@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: "Model United Nations platform",
 };
 
+// Avoid static prerender during build when Supabase env is only set at deploy/runtime.
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{
