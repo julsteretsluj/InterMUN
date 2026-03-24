@@ -1,0 +1,30 @@
+import { createClient } from "@/lib/supabase/server";
+import { ChatsNotesView } from "@/components/chats-notes/ChatsNotesView";
+
+export default async function ChatsNotesPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: notes } = await supabase
+    .from("notes")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("note_type", "chat")
+    .order("updated_at", { ascending: false });
+
+  const { data: voteItems } = await supabase
+    .from("vote_items")
+    .select("*")
+    .is("closed_at", null)
+    .order("created_at", { ascending: false });
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6">Chats/Notes</h2>
+      <ChatsNotesView initialNotes={notes || []} voteItems={voteItems || []} />
+    </div>
+  );
+}
