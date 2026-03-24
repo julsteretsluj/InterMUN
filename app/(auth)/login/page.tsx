@@ -11,12 +11,23 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    let supabase;
+    try {
+      supabase = createClient();
+    } catch (err) {
+      setLoading(false);
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Could not connect to authentication (check Supabase env vars)."
+      );
+      return;
+    }
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) {
