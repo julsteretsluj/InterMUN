@@ -3,20 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { VotingPanel } from "@/components/voting/VotingPanel";
+import type { VoteItem } from "@/types/database";
 
 interface Note {
   id: string;
   content: string | null;
   note_type: string;
   updated_at: string;
-}
-
-interface VoteItem {
-  id: string;
-  vote_type: string;
-  title: string | null;
-  must_vote: boolean;
-  required_majority: string;
 }
 
 export function ChatsNotesView({

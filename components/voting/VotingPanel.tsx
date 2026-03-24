@@ -2,15 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-
-interface VoteItem {
-  id: string;
-  vote_type: string;
-  title: string | null;
-  must_vote: boolean;
-  required_majority: string;
-  conference_id: string;
-}
+import type { VoteItem } from "@/types/database";
 
 interface Vote {
   value: string;
@@ -54,7 +46,9 @@ export function VotingPanel({ voteItems }: { voteItems: VoteItem[] }) {
         }
       )
       .subscribe();
-    return () => supabase.removeChannel(channel);
+    return () => {
+      void supabase.removeChannel(channel);
+    };
   }, [supabase]);
 
   async function castVote(itemId: string, value: "yes" | "no" | "abstain") {

@@ -11,7 +11,7 @@ const schema = z.object({
   name: z.string().optional(),
   pronouns: z.string().optional(),
   allocation: z.string().optional(),
-  conferences_attended: z.coerce.number().min(0).optional(),
+  conferences_attended: z.number().min(0).optional(),
   awards: z.string().optional(),
 });
 
@@ -129,7 +129,13 @@ export function ProfileForm({
             </label>
             <input
               type="number"
-              {...register("conferences_attended")}
+              {...register("conferences_attended", {
+                setValueAs: (value) => {
+                  if (value === "" || value == null) return undefined;
+                  const parsed = Number(value);
+                  return Number.isNaN(parsed) ? undefined : parsed;
+                },
+              })}
               className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
               min={0}
             />

@@ -37,7 +37,9 @@ export function Timers() {
         }
       )
       .subscribe();
-    return () => supabase.removeChannel(channel);
+    return () => {
+      void supabase.removeChannel(channel);
+    };
   }, [supabase]);
 
   useEffect(() => {
