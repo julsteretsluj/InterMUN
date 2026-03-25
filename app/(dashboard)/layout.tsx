@@ -20,16 +20,27 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
-      <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 py-3">
-        <div className="flex justify-between items-center mb-2">
-          <h1 className="text-xl font-bold">InterMUN</h1>
+    <div className="min-h-screen bg-brand-cream">
+      <header className="bg-brand-navy text-brand-paper shadow-md border-b border-brand-gold/20">
+        <div className="max-w-6xl mx-auto px-4 pt-5 pb-1 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
+              InterMUN
+            </h1>
+            <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90 mt-1">
+              Delegate platform
+            </p>
+          </div>
           <SignOutButton />
         </div>
-        <TabNav />
-        <Timers />
+        <div className="max-w-6xl mx-auto px-4 pb-4">
+          <TabNav />
+          <div className="mt-3">
+            <Timers />
+          </div>
+        </div>
       </header>
-      <main className="p-4 max-w-6xl mx-auto">{children}</main>
+      <main className="max-w-6xl mx-auto px-4 py-6 md:py-8">{children}</main>
       <PaperSavedWidget />
     </div>
   );

@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { ReportView } from "@/components/report/ReportView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function ReportPage() {
   const supabase = await createClient();
@@ -15,9 +16,8 @@ export default async function ReportPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Report</h2>
+    <MunPageShell title="Report">
       <ReportView reports={reports || []} />
-    </div>
+    </MunPageShell>
   );
 }

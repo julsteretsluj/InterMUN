@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { ResolutionsView } from "@/components/resolutions/ResolutionsView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function ResolutionsPage() {
   const supabase = await createClient();
@@ -18,9 +19,8 @@ export default async function ResolutionsPage() {
     .select("*, bloc_memberships(*)");
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Resolutions</h2>
+    <MunPageShell title="Resolutions">
       <ResolutionsView resolutions={resolutions || []} blocs={blocs || []} />
-    </div>
+    </MunPageShell>
   );
 }

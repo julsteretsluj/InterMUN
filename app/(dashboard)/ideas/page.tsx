@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { IdeasView } from "@/components/ideas/IdeasView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function IdeasPage() {
   const supabase = await createClient();
@@ -15,9 +16,8 @@ export default async function IdeasPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Ideas</h2>
+    <MunPageShell title="Ideas">
       <IdeasView ideas={ideas || []} />
-    </div>
+    </MunPageShell>
   );
 }

@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { RunningNotesView } from "@/components/running-notes/RunningNotesView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function RunningNotesPage() {
   const supabase = await createClient();
@@ -16,9 +17,8 @@ export default async function RunningNotesPage() {
     .order("updated_at", { ascending: false });
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Running Notes</h2>
+    <MunPageShell title="Running Notes">
       <RunningNotesView notes={notes || []} />
-    </div>
+    </MunPageShell>
   );
 }

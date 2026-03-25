@@ -60,20 +60,26 @@ export function Timers() {
   if (!timer) return null;
 
   return (
-    <div className="flex items-center gap-4 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg">
-      <Clock className="w-5 h-5 text-slate-500" />
-      <div className="flex gap-6">
+    <div className="flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-brand-paper">
+      <Clock className="w-5 h-5 text-brand-gold-bright shrink-0" />
+      <div className="flex flex-wrap gap-6 text-sm">
         <div>
-          <span className="text-xs text-slate-500">Current speaker</span>
+          <span className="text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5">
+            Current speaker
+          </span>
           <p className="font-medium">{timer.current_speaker || "—"}</p>
         </div>
         <div>
-          <span className="text-xs text-slate-500">Next speaker</span>
+          <span className="text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5">
+            Next speaker
+          </span>
           <p className="font-medium">{timer.next_speaker || "—"}</p>
         </div>
         <div>
-          <span className="text-xs text-slate-500">Time left</span>
-          <p className="font-mono font-medium">
+          <span className="text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5">
+            Time left
+          </span>
+          <p className="font-mono font-medium tabular-nums">
             {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
             {(total % 60).toString().padStart(2, "0")}
           </p>

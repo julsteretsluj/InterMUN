@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { ProfileForm } from "@/components/profile/ProfileForm";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -18,13 +19,12 @@ export default async function ProfilePage() {
   const canViewPrivate = true;
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Profile</h2>
+    <MunPageShell title="Profile">
       <ProfileForm
         profile={profile}
         userId={user.id}
         canViewPrivate={!!canViewPrivate}
       />
-    </div>
+    </MunPageShell>
   );
 }

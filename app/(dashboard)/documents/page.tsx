@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { DocumentsView } from "@/components/documents/DocumentsView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function DocumentsPage() {
   const supabase = await createClient();
@@ -15,9 +16,8 @@ export default async function DocumentsPage() {
     .order("updated_at", { ascending: false });
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Documents</h2>
+    <MunPageShell title="Documents">
       <DocumentsView documents={docs || []} />
-    </div>
+    </MunPageShell>
   );
 }

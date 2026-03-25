@@ -43,9 +43,9 @@ export function PaperSavedWidget() {
   if (papers.length === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 w-56 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 p-3 z-50">
-      <h3 className="text-sm font-semibold mb-2 flex items-center gap-2">
-        <FileText className="w-4 h-4" />
+    <div className="fixed bottom-4 right-4 w-56 rounded-xl border border-brand-navy/10 bg-brand-paper shadow-[0_12px_40px_-8px_rgba(10,22,40,0.2)] p-3 z-50">
+      <h3 className="text-sm font-semibold mb-2 flex items-center gap-2 text-brand-navy">
+        <FileText className="w-4 h-4 text-brand-gold" />
         Paper Saved
       </h3>
       <ul className="space-y-1 text-sm">
@@ -53,11 +53,11 @@ export function PaperSavedWidget() {
           <li key={p.id}>
             <Link
               href={p.href}
-              className="block truncate text-blue-600 hover:underline dark:text-blue-400"
+              className="block truncate text-brand-navy hover:text-brand-gold font-medium underline-offset-2 hover:underline"
             >
               {p.title}
             </Link>
-            <span className="text-xs text-slate-500 capitalize">
+            <span className="text-xs text-brand-muted capitalize">
               {p.type.replace("_", " ")}
             </span>
           </li>

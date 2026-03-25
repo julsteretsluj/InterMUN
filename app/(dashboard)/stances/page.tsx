@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { StancesView } from "@/components/stances/StancesView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function StancesPage() {
   const supabase = await createClient();
@@ -34,12 +35,11 @@ export default async function StancesPage() {
     .single();
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Stances</h2>
+    <MunPageShell title="Stances">
       <StancesView
         allocations={allocationsWithNotes}
         stanceOverview={profile?.stance_overview || {}}
       />
-    </div>
+    </MunPageShell>
   );
 }

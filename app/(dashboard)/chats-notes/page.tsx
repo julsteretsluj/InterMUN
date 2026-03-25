@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { ChatsNotesView } from "@/components/chats-notes/ChatsNotesView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function ChatsNotesPage() {
   const supabase = await createClient();
@@ -22,9 +23,8 @@ export default async function ChatsNotesPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Chats/Notes</h2>
+    <MunPageShell title="Chats/Notes">
       <ChatsNotesView initialNotes={notes || []} voteItems={voteItems || []} />
-    </div>
+    </MunPageShell>
   );
 }

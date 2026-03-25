@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { GuidesView } from "@/components/guides/GuidesView";
+import { MunPageShell } from "@/components/MunPageShell";
 
 export default async function GuidesPage() {
   const supabase = await createClient();
@@ -9,9 +10,8 @@ export default async function GuidesPage() {
     .order("slug");
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Guides</h2>
+    <MunPageShell title="Guides">
       <GuidesView guides={guides || []} />
-    </div>
+    </MunPageShell>
   );
 }
