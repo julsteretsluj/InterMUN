@@ -40,7 +40,59 @@ export function ProfileForm({
   const [profilePictureUrl, setProfilePictureUrl] = useState(
     profile?.profile_picture_url || ""
   );
+  const [uploadPending, setUploadPending] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const supabase = createClient();
+
+  async function uploadProfilePicture(file: File) {
+    setUploadError(null);
+
+    if (!file.type.startsWith("image/")) {
+      setUploadError("Please choose an image file.");
+      return;
+    }
+
+    if (!file.size || file.size > 5 * 1024 * 1024) {
+      setUploadError("Image is too large (max 5 MB).");
+      return;
+    }
+
+    setUploadPending(true);
+    try {
+      // Storage bucket must exist in Supabase: `profile-pictures`.
+      // Public URL is used so the <img> can load directly.
+      const bucketName = "profile-pictures";
+      const ext = file.name.split(".").pop()?.toLowerCase() || "img";
+      const safeExt = /^[a-z0-9]+$/.test(ext) ? ext : "img";
+      const objectPath = `profiles/${userId}/${Date.now()}.${safeExt}`;
+
+      const { error: uploadErr } = await supabase.storage
+        .from(bucketName)
+        .upload(objectPath, file, {
+          contentType: file.type,
+          upsert: true,
+        });
+
+      if (uploadErr) {
+        throw new Error(uploadErr.message);
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from(bucketName)
+        .getPublicUrl(objectPath);
+
+      if (!publicUrlData?.publicUrl) {
+        throw new Error("Could not resolve public URL for uploaded image.");
+      }
+
+      setProfilePictureUrl(publicUrlData.publicUrl);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Upload failed.";
+      setUploadError(msg);
+    } finally {
+      setUploadPending(false);
+    }
+  }
 
   const {
     register,
@@ -102,7 +154,7 @@ export function ProfileForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-xl">
-      {canViewPrivate && profilePictureUrl && (
+      {!!profilePictureUrl && (
         <div className="flex items-center gap-4">
           <img
             src={profilePictureUrl}
@@ -111,20 +163,49 @@ export function ProfileForm({
           />
         </div>
       )}
-      {canViewPrivate && (
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Profile picture URL
-          </label>
-          <input
-            type="url"
-            value={profilePictureUrl}
-            onChange={(e) => setProfilePictureUrl(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
-            placeholder="https://..."
-          />
+
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Profile picture
+        </label>
+
+        <div className="space-y-3">
+          <div>
+            <input
+              type="file"
+              accept="image/*"
+              disabled={uploadPending}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                void uploadProfilePicture(file);
+              }}
+              className="w-full"
+            />
+            {uploadPending && (
+              <p className="text-xs text-brand-muted mt-1">Uploading…</p>
+            )}
+            {uploadError && (
+              <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2 mt-2">
+                {uploadError}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-xs text-brand-muted mb-1">
+              Or set by URL
+            </label>
+            <input
+              type="url"
+              value={profilePictureUrl}
+              onChange={(e) => setProfilePictureUrl(e.target.value)}
+              className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
+              placeholder="https://..."
+            />
+          </div>
         </div>
-      )}
+      </div>
       <div>
         <label className="block text-sm font-medium mb-1">Name</label>
         <input

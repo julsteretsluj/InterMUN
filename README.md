@@ -55,6 +55,12 @@ A full-featured MUN platform built with Next.js and Supabase.
      MATERIALS_EXPORT_FROM="InterMUN <no-reply@seamun.com>"
      ```
 
+   - **Profile picture uploads (Supabase Storage):**
+     - Create a storage bucket named `profile-pictures`
+     - Make it **public** (so `getPublicUrl` can be used by `<img>`)
+     - Optionally add a policy allowing authenticated users to upload to their own folder
+       (path prefix `profiles/<userId>/...`)
+
 5. **Run**
    ```bash
    npm run dev
