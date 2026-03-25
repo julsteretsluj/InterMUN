@@ -37,7 +37,14 @@ export default async function DashboardLayout({
   const role = profile?.role as UserRole | undefined;
   const normalizedRole = role ? (role.toString().trim().toLowerCase() as UserRole) : undefined;
   const showStaffNav = isStaffRole(role);
-  const welcomeTitle = normalizedRole === "chair" ? "Welcome Chair" : "Welcome Delegate";
+  const welcomeTitle =
+    normalizedRole === "chair"
+      ? "Welcome Chair"
+      : normalizedRole === "smt"
+        ? "Welcome Secretary General"
+        : normalizedRole === "admin"
+          ? "Welcome Admin"
+          : "Welcome Delegate";
 
   if (isAdminRole(normalizedRole)) {
     const search = hdrs.get("x-search") ?? "";
