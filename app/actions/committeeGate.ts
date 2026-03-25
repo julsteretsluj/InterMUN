@@ -4,7 +4,10 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { verifyCommitteePassword, hashCommitteePassword } from "@/lib/committee-password";
 import { setVerifiedConferenceId, clearVerifiedConference } from "@/lib/committee-gate-cookie";
-import { getActiveConferenceId } from "@/lib/active-conference-cookie";
+import { getConferenceForDashboard } from "@/lib/active-conference";
+import { verifyStaffCommitteeBypassPassword } from "@/lib/staff-committee-bypass";
+import { getActiveEventId, setActiveEventId } from "@/lib/active-event-cookie";
+import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 
 export async function clearCommitteeVerification() {
   await clearVerifiedConference();
@@ -23,20 +26,44 @@ export async function verifyCommitteeSecondaryLogin(
     return { error: "Conference, allocation, and password are required." };
   }
 
-  const active = await getActiveConferenceId();
-  if (active !== conferenceId) {
-    return {
-      error:
-        "Your selected committee does not match your room code. Re-enter your room code on the join page.",
-    };
-  }
-
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
     return { error: "You must be signed in." };
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const ctx = await getConferenceForDashboard({ role: profile?.role });
+  if (!ctx || ctx.id !== conferenceId) {
+    return {
+      error:
+        "Your committee context does not match this sign-in. Re-enter your conference and committee codes if needed.",
+    };
+  }
+
+  const eventId = await getActiveEventId();
+  if (profile?.role === "chair" || profile?.role === "smt") {
+    if (eventId && ctx.event_id !== eventId) {
+      return {
+        error:
+          "Your conference selection does not match this committee. Re-enter your conference and committee codes.",
+      };
+    }
+    if (!eventId) {
+      await setActiveEventId(ctx.event_id);
+    }
+  } else if (!eventId || ctx.event_id !== eventId) {
+    return {
+      error:
+        "Your conference selection does not match this committee. Go back and enter the correct conference code, then committee code.",
+    };
   }
 
   const { data: conference, error: cErr } = await supabase
@@ -73,6 +100,7 @@ export async function verifyCommitteeSecondaryLogin(
 
   if (!conference.committee_password_hash) {
     await setVerifiedConferenceId(conference.id);
+    await setActiveConferenceContext(supabase, conference.id);
     redirect(nextPath.startsWith("/") ? nextPath : "/profile");
   }
 
@@ -81,6 +109,66 @@ export async function verifyCommitteeSecondaryLogin(
   }
 
   await setVerifiedConferenceId(conference.id);
+  await setActiveConferenceContext(supabase, conference.id);
+  redirect(nextPath.startsWith("/") ? nextPath : "/profile");
+}
+
+/** Chairs / SMT: skip allocation + committee password with org secondary password. */
+export async function verifyStaffNotDelegateBypass(
+  _prev: { error?: string } | null,
+  formData: FormData
+): Promise<{ error: string } | null> {
+  const conferenceId = String(formData.get("conference_id") ?? "").trim();
+  const staffPassword = String(formData.get("staff_secondary_password") ?? "");
+  const nextPath = String(formData.get("next") ?? "/profile").trim() || "/profile";
+
+  if (!conferenceId || !staffPassword) {
+    return { error: "Conference and staff secondary password are required." };
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: "You must be signed in." };
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (profile?.role !== "chair" && profile?.role !== "smt") {
+    return { error: "Only chairs and SMT can use staff sign-in." };
+  }
+
+  const ctx = await getConferenceForDashboard({ role: profile?.role });
+  if (!ctx || ctx.id !== conferenceId) {
+    return {
+      error:
+        "Your committee context does not match this sign-in. Re-enter your conference and committee codes if needed.",
+    };
+  }
+
+  const eventId = await getActiveEventId();
+  if (eventId && ctx.event_id !== eventId) {
+    return {
+      error:
+        "Your conference selection does not match this committee. Re-enter your conference and committee codes.",
+    };
+  }
+  if (!eventId) {
+    await setActiveEventId(ctx.event_id);
+  }
+
+  if (!verifyStaffCommitteeBypassPassword(staffPassword)) {
+    return { error: "Incorrect staff secondary password." };
+  }
+
+  await setVerifiedConferenceId(conferenceId);
+  await setActiveConferenceContext(supabase, conferenceId);
   redirect(nextPath.startsWith("/") ? nextPath : "/profile");
 }
 

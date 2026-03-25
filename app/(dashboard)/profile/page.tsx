@@ -52,11 +52,11 @@ export default async function ProfilePage() {
       {(myAwards?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-gold/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
-            SEAMUN I — recorded awards
+            Recorded awards
           </h3>
           <p className="text-xs text-brand-muted mb-3">
-            Listed when chairs or SMT assign you in the awards tracker. Final recognition follows
-            the conference handbook.
+            Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your
+            conference&apos;s rules.
           </p>
           <ul className="space-y-2 text-sm">
             {(myAwards ?? []).map((a) => {

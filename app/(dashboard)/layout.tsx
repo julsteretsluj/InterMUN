@@ -54,11 +54,13 @@ export default async function DashboardLayout({
         <div className="max-w-6xl mx-auto px-4 pt-5 pb-1 flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
-              SEAMUN I 2027
+              {activeConf.name}
             </h1>
-            <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90 mt-1">
-              Policies with a Purpose · 23–24 Jan 2027
-            </p>
+            {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
+              <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90 mt-1">
+                {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
+              </p>
+            ) : null}
           </div>
           <SignOutButton />
         </div>

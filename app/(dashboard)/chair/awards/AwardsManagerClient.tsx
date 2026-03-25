@@ -117,9 +117,9 @@ export function AwardsManagerClient({
         <p className="flex items-start gap-2">
           <Award className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
           <span>
-            Tracks SEAMUN I categories from the handbook: conference-wide, collective &amp; chair,
-            and committee-level. Final authority stays with the Secretary-General; this tool is for
-            drafting and internal records. Delegates see only rows where they are the recipient.
+            Tracks typical categories: conference-wide, collective &amp; chair, and committee-level.
+            Final authority stays with your conference leadership; this tool is for drafting and
+            internal records. Delegates see only rows where they are the recipient.
           </span>
         </p>
       </div>

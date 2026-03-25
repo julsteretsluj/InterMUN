@@ -51,7 +51,7 @@ export function TabNav({ showChairTools = false }: { showChairTools?: boolean })
         },
         {
           href: "/chair/room-code",
-          label: "Room code",
+          label: "Committee code",
           icon: DoorOpen,
         },
         {

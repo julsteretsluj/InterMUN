@@ -4,7 +4,10 @@ import { createClient } from "@/lib/supabase/server";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { RoomGateForm } from "./RoomGateForm";
 import { SwitchCommitteeButton } from "./SwitchCommitteeButton";
+import { SwitchConferenceButton } from "./SwitchConferenceButton";
+import { AutoJoinSingleton } from "./AutoJoinSingleton";
 import { getResolvedActiveConference } from "@/lib/active-conference";
+import { getActiveEventId } from "@/lib/active-event-cookie";
 import { staffContinueWithLatestConference } from "@/app/actions/roomGate";
 
 export default async function RoomGatePage({
@@ -35,6 +38,28 @@ export default async function RoomGatePage({
   const showChairSetupLink =
     profile?.role === "chair" || profile?.role === "smt";
 
+  const { count: eventCount } = await supabase
+    .from("conference_events")
+    .select("*", { count: "exact", head: true });
+  const { count: conferenceCount } = await supabase
+    .from("conferences")
+    .select("*", { count: "exact", head: true });
+
+  if ((eventCount ?? 0) === 1 && (conferenceCount ?? 0) === 1) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-brand-cream via-brand-paper to-[#e4ddd4]">
+        <div className="relative w-full max-w-md space-y-8">
+          <BrandWordmark />
+          <AutoJoinSingleton nextPath={nextPath} />
+        </div>
+      </div>
+    );
+  }
+
+  if (!(await getActiveEventId())) {
+    redirect(`/event-gate?next=${encodeURIComponent(nextPath)}`);
+  }
+
   const existing = await getResolvedActiveConference();
   if (existing?.id) {
     return (
@@ -48,7 +73,7 @@ export default async function RoomGatePage({
             <p className="text-sm text-brand-muted text-center">
               You are set to{" "}
               <strong className="text-brand-navy">
-                {[existing.name, existing.committee].filter(Boolean).join(" — ")}
+                {[existing.name, existing.committee, existing.tagline].filter(Boolean).join(" — ")}
               </strong>
               .
             </p>
@@ -59,7 +84,16 @@ export default async function RoomGatePage({
               >
                 Continue to platform
               </Link>
-              <SwitchCommitteeButton />
+              <SwitchCommitteeButton nextPath={nextPath} />
+              <SwitchConferenceButton nextPath={nextPath} />
+              {showChairSetupLink ? (
+                <Link
+                  href={`/conference-setup?next=${encodeURIComponent(nextPath)}`}
+                  className="block text-center text-sm text-brand-navy font-medium border border-brand-navy/20 rounded-lg py-2.5 hover:bg-brand-cream/60"
+                >
+                  Set up a new conference
+                </Link>
+              ) : null}
               <Link
                 href="/profile"
                 className="block text-center text-sm text-brand-gold hover:underline py-2"
@@ -75,10 +109,12 @@ export default async function RoomGatePage({
 
   const staffErrMsg =
     errCode === "no-conferences"
-      ? "There are no conferences in the database yet. Add one in Supabase (Table editor → conferences) or run seed.sql, then try again."
+      ? "There are no conferences yet. If you are a chair or SMT, use Set up a new conference below, or add a row in Supabase / run seed.sql."
       : errCode === "not-staff"
         ? "Only chairs and SMT can use the staff shortcut."
-        : null;
+        : errCode === "create-forbidden"
+          ? "Only chairs and SMT can create a conference. Join with your codes instead."
+          : null;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-brand-cream via-brand-paper to-[#e4ddd4]">
@@ -91,8 +127,13 @@ export default async function RoomGatePage({
             Join your committee
           </h1>
           <p className="text-sm text-brand-muted text-center mb-6">
-            Enter the <strong>room code</strong> your chair shared. This selects which committee
-            session you are in for the rest of the platform.
+            Enter your <strong>committee code</strong> for this conference. You should already have
+            entered the <strong>conference code</strong> on the previous screen.
+          </p>
+          <p className="text-xs text-brand-muted text-center mb-4">
+            <Link href={`/event-gate?next=${encodeURIComponent(nextPath)}`} className="text-brand-gold hover:underline">
+              Wrong conference? Enter a different conference code
+            </Link>
           </p>
           {staffErrMsg && (
             <p
@@ -103,19 +144,33 @@ export default async function RoomGatePage({
             </p>
           )}
           {showChairSetupLink && (
-            <form action={staffContinueWithLatestConference} className="mb-6">
+            <form action={staffContinueWithLatestConference} className="mb-4">
               <input type="hidden" name="next" value={nextPath} />
               <button
                 type="submit"
                 className="w-full py-3 rounded-lg border-2 border-brand-gold text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors"
               >
-                Continue as chair / SMT (skip room code)
+                Continue as chair / SMT (skip codes)
               </button>
               <p className="text-xs text-brand-muted text-center mt-2">
-                Opens the latest conference in the database. Use a room code if you need a specific
-                committee.
+                Opens the latest committee in the database. Use committee codes if you need a
+                specific session.
               </p>
             </form>
+          )}
+          {showChairSetupLink && (
+            <div className="mb-6 rounded-xl border border-brand-navy/15 bg-brand-cream/50 p-4">
+              <Link
+                href={`/conference-setup?next=${encodeURIComponent(nextPath)}`}
+                className="block text-center text-sm font-semibold text-brand-navy hover:text-brand-gold transition-colors"
+              >
+                Set up a new conference
+              </Link>
+              <p className="text-xs text-brand-muted text-center mt-2 leading-relaxed">
+                Creates a conference code plus your first committee code, optional passwords, and
+                session details.
+              </p>
+            </div>
           )}
           <RoomGateForm nextPath={nextPath} showChairSetupLink={showChairSetupLink} />
         </div>

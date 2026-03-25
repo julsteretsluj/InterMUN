@@ -22,15 +22,15 @@ export default async function ChairRoomCodePage() {
 
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee, room_code")
+    .select("id, name, committee, room_code, committee_code")
     .order("created_at", { ascending: false });
 
   return (
-    <MunPageShell title="Room codes (chair / SMT)">
+    <MunPageShell title="Committee codes (chair / SMT)">
       <p className="text-sm text-brand-muted mb-6 max-w-xl">
-        Set a short <strong>room code</strong> for each committee. Delegates enter it after login to
-        load the correct session. Codes are unique across the project. After saving, you can go
-        straight into that committee or share the code on the dais.
+        Each committee has a <strong>committee code</strong> within its conference (second gate after
+        delegates enter the conference code). Codes must be unique within the same conference event.
+        After saving, you can enter that committee or share the code on the dais.
       </p>
       <RoomCodeChairForm conferences={conferences ?? []} />
     </MunPageShell>

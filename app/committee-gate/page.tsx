@@ -3,8 +3,9 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { CommitteeGateForm } from "./CommitteeGateForm";
+import { StaffNotDelegateBypassForm } from "./StaffNotDelegateBypassForm";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
-import { getActiveConferenceId } from "@/lib/active-conference-cookie";
+import { getConferenceForDashboard } from "@/lib/active-conference";
 
 export default async function CommitteeGatePage({
   searchParams,
@@ -25,15 +26,21 @@ export default async function CommitteeGatePage({
     redirect("/login");
   }
 
-  const activeId = await getActiveConferenceId();
-  if (!activeId) {
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const activeCtx = await getConferenceForDashboard({ role: profile?.role });
+  if (!activeCtx?.id) {
     redirect(`/room-gate?next=${encodeURIComponent(nextPath)}`);
   }
 
   const { data: conference } = await supabase
     .from("conferences")
-    .select("id, name, committee, committee_password_hash")
-    .eq("id", activeId)
+    .select("id, name, committee, tagline, committee_password_hash")
+    .eq("id", activeCtx.id)
     .maybeSingle();
 
   if (!conference) {
@@ -63,7 +70,8 @@ export default async function CommitteeGatePage({
     ),
   ];
 
-  const title = [conference.name, conference.committee].filter(Boolean).join(" — ");
+  const title = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
+  const isStaff = profile?.role === "chair" || profile?.role === "smt";
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-brand-cream via-brand-paper to-[#e4ddd4]">
@@ -81,11 +89,14 @@ export default async function CommitteeGatePage({
           </p>
 
           {allocationChoices.length === 0 ? (
-            <div className="space-y-4 text-sm text-brand-muted">
+            <div className="space-y-5 text-sm text-brand-muted">
               <p>
                 You do not have an allocation for this committee yet. Ask a chair or SMT member
                 to assign you before you can continue.
               </p>
+              {isStaff ? (
+                <StaffNotDelegateBypassForm conferenceId={conference.id} nextPath={nextPath} />
+              ) : null}
               <Link
                 href="/room-gate"
                 className="inline-block text-brand-gold font-medium hover:underline"
@@ -94,12 +105,20 @@ export default async function CommitteeGatePage({
               </Link>
             </div>
           ) : (
-            <CommitteeGateForm
-              conferenceId={conference.id}
-              conferenceTitle={title || "Conference"}
-              allocationChoices={allocationChoices}
-              nextPath={nextPath}
-            />
+            <div className="space-y-6">
+              <CommitteeGateForm
+                conferenceId={conference.id}
+                conferenceTitle={title || "Conference"}
+                allocationChoices={allocationChoices}
+                nextPath={nextPath}
+              />
+              {isStaff ? (
+                <>
+                  <p className="text-center text-xs text-brand-muted">or</p>
+                  <StaffNotDelegateBypassForm conferenceId={conference.id} nextPath={nextPath} />
+                </>
+              ) : null}
+            </div>
           )}
         </div>
       </div>

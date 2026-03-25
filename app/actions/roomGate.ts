@@ -2,17 +2,20 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import {
-  setActiveConferenceId,
-  clearActiveConference,
-} from "@/lib/active-conference-cookie";
+import { clearActiveConference } from "@/lib/active-conference-cookie";
+import { clearActiveEvent, getActiveEventId } from "@/lib/active-event-cookie";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
-
-function normalizeRoomCode(raw: string): string {
-  return raw.trim().toUpperCase().replace(/\s+/g, "");
-}
+import { normalizeCommitteeCode } from "@/lib/join-codes";
+import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 
 export async function clearRoomAndCommitteeContext() {
+  await clearActiveEvent();
+  await clearActiveConference();
+  await clearVerifiedConference();
+}
+
+/** Clear committee context only; keep selected conference event (second gate again). */
+export async function clearCommitteeContextOnly() {
   await clearActiveConference();
   await clearVerifiedConference();
 }
@@ -21,7 +24,7 @@ export async function joinRoomByCode(
   _prev: { error?: string } | null,
   formData: FormData
 ): Promise<{ error: string } | null> {
-  const code = normalizeRoomCode(String(formData.get("code") ?? ""));
+  const code = normalizeCommitteeCode(String(formData.get("code") ?? ""));
   const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
   const nextPath =
     nextPathRaw.startsWith("/") && !nextPathRaw.startsWith("//")
@@ -29,7 +32,7 @@ export async function joinRoomByCode(
       : "/profile";
 
   if (code.length < 4) {
-    return { error: "Enter the room code from your chair (at least 4 characters)." };
+    return { error: "Enter the committee code from your chair (at least 4 characters)." };
   }
 
   const supabase = await createClient();
@@ -40,17 +43,28 @@ export async function joinRoomByCode(
     return { error: "You must be signed in." };
   }
 
+  const eventId = await getActiveEventId();
+  if (!eventId) {
+    return {
+      error: "Enter your conference code first (go back to the previous step).",
+    };
+  }
+
   const { data: conference, error } = await supabase
     .from("conferences")
     .select("id")
-    .eq("room_code", code)
+    .eq("event_id", eventId)
+    .eq("committee_code", code)
     .maybeSingle();
 
   if (error || !conference) {
-    return { error: "No committee matches that code. Check with your chair." };
+    return {
+      error:
+        "No committee matches that code for this conference. Check with your chair (code is case-insensitive except spacing).",
+    };
   }
 
-  await setActiveConferenceId(conference.id);
+  await setActiveConferenceContext(supabase, conference.id);
   await clearVerifiedConference();
   redirect(nextPath);
 }
@@ -60,7 +74,7 @@ export async function setRoomCodeAndEnterAction(
   formData: FormData
 ): Promise<{ error: string } | null> {
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
-  const code = normalizeRoomCode(String(formData.get("code") ?? ""));
+  const code = normalizeCommitteeCode(String(formData.get("code") ?? ""));
   const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
   const nextPath =
     nextPathRaw.startsWith("/") && !nextPathRaw.startsWith("//")
@@ -71,7 +85,7 @@ export async function setRoomCodeAndEnterAction(
     return { error: "Choose a conference." };
   }
   if (code.length < 4) {
-    return { error: "Room code must be at least 4 characters." };
+    return { error: "Committee code must be at least 4 characters." };
   }
 
   const supabase = await createClient();
@@ -89,7 +103,7 @@ export async function setRoomCodeAndEnterAction(
     .maybeSingle();
 
   if (profile?.role !== "chair" && profile?.role !== "smt") {
-    return { error: "Only chairs and SMT can set room codes." };
+    return { error: "Only chairs and SMT can set committee codes." };
   }
 
   const { error } = await supabase.rpc("set_conference_room_code", {
@@ -101,12 +115,55 @@ export async function setRoomCodeAndEnterAction(
     return { error: error.message };
   }
 
-  await setActiveConferenceId(conferenceId);
+  await setActiveConferenceContext(supabase, conferenceId);
   await clearVerifiedConference();
   redirect(nextPath);
 }
 
-/** Chair/SMT: set active committee cookie to latest conference row (no room code typed). */
+/** When exactly one event and one committee exist, set both cookies and skip both gates. */
+export async function implicitJoinSingletonAction(formData: FormData) {
+  const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
+  const nextPath =
+    nextPathRaw.startsWith("/") && !nextPathRaw.startsWith("//")
+      ? nextPathRaw
+      : "/profile";
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    redirect("/login");
+  }
+
+  const { count: eventCount } = await supabase
+    .from("conference_events")
+    .select("*", { count: "exact", head: true });
+  const { count: confCount } = await supabase
+    .from("conferences")
+    .select("*", { count: "exact", head: true });
+
+  if ((eventCount ?? 0) !== 1 || (confCount ?? 0) !== 1) {
+    redirect(`/event-gate?next=${encodeURIComponent(nextPath)}`);
+  }
+
+  const { data: ev } = await supabase.from("conference_events").select("id").limit(1).maybeSingle();
+  const { data: conf } = await supabase
+    .from("conferences")
+    .select("id, event_id")
+    .limit(1)
+    .maybeSingle();
+
+  if (!ev?.id || !conf?.id || conf.event_id !== ev.id) {
+    redirect(`/event-gate?next=${encodeURIComponent(nextPath)}`);
+  }
+
+  await setActiveConferenceContext(supabase, conf.id);
+  await clearVerifiedConference();
+  redirect(nextPath);
+}
+
+/** Chair/SMT: set active committee to latest row (sets event + committee cookies). */
 export async function staffContinueWithLatestConference(formData: FormData) {
   const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
   const nextPath =
@@ -129,25 +186,21 @@ export async function staffContinueWithLatestConference(formData: FormData) {
     .maybeSingle();
 
   if (profile?.role !== "chair" && profile?.role !== "smt") {
-    redirect(
-      `/room-gate?next=${encodeURIComponent(nextPath)}&e=not-staff`
-    );
+    redirect(`/room-gate?next=${encodeURIComponent(nextPath)}&e=not-staff`);
   }
 
   const { data: conf } = await supabase
     .from("conferences")
-    .select("id")
+    .select("id, event_id")
     .order("created_at", { ascending: false })
     .limit(1)
     .maybeSingle();
 
-  if (!conf?.id) {
-    redirect(
-      `/room-gate?next=${encodeURIComponent(nextPath)}&e=no-conferences`
-    );
+  if (!conf?.id || !conf.event_id) {
+    redirect(`/room-gate?next=${encodeURIComponent(nextPath)}&e=no-conferences`);
   }
 
-  await setActiveConferenceId(conf.id);
+  await setActiveConferenceContext(supabase, conf.id);
   await clearVerifiedConference();
   redirect(nextPath);
 }

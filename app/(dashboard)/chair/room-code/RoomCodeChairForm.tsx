@@ -8,6 +8,7 @@ type Conf = {
   name: string;
   committee: string | null;
   room_code: string | null;
+  committee_code: string | null;
 };
 
 export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
@@ -41,10 +42,12 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
             ))
           )}
         </select>
-        {selected?.room_code && (
+        {(selected?.committee_code || selected?.room_code) && (
           <p className="text-xs text-brand-muted mt-1">
-            Current code:{" "}
-            <span className="font-mono font-medium text-brand-navy">{selected.room_code}</span>
+            Current committee code:{" "}
+            <span className="font-mono font-medium text-brand-navy">
+              {selected.committee_code ?? selected.room_code}
+            </span>
           </p>
         )}
       </div>
@@ -54,7 +57,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           htmlFor="chair-room-code"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          New room code
+          New committee code
         </label>
         <input
           id="chair-room-code"

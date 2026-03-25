@@ -1,6 +1,5 @@
 /**
- * SEAMUN I award categories (handbook: Awards for SEAMUN I 2027).
- * `scope` drives which fields are required in the chair UI.
+ * Standard MUN-style award categories. `scope` drives which fields are required in the chair UI.
  */
 export type AwardScope = "conference_wide" | "collective_person" | "collective_committee" | "committee";
 

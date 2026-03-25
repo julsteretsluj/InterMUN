@@ -2,6 +2,7 @@
 """
 Read data/allocation-matrix.xlsx (SEAMUN-style allocation matrix) and emit SQL:
 - One conference per worksheet (committee = sheet name, name = primary agenda)
+- Each INSERT must include event_id (default event UUID) and committee_code (unique per event, e.g. ECOSOC@SEAMUN)
 - allocations rows with user_id NULL (chairs link delegates later)
 - allocation_gate_codes.code = spreadsheet ID (ECO-001, FWC-001, …)
 

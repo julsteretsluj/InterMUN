@@ -20,9 +20,12 @@ export interface Profile {
 
 export interface Conference {
   id: string;
+  event_id?: string;
   name: string;
   committee: string | null;
+  tagline?: string | null;
   room_code?: string | null;
+  committee_code?: string | null;
   committee_password_hash?: string | null;
   created_at: string;
 }

@@ -2,52 +2,53 @@
 
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
-import { joinRoomByCode } from "@/app/actions/roomGate";
+import { joinEventByCode } from "@/app/actions/eventGate";
 
 type Props = {
-  nextPath: string;
-  showChairSetupLink: boolean;
+  /** After success: usually `/room-gate?next=...` */
+  roomGateNext: string;
 };
 
-export function RoomGateForm({ nextPath, showChairSetupLink }: Props) {
-  const [state, formAction, pending] = useActionState(joinRoomByCode, null);
+export function EventGateForm({ roomGateNext }: Props) {
+  const [state, formAction, pending] = useActionState(joinEventByCode, null);
 
   useEffect(() => {
     if (state?.error) {
-      document.getElementById("room-gate-error")?.focus();
+      document.getElementById("event-gate-error")?.focus();
     }
   }, [state?.error]);
 
   return (
     <form action={formAction} className="space-y-5">
-      <input type="hidden" name="next" value={nextPath} />
+      <input type="hidden" name="next" value={roomGateNext} />
 
       <div>
         <label
-          htmlFor="code"
+          htmlFor="event_code"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          Committee code
+          Conference code
         </label>
         <input
-          id="code"
-          name="code"
+          id="event_code"
+          name="event_code"
           type="text"
           autoComplete="off"
           autoCapitalize="characters"
           required
+          minLength={4}
           className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono tracking-wide text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
-          placeholder="e.g. ECOSOC@SEAMUN"
+          placeholder="e.g. SEAMUNI2027"
         />
         <p className="text-xs text-brand-muted mt-1.5">
-          Second step: the code for <strong>your committee</strong> within this conference. Leading
-          and trailing spaces are trimmed; letters are matched case-insensitively.
+          First step: the code for the whole conference (all committees). Spaces are ignored;
+          matching is case-insensitive.
         </p>
       </div>
 
       {state?.error && (
         <p
-          id="room-gate-error"
+          id="event-gate-error"
           tabIndex={-1}
           className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2"
           role="alert"
@@ -61,17 +62,8 @@ export function RoomGateForm({ nextPath, showChairSetupLink }: Props) {
         disabled={pending}
         className="w-full py-3 rounded-lg bg-brand-navy text-brand-paper font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
       >
-        {pending ? "Joining…" : "Join committee"}
+        {pending ? "Continuing…" : "Continue to committee step"}
       </button>
-
-      {showChairSetupLink && (
-        <p className="text-center text-sm text-brand-muted">
-          Chair or SMT?{" "}
-          <Link href="/chair/room-code" className="text-brand-gold font-medium hover:underline">
-            Set committee code
-          </Link>
-        </p>
-      )}
 
       <p className="text-center text-sm text-brand-muted">
         <Link href="/login" className="text-brand-gold hover:underline">

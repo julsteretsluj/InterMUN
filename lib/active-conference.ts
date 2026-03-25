@@ -1,13 +1,17 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveConferenceId, clearActiveConference } from "@/lib/active-conference-cookie";
+import { getActiveEventId, clearActiveEvent } from "@/lib/active-event-cookie";
 
 export type ActiveConferenceRow = {
   id: string;
+  event_id: string;
   name: string;
   committee: string | null;
+  tagline: string | null;
   committee_password_hash: string | null;
   room_code: string | null;
+  committee_code: string | null;
 };
 
 /** Active committee from room code (cookie). Validates row still exists. */
@@ -15,10 +19,12 @@ export async function getResolvedActiveConference(): Promise<ActiveConferenceRow
   const id = await getActiveConferenceId();
   if (!id) return null;
 
+  const eventId = await getActiveEventId();
+
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("conferences")
-    .select("id, name, committee, committee_password_hash, room_code")
+    .select("id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code")
     .eq("id", id)
     .maybeSingle();
 
@@ -27,12 +33,25 @@ export async function getResolvedActiveConference(): Promise<ActiveConferenceRow
     return null;
   }
 
+  if (!eventId) {
+    await clearActiveConference();
+    return null;
+  }
+
+  if (data.event_id !== eventId) {
+    await clearActiveConference();
+    await clearActiveEvent();
+    return null;
+  }
+
   return data as ActiveConferenceRow;
 }
 
 /**
- * Conference context for the dashboard: cookie first, then (chairs/SMT only) latest conference
- * so staff are not blocked on every tab before setting a room code.
+ * Conference context for the dashboard:
+ * 1) Room code cookie (explicit committee)
+ * 2) Chairs / SMT → latest conference row (multi-committee ops)
+ * 3) Everyone when exactly one conference exists → that row (no room code needed)
  */
 export async function getConferenceForDashboard(options: {
   role: string | null | undefined;
@@ -40,18 +59,25 @@ export async function getConferenceForDashboard(options: {
   const fromCookie = await getResolvedActiveConference();
   if (fromCookie) return fromCookie;
 
-  if (options.role === "chair" || options.role === "smt") {
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from("conferences")
-      .select("id, name, committee, committee_password_hash, room_code")
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    return (data as ActiveConferenceRow) ?? null;
-  }
+  const supabase = await createClient();
+  const isStaff = options.role === "chair" || options.role === "smt";
 
-  return null;
+  const { count, error: countErr } = await supabase
+    .from("conferences")
+    .select("*", { count: "exact", head: true });
+  const total = countErr ? 0 : count ?? 0;
+
+  const useImplicitLatest = isStaff || total === 1;
+  if (!useImplicitLatest) return null;
+
+  const { data } = await supabase
+    .from("conferences")
+    .select("id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  return (data as ActiveConferenceRow) ?? null;
 }
 
 export async function requireActiveConferenceId(): Promise<string> {
