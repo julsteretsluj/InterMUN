@@ -78,7 +78,7 @@ export function ChatsNotesView({ initialNotes }: { initialNotes: Note[] }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-semibold mb-2">seamunnotes.com / https://seamun-chat.vercel.app/</h3>
+        <h3 className="font-semibold mb-2">Notes</h3>
         <div className="flex gap-4">
           <div className="flex-1">
             <textarea

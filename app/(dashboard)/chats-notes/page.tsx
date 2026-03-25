@@ -21,7 +21,7 @@ export default async function ChatsNotesPage() {
     .order("updated_at", { ascending: false });
 
   return (
-    <MunPageShell title="seamunnotes.com / https://seamun-chat.vercel.app/">
+    <MunPageShell title="Notes">
       <ChatsNotesView initialNotes={notes || []} />
     </MunPageShell>
   );
