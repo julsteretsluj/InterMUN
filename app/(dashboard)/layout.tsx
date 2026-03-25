@@ -77,11 +77,6 @@ export default async function DashboardLayout({
             <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
               {welcomeTitle}
             </h1>
-            {process.env.NODE_ENV !== "production" && (
-              <p className="mt-1 text-[0.7rem] text-brand-paper/70">
-                DEBUG role: {normalizedRole ?? "unknown"}
-              </p>
-            )}
             <div className="mt-1 space-y-0.5">
               <p className="text-sm text-brand-paper/90">{activeConf.name}</p>
               {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
