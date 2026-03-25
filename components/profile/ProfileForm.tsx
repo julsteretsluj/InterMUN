@@ -85,6 +85,19 @@ export function ProfileForm({
         throw new Error("Could not resolve public URL for uploaded image.");
       }
 
+      // Persist URL immediately so the user doesn't have to click "Save profile".
+      const { error: updateErr } = await supabase
+        .from("profiles")
+        .update({
+          profile_picture_url: publicUrlData.publicUrl,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", userId);
+
+      if (updateErr) {
+        throw new Error(updateErr.message);
+      }
+
       setProfilePictureUrl(publicUrlData.publicUrl);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Upload failed.";
@@ -165,7 +178,10 @@ export function ProfileForm({
       )}
 
       <div>
-        <label className="block text-sm font-medium mb-1">
+        <label
+          htmlFor="profile-picture-file"
+          className="block text-sm font-medium mb-1"
+        >
           Profile picture
         </label>
 
@@ -173,7 +189,9 @@ export function ProfileForm({
           <div>
             <input
               type="file"
+              id="profile-picture-file"
               accept="image/*"
+              name="profilePictureFile"
               disabled={uploadPending}
               onChange={(e) => {
                 const file = e.target.files?.[0];
