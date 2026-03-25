@@ -1,33 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { StanceHeatmap } from "./StanceHeatmap";
 
 interface Allocation {
   id: string;
   country: string;
+  user_id: string | null;
   conference_id: string;
   notes?: { id: string; content: string | null }[];
 }
 
 export function StancesView({
   allocations,
-  stanceOverview,
+  stanceOverviewByUser,
+  currentUserId,
+  canEdit,
 }: {
   allocations: Allocation[];
-  stanceOverview: Record<string, number>;
+  stanceOverviewByUser: Record<string, Record<string, number>>;
+  currentUserId: string;
+  canEdit: boolean;
 }) {
   const [selectedAllocation, setSelectedAllocation] =
     useState<Allocation | null>(null);
   const [noteContent, setNoteContent] = useState("");
   const [stanceForm, setStanceForm] = useState({ topic: "", extent: 5 });
   const [stanceData, setStanceData] = useState<Record<string, number>>(
-    stanceOverview || {}
+    (() => {
+      const fallbackUser = currentUserId;
+      return stanceOverviewByUser[fallbackUser] || {};
+    })()
   );
   const supabase = createClient();
 
+  useEffect(() => {
+    if (!selectedAllocation) return;
+    const uid = selectedAllocation.user_id;
+    if (uid && stanceOverviewByUser[uid]) setStanceData(stanceOverviewByUser[uid]);
+  }, [selectedAllocation, stanceOverviewByUser]);
+
   async function saveStanceNote() {
+    if (!canEdit) return;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -60,6 +75,7 @@ export function StancesView({
   }
 
   async function addStanceToHeatmap() {
+    if (!canEdit) return;
     if (!stanceForm.topic.trim()) return;
     const updated = {
       ...stanceData,
@@ -88,35 +104,43 @@ export function StancesView({
           To what extent does your allocation support ___? (1–5 scale)
         </p>
         <div className="flex gap-4 flex-wrap items-end mb-4">
-          <input
-            type="text"
-            value={stanceForm.topic}
-            onChange={(e) =>
-              setStanceForm({ ...stanceForm, topic: e.target.value })
-            }
-            placeholder="e.g. climate action"
-            className="px-3 py-2 border rounded dark:bg-slate-700 w-48"
-          />
-          <div className="flex items-center gap-2">
-            <label className="text-sm">Extent (1–5):</label>
-            <input
-              type="range"
-              min={1}
-              max={5}
-              value={stanceForm.extent}
-              onChange={(e) =>
-                setStanceForm({ ...stanceForm, extent: +e.target.value })
-              }
-              className="w-24"
-            />
-            <span>{stanceForm.extent}</span>
-          </div>
-          <button
-            onClick={addStanceToHeatmap}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Add
-          </button>
+          {canEdit ? (
+            <>
+              <input
+                type="text"
+                value={stanceForm.topic}
+                onChange={(e) =>
+                  setStanceForm({ ...stanceForm, topic: e.target.value })
+                }
+                placeholder="e.g. climate action"
+                className="px-3 py-2 border rounded dark:bg-slate-700 w-48"
+              />
+              <div className="flex items-center gap-2">
+                <label className="text-sm">Extent (1–5):</label>
+                <input
+                  type="range"
+                  min={1}
+                  max={5}
+                  value={stanceForm.extent}
+                  onChange={(e) =>
+                    setStanceForm({ ...stanceForm, extent: +e.target.value })
+                  }
+                  className="w-24"
+                />
+                <span>{stanceForm.extent}</span>
+              </div>
+              <button
+                onClick={addStanceToHeatmap}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                Add
+              </button>
+            </>
+          ) : (
+            <p className="text-sm text-slate-500">
+              View-only heatmap for staff.
+            </p>
+          )}
         </div>
         <StanceHeatmap data={stanceData} />
       </div>
@@ -132,6 +156,9 @@ export function StancesView({
                   key={a.id}
                   onClick={() => {
                     setSelectedAllocation(a);
+                    if (a.user_id && stanceOverviewByUser[a.user_id]) {
+                      setStanceData(stanceOverviewByUser[a.user_id]);
+                    }
                     setNoteContent(a.notes?.[0]?.content || "");
                   }}
                   className={`block w-full text-left px-3 py-2 rounded ${
@@ -153,10 +180,12 @@ export function StancesView({
                 onChange={(e) => setNoteContent(e.target.value)}
                 className="w-full h-40 px-3 py-2 border rounded dark:bg-slate-700"
                 placeholder="Stance notes for this allocation..."
+                disabled={!canEdit}
               />
               <button
                 onClick={saveStanceNote}
-                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                disabled={!canEdit}
+                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
               >
                 Save
               </button>

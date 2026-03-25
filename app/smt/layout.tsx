@@ -73,6 +73,9 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             <Link href="/smt/profile" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
               Profile
             </Link>
+            <Link href="/smt/follow" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
+              Follow
+            </Link>
           </nav>
           <SignOutButton className="text-white/90 hover:text-amber-200" />
         </div>

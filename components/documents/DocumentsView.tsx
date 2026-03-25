@@ -6,15 +6,29 @@ import { FileText, Plus } from "lucide-react";
 
 interface Document {
   id: string;
+  user_id: string;
   doc_type: string;
   title: string | null;
   content: string | null;
   file_url: string | null;
 }
 
-export function DocumentsView({ documents }: { documents: Document[] }) {
+export function DocumentsView({
+  documents,
+  currentUserId,
+  myRole,
+  canViewAll,
+  canEditAll,
+}: {
+  documents: Document[];
+  currentUserId: string;
+  myRole: string;
+  canViewAll: boolean;
+  canEditAll: boolean;
+}) {
   const [docs, setDocs] = useState(documents);
   const [editing, setEditing] = useState<Document | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
     doc_type: "position_paper" as "position_paper" | "prep_doc",
@@ -23,12 +37,20 @@ export function DocumentsView({ documents }: { documents: Document[] }) {
   });
   const supabase = createClient();
 
+  async function refreshDocs() {
+    let q = supabase.from("documents").select("*").order("updated_at", { ascending: false });
+    if (!canViewAll) q = q.eq("user_id", currentUserId);
+    const { data } = await q;
+    if (data) setDocs(data as Document[]);
+  }
+
   async function saveDocument() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
     if (editing) {
+      if (!canEditAll && editing.user_id !== currentUserId) return;
       await supabase
         .from("documents")
         .update({
@@ -46,15 +68,22 @@ export function DocumentsView({ documents }: { documents: Document[] }) {
         content: form.content || null,
       });
     }
-    const { data } = await supabase
-      .from("documents")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("updated_at", { ascending: false });
-    if (data) setDocs(data);
+    await refreshDocs();
     setEditing(null);
     setShowForm(false);
     setForm({ doc_type: "position_paper", title: "", content: "" });
+  }
+
+  async function deleteDocument(docId: string) {
+    const src = docs.find((d) => d.id === docId);
+    if (!src) return;
+    if (!canEditAll && src.user_id !== currentUserId) return;
+    const ok = confirm("Delete this document?");
+    if (!ok) return;
+    const { error } = await supabase.from("documents").delete().eq("id", docId);
+    if (error) return;
+    setDeleteId(null);
+    await refreshDocs();
   }
 
   return (
@@ -147,19 +176,34 @@ export function DocumentsView({ documents }: { documents: Document[] }) {
                 </p>
               </div>
             </div>
-            <button
-              onClick={() => {
-                setEditing(d);
-                setForm({
-                  doc_type: d.doc_type as "position_paper" | "prep_doc",
-                  title: d.title || "",
-                  content: d.content || "",
-                });
-              }}
-              className="text-sm text-blue-600 hover:underline"
-            >
-              Edit
-            </button>
+            <div className="flex flex-col gap-2 items-end">
+              {(canEditAll || d.user_id === currentUserId) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditing(d);
+                    setForm({
+                      doc_type: d.doc_type as "position_paper" | "prep_doc",
+                      title: d.title || "",
+                      content: d.content || "",
+                    });
+                  }}
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Edit
+                </button>
+              )}
+              {(canEditAll || d.user_id === currentUserId) && (
+                <button
+                  type="button"
+                  onClick={() => void deleteDocument(d.id)}
+                  className="text-sm text-red-600 hover:underline"
+                  disabled={deleteId === d.id}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </div>
         ))}
       </div>

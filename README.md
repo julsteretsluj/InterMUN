@@ -45,6 +45,16 @@ A full-featured MUN platform built with Next.js and Supabase.
      ```
      You can use `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY` instead of `NEXT_PUBLIC_SUPABASE_ANON_KEY` if that is what the Supabase dashboard shows.
 
+   - **Delegate materials export emails (SMTP):**
+     ```
+     SMTP_HOST=smtp.hostinger.com
+     SMTP_PORT=465
+     SMTP_USER=information
+     SMTP_PASS=informationisKEY!27
+     # optional; otherwise SMTP_USER is used as the sender address
+     MATERIALS_EXPORT_FROM="InterMUN <no-reply@seamun.com>"
+     ```
+
 5. **Run**
    ```bash
    npm run dev

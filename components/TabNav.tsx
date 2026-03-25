@@ -21,12 +21,14 @@ import {
   DoorOpen,
   PanelsTopLeft,
   Trophy,
+  UserPlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/database";
 
 const BASE_TABS = [
   { href: "/profile", label: "Profile", icon: User },
+  { href: "/follow", label: "Follow", icon: UserPlus },
   { href: "/chats-notes", label: "Notes", icon: MessageSquare },
   { href: "/committee-room", label: "Committee room", icon: Landmark },
   { href: "/voting", label: "Voting", icon: Scale },

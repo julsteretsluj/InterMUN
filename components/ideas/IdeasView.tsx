@@ -19,6 +19,8 @@ export function IdeasView({
 }) {
   const [items, setItems] = useState(ideas);
   const [newContent, setNewContent] = useState("");
+  const [editing, setEditing] = useState<Idea | null>(null);
+  const [editContent, setEditContent] = useState("");
   const supabase = createClient();
 
   async function addIdea() {
@@ -46,8 +48,53 @@ export function IdeasView({
     setItems((prev) => prev.filter((i) => i.id !== id));
   }
 
+  async function saveEdit() {
+    if (!editing) return;
+    const content = editContent.trim();
+    if (!content) return;
+    const { error } = await supabase
+      .from("ideas")
+      .update({ content })
+      .eq("id", editing.id);
+    if (error) return;
+    setItems((prev) =>
+      prev.map((i) => (i.id === editing.id ? { ...i, content } : i))
+    );
+    setEditing(null);
+    setEditContent("");
+  }
+
   return (
     <div className="space-y-4">
+      {(editing && (
+        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+          <h3 className="font-semibold">Edit idea</h3>
+          <textarea
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+            placeholder="Update your idea..."
+            className="w-full h-32 px-3 py-2 border rounded dark:bg-slate-700"
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={() => void saveEdit()}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Save
+            </button>
+            <button
+              onClick={() => {
+                setEditing(null);
+                setEditContent("");
+              }}
+              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )) || null}
+
       <div className="flex gap-2">
         <textarea
           value={newContent}
@@ -73,12 +120,24 @@ export function IdeasView({
             <div className="flex-1 min-w-0">
               <p className="text-sm">{idea.content || "Empty idea"}</p>
             </div>
-            <button
-              onClick={() => deleteIdea(idea.id)}
-              className="text-sm text-red-600 hover:underline"
-            >
-              Delete
-            </button>
+              <div className="flex flex-col gap-2 items-end">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditing(idea);
+                    setEditContent(idea.content || "");
+                  }}
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => void deleteIdea(idea.id)}
+                  className="text-sm text-red-600 hover:underline"
+                >
+                  Delete
+                </button>
+              </div>
           </div>
         ))}
       </div>

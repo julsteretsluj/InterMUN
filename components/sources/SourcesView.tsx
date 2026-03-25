@@ -6,16 +6,57 @@ import { Plus, Link2 } from "lucide-react";
 
 interface Source {
   id: string;
+  user_id: string;
   url: string;
   title: string | null;
 }
 
-export function SourcesView({ sources }: { sources: Source[] }) {
+export function SourcesView({
+  sources,
+  currentUserId,
+  myRole,
+  canEditAll,
+}: {
+  sources: Source[];
+  currentUserId: string;
+  myRole: string;
+  canEditAll: boolean;
+}) {
   const [items, setItems] = useState(sources);
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editing, setEditing] = useState<Source | null>(null);
+  const [editUrl, setEditUrl] = useState("");
+  const [editTitle, setEditTitle] = useState("");
   const supabase = createClient();
+
+  async function refreshSources() {
+    if (canEditAll) {
+      const { data } = await supabase
+        .from("sources")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (data) setItems(data as Source[]);
+      return;
+    }
+
+    const { data: follows } = await supabase
+      .from("follows")
+      .select("followed_id")
+      .eq("follower_id", currentUserId);
+
+    const followedIds = (follows ?? []).map((f) => f.followed_id as string);
+    const ids = [currentUserId, ...followedIds];
+
+    const { data } = await supabase
+      .from("sources")
+      .select("*")
+      .in("user_id", ids.length > 0 ? ids : [currentUserId])
+      .order("created_at", { ascending: false });
+
+    if (data) setItems(data as Source[]);
+  }
 
   async function addSource() {
     const {
@@ -30,17 +71,38 @@ export function SourcesView({ sources }: { sources: Source[] }) {
     setUrl("");
     setTitle("");
     setShowForm(false);
-    const { data } = await supabase
+    await refreshSources();
+  }
+
+  async function saveEdit() {
+    if (!editing) return;
+    if (!canEditAll && editing.user_id !== currentUserId) return;
+    if (!editUrl.trim()) return;
+
+    const { error } = await supabase
       .from("sources")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false });
-    if (data) setItems(data);
+      .update({
+        url: editUrl.trim(),
+        title: editTitle.trim() || null,
+      })
+      .eq("id", editing.id);
+
+    if (error) return;
+
+    setEditing(null);
+    setEditUrl("");
+    setEditTitle("");
+    await refreshSources();
   }
 
   async function deleteSource(id: string) {
-    await supabase.from("sources").delete().eq("id", id);
-    setItems((prev) => prev.filter((s) => s.id !== id));
+    if (!canEditAll) {
+      const src = items.find((s) => s.id === id);
+      if (!src || src.user_id !== currentUserId) return;
+    }
+    const { error } = await supabase.from("sources").delete().eq("id", id);
+    if (error) return;
+    await refreshSources();
   }
 
   return (
@@ -84,6 +146,44 @@ export function SourcesView({ sources }: { sources: Source[] }) {
           </div>
         </div>
       )}
+
+      {editing && (
+        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+          <h3 className="font-semibold">Edit source</h3>
+          <input
+            type="url"
+            value={editUrl}
+            onChange={(e) => setEditUrl(e.target.value)}
+            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+          />
+          <input
+            type="text"
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            placeholder="Title (optional)"
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={() => void saveEdit()}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Save changes
+            </button>
+            <button
+              onClick={() => {
+                setEditing(null);
+                setEditUrl("");
+                setEditTitle("");
+              }}
+              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-2">
         {items.map((s) => (
           <div
@@ -99,12 +199,28 @@ export function SourcesView({ sources }: { sources: Source[] }) {
             >
               {s.title || s.url}
             </a>
-            <button
-              onClick={() => deleteSource(s.id)}
-              className="text-sm text-red-600 hover:underline"
-            >
-              Delete
-            </button>
+            {(canEditAll || s.user_id === currentUserId) && (
+              <div className="flex gap-3 items-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditing(s);
+                    setEditUrl(s.url);
+                    setEditTitle(s.title || "");
+                  }}
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void deleteSource(s.id)}
+                  className="text-sm text-red-600 hover:underline"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>

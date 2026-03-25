@@ -11,6 +11,14 @@ export default async function VotingPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const myRole = (profile?.role || "delegate").toString().toLowerCase();
+
   const conferenceId = await requireActiveConferenceId();
 
   const { data: voteItems } = await supabase
@@ -22,7 +30,7 @@ export default async function VotingPage() {
 
   return (
     <MunPageShell title="Voting">
-      <VotingPanel voteItems={voteItems || []} />
+      <VotingPanel voteItems={voteItems || []} myRole={myRole} />
     </MunPageShell>
   );
 }

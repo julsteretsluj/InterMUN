@@ -10,6 +10,15 @@ export default async function ResolutionsPage() {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const myRole = (profile?.role || "delegate").toString().toLowerCase();
+  const canCreate = myRole === "chair" || myRole === "smt" || myRole === "admin";
+
   const conferenceId = await requireActiveConferenceId();
 
   const { data: resolutions } = await supabase
@@ -34,6 +43,7 @@ export default async function ResolutionsPage() {
         resolutions={resolutions || []}
         blocs={blocs || []}
         conferenceId={conferenceId}
+        canCreate={canCreate}
       />
     </MunPageShell>
   );

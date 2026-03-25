@@ -9,15 +9,29 @@ export default async function DocumentsPage() {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: docs } = await supabase
-    .from("documents")
-    .select("*")
-    .eq("user_id", user.id)
-    .order("updated_at", { ascending: false });
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const myRole = (profile?.role || "delegate").toString().toLowerCase();
+  const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
+  const canEditAll = myRole === "smt" || myRole === "admin";
+
+  let q = supabase.from("documents").select("*").order("updated_at", { ascending: false });
+  if (!canViewAll) q = q.eq("user_id", user.id);
+  const { data: docs } = await q;
 
   return (
     <MunPageShell title="Documents">
-      <DocumentsView documents={docs || []} />
+      <DocumentsView
+        documents={docs || []}
+        currentUserId={user.id}
+        myRole={myRole}
+        canViewAll={canViewAll}
+        canEditAll={canEditAll}
+      />
     </MunPageShell>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
+import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -54,51 +55,49 @@ export default async function ProfilePage() {
     ])
   );
 
-  const canViewPrivate = true;
+  const isDelegate = roleLower === "delegate";
+  const canViewPrivate = !isDelegate;
 
-  if (profile?.role?.toString().trim().toLowerCase() === "delegate") {
-    const delegateOf = profile?.country || profile?.name || "your committee";
-    const quickActions = [
-      { href: "/documents", label: "Documents" },
-      { href: "/chats-notes", label: "Notes" },
-      { href: "/committee-room", label: "Committee room" },
-      { href: "/running-notes", label: "Running Notes" },
-      { href: "/ideas", label: "Ideas" },
-      { href: "/guides", label: "Guides" },
-      { href: "/sources", label: "Sources" },
-      { href: "/resolutions", label: "Resolutions" },
-      { href: "/speeches", label: "Speeches" },
-      { href: "/stances", label: "Stances" },
-      { href: "/report", label: "Report" },
-      { href: "/voting", label: "Motions" },
-      { href: "/voting", label: "Points" },
-    ];
-
-    return (
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
-            Welcome delegate of {delegateOf}
-          </h2>
-          <p className="mt-3 text-brand-muted">What would you like to start with?</p>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            {quickActions.map((item) => (
-              <Link
-                key={`${item.label}-${item.href}`}
-                href={item.href}
-                className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy bg-white hover:bg-brand-cream transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+  const delegateWelcome = isDelegate ? (
+    <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
+          Welcome delegate of {profile?.country || profile?.name || "your committee"}
+        </h2>
+        <p className="mt-3 text-brand-muted">What would you like to start with?</p>
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {[
+            { href: "/documents", label: "Documents" },
+            { href: "/chats-notes", label: "Notes" },
+            { href: "/committee-room", label: "Committee room" },
+            { href: "/running-notes", label: "Running Notes" },
+            { href: "/ideas", label: "Ideas" },
+            { href: "/guides", label: "Guides" },
+            { href: "/sources", label: "Sources" },
+            { href: "/resolutions", label: "Resolutions" },
+            { href: "/speeches", label: "Speeches" },
+            { href: "/stances", label: "Stances" },
+            { href: "/report", label: "Report" },
+            { href: "/voting", label: "Motions" },
+            { href: "/voting", label: "Points" },
+          ].map((item) => (
+            <Link
+              key={`${item.label}-${item.href}`}
+              href={item.href}
+              className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy bg-white hover:bg-brand-cream transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
-    );
-  }
+    </div>
+  ) : null;
 
   return (
     <MunPageShell title="Profile">
+      {delegateWelcome}
+      {isDelegate && <DelegateMaterialsExportCard />}
       {(myAwards?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-gold/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">

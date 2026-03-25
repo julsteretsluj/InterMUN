@@ -25,10 +25,12 @@ export function ResolutionsView({
   resolutions,
   blocs,
   conferenceId,
+  canCreate,
 }: {
   resolutions: Resolution[];
   blocs: Bloc[];
   conferenceId: string;
+  canCreate: boolean;
 }) {
   const [res, setRes] = useState(resolutions);
   const [showForm, setShowForm] = useState(false);
@@ -42,6 +44,7 @@ export function ResolutionsView({
   const supabase = createClient();
 
   async function createResolution() {
+    if (!canCreate) return;
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -121,13 +124,15 @@ export function ResolutionsView({
 
   return (
     <div className="space-y-4">
-      <button
-        onClick={() => setShowForm(true)}
-        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        <Plus className="w-4 h-4" />
-        New Resolution
-      </button>
+      {canCreate ? (
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          <Plus className="w-4 h-4" />
+          New Resolution
+        </button>
+      ) : null}
       {showForm && (
         <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
           <input

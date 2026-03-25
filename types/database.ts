@@ -7,6 +7,7 @@ export interface Profile {
   id: string;
   role: UserRole;
   name: string | null;
+  username: string | null;
   pronouns: string | null;
   school: string | null;
   profile_picture_url: string | null;

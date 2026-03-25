@@ -10,7 +10,13 @@ interface Report {
   created_at: string;
 }
 
-export function ReportView({ reports }: { reports: Report[] }) {
+export function ReportView({
+  reports,
+  canViewAll,
+}: {
+  reports: Report[];
+  canViewAll: boolean;
+}) {
   const [items, setItems] = useState(reports);
   const [reportType, setReportType] = useState<"ai_use" | "inappropriate_conduct">(
     "ai_use"
@@ -29,11 +35,9 @@ export function ReportView({ reports }: { reports: Report[] }) {
       description: description || null,
     });
     setDescription("");
-    const { data } = await supabase
-      .from("reports")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false });
+    let q = supabase.from("reports").select("*").order("created_at", { ascending: false });
+    if (!canViewAll) q = q.eq("user_id", user.id);
+    const { data } = await q;
     if (data) setItems(data);
   }
 
@@ -75,7 +79,7 @@ export function ReportView({ reports }: { reports: Report[] }) {
         </div>
       </div>
       <div>
-        <h3 className="font-semibold mb-3">Your Reports</h3>
+        <h3 className="font-semibold mb-3">{canViewAll ? "All Reports" : "Your Reports"}</h3>
         <div className="space-y-2">
           {items.map((r) => (
             <div

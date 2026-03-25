@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { StancesView } from "@/components/stances/StancesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { requireActiveConferenceId } from "@/lib/active-conference";
 
 export default async function StancesPage() {
   const supabase = await createClient();
@@ -9,10 +10,23 @@ export default async function StancesPage() {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: allocations } = await supabase
+  const conferenceId = await requireActiveConferenceId();
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const myRole = (profile?.role || "delegate").toString().toLowerCase();
+  const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
+
+  let allocationsQuery = supabase
     .from("allocations")
     .select("*")
-    .eq("user_id", user.id);
+    .eq("conference_id", conferenceId);
+  if (!canViewAll) allocationsQuery = allocationsQuery.eq("user_id", user.id);
+  const { data: allocations } = await allocationsQuery;
 
   const allocationIds = (allocations || []).map((a) => a.id);
   const { data: stanceNotes } = allocationIds.length
@@ -28,17 +42,38 @@ export default async function StancesPage() {
     notes: (stanceNotes || []).filter((n) => n.allocation_id === a.id),
   }));
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("stance_overview")
-    .eq("id", user.id)
-    .single();
+  const delegateIds = Array.from(
+    new Set((allocations || []).map((a) => a.user_id).filter((id): id is string => Boolean(id)))
+  );
+
+  let stanceOverviewByUser: Record<string, Record<string, number>> = {};
+  if (canViewAll) {
+    const { data: delegates } =
+      delegateIds.length > 0
+        ? await supabase
+            .from("profiles")
+            .select("id, stance_overview")
+            .in("id", delegateIds)
+        : { data: [] as { id: string; stance_overview: Record<string, number> | null }[] };
+    stanceOverviewByUser = Object.fromEntries(
+      (delegates ?? []).map((p) => [p.id, p.stance_overview || {}])
+    );
+  } else {
+    const { data: myStance } = await supabase
+      .from("profiles")
+      .select("stance_overview")
+      .eq("id", user.id)
+      .single();
+    stanceOverviewByUser = { [user.id]: (myStance?.stance_overview as Record<string, number>) || {} };
+  }
 
   return (
     <MunPageShell title="Stances">
       <StancesView
         allocations={allocationsWithNotes}
-        stanceOverview={profile?.stance_overview || {}}
+        stanceOverviewByUser={stanceOverviewByUser}
+        currentUserId={user.id}
+        canEdit={myRole === "delegate"}
       />
     </MunPageShell>
   );
