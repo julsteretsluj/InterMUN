@@ -14,7 +14,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, name")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -31,11 +31,16 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         .maybeSingle()
     : { data: null };
 
+  const email = user.email?.toLowerCase().trim();
+  const isJules = email === "juleskittoastrop@gmail.com";
+  const secGenName = profile?.name?.trim() || "Jules";
+  const welcomeLabel = isJules ? `Welcome Sec Gen ${secGenName}` : "Welcome SMT";
+
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy">
       <header className="bg-slate-900 text-white border-b border-slate-700">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-          <span className="font-display text-lg font-semibold tracking-tight">Secretariat</span>
+          <span className="font-display text-lg font-semibold tracking-tight">{welcomeLabel}</span>
           <nav className="flex flex-wrap items-center gap-1 sm:gap-3 text-sm">
             <Link href="/smt" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
               Live committees

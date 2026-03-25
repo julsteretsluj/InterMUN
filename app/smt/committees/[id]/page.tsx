@@ -59,7 +59,7 @@ export default async function SmtCommitteeLivePage({
         </section>
 
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">
-          SMT live oversight: only the session timer for this committee.
+          SMT live oversight: current speaker, next speaker, and remaining time for this committee.
         </p>
       </div>
     </div>

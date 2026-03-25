@@ -61,7 +61,7 @@ export default async function SmtOverviewPage({
       )}
       <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">Live committees</h1>
       <p className="text-sm text-brand-muted mb-6 max-w-2xl">
-        Real-time session timers update as chairs run the session.{" "}
+        Use these cards to monitor committee metadata, then open a committee for live session details.{" "}
         <Link href="/smt/conference" className="text-brand-gold hover:underline">
           Edit names and codes
         </Link>{" "}

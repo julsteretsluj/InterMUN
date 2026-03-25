@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Timers } from "@/components/timers/Timers";
 
 type Props = {
   conferenceId: string;
@@ -32,9 +31,6 @@ export function CommitteeLivePreview({
         >
           Full view
         </Link>
-      </div>
-      <div className="p-3 space-y-3">
-        <Timers conferenceId={conferenceId} theme="light" />
       </div>
     </div>
   );

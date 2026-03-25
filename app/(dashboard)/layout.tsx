@@ -36,6 +36,7 @@ export default async function DashboardLayout({
 
   const role = profile?.role as UserRole | undefined;
   const showStaffNav = isStaffRole(role);
+  const welcomeTitle = role === "chair" ? "Welcome Chair" : "Welcome Delegate";
 
   if (isAdminRole(role)) {
     const search = hdrs.get("x-search") ?? "";
@@ -66,9 +67,10 @@ export default async function DashboardLayout({
         <div className="max-w-6xl mx-auto px-4 pt-5 pb-1 flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
-              {activeConf.name}
+              {welcomeTitle}
             </h1>
             <div className="mt-1 space-y-0.5">
+              <p className="text-sm text-brand-paper/90">{activeConf.name}</p>
               {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
                 <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90">
                   {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
