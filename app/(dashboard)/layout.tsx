@@ -37,14 +37,14 @@ export default async function DashboardLayout({
   const role = profile?.role as UserRole | undefined;
   const normalizedRole = role ? (role.toString().trim().toLowerCase() as UserRole) : undefined;
   const showStaffNav = isStaffRole(role);
-  const welcomeTitle =
-    normalizedRole === "chair"
+  // Use the shared role helpers to avoid edge-cases with casing/enum serialization.
+  const welcomeTitle = isSmtRole(role)
+    ? "Welcome Secretary General"
+    : normalizedRole === "chair"
       ? "Welcome Chair"
-      : normalizedRole === "smt"
-        ? "Welcome Secretary General"
-        : normalizedRole === "admin"
-          ? "Welcome Admin"
-          : "Welcome Delegate";
+      : isAdminRole(role)
+        ? "Welcome Admin"
+        : "Welcome Delegate";
 
   if (isAdminRole(normalizedRole)) {
     const search = hdrs.get("x-search") ?? "";
