@@ -7,7 +7,7 @@ import { Timers } from "@/components/timers/Timers";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
-import { getResolvedActiveConference } from "@/lib/active-conference";
+import { getConferenceForDashboard } from "@/lib/active-conference";
 
 export default async function DashboardLayout({
   children,
@@ -35,13 +35,9 @@ export default async function DashboardLayout({
   const role = profile?.role;
   const showChairTools = role === "chair" || role === "smt";
 
-  const chairBypassNoRoom =
-    showChairTools &&
-    (pathname.startsWith("/chair/") || pathname === "/profile");
+  const activeConf = await getConferenceForDashboard({ role });
 
-  const activeConf = await getResolvedActiveConference();
-
-  if (!activeConf && !chairBypassNoRoom) {
+  if (!activeConf) {
     redirect(`/room-gate?next=${encodeURIComponent(pathname)}`);
   }
 
@@ -58,10 +54,10 @@ export default async function DashboardLayout({
         <div className="max-w-6xl mx-auto px-4 pt-5 pb-1 flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
-              InterMUN
+              SEAMUN I 2027
             </h1>
             <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90 mt-1">
-              Delegate platform
+              Policies with a Purpose · 23–24 Jan 2027
             </p>
           </div>
           <SignOutButton />

@@ -39,6 +39,19 @@ export interface VoteItem {
   closed_at: string | null;
 }
 
+export interface AwardAssignment {
+  id: string;
+  category: string;
+  committee_conference_id: string | null;
+  recipient_profile_id: string | null;
+  recipient_committee_id: string | null;
+  notes: string | null;
+  sort_order: number;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Resolution {
   id: string;
   conference_id: string;

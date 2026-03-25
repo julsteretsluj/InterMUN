@@ -105,3 +105,49 @@ export async function setRoomCodeAndEnterAction(
   await clearVerifiedConference();
   redirect(nextPath);
 }
+
+/** Chair/SMT: set active committee cookie to latest conference row (no room code typed). */
+export async function staffContinueWithLatestConference(formData: FormData) {
+  const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
+  const nextPath =
+    nextPathRaw.startsWith("/") && !nextPathRaw.startsWith("//")
+      ? nextPathRaw
+      : "/profile";
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    redirect(`/login?next=${encodeURIComponent("/room-gate")}`);
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (profile?.role !== "chair" && profile?.role !== "smt") {
+    redirect(
+      `/room-gate?next=${encodeURIComponent(nextPath)}&e=not-staff`
+    );
+  }
+
+  const { data: conf } = await supabase
+    .from("conferences")
+    .select("id")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (!conf?.id) {
+    redirect(
+      `/room-gate?next=${encodeURIComponent(nextPath)}&e=no-conferences`
+    );
+  }
+
+  await setActiveConferenceId(conf.id);
+  await clearVerifiedConference();
+  redirect(nextPath);
+}

@@ -1,8 +1,10 @@
 -- Seed default conference and guides (run after migrations)
 -- created_at is old so optional seed_allocation_matrix.sql conferences stay "latest" when both run.
 INSERT INTO conferences (id, name, committee, created_at) VALUES
-  ('00000000-0000-0000-0000-000000000001', 'Default Conference', 'General Assembly', '2020-01-01T00:00:00Z')
-ON CONFLICT (id) DO NOTHING;
+  ('00000000-0000-0000-0000-000000000001', 'SEAMUN I 2027', 'Policies with a Purpose', '2020-01-01T00:00:00Z')
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  committee = EXCLUDED.committee;
 
 INSERT INTO guides (slug, title, content) VALUES
   ('rop', 'Rules of Procedure (RoP)', E'# Rules of Procedure\n\n## Points and Motions\n- **Point of Order**: Correct procedure\n- **Point of Information**: Question to speaker\n- **Point of Personal Privilege**: Personal comfort\n- **Motion to Table**: Postpone debate\n- **Motion to Adjourn**: End session\n\n## Voting\n- Simple majority for procedural matters\n- 2/3 majority for substantive matters\n- Roll-call vote if requested'),

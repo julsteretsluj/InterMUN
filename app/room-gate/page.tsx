@@ -5,13 +5,14 @@ import { BrandWordmark } from "@/components/BrandWordmark";
 import { RoomGateForm } from "./RoomGateForm";
 import { SwitchCommitteeButton } from "./SwitchCommitteeButton";
 import { getResolvedActiveConference } from "@/lib/active-conference";
+import { staffContinueWithLatestConference } from "@/app/actions/roomGate";
 
 export default async function RoomGatePage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; e?: string }>;
 }) {
-  const { next: nextRaw } = await searchParams;
+  const { next: nextRaw, e: errCode } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//")
       ? nextRaw
@@ -72,6 +73,13 @@ export default async function RoomGatePage({
     );
   }
 
+  const staffErrMsg =
+    errCode === "no-conferences"
+      ? "There are no conferences in the database yet. Add one in Supabase (Table editor → conferences) or run seed.sql, then try again."
+      : errCode === "not-staff"
+        ? "Only chairs and SMT can use the staff shortcut."
+        : null;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-brand-cream via-brand-paper to-[#e4ddd4]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(184,148,30,0.08),transparent)] pointer-events-none" />
@@ -86,6 +94,29 @@ export default async function RoomGatePage({
             Enter the <strong>room code</strong> your chair shared. This selects which committee
             session you are in for the rest of the platform.
           </p>
+          {staffErrMsg && (
+            <p
+              className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2 mb-4"
+              role="alert"
+            >
+              {staffErrMsg}
+            </p>
+          )}
+          {showChairSetupLink && (
+            <form action={staffContinueWithLatestConference} className="mb-6">
+              <input type="hidden" name="next" value={nextPath} />
+              <button
+                type="submit"
+                className="w-full py-3 rounded-lg border-2 border-brand-gold text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors"
+              >
+                Continue as chair / SMT (skip room code)
+              </button>
+              <p className="text-xs text-brand-muted text-center mt-2">
+                Opens the latest conference in the database. Use a room code if you need a specific
+                committee.
+              </p>
+            </form>
+          )}
           <RoomGateForm nextPath={nextPath} showChairSetupLink={showChairSetupLink} />
         </div>
       </div>

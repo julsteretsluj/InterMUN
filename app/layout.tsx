@@ -14,8 +14,9 @@ const sans = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "InterMUN",
-  description: "Model United Nations platform",
+  title: "SEAMUN I 2027",
+  description:
+    "Southeast Asia Model United Nations — 23–24 January 2027. Policies with a Purpose.",
 };
 
 // Avoid static prerender during build when Supabase env is only set at deploy/runtime.

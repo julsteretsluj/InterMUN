@@ -18,6 +18,7 @@ A full-featured MUN platform built with Next.js and Supabase.
 - **Timers** – Current/next speaker, time left (per active committee, realtime)
 - **Room code** – After login, delegates enter a short code to select the committee session; chairs set codes under **Room code**
 - **Session floor** (chairs) – Timers, speakers queue, roll call, dais announcements; delegates see dais, queue, and their roll status in the header strip
+- **Awards** (chairs / SMT) – Track SEAMUN I categories (conference-wide, collective, committee); delegates see their own rows on **Profile**
 - **Paper Saved Widget** – Saved papers quick access
 
 ## Setup
@@ -29,7 +30,7 @@ A full-featured MUN platform built with Next.js and Supabase.
 
 2. **Supabase**
    - Create a [Supabase](https://supabase.com) project
-   - Run migrations in `supabase/migrations/` in order (`00001` … `00005`)
+   - Run migrations in `supabase/migrations/` in order (`00001` … `00008`)
    - Run `supabase/seed.sql` for guides (and optional placeholder conference)
    - **Allocation matrix:** replace `data/allocation-matrix.xlsx` if needed, run `npm run seed:allocations` to regenerate SQL, then run `supabase/seed_allocation_matrix.sql` in the SQL editor. That loads one conference per worksheet (ECOSOC, WHO, …), unassigned allocations, and per-row IDs as `allocation_gate_codes` (e.g. `ECO-001`). Re-running that file replaces only those matrix conferences’ allocations and codes.
 3. **Pre-provisioning delegates (recommended for conference day)**
@@ -42,6 +43,7 @@ A full-featured MUN platform built with Next.js and Supabase.
      NEXT_PUBLIC_SUPABASE_URL=your_url
      NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
      ```
+     You can use `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY` instead of `NEXT_PUBLIC_SUPABASE_ANON_KEY` if that is what the Supabase dashboard shows.
 
 5. **Run**
    ```bash

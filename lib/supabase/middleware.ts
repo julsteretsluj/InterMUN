@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { getSupabasePublishableKey } from "./publishable-key";
 
 export async function updateSession(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
@@ -12,10 +13,10 @@ export async function updateSession(request: NextRequest) {
   });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const anonKey = getSupabasePublishableKey();
   if (!url || !anonKey) {
     console.error(
-      "[intermun] Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY (check Vercel env)."
+      "[intermun] Missing NEXT_PUBLIC_SUPABASE_URL or publishable/anon key (check Vercel env)."
     );
     return response;
   }

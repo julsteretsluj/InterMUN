@@ -19,6 +19,7 @@ import {
   ListOrdered,
   DoorOpen,
   PanelsTopLeft,
+  Trophy,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -62,6 +63,11 @@ export function TabNav({ showChairTools = false }: { showChairTools?: boolean })
           href: "/chair/allocation-passwords",
           label: "Allocation passwords",
           icon: ListOrdered,
+        },
+        {
+          href: "/chair/awards",
+          label: "Awards",
+          icon: Trophy,
         },
         ...BASE_TABS.slice(3),
       ]
