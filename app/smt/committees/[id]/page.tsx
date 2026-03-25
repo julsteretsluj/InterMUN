@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { Timers } from "@/components/timers/Timers";
+import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 
 export default async function SmtCommitteeLivePage({
   params,
@@ -56,6 +57,11 @@ export default async function SmtCommitteeLivePage({
         <section className="space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Timer</h2>
           <Timers conferenceId={conf.id} theme="light" />
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Floor status</h2>
+          <FloorStatusBar conferenceId={conf.id} observeOnly theme="light" />
         </section>
 
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">

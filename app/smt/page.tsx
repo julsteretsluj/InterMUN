@@ -70,6 +70,9 @@ export default async function SmtOverviewPage({
             <p className="font-semibold text-sm">
               {[c.name, c.committee].filter(Boolean).join(" — ") || "Committee"}
             </p>
+            {c.tagline ? (
+              <p className="text-xs text-brand-muted mt-1 line-clamp-2">{c.tagline}</p>
+            ) : null}
             {c.committee_code ? <p className="text-xs font-mono text-brand-navy/70 mt-1">{c.committee_code}</p> : null}
           </Link>
         ))}

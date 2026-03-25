@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isSmtRole } from "@/lib/roles";
+import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -90,6 +91,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         )}
       </header>
       <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
+      <PaperSavedWidget />
     </div>
   );
 }

@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
 import { isAdminRole } from "@/lib/roles";
+import { PaperSavedWidget } from "@/components/PaperSavedWidget";
+import { getActiveEventId } from "@/lib/active-event-cookie";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -21,11 +23,20 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     redirect("/profile");
   }
 
+  const eventId = await getActiveEventId();
+  const { data: activeEvent } = eventId
+    ? await supabase
+        .from("conference_events")
+        .select("name, event_code")
+        .eq("id", eventId)
+        .maybeSingle()
+    : { data: null };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <header className="border-b border-slate-800 bg-slate-900">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-          <span className="font-display text-lg font-semibold tracking-tight text-white">Site admin</span>
+          <span className="font-display text-lg font-semibold tracking-tight text-white">Welcome Admin</span>
           <nav className="flex flex-wrap items-center gap-1 sm:gap-3 text-sm">
             <Link href="/admin" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
               Overview
@@ -45,12 +56,19 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </nav>
           <SignOutButton className="text-slate-300 hover:text-amber-300" />
         </div>
+        {activeEvent ? (
+          <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-slate-400 border-t border-slate-800 pt-2">
+            Active event: <span className="text-slate-200 font-medium">{activeEvent.name}</span> · code{" "}
+            <span className="font-mono text-amber-200/90">{activeEvent.event_code}</span>
+          </div>
+        ) : null}
         <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-slate-400 border-t border-slate-800 pt-2">
-          First admin account is assigned in the database (see migration comments). Never share the service
-          role key.
+          First admin account is assigned in the database (see migration comments). Never share the service role
+          key.
         </div>
       </header>
       <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
+      <PaperSavedWidget />
     </div>
   );
 }
