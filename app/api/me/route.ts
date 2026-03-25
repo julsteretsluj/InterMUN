@@ -10,11 +10,13 @@ export async function GET() {
     return Response.json({ error: "not signed in" }, { status: 401 });
   }
 
-  const { data: profile } = await supabase
+  const { data: profiles, error: profileErr } = await supabase
     .from("profiles")
     .select("id, role, profile_picture_url")
     .eq("id", user.id)
-    .maybeSingle();
+    .limit(1);
+
+  const profile = profiles?.[0] ?? null;
 
   return Response.json({
     configuredSupabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? null,
@@ -26,6 +28,14 @@ export async function GET() {
       id: profile?.id ?? null,
       role: profile?.role ?? null,
       profile_picture_url: profile?.profile_picture_url ?? null,
+    },
+    debug: {
+      profileRows: profiles?.length ?? 0,
+      profileSelectError: profileErr
+        ? {
+            message: profileErr.message,
+          }
+        : null,
     },
   });
 }
