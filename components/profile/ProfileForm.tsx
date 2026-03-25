@@ -120,7 +120,7 @@ export function ProfileForm({
             type="url"
             value={profilePictureUrl}
             onChange={(e) => setProfilePictureUrl(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+            className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
             placeholder="https://..."
           />
         </div>
@@ -129,14 +129,14 @@ export function ProfileForm({
         <label className="block text-sm font-medium mb-1">Name</label>
         <input
           {...register("name")}
-          className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
         />
       </div>
       <div>
         <label className="block text-sm font-medium mb-1">Username</label>
         <input
           {...register("username")}
-          className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
           placeholder="e.g. alex_1999"
         />
         {errors.username && (
@@ -147,7 +147,7 @@ export function ProfileForm({
         <label className="block text-sm font-medium mb-1">Pronouns</label>
         <input
           {...register("pronouns")}
-          className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
           placeholder="e.g. she/her"
         />
       </div>
@@ -155,7 +155,7 @@ export function ProfileForm({
         <label className="block text-sm font-medium mb-1">School</label>
         <input
           {...register("school")}
-          className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
           placeholder="e.g. Lincoln High School"
         />
       </div>
@@ -174,7 +174,7 @@ export function ProfileForm({
                   return Number.isNaN(parsed) ? undefined : parsed;
                 },
               })}
-              className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+              className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
               min={0}
             />
           </div>
@@ -184,7 +184,7 @@ export function ProfileForm({
             </label>
             <input
               {...register("awards")}
-              className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+              className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
               placeholder="Best Delegate, Honorable Mention"
             />
           </div>
@@ -194,7 +194,7 @@ export function ProfileForm({
         <label className="block text-sm font-medium mb-1">Allocation</label>
         <input
           {...register("allocation")}
-          className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-paper dark:border-slate-600 dark:placeholder:text-brand-paper/50"
           placeholder="e.g. United Kingdom"
         />
       </div>
