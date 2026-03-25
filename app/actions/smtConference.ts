@@ -29,8 +29,8 @@ export async function updateConferenceEventAction(
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can edit conference info." };
+  if (profile?.role !== "smt") {
+    return { error: "Only secretariat can edit conference info." };
   }
 
   const { error } = await supabase.rpc("update_conference_event_smt", {
@@ -71,8 +71,8 @@ export async function updateCommitteeSessionAction(
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can edit committees." };
+  if (profile?.role !== "smt") {
+    return { error: "Only secretariat can edit committees." };
   }
 
   const { error } = await supabase.rpc("update_committee_session_smt", {

@@ -29,8 +29,8 @@ async function requireSmt(conferenceId: string): Promise<AuthOk | AuthErr> {
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can manage the allocation matrix.", ok: false };
+  if (profile?.role !== "smt") {
+    return { error: "Only secretariat can manage the allocation matrix.", ok: false };
   }
 
   const { data: conf } = await supabase

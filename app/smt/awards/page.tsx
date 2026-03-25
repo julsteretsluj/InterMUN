@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { AwardsManagerClient } from "@/app/(dashboard)/chair/awards/AwardsManagerClient";
 import type { AwardAssignment } from "@/types/database";
-import { hasSmtDashboardAccess } from "@/lib/roles";
+import { isSmtRole } from "@/lib/roles";
 
 export default async function SmtAwardsPage() {
   const supabase = await createClient();
@@ -18,7 +18,7 @@ export default async function SmtAwardsPage() {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (!hasSmtDashboardAccess(profile?.role)) {
+  if (!isSmtRole(profile?.role)) {
     redirect("/profile");
   }
 

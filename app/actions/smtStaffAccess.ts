@@ -26,8 +26,8 @@ async function requireSmtForConference(conferenceId: string) {
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can change committee codes here.", supabase: null as null };
+  if (profile?.role !== "smt") {
+    return { error: "Only secretariat can change committee codes here.", supabase: null as null };
   }
 
   const { data: conf } = await supabase
@@ -100,8 +100,8 @@ export async function smtInviteChairAction(
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can send chair invites." };
+  if (profile?.role !== "smt") {
+    return { error: "Only secretariat can send chair invites." };
   }
 
   const admin = createAdminClient();
@@ -169,8 +169,8 @@ export async function smtPromoteToChairByEmailAction(
     .select("role")
     .eq("id", user.id)
     .maybeSingle();
-  if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can grant chair roles." };
+  if (profile?.role !== "smt") {
+    return { error: "Only secretariat can grant chair roles." };
   }
 
   const { error } = await supabase.rpc("smt_promote_to_chair_by_email", { p_email: email });

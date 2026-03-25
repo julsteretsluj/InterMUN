@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient";
-import { hasSmtDashboardAccess } from "@/lib/roles";
+import { isSmtRole } from "@/lib/roles";
 
 type ProfileEmbed = { name: string | null } | null;
 
@@ -39,7 +39,7 @@ export default async function SmtAllocationPasswordsPage({
     .eq("id", user.id)
     .maybeSingle();
 
-  if (!hasSmtDashboardAccess(profile?.role)) {
+  if (!isSmtRole(profile?.role)) {
     redirect("/profile");
   }
 

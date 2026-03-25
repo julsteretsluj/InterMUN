@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
-import { CommitteeLivePreview } from "@/components/smt/CommitteeLivePreview";
 
 export default async function SmtOverviewPage({
   searchParams,
@@ -59,23 +58,20 @@ export default async function SmtOverviewPage({
           delegates when you need a specific session.
         </div>
       )}
-      <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">Live committees</h1>
-      <p className="text-sm text-brand-muted mb-6 max-w-2xl">
-        Use these cards to monitor committee metadata, then open a committee for live session details.{" "}
-        <Link href="/smt/conference" className="text-brand-gold hover:underline">
-          Edit names and codes
-        </Link>{" "}
-        without leaving this area.
-      </p>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <h1 className="font-display text-3xl font-semibold text-brand-navy mb-2">Welcome Sec Gen!</h1>
+      <p className="text-base text-brand-navy mb-6">Which committee would you like to check in on?</p>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((c) => (
-          <CommitteeLivePreview
+          <Link
             key={c.id}
-            conferenceId={c.id}
-            title={[c.name, c.committee].filter(Boolean).join(" — ") || "Committee"}
-            subtitle={c.tagline}
-            committeeCode={c.committee_code}
-          />
+            href={`/smt/committees/${c.id}`}
+            className="rounded-xl border border-brand-navy/15 bg-brand-paper px-4 py-3 text-brand-navy shadow-sm hover:bg-brand-cream transition-colors"
+          >
+            <p className="font-semibold text-sm">
+              {[c.name, c.committee].filter(Boolean).join(" — ") || "Committee"}
+            </p>
+            {c.committee_code ? <p className="text-xs font-mono text-brand-navy/70 mt-1">{c.committee_code}</p> : null}
+          </Link>
         ))}
       </div>
     </div>

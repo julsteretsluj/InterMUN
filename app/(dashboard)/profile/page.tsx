@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
@@ -46,6 +47,42 @@ export default async function ProfilePage() {
   );
 
   const canViewPrivate = true;
+
+  if (profile?.role === "delegate") {
+    const delegateOf = profile?.country || profile?.name || "your committee";
+    const quickActions = [
+      { href: "/documents", label: "Documents" },
+      { href: "/chats-notes", label: "Notes" },
+      { href: "/ideas", label: "Ideas" },
+      { href: "/guides", label: "Guides" },
+      { href: "/sources", label: "Sources" },
+      { href: "/report", label: "Report" },
+      { href: "/voting", label: "Motions" },
+      { href: "/voting", label: "Points" },
+    ];
+
+    return (
+      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
+            Welcome delegate of {delegateOf}
+          </h2>
+          <p className="mt-3 text-brand-muted">What would you like to start with?</p>
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+            {quickActions.map((item) => (
+              <Link
+                key={`${item.label}-${item.href}`}
+                href={item.href}
+                className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy bg-white hover:bg-brand-cream transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <MunPageShell title="Profile">

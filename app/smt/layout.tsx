@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getActiveEventId } from "@/lib/active-event-cookie";
-import { hasSmtDashboardAccess } from "@/lib/roles";
+import { isSmtRole } from "@/lib/roles";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -18,7 +18,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
     .eq("id", user.id)
     .maybeSingle();
 
-  if (!hasSmtDashboardAccess(profile?.role)) {
+  if (!isSmtRole(profile?.role)) {
     redirect("/profile");
   }
 
