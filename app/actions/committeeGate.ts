@@ -49,7 +49,7 @@ export async function verifyCommitteeSecondaryLogin(
   }
 
   const eventId = await getActiveEventId();
-  if (profile?.role === "chair" || profile?.role === "smt") {
+  if (profile?.role === "chair" || profile?.role === "smt" || profile?.role === "admin") {
     if (eventId && ctx.event_id !== eventId) {
       return {
         error:
@@ -140,8 +140,8 @@ export async function verifyStaffNotDelegateBypass(
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
-    return { error: "Only chairs and SMT can use staff sign-in." };
+  if (profile?.role !== "smt" && profile?.role !== "admin") {
+    return { error: "Only secretariat or website admins can use this sign-in." };
   }
 
   const ctx = await getConferenceForDashboard({ role: profile?.role });
@@ -206,8 +206,8 @@ export async function setCommitteePasswordAction(
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
-    return { error: "Only chairs and SMT can set the committee password." };
+  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
+    return { error: "Only chairs, SMT, and website admins can set the committee password." };
   }
 
   const hash = hashCommitteePassword(password);
@@ -242,8 +242,8 @@ export async function removeCommitteePasswordAction(
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
-    return { error: "Only chairs and SMT can remove the committee password." };
+  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
+    return { error: "Only chairs, SMT, and website admins can remove the committee password." };
   }
 
   const { error } = await supabase.rpc("set_committee_password_hash", {

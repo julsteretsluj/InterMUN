@@ -9,6 +9,12 @@ import { AutoJoinSingleton } from "./AutoJoinSingleton";
 import { getResolvedActiveConference } from "@/lib/active-conference";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { staffContinueWithLatestConference } from "@/app/actions/roomGate";
+import {
+  canCreateConferenceEvent,
+  canUseLatestCommitteeShortcut,
+  isStaffRole,
+} from "@/lib/roles";
+import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 
 export default async function RoomGatePage({
   searchParams,
@@ -35,8 +41,10 @@ export default async function RoomGatePage({
     .eq("id", user.id)
     .maybeSingle();
 
-  const showChairSetupLink =
-    profile?.role === "chair" || profile?.role === "smt";
+  const role = profile?.role;
+  const showStaffTools = isStaffRole(role);
+  const showLatestShortcut = canUseLatestCommitteeShortcut(role);
+  const showConferenceSetup = canCreateConferenceEvent(role);
 
   const { count: eventCount } = await supabase
     .from("conference_events")
@@ -86,12 +94,12 @@ export default async function RoomGatePage({
               </Link>
               <SwitchCommitteeButton nextPath={nextPath} />
               <SwitchConferenceButton nextPath={nextPath} />
-              {showChairSetupLink ? (
+              {showConferenceSetup ? (
                 <Link
                   href={`/conference-setup?next=${encodeURIComponent(nextPath)}`}
                   className="block text-center text-sm text-brand-navy font-medium border border-brand-navy/20 rounded-lg py-2.5 hover:bg-brand-cream/60"
                 >
-                  Set up a new conference
+                  Set up a new conference (SMT)
                 </Link>
               ) : null}
               <Link
@@ -109,11 +117,13 @@ export default async function RoomGatePage({
 
   const staffErrMsg =
     errCode === "no-conferences"
-      ? "There are no conferences yet. If you are a chair or SMT, use Set up a new conference below, or add a row in Supabase / run seed.sql."
+      ? "There are no conferences yet. SMT can set up a new conference below, or add rows in Supabase / run seed.sql."
       : errCode === "not-staff"
-        ? "Only chairs and SMT can use the staff shortcut."
+        ? "That shortcut is not available for your role."
+      : errCode === "latest-smt-only"
+        ? "Opening the latest committee without codes is for SMT (secretariat) only. Dais chairs should enter the conference code and committee code."
         : errCode === "create-forbidden"
-          ? "Only chairs and SMT can create a conference. Join with your codes instead."
+          ? "Only SMT (secretariat) can create a new conference event. Join with your codes or ask SMT."
           : null;
 
   return (
@@ -143,36 +153,37 @@ export default async function RoomGatePage({
               {staffErrMsg}
             </p>
           )}
-          {showChairSetupLink && (
+          {showLatestShortcut && (
             <form action={staffContinueWithLatestConference} className="mb-4">
               <input type="hidden" name="next" value={nextPath} />
               <button
                 type="submit"
                 className="w-full py-3 rounded-lg border-2 border-brand-gold text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors"
               >
-                Continue as chair / SMT (skip codes)
+                SMT: open latest committee (skip codes)
               </button>
               <p className="text-xs text-brand-muted text-center mt-2">
-                Opens the latest committee in the database. Use committee codes if you need a
-                specific session.
+                Opens the <strong className="text-brand-navy">{SMT_COMMITTEE_CODE}</strong> session when
+                it exists (after conference code <strong className="text-brand-navy">SEAMUNI2027</strong>
+                ). Dais chairs must enter their committee codes above.
               </p>
             </form>
           )}
-          {showChairSetupLink && (
+          {showConferenceSetup && (
             <div className="mb-6 rounded-xl border border-brand-navy/15 bg-brand-cream/50 p-4">
               <Link
                 href={`/conference-setup?next=${encodeURIComponent(nextPath)}`}
                 className="block text-center text-sm font-semibold text-brand-navy hover:text-brand-gold transition-colors"
               >
-                Set up a new conference
+                Set up a new conference (SMT only)
               </Link>
               <p className="text-xs text-brand-muted text-center mt-2 leading-relaxed">
-                Creates a conference code plus your first committee code, optional passwords, and
-                session details.
+                Creates the conference code and the first committee code. Chairs manage committee
+                codes from Chair → Committee code after SMT creates the event.
               </p>
             </div>
           )}
-          <RoomGateForm nextPath={nextPath} showChairSetupLink={showChairSetupLink} />
+          <RoomGateForm nextPath={nextPath} showStaffTools={showStaffTools} />
         </div>
       </div>
     </div>

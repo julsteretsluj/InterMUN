@@ -20,7 +20,7 @@ async function requireChairOrSmt() {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
+  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
     return { supabase, user, ok: false as const };
   }
   return { supabase, user, ok: true as const };
@@ -29,7 +29,7 @@ async function requireChairOrSmt() {
 export async function saveAllocationCode(allocationId: string, code: string) {
   const auth = await requireChairOrSmt();
   if (!auth.ok || !auth.user) {
-    return { error: "Only chairs and SMT can update allocation codes." };
+    return { error: "Only chairs, SMT, and website admins can update allocation codes." };
   }
 
   const trimmed = code.trim();
@@ -60,7 +60,7 @@ export async function saveAllocationCode(allocationId: string, code: string) {
 export async function generateMissingAllocationCodes(conferenceId: string) {
   const auth = await requireChairOrSmt();
   if (!auth.ok || !auth.user) {
-    return { error: "Only chairs and SMT can generate codes." };
+    return { error: "Only chairs, SMT, and website admins can generate codes." };
   }
 
   const supabase = auth.supabase;

@@ -6,6 +6,7 @@ import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { normalizeCommitteeCode, normalizeEventCode } from "@/lib/join-codes";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { redirect } from "next/navigation";
+import { canCreateConferenceEvent } from "@/lib/roles";
 
 export type ConferenceSetupState = { error?: string };
 
@@ -58,8 +59,8 @@ export async function createConferenceAsStaff(
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
-    return { error: "Only chairs and SMT can create a conference." };
+  if (!canCreateConferenceEvent(profile?.role)) {
+    return { error: "Only secretariat or website admins can create a new conference event." };
   }
 
   const { data: newId, error: createErr } = await supabase.rpc("create_event_and_committee_as_staff", {

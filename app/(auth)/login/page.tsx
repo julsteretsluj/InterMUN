@@ -28,13 +28,21 @@ export default function LoginPage() {
       );
       return;
     }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
+    const { data: authData, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
+      setLoading(false);
       setError(error.message);
       return;
     }
-    router.push("/profile");
+    const uid = authData.user?.id;
+    let next = "/profile";
+    if (uid) {
+      const { data: prof } = await supabase.from("profiles").select("role").eq("id", uid).maybeSingle();
+      if (prof?.role === "admin") next = "/admin";
+      else if (prof?.role === "smt") next = "/smt";
+    }
+    setLoading(false);
+    router.push(next);
     router.refresh();
   }
 

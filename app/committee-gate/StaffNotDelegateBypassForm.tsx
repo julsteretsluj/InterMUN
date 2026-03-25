@@ -25,10 +25,10 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
       <input type="hidden" name="conference_id" value={conferenceId} />
       <input type="hidden" name="next" value={nextPath} />
 
-      <p className="text-sm font-medium text-brand-navy">I&apos;m not a delegate</p>
+      <p className="text-sm font-medium text-brand-navy">SMT: not signing in as a delegate</p>
       <p className="text-xs text-brand-muted">
-        Chairs and SMT only. Enter the <strong>staff secondary password</strong> provided by
-        organisers — not the committee room password delegates use.
+        Secretariat only. Enter the <strong>staff secondary password</strong> from organisers — not
+        the committee password delegates share.
       </p>
 
       <div>
@@ -65,7 +65,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
         disabled={pending}
         className="w-full py-2.5 rounded-lg border-2 border-brand-gold text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors disabled:opacity-50 text-sm"
       >
-        {pending ? "Verifying…" : "Continue as chair / SMT (not a delegate)"}
+        {pending ? "Verifying…" : "Continue as SMT (oversight)"}
       </button>
     </form>
   );

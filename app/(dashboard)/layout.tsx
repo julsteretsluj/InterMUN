@@ -8,6 +8,8 @@ import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { isAdminRole, isStaffRole, isSmtRole, showsDaisTools, SMT_APP_HOME, ADMIN_APP_HOME } from "@/lib/roles";
+import type { UserRole } from "@/types/database";
 
 export default async function DashboardLayout({
   children,
@@ -32,8 +34,18 @@ export default async function DashboardLayout({
     .eq("id", user.id)
     .maybeSingle();
 
-  const role = profile?.role;
-  const showChairTools = role === "chair" || role === "smt";
+  const role = profile?.role as UserRole | undefined;
+  const showStaffNav = isStaffRole(role);
+
+  if (isAdminRole(role)) {
+    const search = hdrs.get("x-search") ?? "";
+    redirect(`${ADMIN_APP_HOME}${search}`);
+  }
+
+  if (isSmtRole(role)) {
+    const search = hdrs.get("x-search") ?? "";
+    redirect(`${SMT_APP_HOME}${search}`);
+  }
 
   const activeConf = await getConferenceForDashboard({ role });
 
@@ -41,7 +53,7 @@ export default async function DashboardLayout({
     redirect(`/room-gate?next=${encodeURIComponent(pathname)}`);
   }
 
-  if (!showChairTools && activeConf?.committee_password_hash) {
+  if (!showStaffNav && activeConf?.committee_password_hash) {
     const verified = await getVerifiedConferenceId();
     if (verified !== activeConf.id) {
       redirect(`/committee-gate?next=${encodeURIComponent(pathname)}`);
@@ -56,17 +68,22 @@ export default async function DashboardLayout({
             <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
               {activeConf.name}
             </h1>
-            {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
-              <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90 mt-1">
-                {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
-              </p>
-            ) : null}
+            <div className="mt-1 space-y-0.5">
+              {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
+                <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90">
+                  {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
+                </p>
+              ) : null}
+              {role === "chair" ? (
+                <p className="text-[0.65rem] font-medium text-brand-paper/90 tracking-wide">Dais chair</p>
+              ) : null}
+            </div>
           </div>
           <SignOutButton />
         </div>
         <div className="max-w-6xl mx-auto px-4 pb-4">
-          <TabNav showChairTools={showChairTools} />
-          {activeConf?.id ? (
+          <TabNav staffRole={showStaffNav ? role ?? null : null} />
+          {activeConf?.id && showsDaisTools(role) ? (
             <>
               <div className="mt-3">
                 <Timers conferenceId={activeConf.id} />

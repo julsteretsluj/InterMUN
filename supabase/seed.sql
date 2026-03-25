@@ -30,6 +30,32 @@ ON CONFLICT (id) DO UPDATE SET
   committee_code = EXCLUDED.committee_code,
   room_code = EXCLUDED.room_code;
 
+-- SMT second-gate committee code (after conference code SEAMUNI2027).
+INSERT INTO conferences (
+  id,
+  event_id,
+  name,
+  committee,
+  created_at,
+  committee_code,
+  room_code
+)
+VALUES (
+  '22222222-2222-2222-2222-222222222202',
+  '11111111-1111-1111-1111-111111111101',
+  'Secretariat oversight',
+  'SMT',
+  '2027-01-02T00:00:00Z',
+  'SECRETARIAT2027',
+  'SECRETARIAT2027'
+)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  committee = EXCLUDED.committee,
+  event_id = EXCLUDED.event_id,
+  committee_code = 'SECRETARIAT2027',
+  room_code = 'SECRETARIAT2027';
+
 INSERT INTO guides (slug, title, content) VALUES
   ('rop', 'Rules of Procedure (RoP)', E'# Rules of Procedure\n\n## Points and Motions\n- **Point of Order**: Correct procedure\n- **Point of Information**: Question to speaker\n- **Point of Personal Privilege**: Personal comfort\n- **Motion to Table**: Postpone debate\n- **Motion to Adjourn**: End session\n\n## Voting\n- Simple majority for procedural matters\n- 2/3 majority for substantive matters\n- Roll-call vote if requested'),
   ('examples', 'Examples', E'# Examples\n\n## Resolution Format\n```\nThe General Assembly,\n...\n1. Calls upon member states to...\n2. Urges the international community to...\n```\n\n## Position Paper Structure\n1. Background\n2. Country Policy\n3. Proposed Solutions'),

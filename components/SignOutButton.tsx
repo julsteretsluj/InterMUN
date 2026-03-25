@@ -3,8 +3,9 @@
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { clearRoomAndCommitteeContext } from "@/app/actions/roomGate";
+import { cn } from "@/lib/utils";
 
-export function SignOutButton() {
+export function SignOutButton({ className }: { className?: string }) {
   const router = useRouter();
   const supabase = createClient();
 
@@ -19,7 +20,10 @@ export function SignOutButton() {
     <button
       type="button"
       onClick={signOut}
-      className="text-sm text-brand-paper/80 hover:text-brand-gold-bright transition-colors underline-offset-2 hover:underline"
+      className={cn(
+        "text-sm text-brand-paper/80 hover:text-brand-gold-bright transition-colors underline-offset-2 hover:underline",
+        className
+      )}
     >
       Sign out
     </button>

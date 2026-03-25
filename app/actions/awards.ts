@@ -16,7 +16,7 @@ async function requireChairOrSmt() {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
+  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
     return { supabase, user, ok: false as const };
   }
   return { supabase, user, ok: true as const };
@@ -29,7 +29,7 @@ function scopeForCategory(category: string): AwardScope | undefined {
 export async function saveAwardAssignment(formData: FormData): Promise<{ error?: string; success?: boolean }> {
   const auth = await requireChairOrSmt();
   if (!auth.ok || !auth.user) {
-    return { error: "Only chairs and SMT can edit awards." };
+    return { error: "Only chairs, SMT, and website admins can edit awards." };
   }
 
   const id = String(formData.get("id") ?? "").trim();
@@ -87,7 +87,7 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
 export async function deleteAwardAssignment(id: string): Promise<{ error?: string; success?: boolean }> {
   const auth = await requireChairOrSmt();
   if (!auth.ok || !auth.user) {
-    return { error: "Only chairs and SMT can delete awards." };
+    return { error: "Only chairs, SMT, and website admins can delete awards." };
   }
   const { error } = await auth.supabase.from("award_assignments").delete().eq("id", id);
   if (error) return { error: error.message };

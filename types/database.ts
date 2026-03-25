@@ -1,4 +1,4 @@
-export type UserRole = "delegate" | "chair" | "smt";
+export type UserRole = "delegate" | "chair" | "smt" | "admin";
 export type VoteType = "motion" | "amendment" | "resolution";
 export type VoteValue = "yes" | "no" | "abstain";
 export type BlocStance = "for" | "against";

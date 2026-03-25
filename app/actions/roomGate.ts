@@ -5,8 +5,9 @@ import { createClient } from "@/lib/supabase/server";
 import { clearActiveConference } from "@/lib/active-conference-cookie";
 import { clearActiveEvent, getActiveEventId } from "@/lib/active-event-cookie";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
-import { normalizeCommitteeCode } from "@/lib/join-codes";
+import { normalizeCommitteeCode, SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
+import { canUseLatestCommitteeShortcut } from "@/lib/roles";
 
 export async function clearRoomAndCommitteeContext() {
   await clearActiveEvent();
@@ -102,8 +103,8 @@ export async function setRoomCodeAndEnterAction(
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
-    return { error: "Only chairs and SMT can set committee codes." };
+  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
+    return { error: "Only chairs, SMT, and admins can set committee codes." };
   }
 
   const { error } = await supabase.rpc("set_conference_room_code", {
@@ -185,16 +186,32 @@ export async function staffContinueWithLatestConference(formData: FormData) {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
-    redirect(`/room-gate?next=${encodeURIComponent(nextPath)}&e=not-staff`);
+  if (!canUseLatestCommitteeShortcut(profile?.role)) {
+    redirect(
+      `/room-gate?next=${encodeURIComponent(nextPath)}&e=latest-smt-only`
+    );
   }
 
-  const { data: conf } = await supabase
+  const eventId = await getActiveEventId();
+
+  let smtQuery = supabase
     .from("conferences")
     .select("id, event_id")
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+    .eq("committee_code", SMT_COMMITTEE_CODE);
+  if (eventId) {
+    smtQuery = smtQuery.eq("event_id", eventId);
+  }
+  let { data: conf } = await smtQuery.order("created_at", { ascending: false }).limit(1).maybeSingle();
+
+  if (!conf?.id) {
+    const { data: latest } = await supabase
+      .from("conferences")
+      .select("id, event_id")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    conf = latest;
+  }
 
   if (!conf?.id || !conf.event_id) {
     redirect(`/room-gate?next=${encodeURIComponent(nextPath)}&e=no-conferences`);

@@ -13,7 +13,15 @@ interface Timer {
   total_time_seconds: number;
 }
 
-export function Timers({ conferenceId }: { conferenceId: string | null }) {
+type TimerTheme = "dark" | "light";
+
+export function Timers({
+  conferenceId,
+  theme = "dark",
+}: {
+  conferenceId: string | null;
+  theme?: TimerTheme;
+}) {
   const [timer, setTimer] = useState<Timer | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const supabase = createClient();
@@ -68,28 +76,37 @@ export function Timers({ conferenceId }: { conferenceId: string | null }) {
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
 
-  if (!conferenceId || !timer) return null;
+  if (!conferenceId) return null;
+
+  const isLight = theme === "light";
+  const shell = isLight
+    ? "flex flex-wrap items-center gap-4 px-3 py-2.5 rounded-lg bg-white border border-brand-navy/10 text-brand-navy text-sm"
+    : "flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-brand-paper";
+  const labelCls = isLight
+    ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
+    : "text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5";
+  const clockCls = isLight ? "w-4 h-4 text-brand-gold shrink-0" : "w-5 h-5 text-brand-gold-bright shrink-0";
+
+  if (!timer) {
+    return isLight ? (
+      <p className="text-xs text-brand-muted italic px-1">No timer row yet for this committee.</p>
+    ) : null;
+  }
 
   return (
-    <div className="flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-brand-paper">
-      <Clock className="w-5 h-5 text-brand-gold-bright shrink-0" />
-      <div className="flex flex-wrap gap-6 text-sm">
+    <div className={shell}>
+      <Clock className={clockCls} />
+      <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
         <div>
-          <span className="text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5">
-            Current speaker
-          </span>
+          <span className={labelCls}>Current speaker</span>
           <p className="font-medium">{timer.current_speaker || "—"}</p>
         </div>
         <div>
-          <span className="text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5">
-            Next speaker
-          </span>
+          <span className={labelCls}>Next speaker</span>
           <p className="font-medium">{timer.next_speaker || "—"}</p>
         </div>
         <div>
-          <span className="text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5">
-            Time left
-          </span>
+          <span className={labelCls}>Time left</span>
           <p className="font-mono font-medium tabular-nums">
             {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
             {(total % 60).toString().padStart(2, "0")}

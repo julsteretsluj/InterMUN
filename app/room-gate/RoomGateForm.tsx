@@ -6,10 +6,10 @@ import { joinRoomByCode } from "@/app/actions/roomGate";
 
 type Props = {
   nextPath: string;
-  showChairSetupLink: boolean;
+  showStaffTools: boolean;
 };
 
-export function RoomGateForm({ nextPath, showChairSetupLink }: Props) {
+export function RoomGateForm({ nextPath, showStaffTools }: Props) {
   const [state, formAction, pending] = useActionState(joinRoomByCode, null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function RoomGateForm({ nextPath, showChairSetupLink }: Props) {
         {pending ? "Joining…" : "Join committee"}
       </button>
 
-      {showChairSetupLink && (
+      {showStaffTools && (
         <p className="text-center text-sm text-brand-muted">
           Chair or SMT?{" "}
           <Link href="/chair/room-code" className="text-brand-gold font-medium hover:underline">

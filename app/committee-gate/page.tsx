@@ -71,7 +71,7 @@ export default async function CommitteeGatePage({
   ];
 
   const title = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
-  const isStaff = profile?.role === "chair" || profile?.role === "smt";
+  const staffBypass = profile?.role === "smt" || profile?.role === "admin";
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-brand-cream via-brand-paper to-[#e4ddd4]">
@@ -91,11 +91,16 @@ export default async function CommitteeGatePage({
           {allocationChoices.length === 0 ? (
             <div className="space-y-5 text-sm text-brand-muted">
               <p>
-                You do not have an allocation for this committee yet. Ask a chair or SMT member
-                to assign you before you can continue.
+                You do not have an allocation for this committee yet. Ask SMT to assign you in
+                the matrix before you can continue.
               </p>
-              {isStaff ? (
+              {staffBypass ? (
                 <StaffNotDelegateBypassForm conferenceId={conference.id} nextPath={nextPath} />
+              ) : profile?.role === "chair" ? (
+                <p className="text-xs border border-brand-navy/10 rounded-lg p-3 bg-brand-cream/40">
+                  <strong>Dais chairs</strong> need a committee allocation from secretariat. After SMT
+                  adds your seat, reload and sign in with your allocation and the committee password.
+                </p>
               ) : null}
               <Link
                 href="/room-gate"
@@ -112,7 +117,7 @@ export default async function CommitteeGatePage({
                 allocationChoices={allocationChoices}
                 nextPath={nextPath}
               />
-              {isStaff ? (
+              {staffBypass ? (
                 <>
                   <p className="text-center text-xs text-brand-muted">or</p>
                   <StaffNotDelegateBypassForm conferenceId={conference.id} nextPath={nextPath} />

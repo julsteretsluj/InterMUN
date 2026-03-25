@@ -38,7 +38,7 @@ export default async function AllocationPasswordsPage({
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
+  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
     redirect("/profile");
   }
 

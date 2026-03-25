@@ -57,10 +57,10 @@ export default async function CommitteeRoomPage() {
   const { data: staff } = await supabase
     .from("profiles")
     .select("name, role")
-    .in("role", ["chair", "smt"]);
+    .in("role", ["chair", "smt", "admin"]);
 
   const chairs = (staff ?? []).filter((p) => p.role === "chair");
-  const smt = (staff ?? []).filter((p) => p.role === "smt");
+  const smt = (staff ?? []).filter((p) => p.role === "smt" || p.role === "admin");
 
   const dais: DaisSeat[] = [
     { title: "Chair", name: chairs[0]?.name ?? null, showGavel: true },

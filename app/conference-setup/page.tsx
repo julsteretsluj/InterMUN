@@ -29,7 +29,7 @@ export default async function ConferenceSetupPage({
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
+  if (profile?.role !== "smt" && profile?.role !== "admin") {
     redirect(`/room-gate?next=${encodeURIComponent(nextPath)}&e=create-forbidden`);
   }
 
@@ -44,9 +44,9 @@ export default async function ConferenceSetupPage({
             Set up a conference
           </h1>
           <p className="text-sm text-brand-muted text-center mb-6">
-            Creates a <strong>conference code</strong> (first gate for all delegates) and your first{" "}
-            <strong>committee code</strong> (second gate). Add more committees later in Supabase or
-            future tools; chairs can edit committee codes from Chair → Set committee code.
+            Secretariat or <strong>website admin</strong>: creates a <strong>conference code</strong>{" "}
+            (first gate) and the first <strong>committee code</strong> (second gate). Add more committees
+            in Supabase or via your workflow; dais chairs edit committee codes under Chair → Committee code.
           </p>
           <ConferenceSetupForm nextPath={nextPath} />
           <p className="text-center mt-6">

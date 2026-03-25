@@ -18,7 +18,13 @@ export default async function ChairSessionPage() {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt") {
+  if (profile?.role !== "chair") {
+    if (profile?.role === "smt") {
+      redirect("/smt?e=smt-no-session-floor");
+    }
+    if (profile?.role === "admin") {
+      redirect("/admin?e=no-session-floor");
+    }
     redirect("/profile");
   }
 

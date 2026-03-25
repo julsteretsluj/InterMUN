@@ -22,6 +22,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { UserRole } from "@/types/database";
 
 const BASE_TABS = [
   { href: "/profile", label: "Profile", icon: User },
@@ -38,40 +39,45 @@ const BASE_TABS = [
   { href: "/report", label: "Report", icon: Flag },
 ];
 
-export function TabNav({ showChairTools = false }: { showChairTools?: boolean }) {
+export function TabNav({ staffRole = null }: { staffRole?: UserRole | null }) {
   const pathname = usePathname();
 
-  const tabs = showChairTools
-    ? [
-        ...BASE_TABS.slice(0, 3),
-        {
-          href: "/chair/committee-access",
-          label: "Committee access",
-          icon: KeyRound,
-        },
-        {
-          href: "/chair/room-code",
-          label: "Committee code",
-          icon: DoorOpen,
-        },
-        {
-          href: "/chair/session",
-          label: "Session floor",
-          icon: PanelsTopLeft,
-        },
-        {
-          href: "/chair/allocation-passwords",
-          label: "Allocation passwords",
-          icon: ListOrdered,
-        },
-        {
-          href: "/chair/awards",
-          label: "Awards",
-          icon: Trophy,
-        },
-        ...BASE_TABS.slice(3),
-      ]
-    : BASE_TABS;
+  const tabs =
+    staffRole === "chair" || staffRole === "smt" || staffRole === "admin"
+      ? [
+          ...BASE_TABS.slice(0, 3),
+          {
+            href: "/chair/committee-access",
+            label: "Committee access",
+            icon: KeyRound,
+          },
+          {
+            href: "/chair/room-code",
+            label: "Committee code",
+            icon: DoorOpen,
+          },
+          ...(staffRole === "chair"
+            ? [
+                {
+                  href: "/chair/session",
+                  label: "Session floor",
+                  icon: PanelsTopLeft,
+                } as const,
+              ]
+            : []),
+          {
+            href: "/chair/allocation-passwords",
+            label: "Allocation passwords",
+            icon: ListOrdered,
+          },
+          {
+            href: "/chair/awards",
+            label: "Awards",
+            icon: Trophy,
+          },
+          ...BASE_TABS.slice(3),
+        ]
+      : BASE_TABS;
 
   return (
     <nav className="flex flex-wrap gap-1.5 sm:gap-2 border-b border-white/10 pb-3 -mb-px overflow-x-auto">
