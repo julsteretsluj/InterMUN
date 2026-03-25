@@ -11,6 +11,7 @@ import {
   Lightbulb,
   Link2,
   FileCheck,
+  Scale,
   Mic,
   ClipboardList,
   Flag,
@@ -26,8 +27,9 @@ import type { UserRole } from "@/types/database";
 
 const BASE_TABS = [
   { href: "/profile", label: "Profile", icon: User },
-  { href: "/chats-notes", label: "Chats/Notes", icon: MessageSquare },
+  { href: "/chats-notes", label: "seamunnotes.com / https://seamun-chat.vercel.app/", icon: MessageSquare },
   { href: "/committee-room", label: "Committee room", icon: Landmark },
+  { href: "/voting", label: "Voting", icon: Scale },
   { href: "/guides", label: "Guides", icon: BookOpen },
   { href: "/documents", label: "Documents", icon: FileText },
   { href: "/stances", label: "Stances", icon: Compass },
@@ -92,7 +94,7 @@ export function TabNav({ staffRole = null }: { staffRole?: UserRole | null }) {
               "flex items-center gap-1.5 shrink-0 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
               isActive
                 ? "bg-brand-gold text-brand-navy shadow-sm"
-                : "text-brand-paper/75 hover:text-brand-paper hover:bg-white/10"
+                : "text-brand-paper/90 hover:text-brand-paper hover:bg-white/10"
             )}
           >
             <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-90" />

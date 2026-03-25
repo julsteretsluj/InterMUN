@@ -3,9 +3,12 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { Timers } from "@/components/timers/Timers";
-import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 
-export default async function SmtCommitteeLivePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function SmtCommitteeLivePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const supabase = await createClient();
   const eventId = await getActiveEventId();
@@ -49,19 +52,17 @@ export default async function SmtCommitteeLivePage({ params }: { params: Promise
             <p className="text-xs font-mono text-brand-navy/70 mt-2">Code: {conf.committee_code}</p>
           ) : null}
         </div>
+
         <section className="space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Timer</h2>
           <Timers conferenceId={conf.id} theme="light" />
         </section>
-        <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Floor</h2>
-          <FloorStatusBar conferenceId={conf.id} observeOnly theme="light" />
-        </section>
+
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">
-          Read-only view for secretariat. Chairs control the dais from{" "}
-          <span className="font-medium">Session floor</span> in the chair dashboard.
+          SMT live oversight: only the session timer for this committee.
         </p>
       </div>
     </div>
   );
 }
+

@@ -17,6 +17,44 @@ export function ConferenceSetupForm({ nextPath }: Props) {
     }
   }, [state?.error]);
 
+  const committeeOptions = [
+    "African Union",
+    "Arab League",
+    "ASEAN",
+    "CCPCJ",
+    "DISEC",
+    "ECOFIN",
+    "ECOSOC",
+    "EU",
+    "F1",
+    "FIFA",
+    "Fantasy World Committee",
+    "HSC",
+    "HRC",
+    "HCR",
+    "IAEA",
+    "ICAO",
+    "ICC",
+    "ICJ",
+    "Interpol",
+    "IOPC",
+    "NATO",
+    "Press Corps",
+    "US Senate",
+    "SOCHUM",
+    "SPECPOL",
+    "CSA",
+    "UNDP",
+    "UNEP",
+    "UNESCO",
+    "UNICEF",
+    "UNODC",
+    "UNSC",
+    "WHO",
+    "WIPO",
+    "WTO",
+  ];
+
   return (
     <form action={formAction} className="space-y-5 text-left">
       <input type="hidden" name="next" value={nextPath} />
@@ -103,9 +141,15 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             name="committee"
             type="text"
             autoComplete="off"
+            list="committee-suggestions"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="e.g. ECOSOC, UNSC"
           />
+          <datalist id="committee-suggestions">
+            {committeeOptions.map((c) => (
+              <option key={c} value={c} />
+            ))}
+          </datalist>
           <p className="text-xs text-brand-muted mt-1">Optional. Shown next to the session title.</p>
         </div>
 

@@ -126,7 +126,9 @@ export function FloorStatusBar({
   const box = isLight
     ? "rounded-lg border border-brand-navy/10 bg-brand-cream/30 px-3 py-2 text-brand-navy text-sm space-y-2"
     : "rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-brand-paper text-sm space-y-2";
-  const muted = isLight ? "text-[0.65rem] uppercase tracking-wider text-brand-muted" : "text-[0.65rem] uppercase tracking-wider text-brand-paper/55";
+  const muted = isLight
+    ? "text-[0.65rem] uppercase tracking-wider text-brand-muted"
+    : "text-[0.65rem] uppercase tracking-wider text-brand-paper/80";
   const icon = isLight ? "text-brand-gold" : "text-brand-gold-bright";
   const border = isLight ? "border-brand-navy/10" : "border-white/10";
   const current = isLight ? "text-brand-gold" : "text-brand-gold-bright";
@@ -162,7 +164,7 @@ export function FloorStatusBar({
         </div>
       )}
       {rollSelf && (
-        <p className={`text-[0.65rem] pt-1 border-t ${border} ${isLight ? "text-brand-muted" : "text-brand-paper/70"}`}>
+        <p className={`text-[0.65rem] pt-1 border-t ${border} ${isLight ? "text-brand-muted" : "text-brand-paper/90"}`}>
           Roll call (you): <span className={`font-medium ${isLight ? "text-brand-navy" : "text-brand-paper"}`}>{rollSelf}</span>
         </p>
       )}

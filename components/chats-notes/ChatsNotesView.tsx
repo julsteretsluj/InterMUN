@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { VotingPanel } from "@/components/voting/VotingPanel";
-import type { VoteItem } from "@/types/database";
 
 interface Note {
   id: string;
@@ -12,13 +10,7 @@ interface Note {
   updated_at: string;
 }
 
-export function ChatsNotesView({
-  initialNotes,
-  voteItems,
-}: {
-  initialNotes: Note[];
-  voteItems: VoteItem[];
-}) {
+export function ChatsNotesView({ initialNotes }: { initialNotes: Note[] }) {
   const [notes, setNotes] = useState(initialNotes);
   const [newNote, setNewNote] = useState("");
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
@@ -28,22 +20,25 @@ export function ChatsNotesView({
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (!user) return;
-      const ch = supabase.channel("notes-changes").on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "notes" },
-        () => {
-          supabase
-            .from("notes")
-            .select("*")
-            .eq("note_type", "chat")
-            .eq("user_id", user.id)
-            .order("updated_at", { ascending: false })
-            .then(({ data }) => data && setNotes(data));
-        }
-      );
+      const ch = supabase
+        .channel("notes-changes")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "notes" },
+          () => {
+            supabase
+              .from("notes")
+              .select("*")
+              .eq("note_type", "chat")
+              .eq("user_id", user.id)
+              .order("updated_at", { ascending: false })
+              .then(({ data }) => data && setNotes(data));
+          }
+        );
       ch.subscribe();
       channelRef.current = ch;
     });
+
     return () => {
       if (channelRef.current) supabase.removeChannel(channelRef.current);
     };
@@ -54,6 +49,7 @@ export function ChatsNotesView({
       data: { user },
     } = await supabase.auth.getUser();
     if (!user || !newNote.trim()) return;
+
     if (selectedNote) {
       await supabase
         .from("notes")
@@ -67,6 +63,7 @@ export function ChatsNotesView({
         content: newNote,
       });
     }
+
     setNewNote("");
     const { data } = await supabase
       .from("notes")
@@ -74,13 +71,14 @@ export function ChatsNotesView({
       .eq("user_id", user.id)
       .eq("note_type", "chat")
       .order("updated_at", { ascending: false });
+
     if (data) setNotes(data);
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-semibold mb-2">Digital Notes</h3>
+        <h3 className="font-semibold mb-2">seamunnotes.com / https://seamun-chat.vercel.app/</h3>
         <div className="flex gap-4">
           <div className="flex-1">
             <textarea
@@ -112,10 +110,7 @@ export function ChatsNotesView({
           </div>
         </div>
       </div>
-      <div>
-        <h3 className="font-semibold mb-2">Live Voting</h3>
-        <VotingPanel voteItems={voteItems} />
-      </div>
     </div>
   );
 }
+

@@ -68,7 +68,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
               Profile
             </Link>
           </nav>
-          <SignOutButton className="text-white/75 hover:text-amber-200" />
+          <SignOutButton className="text-white/90 hover:text-amber-200" />
         </div>
         {activeEvent ? (
           <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-slate-300 border-t border-slate-800 pt-2">

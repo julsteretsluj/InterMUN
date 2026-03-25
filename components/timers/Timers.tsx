@@ -81,10 +81,10 @@ export function Timers({
   const isLight = theme === "light";
   const shell = isLight
     ? "flex flex-wrap items-center gap-4 px-3 py-2.5 rounded-lg bg-white border border-brand-navy/10 text-brand-navy text-sm"
-    : "flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-brand-paper";
+    : "flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/8 border border-white/12 text-brand-paper/95";
   const labelCls = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
-    : "text-xs uppercase tracking-wider text-brand-paper/55 block mb-0.5";
+    : "text-xs uppercase tracking-wider text-brand-paper/75 block mb-0.5";
   const clockCls = isLight ? "w-4 h-4 text-brand-gold shrink-0" : "w-5 h-5 text-brand-gold-bright shrink-0";
 
   if (!timer) {

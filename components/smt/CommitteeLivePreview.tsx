@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Timers } from "@/components/timers/Timers";
-import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 
 type Props = {
   conferenceId: string;
@@ -11,15 +10,18 @@ type Props = {
   committeeCode: string | null;
 };
 
-export function CommitteeLivePreview({ conferenceId, title, subtitle, committeeCode }: Props) {
+export function CommitteeLivePreview({
+  conferenceId,
+  title,
+  subtitle,
+  committeeCode,
+}: Props) {
   return (
     <div className="rounded-xl border border-brand-navy/15 bg-white shadow-sm overflow-hidden flex flex-col">
       <div className="px-3 py-2 border-b border-brand-navy/10 bg-brand-cream/40 flex items-start justify-between gap-2">
         <div className="min-w-0">
           <p className="font-medium text-brand-navy text-sm truncate">{title}</p>
-          {subtitle ? (
-            <p className="text-xs text-brand-muted truncate">{subtitle}</p>
-          ) : null}
+          {subtitle ? <p className="text-xs text-brand-muted truncate">{subtitle}</p> : null}
           {committeeCode ? (
             <p className="text-[0.65rem] font-mono text-brand-navy/70 mt-0.5">{committeeCode}</p>
           ) : null}
@@ -33,8 +35,8 @@ export function CommitteeLivePreview({ conferenceId, title, subtitle, committeeC
       </div>
       <div className="p-3 space-y-3">
         <Timers conferenceId={conferenceId} theme="light" />
-        <FloorStatusBar conferenceId={conferenceId} observeOnly theme="light" />
       </div>
     </div>
   );
 }
+
