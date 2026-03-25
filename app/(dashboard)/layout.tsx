@@ -1,9 +1,11 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { Timers } from "@/components/timers/Timers";
 import { SignOutButton } from "@/components/SignOutButton";
+import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 
 export default async function DashboardLayout({
   children,
@@ -17,6 +19,33 @@ export default async function DashboardLayout({
 
   if (!user) {
     redirect("/login");
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const role = profile?.role;
+  const showChairTools = role === "chair" || role === "smt";
+
+  if (!showChairTools) {
+    const { data: conference } = await supabase
+      .from("conferences")
+      .select("id, committee_password_hash")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (conference?.committee_password_hash) {
+      const verified = await getVerifiedConferenceId();
+      if (verified !== conference.id) {
+        const hdrs = await headers();
+        const pathname = hdrs.get("x-pathname") || "/profile";
+        redirect(`/committee-gate?next=${encodeURIComponent(pathname)}`);
+      }
+    }
   }
 
   return (
@@ -34,7 +63,7 @@ export default async function DashboardLayout({
           <SignOutButton />
         </div>
         <div className="max-w-6xl mx-auto px-4 pb-4">
-          <TabNav />
+          <TabNav showChairTools={showChairTools} />
           <div className="mt-3">
             <Timers />
           </div>

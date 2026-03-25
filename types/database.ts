@@ -22,6 +22,7 @@ export interface Conference {
   id: string;
   name: string;
   committee: string | null;
+  committee_password_hash?: string | null;
   created_at: string;
 }
 

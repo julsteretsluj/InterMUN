@@ -15,10 +15,11 @@ import {
   ClipboardList,
   Flag,
   Landmark,
+  KeyRound,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const TABS = [
+const BASE_TABS = [
   { href: "/profile", label: "Profile", icon: User },
   { href: "/chats-notes", label: "Chats/Notes", icon: MessageSquare },
   { href: "/committee-room", label: "Committee room", icon: Landmark },
@@ -33,12 +34,24 @@ const TABS = [
   { href: "/report", label: "Report", icon: Flag },
 ];
 
-export function TabNav() {
+export function TabNav({ showChairTools = false }: { showChairTools?: boolean }) {
   const pathname = usePathname();
+
+  const tabs = showChairTools
+    ? [
+        ...BASE_TABS.slice(0, 3),
+        {
+          href: "/chair/committee-access",
+          label: "Committee access",
+          icon: KeyRound,
+        },
+        ...BASE_TABS.slice(3),
+      ]
+    : BASE_TABS;
 
   return (
     <nav className="flex flex-wrap gap-1.5 sm:gap-2 border-b border-white/10 pb-3 -mb-px overflow-x-auto">
-      {TABS.map((tab) => {
+      {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = pathname === tab.href;
         return (
