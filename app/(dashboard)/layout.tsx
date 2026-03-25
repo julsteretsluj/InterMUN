@@ -35,20 +35,21 @@ export default async function DashboardLayout({
     .maybeSingle();
 
   const role = profile?.role as UserRole | undefined;
+  const normalizedRole = role ? (role.toString().toLowerCase() as UserRole) : undefined;
   const showStaffNav = isStaffRole(role);
-  const welcomeTitle = role === "chair" ? "Welcome Chair" : "Welcome Delegate";
+  const welcomeTitle = normalizedRole === "chair" ? "Welcome Chair" : "Welcome Delegate";
 
-  if (isAdminRole(role)) {
+  if (isAdminRole(normalizedRole)) {
     const search = hdrs.get("x-search") ?? "";
     redirect(`${ADMIN_APP_HOME}${search}`);
   }
 
-  if (isSmtRole(role)) {
+  if (isSmtRole(normalizedRole)) {
     const search = hdrs.get("x-search") ?? "";
     redirect(`${SMT_APP_HOME}${search}`);
   }
 
-  const activeConf = await getConferenceForDashboard({ role });
+  const activeConf = await getConferenceForDashboard({ role: normalizedRole });
 
   if (!activeConf) {
     redirect(`/room-gate?next=${encodeURIComponent(pathname)}`);
