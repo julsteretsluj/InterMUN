@@ -1,6 +1,7 @@
 -- Seed default conference and guides (run after migrations)
-INSERT INTO conferences (id, name, committee) VALUES
-  ('00000000-0000-0000-0000-000000000001', 'Default Conference', 'General Assembly')
+-- created_at is old so optional seed_allocation_matrix.sql conferences stay "latest" when both run.
+INSERT INTO conferences (id, name, committee, created_at) VALUES
+  ('00000000-0000-0000-0000-000000000001', 'Default Conference', 'General Assembly', '2020-01-01T00:00:00Z')
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO guides (slug, title, content) VALUES

@@ -10,7 +10,13 @@ interface Idea {
   created_at: string;
 }
 
-export function IdeasView({ ideas }: { ideas: Idea[] }) {
+export function IdeasView({
+  ideas,
+  conferenceId,
+}: {
+  ideas: Idea[];
+  conferenceId: string;
+}) {
   const [items, setItems] = useState(ideas);
   const [newContent, setNewContent] = useState("");
   const supabase = createClient();
@@ -22,6 +28,7 @@ export function IdeasView({ ideas }: { ideas: Idea[] }) {
     if (!user || !newContent.trim()) return;
     await supabase.from("ideas").insert({
       user_id: user.id,
+      conference_id: conferenceId,
       content: newContent,
     });
     setNewContent("");
@@ -29,6 +36,7 @@ export function IdeasView({ ideas }: { ideas: Idea[] }) {
       .from("ideas")
       .select("*")
       .eq("user_id", user.id)
+      .eq("conference_id", conferenceId)
       .order("created_at", { ascending: false });
     if (data) setItems(data);
   }

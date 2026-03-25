@@ -5,8 +5,7 @@ import {
   type DaisSeat,
   type DelegatePlacard,
 } from "@/components/committee-room/VirtualCommitteeRoom";
-
-const DEFAULT_CONFERENCE_ID = "00000000-0000-0000-0000-000000000001";
+import { requireActiveConferenceId } from "@/lib/active-conference";
 
 type ProfileEmbed = {
   name: string | null;
@@ -28,14 +27,13 @@ export default async function CommitteeRoomPage() {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
+  const conferenceId = await requireActiveConferenceId();
+
   const { data: conference } = await supabase
     .from("conferences")
     .select("id, name, committee")
-    .order("created_at", { ascending: false })
-    .limit(1)
+    .eq("id", conferenceId)
     .maybeSingle();
-
-  const conferenceId = conference?.id ?? DEFAULT_CONFERENCE_ID;
 
   const { data: allocationRows } = await supabase
     .from("allocations")

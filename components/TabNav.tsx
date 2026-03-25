@@ -16,6 +16,9 @@ import {
   Flag,
   Landmark,
   KeyRound,
+  ListOrdered,
+  DoorOpen,
+  PanelsTopLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -44,6 +47,21 @@ export function TabNav({ showChairTools = false }: { showChairTools?: boolean })
           href: "/chair/committee-access",
           label: "Committee access",
           icon: KeyRound,
+        },
+        {
+          href: "/chair/room-code",
+          label: "Room code",
+          icon: DoorOpen,
+        },
+        {
+          href: "/chair/session",
+          label: "Session floor",
+          icon: PanelsTopLeft,
+        },
+        {
+          href: "/chair/allocation-passwords",
+          label: "Allocation passwords",
+          icon: ListOrdered,
         },
         ...BASE_TABS.slice(3),
       ]

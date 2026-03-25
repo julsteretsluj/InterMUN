@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:allocations": "python3 scripts/parse-allocation-matrix.py"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

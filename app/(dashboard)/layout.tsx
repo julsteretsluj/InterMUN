@@ -4,8 +4,10 @@ import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { Timers } from "@/components/timers/Timers";
+import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
+import { getResolvedActiveConference } from "@/lib/active-conference";
 
 export default async function DashboardLayout({
   children,
@@ -21,6 +23,9 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
+  const hdrs = await headers();
+  const pathname = hdrs.get("x-pathname") || "/profile";
+
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
@@ -30,21 +35,20 @@ export default async function DashboardLayout({
   const role = profile?.role;
   const showChairTools = role === "chair" || role === "smt";
 
-  if (!showChairTools) {
-    const { data: conference } = await supabase
-      .from("conferences")
-      .select("id, committee_password_hash")
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
+  const chairBypassNoRoom =
+    showChairTools &&
+    (pathname.startsWith("/chair/") || pathname === "/profile");
 
-    if (conference?.committee_password_hash) {
-      const verified = await getVerifiedConferenceId();
-      if (verified !== conference.id) {
-        const hdrs = await headers();
-        const pathname = hdrs.get("x-pathname") || "/profile";
-        redirect(`/committee-gate?next=${encodeURIComponent(pathname)}`);
-      }
+  const activeConf = await getResolvedActiveConference();
+
+  if (!activeConf && !chairBypassNoRoom) {
+    redirect(`/room-gate?next=${encodeURIComponent(pathname)}`);
+  }
+
+  if (!showChairTools && activeConf?.committee_password_hash) {
+    const verified = await getVerifiedConferenceId();
+    if (verified !== activeConf.id) {
+      redirect(`/committee-gate?next=${encodeURIComponent(pathname)}`);
     }
   }
 
@@ -64,9 +68,16 @@ export default async function DashboardLayout({
         </div>
         <div className="max-w-6xl mx-auto px-4 pb-4">
           <TabNav showChairTools={showChairTools} />
-          <div className="mt-3">
-            <Timers />
-          </div>
+          {activeConf?.id ? (
+            <>
+              <div className="mt-3">
+                <Timers conferenceId={activeConf.id} />
+              </div>
+              <div className="mt-2">
+                <FloorStatusBar conferenceId={activeConf.id} />
+              </div>
+            </>
+          ) : null}
         </div>
       </header>
       <main className="max-w-6xl mx-auto px-4 py-6 md:py-8">{children}</main>

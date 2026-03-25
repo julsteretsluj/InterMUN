@@ -24,9 +24,11 @@ interface Bloc {
 export function ResolutionsView({
   resolutions,
   blocs,
+  conferenceId,
 }: {
   resolutions: Resolution[];
   blocs: Bloc[];
+  conferenceId: string;
 }) {
   const [res, setRes] = useState(resolutions);
   const [showForm, setShowForm] = useState(false);
@@ -34,7 +36,7 @@ export function ResolutionsView({
     google_docs_url: "",
     main_submitters: "",
     co_submitters: "",
-    conference_id: "00000000-0000-0000-0000-000000000001",
+    conference_id: conferenceId,
   });
   const [selectedBloc, setSelectedBloc] = useState<Record<string, string>>({});
   const supabase = createClient();
@@ -52,7 +54,7 @@ export function ResolutionsView({
     const { data: newRes } = await supabase
       .from("resolutions")
       .insert({
-        conference_id: form.conference_id,
+        conference_id: conferenceId,
         google_docs_url: form.google_docs_url || null,
         main_submitters: mainSubs,
         co_submitters: form.co_submitters
@@ -75,11 +77,12 @@ export function ResolutionsView({
       google_docs_url: "",
       main_submitters: "",
       co_submitters: "",
-      conference_id: "00000000-0000-0000-0000-000000000001",
+      conference_id: conferenceId,
     });
     const { data } = await supabase
       .from("resolutions")
       .select("*")
+      .eq("conference_id", conferenceId)
       .order("created_at", { ascending: false });
     if (data) setRes(data);
   }

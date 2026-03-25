@@ -2,14 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { clearCommitteeVerification } from "@/app/actions/committeeGate";
+import { clearRoomAndCommitteeContext } from "@/app/actions/roomGate";
 
 export function SignOutButton() {
   const router = useRouter();
   const supabase = createClient();
 
   async function signOut() {
-    await clearCommitteeVerification();
+    await clearRoomAndCommitteeContext();
     await supabase.auth.signOut();
     router.push("/login");
     router.refresh();

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { verifyCommitteePassword, hashCommitteePassword } from "@/lib/committee-password";
 import { setVerifiedConferenceId, clearVerifiedConference } from "@/lib/committee-gate-cookie";
+import { getActiveConferenceId } from "@/lib/active-conference-cookie";
 
 export async function clearCommitteeVerification() {
   await clearVerifiedConference();
@@ -22,6 +23,14 @@ export async function verifyCommitteeSecondaryLogin(
     return { error: "Conference, allocation, and password are required." };
   }
 
+  const active = await getActiveConferenceId();
+  if (active !== conferenceId) {
+    return {
+      error:
+        "Your selected committee does not match your room code. Re-enter your room code on the join page.",
+    };
+  }
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -38,15 +47,6 @@ export async function verifyCommitteeSecondaryLogin(
 
   if (cErr || !conference) {
     return { error: "Conference not found." };
-  }
-
-  if (!conference.committee_password_hash) {
-    await setVerifiedConferenceId(conference.id);
-    redirect(nextPath.startsWith("/") ? nextPath : "/profile");
-  }
-
-  if (!verifyCommitteePassword(password, conference.committee_password_hash)) {
-    return { error: "Incorrect committee password." };
   }
 
   const { data: allocs, error: aErr } = await supabase
@@ -69,6 +69,15 @@ export async function verifyCommitteeSecondaryLogin(
       error:
         "Allocation does not match your assignment. Enter your country or position exactly as assigned (spacing and accents may differ).",
     };
+  }
+
+  if (!conference.committee_password_hash) {
+    await setVerifiedConferenceId(conference.id);
+    redirect(nextPath.startsWith("/") ? nextPath : "/profile");
+  }
+
+  if (!verifyCommitteePassword(password, conference.committee_password_hash)) {
+    return { error: "Incorrect committee password." };
   }
 
   await setVerifiedConferenceId(conference.id);

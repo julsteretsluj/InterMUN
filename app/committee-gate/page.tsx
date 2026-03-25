@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { CommitteeGateForm } from "./CommitteeGateForm";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
+import { getActiveConferenceId } from "@/lib/active-conference-cookie";
 
 export default async function CommitteeGatePage({
   searchParams,
@@ -24,14 +25,22 @@ export default async function CommitteeGatePage({
     redirect("/login");
   }
 
+  const activeId = await getActiveConferenceId();
+  if (!activeId) {
+    redirect(`/room-gate?next=${encodeURIComponent(nextPath)}`);
+  }
+
   const { data: conference } = await supabase
     .from("conferences")
     .select("id, name, committee, committee_password_hash")
-    .order("created_at", { ascending: false })
-    .limit(1)
+    .eq("id", activeId)
     .maybeSingle();
 
-  if (!conference?.committee_password_hash) {
+  if (!conference) {
+    redirect(`/room-gate?next=${encodeURIComponent(nextPath)}`);
+  }
+
+  if (!conference.committee_password_hash) {
     redirect(nextPath);
   }
 
@@ -74,14 +83,14 @@ export default async function CommitteeGatePage({
           {allocationChoices.length === 0 ? (
             <div className="space-y-4 text-sm text-brand-muted">
               <p>
-                You do not have an allocation for the active conference yet. Ask a chair or
-                SMT member to assign you before you can continue.
+                You do not have an allocation for this committee yet. Ask a chair or SMT member
+                to assign you before you can continue.
               </p>
               <Link
-                href={nextPath}
+                href="/room-gate"
                 className="inline-block text-brand-gold font-medium hover:underline"
               >
-                ← Back
+                Change room code
               </Link>
             </div>
           ) : (

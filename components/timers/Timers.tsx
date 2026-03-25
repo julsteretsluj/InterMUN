@@ -6,32 +6,43 @@ import { Clock } from "lucide-react";
 
 interface Timer {
   id: string;
+  conference_id: string | null;
   current_speaker: string | null;
   next_speaker: string | null;
   time_left_seconds: number;
   total_time_seconds: number;
 }
 
-export function Timers() {
+export function Timers({ conferenceId }: { conferenceId: string | null }) {
   const [timer, setTimer] = useState<Timer | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const supabase = createClient();
 
   useEffect(() => {
-    supabase
+    if (!conferenceId) {
+      setTimer(null);
+      return;
+    }
+    void supabase
       .from("timers")
       .select("*")
-      .limit(1)
-      .single()
-      .then(({ data }) => data && setTimer(data));
-  }, [supabase]);
+      .eq("conference_id", conferenceId)
+      .maybeSingle()
+      .then(({ data }) => data && setTimer(data as Timer));
+  }, [supabase, conferenceId]);
 
   useEffect(() => {
+    if (!conferenceId) return;
     const channel = supabase
-      .channel("timers")
+      .channel(`timers-${conferenceId}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "timers" },
+        {
+          event: "*",
+          schema: "public",
+          table: "timers",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
         (payload) => {
           setTimer(payload.new as Timer);
         }
@@ -40,7 +51,7 @@ export function Timers() {
     return () => {
       void supabase.removeChannel(channel);
     };
-  }, [supabase]);
+  }, [supabase, conferenceId]);
 
   useEffect(() => {
     if (!timer?.time_left_seconds) return;
@@ -57,7 +68,7 @@ export function Timers() {
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
 
-  if (!timer) return null;
+  if (!conferenceId || !timer) return null;
 
   return (
     <div className="flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-brand-paper">
