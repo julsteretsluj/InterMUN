@@ -14,12 +14,14 @@ import {
   Mic,
   ClipboardList,
   Flag,
+  Landmark,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const TABS = [
   { href: "/profile", label: "Profile", icon: User },
   { href: "/chats-notes", label: "Chats/Notes", icon: MessageSquare },
+  { href: "/committee-room", label: "Committee room", icon: Landmark },
   { href: "/guides", label: "Guides", icon: BookOpen },
   { href: "/documents", label: "Documents", icon: FileText },
   { href: "/stances", label: "Stances", icon: Compass },
