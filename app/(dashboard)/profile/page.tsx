@@ -48,7 +48,7 @@ export default async function ProfilePage() {
 
   const canViewPrivate = true;
 
-  if (profile?.role?.toString().toLowerCase() === "delegate") {
+  if (profile?.role?.toString().trim().toLowerCase() === "delegate") {
     const delegateOf = profile?.country || profile?.name || "your committee";
     const quickActions = [
       { href: "/documents", label: "Documents" },
