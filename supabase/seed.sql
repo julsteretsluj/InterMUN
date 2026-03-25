@@ -1,5 +1,18 @@
 -- Seed default conference and guides (run after migrations)
 -- created_at is old so optional seed_allocation_matrix.sql conferences stay "latest" when both run.
+
+-- Default conference event: first gate code must be SEAMUNI2027 (matches migration 00010 / 00011).
+INSERT INTO conference_events (id, name, tagline, event_code)
+VALUES (
+  '11111111-1111-1111-1111-111111111101',
+  'SEAMUN I 2027',
+  NULL,
+  'SEAMUNI2027'
+)
+ON CONFLICT (id) DO UPDATE SET
+  event_code = 'SEAMUNI2027',
+  name = EXCLUDED.name;
+
 INSERT INTO conferences (id, name, committee, created_at, event_id, committee_code, room_code) VALUES
   (
     '00000000-0000-0000-0000-000000000001',

@@ -31,7 +31,7 @@ export async function joinEventByCode(
   const { data: event, error } = await supabase
     .from("conference_events")
     .select("id")
-    .ilike("event_code", code)
+    .eq("event_code", code)
     .maybeSingle();
 
   if (error || !event) {

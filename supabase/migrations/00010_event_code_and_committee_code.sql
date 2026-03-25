@@ -23,7 +23,7 @@ ALTER TABLE conferences
 INSERT INTO conference_events (id, name, tagline, event_code)
 VALUES (
   '11111111-1111-1111-1111-111111111101',
-  'Default conference',
+  'SEAMUN I 2027',
   NULL,
   'SEAMUNI2027'
 );
