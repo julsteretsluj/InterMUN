@@ -3,9 +3,23 @@ import { MunPageShell } from "@/components/MunPageShell";
 import {
   VirtualCommitteeRoom,
   type DaisSeat,
+  type DelegatePlacard,
 } from "@/components/committee-room/VirtualCommitteeRoom";
 
 const DEFAULT_CONFERENCE_ID = "00000000-0000-0000-0000-000000000001";
+
+type ProfileEmbed = {
+  name: string | null;
+  pronouns: string | null;
+  school: string | null;
+};
+
+function embedProfile(
+  p: ProfileEmbed | ProfileEmbed[] | null
+): ProfileEmbed | null {
+  if (p == null) return null;
+  return Array.isArray(p) ? (p[0] ?? null) : p;
+}
 
 export default async function CommitteeRoomPage() {
   const supabase = await createClient();
@@ -23,23 +37,29 @@ export default async function CommitteeRoomPage() {
 
   const conferenceId = conference?.id ?? DEFAULT_CONFERENCE_ID;
 
-  const { data: allocations } = await supabase
+  const { data: allocationRows } = await supabase
     .from("allocations")
-    .select("country")
-    .eq("conference_id", conferenceId);
+    .select("country, user_id, profiles(name, pronouns, school)")
+    .eq("conference_id", conferenceId)
+    .order("country");
+
+  const placards: DelegatePlacard[] = (allocationRows ?? []).map((row) => {
+    const p = embedProfile(
+      row.profiles as ProfileEmbed | ProfileEmbed[] | null
+    );
+    return {
+      country: String(row.country ?? "").trim() || "—",
+      name: p?.name?.trim() || null,
+      school: p?.school?.trim() || null,
+      pronouns: p?.pronouns?.trim() || null,
+      vacant: false,
+    };
+  });
 
   const { data: staff } = await supabase
     .from("profiles")
     .select("name, role")
     .in("role", ["chair", "smt"]);
-
-  const placards = [
-    ...new Set(
-      (allocations ?? [])
-        .map((a) => a.country?.trim())
-        .filter((c): c is string => Boolean(c))
-    ),
-  ];
 
   const chairs = (staff ?? []).filter((p) => p.role === "chair");
   const smt = (staff ?? []).filter((p) => p.role === "smt");

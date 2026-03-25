@@ -8,6 +8,7 @@ export interface Profile {
   role: UserRole;
   name: string | null;
   pronouns: string | null;
+  school: string | null;
   profile_picture_url: string | null;
   conferences_attended: number;
   awards: string[];

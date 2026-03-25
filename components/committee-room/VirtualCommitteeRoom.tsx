@@ -9,29 +9,42 @@ export interface DaisSeat {
   showGavel: boolean;
 }
 
+export interface DelegatePlacard {
+  country: string;
+  name: string | null;
+  school: string | null;
+  pronouns: string | null;
+  vacant: boolean;
+}
+
 interface VirtualCommitteeRoomProps {
   conferenceName: string;
   committeeName: string;
-  placards: string[];
+  placards: DelegatePlacard[];
   dais: DaisSeat[];
 }
 
+function dash(v: string | null | undefined) {
+  const t = v?.trim();
+  return t ? t : "—";
+}
+
 function Placard({
-  label,
+  placard,
   left,
   top,
   rotate,
-  vacant,
 }: {
-  label: string;
+  placard: DelegatePlacard;
   left: number;
   top: number;
   rotate: number;
-  vacant: boolean;
 }) {
+  const { vacant, country, name, school, pronouns } = placard;
+
   return (
     <div
-      className="absolute w-[4.5rem] sm:w-[5.25rem] md:w-24 pointer-events-none"
+      className="absolute w-[6.75rem] sm:w-28 md:w-32 pointer-events-none"
       style={{
         left: `${left}%`,
         top: `${top}%`,
@@ -40,20 +53,33 @@ function Placard({
     >
       <div
         className={[
-          "rounded-sm border-2 shadow-md px-1 py-1.5 text-center leading-tight",
+          "rounded-sm border-2 shadow-md px-1.5 py-2 text-left leading-snug",
           vacant
-            ? "border-brand-navy/20 bg-brand-cream/40 text-brand-muted/70"
+            ? "border-brand-navy/20 bg-brand-cream/40 text-brand-muted/80"
             : "border-amber-900/40 bg-[#fffef8] text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]",
         ].join(" ")}
       >
-        <div className="text-[0.5rem] uppercase tracking-widest text-brand-muted/80 mb-0.5">
-          {vacant ? "—" : "Placard"}
-        </div>
-        <div className="font-display text-[0.65rem] sm:text-xs font-semibold line-clamp-3 break-words">
-          {label}
-        </div>
+        {vacant ? (
+          <div className="text-center font-display text-xs font-semibold py-1">
+            Vacant
+          </div>
+        ) : (
+          <>
+            <div className="text-[0.5rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
+              {country}
+            </div>
+            <div className="text-[0.62rem] sm:text-[0.65rem] font-medium line-clamp-2 break-words">
+              {dash(name)}
+            </div>
+            <div className="text-[0.55rem] sm:text-[0.58rem] text-brand-muted mt-0.5 line-clamp-2 break-words">
+              {dash(school)}
+            </div>
+            <div className="text-[0.52rem] sm:text-[0.55rem] text-brand-muted/85 mt-0.5 italic line-clamp-2">
+              {pronouns?.trim() ? pronouns.trim() : "—"}
+            </div>
+          </>
+        )}
       </div>
-      {/* Desk edge */}
       <div
         className={[
           "mx-auto mt-0.5 h-1 rounded-sm",
@@ -92,25 +118,33 @@ function DaisStation({ seat }: { seat: DaisSeat }) {
   );
 }
 
+const VACANT_SEAT: DelegatePlacard = {
+  country: "Vacant",
+  name: null,
+  school: null,
+  pronouns: null,
+  vacant: true,
+};
+
 function placardRing(
-  labels: string[],
+  seats: DelegatePlacard[],
   startRad: number,
   endRad: number,
   rNear: number,
   rFar: number
-): { label: string; left: number; top: number; rotate: number }[] {
-  const n = labels.length;
+): { placard: DelegatePlacard; left: number; top: number; rotate: number }[] {
+  const n = seats.length;
   if (n === 0) return [];
   const span = endRad - startRad;
   const cy = 22;
-  return labels.map((label, i) => {
+  return seats.map((placard, i) => {
     const t = n === 1 ? 0.5 : (i + 0.5) / n;
     const rad = startRad + t * span;
     const radiusPct = i % 2 === 0 ? rFar : rNear;
     const left = 50 + radiusPct * Math.cos(rad);
     const top = cy + radiusPct * Math.sin(rad);
     const rotate = (rad * 180) / Math.PI + 90;
-    return { label, left, top, rotate };
+    return { placard, left, top, rotate };
   });
 }
 
@@ -120,39 +154,39 @@ export function VirtualCommitteeRoom({
   placards,
   dais,
 }: VirtualCommitteeRoomProps) {
-  const ringLabels = useMemo(() => {
+  const ringSeats = useMemo(() => {
     const minTotal = 22;
     const raw = [...placards];
-    while (raw.length < minTotal) raw.push("Vacant");
+    while (raw.length < minTotal) raw.push({ ...VACANT_SEAT });
     return raw;
   }, [placards]);
 
   const positions = useMemo(
-    () => placardRing(ringLabels, Math.PI * 0.19, Math.PI * 0.81, 30, 42),
-    [ringLabels]
+    () => placardRing(ringSeats, Math.PI * 0.19, Math.PI * 0.81, 30, 42),
+    [ringSeats]
   );
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-brand-muted max-w-2xl">
-        Top-down style layout: dais with chairs and gavels, delegate placards in a
-        horseshoe. Placards use your conference allocations; empty seats show as{" "}
-        <span className="text-brand-navy font-medium">Vacant</span> until assigned.
+        Placards list <strong>country</strong> (from allocations),{" "}
+        <strong>name</strong>, <strong>school</strong>, and <strong>pronouns</strong>{" "}
+        from each delegate&apos;s profile. Edit yours under{" "}
+        <strong>Profile</strong>. Empty committee seats show as{" "}
+        <span className="text-brand-navy font-medium">Vacant</span>.
       </p>
 
       <figure
         className="relative w-full overflow-hidden rounded-2xl border border-brand-navy/15 shadow-[0_24px_60px_-20px_rgba(10,22,40,0.35)] select-none"
         aria-label="Virtual committee room"
       >
-        {/* Room floor */}
         <div
-          className="relative aspect-[16/11] min-h-[320px] sm:min-h-[400px] md:min-h-[460px]"
+          className="relative aspect-[16/12] min-h-[380px] sm:min-h-[440px] md:min-h-[520px]"
           style={{
             background:
               "radial-gradient(ellipse 120% 80% at 50% 100%, #2d4a3e 0%, #1e3329 42%, #15261f 100%)",
           }}
         >
-          {/* Wood dais platform */}
           <div
             className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x-2 border-b-2 border-amber-950/50 shadow-inner"
             style={{
@@ -169,15 +203,13 @@ export function VirtualCommitteeRoom({
             </div>
           </div>
 
-          {/* Dais team */}
-          <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-10 md:gap-14 px-2 z-10">
+          <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-10 md:gap-14 px-2 z-10 flex-wrap">
             {dais.map((seat, i) => (
               <DaisStation key={`${seat.title}-${i}`} seat={seat} />
             ))}
           </div>
 
-          {/* UN-style nameplate on dais front */}
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-amber-900/60 bg-[#f7f0e4] shadow-lg">
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-amber-900/60 bg-[#f7f0e4] shadow-lg max-w-[90%]">
             <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight">
               {committeeName}
             </p>
@@ -186,21 +218,18 @@ export function VirtualCommitteeRoom({
             </p>
           </div>
 
-          {/* Horseshoe placards (alternating near/far radius for double row) */}
           <div className="absolute inset-0 z-[5]">
             {positions.map((p, i) => (
               <Placard
                 key={`seat-${i}`}
-                label={p.label}
+                placard={p.placard}
                 left={p.left}
                 top={p.top}
                 rotate={p.rotate}
-                vacant={p.label === "Vacant"}
               />
             ))}
           </div>
 
-          {/* Subtle floor highlight */}
           <div
             className="pointer-events-none absolute bottom-0 left-0 right-0 h-1/3 opacity-30"
             style={{
@@ -210,8 +239,8 @@ export function VirtualCommitteeRoom({
           />
         </div>
         <figcaption className="sr-only">
-          Virtual Model UN committee room showing dais with chairs and gavels and
-          delegate placards in a horseshoe arrangement.
+          Virtual Model UN committee room with delegate placards showing country,
+          name, school, and pronouns.
         </figcaption>
       </figure>
     </div>

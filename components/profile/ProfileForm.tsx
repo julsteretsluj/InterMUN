@@ -10,6 +10,7 @@ import { Profile } from "@/types/database";
 const schema = z.object({
   name: z.string().optional(),
   pronouns: z.string().optional(),
+  school: z.string().optional(),
   allocation: z.string().optional(),
   conferences_attended: z.number().min(0).optional(),
   awards: z.string().optional(),
@@ -43,6 +44,7 @@ export function ProfileForm({
     defaultValues: {
       name: profile?.name || "",
       pronouns: profile?.pronouns || "",
+      school: profile?.school || "",
       allocation: profile?.allocation || "",
       conferences_attended: profile?.conferences_attended ?? 0,
       awards: profile?.awards?.join(", ") || "",
@@ -54,6 +56,7 @@ export function ProfileForm({
       reset({
         name: profile.name || "",
         pronouns: profile.pronouns || "",
+        school: profile.school || "",
         allocation: profile.allocation || "",
         conferences_attended: profile.conferences_attended ?? 0,
         awards: profile.awards?.join(", ") || "",
@@ -69,6 +72,7 @@ export function ProfileForm({
         id: userId,
         name: data.name,
         pronouns: data.pronouns,
+        school: data.school || null,
         allocation: data.allocation,
         ...(canViewPrivate && {
           conferences_attended: data.conferences_attended ?? 0,
@@ -119,6 +123,14 @@ export function ProfileForm({
           {...register("pronouns")}
           className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
           placeholder="e.g. she/her"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">School</label>
+        <input
+          {...register("school")}
+          className="w-full px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+          placeholder="e.g. Lincoln High School"
         />
       </div>
       {canViewPrivate && (
