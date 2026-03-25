@@ -8,7 +8,10 @@ export type ExportMaterialsRange = "today" | "all";
 type ExportMaterialsActionState = { error?: string; success?: string };
 
 export function DelegateMaterialsExportCard() {
-  const [state, formAction, pending] = useActionState<ExportMaterialsActionState, FormData>(
+  const [state, formAction, pending] = useActionState<
+    ExportMaterialsActionState | null,
+    FormData
+  >(
     exportDelegateMaterialsAction,
     null
   );

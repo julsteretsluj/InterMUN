@@ -39,7 +39,7 @@ BEGIN
     RAISE EXCEPTION 'not authenticated';
   END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('smt', 'admin')
+    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role::text IN ('smt', 'admin')
   ) THEN
     RAISE EXCEPTION 'forbidden';
   END IF;
@@ -104,7 +104,7 @@ BEGIN
     RAISE EXCEPTION 'not authenticated';
   END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('smt', 'admin')
+    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role::text IN ('smt', 'admin')
   ) THEN
     RAISE EXCEPTION 'forbidden';
   END IF;
@@ -149,7 +149,7 @@ BEGIN
     RAISE EXCEPTION 'not authenticated';
   END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('smt', 'admin')
+    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role::text IN ('smt', 'admin')
   ) THEN
     RAISE EXCEPTION 'forbidden';
   END IF;
@@ -199,7 +199,7 @@ DECLARE
 BEGIN
   IF NOT EXISTS (
     SELECT 1 FROM profiles p
-    WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')
+    WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')
   ) THEN
     RAISE EXCEPTION 'not authorized';
   END IF;
@@ -241,7 +241,7 @@ BEGIN
     RAISE EXCEPTION 'not authenticated';
   END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('chair', 'smt', 'admin')
+    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role::text IN ('chair', 'smt', 'admin')
   ) THEN
     RAISE EXCEPTION 'forbidden';
   END IF;
@@ -269,7 +269,7 @@ BEGIN
     RAISE EXCEPTION 'not authenticated';
   END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
+    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role::text = 'admin'
   ) THEN
     RAISE EXCEPTION 'forbidden';
   END IF;
@@ -291,7 +291,7 @@ BEGIN
     RAISE EXCEPTION 'no user with that email';
   END IF;
 
-  IF uid = auth.uid() AND v_role IS DISTINCT FROM 'admin'::user_role THEN
+  IF uid = auth.uid() AND v_role::text IS DISTINCT FROM 'admin' THEN
     RAISE EXCEPTION 'cannot change your own role from the admin dashboard';
   END IF;
 
@@ -311,44 +311,44 @@ GRANT EXECUTE ON FUNCTION public.admin_set_profile_role_by_email(text, text) TO 
 -- RLS: treat admin like chair/SMT for platform operations (not vote_items chair-only).
 DROP POLICY IF EXISTS "Chairs and SMT can read all profiles" ON profiles;
 CREATE POLICY "Chairs and SMT can read all profiles" ON profiles FOR SELECT USING (
-  EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+  EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
 );
 
 DROP POLICY IF EXISTS "Chairs SMT can manage allocations" ON allocations;
 CREATE POLICY "Chairs SMT can manage allocations" ON allocations FOR ALL USING (
-  EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+  EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
 );
 
 DROP POLICY IF EXISTS "Main subs can update resolution" ON resolutions;
 CREATE POLICY "Main subs can update resolution" ON resolutions FOR UPDATE USING (
-  auth.uid() = ANY(main_submitters) OR EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+  auth.uid() = ANY(main_submitters) OR EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
 );
 
 DROP POLICY IF EXISTS "Timers update chairs" ON timers;
 CREATE POLICY "Timers update chairs" ON timers FOR UPDATE USING (
-  EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+  EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
 );
 
 DROP POLICY IF EXISTS "Timers insert chairs" ON timers;
 CREATE POLICY "Timers insert chairs" ON timers FOR INSERT TO authenticated
   WITH CHECK (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
   );
 
 DROP POLICY IF EXISTS "Chairs SMT manage allocation gate codes" ON allocation_gate_codes;
 CREATE POLICY "Chairs SMT manage allocation gate codes" ON allocation_gate_codes
 FOR ALL TO authenticated
 USING (
-      EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+      EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
 )
 WITH CHECK (
-      EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+      EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
 );
 
 DROP POLICY IF EXISTS "speaker_queue_select" ON speaker_queue_entries;
 CREATE POLICY "speaker_queue_select" ON speaker_queue_entries FOR SELECT TO authenticated
   USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
     OR EXISTS (
       SELECT 1 FROM allocations a
       WHERE a.conference_id = speaker_queue_entries.conference_id
@@ -358,13 +358,13 @@ CREATE POLICY "speaker_queue_select" ON speaker_queue_entries FOR SELECT TO auth
 
 DROP POLICY IF EXISTS "speaker_queue_chair_all" ON speaker_queue_entries;
 CREATE POLICY "speaker_queue_chair_all" ON speaker_queue_entries FOR ALL TO authenticated
-  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')))
-  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')));
+  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')))
+  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')));
 
 DROP POLICY IF EXISTS "roll_call_select" ON roll_call_entries;
 CREATE POLICY "roll_call_select" ON roll_call_entries FOR SELECT TO authenticated
   USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
     OR EXISTS (
       SELECT 1 FROM allocations a
       WHERE a.id = roll_call_entries.allocation_id
@@ -374,13 +374,13 @@ CREATE POLICY "roll_call_select" ON roll_call_entries FOR SELECT TO authenticate
 
 DROP POLICY IF EXISTS "roll_call_chair_all" ON roll_call_entries;
 CREATE POLICY "roll_call_chair_all" ON roll_call_entries FOR ALL TO authenticated
-  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')))
-  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')));
+  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')))
+  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')));
 
 DROP POLICY IF EXISTS "dais_select" ON dais_announcements;
 CREATE POLICY "dais_select" ON dais_announcements FOR SELECT TO authenticated
   USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
     OR EXISTS (
       SELECT 1 FROM allocations a
       WHERE a.conference_id = dais_announcements.conference_id
@@ -391,33 +391,33 @@ CREATE POLICY "dais_select" ON dais_announcements FOR SELECT TO authenticated
 DROP POLICY IF EXISTS "dais_insert_chairs" ON dais_announcements;
 CREATE POLICY "dais_insert_chairs" ON dais_announcements FOR INSERT TO authenticated
   WITH CHECK (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
     AND created_by = auth.uid()
   );
 
 DROP POLICY IF EXISTS "dais_delete_chairs" ON dais_announcements;
 CREATE POLICY "dais_delete_chairs" ON dais_announcements FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')));
+  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')));
 
 DROP POLICY IF EXISTS "award_assignments_select" ON award_assignments;
 CREATE POLICY "award_assignments_select" ON award_assignments FOR SELECT TO authenticated
   USING (
     recipient_profile_id = auth.uid()
-    OR EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin'))
+    OR EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin'))
   );
 
 DROP POLICY IF EXISTS "award_assignments_insert" ON award_assignments;
 CREATE POLICY "award_assignments_insert" ON award_assignments FOR INSERT TO authenticated
-  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')));
+  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')));
 
 DROP POLICY IF EXISTS "award_assignments_update" ON award_assignments;
 CREATE POLICY "award_assignments_update" ON award_assignments FOR UPDATE TO authenticated
-  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')))
-  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')));
+  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')))
+  WITH CHECK (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')));
 
 DROP POLICY IF EXISTS "award_assignments_delete" ON award_assignments;
 CREATE POLICY "award_assignments_delete" ON award_assignments FOR DELETE TO authenticated
-  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role IN ('chair', 'smt', 'admin')));
+  USING (EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.role::text IN ('chair', 'smt', 'admin')));
 
 -- SMT or website admin may promote an existing account to chair.
 CREATE OR REPLACE FUNCTION public.smt_promote_to_chair_by_email(p_email text)
@@ -434,7 +434,7 @@ BEGIN
     RAISE EXCEPTION 'not authenticated';
   END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('smt', 'admin')
+    SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role::text IN ('smt', 'admin')
   ) THEN
     RAISE EXCEPTION 'forbidden';
   END IF;
