@@ -18,6 +18,14 @@ export default async function ProfilePage() {
     .eq("id", user.id)
     .single();
 
+  const roleLower = profile?.role?.toString().trim().toLowerCase();
+  if (roleLower === "smt") {
+    redirect("/smt");
+  }
+  if (roleLower === "admin") {
+    redirect("/admin");
+  }
+
   const { data: myAwards } = await supabase
     .from("award_assignments")
     .select("*")
