@@ -6,6 +6,7 @@ import { setActiveEventId } from "@/lib/active-event-cookie";
 import { clearActiveConference } from "@/lib/active-conference-cookie";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { normalizeEventCode } from "@/lib/join-codes";
+import { findEventIdByEventCode } from "@/lib/gate-code-lookup";
 
 export async function joinEventByCode(
   _prev: { error?: string } | null,
@@ -28,17 +29,12 @@ export async function joinEventByCode(
     return { error: "You must be signed in." };
   }
 
-  const { data: event, error } = await supabase
-    .from("conference_events")
-    .select("id")
-    .eq("event_code", code)
-    .maybeSingle();
-
-  if (error || !event) {
+  const eventId = await findEventIdByEventCode(supabase, code);
+  if (!eventId) {
     return { error: "No conference matches that code. Check spelling with your organisers." };
   }
 
-  await setActiveEventId(event.id);
+  await setActiveEventId(eventId);
   await clearActiveConference();
   await clearVerifiedConference();
   redirect(nextPath.startsWith("/") ? nextPath : "/room-gate");

@@ -27,6 +27,7 @@ export interface Conference {
   tagline?: string | null;
   room_code?: string | null;
   committee_code?: string | null;
+  committee_logo_url?: string | null;
   committee_password_hash?: string | null;
   created_at: string;
 }

@@ -1,12 +1,13 @@
-/** Second-gate committee code reserved for SMT / secretariat (same event as delegates). */
-export const SMT_COMMITTEE_CODE = "SECRETARIAT2027";
+import { normalizeCommitteeJoinCode } from "@/lib/committee-join-code";
+
+export { SMT_COMMITTEE_CODE } from "@/lib/committee-join-code";
 
 /** Conference / event code: letters, digits, common punctuation; spaces stripped; compared case-insensitively. */
 export function normalizeEventCode(raw: string): string {
   return raw.trim().toUpperCase().replace(/\s+/g, "");
 }
 
-/** Committee code within an event (e.g. ECOSOC@SEAMUN): trim, uppercase; keeps @ and similar. */
+/** Second-gate committee / room code: A–Z0–9 only (e.g. ECO741). */
 export function normalizeCommitteeCode(raw: string): string {
-  return raw.trim().toUpperCase();
+  return normalizeCommitteeJoinCode(raw);
 }

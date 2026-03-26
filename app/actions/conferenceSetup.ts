@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { hashCommitteePassword } from "@/lib/committee-password";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { normalizeCommitteeCode, normalizeEventCode } from "@/lib/join-codes";
+import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { redirect } from "next/navigation";
 import { canCreateConferenceEvent } from "@/lib/roles";
@@ -35,8 +36,8 @@ export async function createConferenceAsStaff(
   if (sessionName.length < 2) {
     return { error: "Enter a committee session title (at least 2 characters)." };
   }
-  if (committeeCode.length < 4) {
-    return { error: "Committee code must be at least 4 characters." };
+  if (!isValidCommitteeJoinCode(committeeCode)) {
+    return { error: "Committee code must be exactly 6 letters or digits (e.g. ECO741 from chamber initials + 3 digits)." };
   }
   if (password && password.length < 6) {
     return { error: "Committee password must be at least 6 characters, or leave both password fields empty." };

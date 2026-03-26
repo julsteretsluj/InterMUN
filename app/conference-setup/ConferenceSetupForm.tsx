@@ -182,14 +182,18 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             name="committee_code"
             type="text"
             required
-            minLength={4}
+            minLength={6}
+            maxLength={6}
+            pattern="[A-Za-z0-9]{6}"
+            title="Exactly 6 letters or digits"
             autoComplete="off"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
-            placeholder="e.g. ECOSOC@SEAMUN"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            placeholder="e.g. ECO741"
           />
           <p className="text-xs text-brand-muted mt-1">
-            Second gate: unique within this conference. You can use letters, digits, and symbols like @.
-            Compared case-insensitively (trimmed).
+            Second gate: exactly six letters or digits, unique within this event—typically three letters from
+            the chamber name plus three digits (e.g. ECOSOC → ECO741). Non-alphanumeric characters are
+            stripped when you save.
           </p>
         </div>
       </div>

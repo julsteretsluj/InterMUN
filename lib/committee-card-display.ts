@@ -1,5 +1,3 @@
-import { createHash } from "node:crypto";
-
 /** Known chamber labels → full name when `committee_full_name` is not set in DB. */
 const WELL_KNOWN_COMMITTEE_FULL_NAME: Record<string, string> = {
   DISEC: "Disarmament and International Security Committee",
@@ -52,17 +50,3 @@ export function formatCommitteeCardTitle(
   return "Committee";
 }
 
-const PUBLIC_CODE_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-/** Stable 6-character A–Z / 0–9 reference for display (join codes stay unchanged). */
-export function derivePublicCommitteeCode(conferenceId: string, committeeCode: string | null | undefined): string {
-  const h = createHash("sha256").update(`${conferenceId}\0${committeeCode ?? ""}`).digest("hex");
-  let out = "";
-  for (let i = 0; i < 6; i++) {
-    const slice = h.slice(i * 5, i * 5 + 8);
-    const v = parseInt(slice, 16);
-    const n = Number.isFinite(v) && v > 0 ? v : i + 1;
-    out += PUBLIC_CODE_ALPHABET[n % 36]!;
-  }
-  return out;
-}

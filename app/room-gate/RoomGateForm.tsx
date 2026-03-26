@@ -36,12 +36,17 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
           autoComplete="off"
           autoCapitalize="characters"
           required
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono tracking-wide text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
-          placeholder="e.g. ECOSOC@SEAMUN"
+          minLength={6}
+          maxLength={6}
+          pattern="[A-Za-z0-9]{6}"
+          title="Exactly 6 letters or digits"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono tracking-widest text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+          placeholder="e.g. ECO741"
         />
         <p className="text-xs text-brand-muted mt-1.5">
-          Second step: the code for <strong>your committee</strong> within this conference. Leading
-          and trailing spaces are trimmed; letters are matched case-insensitively.
+          Second step: six letters or digits for <strong>your committee</strong> (often three letters from
+          the chamber name plus three digits). Spaces and punctuation are ignored; matching is
+          case-insensitive.
         </p>
       </div>
 

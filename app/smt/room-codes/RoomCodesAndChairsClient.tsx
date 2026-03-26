@@ -28,11 +28,14 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
           <input
             name="code"
             required
-            minLength={4}
+            minLength={6}
+            maxLength={6}
+            pattern="[A-Za-z0-9]{6}"
+            title="Exactly 6 letters or digits"
             defaultValue={c.committee_code ?? ""}
-            placeholder="e.g. DISEC@SEAMUN"
+            placeholder="e.g. DIS795"
             autoComplete="off"
-            className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm uppercase"
+            className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm uppercase tracking-widest"
           />
         </div>
         <button

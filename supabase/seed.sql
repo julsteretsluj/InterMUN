@@ -20,8 +20,8 @@ INSERT INTO conferences (id, name, committee, created_at, event_id, committee_co
     'Policies with a Purpose',
     '2020-01-01T00:00:00Z',
     '11111111-1111-1111-1111-111111111101',
-    'MAIN@SEED',
-    'MAIN@SEED'
+    'POL038',
+    'POL038'
   )
 ON CONFLICT (id) DO UPDATE SET
   name = EXCLUDED.name,
@@ -46,15 +46,15 @@ VALUES (
   'Secretariat oversight',
   'SMT',
   '2027-01-02T00:00:00Z',
-  'SECRETARIAT2027',
-  'SECRETARIAT2027'
+  'SMT227',
+  'SMT227'
 )
 ON CONFLICT (id) DO UPDATE SET
   name = EXCLUDED.name,
   committee = EXCLUDED.committee,
   event_id = EXCLUDED.event_id,
-  committee_code = 'SECRETARIAT2027',
-  room_code = 'SECRETARIAT2027';
+  committee_code = 'SMT227',
+  room_code = 'SMT227';
 
 INSERT INTO guides (slug, title, content) VALUES
   ('rop', 'Rules of Procedure (RoP)', E'# Rules of Procedure\n\n## Points and Motions\n- **Point of Order**: Correct procedure\n- **Point of Information**: Question to speaker\n- **Point of Personal Privilege**: Personal comfort\n- **Motion to Table**: Postpone debate\n- **Motion to Adjourn**: End session\n\n## Voting\n- Simple majority for procedural matters\n- 2/3 majority for substantive matters\n- Roll-call vote if requested'),

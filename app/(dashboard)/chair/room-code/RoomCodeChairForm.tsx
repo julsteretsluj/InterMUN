@@ -64,10 +64,13 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           name="code"
           type="text"
           required
-          minLength={4}
+          minLength={6}
+          maxLength={6}
+          pattern="[A-Za-z0-9]{6}"
+          title="Exactly 6 letters or digits"
           autoComplete="off"
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono uppercase"
-          placeholder="At least 4 characters"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono uppercase tracking-widest"
+          placeholder="e.g. WHO582"
         />
       </div>
 

@@ -1,9 +1,23 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { Timers } from "@/components/timers/Timers";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
+import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
+import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
+import { formatCommitteeCardTitle, resolveCommitteeFullName } from "@/lib/committee-card-display";
+import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
+
+function MetaItem({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="min-w-0">
+      <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">{label}</dt>
+      <dd className="text-sm text-brand-navy mt-0.5 break-words">{children}</dd>
+    </div>
+  );
+}
 
 export default async function SmtCommitteeLivePage({
   params,
@@ -16,7 +30,9 @@ export default async function SmtCommitteeLivePage({
 
   const { data: conf } = await supabase
     .from("conferences")
-    .select("id, event_id, name, committee, tagline, committee_code")
+    .select(
+      "id, event_id, name, committee, tagline, committee_code, room_code, committee_full_name, chair_names, committee_logo_url"
+    )
     .eq("id", id)
     .maybeSingle();
 
@@ -38,24 +54,108 @@ export default async function SmtCommitteeLivePage({
     );
   }
 
-  const heading = [conf.name, conf.committee].filter(Boolean).join(" — ");
+  const [roomPayload, resolutionCount, openVotesCount] = await Promise.all([
+    loadCommitteeRoomPayload(supabase, conf.id, {
+      includeDelegatesForStaff: true,
+      chairNamesHint: conf.chair_names,
+    }),
+    supabase
+      .from("resolutions")
+      .select("id", { count: "exact", head: true })
+      .eq("conference_id", conf.id),
+    supabase
+      .from("vote_items")
+      .select("id", { count: "exact", head: true })
+      .eq("conference_id", conf.id)
+      .is("closed_at", null),
+  ]);
+
+  const staffAllocs = roomPayload.staffAllocations;
+  const totalSeats = staffAllocs.length;
+  const filledSeats = staffAllocs.filter((a) => a.user_id).length;
+
+  const displayTitle = formatCommitteeCardTitle(conf.committee_full_name, conf.committee);
+  const officialName = resolveCommitteeFullName(conf.committee_full_name, conf.committee);
 
   return (
-    <div>
-      <Link href="/smt" className="text-sm text-brand-gold hover:underline mb-4 inline-block">
+    <div className="space-y-8">
+      <Link href="/smt" className="text-sm text-brand-gold hover:underline inline-block">
         ← All committees
       </Link>
+
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-6">
         <div>
-          <h1 className="font-display text-2xl font-semibold text-brand-navy">{heading}</h1>
-          {conf.tagline ? <p className="text-sm text-brand-muted mt-1">{conf.tagline}</p> : null}
-          {conf.committee_code ? (
-            <p className="text-xs font-mono text-brand-navy/70 mt-2">Code: {conf.committee_code}</p>
-          ) : null}
+          <div className="flex items-start gap-4">
+            {conf.committee_logo_url ? (
+              <img
+                src={conf.committee_logo_url}
+                alt={`${conf.committee ?? "Committee"} logo`}
+                className="h-14 w-14 object-contain rounded-md bg-white/70 border border-brand-navy/10 mt-1"
+              />
+            ) : null}
+            <h1 className="font-display text-2xl font-semibold text-brand-navy">{displayTitle}</h1>
+          </div>
+          <p className="text-xs text-brand-muted mt-2 uppercase tracking-wide">Committee overview</p>
         </div>
 
+        <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <MetaItem label="Session topic (agenda)">
+            {conf.name?.trim() ? conf.name : "—"}
+          </MetaItem>
+          {conf.tagline?.trim() ? (
+            <MetaItem label="Tagline">{conf.tagline}</MetaItem>
+          ) : null}
+          <MetaItem label="Official committee name">{officialName ?? "—"}</MetaItem>
+          <MetaItem label="Chamber / acronym">{conf.committee?.trim() || "—"}</MetaItem>
+          <MetaItem label="Dais (listed)">{conf.chair_names?.trim() || "—"}</MetaItem>
+          <MetaItem label="Committee / room code (second gate)">
+            {conf.committee_code?.trim() || conf.room_code?.trim() ? (
+              <span className="font-mono tracking-widest">
+                {conf.committee_code?.trim() || conf.room_code}
+              </span>
+            ) : (
+              "—"
+            )}
+          </MetaItem>
+          <MetaItem label="Seats">
+            {filledSeats} filled · {totalSeats} allocated
+          </MetaItem>
+          <MetaItem label="Resolutions">{resolutionCount.count ?? 0}</MetaItem>
+          <MetaItem label="Open votes">{openVotesCount.count ?? 0}</MetaItem>
+        </dl>
+
+        <p className="text-xs text-brand-muted border-t border-brand-navy/10 pt-4">
+          Edit committee session metadata and chair names under{" "}
+          <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
+            Event & committee sessions
+          </Link>
+          . Codes under{" "}
+          <Link href="/smt/room-codes" className="text-brand-gold font-medium hover:underline">
+            Room codes & chairs
+          </Link>
+          .
+        </p>
+      </div>
+
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-4">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Digital committee room</h2>
+        <p className="text-sm text-brand-navy/90 max-w-2xl">
+          Same virtual floor delegates see under <span className="font-medium">Committee room</span> in the
+          delegate dashboard (placards and dais use this committee&apos;s allocations).
+        </p>
+        <VirtualCommitteeRoom
+          conferenceName={conf.name ?? "Conference"}
+          committeeName={conf.committee?.trim() || "Committee"}
+          placards={roomPayload.placards}
+          dais={roomPayload.dais}
+          helperText="Secretariat view: live preview from this committee's allocation matrix. Assign seats below or in Allocation matrix."
+        />
+        <CommitteeRoomStaffControls allocations={roomPayload.staffAllocations} delegates={roomPayload.delegates} />
+      </section>
+
+      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-8">
         <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Timer</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Session timer</h2>
           <Timers conferenceId={conf.id} theme="light" />
         </section>
 
@@ -65,10 +165,9 @@ export default async function SmtCommitteeLivePage({
         </section>
 
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">
-          SMT live oversight: current speaker, next speaker, and remaining time for this committee.
+          Live speaker queue, roll call, and timers for this committee—same data chairs see on the session floor.
         </p>
       </div>
     </div>
   );
 }
-

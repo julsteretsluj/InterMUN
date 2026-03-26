@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { getServerAppOrigin } from "@/lib/app-origin";
 import { normalizeCommitteeCode } from "@/lib/join-codes";
+import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export type StaffAccessFormState = { error?: string; success?: string };
@@ -53,8 +54,8 @@ export async function smtSetCommitteeCodeOnlyAction(
   if (!conferenceId) {
     return { error: "Missing committee." };
   }
-  if (code.length < 4) {
-    return { error: "Committee / room code must be at least 4 characters." };
+  if (!isValidCommitteeJoinCode(code)) {
+    return { error: "Committee / room code must be exactly 6 letters or digits (e.g. ECO741)." };
   }
 
   const auth = await requireSmtForConference(conferenceId);

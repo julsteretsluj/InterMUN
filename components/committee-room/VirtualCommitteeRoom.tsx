@@ -22,6 +22,8 @@ interface VirtualCommitteeRoomProps {
   committeeName: string;
   placards: DelegatePlacard[];
   dais: DaisSeat[];
+  /** Omit the helper paragraph with `null`; omit prop for default delegate copy. */
+  helperText?: string | null;
 }
 
 function dash(v: string | null | undefined) {
@@ -153,6 +155,7 @@ export function VirtualCommitteeRoom({
   committeeName,
   placards,
   dais,
+  helperText,
 }: VirtualCommitteeRoomProps) {
   const ringSeats = useMemo(() => {
     const minTotal = 22;
@@ -168,13 +171,18 @@ export function VirtualCommitteeRoom({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-brand-muted max-w-2xl">
-        Placards list <strong>country</strong> (from allocations),{" "}
-        <strong>name</strong>, <strong>school</strong>, and <strong>pronouns</strong>{" "}
-        from each delegate&apos;s profile. Edit yours under{" "}
-        <strong>Profile</strong>. Empty committee seats show as{" "}
-        <span className="text-brand-navy font-medium">Vacant</span>.
-      </p>
+      {helperText === null ? null : (
+        <p className="text-sm text-brand-muted max-w-2xl">
+          {helperText ?? (
+            <>
+              Placards list <strong>country</strong> (from allocations), <strong>name</strong>,{" "}
+              <strong>school</strong>, and <strong>pronouns</strong> from each delegate&apos;s profile. Edit
+              yours under <strong>Profile</strong>. Empty committee seats show as{" "}
+              <span className="text-brand-navy font-medium">Vacant</span>.
+            </>
+          )}
+        </p>
+      )}
 
       <figure
         className="relative w-full overflow-hidden rounded-2xl border border-brand-navy/15 shadow-[0_24px_60px_-20px_rgba(10,22,40,0.35)] select-none"

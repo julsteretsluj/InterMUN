@@ -154,7 +154,7 @@ export function AllocationMatrixManagerClient({
       <p className="text-sm text-brand-muted">
         Add committees to this event first in{" "}
         <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
-          Conference & committees
+          Event & committee sessions
         </Link>
         .
       </p>

@@ -35,13 +35,25 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
   const email = user.email?.toLowerCase().trim();
   const isJules = email === "juleskittoastrop@gmail.com";
   const secGenName = profile?.name?.trim() || "Jules";
-  const welcomeLabel = isJules ? `Welcome Sec Gen ${secGenName}` : "Welcome SMT";
+  const welcomeLabel = isJules
+    ? `Welcome Secretary General ${secGenName}`
+    : "Welcome SMT";
+  const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
 
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy">
       <header className="bg-slate-900 text-white border-b border-slate-700">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-          <span className="font-display text-lg font-semibold tracking-tight">{welcomeLabel}</span>
+          <div className="flex items-center gap-3">
+            {showSeamunLogo ? (
+              <img
+                src="/seamun-i-2027-logo.png"
+                alt="SEAMUN I 2027 logo"
+                className="h-10 w-10 object-contain"
+              />
+            ) : null}
+            <span className="font-display text-lg font-semibold tracking-tight">{welcomeLabel}</span>
+          </div>
           <nav className="flex flex-wrap items-center gap-1 sm:gap-3 text-sm">
             <Link href="/smt" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
               Live committees
@@ -50,7 +62,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
               href="/smt/conference"
               className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors"
             >
-              Conference & committees
+              Event & committee sessions
             </Link>
             <Link href="/smt/room-codes" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
               Room codes & chairs

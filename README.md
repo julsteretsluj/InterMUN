@@ -32,7 +32,7 @@ A full-featured MUN platform built with Next.js and Supabase.
    - Create a [Supabase](https://supabase.com) project
    - Run migrations in `supabase/migrations/` in order (`00001` … `00008`)
    - Run `supabase/seed.sql` for guides (and optional placeholder conference)
-   - **Allocation matrix:** replace `data/allocation-matrix.xlsx` if needed, run `npm run seed:allocations` to regenerate SQL, then run `supabase/seed_allocation_matrix.sql` in the SQL editor. That loads one conference per worksheet (ECOSOC, WHO, …), unassigned allocations, and per-row IDs as `allocation_gate_codes` (e.g. `ECO-001`). Re-running that file replaces only those matrix conferences’ allocations and codes.
+   - **Allocation matrix:** replace `data/allocation-matrix.xlsx` if needed, run `npm run seed:allocations` to regenerate SQL, then run `supabase/seed_allocation_matrix.sql` in the SQL editor. That loads one conference per worksheet (ECOSOC, WHO, …), unassigned allocations, and per-row IDs as `allocation_gate_codes` (e.g. `ECO-001`). Re-running that file replaces only those matrix conferences’ allocations and codes. **Second-gate committee / room codes** are six alphanumeric characters (chamber initials + three digits, e.g. `ECO741` for ECOSOC). Migration `00036` updates canonical seed rows; older databases may still have `LEGACY-…` until you edit codes in **SMT → Room codes** or SQL. First-gate code for the default seed event is `SEAMUNI2027`.
 3. **Pre-provisioning delegates (recommended for conference day)**
    - In Supabase **Authentication → Users**, use **Invite user** (or the Admin API `inviteUserByEmail`) so each delegate gets an email link instead of open self-signup.
    - After users exist, link them to allocations: in **Table Editor → allocations**, set `user_id` to the delegate’s profile UUID for their country row and `conference_id`. Chairs can also run **Session floor → Initialize roll call** once allocations exist.
@@ -57,6 +57,11 @@ A full-featured MUN platform built with Next.js and Supabase.
 
    - **Profile picture uploads (Supabase Storage):**
      - Create a storage bucket named `profile-pictures`
+  - Storage objects are uploaded directly from the browser as authenticated users.
+
+- **Committee logo uploads (SMT) (Supabase Storage):**
+  - Run the migration `supabase/migrations/00037_committee_logos_upload.sql`
+  - It creates a storage bucket named `committee-logos` (public read; chairs/SMT/admin can upload)
      - Make it **public** (so `getPublicUrl` can be used by `<img>`)
      - Optionally add a policy allowing authenticated users to upload to their own folder
        (path prefix `profiles/<userId>/...`)

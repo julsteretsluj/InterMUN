@@ -6,8 +6,10 @@ import { clearActiveConference } from "@/lib/active-conference-cookie";
 import { clearActiveEvent, getActiveEventId } from "@/lib/active-event-cookie";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { normalizeCommitteeCode, SMT_COMMITTEE_CODE } from "@/lib/join-codes";
+import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { canUseLatestCommitteeShortcut } from "@/lib/roles";
+import { findConferenceIdBySecondGateCode } from "@/lib/gate-code-lookup";
 
 export async function clearRoomAndCommitteeContext() {
   await clearActiveEvent();
@@ -32,8 +34,11 @@ export async function joinRoomByCode(
       ? nextPathRaw
       : "/profile";
 
-  if (code.length < 4) {
-    return { error: "Enter the committee code from your chair (at least 4 characters)." };
+  if (!isValidCommitteeJoinCode(code)) {
+    return {
+      error:
+        "Enter the 6-character committee code (letters and digits only, e.g. ECO741). Ask your chair or check SMT → Room codes.",
+    };
   }
 
   const supabase = await createClient();
@@ -51,21 +56,15 @@ export async function joinRoomByCode(
     };
   }
 
-  const { data: conference, error } = await supabase
-    .from("conferences")
-    .select("id")
-    .eq("event_id", eventId)
-    .eq("committee_code", code)
-    .maybeSingle();
-
-  if (error || !conference) {
+  const conferenceId = await findConferenceIdBySecondGateCode(supabase, eventId, code);
+  if (!conferenceId) {
     return {
       error:
-        "No committee matches that code for this conference. Check with your chair (code is case-insensitive except spacing).",
+        "No committee matches that code for this event. Enter the conference code first, then the exact 6-character committee code (SMT → Room codes or Supabase → conferences).",
     };
   }
 
-  await setActiveConferenceContext(supabase, conference.id);
+  await setActiveConferenceContext(supabase, conferenceId);
   await clearVerifiedConference();
   redirect(nextPath);
 }
@@ -85,8 +84,8 @@ export async function setRoomCodeAndEnterAction(
   if (!conferenceId) {
     return { error: "Choose a conference." };
   }
-  if (code.length < 4) {
-    return { error: "Committee code must be at least 4 characters." };
+  if (!isValidCommitteeJoinCode(code)) {
+    return { error: "Committee code must be exactly 6 letters or digits (e.g. ECO741)." };
   }
 
   const supabase = await createClient();

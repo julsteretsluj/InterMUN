@@ -1,6 +1,8 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
+import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { revalidatePath } from "next/cache";
 
 export type SmtFormState = { error?: string; success?: boolean };
@@ -54,12 +56,12 @@ export async function updateCommitteeSessionAction(
   const name = String(formData.get("name") ?? "").trim();
   const committee = String(formData.get("committee") ?? "").trim();
   const tagline = String(formData.get("tagline") ?? "").trim();
-  const committeeCode = String(formData.get("committee_code") ?? "").trim();
+  const committeeCode = normalizeCommitteeCode(String(formData.get("committee_code") ?? ""));
   const committeeFullName = String(formData.get("committee_full_name") ?? "").trim();
   const chairNames = String(formData.get("chair_names") ?? "").trim();
 
-  if (!id || name.length < 2 || committeeCode.length < 4) {
-    return { error: "Session title and committee code (4+ chars) are required." };
+  if (!id || name.length < 2 || !isValidCommitteeJoinCode(committeeCode)) {
+    return { error: "Session title and a valid 6-character committee code (letters/digits) are required." };
   }
 
   const supabase = await createClient();
