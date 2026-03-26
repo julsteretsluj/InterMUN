@@ -26,10 +26,20 @@ export default async function SmtConferencePage() {
   const { data: committees } = eventId
     ? await supabase
         .from("conferences")
-        .select("id, name, committee, tagline, committee_code")
+        .select("id, name, committee, tagline, committee_code, committee_full_name, chair_names")
         .eq("event_id", eventId)
         .order("name", { ascending: true })
-    : { data: [] as { id: string; name: string; committee: string | null; tagline: string | null; committee_code: string | null }[] };
+    : {
+        data: [] as {
+          id: string;
+          name: string;
+          committee: string | null;
+          tagline: string | null;
+          committee_code: string | null;
+          committee_full_name: string | null;
+          chair_names: string | null;
+        }[],
+      };
 
   return (
     <div>

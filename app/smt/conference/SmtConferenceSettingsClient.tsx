@@ -14,6 +14,8 @@ type CommitteeRow = {
   committee: string | null;
   tagline: string | null;
   committee_code: string | null;
+  committee_full_name: string | null;
+  chair_names: string | null;
 };
 
 export function SmtConferenceSettingsClient({
@@ -39,7 +41,9 @@ export function SmtConferenceSettingsClient({
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
         <h2 className="font-display text-xl font-semibold text-brand-navy mb-2">Committees in this event</h2>
         <p className="text-sm text-brand-muted mb-6">
-          Titles, taglines, and committee codes (second gate). Codes must stay unique within the event.
+          Session titles (agenda topics) stay here for records; the SMT home grid shows official committee
+          name, acronym, chairs, and a short display code. Committee codes (second gate) must stay unique
+          within the event.
         </p>
         <div className="space-y-8">
           {committees.length === 0 ? (
@@ -138,6 +142,26 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
         <input
           name="tagline"
           defaultValue={row.tagline ?? ""}
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
+        />
+      </div>
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">
+          Official committee name (SMT grid)
+        </label>
+        <input
+          name="committee_full_name"
+          defaultValue={row.committee_full_name ?? ""}
+          placeholder="e.g. World Health Organization"
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
+        />
+      </div>
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">Chair names</label>
+        <input
+          name="chair_names"
+          defaultValue={row.chair_names ?? ""}
+          placeholder="Comma-separated, e.g. Alex Kim, Jordan Lee"
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         />
       </div>

@@ -55,6 +55,8 @@ export async function updateCommitteeSessionAction(
   const committee = String(formData.get("committee") ?? "").trim();
   const tagline = String(formData.get("tagline") ?? "").trim();
   const committeeCode = String(formData.get("committee_code") ?? "").trim();
+  const committeeFullName = String(formData.get("committee_full_name") ?? "").trim();
+  const chairNames = String(formData.get("chair_names") ?? "").trim();
 
   if (!id || name.length < 2 || committeeCode.length < 4) {
     return { error: "Session title and committee code (4+ chars) are required." };
@@ -81,6 +83,8 @@ export async function updateCommitteeSessionAction(
     p_committee: committee,
     p_tagline: tagline,
     p_committee_code: committeeCode,
+    p_committee_full_name: committeeFullName,
+    p_chair_names: chairNames,
   });
 
   if (error) return { error: error.message };

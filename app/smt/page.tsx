@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
+import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
+import {
+  derivePublicCommitteeCode,
+  formatCommitteeCardTitle,
+} from "@/lib/committee-card-display";
 
 export default async function SmtOverviewPage({
   searchParams,
@@ -27,12 +32,15 @@ export default async function SmtOverviewPage({
 
   const { data: committees } = await supabase
     .from("conferences")
-    .select("id, name, committee, tagline, committee_code")
+    .select("id, name, committee, tagline, committee_code, committee_full_name, chair_names")
     .eq("event_id", eventId)
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
 
-  const list = committees ?? [];
+  const list = (committees ?? []).filter((c) => {
+    const code = c.committee_code?.trim().toUpperCase() ?? "";
+    return code !== SMT_COMMITTEE_CODE;
+  });
 
   if (list.length === 0) {
     return (
@@ -67,13 +75,18 @@ export default async function SmtOverviewPage({
             href={`/smt/committees/${c.id}`}
             className="rounded-xl border border-brand-navy/15 bg-brand-paper px-4 py-3 text-brand-navy shadow-sm hover:bg-brand-cream transition-colors"
           >
-            <p className="font-semibold text-sm">
-              {[c.name, c.committee].filter(Boolean).join(" — ") || "Committee"}
+            <p className="font-semibold text-sm leading-snug">
+              {formatCommitteeCardTitle(c.committee_full_name, c.committee)}
             </p>
-            {c.tagline ? (
-              <p className="text-xs text-brand-muted mt-1 line-clamp-2">{c.tagline}</p>
+            {c.chair_names?.trim() ? (
+              <p className="text-xs text-brand-muted mt-2">
+                <span className="font-medium text-brand-navy/80">Chairs: </span>
+                {c.chair_names.trim()}
+              </p>
             ) : null}
-            {c.committee_code ? <p className="text-xs font-mono text-brand-navy/70 mt-1">{c.committee_code}</p> : null}
+            <p className="text-xs font-mono text-brand-navy/70 mt-2 tracking-wide">
+              {derivePublicCommitteeCode(c.id, c.committee_code)}
+            </p>
           </Link>
         ))}
       </div>
