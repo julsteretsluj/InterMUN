@@ -25,8 +25,9 @@ export default async function VotingPage() {
     .from("vote_items")
     .select("*")
     .eq("conference_id", conferenceId)
-    .is("closed_at", null)
-    .order("created_at", { ascending: false });
+    .order("closed_at", { ascending: true, nullsFirst: true })
+    .order("created_at", { ascending: false })
+    .limit(50);
 
   return (
     <MunPageShell title="Voting">

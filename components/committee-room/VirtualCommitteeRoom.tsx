@@ -8,9 +8,11 @@ export interface DaisSeat {
   title: string;
   name: string | null;
   showGavel: boolean;
+  profileId: string | null;
 }
 
 export interface DelegatePlacard {
+  allocationId: string;
   country: string;
   name: string | null;
   school: string | null;
@@ -26,6 +28,13 @@ interface VirtualCommitteeRoomProps {
   dais: DaisSeat[];
   /** Omit the helper paragraph with `null`; omit prop for default delegate copy. */
   helperText?: string | null;
+
+  // Digital MUN: click-to-select recipient targeting (optional).
+  selectedAllocationRecipientIds?: string[];
+  onToggleAllocationRecipient?: (allocationId: string) => void;
+  selectedChairRecipientIds?: string[];
+  anyChairRecipient?: boolean;
+  onToggleChairRecipient?: (chairProfileId: string) => void;
 }
 
 function dash(v: string | null | undefined) {
@@ -35,19 +44,37 @@ function dash(v: string | null | undefined) {
 
 function Placard({
   placard,
+  selected,
+  onClick,
 }: {
   placard: DelegatePlacard;
+  selected: boolean;
+  onClick?: () => void;
 }) {
-  const { vacant, country, name, school, pronouns } = placard;
+  const { vacant, country, name, school, pronouns, allocationId } = placard;
+  const disabled = vacant || !onClick;
 
   return (
-    <div className="w-[6.75rem] sm:w-28 md:w-32 pointer-events-none">
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={[
+        "w-[6.75rem] sm:w-28 md:w-32 text-left",
+        disabled ? "opacity-100 cursor-default" : "cursor-pointer",
+        selected && !vacant ? "ring-2 ring-brand-gold-bright/60 rounded-[0.35rem]" : "",
+      ].join(" ")}
+      aria-label={vacant ? `Vacant seat` : `Toggle recipient ${country}`}
+      data-allocation-id={allocationId}
+    >
       <div
         className={[
           "rounded-sm border-2 shadow-md px-1.5 py-2 text-left leading-snug",
           vacant
             ? "border-brand-navy/20 bg-brand-cream/40 text-brand-muted/80"
-            : "border-brand-gold-bright/30 bg-brand-paper/70 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
+            : selected
+              ? "border-brand-gold-bright/40 bg-brand-paper/90 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
+              : "border-brand-gold-bright/30 bg-brand-paper/70 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
         ].join(" ")}
       >
         {vacant ? (
@@ -77,13 +104,31 @@ function Placard({
           vacant ? "bg-brand-navy/15 w-[90%]" : "bg-brand-gold-bright/50 w-full",
         ].join(" ")}
       />
-    </div>
+    </button>
   );
 }
 
-function DaisStation({ seat }: { seat: DaisSeat }) {
+function DaisStation({
+  seat,
+  selected,
+  onClick,
+}: {
+  seat: DaisSeat;
+  selected: boolean;
+  onClick?: () => void;
+}) {
+  const disabled = !onClick || !seat.profileId;
   return (
-    <div className="flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem]">
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={[
+        "flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem]",
+        disabled ? "cursor-default" : "cursor-pointer",
+        selected && !disabled ? "ring-2 ring-brand-gold-bright/50 rounded-[0.35rem]" : "",
+      ].join(" ")}
+    >
       <div className="relative flex items-end justify-center gap-0.5 h-14 sm:h-16">
         <Armchair
           className="w-10 h-10 sm:w-12 sm:h-12 text-brand-navy drop-shadow-md"
@@ -97,7 +142,12 @@ function DaisStation({ seat }: { seat: DaisSeat }) {
           />
         )}
       </div>
-      <div className="rounded-md bg-black/25 border border-white/10 px-2 py-1 w-full text-center">
+      <div
+        className={[
+          "rounded-md bg-black/25 px-2 py-1 w-full text-center border",
+          selected && !disabled ? "border-brand-gold-bright/40" : "border-white/10",
+        ].join(" ")}
+      >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-gold-bright/90">
           {seat.title}
         </p>
@@ -105,11 +155,12 @@ function DaisStation({ seat }: { seat: DaisSeat }) {
           {seat.name ?? "—"}
         </p>
       </div>
-    </div>
+    </button>
   );
 }
 
 const VACANT_SEAT: DelegatePlacard = {
+  allocationId: "VACANT",
   country: "Vacant",
   name: null,
   school: null,
@@ -124,6 +175,11 @@ export function VirtualCommitteeRoom({
   placards,
   dais,
   helperText,
+  selectedAllocationRecipientIds = [],
+  onToggleAllocationRecipient,
+  selectedChairRecipientIds = [],
+  anyChairRecipient = false,
+  onToggleChairRecipient,
 }: VirtualCommitteeRoomProps) {
   const supabase = useMemo(() => createClient(), []);
   const [livePlacards, setLivePlacards] = useState<DelegatePlacard[]>(placards);
@@ -144,6 +200,7 @@ export function VirtualCommitteeRoom({
     };
 
     type AllocationRow = {
+      id: string;
       country: string | null;
       user_id: string | null;
       display_name_override: string | null;
@@ -156,7 +213,7 @@ export function VirtualCommitteeRoom({
       const { data: allocationRows, error } = await supabase
         .from("allocations")
         .select(
-          "country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
+          "id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
         )
         .eq("conference_id", conferenceId)
         .order("country");
@@ -170,6 +227,7 @@ export function VirtualCommitteeRoom({
         const pronounsOverride = String(row.display_pronouns_override ?? "").trim();
         const schoolOverride = String(row.display_school_override ?? "").trim();
         return {
+          allocationId: row.id,
           country: String(row.country ?? "").trim() || "—",
           name: vacant ? null : nameOverride ? nameOverride : p?.name?.trim() || null,
           school: vacant ? null : schoolOverride ? schoolOverride : p?.school?.trim() || null,
@@ -257,9 +315,23 @@ export function VirtualCommitteeRoom({
           </div>
 
           <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-10 md:gap-14 px-2 z-10 flex-wrap">
-            {dais.map((seat, i) => (
-              <DaisStation key={`${seat.title}-${i}`} seat={seat} />
-            ))}
+            {dais.map((seat, i) => {
+              const selected =
+                anyChairRecipient ||
+                (seat.profileId ? selectedChairRecipientIds.includes(seat.profileId) : false);
+              return (
+                <DaisStation
+                  key={`${seat.title}-${i}`}
+                  seat={seat}
+                  selected={selected}
+                  onClick={
+                    onToggleChairRecipient && seat.profileId
+                      ? () => onToggleChairRecipient(seat.profileId as string)
+                      : undefined
+                  }
+                />
+              );
+            })}
           </div>
 
           <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-brand-gold/30 bg-brand-paper/80 shadow-lg max-w-[90%]">
@@ -274,7 +346,16 @@ export function VirtualCommitteeRoom({
           <div className="absolute inset-0 z-[5] overflow-y-auto px-3 pb-4 pt-[30%]">
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center">
               {ringSeats.map((p, i) => (
-                <Placard key={`seat-${i}`} placard={p} />
+                <Placard
+                  key={`seat-${i}`}
+                  placard={p}
+                  selected={selectedAllocationRecipientIds.includes(p.allocationId)}
+                  onClick={
+                    onToggleAllocationRecipient && !p.vacant
+                      ? () => onToggleAllocationRecipient(p.allocationId)
+                      : undefined
+                  }
+                />
               ))}
             </div>
           </div>

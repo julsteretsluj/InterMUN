@@ -1,11 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
-import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
-import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
-import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
+import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 
 export default async function CommitteeRoomPage() {
   const supabase = await createClient();
@@ -40,6 +38,9 @@ export default async function CommitteeRoomPage() {
   const myAllocationId =
     payload.staffAllocations.find((a) => a.user_id === user.id)?.id ?? null;
 
+  const myAllocationCountry =
+    allocationOptions.find((a) => a.id === myAllocationId)?.country ?? null;
+
   const { data: chairProfiles } = await supabase
     .from("profiles")
     .select("id, name")
@@ -48,42 +49,27 @@ export default async function CommitteeRoomPage() {
 
   return (
     <MunPageShell title="Virtual committee room">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-start">
-        <VirtualCommitteeRoom
-          conferenceId={conferenceId}
-          conferenceName={payload.conference?.name ?? "Conference"}
-          committeeName={payload.conference?.committee ?? "General Assembly"}
-          placards={payload.placards}
-          dais={payload.dais}
-        />
-
-        <div className="space-y-6">
-          <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-            <DelegationNotesView
-              conferenceId={conferenceId}
-              initialNotes={[]}
-              myUserId={user.id}
-              myRole={myRole}
-              smtVerified={smtVerified}
-              myAllocationId={myAllocationId}
-              myProfileName={myProfileName}
-              allocationOptions={allocationOptions}
-              chairOptions={(chairProfiles ?? []).map((c) => ({
-                id: c.id,
-                name: c.name ?? "Chair",
-              }))}
-              nextPathAfterVerification="/committee-room"
-            />
-          </div>
-
-          {canManageSeats ? (
-            <CommitteeRoomStaffControls
-              allocations={payload.staffAllocations}
-              delegates={payload.delegates}
-            />
-          ) : null}
-        </div>
-      </div>
+      <CommitteeRoomDigitalMUNClient
+        conferenceId={conferenceId}
+        conferenceName={payload.conference?.name ?? "Conference"}
+        committeeName={payload.conference?.committee ?? "General Assembly"}
+        placards={payload.placards}
+        dais={payload.dais}
+        myRole={myRole}
+        myUserId={user.id}
+        smtVerified={smtVerified}
+        myAllocationId={myAllocationId}
+        myProfileName={myProfileName}
+        allocationOptions={allocationOptions}
+        chairOptions={(chairProfiles ?? []).map((c) => ({
+          id: c.id,
+          name: c.name ?? "Chair",
+        }))}
+        myAllocationCountry={myAllocationCountry}
+        canManageSeats={canManageSeats}
+        staffAllocations={payload.staffAllocations}
+        delegates={payload.delegates}
+      />
     </MunPageShell>
   );
 }

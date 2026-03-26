@@ -66,6 +66,13 @@ export function DelegationNotesView({
   allocationOptions,
   chairOptions,
   nextPathAfterVerification = "/chats-notes",
+  selectedAllocationRecipientIds: controlledSelectedAllocationRecipientIds,
+  selectedChairRecipientIds: controlledSelectedChairRecipientIds,
+  anyChairRecipient: controlledAnyChairRecipient,
+  onToggleAllocationRecipient,
+  onToggleChairRecipient,
+  onAnyChairRecipientChange,
+  onClearRecipientSelection,
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -77,6 +84,15 @@ export function DelegationNotesView({
   allocationOptions: AllocationOption[];
   chairOptions: ChairOption[];
   nextPathAfterVerification?: string;
+
+  // Controlled recipients selection (digital MUN click-to-select).
+  selectedAllocationRecipientIds?: string[];
+  selectedChairRecipientIds?: string[];
+  anyChairRecipient?: boolean;
+  onToggleAllocationRecipient?: (allocationId: string) => void;
+  onToggleChairRecipient?: (chairProfileId: string) => void;
+  onAnyChairRecipientChange?: (next: boolean) => void;
+  onClearRecipientSelection?: () => void;
 }) {
   const supabase = useMemo(() => createClient(), []);
 
@@ -85,11 +101,11 @@ export function DelegationNotesView({
   const [content, setContent] = useState("");
   const [concernFlag, setConcernFlag] = useState(false);
 
-  const [selectedAllocationRecipientIds, setSelectedAllocationRecipientIds] = useState<
+  const [selectedAllocationRecipientIdsState, setSelectedAllocationRecipientIdsState] = useState<
     string[]
   >([]);
-  const [selectedChairRecipientIds, setSelectedChairRecipientIds] = useState<string[]>([]);
-  const [anyChairRecipient, setAnyChairRecipient] = useState(false);
+  const [selectedChairRecipientIdsState, setSelectedChairRecipientIdsState] = useState<string[]>([]);
+  const [anyChairRecipientState, setAnyChairRecipientState] = useState(false);
 
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -97,6 +113,25 @@ export function DelegationNotesView({
   const isChairLike = myRole === "chair" || myRole === "admin";
   const isDelegate = myRole === "delegate";
   const isSmt = myRole === "smt";
+
+  const isControlledRecipients =
+    controlledSelectedAllocationRecipientIds !== undefined &&
+    controlledSelectedChairRecipientIds !== undefined &&
+    controlledAnyChairRecipient !== undefined &&
+    !!onToggleAllocationRecipient &&
+    !!onToggleChairRecipient &&
+    !!onAnyChairRecipientChange &&
+    !!onClearRecipientSelection;
+
+  const selectedAllocationRecipientIds = isControlledRecipients
+    ? controlledSelectedAllocationRecipientIds ?? []
+    : selectedAllocationRecipientIdsState;
+  const selectedChairRecipientIds = isControlledRecipients
+    ? controlledSelectedChairRecipientIds ?? []
+    : selectedChairRecipientIdsState;
+  const anyChairRecipient = isControlledRecipients
+    ? controlledAnyChairRecipient ?? false
+    : anyChairRecipientState;
 
   const allocationIdToCountry = useMemo(() => {
     return new Map(allocationOptions.map((a) => [a.id, a.country] as const));
@@ -411,9 +446,13 @@ export function DelegationNotesView({
       setNotes((prev) => [newNote, ...prev]);
       setContent("");
       setConcernFlag(false);
-      setSelectedAllocationRecipientIds([]);
-      setSelectedChairRecipientIds([]);
-      setAnyChairRecipient(false);
+      if (isControlledRecipients) {
+        onClearRecipientSelection?.();
+      } else {
+        setSelectedAllocationRecipientIdsState([]);
+        setSelectedChairRecipientIdsState([]);
+        setAnyChairRecipientState(false);
+      }
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : "Failed to send note.";
       setError(message);
@@ -566,7 +605,11 @@ export function DelegationNotesView({
                         type="checkbox"
                         checked={checked}
                         onChange={(e) => {
-                          setSelectedAllocationRecipientIds((prev) => {
+                          if (isControlledRecipients) {
+                            onToggleAllocationRecipient?.(a.id);
+                            return;
+                          }
+                          setSelectedAllocationRecipientIdsState((prev) => {
                             if (e.target.checked) return [...prev, a.id];
                             return prev.filter((x) => x !== a.id);
                           });
@@ -596,7 +639,15 @@ export function DelegationNotesView({
                 <input
                   type="checkbox"
                   checked={anyChairRecipient}
-                  onChange={(e) => setAnyChairRecipient(e.target.checked)}
+                  onChange={(e) => {
+                    const next = e.target.checked;
+                    if (isControlledRecipients) {
+                      onAnyChairRecipientChange?.(next);
+                      return;
+                    }
+                    setAnyChairRecipientState(next);
+                    if (next) setSelectedChairRecipientIdsState([]);
+                  }}
                 />
                 <span>Any chair</span>
               </label>
@@ -607,13 +658,22 @@ export function DelegationNotesView({
                   return (
                     <label
                       key={c.id}
-                      className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer"
+                      className={[
+                        "flex items-center gap-2 text-sm px-1 py-1 cursor-pointer",
+                        anyChairRecipient ? "opacity-60 cursor-not-allowed" : "",
+                      ].join(" ")}
                     >
                       <input
                         type="checkbox"
                         checked={checked}
+                        disabled={anyChairRecipient}
                         onChange={(e) => {
-                          setSelectedChairRecipientIds((prev) => {
+                          if (anyChairRecipient) return;
+                          if (isControlledRecipients) {
+                            onToggleChairRecipient?.(c.id);
+                            return;
+                          }
+                          setSelectedChairRecipientIdsState((prev) => {
                             if (e.target.checked) return [...prev, c.id];
                             return prev.filter((x) => x !== c.id);
                           });

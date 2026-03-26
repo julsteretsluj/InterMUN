@@ -37,14 +37,15 @@ function daisFromChairNamesField(raw: string | null | undefined): DaisSeat[] | n
       .filter(Boolean) ?? [];
   if (parts.length === 0) return null;
   return [
-    { title: "Chair", name: parts[0] ?? null, showGavel: true },
-    { title: "Vice-Chair", name: parts[1] ?? null, showGavel: true },
-    { title: "Rapporteur", name: parts[2] ?? null, showGavel: true },
+    { title: "Chair", name: parts[0] ?? null, showGavel: true, profileId: null },
+    { title: "Vice-Chair", name: parts[1] ?? null, showGavel: true, profileId: null },
+    { title: "Rapporteur", name: parts[2] ?? null, showGavel: true, profileId: null },
   ];
 }
 
 function placardsFromAllocationRows(
   allocationRows: {
+    id: string;
     country: string | null;
     user_id: string | null;
     display_name_override: string | null;
@@ -60,6 +61,7 @@ function placardsFromAllocationRows(
     const pronounsOverride = String(row.display_pronouns_override ?? "").trim();
     const schoolOverride = String(row.display_school_override ?? "").trim();
     return {
+      allocationId: row.id,
       country: String(row.country ?? "").trim() || "—",
       name: vacant ? null : nameOverride ? nameOverride : p?.name?.trim() || null,
       school: vacant ? null : schoolOverride ? schoolOverride : p?.school?.trim() || null,
@@ -98,6 +100,7 @@ export async function loadCommitteeRoomPayload(
   const rows = allocationRows ?? [];
   const placards = placardsFromAllocationRows(
     rows as {
+      id: string;
       country: string | null;
       user_id: string | null;
       display_name_override: string | null;
@@ -109,13 +112,31 @@ export async function loadCommitteeRoomPayload(
 
   let dais = daisFromChairNamesField(options.chairNamesHint);
   if (!dais) {
-    const { data: staff } = await supabase.from("profiles").select("name, role").in("role", ["chair", "smt", "admin"]);
+    const { data: staff } = await supabase
+      .from("profiles")
+      .select("id, name, role")
+      .in("role", ["chair", "smt", "admin"]);
     const chairs = (staff ?? []).filter((p) => p.role === "chair");
     const smt = (staff ?? []).filter((p) => p.role === "smt" || p.role === "admin");
     dais = [
-      { title: "Chair", name: chairs[0]?.name ?? null, showGavel: true },
-      { title: "Vice-Chair", name: chairs[1]?.name ?? smt[0]?.name ?? null, showGavel: true },
-      { title: "Rapporteur", name: chairs[2]?.name ?? smt[1]?.name ?? null, showGavel: true },
+      {
+        title: "Chair",
+        name: chairs[0]?.name ?? null,
+        showGavel: true,
+        profileId: chairs[0]?.id ?? null,
+      },
+      {
+        title: "Vice-Chair",
+        name: chairs[1]?.name ?? smt[0]?.name ?? null,
+        showGavel: true,
+        profileId: chairs[1]?.id ?? smt[0]?.id ?? null,
+      },
+      {
+        title: "Rapporteur",
+        name: chairs[2]?.name ?? smt[1]?.name ?? null,
+        showGavel: true,
+        profileId: chairs[2]?.id ?? smt[1]?.id ?? null,
+      },
     ];
   }
 
