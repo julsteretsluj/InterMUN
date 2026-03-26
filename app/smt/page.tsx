@@ -19,7 +19,7 @@ export default async function SmtOverviewPage({
         <p className="mb-4">No conference is selected. Enter your event code first.</p>
         <Link
           href="/event-gate?next=%2Fsmt"
-          className="inline-block px-4 py-2 rounded-lg bg-brand-navy text-brand-paper font-medium hover:bg-brand-navy-soft"
+          className="inline-block px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft"
         >
           Enter conference code
         </Link>

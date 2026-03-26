@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-cormorant",
-});
-
-const sans = Outfit({
+const sans = Manrope({
   subsets: ["latin"],
   variable: "--font-ui",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -30,10 +25,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} h-full antialiased`}
+      className={`${sans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-brand-cream text-brand-navy">
         {children}
+        <style jsx global>{`
+          *::selection {
+            background: rgba(29, 185, 84, 0.35);
+            color: #ffffff;
+          }
+        `}</style>
       </body>
     </html>
   );

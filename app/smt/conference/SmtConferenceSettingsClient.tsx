@@ -110,7 +110,7 @@ function EventForm({ eventRow }: { eventRow: EventRow }) {
       <button
         type="submit"
         disabled={pending}
-        className="px-4 py-2 rounded-lg bg-brand-navy text-brand-paper font-medium disabled:opacity-50"
+        className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium disabled:opacity-50"
       >
         {pending ? "Saving…" : "Save conference event"}
       </button>

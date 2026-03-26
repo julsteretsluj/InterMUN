@@ -103,7 +103,7 @@ export function CommitteeAccessForm({ conferences }: { conferences: Conf[] }) {
           <button
             type="submit"
             disabled={setPending}
-            className="px-4 py-2.5 rounded-lg bg-brand-navy text-brand-paper font-medium disabled:opacity-50"
+            className="px-4 py-2.5 rounded-lg bg-brand-paper text-brand-navy font-medium disabled:opacity-50"
           >
             {setPending ? "Saving…" : "Save committee password"}
           </button>

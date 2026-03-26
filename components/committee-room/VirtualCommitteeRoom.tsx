@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Armchair, Gavel, Mic } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 export interface DaisSeat {
   title: string;
@@ -18,6 +19,7 @@ export interface DelegatePlacard {
 }
 
 interface VirtualCommitteeRoomProps {
+  conferenceId?: string;
   conferenceName: string;
   committeeName: string;
   placards: DelegatePlacard[];
@@ -33,32 +35,19 @@ function dash(v: string | null | undefined) {
 
 function Placard({
   placard,
-  left,
-  top,
-  rotate,
 }: {
   placard: DelegatePlacard;
-  left: number;
-  top: number;
-  rotate: number;
 }) {
   const { vacant, country, name, school, pronouns } = placard;
 
   return (
-    <div
-      className="absolute w-[6.75rem] sm:w-28 md:w-32 pointer-events-none"
-      style={{
-        left: `${left}%`,
-        top: `${top}%`,
-        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
-      }}
-    >
+    <div className="w-[6.75rem] sm:w-28 md:w-32 pointer-events-none">
       <div
         className={[
           "rounded-sm border-2 shadow-md px-1.5 py-2 text-left leading-snug",
           vacant
             ? "border-brand-navy/20 bg-brand-cream/40 text-brand-muted/80"
-            : "border-amber-900/40 bg-[#fffef8] text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]",
+            : "border-brand-gold-bright/30 bg-brand-paper/70 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
         ].join(" ")}
       >
         {vacant ? (
@@ -85,7 +74,7 @@ function Placard({
       <div
         className={[
           "mx-auto mt-0.5 h-1 rounded-sm",
-          vacant ? "bg-brand-navy/15 w-[90%]" : "bg-amber-900/50 w-full",
+          vacant ? "bg-brand-navy/15 w-[90%]" : "bg-brand-gold-bright/50 w-full",
         ].join(" ")}
       />
     </div>
@@ -94,10 +83,10 @@ function Placard({
 
 function DaisStation({ seat }: { seat: DaisSeat }) {
   return (
-    <div className="flex flex-col items-center gap-1 text-brand-paper min-w-[5.5rem] sm:min-w-[6.5rem]">
+    <div className="flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem]">
       <div className="relative flex items-end justify-center gap-0.5 h-14 sm:h-16">
         <Armchair
-          className="w-10 h-10 sm:w-12 sm:h-12 text-brand-paper drop-shadow-md"
+          className="w-10 h-10 sm:w-12 sm:h-12 text-brand-navy drop-shadow-md"
           strokeWidth={1.25}
         />
         {seat.showGavel && (
@@ -128,46 +117,102 @@ const VACANT_SEAT: DelegatePlacard = {
   vacant: true,
 };
 
-function placardRing(
-  seats: DelegatePlacard[],
-  startRad: number,
-  endRad: number,
-  rNear: number,
-  rFar: number
-): { placard: DelegatePlacard; left: number; top: number; rotate: number }[] {
-  const n = seats.length;
-  if (n === 0) return [];
-  const span = endRad - startRad;
-  const cy = 22;
-  return seats.map((placard, i) => {
-    const t = n === 1 ? 0.5 : (i + 0.5) / n;
-    const rad = startRad + t * span;
-    const radiusPct = i % 2 === 0 ? rFar : rNear;
-    const left = 50 + radiusPct * Math.cos(rad);
-    const top = cy + radiusPct * Math.sin(rad);
-    const rotate = (rad * 180) / Math.PI + 90;
-    return { placard, left, top, rotate };
-  });
-}
-
 export function VirtualCommitteeRoom({
+  conferenceId,
   conferenceName,
   committeeName,
   placards,
   dais,
   helperText,
 }: VirtualCommitteeRoomProps) {
-  const ringSeats = useMemo(() => {
-    const minTotal = 22;
-    const raw = [...placards];
-    while (raw.length < minTotal) raw.push({ ...VACANT_SEAT });
-    return raw;
+  const supabase = useMemo(() => createClient(), []);
+  const [livePlacards, setLivePlacards] = useState<DelegatePlacard[]>(placards);
+
+  useEffect(() => {
+    setLivePlacards(placards);
   }, [placards]);
 
-  const positions = useMemo(
-    () => placardRing(ringSeats, Math.PI * 0.19, Math.PI * 0.81, 30, 42),
-    [ringSeats]
-  );
+  useEffect(() => {
+    if (!conferenceId) return;
+
+    let isActive = true;
+
+    type ProfileEmbed = {
+      name: string | null;
+      pronouns: string | null;
+      school: string | null;
+    };
+
+    type AllocationRow = {
+      country: string | null;
+      user_id: string | null;
+      display_name_override: string | null;
+      display_pronouns_override: string | null;
+      display_school_override: string | null;
+      profiles: ProfileEmbed | ProfileEmbed[] | null;
+    };
+
+    async function refresh() {
+      const { data: allocationRows, error } = await supabase
+        .from("allocations")
+        .select(
+          "country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
+        )
+        .eq("conference_id", conferenceId)
+        .order("country");
+
+      if (!isActive || error || !allocationRows) return;
+
+      const next: DelegatePlacard[] = (allocationRows as AllocationRow[]).map((row) => {
+        const p = Array.isArray(row.profiles) ? row.profiles[0] ?? null : row.profiles ?? null;
+        const vacant = !row.user_id;
+        const nameOverride = String(row.display_name_override ?? "").trim();
+        const pronounsOverride = String(row.display_pronouns_override ?? "").trim();
+        const schoolOverride = String(row.display_school_override ?? "").trim();
+        return {
+          country: String(row.country ?? "").trim() || "—",
+          name: vacant ? null : nameOverride ? nameOverride : p?.name?.trim() || null,
+          school: vacant ? null : schoolOverride ? schoolOverride : p?.school?.trim() || null,
+          pronouns: vacant
+            ? null
+            : pronounsOverride
+              ? pronounsOverride
+              : p?.pronouns?.trim() || null,
+          vacant,
+        };
+      });
+
+      setLivePlacards(next);
+    }
+
+    void refresh();
+
+    const ch = supabase
+      .channel(`committee-room-allocations-${conferenceId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "allocations",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void refresh()
+      )
+      .subscribe();
+
+    return () => {
+      isActive = false;
+      supabase.removeChannel(ch);
+    };
+  }, [conferenceId, supabase]);
+
+  const ringSeats = useMemo(() => {
+    const minTotal = 22;
+    const raw = [...livePlacards];
+    while (raw.length < minTotal) raw.push({ ...VACANT_SEAT });
+    return raw;
+  }, [livePlacards]);
 
   return (
     <div className="space-y-4">
@@ -192,18 +237,18 @@ export function VirtualCommitteeRoom({
           className="relative aspect-[16/12] min-h-[380px] sm:min-h-[440px] md:min-h-[520px]"
           style={{
             background:
-              "radial-gradient(ellipse 120% 80% at 50% 100%, #2d4a3e 0%, #1e3329 42%, #15261f 100%)",
+              "radial-gradient(ellipse 120% 80% at 50% 100%, rgba(29,185,84,0.35) 0%, rgba(20,20,20,0.9) 42%, rgba(10,10,10,1) 100%)",
           }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x-2 border-b-2 border-amber-950/50 shadow-inner"
+            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x-2 border-b-2 border-brand-gold-bright/20 shadow-inner"
             style={{
               background:
-                "linear-gradient(180deg, #5c4033 0%, #4a3428 45%, #3d2a20 100%)",
+                "linear-gradient(180deg, rgba(29,185,84,0.35) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.55) 100%)",
             }}
           >
-            <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-amber-200/15" />
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-brand-paper/50">
+            <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-brand-gold-bright/20" />
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-brand-navy/50">
               <Mic className="w-3 h-3" />
               <span className="text-[0.55rem] uppercase tracking-[0.35em]">
                 Committee floor
@@ -217,7 +262,7 @@ export function VirtualCommitteeRoom({
             ))}
           </div>
 
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-amber-900/60 bg-[#f7f0e4] shadow-lg max-w-[90%]">
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-brand-gold/30 bg-brand-paper/80 shadow-lg max-w-[90%]">
             <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight">
               {committeeName}
             </p>
@@ -226,16 +271,12 @@ export function VirtualCommitteeRoom({
             </p>
           </div>
 
-          <div className="absolute inset-0 z-[5]">
-            {positions.map((p, i) => (
-              <Placard
-                key={`seat-${i}`}
-                placard={p.placard}
-                left={p.left}
-                top={p.top}
-                rotate={p.rotate}
-              />
-            ))}
+          <div className="absolute inset-0 z-[5] overflow-y-auto px-3 pb-4 pt-[30%]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center">
+              {ringSeats.map((p, i) => (
+                <Placard key={`seat-${i}`} placard={p} />
+              ))}
+            </div>
           </div>
 
           <div

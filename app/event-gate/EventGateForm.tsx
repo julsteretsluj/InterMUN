@@ -60,7 +60,7 @@ export function EventGateForm({ roomGateNext }: Props) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full py-3 rounded-lg bg-brand-navy text-brand-paper font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
+        className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
       >
         {pending ? "Continuing…" : "Continue to committee step"}
       </button>

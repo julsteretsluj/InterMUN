@@ -14,7 +14,21 @@ END
 $$;
 
 -- Ensure RLS is enabled for object-level access control.
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+DO $$
+BEGIN
+  -- Some Supabase projects require ownership for this; if the migration runner
+  -- isn't the owner, we still want the rest of the migration (bucket + policies)
+  -- to apply.
+  BEGIN
+    ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+  EXCEPTION
+    WHEN insufficient_privilege THEN
+      RAISE NOTICE 'Skipping storage.objects RLS enable (insufficient privilege).';
+    WHEN undefined_table THEN
+      RAISE NOTICE 'Skipping storage.objects RLS enable (storage.objects missing).';
+  END;
+END
+$$;
 
 DROP POLICY IF EXISTS "Public can read committee logos" ON storage.objects;
 CREATE POLICY "Public can read committee logos"

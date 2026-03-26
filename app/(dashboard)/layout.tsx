@@ -81,7 +81,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-brand-cream">
-      <header className="bg-brand-navy text-brand-paper shadow-md border-b border-brand-gold/20">
+      <header className="bg-brand-paper text-brand-navy shadow-md border-b border-brand-gold/20">
         <div className="max-w-6xl mx-auto px-4 pt-5 pb-1 flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-start gap-4">
             {showSeamunLogo ? (
@@ -92,18 +92,18 @@ export default async function DashboardLayout({
               />
             ) : null}
             <div>
-              <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-paper">
+              <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-navy">
                 {welcomeTitle}
               </h1>
               <div className="mt-1 space-y-0.5">
-                <p className="text-sm text-brand-paper/90">{activeConf.name}</p>
+                <p className="text-sm text-brand-navy/90">{activeConf.name}</p>
                 {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
                   <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90">
                     {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
                   </p>
                 ) : null}
                 {role === "chair" ? (
-                  <p className="text-[0.65rem] font-medium text-brand-paper/90 tracking-wide">
+                  <p className="text-[0.65rem] font-medium text-brand-navy/90 tracking-wide">
                     Dais chair
                   </p>
                 ) : null}

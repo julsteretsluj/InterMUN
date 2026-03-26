@@ -317,7 +317,7 @@ export function AllocationMatrixManagerClient({
           <button
             type="submit"
             disabled={pending}
-            className="px-4 py-2 rounded-lg bg-brand-navy text-brand-paper text-sm font-medium disabled:opacity-50"
+            className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
           >
             Add
           </button>
@@ -393,7 +393,7 @@ export function AllocationMatrixManagerClient({
             <button
               type="submit"
               disabled={pending || !csvText.trim()}
-              className="px-4 py-2 rounded-lg bg-brand-navy text-brand-paper text-sm font-medium disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
             >
               Run import
             </button>

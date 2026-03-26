@@ -42,7 +42,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy">
-      <header className="bg-slate-900 text-white border-b border-slate-700">
+      <header className="bg-brand-paper text-brand-navy border-b border-brand-navy/10">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             {showSeamunLogo ? (
@@ -89,15 +89,15 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
               Follow
             </Link>
           </nav>
-          <SignOutButton className="text-white/90 hover:text-amber-200" />
+          <SignOutButton className="text-white/90 hover:text-brand-gold-bright" />
         </div>
         {activeEvent ? (
-          <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-slate-300 border-t border-slate-800 pt-2">
-            Active event: <span className="text-white font-medium">{activeEvent.name}</span> · code{" "}
-            <span className="font-mono text-amber-200/90">{activeEvent.event_code}</span>
+          <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-brand-muted border-t border-brand-navy/10 pt-2">
+            Active event: <span className="text-brand-navy font-medium">{activeEvent.name}</span> · code{" "}
+            <span className="font-mono text-brand-gold-bright/90">{activeEvent.event_code}</span>
           </div>
         ) : (
-          <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-amber-200/90 border-t border-slate-800 pt-2">
+          <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-brand-gold-bright/90 border-t border-brand-navy/10 pt-2">
             <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
               Enter conference code
             </Link>{" "}

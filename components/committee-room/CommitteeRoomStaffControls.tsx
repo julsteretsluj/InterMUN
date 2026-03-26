@@ -159,7 +159,7 @@ export function CommitteeRoomStaffControls({
                     <button
                       type="button"
                       onClick={() => void saveAllocation(a.id)}
-                      className="px-3 py-1 rounded bg-brand-navy text-brand-paper text-xs font-medium hover:opacity-90"
+                      className="px-3 py-1 rounded bg-brand-paper text-brand-navy text-xs font-medium hover:opacity-90"
                     >
                       Save
                     </button>

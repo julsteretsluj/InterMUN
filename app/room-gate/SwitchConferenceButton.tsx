@@ -18,7 +18,7 @@ export function SwitchConferenceButton({ nextPath = "/profile" }: { nextPath?: s
           router.push(`/event-gate?next=${encodeURIComponent(nextPath)}`);
         });
       }}
-      className="block w-full text-center py-3 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+      className="block w-full text-center py-3 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-white/5 active:bg-white/10 transition-colors disabled:opacity-50"
     >
       {pending ? "…" : "Switch conference (new conference code)"}
     </button>

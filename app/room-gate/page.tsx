@@ -88,7 +88,7 @@ export default async function RoomGatePage({
             <div className="flex flex-col gap-2">
               <Link
                 href={nextPath}
-                className="block text-center py-3 rounded-lg bg-brand-navy text-brand-paper font-medium hover:bg-brand-navy-soft"
+                className="block text-center py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft"
               >
                 Continue to platform
               </Link>

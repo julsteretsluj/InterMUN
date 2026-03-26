@@ -10,7 +10,7 @@ import {
 type Row = {
   allocationId: string;
   country: string;
-  delegateName: string | null;
+  delegateUserId: string | null;
   code: string;
 };
 
@@ -48,8 +48,8 @@ export function AllocationPasswordsClient({
     return initialRows
       .map((r) => {
         const code = codes[r.allocationId] ?? "";
-        const name = r.delegateName ?? "—";
-        return `${r.country}\t${name}\t${code || "—"}`;
+        const delegateId = r.delegateUserId ?? "—";
+        return `${r.country}\t${delegateId}\t${code || "—"}`;
       })
       .join("\n");
   }, [initialRows, codes]);
@@ -131,7 +131,7 @@ export function AllocationPasswordsClient({
           <thead>
             <tr className="border-b border-brand-navy/10 bg-brand-cream/80">
               <th className="px-3 py-2 font-semibold text-brand-navy">Country / allocation</th>
-              <th className="px-3 py-2 font-semibold text-brand-navy">Delegate name</th>
+              <th className="px-3 py-2 font-semibold text-brand-navy">Delegate (allocation)</th>
               <th className="px-3 py-2 font-semibold text-brand-navy w-[min(40%,14rem)]">
                 Password / code
               </th>
@@ -152,7 +152,7 @@ export function AllocationPasswordsClient({
                     {r.country}
                   </td>
                   <td className="px-3 py-2 text-brand-muted align-top">
-                    {r.delegateName ?? "—"}
+                    {r.delegateUserId ?? "—"}
                   </td>
                   <td className="px-3 py-2 align-top">
                     <input

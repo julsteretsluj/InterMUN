@@ -53,7 +53,7 @@ export function PaperSavedWidget() {
           <li key={p.id}>
             <Link
               href={p.href}
-              className="block truncate text-brand-navy hover:text-brand-gold font-medium underline-offset-2 hover:underline"
+              className="block truncate px-2 py-1 rounded-md text-brand-navy hover:text-brand-gold-bright font-medium underline-offset-2 hover:underline hover:bg-white/5 transition-colors"
             >
               {p.title}
             </Link>

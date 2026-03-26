@@ -95,8 +95,8 @@ export function TabNav({ staffRole = null }: { staffRole?: UserRole | null }) {
             className={cn(
               "flex items-center gap-1.5 shrink-0 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors",
               isActive
-                ? "bg-brand-gold text-brand-navy shadow-sm"
-                : "text-brand-paper/90 hover:text-brand-paper hover:bg-white/10"
+                ? "bg-brand-gold text-brand-accent-ink shadow-sm hover:opacity-95"
+                : "text-brand-navy/90 hover:text-brand-navy hover:bg-white/5"
             )}
           >
             <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-90" />

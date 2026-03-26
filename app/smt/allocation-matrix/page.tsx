@@ -21,7 +21,7 @@ export default async function SmtAllocationMatrixPage({
         <p className="mb-4">Select a conference event first.</p>
         <Link
           href="/event-gate?next=%2Fsmt%2Fallocation-matrix"
-          className="inline-block px-4 py-2 rounded-lg bg-brand-navy text-brand-paper font-medium hover:bg-brand-navy-soft"
+          className="inline-block px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft"
         >
           Enter conference code
         </Link>

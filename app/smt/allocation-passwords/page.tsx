@@ -83,7 +83,7 @@ export default async function SmtAllocationPasswordsPage({
   const merged = rows.map((r) => ({
     allocationId: r.id,
     country: r.country?.trim() || "—",
-    delegateName: embedName(r.profiles),
+    delegateUserId: r.user_id ?? null,
     code: codeMap.get(r.id) ?? "",
   }));
 
@@ -105,7 +105,7 @@ export default async function SmtAllocationPasswordsPage({
               href={`/smt/allocation-passwords?conference=${c.id}`}
               className={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${
                 c.id === conferenceId
-                  ? "bg-brand-navy text-brand-paper border-brand-navy"
+                  ? "bg-brand-paper text-brand-navy border-brand-navy"
                   : "border-brand-navy/20 text-brand-navy hover:bg-brand-cream"
               }`}
             >

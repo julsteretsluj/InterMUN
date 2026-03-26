@@ -1,16 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f0ebe3;
-  --foreground: #0a1628;
-  --brand-navy: #0a1628;
-  --brand-navy-soft: #132a42;
-  --brand-gold: #b8941e;
-  --brand-gold-bright: #d4b44a;
-  --brand-cream: #f0ebe3;
-  --brand-paper: #fffcf7;
-  --brand-muted: #5c6570;
-  --brand-line: rgba(10, 22, 40, 0.12);
+  /* Spotify-ish dark theme */
+  --background: #121212;
+  --foreground: #b3b3b3;
+
+  /* Primary text ink */
+  --brand-navy: #ffffff;
+  /* Dark surface used for "button hover" states where bg-brand-navy-soft appears */
+  --brand-navy-soft: #282828;
+
+  /* Accent */
+  --brand-gold: #1db954;
+  --brand-gold-bright: #1ed760;
+
+  /* Surfaces */
+  --brand-cream: #181818;
+  --brand-paper: #191414;
+
+  /* Secondary text */
+  --brand-muted: #b3b3b3;
+
+  --brand-line: rgba(255, 255, 255, 0.12);
+
+  /* Text on green accent blocks */
+  --brand-accent-ink: #0b0b0b;
 }
 
 @theme inline {
@@ -24,7 +38,9 @@
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
   --font-sans: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  /* Spotify uses one main rounded sans. Keep headings in the same family. */
+  --font-display: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+  --color-brand-accent-ink: var(--brand-accent-ink);
 }
 
 body {
@@ -34,6 +50,17 @@ body {
 
 /* Conference-style focus ring (gold) */
 :focus-visible {
-  outline: 2px solid var(--brand-gold);
+  outline: 2px solid var(--brand-gold-bright);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.18);
+}
+
+::selection {
+  background: rgba(29, 185, 84, 0.35);
+  color: #ffffff;
+}
+
+::selection {
+  background: rgba(29, 185, 84, 0.35);
+  color: #ffffff;
 }
