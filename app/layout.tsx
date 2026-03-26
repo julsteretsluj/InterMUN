@@ -23,19 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${sans.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${sans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans bg-brand-cream text-brand-navy">
         {children}
-        <style jsx global>{`
-          *::selection {
-            background: rgba(29, 185, 84, 0.35);
-            color: #ffffff;
-          }
-        `}</style>
       </body>
     </html>
   );
 }
+

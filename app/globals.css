@@ -48,7 +48,7 @@ body {
   color: var(--foreground);
 }
 
-/* Conference-style focus ring (gold) */
+/* Spotify-ish focus styling (green ink + soft glow) */
 :focus-visible {
   outline: 2px solid var(--brand-gold-bright);
   outline-offset: 2px;
@@ -60,7 +60,3 @@ body {
   color: #ffffff;
 }
 
-::selection {
-  background: rgba(29, 185, 84, 0.35);
-  color: #ffffff;
-}

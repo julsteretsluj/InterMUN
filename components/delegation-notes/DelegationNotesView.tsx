@@ -329,40 +329,41 @@ export function DelegationNotesView({
         .single();
       if (insertErr) throw insertErr;
 
-      const recipientInserts: Promise<unknown>[] = [];
       for (const allocationId of selectedAllocationRecipientIds) {
-        recipientInserts.push(
-          supabase.from("delegation_note_recipients").insert({
+        const { error: recipErr } = await supabase
+          .from("delegation_note_recipients")
+          .insert({
             note_id: inserted.id,
             recipient_kind: "allocation",
             recipient_allocation_id: allocationId,
             recipient_profile_id: null,
-          })
-        );
+          });
+        if (recipErr) throw recipErr;
       }
+
       for (const chairId of selectedChairRecipientIds) {
-        recipientInserts.push(
-          supabase.from("delegation_note_recipients").insert({
+        const { error: recipErr } = await supabase
+          .from("delegation_note_recipients")
+          .insert({
             note_id: inserted.id,
             recipient_kind: "chair",
             recipient_allocation_id: null,
             recipient_profile_id: chairId,
-          })
-        );
+          });
+        if (recipErr) throw recipErr;
       }
+
       if (anyChairRecipient) {
-        recipientInserts.push(
-          supabase.from("delegation_note_recipients").insert({
+        const { error: recipErr } = await supabase
+          .from("delegation_note_recipients")
+          .insert({
             note_id: inserted.id,
             recipient_kind: "chair_all",
             recipient_allocation_id: null,
             recipient_profile_id: null,
-          })
-        );
+          });
+        if (recipErr) throw recipErr;
       }
-
-      const res = await Promise.all(recipientInserts);
-      void res;
 
       const sender: NoteSender = senderAllo
         ? {
