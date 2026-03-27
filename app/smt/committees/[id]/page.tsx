@@ -74,6 +74,12 @@ export default async function SmtCommitteeLivePage({
       .is("closed_at", null),
   ]);
 
+  const { data: chairProfiles } = await supabase
+    .from("profiles")
+    .select("id, name")
+    .eq("role", "chair")
+    .order("name");
+
   const staffAllocs = roomPayload.staffAllocations;
   const totalSeats = staffAllocs.length;
   const filledSeats = staffAllocs.filter((a) => a.user_id).length;
@@ -159,7 +165,11 @@ export default async function SmtCommitteeLivePage({
           dais={roomPayload.dais}
           helperText="Secretariat view: live preview from this committee's allocation matrix. Assign seats below or in Allocation matrix."
         />
-        <CommitteeRoomStaffControls allocations={roomPayload.staffAllocations} delegates={roomPayload.delegates} />
+        <CommitteeRoomStaffControls
+          allocations={roomPayload.staffAllocations}
+          delegates={roomPayload.delegates}
+          chairs={(chairProfiles ?? []).map((c) => ({ id: c.id, name: c.name ?? null }))}
+        />
       </section>
 
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-8">
