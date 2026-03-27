@@ -23,6 +23,12 @@ export const AWARD_CATEGORIES: {
     scope: "conference_wide",
   },
   {
+    id: "conference_honorable_mention",
+    label: "Honorable Mention (conference-wide)",
+    description: "Conference-level recognition for delegates with outstanding overall impact.",
+    scope: "conference_wide",
+  },
+  {
     id: "best_chair",
     label: "Best Chair",
     description: "Impartiality, control of the house, delegate growth.",
@@ -30,7 +36,7 @@ export const AWARD_CATEGORIES: {
   },
   {
     id: "honourable_mention_chair",
-    label: "Honourable Mention — Chair",
+    label: "Honorable Mention — Chair",
     description: "Outstanding support and execution on the dais.",
     scope: "collective_person",
   },
@@ -54,7 +60,7 @@ export const AWARD_CATEGORIES: {
   },
   {
     id: "committee_honourable_mention",
-    label: "Honourable Mention (committee)",
+    label: "Honorable Mention (committee)",
     description: "Up to two per committee; initiative and resolution contribution.",
     scope: "committee",
   },

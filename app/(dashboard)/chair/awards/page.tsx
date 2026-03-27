@@ -92,43 +92,71 @@ export default async function ChairAwardsPage() {
     label: string;
     slots: number[];
     helper: string;
-    criteria: string[];
+    rubricExact: string;
   }[] = [
     {
       id: "committee_best_delegate",
       label: "Best Delegate (committee)",
       slots: [1, 2],
       helper: "Submit Top 2 contenders for committee best delegate.",
-      criteria: [
-        "Diplomacy & collaboration (bridges blocs, includes quieter delegates).",
-        "Leadership & participation (consistent floor presence, initiates motions/caucuses).",
-        "Knowledge & research depth (accurate RoP/topic command with specific evidence).",
-        "Creativity & policy impact (actionable clauses, meaningful compromise outcomes).",
-      ],
+      rubricExact: `Delegate Criteria
+This rubric outlines the 48-point system used to assess live diplomacy during committee sessions.
+● Diplomacy & Collaboration: Rewards "statesmanship"—the ability to build rapport, bridge clashing blocs, and ensure all members of a group have a voice.
+● Leadership & Participation: Looks for "visionary leaders" who take initiative in caucuses and maintain a consistent, necessary presence from start to finish.
+● Creativity & Knowledge: Evaluates the use of deep research to debunk false info and the development of "game-changing" compromises.
+
+Creativity: __/8
+Diplomacy: __/8
+Collaboration: __/8
+Leadership: __/8
+Knowledge and Research: __/8
+Participation: __/8
+Total Score: __/48
+
+Section for Evidence & Written Confirmation
+Chairs must complete this section to justify the award for the SMT and Secretariat records.
+Delegate Full Name: _______________________________
+Committee & Allocation: _______________________________
+1. Primary Evidence of Excellence: (Please list specific instances: e.g., "Led the drafting of Working Paper 1.1," "Provided a rebuttal citing the 1997 Ottawa Treaty," "Brokered compromise between Bloc A and Bloc B during Unmod 2.")
+2. Justification for Final Score: (Summary of why this delegate outperformed the runner-up in their respective category.)
+Head Chair Signature: _____________________ Date: ______________`,
     },
     {
       id: "committee_best_position_paper",
       label: "Best Position Paper (committee)",
       slots: [1, 2],
       helper: "Submit Top 2 position papers for SMT review.",
-      criteria: [
-        "Research depth (specific data, treaties, legal/policy context).",
-        "Country stance alignment (reflects real national red lines and interests).",
-        "Policy accuracy & solutions (feasible, mandate-accurate implementation detail).",
-        "Formatting/style/citations (professional academic standard, clear sourcing).",
-      ],
+      rubricExact: `Position Paper Criteria
+Delegates are scored out of 40 points (graded on a scale of 1–8 across five categories) to determine the "Best Position Paper".
+● Research Depth: Looks for niche legal loopholes, specific funding gaps, and historical context rather than just basic treaty mentions.
+● Country Stance Alignment: Evaluates how accurately a delegate reflects their nation’s "red lines" and regional geopolitical interests.
+● Policy Accuracy & Solutions: Assesses the technical understanding of the mandate and the feasibility/originality of proposed implementation plans.
+● Formatting, Style & Citations: Requires a professional UN academic tone and flawless citation of all sources.
+
+Research Depth: __/8
+Country Stance Alignment: __/8
+Policy Accuracy: __/8
+Proposed Solutions: __/8
+Formatting, Style and Citations: __/8
+Total Score : __/40
+
+Section for Evidence & Written Confirmation
+Chairs must complete this section to justify the award for the SMT and Secretariat records.
+Delegate Full Name: _______________________________
+Committee & Allocation: _______________________________
+1. Primary Evidence of Excellence: (Please list specific instances: e.g., "Led the drafting of Working Paper 1.1," "Provided a rebuttal citing the 1997 Ottawa Treaty," "Brokered compromise between Bloc A and Bloc B during Unmod 2.")
+2. Justification for Final Score: (Summary of why this delegate outperformed the runner-up in their respective category.)
+Head Chair Signature: _____________________ Date: ______________`,
     },
     {
       id: "conference_best_delegate",
       label: "Best Delegate (overall conference)",
       slots: [1],
       helper: "Submit your single strongest overall candidate from this committee.",
-      criteria: [
-        "Cross-session consistency in diplomacy, leadership, and substantive impact.",
-        "Mastery of Rules of Procedure and high-quality floor interventions.",
-        "Evidence of conference-level influence beyond own bloc/committee moments.",
-        "Strong written confirmation with specific examples for SMT final vetting.",
-      ],
+      rubricExact: `Conference-Wide Awards (Overall)
+● Best Delegate: Awarded to the individual who consistently leads diplomatic efforts, demonstrates a mastery of the Rules of Procedure, and spearheads the creation of comprehensive resolutions.
+
+Use the same Delegate Criteria rubric (48-point system) and provide a Statement of Confirmation with concrete evidence for SMT final vetting.`,
     },
   ];
 
@@ -152,14 +180,12 @@ export default async function ChairAwardsPage() {
               <h3 className="font-display text-lg font-semibold text-brand-navy">{type.label}</h3>
               <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
               <div className="mt-3 rounded-lg border border-brand-navy/10 bg-brand-cream/40 p-3">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-wide text-brand-navy/80">
-                  Criteria checklist
+                <p className="text-[0.68rem] font-semibold uppercase tracking-wide text-brand-navy/80 mb-2">
+                  Rubric (verbatim)
                 </p>
-                <ul className="mt-1 space-y-1 text-xs text-brand-navy/85">
-                  {type.criteria.map((item) => (
-                    <li key={`${type.id}-${item}`}>- {item}</li>
-                  ))}
-                </ul>
+                <pre className="whitespace-pre-wrap text-[0.7rem] leading-relaxed text-brand-navy/90 font-mono">
+                  {type.rubricExact}
+                </pre>
               </div>
             </div>
             {type.slots.map((rank) => {
