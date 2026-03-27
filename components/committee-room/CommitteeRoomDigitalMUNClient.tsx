@@ -138,7 +138,7 @@ export function CommitteeRoomDigitalMUNClient({
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-start">
+    <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(380px,460px)] gap-5 items-start">
       <VirtualCommitteeRoom
         conferenceId={conferenceId}
         conferenceName={conferenceName}
@@ -154,51 +154,48 @@ export function CommitteeRoomDigitalMUNClient({
         onToggleChairRecipient={canClickSelectRecipients ? (id) => toggleChairRecipient(id) : undefined}
       />
 
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-            <DelegationNotesView
-              conferenceId={conferenceId}
-              initialNotes={[]}
-              myUserId={myUserId}
-              myRole={myRole}
-              smtVerified={smtVerified}
-              myAllocationId={myAllocationId}
-              myProfileName={myProfileName}
-              allocationOptions={allocationOptions}
-              chairOptions={chairOptions}
-              nextPathAfterVerification="/committee-room"
-              votingProcedureLocked={votingProcedureActive && isDelegate}
-              selectedAllocationRecipientIds={
-                canClickSelectRecipients ? selectedAllocationRecipientIdsControlled : undefined
-              }
-              selectedChairRecipientIds={
-                canClickSelectRecipients ? selectedChairRecipientIdsControlled : undefined
-              }
-              anyChairRecipient={canClickSelectRecipients ? anyChairRecipient : undefined}
-              onToggleAllocationRecipient={
-                canClickSelectRecipients ? (id) => toggleAllocationRecipient(id) : undefined
-              }
-              onToggleChairRecipient={
-                canClickSelectRecipients ? (id) => toggleChairRecipient(id) : undefined
-              }
-              onAnyChairRecipientChange={canClickSelectRecipients ? onAnyChairRecipientChange : undefined}
-              onClearRecipientSelection={canClickSelectRecipients ? clearRecipientSelection : undefined}
-            />
-          </div>
-
-          <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-            <CommitteeRoomSessionFloor
-              conferenceId={conferenceId}
-              conferenceTitle={`${conferenceName} — ${committeeName}`}
-              myRole={myRole}
-              myAllocationId={myAllocationId}
-              myAllocationCountry={myAllocationCountry}
-              observeDelegatesOnly={false}
-              procedureState={procedureState}
-              currentVoteItemId={currentVoteItemId}
-            />
-          </div>
+      <div className="space-y-4">
+        <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
+          <CommitteeRoomSessionFloor
+            conferenceId={conferenceId}
+            conferenceTitle={`${conferenceName} — ${committeeName}`}
+            myRole={myRole}
+            myAllocationId={myAllocationId}
+            myAllocationCountry={myAllocationCountry}
+            observeDelegatesOnly={false}
+            procedureState={procedureState}
+            currentVoteItemId={currentVoteItemId}
+          />
+        </div>
+        <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
+          <DelegationNotesView
+            conferenceId={conferenceId}
+            initialNotes={[]}
+            myUserId={myUserId}
+            myRole={myRole}
+            smtVerified={smtVerified}
+            myAllocationId={myAllocationId}
+            myProfileName={myProfileName}
+            allocationOptions={allocationOptions}
+            chairOptions={chairOptions}
+            nextPathAfterVerification="/committee-room"
+            votingProcedureLocked={votingProcedureActive && isDelegate}
+            selectedAllocationRecipientIds={
+              canClickSelectRecipients ? selectedAllocationRecipientIdsControlled : undefined
+            }
+            selectedChairRecipientIds={
+              canClickSelectRecipients ? selectedChairRecipientIdsControlled : undefined
+            }
+            anyChairRecipient={canClickSelectRecipients ? anyChairRecipient : undefined}
+            onToggleAllocationRecipient={
+              canClickSelectRecipients ? (id) => toggleAllocationRecipient(id) : undefined
+            }
+            onToggleChairRecipient={
+              canClickSelectRecipients ? (id) => toggleChairRecipient(id) : undefined
+            }
+            onAnyChairRecipientChange={canClickSelectRecipients ? onAnyChairRecipientChange : undefined}
+            onClearRecipientSelection={canClickSelectRecipients ? clearRecipientSelection : undefined}
+          />
         </div>
 
         {canManageSeats ? (

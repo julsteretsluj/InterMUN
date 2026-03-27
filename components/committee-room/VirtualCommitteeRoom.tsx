@@ -292,7 +292,7 @@ export function VirtualCommitteeRoom({
         aria-label="Virtual committee room"
       >
         <div
-          className="relative aspect-[16/12] min-h-[380px] sm:min-h-[440px] md:min-h-[520px]"
+          className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
           style={{
             background:
               "radial-gradient(ellipse 120% 80% at 50% 100%, rgba(29,185,84,0.35) 0%, rgba(20,20,20,0.9) 42%, rgba(10,10,10,1) 100%)",
@@ -343,7 +343,7 @@ export function VirtualCommitteeRoom({
             </p>
           </div>
 
-          <div className="absolute inset-0 z-[5] overflow-y-auto px-3 pb-4 pt-[30%]">
+          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[30%] md:pt-[28%]">
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center">
               {ringSeats.map((p, i) => (
                 <Placard
