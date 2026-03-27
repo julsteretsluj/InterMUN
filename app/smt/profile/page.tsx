@@ -61,7 +61,7 @@ export default async function SmtProfilePage() {
           </ul>
         </div>
       )}
-      <ProfileForm profile={profile} userId={user.id} canViewPrivate />
+      <ProfileForm profile={profile} userId={user.id} canViewPrivate availableAllocations={[]} />
     </MunPageShell>
   );
 }

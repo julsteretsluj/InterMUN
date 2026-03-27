@@ -84,12 +84,12 @@ export async function createAllocationSignupRequestAction(
 
 export async function approveAllocationSignupRequestAction(
   formData: FormData
-): Promise<ActionState> {
+): Promise<void> {
   const requestId = String(formData.get("request_id") ?? "").trim();
-  if (!requestId) return { error: "Missing request id." };
+  if (!requestId) return;
 
   const { supabase, user, role } = await getAuthedProfile();
-  if (!user) return { error: "You must be signed in." };
+  if (!user) return;
 
   const { data: req } = await supabase
     .from("allocation_signup_requests")
@@ -97,8 +97,8 @@ export async function approveAllocationSignupRequestAction(
     .eq("id", requestId)
     .maybeSingle();
 
-  if (!req) return { error: "Request not found." };
-  if (req.status !== "pending") return { error: "Request is no longer pending." };
+  if (!req) return;
+  if (req.status !== "pending") return;
 
   const { data: membership } = await supabase
     .from("allocations")
@@ -108,7 +108,7 @@ export async function approveAllocationSignupRequestAction(
     .limit(1)
     .maybeSingle();
   if (!isChairForConference(role, Boolean(membership?.id))) {
-    return { error: "Only committee chairs (or SMT/admin) can approve requests." };
+    return;
   }
 
   const { data: target } = await supabase
@@ -117,10 +117,8 @@ export async function approveAllocationSignupRequestAction(
     .eq("id", req.allocation_id)
     .eq("conference_id", req.conference_id)
     .maybeSingle();
-  if (!target) return { error: "Target allocation not found." };
-  if (target.user_id && target.user_id !== req.requested_by) {
-    return { error: "Allocation already assigned to another account." };
-  }
+  if (!target) return;
+  if (target.user_id && target.user_id !== req.requested_by) return;
 
   const { error: clearErr } = await supabase
     .from("allocations")
@@ -128,7 +126,7 @@ export async function approveAllocationSignupRequestAction(
     .eq("conference_id", req.conference_id)
     .eq("user_id", req.requested_by)
     .neq("id", req.allocation_id);
-  if (clearErr) return { error: clearErr.message };
+  if (clearErr) return;
 
   if (!target.user_id) {
     const { error: setErr } = await supabase
@@ -137,14 +135,14 @@ export async function approveAllocationSignupRequestAction(
       .eq("id", req.allocation_id)
       .eq("conference_id", req.conference_id)
       .is("user_id", null);
-    if (setErr) return { error: setErr.message };
+    if (setErr) return;
   }
 
   const { error: profileErr } = await supabase
     .from("profiles")
     .update({ allocation: target.country, updated_at: new Date().toISOString() })
     .eq("id", req.requested_by);
-  if (profileErr) return { error: profileErr.message };
+  if (profileErr) return;
 
   const now = new Date().toISOString();
   const { error: reqErr } = await supabase
@@ -156,7 +154,7 @@ export async function approveAllocationSignupRequestAction(
       updated_at: now,
     })
     .eq("id", req.id);
-  if (reqErr) return { error: reqErr.message };
+  if (reqErr) return;
 
   await supabase
     .from("allocation_signup_requests")
@@ -175,25 +173,24 @@ export async function approveAllocationSignupRequestAction(
   revalidatePath("/chair/allocation-matrix");
   revalidatePath("/smt/allocation-matrix");
   revalidatePath("/profile");
-  return { success: true };
 }
 
 export async function rejectAllocationSignupRequestAction(
   formData: FormData
-): Promise<ActionState> {
+): Promise<void> {
   const requestId = String(formData.get("request_id") ?? "").trim();
-  if (!requestId) return { error: "Missing request id." };
+  if (!requestId) return;
 
   const { supabase, user, role } = await getAuthedProfile();
-  if (!user) return { error: "You must be signed in." };
+  if (!user) return;
 
   const { data: req } = await supabase
     .from("allocation_signup_requests")
     .select("id, conference_id, status")
     .eq("id", requestId)
     .maybeSingle();
-  if (!req) return { error: "Request not found." };
-  if (req.status !== "pending") return { error: "Request is no longer pending." };
+  if (!req) return;
+  if (req.status !== "pending") return;
 
   const { data: membership } = await supabase
     .from("allocations")
@@ -203,7 +200,7 @@ export async function rejectAllocationSignupRequestAction(
     .limit(1)
     .maybeSingle();
   if (!isChairForConference(role, Boolean(membership?.id))) {
-    return { error: "Only committee chairs (or SMT/admin) can reject requests." };
+    return;
   }
 
   const { error } = await supabase
@@ -215,9 +212,8 @@ export async function rejectAllocationSignupRequestAction(
       updated_at: new Date().toISOString(),
     })
     .eq("id", req.id);
-  if (error) return { error: error.message };
+  if (error) return;
 
   revalidatePath("/chair/allocation-matrix");
   revalidatePath("/smt/allocation-matrix");
-  return { success: true };
 }

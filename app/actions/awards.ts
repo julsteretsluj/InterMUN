@@ -115,13 +115,10 @@ async function requireSmtOrAdmin() {
 }
 
 export async function submitChairTopNominationAction(
-  _prev: { error?: string } | null,
   formData: FormData
-): Promise<{ error?: string; success?: boolean }> {
+): Promise<void> {
   const auth = await requireChairOrSmt();
-  if (!auth.ok || !auth.user) {
-    return { error: "Only chairs, SMT, and website admins can submit nominations." };
-  }
+  if (!auth.ok || !auth.user) return;
 
   const committeeId = String(formData.get("committee_conference_id") ?? "").trim();
   const nomineeId = String(formData.get("nominee_profile_id") ?? "").trim();
@@ -129,9 +126,7 @@ export async function submitChairTopNominationAction(
   const rank = rankRaw === 1 ? 1 : rankRaw === 2 ? 2 : 0;
   const evidence = String(formData.get("evidence_note") ?? "").trim();
 
-  if (!committeeId || !nomineeId || !rank) {
-    return { error: "Committee, nominee, and rank are required." };
-  }
+  if (!committeeId || !nomineeId || !rank) return;
 
   const { data: canManage } = await auth.supabase
     .from("allocations")
@@ -148,7 +143,7 @@ export async function submitChairTopNominationAction(
       .maybeSingle();
     const role = p?.role?.toString().trim().toLowerCase();
     if (role !== "smt" && role !== "admin") {
-      return { error: "You can only submit nominations for your own committee." };
+      return;
     }
   }
 
@@ -159,9 +154,7 @@ export async function submitChairTopNominationAction(
     .eq("user_id", nomineeId)
     .limit(1)
     .maybeSingle();
-  if (!nomineeInCommittee?.id) {
-    return { error: "Nominee must be assigned in this committee." };
-  }
+  if (!nomineeInCommittee?.id) return;
 
   const { data: existing } = await auth.supabase
     .from("award_nominations")
@@ -181,7 +174,7 @@ export async function submitChairTopNominationAction(
         updated_at: new Date().toISOString(),
       })
       .eq("id", existing.id);
-    if (error) return { error: error.message };
+    if (error) return;
   } else {
     const { error } = await auth.supabase.from("award_nominations").insert({
       committee_conference_id: committeeId,
@@ -191,33 +184,29 @@ export async function submitChairTopNominationAction(
       created_by: auth.user.id,
       status: "pending",
     });
-    if (error) return { error: error.message };
+    if (error) return;
   }
 
   revalidatePath("/chair/awards");
   revalidatePath("/smt/awards");
-  return { success: true };
 }
 
 export async function promoteNominationToAwardAction(
-  _prev: { error?: string } | null,
   formData: FormData
-): Promise<{ error?: string; success?: boolean }> {
+): Promise<void> {
   const auth = await requireSmtOrAdmin();
-  if (!auth.ok || !auth.user) {
-    return { error: "Only SMT/admin can finalize awards from nominations." };
-  }
+  if (!auth.ok || !auth.user) return;
 
   const nominationId = String(formData.get("nomination_id") ?? "").trim();
   const category = String(formData.get("category") ?? "").trim();
-  if (!nominationId || !category) return { error: "Nomination and category are required." };
-  if (!AWARD_CATEGORIES.some((c) => c.id === category)) return { error: "Invalid award category." };
+  if (!nominationId || !category) return;
+  if (!AWARD_CATEGORIES.some((c) => c.id === category)) return;
   if (
     category !== "committee_best_delegate" &&
     category !== "committee_honourable_mention" &&
     category !== "committee_best_position_paper"
   ) {
-    return { error: "SMT selection from nominations is limited to committee-level delegate awards." };
+    return;
   }
 
   const { data: nomination } = await auth.supabase
@@ -225,8 +214,8 @@ export async function promoteNominationToAwardAction(
     .select("id, committee_conference_id, nominee_profile_id, rank, evidence_note, status")
     .eq("id", nominationId)
     .maybeSingle();
-  if (!nomination) return { error: "Nomination not found." };
-  if (nomination.status !== "pending") return { error: "Nomination is no longer pending." };
+  if (!nomination) return;
+  if (nomination.status !== "pending") return;
 
   const sortOrder = category === "committee_honourable_mention" ? nomination.rank : 0;
   const payload = {
@@ -252,7 +241,7 @@ export async function promoteNominationToAwardAction(
         .from("award_assignments")
         .update(payload)
         .eq("id", existing.id);
-      if (error) return { error: error.message };
+      if (error) return;
       assignmentId = existing.id;
     } else {
       const { data, error } = await auth.supabase
@@ -264,7 +253,7 @@ export async function promoteNominationToAwardAction(
         })
         .select("id")
         .maybeSingle();
-      if (error) return { error: error.message };
+      if (error) return;
       assignmentId = data?.id ?? null;
     }
   } else {
@@ -277,7 +266,7 @@ export async function promoteNominationToAwardAction(
       })
       .select("id")
       .maybeSingle();
-    if (error) return { error: error.message };
+    if (error) return;
     assignmentId = data?.id ?? null;
   }
 
@@ -297,5 +286,4 @@ export async function promoteNominationToAwardAction(
   revalidatePath("/smt/awards");
   revalidatePath("/chair/awards");
   revalidatePath("/profile");
-  return { success: true };
 }
