@@ -1,8 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { FileCheck, Plus, Users } from "lucide-react";
+import {
+  addClauseAction,
+  createResolutionAction,
+  deleteClauseAction,
+  joinBlocAction,
+  signResolutionAction,
+  updateClauseAction,
+} from "@/app/actions/resolutions";
 
 interface Resolution {
   id: string;
@@ -21,18 +28,38 @@ interface Bloc {
   bloc_memberships?: { user_id: string }[];
 }
 
+interface Clause {
+  id: string;
+  resolution_id: string;
+  clause_number: number;
+  clause_text: string;
+  updated_at: string;
+}
+
+interface ClauseOutcome {
+  id: string;
+  vote_item_id: string;
+  resolution_id: string;
+  clause_id: string;
+  passed: boolean;
+  applied_at: string;
+}
+
 export function ResolutionsView({
   resolutions,
   blocs,
+  clauses,
+  clauseOutcomes,
   conferenceId,
   canCreate,
 }: {
   resolutions: Resolution[];
   blocs: Bloc[];
+  clauses: Clause[];
+  clauseOutcomes: ClauseOutcome[];
   conferenceId: string;
   canCreate: boolean;
 }) {
-  const [res, setRes] = useState(resolutions);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
     google_docs_url: "",
@@ -41,39 +68,30 @@ export function ResolutionsView({
     conference_id: conferenceId,
   });
   const [selectedBloc, setSelectedBloc] = useState<Record<string, string>>({});
-  const supabase = createClient();
+  const [newClause, setNewClause] = useState<Record<string, string>>({});
+  const [editingClause, setEditingClause] = useState<Record<string, string>>({});
+  const [actionError, setActionError] = useState<string | null>(null);
 
   async function createResolution() {
     if (!canCreate) return;
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
+    setActionError(null);
     const mainSubs = form.main_submitters
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean);
-    if (!mainSubs.includes(user.id)) mainSubs.push(user.id);
-    const { data: newRes } = await supabase
-      .from("resolutions")
-      .insert({
-        conference_id: conferenceId,
-        google_docs_url: form.google_docs_url || null,
-        main_submitters: mainSubs,
-        co_submitters: form.co_submitters
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean),
-        signatories: [],
-      })
-      .select("id")
-      .single();
-
-    if (newRes?.id) {
-      await supabase.from("blocs").insert([
-        { resolution_id: newRes.id, name: "A", stance: "for" },
-        { resolution_id: newRes.id, name: "B", stance: "against" },
-      ]);
+    const coSubs = form.co_submitters
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const result = await createResolutionAction({
+      conferenceId,
+      googleDocsUrl: form.google_docs_url || undefined,
+      mainSubmitterIds: mainSubs,
+      coSubmitterIds: coSubs,
+    });
+    if (!result.ok) {
+      setActionError(result.error);
+      return;
     }
     setShowForm(false);
     setForm({
@@ -82,44 +100,67 @@ export function ResolutionsView({
       co_submitters: "",
       conference_id: conferenceId,
     });
-    const { data } = await supabase
-      .from("resolutions")
-      .select("*")
-      .eq("conference_id", conferenceId)
-      .order("created_at", { ascending: false });
-    if (data) setRes(data);
+    location.reload();
   }
 
   async function signResolution(resolutionId: string) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-    await supabase.from("signatory_requests").insert({
-      resolution_id: resolutionId,
-      user_id: user.id,
-      status: "pending",
-    });
+    setActionError(null);
+    const result = await signResolutionAction({ resolutionId });
+    if (!result.ok) setActionError(result.error);
   }
 
   async function joinBloc(resolutionId: string, blocId: string) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-    const resolutionBlocs = blocs.filter((b) => b.resolution_id === resolutionId);
-    for (const b of resolutionBlocs) {
-      await supabase
-        .from("bloc_memberships")
-        .delete()
-        .eq("bloc_id", b.id)
-        .eq("user_id", user.id);
+    setActionError(null);
+    const result = await joinBlocAction({ resolutionId, blocId });
+    if (!result.ok) {
+      setActionError(result.error);
+      return;
     }
-    await supabase.from("bloc_memberships").insert({
-      bloc_id: blocId,
-      user_id: user.id,
-    });
     setSelectedBloc((s) => ({ ...s, [resolutionId]: blocId }));
+  }
+
+  async function addClause(resolutionId: string) {
+    if (!canCreate) return;
+    setActionError(null);
+    const text = (newClause[resolutionId] ?? "").trim();
+    if (!text) return;
+
+    const result = await addClauseAction({
+      conferenceId,
+      resolutionId,
+      clauseText: text,
+    });
+    if (!result.ok) {
+      setActionError(result.error);
+      return;
+    }
+    setNewClause((prev) => ({ ...prev, [resolutionId]: "" }));
+    location.reload();
+  }
+
+  async function saveClause(clauseId: string) {
+    if (!canCreate) return;
+    setActionError(null);
+    const text = (editingClause[clauseId] ?? "").trim();
+    if (!text) return;
+    const result = await updateClauseAction({ clauseId, clauseText: text });
+    if (!result.ok) {
+      setActionError(result.error);
+      return;
+    }
+    setEditingClause((prev) => ({ ...prev, [clauseId]: text }));
+    location.reload();
+  }
+
+  async function deleteClause(clauseId: string) {
+    if (!canCreate) return;
+    setActionError(null);
+    const result = await deleteClauseAction({ clauseId });
+    if (!result.ok) {
+      setActionError(result.error);
+      return;
+    }
+    location.reload();
   }
 
   return (
@@ -176,9 +217,19 @@ export function ResolutionsView({
           </div>
         </div>
       )}
+      {actionError ? (
+        <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded px-3 py-2">
+          {actionError}
+        </p>
+      ) : null}
       <div className="space-y-4">
-        {res.map((r) => {
+        {resolutions.map((r) => {
           const resolutionBlocs = blocs.filter((b) => b.resolution_id === r.id);
+          const resolutionClauses = clauses.filter((c) => c.resolution_id === r.id);
+          const outcomesForResolution = clauseOutcomes.filter((o) => o.resolution_id === r.id);
+          const clauseIdToLabel = new Map(
+            resolutionClauses.map((c) => [c.id, `Clause ${c.clause_number}`] as const)
+          );
           return (
             <div
               key={r.id}
@@ -234,6 +285,98 @@ export function ResolutionsView({
               >
                 Sign virtually (main subs notified)
               </button>
+
+              <div className="border-t pt-3 mt-2 space-y-2">
+                <p className="text-sm font-medium">Clause editor</p>
+                {resolutionClauses.length === 0 ? (
+                  <p className="text-xs text-slate-500">No clauses yet.</p>
+                ) : (
+                  <ul className="space-y-2">
+                    {resolutionClauses.map((c) => {
+                      const draft = editingClause[c.id] ?? c.clause_text;
+                      return (
+                        <li key={c.id} className="border rounded p-2 space-y-2">
+                          <p className="text-xs text-slate-500">Clause {c.clause_number}</p>
+                          <textarea
+                            className="w-full px-2 py-1 border rounded dark:bg-slate-700"
+                            value={draft}
+                            onChange={(e) =>
+                              setEditingClause((prev) => ({ ...prev, [c.id]: e.target.value }))
+                            }
+                            disabled={!canCreate}
+                          />
+                          {canCreate ? (
+                            <div className="flex gap-2">
+                              <button
+                                type="button"
+                                className="px-2 py-1 rounded bg-blue-600 text-white text-xs"
+                                onClick={() => void saveClause(c.id)}
+                              >
+                                Save clause
+                              </button>
+                              <button
+                                type="button"
+                                className="px-2 py-1 rounded border border-red-400/40 text-red-700 text-xs"
+                                onClick={() => void deleteClause(c.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          ) : null}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+
+                {canCreate ? (
+                  <div className="space-y-2">
+                    <textarea
+                      className="w-full px-2 py-1 border rounded dark:bg-slate-700"
+                      value={newClause[r.id] ?? ""}
+                      onChange={(e) =>
+                        setNewClause((prev) => ({ ...prev, [r.id]: e.target.value }))
+                      }
+                      placeholder="Add a new clause..."
+                    />
+                    <button
+                      type="button"
+                      className="px-3 py-1 rounded bg-blue-600 text-white text-sm"
+                      onClick={() => void addClause(r.id)}
+                    >
+                      Add clause
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="border-t pt-3 mt-2 space-y-2">
+                <p className="text-sm font-medium">Clause vote history</p>
+                {outcomesForResolution.length === 0 ? (
+                  <p className="text-xs text-slate-500">No recorded clause vote outcomes yet.</p>
+                ) : (
+                  <ul className="space-y-1 text-xs">
+                    {outcomesForResolution.map((o) => (
+                      <li
+                        key={o.id}
+                        className={[
+                          "flex flex-wrap items-center gap-2 rounded border px-2 py-1",
+                          o.passed ? "border-green-200 bg-green-50/60" : "border-red-200 bg-red-50/60",
+                        ].join(" ")}
+                      >
+                        <span className="font-medium">{clauseIdToLabel.get(o.clause_id) ?? "Clause"}</span>
+                        <span className={o.passed ? "text-green-700" : "text-red-700"}>
+                          {o.passed ? "PASSED" : "FAILED"}
+                        </span>
+                        <span className="text-slate-500">•</span>
+                        <span className="text-slate-600">Motion {o.vote_item_id.slice(0, 8)}</span>
+                        <span className="text-slate-500">•</span>
+                        <span className="text-slate-500">{new Date(o.applied_at).toLocaleString()}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           );
         })}

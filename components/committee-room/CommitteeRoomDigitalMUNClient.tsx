@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
 import { CommitteeRoomSessionFloor } from "@/components/committee-room/CommitteeRoomSessionFloor";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import type { StaffAllocationRow } from "@/lib/committee-room-payload";
+import { createClient } from "@/lib/supabase/client";
 
 export function CommitteeRoomDigitalMUNClient({
   conferenceId,
@@ -47,7 +48,54 @@ export function CommitteeRoomDigitalMUNClient({
   const isChairLike = role === "chair" || role === "admin";
   const isDelegate = role === "delegate";
 
-  const canClickSelectRecipients = isDelegate || isChairLike;
+  const supabase = useMemo(() => createClient(), []);
+  const [procedureState, setProcedureState] = useState<"debate_open" | "voting_procedure">("debate_open");
+  const [currentVoteItemId, setCurrentVoteItemId] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function load() {
+      const { data: ps } = await supabase
+        .from("procedure_states")
+        .select("state, current_vote_item_id")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+
+      if (!isActive) return;
+      setProcedureState(ps?.state ?? "debate_open");
+      setCurrentVoteItemId(ps?.current_vote_item_id ?? null);
+    }
+
+    void load();
+
+    const ch = supabase
+      .channel(`procedure-state-${conferenceId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "procedure_states",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        (payload) => {
+          const row = payload.new as { state: "debate_open" | "voting_procedure"; current_vote_item_id: string | null };
+          setProcedureState(row?.state ?? "debate_open");
+          setCurrentVoteItemId(row?.current_vote_item_id ?? null);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      isActive = false;
+      void supabase.removeChannel(ch);
+    };
+  }, [supabase, conferenceId]);
+
+  const votingProcedureActive = procedureState === "voting_procedure";
+
+  const canClickSelectRecipients = (isDelegate || isChairLike) && !(isDelegate && votingProcedureActive);
 
   const [selectedAllocationRecipientIds, setSelectedAllocationRecipientIds] = useState<string[]>([]);
   const [selectedChairRecipientIds, setSelectedChairRecipientIds] = useState<string[]>([]);
@@ -120,6 +168,7 @@ export function CommitteeRoomDigitalMUNClient({
               allocationOptions={allocationOptions}
               chairOptions={chairOptions}
               nextPathAfterVerification="/committee-room"
+              votingProcedureLocked={votingProcedureActive && isDelegate}
               selectedAllocationRecipientIds={
                 canClickSelectRecipients ? selectedAllocationRecipientIdsControlled : undefined
               }
@@ -146,6 +195,8 @@ export function CommitteeRoomDigitalMUNClient({
               myAllocationId={myAllocationId}
               myAllocationCountry={myAllocationCountry}
               observeDelegatesOnly={false}
+              procedureState={procedureState}
+              currentVoteItemId={currentVoteItemId}
             />
           </div>
         </div>

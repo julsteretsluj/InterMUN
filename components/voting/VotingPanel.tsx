@@ -61,7 +61,7 @@ export function VotingPanel({
     };
   }, [supabase]);
 
-  async function castVote(itemId: string, value: "yes" | "no" | "abstain") {
+  async function castVote(itemId: string, value: "yes" | "no") {
     if (!canCastVotes) return;
     const {
       data: { user },
@@ -96,18 +96,17 @@ export function VotingPanel({
     const v = votes[item.id] || [];
     const yes = v.filter((x) => x.value === "yes").length;
     const no = v.filter((x) => x.value === "no").length;
-    const abstain = v.filter((x) => x.value === "abstain").length;
     const total = v.length;
     const majority = item.required_majority === "2/3" ? (total * 2) / 3 : total / 2;
     const passes = yes > majority;
-    return { yes, no, abstain, total, passes };
+    return { yes, no, total, passes };
   }
 
   const openItems = voteItems.filter((i) => !i.closed_at);
   const closedItems = voteItems.filter((i) => !!i.closed_at);
 
   function renderVoteCard(item: VoteItem) {
-    const { yes, no, abstain, total, passes } = getResult(item);
+    const { yes, no, total, passes } = getResult(item);
     const d = drafts[item.id] || { must_vote: item.must_vote, required_majority: item.required_majority };
     const isClosed = !!item.closed_at;
 
@@ -134,7 +133,7 @@ export function VotingPanel({
         </p>
 
         <div className="flex gap-2 mb-3">
-          {(["yes", "no", "abstain"] as const).map((val) => (
+          {(["yes", "no"] as const).map((val) => (
             <button
               key={val}
               onClick={() => castVote(item.id, val)}
@@ -213,7 +212,7 @@ export function VotingPanel({
         ) : null}
 
         <div className="text-sm">
-          Yes: {yes} | No: {no} | Abstain: {abstain} | Total: {total}
+          Yes: {yes} | No: {no} | Total: {total}
         </div>
         <div
           className={`mt-2 font-semibold ${

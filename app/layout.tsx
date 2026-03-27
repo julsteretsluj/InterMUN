@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Inter } from "next/font/google";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
 import "./globals.css";
 
-const sans = Manrope({
+const sans = Inter({
   subsets: ["latin"],
   variable: "--font-ui",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {

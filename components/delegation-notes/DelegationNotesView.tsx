@@ -66,6 +66,7 @@ export function DelegationNotesView({
   allocationOptions,
   chairOptions,
   nextPathAfterVerification = "/chats-notes",
+  votingProcedureLocked,
   selectedAllocationRecipientIds: controlledSelectedAllocationRecipientIds,
   selectedChairRecipientIds: controlledSelectedChairRecipientIds,
   anyChairRecipient: controlledAnyChairRecipient,
@@ -84,6 +85,7 @@ export function DelegationNotesView({
   allocationOptions: AllocationOption[];
   chairOptions: ChairOption[];
   nextPathAfterVerification?: string;
+  votingProcedureLocked?: boolean;
 
   // Controlled recipients selection (digital MUN click-to-select).
   selectedAllocationRecipientIds?: string[];
@@ -143,7 +145,8 @@ export function DelegationNotesView({
   const canCompose =
     (!isSmt && (isChairLike || isDelegate)) &&
     (myAllocationId !== null || isChairLike) &&
-    (allocationOptions.length > 0 || isChairLike);
+    (allocationOptions.length > 0 || isChairLike) &&
+    !votingProcedureLocked;
 
   const lastRefreshAtRef = useRef<number>(0);
 
@@ -334,6 +337,10 @@ export function DelegationNotesView({
   async function createNote() {
     if (sending) return;
     setError(null);
+    if (votingProcedureLocked) {
+      setError("Voting procedure is active: note composing is disabled.");
+      return;
+    }
 
     const trimmed = content.trim();
     if (!trimmed) return setError("Write the note content first.");
@@ -554,6 +561,7 @@ export function DelegationNotesView({
               onChange={(e) => setContent(e.target.value)}
               placeholder={canCompose ? "Write your note..." : "Only delegates/chairs can send notes."}
               className="w-full h-28 px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600"
+              disabled={votingProcedureLocked}
             />
             {error ? (
               <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
@@ -604,6 +612,7 @@ export function DelegationNotesView({
                       <input
                         type="checkbox"
                         checked={checked}
+                    disabled={votingProcedureLocked}
                         onChange={(e) => {
                           if (isControlledRecipients) {
                             onToggleAllocationRecipient?.(a.id);
@@ -639,6 +648,7 @@ export function DelegationNotesView({
                 <input
                   type="checkbox"
                   checked={anyChairRecipient}
+                  disabled={votingProcedureLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
                     if (isControlledRecipients) {
@@ -666,7 +676,7 @@ export function DelegationNotesView({
                       <input
                         type="checkbox"
                         checked={checked}
-                        disabled={anyChairRecipient}
+                        disabled={anyChairRecipient || votingProcedureLocked}
                         onChange={(e) => {
                           if (anyChairRecipient) return;
                           if (isControlledRecipients) {

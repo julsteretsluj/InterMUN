@@ -1,8 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteType } from "@/types/database";
+import {
+  didMotionPass,
+  motionRequiresClauseTargets,
+} from "@/lib/resolution-functions";
+import { recordClauseVoteOutcomesAction } from "@/app/actions/resolutions";
 
 type Alloc = { id: string; country: string };
 type QueueRow = {
@@ -22,6 +27,9 @@ type MotionRow = {
   id: string;
   conference_id: string;
   vote_type: VoteType;
+  procedure_code: string | null;
+  procedure_resolution_id: string | null;
+  procedure_clause_ids: string[];
   title: string | null;
   description: string | null;
   must_vote: boolean;
@@ -35,7 +43,14 @@ type MotionAudit = {
   actor_profile_id: string | null;
   metadata: Record<string, unknown> | null;
 };
-type VoteCountRow = { value: "yes" | "no" | "abstain" };
+type VoteCountRow = { value: "yes" | "no" };
+type ResolutionRow = { id: string; google_docs_url: string | null };
+type ClauseRow = {
+  id: string;
+  resolution_id: string;
+  clause_number: number;
+  clause_text: string;
+};
 
 export function SessionControlClient({
   conferenceId,
@@ -64,14 +79,47 @@ export function SessionControlClient({
   const [openMotion, setOpenMotion] = useState<MotionRow | null>(null);
   const [recentMotions, setRecentMotions] = useState<MotionRow[]>([]);
   const [motionAudit, setMotionAudit] = useState<MotionAudit[]>([]);
-  const [motionTally, setMotionTally] = useState({ yes: 0, no: 0, abstain: 0, total: 0 });
+  const [motionTally, setMotionTally] = useState({ yes: 0, no: 0, total: 0 });
   const [motionDraft, setMotionDraft] = useState({
     vote_type: "motion" as VoteType,
+    procedure_code: null as string | null,
     title: "",
     description: "",
     must_vote: false,
     required_majority: "simple",
+    procedure_resolution_id: null as string | null,
+    procedure_clause_ids: [] as string[],
   });
+  const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
+  const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
+
+  const procedurePresets = useMemo(
+    () => [
+      { code: null as string | null, label: "Custom" },
+      { code: "set_agenda", label: "Motion to Set the Agenda", title: "Motion to Set the Agenda", majority: "simple" },
+      { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time", majority: "simple" },
+      { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate", majority: "simple" },
+      { code: "close_debate", label: "Motion to Close Debate", title: "Motion to Close Debate", majority: "simple" },
+      { code: "exclude_public", label: "Motion to Exclude the Public", title: "Motion to Exclude the Public", majority: "simple" },
+      { code: "silent_prayer", label: "Minute of Silent Prayer/Meditation", title: "Motion for a Minute of Silent Prayer or Meditation", majority: "simple" },
+      { code: "roll_call_vote", label: "Motion for a Roll Call Vote", title: "Motion for a Roll Call Vote", majority: "simple" },
+      { code: "minute_silent", label: "Minute of Silent Prayer", title: "Motion for a Minute of Silent Prayer or Meditation", majority: "simple" },
+      { code: "unmoderated_caucus", label: "Unmoderated Caucus", title: "Motion for an Unmoderated Caucus", majority: "simple" },
+      { code: "moderated_caucus", label: "Moderated Caucus", title: "Motion for a Moderated Caucus", majority: "simple" },
+      { code: "consultation", label: "Consultation", title: "Motion for a Consultation", majority: "simple" },
+      { code: "adjourn", label: "Adjourn Session", title: "Motion to Adjourn Session", majority: "simple" },
+      { code: "suspend", label: "Suspend Session", title: "Motion to Suspend Session", majority: "simple" },
+      { code: "divide_question", label: "Divide the Question (editor needed)", title: "Motion to Divide the Question", majority: "simple" },
+      { code: "clause_by_clause", label: "Clause-by-Clause (editor needed)", title: "Motion to Vote Clause by Clause", majority: "simple" },
+      { code: "amendment", label: "Amendments (editor needed)", title: "Amendment", majority: "simple" },
+    ],
+    []
+  );
+
+  const selectedResolutionClauses = useMemo(() => {
+    if (!motionDraft.procedure_resolution_id) return [];
+    return resolutionClauses.filter((c) => c.resolution_id === motionDraft.procedure_resolution_id);
+  }, [motionDraft.procedure_resolution_id, resolutionClauses]);
 
   const refresh = useCallback(async () => {
     const [
@@ -82,6 +130,8 @@ export function SessionControlClient({
       { data: t },
       { data: currentMotion },
       { data: motionRows },
+      { data: resolutionRows },
+      { data: clauseRows },
     ] =
       await Promise.all([
         supabase
@@ -108,16 +158,32 @@ export function SessionControlClient({
         supabase.from("timers").select("*").eq("conference_id", conferenceId).maybeSingle(),
         supabase
           .from("vote_items")
-          .select("id, conference_id, vote_type, title, description, must_vote, required_majority, closed_at")
+          .select(
+            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, closed_at"
+          )
           .eq("conference_id", conferenceId)
           .is("closed_at", null)
           .maybeSingle(),
         supabase
           .from("vote_items")
-          .select("id, conference_id, vote_type, title, description, must_vote, required_majority, closed_at")
+          .select(
+            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, closed_at"
+          )
           .eq("conference_id", conferenceId)
           .order("created_at", { ascending: false })
           .limit(8),
+        supabase
+          .from("resolutions")
+          .select("id, google_docs_url")
+          .eq("conference_id", conferenceId)
+          .order("created_at", { ascending: false })
+          .limit(30),
+        supabase
+          .from("resolution_clauses")
+          .select("id, resolution_id, clause_number, clause_text")
+          .eq("conference_id", conferenceId)
+          .order("clause_number", { ascending: true })
+          .limit(500),
       ]);
 
     setAllocations((allocs as Alloc[]) ?? []);
@@ -127,13 +193,18 @@ export function SessionControlClient({
     const open = (currentMotion as MotionRow | null) ?? null;
     setOpenMotion(open);
     setRecentMotions((motionRows as MotionRow[]) ?? []);
+    setResolutions((resolutionRows as ResolutionRow[]) ?? []);
+    setResolutionClauses((clauseRows as ClauseRow[]) ?? []);
     if (open) {
       setMotionDraft({
         vote_type: open.vote_type,
+        procedure_code: open.procedure_code,
         title: open.title ?? "",
         description: open.description ?? "",
         must_vote: open.must_vote,
         required_majority: open.required_majority,
+        procedure_resolution_id: open.procedure_resolution_id,
+        procedure_clause_ids: open.procedure_clause_ids ?? [],
       });
     }
 
@@ -152,11 +223,10 @@ export function SessionControlClient({
       const rows = (openVotes ?? []) as VoteCountRow[];
       const yes = rows.filter((v) => v.value === "yes").length;
       const no = rows.filter((v) => v.value === "no").length;
-      const abstain = rows.filter((v) => v.value === "abstain").length;
-      setMotionTally({ yes, no, abstain, total: rows.length });
+      setMotionTally({ yes, no, total: rows.length });
       setMotionAudit((auditRows as MotionAudit[]) ?? []);
     } else {
-      setMotionTally({ yes: 0, no: 0, abstain: 0, total: 0 });
+      setMotionTally({ yes: 0, no: 0, total: 0 });
       setMotionAudit([]);
     }
 
@@ -346,23 +416,55 @@ export function SessionControlClient({
       setMsg("Close the current motion before opening another.");
       return;
     }
+    if (
+      motionRequiresClauseTargets(motionDraft.procedure_code) &&
+      (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)
+    ) {
+      setMsg("Select a resolution and at least one clause for this procedural motion.");
+      return;
+    }
     startTransition(async () => {
-      const { error } = await supabase.from("vote_items").insert({
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const debateClosed = psRow?.debate_closed ?? false;
+
+      const { data: inserted, error } = await supabase
+        .from("vote_items")
+        .insert({
         conference_id: conferenceId,
         vote_type: motionDraft.vote_type,
+          procedure_code: motionDraft.procedure_code,
+          procedure_resolution_id: motionDraft.procedure_resolution_id,
+          procedure_clause_ids: motionDraft.procedure_clause_ids,
         title: motionDraft.title.trim(),
         description: motionDraft.description.trim() || null,
         must_vote: motionDraft.must_vote,
         required_majority: motionDraft.required_majority,
-      });
+        })
+        .select("id")
+        .maybeSingle();
+
       setMsg(error ? error.message : "Motion created and opened.");
-      if (!error) {
+      if (!error && inserted?.id) {
+        await supabase.from("procedure_states").upsert({
+          conference_id: conferenceId,
+          state: "voting_procedure",
+          current_vote_item_id: inserted.id,
+          debate_closed: debateClosed,
+          updated_at: new Date().toISOString(),
+        });
         setMotionDraft({
           vote_type: "motion",
+          procedure_code: null,
           title: "",
           description: "",
           must_vote: false,
           required_majority: "simple",
+          procedure_resolution_id: null,
+          procedure_clause_ids: [],
         });
       }
       void refresh();
@@ -376,6 +478,9 @@ export function SessionControlClient({
         .from("vote_items")
         .update({
           vote_type: motionDraft.vote_type,
+          procedure_code: motionDraft.procedure_code,
+          procedure_resolution_id: motionDraft.procedure_resolution_id,
+          procedure_clause_ids: motionDraft.procedure_clause_ids,
           title: motionDraft.title.trim() || null,
           description: motionDraft.description.trim() || null,
           must_vote: motionDraft.must_vote,
@@ -390,22 +495,90 @@ export function SessionControlClient({
   function closeMotion() {
     if (!openMotion) return;
     startTransition(async () => {
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const debateClosed = psRow?.debate_closed ?? false;
+
       const { error } = await supabase
         .from("vote_items")
         .update({ closed_at: new Date().toISOString() })
         .eq("id", openMotion.id);
       setMsg(error ? error.message : "Motion closed.");
+      if (!error) {
+        const passes = didMotionPass(
+          openMotion.required_majority,
+          motionTally.yes,
+          motionTally.total
+        );
+
+        const hasClauseTargets =
+          !!openMotion.procedure_resolution_id &&
+          Array.isArray(openMotion.procedure_clause_ids) &&
+          openMotion.procedure_clause_ids.length > 0;
+        if (hasClauseTargets) {
+          const outcomeResult = await recordClauseVoteOutcomesAction({
+            voteItemId: openMotion.id,
+            resolutionId: openMotion.procedure_resolution_id as string,
+            clauseIds: openMotion.procedure_clause_ids,
+            passed: passes,
+            removeClauseTargetsOnFail: true,
+            procedureCode: openMotion.procedure_code,
+          });
+          if (!outcomeResult.ok) {
+            setMsg(outcomeResult.error);
+            void refresh();
+            return;
+          }
+        }
+
+        let nextDebateClosed = debateClosed;
+        if (openMotion.procedure_code === "close_debate") {
+          nextDebateClosed = passes;
+        }
+        if (openMotion.procedure_code === "open_debate") {
+          // Allow chairs to return to debate if explicitly reopened.
+          nextDebateClosed = !passes ? debateClosed : false;
+        }
+
+        const nextState = nextDebateClosed ? "voting_procedure" : "debate_open";
+        await supabase.from("procedure_states").upsert({
+          conference_id: conferenceId,
+          state: nextState,
+          current_vote_item_id: null,
+          debate_closed: nextDebateClosed,
+          updated_at: new Date().toISOString(),
+        });
+      }
       void refresh();
     });
   }
 
   function reopenMotion(voteItemId: string) {
     startTransition(async () => {
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const debateClosed = psRow?.debate_closed ?? false;
+
       const { error } = await supabase
         .from("vote_items")
         .update({ closed_at: null })
         .eq("id", voteItemId);
       setMsg(error ? error.message : "Motion reopened.");
+      if (!error) {
+        await supabase.from("procedure_states").upsert({
+          conference_id: conferenceId,
+          state: "voting_procedure",
+          current_vote_item_id: voteItemId,
+          debate_closed: debateClosed,
+          updated_at: new Date().toISOString(),
+        });
+      }
       void refresh();
     });
   }
@@ -425,6 +598,95 @@ export function SessionControlClient({
           Chair-only: one open motion at a time. Delegates vote while motion is open.
         </p>
         <div className="rounded-xl border border-brand-navy/10 p-3 space-y-3 bg-white/60">
+          <label className="text-sm">
+            <span className="text-brand-muted text-xs uppercase">Procedure preset</span>
+            <select
+              className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+              value={motionDraft.procedure_code ?? ""}
+              onChange={(e) => {
+                const raw = e.target.value;
+                const code = raw === "" ? null : raw;
+                const preset = procedurePresets.find((p) => p.code === code);
+                setMotionDraft((d) => ({
+                  ...d,
+                  procedure_code: code,
+                  vote_type: "motion",
+                  title: preset?.title ?? d.title,
+                  required_majority: (preset?.majority as string | undefined) ?? d.required_majority,
+                }));
+              }}
+            >
+              {procedurePresets.map((p) => (
+                <option key={String(p.code ?? "custom")} value={p.code ?? ""}>
+                  {p.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {(motionDraft.procedure_code === "divide_question" ||
+            motionDraft.procedure_code === "clause_by_clause" ||
+            motionDraft.procedure_code === "amendment") ? (
+            <div className="space-y-3 rounded-lg border border-brand-navy/10 p-3 bg-brand-cream/40">
+              <label className="text-sm block">
+                <span className="text-brand-muted text-xs uppercase">Target resolution</span>
+                <select
+                  className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+                  value={motionDraft.procedure_resolution_id ?? ""}
+                  onChange={(e) =>
+                    setMotionDraft((d) => ({
+                      ...d,
+                      procedure_resolution_id: e.target.value || null,
+                      procedure_clause_ids: [],
+                    }))
+                  }
+                >
+                  <option value="">Select resolution…</option>
+                  {resolutions.map((r) => (
+                    <option key={r.id} value={r.id}>
+                      {r.google_docs_url ? `Resolution ${r.id.slice(0, 8)} (${r.google_docs_url})` : `Resolution ${r.id.slice(0, 8)}`}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <div className="space-y-1">
+                <p className="text-brand-muted text-xs uppercase">Target clauses</p>
+                <div className="max-h-36 overflow-y-auto rounded border border-brand-navy/10 p-2 bg-white/70 space-y-1">
+                  {selectedResolutionClauses.length === 0 ? (
+                    <p className="text-xs text-brand-muted">No clauses found for selected resolution.</p>
+                  ) : (
+                    selectedResolutionClauses.map((c) => {
+                      const checked = motionDraft.procedure_clause_ids.includes(c.id);
+                      return (
+                        <label key={c.id} className="flex items-start gap-2 text-xs cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={(e) => {
+                              setMotionDraft((d) => {
+                                if (e.target.checked) {
+                                  return { ...d, procedure_clause_ids: [...d.procedure_clause_ids, c.id] };
+                                }
+                                return {
+                                  ...d,
+                                  procedure_clause_ids: d.procedure_clause_ids.filter((x) => x !== c.id),
+                                };
+                              });
+                            }}
+                          />
+                          <span className="line-clamp-2">
+                            Clause {c.clause_number}: {c.clause_text}
+                          </span>
+                        </label>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : null}
+
           <div className="grid sm:grid-cols-2 gap-3">
             <label className="text-sm">
               <span className="text-brand-muted text-xs uppercase">Type</span>
@@ -511,8 +773,7 @@ export function SessionControlClient({
             )}
           </div>
           <div className="text-xs text-brand-muted">
-            Tally: Yes {motionTally.yes} | No {motionTally.no} | Abstain {motionTally.abstain} | Total{" "}
-            {motionTally.total}
+            Tally: Yes {motionTally.yes} | No {motionTally.no} | Total {motionTally.total}
           </div>
         </div>
 

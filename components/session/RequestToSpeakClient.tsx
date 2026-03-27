@@ -7,10 +7,12 @@ export function RequestToSpeakClient({
   conferenceId,
   allocationId,
   allocationCountry,
+  disabled,
 }: {
   conferenceId: string;
   allocationId: string | null;
   allocationCountry: string | null;
+  disabled?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
   const [purpose, setPurpose] = useState("");
@@ -87,12 +89,12 @@ export function RequestToSpeakClient({
         value={purpose}
         onChange={(e) => setPurpose(e.target.value)}
         placeholder="e.g. support + amendment overview"
-        disabled={pending || !allocationId}
+        disabled={pending || !allocationId || disabled}
       />
       <button
         type="button"
         onClick={() => void request()}
-        disabled={pending || !allocationId}
+        disabled={pending || !allocationId || disabled}
         className="w-full px-3 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
       >
         {pending ? "Requesting…" : "Request to speak"}

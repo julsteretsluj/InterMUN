@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  /* Spotify-ish dark theme */
-  --background: #121212;
-  --foreground: #b3b3b3;
+  /* Global Spotify-style dark + muted glass theme */
+  --background: #0b0b0b;
+  --foreground: #d7d7d7;
 
   /* Primary text ink */
-  --brand-navy: #ffffff;
+  --brand-navy: #f5f5f5;
   /* Dark surface used for "button hover" states where bg-brand-navy-soft appears */
-  --brand-navy-soft: #282828;
+  --brand-navy-soft: rgba(255, 255, 255, 0.12);
 
   /* Accent */
   --brand-gold: #1db954;
-  --brand-gold-bright: #1ed760;
+  --brand-gold-bright: #2be168;
 
   /* Surfaces */
-  --brand-cream: #181818;
-  --brand-paper: #191414;
+  --brand-cream: rgba(255, 255, 255, 0.03);
+  --brand-paper: rgba(255, 255, 255, 0.05);
 
   /* Secondary text */
-  --brand-muted: #b3b3b3;
+  --brand-muted: #b6b6b6;
 
-  --brand-line: rgba(255, 255, 255, 0.12);
+  --brand-line: rgba(255, 255, 255, 0.14);
 
   /* Text on green accent blocks */
   --brand-accent-ink: #0b0b0b;
@@ -44,8 +44,18 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top left, rgba(29, 185, 84, 0.2) 0%, rgba(12, 12, 12, 0.94) 40%),
+    radial-gradient(circle at bottom right, rgba(29, 185, 84, 0.16) 0%, rgba(10, 10, 10, 0.96) 45%),
+    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
+  background-attachment: fixed;
   color: var(--foreground);
+}
+
+/* Global glass surface defaults for common cards/headers */
+.bg-brand-paper,
+.bg-brand-cream {
+  backdrop-filter: blur(8px);
 }
 
 /* Spotify-ish focus styling (green ink + soft glow) */
