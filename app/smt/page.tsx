@@ -4,6 +4,23 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { formatCommitteeCardTitle, resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
 
+function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advanced") {
+  if (level === "Beginner") {
+    return "border-emerald-300/80 bg-emerald-100 text-emerald-900";
+  }
+  if (level === "Intermediate") {
+    return "border-amber-300/80 bg-amber-100 text-amber-950";
+  }
+  return "border-rose-300/80 bg-rose-100 text-rose-900";
+}
+
+function formatTagClass(format: "Traditional" | "Crisis") {
+  if (format === "Crisis") {
+    return "border-fuchsia-300/80 bg-fuchsia-100 text-fuchsia-900";
+  }
+  return "border-sky-300/80 bg-sky-100 text-sky-900";
+}
+
 export default async function SmtOverviewPage({
   searchParams,
 }: {
@@ -150,17 +167,21 @@ export default async function SmtOverviewPage({
               if (!tags) return null;
               return (
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  <span className="rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.65rem] text-brand-navy">
+                  <span
+                    className={`rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold ${difficultyTagClass(tags.difficulty)}`}
+                  >
                     {tags.difficulty}
                   </span>
-                  <span className="rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.65rem] text-brand-navy">
+                  <span
+                    className={`rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold ${formatTagClass(tags.format)}`}
+                  >
                     {tags.format}
                   </span>
-                  <span className="rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.65rem] text-brand-navy">
+                  <span className="rounded-full border border-violet-300/80 bg-violet-100 px-2 py-0.5 text-[0.68rem] font-semibold text-violet-900">
                     {tags.ageRange}
                   </span>
                   {tags.eslFriendly ? (
-                    <span className="rounded-full border border-emerald-300/70 bg-emerald-50 px-2 py-0.5 text-[0.65rem] text-emerald-800">
+                    <span className="rounded-full border border-lime-300/80 bg-lime-100 px-2 py-0.5 text-[0.68rem] font-semibold text-lime-900">
                       ESL-friendly
                     </span>
                   ) : null}
@@ -179,13 +200,13 @@ export default async function SmtOverviewPage({
               </p>
             ) : null}
             {g.topicCount > 1 ? (
-              <p className="text-[0.68rem] text-brand-muted mt-1">{g.topicCount} sessions</p>
+              <p className="text-[0.72rem] text-brand-navy/85 mt-1 font-medium">{g.topicCount} sessions</p>
             ) : null}
             {g.topics.length > 0 ? (
               <div className="mt-2 space-y-1">
                 {g.topics.slice(0, 2).map((topic) => (
-                  <p key={topic} className="text-[0.68rem] text-brand-muted leading-snug">
-                    Topic: {topic}
+                  <p key={topic} className="text-[0.72rem] text-brand-navy/90 leading-snug">
+                    <span className="font-semibold text-brand-navy">Topic:</span> {topic}
                   </p>
                 ))}
               </div>
