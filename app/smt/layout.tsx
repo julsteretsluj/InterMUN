@@ -89,7 +89,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
               Follow
             </Link>
           </nav>
-          <SignOutButton className="text-white/90 hover:text-brand-gold-bright" />
+          <SignOutButton className="text-brand-navy hover:text-brand-gold-bright" />
         </div>
         {activeEvent ? (
           <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-brand-muted border-t border-brand-navy/10 pt-2">
