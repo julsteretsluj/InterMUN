@@ -95,8 +95,7 @@ export default async function AllocationPasswordsPage({
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
         Per-allocation <strong>codes</strong> for placards, binders, or handouts. Stored in
         plain text so you can copy this list—treat it like a seating chart (do not share
-        publicly). The <Link href="/chair/committee-access" className="text-brand-gold underline">committee password</Link> is separate and shared by all delegates for the secondary
-        sign-in.
+        publicly).
       </p>
 
       {list.length > 1 && (

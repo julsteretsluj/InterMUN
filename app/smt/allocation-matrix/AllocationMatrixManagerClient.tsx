@@ -93,6 +93,25 @@ export function AllocationMatrixManagerClient({
     });
   }
 
+  function onQuickAddChairSeat(label: "Head Chair" | "Co-chair") {
+    if (!selectedConferenceId) return;
+    setError(null);
+    setMessage(null);
+    startTransition(async () => {
+      const fd = new FormData();
+      fd.set("conference_id", selectedConferenceId);
+      fd.set("country", label);
+      fd.set("code", "");
+      const res = await smtAddAllocationRow(fd);
+      if ("error" in res && res.error) {
+        flash(null, res.error);
+        return;
+      }
+      flash(`Added ${label} seat.`, null);
+      router.refresh();
+    });
+  }
+
   async function onUpdate(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
@@ -393,6 +412,24 @@ export function AllocationMatrixManagerClient({
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-3">
         <h2 className="font-display text-lg font-semibold text-brand-navy">Add one seat</h2>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => onQuickAddChairSeat("Head Chair")}
+            disabled={pending}
+            className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+          >
+            Add Head Chair allocation
+          </button>
+          <button
+            type="button"
+            onClick={() => onQuickAddChairSeat("Co-chair")}
+            disabled={pending}
+            className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+          >
+            Add Co-chair allocation
+          </button>
+        </div>
         <form onSubmit={onAdd} className="flex flex-wrap gap-2 items-end">
           <input type="hidden" name="conference_id" value={selectedConferenceId} />
           <div>

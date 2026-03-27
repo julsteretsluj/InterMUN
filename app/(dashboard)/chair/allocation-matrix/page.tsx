@@ -6,6 +6,7 @@ import {
   approveAllocationSignupRequestAction,
   rejectAllocationSignupRequestAction,
 } from "@/app/actions/allocationSignup";
+import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
 
 type AllocationRow = {
   id: string;
@@ -162,6 +163,11 @@ export default async function ChairAllocationMatrixPage() {
           </tbody>
         </table>
       </div>
+
+      <ChairDelegateApprovalByEmailForm
+        conferenceId={activeConf.id}
+        allocationOptions={rows.map((r) => ({ id: r.id, country: r.country, user_id: r.user_id }))}
+      />
 
       <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
         <h2 className="font-display text-lg font-semibold text-brand-navy">

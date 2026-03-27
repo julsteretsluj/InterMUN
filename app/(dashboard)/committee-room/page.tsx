@@ -69,6 +69,7 @@ export default async function CommitteeRoomPage() {
         canManageSeats={canManageSeats}
         staffAllocations={payload.staffAllocations}
         delegates={payload.delegates}
+        chairs={(chairProfiles ?? []).map((c) => ({ id: c.id, name: c.name ?? "Chair" }))}
       />
     </MunPageShell>
   );

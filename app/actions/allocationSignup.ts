@@ -217,3 +217,34 @@ export async function rejectAllocationSignupRequestAction(
   revalidatePath("/chair/allocation-matrix");
   revalidatePath("/smt/allocation-matrix");
 }
+
+export async function chairAssignDelegateByEmailAction(
+  _prevState: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  const conferenceId = String(formData.get("conference_id") ?? "").trim();
+  const allocationId = String(formData.get("allocation_id") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+
+  if (!conferenceId || !allocationId || !email) {
+    return { error: "Conference, allocation, and delegate email are required." };
+  }
+
+  const { supabase, user } = await getAuthedProfile();
+  if (!user) return { error: "You must be signed in." };
+
+  const { error } = await supabase.rpc("chair_assign_delegate_by_email", {
+    p_conference_id: conferenceId,
+    p_allocation_id: allocationId,
+    p_email: email,
+  });
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/chair/allocation-matrix");
+  revalidatePath("/smt/allocation-matrix");
+  revalidatePath("/profile");
+  revalidatePath("/committee-room");
+  return { success: true };
+}

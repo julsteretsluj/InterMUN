@@ -4,6 +4,51 @@ import { createClient } from "@/lib/supabase/server";
 import { AWARD_CATEGORIES, type AwardScope } from "@/lib/awards";
 import { revalidatePath } from "next/cache";
 
+type NominationType =
+  | "committee_best_delegate"
+  | "committee_best_position_paper"
+  | "conference_best_delegate";
+
+const RUBRIC_KEYS: Record<NominationType, string[]> = {
+  committee_best_delegate: [
+    "creativity",
+    "diplomacy",
+    "collaboration",
+    "leadership",
+    "knowledge_research",
+    "participation",
+  ],
+  conference_best_delegate: [
+    "creativity",
+    "diplomacy",
+    "collaboration",
+    "leadership",
+    "knowledge_research",
+    "participation",
+  ],
+  committee_best_position_paper: [
+    "research_depth",
+    "country_stance_alignment",
+    "policy_accuracy",
+    "proposed_solutions",
+    "formatting_style_citations",
+  ],
+};
+
+function parseRubricScores(formData: FormData, nominationType: NominationType) {
+  const keys = RUBRIC_KEYS[nominationType];
+  const out: Record<string, number> = {};
+  for (const key of keys) {
+    const raw = String(formData.get(`score_${key}`) ?? "").trim();
+    const n = Number(raw);
+    if (!Number.isInteger(n) || n < 1 || n > 8) {
+      return null;
+    }
+    out[key] = n;
+  }
+  return out;
+}
+
 async function requireChairOrSmt() {
   const supabase = await createClient();
   const {
@@ -133,6 +178,8 @@ export async function submitChairTopNominationAction(
     nominationType === "conference_best_delegate";
   if (!committeeId || !nomineeId || !rank || !validNominationType) return;
   if (nominationType === "conference_best_delegate" && rank !== 1) return;
+  const rubricScores = parseRubricScores(formData, nominationType as NominationType);
+  if (!rubricScores) return;
 
   const { data: canManage } = await auth.supabase
     .from("allocations")
@@ -177,6 +224,7 @@ export async function submitChairTopNominationAction(
       .update({
         nominee_profile_id: nomineeId,
         evidence_note: evidence || null,
+        rubric_scores: rubricScores,
         nomination_type: nominationType,
         created_by: auth.user.id,
         updated_at: new Date().toISOString(),
@@ -190,6 +238,7 @@ export async function submitChairTopNominationAction(
       nomination_type: nominationType,
       rank,
       evidence_note: evidence || null,
+      rubric_scores: rubricScores,
       created_by: auth.user.id,
       status: "pending",
     });

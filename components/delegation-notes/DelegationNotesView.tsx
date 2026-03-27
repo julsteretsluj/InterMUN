@@ -524,17 +524,17 @@ export function DelegationNotesView({
 
   return (
     <div className="space-y-6">
-      <div className="border border-brand-navy/10 rounded-xl p-4 bg-white/60">
-        <h3 className="font-semibold mb-3">Delegation notes</h3>
+      <div className="border border-brand-navy/25 rounded-xl p-4 bg-white">
+        <h3 className="font-semibold mb-3 text-brand-navy">Delegation notes</h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <label className="text-xs uppercase tracking-wider text-brand-muted font-medium">
+              <label className="text-xs uppercase tracking-wider text-brand-navy/80 font-semibold">
                 Topic
               </label>
               <select
-                className="ml-auto px-3 py-2 rounded-lg border border-brand-navy/15 bg-white text-brand-navy text-sm"
+                className="ml-auto px-3 py-2 rounded-lg border border-brand-navy/30 bg-white text-brand-navy text-sm"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value as NoteTopic)}
               >
@@ -546,13 +546,13 @@ export function DelegationNotesView({
             </div>
 
             <div className="flex items-start gap-3">
-              <label className="flex items-center gap-2 text-sm">
+              <label className="flex items-center gap-2 text-sm text-brand-navy">
                 <input
                   type="checkbox"
                   checked={concernFlag}
                   onChange={(e) => setConcernFlag(e.target.checked)}
                 />
-                <span className="text-brand-muted">Concern (auto placeholder)</span>
+                <span className="text-brand-navy/80">Concern (auto placeholder)</span>
               </label>
             </div>
 
@@ -560,7 +560,7 @@ export function DelegationNotesView({
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={canCompose ? "Write your note..." : "Only delegates/chairs can send notes."}
-              className="w-full h-28 px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-slate-600"
+              className="w-full h-28 px-3 py-2 border border-brand-navy/35 rounded-lg bg-white text-brand-navy placeholder:text-brand-navy/45"
               disabled={votingProcedureLocked}
             />
             {error ? (
@@ -574,7 +574,7 @@ export function DelegationNotesView({
                 type="button"
                 onClick={() => void createNote()}
                 disabled={!canCompose || sending}
-                className="px-4 py-2 rounded-lg border border-brand-navy/15 bg-brand-gold text-brand-navy font-medium disabled:opacity-50"
+                className="px-4 py-2 rounded-lg border border-brand-navy/30 bg-brand-gold text-brand-navy font-semibold disabled:opacity-50"
               >
                 {sending ? "Sending…" : "Send note"}
               </button>
@@ -585,8 +585,8 @@ export function DelegationNotesView({
                   ) : (
                     <>
                       Viewing forwarded notes (SMT inbox).{" "}
-                      <Link
-                        className="underline text-brand-gold"
+                  <Link
+                        className="underline text-brand-navy font-medium"
                         href={`/committee-gate?next=${encodeURIComponent(nextPathAfterVerification)}`}
                       >
                         Enter staff secondary password
@@ -600,15 +600,15 @@ export function DelegationNotesView({
           </div>
 
           <div className="space-y-3">
-            <p className="text-sm font-medium">Recipients</p>
+            <p className="text-sm font-semibold text-brand-navy">Recipients</p>
 
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-wider text-brand-muted">Delegations</p>
-              <div className="max-h-40 overflow-y-auto border rounded-lg p-2 bg-white/40">
+              <p className="text-xs uppercase tracking-wider text-brand-navy/80 font-semibold">Delegations</p>
+              <div className="max-h-40 overflow-y-auto border border-brand-navy/25 rounded-lg p-2 bg-white">
                 {allocationOptions.map((a) => {
                   const checked = selectedAllocationRecipientIds.includes(a.id);
                   return (
-                    <label key={a.id} className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer">
+                    <label key={a.id} className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-brand-navy">
                       <input
                         type="checkbox"
                         checked={checked}
@@ -631,20 +631,20 @@ export function DelegationNotesView({
                   );
                 })}
                 {allocationOptions.length === 0 ? (
-                  <p className="text-xs text-brand-muted p-1">No assigned delegations for this committee.</p>
+                  <p className="text-xs text-brand-navy/70 p-1">No assigned delegations for this committee.</p>
                 ) : null}
               </div>
               {isDelegate ? (
-                <p className="text-xs text-brand-muted">
+                <p className="text-xs text-brand-navy/75">
                   Targets are limited to assigned allocations only.
                 </p>
               ) : null}
             </div>
 
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-wider text-brand-muted">Chairs</p>
+              <p className="text-xs uppercase tracking-wider text-brand-navy/80 font-semibold">Chairs</p>
 
-              <label className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer">
+              <label className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-brand-navy">
                 <input
                   type="checkbox"
                   checked={anyChairRecipient}
@@ -662,14 +662,14 @@ export function DelegationNotesView({
                 <span>Any chair</span>
               </label>
 
-              <div className="max-h-32 overflow-y-auto border rounded-lg p-2 bg-white/40">
+              <div className="max-h-32 overflow-y-auto border border-brand-navy/25 rounded-lg p-2 bg-white">
                 {chairOptions.map((c) => {
                   const checked = selectedChairRecipientIds.includes(c.id);
                   return (
                     <label
                       key={c.id}
                       className={[
-                        "flex items-center gap-2 text-sm px-1 py-1 cursor-pointer",
+                        "flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-brand-navy",
                         anyChairRecipient ? "opacity-60 cursor-not-allowed" : "",
                       ].join(" ")}
                     >
@@ -694,7 +694,7 @@ export function DelegationNotesView({
                   );
                 })}
                 {chairOptions.length === 0 ? (
-                  <p className="text-xs text-brand-muted p-1">No chair profiles found.</p>
+                  <p className="text-xs text-brand-navy/70 p-1">No chair profiles found.</p>
                 ) : null}
               </div>
             </div>
@@ -702,20 +702,20 @@ export function DelegationNotesView({
         </div>
       </div>
 
-      <div className="border border-brand-navy/10 rounded-xl p-4 bg-white/60">
+      <div className="border border-brand-navy/25 rounded-xl p-4 bg-white">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-semibold">Notes list</h3>
-          <p className="text-xs text-brand-muted">
+          <h3 className="font-semibold text-brand-navy">Notes list</h3>
+          <p className="text-xs text-brand-navy/70">
             {notes.length} note{notes.length === 1 ? "" : "s"}
           </p>
         </div>
 
         {notes.length === 0 ? (
-          <p className="text-sm text-brand-muted mt-3">No notes yet.</p>
+          <p className="text-sm text-brand-navy/75 mt-3">No notes yet.</p>
         ) : (
           <div className="mt-3 space-y-3">
             {notes.map((n) => (
-              <div key={n.id} className="border border-brand-navy/10 rounded-xl p-3 bg-white/50">
+              <div key={n.id} className="border border-brand-navy/20 rounded-xl p-3 bg-white">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="text-xs uppercase tracking-wider text-brand-muted flex items-center gap-2">
@@ -737,8 +737,8 @@ export function DelegationNotesView({
                         <span className="ml-2 text-brand-gold font-medium">(forwarded)</span>
                       ) : null}
                     </div>
-                    <div className="mt-2 break-words whitespace-pre-wrap text-sm">{n.content}</div>
-                    <div className="mt-2 text-xs text-brand-muted">
+                    <div className="mt-2 break-words whitespace-pre-wrap text-sm text-brand-navy">{n.content}</div>
+                    <div className="mt-2 text-xs text-brand-navy/75">
                       To:{" "}
                       {n.recipients.length === 0
                         ? "—"
@@ -751,7 +751,7 @@ export function DelegationNotesView({
                       <button
                         type="button"
                         onClick={() => void toggleStar(n.id, !n.starred_by_me)}
-                        className="px-2.5 py-1 rounded-lg border border-brand-navy/15 text-xs bg-brand-cream hover:bg-brand-cream/70"
+                        className="px-2.5 py-1 rounded-lg border border-brand-navy/25 text-xs bg-brand-cream text-brand-navy hover:bg-brand-cream/80"
                       >
                         {n.starred_by_me ? "Starred" : "Star"}
                       </button>
@@ -760,7 +760,7 @@ export function DelegationNotesView({
                         type="button"
                         onClick={() => void forwardToSmt(n.id)}
                         disabled={n.forwarded_to_smt}
-                        className="px-2.5 py-1 rounded-lg border border-brand-navy/15 text-xs bg-white hover:bg-brand-paper/20 disabled:opacity-50"
+                        className="px-2.5 py-1 rounded-lg border border-brand-navy/25 text-xs bg-white text-brand-navy hover:bg-brand-paper/30 disabled:opacity-50"
                       >
                         {n.forwarded_to_smt ? "Forwarded" : "Forward to SMT"}
                       </button>
@@ -768,7 +768,7 @@ export function DelegationNotesView({
                       <button
                         type="button"
                         onClick={() => void reportNote(n.id)}
-                        className="px-2.5 py-1 rounded-lg border border-brand-navy/15 text-xs bg-white hover:bg-red-50"
+                        className="px-2.5 py-1 rounded-lg border border-brand-navy/25 text-xs bg-white text-brand-navy hover:bg-red-50"
                       >
                         Report
                       </button>

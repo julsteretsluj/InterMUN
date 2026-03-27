@@ -26,6 +26,7 @@ export function CommitteeRoomDigitalMUNClient({
   canManageSeats,
   staffAllocations,
   delegates,
+  chairs,
 }: {
   conferenceId: string;
   conferenceName: string;
@@ -43,6 +44,7 @@ export function CommitteeRoomDigitalMUNClient({
   canManageSeats: boolean;
   staffAllocations: StaffAllocationRow[];
   delegates: { id: string; name: string | null }[];
+  chairs: { id: string; name: string | null }[];
 }) {
   const role = myRole.toLowerCase();
   const isChairLike = role === "chair" || role === "admin";
@@ -199,7 +201,7 @@ export function CommitteeRoomDigitalMUNClient({
         </div>
 
         {canManageSeats ? (
-          <CommitteeRoomStaffControls allocations={staffAllocations} delegates={delegates} />
+          <CommitteeRoomStaffControls allocations={staffAllocations} delegates={delegates} chairs={chairs} />
         ) : null}
       </div>
     </div>

@@ -43,6 +43,61 @@ function daisFromChairNamesField(raw: string | null | undefined): DaisSeat[] | n
   ];
 }
 
+function daisFromChairAllocations(
+  allocationRows: {
+    country: string | null;
+    user_id: string | null;
+    display_name_override: string | null;
+    profiles: ProfileEmbed | ProfileEmbed[] | null;
+  }[]
+): DaisSeat[] | null {
+  function nameFromRow(
+    row:
+      | {
+          country: string | null;
+          user_id: string | null;
+          display_name_override: string | null;
+          profiles: ProfileEmbed | ProfileEmbed[] | null;
+        }
+      | undefined
+  ) {
+    if (!row || !row.user_id) return null;
+    const p = embedProfile(row.profiles);
+    const override = String(row.display_name_override ?? "").trim();
+    return override || p?.name?.trim() || null;
+  }
+  const byLabel = new Map(
+    allocationRows.map((r) => [String(r.country ?? "").trim().toLowerCase(), r] as const)
+  );
+  const head = byLabel.get("head chair");
+  const co = byLabel.get("co-chair") ?? byLabel.get("co chair");
+  if (!head && !co) return null;
+
+  const headProfile = embedProfile(head?.profiles ?? null);
+  const coProfile = embedProfile(co?.profiles ?? null);
+
+  return [
+    {
+      title: "Head Chair",
+      name: nameFromRow(head),
+      showGavel: true,
+      profileId: head?.user_id ?? null,
+    },
+    {
+      title: "Co-chair",
+      name: nameFromRow(co),
+      showGavel: true,
+      profileId: co?.user_id ?? null,
+    },
+    {
+      title: "Rapporteur",
+      name: null,
+      showGavel: true,
+      profileId: null,
+    },
+  ];
+}
+
 function placardsFromAllocationRows(
   allocationRows: {
     id: string;
@@ -110,7 +165,17 @@ export async function loadCommitteeRoomPayload(
     }[]
   );
 
-  let dais = daisFromChairNamesField(options.chairNamesHint);
+  let dais = daisFromChairAllocations(
+    rows as {
+      country: string | null;
+      user_id: string | null;
+      display_name_override: string | null;
+      profiles: ProfileEmbed | ProfileEmbed[] | null;
+    }[]
+  );
+  if (!dais) {
+    dais = daisFromChairNamesField(options.chairNamesHint);
+  }
   if (!dais) {
     const { data: staff } = await supabase
       .from("profiles")

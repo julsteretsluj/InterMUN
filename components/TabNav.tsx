@@ -16,7 +16,6 @@ import {
   ClipboardList,
   Flag,
   Landmark,
-  KeyRound,
   ListOrdered,
   DoorOpen,
   PanelsTopLeft,
@@ -50,11 +49,6 @@ export function TabNav({ staffRole = null }: { staffRole?: UserRole | null }) {
     staffRole === "chair" || staffRole === "smt" || staffRole === "admin"
       ? [
           ...BASE_TABS.slice(0, 3),
-          {
-            href: "/chair/committee-access",
-            label: "Committee access",
-            icon: KeyRound,
-          },
           {
             href: "/chair/room-code",
             label: "Committee code",

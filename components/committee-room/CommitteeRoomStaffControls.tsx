@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 type DelegateOption = { id: string; name: string | null };
+type ChairOption = { id: string; name: string | null };
 
 type AllocationRow = {
   id: string;
@@ -18,9 +19,11 @@ type AllocationRow = {
 export function CommitteeRoomStaffControls({
   allocations,
   delegates,
+  chairs,
 }: {
   allocations: AllocationRow[];
   delegates: DelegateOption[];
+  chairs: ChairOption[];
 }) {
   const supabase = createClient();
   const router = useRouter();
@@ -29,6 +32,15 @@ export function CommitteeRoomStaffControls({
     () => delegates.slice().sort((a, b) => (a.name || "").localeCompare(b.name || "")),
     [delegates]
   );
+  const chairOptions = useMemo(
+    () => chairs.slice().sort((a, b) => (a.name || "").localeCompare(b.name || "")),
+    [chairs]
+  );
+
+  function isChairSeat(country: string | null) {
+    const k = (country ?? "").trim().toLowerCase();
+    return k === "head chair" || k === "co-chair" || k === "co chair";
+  }
 
   const [drafts, setDrafts] = useState<Record<string, {
     user_id: string | null;
@@ -109,7 +121,7 @@ export function CommitteeRoomStaffControls({
                       className="w-full px-2 py-1 rounded border border-brand-navy/15 bg-white text-sm"
                     >
                       <option value="">Vacant</option>
-                      {delegateOptions.map((opt) => (
+                      {(isChairSeat(a.country) ? chairOptions : delegateOptions).map((opt) => (
                         <option key={opt.id} value={opt.id}>
                           {opt.name || opt.id}
                         </option>
