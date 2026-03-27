@@ -75,6 +75,15 @@ export default async function SmtAllocationMatrixPage({
     const allCodeById = new Map(
       (allCodes ?? []).map((c) => [c.allocation_id, c.code ?? null])
     );
+    const allUserIds = [
+      ...new Set((allAllocs ?? []).map((a) => a.user_id).filter((id): id is string => Boolean(id))),
+    ];
+    const { data: allProfiles } = allUserIds.length
+      ? await supabase.from("profiles").select("id, role, name").in("id", allUserIds)
+      : { data: [] as { id: string; role: string | null; name: string | null }[] };
+    const allProfileById = new Map(
+      (allProfiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
+    );
 
     overallRows = (allAllocs ?? []).map((a) => {
       const meta = conferenceMap.get(a.conference_id);
@@ -85,6 +94,8 @@ export default async function SmtAllocationMatrixPage({
         topic: meta?.topic ?? "Session",
         country: a.country,
         user_id: a.user_id,
+        linked_role: a.user_id ? (allProfileById.get(a.user_id)?.role ?? null) : null,
+        linked_name: a.user_id ? (allProfileById.get(a.user_id)?.name ?? null) : null,
         code: allCodeById.get(a.id) ?? null,
       };
     });
@@ -103,10 +114,21 @@ export default async function SmtAllocationMatrixPage({
       : { data: [] as { allocation_id: string; code: string | null }[] };
 
     const codeById = new Map((codes ?? []).map((c) => [c.allocation_id, c.code ?? null]));
+    const userIds = [
+      ...new Set((allocs ?? []).map((a) => a.user_id).filter((id): id is string => Boolean(id))),
+    ];
+    const { data: profiles } = userIds.length
+      ? await supabase.from("profiles").select("id, role, name").in("id", userIds)
+      : { data: [] as { id: string; role: string | null; name: string | null }[] };
+    const profileById = new Map(
+      (profiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
+    );
     rows = (allocs ?? []).map((a) => ({
       id: a.id,
       country: a.country,
       user_id: a.user_id,
+      linked_role: a.user_id ? (profileById.get(a.user_id)?.role ?? null) : null,
+      linked_name: a.user_id ? (profileById.get(a.user_id)?.name ?? null) : null,
       code: codeById.get(a.id) ?? null,
     }));
   }

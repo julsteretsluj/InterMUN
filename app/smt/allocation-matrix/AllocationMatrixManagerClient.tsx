@@ -17,6 +17,8 @@ export type MatrixRow = {
   id: string;
   country: string;
   user_id: string | null;
+  linked_role: string | null;
+  linked_name: string | null;
   code: string | null;
 };
 
@@ -27,6 +29,8 @@ export type MatrixOverallRow = {
   topic: string;
   country: string;
   user_id: string | null;
+  linked_role: string | null;
+  linked_name: string | null;
   code: string | null;
 };
 
@@ -61,6 +65,14 @@ export function AllocationMatrixManagerClient({
 
   function signupHref(conferenceId: string, allocationId: string) {
     return `/allocation-signup?conference=${encodeURIComponent(conferenceId)}&allocation=${encodeURIComponent(allocationId)}&next=${encodeURIComponent("/profile")}`;
+  }
+
+  function linkedLabel(row: { user_id: string | null; linked_role: string | null; linked_name: string | null }) {
+    if (!row.user_id) return "Open";
+    const role = row.linked_role?.trim().toLowerCase();
+    const roleLabel = role === "chair" ? "Chair" : role === "delegate" ? "Delegate" : "Linked";
+    const name = row.linked_name?.trim();
+    return name ? `${roleLabel}: ${name}` : roleLabel;
   }
 
   async function onAdd(e: React.FormEvent<HTMLFormElement>) {
@@ -200,7 +212,7 @@ export function AllocationMatrixManagerClient({
                 <th className="px-3 py-2">Topic</th>
                 <th className="px-3 py-2">Country / position</th>
                 <th className="px-3 py-2">Placard code</th>
-                <th className="px-3 py-2">Delegate</th>
+                <th className="px-3 py-2">Assigned account</th>
                 <th className="px-3 py-2">Sign-up link</th>
               </tr>
             </thead>
@@ -220,9 +232,7 @@ export function AllocationMatrixManagerClient({
                     <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
                       {r.code?.trim() ? r.code : "—"}
                     </td>
-                    <td className="px-3 py-2 text-xs text-brand-muted">
-                      {r.user_id ? "Linked" : "Open"}
-                    </td>
+                    <td className="px-3 py-2 text-xs text-brand-muted">{linkedLabel(r)}</td>
                     <td className="px-3 py-2">
                       <a
                         href={signupHref(r.conference_id, r.id)}
@@ -286,7 +296,7 @@ export function AllocationMatrixManagerClient({
               <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
                 <th className="px-3 py-2">Country / position</th>
                 <th className="px-3 py-2">Placard code</th>
-                <th className="px-3 py-2">Delegate</th>
+                <th className="px-3 py-2">Assigned account</th>
                 <th className="px-3 py-2">Sign-up link</th>
                 <th className="px-3 py-2 w-[120px]">Actions</th>
               </tr>
@@ -308,7 +318,7 @@ export function AllocationMatrixManagerClient({
                         <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
                           {r.code?.trim() ? r.code : "—"}
                         </td>
-                        <td className="px-3 py-2 text-xs text-amber-800/90">Linked</td>
+                        <td className="px-3 py-2 text-xs text-amber-800/90">{linkedLabel(r)}</td>
                         <td className="px-3 py-2">
                           <a
                             href={signupHref(selectedConferenceId, r.id)}
@@ -343,7 +353,7 @@ export function AllocationMatrixManagerClient({
                           className="w-full min-w-[88px] px-2 py-1 rounded border border-brand-navy/15 font-mono text-xs"
                         />
                       </td>
-                      <td className="px-3 py-2 text-xs text-brand-muted">Open</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted">{linkedLabel(r)}</td>
                       <td className="px-3 py-2">
                         <a
                           href={signupHref(selectedConferenceId, r.id)}

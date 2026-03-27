@@ -12,6 +12,8 @@ type AllocationRow = {
   conference_id: string;
   country: string;
   user_id: string | null;
+  linked_role: string | null;
+  linked_name: string | null;
 };
 
 type SignupRequestRow = {
@@ -71,7 +73,21 @@ export default async function ChairAllocationMatrixPage() {
     .eq("conference_id", activeConf.id)
     .order("country", { ascending: true });
 
-  const rows = (allocData ?? []) as AllocationRow[];
+  const rawRows = (allocData ?? []) as Omit<AllocationRow, "linked_role" | "linked_name">[];
+  const userIds = [
+    ...new Set(rawRows.map((r) => r.user_id).filter((id): id is string => Boolean(id))),
+  ];
+  const { data: profiles } = userIds.length
+    ? await supabase.from("profiles").select("id, role, name").in("id", userIds)
+    : { data: [] as { id: string; role: string | null; name: string | null }[] };
+  const profileById = new Map(
+    (profiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
+  );
+  const rows: AllocationRow[] = rawRows.map((r) => ({
+    ...r,
+    linked_role: r.user_id ? (profileById.get(r.user_id)?.role ?? null) : null,
+    linked_name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
+  }));
   const ids = rows.map((r) => r.id);
 
   const { data: codeRows } = ids.length
@@ -107,7 +123,7 @@ export default async function ChairAllocationMatrixPage() {
             <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
               <th className="px-3 py-2">Country / position</th>
               <th className="px-3 py-2">Placard code</th>
-              <th className="px-3 py-2">Delegate</th>
+              <th className="px-3 py-2">Assigned account</th>
               <th className="px-3 py-2">Sign-up link</th>
             </tr>
           </thead>
@@ -126,7 +142,11 @@ export default async function ChairAllocationMatrixPage() {
                     {codeById.get(r.id)?.trim() ? codeById.get(r.id) : "—"}
                   </td>
                   <td className="px-3 py-2 text-xs text-brand-muted">
-                    {r.user_id ? "Linked" : "Open"}
+                    {r.user_id
+                      ? `${r.linked_role?.trim().toLowerCase() === "chair" ? "Chair" : "Delegate"}${
+                          r.linked_name?.trim() ? `: ${r.linked_name.trim()}` : ""
+                        }`
+                      : "Open"}
                   </td>
                   <td className="px-3 py-2">
                     <a
