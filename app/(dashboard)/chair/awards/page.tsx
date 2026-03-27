@@ -48,8 +48,10 @@ export default async function ChairAwardsPage() {
       .order("country", { ascending: true }),
     supabase
       .from("award_nominations")
-      .select("id, rank, evidence_note, status, nominee_profile_id, profiles(name)")
+      .select("id, nomination_type, rank, evidence_note, status, nominee_profile_id, profiles(name)")
       .eq("committee_conference_id", activeConf.id)
+      .eq("status", "pending")
+      .order("nomination_type", { ascending: true })
       .order("rank", { ascending: true }),
   ]);
 
@@ -73,6 +75,7 @@ export default async function ChairAwardsPage() {
 
   type NomRow = {
     id: string;
+    nomination_type: "committee_best_delegate" | "committee_best_position_paper" | "conference_best_delegate";
     rank: number;
     evidence_note: string | null;
     status: string;
@@ -80,7 +83,35 @@ export default async function ChairAwardsPage() {
     profiles: { name: string | null } | { name: string | null }[] | null;
   };
   const nominationRows = (nominations ?? []) as NomRow[];
-  const nominationByRank = new Map(nominationRows.map((n) => [n.rank, n]));
+  const nominationByKey = new Map(
+    nominationRows.map((n) => [`${n.nomination_type}:${n.rank}`, n] as const)
+  );
+
+  const nominationTypes: {
+    id: NomRow["nomination_type"];
+    label: string;
+    slots: number[];
+    helper: string;
+  }[] = [
+    {
+      id: "committee_best_delegate",
+      label: "Best Delegate (committee)",
+      slots: [1, 2],
+      helper: "Submit Top 2 contenders for committee best delegate.",
+    },
+    {
+      id: "committee_best_position_paper",
+      label: "Best Position Paper (committee)",
+      slots: [1, 2],
+      helper: "Submit Top 2 position papers for SMT review.",
+    },
+    {
+      id: "conference_best_delegate",
+      label: "Best Delegate (overall conference)",
+      slots: [1],
+      helper: "Submit your single strongest overall candidate from this committee.",
+    },
+  ];
 
   return (
     <MunPageShell title="Awards nomination (chair)">
@@ -93,55 +124,63 @@ export default async function ChairAwardsPage() {
           Committee: {[activeConf.name, activeConf.committee].filter(Boolean).join(" — ")}
         </p>
 
-        {[1, 2].map((rank) => {
-          const existing = nominationByRank.get(rank);
-          const selectedId = existing?.nominee_profile_id ?? "";
-          return (
-            <form
-              key={rank}
-              action={submitChairTopNominationAction}
-              className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5 space-y-3"
-            >
-              <input type="hidden" name="committee_conference_id" value={activeConf.id} />
-              <input type="hidden" name="rank" value={String(rank)} />
-              <h3 className="font-display text-lg font-semibold text-brand-navy">Top {rank}</h3>
-              <label className="block text-sm">
-                <span className="text-brand-muted text-xs uppercase">Nominee</span>
-                <select
-                  name="nominee_profile_id"
-                  defaultValue={selectedId}
-                  required
-                  className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white"
-                >
-                  <option value="" disabled>
-                    Select delegate
-                  </option>
-                  {options.map((o) => (
-                    <option key={`${rank}-${o.userId}`} value={o.userId}>
-                      {o.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="block text-sm">
-                <span className="text-brand-muted text-xs uppercase">Statement of confirmation / evidence</span>
-                <textarea
-                  name="evidence_note"
-                  defaultValue={existing?.evidence_note ?? ""}
-                  rows={4}
-                  className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
-                  placeholder="Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions)."
-                />
-              </label>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy font-medium"
-              >
-                Save top {rank}
-              </button>
-            </form>
-          );
-        })}
+        {nominationTypes.map((type) => (
+          <section
+            key={type.id}
+            className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5 space-y-4"
+          >
+            <div>
+              <h3 className="font-display text-lg font-semibold text-brand-navy">{type.label}</h3>
+              <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
+            </div>
+            {type.slots.map((rank) => {
+              const existing = nominationByKey.get(`${type.id}:${rank}`);
+              const selectedId = existing?.nominee_profile_id ?? "";
+              return (
+                <form key={`${type.id}-${rank}`} action={submitChairTopNominationAction} className="space-y-3">
+                  <input type="hidden" name="committee_conference_id" value={activeConf.id} />
+                  <input type="hidden" name="nomination_type" value={type.id} />
+                  <input type="hidden" name="rank" value={String(rank)} />
+                  <h4 className="text-sm font-semibold text-brand-navy">Top {rank}</h4>
+                  <label className="block text-sm">
+                    <span className="text-brand-muted text-xs uppercase">Nominee</span>
+                    <select
+                      name="nominee_profile_id"
+                      defaultValue={selectedId}
+                      required
+                      className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white"
+                    >
+                      <option value="" disabled>
+                        Select delegate
+                      </option>
+                      {options.map((o) => (
+                        <option key={`${type.id}-${rank}-${o.userId}`} value={o.userId}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="block text-sm">
+                    <span className="text-brand-muted text-xs uppercase">Statement of confirmation / evidence</span>
+                    <textarea
+                      name="evidence_note"
+                      defaultValue={existing?.evidence_note ?? ""}
+                      rows={3}
+                      className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+                      placeholder="Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions)."
+                    />
+                  </label>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy font-medium"
+                  >
+                    Save {type.label} top {rank}
+                  </button>
+                </form>
+              );
+            })}
+          </section>
+        ))}
       </div>
     </MunPageShell>
   );

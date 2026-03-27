@@ -124,9 +124,15 @@ export async function submitChairTopNominationAction(
   const nomineeId = String(formData.get("nominee_profile_id") ?? "").trim();
   const rankRaw = Number(String(formData.get("rank") ?? "0"));
   const rank = rankRaw === 1 ? 1 : rankRaw === 2 ? 2 : 0;
+  const nominationType = String(formData.get("nomination_type") ?? "").trim();
   const evidence = String(formData.get("evidence_note") ?? "").trim();
 
-  if (!committeeId || !nomineeId || !rank) return;
+  const validNominationType =
+    nominationType === "committee_best_delegate" ||
+    nominationType === "committee_best_position_paper" ||
+    nominationType === "conference_best_delegate";
+  if (!committeeId || !nomineeId || !rank || !validNominationType) return;
+  if (nominationType === "conference_best_delegate" && rank !== 1) return;
 
   const { data: canManage } = await auth.supabase
     .from("allocations")
@@ -160,6 +166,7 @@ export async function submitChairTopNominationAction(
     .from("award_nominations")
     .select("id")
     .eq("committee_conference_id", committeeId)
+    .eq("nomination_type", nominationType)
     .eq("rank", rank)
     .eq("status", "pending")
     .maybeSingle();
@@ -170,6 +177,7 @@ export async function submitChairTopNominationAction(
       .update({
         nominee_profile_id: nomineeId,
         evidence_note: evidence || null,
+        nomination_type: nominationType,
         created_by: auth.user.id,
         updated_at: new Date().toISOString(),
       })
@@ -179,6 +187,7 @@ export async function submitChairTopNominationAction(
     const { error } = await auth.supabase.from("award_nominations").insert({
       committee_conference_id: committeeId,
       nominee_profile_id: nomineeId,
+      nomination_type: nominationType,
       rank,
       evidence_note: evidence || null,
       created_by: auth.user.id,
@@ -204,18 +213,30 @@ export async function promoteNominationToAwardAction(
   if (
     category !== "committee_best_delegate" &&
     category !== "committee_honourable_mention" &&
-    category !== "committee_best_position_paper"
+    category !== "committee_best_position_paper" &&
+    category !== "conference_best_delegate"
   ) {
     return;
   }
 
   const { data: nomination } = await auth.supabase
     .from("award_nominations")
-    .select("id, committee_conference_id, nominee_profile_id, rank, evidence_note, status")
+    .select("id, committee_conference_id, nominee_profile_id, nomination_type, rank, evidence_note, status")
     .eq("id", nominationId)
     .maybeSingle();
   if (!nomination) return;
   if (nomination.status !== "pending") return;
+
+  if (nomination.nomination_type === "conference_best_delegate" && category !== "conference_best_delegate") {
+    return;
+  }
+  if (
+    (nomination.nomination_type === "committee_best_delegate" ||
+      nomination.nomination_type === "committee_best_position_paper") &&
+    category === "conference_best_delegate"
+  ) {
+    return;
+  }
 
   const sortOrder = category === "committee_honourable_mention" ? nomination.rank : 0;
   const payload = {
@@ -229,7 +250,11 @@ export async function promoteNominationToAwardAction(
   };
 
   let assignmentId: string | null = null;
-  if (category === "committee_best_delegate" || category === "committee_best_position_paper") {
+  if (
+    category === "committee_best_delegate" ||
+    category === "committee_best_position_paper" ||
+    category === "conference_best_delegate"
+  ) {
     const { data: existing } = await auth.supabase
       .from("award_assignments")
       .select("id")
