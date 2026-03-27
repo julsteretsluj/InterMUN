@@ -20,13 +20,25 @@ export type MatrixRow = {
   code: string | null;
 };
 
+export type MatrixOverallRow = {
+  id: string;
+  conference_id: string;
+  committee: string;
+  topic: string;
+  country: string;
+  user_id: string | null;
+  code: string | null;
+};
+
 export function AllocationMatrixManagerClient({
   conferences,
   selectedConferenceId,
+  overallRows,
   rows,
 }: {
   conferences: { id: string; name: string; committee: string | null }[];
   selectedConferenceId: string | null;
+  overallRows: MatrixOverallRow[];
   rows: MatrixRow[];
 }) {
   const router = useRouter();
@@ -45,6 +57,10 @@ export function AllocationMatrixManagerClient({
 
   function onConferenceChange(id: string) {
     router.push(`/smt/allocation-matrix?conference=${encodeURIComponent(id)}`);
+  }
+
+  function signupHref(conferenceId: string, allocationId: string) {
+    return `/allocation-signup?conference=${encodeURIComponent(conferenceId)}&allocation=${encodeURIComponent(allocationId)}&next=${encodeURIComponent("/profile")}`;
   }
 
   async function onAdd(e: React.FormEvent<HTMLFormElement>) {
@@ -168,6 +184,61 @@ export function AllocationMatrixManagerClient({
 
   return (
     <div className="space-y-8">
+      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
+        <h2 className="font-display text-lg font-semibold text-brand-navy">
+          Overall allocation matrix (all committees)
+        </h2>
+        <p className="text-xs text-brand-muted">
+          {overallRows.length} seat{overallRows.length === 1 ? "" : "s"} across{" "}
+          {conferences.length} session{conferences.length === 1 ? "" : "s"}.
+        </p>
+        <div className="overflow-x-auto rounded-lg border border-brand-navy/10 max-h-[26rem]">
+          <table className="w-full text-sm">
+            <thead className="sticky top-0">
+              <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
+                <th className="px-3 py-2">Committee</th>
+                <th className="px-3 py-2">Topic</th>
+                <th className="px-3 py-2">Country / position</th>
+                <th className="px-3 py-2">Placard code</th>
+                <th className="px-3 py-2">Delegate</th>
+                <th className="px-3 py-2">Sign-up link</th>
+              </tr>
+            </thead>
+            <tbody>
+              {overallRows.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
+                    No allocation rows found for the active event.
+                  </td>
+                </tr>
+              ) : (
+                overallRows.map((r) => (
+                  <tr key={r.id} className="border-t border-brand-navy/5">
+                    <td className="px-3 py-2 font-medium text-brand-navy">{r.committee}</td>
+                    <td className="px-3 py-2 text-brand-navy/85">{r.topic}</td>
+                    <td className="px-3 py-2">{r.country}</td>
+                    <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
+                      {r.code?.trim() ? r.code : "—"}
+                    </td>
+                    <td className="px-3 py-2 text-xs text-brand-muted">
+                      {r.user_id ? "Linked" : "Open"}
+                    </td>
+                    <td className="px-3 py-2">
+                      <a
+                        href={signupHref(r.conference_id, r.id)}
+                        className="text-xs text-brand-gold hover:underline break-all"
+                      >
+                        Allocation sign-up link
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <div className="flex flex-col sm:flex-row sm:items-end gap-4 flex-wrap">
         <div>
           <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
@@ -216,13 +287,14 @@ export function AllocationMatrixManagerClient({
                 <th className="px-3 py-2">Country / position</th>
                 <th className="px-3 py-2">Placard code</th>
                 <th className="px-3 py-2">Delegate</th>
+                <th className="px-3 py-2">Sign-up link</th>
                 <th className="px-3 py-2 w-[120px]">Actions</th>
               </tr>
             </thead>
             <tbody>
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-3 py-6 text-center text-brand-muted">
+                  <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
                     No seats yet. Add rows or import a CSV.
                   </td>
                 </tr>
@@ -237,6 +309,14 @@ export function AllocationMatrixManagerClient({
                           {r.code?.trim() ? r.code : "—"}
                         </td>
                         <td className="px-3 py-2 text-xs text-amber-800/90">Linked</td>
+                        <td className="px-3 py-2">
+                          <a
+                            href={signupHref(selectedConferenceId, r.id)}
+                            className="text-xs text-brand-gold hover:underline break-all"
+                          >
+                            Allocation sign-up link
+                          </a>
+                        </td>
                         <td className="px-3 py-2 text-xs text-brand-muted">—</td>
                       </tr>
                     );
@@ -264,6 +344,14 @@ export function AllocationMatrixManagerClient({
                         />
                       </td>
                       <td className="px-3 py-2 text-xs text-brand-muted">Open</td>
+                      <td className="px-3 py-2">
+                        <a
+                          href={signupHref(selectedConferenceId, r.id)}
+                          className="text-xs text-brand-gold hover:underline break-all"
+                        >
+                          Allocation sign-up link
+                        </a>
+                      </td>
                       <td className="px-3 py-2">
                         <div className="flex flex-wrap gap-2">
                           <button

@@ -30,12 +30,14 @@ interface ProfileFormProps {
   profile: Profile | null;
   userId: string;
   canViewPrivate: boolean;
+  availableAllocations: string[];
 }
 
 export function ProfileForm({
   profile,
   userId,
   canViewPrivate,
+  availableAllocations,
 }: ProfileFormProps) {
   const [profilePictureUrl, setProfilePictureUrl] = useState(
     profile?.profile_picture_url || ""
@@ -291,11 +293,25 @@ export function ProfileForm({
       )}
       <div>
         <label className="block text-sm font-medium mb-1">Allocation</label>
-        <input
-          {...register("allocation")}
-          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
-          placeholder="e.g. United Kingdom"
-        />
+        {availableAllocations.length > 0 ? (
+          <select
+            {...register("allocation")}
+            className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600"
+          >
+            <option value="">Select allocation</option>
+            {availableAllocations.map((allocation) => (
+              <option key={allocation} value={allocation}>
+                {allocation}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <input
+            {...register("allocation")}
+            className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
+            placeholder="No committee allocations available"
+          />
+        )}
       </div>
       {errors.conferences_attended && (
         <p className="text-sm text-red-600">{errors.conferences_attended.message}</p>

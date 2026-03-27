@@ -75,6 +75,11 @@ export function TabNav({ staffRole = null }: { staffRole?: UserRole | null }) {
             icon: ListOrdered,
           },
           {
+            href: "/chair/allocation-matrix",
+            label: "Allocation matrix",
+            icon: ListOrdered,
+          },
+          {
             href: "/chair/awards",
             label: "Awards",
             icon: Trophy,

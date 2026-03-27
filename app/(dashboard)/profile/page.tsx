@@ -5,6 +5,7 @@ import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
 import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
+import { getConferenceForDashboard } from "@/lib/active-conference";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -57,6 +58,23 @@ export default async function ProfilePage() {
 
   const isDelegate = roleLower === "delegate";
   const canViewPrivate = !isDelegate;
+  const activeConference = await getConferenceForDashboard({ role: roleLower });
+
+  const { data: allocationRows } = activeConference?.id
+    ? await supabase
+        .from("allocations")
+        .select("country")
+        .eq("conference_id", activeConference.id)
+        .order("country", { ascending: true })
+    : { data: [] as { country: string }[] };
+
+  const availableAllocations = [
+    ...new Set(
+      (allocationRows ?? [])
+        .map((row) => row.country?.trim())
+        .filter((value): value is string => Boolean(value))
+    ),
+  ];
 
   const delegateWelcome = isDelegate ? (
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
@@ -132,6 +150,7 @@ export default async function ProfilePage() {
         profile={profile}
         userId={user.id}
         canViewPrivate={!!canViewPrivate}
+        availableAllocations={availableAllocations}
       />
     </MunPageShell>
   );

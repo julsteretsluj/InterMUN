@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
+import { formatCommitteeCardTitle } from "@/lib/committee-card-display";
 import {
   AllocationMatrixManagerClient,
   type MatrixRow,
+  type MatrixOverallRow,
 } from "./AllocationMatrixManagerClient";
 
 export default async function SmtAllocationMatrixPage({
@@ -43,6 +45,51 @@ export default async function SmtAllocationMatrixPage({
       : list[0]?.id ?? null;
 
   let rows: MatrixRow[] = [];
+  let overallRows: MatrixOverallRow[] = [];
+  const conferenceMap = new Map(
+    list.map((c) => [
+      c.id,
+      {
+        topic: c.name,
+        committee: formatCommitteeCardTitle(null, c.committee),
+      },
+    ])
+  );
+
+  if (list.length > 0) {
+    const conferenceIds = list.map((c) => c.id);
+    const { data: allAllocs } = await supabase
+      .from("allocations")
+      .select("id, conference_id, country, user_id")
+      .in("conference_id", conferenceIds)
+      .order("country", { ascending: true });
+
+    const allIds = (allAllocs ?? []).map((a) => a.id);
+    const { data: allCodes } = allIds.length
+      ? await supabase
+          .from("allocation_gate_codes")
+          .select("allocation_id, code")
+          .in("allocation_id", allIds)
+      : { data: [] as { allocation_id: string; code: string | null }[] };
+
+    const allCodeById = new Map(
+      (allCodes ?? []).map((c) => [c.allocation_id, c.code ?? null])
+    );
+
+    overallRows = (allAllocs ?? []).map((a) => {
+      const meta = conferenceMap.get(a.conference_id);
+      return {
+        id: a.id,
+        conference_id: a.conference_id,
+        committee: meta?.committee ?? "Committee",
+        topic: meta?.topic ?? "Session",
+        country: a.country,
+        user_id: a.user_id,
+        code: allCodeById.get(a.id) ?? null,
+      };
+    });
+  }
+
   if (selectedConferenceId) {
     const { data: allocs } = await supabase
       .from("allocations")
@@ -74,6 +121,7 @@ export default async function SmtAllocationMatrixPage({
       <AllocationMatrixManagerClient
         conferences={list}
         selectedConferenceId={selectedConferenceId}
+        overallRows={overallRows}
         rows={rows}
       />
     </div>

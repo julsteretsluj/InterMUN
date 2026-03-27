@@ -10,13 +10,14 @@ import { getConferenceForDashboard } from "@/lib/active-conference";
 export default async function CommitteeGatePage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; allocation?: string }>;
 }) {
-  const { next: nextRaw } = await searchParams;
+  const { next: nextRaw, allocation: allocationRaw } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//")
       ? nextRaw
       : "/profile";
+  const allocationPrefill = String(allocationRaw ?? "").trim();
 
   const supabase = await createClient();
   const {
@@ -69,6 +70,12 @@ export default async function CommitteeGatePage({
         .filter((c): c is string => Boolean(c))
     ),
   ];
+  const preselectedAllocation =
+    allocationPrefill.length > 0
+      ? allocationChoices.find(
+          (choice) => choice.trim().toLowerCase() === allocationPrefill.toLowerCase()
+        ) ?? null
+      : null;
 
   const title = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
   const staffBypass = profile?.role === "smt" || profile?.role === "admin";
@@ -115,6 +122,7 @@ export default async function CommitteeGatePage({
                 conferenceId={conference.id}
                 conferenceTitle={title || "Conference"}
                 allocationChoices={allocationChoices}
+                initialAllocation={preselectedAllocation}
                 nextPath={nextPath}
               />
               {staffBypass ? (
