@@ -92,24 +92,43 @@ export default async function ChairAwardsPage() {
     label: string;
     slots: number[];
     helper: string;
+    criteria: string[];
   }[] = [
     {
       id: "committee_best_delegate",
       label: "Best Delegate (committee)",
       slots: [1, 2],
       helper: "Submit Top 2 contenders for committee best delegate.",
+      criteria: [
+        "Diplomacy & collaboration (bridges blocs, includes quieter delegates).",
+        "Leadership & participation (consistent floor presence, initiates motions/caucuses).",
+        "Knowledge & research depth (accurate RoP/topic command with specific evidence).",
+        "Creativity & policy impact (actionable clauses, meaningful compromise outcomes).",
+      ],
     },
     {
       id: "committee_best_position_paper",
       label: "Best Position Paper (committee)",
       slots: [1, 2],
       helper: "Submit Top 2 position papers for SMT review.",
+      criteria: [
+        "Research depth (specific data, treaties, legal/policy context).",
+        "Country stance alignment (reflects real national red lines and interests).",
+        "Policy accuracy & solutions (feasible, mandate-accurate implementation detail).",
+        "Formatting/style/citations (professional academic standard, clear sourcing).",
+      ],
     },
     {
       id: "conference_best_delegate",
       label: "Best Delegate (overall conference)",
       slots: [1],
       helper: "Submit your single strongest overall candidate from this committee.",
+      criteria: [
+        "Cross-session consistency in diplomacy, leadership, and substantive impact.",
+        "Mastery of Rules of Procedure and high-quality floor interventions.",
+        "Evidence of conference-level influence beyond own bloc/committee moments.",
+        "Strong written confirmation with specific examples for SMT final vetting.",
+      ],
     },
   ];
 
@@ -132,6 +151,16 @@ export default async function ChairAwardsPage() {
             <div>
               <h3 className="font-display text-lg font-semibold text-brand-navy">{type.label}</h3>
               <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
+              <div className="mt-3 rounded-lg border border-brand-navy/10 bg-brand-cream/40 p-3">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-wide text-brand-navy/80">
+                  Criteria checklist
+                </p>
+                <ul className="mt-1 space-y-1 text-xs text-brand-navy/85">
+                  {type.criteria.map((item) => (
+                    <li key={`${type.id}-${item}`}>- {item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
             {type.slots.map((rank) => {
               const existing = nominationByKey.get(`${type.id}:${rank}`);
