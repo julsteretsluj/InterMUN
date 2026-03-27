@@ -7,7 +7,11 @@ import { Timers } from "@/components/timers/Timers";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
-import { formatCommitteeCardTitle, resolveCommitteeFullName } from "@/lib/committee-card-display";
+import {
+  formatCommitteeCardTitle,
+  resolveCommitteeDisplayTags,
+  resolveCommitteeFullName,
+} from "@/lib/committee-card-display";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
@@ -76,6 +80,7 @@ export default async function SmtCommitteeLivePage({
 
   const displayTitle = formatCommitteeCardTitle(conf.committee_full_name, conf.committee);
   const officialName = resolveCommitteeFullName(conf.committee_full_name, conf.committee);
+  const displayTags = resolveCommitteeDisplayTags(conf.committee);
 
   return (
     <div className="space-y-8">
@@ -107,6 +112,10 @@ export default async function SmtCommitteeLivePage({
           ) : null}
           <MetaItem label="Official committee name">{officialName ?? "—"}</MetaItem>
           <MetaItem label="Chamber / acronym">{conf.committee?.trim() || "—"}</MetaItem>
+          <MetaItem label="Difficulty">{displayTags?.difficulty ?? "—"}</MetaItem>
+          <MetaItem label="Format">{displayTags?.format ?? "—"}</MetaItem>
+          <MetaItem label="Age range">{displayTags?.ageRange ?? "—"}</MetaItem>
+          <MetaItem label="ESL-friendly">{displayTags ? (displayTags.eslFriendly ? "Yes" : "No") : "—"}</MetaItem>
           <MetaItem label="Dais (listed)">{conf.chair_names?.trim() || "—"}</MetaItem>
           <MetaItem label="Committee / room code (second gate)">
             {conf.committee_code?.trim() || conf.room_code?.trim() ? (

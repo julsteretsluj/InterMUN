@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
-import { formatCommitteeCardTitle } from "@/lib/committee-card-display";
+import { formatCommitteeCardTitle, resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
 
 export default async function SmtOverviewPage({
   searchParams,
@@ -145,6 +145,28 @@ export default async function SmtOverviewPage({
             <p className="font-semibold text-sm leading-snug">
               {formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee)}
             </p>
+            {(() => {
+              const tags = resolveCommitteeDisplayTags(g.latestRow.committee);
+              if (!tags) return null;
+              return (
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  <span className="rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.65rem] text-brand-navy">
+                    {tags.difficulty}
+                  </span>
+                  <span className="rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.65rem] text-brand-navy">
+                    {tags.format}
+                  </span>
+                  <span className="rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.65rem] text-brand-navy">
+                    {tags.ageRange}
+                  </span>
+                  {tags.eslFriendly ? (
+                    <span className="rounded-full border border-emerald-300/70 bg-emerald-50 px-2 py-0.5 text-[0.65rem] text-emerald-800">
+                      ESL-friendly
+                    </span>
+                  ) : null}
+                </div>
+              );
+            })()}
             {g.latestRow.chair_names?.trim() ? (
               <p className="text-xs text-brand-muted mt-2">
                 <span className="font-medium text-brand-navy/80">Chairs: </span>
