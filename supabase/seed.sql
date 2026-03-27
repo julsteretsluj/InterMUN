@@ -17,7 +17,7 @@ INSERT INTO conferences (id, name, committee, created_at, event_id, committee_co
   (
     '00000000-0000-0000-0000-000000000001',
     'SEAMUN I 2027',
-    'Policies with a Purpose',
+    NULL,
     '2020-01-01T00:00:00Z',
     '11111111-1111-1111-1111-111111111101',
     'POL038',
