@@ -38,23 +38,35 @@ export default async function SmtOverviewPage({
 
   const rows = (committees ?? []).filter((c) => {
     const code = c.committee_code?.trim().toUpperCase() ?? "";
-    return code !== SMT_COMMITTEE_CODE;
+    const committeeLabel = c.committee?.trim() ?? "";
+    const fullName = c.committee_full_name?.trim() ?? "";
+    const hasRealCommitteeLabel =
+      committeeLabel.length > 0 &&
+      committeeLabel.toLowerCase() !== "committee" &&
+      fullName.toLowerCase() !== "committee";
+    return code !== SMT_COMMITTEE_CODE && hasRealCommitteeLabel;
   });
 
   type Row = (typeof rows)[number];
 
   const groups = new Map<
     string,
-    { code: string; latestId: string; latestRow: Row; topicCount: number }
+    { latestId: string; latestRow: Row; topicCount: number; topics: string[] }
   >();
 
   for (const r of rows) {
-    const code = r.committee_code?.trim().toUpperCase();
-    if (!code) continue;
+    const groupLabel = formatCommitteeCardTitle(r.committee_full_name, r.committee).trim();
+    if (!groupLabel || groupLabel.toLowerCase() === "committee") continue;
+    const key = groupLabel.toLowerCase();
 
-    const existing = groups.get(code);
+    const existing = groups.get(key);
     if (!existing) {
-      groups.set(code, { code, latestId: r.id, latestRow: r, topicCount: 1 });
+      groups.set(key, {
+        latestId: r.id,
+        latestRow: r,
+        topicCount: 1,
+        topics: r.name?.trim() ? [r.name.trim()] : [],
+      });
       continue;
     }
 
@@ -64,17 +76,29 @@ export default async function SmtOverviewPage({
     const nextTime = r.created_at ? new Date(r.created_at).getTime() : 0;
     const latestRow = nextTime > existingTime ? r : existing.latestRow;
 
-    groups.set(code, {
+    groups.set(key, {
       ...existing,
       latestId: latestRow.id,
       latestRow,
       topicCount: existing.topicCount + 1,
+      topics:
+        r.name?.trim() && !existing.topics.includes(r.name.trim())
+          ? [...existing.topics, r.name.trim()]
+          : existing.topics,
     });
   }
 
-  const list = Array.from(groups.values()).sort((a, b) =>
-    a.code.localeCompare(b.code)
-  );
+  const list = Array.from(groups.values()).sort((a, b) => {
+    const aTitle = formatCommitteeCardTitle(
+      a.latestRow.committee_full_name,
+      a.latestRow.committee
+    ).toLowerCase();
+    const bTitle = formatCommitteeCardTitle(
+      b.latestRow.committee_full_name,
+      b.latestRow.committee
+    ).toLowerCase();
+    return aTitle.localeCompare(bTitle);
+  });
 
   if (list.length === 0) {
     return (
@@ -107,7 +131,7 @@ export default async function SmtOverviewPage({
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((g) => (
           <Link
-            key={g.code}
+            key={g.latestId}
             href={`/smt/committees/${g.latestId}`}
             className="rounded-xl border border-brand-navy/15 bg-brand-paper px-4 py-3 text-brand-navy shadow-sm hover:bg-brand-cream transition-colors"
           >
@@ -127,11 +151,22 @@ export default async function SmtOverviewPage({
                 {g.latestRow.chair_names.trim()}
               </p>
             ) : null}
-            {g.code ? (
-              <p className="text-xs font-mono text-brand-navy/70 mt-2 tracking-widest">{g.code}</p>
+            {g.latestRow.committee_code?.trim() ? (
+              <p className="text-xs font-mono text-brand-navy/70 mt-2 tracking-widest">
+                {g.latestRow.committee_code.trim().toUpperCase()}
+              </p>
             ) : null}
             {g.topicCount > 1 ? (
               <p className="text-[0.68rem] text-brand-muted mt-1">{g.topicCount} sessions</p>
+            ) : null}
+            {g.topics.length > 0 ? (
+              <div className="mt-2 space-y-1">
+                {g.topics.slice(0, 2).map((topic) => (
+                  <p key={topic} className="text-[0.68rem] text-brand-muted leading-snug">
+                    Topic: {topic}
+                  </p>
+                ))}
+              </div>
             ) : null}
           </Link>
         ))}
