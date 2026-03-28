@@ -10,6 +10,7 @@ import {
   signResolutionAction,
   updateClauseAction,
 } from "@/app/actions/resolutions";
+import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 
 interface Resolution {
   id: string;
@@ -182,7 +183,7 @@ export function ResolutionsView({
             onChange={(e) =>
               setForm({ ...form, google_docs_url: e.target.value })
             }
-            placeholder="Google Docs URL"
+            placeholder="Google Docs URL (docs.google.com/document/d/… — used for embed + editing)"
             className="w-full px-3 py-2 border rounded dark:bg-slate-700"
           />
           <input
@@ -235,24 +236,27 @@ export function ResolutionsView({
               key={r.id}
               className="p-4 border rounded-lg dark:border-slate-700 space-y-3"
             >
-              <div className="flex items-start justify-between">
-                <div>
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1 space-y-3">
                   {r.google_docs_url ? (
-                    <a
-                      href={r.google_docs_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline flex items-center gap-2"
-                    >
-                      <FileCheck className="w-4 h-4" />
-                      View Resolution
-                    </a>
+                    <>
+                      <a
+                        href={r.google_docs_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2 text-sm font-medium"
+                      >
+                        <FileCheck className="w-4 h-4 shrink-0" />
+                        Open in new tab
+                      </a>
+                      <GoogleDocsEmbed googleDocsUrl={r.google_docs_url} />
+                    </>
                   ) : (
-                    <span className="text-slate-500">No link</span>
+                    <span className="text-slate-500 dark:text-slate-400 text-sm">No Google Doc link</span>
                   )}
                 </div>
                 {r.visible_to_other_bloc && (
-                  <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">
+                  <span className="text-xs shrink-0 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">
                     Visible to other bloc
                   </span>
                 )}
