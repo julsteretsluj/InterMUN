@@ -3,8 +3,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
-import { Timers } from "@/components/timers/Timers";
-import { FloorStatusBar } from "@/components/session/FloorStatusBar";
+import { ChairLiveFloor } from "@/components/session/ChairLiveFloor";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
@@ -140,8 +139,7 @@ export default async function DashboardLayout({
           </div>
           {activeConf?.id && showsDaisTools(role) ? (
             <div className="max-w-6xl mx-auto px-4 pb-4 space-y-2">
-              <Timers conferenceId={activeConf.id} />
-              <FloorStatusBar conferenceId={activeConf.id} />
+              <ChairLiveFloor conferenceId={activeConf.id} theme="dark" />
             </div>
           ) : null}
         </header>

@@ -3,8 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
-import { Timers } from "@/components/timers/Timers";
-import { FloorStatusBar } from "@/components/session/FloorStatusBar";
+import { ChairLiveFloor } from "@/components/session/ChairLiveFloor";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
 import {
@@ -174,13 +173,8 @@ export default async function SmtCommitteeLivePage({
 
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-8">
         <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Session timer</h2>
-          <Timers conferenceId={conf.id} theme="light" />
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Floor status</h2>
-          <FloorStatusBar conferenceId={conf.id} observeOnly theme="light" />
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Live floor</h2>
+          <ChairLiveFloor conferenceId={conf.id} theme="light" observeFloorOnly />
         </section>
 
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">

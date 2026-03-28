@@ -1,17 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { Clock } from "lucide-react";
-
-interface Timer {
-  id: string;
-  conference_id: string | null;
-  current_speaker: string | null;
-  next_speaker: string | null;
-  time_left_seconds: number;
-  total_time_seconds: number;
-}
+import { useConferenceTimer } from "@/lib/use-conference-timer";
 
 type TimerTheme = "dark" | "light";
 
@@ -22,59 +12,7 @@ export function Timers({
   conferenceId: string | null;
   theme?: TimerTheme;
 }) {
-  const [timer, setTimer] = useState<Timer | null>(null);
-  const [elapsed, setElapsed] = useState(0);
-  const supabase = createClient();
-
-  useEffect(() => {
-    if (!conferenceId) {
-      setTimer(null);
-      return;
-    }
-    void supabase
-      .from("timers")
-      .select("*")
-      .eq("conference_id", conferenceId)
-      .maybeSingle()
-      .then(({ data }) => data && setTimer(data as Timer));
-  }, [supabase, conferenceId]);
-
-  useEffect(() => {
-    if (!conferenceId) return;
-    const channel = supabase
-      .channel(`timers-${conferenceId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "timers",
-          filter: `conference_id=eq.${conferenceId}`,
-        },
-        (payload) => {
-          setTimer(payload.new as Timer);
-        }
-      )
-      .subscribe();
-    return () => {
-      void supabase.removeChannel(channel);
-    };
-  }, [supabase, conferenceId]);
-
-  useEffect(() => {
-    if (!timer?.time_left_seconds) return;
-    const interval = setInterval(() => {
-      setElapsed((e) => Math.min(e + 1, timer.total_time_seconds));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [timer?.time_left_seconds, timer?.total_time_seconds]);
-
-  const remaining = timer
-    ? Math.max(0, timer.time_left_seconds - elapsed)
-    : 0;
-  const total = timer?.total_time_seconds || 0;
-  const mins = Math.floor(remaining / 60);
-  const secs = remaining % 60;
+  const { timer, total, mins, secs } = useConferenceTimer(conferenceId);
 
   if (!conferenceId) return null;
 

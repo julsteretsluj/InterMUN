@@ -42,7 +42,14 @@ export function CommitteeRoomSessionFloor({
   // Delegates: live status + request-to-speak.
   return (
     <div className="space-y-4">
-      <FloorStatusBar conferenceId={conferenceId} observeOnly={observeDelegatesOnly} theme="dark" />
+      <FloorStatusBar
+        conferenceId={conferenceId}
+        observeOnly={observeDelegatesOnly}
+        theme="dark"
+        activeMotionVoteItemId={
+          procedureState === "voting_procedure" ? (currentVoteItemId ?? null) : null
+        }
+      />
       {isDelegate ? (
         <>
           {procedureState === "voting_procedure" ? (

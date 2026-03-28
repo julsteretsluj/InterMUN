@@ -40,6 +40,8 @@ export interface VoteItem {
   description: string | null;
   must_vote: boolean;
   required_majority: string;
+  /** Delegate allocation that moved the motion (optional). */
+  motioner_allocation_id?: string | null;
   created_at: string;
   closed_at: string | null;
 }

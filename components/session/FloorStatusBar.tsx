@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Megaphone, ListOrdered } from "lucide-react";
+import { ActiveMotionContextStrip } from "@/components/session/ActiveMotionContextStrip";
 
 type Announcement = { id: string; body: string; created_at: string };
 type QueueRow = {
@@ -28,10 +29,13 @@ export function FloorStatusBar({
   conferenceId,
   observeOnly = false,
   theme = "dark",
+  activeMotionVoteItemId = null,
 }: {
   conferenceId: string;
   observeOnly?: boolean;
   theme?: FloorTheme;
+  /** When set, show current motion + floor timer above dais / speakers (e.g. delegate committee room). */
+  activeMotionVoteItemId?: string | null;
 }) {
   const supabase = createClient();
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
@@ -136,7 +140,15 @@ export function FloorStatusBar({
   const qText = isLight ? "text-brand-navy/90" : "text-brand-navy/90";
 
   return (
-    <div className={box}>
+    <div className="space-y-2">
+      {activeMotionVoteItemId ? (
+        <ActiveMotionContextStrip
+          conferenceId={conferenceId}
+          voteItemId={activeMotionVoteItemId}
+          theme={theme}
+        />
+      ) : null}
+      <div className={box}>
       {latestDais && (
         <div className="flex gap-2 items-start">
           <Megaphone className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
@@ -173,6 +185,7 @@ export function FloorStatusBar({
           <span className={`font-medium ${isLight ? "text-brand-navy" : "text-brand-navy"}`}>{rollSelf}</span>
         </p>
       )}
+      </div>
     </div>
   );
 }

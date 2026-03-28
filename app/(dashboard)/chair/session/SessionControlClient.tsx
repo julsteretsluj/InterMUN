@@ -35,6 +35,7 @@ type MotionRow = {
   description: string | null;
   must_vote: boolean;
   required_majority: string;
+  motioner_allocation_id: string | null;
   closed_at: string | null;
 };
 type MotionAudit = {
@@ -90,6 +91,7 @@ export function SessionControlClient({
     required_majority: "simple",
     procedure_resolution_id: null as string | null,
     procedure_clause_ids: [] as string[],
+    motioner_allocation_id: null as string | null,
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
@@ -160,7 +162,7 @@ export function SessionControlClient({
         supabase
           .from("vote_items")
           .select(
-            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, closed_at"
+            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, closed_at"
           )
           .eq("conference_id", conferenceId)
           .is("closed_at", null)
@@ -168,7 +170,7 @@ export function SessionControlClient({
         supabase
           .from("vote_items")
           .select(
-            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, closed_at"
+            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, closed_at"
           )
           .eq("conference_id", conferenceId)
           .order("created_at", { ascending: false })
@@ -206,6 +208,7 @@ export function SessionControlClient({
         required_majority: open.required_majority,
         procedure_resolution_id: open.procedure_resolution_id,
         procedure_clause_ids: open.procedure_clause_ids ?? [],
+        motioner_allocation_id: open.motioner_allocation_id ?? null,
       });
     }
 
@@ -444,6 +447,7 @@ export function SessionControlClient({
         description: motionDraft.description.trim() || null,
         must_vote: motionDraft.must_vote,
         required_majority: motionDraft.required_majority,
+        motioner_allocation_id: motionDraft.motioner_allocation_id || null,
         })
         .select("id")
         .maybeSingle();
@@ -466,6 +470,7 @@ export function SessionControlClient({
           required_majority: "simple",
           procedure_resolution_id: null,
           procedure_clause_ids: [],
+          motioner_allocation_id: null,
         });
       }
       void refresh();
@@ -486,6 +491,7 @@ export function SessionControlClient({
           description: motionDraft.description.trim() || null,
           must_vote: motionDraft.must_vote,
           required_majority: motionDraft.required_majority,
+          motioner_allocation_id: motionDraft.motioner_allocation_id || null,
         })
         .eq("id", openMotion.id);
       setMsg(error ? error.message : "Motion updated.");
@@ -738,6 +744,26 @@ export function SessionControlClient({
               onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
               placeholder="Motion title"
             />
+          </label>
+          <label className="text-sm block text-neutral-900">
+            <span className={surfaceLabel}>Motioner</span>
+            <select
+              className={surfaceField}
+              value={motionDraft.motioner_allocation_id ?? ""}
+              onChange={(e) =>
+                setMotionDraft((d) => ({
+                  ...d,
+                  motioner_allocation_id: e.target.value || null,
+                }))
+              }
+            >
+              <option value="">Not specified</option>
+              {allocations.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.country}
+                </option>
+              ))}
+            </select>
           </label>
           <label className="text-sm block text-neutral-900">
             <span className={surfaceLabel}>Description</span>
