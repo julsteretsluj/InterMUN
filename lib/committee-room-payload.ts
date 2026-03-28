@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 
 type ProfileEmbed = {
@@ -211,7 +212,7 @@ export async function loadCommitteeRoomPayload(
       ).data ?? []
     : [];
 
-  const staffAllocations: StaffAllocationRow[] = rows.map((r) => ({
+  const staffAllocations: StaffAllocationRow[] = sortRowsByAllocationCountry(rows).map((r) => ({
     id: r.id as string,
     country: r.country as string | null,
     user_id: r.user_id as string | null,

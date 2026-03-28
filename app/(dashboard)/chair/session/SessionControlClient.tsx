@@ -8,6 +8,7 @@ import {
   motionRequiresClauseTargets,
 } from "@/lib/resolution-functions";
 import { recordClauseVoteOutcomesAction } from "@/app/actions/resolutions";
+import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 
 type Alloc = { id: string; country: string };
 type QueueRow = {
@@ -186,7 +187,7 @@ export function SessionControlClient({
           .limit(500),
       ]);
 
-    setAllocations((allocs as Alloc[]) ?? []);
+    setAllocations(sortAllocationsByDisplayCountry((allocs as Alloc[]) ?? []));
     setQueue((q as QueueRow[]) ?? []);
     setRoll((r as RollRow[]) ?? []);
     setAnnouncements((ann as Announcement[]) ?? []);

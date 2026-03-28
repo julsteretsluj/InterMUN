@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
+import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 
 const MAX_COUNTRY_LEN = 500;
 const MAX_CODE_LEN = 120;
@@ -91,6 +92,7 @@ export async function smtAddAllocationRow(formData: FormData) {
     if (codeErr) return { error: codeErr.message };
   }
 
+  await ensureDaisSeatAllocations(auth.supabase, conferenceId);
   revalidateAllocationPaths();
   return { success: true as const };
 }
@@ -279,6 +281,7 @@ export async function smtImportAllocationsCsv(formData: FormData) {
     }
   }
 
+  await ensureDaisSeatAllocations(auth.supabase, conferenceId);
   revalidateAllocationPaths();
   return {
     success: true as const,

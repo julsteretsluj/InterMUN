@@ -6,6 +6,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
 import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -68,13 +69,13 @@ export default async function ProfilePage() {
         .order("country", { ascending: true })
     : { data: [] as { country: string }[] };
 
-  const availableAllocations = [
+  const availableAllocations = sortCountryLabelsForDisplay([
     ...new Set(
       (allocationRows ?? [])
         .map((row) => row.country?.trim())
         .filter((value): value is string => Boolean(value))
     ),
-  ];
+  ]);
 
   const delegateWelcome = isDelegate ? (
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">

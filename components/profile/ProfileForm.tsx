@@ -167,8 +167,11 @@ export function ProfileForm({
       });
   }
 
+  const fieldClass =
+    "w-full min-w-0 px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50";
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-xl">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-3xl">
       {!!profilePictureUrl && (
         <div className="flex items-center gap-4">
           <img
@@ -180,15 +183,15 @@ export function ProfileForm({
       )}
 
       <div>
-        <label
-          htmlFor="profile-picture-file"
-          className="block text-sm font-medium mb-1"
-        >
-          Profile picture
-        </label>
-
-        <div className="space-y-3">
-          <div>
+        <p className="block text-sm font-medium mb-2">Profile picture</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="min-w-0">
+            <label
+              htmlFor="profile-picture-file"
+              className="block text-xs text-brand-muted mb-1"
+            >
+              Upload file
+            </label>
             <input
               type="file"
               id="profile-picture-file"
@@ -200,7 +203,7 @@ export function ProfileForm({
                 if (!file) return;
                 void uploadProfilePicture(file);
               }}
-              className="w-full"
+              className="w-full min-w-0"
             />
             {uploadPending && (
               <p className="text-xs text-brand-muted mt-1">Uploading…</p>
@@ -211,8 +214,7 @@ export function ProfileForm({
               </p>
             )}
           </div>
-
-          <div>
+          <div className="min-w-0">
             <label className="block text-xs text-brand-muted mb-1">
               Or set by URL
             </label>
@@ -220,49 +222,53 @@ export function ProfileForm({
               type="url"
               value={profilePictureUrl}
               onChange={(e) => setProfilePictureUrl(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
+              className={fieldClass}
               placeholder="https://..."
             />
           </div>
         </div>
       </div>
-      <div>
-        <label className="block text-sm font-medium mb-1">Name</label>
-        <input
-          {...register("name")}
-          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
-        />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="min-w-0">
+          <label className="block text-sm font-medium mb-1">Name</label>
+          <input {...register("name")} className={fieldClass} />
+        </div>
+        <div className="min-w-0">
+          <label className="block text-sm font-medium mb-1">Username</label>
+          <input
+            {...register("username")}
+            className={fieldClass}
+            placeholder="e.g. alex_1999"
+          />
+          {errors.username && (
+            <p className="text-sm text-red-600 mt-1">{errors.username.message}</p>
+          )}
+        </div>
       </div>
-      <div>
-        <label className="block text-sm font-medium mb-1">Username</label>
-        <input
-          {...register("username")}
-          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
-          placeholder="e.g. alex_1999"
-        />
-        {errors.username && (
-          <p className="text-sm text-red-600 mt-1">{errors.username.message}</p>
-        )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="min-w-0">
+          <label className="block text-sm font-medium mb-1">Pronouns</label>
+          <input
+            {...register("pronouns")}
+            className={fieldClass}
+            placeholder="e.g. she/her"
+          />
+        </div>
+        <div className="min-w-0">
+          <label className="block text-sm font-medium mb-1">School</label>
+          <input
+            {...register("school")}
+            className={fieldClass}
+            placeholder="e.g. Lincoln High School"
+          />
+        </div>
       </div>
-      <div>
-        <label className="block text-sm font-medium mb-1">Pronouns</label>
-        <input
-          {...register("pronouns")}
-          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
-          placeholder="e.g. she/her"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-1">School</label>
-        <input
-          {...register("school")}
-          className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
-          placeholder="e.g. Lincoln High School"
-        />
-      </div>
+
       {canViewPrivate && (
-        <>
-          <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="min-w-0">
             <label className="block text-sm font-medium mb-1">
               Conferences attended
             </label>
@@ -275,28 +281,29 @@ export function ProfileForm({
                   return Number.isNaN(parsed) ? undefined : parsed;
                 },
               })}
-              className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
+              className={fieldClass}
               min={0}
             />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="block text-sm font-medium mb-1">
               Awards (comma-separated)
             </label>
             <input
               {...register("awards")}
-              className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
+              className={fieldClass}
               placeholder="Best Delegate, Honorable Mention"
             />
           </div>
-        </>
+        </div>
       )}
+
       <div>
         <label className="block text-sm font-medium mb-1">Allocation</label>
         {availableAllocations.length > 0 ? (
           <select
             {...register("allocation")}
-            className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600"
+            className={fieldClass}
           >
             <option value="">Select allocation</option>
             {availableAllocations.map((allocation) => (
@@ -308,7 +315,7 @@ export function ProfileForm({
         ) : (
           <input
             {...register("allocation")}
-            className="w-full px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50"
+            className={fieldClass}
             placeholder="No committee allocations available"
           />
         )}

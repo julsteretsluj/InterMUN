@@ -7,6 +7,7 @@ import {
   rejectAllocationSignupRequestAction,
 } from "@/app/actions/allocationSignup";
 import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
+import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 
 type AllocationRow = {
   id: string;
@@ -84,11 +85,13 @@ export default async function ChairAllocationMatrixPage() {
   const profileById = new Map(
     (profiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
   );
-  const rows: AllocationRow[] = rawRows.map((r) => ({
-    ...r,
-    linked_role: r.user_id ? (profileById.get(r.user_id)?.role ?? null) : null,
-    linked_name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
-  }));
+  const rows: AllocationRow[] = sortRowsByAllocationCountry(
+    rawRows.map((r) => ({
+      ...r,
+      linked_role: r.user_id ? (profileById.get(r.user_id)?.role ?? null) : null,
+      linked_name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
+    }))
+  );
   const ids = rows.map((r) => r.id);
 
   const { data: codeRows } = ids.length

@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { StancesView } from "@/components/stances/StancesView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
+import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 
 export default async function StancesPage() {
   const supabase = await createClient();
@@ -37,10 +38,12 @@ export default async function StancesPage() {
         .eq("note_type", "stance")
     : { data: [] };
 
-  const allocationsWithNotes = (allocations || []).map((a) => ({
-    ...a,
-    notes: (stanceNotes || []).filter((n) => n.allocation_id === a.id),
-  }));
+  const allocationsWithNotes = sortRowsByAllocationCountry(
+    (allocations || []).map((a) => ({
+      ...a,
+      notes: (stanceNotes || []).filter((n) => n.allocation_id === a.id),
+    }))
+  );
 
   const delegateIds = Array.from(
     new Set((allocations || []).map((a) => a.user_id).filter((id): id is string => Boolean(id)))

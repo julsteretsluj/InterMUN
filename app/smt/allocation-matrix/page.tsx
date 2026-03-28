@@ -7,6 +7,10 @@ import {
   type MatrixRow,
   type MatrixOverallRow,
 } from "./AllocationMatrixManagerClient";
+import {
+  compareAllocationCountryDisplay,
+  sortRowsByAllocationCountry,
+} from "@/lib/allocation-display-order";
 
 export default async function SmtAllocationMatrixPage({
   searchParams,
@@ -99,6 +103,11 @@ export default async function SmtAllocationMatrixPage({
         code: allCodeById.get(a.id) ?? null,
       };
     });
+    overallRows.sort((a, b) => {
+      const byConf = a.conference_id.localeCompare(b.conference_id);
+      if (byConf !== 0) return byConf;
+      return compareAllocationCountryDisplay(a.country, b.country);
+    });
   }
 
   if (selectedConferenceId) {
@@ -123,14 +132,16 @@ export default async function SmtAllocationMatrixPage({
     const profileById = new Map(
       (profiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
     );
-    rows = (allocs ?? []).map((a) => ({
-      id: a.id,
-      country: a.country,
-      user_id: a.user_id,
-      linked_role: a.user_id ? (profileById.get(a.user_id)?.role ?? null) : null,
-      linked_name: a.user_id ? (profileById.get(a.user_id)?.name ?? null) : null,
-      code: codeById.get(a.id) ?? null,
-    }));
+    rows = sortRowsByAllocationCountry(
+      (allocs ?? []).map((a) => ({
+        id: a.id,
+        country: a.country,
+        user_id: a.user_id,
+        linked_role: a.user_id ? (profileById.get(a.user_id)?.role ?? null) : null,
+        linked_name: a.user_id ? (profileById.get(a.user_id)?.name ?? null) : null,
+        code: codeById.get(a.id) ?? null,
+      }))
+    );
   }
 
   return (

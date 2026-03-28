@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
+import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 
 type NoteTopic = "bloc forming" | "speech pois or pocs" | "questions" | "informal conversations";
 
@@ -105,9 +106,9 @@ export default async function ChatsNotesPage() {
   const allocationRows = (allocations ?? []) as AllocationRow[];
   const assignedAllocations = allocationRows.filter((a) => Boolean(a.user_id));
 
-  const allocationOptions = assignedAllocations
-    .map((a) => ({ id: a.id, country: a.country }))
-    .sort((x, y) => x.country.localeCompare(y.country));
+  const allocationOptions = sortAllocationsByDisplayCountry(
+    assignedAllocations.map((a) => ({ id: a.id, country: a.country }))
+  );
 
   const { data: myAllocations } = await supabase
     .from("allocations")

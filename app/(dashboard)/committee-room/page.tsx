@@ -4,6 +4,7 @@ import { requireActiveConferenceId } from "@/lib/active-conference";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
+import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 
 export default async function CommitteeRoomPage() {
   const supabase = await createClient();
@@ -31,9 +32,11 @@ export default async function CommitteeRoomPage() {
   const verifiedConferenceId = await getVerifiedConferenceId();
   const smtVerified = myRole === "smt" && verifiedConferenceId === conferenceId;
 
-  const allocationOptions = payload.staffAllocations
-    .filter((a) => Boolean(a.user_id))
-    .map((a) => ({ id: a.id, country: a.country ?? "—" }));
+  const allocationOptions = sortAllocationsByDisplayCountry(
+    payload.staffAllocations
+      .filter((a) => Boolean(a.user_id))
+      .map((a) => ({ id: a.id, country: a.country ?? "—" }))
+  );
 
   const myAllocationId =
     payload.staffAllocations.find((a) => a.user_id === user.id)?.id ?? null;

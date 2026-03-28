@@ -6,6 +6,7 @@ import { CommitteeGateForm } from "./CommitteeGateForm";
 import { StaffNotDelegateBypassForm } from "./StaffNotDelegateBypassForm";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 
 export default async function CommitteeGatePage({
   searchParams,
@@ -63,13 +64,13 @@ export default async function CommitteeGatePage({
     .eq("conference_id", conference.id)
     .eq("user_id", user.id);
 
-  const allocationChoices = [
+  const allocationChoices = sortCountryLabelsForDisplay([
     ...new Set(
       (allocs ?? [])
         .map((a) => a.country?.trim())
         .filter((c): c is string => Boolean(c))
     ),
-  ];
+  ]);
   const preselectedAllocation =
     allocationPrefill.length > 0
       ? allocationChoices.find(

@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { submitChairTopNominationAction } from "@/app/actions/awards";
+import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 
 type ScoreLevel = { value: number; description: string };
 
@@ -156,7 +157,7 @@ export default async function ChairAwardsPage() {
     country: string;
     profiles: { name: string | null } | { name: string | null }[] | null;
   };
-  const delegateRows = (delegates ?? []) as DelegateRow[];
+  const delegateRows = sortRowsByAllocationCountry((delegates ?? []) as DelegateRow[]);
   const options = delegateRows
     .filter((d) => !!d.user_id)
     .map((d) => {

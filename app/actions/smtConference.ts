@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { revalidatePath } from "next/cache";
+import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 
 export type SmtFormState = { error?: string; success?: boolean };
 
@@ -90,6 +91,7 @@ export async function updateCommitteeSessionAction(
   });
 
   if (error) return { error: error.message };
+  await ensureDaisSeatAllocations(supabase, id);
   revalidatePath("/smt");
   revalidatePath("/smt/conference");
   revalidatePath(`/smt/committees/${id}`);
