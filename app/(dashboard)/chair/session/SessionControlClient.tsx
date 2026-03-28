@@ -728,7 +728,7 @@ export function SessionControlClient({
                   setMotionDraft((d) => ({ ...d, required_majority: e.target.value }))
                 }
               >
-                <option value="simple">simple</option>
+                <option value="simple">Simple</option>
                 <option value="2/3">2/3</option>
               </select>
             </label>

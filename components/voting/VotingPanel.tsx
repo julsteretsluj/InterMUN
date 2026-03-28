@@ -129,7 +129,8 @@ export function VotingPanel({
           </span>
         </div>
         <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
-          Majority required: {item.required_majority}
+          Majority required:{" "}
+          {item.required_majority === "simple" ? "Simple" : item.required_majority}
         </p>
 
         <div className="flex gap-2 mb-3">
@@ -177,7 +178,7 @@ export function VotingPanel({
                   }
                   className="ml-2 px-2 py-1 rounded border dark:bg-slate-700"
                 >
-                  <option value="simple">simple</option>
+                  <option value="simple">Simple</option>
                   <option value="2/3">2/3</option>
                 </select>
               </label>
