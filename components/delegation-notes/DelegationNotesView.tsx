@@ -522,19 +522,25 @@ export function DelegationNotesView({
     return "Any chair";
   };
 
+  /* Light-surface ink: brand-navy is light text for dark pages; these cards use bg-white. */
+  const card = "border border-neutral-300 rounded-xl p-4 bg-white text-neutral-900 shadow-sm";
+  const labelStrong = "text-xs uppercase tracking-wider text-neutral-800 font-semibold";
+  const body = "text-sm text-neutral-900";
+  const muted = "text-neutral-600";
+  const field =
+    "rounded-lg border border-neutral-400 bg-white text-neutral-900 placeholder:text-neutral-500 shadow-sm";
+
   return (
     <div className="space-y-6">
-      <div className="border border-brand-navy/25 rounded-xl p-4 bg-white">
-        <h3 className="font-semibold mb-3 text-brand-navy">Delegation notes</h3>
+      <div className={card}>
+        <h3 className="font-semibold mb-3 text-neutral-950">Delegation notes</h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <label className="text-xs uppercase tracking-wider text-brand-navy/80 font-semibold">
-                Topic
-              </label>
+              <label className={labelStrong}>Topic</label>
               <select
-                className="ml-auto px-3 py-2 rounded-lg border border-brand-navy/30 bg-white text-brand-navy text-sm"
+                className={`ml-auto px-3 py-2 text-sm ${field}`}
                 value={topic}
                 onChange={(e) => setTopic(e.target.value as NoteTopic)}
               >
@@ -546,13 +552,14 @@ export function DelegationNotesView({
             </div>
 
             <div className="flex items-start gap-3">
-              <label className="flex items-center gap-2 text-sm text-brand-navy">
+              <label className={`flex items-center gap-2 ${body}`}>
                 <input
                   type="checkbox"
                   checked={concernFlag}
                   onChange={(e) => setConcernFlag(e.target.checked)}
+                  className="size-4 accent-neutral-800 border-neutral-400 rounded"
                 />
-                <span className="text-brand-navy/80">Concern (auto placeholder)</span>
+                <span className="text-neutral-800">Concern (auto placeholder)</span>
               </label>
             </div>
 
@@ -560,11 +567,11 @@ export function DelegationNotesView({
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={canCompose ? "Write your note..." : "Only delegates/chairs can send notes."}
-              className="w-full h-28 px-3 py-2 border border-brand-navy/35 rounded-lg bg-white text-brand-navy placeholder:text-brand-navy/45"
+              className={`w-full h-28 px-3 py-2 ${field}`}
               disabled={votingProcedureLocked}
             />
             {error ? (
-              <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+              <p className="text-sm text-red-900 bg-red-100 border border-red-300 rounded-lg px-3 py-2">
                 {error}
               </p>
             ) : null}
@@ -574,19 +581,19 @@ export function DelegationNotesView({
                 type="button"
                 onClick={() => void createNote()}
                 disabled={!canCompose || sending}
-                className="px-4 py-2 rounded-lg border border-brand-navy/30 bg-brand-gold text-brand-navy font-semibold disabled:opacity-50"
+                className="px-4 py-2 rounded-lg border border-emerald-700/40 bg-brand-gold text-neutral-950 font-semibold disabled:opacity-50 hover:opacity-95"
               >
                 {sending ? "Sending…" : "Send note"}
               </button>
               {isSmt ? (
-                <p className="text-xs text-brand-muted">
+                <p className={`text-xs ${muted}`}>
                   {smtVerified ? (
                     "Viewing full notes (password verified)."
                   ) : (
                     <>
                       Viewing forwarded notes (SMT inbox).{" "}
                   <Link
-                        className="underline text-brand-navy font-medium"
+                        className="underline text-blue-800 font-semibold hover:text-blue-950"
                         href={`/committee-gate?next=${encodeURIComponent(nextPathAfterVerification)}`}
                       >
                         Enter staff secondary password
@@ -600,18 +607,22 @@ export function DelegationNotesView({
           </div>
 
           <div className="space-y-3">
-            <p className="text-sm font-semibold text-brand-navy">Recipients</p>
+            <p className="text-sm font-semibold text-neutral-950">Recipients</p>
 
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-wider text-brand-navy/80 font-semibold">Delegations</p>
-              <div className="max-h-40 overflow-y-auto border border-brand-navy/25 rounded-lg p-2 bg-white">
+              <p className={labelStrong}>Delegations</p>
+              <div className="max-h-40 overflow-y-auto border border-neutral-300 rounded-lg p-2 bg-neutral-50">
                 {allocationOptions.map((a) => {
                   const checked = selectedAllocationRecipientIds.includes(a.id);
                   return (
-                    <label key={a.id} className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-brand-navy">
+                    <label
+                      key={a.id}
+                      className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-neutral-900"
+                    >
                       <input
                         type="checkbox"
                         checked={checked}
+                        className="size-4 accent-neutral-800 rounded border-neutral-400"
                     disabled={votingProcedureLocked}
                         onChange={(e) => {
                           if (isControlledRecipients) {
@@ -631,23 +642,22 @@ export function DelegationNotesView({
                   );
                 })}
                 {allocationOptions.length === 0 ? (
-                  <p className="text-xs text-brand-navy/70 p-1">No assigned delegations for this committee.</p>
+                  <p className={`text-xs ${muted} p-1`}>No assigned delegations for this committee.</p>
                 ) : null}
               </div>
               {isDelegate ? (
-                <p className="text-xs text-brand-navy/75">
-                  Targets are limited to assigned allocations only.
-                </p>
+                <p className={`text-xs ${muted}`}>Targets are limited to assigned allocations only.</p>
               ) : null}
             </div>
 
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-wider text-brand-navy/80 font-semibold">Chairs</p>
+              <p className={labelStrong}>Chairs</p>
 
-              <label className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-brand-navy">
+              <label className="flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-neutral-900">
                 <input
                   type="checkbox"
                   checked={anyChairRecipient}
+                  className="size-4 accent-neutral-800 rounded border-neutral-400"
                   disabled={votingProcedureLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
@@ -662,20 +672,21 @@ export function DelegationNotesView({
                 <span>Any chair</span>
               </label>
 
-              <div className="max-h-32 overflow-y-auto border border-brand-navy/25 rounded-lg p-2 bg-white">
+              <div className="max-h-32 overflow-y-auto border border-neutral-300 rounded-lg p-2 bg-neutral-50">
                 {chairOptions.map((c) => {
                   const checked = selectedChairRecipientIds.includes(c.id);
                   return (
                     <label
                       key={c.id}
                       className={[
-                        "flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-brand-navy",
+                        "flex items-center gap-2 text-sm px-1 py-1 cursor-pointer text-neutral-900",
                         anyChairRecipient ? "opacity-60 cursor-not-allowed" : "",
                       ].join(" ")}
                     >
                       <input
                         type="checkbox"
                         checked={checked}
+                        className="size-4 accent-neutral-800 rounded border-neutral-400"
                         disabled={anyChairRecipient || votingProcedureLocked}
                         onChange={(e) => {
                           if (anyChairRecipient) return;
@@ -694,7 +705,7 @@ export function DelegationNotesView({
                   );
                 })}
                 {chairOptions.length === 0 ? (
-                  <p className="text-xs text-brand-navy/70 p-1">No chair profiles found.</p>
+                  <p className={`text-xs ${muted} p-1`}>No chair profiles found.</p>
                 ) : null}
               </div>
             </div>
@@ -702,24 +713,27 @@ export function DelegationNotesView({
         </div>
       </div>
 
-      <div className="border border-brand-navy/25 rounded-xl p-4 bg-white">
+      <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-semibold text-brand-navy">Notes list</h3>
-          <p className="text-xs text-brand-navy/70">
+          <h3 className="font-semibold text-neutral-950">Notes list</h3>
+          <p className={`text-xs ${muted}`}>
             {notes.length} note{notes.length === 1 ? "" : "s"}
           </p>
         </div>
 
         {notes.length === 0 ? (
-          <p className="text-sm text-brand-navy/75 mt-3">No notes yet.</p>
+          <p className={`text-sm ${muted} mt-3`}>No notes yet.</p>
         ) : (
           <div className="mt-3 space-y-3">
             {notes.map((n) => (
-              <div key={n.id} className="border border-brand-navy/20 rounded-xl p-3 bg-white">
+              <div
+                key={n.id}
+                className="border border-neutral-300 rounded-xl p-3 bg-neutral-50 text-neutral-900"
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <div className="text-xs uppercase tracking-wider text-brand-muted flex items-center gap-2">
-                      <span>
+                    <div className="text-xs uppercase tracking-wider text-neutral-700 flex items-center gap-2 flex-wrap">
+                      <span className="text-neutral-800 font-medium normal-case">
                         {n.concern_flag ? "🚩" : "⚑"}{" "}
                         {n.sender.kind === "allocation" ? (
                           <>
@@ -731,14 +745,16 @@ export function DelegationNotesView({
                           </>
                         )}
                       </span>
-                      <span className="text-brand-navy/70">•</span>
-                      <span className="capitalize">{n.topic}</span>
+                      <span className="text-neutral-500">•</span>
+                      <span className="capitalize text-neutral-800">{n.topic}</span>
                       {n.forwarded_to_smt ? (
-                        <span className="ml-2 text-brand-gold font-medium">(forwarded)</span>
+                        <span className="ml-2 text-emerald-800 font-semibold">(forwarded)</span>
                       ) : null}
                     </div>
-                    <div className="mt-2 break-words whitespace-pre-wrap text-sm text-brand-navy">{n.content}</div>
-                    <div className="mt-2 text-xs text-brand-navy/75">
+                    <div className="mt-2 break-words whitespace-pre-wrap text-sm text-neutral-950">
+                      {n.content}
+                    </div>
+                    <div className={`mt-2 text-xs ${muted}`}>
                       To:{" "}
                       {n.recipients.length === 0
                         ? "—"
@@ -751,7 +767,7 @@ export function DelegationNotesView({
                       <button
                         type="button"
                         onClick={() => void toggleStar(n.id, !n.starred_by_me)}
-                        className="px-2.5 py-1 rounded-lg border border-brand-navy/25 text-xs bg-brand-cream text-brand-navy hover:bg-brand-cream/80"
+                        className="px-2.5 py-1 rounded-lg border border-neutral-400 text-xs bg-white text-neutral-900 hover:bg-neutral-100"
                       >
                         {n.starred_by_me ? "Starred" : "Star"}
                       </button>
@@ -760,7 +776,7 @@ export function DelegationNotesView({
                         type="button"
                         onClick={() => void forwardToSmt(n.id)}
                         disabled={n.forwarded_to_smt}
-                        className="px-2.5 py-1 rounded-lg border border-brand-navy/25 text-xs bg-white text-brand-navy hover:bg-brand-paper/30 disabled:opacity-50"
+                        className="px-2.5 py-1 rounded-lg border border-neutral-400 text-xs bg-white text-neutral-900 hover:bg-neutral-100 disabled:opacity-50"
                       >
                         {n.forwarded_to_smt ? "Forwarded" : "Forward to SMT"}
                       </button>
@@ -768,7 +784,7 @@ export function DelegationNotesView({
                       <button
                         type="button"
                         onClick={() => void reportNote(n.id)}
-                        className="px-2.5 py-1 rounded-lg border border-brand-navy/25 text-xs bg-white text-brand-navy hover:bg-red-50"
+                        className="px-2.5 py-1 rounded-lg border border-neutral-400 text-xs bg-white text-neutral-900 hover:bg-red-100 hover:border-red-400"
                       >
                         Report
                       </button>
