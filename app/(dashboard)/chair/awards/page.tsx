@@ -4,27 +4,100 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { submitChairTopNominationAction } from "@/app/actions/awards";
 
-const DELEGATE_LEVELS = [
-  { value: 1, description: "Very weak: almost no clear evidence." },
-  { value: 2, description: "Weak: limited impact, inconsistent quality." },
-  { value: 3, description: "Below standard: some attempts, low effectiveness." },
-  { value: 4, description: "Developing: acceptable but still uneven." },
-  { value: 5, description: "Solid: reliable and clearly competent." },
-  { value: 6, description: "Strong: frequent impact and good consistency." },
-  { value: 7, description: "Excellent: high-level performance with clear leadership." },
-  { value: 8, description: "Outstanding: exceptional, committee-best standard." },
-] as const;
+type ScoreLevel = { value: number; description: string };
 
-const PAPER_LEVELS = [
-  { value: 1, description: "Very weak: minimal research and poor structure." },
-  { value: 2, description: "Weak: limited depth and unclear alignment." },
-  { value: 3, description: "Below standard: basic points, little rigor." },
-  { value: 4, description: "Developing: adequate but with notable gaps." },
-  { value: 5, description: "Solid: clear, accurate, and reasonably supported." },
-  { value: 6, description: "Strong: detailed and well-argued with good sourcing." },
-  { value: 7, description: "Excellent: advanced analysis and polished delivery." },
-  { value: 8, description: "Outstanding: exceptional rigor, originality, and precision." },
-] as const;
+function levelsFromPairs(beginning: string, developing: string, proficient: string, exemplary: string): ScoreLevel[] {
+  return [
+    { value: 1, description: beginning },
+    { value: 2, description: beginning },
+    { value: 3, description: developing },
+    { value: 4, description: developing },
+    { value: 5, description: proficient },
+    { value: 6, description: proficient },
+    { value: 7, description: exemplary },
+    { value: 8, description: exemplary },
+  ];
+}
+
+// SEAMUN I 2027 Awards guide: "Delegate Criteria" scale text (1-8 mapped from 1–2 / 3–4 / 5–6 / 7–8).
+const DELEGATE_LEVELS_BY_CRITERION: Record<
+  "creativity" | "diplomacy" | "collaboration" | "leadership" | "knowledge_research" | "participation",
+  ScoreLevel[]
+> = {
+  creativity: levelsFromPairs(
+    `Proposes repetitive or standard solutions; rarely thinks outside the existing framework.`,
+    `Offers some original ideas but struggles to adapt them to changing committee dynamics.`,
+    `Frequently suggests innovative solutions and unique clauses for draft resolutions.`,
+    `Highly creative; develops "game-changing" compromises that bridge clashing blocs.`
+  ),
+  diplomacy: levelsFromPairs(
+    `Lacks professional decorum; occasionally dismissive of other delegates' viewpoints.`,
+    `Respectful but unremarkable; maintains a neutral presence without building rapport.`,
+    `Consistently professional; actively seeks to understand and incorporate opposing views.`,
+    `Exemplifies true statesmanship; commands respect while remaining humble and inclusive.`
+  ),
+  collaboration: levelsFromPairs(
+    `Works in isolation or refuses to compromise on minor details; disrupts group work.`,
+    `Contributes to a bloc but does not take an active role in drafting or merging ideas.`,
+    `A strong team player; helps merge resolutions and ensures all bloc members have a voice.`,
+    `The "glue" of the committee brings disparate groups together and facilitates consensus.`
+  ),
+  leadership: levelsFromPairs(
+    `Passive; waits for others to initiate motions or start discussions during caucuses.`,
+    `Shows leadership in small groups but is hesitant to lead the house or present for the bloc.`,
+    `Takes clear initiative; leads unmoderated caucuses and manages the drafting process.`,
+    `Visionary leader; sets the tone for the room and inspires others through action and guidance.`
+  ),
+  knowledge_research: levelsFromPairs(
+    `Frequently confused by the topic; relies on generalities rather than specific facts.`,
+    `Has a basic understanding of the agenda but misses technical or legal nuances.`,
+    `Demonstrates strong command of the topic; cites relevant stats and UN past actions.`,
+    `Expert-level mastery; uses deep research to navigate technical debates and debunk false info.`
+  ),
+  participation: levelsFromPairs(
+    `Rarely speaks; frequently absent during caucusing or inactive during voting.`,
+    `Speaks occasionally in moderated caucuses; participates only when prompted.`,
+    `Consistently active in all sessions; frequently raises motions and contributes to the floor.`,
+    `Necessary and consistent presence; engages in every aspect of the debate from start to finish.`
+  ),
+};
+
+// SEAMUN I 2027 Awards guide: "Position Paper Criteria" scale text (1-8 mapped from 1–2 / 3–4 / 5–6 / 7–8).
+const PAPER_LEVELS_BY_CRITERION: Record<
+  "research_depth" | "country_stance_alignment" | "policy_accuracy" | "proposed_solutions" | "formatting_style_citations",
+  ScoreLevel[]
+> = {
+  research_depth: levelsFromPairs(
+    `Minimal data; lacks specific UN resolutions, treaty citations, or historical context.`,
+    `Basic data provided; mentions well-known treaties but lacks specific localised evidence.`,
+    `Strong research; includes relevant stats, past UN actions, and committee-specific history.`,
+    `Exceptional depth; identifies niche legal loopholes, specific funding gaps, or rare data points.`
+  ),
+  country_stance_alignment: levelsFromPairs(
+    `Frequently contradicts the assigned country's real-world geopolitical interests or voting history.`,
+    `Generally follows policy but lacks clarity on sensitive or controversial national stances.`,
+    `Consistently accurate; clearly reflects the nation's strategic regional and global interests.`,
+    `Highly nuanced; addresses complex regional dynamics and clearly defines national "red lines."`
+  ),
+  policy_accuracy: levelsFromPairs(
+    `Fundamental misunderstanding of the topic's legal framework or the committee's mandate.`,
+    `Understands the general topic but misses technical or legal complexities within current policy.`,
+    `Solid grasp of complex policy issues (e.g., specific clauses in international law).`,
+    `Expert-level accuracy; integrates technical facts to build a sophisticated policy argument.`
+  ),
+  proposed_solutions: levelsFromPairs(
+    `Vague or non-actionable (e.g., "countries should talk more"). No implementation plan.`,
+    `Generic solutions; lack details on funding, specific UN agencies, or feasibility.`,
+    `Innovative and actionable; proposes specific mechanisms, task forces, or monitoring bodies.`,
+    `Sophisticated and holistic; solutions are original, feasible, and legally sound with clear timelines.`
+  ),
+  formatting_style_citations: levelsFromPairs(
+    `Significant errors in UN citation style (e.g., Chicago/APA); unprofessional tone.`,
+    `Standard formatting, but contains several grammatical gaps or inconsistent citation styles.`,
+    `Professional UN academic formatting; clear, concise, and persuasive diplomatic language.`,
+    `Flawless UN academic style; compelling narrative and perfect citation of all sources.`
+  ),
+};
 
 export default async function ChairAwardsPage() {
   const supabase = await createClient();
@@ -115,8 +188,11 @@ export default async function ChairAwardsPage() {
     label: string;
     slots: number[];
     helper: string;
-    criteria: { key: string; label: string }[];
-    levels: ReadonlyArray<{ value: number; description: string }>;
+    criteria: {
+      key: string;
+      label: string;
+      levels: ScoreLevel[];
+    }[];
   }[] = [
     {
       id: "committee_best_delegate",
@@ -124,14 +200,17 @@ export default async function ChairAwardsPage() {
       slots: [1, 2],
       helper: "Submit Top 2 contenders for committee best delegate.",
       criteria: [
-        { key: "creativity", label: "Creativity" },
-        { key: "diplomacy", label: "Diplomacy" },
-        { key: "collaboration", label: "Collaboration" },
-        { key: "leadership", label: "Leadership" },
-        { key: "knowledge_research", label: "Knowledge and Research" },
-        { key: "participation", label: "Participation" },
+        { key: "creativity", label: "Creativity", levels: DELEGATE_LEVELS_BY_CRITERION.creativity },
+        { key: "diplomacy", label: "Diplomacy", levels: DELEGATE_LEVELS_BY_CRITERION.diplomacy },
+        { key: "collaboration", label: "Collaboration", levels: DELEGATE_LEVELS_BY_CRITERION.collaboration },
+        { key: "leadership", label: "Leadership", levels: DELEGATE_LEVELS_BY_CRITERION.leadership },
+        {
+          key: "knowledge_research",
+          label: "Knowledge and Research",
+          levels: DELEGATE_LEVELS_BY_CRITERION.knowledge_research,
+        },
+        { key: "participation", label: "Participation", levels: DELEGATE_LEVELS_BY_CRITERION.participation },
       ],
-      levels: DELEGATE_LEVELS,
     },
     {
       id: "committee_best_position_paper",
@@ -139,13 +218,28 @@ export default async function ChairAwardsPage() {
       slots: [1, 2],
       helper: "Submit Top 2 position papers for SMT review.",
       criteria: [
-        { key: "research_depth", label: "Research Depth" },
-        { key: "country_stance_alignment", label: "Country Stance Alignment" },
-        { key: "policy_accuracy", label: "Policy Accuracy" },
-        { key: "proposed_solutions", label: "Proposed Solutions" },
-        { key: "formatting_style_citations", label: "Formatting, Style and Citations" },
+        {
+          key: "research_depth",
+          label: "Research Depth",
+          levels: PAPER_LEVELS_BY_CRITERION.research_depth,
+        },
+        {
+          key: "country_stance_alignment",
+          label: "Country Stance Alignment",
+          levels: PAPER_LEVELS_BY_CRITERION.country_stance_alignment,
+        },
+        { key: "policy_accuracy", label: "Policy Accuracy", levels: PAPER_LEVELS_BY_CRITERION.policy_accuracy },
+        {
+          key: "proposed_solutions",
+          label: "Proposed Solutions",
+          levels: PAPER_LEVELS_BY_CRITERION.proposed_solutions,
+        },
+        {
+          key: "formatting_style_citations",
+          label: "Formatting, Style and Citations",
+          levels: PAPER_LEVELS_BY_CRITERION.formatting_style_citations,
+        },
       ],
-      levels: PAPER_LEVELS,
     },
     {
       id: "conference_best_delegate",
@@ -153,14 +247,17 @@ export default async function ChairAwardsPage() {
       slots: [1],
       helper: "Submit your single strongest overall candidate from this committee.",
       criteria: [
-        { key: "creativity", label: "Creativity" },
-        { key: "diplomacy", label: "Diplomacy" },
-        { key: "collaboration", label: "Collaboration" },
-        { key: "leadership", label: "Leadership" },
-        { key: "knowledge_research", label: "Knowledge and Research" },
-        { key: "participation", label: "Participation" },
+        { key: "creativity", label: "Creativity", levels: DELEGATE_LEVELS_BY_CRITERION.creativity },
+        { key: "diplomacy", label: "Diplomacy", levels: DELEGATE_LEVELS_BY_CRITERION.diplomacy },
+        { key: "collaboration", label: "Collaboration", levels: DELEGATE_LEVELS_BY_CRITERION.collaboration },
+        { key: "leadership", label: "Leadership", levels: DELEGATE_LEVELS_BY_CRITERION.leadership },
+        {
+          key: "knowledge_research",
+          label: "Knowledge and Research",
+          levels: DELEGATE_LEVELS_BY_CRITERION.knowledge_research,
+        },
+        { key: "participation", label: "Participation", levels: DELEGATE_LEVELS_BY_CRITERION.participation },
       ],
-      levels: DELEGATE_LEVELS,
     },
   ];
 
@@ -242,16 +339,6 @@ export default async function ChairAwardsPage() {
                     <p className="text-brand-muted text-xs uppercase mb-2">
                       Criteria scores (rate each 1-8)
                     </p>
-                    <div className="rounded-md border border-brand-navy/10 bg-brand-cream/30 p-2 mb-3">
-                      <p className="text-[11px] font-semibold text-brand-navy mb-1">Score guide</p>
-                      <ul className="space-y-1">
-                        {type.levels.map((level) => (
-                          <li key={`${type.id}-level-${level.value}`} className="text-[11px] text-brand-navy/85">
-                            <strong>{level.value}</strong>: {level.description}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {type.criteria.map((criterion) => (
                         <label key={`${type.id}-${rank}-${criterion.key}`} className="text-sm">
@@ -265,7 +352,7 @@ export default async function ChairAwardsPage() {
                             <option value="" disabled>
                               Score
                             </option>
-                            {type.levels.map((level) => (
+                            {criterion.levels.map((level) => (
                               <option
                                 key={`${type.id}-${rank}-${criterion.key}-${level.value}`}
                                 value={level.value}
@@ -274,6 +361,17 @@ export default async function ChairAwardsPage() {
                               </option>
                             ))}
                           </select>
+                          <div className="mt-2 text-[11px] rounded-md border border-brand-navy/10 bg-brand-cream/20 p-2">
+                            <div className="font-semibold text-brand-navy/85 mb-1">Level guide</div>
+                            <div className="grid grid-cols-2 gap-x-2 gap-y-1">
+                              {criterion.levels.map((lvl) => (
+                                <div key={`${criterion.key}-lvl-${lvl.value}`} className="min-w-0 break-words">
+                                  <strong className="text-brand-navy">{lvl.value}</strong>
+                                  <span className="text-brand-navy/70">: {lvl.description}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </label>
                       ))}
                     </div>
