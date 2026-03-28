@@ -83,7 +83,7 @@ export function GoogleDocsEmbed({
         <iframe
           title={heading}
           src={iframeSrc}
-          className="w-full h-[min(72vh,820px)] bg-brand-cream"
+          className="w-full min-h-[70vh] h-[calc(100dvh-12rem)] bg-brand-cream"
           allow="clipboard-read; clipboard-write; fullscreen"
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
