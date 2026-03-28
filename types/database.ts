@@ -42,6 +42,8 @@ export interface VoteItem {
   required_majority: string;
   /** Delegate allocation that moved the motion (optional). */
   motioner_allocation_id?: string | null;
+  /** False while motion is only stated on the floor; true when delegates may vote. */
+  open_for_voting?: boolean;
   created_at: string;
   closed_at: string | null;
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { ListOrdered } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteType } from "@/types/database";
 import {
@@ -9,6 +10,12 @@ import {
 } from "@/lib/resolution-functions";
 import { recordClauseVoteOutcomesAction } from "@/app/actions/resolutions";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import { ropRequiredMajority } from "@/lib/rop-required-majority";
+import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
+import {
+  motionDisruptivenessScore,
+  sortMotionsMostDisruptiveFirst,
+} from "@/lib/motion-disruptiveness";
 
 type Alloc = { id: string; country: string };
 type QueueRow = {
@@ -36,6 +43,8 @@ type MotionRow = {
   must_vote: boolean;
   required_majority: string;
   motioner_allocation_id: string | null;
+  open_for_voting: boolean;
+  created_at: string;
   closed_at: string | null;
 };
 type MotionAudit = {
@@ -88,35 +97,44 @@ export function SessionControlClient({
     title: "",
     description: "",
     must_vote: false,
-    required_majority: "simple",
     procedure_resolution_id: null as string | null,
     procedure_clause_ids: [] as string[],
     motioner_allocation_id: null as string | null,
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
+  const [showModeratedCaucusQueuePrompt, setShowModeratedCaucusQueuePrompt] = useState(false);
+  const [caucusBulkPick, setCaucusBulkPick] = useState<string[]>([]);
+  const speakersSectionRef = useRef<HTMLElement | null>(null);
+  const [motionFloorOpen, setMotionFloorOpen] = useState(false);
+  const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
 
   const procedurePresets = useMemo(
     () => [
       { code: null as string | null, label: "Custom" },
-      { code: "set_agenda", label: "Motion to Set the Agenda", title: "Motion to Set the Agenda", majority: "simple" },
-      { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time", majority: "simple" },
-      { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate", majority: "simple" },
-      { code: "close_debate", label: "Motion to Close Debate", title: "Motion to Close Debate", majority: "simple" },
-      { code: "exclude_public", label: "Motion to Exclude the Public", title: "Motion to Exclude the Public", majority: "simple" },
-      { code: "silent_prayer", label: "Minute of Silent Prayer/Meditation", title: "Motion for a Minute of Silent Prayer or Meditation", majority: "simple" },
-      { code: "roll_call_vote", label: "Motion for a Roll Call Vote", title: "Motion for a Roll Call Vote", majority: "simple" },
-      { code: "minute_silent", label: "Minute of Silent Prayer", title: "Motion for a Minute of Silent Prayer or Meditation", majority: "simple" },
-      { code: "unmoderated_caucus", label: "Unmoderated Caucus", title: "Motion for an Unmoderated Caucus", majority: "simple" },
-      { code: "moderated_caucus", label: "Moderated Caucus", title: "Motion for a Moderated Caucus", majority: "simple" },
-      { code: "consultation", label: "Consultation", title: "Motion for a Consultation", majority: "simple" },
-      { code: "adjourn", label: "Adjourn Session", title: "Motion to Adjourn Session", majority: "simple" },
-      { code: "suspend", label: "Suspend Session", title: "Motion to Suspend Session", majority: "simple" },
-      { code: "divide_question", label: "Divide the Question (editor needed)", title: "Motion to Divide the Question", majority: "simple" },
-      { code: "clause_by_clause", label: "Clause-by-Clause (editor needed)", title: "Motion to Vote Clause by Clause", majority: "simple" },
-      { code: "amendment", label: "Amendments (editor needed)", title: "Amendment", majority: "simple" },
+      { code: "set_agenda", label: "Motion to Set the Agenda", title: "Motion to Set the Agenda" },
+      { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time" },
+      { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate" },
+      { code: "close_debate", label: "Motion to Close Debate", title: "Motion to Close Debate" },
+      { code: "exclude_public", label: "Motion to Exclude the Public", title: "Motion to Exclude the Public" },
+      { code: "silent_prayer", label: "Minute of Silent Prayer/Meditation", title: "Motion for a Minute of Silent Prayer or Meditation" },
+      { code: "roll_call_vote", label: "Motion for a Roll Call Vote", title: "Motion for a Roll Call Vote" },
+      { code: "minute_silent", label: "Minute of Silent Prayer", title: "Motion for a Minute of Silent Prayer or Meditation" },
+      { code: "unmoderated_caucus", label: "Unmoderated Caucus", title: "Motion for an Unmoderated Caucus" },
+      { code: "moderated_caucus", label: "Moderated Caucus", title: "Motion for a Moderated Caucus" },
+      { code: "consultation", label: "Consultation", title: "Motion for a Consultation" },
+      { code: "adjourn", label: "Adjourn Session", title: "Motion to Adjourn Session" },
+      { code: "suspend", label: "Suspend Session", title: "Motion to Suspend Session" },
+      { code: "divide_question", label: "Divide the Question (editor needed)", title: "Motion to Divide the Question" },
+      { code: "clause_by_clause", label: "Clause-by-Clause (editor needed)", title: "Motion to Vote Clause by Clause" },
+      { code: "amendment", label: "Amendments (editor needed)", title: "Amendment" },
     ],
     []
+  );
+
+  const ropMajorityForDraft = useMemo(
+    () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
+    [motionDraft.vote_type, motionDraft.procedure_code]
   );
 
   const selectedResolutionClauses = useMemo(() => {
@@ -124,19 +142,49 @@ export function SessionControlClient({
     return resolutionClauses.filter((c) => c.resolution_id === motionDraft.procedure_resolution_id);
   }, [motionDraft.procedure_resolution_id, resolutionClauses]);
 
+  const activeQueueAllocationIds = useMemo(() => {
+    const s = new Set<string>();
+    for (const row of queue) {
+      if (
+        (row.status === "waiting" || row.status === "current") &&
+        row.allocation_id
+      ) {
+        s.add(row.allocation_id);
+      }
+    }
+    return s;
+  }, [queue]);
+
+  useEffect(() => {
+    if (!showModeratedCaucusQueuePrompt) return;
+    const id = requestAnimationFrame(() => {
+      speakersSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [showModeratedCaucusQueuePrompt]);
+
   const refresh = useCallback(async () => {
+    const motionSelect =
+      "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, open_for_voting, created_at, closed_at";
+
     const [
+      { data: psRow },
       { data: allocs },
       { data: q },
       { data: r },
       { data: ann },
       { data: t },
-      { data: currentMotion },
-      { data: motionRows },
+      { data: unclosedRows },
+      { data: recentClosedRows },
       { data: resolutionRows },
       { data: clauseRows },
     ] =
       await Promise.all([
+        supabase
+          .from("procedure_states")
+          .select("state, current_vote_item_id, debate_closed, motion_floor_open")
+          .eq("conference_id", conferenceId)
+          .maybeSingle(),
         supabase
           .from("allocations")
           .select("id, country")
@@ -159,20 +207,12 @@ export function SessionControlClient({
           .order("created_at", { ascending: false })
           .limit(12),
         supabase.from("timers").select("*").eq("conference_id", conferenceId).maybeSingle(),
+        supabase.from("vote_items").select(motionSelect).eq("conference_id", conferenceId).is("closed_at", null),
         supabase
           .from("vote_items")
-          .select(
-            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, closed_at"
-          )
+          .select(motionSelect)
           .eq("conference_id", conferenceId)
-          .is("closed_at", null)
-          .maybeSingle(),
-        supabase
-          .from("vote_items")
-          .select(
-            "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, closed_at"
-          )
-          .eq("conference_id", conferenceId)
+          .not("closed_at", "is", null)
           .order("created_at", { ascending: false })
           .limit(8),
         supabase
@@ -193,9 +233,20 @@ export function SessionControlClient({
     setQueue((q as QueueRow[]) ?? []);
     setRoll((r as RollRow[]) ?? []);
     setAnnouncements((ann as Announcement[]) ?? []);
-    const open = (currentMotion as MotionRow | null) ?? null;
+    const ps = psRow as {
+      motion_floor_open?: boolean;
+      debate_closed?: boolean;
+      state?: string;
+      current_vote_item_id?: string | null;
+    } | null;
+    setMotionFloorOpen(!!ps?.motion_floor_open);
+
+    const unclosed = (unclosedRows as MotionRow[]) ?? [];
+    const open = unclosed.find((row) => row.open_for_voting === true) ?? null;
+    const pendingRaw = unclosed.filter((row) => row.open_for_voting === false);
+    setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw));
     setOpenMotion(open);
-    setRecentMotions((motionRows as MotionRow[]) ?? []);
+    setRecentMotions((recentClosedRows as MotionRow[]) ?? []);
     setResolutions((resolutionRows as ResolutionRow[]) ?? []);
     setResolutionClauses((clauseRows as ClauseRow[]) ?? []);
     if (open) {
@@ -205,14 +256,13 @@ export function SessionControlClient({
         title: open.title ?? "",
         description: open.description ?? "",
         must_vote: open.must_vote,
-        required_majority: open.required_majority,
         procedure_resolution_id: open.procedure_resolution_id,
         procedure_clause_ids: open.procedure_clause_ids ?? [],
         motioner_allocation_id: open.motioner_allocation_id ?? null,
       });
     }
 
-    const motionId = (currentMotion as MotionRow | null)?.id ?? null;
+    const motionId = open?.id ?? null;
     if (motionId) {
       const [{ data: openVotes }, { data: auditRows }] = await Promise.all([
         supabase.from("votes").select("value").eq("vote_item_id", motionId),
@@ -286,6 +336,16 @@ export function SessionControlClient({
         { event: "*", schema: "public", table: "motion_audit_events" },
         () => void refresh()
       )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "procedure_states",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void refresh()
+      )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
@@ -350,6 +410,43 @@ export function SessionControlClient({
         status: "waiting",
       });
       setMsg(error ? error.message : "Added to queue.");
+      void refresh();
+    });
+  }
+
+  function toggleCaucusBulkPick(allocationId: string) {
+    setCaucusBulkPick((prev) =>
+      prev.includes(allocationId) ? prev.filter((x) => x !== allocationId) : [...prev, allocationId]
+    );
+  }
+
+  function addBulkModeratedCaucusSpeakers() {
+    const toAdd = allocations
+      .map((a) => a.id)
+      .filter((id) => caucusBulkPick.includes(id) && !activeQueueAllocationIds.has(id));
+    if (!toAdd.length) {
+      setMsg("Choose allocations that are not already waiting or current in the queue.");
+      return;
+    }
+    startTransition(async () => {
+      const maxBase = queue.reduce((m, r) => Math.max(m, r.sort_order), 0);
+      const rows = toAdd.map((id, i) => {
+        const a = allocations.find((x) => x.id === id);
+        return {
+          conference_id: conferenceId,
+          allocation_id: id,
+          label: a?.country ?? "—",
+          sort_order: maxBase + 1 + i,
+          status: "waiting" as const,
+        };
+      });
+      const { error } = await supabase.from("speaker_queue_entries").insert(rows);
+      setMsg(
+        error
+          ? error.message
+          : `Added ${toAdd.length} speaker(s) to the queue for the moderated caucus.`
+      );
+      if (!error) setCaucusBulkPick([]);
       void refresh();
     });
   }
@@ -420,6 +517,18 @@ export function SessionControlClient({
       setMsg("Close the current motion before opening another.");
       return;
     }
+    if (motionFloorOpen) {
+      setMsg(
+        "The motion floor is open for statements. Close the floor and use Record stated motion, or close the floor first to create a single open vote."
+      );
+      return;
+    }
+    if (pendingStatedMotions.length > 0) {
+      setMsg(
+        "Stated motions are waiting to be voted. Use Begin voting (RoP order) or withdraw them before using Create and open motion."
+      );
+      return;
+    }
     if (
       motionRequiresClauseTargets(motionDraft.procedure_code) &&
       (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)
@@ -430,10 +539,11 @@ export function SessionControlClient({
     startTransition(async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
-        .select("debate_closed")
+        .select("debate_closed, motion_floor_open, state, current_vote_item_id")
         .eq("conference_id", conferenceId)
         .maybeSingle();
       const debateClosed = psRow?.debate_closed ?? false;
+      const motionFloor = psRow?.motion_floor_open ?? false;
 
       const { data: inserted, error } = await supabase
         .from("vote_items")
@@ -446,8 +556,9 @@ export function SessionControlClient({
         title: motionDraft.title.trim(),
         description: motionDraft.description.trim() || null,
         must_vote: motionDraft.must_vote,
-        required_majority: motionDraft.required_majority,
+        required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
         motioner_allocation_id: motionDraft.motioner_allocation_id || null,
+        open_for_voting: true,
         })
         .select("id")
         .maybeSingle();
@@ -459,6 +570,7 @@ export function SessionControlClient({
           state: "voting_procedure",
           current_vote_item_id: inserted.id,
           debate_closed: debateClosed,
+          motion_floor_open: motionFloor,
           updated_at: new Date().toISOString(),
         });
         setMotionDraft({
@@ -467,7 +579,6 @@ export function SessionControlClient({
           title: "",
           description: "",
           must_vote: false,
-          required_majority: "simple",
           procedure_resolution_id: null,
           procedure_clause_ids: [],
           motioner_allocation_id: null,
@@ -490,7 +601,7 @@ export function SessionControlClient({
           title: motionDraft.title.trim() || null,
           description: motionDraft.description.trim() || null,
           must_vote: motionDraft.must_vote,
-          required_majority: motionDraft.required_majority,
+          required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
           motioner_allocation_id: motionDraft.motioner_allocation_id || null,
         })
         .eq("id", openMotion.id);
@@ -504,10 +615,11 @@ export function SessionControlClient({
     startTransition(async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
-        .select("debate_closed")
+        .select("debate_closed, motion_floor_open")
         .eq("conference_id", conferenceId)
         .maybeSingle();
       const debateClosed = psRow?.debate_closed ?? false;
+      const motionFloor = psRow?.motion_floor_open ?? false;
 
       const { error } = await supabase
         .from("vote_items")
@@ -556,8 +668,14 @@ export function SessionControlClient({
           state: nextState,
           current_vote_item_id: null,
           debate_closed: nextDebateClosed,
+          motion_floor_open: motionFloor,
           updated_at: new Date().toISOString(),
         });
+
+        if (passes && openMotion.procedure_code === "moderated_caucus") {
+          setCaucusBulkPick([]);
+          setShowModeratedCaucusQueuePrompt(true);
+        }
       }
       void refresh();
     });
@@ -565,16 +683,29 @@ export function SessionControlClient({
 
   function reopenMotion(voteItemId: string) {
     startTransition(async () => {
+      const { data: blocking } = await supabase
+        .from("vote_items")
+        .select("id")
+        .eq("conference_id", conferenceId)
+        .is("closed_at", null)
+        .eq("open_for_voting", true)
+        .maybeSingle();
+      if (blocking && blocking.id !== voteItemId) {
+        setMsg("Another motion is already open for voting. Close it before reopening this one.");
+        return;
+      }
+
       const { data: psRow } = await supabase
         .from("procedure_states")
-        .select("debate_closed")
+        .select("debate_closed, motion_floor_open")
         .eq("conference_id", conferenceId)
         .maybeSingle();
       const debateClosed = psRow?.debate_closed ?? false;
+      const motionFloor = psRow?.motion_floor_open ?? false;
 
       const { error } = await supabase
         .from("vote_items")
-        .update({ closed_at: null })
+        .update({ closed_at: null, open_for_voting: true })
         .eq("id", voteItemId);
       setMsg(error ? error.message : "Motion reopened.");
       if (!error) {
@@ -583,9 +714,166 @@ export function SessionControlClient({
           state: "voting_procedure",
           current_vote_item_id: voteItemId,
           debate_closed: debateClosed,
+          motion_floor_open: motionFloor,
           updated_at: new Date().toISOString(),
         });
       }
+      void refresh();
+    });
+  }
+
+  function openMotionFloorForStatements() {
+    if (openMotion) {
+      setMsg("Close the current vote before opening the motion floor for statements.");
+      return;
+    }
+    startTransition(async () => {
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed, motion_floor_open, state, current_vote_item_id")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const { error } = await supabase.from("procedure_states").upsert({
+        conference_id: conferenceId,
+        state: (psRow?.state as string) ?? "debate_open",
+        current_vote_item_id: psRow?.current_vote_item_id ?? null,
+        debate_closed: psRow?.debate_closed ?? false,
+        motion_floor_open: true,
+        updated_at: new Date().toISOString(),
+      });
+      setMsg(error ? error.message : "Motion floor open — record each stated motion below.");
+      void refresh();
+    });
+  }
+
+  function closeMotionFloorForStatements() {
+    startTransition(async () => {
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed, motion_floor_open, state, current_vote_item_id")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const { error } = await supabase.from("procedure_states").upsert({
+        conference_id: conferenceId,
+        state: (psRow?.state as string) ?? "debate_open",
+        current_vote_item_id: psRow?.current_vote_item_id ?? null,
+        debate_closed: psRow?.debate_closed ?? false,
+        motion_floor_open: false,
+        updated_at: new Date().toISOString(),
+      });
+      setMsg(error ? error.message : "Motion floor closed for statements.");
+      void refresh();
+    });
+  }
+
+  function recordStatedMotion() {
+    if (!motionFloorOpen) {
+      setMsg("Open the motion floor for statements first.");
+      return;
+    }
+    if (openMotion) {
+      setMsg("A motion is already open for voting. Close it before recording further statements.");
+      return;
+    }
+    if (!motionDraft.title.trim()) {
+      setMsg("Motion title is required.");
+      return;
+    }
+    if (
+      motionRequiresClauseTargets(motionDraft.procedure_code) &&
+      (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)
+    ) {
+      setMsg("Select a resolution and at least one clause for this procedural motion.");
+      return;
+    }
+    startTransition(async () => {
+      const { error } = await supabase.from("vote_items").insert({
+        conference_id: conferenceId,
+        vote_type: motionDraft.vote_type,
+        procedure_code: motionDraft.procedure_code,
+        procedure_resolution_id: motionDraft.procedure_resolution_id,
+        procedure_clause_ids: motionDraft.procedure_clause_ids,
+        title: motionDraft.title.trim(),
+        description: motionDraft.description.trim() || null,
+        must_vote: motionDraft.must_vote,
+        required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
+        motioner_allocation_id: motionDraft.motioner_allocation_id || null,
+        open_for_voting: false,
+      });
+      setMsg(error ? error.message : "Stated motion recorded (not yet open for voting).");
+      if (!error) {
+        setMotionDraft({
+          vote_type: "motion",
+          procedure_code: null,
+          title: "",
+          description: "",
+          must_vote: false,
+          procedure_resolution_id: null,
+          procedure_clause_ids: [],
+          motioner_allocation_id: null,
+        });
+      }
+      void refresh();
+    });
+  }
+
+  function beginVotingInDisruptivenessOrder() {
+    if (motionFloorOpen) {
+      setMsg("Close the motion floor for statements before beginning votes.");
+      return;
+    }
+    if (openMotion) {
+      setMsg("A motion is already open for voting.");
+      return;
+    }
+    const ordered = sortMotionsMostDisruptiveFirst(pendingStatedMotions);
+    if (!ordered.length) {
+      setMsg("No stated motions are waiting to be voted on.");
+      return;
+    }
+    const first = ordered[0];
+    startTransition(async () => {
+      const { data: psRow } = await supabase
+        .from("procedure_states")
+        .select("debate_closed, motion_floor_open, state, current_vote_item_id")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const { error: uErr } = await supabase
+        .from("vote_items")
+        .update({ open_for_voting: true })
+        .eq("id", first.id)
+        .eq("open_for_voting", false);
+      if (uErr) {
+        setMsg(uErr.message);
+        void refresh();
+        return;
+      }
+      const { error: pErr } = await supabase.from("procedure_states").upsert({
+        conference_id: conferenceId,
+        state: "voting_procedure",
+        current_vote_item_id: first.id,
+        debate_closed: psRow?.debate_closed ?? false,
+        motion_floor_open: false,
+        updated_at: new Date().toISOString(),
+      });
+      setMsg(
+        pErr
+          ? pErr.message
+          : `Opened for voting: ${first.title ?? "Motion"} (most disruptive of the pending set).`
+      );
+      void refresh();
+    });
+  }
+
+  function withdrawStatedMotion(voteItemId: string) {
+    startTransition(async () => {
+      const { error } = await supabase
+        .from("vote_items")
+        .delete()
+        .eq("id", voteItemId)
+        .eq("conference_id", conferenceId)
+        .eq("open_for_voting", false);
+      setMsg(error ? error.message : "Stated motion removed.");
       void refresh();
     });
   }
@@ -615,9 +903,92 @@ export function SessionControlClient({
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
         <p className="text-xs text-brand-muted">
-          Chair-only: one open motion at a time. Delegates vote while motion is open.
+          Chair-only: one vote open at a time. For several motions at once, open the motion floor, record each
+          stated motion, close the floor, then begin voting—motions are taken in{" "}
+          <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP). Required majority
+          follows UN-style RoP from type and preset.
         </p>
         <div className={`${surfaceCard} space-y-3`}>
+          <div className="rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-2 space-y-2">
+            <p className="text-sm font-medium text-neutral-900">
+              Motion floor:{" "}
+              <span className={motionFloorOpen ? "text-amber-800" : "text-neutral-600"}>
+                {motionFloorOpen ? "open for statements" : "closed"}
+              </span>
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={pending || !!openMotion || motionFloorOpen}
+                onClick={openMotionFloorForStatements}
+                className="px-3 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium disabled:opacity-50"
+              >
+                Open floor for motion statements
+              </button>
+              <button
+                type="button"
+                disabled={pending || !motionFloorOpen}
+                onClick={closeMotionFloorForStatements}
+                className="px-3 py-2 rounded-lg border border-neutral-500 bg-white text-neutral-950 text-sm font-medium hover:bg-neutral-50 disabled:opacity-50"
+              >
+                Close floor (statements ended)
+              </button>
+              <button
+                type="button"
+                disabled={
+                  pending ||
+                  !motionFloorOpen ||
+                  !!openMotion ||
+                  !motionDraft.title.trim() ||
+                  (motionRequiresClauseTargets(motionDraft.procedure_code) &&
+                    (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0))
+                }
+                onClick={recordStatedMotion}
+                className="px-3 py-2 rounded-lg border border-amber-700 text-amber-900 text-sm font-medium hover:bg-amber-50 disabled:opacity-50"
+              >
+                Record stated motion
+              </button>
+              <button
+                type="button"
+                disabled={
+                  pending || motionFloorOpen || !!openMotion || pendingStatedMotions.length === 0
+                }
+                onClick={beginVotingInDisruptivenessOrder}
+                className="px-3 py-2 rounded-lg bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 disabled:opacity-50"
+              >
+                Begin voting (most disruptive first)
+              </button>
+            </div>
+          </div>
+
+          {pendingStatedMotions.length > 0 ? (
+            <div className="rounded-lg border border-neutral-200 bg-white px-3 py-2 space-y-2">
+              <p className={surfaceLabel}>Pending — vote order (most disruptive first)</p>
+              <ol className="list-decimal pl-5 space-y-2 text-sm text-neutral-900">
+                {pendingStatedMotions.map((m, i) => (
+                  <li key={m.id} className="pl-1">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <span className="font-medium">#{i + 1}</span> — {m.title || "Untitled"}
+                        <span className="text-neutral-500 text-xs block sm:inline sm:ml-2">
+                          ({m.procedure_code ?? m.vote_type}, RoP priority {motionDisruptivenessScore(m.vote_type, m.procedure_code)})
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        disabled={pending}
+                        onClick={() => withdrawStatedMotion(m.id)}
+                        className="text-xs text-red-700 font-medium hover:underline shrink-0"
+                      >
+                        Withdraw
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ) : null}
+
           <label className="text-sm text-neutral-900">
             <span className={surfaceLabel}>Procedure preset</span>
             <select
@@ -632,7 +1003,6 @@ export function SessionControlClient({
                   procedure_code: code,
                   vote_type: "motion",
                   title: preset?.title ?? d.title,
-                  required_majority: (preset?.majority as string | undefined) ?? d.required_majority,
                 }));
               }}
             >
@@ -722,19 +1092,14 @@ export function SessionControlClient({
                 <option value="resolution">Resolution</option>
               </select>
             </label>
-            <label className="text-sm text-neutral-900">
-              <span className={surfaceLabel}>Required majority</span>
-              <select
-                className={surfaceField}
-                value={motionDraft.required_majority}
-                onChange={(e) =>
-                  setMotionDraft((d) => ({ ...d, required_majority: e.target.value }))
-                }
-              >
-                <option value="simple">Simple</option>
-                <option value="2/3">2/3</option>
-              </select>
-            </label>
+            <div className="text-sm text-neutral-900 rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-2">
+              <span className={surfaceLabel}>Required majority (RoP)</span>
+              <p className="mt-1 font-semibold text-neutral-950">{formatVoteMajorityLabel(ropMajorityForDraft)}</p>
+              <p className="text-xs text-neutral-600 mt-1 leading-snug">
+                Simple for procedural motions; two-thirds for resolutions, amendments, and motions to approve an
+                amendment (Amendments preset).
+              </p>
+            </div>
           </div>
           <label className="text-sm block text-neutral-900">
             <span className={surfaceLabel}>Title</span>
@@ -840,10 +1205,9 @@ export function SessionControlClient({
               <li key={m.id} className="flex items-center justify-between gap-2">
                 <span className="truncate">
                   {m.title || "Untitled"}{" "}
-                  <span className="text-neutral-600">({m.closed_at ? "closed" : "open"})</span>
+                  <span className="text-neutral-600">(closed)</span>
                 </span>
-                {m.closed_at ? (
-                  <button
+                <button
                     type="button"
                     disabled={pending || !!openMotion}
                     onClick={() => reopenMotion(m.id)}
@@ -851,7 +1215,6 @@ export function SessionControlClient({
                   >
                     Reopen
                   </button>
-                ) : null}
               </li>
             ))}
           </ul>
@@ -959,9 +1322,105 @@ export function SessionControlClient({
         </div>
       </section>
 
-      <section className="space-y-3">
+      <section ref={speakersSectionRef} className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Speakers queue</h3>
         <div className={`${surfaceCard} space-y-3`}>
+          {showModeratedCaucusQueuePrompt ? (
+            <div className="rounded-lg border-2 border-amber-500/80 bg-amber-50 p-3 space-y-3 text-neutral-900">
+              <div className="flex gap-2 items-start">
+                <ListOrdered className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" aria-hidden />
+                <div className="min-w-0 space-y-1">
+                  <p className="font-semibold text-amber-950">Moderated caucus passed</p>
+                  <p className="text-sm text-neutral-800">
+                    Add delegates to the speakers queue for this caucus. They appear in the order you add them
+                    (single <strong className="font-medium">Add</strong> below adds one at a time to the end).
+                    Or tick several allocations and use <strong className="font-medium">Add selected</strong>—they
+                    are appended in committee list order. Delegates can still use Request to speak on their own.
+                  </p>
+                </div>
+              </div>
+              {allocations.length === 0 ? (
+                <p className="text-sm text-neutral-700">
+                  No allocations are loaded for this committee yet. Dismiss when ready—you can add speakers later from
+                  the queue controls.
+                </p>
+              ) : allocations.some((a) => !activeQueueAllocationIds.has(a.id)) ? (
+                <div className="space-y-2">
+                  <p className={`${surfaceLabel} text-neutral-700`}>Quick add (not yet waiting or current)</p>
+                  <ul className="max-h-40 overflow-y-auto rounded border border-amber-200/80 bg-white/90 p-2 space-y-1.5 text-sm">
+                    {allocations.map((a) => {
+                      if (activeQueueAllocationIds.has(a.id)) return null;
+                      const checked = caucusBulkPick.includes(a.id);
+                      return (
+                        <li key={a.id}>
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={() => toggleCaucusBulkPick(a.id)}
+                            />
+                            <span>{a.country}</span>
+                          </label>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      disabled={pending || caucusBulkPick.length === 0}
+                      onClick={addBulkModeratedCaucusSpeakers}
+                      className="px-3 py-2 rounded-lg bg-amber-700 text-white text-sm font-medium hover:bg-amber-800 disabled:opacity-50"
+                    >
+                      Add selected to queue
+                    </button>
+                    <button
+                      type="button"
+                      disabled={pending}
+                      onClick={() => {
+                        setShowModeratedCaucusQueuePrompt(false);
+                        setCaucusBulkPick([]);
+                      }}
+                      className="px-3 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-900 text-sm font-medium hover:bg-neutral-50"
+                    >
+                      Dismiss reminder
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <p className="text-sm text-neutral-700">
+                    Every allocation already has a waiting or current slot. Remove entries if you need to reorder, or
+                    dismiss when you are done.
+                  </p>
+                  <button
+                    type="button"
+                    disabled={pending}
+                    onClick={() => {
+                      setShowModeratedCaucusQueuePrompt(false);
+                      setCaucusBulkPick([]);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-900 text-sm font-medium hover:bg-neutral-50"
+                  >
+                    Dismiss reminder
+                  </button>
+                </div>
+              )}
+              {allocations.length === 0 ? (
+                <button
+                  type="button"
+                  disabled={pending}
+                  onClick={() => {
+                    setShowModeratedCaucusQueuePrompt(false);
+                    setCaucusBulkPick([]);
+                  }}
+                  className="px-3 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-900 text-sm font-medium hover:bg-neutral-50"
+                >
+                  Dismiss reminder
+                </button>
+              ) : null}
+            </div>
+          ) : null}
           <div className="flex flex-wrap gap-2 items-end">
             <label className="text-sm flex-1 min-w-[12rem] text-neutral-900">
               <span className={surfaceLabel}>Add allocation</span>
