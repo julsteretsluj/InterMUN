@@ -102,8 +102,24 @@ export async function setRoomCodeAndEnterAction(
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
+  const role = profile?.role ?? null;
+  if (role !== "chair" && role !== "smt" && role !== "admin") {
     return { error: "Only chairs, SMT, and admins can set committee codes." };
+  }
+
+  if (role === "chair") {
+    const { data: seats } = await supabase
+      .from("allocations")
+      .select("conference_id")
+      .eq("user_id", user.id);
+    const allowed = new Set(
+      (seats ?? []).map((s) => s.conference_id).filter((id): id is string => Boolean(id))
+    );
+    if (!allowed.has(conferenceId)) {
+      return {
+        error: "You can only set the committee code for a session where you have a seat.",
+      };
+    }
   }
 
   const { error } = await supabase.rpc("set_conference_room_code", {
@@ -116,7 +132,7 @@ export async function setRoomCodeAndEnterAction(
   }
 
   await setActiveConferenceContext(supabase, conferenceId);
-  await clearVerifiedConference();
+  // Do not clear committee second-gate cookie: delegates stay verified until next login.
   redirect(nextPath);
 }
 
