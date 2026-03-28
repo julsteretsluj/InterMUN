@@ -79,54 +79,82 @@ export default async function DashboardLayout({
 
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
 
+  const navRole = showStaffNav ? role ?? null : null;
+
   return (
-    <div className="min-h-screen bg-brand-cream">
-      <header className="bg-brand-paper text-brand-navy shadow-md border-b border-brand-gold/20">
-        <div className="max-w-6xl mx-auto px-4 pt-5 pb-1 flex flex-wrap items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            {showSeamunLogo ? (
-              <img
-                src="/seamun-i-2027-logo.png"
-                alt="SEAMUN I 2027 logo"
-                className="h-14 w-14 object-contain mt-1"
-              />
-            ) : null}
-            <div>
-              <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-navy">
-                {welcomeTitle}
-              </h1>
-              <div className="mt-1 space-y-0.5">
-                <p className="text-sm text-brand-navy/90">{activeConf.name}</p>
-                {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
-                  <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90">
-                    {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
-                  </p>
-                ) : null}
-                {role === "chair" ? (
-                  <p className="text-[0.65rem] font-medium text-brand-navy/90 tracking-wide">
-                    Dais chair
-                  </p>
-                ) : null}
+    <div className="min-h-screen bg-brand-cream flex">
+      {/* Sidebar: app-style icon rail (desktop) */}
+      <aside className="hidden md:flex sticky top-0 h-screen w-[5.5rem] shrink-0 flex-col border-r border-brand-gold/25 bg-brand-paper/95 backdrop-blur-sm shadow-[4px_0_24px_rgba(0,0,0,0.2)] z-30">
+        <div className="shrink-0 flex justify-center pt-4 pb-2 border-b border-brand-line/50">
+          {showSeamunLogo ? (
+            <img
+              src="/seamun-i-2027-logo.png"
+              alt=""
+              className="h-9 w-9 object-contain rounded-xl opacity-95"
+            />
+          ) : (
+            <span
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gold/20 text-[0.65rem] font-bold text-brand-gold-bright border border-brand-gold/30"
+              aria-hidden
+            >
+              IM
+            </span>
+          )}
+        </div>
+        <div className="flex-1 min-h-0">
+          <TabNav staffRole={navRole} variant="sidebar" />
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
+        <header className="bg-brand-paper text-brand-navy shadow-md border-b border-brand-gold/20">
+          <div className="max-w-6xl mx-auto px-4 pt-5 pb-4 flex flex-wrap items-start justify-between gap-4">
+            <div className="flex items-start gap-4 min-w-0">
+              {showSeamunLogo ? (
+                <img
+                  src="/seamun-i-2027-logo.png"
+                  alt="SEAMUN I 2027 logo"
+                  className="h-14 w-14 object-contain mt-1 md:hidden shrink-0"
+                />
+              ) : null}
+              <div className="min-w-0">
+                <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-navy">
+                  {welcomeTitle}
+                </h1>
+                <div className="mt-1 space-y-0.5">
+                  <p className="text-sm text-brand-navy/90 truncate">{activeConf.name}</p>
+                  {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
+                    <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90">
+                      {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
+                    </p>
+                  ) : null}
+                  {role === "chair" ? (
+                    <p className="text-[0.65rem] font-medium text-brand-navy/90 tracking-wide">
+                      Dais chair
+                    </p>
+                  ) : null}
+                </div>
               </div>
             </div>
+            <SignOutButton />
           </div>
-          <SignOutButton />
-        </div>
-        <div className="max-w-6xl mx-auto px-4 pb-4">
-          <TabNav staffRole={showStaffNav ? role ?? null : null} />
           {activeConf?.id && showsDaisTools(role) ? (
-            <>
-              <div className="mt-3">
-                <Timers conferenceId={activeConf.id} />
-              </div>
-              <div className="mt-2">
-                <FloorStatusBar conferenceId={activeConf.id} />
-              </div>
-            </>
+            <div className="max-w-6xl mx-auto px-4 pb-4 space-y-2">
+              <Timers conferenceId={activeConf.id} />
+              <FloorStatusBar conferenceId={activeConf.id} />
+            </div>
           ) : null}
-        </div>
-      </header>
-      <main className="max-w-6xl mx-auto px-4 py-6 md:py-8">{children}</main>
+        </header>
+        <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-6 md:py-8 pb-[calc(6.85rem+env(safe-area-inset-bottom))] md:pb-8">
+          {children}
+        </main>
+      </div>
+
+      {/* Mobile: bottom app dock */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40">
+        <TabNav staffRole={navRole} variant="dock" />
+      </div>
+
       <PaperSavedWidget />
     </div>
   );
