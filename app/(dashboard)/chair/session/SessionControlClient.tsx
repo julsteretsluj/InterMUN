@@ -588,12 +588,9 @@ export function SessionControlClient({
   const surfaceCard =
     "rounded-xl border border-neutral-300 bg-white text-neutral-900 shadow-sm p-3";
   const surfaceLabel = "text-neutral-600 text-xs uppercase font-medium tracking-wide";
-  /** Labels for fields on the dark page shell (not inside white cards). */
-  const pageFieldLabel = "text-neutral-400 text-xs uppercase font-medium tracking-wide";
   const surfaceInputCore =
     "w-full px-3 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-950 placeholder:text-neutral-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold";
   const surfaceField = `mt-1 ${surfaceInputCore}`;
-  const surfaceTextarea = `${surfaceInputCore} min-h-[80px]`;
   const surfaceFieldSm =
     "px-2 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-950 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40";
   const surfaceSubpanel = "space-y-3 rounded-lg border border-neutral-300 p-3 bg-neutral-50 text-neutral-900";
@@ -824,7 +821,7 @@ export function SessionControlClient({
                     type="button"
                     disabled={pending || !!openMotion}
                     onClick={() => reopenMotion(m.id)}
-                    className="text-xs text-brand-gold hover:underline disabled:opacity-50"
+                    className="text-xs text-amber-700 font-medium hover:underline disabled:opacity-50"
                   >
                     Reopen
                   </button>
@@ -837,186 +834,197 @@ export function SessionControlClient({
 
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
-        <p className="text-xs text-brand-muted">
-          Delegates see this in the header when you save. Times are minutes and seconds.
-        </p>
-        <div className="grid sm:grid-cols-2 gap-3">
-          <label className="block text-sm">
-            <span className={pageFieldLabel}>Current speaker</span>
-            <input
-              className={surfaceField}
-              value={timer.current}
-              onChange={(e) => setTimer((t) => ({ ...t, current: e.target.value }))}
-            />
-          </label>
-          <label className="block text-sm">
-            <span className={pageFieldLabel}>Next speaker</span>
-            <input
-              className={surfaceField}
-              value={timer.next}
-              onChange={(e) => setTimer((t) => ({ ...t, next: e.target.value }))}
-            />
-          </label>
-        </div>
-        <div className="flex flex-wrap gap-4 items-end">
-          <label className="text-sm">
-            <span className={pageFieldLabel}>Time left</span>
-            <div className="flex gap-1 mt-1 items-center">
+        <div className={`${surfaceCard} space-y-3`}>
+          <p className="text-sm text-neutral-600">
+            Delegates see this in the header when you save. Times are minutes and seconds.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <label className="block text-sm text-neutral-900">
+              <span className={surfaceLabel}>Current speaker</span>
               <input
-                className={`w-14 ${surfaceFieldSm}`}
-                value={timer.leftM}
-                onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
+                className={surfaceField}
+                value={timer.current}
+                onChange={(e) => setTimer((t) => ({ ...t, current: e.target.value }))}
               />
-              <span className="py-2 text-brand-muted">m</span>
+            </label>
+            <label className="block text-sm text-neutral-900">
+              <span className={surfaceLabel}>Next speaker</span>
               <input
-                className={`w-14 ${surfaceFieldSm}`}
-                value={timer.leftS}
-                onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
+                className={surfaceField}
+                value={timer.next}
+                onChange={(e) => setTimer((t) => ({ ...t, next: e.target.value }))}
               />
-              <span className="py-2 text-brand-muted">s</span>
-            </div>
-          </label>
-          <label className="text-sm">
-            <span className={pageFieldLabel}>Total</span>
-            <div className="flex gap-1 mt-1 items-center">
-              <input
-                className={`w-14 ${surfaceFieldSm}`}
-                value={timer.totalM}
-                onChange={(e) => setTimer((t) => ({ ...t, totalM: e.target.value }))}
-              />
-              <span className="py-2 text-brand-muted">m</span>
-              <input
-                className={`w-14 ${surfaceFieldSm}`}
-                value={timer.totalS}
-                onChange={(e) => setTimer((t) => ({ ...t, totalS: e.target.value }))}
-              />
-              <span className="py-2 text-brand-muted">s</span>
-            </div>
-          </label>
-          <button
-            type="button"
-            disabled={pending}
-            onClick={saveTimer}
-            className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium hover:opacity-90"
-          >
-            Save timer
-          </button>
+            </label>
+          </div>
+          <div className="flex flex-wrap gap-4 items-end">
+            <label className="text-sm text-neutral-900">
+              <span className={surfaceLabel}>Time left</span>
+              <div className="flex gap-1 mt-1 items-center">
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  value={timer.leftM}
+                  onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
+                />
+                <span className="py-2 text-neutral-600 text-sm">m</span>
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  value={timer.leftS}
+                  onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
+                />
+                <span className="py-2 text-neutral-600 text-sm">s</span>
+              </div>
+            </label>
+            <label className="text-sm text-neutral-900">
+              <span className={surfaceLabel}>Total</span>
+              <div className="flex gap-1 mt-1 items-center">
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  value={timer.totalM}
+                  onChange={(e) => setTimer((t) => ({ ...t, totalM: e.target.value }))}
+                />
+                <span className="py-2 text-neutral-600 text-sm">m</span>
+                <input
+                  className={`w-14 ${surfaceFieldSm}`}
+                  value={timer.totalS}
+                  onChange={(e) => setTimer((t) => ({ ...t, totalS: e.target.value }))}
+                />
+                <span className="py-2 text-neutral-600 text-sm">s</span>
+              </div>
+            </label>
+            <button
+              type="button"
+              disabled={pending}
+              onClick={saveTimer}
+              className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
+            >
+              Save timer
+            </button>
+          </div>
         </div>
       </section>
 
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcements</h3>
-        <textarea
-          className={surfaceTextarea}
-          placeholder="Message to the committee…"
-          value={daisBody}
-          onChange={(e) => setDaisBody(e.target.value)}
-        />
-        <button
-          type="button"
-          disabled={pending}
-          onClick={postDais}
-          className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium"
-        >
-          Post
-        </button>
-        <ul className="text-sm space-y-1 border-t border-brand-navy/10 pt-3">
-          {announcements.map((a) => (
-            <li key={a.id} className="text-brand-muted">
-              {a.body}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="space-y-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">Speakers queue</h3>
-        <div className="flex flex-wrap gap-2 items-end">
-          <label className="text-sm flex-1 min-w-[12rem]">
-            <span className={pageFieldLabel}>Add allocation</span>
-            <select
-              className={surfaceField}
-              value={pickAlloc}
-              onChange={(e) => setPickAlloc(e.target.value)}
-            >
-              <option value="">Select…</option>
-              {allocations.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.country}
-                </option>
-              ))}
-            </select>
+        <div className={`${surfaceCard} space-y-3`}>
+          <label className="block text-sm text-neutral-900">
+            <span className={surfaceLabel}>Message</span>
+            <textarea
+              className={`${surfaceInputCore} mt-1 min-h-[80px]`}
+              placeholder="Message to the committee…"
+              value={daisBody}
+              onChange={(e) => setDaisBody(e.target.value)}
+            />
           </label>
           <button
             type="button"
             disabled={pending}
-            onClick={addSpeaker}
-            className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
+            onClick={postDais}
+            className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
           >
-            Add
+            Post
           </button>
+          <ul className="text-sm space-y-1 border-t border-neutral-200 pt-3 text-neutral-800">
+            {announcements.map((a) => (
+              <li key={a.id}>
+                {a.body}
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="space-y-2">
-          {queue.map((q) => (
-            <li
-              key={q.id}
-              className="flex flex-wrap items-center justify-between gap-2 py-2 border-b border-brand-navy/5"
+      </section>
+
+      <section className="space-y-3">
+        <h3 className="font-display text-lg font-semibold text-brand-navy">Speakers queue</h3>
+        <div className={`${surfaceCard} space-y-3`}>
+          <div className="flex flex-wrap gap-2 items-end">
+            <label className="text-sm flex-1 min-w-[12rem] text-neutral-900">
+              <span className={surfaceLabel}>Add allocation</span>
+              <select
+                className={surfaceField}
+                value={pickAlloc}
+                onChange={(e) => setPickAlloc(e.target.value)}
+              >
+                <option value="">Select…</option>
+                {allocations.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.country}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button
+              type="button"
+              disabled={pending}
+              onClick={addSpeaker}
+              className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
             >
-              <span className="font-medium text-brand-navy">
-                {q.label || "—"}{" "}
-                <span className="text-xs font-normal text-brand-muted">({q.status})</span>
-              </span>
-              <span className="flex gap-2">
-                <button
-                  type="button"
-                  className="text-xs text-brand-gold hover:underline"
-                  onClick={() => setCurrent(q.id)}
-                >
-                  Current
-                </button>
-                <button
-                  type="button"
-                  className="text-xs text-red-600 hover:underline"
-                  onClick={() => removeQueue(q.id)}
-                >
-                  Remove
-                </button>
-              </span>
-            </li>
-          ))}
-        </ul>
+              Add
+            </button>
+          </div>
+          <ul className="space-y-2 text-neutral-900">
+            {queue.map((q) => (
+              <li
+                key={q.id}
+                className="flex flex-wrap items-center justify-between gap-2 py-2 border-b border-neutral-200"
+              >
+                <span className="font-medium">
+                  {q.label || "—"}{" "}
+                  <span className="text-xs font-normal text-neutral-600">({q.status})</span>
+                </span>
+                <span className="flex gap-2">
+                  <button
+                    type="button"
+                    className="text-xs text-amber-700 font-medium hover:underline"
+                    onClick={() => setCurrent(q.id)}
+                  >
+                    Current
+                  </button>
+                  <button
+                    type="button"
+                    className="text-xs text-red-700 font-medium hover:underline"
+                    onClick={() => removeQueue(q.id)}
+                  >
+                    Remove
+                  </button>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Roll call</h3>
-        <button
-          type="button"
-          disabled={pending}
-          onClick={initRollCall}
-          className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
-        >
-          Initialize rows (all allocations)
-        </button>
-        <ul className="space-y-2">
-          {roll.map((r) => {
-            const emb = r.allocations;
-            const row = Array.isArray(emb) ? emb[0] : emb;
-            const country = row?.country ?? r.allocation_id.slice(0, 8);
-            return (
-              <li key={r.allocation_id} className="flex items-center justify-between gap-2 text-sm">
-                <span>{country}</span>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={r.present}
-                    onChange={(e) => togglePresent(r.allocation_id, e.target.checked)}
-                  />
-                  Present
-                </label>
-              </li>
-            );
-          })}
-        </ul>
+        <div className={`${surfaceCard} space-y-3`}>
+          <button
+            type="button"
+            disabled={pending}
+            onClick={initRollCall}
+            className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
+          >
+            Initialize rows (all allocations)
+          </button>
+          <ul className="space-y-2 text-sm text-neutral-900">
+            {roll.map((r) => {
+              const emb = r.allocations;
+              const row = Array.isArray(emb) ? emb[0] : emb;
+              const country = row?.country ?? r.allocation_id.slice(0, 8);
+              return (
+                <li key={r.allocation_id} className="flex items-center justify-between gap-2">
+                  <span>{country}</span>
+                  <label className="flex items-center gap-2 cursor-pointer text-neutral-800">
+                    <input
+                      type="checkbox"
+                      checked={r.present}
+                      onChange={(e) => togglePresent(r.allocation_id, e.target.checked)}
+                    />
+                    Present
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </section>
     </div>
   );
