@@ -584,11 +584,27 @@ export function SessionControlClient({
     });
   }
 
+  // Body uses light ink; panels are light cards — force dark text and visible field chrome.
+  const surfaceCard =
+    "rounded-xl border border-neutral-300 bg-white text-neutral-900 shadow-sm p-3";
+  const surfaceLabel = "text-neutral-600 text-xs uppercase font-medium tracking-wide";
+  /** Labels for fields on the dark page shell (not inside white cards). */
+  const pageFieldLabel = "text-neutral-400 text-xs uppercase font-medium tracking-wide";
+  const surfaceInputCore =
+    "w-full px-3 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-950 placeholder:text-neutral-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold";
+  const surfaceField = `mt-1 ${surfaceInputCore}`;
+  const surfaceTextarea = `${surfaceInputCore} min-h-[80px]`;
+  const surfaceFieldSm =
+    "px-2 py-2 rounded-lg border border-neutral-400 bg-white text-neutral-950 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/40";
+  const surfaceSubpanel = "space-y-3 rounded-lg border border-neutral-300 p-3 bg-neutral-50 text-neutral-900";
+  const surfaceInset =
+    "max-h-36 overflow-y-auto rounded border border-neutral-300 p-2 bg-white space-y-1 text-neutral-950 text-xs";
+
   return (
     <div className="space-y-10 max-w-3xl">
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
       {msg && (
-        <p className="text-sm text-brand-navy bg-brand-cream border border-brand-navy/10 rounded-lg px-3 py-2">
+        <p className="text-sm text-neutral-900 bg-white border border-neutral-300 rounded-lg px-3 py-2 shadow-sm">
           {msg}
         </p>
       )}
@@ -598,11 +614,11 @@ export function SessionControlClient({
         <p className="text-xs text-brand-muted">
           Chair-only: one open motion at a time. Delegates vote while motion is open.
         </p>
-        <div className="rounded-xl border border-brand-navy/10 p-3 space-y-3 bg-white/60">
-          <label className="text-sm">
-            <span className="text-brand-muted text-xs uppercase">Procedure preset</span>
+        <div className={`${surfaceCard} space-y-3`}>
+          <label className="text-sm text-neutral-900">
+            <span className={surfaceLabel}>Procedure preset</span>
             <select
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+              className={surfaceField}
               value={motionDraft.procedure_code ?? ""}
               onChange={(e) => {
                 const raw = e.target.value;
@@ -628,11 +644,11 @@ export function SessionControlClient({
           {(motionDraft.procedure_code === "divide_question" ||
             motionDraft.procedure_code === "clause_by_clause" ||
             motionDraft.procedure_code === "amendment") ? (
-            <div className="space-y-3 rounded-lg border border-brand-navy/10 p-3 bg-brand-cream/40">
+            <div className={surfaceSubpanel}>
               <label className="text-sm block">
-                <span className="text-brand-muted text-xs uppercase">Target resolution</span>
+                <span className={surfaceLabel}>Target resolution</span>
                 <select
-                  className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+                  className={surfaceField}
                   value={motionDraft.procedure_resolution_id ?? ""}
                   onChange={(e) =>
                     setMotionDraft((d) => ({
@@ -652,15 +668,15 @@ export function SessionControlClient({
               </label>
 
               <div className="space-y-1">
-                <p className="text-brand-muted text-xs uppercase">Target clauses</p>
-                <div className="max-h-36 overflow-y-auto rounded border border-brand-navy/10 p-2 bg-white/70 space-y-1">
+                <p className={surfaceLabel}>Target clauses</p>
+                <div className={surfaceInset}>
                   {selectedResolutionClauses.length === 0 ? (
-                    <p className="text-xs text-brand-muted">No clauses found for selected resolution.</p>
+                    <p className="text-xs text-neutral-600">No clauses found for selected resolution.</p>
                   ) : (
                     selectedResolutionClauses.map((c) => {
                       const checked = motionDraft.procedure_clause_ids.includes(c.id);
                       return (
-                        <label key={c.id} className="flex items-start gap-2 text-xs cursor-pointer">
+                        <label key={c.id} className="flex items-start gap-2 text-xs cursor-pointer text-neutral-900">
                           <input
                             type="checkbox"
                             checked={checked}
@@ -689,10 +705,10 @@ export function SessionControlClient({
           ) : null}
 
           <div className="grid sm:grid-cols-2 gap-3">
-            <label className="text-sm">
-              <span className="text-brand-muted text-xs uppercase">Type</span>
+            <label className="text-sm text-neutral-900">
+              <span className={surfaceLabel}>Type</span>
               <select
-                className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+                className={surfaceField}
                 value={motionDraft.vote_type}
                 onChange={(e) =>
                   setMotionDraft((d) => ({ ...d, vote_type: e.target.value as VoteType }))
@@ -703,10 +719,10 @@ export function SessionControlClient({
                 <option value="resolution">Resolution</option>
               </select>
             </label>
-            <label className="text-sm">
-              <span className="text-brand-muted text-xs uppercase">Required majority</span>
+            <label className="text-sm text-neutral-900">
+              <span className={surfaceLabel}>Required majority</span>
               <select
-                className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+                className={surfaceField}
                 value={motionDraft.required_majority}
                 onChange={(e) =>
                   setMotionDraft((d) => ({ ...d, required_majority: e.target.value }))
@@ -717,24 +733,24 @@ export function SessionControlClient({
               </select>
             </label>
           </div>
-          <label className="text-sm block">
-            <span className="text-brand-muted text-xs uppercase">Title</span>
+          <label className="text-sm block text-neutral-900">
+            <span className={surfaceLabel}>Title</span>
             <input
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+              className={surfaceField}
               value={motionDraft.title}
               onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
               placeholder="Motion title"
             />
           </label>
-          <label className="text-sm block">
-            <span className="text-brand-muted text-xs uppercase">Description</span>
+          <label className="text-sm block text-neutral-900">
+            <span className={surfaceLabel}>Description</span>
             <textarea
-              className="mt-1 w-full min-h-[72px] px-3 py-2 rounded-lg border border-brand-navy/15"
+              className={`${surfaceInputCore} mt-1 min-h-[72px]`}
               value={motionDraft.description}
               onChange={(e) => setMotionDraft((d) => ({ ...d, description: e.target.value }))}
             />
           </label>
-          <label className="text-sm inline-flex items-center gap-2">
+          <label className="text-sm inline-flex items-center gap-2 text-neutral-900">
             <input
               type="checkbox"
               checked={motionDraft.must_vote}
@@ -758,7 +774,7 @@ export function SessionControlClient({
                   type="button"
                   disabled={pending}
                   onClick={saveMotionEdits}
-                  className="px-4 py-2 rounded-lg border border-brand-navy/20 text-sm font-medium"
+                  className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
                 >
                   Save edits
                 </button>
@@ -766,42 +782,42 @@ export function SessionControlClient({
                   type="button"
                   disabled={pending}
                   onClick={closeMotion}
-                  className="px-4 py-2 rounded-lg border border-red-400/40 text-red-700 text-sm font-medium"
+                  className="px-4 py-2 rounded-lg border border-red-600 bg-red-50 text-red-900 text-sm font-medium hover:bg-red-100 disabled:opacity-50"
                 >
                   Close motion
                 </button>
               </>
             )}
           </div>
-          <div className="text-xs text-brand-muted">
+          <div className="text-xs text-neutral-700 font-medium">
             Tally: Yes {motionTally.yes} | No {motionTally.no} | Total {motionTally.total}
           </div>
         </div>
 
-        <div className="rounded-xl border border-brand-navy/10 p-3 bg-white/50">
-          <p className="text-xs uppercase tracking-wider text-brand-muted mb-2">Audit timeline</p>
+        <div className={surfaceCard}>
+          <p className={`${surfaceLabel} mb-2 tracking-wider`}>Audit timeline</p>
           {motionAudit.length === 0 ? (
-            <p className="text-sm text-brand-muted">No audit events yet.</p>
+            <p className="text-sm text-neutral-600">No audit events yet.</p>
           ) : (
-            <ul className="space-y-1 text-sm">
+            <ul className="space-y-1 text-sm text-neutral-900">
               {motionAudit.map((e) => (
-                <li key={e.id} className="text-brand-navy/90">
+                <li key={e.id}>
                   <span className="capitalize font-medium">{e.event_type}</span>{" "}
-                  <span className="text-brand-muted">({new Date(e.created_at).toLocaleString()})</span>
+                  <span className="text-neutral-600">({new Date(e.created_at).toLocaleString()})</span>
                 </li>
               ))}
             </ul>
           )}
         </div>
 
-        <div className="rounded-xl border border-brand-navy/10 p-3 bg-white/50">
-          <p className="text-xs uppercase tracking-wider text-brand-muted mb-2">Recent motions</p>
-          <ul className="space-y-2 text-sm">
+        <div className={surfaceCard}>
+          <p className={`${surfaceLabel} mb-2 tracking-wider`}>Recent motions</p>
+          <ul className="space-y-2 text-sm text-neutral-900">
             {recentMotions.map((m) => (
               <li key={m.id} className="flex items-center justify-between gap-2">
                 <span className="truncate">
                   {m.title || "Untitled"}{" "}
-                  <span className="text-brand-muted">({m.closed_at ? "closed" : "open"})</span>
+                  <span className="text-neutral-600">({m.closed_at ? "closed" : "open"})</span>
                 </span>
                 {m.closed_at ? (
                   <button
@@ -826,17 +842,17 @@ export function SessionControlClient({
         </p>
         <div className="grid sm:grid-cols-2 gap-3">
           <label className="block text-sm">
-            <span className="text-brand-muted text-xs uppercase">Current speaker</span>
+            <span className={pageFieldLabel}>Current speaker</span>
             <input
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+              className={surfaceField}
               value={timer.current}
               onChange={(e) => setTimer((t) => ({ ...t, current: e.target.value }))}
             />
           </label>
           <label className="block text-sm">
-            <span className="text-brand-muted text-xs uppercase">Next speaker</span>
+            <span className={pageFieldLabel}>Next speaker</span>
             <input
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+              className={surfaceField}
               value={timer.next}
               onChange={(e) => setTimer((t) => ({ ...t, next: e.target.value }))}
             />
@@ -844,37 +860,37 @@ export function SessionControlClient({
         </div>
         <div className="flex flex-wrap gap-4 items-end">
           <label className="text-sm">
-            <span className="text-brand-muted text-xs uppercase">Time left</span>
-            <div className="flex gap-1 mt-1">
+            <span className={pageFieldLabel}>Time left</span>
+            <div className="flex gap-1 mt-1 items-center">
               <input
-                className="w-14 px-2 py-2 rounded-lg border border-brand-navy/15"
+                className={`w-14 ${surfaceFieldSm}`}
                 value={timer.leftM}
                 onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
               />
-              <span className="py-2">m</span>
+              <span className="py-2 text-brand-muted">m</span>
               <input
-                className="w-14 px-2 py-2 rounded-lg border border-brand-navy/15"
+                className={`w-14 ${surfaceFieldSm}`}
                 value={timer.leftS}
                 onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
               />
-              <span className="py-2">s</span>
+              <span className="py-2 text-brand-muted">s</span>
             </div>
           </label>
           <label className="text-sm">
-            <span className="text-brand-muted text-xs uppercase">Total</span>
-            <div className="flex gap-1 mt-1">
+            <span className={pageFieldLabel}>Total</span>
+            <div className="flex gap-1 mt-1 items-center">
               <input
-                className="w-14 px-2 py-2 rounded-lg border border-brand-navy/15"
+                className={`w-14 ${surfaceFieldSm}`}
                 value={timer.totalM}
                 onChange={(e) => setTimer((t) => ({ ...t, totalM: e.target.value }))}
               />
-              <span className="py-2">m</span>
+              <span className="py-2 text-brand-muted">m</span>
               <input
-                className="w-14 px-2 py-2 rounded-lg border border-brand-navy/15"
+                className={`w-14 ${surfaceFieldSm}`}
                 value={timer.totalS}
                 onChange={(e) => setTimer((t) => ({ ...t, totalS: e.target.value }))}
               />
-              <span className="py-2">s</span>
+              <span className="py-2 text-brand-muted">s</span>
             </div>
           </label>
           <button
@@ -891,7 +907,7 @@ export function SessionControlClient({
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcements</h3>
         <textarea
-          className="w-full min-h-[80px] px-3 py-2 rounded-lg border border-brand-navy/15"
+          className={surfaceTextarea}
           placeholder="Message to the committee…"
           value={daisBody}
           onChange={(e) => setDaisBody(e.target.value)}
@@ -917,9 +933,9 @@ export function SessionControlClient({
         <h3 className="font-display text-lg font-semibold text-brand-navy">Speakers queue</h3>
         <div className="flex flex-wrap gap-2 items-end">
           <label className="text-sm flex-1 min-w-[12rem]">
-            <span className="text-brand-muted text-xs uppercase">Add allocation</span>
+            <span className={pageFieldLabel}>Add allocation</span>
             <select
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
+              className={surfaceField}
               value={pickAlloc}
               onChange={(e) => setPickAlloc(e.target.value)}
             >
@@ -935,7 +951,7 @@ export function SessionControlClient({
             type="button"
             disabled={pending}
             onClick={addSpeaker}
-            className="px-4 py-2 rounded-lg border border-brand-navy/20 text-sm font-medium"
+            className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
           >
             Add
           </button>
@@ -977,7 +993,7 @@ export function SessionControlClient({
           type="button"
           disabled={pending}
           onClick={initRollCall}
-          className="px-4 py-2 rounded-lg border border-brand-navy/20 text-sm font-medium"
+          className="px-4 py-2 rounded-lg border border-neutral-500 bg-neutral-100 text-neutral-950 text-sm font-medium hover:bg-neutral-200 disabled:opacity-50"
         >
           Initialize rows (all allocations)
         </button>
