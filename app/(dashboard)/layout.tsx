@@ -1,13 +1,15 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { HelpCircle, Settings } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { ChairLiveFloorThemed } from "@/components/session/ChairLiveFloorThemed";
-import { SignOutButton } from "@/components/SignOutButton";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { getAppName } from "@/lib/branding";
 import { isAdminRole, isStaffRole, isSmtRole, showsDaisTools, SMT_APP_HOME, ADMIN_APP_HOME } from "@/lib/roles";
 import type { UserRole } from "@/types/database";
 
@@ -30,21 +32,13 @@ export default async function DashboardLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, name")
     .eq("id", user.id)
     .maybeSingle();
 
   const role = profile?.role as UserRole | undefined;
   const normalizedRole = role ? (role.toString().trim().toLowerCase() as UserRole) : undefined;
   const showStaffNav = isStaffRole(role);
-  // Use the shared role helpers to avoid edge-cases with casing/enum serialization.
-  const welcomeTitle = isSmtRole(role)
-    ? "Welcome Secretary General"
-    : normalizedRole === "chair"
-      ? "Welcome Chair"
-      : isAdminRole(role)
-        ? "Welcome Admin"
-        : "Welcome Delegate";
 
   if (isAdminRole(normalizedRole)) {
     const search = hdrs.get("x-search") ?? "";
@@ -78,82 +72,79 @@ export default async function DashboardLayout({
     : { data: null };
 
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
-
   const navRole = showStaffNav ? role ?? null : null;
+  const appName = getAppName();
+  const displayName = profile?.name?.trim() || "Delegate";
+  const userEmail = user.email ?? "";
+  const conferenceLine = [activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ") || activeConf.name;
 
   return (
-    <div className="flex min-h-screen bg-brand-cream">
-      {/* Sidebar: app-style icon rail (desktop) */}
-      <aside className="sticky top-0 z-30 hidden h-screen w-[5.5rem] shrink-0 flex-col border-r border-slate-200 bg-white/95 shadow-[4px_0_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:border-brand-gold/25 dark:bg-brand-paper/95 dark:shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
-        <div className="flex shrink-0 justify-center border-b border-slate-200/90 pb-2 pt-4 dark:border-brand-line/50">
+    <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
+      <aside className="sticky top-0 z-30 hidden h-screen w-64 shrink-0 flex-col border-r border-slate-200/90 bg-white shadow-[4px_0_32px_rgba(15,23,42,0.04)] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none lg:flex">
+        <Link
+          href="/profile"
+          className="flex shrink-0 items-center gap-3 border-b border-slate-100 px-5 py-5 transition hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
+        >
           {showSeamunLogo ? (
             <img
               src="/seamun-i-2027-logo.png"
               alt=""
-              className="h-9 w-9 object-contain rounded-xl opacity-95"
+              className="h-10 w-10 shrink-0 rounded-2xl object-contain"
             />
           ) : (
             <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-500/35 bg-emerald-500/10 text-[0.65rem] font-bold text-emerald-800 dark:border-brand-gold/30 dark:bg-brand-gold/20 dark:text-brand-gold-bright"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 text-xs font-bold text-white shadow-md"
               aria-hidden
             >
               IM
             </span>
           )}
+          <span className="truncate text-lg font-bold tracking-tight text-violet-800 dark:text-violet-200">
+            {appName}
+          </span>
+        </Link>
+        <div className="flex min-h-0 flex-1 flex-col">
+          <TabNav staffRole={navRole} variant="aspire-sidebar" />
         </div>
-        <div className="flex-1 min-h-0">
-          <TabNav staffRole={navRole} variant="sidebar" />
+        <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-4 dark:border-zinc-800">
+          <Link
+            href="/guides"
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          >
+            <HelpCircle className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
+            Help center
+          </Link>
+          <Link
+            href="/profile"
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          >
+            <Settings className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
+            Settings
+          </Link>
         </div>
       </aside>
 
-      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
-        <header className="border-b border-slate-200 bg-white/95 text-brand-navy shadow-sm dark:border-brand-gold/20 dark:bg-brand-paper dark:shadow-md">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-start justify-between gap-4 px-4 pb-4 pt-5">
-            <div className="flex items-start gap-4 min-w-0">
-              {showSeamunLogo ? (
-                <img
-                  src="/seamun-i-2027-logo.png"
-                  alt="SEAMUN I 2027 logo"
-                  className="h-14 w-14 object-contain mt-1 md:hidden shrink-0"
-                />
-              ) : null}
-              <div className="min-w-0">
-                <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-brand-navy">
-                  {welcomeTitle}
-                </h1>
-                <div className="mt-1 space-y-0.5">
-                  <p className="text-sm text-brand-navy/90 truncate">{activeConf.name}</p>
-                  {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
-                    <p className="text-[0.65rem] uppercase tracking-[0.28em] text-emerald-700 dark:text-brand-gold-bright/90">
-                      {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
-                    </p>
-                  ) : null}
-                  {role === "chair" ? (
-                    <p className="text-[0.65rem] font-medium text-brand-navy/90 tracking-wide">
-                      Dais chair
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <ThemeToggle />
-              <SignOutButton />
-            </div>
-          </div>
-          {activeConf?.id && showsDaisTools(role) ? (
-            <div className="mx-auto max-w-6xl space-y-2 px-4 pb-4">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col">
+        <DashboardTopBar
+          userName={displayName}
+          userEmail={userEmail}
+          conferenceLine={conferenceLine || null}
+          showSeamunLogo={showSeamunLogo}
+          appName={appName}
+        />
+        {activeConf?.id && showsDaisTools(role) ? (
+          <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950 sm:px-6">
+            <div className="mx-auto max-w-[1400px]">
               <ChairLiveFloorThemed conferenceId={activeConf.id} />
             </div>
-          ) : null}
-        </header>
-        <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-6 md:py-8 pb-[calc(6.85rem+env(safe-area-inset-bottom))] md:pb-8">
+          </div>
+        ) : null}
+        <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-8">
           {children}
         </main>
       </div>
 
-      {/* Mobile: bottom app dock */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40">
+      <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
         <TabNav staffRole={navRole} variant="dock" />
       </div>
 
