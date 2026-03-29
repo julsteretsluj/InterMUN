@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -154,29 +153,13 @@ export function ChairCommitteeSessionControl({
         {msg ? <p className="mt-3 text-sm text-rose-300">{msg}</p> : null}
       </div>
 
-      <div className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-brand-muted">
-        <span className="font-medium text-brand-navy/90">Session tools</span>
-        <span className="mx-2 text-brand-muted">·</span>
-        <Link href="/chair/session/motions" className="text-brand-gold-bright hover:underline">
-          Motions
-        </Link>
-        <span className="mx-1.5">·</span>
-        <Link href="/chair/session/timer" className="text-brand-gold-bright hover:underline">
-          Timer
-        </Link>
-        <span className="mx-1.5">·</span>
-        <Link href="/chair/session/speakers" className="text-brand-gold-bright hover:underline">
-          Speakers
-        </Link>
-        <span className="mx-1.5">·</span>
-        <Link href="/chair/session/roll-call" className="text-brand-gold-bright hover:underline">
-          Roll call
-        </Link>
-        <span className="mx-1.5">·</span>
-        <Link href="/chair/session/announcements" className="text-brand-gold-bright hover:underline">
-          Announcements
-        </Link>
-      </div>
+      <p className="text-sm text-brand-muted">
+        Use the sidebar for <span className="font-medium text-brand-navy/90">Roll call</span>,{" "}
+        <span className="font-medium text-brand-navy/90">Speakers</span>,{" "}
+        <span className="font-medium text-brand-navy/90">Formal motions</span>,{" "}
+        <span className="font-medium text-brand-navy/90">Timer</span>, and{" "}
+        <span className="font-medium text-brand-navy/90">Announcements</span> — one tool per tab.
+      </p>
     </div>
   );
 }

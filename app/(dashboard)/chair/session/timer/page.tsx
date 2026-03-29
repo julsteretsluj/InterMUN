@@ -7,13 +7,13 @@ export default async function ChairSessionTimerPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title="Session floor">
+      <MunPageShell title="Timer">
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
   }
   return (
-    <MunPageShell title="Session floor">
+    <MunPageShell title="Timer">
       <SessionControlClient {...data} activeSection="timer" />
     </MunPageShell>
   );

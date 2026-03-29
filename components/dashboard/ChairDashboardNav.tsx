@@ -9,13 +9,16 @@ import {
   BookOpen,
   CheckSquare,
   ClipboardList,
+  Clock,
   DoorOpen,
   FileText,
+  Gavel,
   HelpCircle,
   KeyRound,
   LayoutGrid,
   Link2,
   ListChecks,
+  Megaphone,
   Mic,
   PanelLeftClose,
   Play,
@@ -36,6 +39,8 @@ type ChairNavItem = {
   emoji: string;
   /** If set, active when pathname === or starts with this */
   activeMatch?: string;
+  /** When true, active only on exact `href` (no `/child` match). */
+  exactHref?: boolean;
 };
 
 /** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
@@ -55,7 +60,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     label: "Session",
     icon: Play,
     emoji: "▶️",
-    activeMatch: "/chair/session",
+    exactHref: true,
   },
   {
     href: "/chair/session/speakers",
@@ -64,10 +69,28 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "🎤",
   },
   {
-    href: "/chair/motions-points",
-    label: "Motions & Points",
-    icon: FileText,
+    href: "/chair/session/motions",
+    label: "Formal motions",
+    icon: Gavel,
     emoji: "📜",
+  },
+  {
+    href: "/chair/session/timer",
+    label: "Timer",
+    icon: Clock,
+    emoji: "⏱️",
+  },
+  {
+    href: "/chair/session/announcements",
+    label: "Announcements",
+    icon: Megaphone,
+    emoji: "📣",
+  },
+  {
+    href: "/chair/motions-points",
+    label: "Motions log",
+    icon: FileText,
+    emoji: "📝",
   },
   { href: "/voting", label: "Voting", icon: CheckSquare, emoji: "🗳️" },
   { href: "/chair/awards", label: "Score", icon: BarChart3, emoji: "📊" },
@@ -79,21 +102,13 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/profile", label: "Settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
 ];
 
-const SESSION_LEAF_PREFIXES = [
-  "/chair/session/motions",
-  "/chair/session/speakers",
-  "/chair/session/roll-call",
-] as const;
-
 function navItemIsActive(pathname: string, item: ChairNavItem): boolean {
+  if (item.exactHref) {
+    return pathname === item.href;
+  }
   const key = item.activeMatch ?? item.href;
   if (key === "/profile") {
     return pathname === "/profile";
-  }
-  if (key === "/chair/session") {
-    if (pathname === "/chair/session") return true;
-    if (!pathname.startsWith("/chair/session/")) return false;
-    return !SESSION_LEAF_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
   }
   return pathname === key || pathname.startsWith(`${key}/`);
 }
