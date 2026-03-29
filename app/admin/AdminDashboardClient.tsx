@@ -29,23 +29,23 @@ export function AdminDashboardClient({
 
   return (
     <div className="space-y-10">
-      <section className="rounded-2xl border border-slate-700 bg-slate-900/40 p-5 md:p-6">
-        <h2 className="font-display text-lg font-semibold text-white mb-2">New conference event</h2>
-        <p className="text-sm text-slate-300 mb-4 max-w-2xl">
+      <section className="mun-shell !shadow-none">
+        <h2 className="mb-2 font-display text-lg font-semibold text-brand-navy">New conference event</h2>
+        <p className="mb-4 max-w-2xl text-sm text-brand-muted">
           Creates a conference code (first gate) and the first committee session (second gate). Use{" "}
           <span className="font-mono text-xs">next=/admin</span> so you return here after setup.
         </p>
         <Link
           href="/conference-setup?next=%2Fadmin"
-          className="inline-flex px-4 py-2 rounded-lg bg-amber-400 text-slate-900 text-sm font-medium hover:bg-amber-300"
+          className="inline-flex rounded-lg bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-accent-ink hover:opacity-95"
         >
           Open conference setup
         </Link>
       </section>
 
-      <section className="rounded-2xl border border-slate-700 bg-slate-900/40 p-5 md:p-6 space-y-4">
-        <h2 className="font-display text-lg font-semibold text-white">Secretariat (SMT)</h2>
-        <p className="text-sm text-slate-300 max-w-2xl">
+      <section className="mun-shell !shadow-none space-y-4">
+        <h2 className="font-display text-lg font-semibold text-brand-navy">Secretariat (SMT)</h2>
+        <p className="max-w-2xl text-sm text-brand-muted">
           Invite new SMT accounts by email, or change an existing user to delegate, chair, or SMT.
           Promoting someone to SMT lets them use the full secretariat dashboard during the event.
         </p>
@@ -58,15 +58,13 @@ export function AdminDashboardClient({
         ) : (
           <form action={inviteAction} className="max-w-md space-y-3">
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wider text-slate-400 mb-1">
-                Email
-              </label>
+              <label className="mun-label mb-2 block normal-case">Email</label>
               <input
                 name="email"
                 type="email"
                 required
                 autoComplete="email"
-                className="w-full px-3 py-2 rounded-lg border border-slate-600 bg-slate-950 text-white placeholder:text-slate-500"
+                className="mun-field"
                 placeholder="smt@school.edu"
               />
             </div>
@@ -74,37 +72,29 @@ export function AdminDashboardClient({
             <button
               type="submit"
               disabled={invitePending}
-              className="px-4 py-2 rounded-lg bg-amber-400 text-slate-900 text-sm font-medium disabled:opacity-50"
+              className="mun-btn-primary disabled:opacity-50"
             >
               {invitePending ? "Sending…" : "Invite as SMT"}
             </button>
           </form>
         )}
 
-        <form action={roleAction} className="max-w-md space-y-3 pt-4 border-t border-slate-700">
-          <h3 className="text-sm font-medium text-white">Set role on existing account</h3>
+        <form action={roleAction} className="max-w-md space-y-3 border-t border-white/10 pt-4">
+          <h3 className="text-sm font-medium text-brand-navy">Set role on existing account</h3>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wider text-slate-400 mb-1">
-              Email
-            </label>
+            <label className="mun-label mb-2 block normal-case">Email</label>
             <input
               name="email"
               type="email"
               required
               autoComplete="email"
-              className="w-full px-3 py-2 rounded-lg border border-slate-600 bg-slate-950 text-white"
+              className="mun-field"
               placeholder="user@school.edu"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wider text-slate-400 mb-1">
-              Role
-            </label>
-            <select
-              name="role"
-              required
-              className="w-full px-3 py-2 rounded-lg border border-slate-600 bg-slate-950 text-white"
-            >
+            <label className="mun-label mb-2 block normal-case">Role</label>
+            <select name="role" required className="mun-field">
               <option value="delegate">Delegate</option>
               <option value="chair">Chair</option>
               <option value="smt">SMT (secretariat)</option>
@@ -114,7 +104,7 @@ export function AdminDashboardClient({
           <button
             type="submit"
             disabled={rolePending}
-            className="px-4 py-2 rounded-lg border border-slate-500 text-white text-sm font-medium hover:bg-slate-800 disabled:opacity-50"
+            className="mun-btn disabled:opacity-50"
           >
             {rolePending ? "Saving…" : "Save role"}
           </button>

@@ -67,13 +67,13 @@ export function IdeasView({
   return (
     <div className="space-y-4">
       {(editing && (
-        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+        <div className="p-4 border rounded-lg border-white/15 space-y-3">
           <h3 className="font-semibold">Edit idea</h3>
           <textarea
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
             placeholder="Update your idea..."
-            className="w-full h-32 px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full h-32 px-3 py-2 border rounded bg-black/30"
           />
           <div className="flex gap-2">
             <button
@@ -87,7 +87,7 @@ export function IdeasView({
                 setEditing(null);
                 setEditContent("");
               }}
-              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="px-4 py-2 border rounded hover:bg-white/10"
             >
               Cancel
             </button>
@@ -100,7 +100,7 @@ export function IdeasView({
           value={newContent}
           onChange={(e) => setNewContent(e.target.value)}
           placeholder="Resolution idea..."
-          className="flex-1 px-3 py-2 border rounded dark:bg-slate-700 min-h-[80px]"
+          className="flex-1 px-3 py-2 border rounded bg-black/30 min-h-[80px]"
         />
         <button
           onClick={addIdea}
@@ -114,7 +114,7 @@ export function IdeasView({
         {items.map((idea) => (
           <div
             key={idea.id}
-            className="flex items-start gap-3 p-4 border rounded-lg dark:border-slate-700"
+            className="flex items-start gap-3 p-4 border rounded-lg border-white/15"
           >
             <Lightbulb className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0">

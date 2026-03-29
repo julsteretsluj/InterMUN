@@ -3,8 +3,9 @@ import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
-import { ChairLiveFloor } from "@/components/session/ChairLiveFloor";
+import { ChairLiveFloorThemed } from "@/components/session/ChairLiveFloorThemed";
 import { SignOutButton } from "@/components/SignOutButton";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { isAdminRole, isStaffRole, isSmtRole, showsDaisTools, SMT_APP_HOME, ADMIN_APP_HOME } from "@/lib/roles";
@@ -81,10 +82,10 @@ export default async function DashboardLayout({
   const navRole = showStaffNav ? role ?? null : null;
 
   return (
-    <div className="min-h-screen bg-brand-cream flex">
+    <div className="flex min-h-screen bg-brand-cream">
       {/* Sidebar: app-style icon rail (desktop) */}
-      <aside className="hidden md:flex sticky top-0 h-screen w-[5.5rem] shrink-0 flex-col border-r border-brand-gold/25 bg-brand-paper/95 backdrop-blur-sm shadow-[4px_0_24px_rgba(0,0,0,0.2)] z-30">
-        <div className="shrink-0 flex justify-center pt-4 pb-2 border-b border-brand-line/50">
+      <aside className="sticky top-0 z-30 hidden h-screen w-[5.5rem] shrink-0 flex-col border-r border-slate-200 bg-white/95 shadow-[4px_0_24px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:border-brand-gold/25 dark:bg-brand-paper/95 dark:shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
+        <div className="flex shrink-0 justify-center border-b border-slate-200/90 pb-2 pt-4 dark:border-brand-line/50">
           {showSeamunLogo ? (
             <img
               src="/seamun-i-2027-logo.png"
@@ -93,7 +94,7 @@ export default async function DashboardLayout({
             />
           ) : (
             <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gold/20 text-[0.65rem] font-bold text-brand-gold-bright border border-brand-gold/30"
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-500/35 bg-emerald-500/10 text-[0.65rem] font-bold text-emerald-800 dark:border-brand-gold/30 dark:bg-brand-gold/20 dark:text-brand-gold-bright"
               aria-hidden
             >
               IM
@@ -106,8 +107,8 @@ export default async function DashboardLayout({
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0 min-h-screen">
-        <header className="bg-brand-paper text-brand-navy shadow-md border-b border-brand-gold/20">
-          <div className="max-w-6xl mx-auto px-4 pt-5 pb-4 flex flex-wrap items-start justify-between gap-4">
+        <header className="border-b border-slate-200 bg-white/95 text-brand-navy shadow-sm dark:border-brand-gold/20 dark:bg-brand-paper dark:shadow-md">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-start justify-between gap-4 px-4 pb-4 pt-5">
             <div className="flex items-start gap-4 min-w-0">
               {showSeamunLogo ? (
                 <img
@@ -123,7 +124,7 @@ export default async function DashboardLayout({
                 <div className="mt-1 space-y-0.5">
                   <p className="text-sm text-brand-navy/90 truncate">{activeConf.name}</p>
                   {[activeConf.committee, activeConf.tagline].filter(Boolean).length > 0 ? (
-                    <p className="text-[0.65rem] uppercase tracking-[0.28em] text-brand-gold-bright/90">
+                    <p className="text-[0.65rem] uppercase tracking-[0.28em] text-emerald-700 dark:text-brand-gold-bright/90">
                       {[activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ")}
                     </p>
                   ) : null}
@@ -135,11 +136,14 @@ export default async function DashboardLayout({
                 </div>
               </div>
             </div>
-            <SignOutButton />
+            <div className="flex shrink-0 items-center gap-2">
+              <ThemeToggle />
+              <SignOutButton />
+            </div>
           </div>
           {activeConf?.id && showsDaisTools(role) ? (
-            <div className="max-w-6xl mx-auto px-4 pb-4 space-y-2">
-              <ChairLiveFloor conferenceId={activeConf.id} theme="dark" />
+            <div className="mx-auto max-w-6xl space-y-2 px-4 pb-4">
+              <ChairLiveFloorThemed conferenceId={activeConf.id} />
             </div>
           ) : null}
         </header>

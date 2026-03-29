@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
+import { THEME_STORAGE_KEY } from "@/lib/theme-storage";
 import "./globals.css";
 
 const sans = Inter({
@@ -22,9 +24,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeInit = `(function(){try{var k=${JSON.stringify(THEME_STORAGE_KEY)};var v=localStorage.getItem(k);var r=document.documentElement;if(v==="dark"){r.classList.add("dark");}else{r.classList.remove("dark");}}catch(e){}})();`;
+
   return (
-    <html lang="en" className={`${sans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-brand-cream text-brand-navy">
+    <html lang="en" suppressHydrationWarning className={`${sans.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col font-sans text-brand-navy">
+        <Script id="intermun-theme-init" strategy="beforeInteractive">
+          {themeInit}
+        </Script>
         {children}
       </body>
     </html>

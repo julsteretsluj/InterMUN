@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { isAdminRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { getActiveEventId } from "@/lib/active-event-cookie";
@@ -33,36 +34,48 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     : { data: null };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="border-b border-slate-800 bg-slate-900">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-          <span className="font-display text-lg font-semibold tracking-tight text-white">Welcome Admin</span>
-          <nav className="flex flex-wrap items-center gap-1 sm:gap-3 text-sm">
-            <Link href="/admin" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
+    <div className="min-h-screen bg-brand-cream text-brand-navy">
+      <header className="border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+          <span className="font-display text-lg font-semibold tracking-tight text-brand-navy">Welcome Admin</span>
+          <nav className="flex flex-wrap items-center gap-1 text-sm sm:gap-3">
+            <Link
+              href="/admin"
+              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
+            >
               Overview
             </Link>
             <Link
               href="/conference-setup?next=%2Fadmin"
-              className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors"
+              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
             >
               New conference
             </Link>
-            <Link href="/smt" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
+            <Link
+              href="/smt"
+              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
+            >
               SMT dashboard
             </Link>
-            <Link href="/smt/profile" className="px-2 py-1 rounded-md hover:bg-white/10 transition-colors">
+            <Link
+              href="/smt/profile"
+              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
+            >
               Profile
             </Link>
           </nav>
-          <SignOutButton className="text-slate-300 hover:text-amber-300" />
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <SignOutButton className="text-brand-muted hover:text-emerald-700 dark:hover:text-brand-gold-bright" />
+          </div>
         </div>
         {activeEvent ? (
-          <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-slate-400 border-t border-slate-800 pt-2">
-            Active event: <span className="text-slate-200 font-medium">{activeEvent.name}</span> · code{" "}
-            <span className="font-mono text-amber-200/90">{activeEvent.event_code}</span>
+          <div className="mx-auto max-w-6xl border-t border-slate-200 px-4 pb-2 pt-2 text-xs text-brand-muted dark:border-white/10">
+            Active event: <span className="font-medium text-brand-navy">{activeEvent.name}</span> · code{" "}
+            <span className="font-mono text-brand-gold-bright">{activeEvent.event_code}</span>
           </div>
         ) : null}
-        <div className="max-w-6xl mx-auto px-4 pb-2 text-xs text-slate-400 border-t border-slate-800 pt-2">
+        <div className="mx-auto max-w-6xl border-t border-slate-200 px-4 pb-2 pt-2 text-xs text-brand-muted dark:border-white/10">
           First admin account is assigned in the database (see migration comments). Never share the service role
           key.
         </div>

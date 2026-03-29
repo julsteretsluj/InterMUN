@@ -40,7 +40,7 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
           maxLength={6}
           pattern="[A-Za-z0-9]{6}"
           title="Exactly 6 letters or digits"
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono tracking-widest text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-widest text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
           placeholder="e.g. ECO741"
         />
         <p className="text-xs text-brand-muted mt-1.5">

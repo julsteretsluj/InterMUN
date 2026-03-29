@@ -92,7 +92,7 @@ export function RunningNotesView({
       <div className="w-56 shrink-0 space-y-2">
         <button
           onClick={createNote}
-          className="w-full px-3 py-2 text-left border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+          className="w-full px-3 py-2 text-left border rounded hover:bg-white/10"
         >
           + New note
         </button>
@@ -106,7 +106,7 @@ export function RunningNotesView({
             className={`block w-full text-left px-3 py-2 rounded truncate ${
               activeNote?.id === n.id
                 ? "bg-blue-600 text-white"
-                : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                : "hover:bg-white/10"
             }`}
           >
             {(n.content || "Empty")?.slice(0, 30)}...
@@ -116,14 +116,14 @@ export function RunningNotesView({
       {activeNote && (
         <div className="flex-1">
           {activeNote.user_id !== currentUserId && (
-            <p className="text-sm text-slate-500 mb-2">
+            <p className="text-sm text-brand-muted/70 mb-2">
               View-only (you can only edit your own running notes).
             </p>
           )}
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full h-64 px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full h-64 px-3 py-2 border rounded bg-black/30"
             placeholder="Keep notes of everything..."
             disabled={activeNote.user_id !== currentUserId}
           />
@@ -139,7 +139,7 @@ export function RunningNotesView({
               type="button"
               onClick={() => void deleteNote()}
               disabled={activeNote.user_id !== currentUserId}
-              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-50"
+              className="px-4 py-2 border rounded hover:bg-white/10 disabled:opacity-50"
             >
               Delete
             </button>

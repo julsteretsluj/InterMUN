@@ -18,8 +18,8 @@ export function Timers({
 
   const isLight = theme === "light";
   const shell = isLight
-    ? "flex flex-wrap items-center gap-4 px-3 py-2.5 rounded-lg bg-white border border-brand-navy/10 text-brand-navy text-sm"
-    : "flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-white/8 border border-white/12 text-brand-navy/95";
+    ? "flex flex-wrap items-center gap-4 px-3 py-2.5 rounded-lg bg-black/25 border border-brand-navy/10 text-brand-navy text-sm"
+    : "flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-black/20 border border-white/12 text-brand-navy/95";
   const labelCls = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-xs uppercase tracking-wider text-brand-navy/75 block mb-0.5";

@@ -17,7 +17,7 @@ export function DelegateMaterialsExportCard() {
   );
 
   return (
-    <div className="mb-6 rounded-2xl border border-brand-navy/10 bg-white shadow-sm overflow-hidden">
+    <div className="mb-6 rounded-2xl border border-brand-navy/10 bg-black/25 shadow-sm overflow-hidden">
       <div className="p-5 md:p-6">
         <h3 className="font-display text-xl font-semibold text-brand-navy">
           Export my materials
@@ -39,7 +39,7 @@ export function DelegateMaterialsExportCard() {
               id="range"
               name="range"
               defaultValue="today"
-              className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-medium"
+              className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-medium"
             >
               <option value="today">Today (UTC)</option>
               <option value="all">All time</option>

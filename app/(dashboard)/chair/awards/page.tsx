@@ -324,7 +324,7 @@ export default async function ChairAwardsPage() {
                       name="nominee_profile_id"
                       defaultValue={selectedId}
                       required
-                      className="mt-1 w-full px-3 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-900"
+                      className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy"
                     >
                       <option value="" disabled>
                         Select delegate
@@ -336,19 +336,19 @@ export default async function ChairAwardsPage() {
                       ))}
                     </select>
                   </label>
-                  <div className="rounded-lg border border-neutral-200 bg-white p-3 text-neutral-900">
-                    <p className="text-neutral-600 text-xs uppercase font-semibold tracking-wide mb-2">
+                  <div className="rounded-lg border border-white/12 bg-black/25 p-3 text-brand-navy">
+                    <p className="text-brand-muted text-xs uppercase font-semibold tracking-wide mb-2">
                       Criteria scores (rate each 1-8)
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {type.criteria.map((criterion) => (
-                        <label key={`${type.id}-${rank}-${criterion.key}`} className="text-sm text-neutral-900">
-                          <span className="text-neutral-800 text-xs font-medium">{criterion.label}</span>
+                        <label key={`${type.id}-${rank}-${criterion.key}`} className="text-sm text-brand-navy">
+                          <span className="text-brand-navy/85 text-xs font-medium">{criterion.label}</span>
                           <select
                             name={`score_${criterion.key}`}
                             required
                             defaultValue={String(Number(scoreMap[criterion.key] ?? 0) || "")}
-                            className="mt-1 w-full px-2 py-2 rounded-lg border border-neutral-300 bg-white text-sm text-neutral-900"
+                            className="mt-1 w-full px-2 py-2 rounded-lg border border-white/15 bg-black/25 text-sm text-brand-navy"
                           >
                             <option value="" disabled>
                               Score
@@ -362,13 +362,13 @@ export default async function ChairAwardsPage() {
                               </option>
                             ))}
                           </select>
-                          <div className="mt-2 text-[11px] rounded-md border border-neutral-200 bg-neutral-50 p-2 text-neutral-800">
-                            <div className="font-semibold text-neutral-900 mb-1">Level guide</div>
+                          <div className="mt-2 text-[11px] rounded-md border border-white/12 bg-black/20 p-2 text-brand-navy/85">
+                            <div className="font-semibold text-brand-navy mb-1">Level guide</div>
                             <div className="grid grid-cols-2 gap-x-2 gap-y-1">
                               {criterion.levels.map((lvl) => (
                                 <div key={`${criterion.key}-lvl-${lvl.value}`} className="min-w-0 break-words">
-                                  <strong className="text-neutral-900">{lvl.value}</strong>
-                                  <span className="text-neutral-700">: {lvl.description}</span>
+                                  <strong className="text-brand-navy">{lvl.value}</strong>
+                                  <span className="text-brand-muted">: {lvl.description}</span>
                                 </div>
                               ))}
                             </div>
@@ -376,9 +376,9 @@ export default async function ChairAwardsPage() {
                         </label>
                       ))}
                     </div>
-                    <p className="mt-2 text-xs text-neutral-600">
+                    <p className="mt-2 text-xs text-brand-muted">
                       Current total:{" "}
-                      <strong className="text-neutral-900">
+                      <strong className="text-brand-navy">
                         {criteriaTotal}/{type.criteria.length * 8}
                       </strong>
                     </p>
@@ -389,7 +389,7 @@ export default async function ChairAwardsPage() {
                       name="evidence_note"
                       defaultValue={existing?.evidence_note ?? ""}
                       rows={3}
-                      className="mt-1 w-full px-3 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-500"
+                      className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy placeholder:text-brand-muted/70"
                       placeholder="Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions)."
                     />
                   </label>

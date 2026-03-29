@@ -176,7 +176,7 @@ export function ResolutionsView({
         </button>
       ) : null}
       {showForm && (
-        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+        <div className="p-4 border rounded-lg border-white/15 space-y-3">
           <input
             type="url"
             value={form.google_docs_url}
@@ -184,7 +184,7 @@ export function ResolutionsView({
               setForm({ ...form, google_docs_url: e.target.value })
             }
             placeholder="Google Docs URL (docs.google.com/document/d/… — used for embed + editing)"
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <input
             value={form.main_submitters}
@@ -192,7 +192,7 @@ export function ResolutionsView({
               setForm({ ...form, main_submitters: e.target.value })
             }
             placeholder="Main submitters (user IDs, comma-separated)"
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <input
             value={form.co_submitters}
@@ -200,7 +200,7 @@ export function ResolutionsView({
               setForm({ ...form, co_submitters: e.target.value })
             }
             placeholder="Co-submitters (user IDs, comma-separated)"
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <div className="flex gap-2">
             <button
@@ -211,7 +211,7 @@ export function ResolutionsView({
             </button>
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="px-4 py-2 border rounded hover:bg-white/10"
             >
               Cancel
             </button>
@@ -234,7 +234,7 @@ export function ResolutionsView({
           return (
             <div
               key={r.id}
-              className="p-4 border rounded-lg dark:border-slate-700 space-y-3"
+              className="p-4 border rounded-lg border-white/15 space-y-3"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1 space-y-3">
@@ -252,7 +252,7 @@ export function ResolutionsView({
                       <GoogleDocsEmbed googleDocsUrl={r.google_docs_url} />
                     </>
                   ) : (
-                    <span className="text-slate-500 dark:text-slate-400 text-sm">No Google Doc link</span>
+                    <span className="text-brand-muted/70 text-brand-muted text-sm">No Google Doc link</span>
                   )}
                 </div>
                 {r.visible_to_other_bloc && (
@@ -275,7 +275,7 @@ export function ResolutionsView({
                       className={`px-3 py-1 rounded text-sm ${
                         selectedBloc[r.id] === b.id
                           ? "bg-blue-600 text-white"
-                          : "bg-slate-200 dark:bg-slate-700 hover:bg-slate-300"
+                          : "bg-black/30 hover:bg-white/10"
                       }`}
                     >
                       Bloc {b.name} ({b.stance})
@@ -293,16 +293,16 @@ export function ResolutionsView({
               <div className="border-t pt-3 mt-2 space-y-2">
                 <p className="text-sm font-medium">Clause editor</p>
                 {resolutionClauses.length === 0 ? (
-                  <p className="text-xs text-slate-500">No clauses yet.</p>
+                  <p className="text-xs text-brand-muted/70">No clauses yet.</p>
                 ) : (
                   <ul className="space-y-2">
                     {resolutionClauses.map((c) => {
                       const draft = editingClause[c.id] ?? c.clause_text;
                       return (
                         <li key={c.id} className="border rounded p-2 space-y-2">
-                          <p className="text-xs text-slate-500">Clause {c.clause_number}</p>
+                          <p className="text-xs text-brand-muted/70">Clause {c.clause_number}</p>
                           <textarea
-                            className="w-full px-2 py-1 border rounded dark:bg-slate-700"
+                            className="w-full px-2 py-1 border rounded bg-black/30"
                             value={draft}
                             onChange={(e) =>
                               setEditingClause((prev) => ({ ...prev, [c.id]: e.target.value }))
@@ -336,7 +336,7 @@ export function ResolutionsView({
                 {canCreate ? (
                   <div className="space-y-2">
                     <textarea
-                      className="w-full px-2 py-1 border rounded dark:bg-slate-700"
+                      className="w-full px-2 py-1 border rounded bg-black/30"
                       value={newClause[r.id] ?? ""}
                       onChange={(e) =>
                         setNewClause((prev) => ({ ...prev, [r.id]: e.target.value }))
@@ -357,7 +357,7 @@ export function ResolutionsView({
               <div className="border-t pt-3 mt-2 space-y-2">
                 <p className="text-sm font-medium">Clause vote history</p>
                 {outcomesForResolution.length === 0 ? (
-                  <p className="text-xs text-slate-500">No recorded clause vote outcomes yet.</p>
+                  <p className="text-xs text-brand-muted/70">No recorded clause vote outcomes yet.</p>
                 ) : (
                   <ul className="space-y-1 text-xs">
                     {outcomesForResolution.map((o) => (
@@ -372,10 +372,10 @@ export function ResolutionsView({
                         <span className={o.passed ? "text-green-700" : "text-red-700"}>
                           {o.passed ? "PASSED" : "FAILED"}
                         </span>
-                        <span className="text-slate-500">•</span>
-                        <span className="text-slate-600">Motion {o.vote_item_id.slice(0, 8)}</span>
-                        <span className="text-slate-500">•</span>
-                        <span className="text-slate-500">{new Date(o.applied_at).toLocaleString()}</span>
+                        <span className="text-brand-muted/70">•</span>
+                        <span className="text-brand-muted">Motion {o.vote_item_id.slice(0, 8)}</span>
+                        <span className="text-brand-muted/70">•</span>
+                        <span className="text-brand-muted/70">{new Date(o.applied_at).toLocaleString()}</span>
                       </li>
                     ))}
                   </ul>

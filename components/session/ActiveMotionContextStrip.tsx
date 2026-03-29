@@ -77,8 +77,8 @@ export function ActiveMotionContextStrip({
 
   const isLight = theme === "light";
   const shell = isLight
-    ? "rounded-lg border border-brand-navy/10 bg-white text-brand-navy text-sm p-3 space-y-3 shadow-sm"
-    : "rounded-xl border border-white/12 bg-white/8 text-brand-navy/95 text-sm p-3 md:p-4 space-y-3";
+    ? "rounded-lg border border-brand-navy/10 bg-black/25 text-brand-navy text-sm p-3 space-y-3 shadow-sm"
+    : "rounded-xl border border-white/12 bg-black/20 text-brand-navy/95 text-sm p-3 md:p-4 space-y-3";
   const labelCls = isLight
     ? "text-[0.65rem] uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/75 block mb-0.5";

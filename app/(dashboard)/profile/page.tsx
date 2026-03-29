@@ -103,7 +103,7 @@ export default async function ProfilePage() {
             <Link
               key={`${item.label}-${item.href}`}
               href={item.href}
-              className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy bg-white hover:bg-brand-cream transition-colors"
+              className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy bg-black/25 hover:bg-brand-cream transition-colors"
             >
               {item.label}
             </Link>

@@ -44,8 +44,8 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] backdrop-blur-sm p-8 md:p-10">
-      <div className="h-1 w-16 rounded-full bg-brand-gold mx-auto mb-6" aria-hidden />
+    <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
+      <div className="mx-auto mb-6 h-1 w-16 rounded-full bg-brand-gold" aria-hidden />
       <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-6">
         Create account
       </h2>
@@ -58,7 +58,7 @@ export default function SignupPage() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy placeholder:text-brand-muted/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold"
+            className="mun-field py-2.5"
           />
         </div>
         <div>
@@ -69,7 +69,7 @@ export default function SignupPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy placeholder:text-brand-muted/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold"
+            className="mun-field py-2.5"
             required
           />
         </div>
@@ -81,7 +81,7 @@ export default function SignupPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy placeholder:text-brand-muted/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold"
+            className="mun-field py-2.5"
             required
             minLength={6}
           />
@@ -94,7 +94,7 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50 shadow-sm"
+          className="w-full rounded-lg bg-brand-gold py-3 font-semibold text-brand-accent-ink transition-opacity hover:opacity-95 disabled:opacity-50"
         >
           {loading ? "Creating account…" : "Sign up"}
         </button>

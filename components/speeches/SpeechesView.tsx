@@ -63,18 +63,18 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
         New Speech
       </button>
       {(showForm || editing) && (
-        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+        <div className="p-4 border rounded-lg border-white/15 space-y-3">
           <input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             placeholder="Speech title"
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <textarea
             value={form.content}
             onChange={(e) => setForm({ ...form, content: e.target.value })}
             placeholder="Write your speech..."
-            className="w-full h-48 px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full h-48 px-3 py-2 border rounded bg-black/30"
           />
           <div className="flex gap-2">
             <button
@@ -88,7 +88,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
                 setShowForm(false);
                 setEditing(null);
               }}
-              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="px-4 py-2 border rounded hover:bg-white/10"
             >
               Cancel
             </button>
@@ -99,13 +99,13 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
         {items.map((s) => (
           <div
             key={s.id}
-            className="p-4 border rounded-lg dark:border-slate-700 flex justify-between items-start"
+            className="p-4 border rounded-lg border-white/15 flex justify-between items-start"
           >
             <div className="flex items-start gap-3">
-              <Mic className="w-5 h-5 text-slate-400 shrink-0" />
+              <Mic className="w-5 h-5 text-brand-muted shrink-0" />
               <div>
                 <h4 className="font-medium">{s.title || "Untitled"}</h4>
-                <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                <p className="text-sm text-brand-muted text-brand-muted line-clamp-2">
                   {s.content || "No content"}
                 </p>
               </div>

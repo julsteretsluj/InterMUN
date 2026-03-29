@@ -163,7 +163,7 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
   const isClosed = voteItem?.closed_at != null;
 
   return (
-    <div className="rounded-xl border border-brand-navy/10 bg-white/60 p-3 space-y-3">
+    <div className="rounded-xl border border-white/15 bg-black/25 p-3 space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs uppercase tracking-wider text-brand-muted">Voting procedure</p>

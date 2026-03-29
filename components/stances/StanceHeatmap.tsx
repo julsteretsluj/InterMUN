@@ -8,7 +8,7 @@ export function StanceHeatmap({
   const entries = Object.entries(data);
   if (entries.length === 0) {
     return (
-      <p className="text-sm text-slate-500 py-4">
+      <p className="text-sm text-brand-muted/70 py-4">
         Add topics above to build your stance heatmap.
       </p>
     );
@@ -32,13 +32,13 @@ export function StanceHeatmap({
           className="contents"
         >
           <span className="text-sm font-medium">{topic}</span>
-          <div className="h-8 rounded overflow-hidden bg-slate-100 dark:bg-slate-800">
+          <div className="h-8 rounded overflow-hidden bg-black/25 bg-black/35">
             <div
               className={`h-full ${getColor(value)} transition-all`}
               style={{ width: `${(value / max) * 100}%` }}
             />
           </div>
-          <span className="text-sm text-slate-500">{value}/5</span>
+          <span className="text-sm text-brand-muted/70">{value}/5</span>
         </div>
       ))}
     </div>

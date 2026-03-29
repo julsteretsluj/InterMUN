@@ -10,8 +10,8 @@ export default async function AdminPage({
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold text-white mb-2">Website administration</h1>
-      <p className="text-sm text-slate-400 mb-6 max-w-2xl">
+      <h1 className="mb-2 font-display text-2xl font-semibold text-brand-navy">Website administration</h1>
+      <p className="mb-6 max-w-2xl text-sm text-brand-muted">
         Create conference events and manage who can run the secretariat tools. Day-to-day committee
         oversight lives in the SMT dashboard.
       </p>

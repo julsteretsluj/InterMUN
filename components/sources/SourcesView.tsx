@@ -115,20 +115,20 @@ export function SourcesView({
         Add Source
       </button>
       {showForm && (
-        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+        <div className="p-4 border rounded-lg border-white/15 space-y-3">
           <input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://..."
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title (optional)"
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <div className="flex gap-2">
             <button
@@ -139,7 +139,7 @@ export function SourcesView({
             </button>
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="px-4 py-2 border rounded hover:bg-white/10"
             >
               Cancel
             </button>
@@ -148,19 +148,19 @@ export function SourcesView({
       )}
 
       {editing && (
-        <div className="p-4 border rounded-lg dark:border-slate-700 space-y-3">
+        <div className="p-4 border rounded-lg border-white/15 space-y-3">
           <h3 className="font-semibold">Edit source</h3>
           <input
             type="url"
             value={editUrl}
             onChange={(e) => setEditUrl(e.target.value)}
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <input
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
-            className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+            className="w-full px-3 py-2 border rounded bg-black/30"
             placeholder="Title (optional)"
           />
           <div className="flex gap-2">
@@ -176,7 +176,7 @@ export function SourcesView({
                 setEditUrl("");
                 setEditTitle("");
               }}
-              className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="px-4 py-2 border rounded hover:bg-white/10"
             >
               Cancel
             </button>
@@ -188,9 +188,9 @@ export function SourcesView({
         {items.map((s) => (
           <div
             key={s.id}
-            className="flex items-center gap-3 p-3 border rounded dark:border-slate-700"
+            className="flex items-center gap-3 p-3 border rounded border-white/15"
           >
-            <Link2 className="w-4 h-4 text-slate-400 shrink-0" />
+            <Link2 className="w-4 h-4 text-brand-muted shrink-0" />
             <a
               href={s.url}
               target="_blank"

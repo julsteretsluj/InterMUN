@@ -46,17 +46,17 @@ export function ReportView({
 
   return (
     <div className="space-y-6">
-      <div className="p-4 border rounded-lg dark:border-slate-700">
-        <h3 className="font-semibold mb-3">Submit Report</h3>
+      <div className="mun-card space-y-3">
+        <h3 className="font-semibold text-brand-navy">Submit report</h3>
         <div className="space-y-3">
           <div>
-            <label className="block text-sm mb-1">Report type</label>
+            <label className="mun-label mb-2 block normal-case">Report type</label>
             <select
               value={reportType}
               onChange={(e) =>
                 setReportType(e.target.value as "ai_use" | "inappropriate_conduct")
               }
-              className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+              className="mun-field"
             >
               <option value="ai_use">AI use</option>
               <option value="inappropriate_conduct">
@@ -65,37 +65,31 @@ export function ReportView({
             </select>
           </div>
           <div>
-            <label className="block text-sm mb-1">Description</label>
+            <label className="mun-label mb-2 block normal-case">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe the incident..."
-              className="w-full h-24 px-3 py-2 border rounded dark:bg-slate-700"
+              className="mun-field h-28 resize-y"
             />
           </div>
-          <button
-            onClick={submitReport}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Submit Report
+          <button type="button" onClick={() => void submitReport()} className="mun-btn-primary">
+            Submit report
           </button>
         </div>
       </div>
       <div>
-        <h3 className="font-semibold mb-3">{canViewAll ? "All Reports" : "Your Reports"}</h3>
+        <h3 className="mb-3 font-semibold text-brand-navy">
+          {canViewAll ? "All reports" : "Your reports"}
+        </h3>
         <div className="space-y-2">
           {items.map((r) => (
-            <div
-              key={r.id}
-              className="p-3 border rounded dark:border-slate-700"
-            >
-              <span className="text-sm font-medium capitalize">
+            <div key={r.id} className="mun-card-dense">
+              <span className="text-sm font-medium capitalize text-brand-navy">
                 {r.report_type.replace("_", " ")}
               </span>
               {r.description && (
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                  {r.description}
-                </p>
+                <p className="mt-1 text-sm text-brand-muted">{r.description}</p>
               )}
             </div>
           ))}

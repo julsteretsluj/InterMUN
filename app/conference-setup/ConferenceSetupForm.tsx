@@ -76,7 +76,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             required
             minLength={2}
             autoComplete="organization"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="e.g. Southeast Asia Model UN 2027"
           />
           <p className="text-xs text-brand-muted mt-1">Shown to organisers; delegates see it after they join.</p>
@@ -96,7 +96,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             required
             minLength={4}
             autoComplete="off"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="e.g. SEAMUNI2027"
           />
           <p className="text-xs text-brand-muted mt-1">
@@ -106,7 +106,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
         </div>
       </div>
 
-      <div className="rounded-lg border border-brand-navy/15 bg-white/60 p-4 space-y-4">
+      <div className="rounded-lg border border-brand-navy/15 bg-black/30 p-4 space-y-4">
         <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy">First committee (second gate)</p>
 
         <div>
@@ -123,7 +123,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             required
             minLength={2}
             autoComplete="off"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="e.g. Topic or agenda title for this committee"
           />
           <p className="text-xs text-brand-muted mt-1">Main heading for this committee in the app header.</p>
@@ -142,7 +142,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             type="text"
             autoComplete="off"
             list="committee-suggestions"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="e.g. ECOSOC, UNSC"
           />
           <datalist id="committee-suggestions">
@@ -165,7 +165,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             name="tagline"
             type="text"
             autoComplete="off"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="Optional subtitle under the header"
           />
         </div>
@@ -187,7 +187,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             pattern="[A-Za-z0-9]{6}"
             title="Exactly 6 letters or digits"
             autoComplete="off"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="e.g. ECO741"
           />
           <p className="text-xs text-brand-muted mt-1">
@@ -215,7 +215,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             name="committee_password"
             type="password"
             autoComplete="new-password"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="Leave empty to skip"
           />
         </div>
@@ -231,7 +231,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             name="committee_password_confirm"
             type="password"
             autoComplete="new-password"
-            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
             placeholder="Same as above if using a password"
           />
         </div>

@@ -156,7 +156,7 @@ export function ChatsNotesView({
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder={selectedMessage ? "Edit your message..." : "Type your message..."}
-              className="w-full h-32 px-3 py-2 border rounded-md dark:bg-slate-700 dark:border-slate-600"
+              className="w-full h-32 px-3 py-2 border rounded-md bg-black/30 border-white/20"
             />
             {selectedMessage ? (
               <button
@@ -184,7 +184,7 @@ export function ChatsNotesView({
                   setNewMessage(m.content);
                   setMode(canBroadcast ? m.kind : "personal");
                 }}
-                className="p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer text-sm truncate"
+                className="p-2 rounded hover:bg-white/10 cursor-pointer text-sm truncate"
               >
                 {m.content?.slice(0, 50) || "Empty"}...
               </div>

@@ -44,7 +44,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
           type="password"
           autoComplete="off"
           required
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-white text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
           placeholder="Organiser password"
         />
       </div>

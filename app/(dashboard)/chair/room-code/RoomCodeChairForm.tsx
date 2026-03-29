@@ -34,7 +34,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
   const selected = conferences.find((c) => c.id === conferenceId);
 
   const fieldClass =
-    "w-full px-3 py-2.5 rounded-lg border border-neutral-400 bg-white text-neutral-950 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold";
+    "w-full px-3 py-2.5 rounded-lg border border-white/20 bg-black/25 text-brand-navy shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold";
 
   const singleCommittee = conferences.length === 1;
   const showSearch = conferences.length > 1;
@@ -46,10 +46,10 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
       <div>
         {singleCommittee ? (
           <>
-            <p className="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1.5">
+            <p className="text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
               Committee
             </p>
-            <p className="text-sm text-neutral-200 font-medium leading-snug">
+            <p className="text-sm text-brand-navy font-medium leading-snug">
               {[conferences[0].name, conferences[0].committee].filter(Boolean).join(" — ")}
             </p>
             <input type="hidden" name="conference_id" value={conferences[0].id} />
@@ -60,7 +60,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
               <div className="mb-3">
                 <label
                   htmlFor="committee-search"
-                  className="block text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1.5"
+                  className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
                 >
                   Find committee
                 </label>
@@ -70,12 +70,12 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Type to filter by name or committee…"
-                  className={`${fieldClass} placeholder:text-neutral-500`}
+                  className={`${fieldClass} placeholder:text-brand-muted/70`}
                   autoComplete="off"
                 />
               </div>
             ) : null}
-            <label className="block text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1.5">
+            <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
               Conference
             </label>
             <select
@@ -98,7 +98,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           </>
         )}
         {(selected?.committee_code || selected?.room_code) && (
-          <p className="text-xs text-neutral-400 mt-2">
+          <p className="text-xs text-brand-muted mt-2">
             Current committee code:{" "}
             <span className="font-mono font-semibold text-brand-gold-bright tabular-nums">
               {selected.committee_code ?? selected.room_code}
@@ -110,7 +110,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
       <div>
         <label
           htmlFor="chair-room-code"
-          className="block text-xs font-medium uppercase tracking-wider text-neutral-400 mb-1.5"
+          className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
           New committee code
         </label>
@@ -124,7 +124,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           pattern="[A-Za-z0-9]{6}"
           title="Exactly 6 letters or digits"
           autoComplete="off"
-          className={`${fieldClass} font-mono uppercase tracking-widest placeholder:text-neutral-500`}
+          className={`${fieldClass} font-mono uppercase tracking-widest placeholder:text-brand-muted/70`}
           placeholder="e.g. WHO582"
         />
       </div>
@@ -143,7 +143,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
             conferences.length === 0 ||
             (!singleCommittee && (filtered.length === 0 || !conferenceId))
           }
-          className="px-4 py-2.5 rounded-lg bg-brand-gold text-neutral-950 font-semibold hover:opacity-90 disabled:opacity-50 border border-emerald-700/30"
+          className="px-4 py-2.5 rounded-lg bg-brand-gold text-brand-navy font-semibold hover:opacity-90 disabled:opacity-50 border border-emerald-700/30"
         >
           {pending ? "Saving…" : "Save code & go to profile"}
         </button>

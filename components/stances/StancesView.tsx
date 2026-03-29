@@ -100,7 +100,7 @@ export function StancesView({
     <div className="space-y-8">
       <div>
         <h3 className="font-semibold mb-4">Brief Stance Overview (Heatmap)</h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
+        <p className="text-sm text-brand-muted text-brand-muted mb-3">
           To what extent does your allocation support ___? (1–5 scale)
         </p>
         <div className="flex gap-4 flex-wrap items-end mb-4">
@@ -113,7 +113,7 @@ export function StancesView({
                   setStanceForm({ ...stanceForm, topic: e.target.value })
                 }
                 placeholder="e.g. climate action"
-                className="px-3 py-2 border rounded dark:bg-slate-700 w-48"
+                className="px-3 py-2 border rounded bg-black/30 w-48"
               />
               <div className="flex items-center gap-2">
                 <label className="text-sm">Extent (1–5):</label>
@@ -137,7 +137,7 @@ export function StancesView({
               </button>
             </>
           ) : (
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-brand-muted/70">
               View-only heatmap for staff.
             </p>
           )}
@@ -149,7 +149,7 @@ export function StancesView({
         <div className="flex gap-6">
           <div className="w-48 space-y-2">
             {allocations.length === 0 ? (
-              <p className="text-sm text-slate-500">No allocations yet</p>
+              <p className="text-sm text-brand-muted/70">No allocations yet</p>
             ) : (
               allocations.map((a) => (
                 <button
@@ -164,7 +164,7 @@ export function StancesView({
                   className={`block w-full text-left px-3 py-2 rounded ${
                     selectedAllocation?.id === a.id
                       ? "bg-blue-600 text-white"
-                      : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                      : "hover:bg-white/10"
                   }`}
                 >
                   {a.country}
@@ -178,7 +178,7 @@ export function StancesView({
               <textarea
                 value={noteContent}
                 onChange={(e) => setNoteContent(e.target.value)}
-                className="w-full h-40 px-3 py-2 border rounded dark:bg-slate-700"
+                className="w-full h-40 px-3 py-2 border rounded bg-black/30"
                 placeholder="Stance notes for this allocation..."
                 disabled={!canEdit}
               />

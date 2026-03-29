@@ -168,7 +168,7 @@ export function ProfileForm({
   }
 
   const fieldClass =
-    "w-full min-w-0 px-3 py-2 border rounded-md bg-white text-brand-navy placeholder:text-brand-navy/50 dark:bg-slate-700 dark:text-brand-navy dark:border-slate-600 dark:placeholder:text-brand-navy/50";
+    "mun-field min-w-0 rounded-md border border-white/15 bg-black/30 px-3 py-2 text-brand-navy placeholder:text-brand-muted/60";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-3xl">

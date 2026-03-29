@@ -276,7 +276,7 @@ export function AllocationMatrixManagerClient({
           <select
             value={selectedConferenceId}
             onChange={(e) => onConferenceChange(e.target.value)}
-            className="min-w-[240px] px-3 py-2 rounded-lg border border-brand-navy/15 bg-white text-brand-navy text-sm"
+            className="min-w-[240px] px-3 py-2 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy text-sm"
           >
             {conferences.map((c) => (
               <option key={c.id} value={c.id}>

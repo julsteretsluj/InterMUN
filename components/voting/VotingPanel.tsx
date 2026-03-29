@@ -113,7 +113,7 @@ export function VotingPanel({
     return (
       <div
         key={item.id}
-        className={`border rounded-lg p-4 dark:border-slate-700 ${isClosed ? "opacity-85" : ""}`}
+        className={`border rounded-lg p-4 border-white/15 ${isClosed ? "opacity-85" : ""}`}
       >
         <div className="flex justify-between items-start mb-2">
           <div>
@@ -122,13 +122,13 @@ export function VotingPanel({
           </div>
           <span
             className={`text-sm px-2 py-1 rounded ${
-              item.must_vote ? "bg-amber-100 dark:bg-amber-900" : "bg-slate-100 dark:bg-slate-800"
+              item.must_vote ? "bg-amber-100 dark:bg-amber-900" : "bg-black/25 bg-black/35"
             }`}
           >
             {item.must_vote ? "MUST vote" : "CAN vote"}
           </span>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
+        <p className="text-sm text-brand-muted text-brand-muted mb-3">
           Majority required:{" "}
           {item.required_majority === "simple" ? "Simple" : item.required_majority}
         </p>
@@ -142,7 +142,7 @@ export function VotingPanel({
               className={`px-3 py-1 rounded text-sm ${
                 myVotes[item.id] === val
                   ? "bg-blue-600 text-white"
-                  : "bg-slate-200 dark:bg-slate-700 hover:bg-slate-300"
+                  : "bg-black/30 hover:bg-white/10"
               } ${isClosed ? "opacity-60 cursor-not-allowed" : ""}`}
             >
               {val.charAt(0).toUpperCase() + val.slice(1)}
@@ -151,7 +151,7 @@ export function VotingPanel({
         </div>
 
         {canManageVotes ? (
-          <div className="mt-3 p-3 border rounded dark:border-slate-700 space-y-2 bg-slate-50/50 dark:bg-slate-800/30">
+          <div className="mt-3 p-3 border rounded border-white/15 space-y-2 bg-black/20/50 bg-black/35/30">
             <div className="flex flex-wrap gap-3 items-center">
               <label className="flex items-center gap-2 text-sm">
                 <input
@@ -176,7 +176,7 @@ export function VotingPanel({
                       [item.id]: { ...d, required_majority: e.target.value },
                     }))
                   }
-                  className="ml-2 px-2 py-1 rounded border dark:bg-slate-700"
+                  className="ml-2 px-2 py-1 rounded border bg-black/30"
                 >
                   <option value="simple">Simple</option>
                   <option value="2/3">2/3</option>
@@ -194,7 +194,7 @@ export function VotingPanel({
               {isClosed ? (
                 <button
                   type="button"
-                  className="px-3 py-1 rounded border dark:border-slate-600 text-sm"
+                  className="px-3 py-1 rounded border border-white/20 text-sm"
                   onClick={() => void setClosed(item.id, false)}
                 >
                   Reopen
@@ -229,13 +229,13 @@ export function VotingPanel({
   return (
     <div className="space-y-4">
       {voteItems.length === 0 ? (
-        <p className="text-slate-500">No motions yet.</p>
+        <p className="text-brand-muted/70">No motions yet.</p>
       ) : (
         <>
           <div className="space-y-2">
             <p className="text-sm font-medium">Current open motion</p>
             {openItems.length > 0 ? openItems.map(renderVoteCard) : (
-              <p className="text-slate-500">No open motion right now.</p>
+              <p className="text-brand-muted/70">No open motion right now.</p>
             )}
           </div>
           {closedItems.length > 0 ? (

@@ -118,7 +118,7 @@ export function CommitteeRoomStaffControls({
                           [a.id]: { ...prev[a.id], user_id: v ? v : null },
                         }));
                       }}
-                      className="w-full px-2 py-1 rounded border border-brand-navy/15 bg-white text-sm"
+                      className="w-full px-2 py-1 rounded border border-brand-navy/15 bg-black/25 text-sm"
                     >
                       <option value="">Vacant</option>
                       {(isChairSeat(a.country) ? chairOptions : delegateOptions).map((opt) => (

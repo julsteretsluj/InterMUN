@@ -98,7 +98,7 @@ export function GuidesView({
             className={`block w-full text-left px-3 py-2 rounded ${
               selected?.id === g.id
                 ? "bg-blue-600 text-white"
-                : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                : "hover:bg-white/10"
             }`}
           >
             {g.title}
@@ -107,7 +107,7 @@ export function GuidesView({
       </div>
       <div className="flex-1 min-w-0">
         {selected && (
-          <div className="prose dark:prose-invert max-w-none bg-white dark:bg-slate-800 rounded-lg p-6 border dark:border-slate-700">
+          <div className="prose prose-invert max-w-none rounded-lg border border-white/15 bg-black/30 p-6 text-brand-navy">
             <div className="flex items-start justify-between gap-4">
               <h2 className="text-xl font-bold mb-4">{selected.title}</h2>
               {canEdit && !editMode ? (
@@ -134,12 +134,12 @@ export function GuidesView({
                 <input
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
-                  className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+                  className="w-full px-3 py-2 border rounded bg-black/30"
                 />
                 <textarea
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
-                  className="w-full h-56 px-3 py-2 border rounded dark:bg-slate-700"
+                  className="w-full h-56 px-3 py-2 border rounded bg-black/30"
                 />
                 <div className="flex gap-2">
                   <button
@@ -172,7 +172,7 @@ export function GuidesView({
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-sm"
+                    className="px-4 py-2 border rounded hover:bg-white/10 text-sm"
                   >
                     Cancel
                   </button>
@@ -183,27 +183,27 @@ export function GuidesView({
         )}
 
         {canEdit && (
-          <div className="mt-6 p-4 border rounded-lg dark:border-slate-700 space-y-3 bg-white/10">
+          <div className="mt-6 p-4 border rounded-lg border-white/15 space-y-3 bg-black/20">
             <h3 className="font-semibold">Create new guide</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <input
                 value={createSlug}
                 onChange={(e) => setCreateSlug(e.target.value)}
                 placeholder="slug (unique)"
-                className="px-3 py-2 border rounded dark:bg-slate-700"
+                className="px-3 py-2 border rounded bg-black/30"
               />
               <input
                 value={createTitle}
                 onChange={(e) => setCreateTitle(e.target.value)}
                 placeholder="title"
-                className="px-3 py-2 border rounded dark:bg-slate-700"
+                className="px-3 py-2 border rounded bg-black/30"
               />
             </div>
             <textarea
               value={createContent}
               onChange={(e) => setCreateContent(e.target.value)}
               placeholder="Markdown content..."
-              className="w-full h-40 px-3 py-2 border rounded dark:bg-slate-700"
+              className="w-full h-40 px-3 py-2 border rounded bg-black/30"
             />
             <button
               type="button"

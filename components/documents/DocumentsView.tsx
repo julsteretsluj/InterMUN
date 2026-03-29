@@ -100,7 +100,7 @@ export function DocumentsView({
         Add Document
       </button>
       {(showForm || editing) && (
-        <div className="border rounded-lg p-4 dark:border-slate-700">
+        <div className="border rounded-lg p-4 border-white/15">
           <h3 className="font-semibold mb-3">
             {editing ? "Edit" : "New"} Document
           </h3>
@@ -115,7 +115,7 @@ export function DocumentsView({
                     doc_type: e.target.value as "position_paper" | "prep_doc",
                   })
                 }
-                className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+                className="w-full px-3 py-2 border rounded bg-black/30"
               >
                 <option value="position_paper">Position Paper</option>
                 <option value="prep_doc">Prep Document</option>
@@ -126,7 +126,7 @@ export function DocumentsView({
               <input
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-slate-700"
+                className="w-full px-3 py-2 border rounded bg-black/30"
                 placeholder="Document title"
               />
             </div>
@@ -135,7 +135,7 @@ export function DocumentsView({
               <textarea
                 value={form.content}
                 onChange={(e) => setForm({ ...form, content: e.target.value })}
-                className="w-full h-40 px-3 py-2 border rounded dark:bg-slate-700"
+                className="w-full h-40 px-3 py-2 border rounded bg-black/30"
                 placeholder="Paste or type content..."
               />
             </div>
@@ -151,7 +151,7 @@ export function DocumentsView({
                   setShowForm(false);
                   setEditing(null);
                 }}
-                className="px-4 py-2 border rounded hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="px-4 py-2 border rounded hover:bg-white/10"
               >
                 Cancel
               </button>
@@ -163,15 +163,15 @@ export function DocumentsView({
         {docs.map((d) => (
           <div
             key={d.id}
-            className="border rounded-lg p-4 flex justify-between items-start dark:border-slate-700"
+            className="border rounded-lg p-4 flex justify-between items-start border-white/15"
           >
             <div className="flex items-start gap-3">
-              <FileText className="w-8 h-8 text-slate-400 shrink-0" />
+              <FileText className="w-8 h-8 text-brand-muted shrink-0" />
               <div>
                 <h4 className="font-medium">
                   {d.title || "Untitled"}
                 </h4>
-                <p className="text-sm text-slate-500 capitalize">
+                <p className="text-sm text-brand-muted/70 capitalize">
                   {d.doc_type.replace("_", " ")}
                 </p>
               </div>

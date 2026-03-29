@@ -164,7 +164,7 @@ export function AllocationPasswordsClient({
                           [r.allocationId]: e.target.value,
                         }))
                       }
-                      className="w-full min-w-[8rem] px-2 py-1.5 rounded-md border border-brand-navy/15 bg-white font-mono text-xs"
+                      className="w-full min-w-[8rem] px-2 py-1.5 rounded-md border border-brand-navy/15 bg-black/25 font-mono text-xs"
                       placeholder="—"
                       autoComplete="off"
                     />

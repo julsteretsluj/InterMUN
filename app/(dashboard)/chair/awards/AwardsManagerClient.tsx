@@ -144,7 +144,7 @@ export function AwardsManagerClient({
               <span className="text-brand-muted text-xs uppercase">Award</span>
               <select
                 name="category"
-                className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white"
+                className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
                 value={form.category}
                 onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
               >
@@ -161,7 +161,7 @@ export function AwardsManagerClient({
                 <select
                   name="committee_conference_id"
                   required
-                  className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white"
+                  className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
                   value={form.committee_conference_id}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, committee_conference_id: e.target.value }))
@@ -190,7 +190,7 @@ export function AwardsManagerClient({
               <span className="text-brand-muted text-xs uppercase">Recipient (delegate / chair)</span>
               <select
                 name="recipient_profile_id"
-                className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white"
+                className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
                 value={form.recipient_profile_id}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, recipient_profile_id: e.target.value }))
@@ -211,7 +211,7 @@ export function AwardsManagerClient({
               <span className="text-brand-muted text-xs uppercase">Winning committee</span>
               <select
                 name="recipient_committee_id"
-                className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white"
+                className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
                 value={form.recipient_committee_id}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, recipient_committee_id: e.target.value }))
