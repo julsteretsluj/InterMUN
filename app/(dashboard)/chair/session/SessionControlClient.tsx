@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { ListOrdered, Pause, Play } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -65,12 +67,42 @@ type ClauseRow = {
   clause_text: string;
 };
 
+/** Dashboard splits session tools across routes; committee room uses `"all"`. */
+export type SessionFloorSection =
+  | "motions"
+  | "timer"
+  | "announcements"
+  | "speakers"
+  | "roll-call"
+  | "all";
+
+function SessionFloorNavLink({ href, label }: { href: string; label: string }) {
+  const pathname = usePathname();
+  const active =
+    href === "/chair/session"
+      ? pathname === "/chair/session"
+      : pathname === href;
+  return (
+    <Link
+      href={href}
+      className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${
+        active ? "bg-brand-gold text-brand-navy" : "text-brand-navy hover:bg-white/10"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
+
 export function SessionControlClient({
   conferenceId,
   conferenceTitle,
+  activeSection = "all",
 }: {
   conferenceId: string;
   conferenceTitle: string;
+  /** Default `"all"` keeps a single scroll (e.g. committee room). */
+  activeSection?: SessionFloorSection;
 }) {
   const supabase = createClient();
   const [allocations, setAllocations] = useState<Alloc[]>([]);
@@ -1164,8 +1196,25 @@ export function SessionControlClient({
   const surfaceInset =
     "max-h-36 space-y-1 overflow-y-auto rounded border border-white/15 bg-black/30 p-2 text-xs text-brand-navy";
 
+  const isSplitView = activeSection !== "all";
+  const show = (id: Exclude<SessionFloorSection, "all">) =>
+    activeSection === "all" || activeSection === id;
+
   return (
     <div className="space-y-10 max-w-3xl">
+      {isSplitView ? (
+        <nav
+          aria-label="Session floor sections"
+          className="flex flex-wrap gap-2 border-b border-white/15 pb-3"
+        >
+          <SessionFloorNavLink href="/chair/session" label="Overview" />
+          <SessionFloorNavLink href="/chair/session/motions" label="Motions" />
+          <SessionFloorNavLink href="/chair/session/timer" label="Timer" />
+          <SessionFloorNavLink href="/chair/session/announcements" label="Announcements" />
+          <SessionFloorNavLink href="/chair/session/speakers" label="Speakers" />
+          <SessionFloorNavLink href="/chair/session/roll-call" label="Roll call" />
+        </nav>
+      ) : null}
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
       {msg && (
         <p className="rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
@@ -1173,6 +1222,7 @@ export function SessionControlClient({
         </p>
       )}
 
+      {show("motions") ? (
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
         <p className="text-xs text-brand-muted">
@@ -1617,7 +1667,9 @@ export function SessionControlClient({
           </ul>
         </div>
       </section>
+      ) : null}
 
+      {show("timer") ? (
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
         <div className={`${surfaceCard} space-y-3`}>
@@ -1786,7 +1838,9 @@ export function SessionControlClient({
           </div>
         </div>
       </section>
+      ) : null}
 
+      {show("announcements") ? (
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcements</h3>
         <div className={`${surfaceCard} space-y-3`}>
@@ -1816,7 +1870,9 @@ export function SessionControlClient({
           </ul>
         </div>
       </section>
+      ) : null}
 
+      {show("speakers") ? (
       <section ref={speakersSectionRef} className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Speakers queue</h3>
         <div className={`${surfaceCard} space-y-3`}>
@@ -1972,7 +2028,9 @@ export function SessionControlClient({
           </ul>
         </div>
       </section>
+      ) : null}
 
+      {show("roll-call") ? (
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Roll call</h3>
         <div className={`${surfaceCard} space-y-3`}>
@@ -2006,6 +2064,7 @@ export function SessionControlClient({
           </ul>
         </div>
       </section>
+      ) : null}
     </div>
   );
 }

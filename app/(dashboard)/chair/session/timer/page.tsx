@@ -1,9 +1,9 @@
 import { MunPageShell } from "@/components/MunPageShell";
-import { loadChairSessionConference } from "./loadChairSession";
-import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
-import { SessionFloorOverview } from "./SessionFloorOverview";
+import { SessionControlClient } from "../SessionControlClient";
+import { loadChairSessionConference } from "../loadChairSession";
+import { SessionFloorNoCommittee } from "../SessionFloorNoCommittee";
 
-export default async function ChairSessionPage() {
+export default async function ChairSessionTimerPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
@@ -12,10 +12,9 @@ export default async function ChairSessionPage() {
       </MunPageShell>
     );
   }
-
   return (
     <MunPageShell title="Session floor">
-      <SessionFloorOverview conferenceTitle={data.conferenceTitle} />
+      <SessionControlClient {...data} activeSection="timer" />
     </MunPageShell>
   );
 }
