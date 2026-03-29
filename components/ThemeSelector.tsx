@@ -1,0 +1,206 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Check, Moon, Palette, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  THEME_HUES,
+  type ThemeHue,
+  type ThemePreference,
+} from "@/lib/theme-storage";
+import { persistAndApplyTheme, readThemeFromStorage } from "@/lib/theme-document";
+
+const HUE_META: Record<
+  ThemeHue,
+  { label: string; swatch: string; swatchDark?: string }
+> = {
+  red: { label: "Red", swatch: "bg-red-600" },
+  orange: { label: "Orange", swatch: "bg-orange-500" },
+  yellow: { label: "Yellow", swatch: "bg-yellow-500" },
+  green: { label: "Green", swatch: "bg-emerald-600" },
+  blue: { label: "Blue", swatch: "bg-blue-600" },
+  purple: { label: "Purple", swatch: "bg-violet-600" },
+  pink: { label: "Pink", swatch: "bg-pink-600" },
+  neutral: {
+    label: "B & W",
+    swatch: "bg-gradient-to-br from-white to-zinc-800 ring-1 ring-zinc-400",
+    swatchDark: "bg-gradient-to-br from-zinc-200 to-zinc-800 ring-1 ring-zinc-500",
+  },
+};
+
+export function ThemeSelector({ className }: { className?: string }) {
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<ThemePreference>("light");
+  const [hue, setHue] = useState<ThemeHue>("green");
+  const [mounted, setMounted] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    const t = readThemeFromStorage();
+    setMode(t.mode);
+    setHue(t.hue);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    function onDoc(e: MouseEvent) {
+      const t = e.target as Node;
+      if (panelRef.current?.contains(t)) return;
+      if (btnRef.current?.contains(t)) return;
+      setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const setAppearance = useCallback(
+    (next: ThemePreference) => {
+      setMode(next);
+      persistAndApplyTheme(next, hue);
+    },
+    [hue]
+  );
+
+  const setColorHue = useCallback(
+    (next: ThemeHue) => {
+      setHue(next);
+      persistAndApplyTheme(mode, next);
+    },
+    [mode]
+  );
+
+  if (!mounted) {
+    return (
+      <span
+        className={cn(
+          "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white opacity-0 dark:border-white/15 dark:bg-black/20",
+          className
+        )}
+        aria-hidden
+      />
+    );
+  }
+
+  return (
+    <div className={cn("relative", className)}>
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className={cn(
+          "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border transition-colors",
+          "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
+          "dark:border-white/15 dark:bg-black/25 dark:text-brand-navy dark:hover:bg-white/10",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright"
+        )}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        title="Theme: color & appearance"
+        aria-label="Open theme settings"
+      >
+        <Palette className="size-4" strokeWidth={2} aria-hidden />
+      </button>
+
+      {open ? (
+        <div
+          ref={panelRef}
+          role="dialog"
+          aria-label="Theme settings"
+          className="absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18rem)] rounded-xl border border-slate-200/90 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
+        >
+          <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
+            Appearance
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => setAppearance("light")}
+              className={cn(
+                "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition",
+                mode === "light"
+                  ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-500 dark:bg-blue-950/50 dark:text-blue-100"
+                  : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              )}
+            >
+              <Sun className="size-4" strokeWidth={1.75} aria-hidden />
+              Light
+            </button>
+            <button
+              type="button"
+              onClick={() => setAppearance("dark")}
+              className={cn(
+                "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition",
+                mode === "dark"
+                  ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-500 dark:bg-blue-950/50 dark:text-blue-100"
+                  : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              )}
+            >
+              <Moon className="size-4" strokeWidth={1.75} aria-hidden />
+              Dark
+            </button>
+          </div>
+
+          <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
+            Accent color
+          </p>
+          <div className="mt-2 grid grid-cols-4 gap-2">
+            {THEME_HUES.map((h) => {
+              const meta = HUE_META[h];
+              const active = hue === h;
+              return (
+                <button
+                  key={h}
+                  type="button"
+                  onClick={() => setColorHue(h)}
+                  title={meta.label}
+                  className={cn(
+                    "flex flex-col items-center gap-1 rounded-lg border p-2 text-center transition",
+                    active
+                      ? "border-blue-500 bg-blue-50/80 dark:border-blue-400 dark:bg-blue-950/40"
+                      : "border-transparent hover:bg-slate-50 dark:hover:bg-zinc-800/80"
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "relative flex size-8 items-center justify-center rounded-full shadow-inner",
+                      h === "neutral"
+                        ? mode === "dark"
+                          ? meta.swatchDark
+                          : meta.swatch
+                        : meta.swatch
+                    )}
+                  >
+                    {active ? (
+                      <Check
+                        className={cn(
+                          "absolute size-4 drop-shadow-sm",
+                          h === "yellow" && "text-zinc-900",
+                          h === "neutral" && "text-zinc-900 dark:text-white",
+                          h !== "yellow" && h !== "neutral" && "text-white"
+                        )}
+                        strokeWidth={2.5}
+                        aria-hidden
+                      />
+                    ) : null}
+                  </span>
+                  <span className="text-[0.65rem] font-medium leading-tight text-slate-700 dark:text-zinc-200">
+                    {meta.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}

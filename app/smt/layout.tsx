@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeSelector } from "@/components/ThemeSelector";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isSmtRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
@@ -103,7 +103,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             </Link>
           </nav>
           <div className="flex items-center gap-2">
-            <ThemeToggle />
+            <ThemeSelector />
             <SignOutButton className="text-brand-navy hover:text-emerald-700 dark:hover:text-brand-gold-bright" />
           </div>
         </div>

@@ -38,10 +38,10 @@ type ChairNavItem = {
 };
 
 const CHAIR_NAV_ITEMS: ChairNavItem[] = [
-  { href: "/guides", label: "Prep checklist", icon: ListChecks, emoji: "✅" },
-  { href: "/running-notes", label: "Flow checklist", icon: ClipboardList, emoji: "📋" },
+  { href: "/chair/prep-checklist", label: "Prep checklist", icon: ListChecks, emoji: "✅" },
+  { href: "/chair/flow-checklist", label: "Flow checklist", icon: ClipboardList, emoji: "📋" },
   { href: "/chair/allocation-matrix", label: "Delegates", icon: Users, emoji: "👥" },
-  { href: "/committee-room", label: "Digital Room", icon: LayoutGrid, emoji: "🖥️" },
+  { href: "/chair/digital-room", label: "Digital Room", icon: LayoutGrid, emoji: "🖥️" },
   { href: "/chair/room-code", label: "Room code", icon: DoorOpen, emoji: "🚪" },
   {
     href: "/chair/session/roll-call",
@@ -63,7 +63,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "🎤",
   },
   {
-    href: "/chair/session/motions",
+    href: "/chair/motions-points",
     label: "Motions & Points",
     icon: FileText,
     emoji: "📜",
@@ -72,7 +72,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/awards", label: "Score", icon: BarChart3, emoji: "📊" },
   { href: "/report", label: "Crisis", icon: TriangleAlert, emoji: "⚠️" },
   { href: "/documents", label: "Archive", icon: Archive, emoji: "📁" },
-  { href: "/sources", label: "Official links", icon: Link2, emoji: "🔗" },
+  { href: "/chair/official-links", label: "Official links", icon: Link2, emoji: "🔗" },
   { href: "/chair/allocation-passwords", label: "Sign-in passwords", icon: KeyRound, emoji: "🔑" },
   { href: "/profile", label: "Settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
 ];
@@ -159,16 +159,18 @@ export function ChairDashboardSidebar({ conferenceLine }: { conferenceLine: stri
 
   const headerText =
     conferenceLine.trim() || "Committee & topic";
+  const hubActive = pathname === "/chair";
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className={cn("shrink-0 px-3 pt-3 pb-2", labelsHidden && "px-2")}>
         <Link
-          href="/committee-room"
+          href="/chair"
           title={headerText}
           className={cn(
             "flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500",
-            labelsHidden && "px-3 py-2.5"
+            labelsHidden && "px-3 py-2.5",
+            hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-white dark:ring-amber-400/90 dark:ring-offset-zinc-950"
           )}
         >
           <BookOpen className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
@@ -282,15 +284,22 @@ export function ChairMobileDock({ conferenceLine }: { conferenceLine: string }) 
     });
   }, []);
 
+  const hubActive = pathname === "/chair";
+
   return (
     <div className="border-t border-slate-200/80 bg-[#f4f6fb]/95 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <Link
-          href="/committee-room"
+          href="/chair"
           className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2"
           title={conferenceLine || "Committee"}
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-lg text-white shadow-sm">
+          <span
+            className={cn(
+              "flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-lg text-white shadow-sm",
+              hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-[#f4f6fb] dark:ring-amber-400/90 dark:ring-offset-zinc-950"
+            )}
+          >
             📌
           </span>
           {!labelsHidden ? (

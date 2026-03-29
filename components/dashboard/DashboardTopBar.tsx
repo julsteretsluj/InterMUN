@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 
 function initialsFromName(name: string, email: string): string {
@@ -82,7 +82,7 @@ export function DashboardTopBar({
             {formatHeaderDate(new Date())}
           </time>
           {notifications ?? null}
-          <ThemeToggle />
+          <ThemeSelector />
           <div className="flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white py-1.5 pl-1.5 pr-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
             <Link
               href="/profile"
