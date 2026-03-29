@@ -11,7 +11,16 @@ import { DashboardNotifications } from "@/components/dashboard/DashboardNotifica
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getAppName } from "@/lib/branding";
-import { isAdminRole, isStaffRole, isSmtRole, showsDaisTools, SMT_APP_HOME, ADMIN_APP_HOME } from "@/lib/roles";
+import {
+  isAdminRole,
+  isChairRole,
+  isStaffRole,
+  isSmtRole,
+  showsDaisTools,
+  SMT_APP_HOME,
+  ADMIN_APP_HOME,
+} from "@/lib/roles";
+import { ChairDashboardSidebar, ChairMobileDock } from "@/components/dashboard/ChairDashboardNav";
 import type { UserRole } from "@/types/database";
 
 export default async function DashboardLayout({
@@ -111,24 +120,30 @@ export default async function DashboardLayout({
           </span>
         </Link>
         <div className="flex min-h-0 flex-1 flex-col">
-          <TabNav staffRole={navRole} variant="aspire-sidebar" />
+          {isChairRole(normalizedRole) ? (
+            <ChairDashboardSidebar conferenceLine={conferenceLine || ""} />
+          ) : (
+            <TabNav staffRole={navRole} variant="aspire-sidebar" />
+          )}
         </div>
-        <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-4 dark:border-zinc-800">
-          <Link
-            href="/guides"
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
-          >
-            <HelpCircle className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-            Help center
-          </Link>
-          <Link
-            href="/profile"
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
-          >
-            <Settings className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-            Settings
-          </Link>
-        </div>
+        {!isChairRole(normalizedRole) ? (
+          <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-4 dark:border-zinc-800">
+            <Link
+              href="/guides"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+            >
+              <HelpCircle className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
+              Help center
+            </Link>
+            <Link
+              href="/profile"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+            >
+              <Settings className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
+              Settings
+            </Link>
+          </div>
+        ) : null}
       </aside>
 
       <div className="flex min-h-screen min-w-0 flex-1 flex-col">
@@ -155,7 +170,11 @@ export default async function DashboardLayout({
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
-        <TabNav staffRole={navRole} variant="dock" />
+        {isChairRole(normalizedRole) ? (
+          <ChairMobileDock conferenceLine={conferenceLine || ""} />
+        ) : (
+          <TabNav staffRole={navRole} variant="dock" />
+        )}
       </div>
 
       <PaperSavedWidget />
