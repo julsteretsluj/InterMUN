@@ -6,6 +6,9 @@ import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 type NoteTopic = "bloc forming" | "speech pois or pocs" | "questions" | "informal conversations";
 
 type DelegationNoteRow = {
@@ -53,7 +56,17 @@ type InitialDelegationNote = {
   starred_by_me: boolean;
 };
 
-export default async function ChatsNotesPage() {
+function isDaisAllocationCountry(country: string): boolean {
+  const n = country.trim().toLowerCase();
+  return n === "head chair" || n === "co-chair" || n === "co chair";
+}
+
+export default async function ChatsNotesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ forProfile?: string }>;
+}) {
+  const { forProfile } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
@@ -129,6 +142,29 @@ export default async function ChatsNotesPage() {
       name: c.name ?? "Chair",
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  let initialSelectedAllocationRecipientIds: string[] | undefined;
+  let initialSelectedChairRecipientIds: string[] | undefined;
+
+  if (forProfile && UUID_RE.test(forProfile)) {
+    const { data: targetAlloc } = await supabase
+      .from("allocations")
+      .select("id, country")
+      .eq("conference_id", conferenceId)
+      .eq("user_id", forProfile)
+      .maybeSingle();
+
+    if (targetAlloc?.id) {
+      const country = String(targetAlloc.country ?? "");
+      if (isDaisAllocationCountry(country)) {
+        initialSelectedChairRecipientIds = [forProfile];
+      } else {
+        initialSelectedAllocationRecipientIds = [targetAlloc.id as string];
+      }
+    } else if (chairOptions.some((c) => c.id === forProfile)) {
+      initialSelectedChairRecipientIds = [forProfile];
+    }
+  }
 
   // Recipients for notes list.
   const recipientsByNoteId = new Map<string, DelegationRecipientRow[]>();
@@ -249,6 +285,8 @@ export default async function ChatsNotesPage() {
         myProfileName={myProfileName}
         allocationOptions={allocationOptions}
         chairOptions={chairOptions}
+        initialSelectedAllocationRecipientIds={initialSelectedAllocationRecipientIds}
+        initialSelectedChairRecipientIds={initialSelectedChairRecipientIds}
       />
     </MunPageShell>
   );

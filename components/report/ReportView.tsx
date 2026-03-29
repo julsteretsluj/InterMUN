@@ -13,15 +13,18 @@ interface Report {
 export function ReportView({
   reports,
   canViewAll,
+  initialDescription,
 }: {
   reports: Report[];
   canViewAll: boolean;
+  /** Optional prefill (e.g. deep link from a member profile). */
+  initialDescription?: string;
 }) {
   const [items, setItems] = useState(reports);
   const [reportType, setReportType] = useState<"ai_use" | "inappropriate_conduct">(
     "ai_use"
   );
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(initialDescription ?? "");
   const supabase = createClient();
 
   async function submitReport() {

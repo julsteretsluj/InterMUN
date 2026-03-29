@@ -3,7 +3,12 @@ import { ReportView } from "@/components/report/ReportView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
 
-export default async function ReportPage() {
+export default async function ReportPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ about?: string; aboutName?: string }>;
+}) {
+  const { about, aboutName: aboutNameRaw } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
@@ -24,9 +29,21 @@ export default async function ReportPage() {
   if (!canViewAll) q = q.eq("user_id", user.id);
   const { data: reports } = await q;
 
+  const aboutName = aboutNameRaw ? decodeURIComponent(aboutNameRaw) : "";
+  const initialDescription =
+    about && aboutName
+      ? `Regarding ${aboutName} (profile id ${about}). `
+      : about
+        ? `Regarding profile id ${about}. `
+        : undefined;
+
   return (
     <MunPageShell title="Report">
-      <ReportView reports={reports || []} canViewAll={canViewAll} />
+      <ReportView
+        reports={reports || []}
+        canViewAll={canViewAll}
+        initialDescription={initialDescription}
+      />
     </MunPageShell>
   );
 }

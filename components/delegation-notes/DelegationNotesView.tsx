@@ -67,13 +67,9 @@ export function DelegationNotesView({
   chairOptions,
   nextPathAfterVerification = "/chats-notes",
   votingProcedureLocked,
-  selectedAllocationRecipientIds: controlledSelectedAllocationRecipientIds,
-  selectedChairRecipientIds: controlledSelectedChairRecipientIds,
-  anyChairRecipient: controlledAnyChairRecipient,
-  onToggleAllocationRecipient,
-  onToggleChairRecipient,
-  onAnyChairRecipientChange,
-  onClearRecipientSelection,
+  initialSelectedAllocationRecipientIds,
+  initialSelectedChairRecipientIds,
+  initialAnyChairRecipient,
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -86,15 +82,10 @@ export function DelegationNotesView({
   chairOptions: ChairOption[];
   nextPathAfterVerification?: string;
   votingProcedureLocked?: boolean;
-
-  // Controlled recipients selection (digital MUN click-to-select).
-  selectedAllocationRecipientIds?: string[];
-  selectedChairRecipientIds?: string[];
-  anyChairRecipient?: boolean;
-  onToggleAllocationRecipient?: (allocationId: string) => void;
-  onToggleChairRecipient?: (chairProfileId: string) => void;
-  onAnyChairRecipientChange?: (next: boolean) => void;
-  onClearRecipientSelection?: () => void;
+  /** Pre-check recipients (e.g. deep link from a member profile). */
+  initialSelectedAllocationRecipientIds?: string[];
+  initialSelectedChairRecipientIds?: string[];
+  initialAnyChairRecipient?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
 
@@ -105,9 +96,13 @@ export function DelegationNotesView({
 
   const [selectedAllocationRecipientIdsState, setSelectedAllocationRecipientIdsState] = useState<
     string[]
-  >([]);
-  const [selectedChairRecipientIdsState, setSelectedChairRecipientIdsState] = useState<string[]>([]);
-  const [anyChairRecipientState, setAnyChairRecipientState] = useState(false);
+  >(() => initialSelectedAllocationRecipientIds ?? []);
+  const [selectedChairRecipientIdsState, setSelectedChairRecipientIdsState] = useState<string[]>(
+    () => initialSelectedChairRecipientIds ?? []
+  );
+  const [anyChairRecipientState, setAnyChairRecipientState] = useState(
+    () => initialAnyChairRecipient ?? false
+  );
 
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -116,24 +111,9 @@ export function DelegationNotesView({
   const isDelegate = myRole === "delegate";
   const isSmt = myRole === "smt";
 
-  const isControlledRecipients =
-    controlledSelectedAllocationRecipientIds !== undefined &&
-    controlledSelectedChairRecipientIds !== undefined &&
-    controlledAnyChairRecipient !== undefined &&
-    !!onToggleAllocationRecipient &&
-    !!onToggleChairRecipient &&
-    !!onAnyChairRecipientChange &&
-    !!onClearRecipientSelection;
-
-  const selectedAllocationRecipientIds = isControlledRecipients
-    ? controlledSelectedAllocationRecipientIds ?? []
-    : selectedAllocationRecipientIdsState;
-  const selectedChairRecipientIds = isControlledRecipients
-    ? controlledSelectedChairRecipientIds ?? []
-    : selectedChairRecipientIdsState;
-  const anyChairRecipient = isControlledRecipients
-    ? controlledAnyChairRecipient ?? false
-    : anyChairRecipientState;
+  const selectedAllocationRecipientIds = selectedAllocationRecipientIdsState;
+  const selectedChairRecipientIds = selectedChairRecipientIdsState;
+  const anyChairRecipient = anyChairRecipientState;
 
   const allocationIdToCountry = useMemo(() => {
     return new Map(allocationOptions.map((a) => [a.id, a.country] as const));
@@ -453,13 +433,9 @@ export function DelegationNotesView({
       setNotes((prev) => [newNote, ...prev]);
       setContent("");
       setConcernFlag(false);
-      if (isControlledRecipients) {
-        onClearRecipientSelection?.();
-      } else {
-        setSelectedAllocationRecipientIdsState([]);
-        setSelectedChairRecipientIdsState([]);
-        setAnyChairRecipientState(false);
-      }
+      setSelectedAllocationRecipientIdsState([]);
+      setSelectedChairRecipientIdsState([]);
+      setAnyChairRecipientState(false);
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : "Failed to send note.";
       setError(message);
@@ -625,10 +601,6 @@ export function DelegationNotesView({
                         className="size-4 accent-neutral-800 rounded border-neutral-400"
                     disabled={votingProcedureLocked}
                         onChange={(e) => {
-                          if (isControlledRecipients) {
-                            onToggleAllocationRecipient?.(a.id);
-                            return;
-                          }
                           setSelectedAllocationRecipientIdsState((prev) => {
                             if (e.target.checked) return [...prev, a.id];
                             return prev.filter((x) => x !== a.id);
@@ -661,10 +633,6 @@ export function DelegationNotesView({
                   disabled={votingProcedureLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
-                    if (isControlledRecipients) {
-                      onAnyChairRecipientChange?.(next);
-                      return;
-                    }
                     setAnyChairRecipientState(next);
                     if (next) setSelectedChairRecipientIdsState([]);
                   }}
@@ -690,10 +658,6 @@ export function DelegationNotesView({
                         disabled={anyChairRecipient || votingProcedureLocked}
                         onChange={(e) => {
                           if (anyChairRecipient) return;
-                          if (isControlledRecipients) {
-                            onToggleChairRecipient?.(c.id);
-                            return;
-                          }
                           setSelectedChairRecipientIdsState((prev) => {
                             if (e.target.checked) return [...prev, c.id];
                             return prev.filter((x) => x !== c.id);

@@ -51,7 +51,7 @@ export default async function CommitteeRoomPage() {
     .order("name");
 
   return (
-    <MunPageShell title="Virtual committee room">
+    <MunPageShell title="Committee room">
       <CommitteeRoomDigitalMUNClient
         conferenceId={conferenceId}
         conferenceName={payload.conference?.name ?? "Conference"}

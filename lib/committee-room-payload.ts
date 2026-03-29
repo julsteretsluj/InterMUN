@@ -118,6 +118,7 @@ function placardsFromAllocationRows(
     const schoolOverride = String(row.display_school_override ?? "").trim();
     return {
       allocationId: row.id,
+      profileId: row.user_id ? String(row.user_id) : null,
       country: String(row.country ?? "").trim() || "—",
       name: vacant ? null : nameOverride ? nameOverride : p?.name?.trim() || null,
       school: vacant ? null : schoolOverride ? schoolOverride : p?.school?.trim() || null,

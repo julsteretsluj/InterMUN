@@ -1,8 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { Armchair, Gavel, Mic } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import {
+  daisSeatMatchesSearch,
+  delegatePlacardMatchesSearch,
+  normalizeDelegationSearchQuery,
+} from "@/lib/committee-room-delegation-search";
 
 export interface DaisSeat {
   title: string;
@@ -13,6 +19,7 @@ export interface DaisSeat {
 
 export interface DelegatePlacard {
   allocationId: string;
+  profileId: string | null;
   country: string;
   name: string | null;
   school: string | null;
@@ -28,13 +35,12 @@ interface VirtualCommitteeRoomProps {
   dais: DaisSeat[];
   /** Omit the helper paragraph with `null`; omit prop for default delegate copy. */
   helperText?: string | null;
-
-  // Digital MUN: click-to-select recipient targeting (optional).
-  selectedAllocationRecipientIds?: string[];
-  onToggleAllocationRecipient?: (allocationId: string) => void;
-  selectedChairRecipientIds?: string[];
-  anyChairRecipient?: boolean;
-  onToggleChairRecipient?: (chairProfileId: string) => void;
+  /** Base path for member profile pages (no trailing slash). */
+  personHrefBase?: string;
+  /** Filter / highlight placards and dais (country, name, school, pronouns; “vacant” matches empty seats). */
+  delegationSearchQuery?: string;
+  /** Increment (e.g. on Enter in search) to scroll the first matching placard into view. */
+  scrollToDelegationMatchNonce?: number;
 }
 
 function dash(v: string | null | undefined) {
@@ -44,37 +50,33 @@ function dash(v: string | null | undefined) {
 
 function Placard({
   placard,
-  selected,
-  onClick,
+  personHref,
+  searchActive,
+  matchesSearch,
+  jumpAnchor,
 }: {
   placard: DelegatePlacard;
-  selected: boolean;
-  onClick?: () => void;
+  personHref: string | null;
+  searchActive: boolean;
+  matchesSearch: boolean;
+  jumpAnchor: boolean;
 }) {
   const { vacant, country, name, school, pronouns, allocationId } = placard;
-  const disabled = vacant || !onClick;
+  const interactive = Boolean(personHref);
+  const dimmed = searchActive && !matchesSearch;
+  const ringMatch = searchActive && matchesSearch;
 
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={[
-        "w-[6.75rem] sm:w-28 md:w-32 text-left",
-        disabled ? "opacity-100 cursor-default" : "cursor-pointer",
-        selected && !vacant ? "ring-2 ring-brand-gold-bright/60 rounded-[0.35rem]" : "",
-      ].join(" ")}
-      aria-label={vacant ? `Vacant seat` : `Toggle recipient ${country}`}
-      data-allocation-id={allocationId}
-    >
+  const inner = (
+    <>
       <div
         className={[
-          "rounded-sm border-2 shadow-md px-1.5 py-2 text-left leading-snug",
+          "rounded-sm border-2 shadow-md px-1.5 py-2 text-left leading-snug transition-[opacity,transform,box-shadow,border-color] duration-200",
           vacant
             ? "border-brand-navy/20 bg-brand-cream/40 text-brand-muted/80"
-            : selected
-              ? "border-brand-gold-bright/40 bg-brand-paper/90 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
-              : "border-brand-gold-bright/30 bg-brand-paper/70 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
+            : "border-brand-gold-bright/30 bg-brand-paper/70 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
+          interactive ? "hover:border-brand-gold-bright/50 hover:shadow-md" : "",
+          dimmed ? "opacity-[0.32] scale-[0.98]" : "",
+          ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-gold-bright/60" : "",
         ].join(" ")}
       >
         {vacant ? (
@@ -104,31 +106,55 @@ function Placard({
           vacant ? "bg-brand-navy/15 w-[90%]" : "bg-brand-gold-bright/50 w-full",
         ].join(" ")}
       />
-    </button>
+    </>
+  );
+
+  const wrapClass = "w-[6.75rem] sm:w-28 md:w-32 text-left block";
+
+  if (personHref) {
+    return (
+      <Link
+        href={personHref}
+        className={[wrapClass, "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright"].join(
+          " "
+        )}
+        aria-label={`View profile: ${country}`}
+        data-allocation-id={allocationId}
+        data-committee-search-jump={jumpAnchor ? "" : undefined}
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={[wrapClass, vacant ? "opacity-100" : ""].join(" ")}
+      aria-label={vacant ? "Vacant seat" : `Placard ${country}`}
+      data-allocation-id={allocationId}
+      data-committee-search-jump={jumpAnchor ? "" : undefined}
+    >
+      {inner}
+    </div>
   );
 }
 
 function DaisStation({
   seat,
-  selected,
-  onClick,
+  personHref,
+  searchActive,
+  matchesSearch,
 }: {
   seat: DaisSeat;
-  selected: boolean;
-  onClick?: () => void;
+  personHref: string | null;
+  searchActive: boolean;
+  matchesSearch: boolean;
 }) {
-  const disabled = !onClick || !seat.profileId;
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={[
-        "flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem]",
-        disabled ? "cursor-default" : "cursor-pointer",
-        selected && !disabled ? "ring-2 ring-brand-gold-bright/50 rounded-[0.35rem]" : "",
-      ].join(" ")}
-    >
+  const dimmed = searchActive && !matchesSearch;
+  const ringMatch = searchActive && matchesSearch;
+
+  const inner = (
+    <>
       <div className="relative flex items-end justify-center gap-0.5 h-14 sm:h-16">
         <Armchair
           className="w-10 h-10 sm:w-12 sm:h-12 text-brand-navy drop-shadow-md"
@@ -144,8 +170,9 @@ function DaisStation({
       </div>
       <div
         className={[
-          "rounded-md bg-black/25 px-2 py-1 w-full text-center border",
-          selected && !disabled ? "border-brand-gold-bright/40" : "border-white/10",
+          "rounded-md bg-black/25 px-2 py-1 w-full text-center border border-white/10 transition-[opacity,transform,box-shadow] duration-200",
+          dimmed ? "opacity-[0.35] scale-[0.97]" : "",
+          ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-gold-bright/50" : "",
         ].join(" ")}
       >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-gold-bright/90">
@@ -155,12 +182,33 @@ function DaisStation({
           {seat.name ?? "—"}
         </p>
       </div>
-    </button>
+    </>
+  );
+
+  const wrapClass = [
+    "flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem] transition-opacity duration-200",
+    dimmed ? "opacity-[0.35]" : "",
+    personHref ? "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright" : "cursor-default",
+  ].join(" ");
+
+  if (personHref) {
+    return (
+      <Link href={personHref} className={wrapClass} aria-label={`View profile: ${seat.title}`}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div className={wrapClass} aria-label={`${seat.title} (no profile link)`}>
+      {inner}
+    </div>
   );
 }
 
 const VACANT_SEAT: DelegatePlacard = {
   allocationId: "VACANT",
+  profileId: null,
   country: "Vacant",
   name: null,
   school: null,
@@ -175,14 +223,13 @@ export function VirtualCommitteeRoom({
   placards,
   dais,
   helperText,
-  selectedAllocationRecipientIds = [],
-  onToggleAllocationRecipient,
-  selectedChairRecipientIds = [],
-  anyChairRecipient = false,
-  onToggleChairRecipient,
+  personHrefBase = "/committee-room/person",
+  delegationSearchQuery = "",
+  scrollToDelegationMatchNonce = 0,
 }: VirtualCommitteeRoomProps) {
   const supabase = useMemo(() => createClient(), []);
   const [livePlacards, setLivePlacards] = useState<DelegatePlacard[]>(placards);
+  const placardGridRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setLivePlacards(placards);
@@ -228,6 +275,7 @@ export function VirtualCommitteeRoom({
         const schoolOverride = String(row.display_school_override ?? "").trim();
         return {
           allocationId: row.id,
+          profileId: row.user_id ? String(row.user_id) : null,
           country: String(row.country ?? "").trim() || "—",
           name: vacant ? null : nameOverride ? nameOverride : p?.name?.trim() || null,
           school: vacant ? null : schoolOverride ? schoolOverride : p?.school?.trim() || null,
@@ -272,6 +320,24 @@ export function VirtualCommitteeRoom({
     return raw;
   }, [livePlacards]);
 
+  const qNorm = normalizeDelegationSearchQuery(delegationSearchQuery);
+  const searchActive = qNorm.length > 0;
+
+  const firstPlacardMatchIndex = useMemo(() => {
+    if (!searchActive) return -1;
+    return ringSeats.findIndex((p) => delegatePlacardMatchesSearch(p, qNorm));
+  }, [ringSeats, searchActive, qNorm]);
+
+  useEffect(() => {
+    if (!scrollToDelegationMatchNonce || !searchActive || firstPlacardMatchIndex < 0) return;
+    const root = placardGridRef.current;
+    if (!root) return;
+    requestAnimationFrame(() => {
+      const el = root.querySelector<HTMLElement>("[data-committee-search-jump]");
+      el?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    });
+  }, [scrollToDelegationMatchNonce, searchActive, firstPlacardMatchIndex, qNorm]);
+
   return (
     <div className="space-y-4">
       {helperText === null ? null : (
@@ -281,16 +347,23 @@ export function VirtualCommitteeRoom({
               Placards list <strong>country</strong> (from allocations), <strong>name</strong>,{" "}
               <strong>school</strong>, and <strong>pronouns</strong> from each delegate&apos;s profile. Edit
               yours under <strong>Profile</strong>. Empty committee seats show as{" "}
-              <span className="text-brand-navy font-medium">Vacant</span>.
+              <span className="text-brand-navy font-medium">Vacant</span>.{" "}
+              <strong>Click</strong> a filled placard or dais seat to open that member&apos;s page (chat and
+              report from there).
             </>
           )}
         </p>
       )}
 
       <figure
-        className="relative w-full overflow-hidden rounded-2xl border border-brand-navy/15 shadow-[0_24px_60px_-20px_rgba(10,22,40,0.35)] select-none"
+        className="relative w-full overflow-hidden rounded-3xl border border-white/10 shadow-[0_28px_80px_-24px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.06)] select-none ring-1 ring-brand-gold/10"
         aria-label="Virtual committee room"
       >
+        {searchActive ? (
+          <span className="sr-only" aria-live="polite">
+            Filtering delegations. First highlighted seat is the first match in the ring.
+          </span>
+        ) : null}
         <div
           className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
           style={{
@@ -316,19 +389,16 @@ export function VirtualCommitteeRoom({
 
           <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-10 md:gap-14 px-2 z-10 flex-wrap">
             {dais.map((seat, i) => {
-              const selected =
-                anyChairRecipient ||
-                (seat.profileId ? selectedChairRecipientIds.includes(seat.profileId) : false);
+              const href = seat.profileId
+                ? `${personHrefBase.replace(/\/$/, "")}/${seat.profileId}`
+                : null;
               return (
                 <DaisStation
                   key={`${seat.title}-${i}`}
                   seat={seat}
-                  selected={selected}
-                  onClick={
-                    onToggleChairRecipient && seat.profileId
-                      ? () => onToggleChairRecipient(seat.profileId as string)
-                      : undefined
-                  }
+                  personHref={href}
+                  searchActive={searchActive}
+                  matchesSearch={daisSeatMatchesSearch(seat, qNorm)}
                 />
               );
             })}
@@ -344,19 +414,27 @@ export function VirtualCommitteeRoom({
           </div>
 
           <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[30%] md:pt-[28%]">
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center">
-              {ringSeats.map((p, i) => (
-                <Placard
-                  key={`seat-${i}`}
-                  placard={p}
-                  selected={selectedAllocationRecipientIds.includes(p.allocationId)}
-                  onClick={
-                    onToggleAllocationRecipient && !p.vacant
-                      ? () => onToggleAllocationRecipient(p.allocationId)
-                      : undefined
-                  }
-                />
-              ))}
+            <div
+              ref={placardGridRef}
+              className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center"
+            >
+              {ringSeats.map((p, i) => {
+                const href =
+                  !p.vacant && p.profileId
+                    ? `${personHrefBase.replace(/\/$/, "")}/${p.profileId}`
+                    : null;
+                const matchesSearch = delegatePlacardMatchesSearch(p, qNorm);
+                return (
+                  <Placard
+                    key={`seat-${i}`}
+                    placard={p}
+                    personHref={href}
+                    searchActive={searchActive}
+                    matchesSearch={matchesSearch}
+                    jumpAnchor={searchActive && i === firstPlacardMatchIndex && firstPlacardMatchIndex >= 0}
+                  />
+                );
+              })}
             </div>
           </div>
 

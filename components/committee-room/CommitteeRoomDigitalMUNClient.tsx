@@ -1,13 +1,64 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { Users, UserRound, Search, CircleDot, Gavel, Sparkles, X } from "lucide-react";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
 import { CommitteeRoomSessionFloor } from "@/components/committee-room/CommitteeRoomSessionFloor";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import type { StaffAllocationRow } from "@/lib/committee-room-payload";
+import {
+  countDelegatePlacardMatches,
+  daisSeatMatchesSearch,
+  normalizeDelegationSearchQuery,
+} from "@/lib/committee-room-delegation-search";
 import { createClient } from "@/lib/supabase/client";
+
+function StatMiniCard({
+  label,
+  value,
+  tint,
+  onPress,
+  title,
+}: {
+  label: string;
+  value: string | number;
+  tint: "emerald" | "amber" | "violet" | "sky";
+  onPress?: () => void;
+  title?: string;
+}) {
+  const tones = {
+    emerald: "from-emerald-500/25 to-emerald-600/5 border-emerald-400/20",
+    amber: "from-amber-500/25 to-amber-600/5 border-amber-400/20",
+    violet: "from-violet-500/25 to-violet-600/5 border-violet-400/20",
+    sky: "from-sky-500/25 to-sky-600/5 border-sky-400/20",
+  } as const;
+  const interactive = Boolean(onPress);
+  const className = [
+    "rounded-xl border bg-gradient-to-br px-3 py-2.5 shadow-sm text-left w-full",
+    tones[tint],
+    interactive
+      ? "cursor-pointer hover:brightness-110 active:scale-[0.98] transition-[transform,filter] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright"
+      : "",
+  ].join(" ");
+
+  if (onPress) {
+    return (
+      <button type="button" className={className} onClick={onPress} title={title}>
+        <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">{label}</p>
+        <p className="mt-0.5 text-lg font-semibold tabular-nums text-brand-navy">{value}</p>
+      </button>
+    );
+  }
+
+  return (
+    <div className={className}>
+      <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">{label}</p>
+      <p className="mt-0.5 text-lg font-semibold tabular-nums text-brand-navy">{value}</p>
+    </div>
+  );
+}
 
 export function CommitteeRoomDigitalMUNClient({
   conferenceId,
@@ -47,12 +98,15 @@ export function CommitteeRoomDigitalMUNClient({
   chairs: { id: string; name: string | null }[];
 }) {
   const role = myRole.toLowerCase();
-  const isChairLike = role === "chair" || role === "admin";
   const isDelegate = role === "delegate";
 
   const supabase = useMemo(() => createClient(), []);
+  const searchFieldId = useId();
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [procedureState, setProcedureState] = useState<"debate_open" | "voting_procedure">("debate_open");
   const [currentVoteItemId, setCurrentVoteItemId] = useState<string | null>(null);
+  const [delegationSearch, setDelegationSearch] = useState("");
+  const [scrollMatchNonce, setScrollMatchNonce] = useState(0);
 
   useEffect(() => {
     let isActive = true;
@@ -82,7 +136,10 @@ export function CommitteeRoomDigitalMUNClient({
           filter: `conference_id=eq.${conferenceId}`,
         },
         (payload) => {
-          const row = payload.new as { state: "debate_open" | "voting_procedure"; current_vote_item_id: string | null };
+          const row = payload.new as {
+            state: "debate_open" | "voting_procedure";
+            current_vote_item_id: string | null;
+          };
           setProcedureState(row?.state ?? "debate_open");
           setCurrentVoteItemId(row?.current_vote_item_id ?? null);
         }
@@ -97,114 +154,209 @@ export function CommitteeRoomDigitalMUNClient({
 
   const votingProcedureActive = procedureState === "voting_procedure";
 
-  const canClickSelectRecipients = (isDelegate || isChairLike) && !(isDelegate && votingProcedureActive);
+  const assignedCount = useMemo(() => placards.filter((p) => !p.vacant).length, [placards]);
+  const vacantCount = useMemo(() => placards.filter((p) => p.vacant).length, [placards]);
+  const daisFilled = useMemo(() => dais.filter((s) => s.profileId).length, [dais]);
+  const phaseLabel = votingProcedureActive ? "Voting" : "Debate";
 
-  const [selectedAllocationRecipientIds, setSelectedAllocationRecipientIds] = useState<string[]>([]);
-  const [selectedChairRecipientIds, setSelectedChairRecipientIds] = useState<string[]>([]);
-  const [anyChairRecipient, setAnyChairRecipient] = useState(false);
-
-  const selectedAllocationRecipientIdsControlled = useMemo(
-    () => (canClickSelectRecipients ? selectedAllocationRecipientIds : []),
-    [canClickSelectRecipients, selectedAllocationRecipientIds]
+  const qNorm = useMemo(() => normalizeDelegationSearchQuery(delegationSearch), [delegationSearch]);
+  const delegationMatchCount = useMemo(
+    () => countDelegatePlacardMatches(placards, qNorm),
+    [placards, qNorm]
   );
-  const selectedChairRecipientIdsControlled = useMemo(
-    () => (canClickSelectRecipients ? selectedChairRecipientIds : []),
-    [canClickSelectRecipients, selectedChairRecipientIds]
-  );
-
-  function toggleAllocationRecipient(allocationId: string) {
-    setSelectedAllocationRecipientIds((prev) => {
-      if (prev.includes(allocationId)) return prev.filter((x) => x !== allocationId);
-      return [...prev, allocationId];
-    });
-  }
-
-  function toggleChairRecipient(chairProfileId: string) {
-    if (anyChairRecipient) setAnyChairRecipient(false);
-    setSelectedChairRecipientIds((prev) => {
-      const already = prev.includes(chairProfileId);
-      if (already) return prev.filter((x) => x !== chairProfileId);
-      return [...prev, chairProfileId];
-    });
-  }
-
-  function onAnyChairRecipientChange(next: boolean) {
-    setAnyChairRecipient(next);
-    if (next) setSelectedChairRecipientIds([]);
-  }
-
-  function clearRecipientSelection() {
-    setSelectedAllocationRecipientIds([]);
-    setSelectedChairRecipientIds([]);
-    setAnyChairRecipient(false);
-  }
+  const daisMatchCount = useMemo(() => {
+    if (!qNorm) return dais.length;
+    return dais.filter((s) => daisSeatMatchesSearch(s, qNorm)).length;
+  }, [dais, qNorm]);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(380px,460px)] gap-5 items-start">
-      <VirtualCommitteeRoom
-        conferenceId={conferenceId}
-        conferenceName={conferenceName}
-        committeeName={committeeName}
-        placards={placards}
-        dais={dais}
-        selectedAllocationRecipientIds={selectedAllocationRecipientIdsControlled}
-        onToggleAllocationRecipient={
-          canClickSelectRecipients ? (id) => toggleAllocationRecipient(id) : undefined
-        }
-        selectedChairRecipientIds={selectedChairRecipientIdsControlled}
-        anyChairRecipient={canClickSelectRecipients ? anyChairRecipient : false}
-        onToggleChairRecipient={canClickSelectRecipients ? (id) => toggleChairRecipient(id) : undefined}
-      />
+    <div className="w-full space-y-6">
+      <div className="xl:grid xl:grid-cols-[minmax(0,13.5rem)_minmax(0,1fr)_minmax(0,17.5rem)] xl:gap-6 xl:items-start">
+        {/* Left rail — context & stats (mockup sidebar) */}
+        <aside className="space-y-4 mb-6 xl:mb-0 xl:sticky xl:top-4">
+          <div className="rounded-2xl border border-brand-gold/20 bg-brand-paper/90 p-4 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Committee</p>
+            <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug line-clamp-3">
+              {committeeName}
+            </p>
+            <p className="mt-1 text-xs text-brand-muted line-clamp-2">{conferenceName}</p>
 
-      <div className="space-y-4">
-        <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-          <CommitteeRoomSessionFloor
-            conferenceId={conferenceId}
-            conferenceTitle={`${conferenceName} — ${committeeName}`}
-            myRole={myRole}
-            myAllocationId={myAllocationId}
-            myAllocationCountry={myAllocationCountry}
-            observeDelegatesOnly={false}
-            procedureState={procedureState}
-            currentVoteItemId={currentVoteItemId}
-          />
-        </div>
-        <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-          <DelegationNotesView
-            conferenceId={conferenceId}
-            initialNotes={[]}
-            myUserId={myUserId}
-            myRole={myRole}
-            smtVerified={smtVerified}
-            myAllocationId={myAllocationId}
-            myProfileName={myProfileName}
-            allocationOptions={allocationOptions}
-            chairOptions={chairOptions}
-            nextPathAfterVerification="/committee-room"
-            votingProcedureLocked={votingProcedureActive && isDelegate}
-            selectedAllocationRecipientIds={
-              canClickSelectRecipients ? selectedAllocationRecipientIdsControlled : undefined
-            }
-            selectedChairRecipientIds={
-              canClickSelectRecipients ? selectedChairRecipientIdsControlled : undefined
-            }
-            anyChairRecipient={canClickSelectRecipients ? anyChairRecipient : undefined}
-            onToggleAllocationRecipient={
-              canClickSelectRecipients ? (id) => toggleAllocationRecipient(id) : undefined
-            }
-            onToggleChairRecipient={
-              canClickSelectRecipients ? (id) => toggleChairRecipient(id) : undefined
-            }
-            onAnyChairRecipientChange={canClickSelectRecipients ? onAnyChairRecipientChange : undefined}
-            onClearRecipientSelection={canClickSelectRecipients ? clearRecipientSelection : undefined}
-          />
-        </div>
+            <div className="mt-4 pt-4 border-t border-brand-line/50 space-y-2">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Your context</p>
+              <div className="flex items-start gap-2 rounded-xl bg-black/20 px-3 py-2 border border-white/5">
+                <UserRound className="size-4 shrink-0 text-brand-gold-bright mt-0.5" strokeWidth={1.5} />
+                <div className="min-w-0 text-xs">
+                  <p className="text-brand-muted">Role</p>
+                  <p className="font-medium text-brand-navy capitalize">{role}</p>
+                  {myAllocationCountry ? (
+                    <p className="text-brand-muted mt-1">
+                      Seat · <span className="text-brand-navy/90">{myAllocationCountry}</span>
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
 
-        {canManageSeats ? (
-          <CommitteeRoomStaffControls allocations={staffAllocations} delegates={delegates} chairs={chairs} />
-        ) : null}
+          <div className="grid grid-cols-2 gap-2">
+            <StatMiniCard
+              label="Assigned"
+              value={assignedCount}
+              tint="emerald"
+              onPress={() => setDelegationSearch("")}
+              title="Clear search and show all delegations"
+            />
+            <StatMiniCard
+              label="Vacant"
+              value={vacantCount}
+              tint="amber"
+              onPress={() => setDelegationSearch("vacant")}
+              title='Search for "vacant" seats in the room'
+            />
+            <StatMiniCard
+              label="Dais"
+              value={daisFilled}
+              tint="violet"
+              onPress={() => searchInputRef.current?.focus()}
+              title="Focus search (dais titles and names match your query)"
+            />
+            <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-orange-500/20 via-fuchsia-500/10 to-emerald-500/15 p-3 text-xs text-brand-navy/90 leading-relaxed">
+            <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
+              <Sparkles className="size-3.5 text-amber-300/90 shrink-0" />
+              Tip
+            </div>
+            Use the search bar to filter placards and dais. Press Enter to scroll to the first match. Escape
+            clears. Click <strong>Vacant</strong> to jump to empty seats.
+          </div>
+        </aside>
+
+        {/* Center — digital display */}
+        <section className="min-w-0 space-y-4 mb-6 xl:mb-0">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl border border-brand-gold/15 bg-brand-paper/85 px-4 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
+            <div className="min-w-0 flex-1">
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
+                Digital display
+              </p>
+              <p className="font-display text-base sm:text-lg font-semibold text-brand-navy truncate">
+                {committeeName}
+              </p>
+            </div>
+            <div className="flex flex-col items-stretch sm:items-end gap-1.5 shrink-0 w-full sm:w-auto min-w-0 sm:min-w-[14rem]">
+              <label htmlFor={searchFieldId} className="sr-only">
+                Find a delegation or dais member
+              </label>
+              <div className="flex items-center gap-1 rounded-full border border-white/10 bg-black/25 pl-3 pr-1 py-1">
+                <Search className="size-3.5 opacity-70 shrink-0 text-brand-muted" strokeWidth={2} aria-hidden />
+                <input
+                  ref={searchInputRef}
+                  id={searchFieldId}
+                  type="search"
+                  value={delegationSearch}
+                  onChange={(e) => setDelegationSearch(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      e.preventDefault();
+                      setDelegationSearch("");
+                    }
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      setScrollMatchNonce((n) => n + 1);
+                    }
+                  }}
+                  placeholder="Country, name, school…"
+                  autoComplete="off"
+                  className="min-w-0 flex-1 bg-transparent text-xs text-brand-navy placeholder:text-brand-muted/70 focus:outline-none py-1.5"
+                />
+                {delegationSearch ? (
+                  <button
+                    type="button"
+                    onClick={() => setDelegationSearch("")}
+                    className="rounded-full p-1.5 text-brand-muted hover:text-brand-navy hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold-bright"
+                    aria-label="Clear search"
+                  >
+                    <X className="size-3.5" strokeWidth={2} />
+                  </button>
+                ) : null}
+              </div>
+              <p className="text-[0.65rem] text-brand-muted text-right tabular-nums" aria-live="polite">
+                {qNorm ? (
+                  <>
+                    <span className="text-brand-navy/90 font-medium">{delegationMatchCount}</span> of{" "}
+                    {placards.length} placards ·{" "}
+                    <span className="text-brand-navy/90 font-medium">{daisMatchCount}</span> of {dais.length} dais ·
+                    Enter scrolls
+                  </>
+                ) : (
+                  "Type to filter · Enter scrolls to first match"
+                )}
+              </p>
+            </div>
+          </div>
+
+          <VirtualCommitteeRoom
+            conferenceId={conferenceId}
+            conferenceName={conferenceName}
+            committeeName={committeeName}
+            placards={placards}
+            dais={dais}
+            helperText={null}
+            delegationSearchQuery={delegationSearch}
+            scrollToDelegationMatchNonce={scrollMatchNonce}
+          />
+        </section>
+
+        {/* Right rail — session + notes (mockup widget column) */}
+        <aside className="rounded-2xl border border-amber-400/15 bg-gradient-to-b from-amber-500/[0.06] via-brand-paper/40 to-brand-paper/20 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
+          <div className="rounded-xl bg-black/15 border border-white/5 p-3 md:p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <CircleDot className="size-4 text-brand-gold-bright" />
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Session</p>
+            </div>
+            <CommitteeRoomSessionFloor
+              conferenceId={conferenceId}
+              conferenceTitle={`${conferenceName} — ${committeeName}`}
+              myRole={myRole}
+              myAllocationId={myAllocationId}
+              myAllocationCountry={myAllocationCountry}
+              observeDelegatesOnly={false}
+              procedureState={procedureState}
+              currentVoteItemId={currentVoteItemId}
+            />
+          </div>
+          <div className="rounded-xl bg-black/15 border border-white/5 p-3 md:p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="size-4 text-brand-gold-bright" />
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Notes</p>
+            </div>
+            <DelegationNotesView
+              conferenceId={conferenceId}
+              initialNotes={[]}
+              myUserId={myUserId}
+              myRole={myRole}
+              smtVerified={smtVerified}
+              myAllocationId={myAllocationId}
+              myProfileName={myProfileName}
+              allocationOptions={allocationOptions}
+              chairOptions={chairOptions}
+              nextPathAfterVerification="/committee-room"
+              votingProcedureLocked={votingProcedureActive && isDelegate}
+            />
+          </div>
+        </aside>
       </div>
+
+      {canManageSeats ? (
+        <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/80 p-4 md:p-5 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <Gavel className="size-4 text-brand-gold-bright" />
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">Staff · seats</h3>
+          </div>
+          <CommitteeRoomStaffControls allocations={staffAllocations} delegates={delegates} chairs={chairs} />
+        </div>
+      ) : null}
     </div>
   );
 }
-
