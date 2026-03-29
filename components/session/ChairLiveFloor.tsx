@@ -2,9 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Timers } from "@/components/timers/Timers";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
-import { ActiveMotionContextStrip } from "@/components/session/ActiveMotionContextStrip";
 
 type ProcedureRow = {
   state: string;
@@ -12,8 +10,8 @@ type ProcedureRow = {
 };
 
 /**
- * Chair dashboard header: committee timer, or combined “current motion + floor time”
- * when the committee is in voting procedure.
+ * Chair dashboard header: single floor strip (motion + timer when voting, or general timer in debate).
+ * Renders only inside {@link FloorStatusBar} so the timer is not duplicated.
  */
 export function ChairLiveFloor({
   conferenceId,
@@ -72,16 +70,12 @@ export function ChairLiveFloor({
 
   return (
     <div className="space-y-2">
-      {activeVoteItemId ? (
-        <ActiveMotionContextStrip
-          conferenceId={conferenceId}
-          voteItemId={activeVoteItemId}
-          theme={theme}
-        />
-      ) : (
-        <Timers conferenceId={conferenceId} theme={theme} activeVoteItemId={activeVoteItemId} />
-      )}
-      <FloorStatusBar conferenceId={conferenceId} theme={theme} observeOnly={observeFloorOnly} />
+      <FloorStatusBar
+        conferenceId={conferenceId}
+        theme={theme}
+        observeOnly={observeFloorOnly}
+        activeMotionVoteItemId={activeVoteItemId}
+      />
     </div>
   );
 }

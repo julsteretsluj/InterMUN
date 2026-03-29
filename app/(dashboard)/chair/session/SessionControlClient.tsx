@@ -1184,6 +1184,82 @@ export function SessionControlClient({
     });
   }
 
+  /** Deletes an open-for-voting or closed motion; pending stated motions use {@link withdrawStatedMotion}. */
+  function deleteMotionAsChair(voteItemId: string) {
+    startTransition(async () => {
+      const { data: row, error: fetchErr } = await supabase
+        .from("vote_items")
+        .select("open_for_voting, closed_at")
+        .eq("id", voteItemId)
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+
+      if (fetchErr) {
+        setMsg(fetchErr.message);
+        void refresh();
+        return;
+      }
+      if (!row) {
+        setMsg("Motion not found.");
+        void refresh();
+        return;
+      }
+
+      const isPendingStated = row.closed_at === null && row.open_for_voting === false;
+      if (isPendingStated) {
+        setMsg("Remove pending stated motions with Withdraw in the list above.");
+        void refresh();
+        return;
+      }
+
+      const isLiveOpen = row.closed_at === null && row.open_for_voting === true;
+      let psRow: {
+        debate_closed?: boolean;
+        motion_floor_open?: boolean;
+        current_vote_item_id?: string | null;
+      } | null = null;
+      if (isLiveOpen) {
+        const { data: ps } = await supabase
+          .from("procedure_states")
+          .select("debate_closed, motion_floor_open, current_vote_item_id")
+          .eq("conference_id", conferenceId)
+          .maybeSingle();
+        psRow = ps;
+      }
+
+      const { error: delErr } = await supabase
+        .from("vote_items")
+        .delete()
+        .eq("id", voteItemId)
+        .eq("conference_id", conferenceId);
+
+      if (delErr) {
+        setMsg(delErr.message);
+        void refresh();
+        return;
+      }
+
+      if (isLiveOpen && psRow?.current_vote_item_id === voteItemId) {
+        const { error: psErr } = await supabase.from("procedure_states").upsert({
+          conference_id: conferenceId,
+          state: psRow.debate_closed ? "voting_procedure" : "debate_open",
+          current_vote_item_id: null,
+          debate_closed: psRow.debate_closed ?? false,
+          motion_floor_open: psRow.motion_floor_open ?? false,
+          updated_at: new Date().toISOString(),
+        });
+        if (psErr) {
+          setMsg(psErr.message);
+          void refresh();
+          return;
+        }
+      }
+
+      setMsg("Motion deleted.");
+      void refresh();
+    });
+  }
+
   const surfaceCard =
     "rounded-xl border border-white/15 bg-black/25 p-3 text-brand-navy shadow-sm backdrop-blur-sm";
   const surfaceLabel = "text-xs font-medium uppercase tracking-wide text-brand-muted";
@@ -1508,6 +1584,23 @@ export function SessionControlClient({
                 >
                   Close motion
                 </button>
+                <button
+                  type="button"
+                  disabled={pending}
+                  onClick={() => {
+                    if (
+                      !window.confirm(
+                        "Delete this motion permanently? All recorded votes for it will be removed and the motion will disappear from the record."
+                      )
+                    ) {
+                      return;
+                    }
+                    if (openMotion) deleteMotionAsChair(openMotion.id);
+                  }}
+                  className="px-4 py-2 rounded-lg border border-red-800 bg-red-950/40 text-red-100 text-sm font-medium hover:bg-red-950/60 disabled:opacity-50"
+                >
+                  Delete motion
+                </button>
               </>
             )}
           </div>
@@ -1654,7 +1747,8 @@ export function SessionControlClient({
                   {m.title || "Untitled"}{" "}
                   <span className="text-brand-muted">(closed)</span>
                 </span>
-                <button
+                <span className="flex shrink-0 items-center gap-2">
+                  <button
                     type="button"
                     disabled={pending || !!openMotion}
                     onClick={() => reopenMotion(m.id)}
@@ -1662,6 +1756,24 @@ export function SessionControlClient({
                   >
                     Reopen
                   </button>
+                  <button
+                    type="button"
+                    disabled={pending}
+                    onClick={() => {
+                      if (
+                        !window.confirm(
+                          `Delete “${m.title || "Untitled"}” permanently? This removes the closed motion from the record.`
+                        )
+                      ) {
+                        return;
+                      }
+                      deleteMotionAsChair(m.id);
+                    }}
+                    className="text-xs text-red-700 font-medium hover:underline disabled:opacity-50"
+                  >
+                    Delete
+                  </button>
+                </span>
               </li>
             ))}
           </ul>
