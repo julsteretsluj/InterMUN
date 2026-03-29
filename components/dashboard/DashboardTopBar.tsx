@@ -1,5 +1,6 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { Bell, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
@@ -31,12 +32,14 @@ export function DashboardTopBar({
   conferenceLine,
   showSeamunLogo,
   appName,
+  notifications,
 }: {
   userName: string;
   userEmail: string;
   conferenceLine: string | null;
   showSeamunLogo: boolean;
   appName: string;
+  notifications?: ReactNode;
 }) {
   const initials = initialsFromName(userName, userEmail);
 
@@ -78,16 +81,7 @@ export function DashboardTopBar({
           >
             {formatHeaderDate(new Date())}
           </time>
-          <button
-            type="button"
-            className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
-            aria-label="Notifications (demo)"
-          >
-            <Bell className="h-[1.15rem] w-[1.15rem]" strokeWidth={1.75} />
-            <span className="absolute right-1.5 top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[0.6rem] font-bold text-white">
-              3
-            </span>
-          </button>
+          {notifications ?? null}
           <ThemeToggle />
           <div className="flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white py-1.5 pl-1.5 pr-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
             <Link

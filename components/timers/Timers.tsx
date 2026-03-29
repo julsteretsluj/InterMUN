@@ -8,11 +8,14 @@ type TimerTheme = "dark" | "light";
 export function Timers({
   conferenceId,
   theme = "dark",
+  activeVoteItemId = null,
 }: {
   conferenceId: string | null;
   theme?: TimerTheme;
+  /** Current open motion id when in voting procedure; used to show motion-bound timers only. */
+  activeVoteItemId?: string | null;
 }) {
-  const { timer, total, mins, secs } = useConferenceTimer(conferenceId);
+  const { timer, total, mins, secs, perSpeakerMode } = useConferenceTimer(conferenceId, activeVoteItemId);
 
   if (!conferenceId) return null;
 
@@ -44,10 +47,15 @@ export function Timers({
           <p className="font-medium">{timer.next_speaker || "—"}</p>
         </div>
         <div>
-          <span className={labelCls}>Time left</span>
+          <span className={labelCls}>{perSpeakerMode ? "Speaker time left" : "Time left"}</span>
           <p className="font-mono font-medium tabular-nums">
             {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
             {(total % 60).toString().padStart(2, "0")}
+            {perSpeakerMode ? (
+              <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-brand-muted">
+                (per speaker)
+              </span>
+            ) : null}
           </p>
         </div>
       </div>

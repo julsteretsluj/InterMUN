@@ -28,7 +28,6 @@ export default async function DocumentsPage() {
       <DocumentsView
         documents={docs || []}
         currentUserId={user.id}
-        myRole={myRole}
         canViewAll={canViewAll}
         canEditAll={canEditAll}
       />

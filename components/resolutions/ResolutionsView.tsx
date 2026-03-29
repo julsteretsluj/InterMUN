@@ -10,6 +10,7 @@ import {
   signResolutionAction,
   updateClauseAction,
 } from "@/app/actions/resolutions";
+import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 
 interface Resolution {
@@ -177,6 +178,10 @@ export function ResolutionsView({
       ) : null}
       {showForm && (
         <div className="p-4 border rounded-lg border-white/15 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-sm font-medium text-brand-navy">Google Doc link</span>
+            <OpenNewGoogleDocButton className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white/15" />
+          </div>
           <input
             type="url"
             value={form.google_docs_url}
@@ -186,6 +191,9 @@ export function ResolutionsView({
             placeholder="Google Docs URL (docs.google.com/document/d/… — used for embed + editing)"
             className="w-full px-3 py-2 border rounded bg-black/30"
           />
+          <p className="text-xs text-brand-muted">
+            New Google Doc opens in another tab; copy the URL from the address bar and paste it here.
+          </p>
           <input
             value={form.main_submitters}
             onChange={(e) =>

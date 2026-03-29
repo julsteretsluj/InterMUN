@@ -7,15 +7,19 @@ import {
   googleDocsEmbeddedEditSrc,
   googleDocsPreviewSrc,
 } from "@/lib/google-docs-embed";
+import { cn } from "@/lib/utils";
 
 type Mode = "edit" | "preview";
 
 export function GoogleDocsEmbed({
   googleDocsUrl,
   heading = "Resolution document",
+  compact = false,
 }: {
   googleDocsUrl: string;
   heading?: string;
+  /** Shorter iframe for side-by-side resource layouts */
+  compact?: boolean;
 }) {
   const docId = useMemo(() => extractGoogleDocsDocumentId(googleDocsUrl), [googleDocsUrl]);
   const [mode, setMode] = useState<Mode>("edit");
@@ -79,11 +83,16 @@ export function GoogleDocsEmbed({
         Sign in to Google in this browser if the frame is blank. If Google blocks embedding for this
         file, use <strong className="text-brand-navy/80 font-medium">Open in Google Docs</strong>.
       </p>
-      <div className="relative rounded-xl overflow-hidden border border-brand-line/60 bg-brand-paper shadow-inner">
+      <div className="relative overflow-hidden rounded-xl border border-brand-line/60 bg-brand-paper shadow-inner">
         <iframe
           title={heading}
           src={iframeSrc}
-          className="w-full min-h-[70vh] h-[calc(100dvh-12rem)] bg-brand-cream"
+          className={cn(
+            "w-full bg-slate-50 dark:bg-brand-cream",
+            compact
+              ? "h-[min(520px,58vh)] min-h-[320px] sm:h-[min(560px,62vh)]"
+              : "min-h-[70vh] h-[calc(100dvh-12rem)]"
+          )}
           allow="clipboard-read; clipboard-write; fullscreen"
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"

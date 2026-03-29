@@ -41,7 +41,6 @@ export default async function SourcesPage() {
       <SourcesView
         sources={sources || []}
         currentUserId={user.id}
-        myRole={myRole}
         canEditAll={canEditAll}
       />
     </MunPageShell>

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Megaphone, ListOrdered } from "lucide-react";
 import { ActiveMotionContextStrip } from "@/components/session/ActiveMotionContextStrip";
+import { Timers } from "@/components/timers/Timers";
 
 type Announcement = { id: string; body: string; created_at: string };
 type QueueRow = {
@@ -147,7 +148,9 @@ export function FloorStatusBar({
           voteItemId={activeMotionVoteItemId}
           theme={theme}
         />
-      ) : null}
+      ) : (
+        <Timers conferenceId={conferenceId} theme={theme} activeVoteItemId={null} />
+      )}
       <div className={box}>
       {latestDais && (
         <div className="flex gap-2 items-start">

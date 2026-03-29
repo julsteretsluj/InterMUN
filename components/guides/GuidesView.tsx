@@ -2,12 +2,15 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
+import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 
 interface Guide {
   id: string;
   slug: string;
   title: string;
   content: string | null;
+  google_docs_url?: string | null;
 }
 
 const DEFAULT_GUIDES: Guide[] = [
@@ -28,6 +31,7 @@ const DEFAULT_GUIDES: Guide[] = [
 - Simple majority for procedural matters
 - 2/3 majority for substantive matters
 - Roll-call vote if requested`,
+    google_docs_url: null,
   },
   {
     id: "examples",
@@ -47,6 +51,7 @@ The General Assembly,
 1. Background
 2. Country Policy
 3. Proposed Solutions`,
+    google_docs_url: null,
   },
   {
     id: "templates",
@@ -59,6 +64,7 @@ The General Assembly,
 - Key discussion points
 - Resolutions passed
 - Recommendations`,
+    google_docs_url: null,
   },
   {
     id: "chair-report",
@@ -67,6 +73,7 @@ The General Assembly,
     content: `# Chair Report
 
 Document committee proceedings and outcomes here.`,
+    google_docs_url: null,
   },
 ];
 
@@ -82,34 +89,37 @@ export function GuidesView({
   const [editMode, setEditMode] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
+  const [editGoogleUrl, setEditGoogleUrl] = useState("");
   const [createSlug, setCreateSlug] = useState("");
   const [createTitle, setCreateTitle] = useState("");
   const [createContent, setCreateContent] = useState("");
+  const [createGoogleUrl, setCreateGoogleUrl] = useState("");
 
   const supabase = createClient();
 
   return (
-    <div className="flex gap-6">
-      <div className="w-48 shrink-0 space-y-2">
+    <div className="flex flex-col gap-6 lg:flex-row">
+      <div className="w-full shrink-0 space-y-2 lg:w-48">
         {items.map((g) => (
           <button
             key={g.id}
+            type="button"
             onClick={() => setSelected(g)}
-            className={`block w-full text-left px-3 py-2 rounded ${
+            className={`block w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition ${
               selected?.id === g.id
-                ? "bg-blue-600 text-white"
-                : "hover:bg-white/10"
+                ? "bg-violet-600 text-white"
+                : "bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/15"
             }`}
           >
             {g.title}
           </button>
         ))}
       </div>
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         {selected && (
-          <div className="prose prose-invert max-w-none rounded-lg border border-white/15 bg-black/30 p-6 text-brand-navy">
-            <div className="flex items-start justify-between gap-4">
-              <h2 className="text-xl font-bold mb-4">{selected.title}</h2>
+          <div className="rounded-2xl border border-slate-200/90 bg-white p-6 text-brand-navy shadow-sm dark:border-white/10 dark:bg-black/30 dark:text-zinc-100">
+            <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
+              <h2 className="text-xl font-bold">{selected.title}</h2>
               {canEdit && !editMode ? (
                 <button
                   type="button"
@@ -117,8 +127,9 @@ export function GuidesView({
                     setEditMode(true);
                     setEditTitle(selected.title);
                     setEditContent(selected.content || "");
+                    setEditGoogleUrl(selected.google_docs_url?.trim() || "");
                   }}
-                  className="px-3 py-1.5 rounded bg-blue-600 text-white text-sm"
+                  className="rounded-lg bg-violet-600 px-3 py-1.5 text-sm text-white hover:bg-violet-700"
                 >
                   Edit
                 </button>
@@ -126,22 +137,61 @@ export function GuidesView({
             </div>
 
             {!editMode ? (
-              <pre className="whitespace-pre-wrap font-sans text-sm">
-                {selected.content || "No content yet."}
-              </pre>
+              <div className="space-y-4">
+                {selected.google_docs_url?.trim() ? (
+                  <GoogleDocsEmbed
+                    googleDocsUrl={selected.google_docs_url.trim()}
+                    heading="Guide document"
+                    compact
+                  />
+                ) : null}
+                {selected.content?.trim() ? (
+                  <div>
+                    {selected.google_docs_url?.trim() ? (
+                      <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+                        Additional notes
+                      </p>
+                    ) : null}
+                    <pre className="whitespace-pre-wrap font-sans text-sm text-slate-800 dark:text-zinc-200">
+                      {selected.content}
+                    </pre>
+                  </div>
+                ) : !selected.google_docs_url?.trim() ? (
+                  <p className="text-sm text-slate-500 dark:text-zinc-400">No content yet.</p>
+                ) : null}
+              </div>
             ) : (
               <div className="space-y-3">
                 <input
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
-                  className="w-full px-3 py-2 border rounded bg-black/30"
+                  className="mun-field"
+                  placeholder="Title"
                 />
+                <div>
+                  <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+                    <label className="mun-label normal-case">Google Docs URL</label>
+                    <OpenNewGoogleDocButton />
+                  </div>
+                  <input
+                    value={editGoogleUrl}
+                    onChange={(e) => setEditGoogleUrl(e.target.value)}
+                    className="mun-field"
+                    placeholder="https://docs.google.com/document/d/…"
+                    type="url"
+                  />
+                  <p className="mt-1 text-xs text-brand-muted">
+                    New Google Doc opens in another tab. Paste a shareable link so delegates can open the doc
+                    here (view/edit depends on Google sharing).
+                  </p>
+                </div>
                 <textarea
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
-                  className="w-full h-56 px-3 py-2 border rounded bg-black/30"
+                  className="mun-field h-56 resize-y"
+                  placeholder="Markdown notes (optional if you use a Google Doc)"
                 />
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
                     onClick={async () => {
@@ -150,29 +200,29 @@ export function GuidesView({
                         .update({
                           title: editTitle.trim(),
                           content: editContent,
+                          google_docs_url: editGoogleUrl.trim() || null,
                           updated_at: new Date().toISOString(),
                         })
                         .eq("slug", selected.slug);
                       if (error) return;
-                      const { data } = await supabase
-                        .from("guides")
-                        .select("*")
-                        .order("slug");
+                      const { data } = await supabase.from("guides").select("*").order("slug");
                       if (data) {
-                        const nextItems = (data as Guide[])?.length > 0 ? (data as Guide[]) : DEFAULT_GUIDES;
-                        const nextSelected = nextItems.find((g) => g.slug === selected.slug) || nextItems[0] || null;
+                        const nextItems =
+                          (data as Guide[])?.length > 0 ? (data as Guide[]) : DEFAULT_GUIDES;
+                        const nextSelected =
+                          nextItems.find((g) => g.slug === selected.slug) || nextItems[0] || null;
                         setSelected(nextSelected);
                       }
                       setEditMode(false);
                     }}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                    className="mun-btn-primary"
                   >
                     Save
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    className="px-4 py-2 border rounded hover:bg-white/10 text-sm"
+                    className="mun-btn"
                   >
                     Cancel
                   </button>
@@ -183,27 +233,40 @@ export function GuidesView({
         )}
 
         {canEdit && (
-          <div className="mt-6 p-4 border rounded-lg border-white/15 space-y-3 bg-black/20">
-            <h3 className="font-semibold">Create new guide</h3>
+          <div className="mt-6 space-y-3 rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-black/20">
+            <h3 className="font-semibold text-brand-navy dark:text-zinc-100">Create new guide</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <input
                 value={createSlug}
                 onChange={(e) => setCreateSlug(e.target.value)}
                 placeholder="slug (unique)"
-                className="px-3 py-2 border rounded bg-black/30"
+                className="mun-field"
               />
               <input
                 value={createTitle}
                 onChange={(e) => setCreateTitle(e.target.value)}
                 placeholder="title"
-                className="px-3 py-2 border rounded bg-black/30"
+                className="mun-field"
+              />
+            </div>
+            <div>
+              <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+                <label className="mun-label normal-case">Google Docs URL (optional)</label>
+                <OpenNewGoogleDocButton />
+              </div>
+              <input
+                value={createGoogleUrl}
+                onChange={(e) => setCreateGoogleUrl(e.target.value)}
+                placeholder="https://docs.google.com/document/d/…"
+                className="mun-field"
+                type="url"
               />
             </div>
             <textarea
               value={createContent}
               onChange={(e) => setCreateContent(e.target.value)}
-              placeholder="Markdown content..."
-              className="w-full h-40 px-3 py-2 border rounded bg-black/30"
+              placeholder="Markdown content (optional)"
+              className="mun-field h-40 resize-y"
             />
             <button
               type="button"
@@ -213,22 +276,23 @@ export function GuidesView({
                   slug: createSlug.trim(),
                   title: createTitle.trim(),
                   content: createContent,
+                  google_docs_url: createGoogleUrl.trim() || null,
                   updated_at: new Date().toISOString(),
                 });
                 if (error) return;
-                const { data } = await supabase
-                  .from("guides")
-                  .select("*")
-                  .order("slug");
+                const { data } = await supabase.from("guides").select("*").order("slug");
                 if (data && Array.isArray(data) && data.length > 0) {
                   const nextItems = data as Guide[];
-                  setSelected(nextItems.find((g) => g.slug === createSlug.trim()) || nextItems[0] || null);
+                  setSelected(
+                    nextItems.find((g) => g.slug === createSlug.trim()) || nextItems[0] || null
+                  );
                   setCreateSlug("");
                   setCreateTitle("");
                   setCreateContent("");
+                  setCreateGoogleUrl("");
                 }
               }}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+              className="mun-btn-primary"
             >
               Create
             </button>

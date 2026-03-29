@@ -79,7 +79,7 @@ export function ChairLiveFloor({
           theme={theme}
         />
       ) : (
-        <Timers conferenceId={conferenceId} theme={theme} />
+        <Timers conferenceId={conferenceId} theme={theme} activeVoteItemId={activeVoteItemId} />
       )}
       <FloorStatusBar conferenceId={conferenceId} theme={theme} observeOnly={observeFloorOnly} />
     </div>

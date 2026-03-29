@@ -4,8 +4,15 @@ export const CLAUSE_TARGET_PROCEDURE_CODES = new Set([
   "amendment",
 ]);
 
+/** Motions that require a draft resolution target but not specific clauses. */
+export const RESOLUTION_ONLY_PROCEDURE_CODES = new Set(["for_against_speeches"]);
+
 export function motionRequiresClauseTargets(procedureCode: string | null | undefined) {
   return !!procedureCode && CLAUSE_TARGET_PROCEDURE_CODES.has(procedureCode);
+}
+
+export function motionRequiresResolutionOnly(procedureCode: string | null | undefined) {
+  return !!procedureCode && RESOLUTION_ONLY_PROCEDURE_CODES.has(procedureCode);
 }
 
 export function majorityThreshold(requiredMajority: string, totalVotes: number) {

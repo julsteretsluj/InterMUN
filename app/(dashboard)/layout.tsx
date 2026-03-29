@@ -7,6 +7,7 @@ import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { ChairLiveFloorThemed } from "@/components/session/ChairLiveFloorThemed";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
+import { DashboardNotifications } from "@/components/dashboard/DashboardNotifications";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getAppName } from "@/lib/branding";
@@ -78,6 +79,12 @@ export default async function DashboardLayout({
   const userEmail = user.email ?? "";
   const conferenceLine = [activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ") || activeConf.name;
 
+  const { count: notificationUnreadCount } = await supabase
+    .from("user_notifications")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .is("read_at", null);
+
   return (
     <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
       <aside className="sticky top-0 z-30 hidden h-screen w-64 shrink-0 flex-col border-r border-slate-200/90 bg-white shadow-[4px_0_32px_rgba(15,23,42,0.04)] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none lg:flex">
@@ -131,6 +138,9 @@ export default async function DashboardLayout({
           conferenceLine={conferenceLine || null}
           showSeamunLogo={showSeamunLogo}
           appName={appName}
+          notifications={
+            <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
+          }
         />
         {activeConf?.id && showsDaisTools(role) ? (
           <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950 sm:px-6">

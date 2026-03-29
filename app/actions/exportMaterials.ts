@@ -40,6 +40,7 @@ function buildMaterialsMarkdown(args: {
       title: string | null;
       content: string | null;
       file_url: string | null;
+      google_docs_url?: string | null;
       created_at: string;
       updated_at: string;
     }>;
@@ -49,6 +50,7 @@ function buildMaterialsMarkdown(args: {
       content: string | null;
       conference_id: string | null;
       allocation_id: string | null;
+      google_docs_url?: string | null;
       created_at: string;
       updated_at: string;
     }>;
@@ -57,6 +59,7 @@ function buildMaterialsMarkdown(args: {
       title: string | null;
       content: string | null;
       conference_id: string | null;
+      google_docs_url?: string | null;
       created_at: string;
       updated_at: string;
     }>;
@@ -75,6 +78,7 @@ function buildMaterialsMarkdown(args: {
       id: string;
       content: string | null;
       conference_id: string | null;
+      google_docs_url?: string | null;
       created_at: string;
       updated_at: string;
     }>;
@@ -126,10 +130,13 @@ function buildMaterialsMarkdown(args: {
           .map((d) => {
             const name = [d.doc_type.replace("_", " "), d.title].filter(Boolean).join(": ");
             const urlPart = d.file_url ? `\n  File: ${d.file_url}` : "";
+            const gDocPart = d.google_docs_url?.trim()
+              ? `\n  Google Doc: ${d.google_docs_url.trim()}`
+              : "";
             const contentPart = d.content?.trim()
               ? `\n  Content:\n  ${d.content.trim().replace(/\n/g, "\n  ")}`
               : "";
-            return `- ${name}\n  Updated: ${d.updated_at}\n  Created: ${d.created_at}${urlPart}${contentPart}`;
+            return `- ${name}\n  Updated: ${d.updated_at}\n  Created: ${d.created_at}${urlPart}${gDocPart}${contentPart}`;
           })
           .join("\n");
 
@@ -147,11 +154,15 @@ function buildMaterialsMarkdown(args: {
       }
 
       const conf = conferenceLabel(n.conference_id);
-      return [
+      const lines = [
         `- ${conf}`,
         n.content?.trim() ? `  Notes:\n  ${n.content.trim().replace(/\n/g, "\n  ")}` : "  Notes: (empty)",
-        `  Updated: ${n.updated_at}`,
-      ].join("\n");
+      ];
+      if (n.note_type === "running" && n.google_docs_url?.trim()) {
+        lines.push(`  Google Doc: ${n.google_docs_url.trim()}`);
+      }
+      lines.push(`  Updated: ${n.updated_at}`);
+      return lines.join("\n");
     });
     return `## ${label}\n${mapped.join("\n")}\n`;
   };
@@ -162,13 +173,19 @@ function buildMaterialsMarkdown(args: {
       : args.data.speeches
           .map((s) => {
             const where = conferenceLabel(s.conference_id);
-            return [
+            const lines = [
               `- ${s.title?.trim() ? s.title : "Untitled speech"} (${where})`,
+            ];
+            if (s.google_docs_url?.trim()) {
+              lines.push(`  Google Doc: ${s.google_docs_url.trim()}`);
+            }
+            lines.push(
               s.content?.trim()
                 ? `  Content:\n  ${s.content.trim().replace(/\n/g, "\n  ")}`
                 : "  Content: (empty)",
-              `  Updated: ${s.updated_at}`,
-            ].join("\n");
+              `  Updated: ${s.updated_at}`
+            );
+            return lines.join("\n");
           })
           .join("\n");
 
@@ -198,11 +215,15 @@ function buildMaterialsMarkdown(args: {
           .map((i) => {
             const where = conferenceLabel(i.conference_id);
             const content = i.content?.trim();
-            return [
-              `- ${where}`,
+            const lines = [`- ${where}`];
+            if (i.google_docs_url?.trim()) {
+              lines.push(`  Google Doc: ${i.google_docs_url.trim()}`);
+            }
+            lines.push(
               content ? `  Idea:\n  ${content.replace(/\n/g, "\n  ")}` : "  Idea: (empty)",
-              `  Updated: ${i.updated_at}`,
-            ].join("\n");
+              `  Updated: ${i.updated_at}`
+            );
+            return lines.join("\n");
           })
           .join("\n");
 
@@ -360,13 +381,15 @@ export async function exportDelegateMaterialsAction(
   // Delegate-owned content
   let documentsQuery = supabase
     .from("documents")
-    .select("id, user_id, doc_type, title, content, file_url, created_at, updated_at")
+    .select(
+      "id, user_id, doc_type, title, content, file_url, google_docs_url, created_at, updated_at"
+    )
     .eq("user_id", user.id)
     .order("updated_at", { ascending: false });
   let notesQuery = supabase
     .from("notes")
     .select(
-      "id, user_id, note_type, content, conference_id, allocation_id, created_at, updated_at"
+      "id, user_id, note_type, content, conference_id, allocation_id, google_docs_url, created_at, updated_at"
     )
     .eq("user_id", user.id)
     .in("note_type", ["chat", "running", "stance"])
@@ -378,7 +401,7 @@ export async function exportDelegateMaterialsAction(
     .order("updated_at", { ascending: false });
   let ideasQuery = supabase
     .from("ideas")
-    .select("id, user_id, content, conference_id, created_at, updated_at")
+    .select("id, user_id, content, conference_id, google_docs_url, created_at, updated_at")
     .eq("user_id", user.id)
     .order("updated_at", { ascending: false });
   let sourcesQuery = supabase

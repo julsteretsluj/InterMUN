@@ -7,6 +7,7 @@ import type { VoteType } from "@/types/database";
 import {
   didMotionPass,
   motionRequiresClauseTargets,
+  motionRequiresResolutionOnly,
 } from "@/lib/resolution-functions";
 import { recordClauseVoteOutcomesAction } from "@/app/actions/resolutions";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
@@ -83,6 +84,7 @@ export function SessionControlClient({
     leftS: "0",
     totalM: "5",
     totalS: "0",
+    perSpeakerMode: false,
   });
   const [pickAlloc, setPickAlloc] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
@@ -115,6 +117,11 @@ export function SessionControlClient({
       { code: "set_agenda", label: "Motion to Set the Agenda", title: "Motion to Set the Agenda" },
       { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time" },
       { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate" },
+      {
+        code: "for_against_speeches",
+        label: "Motion to Begin For/Against Speeches (resolution)",
+        title: "Motion to Begin For and Against Speeches on the Draft Resolution",
+      },
       { code: "close_debate", label: "Motion to Close Debate", title: "Motion to Close Debate" },
       { code: "exclude_public", label: "Motion to Exclude the Public", title: "Motion to Exclude the Public" },
       { code: "silent_prayer", label: "Minute of Silent Prayer/Meditation", title: "Motion for a Minute of Silent Prayer or Meditation" },
@@ -287,6 +294,9 @@ export function SessionControlClient({
     if (t) {
       const tl = t.time_left_seconds ?? 0;
       const tt = t.total_time_seconds ?? 0;
+      const tr = t as {
+        per_speaker_mode?: boolean | null;
+      };
       setTimer({
         current: t.current_speaker ?? "",
         next: t.next_speaker ?? "",
@@ -294,6 +304,7 @@ export function SessionControlClient({
         leftS: String(tl % 60),
         totalM: String(Math.floor(tt / 60)),
         totalS: String(tt % 60),
+        perSpeakerMode: !!tr.per_speaker_mode,
       });
     }
   }, [supabase, conferenceId]);
@@ -361,19 +372,98 @@ export function SessionControlClient({
   function saveTimer() {
     startTransition(async () => {
       const left = parseTime(timer.leftM, timer.leftS);
-      const total = parseTime(timer.totalM, timer.totalS);
+      let total = parseTime(timer.totalM, timer.totalS);
+      if (total <= 0) total = left > 0 ? left : 60;
+      const { data: existingTimer } = await supabase
+        .from("timers")
+        .select("vote_item_id")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const preservedVid = (existingTimer as { vote_item_id?: string | null } | null)?.vote_item_id ?? null;
+      const voteItemIdToSave =
+        openMotion?.id ?? (timer.perSpeakerMode ? preservedVid : null);
       const { error } = await supabase.from("timers").upsert(
         {
           conference_id: conferenceId,
           current_speaker: timer.current.trim() || null,
           next_speaker: timer.next.trim() || null,
           time_left_seconds: left,
-          total_time_seconds: total || left,
+          total_time_seconds: total,
+          vote_item_id: voteItemIdToSave,
+          per_speaker_mode: timer.perSpeakerMode,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
       );
       setMsg(error ? error.message : "Timer saved.");
+      void refresh();
+    });
+  }
+
+  function advanceSpeakerAndResetClock() {
+    if (!timer.perSpeakerMode) {
+      setMsg("Turn on per-speaker time first, then save the timer.");
+      return;
+    }
+    startTransition(async () => {
+      const sorted = [...queue].sort((a, b) => a.sort_order - b.sort_order);
+      const curIdx = sorted.findIndex((r) => r.status === "current");
+      const currentRow = curIdx >= 0 ? sorted[curIdx] : null;
+      const nextWaiting = sorted.find((r, i) => r.status === "waiting" && (!currentRow || i > curIdx));
+      const firstWaiting = sorted.find((r) => r.status === "waiting");
+
+      const nextCurrent = nextWaiting ?? firstWaiting;
+      if (!nextCurrent) {
+        setMsg("No waiting speakers in the queue to advance to.");
+        return;
+      }
+
+      await supabase.from("speaker_queue_entries").update({ status: "waiting" }).eq("conference_id", conferenceId);
+      if (currentRow) {
+        await supabase.from("speaker_queue_entries").update({ status: "done" }).eq("id", currentRow.id);
+      }
+      await supabase.from("speaker_queue_entries").update({ status: "current" }).eq("id", nextCurrent.id);
+
+      const nextIdx = sorted.indexOf(nextCurrent);
+      const afterNext = sorted.slice(nextIdx + 1).find((r) => r.status === "waiting");
+      const cap = Math.max(1, parseTime(timer.totalM, timer.totalS) || parseTime(timer.leftM, timer.leftS) || 60);
+      const curLabel = nextCurrent.label?.trim() || "—";
+      const nextLabel = afterNext?.label?.trim() || "";
+
+      const { data: existingTimer } = await supabase
+        .from("timers")
+        .select("vote_item_id")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
+      const preservedVid = (existingTimer as { vote_item_id?: string | null } | null)?.vote_item_id ?? null;
+      const voteItemIdToSave = openMotion?.id ?? preservedVid;
+
+      const { error } = await supabase.from("timers").upsert(
+        {
+          conference_id: conferenceId,
+          current_speaker: curLabel,
+          next_speaker: nextLabel || null,
+          time_left_seconds: cap,
+          total_time_seconds: cap,
+          vote_item_id: voteItemIdToSave,
+          per_speaker_mode: true,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "conference_id" }
+      );
+
+      setTimer((prev) => ({
+        ...prev,
+        current: curLabel,
+        next: nextLabel,
+        leftM: String(Math.floor(cap / 60)),
+        leftS: String(cap % 60),
+        totalM: String(Math.floor(cap / 60)),
+        totalS: String(cap % 60),
+        perSpeakerMode: true,
+      }));
+      setMsg(error ? error.message : "Advanced speaker and reset per-speaker clock.");
+      void refresh();
     });
   }
 
@@ -534,6 +624,13 @@ export function SessionControlClient({
       (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)
     ) {
       setMsg("Select a resolution and at least one clause for this procedural motion.");
+      return;
+    }
+    if (
+      motionRequiresResolutionOnly(motionDraft.procedure_code) &&
+      !motionDraft.procedure_resolution_id
+    ) {
+      setMsg("Select a resolution for this motion.");
       return;
     }
     startTransition(async () => {
@@ -786,6 +883,13 @@ export function SessionControlClient({
       setMsg("Select a resolution and at least one clause for this procedural motion.");
       return;
     }
+    if (
+      motionRequiresResolutionOnly(motionDraft.procedure_code) &&
+      !motionDraft.procedure_resolution_id
+    ) {
+      setMsg("Select a resolution for this motion.");
+      return;
+    }
     startTransition(async () => {
       const { error } = await supabase.from("vote_items").insert({
         conference_id: conferenceId,
@@ -940,7 +1044,9 @@ export function SessionControlClient({
                   !!openMotion ||
                   !motionDraft.title.trim() ||
                   (motionRequiresClauseTargets(motionDraft.procedure_code) &&
-                    (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0))
+                    (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)) ||
+                  (motionRequiresResolutionOnly(motionDraft.procedure_code) &&
+                    !motionDraft.procedure_resolution_id)
                 }
                 onClick={recordStatedMotion}
                 className="rounded-lg border border-amber-500/50 px-3 py-2 text-sm font-medium text-amber-200 hover:bg-amber-500/15 disabled:opacity-50"
@@ -1013,9 +1119,8 @@ export function SessionControlClient({
             </select>
           </label>
 
-          {(motionDraft.procedure_code === "divide_question" ||
-            motionDraft.procedure_code === "clause_by_clause" ||
-            motionDraft.procedure_code === "amendment") ? (
+          {motionRequiresClauseTargets(motionDraft.procedure_code) ||
+          motionRequiresResolutionOnly(motionDraft.procedure_code) ? (
             <div className={surfaceSubpanel}>
               <label className="text-sm block">
                 <span className={surfaceLabel}>Target resolution</span>
@@ -1039,40 +1144,42 @@ export function SessionControlClient({
                 </select>
               </label>
 
-              <div className="space-y-1">
-                <p className={surfaceLabel}>Target clauses</p>
-                <div className={surfaceInset}>
-                  {selectedResolutionClauses.length === 0 ? (
-                    <p className="text-xs text-brand-muted">No clauses found for selected resolution.</p>
-                  ) : (
-                    selectedResolutionClauses.map((c) => {
-                      const checked = motionDraft.procedure_clause_ids.includes(c.id);
-                      return (
-                        <label key={c.id} className="flex items-start gap-2 text-xs cursor-pointer text-brand-navy">
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={(e) => {
-                              setMotionDraft((d) => {
-                                if (e.target.checked) {
-                                  return { ...d, procedure_clause_ids: [...d.procedure_clause_ids, c.id] };
-                                }
-                                return {
-                                  ...d,
-                                  procedure_clause_ids: d.procedure_clause_ids.filter((x) => x !== c.id),
-                                };
-                              });
-                            }}
-                          />
-                          <span className="line-clamp-2">
-                            Clause {c.clause_number}: {c.clause_text}
-                          </span>
-                        </label>
-                      );
-                    })
-                  )}
+              {motionRequiresClauseTargets(motionDraft.procedure_code) ? (
+                <div className="space-y-1">
+                  <p className={surfaceLabel}>Target clauses</p>
+                  <div className={surfaceInset}>
+                    {selectedResolutionClauses.length === 0 ? (
+                      <p className="text-xs text-brand-muted">No clauses found for selected resolution.</p>
+                    ) : (
+                      selectedResolutionClauses.map((c) => {
+                        const checked = motionDraft.procedure_clause_ids.includes(c.id);
+                        return (
+                          <label key={c.id} className="flex items-start gap-2 text-xs cursor-pointer text-brand-navy">
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={(e) => {
+                                setMotionDraft((d) => {
+                                  if (e.target.checked) {
+                                    return { ...d, procedure_clause_ids: [...d.procedure_clause_ids, c.id] };
+                                  }
+                                  return {
+                                    ...d,
+                                    procedure_clause_ids: d.procedure_clause_ids.filter((x) => x !== c.id),
+                                  };
+                                });
+                              }}
+                            />
+                            <span className="line-clamp-2">
+                              Clause {c.clause_number}: {c.clause_text}
+                            </span>
+                          </label>
+                        );
+                      })
+                    )}
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           ) : null}
 
@@ -1149,7 +1256,14 @@ export function SessionControlClient({
             {!openMotion ? (
               <button
                 type="button"
-                disabled={pending}
+                disabled={
+                  pending ||
+                  !motionDraft.title.trim() ||
+                  (motionRequiresClauseTargets(motionDraft.procedure_code) &&
+                    (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)) ||
+                  (motionRequiresResolutionOnly(motionDraft.procedure_code) &&
+                    !motionDraft.procedure_resolution_id)
+                }
                 onClick={createMotion}
                 className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium"
               >
@@ -1224,8 +1338,25 @@ export function SessionControlClient({
         <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
         <div className={`${surfaceCard} space-y-3`}>
           <p className="text-sm text-brand-muted">
-            Delegates see this in the header when you save. Times are minutes and seconds.
+            Delegates see this when it applies to the current motion, or whenever{" "}
+            <strong className="font-medium text-brand-navy">per-speaker time</strong> is on (e.g. after a moderated
+            caucus passes). Save binds the timer to the <strong className="font-medium">open vote</strong> when one is
+            active; use per-speaker mode so the clock stays visible during the caucus floor.
           </p>
+          <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
+            <input
+              type="checkbox"
+              className="mt-1 rounded border-brand-line"
+              checked={timer.perSpeakerMode}
+              onChange={(e) => setTimer((t) => ({ ...t, perSpeakerMode: e.target.checked }))}
+            />
+            <span>
+              <span className="font-medium">Per-speaker time (moderated caucus)</span>
+              <span className="block text-brand-muted text-xs mt-0.5">
+                Total = cap each speaker gets; use Advance to move to the next queue speaker and reset the clock.
+              </span>
+            </span>
+          </label>
           <div className="grid sm:grid-cols-2 gap-3">
             <label className="block text-sm text-brand-navy">
               <span className={surfaceLabel}>Current speaker</span>
@@ -1263,7 +1394,7 @@ export function SessionControlClient({
               </div>
             </label>
             <label className="text-sm text-brand-navy">
-              <span className={surfaceLabel}>Total</span>
+              <span className={surfaceLabel}>{timer.perSpeakerMode ? "Per-speaker cap" : "Total"}</span>
               <div className="flex gap-1 mt-1 items-center">
                 <input
                   className={`w-14 ${surfaceFieldSm}`}
@@ -1287,6 +1418,16 @@ export function SessionControlClient({
             >
               Save timer
             </button>
+            {timer.perSpeakerMode ? (
+              <button
+                type="button"
+                disabled={pending}
+                onClick={advanceSpeakerAndResetClock}
+                className="px-4 py-2 rounded-lg border border-brand-navy/20 bg-white text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+              >
+                Advance speaker & reset clock
+              </button>
+            ) : null}
           </div>
         </div>
       </section>

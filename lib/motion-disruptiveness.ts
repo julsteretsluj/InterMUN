@@ -27,6 +27,7 @@ export function motionDisruptivenessScore(
     moderated_caucus: 50,
     consultation: 44,
     extend_opening_speech: 34,
+    for_against_speeches: 30,
     set_agenda: 28,
     open_debate: 24,
     silent_prayer: 18,

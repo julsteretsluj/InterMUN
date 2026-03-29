@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Plus, Link2 } from "lucide-react";
+import { ExternalLink, Link2, Plus } from "lucide-react";
+import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
+import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { isGoogleDocsDocumentUrl } from "@/lib/google-docs-embed";
 
 interface Source {
   id: string;
@@ -14,15 +17,14 @@ interface Source {
 export function SourcesView({
   sources,
   currentUserId,
-  myRole,
   canEditAll,
 }: {
   sources: Source[];
   currentUserId: string;
-  myRole: string;
   canEditAll: boolean;
 }) {
   const [items, setItems] = useState(sources);
+  const [selectedId, setSelectedId] = useState<string | null>(() => sources[0]?.id ?? null);
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -30,6 +32,12 @@ export function SourcesView({
   const [editUrl, setEditUrl] = useState("");
   const [editTitle, setEditTitle] = useState("");
   const supabase = createClient();
+
+  const displaySelectedId =
+    selectedId != null && items.some((s) => s.id === selectedId)
+      ? selectedId
+      : (items[0]?.id ?? null);
+  const selected = items.find((s) => s.id === displaySelectedId) ?? null;
 
   async function refreshSources() {
     if (canEditAll) {
@@ -63,15 +71,20 @@ export function SourcesView({
       data: { user },
     } = await supabase.auth.getUser();
     if (!user || !url.trim()) return;
-    await supabase.from("sources").insert({
-      user_id: user.id,
-      url: url.trim(),
-      title: title.trim() || null,
-    });
+    const { data: row } = await supabase
+      .from("sources")
+      .insert({
+        user_id: user.id,
+        url: url.trim(),
+        title: title.trim() || null,
+      })
+      .select("id")
+      .single();
     setUrl("");
     setTitle("");
     setShowForm(false);
     await refreshSources();
+    if (row?.id) setSelectedId(row.id as string);
   }
 
   async function saveEdit() {
@@ -108,39 +121,41 @@ export function SourcesView({
   return (
     <div className="space-y-4">
       <button
+        type="button"
         onClick={() => setShowForm(true)}
-        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-700"
       >
-        <Plus className="w-4 h-4" />
-        Add Source
+        <Plus className="h-4 w-4" />
+        Add source
       </button>
       {showForm && (
-        <div className="p-4 border rounded-lg border-white/15 space-y-3">
+        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">Source URL</span>
+            <OpenNewGoogleDocButton />
+          </div>
           <input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://..."
-            className="w-full px-3 py-2 border rounded bg-black/30"
+            placeholder="https://docs.google.com/document/d/… (recommended)"
+            className="mun-field"
           />
+          <p className="text-xs text-brand-muted">
+            For a new Google Doc, use the button and paste the document link here.
+          </p>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title (optional)"
-            className="w-full px-3 py-2 border rounded bg-black/30"
+            className="mun-field"
           />
-          <div className="flex gap-2">
-            <button
-              onClick={addSource}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => void addSource()} className="mun-btn-primary">
               Save
             </button>
-            <button
-              onClick={() => setShowForm(false)}
-              className="px-4 py-2 border rounded hover:bg-white/10"
-            >
+            <button type="button" onClick={() => setShowForm(false)} className="mun-btn">
               Cancel
             </button>
           </div>
@@ -148,35 +163,38 @@ export function SourcesView({
       )}
 
       {editing && (
-        <div className="p-4 border rounded-lg border-white/15 space-y-3">
-          <h3 className="font-semibold">Edit source</h3>
+        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+          <h3 className="font-semibold text-brand-navy dark:text-zinc-100">Edit source</h3>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">URL</span>
+            <OpenNewGoogleDocButton />
+          </div>
           <input
             type="url"
             value={editUrl}
             onChange={(e) => setEditUrl(e.target.value)}
-            className="w-full px-3 py-2 border rounded bg-black/30"
+            className="mun-field"
+            placeholder="Google Doc or other URL"
           />
           <input
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
-            className="w-full px-3 py-2 border rounded bg-black/30"
+            className="mun-field"
             placeholder="Title (optional)"
           />
-          <div className="flex gap-2">
-            <button
-              onClick={() => void saveEdit()}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => void saveEdit()} className="mun-btn-primary">
               Save changes
             </button>
             <button
+              type="button"
               onClick={() => {
                 setEditing(null);
                 setEditUrl("");
                 setEditTitle("");
               }}
-              className="px-4 py-2 border rounded hover:bg-white/10"
+              className="mun-btn"
             >
               Cancel
             </button>
@@ -184,46 +202,92 @@ export function SourcesView({
         </div>
       )}
 
-      <div className="space-y-2">
-        {items.map((s) => (
-          <div
-            key={s.id}
-            className="flex items-center gap-3 p-3 border rounded border-white/15"
-          >
-            <Link2 className="w-4 h-4 text-brand-muted shrink-0" />
-            <a
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 text-blue-600 hover:underline truncate"
+      {items.length === 0 ? (
+        <p className="text-sm text-brand-muted">No sources yet. Add a Google Doc link to open it here.</p>
+      ) : (
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+          <div className="w-full shrink-0 space-y-2 lg:w-56">
+            <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
+              Source
+            </label>
+            <select
+              className="mun-field lg:hidden"
+              value={displaySelectedId ?? ""}
+              onChange={(e) => setSelectedId(e.target.value || null)}
             >
-              {s.title || s.url}
-            </a>
-            {(canEditAll || s.user_id === currentUserId) && (
-              <div className="flex gap-3 items-center">
+              {items.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title || s.url}
+                </option>
+              ))}
+            </select>
+            <div className="hidden max-h-[min(70vh,640px)] flex-col gap-1 overflow-y-auto lg:flex">
+              {items.map((s) => (
                 <button
+                  key={s.id}
                   type="button"
-                  onClick={() => {
-                    setEditing(s);
-                    setEditUrl(s.url);
-                    setEditTitle(s.title || "");
-                  }}
-                  className="text-sm text-blue-600 hover:underline"
+                  onClick={() => setSelectedId(s.id)}
+                  className={`flex w-full items-center gap-2 rounded-xl border px-3 py-2 text-left text-sm transition ${
+                    displaySelectedId === s.id
+                      ? "border-violet-300 bg-violet-50 font-medium text-violet-900 dark:border-violet-500/40 dark:bg-violet-950/40 dark:text-violet-100"
+                      : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
+                  }`}
                 >
-                  Edit
+                  <Link2 className="h-4 w-4 shrink-0 opacity-70" />
+                  <span className="truncate">{s.title || s.url}</span>
                 </button>
-                <button
-                  type="button"
-                  onClick={() => void deleteSource(s.id)}
-                  className="text-sm text-red-600 hover:underline"
-                >
-                  Delete
-                </button>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
+
+          {selected ? (
+            <div className="min-w-0 flex-1 space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <a
+                  href={selected.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-violet-600 hover:underline dark:text-violet-400"
+                >
+                  {selected.title || "Open link"}
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                </a>
+                {(canEditAll || selected.user_id === currentUserId) && (
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditing(selected);
+                        setEditUrl(selected.url);
+                        setEditTitle(selected.title || "");
+                      }}
+                      className="text-sm text-violet-600 hover:underline dark:text-violet-400"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void deleteSource(selected.id)}
+                      className="text-sm text-red-600 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+              {isGoogleDocsDocumentUrl(selected.url) ? (
+                <GoogleDocsEmbed googleDocsUrl={selected.url.trim()} heading="Source document" compact />
+              ) : (
+                <div className="rounded-xl border border-amber-200/60 bg-amber-50/80 px-4 py-3 text-sm text-amber-950 dark:border-amber-500/30 dark:bg-amber-950/25 dark:text-amber-100/90">
+                  This URL is not a Google Doc. Use a{" "}
+                  <code className="text-xs">docs.google.com/document/d/…</code> link to embed and edit here;
+                  otherwise open the link above.
+                </div>
+              )}
+            </div>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 }

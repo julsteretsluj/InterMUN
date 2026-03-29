@@ -3,128 +3,218 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Mic, Plus } from "lucide-react";
+import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
+import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 
 interface Speech {
   id: string;
   title: string | null;
   content: string | null;
+  google_docs_url?: string | null;
 }
 
 export function SpeechesView({ speeches }: { speeches: Speech[] }) {
   const [items, setItems] = useState(speeches);
+  const [selectedId, setSelectedId] = useState<string | null>(speeches[0]?.id ?? null);
   const [editing, setEditing] = useState<Speech | null>(null);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ title: "", content: "" });
+  const [form, setForm] = useState({ title: "", content: "", google_docs_url: "" });
   const supabase = createClient();
+
+  const displaySelectedId =
+    selectedId != null && items.some((s) => s.id === selectedId)
+      ? selectedId
+      : (items[0]?.id ?? null);
+  const selected = items.find((s) => s.id === displaySelectedId) ?? null;
 
   async function saveSpeech() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
+    const gUrl = form.google_docs_url.trim() || null;
     if (editing) {
       await supabase
         .from("speeches")
         .update({
           title: form.title || null,
           content: form.content || null,
+          google_docs_url: gUrl,
           updated_at: new Date().toISOString(),
         })
         .eq("id", editing.id);
+      setSelectedId(editing.id);
     } else {
-      await supabase.from("speeches").insert({
-        user_id: user.id,
-        title: form.title || null,
-        content: form.content || null,
-      });
+      const { data: row } = await supabase
+        .from("speeches")
+        .insert({
+          user_id: user.id,
+          title: form.title || null,
+          content: form.content || null,
+          google_docs_url: gUrl,
+        })
+        .select("id")
+        .single();
+      if (row?.id) setSelectedId(row.id as string);
     }
     setEditing(null);
     setShowForm(false);
-    setForm({ title: "", content: "" });
+    setForm({ title: "", content: "", google_docs_url: "" });
     const { data } = await supabase
       .from("speeches")
       .select("*")
       .eq("user_id", user.id)
       .order("updated_at", { ascending: false });
-    if (data) setItems(data);
+    if (data) setItems(data as Speech[]);
   }
 
   return (
     <div className="space-y-4">
       <button
+        type="button"
         onClick={() => {
           setShowForm(true);
           setEditing(null);
-          setForm({ title: "", content: "" });
+          setForm({ title: "", content: "", google_docs_url: "" });
         }}
-        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-700"
       >
-        <Plus className="w-4 h-4" />
-        New Speech
+        <Plus className="h-4 w-4" />
+        New speech
       </button>
       {(showForm || editing) && (
-        <div className="p-4 border rounded-lg border-white/15 space-y-3">
+        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
           <input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             placeholder="Speech title"
-            className="w-full px-3 py-2 border rounded bg-black/30"
+            className="mun-field"
           />
+          <div>
+            <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+              <label className="mun-label normal-case">Google Docs URL</label>
+              <OpenNewGoogleDocButton />
+            </div>
+            <input
+              value={form.google_docs_url}
+              onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}
+              className="mun-field"
+              type="url"
+              placeholder="https://docs.google.com/document/d/…"
+            />
+            <p className="mt-1 text-xs text-brand-muted">
+              Opens Google in a new tab; paste the document URL here when ready.
+            </p>
+          </div>
           <textarea
             value={form.content}
             onChange={(e) => setForm({ ...form, content: e.target.value })}
-            placeholder="Write your speech..."
-            className="w-full h-48 px-3 py-2 border rounded bg-black/30"
+            placeholder="Plain text draft (optional if you use a Google Doc)"
+            className="mun-field h-40 resize-y"
           />
-          <div className="flex gap-2">
-            <button
-              onClick={saveSpeech}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => void saveSpeech()} className="mun-btn-primary">
               Save
             </button>
             <button
+              type="button"
               onClick={() => {
                 setShowForm(false);
                 setEditing(null);
               }}
-              className="px-4 py-2 border rounded hover:bg-white/10"
+              className="mun-btn"
             >
               Cancel
             </button>
           </div>
         </div>
       )}
-      <div className="space-y-3">
-        {items.map((s) => (
-          <div
-            key={s.id}
-            className="p-4 border rounded-lg border-white/15 flex justify-between items-start"
-          >
-            <div className="flex items-start gap-3">
-              <Mic className="w-5 h-5 text-brand-muted shrink-0" />
-              <div>
-                <h4 className="font-medium">{s.title || "Untitled"}</h4>
-                <p className="text-sm text-brand-muted text-brand-muted line-clamp-2">
-                  {s.content || "No content"}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                setEditing(s);
-                setForm({
-                  title: s.title || "",
-                  content: s.content || "",
-                });
-              }}
-              className="text-sm text-blue-600 hover:underline"
+
+      {items.length === 0 ? (
+        <p className="text-sm text-brand-muted">No speeches yet. Link a Google Doc or paste text.</p>
+      ) : (
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+          <div className="w-full shrink-0 space-y-2 lg:w-56">
+            <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
+              Speech
+            </label>
+            <select
+              className="mun-field lg:hidden"
+              value={displaySelectedId ?? ""}
+              onChange={(e) => setSelectedId(e.target.value || null)}
             >
-              Edit
-            </button>
+              {items.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title || "Untitled"}
+                </option>
+              ))}
+            </select>
+            <div className="hidden max-h-[min(70vh,640px)] flex-col gap-1 overflow-y-auto lg:flex">
+              {items.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => setSelectedId(s.id)}
+                  className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2 text-left text-sm transition ${
+                    displaySelectedId === s.id
+                      ? "border-violet-300 bg-violet-50 font-medium text-violet-900 dark:border-violet-500/40 dark:bg-violet-950/40 dark:text-violet-100"
+                      : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
+                  }`}
+                >
+                  <Mic className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
+                  <span className="truncate">{s.title || "Untitled"}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
+
+          {selected ? (
+            <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <h3 className="text-lg font-semibold text-brand-navy dark:text-zinc-100">
+                  {selected.title || "Untitled"}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditing(selected);
+                    setForm({
+                      title: selected.title || "",
+                      content: selected.content || "",
+                      google_docs_url: selected.google_docs_url?.trim() || "",
+                    });
+                    setShowForm(false);
+                  }}
+                  className="text-sm font-medium text-violet-600 hover:underline dark:text-violet-400"
+                >
+                  Edit
+                </button>
+              </div>
+              {selected.google_docs_url?.trim() ? (
+                <GoogleDocsEmbed
+                  googleDocsUrl={selected.google_docs_url.trim()}
+                  heading="Speech document"
+                  compact
+                />
+              ) : null}
+              {selected.content?.trim() ? (
+                <div>
+                  {selected.google_docs_url?.trim() ? (
+                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">Draft text</p>
+                  ) : null}
+                  <pre className="whitespace-pre-wrap rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-sans text-sm dark:border-white/10 dark:bg-black/30">
+                    {selected.content}
+                  </pre>
+                </div>
+              ) : !selected.google_docs_url?.trim() ? (
+                <p className="text-sm text-brand-muted">
+                  Link a Google Doc with Edit, or add plain text in the form.
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 }

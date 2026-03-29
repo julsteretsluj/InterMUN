@@ -21,6 +21,10 @@ export function extractGoogleDocsDocumentId(raw: string | null | undefined): str
   return null;
 }
 
+export function isGoogleDocsDocumentUrl(raw: string | null | undefined): boolean {
+  return extractGoogleDocsDocumentId(raw) !== null;
+}
+
 /** Iframe src: full editor UI (menus, font + size controls). Omit rm=minimal so toolbars stay visible. */
 export function googleDocsEmbeddedEditSrc(documentId: string): string {
   return `https://docs.google.com/document/d/${encodeURIComponent(documentId)}/edit?embedded=true`;
