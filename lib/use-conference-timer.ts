@@ -12,6 +12,8 @@ export type ConferenceTimerRow = {
   total_time_seconds: number;
   vote_item_id?: string | null;
   per_speaker_mode?: boolean | null;
+  /** When false, countdown is frozen until the chair starts again. */
+  is_running?: boolean | null;
 };
 
 function timerVisibleForFloor(
@@ -30,16 +32,22 @@ function timerVisibleForFloor(
  * Live committee floor timer (Supabase `timers` table).
  * @param activeVoteItemId Procedure current vote item when in voting_procedure; null otherwise.
  *        Timer rows with vote_item_id set are hidden unless they match or per_speaker_mode is on.
+ * @param chairSeesRawTimer When true, ignore motion binding so chairs always see the committee timer row (for controls).
  */
-export function useConferenceTimer(conferenceId: string | null, activeVoteItemId: string | null = null) {
+export function useConferenceTimer(
+  conferenceId: string | null,
+  activeVoteItemId: string | null = null,
+  chairSeesRawTimer = false
+) {
   const [rawTimer, setRawTimer] = useState<ConferenceTimerRow | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const supabase = useMemo(() => createClient(), []);
 
   const timer = useMemo(() => {
     if (!rawTimer) return null;
+    if (chairSeesRawTimer) return rawTimer;
     return timerVisibleForFloor(rawTimer, activeVoteItemId) ? rawTimer : null;
-  }, [rawTimer, activeVoteItemId]);
+  }, [rawTimer, activeVoteItemId, chairSeesRawTimer]);
 
   useEffect(() => {
     if (!conferenceId) {
@@ -84,17 +92,19 @@ export function useConferenceTimer(conferenceId: string | null, activeVoteItemId
 
   useEffect(() => {
     if (!timer?.time_left_seconds) return;
+    if (timer.is_running === false) return;
     const interval = setInterval(() => {
       setElapsed((e) => Math.min(e + 1, timer.total_time_seconds));
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer?.time_left_seconds, timer?.total_time_seconds]);
+  }, [timer?.time_left_seconds, timer?.total_time_seconds, timer?.is_running]);
 
   const remaining = timer ? Math.max(0, timer.time_left_seconds - elapsed) : 0;
   const total = timer?.total_time_seconds || 0;
   const perSpeakerMode = !!timer?.per_speaker_mode;
+  const isRunning = timer ? timer.is_running !== false : false;
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
 
-  return { timer, remaining, total, mins, secs, perSpeakerMode };
+  return { timer, remaining, total, mins, secs, perSpeakerMode, isRunning };
 }

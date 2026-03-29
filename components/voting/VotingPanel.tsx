@@ -17,11 +17,9 @@ export function VotingPanel({
   myRole: string;
 }) {
   const [votes, setVotes] = useState<Record<string, Vote[]>>({});
-  const [myVotes, setMyVotes] = useState<Record<string, string>>({});
   const [drafts, setDrafts] = useState<Record<string, { must_vote: boolean; required_majority: string }>>({});
   const supabase = createClient();
 
-  const canCastVotes = myRole === "delegate";
   const canManageVotes = myRole === "chair";
 
   useEffect(() => {
@@ -61,19 +59,6 @@ export function VotingPanel({
     };
   }, [supabase]);
 
-  async function castVote(itemId: string, value: "yes" | "no") {
-    if (!canCastVotes) return;
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-    await supabase.from("votes").upsert(
-      { vote_item_id: itemId, user_id: user.id, value },
-      { onConflict: "vote_item_id,user_id" }
-    );
-    setMyVotes((v) => ({ ...v, [itemId]: value }));
-  }
-
   async function saveSettings(itemId: string, must_vote: boolean, required_majority: string) {
     const { error } = await supabase
       .from("vote_items")
@@ -94,9 +79,10 @@ export function VotingPanel({
 
   function getResult(item: VoteItem) {
     const v = votes[item.id] || [];
-    const yes = v.filter((x) => x.value === "yes").length;
-    const no = v.filter((x) => x.value === "no").length;
-    const total = v.length;
+    const counted = v.filter((x) => x.value === "yes" || x.value === "no");
+    const yes = counted.filter((x) => x.value === "yes").length;
+    const no = counted.filter((x) => x.value === "no").length;
+    const total = counted.length;
     const majority = item.required_majority === "2/3" ? (total * 2) / 3 : total / 2;
     const passes = yes > majority;
     return { yes, no, total, passes };
@@ -133,22 +119,12 @@ export function VotingPanel({
           {item.required_majority === "simple" ? "Simple" : item.required_majority}
         </p>
 
-        <div className="flex gap-2 mb-3">
-          {(["yes", "no"] as const).map((val) => (
-            <button
-              key={val}
-              onClick={() => castVote(item.id, val)}
-              disabled={!canCastVotes || isClosed}
-              className={`px-3 py-1 rounded text-sm ${
-                myVotes[item.id] === val
-                  ? "bg-blue-600 text-white"
-                  : "bg-black/30 hover:bg-white/10"
-              } ${isClosed ? "opacity-60 cursor-not-allowed" : ""}`}
-            >
-              {val.charAt(0).toUpperCase() + val.slice(1)}
-            </button>
-          ))}
-        </div>
+        {myRole === "delegate" ? (
+          <p className="mb-3 text-sm text-brand-muted">
+            Voting is conducted by the dais in session (roll call). You can follow the live tally here; you cannot
+            cast a vote in the app.
+          </p>
+        ) : null}
 
         {canManageVotes ? (
           <div className="mt-3 p-3 border rounded border-white/15 space-y-2 bg-black/20/50 bg-black/35/30">

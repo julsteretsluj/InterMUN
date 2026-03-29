@@ -15,7 +15,10 @@ export function Timers({
   /** Current open motion id when in voting procedure; used to show motion-bound timers only. */
   activeVoteItemId?: string | null;
 }) {
-  const { timer, total, mins, secs, perSpeakerMode } = useConferenceTimer(conferenceId, activeVoteItemId);
+  const { timer, total, mins, secs, perSpeakerMode, isRunning } = useConferenceTimer(
+    conferenceId,
+    activeVoteItemId
+  );
 
   if (!conferenceId) return null;
 
@@ -54,6 +57,11 @@ export function Timers({
             {perSpeakerMode ? (
               <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-brand-muted">
                 (per speaker)
+              </span>
+            ) : null}
+            {!isRunning ? (
+              <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-amber-700 dark:text-amber-400">
+                (paused)
               </span>
             ) : null}
           </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { ListOrdered } from "lucide-react";
+import { ListOrdered, Pause, Play } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteType } from "@/types/database";
 import {
@@ -17,8 +17,9 @@ import {
   motionDisruptivenessScore,
   sortMotionsMostDisruptiveFirst,
 } from "@/lib/motion-disruptiveness";
+import { useConferenceTimer } from "@/lib/use-conference-timer";
 
-type Alloc = { id: string; country: string };
+type Alloc = { id: string; country: string; user_id: string | null };
 type QueueRow = {
   id: string;
   sort_order: number;
@@ -55,7 +56,7 @@ type MotionAudit = {
   actor_profile_id: string | null;
   metadata: Record<string, unknown> | null;
 };
-type VoteCountRow = { value: "yes" | "no" };
+type VoteCountRow = { value: string; user_id: string };
 type ResolutionRow = { id: string; google_docs_url: string | null };
 type ClauseRow = {
   id: string;
@@ -85,7 +86,12 @@ export function SessionControlClient({
     totalM: "5",
     totalS: "0",
     perSpeakerMode: false,
+    isRunning: true,
+    /** general_floor = vote_item_id null; motion_vote = bind to selected open-for-voting motion */
+    purpose: "general_floor" as "general_floor" | "motion_vote",
+    boundVoteItemId: "",
   });
+  const [openVotingMotions, setOpenVotingMotions] = useState<MotionRow[]>([]);
   const [pickAlloc, setPickAlloc] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -93,6 +99,7 @@ export function SessionControlClient({
   const [recentMotions, setRecentMotions] = useState<MotionRow[]>([]);
   const [motionAudit, setMotionAudit] = useState<MotionAudit[]>([]);
   const [motionTally, setMotionTally] = useState({ yes: 0, no: 0, total: 0 });
+  const [motionVoteByUser, setMotionVoteByUser] = useState<Record<string, "yes" | "no">>({});
   const [motionDraft, setMotionDraft] = useState({
     vote_type: "motion" as VoteType,
     procedure_code: null as string | null,
@@ -110,6 +117,43 @@ export function SessionControlClient({
   const speakersSectionRef = useRef<HTMLElement | null>(null);
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
+  /** Linear roll-call index into `sortAllocationsByDisplayCountry(allocations)` while recording votes. */
+  const [voteCallIndex, setVoteCallIndex] = useState(0);
+
+  const { timer: liveTimerRow, remaining: liveRemaining } = useConferenceTimer(
+    conferenceId,
+    openMotion?.id ?? null,
+    true
+  );
+
+  useEffect(() => {
+    if (timer.purpose !== "motion_vote") return;
+    if (timer.boundVoteItemId.trim()) return;
+    if (openVotingMotions.length !== 1) return;
+    const onlyId = openVotingMotions[0]!.id;
+    setTimer((t) => (t.boundVoteItemId === "" ? { ...t, boundVoteItemId: onlyId } : t));
+  }, [timer.purpose, timer.boundVoteItemId, openVotingMotions]);
+
+  useEffect(() => {
+    setVoteCallIndex(0);
+  }, [openMotion?.id]);
+
+  const votingCallOrder = useMemo(
+    () => sortAllocationsByDisplayCountry(allocations),
+    [allocations]
+  );
+
+  const presentByAllocationId = useMemo(() => {
+    const m = new Map<string, boolean>();
+    for (const r of roll) {
+      m.set(r.allocation_id, r.present);
+    }
+    return m;
+  }, [roll]);
+
+  useEffect(() => {
+    setVoteCallIndex((i) => Math.min(i, votingCallOrder.length));
+  }, [votingCallOrder.length]);
 
   const procedurePresets = useMemo(
     () => [
@@ -194,7 +238,7 @@ export function SessionControlClient({
           .maybeSingle(),
         supabase
           .from("allocations")
-          .select("id, country")
+          .select("id, country, user_id")
           .eq("conference_id", conferenceId)
           .order("country"),
         supabase
@@ -249,7 +293,9 @@ export function SessionControlClient({
     setMotionFloorOpen(!!ps?.motion_floor_open);
 
     const unclosed = (unclosedRows as MotionRow[]) ?? [];
-    const open = unclosed.find((row) => row.open_for_voting === true) ?? null;
+    const openForVotingList = unclosed.filter((row) => row.open_for_voting === true);
+    setOpenVotingMotions(openForVotingList);
+    const open = openForVotingList[0] ?? null;
     const pendingRaw = unclosed.filter((row) => row.open_for_voting === false);
     setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw));
     setOpenMotion(open);
@@ -272,7 +318,7 @@ export function SessionControlClient({
     const motionId = open?.id ?? null;
     if (motionId) {
       const [{ data: openVotes }, { data: auditRows }] = await Promise.all([
-        supabase.from("votes").select("value").eq("vote_item_id", motionId),
+        supabase.from("votes").select("value, user_id").eq("vote_item_id", motionId),
         supabase
           .from("motion_audit_events")
           .select("id, event_type, created_at, actor_profile_id, metadata")
@@ -282,12 +328,19 @@ export function SessionControlClient({
       ]);
 
       const rows = (openVotes ?? []) as VoteCountRow[];
-      const yes = rows.filter((v) => v.value === "yes").length;
-      const no = rows.filter((v) => v.value === "no").length;
-      setMotionTally({ yes, no, total: rows.length });
+      const counted = rows.filter((v) => v.value === "yes" || v.value === "no");
+      const yes = counted.filter((v) => v.value === "yes").length;
+      const no = counted.filter((v) => v.value === "no").length;
+      setMotionTally({ yes, no, total: counted.length });
+      const vm: Record<string, "yes" | "no"> = {};
+      for (const r of counted) {
+        vm[r.user_id] = r.value as "yes" | "no";
+      }
+      setMotionVoteByUser(vm);
       setMotionAudit((auditRows as MotionAudit[]) ?? []);
     } else {
       setMotionTally({ yes: 0, no: 0, total: 0 });
+      setMotionVoteByUser({});
       setMotionAudit([]);
     }
 
@@ -296,7 +349,10 @@ export function SessionControlClient({
       const tt = t.total_time_seconds ?? 0;
       const tr = t as {
         per_speaker_mode?: boolean | null;
+        is_running?: boolean | null;
+        vote_item_id?: string | null;
       };
+      const vid = tr.vote_item_id ?? null;
       setTimer({
         current: t.current_speaker ?? "",
         next: t.next_speaker ?? "",
@@ -305,6 +361,9 @@ export function SessionControlClient({
         totalM: String(Math.floor(tt / 60)),
         totalS: String(tt % 60),
         perSpeakerMode: !!tr.per_speaker_mode,
+        isRunning: tr.is_running !== false,
+        purpose: vid ? "motion_vote" : "general_floor",
+        boundVoteItemId: vid ?? "",
       });
     }
   }, [supabase, conferenceId]);
@@ -370,18 +429,24 @@ export function SessionControlClient({
   }
 
   function saveTimer() {
+    let voteItemIdToSave: string | null = null;
+    if (timer.purpose === "motion_vote") {
+      const id = timer.boundVoteItemId.trim();
+      if (!id) {
+        setMsg("Select which open motion this timer applies to.");
+        return;
+      }
+      if (!openVotingMotions.some((m) => m.id === id)) {
+        setMsg("That selection is not an open vote anymore. Choose again or use general floor.");
+        return;
+      }
+      voteItemIdToSave = id;
+    }
+
     startTransition(async () => {
       const left = parseTime(timer.leftM, timer.leftS);
       let total = parseTime(timer.totalM, timer.totalS);
       if (total <= 0) total = left > 0 ? left : 60;
-      const { data: existingTimer } = await supabase
-        .from("timers")
-        .select("vote_item_id")
-        .eq("conference_id", conferenceId)
-        .maybeSingle();
-      const preservedVid = (existingTimer as { vote_item_id?: string | null } | null)?.vote_item_id ?? null;
-      const voteItemIdToSave =
-        openMotion?.id ?? (timer.perSpeakerMode ? preservedVid : null);
       const { error } = await supabase.from("timers").upsert(
         {
           conference_id: conferenceId,
@@ -391,11 +456,117 @@ export function SessionControlClient({
           total_time_seconds: total,
           vote_item_id: voteItemIdToSave,
           per_speaker_mode: timer.perSpeakerMode,
+          is_running: timer.isRunning,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
       );
       setMsg(error ? error.message : "Timer saved.");
+      void refresh();
+    });
+  }
+
+  function stopFloorTimer() {
+    if (!liveTimerRow) {
+      setMsg("Save the timer once so there is a row to pause.");
+      return;
+    }
+    if (!timer.isRunning) {
+      setMsg("Timer is already paused.");
+      return;
+    }
+    const frozenLeft = Math.max(0, Math.round(liveRemaining));
+    startTransition(async () => {
+      const { error } = await supabase
+        .from("timers")
+        .update({
+          time_left_seconds: frozenLeft,
+          is_running: false,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("conference_id", conferenceId);
+      setMsg(error ? error.message : "Timer paused for the committee.");
+      void refresh();
+    });
+  }
+
+  function startFloorTimer() {
+    if (!liveTimerRow) {
+      setMsg("Save the timer once before starting the clock.");
+      return;
+    }
+    if (timer.isRunning) {
+      setMsg("Timer is already running.");
+      return;
+    }
+    startTransition(async () => {
+      const { error } = await supabase
+        .from("timers")
+        .update({
+          is_running: true,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("conference_id", conferenceId);
+      setMsg(error ? error.message : "Timer running for the committee.");
+      void refresh();
+    });
+  }
+
+  function recordDelegateVoteForCall(value: "yes" | "no") {
+    if (!openMotion) {
+      setMsg("No motion open for voting.");
+      return;
+    }
+    const current = votingCallOrder[voteCallIndex];
+    if (!current) {
+      setMsg("No delegate at this position in the call list.");
+      return;
+    }
+    if (!current.user_id) {
+      setMsg("This placard has no delegate account — use Skip (vacant / not seated).");
+      return;
+    }
+    const orderLen = votingCallOrder.length;
+    const uid = current.user_id;
+    const voteItemId = openMotion.id;
+    startTransition(async () => {
+      const { error } = await supabase.from("votes").upsert(
+        { vote_item_id: voteItemId, user_id: uid, value },
+        { onConflict: "vote_item_id,user_id" }
+      );
+      if (error) {
+        setMsg(error.message);
+        return;
+      }
+      setMsg(null);
+      setVoteCallIndex((i) => Math.min(i + 1, orderLen));
+      void refresh();
+    });
+  }
+
+  function skipDelegateVoteForCall() {
+    if (!openMotion) {
+      setMsg("No motion open for voting.");
+      return;
+    }
+    const current = votingCallOrder[voteCallIndex];
+    if (!current) return;
+    const orderLen = votingCallOrder.length;
+    const voteItemId = openMotion.id;
+    startTransition(async () => {
+      if (current.user_id) {
+        const { error } = await supabase
+          .from("votes")
+          .delete()
+          .eq("vote_item_id", voteItemId)
+          .eq("user_id", current.user_id);
+        if (error) {
+          setMsg(error.message);
+          return;
+        }
+      }
+      setMsg(null);
+      setVoteCallIndex((i) => Math.min(i + 1, orderLen));
       void refresh();
     });
   }
@@ -430,13 +601,10 @@ export function SessionControlClient({
       const curLabel = nextCurrent.label?.trim() || "—";
       const nextLabel = afterNext?.label?.trim() || "";
 
-      const { data: existingTimer } = await supabase
-        .from("timers")
-        .select("vote_item_id")
-        .eq("conference_id", conferenceId)
-        .maybeSingle();
-      const preservedVid = (existingTimer as { vote_item_id?: string | null } | null)?.vote_item_id ?? null;
-      const voteItemIdToSave = openMotion?.id ?? preservedVid;
+      const voteItemIdToSave =
+        timer.purpose === "motion_vote" && timer.boundVoteItemId.trim()
+          ? timer.boundVoteItemId.trim()
+          : null;
 
       const { error } = await supabase.from("timers").upsert(
         {
@@ -447,6 +615,7 @@ export function SessionControlClient({
           total_time_seconds: cap,
           vote_item_id: voteItemIdToSave,
           per_speaker_mode: true,
+          is_running: true,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
@@ -461,6 +630,7 @@ export function SessionControlClient({
         totalM: String(Math.floor(cap / 60)),
         totalS: String(cap % 60),
         perSpeakerMode: true,
+        isRunning: true,
       }));
       setMsg(error ? error.message : "Advanced speaker and reset per-speaker clock.");
       void refresh();
@@ -1006,10 +1176,11 @@ export function SessionControlClient({
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
         <p className="text-xs text-brand-muted">
-          Chair-only: one vote open at a time. For several motions at once, open the motion floor, record each
-          stated motion, close the floor, then begin voting—motions are taken in{" "}
-          <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP). Required majority
-          follows UN-style RoP from type and preset.
+          Chair-only: one vote open at a time. Delegates do not vote in the app — use{" "}
+          <span className="font-medium text-brand-navy/90">Record votes</span> below to call each placard, enter Yes or
+          No, or skip if absent (skipped delegations are not counted). For several motions at once, open the motion
+          floor, record stated motions, close the floor, then begin voting in{" "}
+          <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP).
         </p>
         <div className={`${surfaceCard} space-y-3`}>
           <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
@@ -1292,7 +1463,120 @@ export function SessionControlClient({
           </div>
           <div className="text-xs text-brand-muted font-medium">
             Tally: Yes {motionTally.yes} | No {motionTally.no} | Total {motionTally.total}
+            <span className="mt-1 block font-normal text-[0.65rem] leading-snug">
+              Total is only recorded Yes and No votes. Skip removes that placard from the count (absent / vacant).
+            </span>
           </div>
+
+          {openMotion ? (
+            <div className={surfaceSubpanel}>
+              <p className={surfaceLabel}>Record votes — one placard at a time</p>
+              <p className="text-sm text-brand-muted">
+                Delegates cannot vote in the app. Call each country in order, record how they voted, or skip if they
+                are not present (their vote is not counted at all).
+              </p>
+              {votingCallOrder.length === 0 ? (
+                <p className="text-sm text-brand-muted">No allocations in this committee.</p>
+              ) : voteCallIndex >= votingCallOrder.length ? (
+                <div className="space-y-2 text-sm text-brand-navy">
+                  <p className="font-medium">End of roll — all placards in the list have been reached.</p>
+                  <button
+                    type="button"
+                    disabled={pending}
+                    onClick={() => setVoteCallIndex(0)}
+                    className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-medium hover:bg-white/15 disabled:opacity-50"
+                  >
+                    Restart from first placard
+                  </button>
+                </div>
+              ) : (
+                (() => {
+                  const call = votingCallOrder[voteCallIndex]!;
+                  const rollPresent = presentByAllocationId.get(call.id);
+                  const rollLabel =
+                    rollPresent === true ? "Present (roll)" : rollPresent === false ? "Absent (roll)" : "— (roll)";
+                  const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
+                  return (
+                    <div className="space-y-3">
+                      <p className="text-sm text-brand-muted">
+                        Placard <span className="font-semibold text-brand-navy">{voteCallIndex + 1}</span> of{" "}
+                        <span className="font-semibold text-brand-navy">{votingCallOrder.length}</span>
+                      </p>
+                      <div className="rounded-lg border border-white/12 bg-black/25 px-3 py-2">
+                        <p className="font-display text-lg font-semibold text-brand-navy">{call.country}</p>
+                        <p className="text-xs text-brand-muted mt-1">
+                          Roll: {rollLabel}
+                          {call.user_id ? (
+                            <>
+                              {" "}
+                              · Recorded:{" "}
+                              <span className="font-medium text-brand-navy">
+                                {recorded === "yes"
+                                  ? "Yes"
+                                  : recorded === "no"
+                                    ? "No"
+                                    : "— (not counted yet)"}
+                              </span>
+                            </>
+                          ) : (
+                            <span className="block mt-1 text-amber-800 dark:text-amber-200/90">
+                              No delegate account on this placard — use Skip.
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          disabled={pending || !call.user_id}
+                          onClick={() => recordDelegateVoteForCall("yes")}
+                          className="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
+                        >
+                          Yes
+                        </button>
+                        <button
+                          type="button"
+                          disabled={pending || !call.user_id}
+                          onClick={() => recordDelegateVoteForCall("no")}
+                          className="rounded-lg bg-rose-700 px-4 py-2 text-sm font-medium text-white hover:bg-rose-600 disabled:opacity-50"
+                        >
+                          No
+                        </button>
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={skipDelegateVoteForCall}
+                          className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-brand-navy hover:bg-white/15 disabled:opacity-50"
+                        >
+                          Skip (absent — no vote)
+                        </button>
+                      </div>
+                      <div className="flex flex-wrap gap-2 border-t border-white/10 pt-3">
+                        <button
+                          type="button"
+                          disabled={pending || voteCallIndex <= 0}
+                          onClick={() => setVoteCallIndex((i) => Math.max(0, i - 1))}
+                          className="text-sm font-medium text-brand-navy underline decoration-brand-muted/50 hover:decoration-brand-navy disabled:opacity-40 disabled:no-underline"
+                        >
+                          Previous placard
+                        </button>
+                        <button
+                          type="button"
+                          disabled={pending || voteCallIndex >= votingCallOrder.length}
+                          onClick={() =>
+                            setVoteCallIndex((i) => Math.min(i + 1, votingCallOrder.length))
+                          }
+                          className="text-sm font-medium text-brand-navy underline decoration-brand-muted/50 hover:decoration-brand-navy disabled:opacity-40 disabled:no-underline"
+                        >
+                          Next placard (no vote)
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })()
+              )}
+            </div>
+          ) : null}
         </div>
 
         <div className={surfaceCard}>
@@ -1338,11 +1622,82 @@ export function SessionControlClient({
         <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
         <div className={`${surfaceCard} space-y-3`}>
           <p className="text-sm text-brand-muted">
-            Delegates see this when it applies to the current motion, or whenever{" "}
-            <strong className="font-medium text-brand-navy">per-speaker time</strong> is on (e.g. after a moderated
-            caucus passes). Save binds the timer to the <strong className="font-medium">open vote</strong> when one is
-            active; use per-speaker mode so the clock stays visible during the caucus floor.
+            Choose whether this timer is for <strong className="font-medium text-brand-navy">general floor</strong>{" "}
+            (always visible to delegates) or tied to the{" "}
+            <strong className="font-medium text-brand-navy">motion open for voting</strong> (delegates only see it while
+            that vote is the active item). With <strong className="font-medium text-brand-navy">per-speaker time</strong>{" "}
+            on, the clock stays visible during moderated caucus regardless.{" "}
+            <strong className="font-medium text-brand-navy">Pause clock</strong> /{" "}
+            <strong className="font-medium text-brand-navy">Start clock</strong> freeze or resume the countdown.
           </p>
+          <label className="block text-sm text-brand-navy">
+            <span className={surfaceLabel}>Timer purpose</span>
+            <select
+              className={`${surfaceField} mt-1`}
+              value={timer.purpose}
+              onChange={(e) => {
+                const v = e.target.value as "general_floor" | "motion_vote";
+                setTimer((t) => ({
+                  ...t,
+                  purpose: v,
+                  boundVoteItemId: v === "general_floor" ? "" : t.boundVoteItemId,
+                }));
+              }}
+            >
+              <option value="general_floor">General debate / floor (not tied to a vote)</option>
+              <option value="motion_vote">Open motion — timer only while that vote is active on the floor</option>
+            </select>
+          </label>
+          {timer.purpose === "motion_vote" ? (
+            <label className="block text-sm text-brand-navy">
+              <span className={surfaceLabel}>Open motion (must be open for voting)</span>
+              <select
+                className={`${surfaceField} mt-1`}
+                value={timer.boundVoteItemId}
+                onChange={(e) => setTimer((t) => ({ ...t, boundVoteItemId: e.target.value }))}
+              >
+                <option value="">Select motion…</option>
+                {openVotingMotions.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.title?.trim() || "Untitled"} · {m.vote_type}
+                    {m.procedure_code ? ` (${m.procedure_code})` : ""}
+                  </option>
+                ))}
+              </select>
+              {openVotingMotions.length === 0 ? (
+                <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
+                  No motion is open for voting. Open a vote first, or switch purpose to general floor.
+                </p>
+              ) : null}
+            </label>
+          ) : null}
+          <p className="text-sm text-brand-navy">
+            <span className={surfaceLabel}>Clock</span>{" "}
+            <span className="font-medium">{timer.isRunning ? "Running" : "Paused"}</span>
+            {!liveTimerRow ? (
+              <span className="text-brand-muted font-normal"> — save the timer to enable pause/start.</span>
+            ) : null}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={pending || !liveTimerRow || !timer.isRunning}
+              onClick={stopFloorTimer}
+              className="inline-flex items-center gap-2 rounded-lg border border-brand-navy/20 bg-white px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream disabled:opacity-50"
+            >
+              <Pause className="h-4 w-4 shrink-0" aria-hidden />
+              Pause clock
+            </button>
+            <button
+              type="button"
+              disabled={pending || !liveTimerRow || timer.isRunning}
+              onClick={startFloorTimer}
+              className="inline-flex items-center gap-2 rounded-lg border border-brand-navy/20 bg-white px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream disabled:opacity-50"
+            >
+              <Play className="h-4 w-4 shrink-0" aria-hidden />
+              Start clock
+            </button>
+          </div>
           <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
             <input
               type="checkbox"

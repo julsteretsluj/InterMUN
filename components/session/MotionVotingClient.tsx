@@ -26,24 +26,14 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
   const [voteItem, setVoteItem] = useState<VoteItemRow | null>(null);
   const [motionerCountry, setMotionerCountry] = useState<string | null>(null);
   const [tally, setTally] = useState<VoteTally>({ yes: 0, no: 0, total: 0 });
-  const [myVote, setMyVote] = useState<"yes" | "no" | null>(null);
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    setError(null);
     if (!voteItemId) {
       setVoteItem(null);
       setMotionerCountry(null);
       setTally({ yes: 0, no: 0, total: 0 });
-      setMyVote(null);
       return;
     }
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const userId = user?.id ?? null;
 
     const [{ data: vi }, { data: votes }] = await Promise.all([
       supabase
@@ -71,21 +61,10 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
     }
 
     const v = (votes ?? []) as Array<{ value: "yes" | "no" | string }>;
-    const yes = v.filter((x) => x.value === "yes").length;
-    const no = v.filter((x) => x.value === "no").length;
-    setTally({ yes, no, total: v.length });
-
-    if (userId) {
-      const { data: myRow } = await supabase
-        .from("votes")
-        .select("value")
-        .eq("vote_item_id", voteItemId)
-        .eq("user_id", userId)
-        .maybeSingle();
-      const value = myRow?.value;
-      if (value === "yes" || value === "no") setMyVote(value);
-      else setMyVote(null);
-    }
+    const counted = v.filter((x) => x.value === "yes" || x.value === "no");
+    const yes = counted.filter((x) => x.value === "yes").length;
+    const no = counted.filter((x) => x.value === "no").length;
+    setTally({ yes, no, total: counted.length });
   }, [supabase, voteItemId]);
 
   useEffect(() => {
@@ -134,34 +113,6 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
     };
   }, [supabase, voteItemId, load]);
 
-  async function cast(value: "yes" | "no") {
-    setPending(true);
-    setError(null);
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        setError("You must be logged in.");
-        return;
-      }
-
-      const { error: insErr } = await supabase.from("votes").upsert(
-        { vote_item_id: voteItemId, user_id: user.id, value },
-        { onConflict: "vote_item_id,user_id" }
-      );
-      if (insErr) throw insErr;
-      setMyVote(value);
-    } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : "Failed to vote.";
-      setError(message);
-    } finally {
-      setPending(false);
-    }
-  }
-
-  const isClosed = voteItem?.closed_at != null;
-
   return (
     <div className="rounded-xl border border-white/15 bg-black/25 p-3 space-y-3">
       <div className="flex items-start justify-between gap-3">
@@ -191,38 +142,10 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
         </p>
       </div>
 
-      <div className="flex gap-2">
-        <button
-          type="button"
-          onClick={() => void cast("yes")}
-          disabled={pending || isClosed}
-          className={[
-            "flex-1 px-3 py-2 rounded-lg text-sm font-medium",
-            myVote === "yes" ? "bg-brand-gold text-brand-navy" : "bg-brand-paper border border-brand-navy/15",
-            isClosed ? "opacity-60 cursor-not-allowed" : "hover:opacity-90",
-          ].join(" ")}
-        >
-          Yes
-        </button>
-        <button
-          type="button"
-          onClick={() => void cast("no")}
-          disabled={pending || isClosed}
-          className={[
-            "flex-1 px-3 py-2 rounded-lg text-sm font-medium",
-            myVote === "no" ? "bg-brand-gold text-brand-navy" : "bg-brand-paper border border-brand-navy/15",
-            isClosed ? "opacity-60 cursor-not-allowed" : "hover:opacity-90",
-          ].join(" ")}
-        >
-          No
-        </button>
-      </div>
-
-      {error ? (
-        <p className="text-xs text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
-          {error}
-        </p>
-      ) : null}
+      <p className="text-xs text-brand-muted leading-relaxed">
+        The dais records each delegation&apos;s vote in session. Total includes only placards where Yes or No was
+        recorded; absent delegations are skipped and do not count.
+      </p>
     </div>
   );
 }

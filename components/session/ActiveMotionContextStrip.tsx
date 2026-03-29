@@ -25,7 +25,10 @@ export function ActiveMotionContextStrip({
   theme?: "dark" | "light";
 }) {
   const supabase = useMemo(() => createClient(), []);
-  const { timer, total, mins, secs, perSpeakerMode } = useConferenceTimer(conferenceId, voteItemId);
+  const { timer, total, mins, secs, perSpeakerMode, isRunning } = useConferenceTimer(
+    conferenceId,
+    voteItemId
+  );
   const [row, setRow] = useState<VoteMotionRow | null>(null);
   const [motionerCountry, setMotionerCountry] = useState<string | null>(null);
 
@@ -141,6 +144,11 @@ export function ActiveMotionContextStrip({
                   {perSpeakerMode ? (
                     <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case opacity-80">
                       (per speaker)
+                    </span>
+                  ) : null}
+                  {!isRunning ? (
+                    <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-amber-700 dark:text-amber-300">
+                      (paused)
                     </span>
                   ) : null}
                 </p>
