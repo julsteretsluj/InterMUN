@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairDigitalRoomClient } from "@/components/chair/ChairDigitalRoomClient";
+import { type RollAttendance, parseRollAttendance } from "@/lib/roll-attendance";
 
 export default async function ChairDigitalRoomPage() {
   const supabase = await createClient();
@@ -26,7 +27,7 @@ export default async function ChairDigitalRoomPage() {
   const [{ data: conf }, { data: allocationRows }, { data: rollRows }] = await Promise.all([
     supabase.from("conferences").select("committee, tagline, name").eq("id", conferenceId).maybeSingle(),
     supabase.from("allocations").select("id, country, user_id").eq("conference_id", conferenceId),
-    supabase.from("roll_call_entries").select("allocation_id, present").eq("conference_id", conferenceId),
+    supabase.from("roll_call_entries").select("allocation_id, present, attendance").eq("conference_id", conferenceId),
   ]);
 
   const committeeLine =
@@ -38,10 +39,13 @@ export default async function ChairDigitalRoomPage() {
     user_id: r.user_id,
   }));
 
-  const rollPresentByAllocationId: Record<string, boolean> = {};
+  const rollAttendanceByAllocationId: Record<string, RollAttendance> = {};
   for (const row of rollRows ?? []) {
     if (row.allocation_id != null) {
-      rollPresentByAllocationId[row.allocation_id] = row.present === true;
+      const raw = row as { allocation_id: string; present?: boolean; attendance?: string | null };
+      const att =
+        parseRollAttendance(raw.attendance) ?? (raw.present === true ? "present_voting" : "absent");
+      rollAttendanceByAllocationId[row.allocation_id] = att;
     }
   }
 
@@ -51,7 +55,7 @@ export default async function ChairDigitalRoomPage() {
         conferenceId={conferenceId}
         committeeLine={committeeLine}
         allocations={allocations}
-        rollPresentByAllocationId={rollPresentByAllocationId}
+        rollAttendanceByAllocationId={rollAttendanceByAllocationId}
       />
     </MunPageShell>
   );

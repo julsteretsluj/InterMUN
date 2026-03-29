@@ -22,6 +22,7 @@ import {
   Settings,
   TriangleAlert,
   Users,
+  UserCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -37,16 +38,16 @@ type ChairNavItem = {
   activeMatch?: string;
 };
 
+/** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
 const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/prep-checklist", label: "Prep checklist", icon: ListChecks, emoji: "✅" },
   { href: "/chair/flow-checklist", label: "Flow checklist", icon: ClipboardList, emoji: "📋" },
   { href: "/chair/allocation-matrix", label: "Delegates", icon: Users, emoji: "👥" },
   { href: "/chair/digital-room", label: "Digital Room", icon: LayoutGrid, emoji: "🖥️" },
-  { href: "/chair/room-code", label: "Room code", icon: DoorOpen, emoji: "🚪" },
   {
     href: "/chair/session/roll-call",
     label: "Roll Call",
-    icon: ListChecks,
+    icon: UserCheck,
     emoji: "✅",
   },
   {
@@ -72,7 +73,8 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/awards", label: "Score", icon: BarChart3, emoji: "📊" },
   { href: "/report", label: "Crisis", icon: TriangleAlert, emoji: "⚠️" },
   { href: "/documents", label: "Archive", icon: Archive, emoji: "📁" },
-  { href: "/chair/official-links", label: "Official links", icon: Link2, emoji: "🔗" },
+  { href: "/official-links", label: "Official links", icon: Link2, emoji: "🔗" },
+  { href: "/chair/room-code", label: "Room code", icon: DoorOpen, emoji: "🚪" },
   { href: "/chair/allocation-passwords", label: "Sign-in passwords", icon: KeyRound, emoji: "🔑" },
   { href: "/profile", label: "Settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
 ];

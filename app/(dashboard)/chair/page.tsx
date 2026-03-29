@@ -31,16 +31,24 @@ export default async function ChairOverviewPage() {
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
 
   const tiles: { href: string; label: string; hint: string }[] = [
-    { href: "/chair/digital-room", label: "Digital Room", hint: "Placards, roll status, compliment & concern (this device)" },
-    { href: "/committee-room", label: "Committee room (full)", hint: "Virtual layout & session strip" },
+    { href: "/chair/prep-checklist", label: "Prep checklist", hint: "Before conference" },
+    { href: "/chair/flow-checklist", label: "Flow checklist", hint: "During session" },
     { href: "/chair/allocation-matrix", label: "Delegates", hint: "Matrix & assignments" },
-    { href: "/chair/session", label: "Session", hint: "Timer, roll call, speakers, formal motions" },
+    { href: "/chair/digital-room", label: "Digital Room", hint: "Placards, roll status, compliment & concern (this device)" },
+    { href: "/chair/session/roll-call", label: "Roll call", hint: "Attendance" },
+    { href: "/chair/session", label: "Session", hint: "Start/stop committee session, timer, announcements" },
+    { href: "/chair/session/speakers", label: "Speakers", hint: "Speaker list" },
     { href: "/chair/session/motions", label: "Formal motions", hint: "Motion floor & chair-recorded votes" },
     { href: "/chair/motions-points", label: "Motions & points log", hint: "Quick scratch list (this device)" },
     { href: "/voting", label: "Voting", hint: "Delegate vote display" },
-    { href: "/chair/prep-checklist", label: "Prep checklist", hint: "Before conference" },
-    { href: "/chair/flow-checklist", label: "Flow checklist", hint: "During session" },
-    { href: "/chair/official-links", label: "Official UN links", hint: "Documents & bodies" },
+    { href: "/chair/awards", label: "Score", hint: "Awards & nominations" },
+    { href: "/report", label: "Crisis", hint: "Incident reporting" },
+    { href: "/documents", label: "Archive", hint: "Committee documents" },
+    { href: "/official-links", label: "Official UN links", hint: "Documents & bodies" },
+    { href: "/chair/room-code", label: "Room code", hint: "Committee gate code" },
+    { href: "/chair/allocation-passwords", label: "Sign-in passwords", hint: "Delegate passwords" },
+    { href: "/committee-room", label: "Committee room (full)", hint: "Virtual layout & delegate floor" },
+    { href: "/delegate", label: "Delegate dashboard", hint: "Same hub style as SEAMUNs delegate view" },
   ];
 
   return (
@@ -53,7 +61,16 @@ export default async function ChairOverviewPage() {
           <p className="text-sm text-slate-600 dark:text-zinc-400">
             Active committee: <span className="font-semibold text-slate-900 dark:text-zinc-100">{line}</span>. Session
             data syncs through your account; prep/flow checklists and the quick motions log are saved in this browser
-            for this committee.
+            for this committee — same idea as{" "}
+            <a
+              href="https://thedashboard.seamuns.site/chair"
+              className="font-medium text-blue-700 underline decoration-blue-700/30 underline-offset-2 dark:text-blue-400"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              SEAMUNs Chair Room
+            </a>
+            .
           </p>
         </header>
 

@@ -128,6 +128,12 @@ export function ActiveMotionContextStrip({
           <div className="flex flex-wrap items-center gap-4">
             <Clock className={clockCls} />
             <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
+              {timer.floor_label?.trim() ? (
+                <div>
+                  <span className={timerLabel}>Timer</span>
+                  <p className="font-semibold text-brand-gold">{timer.floor_label.trim()}</p>
+                </div>
+              ) : null}
               <div>
                 <span className={timerLabel}>Current speaker</span>
                 <p className="font-medium">{timer.current_speaker || "—"}</p>
@@ -152,6 +158,11 @@ export function ActiveMotionContextStrip({
                     </span>
                   ) : null}
                 </p>
+                {!isRunning && timer.current_pause_reason?.trim() ? (
+                  <p className="mt-1 max-w-md text-[0.7rem] font-normal normal-case opacity-90">
+                    Pause: {timer.current_pause_reason.trim()}
+                  </p>
+                ) : null}
               </div>
             </div>
           </div>

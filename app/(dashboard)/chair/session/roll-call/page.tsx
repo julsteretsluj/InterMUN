@@ -7,13 +7,13 @@ export default async function ChairSessionRollCallPage() {
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title="Session floor">
+      <MunPageShell title="✅ Roll Call Tracker">
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
   }
   return (
-    <MunPageShell title="Session floor">
+    <MunPageShell title="✅ Roll Call Tracker">
       <SessionControlClient {...data} activeSection="roll-call" />
     </MunPageShell>
   );

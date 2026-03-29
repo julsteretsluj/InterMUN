@@ -33,6 +33,8 @@ export function DashboardTopBar({
   showSeamunLogo,
   appName,
   notifications,
+  showDelegateHubLink,
+  brandHomeHref,
 }: {
   userName: string;
   userEmail: string;
@@ -40,6 +42,10 @@ export function DashboardTopBar({
   showSeamunLogo: boolean;
   appName: string;
   notifications?: ReactNode;
+  /** Chairs see a quick jump to the SEAMUNs-style delegate hub. */
+  showDelegateHubLink?: boolean;
+  /** Mobile header logo target (sidebar brand uses the same hub). */
+  brandHomeHref?: string;
 }) {
   const initials = initialsFromName(userName, userEmail);
 
@@ -47,7 +53,7 @@ export function DashboardTopBar({
     <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/80 bg-[#f4f6fb]/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90">
       <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
-          href="/profile"
+          href={brandHomeHref ?? "/profile"}
           className="flex shrink-0 items-center gap-2 lg:hidden"
           aria-label={`${appName} home`}
         >
@@ -70,6 +76,14 @@ export function DashboardTopBar({
           <DashboardSearch />
         </div>
         <div className="ml-auto flex flex-wrap items-center justify-end gap-2 sm:ml-0 sm:flex-nowrap sm:gap-3">
+          {showDelegateHubLink ? (
+            <Link
+              href="/delegate"
+              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-violet-300 hover:bg-violet-50/50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-violet-500/40 dark:hover:bg-violet-950/40 sm:inline-flex"
+            >
+              📄 Delegate hub
+            </Link>
+          ) : null}
           {conferenceLine ? (
             <p className="hidden max-w-[200px] truncate text-xs font-medium text-violet-700/90 dark:text-violet-300/90 lg:block">
               {conferenceLine}

@@ -2,10 +2,12 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Users, UserRound, Search, CircleDot, Gavel, Sparkles, X } from "lucide-react";
+import { FloorStatusBar } from "@/components/session/FloorStatusBar";
+import { MotionVotingClient } from "@/components/session/MotionVotingClient";
+import { RequestToSpeakClient } from "@/components/session/RequestToSpeakClient";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
-import { CommitteeRoomSessionFloor } from "@/components/committee-room/CommitteeRoomSessionFloor";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import type { StaffAllocationRow } from "@/lib/committee-room-payload";
 import {
@@ -99,6 +101,9 @@ export function CommitteeRoomDigitalMUNClient({
 }) {
   const role = myRole.toLowerCase();
   const isDelegate = role === "delegate";
+  /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */
+  const showDelegateFloorPanel =
+    role !== "chair" && role !== "smt" && role !== "admin";
 
   const supabase = useMemo(() => createClient(), []);
   const searchFieldId = useId();
@@ -308,24 +313,39 @@ export function CommitteeRoomDigitalMUNClient({
           />
         </section>
 
-        {/* Right rail — session + notes (mockup widget column) */}
+        {/* Right rail — delegate floor (chairs: use Chair → Session); notes */}
         <aside className="rounded-2xl border border-amber-400/15 bg-gradient-to-b from-amber-500/[0.06] via-brand-paper/40 to-brand-paper/20 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
-          <div className="rounded-xl bg-black/15 border border-white/5 p-3 md:p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <CircleDot className="size-4 text-brand-gold-bright" />
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Session</p>
+          {showDelegateFloorPanel ? (
+            <div className="rounded-xl border border-white/5 bg-black/15 p-3 md:p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <CircleDot className="size-4 text-brand-gold-bright" />
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Floor</p>
+              </div>
+              <div className="space-y-4">
+                <FloorStatusBar
+                  conferenceId={conferenceId}
+                  observeOnly={false}
+                  theme="dark"
+                  activeMotionVoteItemId={
+                    procedureState === "voting_procedure" ? (currentVoteItemId ?? null) : null
+                  }
+                />
+                {isDelegate ? (
+                  <>
+                    {procedureState === "voting_procedure" ? (
+                      <MotionVotingClient voteItemId={currentVoteItemId ?? null} />
+                    ) : null}
+                    <RequestToSpeakClient
+                      conferenceId={conferenceId}
+                      allocationId={myAllocationId}
+                      allocationCountry={myAllocationCountry}
+                      disabled={procedureState === "voting_procedure"}
+                    />
+                  </>
+                ) : null}
+              </div>
             </div>
-            <CommitteeRoomSessionFloor
-              conferenceId={conferenceId}
-              conferenceTitle={`${conferenceName} — ${committeeName}`}
-              myRole={myRole}
-              myAllocationId={myAllocationId}
-              myAllocationCountry={myAllocationCountry}
-              observeDelegatesOnly={false}
-              procedureState={procedureState}
-              currentVoteItemId={currentVoteItemId}
-            />
-          </div>
+          ) : null}
           <div className="rounded-xl bg-black/15 border border-white/5 p-3 md:p-4">
             <div className="flex items-center gap-2 mb-3">
               <Users className="size-4 text-brand-gold-bright" />

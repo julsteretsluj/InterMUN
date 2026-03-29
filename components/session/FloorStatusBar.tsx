@@ -2,11 +2,23 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Megaphone, ListOrdered } from "lucide-react";
+import { Megaphone, ListOrdered, PauseCircle } from "lucide-react";
 import { ActiveMotionContextStrip } from "@/components/session/ActiveMotionContextStrip";
 import { Timers } from "@/components/timers/Timers";
+import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
+import { firstVisibleDaisRow } from "@/lib/dais-visible";
+import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
 
-type Announcement = { id: string; body: string; created_at: string };
+type Announcement = {
+  id: string;
+  body: string;
+  created_at: string;
+  body_format?: string | null;
+  is_pinned?: boolean | null;
+  publish_at?: string | null;
+};
+type PauseEventRow = { id: string; reason: string; created_at: string };
+
 type QueueRow = {
   id: string;
   sort_order: number;
@@ -40,6 +52,7 @@ export function FloorStatusBar({
 }) {
   const supabase = createClient();
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
+  const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
   const [queue, setQueue] = useState<QueueRow[]>([]);
   const [rollSelf, setRollSelf] = useState<string | null>(null);
 
@@ -52,15 +65,33 @@ export function FloorStatusBar({
       .then(({ data }) => setQueue((data as QueueRow[]) ?? []));
   }, [supabase, conferenceId]);
 
-  useEffect(() => {
-    void supabase
+  const loadDais = useCallback(() => {
+    return supabase
       .from("dais_announcements")
-      .select("id, body, created_at")
+      .select("id, body, created_at, body_format, is_pinned, publish_at")
+      .eq("conference_id", conferenceId)
+      .order("is_pinned", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(24)
+      .then(({ data }) => {
+        const rows = (data as Announcement[]) ?? [];
+        setLatestDais(firstVisibleDaisRow(rows));
+      });
+  }, [supabase, conferenceId]);
+
+  const loadPauseEvents = useCallback(() => {
+    return supabase
+      .from("timer_pause_events")
+      .select("id, reason, created_at")
       .eq("conference_id", conferenceId)
       .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle()
-      .then(({ data }) => data && setLatestDais(data));
+      .limit(8)
+      .then(({ data }) => setPauseEvents((data as PauseEventRow[]) ?? []));
+  }, [supabase, conferenceId]);
+
+  useEffect(() => {
+    void loadDais();
+    void loadPauseEvents();
 
     void loadQueue();
 
@@ -79,16 +110,27 @@ export function FloorStatusBar({
         if (!alloc?.id) return;
         const { data: rc } = await supabase
           .from("roll_call_entries")
-          .select("present")
+          .select("present, attendance")
           .eq("conference_id", conferenceId)
           .eq("allocation_id", alloc.id)
           .maybeSingle();
         if (rc) {
-          setRollSelf(rc.present ? "Present" : "Not marked present");
+          const row = rc as { present?: boolean; attendance?: string | null };
+          const att =
+            parseRollAttendance(row.attendance) ?? (row.present === true ? "present_voting" : "absent");
+          setRollSelf(`Roll: ${rollAttendanceShortLabel(att)}`);
         }
       })();
     }
-  }, [supabase, conferenceId, loadQueue, observeOnly]);
+  }, [supabase, conferenceId, loadQueue, loadDais, loadPauseEvents, observeOnly]);
+
+  useEffect(() => {
+    const t = window.setInterval(() => {
+      void loadDais();
+      void loadPauseEvents();
+    }, 25000);
+    return () => window.clearInterval(t);
+  }, [loadDais, loadPauseEvents]);
 
   useEffect(() => {
     const ch = supabase
@@ -96,21 +138,28 @@ export function FloorStatusBar({
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "*",
           schema: "public",
           table: "dais_announcements",
           filter: `conference_id=eq.${conferenceId}`,
         },
-        (payload) => {
-          const row = payload.new as Announcement;
-          setLatestDais(row);
-        }
+        () => void loadDais()
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "timer_pause_events",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void loadPauseEvents()
       )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId]);
+  }, [supabase, conferenceId, loadDais, loadPauseEvents]);
 
   useEffect(() => {
     const ch = supabase
@@ -156,11 +205,42 @@ export function FloorStatusBar({
         <div className="flex gap-2 items-start">
           <Megaphone className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
           <div>
-            <span className={`${muted} block`}>Dais</span>
-            <p className={bodyText}>{latestDais.body}</p>
+            <span className={`${muted} block`}>
+              Dais
+              {latestDais.is_pinned ? (
+                <span className="ml-2 normal-case text-amber-700 dark:text-amber-300">· Pinned</span>
+              ) : null}
+            </span>
+            <div className={bodyText}>
+              <DaisAnnouncementBody
+                body={latestDais.body}
+                format={latestDais.body_format === "markdown" ? "markdown" : "plain"}
+              />
+            </div>
           </div>
         </div>
       )}
+      {pauseEvents.length > 0 ? (
+        <div className={`flex gap-2 items-start pt-1 ${latestDais ? `border-t ${border}` : ""}`}>
+          <PauseCircle className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} aria-hidden />
+          <div className="min-w-0 flex-1">
+            <span className={`${muted} block`}>Timer pauses (read-only)</span>
+            <ul className={`mt-1 space-y-1 text-xs ${qText}`}>
+              {pauseEvents.map((ev) => (
+                <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
+                  <time className="shrink-0 text-brand-muted" dateTime={ev.created_at}>
+                    {new Date(ev.created_at).toLocaleTimeString(undefined, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </time>
+                  <span>{ev.reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : null}
       {displayQueue.length > 0 && (
         <div className={`flex gap-2 items-start pt-1 border-t ${border}`}>
           <ListOrdered className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />

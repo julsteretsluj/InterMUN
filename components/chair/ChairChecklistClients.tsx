@@ -145,7 +145,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           {ready ? (
             <>
-              {done} / {allIds.length} steps ticked
+              {done} / {allIds.length} complete
             </>
           ) : (
             "Loading…"
@@ -161,7 +161,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
       </div>
 
       <div className={surfaceCard}>
-        <ol className="list-decimal space-y-2 pl-5 text-sm text-slate-800 dark:text-zinc-100">
+        <ul className="space-y-2 text-sm text-slate-800 dark:text-zinc-100">
           {CHAIR_FLOW_ITEMS.map((item) => (
             <li key={item.id}>
               <label className="flex cursor-pointer items-start gap-3 rounded-lg py-0.5 hover:bg-slate-50 dark:hover:bg-zinc-800/50">
@@ -175,7 +175,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
               </label>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </div>
   );

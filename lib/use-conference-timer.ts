@@ -14,6 +14,10 @@ export type ConferenceTimerRow = {
   per_speaker_mode?: boolean | null;
   /** When false, countdown is frozen until the chair starts again. */
   is_running?: boolean | null;
+  /** Delegate-visible label (e.g. GSL 60s). */
+  floor_label?: string | null;
+  /** Shown when paused (e.g. after chair logs a pause reason). */
+  current_pause_reason?: string | null;
 };
 
 function timerVisibleForFloor(

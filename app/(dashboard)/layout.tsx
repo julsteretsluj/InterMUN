@@ -98,7 +98,7 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
       <aside className="sticky top-0 z-30 hidden h-screen w-64 shrink-0 flex-col border-r border-slate-200/90 bg-white shadow-[4px_0_32px_rgba(15,23,42,0.04)] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none lg:flex">
         <Link
-          href="/profile"
+          href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
           className="flex shrink-0 items-center gap-3 border-b border-slate-100 px-5 py-5 transition hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
         >
           {showSeamunLogo ? (
@@ -153,6 +153,8 @@ export default async function DashboardLayout({
           conferenceLine={conferenceLine || null}
           showSeamunLogo={showSeamunLogo}
           appName={appName}
+          brandHomeHref={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
+          showDelegateHubLink={isChairRole(normalizedRole)}
           notifications={
             <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
           }

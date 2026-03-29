@@ -21,12 +21,14 @@ import {
   PanelsTopLeft,
   Trophy,
   UserPlus,
+  LayoutDashboard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/database";
 import type { LucideIcon } from "lucide-react";
 
 const BASE_TABS = [
+  { href: "/delegate", label: "Delegate hub", icon: LayoutDashboard },
   { href: "/profile", label: "Profile", icon: User },
   { href: "/follow", label: "Follow", icon: UserPlus },
   { href: "/chats-notes", label: "Notes", icon: MessageSquare },

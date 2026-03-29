@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ExternalLink, Search, Smile, TriangleAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import { type RollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
 
 export type DigitalRoomAllocation = {
   id: string;
@@ -38,12 +39,12 @@ export function ChairDigitalRoomClient({
   conferenceId,
   committeeLine,
   allocations,
-  rollPresentByAllocationId,
+  rollAttendanceByAllocationId,
 }: {
   conferenceId: string;
   committeeLine: string;
   allocations: DigitalRoomAllocation[];
-  rollPresentByAllocationId: Record<string, boolean>;
+  rollAttendanceByAllocationId: Record<string, RollAttendance>;
 }) {
   const [query, setQuery] = useState("");
   const [flagsByAlloc, setFlagsByAlloc] = useState<Record<string, PlacardFlags>>({});
@@ -156,7 +157,7 @@ export function ChairDigitalRoomClient({
         </label>
         <p className="text-sm text-slate-500 dark:text-zinc-400">
           {allocations.length} placards · {flaggedCount} with chair notes · Roll recorded for{" "}
-          {Object.keys(rollPresentByAllocationId).length}
+          {Object.keys(rollAttendanceByAllocationId).length}
         </p>
       </div>
 
@@ -168,15 +169,16 @@ export function ChairDigitalRoomClient({
         <ul className="space-y-2">
           {filtered.map((a) => {
             const f = flagsByAlloc[a.id] ?? {};
-            const roll = rollPresentByAllocationId[a.id];
-            const rollLabel =
-              roll === true ? "Present" : roll === false ? "Absent" : "—";
+            const att = rollAttendanceByAllocationId[a.id];
+            const rollLabel = att !== undefined ? rollAttendanceShortLabel(att) : "—";
             const rollClass =
-              roll === true
+              att === "present_voting"
                 ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-200"
-                : roll === false
-                  ? "bg-rose-100 text-rose-900 dark:bg-rose-950/45 dark:text-rose-200"
-                  : "bg-slate-100 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400";
+                : att === "present_abstain"
+                  ? "bg-amber-100 text-amber-950 dark:bg-amber-950/45 dark:text-amber-100"
+                  : att === "absent"
+                    ? "bg-rose-100 text-rose-900 dark:bg-rose-950/45 dark:text-rose-200"
+                    : "bg-slate-100 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400";
 
             return (
               <li

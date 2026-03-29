@@ -37,10 +37,19 @@ export function Timers({
     ) : null;
   }
 
+  const floorLabel = timer.floor_label?.trim();
+  const pauseReason = timer.current_pause_reason?.trim();
+
   return (
     <div className={shell}>
       <Clock className={clockCls} />
       <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
+        {floorLabel ? (
+          <div className="min-w-[8rem]">
+            <span className={labelCls}>Timer</span>
+            <p className="font-semibold text-brand-gold">{floorLabel}</p>
+          </div>
+        ) : null}
         <div>
           <span className={labelCls}>Current speaker</span>
           <p className="font-medium">{timer.current_speaker || "—"}</p>
@@ -65,6 +74,11 @@ export function Timers({
               </span>
             ) : null}
           </p>
+          {!isRunning && pauseReason ? (
+            <p className="mt-1 max-w-md text-[0.7rem] font-normal normal-case text-amber-900/90 dark:text-amber-200/90">
+              Pause: {pauseReason}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

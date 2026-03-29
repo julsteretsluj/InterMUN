@@ -20,6 +20,16 @@ import {
   sortMotionsMostDisruptiveFirst,
 } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { BUILTIN_TIMER_PRESETS, presetToTimerFields } from "@/lib/timer-presets";
+import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
+import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
+import {
+  type RollAttendance,
+  nextRollAttendance,
+  parseRollAttendance,
+  rollAttendanceRollLabel,
+  rollAttendanceShortLabel,
+} from "@/lib/roll-attendance";
 
 type Alloc = { id: string; country: string; user_id: string | null };
 type QueueRow = {
@@ -32,9 +42,18 @@ type QueueRow = {
 type RollRow = {
   allocation_id: string;
   present: boolean;
+  attendance: RollAttendance;
   allocations: { country: string } | { country: string }[] | null;
 };
-type Announcement = { id: string; body: string; created_at: string };
+type Announcement = {
+  id: string;
+  body: string;
+  created_at: string;
+  body_format?: string | null;
+  is_pinned?: boolean | null;
+  publish_at?: string | null;
+};
+type PauseEvent = { id: string; reason: string; created_at: string };
 type MotionRow = {
   id: string;
   conference_id: string;
@@ -110,6 +129,14 @@ export function SessionControlClient({
   const [roll, setRoll] = useState<RollRow[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [daisBody, setDaisBody] = useState("");
+  const [daisFormat, setDaisFormat] = useState<"plain" | "markdown">("markdown");
+  const [daisPublishAt, setDaisPublishAt] = useState("");
+  const [daisEditingId, setDaisEditingId] = useState<string | null>(null);
+  const [daisEditBody, setDaisEditBody] = useState("");
+  const [daisEditFormat, setDaisEditFormat] = useState<"plain" | "markdown">("markdown");
+  const [daisEditPublishAt, setDaisEditPublishAt] = useState("");
+  const [pauseEvents, setPauseEvents] = useState<PauseEvent[]>([]);
+  const [pauseReasonDraft, setPauseReasonDraft] = useState("");
   const [timer, setTimer] = useState({
     current: "",
     next: "",
@@ -122,6 +149,8 @@ export function SessionControlClient({
     /** general_floor = vote_item_id null; motion_vote = bind to selected open-for-voting motion */
     purpose: "general_floor" as "general_floor" | "motion_vote",
     boundVoteItemId: "",
+    /** Delegate-visible preset label (e.g. GSL 60s). */
+    floorLabel: "",
   });
   const [openVotingMotions, setOpenVotingMotions] = useState<MotionRow[]>([]);
   const [pickAlloc, setPickAlloc] = useState("");
@@ -175,10 +204,10 @@ export function SessionControlClient({
     [allocations]
   );
 
-  const presentByAllocationId = useMemo(() => {
-    const m = new Map<string, boolean>();
+  const rollAttendanceByAllocationId = useMemo(() => {
+    const m = new Map<string, RollAttendance>();
     for (const r of roll) {
-      m.set(r.allocation_id, r.present);
+      m.set(r.allocation_id, r.attendance);
     }
     return m;
   }, [roll]);
@@ -261,6 +290,7 @@ export function SessionControlClient({
       { data: recentClosedRows },
       { data: resolutionRows },
       { data: clauseRows },
+      { data: pauseRows },
     ] =
       await Promise.all([
         supabase
@@ -280,15 +310,16 @@ export function SessionControlClient({
           .order("sort_order", { ascending: true }),
         supabase
           .from("roll_call_entries")
-          .select("allocation_id, present, allocations(country)")
+          .select("allocation_id, present, attendance, allocations(country)")
           .eq("conference_id", conferenceId)
           .order("allocation_id"),
         supabase
           .from("dais_announcements")
-          .select("id, body, created_at")
+          .select("id, body, created_at, body_format, is_pinned, publish_at")
           .eq("conference_id", conferenceId)
+          .order("is_pinned", { ascending: false })
           .order("created_at", { ascending: false })
-          .limit(12),
+          .limit(24),
         supabase.from("timers").select("*").eq("conference_id", conferenceId).maybeSingle(),
         supabase.from("vote_items").select(motionSelect).eq("conference_id", conferenceId).is("closed_at", null),
         supabase
@@ -310,12 +341,29 @@ export function SessionControlClient({
           .eq("conference_id", conferenceId)
           .order("clause_number", { ascending: true })
           .limit(500),
+        supabase
+          .from("timer_pause_events")
+          .select("id, reason, created_at")
+          .eq("conference_id", conferenceId)
+          .order("created_at", { ascending: false })
+          .limit(20),
       ]);
 
     setAllocations(sortAllocationsByDisplayCountry((allocs as Alloc[]) ?? []));
     setQueue((q as QueueRow[]) ?? []);
-    setRoll((r as RollRow[]) ?? []);
+    setRoll(
+      ((r as (Omit<RollRow, "attendance"> & { attendance?: string | null })[]) ?? []).map(
+        (row) =>
+          ({
+            ...row,
+            attendance:
+              parseRollAttendance(row.attendance) ??
+              (row.present === true ? "present_voting" : "absent"),
+          }) satisfies RollRow
+      )
+    );
     setAnnouncements((ann as Announcement[]) ?? []);
+    setPauseEvents((pauseRows as PauseEvent[]) ?? []);
     const ps = psRow as {
       motion_floor_open?: boolean;
       debate_closed?: boolean;
@@ -385,6 +433,7 @@ export function SessionControlClient({
         vote_item_id?: string | null;
       };
       const vid = tr.vote_item_id ?? null;
+      const floorLabel = (t as { floor_label?: string | null }).floor_label ?? "";
       setTimer({
         current: t.current_speaker ?? "",
         next: t.next_speaker ?? "",
@@ -396,6 +445,7 @@ export function SessionControlClient({
         isRunning: tr.is_running !== false,
         purpose: vid ? "motion_vote" : "general_floor",
         boundVoteItemId: vid ?? "",
+        floorLabel: floorLabel.trim(),
       });
     }
   }, [supabase, conferenceId]);
@@ -448,6 +498,11 @@ export function SessionControlClient({
         },
         () => void refresh()
       )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "dais_announcements", filter: `conference_id=eq.${conferenceId}` },
+        () => void refresh()
+      )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
@@ -489,6 +544,7 @@ export function SessionControlClient({
           vote_item_id: voteItemIdToSave,
           per_speaker_mode: timer.perSpeakerMode,
           is_running: timer.isRunning,
+          floor_label: timer.floorLabel.trim() || null,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
@@ -508,12 +564,26 @@ export function SessionControlClient({
       return;
     }
     const frozenLeft = Math.max(0, Math.round(liveRemaining));
+    const reason = pauseReasonDraft.trim() || "Paused by chair";
     startTransition(async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const { error: logErr } = await supabase.from("timer_pause_events").insert({
+        conference_id: conferenceId,
+        reason,
+        created_by: user?.id ?? null,
+      });
+      if (logErr) {
+        setMsg(logErr.message);
+        return;
+      }
       const { error } = await supabase
         .from("timers")
         .update({
           time_left_seconds: frozenLeft,
           is_running: false,
+          current_pause_reason: reason,
           updated_at: new Date().toISOString(),
         })
         .eq("conference_id", conferenceId);
@@ -536,6 +606,7 @@ export function SessionControlClient({
         .from("timers")
         .update({
           is_running: true,
+          current_pause_reason: null,
           updated_at: new Date().toISOString(),
         })
         .eq("conference_id", conferenceId);
@@ -648,6 +719,7 @@ export function SessionControlClient({
           vote_item_id: voteItemIdToSave,
           per_speaker_mode: true,
           is_running: true,
+          floor_label: timer.floorLabel.trim() || null,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
@@ -663,6 +735,7 @@ export function SessionControlClient({
         totalS: String(cap % 60),
         perSpeakerMode: true,
         isRunning: true,
+        floorLabel: prev.floorLabel,
       }));
       setMsg(error ? error.message : "Advanced speaker and reset per-speaker clock.");
       void refresh();
@@ -677,13 +750,94 @@ export function SessionControlClient({
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) return;
+      const publishAtIso = daisPublishAt.trim() ? new Date(daisPublishAt).toISOString() : null;
       const { error } = await supabase.from("dais_announcements").insert({
         conference_id: conferenceId,
         body,
         created_by: user.id,
+        body_format: daisFormat,
+        publish_at: publishAtIso,
+        is_pinned: false,
       });
-      if (!error) setDaisBody("");
+      if (!error) {
+        setDaisBody("");
+        setDaisPublishAt("");
+      }
       setMsg(error ? error.message : "Announcement posted.");
+      void refresh();
+    });
+  }
+
+  function setDaisPinned(announcementId: string, pinned: boolean) {
+    startTransition(async () => {
+      if (pinned) {
+        await supabase
+          .from("dais_announcements")
+          .update({ is_pinned: false })
+          .eq("conference_id", conferenceId);
+        const { error } = await supabase
+          .from("dais_announcements")
+          .update({ is_pinned: true })
+          .eq("id", announcementId);
+        setMsg(error ? error.message : "Pinned for the committee floor.");
+      } else {
+        const { error } = await supabase
+          .from("dais_announcements")
+          .update({ is_pinned: false })
+          .eq("id", announcementId);
+        setMsg(error ? error.message : "Unpinned.");
+      }
+      void refresh();
+    });
+  }
+
+  function beginEditDais(a: Announcement) {
+    setDaisEditingId(a.id);
+    setDaisEditBody(a.body);
+    setDaisEditFormat(a.body_format === "markdown" ? "markdown" : "plain");
+    setDaisEditPublishAt(isoToDatetimeLocalValue(a.publish_at ?? null));
+  }
+
+  function cancelEditDais() {
+    setDaisEditingId(null);
+    setDaisEditBody("");
+    setDaisEditPublishAt("");
+  }
+
+  function saveDaisEdit() {
+    if (!daisEditingId) return;
+    const body = daisEditBody.trim();
+    if (!body) {
+      setMsg("Announcement body cannot be empty.");
+      return;
+    }
+    const publishAtIso = daisEditPublishAt.trim() ? new Date(daisEditPublishAt).toISOString() : null;
+    startTransition(async () => {
+      const { error } = await supabase
+        .from("dais_announcements")
+        .update({
+          body,
+          body_format: daisEditFormat,
+          publish_at: publishAtIso,
+        })
+        .eq("id", daisEditingId)
+        .eq("conference_id", conferenceId);
+      if (!error) cancelEditDais();
+      setMsg(error ? error.message : "Announcement updated.");
+      void refresh();
+    });
+  }
+
+  function deleteDaisAnnouncement(id: string) {
+    if (
+      !window.confirm("Delete this announcement permanently? This cannot be undone.")
+    ) {
+      return;
+    }
+    startTransition(async () => {
+      if (daisEditingId === id) cancelEditDais();
+      const { error } = await supabase.from("dais_announcements").delete().eq("id", id).eq("conference_id", conferenceId);
+      setMsg(error ? error.message : "Announcement deleted.");
       void refresh();
     });
   }
@@ -766,7 +920,7 @@ export function SessionControlClient({
       const rows = allocations.map((a) => ({
         conference_id: conferenceId,
         allocation_id: a.id,
-        present: false,
+        attendance: "absent" as const,
       }));
       if (!rows.length) {
         setMsg("No allocations to add.");
@@ -789,11 +943,14 @@ export function SessionControlClient({
     });
   }
 
-  function togglePresent(allocationId: string, present: boolean) {
+  function cycleRollAttendanceForRow(allocationId: string) {
+    const row = roll.find((x) => x.allocation_id === allocationId);
+    const current = row?.attendance ?? "absent";
+    const next = nextRollAttendance(current);
     startTransition(async () => {
       await supabase
         .from("roll_call_entries")
-        .update({ present, updated_at: new Date().toISOString() })
+        .update({ attendance: next, updated_at: new Date().toISOString() })
         .eq("conference_id", conferenceId)
         .eq("allocation_id", allocationId);
       void refresh();
@@ -1635,9 +1792,8 @@ export function SessionControlClient({
               ) : (
                 (() => {
                   const call = votingCallOrder[voteCallIndex]!;
-                  const rollPresent = presentByAllocationId.get(call.id);
-                  const rollLabel =
-                    rollPresent === true ? "Present (roll)" : rollPresent === false ? "Absent (roll)" : "— (roll)";
+                  const rollA = rollAttendanceByAllocationId.get(call.id);
+                  const rollLabel = rollAttendanceRollLabel(rollA);
                   const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
                   return (
                     <div className="space-y-3">
@@ -1793,7 +1949,42 @@ export function SessionControlClient({
             on, the clock stays visible during moderated caucus regardless.{" "}
             <strong className="font-medium text-brand-navy">Pause clock</strong> /{" "}
             <strong className="font-medium text-brand-navy">Start clock</strong> freeze or resume the countdown.
+            Presets set duration and a <strong className="font-medium text-brand-navy">floor label</strong> delegates
+            see next to the timer. Pauses are logged with a short reason.
           </p>
+          <div className="flex flex-wrap gap-3 items-end">
+            <label className="block text-sm text-brand-navy min-w-[12rem]">
+              <span className={surfaceLabel}>Named preset</span>
+              <select
+                className={`${surfaceField} mt-1`}
+                value=""
+                onChange={(e) => {
+                  const id = e.target.value;
+                  if (!id) return;
+                  const p = BUILTIN_TIMER_PRESETS.find((x) => x.id === id);
+                  if (!p) return;
+                  const f = presetToTimerFields(p);
+                  setTimer((t) => ({ ...t, ...f }));
+                }}
+              >
+                <option value="">Apply preset…</option>
+                {BUILTIN_TIMER_PRESETS.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="block flex-1 min-w-[10rem] text-sm text-brand-navy">
+              <span className={surfaceLabel}>Floor label (delegates)</span>
+              <input
+                className={`${surfaceField} mt-1`}
+                placeholder="e.g. GSL 60s"
+                value={timer.floorLabel}
+                onChange={(e) => setTimer((t) => ({ ...t, floorLabel: e.target.value }))}
+              />
+            </label>
+          </div>
           <label className="block text-sm text-brand-navy">
             <span className={surfaceLabel}>Timer purpose</span>
             <select
@@ -1842,6 +2033,15 @@ export function SessionControlClient({
               <span className="text-brand-muted font-normal"> — save the timer to enable pause/start.</span>
             ) : null}
           </p>
+          <label className="block text-sm text-brand-navy">
+            <span className={surfaceLabel}>Pause reason (logged)</span>
+            <input
+              className={`${surfaceField} mt-1`}
+              placeholder="e.g. Point of order, tech issue, unmoderated caucus…"
+              value={pauseReasonDraft}
+              onChange={(e) => setPauseReasonDraft(e.target.value)}
+            />
+          </label>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
@@ -1948,6 +2148,21 @@ export function SessionControlClient({
               </button>
             ) : null}
           </div>
+          {pauseEvents.length > 0 ? (
+            <div className="border-t border-white/12 pt-3">
+              <p className={`${surfaceLabel} mb-2`}>Recent pause log</p>
+              <ul className="max-h-36 space-y-1.5 overflow-y-auto text-xs text-brand-navy/85">
+                {pauseEvents.map((ev) => (
+                  <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
+                    <time className="shrink-0 text-brand-muted" dateTime={ev.created_at}>
+                      {new Date(ev.created_at).toLocaleString()}
+                    </time>
+                    <span>{ev.reason}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </section>
       ) : null}
@@ -1956,15 +2171,43 @@ export function SessionControlClient({
       <section className="space-y-3">
         <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcements</h3>
         <div className={`${surfaceCard} space-y-3`}>
+          <p className="text-sm text-brand-muted">
+            Use <strong className="font-medium text-brand-navy">Markdown</strong> for bold, lists, and links. Pin one
+            line for the floor strip; schedule a future <strong className="font-medium text-brand-navy">publish</strong>{" "}
+            time and delegates will only see it once that moment passes. You can <strong className="font-medium text-brand-navy">edit</strong> or{" "}
+            <strong className="font-medium text-brand-navy">delete</strong> any line below.
+          </p>
           <label className="block text-sm text-brand-navy">
             <span className={surfaceLabel}>Message</span>
             <textarea
-              className={`${surfaceInputCore} mt-1 min-h-[80px]`}
+              className={`${surfaceInputCore} mt-1 min-h-[100px] font-mono text-sm`}
               placeholder="Message to the committee…"
               value={daisBody}
               onChange={(e) => setDaisBody(e.target.value)}
             />
           </label>
+          <div className="flex flex-wrap gap-4">
+            <label className="block text-sm text-brand-navy">
+              <span className={surfaceLabel}>Format</span>
+              <select
+                className={`${surfaceField} mt-1`}
+                value={daisFormat}
+                onChange={(e) => setDaisFormat(e.target.value as "plain" | "markdown")}
+              >
+                <option value="markdown">Markdown</option>
+                <option value="plain">Plain text</option>
+              </select>
+            </label>
+            <label className="block text-sm text-brand-navy min-w-[12rem]">
+              <span className={surfaceLabel}>Publish at (optional)</span>
+              <input
+                type="datetime-local"
+                className={`${surfaceField} mt-1`}
+                value={daisPublishAt}
+                onChange={(e) => setDaisPublishAt(e.target.value)}
+              />
+            </label>
+          </div>
           <button
             type="button"
             disabled={pending}
@@ -1973,12 +2216,125 @@ export function SessionControlClient({
           >
             Post
           </button>
-          <ul className="text-sm space-y-1 border-t border-white/12 pt-3 text-brand-navy/85">
-            {announcements.map((a) => (
-              <li key={a.id}>
-                {a.body}
-              </li>
-            ))}
+          <ul className="text-sm space-y-3 border-t border-white/12 pt-3 text-brand-navy/85">
+            {announcements.map((a) => {
+              const fmt = a.body_format === "markdown" ? "markdown" : "plain";
+              const scheduled =
+                a.publish_at && !Number.isNaN(new Date(a.publish_at).getTime())
+                  ? new Date(a.publish_at) > new Date()
+                  : false;
+              const editing = daisEditingId === a.id;
+              return (
+                <li key={a.id} className="rounded-lg border border-white/10 bg-black/20 p-3">
+                  <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
+                    <time className="text-brand-muted" dateTime={a.created_at}>
+                      {new Date(a.created_at).toLocaleString()}
+                    </time>
+                    {a.is_pinned ? (
+                      <span className="rounded bg-amber-500/20 px-1.5 py-0.5 font-semibold text-amber-950 dark:text-amber-100">
+                        Pinned
+                      </span>
+                    ) : null}
+                    {scheduled ? (
+                      <span className="rounded bg-blue-500/15 px-1.5 py-0.5 text-blue-900 dark:text-blue-100">
+                        Scheduled {new Date(a.publish_at!).toLocaleString()}
+                      </span>
+                    ) : null}
+                    <span className="text-brand-muted">{fmt === "markdown" ? "Markdown" : "Plain"}</span>
+                  </div>
+                  {editing ? (
+                    <div className="space-y-3">
+                      <textarea
+                        className={`${surfaceInputCore} min-h-[100px] w-full font-mono text-sm`}
+                        value={daisEditBody}
+                        onChange={(e) => setDaisEditBody(e.target.value)}
+                      />
+                      <div className="flex flex-wrap gap-4">
+                        <label className="block text-sm text-brand-navy">
+                          <span className={surfaceLabel}>Format</span>
+                          <select
+                            className={`${surfaceField} mt-1`}
+                            value={daisEditFormat}
+                            onChange={(e) => setDaisEditFormat(e.target.value as "plain" | "markdown")}
+                          >
+                            <option value="markdown">Markdown</option>
+                            <option value="plain">Plain text</option>
+                          </select>
+                        </label>
+                        <label className="block text-sm text-brand-navy min-w-[12rem]">
+                          <span className={surfaceLabel}>Publish at</span>
+                          <input
+                            type="datetime-local"
+                            className={`${surfaceField} mt-1`}
+                            value={daisEditPublishAt}
+                            onChange={(e) => setDaisEditPublishAt(e.target.value)}
+                          />
+                        </label>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={saveDaisEdit}
+                          className="rounded-lg bg-brand-gold px-3 py-1.5 text-sm font-medium text-brand-navy hover:opacity-90 disabled:opacity-50"
+                        >
+                          Save changes
+                        </button>
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={cancelEditDais}
+                          className="rounded-lg border border-white/20 px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white/10 disabled:opacity-50"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <DaisAnnouncementBody body={a.body} format={fmt} />
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {a.is_pinned ? (
+                          <button
+                            type="button"
+                            disabled={pending}
+                            onClick={() => setDaisPinned(a.id, false)}
+                            className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
+                          >
+                            Unpin
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled={pending}
+                            onClick={() => setDaisPinned(a.id, true)}
+                            className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
+                          >
+                            Pin to floor
+                          </button>
+                        )}
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={() => beginEditDais(a)}
+                          className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={() => deleteDaisAnnouncement(a.id)}
+                          className="text-xs font-medium text-red-800 underline hover:no-underline dark:text-red-300 disabled:opacity-50"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -2144,8 +2500,12 @@ export function SessionControlClient({
 
       {show("roll-call") ? (
       <section className="space-y-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">Roll call</h3>
-        <div className={`${surfaceCard} space-y-3`}>
+        <h3 className="font-display text-lg font-semibold text-brand-navy">✅ Roll Call Tracker</h3>
+        <p className="text-sm text-brand-muted">
+          Present (may abstain from voting), Present and voting (must vote, cannot abstain), or Absent. Click to
+          cycle.
+        </p>
+        <div className={`${surfaceCard} space-y-4`}>
           <button
             type="button"
             disabled={pending}
@@ -2154,26 +2514,43 @@ export function SessionControlClient({
           >
             Initialize rows (all allocations)
           </button>
-          <ul className="space-y-2 text-sm text-brand-navy">
-            {roll.map((r) => {
-              const emb = r.allocations;
-              const row = Array.isArray(emb) ? emb[0] : emb;
-              const country = row?.country ?? r.allocation_id.slice(0, 8);
-              return (
-                <li key={r.allocation_id} className="flex items-center justify-between gap-2">
-                  <span>{country}</span>
-                  <label className="flex items-center gap-2 cursor-pointer text-brand-navy/85">
-                    <input
-                      type="checkbox"
-                      checked={r.present}
-                      onChange={(e) => togglePresent(r.allocation_id, e.target.checked)}
-                    />
-                    Present
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
+          {roll.length === 0 ? (
+            <p className="text-sm text-brand-muted">
+              No roll rows yet. Initialize to create one row per delegate placard from this committee&apos;s allocation
+              matrix.
+            </p>
+          ) : (
+            <>
+              <div>
+                <h4 className="font-display text-base font-semibold text-brand-navy">👥 Delegates</h4>
+                <p className="mt-1 text-sm text-brand-muted">
+                  Click a delegate&apos;s status to cycle: Absent → Present (may abstain) → Present and voting →
+                  Absent.
+                </p>
+              </div>
+              <ul className="space-y-2 text-sm text-brand-navy">
+                {roll.map((r) => {
+                  const emb = r.allocations;
+                  const row = Array.isArray(emb) ? emb[0] : emb;
+                  const country = row?.country ?? r.allocation_id.slice(0, 8);
+                  const att = r.attendance;
+                  return (
+                    <li key={r.allocation_id} className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-medium">{country}</span>
+                      <button
+                        type="button"
+                        disabled={pending}
+                        onClick={() => cycleRollAttendanceForRow(r.allocation_id)}
+                        className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-left text-sm font-medium text-brand-navy hover:bg-white/20 disabled:opacity-50"
+                      >
+                        {rollAttendanceShortLabel(att)}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )}
         </div>
       </section>
       ) : null}

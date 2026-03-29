@@ -24,7 +24,7 @@ export default async function ChairFlowChecklistPage() {
   const conferenceId = await requireActiveConferenceId();
 
   return (
-    <MunPageShell title="Flow checklist">
+    <MunPageShell title="📋 Committee flow checklist">
       <div className="space-y-3">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           Normal committee flow — tick steps as you go. Reset when starting a new session or cycle.

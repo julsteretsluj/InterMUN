@@ -66,6 +66,7 @@ export const CHAIR_PREP_SECTIONS: ChairPrepSection[] = [
   },
 ];
 
+/** Labels match SEAMUNs “Committee flow checklist” checkboxes (thedashboard.seamuns.site/chair → Flow checklist). */
 export const CHAIR_FLOW_ITEMS: { id: string; label: string }[] = [
   { id: "roll-call", label: "Roll call" },
   { id: "open-floor", label: "Open the floor (points & motions)" },
