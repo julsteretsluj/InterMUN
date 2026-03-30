@@ -5,6 +5,12 @@ import { AwardsManagerClient } from "@/app/(dashboard)/chair/awards/AwardsManage
 import { promoteNominationToAwardAction } from "@/app/actions/awards";
 import type { AwardAssignment } from "@/types/database";
 import { isSmtRole } from "@/lib/roles";
+import {
+  maxRubricTotal,
+  rubricBandInitials,
+  rubricNumericTotal,
+  type NominationRubricType,
+} from "@/lib/seamuns-award-scoring";
 
 export default async function SmtAwardsPage() {
   const supabase = await createClient();
@@ -29,7 +35,9 @@ export default async function SmtAwardsPage() {
     supabase.from("profiles").select("id, name").order("name").limit(500),
     supabase
       .from("award_nominations")
-      .select("id, nomination_type, rank, status, evidence_note, committee_conference_id, nominee_profile_id, profiles(name)")
+      .select(
+        "id, nomination_type, rank, status, evidence_note, rubric_scores, committee_conference_id, nominee_profile_id, profiles(name)"
+      )
       .eq("status", "pending")
       .order("committee_conference_id", { ascending: true })
       .order("nomination_type", { ascending: true })
@@ -41,10 +49,11 @@ export default async function SmtAwardsPage() {
 
   type NominationRow = {
     id: string;
-    nomination_type: "committee_best_delegate" | "committee_best_position_paper" | "conference_best_delegate";
+    nomination_type: NominationRubricType;
     rank: number;
     status: string;
     evidence_note: string | null;
+    rubric_scores: Record<string, number> | null;
     committee_conference_id: string;
     nominee_profile_id: string;
     profiles: { name: string | null } | { name: string | null }[] | null;
@@ -63,7 +72,8 @@ export default async function SmtAwardsPage() {
           Chair Top 2 nominations (SMT review)
         </h2>
         <p className="text-xs text-brand-muted mb-3">
-          Chairs submit their Top 2 with evidence; SMT selects final awards from these nominations.
+          Chairs score nominees with the same SEAMUNs-style bands (Beginning–Exemplary); rubric totals and band initials
+          (B/D/P/E) summarize each row. SMT selects final awards from these nominations.
         </p>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
           <table className="w-full text-sm">
@@ -73,6 +83,7 @@ export default async function SmtAwardsPage() {
                 <th className="px-3 py-2">Rank</th>
                 <th className="px-3 py-2">Award type</th>
                 <th className="px-3 py-2">Nominee</th>
+                <th className="px-3 py-2">Rubric</th>
                 <th className="px-3 py-2">Evidence</th>
                 <th className="px-3 py-2">SMT action</th>
               </tr>
@@ -80,7 +91,7 @@ export default async function SmtAwardsPage() {
             <tbody>
               {nominationRows.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
+                  <td colSpan={7} className="px-3 py-6 text-center text-brand-muted">
                     No pending chair nominations yet.
                   </td>
                 </tr>
@@ -101,6 +112,15 @@ export default async function SmtAwardsPage() {
                         {nominationTypeLabel[n.nomination_type]}
                       </td>
                       <td className="px-3 py-2">{nomineeLabel}</td>
+                      <td className="px-3 py-2 text-brand-navy/90 text-xs align-top">
+                        <span className="font-mono tabular-nums">
+                          {rubricNumericTotal(n.rubric_scores, n.nomination_type)}/
+                          {maxRubricTotal(n.nomination_type)}
+                        </span>
+                        <span className="block text-brand-muted mt-0.5" title="Band initials: B/D/P/E">
+                          {rubricBandInitials(n.rubric_scores, n.nomination_type)}
+                        </span>
+                      </td>
                       <td className="px-3 py-2 text-brand-muted max-w-md">
                         {n.evidence_note?.trim() || "—"}
                       </td>

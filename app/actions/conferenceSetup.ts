@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { hashCommitteePassword } from "@/lib/committee-password";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
+import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { normalizeCommitteeCode, normalizeEventCode } from "@/lib/join-codes";
 import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
@@ -94,5 +95,6 @@ export async function createConferenceAsStaff(
 
   await setActiveConferenceContext(supabase, conferenceId);
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
   redirect(nextPath);
 }

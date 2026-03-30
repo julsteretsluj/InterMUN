@@ -60,6 +60,7 @@ export async function updateCommitteeSessionAction(
   const committeeCode = normalizeCommitteeCode(String(formData.get("committee_code") ?? ""));
   const committeeFullName = String(formData.get("committee_full_name") ?? "").trim();
   const chairNames = String(formData.get("chair_names") ?? "").trim();
+  const crisisSlidesUrl = String(formData.get("crisis_slides_url") ?? "").trim();
 
   if (!id || name.length < 2 || !isValidCommitteeJoinCode(committeeCode)) {
     return { error: "Session title and a valid 6-character committee code (letters/digits) are required." };
@@ -88,6 +89,7 @@ export async function updateCommitteeSessionAction(
     p_committee_code: committeeCode,
     p_committee_full_name: committeeFullName,
     p_chair_names: chairNames,
+    p_crisis_slides_url: crisisSlidesUrl,
   });
 
   if (error) return { error: error.message };
@@ -95,5 +97,6 @@ export async function updateCommitteeSessionAction(
   revalidatePath("/smt");
   revalidatePath("/smt/conference");
   revalidatePath(`/smt/committees/${id}`);
+  revalidatePath("/crisis-slides");
   return { success: true };
 }

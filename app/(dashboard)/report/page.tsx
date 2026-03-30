@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { ReportView } from "@/components/report/ReportView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
+import { getConferenceForDashboard } from "@/lib/active-conference";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 
 export default async function ReportPage({
   searchParams,
@@ -23,6 +25,12 @@ export default async function ReportPage({
   if (!profile?.role) redirect("/login");
 
   const myRole = profile.role.toString().toLowerCase();
+  const activeConf = await getConferenceForDashboard({ role: myRole });
+  if (!activeConf || !isCrisisCommittee(activeConf.committee)) {
+    if (myRole === "chair") redirect("/chair");
+    if (myRole === "smt" || myRole === "admin") redirect("/smt");
+    redirect("/delegate");
+  }
   const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
   let q = supabase.from("reports").select("*").order("created_at", { ascending: false });

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { verifyCommitteePassword, hashCommitteePassword } from "@/lib/committee-password";
 import { setVerifiedConferenceId, clearVerifiedConference } from "@/lib/committee-gate-cookie";
+import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { verifyStaffCommitteeBypassPassword } from "@/lib/staff-committee-bypass";
 import { getActiveEventId, setActiveEventId } from "@/lib/active-event-cookie";
@@ -11,6 +12,7 @@ import { setActiveConferenceContext } from "@/lib/set-active-conference-context"
 
 export async function clearCommitteeVerification() {
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
 }
 
 export async function verifyCommitteeSecondaryLogin(

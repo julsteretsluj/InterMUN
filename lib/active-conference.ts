@@ -13,6 +13,8 @@ export type ActiveConferenceRow = {
   committee_password_hash: string | null;
   room_code: string | null;
   committee_code: string | null;
+  crisis_slides_url: string | null;
+  allocation_code_gate_enabled: boolean;
 };
 
 /** Active committee from room code (cookie). Validates row still exists. */
@@ -25,7 +27,9 @@ export async function getResolvedActiveConference(): Promise<ActiveConferenceRow
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("conferences")
-    .select("id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code")
+    .select(
+      "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled"
+    )
     .eq("id", id)
     .maybeSingle();
 
@@ -73,7 +77,9 @@ export async function getConferenceForDashboard(options: {
 
   const { data } = await supabase
     .from("conferences")
-    .select("id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code")
+    .select(
+      "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled"
+    )
     .order("created_at", { ascending: false })
     .limit(1)
     .maybeSingle();

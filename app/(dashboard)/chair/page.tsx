@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairHowToAccordion } from "@/components/chair/ChairHowToAccordion";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 
 export default async function ChairOverviewPage() {
   const supabase = await createClient();
@@ -29,22 +30,28 @@ export default async function ChairOverviewPage() {
     .eq("id", conferenceId)
     .maybeSingle();
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
+  const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string }[] = [
     { href: "/chair/prep-checklist", label: "Prep checklist", hint: "Before conference" },
     { href: "/chair/flow-checklist", label: "Flow checklist", hint: "During session" },
     { href: "/chair/allocation-matrix", label: "Delegates", hint: "Matrix & assignments" },
-    { href: "/chair/digital-room", label: "Digital Room", hint: "Placards, roll status, compliment & concern (this device)" },
+    { href: "/chair/digital-room", label: "Digital Room", hint: "Placards, speaker list, roll status, chair notes (this device)" },
     { href: "/chair/session/roll-call", label: "Roll call", hint: "Attendance" },
     { href: "/chair/session", label: "Session", hint: "Start/stop committee session (timestamp)" },
-    { href: "/chair/session/speakers", label: "Speakers", hint: "Speaker list" },
+    { href: "/chair/session/speakers", label: "Speakers", hint: "Same speaker list as Digital Room; syncs to committee room" },
     { href: "/chair/session/motions", label: "Formal motions", hint: "Motion floor & chair-recorded votes" },
     { href: "/chair/session/timer", label: "Timer", hint: "Floor clock, presets, pause log" },
     { href: "/chair/session/announcements", label: "Announcements", hint: "Dais lines, pin, schedule" },
-    { href: "/chair/motions-points", label: "Motions log", hint: "Quick scratch list (this device)" },
+    { href: "/chair/motions-points", label: "Motions & Points", hint: "Shared log & presets for your committee" },
     { href: "/voting", label: "Voting", hint: "Delegate vote display" },
     { href: "/chair/awards", label: "Score", hint: "Awards & nominations" },
-    { href: "/report", label: "Crisis", hint: "Incident reporting" },
+    ...(crisisReportingEnabled
+      ? ([
+          { href: "/report", label: "Crisis", hint: "Incident reporting" },
+          { href: "/crisis-slides", label: "Crisis slides", hint: "Embedded deck (SMT sets URL)" },
+        ] as const)
+      : []),
     { href: "/documents", label: "Archive", hint: "Committee documents" },
     { href: "/official-links", label: "Official UN links", hint: "Documents & bodies" },
     { href: "/chair/room-code", label: "Room code", hint: "Committee gate code" },
@@ -62,7 +69,7 @@ export default async function ChairOverviewPage() {
           </p>
           <p className="text-sm text-slate-600 dark:text-zinc-400">
             Active committee: <span className="font-semibold text-slate-900 dark:text-zinc-100">{line}</span>. Session
-            data syncs through your account; prep/flow checklists and the quick motions log are saved in this browser
+            data syncs through your account; prep/flow checklists and Motions & Points are saved in this browser
             for this committee — same idea as{" "}
             <a
               href="https://thedashboard.seamuns.site/chair"

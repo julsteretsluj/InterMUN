@@ -20,6 +20,7 @@ type CommitteeRow = {
   committee_full_name: string | null;
   chair_names: string | null;
   committee_logo_url: string | null;
+  crisis_slides_url: string | null;
 };
 
 export function SmtConferenceSettingsClient({
@@ -272,6 +273,23 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
             {uploadError}
           </p>
         ) : null}
+      </div>
+
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">
+          Crisis slides (Google Slides URL)
+        </label>
+        <input
+          name="crisis_slides_url"
+          type="url"
+          defaultValue={row.crisis_slides_url ?? ""}
+          placeholder="https://docs.google.com/presentation/d/…/edit"
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm font-mono"
+        />
+        <p className="text-xs text-brand-muted mt-1">
+          For FWC / UNSC / HSC: embedded on delegates’ and chairs’ <span className="font-medium">Crisis slides</span>{" "}
+          page. Leave blank if not used. Deck should allow viewing for your audience (link sharing).
+        </p>
       </div>
 
       <div>

@@ -1,4 +1,5 @@
 import { AdminDashboardClient } from "./AdminDashboardClient";
+import StatusPortalBoard from "./StatusPortalBoard";
 
 export default async function AdminPage({
   searchParams,
@@ -28,6 +29,10 @@ export default async function AdminPage({
       )}
 
       <AdminDashboardClient adminInviteConfigured={adminInviteConfigured} />
+
+      <div className="mt-10">
+        <StatusPortalBoard />
+      </div>
     </div>
   );
 }

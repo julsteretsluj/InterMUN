@@ -9,6 +9,7 @@ import { ChairLiveFloorThemed } from "@/components/session/ChairLiveFloorThemed"
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { DashboardNotifications } from "@/components/dashboard/DashboardNotifications";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
+import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getAppName } from "@/lib/branding";
 import {
@@ -21,6 +22,7 @@ import {
   ADMIN_APP_HOME,
 } from "@/lib/roles";
 import { ChairDashboardSidebar, ChairMobileDock } from "@/components/dashboard/ChairDashboardNav";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 import type { UserRole } from "@/types/database";
 
 export default async function DashboardLayout({
@@ -73,6 +75,16 @@ export default async function DashboardLayout({
     }
   }
 
+  const allocationGateOn = activeConf.allocation_code_gate_enabled === true;
+  const needsAllocationCodeGate =
+    allocationGateOn && (normalizedRole === "delegate" || normalizedRole === "chair");
+  if (needsAllocationCodeGate) {
+    const allocVerified = await getAllocationCodeVerifiedConferenceId();
+    if (allocVerified !== activeConf.id) {
+      redirect(`/allocation-code-gate?next=${encodeURIComponent(pathname)}`);
+    }
+  }
+
   const { data: activeEvent } = activeConf?.event_id
     ? await supabase
         .from("conference_events")
@@ -87,6 +99,7 @@ export default async function DashboardLayout({
   const displayName = profile?.name?.trim() || "Delegate";
   const userEmail = user.email ?? "";
   const conferenceLine = [activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ") || activeConf.name;
+  const crisisReportingEnabled = isCrisisCommittee(activeConf.committee);
 
   const { count: notificationUnreadCount } = await supabase
     .from("user_notifications")
@@ -96,10 +109,10 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
-      <aside className="sticky top-0 z-30 hidden h-screen w-64 shrink-0 flex-col border-r border-slate-200/90 bg-white shadow-[4px_0_32px_rgba(15,23,42,0.04)] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none lg:flex">
+      <aside className="group sticky top-0 z-30 hidden h-screen w-[70px] hover:w-[220px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
-          className="flex shrink-0 items-center gap-3 border-b border-slate-100 px-5 py-5 transition hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
+          className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
         >
           {showSeamunLogo ? (
             <img
@@ -115,32 +128,45 @@ export default async function DashboardLayout({
               IM
             </span>
           )}
-          <span className="truncate text-lg font-bold tracking-tight text-violet-800 dark:text-violet-200">
+          <span
+            className={
+              isChairRole(normalizedRole)
+                ? "hidden truncate text-lg font-bold tracking-tight text-amber-800 group-hover:block dark:text-amber-200"
+                : "hidden truncate text-lg font-bold tracking-tight text-blue-800 group-hover:block dark:text-blue-200"
+            }
+          >
             {appName}
           </span>
         </Link>
         <div className="flex min-h-0 flex-1 flex-col">
           {isChairRole(normalizedRole) ? (
-            <ChairDashboardSidebar conferenceLine={conferenceLine || ""} />
+            <ChairDashboardSidebar
+              conferenceLine={conferenceLine || ""}
+              crisisReportingEnabled={crisisReportingEnabled}
+            />
           ) : (
-            <TabNav staffRole={navRole} variant="aspire-sidebar" />
+            <TabNav
+              staffRole={navRole}
+              variant="aspire-sidebar"
+              crisisReportingEnabled={crisisReportingEnabled}
+            />
           )}
         </div>
         {!isChairRole(normalizedRole) ? (
           <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-4 dark:border-zinc-800">
             <Link
               href="/guides"
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+              className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
             >
               <HelpCircle className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-              Help center
+              <span className="hidden group-hover:inline">Help center</span>
             </Link>
             <Link
               href="/profile"
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+              className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
             >
               <Settings className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-              Settings
+              <span className="hidden group-hover:inline">Settings</span>
             </Link>
           </div>
         ) : null}
@@ -173,9 +199,12 @@ export default async function DashboardLayout({
 
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
         {isChairRole(normalizedRole) ? (
-          <ChairMobileDock conferenceLine={conferenceLine || ""} />
+          <ChairMobileDock
+            conferenceLine={conferenceLine || ""}
+            crisisReportingEnabled={crisisReportingEnabled}
+          />
         ) : (
-          <TabNav staffRole={navRole} variant="dock" />
+          <TabNav staffRole={navRole} variant="dock" crisisReportingEnabled={crisisReportingEnabled} />
         )}
       </div>
 

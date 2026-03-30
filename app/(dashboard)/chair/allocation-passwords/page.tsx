@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { getConferenceForDashboard } from "@/lib/active-conference";
+import { AllocationCodeGateToggle } from "@/components/allocation/AllocationCodeGateToggle";
 import { AllocationPasswordsClient } from "./AllocationPasswordsClient";
 
 type ProfileEmbed = { name: string | null } | null;
@@ -42,16 +44,40 @@ export default async function AllocationPasswordsPage({
     redirect("/profile");
   }
 
-  const { data: conferences } = await supabase
-    .from("conferences")
-    .select("id, name, committee")
-    .order("created_at", { ascending: false });
+  const role = profile?.role;
+  const isChairOnly = role === "chair";
 
-  const list = conferences ?? [];
-  const conferenceId =
-    conferenceParam && list.some((c) => c.id === conferenceParam)
-      ? conferenceParam
-      : list[0]?.id;
+  let list: { id: string; name: string; committee: string | null }[];
+  let conferenceId: string | undefined;
+
+  if (isChairOnly) {
+    const activeConf = await getConferenceForDashboard({ role });
+    if (!activeConf) {
+      redirect("/room-gate?next=%2Fchair%2Fallocation-passwords");
+    }
+    if (conferenceParam && conferenceParam !== activeConf.id) {
+      redirect("/chair/allocation-passwords");
+    }
+    conferenceId = activeConf.id;
+    list = [
+      {
+        id: activeConf.id,
+        name: activeConf.name,
+        committee: activeConf.committee,
+      },
+    ];
+  } else {
+    const { data: conferences } = await supabase
+      .from("conferences")
+      .select("id, name, committee")
+      .order("created_at", { ascending: false });
+
+    list = conferences ?? [];
+    conferenceId =
+      conferenceParam && list.some((c) => c.id === conferenceParam)
+        ? conferenceParam
+        : list[0]?.id;
+  }
 
   if (!conferenceId) {
     return (
@@ -90,13 +116,26 @@ export default async function AllocationPasswordsPage({
 
   const activeConf = list.find((c) => c.id === conferenceId);
 
+  const { data: gateConf } = await supabase
+    .from("conferences")
+    .select("allocation_code_gate_enabled")
+    .eq("id", conferenceId)
+    .maybeSingle();
+
   return (
     <MunPageShell title="Allocation passwords">
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-        Per-allocation <strong>codes</strong> for placards, binders, or handouts. Stored in
-        plain text so you can copy this list—treat it like a seating chart (do not share
-        publicly).
+        Per-allocation <strong>codes</strong> for placards, binders, or handouts. Delegates and chairs use them
+        as the <strong>third gate</strong> when enabled below. Stored in plain text so you can copy this list—treat
+        it like a seating chart (do not share publicly).
       </p>
+
+      <div className="mb-6 max-w-2xl">
+        <AllocationCodeGateToggle
+          conferenceId={conferenceId}
+          enabled={gateConf?.allocation_code_gate_enabled === true}
+        />
+      </div>
 
       {list.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6">

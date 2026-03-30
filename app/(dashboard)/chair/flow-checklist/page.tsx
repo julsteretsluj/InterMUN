@@ -27,7 +27,8 @@ export default async function ChairFlowChecklistPage() {
     <MunPageShell title="📋 Committee flow checklist">
       <div className="space-y-3">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
-          Normal committee flow — tick steps as you go. Reset when starting a new session or cycle.
+          Normal committee flow — tick steps as you go. Shared across chair accounts and devices; reset clears for
+          everyone.
         </p>
         <ChairFlowChecklistClient conferenceId={conferenceId} />
       </div>

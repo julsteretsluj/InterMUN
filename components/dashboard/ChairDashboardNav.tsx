@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Archive,
   BarChart3,
@@ -22,6 +22,7 @@ import {
   Mic,
   PanelLeftClose,
   Play,
+  Presentation,
   Settings,
   TriangleAlert,
   Users,
@@ -41,6 +42,8 @@ type ChairNavItem = {
   activeMatch?: string;
   /** When true, active only on exact `href` (no `/child` match). */
   exactHref?: boolean;
+  /** Shown only for FWC / UNSC / HSC committees. */
+  crisisOnly?: boolean;
 };
 
 /** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
@@ -88,13 +91,14 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   },
   {
     href: "/chair/motions-points",
-    label: "Motions log",
+    label: "Motions & Points",
     icon: FileText,
-    emoji: "📝",
+    emoji: "📜",
   },
   { href: "/voting", label: "Voting", icon: CheckSquare, emoji: "🗳️" },
   { href: "/chair/awards", label: "Score", icon: BarChart3, emoji: "📊" },
-  { href: "/report", label: "Crisis", icon: TriangleAlert, emoji: "⚠️" },
+  { href: "/report", label: "Crisis", icon: TriangleAlert, emoji: "⚠️", crisisOnly: true },
+  { href: "/crisis-slides", label: "Crisis slides", icon: Presentation, emoji: "🖼️", crisisOnly: true },
   { href: "/documents", label: "Archive", icon: Archive, emoji: "📁" },
   { href: "/official-links", label: "Official links", icon: Link2, emoji: "🔗" },
   { href: "/chair/room-code", label: "Room code", icon: DoorOpen, emoji: "🚪" },
@@ -131,7 +135,7 @@ function ChairNavRow({
         "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
         labelsHidden && "justify-center px-2",
         isActive
-          ? "border border-blue-200/80 bg-blue-50 font-semibold text-slate-900 shadow-sm dark:border-blue-500/30 dark:bg-blue-950/45 dark:text-zinc-50"
+          ? "border border-amber-200/80 bg-amber-50 font-semibold text-slate-900 shadow-sm dark:border-amber-500/30 dark:bg-amber-950/35 dark:text-zinc-50"
           : "border border-transparent font-medium text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800/90"
       )}
     >
@@ -139,7 +143,7 @@ function ChairNavRow({
         <Icon
           className={cn(
             "h-[1.15rem] w-[1.15rem] shrink-0",
-            isActive ? "text-blue-700 dark:text-blue-300" : "text-slate-500 dark:text-zinc-400"
+            isActive ? "text-amber-700 dark:text-amber-300" : "text-slate-500 dark:text-zinc-400"
           )}
           strokeWidth={1.75}
         />
@@ -150,7 +154,17 @@ function ChairNavRow({
   );
 }
 
-export function ChairDashboardSidebar({ conferenceLine }: { conferenceLine: string }) {
+function filterChairNavItems(items: ChairNavItem[], crisisReportingEnabled: boolean) {
+  return items.filter((item) => !item.crisisOnly || crisisReportingEnabled);
+}
+
+export function ChairDashboardSidebar({
+  conferenceLine,
+  crisisReportingEnabled,
+}: {
+  conferenceLine: string;
+  crisisReportingEnabled: boolean;
+}) {
   const pathname = usePathname();
   const [labelsHidden, setLabelsHidden] = useState(false);
 
@@ -177,6 +191,10 @@ export function ChairDashboardSidebar({ conferenceLine }: { conferenceLine: stri
   const headerText =
     conferenceLine.trim() || "Committee & topic";
   const hubActive = pathname === "/chair";
+  const navItems = useMemo(
+    () => filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled),
+    [crisisReportingEnabled]
+  );
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -185,7 +203,7 @@ export function ChairDashboardSidebar({ conferenceLine }: { conferenceLine: stri
           href="/chair"
           title={headerText}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500",
+            "flex w-full items-center justify-center gap-2 rounded-full bg-amber-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-500",
             labelsHidden && "px-3 py-2.5",
             hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-white dark:ring-amber-400/90 dark:ring-offset-zinc-950"
           )}
@@ -203,7 +221,7 @@ export function ChairDashboardSidebar({ conferenceLine }: { conferenceLine: stri
         aria-label="Chair dashboard"
         className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-3 py-1 [scrollbar-width:thin]"
       >
-        {CHAIR_NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <ChairNavRow
             key={item.href + item.label}
             item={item}
@@ -254,8 +272,8 @@ function DockItem({
         className={cn(
           "flex h-11 min-w-[2.75rem] items-center justify-center gap-0.5 rounded-xl border px-1.5 shadow-sm transition-all duration-200",
           isActive
-            ? "border-blue-300/90 bg-blue-50 text-blue-900 dark:border-blue-500/50 dark:bg-blue-950/50 dark:text-blue-100"
-            : "border-slate-200/90 bg-white text-slate-600 group-hover:border-blue-200 group-hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
+            ? "border-amber-300/90 bg-amber-50 text-amber-900 dark:border-amber-500/50 dark:bg-amber-950/40 dark:text-amber-100"
+            : "border-slate-200/90 bg-white text-slate-600 group-hover:border-amber-200 group-hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
         )}
       >
         <Icon className="h-[1.1rem] w-[1.1rem] shrink-0" strokeWidth={1.75} />
@@ -267,7 +285,7 @@ function DockItem({
         <span
           className={cn(
             "max-w-[4.5rem] text-center text-[0.625rem] font-medium leading-tight",
-            isActive ? "text-blue-800 dark:text-blue-200" : "text-slate-600 dark:text-zinc-400"
+            isActive ? "text-amber-800 dark:text-amber-200" : "text-slate-600 dark:text-zinc-400"
           )}
         >
           {item.label}
@@ -277,7 +295,13 @@ function DockItem({
   );
 }
 
-export function ChairMobileDock({ conferenceLine }: { conferenceLine: string }) {
+export function ChairMobileDock({
+  conferenceLine,
+  crisisReportingEnabled,
+}: {
+  conferenceLine: string;
+  crisisReportingEnabled: boolean;
+}) {
   const pathname = usePathname();
   const [labelsHidden, setLabelsHidden] = useState(false);
 
@@ -302,6 +326,10 @@ export function ChairMobileDock({ conferenceLine }: { conferenceLine: string }) 
   }, []);
 
   const hubActive = pathname === "/chair";
+  const navItems = useMemo(
+    () => filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled),
+    [crisisReportingEnabled]
+  );
 
   return (
     <div className="border-t border-slate-200/80 bg-[#f4f6fb]/95 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95">
@@ -313,19 +341,19 @@ export function ChairMobileDock({ conferenceLine }: { conferenceLine: string }) 
         >
           <span
             className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-lg text-white shadow-sm",
+              "flex h-11 w-11 items-center justify-center rounded-xl bg-amber-600 text-lg text-white shadow-sm",
               hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-[#f4f6fb] dark:ring-amber-400/90 dark:ring-offset-zinc-950"
             )}
           >
             📌
           </span>
           {!labelsHidden ? (
-            <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-blue-800 dark:text-blue-200">
+            <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-amber-800 dark:text-amber-200">
               Committee
             </span>
           ) : null}
         </Link>
-        {CHAIR_NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <DockItem
             key={item.href + item.label}
             item={item}

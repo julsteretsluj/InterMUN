@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { clearActiveConference } from "@/lib/active-conference-cookie";
 import { clearActiveEvent, getActiveEventId } from "@/lib/active-event-cookie";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
+import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { normalizeCommitteeCode, SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
@@ -15,12 +16,14 @@ export async function clearRoomAndCommitteeContext() {
   await clearActiveEvent();
   await clearActiveConference();
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
 }
 
 /** Clear committee context only; keep selected conference event (second gate again). */
 export async function clearCommitteeContextOnly() {
   await clearActiveConference();
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
 }
 
 export async function joinRoomByCode(
@@ -66,6 +69,7 @@ export async function joinRoomByCode(
 
   await setActiveConferenceContext(supabase, conferenceId);
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
   redirect(nextPath);
 }
 
@@ -133,6 +137,7 @@ export async function setRoomCodeAndEnterAction(
 
   await setActiveConferenceContext(supabase, conferenceId);
   // Do not clear committee second-gate cookie: delegates stay verified until next login.
+  await clearAllocationCodeVerification();
   redirect(nextPath);
 }
 
@@ -176,6 +181,7 @@ export async function implicitJoinSingletonAction(formData: FormData) {
 
   await setActiveConferenceContext(supabase, conf.id);
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
   redirect(nextPath);
 }
 
@@ -234,5 +240,6 @@ export async function staffContinueWithLatestConference(formData: FormData) {
 
   await setActiveConferenceContext(supabase, conf.id);
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
   redirect(nextPath);
 }

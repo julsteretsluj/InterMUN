@@ -20,6 +20,18 @@ export type ConferenceTimerRow = {
   current_pause_reason?: string | null;
 };
 
+/** Hide idle timer numbers on the live floor until something is actively happening. */
+export function shouldShowLiveFloorTimerUI(
+  timer: ConferenceTimerRow,
+  isRunning: boolean
+): boolean {
+  if (isRunning) return true;
+  if (timer.current_pause_reason?.trim()) return true;
+  if (timer.current_speaker?.trim()) return true;
+  if (timer.next_speaker?.trim()) return true;
+  return false;
+}
+
 function timerVisibleForFloor(
   row: ConferenceTimerRow,
   activeVoteItemId: string | null

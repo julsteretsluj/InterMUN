@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { getConferenceForDashboard } from "@/lib/active-conference";
 import { randomBytes } from "crypto";
 
 function randomCode(): string {
@@ -12,7 +13,7 @@ async function requireChairOrSmt() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { supabase, user: null, ok: false as const };
+  if (!user) return { supabase, user: null, role: null, ok: false as const };
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -20,10 +21,24 @@ async function requireChairOrSmt() {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
-    return { supabase, user, ok: false as const };
+  const role = profile?.role ?? null;
+  if (role !== "chair" && role !== "smt" && role !== "admin") {
+    return { supabase, user, role, ok: false as const };
   }
-  return { supabase, user, ok: true as const };
+  return { supabase, user, role, ok: true as const };
+}
+
+/** Chairs are limited to their active committee (room / dashboard context). SMT and admin are not. */
+async function assertChairOwnsConference(
+  role: string | null | undefined,
+  conferenceId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  if (role !== "chair") return { ok: true };
+  const active = await getConferenceForDashboard({ role });
+  if (!active || active.id !== conferenceId) {
+    return { ok: false, error: "You can only manage codes for your committee." };
+  }
+  return { ok: true };
 }
 
 export async function saveAllocationCode(allocationId: string, code: string) {
@@ -34,6 +49,17 @@ export async function saveAllocationCode(allocationId: string, code: string) {
 
   const trimmed = code.trim();
   const supabase = auth.supabase;
+
+  const { data: alloc } = await supabase
+    .from("allocations")
+    .select("conference_id")
+    .eq("id", allocationId)
+    .maybeSingle();
+  if (!alloc?.conference_id) {
+    return { error: "Allocation not found." };
+  }
+  const scope = await assertChairOwnsConference(auth.role, alloc.conference_id);
+  if (!scope.ok) return { error: scope.error };
 
   if (!trimmed) {
     const { error } = await supabase
@@ -62,6 +88,9 @@ export async function generateMissingAllocationCodes(conferenceId: string) {
   if (!auth.ok || !auth.user) {
     return { error: "Only chairs, SMT, and website admins can generate codes." };
   }
+
+  const scope = await assertChairOwnsConference(auth.role, conferenceId);
+  if (!scope.ok) return { error: scope.error };
 
   const supabase = auth.supabase;
 

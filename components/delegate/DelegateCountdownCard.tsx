@@ -1,24 +1,43 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
+import { useCommitteeSyncedState } from "@/lib/hooks/useCommitteeSyncedState";
 
 type Stored = {
   conferenceStart: string | null;
   paperDeadline: string | null;
 };
 
-function loadStored(conferenceId: string): Stored {
+const emptyStored: Stored = { conferenceStart: null, paperDeadline: null };
+
+function loadLegacyCountdown(conferenceId: string): Stored | null {
   try {
     const raw = localStorage.getItem(`intermun-delegate-countdown-${conferenceId}`);
-    if (!raw) return { conferenceStart: null, paperDeadline: null };
+    if (!raw) return null;
     const p = JSON.parse(raw) as Partial<Stored>;
-    return {
+    const next: Stored = {
       conferenceStart: typeof p.conferenceStart === "string" ? p.conferenceStart : null,
       paperDeadline: typeof p.paperDeadline === "string" ? p.paperDeadline : null,
     };
+    if (!next.conferenceStart && !next.paperDeadline) return null;
+    return next;
   } catch {
-    return { conferenceStart: null, paperDeadline: null };
+    return null;
   }
+}
+
+function parseCountdownPayload(raw: unknown): Stored {
+  if (!raw || typeof raw !== "object") return { ...emptyStored };
+  const p = raw as Partial<Stored>;
+  return {
+    conferenceStart: typeof p.conferenceStart === "string" ? p.conferenceStart : null,
+    paperDeadline: typeof p.paperDeadline === "string" ? p.paperDeadline : null,
+  };
+}
+
+function countdownMeaningful(s: Stored): boolean {
+  return Boolean(s.conferenceStart || s.paperDeadline);
 }
 
 function formatRemaining(ms: number): string {
@@ -67,32 +86,29 @@ function CountdownLine({ label, iso }: { label: string; iso: string | null }) {
 }
 
 export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }) {
-  const [conferenceStart, setConferenceStart] = useState<string | null>(null);
-  const [paperDeadline, setPaperDeadline] = useState<string | null>(null);
-
-  const persist = useCallback(
-    (next: Stored) => {
-      try {
-        localStorage.setItem(`intermun-delegate-countdown-${conferenceId}`, JSON.stringify(next));
-      } catch {
-        /* ignore */
-      }
-    },
+  const loadLegacy = useCallback(
+    () => (typeof window !== "undefined" ? loadLegacyCountdown(conferenceId) : null),
     [conferenceId]
   );
 
-  useEffect(() => {
-    const s = loadStored(conferenceId);
-    setConferenceStart(s.conferenceStart);
-    setPaperDeadline(s.paperDeadline);
-  }, [conferenceId]);
+  const { value, setValue: persist, ready } = useCommitteeSyncedState({
+    conferenceId,
+    stateKey: COMMITTEE_SYNCED_STATE_KEYS.DELEGATE_COUNTDOWN,
+    defaultValue: emptyStored,
+    parsePayload: parseCountdownPayload,
+    toPayload: (s) => s,
+    hasMeaningfulData: countdownMeaningful,
+    loadLegacy,
+    debounceMs: 600,
+  });
+
+  const conferenceStart = value.conferenceStart;
+  const paperDeadline = value.paperDeadline;
 
   const onChangeStart = (v: string) => {
-    setConferenceStart(v || null);
     persist({ conferenceStart: v || null, paperDeadline });
   };
   const onChangePaper = (v: string) => {
-    setPaperDeadline(v || null);
     persist({ conferenceStart, paperDeadline: v || null });
   };
 
@@ -105,7 +121,9 @@ export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }
         ⏱️ Conference &amp; position paper countdown
       </h2>
       <p className="mt-1 text-sm text-slate-600 dark:text-zinc-400">
-        Saved on this device for this committee (like the SEAMUNs delegate dashboard). Use your local timezone.
+        {ready
+          ? "Shared for this committee — everyone with a seat sees the same dates (any delegate can update)."
+          : "Loading…"}
       </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm">

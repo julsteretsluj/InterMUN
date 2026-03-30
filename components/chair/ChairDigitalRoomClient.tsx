@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ExternalLink, Search, Smile, TriangleAlert } from "lucide-react";
+import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
+import { useCommitteeSyncedState } from "@/lib/hooks/useCommitteeSyncedState";
+import { ExternalLink, Mic2, Search, Smile, TriangleAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 import { type RollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
+import { createClient } from "@/lib/supabase/client";
+import { addAllocationToSpeakerQueue, fetchSpeakerQueue } from "@/lib/speaker-queue";
+import { ChairSpeakerQueuePanel } from "@/components/chair/ChairSpeakerQueuePanel";
 
 export type DigitalRoomAllocation = {
   id: string;
@@ -23,16 +28,25 @@ function storageKey(conferenceId: string) {
   return `intermun.chair.digitalRoom.${conferenceId}.v1`;
 }
 
-function loadFlags(conferenceId: string): Record<string, PlacardFlags> {
+function loadLegacyFlags(conferenceId: string): Record<string, PlacardFlags> | null {
   try {
     const raw = localStorage.getItem(storageKey(conferenceId));
-    if (!raw) return {};
+    if (!raw) return null;
     const p = JSON.parse(raw) as unknown;
-    if (!p || typeof p !== "object") return {};
+    if (!p || typeof p !== "object") return null;
     return p as Record<string, PlacardFlags>;
   } catch {
-    return {};
+    return null;
   }
+}
+
+function parseFlagsPayload(raw: unknown): Record<string, PlacardFlags> {
+  if (!raw || typeof raw !== "object") return {};
+  return raw as Record<string, PlacardFlags>;
+}
+
+function flagsMeaningful(f: Record<string, PlacardFlags>): boolean {
+  return Object.keys(f).length > 0;
 }
 
 export function ChairDigitalRoomClient({
@@ -46,27 +60,29 @@ export function ChairDigitalRoomClient({
   allocations: DigitalRoomAllocation[];
   rollAttendanceByAllocationId: Record<string, RollAttendance>;
 }) {
+  const supabase = useMemo(() => createClient(), []);
   const [query, setQuery] = useState("");
-  const [flagsByAlloc, setFlagsByAlloc] = useState<Record<string, PlacardFlags>>({});
-  const [ready, setReady] = useState(false);
-  const [expandedReminderId, setExpandedReminderId] = useState<string | null>(null);
-
-  useEffect(() => {
-    setFlagsByAlloc(loadFlags(conferenceId));
-    setReady(true);
-  }, [conferenceId]);
-
-  const persist = useCallback(
-    (next: Record<string, PlacardFlags>) => {
-      setFlagsByAlloc(next);
-      try {
-        localStorage.setItem(storageKey(conferenceId), JSON.stringify(next));
-      } catch {
-        /* ignore */
-      }
-    },
+  const loadLegacy = useCallback(
+    () => (typeof window !== "undefined" ? loadLegacyFlags(conferenceId) : null),
     [conferenceId]
   );
+  const {
+    value: flagsByAlloc,
+    setValue: persist,
+    ready,
+  } = useCommitteeSyncedState({
+    conferenceId,
+    stateKey: COMMITTEE_SYNCED_STATE_KEYS.DIGITAL_ROOM_FLAGS,
+    defaultValue: {},
+    parsePayload: parseFlagsPayload,
+    toPayload: (x) => x,
+    hasMeaningfulData: flagsMeaningful,
+    loadLegacy,
+    debounceMs: 500,
+  });
+  const [expandedReminderId, setExpandedReminderId] = useState<string | null>(null);
+  const [speakerPlacardMsg, setSpeakerPlacardMsg] = useState<string | null>(null);
+  const [addingSpeakerId, setAddingSpeakerId] = useState<string | null>(null);
 
   const toggle = useCallback(
     (allocationId: string, key: "compliment" | "concern") => {
@@ -82,7 +98,12 @@ export function ChairDigitalRoomClient({
   );
 
   const clearAllFlags = useCallback(() => {
-    if (!window.confirm("Clear compliment, concern, and reminder notes for every placard on this device?")) return;
+    if (
+      !window.confirm(
+        "Clear compliment, concern, and reminder notes for every placard? This updates the shared committee copy."
+      )
+    )
+      return;
     persist({});
   }, [persist]);
 
@@ -96,6 +117,39 @@ export function ChairDigitalRoomClient({
     if (!q) return sorted;
     return sorted.filter((a) => (a.country || "").toLowerCase().includes(q));
   }, [sorted, query]);
+
+  const speakerAllocOptions = useMemo(
+    () => sorted.map((a) => ({ id: a.id, country: a.country || "—" })),
+    [sorted]
+  );
+
+  useEffect(() => {
+    if (!speakerPlacardMsg) return;
+    const t = window.setTimeout(() => setSpeakerPlacardMsg(null), 5000);
+    return () => window.clearTimeout(t);
+  }, [speakerPlacardMsg]);
+
+  const addPlacardToSpeakerList = useCallback(
+    async (allocationId: string, country: string) => {
+      setAddingSpeakerId(allocationId);
+      try {
+        const rows = await fetchSpeakerQueue(supabase, conferenceId);
+        const result = await addAllocationToSpeakerQueue(
+          supabase,
+          conferenceId,
+          allocationId,
+          country,
+          rows
+        );
+        setSpeakerPlacardMsg(
+          result.ok ? `${country} added to speaker list.` : result.message
+        );
+      } finally {
+        setAddingSpeakerId(null);
+      }
+    },
+    [supabase, conferenceId]
+  );
 
   const flaggedCount = useMemo(() => {
     let n = 0;
@@ -113,7 +167,7 @@ export function ChairDigitalRoomClient({
           <span className="font-semibold text-slate-900 dark:text-zinc-50">{committeeLine}</span>
           <span className="text-slate-500 dark:text-zinc-400">
             {" "}
-            — click a placard to mark a compliment or concern for your own reference. Stored on this device only.
+            — chair notes sync for this committee (all chair accounts and devices).
           </span>
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -138,6 +192,19 @@ export function ChairDigitalRoomClient({
             Clear all chair notes
           </button>
         </div>
+      </div>
+
+      <div className="space-y-3">
+        {speakerPlacardMsg ? (
+          <p className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 dark:border-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-200">
+            {speakerPlacardMsg}
+          </p>
+        ) : null}
+        <ChairSpeakerQueuePanel
+          conferenceId={conferenceId}
+          allocations={speakerAllocOptions}
+          variant="digital-room"
+        />
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -246,6 +313,15 @@ export function ChairDigitalRoomClient({
                     </button>
                     <button
                       type="button"
+                      disabled={addingSpeakerId === a.id}
+                      onClick={() => void addPlacardToSpeakerList(a.id, a.country || "—")}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                    >
+                      <Mic2 className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                      {addingSpeakerId === a.id ? "Adding…" : "Add to speaker list"}
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => setExpandedReminderId((id) => (id === a.id ? null : a.id))}
                       className={cn(
                         "rounded-lg border px-3 py-2 text-sm font-medium transition",
@@ -265,7 +341,7 @@ export function ChairDigitalRoomClient({
                 ) : null}
                 {expandedReminderId === a.id ? (
                   <label className="mt-2 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-                    Private reminder (chair only, this device)
+                    Private reminder (chairs only, synced)
                     <textarea
                       value={f.reminder ?? ""}
                       onChange={(e) => {

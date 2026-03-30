@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { DelegateCountdownCard } from "@/components/delegate/DelegateCountdownCard";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 
 export default async function DelegateDashboardPage() {
   const supabase = await createClient();
@@ -19,10 +20,11 @@ export default async function DelegateDashboardPage() {
     .eq("id", conferenceId)
     .maybeSingle();
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
+  const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string; emoji: string }[] = [
     { href: "/stances", label: "Country & stance", hint: "Your position and prep", emoji: "🌍" },
-    { href: "/delegate#countdown", label: "Countdown", hint: "Conference & paper deadlines (this device)", emoji: "⏱️" },
+    { href: "/delegate#countdown", label: "Countdown", hint: "Committee-wide deadlines", emoji: "⏱️" },
     { href: "/committee-room", label: "Committee matrix", hint: "Seats and committee room", emoji: "📊" },
     { href: "/speeches", label: "Prep & speeches", hint: "Speech drafts and floor prep", emoji: "📝" },
     { href: "/sources", label: "Trusted sources", hint: "Research links and nation sources", emoji: "🔗" },
@@ -31,7 +33,12 @@ export default async function DelegateDashboardPage() {
     { href: "/official-links", label: "Official UN links", hint: "Documents, bodies, programmes", emoji: "🌐" },
     { href: "/voting", label: "Voting", hint: "When your chair opens a vote", emoji: "🗳️" },
     { href: "/documents", label: "Archive", hint: "Your documents", emoji: "📁" },
-    { href: "/report", label: "Crisis / report", hint: "Raise an issue", emoji: "⚠️" },
+    ...(crisisReportingEnabled
+      ? ([
+          { href: "/crisis-slides", label: "Crisis slides", hint: "Live deck in the app", emoji: "🖼️" },
+          { href: "/report", label: "Crisis / report", hint: "Raise an issue", emoji: "⚠️" },
+        ] as const)
+      : []),
   ];
 
   return (
@@ -43,8 +50,8 @@ export default async function DelegateDashboardPage() {
           </p>
           <p className="text-sm text-slate-600 dark:text-zinc-400">
             Active committee: <span className="font-semibold text-slate-900 dark:text-zinc-100">{line}</span>.
-            Conference dates below are stored in this browser only. Everything else follows your InterMUN account
-            and committee assignment.
+            Countdown dates are shared with everyone in this committee. Your prep, stances, and documents stay with
+            your account.
           </p>
         </header>
 

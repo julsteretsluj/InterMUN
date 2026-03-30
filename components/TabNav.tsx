@@ -15,6 +15,7 @@ import {
   Mic,
   ClipboardList,
   Flag,
+  Presentation,
   Landmark,
   ListOrdered,
   DoorOpen,
@@ -43,13 +44,19 @@ const BASE_TABS = [
   { href: "/speeches", label: "Speeches", icon: Mic },
   { href: "/running-notes", label: "Running", icon: ClipboardList },
   { href: "/report", label: "Report", icon: Flag },
+  { href: "/crisis-slides", label: "Crisis slides", icon: Presentation },
 ] as const;
 
-function useNavTabs(staffRole: UserRole | null | undefined) {
+const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
+
+function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabled: boolean) {
   const role = staffRole ?? null;
+  const baseTabs = crisisReportingEnabled
+    ? [...BASE_TABS]
+    : BASE_TABS.filter((t) => !CRISIS_ONLY_HREFS.has(t.href));
   return role === "chair" || role === "smt" || role === "admin"
     ? [
-        ...BASE_TABS.slice(0, 3),
+        ...baseTabs.slice(0, 3),
         { href: "/chair/room-code", label: "Committee code", icon: DoorOpen },
         ...(role === "chair"
           ? ([{ href: "/chair/session", label: "Session", icon: PanelsTopLeft }] as const)
@@ -57,9 +64,9 @@ function useNavTabs(staffRole: UserRole | null | undefined) {
         { href: "/chair/allocation-passwords", label: "Passwords", icon: ListOrdered },
         { href: "/chair/allocation-matrix", label: "Matrix", icon: ListOrdered },
         { href: "/chair/awards", label: "Awards", icon: Trophy },
-        ...BASE_TABS.slice(3),
+        ...baseTabs.slice(3),
       ]
-    : [...BASE_TABS];
+    : [...baseTabs];
 }
 
 function aspireSections(tabs: readonly { href: string; label: string; icon: LucideIcon }[]) {
@@ -85,20 +92,20 @@ function AspireSidebarLink({
     <Link
       href={tab.href}
       className={cn(
-        "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
+        "flex items-center gap-0 group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
         isActive
-          ? "bg-violet-100 font-semibold text-violet-900 dark:bg-violet-950/55 dark:text-violet-100"
+          ? "bg-blue-100 font-semibold text-blue-900 dark:bg-blue-950/55 dark:text-blue-100"
           : "font-medium text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
       )}
     >
       <Icon
         className={cn(
           "h-5 w-5 shrink-0",
-          isActive ? "text-violet-600 dark:text-violet-300" : "text-slate-400 dark:text-zinc-500"
+          isActive ? "text-blue-600 dark:text-blue-300" : "text-slate-400 dark:text-zinc-500"
         )}
         strokeWidth={1.75}
       />
-      <span className="truncate">{tab.label}</span>
+      <span className="hidden truncate group-hover:block">{tab.label}</span>
     </Link>
   );
 }
@@ -121,8 +128,8 @@ function DockLink({
         className={cn(
           "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
           isActive
-            ? "scale-[1.02] border-violet-300/80 bg-violet-100 text-violet-800 shadow-violet-500/10 dark:border-violet-500/40 dark:bg-violet-950/70 dark:text-violet-200"
-            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-violet-200 group-hover:bg-slate-50 group-hover:text-violet-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-violet-500/30 dark:group-hover:bg-zinc-800"
+            ? "scale-[1.02] border-blue-300/80 bg-blue-100 text-blue-800 shadow-blue-500/10 dark:border-blue-500/40 dark:bg-blue-950/70 dark:text-blue-200"
+            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-blue-200 group-hover:bg-slate-50 group-hover:text-blue-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-blue-500/30 dark:group-hover:bg-zinc-800"
         )}
       >
         <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
@@ -130,7 +137,7 @@ function DockLink({
       <span
         className={cn(
           "max-w-[4.25rem] text-center text-[0.625rem] font-medium leading-tight",
-          isActive ? "text-violet-800 dark:text-violet-200" : "text-slate-600 dark:text-zinc-400"
+          isActive ? "text-blue-800 dark:text-blue-200" : "text-slate-600 dark:text-zinc-400"
         )}
       >
         {tab.label}
@@ -142,12 +149,15 @@ function DockLink({
 export function TabNav({
   staffRole = null,
   variant,
+  crisisReportingEnabled = true,
 }: {
   staffRole?: UserRole | null;
   variant: "aspire-sidebar" | "dock";
+  /** When false, hide `/report` and `/crisis-slides` (crisis committees: FWC, UNSC, HSC). */
+  crisisReportingEnabled?: boolean;
 }) {
   const pathname = usePathname();
-  const tabs = useNavTabs(staffRole);
+  const tabs = useNavTabs(staffRole, crisisReportingEnabled);
 
   if (variant === "aspire-sidebar") {
     const sections = aspireSections(tabs);

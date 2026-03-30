@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { setActiveEventId } from "@/lib/active-event-cookie";
 import { clearActiveConference } from "@/lib/active-conference-cookie";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
+import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { normalizeEventCode } from "@/lib/join-codes";
 import { findEventIdByEventCode } from "@/lib/gate-code-lookup";
 
@@ -37,5 +38,6 @@ export async function joinEventByCode(
   await setActiveEventId(eventId);
   await clearActiveConference();
   await clearVerifiedConference();
+  await clearAllocationCodeVerification();
   redirect(nextPath.startsWith("/") ? nextPath : "/room-gate");
 }

@@ -6,6 +6,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
 import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 
 export default async function ProfilePage() {
@@ -60,6 +61,7 @@ export default async function ProfilePage() {
   const isDelegate = roleLower === "delegate";
   const canViewPrivate = !isDelegate;
   const activeConference = await getConferenceForDashboard({ role: roleLower });
+  const crisisReportingEnabled = isCrisisCommittee(activeConference?.committee ?? null);
 
   const { data: allocationRows } = activeConference?.id
     ? await supabase
@@ -96,7 +98,12 @@ export default async function ProfilePage() {
             { href: "/resolutions", label: "Resolutions" },
             { href: "/speeches", label: "Speeches" },
             { href: "/stances", label: "Stances" },
-            { href: "/report", label: "Report" },
+            ...(crisisReportingEnabled
+              ? ([
+                  { href: "/crisis-slides", label: "Crisis slides" },
+                  { href: "/report", label: "Report" },
+                ] as const)
+              : []),
             { href: "/voting", label: "Motions" },
             { href: "/voting", label: "Points" },
           ].map((item) => (

@@ -2,43 +2,26 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { AWARD_CATEGORIES, type AwardScope } from "@/lib/awards";
+import {
+  BAND_STORED_SCORE,
+  RUBRIC_KEYS_BY_NOMINATION,
+  parseBandId,
+  type NominationRubricType,
+} from "@/lib/seamuns-award-scoring";
 import { revalidatePath } from "next/cache";
 
-type NominationType =
-  | "committee_best_delegate"
-  | "committee_best_position_paper"
-  | "conference_best_delegate";
-
-const RUBRIC_KEYS: Record<NominationType, string[]> = {
-  committee_best_delegate: [
-    "creativity",
-    "diplomacy",
-    "collaboration",
-    "leadership",
-    "knowledge_research",
-    "participation",
-  ],
-  conference_best_delegate: [
-    "creativity",
-    "diplomacy",
-    "collaboration",
-    "leadership",
-    "knowledge_research",
-    "participation",
-  ],
-  committee_best_position_paper: [
-    "research_depth",
-    "country_stance_alignment",
-    "policy_accuracy",
-    "proposed_solutions",
-    "formatting_style_citations",
-  ],
-};
+type NominationType = NominationRubricType;
 
 function parseRubricScores(formData: FormData, nominationType: NominationType) {
-  const keys = RUBRIC_KEYS[nominationType];
+  const keys = RUBRIC_KEYS_BY_NOMINATION[nominationType];
   const out: Record<string, number> = {};
   for (const key of keys) {
+    const bandRaw = String(formData.get(`band_${key}`) ?? "").trim();
+    const band = parseBandId(bandRaw);
+    if (band) {
+      out[key] = BAND_STORED_SCORE[band];
+      continue;
+    }
     const raw = String(formData.get(`score_${key}`) ?? "").trim();
     const n = Number(raw);
     if (!Number.isInteger(n) || n < 1 || n > 8) {

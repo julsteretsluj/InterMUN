@@ -1,43 +1,67 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import {
   CHAIR_FLOW_ITEMS,
   CHAIR_PREP_SECTIONS,
   type ChairPrepSection,
 } from "@/lib/chair-dashboard-checklists";
+import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
+import { useCommitteeSyncedState } from "@/lib/hooks/useCommitteeSyncedState";
 
-function parseSet(raw: string | null): Set<string> {
-  if (!raw) return new Set();
+function parseChecklistPayload(raw: unknown): Set<string> {
+  if (!raw || typeof raw !== "object") return new Set();
+  const ids = (raw as { checkedIds?: unknown }).checkedIds;
+  if (!Array.isArray(ids)) return new Set();
+  return new Set(ids.filter((x): x is string => typeof x === "string"));
+}
+
+function parseLegacyChecklistArray(raw: string | null): Set<string> | null {
+  if (!raw) return null;
   try {
     const arr = JSON.parse(raw) as unknown;
-    if (!Array.isArray(arr)) return new Set();
+    if (!Array.isArray(arr)) return null;
     return new Set(arr.filter((x): x is string => typeof x === "string"));
   } catch {
-    return new Set();
+    return null;
   }
 }
 
-function useChecklistPersistence(storageKey: string) {
-  const [checked, setChecked] = useState<Set<string>>(new Set());
-  const [ready, setReady] = useState(false);
+const surfaceCard =
+  "rounded-xl border border-slate-200/90 bg-white p-4 text-slate-800 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100";
 
-  useEffect(() => {
-    setChecked(parseSet(typeof window !== "undefined" ? localStorage.getItem(storageKey) : null));
-    setReady(true);
-  }, [storageKey]);
-
-  const persist = useCallback(
-    (next: Set<string>) => {
-      setChecked(next);
-      try {
-        localStorage.setItem(storageKey, JSON.stringify([...next]));
-      } catch {
-        /* ignore quota */
-      }
-    },
-    [storageKey]
+export function ChairPrepChecklistClient({
+  conferenceId,
+  crisisPrepEnabled,
+}: {
+  conferenceId: string;
+  /** FWC / UNSC / HSC only — hides the “Crisis (if applicable)” prep block. */
+  crisisPrepEnabled: boolean;
+}) {
+  const legacyKey = useMemo(() => `intermun.chair.prep.${conferenceId}.v1`, [conferenceId]);
+  const loadLegacy = useCallback(
+    () => parseLegacyChecklistArray(typeof window !== "undefined" ? localStorage.getItem(legacyKey) : null),
+    [legacyKey]
   );
+
+  const { value: checked, setValue: persist, ready } = useCommitteeSyncedState({
+    conferenceId,
+    stateKey: COMMITTEE_SYNCED_STATE_KEYS.CHAIR_PREP_CHECKLIST,
+    defaultValue: new Set<string>(),
+    parsePayload: parseChecklistPayload,
+    toPayload: (s) => ({ checkedIds: [...s] }),
+    hasMeaningfulData: (s) => s.size > 0,
+    loadLegacy,
+  });
+
+  const prepSections = useMemo(
+    () =>
+      crisisPrepEnabled ? CHAIR_PREP_SECTIONS : CHAIR_PREP_SECTIONS.filter((s) => s.id !== "crisis"),
+    [crisisPrepEnabled]
+  );
+
+  const allIds = useMemo(() => prepSections.flatMap((s) => s.items.map((i) => i.id)), [prepSections]);
+  const done = useMemo(() => allIds.filter((id) => checked.has(id)).length, [allIds, checked]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -53,29 +77,13 @@ function useChecklistPersistence(storageKey: string) {
     persist(new Set());
   }, [persist]);
 
-  return { checked, toggle, reset, ready };
-}
-
-const surfaceCard =
-  "rounded-xl border border-slate-200/90 bg-white p-4 text-slate-800 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100";
-
-export function ChairPrepChecklistClient({ conferenceId }: { conferenceId: string }) {
-  const storageKey = useMemo(() => `intermun.chair.prep.${conferenceId}.v1`, [conferenceId]);
-  const { checked, toggle, reset, ready } = useChecklistPersistence(storageKey);
-
-  const allIds = useMemo(
-    () => CHAIR_PREP_SECTIONS.flatMap((s) => s.items.map((i) => i.id)),
-    []
-  );
-  const done = useMemo(() => allIds.filter((id) => checked.has(id)).length, [allIds, checked]);
-
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           {ready ? (
             <>
-              {done} / {allIds.length} complete
+              {done} / {allIds.length} complete · synced for this committee
             </>
           ) : (
             "Loading…"
@@ -91,7 +99,7 @@ export function ChairPrepChecklistClient({ conferenceId }: { conferenceId: strin
       </div>
 
       <div className="space-y-6">
-        {CHAIR_PREP_SECTIONS.map((section) => (
+        {prepSections.map((section) => (
           <PrepSectionBlock key={section.id} section={section} checked={checked} onToggle={toggle} />
         ))}
       </div>
@@ -133,11 +141,38 @@ function PrepSectionBlock({
 }
 
 export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: string }) {
-  const storageKey = useMemo(() => `intermun.chair.flow.${conferenceId}.v1`, [conferenceId]);
-  const { checked, toggle, reset, ready } = useChecklistPersistence(storageKey);
+  const legacyKey = useMemo(() => `intermun.chair.flow.${conferenceId}.v1`, [conferenceId]);
+  const loadLegacy = useCallback(
+    () => parseLegacyChecklistArray(typeof window !== "undefined" ? localStorage.getItem(legacyKey) : null),
+    [legacyKey]
+  );
+
+  const { value: checked, setValue: persist, ready } = useCommitteeSyncedState({
+    conferenceId,
+    stateKey: COMMITTEE_SYNCED_STATE_KEYS.CHAIR_FLOW_CHECKLIST,
+    defaultValue: new Set<string>(),
+    parsePayload: parseChecklistPayload,
+    toPayload: (s) => ({ checkedIds: [...s] }),
+    hasMeaningfulData: (s) => s.size > 0,
+    loadLegacy,
+  });
 
   const allIds = CHAIR_FLOW_ITEMS.map((i) => i.id);
   const done = useMemo(() => allIds.filter((id) => checked.has(id)).length, [allIds, checked]);
+
+  const toggle = useCallback(
+    (id: string) => {
+      const next = new Set(checked);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      persist(next);
+    },
+    [checked, persist]
+  );
+
+  const reset = useCallback(() => {
+    persist(new Set());
+  }, [persist]);
 
   return (
     <div className="space-y-4">
@@ -145,7 +180,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           {ready ? (
             <>
-              {done} / {allIds.length} complete
+              {done} / {allIds.length} complete · synced for this committee
             </>
           ) : (
             "Loading…"

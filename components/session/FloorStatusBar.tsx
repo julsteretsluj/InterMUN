@@ -245,7 +245,7 @@ export function FloorStatusBar({
         <div className={`flex gap-2 items-start pt-1 border-t ${border}`}>
           <ListOrdered className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
           <div className="min-w-0 flex-1">
-            <span className={`${muted} block mb-0.5`}>Speakers</span>
+            <span className={`${muted} block mb-0.5`}>Speaker list</span>
             <ul className={`flex flex-wrap gap-x-3 gap-y-0.5 text-xs ${qText}`}>
               {displayQueue.map((q) => (
                 <li key={q.id} className="font-medium">

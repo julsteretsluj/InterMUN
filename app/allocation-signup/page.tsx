@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
+import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { createAllocationSignupRequestAction } from "@/app/actions/allocationSignup";
 
 type Params = {
@@ -95,6 +96,7 @@ export default async function AllocationSignupPage({
   if (targetAllocation.user_id === user.id) {
     await setActiveConferenceContext(supabase, conferenceId);
     await clearVerifiedConference();
+    await clearAllocationCodeVerification();
     redirect(
       `/committee-gate?next=${encodeURIComponent(nextPath)}&allocation=${encodeURIComponent(targetAllocation.country)}`
     );

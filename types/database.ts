@@ -29,6 +29,10 @@ export interface Conference {
   committee_code?: string | null;
   committee_logo_url?: string | null;
   committee_password_hash?: string | null;
+  /** Google Slides URL for crisis committees (in-app embed). */
+  crisis_slides_url?: string | null;
+  /** Third gate: require per-seat placard code from allocation_gate_codes. */
+  allocation_code_gate_enabled?: boolean;
   created_at: string;
 }
 

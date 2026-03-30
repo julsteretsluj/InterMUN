@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Clock, Gavel } from "lucide-react";
-import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
 import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
 
 type VoteMotionRow = {
@@ -123,8 +123,8 @@ export function ActiveMotionContextStrip({
         </div>
       </div>
 
-      <div className={divider}>
-        {timer ? (
+      {timer && shouldShowLiveFloorTimerUI(timer, isRunning) ? (
+        <div className={divider}>
           <div className="flex flex-wrap items-center gap-4">
             <Clock className={clockCls} />
             <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
@@ -143,7 +143,9 @@ export function ActiveMotionContextStrip({
                 <p className="font-medium">{timer.next_speaker || "—"}</p>
               </div>
               <div>
-                <span className={timerLabel}>{perSpeakerMode ? "Speaker time left" : "Time left"}</span>
+                <span className={timerLabel}>
+                  {perSpeakerMode ? "Speaker time (left / cap)" : "Speaker time (left / total)"}
+                </span>
                 <p className="font-mono font-medium tabular-nums">
                   {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
                   {(total % 60).toString().padStart(2, "0")}
@@ -166,10 +168,8 @@ export function ActiveMotionContextStrip({
               </div>
             </div>
           </div>
-        ) : isLight ? (
-          <p className="text-xs text-brand-muted italic">No timer row yet for this committee.</p>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 }

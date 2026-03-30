@@ -4,6 +4,7 @@ import { MessageCircle, Flag, ChevronLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -59,6 +60,7 @@ export default async function CommitteeRoomPersonPage({
   const payload = await loadCommitteeRoomPayload(supabase, conferenceId, {
     includeDelegatesForStaff: false,
   });
+  const crisisReportingEnabled = isCrisisCommittee(payload.conference?.committee ?? null);
 
   const allowed = new Set<string>();
   for (const p of payload.placards) {
@@ -116,13 +118,15 @@ export default async function CommitteeRoomPersonPage({
             <MessageCircle className="size-4 shrink-0" strokeWidth={2} />
             Chat
           </Link>
-          <Link
-            href={`/report?about=${encodeURIComponent(profileId)}&aboutName=${reportAboutName}`}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-rose-400/30 bg-gradient-to-br from-rose-500/20 to-rose-600/5 px-4 py-2 text-sm font-semibold text-brand-navy shadow-sm hover:border-rose-400/50"
-          >
-            <Flag className="size-4 shrink-0" strokeWidth={2} />
-            Report
-          </Link>
+          {crisisReportingEnabled ? (
+            <Link
+              href={`/report?about=${encodeURIComponent(profileId)}&aboutName=${reportAboutName}`}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-rose-400/30 bg-gradient-to-br from-rose-500/20 to-rose-600/5 px-4 py-2 text-sm font-semibold text-brand-navy shadow-sm hover:border-rose-400/50"
+            >
+              <Flag className="size-4 shrink-0" strokeWidth={2} />
+              Report
+            </Link>
+          ) : null}
         </div>
       </div>
 
@@ -157,7 +161,9 @@ export default async function CommitteeRoomPersonPage({
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted text-center">
               Profile &amp; actions
             </p>
-            <div className="grid grid-cols-2 gap-2">
+            <div
+              className={crisisReportingEnabled ? "grid grid-cols-2 gap-2" : "grid grid-cols-1 gap-2"}
+            >
               <Link
                 href={`/chats-notes?forProfile=${encodeURIComponent(profileId)}`}
                 className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-black/20 py-3 text-xs font-semibold text-brand-navy hover:border-emerald-400/30 transition-colors"
@@ -165,13 +171,15 @@ export default async function CommitteeRoomPersonPage({
                 <MessageCircle className="size-5 text-emerald-400/90" strokeWidth={1.75} />
                 Messages
               </Link>
-              <Link
-                href={`/report?about=${encodeURIComponent(profileId)}&aboutName=${reportAboutName}`}
-                className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-black/20 py-3 text-xs font-semibold text-brand-navy hover:border-rose-400/35 transition-colors"
-              >
-                <Flag className="size-5 text-rose-400/90" strokeWidth={1.75} />
-                Report
-              </Link>
+              {crisisReportingEnabled ? (
+                <Link
+                  href={`/report?about=${encodeURIComponent(profileId)}&aboutName=${reportAboutName}`}
+                  className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-black/20 py-3 text-xs font-semibold text-brand-navy hover:border-rose-400/35 transition-colors"
+                >
+                  <Flag className="size-5 text-rose-400/90" strokeWidth={1.75} />
+                  Report
+                </Link>
+              ) : null}
             </div>
           </div>
         </aside>

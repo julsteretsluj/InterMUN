@@ -24,12 +24,8 @@ export default async function ChairMotionsPointsPage() {
   const conferenceId = await requireActiveConferenceId();
 
   return (
-    <MunPageShell title="Motions & points">
+    <MunPageShell title="📜 Motions & Points">
       <div className="space-y-2">
-        <p className="text-sm text-slate-600 dark:text-zinc-400">
-          Record and star informal motions and points. Start a formal vote from{" "}
-          <span className="font-medium text-slate-800 dark:text-zinc-200">Session → Motions</span>.
-        </p>
         <ChairMotionsPointsLog conferenceId={conferenceId} />
       </div>
     </MunPageShell>

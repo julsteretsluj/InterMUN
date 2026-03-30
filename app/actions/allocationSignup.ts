@@ -2,8 +2,51 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+import nodemailer from "nodemailer";
 
 type ActionState = { error?: string; success?: boolean };
+
+function normalizeEmail(raw: string | null | undefined): string {
+  return (raw ?? "").toLowerCase().trim();
+}
+
+async function sendWelcomeToInterMUNEmail(args: { to: string; allocationCountry: string }): Promise<void> {
+  // Uses SMTP settings already present for other automated emails (see `exportMaterials.ts`).
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT ?? "587");
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  const from = process.env.MATERIALS_EXPORT_FROM || process.env.SMTP_FROM || user;
+
+  if (!host || !user || !pass || !from) return;
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+  });
+
+  const subject = "Welcome to InterMUN";
+  const text = [
+    "Welcome to InterMUN.",
+    "",
+    `Your delegate account has been confirmed for: ${args.allocationCountry}.`,
+    "",
+    "You can now proceed to committee sign-in and join the live session.",
+    "",
+    "See you on the floor.",
+    "InterMUN",
+  ].join("\n");
+
+  await transporter.sendMail({
+    from,
+    to: args.to,
+    subject,
+    text,
+  });
+}
 
 async function getAuthedProfile() {
   const supabase = await createClient();
@@ -170,9 +213,44 @@ export async function approveAllocationSignupRequestAction(
     .eq("status", "pending")
     .neq("id", req.id);
 
+  // "Architects pipeline" confirmation side-effect:
+  // When Pending -> Confirmed, provision delegate role + send Welcome email.
+  // (DB concept mapping: `allocation_signup_requests.status` replaces `Pending/Confirmed`.)
+  const admin = createAdminClient();
+  if (admin) {
+    try {
+      const { data: authUser } = await admin.auth.admin.getUserById(req.requested_by);
+      const toEmail = normalizeEmail(authUser?.user?.email);
+      if (toEmail) {
+        // Provision delegate role if needed (spec calls for auto-provision).
+        const { data: targetProfile } = await admin
+          .from("profiles")
+          .select("id, role")
+          .eq("id", req.requested_by)
+          .maybeSingle();
+        const currentRole = targetProfile?.role?.toString().toLowerCase().trim() ?? "delegate";
+        if (currentRole !== "delegate") {
+          await admin.from("profiles").update({ role: "delegate", updated_at: now }).eq("id", req.requested_by);
+        }
+
+        // Spec wants a login-email == sign-up-email check. We don't store a separate signup email,
+        // so the auth email acts as both.
+        const loginEmail = toEmail;
+        const signUpEmail = toEmail;
+        if (loginEmail === signUpEmail) {
+          await sendWelcomeToInterMUNEmail({ to: toEmail, allocationCountry: target.country });
+        }
+      }
+    } catch (e) {
+      // Approval must not fail due to email provisioning.
+      console.error("Failed to send Welcome to InterMUN email:", e);
+    }
+  }
+
   revalidatePath("/chair/allocation-matrix");
   revalidatePath("/smt/allocation-matrix");
   revalidatePath("/profile");
+  revalidatePath("/admin");
 }
 
 export async function rejectAllocationSignupRequestAction(
@@ -216,6 +294,7 @@ export async function rejectAllocationSignupRequestAction(
 
   revalidatePath("/chair/allocation-matrix");
   revalidatePath("/smt/allocation-matrix");
+  revalidatePath("/admin");
 }
 
 export async function chairAssignDelegateByEmailAction(

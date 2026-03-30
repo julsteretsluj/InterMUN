@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock } from "lucide-react";
-import { useConferenceTimer } from "@/lib/use-conference-timer";
+import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
 
 type TimerTheme = "dark" | "light";
 
@@ -31,11 +31,9 @@ export function Timers({
     : "text-xs uppercase tracking-wider text-brand-navy/75 block mb-0.5";
   const clockCls = isLight ? "w-4 h-4 text-brand-gold shrink-0" : "w-5 h-5 text-brand-gold-bright shrink-0";
 
-  if (!timer) {
-    return isLight ? (
-      <p className="text-xs text-brand-muted italic px-1">No timer row yet for this committee.</p>
-    ) : null;
-  }
+  if (!timer) return null;
+
+  if (!shouldShowLiveFloorTimerUI(timer, isRunning)) return null;
 
   const floorLabel = timer.floor_label?.trim();
   const pauseReason = timer.current_pause_reason?.trim();
@@ -59,7 +57,9 @@ export function Timers({
           <p className="font-medium">{timer.next_speaker || "—"}</p>
         </div>
         <div>
-          <span className={labelCls}>{perSpeakerMode ? "Speaker time left" : "Time left"}</span>
+          <span className={labelCls}>
+            {perSpeakerMode ? "Speaker time (left / cap)" : "Speaker time (left / total)"}
+          </span>
           <p className="font-mono font-medium tabular-nums">
             {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
             {(total % 60).toString().padStart(2, "0")}

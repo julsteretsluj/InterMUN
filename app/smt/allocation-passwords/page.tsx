@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
+import { AllocationCodeGateToggle } from "@/components/allocation/AllocationCodeGateToggle";
 import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient";
 import { isSmtRole } from "@/lib/roles";
 
@@ -89,13 +90,27 @@ export default async function SmtAllocationPasswordsPage({
 
   const activeConf = list.find((c) => c.id === conferenceId);
 
+  const { data: gateConf } = await supabase
+    .from("conferences")
+    .select("allocation_code_gate_enabled")
+    .eq("id", conferenceId)
+    .maybeSingle();
+
   return (
     <MunPageShell title="Allocation passwords">
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-        Per-allocation <strong>codes</strong> for placards, binders, or handouts. Stored in plain text so
-        you can copy this list—treat it like a seating chart (do not share publicly). The shared
-        committee password for the second gate is managed from the chair dashboard (dais), not here.
+        Per-allocation <strong>codes</strong> for placards, binders, or handouts. Optional <strong>third gate</strong>
+        : when enabled, each delegate and chair must enter their seat code after committee sign-in. Stored in plain
+        text so you can copy this list—treat it like a seating chart (do not share publicly). The shared committee
+        password for the second gate is managed from the chair dashboard (dais), not here.
       </p>
+
+      <div className="mb-6 max-w-2xl">
+        <AllocationCodeGateToggle
+          conferenceId={conferenceId}
+          enabled={gateConf?.allocation_code_gate_enabled === true}
+        />
+      </div>
 
       {list.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6">

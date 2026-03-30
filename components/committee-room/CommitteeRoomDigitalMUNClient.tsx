@@ -16,6 +16,8 @@ import {
   normalizeDelegationSearchQuery,
 } from "@/lib/committee-room-delegation-search";
 import { createClient } from "@/lib/supabase/client";
+import type { RollAttendance } from "@/lib/roll-attendance";
+import { parseRollAttendance } from "@/lib/roll-attendance";
 
 function StatMiniCard({
   label,
@@ -112,6 +114,11 @@ export function CommitteeRoomDigitalMUNClient({
   const [currentVoteItemId, setCurrentVoteItemId] = useState<string | null>(null);
   const [delegationSearch, setDelegationSearch] = useState("");
   const [scrollMatchNonce, setScrollMatchNonce] = useState(0);
+  const [myRollAttendance, setMyRollAttendance] = useState<RollAttendance | null>(null);
+  const [myRollApprovalLoaded, setMyRollApprovalLoaded] = useState(false);
+
+  const delegateFloorUnlocked =
+    isDelegate && (myRollAttendance === "present_abstain" || myRollAttendance === "present_voting");
 
   useEffect(() => {
     let isActive = true;
@@ -156,6 +163,55 @@ export function CommitteeRoomDigitalMUNClient({
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId]);
+
+  useEffect(() => {
+    if (!isDelegate) return;
+    if (!myAllocationId) return;
+
+    let active = true;
+
+    async function load() {
+      setMyRollApprovalLoaded(false);
+      const { data } = await supabase
+        .from("roll_call_entries")
+        .select("attendance")
+        .eq("conference_id", conferenceId)
+        .eq("allocation_id", myAllocationId)
+        .maybeSingle();
+
+      if (!active) return;
+      const attRaw = (data as { attendance?: string | null } | null)?.attendance ?? null;
+      const parsed = parseRollAttendance(attRaw);
+      // If no row exists yet, chairs haven't initialized roll call: keep the delegate locked.
+      if (!parsed) {
+        setMyRollAttendance(null);
+      } else {
+        setMyRollAttendance(parsed);
+      }
+      setMyRollApprovalLoaded(true);
+    }
+
+    void load();
+
+    const ch = supabase
+      .channel(`roll-approval-${conferenceId}-${myAllocationId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "roll_call_entries",
+          filter: `conference_id=eq.${conferenceId} and allocation_id=eq.${myAllocationId}`,
+        },
+        () => void load()
+      )
+      .subscribe();
+
+    return () => {
+      active = false;
+      void supabase.removeChannel(ch);
+    };
+  }, [supabase, conferenceId, isDelegate, myAllocationId]);
 
   const votingProcedureActive = procedureState === "voting_procedure";
 
@@ -332,15 +388,38 @@ export function CommitteeRoomDigitalMUNClient({
                 />
                 {isDelegate ? (
                   <>
-                    {procedureState === "voting_procedure" ? (
-                      <MotionVotingClient voteItemId={currentVoteItemId ?? null} />
+                    {!delegateFloorUnlocked ? (
+                      <div className="rounded-lg border border-white/10 bg-black/20 p-3">
+                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
+                          Chair approval required
+                        </p>
+                        <p className="mt-1 text-sm text-brand-navy/90">
+                          {myRollApprovalLoaded ? (
+                            myRollAttendance === null ? (
+                              "Waiting for the chair to initialize roll call."
+                            ) : (
+                              "You’re currently marked absent. Ask the chair to mark you Present to speak and vote."
+                            )
+                          ) : (
+                            "Checking your roll status..."
+                          )}
+                        </p>
+                      </div>
                     ) : null}
-                    <RequestToSpeakClient
-                      conferenceId={conferenceId}
-                      allocationId={myAllocationId}
-                      allocationCountry={myAllocationCountry}
-                      disabled={procedureState === "voting_procedure"}
-                    />
+
+                    {delegateFloorUnlocked ? (
+                      <>
+                        {procedureState === "voting_procedure" ? (
+                          <MotionVotingClient voteItemId={currentVoteItemId ?? null} />
+                        ) : null}
+                        <RequestToSpeakClient
+                          conferenceId={conferenceId}
+                          allocationId={myAllocationId}
+                          allocationCountry={myAllocationCountry}
+                          disabled={procedureState === "voting_procedure"}
+                        />
+                      </>
+                    ) : null}
                   </>
                 ) : null}
               </div>
@@ -351,19 +430,34 @@ export function CommitteeRoomDigitalMUNClient({
               <Users className="size-4 text-brand-gold-bright" />
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Notes</p>
             </div>
-            <DelegationNotesView
-              conferenceId={conferenceId}
-              initialNotes={[]}
-              myUserId={myUserId}
-              myRole={myRole}
-              smtVerified={smtVerified}
-              myAllocationId={myAllocationId}
-              myProfileName={myProfileName}
-              allocationOptions={allocationOptions}
-              chairOptions={chairOptions}
-              nextPathAfterVerification="/committee-room"
-              votingProcedureLocked={votingProcedureActive && isDelegate}
-            />
+            {isDelegate && !delegateFloorUnlocked ? (
+              <div className="rounded-lg border border-white/10 bg-black/20 p-3">
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
+                  Chair approval required
+                </p>
+                <p className="mt-1 text-sm text-brand-navy/90">
+                  {myRollApprovalLoaded
+                    ? myRollAttendance === null
+                      ? "Waiting for the chair to initialize roll call."
+                      : "Ask the chair to mark you Present before you can use committee notes."
+                    : "Checking your roll status..."}
+                </p>
+              </div>
+            ) : (
+              <DelegationNotesView
+                conferenceId={conferenceId}
+                initialNotes={[]}
+                myUserId={myUserId}
+                myRole={myRole}
+                smtVerified={smtVerified}
+                myAllocationId={myAllocationId}
+                myProfileName={myProfileName}
+                allocationOptions={allocationOptions}
+                chairOptions={chairOptions}
+                nextPathAfterVerification="/committee-room"
+                votingProcedureLocked={votingProcedureActive && isDelegate}
+              />
+            )}
           </div>
         </aside>
       </div>
