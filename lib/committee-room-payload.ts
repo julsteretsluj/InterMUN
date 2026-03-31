@@ -110,7 +110,14 @@ function placardsFromAllocationRows(
     profiles: ProfileEmbed | ProfileEmbed[] | null;
   }[]
 ): DelegatePlacard[] {
-  return allocationRows.map((row) => {
+  const isDaisSeatLabel = (raw: string | null | undefined) => {
+    const label = String(raw ?? "").trim().toLowerCase();
+    return label === "head chair" || label === "co-chair" || label === "co chair" || label === "rapporteur";
+  };
+
+  return allocationRows
+    .filter((row) => !isDaisSeatLabel(row.country))
+    .map((row) => {
     const p = embedProfile(row.profiles);
     const vacant = !row.user_id;
     const nameOverride = String(row.display_name_override ?? "").trim();
@@ -125,7 +132,7 @@ function placardsFromAllocationRows(
       pronouns: vacant ? null : pronounsOverride ? pronounsOverride : p?.pronouns?.trim() || null,
       vacant,
     };
-  });
+    });
 }
 
 /**

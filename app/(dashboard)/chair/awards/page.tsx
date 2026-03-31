@@ -281,11 +281,11 @@ export default async function ChairAwardsPage() {
                       <select
                         name="nominee_profile_id"
                         defaultValue={selectedId}
-                        required
+                        required={slot.required}
                         className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy"
                       >
-                        <option value="" disabled>
-                          Select delegate
+                        <option value="">
+                          {slot.required ? "Select delegate" : "Leave blank for no submission"}
                         </option>
                         {options.map((o) => (
                           <option key={`${type.id}-${rank}-${o.userId}`} value={o.userId}>
@@ -327,7 +327,7 @@ export default async function ChairAwardsPage() {
                                     type="radio"
                                     name={`band_${criterion.key}`}
                                     value={bandId}
-                                    required
+                                    required={slot.required}
                                     defaultChecked={defaultBand === bandId}
                                     className="mt-1 shrink-0"
                                   />
@@ -367,7 +367,7 @@ export default async function ChairAwardsPage() {
                       type="submit"
                       className="px-4 py-2 rounded-lg bg-brand-gold text-white font-semibold"
                     >
-                      Save {type.label} top {rank}
+                      {slot.required ? `Save ${type.label} top ${rank}` : `Save optional ${type.label} slot`}
                     </button>
                   </form>
                 );

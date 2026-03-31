@@ -160,7 +160,7 @@ export async function submitChairTopNominationAction(
     nominationType === "committee_honourable_mention" ||
     nominationType === "committee_best_position_paper" ||
     nominationType === "conference_best_delegate";
-  if (!committeeId || !nomineeId || !rank || !validNominationType) return;
+  if (!committeeId || !rank || !validNominationType) return;
   if (nominationType === "conference_best_delegate" && rank !== 1) return;
   if (
     (nominationType === "committee_best_delegate" || nominationType === "committee_best_position_paper") &&
@@ -169,6 +169,22 @@ export async function submitChairTopNominationAction(
     return;
   }
   if (nominationType === "committee_honourable_mention" && (rank < 1 || rank > 3)) return;
+
+  if (!nomineeId) {
+    if (nominationType === "committee_honourable_mention") {
+      await auth.supabase
+        .from("award_nominations")
+        .delete()
+        .eq("committee_conference_id", committeeId)
+        .eq("nomination_type", nominationType)
+        .eq("rank", rank)
+        .eq("status", "pending");
+      revalidatePath("/chair/awards");
+      revalidatePath("/smt/awards");
+    }
+    return;
+  }
+
   const rubricScores = parseRubricScores(formData, nominationType as NominationType);
   if (!rubricScores) return;
 

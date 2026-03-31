@@ -121,7 +121,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
-      <aside className="group sticky top-0 z-30 hidden h-screen w-[70px] hover:w-[220px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
+      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
           className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"

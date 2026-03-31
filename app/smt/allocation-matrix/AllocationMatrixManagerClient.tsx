@@ -217,6 +217,11 @@ export function AllocationMatrixManagerClient({
   const heading = confLabel
     ? [confLabel.name, confLabel.committee].filter(Boolean).join(" — ")
     : "Committee";
+  const sheetTabs = conferences.map((c) => ({
+    id: c.id,
+    label: c.committee?.trim() || c.name?.trim() || c.id.slice(0, 8),
+    title: [c.name, c.committee].filter(Boolean).join(" — ") || c.id.slice(0, 8),
+  }));
 
   return (
     <div className="space-y-8">
@@ -293,6 +298,31 @@ export function AllocationMatrixManagerClient({
         >
           Edit placard codes sheet →
         </Link>
+      </div>
+      <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-3">
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-brand-muted">
+          Committee sheets
+        </p>
+        <div className="flex gap-2 overflow-x-auto pb-1">
+          {sheetTabs.map((tab) => {
+            const active = tab.id === selectedConferenceId;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                title={tab.title}
+                onClick={() => onConferenceChange(tab.id)}
+                className={`shrink-0 rounded-t-lg border px-3 py-1.5 text-sm font-medium transition ${
+                  active
+                    ? "border-brand-gold/60 bg-brand-gold/20 text-brand-navy"
+                    : "border-brand-navy/15 bg-white text-brand-navy/80 hover:bg-brand-cream/70"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {(message || error) && (
@@ -545,6 +575,28 @@ export function AllocationMatrixManagerClient({
           </div>
         </form>
       </section>
+      <div className="sticky bottom-2 z-20 rounded-xl border border-brand-navy/15 bg-brand-paper/95 p-2 shadow-sm backdrop-blur">
+        <div className="flex gap-2 overflow-x-auto">
+          {sheetTabs.map((tab) => {
+            const active = tab.id === selectedConferenceId;
+            return (
+              <button
+                key={`bottom-${tab.id}`}
+                type="button"
+                title={tab.title}
+                onClick={() => onConferenceChange(tab.id)}
+                className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
+                  active
+                    ? "border-brand-gold/60 bg-brand-gold/20 text-brand-navy"
+                    : "border-brand-navy/15 bg-white text-brand-navy/80 hover:bg-brand-cream/70"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

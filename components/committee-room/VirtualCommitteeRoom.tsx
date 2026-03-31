@@ -51,6 +51,11 @@ function dash(v: string | null | undefined) {
   return t ? t : "—";
 }
 
+function isDaisSeatLabel(raw: string | null | undefined) {
+  const label = String(raw ?? "").trim().toLowerCase();
+  return label === "head chair" || label === "co-chair" || label === "co chair" || label === "rapporteur";
+}
+
 function Placard({
   placard,
   personHref,
@@ -75,11 +80,11 @@ function Placard({
     <>
       <div
         className={[
-          "rounded-sm border-2 shadow-md px-1.5 py-2 text-left leading-snug transition-[opacity,transform,box-shadow,border-color] duration-200",
+          "rounded-md border px-2 py-2 text-left leading-snug transition-[opacity,transform,box-shadow,border-color] duration-150",
           vacant
-            ? "border-brand-navy/20 bg-brand-cream/40 text-brand-muted/80"
-            : "border-brand-gold-bright/30 bg-brand-paper/70 text-brand-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]",
-          interactive ? "hover:border-brand-gold-bright/50 hover:shadow-md" : "",
+            ? "border-slate-300/70 bg-white/70 text-slate-500"
+            : "border-slate-300/80 bg-white/90 text-slate-800 shadow-sm",
+          interactive ? "hover:border-slate-400 hover:shadow" : "",
           dimmed ? "opacity-[0.32] scale-[0.98]" : "",
           ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-gold-bright/60" : "",
         ].join(" ")}
@@ -117,7 +122,7 @@ function Placard({
       <div
         className={[
           "mx-auto mt-0.5 h-1 rounded-sm",
-          vacant ? "bg-brand-navy/15 w-[90%]" : "bg-brand-gold-bright/50 w-full",
+          vacant ? "bg-slate-300/60 w-[90%]" : "bg-slate-400/60 w-full",
         ].join(" ")}
       />
     </>
@@ -184,9 +189,9 @@ function DaisStation({
       </div>
       <div
         className={[
-          "rounded-md bg-black/25 px-2 py-1 w-full text-center border border-white/10 transition-[opacity,transform,box-shadow] duration-200",
+          "rounded-md bg-white/90 px-2 py-1 w-full text-center border border-slate-300/80 transition-[opacity,transform,box-shadow] duration-200 shadow-sm",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
-          ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-gold-bright/50" : "",
+          ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-white border-brand-gold-bright/50" : "",
         ].join(" ")}
       >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-gold-bright/90">
@@ -282,7 +287,9 @@ export function VirtualCommitteeRoom({
 
       if (!isActive || error || !allocationRows) return;
 
-      const next: DelegatePlacard[] = (allocationRows as AllocationRow[]).map((row) => {
+      const next: DelegatePlacard[] = (allocationRows as AllocationRow[])
+        .filter((row) => !isDaisSeatLabel(row.country))
+        .map((row) => {
         const p = Array.isArray(row.profiles) ? row.profiles[0] ?? null : row.profiles ?? null;
         const vacant = !row.user_id;
         const nameOverride = String(row.display_name_override ?? "").trim();
@@ -371,7 +378,7 @@ export function VirtualCommitteeRoom({
       )}
 
       <figure
-        className="relative w-full overflow-hidden rounded-3xl border border-white/10 shadow-[0_28px_80px_-24px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.06)] select-none ring-1 ring-brand-gold/10"
+        className="relative w-full overflow-hidden rounded-3xl border border-slate-300/80 bg-white shadow-[0_14px_40px_-24px_rgba(15,23,42,0.28)] select-none ring-1 ring-slate-200/90"
         aria-label="Virtual committee room"
       >
         {searchActive ? (
@@ -383,18 +390,17 @@ export function VirtualCommitteeRoom({
           className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
           style={{
             background:
-              "radial-gradient(ellipse 120% 80% at 50% 100%, color-mix(in srgb, var(--brand-gold-bright) 45%, transparent) 0%, rgba(20,20,20,0.9) 42%, rgba(10,10,10,1) 100%)",
+              "linear-gradient(180deg, #f8fafc 0%, #eef2f7 42%, #e5ebf3 100%)",
           }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x-2 border-b-2 border-brand-gold-bright/20 shadow-inner"
+            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x border-b border-slate-300/80 shadow-inner"
             style={{
-              background:
-                "linear-gradient(180deg, color-mix(in srgb, var(--brand-gold-bright) 45%, transparent) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.55) 100%)",
+              background: "linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%)",
             }}
           >
-            <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-brand-gold-bright/20" />
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-brand-navy/50">
+            <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-slate-200/90" />
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-slate-500">
               <Mic className="w-3 h-3" />
               <span className="text-[0.55rem] uppercase tracking-[0.35em]">
                 Committee floor
@@ -419,7 +425,7 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-brand-gold/30 bg-brand-paper/80 shadow-lg max-w-[90%]">
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-slate-300/90 bg-white/95 shadow max-w-[90%]">
             <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight">
               {committeeName}
             </p>
