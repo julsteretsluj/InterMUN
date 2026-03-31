@@ -219,7 +219,10 @@ export function ChairDashboardSidebar({
 
       <nav
         aria-label="Chair dashboard"
-        className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-3 py-1 [scrollbar-width:thin]"
+        className={cn(
+          "flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden py-1 [scrollbar-width:thin]",
+          labelsHidden ? "px-2" : "px-3"
+        )}
       >
         {navItems.map((item) => (
           <ChairNavRow
@@ -231,18 +234,29 @@ export function ChairDashboardSidebar({
         ))}
       </nav>
 
-      <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-3 dark:border-zinc-800">
+      <div
+        className={cn(
+          "mt-auto shrink-0 space-y-0.5 border-t border-slate-100 py-3 dark:border-zinc-800",
+          labelsHidden ? "px-2" : "px-3"
+        )}
+      >
         <button
           type="button"
           onClick={toggleLabels}
-          className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          className={cn(
+            "flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
+            labelsHidden && "justify-center px-2"
+          )}
         >
           <PanelLeftClose className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
           {!labelsHidden ? <span>Hide labels</span> : <span className="sr-only">Show labels</span>}
         </button>
         <Link
           href="/guides"
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          className={cn(
+            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
+            labelsHidden && "justify-center px-2"
+          )}
         >
           <HelpCircle className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
           {!labelsHidden ? "Help center" : <span className="sr-only">Help center</span>}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { StanceHeatmap } from "./StanceHeatmap";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
+import { HelpButton } from "@/components/HelpButton";
 
 interface Allocation {
   id: string;
@@ -117,8 +118,12 @@ export function StancesView({
                 placeholder="e.g. climate action"
                 className="px-3 py-2 border rounded bg-black/30 w-48"
               />
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <label className="text-sm">Extent (1–5):</label>
+                <HelpButton title="Extent (1–5)">
+                  1 means your allocation has little support for the topic, and 5 means strong support.
+                  Pick a number that matches your stance in the committee.
+                </HelpButton>
                 <input
                   type="range"
                   min={1}
@@ -189,13 +194,19 @@ export function StancesView({
                   Reader warning: this note may contain inappropriate language.
                 </p>
               ) : null}
-              <button
-                onClick={saveStanceNote}
-                disabled={!canEdit}
-                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-              >
-                Save
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  onClick={saveStanceNote}
+                  disabled={!canEdit}
+                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                >
+                  Save
+                </button>
+                <HelpButton title="Save stance note">
+                  Saves the stance note for this allocation. It can be viewed by staff and (depending on
+                  committee settings) other participants.
+                </HelpButton>
+              </div>
             </div>
           )}
         </div>

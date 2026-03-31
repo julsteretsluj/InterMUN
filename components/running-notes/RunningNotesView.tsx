@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
+import { HelpButton } from "@/components/HelpButton";
 
 interface Note {
   id: string;
@@ -174,7 +175,13 @@ export function RunningNotesView({
           {canEdit ? (
             <div>
               <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-                <label className="mun-label normal-case">Google Docs URL (optional)</label>
+                <div className="flex items-center gap-2">
+                  <label className="mun-label normal-case">Google Docs URL (optional)</label>
+                  <HelpButton title="Google Docs URL">
+                    Paste a shared Google Docs link to show a live preview of your notes. The link is
+                    optional; you can keep plain text notes instead.
+                  </HelpButton>
+                </div>
                 <OpenNewGoogleDocButton />
               </div>
               <input
@@ -221,6 +228,11 @@ export function RunningNotesView({
             >
               Save
             </button>
+            {canEdit ? (
+              <HelpButton title="Save">
+                Saves your current running note text (and Google Docs URL, if provided) for your own account.
+              </HelpButton>
+            ) : null}
             <button
               type="button"
               onClick={() => void deleteNote()}

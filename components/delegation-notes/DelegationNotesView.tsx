@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
+import { HelpButton } from "@/components/HelpButton";
 
 type NoteTopic =
   | "bloc forming"
@@ -548,7 +549,7 @@ export function DelegationNotesView({
               </select>
             </div>
 
-            <div className="flex items-start gap-3">
+            <div className="flex items-start justify-between gap-3">
               <label className={`flex items-center gap-2 ${body}`}>
                 <input
                   type="checkbox"
@@ -558,6 +559,10 @@ export function DelegationNotesView({
                 />
                 <span className="text-brand-navy/90">Concern (auto placeholder)</span>
               </label>
+              <HelpButton title="Concern flag">
+                Use this when your note includes a moderation-sensitive concern. The reader may see a warning,
+                but your note will still send.
+              </HelpButton>
             </div>
 
             <textarea
@@ -583,7 +588,7 @@ export function DelegationNotesView({
               </p>
             ) : null}
 
-            <div className="flex gap-3 items-center">
+            <div className="flex gap-3 items-center flex-wrap">
               <button
                 type="button"
                 onClick={() => void createNote()}
@@ -592,6 +597,10 @@ export function DelegationNotesView({
               >
                 {sending ? "Sending…" : "Send note"}
               </button>
+              <HelpButton title="Send note">
+                Sends this note to the recipients selected above. It doesn’t prevent sending; it only affects
+                how the reader is warned/flagged.
+              </HelpButton>
               {isSmt ? (
                 <p className={`text-xs ${muted}`}>
                   {smtVerified ? (

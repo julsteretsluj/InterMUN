@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteItem } from "@/types/database";
 import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
+import { HelpButton } from "@/components/HelpButton";
 
 interface Vote {
   value: string;
@@ -105,7 +106,13 @@ export function VotingPanel({
       <div className="mun-inset space-y-3">
         <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
           <label className="block text-sm text-brand-navy dark:text-brand-navy">
-            <span className="mun-label">Required majority</span>
+              <div className="flex items-center justify-between gap-2">
+                <span className="mun-label">Required majority</span>
+                <HelpButton title="Required majority">
+                  Choose the vote threshold used to decide pass/fail. `Simple` is more than half. `2/3`
+                  requires a supermajority.
+                </HelpButton>
+              </div>
             <select
               value={d.required_majority}
               onChange={(e) =>
@@ -120,20 +127,26 @@ export function VotingPanel({
               <option value="2/3">2/3</option>
             </select>
           </label>
-          <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-brand-navy dark:border-white/12 dark:bg-black/25">
-            <input
-              type="checkbox"
-              className="size-4 rounded border-slate-300 text-emerald-700 focus:ring-brand-gold-bright dark:border-white/20"
-              checked={d.must_vote}
-              onChange={(e) =>
-                setDrafts((prev) => ({
-                  ...prev,
-                  [item.id]: { ...d, must_vote: e.target.checked },
-                }))
-              }
-            />
-            <span className="font-medium">MUST vote</span>
-          </label>
+            <div className="flex flex-col items-end gap-1">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-brand-navy dark:border-white/12 dark:bg-black/25">
+                <input
+                  type="checkbox"
+                  className="size-4 rounded border-slate-300 text-emerald-700 focus:ring-brand-gold-bright dark:border-white/20"
+                  checked={d.must_vote}
+                  onChange={(e) =>
+                    setDrafts((prev) => ({
+                      ...prev,
+                      [item.id]: { ...d, must_vote: e.target.checked },
+                    }))
+                  }
+                />
+                <span className="font-medium">MUST vote</span>
+              </label>
+              <HelpButton title="MUST vote">
+                Marks this motion as a “must-vote” item. This is used to communicate the requirement to
+                participants (depending on your committee’s setup).
+              </HelpButton>
+            </div>
         </div>
         <button
           type="button"
