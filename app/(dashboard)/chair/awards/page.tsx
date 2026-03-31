@@ -131,8 +131,8 @@ export default async function ChairAwardsPage() {
 
   return (
     <MunPageShell title="Score">
-      <div className="space-y-6 max-w-6xl">
-        <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/40 p-4 text-sm text-brand-muted">
+      <div className="space-y-5 max-w-6xl">
+        <div className="rounded-xl border border-brand-navy/10 bg-sky-50/70 p-3 text-sm text-brand-muted">
           <p>
             Scoring matches the{" "}
             <a
@@ -160,12 +160,12 @@ export default async function ChairAwardsPage() {
           return (
             <section
               key={type.id}
-              className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5 space-y-4"
+              className="rounded-xl border border-brand-navy/10 bg-sky-50/35 p-4 md:p-4 space-y-3"
             >
               <div>
                 <h3 className="font-display text-lg font-semibold text-brand-navy">{type.label}</h3>
                 <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
-                <div className="mt-3 rounded-lg border border-brand-navy/10 bg-brand-cream/40 p-3">
+                <div className="mt-3 rounded-lg border border-brand-navy/10 bg-sky-50/55 p-3">
                   {(() => {
                     const completed = type.slots.filter((rank) => {
                       const existing = nominationByKey.get(`${type.id}:${rank}`);
@@ -230,7 +230,7 @@ export default async function ChairAwardsPage() {
                         return (
                           <fieldset
                             key={`${type.id}-${rank}-${criterion.key}`}
-                            className="rounded-lg border border-white/10 bg-black/20 p-2.5 space-y-2"
+                            className="rounded-lg border border-white/10 bg-black/20 p-2 space-y-1.5"
                           >
                             <legend className="text-sm font-semibold text-brand-navy px-1">{criterion.label}</legend>
                             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
@@ -247,7 +247,7 @@ export default async function ChairAwardsPage() {
                                   return (
                                 <label
                                   key={bandId}
-                                  className={`flex gap-2 cursor-pointer rounded-lg border p-2 ${tone} has-[:checked]:ring-2 has-[:checked]:ring-brand-gold/60 has-[:checked]:border-brand-gold/70`}
+                                  className={`flex gap-1.5 cursor-pointer rounded-lg border p-2 ${tone} has-[:checked]:ring-2 has-[:checked]:ring-brand-gold/60 has-[:checked]:border-brand-gold/70`}
                                 >
                                   <input
                                     type="radio"
