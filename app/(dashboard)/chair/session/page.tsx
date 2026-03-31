@@ -15,13 +15,25 @@ export default async function ChairSessionPage() {
   }
 
   const supabase = await createClient();
-  const { data: ps } = await supabase
+  const { data: ps, error } = await supabase
     .from("procedure_states")
     .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
     .eq("conference_id", data.conferenceId)
     .maybeSingle();
 
-  const row = ps as {
+  const errorMessage = String(error?.message ?? "");
+  const missingEndColumns =
+    /schema cache/i.test(errorMessage) &&
+    /committee_session_duration_seconds|committee_session_ends_at/i.test(errorMessage);
+  const fallback = missingEndColumns
+    ? await supabase
+        .from("procedure_states")
+        .select("committee_session_started_at")
+        .eq("conference_id", data.conferenceId)
+        .maybeSingle()
+    : null;
+
+  const row = (missingEndColumns ? fallback?.data : ps) as {
     committee_session_started_at?: string | null;
     committee_session_duration_seconds?: number | null;
     committee_session_ends_at?: string | null;

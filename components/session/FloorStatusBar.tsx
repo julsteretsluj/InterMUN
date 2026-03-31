@@ -87,7 +87,23 @@ export function FloorStatusBar({
       .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
       .eq("conference_id", conferenceId)
       .maybeSingle()
-      .then(({ data }) => {
+      .then(async ({ data, error }) => {
+        const errorMessage = String(error?.message ?? "");
+        const missingEndColumns =
+          /schema cache/i.test(errorMessage) &&
+          /committee_session_duration_seconds|committee_session_ends_at/i.test(errorMessage);
+        if (missingEndColumns) {
+          const fallback = await supabase
+            .from("procedure_states")
+            .select("committee_session_started_at")
+            .eq("conference_id", conferenceId)
+            .maybeSingle();
+          const startOnly = fallback.data as { committee_session_started_at?: string | null } | null;
+          setSessionStartedAt(startOnly?.committee_session_started_at ?? null);
+          setSessionDurationSeconds(null);
+          setSessionEndsAt(null);
+          return;
+        }
         const row = data as {
           committee_session_started_at?: string | null;
           committee_session_duration_seconds?: number | null;

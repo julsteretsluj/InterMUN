@@ -76,8 +76,7 @@ export default async function DashboardLayout({
   }
 
   const allocationGateOn = activeConf.allocation_code_gate_enabled === true;
-  const needsAllocationCodeGate =
-    allocationGateOn && (normalizedRole === "delegate" || normalizedRole === "chair");
+  const needsAllocationCodeGate = allocationGateOn && normalizedRole === "delegate";
   if (needsAllocationCodeGate) {
     const allocVerified = await getAllocationCodeVerifiedConferenceId();
     if (allocVerified !== activeConf.id) {

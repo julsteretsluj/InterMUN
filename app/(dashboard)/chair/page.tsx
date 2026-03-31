@@ -30,6 +30,7 @@ export default async function ChairOverviewPage() {
     .select("committee, tagline, name")
     .eq("id", conferenceId)
     .maybeSingle();
+  const committeeLabel = conf?.committee?.trim() || conf?.name?.trim() || "your committee";
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
@@ -65,7 +66,10 @@ export default async function ChairOverviewPage() {
     <MunPageShell title="Chair room">
       <div className="space-y-6">
         <header className="space-y-2">
-          <p className="text-lg font-medium text-slate-800 dark:text-zinc-100">
+          <h1 className="font-display text-3xl font-semibold text-brand-navy">
+            Welcome, Chair of {committeeLabel}
+          </h1>
+          <p className="text-base font-medium text-slate-800 dark:text-zinc-100">
             🖥️ Digital Room · 📜 Motions · 🗳️ Voting · 🎤 Speakers
           </p>
           <p className="text-sm text-slate-600 dark:text-zinc-400">

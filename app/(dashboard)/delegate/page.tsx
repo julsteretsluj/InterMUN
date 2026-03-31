@@ -13,6 +13,11 @@ export default async function DelegateDashboardPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("country, name")
+    .eq("id", user.id)
+    .maybeSingle();
 
   const conferenceId = await requireActiveConferenceId();
   const { data: conf } = await supabase
@@ -21,6 +26,7 @@ export default async function DelegateDashboardPage() {
     .eq("id", conferenceId)
     .maybeSingle();
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
+  const countryLabel = profile?.country?.trim() || profile?.name?.trim() || "your country";
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string }[] = [
@@ -46,7 +52,9 @@ export default async function DelegateDashboardPage() {
     <MunPageShell title="Delegate dashboard">
       <div className="space-y-6">
         <header className="space-y-2">
-          <h1 className="font-display text-3xl font-semibold text-brand-navy">Welcome Delegate!</h1>
+          <h1 className="font-display text-3xl font-semibold text-brand-navy">
+            Welcome, Delegate of {countryLabel}
+          </h1>
           <p className="text-sm text-slate-600 dark:text-zinc-400">
             Active committee: <span className="font-semibold text-slate-900 dark:text-zinc-100">{line}</span>.
             Countdown dates are shared with everyone in this committee. Your prep, stances, and documents stay with
