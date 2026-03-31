@@ -10,6 +10,8 @@ export interface Profile {
   username: string | null;
   pronouns: string | null;
   school: string | null;
+  grade: string | null;
+  notes: string | null;
   profile_picture_url: string | null;
   conferences_attended: number;
   awards: string[];

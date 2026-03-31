@@ -19,12 +19,21 @@ const schema = z.object({
     ),
   pronouns: z.string().optional(),
   school: z.string().optional(),
+  grade: z.string().optional(),
   allocation: z.string().optional(),
   conferences_attended: z.number().min(0).optional(),
   awards: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
+const GRADE_OPTIONS = [
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+] as const;
 
 interface ProfileFormProps {
   profile: Profile | null;
@@ -121,6 +130,7 @@ export function ProfileForm({
       username: profile?.username || "",
       pronouns: profile?.pronouns || "",
       school: profile?.school || "",
+      grade: profile?.grade || "",
       allocation: profile?.allocation || "",
       conferences_attended: profile?.conferences_attended ?? 0,
       awards: profile?.awards?.join(", ") || "",
@@ -134,6 +144,7 @@ export function ProfileForm({
         username: profile.username || "",
         pronouns: profile.pronouns || "",
         school: profile.school || "",
+        grade: profile.grade || "",
         allocation: profile.allocation || "",
         conferences_attended: profile.conferences_attended ?? 0,
         awards: profile.awards?.join(", ") || "",
@@ -155,6 +166,7 @@ export function ProfileForm({
         username: normalizedUsername ? normalizedUsername : null,
         pronouns: data.pronouns,
         school: data.school || null,
+        grade: data.grade || null,
         allocation: data.allocation,
         ...(canViewPrivate && {
           conferences_attended: data.conferences_attended ?? 0,
@@ -264,6 +276,18 @@ export function ProfileForm({
             placeholder="e.g. Lincoln High School"
           />
         </div>
+      </div>
+
+      <div className="min-w-0 sm:max-w-xs">
+        <label className="block text-sm font-medium mb-1">Grade</label>
+        <select {...register("grade")} className={fieldClass}>
+          <option value="">Select grade</option>
+          {GRADE_OPTIONS.map((grade) => (
+            <option key={grade} value={grade}>
+              {grade}
+            </option>
+          ))}
+        </select>
       </div>
 
       {canViewPrivate && (
