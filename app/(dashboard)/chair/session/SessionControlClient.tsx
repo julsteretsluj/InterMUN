@@ -89,6 +89,7 @@ type MotionRow = {
   created_at: string;
   closed_at: string | null;
 };
+type AgendaTopic = { id: string; name: string | null };
 type MotionAudit = {
   id: string;
   event_type: "created" | "edited" | "opened" | "closed";
@@ -203,6 +204,9 @@ export function SessionControlClient({
   /** Linear roll-call index into `sortAllocationsByDisplayCountry(allocations)` while recording votes. */
   const [voteCallIndex, setVoteCallIndex] = useState(0);
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
+  const [agendaTopicsAll, setAgendaTopicsAll] = useState<AgendaTopic[]>([]);
+  const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
+  const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
 
   const { timer: liveTimerRow, remaining: liveRemaining } = useConferenceTimer(
     conferenceId,
@@ -239,10 +243,13 @@ export function SessionControlClient({
     setVoteCallIndex((i) => Math.min(i, votingCallOrder.length));
   }, [votingCallOrder.length]);
 
-  const procedurePresets = useMemo(
-    () => [
+  const procedurePresets = useMemo(() => {
+    const base: {
+      code: string | null;
+      label: string;
+      title?: string;
+    }[] = [
       { code: null as string | null, label: "Custom" },
-      { code: "set_agenda", label: "Motion to Set the Agenda", title: "Motion to Set the Agenda" },
       { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time" },
       { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate" },
       {
@@ -268,9 +275,15 @@ export function SessionControlClient({
       { code: "divide_question", label: "Divide the Question (editor needed)", title: "Motion to Divide the Question" },
       { code: "clause_by_clause", label: "Clause-by-Clause (editor needed)", title: "Motion to Vote Clause by Clause" },
       { code: "amendment", label: "Amendments (editor needed)", title: "Amendment" },
-    ],
-    []
-  );
+    ];
+
+    // Hide set-agenda when there isn't at least 2 agenda topics left to choose from.
+    // But keep it visible if the chair is currently editing a set-agenda motion.
+    if (agendaTopicsRemaining.length > 1 || motionDraft.procedure_code === "set_agenda") {
+      base.splice(1, 0, { code: "set_agenda", label: "Motion to Set the Agenda", title: "" });
+    }
+    return base;
+  }, [agendaTopicsRemaining.length, motionDraft.procedure_code]);
 
   const ropMajorityForDraft = useMemo(
     () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
@@ -285,6 +298,18 @@ export function SessionControlClient({
     if (!motionDraft.procedure_resolution_id) return [];
     return resolutionClauses.filter((c) => c.resolution_id === motionDraft.procedure_resolution_id);
   }, [motionDraft.procedure_resolution_id, resolutionClauses]);
+
+  const agendaUsedNameSet = useMemo(() => {
+    return new Set(agendaTopicsUsedNames.map((n) => n.trim()).filter(Boolean));
+  }, [agendaTopicsUsedNames]);
+
+  const setAgendaTopicOptions = useMemo(() => {
+    if (motionDraft.procedure_code !== "set_agenda") return agendaTopicsRemaining;
+    const cur = motionDraft.title.trim();
+    if (!cur) return agendaTopicsRemaining;
+    if (agendaTopicsRemaining.some((t) => (t.name ?? "").trim() === cur)) return agendaTopicsRemaining;
+    return [...agendaTopicsRemaining, { id: "current", name: cur }];
+  }, [agendaTopicsRemaining, motionDraft.procedure_code, motionDraft.title]);
 
   function parseModeratedTiming(description: string | null | undefined): {
     totalMinutes: string;
@@ -350,6 +375,14 @@ export function SessionControlClient({
         return "Consultation requires total time (minutes).";
       }
     }
+    if (draft.procedure_code === "set_agenda") {
+      const title = draft.title.trim();
+      if (!title) return "Select an agenda topic.";
+      // Allow editing an already-stated/past set-agenda motion even if the remaining list is exhausted.
+      if (agendaTopicsRemaining.length <= 1 && !agendaUsedNameSet.has(title)) {
+        return "Motion to Set the Agenda is unavailable for this committee (not enough topics remaining).";
+      }
+    }
     if (
       motionRequiresClauseTargets(draft.procedure_code) &&
       (!draft.procedure_resolution_id || draft.procedure_clause_ids.length === 0)
@@ -396,6 +429,7 @@ export function SessionControlClient({
       { data: ann },
       { data: t },
       { data: unclosedRows },
+      { data: setAgendaClosedRows },
       { data: recentClosedRows },
       { data: resolutionRows },
       { data: clauseRows },
@@ -408,7 +442,11 @@ export function SessionControlClient({
           .select("state, current_vote_item_id, debate_closed, motion_floor_open")
           .eq("conference_id", conferenceId)
           .maybeSingle(),
-        supabase.from("conferences").select("consultation_before_moderated_caucus").eq("id", conferenceId).maybeSingle(),
+        supabase
+          .from("conferences")
+          .select("consultation_before_moderated_caucus, event_id, committee")
+          .eq("id", conferenceId)
+          .maybeSingle(),
         supabase
           .from("allocations")
           .select("id, country, user_id")
@@ -428,6 +466,14 @@ export function SessionControlClient({
           .limit(24),
         supabase.from("timers").select("*").eq("conference_id", conferenceId).maybeSingle(),
         supabase.from("vote_items").select(motionSelect).eq("conference_id", conferenceId).is("closed_at", null),
+        supabase
+          .from("vote_items")
+          .select("title")
+          .eq("conference_id", conferenceId)
+          .eq("procedure_code", "set_agenda")
+          .not("closed_at", "is", null)
+          .order("created_at", { ascending: false })
+          .limit(50),
         supabase
           .from("vote_items")
           .select(motionSelect)
@@ -491,7 +537,37 @@ export function SessionControlClient({
         : "consultation_first";
     setCaucusPrecedence(precedence);
 
+    const agendaTopicsAllResolved: AgendaTopic[] = [];
+    const confForAgenda = confRow as { event_id?: string | null; committee?: string | null } | null;
+    if (confForAgenda?.event_id && confForAgenda.committee) {
+      const { data: topicRows } = await supabase
+        .from("conferences")
+        .select("id, name")
+        .eq("event_id", confForAgenda.event_id)
+        .eq("committee", confForAgenda.committee)
+        .order("created_at", { ascending: true });
+      agendaTopicsAllResolved.push(...(((topicRows as AgendaTopic[]) ?? []).filter((t) => (t.name ?? "").trim().length > 0)));
+    }
+
+    const usedAgendaNames = new Set<string>();
     const unclosed = (unclosedRows as MotionRow[]) ?? [];
+    for (const m of unclosed) {
+      if (m.procedure_code !== "set_agenda") continue;
+      const name = (m.title ?? "").trim();
+      if (name) usedAgendaNames.add(name);
+    }
+    for (const r of (setAgendaClosedRows as { title?: string | null }[] | null) ?? []) {
+      const name = (r.title ?? "").trim();
+      if (name) usedAgendaNames.add(name);
+    }
+
+    const remaining = agendaTopicsAllResolved.filter(
+      (t) => !usedAgendaNames.has((t.name ?? "").trim())
+    );
+    setAgendaTopicsAll(agendaTopicsAllResolved);
+    setAgendaTopicsRemaining(remaining);
+    setAgendaTopicsUsedNames(Array.from(usedAgendaNames));
+
     const openForVotingList = unclosed.filter((row) => row.open_for_voting === true);
     setOpenVotingMotions(openForVotingList);
     const open = openForVotingList[0] ?? null;
@@ -1464,25 +1540,48 @@ export function SessionControlClient({
     const selected = options[pick - 1]!;
     const procedureCode = selected.code;
 
-    const titlePrompt =
-      procedureCode === "consultation"
-        ? "Step 2/5: Topic / purpose"
-        : procedureCode === "moderated_caucus"
-          ? "Step 2/5: Topic"
-          : procedureCode === "unmoderated_caucus"
-            ? "Step 2/5: Topic (optional)"
-            : "Step 2/5: Motion title (optional)";
-    const titleInput = window.prompt(titlePrompt, selected.title ?? selected.label);
-    if (titleInput === null) return;
-    const titleTrimmed = titleInput.trim();
-    if (!titleTrimmed) {
-      if (procedureCode === "consultation") {
-        setMsg("Consultation requires a topic or purpose.");
+    let titleTrimmed = "";
+    if (procedureCode === "set_agenda") {
+      const topics = agendaTopicsRemaining.filter((t) => (t.name ?? "").trim().length > 0);
+      if (topics.length === 0) {
+        setMsg("No agenda topics available for this committee.");
         return;
       }
-      if (procedureCode === "moderated_caucus") {
-        setMsg("Topic is required.");
+      const pickTopicRaw = window.prompt(
+        [
+          "Step 2/5: Choose agenda topic (enter number).",
+          ...topics.map((t, i) => `${i + 1}. ${String(t.name).trim()}`),
+        ].join("\n"),
+        "1"
+      );
+      if (!pickTopicRaw) return;
+      const pickTopic = Number(pickTopicRaw);
+      if (!Number.isFinite(pickTopic) || pickTopic < 1 || pickTopic > topics.length) {
+        setMsg("Invalid agenda topic selection.");
         return;
+      }
+      titleTrimmed = String(topics[pickTopic - 1]!.name ?? "").trim();
+    } else {
+      const titlePrompt =
+        procedureCode === "consultation"
+          ? "Step 2/5: Topic / purpose"
+          : procedureCode === "moderated_caucus"
+            ? "Step 2/5: Topic"
+            : procedureCode === "unmoderated_caucus"
+              ? "Step 2/5: Topic (optional)"
+              : "Step 2/5: Motion title (optional)";
+      const titleInput = window.prompt(titlePrompt, selected.title ?? selected.label);
+      if (titleInput === null) return;
+      titleTrimmed = titleInput.trim();
+      if (!titleTrimmed) {
+        if (procedureCode === "consultation") {
+          setMsg("Consultation requires a topic or purpose.");
+          return;
+        }
+        if (procedureCode === "moderated_caucus") {
+          setMsg("Topic is required.");
+          return;
+        }
       }
     }
 
@@ -1913,7 +2012,12 @@ export function SessionControlClient({
                   ...d,
                   procedure_code: code,
                   vote_type: "motion",
-                  title: preset?.title ?? d.title,
+                  title:
+                    code === "set_agenda"
+                      ? agendaTopicsRemaining[0]?.name ?? ""
+                      : preset?.title ?? d.title,
+                  procedure_resolution_id: code === "set_agenda" ? null : d.procedure_resolution_id,
+                  procedure_clause_ids: code === "set_agenda" ? [] : d.procedure_clause_ids,
                   moderated_total_minutes: code === "moderated_caucus" ? d.moderated_total_minutes : "",
                   moderated_speaker_seconds: code === "moderated_caucus" ? d.moderated_speaker_seconds : "",
                   unmoderated_total_minutes: code === "unmoderated_caucus" ? d.unmoderated_total_minutes : "",
@@ -2017,31 +2121,54 @@ export function SessionControlClient({
               </p>
             </div>
           </div>
-          <label className="text-sm block text-brand-navy">
-            <span className={surfaceLabel}>
-              {motionDraft.procedure_code === "consultation"
-                ? "Topic / purpose"
-                : motionDraft.procedure_code === "moderated_caucus"
-                  ? "Topic"
-                  : motionDraft.procedure_code === "unmoderated_caucus"
-                    ? "Topic (optional)"
-                    : "Title (optional)"}
-            </span>
-            <input
-              className={surfaceField}
-              value={motionDraft.title}
-              onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
-              placeholder={
-                motionDraft.procedure_code === "moderated_caucus"
-                  ? "Moderated caucus topic"
-                  : motionDraft.procedure_code === "unmoderated_caucus"
-                    ? "Unmoderated caucus topic (optional)"
-                    : motionDraft.procedure_code === "consultation"
-                      ? "What the consultation is for"
-                      : "Motion title (optional)"
-              }
-            />
-          </label>
+          {motionDraft.procedure_code === "set_agenda" ? (
+            <label className="text-sm block text-brand-navy">
+              <span className={surfaceLabel}>Agenda topic (committee)</span>
+              <select
+                className={surfaceField}
+                value={motionDraft.title}
+                onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
+              >
+                {setAgendaTopicOptions.length === 0 ? <option value="">No topics available</option> : null}
+                {setAgendaTopicOptions
+                  .filter((t) => (t.name ?? "").trim().length > 0)
+                  .map((t) => {
+                    const name = (t.name ?? "").trim();
+                    return (
+                      <option key={t.id} value={name}>
+                        {name}
+                      </option>
+                    );
+                  })}
+              </select>
+            </label>
+          ) : (
+            <label className="text-sm block text-brand-navy">
+              <span className={surfaceLabel}>
+                {motionDraft.procedure_code === "consultation"
+                  ? "Topic / purpose"
+                  : motionDraft.procedure_code === "moderated_caucus"
+                    ? "Topic"
+                    : motionDraft.procedure_code === "unmoderated_caucus"
+                      ? "Topic (optional)"
+                      : "Title (optional)"}
+              </span>
+              <input
+                className={surfaceField}
+                value={motionDraft.title}
+                onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
+                placeholder={
+                  motionDraft.procedure_code === "moderated_caucus"
+                    ? "Moderated caucus topic"
+                    : motionDraft.procedure_code === "unmoderated_caucus"
+                      ? "Unmoderated caucus topic (optional)"
+                      : motionDraft.procedure_code === "consultation"
+                        ? "What the consultation is for"
+                        : "Motion title (optional)"
+                }
+              />
+            </label>
+          )}
           {motionDraft.procedure_code === "moderated_caucus" ? (
             <div className="grid sm:grid-cols-2 gap-3">
               <label className="text-sm block text-brand-navy">
