@@ -22,6 +22,13 @@ function formatTagClass(format: "Traditional" | "Crisis") {
   return "border-sky-300/80 bg-sky-100 text-sky-900";
 }
 
+function difficultySortRank(level: "Beginner" | "Intermediate" | "Advanced" | null | undefined) {
+  if (level === "Beginner") return 0;
+  if (level === "Intermediate") return 1;
+  if (level === "Advanced") return 2;
+  return 99;
+}
+
 export default async function SmtOverviewPage({
   searchParams,
 }: {
@@ -107,6 +114,11 @@ export default async function SmtOverviewPage({
   }
 
   const list = Array.from(groups.values()).sort((a, b) => {
+    const aDifficulty = resolveCommitteeDisplayTags(a.latestRow.committee)?.difficulty;
+    const bDifficulty = resolveCommitteeDisplayTags(b.latestRow.committee)?.difficulty;
+    const difficultyDelta = difficultySortRank(aDifficulty) - difficultySortRank(bDifficulty);
+    if (difficultyDelta !== 0) return difficultyDelta;
+
     const aTitle = formatCommitteeCardTitle(
       a.latestRow.committee_full_name,
       a.latestRow.committee

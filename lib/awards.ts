@@ -11,21 +11,15 @@ export const AWARD_CATEGORIES: {
 }[] = [
   {
     id: "conference_best_delegate",
-    label: "Best Delegate (conference-wide)",
+    label: "Best Delegate (Trophy)",
     description:
-      "Highest performance across the entire conference—diplomacy, RoP, resolutions.",
+      "Overall trophy winner for the strongest delegate across the full conference.",
     scope: "conference_wide",
   },
   {
     id: "conference_best_position_paper",
     label: "Best Position Paper (conference-wide)",
     description: "Most exceptional pre-conference research and policy alignment.",
-    scope: "conference_wide",
-  },
-  {
-    id: "conference_honorable_mention",
-    label: "Honorable Mention (conference-wide)",
-    description: "Conference-level recognition for delegates with outstanding overall impact.",
     scope: "conference_wide",
   },
   {
@@ -61,7 +55,7 @@ export const AWARD_CATEGORIES: {
   {
     id: "committee_honourable_mention",
     label: "Honorable Mention (committee)",
-    description: "Up to two per committee; initiative and resolution contribution.",
+    description: "Up to two per committee.",
     scope: "committee",
   },
   {

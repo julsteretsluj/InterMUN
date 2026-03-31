@@ -30,6 +30,7 @@ export const BAND_STORED_SCORE: Record<ProficiencyBandId, number> = {
 
 export type NominationRubricType =
   | "committee_best_delegate"
+  | "committee_honourable_mention"
   | "committee_best_position_paper"
   | "conference_best_delegate";
 
@@ -42,6 +43,14 @@ export type RubricCriterion = {
 
 export const RUBRIC_KEYS_BY_NOMINATION: Record<NominationRubricType, string[]> = {
   committee_best_delegate: [
+    "creativity",
+    "diplomacy",
+    "collaboration",
+    "leadership",
+    "knowledge_research",
+    "participation",
+  ],
+  committee_honourable_mention: [
     "creativity",
     "diplomacy",
     "collaboration",

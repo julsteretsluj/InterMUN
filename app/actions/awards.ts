@@ -151,16 +151,24 @@ export async function submitChairTopNominationAction(
   const committeeId = String(formData.get("committee_conference_id") ?? "").trim();
   const nomineeId = String(formData.get("nominee_profile_id") ?? "").trim();
   const rankRaw = Number(String(formData.get("rank") ?? "0"));
-  const rank = rankRaw === 1 ? 1 : rankRaw === 2 ? 2 : 0;
+  const rank = Number.isInteger(rankRaw) ? rankRaw : 0;
   const nominationType = String(formData.get("nomination_type") ?? "").trim();
   const evidence = String(formData.get("evidence_note") ?? "").trim();
 
   const validNominationType =
     nominationType === "committee_best_delegate" ||
+    nominationType === "committee_honourable_mention" ||
     nominationType === "committee_best_position_paper" ||
     nominationType === "conference_best_delegate";
   if (!committeeId || !nomineeId || !rank || !validNominationType) return;
   if (nominationType === "conference_best_delegate" && rank !== 1) return;
+  if (
+    (nominationType === "committee_best_delegate" || nominationType === "committee_best_position_paper") &&
+    (rank < 1 || rank > 2)
+  ) {
+    return;
+  }
+  if (nominationType === "committee_honourable_mention" && (rank < 1 || rank > 3)) return;
   const rubricScores = parseRubricScores(formData, nominationType as NominationType);
   if (!rubricScores) return;
 
@@ -191,6 +199,16 @@ export async function submitChairTopNominationAction(
     .limit(1)
     .maybeSingle();
   if (!nomineeInCommittee?.id) return;
+
+  if (nominationType === "committee_honourable_mention") {
+    const { count: seatedCount } = await auth.supabase
+      .from("allocations")
+      .select("id", { count: "exact", head: true })
+      .eq("conference_id", committeeId)
+      .not("user_id", "is", null);
+    const maxHmRank = (seatedCount ?? 0) > 23 ? 3 : 2;
+    if (rank > maxHmRank) return;
+  }
 
   const { data: existing } = await auth.supabase
     .from("award_nominations")
@@ -264,8 +282,20 @@ export async function promoteNominationToAwardAction(
   }
   if (
     (nomination.nomination_type === "committee_best_delegate" ||
+      nomination.nomination_type === "committee_honourable_mention" ||
       nomination.nomination_type === "committee_best_position_paper") &&
     category === "conference_best_delegate"
+  ) {
+    return;
+  }
+
+  if (nomination.nomination_type === "committee_best_delegate" && category !== "committee_best_delegate") return;
+  if (nomination.nomination_type === "committee_honourable_mention" && category !== "committee_honourable_mention") {
+    return;
+  }
+  if (
+    nomination.nomination_type === "committee_best_position_paper" &&
+    category !== "committee_best_position_paper"
   ) {
     return;
   }

@@ -117,9 +117,10 @@ export function AwardsManagerClient({
         <p className="flex items-start gap-2">
           <Award className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
           <span>
-            Tracks typical categories: conference-wide, collective &amp; chair, and committee-level.
-            Final authority stays with your conference leadership; this tool is for drafting and
-            internal records. Delegates see only rows where they are the recipient.
+            SMT award structure: <strong className="text-brand-navy">Overall</strong> (Best Delegate Trophy, Best
+            Position Paper), <strong className="text-brand-navy">Chair</strong> (Best Chair, Honourable Mention Chair,
+            Best Committee, Best Chair Report), and <strong className="text-brand-navy">Committee</strong> (Best
+            Delegate, Honourable Mention, Best Position Paper). Delegates see only rows where they are the recipient.
           </span>
         </p>
       </div>

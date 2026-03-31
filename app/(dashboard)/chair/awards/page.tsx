@@ -83,6 +83,8 @@ export default async function ChairAwardsPage() {
         label: `${d.country} — ${name}`,
       };
     });
+  const seatedDelegatesCount = options.length;
+  const hmRequiresBackup = seatedDelegatesCount > 23;
 
   type NomRow = {
     id: string;
@@ -102,32 +104,74 @@ export default async function ChairAwardsPage() {
   const nominationTypes: {
     id: NominationRubricType;
     label: string;
-    slots: number[];
+    slots: Array<{ rank: number; label: string; required: boolean }>;
     helper: string;
     criteria: RubricCriterion[];
   }[] = [
     {
       id: "committee_best_delegate",
       label: "Best Delegate (committee)",
-      slots: [1, 2],
-      helper: "Submit Top 2 contenders for committee best delegate (same rubric as SEAMUNs dashboard).",
+      slots: [
+        { rank: 1, label: "Best Delegate nominee", required: true },
+        { rank: 2, label: "Best Delegate backup", required: true },
+      ],
+      helper: "Submit one primary Best Delegate nominee and one backup.",
+      criteria: criteriaForNominationType("committee_best_delegate"),
+    },
+    {
+      id: "committee_honourable_mention",
+      label: "Honourable Mention (committee)",
+      slots: hmRequiresBackup
+        ? [
+            { rank: 1, label: "Honourable Mention #1", required: true },
+            { rank: 2, label: "Honourable Mention #2", required: true },
+            { rank: 3, label: "Honourable Mention backup", required: true },
+          ]
+        : [
+            { rank: 1, label: "Honourable Mention #1 (optional)", required: false },
+            { rank: 2, label: "Honourable Mention #2 (optional)", required: false },
+          ],
+      helper: hmRequiresBackup
+        ? "Committee has more than 23 seated delegates: submit 2 Honourable Mentions plus 1 backup (3 total)."
+        : "Submit up to 2 Honourable Mentions.",
       criteria: criteriaForNominationType("committee_best_delegate"),
     },
     {
       id: "committee_best_position_paper",
       label: "Best Position Paper (committee)",
-      slots: [1, 2],
-      helper: "Submit Top 2 position papers for SMT review.",
+      slots: [
+        { rank: 1, label: "Best Position Paper nominee", required: true },
+        { rank: 2, label: "Best Position Paper backup", required: true },
+      ],
+      helper: "Submit one primary Best Position Paper nominee and one backup.",
       criteria: criteriaForNominationType("committee_best_position_paper"),
     },
     {
       id: "conference_best_delegate",
       label: "Best Delegate (overall conference)",
-      slots: [1],
-      helper: "Submit your single strongest overall candidate from this committee.",
+      slots: [{ rank: 1, label: "Overall Best Delegate nominee", required: true }],
+      helper: "Submit one overall Best Delegate nominee from this committee.",
       criteria: criteriaForNominationType("conference_best_delegate"),
     },
   ];
+
+  const isSlotComplete = (typeId: NominationRubricType, rank: number, criteria: RubricCriterion[]) => {
+    const existing = nominationByKey.get(`${typeId}:${rank}`);
+    if (!existing?.nominee_profile_id) return false;
+    const scores = existing.rubric_scores ?? {};
+    return criteria.every((c) => Number(scores[c.key] ?? 0) >= 1);
+  };
+
+  const totalRequiredAwards = nominationTypes.reduce(
+    (sum, t) => sum + t.slots.filter((s) => s.required).length,
+    0
+  );
+  const totalCompletedAwards = nominationTypes.reduce(
+    (sum, t) => sum + t.slots.filter((s) => s.required && isSlotComplete(t.id, s.rank, t.criteria)).length,
+    0
+  );
+  const totalProgressPct =
+    totalRequiredAwards === 0 ? 0 : Math.round((totalCompletedAwards / totalRequiredAwards) * 100);
 
   return (
     <MunPageShell title="Score">
@@ -150,6 +194,23 @@ export default async function ChairAwardsPage() {
             <strong className="text-brand-navy">Exemplary</strong>. Submit Top 2 with evidence; SMT confirms final
             awards.
           </p>
+          <ol className="mt-2.5 list-decimal space-y-1 pl-5 text-xs leading-relaxed text-brand-navy/85">
+            <li>Select a nominee for each required Top slot.</li>
+            <li>Pick exactly one band for every criterion row.</li>
+            <li>Add concise evidence from debate, drafting, and diplomacy.</li>
+            <li>Save required slots and add optional slots where applicable.</li>
+          </ol>
+        </div>
+        <div className="rounded-xl border border-brand-navy/10 bg-sky-50/65 p-3">
+          <div className="mb-2 flex items-center justify-between text-xs text-brand-navy/85">
+            <span className="font-semibold uppercase tracking-wide">Overall awards completion</span>
+            <span>
+              {totalCompletedAwards}/{totalRequiredAwards} complete
+            </span>
+          </div>
+          <div className="h-2.5 overflow-hidden rounded-full bg-brand-navy/10">
+            <div className="h-full bg-brand-gold transition-all" style={{ width: `${totalProgressPct}%` }} />
+          </div>
         </div>
         <p className="text-xs text-brand-muted">
           Committee: {[activeConf.name, activeConf.committee].filter(Boolean).join(" — ")}
@@ -167,31 +228,39 @@ export default async function ChairAwardsPage() {
                 <p className="text-xs text-brand-muted mt-1">{type.helper}</p>
                 <div className="mt-3 rounded-lg border border-brand-navy/10 bg-sky-50/55 p-3">
                   {(() => {
-                    const completed = type.slots.filter((rank) => {
-                      const existing = nominationByKey.get(`${type.id}:${rank}`);
-                      if (!existing?.nominee_profile_id) return false;
-                      const scores = existing.rubric_scores ?? {};
-                      return type.criteria.every((c) => Number(scores[c.key] ?? 0) >= 1);
-                    }).length;
-                    const totalSlots = type.slots.length;
-                    const pct = totalSlots === 0 ? 0 : Math.round((completed / totalSlots) * 100);
+                    const requiredTotal = type.slots.filter((s) => s.required).length;
+                    const requiredCompleted = type.slots.filter(
+                      (s) => s.required && isSlotComplete(type.id, s.rank, type.criteria)
+                    ).length;
+                    const optionalTotal = type.slots.filter((s) => !s.required).length;
+                    const optionalCompleted = type.slots.filter(
+                      (s) => !s.required && isSlotComplete(type.id, s.rank, type.criteria)
+                    ).length;
+                    const pct =
+                      requiredTotal === 0 ? 100 : Math.round((requiredCompleted / requiredTotal) * 100);
                     return (
                       <>
                         <div className="flex items-center justify-between text-xs text-brand-navy/85 mb-2">
-                          <span className="font-semibold">Progress</span>
+                          <span className="font-semibold">Progress (required)</span>
                           <span>
-                            {completed}/{totalSlots} complete
+                            {requiredCompleted}/{requiredTotal} complete
                           </span>
                         </div>
                         <div className="h-2 rounded-full bg-brand-navy/10 overflow-hidden">
                           <div className="h-full bg-brand-gold transition-all" style={{ width: `${pct}%` }} />
                         </div>
+                        {optionalTotal > 0 ? (
+                          <p className="mt-2 text-[0.72rem] text-brand-muted">
+                            Optional slots: {optionalCompleted}/{optionalTotal} filled
+                          </p>
+                        ) : null}
                       </>
                     );
                   })()}
                 </div>
               </div>
-              {type.slots.map((rank) => {
+              {type.slots.map((slot) => {
+                const rank = slot.rank;
                 const existing = nominationByKey.get(`${type.id}:${rank}`);
                 const selectedId = existing?.nominee_profile_id ?? "";
                 const scoreMap = existing?.rubric_scores ?? {};
@@ -201,7 +270,12 @@ export default async function ChairAwardsPage() {
                     <input type="hidden" name="committee_conference_id" value={activeConf.id} />
                     <input type="hidden" name="nomination_type" value={type.id} />
                     <input type="hidden" name="rank" value={String(rank)} />
-                    <h4 className="text-sm font-semibold text-brand-navy">Top {rank}</h4>
+                    <h4 className="text-sm font-semibold text-brand-navy">
+                      {slot.label}
+                      {!slot.required ? (
+                        <span className="ml-2 text-xs font-normal text-brand-muted">(optional)</span>
+                      ) : null}
+                    </h4>
                     <label className="block text-sm">
                       <span className="text-brand-muted text-xs uppercase">Nominee</span>
                       <select
