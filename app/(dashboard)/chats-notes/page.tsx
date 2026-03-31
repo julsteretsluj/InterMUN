@@ -90,6 +90,35 @@ export default async function ChatsNotesPage({
   const verifiedConferenceId = await getVerifiedConferenceId();
   const isSmtLike = myRole === "smt";
   const smtVerified = isSmtLike && verifiedConferenceId === conferenceId;
+  const { data: procedureState } = await supabase
+    .from("procedure_states")
+    .select("committee_session_started_at, state, current_vote_item_id")
+    .eq("conference_id", conferenceId)
+    .maybeSingle();
+  const sessionActive = Boolean(
+    (procedureState as { committee_session_started_at?: string | null } | null)
+      ?.committee_session_started_at
+  );
+  const activeProcedureCode =
+    (procedureState as { state?: string | null; current_vote_item_id?: string | null } | null)?.state ===
+      "voting_procedure" &&
+    (procedureState as { current_vote_item_id?: string | null } | null)?.current_vote_item_id
+      ? (
+          await supabase
+            .from("vote_items")
+            .select("procedure_code")
+            .eq(
+              "id",
+              (
+                procedureState as {
+                  current_vote_item_id?: string | null;
+                }
+              ).current_vote_item_id as string
+            )
+            .maybeSingle()
+        ).data?.procedure_code ?? null
+      : null;
+  const unmoderatedLocked = activeProcedureCode === "unmoderated_caucus";
 
   // Fetch notes using the same visibility split as the spec:
   // - SMT unverified: forwarded notes only (SMT inbox)
@@ -285,6 +314,8 @@ export default async function ChatsNotesPage({
         myProfileName={myProfileName}
         allocationOptions={allocationOptions}
         chairOptions={chairOptions}
+        sessionActive={sessionActive}
+        unmoderatedLocked={unmoderatedLocked}
         initialSelectedAllocationRecipientIds={initialSelectedAllocationRecipientIds}
         initialSelectedChairRecipientIds={initialSelectedChairRecipientIds}
       />

@@ -19,8 +19,17 @@ import {
 } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { fetchSpeakerQueue } from "@/lib/speaker-queue";
-import { ChairSpeakerQueuePanel } from "@/components/chair/ChairSpeakerQueuePanel";
-import { BUILTIN_TIMER_PRESETS, presetToTimerFields } from "@/lib/timer-presets";
+import {
+  ChairSpeakerQueuePanel,
+  type SpeakerListChairPromptKind,
+} from "@/components/chair/ChairSpeakerQueuePanel";
+import {
+  BUILTIN_TIMER_PRESETS,
+  presetToTimerFields,
+  floorLabelLooksLikeGsl,
+  isGslTimerPresetId,
+  isModeratedCaucusTimerPresetId,
+} from "@/lib/timer-presets";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import {
@@ -95,6 +104,19 @@ type ClauseRow = {
   clause_number: number;
   clause_text: string;
 };
+type CurrentSpeakerQueueRow = {
+  id: string;
+  allocation_id: string | null;
+  label: string | null;
+};
+type ChairSpeechNoteRow = {
+  id: string;
+  speaker_label: string;
+  content: string;
+  allocation_id: string | null;
+  created_at: string;
+  updated_at: string;
+};
 
 /** Dashboard splits session tools across routes; committee room uses `"all"`. */
 export type SessionFloorSection =
@@ -128,6 +150,9 @@ export function SessionControlClient({
   const [daisEditPublishAt, setDaisEditPublishAt] = useState("");
   const [pauseEvents, setPauseEvents] = useState<PauseEvent[]>([]);
   const [pauseReasonDraft, setPauseReasonDraft] = useState("");
+  const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
+  const [speechNoteDraft, setSpeechNoteDraft] = useState("");
+  const [speechNotesRecent, setSpeechNotesRecent] = useState<ChairSpeechNoteRow[]>([]);
   const [timer, setTimer] = useState({
     current: "",
     next: "",
@@ -160,10 +185,18 @@ export function SessionControlClient({
     procedure_resolution_id: null as string | null,
     procedure_clause_ids: [] as string[],
     motioner_allocation_id: null as string | null,
+    moderated_total_minutes: "",
+    moderated_speaker_seconds: "",
+    unmoderated_total_minutes: "",
+    consultation_total_minutes: "",
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
-  const [showModeratedCaucusQueuePrompt, setShowModeratedCaucusQueuePrompt] = useState(false);
+  const [speakerListChairPrompt, setSpeakerListChairPrompt] = useState<SpeakerListChairPromptKind | null>(
+    null
+  );
+  /** After dismissing the GSL save reminder, do not re-open on the next save until the floor label changes. */
+  const suppressGslSavePromptRef = useRef(false);
   const speakersSectionRef = useRef<HTMLElement | null>(null);
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
@@ -237,19 +270,113 @@ export function SessionControlClient({
     () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
     [motionDraft.vote_type, motionDraft.procedure_code]
   );
+  const motionDraftValidationError = useMemo(
+    () => validateMotionDraft(motionDraft),
+    [motionDraft]
+  );
 
   const selectedResolutionClauses = useMemo(() => {
     if (!motionDraft.procedure_resolution_id) return [];
     return resolutionClauses.filter((c) => c.resolution_id === motionDraft.procedure_resolution_id);
   }, [motionDraft.procedure_resolution_id, resolutionClauses]);
 
+  function parseModeratedTiming(description: string | null | undefined): {
+    totalMinutes: string;
+    speakerSeconds: string;
+  } {
+    const d = String(description ?? "");
+    const total = d.match(/total\s+(\d+)\s*min/i)?.[1] ?? "";
+    const speaker = d.match(/speaker\s+(\d+)\s*s/i)?.[1] ?? "";
+    return { totalMinutes: total, speakerSeconds: speaker };
+  }
+
+  function stripTimingLineFromDescription(raw: string) {
+    return raw
+      .replace(/(?:^|\n)Timing:\s*total\s+\d+\s*min(?:,\s*speaker\s+\d+\s*s)?\s*$/i, "")
+      .trim();
+  }
+
+  function withModeratedTimingInDescription(draft: typeof motionDraft) {
+    if (draft.procedure_code === "moderated_caucus") {
+      const base = stripTimingLineFromDescription(draft.description);
+      const timing = `Timing: total ${draft.moderated_total_minutes} min, speaker ${draft.moderated_speaker_seconds}s`;
+      return base ? `${base}\n${timing}` : timing;
+    }
+    if (draft.procedure_code === "unmoderated_caucus") {
+      const base = stripTimingLineFromDescription(draft.description);
+      const timing = `Timing: total ${draft.unmoderated_total_minutes} min`;
+      return base ? `${base}\n${timing}` : timing;
+    }
+    if (draft.procedure_code === "consultation") {
+      const base = stripTimingLineFromDescription(draft.description);
+      const timing = `Timing: total ${draft.consultation_total_minutes} min`;
+      return base ? `${base}\n${timing}` : timing;
+    }
+    return draft.description.trim() || null;
+  }
+
+  function validateMotionDraft(draft: typeof motionDraft): string | null {
+    if (draft.procedure_code === "moderated_caucus") {
+      if (!draft.title.trim()) {
+        return "Moderated caucus requires a topic.";
+      }
+      const total = Number(draft.moderated_total_minutes);
+      const speaker = Number(draft.moderated_speaker_seconds);
+      if (!Number.isFinite(total) || total <= 0) {
+        return "Moderated caucus requires total time (minutes).";
+      }
+      if (!Number.isFinite(speaker) || speaker <= 0) {
+        return "Moderated caucus requires speaker time (seconds).";
+      }
+    }
+    if (draft.procedure_code === "unmoderated_caucus") {
+      const total = Number(draft.unmoderated_total_minutes);
+      if (!Number.isFinite(total) || total <= 0) {
+        return "Unmoderated caucus requires total time (minutes).";
+      }
+    }
+    if (draft.procedure_code === "consultation") {
+      if (!draft.title.trim()) {
+        return "Consultation requires a topic or purpose.";
+      }
+      const total = Number(draft.consultation_total_minutes);
+      if (!Number.isFinite(total) || total <= 0) {
+        return "Consultation requires total time (minutes).";
+      }
+    }
+    if (
+      motionRequiresClauseTargets(draft.procedure_code) &&
+      (!draft.procedure_resolution_id || draft.procedure_clause_ids.length === 0)
+    ) {
+      return "Select a resolution and at least one clause for this procedural motion.";
+    }
+    if (
+      motionRequiresResolutionOnly(draft.procedure_code) &&
+      !draft.procedure_resolution_id
+    ) {
+      return "Select a resolution for this motion.";
+    }
+    return null;
+  }
+
   useEffect(() => {
-    if (!showModeratedCaucusQueuePrompt) return;
+    suppressGslSavePromptRef.current = false;
+  }, [timer.floorLabel]);
+
+  useEffect(() => {
+    if (!speakerListChairPrompt) return;
     const id = requestAnimationFrame(() => {
       speakersSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
     return () => cancelAnimationFrame(id);
-  }, [showModeratedCaucusQueuePrompt]);
+  }, [speakerListChairPrompt]);
+
+  function dismissSpeakerListPrompt() {
+    setSpeakerListChairPrompt((kind) => {
+      if (kind === "gsl") suppressGslSavePromptRef.current = true;
+      return null;
+    });
+  }
 
   const refresh = useCallback(async () => {
     const motionSelect =
@@ -266,6 +393,7 @@ export function SessionControlClient({
       { data: resolutionRows },
       { data: clauseRows },
       { data: pauseRows },
+      { data: sqCurrentRow },
     ] =
       await Promise.all([
         supabase
@@ -317,6 +445,12 @@ export function SessionControlClient({
           .eq("conference_id", conferenceId)
           .order("created_at", { ascending: false })
           .limit(20),
+        supabase
+          .from("speaker_queue_entries")
+          .select("id, allocation_id, label")
+          .eq("conference_id", conferenceId)
+          .eq("status", "current")
+          .maybeSingle(),
       ]);
 
     setAllocations(sortAllocationsByDisplayCountry((allocs as Alloc[]) ?? []));
@@ -333,6 +467,7 @@ export function SessionControlClient({
     );
     setAnnouncements((ann as Announcement[]) ?? []);
     setPauseEvents((pauseRows as PauseEvent[]) ?? []);
+    setCurrentSpeakerQueueRow((sqCurrentRow as CurrentSpeakerQueueRow | null) ?? null);
     const ps = psRow as {
       motion_floor_open?: boolean;
       debate_closed?: boolean;
@@ -352,6 +487,10 @@ export function SessionControlClient({
     setResolutions((resolutionRows as ResolutionRow[]) ?? []);
     setResolutionClauses((clauseRows as ClauseRow[]) ?? []);
     if (open) {
+      const parsedTiming = parseModeratedTiming(open.description);
+      const isMod = open.procedure_code === "moderated_caucus";
+      const isUnmod = open.procedure_code === "unmoderated_caucus";
+      const isConsult = open.procedure_code === "consultation";
       setMotionDraft({
         vote_type: open.vote_type,
         procedure_code: open.procedure_code,
@@ -361,6 +500,10 @@ export function SessionControlClient({
         procedure_resolution_id: open.procedure_resolution_id,
         procedure_clause_ids: open.procedure_clause_ids ?? [],
         motioner_allocation_id: open.motioner_allocation_id ?? null,
+        moderated_total_minutes: isMod ? parsedTiming.totalMinutes : "",
+        moderated_speaker_seconds: isMod ? parsedTiming.speakerSeconds : "",
+        unmoderated_total_minutes: isUnmod ? parsedTiming.totalMinutes : "",
+        consultation_total_minutes: isConsult ? parsedTiming.totalMinutes : "",
       });
     }
 
@@ -467,11 +610,59 @@ export function SessionControlClient({
         { event: "*", schema: "public", table: "dais_announcements", filter: `conference_id=eq.${conferenceId}` },
         () => void refresh()
       )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "speaker_queue_entries",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void refresh()
+      )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId, refresh]);
+
+  const loadChairSpeechNotes = useCallback(async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return;
+    const { data, error } = await supabase
+      .from("chair_speech_notes")
+      .select("id, speaker_label, content, allocation_id, created_at, updated_at")
+      .eq("conference_id", conferenceId)
+      .eq("chair_user_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(25);
+    if (!error && data) setSpeechNotesRecent(data as ChairSpeechNoteRow[]);
+  }, [supabase, conferenceId]);
+
+  useEffect(() => {
+    void loadChairSpeechNotes();
+  }, [loadChairSpeechNotes]);
+
+  useEffect(() => {
+    const ch = supabase
+      .channel(`chair-speech-notes-${conferenceId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "chair_speech_notes",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void loadChairSpeechNotes()
+      )
+      .subscribe();
+    return () => {
+      void supabase.removeChannel(ch);
+    };
+  }, [supabase, conferenceId, loadChairSpeechNotes]);
 
   function parseTime(m: string, s: string) {
     const mi = Math.max(0, parseInt(m, 10) || 0);
@@ -529,6 +720,14 @@ export function SessionControlClient({
             ? "Timer saved. Speaker time was longer than total; capped to total."
             : "Timer saved."
       );
+      if (
+        !error &&
+        !timer.perSpeakerMode &&
+        floorLabelLooksLikeGsl(timer.floorLabel) &&
+        !suppressGslSavePromptRef.current
+      ) {
+        setSpeakerListChairPrompt((prev) => (prev === "moderated_passed" ? prev : "gsl"));
+      }
       setTimer((t) => ({
         ...t,
         leftM: String(Math.floor(left / 60)),
@@ -729,6 +928,50 @@ export function SessionControlClient({
     });
   }
 
+  function saveChairSpeechNote() {
+    const text = speechNoteDraft.trim();
+    if (!text) {
+      setMsg("Write something before saving a speech note.");
+      return;
+    }
+    startTransition(async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return;
+      const queueAlloc = currentSpeakerQueueRow?.allocation_id ?? null;
+      const queueCountry = queueAlloc
+        ? allocations.find((a) => a.id === queueAlloc)?.country ?? null
+        : null;
+      const timerLine = timer.current.trim();
+      const speakerLabel =
+        timerLine ||
+        currentSpeakerQueueRow?.label?.trim() ||
+        queueCountry ||
+        "—";
+      const { error } = await supabase.from("chair_speech_notes").insert({
+        conference_id: conferenceId,
+        chair_user_id: user.id,
+        allocation_id: queueAlloc,
+        speaker_label: speakerLabel,
+        content: text,
+      });
+      setMsg(error ? error.message : "Speech note saved.");
+      if (!error) {
+        setSpeechNoteDraft("");
+        void loadChairSpeechNotes();
+      }
+    });
+  }
+
+  function deleteChairSpeechNote(noteId: string) {
+    startTransition(async () => {
+      const { error } = await supabase.from("chair_speech_notes").delete().eq("id", noteId);
+      setMsg(error ? error.message : "Speech note deleted.");
+      if (!error) void loadChairSpeechNotes();
+    });
+  }
+
   function postDais() {
     const body = daisBody.trim();
     if (!body) return;
@@ -870,11 +1113,12 @@ export function SessionControlClient({
     });
   }
 
-  function createMotion() {
-    if (!motionDraft.title.trim()) {
-      setMsg("Motion title is required.");
-      return;
-    }
+  type MotionDraftState = typeof motionDraft;
+
+  function createMotion(draftOverride?: MotionDraftState) {
+    const draft = draftOverride ?? motionDraft;
+    const draftError = validateMotionDraft(draft);
+    if (draftError) return setMsg(draftError);
     if (openMotion) {
       setMsg("Close the current motion before opening another.");
       return;
@@ -891,20 +1135,6 @@ export function SessionControlClient({
       );
       return;
     }
-    if (
-      motionRequiresClauseTargets(motionDraft.procedure_code) &&
-      (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)
-    ) {
-      setMsg("Select a resolution and at least one clause for this procedural motion.");
-      return;
-    }
-    if (
-      motionRequiresResolutionOnly(motionDraft.procedure_code) &&
-      !motionDraft.procedure_resolution_id
-    ) {
-      setMsg("Select a resolution for this motion.");
-      return;
-    }
     startTransition(async () => {
       const { data: psRow } = await supabase
         .from("procedure_states")
@@ -918,15 +1148,15 @@ export function SessionControlClient({
         .from("vote_items")
         .insert({
         conference_id: conferenceId,
-        vote_type: motionDraft.vote_type,
-          procedure_code: motionDraft.procedure_code,
-          procedure_resolution_id: motionDraft.procedure_resolution_id,
-          procedure_clause_ids: motionDraft.procedure_clause_ids,
-        title: motionDraft.title.trim(),
-        description: motionDraft.description.trim() || null,
-        must_vote: motionDraft.must_vote,
-        required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
-        motioner_allocation_id: motionDraft.motioner_allocation_id || null,
+        vote_type: draft.vote_type,
+          procedure_code: draft.procedure_code,
+          procedure_resolution_id: draft.procedure_resolution_id,
+          procedure_clause_ids: draft.procedure_clause_ids,
+        title: draft.title.trim() || null,
+        description: withModeratedTimingInDescription(draft),
+        must_vote: draft.must_vote,
+        required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code),
+        motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: true,
         })
         .select("id")
@@ -951,6 +1181,10 @@ export function SessionControlClient({
           procedure_resolution_id: null,
           procedure_clause_ids: [],
           motioner_allocation_id: null,
+          moderated_total_minutes: "",
+          moderated_speaker_seconds: "",
+          unmoderated_total_minutes: "",
+          consultation_total_minutes: "",
         });
       }
       void refresh();
@@ -959,6 +1193,8 @@ export function SessionControlClient({
 
   function saveMotionEdits() {
     if (!openMotion) return;
+    const draftError = validateMotionDraft(motionDraft);
+    if (draftError) return setMsg(draftError);
     startTransition(async () => {
       const { error } = await supabase
         .from("vote_items")
@@ -968,7 +1204,7 @@ export function SessionControlClient({
           procedure_resolution_id: motionDraft.procedure_resolution_id,
           procedure_clause_ids: motionDraft.procedure_clause_ids,
           title: motionDraft.title.trim() || null,
-          description: motionDraft.description.trim() || null,
+          description: withModeratedTimingInDescription(motionDraft),
           must_vote: motionDraft.must_vote,
           required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
           motioner_allocation_id: motionDraft.motioner_allocation_id || null,
@@ -1042,7 +1278,7 @@ export function SessionControlClient({
         });
 
         if (passes && openMotion.procedure_code === "moderated_caucus") {
-          setShowModeratedCaucusQueuePrompt(true);
+          setSpeakerListChairPrompt("moderated_passed");
         }
       }
       void refresh();
@@ -1134,7 +1370,8 @@ export function SessionControlClient({
     });
   }
 
-  function recordStatedMotion() {
+  function recordStatedMotion(draftOverride?: MotionDraftState) {
+    const draft = draftOverride ?? motionDraft;
     if (!motionFloorOpen) {
       setMsg("Open the motion floor for statements first.");
       return;
@@ -1143,36 +1380,20 @@ export function SessionControlClient({
       setMsg("A motion is already open for voting. Close it before recording further statements.");
       return;
     }
-    if (!motionDraft.title.trim()) {
-      setMsg("Motion title is required.");
-      return;
-    }
-    if (
-      motionRequiresClauseTargets(motionDraft.procedure_code) &&
-      (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)
-    ) {
-      setMsg("Select a resolution and at least one clause for this procedural motion.");
-      return;
-    }
-    if (
-      motionRequiresResolutionOnly(motionDraft.procedure_code) &&
-      !motionDraft.procedure_resolution_id
-    ) {
-      setMsg("Select a resolution for this motion.");
-      return;
-    }
+    const draftError = validateMotionDraft(draft);
+    if (draftError) return setMsg(draftError);
     startTransition(async () => {
       const { error } = await supabase.from("vote_items").insert({
         conference_id: conferenceId,
-        vote_type: motionDraft.vote_type,
-        procedure_code: motionDraft.procedure_code,
-        procedure_resolution_id: motionDraft.procedure_resolution_id,
-        procedure_clause_ids: motionDraft.procedure_clause_ids,
-        title: motionDraft.title.trim(),
-        description: motionDraft.description.trim() || null,
-        must_vote: motionDraft.must_vote,
-        required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
-        motioner_allocation_id: motionDraft.motioner_allocation_id || null,
+        vote_type: draft.vote_type,
+        procedure_code: draft.procedure_code,
+        procedure_resolution_id: draft.procedure_resolution_id,
+        procedure_clause_ids: draft.procedure_clause_ids,
+        title: draft.title.trim() || null,
+        description: withModeratedTimingInDescription(draft),
+        must_vote: draft.must_vote,
+        required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code),
+        motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: false,
       });
       setMsg(error ? error.message : "Stated motion recorded (not yet open for voting).");
@@ -1186,10 +1407,203 @@ export function SessionControlClient({
           procedure_resolution_id: null,
           procedure_clause_ids: [],
           motioner_allocation_id: null,
+          moderated_total_minutes: "",
+          moderated_speaker_seconds: "",
+          unmoderated_total_minutes: "",
+          consultation_total_minutes: "",
         });
       }
       void refresh();
     });
+  }
+
+  function startGuidedMotionFlow() {
+    const options = procedurePresets.filter((p) => p.code !== null);
+    const pickRaw = window.prompt(
+      [
+        "Step 1/5: Choose procedure (enter number).",
+        ...options.map((p, i) => `${i + 1}. ${p.label}`),
+      ].join("\n")
+    );
+    if (!pickRaw) return;
+    const pick = Number(pickRaw);
+    if (!Number.isFinite(pick) || pick < 1 || pick > options.length) {
+      setMsg("Invalid procedure selection.");
+      return;
+    }
+    const selected = options[pick - 1]!;
+    const procedureCode = selected.code;
+
+    const titlePrompt =
+      procedureCode === "consultation"
+        ? "Step 2/5: Topic / purpose"
+        : procedureCode === "moderated_caucus"
+          ? "Step 2/5: Topic"
+          : procedureCode === "unmoderated_caucus"
+            ? "Step 2/5: Topic (optional)"
+            : "Step 2/5: Motion title (optional)";
+    const titleInput = window.prompt(titlePrompt, selected.title ?? selected.label);
+    if (titleInput === null) return;
+    const titleTrimmed = titleInput.trim();
+    if (!titleTrimmed) {
+      if (procedureCode === "consultation") {
+        setMsg("Consultation requires a topic or purpose.");
+        return;
+      }
+      if (procedureCode === "moderated_caucus") {
+        setMsg("Topic is required.");
+        return;
+      }
+    }
+
+    const motionerInput = window.prompt(
+      [
+        "Step 3/5: Motioner (optional, enter number or leave blank).",
+        "0. Not specified",
+        ...allocations.map((a, i) => `${i + 1}. ${a.country}`),
+      ].join("\n"),
+      "0"
+    );
+    let motionerId: string | null = null;
+    if (motionerInput && motionerInput.trim() !== "" && motionerInput.trim() !== "0") {
+      const idx = Number(motionerInput);
+      if (Number.isFinite(idx) && idx >= 1 && idx <= allocations.length) {
+        motionerId = allocations[idx - 1]!.id;
+      }
+    }
+
+    let description = window.prompt("Step 4/5: Description / notes (optional)", "") ?? "";
+    if (
+      procedureCode === "moderated_caucus" ||
+      procedureCode === "unmoderated_caucus" ||
+      procedureCode === "consultation"
+    ) {
+      const totalRequired =
+        procedureCode === "moderated_caucus" ||
+        procedureCode === "unmoderated_caucus" ||
+        procedureCode === "consultation";
+      const totalMinutes = window.prompt(
+        `Timing: total minutes${totalRequired ? " (required)" : ""}`,
+        "10"
+      );
+      if (procedureCode === "moderated_caucus" && (!totalMinutes || Number(totalMinutes) <= 0)) {
+        setMsg("Moderated caucus requires total time (minutes).");
+        return;
+      }
+      if (procedureCode === "unmoderated_caucus" && (!totalMinutes || Number(totalMinutes) <= 0)) {
+        setMsg("Unmoderated caucus requires total time (minutes).");
+        return;
+      }
+      if (procedureCode === "consultation" && (!totalMinutes || Number(totalMinutes) <= 0)) {
+        setMsg("Consultation requires total time (minutes).");
+        return;
+      }
+      if (totalMinutes && Number(totalMinutes) > 0) {
+        let timing = `Timing: total ${totalMinutes} min`;
+        if (procedureCode === "moderated_caucus") {
+          const speakerSeconds = window.prompt("Timing: speaker seconds (required)", "60");
+          if (!speakerSeconds || Number(speakerSeconds) <= 0) {
+            setMsg("Moderated caucus requires speaker time (seconds).");
+            return;
+          }
+          timing += `, speaker ${speakerSeconds}s`;
+        }
+        description = description.trim() ? `${description.trim()}\n${timing}` : timing;
+      }
+    }
+
+    let resolutionId: string | null = null;
+    let clauseIds: string[] = [];
+    if (motionRequiresResolutionOnly(procedureCode) || motionRequiresClauseTargets(procedureCode)) {
+      if (resolutions.length === 0) {
+        setMsg("No resolutions available for this motion.");
+        return;
+      }
+      const resPick = window.prompt(
+        [
+          "Step 5/5: Select target resolution (number).",
+          ...resolutions.map((r, i) => `${i + 1}. ${r.id.slice(0, 8)} ${r.google_docs_url ? `(${r.google_docs_url})` : ""}`),
+        ].join("\n")
+      );
+      const rIdx = Number(resPick);
+      if (!Number.isFinite(rIdx) || rIdx < 1 || rIdx > resolutions.length) {
+        setMsg("Resolution selection is required.");
+        return;
+      }
+      resolutionId = resolutions[rIdx - 1]!.id;
+
+      if (motionRequiresClauseTargets(procedureCode)) {
+        const clauses = resolutionClauses.filter((c) => c.resolution_id === resolutionId);
+        if (clauses.length === 0) {
+          setMsg("No clauses available for selected resolution.");
+          return;
+        }
+        const clausePick = window.prompt(
+          [
+            "Choose clause numbers (comma-separated indexes).",
+            ...clauses.map((c, i) => `${i + 1}. Clause ${c.clause_number}: ${c.clause_text.slice(0, 60)}...`),
+          ].join("\n")
+        );
+        if (!clausePick) {
+          setMsg("At least one clause is required.");
+          return;
+        }
+        const picked = clausePick
+          .split(",")
+          .map((x) => Number(x.trim()))
+          .filter((n) => Number.isFinite(n) && n >= 1 && n <= clauses.length)
+          .map((n) => clauses[n - 1]!.id);
+        clauseIds = Array.from(new Set(picked));
+        if (clauseIds.length === 0) {
+          setMsg("At least one clause is required.");
+          return;
+        }
+      }
+    }
+
+    const nextDraft: MotionDraftState = {
+      vote_type: "motion",
+      procedure_code: procedureCode,
+      title: titleTrimmed,
+      description: description.trim(),
+      must_vote: false,
+      procedure_resolution_id: resolutionId,
+      procedure_clause_ids: clauseIds,
+      motioner_allocation_id: motionerId,
+      moderated_total_minutes:
+        procedureCode === "moderated_caucus"
+          ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
+          : "",
+      moderated_speaker_seconds:
+        procedureCode === "moderated_caucus"
+          ? (description.match(/speaker\s+(\d+)\s*s/i)?.[1] ?? "")
+          : "",
+      unmoderated_total_minutes:
+        procedureCode === "unmoderated_caucus"
+          ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
+          : "",
+      consultation_total_minutes:
+        procedureCode === "consultation"
+          ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
+          : "",
+    };
+
+    setMotionDraft(nextDraft);
+
+    if (motionFloorOpen) {
+      if (window.confirm("Record this as a stated motion now?")) {
+        recordStatedMotion(nextDraft);
+        return;
+      }
+      setMsg("Guided draft loaded. Motion floor is open — click Record stated motion when ready.");
+      return;
+    }
+
+    if (window.confirm("Create and open this motion for voting now?")) {
+      createMotion(nextDraft);
+      return;
+    }
+    setMsg("Guided draft loaded. Review and click Create and open motion when ready.");
   }
 
   function beginVotingInDisruptivenessOrder() {
@@ -1374,6 +1788,14 @@ export function SessionControlClient({
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
+                disabled={pending || !!openMotion}
+                onClick={startGuidedMotionFlow}
+                className="px-3 py-2 rounded-lg border border-brand-gold/50 bg-brand-gold/15 text-brand-navy text-sm font-medium hover:bg-brand-gold/25 disabled:opacity-50"
+              >
+                Add motion (guided)
+              </button>
+              <button
+                type="button"
                 disabled={pending || !!openMotion || motionFloorOpen}
                 onClick={openMotionFloorForStatements}
                 className="px-3 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium disabled:opacity-50"
@@ -1394,13 +1816,9 @@ export function SessionControlClient({
                   pending ||
                   !motionFloorOpen ||
                   !!openMotion ||
-                  !motionDraft.title.trim() ||
-                  (motionRequiresClauseTargets(motionDraft.procedure_code) &&
-                    (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)) ||
-                  (motionRequiresResolutionOnly(motionDraft.procedure_code) &&
-                    !motionDraft.procedure_resolution_id)
+                  !!motionDraftValidationError
                 }
-                onClick={recordStatedMotion}
+                onClick={() => recordStatedMotion()}
                 className="rounded-lg border border-amber-500/50 px-3 py-2 text-sm font-medium text-amber-200 hover:bg-amber-500/15 disabled:opacity-50"
               >
                 Record stated motion
@@ -1460,6 +1878,10 @@ export function SessionControlClient({
                   procedure_code: code,
                   vote_type: "motion",
                   title: preset?.title ?? d.title,
+                  moderated_total_minutes: code === "moderated_caucus" ? d.moderated_total_minutes : "",
+                  moderated_speaker_seconds: code === "moderated_caucus" ? d.moderated_speaker_seconds : "",
+                  unmoderated_total_minutes: code === "unmoderated_caucus" ? d.unmoderated_total_minutes : "",
+                  consultation_total_minutes: code === "consultation" ? d.consultation_total_minutes : "",
                 }));
               }}
             >
@@ -1560,14 +1982,88 @@ export function SessionControlClient({
             </div>
           </div>
           <label className="text-sm block text-brand-navy">
-            <span className={surfaceLabel}>Title</span>
+            <span className={surfaceLabel}>
+              {motionDraft.procedure_code === "consultation"
+                ? "Topic / purpose"
+                : motionDraft.procedure_code === "moderated_caucus"
+                  ? "Topic"
+                  : motionDraft.procedure_code === "unmoderated_caucus"
+                    ? "Topic (optional)"
+                    : "Title (optional)"}
+            </span>
             <input
               className={surfaceField}
               value={motionDraft.title}
               onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
-              placeholder="Motion title"
+              placeholder={
+                motionDraft.procedure_code === "moderated_caucus"
+                  ? "Moderated caucus topic"
+                  : motionDraft.procedure_code === "unmoderated_caucus"
+                    ? "Unmoderated caucus topic (optional)"
+                    : motionDraft.procedure_code === "consultation"
+                      ? "What the consultation is for"
+                      : "Motion title (optional)"
+              }
             />
           </label>
+          {motionDraft.procedure_code === "moderated_caucus" ? (
+            <div className="grid sm:grid-cols-2 gap-3">
+              <label className="text-sm block text-brand-navy">
+                <span className={surfaceLabel}>Total time (minutes)</span>
+                <input
+                  type="number"
+                  min={1}
+                  className={surfaceField}
+                  value={motionDraft.moderated_total_minutes}
+                  onChange={(e) =>
+                    setMotionDraft((d) => ({ ...d, moderated_total_minutes: e.target.value }))
+                  }
+                  placeholder="e.g. 10"
+                />
+              </label>
+              <label className="text-sm block text-brand-navy">
+                <span className={surfaceLabel}>Speaker time (seconds)</span>
+                <input
+                  type="number"
+                  min={1}
+                  className={surfaceField}
+                  value={motionDraft.moderated_speaker_seconds}
+                  onChange={(e) =>
+                    setMotionDraft((d) => ({ ...d, moderated_speaker_seconds: e.target.value }))
+                  }
+                  placeholder="e.g. 60"
+                />
+              </label>
+            </div>
+          ) : motionDraft.procedure_code === "unmoderated_caucus" ? (
+            <label className="text-sm block text-brand-navy">
+              <span className={surfaceLabel}>Total time (minutes)</span>
+              <input
+                type="number"
+                min={1}
+                className={surfaceField}
+                value={motionDraft.unmoderated_total_minutes}
+                onChange={(e) =>
+                  setMotionDraft((d) => ({ ...d, unmoderated_total_minutes: e.target.value }))
+                }
+                placeholder="e.g. 10"
+              />
+            </label>
+          ) : motionDraft.procedure_code === "consultation" ? (
+            <label className="text-sm block text-brand-navy">
+              <span className={surfaceLabel}>Total time (minutes)</span>
+              <input
+                type="number"
+                min={1}
+                className={surfaceField}
+                value={motionDraft.consultation_total_minutes}
+                onChange={(e) =>
+                  setMotionDraft((d) => ({ ...d, consultation_total_minutes: e.target.value }))
+                }
+                placeholder="e.g. 10"
+              />
+            </label>
+          ) : null}
           <label className="text-sm block text-brand-navy">
             <span className={surfaceLabel}>Motioner</span>
             <select
@@ -1609,14 +2105,9 @@ export function SessionControlClient({
               <button
                 type="button"
                 disabled={
-                  pending ||
-                  !motionDraft.title.trim() ||
-                  (motionRequiresClauseTargets(motionDraft.procedure_code) &&
-                    (!motionDraft.procedure_resolution_id || motionDraft.procedure_clause_ids.length === 0)) ||
-                  (motionRequiresResolutionOnly(motionDraft.procedure_code) &&
-                    !motionDraft.procedure_resolution_id)
+                  pending || !!motionDraftValidationError
                 }
-                onClick={createMotion}
+                onClick={() => createMotion()}
                 className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium"
               >
                 Create and open motion
@@ -1659,6 +2150,9 @@ export function SessionControlClient({
               </>
             )}
           </div>
+          {motionDraftValidationError ? (
+            <p className="text-xs text-amber-800 dark:text-amber-200">{motionDraftValidationError}</p>
+          ) : null}
           <div className="text-xs text-brand-muted font-medium">
             Tally: Yes {motionTally.yes} | No {motionTally.no} | Total {motionTally.total}
             <span className="mt-1 block font-normal text-[0.65rem] leading-snug">
@@ -1865,6 +2359,12 @@ export function SessionControlClient({
                   if (!p) return;
                   const f = presetToTimerFields(p);
                   setTimer((t) => ({ ...t, ...f }));
+                  suppressGslSavePromptRef.current = false;
+                  if (isGslTimerPresetId(id)) {
+                    setSpeakerListChairPrompt((prev) => (prev === "moderated_passed" ? prev : "gsl"));
+                  } else if (isModeratedCaucusTimerPresetId(id)) {
+                    setSpeakerListChairPrompt((prev) => (prev === "moderated_passed" ? prev : "moderated_timer"));
+                  }
                 }}
               >
                 <option value="">Apply preset…</option>
@@ -1996,6 +2496,80 @@ export function SessionControlClient({
               />
             </label>
           </div>
+
+          <div className="rounded-lg border border-white/15 bg-black/20 p-3 space-y-3 text-brand-navy">
+            <div>
+              <p className={surfaceLabel}>Speech notes (current speaker)</p>
+              <p className="text-xs text-brand-muted mt-1 leading-snug">
+                Notes are tied to the <strong className="font-medium text-brand-navy/90">Current speaker</strong> timer
+                text and, when the speaker list has someone marked <strong className="font-medium text-brand-navy/90">Current</strong>, their delegation is stored for reference.
+              </p>
+            </div>
+            <div className="text-sm rounded-md border border-white/10 bg-black/25 px-3 py-2 space-y-1">
+              <p>
+                <span className="text-brand-muted">Timer (floor): </span>
+                <span className="font-medium">{timer.current.trim() || "—"}</span>
+              </p>
+              {currentSpeakerQueueRow ? (
+                <p>
+                  <span className="text-brand-muted">Speaker list (current): </span>
+                  <span className="font-medium">
+                    {currentSpeakerQueueRow.allocation_id
+                      ? (allocations.find((a) => a.id === currentSpeakerQueueRow.allocation_id)?.country ??
+                        currentSpeakerQueueRow.label ??
+                        "—")
+                      : (currentSpeakerQueueRow.label ?? "—")}
+                  </span>
+                </p>
+              ) : (
+                <p className="text-brand-muted text-xs">No delegation is marked Current on the speaker list.</p>
+              )}
+            </div>
+            <label className="block text-sm">
+              <span className={surfaceLabel}>Note</span>
+              <textarea
+                className={`${surfaceInputCore} mt-1 min-h-[88px]`}
+                value={speechNoteDraft}
+                onChange={(e) => setSpeechNoteDraft(e.target.value)}
+                placeholder="Points, POIs, tone, follow-ups…"
+              />
+            </label>
+            <button
+              type="button"
+              disabled={pending || !speechNoteDraft.trim()}
+              onClick={saveChairSpeechNote}
+              className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
+            >
+              Save speech note
+            </button>
+            {speechNotesRecent.length > 0 ? (
+              <div className="border-t border-white/10 pt-3 space-y-2">
+                <p className={surfaceLabel}>Your recent notes (this committee)</p>
+                <ul className="max-h-48 overflow-y-auto space-y-2 text-sm">
+                  {speechNotesRecent.map((n) => (
+                    <li key={n.id} className="rounded-md border border-white/10 bg-black/20 p-2">
+                      <div className="flex flex-wrap items-start justify-between gap-2">
+                        <span className="font-medium text-brand-navy">{n.speaker_label}</span>
+                        <button
+                          type="button"
+                          className="text-xs text-red-700 hover:underline dark:text-red-300 shrink-0"
+                          disabled={pending}
+                          onClick={() => deleteChairSpeechNote(n.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <p className="text-xs text-brand-muted mt-0.5">
+                        {new Date(n.created_at).toLocaleString()}
+                      </p>
+                      <p className="mt-1 whitespace-pre-wrap text-brand-navy/90">{n.content}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+
           <div className="flex flex-wrap gap-4 items-end">
             <label className="text-sm text-brand-navy min-w-[10rem]">
               <span className={surfaceLabel}>Speaker time (remaining)</span>
@@ -2260,8 +2834,8 @@ export function SessionControlClient({
           conferenceId={conferenceId}
           allocations={allocations}
           variant="session"
-          moderatedCaucusPromptOpen={showModeratedCaucusQueuePrompt}
-          onDismissModeratedCaucusPrompt={() => setShowModeratedCaucusQueuePrompt(false)}
+          speakerListPromptKind={speakerListChairPrompt}
+          onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
           onNotify={(text) => setMsg(text)}
         />
       ) : null}

@@ -2,12 +2,16 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Megaphone, ListOrdered, PauseCircle } from "lucide-react";
+import { Clock, Megaphone, ListOrdered, PauseCircle } from "lucide-react";
 import { ActiveMotionContextStrip } from "@/components/session/ActiveMotionContextStrip";
 import { Timers } from "@/components/timers/Timers";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
+import {
+  committeeSessionEndTimestampMs,
+  formatCountdownOrElapsed,
+} from "@/lib/committee-session-end";
 
 type Announcement = {
   id: string;
@@ -38,6 +42,21 @@ function allocCountry(
 
 type FloorTheme = "dark" | "light";
 
+function formatSessionElapsed(startIso: string, nowMs: number): string {
+  const t0 = new Date(startIso).getTime();
+  if (Number.isNaN(t0)) return "—";
+  let sec = Math.max(0, Math.floor((nowMs - t0) / 1000));
+  const h = Math.floor(sec / 3600);
+  sec %= 3600;
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  if (h > 0) {
+    return `${h}:${pad(m)}:${pad(s)}`;
+  }
+  return `${m}:${pad(s)}`;
+}
+
 export function FloorStatusBar({
   conferenceId,
   observeOnly = false,
@@ -55,6 +74,30 @@ export function FloorStatusBar({
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
   const [queue, setQueue] = useState<QueueRow[]>([]);
   const [rollSelf, setRollSelf] = useState<string | null>(null);
+  const [expandedAnnouncement, setExpandedAnnouncement] = useState<Announcement | null>(null);
+  const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
+  const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
+  const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
+  /** Bumps once per second while a session is running (or a limit is set) so timers update. */
+  const [, setSessionTick] = useState(0);
+
+  const loadProcedureSession = useCallback(() => {
+    return supabase
+      .from("procedure_states")
+      .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
+      .eq("conference_id", conferenceId)
+      .maybeSingle()
+      .then(({ data }) => {
+        const row = data as {
+          committee_session_started_at?: string | null;
+          committee_session_duration_seconds?: number | null;
+          committee_session_ends_at?: string | null;
+        } | null;
+        setSessionStartedAt(row?.committee_session_started_at ?? null);
+        setSessionDurationSeconds(row?.committee_session_duration_seconds ?? null);
+        setSessionEndsAt(row?.committee_session_ends_at ?? null);
+      });
+  }, [supabase, conferenceId]);
 
   const loadQueue = useCallback(() => {
     return supabase
@@ -125,6 +168,37 @@ export function FloorStatusBar({
   }, [supabase, conferenceId, loadQueue, loadDais, loadPauseEvents, observeOnly]);
 
   useEffect(() => {
+    void loadProcedureSession();
+    const ch = supabase
+      .channel(`floor-procedure-session-${conferenceId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "procedure_states",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void loadProcedureSession()
+      )
+      .subscribe();
+    return () => {
+      void supabase.removeChannel(ch);
+    };
+  }, [supabase, conferenceId, loadProcedureSession]);
+
+  const sessionEndMs =
+    sessionStartedAt != null
+      ? committeeSessionEndTimestampMs(sessionStartedAt, sessionDurationSeconds, sessionEndsAt)
+      : null;
+
+  useEffect(() => {
+    if (!sessionStartedAt) return;
+    const id = window.setInterval(() => setSessionTick((n) => n + 1), 1000);
+    return () => window.clearInterval(id);
+  }, [sessionStartedAt]);
+
+  useEffect(() => {
     const t = window.setInterval(() => {
       void loadDais();
       void loadPauseEvents();
@@ -187,10 +261,54 @@ export function FloorStatusBar({
   const border = isLight ? "border-brand-navy/10" : "border-white/10";
   const current = isLight ? "text-brand-gold" : "text-brand-gold-bright";
   const bodyText = isLight ? "text-brand-navy/95" : "text-brand-navy/95";
-  const qText = isLight ? "text-brand-navy/90" : "text-brand-navy/90";
+  const qText = "text-brand-navy/90";
+
+  const limitNow = Date.now();
+  const limitFmt =
+    sessionStartedAt != null && sessionEndMs != null
+      ? formatCountdownOrElapsed(sessionEndMs, limitNow)
+      : null;
+
+  const sessionElapsedRow =
+    sessionStartedAt != null ? (
+      <div
+        className={
+          isLight
+            ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1.5 text-sm text-brand-navy"
+            : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-brand-navy"
+        }
+      >
+        <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
+        <span className={muted}>Session time</span>
+        <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
+          {formatSessionElapsed(sessionStartedAt, limitNow)}
+        </span>
+        {limitFmt ? (
+          <>
+            <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
+              ·
+            </span>
+            <span className={muted}>Limit</span>
+            <span
+              className={`font-display font-semibold tabular-nums tracking-tight ${
+                limitFmt.label === "passed"
+                  ? isLight
+                    ? "text-amber-800"
+                    : "text-amber-200"
+                  : undefined
+              }`}
+              suppressHydrationWarning
+            >
+              {limitFmt.label === "remaining" ? `${limitFmt.text} left` : `over by ${limitFmt.text}`}
+            </span>
+          </>
+        ) : null}
+      </div>
+    ) : null;
 
   return (
     <div className="space-y-2">
+      {sessionElapsedRow}
       {activeMotionVoteItemId ? (
         <ActiveMotionContextStrip
           conferenceId={conferenceId}
@@ -216,6 +334,13 @@ export function FloorStatusBar({
                 body={latestDais.body}
                 format={latestDais.body_format === "markdown" ? "markdown" : "plain"}
               />
+              <button
+                type="button"
+                onClick={() => setExpandedAnnouncement(latestDais)}
+                className="mt-1 text-xs font-medium text-brand-gold hover:underline"
+              >
+                View full announcement
+              </button>
             </div>
           </div>
         </div>
@@ -269,6 +394,37 @@ export function FloorStatusBar({
         </p>
       )}
       </div>
+      {expandedAnnouncement ? (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/55 px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Full announcement"
+          onClick={() => setExpandedAnnouncement(null)}
+        >
+          <div
+            className="w-full max-w-2xl rounded-xl border border-white/15 bg-brand-paper p-4 md:p-5 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcement</h3>
+              <button
+                type="button"
+                onClick={() => setExpandedAnnouncement(null)}
+                className="text-xs font-medium text-brand-gold hover:underline"
+              >
+                Close
+              </button>
+            </div>
+            <div className="max-h-[70vh] overflow-y-auto text-sm text-brand-navy">
+              <DaisAnnouncementBody
+                body={expandedAnnouncement.body}
+                format={expandedAnnouncement.body_format === "markdown" ? "markdown" : "plain"}
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

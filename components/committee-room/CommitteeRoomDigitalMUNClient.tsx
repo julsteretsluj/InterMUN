@@ -112,6 +112,8 @@ export function CommitteeRoomDigitalMUNClient({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [procedureState, setProcedureState] = useState<"debate_open" | "voting_procedure">("debate_open");
   const [currentVoteItemId, setCurrentVoteItemId] = useState<string | null>(null);
+  const [sessionActive, setSessionActive] = useState(false);
+  const [activeProcedureCode, setActiveProcedureCode] = useState<string | null>(null);
   const [delegationSearch, setDelegationSearch] = useState("");
   const [scrollMatchNonce, setScrollMatchNonce] = useState(0);
   const [myRollAttendance, setMyRollAttendance] = useState<RollAttendance | null>(null);
@@ -123,16 +125,36 @@ export function CommitteeRoomDigitalMUNClient({
   useEffect(() => {
     let isActive = true;
 
+    async function loadProcedureCode(voteItemId: string | null) {
+      if (!voteItemId) {
+        if (isActive) setActiveProcedureCode(null);
+        return;
+      }
+      const { data } = await supabase
+        .from("vote_items")
+        .select("procedure_code")
+        .eq("id", voteItemId)
+        .maybeSingle();
+      if (!isActive) return;
+      setActiveProcedureCode((data as { procedure_code?: string | null } | null)?.procedure_code ?? null);
+    }
+
     async function load() {
       const { data: ps } = await supabase
         .from("procedure_states")
-        .select("state, current_vote_item_id")
+        .select("state, current_vote_item_id, committee_session_started_at")
         .eq("conference_id", conferenceId)
         .maybeSingle();
 
       if (!isActive) return;
       setProcedureState(ps?.state ?? "debate_open");
       setCurrentVoteItemId(ps?.current_vote_item_id ?? null);
+      setSessionActive(Boolean(ps?.committee_session_started_at));
+      if (ps?.state === "voting_procedure") {
+        await loadProcedureCode(ps?.current_vote_item_id ?? null);
+      } else {
+        setActiveProcedureCode(null);
+      }
     }
 
     void load();
@@ -151,9 +173,16 @@ export function CommitteeRoomDigitalMUNClient({
           const row = payload.new as {
             state: "debate_open" | "voting_procedure";
             current_vote_item_id: string | null;
+            committee_session_started_at: string | null;
           };
           setProcedureState(row?.state ?? "debate_open");
           setCurrentVoteItemId(row?.current_vote_item_id ?? null);
+          setSessionActive(Boolean(row?.committee_session_started_at));
+          if (row?.state === "voting_procedure") {
+            void loadProcedureCode(row?.current_vote_item_id ?? null);
+          } else {
+            setActiveProcedureCode(null);
+          }
         }
       )
       .subscribe();
@@ -214,6 +243,7 @@ export function CommitteeRoomDigitalMUNClient({
   }, [supabase, conferenceId, isDelegate, myAllocationId]);
 
   const votingProcedureActive = procedureState === "voting_procedure";
+  const unmoderatedLocked = activeProcedureCode === "unmoderated_caucus";
 
   const assignedCount = useMemo(() => placards.filter((p) => !p.vacant).length, [placards]);
   const vacantCount = useMemo(() => placards.filter((p) => p.vacant).length, [placards]);
@@ -457,6 +487,8 @@ export function CommitteeRoomDigitalMUNClient({
                 chairOptions={chairOptions}
                 nextPathAfterVerification="/committee-room"
                 votingProcedureLocked={votingProcedureActive && isDelegate}
+                sessionActive={sessionActive}
+                unmoderatedLocked={unmoderatedLocked}
               />
             )}
           </div>

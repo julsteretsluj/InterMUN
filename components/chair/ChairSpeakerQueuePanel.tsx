@@ -13,13 +13,15 @@ import {
 
 type Alloc = { id: string; country: string };
 
+/** Session: chair reminder to curate the speaker list (add / remove delegates). */
+export type SpeakerListChairPromptKind = "moderated_passed" | "moderated_timer" | "gsl";
+
 type ChairSpeakerQueuePanelProps = {
   conferenceId: string;
   allocations: Alloc[];
   variant: "session" | "digital-room";
-  /** Shown after a moderated caucus passes (session floor only). */
-  moderatedCaucusPromptOpen?: boolean;
-  onDismissModeratedCaucusPrompt?: () => void;
+  speakerListPromptKind?: SpeakerListChairPromptKind | null;
+  onDismissSpeakerListPrompt?: () => void;
   /** Session page: surface feedback in the shared message strip. */
   onNotify?: (text: string) => void;
 };
@@ -37,8 +39,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       conferenceId,
       allocations,
       variant,
-      moderatedCaucusPromptOpen = false,
-      onDismissModeratedCaucusPrompt,
+      speakerListPromptKind = null,
+      onDismissSpeakerListPrompt,
       onNotify,
     },
     ref
@@ -115,7 +117,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       });
     }
 
-    function addBulkModeratedCaucusSpeakers() {
+    function addBulkSelectedToQueue() {
       const toAdd = allocations
         .map((x) => x.id)
         .filter((id) => caucusBulkPick.includes(id) && !activeQueueAllocationIds.has(id));
@@ -239,17 +241,25 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         ) : null}
 
         <div className={`${cardClass} space-y-3`}>
-          {isSession && moderatedCaucusPromptOpen ? (
+          {isSession && speakerListPromptKind ? (
             <div className="rounded-lg border-2 border-amber-500/80 bg-amber-50 p-3 space-y-3 text-brand-navy dark:border-amber-600 dark:bg-amber-950/30 dark:text-amber-50">
               <div className="flex gap-2 items-start">
                 <ListOrdered className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
                 <div className="min-w-0 space-y-1">
-                  <p className="font-semibold text-amber-950 dark:text-amber-100">Moderated caucus passed</p>
+                  <p className="font-semibold text-amber-950 dark:text-amber-100">
+                    {speakerListPromptKind === "gsl"
+                      ? "General Speakers' List (GSL)"
+                      : speakerListPromptKind === "moderated_timer"
+                        ? "Moderated caucus (per-speaker timer)"
+                        : "Moderated caucus passed"}
+                  </p>
                   <p className="text-sm text-brand-navy/85 dark:text-amber-100/90">
-                    Add delegates to the speaker list for this caucus. They appear in the order you add them (single{" "}
-                    <strong className="font-medium">Add</strong> below adds one at a time to the end). Or tick several
-                    delegations and use <strong className="font-medium">Add selected</strong>—they are appended in
-                    committee list order.
+                    Use the speaker list below to <strong className="font-medium">add</strong> delegates (dropdown +
+                    <strong className="font-medium"> Add</strong>, or tick delegations and{" "}
+                    <strong className="font-medium">Add selected to list</strong>) and{" "}
+                    <strong className="font-medium">remove</strong> them with <strong className="font-medium">Remove</strong>{" "}
+                    on each row. Reorder with the arrows or set <strong className="font-medium">Current</strong> when someone
+                    is at the mic.
                   </p>
                 </div>
               </div>
@@ -281,7 +291,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                     <button
                       type="button"
                       disabled={pending || caucusBulkPick.length === 0}
-                      onClick={addBulkModeratedCaucusSpeakers}
+                      onClick={addBulkSelectedToQueue}
                       className="px-3 py-2 rounded-lg bg-amber-700 text-white text-sm font-medium hover:bg-amber-800 disabled:opacity-50 dark:bg-amber-600 dark:hover:bg-amber-500"
                     >
                       Add selected to list
@@ -290,7 +300,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       type="button"
                       disabled={pending}
                       onClick={() => {
-                        onDismissModeratedCaucusPrompt?.();
+                        onDismissSpeakerListPrompt?.();
                         setCaucusBulkPick([]);
                       }}
                       className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
@@ -309,7 +319,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                     type="button"
                     disabled={pending}
                     onClick={() => {
-                      onDismissModeratedCaucusPrompt?.();
+                      onDismissSpeakerListPrompt?.();
                       setCaucusBulkPick([]);
                     }}
                     className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
@@ -323,7 +333,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   type="button"
                   disabled={pending}
                   onClick={() => {
-                    onDismissModeratedCaucusPrompt?.();
+                    onDismissSpeakerListPrompt?.();
                     setCaucusBulkPick([]);
                   }}
                   className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"

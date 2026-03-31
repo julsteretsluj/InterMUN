@@ -67,6 +67,8 @@ export function DelegationNotesView({
   chairOptions,
   nextPathAfterVerification = "/chats-notes",
   votingProcedureLocked,
+  sessionActive = true,
+  unmoderatedLocked = false,
   initialSelectedAllocationRecipientIds,
   initialSelectedChairRecipientIds,
   initialAnyChairRecipient,
@@ -82,6 +84,10 @@ export function DelegationNotesView({
   chairOptions: ChairOption[];
   nextPathAfterVerification?: string;
   votingProcedureLocked?: boolean;
+  /** Notes can only be composed during active committee sessions. */
+  sessionActive?: boolean;
+  /** Notes are disabled during an active unmoderated caucus. */
+  unmoderatedLocked?: boolean;
   /** Pre-check recipients (e.g. deep link from a member profile). */
   initialSelectedAllocationRecipientIds?: string[];
   initialSelectedChairRecipientIds?: string[];
@@ -106,6 +112,7 @@ export function DelegationNotesView({
 
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [expandedNote, setExpandedNote] = useState<DelegationNote | null>(null);
 
   const isChairLike = myRole === "chair" || myRole === "admin";
   const isDelegate = myRole === "delegate";
@@ -126,6 +133,8 @@ export function DelegationNotesView({
     (!isSmt && (isChairLike || isDelegate)) &&
     (myAllocationId !== null || isChairLike) &&
     (allocationOptions.length > 0 || isChairLike) &&
+    sessionActive &&
+    !unmoderatedLocked &&
     !votingProcedureLocked;
 
   const lastRefreshAtRef = useRef<number>(0);
@@ -319,6 +328,14 @@ export function DelegationNotesView({
     setError(null);
     if (votingProcedureLocked) {
       setError("Voting procedure is active: note composing is disabled.");
+      return;
+    }
+    if (!sessionActive) {
+      setError("Notes are disabled while the committee session is not active.");
+      return;
+    }
+    if (unmoderatedLocked) {
+      setError("Notes are disabled during unmoderated caucus.");
       return;
     }
 
@@ -542,11 +559,21 @@ export function DelegationNotesView({
               onChange={(e) => setContent(e.target.value)}
               placeholder={canCompose ? "Write your note..." : "Only delegates/chairs can send notes."}
               className={`w-full h-28 px-3 py-2 ${field}`}
-              disabled={votingProcedureLocked}
+              disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
             />
             {error ? (
               <p className="rounded-lg border border-red-400/40 bg-red-500/15 px-3 py-2 text-sm text-red-200">
                 {error}
+              </p>
+            ) : null}
+            {!sessionActive ? (
+              <p className={`text-xs ${muted}`}>
+                Notes are available only during active committee sessions.
+              </p>
+            ) : null}
+            {unmoderatedLocked ? (
+              <p className={`text-xs ${muted}`}>
+                Notes are disabled during unmoderated caucus.
               </p>
             ) : null}
 
@@ -594,7 +621,7 @@ export function DelegationNotesView({
                         type="checkbox"
                         checked={checked}
                         className="size-4 rounded border-white/25 accent-brand-gold"
-                    disabled={votingProcedureLocked}
+                    disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
                         onChange={(e) => {
                           setSelectedAllocationRecipientIdsState((prev) => {
                             if (e.target.checked) return [...prev, a.id];
@@ -625,7 +652,7 @@ export function DelegationNotesView({
                   type="checkbox"
                   checked={anyChairRecipient}
                   className="size-4 rounded border-white/25 accent-brand-gold"
-                  disabled={votingProcedureLocked}
+                  disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
                     setAnyChairRecipientState(next);
@@ -650,7 +677,9 @@ export function DelegationNotesView({
                         type="checkbox"
                         checked={checked}
                         className="size-4 rounded border-white/25 accent-brand-gold"
-                        disabled={anyChairRecipient || votingProcedureLocked}
+                        disabled={
+                          anyChairRecipient || votingProcedureLocked || !sessionActive || unmoderatedLocked
+                        }
                         onChange={(e) => {
                           if (anyChairRecipient) return;
                           setSelectedChairRecipientIdsState((prev) => {
@@ -711,8 +740,17 @@ export function DelegationNotesView({
                       ) : null}
                     </div>
                     <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">
-                      {n.content}
+                      {n.content.length > 280 ? `${n.content.slice(0, 280)}…` : n.content}
                     </div>
+                    {n.content.length > 280 ? (
+                      <button
+                        type="button"
+                        onClick={() => setExpandedNote(n)}
+                        className="mt-1 text-xs font-medium text-brand-gold hover:underline"
+                      >
+                        View full note
+                      </button>
+                    ) : null}
                     <div className={`mt-2 text-xs ${muted}`}>
                       To:{" "}
                       {n.recipients.length === 0
@@ -755,6 +793,41 @@ export function DelegationNotesView({
           </div>
         )}
       </div>
+      {expandedNote ? (
+        <div
+          className="fixed inset-0 z-[85] flex items-center justify-center bg-black/55 px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Full note"
+          onClick={() => setExpandedNote(null)}
+        >
+          <div
+            className="w-full max-w-2xl rounded-xl border border-white/15 bg-brand-paper p-4 md:p-5 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <h3 className="font-display text-lg font-semibold text-brand-navy">Full note</h3>
+              <button
+                type="button"
+                onClick={() => setExpandedNote(null)}
+                className="text-xs font-medium text-brand-gold hover:underline"
+              >
+                Close
+              </button>
+            </div>
+            <div className="mb-2 text-xs text-brand-muted">
+              {expandedNote.sender.kind === "allocation"
+                ? `${flagEmojiForCountryName(expandedNote.sender.country)} ${expandedNote.sender.country}`
+                : `🏳️ ${expandedNote.sender.name}`}
+              {" · "}
+              <span className="capitalize">{expandedNote.topic}</span>
+            </div>
+            <div className="max-h-[70vh] overflow-y-auto whitespace-pre-wrap break-words text-sm text-brand-navy">
+              {expandedNote.content}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

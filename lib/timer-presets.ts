@@ -8,6 +8,25 @@ export type TimerPreset = {
   perSpeakerMode: boolean;
 };
 
+/** Built-in presets that denote the General Speakers' List (chair speaker-list prompt). */
+export const GSL_TIMER_PRESET_IDS = new Set(["gsl-45", "gsl-60", "gsl-90"]);
+
+/** Presets for per-speaker moderated caucus segments (chair speaker-list prompt). */
+export const MODERATED_CAUCUS_TIMER_PRESET_IDS = new Set(["mod-3", "mod-5", "mod-10"]);
+
+export function isGslTimerPresetId(id: string): boolean {
+  return GSL_TIMER_PRESET_IDS.has(id);
+}
+
+export function isModeratedCaucusTimerPresetId(id: string): boolean {
+  return MODERATED_CAUCUS_TIMER_PRESET_IDS.has(id);
+}
+
+/** Floor label shown to delegates (e.g. user-typed "GSL 60s"). */
+export function floorLabelLooksLikeGsl(label: string): boolean {
+  return /\bgsl\b/i.test(label.trim());
+}
+
 export const BUILTIN_TIMER_PRESETS: TimerPreset[] = [
   { id: "gsl-45", name: "GSL 45s", totalSeconds: 45, perSpeakerMode: false },
   { id: "gsl-60", name: "GSL 60s", totalSeconds: 60, perSpeakerMode: false },

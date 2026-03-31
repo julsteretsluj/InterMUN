@@ -107,6 +107,18 @@ export default async function DashboardLayout({
     .eq("user_id", user.id)
     .is("read_at", null);
 
+  const { data: procedureState } = activeConf?.id
+    ? await supabase
+        .from("procedure_states")
+        .select("committee_session_started_at")
+        .eq("conference_id", activeConf.id)
+        .maybeSingle()
+    : { data: null };
+  const sessionIsActive = Boolean(
+    (procedureState as { committee_session_started_at?: string | null } | null)
+      ?.committee_session_started_at
+  );
+
   return (
     <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
       <aside className="group sticky top-0 z-30 hidden h-screen w-[70px] hover:w-[220px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
@@ -185,7 +197,7 @@ export default async function DashboardLayout({
             <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
           }
         />
-        {activeConf?.id && showsDaisTools(role) ? (
+        {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
           <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950 sm:px-6">
             <div className="mx-auto max-w-[1400px]">
               <ChairLiveFloorThemed conferenceId={activeConf.id} />
