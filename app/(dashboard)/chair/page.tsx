@@ -5,6 +5,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairHowToAccordion } from "@/components/chair/ChairHowToAccordion";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
+import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 
 export default async function ChairOverviewPage() {
   const supabase = await createClient();
@@ -84,6 +85,7 @@ export default async function ChairOverviewPage() {
         </header>
 
         <ChairHowToAccordion />
+        <RoleSetupChecklist role="chair" />
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">

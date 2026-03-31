@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { formatCommitteeCardTitle, resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
+import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 
 function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advanced") {
   if (level === "Beginner") {
@@ -145,6 +146,9 @@ export default async function SmtOverviewPage({
         Welcome Secretary General!
       </h1>
       <p className="text-base text-brand-navy mb-6">Which committee would you like to check in on?</p>
+      <div className="mb-6">
+        <RoleSetupChecklist role="smt" />
+      </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((g) => (
           <Link

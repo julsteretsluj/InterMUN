@@ -9,6 +9,7 @@ import {
   delegatePlacardMatchesSearch,
   normalizeDelegationSearchQuery,
 } from "@/lib/committee-room-delegation-search";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 
 export interface DaisSeat {
   title: string;
@@ -41,6 +42,8 @@ interface VirtualCommitteeRoomProps {
   delegationSearchQuery?: string;
   /** Increment (e.g. on Enter in search) to scroll the first matching placard into view. */
   scrollToDelegationMatchNonce?: number;
+  /** Delegate matrix mode: show only allocation + flag on placards. */
+  compactPlacardDetails?: boolean;
 }
 
 function dash(v: string | null | undefined) {
@@ -54,12 +57,14 @@ function Placard({
   searchActive,
   matchesSearch,
   jumpAnchor,
+  compactPlacardDetails,
 }: {
   placard: DelegatePlacard;
   personHref: string | null;
   searchActive: boolean;
   matchesSearch: boolean;
   jumpAnchor: boolean;
+  compactPlacardDetails?: boolean;
 }) {
   const { vacant, country, name, school, pronouns, allocationId } = placard;
   const interactive = Boolean(personHref);
@@ -84,20 +89,29 @@ function Placard({
             Vacant
           </div>
         ) : (
-          <>
-            <div className="text-[0.5rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
-              {country}
-            </div>
-            <div className="text-[0.62rem] sm:text-[0.65rem] font-medium line-clamp-2 break-words">
-              {dash(name)}
-            </div>
-            <div className="text-[0.55rem] sm:text-[0.58rem] text-brand-muted mt-0.5 line-clamp-2 break-words">
-              {dash(school)}
-            </div>
-            <div className="text-[0.52rem] sm:text-[0.55rem] text-brand-muted/85 mt-0.5 italic line-clamp-2">
-              {pronouns?.trim() ? pronouns.trim() : "—"}
-            </div>
-          </>
+          compactPlacardDetails ? (
+            <>
+              <div className="text-base leading-none mb-1">{flagEmojiForCountryName(country)}</div>
+              <div className="text-[0.56rem] uppercase tracking-widest text-brand-muted/90 mb-0.5 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
+                {country}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="text-[0.5rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
+                {country}
+              </div>
+              <div className="text-[0.62rem] sm:text-[0.65rem] font-medium line-clamp-2 break-words">
+                {dash(name)}
+              </div>
+              <div className="text-[0.55rem] sm:text-[0.58rem] text-brand-muted mt-0.5 line-clamp-2 break-words">
+                {dash(school)}
+              </div>
+              <div className="text-[0.52rem] sm:text-[0.55rem] text-brand-muted/85 mt-0.5 italic line-clamp-2">
+                {pronouns?.trim() ? pronouns.trim() : "—"}
+              </div>
+            </>
+          )
         )}
       </div>
       <div
@@ -226,6 +240,7 @@ export function VirtualCommitteeRoom({
   personHrefBase = "/committee-room/person",
   delegationSearchQuery = "",
   scrollToDelegationMatchNonce = 0,
+  compactPlacardDetails = false,
 }: VirtualCommitteeRoomProps) {
   const supabase = useMemo(() => createClient(), []);
   const [livePlacards, setLivePlacards] = useState<DelegatePlacard[]>(placards);
@@ -432,6 +447,7 @@ export function VirtualCommitteeRoom({
                     searchActive={searchActive}
                     matchesSearch={matchesSearch}
                     jumpAnchor={searchActive && i === firstPlacardMatchIndex && firstPlacardMatchIndex >= 0}
+                    compactPlacardDetails={compactPlacardDetails}
                   />
                 );
               })}

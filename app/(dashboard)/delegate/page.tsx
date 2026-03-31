@@ -5,6 +5,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { DelegateCountdownCard } from "@/components/delegate/DelegateCountdownCard";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
+import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 
 export default async function DelegateDashboardPage() {
   const supabase = await createClient();
@@ -56,6 +57,7 @@ export default async function DelegateDashboardPage() {
         </header>
 
         <DelegateCountdownCard conferenceId={conferenceId} />
+        <RoleSetupChecklist role="delegate" />
 
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">

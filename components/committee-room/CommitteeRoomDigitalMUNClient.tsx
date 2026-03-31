@@ -366,6 +366,7 @@ export function CommitteeRoomDigitalMUNClient({
             helperText={null}
             delegationSearchQuery={delegationSearch}
             scrollToDelegationMatchNonce={scrollMatchNonce}
+            compactPlacardDetails={isDelegate}
           />
         </section>
 

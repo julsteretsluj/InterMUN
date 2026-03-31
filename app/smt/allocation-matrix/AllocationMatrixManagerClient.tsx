@@ -28,6 +28,11 @@ export type MatrixOverallRow = {
   committee: string;
   topic: string;
   country: string;
+  flag: string;
+  email: string | null;
+  name: string | null;
+  grade: string | null;
+  notes: string | null;
   user_id: string | null;
   linked_role: string | null;
   linked_name: string | null;
@@ -229,16 +234,18 @@ export function AllocationMatrixManagerClient({
               <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
                 <th className="px-3 py-2">Committee</th>
                 <th className="px-3 py-2">Topic</th>
-                <th className="px-3 py-2">Country / position</th>
-                <th className="px-3 py-2">Placard code</th>
-                <th className="px-3 py-2">Assigned account</th>
-                <th className="px-3 py-2">Sign-up link</th>
+                <th className="px-3 py-2">Allocation</th>
+                <th className="px-3 py-2">Flag</th>
+                <th className="px-3 py-2">Email</th>
+                <th className="px-3 py-2">Name</th>
+                <th className="px-3 py-2">Grade</th>
+                <th className="px-3 py-2">Notes</th>
               </tr>
             </thead>
             <tbody>
               {overallRows.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
+                  <td colSpan={8} className="px-3 py-6 text-center text-brand-muted">
                     No allocation rows found for the active event.
                   </td>
                 </tr>
@@ -248,17 +255,12 @@ export function AllocationMatrixManagerClient({
                     <td className="px-3 py-2 font-medium text-brand-navy">{r.committee}</td>
                     <td className="px-3 py-2 text-brand-navy/85">{r.topic}</td>
                     <td className="px-3 py-2">{r.country}</td>
-                    <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
-                      {r.code?.trim() ? r.code : "—"}
-                    </td>
-                    <td className="px-3 py-2 text-xs text-brand-muted">{linkedLabel(r)}</td>
-                    <td className="px-3 py-2">
-                      <a
-                        href={signupHref(r.conference_id, r.id)}
-                        className="text-xs text-brand-gold hover:underline break-all"
-                      >
-                        Allocation sign-up link
-                      </a>
+                    <td className="px-3 py-2 text-base">{r.flag}</td>
+                    <td className="px-3 py-2 text-xs text-brand-muted">{r.email || "—"}</td>
+                    <td className="px-3 py-2 text-xs text-brand-muted">{r.name || "—"}</td>
+                    <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || "—"}</td>
+                    <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
+                      {r.notes?.trim() || "—"}
                     </td>
                   </tr>
                 ))

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { formatCommitteeCardTitle } from "@/lib/committee-card-display";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import {
   AllocationMatrixManagerClient,
   type MatrixRow,
@@ -83,10 +85,43 @@ export default async function SmtAllocationMatrixPage({
       ...new Set((allAllocs ?? []).map((a) => a.user_id).filter((id): id is string => Boolean(id))),
     ];
     const { data: allProfiles } = allUserIds.length
-      ? await supabase.from("profiles").select("id, role, name").in("id", allUserIds)
-      : { data: [] as { id: string; role: string | null; name: string | null }[] };
+      ? await supabase
+          .from("profiles")
+          .select("id, role, name, grade, notes")
+          .in("id", allUserIds)
+      : {
+          data: [] as {
+            id: string;
+            role: string | null;
+            name: string | null;
+            grade: string | null;
+            notes: string | null;
+          }[],
+        };
+    const emailByUserId = new Map<string, string>();
+    if (allUserIds.length > 0) {
+      const admin = createAdminClient();
+      const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
+        page: 1,
+        perPage: 1000,
+      });
+      if (!usersError) {
+        const userSet = new Set(allUserIds);
+        for (const u of usersData.users) {
+          if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
+        }
+      }
+    }
     const allProfileById = new Map(
-      (allProfiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
+      (allProfiles ?? []).map((p) => [
+        p.id,
+        {
+          role: p.role ?? null,
+          name: p.name ?? null,
+          grade: p.grade ?? null,
+          notes: p.notes ?? null,
+        },
+      ])
     );
 
     overallRows = (allAllocs ?? []).map((a) => {
@@ -97,6 +132,11 @@ export default async function SmtAllocationMatrixPage({
         committee: meta?.committee ?? "Committee",
         topic: meta?.topic ?? "Session",
         country: a.country,
+        flag: flagEmojiForCountryName(a.country),
+        email: a.user_id ? (emailByUserId.get(a.user_id) ?? null) : null,
+        name: a.user_id ? (allProfileById.get(a.user_id)?.name ?? null) : null,
+        grade: a.user_id ? (allProfileById.get(a.user_id)?.grade ?? null) : null,
+        notes: a.user_id ? (allProfileById.get(a.user_id)?.notes ?? null) : null,
         user_id: a.user_id,
         linked_role: a.user_id ? (allProfileById.get(a.user_id)?.role ?? null) : null,
         linked_name: a.user_id ? (allProfileById.get(a.user_id)?.name ?? null) : null,

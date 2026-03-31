@@ -6,6 +6,7 @@ import {
   addClauseAction,
   createResolutionAction,
   deleteClauseAction,
+  emailResolutionToDelegateAction,
   joinBlocAction,
   signResolutionAction,
   updateClauseAction,
@@ -72,6 +73,8 @@ export function ResolutionsView({
   const [selectedBloc, setSelectedBloc] = useState<Record<string, string>>({});
   const [newClause, setNewClause] = useState<Record<string, string>>({});
   const [editingClause, setEditingClause] = useState<Record<string, string>>({});
+  const [shareEmailByResolution, setShareEmailByResolution] = useState<Record<string, string>>({});
+  const [shareStatusByResolution, setShareStatusByResolution] = useState<Record<string, string>>({});
   const [actionError, setActionError] = useState<string | null>(null);
 
   async function createResolution() {
@@ -163,6 +166,27 @@ export function ResolutionsView({
       return;
     }
     location.reload();
+  }
+
+  async function emailResolutionToDelegate(resolutionId: string) {
+    setActionError(null);
+    setShareStatusByResolution((prev) => ({ ...prev, [resolutionId]: "" }));
+    const targetEmail = (shareEmailByResolution[resolutionId] ?? "").trim();
+    if (!targetEmail) {
+      setActionError("Enter a delegate email first.");
+      return;
+    }
+
+    const result = await emailResolutionToDelegateAction({
+      conferenceId,
+      resolutionId,
+      targetEmail,
+    });
+    if (!result.ok) {
+      setActionError(result.error);
+      return;
+    }
+    setShareStatusByResolution((prev) => ({ ...prev, [resolutionId]: `Sent to ${result.data.targetEmail}.` }));
   }
 
   return (
@@ -297,6 +321,30 @@ export function ResolutionsView({
               >
                 Sign virtually (main subs notified)
               </button>
+              <div className="rounded border border-white/10 bg-black/15 p-2 space-y-2">
+                <p className="text-xs font-medium text-brand-navy">Share resolution by email</p>
+                <div className="flex flex-wrap gap-2">
+                  <input
+                    type="email"
+                    value={shareEmailByResolution[r.id] ?? ""}
+                    onChange={(e) =>
+                      setShareEmailByResolution((prev) => ({ ...prev, [r.id]: e.target.value }))
+                    }
+                    placeholder="delegate@email.com"
+                    className="min-w-[220px] flex-1 px-2 py-1.5 border rounded bg-black/30 text-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => void emailResolutionToDelegate(r.id)}
+                    className="px-3 py-1.5 rounded bg-blue-600 text-white text-sm hover:bg-blue-700"
+                  >
+                    Send to delegate
+                  </button>
+                </div>
+                {shareStatusByResolution[r.id] ? (
+                  <p className="text-xs text-emerald-700">{shareStatusByResolution[r.id]}</p>
+                ) : null}
+              </div>
 
               <div className="border-t pt-3 mt-2 space-y-2">
                 <p className="text-sm font-medium">Clause editor</p>

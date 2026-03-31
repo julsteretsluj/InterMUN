@@ -1,0 +1,16 @@
+InterMUN Position Paper Guide (Placeholder)
+===========================================
+
+This is a temporary downloadable placeholder.
+
+Recommended final guide sections:
+1) Position paper structure (header, country policy, committee context)
+2) Research checklist and citation expectations
+3) Formatting standard (word count, font, spacing, file naming)
+4) Submission timeline and grading rubric
+5) Sample outline + common mistakes
+
+TODO:
+- Replace this file with the official Position Paper Guide PDF.
+- Keep the same path/filename if you want existing links to continue working.
+

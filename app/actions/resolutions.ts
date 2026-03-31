@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { nextClauseNumber } from "@/lib/resolution-functions";
+import nodemailer from "nodemailer";
 
 type ActionResult<T> = { ok: true; data: T } | { ok: false; error: string };
 type Role = "delegate" | "chair" | "smt" | "admin";
@@ -285,5 +286,89 @@ export async function listClauseOutcomesAction(input: {
     .limit(500);
   if (error) return { ok: false, error: error.message };
   return { ok: true, data: data ?? [] };
+}
+
+export async function emailResolutionToDelegateAction(input: {
+  conferenceId: string;
+  resolutionId: string;
+  targetEmail: string;
+}): Promise<ActionResult<{ resolutionId: string; targetEmail: string }>> {
+  const auth = await getAuthContext();
+  if (!auth.user || (auth.role !== "delegate" && !isStaff(auth.role))) {
+    return { ok: false, error: "Only delegates or staff can send resolutions by email." };
+  }
+  if (!isUuid(input.conferenceId) || !isUuid(input.resolutionId)) {
+    return { ok: false, error: "Invalid IDs." };
+  }
+
+  const to = input.targetEmail.trim().toLowerCase();
+  if (!to || !to.includes("@") || to.includes(" ")) {
+    return { ok: false, error: "Enter a valid delegate email." };
+  }
+
+  const { data: resolution, error: resolutionErr } = await auth.supabase
+    .from("resolutions")
+    .select("id, conference_id, google_docs_url")
+    .eq("id", input.resolutionId)
+    .eq("conference_id", input.conferenceId)
+    .maybeSingle();
+  if (resolutionErr || !resolution) {
+    return { ok: false, error: resolutionErr?.message ?? "Resolution not found in this committee." };
+  }
+
+  const { data: conf } = await auth.supabase
+    .from("conferences")
+    .select("name, committee")
+    .eq("id", input.conferenceId)
+    .maybeSingle();
+  const committeeLabel = [conf?.name, conf?.committee].filter(Boolean).join(" — ") || "InterMUN committee";
+
+  try {
+    const host = process.env.SMTP_HOST;
+    const port = Number(process.env.SMTP_PORT ?? "587");
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    const from = process.env.SMTP_FROM || user;
+    if (!host || !user || !pass || !from) {
+      return {
+        ok: false,
+        error: "Email server is not configured. Set SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS.",
+      };
+    }
+
+    const transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+    });
+
+    const subject = `InterMUN resolution share (${committeeLabel})`;
+    const text = [
+      "A resolution was shared with you in InterMUN.",
+      "",
+      `Committee: ${committeeLabel}`,
+      `Resolution ID: ${resolution.id}`,
+      resolution.google_docs_url?.trim()
+        ? `Google Doc: ${resolution.google_docs_url.trim()}`
+        : "Google Doc: (not linked)",
+      "",
+      "Open InterMUN -> Resolutions for full context and bloc details.",
+    ].join("\n");
+
+    await transporter.sendMail({
+      from,
+      to,
+      subject,
+      text,
+    });
+  } catch (e) {
+    return {
+      ok: false,
+      error: e instanceof Error ? e.message : "Could not send resolution email.",
+    };
+  }
+
+  return { ok: true, data: { resolutionId: input.resolutionId, targetEmail: to } };
 }
 

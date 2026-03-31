@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { MunPageShell } from "@/components/MunPageShell";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import {
@@ -8,11 +9,17 @@ import {
 } from "@/app/actions/allocationSignup";
 import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 
 type AllocationRow = {
   id: string;
   conference_id: string;
   country: string;
+  flag: string;
+  email: string | null;
+  name: string | null;
+  grade: string | null;
+  notes: string | null;
   user_id: string | null;
   linked_role: string | null;
   linked_name: string | null;
@@ -75,19 +82,60 @@ export default async function ChairAllocationMatrixPage() {
     .eq("conference_id", activeConf.id)
     .order("country", { ascending: true });
 
-  const rawRows = (allocData ?? []) as Omit<AllocationRow, "linked_role" | "linked_name">[];
+  const rawRows = (allocData ?? []) as Omit<
+    AllocationRow,
+    "flag" | "email" | "name" | "grade" | "notes" | "linked_role" | "linked_name"
+  >[];
   const userIds = [
     ...new Set(rawRows.map((r) => r.user_id).filter((id): id is string => Boolean(id))),
   ];
   const { data: profiles } = userIds.length
-    ? await supabase.from("profiles").select("id, role, name").in("id", userIds)
-    : { data: [] as { id: string; role: string | null; name: string | null }[] };
+    ? await supabase
+        .from("profiles")
+        .select("id, role, name, grade, notes")
+        .in("id", userIds)
+    : {
+        data: [] as {
+          id: string;
+          role: string | null;
+          name: string | null;
+          grade: string | null;
+          notes: string | null;
+        }[],
+      };
+  const emailByUserId = new Map<string, string>();
+  if (userIds.length > 0) {
+    const admin = createAdminClient();
+    const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
+      page: 1,
+      perPage: 1000,
+    });
+    if (!usersError) {
+      const userSet = new Set(userIds);
+      for (const u of usersData.users) {
+        if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
+      }
+    }
+  }
   const profileById = new Map(
-    (profiles ?? []).map((p) => [p.id, { role: p.role ?? null, name: p.name ?? null }])
+    (profiles ?? []).map((p) => [
+      p.id,
+      {
+        role: p.role ?? null,
+        name: p.name ?? null,
+        grade: p.grade ?? null,
+        notes: p.notes ?? null,
+      },
+    ])
   );
   const rows: AllocationRow[] = sortRowsByAllocationCountry(
     rawRows.map((r) => ({
       ...r,
+      flag: flagEmojiForCountryName(r.country),
+      email: r.user_id ? (emailByUserId.get(r.user_id) ?? null) : null,
+      name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
+      grade: r.user_id ? (profileById.get(r.user_id)?.grade ?? null) : null,
+      notes: r.user_id ? (profileById.get(r.user_id)?.notes ?? null) : null,
       linked_role: r.user_id ? (profileById.get(r.user_id)?.role ?? null) : null,
       linked_name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
     }))
@@ -125,16 +173,18 @@ export default async function ChairAllocationMatrixPage() {
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-              <th className="px-3 py-2">Country / position</th>
-              <th className="px-3 py-2">Placard code</th>
-              <th className="px-3 py-2">Assigned account</th>
-              <th className="px-3 py-2">Sign-up link</th>
+              <th className="px-3 py-2">Allocation</th>
+              <th className="px-3 py-2">Flag</th>
+              <th className="px-3 py-2">Email</th>
+              <th className="px-3 py-2">Name</th>
+              <th className="px-3 py-2">Grade</th>
+              <th className="px-3 py-2">Notes</th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-3 py-6 text-center text-brand-muted">
+                <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
                   No allocation rows found for this committee.
                 </td>
               </tr>
@@ -142,23 +192,12 @@ export default async function ChairAllocationMatrixPage() {
               rows.map((r) => (
                 <tr key={r.id} className="border-t border-brand-navy/5">
                   <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
-                  <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
-                    {codeById.get(r.id)?.trim() ? codeById.get(r.id) : "—"}
-                  </td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">
-                    {r.user_id
-                      ? `${r.linked_role?.trim().toLowerCase() === "chair" ? "Chair" : "Delegate"}${
-                          r.linked_name?.trim() ? `: ${r.linked_name.trim()}` : ""
-                        }`
-                      : "Open"}
-                  </td>
-                  <td className="px-3 py-2">
-                    <a
-                      href={`/allocation-signup?conference=${encodeURIComponent(activeConf.id)}&allocation=${encodeURIComponent(r.id)}&next=${encodeURIComponent("/profile")}`}
-                      className="text-xs text-brand-gold hover:underline break-all"
-                    >
-                      Allocation sign-up link
-                    </a>
+                  <td className="px-3 py-2 text-base">{r.flag}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted">{r.email || "—"}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted">{r.name || "—"}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || "—"}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
+                    {r.notes?.trim() || "—"}
                   </td>
                 </tr>
               ))

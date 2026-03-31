@@ -1,5 +1,6 @@
 import { AdminDashboardClient } from "./AdminDashboardClient";
 import StatusPortalBoard from "./StatusPortalBoard";
+import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 
 export default async function AdminPage({
   searchParams,
@@ -29,6 +30,10 @@ export default async function AdminPage({
       )}
 
       <AdminDashboardClient adminInviteConfigured={adminInviteConfigured} />
+
+      <div className="mt-10">
+        <RoleSetupChecklist role="admin" />
+      </div>
 
       <div className="mt-10">
         <StatusPortalBoard />
