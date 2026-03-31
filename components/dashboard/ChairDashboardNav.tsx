@@ -133,13 +133,13 @@ function ChairNavRow({
       title={labelsHidden ? item.label : undefined}
       className={cn(
         "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
-        labelsHidden && "justify-center px-2",
+        labelsHidden && "mx-auto h-11 w-11 justify-center px-0 py-0",
         isActive
           ? "border border-amber-200/80 bg-amber-50 font-semibold text-slate-900 shadow-sm dark:border-amber-500/30 dark:bg-amber-950/35 dark:text-zinc-50"
           : "border border-transparent font-medium text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800/90"
       )}
     >
-      <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
+      <span className={cn("flex shrink-0 items-center gap-1.5", labelsHidden && "gap-0")} aria-hidden>
         <Icon
           className={cn(
             "h-[1.15rem] w-[1.15rem] shrink-0",
@@ -147,7 +147,7 @@ function ChairNavRow({
           )}
           strokeWidth={1.75}
         />
-        <span className="text-base leading-none">{item.emoji}</span>
+        {!labelsHidden ? <span className="text-base leading-none">{item.emoji}</span> : null}
       </span>
       {!labelsHidden ? <span className="min-w-0 truncate">{item.label}</span> : null}
     </Link>
@@ -204,14 +204,20 @@ export function ChairDashboardSidebar({
           title={headerText}
           className={cn(
             "flex w-full items-center justify-center gap-2 rounded-full bg-amber-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-500",
-            labelsHidden && "px-3 py-2.5",
+            labelsHidden && "mx-auto h-11 w-11 rounded-xl px-0 py-0",
             hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-white dark:ring-amber-400/90 dark:ring-offset-zinc-950"
           )}
         >
-          <BookOpen className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
-          <span className="text-base leading-none" aria-hidden>
-            📌
-          </span>
+          {labelsHidden ? (
+            <BookOpen className="h-5 w-5 shrink-0 opacity-95" strokeWidth={1.9} aria-hidden />
+          ) : (
+            <>
+              <BookOpen className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
+              <span className="text-base leading-none" aria-hidden>
+                📌
+              </span>
+            </>
+          )}
           {!labelsHidden ? <span className="min-w-0 truncate">{headerText}</span> : null}
           {labelsHidden ? <span className="sr-only">{headerText}</span> : null}
         </Link>

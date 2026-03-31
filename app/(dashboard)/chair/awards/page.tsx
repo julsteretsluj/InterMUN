@@ -131,7 +131,7 @@ export default async function ChairAwardsPage() {
 
   return (
     <MunPageShell title="Score">
-      <div className="space-y-6 max-w-3xl">
+      <div className="space-y-6 max-w-6xl">
         <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/40 p-4 text-sm text-brand-muted">
           <p>
             Scoring matches the{" "}
@@ -220,7 +220,7 @@ export default async function ChairAwardsPage() {
                         ))}
                       </select>
                     </label>
-                    <div className="rounded-lg border border-white/12 bg-black/25 p-3 text-brand-navy space-y-3">
+                    <div className="rounded-lg border border-white/12 bg-black/25 p-3 text-brand-navy space-y-2.5">
                       <p className="text-brand-muted text-xs uppercase font-semibold tracking-wide">
                         Criteria (SEAMUNs bands — pick one per row)
                       </p>
@@ -230,14 +230,24 @@ export default async function ChairAwardsPage() {
                         return (
                           <fieldset
                             key={`${type.id}-${rank}-${criterion.key}`}
-                            className="rounded-lg border border-white/10 bg-black/20 p-3 space-y-2"
+                            className="rounded-lg border border-white/10 bg-black/20 p-2.5 space-y-2"
                           >
                             <legend className="text-sm font-semibold text-brand-navy px-1">{criterion.label}</legend>
-                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
                               {PROFICIENCY_BAND_ORDER.map((bandId, i) => (
+                                (() => {
+                                  const tone =
+                                    bandId === "beginning"
+                                      ? "border-rose-200/80 bg-rose-50/70 dark:border-rose-400/30 dark:bg-rose-950/20"
+                                      : bandId === "developing"
+                                        ? "border-amber-200/80 bg-amber-50/70 dark:border-amber-400/30 dark:bg-amber-950/20"
+                                        : bandId === "proficient"
+                                          ? "border-sky-200/80 bg-sky-50/70 dark:border-sky-400/30 dark:bg-sky-950/20"
+                                          : "border-emerald-200/80 bg-emerald-50/70 dark:border-emerald-400/30 dark:bg-emerald-950/20";
+                                  return (
                                 <label
                                   key={bandId}
-                                  className="flex gap-2.5 cursor-pointer rounded-lg border border-white/12 bg-black/15 p-2.5 has-[:checked]:border-brand-gold/60 has-[:checked]:bg-brand-gold/10"
+                                  className={`flex gap-2 cursor-pointer rounded-lg border p-2 ${tone} has-[:checked]:ring-2 has-[:checked]:ring-brand-gold/60 has-[:checked]:border-brand-gold/70`}
                                 >
                                   <input
                                     type="radio"
@@ -254,6 +264,8 @@ export default async function ChairAwardsPage() {
                                     <span className="block text-brand-navy/80 mt-0.5">{criterion.bandDescriptions[i]}</span>
                                   </span>
                                 </label>
+                                  );
+                                })()
                               ))}
                             </div>
                           </fieldset>
