@@ -101,14 +101,16 @@ export default async function SmtAllocationMatrixPage({
     const emailByUserId = new Map<string, string>();
     if (allUserIds.length > 0) {
       const admin = createAdminClient();
-      const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
-        page: 1,
-        perPage: 1000,
-      });
-      if (!usersError) {
-        const userSet = new Set(allUserIds);
-        for (const u of usersData.users) {
-          if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
+      if (admin) {
+        const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
+          page: 1,
+          perPage: 1000,
+        });
+        if (!usersError) {
+          const userSet = new Set(allUserIds);
+          for (const u of usersData.users) {
+            if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
+          }
         }
       }
     }

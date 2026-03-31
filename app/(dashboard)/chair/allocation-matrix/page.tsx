@@ -106,14 +106,16 @@ export default async function ChairAllocationMatrixPage() {
   const emailByUserId = new Map<string, string>();
   if (userIds.length > 0) {
     const admin = createAdminClient();
-    const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
-      page: 1,
-      perPage: 1000,
-    });
-    if (!usersError) {
-      const userSet = new Set(userIds);
-      for (const u of usersData.users) {
-        if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
+    if (admin) {
+      const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
+        page: 1,
+        perPage: 1000,
+      });
+      if (!usersError) {
+        const userSet = new Set(userIds);
+        for (const u of usersData.users) {
+          if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
+        }
       }
     }
   }
