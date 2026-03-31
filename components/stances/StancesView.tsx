@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { StanceHeatmap } from "./StanceHeatmap";
+import { detectInappropriateTerms } from "@/lib/note-moderation";
 
 interface Allocation {
   id: string;
@@ -34,6 +35,7 @@ export function StancesView({
     })()
   );
   const supabase = createClient();
+  const stanceNoteFlaggedTerms = detectInappropriateTerms(noteContent);
 
   useEffect(() => {
     if (!selectedAllocation) return;
@@ -182,6 +184,11 @@ export function StancesView({
                 placeholder="Stance notes for this allocation..."
                 disabled={!canEdit}
               />
+              {stanceNoteFlaggedTerms.length > 0 ? (
+                <p className="mt-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
+                  Reader warning: this note may contain inappropriate language.
+                </p>
+              ) : null}
               <button
                 onClick={saveStanceNote}
                 disabled={!canEdit}

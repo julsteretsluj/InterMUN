@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { detectInappropriateTerms } from "@/lib/note-moderation";
 
 interface Note {
   id: string;
@@ -113,6 +114,7 @@ export function RunningNotesView({
   const embedSource = canEdit
     ? docsUrl.trim() || activeNote?.google_docs_url?.trim() || ""
     : activeNote?.google_docs_url?.trim() || "";
+  const activeNoteFlaggedTerms = detectInappropriateTerms(activeNote?.content);
 
   return (
     <div className="flex flex-col gap-6 lg:flex-row">
@@ -192,6 +194,11 @@ export function RunningNotesView({
             <GoogleDocsEmbed googleDocsUrl={embedSource} heading="Running notes document" compact />
           ) : null}
           <div>
+            {activeNoteFlaggedTerms.length > 0 ? (
+              <p className="mb-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
+                Reader warning: this note may contain inappropriate language.
+              </p>
+            ) : null}
             {embedSource ? (
               <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
                 Plain text (optional)

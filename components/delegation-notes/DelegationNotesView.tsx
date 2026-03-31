@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { detectInappropriateTerms } from "@/lib/note-moderation";
 
 type NoteTopic =
   | "bloc forming"
@@ -128,6 +129,11 @@ export function DelegationNotesView({
   const chairIdToName = useMemo(() => {
     return new Map(chairOptions.map((c) => [c.id, c.name] as const));
   }, [chairOptions]);
+  const noteModerationById = useMemo(() => {
+    const m = new Map<string, string[]>();
+    for (const n of notes) m.set(n.id, detectInappropriateTerms(n.content));
+    return m;
+  }, [notes]);
 
   const canCompose =
     (!isSmt && (isChairLike || isDelegate)) &&
@@ -742,6 +748,11 @@ export function DelegationNotesView({
                     <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">
                       {n.content.length > 280 ? `${n.content.slice(0, 280)}…` : n.content}
                     </div>
+                    {noteModerationById.get(n.id)?.length ? (
+                      <p className="mt-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
+                        Reader warning: this note may contain inappropriate language.
+                      </p>
+                    ) : null}
                     {n.content.length > 280 ? (
                       <button
                         type="button"
@@ -822,6 +833,11 @@ export function DelegationNotesView({
               {" · "}
               <span className="capitalize">{expandedNote.topic}</span>
             </div>
+            {noteModerationById.get(expandedNote.id)?.length ? (
+              <p className="mb-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
+                Reader warning: this note may contain inappropriate language.
+              </p>
+            ) : null}
             <div className="max-h-[70vh] overflow-y-auto whitespace-pre-wrap break-words text-sm text-brand-navy">
               {expandedNote.content}
             </div>
