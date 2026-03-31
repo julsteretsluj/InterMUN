@@ -1,3 +1,5 @@
+import type { RollAttendance } from "@/lib/roll-attendance";
+
 export const CLAUSE_TARGET_PROCEDURE_CODES = new Set([
   "divide_question",
   "clause_by_clause",
@@ -21,6 +23,32 @@ export function majorityThreshold(requiredMajority: string, totalVotes: number) 
 
 export function didMotionPass(requiredMajority: string, yesVotes: number, totalVotes: number) {
   return yesVotes > majorityThreshold(requiredMajority, totalVotes);
+}
+
+/**
+ * Members counted as **present** on roll (may abstain or present and voting) — denominator for
+ * “majority of members present” on procedural motions.
+ */
+export function membersPresentForMajorityDenominator(
+  rollByAllocationId: Map<string, RollAttendance>,
+  committeeAllocationIds: string[]
+): number {
+  let n = 0;
+  for (const id of committeeAllocationIds) {
+    const att = rollByAllocationId.get(id) ?? "absent";
+    if (att === "present_abstain" || att === "present_voting") n++;
+  }
+  return n;
+}
+
+/** Procedural motion passes if YES exceeds simple or 2/3 threshold of members **present** (roll), not only ballots cast. */
+export function didProceduralMotionPassAgainstRollPresent(
+  requiredMajority: string,
+  yesVotes: number,
+  membersPresent: number
+): boolean {
+  if (membersPresent <= 0) return false;
+  return yesVotes > majorityThreshold(requiredMajority, membersPresent);
 }
 
 export function nextClauseNumber(existingClauseNumbers: number[]) {

@@ -21,6 +21,7 @@ type CommitteeRow = {
   chair_names: string | null;
   committee_logo_url: string | null;
   crisis_slides_url: string | null;
+  consultation_before_moderated_caucus?: boolean | null;
 };
 
 export function SmtConferenceSettingsClient({
@@ -291,6 +292,23 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           page. Leave blank if not used. Deck should allow viewing for your audience (link sharing).
         </p>
       </div>
+
+      <label className="flex cursor-pointer items-start gap-2 rounded-lg border border-brand-navy/15 bg-white/60 px-3 py-2.5 text-sm text-brand-navy">
+        <input
+          type="checkbox"
+          name="consultation_before_moderated_caucus"
+          value="on"
+          defaultChecked={row.consultation_before_moderated_caucus !== false}
+          className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-gold focus:ring-brand-gold"
+        />
+        <span>
+          <span className="font-medium">Competing motions (RoP): consultation before moderated caucus</span>
+          <span className="block text-xs text-brand-muted mt-1">
+            Uncheck if your handbook ranks a <span className="font-medium">moderated caucus</span> motion above{" "}
+            <span className="font-medium">consultation</span> when both are pending.
+          </span>
+        </span>
+      </label>
 
       <div>
         <label className="block text-xs font-medium text-brand-muted mb-1">

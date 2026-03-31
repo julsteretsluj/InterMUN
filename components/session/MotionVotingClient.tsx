@@ -143,8 +143,8 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
       </div>
 
       <p className="text-xs text-brand-muted leading-relaxed">
-        The dais records each delegation&apos;s vote in session. Total includes only placards where Yes or No was
-        recorded; absent delegations are skipped and do not count.
+        The dais records each delegation&apos;s vote in session. Motion votes use Yes or No only (no abstain). Totals
+        count only placards where Yes or No was recorded; absent delegations are skipped.
       </p>
     </div>
   );

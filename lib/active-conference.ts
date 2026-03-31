@@ -15,6 +15,7 @@ export type ActiveConferenceRow = {
   committee_code: string | null;
   crisis_slides_url: string | null;
   allocation_code_gate_enabled: boolean;
+  consultation_before_moderated_caucus?: boolean;
 };
 
 /** Active committee from room code (cookie). Validates row still exists. */
@@ -78,7 +79,7 @@ export async function getConferenceForDashboard(options: {
   const { data } = await supabase
     .from("conferences")
     .select(
-      "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled"
+      "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled, consultation_before_moderated_caucus"
     )
     .order("created_at", { ascending: false })
     .limit(1)

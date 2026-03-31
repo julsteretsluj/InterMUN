@@ -27,7 +27,7 @@ export default async function SmtConferencePage() {
     ? await supabase
         .from("conferences")
         .select(
-          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url"
+          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, consultation_before_moderated_caucus"
         )
         .eq("event_id", eventId)
         .order("name", { ascending: true })
@@ -43,6 +43,7 @@ export default async function SmtConferencePage() {
           chair_names: string | null;
           committee_logo_url: string | null;
           crisis_slides_url: string | null;
+          consultation_before_moderated_caucus: boolean | null;
         }[],
       };
 

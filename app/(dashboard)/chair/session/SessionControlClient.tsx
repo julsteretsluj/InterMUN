@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/client";
 import type { VoteType } from "@/types/database";
 import {
   didMotionPass,
+  didProceduralMotionPassAgainstRollPresent,
+  membersPresentForMajorityDenominator,
   motionRequiresClauseTargets,
   motionRequiresResolutionOnly,
 } from "@/lib/resolution-functions";
@@ -13,10 +15,8 @@ import { recordClauseVoteOutcomesAction } from "@/app/actions/resolutions";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 import { ropRequiredMajority } from "@/lib/rop-required-majority";
 import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
-import {
-  motionDisruptivenessScore,
-  sortMotionsMostDisruptiveFirst,
-} from "@/lib/motion-disruptiveness";
+import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness";
+import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { fetchSpeakerQueue } from "@/lib/speaker-queue";
 import {
@@ -202,6 +202,7 @@ export function SessionControlClient({
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
   /** Linear roll-call index into `sortAllocationsByDisplayCountry(allocations)` while recording votes. */
   const [voteCallIndex, setVoteCallIndex] = useState(0);
+  const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
 
   const { timer: liveTimerRow, remaining: liveRemaining } = useConferenceTimer(
     conferenceId,
@@ -244,6 +245,11 @@ export function SessionControlClient({
       { code: "set_agenda", label: "Motion to Set the Agenda", title: "Motion to Set the Agenda" },
       { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time" },
       { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate" },
+      {
+        code: "open_gsl",
+        label: "Motion to Open the General Speakers' List",
+        title: "Motion to Open the General Speakers' List",
+      },
       {
         code: "for_against_speeches",
         label: "Motion to Begin For/Against Speeches (resolution)",
@@ -384,6 +390,7 @@ export function SessionControlClient({
 
     const [
       { data: psRow },
+      { data: confRow },
       { data: allocs },
       { data: r },
       { data: ann },
@@ -401,6 +408,7 @@ export function SessionControlClient({
           .select("state, current_vote_item_id, debate_closed, motion_floor_open")
           .eq("conference_id", conferenceId)
           .maybeSingle(),
+        supabase.from("conferences").select("consultation_before_moderated_caucus").eq("id", conferenceId).maybeSingle(),
         supabase
           .from("allocations")
           .select("id, country, user_id")
@@ -476,12 +484,19 @@ export function SessionControlClient({
     } | null;
     setMotionFloorOpen(!!ps?.motion_floor_open);
 
+    const precedence: CaucusDisruptivenessPrecedence =
+      (confRow as { consultation_before_moderated_caucus?: boolean } | null)?.consultation_before_moderated_caucus ===
+      false
+        ? "moderated_first"
+        : "consultation_first";
+    setCaucusPrecedence(precedence);
+
     const unclosed = (unclosedRows as MotionRow[]) ?? [];
     const openForVotingList = unclosed.filter((row) => row.open_for_voting === true);
     setOpenVotingMotions(openForVotingList);
     const open = openForVotingList[0] ?? null;
     const pendingRaw = unclosed.filter((row) => row.open_for_voting === false);
-    setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw));
+    setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw, precedence));
     setOpenMotion(open);
     setRecentMotions((recentClosedRows as MotionRow[]) ?? []);
     setResolutions((resolutionRows as ResolutionRow[]) ?? []);
@@ -618,6 +633,11 @@ export function SessionControlClient({
           table: "speaker_queue_entries",
           filter: `conference_id=eq.${conferenceId}`,
         },
+        () => void refresh()
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "conferences", filter: `id=eq.${conferenceId}` },
         () => void refresh()
       )
       .subscribe();
@@ -1232,11 +1252,18 @@ export function SessionControlClient({
         .eq("id", openMotion.id);
       setMsg(error ? error.message : "Motion closed.");
       if (!error) {
-        const passes = didMotionPass(
-          openMotion.required_majority,
-          motionTally.yes,
-          motionTally.total
+        const membersPresent = membersPresentForMajorityDenominator(
+          rollAttendanceByAllocationId,
+          votingCallOrder.map((a) => a.id)
         );
+        const passes =
+          openMotion.vote_type === "motion"
+            ? didProceduralMotionPassAgainstRollPresent(
+                openMotion.required_majority,
+                motionTally.yes,
+                membersPresent
+              )
+            : didMotionPass(openMotion.required_majority, motionTally.yes, motionTally.total);
 
         const hasClauseTargets =
           !!openMotion.procedure_resolution_id &&
@@ -1279,6 +1306,9 @@ export function SessionControlClient({
 
         if (passes && openMotion.procedure_code === "moderated_caucus") {
           setSpeakerListChairPrompt("moderated_passed");
+        }
+        if (passes && openMotion.procedure_code === "open_gsl") {
+          setSpeakerListChairPrompt("gsl");
         }
       }
       void refresh();
@@ -1615,7 +1645,7 @@ export function SessionControlClient({
       setMsg("A motion is already open for voting.");
       return;
     }
-    const ordered = sortMotionsMostDisruptiveFirst(pendingStatedMotions);
+    const ordered = sortMotionsMostDisruptiveFirst(pendingStatedMotions, caucusPrecedence);
     if (!ordered.length) {
       setMsg("No stated motions are waiting to be voted on.");
       return;
@@ -1772,10 +1802,15 @@ export function SessionControlClient({
         <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
         <p className="text-xs text-brand-muted">
           Chair-only: one vote open at a time. Delegates do not vote in the app — use{" "}
-          <span className="font-medium text-brand-navy/90">Record votes</span> below to call each placard, enter Yes or
-          No, or skip if absent (skipped delegations are not counted). For several motions at once, open the motion
-          floor, record stated motions, close the floor, then begin voting in{" "}
-          <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP).
+          <span className="font-medium text-brand-navy/90">Record votes</span> below to call each placard; record{" "}
+          <span className="font-medium text-brand-navy/90">Yes</span> or <span className="font-medium text-brand-navy/90">No</span> only
+          (procedural motions do not use abstain). Skip if absent (skipped delegations are not counted in the yes/no
+          tally). <span className="font-medium text-brand-navy/90">Pass/fail</span> for procedural motions uses a simple
+          or two-thirds majority of <span className="font-medium text-brand-navy/90">members present</span> on the
+          roll, not only the ballots recorded. For several motions at once, open the motion floor, record stated
+          motions, close the floor, then begin voting in{" "}
+          <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP; caucus order follows your
+          committee session SMT setting unless the handbook default applies).
         </p>
         <div className={`${surfaceCard} space-y-3`}>
           <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
@@ -1846,7 +1881,8 @@ export function SessionControlClient({
                       <div className="min-w-0">
                         <span className="font-medium">#{i + 1}</span> — {m.title || "Untitled"}
                         <span className="text-brand-muted/70 text-xs block sm:inline sm:ml-2">
-                          ({m.procedure_code ?? m.vote_type}, RoP priority {motionDisruptivenessScore(m.vote_type, m.procedure_code)})
+                          ({m.procedure_code ?? m.vote_type}, RoP priority{" "}
+                          {motionDisruptivenessScore(m.vote_type, m.procedure_code, caucusPrecedence)})
                         </span>
                       </div>
                       <button
@@ -2154,9 +2190,10 @@ export function SessionControlClient({
             <p className="text-xs text-amber-800 dark:text-amber-200">{motionDraftValidationError}</p>
           ) : null}
           <div className="text-xs text-brand-muted font-medium">
-            Tally: Yes {motionTally.yes} | No {motionTally.no} | Total {motionTally.total}
+            Tally: Yes {motionTally.yes} | No {motionTally.no} | Ballots {motionTally.total}
             <span className="mt-1 block font-normal text-[0.65rem] leading-snug">
-              Total is only recorded Yes and No votes. Skip removes that placard from the count (absent / vacant).
+              Ballots = placards with a recorded Yes or No. Skip leaves no ballot. For procedural motions, outcome
+              compares Yes to members <span className="font-medium">present</span> on the roll (see roll call section).
             </span>
           </div>
 

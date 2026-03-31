@@ -35,6 +35,8 @@ export interface Conference {
   crisis_slides_url?: string | null;
   /** Third gate: require per-seat placard code from allocation_gate_codes. */
   allocation_code_gate_enabled?: boolean;
+  /** Competing-motion order: consultation ranks above moderated caucus unless false. */
+  consultation_before_moderated_caucus?: boolean;
   created_at: string;
 }
 

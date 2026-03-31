@@ -176,8 +176,8 @@ export function VotingPanel({
 
         {myRole === "delegate" ? (
           <p className="mun-muted mt-3 text-sm leading-relaxed">
-            The dais records votes in session (e.g. roll call). You can follow the tally here; delegates do not cast
-            votes in the app.
+            The dais records votes in session (e.g. roll call). Motion votes here follow Yes/No only (abstain is not
+            used). You can follow the tally; delegates do not cast votes in the app.
           </p>
         ) : null}
 
