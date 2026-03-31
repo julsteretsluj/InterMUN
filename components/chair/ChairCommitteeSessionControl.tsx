@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
+import { HelpButton } from "@/components/HelpButton";
 
 type EndMode = "none" | "duration" | "until";
 
@@ -238,7 +239,13 @@ export function ChairCommitteeSessionControl({
   return (
     <div className="space-y-6">
       <div className="rounded-2xl border border-white/15 bg-black/25 p-6 shadow-sm backdrop-blur-sm md:p-8">
-        <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">Committee session</h3>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">Committee session</h3>
+          <HelpButton title="Committee session">
+            Start begins the live committee session timer/status for everyone. Stop ends the session and clears the
+            current time limit.
+          </HelpButton>
+        </div>
         <p className="mt-1 text-sm text-brand-muted">Start or stop the committee session.</p>
 
         {live && startedAt ? (
@@ -251,7 +258,12 @@ export function ChairCommitteeSessionControl({
         )}
 
         <div className="mt-6 space-y-4 rounded-xl border border-white/10 bg-black/20 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Session limit</p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Session limit</p>
+            <HelpButton title="Session limit modes">
+              None: no end. Time budget: counts from start. End at: fixed clock time in your local timezone.
+            </HelpButton>
+          </div>
           <p className="text-xs text-brand-muted">
             Optional. <strong className="font-medium text-brand-navy/90">None</strong> runs until you stop.{" "}
             <strong className="font-medium text-brand-navy/90">Time budget</strong> counts from the moment you start.{" "}
@@ -355,6 +367,9 @@ export function ChairCommitteeSessionControl({
               >
                 Save limit
               </button>
+              <HelpButton title="Save limit">
+                Applies updated limit settings while the session is already running, without stopping the session.
+              </HelpButton>
             </>
           ) : (
             <button

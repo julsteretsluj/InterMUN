@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { setRoomCodeAndEnterAction } from "@/app/actions/roomGate";
+import { HelpButton } from "@/components/HelpButton";
 
 type Conf = {
   id: string;
@@ -44,6 +45,13 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
       <input type="hidden" name="next" value="/profile" />
 
       <div>
+        <div className="mb-2 flex items-center justify-between gap-2">
+          <p className="text-xs font-medium uppercase tracking-wider text-brand-muted">Committee selection</p>
+          <HelpButton title="Committee code setup">
+            Pick the committee, set a 6-character code, and save. This updates the code delegates/staff use to enter
+            that committee room.
+          </HelpButton>
+        </div>
         {singleCommittee ? (
           <>
             <p className="text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
@@ -108,12 +116,18 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
       </div>
 
       <div>
-        <label
-          htmlFor="chair-room-code"
-          className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
-        >
-          New committee code
-        </label>
+        <div className="mb-1.5 flex items-center justify-between gap-2">
+          <label
+            htmlFor="chair-room-code"
+            className="block text-xs font-medium uppercase tracking-wider text-brand-muted"
+          >
+            New committee code
+          </label>
+          <HelpButton title="New committee code">
+            Must be exactly 6 letters/numbers. Share this only with the committee participants who should access this
+            room.
+          </HelpButton>
+        </div>
         <input
           id="chair-room-code"
           name="code"

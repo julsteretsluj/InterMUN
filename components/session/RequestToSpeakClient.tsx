@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { HelpButton } from "@/components/HelpButton";
 
 export function RequestToSpeakClient({
   conferenceId,
@@ -80,10 +81,20 @@ export function RequestToSpeakClient({
 
   return (
     <div className="rounded-xl border border-brand-navy/10 bg-white/60 p-3 space-y-2">
-      <h3 className="font-display text-sm font-semibold text-brand-navy">Request to speak</h3>
-      <label className="block text-xs text-brand-muted uppercase tracking-wider">
-        Optional purpose (shows in queue label)
-      </label>
+      <div className="flex items-center justify-between gap-2">
+        <h3 className="font-display text-sm font-semibold text-brand-navy">Request to speak</h3>
+        <HelpButton title="Request to speak">
+          Sends your delegation to the chair queue. You can have one active waiting/current request at a time.
+        </HelpButton>
+      </div>
+      <div className="flex items-center justify-between gap-2">
+        <label className="block text-xs text-brand-muted uppercase tracking-wider">
+          Optional purpose (shows in queue label)
+        </label>
+        <HelpButton title="Purpose label">
+          This text is appended to your country name so chairs can see why you are requesting the floor.
+        </HelpButton>
+      </div>
       <input
         className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         value={purpose}

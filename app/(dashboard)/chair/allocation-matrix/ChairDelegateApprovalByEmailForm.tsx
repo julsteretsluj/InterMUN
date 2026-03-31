@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { chairAssignDelegateByEmailAction } from "@/app/actions/allocationSignup";
+import { HelpButton } from "@/components/HelpButton";
 
 type AllocationOption = { id: string; country: string; user_id: string | null };
 
@@ -18,9 +19,14 @@ export function ChairDelegateApprovalByEmailForm({
 
   return (
     <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-      <h2 className="font-display text-lg font-semibold text-brand-navy">
-        Accept delegate by email + allocation
-      </h2>
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="font-display text-lg font-semibold text-brand-navy">
+          Accept delegate by email + allocation
+        </h2>
+        <HelpButton title="Accept delegate">
+          Use this to directly assign a user account (by email) to a specific allocation in this conference.
+        </HelpButton>
+      </div>
       <p className="text-xs text-brand-muted mt-1 mb-3">
         Chairs can directly approve a delegate account to a specific allocation.
       </p>
@@ -28,7 +34,12 @@ export function ChairDelegateApprovalByEmailForm({
       <form action={formAction} className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 items-end">
         <input type="hidden" name="conference_id" value={conferenceId} />
         <div>
-          <label className="block text-xs text-brand-muted mb-1">Delegate email</label>
+          <div className="mb-1 flex items-center justify-between gap-2">
+            <label className="block text-xs text-brand-muted">Delegate email</label>
+            <HelpButton title="Delegate email">
+              Enter the exact account email the delegate uses to sign in.
+            </HelpButton>
+          </div>
           <input
             type="email"
             name="email"
@@ -38,7 +49,12 @@ export function ChairDelegateApprovalByEmailForm({
           />
         </div>
         <div>
-          <label className="block text-xs text-brand-muted mb-1">Allocation</label>
+          <div className="mb-1 flex items-center justify-between gap-2">
+            <label className="block text-xs text-brand-muted">Allocation</label>
+            <HelpButton title="Allocation">
+              Choose which country/seat to assign. “Currently assigned” means another user is already linked there.
+            </HelpButton>
+          </div>
           <select
             name="allocation_id"
             required

@@ -38,6 +38,7 @@ import {
   rollAttendanceRollLabel,
   rollAttendanceShortLabel,
 } from "@/lib/roll-attendance";
+import { HelpButton } from "@/components/HelpButton";
 
 const ROLL_ATTENDANCE_BUTTONS: {
   value: RollAttendance;
@@ -1886,7 +1887,13 @@ export function SessionControlClient({
 
       {show("motions") ? (
       <section className="space-y-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
+          <HelpButton title="Motion control">
+            Chair workflow: capture motions, open one vote at a time, record votes by allocation, then close the
+            motion to finalize pass/fail.
+          </HelpButton>
+        </div>
         <p className="text-xs text-brand-muted">
           Chair-only: one vote open at a time. Delegates do not vote in the app — use{" "}
           <span className="font-medium text-brand-navy/90">Record votes</span> below to call each placard; record{" "}
@@ -1988,7 +1995,13 @@ export function SessionControlClient({
           ) : null}
 
           <label className="text-sm text-brand-navy">
-            <span className={surfaceLabel}>Procedure preset</span>
+            <span className="flex items-center justify-between gap-2">
+              <span className={surfaceLabel}>Procedure preset</span>
+              <HelpButton title="Procedure preset">
+                Prefills common motion types and default titles/timing fields. You can still edit details before
+                opening.
+              </HelpButton>
+            </span>
             <select
               className={surfaceField}
               value={motionDraft.procedure_code ?? ""}
@@ -2216,7 +2229,12 @@ export function SessionControlClient({
             </label>
           ) : null}
           <label className="text-sm block text-brand-navy">
-            <span className={surfaceLabel}>Motioner</span>
+            <span className="flex items-center justify-between gap-2">
+              <span className={surfaceLabel}>Motioner</span>
+              <HelpButton title="Motioner">
+                Optional. Set the delegation that moved the motion so records and exports show who introduced it.
+              </HelpButton>
+            </span>
             <select
               className={surfaceField}
               value={motionDraft.motioner_allocation_id ?? ""}
@@ -2250,6 +2268,9 @@ export function SessionControlClient({
               onChange={(e) => setMotionDraft((d) => ({ ...d, must_vote: e.target.checked }))}
             />
             MUST vote
+            <HelpButton title="MUST vote">
+              Marks this as a mandatory vote item according to your committee rules.
+            </HelpButton>
           </label>
           <div className="flex flex-wrap gap-2">
             {!openMotion ? (
@@ -2315,7 +2336,15 @@ export function SessionControlClient({
 
           {openMotion ? (
             <div className={surfaceSubpanel}>
-              <p className={surfaceLabel}>Record votes — by allocation</p>
+              <p className={surfaceLabel}>
+                <span className="inline-flex items-center gap-1.5">
+                  Record votes — by allocation
+                  <HelpButton title="Record votes">
+                    Chairs register votes per allocation. Abstain appears only for amendment/resolution votes when roll
+                    status is not Present and voting.
+                  </HelpButton>
+                </span>
+              </p>
               <p className="text-sm text-brand-muted">
                 Delegates cannot vote in the app. Chairs record votes for each allocation. Abstain appears only for
                 resolution/amendment votes when that delegation is not marked Present and voting.
@@ -2464,7 +2493,12 @@ export function SessionControlClient({
 
       {show("timer") ? (
       <section className="space-y-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
+          <HelpButton title="Timer controls">
+            Use General floor for overall debate timing, or Motion vote to tie visibility to a specific open vote item.
+          </HelpButton>
+        </div>
         <div className={`${surfaceCard} space-y-3`}>
           <p className="text-sm text-brand-muted">
             Choose whether this timer is for <strong className="font-medium text-brand-navy">general floor</strong>{" "}
@@ -2975,7 +3009,12 @@ export function SessionControlClient({
 
       {show("roll-call") ? (
       <section className="space-y-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">✅ Roll Call Tracker</h3>
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="font-display text-lg font-semibold text-brand-navy">✅ Roll Call Tracker</h3>
+          <HelpButton title="Roll call tracker">
+            Present: may abstain. Present and voting: must vote yes/no. Absent: no ballot is recorded.
+          </HelpButton>
+        </div>
         <p className="text-sm text-brand-muted">
           For each delegate, choose <strong className="font-medium text-brand-navy">Present</strong> (may abstain),{" "}
           <strong className="font-medium text-brand-navy">Present and voting</strong> (must vote), or{" "}

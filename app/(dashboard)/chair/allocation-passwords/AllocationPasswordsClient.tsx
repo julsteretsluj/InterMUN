@@ -6,6 +6,7 @@ import {
   saveAllocationCode,
   generateMissingAllocationCodes,
 } from "@/app/actions/allocationCodes";
+import { HelpButton } from "@/components/HelpButton";
 
 type Row = {
   allocationId: string;
@@ -113,6 +114,10 @@ export function AllocationPasswordsClient({
         >
           Copy list (TSV)
         </button>
+        <HelpButton title="Allocation sign-in codes">
+          These are per-allocation placard codes used by delegates/chairs during allocation-code gate. Generate fills
+          missing codes only.
+        </HelpButton>
       </div>
 
       {message && (
@@ -133,7 +138,12 @@ export function AllocationPasswordsClient({
               <th className="px-3 py-2 font-semibold text-brand-navy">Country / allocation</th>
               <th className="px-3 py-2 font-semibold text-brand-navy">Delegate (allocation)</th>
               <th className="px-3 py-2 font-semibold text-brand-navy w-[min(40%,14rem)]">
-                Password / code
+                <span className="inline-flex items-center gap-1.5">
+                  Password / code
+                  <HelpButton title="Password / code field">
+                    Use short alphanumeric codes. Delegates enter this code for their assigned allocation.
+                  </HelpButton>
+                </span>
               </th>
               <th className="px-3 py-2 w-24" />
             </tr>
