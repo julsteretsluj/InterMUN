@@ -37,7 +37,7 @@ export function AdminDashboardClient({
         </p>
         <Link
           href="/conference-setup?next=%2Fadmin"
-          className="inline-flex rounded-lg bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-accent-ink hover:opacity-95"
+          className="inline-flex rounded-lg bg-brand-gold px-4 py-2 text-sm font-semibold text-white hover:opacity-95"
         >
           Open conference setup
         </Link>

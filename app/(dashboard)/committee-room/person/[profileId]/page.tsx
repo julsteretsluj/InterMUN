@@ -113,7 +113,7 @@ export default async function CommitteeRoomPersonPage({
         <div className="flex items-center gap-2 sm:justify-end">
           <Link
             href={`/chats-notes?forProfile=${encodeURIComponent(profileId)}`}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/35 bg-gradient-to-br from-emerald-500/25 to-emerald-600/10 px-4 py-2 text-sm font-semibold text-brand-accent-ink shadow-sm hover:opacity-95"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/35 bg-gradient-to-br from-emerald-500/25 to-emerald-600/10 px-4 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 shadow-sm hover:opacity-95"
           >
             <MessageCircle className="size-4 shrink-0" strokeWidth={2} />
             Chat

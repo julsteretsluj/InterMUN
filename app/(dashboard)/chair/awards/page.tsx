@@ -279,7 +279,7 @@ export default async function ChairAwardsPage() {
                     </label>
                     <button
                       type="submit"
-                      className="px-4 py-2 rounded-lg bg-brand-gold text-brand-accent-ink font-semibold"
+                      className="px-4 py-2 rounded-lg bg-brand-gold text-white font-semibold"
                     >
                       Save {type.label} top {rank}
                     </button>

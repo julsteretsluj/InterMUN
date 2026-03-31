@@ -2,45 +2,49 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Default: light (white) UI. Add class `dark` on <html> for previous dark glass theme. */
+/*
+ * Default palette aligned with SEAMUNs logo (public/seamun-i-2027-logo.png):
+ * deep navy caduceus, royal / sky blue waves, silver highlights.
+ * Token names `brand-gold` / `brand-gold-bright` are legacy aliases for the primary accent (blue).
+ */
 html {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #0c1a3a;
 
-  --brand-navy: #0f172a;
-  --brand-navy-soft: rgba(15, 23, 42, 0.08);
+  --brand-navy: #0c1a3a;
+  --brand-navy-soft: rgba(12, 26, 58, 0.08);
 
-  --brand-gold: #1db954;
-  --brand-gold-bright: #169c46;
+  --brand-gold: #1e56a0;
+  --brand-gold-bright: #4a90e2;
 
-  --brand-cream: #f8fafc;
+  --brand-cream: #f0f6fc;
   --brand-paper: rgba(255, 255, 255, 0.97);
 
-  --brand-muted: #64748b;
-  --brand-line: rgba(15, 23, 42, 0.12);
+  --brand-muted: #5a6d88;
+  --brand-line: rgba(12, 26, 58, 0.14);
 
-  --brand-accent-ink: #0b0b0b;
+  --brand-accent-ink: #0c1a3a;
 
   color-scheme: light;
 }
 
 html.dark {
-  --background: #0b0b0b;
-  --foreground: #d7d7d7;
+  --background: #060d18;
+  --foreground: #e8eef7;
 
-  --brand-navy: #f5f5f5;
-  --brand-navy-soft: rgba(255, 255, 255, 0.12);
+  --brand-navy: #e8eef7;
+  --brand-navy-soft: rgba(232, 238, 247, 0.12);
 
-  --brand-gold: #1db954;
-  --brand-gold-bright: #2be168;
+  --brand-gold: #4a90e2;
+  --brand-gold-bright: #7eb8f0;
 
-  --brand-cream: rgba(255, 255, 255, 0.03);
-  --brand-paper: rgba(255, 255, 255, 0.05);
+  --brand-cream: rgba(255, 255, 255, 0.04);
+  --brand-paper: rgba(255, 255, 255, 0.06);
 
-  --brand-muted: #b6b6b6;
-  --brand-line: rgba(255, 255, 255, 0.14);
+  --brand-muted: #9eb0cb;
+  --brand-line: rgba(232, 238, 247, 0.14);
 
-  --brand-accent-ink: #0b0b0b;
+  --brand-accent-ink: #e8eef7;
 
   color-scheme: dark;
 }
@@ -65,14 +69,28 @@ body {
   background-color: #ffffff;
   color: var(--foreground);
   background-attachment: fixed;
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand-gold) 10%, transparent) 0%,
+    #ffffff 48%,
+    var(--brand-cream) 100%
+  );
 }
 
 html.dark body {
-  background-color: #0a0a0a;
+  background-color: #060d18;
   background-image:
-    radial-gradient(circle at top left, rgba(29, 185, 84, 0.2) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(29, 185, 84, 0.16) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--brand-gold) 26%, transparent) 0%,
+      rgba(6, 13, 24, 0.94) 40%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      color-mix(in srgb, var(--brand-gold) 20%, transparent) 0%,
+      rgba(6, 13, 24, 0.96) 45%
+    ),
+    linear-gradient(135deg, #0a1424 0%, #060d18 100%);
 }
 
 /* Auth / marketing subtle glow follows accent */
@@ -91,7 +109,10 @@ html.dark .theme-page-glow {
   );
 }
 
-/* ---- Accent palettes (light + dark). Base html / html.dark = green (legacy). ---- */
+/*
+ * Optional accent overrides (class theme-{hue} on <html>). Default hue key `green` adds
+ * theme-green — no rules below — so variables come from `html` / `html.dark` (SEAMUN logo blues).
+ */
 
 html.theme-red:not(.dark) {
   --brand-gold: #dc2626;
@@ -295,7 +316,7 @@ html.dark ::selection {
   }
 
   .mun-field {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-emerald-600/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/25;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-gold/55 focus:outline-none focus:ring-2 focus:ring-brand-gold-bright/25;
     @apply dark:border-white/15 dark:bg-black/30 dark:text-brand-navy dark:shadow-inner dark:placeholder:text-brand-muted/60 dark:focus:border-brand-gold/50 dark:focus:ring-brand-gold/40;
   }
 
@@ -305,7 +326,7 @@ html.dark ::selection {
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-emerald-600/50 bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-accent-ink hover:opacity-95 disabled:opacity-45;
+    @apply rounded-lg border border-brand-gold/45 bg-brand-gold px-4 py-2 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-45;
   }
 
   .mun-btn-danger {
@@ -314,7 +335,7 @@ html.dark ::selection {
   }
 
   .mun-link {
-    @apply font-semibold text-emerald-700 underline underline-offset-2 hover:text-emerald-800;
+    @apply font-semibold text-brand-gold underline underline-offset-2 hover:text-brand-gold-bright;
     @apply dark:text-brand-gold-bright dark:hover:text-brand-gold;
   }
 }

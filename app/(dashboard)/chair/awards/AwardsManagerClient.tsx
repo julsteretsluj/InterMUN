@@ -260,7 +260,7 @@ export function AwardsManagerClient({
             <button
               type="submit"
               disabled={pending}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-gold text-brand-navy font-medium disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-gold text-white font-medium disabled:opacity-50"
             >
               <Plus className="w-4 h-4" />
               {form.id ? "Update" : "Add"} award

@@ -337,7 +337,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
       <button
         type="submit"
         disabled={pending}
-        className="text-sm px-3 py-1.5 rounded-lg bg-brand-gold text-brand-navy font-medium disabled:opacity-50"
+        className="text-sm px-3 py-1.5 rounded-lg bg-brand-gold text-white font-medium disabled:opacity-50"
       >
         {pending ? "Saving…" : "Save committee"}
       </button>

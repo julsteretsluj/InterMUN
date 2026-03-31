@@ -41,7 +41,7 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
         <button
           type="submit"
           disabled={pending}
-          className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-semibold disabled:opacity-50 border border-emerald-700/30"
+          className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-semibold disabled:opacity-50 border border-brand-navy/20"
         >
           {pending ? "Saving…" : "Save"}
         </button>

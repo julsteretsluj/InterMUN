@@ -1833,7 +1833,7 @@ export function SessionControlClient({
                 type="button"
                 disabled={pending || !!openMotion || motionFloorOpen}
                 onClick={openMotionFloorForStatements}
-                className="px-3 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium disabled:opacity-50"
+                className="px-3 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium disabled:opacity-50"
               >
                 Open floor for motion statements
               </button>
@@ -2144,7 +2144,7 @@ export function SessionControlClient({
                   pending || !!motionDraftValidationError
                 }
                 onClick={() => createMotion()}
-                className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium"
+                className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium"
               >
                 Create and open motion
               </button>
@@ -2575,7 +2575,7 @@ export function SessionControlClient({
               type="button"
               disabled={pending || !speechNoteDraft.trim()}
               onClick={saveChairSpeechNote}
-              className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
               Save speech note
             </button>
@@ -2658,7 +2658,7 @@ export function SessionControlClient({
               type="button"
               disabled={pending}
               onClick={saveTimer}
-              className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
               Save timer
             </button>
@@ -2737,7 +2737,7 @@ export function SessionControlClient({
             type="button"
             disabled={pending}
             onClick={postDais}
-            className="px-4 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
+            className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
           >
             Post
           </button>
@@ -2801,7 +2801,7 @@ export function SessionControlClient({
                           type="button"
                           disabled={pending}
                           onClick={saveDaisEdit}
-                          className="rounded-lg bg-brand-gold px-3 py-1.5 text-sm font-medium text-brand-navy hover:opacity-90 disabled:opacity-50"
+                          className="rounded-lg bg-brand-gold px-3 py-1.5 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
                         >
                           Save changes
                         </button>

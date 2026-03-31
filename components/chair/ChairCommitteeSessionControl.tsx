@@ -361,7 +361,7 @@ export function ChairCommitteeSessionControl({
               type="button"
               disabled={pending}
               onClick={startSession}
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-sm font-semibold text-brand-accent-ink hover:opacity-95 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
             >
               <span aria-hidden>▶️</span>
               Start session

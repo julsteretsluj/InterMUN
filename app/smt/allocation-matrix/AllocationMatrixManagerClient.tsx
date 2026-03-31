@@ -389,7 +389,7 @@ export function AllocationMatrixManagerClient({
                             type="submit"
                             form={formId}
                             disabled={pending}
-                            className="text-xs px-2 py-1 rounded bg-brand-gold text-brand-navy font-medium disabled:opacity-50"
+                            className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium disabled:opacity-50"
                           >
                             Save
                           </button>

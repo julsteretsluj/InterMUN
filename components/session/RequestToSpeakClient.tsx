@@ -95,7 +95,7 @@ export function RequestToSpeakClient({
         type="button"
         onClick={() => void request()}
         disabled={pending || !allocationId || disabled}
-        className="w-full px-3 py-2 rounded-lg bg-brand-gold text-brand-navy text-sm font-medium hover:opacity-90 disabled:opacity-50"
+        className="w-full px-3 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
       >
         {pending ? "Requesting…" : "Request to speak"}
       </button>

@@ -133,7 +133,7 @@ export default async function SmtAwardsPage() {
                                 <input type="hidden" name="category" value="committee_best_delegate" />
                                 <button
                                   type="submit"
-                                  className="text-xs px-2 py-1 rounded bg-brand-gold text-brand-navy font-medium"
+                                  className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
                                 >
                                   Select as Best Delegate
                                 </button>
@@ -156,7 +156,7 @@ export default async function SmtAwardsPage() {
                               <input type="hidden" name="category" value="committee_best_position_paper" />
                               <button
                                 type="submit"
-                                className="text-xs px-2 py-1 rounded bg-brand-gold text-brand-navy font-medium"
+                                className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
                               >
                                 Select as Best Position Paper
                               </button>
@@ -168,7 +168,7 @@ export default async function SmtAwardsPage() {
                               <input type="hidden" name="category" value="conference_best_delegate" />
                               <button
                                 type="submit"
-                                className="text-xs px-2 py-1 rounded bg-brand-gold text-brand-navy font-medium"
+                                className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
                               >
                                 Select as Best Delegate (overall)
                               </button>

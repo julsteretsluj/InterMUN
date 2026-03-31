@@ -383,14 +383,14 @@ export function VirtualCommitteeRoom({
           className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
           style={{
             background:
-              "radial-gradient(ellipse 120% 80% at 50% 100%, rgba(29,185,84,0.35) 0%, rgba(20,20,20,0.9) 42%, rgba(10,10,10,1) 100%)",
+              "radial-gradient(ellipse 120% 80% at 50% 100%, color-mix(in srgb, var(--brand-gold-bright) 45%, transparent) 0%, rgba(20,20,20,0.9) 42%, rgba(10,10,10,1) 100%)",
           }}
         >
           <div
             className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x-2 border-b-2 border-brand-gold-bright/20 shadow-inner"
             style={{
               background:
-                "linear-gradient(180deg, rgba(29,185,84,0.35) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.55) 100%)",
+                "linear-gradient(180deg, color-mix(in srgb, var(--brand-gold-bright) 45%, transparent) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.55) 100%)",
             }}
           >
             <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-brand-gold-bright/20" />

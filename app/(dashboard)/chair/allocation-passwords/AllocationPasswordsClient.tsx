@@ -101,7 +101,7 @@ export function AllocationPasswordsClient({
           type="button"
           onClick={generateMissing}
           disabled={pending || initialRows.length === 0}
-          className="px-3 py-2 text-sm rounded-lg bg-brand-gold text-brand-navy font-medium hover:opacity-90 disabled:opacity-50"
+          className="px-3 py-2 text-sm rounded-lg bg-brand-gold text-white font-medium hover:opacity-90 disabled:opacity-50"
         >
           Generate codes for empty rows
         </button>

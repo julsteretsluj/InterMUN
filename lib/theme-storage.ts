@@ -16,5 +16,5 @@ export const THEME_HUES = [
 
 export type ThemeHue = (typeof THEME_HUES)[number];
 
-/** Default matches legacy InterMUN accent (green). */
+/** Default accent; `theme-green` has no CSS override — base palette is SEAMUN logo blues. */
 export const DEFAULT_THEME_HUE: ThemeHue = "green";

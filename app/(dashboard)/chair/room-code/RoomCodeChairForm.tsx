@@ -143,7 +143,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
             conferences.length === 0 ||
             (!singleCommittee && (filtered.length === 0 || !conferenceId))
           }
-          className="px-4 py-2.5 rounded-lg bg-brand-gold text-brand-navy font-semibold hover:opacity-90 disabled:opacity-50 border border-emerald-700/30"
+          className="px-4 py-2.5 rounded-lg bg-brand-gold text-white font-semibold hover:opacity-90 disabled:opacity-50 border border-brand-navy/15"
         >
           {pending ? "Saving…" : "Save code & go to profile"}
         </button>
