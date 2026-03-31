@@ -176,7 +176,7 @@ export function SessionControlClient({
   const [recentMotions, setRecentMotions] = useState<MotionRow[]>([]);
   const [motionAudit, setMotionAudit] = useState<MotionAudit[]>([]);
   const [motionTally, setMotionTally] = useState({ yes: 0, no: 0, total: 0 });
-  const [motionVoteByUser, setMotionVoteByUser] = useState<Record<string, "yes" | "no">>({});
+  const [motionVoteByUser, setMotionVoteByUser] = useState<Record<string, "yes" | "no" | "abstain">>({});
   const [motionDraft, setMotionDraft] = useState({
     vote_type: "motion" as VoteType,
     procedure_code: null as string | null,
@@ -201,8 +201,6 @@ export function SessionControlClient({
   const speakersSectionRef = useRef<HTMLElement | null>(null);
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
-  /** Linear roll-call index into `sortAllocationsByDisplayCountry(allocations)` while recording votes. */
-  const [voteCallIndex, setVoteCallIndex] = useState(0);
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
   const [agendaTopicsAll, setAgendaTopicsAll] = useState<AgendaTopic[]>([]);
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
@@ -222,10 +220,6 @@ export function SessionControlClient({
     setTimer((t) => (t.boundVoteItemId === "" ? { ...t, boundVoteItemId: onlyId } : t));
   }, [timer.purpose, timer.boundVoteItemId, openVotingMotions]);
 
-  useEffect(() => {
-    setVoteCallIndex(0);
-  }, [openMotion?.id]);
-
   const votingCallOrder = useMemo(
     () => sortAllocationsByDisplayCountry(allocations),
     [allocations]
@@ -238,10 +232,6 @@ export function SessionControlClient({
     }
     return m;
   }, [roll]);
-
-  useEffect(() => {
-    setVoteCallIndex((i) => Math.min(i, votingCallOrder.length));
-  }, [votingCallOrder.length]);
 
   const procedurePresets = useMemo(() => {
     const base: {
@@ -615,9 +605,11 @@ export function SessionControlClient({
       const yes = counted.filter((v) => v.value === "yes").length;
       const no = counted.filter((v) => v.value === "no").length;
       setMotionTally({ yes, no, total: counted.length });
-      const vm: Record<string, "yes" | "no"> = {};
-      for (const r of counted) {
-        vm[r.user_id] = r.value as "yes" | "no";
+      const vm: Record<string, "yes" | "no" | "abstain"> = {};
+      for (const r of rows) {
+        if (r.value === "yes" || r.value === "no" || r.value === "abstain") {
+          vm[r.user_id] = r.value;
+        }
       }
       setMotionVoteByUser(vm);
       setMotionAudit((auditRows as MotionAudit[]) ?? []);
@@ -896,22 +888,24 @@ export function SessionControlClient({
     });
   }
 
-  function recordDelegateVoteForCall(value: "yes" | "no") {
+  function recordDelegateVoteForAllocation(allocation: Alloc, value: "yes" | "no" | "abstain") {
     if (!openMotion) {
       setMsg("No motion open for voting.");
       return;
     }
-    const current = votingCallOrder[voteCallIndex];
-    if (!current) {
-      setMsg("No delegate at this position in the call list.");
+    if (!allocation.user_id) {
+      setMsg("This placard has no delegate account — vote cannot be recorded.");
       return;
     }
-    if (!current.user_id) {
-      setMsg("This placard has no delegate account — use Skip (vacant / not seated).");
+
+    const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "absent";
+    const abstainAllowedByVoteType = openMotion.vote_type === "resolution" || openMotion.vote_type === "amendment";
+    const canAbstain = abstainAllowedByVoteType && attendance !== "present_voting";
+    if (value === "abstain" && !canAbstain) {
+      setMsg("Abstain is only available for resolutions/amendments when roll is not Present and voting.");
       return;
     }
-    const orderLen = votingCallOrder.length;
-    const uid = current.user_id;
+    const uid = allocation.user_id;
     const voteItemId = openMotion.id;
     startTransition(async () => {
       const { error } = await supabase.from("votes").upsert(
@@ -923,34 +917,28 @@ export function SessionControlClient({
         return;
       }
       setMsg(null);
-      setVoteCallIndex((i) => Math.min(i + 1, orderLen));
       void refresh();
     });
   }
 
-  function skipDelegateVoteForCall() {
+  function clearDelegateVoteForAllocation(allocation: Alloc) {
     if (!openMotion) {
       setMsg("No motion open for voting.");
       return;
     }
-    const current = votingCallOrder[voteCallIndex];
-    if (!current) return;
-    const orderLen = votingCallOrder.length;
+    if (!allocation.user_id) return;
     const voteItemId = openMotion.id;
     startTransition(async () => {
-      if (current.user_id) {
-        const { error } = await supabase
-          .from("votes")
-          .delete()
-          .eq("vote_item_id", voteItemId)
-          .eq("user_id", current.user_id);
-        if (error) {
-          setMsg(error.message);
-          return;
-        }
+      const { error } = await supabase
+        .from("votes")
+        .delete()
+        .eq("vote_item_id", voteItemId)
+        .eq("user_id", allocation.user_id);
+      if (error) {
+        setMsg(error.message);
+        return;
       }
       setMsg(null);
-      setVoteCallIndex((i) => Math.min(i + 1, orderLen));
       void refresh();
     });
   }
@@ -2319,116 +2307,97 @@ export function SessionControlClient({
           <div className="text-xs text-brand-muted font-medium">
             Tally: Yes {motionTally.yes} | No {motionTally.no} | Ballots {motionTally.total}
             <span className="mt-1 block font-normal text-[0.65rem] leading-snug">
-              Ballots = placards with a recorded Yes or No. Skip leaves no ballot. For procedural motions, outcome
-              compares Yes to members <span className="font-medium">present</span> on the roll (see roll call section).
+              Ballots = placards with a recorded Yes or No (abstain is tracked separately and not counted in this
+              denominator). Clear removes a recorded vote. For procedural motions, outcome compares Yes to members{" "}
+              <span className="font-medium">present</span> on the roll (see roll call section).
             </span>
           </div>
 
           {openMotion ? (
             <div className={surfaceSubpanel}>
-              <p className={surfaceLabel}>Record votes — one placard at a time</p>
+              <p className={surfaceLabel}>Record votes — by allocation</p>
               <p className="text-sm text-brand-muted">
-                Delegates cannot vote in the app. Call each country in order, record how they voted, or skip if they
-                are not present (their vote is not counted at all).
+                Delegates cannot vote in the app. Chairs record votes for each allocation. Abstain appears only for
+                resolution/amendment votes when that delegation is not marked Present and voting.
               </p>
               {votingCallOrder.length === 0 ? (
                 <p className="text-sm text-brand-muted">No allocations in this committee.</p>
-              ) : voteCallIndex >= votingCallOrder.length ? (
-                <div className="space-y-2 text-sm text-brand-navy">
-                  <p className="font-medium">End of roll — all placards in the list have been reached.</p>
-                  <button
-                    type="button"
-                    disabled={pending}
-                    onClick={() => setVoteCallIndex(0)}
-                    className="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-medium hover:bg-white/15 disabled:opacity-50"
-                  >
-                    Restart from first placard
-                  </button>
-                </div>
               ) : (
-                (() => {
-                  const call = votingCallOrder[voteCallIndex]!;
-                  const rollA = rollAttendanceByAllocationId.get(call.id);
-                  const rollLabel = rollAttendanceRollLabel(rollA);
-                  const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
-                  return (
-                    <div className="space-y-3">
-                      <p className="text-sm text-brand-muted">
-                        Placard <span className="font-semibold text-brand-navy">{voteCallIndex + 1}</span> of{" "}
-                        <span className="font-semibold text-brand-navy">{votingCallOrder.length}</span>
-                      </p>
-                      <div className="rounded-lg border border-white/12 bg-black/25 px-3 py-2">
-                        <p className="font-display text-lg font-semibold text-brand-navy">{call.country}</p>
-                        <p className="text-xs text-brand-muted mt-1">
-                          Roll: {rollLabel}
-                          {call.user_id ? (
-                            <>
-                              {" "}
-                              · Recorded:{" "}
+                <div className="max-h-[26rem] overflow-y-auto space-y-2 pr-1">
+                  {votingCallOrder.map((call) => {
+                    const rollA = rollAttendanceByAllocationId.get(call.id);
+                    const rollLabel = rollAttendanceRollLabel(rollA);
+                    const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
+                    const abstainAllowedByVoteType =
+                      openMotion.vote_type === "resolution" || openMotion.vote_type === "amendment";
+                    const canAbstain = abstainAllowedByVoteType && (rollA ?? "absent") !== "present_voting";
+                    return (
+                      <div
+                        key={call.id}
+                        className="rounded-lg border border-white/12 bg-black/25 px-3 py-2.5"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <div>
+                            <p className="font-medium text-brand-navy">{call.country}</p>
+                            <p className="text-xs text-brand-muted mt-0.5">
+                              Roll: {rollLabel} · Recorded:{" "}
                               <span className="font-medium text-brand-navy">
                                 {recorded === "yes"
                                   ? "Yes"
                                   : recorded === "no"
                                     ? "No"
-                                    : "— (not counted yet)"}
+                                    : recorded === "abstain"
+                                      ? "Abstain"
+                                      : "—"}
                               </span>
-                            </>
-                          ) : (
-                            <span className="block mt-1 text-amber-800 dark:text-amber-200/90">
-                              No delegate account on this placard — use Skip.
-                            </span>
-                          )}
-                        </p>
+                            </p>
+                            {!call.user_id ? (
+                              <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
+                                No delegate account on this placard.
+                              </p>
+                            ) : null}
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            <button
+                              type="button"
+                              disabled={pending || !call.user_id}
+                              onClick={() => recordDelegateVoteForAllocation(call, "yes")}
+                              className="rounded-lg bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
+                            >
+                              Yes
+                            </button>
+                            {canAbstain ? (
+                              <button
+                                type="button"
+                                disabled={pending || !call.user_id}
+                                onClick={() => recordDelegateVoteForAllocation(call, "abstain")}
+                                className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
+                              >
+                                Abstain
+                              </button>
+                            ) : null}
+                            <button
+                              type="button"
+                              disabled={pending || !call.user_id}
+                              onClick={() => recordDelegateVoteForAllocation(call, "no")}
+                              className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
+                            >
+                              No
+                            </button>
+                            <button
+                              type="button"
+                              disabled={pending || !call.user_id}
+                              onClick={() => clearDelegateVoteForAllocation(call)}
+                              className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/15 disabled:opacity-50"
+                            >
+                              Clear
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex flex-wrap gap-2">
-                        <button
-                          type="button"
-                          disabled={pending || !call.user_id}
-                          onClick={() => recordDelegateVoteForCall("yes")}
-                          className="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
-                        >
-                          Yes
-                        </button>
-                        <button
-                          type="button"
-                          disabled={pending || !call.user_id}
-                          onClick={() => recordDelegateVoteForCall("no")}
-                          className="rounded-lg bg-rose-700 px-4 py-2 text-sm font-medium text-white hover:bg-rose-600 disabled:opacity-50"
-                        >
-                          No
-                        </button>
-                        <button
-                          type="button"
-                          disabled={pending}
-                          onClick={skipDelegateVoteForCall}
-                          className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-brand-navy hover:bg-white/15 disabled:opacity-50"
-                        >
-                          Skip (absent — no vote)
-                        </button>
-                      </div>
-                      <div className="flex flex-wrap gap-2 border-t border-white/10 pt-3">
-                        <button
-                          type="button"
-                          disabled={pending || voteCallIndex <= 0}
-                          onClick={() => setVoteCallIndex((i) => Math.max(0, i - 1))}
-                          className="text-sm font-medium text-brand-navy underline decoration-brand-muted/50 hover:decoration-brand-navy disabled:opacity-40 disabled:no-underline"
-                        >
-                          Previous placard
-                        </button>
-                        <button
-                          type="button"
-                          disabled={pending || voteCallIndex >= votingCallOrder.length}
-                          onClick={() =>
-                            setVoteCallIndex((i) => Math.min(i + 1, votingCallOrder.length))
-                          }
-                          className="text-sm font-medium text-brand-navy underline decoration-brand-muted/50 hover:decoration-brand-navy disabled:opacity-40 disabled:no-underline"
-                        >
-                          Next placard (no vote)
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })()
+                    );
+                  })}
+                </div>
               )}
             </div>
           ) : null}
