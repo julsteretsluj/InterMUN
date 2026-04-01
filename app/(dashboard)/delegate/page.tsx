@@ -15,18 +15,24 @@ export default async function DelegateDashboardPage() {
   if (!user) redirect("/login");
   const { data: profile } = await supabase
     .from("profiles")
-    .select("country, name")
+    .select("country")
     .eq("id", user.id)
     .maybeSingle();
 
   const conferenceId = await requireActiveConferenceId();
+  const { data: myAllocation } = await supabase
+    .from("allocations")
+    .select("country")
+    .eq("conference_id", conferenceId)
+    .eq("user_id", user.id)
+    .maybeSingle();
   const { data: conf } = await supabase
     .from("conferences")
     .select("committee, tagline, name")
     .eq("id", conferenceId)
     .maybeSingle();
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
-  const countryLabel = profile?.country?.trim() || profile?.name?.trim() || "your country";
+  const countryLabel = myAllocation?.country?.trim() || profile?.country?.trim() || "your country";
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string }[] = [
