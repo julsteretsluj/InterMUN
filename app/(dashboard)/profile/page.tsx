@@ -8,6 +8,7 @@ import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMate
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -86,12 +87,14 @@ export default async function ProfilePage() {
         .filter((value): value is string => Boolean(value))
     ),
   ]);
+  const welcomeCountry = myAllocation?.country?.trim() || profile?.country || "your country";
+  const welcomeFlag = flagEmojiForCountryName(welcomeCountry);
 
   const delegateWelcome = isDelegate ? (
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
-          Welcome delegate of {myAllocation?.country?.trim() || profile?.country || "your country"}
+          Welcome delegate of {welcomeFlag} {welcomeCountry}
         </h2>
         <p className="mt-3 text-brand-muted">What would you like to start with?</p>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">

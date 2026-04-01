@@ -6,6 +6,7 @@ import { requireActiveConferenceId } from "@/lib/active-conference";
 import { DelegateCountdownCard } from "@/components/delegate/DelegateCountdownCard";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 
 export default async function DelegateDashboardPage() {
   const supabase = await createClient();
@@ -33,6 +34,7 @@ export default async function DelegateDashboardPage() {
     .maybeSingle();
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
   const countryLabel = myAllocation?.country?.trim() || profile?.country?.trim() || "your country";
+  const countryFlag = flagEmojiForCountryName(countryLabel);
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string }[] = [
@@ -59,7 +61,7 @@ export default async function DelegateDashboardPage() {
       <div className="space-y-6">
         <header className="space-y-2">
           <h1 className="font-display text-3xl font-semibold text-brand-navy">
-            Welcome, Delegate of {countryLabel}
+            Welcome, Delegate of {countryFlag} {countryLabel}
           </h1>
           <p className="text-sm text-slate-600 dark:text-zinc-400">
             Active committee: <span className="font-semibold text-slate-900 dark:text-zinc-100">{line}</span>.
