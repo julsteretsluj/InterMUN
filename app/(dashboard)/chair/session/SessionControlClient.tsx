@@ -963,7 +963,6 @@ export function SessionControlClient({
         return;
       }
 
-      await supabase.from("speaker_queue_entries").update({ status: "waiting" }).eq("conference_id", conferenceId);
       if (currentRow) {
         await supabase.from("speaker_queue_entries").update({ status: "done" }).eq("id", currentRow.id);
       }

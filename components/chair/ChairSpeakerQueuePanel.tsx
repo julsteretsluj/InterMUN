@@ -160,10 +160,11 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     function setCurrent(id: string) {
       startTransition(async () => {
-        await supabase
-          .from("speaker_queue_entries")
-          .update({ status: "waiting" })
-          .eq("conference_id", conferenceId);
+        const rows = await fetchSpeakerQueue(supabase, conferenceId);
+        const existingCurrent = rows.find((r) => r.status === "current");
+        if (existingCurrent?.id && existingCurrent.id !== id) {
+          await supabase.from("speaker_queue_entries").update({ status: "waiting" }).eq("id", existingCurrent.id);
+        }
         await supabase.from("speaker_queue_entries").update({ status: "current" }).eq("id", id);
         void loadQueue();
       });
