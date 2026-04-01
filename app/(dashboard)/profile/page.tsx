@@ -70,6 +70,14 @@ export default async function ProfilePage() {
         .eq("conference_id", activeConference.id)
         .order("country", { ascending: true })
     : { data: [] as { country: string }[] };
+  const { data: myAllocation } = activeConference?.id
+    ? await supabase
+        .from("allocations")
+        .select("country")
+        .eq("conference_id", activeConference.id)
+        .eq("user_id", user.id)
+        .maybeSingle()
+    : { data: null as { country?: string | null } | null };
 
   const availableAllocations = sortCountryLabelsForDisplay([
     ...new Set(
@@ -83,7 +91,7 @@ export default async function ProfilePage() {
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
-          Welcome delegate of {profile?.country || profile?.name || "your committee"}
+          Welcome delegate of {myAllocation?.country?.trim() || profile?.country || "your country"}
         </h2>
         <p className="mt-3 text-brand-muted">What would you like to start with?</p>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
