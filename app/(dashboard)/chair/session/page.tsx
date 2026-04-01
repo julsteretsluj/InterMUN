@@ -22,18 +22,18 @@ export default async function ChairSessionPage() {
     .maybeSingle();
 
   const errorMessage = String(error?.message ?? "");
-  const missingEndColumns =
+  const missingSessionColumns =
     /schema cache/i.test(errorMessage) &&
-    /committee_session_duration_seconds|committee_session_ends_at/i.test(errorMessage);
-  const fallback = missingEndColumns
+    /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at/i.test(errorMessage);
+  const fallback = missingSessionColumns
     ? await supabase
         .from("procedure_states")
-        .select("committee_session_started_at")
+        .select("id")
         .eq("conference_id", data.conferenceId)
         .maybeSingle()
     : null;
 
-  const row = (missingEndColumns ? fallback?.data : ps) as {
+  const row = (missingSessionColumns ? fallback?.data : ps) as {
     committee_session_started_at?: string | null;
     committee_session_duration_seconds?: number | null;
     committee_session_ends_at?: string | null;

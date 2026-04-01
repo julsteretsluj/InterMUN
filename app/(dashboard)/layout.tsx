@@ -106,14 +106,17 @@ export default async function DashboardLayout({
     .eq("user_id", user.id)
     .is("read_at", null);
 
-  const { data: procedureState } = activeConf?.id
+  const { data: procedureState, error: procedureStateError } = activeConf?.id
     ? await supabase
         .from("procedure_states")
         .select("committee_session_started_at")
         .eq("conference_id", activeConf.id)
         .maybeSingle()
     : { data: null };
-  const sessionIsActive = Boolean(
+  const startedAtColumnMissing =
+    /schema cache/i.test(String(procedureStateError?.message ?? "")) &&
+    /committee_session_started_at/i.test(String(procedureStateError?.message ?? ""));
+  const sessionIsActive = !startedAtColumnMissing && Boolean(
     (procedureState as { committee_session_started_at?: string | null } | null)
       ?.committee_session_started_at
   );

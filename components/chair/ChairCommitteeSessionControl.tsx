@@ -52,7 +52,16 @@ export function ChairCommitteeSessionControl({
   const [durHours, setDurHours] = useState(3);
   const [durMinutes, setDurMinutes] = useState(0);
   const [endsAtLocal, setEndsAtLocal] = useState(() => isoToDatetimeLocalValue(initialEndsAt));
+  const [supportsSessionStartColumn, setSupportsSessionStartColumn] = useState(true);
   const [supportsSessionEndOptions, setSupportsSessionEndOptions] = useState(true);
+
+  function isSessionColumnCacheError(message: string | null | undefined): boolean {
+    const m = String(message ?? "");
+    return (
+      /schema cache/i.test(m) &&
+      /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at/i.test(m)
+    );
+  }
 
   function isSessionEndColumnCacheError(message: string | null | undefined): boolean {
     const m = String(message ?? "");
@@ -70,6 +79,14 @@ export function ChairCommitteeSessionControl({
       )
       .eq("conference_id", conferenceId)
       .maybeSingle();
+    const missingSessionColumns = isSessionColumnCacheError(error?.message);
+    if (missingSessionColumns) {
+      const message = String(error?.message ?? "");
+      setSupportsSessionStartColumn(!/committee_session_started_at/i.test(message));
+      setSupportsSessionEndOptions(!isSessionEndColumnCacheError(message));
+      setStartedAt(null);
+      return;
+    }
     const missingEndColumns = isSessionEndColumnCacheError(error?.message);
     if (missingEndColumns) {
       setSupportsSessionEndOptions(false);
@@ -174,14 +191,43 @@ export function ChairCommitteeSessionControl({
         .select("state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at")
         .eq("conference_id", conferenceId)
         .maybeSingle();
+    const withoutSessionColumns = async () =>
+      supabase
+        .from("procedure_states")
+        .select("state, current_vote_item_id, debate_closed, motion_floor_open")
+        .eq("conference_id", conferenceId)
+        .maybeSingle();
 
-    const { data, error } = supportsSessionEndOptions ? await withEndColumns() : await withoutEndColumns();
+    const { data, error } = supportsSessionStartColumn
+      ? supportsSessionEndOptions
+        ? await withEndColumns()
+        : await withoutEndColumns()
+      : await withoutSessionColumns();
+    if (isSessionColumnCacheError(error?.message)) {
+      const message = String(error?.message ?? "");
+      setSupportsSessionStartColumn(!/committee_session_started_at/i.test(message));
+      setSupportsSessionEndOptions(!isSessionEndColumnCacheError(message));
+    }
     if (isSessionEndColumnCacheError(error?.message)) {
       setSupportsSessionEndOptions(false);
       const fallback = await withoutEndColumns();
       if (fallback.error || !fallback.data) return null;
       const base = fallback.data as Omit<ProcedureRow, "committee_session_duration_seconds" | "committee_session_ends_at">;
       return { ...base, committee_session_duration_seconds: null, committee_session_ends_at: null };
+    }
+    if (isSessionColumnCacheError(error?.message) && /committee_session_started_at/i.test(String(error?.message ?? ""))) {
+      const fallback = await withoutSessionColumns();
+      if (fallback.error || !fallback.data) return null;
+      const base = fallback.data as Omit<
+        ProcedureRow,
+        "committee_session_started_at" | "committee_session_duration_seconds" | "committee_session_ends_at"
+      >;
+      return {
+        ...base,
+        committee_session_started_at: null,
+        committee_session_duration_seconds: null,
+        committee_session_ends_at: null,
+      };
     }
     if (error || !data) return null;
     return data as ProcedureRow;
@@ -197,6 +243,10 @@ export function ChairCommitteeSessionControl({
           setMsg("Choose an end time in the future, or switch to no limit.");
           return;
         }
+      }
+      if (!supportsSessionStartColumn) {
+        setMsg("Session start timestamp is unavailable until latest migrations are applied.");
+        return;
       }
       const row = await loadFullRow();
       const now = new Date().toISOString();
@@ -235,6 +285,10 @@ export function ChairCommitteeSessionControl({
   function stopSession() {
     setMsg(null);
     startTransition(async () => {
+      if (!supportsSessionStartColumn) {
+        setMsg("Session start timestamp is unavailable until latest migrations are applied.");
+        return;
+      }
       const now = new Date().toISOString();
       const { error } = await supabase
         .from("procedure_states")
