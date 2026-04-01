@@ -12,6 +12,7 @@ import {
   resolveCommitteeFullName,
 } from "@/lib/committee-card-display";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
+import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -181,6 +182,8 @@ export default async function SmtCommitteeLivePage({
           Live speaker queue, roll call, and timers for this committee—same data chairs see on the session floor.
         </p>
       </div>
+
+      <SessionHistoryPanel conferenceId={conf.id} />
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import { createClient } from "@/lib/supabase/client";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import { HelpButton } from "@/components/HelpButton";
+import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
+import { committeeSessionEndTimestampMs, formatCountdownOrElapsed } from "@/lib/committee-session-end";
 
 type EndMode = "none" | "duration" | "until";
 
@@ -30,6 +32,19 @@ function modeFromRow(durationSeconds: number | null, endsAt: string | null): End
   return "none";
 }
 
+function formatSessionElapsed(startIso: string, nowMs: number): string {
+  const t0 = new Date(startIso).getTime();
+  if (Number.isNaN(t0)) return "—";
+  let sec = Math.max(0, Math.floor((nowMs - t0) / 1000));
+  const h = Math.floor(sec / 3600);
+  sec %= 3600;
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  if (h > 0) return `${h}:${pad(m)}:${pad(s)}`;
+  return `${m}:${pad(s)}`;
+}
+
 export function ChairCommitteeSessionControl({
   conferenceId,
   initialStartedAt,
@@ -54,6 +69,7 @@ export function ChairCommitteeSessionControl({
   const [endsAtLocal, setEndsAtLocal] = useState(() => isoToDatetimeLocalValue(initialEndsAt));
   const [supportsSessionStartColumn, setSupportsSessionStartColumn] = useState(true);
   const [supportsSessionEndOptions, setSupportsSessionEndOptions] = useState(true);
+  const [, setTick] = useState(0);
 
   function isSessionColumnCacheError(message: string | null | undefined): boolean {
     const m = String(message ?? "");
@@ -159,6 +175,12 @@ export function ChairCommitteeSessionControl({
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId, refresh]);
+
+  useEffect(() => {
+    if (!startedAt) return;
+    const id = window.setInterval(() => setTick((n) => n + 1), 1000);
+    return () => window.clearInterval(id);
+  }, [startedAt]);
 
   function buildTimingPayload(): {
     committee_session_duration_seconds: number | null;
@@ -273,6 +295,15 @@ export function ChairCommitteeSessionControl({
         setMsg(
           error ? friendlySessionColumnError(error.message) ?? error.message : null
         );
+        if (!error && supportsSessionStartColumn) {
+          await supabase
+            .from("committee_session_history")
+            .insert({
+              conference_id: conferenceId,
+              title: `Session ${new Date(now).toLocaleString()}`,
+              started_at: now,
+            });
+        }
       } else {
         const { error } = await supabase.from("procedure_states").insert({
           conference_id: conferenceId,
@@ -286,6 +317,15 @@ export function ChairCommitteeSessionControl({
         setMsg(
           error ? friendlySessionColumnError(error.message) ?? error.message : null
         );
+        if (!error && supportsSessionStartColumn) {
+          await supabase
+            .from("committee_session_history")
+            .insert({
+              conference_id: conferenceId,
+              title: `Session ${new Date(now).toLocaleString()}`,
+              started_at: now,
+            });
+        }
       }
       void refresh();
     });
@@ -315,6 +355,13 @@ export function ChairCommitteeSessionControl({
       setMsg(
         error ? friendlySessionColumnError(error.message) ?? error.message : null
       );
+      if (!error && supportsSessionStartColumn) {
+        await supabase
+          .from("committee_session_history")
+          .update({ ended_at: now, updated_at: now })
+          .eq("conference_id", conferenceId)
+          .is("ended_at", null);
+      }
       void refresh();
     });
   }
@@ -353,6 +400,14 @@ export function ChairCommitteeSessionControl({
   }
 
   const live = Boolean(startedAt);
+  const nowMs = Date.now();
+  const activeDurationSeconds = endMode === "duration" ? clampDurationSeconds(durHours, durMinutes) : null;
+  const activeEndsAtIso = endMode === "until" ? (endsAtLocal.trim() ? new Date(endsAtLocal).toISOString() : null) : null;
+  const endMs = live && startedAt
+    ? committeeSessionEndTimestampMs(startedAt, activeDurationSeconds, activeEndsAtIso)
+    : null;
+  const elapsedText = live && startedAt ? formatSessionElapsed(startedAt, nowMs) : null;
+  const countdown = endMs != null ? formatCountdownOrElapsed(endMs, nowMs) : null;
 
   const fieldWrap =
     "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus-within:border-brand-gold/40";
@@ -371,10 +426,30 @@ export function ChairCommitteeSessionControl({
         <p className="mt-1 text-sm text-brand-muted">Start or stop the committee session.</p>
 
         {live && startedAt ? (
-          <p className="mt-4 text-sm font-medium text-brand-navy">
-            Started:{" "}
-            <time dateTime={startedAt}>{new Date(startedAt).toLocaleString()}</time>
-          </p>
+          <div className="mt-4 space-y-1.5">
+            <p className="text-sm font-medium text-brand-navy">
+              Started:{" "}
+              <time dateTime={startedAt}>{new Date(startedAt).toLocaleString()}</time>
+            </p>
+            <p className="text-sm text-brand-navy">
+              <span className="font-semibold">Time in:</span>{" "}
+              <span className="font-mono tabular-nums">{elapsedText ?? "—"}</span>
+              {countdown ? (
+                <>
+                  <span className="mx-2 text-brand-muted/60">•</span>
+                  <span className="font-semibold">Time until end:</span>{" "}
+                  <span className="font-mono tabular-nums">
+                    {countdown.label === "remaining" ? countdown.text : `over by ${countdown.text}`}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="mx-2 text-brand-muted/60">•</span>
+                  <span className="font-semibold">Mode:</span> Stopwatch (no time limit)
+                </>
+              )}
+            </p>
+          </div>
         ) : (
           <p className="mt-4 text-sm text-brand-muted">Session is not running.</p>
         )}
@@ -524,6 +599,8 @@ export function ChairCommitteeSessionControl({
         <span className="font-medium text-brand-navy/90">Timer</span>, and{" "}
         <span className="font-medium text-brand-navy/90">Announcements</span> — one tool per tab.
       </p>
+
+      <SessionHistoryPanel conferenceId={conferenceId} />
     </div>
   );
 }
