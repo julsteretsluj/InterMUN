@@ -71,6 +71,11 @@ export function ChairCommitteeSessionControl({
     );
   }
 
+  function friendlySessionColumnError(message: string | null | undefined): string | null {
+    if (!isSessionColumnCacheError(message)) return null;
+    return "Session controls are temporarily unavailable until the latest database migrations are applied.";
+  }
+
   const refresh = useCallback(async () => {
     const { data, error } = await supabase
       .from("procedure_states")
@@ -265,7 +270,9 @@ export function ChairCommitteeSessionControl({
             updated_at: now,
           })
           .eq("conference_id", conferenceId);
-        setMsg(error ? error.message : null);
+        setMsg(
+          error ? friendlySessionColumnError(error.message) ?? error.message : null
+        );
       } else {
         const { error } = await supabase.from("procedure_states").insert({
           conference_id: conferenceId,
@@ -276,7 +283,9 @@ export function ChairCommitteeSessionControl({
           ...timingUpdate,
           updated_at: now,
         });
-        setMsg(error ? error.message : null);
+        setMsg(
+          error ? friendlySessionColumnError(error.message) ?? error.message : null
+        );
       }
       void refresh();
     });
@@ -303,7 +312,9 @@ export function ChairCommitteeSessionControl({
           updated_at: now,
         })
         .eq("conference_id", conferenceId);
-      setMsg(error ? error.message : null);
+      setMsg(
+        error ? friendlySessionColumnError(error.message) ?? error.message : null
+      );
       void refresh();
     });
   }
@@ -332,7 +343,11 @@ export function ChairCommitteeSessionControl({
           updated_at: new Date().toISOString(),
         })
         .eq("conference_id", conferenceId);
-      setMsg(error ? error.message : "ok:Session limit updated.");
+      if (error) {
+        setMsg(friendlySessionColumnError(error.message) ?? error.message);
+      } else {
+        setMsg("ok:Session limit updated.");
+      }
       void refresh();
     });
   }
