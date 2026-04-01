@@ -295,15 +295,6 @@ export function ChairCommitteeSessionControl({
         setMsg(
           error ? friendlySessionColumnError(error.message) ?? error.message : null
         );
-        if (!error && supportsSessionStartColumn) {
-          await supabase
-            .from("committee_session_history")
-            .insert({
-              conference_id: conferenceId,
-              title: `Session ${new Date(now).toLocaleString()}`,
-              started_at: now,
-            });
-        }
       } else {
         const { error } = await supabase.from("procedure_states").insert({
           conference_id: conferenceId,
@@ -317,15 +308,6 @@ export function ChairCommitteeSessionControl({
         setMsg(
           error ? friendlySessionColumnError(error.message) ?? error.message : null
         );
-        if (!error && supportsSessionStartColumn) {
-          await supabase
-            .from("committee_session_history")
-            .insert({
-              conference_id: conferenceId,
-              title: `Session ${new Date(now).toLocaleString()}`,
-              started_at: now,
-            });
-        }
       }
       void refresh();
     });
@@ -355,13 +337,6 @@ export function ChairCommitteeSessionControl({
       setMsg(
         error ? friendlySessionColumnError(error.message) ?? error.message : null
       );
-      if (!error && supportsSessionStartColumn) {
-        await supabase
-          .from("committee_session_history")
-          .update({ ended_at: now, updated_at: now })
-          .eq("conference_id", conferenceId)
-          .is("ended_at", null);
-      }
       void refresh();
     });
   }

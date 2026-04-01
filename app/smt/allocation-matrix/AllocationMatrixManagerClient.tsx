@@ -42,7 +42,7 @@ export type MatrixOverallRow = {
 export function AllocationMatrixManagerClient({
   conferences,
   selectedConferenceId,
-  overallRows,
+  overallRows: _overallRows,
   rows,
 }: {
   conferences: { id: string; name: string; committee: string | null }[];
@@ -225,72 +225,9 @@ export function AllocationMatrixManagerClient({
 
   return (
     <div className="space-y-8">
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">
-          Overall allocation matrix (all committees)
-        </h2>
-        <p className="text-xs text-brand-muted">
-          {overallRows.length} seat{overallRows.length === 1 ? "" : "s"} across{" "}
-          {conferences.length} session{conferences.length === 1 ? "" : "s"}.
-        </p>
-        <div className="overflow-x-auto rounded-lg border border-brand-navy/10 max-h-[26rem]">
-          <table className="w-full text-sm">
-            <thead className="sticky top-0">
-              <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-                <th className="px-3 py-2">Committee</th>
-                <th className="px-3 py-2">Topic</th>
-                <th className="px-3 py-2">Allocation</th>
-                <th className="px-3 py-2">Flag</th>
-                <th className="px-3 py-2">Email</th>
-                <th className="px-3 py-2">Name</th>
-                <th className="px-3 py-2">Grade</th>
-                <th className="px-3 py-2">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {overallRows.length === 0 ? (
-                <tr>
-                  <td colSpan={8} className="px-3 py-6 text-center text-brand-muted">
-                    No allocation rows found for the active event.
-                  </td>
-                </tr>
-              ) : (
-                overallRows.map((r) => (
-                  <tr key={r.id} className="border-t border-brand-navy/5">
-                    <td className="px-3 py-2 font-medium text-brand-navy">{r.committee}</td>
-                    <td className="px-3 py-2 text-brand-navy/85">{r.topic}</td>
-                    <td className="px-3 py-2">{r.country}</td>
-                    <td className="px-3 py-2 text-base">{r.flag}</td>
-                    <td className="px-3 py-2 text-xs text-brand-muted">{r.email || "—"}</td>
-                    <td className="px-3 py-2 text-xs text-brand-muted">{r.name || "—"}</td>
-                    <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || "—"}</td>
-                    <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
-                      {r.notes?.trim() || "—"}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
       <div className="flex flex-col sm:flex-row sm:items-end gap-4 flex-wrap">
-        <div>
-          <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
-            Committee
-          </label>
-          <select
-            value={selectedConferenceId}
-            onChange={(e) => onConferenceChange(e.target.value)}
-            className="min-w-[240px] px-3 py-2 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy text-sm"
-          >
-            {conferences.map((c) => (
-              <option key={c.id} value={c.id}>
-                {[c.name, c.committee].filter(Boolean).join(" — ") || c.id.slice(0, 8)}
-              </option>
-            ))}
-          </select>
+        <div className="text-sm text-brand-muted">
+          Showing one committee at a time. Switch committee using the bottom tabs.
         </div>
         <Link
           href={`/smt/allocation-passwords?conference=${selectedConferenceId}`}
@@ -298,31 +235,6 @@ export function AllocationMatrixManagerClient({
         >
           Edit placard codes sheet →
         </Link>
-      </div>
-      <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-3">
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-brand-muted">
-          Committee sheets
-        </p>
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {sheetTabs.map((tab) => {
-            const active = tab.id === selectedConferenceId;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                title={tab.title}
-                onClick={() => onConferenceChange(tab.id)}
-                className={`shrink-0 rounded-t-lg border px-3 py-1.5 text-sm font-medium transition ${
-                  active
-                    ? "border-brand-gold/60 bg-brand-gold/20 text-brand-navy"
-                    : "border-brand-navy/15 bg-white text-brand-navy/80 hover:bg-brand-cream/70"
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
       </div>
 
       {(message || error) && (
