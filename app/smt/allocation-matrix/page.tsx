@@ -1,18 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
 import { getActiveEventId } from "@/lib/active-event-cookie";
-import { formatCommitteeCardTitle } from "@/lib/committee-card-display";
-import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
-import {
-  AllocationMatrixManagerClient,
-  type MatrixRow,
-  type MatrixOverallRow,
-} from "./AllocationMatrixManagerClient";
-import {
-  compareAllocationCountryDisplay,
-  sortRowsByAllocationCountry,
-} from "@/lib/allocation-display-order";
+import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatrixManagerClient";
+import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 
 export default async function SmtAllocationMatrixPage({
   searchParams,
@@ -51,106 +41,6 @@ export default async function SmtAllocationMatrixPage({
       : list[0]?.id ?? null;
 
   let rows: MatrixRow[] = [];
-  let overallRows: MatrixOverallRow[] = [];
-  const conferenceMap = new Map(
-    list.map((c) => [
-      c.id,
-      {
-        topic: c.name,
-        committee: formatCommitteeCardTitle(null, c.committee),
-      },
-    ])
-  );
-
-  if (list.length > 0) {
-    const conferenceIds = list.map((c) => c.id);
-    const { data: allAllocs } = await supabase
-      .from("allocations")
-      .select("id, conference_id, country, user_id")
-      .in("conference_id", conferenceIds)
-      .order("country", { ascending: true });
-
-    const allIds = (allAllocs ?? []).map((a) => a.id);
-    const { data: allCodes } = allIds.length
-      ? await supabase
-          .from("allocation_gate_codes")
-          .select("allocation_id, code")
-          .in("allocation_id", allIds)
-      : { data: [] as { allocation_id: string; code: string | null }[] };
-
-    const allCodeById = new Map(
-      (allCodes ?? []).map((c) => [c.allocation_id, c.code ?? null])
-    );
-    const allUserIds = [
-      ...new Set((allAllocs ?? []).map((a) => a.user_id).filter((id): id is string => Boolean(id))),
-    ];
-    const { data: allProfiles } = allUserIds.length
-      ? await supabase
-          .from("profiles")
-          .select("id, role, name, grade, notes")
-          .in("id", allUserIds)
-      : {
-          data: [] as {
-            id: string;
-            role: string | null;
-            name: string | null;
-            grade: string | null;
-            notes: string | null;
-          }[],
-        };
-    const emailByUserId = new Map<string, string>();
-    if (allUserIds.length > 0) {
-      const admin = createAdminClient();
-      if (admin) {
-        const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
-          page: 1,
-          perPage: 1000,
-        });
-        if (!usersError) {
-          const userSet = new Set(allUserIds);
-          for (const u of usersData.users) {
-            if (u.id && u.email && userSet.has(u.id)) emailByUserId.set(u.id, u.email);
-          }
-        }
-      }
-    }
-    const allProfileById = new Map(
-      (allProfiles ?? []).map((p) => [
-        p.id,
-        {
-          role: p.role ?? null,
-          name: p.name ?? null,
-          grade: p.grade ?? null,
-          notes: p.notes ?? null,
-        },
-      ])
-    );
-
-    overallRows = (allAllocs ?? []).map((a) => {
-      const meta = conferenceMap.get(a.conference_id);
-      return {
-        id: a.id,
-        conference_id: a.conference_id,
-        committee: meta?.committee ?? "Committee",
-        topic: meta?.topic ?? "Session",
-        country: a.country,
-        flag: flagEmojiForCountryName(a.country),
-        email: a.user_id ? (emailByUserId.get(a.user_id) ?? null) : null,
-        name: a.user_id ? (allProfileById.get(a.user_id)?.name ?? null) : null,
-        grade: a.user_id ? (allProfileById.get(a.user_id)?.grade ?? null) : null,
-        notes: a.user_id ? (allProfileById.get(a.user_id)?.notes ?? null) : null,
-        user_id: a.user_id,
-        linked_role: a.user_id ? (allProfileById.get(a.user_id)?.role ?? null) : null,
-        linked_name: a.user_id ? (allProfileById.get(a.user_id)?.name ?? null) : null,
-        code: allCodeById.get(a.id) ?? null,
-      };
-    });
-    overallRows.sort((a, b) => {
-      const byConf = a.conference_id.localeCompare(b.conference_id);
-      if (byConf !== 0) return byConf;
-      return compareAllocationCountryDisplay(a.country, b.country);
-    });
-  }
 
   if (selectedConferenceId) {
     const { data: allocs } = await supabase
@@ -193,12 +83,7 @@ export default async function SmtAllocationMatrixPage({
         Build or import the seat list for each committee in the active event. Delegates pick their row at
         the committee gate after sign-in; placard codes can match your spreadsheet IDs.
       </p>
-      <AllocationMatrixManagerClient
-        conferences={list}
-        selectedConferenceId={selectedConferenceId}
-        overallRows={overallRows}
-        rows={rows}
-      />
+      <AllocationMatrixManagerClient conferences={list} selectedConferenceId={selectedConferenceId} rows={rows} />
     </div>
   );
 }

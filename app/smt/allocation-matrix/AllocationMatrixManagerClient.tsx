@@ -22,32 +22,13 @@ export type MatrixRow = {
   code: string | null;
 };
 
-export type MatrixOverallRow = {
-  id: string;
-  conference_id: string;
-  committee: string;
-  topic: string;
-  country: string;
-  flag: string;
-  email: string | null;
-  name: string | null;
-  grade: string | null;
-  notes: string | null;
-  user_id: string | null;
-  linked_role: string | null;
-  linked_name: string | null;
-  code: string | null;
-};
-
 export function AllocationMatrixManagerClient({
   conferences,
   selectedConferenceId,
-  overallRows: _overallRows,
   rows,
 }: {
   conferences: { id: string; name: string; committee: string | null }[];
   selectedConferenceId: string | null;
-  overallRows: MatrixOverallRow[];
   rows: MatrixRow[];
 }) {
   const router = useRouter();
