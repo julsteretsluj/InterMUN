@@ -7,7 +7,10 @@ import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 type ConfRow = { id: string; name: string; committee: string | null };
 
 /** Duplicate conference rows (same committee / same tab label) become one tab; extras map to the canonical id. */
-function dedupeConferencesForMatrixTabs(rows: ConfRow[]): {
+function dedupeConferencesForMatrixTabs(
+  rows: ConfRow[],
+  hasAllocationsById: Map<string, boolean>
+): {
   list: ConfRow[];
   resolveConferenceId: (id: string) => string;
 } {
@@ -18,17 +21,33 @@ function dedupeConferencesForMatrixTabs(rows: ConfRow[]): {
     if (n) return `n:${n}`;
     return `id:${c.id}`;
   };
-  const canonicalByKey = new Map<string, ConfRow>();
   const resolveToCanonical = new Map<string, string>();
+
+  const groupsByKey = new Map<string, ConfRow[]>();
   for (const c of rows) {
     const k = tabKey(c);
-    let primary = canonicalByKey.get(k);
-    if (!primary) {
-      canonicalByKey.set(k, c);
-      primary = c;
-    }
-    resolveToCanonical.set(c.id, primary.id);
+    const existing = groupsByKey.get(k);
+    if (existing) existing.push(c);
+    else groupsByKey.set(k, [c]);
   }
+
+  // Prefer the canonical conference row that actually has allocation rows.
+  const canonicalByKey = new Map<string, ConfRow>();
+  for (const [k, groupRows] of groupsByKey.entries()) {
+    let primary = groupRows[0];
+    const primaryHas = hasAllocationsById.get(primary.id) ?? false;
+
+    for (const r of groupRows) {
+      const rHas = hasAllocationsById.get(r.id) ?? false;
+      if (rHas && !primaryHas) {
+        primary = r;
+      }
+    }
+
+    canonicalByKey.set(k, primary);
+    for (const r of groupRows) resolveToCanonical.set(r.id, primary.id);
+  }
+
   const list = [...canonicalByKey.values()].sort((a, b) => {
     if (!a.committee && !b.committee) return a.name.localeCompare(b.name);
     if (!a.committee) return 1;
@@ -80,7 +99,24 @@ export default async function SmtAllocationMatrixPage({
     const committee = c.committee?.trim().toLowerCase();
     return name !== "seamun i 2027" && committee !== "seamun i 2027";
   });
-  const { list, resolveConferenceId } = dedupeConferencesForMatrixTabs(rawList);
+
+  // If multiple conference rows map to the same tab label (duplicate committee),
+  // choose the canonical row that has allocations so the roster isn't empty.
+  const rawListIds = rawList.map((c) => c.id);
+  const { data: allocPresence } = rawListIds.length
+    ? await supabase
+        .from("allocations")
+        .select("conference_id")
+        .in("conference_id", rawListIds)
+    : { data: [] as { conference_id: string }[] };
+
+  const hasAllocationsById = new Map<string, boolean>();
+  for (const a of allocPresence ?? []) {
+    if (!a.conference_id) continue;
+    hasAllocationsById.set(a.conference_id, true);
+  }
+
+  const { list, resolveConferenceId } = dedupeConferencesForMatrixTabs(rawList, hasAllocationsById);
   const selectedConferenceId =
     conferenceParam && rawList.some((c) => c.id === conferenceParam)
       ? resolveConferenceId(conferenceParam)
