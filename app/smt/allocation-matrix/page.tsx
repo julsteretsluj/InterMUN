@@ -96,7 +96,8 @@ export default async function SmtAllocationMatrixPage({
 
   // Some datasets include the overall event name as a conference row; it should not
   // show up as a selectable sheet/tab in the allocation matrix.
-  const rawList = (conferences ?? []).filter((c) => {
+  const unfiltered = conferences ?? [];
+  const filtered = unfiltered.filter((c) => {
     const name = c.name?.trim().toLowerCase();
     const committee = c.committee?.trim().toLowerCase();
     const committeeCode = c.committee_code?.trim().toUpperCase() ?? "";
@@ -105,6 +106,9 @@ export default async function SmtAllocationMatrixPage({
     // Hide the overall event name if it appears as a conference row.
     return name !== "seamun i 2027" && committee !== "seamun i 2027";
   });
+  // Safety valve: never hide the entire matrix. If filtering removes every row,
+  // fall back to the raw conference list.
+  const rawList = filtered.length > 0 ? filtered : unfiltered;
 
   // If multiple conference rows map to the same tab label (duplicate committee),
   // choose the canonical row that has allocations so the roster isn't empty.
