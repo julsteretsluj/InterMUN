@@ -117,10 +117,13 @@ export default async function SmtAllocationMatrixPage({
   }
 
   const { list, resolveConferenceId } = dedupeConferencesForMatrixTabs(rawList, hasAllocationsById);
+  const fallbackConferenceId =
+    list.find((c) => hasAllocationsById.get(c.id))?.id ?? list[0]?.id ?? null;
+
   const selectedConferenceId =
     conferenceParam && rawList.some((c) => c.id === conferenceParam)
       ? resolveConferenceId(conferenceParam)
-      : list[0]?.id ?? null;
+      : fallbackConferenceId;
 
   let rows: MatrixRow[] = [];
 
