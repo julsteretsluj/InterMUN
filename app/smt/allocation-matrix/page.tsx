@@ -73,7 +73,13 @@ export default async function SmtAllocationMatrixPage({
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
 
-  const rawList = conferences ?? [];
+  // Some datasets include the overall event name as a conference row; it should not
+  // show up as a selectable sheet/tab in the allocation matrix.
+  const rawList = (conferences ?? []).filter((c) => {
+    const name = c.name?.trim().toLowerCase();
+    const committee = c.committee?.trim().toLowerCase();
+    return name !== "seamun i 2027" && committee !== "seamun i 2027";
+  });
   const { list, resolveConferenceId } = dedupeConferencesForMatrixTabs(rawList);
   const selectedConferenceId =
     conferenceParam && rawList.some((c) => c.id === conferenceParam)
