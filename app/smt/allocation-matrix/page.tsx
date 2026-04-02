@@ -3,8 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatrixManagerClient";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
+import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 
-type ConfRow = { id: string; name: string; committee: string | null };
+type ConfRow = { id: string; name: string; committee: string | null; committee_code: string | null };
 
 /** Duplicate conference rows (same committee / same tab label) become one tab; extras map to the canonical id. */
 function dedupeConferencesForMatrixTabs(
@@ -87,7 +89,7 @@ export default async function SmtAllocationMatrixPage({
 
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee")
+    .select("id, name, committee, committee_code")
     .eq("event_id", eventId)
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
@@ -97,6 +99,10 @@ export default async function SmtAllocationMatrixPage({
   const rawList = (conferences ?? []).filter((c) => {
     const name = c.name?.trim().toLowerCase();
     const committee = c.committee?.trim().toLowerCase();
+    const committeeCode = c.committee_code?.trim().toUpperCase() ?? "";
+    // Hide the reserved SMT / secretariat oversight row from the matrix tab strip.
+    if (committeeCode === SMT_COMMITTEE_CODE) return false;
+    // Hide the overall event name if it appears as a conference row.
     return name !== "seamun i 2027" && committee !== "seamun i 2027";
   });
 
@@ -128,11 +134,32 @@ export default async function SmtAllocationMatrixPage({
   let rows: MatrixRow[] = [];
 
   if (selectedConferenceId) {
-    const { data: allocs } = await supabase
-      .from("allocations")
-      .select("id, country, user_id")
-      .eq("conference_id", selectedConferenceId)
-      .order("country", { ascending: true });
+    let allocs =
+      (
+        await supabase
+          .from("allocations")
+          .select("id, country, user_id")
+          .eq("conference_id", selectedConferenceId)
+          .order("country", { ascending: true })
+      ).data ?? [];
+
+    // If a committee has zero allocations yet, pre-create head-chair/co-chair rows
+    // so the roster isn't empty on first load.
+    if (allocs.length === 0) {
+      try {
+        await ensureDaisSeatAllocations(supabase, selectedConferenceId);
+        allocs =
+          (
+            await supabase
+              .from("allocations")
+              .select("id, country, user_id")
+              .eq("conference_id", selectedConferenceId)
+              .order("country", { ascending: true })
+          ).data ?? [];
+      } catch {
+        // If insert fails (permissions, missing conference, etc.), fall back to empty roster.
+      }
+    }
 
     const ids = (allocs ?? []).map((a) => a.id);
     const { data: codes } = ids.length
