@@ -4,6 +4,45 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatrixManagerClient";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 
+type ConfRow = { id: string; name: string; committee: string | null };
+
+/** Duplicate conference rows (same committee / same tab label) become one tab; extras map to the canonical id. */
+function dedupeConferencesForMatrixTabs(rows: ConfRow[]): {
+  list: ConfRow[];
+  resolveConferenceId: (id: string) => string;
+} {
+  const tabKey = (c: ConfRow) => {
+    const comm = c.committee?.trim().toLowerCase();
+    if (comm) return `c:${comm}`;
+    const n = c.name?.trim().toLowerCase();
+    if (n) return `n:${n}`;
+    return `id:${c.id}`;
+  };
+  const canonicalByKey = new Map<string, ConfRow>();
+  const resolveToCanonical = new Map<string, string>();
+  for (const c of rows) {
+    const k = tabKey(c);
+    let primary = canonicalByKey.get(k);
+    if (!primary) {
+      canonicalByKey.set(k, c);
+      primary = c;
+    }
+    resolveToCanonical.set(c.id, primary.id);
+  }
+  const list = [...canonicalByKey.values()].sort((a, b) => {
+    if (!a.committee && !b.committee) return a.name.localeCompare(b.name);
+    if (!a.committee) return 1;
+    if (!b.committee) return -1;
+    const byC = a.committee.localeCompare(b.committee);
+    if (byC !== 0) return byC;
+    return a.name.localeCompare(b.name);
+  });
+  return {
+    list,
+    resolveConferenceId: (id) => resolveToCanonical.get(id) ?? id,
+  };
+}
+
 export default async function SmtAllocationMatrixPage({
   searchParams,
 }: {
@@ -34,10 +73,11 @@ export default async function SmtAllocationMatrixPage({
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
 
-  const list = conferences ?? [];
+  const rawList = conferences ?? [];
+  const { list, resolveConferenceId } = dedupeConferencesForMatrixTabs(rawList);
   const selectedConferenceId =
-    conferenceParam && list.some((c) => c.id === conferenceParam)
-      ? conferenceParam
+    conferenceParam && rawList.some((c) => c.id === conferenceParam)
+      ? resolveConferenceId(conferenceParam)
       : list[0]?.id ?? null;
 
   let rows: MatrixRow[] = [];
