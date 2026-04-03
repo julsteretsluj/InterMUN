@@ -105,23 +105,34 @@ export default async function SmtAllocationMatrixPage({
     );
   }
 
-  const { data: conferences } = await supabase
+  let { data: conferences } = await supabase
     .from("conferences")
     .select("id, name, committee, committee_code")
     .eq("event_id", eventId)
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
 
+  let unfiltered = conferences ?? [];
+  if (!unfiltered.some((c) => isSmtSecretariatTab(c))) {
+    const { error: ensureErr } = await supabase.rpc("ensure_smt_secretariat_conference_for_event", {
+      p_event_id: eventId,
+    });
+    if (!ensureErr) {
+      const { data: refreshed } = await supabase
+        .from("conferences")
+        .select("id, name, committee, committee_code")
+        .eq("event_id", eventId)
+        .order("committee", { ascending: true, nullsFirst: false })
+        .order("name", { ascending: true });
+      unfiltered = refreshed ?? unfiltered;
+    }
+  }
+
   // Some datasets include the overall event name as a conference row; it should not
   // show up as a selectable sheet/tab in the allocation matrix.
-  const unfiltered = conferences ?? [];
   const filtered = unfiltered.filter((c) => {
     const name = c.name?.trim().toLowerCase();
     const committee = c.committee?.trim().toLowerCase();
-    const committeeCode = c.committee_code?.trim().toUpperCase() ?? "";
-    // Hide the reserved SMT / secretariat oversight row from the matrix tab strip.
-    if (committeeCode === SMT_COMMITTEE_CODE) return false;
-    // Hide the overall event name if it appears as a conference row.
     return name !== "seamun i 2027" && committee !== "seamun i 2027";
   });
   // Safety valve: never hide the entire matrix. If filtering removes every row,
