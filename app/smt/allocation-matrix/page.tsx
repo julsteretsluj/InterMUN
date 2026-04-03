@@ -64,6 +64,24 @@ function dedupeConferencesForMatrixTabs(
   };
 }
 
+function isSmtSecretariatTab(c: ConfRow): boolean {
+  const code = c.committee_code?.trim().toUpperCase() ?? "";
+  if (code === SMT_COMMITTEE_CODE) return true;
+  if (code === "SECRETARIAT2027") return true; // legacy six-char migration order
+  return c.committee?.trim().toLowerCase() === "smt";
+}
+
+/** Secretariat / SMT sheet always appears first in the tab strip. */
+function pinSmtCommitteeFirst(rows: ConfRow[]): ConfRow[] {
+  const smt: ConfRow[] = [];
+  const rest: ConfRow[] = [];
+  for (const c of rows) {
+    if (isSmtSecretariatTab(c)) smt.push(c);
+    else rest.push(c);
+  }
+  return [...smt, ...rest];
+}
+
 export default async function SmtAllocationMatrixPage({
   searchParams,
 }: {
@@ -126,9 +144,11 @@ export default async function SmtAllocationMatrixPage({
     hasAllocationsById.set(a.conference_id, true);
   }
 
-  const { list, resolveConferenceId } = dedupeConferencesForMatrixTabs(rawList, hasAllocationsById);
-  const fallbackConferenceId =
-    list.find((c) => hasAllocationsById.get(c.id))?.id ?? list[0]?.id ?? null;
+  const deduped = dedupeConferencesForMatrixTabs(rawList, hasAllocationsById);
+  const list = pinSmtCommitteeFirst(deduped.list);
+  const { resolveConferenceId } = deduped;
+  // First tab after pinning is the SMT / secretariat sheet when present; otherwise first committee.
+  const fallbackConferenceId = list[0]?.id ?? null;
 
   const selectedConferenceId =
     conferenceParam && rawList.some((c) => c.id === conferenceParam)
