@@ -144,9 +144,9 @@ async function requireSmtOrAdmin() {
 
 export async function submitChairTopNominationAction(
   formData: FormData
-): Promise<void> {
+): Promise<{ ok: boolean }> {
   const auth = await requireChairOrSmt();
-  if (!auth.ok || !auth.user) return;
+  if (!auth.ok || !auth.user) return { ok: false };
 
   const committeeId = String(formData.get("committee_conference_id") ?? "").trim();
   const nomineeId = String(formData.get("nominee_profile_id") ?? "").trim();
@@ -160,15 +160,15 @@ export async function submitChairTopNominationAction(
     nominationType === "committee_honourable_mention" ||
     nominationType === "committee_best_position_paper" ||
     nominationType === "conference_best_delegate";
-  if (!committeeId || !rank || !validNominationType) return;
-  if (nominationType === "conference_best_delegate" && rank !== 1) return;
+  if (!committeeId || !rank || !validNominationType) return { ok: false };
+  if (nominationType === "conference_best_delegate" && rank !== 1) return { ok: false };
   if (
     (nominationType === "committee_best_delegate" || nominationType === "committee_best_position_paper") &&
     (rank < 1 || rank > 2)
   ) {
-    return;
+    return { ok: false };
   }
-  if (nominationType === "committee_honourable_mention" && (rank < 1 || rank > 3)) return;
+  if (nominationType === "committee_honourable_mention" && (rank < 1 || rank > 3)) return { ok: false };
 
   if (!nomineeId) {
     if (nominationType === "committee_honourable_mention") {
@@ -181,12 +181,13 @@ export async function submitChairTopNominationAction(
         .eq("status", "pending");
       revalidatePath("/chair/awards");
       revalidatePath("/smt/awards");
+      return { ok: true };
     }
-    return;
+    return { ok: false };
   }
 
   const rubricScores = parseRubricScores(formData, nominationType as NominationType);
-  if (!rubricScores) return;
+  if (!rubricScores) return { ok: false };
 
   const { data: canManage } = await auth.supabase
     .from("allocations")
@@ -203,7 +204,7 @@ export async function submitChairTopNominationAction(
       .maybeSingle();
     const role = p?.role?.toString().trim().toLowerCase();
     if (role !== "smt" && role !== "admin") {
-      return;
+      return { ok: false };
     }
   }
 
@@ -214,7 +215,7 @@ export async function submitChairTopNominationAction(
     .eq("user_id", nomineeId)
     .limit(1)
     .maybeSingle();
-  if (!nomineeInCommittee?.id) return;
+  if (!nomineeInCommittee?.id) return { ok: false };
 
   if (nominationType === "committee_honourable_mention") {
     const { count: seatedCount } = await auth.supabase
@@ -223,7 +224,7 @@ export async function submitChairTopNominationAction(
       .eq("conference_id", committeeId)
       .not("user_id", "is", null);
     const maxHmRank = (seatedCount ?? 0) > 23 ? 3 : 2;
-    if (rank > maxHmRank) return;
+    if (rank > maxHmRank) return { ok: false };
   }
 
   const { data: existing } = await auth.supabase
@@ -247,7 +248,7 @@ export async function submitChairTopNominationAction(
         updated_at: new Date().toISOString(),
       })
       .eq("id", existing.id);
-    if (error) return;
+    if (error) return { ok: false };
   } else {
     const { error } = await auth.supabase.from("award_nominations").insert({
       committee_conference_id: committeeId,
@@ -259,11 +260,12 @@ export async function submitChairTopNominationAction(
       created_by: auth.user.id,
       status: "pending",
     });
-    if (error) return;
+    if (error) return { ok: false };
   }
 
   revalidatePath("/chair/awards");
   revalidatePath("/smt/awards");
+  return { ok: true };
 }
 
 export async function promoteNominationToAwardAction(
