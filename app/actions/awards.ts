@@ -5,7 +5,9 @@ import { AWARD_CATEGORIES, type AwardScope } from "@/lib/awards";
 import {
   BAND_STORED_SCORE,
   RUBRIC_KEYS_BY_NOMINATION,
+  bandAndTierToScore,
   parseBandId,
+  parseTierId,
   type NominationRubricType,
 } from "@/lib/seamuns-award-scoring";
 import { revalidatePath } from "next/cache";
@@ -16,18 +18,27 @@ function parseRubricScores(formData: FormData, nominationType: NominationType) {
   const keys = RUBRIC_KEYS_BY_NOMINATION[nominationType];
   const out: Record<string, number> = {};
   for (const key of keys) {
+    const scoreRaw = String(formData.get(`score_${key}`) ?? "").trim();
+    if (scoreRaw !== "") {
+      const direct = Number(scoreRaw);
+      if (Number.isInteger(direct) && direct >= 1 && direct <= 8) {
+        out[key] = direct;
+        continue;
+      }
+    }
     const bandRaw = String(formData.get(`band_${key}`) ?? "").trim();
     const band = parseBandId(bandRaw);
+    const tierRaw = String(formData.get(`tier_${key}`) ?? "").trim();
+    const tier = parseTierId(tierRaw);
+    if (band && tier) {
+      out[key] = bandAndTierToScore(band, tier);
+      continue;
+    }
     if (band) {
       out[key] = BAND_STORED_SCORE[band];
       continue;
     }
-    const raw = String(formData.get(`score_${key}`) ?? "").trim();
-    const n = Number(raw);
-    if (!Number.isInteger(n) || n < 1 || n > 8) {
-      return null;
-    }
-    out[key] = n;
+    return null;
   }
   return out;
 }
@@ -199,7 +210,10 @@ export async function submitChairTopNominationAction(
 
   const rubricScores = parseRubricScores(formData, nominationType as NominationType);
   if (!rubricScores) {
-    return { ok: false, error: "Choose one proficiency band for every criterion." };
+    return {
+      ok: false,
+      error: "Choose a band and Low or High for every criterion (scores 1–8 each).",
+    };
   }
 
   const { data: canManage } = await auth.supabase

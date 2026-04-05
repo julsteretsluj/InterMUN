@@ -28,6 +28,40 @@ export const BAND_STORED_SCORE: Record<ProficiencyBandId, number> = {
   exemplary: 8,
 };
 
+/** Low / high within each SEAMUNs band maps to the 1–8 scale (odd = low, even = high). */
+export type BandTier = "low" | "high";
+
+const BAND_PAIR_BASE: Record<ProficiencyBandId, number> = {
+  beginning: 0,
+  developing: 2,
+  proficient: 4,
+  exemplary: 6,
+};
+
+export function bandScoreRange(band: ProficiencyBandId): { low: number; high: number } {
+  const b = BAND_PAIR_BASE[band];
+  return { low: b + 1, high: b + 2 };
+}
+
+export function bandAndTierToScore(band: ProficiencyBandId, tier: BandTier): number {
+  return BAND_PAIR_BASE[band] + (tier === "low" ? 1 : 2);
+}
+
+/** Map a stored 1–8 score to band + low/high tier. */
+export function scoreToBandAndTier(score: number): { band: ProficiencyBandId; tier: BandTier } | null {
+  if (!Number.isFinite(score) || score < 1 || score > 8) return null;
+  const tier: BandTier = score % 2 === 1 ? "low" : "high";
+  const band: ProficiencyBandId =
+    score <= 2 ? "beginning" : score <= 4 ? "developing" : score <= 6 ? "proficient" : "exemplary";
+  return { band, tier };
+}
+
+export function parseTierId(raw: string): BandTier | null {
+  const t = raw.trim().toLowerCase();
+  if (t === "low" || t === "high") return t;
+  return null;
+}
+
 export type NominationRubricType =
   | "committee_best_delegate"
   | "committee_honourable_mention"
