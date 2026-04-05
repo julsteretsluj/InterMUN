@@ -12,7 +12,7 @@ import {
   type RubricCriterion,
 } from "@/lib/seamuns-award-scoring";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
 const AUTOSAVE_MS = 60_000;
 
@@ -70,35 +70,28 @@ export function ChairNominationSlotForm({
   const formRef = useRef<HTMLFormElement>(null);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [autosaveMessage, setAutosaveMessage] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const maxTotal = maxRubricTotal(nominationType);
   const criteriaTotal = rubricNumericTotal(scoreMap, nominationType);
 
-  const runSave = useCallback(
-    async (formData: FormData) => {
-      const res = await submitChairTopNominationAction(formData);
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setSubmitMessage(null);
+    setAutosaveMessage(null);
+    setIsSaving(true);
+    try {
+      const res = await submitChairTopNominationAction(new FormData(form));
       if (res.ok) {
         router.refresh();
-        return true;
+        return;
       }
-      return false;
-    },
-    [router]
-  );
-
-  const formAction = useCallback(
-    async (formData: FormData) => {
-      setSubmitMessage(null);
-      setAutosaveMessage(null);
-      const ok = await runSave(formData);
-      if (!ok) {
-        setSubmitMessage(
-          "Could not save. Pick a nominee where required and choose one band per criterion."
-        );
-      }
-    },
-    [runSave]
-  );
+      setSubmitMessage(res.error);
+    } finally {
+      setIsSaving(false);
+    }
+  }
 
   useEffect(() => {
     const id = window.setInterval(async () => {
@@ -106,8 +99,8 @@ export function ChairNominationSlotForm({
       if (!form) return;
       if (!shouldAttemptAutosave(form, nominationType, slotRequired)) return;
       const fd = new FormData(form);
-      const ok = await submitChairTopNominationAction(fd);
-      if (ok) {
+      const res = await submitChairTopNominationAction(fd);
+      if (res.ok) {
         router.refresh();
         setAutosaveMessage("Autosaved");
         window.setTimeout(() => setAutosaveMessage(null), 4000);
@@ -120,7 +113,8 @@ export function ChairNominationSlotForm({
     nominationRowId ?? `pending-${committeeConferenceId}-${nominationType}-${rank}`;
 
   return (
-    <form key={formKey} ref={formRef} action={formAction} className="space-y-3">
+    <div key={formKey}>
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
       <input type="hidden" name="committee_conference_id" value={committeeConferenceId} />
       <input type="hidden" name="nomination_type" value={nominationType} />
       <input type="hidden" name="rank" value={String(rank)} />
@@ -214,8 +208,12 @@ export function ChairNominationSlotForm({
         />
       </label>
       <div className="flex flex-wrap items-center gap-3">
-        <button type="submit" className="px-4 py-2 rounded-lg bg-brand-gold text-white font-semibold">
-          {slotRequired ? `Save ${typeLabel} top ${rank}` : `Save optional ${typeLabel} slot`}
+        <button
+          type="submit"
+          disabled={isSaving}
+          className="px-4 py-2 rounded-lg bg-brand-gold text-white font-semibold disabled:opacity-60"
+        >
+          {isSaving ? "Saving…" : slotRequired ? `Save ${typeLabel} top ${rank}` : `Save optional ${typeLabel} slot`}
         </button>
         {autosaveMessage ? (
           <span className="text-xs text-brand-muted" aria-live="polite">
@@ -229,5 +227,6 @@ export function ChairNominationSlotForm({
         </p>
       ) : null}
     </form>
+    </div>
   );
 }

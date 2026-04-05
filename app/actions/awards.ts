@@ -142,11 +142,15 @@ async function requireSmtOrAdmin() {
   return { supabase, user, ok: true as const };
 }
 
+export type SubmitChairNominationResult = { ok: true } | { ok: false; error: string };
+
 export async function submitChairTopNominationAction(
   formData: FormData
-): Promise<{ ok: boolean }> {
+): Promise<SubmitChairNominationResult> {
   const auth = await requireChairOrSmt();
-  if (!auth.ok || !auth.user) return { ok: false };
+  if (!auth.ok || !auth.user) {
+    return { ok: false, error: "You must be signed in as a chair, SMT member, or admin." };
+  }
 
   const committeeId = String(formData.get("committee_conference_id") ?? "").trim();
   const nomineeId = String(formData.get("nominee_profile_id") ?? "").trim();
@@ -160,34 +164,43 @@ export async function submitChairTopNominationAction(
     nominationType === "committee_honourable_mention" ||
     nominationType === "committee_best_position_paper" ||
     nominationType === "conference_best_delegate";
-  if (!committeeId || !rank || !validNominationType) return { ok: false };
-  if (nominationType === "conference_best_delegate" && rank !== 1) return { ok: false };
+  if (!committeeId || !rank || !validNominationType) {
+    return { ok: false, error: "Invalid nomination form data." };
+  }
+  if (nominationType === "conference_best_delegate" && rank !== 1) {
+    return { ok: false, error: "Invalid rank for overall Best Delegate." };
+  }
   if (
     (nominationType === "committee_best_delegate" || nominationType === "committee_best_position_paper") &&
     (rank < 1 || rank > 2)
   ) {
-    return { ok: false };
+    return { ok: false, error: "Invalid rank for this nomination type." };
   }
-  if (nominationType === "committee_honourable_mention" && (rank < 1 || rank > 3)) return { ok: false };
+  if (nominationType === "committee_honourable_mention" && (rank < 1 || rank > 3)) {
+    return { ok: false, error: "Invalid rank for Honourable Mention." };
+  }
 
   if (!nomineeId) {
     if (nominationType === "committee_honourable_mention") {
-      await auth.supabase
+      const { error } = await auth.supabase
         .from("award_nominations")
         .delete()
         .eq("committee_conference_id", committeeId)
         .eq("nomination_type", nominationType)
         .eq("rank", rank)
         .eq("status", "pending");
+      if (error) return { ok: false, error: error.message };
       revalidatePath("/chair/awards");
       revalidatePath("/smt/awards");
       return { ok: true };
     }
-    return { ok: false };
+    return { ok: false, error: "Select a nominee for this slot." };
   }
 
   const rubricScores = parseRubricScores(formData, nominationType as NominationType);
-  if (!rubricScores) return { ok: false };
+  if (!rubricScores) {
+    return { ok: false, error: "Choose one proficiency band for every criterion." };
+  }
 
   const { data: canManage } = await auth.supabase
     .from("allocations")
@@ -204,7 +217,10 @@ export async function submitChairTopNominationAction(
       .maybeSingle();
     const role = p?.role?.toString().trim().toLowerCase();
     if (role !== "smt" && role !== "admin") {
-      return { ok: false };
+      return {
+        ok: false,
+        error: "You must be allocated to this committee as chair to save nominations.",
+      };
     }
   }
 
@@ -215,7 +231,9 @@ export async function submitChairTopNominationAction(
     .eq("user_id", nomineeId)
     .limit(1)
     .maybeSingle();
-  if (!nomineeInCommittee?.id) return { ok: false };
+  if (!nomineeInCommittee?.id) {
+    return { ok: false, error: "That delegate is not seated in this committee." };
+  }
 
   if (nominationType === "committee_honourable_mention") {
     const { count: seatedCount } = await auth.supabase
@@ -224,7 +242,9 @@ export async function submitChairTopNominationAction(
       .eq("conference_id", committeeId)
       .not("user_id", "is", null);
     const maxHmRank = (seatedCount ?? 0) > 23 ? 3 : 2;
-    if (rank > maxHmRank) return { ok: false };
+    if (rank > maxHmRank) {
+      return { ok: false, error: "This Honourable Mention slot is not used for your committee size." };
+    }
   }
 
   const { data: existing } = await auth.supabase
@@ -248,7 +268,7 @@ export async function submitChairTopNominationAction(
         updated_at: new Date().toISOString(),
       })
       .eq("id", existing.id);
-    if (error) return { ok: false };
+    if (error) return { ok: false, error: error.message };
   } else {
     const { error } = await auth.supabase.from("award_nominations").insert({
       committee_conference_id: committeeId,
@@ -260,7 +280,7 @@ export async function submitChairTopNominationAction(
       created_by: auth.user.id,
       status: "pending",
     });
-    if (error) return { ok: false };
+    if (error) return { ok: false, error: error.message };
   }
 
   revalidatePath("/chair/awards");
