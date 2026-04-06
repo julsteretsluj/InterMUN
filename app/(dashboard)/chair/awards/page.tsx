@@ -13,6 +13,47 @@ import { ChairNominationSlotForm } from "./ChairNominationSlotForm";
 
 export const dynamic = "force-dynamic";
 
+type DelegateRow = {
+  id: string;
+  user_id: string | null;
+  country: string;
+  profiles:
+    | { name: string | null; role?: string | null }
+    | { name: string | null; role?: string | null }[]
+    | null;
+};
+
+function profileEmbed(row: DelegateRow) {
+  const p = row.profiles;
+  if (!p) return null;
+  return Array.isArray(p) ? p[0] : p;
+}
+
+function isChairAllocation(row: DelegateRow): boolean {
+  return profileEmbed(row)?.role === "chair";
+}
+
+function optionFromDelegateRow(d: DelegateRow): { userId: string; label: string } {
+  const embed = profileEmbed(d);
+  const name = embed?.name?.trim() || d.user_id!.slice(0, 8);
+  return { userId: d.user_id!, label: `${d.country} — ${name}` };
+}
+
+/** Nominee picker: delegates & non-chair seats only; keep current selection if it is a chair (legacy row). */
+function nomineeOptionsForSlot(
+  delegateRowsNoChair: DelegateRow[],
+  allRows: DelegateRow[],
+  selectedNomineeId: string
+): { userId: string; label: string }[] {
+  const base = delegateRowsNoChair.filter((d) => d.user_id).map(optionFromDelegateRow);
+  if (!selectedNomineeId || base.some((o) => o.userId === selectedNomineeId)) {
+    return base;
+  }
+  const row = allRows.find((d) => d.user_id === selectedNomineeId);
+  if (!row) return base;
+  return [...base, optionFromDelegateRow(row)];
+}
+
 export default async function ChairAwardsPage() {
   const supabase = await createClient();
   const {
@@ -51,7 +92,7 @@ export default async function ChairAwardsPage() {
   const [{ data: delegates }, { data: nominations }] = await Promise.all([
     supabase
       .from("allocations")
-      .select("id, user_id, country, profiles(name)")
+      .select("id, user_id, country, profiles(name, role)")
       .eq("conference_id", activeConf.id)
       .not("user_id", "is", null)
       .order("country", { ascending: true }),
@@ -64,26 +105,19 @@ export default async function ChairAwardsPage() {
       .order("rank", { ascending: true }),
   ]);
 
-  type DelegateRow = {
-    id: string;
-    user_id: string | null;
-    country: string;
-    profiles: { name: string | null } | { name: string | null }[] | null;
-  };
-  const delegateRows = sortRowsByAllocationCountry((delegates ?? []) as DelegateRow[]);
+  const delegateRowsAll = sortRowsByAllocationCountry((delegates ?? []) as DelegateRow[]);
+  const delegateRows = delegateRowsAll.filter((d) => !isChairAllocation(d));
+
   const delegateByUserId: Record<string, { country: string; displayName: string }> = {};
-  const options = delegateRows
-    .filter((d) => !!d.user_id)
-    .map((d) => {
-      const embed = Array.isArray(d.profiles) ? d.profiles[0] : d.profiles;
-      const name = embed?.name?.trim() || d.user_id!.slice(0, 8);
-      delegateByUserId[d.user_id!] = { country: d.country, displayName: name };
-      return {
-        userId: d.user_id!,
-        label: `${d.country} — ${name}`,
-      };
-    });
-  const seatedDelegatesCount = options.length;
+  for (const d of delegateRowsAll) {
+    if (!d.user_id) continue;
+    const embed = profileEmbed(d);
+    const name = embed?.name?.trim() || d.user_id.slice(0, 8);
+    delegateByUserId[d.user_id] = { country: d.country, displayName: name };
+  }
+
+  const baseNomineeOptions = delegateRows.filter((d) => !!d.user_id).map(optionFromDelegateRow);
+  const seatedDelegatesCount = baseNomineeOptions.length;
   const hmRequiresBackup = seatedDelegatesCount > 23;
 
   type NomRow = {
@@ -237,7 +271,7 @@ export default async function ChairAwardsPage() {
                     slotRequired={slot.required}
                     slotLabel={slot.label}
                     typeLabel={type.label}
-                    options={options}
+                    options={nomineeOptionsForSlot(delegateRows, delegateRowsAll, selectedId)}
                     delegateByUserId={delegateByUserId}
                     selectedNomineeId={selectedId}
                     scoreMap={scoreMap as Record<string, number>}

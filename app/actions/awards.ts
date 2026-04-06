@@ -11,6 +11,7 @@ import {
   type NominationRubricType,
 } from "@/lib/seamuns-award-scoring";
 import { revalidatePath } from "next/cache";
+import { isSingleWinnerNominationType } from "@/lib/award-nomination-review";
 
 type NominationType = NominationRubricType;
 
@@ -256,13 +257,28 @@ export async function submitChairTopNominationAction(
     return { ok: false, error: "That delegate is not seated in this committee." };
   }
 
+  const { data: nomineeProfile } = await auth.supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", nomineeId)
+    .maybeSingle();
+  if (nomineeProfile?.role === "chair") {
+    return { ok: false, error: "Nominees must be delegates or country seats, not the committee chair." };
+  }
+
   if (nominationType === "committee_honourable_mention") {
-    const { count: seatedCount } = await auth.supabase
+    const { data: allocRows } = await auth.supabase
       .from("allocations")
-      .select("id", { count: "exact", head: true })
+      .select("user_id")
       .eq("conference_id", committeeId)
       .not("user_id", "is", null);
-    const maxHmRank = (seatedCount ?? 0) > 23 ? 3 : 2;
+    const uids = [...new Set((allocRows ?? []).map((r) => r.user_id).filter(Boolean))] as string[];
+    let seatedCount = 0;
+    if (uids.length > 0) {
+      const { data: seatProfiles } = await auth.supabase.from("profiles").select("id, role").in("id", uids);
+      seatedCount = (seatProfiles ?? []).filter((p) => p.role !== "chair").length;
+    }
+    const maxHmRank = seatedCount > 23 ? 3 : 2;
     if (rank > maxHmRank) {
       return { ok: false, error: "This Honourable Mention slot is not used for your committee size." };
     }
@@ -308,6 +324,53 @@ export async function submitChairTopNominationAction(
   revalidatePath("/smt/awards");
   revalidatePath("/smt");
   return { ok: true };
+}
+
+export async function rejectNominationAction(
+  formData: FormData
+): Promise<{ error?: string; success?: boolean }> {
+  const auth = await requireSmtOrAdmin();
+  if (!auth.ok || !auth.user) {
+    return { error: "Only SMT and website admins can reject nominations." };
+  }
+
+  const nominationId = String(formData.get("nomination_id") ?? "").trim();
+  if (!nominationId) {
+    return { error: "Missing nomination." };
+  }
+
+  const { data: nomination } = await auth.supabase
+    .from("award_nominations")
+    .select("id, status")
+    .eq("id", nominationId)
+    .maybeSingle();
+
+  if (!nomination) {
+    return { error: "Nomination not found." };
+  }
+  if (nomination.status !== "pending") {
+    return { error: "This nomination is no longer pending." };
+  }
+
+  const now = new Date().toISOString();
+  const { error } = await auth.supabase
+    .from("award_nominations")
+    .update({
+      status: "rejected",
+      reviewed_by: auth.user.id,
+      reviewed_at: now,
+      updated_at: now,
+    })
+    .eq("id", nominationId);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/smt/awards");
+  revalidatePath("/smt");
+  revalidatePath("/chair/awards");
+  return { success: true };
 }
 
 export async function promoteNominationToAwardAction(
@@ -429,6 +492,19 @@ export async function promoteNominationToAwardAction(
       updated_at: now,
     })
     .eq("id", nomination.id);
+
+  if (isSingleWinnerNominationType(nomination.nomination_type as NominationRubricType)) {
+    await auth.supabase
+      .from("award_nominations")
+      .update({
+        status: "not_selected",
+        updated_at: now,
+      })
+      .eq("committee_conference_id", nomination.committee_conference_id)
+      .eq("nomination_type", nomination.nomination_type)
+      .eq("status", "pending")
+      .neq("id", nomination.id);
+  }
 
   revalidatePath("/smt/awards");
   revalidatePath("/smt");
