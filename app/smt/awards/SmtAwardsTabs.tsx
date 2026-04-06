@@ -70,7 +70,8 @@ export function SmtAwardsTabs({
             <p className="text-xs text-brand-muted">
               Record final recipients for overall trophies, chair honours, and committee-level awards. Overall: Best
               Delegate (Trophy), Best Position Paper. Chair: Best Chair, Honourable Mention Chair, Best Committee, Best
-              Chair Report. Committee: Best Delegate, Honourable Mention (up to 2), Best Position Paper.
+              Chair Report. Committee: Best Delegate, Honourable Mention (1 required; 2 if more than 22 delegates), Best
+              Position Paper.
             </p>
           </section>
           <AwardsManagerClient conferences={conferences} assignments={assignments} profiles={profiles} />

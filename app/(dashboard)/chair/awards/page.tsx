@@ -118,7 +118,8 @@ export default async function ChairAwardsPage() {
 
   const baseNomineeOptions = delegateRows.filter((d) => !!d.user_id).map(optionFromDelegateRow);
   const seatedDelegatesCount = baseNomineeOptions.length;
-  const hmRequiresBackup = seatedDelegatesCount > 23;
+  /** Second HM is required only when there are more than 22 seated delegates. */
+  const hmRequiresTwo = seatedDelegatesCount > 22;
 
   type NomRow = {
     id: string;
@@ -155,19 +156,19 @@ export default async function ChairAwardsPage() {
     {
       id: "committee_honourable_mention",
       label: "Honourable Mention (committee)",
-      slots: hmRequiresBackup
+      slots: hmRequiresTwo
         ? [
             { rank: 1, label: "Honourable Mention #1", required: true },
             { rank: 2, label: "Honourable Mention #2", required: true },
-            { rank: 3, label: "Honourable Mention backup", required: true },
+            { rank: 3, label: "Honourable Mention backup", required: false },
           ]
         : [
-            { rank: 1, label: "Honourable Mention #1 (optional)", required: false },
+            { rank: 1, label: "Honourable Mention #1", required: true },
             { rank: 2, label: "Honourable Mention #2 (optional)", required: false },
           ],
-      helper: hmRequiresBackup
-        ? "Committee has more than 23 seated delegates: submit 2 Honourable Mentions plus 1 backup (3 total)."
-        : "Submit up to 2 Honourable Mentions.",
+      helper: hmRequiresTwo
+        ? "More than 22 seated delegates: submit 2 Honourable Mentions (required). Optional backup rank for SMT."
+        : "Submit at least 1 Honourable Mention (required). Second HM is optional.",
       criteria: criteriaForNominationType("committee_best_delegate"),
     },
     {

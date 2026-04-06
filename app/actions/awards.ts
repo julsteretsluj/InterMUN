@@ -286,7 +286,7 @@ export async function submitChairTopNominationAction(
       const { data: seatProfiles } = await auth.supabase.from("profiles").select("id, role").in("id", uids);
       seatedCount = (seatProfiles ?? []).filter((p) => p.role !== "chair").length;
     }
-    const maxHmRank = seatedCount > 23 ? 3 : 2;
+    const maxHmRank = seatedCount > 22 ? 3 : 2;
     if (rank > maxHmRank) {
       return { ok: false, error: "This Honourable Mention slot is not used for your committee size." };
     }
