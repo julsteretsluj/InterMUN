@@ -33,9 +33,26 @@ export function AwardsManagerClient({
     [conferences]
   );
 
+  /** Include every assignment recipient so controlled selects always have a matching <option>. */
+  const profileOptions = useMemo(() => {
+    const byId = new Map(profiles.map((p) => [p.id, p] as const));
+    for (const a of initialAssignments) {
+      const id = a.recipient_profile_id;
+      if (id && !byId.has(id)) {
+        byId.set(id, { id, name: null });
+      }
+    }
+    return [...byId.values()].sort((a, b) => {
+      const an = (a.name?.trim() || "").toLocaleLowerCase();
+      const bn = (b.name?.trim() || "").toLocaleLowerCase();
+      if (an !== bn) return an.localeCompare(bn);
+      return a.id.localeCompare(b.id);
+    });
+  }, [profiles, initialAssignments]);
+
   const profileById = useMemo(
-    () => Object.fromEntries(profiles.map((p) => [p.id, p.name?.trim() || "—"])),
-    [profiles]
+    () => Object.fromEntries(profileOptions.map((p) => [p.id, p.name?.trim() || "—"])),
+    [profileOptions]
   );
 
   const [form, setForm] = useState({
@@ -86,7 +103,7 @@ export function AwardsManagerClient({
       else {
         setMsg(form.id ? "Updated." : "Saved.");
         resetForm();
-        router.refresh();
+        await router.refresh();
       }
     });
   }
@@ -98,7 +115,7 @@ export function AwardsManagerClient({
       if (res.error) setErr(res.error);
       else {
         setMsg("Removed.");
-        router.refresh();
+        await router.refresh();
       }
     });
   }
@@ -198,7 +215,7 @@ export function AwardsManagerClient({
                 }
               >
                 <option value="">— Not set —</option>
-                {profiles.map((p) => (
+                {profileOptions.map((p) => (
                   <option key={p.id} value={p.id}>
                     {(p.name || "No name").trim()} ({p.id.slice(0, 8)}…)
                   </option>

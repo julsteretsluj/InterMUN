@@ -67,6 +67,14 @@ function scopeForCategory(category: string): AwardScope | undefined {
   return AWARD_CATEGORIES.find((c) => c.id === category)?.scope;
 }
 
+/** Aligns with saveAwardAssignment: committee-scoped awards store a committee id; conference-wide use null. */
+function committeeConferenceIdForAwardAssignment(category: string, nominationCommitteeId: string): string | null {
+  const scope = scopeForCategory(category);
+  if (!scope) return null;
+  if (scope === "committee") return nominationCommitteeId;
+  return null;
+}
+
 export async function saveAwardAssignment(formData: FormData): Promise<{ error?: string; success?: boolean }> {
   const auth = await requireChairOrSmt();
   if (!auth.ok || !auth.user) {
@@ -375,21 +383,27 @@ export async function rejectNominationAction(
 
 export async function promoteNominationToAwardAction(
   formData: FormData
-): Promise<void> {
+): Promise<{ success: boolean; error?: string }> {
   const auth = await requireSmtOrAdmin();
-  if (!auth.ok || !auth.user) return;
+  if (!auth.ok || !auth.user) {
+    return { success: false, error: "Only SMT and website admins can approve nominations." };
+  }
 
   const nominationId = String(formData.get("nomination_id") ?? "").trim();
   const category = String(formData.get("category") ?? "").trim();
-  if (!nominationId || !category) return;
-  if (!AWARD_CATEGORIES.some((c) => c.id === category)) return;
+  if (!nominationId || !category) {
+    return { success: false, error: "Missing nomination or award type." };
+  }
+  if (!AWARD_CATEGORIES.some((c) => c.id === category)) {
+    return { success: false, error: "Invalid award category." };
+  }
   if (
     category !== "committee_best_delegate" &&
     category !== "committee_honourable_mention" &&
     category !== "committee_best_position_paper" &&
     category !== "conference_best_delegate"
   ) {
-    return;
+    return { success: false, error: "This award type cannot be set from a chair nomination." };
   }
 
   const { data: nomination } = await auth.supabase
@@ -397,11 +411,15 @@ export async function promoteNominationToAwardAction(
     .select("id, committee_conference_id, nominee_profile_id, nomination_type, rank, evidence_note, status")
     .eq("id", nominationId)
     .maybeSingle();
-  if (!nomination) return;
-  if (nomination.status !== "pending") return;
+  if (!nomination) {
+    return { success: false, error: "Nomination not found." };
+  }
+  if (nomination.status !== "pending") {
+    return { success: false, error: "This nomination is no longer pending." };
+  }
 
   if (nomination.nomination_type === "conference_best_delegate" && category !== "conference_best_delegate") {
-    return;
+    return { success: false, error: "Award type does not match this nomination." };
   }
   if (
     (nomination.nomination_type === "committee_best_delegate" ||
@@ -409,24 +427,31 @@ export async function promoteNominationToAwardAction(
       nomination.nomination_type === "committee_best_position_paper") &&
     category === "conference_best_delegate"
   ) {
-    return;
+    return { success: false, error: "Award type does not match this nomination." };
   }
 
-  if (nomination.nomination_type === "committee_best_delegate" && category !== "committee_best_delegate") return;
+  if (nomination.nomination_type === "committee_best_delegate" && category !== "committee_best_delegate") {
+    return { success: false, error: "Award type does not match this nomination." };
+  }
   if (nomination.nomination_type === "committee_honourable_mention" && category !== "committee_honourable_mention") {
-    return;
+    return { success: false, error: "Award type does not match this nomination." };
   }
   if (
     nomination.nomination_type === "committee_best_position_paper" &&
     category !== "committee_best_position_paper"
   ) {
-    return;
+    return { success: false, error: "Award type does not match this nomination." };
   }
+
+  const committeeForAssignment = committeeConferenceIdForAwardAssignment(
+    category,
+    nomination.committee_conference_id
+  );
 
   const sortOrder = category === "committee_honourable_mention" ? nomination.rank : 0;
   const payload = {
     category,
-    committee_conference_id: nomination.committee_conference_id,
+    committee_conference_id: committeeForAssignment,
     recipient_profile_id: nomination.nominee_profile_id,
     recipient_committee_id: null,
     notes: nomination.evidence_note || "Selected from chair top-2 nomination.",
@@ -440,18 +465,24 @@ export async function promoteNominationToAwardAction(
     category === "committee_best_position_paper" ||
     category === "conference_best_delegate"
   ) {
-    const { data: existing } = await auth.supabase
-      .from("award_assignments")
-      .select("id")
-      .eq("category", category)
-      .eq("committee_conference_id", nomination.committee_conference_id)
+    let existingQuery = auth.supabase.from("award_assignments").select("id").eq("category", category);
+    if (committeeForAssignment === null) {
+      existingQuery = existingQuery.is("committee_conference_id", null);
+    } else {
+      existingQuery = existingQuery.eq("committee_conference_id", committeeForAssignment);
+    }
+    const { data: existing, error: existingErr } = await existingQuery
+      .order("updated_at", { ascending: false })
+      .limit(1)
       .maybeSingle();
+    if (existingErr) {
+      return { success: false, error: existingErr.message };
+    }
     if (existing?.id) {
-      const { error } = await auth.supabase
-        .from("award_assignments")
-        .update(payload)
-        .eq("id", existing.id);
-      if (error) return;
+      const { error } = await auth.supabase.from("award_assignments").update(payload).eq("id", existing.id);
+      if (error) {
+        return { success: false, error: error.message };
+      }
       assignmentId = existing.id;
     } else {
       const { data, error } = await auth.supabase
@@ -463,7 +494,9 @@ export async function promoteNominationToAwardAction(
         })
         .select("id")
         .maybeSingle();
-      if (error) return;
+      if (error) {
+        return { success: false, error: error.message };
+      }
       assignmentId = data?.id ?? null;
     }
   } else {
@@ -476,12 +509,14 @@ export async function promoteNominationToAwardAction(
       })
       .select("id")
       .maybeSingle();
-    if (error) return;
+    if (error) {
+      return { success: false, error: error.message };
+    }
     assignmentId = data?.id ?? null;
   }
 
   const now = new Date().toISOString();
-  await auth.supabase
+  const { error: nomErr } = await auth.supabase
     .from("award_nominations")
     .update({
       status: "selected",
@@ -492,9 +527,12 @@ export async function promoteNominationToAwardAction(
       updated_at: now,
     })
     .eq("id", nomination.id);
+  if (nomErr) {
+    return { success: false, error: nomErr.message };
+  }
 
   if (isSingleWinnerNominationType(nomination.nomination_type as NominationRubricType)) {
-    await auth.supabase
+    const { error: supErr } = await auth.supabase
       .from("award_nominations")
       .update({
         status: "not_selected",
@@ -504,10 +542,14 @@ export async function promoteNominationToAwardAction(
       .eq("nomination_type", nomination.nomination_type)
       .eq("status", "pending")
       .neq("id", nomination.id);
+    if (supErr) {
+      return { success: false, error: supErr.message };
+    }
   }
 
   revalidatePath("/smt/awards");
   revalidatePath("/smt");
   revalidatePath("/chair/awards");
   revalidatePath("/profile");
+  return { success: true };
 }

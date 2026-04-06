@@ -41,7 +41,7 @@ export default async function SmtAwardsPage() {
   ] = await Promise.all([
     supabase.from("conferences").select("id, name, committee").order("created_at", { ascending: false }),
     supabase.from("award_assignments").select("*").order("created_at", { ascending: true }),
-    supabase.from("profiles").select("id, name").order("name").limit(500),
+    supabase.from("profiles").select("id, name").order("name"),
     supabase
       .from("award_nominations")
       .select(
