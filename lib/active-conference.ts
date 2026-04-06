@@ -72,6 +72,35 @@ export async function getConferenceForDashboard(options: {
     .select("*", { count: "exact", head: true });
   const total = countErr ? 0 : count ?? 0;
 
+  const roleLower = options.role?.toString().trim().toLowerCase();
+
+  /**
+   * Chairs without a room-code cookie used to get `null` whenever more than one committee row
+   * existed globally, even if they were only allocated to a single committee — saves looked
+   * successful but refresh loaded an empty page (wrong/missing context).
+   */
+  if (roleLower === "chair" && total > 1) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user?.id) {
+      const { data: allocRows } = await supabase.from("allocations").select("conference_id").eq("user_id", user.id);
+      const distinctIds = [
+        ...new Set((allocRows ?? []).map((r) => r.conference_id).filter(Boolean)),
+      ] as string[];
+      if (distinctIds.length === 1) {
+        const { data: conf } = await supabase
+          .from("conferences")
+          .select(
+            "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled, consultation_before_moderated_caucus"
+          )
+          .eq("id", distinctIds[0])
+          .maybeSingle();
+        if (conf) return conf as ActiveConferenceRow;
+      }
+    }
+  }
+
   const useImplicitLatest =
     allowImplicitLatestConference(options.role) || total === 1;
   if (!useImplicitLatest) return null;

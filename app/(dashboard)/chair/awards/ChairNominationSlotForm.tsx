@@ -40,7 +40,9 @@ type Props = {
 function shouldAttemptAutosave(
   form: HTMLFormElement,
   nominationType: NominationRubricType,
-  slotRequired: boolean
+  slotRequired: boolean,
+  keys: string[],
+  liveScores: Record<string, number | null>
 ): boolean {
   const fd = new FormData(form);
   const nominee = String(fd.get("nominee_profile_id") ?? "").trim();
@@ -48,13 +50,27 @@ function shouldAttemptAutosave(
     return true;
   }
   if (!nominee) return false;
-  const keys = RUBRIC_KEYS_BY_NOMINATION[nominationType];
   for (const key of keys) {
-    const raw = String(fd.get(`score_${key}`) ?? "").trim();
-    const n = Number(raw);
-    if (!Number.isInteger(n) || n < 1 || n > 8) return false;
+    const v = liveScores[key];
+    if (v == null || v < 1 || v > 8) return false;
   }
   return true;
+}
+
+/** Hidden rubric inputs can lag React state; always send scores from liveScores to the server action. */
+function formDataWithRubricScores(
+  form: HTMLFormElement,
+  keys: string[],
+  liveScores: Record<string, number | null>
+): FormData {
+  const fd = new FormData(form);
+  for (const key of keys) {
+    const v = liveScores[key];
+    if (v != null && v >= 1 && v <= 8) {
+      fd.set(`score_${key}`, String(v));
+    }
+  }
+  return fd;
 }
 
 function scoresFromMap(scoreMap: Record<string, number>, keys: string[]): Record<string, number | null> {
@@ -94,6 +110,7 @@ export function ChairNominationSlotForm({
   const [liveScores, setLiveScores] = useState<Record<string, number | null>>(() =>
     scoresFromMap(scoreMap, keys)
   );
+  const liveScoresRef = useRef(liveScores);
 
   useEffect(() => {
     setLiveScores(scoresFromMap(scoreMap, keys));
@@ -102,6 +119,10 @@ export function ChairNominationSlotForm({
   useEffect(() => {
     setNomineeId(selectedNomineeId);
   }, [selectedNomineeId, nominationRowId]);
+
+  useEffect(() => {
+    liveScoresRef.current = liveScores;
+  }, [liveScores]);
 
   const onCriterionScore = useCallback((key: string, score: number | null) => {
     setLiveScores((prev) => ({ ...prev, [key]: score }));
@@ -143,7 +164,7 @@ export function ChairNominationSlotForm({
 
     setIsSaving(true);
     try {
-      const res = await submitChairTopNominationAction(new FormData(form));
+      const res = await submitChairTopNominationAction(formDataWithRubricScores(form, keys, liveScores));
       if (res.ok) {
         const nominee = String(new FormData(form).get("nominee_profile_id") ?? "").trim();
         const isHmClear =
@@ -164,8 +185,8 @@ export function ChairNominationSlotForm({
     const id = window.setInterval(async () => {
       const form = formRef.current;
       if (!form) return;
-      if (!shouldAttemptAutosave(form, nominationType, slotRequired)) return;
-      const fd = new FormData(form);
+      if (!shouldAttemptAutosave(form, nominationType, slotRequired, keys, liveScoresRef.current)) return;
+      const fd = formDataWithRubricScores(form, keys, liveScoresRef.current);
       const res = await submitChairTopNominationAction(fd);
       if (res.ok) {
         const nominee = String(fd.get("nominee_profile_id") ?? "").trim();
@@ -180,7 +201,7 @@ export function ChairNominationSlotForm({
       }
     }, AUTOSAVE_MS);
     return () => window.clearInterval(id);
-  }, [nominationType, rank, router, slotRequired]);
+  }, [keys, nominationType, rank, router, slotRequired]);
 
   const formKey =
     nominationRowId ?? `pending-${committeeConferenceId}-${nominationType}-${rank}`;
