@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { AwardsManagerClient } from "@/app/(dashboard)/chair/awards/AwardsManagerClient";
-import { promoteNominationToAwardAction } from "@/app/actions/awards";
 import type { AwardAssignment } from "@/types/database";
 import { isSmtRole } from "@/lib/roles";
 import {
@@ -11,6 +10,10 @@ import {
   rubricNumericTotal,
   type NominationRubricType,
 } from "@/lib/seamuns-award-scoring";
+import { PromoteNominationForm } from "./PromoteNominationForm";
+import { SmtAwardsRefreshOnFocus } from "./SmtAwardsRefreshOnFocus";
+
+export const dynamic = "force-dynamic";
 
 export default async function SmtAwardsPage() {
   const supabase = await createClient();
@@ -68,6 +71,7 @@ export default async function SmtAwardsPage() {
 
   return (
     <MunPageShell title="Awards">
+      <SmtAwardsRefreshOnFocus />
       <section className="mb-8 rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
         <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
           Chair nominations (SMT review)
@@ -128,52 +132,36 @@ export default async function SmtAwardsPage() {
                       <td className="px-3 py-2">
                         <div className="flex flex-col gap-2">
                           {n.nomination_type === "committee_best_delegate" ? (
-                            <form action={promoteNominationToAwardAction}>
-                              <input type="hidden" name="nomination_id" value={n.id} />
-                              <input type="hidden" name="category" value="committee_best_delegate" />
-                              <button
-                                type="submit"
-                                className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
-                              >
-                                Select as Best Delegate
-                              </button>
-                            </form>
+                            <PromoteNominationForm
+                              nominationId={n.id}
+                              category="committee_best_delegate"
+                              label="Select as Best Delegate"
+                              buttonClassName="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
+                            />
                           ) : null}
                           {n.nomination_type === "committee_honourable_mention" ? (
-                            <form action={promoteNominationToAwardAction}>
-                              <input type="hidden" name="nomination_id" value={n.id} />
-                              <input type="hidden" name="category" value="committee_honourable_mention" />
-                              <button
-                                type="submit"
-                                className="text-xs px-2 py-1 rounded border border-brand-navy/20 text-brand-navy"
-                              >
-                                Select as Honourable Mention
-                              </button>
-                            </form>
+                            <PromoteNominationForm
+                              nominationId={n.id}
+                              category="committee_honourable_mention"
+                              label="Select as Honourable Mention"
+                              buttonClassName="text-xs px-2 py-1 rounded border border-brand-navy/20 text-brand-navy"
+                            />
                           ) : null}
                           {n.nomination_type === "committee_best_position_paper" ? (
-                            <form action={promoteNominationToAwardAction}>
-                              <input type="hidden" name="nomination_id" value={n.id} />
-                              <input type="hidden" name="category" value="committee_best_position_paper" />
-                              <button
-                                type="submit"
-                                className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
-                              >
-                                Select as Best Position Paper
-                              </button>
-                            </form>
+                            <PromoteNominationForm
+                              nominationId={n.id}
+                              category="committee_best_position_paper"
+                              label="Select as Best Position Paper"
+                              buttonClassName="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
+                            />
                           ) : null}
                           {n.nomination_type === "conference_best_delegate" ? (
-                            <form action={promoteNominationToAwardAction}>
-                              <input type="hidden" name="nomination_id" value={n.id} />
-                              <input type="hidden" name="category" value="conference_best_delegate" />
-                              <button
-                                type="submit"
-                                className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
-                              >
-                                Select as Best Delegate (overall)
-                              </button>
-                            </form>
+                            <PromoteNominationForm
+                              nominationId={n.id}
+                              category="conference_best_delegate"
+                              label="Select as Best Delegate (overall)"
+                              buttonClassName="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
+                            />
                           ) : null}
                         </div>
                       </td>

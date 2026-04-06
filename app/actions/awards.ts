@@ -121,6 +121,9 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
     if (error) return { error: error.message };
   }
 
+  revalidatePath("/smt/awards");
+  revalidatePath("/chair/awards");
+  revalidatePath("/profile");
   return { success: true };
 }
 
@@ -131,6 +134,9 @@ export async function deleteAwardAssignment(id: string): Promise<{ error?: strin
   }
   const { error } = await auth.supabase.from("award_assignments").delete().eq("id", id);
   if (error) return { error: error.message };
+  revalidatePath("/smt/awards");
+  revalidatePath("/chair/awards");
+  revalidatePath("/profile");
   return { success: true };
 }
 
@@ -203,6 +209,7 @@ export async function submitChairTopNominationAction(
       if (error) return { ok: false, error: error.message };
       revalidatePath("/chair/awards");
       revalidatePath("/smt/awards");
+      revalidatePath("/smt");
       return { ok: true };
     }
     return { ok: false, error: "Select a nominee for this slot." };
@@ -299,6 +306,7 @@ export async function submitChairTopNominationAction(
 
   revalidatePath("/chair/awards");
   revalidatePath("/smt/awards");
+  revalidatePath("/smt");
   return { ok: true };
 }
 
@@ -423,6 +431,7 @@ export async function promoteNominationToAwardAction(
     .eq("id", nomination.id);
 
   revalidatePath("/smt/awards");
+  revalidatePath("/smt");
   revalidatePath("/chair/awards");
   revalidatePath("/profile");
 }
