@@ -9,12 +9,16 @@ import {
   type NominationRubricType,
   type RubricCriterion,
 } from "@/lib/seamuns-award-scoring";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const AUTOSAVE_MS = 60_000;
 
 export type DelegateOption = { userId: string; label: string };
+
+export type DelegateInfo = { country: string; displayName: string };
 
 type Props = {
   committeeConferenceId: string;
@@ -24,6 +28,7 @@ type Props = {
   slotLabel: string;
   typeLabel: string;
   options: DelegateOption[];
+  delegateByUserId: Record<string, DelegateInfo>;
   selectedNomineeId: string;
   scoreMap: Record<string, number>;
   evidenceNote: string | null;
@@ -69,6 +74,7 @@ export function ChairNominationSlotForm({
   slotLabel,
   typeLabel,
   options,
+  delegateByUserId,
   selectedNomineeId,
   scoreMap,
   evidenceNote,
@@ -80,6 +86,8 @@ export function ChairNominationSlotForm({
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [autosaveMessage, setAutosaveMessage] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [minimized, setMinimized] = useState(false);
+  const [nomineeId, setNomineeId] = useState(selectedNomineeId);
 
   const keys = useMemo(() => RUBRIC_KEYS_BY_NOMINATION[nominationType], [nominationType]);
   const scoreSnapshot = useMemo(() => JSON.stringify(scoreMap), [scoreMap]);
@@ -90,6 +98,10 @@ export function ChairNominationSlotForm({
   useEffect(() => {
     setLiveScores(scoresFromMap(scoreMap, keys));
   }, [nominationType, nominationRowId, scoreSnapshot, keys]);
+
+  useEffect(() => {
+    setNomineeId(selectedNomineeId);
+  }, [selectedNomineeId, nominationRowId]);
 
   const onCriterionScore = useCallback((key: string, score: number | null) => {
     setLiveScores((prev) => ({ ...prev, [key]: score }));
@@ -107,6 +119,11 @@ export function ChairNominationSlotForm({
     () => keys.filter((k) => liveScores[k] != null).length,
     [keys, liveScores]
   );
+
+  const summaryDelegate = nomineeId ? delegateByUserId[nomineeId] : undefined;
+  const summaryFlag = flagEmojiForCountryName(summaryDelegate?.country);
+  const summaryName = summaryDelegate?.displayName ?? (nomineeId ? nomineeId.slice(0, 8) : "—");
+  const nominationSummary = `${typeLabel} · ${slotLabel}`;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -169,22 +186,68 @@ export function ChairNominationSlotForm({
     nominationRowId ?? `pending-${committeeConferenceId}-${nominationType}-${rank}`;
 
   return (
-    <div key={formKey}>
+    <div key={formKey} className="rounded-xl border border-brand-navy/10 bg-sky-50/40 overflow-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 px-3 py-2.5 border-b border-brand-navy/10 bg-sky-50/70">
+        {minimized ? (
+          <button
+            type="button"
+            onClick={() => setMinimized(false)}
+            className="flex flex-1 min-w-0 flex-wrap items-center gap-x-3 gap-y-1 text-left rounded-lg -m-1 p-1 hover:bg-brand-navy/5 transition-colors"
+            aria-expanded="false"
+            aria-label="Expand to edit nomination"
+          >
+            <span className="text-xl leading-none shrink-0" title={summaryDelegate?.country ?? "Allocation"}>
+              {summaryFlag}
+            </span>
+            <span className="min-w-0">
+              <span className="font-semibold text-brand-navy block truncate">{summaryName}</span>
+              <span className="text-xs text-brand-muted block truncate">{nominationSummary}</span>
+            </span>
+            <span className="ml-auto shrink-0 text-sm tabular-nums">
+              <span className="font-semibold text-brand-navy">{criteriaTotal}</span>
+              <span className="text-brand-muted">/{maxTotal}</span>
+              {scoredCount < keys.length ? (
+                <span className="text-[0.65rem] text-brand-muted ml-1">({scoredCount}/{keys.length} criteria)</span>
+              ) : null}
+            </span>
+            <ChevronDown className="w-5 h-5 text-brand-muted shrink-0" aria-hidden />
+          </button>
+        ) : (
+          <>
+            <div className="min-w-0 flex-1">
+              <h4 className="text-sm font-semibold text-brand-navy">
+                {slotLabel}
+                {!slotRequired ? (
+                  <span className="ml-2 text-xs font-normal text-brand-muted">(optional)</span>
+                ) : null}
+              </h4>
+              <p className="text-[0.7rem] text-brand-muted mt-0.5">{typeLabel}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setMinimized(true)}
+              className="inline-flex items-center gap-1.5 shrink-0 px-2.5 py-1.5 rounded-lg border border-brand-navy/15 bg-white/40 text-xs font-medium text-brand-navy hover:bg-white/70"
+              aria-expanded="true"
+              aria-label="Minimize; show summary only"
+            >
+              <span>Minimize</span>
+              <ChevronUp className="w-4 h-4" aria-hidden />
+            </button>
+          </>
+        )}
+      </div>
+
+      <div className={minimized ? "hidden" : "p-3 pt-3"}>
       <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
         <input type="hidden" name="committee_conference_id" value={committeeConferenceId} />
         <input type="hidden" name="nomination_type" value={nominationType} />
         <input type="hidden" name="rank" value={String(rank)} />
-        <h4 className="text-sm font-semibold text-brand-navy">
-          {slotLabel}
-          {!slotRequired ? (
-            <span className="ml-2 text-xs font-normal text-brand-muted">(optional)</span>
-          ) : null}
-        </h4>
         <label className="block text-sm">
           <span className="text-brand-muted text-xs uppercase">Nominee</span>
           <select
             name="nominee_profile_id"
-            defaultValue={selectedNomineeId}
+            value={nomineeId}
+            onChange={(e) => setNomineeId(e.target.value)}
             required={slotRequired}
             className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy"
           >
@@ -249,6 +312,7 @@ export function ChairNominationSlotForm({
           </p>
         ) : null}
       </form>
+      </div>
     </div>
   );
 }

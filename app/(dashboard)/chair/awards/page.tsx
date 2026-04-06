@@ -71,11 +71,13 @@ export default async function ChairAwardsPage() {
     profiles: { name: string | null } | { name: string | null }[] | null;
   };
   const delegateRows = sortRowsByAllocationCountry((delegates ?? []) as DelegateRow[]);
+  const delegateByUserId: Record<string, { country: string; displayName: string }> = {};
   const options = delegateRows
     .filter((d) => !!d.user_id)
     .map((d) => {
       const embed = Array.isArray(d.profiles) ? d.profiles[0] : d.profiles;
       const name = embed?.name?.trim() || d.user_id!.slice(0, 8);
+      delegateByUserId[d.user_id!] = { country: d.country, displayName: name };
       return {
         userId: d.user_id!,
         label: `${d.country} — ${name}`,
@@ -236,6 +238,7 @@ export default async function ChairAwardsPage() {
                     slotLabel={slot.label}
                     typeLabel={type.label}
                     options={options}
+                    delegateByUserId={delegateByUserId}
                     selectedNomineeId={selectedId}
                     scoreMap={scoreMap as Record<string, number>}
                     evidenceNote={existing?.evidence_note ?? null}
