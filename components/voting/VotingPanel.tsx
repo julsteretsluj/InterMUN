@@ -5,6 +5,12 @@ import { createClient } from "@/lib/supabase/client";
 import type { VoteItem } from "@/types/database";
 import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
 import { HelpButton } from "@/components/HelpButton";
+import {
+  DAIS_SEAT_CO_CHAIR,
+  DAIS_SEAT_HEAD_CHAIR,
+  sortAllocationsByDisplayCountry,
+} from "@/lib/allocation-display-order";
+import { parseRollAttendance, rollAttendanceRollLabel, type RollAttendance } from "@/lib/roll-attendance";
 
 interface Vote {
   value: string;
@@ -12,6 +18,12 @@ interface Vote {
 }
 
 type VoteItemRow = VoteItem & { procedure_code?: string | null };
+type VotingRosterEntry = {
+  allocationId: string;
+  userId: string;
+  country: string;
+  rollAttendance: RollAttendance;
+};
 
 export function VotingPanel({
   voteItems,
@@ -22,6 +34,7 @@ export function VotingPanel({
 }) {
   const [votes, setVotes] = useState<Record<string, Vote[]>>({});
   const [drafts, setDrafts] = useState<Record<string, { must_vote: boolean; required_majority: string }>>({});
+  const [rosterByConferenceId, setRosterByConferenceId] = useState<Record<string, VotingRosterEntry[]>>({});
   const supabase = createClient();
 
   const canManageVotes = myRole === "chair";
@@ -36,6 +49,72 @@ export function VotingPanel({
           if (data) setVotes((v) => ({ ...v, [item.id]: data }));
         });
     });
+  }, [voteItems, supabase]);
+
+  useEffect(() => {
+    const conferenceIds = [...new Set(voteItems.map((item) => item.conference_id).filter(Boolean))];
+    if (conferenceIds.length === 0) {
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      const next: Record<string, VotingRosterEntry[]> = {};
+
+      for (const conferenceId of conferenceIds) {
+        const [{ data: allocations }, { data: rollRows }] = await Promise.all([
+          supabase
+            .from("allocations")
+            .select("id, country, user_id, profiles(role)")
+            .eq("conference_id", conferenceId)
+            .order("country", { ascending: true }),
+          supabase
+            .from("roll_call_entries")
+            .select("allocation_id, present, attendance")
+            .eq("conference_id", conferenceId),
+        ]);
+
+        const rollMap = new Map<string, RollAttendance>();
+        for (const row of (rollRows ?? []) as Array<{ allocation_id: string; present?: boolean; attendance?: string | null }>) {
+          const att = parseRollAttendance(row.attendance) ?? (row.present === true ? "present_voting" : "absent");
+          rollMap.set(row.allocation_id, att);
+        }
+
+        const roster = ((allocations ?? []) as Array<{
+          id: string;
+          country: string;
+          user_id: string | null;
+          profiles: { role?: string | null } | { role?: string | null }[] | null;
+        }>)
+          .filter((a) => {
+            if (!a.user_id) return false;
+            const profile = Array.isArray(a.profiles) ? a.profiles[0] : a.profiles;
+            if (profile?.role?.toString().trim().toLowerCase() === "chair") return false;
+            const countryKey = (a.country ?? "").trim().toLowerCase();
+            return (
+              countryKey !== DAIS_SEAT_HEAD_CHAIR.toLowerCase() &&
+              countryKey !== DAIS_SEAT_CO_CHAIR.toLowerCase() &&
+              countryKey !== "co chair"
+            );
+          })
+          .map((a) => ({
+            allocationId: a.id,
+            userId: a.user_id as string,
+            country: a.country?.trim() || "—",
+            rollAttendance: rollMap.get(a.id) ?? "absent",
+          }));
+
+        next[conferenceId] = sortAllocationsByDisplayCountry(roster);
+      }
+
+      if (!cancelled) {
+        setRosterByConferenceId(next);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [voteItems, supabase]);
 
   useEffect(() => {
@@ -81,6 +160,26 @@ export function VotingPanel({
     location.reload();
   }
 
+  async function recordVoteForMotion(itemId: string, userId: string, value: "yes" | "no" | "abstain") {
+    const { error } = await supabase
+      .from("votes")
+      .upsert({ vote_item_id: itemId, user_id: userId, value }, { onConflict: "vote_item_id,user_id" });
+    if (error) return;
+    const { data } = await supabase.from("votes").select("value, user_id").eq("vote_item_id", itemId);
+    if (data) setVotes((v) => ({ ...v, [itemId]: data }));
+  }
+
+  async function clearVoteForMotion(itemId: string, userId: string) {
+    const { error } = await supabase
+      .from("votes")
+      .delete()
+      .eq("vote_item_id", itemId)
+      .eq("user_id", userId);
+    if (error) return;
+    const { data } = await supabase.from("votes").select("value, user_id").eq("vote_item_id", itemId);
+    if (data) setVotes((v) => ({ ...v, [itemId]: data }));
+  }
+
   function getResult(item: VoteItem) {
     const v = votes[item.id] || [];
     const counted = v.filter((x) => x.value === "yes" || x.value === "no");
@@ -101,6 +200,13 @@ export function VotingPanel({
     const typeLabel = item.vote_type.charAt(0).toUpperCase() + item.vote_type.slice(1);
     const titleLine = item.title?.trim() || "Untitled";
     const proc = item.procedure_code?.replace(/_/g, " ");
+    const roster = rosterByConferenceId[item.conference_id] ?? [];
+    const voteMap: Record<string, "yes" | "no" | "abstain"> = {};
+    for (const row of votes[item.id] ?? []) {
+      if (row.value === "yes" || row.value === "no" || row.value === "abstain") {
+        voteMap[row.user_id] = row.value;
+      }
+    }
 
     const chairSettings = canManageVotes ? (
       <div className="mun-inset space-y-3">
@@ -270,6 +376,81 @@ export function VotingPanel({
                 </span>
               ) : null}
             </div>
+            {canManageVotes ? (
+              <div className="mun-inset space-y-2">
+                <p className="mun-label">
+                  Delegate roll call ({roster.length})
+                </p>
+                {roster.length === 0 ? (
+                  <p className="mun-muted">No seated delegates available for this motion.</p>
+                ) : (
+                  <div className="max-h-[26rem] space-y-2 overflow-y-auto pr-1">
+                    {roster.map((row) => {
+                      const recorded = voteMap[row.userId];
+                      const abstainAllowedByVoteType =
+                        item.vote_type === "resolution" || item.vote_type === "amendment";
+                      const canAbstain = abstainAllowedByVoteType && row.rollAttendance !== "present_voting";
+                      return (
+                        <div
+                          key={`${item.id}-${row.allocationId}`}
+                          className="rounded-lg border border-slate-200/80 bg-white px-3 py-2 dark:border-white/10 dark:bg-black/20"
+                        >
+                          <div className="flex flex-wrap items-start justify-between gap-2">
+                            <div>
+                              <p className="font-medium text-brand-navy">{row.country}</p>
+                              <p className="mt-0.5 text-xs text-slate-500 dark:text-brand-muted">
+                                Roll: {rollAttendanceRollLabel(row.rollAttendance)} · Recorded:{" "}
+                                <span className="font-medium text-brand-navy">
+                                  {recorded === "yes"
+                                    ? "Yes"
+                                    : recorded === "no"
+                                      ? "No"
+                                      : recorded === "abstain"
+                                        ? "Abstain"
+                                        : "—"}
+                                </span>
+                              </p>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              <button
+                                type="button"
+                                onClick={() => void recordVoteForMotion(item.id, row.userId, "yes")}
+                                className="rounded-lg bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600"
+                              >
+                                Yes
+                              </button>
+                              {canAbstain ? (
+                                <button
+                                  type="button"
+                                  onClick={() => void recordVoteForMotion(item.id, row.userId, "abstain")}
+                                  className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500"
+                                >
+                                  Abstain
+                                </button>
+                              ) : null}
+                              <button
+                                type="button"
+                                onClick={() => void recordVoteForMotion(item.id, row.userId, "no")}
+                                className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600"
+                              >
+                                No
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => void clearVoteForMotion(item.id, row.userId)}
+                                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-white/20 dark:bg-white/10 dark:text-brand-navy dark:hover:bg-white/15"
+                              >
+                                Clear
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ) : null}
             {canManageVotes ? (
               <button
                 type="button"
