@@ -51,7 +51,8 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
 
   return (
     <fieldset className="rounded-lg border border-white/10 bg-black/20 p-2 space-y-2">
-      <legend className="text-sm font-semibold text-brand-navy px-1">{criterion.label}</legend>
+      <legend className="sr-only">{criterion.label}</legend>
+      <p className="px-1 pt-0.5 text-sm font-semibold text-brand-navy">{criterion.label}</p>
       <input type="hidden" name={`score_${criterion.key}`} value={score ?? ""} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4 xl:auto-rows-fr">
         {PROFICIENCY_BAND_ORDER.map((bandId, i) => {
