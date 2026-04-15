@@ -219,6 +219,7 @@ export async function submitChairTopNominationAction(
       revalidatePath("/chair/awards");
       revalidatePath("/smt/awards");
       revalidatePath("/smt");
+      revalidatePath("/profile");
       return { ok: true };
     }
     return { ok: false, error: "Select a nominee for this slot." };
@@ -331,6 +332,7 @@ export async function submitChairTopNominationAction(
   revalidatePath("/chair/awards");
   revalidatePath("/smt/awards");
   revalidatePath("/smt");
+  revalidatePath("/profile");
   return { ok: true };
 }
 

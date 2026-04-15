@@ -36,12 +36,73 @@ export default async function ProfilePage() {
     .select("*")
     .eq("recipient_profile_id", user.id)
     .order("created_at", { ascending: true });
+  const { data: myPendingNominations } = await supabase
+    .from("award_nominations")
+    .select("id, nomination_type, rank, evidence_note, committee_conference_id")
+    .eq("nominee_profile_id", user.id)
+    .eq("status", "pending")
+    .order("created_at", { ascending: true });
+  const { data: mySeats } = await supabase
+    .from("allocations")
+    .select("id, conference_id, country")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: true });
+  const seatIds = (mySeats ?? []).map((s) => s.id);
+  const { data: myDelegatePoints } =
+    seatIds.length > 0
+      ? await supabase
+          .from("chair_delegate_points")
+          .select("id, allocation_id, point_text, created_at, conference_id")
+          .in("allocation_id", seatIds)
+          .order("created_at", { ascending: false })
+      : { data: [] as { id: string; allocation_id: string; point_text: string; created_at: string; conference_id: string }[] };
+  const { data: mySpeechNotes } =
+    seatIds.length > 0
+      ? await supabase
+          .from("chair_speech_notes")
+          .select("id, allocation_id, speaker_label, content, created_at, conference_id")
+          .in("allocation_id", seatIds)
+          .order("created_at", { ascending: false })
+      : {
+          data: [] as {
+            id: string;
+            allocation_id: string | null;
+            speaker_label: string;
+            content: string;
+            created_at: string;
+            conference_id: string;
+          }[],
+        };
+  const { data: myMotions } =
+    seatIds.length > 0
+      ? await supabase
+          .from("vote_items")
+          .select("id, title, description, vote_type, procedure_code, created_at, conference_id, motioner_allocation_id")
+          .in("motioner_allocation_id", seatIds)
+          .order("created_at", { ascending: false })
+      : {
+          data: [] as {
+            id: string;
+            title: string | null;
+            description: string | null;
+            vote_type: string;
+            procedure_code: string | null;
+            created_at: string;
+            conference_id: string;
+            motioner_allocation_id: string | null;
+          }[],
+        };
+  const seatById = new Map((mySeats ?? []).map((s) => [s.id, s]));
 
   const committeeIds = [
     ...new Set(
-      (myAwards ?? [])
-        .map((a) => a.committee_conference_id)
-        .filter((id): id is string => Boolean(id))
+      [
+        ...(myAwards ?? []).map((a) => a.committee_conference_id),
+        ...(myPendingNominations ?? []).map((a) => a.committee_conference_id),
+        ...(myDelegatePoints ?? []).map((a) => a.conference_id),
+        ...(mySpeechNotes ?? []).map((a) => a.conference_id),
+        ...(myMotions ?? []).map((a) => a.conference_id),
+      ].filter((id): id is string => Boolean(id))
     ),
   ];
   const { data: awardConfs } =
@@ -135,6 +196,119 @@ export default async function ProfilePage() {
     <MunPageShell title="Profile">
       {delegateWelcome}
       {isDelegate && <DelegateMaterialsExportCard />}
+      {(myPendingNominations?.length ?? 0) > 0 && (
+        <div className="mb-8 rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
+          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+            Pending chair nominations
+          </h3>
+          <p className="mb-3 text-xs text-brand-muted">
+            Saved by chairs and shared with SMT for review. Final awards appear below after confirmation.
+          </p>
+          <ul className="space-y-2 text-sm">
+            {(myPendingNominations ?? []).map((n) => {
+              const category = awardCategoryMeta(n.nomination_type);
+              const where = n.committee_conference_id
+                ? committeeLabel[n.committee_conference_id] ?? "Committee session"
+                : null;
+              return (
+                <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                  <span className="font-medium text-brand-navy">
+                    {category?.label ?? n.nomination_type}
+                  </span>
+                  <span className="text-brand-muted"> · rank {n.rank}</span>
+                  {where && <span className="text-brand-muted"> · {where}</span>}
+                  {n.evidence_note && (
+                    <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {isDelegate && (myDelegatePoints?.length ?? 0) > 0 && (
+        <div className="mb-8 rounded-xl border border-sky-300/40 bg-sky-50/40 p-4 md:p-5">
+          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+            Chair points (private)
+          </h3>
+          <p className="mb-3 text-xs text-brand-muted">
+            Visible only to you, committee chairs, and SMT for the relevant committee.
+          </p>
+          <ul className="space-y-2 text-sm">
+            {(myDelegatePoints ?? []).map((p) => {
+              const where = committeeLabel[p.conference_id] ?? "Committee session";
+              const seat = seatById.get(p.allocation_id);
+              return (
+                <li key={p.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                  <span className="font-medium text-brand-navy">{p.point_text}</span>
+                  <span className="text-brand-muted"> · {seat?.country ?? "Delegate"}</span>
+                  <span className="text-brand-muted"> · {where}</span>
+                  <p className="mt-0.5 text-xs text-brand-muted">
+                    {new Date(p.created_at).toLocaleString()}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {isDelegate && (mySpeechNotes?.length ?? 0) > 0 && (
+        <div className="mb-8 rounded-xl border border-violet-300/40 bg-violet-50/40 p-4 md:p-5">
+          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+            Chair speech notes (private)
+          </h3>
+          <p className="mb-3 text-xs text-brand-muted">
+            Visible only to you, committee chairs, and SMT for the relevant committee.
+          </p>
+          <ul className="space-y-2 text-sm">
+            {(mySpeechNotes ?? []).map((n) => {
+              const where = committeeLabel[n.conference_id] ?? "Committee session";
+              return (
+                <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                  <span className="font-medium text-brand-navy">{n.speaker_label || "Speech note"}</span>
+                  <span className="text-brand-muted"> · {where}</span>
+                  <p className="mt-0.5 text-xs text-brand-muted">{n.content}</p>
+                  <p className="mt-0.5 text-xs text-brand-muted">
+                    {new Date(n.created_at).toLocaleString()}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {isDelegate && (myMotions?.length ?? 0) > 0 && (
+        <div className="mb-8 rounded-xl border border-emerald-300/40 bg-emerald-50/40 p-4 md:p-5">
+          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+            Motions you moved
+          </h3>
+          <p className="mb-3 text-xs text-brand-muted">
+            Saved to your profile for committee review and SMT oversight.
+          </p>
+          <ul className="space-y-2 text-sm">
+            {(myMotions ?? []).map((m) => {
+              const where = committeeLabel[m.conference_id] ?? "Committee session";
+              const title = m.title?.trim() || m.procedure_code?.replace(/_/g, " ") || "Untitled motion";
+              return (
+                <li key={m.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                  <span className="font-medium text-brand-navy">{title}</span>
+                  <span className="text-brand-muted"> · {where}</span>
+                  <p className="mt-0.5 text-xs text-brand-muted capitalize">
+                    {m.vote_type}
+                    {m.procedure_code ? ` · ${m.procedure_code.replace(/_/g, " ")}` : ""}
+                  </p>
+                  {m.description?.trim() ? (
+                    <p className="mt-0.5 text-xs text-brand-muted">{m.description.trim()}</p>
+                  ) : null}
+                  <p className="mt-0.5 text-xs text-brand-muted">
+                    {new Date(m.created_at).toLocaleString()}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
       {(myAwards?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-gold/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">

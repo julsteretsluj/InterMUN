@@ -22,11 +22,30 @@ export default async function ChairMotionsPointsPage() {
   }
 
   const conferenceId = await requireActiveConferenceId();
+  const { data: allocationRows } = await supabase
+    .from("allocations")
+    .select("id, country, user_id, profiles(name, role)")
+    .eq("conference_id", conferenceId)
+    .not("user_id", "is", null)
+    .order("country", { ascending: true });
+
+  const delegateOptions = (allocationRows ?? [])
+    .map((r) => {
+      const embed = Array.isArray(r.profiles) ? r.profiles[0] : r.profiles;
+      const roleLower = embed?.role?.toString().trim().toLowerCase();
+      if (!r.user_id || roleLower === "chair") return null;
+      const name = embed?.name?.trim();
+      return {
+        allocationId: r.id,
+        label: name ? `${r.country} — ${name}` : r.country,
+      };
+    })
+    .filter((row): row is { allocationId: string; label: string } => row != null);
 
   return (
-    <MunPageShell title="📜 Motions & Points">
+    <MunPageShell title="• Points log">
       <div className="space-y-2">
-        <ChairMotionsPointsLog conferenceId={conferenceId} />
+        <ChairMotionsPointsLog conferenceId={conferenceId} delegateOptions={delegateOptions} />
       </div>
     </MunPageShell>
   );

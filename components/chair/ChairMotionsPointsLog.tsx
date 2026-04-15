@@ -1,115 +1,137 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { CHAIR_MOTIONS_POINTS_PRESETS } from "@/lib/chair-motions-points-presets";
-import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
-import { useCommitteeSyncedState } from "@/lib/hooks/useCommitteeSyncedState";
+import { createClient } from "@/lib/supabase/client";
 
-export type MotionsLogEntry = {
+type DelegateOption = {
+  allocationId: string;
+  label: string;
+};
+
+export type DelegatePointEntry = {
   id: string;
-  kind: "motion" | "point";
+  allocationId: string;
+  delegateLabel: string;
   text: string;
   starred: boolean;
   createdAt: string;
 };
 
-function coerceLogEntry(row: unknown): MotionsLogEntry | null {
-  if (typeof row !== "object" || row === null) return null;
-  const r = row as Record<string, unknown>;
-  if (typeof r.id !== "string") return null;
-  if (r.kind !== "motion" && r.kind !== "point") return null;
-  if (typeof r.text !== "string") return null;
-  if (typeof r.createdAt !== "string") return null;
-  return {
-    id: r.id,
-    kind: r.kind,
-    text: r.text,
-    createdAt: r.createdAt,
-    starred: r.starred === true,
-  };
-}
+export function ChairMotionsPointsLog({
+  conferenceId,
+  delegateOptions,
+}: {
+  conferenceId: string;
+  delegateOptions: DelegateOption[];
+}) {
+  const supabase = useMemo(() => createClient(), []);
+  const [entries, setEntries] = useState<DelegatePointEntry[]>([]);
+  const [ready, setReady] = useState(false);
+  const [selectedAllocationId, setSelectedAllocationId] = useState("");
+  const [draft, setDraft] = useState("");
+  const [myUserId, setMyUserId] = useState<string | null>(null);
 
-function parseLogPayload(raw: unknown): MotionsLogEntry[] {
-  const mapList = (arr: unknown[]) =>
-    arr.map(coerceLogEntry).filter((x): x is MotionsLogEntry => x != null);
-  if (Array.isArray(raw)) {
-    return mapList(raw);
-  }
-  if (raw && typeof raw === "object" && "entries" in raw) {
-    const e = (raw as { entries: unknown }).entries;
-    if (Array.isArray(e)) return mapList(e);
-  }
-  return [];
-}
-
-function loadLegacyLog(storageKey: string): MotionsLogEntry[] | null {
-  try {
-    const raw = localStorage.getItem(storageKey);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) return null;
-    const entries = parseLogPayload(parsed);
-    return entries.length > 0 ? entries : null;
-  } catch {
-    return null;
-  }
-}
-
-export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }) {
-  const storageKey = `intermun.chair.motionsLog.${conferenceId}.v1`;
-  const loadLegacy = useCallback(
-    () => (typeof window !== "undefined" ? loadLegacyLog(storageKey) : null),
-    [storageKey]
+  const pointsPresets = useMemo(
+    () => CHAIR_MOTIONS_POINTS_PRESETS.filter((p) => p.kind === "point"),
+    []
   );
 
-  const { value: entries, setValue: persist, ready } = useCommitteeSyncedState({
-    conferenceId,
-    stateKey: COMMITTEE_SYNCED_STATE_KEYS.MOTIONS_LOG,
-    defaultValue: [] as MotionsLogEntry[],
-    parsePayload: parseLogPayload,
-    toPayload: (list) => ({ entries: list }),
-    hasMeaningfulData: (list) => list.length > 0,
-    loadLegacy,
-  });
+  const loadPoints = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("chair_delegate_points")
+      .select("id, allocation_id, point_text, starred, created_at, allocations(country)")
+      .eq("conference_id", conferenceId)
+      .order("created_at", { ascending: false })
+      .limit(300);
+    if (error) {
+      setReady(true);
+      return;
+    }
+    type Row = {
+      id: string;
+      allocation_id: string;
+      point_text: string;
+      starred: boolean;
+      created_at: string;
+      allocations: { country: string | null } | { country: string | null }[] | null;
+    };
+    const rows = (data ?? []) as Row[];
+    const mapped: DelegatePointEntry[] = rows.map((r) => {
+      const alloc = Array.isArray(r.allocations) ? r.allocations[0] : r.allocations;
+      const country = alloc?.country?.trim() || "Delegate";
+      return {
+        id: r.id,
+        allocationId: r.allocation_id,
+        delegateLabel: country,
+        text: r.point_text,
+        starred: r.starred === true,
+        createdAt: r.created_at,
+      };
+    });
+    setEntries(mapped);
+    setReady(true);
+  }, [conferenceId, supabase]);
 
-  const [kind, setKind] = useState<"motion" | "point">("motion");
-  const [draft, setDraft] = useState("");
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadPoints();
+  }, [loadPoints]);
+
+  useEffect(() => {
+    void supabase.auth.getUser().then(({ data }) => {
+      setMyUserId(data.user?.id ?? null);
+    });
+  }, [supabase]);
+
+  useEffect(() => {
+    const ch = supabase
+      .channel(`chair-delegate-points-${conferenceId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "chair_delegate_points" },
+        () => void loadPoints()
+      )
+      .subscribe();
+    return () => {
+      void supabase.removeChannel(ch);
+    };
+  }, [conferenceId, loadPoints, supabase]);
 
   const addEntry = useCallback(
-    (text: string, entryKind: "motion" | "point") => {
+    async (text: string) => {
       const t = text.trim();
-      if (!t) return;
-      const row: MotionsLogEntry = {
-        id: crypto.randomUUID(),
-        kind: entryKind,
-        text: t,
+      if (!t || !selectedAllocationId || !myUserId) return;
+      const { error } = await supabase.from("chair_delegate_points").insert({
+        conference_id: conferenceId,
+        chair_user_id: myUserId,
+        allocation_id: selectedAllocationId,
+        point_text: t,
         starred: false,
-        createdAt: new Date().toISOString(),
-      };
-      persist([row, ...entries]);
+      });
+      if (!error) setDraft("");
     },
-    [entries, persist]
+    [conferenceId, myUserId, selectedAllocationId, supabase]
   );
 
   const add = useCallback(() => {
-    addEntry(draft, kind);
-    setDraft("");
-  }, [draft, kind, addEntry]);
+    void addEntry(draft);
+  }, [addEntry, draft]);
 
   const remove = useCallback(
-    (id: string) => {
-      persist(entries.filter((e) => e.id !== id));
+    async (id: string) => {
+      await supabase.from("chair_delegate_points").delete().eq("id", id);
     },
-    [entries, persist]
+    [supabase]
   );
 
   const toggleStar = useCallback(
-    (id: string) => {
-      persist(entries.map((e) => (e.id === id ? { ...e, starred: !e.starred } : e)));
+    async (entry: DelegatePointEntry) => {
+      await supabase.from("chair_delegate_points").update({ starred: !entry.starred }).eq("id", entry.id);
     },
-    [entries, persist]
+    [supabase]
   );
 
   const sorted = useMemo(
@@ -123,11 +145,12 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
   return (
     <div className="space-y-6">
       <p className="text-sm text-slate-600 dark:text-zinc-400">
-        Record and star motions and points — synced for all chairs on this committee.
+        Record and star points for delegates. Entries are saved to each delegate account/profile and are visible only
+        to that delegate plus committee chair/SMT.
       </p>
 
       <div className="rounded-xl border border-amber-200/80 bg-amber-50/60 p-4 text-sm text-amber-950 dark:border-amber-900/50 dark:bg-amber-950/25 dark:text-amber-100">
-        <p className="font-medium">Informal log (shared across devices)</p>
+        <p className="font-medium">Points log (account-synced)</p>
         <p className="mt-1 text-amber-900/85 dark:text-amber-200/90">
           Formal procedural votes and the motion floor are in{" "}
           <Link
@@ -141,30 +164,21 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
       </div>
 
       <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => setKind("motion")}
-            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${
-              kind === "motion"
-                ? "bg-slate-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                : "border border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
-            }`}
+        <label className="block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+          Delegate
+          <select
+            value={selectedAllocationId}
+            onChange={(e) => setSelectedAllocationId(e.target.value)}
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
-            📜 Motion
-          </button>
-          <button
-            type="button"
-            onClick={() => setKind("point")}
-            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${
-              kind === "point"
-                ? "bg-slate-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                : "border border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
-            }`}
-          >
-            • Point
-          </button>
-        </div>
+            <option value="">Select delegate…</option>
+            {delegateOptions.map((d) => (
+              <option key={d.allocationId} value={d.allocationId}>
+                {d.label}
+              </option>
+            ))}
+          </select>
+        </label>
         <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
           Text
           <input
@@ -179,7 +193,7 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
           <button
             type="button"
             onClick={add}
-            disabled={!draft.trim()}
+            disabled={!draft.trim() || !selectedAllocationId || !myUserId}
             className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-500"
           >
             ➕ Add
@@ -191,14 +205,15 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
             Preset options
           </summary>
           <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400">
-            Tap a preset to add it to the log with the correct motion or point type.
+            Tap a preset to add a point for the selected delegate.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {CHAIR_MOTIONS_POINTS_PRESETS.map((p) => (
+            {pointsPresets.map((p) => (
               <button
                 key={p.id}
                 type="button"
-                onClick={() => addEntry(p.logText, p.kind)}
+                onClick={() => void addEntry(p.logText)}
+                disabled={!selectedAllocationId || !myUserId}
                 className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-left text-sm font-medium text-slate-800 hover:border-blue-300 hover:bg-blue-50/50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-blue-500/40 dark:hover:bg-blue-950/30"
               >
                 {p.buttonLabel}
@@ -223,7 +238,7 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
               >
                 <button
                   type="button"
-                  onClick={() => toggleStar(e.id)}
+                  onClick={() => void toggleStar(e)}
                   className="mt-0.5 shrink-0 text-amber-500 hover:text-amber-600 dark:text-amber-400"
                   aria-label={e.starred ? "Unstar" : "Star"}
                 >
@@ -231,7 +246,7 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
                 </button>
                 <div className="min-w-0 flex-1">
                   <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-                    {e.kind === "motion" ? "Motion" : "Point"}
+                    Point · {e.delegateLabel}
                   </span>
                   <p className="text-slate-900 dark:text-zinc-100">{e.text}</p>
                   <p className="text-xs text-slate-400 dark:text-zinc-500">
@@ -240,7 +255,7 @@ export function ChairMotionsPointsLog({ conferenceId }: { conferenceId: string }
                 </div>
                 <button
                   type="button"
-                  onClick={() => remove(e.id)}
+                  onClick={() => void remove(e.id)}
                   className="shrink-0 text-xs font-medium text-red-700 hover:underline dark:text-red-400"
                 >
                   Remove
