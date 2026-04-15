@@ -16,6 +16,7 @@ export type DigitalRoomAllocation = {
   id: string;
   country: string;
   user_id: string | null;
+  userRole?: string | null;
 };
 
 type PlacardFlags = {
@@ -54,11 +55,13 @@ export function ChairDigitalRoomClient({
   committeeLine,
   allocations,
   rollAttendanceByAllocationId,
+  isCrisisCommittee = false,
 }: {
   conferenceId: string;
   committeeLine: string;
   allocations: DigitalRoomAllocation[];
   rollAttendanceByAllocationId: Record<string, RollAttendance>;
+  isCrisisCommittee?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
   const [query, setQuery] = useState("");
@@ -119,7 +122,7 @@ export function ChairDigitalRoomClient({
   }, [sorted, query]);
 
   const speakerAllocOptions = useMemo(
-    () => sorted.map((a) => ({ id: a.id, country: a.country || "—" })),
+    () => sorted.map((a) => ({ id: a.id, country: a.country || "—", userRole: a.userRole ?? null })),
     [sorted]
   );
 
@@ -204,6 +207,7 @@ export function ChairDigitalRoomClient({
           conferenceId={conferenceId}
           allocations={speakerAllocOptions}
           variant="digital-room"
+          isCrisisCommittee={isCrisisCommittee}
         />
       </div>
 

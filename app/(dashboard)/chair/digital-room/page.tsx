@@ -4,6 +4,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairDigitalRoomClient } from "@/components/chair/ChairDigitalRoomClient";
 import { type RollAttendance, parseRollAttendance } from "@/lib/roll-attendance";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 
 export default async function ChairDigitalRoomPage() {
   const supabase = await createClient();
@@ -33,10 +34,20 @@ export default async function ChairDigitalRoomPage() {
   const committeeLine =
     [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
 
+  const allocationUserIds = [
+    ...new Set((allocationRows ?? []).map((r) => r.user_id).filter((id): id is string => Boolean(id))),
+  ];
+  const { data: allocationProfiles } =
+    allocationUserIds.length > 0
+      ? await supabase.from("profiles").select("id, role").in("id", allocationUserIds)
+      : { data: [] as { id: string; role: string | null }[] };
+  const roleByProfileId = new Map((allocationProfiles ?? []).map((p) => [p.id, p.role ?? null]));
+
   const allocations = (allocationRows ?? []).map((r) => ({
     id: r.id,
     country: r.country?.trim() || "—",
     user_id: r.user_id,
+    userRole: r.user_id ? roleByProfileId.get(r.user_id) ?? null : null,
   }));
 
   const rollAttendanceByAllocationId: Record<string, RollAttendance> = {};
@@ -56,6 +67,7 @@ export default async function ChairDigitalRoomPage() {
         committeeLine={committeeLine}
         allocations={allocations}
         rollAttendanceByAllocationId={rollAttendanceByAllocationId}
+        isCrisisCommittee={isCrisisCommittee(conf?.committee ?? null)}
       />
     </MunPageShell>
   );

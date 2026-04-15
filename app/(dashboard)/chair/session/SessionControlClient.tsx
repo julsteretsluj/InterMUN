@@ -39,6 +39,7 @@ import {
   rollAttendanceShortLabel,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
+import { isCrisisCommittee } from "@/lib/crisis-committee";
 
 const ROLL_ATTENDANCE_BUTTONS: {
   value: RollAttendance;
@@ -58,7 +59,7 @@ const ROLL_ATTENDANCE_BUTTONS: {
   { value: "absent", label: "Absent", title: "Absent" },
 ];
 
-type Alloc = { id: string; country: string; user_id: string | null };
+type Alloc = { id: string; country: string; user_id: string | null; userRole?: string | null };
 type RollRow = {
   allocation_id: string;
   present: boolean;
@@ -141,6 +142,7 @@ export function SessionControlClient({
 }) {
   const supabase = createClient();
   const [allocations, setAllocations] = useState<Alloc[]>([]);
+  const [isCrisisCommitteeSession, setIsCrisisCommitteeSession] = useState(false);
   const [roll, setRoll] = useState<RollRow[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [daisBody, setDaisBody] = useState("");
@@ -498,7 +500,20 @@ export function SessionControlClient({
           .maybeSingle(),
       ]);
 
-    setAllocations(sortAllocationsByDisplayCountry((allocs as Alloc[]) ?? []));
+    const allocRows = (allocs as Alloc[]) ?? [];
+    const allocUserIds = [
+      ...new Set(allocRows.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
+    ];
+    const { data: allocProfiles } =
+      allocUserIds.length > 0
+        ? await supabase.from("profiles").select("id, role").in("id", allocUserIds)
+        : { data: [] as { id: string; role: string | null }[] };
+    const roleByProfileId = new Map((allocProfiles ?? []).map((p) => [p.id, p.role ?? null]));
+    const allocationsWithRoles = allocRows.map((a) => ({
+      ...a,
+      userRole: a.user_id ? roleByProfileId.get(a.user_id) ?? null : null,
+    }));
+    setAllocations(sortAllocationsByDisplayCountry(allocationsWithRoles));
     setRoll(
       ((r as (Omit<RollRow, "attendance"> & { attendance?: string | null })[]) ?? []).map(
         (row) =>
@@ -521,15 +536,17 @@ export function SessionControlClient({
     } | null;
     setMotionFloorOpen(!!ps?.motion_floor_open);
 
+    const confForAgenda = confRow as {
+      consultation_before_moderated_caucus?: boolean;
+      event_id?: string | null;
+      committee?: string | null;
+    } | null;
     const precedence: CaucusDisruptivenessPrecedence =
-      (confRow as { consultation_before_moderated_caucus?: boolean } | null)?.consultation_before_moderated_caucus ===
-      false
-        ? "moderated_first"
-        : "consultation_first";
+      confForAgenda?.consultation_before_moderated_caucus === false ? "moderated_first" : "consultation_first";
     setCaucusPrecedence(precedence);
+    setIsCrisisCommitteeSession(isCrisisCommittee(confForAgenda?.committee ?? null));
 
     const agendaTopicsAllResolved: AgendaTopic[] = [];
-    const confForAgenda = confRow as { event_id?: string | null; committee?: string | null } | null;
     if (confForAgenda?.event_id && confForAgenda.committee) {
       const { data: topicRows } = await supabase
         .from("conferences")
@@ -3000,6 +3017,7 @@ export function SessionControlClient({
           conferenceId={conferenceId}
           allocations={allocations}
           variant="session"
+          isCrisisCommittee={isCrisisCommitteeSession}
           speakerListPromptKind={speakerListChairPrompt}
           onDismissSpeakerListPrompt={dismissSpeakerListPrompt}
           onNotify={(text) => setMsg(text)}

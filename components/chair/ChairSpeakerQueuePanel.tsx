@@ -4,6 +4,7 @@ import { forwardRef, useCallback, useEffect, useMemo, useState, useTransition } 
 import Link from "next/link";
 import { ChevronDown, ChevronUp, ListOrdered } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
 import {
   activeAllocationIdsInQueue,
   addAllocationToSpeakerQueue,
@@ -11,7 +12,7 @@ import {
   type SpeakerQueueEntry,
 } from "@/lib/speaker-queue";
 
-type Alloc = { id: string; country: string };
+type Alloc = { id: string; country: string; userRole?: string | null };
 
 /** Session: chair reminder to curate the speaker list (add / remove delegates). */
 export type SpeakerListChairPromptKind = "moderated_passed" | "moderated_timer" | "gsl";
@@ -20,6 +21,8 @@ type ChairSpeakerQueuePanelProps = {
   conferenceId: string;
   allocations: Alloc[];
   variant: "session" | "digital-room";
+  /** Crisis committees keep crisis actor seats even when linked to chair-role accounts. */
+  isCrisisCommittee?: boolean;
   speakerListPromptKind?: SpeakerListChairPromptKind | null;
   onDismissSpeakerListPrompt?: () => void;
   /** Session page: surface feedback in the shared message strip. */
@@ -39,6 +42,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       conferenceId,
       allocations,
       variant,
+      isCrisisCommittee = false,
       speakerListPromptKind = null,
       onDismissSpeakerListPrompt,
       onNotify,
@@ -88,6 +92,24 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }, [supabase, conferenceId, loadQueue]);
 
     const activeQueueAllocationIds = useMemo(() => activeAllocationIdsInQueue(queue), [queue]);
+    const speakerAllocations = useMemo(() => {
+      return allocations.filter((alloc) => {
+        const label = alloc.country?.trim() ?? "";
+        const key = label.toLowerCase();
+        const isDaisSeat =
+          key === DAIS_SEAT_HEAD_CHAIR.toLowerCase() ||
+          key === DAIS_SEAT_CO_CHAIR.toLowerCase() ||
+          key === "co chair";
+        if (isDaisSeat) return false;
+
+        const role = alloc.userRole?.toString().trim().toLowerCase();
+        if (role === "chair") {
+          // Crisis actors can be chair-role accounts with non-dais allocations.
+          return isCrisisCommittee;
+        }
+        return true;
+      });
+    }, [allocations, isCrisisCommittee]);
     const sortedQueue = useMemo(
       () => [...queue].sort((a, b) => a.sort_order - b.sort_order),
       [queue]
@@ -101,7 +123,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
     function addSpeaker() {
       if (!pickAlloc) return;
-      const a = allocations.find((x) => x.id === pickAlloc);
+      const a = speakerAllocations.find((x) => x.id === pickAlloc);
       if (!a) return;
       startTransition(async () => {
         const rows = await fetchSpeakerQueue(supabase, conferenceId);
@@ -118,7 +140,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }
 
     function addBulkSelectedToQueue() {
-      const toAdd = allocations
+      const toAdd = speakerAllocations
         .map((x) => x.id)
         .filter((id) => caucusBulkPick.includes(id) && !activeQueueAllocationIds.has(id));
       if (!toAdd.length) {
@@ -127,10 +149,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       }
       startTransition(async () => {
         let rows = await fetchSpeakerQueue(supabase, conferenceId);
-        const maxBase = rows.reduce((m, r) => Math.max(m, r.sort_order), 0);
         for (let i = 0; i < toAdd.length; i++) {
           const id = toAdd[i]!;
-          const alloc = allocations.find((x) => x.id === id);
+          const alloc = speakerAllocations.find((x) => x.id === id);
           const result = await addAllocationToSpeakerQueue(
             supabase,
             conferenceId,
@@ -264,18 +285,18 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   </p>
                 </div>
               </div>
-              {allocations.length === 0 ? (
+              {speakerAllocations.length === 0 ? (
                 <p className="text-sm text-brand-muted dark:text-amber-200/80">
                   No allocations are loaded for this committee yet. Dismiss when ready—you can add speakers later from
                   the list controls.
                 </p>
-              ) : allocations.some((a) => !activeQueueAllocationIds.has(a.id)) ? (
+              ) : speakerAllocations.some((a) => !activeQueueAllocationIds.has(a.id)) ? (
                 <div className="space-y-2">
                   <p className={`${labelClass} text-brand-muted dark:text-amber-200/70`}>
                     Quick add (not yet waiting or current)
                   </p>
                   <ul className="max-h-40 overflow-y-auto rounded border border-amber-200/80 bg-black/40 p-2 space-y-1.5 text-sm dark:border-amber-800/50 dark:bg-black/30">
-                    {allocations.map((a) => {
+                    {speakerAllocations.map((a) => {
                       if (activeQueueAllocationIds.has(a.id)) return null;
                       const checked = caucusBulkPick.includes(a.id);
                       return (
@@ -329,7 +350,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   </button>
                 </div>
               )}
-              {allocations.length === 0 ? (
+              {speakerAllocations.length === 0 ? (
                 <button
                   type="button"
                   disabled={pending}
@@ -354,7 +375,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                 onChange={(e) => setPickAlloc(e.target.value)}
               >
                 <option value="">Select…</option>
-                {allocations.map((a) => (
+                {speakerAllocations.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.country}
                   </option>
