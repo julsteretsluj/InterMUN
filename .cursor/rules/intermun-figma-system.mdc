@@ -1,0 +1,58 @@
+---
+description: InterMUN Figma system and UI constraints
+alwaysApply: true
+---
+
+# InterMUN Figma-First UI Rule
+
+Use the provided Figma system as the source of truth for UI work.
+
+## File / Page Structure (Figma)
+- Keep the 4-page structure in mind for all design decisions:
+  - `01 — Foundations`
+  - `02 — Components`
+  - `03 — Patterns (Screens)`
+  - `04 — Prototypes`
+
+## Foundations
+- Respect base color intents:
+  - `bg/primary #0B0B0F`, `bg/secondary #12121A`, `bg/glass rgba(255,255,255,0.04)`
+  - `text/primary #FFFFFF`, `text/secondary #B3B3B3`, `text/muted #6B6B6B`
+  - `accent/primary #1DB954`, `accent/warm #C2A878`, `accent/danger #FF5A5F`
+- Respect typography intents:
+  - UI Sans for app chrome (`h1/h2/body`)
+  - Serif for document surfaces
+  - Mono for system metadata
+- Use 8pt spacing rhythm: `4, 8, 12, 16, 24, 32, 48`.
+- Reuse glass/shadow patterns:
+  - Glass card feel with subtle stroke + blur
+  - Soft shadow depth
+
+## Components and Naming
+- Keep existing naming and structural semantics intact.
+- Build and evolve UI using the specified component families:
+  - Sidebar, Top Bar, Card, Dashboard Panel, Live Session Bar, Committees Card
+  - Documents (Clause Item / Editor / Toolbar)
+  - Messages Thread, Voting Button / Results Bar
+  - Chair Controls (Speakers List / Motion Button)
+  - Profile Header / Stats, Admin Table
+
+## Patterns
+- Compose screens from reusable components (Dashboard, Committees, Documents, Voting, Chair Controls).
+- Prefer consistency and reuse over one-off page-specific styling.
+
+## Auto Layout / Layout Behavior
+- Apply auto-layout principles in implementation:
+  - vertical page flow
+  - internal spacing around `16–24`
+  - inter-element gaps around `12–16`
+- Keep sidebar fixed and main content fill behavior.
+
+## Strict Constraint
+- Enhance UI only through:
+  - color
+  - texture
+  - motion
+- Do **not** change:
+  - labels
+  - information architecture / structural naming
