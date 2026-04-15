@@ -35,6 +35,7 @@ export function DashboardTopBar({
   notifications,
   showDelegateHubLink,
   brandHomeHref,
+  profileHref = "/profile",
 }: {
   userName: string;
   userEmail: string;
@@ -46,6 +47,8 @@ export function DashboardTopBar({
   showDelegateHubLink?: boolean;
   /** Mobile header logo target (sidebar brand uses the same hub). */
   brandHomeHref?: string;
+  /** Account menu target (e.g. SMT uses `/smt/profile`). */
+  profileHref?: string;
 }) {
   const initials = initialsFromName(userName, userEmail);
 
@@ -99,7 +102,7 @@ export function DashboardTopBar({
           <ThemeSelector />
           <div className="flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white py-1.5 pl-1.5 pr-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
             <Link
-              href="/profile"
+              href={profileHref}
               className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition hover:bg-slate-50 dark:hover:bg-zinc-800"
             >
               <span
