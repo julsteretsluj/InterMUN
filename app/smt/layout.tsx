@@ -6,6 +6,7 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isSmtRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
+import { isRoleOnlyDisplayName, stripRedundantLeadingRole } from "@/lib/utils";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -35,9 +36,12 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
   const email = user.email?.toLowerCase().trim();
   const isJules = email === "juleskittoastrop@gmail.com";
-  const secGenName = profile?.name?.trim() || "Jules";
+  const rawSecGenName = profile?.name?.trim() || "Jules";
+  const secGenDisplayName = stripRedundantLeadingRole(rawSecGenName, "Secretary General");
   const welcomeLabel = isJules
-    ? `Welcome Secretary General ${secGenName}`
+    ? isRoleOnlyDisplayName(rawSecGenName, "Secretary General")
+      ? "Welcome Secretary General"
+      : `Welcome Secretary General ${secGenDisplayName}`
     : "Welcome SMT";
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
 
