@@ -129,7 +129,7 @@ export function AwardsManagerClient({
   });
 
   return (
-    <div className="space-y-10 max-w-4xl">
+    <div className="space-y-10">
       <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/40 p-4 text-sm text-brand-muted">
         <p className="flex items-start gap-2">
           <Award className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />

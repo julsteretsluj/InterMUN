@@ -211,7 +211,7 @@ export default async function ChairAwardsPage() {
 
   return (
     <MunPageShell title="Score">
-      <div className="space-y-5 max-w-6xl">
+      <div className="space-y-5">
         <div className="rounded-xl border border-brand-navy/10 bg-sky-50/70 p-3 text-sm text-brand-muted">
           <p>
             Scoring matches the{" "}

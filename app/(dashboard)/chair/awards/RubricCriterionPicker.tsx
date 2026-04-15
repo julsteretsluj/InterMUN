@@ -53,7 +53,7 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
     <fieldset className="rounded-lg border border-white/10 bg-black/20 p-2 space-y-2">
       <legend className="text-sm font-semibold text-brand-navy px-1">{criterion.label}</legend>
       <input type="hidden" name={`score_${criterion.key}`} value={score ?? ""} />
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4 xl:auto-rows-fr">
         {PROFICIENCY_BAND_ORDER.map((bandId, i) => {
           const tone =
             bandId === "beginning"
@@ -69,7 +69,7 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
               key={bandId}
               type="button"
               onClick={() => selectBand(bandId)}
-              className={`text-left flex gap-1.5 cursor-pointer rounded-lg border p-2 transition-[box-shadow] ${tone} ${
+              className={`text-left flex h-full items-start gap-1.5 cursor-pointer rounded-lg border p-2 transition-[box-shadow] ${tone} ${
                 selected ? "ring-2 ring-brand-gold/60 border-brand-gold/70" : "hover:border-brand-navy/25"
               }`}
             >
@@ -79,7 +79,9 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
               />
               <span className="min-w-0 text-xs leading-snug">
                 <span className="font-semibold text-brand-navy">{PROFICIENCY_BAND_LABEL[bandId]}</span>
-                <span className="block text-brand-navy/80 mt-0.5">{criterion.bandDescriptions[i]}</span>
+                <span className="mt-0.5 block whitespace-normal break-words text-brand-navy/80">
+                  {criterion.bandDescriptions[i]}
+                </span>
               </span>
             </button>
           );

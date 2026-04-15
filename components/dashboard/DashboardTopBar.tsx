@@ -54,7 +54,7 @@ export function DashboardTopBar({
 
   return (
     <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/80 bg-[#f4f6fb]/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90">
-      <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
+      <div className="flex w-full flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
           href={brandHomeHref ?? "/profile"}
           className="flex shrink-0 items-center gap-2 lg:hidden"

@@ -907,7 +907,7 @@ export function SessionControlClient({
   }
 
   function recordDelegateVoteForAllocation(allocation: Alloc, value: "yes" | "no" | "abstain") {
-    if (!openMotion) {
+    if (!activeMotionForRecordedVotes) {
       setMsg("No motion open for voting.");
       return;
     }
@@ -917,14 +917,16 @@ export function SessionControlClient({
     }
 
     const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "absent";
-    const abstainAllowedByVoteType = openMotion.vote_type === "resolution" || openMotion.vote_type === "amendment";
+    const abstainAllowedByVoteType =
+      activeMotionForRecordedVotes.vote_type === "resolution" ||
+      activeMotionForRecordedVotes.vote_type === "amendment";
     const canAbstain = abstainAllowedByVoteType && attendance !== "present_voting";
     if (value === "abstain" && !canAbstain) {
       setMsg("Abstain is only available for resolutions/amendments when roll is not Present and voting.");
       return;
     }
     const uid = allocation.user_id;
-    const voteItemId = openMotion.id;
+    const voteItemId = activeMotionForRecordedVotes.id;
     startTransition(async () => {
       const { error } = await supabase.from("votes").upsert(
         { vote_item_id: voteItemId, user_id: uid, value },
@@ -940,12 +942,12 @@ export function SessionControlClient({
   }
 
   function clearDelegateVoteForAllocation(allocation: Alloc) {
-    if (!openMotion) {
+    if (!activeMotionForRecordedVotes) {
       setMsg("No motion open for voting.");
       return;
     }
     if (!allocation.user_id) return;
-    const voteItemId = openMotion.id;
+    const voteItemId = activeMotionForRecordedVotes.id;
     startTransition(async () => {
       const { error } = await supabase
         .from("votes")
@@ -1891,9 +1893,16 @@ export function SessionControlClient({
 
   const show = (id: Exclude<SessionFloorSection, "all">) =>
     activeSection === "all" || activeSection === id;
+  const activeMotionForRecordedVotes = useMemo(() => {
+    const boundId = timer.boundVoteItemId.trim();
+    if (boundId) {
+      return openVotingMotions.find((m) => m.id === boundId) ?? null;
+    }
+    return openMotion;
+  }, [openMotion, openVotingMotions, timer.boundVoteItemId]);
 
   return (
-    <div className="space-y-10 max-w-3xl">
+    <div className="space-y-10">
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
       {msg && (
         <p className="rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
@@ -2354,7 +2363,7 @@ export function SessionControlClient({
             <div className={surfaceSubpanel}>
               <p className={surfaceLabel}>
                 <span className="inline-flex items-center gap-1.5">
-                  Record votes — by allocation
+                  Record votes — {activeMotionForRecordedVotes?.title?.trim() || "current motion"}
                   <HelpButton title="Record votes">
                     Chairs register votes per allocation. Abstain appears only for amendment/resolution votes when roll
                     status is not Present and voting.
@@ -2374,7 +2383,8 @@ export function SessionControlClient({
                     const rollLabel = rollAttendanceRollLabel(rollA);
                     const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
                     const abstainAllowedByVoteType =
-                      openMotion.vote_type === "resolution" || openMotion.vote_type === "amendment";
+                      activeMotionForRecordedVotes?.vote_type === "resolution" ||
+                      activeMotionForRecordedVotes?.vote_type === "amendment";
                     const canAbstain = abstainAllowedByVoteType && (rollA ?? "absent") !== "present_voting";
                     return (
                       <div

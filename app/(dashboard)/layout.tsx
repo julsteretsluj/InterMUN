@@ -201,12 +201,12 @@ export default async function DashboardLayout({
         />
         {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
           <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950 sm:px-6">
-            <div className="mx-auto max-w-[1400px]">
+            <div className="w-full">
               <ChairLiveFloorThemed conferenceId={activeConf.id} />
             </div>
           </div>
         ) : null}
-        <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-8">
+        <main className="w-full flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-8">
           {children}
         </main>
       </div>
