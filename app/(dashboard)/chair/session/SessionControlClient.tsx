@@ -12,7 +12,11 @@ import {
   motionRequiresResolutionOnly,
 } from "@/lib/resolution-functions";
 import { recordClauseVoteOutcomesAction } from "@/app/actions/resolutions";
-import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import {
+  DAIS_SEAT_CO_CHAIR,
+  DAIS_SEAT_HEAD_CHAIR,
+  sortAllocationsByDisplayCountry,
+} from "@/lib/allocation-display-order";
 import { ropRequiredMajority } from "@/lib/rop-required-majority";
 import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
 import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness";
@@ -224,7 +228,20 @@ export function SessionControlClient({
   }, [timer.purpose, timer.boundVoteItemId, openVotingMotions]);
 
   const votingCallOrder = useMemo(
-    () => sortAllocationsByDisplayCountry(allocations),
+    () =>
+      sortAllocationsByDisplayCountry(
+        allocations.filter((a) => {
+          if (!a.user_id) return false;
+          const role = a.userRole?.toString().trim().toLowerCase();
+          if (role === "chair") return false;
+          const countryKey = a.country.trim().toLowerCase();
+          return (
+            countryKey !== DAIS_SEAT_HEAD_CHAIR.toLowerCase() &&
+            countryKey !== DAIS_SEAT_CO_CHAIR.toLowerCase() &&
+            countryKey !== "co chair"
+          );
+        })
+      ),
     [allocations]
   );
 
@@ -2359,7 +2376,7 @@ export function SessionControlClient({
             </span>
           </div>
 
-          {openMotion ? (
+          {activeMotionForRecordedVotes ? (
             <div className={surfaceSubpanel}>
               <p className={surfaceLabel}>
                 <span className="inline-flex items-center gap-1.5">
@@ -2374,8 +2391,11 @@ export function SessionControlClient({
                 Delegates cannot vote in the app. Chairs record votes for each allocation. Abstain appears only for
                 resolution/amendment votes when that delegation is not marked Present and voting.
               </p>
+              <p className="text-xs text-brand-muted">
+                Delegate roll for this motion: <span className="font-medium text-brand-navy">{votingCallOrder.length}</span>
+              </p>
               {votingCallOrder.length === 0 ? (
-                <p className="text-sm text-brand-muted">No allocations in this committee.</p>
+                <p className="text-sm text-brand-muted">No delegates are seated for this committee yet.</p>
               ) : (
                 <div className="max-h-[26rem] overflow-y-auto space-y-2 pr-1">
                   {votingCallOrder.map((call) => {
