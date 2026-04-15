@@ -64,6 +64,21 @@ html.dark {
   --color-brand-accent-ink: var(--brand-accent-ink);
 }
 
+html.dyslexic-font {
+  --font-sans: "Arial", "Helvetica Neue", "Verdana", sans-serif;
+  --font-display: "Arial", "Helvetica Neue", "Verdana", sans-serif;
+}
+
+html.dyslexic-font .font-serif,
+html.dyslexic-font .font-mono {
+  font-family: "Arial", "Helvetica Neue", "Verdana", sans-serif !important;
+}
+
+html.dyslexic-font body {
+  letter-spacing: 0.01em;
+  word-spacing: 0.04em;
+}
+
 body {
   min-height: 100%;
   background-color: #ffffff;

@@ -1,14 +1,19 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Moon, Palette, Sun } from "lucide-react";
+import { Check, Moon, Palette, Sun, Type } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   THEME_HUES,
   type ThemeHue,
   type ThemePreference,
 } from "@/lib/theme-storage";
-import { persistAndApplyTheme, readThemeFromStorage } from "@/lib/theme-document";
+import {
+  persistAndApplyDyslexicFont,
+  persistAndApplyTheme,
+  readDyslexicFontFromStorage,
+  readThemeFromStorage,
+} from "@/lib/theme-document";
 
 const HUE_META: Record<
   ThemeHue,
@@ -30,17 +35,16 @@ const HUE_META: Record<
 
 export function ThemeSelector({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState<ThemePreference>("light");
-  const [hue, setHue] = useState<ThemeHue>("green");
+  const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
+  const [hue, setHue] = useState<ThemeHue>(() => readThemeFromStorage().hue);
+  const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
   const [mounted, setMounted] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-    const t = readThemeFromStorage();
-    setMode(t.mode);
-    setHue(t.hue);
+    const frame = window.requestAnimationFrame(() => setMounted(true));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -77,6 +81,14 @@ export function ThemeSelector({ className }: { className?: string }) {
     },
     [mode]
   );
+
+  const toggleDyslexicFont = useCallback(() => {
+    setDyslexicFont((prev) => {
+      const next = !prev;
+      persistAndApplyDyslexicFont(next);
+      return next;
+    });
+  }, []);
 
   if (!mounted) {
     return (
@@ -199,6 +211,27 @@ export function ThemeSelector({ className }: { className?: string }) {
               );
             })}
           </div>
+
+          <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
+            Typography
+          </p>
+          <button
+            type="button"
+            onClick={toggleDyslexicFont}
+            className={cn(
+              "mt-2 flex w-full items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-medium transition",
+              dyslexicFont
+                ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-500 dark:bg-blue-950/50 dark:text-blue-100"
+                : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            )}
+            aria-pressed={dyslexicFont}
+          >
+            <span className="inline-flex items-center gap-2">
+              <Type className="size-4" strokeWidth={1.75} aria-hidden />
+              Dyslexic-friendly font
+            </span>
+            <span className="text-xs font-semibold">{dyslexicFont ? "On" : "Off"}</span>
+          </button>
         </div>
       ) : null}
     </div>
