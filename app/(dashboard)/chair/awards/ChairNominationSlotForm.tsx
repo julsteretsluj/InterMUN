@@ -35,6 +35,8 @@ type Props = {
   /** DB row id when this slot is already saved; drives remount after refresh. */
   nominationRowId: string | null;
   criteria: RubricCriterion[];
+  /** Submitted batch to SMT — no edits or autosave. */
+  locked?: boolean;
 };
 
 function shouldAttemptAutosave(
@@ -96,6 +98,7 @@ export function ChairNominationSlotForm({
   evidenceNote,
   nominationRowId,
   criteria,
+  locked = false,
 }: Props) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -148,6 +151,7 @@ export function ChairNominationSlotForm({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (locked) return;
     const form = e.currentTarget;
     setSubmitMessage(null);
     setAutosaveMessage(null);
@@ -182,6 +186,7 @@ export function ChairNominationSlotForm({
   }
 
   useEffect(() => {
+    if (locked) return;
     const id = window.setInterval(async () => {
       const form = formRef.current;
       if (!form) return;
@@ -201,10 +206,10 @@ export function ChairNominationSlotForm({
       }
     }, AUTOSAVE_MS);
     return () => window.clearInterval(id);
-  }, [keys, nominationType, rank, router, slotRequired]);
+  }, [keys, locked, nominationType, rank, router, slotRequired]);
 
   const formKey =
-    nominationRowId ?? `pending-${committeeConferenceId}-${nominationType}-${rank}`;
+    nominationRowId ?? `draft-${committeeConferenceId}-${nominationType}-${rank}`;
 
   return (
     <div key={formKey} className="rounded-xl border border-brand-navy/10 bg-logo-cyan/8 overflow-hidden">
@@ -243,7 +248,13 @@ export function ChairNominationSlotForm({
                 ) : null}
               </h4>
               <p className="text-[0.7rem] text-brand-muted mt-0.5">{typeLabel}</p>
+              {locked ? (
+                <p className="text-[0.65rem] text-emerald-800 dark:text-emerald-200/85 mt-1">
+                  Submitted to SMT — editing locked.
+                </p>
+              ) : null}
             </div>
+            {!locked ? (
             <button
               type="button"
               onClick={() => setMinimized(true)}
@@ -254,11 +265,12 @@ export function ChairNominationSlotForm({
               <span>Minimize</span>
               <ChevronUp className="w-4 h-4" aria-hidden />
             </button>
+            ) : null}
           </>
         )}
       </div>
 
-      <div className={minimized ? "hidden" : "p-3 pt-3"}>
+      <div className={minimized && !locked ? "hidden" : "p-3 pt-3"}>
       <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
         <input type="hidden" name="committee_conference_id" value={committeeConferenceId} />
         <input type="hidden" name="nomination_type" value={nominationType} />
@@ -270,7 +282,8 @@ export function ChairNominationSlotForm({
             value={nomineeId}
             onChange={(e) => setNomineeId(e.target.value)}
             required={slotRequired}
-            className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy"
+            disabled={locked}
+            className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <option value="">{slotRequired ? "Select delegate" : "Leave blank for no submission"}</option>
             {options.map((o) => (
@@ -290,6 +303,7 @@ export function ChairNominationSlotForm({
               criterion={criterion}
               initialScore={Number(scoreMap[criterion.key] ?? 0)}
               onScoreChange={onCriterionScore}
+              disabled={locked}
             />
           ))}
           <p className="text-xs text-brand-muted pt-1">
@@ -309,17 +323,24 @@ export function ChairNominationSlotForm({
             name="evidence_note"
             defaultValue={evidenceNote ?? ""}
             rows={3}
-            className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy placeholder:text-brand-muted/70"
+            readOnly={locked}
+            className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy placeholder:text-brand-muted/70 read-only:opacity-70"
             placeholder="Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions)."
           />
         </label>
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="submit"
-            disabled={isSaving}
+            disabled={isSaving || locked}
             className="px-4 py-2 rounded-lg bg-brand-accent text-white font-semibold disabled:opacity-60"
           >
-            {isSaving ? "Saving…" : slotRequired ? `Save ${typeLabel} top ${rank}` : `Save optional ${typeLabel} slot`}
+            {locked
+              ? "Locked"
+              : isSaving
+                ? "Saving…"
+                : slotRequired
+                  ? `Save ${typeLabel} top ${rank}`
+                  : `Save optional ${typeLabel} slot`}
           </button>
           {autosaveMessage ? (
             <span className="text-xs text-brand-muted" aria-live="polite">

@@ -12,6 +12,8 @@ import {
 } from "@/lib/seamuns-award-scoring";
 import { revalidatePath } from "next/cache";
 import { isSingleWinnerNominationType } from "@/lib/award-nomination-review";
+import { isPastAwardSubmissionDeadline } from "@/lib/award-submission";
+import { promoteCommitteeDraftsToPending } from "@/lib/award-committee-submit";
 
 type NominationType = NominationRubricType;
 
@@ -170,6 +172,100 @@ async function requireSmtOrAdmin() {
 
 export type SubmitChairNominationResult = { ok: true } | { ok: false; error: string };
 
+/** After the submission deadline, promotes complete draft batches when a chair opens the awards page. */
+export async function runChairAwardAutoSubmitIfDue(committeeConferenceId: string): Promise<void> {
+  if (!isPastAwardSubmissionDeadline()) return;
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return;
+
+  const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+  if (profile?.role !== "chair") return;
+
+  const { data: seat } = await supabase
+    .from("allocations")
+    .select("id")
+    .eq("conference_id", committeeConferenceId)
+    .eq("user_id", user.id)
+    .limit(1)
+    .maybeSingle();
+  if (!seat?.id) return;
+
+  const result = await promoteCommitteeDraftsToPending(supabase, committeeConferenceId, {
+    onlyIfPastDeadline: true,
+    isPastDeadline: isPastAwardSubmissionDeadline,
+    requireCompleteForIncomplete: false,
+  });
+
+  if (result.ok && result.didPromote) {
+    revalidatePath("/chair/awards");
+    revalidatePath("/smt/awards");
+    revalidatePath("/smt");
+    revalidatePath("/profile");
+  }
+}
+
+export async function submitCommitteeAwardDraftsToSmtAction(
+  committeeConferenceId: string
+): Promise<SubmitChairNominationResult> {
+  const auth = await requireChairOrSmt();
+  if (!auth.ok || !auth.user) {
+    return { ok: false, error: "You must be signed in as a chair, SMT member, or admin." };
+  }
+
+  const { data: profile } = await auth.supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", auth.user.id)
+    .maybeSingle();
+  const role = profile?.role?.toString().trim().toLowerCase();
+
+  if (role === "admin") {
+    // ok
+  } else {
+    if (role !== "chair") {
+      return { ok: false, error: "Only committee chairs (or admins) can submit nominations to SMT." };
+    }
+    const { data: canManage } = await auth.supabase
+      .from("allocations")
+      .select("id")
+      .eq("conference_id", committeeConferenceId)
+      .eq("user_id", auth.user.id)
+      .limit(1)
+      .maybeSingle();
+    if (!canManage?.id) {
+      return { ok: false, error: "You must be allocated as chair for this committee to submit." };
+    }
+  }
+
+  const result = await promoteCommitteeDraftsToPending(auth.supabase, committeeConferenceId, {
+    onlyIfPastDeadline: false,
+    isPastDeadline: () => true,
+    requireCompleteForIncomplete: true,
+  });
+
+  if (!result.ok) {
+    return { ok: false, error: result.error };
+  }
+  if (result.didPromote) {
+    revalidatePath("/chair/awards");
+    revalidatePath("/smt/awards");
+    revalidatePath("/smt");
+    revalidatePath("/profile");
+    return { ok: true };
+  }
+  if (result.reason === "already_submitted") {
+    return { ok: false, error: "These nominations were already sent to SMT." };
+  }
+  if (result.reason === "no_drafts") {
+    return { ok: false, error: "Nothing to submit yet. Save your required slots first." };
+  }
+  return { ok: false, error: "Could not submit nominations. Ensure every required slot is complete." };
+}
+
 export async function submitChairTopNominationAction(
   formData: FormData
 ): Promise<SubmitChairNominationResult> {
@@ -214,7 +310,7 @@ export async function submitChairTopNominationAction(
         .eq("committee_conference_id", committeeId)
         .eq("nomination_type", nominationType)
         .eq("rank", rank)
-        .eq("status", "pending");
+        .eq("status", "draft");
       if (error) return { ok: false, error: error.message };
       revalidatePath("/chair/awards");
       revalidatePath("/smt/awards");
@@ -293,14 +389,28 @@ export async function submitChairTopNominationAction(
     }
   }
 
+  const { data: profileForRole } = await auth.supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", auth.user.id)
+    .maybeSingle();
+  const actorRole = profileForRole?.role?.toString().trim().toLowerCase();
+
   const { data: existing } = await auth.supabase
     .from("award_nominations")
-    .select("id")
+    .select("id, status")
     .eq("committee_conference_id", committeeId)
     .eq("nomination_type", nominationType)
     .eq("rank", rank)
-    .eq("status", "pending")
+    .in("status", ["draft", "pending"])
     .maybeSingle();
+
+  if (existing?.status === "pending" && actorRole !== "smt" && actorRole !== "admin") {
+    return {
+      ok: false,
+      error: "This nomination was already submitted to SMT and cannot be edited here.",
+    };
+  }
 
   if (existing?.id) {
     const { error } = await auth.supabase
@@ -324,7 +434,7 @@ export async function submitChairTopNominationAction(
       evidence_note: evidence || null,
       rubric_scores: rubricScores,
       created_by: auth.user.id,
-      status: "pending",
+      status: "draft",
     });
     if (error) return { ok: false, error: error.message };
   }

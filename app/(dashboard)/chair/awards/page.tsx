@@ -10,6 +10,9 @@ import {
 } from "@/lib/seamuns-award-scoring";
 import { OverallAwardsProgress, SectionAwardsProgress } from "./AwardProgressBars";
 import { ChairNominationSlotForm } from "./ChairNominationSlotForm";
+import { ChairSubmitToSmtPanel } from "./ChairSubmitToSmtPanel";
+import { runChairAwardAutoSubmitIfDue } from "@/app/actions/awards";
+import { AWARD_SUBMISSION_DEADLINE_ISO } from "@/lib/award-submission";
 
 export const dynamic = "force-dynamic";
 
@@ -87,6 +90,7 @@ export default async function ChairAwardsPage() {
     if (!chairSeat?.id) {
       redirect("/chair/allocation-matrix");
     }
+    await runChairAwardAutoSubmitIfDue(activeConf.id);
   }
 
   const [{ data: delegates }, { data: nominations }] = await Promise.all([
@@ -98,9 +102,11 @@ export default async function ChairAwardsPage() {
       .order("country", { ascending: true }),
     supabase
       .from("award_nominations")
-      .select("id, nomination_type, rank, evidence_note, rubric_scores, status, nominee_profile_id, profiles(name)")
+      .select(
+        "id, nomination_type, rank, evidence_note, rubric_scores, status, submitted_to_smt_at, nominee_profile_id, profiles(name)"
+      )
       .eq("committee_conference_id", activeConf.id)
-      .eq("status", "pending")
+      .in("status", ["draft", "pending"])
       .order("nomination_type", { ascending: true })
       .order("rank", { ascending: true }),
   ]);
@@ -128,6 +134,7 @@ export default async function ChairAwardsPage() {
     evidence_note: string | null;
     rubric_scores: Record<string, number> | null;
     status: string;
+    submitted_to_smt_at: string | null;
     nominee_profile_id: string;
     profiles: { name: string | null } | { name: string | null }[] | null;
   };
@@ -209,6 +216,15 @@ export default async function ChairAwardsPage() {
     return isSlotComplete(typeId, rank, criteria);
   });
 
+  const alreadySubmittedToSmt = nominationRows.some((n) => n.status === "pending");
+  const hasDraftNominations = nominationRows.some((n) => n.status === "draft");
+  const allRequiredSlotsComplete = allRequiredKeys.every((k) => serverCompletedKeys.includes(k));
+  const canSubmitToSmt = hasDraftNominations && allRequiredSlotsComplete && !alreadySubmittedToSmt;
+  const submittedAtIso = nominationRows.find((n) => n.submitted_to_smt_at)?.submitted_to_smt_at ?? null;
+  const submittedAtLabel = submittedAtIso
+    ? new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(submittedAtIso))
+    : null;
+
   return (
     <MunPageShell title="Score">
       <div className="space-y-5">
@@ -230,13 +246,26 @@ export default async function ChairAwardsPage() {
             <strong className="text-brand-navy">Exemplary</strong>. Submit Top 2 with evidence; SMT confirms final
             awards.
           </p>
+          <p className="mt-2 text-xs text-brand-navy/85">
+            Submission to SMT is manual (button below) or automatic after{" "}
+            <span className="font-mono text-[0.65rem]">{AWARD_SUBMISSION_DEADLINE_ISO}</span> UTC when you next open
+            this page (if all required slots are complete).
+          </p>
           <ol className="mt-2.5 list-decimal space-y-1 pl-5 text-xs leading-relaxed text-brand-navy/85">
             <li>Select a nominee for each required Top slot.</li>
             <li>Pick exactly one band for every criterion row.</li>
             <li>Add concise evidence from debate, drafting, and diplomacy.</li>
             <li>Save required slots and add optional slots where applicable.</li>
+            <li>When ready, submit the full batch to SMT.</li>
           </ol>
         </div>
+        <ChairSubmitToSmtPanel
+          committeeConferenceId={activeConf.id}
+          canSubmit={canSubmitToSmt}
+          alreadySubmitted={alreadySubmittedToSmt}
+          submittedAtLabel={submittedAtLabel}
+          showChairControls={profile?.role === "chair"}
+        />
         <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
         <p className="text-xs text-brand-muted">
           Committee: {[activeConf.name, activeConf.committee].filter(Boolean).join(" — ")}
@@ -279,6 +308,7 @@ export default async function ChairAwardsPage() {
                     evidenceNote={existing?.evidence_note ?? null}
                     nominationRowId={existing?.id ?? null}
                     criteria={type.criteria}
+                    locked={existing?.status === "pending"}
                   />
                 );
               })}

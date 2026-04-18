@@ -16,9 +16,10 @@ type Props = {
   criterion: RubricCriterion;
   initialScore: number;
   onScoreChange: (key: string, score: number | null) => void;
+  disabled?: boolean;
 };
 
-export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }: Props) {
+export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, disabled = false }: Props) {
   const init = scoreToBandAndTier(initialScore);
   const [band, setBand] = useState<ProficiencyBandId | null>(init?.band ?? null);
   const [tier, setTier] = useState<BandTier | null>(init?.tier ?? null);
@@ -37,8 +38,9 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
   const score = band && tier ? bandAndTierToScore(band, tier) : null;
 
   useEffect(() => {
+    if (disabled) return;
     onScoreChange(criterion.key, score);
-  }, [score, criterion.key, onScoreChange]);
+  }, [score, criterion.key, onScoreChange, disabled]);
 
   function selectBand(b: ProficiencyBandId) {
     setBand(b);
@@ -50,7 +52,9 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
   }
 
   return (
-    <fieldset className="rounded-lg border border-white/10 bg-black/20 p-2 space-y-2">
+    <fieldset
+      className={`rounded-lg border border-white/10 bg-black/20 p-2 space-y-2 ${disabled ? "opacity-65 pointer-events-none" : ""}`}
+    >
       <legend className="sr-only">{criterion.label}</legend>
       <p className="px-1 pt-0.5 text-sm font-semibold text-brand-navy">{criterion.label}</p>
       <input type="hidden" name={`score_${criterion.key}`} value={score ?? ""} />
