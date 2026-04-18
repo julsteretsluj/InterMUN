@@ -1,10 +1,15 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getResolvedActiveConference } from "@/lib/active-conference";
+import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 
 export type ChairSessionConference = {
   conferenceId: string;
   conferenceTitle: string;
+  debateConferenceId: string;
+  canonicalConferenceId: string;
+  rosterConferenceIds: string[];
+  debateTopicOptions: { id: string; label: string }[];
 };
 
 /**
@@ -36,6 +41,14 @@ export async function loadChairSessionConference(): Promise<ChairSessionConferen
   const active = await getResolvedActiveConference();
   if (!active) return null;
 
+  const bundle = await getResolvedDebateConferenceBundle(supabase, active.id);
   const conferenceTitle = [active.name, active.committee].filter(Boolean).join(" — ");
-  return { conferenceId: active.id, conferenceTitle };
+  return {
+    conferenceId: active.id,
+    conferenceTitle,
+    debateConferenceId: bundle.debateConferenceId,
+    canonicalConferenceId: bundle.canonicalConferenceId,
+    rosterConferenceIds: bundle.siblingConferenceIds,
+    debateTopicOptions: bundle.debateTopicOptions,
+  };
 }

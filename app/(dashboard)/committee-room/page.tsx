@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
+import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
@@ -28,6 +29,7 @@ export default async function CommitteeRoomPage() {
   const payload = await loadCommitteeRoomPayload(supabase, conferenceId, {
     includeDelegatesForStaff: canManageSeats,
   });
+  const debateBundle = await getResolvedDebateConferenceBundle(supabase, conferenceId);
 
   const verifiedConferenceId = await getVerifiedConferenceId();
   const smtVerified = myRole === "smt" && verifiedConferenceId === conferenceId;
@@ -54,6 +56,9 @@ export default async function CommitteeRoomPage() {
     <MunPageShell title="Committee room">
       <CommitteeRoomDigitalMUNClient
         conferenceId={conferenceId}
+        floorConferenceId={debateBundle.debateConferenceId}
+        canonicalConferenceId={debateBundle.canonicalConferenceId}
+        siblingConferenceIds={debateBundle.siblingConferenceIds}
         conferenceName={payload.conference?.name ?? "Conference"}
         committeeName={payload.conference?.committee ?? "General Assembly"}
         placards={payload.placards}

@@ -18,6 +18,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { parseRollAttendance } from "@/lib/roll-attendance";
+import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
 
 function StatMiniCard({
   label,
@@ -66,6 +67,9 @@ function StatMiniCard({
 
 export function CommitteeRoomDigitalMUNClient({
   conferenceId,
+  floorConferenceId: floorConferenceIdProp,
+  canonicalConferenceId,
+  siblingConferenceIds,
   conferenceName,
   committeeName,
   placards,
@@ -84,6 +88,10 @@ export function CommitteeRoomDigitalMUNClient({
   chairs,
 }: {
   conferenceId: string;
+  /** Live floor: motions, procedure, timers, speaker queue. */
+  floorConferenceId: string;
+  canonicalConferenceId: string;
+  siblingConferenceIds: string[];
   conferenceName: string;
   committeeName: string;
   placards: DelegatePlacard[];
@@ -108,6 +116,12 @@ export function CommitteeRoomDigitalMUNClient({
     role !== "chair" && role !== "smt" && role !== "admin";
 
   const supabase = useMemo(() => createClient(), []);
+  const floorConferenceId = useLiveDebateConferenceId(
+    supabase,
+    floorConferenceIdProp,
+    canonicalConferenceId,
+    siblingConferenceIds
+  );
   const searchFieldId = useId();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [procedureState, setProcedureState] = useState<"debate_open" | "voting_procedure">("debate_open");
@@ -143,7 +157,7 @@ export function CommitteeRoomDigitalMUNClient({
       const { data: ps } = await supabase
         .from("procedure_states")
         .select("state, current_vote_item_id, committee_session_started_at")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
 
       if (!isActive) return;
@@ -160,14 +174,14 @@ export function CommitteeRoomDigitalMUNClient({
     void load();
 
     const ch = supabase
-      .channel(`procedure-state-${conferenceId}`)
+      .channel(`procedure-state-${floorConferenceId}`)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
           table: "procedure_states",
-          filter: `conference_id=eq.${conferenceId}`,
+          filter: `conference_id=eq.${floorConferenceId}`,
         },
         (payload) => {
           const row = payload.new as {
@@ -191,7 +205,7 @@ export function CommitteeRoomDigitalMUNClient({
       isActive = false;
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId]);
+  }, [supabase, floorConferenceId]);
 
   useEffect(() => {
     if (!isDelegate) return;
@@ -410,7 +424,7 @@ export function CommitteeRoomDigitalMUNClient({
               </div>
               <div className="space-y-4">
                 <FloorStatusBar
-                  conferenceId={conferenceId}
+                  conferenceId={floorConferenceId}
                   observeOnly={false}
                   theme="dark"
                   activeMotionVoteItemId={
@@ -444,7 +458,7 @@ export function CommitteeRoomDigitalMUNClient({
                           <MotionVotingClient voteItemId={currentVoteItemId ?? null} />
                         ) : null}
                         <RequestToSpeakClient
-                          conferenceId={conferenceId}
+                          conferenceId={floorConferenceId}
                           allocationId={myAllocationId}
                           allocationCountry={myAllocationCountry}
                           disabled={procedureState === "voting_procedure"}

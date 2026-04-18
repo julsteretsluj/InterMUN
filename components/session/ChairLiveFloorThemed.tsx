@@ -10,9 +10,13 @@ function isDocDark() {
 /** Syncs `ChairLiveFloor` `theme` with the `html.dark` class (theme toggle). */
 export function ChairLiveFloorThemed({
   conferenceId,
+  canonicalConferenceId,
+  siblingConferenceIds,
   observeFloorOnly = false,
 }: {
   conferenceId: string;
+  canonicalConferenceId: string;
+  siblingConferenceIds: string[];
   observeFloorOnly?: boolean;
 }) {
   const [dark, setDark] = useState(false);
@@ -28,6 +32,8 @@ export function ChairLiveFloorThemed({
   return (
     <ChairLiveFloor
       conferenceId={conferenceId}
+      canonicalConferenceId={canonicalConferenceId}
+      siblingConferenceIds={siblingConferenceIds}
       theme={dark ? "dark" : "light"}
       observeFloorOnly={observeFloorOnly}
     />

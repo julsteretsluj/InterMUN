@@ -3,12 +3,15 @@ import { ChairCommitteeSessionControl } from "@/components/chair/ChairCommitteeS
 export function SessionFloorOverview({
   conferenceId,
   conferenceTitle,
+  canonicalConferenceId,
   initialCommitteeSessionStartedAt,
   initialCommitteeSessionDurationSeconds,
   initialCommitteeSessionEndsAt,
 }: {
   conferenceId: string;
   conferenceTitle: string;
+  /** Committee-wide session timer + history (canonical `conferences.id`). */
+  canonicalConferenceId: string;
   initialCommitteeSessionStartedAt: string | null;
   initialCommitteeSessionDurationSeconds: number | null;
   initialCommitteeSessionEndsAt: string | null;
@@ -17,7 +20,7 @@ export function SessionFloorOverview({
     <div className="space-y-4">
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
       <ChairCommitteeSessionControl
-        conferenceId={conferenceId}
+        conferenceId={canonicalConferenceId}
         initialStartedAt={initialCommitteeSessionStartedAt}
         initialDurationSeconds={initialCommitteeSessionDurationSeconds}
         initialEndsAt={initialCommitteeSessionEndsAt}

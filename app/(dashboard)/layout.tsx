@@ -11,6 +11,7 @@ import { DashboardNotifications } from "@/components/dashboard/DashboardNotifica
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { getAppName } from "@/lib/branding";
 import { InterMunEmblem } from "@/components/InterMunEmblem";
 import {
@@ -107,11 +108,20 @@ export default async function DashboardLayout({
     .eq("user_id", user.id)
     .is("read_at", null);
 
-  const { data: procedureState, error: procedureStateError } = activeConf?.id
+  const debateBundle = activeConf?.id
+    ? await getResolvedDebateConferenceBundle(supabase, activeConf.id)
+    : null;
+  const sessionProcedureConferenceId =
+    debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
+  const liveFloorConferenceId = debateBundle?.debateConferenceId ?? activeConf?.id ?? null;
+  const liveFloorCanonicalId = debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
+  const liveFloorSiblings = debateBundle?.siblingConferenceIds ?? (activeConf?.id ? [activeConf.id] : []);
+
+  const { data: procedureState, error: procedureStateError } = sessionProcedureConferenceId
     ? await supabase
         .from("procedure_states")
         .select("committee_session_started_at")
-        .eq("conference_id", activeConf.id)
+        .eq("conference_id", sessionProcedureConferenceId)
         .maybeSingle()
     : { data: null };
   const startedAtColumnMissing =
@@ -199,7 +209,11 @@ export default async function DashboardLayout({
         {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
           <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-3 dark:border-discord-divider dark:bg-discord-app sm:px-6">
             <div className="w-full">
-              <ChairLiveFloorThemed conferenceId={activeConf.id} />
+              <ChairLiveFloorThemed
+                conferenceId={liveFloorConferenceId ?? activeConf.id}
+                canonicalConferenceId={liveFloorCanonicalId ?? activeConf.id}
+                siblingConferenceIds={liveFloorSiblings}
+              />
             </div>
           </div>
         ) : null}

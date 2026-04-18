@@ -44,6 +44,9 @@ import {
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
+import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
+import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
+import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
 
 const ROLL_ATTENDANCE_BUTTONS: {
   value: RollAttendance;
@@ -63,9 +66,16 @@ const ROLL_ATTENDANCE_BUTTONS: {
   { value: "absent", label: "Absent", title: "Absent" },
 ];
 
-type Alloc = { id: string; country: string; user_id: string | null; userRole?: string | null };
+type Alloc = {
+  id: string;
+  country: string;
+  user_id: string | null;
+  userRole?: string | null;
+  conference_id: string;
+};
 type RollRow = {
   allocation_id: string;
+  conference_id: string;
   present: boolean;
   attendance: RollAttendance;
   allocations: { country: string } | { country: string }[] | null;
@@ -137,14 +147,38 @@ export type SessionFloorSection =
 export function SessionControlClient({
   conferenceId,
   conferenceTitle,
+  debateConferenceId: debateConferenceIdProp,
+  canonicalConferenceId: canonicalConferenceIdProp,
+  rosterConferenceIds,
+  debateTopicOptions,
   activeSection = "all",
 }: {
   conferenceId: string;
   conferenceTitle: string;
+  /** Live floor / motions / timers (`conferences.id`). Defaults to `conferenceId`. */
+  debateConferenceId?: string;
+  /** Canonical committee row for synced topic selection. */
+  canonicalConferenceId?: string;
+  /** Sibling topic rows: merged roster + roll scope. */
+  rosterConferenceIds?: string[];
+  debateTopicOptions?: { id: string; label: string }[];
   /** Default `"all"` keeps a single scroll (e.g. committee room). */
   activeSection?: SessionFloorSection;
 }) {
   const supabase = createClient();
+  const rosterConferenceIdList = useMemo(() => {
+    if (rosterConferenceIds?.length) return rosterConferenceIds;
+    return [conferenceId];
+  }, [conferenceId, rosterConferenceIds]);
+  const rosterKey = useMemo(() => rosterConferenceIdList.slice().sort().join(","), [rosterConferenceIdList]);
+  const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
+  const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
+  const floorConferenceId = useLiveDebateConferenceId(
+    supabase,
+    initialDebateConferenceId,
+    canonicalConferenceId,
+    rosterConferenceIdList
+  );
   const [allocations, setAllocations] = useState<Alloc[]>([]);
   const [isCrisisCommitteeSession, setIsCrisisCommitteeSession] = useState(false);
   const [roll, setRoll] = useState<RollRow[]>([]);
@@ -214,7 +248,7 @@ export function SessionControlClient({
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
 
   const { timer: liveTimerRow, remaining: liveRemaining } = useConferenceTimer(
-    conferenceId,
+    floorConferenceId,
     openMotion?.id ?? null,
     true
   );
@@ -450,36 +484,36 @@ export function SessionControlClient({
         supabase
           .from("procedure_states")
           .select("state, current_vote_item_id, debate_closed, motion_floor_open")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .maybeSingle(),
         supabase
           .from("conferences")
           .select("consultation_before_moderated_caucus, event_id, committee")
-          .eq("id", conferenceId)
+          .eq("id", floorConferenceId)
           .maybeSingle(),
         supabase
           .from("allocations")
-          .select("id, country, user_id")
-          .eq("conference_id", conferenceId)
+          .select("id, country, user_id, conference_id")
+          .in("conference_id", rosterConferenceIdList)
           .order("country"),
         supabase
           .from("roll_call_entries")
-          .select("allocation_id, present, attendance, allocations(country)")
-          .eq("conference_id", conferenceId)
+          .select("allocation_id, conference_id, present, attendance, allocations(country)")
+          .in("conference_id", rosterConferenceIdList)
           .order("allocation_id"),
         supabase
           .from("dais_announcements")
           .select("id, body, created_at, body_format, is_pinned, publish_at")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .order("is_pinned", { ascending: false })
           .order("created_at", { ascending: false })
           .limit(24),
-        supabase.from("timers").select("*").eq("conference_id", conferenceId).maybeSingle(),
-        supabase.from("vote_items").select(motionSelect).eq("conference_id", conferenceId).is("closed_at", null),
+        supabase.from("timers").select("*").eq("conference_id", floorConferenceId).maybeSingle(),
+        supabase.from("vote_items").select(motionSelect).eq("conference_id", floorConferenceId).is("closed_at", null),
         supabase
           .from("vote_items")
           .select("title")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .eq("procedure_code", "set_agenda")
           .not("closed_at", "is", null)
           .order("created_at", { ascending: false })
@@ -487,61 +521,71 @@ export function SessionControlClient({
         supabase
           .from("vote_items")
           .select(motionSelect)
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .not("closed_at", "is", null)
           .order("created_at", { ascending: false })
           .limit(8),
         supabase
           .from("resolutions")
           .select("id, google_docs_url")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .order("created_at", { ascending: false })
           .limit(30),
         supabase
           .from("resolution_clauses")
           .select("id, resolution_id, clause_number, clause_text")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .order("clause_number", { ascending: true })
           .limit(500),
         supabase
           .from("timer_pause_events")
           .select("id, reason, created_at")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .order("created_at", { ascending: false })
           .limit(20),
         supabase
           .from("speaker_queue_entries")
           .select("id, allocation_id, label")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .eq("status", "current")
           .maybeSingle(),
       ]);
 
     const allocRows = (allocs as Alloc[]) ?? [];
+    const sortedByFloor = [...allocRows].sort((a, b) => {
+      const ap = a.conference_id === floorConferenceId ? 0 : 1;
+      const bp = b.conference_id === floorConferenceId ? 0 : 1;
+      if (ap !== bp) return ap - bp;
+      return (a.country ?? "").localeCompare(b.country ?? "");
+    });
     const allocUserIds = [
-      ...new Set(allocRows.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
+      ...new Set(sortedByFloor.map((a) => a.user_id).filter((id): id is string => Boolean(id))),
     ];
     const { data: allocProfiles } =
       allocUserIds.length > 0
         ? await supabase.from("profiles").select("id, role").in("id", allocUserIds)
         : { data: [] as { id: string; role: string | null }[] };
     const roleByProfileId = new Map((allocProfiles ?? []).map((p) => [p.id, p.role ?? null]));
-    const allocationsWithRoles = allocRows.map((a) => ({
+    const allocationsWithRoles = sortedByFloor.map((a) => ({
       ...a,
       userRole: a.user_id ? roleByProfileId.get(a.user_id) ?? null : null,
     }));
-    setAllocations(sortAllocationsByDisplayCountry(allocationsWithRoles));
-    setRoll(
-      ((r as (Omit<RollRow, "attendance"> & { attendance?: string | null })[]) ?? []).map(
-        (row) =>
-          ({
-            ...row,
-            attendance:
-              parseRollAttendance(row.attendance) ??
-              (row.present === true ? "present_voting" : "absent"),
-          }) satisfies RollRow
-      )
+    const dedupedAllocs = dedupeAllocationsByUserId(sortAllocationsByDisplayCountry(allocationsWithRoles));
+    const allowedAllocIds = new Set(dedupedAllocs.map((a) => a.id));
+    setAllocations(dedupedAllocs);
+    const rollMapped = (
+      (r as (Omit<RollRow, "attendance"> & { attendance?: string | null; conference_id?: string })[]) ?? []
+    ).map(
+      (row) =>
+        ({
+          ...row,
+          conference_id: row.conference_id ?? conferenceId,
+          attendance:
+            parseRollAttendance(row.attendance) ??
+            (row.present === true ? "present_voting" : "absent"),
+        }) satisfies RollRow
     );
+    setRoll(rollMapped.filter((row) => allowedAllocIds.has(row.allocation_id)));
     setAnnouncements((ann as Announcement[]) ?? []);
     setPauseEvents((pauseRows as PauseEvent[]) ?? []);
     setCurrentSpeakerQueueRow((sqCurrentRow as CurrentSpeakerQueueRow | null) ?? null);
@@ -678,7 +722,7 @@ export function SessionControlClient({
         floorLabel: floorLabel.trim(),
       });
     }
-  }, [supabase, conferenceId]);
+  }, [supabase, floorConferenceId, rosterConferenceIdList, rosterKey, conferenceId]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -687,7 +731,7 @@ export function SessionControlClient({
 
   useEffect(() => {
     const ch = supabase
-      .channel(`chair-session-${conferenceId}`)
+      .channel(`chair-session-${floorConferenceId}-${rosterKey}`)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "roll_call_entries" },
@@ -719,13 +763,18 @@ export function SessionControlClient({
           event: "*",
           schema: "public",
           table: "procedure_states",
-          filter: `conference_id=eq.${conferenceId}`,
+          filter: `conference_id=eq.${floorConferenceId}`,
         },
         () => void refresh()
       )
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "dais_announcements", filter: `conference_id=eq.${conferenceId}` },
+        {
+          event: "*",
+          schema: "public",
+          table: "dais_announcements",
+          filter: `conference_id=eq.${floorConferenceId}`,
+        },
         () => void refresh()
       )
       .on(
@@ -734,20 +783,20 @@ export function SessionControlClient({
           event: "*",
           schema: "public",
           table: "speaker_queue_entries",
-          filter: `conference_id=eq.${conferenceId}`,
+          filter: `conference_id=eq.${floorConferenceId}`,
         },
         () => void refresh()
       )
       .on(
         "postgres_changes",
-        { event: "UPDATE", schema: "public", table: "conferences", filter: `id=eq.${conferenceId}` },
+        { event: "UPDATE", schema: "public", table: "conferences", filter: `id=eq.${floorConferenceId}` },
         () => void refresh()
       )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId, refresh]);
+  }, [supabase, floorConferenceId, rosterKey, refresh]);
 
   const loadChairSpeechNotes = useCallback(async () => {
     const {
@@ -757,12 +806,12 @@ export function SessionControlClient({
     const { data, error } = await supabase
       .from("chair_speech_notes")
       .select("id, speaker_label, content, allocation_id, created_at, updated_at")
-      .eq("conference_id", conferenceId)
+      .eq("conference_id", floorConferenceId)
       .eq("chair_user_id", user.id)
       .order("created_at", { ascending: false })
       .limit(25);
     if (!error && data) setSpeechNotesRecent(data as ChairSpeechNoteRow[]);
-  }, [supabase, conferenceId]);
+  }, [supabase, floorConferenceId]);
 
   useEffect(() => {
     void loadChairSpeechNotes();
@@ -770,14 +819,14 @@ export function SessionControlClient({
 
   useEffect(() => {
     const ch = supabase
-      .channel(`chair-speech-notes-${conferenceId}`)
+      .channel(`chair-speech-notes-${floorConferenceId}`)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
           table: "chair_speech_notes",
-          filter: `conference_id=eq.${conferenceId}`,
+          filter: `conference_id=eq.${floorConferenceId}`,
         },
         () => void loadChairSpeechNotes()
       )
@@ -785,7 +834,7 @@ export function SessionControlClient({
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId, loadChairSpeechNotes]);
+  }, [supabase, floorConferenceId, loadChairSpeechNotes]);
 
   function parseTime(m: string, s: string) {
     const mi = Math.max(0, parseInt(m, 10) || 0);
@@ -823,7 +872,7 @@ export function SessionControlClient({
       }
       const { error } = await supabase.from("timers").upsert(
         {
-          conference_id: conferenceId,
+          conference_id: floorConferenceId,
           current_speaker: timer.current.trim() || null,
           next_speaker: timer.next.trim() || null,
           time_left_seconds: left,
@@ -878,7 +927,7 @@ export function SessionControlClient({
         data: { user },
       } = await supabase.auth.getUser();
       const { error: logErr } = await supabase.from("timer_pause_events").insert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         reason,
         created_by: user?.id ?? null,
       });
@@ -894,7 +943,7 @@ export function SessionControlClient({
           current_pause_reason: reason,
           updated_at: new Date().toISOString(),
         })
-        .eq("conference_id", conferenceId);
+        .eq("conference_id", floorConferenceId);
       setMsg(error ? error.message : "Timer paused for the committee.");
       void refresh();
     });
@@ -917,7 +966,7 @@ export function SessionControlClient({
           current_pause_reason: null,
           updated_at: new Date().toISOString(),
         })
-        .eq("conference_id", conferenceId);
+        .eq("conference_id", floorConferenceId);
       setMsg(error ? error.message : "Timer running for the committee.");
       void refresh();
     });
@@ -986,7 +1035,7 @@ export function SessionControlClient({
       return;
     }
     startTransition(async () => {
-      const rows = await fetchSpeakerQueue(supabase, conferenceId);
+      const rows = await fetchSpeakerQueue(supabase, floorConferenceId);
       const sorted = [...rows].sort((a, b) => a.sort_order - b.sort_order);
       const curIdx = sorted.findIndex((r) => r.status === "current");
       const currentRow = curIdx >= 0 ? sorted[curIdx] : null;
@@ -1017,7 +1066,7 @@ export function SessionControlClient({
 
       const { error } = await supabase.from("timers").upsert(
         {
-          conference_id: conferenceId,
+          conference_id: floorConferenceId,
           current_speaker: curLabel,
           next_speaker: nextLabel || null,
           time_left_seconds: cap,
@@ -1070,7 +1119,7 @@ export function SessionControlClient({
         queueCountry ||
         "—";
       const { error } = await supabase.from("chair_speech_notes").insert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         chair_user_id: user.id,
         allocation_id: queueAlloc,
         speaker_label: speakerLabel,
@@ -1102,7 +1151,7 @@ export function SessionControlClient({
       if (!user) return;
       const publishAtIso = daisPublishAt.trim() ? new Date(daisPublishAt).toISOString() : null;
       const { error } = await supabase.from("dais_announcements").insert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         body,
         created_by: user.id,
         body_format: daisFormat,
@@ -1124,7 +1173,7 @@ export function SessionControlClient({
         await supabase
           .from("dais_announcements")
           .update({ is_pinned: false })
-          .eq("conference_id", conferenceId);
+          .eq("conference_id", floorConferenceId);
         const { error } = await supabase
           .from("dais_announcements")
           .update({ is_pinned: true })
@@ -1171,7 +1220,7 @@ export function SessionControlClient({
           publish_at: publishAtIso,
         })
         .eq("id", daisEditingId)
-        .eq("conference_id", conferenceId);
+        .eq("conference_id", floorConferenceId);
       if (!error) cancelEditDais();
       setMsg(error ? error.message : "Announcement updated.");
       void refresh();
@@ -1186,7 +1235,11 @@ export function SessionControlClient({
     }
     startTransition(async () => {
       if (daisEditingId === id) cancelEditDais();
-      const { error } = await supabase.from("dais_announcements").delete().eq("id", id).eq("conference_id", conferenceId);
+      const { error } = await supabase
+        .from("dais_announcements")
+        .delete()
+        .eq("id", id)
+        .eq("conference_id", floorConferenceId);
       setMsg(error ? error.message : "Announcement deleted.");
       void refresh();
     });
@@ -1195,7 +1248,7 @@ export function SessionControlClient({
   function initRollCall() {
     startTransition(async () => {
       const rows = allocations.map((a) => ({
-        conference_id: conferenceId,
+        conference_id: a.conference_id,
         allocation_id: a.id,
         attendance: "absent" as const,
       }));
@@ -1206,7 +1259,7 @@ export function SessionControlClient({
       const { data: existing } = await supabase
         .from("roll_call_entries")
         .select("allocation_id")
-        .eq("conference_id", conferenceId);
+        .in("conference_id", rosterConferenceIdList);
       const have = new Set((existing ?? []).map((r) => r.allocation_id));
       const newRows = rows.filter((r) => !have.has(r.allocation_id));
       if (!newRows.length) {
@@ -1224,10 +1277,14 @@ export function SessionControlClient({
     const row = roll.find((x) => x.allocation_id === allocationId);
     if (row?.attendance === attendance) return;
     startTransition(async () => {
+      const rollConferenceId =
+        row?.conference_id ??
+        allocations.find((a) => a.id === allocationId)?.conference_id ??
+        floorConferenceId;
       await supabase
         .from("roll_call_entries")
         .update({ attendance, updated_at: new Date().toISOString() })
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", rollConferenceId)
         .eq("allocation_id", allocationId);
       void refresh();
     });
@@ -1259,7 +1316,7 @@ export function SessionControlClient({
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       const debateClosed = psRow?.debate_closed ?? false;
       const motionFloor = psRow?.motion_floor_open ?? false;
@@ -1267,7 +1324,7 @@ export function SessionControlClient({
       const { data: inserted, error } = await supabase
         .from("vote_items")
         .insert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         vote_type: draft.vote_type,
           procedure_code: draft.procedure_code,
           procedure_resolution_id: draft.procedure_resolution_id,
@@ -1285,7 +1342,7 @@ export function SessionControlClient({
       setMsg(error ? error.message : "Motion created and opened.");
       if (!error && inserted?.id) {
         await supabase.from("procedure_states").upsert({
-          conference_id: conferenceId,
+          conference_id: floorConferenceId,
           state: "voting_procedure",
           current_vote_item_id: inserted.id,
           debate_closed: debateClosed,
@@ -1341,7 +1398,7 @@ export function SessionControlClient({
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       const debateClosed = psRow?.debate_closed ?? false;
       const motionFloor = psRow?.motion_floor_open ?? false;
@@ -1396,7 +1453,7 @@ export function SessionControlClient({
 
         const nextState = nextDebateClosed ? "voting_procedure" : "debate_open";
         await supabase.from("procedure_states").upsert({
-          conference_id: conferenceId,
+          conference_id: floorConferenceId,
           state: nextState,
           current_vote_item_id: null,
           debate_closed: nextDebateClosed,
@@ -1420,7 +1477,7 @@ export function SessionControlClient({
       const { data: blocking } = await supabase
         .from("vote_items")
         .select("id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .is("closed_at", null)
         .eq("open_for_voting", true)
         .maybeSingle();
@@ -1432,7 +1489,7 @@ export function SessionControlClient({
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       const debateClosed = psRow?.debate_closed ?? false;
       const motionFloor = psRow?.motion_floor_open ?? false;
@@ -1444,7 +1501,7 @@ export function SessionControlClient({
       setMsg(error ? error.message : "Motion reopened.");
       if (!error) {
         await supabase.from("procedure_states").upsert({
-          conference_id: conferenceId,
+          conference_id: floorConferenceId,
           state: "voting_procedure",
           current_vote_item_id: voteItemId,
           debate_closed: debateClosed,
@@ -1465,10 +1522,10 @@ export function SessionControlClient({
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       const { error } = await supabase.from("procedure_states").upsert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         state: (psRow?.state as string) ?? "debate_open",
         current_vote_item_id: psRow?.current_vote_item_id ?? null,
         debate_closed: psRow?.debate_closed ?? false,
@@ -1485,10 +1542,10 @@ export function SessionControlClient({
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       const { error } = await supabase.from("procedure_states").upsert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         state: (psRow?.state as string) ?? "debate_open",
         current_vote_item_id: psRow?.current_vote_item_id ?? null,
         debate_closed: psRow?.debate_closed ?? false,
@@ -1514,7 +1571,7 @@ export function SessionControlClient({
     if (draftError) return setMsg(draftError);
     startTransition(async () => {
       const { error } = await supabase.from("vote_items").insert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         vote_type: draft.vote_type,
         procedure_code: draft.procedure_code,
         procedure_resolution_id: draft.procedure_resolution_id,
@@ -1778,7 +1835,7 @@ export function SessionControlClient({
       const { data: psRow } = await supabase
         .from("procedure_states")
         .select("debate_closed, motion_floor_open, state, current_vote_item_id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       const { error: uErr } = await supabase
         .from("vote_items")
@@ -1791,7 +1848,7 @@ export function SessionControlClient({
         return;
       }
       const { error: pErr } = await supabase.from("procedure_states").upsert({
-        conference_id: conferenceId,
+        conference_id: floorConferenceId,
         state: "voting_procedure",
         current_vote_item_id: first.id,
         debate_closed: psRow?.debate_closed ?? false,
@@ -1813,7 +1870,7 @@ export function SessionControlClient({
         .from("vote_items")
         .delete()
         .eq("id", voteItemId)
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .eq("open_for_voting", false);
       setMsg(error ? error.message : "Stated motion removed.");
       void refresh();
@@ -1827,7 +1884,7 @@ export function SessionControlClient({
         .from("vote_items")
         .select("open_for_voting, closed_at")
         .eq("id", voteItemId)
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
 
       if (fetchErr) {
@@ -1858,7 +1915,7 @@ export function SessionControlClient({
         const { data: ps } = await supabase
           .from("procedure_states")
           .select("debate_closed, motion_floor_open, current_vote_item_id")
-          .eq("conference_id", conferenceId)
+          .eq("conference_id", floorConferenceId)
           .maybeSingle();
         psRow = ps;
       }
@@ -1867,7 +1924,7 @@ export function SessionControlClient({
         .from("vote_items")
         .delete()
         .eq("id", voteItemId)
-        .eq("conference_id", conferenceId);
+        .eq("conference_id", floorConferenceId);
 
       if (delErr) {
         setMsg(delErr.message);
@@ -1877,7 +1934,7 @@ export function SessionControlClient({
 
       if (isLiveOpen && psRow?.current_vote_item_id === voteItemId) {
         const { error: psErr } = await supabase.from("procedure_states").upsert({
-          conference_id: conferenceId,
+          conference_id: floorConferenceId,
           state: psRow.debate_closed ? "voting_procedure" : "debate_open",
           current_vote_item_id: null,
           debate_closed: psRow.debate_closed ?? false,
@@ -1921,6 +1978,36 @@ export function SessionControlClient({
   return (
     <div className="space-y-10">
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
+      {(debateTopicOptions?.length ?? 0) > 1 ? (
+        <div className="flex flex-wrap items-end gap-3 rounded-xl border border-white/15 bg-black/20 px-3 py-3">
+          <label className="block min-w-[12rem] flex-1 text-sm text-brand-navy">
+            <span className="text-xs font-medium uppercase tracking-wide text-brand-muted">Live debate topic</span>
+            <select
+              className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+              value={floorConferenceId}
+              disabled={pending}
+              onChange={(e) => {
+                const v = e.target.value;
+                startTransition(async () => {
+                  const r = await setActiveDebateTopicAction(v);
+                  if (r.error) setMsg(r.error);
+                  else setMsg(null);
+                });
+              }}
+            >
+              {(debateTopicOptions ?? []).map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <p className="max-w-md text-xs text-brand-muted">
+            Motions, timers, and the speaker list follow this topic row. Roll call still uses each delegate’s
+            allocation.
+          </p>
+        </div>
+      ) : null}
       {msg && (
         <p className="rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
           {msg}
@@ -3044,7 +3131,7 @@ export function SessionControlClient({
       {show("speakers") ? (
         <ChairSpeakerQueuePanel
           ref={speakersSectionRef}
-          conferenceId={conferenceId}
+          conferenceId={floorConferenceId}
           allocations={allocations}
           variant="session"
           isCrisisCommittee={isCrisisCommitteeSession}

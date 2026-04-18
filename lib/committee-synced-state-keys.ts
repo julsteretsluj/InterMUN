@@ -5,6 +5,7 @@ export const COMMITTEE_SYNCED_STATE_KEYS = {
   DIGITAL_ROOM_FLAGS: "digital_room_flags",
   MOTIONS_LOG: "motions_log",
   DELEGATE_COUNTDOWN: "delegate_countdown",
+  ACTIVE_DEBATE_TOPIC: "active_debate_topic",
 } as const;
 
 export type CommitteeSyncedStateKey =

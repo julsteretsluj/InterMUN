@@ -18,7 +18,7 @@ export default async function ChairSessionPage() {
   const { data: ps, error } = await supabase
     .from("procedure_states")
     .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
-    .eq("conference_id", data.conferenceId)
+    .eq("conference_id", data.canonicalConferenceId)
     .maybeSingle();
 
   const errorMessage = String(error?.message ?? "");
@@ -29,7 +29,7 @@ export default async function ChairSessionPage() {
     ? await supabase
         .from("procedure_states")
         .select("id")
-        .eq("conference_id", data.conferenceId)
+        .eq("conference_id", data.canonicalConferenceId)
         .maybeSingle()
     : null;
 
@@ -47,6 +47,7 @@ export default async function ChairSessionPage() {
       <SessionFloorOverview
         conferenceId={data.conferenceId}
         conferenceTitle={data.conferenceTitle}
+        canonicalConferenceId={data.canonicalConferenceId}
         initialCommitteeSessionStartedAt={initialStartedAt}
         initialCommitteeSessionDurationSeconds={initialDurationSeconds}
         initialCommitteeSessionEndsAt={initialEndsAt}

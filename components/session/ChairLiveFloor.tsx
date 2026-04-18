@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
+import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
 
 type ProcedureRow = {
   state: string;
@@ -15,15 +16,25 @@ type ProcedureRow = {
  */
 export function ChairLiveFloor({
   conferenceId,
+  canonicalConferenceId,
+  siblingConferenceIds,
   theme = "dark",
   observeFloorOnly = false,
 }: {
   conferenceId: string;
+  canonicalConferenceId: string;
+  siblingConferenceIds: string[];
   theme?: "dark" | "light";
   /** Secretariat preview: do not load the signed-in user’s roll-call row. */
   observeFloorOnly?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
+  const floorConferenceId = useLiveDebateConferenceId(
+    supabase,
+    conferenceId,
+    canonicalConferenceId,
+    siblingConferenceIds
+  );
   const [activeVoteItemId, setActiveVoteItemId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,7 +44,7 @@ export function ChairLiveFloor({
       const { data } = await supabase
         .from("procedure_states")
         .select("state, current_vote_item_id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", floorConferenceId)
         .maybeSingle();
       if (cancelled) return;
       const row = data as ProcedureRow | null;
@@ -44,14 +55,14 @@ export function ChairLiveFloor({
     void load();
 
     const ch = supabase
-      .channel(`chair-live-floor-${conferenceId}`)
+      .channel(`chair-live-floor-${floorConferenceId}`)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
           table: "procedure_states",
-          filter: `conference_id=eq.${conferenceId}`,
+          filter: `conference_id=eq.${floorConferenceId}`,
         },
         (payload) => {
           const row = payload.new as ProcedureRow | null;
@@ -66,12 +77,12 @@ export function ChairLiveFloor({
       cancelled = true;
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId]);
+  }, [supabase, floorConferenceId]);
 
   return (
     <div className="space-y-2">
       <FloorStatusBar
-        conferenceId={conferenceId}
+        conferenceId={floorConferenceId}
         theme={theme}
         observeOnly={observeFloorOnly}
         activeMotionVoteItemId={activeVoteItemId}

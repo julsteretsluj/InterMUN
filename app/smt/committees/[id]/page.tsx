@@ -19,6 +19,7 @@ import {
 } from "@/lib/committee-tag-styles";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
+import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -64,7 +65,7 @@ export default async function SmtCommitteeLivePage({
     );
   }
 
-  const [roomPayload, resolutionCount, openVotesCount] = await Promise.all([
+  const [roomPayload, resolutionCount, openVotesCount, liveFloorBundle] = await Promise.all([
     loadCommitteeRoomPayload(supabase, conf.id, {
       includeDelegatesForStaff: true,
       chairNamesHint: conf.chair_names,
@@ -78,6 +79,7 @@ export default async function SmtCommitteeLivePage({
       .select("id", { count: "exact", head: true })
       .eq("conference_id", conf.id)
       .is("closed_at", null),
+    getResolvedDebateConferenceBundle(supabase, conf.id),
   ]);
 
   const { data: chairProfiles } = await supabase
@@ -207,7 +209,13 @@ export default async function SmtCommitteeLivePage({
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-8">
         <section className="space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Live floor</h2>
-          <ChairLiveFloor conferenceId={conf.id} theme="light" observeFloorOnly />
+          <ChairLiveFloor
+            conferenceId={liveFloorBundle.debateConferenceId}
+            canonicalConferenceId={liveFloorBundle.canonicalConferenceId}
+            siblingConferenceIds={liveFloorBundle.siblingConferenceIds}
+            theme="light"
+            observeFloorOnly
+          />
         </section>
 
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">
