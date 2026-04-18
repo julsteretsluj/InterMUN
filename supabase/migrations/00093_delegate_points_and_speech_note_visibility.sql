@@ -1,3 +1,4 @@
+-- Renumbered from 00090: Supabase stores one row per numeric prefix; must not duplicate 00090_award_nominations_*.
 -- Delegate-scoped chair points + delegate visibility for chair speech notes.
 
 BEGIN;
