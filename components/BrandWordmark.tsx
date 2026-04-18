@@ -7,7 +7,7 @@ export function BrandWordmark({
   size = "default",
 }: {
   className?: string;
-  /** Larger emblem and title for auth hero (login / signup). */
+  /** Larger emblem only (e.g. login / signup); title and tagline stay default scale. */
   size?: "default" | "hero";
 }) {
   const title = getAppName();
@@ -15,7 +15,7 @@ export function BrandWordmark({
   const hero = size === "hero";
   return (
     <div className={cn("text-center", className)}>
-      <div className={cn("flex justify-center", hero ? "mb-6 md:mb-8" : "mb-4")}>
+      <div className={cn("flex justify-center", hero ? "mb-5 md:mb-6" : "mb-4")}>
         <InterMunEmblem
           alt=""
           className={cn(
@@ -23,21 +23,11 @@ export function BrandWordmark({
           )}
         />
       </div>
-      <p
-        className={cn(
-          "font-display font-semibold text-brand-navy tracking-tight",
-          hero ? "text-4xl sm:text-5xl md:text-6xl" : "text-3xl md:text-4xl"
-        )}
-      >
+      <p className="font-display text-3xl md:text-4xl font-semibold text-brand-navy tracking-tight">
         {title}
       </p>
       {sub ? (
-        <p
-          className={cn(
-            "text-brand-muted uppercase tracking-[0.28em]",
-            hero ? "mt-2 text-xs sm:text-sm md:text-base" : "mt-1.5 text-[0.65rem] sm:text-xs"
-          )}
-        >
+        <p className="text-[0.65rem] sm:text-xs text-brand-muted mt-1.5 uppercase tracking-[0.28em]">
           {sub}
         </p>
       ) : null}
