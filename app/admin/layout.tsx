@@ -35,7 +35,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy">
-      <header className="border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95">
+      <header className="flex flex-col border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95">
+        <div className="orbit-rail-h" aria-hidden />
         <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3">
           <span className="font-display text-lg font-semibold tracking-tight text-brand-navy">Welcome Admin</span>
           <nav className="flex flex-wrap items-center gap-1 text-sm sm:gap-3">

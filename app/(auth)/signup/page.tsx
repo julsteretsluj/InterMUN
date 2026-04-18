@@ -45,7 +45,10 @@ export default function SignupPage() {
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
-      <div className="mx-auto mb-6 h-1 w-16 rounded-full bg-brand-accent" aria-hidden />
+      <div
+        className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-gradient-to-r from-logo-magenta via-brand-accent to-logo-cyan"
+        aria-hidden
+      />
       <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-6">
         Create account
       </h2>
@@ -94,7 +97,7 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-brand-accent py-3 font-semibold text-white transition-opacity hover:opacity-95 disabled:opacity-50"
+          className="mun-btn-primary w-full rounded-lg py-3 text-base"
         >
           {loading ? "Creating account…" : "Sign up"}
         </button>

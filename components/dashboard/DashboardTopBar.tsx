@@ -54,7 +54,8 @@ export function DashboardTopBar({
   const initials = initialsFromName(userName, userEmail);
 
   return (
-    <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/70 bg-brand-cream/85 backdrop-blur-md dark:border-discord-divider dark:bg-discord-app/95 dark:backdrop-blur-md dark:shadow-[0_1px_0_rgba(0,0,0,0.2)]">
+    <header className="sticky top-0 z-20 flex shrink-0 flex-col border-b border-slate-200/70 bg-brand-cream/90 backdrop-blur-md dark:border-discord-divider dark:bg-discord-app/95 dark:backdrop-blur-md dark:shadow-[0_1px_0_rgba(0,0,0,0.2)]">
+      <div className="orbit-rail-h" aria-hidden />
       <div className="flex w-full flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
           href={brandHomeHref ?? "/profile"}

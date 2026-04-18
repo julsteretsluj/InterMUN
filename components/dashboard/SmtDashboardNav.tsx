@@ -51,7 +51,7 @@ function SmtSidebarLink({ item, isActive }: { item: SmtNavItem; isActive: boolea
       className={cn(
         "discord-interactive-hover flex items-center gap-0 rounded-md px-2 py-2.5 text-sm transition-colors group-hover:gap-3 group-hover:px-3",
         isActive
-          ? "bg-brand-accent/15 font-semibold text-brand-accent dark:bg-[color:var(--discord-active-bg)] dark:text-white"
+          ? "smt-nav-row-active bg-gradient-to-r from-logo-magenta/20 via-brand-accent/15 to-logo-cyan/20 font-semibold text-brand-navy ring-1 ring-logo-orange/25 dark:text-white dark:ring-0"
           : "font-medium text-slate-600 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
       )}
     >
@@ -79,8 +79,8 @@ function SmtDockLink({ item, isActive }: { item: SmtNavItem; isActive: boolean }
         className={cn(
           "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
           isActive
-            ? "scale-[1.02] border-brand-accent/45 bg-brand-accent/15 text-brand-accent shadow-lg shadow-brand-accent/10 dark:border-discord-blurple/55 dark:bg-discord-blurple/25 dark:text-white dark:shadow-none"
-            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-brand-accent/30 group-hover:bg-slate-50 group-hover:text-brand-accent dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-white/10 dark:group-hover:bg-[color:var(--discord-hover-bg)]"
+            ? "smt-dock-tile-active scale-[1.02] border-logo-orange/40 bg-gradient-to-br from-logo-magenta/22 via-brand-accent/14 to-logo-cyan/20 text-brand-navy shadow-lg shadow-logo-magenta/15 dark:border-discord-blurple/55 dark:text-white dark:shadow-none"
+            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-brand-accent/30 group-hover:bg-slate-50 group-hover:text-brand-diplomatic dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-white/10 dark:group-hover:bg-[color:var(--discord-hover-bg)]"
         )}
       >
         <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
@@ -108,9 +108,9 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           href="/smt"
           title={hubLabel}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-discord-blurple px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:opacity-95 dark:bg-discord-blurple dark:hover:bg-discord-blurple-hover",
+            "flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-logo-magenta via-logo-orange to-logo-cyan px-3 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-logo-magenta/25 transition hover:opacity-95 dark:from-logo-magenta dark:via-logo-orange dark:to-logo-cyan dark:shadow-logo-cyan/20",
             hubActive &&
-              "ring-2 ring-discord-blurple/60 ring-offset-2 ring-offset-white dark:ring-discord-blurple/70 dark:ring-offset-[#1e1f22]"
+              "ring-2 ring-white/50 ring-offset-2 ring-offset-white dark:ring-logo-cyan/60 dark:ring-offset-[#1e1f22]"
           )}
         >
           <LayoutDashboard className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />

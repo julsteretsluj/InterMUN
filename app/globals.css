@@ -139,26 +139,27 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   background-attachment: fixed;
-  /* Soft orbit wash: cyan → paper → warm orange (logo spectrum, low saturation on canvas) */
-  background-image: linear-gradient(
-    185deg,
-    color-mix(in srgb, var(--logo-cyan) 9%, transparent) 0%,
-    var(--background) 40%,
-    color-mix(in srgb, var(--logo-orange) 7%, var(--background)) 72%,
-    color-mix(in srgb, var(--brand-silver) 11%, var(--background)) 100%
-  );
+  /* Full orbit spectrum: corners + edges carry logo hues; center stays readable cream */
+  background-image:
+    radial-gradient(ellipse 78% 58% at -8% -8%, color-mix(in srgb, var(--logo-magenta) 22%, transparent), transparent 58%),
+    radial-gradient(ellipse 72% 52% at 108% -5%, color-mix(in srgb, var(--logo-cyan) 20%, transparent), transparent 55%),
+    radial-gradient(ellipse 68% 50% at 105% 108%, color-mix(in srgb, var(--logo-orange) 20%, transparent), transparent 54%),
+    radial-gradient(ellipse 72% 52% at -6% 104%, color-mix(in srgb, var(--logo-blue) 18%, transparent), transparent 54%),
+    radial-gradient(ellipse 52% 44% at 50% 112%, color-mix(in srgb, var(--logo-green) 14%, transparent), transparent 50%),
+    radial-gradient(ellipse 48% 40% at 88% 42%, color-mix(in srgb, var(--logo-yellow) 11%, transparent), transparent 48%),
+    linear-gradient(168deg, var(--background) 0%, color-mix(in srgb, var(--logo-cyan) 5%, var(--background)) 100%);
 }
 
 html.dark body {
   background-color: var(--discord-app);
-  /* Deep panels with cyan / magenta / blue orbit hints (logo-aligned) */
-  background-image: linear-gradient(
-    165deg,
-    color-mix(in srgb, var(--logo-cyan) 12%, transparent) 0%,
-    var(--discord-app) 34%,
-    color-mix(in srgb, var(--logo-magenta) 7%, transparent) 62%,
-    color-mix(in srgb, var(--discord-sidebar) 28%, var(--discord-app)) 100%
-  );
+  background-image:
+    radial-gradient(ellipse 82% 62% at -12% -12%, color-mix(in srgb, var(--logo-magenta) 26%, transparent), transparent 52%),
+    radial-gradient(ellipse 78% 58% at 112% -8%, color-mix(in srgb, var(--logo-cyan) 24%, transparent), transparent 50%),
+    radial-gradient(ellipse 72% 54% at 108% 112%, color-mix(in srgb, var(--logo-orange) 22%, transparent), transparent 50%),
+    radial-gradient(ellipse 70% 56% at -10% 108%, color-mix(in srgb, var(--logo-blue) 22%, transparent), transparent 52%),
+    radial-gradient(ellipse 58% 48% at 48% 118%, color-mix(in srgb, var(--logo-green) 18%, transparent), transparent 46%),
+    radial-gradient(ellipse 44% 38% at 72% 38%, color-mix(in srgb, var(--logo-yellow) 14%, transparent), transparent 44%),
+    linear-gradient(172deg, var(--discord-app) 18%, color-mix(in srgb, var(--logo-magenta) 6%, var(--discord-app)) 100%);
 }
 
 html.dark {
@@ -187,15 +188,19 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 /* Auth / marketing: multi-stop glow echoing logo orbit */
 .theme-page-glow {
   background-image:
-    radial-gradient(ellipse 55% 42% at 78% -8%, color-mix(in srgb, var(--logo-magenta) 11%, transparent), transparent),
-    radial-gradient(ellipse 70% 48% at 18% -12%, color-mix(in srgb, var(--logo-cyan) 12%, transparent), transparent),
-    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--logo-blue) 8%, transparent), transparent);
+    radial-gradient(ellipse 55% 42% at 78% -8%, color-mix(in srgb, var(--logo-magenta) 14%, transparent), transparent),
+    radial-gradient(ellipse 62% 46% at 12% 8%, color-mix(in srgb, var(--logo-orange) 10%, transparent), transparent),
+    radial-gradient(ellipse 70% 48% at 18% -12%, color-mix(in srgb, var(--logo-cyan) 14%, transparent), transparent),
+    radial-gradient(ellipse 52% 40% at 92% 88%, color-mix(in srgb, var(--logo-green) 9%, transparent), transparent),
+    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--logo-blue) 10%, transparent), transparent);
 }
 html.dark .theme-page-glow {
   background-image:
-    radial-gradient(ellipse 55% 42% at 82% -6%, color-mix(in srgb, var(--logo-magenta) 14%, transparent), transparent),
-    radial-gradient(ellipse 65% 44% at 12% -10%, color-mix(in srgb, var(--logo-cyan) 15%, transparent), transparent),
-    radial-gradient(ellipse 80% 50% at 50% -18%, color-mix(in srgb, var(--logo-blue) 14%, transparent), transparent);
+    radial-gradient(ellipse 55% 42% at 82% -6%, color-mix(in srgb, var(--logo-magenta) 18%, transparent), transparent),
+    radial-gradient(ellipse 58% 44% at 8% 12%, color-mix(in srgb, var(--logo-orange) 12%, transparent), transparent),
+    radial-gradient(ellipse 65% 44% at 12% -10%, color-mix(in srgb, var(--logo-cyan) 18%, transparent), transparent),
+    radial-gradient(ellipse 50% 38% at 95% 92%, color-mix(in srgb, var(--logo-green) 12%, transparent), transparent),
+    radial-gradient(ellipse 80% 50% at 50% -18%, color-mix(in srgb, var(--logo-blue) 16%, transparent), transparent);
 }
 
 /*
@@ -359,20 +364,82 @@ html.dark :focus-visible {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--brand-accent) 30%, transparent);
+  background: color-mix(in srgb, var(--logo-magenta) 22%, color-mix(in srgb, var(--logo-cyan) 18%, var(--background)));
   color: inherit;
 }
 
 html.dark ::selection {
-  background: color-mix(in srgb, var(--brand-accent) 40%, transparent);
+  background: color-mix(in srgb, var(--logo-magenta) 35%, var(--discord-elevated));
   color: #ffffff;
 }
 
 @layer components {
+  /** Full logo spectrum bar (horizontal). */
+  .orbit-rail-h {
+    height: 3px;
+    width: 100%;
+    flex-shrink: 0;
+    background: linear-gradient(
+      90deg,
+      var(--logo-magenta),
+      var(--logo-orange),
+      var(--logo-yellow),
+      var(--logo-green),
+      var(--logo-cyan),
+      var(--logo-blue),
+      var(--logo-magenta)
+    );
+  }
+
+  /** Full logo spectrum strip (vertical). */
+  .orbit-rail-v {
+    width: 4px;
+    background: linear-gradient(
+      180deg,
+      var(--logo-magenta),
+      var(--logo-orange),
+      var(--logo-yellow),
+      var(--logo-green),
+      var(--logo-cyan),
+      var(--logo-blue)
+    );
+  }
+
+  /** Dark sidebar rows: spectrum gradient is light-mode only; Discord panel fill in dark. */
+  html.dark .smt-nav-row-active {
+    background-image: none;
+    background-color: var(--discord-active-bg);
+  }
+
+  html.dark .smt-dock-tile-active {
+    background-image: none !important;
+    background-color: color-mix(in srgb, var(--discord-blurple) 24%, var(--discord-elevated));
+  }
+
   .mun-shell {
-    @apply rounded-2xl border border-slate-100/90 bg-white p-6 text-brand-navy shadow-[0_8px_30px_-8px_rgba(18,18,18,0.08)] backdrop-blur-sm md:p-8;
+    @apply relative overflow-hidden rounded-2xl border border-slate-100/90 bg-white p-6 text-brand-navy shadow-[0_8px_30px_-8px_rgba(18,18,18,0.08)] backdrop-blur-sm md:p-8;
     @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
     @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-none dark:backdrop-blur-none;
+  }
+
+  .mun-shell::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      var(--logo-magenta),
+      var(--logo-orange),
+      var(--logo-yellow),
+      var(--logo-green),
+      var(--logo-cyan),
+      var(--logo-blue),
+      var(--logo-magenta)
+    );
   }
 
   .mun-shell-title {
@@ -380,9 +447,26 @@ html.dark ::selection {
   }
 
   .mun-card {
-    @apply rounded-xl border border-slate-200 bg-white p-4 text-brand-navy shadow-[0_6px_24px_-10px_rgba(18,18,18,0.07)];
+    @apply relative overflow-hidden rounded-xl border border-slate-200 bg-white p-4 text-brand-navy shadow-[0_6px_24px_-10px_rgba(18,18,18,0.07)];
     @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
     @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-none;
+  }
+
+  .mun-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--logo-magenta) 75%, transparent),
+      color-mix(in srgb, var(--logo-orange) 75%, transparent),
+      color-mix(in srgb, var(--logo-cyan) 75%, transparent),
+      color-mix(in srgb, var(--logo-blue) 75%, transparent)
+    );
   }
 
   .mun-card-dense {
@@ -416,7 +500,13 @@ html.dark ::selection {
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-brand-accent/45 bg-brand-accent px-4 py-2 text-sm font-semibold text-white transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
+    @apply rounded-lg border border-white/25 px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_-4px_rgba(51,102,255,0.45)] transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
+    background-image: linear-gradient(
+      103deg,
+      color-mix(in srgb, var(--logo-blue) 88%, black) 0%,
+      var(--logo-magenta) 42%,
+      color-mix(in srgb, var(--logo-cyan) 75%, var(--logo-blue)) 100%
+    );
   }
 
   .mun-btn-danger {
