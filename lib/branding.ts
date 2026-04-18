@@ -3,7 +3,7 @@
  * Override with NEXT_PUBLIC_APP_NAME and NEXT_PUBLIC_APP_TAGLINE.
  */
 
-/** App emblem — luminous-orbit PNG at `public/intermun-emblem.png`. Keep favicons in sync: `public/icon.png`, `public/apple-icon.png`, `app/icon.png`, `app/apple-icon.png`. */
+/** App emblem — RGBA PNG (`public/intermun-emblem.png`). Keep favicons in sync: `public/icon.png`, `public/apple-icon.png`, `app/icon.png`, `app/apple-icon.png`. */
 export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png";
 
 export function getAppName(): string {
