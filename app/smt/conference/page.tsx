@@ -53,7 +53,7 @@ export default async function SmtConferencePage() {
       {!eventId ? (
         <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-6 text-sm text-brand-muted mb-6">
           Choose an event first:{" "}
-          <Link href="/event-gate?next=%2Fsmt%2Fconference" className="text-brand-gold font-medium underline">
+          <Link href="/event-gate?next=%2Fsmt%2Fconference" className="text-brand-accent font-medium underline">
             Enter conference code
           </Link>
           .

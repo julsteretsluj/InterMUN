@@ -61,7 +61,7 @@ export function CommitteeGateForm({
               id="allocation"
               name="allocation"
               required
-              className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+              className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
               defaultValue={initialAllocation ?? ""}
             >
               <option value="" disabled>
@@ -98,7 +98,7 @@ export function CommitteeGateForm({
           type="password"
           autoComplete="off"
           required
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
           placeholder="Provided by your chair"
         />
       </div>
@@ -123,7 +123,7 @@ export function CommitteeGateForm({
       </button>
 
       <p className="text-center text-sm text-brand-muted">
-        <Link href="/login" className="text-brand-gold hover:underline">
+        <Link href="/login" className="text-brand-accent hover:underline">
           Use a different account
         </Link>
       </p>

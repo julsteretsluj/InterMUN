@@ -269,9 +269,9 @@ export function FloorStatusBar({
   const muted = isLight
     ? "text-[0.65rem] uppercase tracking-wider text-brand-muted"
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/80";
-  const icon = isLight ? "text-brand-gold" : "text-brand-gold-bright";
+  const icon = isLight ? "text-brand-accent" : "text-brand-accent-bright";
   const border = isLight ? "border-brand-navy/10" : "border-white/10";
-  const current = isLight ? "text-brand-gold" : "text-brand-gold-bright";
+  const current = isLight ? "text-brand-accent" : "text-brand-accent-bright";
   const bodyText = isLight ? "text-brand-navy/95" : "text-brand-navy/95";
   const qText = "text-brand-navy/90";
 
@@ -349,7 +349,7 @@ export function FloorStatusBar({
               <button
                 type="button"
                 onClick={() => setExpandedAnnouncement(latestDais)}
-                className="mt-1 text-xs font-medium text-brand-gold hover:underline"
+                className="mt-1 text-xs font-medium text-brand-accent hover:underline"
               >
                 View full announcement
               </button>
@@ -423,7 +423,7 @@ export function FloorStatusBar({
               <button
                 type="button"
                 onClick={() => setExpandedAnnouncement(null)}
-                className="text-xs font-medium text-brand-gold hover:underline"
+                className="text-xs font-medium text-brand-accent hover:underline"
               >
                 Close
               </button>

@@ -19,7 +19,7 @@ export function AutoJoinSingleton({ nextPath }: { nextPath: string }) {
       <p className="mb-4">Only one conference and one committee are set up — signing you in…</p>
       <form ref={formRef} action={implicitJoinSingletonAction}>
         <input type="hidden" name="next" value={nextPath} />
-        <button type="submit" className="text-brand-gold font-medium hover:underline">
+        <button type="submit" className="text-brand-accent font-medium hover:underline">
           Tap here if nothing happens
         </button>
       </form>

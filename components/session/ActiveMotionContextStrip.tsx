@@ -87,9 +87,9 @@ export function ActiveMotionContextStrip({
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/75 block mb-0.5";
   const bodyCls = isLight ? "font-medium text-brand-navy" : "font-medium text-brand-navy/95";
   const subCls = isLight ? "text-sm text-brand-navy/85 mt-1 line-clamp-4" : "text-sm text-brand-navy/90 mt-1 line-clamp-4";
-  const iconCls = isLight ? "w-4 h-4 text-brand-gold shrink-0 mt-0.5" : "w-5 h-5 text-brand-gold-bright shrink-0 mt-0.5";
+  const iconCls = isLight ? "w-4 h-4 text-brand-accent shrink-0 mt-0.5" : "w-5 h-5 text-brand-accent-bright shrink-0 mt-0.5";
   const divider = isLight ? "border-t border-brand-navy/10 pt-3" : "border-t border-white/10 pt-3";
-  const clockCls = isLight ? "w-4 h-4 text-brand-gold shrink-0" : "w-5 h-5 text-brand-gold-bright shrink-0";
+  const clockCls = isLight ? "w-4 h-4 text-brand-accent shrink-0" : "w-5 h-5 text-brand-accent-bright shrink-0";
   const timerLabel = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-xs uppercase tracking-wider text-brand-navy/75 block mb-0.5";
@@ -131,7 +131,7 @@ export function ActiveMotionContextStrip({
               {timer.floor_label?.trim() ? (
                 <div>
                   <span className={timerLabel}>Timer</span>
-                  <p className="font-semibold text-brand-gold">{timer.floor_label.trim()}</p>
+                  <p className="font-semibold text-brand-accent">{timer.floor_label.trim()}</p>
                 </div>
               ) : null}
               <div>

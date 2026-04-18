@@ -33,7 +33,7 @@ const SESSION_CARD =
   "rounded-xl border border-white/15 bg-black/25 p-3 text-brand-navy shadow-sm backdrop-blur-sm";
 const SESSION_LABEL = "text-xs font-medium uppercase tracking-wide text-brand-muted";
 const SESSION_INPUT_CORE =
-  "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/40";
+  "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
 const SESSION_FIELD = `mt-1 ${SESSION_INPUT_CORE}`;
 
 export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueuePanelProps>(
@@ -246,7 +246,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
               href="/chair/session/timer"
               className={
                 isSession
-                  ? "font-medium text-brand-gold-bright underline decoration-brand-gold-bright/40 underline-offset-2"
+                  ? "font-medium text-brand-accent-bright underline decoration-brand-accent-bright/40 underline-offset-2"
                   : "font-medium text-blue-700 underline decoration-blue-700/30 underline-offset-2 dark:text-blue-400"
               }
             >

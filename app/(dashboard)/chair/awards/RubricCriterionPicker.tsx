@@ -71,11 +71,11 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
               type="button"
               onClick={() => selectBand(bandId)}
               className={`text-left flex h-full items-start gap-1.5 cursor-pointer rounded-lg border p-2 transition-[box-shadow] ${tone} ${
-                selected ? "ring-2 ring-brand-gold/60 border-brand-gold/70" : "hover:border-brand-navy/25"
+                selected ? "ring-2 ring-brand-accent/60 border-brand-accent/70" : "hover:border-brand-navy/25"
               }`}
             >
               <span
-                className={`mt-1.5 h-2 w-2 shrink-0 rounded-full border ${selected ? "border-brand-gold bg-brand-gold" : "border-brand-navy/30"}`}
+                className={`mt-1.5 h-2 w-2 shrink-0 rounded-full border ${selected ? "border-brand-accent bg-brand-accent" : "border-brand-navy/30"}`}
                 aria-hidden
               />
               <span className="min-w-0 text-xs leading-snug">
@@ -89,7 +89,7 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
         })}
       </div>
       {band ? (
-        <div className="rounded-lg border border-brand-gold/30 bg-black/15 p-2 space-y-2">
+        <div className="rounded-lg border border-brand-accent/30 bg-black/15 p-2 space-y-2">
           <p className="text-xs font-medium text-brand-navy" id={`tier-prompt-${criterion.key}`}>
             {tier
               ? `Locked in: ${PROFICIENCY_BAND_LABEL[band]} — ${tier === "low" ? "Low" : "High"} (${score})`
@@ -108,8 +108,8 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
                   aria-pressed={active}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
                     active
-                      ? "bg-brand-gold text-white border-brand-gold"
-                      : "bg-white/10 text-brand-navy border-white/20 hover:border-brand-gold/50"
+                      ? "bg-brand-accent text-white border-brand-accent"
+                      : "bg-white/10 text-brand-navy border-white/20 hover:border-brand-accent/50"
                   }`}
                 >
                   {t === "low" ? "Low" : "High"} ({pts})

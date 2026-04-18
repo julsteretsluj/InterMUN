@@ -75,7 +75,7 @@ export function ChairDelegateApprovalByEmailForm({
         <button
           type="submit"
           disabled={pending}
-          className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-semibold disabled:opacity-50"
+          className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-semibold disabled:opacity-50"
         >
           {pending ? "Accepting..." : "Accept delegate"}
         </button>

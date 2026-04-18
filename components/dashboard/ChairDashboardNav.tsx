@@ -135,7 +135,7 @@ function ChairNavRow({
         "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
-          ? "border border-amber-200/80 bg-amber-50 font-semibold text-slate-900 shadow-sm dark:border-amber-500/30 dark:bg-amber-950/35 dark:text-zinc-50"
+          ? "border border-brand-accent/35 bg-brand-accent/10 font-semibold text-slate-900 shadow-sm dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-zinc-50"
           : "border border-transparent font-medium text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800/90"
       )}
     >
@@ -143,7 +143,7 @@ function ChairNavRow({
         <Icon
           className={cn(
             "h-[1.15rem] w-[1.15rem] shrink-0",
-            isActive ? "text-amber-700 dark:text-amber-300" : "text-slate-500 dark:text-zinc-400"
+            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-500 dark:text-zinc-400"
           )}
           strokeWidth={1.75}
         />
@@ -203,9 +203,10 @@ export function ChairDashboardSidebar({
           href="/chair"
           title={headerText}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-amber-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-500",
+            "flex w-full items-center justify-center gap-2 rounded-full bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:opacity-90 dark:hover:opacity-90",
             labelsHidden && "mx-auto h-11 w-full rounded-xl px-2 py-0",
-            hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-white dark:ring-amber-400/90 dark:ring-offset-zinc-950"
+            hubActive &&
+              "ring-2 ring-brand-accent/45 ring-offset-2 ring-offset-white dark:ring-brand-accent/50 dark:ring-offset-zinc-950"
           )}
         >
           <BookOpen
@@ -290,8 +291,8 @@ function DockItem({
         className={cn(
           "flex h-11 min-w-[2.75rem] items-center justify-center gap-0.5 rounded-xl border px-1.5 shadow-sm transition-all duration-200",
           isActive
-            ? "border-amber-300/90 bg-amber-50 text-amber-900 dark:border-amber-500/50 dark:bg-amber-950/40 dark:text-amber-100"
-            : "border-slate-200/90 bg-white text-slate-600 group-hover:border-amber-200 group-hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
+            ? "border-brand-accent/40 bg-brand-accent/10 text-slate-900 dark:border-brand-accent/45 dark:bg-brand-accent/15 dark:text-zinc-50"
+            : "border-slate-200/90 bg-white text-slate-600 group-hover:border-brand-accent/25 group-hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
         )}
       >
         <Icon className="h-[1.1rem] w-[1.1rem] shrink-0" strokeWidth={1.75} />
@@ -303,7 +304,7 @@ function DockItem({
         <span
           className={cn(
             "max-w-[4.5rem] text-center text-[0.625rem] font-medium leading-tight",
-            isActive ? "text-amber-800 dark:text-amber-200" : "text-slate-600 dark:text-zinc-400"
+            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-600 dark:text-zinc-400"
           )}
         >
           {item.label}
@@ -359,15 +360,15 @@ export function ChairMobileDock({
         >
           <span
             className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-xl bg-amber-600 text-lg text-white shadow-sm",
+              "flex h-11 w-11 items-center justify-center rounded-xl bg-brand-accent text-lg text-white shadow-sm",
               hubActive &&
-                "ring-2 ring-brand-diplomatic/80 ring-offset-2 ring-offset-brand-cream dark:ring-brand-diplomatic/70 dark:ring-offset-[#121212]"
+                "ring-2 ring-brand-silver/80 ring-offset-2 ring-offset-brand-cream dark:ring-brand-silver/70 dark:ring-offset-[#121212]"
             )}
           >
             📌
           </span>
           {!labelsHidden ? (
-            <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-amber-800 dark:text-amber-200">
+            <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-brand-accent dark:text-brand-accent-bright">
               Committee
             </span>
           ) : null}

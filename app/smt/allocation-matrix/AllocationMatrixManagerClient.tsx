@@ -186,7 +186,7 @@ export function AllocationMatrixManagerClient({
     return (
       <p className="text-sm text-brand-muted">
         Add committees to this event first in{" "}
-        <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
+        <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
           Event & committee sessions
         </Link>
         .
@@ -212,7 +212,7 @@ export function AllocationMatrixManagerClient({
         </div>
         <Link
           href={`/smt/allocation-passwords?conference=${selectedConferenceId}`}
-          className="text-sm text-brand-gold hover:underline"
+          className="text-sm text-brand-accent hover:underline"
         >
           Edit placard codes sheet →
         </Link>
@@ -266,7 +266,7 @@ export function AllocationMatrixManagerClient({
                         <td className="px-3 py-2">
                           <a
                             href={signupHref(selectedConferenceId, r.id)}
-                            className="text-xs text-brand-gold hover:underline break-all"
+                            className="text-xs text-brand-accent hover:underline break-all"
                           >
                             Allocation sign-up link
                           </a>
@@ -301,7 +301,7 @@ export function AllocationMatrixManagerClient({
                       <td className="px-3 py-2">
                         <a
                           href={signupHref(selectedConferenceId, r.id)}
-                          className="text-xs text-brand-gold hover:underline break-all"
+                          className="text-xs text-brand-accent hover:underline break-all"
                         >
                           Allocation sign-up link
                         </a>
@@ -312,7 +312,7 @@ export function AllocationMatrixManagerClient({
                             type="submit"
                             form={formId}
                             disabled={pending}
-                            className="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium disabled:opacity-50"
+                            className="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium disabled:opacity-50"
                           >
                             Save
                           </button>
@@ -480,7 +480,7 @@ export function AllocationMatrixManagerClient({
                 onClick={() => onConferenceChange(tab.id)}
                 className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                   active
-                    ? "border-brand-gold/60 bg-brand-gold/20 text-brand-navy"
+                    ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
                     : "border-brand-navy/15 bg-white text-brand-navy/80 hover:bg-brand-cream/70"
                 }`}
               >

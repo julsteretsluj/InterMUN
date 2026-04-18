@@ -27,7 +27,7 @@ export function CommitteeLivePreview({
         </div>
         <Link
           href={`/smt/committees/${conferenceId}`}
-          className="shrink-0 text-xs font-medium text-brand-gold hover:underline"
+          className="shrink-0 text-xs font-medium text-brand-accent hover:underline"
         >
           Full view
         </Link>

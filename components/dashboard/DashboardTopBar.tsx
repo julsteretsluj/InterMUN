@@ -68,7 +68,7 @@ export function DashboardTopBar({
             />
           ) : (
             <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-blue-800 text-[0.65rem] font-bold text-white shadow-md"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-accent to-blue-800 text-[0.65rem] font-bold text-white shadow-md"
               aria-hidden
             >
               IM
@@ -82,13 +82,13 @@ export function DashboardTopBar({
           {showDelegateHubLink ? (
             <Link
               href="/delegate"
-              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:border-brand-gold/45 hover:bg-brand-gold/10 dark:border-white/12 dark:bg-white/5 dark:text-zinc-100 dark:hover:border-brand-gold/50 dark:hover:bg-brand-gold/15 sm:inline-flex"
+              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:border-brand-accent/45 hover:bg-brand-accent/10 dark:border-white/12 dark:bg-white/5 dark:text-zinc-100 dark:hover:border-brand-accent/50 dark:hover:bg-brand-accent/15 sm:inline-flex"
             >
               📄 Delegate hub
             </Link>
           ) : null}
           {conferenceLine ? (
-            <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-diplomatic lg:block">
+            <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-silver lg:block">
               {conferenceLine}
             </p>
           ) : null}
@@ -106,7 +106,7 @@ export function DashboardTopBar({
               className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition hover:bg-slate-50 dark:hover:bg-zinc-800"
             >
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-blue-900 text-xs font-bold text-white shadow-inner"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-accent to-blue-900 text-xs font-bold text-white shadow-inner"
                 aria-hidden
               >
                 {initials}

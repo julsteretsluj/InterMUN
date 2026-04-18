@@ -35,7 +35,7 @@ export default async function AllocationSignupPage({
             This allocation link is missing required details. Ask your chair or SMT for a fresh
             sign-up link.
           </p>
-          <Link href="/profile" className="text-sm text-brand-gold hover:underline">
+          <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             Return to profile
           </Link>
         </div>
@@ -68,7 +68,7 @@ export default async function AllocationSignupPage({
           <p className="text-sm text-brand-muted">
             This nation/position is no longer available in the selected committee.
           </p>
-          <Link href="/profile" className="text-sm text-brand-gold hover:underline">
+          <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             Return to profile
           </Link>
         </div>
@@ -85,7 +85,7 @@ export default async function AllocationSignupPage({
             {targetAllocation.country} has already been claimed by another account. Please choose a
             different allocation.
           </p>
-          <Link href="/profile" className="text-sm text-brand-gold hover:underline">
+          <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             Return to profile
           </Link>
         </div>
@@ -109,7 +109,7 @@ export default async function AllocationSignupPage({
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
           <h1 className="font-display text-xl font-semibold">Could not submit request</h1>
           <p className="text-sm text-brand-muted">{requestResult.error}</p>
-          <Link href="/profile" className="text-sm text-brand-gold hover:underline">
+          <Link href="/profile" className="text-sm text-brand-accent hover:underline">
             Return to profile
           </Link>
         </div>
@@ -131,7 +131,7 @@ export default async function AllocationSignupPage({
         <div className="pt-1">
           <Link
             href={`/committee-gate?next=${encodeURIComponent(nextPath)}&allocation=${encodeURIComponent(targetAllocation.country)}`}
-            className="text-sm text-brand-gold hover:underline"
+            className="text-sm text-brand-accent hover:underline"
           >
             Continue to committee sign-in
           </Link>

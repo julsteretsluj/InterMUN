@@ -86,7 +86,7 @@ function Placard({
             : "border-slate-300/80 bg-white/90 text-slate-800 shadow-sm",
           interactive ? "hover:border-slate-400 hover:shadow" : "",
           dimmed ? "opacity-[0.32] scale-[0.98]" : "",
-          ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-gold-bright/60" : "",
+          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-accent-bright/60" : "",
         ].join(" ")}
       >
         {vacant ? (
@@ -134,7 +134,7 @@ function Placard({
     return (
       <Link
         href={personHref}
-        className={[wrapClass, "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright"].join(
+        className={[wrapClass, "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"].join(
           " "
         )}
         aria-label={`View profile: ${country}`}
@@ -181,7 +181,7 @@ function DaisStation({
         />
         {seat.showGavel && (
           <Gavel
-            className="w-6 h-6 sm:w-7 sm:h-7 text-brand-gold-bright -mb-0.5 -ml-1 drop-shadow"
+            className="w-6 h-6 sm:w-7 sm:h-7 text-brand-accent-bright -mb-0.5 -ml-1 drop-shadow"
             strokeWidth={2}
             aria-label="Gavel"
           />
@@ -191,10 +191,10 @@ function DaisStation({
         className={[
           "rounded-md bg-white/90 px-2 py-1 w-full text-center border border-slate-300/80 transition-[opacity,transform,box-shadow] duration-200 shadow-sm",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
-          ringMatch ? "ring-2 ring-brand-gold-bright/70 ring-offset-2 ring-offset-white border-brand-gold-bright/50" : "",
+          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "",
         ].join(" ")}
       >
-        <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-gold-bright/90">
+        <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-accent-bright/90">
           {seat.title}
         </p>
         <p className="text-xs sm:text-sm font-medium truncate max-w-[7rem] mx-auto">
@@ -207,7 +207,7 @@ function DaisStation({
   const wrapClass = [
     "flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem] transition-opacity duration-200",
     dimmed ? "opacity-[0.35]" : "",
-    personHref ? "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright" : "cursor-default",
+    personHref ? "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright" : "cursor-default",
   ].join(" ");
 
   if (personHref) {

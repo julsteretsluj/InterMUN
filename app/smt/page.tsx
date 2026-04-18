@@ -134,7 +134,7 @@ export default async function SmtOverviewPage({
     return (
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-brand-muted text-sm">
         No committees found for this event. Add them in{" "}
-        <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
+        <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
           Event & committee sessions
         </Link>{" "}
         or in Supabase.
@@ -146,7 +146,7 @@ export default async function SmtOverviewPage({
     <div>
       {overviewErr === "smt-no-session-floor" && (
         <div
-          className="mb-6 rounded-lg border border-brand-gold/40 bg-brand-cream/60 px-4 py-3 text-sm text-brand-navy"
+          className="mb-6 rounded-lg border border-brand-accent/40 bg-brand-cream/60 px-4 py-3 text-sm text-brand-navy"
           role="status"
         >
           <strong>Session floor</strong> (timers, speakers, roll call) is for <strong>dais chairs</strong>{" "}
@@ -193,7 +193,7 @@ export default async function SmtOverviewPage({
                   >
                     {tags.format}
                   </span>
-                  <span className="rounded-full border border-brand-diplomatic/60 bg-brand-diplomatic/15 px-2 py-0.5 text-[0.68rem] font-semibold text-brand-navy">
+                  <span className="rounded-full border border-brand-silver/60 bg-brand-silver/15 px-2 py-0.5 text-[0.68rem] font-semibold text-brand-navy">
                     {tags.ageRange}
                   </span>
                   {tags.eslFriendly ? (

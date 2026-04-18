@@ -28,14 +28,14 @@ function StatMiniCard({
 }: {
   label: string;
   value: string | number;
-  tint: "blue" | "amber" | "accent" | "sky";
+  tint: "blue" | "silver" | "accent" | "sky";
   onPress?: () => void;
   title?: string;
 }) {
   const tones = {
     blue: "from-blue-500/25 to-blue-600/5 border-blue-400/20",
-    amber: "from-amber-500/25 to-amber-600/5 border-amber-400/20",
-    accent: "from-blue-600/22 to-blue-950/8 border-brand-gold/30",
+    silver: "from-slate-400/25 to-slate-700/10 border-slate-400/25",
+    accent: "from-blue-600/22 to-blue-950/8 border-brand-accent/30",
     sky: "from-sky-500/25 to-sky-600/5 border-sky-400/20",
   } as const;
   const interactive = Boolean(onPress);
@@ -43,7 +43,7 @@ function StatMiniCard({
     "rounded-xl border bg-gradient-to-br px-3 py-2.5 shadow-sm text-left w-full",
     tones[tint],
     interactive
-      ? "cursor-pointer hover:brightness-110 active:scale-[0.98] transition-[transform,filter] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright"
+      ? "cursor-pointer hover:brightness-110 active:scale-[0.98] transition-[transform,filter] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"
       : "",
   ].join(" ");
 
@@ -265,7 +265,7 @@ export function CommitteeRoomDigitalMUNClient({
       <div className="xl:grid xl:grid-cols-[minmax(0,13.5rem)_minmax(0,1fr)_minmax(0,17.5rem)] xl:gap-6 xl:items-start">
         {/* Left rail — context & stats (mockup sidebar) */}
         <aside className="space-y-4 mb-6 xl:mb-0 xl:sticky xl:top-4">
-          <div className="rounded-2xl border border-brand-gold/20 bg-brand-paper/90 p-4 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
+          <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-4 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Committee</p>
             <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug line-clamp-3">
               {committeeName}
@@ -275,7 +275,7 @@ export function CommitteeRoomDigitalMUNClient({
             <div className="mt-4 pt-4 border-t border-brand-line/50 space-y-2">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Your context</p>
               <div className="flex items-start gap-2 rounded-xl bg-black/20 px-3 py-2 border border-white/5">
-                <UserRound className="size-4 shrink-0 text-brand-gold-bright mt-0.5" strokeWidth={1.5} />
+                <UserRound className="size-4 shrink-0 text-brand-accent-bright mt-0.5" strokeWidth={1.5} />
                 <div className="min-w-0 text-xs">
                   <p className="text-brand-muted">Role</p>
                   <p className="font-medium text-brand-navy capitalize">{role}</p>
@@ -300,7 +300,7 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard
               label="Vacant"
               value={vacantCount}
-              tint="amber"
+              tint="silver"
               onPress={() => setDelegationSearch("vacant")}
               title='Search for "vacant" seats in the room'
             />
@@ -314,9 +314,9 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-gold/15 via-brand-diplomatic/10 to-blue-600/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
+          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-accent/15 via-brand-silver/10 to-blue-600/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
-              <Sparkles className="size-3.5 text-amber-300/90 shrink-0" />
+              <Sparkles className="size-3.5 text-brand-silver shrink-0" />
               Tip
             </div>
             Use the search bar to filter placards and dais. Press Enter to scroll to the first match. Escape
@@ -326,7 +326,7 @@ export function CommitteeRoomDigitalMUNClient({
 
         {/* Center — digital display */}
         <section className="min-w-0 space-y-4 mb-6 xl:mb-0">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl border border-brand-gold/15 bg-brand-paper/85 px-4 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl border border-brand-accent/15 bg-brand-paper/85 px-4 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
             <div className="min-w-0 flex-1">
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
                 Digital display
@@ -365,7 +365,7 @@ export function CommitteeRoomDigitalMUNClient({
                   <button
                     type="button"
                     onClick={() => setDelegationSearch("")}
-                    className="rounded-full p-1.5 text-brand-muted hover:text-brand-navy hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold-bright"
+                    className="rounded-full p-1.5 text-brand-muted hover:text-brand-navy hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright"
                     aria-label="Clear search"
                   >
                     <X className="size-3.5" strokeWidth={2} />
@@ -401,11 +401,11 @@ export function CommitteeRoomDigitalMUNClient({
         </section>
 
         {/* Right rail — delegate floor (chairs: use Chair → Session); notes */}
-        <aside className="rounded-2xl border border-amber-400/15 bg-gradient-to-b from-amber-500/[0.06] via-brand-paper/40 to-brand-paper/20 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
+        <aside className="rounded-2xl border border-slate-400/20 bg-gradient-to-b from-slate-500/[0.08] via-brand-paper/40 to-brand-paper/20 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
           {showDelegateFloorPanel ? (
             <div className="rounded-xl border border-white/5 bg-black/15 p-3 md:p-4">
               <div className="mb-3 flex items-center gap-2">
-                <CircleDot className="size-4 text-brand-gold-bright" />
+                <CircleDot className="size-4 text-brand-accent-bright" />
                 <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Floor</p>
               </div>
               <div className="space-y-4">
@@ -458,7 +458,7 @@ export function CommitteeRoomDigitalMUNClient({
           ) : null}
           <div className="rounded-xl bg-black/15 border border-white/5 p-3 md:p-4">
             <div className="flex items-center gap-2 mb-3">
-              <Users className="size-4 text-brand-gold-bright" />
+              <Users className="size-4 text-brand-accent-bright" />
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Notes</p>
             </div>
             {isDelegate && !delegateFloorUnlocked ? (
@@ -498,7 +498,7 @@ export function CommitteeRoomDigitalMUNClient({
       {canManageSeats ? (
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/80 p-4 md:p-5 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Gavel className="size-4 text-brand-gold-bright" />
+            <Gavel className="size-4 text-brand-accent-bright" />
             <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">Staff · seats</h3>
           </div>
           <CommitteeRoomStaffControls allocations={staffAllocations} delegates={delegates} chairs={chairs} />

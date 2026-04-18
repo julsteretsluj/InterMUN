@@ -40,7 +40,7 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
           maxLength={6}
           pattern="[A-Za-z0-9]{6}"
           title="Exactly 6 letters or digits"
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-widest text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-widest text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
           placeholder="e.g. ECO741"
         />
         <p className="text-xs text-brand-muted mt-1.5">
@@ -72,14 +72,14 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
       {showStaffTools && (
         <p className="text-center text-sm text-brand-muted">
           Chair or SMT?{" "}
-          <Link href="/chair/room-code" className="text-brand-gold font-medium hover:underline">
+          <Link href="/chair/room-code" className="text-brand-accent font-medium hover:underline">
             Set committee code
           </Link>
         </p>
       )}
 
       <p className="text-center text-sm text-brand-muted">
-        <Link href="/login" className="text-brand-gold hover:underline">
+        <Link href="/login" className="text-brand-accent hover:underline">
           Use a different account
         </Link>
       </p>

@@ -21,7 +21,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
   }, [state?.error]);
 
   return (
-    <form action={formAction} className="space-y-4 rounded-xl border border-brand-gold/40 bg-brand-cream/40 p-4">
+    <form action={formAction} className="space-y-4 rounded-xl border border-brand-accent/40 bg-brand-cream/40 p-4">
       <input type="hidden" name="conference_id" value={conferenceId} />
       <input type="hidden" name="next" value={nextPath} />
 
@@ -44,7 +44,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
           type="password"
           autoComplete="off"
           required
-          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+          className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
           placeholder="Organiser password"
         />
       </div>
@@ -63,7 +63,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full py-2.5 rounded-lg border-2 border-brand-gold text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors disabled:opacity-50 text-sm"
+        className="w-full py-2.5 rounded-lg border-2 border-brand-accent text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors disabled:opacity-50 text-sm"
       >
         {pending ? "Verifying…" : "Continue as SMT (oversight)"}
       </button>

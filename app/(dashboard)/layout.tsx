@@ -136,7 +136,7 @@ export default async function DashboardLayout({
             />
           ) : (
             <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold to-blue-900 text-xs font-bold text-white shadow-md"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-accent to-blue-900 text-xs font-bold text-white shadow-md"
               aria-hidden
             >
               IM
@@ -145,7 +145,7 @@ export default async function DashboardLayout({
           <span
             className={
               isChairRole(normalizedRole)
-                ? "hidden truncate text-lg font-bold tracking-tight text-amber-800 group-hover:block dark:text-amber-200"
+                ? "hidden truncate text-lg font-bold tracking-tight text-slate-700 group-hover:block dark:text-slate-200"
                 : "hidden truncate text-lg font-bold tracking-tight text-blue-800 group-hover:block dark:text-blue-200"
             }
           >

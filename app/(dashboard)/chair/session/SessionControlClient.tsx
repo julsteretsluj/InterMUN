@@ -1900,10 +1900,10 @@ export function SessionControlClient({
     "rounded-xl border border-white/15 bg-black/25 p-3 text-brand-navy shadow-sm backdrop-blur-sm";
   const surfaceLabel = "text-xs font-medium uppercase tracking-wide text-brand-muted";
   const surfaceInputCore =
-    "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/40";
+    "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
   const surfaceField = `mt-1 ${surfaceInputCore}`;
   const surfaceFieldSm =
-    "rounded-lg border border-white/15 bg-black/30 px-2 py-2 text-brand-navy shadow-inner focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/40";
+    "rounded-lg border border-white/15 bg-black/30 px-2 py-2 text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
   const surfaceSubpanel = "space-y-3 rounded-lg border border-white/15 bg-black/20 p-3 text-brand-navy";
   const surfaceInset =
     "max-h-36 space-y-1 overflow-y-auto rounded border border-white/15 bg-black/30 p-2 text-xs text-brand-navy";
@@ -1961,7 +1961,7 @@ export function SessionControlClient({
                 type="button"
                 disabled={pending || !!openMotion}
                 onClick={startGuidedMotionFlow}
-                className="px-3 py-2 rounded-lg border border-brand-gold/50 bg-brand-gold/15 text-brand-navy text-sm font-medium hover:bg-brand-gold/25 disabled:opacity-50"
+                className="px-3 py-2 rounded-lg border border-brand-accent/50 bg-brand-accent/15 text-brand-navy text-sm font-medium hover:bg-brand-accent/25 disabled:opacity-50"
               >
                 Add motion (guided)
               </button>
@@ -1969,7 +1969,7 @@ export function SessionControlClient({
                 type="button"
                 disabled={pending || !!openMotion || motionFloorOpen}
                 onClick={openMotionFloorForStatements}
-                className="px-3 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium disabled:opacity-50"
+                className="px-3 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium disabled:opacity-50"
               >
                 Open floor for motion statements
               </button>
@@ -2322,7 +2322,7 @@ export function SessionControlClient({
                   pending || !!motionDraftValidationError
                 }
                 onClick={() => createMotion()}
-                className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium"
+                className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium"
               >
                 Create and open motion
               </button>
@@ -2751,7 +2751,7 @@ export function SessionControlClient({
               type="button"
               disabled={pending || !speechNoteDraft.trim()}
               onClick={saveChairSpeechNote}
-              className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
               Save speech note
             </button>
@@ -2834,7 +2834,7 @@ export function SessionControlClient({
               type="button"
               disabled={pending}
               onClick={saveTimer}
-              className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
               Save timer
             </button>
@@ -2913,7 +2913,7 @@ export function SessionControlClient({
             type="button"
             disabled={pending}
             onClick={postDais}
-            className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
+            className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
           >
             Post
           </button>
@@ -2977,7 +2977,7 @@ export function SessionControlClient({
                           type="button"
                           disabled={pending}
                           onClick={saveDaisEdit}
-                          className="rounded-lg bg-brand-gold px-3 py-1.5 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
+                          className="rounded-lg bg-brand-accent px-3 py-1.5 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
                         >
                           Save changes
                         </button>
@@ -3117,7 +3117,7 @@ export function SessionControlClient({
                               onClick={() => setRollAttendanceForRow(r.allocation_id, opt.value)}
                               className={`rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition disabled:opacity-50 sm:text-sm ${
                                 active
-                                  ? "border-brand-gold/70 bg-brand-gold/25 text-brand-navy shadow-sm"
+                                  ? "border-brand-accent/70 bg-brand-accent/25 text-brand-navy shadow-sm"
                                   : "border-white/20 bg-white/5 text-brand-navy/90 hover:bg-white/15"
                               }`}
                             >

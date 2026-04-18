@@ -38,7 +38,7 @@ export default async function CrisisSlidesPage() {
         <p className="text-sm text-brand-muted">
           Live crisis deck for <span className="font-medium text-brand-navy">{committeeLine}</span>. Secretariat
           sets the Slides link under{" "}
-          <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
+          <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
             Event &amp; committee sessions
           </Link>
           .

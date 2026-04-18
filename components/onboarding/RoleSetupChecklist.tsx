@@ -69,7 +69,7 @@ export function RoleSetupChecklist({ role }: { role: RoleKey }) {
           <li key={`${step.href}-${step.label}`} className="rounded-lg border border-brand-navy/10 bg-black/10 px-3 py-2">
             <p className="text-sm font-medium text-brand-navy">
               {i + 1}.{" "}
-              <Link href={step.href} className="text-brand-gold hover:underline">
+              <Link href={step.href} className="text-brand-accent hover:underline">
                 {step.label}
               </Link>
             </p>

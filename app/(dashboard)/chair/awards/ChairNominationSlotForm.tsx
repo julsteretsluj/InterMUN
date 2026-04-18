@@ -317,7 +317,7 @@ export function ChairNominationSlotForm({
           <button
             type="submit"
             disabled={isSaving}
-            className="px-4 py-2 rounded-lg bg-brand-gold text-white font-semibold disabled:opacity-60"
+            className="px-4 py-2 rounded-lg bg-brand-accent text-white font-semibold disabled:opacity-60"
           >
             {isSaving ? "Saving…" : slotRequired ? `Save ${typeLabel} top ${rank}` : `Save optional ${typeLabel} slot`}
           </button>

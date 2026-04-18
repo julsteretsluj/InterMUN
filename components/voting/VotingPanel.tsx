@@ -237,7 +237,7 @@ export function VotingPanel({
               <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-brand-navy dark:border-white/12 dark:bg-black/25">
                 <input
                   type="checkbox"
-                  className="size-4 rounded border-slate-300 text-blue-700 focus:ring-brand-gold-bright dark:border-white/20"
+                  className="size-4 rounded border-slate-300 text-blue-700 focus:ring-brand-accent-bright dark:border-white/20"
                   checked={d.must_vote}
                   onChange={(e) =>
                     setDrafts((prev) => ({

@@ -5,8 +5,8 @@
 /*
  * Inter-MUN Coursera-style system: calm UI × vintage diplomatic interface.
  * Primary canvas: deep charcoal (#121212) in dark; vintage paper in light.
- * Accent: blue for interactions. Highlight: aged diplomatic gold for status.
- * Token names `brand-navy` / `brand-gold` remain as legacy keys for existing components.
+ * Accent: blue for interactions. Highlight: silver for status and metallic emphasis.
+ * Token names: `brand-navy`, `brand-accent` (primary), `brand-silver` (status / metallic emphasis).
  */
 html {
   --background: #f5f1e8;
@@ -15,10 +15,10 @@ html {
   --brand-navy: #121212;
   --brand-navy-soft: rgba(18, 18, 18, 0.06);
 
-  --brand-gold: #2563eb;
-  --brand-gold-bright: #3b82f6;
+  --brand-accent: #2563eb;
+  --brand-accent-bright: #3b82f6;
 
-  --brand-diplomatic: #c4a574;
+  --brand-silver: #a1a8b5;
 
   --brand-cream: #ebe4d7;
   --brand-paper: rgba(255, 252, 246, 0.94);
@@ -38,10 +38,10 @@ html.dark {
   --brand-navy: #f5f5f5;
   --brand-navy-soft: rgba(245, 245, 245, 0.12);
 
-  --brand-gold: #60a5fa;
-  --brand-gold-bright: #93c5fd;
+  --brand-accent: #60a5fa;
+  --brand-accent-bright: #93c5fd;
 
-  --brand-diplomatic: #d4b896;
+  --brand-silver: #d1d5db;
 
   --brand-cream: rgba(255, 255, 255, 0.05);
   --brand-paper: rgba(255, 255, 255, 0.07);
@@ -59,9 +59,9 @@ html.dark {
   --color-foreground: var(--foreground);
   --color-brand-navy: var(--brand-navy);
   --color-brand-navy-soft: var(--brand-navy-soft);
-  --color-brand-gold: var(--brand-gold);
-  --color-brand-gold-bright: var(--brand-gold-bright);
-  --color-brand-diplomatic: var(--brand-diplomatic);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-bright: var(--brand-accent-bright);
+  --color-brand-silver: var(--brand-silver);
   --color-brand-cream: var(--brand-cream);
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
@@ -93,9 +93,9 @@ body {
   background-attachment: fixed;
   background-image: linear-gradient(
     185deg,
-    color-mix(in srgb, var(--brand-gold) 7%, transparent) 0%,
+    color-mix(in srgb, var(--brand-accent) 7%, transparent) 0%,
     var(--background) 42%,
-    color-mix(in srgb, var(--brand-diplomatic) 12%, var(--background)) 100%
+    color-mix(in srgb, var(--brand-silver) 12%, var(--background)) 100%
   );
 }
 
@@ -104,12 +104,12 @@ html.dark body {
   background-image:
     radial-gradient(
       circle at top left,
-      color-mix(in srgb, var(--brand-gold) 22%, transparent) 0%,
+      color-mix(in srgb, var(--brand-accent) 22%, transparent) 0%,
       rgba(18, 18, 18, 0.97) 42%
     ),
     radial-gradient(
       circle at bottom right,
-      color-mix(in srgb, var(--brand-diplomatic) 12%, transparent) 0%,
+      color-mix(in srgb, var(--brand-silver) 12%, transparent) 0%,
       rgba(18, 18, 18, 0.98) 46%
     ),
     linear-gradient(145deg, #161616 0%, #121212 100%);
@@ -119,14 +119,14 @@ html.dark body {
 .theme-page-glow {
   background-image: radial-gradient(
     ellipse 80% 50% at 50% -20%,
-    color-mix(in srgb, var(--brand-gold) 9%, transparent),
+    color-mix(in srgb, var(--brand-accent) 9%, transparent),
     transparent
   );
 }
 html.dark .theme-page-glow {
   background-image: radial-gradient(
     ellipse 80% 50% at 50% -20%,
-    color-mix(in srgb, var(--brand-gold) 16%, transparent),
+    color-mix(in srgb, var(--brand-accent) 16%, transparent),
     transparent
   );
 }
@@ -137,16 +137,16 @@ html.dark .theme-page-glow {
  */
 
 html.theme-red:not(.dark) {
-  --brand-gold: #dc2626;
-  --brand-gold-bright: #ef4444;
+  --brand-accent: #dc2626;
+  --brand-accent-bright: #ef4444;
 }
 html.theme-red:not(.dark) body {
   background: linear-gradient(180deg, rgba(220, 38, 38, 0.07), #ffffff 48%);
   background-color: #ffffff;
 }
 html.theme-red.dark {
-  --brand-gold: #f87171;
-  --brand-gold-bright: #fca5a5;
+  --brand-accent: #f87171;
+  --brand-accent-bright: #fca5a5;
 }
 html.theme-red.dark body {
   background-image:
@@ -157,16 +157,16 @@ html.theme-red.dark body {
 }
 
 html.theme-orange:not(.dark) {
-  --brand-gold: #ea580c;
-  --brand-gold-bright: #fb923c;
+  --brand-accent: #ea580c;
+  --brand-accent-bright: #fb923c;
 }
 html.theme-orange:not(.dark) body {
   background: linear-gradient(180deg, rgba(234, 88, 12, 0.08), #ffffff 48%);
   background-color: #ffffff;
 }
 html.theme-orange.dark {
-  --brand-gold: #fb923c;
-  --brand-gold-bright: #fdba74;
+  --brand-accent: #fb923c;
+  --brand-accent-bright: #fdba74;
 }
 html.theme-orange.dark body {
   background-image:
@@ -177,16 +177,16 @@ html.theme-orange.dark body {
 }
 
 html.theme-yellow:not(.dark) {
-  --brand-gold: #ca8a04;
-  --brand-gold-bright: #eab308;
+  --brand-accent: #ca8a04;
+  --brand-accent-bright: #eab308;
 }
 html.theme-yellow:not(.dark) body {
   background: linear-gradient(180deg, rgba(202, 138, 4, 0.1), #fffef8 50%);
   background-color: #ffffff;
 }
 html.theme-yellow.dark {
-  --brand-gold: #eab308;
-  --brand-gold-bright: #fde047;
+  --brand-accent: #eab308;
+  --brand-accent-bright: #fde047;
 }
 html.theme-yellow.dark body {
   background-image:
@@ -197,16 +197,16 @@ html.theme-yellow.dark body {
 }
 
 html.theme-blue:not(.dark) {
-  --brand-gold: #2563eb;
-  --brand-gold-bright: #3b82f6;
+  --brand-accent: #2563eb;
+  --brand-accent-bright: #3b82f6;
 }
 html.theme-blue:not(.dark) body {
   background: linear-gradient(180deg, rgba(37, 99, 235, 0.07), #ffffff 48%);
   background-color: #ffffff;
 }
 html.theme-blue.dark {
-  --brand-gold: #60a5fa;
-  --brand-gold-bright: #93c5fd;
+  --brand-accent: #60a5fa;
+  --brand-accent-bright: #93c5fd;
 }
 html.theme-blue.dark body {
   background-image:
@@ -217,16 +217,16 @@ html.theme-blue.dark body {
 }
 
 html.theme-purple:not(.dark) {
-  --brand-gold: #7c3aed;
-  --brand-gold-bright: #8b5cf6;
+  --brand-accent: #7c3aed;
+  --brand-accent-bright: #8b5cf6;
 }
 html.theme-purple:not(.dark) body {
   background: linear-gradient(180deg, rgba(124, 58, 237, 0.07), #ffffff 48%);
   background-color: #ffffff;
 }
 html.theme-purple.dark {
-  --brand-gold: #a78bfa;
-  --brand-gold-bright: #c4b5fd;
+  --brand-accent: #a78bfa;
+  --brand-accent-bright: #c4b5fd;
 }
 html.theme-purple.dark body {
   background-image:
@@ -237,16 +237,16 @@ html.theme-purple.dark body {
 }
 
 html.theme-pink:not(.dark) {
-  --brand-gold: #db2777;
-  --brand-gold-bright: #ec4899;
+  --brand-accent: #db2777;
+  --brand-accent-bright: #ec4899;
 }
 html.theme-pink:not(.dark) body {
   background: linear-gradient(180deg, rgba(219, 39, 119, 0.07), #ffffff 48%);
   background-color: #ffffff;
 }
 html.theme-pink.dark {
-  --brand-gold: #f472b6;
-  --brand-gold-bright: #fbcfe8;
+  --brand-accent: #f472b6;
+  --brand-accent-bright: #fbcfe8;
 }
 html.theme-pink.dark body {
   background-image:
@@ -257,16 +257,16 @@ html.theme-pink.dark body {
 }
 
 html.theme-neutral:not(.dark) {
-  --brand-gold: #27272a;
-  --brand-gold-bright: #3f3f46;
+  --brand-accent: #27272a;
+  --brand-accent-bright: #3f3f46;
 }
 html.theme-neutral:not(.dark) body {
   background: linear-gradient(180deg, rgba(39, 39, 42, 0.06), #fafafa 46%);
   background-color: #fafafa;
 }
 html.theme-neutral.dark {
-  --brand-gold: #d4d4d8;
-  --brand-gold-bright: #fafafa;
+  --brand-accent: #d4d4d8;
+  --brand-accent-bright: #fafafa;
 }
 html.theme-neutral.dark body {
   background-image:
@@ -283,22 +283,22 @@ html.theme-neutral.dark body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--brand-gold-bright);
+  outline: 2px solid var(--brand-accent-bright);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-gold) 22%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-accent) 22%, transparent);
 }
 
 html.dark :focus-visible {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-gold) 28%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-accent) 28%, transparent);
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--brand-gold) 30%, transparent);
+  background: color-mix(in srgb, var(--brand-accent) 30%, transparent);
   color: inherit;
 }
 
 html.dark ::selection {
-  background: color-mix(in srgb, var(--brand-gold) 40%, transparent);
+  background: color-mix(in srgb, var(--brand-accent) 40%, transparent);
   color: #ffffff;
 }
 
@@ -340,26 +340,26 @@ html.dark ::selection {
   }
 
   .mun-field {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-gold/55 focus:outline-none focus:ring-2 focus:ring-brand-gold-bright/25;
-    @apply dark:border-white/15 dark:bg-black/30 dark:text-brand-navy dark:shadow-inner dark:placeholder:text-brand-muted/60 dark:focus:border-brand-gold/50 dark:focus:ring-brand-gold/40;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-accent/55 focus:outline-none focus:ring-2 focus:ring-brand-accent-bright/25;
+    @apply dark:border-white/15 dark:bg-black/30 dark:text-brand-navy dark:shadow-inner dark:placeholder:text-brand-muted/60 dark:focus:border-brand-accent/50 dark:focus:ring-brand-accent/40;
   }
 
   .mun-btn {
-    @apply rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-colors duration-200 ease-out hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold-bright disabled:opacity-45;
+    @apply rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-colors duration-200 ease-out hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright disabled:opacity-45;
     @apply dark:border-white/15 dark:bg-white/5 dark:text-brand-navy dark:hover:bg-white/10;
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-brand-gold/45 bg-brand-gold px-4 py-2 text-sm font-semibold text-white transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
+    @apply rounded-lg border border-brand-accent/45 bg-brand-accent px-4 py-2 text-sm font-semibold text-white transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
   }
 
   .mun-btn-danger {
-    @apply rounded-lg border border-rose-300 bg-white px-3 py-2 text-sm font-medium text-rose-800 hover:border-rose-400 hover:bg-rose-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold-bright disabled:opacity-45;
+    @apply rounded-lg border border-rose-300 bg-white px-3 py-2 text-sm font-medium text-rose-800 hover:border-rose-400 hover:bg-rose-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright disabled:opacity-45;
     @apply dark:border-rose-400/30 dark:bg-white/5 dark:text-brand-navy dark:hover:border-rose-400/50 dark:hover:bg-rose-500/15;
   }
 
   .mun-link {
-    @apply font-semibold text-brand-gold underline underline-offset-2 transition-colors duration-200 ease-out hover:text-brand-gold-bright;
-    @apply dark:text-brand-gold-bright dark:hover:text-brand-gold;
+    @apply font-semibold text-brand-accent underline underline-offset-2 transition-colors duration-200 ease-out hover:text-brand-accent-bright;
+    @apply dark:text-brand-accent-bright dark:hover:text-brand-accent;
   }
 }

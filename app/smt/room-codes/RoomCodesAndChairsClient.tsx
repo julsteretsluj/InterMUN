@@ -35,13 +35,13 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
             defaultValue={c.committee_code ?? ""}
             placeholder="e.g. DIS795"
             autoComplete="off"
-            className="w-full px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy placeholder:text-brand-muted/70 font-mono text-sm uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold"
+            className="w-full px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy placeholder:text-brand-muted/70 font-mono text-sm uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent"
           />
         </div>
         <button
           type="submit"
           disabled={pending}
-          className="px-4 py-2 rounded-lg bg-brand-gold text-white text-sm font-semibold disabled:opacity-50 border border-brand-navy/20"
+          className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-semibold disabled:opacity-50 border border-brand-navy/20"
         >
           {pending ? "Saving…" : "Save"}
         </button>

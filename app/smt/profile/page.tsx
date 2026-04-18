@@ -38,7 +38,7 @@ export default async function SmtProfilePage() {
   return (
     <MunPageShell title="Profile">
       {(myAwards?.length ?? 0) > 0 && (
-        <div className="mb-8 rounded-xl border border-brand-gold/30 bg-brand-cream/50 p-4 md:p-5">
+        <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">Recorded awards</h3>
           <p className="text-xs text-brand-muted mb-3">
             Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your

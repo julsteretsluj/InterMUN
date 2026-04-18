@@ -104,7 +104,7 @@ export default async function RoomGatePage({
               ) : null}
               <Link
                 href="/profile"
-                className="block text-center text-sm text-brand-gold hover:underline py-2"
+                className="block text-center text-sm text-brand-accent hover:underline py-2"
               >
                 Go to profile
               </Link>
@@ -132,7 +132,7 @@ export default async function RoomGatePage({
       <div className="relative w-full max-w-md space-y-8">
         <BrandWordmark />
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10">
-          <div className="h-1 w-16 rounded-full bg-brand-gold mx-auto mb-6" aria-hidden />
+          <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
           <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
             Join your committee
           </h1>
@@ -141,7 +141,7 @@ export default async function RoomGatePage({
             entered the <strong>conference code</strong> on the previous screen.
           </p>
           <p className="text-xs text-brand-muted text-center mb-4">
-            <Link href={`/event-gate?next=${encodeURIComponent(nextPath)}`} className="text-brand-gold hover:underline">
+            <Link href={`/event-gate?next=${encodeURIComponent(nextPath)}`} className="text-brand-accent hover:underline">
               Wrong conference? Enter a different conference code
             </Link>
           </p>
@@ -158,7 +158,7 @@ export default async function RoomGatePage({
               <input type="hidden" name="next" value={nextPath} />
               <button
                 type="submit"
-                className="w-full py-3 rounded-lg border-2 border-brand-gold text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors"
+                className="w-full py-3 rounded-lg border-2 border-brand-accent text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors"
               >
                 SMT: open latest committee (skip codes)
               </button>
@@ -173,7 +173,7 @@ export default async function RoomGatePage({
             <div className="mb-6 rounded-xl border border-brand-navy/15 bg-brand-cream/50 p-4">
               <Link
                 href={`/conference-setup?next=${encodeURIComponent(nextPath)}`}
-                className="block text-center text-sm font-semibold text-brand-navy hover:text-brand-gold transition-colors"
+                className="block text-center text-sm font-semibold text-brand-navy hover:text-brand-accent transition-colors"
               >
                 Set up a new conference (SMT only)
               </Link>

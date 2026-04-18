@@ -132,7 +132,7 @@ export default async function CommitteeRoomPersonPage({
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] items-start">
         {/* Profile rail — mockup left sidebar */}
-        <aside className="rounded-2xl border border-brand-gold/20 bg-brand-paper/90 p-6 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]">
+        <aside className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-6 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5)]">
           <div className="flex flex-col items-center text-center">
             <div className="relative">
               <div
@@ -146,7 +146,7 @@ export default async function CommitteeRoomPersonPage({
                 {initials}
               </div>
               <span
-                className="absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full bg-brand-gold-bright border-[3px] border-[rgba(18,18,18,0.95)] shadow-sm"
+                className="absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full bg-brand-accent-bright border-[3px] border-[rgba(18,18,18,0.95)] shadow-sm"
                 title="In committee"
                 aria-hidden
               />
@@ -187,7 +187,7 @@ export default async function CommitteeRoomPersonPage({
         {/* Detail cards — mockup main list / panels */}
         <div className="space-y-4 min-w-0">
           {placard ? (
-            <section className="rounded-2xl border border-brand-gold/15 bg-gradient-to-br from-brand-gold/[0.12] via-brand-paper/50 to-brand-diplomatic/[0.1] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-brand-accent/15 bg-gradient-to-br from-brand-accent/[0.12] via-brand-paper/50 to-brand-silver/[0.1] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
                 Delegation placard
               </h2>
@@ -201,7 +201,7 @@ export default async function CommitteeRoomPersonPage({
           ) : null}
 
           {daisSeat ? (
-            <section className="rounded-2xl border border-brand-diplomatic/25 bg-gradient-to-br from-brand-diplomatic/[0.12] via-brand-paper/50 to-brand-gold/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-brand-silver/25 bg-gradient-to-br from-brand-silver/[0.12] via-brand-paper/50 to-brand-accent/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">Dais</h2>
               <dl className="grid gap-2 sm:grid-cols-2">
                 <InfoRow label="Role" value={daisSeat.title} />

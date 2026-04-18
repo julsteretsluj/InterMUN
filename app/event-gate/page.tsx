@@ -61,7 +61,7 @@ export default async function EventGatePage({
       <div className="relative w-full max-w-md space-y-8">
         <BrandWordmark />
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10">
-          <div className="h-1 w-16 rounded-full bg-brand-gold mx-auto mb-6" aria-hidden />
+          <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
           <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
             Join your conference
           </h1>
@@ -71,7 +71,7 @@ export default async function EventGatePage({
           </p>
           <EventGateForm roomGateNext={roomGateNext} />
           <p className="text-center mt-6">
-            <Link href={`/room-gate?next=${encodeURIComponent(finalNext)}`} className="text-sm text-brand-gold hover:underline">
+            <Link href={`/room-gate?next=${encodeURIComponent(finalNext)}`} className="text-sm text-brand-accent hover:underline">
               Already entered the conference code? Committee step →
             </Link>
           </p>

@@ -39,14 +39,14 @@ export function GoogleSlidesEmbed({
     <div className="space-y-2">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-medium text-brand-navy flex items-center gap-2">
-          <Presentation className="w-4 h-4 text-brand-gold opacity-90" aria-hidden />
+          <Presentation className="w-4 h-4 text-brand-accent opacity-90" aria-hidden />
           {heading}
         </p>
         <a
           href={openHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs font-medium text-brand-gold hover:text-brand-gold-bright hover:underline"
+          className="inline-flex items-center gap-1 text-xs font-medium text-brand-accent hover:text-brand-accent-bright hover:underline"
         >
           Open in Google Slides
           <ExternalLink className="w-3.5 h-3.5" aria-hidden />

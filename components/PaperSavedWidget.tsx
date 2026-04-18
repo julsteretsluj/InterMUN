@@ -45,7 +45,7 @@ export function PaperSavedWidget() {
   return (
     <div className="fixed bottom-4 right-4 w-56 rounded-xl border border-brand-navy/10 bg-brand-paper shadow-[0_12px_40px_-8px_rgba(10,22,40,0.2)] p-3 z-50">
       <h3 className="text-sm font-semibold mb-2 flex items-center gap-2 text-brand-navy">
-        <FileText className="w-4 h-4 text-brand-gold" />
+        <FileText className="w-4 h-4 text-brand-accent" />
         Paper Saved
       </h3>
       <ul className="space-y-1 text-sm">
@@ -53,7 +53,7 @@ export function PaperSavedWidget() {
           <li key={p.id}>
             <Link
               href={p.href}
-              className="block truncate px-2 py-1 rounded-md text-brand-navy hover:text-brand-gold-bright font-medium underline-offset-2 hover:underline hover:bg-white/5 transition-colors"
+              className="block truncate px-2 py-1 rounded-md text-brand-navy hover:text-brand-accent-bright font-medium underline-offset-2 hover:underline hover:bg-white/5 transition-colors"
             >
               {p.title}
             </Link>

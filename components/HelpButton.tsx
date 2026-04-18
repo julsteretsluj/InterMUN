@@ -36,7 +36,7 @@ export function HelpButton({
         className={[
           "inline-flex items-center justify-center rounded-lg border border-slate-200/90 bg-white/60 p-1",
           "text-slate-600 hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-bright/25",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent-bright/25",
           className ?? "",
         ].join(" ")}
       >

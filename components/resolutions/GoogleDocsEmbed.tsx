@@ -40,7 +40,7 @@ export function GoogleDocsEmbed({
     <div className="space-y-2">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-medium text-brand-navy flex items-center gap-2">
-          <MonitorPlay className="w-4 h-4 text-brand-gold opacity-90" aria-hidden />
+          <MonitorPlay className="w-4 h-4 text-brand-accent opacity-90" aria-hidden />
           {heading}
         </p>
         <div className="flex flex-wrap items-center gap-2">
@@ -50,7 +50,7 @@ export function GoogleDocsEmbed({
               onClick={() => setMode("edit")}
               className={
                 mode === "edit"
-                  ? "px-2.5 py-1 rounded-md bg-brand-gold/25 text-brand-gold-bright font-medium"
+                  ? "px-2.5 py-1 rounded-md bg-brand-accent/25 text-brand-accent-bright font-medium"
                   : "px-2.5 py-1 rounded-md text-brand-muted hover:text-brand-navy"
               }
             >
@@ -61,7 +61,7 @@ export function GoogleDocsEmbed({
               onClick={() => setMode("preview")}
               className={
                 mode === "preview"
-                  ? "px-2.5 py-1 rounded-md bg-brand-gold/25 text-brand-gold-bright font-medium"
+                  ? "px-2.5 py-1 rounded-md bg-brand-accent/25 text-brand-accent-bright font-medium"
                   : "px-2.5 py-1 rounded-md text-brand-muted hover:text-brand-navy"
               }
             >
@@ -72,7 +72,7 @@ export function GoogleDocsEmbed({
             href={googleDocsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs font-medium text-brand-gold hover:text-brand-gold-bright hover:underline"
+            className="inline-flex items-center gap-1 text-xs font-medium text-brand-accent hover:text-brand-accent-bright hover:underline"
           >
             Open in Google Docs
             <ExternalLink className="w-3.5 h-3.5" aria-hidden />

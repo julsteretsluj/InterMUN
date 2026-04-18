@@ -222,7 +222,7 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
               <button
                 type="button"
                 onClick={() => void markAllRead()}
-                className="text-xs font-medium text-brand-gold hover:underline dark:text-brand-gold-bright"
+                className="text-xs font-medium text-brand-accent hover:underline dark:text-brand-accent-bright"
               >
                 Mark all read
               </button>
@@ -247,7 +247,7 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
                       onClick={() => void onItemActivate(n)}
                       className={cn(
                         "flex w-full flex-col gap-0.5 px-4 py-3 text-left transition hover:bg-slate-50 dark:hover:bg-zinc-800/80",
-                        !n.read_at && "bg-brand-gold/10 dark:bg-brand-gold/15"
+                        !n.read_at && "bg-brand-accent/10 dark:bg-brand-accent/15"
                       )}
                     >
                       <div className="flex items-start justify-between gap-2">
@@ -259,7 +259,7 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
                       {n.body ? (
                         <p className="line-clamp-2 text-xs text-slate-600 dark:text-zinc-400">{n.body}</p>
                       ) : null}
-                      <span className="text-[0.65rem] font-medium text-brand-gold dark:text-brand-gold-bright">
+                      <span className="text-[0.65rem] font-medium text-brand-accent dark:text-brand-accent-bright">
                         Open →
                       </span>
                     </button>
@@ -271,7 +271,7 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
           <div className="border-t border-slate-100 px-4 py-2 dark:border-zinc-800">
             <Link
               href="/chats-notes"
-              className="text-xs font-medium text-slate-500 hover:text-brand-gold dark:text-zinc-400 dark:hover:text-brand-gold-bright"
+              className="text-xs font-medium text-slate-500 hover:text-brand-accent dark:text-zinc-400 dark:hover:text-brand-accent-bright"
               onClick={() => setOpen(false)}
             >
               Go to Notes

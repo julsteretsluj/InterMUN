@@ -222,7 +222,7 @@ export function DocumentsView({
         <a
           href="/downloads/position-paper-guide-placeholder.txt"
           download
-          className="mt-2 inline-block text-sm font-medium text-brand-gold hover:underline"
+          className="mt-2 inline-block text-sm font-medium text-brand-accent hover:underline"
         >
           Download placeholder guide
         </a>
@@ -242,7 +242,7 @@ export function DocumentsView({
             chair_feedback: "",
           });
         }}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-gold px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
         Add document
@@ -407,7 +407,7 @@ export function DocumentsView({
                   onClick={() => setSelectedId(d.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                     displaySelectedId === d.id
-                      ? "border-brand-diplomatic/50 bg-brand-diplomatic/12 font-medium text-brand-navy dark:border-brand-diplomatic/45 dark:bg-brand-diplomatic/10 dark:text-brand-navy"
+                      ? "border-brand-silver/50 bg-brand-silver/12 font-medium text-brand-navy dark:border-brand-silver/45 dark:bg-brand-silver/10 dark:text-brand-navy"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
@@ -522,7 +522,7 @@ export function DocumentsView({
                   onClick={() => setSelectedId(d.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                     displaySelectedId === d.id
-                      ? "border-brand-gold/45 bg-brand-gold/10 font-medium text-brand-navy dark:border-brand-gold/40 dark:bg-brand-gold/15 dark:text-brand-navy"
+                      ? "border-brand-accent/45 bg-brand-accent/10 font-medium text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-brand-navy"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
@@ -570,7 +570,7 @@ export function DocumentsView({
                         });
                         setShowForm(false);
                       }}
-                      className="text-sm font-medium text-brand-gold hover:underline dark:text-brand-gold-bright"
+                      className="text-sm font-medium text-brand-accent hover:underline dark:text-brand-accent-bright"
                     >
                       Edit
                     </button>

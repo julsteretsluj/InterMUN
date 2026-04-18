@@ -385,7 +385,7 @@ export function ChairCommitteeSessionControl({
   const countdown = endMs != null ? formatCountdownOrElapsed(endMs, nowMs) : null;
 
   const fieldWrap =
-    "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus-within:border-brand-gold/40";
+    "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus-within:border-brand-accent/40";
   const radioLabel = "flex cursor-pointer items-start gap-2 text-sm text-brand-navy";
 
   return (
@@ -510,7 +510,7 @@ export function ChairCommitteeSessionControl({
               {endMode === "until" ? (
                 <input
                   type="datetime-local"
-                  className="mt-2 w-full max-w-xs rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy focus:border-brand-gold/50 focus:outline-none focus:ring-2 focus:ring-brand-gold/40"
+                  className="mt-2 w-full max-w-xs rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
                   value={endsAtLocal}
                   onChange={(e) => setEndsAtLocal(e.target.value)}
                 />
@@ -548,7 +548,7 @@ export function ChairCommitteeSessionControl({
               type="button"
               disabled={pending}
               onClick={startSession}
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
             >
               <span aria-hidden>▶️</span>
               Start session

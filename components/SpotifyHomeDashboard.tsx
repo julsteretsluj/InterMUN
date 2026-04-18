@@ -52,7 +52,7 @@ export function SpotifyHomeDashboard() {
       className="min-h-screen w-full p-4 md:p-6 lg:p-8"
       style={{
         background:
-          "radial-gradient(circle at top left, color-mix(in srgb, var(--brand-gold) 35%, transparent) 0%, rgba(10,10,10,0.92) 40%), radial-gradient(circle at bottom right, color-mix(in srgb, var(--brand-gold) 26%, transparent) 0%, rgba(10,10,10,0.96) 45%), linear-gradient(135deg, #111111 0%, #0a0a0a 100%)",
+          "radial-gradient(circle at top left, color-mix(in srgb, var(--brand-accent) 35%, transparent) 0%, rgba(10,10,10,0.92) 40%), radial-gradient(circle at bottom right, color-mix(in srgb, var(--brand-accent) 26%, transparent) 0%, rgba(10,10,10,0.96) 45%), linear-gradient(135deg, #111111 0%, #0a0a0a 100%)",
         fontFamily: "Inter, Montserrat, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif",
       }}
     >

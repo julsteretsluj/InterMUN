@@ -112,7 +112,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border transition-colors",
           "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
           "dark:border-white/15 dark:bg-black/25 dark:text-brand-navy dark:hover:bg-white/10",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-bright"
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"
         )}
         aria-expanded={open}
         aria-haspopup="dialog"

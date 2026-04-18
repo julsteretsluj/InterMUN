@@ -97,7 +97,7 @@ export function ChairNominationsPanel({
                             nominationId={n.id}
                             category="committee_best_delegate"
                             label="Approve — Best Delegate"
-                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
+                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
                           />
                         ) : null}
                         {n.nomination_type === "committee_honourable_mention" ? (
@@ -113,7 +113,7 @@ export function ChairNominationsPanel({
                             nominationId={n.id}
                             category="committee_best_position_paper"
                             label="Approve — Best Position Paper"
-                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
+                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
                           />
                         ) : null}
                         {n.nomination_type === "conference_best_delegate" ? (
@@ -121,7 +121,7 @@ export function ChairNominationsPanel({
                             nominationId={n.id}
                             category="conference_best_delegate"
                             label="Approve — Best Delegate (overall)"
-                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-gold text-white font-medium"
+                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
                           />
                         ) : null}
                         <RejectNominationForm nominationId={n.id} />

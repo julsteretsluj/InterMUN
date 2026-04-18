@@ -8,7 +8,7 @@ export default function SetupPage() {
       <div className="relative w-full max-w-lg space-y-8">
         <BrandWordmark />
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10 space-y-4">
-          <div className="h-1 w-16 rounded-full bg-brand-gold" aria-hidden />
+          <div className="h-1 w-16 rounded-full bg-brand-accent" aria-hidden />
           <h1 className="font-display text-2xl font-semibold text-brand-navy">
             Supabase is not configured
           </h1>
@@ -35,7 +35,7 @@ export default function SetupPage() {
           </p>
           <Link
             href="/login"
-            className="inline-block text-brand-gold font-medium hover:text-brand-navy underline-offset-2 hover:underline"
+            className="inline-block text-brand-accent font-medium hover:text-brand-navy underline-offset-2 hover:underline"
           >
             Try sign in again after redeploying
           </Link>

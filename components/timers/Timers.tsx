@@ -29,7 +29,7 @@ export function Timers({
   const labelCls = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-xs uppercase tracking-wider text-brand-navy/75 block mb-0.5";
-  const clockCls = isLight ? "w-4 h-4 text-brand-gold shrink-0" : "w-5 h-5 text-brand-gold-bright shrink-0";
+  const clockCls = isLight ? "w-4 h-4 text-brand-accent shrink-0" : "w-5 h-5 text-brand-accent-bright shrink-0";
 
   if (!timer) return null;
 
@@ -45,7 +45,7 @@ export function Timers({
         {floorLabel ? (
           <div className="min-w-[8rem]">
             <span className={labelCls}>Timer</span>
-            <p className="font-semibold text-brand-gold">{floorLabel}</p>
+            <p className="font-semibold text-brand-accent">{floorLabel}</p>
           </div>
         ) : null}
         <div>

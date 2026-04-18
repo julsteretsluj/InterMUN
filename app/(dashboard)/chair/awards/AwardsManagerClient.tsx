@@ -132,7 +132,7 @@ export function AwardsManagerClient({
     <div className="space-y-10">
       <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/40 p-4 text-sm text-brand-muted">
         <p className="flex items-start gap-2">
-          <Award className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
+          <Award className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
           <span>
             SMT award structure: <strong className="text-brand-navy">Overall</strong> (Best Delegate Trophy, Best
             Position Paper), <strong className="text-brand-navy">Chair</strong> (Best Chair, Honourable Mention Chair,
@@ -196,7 +196,7 @@ export function AwardsManagerClient({
             )}
           </div>
           {meta && (
-            <p className="text-xs text-brand-muted border-l-2 border-brand-gold/50 pl-3">
+            <p className="text-xs text-brand-muted border-l-2 border-brand-accent/50 pl-3">
               {meta.description}
             </p>
           )}
@@ -278,7 +278,7 @@ export function AwardsManagerClient({
             <button
               type="submit"
               disabled={pending}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-gold text-white font-medium disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-white font-medium disabled:opacity-50"
             >
               <Plus className="w-4 h-4" />
               {form.id ? "Update" : "Add"} award
@@ -347,7 +347,7 @@ export function AwardsManagerClient({
                           <button
                             type="button"
                             onClick={() => editRow(a)}
-                            className="text-xs text-brand-gold hover:underline"
+                            className="text-xs text-brand-accent hover:underline"
                           >
                             Edit
                           </button>

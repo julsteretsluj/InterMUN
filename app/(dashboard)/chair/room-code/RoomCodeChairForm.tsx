@@ -35,7 +35,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
   const selected = conferences.find((c) => c.id === conferenceId);
 
   const fieldClass =
-    "w-full px-3 py-2.5 rounded-lg border border-white/20 bg-black/25 text-brand-navy shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold";
+    "w-full px-3 py-2.5 rounded-lg border border-white/20 bg-black/25 text-brand-navy shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent";
 
   const singleCommittee = conferences.length === 1;
   const showSearch = conferences.length > 1;
@@ -108,7 +108,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
         {(selected?.committee_code || selected?.room_code) && (
           <p className="text-xs text-brand-muted mt-2">
             Current committee code:{" "}
-            <span className="font-mono font-semibold text-brand-gold-bright tabular-nums">
+            <span className="font-mono font-semibold text-brand-accent-bright tabular-nums">
               {selected.committee_code ?? selected.room_code}
             </span>
           </p>
@@ -157,7 +157,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
             conferences.length === 0 ||
             (!singleCommittee && (filtered.length === 0 || !conferenceId))
           }
-          className="px-4 py-2.5 rounded-lg bg-brand-gold text-white font-semibold hover:opacity-90 disabled:opacity-50 border border-brand-navy/15"
+          className="px-4 py-2.5 rounded-lg bg-brand-accent text-white font-semibold hover:opacity-90 disabled:opacity-50 border border-brand-navy/15"
         >
           {pending ? "Saving…" : "Save code & go to profile"}
         </button>

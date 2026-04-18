@@ -54,7 +54,7 @@ export function OverallAwardsProgress({ serverCompletedKeys, allRequiredKeys }: 
         </span>
       </div>
       <div className="h-2.5 overflow-hidden rounded-full bg-brand-navy/10">
-        <div className="h-full bg-brand-gold transition-all" style={{ width: `${pct}%` }} />
+        <div className="h-full bg-brand-accent transition-all" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
@@ -119,7 +119,7 @@ export function SectionAwardsProgress({
         </span>
       </div>
       <div className="h-2 rounded-full bg-brand-navy/10 overflow-hidden">
-        <div className="h-full bg-brand-gold transition-all" style={{ width: `${pct}%` }} />
+        <div className="h-full bg-brand-accent transition-all" style={{ width: `${pct}%` }} />
       </div>
       {optionalTotal > 0 ? (
         <p className="mt-2 text-[0.72rem] text-brand-muted">

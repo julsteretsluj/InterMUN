@@ -46,11 +46,11 @@ export default async function SmtCommitteeLivePage({
     return (
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-brand-navy">
         This committee belongs to a different conference than the one you have selected.{" "}
-        <Link href="/event-gate?next=%2Fsmt" className="text-brand-gold font-medium underline">
+        <Link href="/event-gate?next=%2Fsmt" className="text-brand-accent font-medium underline">
           Switch event
         </Link>{" "}
         or open it from{" "}
-        <Link href="/smt" className="text-brand-gold font-medium underline">
+        <Link href="/smt" className="text-brand-accent font-medium underline">
           Live committees
         </Link>
         .
@@ -90,7 +90,7 @@ export default async function SmtCommitteeLivePage({
 
   return (
     <div className="space-y-8">
-      <Link href="/smt" className="text-sm text-brand-gold hover:underline inline-block">
+      <Link href="/smt" className="text-sm text-brand-accent hover:underline inline-block">
         ← All committees
       </Link>
 
@@ -141,11 +141,11 @@ export default async function SmtCommitteeLivePage({
 
         <p className="text-xs text-brand-muted border-t border-brand-navy/10 pt-4">
           Edit committee session metadata and chair names under{" "}
-          <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
+          <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
             Event & committee sessions
           </Link>
           . Codes under{" "}
-          <Link href="/smt/room-codes" className="text-brand-gold font-medium hover:underline">
+          <Link href="/smt/room-codes" className="text-brand-accent font-medium hover:underline">
             Room codes & chairs
           </Link>
           .

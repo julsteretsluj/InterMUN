@@ -66,13 +66,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </nav>
           <div className="flex items-center gap-2">
             <ThemeSelector />
-            <SignOutButton className="text-brand-muted hover:text-blue-700 dark:hover:text-brand-gold-bright" />
+            <SignOutButton className="text-brand-muted hover:text-blue-700 dark:hover:text-brand-accent-bright" />
           </div>
         </div>
         {activeEvent ? (
           <div className="w-full border-t border-slate-200 px-4 pb-2 pt-2 text-xs text-brand-muted dark:border-white/10">
             Active event: <span className="font-medium text-brand-navy">{activeEvent.name}</span> · code{" "}
-            <span className="font-mono text-brand-gold-bright">{activeEvent.event_code}</span>
+            <span className="font-mono text-brand-accent-bright">{activeEvent.event_code}</span>
           </div>
         ) : null}
         <div className="w-full border-t border-slate-200 px-4 pb-2 pt-2 text-xs text-brand-muted dark:border-white/10">

@@ -167,7 +167,7 @@ export function IdeasView({
           <button
             type="button"
             onClick={() => void addIdea()}
-            className="inline-flex h-fit shrink-0 items-center gap-2 rounded-lg bg-brand-gold px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
+            className="inline-flex h-fit shrink-0 items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
           >
             <Plus className="h-4 w-4" />
             Add
@@ -202,7 +202,7 @@ export function IdeasView({
                   onClick={() => setSelectedId(idea.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2 text-left text-sm transition ${
                     displaySelectedId === idea.id
-                      ? "border-brand-gold/45 bg-brand-gold/10 font-medium text-brand-navy dark:border-brand-gold/40 dark:bg-brand-gold/15 dark:text-brand-navy"
+                      ? "border-brand-accent/45 bg-brand-accent/10 font-medium text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-brand-navy"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
@@ -229,7 +229,7 @@ export function IdeasView({
                       setEditContent(selected.content || "");
                       setEditGoogleUrl(selected.google_docs_url?.trim() || "");
                     }}
-                    className="text-sm text-brand-gold hover:underline dark:text-brand-gold-bright"
+                    className="text-sm text-brand-accent hover:underline dark:text-brand-accent-bright"
                   >
                     Edit
                   </button>

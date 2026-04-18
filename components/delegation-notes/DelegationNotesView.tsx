@@ -555,7 +555,7 @@ export function DelegationNotesView({
                   type="checkbox"
                   checked={concernFlag}
                   onChange={(e) => setConcernFlag(e.target.checked)}
-                  className="size-4 rounded border-white/25 accent-brand-gold"
+                  className="size-4 rounded border-white/25 accent-brand-accent"
                 />
                 <span className="text-brand-navy/90">Concern (auto placeholder)</span>
               </label>
@@ -635,7 +635,7 @@ export function DelegationNotesView({
                       <input
                         type="checkbox"
                         checked={checked}
-                        className="size-4 rounded border-white/25 accent-brand-gold"
+                        className="size-4 rounded border-white/25 accent-brand-accent"
                     disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
                         onChange={(e) => {
                           setSelectedAllocationRecipientIdsState((prev) => {
@@ -666,7 +666,7 @@ export function DelegationNotesView({
                 <input
                   type="checkbox"
                   checked={anyChairRecipient}
-                  className="size-4 rounded border-white/25 accent-brand-gold"
+                  className="size-4 rounded border-white/25 accent-brand-accent"
                   disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
@@ -691,7 +691,7 @@ export function DelegationNotesView({
                       <input
                         type="checkbox"
                         checked={checked}
-                        className="size-4 rounded border-white/25 accent-brand-gold"
+                        className="size-4 rounded border-white/25 accent-brand-accent"
                         disabled={
                           anyChairRecipient || votingProcedureLocked || !sessionActive || unmoderatedLocked
                         }
@@ -751,7 +751,7 @@ export function DelegationNotesView({
                       <span className="text-brand-muted/60">•</span>
                       <span className="capitalize text-brand-navy">{n.topic}</span>
                       {n.forwarded_to_smt ? (
-                        <span className="ml-2 font-semibold text-brand-gold-bright">(forwarded)</span>
+                        <span className="ml-2 font-semibold text-brand-accent-bright">(forwarded)</span>
                       ) : null}
                     </div>
                     <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">
@@ -766,7 +766,7 @@ export function DelegationNotesView({
                       <button
                         type="button"
                         onClick={() => setExpandedNote(n)}
-                        className="mt-1 text-xs font-medium text-brand-gold hover:underline"
+                        className="mt-1 text-xs font-medium text-brand-accent hover:underline"
                       >
                         View full note
                       </button>
@@ -830,7 +830,7 @@ export function DelegationNotesView({
               <button
                 type="button"
                 onClick={() => setExpandedNote(null)}
-                className="text-xs font-medium text-brand-gold hover:underline"
+                className="text-xs font-medium text-brand-accent hover:underline"
               >
                 Close
               </button>

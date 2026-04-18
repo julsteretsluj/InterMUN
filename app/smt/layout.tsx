@@ -67,13 +67,13 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             />
           ) : (
             <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold to-blue-900 text-xs font-bold text-white shadow-md"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-accent to-blue-900 text-xs font-bold text-white shadow-md"
               aria-hidden
             >
               IM
             </span>
           )}
-          <span className="hidden truncate text-lg font-bold tracking-tight text-brand-gold group-hover:block dark:text-brand-gold-bright">
+          <span className="hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright">
             {appName}
           </span>
         </Link>
@@ -97,11 +97,11 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             <div className="w-full">
               Active event: <span className="font-medium text-slate-800 dark:text-zinc-100">{activeEvent.name}</span>{" "}
               · code{" "}
-              <span className="font-mono text-brand-gold dark:text-brand-gold-bright">{activeEvent.event_code}</span>
+              <span className="font-mono text-brand-accent dark:text-brand-accent-bright">{activeEvent.event_code}</span>
             </div>
           </div>
         ) : (
-          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-gold dark:border-white/10 dark:bg-[#121212] dark:text-brand-gold-bright sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-accent dark:border-white/10 dark:bg-[#121212] dark:text-brand-accent-bright sm:px-6">
             <div className="w-full">
               <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
                 Enter conference code

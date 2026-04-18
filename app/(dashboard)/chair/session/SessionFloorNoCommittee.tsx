@@ -7,7 +7,7 @@ export function SessionFloorNoCommittee() {
         Join a committee with your room code first (or set a code and enter), then return here to run the session
         floor for that committee.
       </p>
-      <Link href="/chair/room-code" className="inline-block font-medium text-brand-gold hover:underline">
+      <Link href="/chair/room-code" className="inline-block font-medium text-brand-accent hover:underline">
         Go to room codes
       </Link>
     </>

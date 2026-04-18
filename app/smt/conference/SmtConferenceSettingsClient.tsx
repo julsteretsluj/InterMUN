@@ -299,7 +299,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           name="consultation_before_moderated_caucus"
           value="on"
           defaultChecked={row.consultation_before_moderated_caucus !== false}
-          className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-gold focus:ring-brand-gold"
+          className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-accent focus:ring-brand-accent"
         />
         <span>
           <span className="font-medium">Competing motions (RoP): consultation before moderated caucus</span>
@@ -337,7 +337,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
       <button
         type="submit"
         disabled={pending}
-        className="text-sm px-3 py-1.5 rounded-lg bg-brand-gold text-white font-medium disabled:opacity-50"
+        className="text-sm px-3 py-1.5 rounded-lg bg-brand-accent text-white font-medium disabled:opacity-50"
       >
         {pending ? "Saving…" : "Save committee"}
       </button>

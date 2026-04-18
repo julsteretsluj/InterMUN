@@ -38,7 +38,7 @@ export function SmtAwardsTabs({
       onClick={() => setTab(id)}
       className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
         tab === id
-          ? "border-brand-gold text-brand-navy bg-brand-paper"
+          ? "border-brand-accent text-brand-navy bg-brand-paper"
           : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
       }`}
     >
