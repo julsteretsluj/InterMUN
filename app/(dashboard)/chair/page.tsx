@@ -100,7 +100,7 @@ export default async function ChairOverviewPage() {
               <li key={t.href}>
                 <Link
                   href={t.href}
-                  className="block rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-sm transition hover:border-blue-300 hover:bg-blue-50/40 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-blue-500/40 dark:hover:bg-blue-950/30"
+                  className="block rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-sm transition hover:border-brand-accent/45 hover:bg-brand-accent/8 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
                 >
                   <span className="font-semibold text-slate-900 dark:text-zinc-50">{t.label}</span>
                   <span className="mt-0.5 block text-xs text-slate-500 dark:text-zinc-400">{t.hint}</span>

@@ -126,14 +126,14 @@ function AspireSidebarLink({
       className={cn(
         "flex items-center gap-0 group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
         isActive
-          ? "bg-blue-100 font-semibold text-blue-900 dark:bg-blue-950/55 dark:text-blue-100"
+          ? "bg-brand-accent/15 font-semibold text-brand-accent dark:bg-brand-accent/20 dark:text-brand-accent-bright"
           : "font-medium text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
       )}
     >
       <Icon
         className={cn(
           "h-5 w-5 shrink-0",
-          isActive ? "text-blue-600 dark:text-blue-300" : "text-slate-400 dark:text-zinc-500"
+          isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-400 dark:text-zinc-500"
         )}
         strokeWidth={1.75}
       />
@@ -160,8 +160,8 @@ function DockLink({
         className={cn(
           "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
           isActive
-            ? "scale-[1.02] border-blue-300/80 bg-blue-100 text-blue-800 shadow-blue-500/10 dark:border-blue-500/40 dark:bg-blue-950/70 dark:text-blue-200"
-            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-blue-200 group-hover:bg-slate-50 group-hover:text-blue-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-blue-500/30 dark:group-hover:bg-zinc-800"
+            ? "scale-[1.02] border-brand-accent/45 bg-brand-accent/15 text-brand-accent shadow-lg shadow-brand-accent/10 dark:border-brand-accent/40 dark:bg-brand-accent/22 dark:text-brand-accent-bright dark:shadow-none"
+            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-brand-accent/30 group-hover:bg-slate-50 group-hover:text-brand-accent dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-brand-accent/35 dark:group-hover:bg-zinc-800"
         )}
       >
         <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
@@ -169,7 +169,7 @@ function DockLink({
       <span
         className={cn(
           "max-w-[4.25rem] text-center text-[0.625rem] font-medium leading-tight",
-          isActive ? "text-blue-800 dark:text-blue-200" : "text-slate-600 dark:text-zinc-400"
+          isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-600 dark:text-zinc-400"
         )}
       >
         {tab.label}
@@ -234,7 +234,7 @@ export function TabNav({
                   className={cn(
                     "inline-flex items-center justify-center gap-0 rounded-lg px-2 py-1.5 text-[0.7rem] font-medium transition group-hover:gap-1",
                     selected
-                      ? "bg-blue-100 text-blue-900 dark:bg-blue-950/55 dark:text-blue-100"
+                      ? "bg-brand-accent/15 text-brand-accent dark:bg-brand-accent/20 dark:text-brand-accent-bright"
                       : "text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
                   )}
                 >
@@ -277,7 +277,7 @@ export function TabNav({
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[0.7rem] font-medium transition shrink-0",
                   selected
-                    ? "border-blue-300/80 bg-blue-100 text-blue-900 dark:border-blue-500/40 dark:bg-blue-950/55 dark:text-blue-100"
+                    ? "border-brand-accent/40 bg-brand-accent/15 text-brand-accent dark:border-brand-accent/45 dark:bg-brand-accent/18 dark:text-brand-accent-bright"
                     : "border-slate-200/90 bg-white text-slate-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400"
                 )}
               >

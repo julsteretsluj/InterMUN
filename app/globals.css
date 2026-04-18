@@ -36,6 +36,10 @@ html {
 
   --brand-accent-ink: #121212;
 
+  /* Wordmark “MUN” / links; warm accent from Figma accent/warm */
+  --brand-diplomatic: color-mix(in srgb, var(--logo-blue) 78%, var(--brand-navy));
+  --brand-gold: #c2a878;
+
   color-scheme: light;
 }
 
@@ -59,6 +63,9 @@ html.dark {
   --brand-line: rgba(245, 245, 245, 0.14);
 
   --brand-accent-ink: #f5f5f5;
+
+  --brand-diplomatic: var(--brand-accent-bright);
+  --brand-gold: #d4c4a8;
 
   /*
    * Discord-inspired surfaces; accent rails match logo blue (not classic Discord blurple).
@@ -93,6 +100,8 @@ html.dark {
   --font-display: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --color-brand-accent-ink: var(--brand-accent-ink);
+  --color-brand-diplomatic: var(--brand-diplomatic);
+  --color-brand-gold: var(--brand-gold);
   --color-discord-sidebar: var(--discord-sidebar);
   --color-discord-app: var(--discord-app);
   --color-discord-elevated: var(--discord-elevated);

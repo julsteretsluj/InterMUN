@@ -142,7 +142,7 @@ export default async function DashboardLayout({
             className={
               isChairRole(normalizedRole)
                 ? "hidden truncate text-lg font-bold tracking-tight text-slate-700 group-hover:block dark:text-slate-200"
-                : "hidden truncate text-lg font-bold tracking-tight text-blue-800 group-hover:block dark:text-blue-200"
+                : "hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright"
             }
           >
             {appName}
