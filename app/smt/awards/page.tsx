@@ -76,8 +76,12 @@ export default async function SmtAwardsPage() {
 
   const nominationRowsForQueue = filterNominationsForSmtQueue(nominationRows, selectedSingleWinnerGroupKeys);
 
+  /** Awards are scoped to the MUN committee (DISEC, UNSC, …), not the topic/agenda title. */
   const committeeLabelByConferenceId: Record<string, string> = Object.fromEntries(
-    (conferences ?? []).map((c) => [c.id, [c.name, c.committee].filter(Boolean).join(" — ")])
+    (conferences ?? []).map((c) => {
+      const label = c.committee?.trim() || c.name?.trim() || c.id.slice(0, 8);
+      return [c.id, label];
+    })
   );
 
   const profileById = new Map((profiles ?? []).map((p) => [p.id, p.name?.trim() || p.id.slice(0, 8)]));

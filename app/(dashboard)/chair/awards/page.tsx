@@ -13,6 +13,11 @@ import { ChairNominationSlotForm } from "./ChairNominationSlotForm";
 import { ChairSubmitToSmtPanel } from "./ChairSubmitToSmtPanel";
 import { runChairAwardAutoSubmitIfDue } from "@/app/actions/awards";
 import { AWARD_SUBMISSION_DEADLINE_ISO } from "@/lib/award-submission";
+import {
+  dedupeAllocationsByUserId,
+  getCommitteeAwardScope,
+  mergeNominationRowsForCommitteeDisplay,
+} from "@/lib/conference-committee-canonical";
 
 export const dynamic = "force-dynamic";
 
@@ -79,39 +84,44 @@ export default async function ChairAwardsPage() {
     redirect("/room-gate?next=%2Fchair%2Fawards");
   }
 
+  const awardScope = await getCommitteeAwardScope(supabase, activeConf.id);
+  const awardConferenceId = awardScope.canonicalConferenceId;
+
   if (profile?.role === "chair") {
     const { data: chairSeat } = await supabase
       .from("allocations")
       .select("id")
-      .eq("conference_id", activeConf.id)
+      .in("conference_id", awardScope.siblingConferenceIds)
       .eq("user_id", user.id)
       .limit(1)
       .maybeSingle();
     if (!chairSeat?.id) {
       redirect("/chair/allocation-matrix");
     }
-    await runChairAwardAutoSubmitIfDue(activeConf.id);
+    await runChairAwardAutoSubmitIfDue(awardConferenceId);
   }
 
   const [{ data: delegates }, { data: nominations }] = await Promise.all([
     supabase
       .from("allocations")
       .select("id, user_id, country, profiles(name, role)")
-      .eq("conference_id", activeConf.id)
+      .in("conference_id", awardScope.siblingConferenceIds)
       .not("user_id", "is", null)
       .order("country", { ascending: true }),
     supabase
       .from("award_nominations")
       .select(
-        "id, nomination_type, rank, evidence_note, rubric_scores, status, submitted_to_smt_at, nominee_profile_id, profiles(name)"
+        "id, nomination_type, rank, evidence_note, rubric_scores, status, submitted_to_smt_at, nominee_profile_id, committee_conference_id, profiles(name)"
       )
-      .eq("committee_conference_id", activeConf.id)
+      .in("committee_conference_id", awardScope.siblingConferenceIds)
       .in("status", ["draft", "pending"])
       .order("nomination_type", { ascending: true })
       .order("rank", { ascending: true }),
   ]);
 
-  const delegateRowsAll = sortRowsByAllocationCountry((delegates ?? []) as DelegateRow[]);
+  const delegateRowsAll = sortRowsByAllocationCountry(
+    dedupeAllocationsByUserId((delegates ?? []) as DelegateRow[])
+  );
   const delegateRows = delegateRowsAll.filter((d) => !isChairAllocation(d));
 
   const delegateByUserId: Record<string, { country: string; displayName: string }> = {};
@@ -136,9 +146,13 @@ export default async function ChairAwardsPage() {
     status: string;
     submitted_to_smt_at: string | null;
     nominee_profile_id: string;
+    committee_conference_id: string;
     profiles: { name: string | null } | { name: string | null }[] | null;
   };
-  const nominationRows = (nominations ?? []) as NomRow[];
+  const nominationRows = mergeNominationRowsForCommitteeDisplay(
+    (nominations ?? []) as NomRow[],
+    awardConferenceId
+  );
   const nominationByKey = new Map(
     nominationRows.map((n) => [`${n.nomination_type}:${n.rank}`, n] as const)
   );
@@ -260,7 +274,7 @@ export default async function ChairAwardsPage() {
           </ol>
         </div>
         <ChairSubmitToSmtPanel
-          committeeConferenceId={activeConf.id}
+          committeeConferenceId={awardConferenceId}
           canSubmit={canSubmitToSmt}
           alreadySubmitted={alreadySubmittedToSmt}
           submittedAtLabel={submittedAtLabel}
@@ -270,7 +284,10 @@ export default async function ChairAwardsPage() {
         />
         <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
         <p className="text-xs text-brand-muted">
-          Committee: {[activeConf.name, activeConf.committee].filter(Boolean).join(" — ")}
+          Committee: {activeConf.committee?.trim() || activeConf.name}
+          {activeConf.committee?.trim() && activeConf.name?.trim() ? (
+            <span className="text-brand-muted/80"> · {activeConf.name}</span>
+          ) : null}
         </p>
 
         {nominationTypes.map((type) => {
@@ -297,7 +314,7 @@ export default async function ChairAwardsPage() {
                 return (
                   <ChairNominationSlotForm
                     key={`${type.id}-${rank}`}
-                    committeeConferenceId={activeConf.id}
+                    committeeConferenceId={awardConferenceId}
                     nominationType={type.id}
                     rank={rank}
                     slotRequired={slot.required}

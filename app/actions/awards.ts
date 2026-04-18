@@ -14,6 +14,7 @@ import { revalidatePath } from "next/cache";
 import { isSingleWinnerNominationType } from "@/lib/award-nomination-review";
 import { isPastAwardSubmissionDeadline } from "@/lib/award-submission";
 import { promoteCommitteeDraftsToPending } from "@/lib/award-committee-submit";
+import { getCommitteeAwardScope, resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 
 type NominationType = NominationRubricType;
 
@@ -102,7 +103,9 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
   }
 
   const committee_conference_id =
-    scope === "committee" ? committeeConferenceId : null;
+    scope === "committee"
+      ? await resolveCanonicalCommitteeConferenceId(auth.supabase, committeeConferenceId)
+      : null;
   const recipient_committee_id =
     scope === "collective_committee" ? recipientCommitteeId || null : null;
   const recipient_profile_id =
@@ -274,7 +277,11 @@ export async function submitChairTopNominationAction(
     return { ok: false, error: "You must be signed in as a chair, SMT member, or admin." };
   }
 
-  const committeeId = String(formData.get("committee_conference_id") ?? "").trim();
+  const committeeIdRaw = String(formData.get("committee_conference_id") ?? "").trim();
+  const scope = await getCommitteeAwardScope(auth.supabase, committeeIdRaw);
+  const committeeId = scope.canonicalConferenceId;
+  const siblingConferenceIds = scope.siblingConferenceIds;
+
   const nomineeId = String(formData.get("nominee_profile_id") ?? "").trim();
   const rankRaw = Number(String(formData.get("rank") ?? "0"));
   const rank = Number.isInteger(rankRaw) ? rankRaw : 0;
@@ -286,7 +293,7 @@ export async function submitChairTopNominationAction(
     nominationType === "committee_honourable_mention" ||
     nominationType === "committee_best_position_paper" ||
     nominationType === "conference_best_delegate";
-  if (!committeeId || !rank || !validNominationType) {
+  if (!committeeIdRaw || !rank || !validNominationType) {
     return { ok: false, error: "Invalid nomination form data." };
   }
   if (nominationType === "conference_best_delegate" && rank !== 1) {
@@ -307,7 +314,7 @@ export async function submitChairTopNominationAction(
       const { error } = await auth.supabase
         .from("award_nominations")
         .delete()
-        .eq("committee_conference_id", committeeId)
+        .in("committee_conference_id", siblingConferenceIds)
         .eq("nomination_type", nominationType)
         .eq("rank", rank)
         .eq("status", "draft");
@@ -332,7 +339,7 @@ export async function submitChairTopNominationAction(
   const { data: canManage } = await auth.supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", committeeId)
+    .in("conference_id", siblingConferenceIds)
     .eq("user_id", auth.user.id)
     .limit(1)
     .maybeSingle();
@@ -354,7 +361,7 @@ export async function submitChairTopNominationAction(
   const { data: nomineeInCommittee } = await auth.supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", committeeId)
+    .in("conference_id", siblingConferenceIds)
     .eq("user_id", nomineeId)
     .limit(1)
     .maybeSingle();
@@ -375,7 +382,7 @@ export async function submitChairTopNominationAction(
     const { data: allocRows } = await auth.supabase
       .from("allocations")
       .select("user_id")
-      .eq("conference_id", committeeId)
+      .in("conference_id", siblingConferenceIds)
       .not("user_id", "is", null);
     const uids = [...new Set((allocRows ?? []).map((r) => r.user_id).filter(Boolean))] as string[];
     let seatedCount = 0;
@@ -396,14 +403,20 @@ export async function submitChairTopNominationAction(
     .maybeSingle();
   const actorRole = profileForRole?.role?.toString().trim().toLowerCase();
 
-  const { data: existing } = await auth.supabase
+  const { data: existingRows } = await auth.supabase
     .from("award_nominations")
-    .select("id, status")
-    .eq("committee_conference_id", committeeId)
+    .select("id, status, committee_conference_id")
+    .in("committee_conference_id", siblingConferenceIds)
     .eq("nomination_type", nominationType)
     .eq("rank", rank)
-    .in("status", ["draft", "pending"])
-    .maybeSingle();
+    .in("status", ["draft", "pending"]);
+
+  const cand = existingRows ?? [];
+  const pendingRow = cand.find((r) => r.status === "pending");
+  const existing =
+    pendingRow ??
+    cand.find((r) => r.committee_conference_id === committeeId) ??
+    cand[0];
 
   if (existing?.status === "pending" && actorRole !== "smt" && actorRole !== "admin") {
     return {
@@ -416,6 +429,7 @@ export async function submitChairTopNominationAction(
     const { error } = await auth.supabase
       .from("award_nominations")
       .update({
+        committee_conference_id: committeeId,
         nominee_profile_id: nomineeId,
         evidence_note: evidence || null,
         rubric_scores: rubricScores,
