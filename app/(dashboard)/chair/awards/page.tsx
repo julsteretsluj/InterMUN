@@ -265,6 +265,8 @@ export default async function ChairAwardsPage() {
           alreadySubmitted={alreadySubmittedToSmt}
           submittedAtLabel={submittedAtLabel}
           showChairControls={profile?.role === "chair"}
+          requiredSlotsDone={allRequiredKeys.filter((k) => serverCompletedKeys.includes(k)).length}
+          requiredSlotsTotal={allRequiredKeys.length}
         />
         <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
         <p className="text-xs text-brand-muted">

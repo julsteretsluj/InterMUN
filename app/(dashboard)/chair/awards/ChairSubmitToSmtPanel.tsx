@@ -12,6 +12,9 @@ type Props = {
   submittedAtLabel: string | null;
   /** Chairs only — SMT/admins viewing the page should not see the primary submit control. */
   showChairControls: boolean;
+  /** Required slots complete / total (same rules as submit validation). */
+  requiredSlotsDone: number;
+  requiredSlotsTotal: number;
 };
 
 export function ChairSubmitToSmtPanel({
@@ -20,6 +23,8 @@ export function ChairSubmitToSmtPanel({
   alreadySubmitted,
   submittedAtLabel,
   showChairControls,
+  requiredSlotsDone,
+  requiredSlotsTotal,
 }: Props) {
   const router = useRouter();
   const [msg, setMsg] = useState<string | null>(null);
@@ -50,13 +55,25 @@ export function ChairSubmitToSmtPanel({
       <div className="text-sm text-brand-navy space-y-1">
         <p className="font-semibold">Submit to SMT</p>
         <p className="text-xs text-brand-muted leading-relaxed">
-          Nominations stay as drafts while you score. When required slots are complete, send the batch to SMT for
-          review. Automatic submission also runs after{" "}
+          Saving a slot only writes a <strong className="text-brand-navy/90">draft</strong>; SMT does not see it until
+          you submit the batch below. When required slots are complete, send the batch to SMT for review. Automatic
+          submission also runs after{" "}
           <time dateTime={AWARD_SUBMISSION_DEADLINE_ISO} className="font-mono text-[0.7rem] text-brand-navy/90">
             {AWARD_SUBMISSION_DEADLINE_ISO}
           </time>{" "}
           (UTC) when you open this page, or via a scheduled job if your deployment configures it.
         </p>
+        {!alreadySubmitted && requiredSlotsTotal > 0 ? (
+          <p className="text-xs text-brand-navy/85">
+            Required slots complete:{" "}
+            <strong className="tabular-nums">
+              {requiredSlotsDone}/{requiredSlotsTotal}
+            </strong>
+            {requiredSlotsDone < requiredSlotsTotal
+              ? " — finish the rest, then submit so SMT can review."
+              : " — you can submit to SMT now."}
+          </p>
+        ) : null}
       </div>
       {alreadySubmitted ? (
         <p className="text-sm text-emerald-800 dark:text-emerald-200/90">

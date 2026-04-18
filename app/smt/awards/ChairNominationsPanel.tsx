@@ -63,8 +63,15 @@ export function ChairNominationsPanel({
           <tbody>
             {nominations.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-3 py-6 text-center text-brand-muted">
-                  No pending chair submissions yet.
+                <td colSpan={7} className="px-3 py-6 text-center text-brand-muted space-y-2">
+                  <p className="font-medium text-brand-navy/90">No pending chair submissions yet.</p>
+                  <p className="text-xs leading-relaxed max-w-xl mx-auto text-brand-navy/75">
+                    Chairs <strong className="text-brand-navy">Save</strong> each slot as a{" "}
+                    <strong className="text-brand-navy">draft</strong> on the Score page. Those drafts are not shown
+                    here. Once every <strong className="text-brand-navy">required</strong> slot is complete, the chair
+                    must click <strong className="text-brand-navy">Submit nominations to SMT</strong> — then rows
+                    appear in this table as <strong className="text-brand-navy">pending</strong> for review.
+                  </p>
                 </td>
               </tr>
             ) : (
