@@ -67,7 +67,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
               className="h-10 w-10 shrink-0 rounded-2xl object-contain"
             />
           ) : (
-            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl ring-1 ring-black/10 dark:ring-white/15" />
+            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl" />
           )}
           <span className="hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright">
             {appName}

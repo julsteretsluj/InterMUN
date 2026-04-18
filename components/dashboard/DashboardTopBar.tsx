@@ -68,7 +68,7 @@ export function DashboardTopBar({
               className="h-9 w-9 rounded-xl object-contain"
             />
           ) : (
-            <InterMunEmblem alt="" className="h-9 w-9 rounded-xl ring-1 ring-black/10 dark:ring-white/15" />
+            <InterMunEmblem alt="" className="h-9 w-9 rounded-xl" />
           )}
         </Link>
         <div className="min-w-0 flex-1 basis-[min(100%,12rem)] sm:flex-[1_1_40%]">

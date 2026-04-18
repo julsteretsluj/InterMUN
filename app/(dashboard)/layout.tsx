@@ -136,7 +136,7 @@ export default async function DashboardLayout({
               className="h-10 w-10 shrink-0 rounded-2xl object-contain"
             />
           ) : (
-            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl ring-1 ring-black/10 dark:ring-white/15" />
+            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl" />
           )}
           <span
             className={

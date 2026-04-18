@@ -6,10 +6,9 @@ export function BrandWordmark({ className = "" }: { className?: string }) {
   const sub = getAppTagline();
   return (
     <div className={`text-center ${className}`}>
-      <InterMunEmblem
-        alt=""
-        className="mx-auto mb-4 h-20 w-20 md:h-24 md:w-24 rounded-2xl drop-shadow-[0_4px_20px_rgba(51,102,255,0.22)]"
-      />
+      <div className="mb-4 flex justify-center">
+        <InterMunEmblem alt="" className="h-20 w-20 rounded-2xl md:h-24 md:w-24" />
+      </div>
       <p className="font-display text-3xl md:text-4xl font-semibold text-brand-navy tracking-tight">
         {title}
       </p>
