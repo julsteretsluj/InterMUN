@@ -36,7 +36,7 @@ export default async function SmtAwardsPage() {
     { data: conferences },
     { data: assignments },
     { data: profiles },
-    { data: nominations },
+    { data: nominations, error: nominationsError },
     { data: selectedSingleWinners },
   ] = await Promise.all([
     supabase.from("conferences").select("id, name, committee").order("created_at", { ascending: false }),
@@ -45,7 +45,7 @@ export default async function SmtAwardsPage() {
     supabase
       .from("award_nominations")
       .select(
-        "id, nomination_type, rank, status, evidence_note, rubric_scores, committee_conference_id, nominee_profile_id, profiles(name)"
+        "id, nomination_type, rank, status, evidence_note, rubric_scores, committee_conference_id, nominee_profile_id"
       )
       .eq("status", "pending")
       .order("committee_conference_id", { ascending: true })
@@ -67,7 +67,6 @@ export default async function SmtAwardsPage() {
     rubric_scores: Record<string, number> | null;
     committee_conference_id: string;
     nominee_profile_id: string;
-    profiles: { name: string | null } | { name: string | null }[] | null;
   };
   const nominationRows = (nominations ?? []) as NominationRow[];
 
@@ -83,11 +82,6 @@ export default async function SmtAwardsPage() {
 
   const profileById = new Map((profiles ?? []).map((p) => [p.id, p.name?.trim() || p.id.slice(0, 8)]));
   const nomineeNameByProfileId: Record<string, string> = Object.fromEntries(profileById);
-  for (const n of nominationRowsForQueue) {
-    const embed = Array.isArray(n.profiles) ? n.profiles[0] : n.profiles;
-    const nm = embed?.name?.trim();
-    if (nm) nomineeNameByProfileId[n.nominee_profile_id] = nm;
-  }
 
   const nominationsPayload: ChairNominationRow[] = nominationRowsForQueue.map((n) => ({
     id: n.id,
@@ -103,6 +97,17 @@ export default async function SmtAwardsPage() {
   return (
     <MunPageShell title="Awards">
       <SmtAwardsRefreshOnFocus />
+      {nominationsError ? (
+        <div
+          className="mb-4 rounded-xl border border-rose-200 bg-rose-50/90 px-4 py-3 text-sm text-rose-900 dark:border-rose-500/40 dark:bg-rose-950/40 dark:text-rose-100"
+          role="alert"
+        >
+          Could not load chair nominations ({nominationsError.message}). If you recently changed database policies,
+          apply pending Supabase migrations (including{" "}
+          <code className="rounded bg-rose-100 px-1 dark:bg-rose-900/60">00092_profiles_restore_staff_select</code>
+          ).
+        </div>
+      ) : null}
       <SmtAwardsTabs
         nominations={nominationsPayload}
         committeeLabelByConferenceId={committeeLabelByConferenceId}
