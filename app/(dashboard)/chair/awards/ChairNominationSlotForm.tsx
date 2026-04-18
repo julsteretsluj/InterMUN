@@ -207,8 +207,8 @@ export function ChairNominationSlotForm({
     nominationRowId ?? `pending-${committeeConferenceId}-${nominationType}-${rank}`;
 
   return (
-    <div key={formKey} className="rounded-xl border border-brand-navy/10 bg-sky-50/40 overflow-hidden">
-      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 px-3 py-2.5 border-b border-brand-navy/10 bg-sky-50/70">
+    <div key={formKey} className="rounded-xl border border-brand-navy/10 bg-logo-cyan/8 overflow-hidden">
+      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 px-3 py-2.5 border-b border-brand-navy/10 bg-logo-cyan/12">
         {minimized ? (
           <button
             type="button"

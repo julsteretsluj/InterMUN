@@ -33,10 +33,10 @@ function StatMiniCard({
   title?: string;
 }) {
   const tones = {
-    blue: "from-blue-500/25 to-blue-600/5 border-blue-400/20",
+    blue: "from-brand-accent/22 to-logo-blue/8 border-brand-accent/28",
     silver: "from-slate-400/25 to-slate-700/10 border-slate-400/25",
-    accent: "from-blue-600/22 to-blue-950/8 border-brand-accent/30",
-    sky: "from-sky-500/25 to-sky-600/5 border-sky-400/20",
+    accent: "from-brand-accent/22 to-brand-navy/8 border-brand-accent/30",
+    sky: "from-logo-cyan/22 to-logo-blue/8 border-logo-cyan/30",
   } as const;
   const interactive = Boolean(onPress);
   const className = [
@@ -314,7 +314,7 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-accent/15 via-brand-silver/10 to-blue-600/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
+          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-accent/15 via-brand-silver/10 to-brand-accent/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
               <Sparkles className="size-3.5 text-brand-silver shrink-0" />
               Tip

@@ -6,6 +6,7 @@
  * Inter-MUN: vintage paper × orbit logo spectrum.
  * Logo reference: cyan #00CCFF, blue #3366FF, magenta #FF00FF, orange #FF9900, yellow #FFFF00, lime #33FF00.
  * Primary accent follows logo blue; bright accents lean cyan. Dark chrome stays Discord-like but blurple→logo blue.
+ * `--brand-diplomatic` is the preferred body/link blue on cream (higher contrast than raw logo blue).
  * Token names: `brand-navy`, `brand-accent`, `brand-silver`.
  */
 html {
@@ -31,13 +32,14 @@ html {
   --brand-cream: #ede8dc;
   --brand-paper: rgba(255, 252, 246, 0.94);
 
-  --brand-muted: #5c5852;
-  --brand-line: rgba(18, 18, 18, 0.12);
+  /* ≥4.5:1 on --background for UI copy (WCAG AA body) */
+  --brand-muted: #3f3c38;
+  --brand-line: rgba(18, 18, 18, 0.14);
 
   --brand-accent-ink: #121212;
 
   /* Wordmark “MUN” / links; warm accent from Figma accent/warm */
-  --brand-diplomatic: color-mix(in srgb, var(--logo-blue) 78%, var(--brand-navy));
+  --brand-diplomatic: color-mix(in srgb, var(--logo-blue) 62%, var(--brand-navy));
   --brand-gold: #c2a878;
 
   color-scheme: light;
@@ -59,8 +61,8 @@ html.dark {
   --brand-cream: rgba(255, 255, 255, 0.05);
   --brand-paper: rgba(255, 255, 255, 0.07);
 
-  --brand-muted: #a8a4b8;
-  --brand-line: rgba(245, 245, 245, 0.14);
+  --brand-muted: #c9c4d4;
+  --brand-line: rgba(245, 245, 245, 0.16);
 
   --brand-accent-ink: #f5f5f5;
 
@@ -102,6 +104,12 @@ html.dark {
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-gold: var(--brand-gold);
+  --color-logo-cyan: var(--logo-cyan);
+  --color-logo-blue: var(--logo-blue);
+  --color-logo-magenta: var(--logo-magenta);
+  --color-logo-orange: var(--logo-orange);
+  --color-logo-yellow: var(--logo-yellow);
+  --color-logo-green: var(--logo-green);
   --color-discord-sidebar: var(--discord-sidebar);
   --color-discord-app: var(--discord-app);
   --color-discord-elevated: var(--discord-elevated);
@@ -388,12 +396,12 @@ html.dark ::selection {
   }
 
   .mun-label {
-    @apply text-xs font-semibold uppercase tracking-wider text-slate-600;
+    @apply text-xs font-semibold uppercase tracking-wider text-brand-muted;
     @apply dark:text-brand-muted;
   }
 
   .mun-muted {
-    @apply text-sm text-slate-600;
+    @apply text-sm text-brand-muted;
     @apply dark:text-brand-muted;
   }
 

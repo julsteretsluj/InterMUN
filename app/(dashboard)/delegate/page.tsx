@@ -63,8 +63,8 @@ export default async function DelegateDashboardPage() {
           <h1 className="font-display text-3xl font-semibold text-brand-navy">
             Welcome, Delegate of {countryFlag} {countryLabel}
           </h1>
-          <p className="text-sm text-slate-600 dark:text-zinc-400">
-            Active committee: <span className="font-semibold text-slate-900 dark:text-zinc-100">{line}</span>.
+          <p className="text-sm text-brand-muted">
+            Active committee: <span className="font-semibold text-brand-navy">{line}</span>.
             Countdown dates are shared with everyone in this committee. Your prep, stances, and documents stay with
             your account.
           </p>

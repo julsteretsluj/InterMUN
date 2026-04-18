@@ -2437,7 +2437,7 @@ export function SessionControlClient({
                               type="button"
                               disabled={pending || !call.user_id}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
-                              className="rounded-lg bg-blue-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-600 disabled:opacity-50"
+                              className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                             >
                               Yes
                             </button>
@@ -2937,7 +2937,7 @@ export function SessionControlClient({
                       </span>
                     ) : null}
                     {scheduled ? (
-                      <span className="rounded bg-blue-500/15 px-1.5 py-0.5 text-blue-900 dark:text-blue-100">
+                      <span className="rounded bg-brand-accent/100/15 px-1.5 py-0.5 text-brand-navy dark:text-brand-accent-bright">
                         Scheduled {new Date(a.publish_at!).toLocaleString()}
                       </span>
                     ) : null}

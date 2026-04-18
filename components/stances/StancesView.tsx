@@ -138,7 +138,7 @@ export function StancesView({
               </div>
               <button
                 onClick={addStanceToHeatmap}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
               >
                 Add
               </button>
@@ -170,7 +170,7 @@ export function StancesView({
                   }}
                   className={`block w-full text-left px-3 py-2 rounded ${
                     selectedAllocation?.id === a.id
-                      ? "bg-blue-600 text-white"
+                      ? "bg-brand-accent text-white"
                       : "hover:bg-white/10"
                   }`}
                 >
@@ -198,7 +198,7 @@ export function StancesView({
                 <button
                   onClick={saveStanceNote}
                   disabled={!canEdit}
-                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                  className="mt-2 px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90 disabled:opacity-50"
                 >
                   Save
                 </button>

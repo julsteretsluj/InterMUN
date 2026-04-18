@@ -194,7 +194,7 @@ export function ResolutionsView({
       {canCreate ? (
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="flex items-center gap-2 px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
         >
           <Plus className="w-4 h-4" />
           New Resolution
@@ -237,7 +237,7 @@ export function ResolutionsView({
           <div className="flex gap-2">
             <button
               onClick={createResolution}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
             >
               Create
             </button>
@@ -276,7 +276,7 @@ export function ResolutionsView({
                         href={r.google_docs_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2 text-sm font-medium"
+                        className="text-brand-diplomatic dark:text-brand-accent-bright hover:underline inline-flex items-center gap-2 text-sm font-medium"
                       >
                         <FileCheck className="w-4 h-4 shrink-0" />
                         Open in new tab
@@ -288,7 +288,7 @@ export function ResolutionsView({
                   )}
                 </div>
                 {r.visible_to_other_bloc && (
-                  <span className="text-xs shrink-0 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                  <span className="text-xs shrink-0 bg-brand-accent/15 dark:bg-brand-accent/20 text-brand-navy dark:text-brand-accent-bright px-2 py-1 rounded">
                     Visible to other bloc
                   </span>
                 )}
@@ -306,7 +306,7 @@ export function ResolutionsView({
                       onClick={() => joinBloc(r.id, b.id)}
                       className={`px-3 py-1 rounded text-sm ${
                         selectedBloc[r.id] === b.id
-                          ? "bg-blue-600 text-white"
+                          ? "bg-brand-accent text-white"
                           : "bg-black/30 hover:bg-white/10"
                       }`}
                     >
@@ -317,7 +317,7 @@ export function ResolutionsView({
               )}
               <button
                 onClick={() => signResolution(r.id)}
-                className="text-sm text-blue-600 hover:underline"
+                className="text-sm text-brand-diplomatic hover:underline"
               >
                 Sign virtually (main subs notified)
               </button>
@@ -336,13 +336,13 @@ export function ResolutionsView({
                   <button
                     type="button"
                     onClick={() => void emailResolutionToDelegate(r.id)}
-                    className="px-3 py-1.5 rounded bg-blue-600 text-white text-sm hover:bg-blue-700"
+                    className="px-3 py-1.5 rounded bg-brand-accent text-white text-sm hover:opacity-90"
                   >
                     Send to delegate
                   </button>
                 </div>
                 {shareStatusByResolution[r.id] ? (
-                  <p className="text-xs text-blue-700">{shareStatusByResolution[r.id]}</p>
+                  <p className="text-xs text-brand-diplomatic">{shareStatusByResolution[r.id]}</p>
                 ) : null}
               </div>
 
@@ -369,7 +369,7 @@ export function ResolutionsView({
                             <div className="flex gap-2">
                               <button
                                 type="button"
-                                className="px-2 py-1 rounded bg-blue-600 text-white text-xs"
+                                className="px-2 py-1 rounded bg-brand-accent text-white text-xs"
                                 onClick={() => void saveClause(c.id)}
                               >
                                 Save clause
@@ -401,7 +401,7 @@ export function ResolutionsView({
                     />
                     <button
                       type="button"
-                      className="px-3 py-1 rounded bg-blue-600 text-white text-sm"
+                      className="px-3 py-1 rounded bg-brand-accent text-white text-sm"
                       onClick={() => void addClause(r.id)}
                     >
                       Add clause
@@ -421,11 +421,11 @@ export function ResolutionsView({
                         key={o.id}
                         className={[
                           "flex flex-wrap items-center gap-2 rounded border px-2 py-1",
-                          o.passed ? "border-blue-200 bg-blue-50/60" : "border-red-200 bg-red-50/60",
+                          o.passed ? "border-brand-accent/25 bg-brand-accent/10" : "border-red-200 bg-red-50/60",
                         ].join(" ")}
                       >
                         <span className="font-medium">{clauseIdToLabel.get(o.clause_id) ?? "Clause"}</span>
-                        <span className={o.passed ? "text-blue-700" : "text-red-700"}>
+                        <span className={o.passed ? "text-brand-diplomatic" : "text-red-700"}>
                           {o.passed ? "PASSED" : "FAILED"}
                         </span>
                         <span className="text-brand-muted/70">•</span>

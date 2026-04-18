@@ -48,7 +48,7 @@ export function AllocationCodeGateToggle({
         <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">{state.error}</p>
       ) : null}
       {state?.success ? (
-        <p className="text-sm text-blue-800 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">Saved.</p>
+        <p className="text-sm text-brand-navy bg-brand-accent/10 border border-brand-accent/22 rounded-lg px-3 py-2">Saved.</p>
       ) : null}
       <button
         type="submit"

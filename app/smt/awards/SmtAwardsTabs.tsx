@@ -63,7 +63,7 @@ export function SmtAwardsTabs({
         </div>
       ) : (
         <div role="tabpanel" aria-labelledby="tab-chair-committee-awards" className="space-y-6">
-          <section className="rounded-xl border border-brand-navy/10 bg-sky-50/60 p-4 text-sm text-brand-navy">
+          <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 text-sm text-brand-navy">
             <h2 className="font-display text-lg font-semibold text-brand-navy mb-1">
               Award submissions for chair & committee awards
             </h2>

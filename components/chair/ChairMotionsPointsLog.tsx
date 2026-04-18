@@ -169,7 +169,7 @@ export function ChairMotionsPointsLog({
           <select
             value={selectedAllocationId}
             onChange={(e) => setSelectedAllocationId(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
             <option value="">Select delegate…</option>
             {delegateOptions.map((d) => (
@@ -186,7 +186,7 @@ export function ChairMotionsPointsLog({
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), add())}
             placeholder="e.g. Motion to open the speaker list"
-            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           />
         </label>
         <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -194,7 +194,7 @@ export function ChairMotionsPointsLog({
             type="button"
             onClick={add}
             disabled={!draft.trim() || !selectedAllocationId || !myUserId}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-500"
+            className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50 dark:bg-brand-accent dark:hover:opacity-90"
           >
             ➕ Add
           </button>
@@ -214,7 +214,7 @@ export function ChairMotionsPointsLog({
                 type="button"
                 onClick={() => void addEntry(p.logText)}
                 disabled={!selectedAllocationId || !myUserId}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-left text-sm font-medium text-slate-800 hover:border-blue-300 hover:bg-blue-50/50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-blue-500/40 dark:hover:bg-blue-950/30"
+                className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-left text-sm font-medium text-slate-800 hover:border-brand-accent/35 hover:bg-brand-accent/8 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
               >
                 {p.buttonLabel}
               </button>

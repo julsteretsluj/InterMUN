@@ -129,7 +129,7 @@ function PrepSectionBlock({
                 type="checkbox"
                 checked={checked.has(item.id)}
                 onChange={() => onToggle(item.id)}
-                className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:border-zinc-600"
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
               />
               <span>{item.label}</span>
             </label>
@@ -204,7 +204,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
                   type="checkbox"
                   checked={checked.has(item.id)}
                   onChange={() => toggle(item.id)}
-                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:border-zinc-600"
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
                 />
                 <span>{item.label}</span>
               </label>

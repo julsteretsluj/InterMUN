@@ -19,7 +19,7 @@ export function OfficialLinksPanel() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-700 underline decoration-blue-700/30 underline-offset-2 hover:decoration-blue-700 dark:text-blue-400 dark:decoration-blue-400/40"
+                    className="text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 hover:decoration-brand-diplomatic dark:text-brand-accent-bright dark:decoration-brand-accent-bright/45"
                   >
                     {link.label} ↗
                   </a>

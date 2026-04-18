@@ -207,7 +207,7 @@ export function DocumentsView({
   return (
     <div className="space-y-4 font-serif">
       {isDelegate ? (
-        <div className="rounded-lg border border-blue-200/70 bg-blue-50/70 px-4 py-3 text-sm text-blue-950 dark:border-blue-500/30 dark:bg-blue-950/20 dark:text-blue-100">
+        <div className="rounded-lg border border-brand-accent/28 bg-brand-accent/11 px-4 py-3 text-sm text-brand-navy dark:border-brand-accent/35 dark:bg-brand-accent/12 dark:text-brand-accent-bright">
           <p className="font-medium">Prep document section</p>
           <p className="mt-1">
             You can upload, view, and edit your own <strong>Prep documents</strong> directly from this page.
@@ -222,7 +222,7 @@ export function DocumentsView({
         <a
           href="/downloads/position-paper-guide-placeholder.txt"
           download
-          className="mt-2 inline-block text-sm font-medium text-brand-accent hover:underline"
+          className="mt-2 inline-block text-sm font-medium text-brand-diplomatic underline-offset-2 hover:underline"
         >
           Download placeholder guide
         </a>
@@ -476,7 +476,7 @@ export function DocumentsView({
                   onClick={() => setSelectedId(d.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                     displaySelectedId === d.id
-                      ? "border-blue-300 bg-blue-50 font-medium text-blue-900 dark:border-blue-500/40 dark:bg-blue-950/30 dark:text-blue-100"
+                      ? "border-brand-accent/32 bg-brand-accent/10 font-medium text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/14 dark:text-brand-accent-bright"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >

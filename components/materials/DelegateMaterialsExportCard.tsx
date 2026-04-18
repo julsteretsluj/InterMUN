@@ -60,7 +60,7 @@ export function DelegateMaterialsExportCard() {
             </p>
           )}
           {state?.success && (
-            <p className="text-sm text-blue-700 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">
+            <p className="text-sm text-brand-diplomatic bg-brand-accent/10 border border-brand-accent/22 rounded-lg px-3 py-2">
               {state.success}
             </p>
           )}

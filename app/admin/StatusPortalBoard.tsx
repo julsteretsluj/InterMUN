@@ -103,7 +103,7 @@ export default async function StatusPortalBoard() {
                         <input type="hidden" name="request_id" value={req.id} />
                         <button
                           type="submit"
-                          className="text-xs px-2 py-1 rounded bg-blue-600 text-white font-medium hover:bg-blue-700"
+                          className="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium hover:opacity-90"
                         >
                           Confirm
                         </button>
@@ -138,10 +138,10 @@ export default async function StatusPortalBoard() {
                   requester?.name?.trim() || requester?.username?.trim() || req.requested_by.slice(0, 8);
                 const allocLabel = alloc?.country?.trim() || "Unknown allocation";
                 return (
-                  <div key={req.id} className="rounded-lg border border-blue-200/50 bg-blue-50/50 p-3">
+                  <div key={req.id} className="rounded-lg border border-brand-accent/25 bg-brand-accent/9 p-3">
                     <div className="text-sm font-semibold text-brand-navy">{allocLabel}</div>
                     <div className="text-xs text-brand-muted mt-1">Requester: {requesterLabel}</div>
-                    <div className="text-[0.68rem] text-blue-900/80 mt-2 font-medium">Delegate provisioned</div>
+                    <div className="text-[0.68rem] text-brand-navy/85 mt-2 font-medium">Delegate provisioned</div>
                   </div>
                 );
               })

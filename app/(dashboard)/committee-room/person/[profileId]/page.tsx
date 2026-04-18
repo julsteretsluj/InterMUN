@@ -113,7 +113,7 @@ export default async function CommitteeRoomPersonPage({
         <div className="flex items-center gap-2 sm:justify-end">
           <Link
             href={`/chats-notes?forProfile=${encodeURIComponent(profileId)}`}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-400/35 bg-gradient-to-br from-blue-500/25 to-blue-600/10 px-4 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 shadow-sm hover:opacity-95"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-accent/35 bg-gradient-to-br from-brand-accent/22 to-brand-accent/10 px-4 py-2 text-sm font-semibold text-brand-navy dark:text-slate-100 shadow-sm hover:opacity-95"
           >
             <MessageCircle className="size-4 shrink-0" strokeWidth={2} />
             Chat
@@ -166,9 +166,9 @@ export default async function CommitteeRoomPersonPage({
             >
               <Link
                 href={`/chats-notes?forProfile=${encodeURIComponent(profileId)}`}
-                className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-black/20 py-3 text-xs font-semibold text-brand-navy hover:border-blue-400/30 transition-colors"
+                className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-black/20 py-3 text-xs font-semibold text-brand-navy hover:border-brand-accent/32 transition-colors"
               >
-                <MessageCircle className="size-5 text-blue-400/90" strokeWidth={1.75} />
+                <MessageCircle className="size-5 text-brand-accent-bright/95" strokeWidth={1.75} />
                 Messages
               </Link>
               {crisisReportingEnabled ? (
@@ -211,7 +211,7 @@ export default async function CommitteeRoomPersonPage({
           ) : null}
 
           {canReadFullProfile && fullProfile ? (
-            <section className="rounded-2xl border border-sky-400/20 bg-gradient-to-br from-sky-500/[0.1] via-brand-paper/50 to-blue-500/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-logo-cyan/30 bg-gradient-to-br from-logo-cyan/[0.12] via-brand-paper/50 to-logo-blue/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
                 Account profile
               </h2>

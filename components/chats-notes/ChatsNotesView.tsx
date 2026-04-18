@@ -161,7 +161,7 @@ export function ChatsNotesView({
             {selectedMessage ? (
               <button
                 onClick={saveEditedMessage}
-                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="mt-2 px-4 py-2 bg-brand-accent text-white rounded-md hover:opacity-90"
               >
                 Save changes
               </button>
@@ -169,7 +169,7 @@ export function ChatsNotesView({
               <button
                 onClick={submitMessage}
                 disabled={!newMessage.trim()}
-                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                className="mt-2 px-4 py-2 bg-brand-accent text-white rounded-md hover:opacity-90 disabled:opacity-50"
               >
                 Send
               </button>
@@ -216,7 +216,7 @@ export function ChatsNotesView({
                     <div className="flex gap-2 shrink-0">
                       <button
                         type="button"
-                        className="text-xs text-blue-700 hover:underline"
+                        className="text-xs text-brand-diplomatic hover:underline"
                         onClick={() => {
                           setSelectedMessage(m);
                           setNewMessage(m.content);

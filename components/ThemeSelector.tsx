@@ -20,7 +20,7 @@ const HUE_META: Record<
   ThemeHue,
   { name: string; swatch: string; swatchDark?: string }
 > = {
-  blue: { name: "Blue", swatch: "bg-blue-600" },
+  blue: { name: "Blue", swatch: "bg-brand-accent" },
   red: { name: "Red", swatch: "bg-red-600" },
   orange: { name: "Orange", swatch: "bg-orange-500" },
   yellow: { name: "Yellow", swatch: "bg-yellow-500" },
@@ -139,7 +139,7 @@ export function ThemeSelector({ className }: { className?: string }) {
               className={cn(
                 "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition",
                 mode === "light"
-                  ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-500 dark:bg-blue-950/50 dark:text-blue-100"
+                  ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent dark:bg-brand-accent/16 dark:text-brand-accent-bright"
                   : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
               )}
             >
@@ -152,7 +152,7 @@ export function ThemeSelector({ className }: { className?: string }) {
               className={cn(
                 "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition",
                 mode === "dark"
-                  ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-500 dark:bg-blue-950/50 dark:text-blue-100"
+                  ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent dark:bg-brand-accent/16 dark:text-brand-accent-bright"
                   : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
               )}
             >
@@ -181,7 +181,7 @@ export function ThemeSelector({ className }: { className?: string }) {
                   className={cn(
                     "flex items-center justify-center rounded-lg border p-2 transition",
                     active
-                      ? "border-blue-500 bg-blue-50/80 dark:border-blue-400 dark:bg-blue-950/40"
+                      ? "border-brand-accent bg-brand-accent/12 dark:border-brand-accent/45 dark:bg-brand-accent/14"
                       : "border-transparent hover:bg-slate-50 dark:hover:bg-zinc-800/80"
                   )}
                 >
@@ -222,7 +222,7 @@ export function ThemeSelector({ className }: { className?: string }) {
             className={cn(
               "mt-2 flex w-full items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-medium transition",
               dyslexicFont
-                ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-500 dark:bg-blue-950/50 dark:text-blue-100"
+                ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent dark:bg-brand-accent/16 dark:text-brand-accent-bright"
                 : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
             )}
             aria-pressed={dyslexicFont}

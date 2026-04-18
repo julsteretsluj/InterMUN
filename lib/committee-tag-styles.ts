@@ -24,7 +24,7 @@ export function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advance
 export function formatTagClass(format: "Traditional" | "Crisis"): string {
   switch (format) {
     case "Traditional":
-      return `${pill} border-indigo-400/65 bg-indigo-100 text-indigo-950 dark:border-indigo-500/40 dark:bg-indigo-950/55 dark:text-indigo-50`;
+      return `${pill} border-brand-accent/50 bg-brand-accent/14 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/18 dark:text-brand-accent-bright`;
     case "Crisis":
       return `${pill} border-orange-400/65 bg-orange-100 text-orange-950 dark:border-orange-500/40 dark:bg-orange-950/55 dark:text-orange-50`;
     default: {
@@ -35,7 +35,7 @@ export function formatTagClass(format: "Traditional" | "Crisis"): string {
 }
 
 export function ageRangeTagClass(): string {
-  return `${pill} border-cyan-400/65 bg-cyan-100 text-cyan-950 dark:border-cyan-500/40 dark:bg-cyan-950/55 dark:text-cyan-50`;
+  return `${pill} border-logo-cyan/50 bg-logo-cyan/14 text-brand-navy dark:border-logo-cyan/45 dark:bg-logo-cyan/16 dark:text-brand-accent-bright`;
 }
 
 /** Pill for the age-range line (same colour whenever text differs). */

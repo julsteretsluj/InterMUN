@@ -218,7 +218,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     const labelClass = isSession ? SESSION_LABEL : "text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400";
     const fieldClass = isSession
       ? SESSION_FIELD
-      : "mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100";
+      : "mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100";
     const addButtonClass = isSession
       ? "px-4 py-2 rounded-lg border border-white/25 bg-white/10 text-brand-navy text-sm font-medium hover:bg-white/20 disabled:opacity-50"
       : "rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100 disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700";
@@ -247,7 +247,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
               className={
                 isSession
                   ? "font-medium text-brand-accent-bright underline decoration-brand-accent-bright/40 underline-offset-2"
-                  : "font-medium text-blue-700 underline decoration-blue-700/30 underline-offset-2 dark:text-blue-400"
+                  : "font-medium text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 dark:text-brand-accent-bright"
               }
             >
               Session → Timer

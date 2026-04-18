@@ -11,7 +11,7 @@ function Flash({ state }: { state: AdminUserFormState | null }) {
       className={`text-sm rounded-lg px-3 py-2 ${
         state.error
           ? "bg-red-950/50 text-red-200 border border-red-900/50"
-          : "bg-blue-950/40 text-blue-100 border border-blue-900/50"
+          : "bg-brand-accent/14 text-brand-accent-bright border border-brand-accent/45"
       }`}
     >
       {state.error ?? state.success}

@@ -237,7 +237,7 @@ export function VotingPanel({
               <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-brand-navy dark:border-white/12 dark:bg-black/25">
                 <input
                   type="checkbox"
-                  className="size-4 rounded border-slate-300 text-blue-700 focus:ring-brand-accent-bright dark:border-white/20"
+                  className="size-4 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent-bright dark:border-white/20"
                   checked={d.must_vote}
                   onChange={(e) =>
                     setDrafts((prev) => ({
@@ -323,7 +323,7 @@ export function VotingPanel({
                   <p
                     className={`font-display text-lg font-semibold ${
                       passes
-                        ? "text-blue-700 dark:text-blue-400"
+                        ? "text-brand-diplomatic dark:text-brand-accent-bright"
                         : "text-rose-700 dark:text-rose-400"
                     }`}
                   >
@@ -369,7 +369,7 @@ export function VotingPanel({
               {total > 0 ? (
                 <span
                   className={`font-semibold ${
-                    passes ? "text-blue-700 dark:text-blue-400" : "text-rose-700 dark:text-rose-400"
+                    passes ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-rose-700 dark:text-rose-400"
                   }`}
                 >
                   {passes ? "Passing" : "Failing"} (preliminary)
@@ -415,7 +415,7 @@ export function VotingPanel({
                               <button
                                 type="button"
                                 onClick={() => void recordVoteForMotion(item.id, row.userId, "yes")}
-                                className="rounded-lg bg-blue-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-600"
+                                className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
                               >
                                 Yes
                               </button>

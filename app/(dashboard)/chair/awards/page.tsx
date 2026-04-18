@@ -212,7 +212,7 @@ export default async function ChairAwardsPage() {
   return (
     <MunPageShell title="Score">
       <div className="space-y-5">
-        <div className="rounded-xl border border-brand-navy/10 bg-sky-50/70 p-3 text-sm text-brand-muted">
+        <div className="rounded-xl border border-brand-navy/10 bg-logo-cyan/12 p-3 text-sm text-brand-muted">
           <p>
             Scoring matches the{" "}
             <a
@@ -246,7 +246,7 @@ export default async function ChairAwardsPage() {
           return (
             <section
               key={type.id}
-              className="rounded-xl border border-brand-navy/10 bg-sky-50/35 p-4 md:p-4 space-y-3"
+              className="rounded-xl border border-brand-navy/10 bg-logo-cyan/7 p-4 md:p-4 space-y-3"
             >
               <div>
                 <h3 className="font-display text-lg font-semibold text-brand-navy">{type.label}</h3>

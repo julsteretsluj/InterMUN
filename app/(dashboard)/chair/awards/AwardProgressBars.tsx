@@ -46,7 +46,7 @@ export function OverallAwardsProgress({ serverCompletedKeys, allRequiredKeys }: 
   }, [allRequiredKeys, serverCompletedKeys, optimisticKeys]);
 
   return (
-    <div className="rounded-xl border border-brand-navy/10 bg-sky-50/65 p-3">
+    <div className="rounded-xl border border-brand-navy/10 bg-logo-cyan/11 p-3">
       <div className="mb-2 flex items-center justify-between text-xs text-brand-navy/85">
         <span className="font-semibold uppercase tracking-wide">Overall awards completion</span>
         <span>
@@ -111,7 +111,7 @@ export function SectionAwardsProgress({
   }, [nominationType, optimisticKeys, prefix, optionalRanks, requiredRanks, serverCompletedKeys]);
 
   return (
-    <div className="mt-3 rounded-lg border border-brand-navy/10 bg-sky-50/55 p-3">
+    <div className="mt-3 rounded-lg border border-brand-navy/10 bg-logo-cyan/9 p-3">
       <div className="flex items-center justify-between text-xs text-brand-navy/85 mb-2">
         <span className="font-semibold">Progress (required)</span>
         <span>

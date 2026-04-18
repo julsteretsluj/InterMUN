@@ -49,7 +49,7 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
       {state?.error ? (
         <p className="text-xs text-red-700">{state.error}</p>
       ) : state?.success ? (
-        <p className="text-xs text-blue-800">{state.success}</p>
+        <p className="text-xs text-brand-navy">{state.success}</p>
       ) : null}
     </form>
   );
@@ -62,7 +62,7 @@ function Flash({ state }: { state: StaffAccessFormState | null }) {
       className={`text-sm rounded-lg px-3 py-2 ${
         state.error
           ? "bg-red-50 text-red-800 border border-red-100"
-          : "bg-blue-50 text-blue-900 border border-blue-100"
+          : "bg-brand-accent/10 text-brand-navy border border-brand-accent/22"
       }`}
     >
       {state.error ?? state.success}

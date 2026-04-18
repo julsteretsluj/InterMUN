@@ -223,7 +223,7 @@ export function ChairDigitalRoomClient({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search country…"
-            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           />
         </label>
         <p className="text-sm text-slate-500 dark:text-zinc-400">
@@ -244,7 +244,7 @@ export function ChairDigitalRoomClient({
             const rollLabel = att !== undefined ? rollAttendanceShortLabel(att) : "—";
             const rollClass =
               att === "present_voting"
-                ? "bg-blue-100 text-blue-900 dark:bg-blue-950/50 dark:text-blue-200"
+                ? "bg-brand-accent/15 text-brand-navy dark:bg-brand-accent/14 dark:text-brand-accent-bright"
                 : att === "present_abstain"
                   ? "bg-amber-100 text-amber-950 dark:bg-amber-950/45 dark:text-amber-100"
                   : att === "absent"
@@ -272,7 +272,7 @@ export function ChairDigitalRoomClient({
                         className={cn(
                           "rounded-full px-2 py-0.5 text-[0.65rem] font-medium",
                           a.user_id
-                            ? "bg-blue-100 text-blue-900 dark:bg-blue-950/60 dark:text-blue-200"
+                            ? "bg-brand-accent/15 text-brand-navy dark:bg-brand-accent/16 dark:text-brand-accent-bright"
                             : "bg-amber-100 text-amber-950 dark:bg-amber-950/40 dark:text-amber-200"
                         )}
                       >
@@ -282,7 +282,7 @@ export function ChairDigitalRoomClient({
                     {a.user_id ? (
                       <Link
                         href={`/committee-room/person/${a.user_id}`}
-                        className="mt-1 inline-block text-xs font-medium text-blue-700 hover:underline dark:text-blue-400"
+                        className="mt-1 inline-block text-xs font-medium text-brand-diplomatic hover:underline dark:text-brand-accent-bright"
                       >
                         Delegate profile →
                       </Link>
@@ -295,7 +295,7 @@ export function ChairDigitalRoomClient({
                       className={cn(
                         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition",
                         f.compliment
-                          ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-600 dark:bg-blue-950/50 dark:text-blue-100"
+                          ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/16 dark:text-brand-accent-bright"
                           : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >
@@ -330,7 +330,7 @@ export function ChairDigitalRoomClient({
                       className={cn(
                         "rounded-lg border px-3 py-2 text-sm font-medium transition",
                         expandedReminderId === a.id || f.reminder
-                          ? "border-blue-300 bg-blue-50 text-blue-900 dark:border-blue-600 dark:bg-blue-950/40 dark:text-blue-100"
+                          ? "border-brand-accent/32 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/14 dark:text-brand-accent-bright"
                           : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >

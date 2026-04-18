@@ -78,7 +78,7 @@ export default async function ChairOverviewPage() {
             for this committee — same idea as{" "}
             <a
               href="https://thedashboard.seamuns.site/chair"
-              className="font-medium text-blue-700 underline decoration-blue-700/30 underline-offset-2 dark:text-blue-400"
+              className="font-medium text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 dark:text-brand-accent-bright"
               target="_blank"
               rel="noopener noreferrer"
             >
