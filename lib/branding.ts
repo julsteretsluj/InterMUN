@@ -3,7 +3,7 @@
  * Override with NEXT_PUBLIC_APP_NAME and NEXT_PUBLIC_APP_TAGLINE.
  */
 
-/** Rainbow orbit emblem (`public/intermun-emblem.png`). */
+/** Rainbow orbit emblem (`public/intermun-emblem.png`). Keep `app/icon.png` + `app/apple-icon.png` in sync when replacing the asset. */
 export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png";
 
 export function getAppName(): string {

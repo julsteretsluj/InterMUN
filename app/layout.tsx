@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Merriweather } from "next/font/google";
 import Script from "next/script";
-import { getAppMetaDescription, getAppName, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
+import { getAppMetaDescription, getAppName } from "@/lib/branding";
 import {
   DYSLEXIC_FONT_STORAGE_KEY,
   DEFAULT_THEME_HUE,
@@ -28,9 +28,10 @@ const documentSerif = Merriweather({
 export const metadata: Metadata = {
   title: getAppName(),
   description: getAppMetaDescription(),
+  /** Same asset as `public/intermun-emblem.png` / `<InterMunEmblem />`; file convention adds `<link rel="icon">`. */
   icons: {
-    icon: INTERMUN_EMBLEM_PATH,
-    apple: INTERMUN_EMBLEM_PATH,
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
 };
 

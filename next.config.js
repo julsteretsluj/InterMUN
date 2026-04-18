@@ -5,6 +5,12 @@ const nextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  async rewrites() {
+    return [
+      /** Legacy clients request `/favicon.ico`; serve the same PNG as `app/icon.png`. */
+      { source: "/favicon.ico", destination: "/icon.png" },
+    ];
+  },
   async headers() {
     return [
       {
