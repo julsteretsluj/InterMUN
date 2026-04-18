@@ -1,7 +1,7 @@
 import { INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-/** InterMUN orbit emblem (`public/intermun-emblem.png`, transparent background). */
+/** InterMUN emblem (`public/intermun-emblem.png`). */
 export function InterMunEmblem({
   className,
   alt = "InterMUN",
