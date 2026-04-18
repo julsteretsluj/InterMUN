@@ -3,48 +3,53 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Default palette aligned with SEAMUNs logo (public/seamun-i-2027-logo.png):
- * deep navy caduceus, royal / sky blue waves, silver highlights.
- * Token names `brand-gold` / `brand-gold-bright` are legacy aliases for the primary accent (blue).
+ * Inter-MUN Coursera-style system: Spotify × vintage diplomatic interface.
+ * Primary canvas: deep charcoal (#121212) in dark; vintage paper in light.
+ * Accent: Spotify green for interactions. Highlight: aged diplomatic gold for status.
+ * Token names `brand-navy` / `brand-gold` remain as legacy keys for existing components.
  */
 html {
-  --background: #ffffff;
-  --foreground: #0c1a3a;
+  --background: #f5f1e8;
+  --foreground: #121212;
 
-  --brand-navy: #0c1a3a;
-  --brand-navy-soft: rgba(12, 26, 58, 0.08);
+  --brand-navy: #121212;
+  --brand-navy-soft: rgba(18, 18, 18, 0.06);
 
-  --brand-gold: #1e56a0;
-  --brand-gold-bright: #4a90e2;
+  --brand-gold: #1db954;
+  --brand-gold-bright: #1ed760;
 
-  --brand-cream: #f0f6fc;
-  --brand-paper: rgba(255, 255, 255, 0.97);
+  --brand-diplomatic: #c4a574;
 
-  --brand-muted: #5a6d88;
-  --brand-line: rgba(12, 26, 58, 0.14);
+  --brand-cream: #ebe4d7;
+  --brand-paper: rgba(255, 252, 246, 0.94);
 
-  --brand-accent-ink: #0c1a3a;
+  --brand-muted: #5c5852;
+  --brand-line: rgba(18, 18, 18, 0.12);
+
+  --brand-accent-ink: #121212;
 
   color-scheme: light;
 }
 
 html.dark {
-  --background: #060d18;
-  --foreground: #e8eef7;
+  --background: #121212;
+  --foreground: #f5f5f5;
 
-  --brand-navy: #e8eef7;
-  --brand-navy-soft: rgba(232, 238, 247, 0.12);
+  --brand-navy: #f5f5f5;
+  --brand-navy-soft: rgba(245, 245, 245, 0.12);
 
-  --brand-gold: #4a90e2;
-  --brand-gold-bright: #7eb8f0;
+  --brand-gold: #1db954;
+  --brand-gold-bright: #1ed760;
 
-  --brand-cream: rgba(255, 255, 255, 0.04);
-  --brand-paper: rgba(255, 255, 255, 0.06);
+  --brand-diplomatic: #d4b896;
 
-  --brand-muted: #9eb0cb;
-  --brand-line: rgba(232, 238, 247, 0.14);
+  --brand-cream: rgba(255, 255, 255, 0.05);
+  --brand-paper: rgba(255, 255, 255, 0.07);
 
-  --brand-accent-ink: #e8eef7;
+  --brand-muted: #a39e96;
+  --brand-line: rgba(245, 245, 245, 0.14);
+
+  --brand-accent-ink: #f5f5f5;
 
   color-scheme: dark;
 }
@@ -56,11 +61,13 @@ html.dark {
   --color-brand-navy-soft: var(--brand-navy-soft);
   --color-brand-gold: var(--brand-gold);
   --color-brand-gold-bright: var(--brand-gold-bright);
+  --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-cream: var(--brand-cream);
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
   --font-sans: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --color-brand-accent-ink: var(--brand-accent-ink);
 }
 
@@ -81,31 +88,31 @@ html.dyslexic-font body {
 
 body {
   min-height: 100%;
-  background-color: #ffffff;
+  background-color: var(--background);
   color: var(--foreground);
   background-attachment: fixed;
   background-image: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--brand-gold) 10%, transparent) 0%,
-    #ffffff 48%,
-    var(--brand-cream) 100%
+    185deg,
+    color-mix(in srgb, var(--brand-gold) 7%, transparent) 0%,
+    var(--background) 42%,
+    color-mix(in srgb, var(--brand-diplomatic) 12%, var(--background)) 100%
   );
 }
 
 html.dark body {
-  background-color: #060d18;
+  background-color: #121212;
   background-image:
     radial-gradient(
       circle at top left,
-      color-mix(in srgb, var(--brand-gold) 26%, transparent) 0%,
-      rgba(6, 13, 24, 0.94) 40%
+      color-mix(in srgb, var(--brand-gold) 22%, transparent) 0%,
+      rgba(18, 18, 18, 0.97) 42%
     ),
     radial-gradient(
       circle at bottom right,
-      color-mix(in srgb, var(--brand-gold) 20%, transparent) 0%,
-      rgba(6, 13, 24, 0.96) 45%
+      color-mix(in srgb, var(--brand-diplomatic) 12%, transparent) 0%,
+      rgba(18, 18, 18, 0.98) 46%
     ),
-    linear-gradient(135deg, #0a1424 0%, #060d18 100%);
+    linear-gradient(145deg, #161616 0%, #121212 100%);
 }
 
 /* Auth / marketing subtle glow follows accent */
@@ -297,8 +304,9 @@ html.dark ::selection {
 
 @layer components {
   .mun-shell {
-    @apply rounded-2xl border border-slate-100/90 bg-white p-6 text-brand-navy shadow-[0_4px_24px_rgba(15,23,42,0.06)] backdrop-blur-sm md:p-8;
-    @apply dark:border-white/10 dark:bg-brand-paper/90 dark:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)] dark:backdrop-blur-md;
+    @apply rounded-2xl border border-slate-100/90 bg-white p-6 text-brand-navy shadow-[0_8px_30px_-8px_rgba(18,18,18,0.08)] backdrop-blur-sm md:p-8;
+    @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
+    @apply dark:border-white/10 dark:bg-brand-paper/90 dark:shadow-[0_16px_48px_-20px_rgba(0,0,0,0.55)] dark:backdrop-blur-md;
   }
 
   .mun-shell-title {
@@ -306,8 +314,9 @@ html.dark ::selection {
   }
 
   .mun-card {
-    @apply rounded-xl border border-slate-200 bg-white p-4 text-brand-navy shadow-sm;
-    @apply dark:border-white/10 dark:bg-black/20 dark:shadow-sm dark:backdrop-blur-sm;
+    @apply rounded-xl border border-slate-200 bg-white p-4 text-brand-navy shadow-[0_6px_24px_-10px_rgba(18,18,18,0.07)];
+    @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
+    @apply dark:border-white/10 dark:bg-black/20 dark:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.5)] dark:backdrop-blur-sm;
   }
 
   .mun-card-dense {
@@ -336,12 +345,12 @@ html.dark ::selection {
   }
 
   .mun-btn {
-    @apply rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold-bright disabled:opacity-45;
+    @apply rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-colors duration-200 ease-out hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold-bright disabled:opacity-45;
     @apply dark:border-white/15 dark:bg-white/5 dark:text-brand-navy dark:hover:bg-white/10;
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-brand-gold/45 bg-brand-gold px-4 py-2 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-45;
+    @apply rounded-lg border border-brand-gold/45 bg-brand-gold px-4 py-2 text-sm font-semibold text-white transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
   }
 
   .mun-btn-danger {
@@ -350,7 +359,7 @@ html.dark ::selection {
   }
 
   .mun-link {
-    @apply font-semibold text-brand-gold underline underline-offset-2 hover:text-brand-gold-bright;
+    @apply font-semibold text-brand-gold underline underline-offset-2 transition-colors duration-200 ease-out hover:text-brand-gold-bright;
     @apply dark:text-brand-gold-bright dark:hover:text-brand-gold;
   }
 }

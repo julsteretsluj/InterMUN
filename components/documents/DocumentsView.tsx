@@ -205,7 +205,7 @@ export function DocumentsView({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 font-serif">
       {isDelegate ? (
         <div className="rounded-lg border border-emerald-200/70 bg-emerald-50/70 px-4 py-3 text-sm text-emerald-950 dark:border-emerald-500/30 dark:bg-emerald-950/20 dark:text-emerald-100">
           <p className="font-medium">Prep document section</p>
@@ -242,7 +242,7 @@ export function DocumentsView({
             chair_feedback: "",
           });
         }}
-        className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-700"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-gold px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
         Add document
@@ -407,7 +407,7 @@ export function DocumentsView({
                   onClick={() => setSelectedId(d.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                     displaySelectedId === d.id
-                      ? "border-fuchsia-300 bg-fuchsia-50 font-medium text-fuchsia-900 dark:border-fuchsia-500/40 dark:bg-fuchsia-950/30 dark:text-fuchsia-100"
+                      ? "border-brand-diplomatic/50 bg-brand-diplomatic/12 font-medium text-brand-navy dark:border-brand-diplomatic/45 dark:bg-brand-diplomatic/10 dark:text-brand-navy"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
@@ -522,7 +522,7 @@ export function DocumentsView({
                   onClick={() => setSelectedId(d.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                     displaySelectedId === d.id
-                      ? "border-violet-300 bg-violet-50 font-medium text-violet-900 dark:border-violet-500/40 dark:bg-violet-950/40 dark:text-violet-100"
+                      ? "border-brand-gold/45 bg-brand-gold/10 font-medium text-brand-navy dark:border-brand-gold/40 dark:bg-brand-gold/15 dark:text-brand-navy"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
@@ -570,7 +570,7 @@ export function DocumentsView({
                         });
                         setShowForm(false);
                       }}
-                      className="text-sm font-medium text-violet-600 hover:underline dark:text-violet-400"
+                      className="text-sm font-medium text-brand-gold hover:underline dark:text-brand-gold-bright"
                     >
                       Edit
                     </button>

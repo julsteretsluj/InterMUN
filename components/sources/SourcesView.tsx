@@ -123,7 +123,7 @@ export function SourcesView({
       <button
         type="button"
         onClick={() => setShowForm(true)}
-        className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-700"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-gold px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
         Add source
@@ -229,7 +229,7 @@ export function SourcesView({
                   onClick={() => setSelectedId(s.id)}
                   className={`flex w-full items-center gap-2 rounded-xl border px-3 py-2 text-left text-sm transition ${
                     displaySelectedId === s.id
-                      ? "border-violet-300 bg-violet-50 font-medium text-violet-900 dark:border-violet-500/40 dark:bg-violet-950/40 dark:text-violet-100"
+                      ? "border-brand-gold/45 bg-brand-gold/10 font-medium text-brand-navy dark:border-brand-gold/40 dark:bg-brand-gold/15 dark:text-brand-navy"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >
@@ -247,7 +247,7 @@ export function SourcesView({
                   href={selected.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-violet-600 hover:underline dark:text-violet-400"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-brand-gold hover:underline dark:text-brand-gold-bright"
                 >
                   {selected.title || "Open link"}
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden />
@@ -261,7 +261,7 @@ export function SourcesView({
                         setEditUrl(selected.url);
                         setEditTitle(selected.title || "");
                       }}
-                      className="text-sm text-violet-600 hover:underline dark:text-violet-400"
+                      className="text-sm text-brand-gold hover:underline dark:text-brand-gold-bright"
                     >
                       Edit
                     </button>

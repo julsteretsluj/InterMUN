@@ -107,7 +107,7 @@ export function GuidesView({
             onClick={() => setSelected(g)}
             className={`block w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition ${
               selected?.id === g.id
-                ? "bg-violet-600 text-white"
+                ? "bg-brand-gold text-white"
                 : "bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/15"
             }`}
           >
@@ -129,7 +129,7 @@ export function GuidesView({
                     setEditContent(selected.content || "");
                     setEditGoogleUrl(selected.google_docs_url?.trim() || "");
                   }}
-                  className="rounded-lg bg-violet-600 px-3 py-1.5 text-sm text-white hover:bg-violet-700"
+                  className="rounded-lg bg-brand-gold px-3 py-1.5 text-sm text-white transition-opacity duration-200 hover:opacity-95"
                 >
                   Edit
                 </button>

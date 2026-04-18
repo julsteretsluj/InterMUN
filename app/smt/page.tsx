@@ -17,7 +17,7 @@ function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advanced") {
 
 function formatTagClass(format: "Traditional" | "Crisis") {
   if (format === "Crisis") {
-    return "border-fuchsia-300/80 bg-fuchsia-100 text-fuchsia-900";
+    return "border-rose-300/80 bg-rose-100 text-rose-900";
   }
   return "border-sky-300/80 bg-sky-100 text-sky-900";
 }
@@ -193,7 +193,7 @@ export default async function SmtOverviewPage({
                   >
                     {tags.format}
                   </span>
-                  <span className="rounded-full border border-violet-300/80 bg-violet-100 px-2 py-0.5 text-[0.68rem] font-semibold text-violet-900">
+                  <span className="rounded-full border border-brand-diplomatic/60 bg-brand-diplomatic/15 px-2 py-0.5 text-[0.68rem] font-semibold text-brand-navy">
                     {tags.ageRange}
                   </span>
                   {tags.eslFriendly ? (

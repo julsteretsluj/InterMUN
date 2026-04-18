@@ -156,7 +156,7 @@ export function RunningNotesView({
               }}
               className={`block w-full truncate rounded-lg px-3 py-2 text-left text-sm transition ${
                 activeNote?.id === n.id
-                  ? "bg-violet-600 text-white"
+                  ? "bg-brand-gold text-white"
                   : "hover:bg-slate-100 dark:hover:bg-white/10"
               }`}
             >

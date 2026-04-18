@@ -53,8 +53,8 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
   const hubLabel = activeEvent?.name?.trim() || "Enter conference code";
 
   return (
-    <div className="flex min-h-screen bg-[#f4f6fb] text-slate-900 dark:bg-zinc-950 dark:text-zinc-50">
-      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
+    <div className="flex min-h-screen bg-brand-cream text-slate-900 dark:bg-[#121212] dark:text-zinc-50">
+      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(18,18,18,0.06)] transition-[width] duration-200 dark:border-white/10 dark:bg-[#121212]/60 dark:shadow-none lg:flex">
         <Link
           href="/smt"
           className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
@@ -67,13 +67,13 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             />
           ) : (
             <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 text-xs font-bold text-white shadow-md"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold to-emerald-900 text-xs font-bold text-white shadow-md"
               aria-hidden
             >
               IM
             </span>
           )}
-          <span className="hidden truncate text-lg font-bold tracking-tight text-emerald-800 group-hover:block dark:text-emerald-200">
+          <span className="hidden truncate text-lg font-bold tracking-tight text-brand-gold group-hover:block dark:text-brand-gold-bright">
             {appName}
           </span>
         </Link>
@@ -93,14 +93,15 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           profileHref="/smt/profile"
         />
         {activeEvent ? (
-          <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-2 text-xs text-slate-600 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-slate-600 dark:border-white/10 dark:bg-[#121212] dark:text-zinc-400 sm:px-6">
             <div className="w-full">
               Active event: <span className="font-medium text-slate-800 dark:text-zinc-100">{activeEvent.name}</span>{" "}
-              · code <span className="font-mono text-emerald-700 dark:text-emerald-400/90">{activeEvent.event_code}</span>
+              · code{" "}
+              <span className="font-mono text-brand-gold dark:text-brand-gold-bright">{activeEvent.event_code}</span>
             </div>
           </div>
         ) : (
-          <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-2 text-xs text-emerald-800 dark:border-zinc-800 dark:bg-zinc-950 dark:text-emerald-300/90 sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-gold dark:border-white/10 dark:bg-[#121212] dark:text-brand-gold-bright sm:px-6">
             <div className="w-full">
               <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
                 Enter conference code

@@ -53,7 +53,7 @@ export function DashboardTopBar({
   const initials = initialsFromName(userName, userEmail);
 
   return (
-    <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/80 bg-[#f4f6fb]/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90">
+    <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/70 bg-brand-cream/85 backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/92">
       <div className="flex w-full flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
           href={brandHomeHref ?? "/profile"}
@@ -68,7 +68,7 @@ export function DashboardTopBar({
             />
           ) : (
             <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 text-[0.65rem] font-bold text-white shadow-md"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-emerald-800 text-[0.65rem] font-bold text-white shadow-md"
               aria-hidden
             >
               IM
@@ -82,13 +82,13 @@ export function DashboardTopBar({
           {showDelegateHubLink ? (
             <Link
               href="/delegate"
-              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-violet-300 hover:bg-violet-50/50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-violet-500/40 dark:hover:bg-violet-950/40 sm:inline-flex"
+              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:border-brand-gold/45 hover:bg-brand-gold/10 dark:border-white/12 dark:bg-white/5 dark:text-zinc-100 dark:hover:border-brand-gold/50 dark:hover:bg-brand-gold/15 sm:inline-flex"
             >
               📄 Delegate hub
             </Link>
           ) : null}
           {conferenceLine ? (
-            <p className="hidden max-w-[200px] truncate text-xs font-medium text-violet-700/90 dark:text-violet-300/90 lg:block">
+            <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-diplomatic lg:block">
               {conferenceLine}
             </p>
           ) : null}
@@ -106,7 +106,7 @@ export function DashboardTopBar({
               className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition hover:bg-slate-50 dark:hover:bg-zinc-800"
             >
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 text-xs font-bold text-white shadow-inner"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-emerald-900 text-xs font-bold text-white shadow-inner"
                 aria-hidden
               >
                 {initials}

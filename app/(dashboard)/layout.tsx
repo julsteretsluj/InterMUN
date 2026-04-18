@@ -122,7 +122,7 @@ export default async function DashboardLayout({
   );
 
   return (
-    <div className="flex min-h-screen bg-[#f4f6fb] dark:bg-zinc-950">
+    <div className="flex min-h-screen bg-brand-cream dark:bg-[#121212]">
       <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
@@ -136,7 +136,7 @@ export default async function DashboardLayout({
             />
           ) : (
             <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-orange-400 text-xs font-bold text-white shadow-md"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold to-emerald-900 text-xs font-bold text-white shadow-md"
               aria-hidden
             >
               IM
@@ -200,7 +200,7 @@ export default async function DashboardLayout({
           }
         />
         {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
-          <div className="border-b border-slate-200/80 bg-[#f4f6fb] px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950 sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-3 dark:border-white/10 dark:bg-[#121212] sm:px-6">
             <div className="w-full">
               <ChairLiveFloorThemed conferenceId={activeConf.id} />
             </div>

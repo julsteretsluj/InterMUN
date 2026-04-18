@@ -253,7 +253,7 @@ export default async function ProfilePage() {
         </div>
       )}
       {isDelegate && (mySpeechNotes?.length ?? 0) > 0 && (
-        <div className="mb-8 rounded-xl border border-violet-300/40 bg-violet-50/40 p-4 md:p-5">
+        <div className="mb-8 rounded-xl border border-brand-diplomatic/35 bg-brand-diplomatic/10 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Chair speech notes (private)
           </h3>

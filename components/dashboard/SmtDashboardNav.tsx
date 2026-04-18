@@ -147,7 +147,7 @@ export function SmtMobileDock() {
   const pathname = usePathname();
 
   return (
-    <div className="border-t border-slate-200/80 bg-[#f4f6fb]/95 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95">
+    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/95">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {SMT_NAV_ITEMS.map((item) => (
           <SmtDockLink key={item.href} item={item} isActive={smtNavItemIsActive(pathname, item)} />

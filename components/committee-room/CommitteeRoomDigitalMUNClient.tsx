@@ -28,14 +28,14 @@ function StatMiniCard({
 }: {
   label: string;
   value: string | number;
-  tint: "emerald" | "amber" | "violet" | "sky";
+  tint: "emerald" | "amber" | "spotify" | "sky";
   onPress?: () => void;
   title?: string;
 }) {
   const tones = {
     emerald: "from-emerald-500/25 to-emerald-600/5 border-emerald-400/20",
     amber: "from-amber-500/25 to-amber-600/5 border-amber-400/20",
-    violet: "from-violet-500/25 to-violet-600/5 border-violet-400/20",
+    spotify: "from-[#1DB954]/22 to-emerald-900/8 border-brand-gold/30",
     sky: "from-sky-500/25 to-sky-600/5 border-sky-400/20",
   } as const;
   const interactive = Boolean(onPress);
@@ -307,14 +307,14 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard
               label="Dais"
               value={daisFilled}
-              tint="violet"
+              tint="spotify"
               onPress={() => searchInputRef.current?.focus()}
               title="Focus search (dais titles and names match your query)"
             />
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-orange-500/20 via-fuchsia-500/10 to-emerald-500/15 p-3 text-xs text-brand-navy/90 leading-relaxed">
+          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-gold/15 via-brand-diplomatic/10 to-emerald-600/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
               <Sparkles className="size-3.5 text-amber-300/90 shrink-0" />
               Tip

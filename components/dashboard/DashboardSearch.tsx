@@ -14,7 +14,7 @@ export function DashboardSearch() {
       <input
         type="search"
         placeholder="Search guides, documents, notes…"
-        className="w-full rounded-full border border-slate-200/90 bg-white py-2.5 pl-11 pr-4 text-sm text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-violet-500/50 dark:focus:ring-violet-500/25"
+        className="w-full rounded-full border border-slate-200/90 bg-white py-2.5 pl-11 pr-4 text-sm text-slate-800 shadow-sm transition-colors duration-200 placeholder:text-slate-400 focus:border-brand-gold/55 focus:outline-none focus:ring-2 focus:ring-brand-gold/20 dark:border-white/12 dark:bg-white/5 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-brand-gold/55 dark:focus:ring-brand-gold/25"
         autoComplete="off"
       />
     </label>

@@ -187,7 +187,7 @@ export default async function CommitteeRoomPersonPage({
         {/* Detail cards — mockup main list / panels */}
         <div className="space-y-4 min-w-0">
           {placard ? (
-            <section className="rounded-2xl border border-brand-gold/15 bg-gradient-to-br from-orange-500/[0.12] via-brand-paper/50 to-fuchsia-500/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-brand-gold/15 bg-gradient-to-br from-brand-gold/[0.12] via-brand-paper/50 to-brand-diplomatic/[0.1] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
                 Delegation placard
               </h2>
@@ -201,7 +201,7 @@ export default async function CommitteeRoomPersonPage({
           ) : null}
 
           {daisSeat ? (
-            <section className="rounded-2xl border border-violet-400/20 bg-gradient-to-br from-violet-500/[0.12] via-brand-paper/50 to-sky-500/[0.06] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-brand-diplomatic/25 bg-gradient-to-br from-brand-diplomatic/[0.12] via-brand-paper/50 to-brand-gold/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">Dais</h2>
               <dl className="grid gap-2 sm:grid-cols-2">
                 <InfoRow label="Role" value={daisSeat.title} />

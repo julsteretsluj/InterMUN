@@ -350,7 +350,7 @@ export function ChairMobileDock({
   );
 
   return (
-    <div className="border-t border-slate-200/80 bg-[#f4f6fb]/95 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95">
+    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/95">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <Link
           href="/chair"
@@ -360,7 +360,8 @@ export function ChairMobileDock({
           <span
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-xl bg-amber-600 text-lg text-white shadow-sm",
-              hubActive && "ring-2 ring-amber-300 ring-offset-2 ring-offset-[#f4f6fb] dark:ring-amber-400/90 dark:ring-offset-zinc-950"
+              hubActive &&
+                "ring-2 ring-brand-diplomatic/80 ring-offset-2 ring-offset-brand-cream dark:ring-brand-diplomatic/70 dark:ring-offset-[#121212]"
             )}
           >
             📌

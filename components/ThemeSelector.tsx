@@ -22,7 +22,7 @@ const HUE_META: Record<
   red: { label: "Red", swatch: "bg-red-600" },
   orange: { label: "Orange", swatch: "bg-orange-500" },
   yellow: { label: "Yellow", swatch: "bg-yellow-500" },
-  green: { label: "SEAMUN", swatch: "bg-[#1e56a0]" },
+  green: { label: "Spotify", swatch: "bg-[#1DB954]" },
   blue: { label: "Blue", swatch: "bg-blue-600" },
   purple: { label: "Purple", swatch: "bg-violet-600" },
   pink: { label: "Pink", swatch: "bg-pink-600" },

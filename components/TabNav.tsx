@@ -262,7 +262,7 @@ export function TabNav({
   return (
     <nav
       aria-label="Main navigation"
-      className="flex flex-row items-stretch gap-1 overflow-x-auto overflow-y-hidden overscroll-x-contain border-t border-slate-200/80 bg-[#f4f6fb]/95 px-2 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95"
+      className="flex flex-row items-stretch gap-1 overflow-x-auto overflow-y-hidden overscroll-x-contain border-t border-slate-200/80 bg-brand-cream/95 px-2 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/95"
     >
       <div className="flex flex-col gap-1 min-w-full">
         <div className="flex flex-row gap-1 overflow-x-auto">
