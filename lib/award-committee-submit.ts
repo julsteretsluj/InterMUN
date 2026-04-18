@@ -80,7 +80,7 @@ export async function promoteCommitteeDraftsToPending(
   }
 
   const now = new Date().toISOString();
-  const { error: upErr } = await supabase
+  const { data: updatedRows, error: upErr } = await supabase
     .from("award_nominations")
     .update({
       status: "pending",
@@ -88,10 +88,22 @@ export async function promoteCommitteeDraftsToPending(
       updated_at: now,
     })
     .eq("committee_conference_id", committeeConferenceId)
-    .eq("status", "draft");
+    .eq("status", "draft")
+    .select("id");
 
   if (upErr) {
     return { ok: false, error: upErr.message };
+  }
+
+  const updatedCount = updatedRows?.length ?? 0;
+  if (updatedCount !== drafts.length) {
+    return {
+      ok: false,
+      error:
+        updatedCount === 0
+          ? "Submit failed (no rows updated). Ask your tech lead to apply the latest database migration for award nominations, or ensure you are the chair for this committee."
+          : `Submit was incomplete (${updatedCount}/${drafts.length} nominations updated). Try again or contact support.`,
+    };
   }
 
   return { ok: true, didPromote: true };
