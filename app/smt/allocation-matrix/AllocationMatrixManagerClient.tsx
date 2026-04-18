@@ -221,7 +221,7 @@ export function AllocationMatrixManagerClient({
       {(message || error) && (
         <div
           className={`text-sm rounded-lg px-3 py-2 ${
-            error ? "bg-red-50 text-red-800 border border-red-100" : "bg-emerald-50 text-emerald-900 border border-emerald-100"
+            error ? "bg-red-50 text-red-800 border border-red-100" : "bg-blue-50 text-blue-900 border border-blue-100"
           }`}
           role="status"
         >

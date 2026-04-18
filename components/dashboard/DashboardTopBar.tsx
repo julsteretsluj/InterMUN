@@ -68,7 +68,7 @@ export function DashboardTopBar({
             />
           ) : (
             <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-emerald-800 text-[0.65rem] font-bold text-white shadow-md"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-blue-800 text-[0.65rem] font-bold text-white shadow-md"
               aria-hidden
             >
               IM
@@ -106,7 +106,7 @@ export function DashboardTopBar({
               className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition hover:bg-slate-50 dark:hover:bg-zinc-800"
             >
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-emerald-900 text-xs font-bold text-white shadow-inner"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-blue-900 text-xs font-bold text-white shadow-inner"
                 aria-hidden
               >
                 {initials}

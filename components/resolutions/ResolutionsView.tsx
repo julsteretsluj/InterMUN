@@ -288,7 +288,7 @@ export function ResolutionsView({
                   )}
                 </div>
                 {r.visible_to_other_bloc && (
-                  <span className="text-xs shrink-0 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">
+                  <span className="text-xs shrink-0 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
                     Visible to other bloc
                   </span>
                 )}
@@ -342,7 +342,7 @@ export function ResolutionsView({
                   </button>
                 </div>
                 {shareStatusByResolution[r.id] ? (
-                  <p className="text-xs text-emerald-700">{shareStatusByResolution[r.id]}</p>
+                  <p className="text-xs text-blue-700">{shareStatusByResolution[r.id]}</p>
                 ) : null}
               </div>
 
@@ -421,11 +421,11 @@ export function ResolutionsView({
                         key={o.id}
                         className={[
                           "flex flex-wrap items-center gap-2 rounded border px-2 py-1",
-                          o.passed ? "border-green-200 bg-green-50/60" : "border-red-200 bg-red-50/60",
+                          o.passed ? "border-blue-200 bg-blue-50/60" : "border-red-200 bg-red-50/60",
                         ].join(" ")}
                       >
                         <span className="font-medium">{clauseIdToLabel.get(o.clause_id) ?? "Clause"}</span>
-                        <span className={o.passed ? "text-green-700" : "text-red-700"}>
+                        <span className={o.passed ? "text-blue-700" : "text-red-700"}>
                           {o.passed ? "PASSED" : "FAILED"}
                         </span>
                         <span className="text-brand-muted/70">•</span>

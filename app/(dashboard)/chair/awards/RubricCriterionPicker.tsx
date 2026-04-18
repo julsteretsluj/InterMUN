@@ -63,7 +63,7 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange }
                 ? "border-amber-200/80 bg-amber-50/70 dark:border-amber-400/30 dark:bg-amber-950/20"
                 : bandId === "proficient"
                   ? "border-sky-200/80 bg-sky-50/70 dark:border-sky-400/30 dark:bg-sky-950/20"
-                  : "border-emerald-200/80 bg-emerald-50/70 dark:border-emerald-400/30 dark:bg-emerald-950/20";
+                  : "border-blue-200/80 bg-blue-50/70 dark:border-blue-400/30 dark:bg-blue-950/20";
           const selected = band === bandId;
           return (
             <button

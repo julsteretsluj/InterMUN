@@ -559,7 +559,7 @@ export function ChairCommitteeSessionControl({
         {msg ? (
           <p
             className={`mt-3 text-sm ${
-              msg.startsWith("ok:") ? "text-emerald-600 dark:text-emerald-400" : "text-rose-300"
+              msg.startsWith("ok:") ? "text-blue-600 dark:text-blue-400" : "text-rose-300"
             }`}
           >
             {msg.startsWith("ok:") ? msg.slice(3) : msg}

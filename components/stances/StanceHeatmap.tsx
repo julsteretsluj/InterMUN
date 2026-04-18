@@ -20,8 +20,8 @@ export function StanceHeatmap({
     if (ratio <= 0.2) return "bg-red-200 dark:bg-red-900";
     if (ratio <= 0.4) return "bg-orange-200 dark:bg-orange-900";
     if (ratio <= 0.6) return "bg-yellow-200 dark:bg-yellow-900";
-    if (ratio <= 0.8) return "bg-lime-200 dark:bg-lime-900";
-    return "bg-green-200 dark:bg-green-900";
+    if (ratio <= 0.8) return "bg-sky-300 dark:bg-sky-900";
+    return "bg-blue-400 dark:bg-blue-900";
   };
 
   return (

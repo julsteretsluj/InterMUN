@@ -108,7 +108,7 @@ function EventForm({ eventRow }: { eventRow: EventRow }) {
       {state?.error && (
         <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">{state.error}</p>
       )}
-      {state?.success && <p className="text-sm text-green-800">Saved.</p>}
+      {state?.success && <p className="text-sm text-blue-800">Saved.</p>}
       <button
         type="submit"
         disabled={pending}
@@ -333,7 +333,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
       {state?.error && (
         <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded px-2 py-1">{state.error}</p>
       )}
-      {state?.success && <p className="text-xs text-green-800">Saved.</p>}
+      {state?.success && <p className="text-xs text-blue-800">Saved.</p>}
       <button
         type="submit"
         disabled={pending}

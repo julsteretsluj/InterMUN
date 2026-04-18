@@ -28,14 +28,14 @@ function StatMiniCard({
 }: {
   label: string;
   value: string | number;
-  tint: "emerald" | "amber" | "spotify" | "sky";
+  tint: "blue" | "amber" | "accent" | "sky";
   onPress?: () => void;
   title?: string;
 }) {
   const tones = {
-    emerald: "from-emerald-500/25 to-emerald-600/5 border-emerald-400/20",
+    blue: "from-blue-500/25 to-blue-600/5 border-blue-400/20",
     amber: "from-amber-500/25 to-amber-600/5 border-amber-400/20",
-    spotify: "from-[#1DB954]/22 to-emerald-900/8 border-brand-gold/30",
+    accent: "from-blue-600/22 to-blue-950/8 border-brand-gold/30",
     sky: "from-sky-500/25 to-sky-600/5 border-sky-400/20",
   } as const;
   const interactive = Boolean(onPress);
@@ -293,7 +293,7 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard
               label="Assigned"
               value={assignedCount}
-              tint="emerald"
+              tint="blue"
               onPress={() => setDelegationSearch("")}
               title="Clear search and show all delegations"
             />
@@ -307,14 +307,14 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard
               label="Dais"
               value={daisFilled}
-              tint="spotify"
+              tint="accent"
               onPress={() => searchInputRef.current?.focus()}
               title="Focus search (dais titles and names match your query)"
             />
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-gold/15 via-brand-diplomatic/10 to-emerald-600/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
+          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-gold/15 via-brand-diplomatic/10 to-blue-600/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
               <Sparkles className="size-3.5 text-amber-300/90 shrink-0" />
               Tip

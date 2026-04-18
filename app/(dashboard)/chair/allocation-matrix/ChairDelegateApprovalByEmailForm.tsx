@@ -87,7 +87,7 @@ export function ChairDelegateApprovalByEmailForm({
         </p>
       ) : null}
       {state?.success ? (
-        <p className="mt-3 text-sm rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-800">
+        <p className="mt-3 text-sm rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-blue-800">
           Delegate accepted and allocation updated.
         </p>
       ) : null}

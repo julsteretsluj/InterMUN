@@ -7,7 +7,7 @@ import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 
 function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advanced") {
   if (level === "Beginner") {
-    return "border-emerald-300/80 bg-emerald-100 text-emerald-900";
+    return "border-blue-300/80 bg-blue-100 text-blue-900";
   }
   if (level === "Intermediate") {
     return "border-amber-300/80 bg-amber-100 text-amber-950";
@@ -197,7 +197,7 @@ export default async function SmtOverviewPage({
                     {tags.ageRange}
                   </span>
                   {tags.eslFriendly ? (
-                    <span className="rounded-full border border-lime-300/80 bg-lime-100 px-2 py-0.5 text-[0.68rem] font-semibold text-lime-900">
+                    <span className="rounded-full border border-sky-300/80 bg-sky-100 px-2 py-0.5 text-[0.68rem] font-semibold text-sky-900">
                       ESL-friendly
                     </span>
                   ) : null}

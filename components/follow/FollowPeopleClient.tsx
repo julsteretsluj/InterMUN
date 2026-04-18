@@ -201,7 +201,7 @@ export function FollowPeopleClient({ userId }: { userId: string }) {
           </p>
         )}
         {message && (
-          <p className="text-sm text-emerald-900 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2">
+          <p className="text-sm text-blue-900 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">
             {message}
           </p>
         )}

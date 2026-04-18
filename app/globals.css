@@ -3,9 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Inter-MUN Coursera-style system: Spotify × vintage diplomatic interface.
+ * Inter-MUN Coursera-style system: calm UI × vintage diplomatic interface.
  * Primary canvas: deep charcoal (#121212) in dark; vintage paper in light.
- * Accent: Spotify green for interactions. Highlight: aged diplomatic gold for status.
+ * Accent: blue for interactions. Highlight: aged diplomatic gold for status.
  * Token names `brand-navy` / `brand-gold` remain as legacy keys for existing components.
  */
 html {
@@ -15,8 +15,8 @@ html {
   --brand-navy: #121212;
   --brand-navy-soft: rgba(18, 18, 18, 0.06);
 
-  --brand-gold: #1db954;
-  --brand-gold-bright: #1ed760;
+  --brand-gold: #2563eb;
+  --brand-gold-bright: #3b82f6;
 
   --brand-diplomatic: #c4a574;
 
@@ -38,8 +38,8 @@ html.dark {
   --brand-navy: #f5f5f5;
   --brand-navy-soft: rgba(245, 245, 245, 0.12);
 
-  --brand-gold: #1db954;
-  --brand-gold-bright: #1ed760;
+  --brand-gold: #60a5fa;
+  --brand-gold-bright: #93c5fd;
 
   --brand-diplomatic: #d4b896;
 

@@ -2437,7 +2437,7 @@ export function SessionControlClient({
                               type="button"
                               disabled={pending || !call.user_id}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
-                              className="rounded-lg bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
+                              className="rounded-lg bg-blue-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-600 disabled:opacity-50"
                             >
                               Yes
                             </button>

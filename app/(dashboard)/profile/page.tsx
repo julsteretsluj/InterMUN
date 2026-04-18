@@ -278,7 +278,7 @@ export default async function ProfilePage() {
         </div>
       )}
       {isDelegate && (myMotions?.length ?? 0) > 0 && (
-        <div className="mb-8 rounded-xl border border-emerald-300/40 bg-emerald-50/40 p-4 md:p-5">
+        <div className="mb-8 rounded-xl border border-blue-300/40 bg-blue-50/40 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Motions you moved
           </h3>

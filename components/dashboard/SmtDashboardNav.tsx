@@ -108,9 +108,9 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           href="/smt"
           title={hubLabel}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-emerald-600 px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600",
+            "flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600",
             hubActive &&
-              "ring-2 ring-emerald-300 ring-offset-2 ring-offset-white dark:ring-emerald-400/90 dark:ring-offset-zinc-950"
+              "ring-2 ring-blue-300 ring-offset-2 ring-offset-white dark:ring-blue-400/90 dark:ring-offset-zinc-950"
           )}
         >
           <LayoutDashboard className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />

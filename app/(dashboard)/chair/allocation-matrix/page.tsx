@@ -257,7 +257,7 @@ export default async function ChairAllocationMatrixPage() {
                             <input type="hidden" name="request_id" value={req.id} />
                             <button
                               type="submit"
-                              className="text-xs px-2 py-1 rounded bg-emerald-600 text-white font-medium hover:bg-emerald-700"
+                              className="text-xs px-2 py-1 rounded bg-blue-600 text-white font-medium hover:bg-blue-700"
                             >
                               Approve
                             </button>

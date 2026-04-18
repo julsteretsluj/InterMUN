@@ -244,7 +244,7 @@ export function ChairDigitalRoomClient({
             const rollLabel = att !== undefined ? rollAttendanceShortLabel(att) : "—";
             const rollClass =
               att === "present_voting"
-                ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-200"
+                ? "bg-blue-100 text-blue-900 dark:bg-blue-950/50 dark:text-blue-200"
                 : att === "present_abstain"
                   ? "bg-amber-100 text-amber-950 dark:bg-amber-950/45 dark:text-amber-100"
                   : att === "absent"
@@ -295,7 +295,7 @@ export function ChairDigitalRoomClient({
                       className={cn(
                         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition",
                         f.compliment
-                          ? "border-emerald-400 bg-emerald-50 text-emerald-900 dark:border-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-100"
+                          ? "border-blue-400 bg-blue-50 text-blue-900 dark:border-blue-600 dark:bg-blue-950/50 dark:text-blue-100"
                           : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >

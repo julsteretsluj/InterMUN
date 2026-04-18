@@ -207,7 +207,7 @@ export function DocumentsView({
   return (
     <div className="space-y-4 font-serif">
       {isDelegate ? (
-        <div className="rounded-lg border border-emerald-200/70 bg-emerald-50/70 px-4 py-3 text-sm text-emerald-950 dark:border-emerald-500/30 dark:bg-emerald-950/20 dark:text-emerald-100">
+        <div className="rounded-lg border border-blue-200/70 bg-blue-50/70 px-4 py-3 text-sm text-blue-950 dark:border-blue-500/30 dark:bg-blue-950/20 dark:text-blue-100">
           <p className="font-medium">Prep document section</p>
           <p className="mt-1">
             You can upload, view, and edit your own <strong>Prep documents</strong> directly from this page.
@@ -476,7 +476,7 @@ export function DocumentsView({
                   onClick={() => setSelectedId(d.id)}
                   className={`flex w-full items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                     displaySelectedId === d.id
-                      ? "border-emerald-300 bg-emerald-50 font-medium text-emerald-900 dark:border-emerald-500/40 dark:bg-emerald-950/30 dark:text-emerald-100"
+                      ? "border-blue-300 bg-blue-50 font-medium text-blue-900 dark:border-blue-500/40 dark:bg-blue-950/30 dark:text-blue-100"
                       : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
                   }`}
                 >

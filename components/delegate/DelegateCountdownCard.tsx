@@ -75,7 +75,7 @@ function CountdownLine({ label, iso }: { label: string; iso: string | null }) {
   return (
     <p className="text-sm text-slate-700 dark:text-zinc-200">
       <span className="font-medium">{label}:</span>{" "}
-      <span className={past ? "text-emerald-600 dark:text-emerald-400" : "tabular-nums"}>
+      <span className={past ? "text-blue-600 dark:text-blue-400" : "tabular-nums"}>
         {past ? "Past" : formatRemaining(remaining)}
       </span>
       <span className="ml-1 text-slate-500 dark:text-zinc-500">

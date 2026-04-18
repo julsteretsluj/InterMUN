@@ -67,7 +67,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             />
           ) : (
             <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold to-emerald-900 text-xs font-bold text-white shadow-md"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold to-blue-900 text-xs font-bold text-white shadow-md"
               aria-hidden
             >
               IM

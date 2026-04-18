@@ -21,7 +21,7 @@ export function SignOutButton({ className }: { className?: string }) {
       type="button"
       onClick={signOut}
       className={cn(
-        "rounded-md px-2 py-1 text-sm text-brand-navy/80 underline-offset-2 transition-colors hover:bg-slate-100 hover:text-emerald-700 hover:underline active:bg-slate-200 dark:hover:bg-white/5 dark:hover:text-brand-gold-bright dark:active:bg-white/10",
+        "rounded-md px-2 py-1 text-sm text-brand-navy/80 underline-offset-2 transition-colors hover:bg-slate-100 hover:text-blue-700 hover:underline active:bg-slate-200 dark:hover:bg-white/5 dark:hover:text-brand-gold-bright dark:active:bg-white/10",
         className
       )}
     >
