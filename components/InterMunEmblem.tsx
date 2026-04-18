@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * InterMUN wordmark emblem for nav headers and marketing surfaces.
- * Pair with visible app title and pass `alt=""` when the title is redundant for screen readers.
+ * Raster assets often ship with a solid black matte; `mix-blend-screen` removes it against
+ * light/dark UI so only the luminous orbit reads (replace file with transparency when available).
  */
 export function InterMunEmblem({
   className,
@@ -17,7 +18,7 @@ export function InterMunEmblem({
     <img
       src={INTERMUN_EMBLEM_PATH}
       alt={alt}
-      className={cn("shrink-0 object-contain", className)}
+      className={cn("shrink-0 object-contain mix-blend-screen", className)}
       decoding="async"
     />
   );
