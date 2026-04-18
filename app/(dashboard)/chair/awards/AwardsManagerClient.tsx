@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { AWARD_CATEGORIES, awardCategoryMeta } from "@/lib/awards";
+import { AWARD_CATEGORIES, awardCategoryMeta, isConferenceEventPlaceholderRow } from "@/lib/awards";
 import { saveAwardAssignment, deleteAwardAssignment } from "@/app/actions/awards";
 import type { AwardAssignment } from "@/types/database";
 import { Trash2, Plus, Award } from "lucide-react";
@@ -10,8 +10,9 @@ import { Trash2, Plus, Award } from "lucide-react";
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
 
-function confLabel(c: Conf) {
-  return [c.name, c.committee].filter(Boolean).join(" — ") || c.id.slice(0, 8);
+/** Committee chamber only (DISEC, ECOSOC, …) — not the agenda/topic title. */
+function committeeOptionLabel(c: Conf) {
+  return c.committee?.trim() || c.id.slice(0, 8);
 }
 
 export function AwardsManagerClient({
@@ -29,7 +30,7 @@ export function AwardsManagerClient({
   const [err, setErr] = useState<string | null>(null);
 
   const committeeById = useMemo(
-    () => Object.fromEntries(conferences.map((c) => [c.id, confLabel(c)])),
+    () => Object.fromEntries(conferences.map((c) => [c.id, committeeOptionLabel(c)])),
     [conferences]
   );
 
@@ -64,6 +65,27 @@ export function AwardsManagerClient({
     notes: "",
     sort_order: "0",
   });
+
+  /** Drop event-title placeholder rows unless an existing assignment or the open form still references them. */
+  const committeePickerConferences = useMemo(() => {
+    const base = conferences.filter((c) => !isConferenceEventPlaceholderRow(c));
+    const neededIds = new Set<string>();
+    for (const a of initialAssignments) {
+      if (a.committee_conference_id) neededIds.add(a.committee_conference_id);
+      if (a.recipient_committee_id) neededIds.add(a.recipient_committee_id);
+    }
+    if (form.committee_conference_id) neededIds.add(form.committee_conference_id);
+    if (form.recipient_committee_id) neededIds.add(form.recipient_committee_id);
+    const extras = conferences.filter((c) => isConferenceEventPlaceholderRow(c) && neededIds.has(c.id));
+    const merged = [...base, ...extras];
+    merged.sort((a, b) => committeeOptionLabel(a).localeCompare(committeeOptionLabel(b)));
+    return merged;
+  }, [
+    conferences,
+    initialAssignments,
+    form.committee_conference_id,
+    form.recipient_committee_id,
+  ]);
 
   const meta = awardCategoryMeta(form.category);
 
@@ -186,9 +208,9 @@ export function AwardsManagerClient({
                   }
                 >
                   <option value="">Select committee…</option>
-                  {conferences.map((c) => (
+                  {committeePickerConferences.map((c) => (
                     <option key={c.id} value={c.id}>
-                      {confLabel(c)}
+                      {committeeOptionLabel(c)}
                     </option>
                   ))}
                 </select>
@@ -236,9 +258,9 @@ export function AwardsManagerClient({
                 }
               >
                 <option value="">— Not set —</option>
-                {conferences.map((c) => (
+                {committeePickerConferences.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {confLabel(c)}
+                    {committeeOptionLabel(c)}
                   </option>
                 ))}
               </select>

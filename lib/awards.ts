@@ -69,3 +69,16 @@ export const AWARD_CATEGORIES: {
 export function awardCategoryMeta(id: string) {
   return AWARD_CATEGORIES.find((c) => c.id === id);
 }
+
+/**
+ * Some datasets include the overall event name as a `conferences` row (e.g. seed branding).
+ * It must not appear as a selectable committee session (matches allocation matrix filtering).
+ */
+export function isConferenceEventPlaceholderRow(c: {
+  name: string | null;
+  committee: string | null;
+}): boolean {
+  const name = c.name?.trim().toLowerCase();
+  const committee = c.committee?.trim().toLowerCase();
+  return name === "seamun i 2027" || committee === "seamun i 2027";
+}
