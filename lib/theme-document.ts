@@ -1,6 +1,7 @@
 import {
   DYSLEXIC_FONT_STORAGE_KEY,
   DEFAULT_THEME_HUE,
+  LEGACY_THEME_HUE_CLEANUP,
   THEME_HUES,
   THEME_HUE_STORAGE_KEY,
   THEME_STORAGE_KEY,
@@ -33,6 +34,9 @@ export function applyThemeToDocument(mode: ThemePreference, hue: ThemeHue) {
   if (mode === "dark") root.classList.add("dark");
   else root.classList.remove("dark");
   for (const h of THEME_HUES) {
+    root.classList.remove(`theme-${h}`);
+  }
+  for (const h of LEGACY_THEME_HUE_CLEANUP) {
     root.classList.remove(`theme-${h}`);
   }
   root.classList.add(`theme-${hue}`);

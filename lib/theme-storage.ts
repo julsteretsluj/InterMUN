@@ -5,11 +5,10 @@ export const DYSLEXIC_FONT_STORAGE_KEY = "intermun-dyslexic-font";
 export type ThemePreference = "light" | "dark";
 
 export const THEME_HUES = [
+  "blue",
   "red",
   "orange",
   "yellow",
-  "green",
-  "blue",
   "purple",
   "pink",
   "neutral",
@@ -17,5 +16,8 @@ export const THEME_HUES = [
 
 export type ThemeHue = (typeof THEME_HUES)[number];
 
-/** Default accent; `theme-green` has no CSS override — base palette is SEAMUN logo blues. */
-export const DEFAULT_THEME_HUE: ThemeHue = "green";
+/** Default accent (explicit `theme-blue` rules). */
+export const DEFAULT_THEME_HUE: ThemeHue = "blue";
+
+/** Removed from picker; strip `theme-green` from `<html>` on apply (legacy stored key). */
+export const LEGACY_THEME_HUE_CLEANUP = ["green"] as const;

@@ -3,24 +3,32 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Inter-MUN Coursera-style system: calm UI × vintage diplomatic interface.
- * Primary canvas: deep charcoal (#121212) in dark; vintage paper in light.
- * Accent: blue for interactions. Highlight: silver for status and metallic emphasis.
- * Token names: `brand-navy`, `brand-accent` (primary), `brand-silver` (status / metallic emphasis).
+ * Inter-MUN: vintage paper × orbit logo spectrum.
+ * Logo reference: cyan #00CCFF, blue #3366FF, magenta #FF00FF, orange #FF9900, yellow #FFFF00, lime #33FF00.
+ * Primary accent follows logo blue; bright accents lean cyan. Dark chrome stays Discord-like but blurple→logo blue.
+ * Token names: `brand-navy`, `brand-accent`, `brand-silver`.
  */
 html {
-  --background: #f5f1e8;
+  --logo-cyan: #00ccff;
+  --logo-blue: #3366ff;
+  --logo-magenta: #ff00ff;
+  --logo-orange: #ff9900;
+  --logo-yellow: #ffff00;
+  --logo-green: #33ff00;
+
+  --background: #f7f4ec;
   --foreground: #121212;
 
   --brand-navy: #121212;
   --brand-navy-soft: rgba(18, 18, 18, 0.06);
 
-  --brand-accent: #2563eb;
-  --brand-accent-bright: #3b82f6;
+  --brand-accent: var(--logo-blue);
+  /* Readable cyan on cream (pure --logo-cyan kept for washes / gradients only) */
+  --brand-accent-bright: #1aa8dd;
 
-  --brand-silver: #a1a8b5;
+  --brand-silver: #9499a8;
 
-  --brand-cream: #ebe4d7;
+  --brand-cream: #ede8dc;
   --brand-paper: rgba(255, 252, 246, 0.94);
 
   --brand-muted: #5c5852;
@@ -38,18 +46,34 @@ html.dark {
   --brand-navy: #f5f5f5;
   --brand-navy-soft: rgba(245, 245, 245, 0.12);
 
-  --brand-accent: #60a5fa;
-  --brand-accent-bright: #93c5fd;
+  /* Luminous tints of logo blue / cyan for dark UI */
+  --brand-accent: #7aa3ff;
+  --brand-accent-bright: #66e8ff;
 
-  --brand-silver: #d1d5db;
+  --brand-silver: #c7cbd6;
 
   --brand-cream: rgba(255, 255, 255, 0.05);
   --brand-paper: rgba(255, 255, 255, 0.07);
 
-  --brand-muted: #a39e96;
+  --brand-muted: #a8a4b8;
   --brand-line: rgba(245, 245, 245, 0.14);
 
   --brand-accent-ink: #f5f5f5;
+
+  /*
+   * Discord-inspired surfaces; accent rails match logo blue (not classic Discord blurple).
+   */
+  --discord-sidebar: #2b2d31;
+  --discord-app: #313338;
+  --discord-elevated: #383a40;
+  --discord-panel-border: rgba(18, 19, 21, 0.55);
+  --discord-divider: #26272d;
+  --discord-blurple: var(--logo-blue);
+  --discord-blurple-hover: #2952e6;
+  --discord-muted: #949ba4;
+  --discord-hover-bg: hsl(223 7% calc(53% + 12%) / 0.35);
+  --discord-active-bg: hsl(223 7% calc(53% + 6%) / 0.52);
+  --discord-input: #383a40;
 
   color-scheme: dark;
 }
@@ -69,6 +93,13 @@ html.dark {
   --font-display: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --color-brand-accent-ink: var(--brand-accent-ink);
+  --color-discord-sidebar: var(--discord-sidebar);
+  --color-discord-app: var(--discord-app);
+  --color-discord-elevated: var(--discord-elevated);
+  --color-discord-blurple: var(--discord-blurple);
+  --color-discord-blurple-hover: var(--discord-blurple-hover);
+  --color-discord-muted: var(--discord-muted);
+  --color-discord-divider: var(--discord-divider);
 }
 
 html.dyslexic-font {
@@ -91,49 +122,67 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   background-attachment: fixed;
+  /* Soft orbit wash: cyan → paper → warm orange (logo spectrum, low saturation on canvas) */
   background-image: linear-gradient(
     185deg,
-    color-mix(in srgb, var(--brand-accent) 7%, transparent) 0%,
-    var(--background) 42%,
-    color-mix(in srgb, var(--brand-silver) 12%, var(--background)) 100%
+    color-mix(in srgb, var(--logo-cyan) 9%, transparent) 0%,
+    var(--background) 40%,
+    color-mix(in srgb, var(--logo-orange) 7%, var(--background)) 72%,
+    color-mix(in srgb, var(--brand-silver) 11%, var(--background)) 100%
   );
 }
 
 html.dark body {
-  background-color: #121212;
-  background-image:
-    radial-gradient(
-      circle at top left,
-      color-mix(in srgb, var(--brand-accent) 22%, transparent) 0%,
-      rgba(18, 18, 18, 0.97) 42%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      color-mix(in srgb, var(--brand-silver) 12%, transparent) 0%,
-      rgba(18, 18, 18, 0.98) 46%
-    ),
-    linear-gradient(145deg, #161616 0%, #121212 100%);
+  background-color: var(--discord-app);
+  /* Deep panels with cyan / magenta / blue orbit hints (logo-aligned) */
+  background-image: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--logo-cyan) 12%, transparent) 0%,
+    var(--discord-app) 34%,
+    color-mix(in srgb, var(--logo-magenta) 7%, transparent) 62%,
+    color-mix(in srgb, var(--discord-sidebar) 28%, var(--discord-app)) 100%
+  );
 }
 
-/* Auth / marketing subtle glow follows accent */
+html.dark {
+  scrollbar-color: #202225 #2b2d31;
+}
+
+html.dark ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: var(--discord-sidebar);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #202225;
+  border-radius: 999px;
+  border: 2px solid var(--discord-sidebar);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #18191c;
+}
+
+/* Auth / marketing: multi-stop glow echoing logo orbit */
 .theme-page-glow {
-  background-image: radial-gradient(
-    ellipse 80% 50% at 50% -20%,
-    color-mix(in srgb, var(--brand-accent) 9%, transparent),
-    transparent
-  );
+  background-image:
+    radial-gradient(ellipse 55% 42% at 78% -8%, color-mix(in srgb, var(--logo-magenta) 11%, transparent), transparent),
+    radial-gradient(ellipse 70% 48% at 18% -12%, color-mix(in srgb, var(--logo-cyan) 12%, transparent), transparent),
+    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--logo-blue) 8%, transparent), transparent);
 }
 html.dark .theme-page-glow {
-  background-image: radial-gradient(
-    ellipse 80% 50% at 50% -20%,
-    color-mix(in srgb, var(--brand-accent) 16%, transparent),
-    transparent
-  );
+  background-image:
+    radial-gradient(ellipse 55% 42% at 82% -6%, color-mix(in srgb, var(--logo-magenta) 14%, transparent), transparent),
+    radial-gradient(ellipse 65% 44% at 12% -10%, color-mix(in srgb, var(--logo-cyan) 15%, transparent), transparent),
+    radial-gradient(ellipse 80% 50% at 50% -18%, color-mix(in srgb, var(--logo-blue) 14%, transparent), transparent);
 }
 
 /*
- * Optional accent overrides (class theme-{hue} on <html>). Default hue key `green` adds
- * theme-green — no rules below — so variables come from `html` / `html.dark` (SEAMUN logo blues).
+ * Optional accent overrides (`theme-{hue}` on <html>). Default hue is `blue` (explicit rules below).
  */
 
 html.theme-red:not(.dark) {
@@ -197,21 +246,21 @@ html.theme-yellow.dark body {
 }
 
 html.theme-blue:not(.dark) {
-  --brand-accent: #2563eb;
-  --brand-accent-bright: #3b82f6;
+  --brand-accent: var(--logo-blue);
+  --brand-accent-bright: var(--logo-cyan);
 }
 html.theme-blue:not(.dark) body {
-  background: linear-gradient(180deg, rgba(37, 99, 235, 0.07), #ffffff 48%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--logo-blue) 10%, transparent), #ffffff 48%);
   background-color: #ffffff;
 }
 html.theme-blue.dark {
-  --brand-accent: #60a5fa;
-  --brand-accent-bright: #93c5fd;
+  --brand-accent: #7aa3ff;
+  --brand-accent-bright: #66e8ff;
 }
 html.theme-blue.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(96, 165, 250, 0.22) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.14) 0%, rgba(10, 10, 10, 0.96) 45%),
+    radial-gradient(circle at top left, color-mix(in srgb, var(--logo-cyan) 22%, transparent) 0%, rgba(12, 12, 12, 0.94) 40%),
+    radial-gradient(circle at bottom right, color-mix(in srgb, var(--logo-blue) 16%, transparent) 0%, rgba(10, 10, 10, 0.96) 45%),
     linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
   background-color: #0a0a0a;
 }
@@ -306,7 +355,7 @@ html.dark ::selection {
   .mun-shell {
     @apply rounded-2xl border border-slate-100/90 bg-white p-6 text-brand-navy shadow-[0_8px_30px_-8px_rgba(18,18,18,0.08)] backdrop-blur-sm md:p-8;
     @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
-    @apply dark:border-white/10 dark:bg-brand-paper/90 dark:shadow-[0_16px_48px_-20px_rgba(0,0,0,0.55)] dark:backdrop-blur-md;
+    @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-none dark:backdrop-blur-none;
   }
 
   .mun-shell-title {
@@ -316,7 +365,7 @@ html.dark ::selection {
   .mun-card {
     @apply rounded-xl border border-slate-200 bg-white p-4 text-brand-navy shadow-[0_6px_24px_-10px_rgba(18,18,18,0.07)];
     @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
-    @apply dark:border-white/10 dark:bg-black/20 dark:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.5)] dark:backdrop-blur-sm;
+    @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-none;
   }
 
   .mun-card-dense {
@@ -361,5 +410,16 @@ html.dark ::selection {
   .mun-link {
     @apply font-semibold text-brand-accent underline underline-offset-2 transition-colors duration-200 ease-out hover:text-brand-accent-bright;
     @apply dark:text-brand-accent-bright dark:hover:text-brand-accent;
+  }
+
+  /** Discord-like channel row hover (dark); pair with rounded-md */
+  .discord-interactive-hover {
+    @apply transition-colors duration-150 ease-out;
+    @apply dark:hover:bg-[color:var(--discord-hover-bg)];
+  }
+
+  /** Optional blurple outline for emphasis in dark mode */
+  .discord-blurple-ring {
+    @apply dark:ring-1 dark:ring-discord-blurple/45;
   }
 }

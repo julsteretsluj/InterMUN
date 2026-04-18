@@ -12,6 +12,7 @@ import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getAppName } from "@/lib/branding";
+import { InterMunEmblem } from "@/components/InterMunEmblem";
 import {
   isAdminRole,
   isChairRole,
@@ -122,11 +123,11 @@ export default async function DashboardLayout({
   );
 
   return (
-    <div className="flex min-h-screen bg-brand-cream dark:bg-[#121212]">
-      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-white/10 dark:bg-zinc-950/60 dark:shadow-none lg:flex">
+    <div className="flex min-h-screen bg-brand-cream dark:bg-discord-app">
+      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(15,23,42,0.04)] transition-[width] duration-200 dark:border-discord-divider dark:bg-discord-sidebar dark:backdrop-blur-none dark:shadow-none lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
-          className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
+          className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
           {showSeamunLogo ? (
             <img
@@ -135,12 +136,7 @@ export default async function DashboardLayout({
               className="h-10 w-10 shrink-0 rounded-2xl object-contain"
             />
           ) : (
-            <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-accent to-blue-900 text-xs font-bold text-white shadow-md"
-              aria-hidden
-            >
-              IM
-            </span>
+            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl ring-1 ring-black/10 dark:ring-white/15" />
           )}
           <span
             className={
@@ -167,17 +163,17 @@ export default async function DashboardLayout({
           )}
         </div>
         {!isChairRole(normalizedRole) ? (
-          <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-4 dark:border-zinc-800">
+          <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-3 py-4 dark:border-discord-divider">
             <Link
               href="/guides"
-              className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+              className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
             >
               <HelpCircle className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
               <span className="hidden group-hover:inline">Help center</span>
             </Link>
             <Link
               href="/profile"
-              className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+              className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
             >
               <Settings className="h-5 w-5 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
               <span className="hidden group-hover:inline">Settings</span>
@@ -200,7 +196,7 @@ export default async function DashboardLayout({
           }
         />
         {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
-          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-3 dark:border-white/10 dark:bg-[#121212] sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-3 dark:border-discord-divider dark:bg-discord-app sm:px-6">
             <div className="w-full">
               <ChairLiveFloorThemed conferenceId={activeConf.id} />
             </div>

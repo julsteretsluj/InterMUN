@@ -15,19 +15,19 @@ import {
   readThemeFromStorage,
 } from "@/lib/theme-document";
 
+/** Display + accessibility names; picker shows swatches only. */
 const HUE_META: Record<
   ThemeHue,
-  { label: string; swatch: string; swatchDark?: string }
+  { name: string; swatch: string; swatchDark?: string }
 > = {
-  red: { label: "Red", swatch: "bg-red-600" },
-  orange: { label: "Orange", swatch: "bg-orange-500" },
-  yellow: { label: "Yellow", swatch: "bg-yellow-500" },
-  green: { label: "Blue", swatch: "bg-blue-600" },
-  blue: { label: "Blue", swatch: "bg-blue-600" },
-  purple: { label: "Purple", swatch: "bg-violet-600" },
-  pink: { label: "Pink", swatch: "bg-pink-600" },
+  blue: { name: "Blue", swatch: "bg-blue-600" },
+  red: { name: "Red", swatch: "bg-red-600" },
+  orange: { name: "Orange", swatch: "bg-orange-500" },
+  yellow: { name: "Yellow", swatch: "bg-yellow-500" },
+  purple: { name: "Purple", swatch: "bg-violet-600" },
+  pink: { name: "Pink", swatch: "bg-pink-600" },
   neutral: {
-    label: "B & W",
+    name: "Neutral",
     swatch: "bg-gradient-to-br from-white to-zinc-800 ring-1 ring-zinc-400",
     swatchDark: "bg-gradient-to-br from-zinc-200 to-zinc-800 ring-1 ring-zinc-500",
   },
@@ -161,10 +161,11 @@ export function ThemeSelector({ className }: { className?: string }) {
             </button>
           </div>
 
-          <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
-            Accent color
-          </p>
-          <div className="mt-2 grid grid-cols-4 gap-2">
+          <div
+            className="mt-4 grid grid-cols-4 gap-2"
+            role="radiogroup"
+            aria-label="Accent colour"
+          >
             {THEME_HUES.map((h) => {
               const meta = HUE_META[h];
               const active = hue === h;
@@ -172,10 +173,13 @@ export function ThemeSelector({ className }: { className?: string }) {
                 <button
                   key={h}
                   type="button"
+                  role="radio"
+                  aria-checked={active}
+                  aria-label={meta.name}
+                  title={meta.name}
                   onClick={() => setColorHue(h)}
-                  title={meta.label}
                   className={cn(
-                    "flex flex-col items-center gap-1 rounded-lg border p-2 text-center transition",
+                    "flex items-center justify-center rounded-lg border p-2 transition",
                     active
                       ? "border-blue-500 bg-blue-50/80 dark:border-blue-400 dark:bg-blue-950/40"
                       : "border-transparent hover:bg-slate-50 dark:hover:bg-zinc-800/80"
@@ -183,7 +187,7 @@ export function ThemeSelector({ className }: { className?: string }) {
                 >
                   <span
                     className={cn(
-                      "relative flex size-8 items-center justify-center rounded-full shadow-inner",
+                      "relative flex size-9 items-center justify-center rounded-full shadow-inner",
                       h === "neutral"
                         ? mode === "dark"
                           ? meta.swatchDark
@@ -203,9 +207,6 @@ export function ThemeSelector({ className }: { className?: string }) {
                         aria-hidden
                       />
                     ) : null}
-                  </span>
-                  <span className="text-[0.65rem] font-medium leading-tight text-slate-700 dark:text-zinc-200">
-                    {meta.label}
                   </span>
                 </button>
               );

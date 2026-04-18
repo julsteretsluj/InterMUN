@@ -49,16 +49,16 @@ function SmtSidebarLink({ item, isActive }: { item: SmtNavItem; isActive: boolea
     <Link
       href={item.href}
       className={cn(
-        "flex items-center gap-0 rounded-xl px-2 py-2.5 text-sm transition-colors group-hover:gap-3 group-hover:px-3",
+        "discord-interactive-hover flex items-center gap-0 rounded-md px-2 py-2.5 text-sm transition-colors group-hover:gap-3 group-hover:px-3",
         isActive
-          ? "bg-blue-100 font-semibold text-blue-900 dark:bg-blue-950/55 dark:text-blue-100"
-          : "font-medium text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          ? "bg-blue-100 font-semibold text-blue-900 dark:bg-[color:var(--discord-active-bg)] dark:text-white"
+          : "font-medium text-slate-600 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
       )}
     >
       <Icon
         className={cn(
           "h-5 w-5 shrink-0",
-          isActive ? "text-blue-600 dark:text-blue-300" : "text-slate-400 dark:text-zinc-500"
+          isActive ? "text-blue-600 dark:text-discord-blurple" : "text-slate-400 dark:text-zinc-500"
         )}
         strokeWidth={1.75}
       />
@@ -79,8 +79,8 @@ function SmtDockLink({ item, isActive }: { item: SmtNavItem; isActive: boolean }
         className={cn(
           "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
           isActive
-            ? "scale-[1.02] border-blue-300/80 bg-blue-100 text-blue-800 shadow-blue-500/10 dark:border-blue-500/40 dark:bg-blue-950/70 dark:text-blue-200"
-            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-blue-200 group-hover:bg-slate-50 group-hover:text-blue-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-blue-500/30 dark:group-hover:bg-zinc-800"
+            ? "scale-[1.02] border-blue-300/80 bg-blue-100 text-blue-800 shadow-blue-500/10 dark:border-discord-blurple/55 dark:bg-discord-blurple/25 dark:text-white dark:shadow-none"
+            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-blue-200 group-hover:bg-slate-50 group-hover:text-blue-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-white/10 dark:group-hover:bg-[color:var(--discord-hover-bg)]"
         )}
       >
         <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
@@ -88,7 +88,7 @@ function SmtDockLink({ item, isActive }: { item: SmtNavItem; isActive: boolean }
       <span
         className={cn(
           "max-w-[4.25rem] text-center text-[0.625rem] font-medium leading-tight",
-          isActive ? "text-blue-800 dark:text-blue-200" : "text-slate-600 dark:text-zinc-400"
+          isActive ? "text-blue-800 dark:text-white" : "text-slate-600 dark:text-discord-muted"
         )}
       >
         {item.label}
@@ -108,9 +108,9 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           href="/smt"
           title={hubLabel}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600",
+            "flex w-full items-center justify-center gap-2 rounded-full bg-discord-blurple px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:opacity-95 dark:bg-discord-blurple dark:hover:bg-discord-blurple-hover",
             hubActive &&
-              "ring-2 ring-blue-300 ring-offset-2 ring-offset-white dark:ring-blue-400/90 dark:ring-offset-zinc-950"
+              "ring-2 ring-discord-blurple/60 ring-offset-2 ring-offset-white dark:ring-discord-blurple/70 dark:ring-offset-[#1e1f22]"
           )}
         >
           <LayoutDashboard className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
@@ -130,10 +130,10 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
         ))}
       </nav>
 
-      <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-1.5 py-4 group-hover:px-3 dark:border-zinc-800">
+      <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-1.5 py-4 group-hover:px-3 dark:border-discord-divider">
         <Link
           href="/guides"
-          className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
           <HelpCircle className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
           <span className="hidden group-hover:inline">Help center</span>
@@ -147,7 +147,7 @@ export function SmtMobileDock() {
   const pathname = usePathname();
 
   return (
-    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/95">
+    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {SMT_NAV_ITEMS.map((item) => (
           <SmtDockLink key={item.href} item={item} isActive={smtNavItemIsActive(pathname, item)} />

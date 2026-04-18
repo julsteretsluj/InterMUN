@@ -11,6 +11,12 @@ import {
   resolveCommitteeDisplayTags,
   resolveCommitteeFullName,
 } from "@/lib/committee-card-display";
+import {
+  ageRangeTagClass,
+  difficultyTagClass,
+  eslFriendlyTagClass,
+  formatTagClass,
+} from "@/lib/committee-tag-styles";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 
@@ -118,10 +124,36 @@ export default async function SmtCommitteeLivePage({
           ) : null}
           <MetaItem label="Official committee name">{officialName ?? "—"}</MetaItem>
           <MetaItem label="Chamber / acronym">{conf.committee?.trim() || "—"}</MetaItem>
-          <MetaItem label="Difficulty">{displayTags?.difficulty ?? "—"}</MetaItem>
-          <MetaItem label="Format">{displayTags?.format ?? "—"}</MetaItem>
-          <MetaItem label="Age range">{displayTags?.ageRange ?? "—"}</MetaItem>
-          <MetaItem label="ESL-friendly">{displayTags ? (displayTags.eslFriendly ? "Yes" : "No") : "—"}</MetaItem>
+          <MetaItem label="Difficulty">
+            {displayTags?.difficulty ? (
+              <span className={difficultyTagClass(displayTags.difficulty)}>{displayTags.difficulty}</span>
+            ) : (
+              "—"
+            )}
+          </MetaItem>
+          <MetaItem label="Format">
+            {displayTags?.format ? (
+              <span className={formatTagClass(displayTags.format)}>{displayTags.format}</span>
+            ) : (
+              "—"
+            )}
+          </MetaItem>
+          <MetaItem label="Age range">
+            {displayTags?.ageRange ? (
+              <span className={ageRangeTagClass()}>{displayTags.ageRange}</span>
+            ) : (
+              "—"
+            )}
+          </MetaItem>
+          <MetaItem label="ESL-friendly">
+            {displayTags ? (
+              <span className={eslFriendlyTagClass(displayTags.eslFriendly)}>
+                {displayTags.eslFriendly ? "Yes" : "No"}
+              </span>
+            ) : (
+              "—"
+            )}
+          </MetaItem>
           <MetaItem label="Dais (listed)">{conf.chair_names?.trim() || "—"}</MetaItem>
           <MetaItem label="Committee / room code (second gate)">
             {conf.committee_code?.trim() || conf.room_code?.trim() ? (

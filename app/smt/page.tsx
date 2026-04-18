@@ -3,24 +3,13 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { formatCommitteeCardTitle, resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
+import {
+  ageRangeTagClass,
+  difficultyTagClass,
+  eslFriendlyTagClass,
+  formatTagClass,
+} from "@/lib/committee-tag-styles";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
-
-function difficultyTagClass(level: "Beginner" | "Intermediate" | "Advanced") {
-  if (level === "Beginner") {
-    return "border-blue-300/80 bg-blue-100 text-blue-900";
-  }
-  if (level === "Intermediate") {
-    return "border-amber-300/80 bg-amber-100 text-amber-950";
-  }
-  return "border-rose-300/80 bg-rose-100 text-rose-900";
-}
-
-function formatTagClass(format: "Traditional" | "Crisis") {
-  if (format === "Crisis") {
-    return "border-rose-300/80 bg-rose-100 text-rose-900";
-  }
-  return "border-sky-300/80 bg-sky-100 text-sky-900";
-}
 
 function difficultySortRank(level: "Beginner" | "Intermediate" | "Advanced" | null | undefined) {
   if (level === "Beginner") return 0;
@@ -134,7 +123,7 @@ export default async function SmtOverviewPage({
     return (
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-brand-muted text-sm">
         No committees found for this event. Add them in{" "}
-        <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
+        <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
           Event & committee sessions
         </Link>{" "}
         or in Supabase.
@@ -146,7 +135,7 @@ export default async function SmtOverviewPage({
     <div>
       {overviewErr === "smt-no-session-floor" && (
         <div
-          className="mb-6 rounded-lg border border-brand-accent/40 bg-brand-cream/60 px-4 py-3 text-sm text-brand-navy"
+          className="mb-6 rounded-lg border border-brand-gold/40 bg-brand-cream/60 px-4 py-3 text-sm text-brand-navy"
           role="status"
         >
           <strong>Session floor</strong> (timers, speakers, roll call) is for <strong>dais chairs</strong>{" "}
@@ -183,23 +172,11 @@ export default async function SmtOverviewPage({
               if (!tags) return null;
               return (
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  <span
-                    className={`rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold ${difficultyTagClass(tags.difficulty)}`}
-                  >
-                    {tags.difficulty}
-                  </span>
-                  <span
-                    className={`rounded-full border px-2 py-0.5 text-[0.68rem] font-semibold ${formatTagClass(tags.format)}`}
-                  >
-                    {tags.format}
-                  </span>
-                  <span className="rounded-full border border-brand-silver/60 bg-brand-silver/15 px-2 py-0.5 text-[0.68rem] font-semibold text-brand-navy">
-                    {tags.ageRange}
-                  </span>
+                  <span className={difficultyTagClass(tags.difficulty)}>{tags.difficulty}</span>
+                  <span className={formatTagClass(tags.format)}>{tags.format}</span>
+                  <span className={ageRangeTagClass()}>{tags.ageRange}</span>
                   {tags.eslFriendly ? (
-                    <span className="rounded-full border border-sky-300/80 bg-sky-100 px-2 py-0.5 text-[0.68rem] font-semibold text-sky-900">
-                      ESL-friendly
-                    </span>
+                    <span className={eslFriendlyTagClass(true)}>ESL-friendly</span>
                   ) : null}
                 </div>
               );

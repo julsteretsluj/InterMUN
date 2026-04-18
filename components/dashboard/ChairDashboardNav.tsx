@@ -132,7 +132,7 @@ function ChairNavRow({
       href={item.href}
       title={labelsHidden ? item.label : undefined}
       className={cn(
-        "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
+        "discord-interactive-hover flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
           ? "border border-brand-accent/35 bg-brand-accent/10 font-semibold text-slate-900 shadow-sm dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-zinc-50"
@@ -203,10 +203,10 @@ export function ChairDashboardSidebar({
           href="/chair"
           title={headerText}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:opacity-90 dark:hover:opacity-90",
+            "flex w-full items-center justify-center gap-2 rounded-full bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:opacity-90 dark:bg-discord-blurple dark:hover:bg-discord-blurple-hover dark:hover:opacity-100",
             labelsHidden && "mx-auto h-11 w-full rounded-xl px-2 py-0",
             hubActive &&
-              "ring-2 ring-brand-accent/45 ring-offset-2 ring-offset-white dark:ring-brand-accent/50 dark:ring-offset-zinc-950"
+              "ring-2 ring-brand-accent/45 ring-offset-2 ring-offset-white dark:ring-discord-blurple/50 dark:ring-offset-discord-sidebar"
           )}
         >
           <BookOpen
@@ -351,7 +351,7 @@ export function ChairMobileDock({
   );
 
   return (
-    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/95">
+    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <Link
           href="/chair"

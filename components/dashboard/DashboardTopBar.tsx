@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
+import { InterMunEmblem } from "@/components/InterMunEmblem";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 
@@ -53,7 +54,7 @@ export function DashboardTopBar({
   const initials = initialsFromName(userName, userEmail);
 
   return (
-    <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/70 bg-brand-cream/85 backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/92">
+    <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200/70 bg-brand-cream/85 backdrop-blur-md dark:border-discord-divider dark:bg-discord-app/95 dark:backdrop-blur-md dark:shadow-[0_1px_0_rgba(0,0,0,0.2)]">
       <div className="flex w-full flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
           href={brandHomeHref ?? "/profile"}
@@ -67,12 +68,7 @@ export function DashboardTopBar({
               className="h-9 w-9 rounded-xl object-contain"
             />
           ) : (
-            <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-accent to-blue-800 text-[0.65rem] font-bold text-white shadow-md"
-              aria-hidden
-            >
-              IM
-            </span>
+            <InterMunEmblem alt="" className="h-9 w-9 rounded-xl ring-1 ring-black/10 dark:ring-white/15" />
           )}
         </Link>
         <div className="min-w-0 flex-1 basis-[min(100%,12rem)] sm:flex-[1_1_40%]">
@@ -82,31 +78,31 @@ export function DashboardTopBar({
           {showDelegateHubLink ? (
             <Link
               href="/delegate"
-              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:border-brand-accent/45 hover:bg-brand-accent/10 dark:border-white/12 dark:bg-white/5 dark:text-zinc-100 dark:hover:border-brand-accent/50 dark:hover:bg-brand-accent/15 sm:inline-flex"
+              className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:border-brand-accent/45 hover:bg-brand-accent/10 dark:border-discord-divider dark:bg-discord-elevated dark:text-zinc-100 dark:hover:bg-[color:var(--discord-hover-bg)] sm:inline-flex"
             >
               📄 Delegate hub
             </Link>
           ) : null}
           {conferenceLine ? (
-            <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-silver lg:block">
+            <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-diplomatic lg:block">
               {conferenceLine}
             </p>
           ) : null}
           <time
-            className="hidden text-sm text-slate-500 dark:text-zinc-400 md:block"
+            className="hidden text-sm text-slate-500 dark:text-discord-muted md:block"
             dateTime={new Date().toISOString()}
           >
             {formatHeaderDate(new Date())}
           </time>
           {notifications ?? null}
           <ThemeSelector />
-          <div className="flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white py-1.5 pl-1.5 pr-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
+          <div className="flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white py-1.5 pl-1.5 pr-2 shadow-sm dark:border-discord-divider dark:bg-discord-elevated">
             <Link
               href={profileHref}
-              className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition hover:bg-slate-50 dark:hover:bg-zinc-800"
+              className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition-colors duration-150 ease-out hover:bg-slate-50 dark:hover:bg-[color:var(--discord-hover-bg)]"
             >
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-accent to-blue-900 text-xs font-bold text-white shadow-inner"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-gold to-emerald-900 text-xs font-bold text-white shadow-inner"
                 aria-hidden
               >
                 {initials}
@@ -115,15 +111,15 @@ export function DashboardTopBar({
                 <p className="truncate text-sm font-semibold text-slate-800 dark:text-zinc-100">
                   {userName}
                 </p>
-                <p className="truncate text-[0.7rem] text-slate-500 dark:text-zinc-400">{userEmail}</p>
+                <p className="truncate text-[0.7rem] text-slate-500 dark:text-discord-muted">{userEmail}</p>
               </div>
               <ChevronDown
-                className="hidden h-4 w-4 shrink-0 text-slate-400 sm:block"
+                className="hidden h-4 w-4 shrink-0 text-slate-400 dark:text-discord-muted sm:block"
                 strokeWidth={1.75}
                 aria-hidden
               />
             </Link>
-            <SignOutButton className="border-l border-slate-200 pl-2 text-xs sm:text-sm dark:border-zinc-700" />
+            <SignOutButton className="border-l border-slate-200 pl-2 text-xs sm:text-sm dark:border-discord-divider" />
           </div>
         </div>
       </div>

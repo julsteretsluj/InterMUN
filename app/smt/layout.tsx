@@ -6,6 +6,7 @@ import { isSmtRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { isRoleOnlyDisplayName, stripRedundantLeadingRole } from "@/lib/utils";
 import { getAppName } from "@/lib/branding";
+import { InterMunEmblem } from "@/components/InterMunEmblem";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
 
@@ -53,11 +54,11 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
   const hubLabel = activeEvent?.name?.trim() || "Enter conference code";
 
   return (
-    <div className="flex min-h-screen bg-brand-cream text-slate-900 dark:bg-[#121212] dark:text-zinc-50">
-      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(18,18,18,0.06)] transition-[width] duration-200 dark:border-white/10 dark:bg-[#121212]/60 dark:shadow-none lg:flex">
+    <div className="flex min-h-screen bg-brand-cream text-slate-900 dark:bg-discord-app dark:text-zinc-50">
+      <aside className="group sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/20 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(18,18,18,0.06)] transition-[width] duration-200 dark:border-discord-divider dark:bg-discord-sidebar dark:backdrop-blur-none dark:shadow-none lg:flex">
         <Link
           href="/smt"
-          className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-zinc-800 dark:hover:bg-zinc-900/80"
+          className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
           {showSeamunLogo ? (
             <img
@@ -66,12 +67,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
               className="h-10 w-10 shrink-0 rounded-2xl object-contain"
             />
           ) : (
-            <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-accent to-blue-900 text-xs font-bold text-white shadow-md"
-              aria-hidden
-            >
-              IM
-            </span>
+            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl ring-1 ring-black/10 dark:ring-white/15" />
           )}
           <span className="hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright">
             {appName}
@@ -93,15 +89,15 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           profileHref="/smt/profile"
         />
         {activeEvent ? (
-          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-slate-600 dark:border-white/10 dark:bg-[#121212] dark:text-zinc-400 sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-slate-600 dark:border-discord-divider dark:bg-discord-app dark:text-discord-muted sm:px-6">
             <div className="w-full">
               Active event: <span className="font-medium text-slate-800 dark:text-zinc-100">{activeEvent.name}</span>{" "}
               · code{" "}
-              <span className="font-mono text-brand-accent dark:text-brand-accent-bright">{activeEvent.event_code}</span>
+              <span className="font-mono text-discord-blurple dark:text-[#949cfa]">{activeEvent.event_code}</span>
             </div>
           </div>
         ) : (
-          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-accent dark:border-white/10 dark:bg-[#121212] dark:text-brand-accent-bright sm:px-6">
+          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-accent dark:border-discord-divider dark:bg-discord-app dark:text-brand-accent-bright sm:px-6">
             <div className="w-full">
               <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
                 Enter conference code
