@@ -124,7 +124,7 @@ function AspireSidebarLink({
     <Link
       href={tab.href}
       className={cn(
-        "flex items-center gap-0 group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
+        "flex items-center justify-center gap-0 group-hover:justify-start group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
         isActive
           ? "bg-gradient-to-r from-logo-magenta/18 via-brand-accent/14 to-logo-cyan/18 font-semibold text-brand-navy ring-1 ring-logo-orange/25 dark:from-logo-magenta/22 dark:via-brand-accent/18 dark:to-logo-cyan/22 dark:text-brand-accent-bright dark:ring-white/10"
           : "font-medium text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"

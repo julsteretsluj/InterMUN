@@ -49,7 +49,7 @@ function SmtSidebarLink({ item, isActive }: { item: SmtNavItem; isActive: boolea
     <Link
       href={item.href}
       className={cn(
-        "discord-interactive-hover flex items-center gap-0 rounded-md px-2 py-2.5 text-sm transition-colors group-hover:gap-3 group-hover:px-3",
+        "discord-interactive-hover flex items-center justify-center gap-0 rounded-md px-2 py-2.5 text-sm transition-colors group-hover:justify-start group-hover:gap-3 group-hover:px-3",
         isActive
           ? "smt-nav-row-active bg-gradient-to-r from-logo-magenta/20 via-brand-accent/15 to-logo-cyan/20 font-semibold text-brand-navy ring-1 ring-logo-orange/25 dark:text-white dark:ring-0"
           : "font-medium text-slate-600 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
@@ -133,7 +133,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
       <div className="mt-auto shrink-0 space-y-0.5 border-t border-slate-100 px-1.5 py-4 group-hover:px-3 dark:border-discord-divider">
         <Link
           href="/guides"
-          className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:px-3 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex items-center justify-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:justify-start group-hover:px-3 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
           <HelpCircle className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
           <span className="hidden group-hover:inline">Help center</span>
