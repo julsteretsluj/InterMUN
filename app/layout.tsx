@@ -28,10 +28,10 @@ const documentSerif = Merriweather({
 export const metadata: Metadata = {
   title: getAppName(),
   description: getAppMetaDescription(),
-  /** Same asset as `public/intermun-emblem.png` / `<InterMunEmblem />`; file convention adds `<link rel="icon">`. */
+  /** InterMUN emblem (`public/intermun-emblem.png`) — same asset as `<InterMunEmblem />`. */
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
-    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+    icon: [{ url: "/intermun-emblem.png", type: "image/png" }],
+    apple: [{ url: "/intermun-emblem.png", type: "image/png" }],
   },
 };
 

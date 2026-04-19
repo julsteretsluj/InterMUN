@@ -7,8 +7,10 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      /** Legacy clients request `/favicon.ico`; serve the same PNG as `app/icon.png`. */
-      { source: "/favicon.ico", destination: "/icon.png" },
+      /** Legacy URLs and `/favicon.ico` → canonical logo asset. */
+      { source: "/favicon.ico", destination: "/intermun-emblem.png" },
+      { source: "/icon.png", destination: "/intermun-emblem.png" },
+      { source: "/apple-icon.png", destination: "/intermun-emblem.png" },
     ];
   },
   async headers() {

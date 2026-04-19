@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Armchair, Building2, ChevronLeft, ChevronRight, Users } from "lucide-react";
@@ -12,16 +12,28 @@ import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
 
 type Step = "welcome" | "role" | "account";
 
+/** Ring segment colors (color-wheel order: top → clockwise matches pointer angle). */
+const ROLE_RING_HEX = ["#1DB954", "#3366FF", "#FF00E5"] as const;
+
 const ROLES: {
   id: InterMunEntryRole;
   label: string;
   hint: string;
   Icon: LucideIcon;
+  /** Center icon tint */
+  accentHex: string;
 }[] = [
-  { id: "chair", label: "Chair", hint: "(the dais)", Icon: Armchair },
-  { id: "delegate", label: "Delegate", hint: "(your committee)", Icon: Users },
-  { id: "secretariat", label: "Secretariat", hint: "(event staff)", Icon: Building2 },
+  { id: "chair", label: "Chair", hint: "(the dais)", Icon: Armchair, accentHex: ROLE_RING_HEX[0]! },
+  { id: "delegate", label: "Delegate", hint: "(your committee)", Icon: Users, accentHex: ROLE_RING_HEX[1]! },
+  { id: "secretariat", label: "Secretariat", hint: "(event staff)", Icon: Building2, accentHex: ROLE_RING_HEX[2]! },
 ];
+
+function roleRingConicGradient(): string {
+  const n = ROLES.length;
+  const seg = 360 / n;
+  const parts = ROLE_RING_HEX.map((c, i) => `${c} ${i * seg}deg ${(i + 1) * seg}deg`).join(", ");
+  return `conic-gradient(from -90deg, ${parts})`;
+}
 
 function angleFromPointer(cx: number, cy: number, px: number, py: number): number {
   const rad = Math.atan2(py - cy, px - cx);
@@ -51,6 +63,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
 
   const selectedRole = ROLES[roleIndex] ?? ROLES[0]!;
   const RoleIcon = selectedRole.Icon;
+  const ringGradient = useMemo(() => roleRingConicGradient(), []);
 
   const snapToIndex = useCallback((idx: number) => {
     const n = ROLES.length;
@@ -255,23 +268,23 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                   onPointerMove={onPointerMove}
                   onPointerUp={endPointer}
                   onPointerCancel={endPointer}
-                  className="relative size-[min(18rem,85vw)] shrink-0 cursor-grab touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 active:cursor-grabbing"
+                  className="relative size-[min(18rem,85vw)] shrink-0 cursor-grab touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 active:cursor-grabbing drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
                 >
+                  {/* Color-wheel ring */}
                   <div
-                    className="pointer-events-none absolute inset-0 rounded-full border-[14px] border-[#1a2f4a] shadow-inner dark:border-[#3d5a80]"
+                    className="pointer-events-none absolute inset-0 rounded-full shadow-[inset_0_2px_14px_rgba(0,0,0,0.18)]"
+                    style={{ background: ringGradient }}
                     aria-hidden
                   />
-                  <span
-                    className="pointer-events-none absolute left-1/2 top-3 h-2.5 w-1 -translate-x-1/2 rounded-full bg-white"
-                    aria-hidden
-                  />
-                  <span
-                    className="pointer-events-none absolute bottom-[18%] left-[14%] h-2.5 w-1 rounded-full bg-white rotate-[-35deg]"
-                    aria-hidden
-                  />
+                  {/* Inner disc (donut hole) */}
+                  <div className="pointer-events-none absolute inset-[14px] rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner" />
 
-                  <div className="pointer-events-none absolute inset-[18%] flex flex-col items-center justify-center rounded-full bg-white p-4 text-center shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner">
-                    <RoleIcon className="size-12 md:size-14 text-brand-navy mb-2" strokeWidth={1.25} />
+                  <div className="pointer-events-none absolute inset-[14px] flex flex-col items-center justify-center rounded-full p-4 text-center">
+                    <RoleIcon
+                      className="size-12 md:size-14 mb-2"
+                      strokeWidth={1.25}
+                      style={{ color: selectedRole.accentHex }}
+                    />
                     <p className="font-display text-2xl md:text-3xl font-bold text-brand-navy">{selectedRole.label}</p>
                     <p className="text-sm italic text-brand-navy/85">{selectedRole.hint}</p>
                   </div>
