@@ -1,11 +1,18 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { AWARD_CATEGORIES, awardCategoryMeta, isConferenceEventPlaceholderRow } from "@/lib/awards";
+import {
+  maxRubricPointsForAwardCategory,
+  rubricBandInitialsForAssignment,
+  rubricCriteriaForAwardAssignmentCategory,
+  rubricNumericTotalForAssignment,
+} from "@/lib/award-category-rubric";
 import { saveAwardAssignment, deleteAwardAssignment } from "@/app/actions/awards";
 import type { AwardAssignment } from "@/types/database";
 import { Trash2, Plus, Award } from "lucide-react";
+import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
 
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
@@ -65,6 +72,22 @@ export function AwardsManagerClient({
     notes: "",
     sort_order: "0",
   });
+  /** Tracks 1–8 scores for RubricCriterionPicker (same mechanism as chair nominations). */
+  const [rubricScores, setRubricScores] = useState<Record<string, number>>({});
+
+  const rubricCriteria = useMemo(
+    () => rubricCriteriaForAwardAssignmentCategory(form.category),
+    [form.category]
+  );
+
+  const handleRubricScore = useCallback((key: string, score: number | null) => {
+    setRubricScores((prev) => {
+      const next = { ...prev };
+      if (score == null || score < 1 || score > 8) delete next[key];
+      else next[key] = score;
+      return next;
+    });
+  }, []);
 
   /** Drop event-title placeholder rows unless an existing assignment or the open form still references them. */
   const committeePickerConferences = useMemo(() => {
@@ -99,6 +122,7 @@ export function AwardsManagerClient({
       notes: "",
       sort_order: "0",
     });
+    setRubricScores({});
   }
 
   function editRow(a: AwardAssignment) {
@@ -111,6 +135,11 @@ export function AwardsManagerClient({
       notes: a.notes ?? "",
       sort_order: String(a.sort_order ?? 0),
     });
+    setRubricScores(
+      a.rubric_scores && typeof a.rubric_scores === "object"
+        ? { ...(a.rubric_scores as Record<string, number>) }
+        : {}
+    );
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -156,10 +185,11 @@ export function AwardsManagerClient({
         <p className="flex items-start gap-2">
           <Award className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
           <span>
-            SMT award structure: <strong className="text-brand-navy">Overall</strong> (Best Delegate Trophy, Best
-            Position Paper), <strong className="text-brand-navy">Chair</strong> (Best Chair, Honourable Mention Chair,
-            Best Committee, Best Chair Report), and <strong className="text-brand-navy">Committee</strong> (Best
-            Delegate, Honourable Mention, Best Position Paper). Delegates see only rows where they are the recipient.
+            SMT award structure: <strong className="text-brand-navy">Overall</strong> and{" "}
+            <strong className="text-brand-navy">Chair / collective</strong> awards use the same SEAMUN band rubric as
+            the chair Score page (every criterion 1–8 before save).{" "}
+            <strong className="text-brand-navy">Committee-level</strong> trophies here are recipient / approval only—scores
+            live in chair nominations (first tab). Delegates see only rows where they are the recipient.
           </span>
         </p>
       </div>
@@ -186,7 +216,11 @@ export function AwardsManagerClient({
                 name="category"
                 className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
                 value={form.category}
-                onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  setForm((f) => ({ ...f, category: next }));
+                  setRubricScores({});
+                }}
               >
                 {AWARD_CATEGORIES.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -222,6 +256,37 @@ export function AwardsManagerClient({
               {meta.description}
             </p>
           )}
+
+          {rubricCriteria && rubricCriteria.length > 0 ? (
+            <div className="space-y-3 rounded-xl border border-brand-accent/28 bg-brand-cream/45 p-3 dark:border-brand-accent/35 dark:bg-black/25">
+              <p className="text-xs leading-relaxed text-brand-muted">
+                Individual criteria (Beginning → Exemplary, then low/high). Same mechanism as committee nomination
+                scoring—required before save.
+              </p>
+              <div className="grid gap-3">
+                {rubricCriteria.map((criterion) => (
+                  <RubricCriterionPicker
+                    key={`${form.id}-${form.category}-${criterion.key}`}
+                    criterion={criterion}
+                    initialScore={Number(rubricScores[criterion.key] ?? 0)}
+                    onScoreChange={handleRubricScore}
+                  />
+                ))}
+              </div>
+              <p className="font-mono text-xs text-brand-navy dark:text-zinc-200">
+                Rubric total: {rubricNumericTotalForAssignment(rubricScores, form.category)}/
+                {maxRubricPointsForAwardCategory(form.category)}{" "}
+                <span className="text-brand-muted" title="Band initials">
+                  ({rubricBandInitialsForAssignment(rubricScores, form.category)})
+                </span>
+              </p>
+            </div>
+          ) : meta?.scope === "committee" ? (
+            <p className="text-xs leading-relaxed text-brand-muted border-l-2 border-slate-300 pl-3 dark:border-zinc-600">
+              Committee-scoped awards: record the recipient here for the public list only. Detailed rubric scores come
+              from approved chair nominations (Award submissions tab)—no duplicate scoring on this row.
+            </p>
+          ) : null}
 
           {(meta?.scope === "conference_wide" ||
             meta?.scope === "collective_person" ||
@@ -327,6 +392,7 @@ export function AwardsManagerClient({
                 <th className="px-3 py-2 font-semibold text-brand-navy">Award</th>
                 <th className="px-3 py-2 font-semibold text-brand-navy">Committee</th>
                 <th className="px-3 py-2 font-semibold text-brand-navy">Recipient</th>
+                <th className="px-3 py-2 font-semibold text-brand-navy">Rubric</th>
                 <th className="px-3 py-2 font-semibold text-brand-navy">Notes</th>
                 <th className="px-3 py-2 w-24" />
               </tr>
@@ -334,7 +400,7 @@ export function AwardsManagerClient({
             <tbody>
               {ordered.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-3 py-8 text-center text-brand-muted">
+                  <td colSpan={6} className="px-3 py-8 text-center text-brand-muted">
                     No award rows yet.
                   </td>
                 </tr>
@@ -361,6 +427,24 @@ export function AwardsManagerClient({
                       </td>
                       <td className="px-3 py-2 text-brand-muted align-top">{comm}</td>
                       <td className="px-3 py-2 align-top">{recip}</td>
+                      <td className="px-3 py-2 align-top font-mono text-[0.7rem] text-brand-navy dark:text-zinc-300">
+                        {rubricCriteriaForAwardAssignmentCategory(a.category) ? (
+                          <>
+                            <span className="tabular-nums">
+                              {rubricNumericTotalForAssignment(a.rubric_scores, a.category)}/
+                              {maxRubricPointsForAwardCategory(a.category)}
+                            </span>
+                            <span
+                              className="mt-0.5 block max-w-[140px] truncate text-brand-muted text-[0.65rem]"
+                              title={rubricBandInitialsForAssignment(a.rubric_scores, a.category)}
+                            >
+                              {rubricBandInitialsForAssignment(a.rubric_scores, a.category)}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-brand-muted">—</span>
+                        )}
+                      </td>
                       <td className="px-3 py-2 text-brand-muted align-top max-w-xs truncate">
                         {a.notes || "—"}
                       </td>

@@ -3,6 +3,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { AWARD_CATEGORIES, type AwardScope } from "@/lib/awards";
 import {
+  rubricKeysForAwardAssignmentCategory,
+  smtShouldCollectRubric,
+} from "@/lib/award-category-rubric";
+import {
   BAND_STORED_SCORE,
   RUBRIC_KEYS_BY_NOMINATION,
   bandAndTierToScore,
@@ -17,6 +21,34 @@ import { promoteCommitteeDraftsToPending } from "@/lib/award-committee-submit";
 import { getCommitteeAwardScope, resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 
 type NominationType = NominationRubricType;
+
+/** Award assignment form: same `score_${key}` fields as chair nominations (1–8 each). */
+function parseRubricScoresForAssignmentKeys(formData: FormData, keys: string[]): Record<string, number> | null {
+  const out: Record<string, number> = {};
+  for (const key of keys) {
+    const scoreRaw = String(formData.get(`score_${key}`) ?? "").trim();
+    if (scoreRaw === "") return null;
+    const direct = Number(scoreRaw);
+    if (Number.isInteger(direct) && direct >= 1 && direct <= 8) {
+      out[key] = direct;
+      continue;
+    }
+    const bandRaw = String(formData.get(`band_${key}`) ?? "").trim();
+    const band = parseBandId(bandRaw);
+    const tierRaw = String(formData.get(`tier_${key}`) ?? "").trim();
+    const tier = parseTierId(tierRaw);
+    if (band && tier) {
+      out[key] = bandAndTierToScore(band, tier);
+      continue;
+    }
+    if (band) {
+      out[key] = BAND_STORED_SCORE[band];
+      continue;
+    }
+    return null;
+  }
+  return out;
+}
 
 function parseRubricScores(formData: FormData, nominationType: NominationType) {
   const keys = RUBRIC_KEYS_BY_NOMINATION[nominationType];
@@ -111,6 +143,20 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
   const recipient_profile_id =
     scope === "collective_committee" ? null : recipientProfileId || null;
 
+  const rubricKeys = rubricKeysForAwardAssignmentCategory(category);
+  const collectRubric = smtShouldCollectRubric(scope, category) && rubricKeys.length > 0;
+  let rubric_scores: Record<string, number> | null = null;
+  if (collectRubric) {
+    const parsed = parseRubricScoresForAssignmentKeys(formData, rubricKeys);
+    if (!parsed) {
+      return {
+        error:
+          "Complete every rubric criterion for this award (pick band, then low/high within the band—same as chair Score page).",
+      };
+    }
+    rubric_scores = parsed;
+  }
+
   const payload = {
     category,
     committee_conference_id,
@@ -118,6 +164,7 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
     recipient_committee_id,
     notes: notes || null,
     sort_order: sortOrder,
+    rubric_scores,
     updated_at: new Date().toISOString(),
   };
 

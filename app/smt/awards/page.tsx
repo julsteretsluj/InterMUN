@@ -1,7 +1,16 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
-import type { AwardAssignment } from "@/types/database";
+import type { AwardAssignment, AwardParticipationScore } from "@/types/database";
+import { isConferenceEventPlaceholderRow } from "@/lib/awards";
+import { getActiveEventId } from "@/lib/active-event-cookie";
+import {
+  evaluateSmtParticipationReadiness,
+  aggregateDelegateChairFeedbackBySeat,
+  rubricKeysForParticipationScope,
+  rubricNumericTotalForKeys,
+  type ChairSeat,
+} from "@/lib/award-participation-scoring";
 import { isSmtRole } from "@/lib/roles";
 import type { NominationRubricType } from "@/lib/seamuns-award-scoring";
 import {
@@ -12,7 +21,6 @@ import {
 import type { ChairNominationRow } from "./ChairNominationsPanel";
 import { SmtAwardsRefreshOnFocus } from "./SmtAwardsRefreshOnFocus";
 import { SmtAwardsTabs } from "./SmtAwardsTabs";
-
 export const dynamic = "force-dynamic";
 
 export default async function SmtAwardsPage() {
@@ -32,6 +40,8 @@ export default async function SmtAwardsPage() {
     redirect("/profile");
   }
 
+  const eventId = await getActiveEventId();
+
   const [
     { data: conferences },
     { data: assignments },
@@ -39,7 +49,7 @@ export default async function SmtAwardsPage() {
     { data: nominations, error: nominationsError },
     { data: selectedSingleWinners },
   ] = await Promise.all([
-    supabase.from("conferences").select("id, name, committee").order("created_at", { ascending: false }),
+    supabase.from("conferences").select("id, name, committee, event_id").order("created_at", { ascending: false }),
     supabase.from("award_assignments").select("*").order("created_at", { ascending: true }),
     supabase.from("profiles").select("id, name").order("name"),
     supabase
@@ -87,6 +97,107 @@ export default async function SmtAwardsPage() {
   const profileById = new Map((profiles ?? []).map((p) => [p.id, p.name?.trim() || p.id.slice(0, 8)]));
   const nomineeNameByProfileId: Record<string, string> = Object.fromEntries(profileById);
 
+  type CommitteeOpt = { id: string; label: string };
+  let smtCommittees: CommitteeOpt[] = [];
+  let smtChairSeats: ChairSeat[] = [];
+  let smtParticipationRows: AwardParticipationScore[] = [];
+  let delegateChairFeedback: ReturnType<typeof aggregateDelegateChairFeedbackBySeat> = [];
+  let smtChairRanking: { seat: ChairSeat; total: number }[] = [];
+  let smtReportRanking: { committee: CommitteeOpt; total: number }[] = [];
+  let smtReadiness = { ok: true as boolean, missingChairs: [] as string[], missingReports: [] as string[] };
+
+  if (eventId) {
+    const rawConfs = (conferences ?? []).filter((c) => c.event_id === eventId && !isConferenceEventPlaceholderRow(c));
+    smtCommittees = rawConfs.map((c) => ({
+      id: c.id,
+      label: c.committee?.trim() || c.name?.trim() || c.id.slice(0, 8),
+    }));
+    const confIds = smtCommittees.map((c) => c.id);
+    const labelByConf = Object.fromEntries(smtCommittees.map((c) => [c.id, c.label]));
+
+    if (confIds.length > 0) {
+      const { data: allocData } = await supabase
+        .from("allocations")
+        .select("conference_id, user_id, profiles(role, name)")
+        .in("conference_id", confIds)
+        .not("user_id", "is", null);
+
+      const seats: ChairSeat[] = [];
+      for (const a of allocData ?? []) {
+        const uid = a.user_id as string;
+        const prof = Array.isArray(a.profiles) ? a.profiles[0] : a.profiles;
+        const role = prof?.role?.toString().trim().toLowerCase();
+        if (role !== "chair") continue;
+        const name = prof?.name?.trim() || uid.slice(0, 8);
+        seats.push({
+          committee_conference_id: a.conference_id as string,
+          chair_profile_id: uid,
+          committeeLabel: labelByConf[a.conference_id as string] ?? "?",
+          chairName: name,
+        });
+      }
+      smtChairSeats = seats;
+
+      const { data: smtScores } = await supabase
+        .from("award_participation_scores")
+        .select("*")
+        .in("committee_conference_id", confIds)
+        .in("scope", ["chair_by_smt", "chair_report_by_smt", "chair_by_delegate"]);
+
+      smtParticipationRows = (smtScores ?? []) as AwardParticipationScore[];
+
+      const delegateFeedbackKeys = rubricKeysForParticipationScope("chair_by_delegate");
+      delegateChairFeedback = aggregateDelegateChairFeedbackBySeat(smtChairSeats, smtParticipationRows, delegateFeedbackKeys);
+
+      const chairKeys = rubricKeysForParticipationScope("chair_by_smt");
+      const reportKeys = rubricKeysForParticipationScope("chair_report_by_smt");
+
+      smtChairRanking = smtChairSeats
+        .map((seat) => {
+          const row = smtParticipationRows.find(
+            (r) =>
+              r.scope === "chair_by_smt" &&
+              r.committee_conference_id === seat.committee_conference_id &&
+              r.subject_profile_id === seat.chair_profile_id
+          );
+          return {
+            seat,
+            total: rubricNumericTotalForKeys(row?.rubric_scores ?? null, chairKeys),
+          };
+        })
+        .sort((a, b) => b.total - a.total);
+
+      smtReportRanking = smtCommittees
+        .map((c) => {
+          const row = smtParticipationRows.find(
+            (r) =>
+              r.scope === "chair_report_by_smt" &&
+              r.committee_conference_id === c.id &&
+              (r.subject_profile_id == null || r.subject_profile_id === "")
+          );
+          return {
+            committee: c,
+            total: rubricNumericTotalForKeys(row?.rubric_scores ?? null, reportKeys),
+          };
+        })
+        .sort((a, b) => b.total - a.total);
+
+      const smtReadinessRows = smtParticipationRows
+        .filter((r) => r.scope === "chair_by_smt" || r.scope === "chair_report_by_smt")
+        .map((r) => ({
+          scope: r.scope as "chair_by_smt" | "chair_report_by_smt",
+          committee_conference_id: r.committee_conference_id,
+          subject_profile_id: r.subject_profile_id,
+          rubric_scores: r.rubric_scores,
+        }));
+      smtReadiness = evaluateSmtParticipationReadiness(
+        smtChairSeats,
+        smtCommittees.map((c) => ({ id: c.id, committee: c.label, name: null })),
+        smtReadinessRows
+      );
+    }
+  }
+
   const nominationsPayload: ChairNominationRow[] = nominationRowsForQueue.map((n) => ({
     id: n.id,
     nomination_type: n.nomination_type,
@@ -119,6 +230,18 @@ export default async function SmtAwardsPage() {
         conferences={conferences ?? []}
         assignments={(assignments ?? []) as AwardAssignment[]}
         profiles={profiles ?? []}
+        participation={{
+          committees: smtCommittees,
+          chairSeats: smtChairSeats,
+          scoreRows: smtParticipationRows,
+          delegateChairFeedback,
+          chairRanking: smtChairRanking,
+          reportRanking: smtReportRanking,
+          smtComplete: smtReadiness.ok,
+          missingChairs: smtReadiness.missingChairs,
+          missingReports: smtReadiness.missingReports,
+        }}
+        hasActiveEvent={Boolean(eventId)}
       />
     </MunPageShell>
   );

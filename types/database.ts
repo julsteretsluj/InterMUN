@@ -56,6 +56,17 @@ export interface VoteItem {
   closed_at: string | null;
 }
 
+export interface AwardParticipationScore {
+  id: string;
+  scope: string;
+  committee_conference_id: string;
+  subject_profile_id: string | null;
+  rubric_scores: Record<string, number> | null;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface AwardAssignment {
   id: string;
   category: string;
@@ -63,6 +74,8 @@ export interface AwardAssignment {
   recipient_profile_id: string | null;
   recipient_committee_id: string | null;
   notes: string | null;
+  /** Per-criterion 1–8 scores (SEAMUN bands); null or omitted for committee-scoped assignments / legacy rows. */
+  rubric_scores?: Record<string, number> | null;
   sort_order: number;
   created_by: string | null;
   created_at: string;

@@ -15,6 +15,9 @@ type Props = {
   /** Required slots complete / total (same rules as submit validation). */
   requiredSlotsDone: number;
   requiredSlotsTotal: number;
+  /** Every-delegate matrix (session rubric); required before submit when there are seated delegates. */
+  delegateMatrixDone?: number;
+  delegateMatrixTotal?: number;
 };
 
 export function ChairSubmitToSmtPanel({
@@ -25,6 +28,8 @@ export function ChairSubmitToSmtPanel({
   showChairControls,
   requiredSlotsDone,
   requiredSlotsTotal,
+  delegateMatrixDone = 0,
+  delegateMatrixTotal = 0,
 }: Props) {
   const router = useRouter();
   const [msg, setMsg] = useState<string | null>(null);
@@ -71,7 +76,18 @@ export function ChairSubmitToSmtPanel({
             </strong>
             {requiredSlotsDone < requiredSlotsTotal
               ? " — finish the rest, then submit so SMT can review."
-              : " — you can submit to SMT now."}
+              : " — nomination batch is ready (ensure the delegate matrix above is complete)."}
+          </p>
+        ) : null}
+        {!alreadySubmitted && delegateMatrixTotal > 0 ? (
+          <p className="text-xs text-brand-navy/85">
+            Delegate matrix (every seated delegate):{" "}
+            <strong className="tabular-nums">
+              {delegateMatrixDone}/{delegateMatrixTotal}
+            </strong>
+            {delegateMatrixDone < delegateMatrixTotal
+              ? " — score each delegate above before submitting."
+              : " — complete."}
           </p>
         ) : null}
       </div>
@@ -92,7 +108,9 @@ export function ChairSubmitToSmtPanel({
               {busy ? "Submitting…" : "Submit nominations to SMT"}
             </button>
             {!canSubmit ? (
-              <span className="text-xs text-brand-muted">Complete every required slot, then submit.</span>
+              <span className="text-xs text-brand-muted">
+                Complete every required nomination slot and the delegate matrix, then submit.
+              </span>
             ) : null}
             {pastDeadline ? (
               <span className="text-xs text-amber-800 dark:text-amber-200/85">

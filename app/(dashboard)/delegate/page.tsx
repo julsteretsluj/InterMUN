@@ -46,6 +46,7 @@ export default async function DelegateDashboardPage() {
     { href: "/guides", label: "Guides & resources", hint: "How-to and chair-facing references" },
     { href: "/running-notes", label: "Checklist & running notes", hint: "Session scratch pad" },
     { href: "/official-links", label: "Official UN links", hint: "Documents, bodies, programmes" },
+    { href: "/delegate/chair-feedback", label: "Chair feedback", hint: "Rate your dais (aggregated for SMT)" },
     { href: "/voting", label: "Voting", hint: "When your chair opens a vote" },
     { href: "/documents", label: "Archive", hint: "Your documents" },
     ...(crisisReportingEnabled

@@ -18,6 +18,12 @@ import {
   getCommitteeAwardScope,
   mergeNominationRowsForCommitteeDisplay,
 } from "@/lib/conference-committee-canonical";
+import {
+  evaluateDelegateMatrixReadiness,
+  rubricKeysForParticipationScope,
+  rubricNumericTotalForKeys,
+} from "@/lib/award-participation-scoring";
+import { DelegateMatrixPanel } from "./DelegateMatrixPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -101,7 +107,7 @@ export default async function ChairAwardsPage() {
     await runChairAwardAutoSubmitIfDue(awardConferenceId);
   }
 
-  const [{ data: delegates }, { data: nominations }] = await Promise.all([
+  const [{ data: delegates }, { data: nominations }, { data: participationDelegate }] = await Promise.all([
     supabase
       .from("allocations")
       .select("id, user_id, country, profiles(name, role)")
@@ -117,6 +123,11 @@ export default async function ChairAwardsPage() {
       .in("status", ["draft", "pending"])
       .order("nomination_type", { ascending: true })
       .order("rank", { ascending: true }),
+    supabase
+      .from("award_participation_scores")
+      .select("subject_profile_id, rubric_scores")
+      .eq("committee_conference_id", awardConferenceId)
+      .eq("scope", "delegate_by_chair"),
   ]);
 
   const delegateRowsAll = sortRowsByAllocationCountry(
@@ -134,6 +145,35 @@ export default async function ChairAwardsPage() {
 
   const baseNomineeOptions = delegateRows.filter((d) => !!d.user_id).map(optionFromDelegateRow);
   const seatedDelegatesCount = baseNomineeOptions.length;
+
+  const delegateProfileIdsForMatrix = delegateRows
+    .filter((d) => d.user_id)
+    .map((d) => d.user_id!) as string[];
+  const matrixEval = evaluateDelegateMatrixReadiness(
+    delegateProfileIdsForMatrix,
+    (participationDelegate ?? []) as { subject_profile_id: string | null; rubric_scores: Record<string, number> | null }[]
+  );
+  const delegateMatrixComplete = matrixEval.ok;
+
+  const matrixKeys = rubricKeysForParticipationScope("delegate_by_chair");
+  const scoresByProfileId: Record<string, Record<string, number>> = {};
+  for (const row of participationDelegate ?? []) {
+    if (row.subject_profile_id && row.rubric_scores && typeof row.rubric_scores === "object") {
+      scoresByProfileId[row.subject_profile_id] = row.rubric_scores as Record<string, number>;
+    }
+  }
+  const delegateMatrixPayload = delegateProfileIdsForMatrix.map((uid) => ({
+    userId: uid,
+    country: delegateByUserId[uid]?.country ?? "?",
+    displayName: delegateByUserId[uid]?.displayName ?? uid.slice(0, 8),
+  }));
+  const rankingDesc = [...delegateProfileIdsForMatrix]
+    .map((uid) => ({
+      uid,
+      label: `${delegateByUserId[uid]?.country ?? "?"} — ${delegateByUserId[uid]?.displayName ?? uid.slice(0, 8)}`,
+      total: rubricNumericTotalForKeys(scoresByProfileId[uid], matrixKeys),
+    }))
+    .sort((a, b) => b.total - a.total);
   /** Second HM is required only when there are more than 22 seated delegates. */
   const hmRequiresTwo = seatedDelegatesCount > 22;
 
@@ -233,7 +273,8 @@ export default async function ChairAwardsPage() {
   const alreadySubmittedToSmt = nominationRows.some((n) => n.status === "pending");
   const hasDraftNominations = nominationRows.some((n) => n.status === "draft");
   const allRequiredSlotsComplete = allRequiredKeys.every((k) => serverCompletedKeys.includes(k));
-  const canSubmitToSmt = hasDraftNominations && allRequiredSlotsComplete && !alreadySubmittedToSmt;
+  const canSubmitToSmt =
+    hasDraftNominations && allRequiredSlotsComplete && !alreadySubmittedToSmt && delegateMatrixComplete;
   const submittedAtIso = nominationRows.find((n) => n.submitted_to_smt_at)?.submitted_to_smt_at ?? null;
   const submittedAtLabel = submittedAtIso
     ? new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(submittedAtIso))
@@ -273,6 +314,13 @@ export default async function ChairAwardsPage() {
             <li>When ready, submit the full batch to SMT.</li>
           </ol>
         </div>
+        {profile?.role === "chair" && delegateMatrixPayload.length > 0 ? (
+          <DelegateMatrixPanel
+            committeeConferenceId={awardConferenceId}
+            delegates={delegateMatrixPayload}
+            scoresByProfileId={scoresByProfileId}
+          />
+        ) : null}
         <ChairSubmitToSmtPanel
           committeeConferenceId={awardConferenceId}
           canSubmit={canSubmitToSmt}
@@ -281,7 +329,32 @@ export default async function ChairAwardsPage() {
           showChairControls={profile?.role === "chair"}
           requiredSlotsDone={allRequiredKeys.filter((k) => serverCompletedKeys.includes(k)).length}
           requiredSlotsTotal={allRequiredKeys.length}
+          delegateMatrixDone={delegateMatrixPayload.filter((d) =>
+            matrixKeys.every((k) => Number(scoresByProfileId[d.userId]?.[k] ?? 0) >= 1)
+          ).length}
+          delegateMatrixTotal={delegateMatrixPayload.length}
         />
+        {rankingDesc.length > 0 ? (
+          <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
+            <h3 className="font-display text-base font-semibold text-brand-navy mb-2">Committee ranking (matrix totals)</h3>
+            <p className="text-xs text-brand-muted mb-3">
+              Highest to lowest rubric sum (six session criteria × 8). Tie-break informally via evidence in nomination
+              slots.
+            </p>
+            <ol className="space-y-1.5 text-sm">
+              {rankingDesc.map((r, i) => (
+                <li
+                  key={r.uid}
+                  className="flex justify-between gap-3 border-b border-brand-navy/5 pb-1.5 last:border-0"
+                >
+                  <span className="text-brand-muted tabular-nums w-6 shrink-0">{i + 1}.</span>
+                  <span className="flex-1 min-w-0 text-brand-navy">{r.label}</span>
+                  <span className="font-mono tabular-nums text-brand-accent font-semibold shrink-0">{r.total}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ) : null}
         <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
         <p className="text-xs text-brand-muted">
           Committee: {activeConf.committee?.trim() || activeConf.name}
