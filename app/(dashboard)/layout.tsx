@@ -13,7 +13,7 @@ import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gat
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { getAppName } from "@/lib/branding";
-import { InterMunEmblem } from "@/components/InterMunEmblem";
+import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import {
   isAdminRole,
   isChairRole,
@@ -138,17 +138,10 @@ export default async function DashboardLayout({
         <div className="orbit-rail-v pointer-events-none absolute bottom-0 left-0 top-0 z-20 opacity-90" aria-hidden />
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
+          aria-label={`${appName} home`}
           className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
-          {showSeamunLogo ? (
-            <img
-              src="/seamun-i-2027-logo.png"
-              alt=""
-              className="h-10 w-10 shrink-0 rounded-2xl object-contain"
-            />
-          ) : (
-            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl" />
-          )}
+          <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span
             className={
               isChairRole(normalizedRole)

@@ -6,7 +6,7 @@ import { isSmtRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { isRoleOnlyDisplayName, stripRedundantLeadingRole } from "@/lib/utils";
 import { getAppName } from "@/lib/branding";
-import { InterMunEmblem } from "@/components/InterMunEmblem";
+import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
 
@@ -59,17 +59,10 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         <div className="orbit-rail-v pointer-events-none absolute bottom-0 left-0 top-0 z-20 opacity-90" aria-hidden />
         <Link
           href="/smt"
+          aria-label={`${appName} home`}
           className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
-          {showSeamunLogo ? (
-            <img
-              src="/seamun-i-2027-logo.png"
-              alt=""
-              className="h-10 w-10 shrink-0 rounded-2xl object-contain"
-            />
-          ) : (
-            <InterMunEmblem alt="" className="h-10 w-10 rounded-2xl" />
-          )}
+          <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span className="hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright">
             {appName}
           </span>

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
-import { InterMunEmblem } from "@/components/InterMunEmblem";
+import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 
@@ -62,15 +62,7 @@ export function DashboardTopBar({
           className="flex shrink-0 items-center gap-2 lg:hidden"
           aria-label={`${appName} home`}
         >
-          {showSeamunLogo ? (
-            <img
-              src="/seamun-i-2027-logo.png"
-              alt=""
-              className="h-9 w-9 rounded-xl object-contain"
-            />
-          ) : (
-            <InterMunEmblem alt="" className="h-9 w-9 rounded-xl" />
-          )}
+          <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="topbar" />
         </Link>
         <div className="min-w-0 flex-1 basis-[min(100%,12rem)] sm:flex-[1_1_40%]">
           <DashboardSearch />
