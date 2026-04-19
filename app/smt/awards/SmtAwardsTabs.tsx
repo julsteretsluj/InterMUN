@@ -4,11 +4,12 @@ import { useState } from "react";
 import { AwardsManagerClient } from "@/app/(dashboard)/chair/awards/AwardsManagerClient";
 import type { AwardAssignment } from "@/types/database";
 import { ChairNominationsPanel, type ChairNominationRow } from "./ChairNominationsPanel";
+import { SmtAwardsRubricPanel } from "./SmtAwardsRubricPanel";
 
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
 
-type TabId = "chair-submissions" | "chair-committee-awards";
+type TabId = "chair-submissions" | "chair-committee-awards" | "official-rubric";
 
 type Props = {
   nominations: ChairNominationRow[];
@@ -51,6 +52,7 @@ export function SmtAwardsTabs({
       <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label="Awards sections">
         {tabBtn("chair-submissions", "Award submissions by chairs", "tab-chair-submissions")}
         {tabBtn("chair-committee-awards", "Chair & committee awards", "tab-chair-committee-awards")}
+        {tabBtn("official-rubric", "Official rubric", "tab-official-rubric")}
       </div>
 
       {tab === "chair-submissions" ? (
@@ -61,7 +63,7 @@ export function SmtAwardsTabs({
             nomineeNameByProfileId={nomineeNameByProfileId}
           />
         </div>
-      ) : (
+      ) : tab === "chair-committee-awards" ? (
         <div role="tabpanel" aria-labelledby="tab-chair-committee-awards" className="space-y-6">
           <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 text-sm text-brand-navy">
             <h2 className="font-display text-lg font-semibold text-brand-navy mb-1">
@@ -75,6 +77,10 @@ export function SmtAwardsTabs({
             </p>
           </section>
           <AwardsManagerClient conferences={conferences} assignments={assignments} profiles={profiles} />
+        </div>
+      ) : (
+        <div role="tabpanel" aria-labelledby="tab-official-rubric">
+          <SmtAwardsRubricPanel />
         </div>
       )}
     </div>

@@ -110,7 +110,7 @@ export const RUBRIC_KEYS_BY_NOMINATION: Record<NominationRubricType, string[]> =
 };
 
 // SEAMUN I 2027–style criteria text (four bands per criterion).
-const DELEGATE_CRITERIA: RubricCriterion[] = [
+export const DELEGATE_CRITERIA: RubricCriterion[] = [
   {
     key: "creativity",
     label: "Creativity",
@@ -173,7 +173,7 @@ const DELEGATE_CRITERIA: RubricCriterion[] = [
   },
 ];
 
-const PAPER_CRITERIA: RubricCriterion[] = [
+export const PAPER_CRITERIA: RubricCriterion[] = [
   {
     key: "research_depth",
     label: "Research Depth",
