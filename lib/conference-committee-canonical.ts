@@ -18,6 +18,51 @@ export type CommitteeAwardScope = {
   siblingConferenceIds: string[];
 };
 
+export type CanonicalCommitteeRow = { id: string; label: string };
+
+/**
+ * Collapses duplicate `conferences` rows that share one committee tab (different topics/names) into a single
+ * canonical `conferences.id` per committee — same bucketing as the allocation matrix and committee awards.
+ */
+export function canonicalCommitteesForEventConferenceRows<
+  T extends { id: string; name: string | null; committee: string | null },
+>(rows: T[], conferenceIdsWithAllocations: Set<string>): {
+  committees: CanonicalCommitteeRow[];
+  conferenceIdToCanonical: Map<string, string>;
+} {
+  const byKey = new Map<string, T[]>();
+  for (const c of rows) {
+    const k = committeeTabKey(c);
+    const arr = byKey.get(k) ?? [];
+    arr.push(c);
+    byKey.set(k, arr);
+  }
+
+  const conferenceIdToCanonical = new Map<string, string>();
+  const committees: CanonicalCommitteeRow[] = [];
+
+  for (const [, group] of byKey) {
+    let primary = group[0]!;
+    let primaryHas = conferenceIdsWithAllocations.has(primary.id);
+    for (const r of group) {
+      const rHas = conferenceIdsWithAllocations.has(r.id);
+      if (rHas && !primaryHas) {
+        primary = r;
+        primaryHas = true;
+      }
+    }
+    const canonicalId = primary.id;
+    const label = primary.committee?.trim() || primary.name?.trim() || primary.id.slice(0, 8);
+    committees.push({ id: canonicalId, label });
+    for (const m of group) {
+      conferenceIdToCanonical.set(m.id, canonicalId);
+    }
+  }
+
+  committees.sort((a, b) => a.label.localeCompare(b.label));
+  return { committees, conferenceIdToCanonical };
+}
+
 /**
  * Resolves the canonical conference row for committee-scoped awards: duplicate `conferences` rows
  * (same `committee`, different `name`/topic) share one awards bucket and one roster for nominees.

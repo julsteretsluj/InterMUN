@@ -7,11 +7,13 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import {
   evaluateSmtParticipationReadiness,
   aggregateDelegateChairFeedbackBySeat,
+  mergeChairReportScoresToCanonical,
   rubricKeysForParticipationScope,
   rubricNumericTotalForKeys,
   type ChairSeat,
 } from "@/lib/award-participation-scoring";
 import { isSmtRole } from "@/lib/roles";
+import { canonicalCommitteesForEventConferenceRows } from "@/lib/conference-committee-canonical";
 import type { NominationRubricType } from "@/lib/seamuns-award-scoring";
 import {
   filterNominationsForSmtQueue,
@@ -108,12 +110,29 @@ export default async function SmtAwardsPage() {
 
   if (eventId) {
     const rawConfs = (conferences ?? []).filter((c) => c.event_id === eventId && !isConferenceEventPlaceholderRow(c));
-    smtCommittees = rawConfs.map((c) => ({
-      id: c.id,
-      label: c.committee?.trim() || c.name?.trim() || c.id.slice(0, 8),
-    }));
-    const confIds = smtCommittees.map((c) => c.id);
-    const labelByConf = Object.fromEntries(smtCommittees.map((c) => [c.id, c.label]));
+    const allConfIds = rawConfs.map((c) => c.id);
+    const { data: allocForMap } = await supabase.from("allocations").select("conference_id").in("conference_id", allConfIds);
+    const conferenceIdsWithAllocations = new Set(
+      (allocForMap ?? []).map((a) => a.conference_id).filter(Boolean) as string[]
+    );
+    const { committees: canonicalCommittees, conferenceIdToCanonical } = canonicalCommitteesForEventConferenceRows(
+      rawConfs,
+      conferenceIdsWithAllocations
+    );
+    smtCommittees = canonicalCommittees;
+    const confIds = allConfIds;
+    const canonicalLabelByCommitteeId = Object.fromEntries(canonicalCommittees.map((x) => [x.id, x.label]));
+    const labelByConf = Object.fromEntries(
+      rawConfs.map((c) => {
+        const canonId = conferenceIdToCanonical.get(c.id) ?? c.id;
+        const label =
+          canonicalLabelByCommitteeId[canonId] ??
+          c.committee?.trim() ??
+          c.name?.trim() ??
+          c.id.slice(0, 8);
+        return [c.id, label];
+      })
+    );
 
     if (confIds.length > 0) {
       const { data: allocData } = await supabase
@@ -144,7 +163,10 @@ export default async function SmtAwardsPage() {
         .in("committee_conference_id", confIds)
         .in("scope", ["chair_by_smt", "chair_report_by_smt", "chair_by_delegate"]);
 
-      smtParticipationRows = (smtScores ?? []) as AwardParticipationScore[];
+      smtParticipationRows = mergeChairReportScoresToCanonical(
+        (smtScores ?? []) as AwardParticipationScore[],
+        conferenceIdToCanonical
+      );
 
       const delegateFeedbackKeys = rubricKeysForParticipationScope("chair_by_delegate");
       delegateChairFeedback = aggregateDelegateChairFeedbackBySeat(smtChairSeats, smtParticipationRows, delegateFeedbackKeys);

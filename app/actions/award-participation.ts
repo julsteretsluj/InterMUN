@@ -6,6 +6,7 @@ import {
   rubricKeysForParticipationScope,
   isRubricScoresComplete,
 } from "@/lib/award-participation-scoring";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import { revalidatePath } from "next/cache";
 
 function parseScoresFromForm(formData: FormData, keys: string[]): Record<string, number> | null {
@@ -36,8 +37,12 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
     return { error: "Invalid scope." };
   }
 
-  const committeeConferenceId = String(formData.get("committee_conference_id") ?? "").trim();
+  let committeeConferenceId = String(formData.get("committee_conference_id") ?? "").trim();
   if (!committeeConferenceId) return { error: "Missing committee." };
+
+  if (scope === "chair_report_by_smt") {
+    committeeConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, committeeConferenceId);
+  }
 
   const subjectProfileIdRaw = String(formData.get("subject_profile_id") ?? "").trim();
   const subject_profile_id =

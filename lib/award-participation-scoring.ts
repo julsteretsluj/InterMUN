@@ -76,6 +76,33 @@ export type DelegateChairFeedbackAggregate = {
   avgTotal: number;
 };
 
+/** Chair report scores attach to one conference row per committee; topic-level ids merge onto canonical (latest wins). */
+export function mergeChairReportScoresToCanonical<
+  T extends {
+    scope: string;
+    committee_conference_id: string;
+    rubric_scores: Record<string, number> | null;
+    updated_at: string;
+  },
+>(rows: T[], conferenceIdToCanonical: Map<string, string>): T[] {
+  const rest = rows.filter((r) => r.scope !== "chair_report_by_smt");
+  const reportRows = rows.filter((r) => r.scope === "chair_report_by_smt");
+  const byCanon = new Map<string, T>();
+  for (const r of reportRows) {
+    const canon = conferenceIdToCanonical.get(r.committee_conference_id) ?? r.committee_conference_id;
+    const merged = { ...r, committee_conference_id: canon };
+    const prev = byCanon.get(canon);
+    if (!prev) {
+      byCanon.set(canon, merged);
+      continue;
+    }
+    const prevT = new Date(prev.updated_at).getTime();
+    const nextT = new Date(merged.updated_at).getTime();
+    if (nextT >= prevT) byCanon.set(canon, merged);
+  }
+  return [...rest, ...byCanon.values()];
+}
+
 /** Aggregates per-chair delegate feedback for SMT view (individual responses stay delegate-only in RLS). */
 export function aggregateDelegateChairFeedbackBySeat(
   seats: ChairSeat[],
