@@ -5,6 +5,7 @@ import { requireActiveConferenceId } from "@/lib/active-conference";
 import type { AwardParticipationScore } from "@/types/database";
 import type { ChairSeat } from "@/lib/award-participation-scoring";
 import { DelegateChairFeedbackPanel } from "@/components/delegate/DelegateChairFeedbackPanel";
+import { uniqueSuggestionStrings } from "@/lib/delegate-chair-feedback-suggestions";
 
 export const dynamic = "force-dynamic";
 
@@ -59,16 +60,56 @@ export default async function DelegateChairFeedbackPage() {
     });
   }
 
-  const { data: myScores } = await supabase
-    .from("award_participation_scores")
-    .select("*")
-    .eq("committee_conference_id", conferenceId)
-    .eq("scope", "chair_by_delegate")
-    .eq("created_by", user.id);
+  const [{ data: myScores }, { data: priorEvidenceRows }, { data: delegatePoints }, { data: myMotions }] =
+    await Promise.all([
+      supabase
+        .from("award_participation_scores")
+        .select("*")
+        .eq("committee_conference_id", conferenceId)
+        .eq("scope", "chair_by_delegate")
+        .eq("created_by", user.id),
+      supabase
+        .from("award_participation_scores")
+        .select("evidence_statement")
+        .eq("scope", "chair_by_delegate")
+        .eq("created_by", user.id)
+        .not("evidence_statement", "is", null)
+        .order("updated_at", { ascending: false })
+        .limit(25),
+      supabase
+        .from("chair_delegate_points")
+        .select("point_text")
+        .eq("allocation_id", alloc.id)
+        .order("created_at", { ascending: false })
+        .limit(15),
+      supabase
+        .from("vote_items")
+        .select("title, description")
+        .eq("motioner_allocation_id", alloc.id)
+        .order("created_at", { ascending: false })
+        .limit(12),
+    ]);
+
+  const motionSnippets = (myMotions ?? [])
+    .map((m) => [m.title, m.description].filter(Boolean).join(" — ").trim())
+    .filter(Boolean);
+
+  const evidenceSuggestions = uniqueSuggestionStrings(
+    [
+      ...(priorEvidenceRows ?? []).map((r) => r.evidence_statement).filter(Boolean) as string[],
+      ...(delegatePoints ?? []).map((p) => p.point_text).filter(Boolean),
+      ...motionSnippets,
+    ],
+    12
+  );
 
   return (
     <MunPageShell title="Chair feedback">
-      <DelegateChairFeedbackPanel chairSeats={seats} myScores={(myScores ?? []) as AwardParticipationScore[]} />
+      <DelegateChairFeedbackPanel
+        chairSeats={seats}
+        myScores={(myScores ?? []) as AwardParticipationScore[]}
+        evidenceSuggestions={evidenceSuggestions}
+      />
     </MunPageShell>
   );
 }

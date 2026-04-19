@@ -9,8 +9,9 @@ import { createClient } from "@/lib/supabase/client";
 import { getAppName } from "@/lib/branding";
 import { INTERMUN_ENTRY_ROLE_KEY, type InterMunEntryRole } from "@/lib/entry-role";
 import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
+import { applyConferenceCodeForAuthWizard } from "@/app/actions/eventGate";
 
-type Step = "welcome" | "role" | "account";
+type Step = "welcome" | "conference" | "role" | "account";
 
 /** Ring segment colors (color-wheel order: top → clockwise matches pointer angle). */
 const ROLE_RING_HEX = ["#1DB954", "#3366FF", "#FF00E5"] as const;
@@ -60,6 +61,8 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [conferenceError, setConferenceError] = useState<string | null>(null);
+  const [conferencePending, setConferencePending] = useState(false);
 
   const selectedRole = ROLES[roleIndex] ?? ROLES[0]!;
   const RoleIcon = selectedRole.Icon;
@@ -107,6 +110,20 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
   const cycle = (delta: number) => {
     snapToIndex(roleIndex + delta);
   };
+
+  async function handleConferenceSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setConferenceError(null);
+    setConferencePending(true);
+    const fd = new FormData(e.currentTarget);
+    const res = await applyConferenceCodeForAuthWizard(fd);
+    setConferencePending(false);
+    if ("error" in res) {
+      setConferenceError(res.error);
+      return;
+    }
+    setStep("role");
+  }
 
   async function handleLoginSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -193,16 +210,78 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
           </h1>
           <p className="text-sm text-brand-muted max-w-sm mx-auto">
             {mode === "signup"
-              ? "Conference materials, committee room, and session floor — create an account after choosing how you participate."
-              : "Conference materials, committee room, and session floor — sign in after choosing how you participate."}
+              ? "Enter your conference code first, choose how you participate, then create your account."
+              : "Enter your conference code first, choose how you participate, then sign in."}
           </p>
           <button
             type="button"
-            onClick={() => setStep("role")}
+            onClick={() => setStep("conference")}
             className="mun-btn-primary w-full max-w-xs mx-auto rounded-xl py-3.5 text-base font-semibold"
           >
             Continue
           </button>
+        </div>
+      ) : null}
+
+      {step === "conference" ? (
+        <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 w-full max-w-md mx-auto">
+          <div
+            className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-gradient-to-r from-logo-magenta via-brand-accent to-logo-cyan"
+            aria-hidden
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setConferenceError(null);
+              setStep("welcome");
+            }}
+            className="mb-4 text-sm text-brand-muted hover:text-brand-navy inline-flex items-center gap-1"
+          >
+            <ChevronLeft className="size-4" strokeWidth={2} />
+            Back
+          </button>
+          <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-2">Join your conference</h2>
+          <p className="text-sm text-brand-muted text-center mb-6">
+            Enter the <strong className="text-brand-navy font-semibold">conference code</strong> from your organisers.
+            Next you&apos;ll choose your role, then {mode === "signup" ? "create an account" : "sign in"}.
+          </p>
+          <form onSubmit={handleConferenceSubmit} className="space-y-5">
+            <div>
+              <label
+                htmlFor="wizard-event-code"
+                className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
+              >
+                Conference code
+              </label>
+              <input
+                id="wizard-event-code"
+                name="event_code"
+                type="text"
+                autoComplete="off"
+                autoCapitalize="characters"
+                required
+                minLength={4}
+                disabled={conferencePending}
+                className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/[0.06] dark:bg-black/25 text-brand-navy font-mono tracking-wide text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                placeholder="e.g. SEAMUNI2027"
+              />
+              <p className="text-xs text-brand-muted mt-1.5">
+                Whole-conference code (all committees). Spaces ignored; matching is case-insensitive.
+              </p>
+            </div>
+            {conferenceError ? (
+              <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2 dark:bg-red-950/40 dark:border-red-900/50 dark:text-red-100">
+                {conferenceError}
+              </p>
+            ) : null}
+            <button
+              type="submit"
+              disabled={conferencePending}
+              className="mun-btn-primary w-full rounded-lg py-3 text-base font-semibold disabled:opacity-50"
+            >
+              {conferencePending ? "Checking…" : "Continue"}
+            </button>
+          </form>
         </div>
       ) : null}
 
@@ -212,7 +291,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             <div className="space-y-4">
               <button
                 type="button"
-                onClick={() => setStep("welcome")}
+                onClick={() => setStep("conference")}
                 className="text-sm text-brand-muted hover:text-brand-navy inline-flex items-center gap-1 mb-2"
               >
                 <ChevronLeft className="size-4" strokeWidth={2} />

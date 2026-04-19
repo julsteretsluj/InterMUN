@@ -1,6 +1,7 @@
 import { rubricKeysForAwardAssignmentCategory } from "@/lib/award-category-rubric";
 import { CHAIR_PERFORMANCE_RUBRIC } from "@/lib/seamun-awards-rubric-guide";
 import { RUBRIC_KEYS_BY_NOMINATION } from "@/lib/seamuns-award-scoring";
+import { DELEGATE_CHAIR_EVIDENCE_MIN_LEN } from "@/lib/delegate-chair-feedback-suggestions";
 
 export const PARTICIPATION_SCOPES = [
   "delegate_by_chair",
@@ -111,16 +112,22 @@ export function aggregateDelegateChairFeedbackBySeat(
     committee_conference_id: string;
     subject_profile_id: string | null;
     rubric_scores: Record<string, number> | null;
+    evidence_statement?: string | null;
   }[],
   keys: string[]
 ): DelegateChairFeedbackAggregate[] {
   const delegateRows = rows.filter((r) => r.scope === "chair_by_delegate");
   return seats.map((seat) => {
-    const matching = delegateRows.filter(
-      (r) =>
-        r.committee_conference_id === seat.committee_conference_id &&
-        r.subject_profile_id === seat.chair_profile_id
-    );
+    const matching = delegateRows.filter((r) => {
+      if (
+        r.committee_conference_id !== seat.committee_conference_id ||
+        r.subject_profile_id !== seat.chair_profile_id
+      ) {
+        return false;
+      }
+      const ev = r.evidence_statement?.trim() ?? "";
+      return ev.length >= DELEGATE_CHAIR_EVIDENCE_MIN_LEN;
+    });
     if (matching.length === 0) {
       return {
         committee_conference_id: seat.committee_conference_id,

@@ -142,8 +142,8 @@ export function SmtParticipationPanel({
           Delegate feedback on chairs
         </h3>
         <p className="text-xs text-brand-muted">
-          Mean rubric total per chair where at least one delegate has submitted. Individual responses are not visible to
-          chairs or dais—SMT oversight only.
+          Mean rubric total per chair where at least one delegate has submitted a complete rubric and evidence statement.
+          Individual responses are not visible to chairs or dais—SMT oversight only.
         </p>
         {chairSeats.map((seat) => {
           const agg = delegateChairFeedback.find(

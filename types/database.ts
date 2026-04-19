@@ -62,6 +62,8 @@ export interface AwardParticipationScore {
   committee_conference_id: string;
   subject_profile_id: string | null;
   rubric_scores: Record<string, number> | null;
+  /** Floor evidence / confirmation text (required for delegate chair feedback in-app). */
+  evidence_statement?: string | null;
   created_by: string | null;
   created_at: string;
   updated_at: string;

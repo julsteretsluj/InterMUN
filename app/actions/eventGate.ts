@@ -9,6 +9,31 @@ import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cook
 import { normalizeEventCode } from "@/lib/join-codes";
 import { findEventIdByEventCode } from "@/lib/gate-code-lookup";
 
+export type AuthWizardConferenceResult = { ok: true } | { error: string };
+
+/** First step of login/signup wizard: set active event cookie from code (works before sign-in via RPC). */
+export async function applyConferenceCodeForAuthWizard(formData: FormData): Promise<AuthWizardConferenceResult> {
+  const raw = String(formData.get("event_code") ?? "");
+  const code = normalizeEventCode(raw);
+  if (code.length < 4) {
+    return { error: "Enter the conference code from your organisers (at least 4 characters)." };
+  }
+
+  const supabase = await createClient();
+  const { data: eventId, error } = await supabase.rpc("resolve_conference_event_id_by_code", {
+    p_code: raw,
+  });
+  if (error || !eventId || typeof eventId !== "string") {
+    return { error: "No conference matches that code. Check spelling with your organisers." };
+  }
+
+  await setActiveEventId(eventId);
+  await clearActiveConference();
+  await clearVerifiedConference();
+  await clearAllocationCodeVerification();
+  return { ok: true };
+}
+
 export async function joinEventByCode(
   _prev: { error?: string } | null,
   formData: FormData

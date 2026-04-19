@@ -7,6 +7,7 @@ import {
   isRubricScoresComplete,
 } from "@/lib/award-participation-scoring";
 import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import { DELEGATE_CHAIR_EVIDENCE_MIN_LEN } from "@/lib/delegate-chair-feedback-suggestions";
 import { revalidatePath } from "next/cache";
 
 function parseScoresFromForm(formData: FormData, keys: string[]): Record<string, number> | null {
@@ -60,6 +61,16 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
     return { error: "Every criterion must be scored 1–8." };
   }
 
+  let evidence_statement: string | null = null;
+  if (scope === "chair_by_delegate") {
+    evidence_statement = String(formData.get("evidence_statement") ?? "").trim();
+    if (evidence_statement.length < DELEGATE_CHAIR_EVIDENCE_MIN_LEN) {
+      return {
+        error: `Add a brief evidence statement (${DELEGATE_CHAIR_EVIDENCE_MIN_LEN}+ characters): concrete observations from committee session(s).`,
+      };
+    }
+  }
+
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   const role = profile?.role?.toString().trim().toLowerCase();
 
@@ -77,6 +88,7 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
     committee_conference_id: committeeConferenceId,
     subject_profile_id,
     rubric_scores,
+    evidence_statement,
     created_by: user.id,
     updated_at: now,
   };
@@ -113,10 +125,11 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
   }
 
   if (existingId) {
-    const { error } = await supabase
-      .from("award_participation_scores")
-      .update({ rubric_scores, updated_at: now })
-      .eq("id", existingId);
+    const updatePayload =
+      scope === "chair_by_delegate"
+        ? { rubric_scores, evidence_statement, updated_at: now }
+        : { rubric_scores, updated_at: now };
+    const { error } = await supabase.from("award_participation_scores").update(updatePayload).eq("id", existingId);
     if (error) return { error: error.message };
   } else {
     const { error } = await supabase.from("award_participation_scores").insert(insertPayload);
