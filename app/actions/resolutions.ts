@@ -42,6 +42,14 @@ export async function createResolutionAction(input: {
     return { ok: false, error: "Only staff can create resolutions." };
   }
   if (!isUuid(input.conferenceId)) return { ok: false, error: "Invalid conference id." };
+  const { count, error: countErr } = await auth.supabase
+    .from("resolutions")
+    .select("id", { count: "exact", head: true })
+    .eq("conference_id", input.conferenceId);
+  if (countErr) return { ok: false, error: countErr.message };
+  if ((count ?? 0) >= 3) {
+    return { ok: false, error: "Maximum of 3 draft resolutions per committee." };
+  }
 
   const mainSubmitters = Array.from(
     new Set([...input.mainSubmitterIds.map((s) => s.trim()).filter(Boolean), auth.user.id])

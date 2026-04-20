@@ -22,13 +22,48 @@ export default async function ResolutionsPage() {
 
   const conferenceId = await requireActiveConferenceId();
 
-  const { data: resolutions } = await supabase
+  const { data: initialResolutions } = await supabase
     .from("resolutions")
     .select("*")
     .eq("conference_id", conferenceId)
     .order("created_at", { ascending: false });
+  let resolutions = initialResolutions ?? [];
 
-  const resList = resolutions ?? [];
+  // Committees should start with two draft resolutions; chairs/staff can add a third.
+  if (canCreate && resolutions.length < 2) {
+    const missing = 2 - resolutions.length;
+    const createdIds: string[] = [];
+    for (let i = 0; i < missing; i += 1) {
+      const { data: created } = await supabase
+        .from("resolutions")
+        .insert({
+          conference_id: conferenceId,
+          google_docs_url: null,
+          main_submitters: [user.id],
+          co_submitters: [],
+          signatories: [],
+        })
+        .select("id")
+        .single();
+      if (created?.id) createdIds.push(created.id as string);
+    }
+    if (createdIds.length > 0) {
+      await supabase.from("blocs").insert(
+        createdIds.flatMap((resolutionId) => [
+          { resolution_id: resolutionId, name: "A", stance: "for" },
+          { resolution_id: resolutionId, name: "B", stance: "against" },
+        ])
+      );
+      const { data: afterBootstrap } = await supabase
+        .from("resolutions")
+        .select("*")
+        .eq("conference_id", conferenceId)
+        .order("created_at", { ascending: false });
+      resolutions = afterBootstrap ?? resolutions;
+    }
+  }
+
+  const resList = resolutions;
   const resIds = resList.map((r) => r.id);
   const { data: blocs } =
     resIds.length > 0
@@ -64,7 +99,7 @@ export default async function ResolutionsPage() {
   return (
     <MunPageShell title="Resolutions">
       <ResolutionsView
-        resolutions={resolutions || []}
+        resolutions={resolutions}
         blocs={blocs || []}
         clauses={
           (clauses ?? []) as Array<{

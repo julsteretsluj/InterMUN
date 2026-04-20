@@ -65,6 +65,8 @@ export function ResolutionsView({
   conferenceId: string;
   canCreate: boolean;
 }) {
+  const MAX_RESOLUTIONS_PER_COMMITTEE = 3;
+  const canAddResolution = canCreate && resolutions.length < MAX_RESOLUTIONS_PER_COMMITTEE;
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
     google_docs_url: "",
@@ -80,7 +82,7 @@ export function ResolutionsView({
   const [actionError, setActionError] = useState<string | null>(null);
 
   async function createResolution() {
-    if (!canCreate) return;
+    if (!canAddResolution) return;
     setActionError(null);
     const mainSubs = form.main_submitters
       .split(",")
@@ -193,7 +195,7 @@ export function ResolutionsView({
 
   return (
     <div className="space-y-4">
-      {canCreate ? (
+      {canAddResolution ? (
         <button
           onClick={() => setShowForm(true)}
           className="flex items-center gap-2 px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
@@ -201,6 +203,11 @@ export function ResolutionsView({
           <Plus className="w-4 h-4" />
           New Resolution
         </button>
+      ) : null}
+      {canCreate && !canAddResolution ? (
+        <p className="text-sm text-brand-muted">
+          This committee already has {MAX_RESOLUTIONS_PER_COMMITTEE} draft resolutions.
+        </p>
       ) : null}
       {showForm && (
         <div className="p-4 border rounded-lg border-white/15 space-y-3">
