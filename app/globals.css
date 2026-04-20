@@ -11,7 +11,7 @@
  * Legacy `brand-*` / `discord-*` names remain as aliases for existing components.
  */
 html {
-  /* Base rem scale (Theme: Text size overrides with .text-size-small / .text-size-large) */
+  /* Base rem scale (Theme: `.text-scale-0` … `.text-scale-6` on `<html>`) */
   font-size: 100%;
 
   /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
@@ -73,10 +73,33 @@ html {
   color-scheme: light;
 }
 
+/* Seven steps: two between old small↔medium and medium↔large */
+html.text-scale-0 {
+  font-size: 93.75%;
+}
+html.text-scale-1 {
+  font-size: 95.833%;
+}
+html.text-scale-2 {
+  font-size: 97.917%;
+}
+html.text-scale-3 {
+  font-size: 100%;
+}
+html.text-scale-4 {
+  font-size: 104.167%;
+}
+html.text-scale-5 {
+  font-size: 108.333%;
+}
+html.text-scale-6 {
+  font-size: 112.5%;
+}
+
+/* Legacy (before numeric steps) */
 html.text-size-small {
   font-size: 93.75%;
 }
-
 html.text-size-large {
   font-size: 112.5%;
 }

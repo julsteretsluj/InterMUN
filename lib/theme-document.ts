@@ -1,14 +1,15 @@
 import {
-  DEFAULT_TEXT_SIZE,
+  DEFAULT_TEXT_SIZE_STEP,
   DYSLEXIC_FONT_STORAGE_KEY,
   DEFAULT_THEME_HUE,
   LEGACY_THEME_HUE_CLEANUP,
-  TEXT_SIZE_OPTIONS,
+  TEXT_SIZE_STEP_MAX,
+  TEXT_SIZE_STEP_MIN,
   TEXT_SIZE_STORAGE_KEY,
   THEME_HUES,
   THEME_HUE_STORAGE_KEY,
   THEME_STORAGE_KEY,
-  type TextSizePreference,
+  type TextSizeStep,
   type ThemeHue,
   type ThemePreference,
 } from "@/lib/theme-storage";
@@ -32,14 +33,35 @@ export function readDyslexicFontFromStorage(): boolean {
   return localStorage.getItem(DYSLEXIC_FONT_STORAGE_KEY) === "1";
 }
 
-export function parseTextSizeFromStorage(raw: string | null): TextSizePreference {
-  if (raw && (TEXT_SIZE_OPTIONS as readonly string[]).includes(raw)) return raw as TextSizePreference;
-  return DEFAULT_TEXT_SIZE;
+export function clampTextSizeStep(n: number): TextSizeStep {
+  const r = Math.round(n);
+  const c = Math.max(TEXT_SIZE_STEP_MIN, Math.min(TEXT_SIZE_STEP_MAX, r));
+  return c as TextSizeStep;
 }
 
-export function readTextSizeFromStorage(): TextSizePreference {
-  if (typeof window === "undefined") return DEFAULT_TEXT_SIZE;
+/** Migrate legacy `"small"` | `"medium"` | `"large"` and numeric `"0"`–`"6"`. */
+export function parseTextSizeFromStorage(raw: string | null): TextSizeStep {
+  if (raw === "small") return 0;
+  if (raw === "medium") return 3;
+  if (raw === "large") return 6;
+  const n = parseInt(raw ?? "", 10);
+  if (!Number.isNaN(n)) return clampTextSizeStep(n);
+  return DEFAULT_TEXT_SIZE_STEP;
+}
+
+export function readTextSizeFromStorage(): TextSizeStep {
+  if (typeof window === "undefined") return DEFAULT_TEXT_SIZE_STEP;
   return parseTextSizeFromStorage(localStorage.getItem(TEXT_SIZE_STORAGE_KEY));
+}
+
+const LEGACY_TEXT_SIZE_CLASSES = ["text-size-small", "text-size-large"] as const;
+
+function textScaleClasses(): string[] {
+  const out: string[] = [];
+  for (let i = TEXT_SIZE_STEP_MIN; i <= TEXT_SIZE_STEP_MAX; i++) {
+    out.push(`text-scale-${i}`);
+  }
+  return out;
 }
 
 export function applyThemeToDocument(mode: ThemePreference, hue: ThemeHue) {
@@ -63,12 +85,16 @@ export function applyDyslexicFontToDocument(enabled: boolean) {
   else root.classList.remove("dyslexic-font");
 }
 
-export function applyTextSizeToDocument(size: TextSizePreference) {
+export function applyTextSizeToDocument(step: TextSizeStep) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
-  root.classList.remove("text-size-small", "text-size-large");
-  if (size === "small") root.classList.add("text-size-small");
-  else if (size === "large") root.classList.add("text-size-large");
+  for (const c of textScaleClasses()) {
+    root.classList.remove(c);
+  }
+  for (const c of LEGACY_TEXT_SIZE_CLASSES) {
+    root.classList.remove(c);
+  }
+  root.classList.add(`text-scale-${step}`);
 }
 
 export function persistAndApplyTheme(mode: ThemePreference, hue: ThemeHue) {
@@ -82,7 +108,8 @@ export function persistAndApplyDyslexicFont(enabled: boolean) {
   applyDyslexicFontToDocument(enabled);
 }
 
-export function persistAndApplyTextSize(size: TextSizePreference) {
-  localStorage.setItem(TEXT_SIZE_STORAGE_KEY, size);
-  applyTextSizeToDocument(size);
+export function persistAndApplyTextSize(step: number) {
+  const s = clampTextSizeStep(step);
+  localStorage.setItem(TEXT_SIZE_STORAGE_KEY, String(s));
+  applyTextSizeToDocument(s);
 }
