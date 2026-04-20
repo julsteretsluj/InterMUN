@@ -180,10 +180,10 @@ html.dark {
   --color-discord-divider: var(--discord-divider);
 }
 
-/* Self-hosted OpenDyslexic (see layout.tsx @fontsource imports); OFL licensed */
+/* Self-hosted Atkinson Hyperlegible (see layout.tsx @fontsource); OFL; straighter, more compact than OpenDyslexic */
 html.dyslexic-font {
-  --font-ui: "OpenDyslexic", "Verdana", "Segoe UI", sans-serif;
-  --font-document: "OpenDyslexic", "Verdana", "Georgia", serif;
+  --font-ui: "Atkinson Hyperlegible", "Verdana", "Segoe UI", sans-serif;
+  --font-document: "Atkinson Hyperlegible", "Verdana", "Georgia", serif;
 }
 
 html.dyslexic-font .font-serif,
@@ -192,8 +192,8 @@ html.dyslexic-font .font-mono {
 }
 
 html.dyslexic-font body {
-  letter-spacing: 0.03em;
-  word-spacing: 0.06em;
+  letter-spacing: 0.01em;
+  word-spacing: 0.04em;
 }
 
 /* —— PAGE: solid fills (accent only on components, not full-page gradients) —— */

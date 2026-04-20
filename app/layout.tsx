@@ -10,8 +10,8 @@ import {
   THEME_HUES,
   THEME_STORAGE_KEY,
 } from "@/lib/theme-storage";
-import "@fontsource/opendyslexic/latin-400.css";
-import "@fontsource/opendyslexic/latin-700.css";
+import "@fontsource/atkinson-hyperlegible/latin-400.css";
+import "@fontsource/atkinson-hyperlegible/latin-700.css";
 import "./globals.css";
 
 const sans = Inter({
