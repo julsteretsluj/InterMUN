@@ -194,7 +194,7 @@ export default async function DashboardLayout({
           showSeamunLogo={showSeamunLogo}
           appName={appName}
           brandHomeHref={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
-          showDelegateHubLink={isChairRole(normalizedRole)}
+          showDelegateHubLink={false}
           notifications={
             <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
           }
