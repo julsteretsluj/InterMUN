@@ -11,6 +11,9 @@
  * Legacy `brand-*` / `discord-*` names remain as aliases for existing components.
  */
 html {
+  /* Base rem scale (Theme: Text size overrides with .text-size-small / .text-size-large) */
+  font-size: 100%;
+
   /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
   --logo-cyan: #00ccff;
   --logo-blue: #3366ff;
@@ -68,6 +71,14 @@ html {
   --semantic-info-bg: color-mix(in srgb, #1d4ed8 12%, var(--color-bg-page));
 
   color-scheme: light;
+}
+
+html.text-size-small {
+  font-size: 93.75%;
+}
+
+html.text-size-large {
+  font-size: 112.5%;
 }
 
 html.dark {

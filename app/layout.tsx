@@ -6,6 +6,7 @@ import {
   DYSLEXIC_FONT_STORAGE_KEY,
   DEFAULT_THEME_HUE,
   LEGACY_THEME_HUE_CLEANUP,
+  TEXT_SIZE_STORAGE_KEY,
   THEME_HUE_STORAGE_KEY,
   THEME_HUES,
   THEME_STORAGE_KEY,
@@ -41,7 +42,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const themeInit = `(function(){try{var mk=${JSON.stringify(THEME_STORAGE_KEY)};var hk=${JSON.stringify(THEME_HUE_STORAGE_KEY)};var dk=${JSON.stringify(DYSLEXIC_FONT_STORAGE_KEY)};var hues=${JSON.stringify([...THEME_HUES])};var leg=${JSON.stringify([...LEGACY_THEME_HUE_CLEANUP])};var def=${JSON.stringify(DEFAULT_THEME_HUE)};var r=document.documentElement;var mode=localStorage.getItem(mk);var raw=localStorage.getItem(hk);if(mode==="dark")r.classList.add("dark");else r.classList.remove("dark");var h=raw&&hues.indexOf(raw)>=0?raw:def;for(var i=0;i<hues.length;i++)r.classList.remove("theme-"+hues[i]);for(var j=0;j<leg.length;j++)r.classList.remove("theme-"+leg[j]);r.classList.add("theme-"+h);if(localStorage.getItem(dk)==="1")r.classList.add("dyslexic-font");else r.classList.remove("dyslexic-font");}catch(e){}})();`;
+  const themeInit = `(function(){try{var mk=${JSON.stringify(THEME_STORAGE_KEY)};var hk=${JSON.stringify(THEME_HUE_STORAGE_KEY)};var dk=${JSON.stringify(DYSLEXIC_FONT_STORAGE_KEY)};var tsk=${JSON.stringify(TEXT_SIZE_STORAGE_KEY)};var hues=${JSON.stringify([...THEME_HUES])};var leg=${JSON.stringify([...LEGACY_THEME_HUE_CLEANUP])};var def=${JSON.stringify(DEFAULT_THEME_HUE)};var r=document.documentElement;var mode=localStorage.getItem(mk);var raw=localStorage.getItem(hk);if(mode==="dark")r.classList.add("dark");else r.classList.remove("dark");var h=raw&&hues.indexOf(raw)>=0?raw:def;for(var i=0;i<hues.length;i++)r.classList.remove("theme-"+hues[i]);for(var j=0;j<leg.length;j++)r.classList.remove("theme-"+leg[j]);r.classList.add("theme-"+h);if(localStorage.getItem(dk)==="1")r.classList.add("dyslexic-font");else r.classList.remove("dyslexic-font");r.classList.remove("text-size-small","text-size-large");var ts=localStorage.getItem(tsk);if(ts==="small")r.classList.add("text-size-small");else if(ts==="large")r.classList.add("text-size-large");}catch(e){}})();`;
 
   return (
     <html
