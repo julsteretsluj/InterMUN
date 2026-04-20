@@ -126,7 +126,7 @@ function AspireSidebarLink({
       className={cn(
         "flex items-center justify-center gap-0 group-hover:justify-start group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
         isActive
-          ? "bg-gradient-to-r from-logo-magenta/18 via-brand-accent/14 to-logo-cyan/18 font-semibold text-brand-navy ring-1 ring-logo-orange/25 dark:from-logo-magenta/22 dark:via-brand-accent/18 dark:to-logo-cyan/22 dark:text-brand-accent-bright dark:ring-white/10"
+          ? "bg-brand-accent/12 font-semibold text-brand-navy ring-1 ring-brand-accent/28 dark:bg-brand-accent/18 dark:text-brand-accent-bright dark:ring-white/10"
           : "font-medium text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
       )}
     >
@@ -160,7 +160,7 @@ function DockLink({
         className={cn(
           "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
           isActive
-            ? "scale-[1.02] border-logo-orange/40 bg-gradient-to-br from-logo-magenta/20 via-brand-accent/14 to-logo-cyan/20 text-brand-navy shadow-lg shadow-logo-magenta/15 dark:border-logo-cyan/45 dark:from-logo-magenta/28 dark:via-brand-accent/18 dark:to-logo-cyan/24 dark:text-brand-accent-bright dark:shadow-none"
+            ? "scale-[1.02] border-brand-accent/35 bg-brand-accent/14 text-brand-navy shadow-md shadow-brand-accent/15 dark:border-brand-accent/45 dark:bg-brand-accent/18 dark:text-brand-accent-bright dark:shadow-none"
             : "border-slate-200/90 bg-white text-slate-500 group-hover:border-brand-accent/30 group-hover:bg-slate-50 group-hover:text-brand-diplomatic dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-brand-accent/35 dark:group-hover:bg-zinc-800"
         )}
       >
@@ -234,7 +234,7 @@ export function TabNav({
                   className={cn(
                     "inline-flex items-center justify-center gap-0 rounded-lg px-2 py-1.5 text-[0.7rem] font-medium transition group-hover:gap-1",
                     selected
-                      ? "bg-gradient-to-r from-logo-magenta/16 via-brand-accent/12 to-logo-cyan/16 text-brand-navy dark:from-logo-magenta/22 dark:via-brand-accent/16 dark:to-logo-cyan/20 dark:text-brand-accent-bright"
+                      ? "bg-brand-accent/12 text-brand-navy dark:bg-brand-accent/18 dark:text-brand-accent-bright"
                       : "text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
                   )}
                 >
@@ -277,7 +277,7 @@ export function TabNav({
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[0.7rem] font-medium transition shrink-0",
                   selected
-                    ? "border-logo-orange/35 bg-gradient-to-r from-logo-magenta/14 via-brand-accent/12 to-logo-cyan/14 text-brand-navy dark:border-logo-cyan/40 dark:from-logo-magenta/20 dark:via-brand-accent/14 dark:to-logo-cyan/18 dark:text-brand-accent-bright"
+                    ? "border-brand-accent/35 bg-brand-accent/12 text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/16 dark:text-brand-accent-bright"
                     : "border-slate-200/90 bg-white text-slate-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400"
                 )}
               >

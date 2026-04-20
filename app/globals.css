@@ -195,22 +195,15 @@ html.dyslexic-font body {
   word-spacing: 0.04em;
 }
 
-/* —— PAGE: one calm wash + accent veil (readable, not rainbow soup) —— */
+/* —— PAGE: solid fills (accent only on components, not full-page gradients) —— */
 body {
   min-height: 100%;
   background-color: var(--background);
   color: var(--foreground);
-  background-attachment: fixed;
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
-    linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--accent) 4%, var(--background)) 100%);
 }
 
 html.dark body {
   background-color: var(--discord-app);
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 6%, var(--discord-app)) 100%);
 }
 
 html.dark {
@@ -236,40 +229,28 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   background: #18191c;
 }
 
+/* Subtle solid wash for auth/marketing shells (no radial gradients) */
 .theme-page-glow {
-  background-image: radial-gradient(
-    ellipse 70% 50% at 50% -20%,
-    color-mix(in srgb, var(--accent) 16%, transparent),
-    transparent 55%
-  );
+  background-color: color-mix(in srgb, var(--accent) 6%, var(--background));
 }
 html.dark .theme-page-glow {
-  background-image: radial-gradient(
-    ellipse 75% 55% at 50% -18%,
-    color-mix(in srgb, var(--accent) 22%, transparent),
-    transparent 52%
-  );
+  background-color: color-mix(in srgb, var(--accent) 8%, var(--discord-app));
 }
 
-/* Hue presets: only shift accent (+ optional page tint) */
+/* Hue presets: accent tokens + optional flat page tint */
 html.theme-red:not(.dark) {
   --accent: #dc2626;
   --accent-bright: #ef4444;
 }
 html.theme-red:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
-    linear-gradient(180deg, #fefcfc 0%, color-mix(in srgb, var(--accent) 5%, #fefcfc) 100%);
-  background-color: #fefcfc;
+  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
 }
 html.theme-red.dark {
   --accent: #f87171;
   --accent-bright: #fca5a5;
 }
 html.theme-red.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
+  background-color: var(--discord-app);
 }
 
 html.theme-orange:not(.dark) {
@@ -277,19 +258,14 @@ html.theme-orange:not(.dark) {
   --accent-bright: #fb923c;
 }
 html.theme-orange:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
-    linear-gradient(180deg, #fffdfb 0%, color-mix(in srgb, var(--accent) 5%, #fffdfb) 100%);
-  background-color: #fffdfb;
+  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
 }
 html.theme-orange.dark {
   --accent: #fb923c;
   --accent-bright: #fdba74;
 }
 html.theme-orange.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
+  background-color: var(--discord-app);
 }
 
 html.theme-yellow:not(.dark) {
@@ -297,19 +273,14 @@ html.theme-yellow:not(.dark) {
   --accent-bright: #eab308;
 }
 html.theme-yellow:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
-    linear-gradient(180deg, #fffef9 0%, color-mix(in srgb, var(--accent) 6%, #fffef9) 100%);
-  background-color: #fffef9;
+  background-color: color-mix(in srgb, var(--accent) 5%, #fffef8);
 }
 html.theme-yellow.dark {
   --accent: #eab308;
   --accent-bright: #fde047;
 }
 html.theme-yellow.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
+  background-color: var(--discord-app);
 }
 
 html.theme-blue:not(.dark) {
@@ -317,18 +288,14 @@ html.theme-blue:not(.dark) {
   --accent-bright: var(--logo-cyan);
 }
 html.theme-blue:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
-    linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--accent) 5%, var(--background)) 100%);
+  background-color: color-mix(in srgb, var(--accent) 5%, var(--background));
 }
 html.theme-blue.dark {
   --accent: #7aa3ff;
   --accent-bright: #66e8ff;
 }
 html.theme-blue.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
+  background-color: var(--discord-app);
 }
 
 html.theme-purple:not(.dark) {
@@ -336,19 +303,14 @@ html.theme-purple:not(.dark) {
   --accent-bright: #8b5cf6;
 }
 html.theme-purple:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 52%),
-    linear-gradient(180deg, #fdfcfe 0%, color-mix(in srgb, var(--accent) 4%, #fdfcfe) 100%);
-  background-color: #fdfcfe;
+  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
 }
 html.theme-purple.dark {
   --accent: #a78bfa;
   --accent-bright: #c4b5fd;
 }
 html.theme-purple.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
+  background-color: var(--discord-app);
 }
 
 html.theme-pink:not(.dark) {
@@ -356,19 +318,14 @@ html.theme-pink:not(.dark) {
   --accent-bright: #ec4899;
 }
 html.theme-pink:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 52%),
-    linear-gradient(180deg, #fffafc 0%, color-mix(in srgb, var(--accent) 4%, #fffafc) 100%);
-  background-color: #fffafc;
+  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
 }
 html.theme-pink.dark {
   --accent: #f472b6;
   --accent-bright: #fbcfe8;
 }
 html.theme-pink.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
-    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
+  background-color: var(--discord-app);
 }
 
 html.theme-neutral:not(.dark) {
@@ -376,9 +333,6 @@ html.theme-neutral:not(.dark) {
   --accent-bright: #52525b;
 }
 html.theme-neutral:not(.dark) body {
-  background-image:
-    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 52%),
-    linear-gradient(180deg, #fafafa 0%, color-mix(in srgb, var(--accent) 4%, #fafafa) 100%);
   background-color: #fafafa;
 }
 html.theme-neutral.dark {
@@ -386,10 +340,7 @@ html.theme-neutral.dark {
   --accent-bright: #fafafa;
 }
 html.theme-neutral.dark body {
-  background-image:
-    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 55%),
-    linear-gradient(180deg, #111113 0%, #080809 100%);
-  background-color: #080809;
+  background-color: #0a0a0a;
 }
 
 .bg-brand-paper,
@@ -418,34 +369,18 @@ html.dark ::selection {
 }
 
 @layer components {
-  /* Spectrum rail — optional marketing accent (full orbit) */
+  /* Header / sidebar accent strip — single solid hue */
   .orbit-rail-h {
     height: 3px;
     width: 100%;
     flex-shrink: 0;
-    background: linear-gradient(
-      90deg,
-      var(--logo-magenta),
-      var(--logo-orange),
-      var(--logo-yellow),
-      var(--logo-green),
-      var(--logo-cyan),
-      var(--logo-blue),
-      var(--logo-magenta)
-    );
+    background-color: var(--accent);
   }
 
   .orbit-rail-v {
     width: 4px;
-    background: linear-gradient(
-      180deg,
-      var(--logo-magenta),
-      var(--logo-orange),
-      var(--logo-yellow),
-      var(--logo-green),
-      var(--logo-cyan),
-      var(--logo-blue)
-    );
+    background-color: var(--accent);
+    opacity: 0.85;
   }
 
   html.dark .smt-nav-row-active {
@@ -475,7 +410,7 @@ html.dark ::selection {
     right: 0;
     height: 3px;
     z-index: 1;
-    background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+    background-color: var(--accent);
   }
 
   .mun-shell-title {
@@ -498,7 +433,7 @@ html.dark ::selection {
     right: 0;
     height: 2px;
     z-index: 1;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 85%, transparent), var(--accent-bright));
+    background-color: var(--accent);
   }
 
   .mun-card-dense {
@@ -546,8 +481,11 @@ html.dark ::selection {
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-transparent px-4 py-2 text-sm font-semibold text-white shadow-md transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 92%, black) 0%, var(--accent) 55%, var(--accent-bright) 100%);
+    @apply rounded-lg border border-transparent px-4 py-2 text-sm font-semibold text-white shadow-md transition-colors duration-200 ease-out disabled:opacity-45;
+    background-color: var(--accent);
+  }
+  .mun-btn-primary:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--accent) 88%, black);
   }
 
   .mun-btn-danger {

@@ -28,8 +28,8 @@ const HUE_META: Record<
   pink: { name: "Pink", swatch: "bg-pink-600" },
   neutral: {
     name: "Neutral",
-    swatch: "bg-gradient-to-br from-white to-zinc-800 ring-1 ring-zinc-400",
-    swatchDark: "bg-gradient-to-br from-zinc-200 to-zinc-800 ring-1 ring-zinc-500",
+    swatch: "bg-zinc-500 ring-1 ring-zinc-400",
+    swatchDark: "bg-zinc-600 ring-1 ring-zinc-500",
   },
 };
 

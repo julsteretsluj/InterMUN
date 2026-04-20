@@ -95,7 +95,7 @@ export function DashboardTopBar({
               className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition-colors duration-150 ease-out hover:bg-slate-50 dark:hover:bg-[color:var(--discord-hover-bg)]"
             >
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[color:var(--logo-blue)] via-[color:var(--logo-magenta)] to-[color:var(--logo-orange)] text-xs font-bold text-white shadow-inner"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-xs font-bold text-white shadow-inner"
                 aria-hidden
               >
                 {initials}

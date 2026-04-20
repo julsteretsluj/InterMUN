@@ -202,7 +202,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
       {step === "welcome" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
           <div
-            className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-gradient-to-r from-logo-magenta via-brand-accent to-logo-cyan"
+            className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
           <h1 className="font-display text-3xl md:text-4xl font-semibold text-brand-navy tracking-tight">
@@ -226,7 +226,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
       {step === "conference" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 w-full max-w-md mx-auto">
           <div
-            className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-gradient-to-r from-logo-magenta via-brand-accent to-logo-cyan"
+            className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
           <button
@@ -389,7 +389,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
       {step === "account" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10">
           <div
-            className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-gradient-to-r from-logo-magenta via-brand-accent to-logo-cyan"
+            className="mx-auto mb-6 h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
           <button

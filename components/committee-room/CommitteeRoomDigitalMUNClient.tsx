@@ -34,14 +34,14 @@ function StatMiniCard({
   title?: string;
 }) {
   const tones = {
-    blue: "from-brand-accent/22 to-logo-blue/8 border-brand-accent/28",
-    silver: "from-slate-400/25 to-slate-700/10 border-slate-400/25",
-    accent: "from-brand-accent/22 to-brand-navy/8 border-brand-accent/30",
-    sky: "from-logo-cyan/22 to-logo-blue/8 border-logo-cyan/30",
+    blue: "bg-brand-accent/10 border-brand-accent/28",
+    silver: "bg-slate-200/45 border-slate-400/25",
+    accent: "bg-brand-accent/10 border-brand-accent/30",
+    sky: "bg-cyan-500/10 border-cyan-500/30",
   } as const;
   const interactive = Boolean(onPress);
   const className = [
-    "rounded-xl border bg-gradient-to-br px-3 py-2.5 shadow-sm text-left w-full",
+    "rounded-xl border px-3 py-2.5 shadow-sm text-left w-full",
     tones[tint],
     interactive
       ? "cursor-pointer hover:brightness-110 active:scale-[0.98] transition-[transform,filter] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"
@@ -328,7 +328,7 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-gradient-to-br from-brand-accent/15 via-brand-silver/10 to-brand-accent/12 p-3 text-xs text-brand-navy/90 leading-relaxed">
+          <div className="rounded-xl border border-white/10 bg-brand-accent/8 p-3 text-xs text-brand-navy/90 leading-relaxed">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
               <Sparkles className="size-3.5 text-brand-silver shrink-0" />
               Tip
@@ -415,7 +415,7 @@ export function CommitteeRoomDigitalMUNClient({
         </section>
 
         {/* Right rail — delegate floor (chairs: use Chair → Session); notes */}
-        <aside className="rounded-2xl border border-slate-400/20 bg-gradient-to-b from-slate-500/[0.08] via-brand-paper/40 to-brand-paper/20 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
+        <aside className="rounded-2xl border border-slate-400/20 bg-brand-paper/35 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
           {showDelegateFloorPanel ? (
             <div className="rounded-xl border border-white/5 bg-black/15 p-3 md:p-4">
               <div className="mb-3 flex items-center gap-2">

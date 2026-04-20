@@ -113,7 +113,7 @@ export default async function CommitteeRoomPersonPage({
         <div className="flex items-center gap-2 sm:justify-end">
           <Link
             href={`/chats-notes?forProfile=${encodeURIComponent(profileId)}`}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-accent/35 bg-gradient-to-br from-brand-accent/22 to-brand-accent/10 px-4 py-2 text-sm font-semibold text-brand-navy dark:text-slate-100 shadow-sm hover:opacity-95"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-accent/35 bg-brand-accent/14 px-4 py-2 text-sm font-semibold text-brand-navy dark:text-slate-100 shadow-sm hover:opacity-95"
           >
             <MessageCircle className="size-4 shrink-0" strokeWidth={2} />
             Chat
@@ -121,7 +121,7 @@ export default async function CommitteeRoomPersonPage({
           {crisisReportingEnabled ? (
             <Link
               href={`/report?about=${encodeURIComponent(profileId)}&aboutName=${reportAboutName}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-rose-400/30 bg-gradient-to-br from-rose-500/20 to-rose-600/5 px-4 py-2 text-sm font-semibold text-brand-navy shadow-sm hover:border-rose-400/50"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-rose-400/30 bg-rose-500/12 px-4 py-2 text-sm font-semibold text-brand-navy shadow-sm hover:border-rose-400/50"
             >
               <Flag className="size-4 shrink-0" strokeWidth={2} />
               Report
@@ -136,11 +136,7 @@ export default async function CommitteeRoomPersonPage({
           <div className="flex flex-col items-center text-center">
             <div className="relative">
               <div
-                className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full text-2xl font-bold text-white shadow-lg ring-4 ring-white/10"
-                style={{
-                  background:
-                    "linear-gradient(145deg, rgba(251,146,60,0.85) 0%, rgba(217,70,239,0.55) 48%, rgba(16,185,129,0.75) 100%)",
-                }}
+                className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full bg-brand-accent text-2xl font-bold text-white shadow-lg ring-4 ring-white/10"
                 aria-hidden
               >
                 {initials}
@@ -187,7 +183,7 @@ export default async function CommitteeRoomPersonPage({
         {/* Detail cards — mockup main list / panels */}
         <div className="space-y-4 min-w-0">
           {placard ? (
-            <section className="rounded-2xl border border-brand-accent/15 bg-gradient-to-br from-brand-accent/[0.12] via-brand-paper/50 to-brand-silver/[0.1] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-brand-accent/15 bg-brand-paper/80 p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
                 Delegation placard
               </h2>
@@ -201,7 +197,7 @@ export default async function CommitteeRoomPersonPage({
           ) : null}
 
           {daisSeat ? (
-            <section className="rounded-2xl border border-brand-silver/25 bg-gradient-to-br from-brand-silver/[0.12] via-brand-paper/50 to-brand-accent/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-brand-silver/25 bg-brand-paper/80 p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">Dais</h2>
               <dl className="grid gap-2 sm:grid-cols-2">
                 <InfoRow label="Role" value={daisSeat.title} />
@@ -211,7 +207,7 @@ export default async function CommitteeRoomPersonPage({
           ) : null}
 
           {canReadFullProfile && fullProfile ? (
-            <section className="rounded-2xl border border-logo-cyan/30 bg-gradient-to-br from-logo-cyan/[0.12] via-brand-paper/50 to-logo-blue/[0.08] p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <section className="rounded-2xl border border-logo-cyan/30 bg-brand-paper/80 p-5 md:p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
                 Account profile
               </h2>

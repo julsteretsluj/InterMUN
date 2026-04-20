@@ -388,16 +388,10 @@ export function VirtualCommitteeRoom({
         ) : null}
         <div
           className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
-          style={{
-            background:
-              "linear-gradient(180deg, #f8fafc 0%, #eef2f7 42%, #e5ebf3 100%)",
-          }}
+          style={{ backgroundColor: "#eef2f7" }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x border-b border-slate-300/80 shadow-inner"
-            style={{
-              background: "linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%)",
-            }}
+            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x border-b border-slate-300/80 bg-slate-50 shadow-inner"
           >
             <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-slate-200/90" />
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-slate-500">
@@ -460,13 +454,6 @@ export function VirtualCommitteeRoom({
             </div>
           </div>
 
-          <div
-            className="pointer-events-none absolute bottom-0 left-0 right-0 h-1/3 opacity-30"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255,255,255,0.08), transparent)",
-            }}
-          />
         </div>
         <figcaption className="sr-only">
           Virtual Model UN committee room with delegate placards showing country,
