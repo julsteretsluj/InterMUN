@@ -129,9 +129,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           aria-label="Theme settings"
           className="absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18rem)] rounded-xl border border-slate-200/90 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
         >
-          <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
-            Appearance
-          </p>
+          <p className="tag tag-neutral mb-0.5">Appearance</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button
               type="button"
@@ -161,8 +159,9 @@ export function ThemeSelector({ className }: { className?: string }) {
             </button>
           </div>
 
+          <p className="tag tag-accent mt-4 mb-1.5">Accent colour</p>
           <div
-            className="mt-4 grid grid-cols-4 gap-2"
+            className="grid grid-cols-4 gap-2"
             role="radiogroup"
             aria-label="Accent colour"
           >
@@ -213,9 +212,7 @@ export function ThemeSelector({ className }: { className?: string }) {
             })}
           </div>
 
-          <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
-            Typography
-          </p>
+          <p className="tag tag-neutral mt-4 mb-1.5">Typography</p>
           <button
             type="button"
             onClick={toggleDyslexicFont}

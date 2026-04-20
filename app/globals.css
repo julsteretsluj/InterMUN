@@ -3,13 +3,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Inter-MUN: vintage paper × orbit logo spectrum.
- * Logo reference: cyan #00CCFF, blue #3366FF, magenta #FF00FF, orange #FF9900, yellow #FFFF00, lime #33FF00.
- * Primary accent follows logo blue; bright accents lean cyan. Dark chrome stays Discord-like but blurple→logo blue.
- * `--brand-diplomatic` is the preferred body/link blue on cream (higher contrast than raw logo blue).
- * Token names: `brand-navy`, `brand-accent`, `brand-silver`.
+ * InterMUN theme — simplified semantic tokens (TAGS):
+ *   PAGE / SURFACE / BORDER — layout layers
+ *   TEXT — primary · secondary · muted
+ *   ACCENT — interactive emphasis (follows hue picker)
+ *   STATE — success · warning · danger · info (fixed, distinct)
+ * Legacy `brand-*` / `discord-*` names remain as aliases for existing components.
  */
 html {
+  /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
   --logo-cyan: #00ccff;
   --logo-blue: #3366ff;
   --logo-magenta: #ff00ff;
@@ -17,68 +19,107 @@ html {
   --logo-yellow: #ffff00;
   --logo-green: #33ff00;
 
-  --background: #f7f4ec;
-  --foreground: #121212;
+  /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
+  --accent: var(--logo-blue);
+  --accent-bright: #1aa8dd;
 
-  --brand-navy: #121212;
-  --brand-navy-soft: rgba(18, 18, 18, 0.06);
+  /* —— PAGE —— */
+  --color-bg-page: #f5f3ee;
+  --background: var(--color-bg-page);
+  --foreground: #141414;
 
-  --brand-accent: var(--logo-blue);
-  /* Readable cyan on cream (pure --logo-cyan kept for washes / gradients only) */
-  --brand-accent-bright: #1aa8dd;
+  /* —— SURFACE —— */
+  --color-surface: rgba(255, 252, 248, 0.96);
+  --color-surface-subtle: #ebe6dc;
+  --color-surface-elevated: #ffffff;
+  --brand-paper: var(--color-surface);
+  --brand-cream: var(--color-surface-subtle);
 
-  --brand-silver: #9499a8;
+  /* —— TEXT —— */
+  --color-text: #141414;
+  --color-text-secondary: #3d3a36;
+  --color-text-muted: #6b6560;
+  --brand-navy: var(--color-text);
+  --brand-muted: var(--color-text-muted);
+  --brand-accent-ink: var(--color-text);
 
-  --brand-cream: #ede8dc;
-  --brand-paper: rgba(255, 252, 246, 0.94);
+  /* —— BORDER / LINE —— */
+  --color-border: rgba(20, 20, 20, 0.12);
+  --color-border-strong: rgba(20, 20, 20, 0.2);
+  --brand-line: var(--color-border);
 
-  /* ≥4.5:1 on --background for UI copy (WCAG AA body) */
-  --brand-muted: #3f3c38;
-  --brand-line: rgba(18, 18, 18, 0.14);
-
-  --brand-accent-ink: #121212;
-
-  /* Wordmark “MUN” / links; warm accent from Figma accent/warm */
-  --brand-diplomatic: color-mix(in srgb, var(--logo-blue) 62%, var(--brand-navy));
+  /* —— ACCENT (published to Tailwind / legacy) —— */
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
+  --brand-diplomatic: color-mix(in srgb, var(--accent) 58%, var(--color-text));
   --brand-gold: #c2a878;
+
+  --brand-navy-soft: rgba(20, 20, 20, 0.06);
+  --brand-silver: #8e949e;
+
+  /* —— STATE (distinct tags — same in every hue) —— */
+  --semantic-success: #15803d;
+  --semantic-success-bg: color-mix(in srgb, #15803d 12%, var(--color-bg-page));
+  --semantic-warning: #b45309;
+  --semantic-warning-bg: color-mix(in srgb, #b45309 12%, var(--color-bg-page));
+  --semantic-danger: #b91c1c;
+  --semantic-danger-bg: color-mix(in srgb, #b91c1c 12%, var(--color-bg-page));
+  --semantic-info: #1d4ed8;
+  --semantic-info-bg: color-mix(in srgb, #1d4ed8 12%, var(--color-bg-page));
 
   color-scheme: light;
 }
 
 html.dark {
-  --background: #121212;
-  --foreground: #f5f5f5;
+  --accent: #7aa3ff;
+  --accent-bright: #66e8ff;
 
-  --brand-navy: #f5f5f5;
-  --brand-navy-soft: rgba(245, 245, 245, 0.12);
+  --color-bg-page: #1e1f22;
+  --background: var(--color-bg-page);
+  --foreground: #f4f4f5;
 
-  /* Luminous tints of logo blue / cyan for dark UI */
-  --brand-accent: #7aa3ff;
-  --brand-accent-bright: #66e8ff;
+  --color-surface: rgba(255, 255, 255, 0.06);
+  --color-surface-subtle: rgba(255, 255, 255, 0.04);
+  --color-surface-elevated: #2b2d31;
+  --brand-paper: var(--color-surface);
+  --brand-cream: var(--color-surface-subtle);
 
-  --brand-silver: #c7cbd6;
+  --color-text: #f4f4f5;
+  --color-text-secondary: #d4d4d8;
+  --color-text-muted: #a1a1aa;
+  --brand-navy: var(--color-text);
+  --brand-muted: var(--color-text-muted);
+  --brand-accent-ink: var(--color-text);
 
-  --brand-cream: rgba(255, 255, 255, 0.05);
-  --brand-paper: rgba(255, 255, 255, 0.07);
+  --color-border: rgba(244, 244, 245, 0.12);
+  --color-border-strong: rgba(244, 244, 245, 0.2);
+  --brand-line: var(--color-border);
 
-  --brand-muted: #c9c4d4;
-  --brand-line: rgba(245, 245, 245, 0.16);
-
-  --brand-accent-ink: #f5f5f5;
-
-  --brand-diplomatic: var(--brand-accent-bright);
+  --brand-accent: var(--accent);
+  --brand-accent-bright: var(--accent-bright);
+  --brand-diplomatic: var(--accent-bright);
   --brand-gold: #d4c4a8;
 
-  /*
-   * Discord-inspired surfaces; accent rails match logo blue (not classic Discord blurple).
-   */
+  --brand-navy-soft: rgba(244, 244, 245, 0.1);
+  --brand-silver: #b4bac4;
+
+  --semantic-success: #4ade80;
+  --semantic-success-bg: rgba(34, 197, 94, 0.14);
+  --semantic-warning: #fbbf24;
+  --semantic-warning-bg: rgba(251, 191, 36, 0.12);
+  --semantic-danger: #fb7185;
+  --semantic-danger-bg: rgba(251, 113, 133, 0.12);
+  --semantic-info: #93c5fd;
+  --semantic-info-bg: rgba(147, 197, 253, 0.12);
+
+  /* Discord-like chrome (sidebar / app shell) — single family */
   --discord-sidebar: #2b2d31;
   --discord-app: #313338;
   --discord-elevated: #383a40;
-  --discord-panel-border: rgba(18, 19, 21, 0.55);
+  --discord-panel-border: rgba(0, 0, 0, 0.35);
   --discord-divider: #26272d;
-  --discord-blurple: var(--logo-blue);
-  --discord-blurple-hover: #2952e6;
+  --discord-blurple: var(--accent);
+  --discord-blurple-hover: color-mix(in srgb, var(--accent) 85%, white);
   --discord-muted: #949ba4;
   --discord-hover-bg: hsl(223 7% calc(53% + 12%) / 0.35);
   --discord-active-bg: hsl(223 7% calc(53% + 6%) / 0.52);
@@ -90,6 +131,26 @@ html.dark {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-text-primary: var(--color-text);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+
+  --color-surface: var(--color-surface);
+  --color-surface-subtle: var(--color-surface-subtle);
+  --color-surface-elevated: var(--color-surface-elevated);
+
+  --color-border-default: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+
+  --color-success: var(--semantic-success);
+  --color-warning: var(--semantic-warning);
+  --color-danger: var(--semantic-danger);
+  --color-info: var(--semantic-info);
+
   --color-brand-navy: var(--brand-navy);
   --color-brand-navy-soft: var(--brand-navy-soft);
   --color-brand-accent: var(--brand-accent);
@@ -134,32 +195,22 @@ html.dyslexic-font body {
   word-spacing: 0.04em;
 }
 
+/* —— PAGE: one calm wash + accent veil (readable, not rainbow soup) —— */
 body {
   min-height: 100%;
   background-color: var(--background);
   color: var(--foreground);
   background-attachment: fixed;
-  /* Full orbit spectrum: corners + edges carry logo hues; center stays readable cream */
   background-image:
-    radial-gradient(ellipse 78% 58% at -8% -8%, color-mix(in srgb, var(--logo-magenta) 22%, transparent), transparent 58%),
-    radial-gradient(ellipse 72% 52% at 108% -5%, color-mix(in srgb, var(--logo-cyan) 20%, transparent), transparent 55%),
-    radial-gradient(ellipse 68% 50% at 105% 108%, color-mix(in srgb, var(--logo-orange) 20%, transparent), transparent 54%),
-    radial-gradient(ellipse 72% 52% at -6% 104%, color-mix(in srgb, var(--logo-blue) 18%, transparent), transparent 54%),
-    radial-gradient(ellipse 52% 44% at 50% 112%, color-mix(in srgb, var(--logo-green) 14%, transparent), transparent 50%),
-    radial-gradient(ellipse 48% 40% at 88% 42%, color-mix(in srgb, var(--logo-yellow) 11%, transparent), transparent 48%),
-    linear-gradient(168deg, var(--background) 0%, color-mix(in srgb, var(--logo-cyan) 5%, var(--background)) 100%);
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
+    linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--accent) 4%, var(--background)) 100%);
 }
 
 html.dark body {
   background-color: var(--discord-app);
   background-image:
-    radial-gradient(ellipse 82% 62% at -12% -12%, color-mix(in srgb, var(--logo-magenta) 26%, transparent), transparent 52%),
-    radial-gradient(ellipse 78% 58% at 112% -8%, color-mix(in srgb, var(--logo-cyan) 24%, transparent), transparent 50%),
-    radial-gradient(ellipse 72% 54% at 108% 112%, color-mix(in srgb, var(--logo-orange) 22%, transparent), transparent 50%),
-    radial-gradient(ellipse 70% 56% at -10% 108%, color-mix(in srgb, var(--logo-blue) 22%, transparent), transparent 52%),
-    radial-gradient(ellipse 58% 48% at 48% 118%, color-mix(in srgb, var(--logo-green) 18%, transparent), transparent 46%),
-    radial-gradient(ellipse 44% 38% at 72% 38%, color-mix(in srgb, var(--logo-yellow) 14%, transparent), transparent 44%),
-    linear-gradient(172deg, var(--discord-app) 18%, color-mix(in srgb, var(--logo-magenta) 6%, var(--discord-app)) 100%);
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 6%, var(--discord-app)) 100%);
 }
 
 html.dark {
@@ -185,196 +236,189 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   background: #18191c;
 }
 
-/* Auth / marketing: multi-stop glow echoing logo orbit */
 .theme-page-glow {
-  background-image:
-    radial-gradient(ellipse 55% 42% at 78% -8%, color-mix(in srgb, var(--logo-magenta) 14%, transparent), transparent),
-    radial-gradient(ellipse 62% 46% at 12% 8%, color-mix(in srgb, var(--logo-orange) 10%, transparent), transparent),
-    radial-gradient(ellipse 70% 48% at 18% -12%, color-mix(in srgb, var(--logo-cyan) 14%, transparent), transparent),
-    radial-gradient(ellipse 52% 40% at 92% 88%, color-mix(in srgb, var(--logo-green) 9%, transparent), transparent),
-    radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--logo-blue) 10%, transparent), transparent);
+  background-image: radial-gradient(
+    ellipse 70% 50% at 50% -20%,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    transparent 55%
+  );
 }
 html.dark .theme-page-glow {
-  background-image:
-    radial-gradient(ellipse 55% 42% at 82% -6%, color-mix(in srgb, var(--logo-magenta) 18%, transparent), transparent),
-    radial-gradient(ellipse 58% 44% at 8% 12%, color-mix(in srgb, var(--logo-orange) 12%, transparent), transparent),
-    radial-gradient(ellipse 65% 44% at 12% -10%, color-mix(in srgb, var(--logo-cyan) 18%, transparent), transparent),
-    radial-gradient(ellipse 50% 38% at 95% 92%, color-mix(in srgb, var(--logo-green) 12%, transparent), transparent),
-    radial-gradient(ellipse 80% 50% at 50% -18%, color-mix(in srgb, var(--logo-blue) 16%, transparent), transparent);
+  background-image: radial-gradient(
+    ellipse 75% 55% at 50% -18%,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 52%
+  );
 }
 
-/*
- * Optional accent overrides (`theme-{hue}` on <html>). Default hue is `blue` (explicit rules below).
- */
-
+/* Hue presets: only shift accent (+ optional page tint) */
 html.theme-red:not(.dark) {
-  --brand-accent: #dc2626;
-  --brand-accent-bright: #ef4444;
+  --accent: #dc2626;
+  --accent-bright: #ef4444;
 }
 html.theme-red:not(.dark) body {
-  background: linear-gradient(180deg, rgba(220, 38, 38, 0.07), #ffffff 48%);
-  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
+    linear-gradient(180deg, #fefcfc 0%, color-mix(in srgb, var(--accent) 5%, #fefcfc) 100%);
+  background-color: #fefcfc;
 }
 html.theme-red.dark {
-  --brand-accent: #f87171;
-  --brand-accent-bright: #fca5a5;
+  --accent: #f87171;
+  --accent-bright: #fca5a5;
 }
 html.theme-red.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(248, 113, 113, 0.22) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(220, 38, 38, 0.14) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
-  background-color: #0a0a0a;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
 }
 
 html.theme-orange:not(.dark) {
-  --brand-accent: #ea580c;
-  --brand-accent-bright: #fb923c;
+  --accent: #ea580c;
+  --accent-bright: #fb923c;
 }
 html.theme-orange:not(.dark) body {
-  background: linear-gradient(180deg, rgba(234, 88, 12, 0.08), #ffffff 48%);
-  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
+    linear-gradient(180deg, #fffdfb 0%, color-mix(in srgb, var(--accent) 5%, #fffdfb) 100%);
+  background-color: #fffdfb;
 }
 html.theme-orange.dark {
-  --brand-accent: #fb923c;
-  --brand-accent-bright: #fdba74;
+  --accent: #fb923c;
+  --accent-bright: #fdba74;
 }
 html.theme-orange.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(251, 146, 60, 0.22) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(234, 88, 12, 0.14) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
-  background-color: #0a0a0a;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
 }
 
 html.theme-yellow:not(.dark) {
-  --brand-accent: #ca8a04;
-  --brand-accent-bright: #eab308;
+  --accent: #ca8a04;
+  --accent-bright: #eab308;
 }
 html.theme-yellow:not(.dark) body {
-  background: linear-gradient(180deg, rgba(202, 138, 4, 0.1), #fffef8 50%);
-  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
+    linear-gradient(180deg, #fffef9 0%, color-mix(in srgb, var(--accent) 6%, #fffef9) 100%);
+  background-color: #fffef9;
 }
 html.theme-yellow.dark {
-  --brand-accent: #eab308;
-  --brand-accent-bright: #fde047;
+  --accent: #eab308;
+  --accent-bright: #fde047;
 }
 html.theme-yellow.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(234, 179, 8, 0.2) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(202, 138, 4, 0.12) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
-  background-color: #0a0a0a;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
 }
 
 html.theme-blue:not(.dark) {
-  --brand-accent: var(--logo-blue);
-  --brand-accent-bright: var(--logo-cyan);
+  --accent: var(--logo-blue);
+  --accent-bright: var(--logo-cyan);
 }
 html.theme-blue:not(.dark) body {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--logo-blue) 10%, transparent), #ffffff 48%);
-  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
+    linear-gradient(180deg, var(--background) 0%, color-mix(in srgb, var(--accent) 5%, var(--background)) 100%);
 }
 html.theme-blue.dark {
-  --brand-accent: #7aa3ff;
-  --brand-accent-bright: #66e8ff;
+  --accent: #7aa3ff;
+  --accent-bright: #66e8ff;
 }
 html.theme-blue.dark body {
   background-image:
-    radial-gradient(circle at top left, color-mix(in srgb, var(--logo-cyan) 22%, transparent) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, color-mix(in srgb, var(--logo-blue) 16%, transparent) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
-  background-color: #0a0a0a;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
 }
 
 html.theme-purple:not(.dark) {
-  --brand-accent: #7c3aed;
-  --brand-accent-bright: #8b5cf6;
+  --accent: #7c3aed;
+  --accent-bright: #8b5cf6;
 }
 html.theme-purple:not(.dark) body {
-  background: linear-gradient(180deg, rgba(124, 58, 237, 0.07), #ffffff 48%);
-  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 52%),
+    linear-gradient(180deg, #fdfcfe 0%, color-mix(in srgb, var(--accent) 4%, #fdfcfe) 100%);
+  background-color: #fdfcfe;
 }
 html.theme-purple.dark {
-  --brand-accent: #a78bfa;
-  --brand-accent-bright: #c4b5fd;
+  --accent: #a78bfa;
+  --accent-bright: #c4b5fd;
 }
 html.theme-purple.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(167, 139, 250, 0.22) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.14) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
-  background-color: #0a0a0a;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
 }
 
 html.theme-pink:not(.dark) {
-  --brand-accent: #db2777;
-  --brand-accent-bright: #ec4899;
+  --accent: #db2777;
+  --accent-bright: #ec4899;
 }
 html.theme-pink:not(.dark) body {
-  background: linear-gradient(180deg, rgba(219, 39, 119, 0.07), #ffffff 48%);
-  background-color: #ffffff;
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 52%),
+    linear-gradient(180deg, #fffafc 0%, color-mix(in srgb, var(--accent) 4%, #fffafc) 100%);
+  background-color: #fffafc;
 }
 html.theme-pink.dark {
-  --brand-accent: #f472b6;
-  --brand-accent-bright: #fbcfe8;
+  --accent: #f472b6;
+  --accent-bright: #fbcfe8;
 }
 html.theme-pink.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(244, 114, 182, 0.2) 0%, rgba(12, 12, 12, 0.94) 40%),
-    radial-gradient(circle at bottom right, rgba(219, 39, 119, 0.12) 0%, rgba(10, 10, 10, 0.96) 45%),
-    linear-gradient(135deg, #121212 0%, #0a0a0a 100%);
-  background-color: #0a0a0a;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--discord-app) 0%, color-mix(in srgb, var(--accent) 8%, var(--discord-app)) 100%);
 }
 
 html.theme-neutral:not(.dark) {
-  --brand-accent: #27272a;
-  --brand-accent-bright: #3f3f46;
+  --accent: #3f3f46;
+  --accent-bright: #52525b;
 }
 html.theme-neutral:not(.dark) body {
-  background: linear-gradient(180deg, rgba(39, 39, 42, 0.06), #fafafa 46%);
+  background-image:
+    radial-gradient(ellipse 85% 55% at 50% -15%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 52%),
+    linear-gradient(180deg, #fafafa 0%, color-mix(in srgb, var(--accent) 4%, #fafafa) 100%);
   background-color: #fafafa;
 }
 html.theme-neutral.dark {
-  --brand-accent: #d4d4d8;
-  --brand-accent-bright: #fafafa;
+  --accent: #d4d4d8;
+  --accent-bright: #fafafa;
 }
 html.theme-neutral.dark body {
   background-image:
-    radial-gradient(circle at top left, rgba(212, 212, 216, 0.12) 0%, rgba(12, 12, 12, 0.95) 42%),
-    radial-gradient(circle at bottom right, rgba(113, 113, 122, 0.1) 0%, rgba(8, 8, 8, 0.98) 45%),
-    linear-gradient(135deg, #101010 0%, #050505 100%);
-  background-color: #050505;
+    radial-gradient(ellipse 90% 60% at 40% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 55%),
+    linear-gradient(180deg, #111113 0%, #080809 100%);
+  background-color: #080809;
 }
 
-/* Global glass surface defaults for common cards/headers */
 .bg-brand-paper,
 .bg-brand-cream {
   backdrop-filter: blur(8px);
 }
 
 :focus-visible {
-  outline: 2px solid var(--brand-accent-bright);
+  outline: 2px solid var(--accent-bright);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-accent) 22%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 html.dark :focus-visible {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-accent) 28%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--logo-magenta) 22%, color-mix(in srgb, var(--logo-cyan) 18%, var(--background)));
+  background: color-mix(in srgb, var(--accent) 28%, var(--background));
   color: inherit;
 }
 
 html.dark ::selection {
-  background: color-mix(in srgb, var(--logo-magenta) 35%, var(--discord-elevated));
+  background: color-mix(in srgb, var(--accent) 35%, var(--discord-elevated));
   color: #ffffff;
 }
 
 @layer components {
-  /** Full logo spectrum bar (horizontal). */
+  /* Spectrum rail — optional marketing accent (full orbit) */
   .orbit-rail-h {
     height: 3px;
     width: 100%;
@@ -391,7 +435,6 @@ html.dark ::selection {
     );
   }
 
-  /** Full logo spectrum strip (vertical). */
   .orbit-rail-v {
     width: 4px;
     background: linear-gradient(
@@ -405,7 +448,6 @@ html.dark ::selection {
     );
   }
 
-  /** Dark sidebar rows: spectrum gradient is light-mode only; Discord panel fill in dark. */
   html.dark .smt-nav-row-active {
     background-image: none;
     background-color: var(--discord-active-bg);
@@ -413,11 +455,14 @@ html.dark ::selection {
 
   html.dark .smt-dock-tile-active {
     background-image: none !important;
-    background-color: color-mix(in srgb, var(--discord-blurple) 24%, var(--discord-elevated));
+    background-color: color-mix(in srgb, var(--accent) 24%, var(--discord-elevated));
   }
 
+  /* Shell / card: single accent rail (clear, not rainbow) */
   .mun-shell {
-    @apply relative overflow-hidden rounded-2xl border border-slate-100/90 bg-white p-6 text-brand-navy shadow-[0_8px_30px_-8px_rgba(18,18,18,0.08)] backdrop-blur-sm md:p-8;
+    @apply relative overflow-hidden rounded-2xl border p-6 text-brand-navy shadow-[0_8px_30px_-8px_rgba(0,0,0,0.06)] backdrop-blur-sm md:p-8;
+    border-color: var(--color-border);
+    background-color: var(--color-surface-elevated);
     @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
     @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-none dark:backdrop-blur-none;
   }
@@ -430,16 +475,7 @@ html.dark ::selection {
     right: 0;
     height: 3px;
     z-index: 1;
-    background: linear-gradient(
-      90deg,
-      var(--logo-magenta),
-      var(--logo-orange),
-      var(--logo-yellow),
-      var(--logo-green),
-      var(--logo-cyan),
-      var(--logo-blue),
-      var(--logo-magenta)
-    );
+    background: linear-gradient(90deg, var(--accent), var(--accent-bright));
   }
 
   .mun-shell-title {
@@ -447,7 +483,9 @@ html.dark ::selection {
   }
 
   .mun-card {
-    @apply relative overflow-hidden rounded-xl border border-slate-200 bg-white p-4 text-brand-navy shadow-[0_6px_24px_-10px_rgba(18,18,18,0.07)];
+    @apply relative overflow-hidden rounded-xl border p-4 text-brand-navy shadow-[0_6px_24px_-10px_rgba(0,0,0,0.06)];
+    border-color: var(--color-border);
+    background-color: var(--color-surface-elevated);
     @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
     @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-none;
   }
@@ -460,73 +498,118 @@ html.dark ::selection {
     right: 0;
     height: 2px;
     z-index: 1;
-    background: linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--logo-magenta) 75%, transparent),
-      color-mix(in srgb, var(--logo-orange) 75%, transparent),
-      color-mix(in srgb, var(--logo-cyan) 75%, transparent),
-      color-mix(in srgb, var(--logo-blue) 75%, transparent)
-    );
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 85%, transparent), var(--accent-bright));
   }
 
   .mun-card-dense {
-    @apply rounded-lg border border-slate-200 bg-slate-50/80 p-3 text-brand-navy;
+    @apply rounded-lg border p-3 text-brand-navy;
+    border-color: var(--color-border);
+    background-color: var(--color-surface-subtle);
     @apply dark:border-white/10 dark:bg-black/20;
   }
 
   .mun-inset {
-    @apply rounded-lg border border-slate-200 bg-slate-50 p-2 text-sm text-brand-navy;
+    @apply rounded-lg border p-2 text-sm text-brand-navy;
+    border-color: var(--color-border);
+    background-color: var(--color-surface-subtle);
     @apply dark:border-white/10 dark:bg-black/30;
   }
 
   .mun-label {
     @apply text-xs font-semibold uppercase tracking-wider text-brand-muted;
-    @apply dark:text-brand-muted;
   }
 
   .mun-muted {
     @apply text-sm text-brand-muted;
-    @apply dark:text-brand-muted;
   }
 
   .mun-field {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-accent/55 focus:outline-none focus:ring-2 focus:ring-brand-accent-bright/25;
-    @apply dark:border-white/15 dark:bg-black/30 dark:text-brand-navy dark:shadow-inner dark:placeholder:text-brand-muted/60 dark:focus:border-brand-accent/50 dark:focus:ring-brand-accent/40;
+    @apply w-full rounded-lg border px-3 py-2 text-sm text-brand-navy shadow-sm placeholder:text-brand-muted focus:outline-none focus:ring-2;
+    border-color: var(--color-border-strong);
+    background-color: var(--color-surface-elevated);
+    color: var(--color-text);
+    @apply dark:border-white/15 dark:bg-black/30 dark:shadow-inner dark:placeholder:text-brand-muted/60;
+  }
+  .mun-field:focus {
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--color-border-strong));
+    --tw-ring-color: color-mix(in srgb, var(--accent-bright) 35%, transparent);
   }
 
   .mun-btn {
-    @apply rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-colors duration-200 ease-out hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright disabled:opacity-45;
+    @apply rounded-lg border px-3 py-2 text-sm font-medium text-brand-navy transition-colors duration-200 ease-out focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
+    border-color: var(--color-border-strong);
+    background-color: var(--color-surface-elevated);
     @apply dark:border-white/15 dark:bg-white/5 dark:text-brand-navy dark:hover:bg-white/10;
+  }
+  html:not(.dark) .mun-btn:hover {
+    background-color: var(--color-surface-subtle);
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-white/25 px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_14px_-4px_rgba(51,102,255,0.45)] transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
-    background-image: linear-gradient(
-      103deg,
-      color-mix(in srgb, var(--logo-blue) 88%, black) 0%,
-      var(--logo-magenta) 42%,
-      color-mix(in srgb, var(--logo-cyan) 75%, var(--logo-blue)) 100%
-    );
+    @apply rounded-lg border border-transparent px-4 py-2 text-sm font-semibold text-white shadow-md transition-opacity duration-200 ease-out hover:opacity-95 disabled:opacity-45;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 92%, black) 0%, var(--accent) 55%, var(--accent-bright) 100%);
   }
 
   .mun-btn-danger {
-    @apply rounded-lg border border-rose-300 bg-white px-3 py-2 text-sm font-medium text-rose-800 hover:border-rose-400 hover:bg-rose-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright disabled:opacity-45;
-    @apply dark:border-rose-400/30 dark:bg-white/5 dark:text-brand-navy dark:hover:border-rose-400/50 dark:hover:bg-rose-500/15;
+    @apply rounded-lg border px-3 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
+    border-color: color-mix(in srgb, var(--semantic-danger) 35%, var(--color-border));
+    background-color: var(--color-surface-elevated);
+    color: var(--semantic-danger);
+    @apply hover:bg-red-50 dark:hover:bg-red-950/30;
   }
 
   .mun-link {
-    @apply font-semibold text-brand-accent underline underline-offset-2 transition-colors duration-200 ease-out hover:text-brand-accent-bright;
-    @apply dark:text-brand-accent-bright dark:hover:text-brand-accent;
+    @apply font-semibold underline underline-offset-2 transition-colors duration-200 ease-out;
+    color: var(--accent);
+  }
+  .mun-link:hover {
+    color: var(--accent-bright);
   }
 
-  /** Discord-like channel row hover (dark); pair with rounded-md */
   .discord-interactive-hover {
     @apply transition-colors duration-150 ease-out;
     @apply dark:hover:bg-[color:var(--discord-hover-bg)];
   }
 
-  /** Optional blurple outline for emphasis in dark mode */
   .discord-blurple-ring {
-    @apply dark:ring-1 dark:ring-discord-blurple/45;
+    @apply dark:ring-1;
+    --tw-ring-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  /* —— TAGS: semantic pills (distinct colors) —— */
+  .tag {
+    @apply inline-flex items-center rounded-md px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide;
+    border-width: 1px;
+    border-style: solid;
+  }
+  .tag-neutral {
+    color: var(--color-text-secondary);
+    background-color: var(--color-surface-subtle);
+    border-color: var(--color-border);
+  }
+  .tag-accent {
+    color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 12%, var(--color-surface-elevated));
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--color-border));
+  }
+  .tag-success {
+    color: var(--semantic-success);
+    background-color: var(--semantic-success-bg);
+    border-color: color-mix(in srgb, var(--semantic-success) 35%, var(--color-border));
+  }
+  .tag-warning {
+    color: var(--semantic-warning);
+    background-color: var(--semantic-warning-bg);
+    border-color: color-mix(in srgb, var(--semantic-warning) 35%, var(--color-border));
+  }
+  .tag-danger {
+    color: var(--semantic-danger);
+    background-color: var(--semantic-danger-bg);
+    border-color: color-mix(in srgb, var(--semantic-danger) 35%, var(--color-border));
+  }
+  .tag-info {
+    color: var(--semantic-info);
+    background-color: var(--semantic-info-bg);
+    border-color: color-mix(in srgb, var(--semantic-info) 35%, var(--color-border));
   }
 }
