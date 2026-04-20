@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/client";
 import { Profile } from "@/types/database";
+import { ProfileLivePreview } from "@/components/profile/ProfileLivePreview";
 
 const schema = z.object({
   name: z.string().optional(),
@@ -122,6 +123,7 @@ export function ProfileForm({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -136,6 +138,8 @@ export function ProfileForm({
       awards: profile?.awards?.join(", ") || "",
     },
   });
+
+  const live = watch();
 
   useEffect(() => {
     if (profile) {
@@ -183,17 +187,9 @@ export function ProfileForm({
     "mun-field min-w-0 rounded-md border border-white/15 bg-black/30 px-3 py-2 text-brand-navy placeholder:text-brand-muted/60";
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-3xl">
-      {!!profilePictureUrl && (
-        <div className="flex items-center gap-4">
-          <img
-            src={profilePictureUrl}
-            alt="Profile"
-            className="w-24 h-24 rounded-full object-cover"
-          />
-        </div>
-      )}
-
+    <div className="max-w-6xl">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_min(18rem,92vw)] lg:items-start xl:grid-cols-[minmax(0,1fr)_20rem]">
+        <form onSubmit={handleSubmit(onSubmit)} className="min-w-0 space-y-6">
       <div>
         <p className="block text-sm font-medium mb-2">Profile picture</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -354,6 +350,21 @@ export function ProfileForm({
       >
         Save profile
       </button>
-    </form>
+        </form>
+
+        <ProfileLivePreview
+          imageUrl={profilePictureUrl}
+          name={live.name ?? ""}
+          username={live.username ?? ""}
+          pronouns={live.pronouns ?? ""}
+          school={live.school ?? ""}
+          grade={live.grade ?? ""}
+          allocation={live.allocation ?? ""}
+          conferencesAttended={live.conferences_attended}
+          awardsRaw={live.awards ?? ""}
+          canViewPrivate={canViewPrivate}
+        />
+      </div>
+    </div>
   );
 }
