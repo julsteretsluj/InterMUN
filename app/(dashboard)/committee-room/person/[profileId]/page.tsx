@@ -209,17 +209,40 @@ export default async function CommitteeRoomPersonPage({
         </aside>
 
         <div className="space-y-4 min-w-0">
-          {placard ? (
+          {placard || (canReadFullProfile && fullProfile) ? (
             <section className="rounded-2xl border border-slate-300/80 bg-brand-paper p-5 md:p-6 shadow-[0_10px_24px_-14px_rgba(0,0,0,0.35)] dark:border-white/12 dark:bg-black/20">
               <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
-                Delegation placard
+                Member profile
               </h2>
-              <dl className="grid gap-2 sm:grid-cols-2">
-                <InfoRow label="Country" value={placard.country} />
-                <InfoRow label="Name" value={dash(placard.name)} />
-                <InfoRow label="School" value={dash(placard.school)} />
-                <InfoRow label="Pronouns" value={dash(placard.pronouns)} />
-              </dl>
+              {placard ? (
+                <div className="space-y-3">
+                  <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
+                    Delegation placard
+                  </h3>
+                  <dl className="grid gap-2 sm:grid-cols-2">
+                    <InfoRow label="Country" value={placard.country} />
+                    <InfoRow label="Name" value={dash(placard.name)} />
+                    <InfoRow label="School" value={dash(placard.school)} />
+                    <InfoRow label="Pronouns" value={dash(placard.pronouns)} />
+                  </dl>
+                </div>
+              ) : null}
+              {placard && canReadFullProfile && fullProfile ? (
+                <div className="my-4 border-t border-slate-300/70 dark:border-white/10" />
+              ) : null}
+              {canReadFullProfile && fullProfile ? (
+                <div className="space-y-3">
+                  <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
+                    Account profile
+                  </h3>
+                  <dl className="grid gap-2 sm:grid-cols-2">
+                    <InfoRow label="Account name" value={dash(fullProfile.name)} />
+                    <InfoRow label="Role" value={dash(fullProfile.role)} />
+                    <InfoRow label="Pronouns" value={dash(fullProfile.pronouns)} />
+                    <InfoRow label="School" value={dash(fullProfile.school)} />
+                  </dl>
+                </div>
+              ) : null}
             </section>
           ) : null}
 
@@ -233,19 +256,6 @@ export default async function CommitteeRoomPersonPage({
             </section>
           ) : null}
 
-          {canReadFullProfile && fullProfile ? (
-            <section className="rounded-2xl border border-slate-300/80 bg-brand-paper p-5 md:p-6 shadow-[0_10px_24px_-14px_rgba(0,0,0,0.35)] dark:border-white/12 dark:bg-black/20">
-              <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
-                Account profile
-              </h2>
-              <dl className="grid gap-2 sm:grid-cols-2">
-                <InfoRow label="Account name" value={dash(fullProfile.name)} />
-                <InfoRow label="Role" value={dash(fullProfile.role)} />
-                <InfoRow label="Pronouns" value={dash(fullProfile.pronouns)} />
-                <InfoRow label="School" value={dash(fullProfile.school)} />
-              </dl>
-            </section>
-          ) : null}
         </div>
       </div>
     </div>
