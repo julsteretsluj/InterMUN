@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
@@ -33,20 +34,39 @@ export function RunningNotesView({
   currentUserId: string;
   myRole: string;
 }) {
+  const router = useRouter();
   const [items, setItems] = useState(notes);
   const [activeNote, setActiveNote] = useState<Note | null>(notes[0] || null);
   const [content, setContent] = useState(notes[0]?.content || "");
   const [docsUrl, setDocsUrl] = useState(notes[0]?.google_docs_url?.trim() || "");
+  const [mutationError, setMutationError] = useState<string | null>(null);
   const supabase = createClient();
   const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
+  const activeNoteIdRef = useRef<string | null>(activeNote?.id ?? null);
+  activeNoteIdRef.current = activeNote?.id ?? null;
+
+  useEffect(() => {
+    setItems(notes);
+    const id = activeNoteIdRef.current;
+    const keep = id ? notes.find((n) => n.id === id) : null;
+    const next = keep ?? notes[0] ?? null;
+    setActiveNote(next);
+    if (next) syncEditorsFromNote(next, setContent, setDocsUrl);
+    else {
+      setContent("");
+      setDocsUrl("");
+    }
+  }, [notes]);
+
   async function saveNote() {
+    setMutationError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user || !activeNote) return;
     if (activeNote.user_id !== currentUserId) return;
-    await supabase
+    const { error } = await supabase
       .from("notes")
       .update({
         content,
@@ -54,17 +74,27 @@ export function RunningNotesView({
         updated_at: new Date().toISOString(),
       })
       .eq("id", activeNote.id);
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     await refreshNotes();
+    router.refresh();
   }
 
   async function deleteNote() {
+    setMutationError(null);
     if (!activeNote) return;
     if (activeNote.user_id !== currentUserId) return;
     const confirmed = confirm("Delete this running note?");
     if (!confirmed) return;
     const { error } = await supabase.from("notes").delete().eq("id", activeNote.id);
-    if (error) return;
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     await refreshNotes();
+    router.refresh();
   }
 
   async function refreshNotes() {
@@ -88,11 +118,12 @@ export function RunningNotesView({
   }
 
   async function createNote() {
+    setMutationError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("notes")
       .insert({
         user_id: user.id,
@@ -102,12 +133,17 @@ export function RunningNotesView({
       })
       .select()
       .single();
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     if (data) {
       const row = data as Note;
       setItems((prev) => [row, ...prev]);
       setActiveNote(row);
       setContent("");
       setDocsUrl("");
+      router.refresh();
     }
   }
 
@@ -118,7 +154,16 @@ export function RunningNotesView({
   const activeNoteFlaggedTerms = detectInappropriateTerms(activeNote?.content);
 
   return (
-    <div className="flex flex-col gap-6 lg:flex-row">
+    <div className="space-y-4">
+      {mutationError ? (
+        <p
+          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-100"
+          role="alert"
+        >
+          {mutationError}
+        </p>
+      ) : null}
+      <div className="flex flex-col gap-6 lg:flex-row">
       <div className="w-full shrink-0 space-y-2 lg:w-56">
         <button
           type="button"
@@ -244,6 +289,7 @@ export function RunningNotesView({
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

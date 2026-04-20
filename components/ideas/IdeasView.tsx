@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Lightbulb, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -20,6 +21,7 @@ export function IdeasView({
   ideas: Idea[];
   conferenceId: string;
 }) {
+  const router = useRouter();
   const [items, setItems] = useState(ideas);
   const [selectedId, setSelectedId] = useState<string | null>(() => ideas[0]?.id ?? null);
   const [newContent, setNewContent] = useState("");
@@ -28,6 +30,11 @@ export function IdeasView({
   const [editContent, setEditContent] = useState("");
   const [editGoogleUrl, setEditGoogleUrl] = useState("");
   const supabase = createClient();
+  const [mutationError, setMutationError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setItems(ideas);
+  }, [ideas]);
 
   const displaySelectedId =
     selectedId != null && items.some((i) => i.id === selectedId)
@@ -50,6 +57,7 @@ export function IdeasView({
   }
 
   async function addIdea() {
+    setMutationError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -57,7 +65,7 @@ export function IdeasView({
     const gUrl = newGoogleUrl.trim() || null;
     const text = newContent.trim();
     if (!gUrl && !text) return;
-    const { data: row } = await supabase
+    const { data: row, error } = await supabase
       .from("ideas")
       .insert({
         user_id: user.id,
@@ -67,18 +75,30 @@ export function IdeasView({
       })
       .select("id")
       .single();
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     setNewContent("");
     setNewGoogleUrl("");
     await reload();
     if (row?.id) setSelectedId(row.id as string);
+    router.refresh();
   }
 
   async function deleteIdea(id: string) {
-    await supabase.from("ideas").delete().eq("id", id);
+    setMutationError(null);
+    const { error } = await supabase.from("ideas").delete().eq("id", id);
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     await reload();
+    router.refresh();
   }
 
   async function saveEdit() {
+    setMutationError(null);
     if (!editing) return;
     const gUrl = editGoogleUrl.trim() || null;
     const text = editContent.trim();
@@ -87,15 +107,27 @@ export function IdeasView({
       .from("ideas")
       .update({ content: text || null, google_docs_url: gUrl })
       .eq("id", editing.id);
-    if (error) return;
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     await reload();
     setEditing(null);
     setEditContent("");
     setEditGoogleUrl("");
+    router.refresh();
   }
 
   return (
     <div className="space-y-4">
+      {mutationError ? (
+        <p
+          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-100"
+          role="alert"
+        >
+          {mutationError}
+        </p>
+      ) : null}
       {editing && (
         <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
           <h3 className="font-semibold text-brand-navy dark:text-zinc-100">Edit idea</h3>

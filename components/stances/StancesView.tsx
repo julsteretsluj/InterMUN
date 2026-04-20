@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { StanceHeatmap } from "./StanceHeatmap";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
@@ -25,6 +26,7 @@ export function StancesView({
   currentUserId: string;
   canEdit: boolean;
 }) {
+  const router = useRouter();
   const [selectedAllocation, setSelectedAllocation] =
     useState<Allocation | null>(null);
   const [noteContent, setNoteContent] = useState("");
@@ -35,16 +37,33 @@ export function StancesView({
       return stanceOverviewByUser[fallbackUser] || {};
     })()
   );
+  const [mutationError, setMutationError] = useState<string | null>(null);
   const supabase = createClient();
   const stanceNoteFlaggedTerms = detectInappropriateTerms(noteContent);
 
   useEffect(() => {
-    if (!selectedAllocation) return;
+    setSelectedAllocation((prev) => {
+      if (!prev) return prev;
+      const next = allocations.find((a) => a.id === prev.id);
+      return next ?? prev;
+    });
+  }, [allocations]);
+
+  useEffect(() => {
+    if (!selectedAllocation?.user_id) return;
     const uid = selectedAllocation.user_id;
-    if (uid && stanceOverviewByUser[uid]) setStanceData(stanceOverviewByUser[uid]);
-  }, [selectedAllocation, stanceOverviewByUser]);
+    const row = stanceOverviewByUser[uid];
+    if (row) setStanceData(row);
+  }, [selectedAllocation?.user_id, stanceOverviewByUser]);
+
+  useEffect(() => {
+    if (!canEdit) return;
+    const row = stanceOverviewByUser[currentUserId];
+    if (row) setStanceData(row);
+  }, [canEdit, stanceOverviewByUser, currentUserId]);
 
   async function saveStanceNote() {
+    setMutationError(null);
     if (!canEdit) return;
     const {
       data: { user },
@@ -52,55 +71,83 @@ export function StancesView({
     if (!user || !selectedAllocation) return;
     const existingNote = selectedAllocation.notes?.[0];
     if (existingNote) {
-      await supabase
+      const { error } = await supabase
         .from("notes")
         .update({
           content: noteContent,
           updated_at: new Date().toISOString(),
         })
         .eq("id", existingNote.id);
+      if (error) {
+        setMutationError(error.message);
+        return;
+      }
     } else {
-      await supabase.from("notes").insert({
+      const { error } = await supabase.from("notes").insert({
         user_id: user.id,
         allocation_id: selectedAllocation.id,
         note_type: "stance",
         content: noteContent,
       });
+      if (error) {
+        setMutationError(error.message);
+        return;
+      }
     }
-    const { data } = await supabase
+    const { data, error: listErr } = await supabase
       .from("allocations")
       .select("*, notes(*)")
       .eq("user_id", user.id);
+    if (listErr) {
+      setMutationError(listErr.message);
+      router.refresh();
+      return;
+    }
     if (data) {
       const a = data.find((x) => x.id === selectedAllocation.id);
       if (a) setSelectedAllocation(a);
     }
+    router.refresh();
   }
 
   async function addStanceToHeatmap() {
+    setMutationError(null);
     if (!canEdit) return;
     if (!stanceForm.topic.trim()) return;
     const updated = {
       ...stanceData,
       [stanceForm.topic]: stanceForm.extent,
     };
-    setStanceData(updated);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
-    await supabase
+    const { error } = await supabase
       .from("profiles")
       .update({
         stance_overview: updated,
         updated_at: new Date().toISOString(),
       })
       .eq("id", user.id);
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
+    setStanceData(updated);
     setStanceForm({ topic: "", extent: 5 });
+    router.refresh();
   }
 
   return (
     <div className="space-y-8">
+      {mutationError ? (
+        <p
+          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-100"
+          role="alert"
+        >
+          {mutationError}
+        </p>
+      ) : null}
       <div>
         <h3 className="font-semibold mb-4">Brief Stance Overview (Heatmap)</h3>
         <p className="text-sm text-brand-muted text-brand-muted mb-3">

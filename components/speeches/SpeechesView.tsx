@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Mic, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -14,12 +15,18 @@ interface Speech {
 }
 
 export function SpeechesView({ speeches }: { speeches: Speech[] }) {
+  const router = useRouter();
   const [items, setItems] = useState(speeches);
   const [selectedId, setSelectedId] = useState<string | null>(speeches[0]?.id ?? null);
   const [editing, setEditing] = useState<Speech | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: "", content: "", google_docs_url: "" });
+  const [saveError, setSaveError] = useState<string | null>(null);
   const supabase = createClient();
+
+  useEffect(() => {
+    setItems(speeches);
+  }, [speeches]);
 
   const displaySelectedId =
     selectedId != null && items.some((s) => s.id === selectedId)
@@ -28,13 +35,14 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
   const selected = items.find((s) => s.id === displaySelectedId) ?? null;
 
   async function saveSpeech() {
+    setSaveError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) return;
     const gUrl = form.google_docs_url.trim() || null;
     if (editing) {
-      await supabase
+      const { error } = await supabase
         .from("speeches")
         .update({
           title: form.title || null,
@@ -43,9 +51,13 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
           updated_at: new Date().toISOString(),
         })
         .eq("id", editing.id);
+      if (error) {
+        setSaveError(error.message);
+        return;
+      }
       setSelectedId(editing.id);
     } else {
-      const { data: row } = await supabase
+      const { data: row, error } = await supabase
         .from("speeches")
         .insert({
           user_id: user.id,
@@ -55,6 +67,10 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
         })
         .select("id")
         .single();
+      if (error) {
+        setSaveError(error.message);
+        return;
+      }
       if (row?.id) setSelectedId(row.id as string);
     }
     setEditing(null);
@@ -66,6 +82,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
       .eq("user_id", user.id)
       .order("updated_at", { ascending: false });
     if (data) setItems(data as Speech[]);
+    router.refresh();
   }
 
   return (
@@ -113,6 +130,11 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
             className="mun-field h-40 resize-y"
           />
           <div className="flex flex-wrap gap-2">
+            {saveError ? (
+              <p className="w-full text-sm text-red-600" role="alert">
+                {saveError}
+              </p>
+            ) : null}
             <button type="button" onClick={() => void saveSpeech()} className="mun-btn-primary">
               Save
             </button>

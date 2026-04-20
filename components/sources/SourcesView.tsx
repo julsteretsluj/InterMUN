@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ExternalLink, Link2, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -23,8 +24,10 @@ export function SourcesView({
   currentUserId: string;
   canEditAll: boolean;
 }) {
+  const router = useRouter();
   const [items, setItems] = useState(sources);
   const [selectedId, setSelectedId] = useState<string | null>(() => sources[0]?.id ?? null);
+  const [mutationError, setMutationError] = useState<string | null>(null);
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -32,6 +35,10 @@ export function SourcesView({
   const [editUrl, setEditUrl] = useState("");
   const [editTitle, setEditTitle] = useState("");
   const supabase = createClient();
+
+  useEffect(() => {
+    setItems(sources);
+  }, [sources]);
 
   const displaySelectedId =
     selectedId != null && items.some((s) => s.id === selectedId)
@@ -67,11 +74,12 @@ export function SourcesView({
   }
 
   async function addSource() {
+    setMutationError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user || !url.trim()) return;
-    const { data: row } = await supabase
+    const { data: row, error } = await supabase
       .from("sources")
       .insert({
         user_id: user.id,
@@ -80,14 +88,20 @@ export function SourcesView({
       })
       .select("id")
       .single();
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     setUrl("");
     setTitle("");
     setShowForm(false);
     await refreshSources();
     if (row?.id) setSelectedId(row.id as string);
+    router.refresh();
   }
 
   async function saveEdit() {
+    setMutationError(null);
     if (!editing) return;
     if (!canEditAll && editing.user_id !== currentUserId) return;
     if (!editUrl.trim()) return;
@@ -100,26 +114,40 @@ export function SourcesView({
       })
       .eq("id", editing.id);
 
-    if (error) return;
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
 
     setEditing(null);
     setEditUrl("");
     setEditTitle("");
     await refreshSources();
+    router.refresh();
   }
 
   async function deleteSource(id: string) {
+    setMutationError(null);
     if (!canEditAll) {
       const src = items.find((s) => s.id === id);
       if (!src || src.user_id !== currentUserId) return;
     }
     const { error } = await supabase.from("sources").delete().eq("id", id);
-    if (error) return;
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
     await refreshSources();
+    router.refresh();
   }
 
   return (
     <div className="space-y-4">
+      {mutationError ? (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-100" role="alert">
+          {mutationError}
+        </p>
+      ) : null}
       <button
         type="button"
         onClick={() => setShowForm(true)}
