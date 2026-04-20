@@ -56,6 +56,14 @@ function isDaisSeatLabel(raw: string | null | undefined) {
   return label === "head chair" || label === "co-chair" || label === "co chair" || label === "rapporteur";
 }
 
+function emojiForDaisTitle(title: string | null | undefined) {
+  const label = String(title ?? "").trim().toLowerCase();
+  if (label === "head chair") return "🧑‍⚖️";
+  if (label === "co-chair" || label === "co chair") return "👥";
+  if (label === "rapporteur") return "📝";
+  return "🎙️";
+}
+
 function Placard({
   placard,
   personHref,
@@ -91,6 +99,7 @@ function Placard({
       >
         {vacant ? (
           <div className="text-center font-display text-xs font-semibold py-1">
+            <span aria-hidden="true" className="mr-1">🪑</span>
             Vacant
           </div>
         ) : (
@@ -103,6 +112,9 @@ function Placard({
             </>
           ) : (
             <>
+              <div className="text-sm leading-none mb-1" aria-hidden="true">
+                {flagEmojiForCountryName(country)}
+              </div>
               <div className="text-[0.53rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
                 {country}
               </div>
@@ -128,7 +140,7 @@ function Placard({
     </>
   );
 
-  const wrapClass = "w-[7rem] sm:w-[7.25rem] md:w-32 text-left block";
+  const wrapClass = "w-[6.25rem] sm:w-[6.5rem] md:w-[7.25rem] text-left block";
 
   if (personHref) {
     return (
@@ -174,14 +186,14 @@ function DaisStation({
 
   const inner = (
     <>
-      <div className="relative flex items-end justify-center gap-0.5 h-14 sm:h-16">
+      <div className="relative flex items-end justify-center gap-0.5 h-12 sm:h-14">
         <Armchair
-          className="w-10 h-10 sm:w-12 sm:h-12 text-brand-navy/90 drop-shadow-sm"
+          className="w-8 h-8 sm:w-10 sm:h-10 text-brand-navy/90 drop-shadow-sm"
           strokeWidth={1.25}
         />
         {seat.showGavel && (
           <Gavel
-            className="w-6 h-6 sm:w-7 sm:h-7 text-brand-accent-bright -mb-0.5 -ml-1 drop-shadow"
+            className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent-bright -mb-0.5 -ml-1 drop-shadow"
             strokeWidth={2}
             aria-label="Gavel"
           />
@@ -189,15 +201,16 @@ function DaisStation({
       </div>
       <div
         className={[
-          "rounded-lg bg-white px-2 py-1.5 w-full text-center border border-slate-300/90 transition-[opacity,transform,box-shadow,border-color] duration-200 shadow-[0_2px_8px_rgba(15,23,42,0.08)]",
+          "rounded-lg bg-white px-1.5 py-1 w-full text-center border border-slate-300/90 transition-[opacity,transform,box-shadow,border-color] duration-200 shadow-[0_2px_8px_rgba(15,23,42,0.08)]",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
           ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "hover:border-slate-400",
         ].join(" ")}
       >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-accent-bright/90">
+          <span aria-hidden="true" className="mr-1">{emojiForDaisTitle(seat.title)}</span>
           {seat.title}
         </p>
-        <p className="text-xs sm:text-sm font-medium truncate max-w-[7rem] mx-auto">
+        <p className="text-[0.7rem] sm:text-xs font-medium truncate max-w-[6.5rem] mx-auto">
           {seat.name ?? "—"}
         </p>
       </div>
@@ -205,7 +218,7 @@ function DaisStation({
   );
 
   const wrapClass = [
-    "flex flex-col items-center gap-1 text-brand-navy min-w-[5.5rem] sm:min-w-[6.5rem] transition-opacity duration-200",
+    "flex flex-col items-center gap-1 text-brand-navy min-w-[5rem] sm:min-w-[5.75rem] transition-opacity duration-200",
     dimmed ? "opacity-[0.35]" : "",
     personHref ? "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright" : "cursor-default",
   ].join(" ");
@@ -387,13 +400,13 @@ export function VirtualCommitteeRoom({
           </span>
         ) : null}
         <div
-          className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
+          className="relative aspect-[16/10] min-h-[360px] sm:min-h-[460px] md:min-h-[540px]"
           style={{
             background: "linear-gradient(180deg, #f2f6fc 0%, #edf2f8 46%, #e8eef6 100%)",
           }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[27%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
+            className="absolute top-0 left-[8%] right-[8%] h-[23%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
           >
             <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-slate-200/90" />
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-slate-500">
@@ -404,7 +417,7 @@ export function VirtualCommitteeRoom({
             </div>
           </div>
 
-          <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-5 sm:gap-10 md:gap-14 px-2 z-10 flex-wrap">
+          <div className="absolute top-[3%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">
             {dais.map((seat, i) => {
               const href = seat.profileId
                 ? `${personHrefBase.replace(/\/$/, "")}/${seat.profileId}`
@@ -421,19 +434,19 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-lg border border-slate-300/90 bg-white shadow-[0_6px_16px_rgba(15,23,42,0.14)] max-w-[90%]">
-            <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight">
+          <div className="absolute top-[14%] sm:top-[15%] md:top-[16%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-lg border border-slate-300/90 bg-white shadow-[0_6px_16px_rgba(15,23,42,0.14)] max-w-[92%]">
+            <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight break-words">
               {committeeName}
             </p>
-            <p className="text-center text-[0.55rem] uppercase tracking-[0.25em] text-brand-muted">
+            <p className="text-center text-[0.5rem] uppercase tracking-[0.22em] text-brand-muted">
               {conferenceName}
             </p>
           </div>
 
-          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-4 pb-5 pt-[31%] md:pt-[29%]">
+          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[24%] sm:pt-[25%] md:pt-[23%]">
             <div
               ref={placardGridRef}
-              className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2.5 sm:gap-3 place-items-center"
+              className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center"
             >
               {ringSeats.map((p, i) => {
                 const href =
