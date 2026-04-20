@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 
 interface Report {
   id: string;
@@ -62,6 +63,10 @@ export function ReportView({
     router.refresh();
   }
 
+  function appendEmoji(emoji: string) {
+    setDescription((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
+  }
+
   return (
     <div className="space-y-6">
       {mutationError ? (
@@ -98,6 +103,7 @@ export function ReportView({
               placeholder="Describe the incident..."
               className="mun-field h-28 resize-y"
             />
+            <EmojiQuickInsert onPick={appendEmoji} />
           </div>
           <button type="button" onClick={() => void submitReport()} className="mun-btn-primary">
             Submit report

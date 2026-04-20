@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { getResolvedActiveConference } from "@/lib/active-conference";
+import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 
 export type ChairSessionConference = {
@@ -38,7 +38,7 @@ export async function loadChairSessionConference(): Promise<ChairSessionConferen
     redirect("/profile");
   }
 
-  const active = await getResolvedActiveConference();
+  const active = await getConferenceForDashboard({ role: "chair" });
   if (!active) return null;
 
   const bundle = await getResolvedDebateConferenceBundle(supabase, active.id);

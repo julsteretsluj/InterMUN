@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Lightbulb, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 
 interface Idea {
   id: string;
@@ -118,6 +119,14 @@ export function IdeasView({
     router.refresh();
   }
 
+  function appendEmojiToNew(emoji: string) {
+    setNewContent((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
+  }
+
+  function appendEmojiToEdit(emoji: string) {
+    setEditContent((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
+  }
+
   return (
     <div className="space-y-4">
       {mutationError ? (
@@ -150,6 +159,7 @@ export function IdeasView({
             placeholder="Short idea text (optional)"
             className="mun-field h-32 resize-y"
           />
+          <EmojiQuickInsert onPick={appendEmojiToEdit} />
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => void saveEdit()} className="mun-btn-primary">
               Save
@@ -196,6 +206,7 @@ export function IdeasView({
             placeholder="Resolution idea…"
             className="mun-field min-h-[80px] flex-1 resize-y"
           />
+          <EmojiQuickInsert onPick={appendEmojiToNew} />
           <button
             type="button"
             onClick={() => void addIdea()}

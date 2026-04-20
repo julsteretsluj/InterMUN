@@ -257,13 +257,15 @@ export function ResolutionsView({
           {actionError}
         </p>
       ) : null}
-      <DelegateResolutionBuilder
-        resolutions={resolutions.map((r) => ({
-          id: r.id,
-          conference_id: r.conference_id,
-          google_docs_url: r.google_docs_url,
-        }))}
-      />
+      {!canCreate ? (
+        <DelegateResolutionBuilder
+          resolutions={resolutions.map((r) => ({
+            id: r.id,
+            conference_id: r.conference_id,
+            google_docs_url: r.google_docs_url,
+          }))}
+        />
+      ) : null}
       <div className="space-y-4">
         {resolutions.map((r) => {
           const resolutionBlocs = blocs.filter((b) => b.resolution_id === r.id);

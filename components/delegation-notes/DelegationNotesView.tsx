@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
+import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 
 type NoteTopic =
   | "bloc forming"
@@ -119,6 +120,7 @@ export function DelegationNotesView({
   const isChairLike = myRole === "chair" || myRole === "admin";
   const isDelegate = myRole === "delegate";
   const isSmt = myRole === "smt";
+  const isStaffLike = isChairLike || isSmt;
 
   const selectedAllocationRecipientIds = selectedAllocationRecipientIdsState;
   const selectedChairRecipientIds = selectedChairRecipientIdsState;
@@ -137,12 +139,17 @@ export function DelegationNotesView({
   }, [notes]);
 
   const canCompose =
-    (!isSmt && (isChairLike || isDelegate)) &&
-    (myAllocationId !== null || isChairLike) &&
-    (allocationOptions.length > 0 || isChairLike) &&
+    (isStaffLike || isDelegate) &&
+    (!isSmt || smtVerified) &&
+    (myAllocationId !== null || isStaffLike) &&
+    (allocationOptions.length > 0 || isStaffLike) &&
     sessionActive &&
     !unmoderatedLocked &&
     !votingProcedureLocked;
+
+  function appendEmoji(emoji: string) {
+    setContent((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
+  }
 
   const lastRefreshAtRef = useRef<number>(0);
 
@@ -345,6 +352,10 @@ export function DelegationNotesView({
       setError("Notes are disabled during unmoderated caucus.");
       return;
     }
+    if (isSmt && !smtVerified) {
+      setError("Verify with the staff secondary password to send notes to this committee.");
+      return;
+    }
 
     const trimmed = content.trim();
     if (!trimmed) return setError("Write the note content first.");
@@ -354,7 +365,7 @@ export function DelegationNotesView({
     }
 
     const senderAllo = myAllocationId;
-    const senderProfile = senderAllo ? null : isChairLike ? myUserId : null;
+    const senderProfile = senderAllo ? null : isStaffLike ? myUserId : null;
     if (!senderAllo && !senderProfile) {
       return setError("You need an allocation to send notes (or be a chair).");
     }
@@ -568,10 +579,11 @@ export function DelegationNotesView({
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder={canCompose ? "Write your note..." : "Only delegates/chairs can send notes."}
+              placeholder={canCompose ? "Write your note..." : "Only delegates/chairs/SMT can send notes."}
               className={`w-full h-28 px-3 py-2 ${field}`}
               disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
             />
+            {canCompose ? <EmojiQuickInsert onPick={appendEmoji} /> : null}
             {error ? (
               <p className="rounded-lg border border-red-400/40 bg-red-500/15 px-3 py-2 text-sm text-red-200">
                 {error}

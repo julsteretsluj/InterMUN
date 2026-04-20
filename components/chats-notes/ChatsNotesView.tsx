@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 
 type ChatMessage = {
   id: string;
@@ -123,6 +124,10 @@ export function ChatsNotesView({
     await refreshMessages();
   }
 
+  function appendEmoji(emoji: string) {
+    setNewMessage((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -158,6 +163,9 @@ export function ChatsNotesView({
               placeholder={selectedMessage ? "Edit your message..." : "Type your message..."}
               className="w-full h-32 px-3 py-2 border rounded-md bg-black/30 border-white/20"
             />
+            <div className="mt-2">
+              <EmojiQuickInsert onPick={appendEmoji} />
+            </div>
             {selectedMessage ? (
               <button
                 onClick={saveEditedMessage}

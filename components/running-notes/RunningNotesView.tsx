@@ -7,6 +7,7 @@ import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDo
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
+import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import {
   RUNNING_NOTE_TAG_PRESETS,
   normalizeRunningNoteTags,
@@ -92,6 +93,10 @@ export function RunningNotesView({
     if (!t) return;
     setTags((prev) => normalizeRunningNoteTags([...prev, t]));
     setCustomTagDraft("");
+  }
+
+  function appendEmoji(emoji: string) {
+    setContent((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
   }
 
   async function saveNote() {
@@ -388,6 +393,7 @@ export function RunningNotesView({
               placeholder="Keep notes of everything…"
               disabled={!canEdit}
             />
+            {canEdit ? <EmojiQuickInsert onPick={appendEmoji} /> : null}
           </div>
           <div className="flex flex-wrap gap-2">
             <button

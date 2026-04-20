@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Mic, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 
 interface Speech {
   id: string;
@@ -85,6 +86,13 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
     router.refresh();
   }
 
+  function appendEmoji(emoji: string) {
+    setForm((prev) => ({
+      ...prev,
+      content: `${prev.content}${prev.content.endsWith(" ") || prev.content.length === 0 ? "" : " "}${emoji} `,
+    }));
+  }
+
   return (
     <div className="space-y-4">
       <button
@@ -129,6 +137,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
             placeholder="Plain text draft (optional if you use a Google Doc)"
             className="mun-field h-40 resize-y"
           />
+          <EmojiQuickInsert onPick={appendEmoji} />
           <div className="flex flex-wrap gap-2">
             {saveError ? (
               <p className="w-full text-sm text-red-600" role="alert">
