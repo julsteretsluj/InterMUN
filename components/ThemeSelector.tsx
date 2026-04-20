@@ -215,6 +215,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           <p className="tag tag-neutral mt-4 mb-1.5">Typography</p>
           <button
             type="button"
+            title="Uses the OpenDyslexic typeface for UI and document text when enabled."
             onClick={toggleDyslexicFont}
             className={cn(
               "mt-2 flex w-full items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-medium transition",
