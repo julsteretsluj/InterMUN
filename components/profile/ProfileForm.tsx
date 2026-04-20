@@ -1,12 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/client";
 import { Profile } from "@/types/database";
 import { ProfileLivePreview } from "@/components/profile/ProfileLivePreview";
+import {
+  PROFILE_PRONOUN_PRESETS,
+  PROFILE_PRONOUN_PRESET_SET,
+  pronounsFormValueFromProfile,
+} from "@/lib/profile-pronouns";
 
 const schema = z.object({
   name: z.string().optional(),
@@ -18,7 +24,13 @@ const schema = z.object({
       (v) => v === undefined || v === "" || /^[A-Za-z0-9_.-]{3,32}$/.test(v),
       "Username must be 3-32 chars (letters, numbers, _, ., -)"
     ),
-  pronouns: z.string().optional(),
+  pronouns: z
+    .string()
+    .optional()
+    .refine(
+      (v) => !v?.trim() || PROFILE_PRONOUN_PRESET_SET.has(v.trim()),
+      "Choose a pronoun from the list."
+    ),
   school: z.string().optional(),
   grade: z.string().optional(),
   allocation: z.string().optional(),
@@ -49,15 +61,37 @@ export function ProfileForm({
   canViewPrivate,
   availableAllocations,
 }: ProfileFormProps) {
+  const router = useRouter();
   const [profilePictureUrl, setProfilePictureUrl] = useState(
     profile?.profile_picture_url || ""
   );
   const [uploadPending, setUploadPending] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const profilePictureFileRef = useRef<HTMLInputElement>(null);
+  const [submitFeedback, setSubmitFeedback] = useState<{
+    kind: "success" | "error";
+    message: string;
+  } | null>(null);
   const supabase = createClient();
+
+  const formValues = useMemo(
+    (): FormData => ({
+      name: profile?.name ?? "",
+      username: profile?.username ?? "",
+      pronouns: pronounsFormValueFromProfile(profile?.pronouns),
+      school: profile?.school ?? "",
+      grade: profile?.grade ?? "",
+      allocation: profile?.allocation ?? "",
+      conferences_attended: profile?.conferences_attended ?? 0,
+      awards: profile?.awards?.join(", ") ?? "",
+    }),
+    [profile]
+  );
 
   async function uploadProfilePicture(file: File) {
     setUploadError(null);
+    setUploadSuccess(false);
 
     if (!file.type.startsWith("image/")) {
       setUploadError("Please choose an image file.");
@@ -86,7 +120,13 @@ export function ProfileForm({
         });
 
       if (uploadErr) {
-        throw new Error(uploadErr.message);
+        const m = uploadErr.message;
+        if (/bucket not found/i.test(m)) {
+          throw new Error(
+            "Profile picture storage is not set up. In the Supabase project, run migration 00100_profile_pictures_storage_bucket.sql, or create a public storage bucket named profile-pictures (see README)."
+          );
+        }
+        throw new Error(m);
       }
 
       const { data: publicUrlData } = supabase.storage
@@ -98,19 +138,27 @@ export function ProfileForm({
       }
 
       // Persist URL immediately so the user doesn't have to click "Save profile".
-      const { error: updateErr } = await supabase
+      const { error: persistErr } = await supabase
         .from("profiles")
-        .update({
-          profile_picture_url: publicUrlData.publicUrl,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", userId);
+        .upsert(
+          {
+            id: userId,
+            profile_picture_url: publicUrlData.publicUrl,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "id" }
+        );
 
-      if (updateErr) {
-        throw new Error(updateErr.message);
+      if (persistErr) {
+        throw new Error(persistErr.message);
       }
 
       setProfilePictureUrl(publicUrlData.publicUrl);
+      setUploadSuccess(true);
+      if (profilePictureFileRef.current) {
+        profilePictureFileRef.current.value = "";
+      }
+      router.refresh();
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Upload failed.";
       setUploadError(msg);
@@ -122,53 +170,43 @@ export function ProfileForm({
   const {
     register,
     handleSubmit,
-    reset,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      name: profile?.name || "",
-      username: profile?.username || "",
-      pronouns: profile?.pronouns || "",
-      school: profile?.school || "",
-      grade: profile?.grade || "",
-      allocation: profile?.allocation || "",
-      conferences_attended: profile?.conferences_attended ?? 0,
-      awards: profile?.awards?.join(", ") || "",
-    },
+    values: formValues,
   });
 
   const live = watch();
 
+  const pronounsSelectValue = (watch("pronouns") ?? "").trim();
+
+  const legacyCustomPronouns =
+    profile?.pronouns?.trim() && !PROFILE_PRONOUN_PRESET_SET.has(profile.pronouns.trim())
+      ? profile.pronouns.trim()
+      : null;
+
   useEffect(() => {
-    if (profile) {
-      reset({
-        name: profile.name || "",
-        username: profile.username || "",
-        pronouns: profile.pronouns || "",
-        school: profile.school || "",
-        grade: profile.grade || "",
-        allocation: profile.allocation || "",
-        conferences_attended: profile.conferences_attended ?? 0,
-        awards: profile.awards?.join(", ") || "",
-      });
-      // This state is only derived from the loaded profile; disabling the rule avoids
-      // cascading render warnings from the linter's heuristics.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setProfilePictureUrl(profile.profile_picture_url || "");
-    }
-  }, [profile, reset]);
+    if (!profile) return;
+    // Keep preview URL in sync when server profile updates (e.g. after refresh).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setProfilePictureUrl(profile.profile_picture_url || "");
+  }, [profile?.id, profile?.profile_picture_url, profile?.updated_at]);
 
   async function onSubmit(data: FormData) {
+    setSubmitFeedback(null);
     const normalizedUsername = data.username?.trim().toLowerCase();
-    await supabase
+    const pt = data.pronouns?.trim();
+    const pronounsNorm =
+      pt && PROFILE_PRONOUN_PRESET_SET.has(pt) ? pt : null;
+    const { error } = await supabase
       .from("profiles")
       .upsert({
         id: userId,
         name: data.name,
         username: normalizedUsername ? normalizedUsername : null,
-        pronouns: data.pronouns,
+        pronouns: pronounsNorm,
         school: data.school || null,
         grade: data.grade || null,
         allocation: data.allocation,
@@ -181,6 +219,17 @@ export function ProfileForm({
         profile_picture_url: profilePictureUrl || null,
         updated_at: new Date().toISOString(),
       });
+
+    if (error) {
+      setSubmitFeedback({
+        kind: "error",
+        message: error.message || "Could not save profile.",
+      });
+      return;
+    }
+
+    setSubmitFeedback({ kind: "success", message: "Profile saved." });
+    router.refresh();
   }
 
   const fieldClass =
@@ -201,6 +250,7 @@ export function ProfileForm({
               Upload file
             </label>
             <input
+              ref={profilePictureFileRef}
               type="file"
               id="profile-picture-file"
               accept="image/*"
@@ -215,6 +265,11 @@ export function ProfileForm({
             />
             {uploadPending && (
               <p className="text-xs text-brand-muted mt-1">Uploading…</p>
+            )}
+            {uploadSuccess && !uploadPending && (
+              <p className="text-xs text-brand-muted mt-1" role="status">
+                Photo uploaded and saved.
+              </p>
             )}
             {uploadError && (
               <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2 mt-2">
@@ -257,12 +312,33 @@ export function ProfileForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="min-w-0">
-          <label className="block text-sm font-medium mb-1">Pronouns</label>
-          <input
-            {...register("pronouns")}
+          <label htmlFor="profile-pronouns-select" className="block text-sm font-medium mb-1">
+            Pronouns
+          </label>
+          <select
+            id="profile-pronouns-select"
             className={fieldClass}
-            placeholder="e.g. she/her"
-          />
+            value={pronounsSelectValue}
+            onChange={(e) => {
+              setValue("pronouns", e.target.value, { shouldDirty: true, shouldValidate: true });
+            }}
+          >
+            <option value="">—</option>
+            {PROFILE_PRONOUN_PRESETS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+          {legacyCustomPronouns ? (
+            <p className="mt-1.5 text-xs text-brand-muted">
+              Your profile had a custom pronoun set that is no longer accepted here. Pick an option
+              above (or leave blank). Saving replaces the old value.
+            </p>
+          ) : null}
+          {errors.pronouns ? (
+            <p className="mt-1 text-sm text-red-600">{errors.pronouns.message}</p>
+          ) : null}
         </div>
         <div className="min-w-0">
           <label className="block text-sm font-medium mb-1">School</label>
@@ -350,6 +426,18 @@ export function ProfileForm({
       >
         Save profile
       </button>
+      {submitFeedback ? (
+        <p
+          role="status"
+          className={
+            submitFeedback.kind === "success"
+              ? "text-sm text-brand-muted"
+              : "text-sm text-red-600"
+          }
+        >
+          {submitFeedback.message}
+        </p>
+      ) : null}
         </form>
 
         <ProfileLivePreview

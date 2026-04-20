@@ -56,8 +56,7 @@ A full-featured MUN platform built with Next.js and Supabase.
      ```
 
    - **Profile picture uploads (Supabase Storage):**
-     - Create a storage bucket named `profile-pictures`
-  - Storage objects are uploaded directly from the browser as authenticated users.
+     - Run migration `supabase/migrations/00100_profile_pictures_storage_bucket.sql` (creates public bucket `profile-pictures` + RLS). Or create the bucket manually and match the migration policies so users can upload only under `profiles/<their-user-id>/`.
 
 - **Committee logo uploads (SMT) (Supabase Storage):**
   - Run the migration `supabase/migrations/00037_committee_logos_upload.sql`
