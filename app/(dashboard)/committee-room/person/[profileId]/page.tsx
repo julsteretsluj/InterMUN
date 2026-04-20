@@ -15,6 +15,12 @@ function dash(v: string | null | undefined) {
   return t ? t : "—";
 }
 
+function sameText(a: string | null | undefined, b: string | null | undefined) {
+  const aa = (a ?? "").trim().toLowerCase();
+  const bb = (b ?? "").trim().toLowerCase();
+  return aa.length > 0 && aa === bb;
+}
+
 function initialsFrom(label: string): string {
   const parts = label
     .trim()
@@ -236,10 +242,16 @@ export default async function CommitteeRoomPersonPage({
                     Account profile
                   </h3>
                   <dl className="grid gap-2 sm:grid-cols-2">
-                    <InfoRow label="Account name" value={dash(fullProfile.name)} />
+                    {!placard || !sameText(fullProfile.name, placard.name) ? (
+                      <InfoRow label="Account name" value={dash(fullProfile.name)} />
+                    ) : null}
                     <InfoRow label="Role" value={dash(fullProfile.role)} />
-                    <InfoRow label="Pronouns" value={dash(fullProfile.pronouns)} />
-                    <InfoRow label="School" value={dash(fullProfile.school)} />
+                    {!placard || !sameText(fullProfile.pronouns, placard.pronouns) ? (
+                      <InfoRow label="Pronouns" value={dash(fullProfile.pronouns)} />
+                    ) : null}
+                    {!placard || !sameText(fullProfile.school, placard.school) ? (
+                      <InfoRow label="School" value={dash(fullProfile.school)} />
+                    ) : null}
                   </dl>
                 </div>
               ) : null}
