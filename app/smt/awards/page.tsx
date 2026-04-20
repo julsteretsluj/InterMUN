@@ -21,6 +21,7 @@ import {
   SINGLE_WINNER_NOMINATION_TYPES,
 } from "@/lib/award-nomination-review";
 import type { ChairNominationRow } from "./ChairNominationsPanel";
+import type { BestDelegateComparisonRow } from "./SmtBestDelegateComparison";
 import { SmtAwardsRefreshOnFocus } from "./SmtAwardsRefreshOnFocus";
 import { SmtAwardsTabs } from "./SmtAwardsTabs";
 export const dynamic = "force-dynamic";
@@ -100,6 +101,7 @@ export default async function SmtAwardsPage() {
   const nomineeNameByProfileId: Record<string, string> = Object.fromEntries(profileById);
 
   type CommitteeOpt = { id: string; label: string };
+  let conferenceIdToCanonicalPayload: Record<string, string> = {};
   let smtCommittees: CommitteeOpt[] = [];
   let smtChairSeats: ChairSeat[] = [];
   let smtParticipationRows: AwardParticipationScore[] = [];
@@ -107,6 +109,7 @@ export default async function SmtAwardsPage() {
   let smtChairRanking: { seat: ChairSeat; total: number }[] = [];
   let smtReportRanking: { committee: CommitteeOpt; total: number }[] = [];
   let smtReadiness = { ok: true as boolean, missingChairs: [] as string[], missingReports: [] as string[] };
+  let bestDelegateComparisonRows: BestDelegateComparisonRow[] = [];
 
   if (eventId) {
     const rawConfs = (conferences ?? []).filter((c) => c.event_id === eventId && !isConferenceEventPlaceholderRow(c));
@@ -119,6 +122,7 @@ export default async function SmtAwardsPage() {
       rawConfs,
       conferenceIdsWithAllocations
     );
+    conferenceIdToCanonicalPayload = Object.fromEntries(conferenceIdToCanonical);
     smtCommittees = canonicalCommittees;
     const confIds = allConfIds;
     const canonicalLabelByCommitteeId = Object.fromEntries(canonicalCommittees.map((x) => [x.id, x.label]));
@@ -217,6 +221,20 @@ export default async function SmtAwardsPage() {
         smtCommittees.map((c) => ({ id: c.id, committee: c.label, name: null })),
         smtReadinessRows
       );
+
+      const { data: bdCompare } = await supabase
+        .from("award_nominations")
+        .select(
+          "id, nomination_type, rank, status, evidence_note, rubric_scores, committee_conference_id, nominee_profile_id"
+        )
+        .in("committee_conference_id", confIds)
+        .in("nomination_type", ["committee_best_delegate", "conference_best_delegate"])
+        .in("status", ["draft", "pending"])
+        .order("committee_conference_id", { ascending: true })
+        .order("nomination_type", { ascending: true })
+        .order("rank", { ascending: true });
+
+      bestDelegateComparisonRows = (bdCompare ?? []) as BestDelegateComparisonRow[];
     }
   }
 
@@ -264,6 +282,8 @@ export default async function SmtAwardsPage() {
           missingReports: smtReadiness.missingReports,
         }}
         hasActiveEvent={Boolean(eventId)}
+        conferenceIdToCanonical={conferenceIdToCanonicalPayload}
+        bestDelegateComparisonRows={bestDelegateComparisonRows}
       />
     </MunPageShell>
   );

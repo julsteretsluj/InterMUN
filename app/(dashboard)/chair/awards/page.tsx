@@ -24,6 +24,8 @@ import {
   rubricNumericTotalForKeys,
 } from "@/lib/award-participation-scoring";
 import { DelegateMatrixPanel } from "./DelegateMatrixPanel";
+import { ChairAwardsShell } from "@/components/chair/awards/ChairAwardsShell";
+import { AwardsRubricReference } from "@/components/awards/AwardsRubricReference";
 
 export const dynamic = "force-dynamic";
 
@@ -282,7 +284,9 @@ export default async function ChairAwardsPage() {
 
   return (
     <MunPageShell title="Score">
-      <div className="space-y-5">
+      <ChairAwardsShell
+        score={
+          <div className="space-y-5">
         <div className="rounded-xl border border-brand-navy/10 bg-logo-cyan/12 p-3 text-sm text-brand-muted">
           <p>
             Scoring matches the{" "}
@@ -407,7 +411,10 @@ export default async function ChairAwardsPage() {
             </section>
           );
         })}
-      </div>
+          </div>
+        }
+        rubric={<AwardsRubricReference />}
+      />
     </MunPageShell>
   );
 }

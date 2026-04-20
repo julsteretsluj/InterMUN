@@ -9,6 +9,7 @@ import { getConferenceForDashboard } from "@/lib/active-conference";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -196,7 +197,7 @@ export default async function ProfilePage() {
     <MunPageShell title="Profile">
       {delegateWelcome}
       {isDelegate && <DelegateMaterialsExportCard />}
-      {(myPendingNominations?.length ?? 0) > 0 && (
+      {(myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) === 0 ? (
         <div className="mb-8 rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Pending chair nominations
@@ -225,7 +226,71 @@ export default async function ProfilePage() {
             })}
           </ul>
         </div>
-      )}
+      ) : null}
+      {(myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) > 0 ? (
+        <ProfileAwardsSummaryTabs
+          pendingSlot={
+            <div className="rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
+              <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+                Pending chair nominations
+              </h3>
+              <p className="mb-3 text-xs text-brand-muted">
+                Saved by chairs and shared with SMT for review. Final awards appear after confirmation.
+              </p>
+              <ul className="space-y-2 text-sm">
+                {(myPendingNominations ?? []).map((n) => {
+                  const category = awardCategoryMeta(n.nomination_type);
+                  const where = n.committee_conference_id
+                    ? committeeLabel[n.committee_conference_id] ?? "Committee session"
+                    : null;
+                  return (
+                    <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                      <span className="font-medium text-brand-navy">
+                        {category?.label ?? n.nomination_type}
+                      </span>
+                      <span className="text-brand-muted"> · rank {n.rank}</span>
+                      {where && <span className="text-brand-muted"> · {where}</span>}
+                      {n.evidence_note && (
+                        <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          }
+          recordedSlot={
+            <div className="rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
+              <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
+                Recorded awards
+              </h3>
+              <p className="text-xs text-brand-muted mb-3">
+                Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your
+                conference&apos;s rules.
+              </p>
+              <ul className="space-y-2 text-sm">
+                {(myAwards ?? []).map((a) => {
+                  const m = awardCategoryMeta(a.category);
+                  const where = a.committee_conference_id
+                    ? committeeLabel[a.committee_conference_id] ?? "Committee session"
+                    : null;
+                  return (
+                    <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                      <span className="font-medium text-brand-navy">{m?.label ?? a.category}</span>
+                      {where && (
+                        <span className="text-brand-muted"> · {where}</span>
+                      )}
+                      {a.notes && (
+                        <p className="text-xs text-brand-muted mt-0.5">{a.notes}</p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          }
+        />
+      ) : null}
       {isDelegate && (myDelegatePoints?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-logo-cyan/35 bg-logo-cyan/10 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
@@ -309,7 +374,7 @@ export default async function ProfilePage() {
           </ul>
         </div>
       )}
-      {(myAwards?.length ?? 0) > 0 && (
+      {(myAwards?.length ?? 0) > 0 && (myPendingNominations?.length ?? 0) === 0 ? (
         <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
             Recorded awards
@@ -338,7 +403,7 @@ export default async function ProfilePage() {
             })}
           </ul>
         </div>
-      )}
+      ) : null}
       <ProfileForm
         profile={profile}
         userId={user.id}

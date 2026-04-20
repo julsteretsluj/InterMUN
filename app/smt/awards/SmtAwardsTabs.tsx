@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { AwardsManagerClient } from "@/app/(dashboard)/chair/awards/AwardsManagerClient";
 import type { AwardAssignment, AwardParticipationScore } from "@/types/database";
+import { AwardsRubricReference } from "@/components/awards/AwardsRubricReference";
 import { ChairNominationsPanel, type ChairNominationRow } from "./ChairNominationsPanel";
-import { SmtAwardsRubricPanel } from "./SmtAwardsRubricPanel";
 import { SmtParticipationPanel } from "./SmtParticipationPanel";
+import { SmtBestDelegateComparison, type BestDelegateComparisonRow } from "./SmtBestDelegateComparison";
 import type { ChairSeat, DelegateChairFeedbackAggregate } from "@/lib/award-participation-scoring";
 
 type Conf = { id: string; name: string; committee: string | null };
@@ -13,7 +14,7 @@ type Prof = { id: string; name: string | null };
 
 type CommitteeOpt = { id: string; label: string };
 
-type TabId = "scoring" | "awards";
+type TabId = "final" | "pending" | "scoring" | "rubric";
 
 type ParticipationBundle = {
   committees: CommitteeOpt[];
@@ -36,6 +37,9 @@ type Props = {
   profiles: Prof[];
   participation: ParticipationBundle;
   hasActiveEvent: boolean;
+  /** Maps raw `conferences.id` → canonical committee conference id for the active event. */
+  conferenceIdToCanonical: Record<string, string>;
+  bestDelegateComparisonRows: BestDelegateComparisonRow[];
 };
 
 export function SmtAwardsTabs({
@@ -47,8 +51,10 @@ export function SmtAwardsTabs({
   profiles,
   participation,
   hasActiveEvent,
+  conferenceIdToCanonical,
+  bestDelegateComparisonRows,
 }: Props) {
-  const [tab, setTab] = useState<TabId>("scoring");
+  const [tab, setTab] = useState<TabId>("final");
 
   const tabBtn = (id: TabId, label: string, domId: string) => (
     <button
@@ -70,11 +76,45 @@ export function SmtAwardsTabs({
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label="SMT awards">
+        {tabBtn("final", "Final awards", "tab-smt-final")}
+        {tabBtn("pending", "Pending awards", "tab-smt-pending")}
         {tabBtn("scoring", "Scoring", "tab-smt-scoring")}
-        {tabBtn("awards", "Awards", "tab-smt-awards")}
+        {tabBtn("rubric", "Rubric", "tab-smt-rubric")}
       </div>
 
-      {tab === "scoring" ? (
+      {tab === "final" ? (
+        <div role="tabpanel" aria-labelledby="tab-smt-final" className="space-y-6">
+          <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 text-sm text-brand-navy">
+            <h2 className="font-display text-lg font-semibold text-brand-navy mb-1">Final recorded awards</h2>
+            <p className="text-xs text-brand-muted">
+              Official recipients entered by SMT. Tick rows to include them in a printable certificate run, then use{" "}
+              <span className="font-medium text-brand-navy">Print selected</span>. Add or edit entries below.
+            </p>
+          </section>
+          <AwardsManagerClient
+            conferences={conferences}
+            assignments={assignments}
+            profiles={profiles}
+            enableCertificatePrint
+          />
+        </div>
+      ) : tab === "pending" ? (
+        <div role="tabpanel" aria-labelledby="tab-smt-pending" className="space-y-4">
+          <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/50 p-4 text-sm text-brand-muted">
+            <p>
+              Chair submissions awaiting review: approve or reject nominations. Approved rows feed the Final awards tab
+              when promoted to assignments.
+            </p>
+          </div>
+          <ChairNominationsPanel
+            nominations={nominations}
+            committeeLabelByConferenceId={committeeLabelByConferenceId}
+            nomineeNameByProfileId={nomineeNameByProfileId}
+            conferenceIdToCanonical={conferenceIdToCanonical}
+            committeeTabs={participation.committees}
+          />
+        </div>
+      ) : tab === "scoring" ? (
         <div role="tabpanel" aria-labelledby="tab-smt-scoring" className="space-y-8">
           {!hasActiveEvent ? (
             <div className="rounded-xl border border-amber-200 bg-amber-50/90 px-4 py-3 text-sm text-amber-950 dark:border-amber-500/40 dark:bg-amber-950/35 dark:text-amber-100">
@@ -92,38 +132,17 @@ export function SmtAwardsTabs({
             smtComplete={participation.smtComplete}
             missingChairs={participation.missingChairs}
             missingReports={participation.missingReports}
+            conferenceIdToCanonical={conferenceIdToCanonical}
           />
-
-          <section className="space-y-6">
-            <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 text-sm text-brand-navy">
-              <h2 className="font-display text-lg font-semibold text-brand-navy mb-1">
-                Award submissions for chair & committee awards
-              </h2>
-              <p className="text-xs text-brand-muted">
-                Record final recipients for overall trophies, chair honours, and committee-level awards. Overall: Best
-                Delegate (Trophy), Best Position Paper. Chair: Best Chair, Honourable Mention Chair, Best Committee, Best
-                Chair Report. Committee: Best Delegate, Honourable Mention (1 required; 2 if more than 22 delegates), Best
-                Position Paper.
-              </p>
-            </section>
-            <AwardsManagerClient conferences={conferences} assignments={assignments} profiles={profiles} />
-          </section>
-
-          <SmtAwardsRubricPanel />
-        </div>
-      ) : (
-        <div role="tabpanel" aria-labelledby="tab-smt-awards" className="space-y-4">
-          <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/50 p-4 text-sm text-brand-muted">
-            <p>
-              Pending award submissions from chairs: review delegate award nominations (committee scope and overall).
-              Approvals feed final assignments alongside the Scoring tab.
-            </p>
-          </div>
-          <ChairNominationsPanel
-            nominations={nominations}
+          <SmtBestDelegateComparison
+            rows={bestDelegateComparisonRows}
             committeeLabelByConferenceId={committeeLabelByConferenceId}
             nomineeNameByProfileId={nomineeNameByProfileId}
           />
+        </div>
+      ) : (
+        <div role="tabpanel" aria-labelledby="tab-smt-rubric">
+          <AwardsRubricReference />
         </div>
       )}
     </div>

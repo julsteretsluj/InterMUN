@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import {
   maxRubricTotal,
   rubricBandInitials,
@@ -27,17 +28,61 @@ const nominationTypeLabel: Record<NominationRubricType, string> = {
   conference_best_delegate: "Best Delegate (overall)",
 };
 
+type CommitteeTab = { id: string; label: string };
+
 type Props = {
   nominations: ChairNominationRow[];
   committeeLabelByConferenceId: Record<string, string>;
   nomineeNameByProfileId: Record<string, string>;
+  conferenceIdToCanonical?: Record<string, string>;
+  committeeTabs?: CommitteeTab[];
 };
 
 export function ChairNominationsPanel({
   nominations,
   committeeLabelByConferenceId,
   nomineeNameByProfileId,
+  conferenceIdToCanonical = {},
+  committeeTabs = [],
 }: Props) {
+  const [committeeFilter, setCommitteeFilter] = useState<"all" | string>("all");
+
+  const canonical = (rawConferenceId: string) => conferenceIdToCanonical[rawConferenceId] ?? rawConferenceId;
+
+  const countByCommittee = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const n of nominations) {
+      const k = canonical(n.committee_conference_id);
+      m.set(k, (m.get(k) ?? 0) + 1);
+    }
+    return m;
+  }, [nominations, conferenceIdToCanonical]);
+
+  const visibleNominations = useMemo(() => {
+    if (committeeFilter === "all" || committeeTabs.length === 0) return nominations;
+    return nominations.filter((n) => canonical(n.committee_conference_id) === committeeFilter);
+  }, [nominations, committeeFilter, committeeTabs.length, conferenceIdToCanonical]);
+
+  const tabBtn = (id: "all" | string, label: string, count: number, domId: string) => (
+    <button
+      key={domId}
+      id={domId}
+      type="button"
+      role="tab"
+      aria-selected={committeeFilter === id}
+      onClick={() => setCommitteeFilter(id)}
+      className={`shrink-0 rounded-t-lg px-3 py-2 text-sm font-medium transition-colors border-b-2 -mb-px max-w-[12rem] truncate ${
+        committeeFilter === id
+          ? "border-brand-accent text-brand-navy bg-brand-paper"
+          : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+      }`}
+      title={label}
+    >
+      {label}
+      <span className="ml-1 font-mono text-xs text-brand-muted">({count})</span>
+    </button>
+  );
+
   return (
     <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
       <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">Award submissions by chairs</h2>
@@ -47,6 +92,23 @@ export function ChairNominationsPanel({
         first (Top 1). Approve to record the award, or reject to move to the next backup rank (Top 2, then Top 3
         for Honourable Mention where applicable).
       </p>
+      {committeeTabs.length > 0 && nominations.length > 0 ? (
+        <div
+          className="mb-3 flex flex-wrap gap-1 overflow-x-auto border-b border-brand-navy/10 pb-px"
+          role="tablist"
+          aria-label="Filter by committee"
+        >
+          {tabBtn("all", "All committees", nominations.length, "tab-smt-nom-all")}
+          {committeeTabs.map((c) =>
+            tabBtn(
+              c.id,
+              c.label,
+              countByCommittee.get(c.id) ?? 0,
+              `tab-smt-nom-${c.id.slice(0, 8)}`
+            )
+          )}
+        </div>
+      ) : null}
       <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
         <table className="w-full text-sm">
           <thead>
@@ -74,8 +136,15 @@ export function ChairNominationsPanel({
                   </p>
                 </td>
               </tr>
+            ) : visibleNominations.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="px-3 py-6 text-center text-sm text-brand-muted">
+                  No pending rows for this committee. Choose <span className="font-medium text-brand-navy">All committees</span>{" "}
+                  or another tab.
+                </td>
+              </tr>
             ) : (
-              nominations.map((n) => {
+              visibleNominations.map((n) => {
                 const nomineeLabel =
                   nomineeNameByProfileId[n.nominee_profile_id] ?? n.nominee_profile_id.slice(0, 8);
                 return (

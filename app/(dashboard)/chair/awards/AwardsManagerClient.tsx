@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { AWARD_CATEGORIES, awardCategoryMeta, isConferenceEventPlaceholderRow } from "@/lib/awards";
 import {
@@ -22,19 +22,36 @@ function committeeOptionLabel(c: Conf) {
   return c.committee?.trim() || c.id.slice(0, 8);
 }
 
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function AwardsManagerClient({
   conferences,
   assignments: initialAssignments,
   profiles,
+  enableCertificatePrint = false,
 }: {
   conferences: Conf[];
   assignments: AwardAssignment[];
   profiles: Prof[];
+  /** When true (SMT final awards tab): add certificate checkboxes and print selected. */
+  enableCertificatePrint?: boolean;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [certSelected, setCertSelected] = useState<Set<string>>(() => new Set());
+
+  useEffect(() => {
+    const ids = new Set(initialAssignments.map((a) => a.id));
+    setCertSelected((prev) => new Set([...prev].filter((id) => ids.has(id))));
+  }, [initialAssignments]);
 
   const committeeById = useMemo(
     () => Object.fromEntries(conferences.map((c) => [c.id, committeeOptionLabel(c)])),
@@ -178,6 +195,58 @@ export function AwardsManagerClient({
     if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
     return a.created_at.localeCompare(b.created_at);
   });
+
+  function toggleCert(id: string, checked: boolean) {
+    setCertSelected((prev) => {
+      const next = new Set(prev);
+      if (checked) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }
+
+  function selectAllCerts() {
+    setCertSelected(new Set(ordered.map((a) => a.id)));
+  }
+
+  function clearCertSelection() {
+    setCertSelected(new Set());
+  }
+
+  function printCertificates() {
+    const rows = ordered.filter((a) => certSelected.has(a.id));
+    if (rows.length === 0) return;
+    const w = window.open("", "_blank");
+    if (!w) return;
+    const bodyRows = rows
+      .map((a) => {
+        const m = awardCategoryMeta(a.category);
+        const recip =
+          a.recipient_profile_id != null
+            ? profileById[a.recipient_profile_id] ?? a.recipient_profile_id.slice(0, 8)
+            : a.recipient_committee_id != null
+              ? committeeById[a.recipient_committee_id] ?? "—"
+              : "—";
+        const comm =
+          a.committee_conference_id != null ? committeeById[a.committee_conference_id] ?? "—" : "—";
+        return `<tr><td>${escapeHtml(m?.label ?? a.category)}</td><td>${escapeHtml(comm)}</td><td>${escapeHtml(
+          String(recip)
+        )}</td><td>${escapeHtml(a.notes?.trim() || "—")}</td></tr>`;
+      })
+      .join("");
+    w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Certificate list</title>
+<style>
+body{font-family:system-ui,sans-serif;padding:24px;color:#111}
+h1{font-size:1.25rem;margin-bottom:16px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border:1px solid #ccc;padding:8px;text-align:left}
+th{background:#f4f4f5}
+</style></head><body><h1>Award certificates — selected recipients</h1><table><thead><tr><th>Award</th><th>Committee</th><th>Recipient</th><th>Notes</th></tr></thead><tbody>${bodyRows}</tbody></table></body></html>`);
+    w.document.close();
+    w.focus();
+    w.print();
+    w.close();
+  }
 
   return (
     <div className="space-y-10">
@@ -385,10 +454,43 @@ export function AwardsManagerClient({
 
       <section>
         <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">Current list</h3>
+        {enableCertificatePrint && ordered.length > 0 ? (
+          <div className="mb-3 flex flex-wrap items-center gap-3 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-2 text-sm">
+            <span className="text-brand-muted">Certificate printing</span>
+            <button
+              type="button"
+              onClick={selectAllCerts}
+              className="rounded-md border border-brand-navy/20 px-2 py-1 text-xs font-medium text-brand-navy hover:bg-brand-paper"
+            >
+              Select all
+            </button>
+            <button
+              type="button"
+              onClick={clearCertSelection}
+              className="rounded-md border border-brand-navy/20 px-2 py-1 text-xs font-medium text-brand-navy hover:bg-brand-paper"
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              onClick={printCertificates}
+              disabled={certSelected.size === 0}
+              className="rounded-md bg-brand-accent px-3 py-1 text-xs font-semibold text-white disabled:opacity-40"
+            >
+              Print selected
+            </button>
+            <span className="text-xs text-brand-muted">{certSelected.size} selected</span>
+          </div>
+        ) : null}
         <div className="overflow-x-auto rounded-xl border border-brand-navy/10">
           <table className="w-full text-sm text-left">
             <thead>
               <tr className="border-b border-brand-navy/10 bg-brand-cream/80">
+                {enableCertificatePrint ? (
+                  <th className="px-2 py-2 w-10 font-semibold text-brand-navy text-center" scope="col">
+                    <span className="sr-only">Certificate</span>
+                  </th>
+                ) : null}
                 <th className="px-3 py-2 font-semibold text-brand-navy">Award</th>
                 <th className="px-3 py-2 font-semibold text-brand-navy">Committee</th>
                 <th className="px-3 py-2 font-semibold text-brand-navy">Recipient</th>
@@ -400,7 +502,7 @@ export function AwardsManagerClient({
             <tbody>
               {ordered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-3 py-8 text-center text-brand-muted">
+                  <td colSpan={enableCertificatePrint ? 7 : 6} className="px-3 py-8 text-center text-brand-muted">
                     No award rows yet.
                   </td>
                 </tr>
@@ -419,6 +521,17 @@ export function AwardsManagerClient({
                       : "—";
                   return (
                     <tr key={a.id} className="border-b border-brand-navy/5">
+                      {enableCertificatePrint ? (
+                        <td className="px-2 py-2 align-top text-center">
+                          <input
+                            type="checkbox"
+                            checked={certSelected.has(a.id)}
+                            onChange={(e) => toggleCert(a.id, e.target.checked)}
+                            aria-label={`Include in certificate print: ${m?.label ?? a.category}`}
+                            className="h-4 w-4 rounded border-brand-navy/30"
+                          />
+                        </td>
+                      ) : null}
                       <td className="px-3 py-2 align-top">
                         <span className="font-medium text-brand-navy">{m?.label ?? a.category}</span>
                         {a.sort_order > 0 && (
