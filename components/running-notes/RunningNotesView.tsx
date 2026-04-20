@@ -7,22 +7,33 @@ import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDo
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
+import {
+  RUNNING_NOTE_TAG_PRESETS,
+  normalizeRunningNoteTags,
+  runningNoteSidebarLabel,
+} from "@/lib/running-notes-tags";
 
 interface Note {
   id: string;
   user_id: string;
   content: string | null;
   google_docs_url?: string | null;
+  title?: string | null;
+  tags?: string[] | null;
   updated_at: string;
 }
 
-function syncEditorsFromNote(
+function syncFromNote(
   n: Note,
   setContent: (v: string) => void,
-  setDocsUrl: (v: string) => void
+  setDocsUrl: (v: string) => void,
+  setTitle: (v: string) => void,
+  setTags: (v: string[]) => void
 ) {
   setContent(n.content || "");
   setDocsUrl(n.google_docs_url?.trim() || "");
+  setTitle(n.title?.trim() ?? "");
+  setTags(normalizeRunningNoteTags(n.tags ?? []));
 }
 
 export function RunningNotesView({
@@ -39,6 +50,11 @@ export function RunningNotesView({
   const [activeNote, setActiveNote] = useState<Note | null>(notes[0] || null);
   const [content, setContent] = useState(notes[0]?.content || "");
   const [docsUrl, setDocsUrl] = useState(notes[0]?.google_docs_url?.trim() || "");
+  const [title, setTitle] = useState(notes[0]?.title?.trim() ?? "");
+  const [tags, setTags] = useState<string[]>(() =>
+    normalizeRunningNoteTags(notes[0]?.tags ?? [])
+  );
+  const [customTagDraft, setCustomTagDraft] = useState("");
   const [mutationError, setMutationError] = useState<string | null>(null);
   const supabase = createClient();
   const canViewAll = myRole === "chair" || myRole === "smt" || myRole === "admin";
@@ -52,12 +68,31 @@ export function RunningNotesView({
     const keep = id ? notes.find((n) => n.id === id) : null;
     const next = keep ?? notes[0] ?? null;
     setActiveNote(next);
-    if (next) syncEditorsFromNote(next, setContent, setDocsUrl);
+    if (next) syncFromNote(next, setContent, setDocsUrl, setTitle, setTags);
     else {
       setContent("");
       setDocsUrl("");
+      setTitle("");
+      setTags([]);
     }
+    setCustomTagDraft("");
   }, [notes]);
+
+  function togglePresetTag(label: string) {
+    setTags((prev) => {
+      const lower = label.toLowerCase();
+      const has = prev.some((t) => t.toLowerCase() === lower);
+      if (has) return normalizeRunningNoteTags(prev.filter((t) => t.toLowerCase() !== lower));
+      return normalizeRunningNoteTags([...prev, label]);
+    });
+  }
+
+  function addCustomTag() {
+    const t = customTagDraft.trim();
+    if (!t) return;
+    setTags((prev) => normalizeRunningNoteTags([...prev, t]));
+    setCustomTagDraft("");
+  }
 
   async function saveNote() {
     setMutationError(null);
@@ -66,9 +101,13 @@ export function RunningNotesView({
     } = await supabase.auth.getUser();
     if (!user || !activeNote) return;
     if (activeNote.user_id !== currentUserId) return;
+    const titleTrim = title.trim();
+    const tagsStored = normalizeRunningNoteTags(tags);
     const { error } = await supabase
       .from("notes")
       .update({
+        title: titleTrim || null,
+        tags: tagsStored,
         content,
         google_docs_url: docsUrl.trim() || null,
         updated_at: new Date().toISOString(),
@@ -110,11 +149,14 @@ export function RunningNotesView({
     setItems(typed);
     const next = typed.find((n) => n.id === activeNote?.id) || typed[0] || null;
     setActiveNote(next);
-    if (next) syncEditorsFromNote(next, setContent, setDocsUrl);
+    if (next) syncFromNote(next, setContent, setDocsUrl, setTitle, setTags);
     else {
       setContent("");
       setDocsUrl("");
+      setTitle("");
+      setTags([]);
     }
+    setCustomTagDraft("");
   }
 
   async function createNote() {
@@ -128,6 +170,8 @@ export function RunningNotesView({
       .insert({
         user_id: user.id,
         note_type: "running",
+        title: null,
+        tags: [],
         content: "",
         google_docs_url: null,
       })
@@ -141,8 +185,8 @@ export function RunningNotesView({
       const row = data as Note;
       setItems((prev) => [row, ...prev]);
       setActiveNote(row);
-      setContent("");
-      setDocsUrl("");
+      syncFromNote(row, setContent, setDocsUrl, setTitle, setTags);
+      setCustomTagDraft("");
       router.refresh();
     }
   }
@@ -180,13 +224,14 @@ export function RunningNotesView({
             const n = items.find((x) => x.id === e.target.value);
             if (n) {
               setActiveNote(n);
-              syncEditorsFromNote(n, setContent, setDocsUrl);
+              syncFromNote(n, setContent, setDocsUrl, setTitle, setTags);
+              setCustomTagDraft("");
             }
           }}
         >
           {items.map((n) => (
             <option key={n.id} value={n.id}>
-              {(n.content || n.google_docs_url || "Empty")?.slice(0, 36)}…
+              {runningNoteSidebarLabel(n)}
             </option>
           ))}
         </select>
@@ -197,15 +242,17 @@ export function RunningNotesView({
               type="button"
               onClick={() => {
                 setActiveNote(n);
-                syncEditorsFromNote(n, setContent, setDocsUrl);
+                syncFromNote(n, setContent, setDocsUrl, setTitle, setTags);
+                setCustomTagDraft("");
               }}
               className={`block w-full truncate rounded-lg px-3 py-2 text-left text-sm transition ${
                 activeNote?.id === n.id
                   ? "bg-brand-accent text-white"
                   : "hover:bg-slate-100 dark:hover:bg-white/10"
               }`}
+              title={runningNoteSidebarLabel(n)}
             >
-              {(n.content || n.google_docs_url || "Empty")?.slice(0, 40)}…
+              {runningNoteSidebarLabel(n)}
             </button>
           ))}
         </div>
@@ -217,6 +264,84 @@ export function RunningNotesView({
               View-only (you can only edit your own running notes).
             </p>
           )}
+          {canEdit ? (
+            <div className="space-y-2">
+              <label className="mun-label normal-case block">Note name</label>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="mun-field"
+                type="text"
+                placeholder="e.g. Sunday bloc prep"
+                maxLength={120}
+              />
+              <p className="text-xs text-brand-muted">
+                Shown in the note list. If empty, tags or note text is used instead.
+              </p>
+            </div>
+          ) : activeNote.title?.trim() ? (
+            <p className="text-sm text-brand-muted">
+              <span className="font-medium text-brand-navy dark:text-zinc-200">Note name: </span>
+              {activeNote.title.trim()}
+            </p>
+          ) : null}
+          {canEdit ? (
+            <div className="space-y-2">
+              <label className="mun-label normal-case block">Tags</label>
+              <div className="flex flex-wrap gap-2">
+                {RUNNING_NOTE_TAG_PRESETS.map((preset) => {
+                  const on = tags.some((t) => t.toLowerCase() === preset.toLowerCase());
+                  return (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => togglePresetTag(preset)}
+                      className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
+                        on
+                          ? "border-brand-accent bg-brand-accent/15 text-brand-navy dark:bg-brand-accent/25 dark:text-zinc-100"
+                          : "border-slate-200 text-brand-muted hover:border-brand-accent/40 dark:border-white/15 dark:hover:border-brand-accent/40"
+                      }`}
+                    >
+                      {preset}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex flex-wrap items-end gap-2">
+                <input
+                  value={customTagDraft}
+                  onChange={(e) => setCustomTagDraft(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addCustomTag();
+                    }
+                  }}
+                  className="mun-field min-w-[12rem] flex-1"
+                  type="text"
+                  placeholder="Add another tag…"
+                  maxLength={48}
+                />
+                <button
+                  type="button"
+                  onClick={addCustomTag}
+                  className="mun-btn shrink-0 px-3 py-2 text-sm"
+                >
+                  Add tag
+                </button>
+              </div>
+              {tags.length > 0 ? (
+                <p className="text-xs text-brand-muted">
+                  Selected: {normalizeRunningNoteTags(tags).join(", ")}
+                </p>
+              ) : null}
+            </div>
+          ) : activeNote.tags && activeNote.tags.length > 0 ? (
+            <p className="text-sm text-brand-muted">
+              <span className="font-medium text-brand-navy dark:text-zinc-200">Tags: </span>
+              {normalizeRunningNoteTags(activeNote.tags).join(", ")}
+            </p>
+          ) : null}
           {canEdit ? (
             <div>
               <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
@@ -275,7 +400,8 @@ export function RunningNotesView({
             </button>
             {canEdit ? (
               <HelpButton title="Save">
-                Saves your current running note text (and Google Docs URL, if provided) for your own account.
+                Saves your note name, tags, running note text, and Google Docs URL (if provided) for your own
+                account.
               </HelpButton>
             ) : null}
             <button
