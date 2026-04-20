@@ -13,9 +13,11 @@ import {
 } from "@/app/actions/resolutions";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { DelegateResolutionBuilder } from "@/components/resolutions/DelegateResolutionBuilder";
 
 interface Resolution {
   id: string;
+  conference_id: string;
   google_docs_url: string | null;
   main_submitters: string[];
   co_submitters: string[];
@@ -255,6 +257,13 @@ export function ResolutionsView({
           {actionError}
         </p>
       ) : null}
+      <DelegateResolutionBuilder
+        resolutions={resolutions.map((r) => ({
+          id: r.id,
+          conference_id: r.conference_id,
+          google_docs_url: r.google_docs_url,
+        }))}
+      />
       <div className="space-y-4">
         {resolutions.map((r) => {
           const resolutionBlocs = blocs.filter((b) => b.resolution_id === r.id);
