@@ -57,7 +57,6 @@ export default async function ChairOverviewPage() {
     { href: "/documents", label: "Archive", hint: "Committee documents" },
     { href: "/official-links", label: "Official UN links", hint: "Documents & bodies" },
     { href: "/chair/room-code", label: "Room code", hint: "Committee gate code" },
-    { href: "/chair/allocation-passwords", label: "Sign-in passwords", hint: "Delegate passwords" },
     { href: "/committee-room", label: "Committee room (full)", hint: "Virtual layout & delegate floor" },
     { href: "/delegate", label: "Delegate dashboard", hint: "Same hub style as SEAMUNs delegate view" },
   ];

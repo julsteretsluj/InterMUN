@@ -14,7 +14,6 @@ import {
   FileText,
   Gavel,
   HelpCircle,
-  KeyRound,
   LayoutGrid,
   Link2,
   ListChecks,
@@ -102,7 +101,6 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/documents", label: "Archive", icon: Archive, emoji: "📁" },
   { href: "/official-links", label: "Official links", icon: Link2, emoji: "🔗" },
   { href: "/chair/room-code", label: "Room code", icon: DoorOpen, emoji: "🚪" },
-  { href: "/chair/allocation-passwords", label: "Sign-in passwords", icon: KeyRound, emoji: "🔑" },
   { href: "/profile", label: "Settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
 ];
 

@@ -65,7 +65,9 @@ function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabl
         ...(role === "chair"
           ? ([{ href: "/chair/session", label: "Session", icon: PanelsTopLeft }] as const)
           : []),
-        { href: "/chair/allocation-passwords", label: "Passwords", icon: ListOrdered },
+        ...(role === "smt" || role === "admin"
+          ? ([{ href: "/smt/allocation-passwords", label: "Passwords", icon: ListOrdered }] as const)
+          : []),
         { href: "/chair/allocation-matrix", label: "Matrix", icon: ListOrdered },
         { href: "/chair/awards", label: "Awards", icon: Trophy },
         ...baseTabs.slice(3),
