@@ -3,7 +3,7 @@
  * Override with NEXT_PUBLIC_APP_NAME and NEXT_PUBLIC_APP_TAGLINE.
  */
 
-/** App emblem — RGBA PNG (`public/intermun-emblem.png`). Used for UI + favicons (`app/layout.tsx`, `next.config.js` rewrites). */
+/** App emblem — RGBA PNG (`public/intermun-emblem.png`). Used for UI; square tab icons are `app/icon.png` / `app/apple-icon.png`. */
 export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png";
 
 export function getAppName(): string {

@@ -30,11 +30,7 @@ const documentSerif = Merriweather({
 export const metadata: Metadata = {
   title: getAppName(),
   description: getAppMetaDescription(),
-  /** InterMUN emblem (`public/intermun-emblem.png`) — same asset as `<InterMunEmblem />`. */
-  icons: {
-    icon: [{ url: "/intermun-emblem.png", type: "image/png" }],
-    apple: [{ url: "/intermun-emblem.png", type: "image/png" }],
-  },
+  /** Favicons: `app/icon.png` + `app/apple-icon.png` (generated from `public/intermun-emblem.png`, square crop). */
 };
 
 // Avoid static prerender during build when Supabase env is only set at deploy/runtime.
