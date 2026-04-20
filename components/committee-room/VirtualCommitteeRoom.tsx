@@ -80,13 +80,13 @@ function Placard({
     <>
       <div
         className={[
-          "rounded-md border px-2 py-2 text-left leading-snug transition-[opacity,transform,box-shadow,border-color] duration-150",
+          "rounded-lg border px-2.5 py-2.5 text-left leading-snug transition-[opacity,transform,box-shadow,border-color,background-color] duration-150",
           vacant
-            ? "border-slate-300/70 bg-white/70 text-slate-500"
-            : "border-slate-300/80 bg-white/90 text-slate-800 shadow-sm",
-          interactive ? "hover:border-slate-400 hover:shadow" : "",
+            ? "border-slate-300/70 bg-white/75 text-slate-500"
+            : "border-slate-300/90 bg-white text-slate-800 shadow-[0_2px_8px_rgba(15,23,42,0.08)]",
+          interactive ? "hover:border-slate-400 hover:shadow-[0_6px_16px_rgba(15,23,42,0.14)] hover:-translate-y-[1px]" : "",
           dimmed ? "opacity-[0.32] scale-[0.98]" : "",
-          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-[rgba(12,12,12,0.85)] border-brand-accent-bright/60" : "",
+          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/60" : "",
         ].join(" ")}
       >
         {vacant ? (
@@ -103,13 +103,13 @@ function Placard({
             </>
           ) : (
             <>
-              <div className="text-[0.5rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
+              <div className="text-[0.53rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
                 {country}
               </div>
-              <div className="text-[0.62rem] sm:text-[0.65rem] font-medium line-clamp-2 break-words">
+              <div className="text-[0.64rem] sm:text-[0.69rem] font-semibold line-clamp-2 break-words text-slate-900">
                 {dash(name)}
               </div>
-              <div className="text-[0.55rem] sm:text-[0.58rem] text-brand-muted mt-0.5 line-clamp-2 break-words">
+              <div className="text-[0.56rem] sm:text-[0.6rem] text-brand-muted mt-0.5 line-clamp-2 break-words">
                 {dash(school)}
               </div>
               <div className="text-[0.52rem] sm:text-[0.55rem] text-brand-muted/85 mt-0.5 italic line-clamp-2">
@@ -128,7 +128,7 @@ function Placard({
     </>
   );
 
-  const wrapClass = "w-[6.75rem] sm:w-28 md:w-32 text-left block";
+  const wrapClass = "w-[7rem] sm:w-[7.25rem] md:w-32 text-left block";
 
   if (personHref) {
     return (
@@ -176,7 +176,7 @@ function DaisStation({
     <>
       <div className="relative flex items-end justify-center gap-0.5 h-14 sm:h-16">
         <Armchair
-          className="w-10 h-10 sm:w-12 sm:h-12 text-brand-navy drop-shadow-md"
+          className="w-10 h-10 sm:w-12 sm:h-12 text-brand-navy/90 drop-shadow-sm"
           strokeWidth={1.25}
         />
         {seat.showGavel && (
@@ -189,9 +189,9 @@ function DaisStation({
       </div>
       <div
         className={[
-          "rounded-md bg-white/90 px-2 py-1 w-full text-center border border-slate-300/80 transition-[opacity,transform,box-shadow] duration-200 shadow-sm",
+          "rounded-lg bg-white px-2 py-1.5 w-full text-center border border-slate-300/90 transition-[opacity,transform,box-shadow,border-color] duration-200 shadow-[0_2px_8px_rgba(15,23,42,0.08)]",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
-          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "",
+          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "hover:border-slate-400",
         ].join(" ")}
       >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-accent-bright/90">
@@ -378,7 +378,7 @@ export function VirtualCommitteeRoom({
       )}
 
       <figure
-        className="relative w-full overflow-hidden rounded-3xl border border-slate-300/80 bg-white shadow-[0_14px_40px_-24px_rgba(15,23,42,0.28)] select-none ring-1 ring-slate-200/90"
+        className="relative w-full overflow-hidden rounded-3xl border border-slate-300/85 bg-white shadow-[0_16px_44px_-22px_rgba(15,23,42,0.24)] select-none ring-1 ring-slate-200/90"
         aria-label="Virtual committee room"
       >
         {searchActive ? (
@@ -388,12 +388,14 @@ export function VirtualCommitteeRoom({
         ) : null}
         <div
           className="relative aspect-[16/10] min-h-[420px] sm:min-h-[520px] md:min-h-[620px]"
-          style={{ backgroundColor: "#eef2f7" }}
+          style={{
+            background: "linear-gradient(180deg, #f2f6fc 0%, #edf2f8 46%, #e8eef6 100%)",
+          }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[26%] rounded-b-2xl border-x border-b border-slate-300/80 bg-slate-50 shadow-inner"
+            className="absolute top-0 left-[8%] right-[8%] h-[27%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
           >
-            <div className="absolute inset-x-4 top-2 h-1 rounded-full bg-slate-200/90" />
+            <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-slate-200/90" />
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-slate-500">
               <Mic className="w-3 h-3" />
               <span className="text-[0.55rem] uppercase tracking-[0.35em]">
@@ -402,7 +404,7 @@ export function VirtualCommitteeRoom({
             </div>
           </div>
 
-          <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-10 md:gap-14 px-2 z-10 flex-wrap">
+          <div className="absolute top-[4%] left-0 right-0 flex justify-center items-start gap-5 sm:gap-10 md:gap-14 px-2 z-10 flex-wrap">
             {dais.map((seat, i) => {
               const href = seat.profileId
                 ? `${personHrefBase.replace(/\/$/, "")}/${seat.profileId}`
@@ -419,7 +421,7 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded border border-slate-300/90 bg-white/95 shadow max-w-[90%]">
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-lg border border-slate-300/90 bg-white shadow-[0_6px_16px_rgba(15,23,42,0.14)] max-w-[90%]">
             <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight">
               {committeeName}
             </p>
@@ -428,10 +430,10 @@ export function VirtualCommitteeRoom({
             </p>
           </div>
 
-          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[30%] md:pt-[28%]">
+          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-4 pb-5 pt-[31%] md:pt-[29%]">
             <div
               ref={placardGridRef}
-              className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center"
+              className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2.5 sm:gap-3 place-items-center"
             >
               {ringSeats.map((p, i) => {
                 const href =
