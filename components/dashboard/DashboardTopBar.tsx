@@ -30,6 +30,7 @@ function formatHeaderDate(d: Date): string {
 export function DashboardTopBar({
   userName,
   userEmail,
+  profilePictureUrl,
   conferenceLine,
   showSeamunLogo,
   appName,
@@ -40,6 +41,7 @@ export function DashboardTopBar({
 }: {
   userName: string;
   userEmail: string;
+  profilePictureUrl?: string | null;
   conferenceLine: string | null;
   showSeamunLogo: boolean;
   appName: string;
@@ -94,12 +96,21 @@ export function DashboardTopBar({
               href={profileHref}
               className="flex min-w-0 items-center gap-2.5 rounded-xl pr-1 transition-colors duration-150 ease-out hover:bg-slate-50 dark:hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-xs font-bold text-white shadow-inner"
-                aria-hidden
-              >
-                {initials}
-              </span>
+              {profilePictureUrl?.trim() ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={profilePictureUrl.trim()}
+                  alt={`${userName} profile`}
+                  className="h-9 w-9 shrink-0 rounded-xl object-cover shadow-inner"
+                />
+              ) : (
+                <span
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-xs font-bold text-white shadow-inner"
+                  aria-hidden
+                >
+                  {initials}
+                </span>
+              )}
               <div className="hidden min-w-0 sm:block">
                 <p className="truncate text-sm font-semibold text-slate-800 dark:text-zinc-100">
                   {userName}

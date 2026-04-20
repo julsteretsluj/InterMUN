@@ -19,7 +19,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role, name")
+    .select("role, name, profile_picture_url")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -76,6 +76,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         <DashboardTopBar
           userName={topBarUserName}
           userEmail={user.email ?? ""}
+          profilePictureUrl={profile?.profile_picture_url ?? null}
           conferenceLine={conferenceLine}
           showSeamunLogo={showSeamunLogo}
           appName={appName}

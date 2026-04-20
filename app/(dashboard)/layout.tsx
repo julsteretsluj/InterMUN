@@ -46,7 +46,7 @@ export default async function DashboardLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role, name")
+    .select("role, name, profile_picture_url")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -190,6 +190,7 @@ export default async function DashboardLayout({
         <DashboardTopBar
           userName={displayName}
           userEmail={userEmail}
+          profilePictureUrl={profile?.profile_picture_url ?? null}
           conferenceLine={conferenceLine || null}
           showSeamunLogo={showSeamunLogo}
           appName={appName}
