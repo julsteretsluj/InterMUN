@@ -203,6 +203,7 @@ export default async function SmtCommitteeLivePage({
           allocations={roomPayload.staffAllocations}
           delegates={roomPayload.delegates}
           chairs={(chairProfiles ?? []).map((c) => ({ id: c.id, name: c.name ?? null }))}
+          staffRole="smt"
         />
       </section>
 
