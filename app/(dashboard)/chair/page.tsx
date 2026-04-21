@@ -6,6 +6,8 @@ import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairHowToAccordion } from "@/components/chair/ChairHowToAccordion";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
+import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
+import { ChairTopicTabsCard } from "@/components/chair/ChairTopicTabsCard";
 
 export default async function ChairOverviewPage() {
   const supabase = await createClient();
@@ -25,6 +27,7 @@ export default async function ChairOverviewPage() {
   }
 
   const conferenceId = await requireActiveConferenceId();
+  const debateBundle = await getResolvedDebateConferenceBundle(supabase, conferenceId);
   const { data: conf } = await supabase
     .from("conferences")
     .select("committee, tagline, name")
@@ -58,7 +61,6 @@ export default async function ChairOverviewPage() {
     { href: "/official-links", label: "Official UN links", hint: "Documents & bodies" },
     { href: "/chair/room-code", label: "Room code", hint: "Committee gate code" },
     { href: "/committee-room", label: "Committee room (full)", hint: "Virtual layout & delegate floor" },
-    { href: "/delegate", label: "Delegate dashboard", hint: "Same hub style as SEAMUNs delegate view" },
   ];
 
   return (
@@ -89,6 +91,10 @@ export default async function ChairOverviewPage() {
 
         <ChairHowToAccordion />
         <RoleSetupChecklist role="chair" />
+        <ChairTopicTabsCard
+          topics={debateBundle.debateTopicOptions}
+          activeTopicId={debateBundle.debateConferenceId}
+        />
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
