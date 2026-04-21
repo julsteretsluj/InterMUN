@@ -275,11 +275,11 @@ export function CommitteeRoomDigitalMUNClient({
   }, [dais, qNorm]);
 
   return (
-    <div className="w-full space-y-6">
-      <div className="xl:grid xl:grid-cols-[minmax(0,13.5rem)_minmax(0,1fr)_minmax(0,17.5rem)] xl:gap-6 xl:items-start">
+    <div className="w-full space-y-5">
+      <div className="xl:grid xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,17.25rem)] xl:gap-5 xl:items-start">
         {/* Left rail — context & stats (mockup sidebar) */}
-        <aside className="space-y-4 mb-6 xl:mb-0 xl:sticky xl:top-4">
-          <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-4 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
+        <aside className="space-y-3 mb-5 xl:mb-0 xl:sticky xl:top-4 h-fit">
+          <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-3.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Committee</p>
             <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug line-clamp-3">
               {committeeName}
@@ -339,8 +339,8 @@ export function CommitteeRoomDigitalMUNClient({
         </aside>
 
         {/* Center — digital display */}
-        <section className="min-w-0 space-y-4 mb-6 xl:mb-0">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl border border-brand-accent/15 bg-brand-paper/85 px-4 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
+        <section className="min-w-0 space-y-3 mb-5 xl:mb-0">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl border border-brand-accent/15 bg-brand-paper/85 px-4 py-2.5 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
             <div className="min-w-0 flex-1">
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
                 Digital display
@@ -349,7 +349,7 @@ export function CommitteeRoomDigitalMUNClient({
                 {committeeName}
               </p>
             </div>
-            <div className="flex flex-col items-stretch sm:items-end gap-1.5 shrink-0 w-full sm:w-auto min-w-0 sm:min-w-[14rem]">
+            <div className="flex flex-col items-stretch sm:items-end gap-1.5 shrink-0 w-full sm:w-auto min-w-0 sm:min-w-[13rem]">
               <label htmlFor={searchFieldId} className="sr-only">
                 Find a delegation or dais member
               </label>
@@ -415,9 +415,9 @@ export function CommitteeRoomDigitalMUNClient({
         </section>
 
         {/* Right rail — delegate floor (chairs: use Chair → Session); notes */}
-        <aside className="rounded-2xl border border-slate-400/20 bg-brand-paper/35 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-4">
+        <aside className="rounded-2xl border border-slate-400/20 bg-brand-paper/35 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-3 h-fit xl:sticky xl:top-4">
           {showDelegateFloorPanel ? (
-            <div className="rounded-xl border border-white/5 bg-black/15 p-3 md:p-4">
+            <div className="rounded-xl border border-white/5 bg-black/15 p-3">
               <div className="mb-3 flex items-center gap-2">
                 <CircleDot className="size-4 text-brand-accent-bright" />
                 <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Floor</p>
@@ -470,7 +470,7 @@ export function CommitteeRoomDigitalMUNClient({
               </div>
             </div>
           ) : null}
-          <div className="rounded-xl bg-black/15 border border-white/5 p-3 md:p-4">
+          <div className="rounded-xl bg-black/15 border border-white/5 p-3">
             <div className="flex items-center gap-2 mb-3">
               <Users className="size-4 text-brand-accent-bright" />
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Notes</p>
