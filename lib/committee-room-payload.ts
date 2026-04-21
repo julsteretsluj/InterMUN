@@ -40,7 +40,6 @@ function daisFromChairNamesField(raw: string | null | undefined): DaisSeat[] | n
   return [
     { title: "Chair", name: parts[0] ?? null, showGavel: true, profileId: null },
     { title: "Vice-Chair", name: parts[1] ?? null, showGavel: true, profileId: null },
-    { title: "Rapporteur", name: parts[2] ?? null, showGavel: true, profileId: null },
   ];
 }
 
@@ -89,12 +88,6 @@ function daisFromChairAllocations(
       name: nameFromRow(co),
       showGavel: true,
       profileId: co?.user_id ?? null,
-    },
-    {
-      title: "Rapporteur",
-      name: null,
-      showGavel: true,
-      profileId: null,
     },
   ];
 }
@@ -204,12 +197,6 @@ export async function loadCommitteeRoomPayload(
         name: chairs[1]?.name ?? smt[0]?.name ?? null,
         showGavel: true,
         profileId: chairs[1]?.id ?? smt[0]?.id ?? null,
-      },
-      {
-        title: "Rapporteur",
-        name: chairs[2]?.name ?? smt[1]?.name ?? null,
-        showGavel: true,
-        profileId: chairs[2]?.id ?? smt[1]?.id ?? null,
       },
     ];
   }

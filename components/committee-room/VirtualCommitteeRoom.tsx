@@ -392,7 +392,7 @@ export function VirtualCommitteeRoom({
 
       <figure
         className="relative w-full overflow-hidden rounded-3xl border border-slate-300/85 bg-white shadow-[0_16px_44px_-22px_rgba(15,23,42,0.24)] select-none ring-1 ring-slate-200/90"
-        aria-label="Virtual committee room"
+        aria-label={`Virtual committee room — ${committeeName}`}
       >
         {searchActive ? (
           <span className="sr-only" aria-live="polite">
@@ -434,13 +434,7 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute top-[14%] sm:top-[15%] md:top-[16%] left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-lg border border-slate-300/90 bg-white shadow-[0_6px_16px_rgba(15,23,42,0.14)] max-w-[92%]">
-            <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight break-words">
-              {committeeName}
-            </p>
-          </div>
-
-          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[24%] sm:pt-[25%] md:pt-[23%]">
+          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[18%] sm:pt-[19%] md:pt-[18%]">
             <div
               ref={placardGridRef}
               className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center"
