@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { Users, UserRound, Search, CircleDot, Gavel, Sparkles, X } from "lucide-react";
+import { UserRound, Search, CircleDot, Gavel, Sparkles, X } from "lucide-react";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 import { MotionVotingClient } from "@/components/session/MotionVotingClient";
 import { RequestToSpeakClient } from "@/components/session/RequestToSpeakClient";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
-import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import type { StaffAllocationRow } from "@/lib/committee-room-payload";
 import {
   countDelegatePlacardMatches,
@@ -75,12 +74,7 @@ export function CommitteeRoomDigitalMUNClient({
   placards,
   dais,
   myRole,
-  myUserId,
-  smtVerified,
   myAllocationId,
-  myProfileName,
-  allocationOptions,
-  chairOptions,
   myAllocationCountry,
   canManageSeats,
   staffAllocations,
@@ -97,12 +91,7 @@ export function CommitteeRoomDigitalMUNClient({
   placards: DelegatePlacard[];
   dais: DaisSeat[];
   myRole: string;
-  myUserId: string;
-  smtVerified: boolean;
   myAllocationId: string | null;
-  myProfileName: string;
-  allocationOptions: { id: string; country: string }[];
-  chairOptions: { id: string; name: string }[];
   myAllocationCountry: string | null;
   canManageSeats: boolean;
   staffAllocations: StaffAllocationRow[];
@@ -114,6 +103,9 @@ export function CommitteeRoomDigitalMUNClient({
   /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */
   const showDelegateFloorPanel =
     role !== "chair" && role !== "smt" && role !== "admin";
+  const layoutColumns = showDelegateFloorPanel
+    ? "xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,18.5rem)]"
+    : "xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]";
 
   const supabase = useMemo(() => createClient(), []);
   const floorConferenceId = useLiveDebateConferenceId(
@@ -126,8 +118,6 @@ export function CommitteeRoomDigitalMUNClient({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [procedureState, setProcedureState] = useState<"debate_open" | "voting_procedure">("debate_open");
   const [currentVoteItemId, setCurrentVoteItemId] = useState<string | null>(null);
-  const [sessionActive, setSessionActive] = useState(false);
-  const [activeProcedureCode, setActiveProcedureCode] = useState<string | null>(null);
   const [delegationSearch, setDelegationSearch] = useState("");
   const [scrollMatchNonce, setScrollMatchNonce] = useState(0);
   const [myRollAttendance, setMyRollAttendance] = useState<RollAttendance | null>(null);
@@ -139,20 +129,6 @@ export function CommitteeRoomDigitalMUNClient({
   useEffect(() => {
     let isActive = true;
 
-    async function loadProcedureCode(voteItemId: string | null) {
-      if (!voteItemId) {
-        if (isActive) setActiveProcedureCode(null);
-        return;
-      }
-      const { data } = await supabase
-        .from("vote_items")
-        .select("procedure_code")
-        .eq("id", voteItemId)
-        .maybeSingle();
-      if (!isActive) return;
-      setActiveProcedureCode((data as { procedure_code?: string | null } | null)?.procedure_code ?? null);
-    }
-
     async function load() {
       const { data: ps } = await supabase
         .from("procedure_states")
@@ -163,12 +139,6 @@ export function CommitteeRoomDigitalMUNClient({
       if (!isActive) return;
       setProcedureState(ps?.state ?? "debate_open");
       setCurrentVoteItemId(ps?.current_vote_item_id ?? null);
-      setSessionActive(Boolean(ps?.committee_session_started_at));
-      if (ps?.state === "voting_procedure") {
-        await loadProcedureCode(ps?.current_vote_item_id ?? null);
-      } else {
-        setActiveProcedureCode(null);
-      }
     }
 
     void load();
@@ -191,12 +161,6 @@ export function CommitteeRoomDigitalMUNClient({
           };
           setProcedureState(row?.state ?? "debate_open");
           setCurrentVoteItemId(row?.current_vote_item_id ?? null);
-          setSessionActive(Boolean(row?.committee_session_started_at));
-          if (row?.state === "voting_procedure") {
-            void loadProcedureCode(row?.current_vote_item_id ?? null);
-          } else {
-            setActiveProcedureCode(null);
-          }
         }
       )
       .subscribe();
@@ -257,7 +221,6 @@ export function CommitteeRoomDigitalMUNClient({
   }, [supabase, conferenceId, isDelegate, myAllocationId]);
 
   const votingProcedureActive = procedureState === "voting_procedure";
-  const unmoderatedLocked = activeProcedureCode === "unmoderated_caucus";
 
   const assignedCount = useMemo(() => placards.filter((p) => !p.vacant).length, [placards]);
   const vacantCount = useMemo(() => placards.filter((p) => p.vacant).length, [placards]);
@@ -276,7 +239,7 @@ export function CommitteeRoomDigitalMUNClient({
 
   return (
     <div className="w-full space-y-5">
-      <div className="xl:grid xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,18.5rem)] xl:gap-5 xl:items-start">
+      <div className={["xl:grid", layoutColumns, "xl:gap-5 xl:items-start"].join(" ")}>
         {/* Left rail — context & stats (mockup sidebar) */}
         <aside className="space-y-3 mb-5 xl:mb-0 xl:sticky xl:top-4 h-fit">
           <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-3.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
@@ -414,9 +377,9 @@ export function CommitteeRoomDigitalMUNClient({
           />
         </section>
 
-        {/* Right rail — delegate floor (chairs: use Chair → Session); notes */}
-        <aside className="rounded-2xl border border-slate-400/20 bg-brand-paper/35 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] space-y-3 h-fit xl:sticky xl:top-4">
-          {showDelegateFloorPanel ? (
+        {/* Right rail — delegate floor (chairs/SMT/admin use Chair → Session) */}
+        {showDelegateFloorPanel ? (
+          <aside className="rounded-2xl border border-slate-400/20 bg-brand-paper/35 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] h-fit xl:sticky xl:top-4">
             <div className="rounded-xl border border-white/5 bg-black/15 p-3">
               <div className="mb-3 flex items-center gap-2">
                 <CircleDot className="size-4 text-brand-accent-bright" />
@@ -469,44 +432,8 @@ export function CommitteeRoomDigitalMUNClient({
                 ) : null}
               </div>
             </div>
-          ) : null}
-          <div className="rounded-xl bg-black/15 border border-white/5 p-3">
-            <div className="flex items-center gap-2 mb-3">
-              <Users className="size-4 text-brand-accent-bright" />
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Notes</p>
-            </div>
-            {isDelegate && !delegateFloorUnlocked ? (
-              <div className="rounded-lg border border-white/10 bg-black/20 p-3">
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
-                  Chair approval required
-                </p>
-                <p className="mt-1 text-sm text-brand-navy/90">
-                  {myRollApprovalLoaded
-                    ? myRollAttendance === null
-                      ? "Waiting for the chair to initialize roll call."
-                      : "Ask the chair to mark you Present before you can use committee notes."
-                    : "Checking your roll status..."}
-                </p>
-              </div>
-            ) : (
-              <DelegationNotesView
-                conferenceId={conferenceId}
-                initialNotes={[]}
-                myUserId={myUserId}
-                myRole={myRole}
-                smtVerified={smtVerified}
-                myAllocationId={myAllocationId}
-                myProfileName={myProfileName}
-                allocationOptions={allocationOptions}
-                chairOptions={chairOptions}
-                nextPathAfterVerification="/committee-room"
-                votingProcedureLocked={votingProcedureActive && isDelegate}
-                sessionActive={sessionActive}
-                unmoderatedLocked={unmoderatedLocked}
-              />
-            )}
-          </div>
-        </aside>
+          </aside>
+        ) : null}
       </div>
 
       {canManageSeats ? (

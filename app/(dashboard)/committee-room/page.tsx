@@ -3,7 +3,6 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
-import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 
@@ -23,16 +22,12 @@ export default async function CommitteeRoomPage() {
     .maybeSingle();
 
   const myRole = (profile?.role || "delegate").toString().toLowerCase();
-  const myProfileName = profile?.name ?? "Chair";
   const canManageSeats = myRole === "chair" || myRole === "smt" || myRole === "admin";
 
   const payload = await loadCommitteeRoomPayload(supabase, conferenceId, {
     includeDelegatesForStaff: canManageSeats,
   });
   const debateBundle = await getResolvedDebateConferenceBundle(supabase, conferenceId);
-
-  const verifiedConferenceId = await getVerifiedConferenceId();
-  const smtVerified = myRole === "smt" && verifiedConferenceId === conferenceId;
 
   const allocationOptions = sortAllocationsByDisplayCountry(
     payload.staffAllocations
@@ -64,15 +59,7 @@ export default async function CommitteeRoomPage() {
         placards={payload.placards}
         dais={payload.dais}
         myRole={myRole}
-        myUserId={user.id}
-        smtVerified={smtVerified}
         myAllocationId={myAllocationId}
-        myProfileName={myProfileName}
-        allocationOptions={allocationOptions}
-        chairOptions={(chairProfiles ?? []).map((c) => ({
-          id: c.id,
-          name: c.name ?? "Chair",
-        }))}
         myAllocationCountry={myAllocationCountry}
         canManageSeats={canManageSeats}
         staffAllocations={payload.staffAllocations}
