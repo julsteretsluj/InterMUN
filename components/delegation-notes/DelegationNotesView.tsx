@@ -544,12 +544,12 @@ export function DelegationNotesView({
       <div className={card}>
         <h3 className="mb-3 font-semibold text-brand-navy">Delegation notes</h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2 space-y-3">
-            <div className="flex items-center gap-2">
+        <div className="grid grid-cols-1 2xl:grid-cols-3 gap-4">
+          <div className="2xl:col-span-2 space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
               <label className={labelStrong}>Topic</label>
               <select
-                className={`ml-auto px-3 py-2 text-sm ${field}`}
+                className={`w-full sm:w-auto sm:ml-auto px-3 py-2 text-sm ${field}`}
                 value={topic}
                 onChange={(e) => setTopic(e.target.value as NoteTopic)}
               >
@@ -656,7 +656,7 @@ export function DelegationNotesView({
                           });
                         }}
                       />
-                      <span className="truncate">
+                      <span className="break-words">
                         {flagEmojiForCountryName(a.country)} {a.country}
                       </span>
                     </label>
@@ -715,7 +715,7 @@ export function DelegationNotesView({
                           });
                         }}
                       />
-                      <span className="truncate">{c.name || "Chair"}</span>
+                      <span className="break-words">{c.name || "Chair"}</span>
                     </label>
                   );
                 })}

@@ -106,7 +106,7 @@ function Placard({
           compactPlacardDetails ? (
             <>
               <div className="text-base leading-none mb-1">{flagEmojiForCountryName(country)}</div>
-              <div className="text-[0.56rem] uppercase tracking-widest text-brand-muted/90 mb-0.5 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
+              <div className="text-[0.56rem] uppercase tracking-widest text-brand-muted/90 mb-0.5 border-b border-brand-navy/10 pb-0.5 font-semibold break-words">
                 {country}
               </div>
             </>
@@ -115,16 +115,16 @@ function Placard({
               <div className="text-sm leading-none mb-1" aria-hidden="true">
                 {flagEmojiForCountryName(country)}
               </div>
-              <div className="text-[0.53rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold line-clamp-2">
+              <div className="text-[0.53rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold break-words">
                 {country}
               </div>
-              <div className="text-[0.64rem] sm:text-[0.69rem] font-semibold line-clamp-2 break-words text-slate-900">
+              <div className="text-[0.64rem] sm:text-[0.69rem] font-semibold break-words leading-tight text-slate-900">
                 {dash(name)}
               </div>
-              <div className="text-[0.56rem] sm:text-[0.6rem] text-brand-muted mt-0.5 line-clamp-2 break-words">
+              <div className="text-[0.56rem] sm:text-[0.6rem] text-brand-muted mt-0.5 break-words leading-tight">
                 {dash(school)}
               </div>
-              <div className="text-[0.52rem] sm:text-[0.55rem] text-brand-muted/85 mt-0.5 italic line-clamp-2">
+              <div className="text-[0.52rem] sm:text-[0.55rem] text-brand-muted/85 mt-0.5 italic break-words leading-tight">
                 {pronouns?.trim() ? pronouns.trim() : "—"}
               </div>
             </>
@@ -210,7 +210,7 @@ function DaisStation({
           <span aria-hidden="true" className="mr-1">{emojiForDaisTitle(seat.title)}</span>
           {seat.title}
         </p>
-        <p className="text-[0.7rem] sm:text-xs font-medium truncate max-w-[6.5rem] mx-auto">
+        <p className="text-[0.7rem] sm:text-xs font-medium break-words leading-tight max-w-[7rem] mx-auto">
           {seat.name ?? "—"}
         </p>
       </div>

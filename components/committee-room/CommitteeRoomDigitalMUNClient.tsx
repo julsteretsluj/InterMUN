@@ -276,15 +276,15 @@ export function CommitteeRoomDigitalMUNClient({
 
   return (
     <div className="w-full space-y-5">
-      <div className="xl:grid xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,17.25rem)] xl:gap-5 xl:items-start">
+      <div className="xl:grid xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,18.5rem)] xl:gap-5 xl:items-start">
         {/* Left rail — context & stats (mockup sidebar) */}
         <aside className="space-y-3 mb-5 xl:mb-0 xl:sticky xl:top-4 h-fit">
           <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-3.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Committee</p>
-            <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug line-clamp-3">
+            <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug break-words">
               {committeeName}
             </p>
-            <p className="mt-1 text-xs text-brand-muted line-clamp-2">{conferenceName}</p>
+            <p className="mt-1 text-xs text-brand-muted break-words">{conferenceName}</p>
 
             <div className="mt-4 pt-4 border-t border-brand-line/50 space-y-2">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Your context</p>
@@ -345,7 +345,7 @@ export function CommitteeRoomDigitalMUNClient({
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
                 Digital display
               </p>
-              <p className="font-display text-base sm:text-lg font-semibold text-brand-navy truncate">
+              <p className="font-display text-base sm:text-lg font-semibold text-brand-navy break-words leading-tight">
                 {committeeName}
               </p>
             </div>
