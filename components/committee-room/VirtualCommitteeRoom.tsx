@@ -90,9 +90,9 @@ function Placard({
         className={[
           "rounded-lg border px-2.5 py-2.5 text-left leading-snug transition-[opacity,transform,box-shadow,border-color,background-color] duration-150",
           vacant
-            ? "border-slate-300/70 bg-white/75 text-slate-500"
-            : "border-slate-300/90 bg-white text-slate-800 shadow-[0_2px_8px_rgba(15,23,42,0.08)]",
-          interactive ? "hover:border-slate-400 hover:shadow-[0_6px_16px_rgba(15,23,42,0.14)] hover:-translate-y-[1px]" : "",
+            ? "border-slate-300/75 bg-white/80 text-slate-600"
+            : "border-slate-300/95 bg-white text-slate-800 shadow-[0_3px_10px_rgba(15,23,42,0.09)]",
+          interactive ? "hover:border-slate-500 hover:shadow-[0_8px_18px_rgba(15,23,42,0.14)] hover:-translate-y-[1px]" : "",
           dimmed ? "opacity-[0.32] scale-[0.98]" : "",
           ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/60" : "",
         ].join(" ")}
@@ -201,7 +201,7 @@ function DaisStation({
       </div>
       <div
         className={[
-          "rounded-lg bg-white px-1.5 py-1 w-full text-center border border-slate-300/90 transition-[opacity,transform,box-shadow,border-color] duration-200 shadow-[0_2px_8px_rgba(15,23,42,0.08)]",
+          "rounded-lg bg-white px-1.5 py-1 w-full text-center border border-slate-300/90 transition-[opacity,transform,box-shadow,border-color] duration-200 shadow-[0_3px_10px_rgba(15,23,42,0.1)]",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
           ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "hover:border-slate-400",
         ].join(" ")}
@@ -391,7 +391,7 @@ export function VirtualCommitteeRoom({
       )}
 
       <figure
-        className="relative w-full overflow-hidden rounded-3xl border border-slate-300/85 bg-white shadow-[0_16px_44px_-22px_rgba(15,23,42,0.24)] select-none ring-1 ring-slate-200/90"
+        className="relative w-full overflow-hidden rounded-3xl border border-slate-300/90 bg-white shadow-[0_16px_44px_-22px_rgba(15,23,42,0.2)] select-none ring-1 ring-slate-200/90"
         aria-label={`Virtual committee room — ${committeeName}`}
       >
         {searchActive ? (
@@ -402,22 +402,22 @@ export function VirtualCommitteeRoom({
         <div
           className="relative aspect-[16/10] min-h-[360px] sm:min-h-[460px] md:min-h-[540px]"
           style={{
-            background: "linear-gradient(180deg, #f2f6fc 0%, #edf2f8 46%, #e8eef6 100%)",
+            background: "linear-gradient(180deg, #eef4fc 0%, #e8eff8 45%, #e3ebf6 100%)",
           }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[23%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
+            className="absolute top-0 left-[8%] right-[8%] h-[20%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
           >
             <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-slate-200/90" />
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 text-slate-500">
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-slate-500">
               <Mic className="w-3 h-3" />
-              <span className="text-[0.55rem] uppercase tracking-[0.35em]">
+              <span className="text-[0.52rem] uppercase tracking-[0.3em]">
                 Committee floor
               </span>
             </div>
           </div>
 
-          <div className="absolute top-[3%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">
+          <div className="absolute top-[2%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">
             {dais.map((seat, i) => {
               const href = seat.profileId
                 ? `${personHrefBase.replace(/\/$/, "")}/${seat.profileId}`
@@ -434,7 +434,7 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[18%] sm:pt-[19%] md:pt-[18%]">
+          <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[14%] sm:pt-[15%] md:pt-[14%]">
             <div
               ref={placardGridRef}
               className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-2.5 place-items-center"
