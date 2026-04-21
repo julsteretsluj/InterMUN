@@ -1979,30 +1979,37 @@ export function SessionControlClient({
     <div className="space-y-10">
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
       {(debateTopicOptions?.length ?? 0) > 1 ? (
-        <div className="flex flex-wrap items-end gap-3 rounded-xl border border-white/15 bg-black/20 px-3 py-3">
-          <label className="block min-w-[12rem] flex-1 text-sm text-brand-navy">
-            <span className="text-xs font-medium uppercase tracking-wide text-brand-muted">Live debate topic</span>
-            <select
-              className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
-              value={floorConferenceId}
-              disabled={pending}
-              onChange={(e) => {
-                const v = e.target.value;
-                startTransition(async () => {
-                  const r = await setActiveDebateTopicAction(v);
-                  if (r.error) setMsg(r.error);
-                  else setMsg(null);
-                });
-              }}
-            >
-              {(debateTopicOptions ?? []).map((t) => (
-                <option key={t.id} value={t.id}>
+        <div className="rounded-xl border border-white/15 bg-black/20 px-3 py-3 space-y-2.5">
+          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">Live debate topic</p>
+          <div className="flex flex-wrap gap-2">
+            {(debateTopicOptions ?? []).map((t) => {
+              const isActive = floorConferenceId === t.id;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  disabled={pending || isActive}
+                  onClick={() => {
+                    startTransition(async () => {
+                      const r = await setActiveDebateTopicAction(t.id);
+                      if (r.error) setMsg(r.error);
+                      else setMsg(null);
+                    });
+                  }}
+                  className={[
+                    "rounded-lg border px-3 py-2 text-sm transition-colors disabled:opacity-60",
+                    isActive
+                      ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy font-medium"
+                      : "border-white/20 bg-black/25 text-brand-navy hover:bg-black/20",
+                  ].join(" ")}
+                  aria-pressed={isActive}
+                >
                   {t.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <p className="max-w-md text-xs text-brand-muted">
+                </button>
+              );
+            })}
+          </div>
+          <p className="max-w-2xl text-xs text-brand-muted">
             Motions, timers, and the speaker list follow this topic row. Roll call still uses each delegate’s
             allocation.
           </p>

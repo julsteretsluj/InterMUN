@@ -409,12 +409,6 @@ export function VirtualCommitteeRoom({
             className="absolute top-0 left-[8%] right-[8%] h-[20%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
           >
             <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-slate-200/90" />
-            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-slate-500">
-              <Mic className="w-3 h-3" />
-              <span className="text-[0.52rem] uppercase tracking-[0.3em]">
-                Committee floor
-              </span>
-            </div>
           </div>
 
           <div className="absolute top-[2%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">
@@ -432,6 +426,13 @@ export function VirtualCommitteeRoom({
                 />
               );
             })}
+          </div>
+
+          <div className="absolute top-[18%] sm:top-[18.5%] md:top-[17.5%] left-1/2 -translate-x-1/2 z-[6] flex items-center gap-1.5 text-slate-500">
+            <Mic className="w-3 h-3" />
+            <span className="text-[0.52rem] uppercase tracking-[0.3em]">
+              Committee floor
+            </span>
           </div>
 
           <div className="absolute inset-0 z-[5] overflow-y-auto md:overflow-y-hidden px-3 pb-4 pt-[14%] sm:pt-[15%] md:pt-[14%]">
