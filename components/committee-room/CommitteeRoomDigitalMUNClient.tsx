@@ -442,7 +442,12 @@ export function CommitteeRoomDigitalMUNClient({
             <Gavel className="size-4 text-brand-accent-bright" />
             <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">Staff · seats</h3>
           </div>
-          <CommitteeRoomStaffControls allocations={staffAllocations} delegates={delegates} chairs={chairs} />
+          <CommitteeRoomStaffControls
+            allocations={staffAllocations}
+            delegates={delegates}
+            chairs={chairs}
+            staffRole={myRole}
+          />
         </div>
       ) : null}
     </div>

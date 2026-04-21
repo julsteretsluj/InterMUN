@@ -434,12 +434,9 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute top-[14%] sm:top-[15%] md:top-[16%] left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-lg border border-slate-300/90 bg-white shadow-[0_6px_16px_rgba(15,23,42,0.14)] max-w-[92%]">
+          <div className="absolute top-[14%] sm:top-[15%] md:top-[16%] left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-lg border border-slate-300/90 bg-white shadow-[0_6px_16px_rgba(15,23,42,0.14)] max-w-[92%]">
             <p className="font-display text-center text-sm sm:text-base font-semibold text-brand-navy leading-tight break-words">
               {committeeName}
-            </p>
-            <p className="text-center text-[0.5rem] uppercase tracking-[0.22em] text-brand-muted">
-              {conferenceName}
             </p>
           </div>
 
