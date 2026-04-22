@@ -1555,7 +1555,8 @@ export function SessionControlClient({
 
   function initRollCall() {
     startTransition(async () => {
-      const rows = allocations.map((a) => ({
+      const floorAllocations = allocations.filter((a) => a.conference_id === floorConferenceId);
+      const rows = floorAllocations.map((a) => ({
         conference_id: a.conference_id,
         allocation_id: a.id,
         attendance: "absent" as const,
@@ -1567,7 +1568,7 @@ export function SessionControlClient({
       const { data: existing } = await supabase
         .from("roll_call_entries")
         .select("allocation_id")
-        .in("conference_id", rosterConferenceIdList);
+        .eq("conference_id", floorConferenceId);
       const have = new Set((existing ?? []).map((r) => r.allocation_id));
       const newRows = rows.filter((r) => !have.has(r.allocation_id));
       if (!newRows.length) {
@@ -1606,10 +1607,15 @@ export function SessionControlClient({
     if (draftError) return setMsg(draftError);
     if (!confirmEuPhaseOverride(draft.procedure_code)) return;
     if (!quorumStatus.hasQuorum) {
-      setMsg(
-        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+      const proceed = window.confirm(
+        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}). Proceed anyway and save this motion?`
       );
-      return;
+      if (!proceed) {
+        setMsg(
+          `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+        );
+        return;
+      }
     }
     if (openMotion) {
       setMsg("Close the current motion before opening another.");
@@ -1928,10 +1934,15 @@ export function SessionControlClient({
     if (draftError) return setMsg(draftError);
     if (!confirmEuPhaseOverride(draft.procedure_code)) return;
     if (!quorumStatus.hasQuorum) {
-      setMsg(
-        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+      const proceed = window.confirm(
+        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}). Proceed anyway and record this stated motion?`
       );
-      return;
+      if (!proceed) {
+        setMsg(
+          `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+        );
+        return;
+      }
     }
     startTransition(async () => {
       const { error } = await supabase.from("vote_items").insert({
