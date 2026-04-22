@@ -283,8 +283,8 @@ export function ChairMotionsPointsLog({
         <div className="mt-4 rounded-lg border border-rose-200/70 bg-rose-50/60 p-3 dark:border-rose-900/50 dark:bg-rose-950/20">
           <p className="text-sm font-medium text-rose-900 dark:text-rose-100">Disciplinary system</p>
           <p className="mt-1 text-xs text-rose-900/80 dark:text-rose-200/90">
-            Rule mapping: 3 warnings => strike. Strike 1: no voting rights. Strike 2: speaking rights suspended.
-            Strike 3: removed from committee.
+            Rule mapping: 3 warnings {"=>"} strike. Strike 1: no voting rights. Strike 2: speaking rights
+            suspended. Strike 3: removed from committee.
           </p>
           <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
             Reason (optional)
