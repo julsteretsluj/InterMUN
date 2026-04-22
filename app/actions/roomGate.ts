@@ -143,6 +143,62 @@ export async function setRoomCodeAndEnterAction(
   redirect(nextPath);
 }
 
+export async function switchCommitteeContextAction(
+  _prev: { error?: string } | null,
+  formData: FormData
+): Promise<{ error: string } | null> {
+  const t = await getTranslations("server");
+  const conferenceId = String(formData.get("conference_id") ?? "").trim();
+  const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
+  const nextPath =
+    nextPathRaw.startsWith("/") && !nextPathRaw.startsWith("//")
+      ? nextPathRaw
+      : "/profile";
+
+  if (!conferenceId) {
+    return { error: t("chooseConference") };
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: t("notSignedIn") };
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const role = profile?.role ?? null;
+  if (role !== "chair" && role !== "smt" && role !== "admin") {
+    return { error: t("onlyStaffSetCode") };
+  }
+
+  if (role === "chair" && !canChairSwitchAnyCommitteeForTesting(user.email)) {
+    const { data: seats } = await supabase
+      .from("allocations")
+      .select("conference_id")
+      .eq("user_id", user.id);
+    const allowed = new Set(
+      (seats ?? []).map((s) => s.conference_id).filter((id): id is string => Boolean(id))
+    );
+    if (!allowed.has(conferenceId)) {
+      return {
+        error: t("chairSeatOnly"),
+      };
+    }
+  }
+
+  await setActiveConferenceContext(supabase, conferenceId);
+  await clearVerifiedConference();
+  await clearAllocationCodeVerification();
+  redirect(nextPath);
+}
+
 /** When exactly one event and one committee exist, set both cookies and skip both gates. */
 export async function implicitJoinSingletonAction(formData: FormData) {
   const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";

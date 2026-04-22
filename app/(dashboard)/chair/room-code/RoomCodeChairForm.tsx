@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useMemo, useState } from "react";
-import { setRoomCodeAndEnterAction } from "@/app/actions/roomGate";
+import { setRoomCodeAndEnterAction, switchCommitteeContextAction } from "@/app/actions/roomGate";
 import { HelpButton } from "@/components/HelpButton";
 
 type Conf = {
@@ -16,6 +16,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
   const [query, setQuery] = useState("");
   const [conferenceId, setConferenceId] = useState(conferences[0]?.id ?? "");
   const [state, formAction, pending] = useActionState(setRoomCodeAndEnterAction, null);
+  const [switchState, switchAction, switchPending] = useActionState(switchCommitteeContextAction, null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -148,8 +149,25 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           {state.error}
         </p>
       )}
+      {switchState?.error && (
+        <p className="text-sm text-red-900 bg-red-100 border border-red-300 rounded-lg px-3 py-2">
+          {switchState.error}
+        </p>
+      )}
 
       <div className="flex flex-wrap gap-2">
+        <button
+          formAction={switchAction}
+          type="submit"
+          disabled={
+            switchPending ||
+            conferences.length === 0 ||
+            (!singleCommittee && (filtered.length === 0 || !conferenceId))
+          }
+          className="px-4 py-2.5 rounded-lg border border-brand-navy/25 bg-white/70 text-brand-navy font-semibold hover:bg-white disabled:opacity-50"
+        >
+          {switchPending ? "Switching…" : "Switch to selected committee"}
+        </button>
         <button
           type="submit"
           disabled={
