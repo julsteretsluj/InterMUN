@@ -1,4 +1,5 @@
 import type { VoteType } from "@/types/database";
+import { normalizeProcedureProfile, type ProcedureProfile } from "@/lib/procedure-profiles";
 
 /** How consultation vs moderated caucus rank when both are pending (handbook vs alternate RoP). */
 export type CaucusDisruptivenessPrecedence = "consultation_first" | "moderated_first";
@@ -20,32 +21,58 @@ function caucusScores(precedence: CaucusDisruptivenessPrecedence) {
 export function motionDisruptivenessScore(
   voteType: VoteType,
   procedureCode: string | null,
-  caucusPrecedence: CaucusDisruptivenessPrecedence = "consultation_first"
+  caucusPrecedence: CaucusDisruptivenessPrecedence = "consultation_first",
+  procedureProfile?: ProcedureProfile | string | null
 ): number {
+  const profile = normalizeProcedureProfile(procedureProfile);
   if (voteType === "resolution") return 78;
   if (voteType === "amendment") return 72;
 
   const cu = caucusScores(caucusPrecedence);
-  const byCode: Record<string, number> = {
-    adjourn: 100,
-    suspend: 96,
-    close_debate: 90,
-    exclude_public: 84,
-    roll_call_vote: 78,
-    divide_question: 74,
-    amendment: 72,
-    clause_by_clause: 70,
-    unmoderated_caucus: cu.unmoderated_caucus,
-    consultation: cu.consultation,
-    moderated_caucus: cu.moderated_caucus,
-    extend_opening_speech: 34,
-    for_against_speeches: 30,
-    set_agenda: 28,
-    open_gsl: 26,
-    open_debate: 24,
-    silent_prayer: 18,
-    minute_silent: 18,
-  };
+  const byCode: Record<string, number> =
+    profile === "eu_parliament"
+      ? {
+          suspend: 100,
+          adjourn: 98,
+          close_debate: 94,
+          open_debate: 92,
+          shadow_meeting: 90,
+          exclude_public: 88,
+          divide_question: 86,
+          roll_call_vote: 84,
+          clause_by_clause: 82,
+          amendment: 80,
+          unmoderated_caucus: cu.unmoderated_caucus,
+          consultation: cu.consultation,
+          moderated_caucus: cu.moderated_caucus,
+          cabinet_meeting: 44,
+          extend_opening_speech: 38,
+          set_agenda: 34,
+          open_gsl: 28,
+          for_against_speeches: 26,
+          silent_prayer: 20,
+          minute_silent: 20,
+        }
+      : {
+          adjourn: 100,
+          suspend: 96,
+          close_debate: 90,
+          exclude_public: 84,
+          roll_call_vote: 78,
+          divide_question: 74,
+          amendment: 72,
+          clause_by_clause: 70,
+          unmoderated_caucus: cu.unmoderated_caucus,
+          consultation: cu.consultation,
+          moderated_caucus: cu.moderated_caucus,
+          extend_opening_speech: 34,
+          for_against_speeches: 30,
+          set_agenda: 28,
+          open_gsl: 26,
+          open_debate: 24,
+          silent_prayer: 18,
+          minute_silent: 18,
+        };
 
   if (procedureCode && byCode[procedureCode] != null) {
     return byCode[procedureCode]!;
@@ -56,10 +83,14 @@ export function motionDisruptivenessScore(
 
 export function sortMotionsMostDisruptiveFirst<
   T extends { vote_type: VoteType; procedure_code: string | null; created_at: string },
->(rows: T[], caucusPrecedence: CaucusDisruptivenessPrecedence = "consultation_first"): T[] {
+>(
+  rows: T[],
+  caucusPrecedence: CaucusDisruptivenessPrecedence = "consultation_first",
+  procedureProfile?: ProcedureProfile | string | null
+): T[] {
   return [...rows].sort((a, b) => {
-    const da = motionDisruptivenessScore(a.vote_type, a.procedure_code, caucusPrecedence);
-    const db = motionDisruptivenessScore(b.vote_type, b.procedure_code, caucusPrecedence);
+    const da = motionDisruptivenessScore(a.vote_type, a.procedure_code, caucusPrecedence, procedureProfile);
+    const db = motionDisruptivenessScore(b.vote_type, b.procedure_code, caucusPrecedence, procedureProfile);
     if (db !== da) return db - da;
     return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
   });

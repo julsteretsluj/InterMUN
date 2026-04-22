@@ -22,6 +22,8 @@ type CommitteeRow = {
   committee_logo_url: string | null;
   crisis_slides_url: string | null;
   consultation_before_moderated_caucus?: boolean | null;
+  procedure_profile?: "default" | "eu_parliament" | null;
+  eu_guided_workflow_enabled?: boolean | null;
 };
 
 export function SmtConferenceSettingsClient({
@@ -306,6 +308,35 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           <span className="block text-xs text-brand-muted mt-1">
             Uncheck if your handbook ranks a <span className="font-medium">moderated caucus</span> motion above{" "}
             <span className="font-medium">consultation</span> when both are pending.
+          </span>
+        </span>
+      </label>
+
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">Procedure profile</label>
+        <select
+          name="procedure_profile"
+          defaultValue={row.procedure_profile ?? "default"}
+          className="w-full rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy"
+        >
+          <option value="default">Default committee RoP</option>
+          <option value="eu_parliament">EU Parliament guided RoP</option>
+        </select>
+      </div>
+
+      <label className="flex cursor-pointer items-start gap-2 rounded-lg border border-brand-navy/15 bg-white/60 px-3 py-2.5 text-sm text-brand-navy">
+        <input
+          type="checkbox"
+          name="eu_guided_workflow_enabled"
+          value="on"
+          defaultChecked={row.eu_guided_workflow_enabled ?? false}
+          className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-accent focus:ring-brand-accent"
+        />
+        <span>
+          <span className="font-medium">EU guided workflow checks</span>
+          <span className="block text-xs text-brand-muted mt-1">
+            Enables EU Parliament phase guidance and core procedural blockers. Ignored unless
+            procedure profile is set to EU Parliament.
           </span>
         </span>
       </label>

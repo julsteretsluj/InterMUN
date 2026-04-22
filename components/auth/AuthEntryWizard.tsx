@@ -10,6 +10,7 @@ import { getAppName } from "@/lib/branding";
 import { INTERMUN_ENTRY_ROLE_KEY, type InterMunEntryRole } from "@/lib/entry-role";
 import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
 import { applyConferenceCodeForAuthWizard } from "@/app/actions/eventGate";
+import { useTranslations } from "next-intl";
 
 type Step = "welcome" | "conference" | "role" | "account";
 
@@ -49,6 +50,7 @@ function angleToRoleIndex(angle: number, count: number): number {
 }
 
 export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
+  const t = useTranslations("authWizard");
   const router = useRouter();
   const appName = getAppName();
   const [step, setStep] = useState<Step>("welcome");
@@ -67,6 +69,18 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
   const selectedRole = ROLES[roleIndex] ?? ROLES[0]!;
   const RoleIcon = selectedRole.Icon;
   const ringGradient = useMemo(() => roleRingConicGradient(), []);
+  const selectedRoleLabel =
+    selectedRole.id === "chair"
+      ? t("chair")
+      : selectedRole.id === "delegate"
+        ? t("delegate")
+        : t("secretariat");
+  const selectedRoleHint =
+    selectedRole.id === "chair"
+      ? t("chairHint")
+      : selectedRole.id === "delegate"
+        ? t("delegateHint")
+        : t("secretariatHint");
 
   const snapToIndex = useCallback((idx: number) => {
     const n = ROLES.length;
@@ -206,19 +220,19 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             aria-hidden
           />
           <h1 className="font-display text-3xl md:text-4xl font-semibold text-brand-navy tracking-tight">
-            Enter {appName}
+            {t("enterApp", { appName })}
           </h1>
           <p className="text-sm text-brand-muted max-w-sm mx-auto">
             {mode === "signup"
-              ? "Enter your conference code first, choose how you participate, then create your account."
-              : "Enter your conference code first, choose how you participate, then sign in."}
+              ? t("welcomeSignup")
+              : t("welcomeLogin")}
           </p>
           <button
             type="button"
             onClick={() => setStep("conference")}
             className="mun-btn-primary w-full max-w-xs mx-auto rounded-xl py-3.5 text-base font-semibold"
           >
-            Continue
+            {t("continue")}
           </button>
         </div>
       ) : null}
@@ -238,12 +252,13 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             className="mb-4 text-sm text-brand-muted hover:text-brand-navy inline-flex items-center gap-1"
           >
             <ChevronLeft className="size-4" strokeWidth={2} />
-            Back
+            {t("back")}
           </button>
-          <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-2">Join your conference</h2>
+          <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-2">{t("conferenceTitle")}</h2>
           <p className="text-sm text-brand-muted text-center mb-6">
-            Enter the <strong className="text-brand-navy font-semibold">conference code</strong> from your organisers.
-            Next you&apos;ll choose your role, then {mode === "signup" ? "create an account" : "sign in"}.
+            {t("conferenceDescription", {
+              mode: mode === "signup" ? t("nextModeSignup") : t("nextModeLogin"),
+            })}
           </p>
           <form onSubmit={handleConferenceSubmit} className="space-y-5">
             <div>
@@ -251,7 +266,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                 htmlFor="wizard-event-code"
                 className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
               >
-                Conference code
+                {t("conferenceCode")}
               </label>
               <input
                 id="wizard-event-code"
@@ -266,7 +281,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                 placeholder="e.g. SEAMUNI2027"
               />
               <p className="text-xs text-brand-muted mt-1.5">
-                Whole-conference code (all committees). Spaces ignored; matching is case-insensitive.
+                {t("conferenceCodeHelp")}
               </p>
             </div>
             {conferenceError ? (
@@ -279,7 +294,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
               disabled={conferencePending}
               className="mun-btn-primary w-full rounded-lg py-3 text-base font-semibold disabled:opacity-50"
             >
-              {conferencePending ? "Checking…" : "Continue"}
+              {conferencePending ? t("checking") : t("continue")}
             </button>
           </form>
         </div>
@@ -295,10 +310,10 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                 className="text-sm text-brand-muted hover:text-brand-navy inline-flex items-center gap-1 mb-2"
               >
                 <ChevronLeft className="size-4" strokeWidth={2} />
-                Back
+                {t("back")}
               </button>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-navy">What is your role?</h2>
-              <p className="text-brand-navy text-sm md:text-base">Move the circle to select the respective role.</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-navy">{t("whatIsYourRole")}</h2>
+              <p className="text-brand-navy text-sm md:text-base">{t("moveCircleRole")}</p>
               <button
                 type="button"
                 onClick={() => {
@@ -310,7 +325,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                 }}
                 className="mt-4 rounded-xl bg-logo-cyan/25 px-8 py-3 text-base font-semibold text-logo-blue hover:bg-logo-cyan/35 transition-colors border border-logo-cyan/30"
               >
-                Confirm
+                {t("confirm")}
               </button>
             </div>
 
@@ -364,8 +379,8 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                       strokeWidth={1.25}
                       style={{ color: selectedRole.accentHex }}
                     />
-                    <p className="font-display text-2xl md:text-3xl font-bold text-brand-navy">{selectedRole.label}</p>
-                    <p className="text-sm italic text-brand-navy/85">{selectedRole.hint}</p>
+                    <p className="font-display text-2xl md:text-3xl font-bold text-brand-navy">{selectedRoleLabel}</p>
+                    <p className="text-sm italic text-brand-navy/85">{selectedRoleHint}</p>
                   </div>
                 </div>
 
@@ -379,7 +394,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
                 </button>
               </div>
               <p className="text-xs text-brand-muted text-center max-w-xs">
-                Drag around the ring or use the arrows / arrow keys to change role.
+                {t("dragHint")}
               </p>
             </div>
           </div>
@@ -398,16 +413,16 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             className="mb-4 text-sm text-brand-muted hover:text-brand-navy inline-flex items-center gap-1"
           >
             <ChevronLeft className="size-4" strokeWidth={2} />
-            Back to role
+            {t("backToRole")}
           </button>
           <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-6">
-            {mode === "login" ? "Sign in" : "Create account"}
+            {mode === "login" ? t("signIn") : t("createAccount")}
           </h2>
           <form onSubmit={mode === "login" ? handleLoginSubmit : handleSignupSubmit} className="space-y-4">
             {mode === "signup" ? (
               <div>
                 <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
-                  Name
+                  {t("name")}
                 </label>
                 <input
                   type="text"
@@ -419,7 +434,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             ) : null}
             <div>
               <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
-                Email
+                {t("email")}
               </label>
               <input
                 type="email"
@@ -431,7 +446,7 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             </div>
             <div>
               <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
-                Password
+                {t("password")}
               </label>
               <input
                 type="password"
@@ -454,26 +469,26 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             >
               {loading
                 ? mode === "login"
-                  ? "Signing in…"
-                  : "Creating account…"
+                  ? t("signingIn")
+                  : t("creatingAccount")
                 : mode === "login"
-                  ? "Sign in"
-                  : "Sign up"}
+                  ? t("signIn")
+                  : t("signUp")}
             </button>
           </form>
           <p className="mt-6 text-center text-sm text-brand-muted">
             {mode === "login" ? (
               <>
-                Don&apos;t have an account?{" "}
+                {t("dontHaveAccount")}{" "}
                 <Link href="/signup" className="mun-link font-medium no-underline hover:underline">
-                  Sign up
+                  {t("signUp")}
                 </Link>
               </>
             ) : (
               <>
-                Already have an account?{" "}
+                {t("alreadyHaveAccount")}{" "}
                 <Link href="/login" className="mun-link font-medium no-underline hover:underline">
-                  Sign in
+                  {t("signIn")}
                 </Link>
               </>
             )}

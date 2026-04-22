@@ -37,6 +37,10 @@ export interface Conference {
   allocation_code_gate_enabled?: boolean;
   /** Competing-motion order: consultation ranks above moderated caucus unless false. */
   consultation_before_moderated_caucus?: boolean;
+  /** Procedure ruleset profile for committee-specific RoP flows. */
+  procedure_profile?: "default" | "eu_parliament";
+  /** Enables EU guided workflow checks when procedure_profile is eu_parliament. */
+  eu_guided_workflow_enabled?: boolean;
   created_at: string;
 }
 
@@ -94,4 +98,28 @@ export interface Resolution {
   visible_to_other_bloc: boolean;
   created_at: string;
   updated_at: string;
+}
+
+export interface DelegateDisciplineRecord {
+  id: string;
+  conference_id: string;
+  allocation_id: string;
+  warning_count: number;
+  strike_count: number;
+  voting_rights_lost: boolean;
+  speaking_rights_suspended: boolean;
+  removed_from_committee: boolean;
+  updated_at: string;
+}
+
+export interface DelegateDisciplineEvent {
+  id: string;
+  conference_id: string;
+  allocation_id: string;
+  chair_user_id: string | null;
+  action: "warning" | "strike" | "revoke_warning" | "revoke_strike" | "reset";
+  reason: string | null;
+  warning_count_after: number;
+  strike_count_after: number;
+  created_at: string;
 }

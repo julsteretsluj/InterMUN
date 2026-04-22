@@ -5,6 +5,8 @@ import { SignOutButton } from "@/components/SignOutButton";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
+import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
+import { useLocale, useTranslations } from "next-intl";
 
 function initialsFromName(name: string, email: string): string {
   const n = name.trim();
@@ -19,8 +21,8 @@ function initialsFromName(name: string, email: string): string {
   return local.slice(0, 2).toUpperCase();
 }
 
-function formatHeaderDate(d: Date): string {
-  return new Intl.DateTimeFormat("en-GB", {
+function formatHeaderDate(d: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -53,6 +55,8 @@ export function DashboardTopBar({
   /** Account menu target (e.g. SMT uses `/smt/profile`). */
   profileHref?: string;
 }) {
+  const t = useTranslations("dashboardTopBar");
+  const locale = useLocale();
   const initials = initialsFromName(userName, userEmail);
 
   return (
@@ -75,7 +79,7 @@ export function DashboardTopBar({
               href="/delegate"
               className="hidden rounded-full border border-slate-200/90 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:border-brand-accent/45 hover:bg-brand-accent/10 dark:border-discord-divider dark:bg-discord-elevated dark:text-zinc-100 dark:hover:bg-[color:var(--discord-hover-bg)] sm:inline-flex"
             >
-              📄 Delegate hub
+              📄 {t("delegateHub")}
             </Link>
           ) : null}
           {conferenceLine ? (
@@ -87,9 +91,10 @@ export function DashboardTopBar({
             className="hidden text-sm text-slate-500 dark:text-discord-muted md:block"
             dateTime={new Date().toISOString()}
           >
-            {formatHeaderDate(new Date())}
+            {formatHeaderDate(new Date(), locale)}
           </time>
           {notifications ?? null}
+          <LanguageSwitcher />
           <ThemeSelector />
           <div className="flex items-center gap-2 rounded-2xl border border-slate-200/90 bg-white py-1.5 pl-1.5 pr-2 shadow-sm dark:border-discord-divider dark:bg-discord-elevated">
             <Link

@@ -11,6 +11,17 @@ type DelegateOption = {
   label: string;
 };
 
+type DelegateDisciplineRow = {
+  allocationId: string;
+  delegateLabel: string;
+  warningCount: number;
+  strikeCount: number;
+  votingRightsLost: boolean;
+  speakingRightsSuspended: boolean;
+  removedFromCommittee: boolean;
+  updatedAt: string;
+};
+
 export type DelegatePointEntry = {
   id: string;
   allocationId: string;
@@ -33,6 +44,8 @@ export function ChairMotionsPointsLog({
   const [selectedAllocationId, setSelectedAllocationId] = useState("");
   const [draft, setDraft] = useState("");
   const [myUserId, setMyUserId] = useState<string | null>(null);
+  const [disciplineRows, setDisciplineRows] = useState<DelegateDisciplineRow[]>([]);
+  const [disciplineReason, setDisciplineReason] = useState("");
 
   const pointsPresets = useMemo(
     () => CHAIR_MOTIONS_POINTS_PRESETS.filter((p) => p.kind === "point"),
@@ -75,10 +88,50 @@ export function ChairMotionsPointsLog({
     setReady(true);
   }, [conferenceId, supabase]);
 
+  const loadDiscipline = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("chair_delegate_discipline")
+      .select(
+        "allocation_id, warning_count, strike_count, voting_rights_lost, speaking_rights_suspended, removed_from_committee, updated_at, allocations(country)"
+      )
+      .eq("conference_id", conferenceId)
+      .order("updated_at", { ascending: false })
+      .limit(400);
+    if (error) return;
+    type Row = {
+      allocation_id: string;
+      warning_count: number;
+      strike_count: number;
+      voting_rights_lost: boolean;
+      speaking_rights_suspended: boolean;
+      removed_from_committee: boolean;
+      updated_at: string;
+      allocations: { country: string | null } | { country: string | null }[] | null;
+    };
+    const rows = (data ?? []) as Row[];
+    setDisciplineRows(
+      rows.map((r) => {
+        const alloc = Array.isArray(r.allocations) ? r.allocations[0] : r.allocations;
+        return {
+          allocationId: r.allocation_id,
+          delegateLabel: alloc?.country?.trim() || "Delegate",
+          warningCount: r.warning_count ?? 0,
+          strikeCount: r.strike_count ?? 0,
+          votingRightsLost: r.voting_rights_lost === true,
+          speakingRightsSuspended: r.speaking_rights_suspended === true,
+          removedFromCommittee: r.removed_from_committee === true,
+          updatedAt: r.updated_at,
+        } satisfies DelegateDisciplineRow;
+      })
+    );
+  }, [conferenceId, supabase]);
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadPoints();
-  }, [loadPoints]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadDiscipline();
+  }, [loadDiscipline, loadPoints]);
 
   useEffect(() => {
     void supabase.auth.getUser().then(({ data }) => {
@@ -94,11 +147,38 @@ export function ChairMotionsPointsLog({
         { event: "*", schema: "public", table: "chair_delegate_points" },
         () => void loadPoints()
       )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "chair_delegate_discipline" },
+        () => void loadDiscipline()
+      )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [conferenceId, loadPoints, supabase]);
+  }, [conferenceId, loadDiscipline, loadPoints, supabase]);
+
+  const selectedDiscipline = useMemo(
+    () => disciplineRows.find((r) => r.allocationId === selectedAllocationId) ?? null,
+    [disciplineRows, selectedAllocationId]
+  );
+
+  const applyDisciplinaryAction = useCallback(
+    async (action: "warning" | "strike" | "revoke_warning" | "revoke_strike" | "reset") => {
+      if (!selectedAllocationId) return;
+      const { error } = await supabase.rpc("apply_delegate_disciplinary_action", {
+        p_conference_id: conferenceId,
+        p_allocation_id: selectedAllocationId,
+        p_action: action,
+        p_reason: disciplineReason.trim() || null,
+      });
+      if (!error) {
+        setDisciplineReason("");
+        void loadDiscipline();
+      }
+    },
+    [conferenceId, disciplineReason, loadDiscipline, selectedAllocationId, supabase]
+  );
 
   const addEntry = useCallback(
     async (text: string) => {
@@ -198,6 +278,83 @@ export function ChairMotionsPointsLog({
           >
             ➕ Add
           </button>
+        </div>
+
+        <div className="mt-4 rounded-lg border border-rose-200/70 bg-rose-50/60 p-3 dark:border-rose-900/50 dark:bg-rose-950/20">
+          <p className="text-sm font-medium text-rose-900 dark:text-rose-100">Disciplinary system</p>
+          <p className="mt-1 text-xs text-rose-900/80 dark:text-rose-200/90">
+            Rule mapping: 3 warnings => strike. Strike 1: no voting rights. Strike 2: speaking rights suspended.
+            Strike 3: removed from committee.
+          </p>
+          <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+            Reason (optional)
+            <input
+              value={disciplineReason}
+              onChange={(e) => setDisciplineReason(e.target.value)}
+              placeholder="e.g. repeated disruption during formal debate"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            />
+          </label>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => void applyDisciplinaryAction("warning")}
+              disabled={!selectedAllocationId}
+              className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+            >
+              + Warning
+            </button>
+            <button
+              type="button"
+              onClick={() => void applyDisciplinaryAction("strike")}
+              disabled={!selectedAllocationId}
+              className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+            >
+              + Strike
+            </button>
+            <button
+              type="button"
+              onClick={() => void applyDisciplinaryAction("revoke_warning")}
+              disabled={!selectedAllocationId}
+              className="rounded-lg border border-amber-600/50 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 disabled:opacity-50 dark:bg-zinc-900 dark:text-amber-200"
+            >
+              Revoke warning
+            </button>
+            <button
+              type="button"
+              onClick={() => void applyDisciplinaryAction("revoke_strike")}
+              disabled={!selectedAllocationId}
+              className="rounded-lg border border-rose-700/50 bg-white px-3 py-1.5 text-xs font-semibold text-rose-800 disabled:opacity-50 dark:bg-zinc-900 dark:text-rose-200"
+            >
+              Revoke strike
+            </button>
+            <button
+              type="button"
+              onClick={() => void applyDisciplinaryAction("reset")}
+              disabled={!selectedAllocationId}
+              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
+            >
+              Reset record
+            </button>
+          </div>
+          {selectedDiscipline ? (
+            <div className="mt-3 rounded-md border border-rose-300/30 bg-white/75 px-3 py-2 text-xs text-slate-700 dark:border-rose-900/40 dark:bg-zinc-900/50 dark:text-zinc-200">
+              <p>
+                <span className="font-semibold">Current:</span> {selectedDiscipline.delegateLabel} · Warnings{" "}
+                <span className="font-semibold">{selectedDiscipline.warningCount}</span> · Strikes{" "}
+                <span className="font-semibold">{selectedDiscipline.strikeCount}</span>
+              </p>
+              <p className="mt-1">
+                Voting disabled: <span className="font-semibold">{selectedDiscipline.votingRightsLost ? "Yes" : "No"}</span> ·
+                Speaking suspended:{" "}
+                <span className="font-semibold">
+                  {selectedDiscipline.speakingRightsSuspended ? "Yes" : "No"}
+                </span>{" "}
+                · Removed:{" "}
+                <span className="font-semibold">{selectedDiscipline.removedFromCommittee ? "Yes" : "No"}</span>
+              </p>
+            </div>
+          ) : null}
         </div>
 
         <details className="mt-4 rounded-lg border border-slate-200/90 bg-slate-50/80 p-3 dark:border-zinc-600 dark:bg-zinc-800/40">

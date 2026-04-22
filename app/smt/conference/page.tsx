@@ -27,7 +27,7 @@ export default async function SmtConferencePage() {
     ? await supabase
         .from("conferences")
         .select(
-          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, consultation_before_moderated_caucus"
+          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, consultation_before_moderated_caucus, procedure_profile, eu_guided_workflow_enabled"
         )
         .eq("event_id", eventId)
         .order("name", { ascending: true })
@@ -44,6 +44,8 @@ export default async function SmtConferencePage() {
           committee_logo_url: string | null;
           crisis_slides_url: string | null;
           consultation_before_moderated_caucus: boolean | null;
+          procedure_profile: "default" | "eu_parliament" | null;
+          eu_guided_workflow_enabled: boolean | null;
         }[],
       };
 

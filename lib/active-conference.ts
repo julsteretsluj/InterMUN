@@ -16,6 +16,8 @@ export type ActiveConferenceRow = {
   crisis_slides_url: string | null;
   allocation_code_gate_enabled: boolean;
   consultation_before_moderated_caucus?: boolean;
+  procedure_profile?: "default" | "eu_parliament";
+  eu_guided_workflow_enabled?: boolean;
 };
 
 /** Active committee from room code (cookie). Validates row still exists. */
@@ -29,7 +31,7 @@ export async function getResolvedActiveConference(): Promise<ActiveConferenceRow
   const { data, error } = await supabase
     .from("conferences")
     .select(
-      "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled"
+      "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled, procedure_profile, eu_guided_workflow_enabled"
     )
     .eq("id", id)
     .maybeSingle();
@@ -93,6 +95,7 @@ export async function getConferenceForDashboard(options: {
           .from("conferences")
           .select(
             "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled, consultation_before_moderated_caucus"
+            + ", procedure_profile, eu_guided_workflow_enabled"
           )
           .eq("id", distinctIds[0])
           .maybeSingle();
@@ -109,6 +112,7 @@ export async function getConferenceForDashboard(options: {
     .from("conferences")
     .select(
       "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled, consultation_before_moderated_caucus"
+      + ", procedure_profile, eu_guided_workflow_enabled"
     )
     .order("created_at", { ascending: false })
     .limit(1)

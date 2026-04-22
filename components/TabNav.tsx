@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   User,
   MessageSquare,
@@ -33,22 +34,22 @@ import type { UserRole } from "@/types/database";
 import type { LucideIcon } from "lucide-react";
 
 const BASE_TABS = [
-  { href: "/delegate", label: "Delegate hub", icon: LayoutDashboard },
-  { href: "/profile", label: "Profile", icon: User },
-  { href: "/follow", label: "Follow", icon: UserPlus },
-  { href: "/chats-notes", label: "Notes", icon: MessageSquare },
-  { href: "/committee-room", label: "Committee", icon: Landmark },
-  { href: "/voting", label: "Voting", icon: Scale },
-  { href: "/guides", label: "Guides", icon: BookOpen },
-  { href: "/documents", label: "Documents", icon: FileText },
-  { href: "/stances", label: "Stances", icon: Compass },
-  { href: "/ideas", label: "Ideas", icon: Lightbulb },
-  { href: "/sources", label: "Sources", icon: Link2 },
-  { href: "/resolutions", label: "Resolutions", icon: FileCheck },
-  { href: "/speeches", label: "Speeches", icon: Mic },
-  { href: "/running-notes", label: "Running", icon: ClipboardList },
-  { href: "/report", label: "Report", icon: Flag },
-  { href: "/crisis-slides", label: "Crisis slides", icon: Presentation },
+  { href: "/delegate", labelKey: "delegateHub", icon: LayoutDashboard },
+  { href: "/profile", labelKey: "profile", icon: User },
+  { href: "/follow", labelKey: "follow", icon: UserPlus },
+  { href: "/chats-notes", labelKey: "notes", icon: MessageSquare },
+  { href: "/committee-room", labelKey: "committee", icon: Landmark },
+  { href: "/voting", labelKey: "voting", icon: Scale },
+  { href: "/guides", labelKey: "guides", icon: BookOpen },
+  { href: "/documents", labelKey: "documents", icon: FileText },
+  { href: "/stances", labelKey: "stances", icon: Compass },
+  { href: "/ideas", labelKey: "ideas", icon: Lightbulb },
+  { href: "/sources", labelKey: "sources", icon: Link2 },
+  { href: "/resolutions", labelKey: "resolutions", icon: FileCheck },
+  { href: "/speeches", labelKey: "speeches", icon: Mic },
+  { href: "/running-notes", labelKey: "running", icon: ClipboardList },
+  { href: "/report", labelKey: "report", icon: Flag },
+  { href: "/crisis-slides", labelKey: "crisisSlides", icon: Presentation },
 ] as const;
 
 const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
@@ -61,38 +62,27 @@ function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabl
   return role === "chair" || role === "smt" || role === "admin"
     ? [
         ...baseTabs.slice(0, 3),
-        { href: "/chair/room-code", label: "Committee code", icon: DoorOpen },
+        { href: "/chair/room-code", labelKey: "committeeCode", icon: DoorOpen },
         ...(role === "chair"
-          ? ([{ href: "/chair/session", label: "Session", icon: PanelsTopLeft }] as const)
+          ? ([{ href: "/chair/session", labelKey: "session", icon: PanelsTopLeft }] as const)
           : []),
         ...(role === "smt" || role === "admin"
-          ? ([{ href: "/smt/allocation-passwords", label: "Passwords", icon: ListOrdered }] as const)
+          ? ([{ href: "/smt/allocation-passwords", labelKey: "passwords", icon: ListOrdered }] as const)
           : []),
-        { href: "/chair/allocation-matrix", label: "Matrix", icon: ListOrdered },
-        { href: "/chair/awards", label: "Awards", icon: Trophy },
+        { href: "/chair/allocation-matrix", labelKey: "matrix", icon: ListOrdered },
+        { href: "/chair/awards", labelKey: "awards", icon: Trophy },
         ...baseTabs.slice(3),
       ]
     : [...baseTabs];
 }
 
-function aspireSections(tabs: readonly { href: string; label: string; icon: LucideIcon }[]) {
-  const libIdx = tabs.findIndex((t) => t.href === "/guides");
-  if (libIdx <= 0) {
-    return [{ label: null as string | null, tabs: [...tabs] }];
-  }
-  return [
-    { label: "Main" as const, tabs: tabs.slice(0, libIdx) },
-    { label: "Library" as const, tabs: tabs.slice(libIdx) },
-  ];
-}
-
 type MainTabKey = "home" | "session" | "library";
-type MainTab = { key: MainTabKey; label: string; icon: LucideIcon };
+type MainTab = { key: MainTabKey; labelKey: "home" | "session" | "library"; icon: LucideIcon };
 
 const MAIN_TABS: MainTab[] = [
-  { key: "home", label: "Home", icon: Layers },
-  { key: "session", label: "Session", icon: Brain },
-  { key: "library", label: "Library", icon: Library },
+  { key: "home", labelKey: "home", icon: Layers },
+  { key: "session", labelKey: "session", icon: Brain },
+  { key: "library", labelKey: "library", icon: Library },
 ];
 
 function tabInPath(pathname: string, href: string) {
@@ -116,9 +106,11 @@ function tabMainGroup(href: string): MainTabKey {
 
 function AspireSidebarLink({
   tab,
+  label,
   isActive,
 }: {
-  tab: { href: string; label: string; icon: LucideIcon };
+  tab: { href: string; labelKey: string; icon: LucideIcon };
+  label: string;
   isActive: boolean;
 }) {
   const Icon = tab.icon;
@@ -139,23 +131,25 @@ function AspireSidebarLink({
         )}
         strokeWidth={1.75}
       />
-      <span className="hidden truncate group-hover:block">{tab.label}</span>
+      <span className="hidden truncate group-hover:block">{label}</span>
     </Link>
   );
 }
 
 function DockLink({
   tab,
+  label,
   isActive,
 }: {
-  tab: { href: string; label: string; icon: LucideIcon };
+  tab: { href: string; labelKey: string; icon: LucideIcon };
+  label: string;
   isActive: boolean;
 }) {
   const Icon = tab.icon;
   return (
     <Link
       href={tab.href}
-      title={tab.label}
+      title={label}
       className="group flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2"
     >
       <span
@@ -174,7 +168,7 @@ function DockLink({
           isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-slate-600 dark:text-zinc-400"
         )}
       >
-        {tab.label}
+        {label}
       </span>
     </Link>
   );
@@ -190,10 +184,11 @@ export function TabNav({
   /** When false, hide `/report` and `/crisis-slides` (crisis committees: FWC, UNSC, HSC). */
   crisisReportingEnabled?: boolean;
 }) {
+  const t = useTranslations("tabNav");
   const pathname = usePathname();
   const tabs = useNavTabs(staffRole, crisisReportingEnabled);
   const groupedTabs = useMemo(() => {
-    const groups: Record<MainTabKey, { href: string; label: string; icon: LucideIcon }[]> = {
+    const groups: Record<MainTabKey, { href: string; labelKey: string; icon: LucideIcon }[]> = {
       home: [],
       session: [],
       library: [],
@@ -222,7 +217,7 @@ export function TabNav({
       >
         <div className="px-1 pb-2 pt-1 group-hover:px-2">
           <p className="hidden px-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-zinc-500 group-hover:block">
-            Main tabs
+            {t("mainTabs")}
           </p>
           <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
             {MAIN_TABS.map((mt) => {
@@ -241,7 +236,7 @@ export function TabNav({
                   )}
                 >
                   <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
-                  <span className="hidden group-hover:inline">{mt.label}</span>
+                  <span className="hidden group-hover:inline">{t(mt.labelKey)}</span>
                 </button>
               );
             })}
@@ -249,11 +244,16 @@ export function TabNav({
         </div>
         <div>
           <p className="hidden px-3 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-zinc-500 group-hover:block">
-            Subtabs
+            {t("subtabs")}
           </p>
           <div className="flex flex-col gap-0.5">
             {visibleTabs.map((tab) => (
-              <AspireSidebarLink key={tab.href} tab={tab} isActive={tabInPath(pathname, tab.href)} />
+              <AspireSidebarLink
+                key={tab.href}
+                tab={tab}
+                label={t(tab.labelKey)}
+                isActive={tabInPath(pathname, tab.href)}
+              />
             ))}
           </div>
         </div>
@@ -284,14 +284,14 @@ export function TabNav({
                 )}
               >
                 <Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
-                {mt.label}
+                {t(mt.labelKey)}
               </button>
             );
           })}
         </div>
         <div className="flex flex-row items-stretch gap-1 overflow-x-auto">
           {visibleTabs.map((tab) => (
-            <DockLink key={tab.href} tab={tab} isActive={tabInPath(pathname, tab.href)} />
+            <DockLink key={tab.href} tab={tab} label={t(tab.labelKey)} isActive={tabInPath(pathname, tab.href)} />
           ))}
         </div>
       </div>

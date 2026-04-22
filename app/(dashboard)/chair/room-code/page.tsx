@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { RoomCodeChairForm } from "./RoomCodeChairForm";
+import { canChairSwitchAnyCommitteeForTesting } from "@/lib/testing-overrides";
 
 export default async function ChairRoomCodePage() {
   const supabase = await createClient();
@@ -20,13 +21,14 @@ export default async function ChairRoomCodePage() {
   if (role !== "chair" && role !== "smt" && role !== "admin") {
     redirect("/profile");
   }
+  const bypassSeatRestriction = canChairSwitchAnyCommitteeForTesting(user.email);
 
   let conferencesQuery = supabase
     .from("conferences")
     .select("id, name, committee, room_code, committee_code")
     .order("created_at", { ascending: false });
 
-  if (role === "chair") {
+  if (role === "chair" && !bypassSeatRestriction) {
     const { data: seats } = await supabase
       .from("allocations")
       .select("conference_id")
@@ -56,7 +58,13 @@ export default async function ChairRoomCodePage() {
       <p className="text-sm text-brand-muted mb-6 max-w-xl">
         Each committee has a <strong>committee code</strong> within its conference (second gate after
         delegates enter the conference code). Codes must be unique within the same conference event.
-        {role === "chair" ? (
+        {role === "chair" && bypassSeatRestriction ? (
+          <>
+            {" "}
+            Testing override enabled: you can switch and manage committee codes across committees
+            without seat allocation checks.
+          </>
+        ) : role === "chair" ? (
           <>
             {" "}
             As dais, you only see committees where you have a seat. Saving sends you to your profile;

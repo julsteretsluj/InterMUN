@@ -40,13 +40,27 @@ import {
   type RollAttendance,
   parseRollAttendance,
   rollAttendanceRollLabel,
-  rollAttendanceShortLabel,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
 import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
 import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
+import {
+  calculateEuPartyTimeAllocation,
+  EU_PARLIAMENT_PARTY_KEYS,
+  EU_PARTY_LABELS,
+  formatSecondsAsMinSec,
+} from "@/lib/eu-party-time";
+import {
+  euSessionPhaseLabel,
+  isProcedureCodeRecommendedInEuPhase,
+  nextEuSessionPhase,
+  parseEuSessionPhase,
+  previousEuSessionPhase,
+  type EuSessionPhase,
+} from "@/lib/eu-session-phase";
+import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
 
 const ROLL_ATTENDANCE_BUTTONS: {
   value: RollAttendance;
@@ -114,7 +128,13 @@ type MotionAudit = {
   metadata: Record<string, unknown> | null;
 };
 type VoteCountRow = { value: string; user_id: string };
-type ResolutionRow = { id: string; google_docs_url: string | null };
+type ResolutionRow = {
+  id: string;
+  google_docs_url: string | null;
+  main_submitters?: string[] | null;
+  co_submitters?: string[] | null;
+  signatories?: string[] | null;
+};
 type ClauseRow = {
   id: string;
   resolution_id: string;
@@ -133,6 +153,37 @@ type ChairSpeechNoteRow = {
   allocation_id: string | null;
   created_at: string;
   updated_at: string;
+};
+type SessionPointCode =
+  | "poi"
+  | "poc"
+  | "parliamentary_inquiry"
+  | "order"
+  | "personal_privilege"
+  | "right_of_reply"
+  | "fact_check";
+type SessionPointRow = {
+  id: string;
+  conference_id: string;
+  raised_by_allocation_id: string | null;
+  point_code: SessionPointCode;
+  detail: string | null;
+  status: "pending" | "accepted" | "denied";
+  created_at: string;
+};
+type VoteRightsRow = {
+  vote_item_id: string;
+  user_id: string;
+  vote_value: "yes" | "no";
+  statement: string;
+};
+type DisciplinaryRow = {
+  allocation_id: string;
+  voting_rights_lost: boolean;
+  speaking_rights_suspended: boolean;
+  removed_from_committee: boolean;
+  warning_count: number;
+  strike_count: number;
 };
 
 /** Dashboard splits session tools across routes; committee room uses `"all"`. */
@@ -231,9 +282,17 @@ export function SessionControlClient({
     moderated_speaker_seconds: "",
     unmoderated_total_minutes: "",
     consultation_total_minutes: "",
+    amendment_kind: "friendly" as "friendly" | "unfriendly",
+    amendment_debate_seconds: "45",
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
+  const [sessionPoints, setSessionPoints] = useState<SessionPointRow[]>([]);
+  const [pointDraftCode, setPointDraftCode] = useState<SessionPointCode>("parliamentary_inquiry");
+  const [pointDraftDetail, setPointDraftDetail] = useState("");
+  const [pointDraftAllocationId, setPointDraftAllocationId] = useState("");
+  const [voteRightsByUserId, setVoteRightsByUserId] = useState<Record<string, VoteRightsRow>>({});
+  const [disciplineByAllocationId, setDisciplineByAllocationId] = useState<Record<string, DisciplinaryRow>>({});
   const [speakerListChairPrompt, setSpeakerListChairPrompt] = useState<SpeakerListChairPromptKind | null>(
     null
   );
@@ -243,7 +302,9 @@ export function SessionControlClient({
   const [motionFloorOpen, setMotionFloorOpen] = useState(false);
   const [pendingStatedMotions, setPendingStatedMotions] = useState<MotionRow[]>([]);
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
-  const [agendaTopicsAll, setAgendaTopicsAll] = useState<AgendaTopic[]>([]);
+  const [procedureProfile, setProcedureProfile] = useState<"default" | "eu_parliament">("default");
+  const [isEuGuidedWorkflow, setIsEuGuidedWorkflow] = useState(false);
+  const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
 
@@ -258,6 +319,7 @@ export function SessionControlClient({
     if (timer.boundVoteItemId.trim()) return;
     if (openVotingMotions.length !== 1) return;
     const onlyId = openVotingMotions[0]!.id;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTimer((t) => (t.boundVoteItemId === "" ? { ...t, boundVoteItemId: onlyId } : t));
   }, [timer.purpose, timer.boundVoteItemId, openVotingMotions]);
 
@@ -287,6 +349,19 @@ export function SessionControlClient({
     return m;
   }, [roll]);
 
+  const quorumStatus = useMemo(() => {
+    const present = membersPresentForMajorityDenominator(
+      rollAttendanceByAllocationId,
+      votingCallOrder.map((a) => a.id)
+    );
+    const required = Math.ceil((votingCallOrder.length * 2) / 3);
+    return {
+      present,
+      required,
+      hasQuorum: votingCallOrder.length === 0 ? false : present >= required,
+    };
+  }, [rollAttendanceByAllocationId, votingCallOrder]);
+
   const procedurePresets = useMemo(() => {
     const base: {
       code: string | null;
@@ -314,6 +389,8 @@ export function SessionControlClient({
       { code: "unmoderated_caucus", label: "Unmoderated Caucus", title: "Motion for an Unmoderated Caucus" },
       { code: "moderated_caucus", label: "Moderated Caucus", title: "Motion for a Moderated Caucus" },
       { code: "consultation", label: "Consultation", title: "Motion for a Consultation" },
+      { code: "cabinet_meeting", label: "Cabinet Meeting", title: "Motion for a Cabinet Meeting" },
+      { code: "shadow_meeting", label: "Shadow Meeting", title: "Motion for a Shadow Meeting" },
       { code: "adjourn", label: "Adjourn Session", title: "Motion to Adjourn Session" },
       { code: "suspend", label: "Suspend Session", title: "Motion to Suspend Session" },
       { code: "divide_question", label: "Divide the Question (editor needed)", title: "Motion to Divide the Question" },
@@ -330,8 +407,8 @@ export function SessionControlClient({
   }, [agendaTopicsRemaining.length, motionDraft.procedure_code]);
 
   const ropMajorityForDraft = useMemo(
-    () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
-    [motionDraft.vote_type, motionDraft.procedure_code]
+    () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code, procedureProfile),
+    [motionDraft.vote_type, motionDraft.procedure_code, procedureProfile]
   );
   const motionDraftValidationError = useMemo(
     () => validateMotionDraft(motionDraft),
@@ -354,6 +431,27 @@ export function SessionControlClient({
     if (agendaTopicsRemaining.some((t) => (t.name ?? "").trim() === cur)) return agendaTopicsRemaining;
     return [...agendaTopicsRemaining, { id: "current", name: cur }];
   }, [agendaTopicsRemaining, motionDraft.procedure_code, motionDraft.title]);
+
+  const euPartyAllocationPreview = useMemo(() => {
+    if (procedureProfile !== "eu_parliament") return null;
+    if (motionDraft.procedure_code !== "moderated_caucus" && motionDraft.procedure_code !== "consultation") {
+      return null;
+    }
+    const totalMinutes =
+      motionDraft.procedure_code === "moderated_caucus"
+        ? Number(motionDraft.moderated_total_minutes)
+        : Number(motionDraft.consultation_total_minutes);
+    if (!Number.isFinite(totalMinutes) || totalMinutes <= 0) return null;
+    return calculateEuPartyTimeAllocation({
+      totalMinutes,
+      mode: motionDraft.procedure_code === "moderated_caucus" ? "moderated" : "consultation",
+    });
+  }, [
+    motionDraft.procedure_code,
+    motionDraft.moderated_total_minutes,
+    motionDraft.consultation_total_minutes,
+    procedureProfile,
+  ]);
 
   function parseModeratedTiming(description: string | null | undefined): {
     totalMinutes: string;
@@ -386,6 +484,14 @@ export function SessionControlClient({
       const base = stripTimingLineFromDescription(draft.description);
       const timing = `Timing: total ${draft.consultation_total_minutes} min`;
       return base ? `${base}\n${timing}` : timing;
+    }
+    if (draft.procedure_code === "amendment") {
+      const base = draft.description.trim();
+      const kindLine =
+        draft.amendment_kind === "unfriendly"
+          ? `Amendment type: unfriendly (${draft.amendment_debate_seconds}s for/against speeches)`
+          : "Amendment type: friendly";
+      return base ? `${base}\n${kindLine}` : kindLine;
     }
     return draft.description.trim() || null;
   }
@@ -439,6 +545,35 @@ export function SessionControlClient({
     ) {
       return "Select a resolution for this motion.";
     }
+    if (draft.procedure_code === "amendment") {
+      if (draft.amendment_kind !== "friendly" && draft.amendment_kind !== "unfriendly") {
+        return "Select amendment type (friendly or unfriendly).";
+      }
+      if (draft.amendment_kind === "unfriendly") {
+        const debateSeconds = Number(draft.amendment_debate_seconds);
+        if (!Number.isFinite(debateSeconds) || debateSeconds < 30 || debateSeconds > 60) {
+          return "Unfriendly amendment debate time must be between 30 and 60 seconds.";
+        }
+      }
+    }
+    if (
+      (draft.procedure_code === "open_debate" || draft.procedure_code === "for_against_speeches") &&
+      draft.procedure_resolution_id
+    ) {
+      const target = resolutions.find((r) => r.id === draft.procedure_resolution_id);
+      if (target) {
+        const mainCount = (target.main_submitters ?? []).length;
+        const coCount = (target.co_submitters ?? []).length;
+        const signatoryCount = (target.signatories ?? []).length;
+        const minSignatories = Math.max(1, Math.ceil(votingCallOrder.length * 0.15));
+        if (mainCount < 2 || coCount < 2) {
+          return "Draft resolution readiness: requires at least 2 main submitters and 2 co-submitters.";
+        }
+        if (signatoryCount < minSignatories) {
+          return `Draft resolution readiness: requires at least ${minSignatories} signatories (15% of committee).`;
+        }
+      }
+    }
     return null;
   }
 
@@ -461,6 +596,33 @@ export function SessionControlClient({
     });
   }
 
+  async function persistEuSessionPhase(nextPhase: EuSessionPhase) {
+    const { error } = await supabase.from("procedure_states").upsert({
+      conference_id: floorConferenceId,
+      eu_session_phase: nextPhase,
+      eu_last_phase_change_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    });
+    if (error) {
+      setMsg(error.message);
+      return false;
+    }
+    setEuSessionPhase(nextPhase);
+    return true;
+  }
+
+  function confirmEuPhaseOverride(procedureCode: string | null): boolean {
+    if (!isEuGuidedWorkflow) return true;
+    if (isProcedureCodeRecommendedInEuPhase(euSessionPhase, procedureCode)) return true;
+    return window.confirm(
+      [
+        `This motion is unusual for the current EU phase: ${euSessionPhaseLabel(euSessionPhase)}.`,
+        "",
+        "Proceed anyway? This override is logged only in the motion history.",
+      ].join("\n")
+    );
+  }
+
   const refresh = useCallback(async () => {
     const motionSelect =
       "id, conference_id, vote_type, procedure_code, procedure_resolution_id, procedure_clause_ids, title, description, must_vote, required_majority, motioner_allocation_id, open_for_voting, created_at, closed_at";
@@ -479,16 +641,18 @@ export function SessionControlClient({
       { data: clauseRows },
       { data: pauseRows },
       { data: sqCurrentRow },
+      { data: pointRows },
+      { data: disciplinaryRows },
     ] =
       await Promise.all([
         supabase
           .from("procedure_states")
-          .select("state, current_vote_item_id, debate_closed, motion_floor_open")
+          .select("state, current_vote_item_id, debate_closed, motion_floor_open, eu_session_phase")
           .eq("conference_id", floorConferenceId)
           .maybeSingle(),
         supabase
           .from("conferences")
-          .select("consultation_before_moderated_caucus, event_id, committee")
+          .select("consultation_before_moderated_caucus, event_id, committee, procedure_profile, eu_guided_workflow_enabled")
           .eq("id", floorConferenceId)
           .maybeSingle(),
         supabase
@@ -527,7 +691,7 @@ export function SessionControlClient({
           .limit(8),
         supabase
           .from("resolutions")
-          .select("id, google_docs_url")
+          .select("id, google_docs_url, main_submitters, co_submitters, signatories")
           .eq("conference_id", floorConferenceId)
           .order("created_at", { ascending: false })
           .limit(30),
@@ -549,6 +713,19 @@ export function SessionControlClient({
           .eq("conference_id", floorConferenceId)
           .eq("status", "current")
           .maybeSingle(),
+        supabase
+          .from("chair_session_points")
+          .select("id, conference_id, raised_by_allocation_id, point_code, detail, status, created_at")
+          .eq("conference_id", floorConferenceId)
+          .order("created_at", { ascending: false })
+          .limit(80),
+        supabase
+          .from("chair_delegate_discipline")
+          .select(
+            "allocation_id, voting_rights_lost, speaking_rights_suspended, removed_from_committee, warning_count, strike_count"
+          )
+          .eq("conference_id", floorConferenceId)
+          .limit(500),
       ]);
 
     const allocRows = (allocs as Alloc[]) ?? [];
@@ -589,23 +766,41 @@ export function SessionControlClient({
     setAnnouncements((ann as Announcement[]) ?? []);
     setPauseEvents((pauseRows as PauseEvent[]) ?? []);
     setCurrentSpeakerQueueRow((sqCurrentRow as CurrentSpeakerQueueRow | null) ?? null);
+    setSessionPoints((pointRows as SessionPointRow[]) ?? []);
+    const dMap: Record<string, DisciplinaryRow> = {};
+    for (const row of (disciplinaryRows as DisciplinaryRow[] | null) ?? []) {
+      dMap[row.allocation_id] = row;
+    }
+    setDisciplineByAllocationId(dMap);
     const ps = psRow as {
       motion_floor_open?: boolean;
       debate_closed?: boolean;
       state?: string;
       current_vote_item_id?: string | null;
+      eu_session_phase?: string | null;
     } | null;
     setMotionFloorOpen(!!ps?.motion_floor_open);
+    setEuSessionPhase(parseEuSessionPhase(ps?.eu_session_phase));
 
     const confForAgenda = confRow as {
       consultation_before_moderated_caucus?: boolean;
       event_id?: string | null;
       committee?: string | null;
+      procedure_profile?: string | null;
+      eu_guided_workflow_enabled?: boolean | null;
     } | null;
+    const normalizedProcedureProfile = isEuParliamentProcedure(confForAgenda?.procedure_profile)
+      ? "eu_parliament"
+      : "default";
+    setProcedureProfile(normalizedProcedureProfile);
     const precedence: CaucusDisruptivenessPrecedence =
       confForAgenda?.consultation_before_moderated_caucus === false ? "moderated_first" : "consultation_first";
     setCaucusPrecedence(precedence);
     setIsCrisisCommitteeSession(isCrisisCommittee(confForAgenda?.committee ?? null));
+    setIsEuGuidedWorkflow(
+      normalizedProcedureProfile === "eu_parliament" &&
+        confForAgenda?.eu_guided_workflow_enabled === true
+    );
 
     const agendaTopicsAllResolved: AgendaTopic[] = [];
     if (confForAgenda?.event_id && confForAgenda.committee) {
@@ -633,7 +828,6 @@ export function SessionControlClient({
     const remaining = agendaTopicsAllResolved.filter(
       (t) => !usedAgendaNames.has((t.name ?? "").trim())
     );
-    setAgendaTopicsAll(agendaTopicsAllResolved);
     setAgendaTopicsRemaining(remaining);
     setAgendaTopicsUsedNames(Array.from(usedAgendaNames));
 
@@ -641,10 +835,26 @@ export function SessionControlClient({
     setOpenVotingMotions(openForVotingList);
     const open = openForVotingList[0] ?? null;
     const pendingRaw = unclosed.filter((row) => row.open_for_voting === false);
-    setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw, precedence));
+    setPendingStatedMotions(sortMotionsMostDisruptiveFirst(pendingRaw, precedence, normalizedProcedureProfile));
     setOpenMotion(open);
     setRecentMotions((recentClosedRows as MotionRow[]) ?? []);
     setResolutions((resolutionRows as ResolutionRow[]) ?? []);
+    const rightsVoteIds = new Set<string>();
+    for (const row of openForVotingList) rightsVoteIds.add(row.id);
+    for (const row of (recentClosedRows as MotionRow[]) ?? []) rightsVoteIds.add(row.id);
+    if (rightsVoteIds.size > 0) {
+      const { data: rightsRows } = await supabase
+        .from("vote_rights_statements")
+        .select("vote_item_id, user_id, vote_value, statement")
+        .in("vote_item_id", Array.from(rightsVoteIds));
+      const rightsMap: Record<string, VoteRightsRow> = {};
+      for (const row of (rightsRows as VoteRightsRow[]) ?? []) {
+        rightsMap[`${row.vote_item_id}:${row.user_id}`] = row;
+      }
+      setVoteRightsByUserId(rightsMap);
+    } else {
+      setVoteRightsByUserId({});
+    }
     setResolutionClauses((clauseRows as ClauseRow[]) ?? []);
     if (open) {
       const parsedTiming = parseModeratedTiming(open.description);
@@ -664,6 +874,8 @@ export function SessionControlClient({
         moderated_speaker_seconds: isMod ? parsedTiming.speakerSeconds : "",
         unmoderated_total_minutes: isUnmod ? parsedTiming.totalMinutes : "",
         consultation_total_minutes: isConsult ? parsedTiming.totalMinutes : "",
+        amendment_kind: "friendly",
+        amendment_debate_seconds: "45",
       });
     }
 
@@ -792,6 +1004,16 @@ export function SessionControlClient({
         { event: "UPDATE", schema: "public", table: "conferences", filter: `id=eq.${floorConferenceId}` },
         () => void refresh()
       )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "chair_delegate_discipline",
+          filter: `conference_id=eq.${floorConferenceId}`,
+        },
+        () => void refresh()
+      )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
@@ -814,6 +1036,7 @@ export function SessionControlClient({
   }, [supabase, floorConferenceId]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadChairSpeechNotes();
   }, [loadChairSpeechNotes]);
 
@@ -972,7 +1195,11 @@ export function SessionControlClient({
     });
   }
 
-  function recordDelegateVoteForAllocation(allocation: Alloc, value: "yes" | "no" | "abstain") {
+  function recordDelegateVoteForAllocation(
+    allocation: Alloc,
+    value: "yes" | "no" | "abstain",
+    withRights = false
+  ) {
     if (!activeMotionForRecordedVotes) {
       setMsg("No motion open for voting.");
       return;
@@ -983,6 +1210,11 @@ export function SessionControlClient({
     }
 
     const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "absent";
+    const discipline = disciplineByAllocationId[allocation.id];
+    if (discipline?.voting_rights_lost) {
+      setMsg("This delegate lost voting rights due to disciplinary strike(s).");
+      return;
+    }
     const abstainAllowedByVoteType =
       activeMotionForRecordedVotes.vote_type === "resolution" ||
       activeMotionForRecordedVotes.vote_type === "amendment";
@@ -993,6 +1225,20 @@ export function SessionControlClient({
     }
     const uid = allocation.user_id;
     const voteItemId = activeMotionForRecordedVotes.id;
+    let rightsStatement: string | null = null;
+    if (withRights) {
+      if (value !== "yes" && value !== "no") {
+        setMsg("Vote with rights is only available for Yes/No.");
+        return;
+      }
+      const drafted = window.prompt(`Statement for ${allocation.country} (${value.toUpperCase()} with rights):`, "");
+      if (drafted === null) return;
+      if (!drafted.trim()) {
+        setMsg("A statement is required for vote with rights.");
+        return;
+      }
+      rightsStatement = drafted.trim();
+    }
     startTransition(async () => {
       const { error } = await supabase.from("votes").upsert(
         { vote_item_id: voteItemId, user_id: uid, value },
@@ -1001,6 +1247,27 @@ export function SessionControlClient({
       if (error) {
         setMsg(error.message);
         return;
+      }
+      if (rightsStatement && (value === "yes" || value === "no")) {
+        const { error: rightsError } = await supabase.from("vote_rights_statements").upsert(
+          {
+            vote_item_id: voteItemId,
+            user_id: uid,
+            vote_value: value,
+            statement: rightsStatement,
+          },
+          { onConflict: "vote_item_id,user_id" }
+        );
+        if (rightsError) {
+          setMsg(rightsError.message);
+          return;
+        }
+      } else {
+        await supabase
+          .from("vote_rights_statements")
+          .delete()
+          .eq("vote_item_id", voteItemId)
+          .eq("user_id", uid);
       }
       setMsg(null);
       void refresh();
@@ -1024,7 +1291,48 @@ export function SessionControlClient({
         setMsg(error.message);
         return;
       }
+      await supabase
+        .from("vote_rights_statements")
+        .delete()
+        .eq("vote_item_id", voteItemId)
+        .eq("user_id", allocation.user_id);
       setMsg(null);
+      void refresh();
+    });
+  }
+
+  function addSessionPoint() {
+    const detail = pointDraftDetail.trim();
+    startTransition(async () => {
+      const { error } = await supabase.from("chair_session_points").insert({
+        conference_id: floorConferenceId,
+        raised_by_allocation_id: pointDraftAllocationId || null,
+        point_code: pointDraftCode,
+        detail: detail || null,
+      });
+      if (error) {
+        setMsg(error.message);
+        return;
+      }
+      setPointDraftDetail("");
+      setPointDraftAllocationId("");
+      setMsg("Point logged.");
+      void refresh();
+    });
+  }
+
+  function setSessionPointStatus(pointId: string, status: "accepted" | "denied") {
+    startTransition(async () => {
+      const { error } = await supabase
+        .from("chair_session_points")
+        .update({ status, updated_at: new Date().toISOString() })
+        .eq("id", pointId)
+        .eq("conference_id", floorConferenceId);
+      if (error) {
+        setMsg(error.message);
+        return;
+      }
+      setMsg(`Point ${status}.`);
       void refresh();
     });
   }
@@ -1296,6 +1604,13 @@ export function SessionControlClient({
     const draft = draftOverride ?? motionDraft;
     const draftError = validateMotionDraft(draft);
     if (draftError) return setMsg(draftError);
+    if (!confirmEuPhaseOverride(draft.procedure_code)) return;
+    if (!quorumStatus.hasQuorum) {
+      setMsg(
+        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+      );
+      return;
+    }
     if (openMotion) {
       setMsg("Close the current motion before opening another.");
       return;
@@ -1332,7 +1647,7 @@ export function SessionControlClient({
         title: draft.title.trim() || null,
         description: withModeratedTimingInDescription(draft),
         must_vote: draft.must_vote,
-        required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code),
+        required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code, procedureProfile),
         motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: true,
         })
@@ -1362,6 +1677,8 @@ export function SessionControlClient({
           moderated_speaker_seconds: "",
           unmoderated_total_minutes: "",
           consultation_total_minutes: "",
+          amendment_kind: "friendly",
+          amendment_debate_seconds: "45",
         });
       }
       void refresh();
@@ -1383,7 +1700,11 @@ export function SessionControlClient({
           title: motionDraft.title.trim() || null,
           description: withModeratedTimingInDescription(motionDraft),
           must_vote: motionDraft.must_vote,
-          required_majority: ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code),
+          required_majority: ropRequiredMajority(
+            motionDraft.vote_type,
+            motionDraft.procedure_code,
+            procedureProfile
+          ),
           motioner_allocation_id: motionDraft.motioner_allocation_id || null,
         })
         .eq("id", openMotion.id);
@@ -1467,6 +1788,33 @@ export function SessionControlClient({
         if (passes && openMotion.procedure_code === "open_gsl") {
           setSpeakerListChairPrompt("gsl");
         }
+        if (isEuGuidedWorkflow && passes) {
+          if (openMotion.procedure_code === "set_agenda") {
+            await persistEuSessionPhase("opening_speeches");
+          } else if (openMotion.procedure_code === "cabinet_meeting") {
+            await persistEuSessionPhase("cabinet_meeting");
+          } else if (openMotion.procedure_code === "shadow_meeting") {
+            await persistEuSessionPhase("shadow_meeting");
+          } else if (
+            openMotion.procedure_code === "moderated_caucus" ||
+            openMotion.procedure_code === "consultation" ||
+            openMotion.procedure_code === "unmoderated_caucus"
+          ) {
+            await persistEuSessionPhase("formal_debate");
+          } else if (
+            openMotion.procedure_code === "open_debate" ||
+            openMotion.procedure_code === "for_against_speeches"
+          ) {
+            await persistEuSessionPhase("resolution_debate");
+          } else if (openMotion.procedure_code === "close_debate") {
+            await persistEuSessionPhase("voting_procedure");
+          } else if (openMotion.procedure_code === "adjourn") {
+            await persistEuSessionPhase("adjourned");
+          }
+        }
+        if (isEuGuidedWorkflow && openMotion.vote_type === "resolution") {
+          await persistEuSessionPhase("closing_statements");
+        }
       }
       void refresh();
     });
@@ -1514,6 +1862,15 @@ export function SessionControlClient({
   }
 
   function openMotionFloorForStatements() {
+    if (
+      isEuGuidedWorkflow &&
+      (euSessionPhase === "voting_procedure" ||
+        euSessionPhase === "closing_statements" ||
+        euSessionPhase === "adjourned")
+    ) {
+      setMsg(`Motion floor is unavailable during ${euSessionPhaseLabel(euSessionPhase)}.`);
+      return;
+    }
     if (openMotion) {
       setMsg("Close the current vote before opening the motion floor for statements.");
       return;
@@ -1569,6 +1926,13 @@ export function SessionControlClient({
     }
     const draftError = validateMotionDraft(draft);
     if (draftError) return setMsg(draftError);
+    if (!confirmEuPhaseOverride(draft.procedure_code)) return;
+    if (!quorumStatus.hasQuorum) {
+      setMsg(
+        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+      );
+      return;
+    }
     startTransition(async () => {
       const { error } = await supabase.from("vote_items").insert({
         conference_id: floorConferenceId,
@@ -1579,7 +1943,7 @@ export function SessionControlClient({
         title: draft.title.trim() || null,
         description: withModeratedTimingInDescription(draft),
         must_vote: draft.must_vote,
-        required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code),
+        required_majority: ropRequiredMajority(draft.vote_type, draft.procedure_code, procedureProfile),
         motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: false,
       });
@@ -1598,6 +1962,8 @@ export function SessionControlClient({
           moderated_speaker_seconds: "",
           unmoderated_total_minutes: "",
           consultation_total_minutes: "",
+          amendment_kind: "friendly",
+          amendment_debate_seconds: "45",
         });
       }
       void refresh();
@@ -1796,6 +2162,8 @@ export function SessionControlClient({
         procedureCode === "consultation"
           ? (description.match(/total\s+(\d+)\s*min/i)?.[1] ?? "")
           : "",
+      amendment_kind: "friendly",
+      amendment_debate_seconds: "45",
     };
 
     setMotionDraft(nextDraft);
@@ -1817,6 +2185,23 @@ export function SessionControlClient({
   }
 
   function beginVotingInDisruptivenessOrder() {
+    if (
+      isEuGuidedWorkflow &&
+      euSessionPhase !== "formal_debate" &&
+      euSessionPhase !== "resolution_debate" &&
+      euSessionPhase !== "voting_procedure"
+    ) {
+      const proceed = window.confirm(
+        `EU guided phase is ${euSessionPhaseLabel(euSessionPhase)}. Begin voting anyway?`
+      );
+      if (!proceed) return;
+    }
+    if (!quorumStatus.hasQuorum) {
+      setMsg(
+        `Quorum not met: ${quorumStatus.present}/${votingCallOrder.length} present (need ${quorumStatus.required}).`
+      );
+      return;
+    }
     if (motionFloorOpen) {
       setMsg("Close the motion floor for statements before beginning votes.");
       return;
@@ -1825,7 +2210,7 @@ export function SessionControlClient({
       setMsg("A motion is already open for voting.");
       return;
     }
-    const ordered = sortMotionsMostDisruptiveFirst(pendingStatedMotions, caucusPrecedence);
+    const ordered = sortMotionsMostDisruptiveFirst(pendingStatedMotions, caucusPrecedence, procedureProfile);
     if (!ordered.length) {
       setMsg("No stated motions are waiting to be voted on.");
       return;
@@ -1853,6 +2238,8 @@ export function SessionControlClient({
         current_vote_item_id: first.id,
         debate_closed: psRow?.debate_closed ?? false,
         motion_floor_open: false,
+        eu_session_phase: isEuGuidedWorkflow ? "voting_procedure" : undefined,
+        eu_last_phase_change_at: isEuGuidedWorkflow ? new Date().toISOString() : undefined,
         updated_at: new Date().toISOString(),
       });
       setMsg(
@@ -2042,6 +2429,164 @@ export function SessionControlClient({
           <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP; caucus order follows your
           committee session SMT setting unless the handbook default applies).
         </p>
+        <p className="text-xs text-brand-muted">
+          Quorum gate:{" "}
+          <span className="font-medium text-brand-navy">
+            {quorumStatus.present}/{votingCallOrder.length}
+          </span>{" "}
+          present on roll (need{" "}
+          <span className="font-medium text-brand-navy">{quorumStatus.required}</span>, two-thirds).
+        </p>
+        {isEuGuidedWorkflow ? (
+          <div className="rounded-lg border border-brand-accent/35 bg-brand-accent/10 px-3 py-2.5 space-y-2">
+            <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
+              EU guided phase
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-md border border-brand-accent/40 bg-brand-accent/15 px-2 py-1 text-sm font-medium text-brand-navy">
+                {euSessionPhaseLabel(euSessionPhase)}
+              </span>
+              <button
+                type="button"
+                disabled={pending}
+                onClick={() => {
+                  const next = previousEuSessionPhase(euSessionPhase);
+                  if (next === euSessionPhase) return;
+                  startTransition(async () => {
+                    const ok = await persistEuSessionPhase(next);
+                    if (ok) setMsg(`EU phase moved back to ${euSessionPhaseLabel(next)}.`);
+                    void refresh();
+                  });
+                }}
+                className="rounded-lg border border-white/20 bg-black/25 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+              >
+                Previous phase
+              </button>
+              <button
+                type="button"
+                disabled={pending}
+                onClick={() => {
+                  const next = nextEuSessionPhase(euSessionPhase);
+                  if (next === euSessionPhase) return;
+                  startTransition(async () => {
+                    const ok = await persistEuSessionPhase(next);
+                    if (ok) setMsg(`EU phase advanced to ${euSessionPhaseLabel(next)}.`);
+                    void refresh();
+                  });
+                }}
+                className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+              >
+                Advance phase
+              </button>
+              {euSessionPhase === "voting_procedure" ? (
+                <button
+                  type="button"
+                  disabled={pending}
+                  onClick={() => {
+                    startTransition(async () => {
+                      const ok = await persistEuSessionPhase("closing_statements");
+                      if (!ok) return;
+                      setTimer((t) => ({
+                        ...t,
+                        floorLabel: "EU closing statements (60s)",
+                        totalM: "1",
+                        totalS: "0",
+                        leftM: "1",
+                        leftS: "0",
+                        perSpeakerMode: true,
+                      }));
+                      setMsg("Closing statements started (default 60 seconds). Save timer to publish.");
+                      void refresh();
+                    });
+                  }}
+                  className="rounded-lg border border-brand-accent/45 bg-brand-accent/20 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+                >
+                  Start closing statements
+                </button>
+              ) : null}
+            </div>
+            <p className="text-xs text-brand-muted">
+              Core blockers remain guided: when a motion does not match this phase, chairs can still continue
+              using an explicit override confirmation.
+            </p>
+          </div>
+        ) : null}
+        <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
+          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">Points workflow</p>
+          <div className="grid gap-2 md:grid-cols-[1fr_1fr_auto_auto]">
+            <select
+              value={pointDraftCode}
+              onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
+              className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+            >
+              <option value="poi">Point of Information</option>
+              <option value="poc">Point of Clarification</option>
+              <option value="parliamentary_inquiry">Parliamentary Inquiry</option>
+              <option value="order">Point of Order</option>
+              <option value="personal_privilege">Personal Privilege</option>
+              <option value="right_of_reply">Right of Reply</option>
+              <option value="fact_check">Fact Check</option>
+            </select>
+            <select
+              value={pointDraftAllocationId}
+              onChange={(e) => setPointDraftAllocationId(e.target.value)}
+              className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+            >
+              <option value="">Raised by (optional)</option>
+              {votingCallOrder.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.country}
+                </option>
+              ))}
+            </select>
+            <input
+              value={pointDraftDetail}
+              onChange={(e) => setPointDraftDetail(e.target.value)}
+              placeholder="Detail (optional)"
+              className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+            />
+            <button
+              type="button"
+              disabled={pending}
+              onClick={addSessionPoint}
+              className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+            >
+              Log point
+            </button>
+          </div>
+          {sessionPoints.length > 0 ? (
+            <div className="max-h-28 overflow-y-auto space-y-1 rounded border border-white/12 bg-black/25 p-2">
+              {sessionPoints.slice(0, 8).map((p) => (
+                <div key={p.id} className="flex flex-wrap items-center justify-between gap-2 text-xs text-brand-navy">
+                  <span>
+                    <span className="font-medium">{p.point_code.replaceAll("_", " ")}</span>
+                    {p.detail ? ` — ${p.detail}` : ""}
+                  </span>
+                  {p.status === "pending" ? (
+                    <span className="flex gap-1">
+                      <button
+                        type="button"
+                        onClick={() => setSessionPointStatus(p.id, "accepted")}
+                        className="rounded border border-emerald-500/40 px-1.5 py-0.5 text-[10px]"
+                      >
+                        Accept
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSessionPointStatus(p.id, "denied")}
+                        className="rounded border border-rose-500/40 px-1.5 py-0.5 text-[10px]"
+                      >
+                        Deny
+                      </button>
+                    </span>
+                  ) : (
+                    <span className="text-[10px] uppercase tracking-wide text-brand-muted">{p.status}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
         <div className={`${surfaceCard} space-y-3`}>
           <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
             <p className="text-sm font-medium text-brand-navy">
@@ -2112,7 +2657,12 @@ export function SessionControlClient({
                         <span className="font-medium">#{i + 1}</span> — {m.title || "Untitled"}
                         <span className="text-brand-muted/70 text-xs block sm:inline sm:ml-2">
                           ({m.procedure_code ?? m.vote_type}, RoP priority{" "}
-                          {motionDisruptivenessScore(m.vote_type, m.procedure_code, caucusPrecedence)})
+                          {motionDisruptivenessScore(
+                            m.vote_type,
+                            m.procedure_code,
+                            caucusPrecedence,
+                            procedureProfile
+                          )})
                         </span>
                       </div>
                       <button
@@ -2159,6 +2709,8 @@ export function SessionControlClient({
                   moderated_speaker_seconds: code === "moderated_caucus" ? d.moderated_speaker_seconds : "",
                   unmoderated_total_minutes: code === "unmoderated_caucus" ? d.unmoderated_total_minutes : "",
                   consultation_total_minutes: code === "consultation" ? d.consultation_total_minutes : "",
+                  amendment_kind: code === "amendment" ? d.amendment_kind : "friendly",
+                  amendment_debate_seconds: code === "amendment" ? d.amendment_debate_seconds : "45",
                 }));
               }}
             >
@@ -2363,6 +2915,75 @@ export function SessionControlClient({
                 placeholder="e.g. 10"
               />
             </label>
+          ) : motionDraft.procedure_code === "amendment" ? (
+            <div className="grid sm:grid-cols-2 gap-3">
+              <label className="text-sm block text-brand-navy">
+                <span className={surfaceLabel}>Amendment type</span>
+                <select
+                  className={surfaceField}
+                  value={motionDraft.amendment_kind}
+                  onChange={(e) =>
+                    setMotionDraft((d) => ({
+                      ...d,
+                      amendment_kind: e.target.value as "friendly" | "unfriendly",
+                    }))
+                  }
+                >
+                  <option value="friendly">Friendly</option>
+                  <option value="unfriendly">Unfriendly</option>
+                </select>
+              </label>
+              {motionDraft.amendment_kind === "unfriendly" ? (
+                <label className="text-sm block text-brand-navy">
+                  <span className={surfaceLabel}>Debate time per side (seconds)</span>
+                  <input
+                    type="number"
+                    min={30}
+                    max={60}
+                    className={surfaceField}
+                    value={motionDraft.amendment_debate_seconds}
+                    onChange={(e) =>
+                      setMotionDraft((d) => ({ ...d, amendment_debate_seconds: e.target.value }))
+                    }
+                    placeholder="30-60"
+                  />
+                </label>
+              ) : null}
+            </div>
+          ) : null}
+          {euPartyAllocationPreview ? (
+            <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
+                EU party time guide
+              </p>
+              <p className="mt-1 text-xs text-brand-muted">
+                Speech pool:{" "}
+                <span className="font-medium text-brand-navy">
+                  {formatSecondsAsMinSec(euPartyAllocationPreview.speechSeconds)}
+                </span>
+                {motionDraft.procedure_code === "moderated_caucus" ? (
+                  <>
+                    {" "}
+                    | POI/PoC pool:{" "}
+                    <span className="font-medium text-brand-navy">
+                      {formatSecondsAsMinSec(euPartyAllocationPreview.inquirySeconds)}
+                    </span>
+                  </>
+                ) : null}
+              </p>
+              <div className="mt-2 grid gap-1 sm:grid-cols-2">
+                {EU_PARLIAMENT_PARTY_KEYS.map((partyKey) => {
+                  const row = euPartyAllocationPreview.breakdown.find((b) => b.party === partyKey);
+                  if (!row) return null;
+                  return (
+                    <p key={partyKey} className="text-xs text-brand-navy">
+                      <span className="font-medium">{EU_PARTY_LABELS[partyKey]}:</span>{" "}
+                      {formatSecondsAsMinSec(row.totalSeconds)}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
           ) : null}
           <label className="text-sm block text-brand-navy">
             <span className="flex items-center justify-between gap-2">
@@ -2477,7 +3098,7 @@ export function SessionControlClient({
                   Record votes — {activeMotionForRecordedVotes?.title?.trim() || "current motion"}
                   <HelpButton title="Record votes">
                     Chairs register votes per allocation. Abstain appears only for amendment/resolution votes when roll
-                    status is not Present and voting.
+                    status is not Present and voting. During a roll-call-vote motion, you can capture Yes/No with Rights.
                   </HelpButton>
                 </span>
               </p>
@@ -2496,6 +3117,13 @@ export function SessionControlClient({
                     const rollA = rollAttendanceByAllocationId.get(call.id);
                     const rollLabel = rollAttendanceRollLabel(rollA);
                     const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
+                    const discipline = disciplineByAllocationId[call.id];
+                    const rights =
+                      call.user_id
+                        ? voteRightsByUserId[`${activeMotionForRecordedVotes.id}:${call.user_id}`]
+                        : null;
+                    const supportsVoteWithRights =
+                      activeMotionForRecordedVotes.procedure_code === "roll_call_vote";
                     const abstainAllowedByVoteType =
                       activeMotionForRecordedVotes?.vote_type === "resolution" ||
                       activeMotionForRecordedVotes?.vote_type === "amendment";
@@ -2520,6 +3148,20 @@ export function SessionControlClient({
                                       : "—"}
                               </span>
                             </p>
+                            {rights ? (
+                              <p className="mt-1 text-xs text-brand-muted">
+                                {rights.vote_value.toUpperCase()} with rights:{" "}
+                                <span className="text-brand-navy">{rights.statement}</span>
+                              </p>
+                            ) : null}
+                            {discipline?.strike_count ? (
+                              <p className="mt-1 text-xs text-rose-700 dark:text-rose-300">
+                                Discipline: {discipline.warning_count} warning(s), {discipline.strike_count} strike(s)
+                                {discipline.voting_rights_lost ? " · voting disabled" : ""}
+                                {discipline.speaking_rights_suspended ? " · speaking suspended" : ""}
+                                {discipline.removed_from_committee ? " · removed" : ""}
+                              </p>
+                            ) : null}
                             {!call.user_id ? (
                               <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
                                 No delegate account on this placard.
@@ -2529,16 +3171,26 @@ export function SessionControlClient({
                           <div className="flex flex-wrap gap-2">
                             <button
                               type="button"
-                              disabled={pending || !call.user_id}
+                              disabled={pending || !call.user_id || discipline?.voting_rights_lost}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
                               className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                             >
                               Yes
                             </button>
+                            {supportsVoteWithRights ? (
+                              <button
+                                type="button"
+                                disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                                onClick={() => recordDelegateVoteForAllocation(call, "yes", true)}
+                                className="rounded-lg border border-brand-accent/45 bg-brand-accent/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+                              >
+                                Yes with rights
+                              </button>
+                            ) : null}
                             {canAbstain ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id}
+                                disabled={pending || !call.user_id || discipline?.voting_rights_lost}
                                 onClick={() => recordDelegateVoteForAllocation(call, "abstain")}
                                 className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
                               >
@@ -2547,15 +3199,25 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || !call.user_id}
+                              disabled={pending || !call.user_id || discipline?.voting_rights_lost}
                               onClick={() => recordDelegateVoteForAllocation(call, "no")}
                               className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
                             >
                               No
                             </button>
+                            {supportsVoteWithRights ? (
+                              <button
+                                type="button"
+                                disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                                onClick={() => recordDelegateVoteForAllocation(call, "no", true)}
+                                className="rounded-lg border border-rose-500/45 bg-rose-500/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+                              >
+                                No with rights
+                              </button>
+                            ) : null}
                             <button
                               type="button"
-                              disabled={pending || !call.user_id}
+                              disabled={pending || !call.user_id || discipline?.voting_rights_lost}
                               onClick={() => clearDelegateVoteForAllocation(call)}
                               className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/15 disabled:opacity-50"
                             >

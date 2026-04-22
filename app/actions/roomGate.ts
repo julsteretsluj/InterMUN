@@ -11,6 +11,8 @@ import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { canUseLatestCommitteeShortcut } from "@/lib/roles";
 import { findConferenceIdBySecondGateCode } from "@/lib/gate-code-lookup";
+import { canChairSwitchAnyCommitteeForTesting } from "@/lib/testing-overrides";
+import { getTranslations } from "next-intl/server";
 
 export async function clearRoomAndCommitteeContext() {
   await clearActiveEvent();
@@ -30,6 +32,7 @@ export async function joinRoomByCode(
   _prev: { error?: string } | null,
   formData: FormData
 ): Promise<{ error: string } | null> {
+  const t = await getTranslations("server");
   const code = normalizeCommitteeCode(String(formData.get("code") ?? ""));
   const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
   const nextPath =
@@ -39,8 +42,7 @@ export async function joinRoomByCode(
 
   if (!isValidCommitteeJoinCode(code)) {
     return {
-      error:
-        "Enter the 6-character committee code (letters and digits only, e.g. ECO741). Ask your chair or check SMT → Room codes.",
+      error: t("committeeCodeInvalid"),
     };
   }
 
@@ -49,21 +51,20 @@ export async function joinRoomByCode(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { error: "You must be signed in." };
+    return { error: t("mustBeSignedIn") };
   }
 
   const eventId = await getActiveEventId();
   if (!eventId) {
     return {
-      error: "Enter your conference code first (go back to the previous step).",
+      error: t("enterConferenceFirst"),
     };
   }
 
   const conferenceId = await findConferenceIdBySecondGateCode(supabase, eventId, code);
   if (!conferenceId) {
     return {
-      error:
-        "No committee matches that code for this event. Enter the conference code first, then the exact 6-character committee code (SMT → Room codes or Supabase → conferences).",
+      error: t("committeeCodeNoMatch"),
     };
   }
 
@@ -77,6 +78,7 @@ export async function setRoomCodeAndEnterAction(
   _prev: { error?: string } | null,
   formData: FormData
 ): Promise<{ error: string } | null> {
+  const t = await getTranslations("server");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const code = normalizeCommitteeCode(String(formData.get("code") ?? ""));
   const nextPathRaw = String(formData.get("next") ?? "/profile").trim() || "/profile";
@@ -86,10 +88,10 @@ export async function setRoomCodeAndEnterAction(
       : "/profile";
 
   if (!conferenceId) {
-    return { error: "Choose a conference." };
+    return { error: t("chooseConference") };
   }
   if (!isValidCommitteeJoinCode(code)) {
-    return { error: "Committee code must be exactly 6 letters or digits (e.g. ECO741)." };
+    return { error: t("committeeCodeMustBeSix") };
   }
 
   const supabase = await createClient();
@@ -97,7 +99,7 @@ export async function setRoomCodeAndEnterAction(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { error: "Not signed in." };
+    return { error: t("notSignedIn") };
   }
 
   const { data: profile } = await supabase
@@ -108,10 +110,10 @@ export async function setRoomCodeAndEnterAction(
 
   const role = profile?.role ?? null;
   if (role !== "chair" && role !== "smt" && role !== "admin") {
-    return { error: "Only chairs, SMT, and admins can set committee codes." };
+    return { error: t("onlyStaffSetCode") };
   }
 
-  if (role === "chair") {
+  if (role === "chair" && !canChairSwitchAnyCommitteeForTesting(user.email)) {
     const { data: seats } = await supabase
       .from("allocations")
       .select("conference_id")
@@ -121,7 +123,7 @@ export async function setRoomCodeAndEnterAction(
     );
     if (!allowed.has(conferenceId)) {
       return {
-        error: "You can only set the committee code for a session where you have a seat.",
+        error: t("chairSeatOnly"),
       };
     }
   }

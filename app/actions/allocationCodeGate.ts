@@ -7,6 +7,7 @@ import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getActiveEventId, setActiveEventId } from "@/lib/active-event-cookie";
 import { setAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
+import { canChairSwitchAnyCommitteeForTesting } from "@/lib/testing-overrides";
 
 export async function verifyAllocationCodeGate(
   _prev: { error?: string } | null,
@@ -111,7 +112,7 @@ export async function setAllocationCodeGateEnabledAction(
     return { error: "Only chairs, SMT, and admins can change this." };
   }
 
-  if (r === "chair") {
+  if (r === "chair" && !canChairSwitchAnyCommitteeForTesting(user.email)) {
     const { data: seat } = await supabase
       .from("allocations")
       .select("id")

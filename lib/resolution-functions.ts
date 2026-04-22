@@ -7,7 +7,7 @@ export const CLAUSE_TARGET_PROCEDURE_CODES = new Set([
 ]);
 
 /** Motions that require a draft resolution target but not specific clauses. */
-export const RESOLUTION_ONLY_PROCEDURE_CODES = new Set(["for_against_speeches"]);
+export const RESOLUTION_ONLY_PROCEDURE_CODES = new Set(["for_against_speeches", "open_debate"]);
 
 export function motionRequiresClauseTargets(procedureCode: string | null | undefined) {
   return !!procedureCode && CLAUSE_TARGET_PROCEDURE_CODES.has(procedureCode);

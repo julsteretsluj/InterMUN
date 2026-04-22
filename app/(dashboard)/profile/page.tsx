@@ -10,6 +10,7 @@ import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
+import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -93,6 +94,28 @@ export default async function ProfilePage() {
             motioner_allocation_id: string | null;
           }[],
         };
+  const { data: myDiscipline } =
+    seatIds.length > 0
+      ? await supabase
+          .from("chair_delegate_discipline")
+          .select(
+            "id, allocation_id, conference_id, warning_count, strike_count, voting_rights_lost, speaking_rights_suspended, removed_from_committee, updated_at"
+          )
+          .in("allocation_id", seatIds)
+          .order("updated_at", { ascending: false })
+      : {
+          data: [] as {
+            id: string;
+            allocation_id: string;
+            conference_id: string;
+            warning_count: number;
+            strike_count: number;
+            voting_rights_lost: boolean;
+            speaking_rights_suspended: boolean;
+            removed_from_committee: boolean;
+            updated_at: string;
+          }[],
+        };
   const seatById = new Map((mySeats ?? []).map((s) => [s.id, s]));
 
   const committeeIds = [
@@ -103,6 +126,7 @@ export default async function ProfilePage() {
         ...(myDelegatePoints ?? []).map((a) => a.conference_id),
         ...(mySpeechNotes ?? []).map((a) => a.conference_id),
         ...(myMotions ?? []).map((a) => a.conference_id),
+        ...(myDiscipline ?? []).map((a) => a.conference_id),
       ].filter((id): id is string => Boolean(id))
     ),
   ];
@@ -195,6 +219,9 @@ export default async function ProfilePage() {
 
   return (
     <MunPageShell title="Profile">
+      <div className="mb-4 flex justify-end">
+        <LanguageSwitcher />
+      </div>
       {delegateWelcome}
       {isDelegate && <DelegateMaterialsExportCard />}
       {(myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) === 0 ? (
@@ -367,6 +394,38 @@ export default async function ProfilePage() {
                   ) : null}
                   <p className="mt-0.5 text-xs text-brand-muted">
                     {new Date(m.created_at).toLocaleString()}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {isDelegate && (myDiscipline?.length ?? 0) > 0 && (
+        <div className="mb-8 rounded-xl border border-rose-300/40 bg-rose-50/35 p-4 md:p-5">
+          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+            Disciplinary status (private)
+          </h3>
+          <p className="mb-3 text-xs text-brand-muted">
+            Visible only to you, committee chairs, and SMT for the relevant committee.
+          </p>
+          <ul className="space-y-2 text-sm">
+            {(myDiscipline ?? []).map((d) => {
+              const where = committeeLabel[d.conference_id] ?? "Committee session";
+              const seat = seatById.get(d.allocation_id);
+              return (
+                <li key={d.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                  <span className="font-medium text-brand-navy">
+                    {seat?.country ?? "Delegate"} · {where}
+                  </span>
+                  <p className="mt-0.5 text-xs text-brand-muted">
+                    Warnings: {d.warning_count} · Strikes: {d.strike_count}
+                    {d.voting_rights_lost ? " · voting disabled" : ""}
+                    {d.speaking_rights_suspended ? " · speaking suspended" : ""}
+                    {d.removed_from_committee ? " · removed from committee" : ""}
+                  </p>
+                  <p className="mt-0.5 text-xs text-brand-muted">
+                    Updated: {new Date(d.updated_at).toLocaleString()}
                   </p>
                 </li>
               );

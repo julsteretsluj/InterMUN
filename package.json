@@ -7,7 +7,9 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "seed:allocations": "python3 scripts/parse-allocation-matrix.py"
+    "seed:allocations": "python3 scripts/parse-allocation-matrix.py",
+    "i18n:seed": "node scripts/seed-locales.mjs",
+    "i18n:check": "node scripts/check-locale-parity.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.2.8",
@@ -18,6 +20,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.0.1",
     "next": "16.2.1",
+    "next-intl": "^4.9.1",
     "nodemailer": "^6.10.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",

@@ -1,11 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabasePublishableKey } from "./publishable-key";
+import { LOCALE_COOKIE_NAME, resolveLocale } from "@/lib/i18n/locales";
 
 export async function updateSession(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-pathname", request.nextUrl.pathname);
   requestHeaders.set("x-search", request.nextUrl.search);
+  requestHeaders.set("x-locale", resolveLocale(request.cookies.get(LOCALE_COOKIE_NAME)?.value).toString());
 
   const response = NextResponse.next({
     request: {
