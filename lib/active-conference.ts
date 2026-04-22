@@ -20,6 +20,15 @@ export type ActiveConferenceRow = {
   eu_guided_workflow_enabled?: boolean;
 };
 
+function asActiveConferenceRow(value: unknown): ActiveConferenceRow | null {
+  if (!value || typeof value !== "object") return null;
+  const row = value as Record<string, unknown>;
+  if (typeof row.id !== "string") return null;
+  if (typeof row.event_id !== "string") return null;
+  if (typeof row.name !== "string") return null;
+  return value as ActiveConferenceRow;
+}
+
 /** Active committee from room code (cookie). Validates row still exists. */
 export async function getResolvedActiveConference(): Promise<ActiveConferenceRow | null> {
   const id = await getActiveConferenceId();
@@ -52,7 +61,7 @@ export async function getResolvedActiveConference(): Promise<ActiveConferenceRow
     return null;
   }
 
-  return data as ActiveConferenceRow;
+  return asActiveConferenceRow(data);
 }
 
 /**
@@ -99,7 +108,8 @@ export async function getConferenceForDashboard(options: {
           )
           .eq("id", distinctIds[0])
           .maybeSingle();
-        if (conf) return conf as ActiveConferenceRow;
+        const confRow = asActiveConferenceRow(conf);
+        if (confRow) return confRow;
       }
     }
   }
@@ -118,7 +128,7 @@ export async function getConferenceForDashboard(options: {
     .limit(1)
     .maybeSingle();
 
-  return (data as ActiveConferenceRow) ?? null;
+  return asActiveConferenceRow(data);
 }
 
 export async function requireActiveConferenceId(): Promise<string> {
