@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { UserRound, Search, CircleDot, Gavel, Sparkles, X } from "lucide-react";
 import { FloorStatusBar } from "@/components/session/FloorStatusBar";
 import { MotionVotingClient } from "@/components/session/MotionVotingClient";
@@ -98,6 +99,7 @@ export function CommitteeRoomDigitalMUNClient({
   delegates: { id: string; name: string | null }[];
   chairs: { id: string; name: string | null }[];
 }) {
+  const t = useTranslations("views.committeeRoom");
   const role = myRole.toLowerCase();
   const isDelegate = role === "delegate";
   /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */
@@ -243,7 +245,7 @@ export function CommitteeRoomDigitalMUNClient({
         {/* Left rail — context & stats (mockup sidebar) */}
         <aside className="space-y-3 mb-5 xl:mb-0 xl:sticky xl:top-4 h-fit">
           <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-3.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Committee</p>
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("committeeLabel")}</p>
             <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug break-words">
               {committeeName}
             </p>
@@ -272,14 +274,14 @@ export function CommitteeRoomDigitalMUNClient({
               value={assignedCount}
               tint="blue"
               onPress={() => setDelegationSearch("")}
-              title="Clear search and show all delegations"
+              title={t("clearSearchTitle")}
             />
             <StatMiniCard
-              label="Vacant"
+              label={t("vacantLabel")}
               value={vacantCount}
               tint="silver"
               onPress={() => setDelegationSearch("vacant")}
-              title='Search for "vacant" seats in the room'
+              title={t("searchVacantTitle")}
             />
             <StatMiniCard
               label="Dais"
@@ -296,8 +298,7 @@ export function CommitteeRoomDigitalMUNClient({
               <Sparkles className="size-3.5 text-brand-silver shrink-0" />
               Tip
             </div>
-            Use the search bar to filter placards and dais. Press Enter to scroll to the first match. Escape
-            clears. Click <strong>Vacant</strong> to jump to empty seats.
+            {t("searchHint")}
           </div>
         </aside>
 
@@ -314,7 +315,7 @@ export function CommitteeRoomDigitalMUNClient({
             </div>
             <div className="flex flex-col items-stretch sm:items-end gap-1.5 shrink-0 w-full sm:w-auto min-w-0 sm:min-w-[13rem]">
               <label htmlFor={searchFieldId} className="sr-only">
-                Find a delegation or dais member
+                {t("findLabel")}
               </label>
               <div className="flex items-center gap-1 rounded-full border border-white/10 bg-black/25 pl-3 pr-1 py-1">
                 <Search className="size-3.5 opacity-70 shrink-0 text-brand-muted" strokeWidth={2} aria-hidden />
@@ -334,7 +335,7 @@ export function CommitteeRoomDigitalMUNClient({
                       setScrollMatchNonce((n) => n + 1);
                     }
                   }}
-                  placeholder="Country, name, school…"
+                  placeholder={t("searchPlaceholder")}
                   autoComplete="off"
                   className="min-w-0 flex-1 bg-transparent text-xs text-brand-navy placeholder:text-brand-muted/70 focus:outline-none py-1.5"
                 />
@@ -343,7 +344,7 @@ export function CommitteeRoomDigitalMUNClient({
                     type="button"
                     onClick={() => setDelegationSearch("")}
                     className="rounded-full p-1.5 text-brand-muted hover:text-brand-navy hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright"
-                    aria-label="Clear search"
+                    aria-label={t("clearSearchTitle")}
                   >
                     <X className="size-3.5" strokeWidth={2} />
                   </button>
@@ -352,10 +353,11 @@ export function CommitteeRoomDigitalMUNClient({
               <p className="text-[0.65rem] text-brand-muted text-right tabular-nums" aria-live="polite">
                 {qNorm ? (
                   <>
-                    <span className="text-brand-navy/90 font-medium">{delegationMatchCount}</span> of{" "}
-                    {placards.length} placards ·{" "}
-                    <span className="text-brand-navy/90 font-medium">{daisMatchCount}</span> of {dais.length} dais ·
-                    Enter scrolls
+                    {t("matchesCount", {
+                      matches: delegationMatchCount + daisMatchCount,
+                      total: placards.length + dais.length,
+                    })}{" "}
+                    · Enter scrolls
                   </>
                 ) : (
                   "Type to filter · Enter scrolls to first match"

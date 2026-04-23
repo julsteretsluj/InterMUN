@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { Lightbulb, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -22,6 +23,8 @@ export function IdeasView({
   ideas: Idea[];
   conferenceId: string;
 }) {
+  const t = useTranslations("views.ideas");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [items, setItems] = useState(ideas);
   const [selectedId, setSelectedId] = useState<string | null>(() => ideas[0]?.id ?? null);
@@ -139,10 +142,10 @@ export function IdeasView({
       ) : null}
       {editing && (
         <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
-          <h3 className="font-semibold text-brand-navy dark:text-zinc-100">Edit idea</h3>
+          <h3 className="font-semibold text-brand-navy dark:text-zinc-100">{t("editIdea")}</h3>
           <div>
             <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-              <label className="mun-label normal-case">Google Docs URL</label>
+              <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
               <OpenNewGoogleDocButton />
             </div>
             <input
@@ -150,19 +153,19 @@ export function IdeasView({
               onChange={(e) => setEditGoogleUrl(e.target.value)}
               className="mun-field"
               type="url"
-              placeholder="https://docs.google.com/document/d/…"
+              placeholder={t("googleDocsPlaceholder")}
             />
           </div>
           <textarea
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
-            placeholder="Short idea text (optional)"
+            placeholder={t("shortIdeaOptional")}
             className="mun-field h-32 resize-y"
           />
           <EmojiQuickInsert onPick={appendEmojiToEdit} />
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => void saveEdit()} className="mun-btn-primary">
-              Save
+              {t("save")}
             </button>
             <button
               type="button"
@@ -173,19 +176,17 @@ export function IdeasView({
               }}
               className="mun-btn"
             >
-              Cancel
+              {tc("cancel")}
             </button>
           </div>
         </div>
       )}
 
       <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
-        <p className="text-sm text-brand-muted">
-          Add a Google Doc to draft a resolution idea in place, or type a short note (or both).
-        </p>
+        <p className="text-sm text-brand-muted">{t("addIntro")}</p>
         <div>
           <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-            <label className="mun-label normal-case">Google Docs URL</label>
+            <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
             <OpenNewGoogleDocButton />
           </div>
           <input
@@ -193,17 +194,15 @@ export function IdeasView({
             onChange={(e) => setNewGoogleUrl(e.target.value)}
             className="mun-field"
             type="url"
-            placeholder="https://docs.google.com/document/d/…"
+            placeholder={t("googleDocsPlaceholder")}
           />
-          <p className="mt-1 text-xs text-brand-muted">
-            New Google Doc opens in another tab; paste the link here after it is created.
-          </p>
+          <p className="mt-1 text-xs text-brand-muted">{t("googleDocsCreateHelp")}</p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
           <textarea
             value={newContent}
             onChange={(e) => setNewContent(e.target.value)}
-            placeholder="Resolution idea…"
+            placeholder={t("resolutionIdeaPlaceholder")}
             className="mun-field min-h-[80px] flex-1 resize-y"
           />
           <EmojiQuickInsert onPick={appendEmojiToNew} />
@@ -213,18 +212,18 @@ export function IdeasView({
             className="inline-flex h-fit shrink-0 items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
           >
             <Plus className="h-4 w-4" />
-            Add
+            {t("add")}
           </button>
         </div>
       </div>
 
       {items.length === 0 ? (
-        <p className="text-sm text-brand-muted">No ideas yet.</p>
+        <p className="text-sm text-brand-muted">{t("noIdeasYet")}</p>
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-52">
             <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
-              Idea
+              {t("ideaLabel")}
             </label>
             <select
               className="mun-field lg:hidden"
@@ -233,7 +232,7 @@ export function IdeasView({
             >
               {items.map((idea, idx) => (
                 <option key={idea.id} value={idea.id}>
-                  {idea.content?.slice(0, 40) || `Idea ${items.length - idx}`}
+                  {idea.content?.slice(0, 40) || t("ideaFallback", { number: items.length - idx })}
                 </option>
               ))}
             </select>
@@ -251,7 +250,10 @@ export function IdeasView({
                 >
                   <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                   <span className="line-clamp-2">
-                    {idea.content?.trim() || (idea.google_docs_url ? "Linked doc" : `Idea ${items.length - idx}`)}
+                    {idea.content?.trim() ||
+                      (idea.google_docs_url
+                        ? t("linkedDoc")
+                        : t("ideaFallback", { number: items.length - idx }))}
                   </span>
                 </button>
               ))}
@@ -262,7 +264,7 @@ export function IdeasView({
             <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <span className="text-xs text-brand-muted">
-                  Added {new Date(selected.created_at).toLocaleString()}
+                  {t("addedOn", { date: new Date(selected.created_at).toLocaleString() })}
                 </span>
                 <div className="flex gap-3">
                   <button
@@ -274,35 +276,37 @@ export function IdeasView({
                     }}
                     className="text-sm text-brand-accent hover:underline dark:text-brand-accent-bright"
                   >
-                    Edit
+                    {tc("edit")}
                   </button>
                   <button
                     type="button"
                     onClick={() => void deleteIdea(selected.id)}
                     className="text-sm text-red-600 hover:underline"
                   >
-                    Delete
+                    {tc("delete")}
                   </button>
                 </div>
               </div>
               {selected.google_docs_url?.trim() ? (
                 <GoogleDocsEmbed
                   googleDocsUrl={selected.google_docs_url.trim()}
-                  heading="Idea document"
+                  heading={t("ideaDocument")}
                   compact
                 />
               ) : null}
               {selected.content?.trim() ? (
                 <div>
                   {selected.google_docs_url?.trim() ? (
-                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">Summary</p>
+                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+                      {t("summary")}
+                    </p>
                   ) : null}
                   <p className="whitespace-pre-wrap text-sm text-brand-navy dark:text-zinc-200">
                     {selected.content}
                   </p>
                 </div>
               ) : !selected.google_docs_url?.trim() ? (
-                <p className="text-sm text-brand-muted">Empty idea.</p>
+                <p className="text-sm text-brand-muted">{t("emptyIdea")}</p>
               ) : null}
             </div>
           ) : null}

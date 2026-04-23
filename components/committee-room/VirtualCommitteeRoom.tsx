@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Armchair, Gavel, Mic } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import {
   daisSeatMatchesSearch,
@@ -79,6 +80,7 @@ function Placard({
   jumpAnchor: boolean;
   compactPlacardDetails?: boolean;
 }) {
+  const t = useTranslations("views.committeeRoom");
   const { vacant, country, name, school, pronouns, allocationId } = placard;
   const interactive = Boolean(personHref);
   const dimmed = searchActive && !matchesSearch;
@@ -100,7 +102,7 @@ function Placard({
         {vacant ? (
           <div className="text-center font-display text-xs font-semibold py-1">
             <span aria-hidden="true" className="mr-1">🪑</span>
-            Vacant
+            {t("virtualRoomVacant")}
           </div>
         ) : (
           compactPlacardDetails ? (
@@ -149,7 +151,7 @@ function Placard({
         className={[wrapClass, "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"].join(
           " "
         )}
-        aria-label={`View profile: ${country}`}
+        aria-label={t("profileAria", { country })}
         data-allocation-id={allocationId}
         data-committee-search-jump={jumpAnchor ? "" : undefined}
       >
@@ -161,7 +163,7 @@ function Placard({
   return (
     <div
       className={[wrapClass, vacant ? "opacity-100" : ""].join(" ")}
-      aria-label={vacant ? "Vacant seat" : `Placard ${country}`}
+      aria-label={vacant ? t("vacantSeatAria") : t("placardAria", { country })}
       data-allocation-id={allocationId}
       data-committee-search-jump={jumpAnchor ? "" : undefined}
     >
@@ -181,6 +183,7 @@ function DaisStation({
   searchActive: boolean;
   matchesSearch: boolean;
 }) {
+  const t = useTranslations("views.committeeRoom");
   const dimmed = searchActive && !matchesSearch;
   const ringMatch = searchActive && matchesSearch;
 
@@ -195,7 +198,7 @@ function DaisStation({
           <Gavel
             className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent-bright -mb-0.5 -ml-1 drop-shadow"
             strokeWidth={2}
-            aria-label="Gavel"
+            aria-label={t("gavelAria")}
           />
         )}
       </div>

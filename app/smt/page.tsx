@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
-import { formatCommitteeCardTitle, resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
+import { formatCommitteeCardTitle, resolveCommitteeDisplayTags, resolveCommitteeFullName } from "@/lib/committee-card-display";
 import {
   ageRangeTagClass,
   difficultyTagClass,
@@ -26,8 +26,27 @@ export default async function SmtOverviewPage({
 }) {
   const { e: overviewErr } = await searchParams;
   const t = await getTranslations("smtOverview");
+  const tNames = await getTranslations("committeeNames.full");
   const supabase = await createClient();
   const eventId = await getActiveEventId();
+
+  function localizeKnownCommitteeFullName(value: string | null | undefined): string | null {
+    const v = value?.trim();
+    if (!v) return null;
+    const map: Record<string, string> = {
+      "Disarmament and International Security Committee": "DISEC",
+      "Economic and Social Council": "ECOSOC",
+      "World Health Organization": "WHO",
+      "United Nations Security Council": "UNSC",
+      "United Nations Human Rights Council": "UNHRC",
+      "United Nations Office on Drugs and Crime": "UNODC",
+      "UN Women": "UN_WOMEN",
+      INTERPOL: "INTERPOL",
+      "Press Corps": "PRESS_CORPS",
+    };
+    const key = map[v];
+    return key ? tNames(key) : v;
+  }
 
   if (!eventId) {
     return (
@@ -71,7 +90,13 @@ export default async function SmtOverviewPage({
   >();
 
   for (const r of rows) {
-    const groupLabel = formatCommitteeCardTitle(r.committee_full_name, r.committee).trim();
+    const localizedFull = localizeKnownCommitteeFullName(
+      resolveCommitteeFullName(r.committee_full_name, r.committee)
+    );
+    const committeeCode = r.committee?.trim() || "";
+    const groupLabel = (localizedFull && committeeCode
+      ? `${localizedFull} — ${committeeCode}`
+      : formatCommitteeCardTitle(r.committee_full_name, r.committee)).trim();
     if (!groupLabel || groupLabel.toLowerCase() === "committee") continue;
     const key = groupLabel.toLowerCase();
 
@@ -110,13 +135,17 @@ export default async function SmtOverviewPage({
     const difficultyDelta = difficultySortRank(aDifficulty) - difficultySortRank(bDifficulty);
     if (difficultyDelta !== 0) return difficultyDelta;
 
-    const aTitle = formatCommitteeCardTitle(
-      a.latestRow.committee_full_name,
-      a.latestRow.committee
+    const aTitle = (
+      localizeKnownCommitteeFullName(resolveCommitteeFullName(a.latestRow.committee_full_name, a.latestRow.committee)) &&
+      a.latestRow.committee?.trim()
+        ? `${localizeKnownCommitteeFullName(resolveCommitteeFullName(a.latestRow.committee_full_name, a.latestRow.committee))} — ${a.latestRow.committee?.trim()}`
+        : formatCommitteeCardTitle(a.latestRow.committee_full_name, a.latestRow.committee)
     ).toLowerCase();
-    const bTitle = formatCommitteeCardTitle(
-      b.latestRow.committee_full_name,
-      b.latestRow.committee
+    const bTitle = (
+      localizeKnownCommitteeFullName(resolveCommitteeFullName(b.latestRow.committee_full_name, b.latestRow.committee)) &&
+      b.latestRow.committee?.trim()
+        ? `${localizeKnownCommitteeFullName(resolveCommitteeFullName(b.latestRow.committee_full_name, b.latestRow.committee))} — ${b.latestRow.committee?.trim()}`
+        : formatCommitteeCardTitle(b.latestRow.committee_full_name, b.latestRow.committee)
     ).toLowerCase();
     return aTitle.localeCompare(bTitle);
   });
@@ -167,7 +196,14 @@ export default async function SmtOverviewPage({
               />
             ) : null}
             <p className="font-semibold text-sm leading-snug">
-              {formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee)}
+              {(() => {
+                const localizedFull = localizeKnownCommitteeFullName(
+                  resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)
+                );
+                const code = g.latestRow.committee?.trim() || "";
+                if (localizedFull && code) return `${localizedFull} — ${code}`;
+                return formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee);
+              })()}
             </p>
             {(() => {
               const tags = resolveCommitteeDisplayTags(g.latestRow.committee);

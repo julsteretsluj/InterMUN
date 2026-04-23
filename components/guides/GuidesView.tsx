@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
@@ -13,70 +14,6 @@ interface Guide {
   google_docs_url?: string | null;
 }
 
-const DEFAULT_GUIDES: Guide[] = [
-  {
-    id: "rop",
-    slug: "rop",
-    title: "Rules of Procedure (RoP)",
-    content: `# Rules of Procedure
-
-## Points and Motions
-- **Point of Order**: Correct procedure
-- **Point of Information**: Question to speaker
-- **Point of Personal Privilege**: Personal comfort
-- **Motion to Table**: Postpone debate
-- **Motion to Adjourn**: End session
-
-## Voting
-- Simple majority for procedural matters
-- 2/3 majority for substantive matters
-- Roll-call vote if requested`,
-    google_docs_url: null,
-  },
-  {
-    id: "examples",
-    slug: "examples",
-    title: "Examples",
-    content: `# Examples
-
-## Resolution Format
-\`\`\`
-The General Assembly,
-...
-1. Calls upon member states to...
-2. Urges the international community to...
-\`\`\`
-
-## Position Paper Structure
-1. Background
-2. Country Policy
-3. Proposed Solutions`,
-    google_docs_url: null,
-  },
-  {
-    id: "templates",
-    slug: "templates",
-    title: "Templates",
-    content: `# Templates
-
-## Chair Report Template
-- Committee overview
-- Key discussion points
-- Resolutions passed
-- Recommendations`,
-    google_docs_url: null,
-  },
-  {
-    id: "chair-report",
-    slug: "chair-report",
-    title: "Chair Report",
-    content: `# Chair Report
-
-Document committee proceedings and outcomes here.`,
-    google_docs_url: null,
-  },
-];
-
 export function GuidesView({
   guides,
   canEdit,
@@ -84,7 +21,42 @@ export function GuidesView({
   guides: Guide[];
   canEdit: boolean;
 }) {
-  const items = guides.length > 0 ? guides : DEFAULT_GUIDES;
+  const t = useTranslations("views.guides");
+  const defaultGuides: Guide[] = useMemo(
+    () => [
+      {
+        id: "rop",
+        slug: "rop",
+        title: t("default.rop.title"),
+        content: t("default.rop.content"),
+        google_docs_url: null,
+      },
+      {
+        id: "examples",
+        slug: "examples",
+        title: t("default.examples.title"),
+        content: t("default.examples.content"),
+        google_docs_url: null,
+      },
+      {
+        id: "templates",
+        slug: "templates",
+        title: t("default.templates.title"),
+        content: t("default.templates.content"),
+        google_docs_url: null,
+      },
+      {
+        id: "chair-report",
+        slug: "chair-report",
+        title: t("default.chairReport.title"),
+        content: t("default.chairReport.content"),
+        google_docs_url: null,
+      },
+    ],
+    [t]
+  );
+
+  const items = guides.length > 0 ? guides : defaultGuides;
   const [selected, setSelected] = useState<Guide | null>(items[0] || null);
   const [editMode, setEditMode] = useState(false);
   const [editTitle, setEditTitle] = useState("");
@@ -131,7 +103,7 @@ export function GuidesView({
                   }}
                   className="rounded-lg bg-brand-accent px-3 py-1.5 text-sm text-white transition-opacity duration-200 hover:opacity-95"
                 >
-                  Edit
+                  {t("edit")}
                 </button>
               ) : null}
             </div>
@@ -141,7 +113,7 @@ export function GuidesView({
                 {selected.google_docs_url?.trim() ? (
                   <GoogleDocsEmbed
                     googleDocsUrl={selected.google_docs_url.trim()}
-                    heading="Guide document"
+                    heading={t("guideDocument")}
                     compact
                   />
                 ) : null}
@@ -149,7 +121,7 @@ export function GuidesView({
                   <div>
                     {selected.google_docs_url?.trim() ? (
                       <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
-                        Additional notes
+                        {t("additionalNotes")}
                       </p>
                     ) : null}
                     <pre className="whitespace-pre-wrap font-sans text-sm text-slate-800 dark:text-zinc-200">
@@ -157,7 +129,7 @@ export function GuidesView({
                     </pre>
                   </div>
                 ) : !selected.google_docs_url?.trim() ? (
-                  <p className="text-sm text-slate-500 dark:text-zinc-400">No content yet.</p>
+                  <p className="text-sm text-slate-500 dark:text-zinc-400">{t("noContentYet")}</p>
                 ) : null}
               </div>
             ) : (
@@ -166,30 +138,27 @@ export function GuidesView({
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                   className="mun-field"
-                  placeholder="Title"
+                  placeholder={t("titlePlaceholder")}
                 />
                 <div>
                   <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-                    <label className="mun-label normal-case">Google Docs URL</label>
+                    <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
                     <OpenNewGoogleDocButton />
                   </div>
                   <input
                     value={editGoogleUrl}
                     onChange={(e) => setEditGoogleUrl(e.target.value)}
                     className="mun-field"
-                    placeholder="https://docs.google.com/document/d/…"
+                    placeholder={t("googleDocsPlaceholder")}
                     type="url"
                   />
-                  <p className="mt-1 text-xs text-brand-muted">
-                    New Google Doc opens in another tab. Paste a shareable link so delegates can open the doc
-                    here (view/edit depends on Google sharing).
-                  </p>
+                  <p className="mt-1 text-xs text-brand-muted">{t("googleDocsHelp")}</p>
                 </div>
                 <textarea
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
                   className="mun-field h-56 resize-y"
-                  placeholder="Markdown notes (optional if you use a Google Doc)"
+                  placeholder={t("markdownOptional")}
                 />
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -208,7 +177,7 @@ export function GuidesView({
                       const { data } = await supabase.from("guides").select("*").order("slug");
                       if (data) {
                         const nextItems =
-                          (data as Guide[])?.length > 0 ? (data as Guide[]) : DEFAULT_GUIDES;
+                          (data as Guide[])?.length > 0 ? (data as Guide[]) : defaultGuides;
                         const nextSelected =
                           nextItems.find((g) => g.slug === selected.slug) || nextItems[0] || null;
                         setSelected(nextSelected);
@@ -217,14 +186,14 @@ export function GuidesView({
                     }}
                     className="mun-btn-primary"
                   >
-                    Save
+                    {t("save")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
                     className="mun-btn"
                   >
-                    Cancel
+                    {t("cancel")}
                   </button>
                 </div>
               </div>
@@ -234,30 +203,30 @@ export function GuidesView({
 
         {canEdit && (
           <div className="mt-6 space-y-3 rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-black/20">
-            <h3 className="font-semibold text-brand-navy dark:text-zinc-100">Create new guide</h3>
+            <h3 className="font-semibold text-brand-navy dark:text-zinc-100">{t("createNewGuide")}</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <input
                 value={createSlug}
                 onChange={(e) => setCreateSlug(e.target.value)}
-                placeholder="slug (unique)"
+                placeholder={t("slugPlaceholder")}
                 className="mun-field"
               />
               <input
                 value={createTitle}
                 onChange={(e) => setCreateTitle(e.target.value)}
-                placeholder="title"
+                placeholder={t("titleLowerPlaceholder")}
                 className="mun-field"
               />
             </div>
             <div>
               <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-                <label className="mun-label normal-case">Google Docs URL (optional)</label>
+                <label className="mun-label normal-case">{t("googleDocsUrlOptional")}</label>
                 <OpenNewGoogleDocButton />
               </div>
               <input
                 value={createGoogleUrl}
                 onChange={(e) => setCreateGoogleUrl(e.target.value)}
-                placeholder="https://docs.google.com/document/d/…"
+                placeholder={t("googleDocsPlaceholder")}
                 className="mun-field"
                 type="url"
               />
@@ -265,7 +234,7 @@ export function GuidesView({
             <textarea
               value={createContent}
               onChange={(e) => setCreateContent(e.target.value)}
-              placeholder="Markdown content (optional)"
+              placeholder={t("markdownContentOptional")}
               className="mun-field h-40 resize-y"
             />
             <button
@@ -294,7 +263,7 @@ export function GuidesView({
               }}
               className="mun-btn-primary"
             >
-              Create
+              {t("create")}
             </button>
           </div>
         )}

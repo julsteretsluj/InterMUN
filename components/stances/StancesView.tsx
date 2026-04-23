@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { StanceHeatmap } from "./StanceHeatmap";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
@@ -26,6 +27,8 @@ export function StancesView({
   currentUserId: string;
   canEdit: boolean;
 }) {
+  const t = useTranslations("views.stances");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [selectedAllocation, setSelectedAllocation] =
     useState<Allocation | null>(null);
@@ -149,9 +152,9 @@ export function StancesView({
         </p>
       ) : null}
       <div>
-        <h3 className="font-semibold mb-4">Brief Stance Overview (Heatmap)</h3>
+        <h3 className="font-semibold mb-4">{t("heatmapTitle")}</h3>
         <p className="text-sm text-brand-muted text-brand-muted mb-3">
-          To what extent does your allocation support ___? (1–5 scale)
+          {t("heatmapHelp")}
         </p>
         <div className="flex gap-4 flex-wrap items-end mb-4">
           {canEdit ? (
@@ -162,15 +165,12 @@ export function StancesView({
                 onChange={(e) =>
                   setStanceForm({ ...stanceForm, topic: e.target.value })
                 }
-                placeholder="e.g. climate action"
+                placeholder={t("topicPlaceholder")}
                 className="px-3 py-2 border rounded bg-black/30 w-48"
               />
               <div className="flex flex-wrap items-center gap-2">
-                <label className="text-sm">Extent (1–5):</label>
-                <HelpButton title="Extent (1–5)">
-                  1 means your allocation has little support for the topic, and 5 means strong support.
-                  Pick a number that matches your stance in the committee.
-                </HelpButton>
+                <label className="text-sm">{t("extentLabel")}</label>
+                <HelpButton title={t("extentHelpTitle")}>{t("extentHelpBody")}</HelpButton>
                 <input
                   type="range"
                   min={1}
@@ -187,23 +187,23 @@ export function StancesView({
                 onClick={addStanceToHeatmap}
                 className="px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
               >
-                Add
+                {t("add")}
               </button>
             </>
           ) : (
             <p className="text-sm text-brand-muted/70">
-              View-only heatmap for staff.
+              {t("viewOnlyHeatmap")}
             </p>
           )}
         </div>
         <StanceHeatmap data={stanceData} />
       </div>
       <div>
-        <h3 className="font-semibold mb-4">Notes per Allocation</h3>
+        <h3 className="font-semibold mb-4">{t("notesPerAllocation")}</h3>
         <div className="flex gap-6">
           <div className="w-48 space-y-2">
             {allocations.length === 0 ? (
-              <p className="text-sm text-brand-muted/70">No allocations yet</p>
+              <p className="text-sm text-brand-muted/70">{t("noAllocationsYet")}</p>
             ) : (
               allocations.map((a) => (
                 <button
@@ -233,12 +233,12 @@ export function StancesView({
                 value={noteContent}
                 onChange={(e) => setNoteContent(e.target.value)}
                 className="w-full h-40 px-3 py-2 border rounded bg-black/30"
-                placeholder="Stance notes for this allocation..."
+                placeholder={t("notesPlaceholder")}
                 disabled={!canEdit}
               />
               {stanceNoteFlaggedTerms.length > 0 ? (
                 <p className="mt-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
-                  Reader warning: this note may contain inappropriate language.
+                  {t("noteLanguageWarning")}
                 </p>
               ) : null}
               <div className="flex flex-wrap items-center gap-2">
@@ -247,12 +247,9 @@ export function StancesView({
                   disabled={!canEdit}
                   className="mt-2 px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90 disabled:opacity-50"
                 >
-                  Save
+                  {tc("save")}
                 </button>
-                <HelpButton title="Save stance note">
-                  Saves the stance note for this allocation. It can be viewed by staff and (depending on
-                  committee settings) other participants.
-                </HelpButton>
+                <HelpButton title={t("saveHelpTitle")}>{t("saveHelpBody")}</HelpButton>
               </div>
             </div>
           )}

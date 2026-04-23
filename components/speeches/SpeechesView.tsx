@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { Mic, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -16,6 +17,8 @@ interface Speech {
 }
 
 export function SpeechesView({ speeches }: { speeches: Speech[] }) {
+  const t = useTranslations("views.speeches");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [items, setItems] = useState(speeches);
   const [selectedId, setSelectedId] = useState<string | null>(speeches[0]?.id ?? null);
@@ -105,19 +108,19 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
         className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
-        New speech
+        {t("newSpeech")}
       </button>
       {(showForm || editing) && (
         <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
           <input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            placeholder="Speech title"
+            placeholder={t("speechTitlePlaceholder")}
             className="mun-field"
           />
           <div>
             <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-              <label className="mun-label normal-case">Google Docs URL</label>
+              <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
               <OpenNewGoogleDocButton />
             </div>
             <input
@@ -125,16 +128,14 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
               onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}
               className="mun-field"
               type="url"
-              placeholder="https://docs.google.com/document/d/…"
+              placeholder={t("googleDocsPlaceholder")}
             />
-            <p className="mt-1 text-xs text-brand-muted">
-              Opens Google in a new tab; paste the document URL here when ready.
-            </p>
+            <p className="mt-1 text-xs text-brand-muted">{t("googleDocsHelp")}</p>
           </div>
           <textarea
             value={form.content}
             onChange={(e) => setForm({ ...form, content: e.target.value })}
-            placeholder="Plain text draft (optional if you use a Google Doc)"
+            placeholder={t("plainTextOptional")}
             className="mun-field h-40 resize-y"
           />
           <EmojiQuickInsert onPick={appendEmoji} />
@@ -145,7 +146,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
               </p>
             ) : null}
             <button type="button" onClick={() => void saveSpeech()} className="mun-btn-primary">
-              Save
+              {t("save")}
             </button>
             <button
               type="button"
@@ -155,19 +156,19 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
               }}
               className="mun-btn"
             >
-              Cancel
+              {tc("cancel")}
             </button>
           </div>
         </div>
       )}
 
       {items.length === 0 ? (
-        <p className="text-sm text-brand-muted">No speeches yet. Link a Google Doc or paste text.</p>
+        <p className="text-sm text-brand-muted">{t("noSpeechesYet")}</p>
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-56">
             <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
-              Speech
+              {t("speechLabel")}
             </label>
             <select
               className="mun-field lg:hidden"
@@ -176,7 +177,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
             >
               {items.map((s) => (
                 <option key={s.id} value={s.id}>
-                  {s.title || "Untitled"}
+                  {s.title || t("untitled")}
                 </option>
               ))}
             </select>
@@ -193,7 +194,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
                   }`}
                 >
                   <Mic className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
-                  <span className="truncate">{s.title || "Untitled"}</span>
+                  <span className="truncate">{s.title || t("untitled")}</span>
                 </button>
               ))}
             </div>
@@ -203,7 +204,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
             <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <h3 className="text-lg font-semibold text-brand-navy dark:text-zinc-100">
-                  {selected.title || "Untitled"}
+                  {selected.title || t("untitled")}
                 </h3>
                 <button
                   type="button"
@@ -218,29 +219,29 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
                   }}
                   className="text-sm font-medium text-brand-accent hover:underline dark:text-brand-accent-bright"
                 >
-                  Edit
+                  {tc("edit")}
                 </button>
               </div>
               {selected.google_docs_url?.trim() ? (
                 <GoogleDocsEmbed
                   googleDocsUrl={selected.google_docs_url.trim()}
-                  heading="Speech document"
+                  heading={t("speechDocument")}
                   compact
                 />
               ) : null}
               {selected.content?.trim() ? (
                 <div>
                   {selected.google_docs_url?.trim() ? (
-                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">Draft text</p>
+                    <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
+                      {t("draftText")}
+                    </p>
                   ) : null}
                   <pre className="whitespace-pre-wrap rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-sans text-sm dark:border-white/10 dark:bg-black/30">
                     {selected.content}
                   </pre>
                 </div>
               ) : !selected.google_docs_url?.trim() ? (
-                <p className="text-sm text-brand-muted">
-                  Link a Google Doc with Edit, or add plain text in the form.
-                </p>
+                <p className="text-sm text-brand-muted">{t("noContentHint")}</p>
               ) : null}
             </div>
           ) : null}

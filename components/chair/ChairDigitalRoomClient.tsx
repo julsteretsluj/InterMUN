@@ -11,6 +11,7 @@ import { type RollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attend
 import { createClient } from "@/lib/supabase/client";
 import { addAllocationToSpeakerQueue, fetchSpeakerQueue } from "@/lib/speaker-queue";
 import { ChairSpeakerQueuePanel } from "@/components/chair/ChairSpeakerQueuePanel";
+import { useTranslations } from "next-intl";
 
 export type DigitalRoomAllocation = {
   id: string;
@@ -63,6 +64,7 @@ export function ChairDigitalRoomClient({
   rollAttendanceByAllocationId: Record<string, RollAttendance>;
   isCrisisCommittee?: boolean;
 }) {
+  const t = useTranslations("chairDigitalRoom");
   const supabase = useMemo(() => createClient(), []);
   const [query, setQuery] = useState("");
   const loadLegacy = useCallback(
@@ -170,7 +172,7 @@ export function ChairDigitalRoomClient({
           <span className="font-semibold text-slate-900 dark:text-zinc-50">{committeeLine}</span>
           <span className="text-slate-500 dark:text-zinc-400">
             {" "}
-            — chair notes sync for this committee (all chair accounts and devices).
+            {t("notesSyncSuffix")}
           </span>
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -178,21 +180,21 @@ export function ChairDigitalRoomClient({
             href="/committee-room"
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
           >
-            Open full committee room
+            {t("openFullCommitteeRoom")}
             <ExternalLink className="h-3.5 w-3.5 opacity-70" strokeWidth={2} />
           </Link>
           <Link
             href="/chair/allocation-matrix"
             className="inline-flex items-center rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
-            Delegates matrix
+            {t("delegatesMatrix")}
           </Link>
           <button
             type="button"
             onClick={clearAllFlags}
             className="rounded-lg px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40"
           >
-            Clear all chair notes
+            {t("clearAllChairNotes")}
           </button>
         </div>
       </div>
@@ -222,20 +224,23 @@ export function ChairDigitalRoomClient({
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search country…"
+            placeholder={t("searchCountry")}
             className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           />
         </label>
         <p className="text-sm text-slate-500 dark:text-zinc-400">
-          {allocations.length} placards · {flaggedCount} with chair notes · Roll recorded for{" "}
-          {Object.keys(rollAttendanceByAllocationId).length}
+          {t("roomStats", {
+            placards: allocations.length,
+            flagged: flaggedCount,
+            count: Object.keys(rollAttendanceByAllocationId).length,
+          })}
         </p>
       </div>
 
       {!ready ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-slate-500">{t("loading")}</p>
       ) : filtered.length === 0 ? (
-        <p className="text-sm text-slate-500 dark:text-zinc-400">No delegations match your search.</p>
+        <p className="text-sm text-slate-500 dark:text-zinc-400">{t("noDelegationsMatch")}</p>
       ) : (
         <ul className="space-y-2">
           {filtered.map((a) => {
@@ -266,7 +271,7 @@ export function ChairDigitalRoomClient({
                           rollClass
                         )}
                       >
-                        Roll {rollLabel}
+                        {t("rollPrefix", { label: rollLabel })}
                       </span>
                       <span
                         className={cn(
@@ -276,7 +281,7 @@ export function ChairDigitalRoomClient({
                             : "bg-amber-100 text-amber-950 dark:bg-amber-950/40 dark:text-amber-200"
                         )}
                       >
-                        {a.user_id ? "Linked account" : "Vacant placard"}
+                        {a.user_id ? t("linkedAccount") : t("vacantPlacard")}
                       </span>
                     </div>
                     {a.user_id ? (
@@ -284,7 +289,7 @@ export function ChairDigitalRoomClient({
                         href={`/committee-room/person/${a.user_id}`}
                         className="mt-1 inline-block text-xs font-medium text-brand-diplomatic hover:underline dark:text-brand-accent-bright"
                       >
-                        Delegate profile →
+                        {t("delegateProfile")}
                       </Link>
                     ) : null}
                   </div>
@@ -300,7 +305,7 @@ export function ChairDigitalRoomClient({
                       )}
                     >
                       <Smile className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-                      Compliment
+                      {t("compliment")}
                     </button>
                     <button
                       type="button"
@@ -313,7 +318,7 @@ export function ChairDigitalRoomClient({
                       )}
                     >
                       <TriangleAlert className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-                      Concern
+                      {t("concern")}
                     </button>
                     <button
                       type="button"
@@ -322,7 +327,7 @@ export function ChairDigitalRoomClient({
                       className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Mic2 className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-                      {addingSpeakerId === a.id ? "Adding…" : "Add to speaker list"}
+                      {addingSpeakerId === a.id ? t("adding") : t("addToSpeakerList")}
                     </button>
                     <button
                       type="button"
@@ -334,7 +339,7 @@ export function ChairDigitalRoomClient({
                           : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                       )}
                     >
-                      Reminder
+                      {t("reminder")}
                     </button>
                   </div>
                 </div>
@@ -345,7 +350,7 @@ export function ChairDigitalRoomClient({
                 ) : null}
                 {expandedReminderId === a.id ? (
                   <label className="mt-2 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-                    Private reminder (chairs only, synced)
+                    {t("privateReminderLabel")}
                     <textarea
                       value={f.reminder ?? ""}
                       onChange={(e) => {
@@ -358,7 +363,7 @@ export function ChairDigitalRoomClient({
                       }}
                       rows={2}
                       className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
-                      placeholder="e.g. Thank France for keeping time"
+                      placeholder={t("chairNotePlaceholder")}
                     />
                   </label>
                 ) : null}

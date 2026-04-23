@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type Props = {
   conferenceId: string;
@@ -15,6 +16,7 @@ export function CommitteeLivePreview({
   subtitle,
   committeeCode,
 }: Props) {
+  const t = useTranslations("smtCards");
   return (
     <div className="rounded-xl border border-brand-navy/15 bg-black/25 shadow-sm overflow-hidden flex flex-col">
       <div className="px-3 py-2 border-b border-brand-navy/10 bg-brand-cream/40 flex items-start justify-between gap-2">
@@ -29,7 +31,7 @@ export function CommitteeLivePreview({
           href={`/smt/committees/${conferenceId}`}
           className="shrink-0 text-xs font-medium text-brand-accent hover:underline"
         >
-          Full view
+          {t("fullView")}
         </Link>
       </div>
     </div>

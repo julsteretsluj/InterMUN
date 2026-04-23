@@ -20,6 +20,7 @@ import {
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
+import { getTranslations } from "next-intl/server";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -35,9 +36,29 @@ export default async function SmtCommitteeLivePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const t = await getTranslations("smtCards");
+  const tNames = await getTranslations("committeeNames.full");
   const { id } = await params;
   const supabase = await createClient();
   const eventId = await getActiveEventId();
+
+  function localizeKnownCommitteeFullName(value: string | null | undefined): string | null {
+    const v = value?.trim();
+    if (!v) return null;
+    const map: Record<string, string> = {
+      "Disarmament and International Security Committee": "DISEC",
+      "Economic and Social Council": "ECOSOC",
+      "World Health Organization": "WHO",
+      "United Nations Security Council": "UNSC",
+      "United Nations Human Rights Council": "UNHRC",
+      "United Nations Office on Drugs and Crime": "UNODC",
+      "UN Women": "UN_WOMEN",
+      INTERPOL: "INTERPOL",
+      "Press Corps": "PRESS_CORPS",
+    };
+    const key = map[v];
+    return key ? tNames(key) : v;
+  }
 
   const { data: conf } = await supabase
     .from("conferences")
@@ -52,13 +73,13 @@ export default async function SmtCommitteeLivePage({
   if (eventId && conf.event_id !== eventId) {
     return (
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-brand-navy">
-        This committee belongs to a different conference than the one you have selected.{" "}
+        {t("differentEventWarning")}{" "}
         <Link href="/event-gate?next=%2Fsmt" className="text-brand-accent font-medium underline">
-          Switch event
+          {t("switchEvent")}
         </Link>{" "}
         or open it from{" "}
         <Link href="/smt" className="text-brand-accent font-medium underline">
-          Live committees
+          {t("liveCommittees")}
         </Link>
         .
       </div>
@@ -92,14 +113,20 @@ export default async function SmtCommitteeLivePage({
   const totalSeats = staffAllocs.length;
   const filledSeats = staffAllocs.filter((a) => a.user_id).length;
 
-  const displayTitle = formatCommitteeCardTitle(conf.committee_full_name, conf.committee);
+  const displayTitle = (() => {
+    const localizedFull = localizeKnownCommitteeFullName(resolveCommitteeFullName(conf.committee_full_name, conf.committee));
+    const ac = conf.committee?.trim() || "";
+    if (localizedFull && ac) return `${localizedFull} — ${ac}`;
+    if (ac) return ac;
+    return t("committeeFallback");
+  })();
   const officialName = resolveCommitteeFullName(conf.committee_full_name, conf.committee);
   const displayTags = resolveCommitteeDisplayTags(conf.committee);
 
   return (
     <div className="space-y-8">
       <Link href="/smt" className="text-sm text-brand-accent hover:underline inline-block">
-        ← All committees
+        ← {t("allCommittees")}
       </Link>
 
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-6">
@@ -108,56 +135,56 @@ export default async function SmtCommitteeLivePage({
             {conf.committee_logo_url ? (
               <img
                 src={conf.committee_logo_url}
-                alt={`${conf.committee ?? "Committee"} logo`}
+                alt={`${conf.committee ?? t("committeeFallback")} logo`}
                 className="h-14 w-14 object-contain rounded-md bg-white/70 border border-brand-navy/10 mt-1"
               />
             ) : null}
             <h1 className="font-display text-2xl font-semibold text-brand-navy">{displayTitle}</h1>
           </div>
-          <p className="text-xs text-brand-muted mt-2 uppercase tracking-wide">Committee overview</p>
+          <p className="text-xs text-brand-muted mt-2 uppercase tracking-wide">{t("committeeOverview")}</p>
         </div>
 
         <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <MetaItem label="Session topic (agenda)">
+          <MetaItem label={t("sessionTopicAgenda")}>
             {conf.name?.trim() ? conf.name : "—"}
           </MetaItem>
           {conf.tagline?.trim() ? (
-            <MetaItem label="Tagline">{conf.tagline}</MetaItem>
+            <MetaItem label={t("tagline")}>{conf.tagline}</MetaItem>
           ) : null}
-          <MetaItem label="Official committee name">{officialName ?? "—"}</MetaItem>
-          <MetaItem label="Chamber / acronym">{conf.committee?.trim() || "—"}</MetaItem>
-          <MetaItem label="Difficulty">
+          <MetaItem label={t("officialCommitteeName")}>{localizeKnownCommitteeFullName(officialName) ?? "—"}</MetaItem>
+          <MetaItem label={t("chamberAcronym")}>{conf.committee?.trim() || "—"}</MetaItem>
+          <MetaItem label={t("difficulty")}>
             {displayTags?.difficulty ? (
               <span className={difficultyTagClass(displayTags.difficulty)}>{displayTags.difficulty}</span>
             ) : (
               "—"
             )}
           </MetaItem>
-          <MetaItem label="Format">
+          <MetaItem label={t("format")}>
             {displayTags?.format ? (
               <span className={formatTagClass(displayTags.format)}>{displayTags.format}</span>
             ) : (
               "—"
             )}
           </MetaItem>
-          <MetaItem label="Age range">
+          <MetaItem label={t("ageRange")}>
             {displayTags?.ageRange ? (
               <span className={ageRangeTagClass()}>{displayTags.ageRange}</span>
             ) : (
               "—"
             )}
           </MetaItem>
-          <MetaItem label="ESL-friendly">
+          <MetaItem label={t("eslFriendly")}>
             {displayTags ? (
               <span className={eslFriendlyTagClass(displayTags.eslFriendly)}>
-                {displayTags.eslFriendly ? "Yes" : "No"}
+                {displayTags.eslFriendly ? t("yes") : t("no")}
               </span>
             ) : (
               "—"
             )}
           </MetaItem>
-          <MetaItem label="Dais (listed)">{conf.chair_names?.trim() || "—"}</MetaItem>
-          <MetaItem label="Committee / room code (second gate)">
+          <MetaItem label={t("daisListed")}>{conf.chair_names?.trim() || "—"}</MetaItem>
+          <MetaItem label={t("committeeCodeSecondGate")}>
             {conf.committee_code?.trim() || conf.room_code?.trim() ? (
               <span className="font-mono tracking-widest">
                 {conf.committee_code?.trim() || conf.room_code}
@@ -166,38 +193,37 @@ export default async function SmtCommitteeLivePage({
               "—"
             )}
           </MetaItem>
-          <MetaItem label="Seats">
-            {filledSeats} filled · {totalSeats} allocated
+          <MetaItem label={t("seats")}>
+            {t("seatsFilledAllocated", { filled: filledSeats, total: totalSeats })}
           </MetaItem>
-          <MetaItem label="Resolutions">{resolutionCount.count ?? 0}</MetaItem>
-          <MetaItem label="Open votes">{openVotesCount.count ?? 0}</MetaItem>
+          <MetaItem label={t("resolutions")}>{resolutionCount.count ?? 0}</MetaItem>
+          <MetaItem label={t("openVotes")}>{openVotesCount.count ?? 0}</MetaItem>
         </dl>
 
         <p className="text-xs text-brand-muted border-t border-brand-navy/10 pt-4">
-          Edit committee session metadata and chair names under{" "}
+          {t("editMetadataIntro")}{" "}
           <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
-            Event & committee sessions
+            {t("eventSessionsLink")}
           </Link>
-          . Codes under{" "}
+          {t("codesUnder")}{" "}
           <Link href="/smt/room-codes" className="text-brand-accent font-medium hover:underline">
-            Room codes & chairs
+            {t("roomCodesChairsLink")}
           </Link>
           .
         </p>
       </div>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-4">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Digital committee room</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("digitalCommitteeRoom")}</h2>
         <p className="text-sm text-brand-navy/90 max-w-2xl">
-          Same virtual floor delegates see under <span className="font-medium">Committee room</span> in the
-          delegate dashboard (placards and dais use this committee&apos;s allocations).
+          {t("digitalRoomDescription")}
         </p>
         <VirtualCommitteeRoom
-          conferenceName={conf.name ?? "Conference"}
-          committeeName={conf.committee?.trim() || "Committee"}
+          conferenceName={conf.name ?? t("conferenceFallback")}
+          committeeName={conf.committee?.trim() || t("committeeFallback")}
           placards={roomPayload.placards}
           dais={roomPayload.dais}
-          helperText="Secretariat view: live preview from this committee's allocation matrix. Assign seats below or in Allocation matrix."
+          helperText={t("helperTextSmtPreview")}
         />
         <CommitteeRoomStaffControls
           allocations={roomPayload.staffAllocations}
@@ -209,7 +235,7 @@ export default async function SmtCommitteeLivePage({
 
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-8">
         <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">Live floor</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("liveFloor")}</h2>
           <ChairLiveFloor
             conferenceId={liveFloorBundle.debateConferenceId}
             canonicalConferenceId={liveFloorBundle.canonicalConferenceId}
@@ -220,7 +246,7 @@ export default async function SmtCommitteeLivePage({
         </section>
 
         <p className="text-xs text-brand-muted pt-2 border-t border-brand-navy/10">
-          Live speaker queue, roll call, and timers for this committee—same data chairs see on the session floor.
+          {t("liveFloorDescription")}
         </p>
       </div>
 
