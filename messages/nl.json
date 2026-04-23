@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "titel",
       "googleDocsUrlOptional": "URL van Google Documenten (optioneel)",
       "markdownContentOptional": "Prijsverlagingsinhoud (optioneel)",
-      "create": "Creëren"
+      "create": "Creëren",
+      "glossary": {
+        "title": "MUN Agenda Woordenlijst",
+        "subtitle": "Unieke terminologie afgestemd op uw commissiecode en actuele agendaonderwerpen.",
+        "committeeCode": "Commissiecode: {code}",
+        "topicTag": "Onderwerp: {onderwerp}",
+        "sources": {
+          "core": "kern",
+          "committee": "commissie",
+          "topic": "onderwerp"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Delegatie",
+            "definition": "Een landen- of waarnemersteam dat één staat of entiteit in de commissie vertegenwoordigt."
+          },
+          "placard": {
+            "term": "Aanplakbiljet",
+            "definition": "Landbord dat wordt gebruikt om het woord te vragen, te stemmen en procedurele moties aan te geven."
+          },
+          "dais": {
+            "term": "Dais",
+            "definition": "Voorzittersteam dat het debat modereert, de procedure toepast en de spreekvolgorde beheert."
+          },
+          "quorum": {
+            "term": "Quorum",
+            "definition": "Minimumaantal delegaties dat nodig is om formele zaken af ​​te handelen en te stemmen."
+          },
+          "motion": {
+            "term": "Beweging",
+            "definition": "Formeel voorstel om de stroom van het debat te veranderen, zoals het caucustype of de spreektijd."
+          },
+          "point_of_order": {
+            "term": "Punt van orde",
+            "definition": "Tussenkomst wanneer de procedure volgens het commissiereglement onjuist wordt toegepast."
+          },
+          "moderated_caucus": {
+            "term": "Gemodereerde caucus",
+            "definition": "Gestructureerd debatsegment met korte toespraken over een bepaald subonderwerp."
+          },
+          "unmoderated_caucus": {
+            "term": "Ongemodereerde caucus",
+            "definition": "Informele onderhandelingsperiode waarin afgevaardigden zich vrijelijk kunnen bewegen om ideeën op te stellen en samen te voegen."
+          },
+          "draft_resolution": {
+            "term": "Ontwerpresolutie",
+            "definition": "Werktekst van voorgestelde commissieactie vóór de definitieve stemming en goedkeuring."
+          },
+          "amendment": {
+            "term": "Wijziging",
+            "definition": "Wijziging voorgesteld om een ​​tekst op te stellen, hetzij vriendelijk, hetzij als onvriendelijk gestemd."
+          },
+          "operative_clause": {
+            "term": "Operatieclausule",
+            "definition": "Actiegerichte genummerde clausule die beschrijft wat de commissie voorstelt te doen."
+          },
+          "preambulatory_clause": {
+            "term": "Preambuleclausule",
+            "definition": "Contextbepalende clausule waarin achtergrondprincipes, zorgen en eerdere kaders worden aangehaald."
+          },
+          "right_of_reply": {
+            "term": "Recht van antwoord",
+            "definition": "Gelegenheid om te reageren op een directe verklaring die de waardigheid of positie van de delegatie aantast."
+          },
+          "veto_power": {
+            "term": "Vetomacht",
+            "definition": "Bevoegdheid van permanent lid van de VN-Veiligheidsraad om inhoudelijke ontwerpresoluties te blokkeren."
+          },
+          "chapter_vii": {
+            "term": "Hoofdstuk VII",
+            "definition": "Autoriteit van het VN-Handvest op het gebied van bedreigingen voor de vrede, sancties en het gebruik van geweld."
+          },
+          "sanctions_regime": {
+            "term": "Sanctieregime",
+            "definition": "Gecoördineerde beperkingen die worden gebruikt om gedrag te beïnvloeden zonder directe militaire actie."
+          },
+          "arms_control": {
+            "term": "Wapenbeheersing",
+            "definition": "Afspraken en verificatiesystemen die typen, hoeveelheden of inzet van wapens beperken."
+          },
+          "non_proliferation": {
+            "term": "Non-proliferatie",
+            "definition": "Beleid om de verspreiding van nucleaire, chemische, biologische of geavanceerde wapencapaciteiten te voorkomen."
+          },
+          "confidence_building_measures": {
+            "term": "Vertrouwenwekkende maatregelen",
+            "definition": "Transparantie- en communicatiemiddelen die misverstanden en conflictrisico's verminderen."
+          },
+          "universal_periodic_review": {
+            "term": "Universele periodieke beoordeling",
+            "definition": "Peer-review-proces waarbij elke VN-lidstaat rapporteert en rechtenaanbevelingen ontvangt."
+          },
+          "special_rapporteur": {
+            "term": "Speciale Rapporteur",
+            "definition": "Onafhankelijke deskundige benoemd om toezicht te houden op en te rapporteren over thematische kwesties of landenrechtenkwesties."
+          },
+          "treaty_body": {
+            "term": "Verdragsorgaan",
+            "definition": "Comité van deskundigen dat toezicht houdt op de implementatie van een specifiek mensenrechtenverdrag."
+          },
+          "public_health_emergency": {
+            "term": "Noodsituatie op het gebied van de volksgezondheid",
+            "definition": "Ernstige uitbraak die dringend een gecoördineerde nationale en internationale respons vereist."
+          },
+          "surveillance": {
+            "term": "Epidemiologische surveillance",
+            "definition": "Continue verzameling en analyse van gezondheidsgegevens om ziektetrends te detecteren en te volgen."
+          },
+          "health_systems": {
+            "term": "Versterking van gezondheidssystemen",
+            "definition": "Verbetering van het personeelsbestand, de financiering, de logistiek en het bestuur voor een betrouwbare levering van gezondheidszorg."
+          },
+          "transnational_crime": {
+            "term": "Transnationale georganiseerde misdaad",
+            "definition": "Criminele activiteiten worden over de grenzen heen gecoördineerd via netwerken en illegale markten."
+          },
+          "illicit_trafficking": {
+            "term": "Illegale handel",
+            "definition": "Illegaal verkeer van drugs, wapens, personen of goederen tussen rechtsgebieden."
+          },
+          "rule_of_law_capacity": {
+            "term": "Capaciteit voor de rechtsstaat",
+            "definition": "Institutioneel vermogen van rechtssystemen om rechten eerlijk te onderzoeken, vervolgen en beschermen."
+          },
+          "sustainable_development": {
+            "term": "Duurzame ontwikkeling",
+            "definition": "Groeimodel dat sociale vooruitgang, economische kansen en milieubescherming in evenwicht brengt."
+          },
+          "financing_for_development": {
+            "term": "Financiering voor ontwikkeling",
+            "definition": "Publieke en private financieringsmechanismen die ontwikkelingsprioriteiten op de lange termijn ondersteunen."
+          },
+          "policy_coordination": {
+            "term": "Beleidscoördinatie",
+            "definition": "Afstemming van acties van staat en instanties om dubbel werk te voorkomen en de collectieve impact te vergroten."
+          },
+          "child_protection": {
+            "term": "Kinderbescherming",
+            "definition": "Maatregelen ter voorkoming van uitbuiting, misbruik en geweld tegen kinderen in alle omstandigheden."
+          },
+          "education_access": {
+            "term": "Toegang tot onderwijs",
+            "definition": "Zorgen voor inclusieve, eerlijke en continue leermogelijkheden voor alle kinderen."
+          },
+          "humanitarian_response": {
+            "term": "Humanitaire reactie",
+            "definition": "Snelle hulpacties die tegemoetkomen aan dringende behoeften in crises en conflictsituaties."
+          },
+          "gender_mainstreaming": {
+            "term": "Gendermainstreaming",
+            "definition": "Integratie van genderanalyse in het ontwerp, de implementatie en de evaluatie van beleid."
+          },
+          "gender_based_violence": {
+            "term": "Gendergerelateerd geweld",
+            "definition": "Schade gericht tegen iemand op basis van genderidentiteit, rollen of ongelijke machtsverhoudingen."
+          },
+          "economic_empowerment": {
+            "term": "Economische empowerment",
+            "definition": "Het uitbreiden van de toegang tot fatsoenlijk werk, financiën, eigendom en beslissingsmacht."
+          },
+          "source_attribution": {
+            "term": "Bronvermelding",
+            "definition": "Het duidelijk citeren van de herkomst van informatie, zodat claims kunnen worden geverifieerd en gecontextualiseerd."
+          },
+          "verified_reporting": {
+            "term": "Geverifieerde rapportage",
+            "definition": "Journalistieke standaard die bevestiging vereist voordat betwiste feiten worden gepubliceerd."
+          },
+          "editorial_independence": {
+            "term": "Redactionele onafhankelijkheid",
+            "definition": "Scheiding van rapportagebeslissingen en politieke druk of invloed van belanghebbenden."
+          },
+          "climate_mitigation": {
+            "term": "Klimaatmitigatie",
+            "definition": "Acties die de uitstoot van broeikasgassen verminderen of de koolstofverwijdering op de lange termijn vergroten."
+          },
+          "climate_adaptation": {
+            "term": "Klimaataanpassing",
+            "definition": "Beleid en investeringen die de kwetsbaarheid voor klimaatgerelateerde gevolgen verminderen."
+          },
+          "cyber_norms": {
+            "term": "Cyber-normen",
+            "definition": "Gedeelde verwachtingen voor verantwoordelijk staatsgedrag in digitale en cyberdomeinen."
+          },
+          "critical_infrastructure": {
+            "term": "Kritieke infrastructuur",
+            "definition": "Essentiële systemen zoals stroom, water, gezondheidszorg en communicatie vereisen veerkracht."
+          },
+          "epidemiology": {
+            "term": "Epidemiologie",
+            "definition": "Studie van ziektepatronen, oorzaken en verspreiding in populaties."
+          },
+          "preparedness_response": {
+            "term": "Paraatheid en reactie",
+            "definition": "Planning, coördinatie en overspanningsacties om noodsituaties te beheersen en te beheersen."
+          },
+          "non_refoulement": {
+            "term": "Non-refoulement",
+            "definition": "Principe dat de terugkeer van mensen verbiedt naar plaatsen waar zij ernstige schade ondervinden."
+          },
+          "durable_solutions": {
+            "term": "Duurzame oplossingen",
+            "definition": "Langetermijnresultaten voor ontheemden: terugkeer, lokale integratie of hervestiging."
+          },
+          "nuclear_safeguards": {
+            "term": "Nucleaire waarborgen",
+            "definition": "Verificatiemaatregelen die ervoor zorgen dat nucleair materiaal niet wordt gebruikt voor wapengebruik."
+          },
+          "counter_terrorism": {
+            "term": "Terrorismebestrijding",
+            "definition": "Geïntegreerde juridische, preventieve en veiligheidsmaatregelen tegen terroristische activiteiten."
+          },
+          "due_process": {
+            "term": "Een eerlijk proces",
+            "definition": "Eerlijke juridische procedures ter bescherming van rechten tijdens onderzoek, vervolging en sancties."
+          },
+          "resource_security": {
+            "term": "Beveiliging van hulpbronnen",
+            "definition": "Betrouwbare toegang tot voedsel, water en energie onder economische en ecologische stress."
+          },
+          "resilience": {
+            "term": "Weerstand",
+            "definition": "Capaciteit van gemeenschappen en instellingen om schokken op te vangen en effectief te herstellen."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Idee bewerken",

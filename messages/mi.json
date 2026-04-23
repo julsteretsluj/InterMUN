@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "taitara",
       "googleDocsUrlOptional": "URL Tuhinga Google (he kōwhiringa)",
       "markdownContentOptional": "Ihirangi tohu (he kōwhiringa)",
-      "create": "Waihanga"
+      "create": "Waihanga",
+      "glossary": {
+        "title": "MUN Agenda Papakupu",
+        "subtitle": "Ko nga kupu ahurei e rite ana ki to waehere komiti me nga kaupapa kaupapa o naianei.",
+        "committeeCode": "Waehere komiti: {code}",
+        "topicTag": "Kaupapa: {topic}",
+        "sources": {
+          "core": "matua",
+          "committee": "komiti",
+          "topic": "kaupapa"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Tukunga",
+            "definition": "He whenua, he roopu kaitirotiro ranei hei kanohi mo tetahi kawanatanga, hinonga ranei i roto i te komiti."
+          },
+          "placard": {
+            "term": "Pepa",
+            "definition": "I whakamahia te tohu whenua ki te tono i te papa, te pooti, ​​me te tohu motini tikanga."
+          },
+          "dais": {
+            "term": "Dais",
+            "definition": "Ko te tiamana o te roopu e whakahaere ana i nga tautohetohe, e whakamahi ana i nga tikanga, e whakahaere ana i te raupapa korero."
+          },
+          "quorum": {
+            "term": "Koorama",
+            "definition": "Ko te iti rawa o nga roopu e tika ana hei whakahaere i nga pakihi me nga pooti."
+          },
+          "motion": {
+            "term": "Motini",
+            "definition": "He tono ōkawa ki te huri i te rere o te tautohetohe, penei i te momo ruuma, te wa korero ranei."
+          },
+          "point_of_order": {
+            "term": "Tohu Whakatau",
+            "definition": "Te wawaotanga i te wa e mahia he ana te tikanga i raro i nga ture komiti."
+          },
+          "moderated_caucus": {
+            "term": "Rūnanga Whakaōrite",
+            "definition": "Wāhanga tautohetohe kua hangahia me nga whaikorero poto mo te kaupapa iti kua tautuhia."
+          },
+          "unmoderated_caucus": {
+            "term": "Rūnanga Whakaōritenga",
+            "definition": "Te wā whiriwhiringa ōpaki ka neke haere noa ngā māngai ki te tuhi me te hanumi whakaaro."
+          },
+          "draft_resolution": {
+            "term": "Whakatau Tauira",
+            "definition": "Tuhituhi mahi mo nga mahi a te komiti i mua i te pooti whakamutunga me te tangohanga."
+          },
+          "amendment": {
+            "term": "Whakatikatika",
+            "definition": "Hurihia ki te tuhi tuhinga, he hoa, he pooti ranei hei kore hoa."
+          },
+          "operative_clause": {
+            "term": "Rarangi Mahi",
+            "definition": "rara tau mahi-a-mahi e whakaatu ana i ta te komiti e whakaaro ana kia mahia."
+          },
+          "preambulatory_clause": {
+            "term": "Tuhinga o mua",
+            "definition": "rara whakatakoto horopaki e whakahua ana i nga maapono papamuri, i nga awangawanga, me nga anga o mua."
+          },
+          "right_of_reply": {
+            "term": "Matau o te Whakautu",
+            "definition": "Te whai waahi ki te whakautu ki tetahi korero tika i pa ki te mana o te tuku, ki te tuunga ranei."
+          },
+          "veto_power": {
+            "term": "Mana Weto",
+            "definition": "Te mana mema-mau a UNSC ki te aukati i nga whakataunga tauira tino nui."
+          },
+          "chapter_vii": {
+            "term": "Upoko VII",
+            "definition": "Te mana o te UN Charter mo nga whakatuma mo te rangimarie, nga whiu, me nga tikanga whakamahi-o-kaha."
+          },
+          "sanctions_regime": {
+            "term": "Tikanga Whakatau",
+            "definition": "Ko nga here kua whakaritea hei whakaawe i te whanonga me te kore he mahi hoia."
+          },
+          "arms_control": {
+            "term": "Mana Whawhai",
+            "definition": "Nga Whakaaetanga me nga punaha manatoko e whakawhāiti ana i nga momo, te rahinga, te horahanga patu ranei."
+          },
+          "non_proliferation": {
+            "term": "Whakanui-kore",
+            "definition": "Nga kaupapa here hei aukati i te horapa o nga kaha patu karihi, matū, koiora, matatau ranei."
+          },
+          "confidence_building_measures": {
+            "term": "Mehua-Hanga Whakapono",
+            "definition": "Ko nga taputapu maamaa me nga taputapu whakawhitiwhiti korero e whakaiti ana i te pohehe me te raruraru raruraru."
+          },
+          "universal_periodic_review": {
+            "term": "Te Arotake Waa Ao",
+            "definition": "Te tukanga arotake-a-hoa i reira ka ripoatahia e ia whenua mema o te UN me te whiwhi i nga taunakitanga motika."
+          },
+          "special_rapporteur": {
+            "term": "Kaipupuri Motuhake",
+            "definition": "Ko te tohunga motuhake kua tohua ki te aro turuki me te tuku korero mo nga take motika kaupapa whenua ranei."
+          },
+          "treaty_body": {
+            "term": "Te Rōpū Tiriti",
+            "definition": "Ko te Komiti o nga tohunga e tirotiro ana i te whakatinanatanga o tetahi tiriti tika tangata."
+          },
+          "public_health_emergency": {
+            "term": "Ohotata Hauora Tūmatanui",
+            "definition": "Ko nga huihuinga pakarutanga nui e hiahia ana kia tere te whakarite urupare a motu me te ao."
+          },
+          "surveillance": {
+            "term": "Te Tirohanga Epidemiological",
+            "definition": "Kohikohi tonu me te tātari i nga raraunga hauora kia kitea me te whai i nga ahuatanga mate."
+          },
+          "health_systems": {
+            "term": "Te Whakapakari i nga Pūnaha Hauora",
+            "definition": "Te whakapai ake i nga kaimahi, te putea putea, te arorau, me te mana whakahaere mo te tuku hauora pono."
+          },
+          "transnational_crime": {
+            "term": "Te Hara-a-Motu o te Whenua",
+            "definition": "Ko nga mahi taihara i ruruku puta noa i nga rohe na roto i nga whatunga me nga maakete kino."
+          },
+          "illicit_trafficking": {
+            "term": "Hokohoko Kore",
+            "definition": "Ko te neke kino o nga raau taero, patu, tangata, taonga ranei puta noa i nga mana whakahaere."
+          },
+          "rule_of_law_capacity": {
+            "term": "Te Kaha Ture-o-Ture",
+            "definition": "Te kaha o nga punaha whakawa ki te whakatewhatewha, ki te whakawa, ki te tiaki tika i nga tika."
+          },
+          "sustainable_development": {
+            "term": "Whanaketanga Taumau",
+            "definition": "Te tauira tipu e whakataurite ana i te ahunga whakamua hapori, whai waahi ohaoha, me te tiaki taiao."
+          },
+          "financing_for_development": {
+            "term": "Putea mo te Whakawhanaketanga",
+            "definition": "Ko nga tikanga tuku putea a te iwi me te tangata motuhake e tautoko ana i nga kaupapa whanaketanga mo te wa roa."
+          },
+          "policy_coordination": {
+            "term": "Whakaritenga Kaupapahere",
+            "definition": "Te whakarite i nga mahi a te kawanatanga me nga umanga hei karo i te taarua me te whakanui i te paanga o te roopu."
+          },
+          "child_protection": {
+            "term": "Tiaki Tamariki",
+            "definition": "Ko nga tikanga hei aukati i te tukino, te tukino, me te tutu ki nga tamariki i nga waahi katoa."
+          },
+          "education_access": {
+            "term": "Te Uru Matauranga",
+            "definition": "Te whakarite i te whakauru, te rite, me te haere tonu o nga huarahi ako mo nga tamariki katoa."
+          },
+          "humanitarian_response": {
+            "term": "Whakautu Tangata",
+            "definition": "Nga mahi whakaora tere ki te whakatutuki i nga hiahia ohorere i roto i nga raru me nga waahi pakanga."
+          },
+          "gender_mainstreaming": {
+            "term": "Te Ira Tangata",
+            "definition": "Te whakauru i te tātaritanga ira tangata ki te hoahoa kaupapa here, te whakatinanatanga, me te arotake."
+          },
+          "gender_based_violence": {
+            "term": "Te Whakarekereke Ira Tangata",
+            "definition": "Ko te kino e pa ana ki tetahi i runga i te tuakiri ira tangata, i nga mahi, i nga hononga mana koretake ranei."
+          },
+          "economic_empowerment": {
+            "term": "Whakamana Ohaoha",
+            "definition": "Te whakawhānui i te uru ki nga mahi tika, te putea, te mana rangatira, me te mana whakatau."
+          },
+          "source_attribution": {
+            "term": "Tohunga Puna",
+            "definition": "Te whakahua i te takenga mai o nga korero kia taea ai te manatoko me te whakamohiotanga o nga kereme."
+          },
+          "verified_reporting": {
+            "term": "Pūrongo Manatoko",
+            "definition": "Ko te paerewa kairipoata e hiahia ana kia whakamanahia i mua i te whakaputa i nga meka tautohe."
+          },
+          "editorial_independence": {
+            "term": "Etita Motuhake",
+            "definition": "Te wehewehe i nga whakatau korero mai i te awe torangapu, te awe a te hunga whai paanga ranei."
+          },
+          "climate_mitigation": {
+            "term": "Te Whakaititanga o te Hurirangi",
+            "definition": "Ko nga mahi e whakaiti ana i te tukunga hau-a-roto, te whakanui ake ranei i te tango waro wa-roa."
+          },
+          "climate_adaptation": {
+            "term": "Te Urutaunga Hurirangi",
+            "definition": "Nga kaupapa here me nga haumi e whakaiti ana i te whakaraeraetanga ki nga paanga o te rangi."
+          },
+          "cyber_norms": {
+            "term": "Paerewa Cyber",
+            "definition": "Ko nga tumanakohanga tiritahi mo te whanonga a te kawanatanga i roto i nga rohe mamati me te ipurangi."
+          },
+          "critical_infrastructure": {
+            "term": "Hanganga Tino",
+            "definition": "Ko nga punaha nui penei i te hiko, te wai, te hauora, me nga whakawhitiwhiti korero e hiahia ana kia kaha."
+          },
+          "epidemiology": {
+            "term": "Epidemiology",
+            "definition": "Te rangahau i nga tauira mate, nga take, me te tohatoha i nga taupori."
+          },
+          "preparedness_response": {
+            "term": "Te Whakarite me te Whakautu",
+            "definition": "Te whakamahere, te ruruku, me nga mahi whakaoho hei pupuri me te whakahaere i nga ohorere."
+          },
+          "non_refoulement": {
+            "term": "Kore-Refoulement",
+            "definition": "Ko te maapono e aukati ana i te hokinga mai o nga tangata ki nga waahi ka pa he kino ki a ratou."
+          },
+          "durable_solutions": {
+            "term": "Rongoa Roa",
+            "definition": "Nga hua mo te wa roa mo te hunga kua heke: te hokinga mai, te whakaurunga o te rohe, te whakanohonoho ranei."
+          },
+          "nuclear_safeguards": {
+            "term": "Nga Tiaki Nuclear",
+            "definition": "Ko nga mehua manatoko kia kaua e whakanekehia nga rawa karihi mo te whakamahi patu."
+          },
+          "counter_terrorism": {
+            "term": "Whakatau-whakatuma",
+            "definition": "Kua whakakotahihia nga tikanga a-ture, arai me te haumaru ki nga mahi kaiwhakatuma."
+          },
+          "due_process": {
+            "term": "Tukatuka Tika",
+            "definition": "Nga tikanga ture tika e tiaki ana i nga tika i te wa o te whakawakanga, te whakawakanga, me te whakamana."
+          },
+          "resource_security": {
+            "term": "Haumarutanga Rauemi",
+            "definition": "Te uru pono ki te kai, te wai, me te kaha i raro i te taumahatanga ohaoha me te taiao."
+          },
+          "resilience": {
+            "term": "Te pakari",
+            "definition": "Te kaha o nga hapori me nga umanga ki te tango i nga ohorere me te whakaora tika."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Whakatika whakaaro",

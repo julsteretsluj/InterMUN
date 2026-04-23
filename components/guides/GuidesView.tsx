@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { resolveGlossaryEntries, type GlossaryContext } from "@/lib/mun-glossary";
 
 interface Guide {
   id: string;
@@ -17,11 +18,22 @@ interface Guide {
 export function GuidesView({
   guides,
   canEdit,
+  glossaryContext,
 }: {
   guides: Guide[];
   canEdit: boolean;
+  glossaryContext?: GlossaryContext | null;
 }) {
   const t = useTranslations("views.guides");
+  const glossary = useMemo(
+    () =>
+      resolveGlossaryEntries({
+        committeeCode: glossaryContext?.committeeCode ?? null,
+        committeeLabel: glossaryContext?.committeeLabel ?? null,
+        topicLabels: glossaryContext?.topicLabels ?? [],
+      }),
+    [glossaryContext?.committeeCode, glossaryContext?.committeeLabel, glossaryContext?.topicLabels]
+  );
   const defaultGuides: Guide[] = useMemo(
     () => [
       {
@@ -88,6 +100,48 @@ export function GuidesView({
         ))}
       </div>
       <div className="min-w-0 flex-1">
+        {glossary.length > 0 ? (
+          <section className="mb-6 rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-black/20">
+            <h3 className="text-base font-semibold text-brand-navy dark:text-zinc-100">{t("glossary.title")}</h3>
+            <p className="mt-1 text-sm text-brand-muted">{t("glossary.subtitle")}</p>
+            <div className="mt-2 flex flex-wrap gap-2 text-xs">
+              {glossaryContext?.committeeCode?.trim() ? (
+                <span className="rounded-full border border-brand-accent/35 bg-brand-accent/10 px-2 py-0.5 font-mono text-brand-navy dark:text-zinc-100">
+                  {t("glossary.committeeCode", { code: glossaryContext.committeeCode.trim().toUpperCase() })}
+                </span>
+              ) : null}
+              {(glossaryContext?.topicLabels ?? []).slice(0, 2).map((topic) => (
+                <span
+                  key={topic}
+                  className="rounded-full border border-slate-300/80 bg-white px-2 py-0.5 text-slate-700 dark:border-white/15 dark:bg-black/30 dark:text-zinc-200"
+                >
+                  {t("glossary.topicTag", { topic })}
+                </span>
+              ))}
+            </div>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {glossary.map((entry) => (
+                <li
+                  key={entry.id}
+                  className="rounded-xl border border-slate-200/90 bg-white p-3 text-sm shadow-sm dark:border-white/10 dark:bg-black/30"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="font-semibold text-brand-navy dark:text-zinc-100">
+                      {t(`glossary.terms.${entry.id}.term`)}
+                    </p>
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wide text-slate-600 dark:bg-white/10 dark:text-zinc-300">
+                      {t(`glossary.sources.${entry.source}`)}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
+                    {t(`glossary.terms.${entry.id}.definition`)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         {selected && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 text-brand-navy shadow-sm dark:border-white/10 dark:bg-black/30 dark:text-zinc-100">
             <div className="mb-4 flex flex-wrap items-start justify-between gap-4">

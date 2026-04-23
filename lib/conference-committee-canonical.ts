@@ -1,9 +1,19 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-type ConfRow = { id: string; name: string | null; committee: string | null };
+type ConfRow = {
+  id: string;
+  name: string | null;
+  committee: string | null;
+  committee_code?: string | null;
+};
 
-/** Same tab key as SMT allocation matrix: one tab per committee name (not per topic / conference name). */
-export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee">): string {
+/**
+ * Committee bucketing key used by topic/awards canonicalization.
+ * Prefer explicit `committee_code` so multiple topic rows for the same chamber always share one scope.
+ */
+export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee" | "committee_code">): string {
+  const code = c.committee_code?.trim().toLowerCase();
+  if (code) return `code:${code}`;
   const comm = c.committee?.trim().toLowerCase();
   if (comm) return `c:${comm}`;
   const n = c.name?.trim().toLowerCase();
@@ -25,7 +35,7 @@ export type CanonicalCommitteeRow = { id: string; label: string };
  * canonical `conferences.id` per committee — same bucketing as the allocation matrix and committee awards.
  */
 export function canonicalCommitteesForEventConferenceRows<
-  T extends { id: string; name: string | null; committee: string | null },
+  T extends { id: string; name: string | null; committee: string | null; committee_code?: string | null },
 >(rows: T[], conferenceIdsWithAllocations: Set<string>): {
   committees: CanonicalCommitteeRow[];
   conferenceIdToCanonical: Map<string, string>;
@@ -73,7 +83,7 @@ export async function getCommitteeAwardScope(
 ): Promise<CommitteeAwardScope> {
   const { data: row } = await supabase
     .from("conferences")
-    .select("id, event_id, name, committee")
+    .select("id, event_id, name, committee, committee_code")
     .eq("id", conferenceId)
     .maybeSingle();
 
@@ -83,7 +93,7 @@ export async function getCommitteeAwardScope(
 
   const { data: eventRows } = await supabase
     .from("conferences")
-    .select("id, name, committee")
+    .select("id, name, committee, committee_code")
     .eq("event_id", row.event_id);
 
   const group = (eventRows ?? []).filter((c) => committeeTabKey(c) === committeeTabKey(row));

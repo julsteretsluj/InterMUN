@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "judul",
       "googleDocsUrlOptional": "URL Google Dokumen (opsional)",
       "markdownContentOptional": "Konten penurunan harga (opsional)",
-      "create": "Membuat"
+      "create": "Membuat",
+      "glossary": {
+        "title": "Daftar Istilah Agenda MUN",
+        "subtitle": "Terminologi unik yang disesuaikan dengan kode komite Anda dan topik agenda terkini.",
+        "committeeCode": "Kode panitia: {code}",
+        "topicTag": "Topik: {topik}",
+        "sources": {
+          "core": "inti",
+          "committee": "komite",
+          "topic": "topik"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Delegasi",
+            "definition": "Sebuah negara atau tim pengamat yang mewakili satu negara bagian atau entitas dalam komite."
+          },
+          "placard": {
+            "term": "Plakat",
+            "definition": "Tanda negara digunakan untuk meminta dasar, pemungutan suara, dan menandakan mosi prosedural."
+          },
+          "dais": {
+            "term": "Mimbar",
+            "definition": "Memimpin tim yang memoderasi perdebatan, menerapkan prosedur, dan mengatur ketertiban berbicara."
+          },
+          "quorum": {
+            "term": "Kuorum",
+            "definition": "Jumlah minimum delegasi yang diperlukan untuk menjalankan bisnis formal dan pemungutan suara."
+          },
+          "motion": {
+            "term": "Gerakan",
+            "definition": "Usulan formal untuk mengubah alur perdebatan, seperti jenis kaukus atau waktu bicara."
+          },
+          "point_of_order": {
+            "term": "Prosedur menurut aturan",
+            "definition": "Intervensi ketika prosedur diterapkan secara tidak benar berdasarkan peraturan komite."
+          },
+          "moderated_caucus": {
+            "term": "Kaukus yang dimoderasi",
+            "definition": "Segmen debat terstruktur dengan pidato singkat mengenai subtopik tertentu."
+          },
+          "unmoderated_caucus": {
+            "term": "Kaukus yang tidak dimoderasi",
+            "definition": "Periode negosiasi informal dimana para delegasi bergerak bebas untuk menyusun dan menggabungkan ide."
+          },
+          "draft_resolution": {
+            "term": "Draf Resolusi",
+            "definition": "Teks kerja usulan tindakan komite sebelum pemungutan suara akhir dan adopsi."
+          },
+          "amendment": {
+            "term": "Amandemen",
+            "definition": "Perubahan diusulkan untuk menyusun teks, baik ramah atau dipilih sebagai tidak ramah."
+          },
+          "operative_clause": {
+            "term": "Klausul Operatif",
+            "definition": "Klausul bernomor berorientasi tindakan yang menjelaskan apa yang diusulkan komite untuk dilakukan."
+          },
+          "preambulatory_clause": {
+            "term": "Klausul Pembukaan",
+            "definition": "Klausul pengaturan konteks yang mengutip prinsip-prinsip latar belakang, kekhawatiran, dan kerangka kerja sebelumnya."
+          },
+          "right_of_reply": {
+            "term": "Hak Jawab",
+            "definition": "Kesempatan untuk menanggapi pernyataan langsung yang mempengaruhi martabat atau posisi delegasi."
+          },
+          "veto_power": {
+            "term": "Hak Veto",
+            "definition": "kewenangan anggota tetap DK PBB untuk memblokir rancangan resolusi substantif."
+          },
+          "chapter_vii": {
+            "term": "Bab VII",
+            "definition": "Otoritas Piagam PBB tentang ancaman terhadap perdamaian, sanksi, dan tindakan penggunaan kekuatan."
+          },
+          "sanctions_regime": {
+            "term": "Rezim Sanksi",
+            "definition": "Pembatasan terkoordinasi digunakan untuk mempengaruhi perilaku tanpa tindakan militer langsung."
+          },
+          "arms_control": {
+            "term": "Pengendalian Senjata",
+            "definition": "Perjanjian dan sistem verifikasi yang membatasi jenis, jumlah, atau penyebaran senjata."
+          },
+          "non_proliferation": {
+            "term": "Non-Proliferasi",
+            "definition": "Kebijakan untuk mencegah penyebaran kemampuan senjata nuklir, kimia, biologi, atau senjata canggih."
+          },
+          "confidence_building_measures": {
+            "term": "Tindakan Membangun Kepercayaan Diri",
+            "definition": "Transparansi dan alat komunikasi yang mengurangi kesalahpahaman dan risiko konflik."
+          },
+          "universal_periodic_review": {
+            "term": "Tinjauan Berkala Universal",
+            "definition": "Proses tinjauan sejawat di mana setiap negara anggota PBB melaporkan dan menerima rekomendasi hak."
+          },
+          "special_rapporteur": {
+            "term": "Pelapor Khusus",
+            "definition": "Pakar independen yang ditunjuk untuk memantau dan melaporkan isu-isu tematik atau isu-isu hak negara."
+          },
+          "treaty_body": {
+            "term": "Badan Perjanjian",
+            "definition": "Komite ahli yang mengawasi implementasi perjanjian hak asasi manusia tertentu."
+          },
+          "public_health_emergency": {
+            "term": "Darurat Kesehatan Masyarakat",
+            "definition": "Peristiwa wabah serius yang memerlukan respons nasional dan internasional yang terkoordinasi dan mendesak."
+          },
+          "surveillance": {
+            "term": "Pengawasan Epidemiologi",
+            "definition": "Pengumpulan dan analisis data kesehatan secara berkelanjutan untuk mendeteksi dan melacak tren penyakit."
+          },
+          "health_systems": {
+            "term": "Penguatan Sistem Kesehatan",
+            "definition": "Meningkatkan tenaga kerja, pembiayaan, logistik, dan tata kelola untuk pemberian layanan kesehatan yang andal."
+          },
+          "transnational_crime": {
+            "term": "Kejahatan Terorganisir Transnasional",
+            "definition": "Aktivitas kriminal terkoordinasi lintas batas melalui jaringan dan pasar gelap."
+          },
+          "illicit_trafficking": {
+            "term": "Perdagangan Gelap",
+            "definition": "Pergerakan ilegal obat-obatan terlarang, senjata, orang, atau barang melintasi yurisdiksi."
+          },
+          "rule_of_law_capacity": {
+            "term": "Kapasitas Supremasi Hukum",
+            "definition": "Kemampuan kelembagaan sistem peradilan untuk menyelidiki, mengadili, dan melindungi hak secara adil."
+          },
+          "sustainable_development": {
+            "term": "Pembangunan Berkelanjutan",
+            "definition": "Model pertumbuhan menyeimbangkan kemajuan sosial, peluang ekonomi, dan perlindungan lingkungan."
+          },
+          "financing_for_development": {
+            "term": "Pembiayaan untuk Pembangunan",
+            "definition": "Mekanisme pendanaan publik dan swasta yang mendukung prioritas pembangunan jangka panjang."
+          },
+          "policy_coordination": {
+            "term": "Koordinasi Kebijakan",
+            "definition": "Penyelarasan tindakan negara dan lembaga untuk menghindari duplikasi dan meningkatkan dampak kolektif."
+          },
+          "child_protection": {
+            "term": "Perlindungan Anak",
+            "definition": "Tindakan yang mencegah eksploitasi, pelecehan, dan kekerasan terhadap anak di segala situasi."
+          },
+          "education_access": {
+            "term": "Akses Pendidikan",
+            "definition": "Menjamin kesempatan belajar yang inklusif, adil, dan berkesinambungan bagi semua anak."
+          },
+          "humanitarian_response": {
+            "term": "Respon Kemanusiaan",
+            "definition": "Tindakan bantuan cepat untuk mengatasi kebutuhan mendesak dalam situasi krisis dan konflik."
+          },
+          "gender_mainstreaming": {
+            "term": "Pengarusutamaan Gender",
+            "definition": "Mengintegrasikan analisis gender ke dalam desain, implementasi, dan evaluasi kebijakan."
+          },
+          "gender_based_violence": {
+            "term": "Kekerasan Berbasis Gender",
+            "definition": "Kerugian yang ditujukan kepada seseorang berdasarkan identitas gender, peran, atau hubungan kekuasaan yang tidak setara."
+          },
+          "economic_empowerment": {
+            "term": "Pemberdayaan Ekonomi",
+            "definition": "Memperluas akses terhadap pekerjaan layak, keuangan, kepemilikan, dan kekuasaan pengambilan keputusan."
+          },
+          "source_attribution": {
+            "term": "Atribusi Sumber",
+            "definition": "Mengutip asal informasi dengan jelas sehingga klaim dapat diverifikasi dan dikontekstualisasikan."
+          },
+          "verified_reporting": {
+            "term": "Pelaporan Terverifikasi",
+            "definition": "Standar jurnalistik yang memerlukan pembuktian sebelum mempublikasikan fakta yang disengketakan."
+          },
+          "editorial_independence": {
+            "term": "Independensi Editorial",
+            "definition": "Pemisahan keputusan pelaporan dari tekanan politik atau pengaruh pemangku kepentingan."
+          },
+          "climate_mitigation": {
+            "term": "Mitigasi Iklim",
+            "definition": "Tindakan yang mengurangi emisi gas rumah kaca atau meningkatkan pembuangan karbon jangka panjang."
+          },
+          "climate_adaptation": {
+            "term": "Adaptasi Iklim",
+            "definition": "Kebijakan dan investasi yang mengurangi kerentanan terhadap dampak terkait perubahan iklim."
+          },
+          "cyber_norms": {
+            "term": "Norma Siber",
+            "definition": "Harapan bersama terhadap perilaku negara yang bertanggung jawab dalam ranah digital dan siber."
+          },
+          "critical_infrastructure": {
+            "term": "Infrastruktur Kritis",
+            "definition": "Sistem penting seperti listrik, air, kesehatan, dan komunikasi memerlukan ketahanan."
+          },
+          "epidemiology": {
+            "term": "Epidemiologi",
+            "definition": "Studi tentang pola penyakit, penyebab, dan distribusi dalam populasi."
+          },
+          "preparedness_response": {
+            "term": "Kesiapsiagaan dan Respon",
+            "definition": "Perencanaan, koordinasi, dan tindakan lonjakan untuk menahan dan mengelola keadaan darurat."
+          },
+          "non_refoulement": {
+            "term": "Non-Refoulement",
+            "definition": "Prinsip yang melarang pemulangan orang ke tempat dimana mereka menghadapi bahaya serius."
+          },
+          "durable_solutions": {
+            "term": "Solusi Tahan Lama",
+            "definition": "Hasil jangka panjang bagi para pengungsi: kepulangan, integrasi lokal, atau pemukiman kembali."
+          },
+          "nuclear_safeguards": {
+            "term": "Perlindungan Nuklir",
+            "definition": "Langkah-langkah verifikasi untuk memastikan bahan nuklir tidak dialihkan untuk penggunaan senjata."
+          },
+          "counter_terrorism": {
+            "term": "Kontra-Terorisme",
+            "definition": "Langkah-langkah hukum, pencegahan, dan keamanan yang terintegrasi terhadap aktivitas teroris."
+          },
+          "due_process": {
+            "term": "Proses Jatuh Tempo",
+            "definition": "Prosedur hukum yang adil melindungi hak-hak selama penyidikan, penuntutan, dan pemberian sanksi."
+          },
+          "resource_security": {
+            "term": "Keamanan Sumber Daya",
+            "definition": "Akses yang dapat diandalkan terhadap makanan, air, dan energi di bawah tekanan ekonomi dan lingkungan."
+          },
+          "resilience": {
+            "term": "Ketangguhan",
+            "definition": "Kapasitas masyarakat dan lembaga untuk menyerap guncangan dan melakukan pemulihan secara efektif."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Sunting ide",

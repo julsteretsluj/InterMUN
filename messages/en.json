@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "title",
       "googleDocsUrlOptional": "Google Docs URL (optional)",
       "markdownContentOptional": "Markdown content (optional)",
-      "create": "Create"
+      "create": "Create",
+      "glossary": {
+        "title": "MUN Agenda Glossary",
+        "subtitle": "Unique terminology matched to your committee code and current agenda topics.",
+        "committeeCode": "Committee code: {code}",
+        "topicTag": "Topic: {topic}",
+        "sources": {
+          "core": "core",
+          "committee": "committee",
+          "topic": "topic"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Delegation",
+            "definition": "A country or observer team representing one state or entity in committee."
+          },
+          "placard": {
+            "term": "Placard",
+            "definition": "Country sign used to request the floor, vote, and signal procedural motions."
+          },
+          "dais": {
+            "term": "Dais",
+            "definition": "Chairing team that moderates debate, applies procedure, and manages speaking order."
+          },
+          "quorum": {
+            "term": "Quorum",
+            "definition": "Minimum number of delegations required to conduct formal business and votes."
+          },
+          "motion": {
+            "term": "Motion",
+            "definition": "Formal proposal to change the flow of debate, such as caucus type or speaking time."
+          },
+          "point_of_order": {
+            "term": "Point of Order",
+            "definition": "Intervention when procedure is being applied incorrectly under committee rules."
+          },
+          "moderated_caucus": {
+            "term": "Moderated Caucus",
+            "definition": "Structured debate segment with short timed speeches on a defined subtopic."
+          },
+          "unmoderated_caucus": {
+            "term": "Unmoderated Caucus",
+            "definition": "Informal negotiation period where delegates move freely to draft and merge ideas."
+          },
+          "draft_resolution": {
+            "term": "Draft Resolution",
+            "definition": "Working text of proposed committee action before final voting and adoption."
+          },
+          "amendment": {
+            "term": "Amendment",
+            "definition": "Change proposed to draft text, either friendly or voted upon as unfriendly."
+          },
+          "operative_clause": {
+            "term": "Operative Clause",
+            "definition": "Action-oriented numbered clause describing what the committee proposes to do."
+          },
+          "preambulatory_clause": {
+            "term": "Preambulatory Clause",
+            "definition": "Context-setting clause citing background principles, concerns, and prior frameworks."
+          },
+          "right_of_reply": {
+            "term": "Right of Reply",
+            "definition": "Opportunity to respond to a direct statement that affected delegation dignity or position."
+          },
+          "veto_power": {
+            "term": "Veto Power",
+            "definition": "UNSC permanent-member authority to block substantive draft resolutions."
+          },
+          "chapter_vii": {
+            "term": "Chapter VII",
+            "definition": "UN Charter authority on threats to peace, sanctions, and use-of-force measures."
+          },
+          "sanctions_regime": {
+            "term": "Sanctions Regime",
+            "definition": "Coordinated restrictions used to influence behavior without direct military action."
+          },
+          "arms_control": {
+            "term": "Arms Control",
+            "definition": "Agreements and verification systems that limit types, quantities, or deployment of weapons."
+          },
+          "non_proliferation": {
+            "term": "Non-Proliferation",
+            "definition": "Policies to prevent spread of nuclear, chemical, biological, or advanced weapon capabilities."
+          },
+          "confidence_building_measures": {
+            "term": "Confidence-Building Measures",
+            "definition": "Transparency and communication tools that reduce misunderstanding and conflict risk."
+          },
+          "universal_periodic_review": {
+            "term": "Universal Periodic Review",
+            "definition": "Peer-review process where each UN member state reports and receives rights recommendations."
+          },
+          "special_rapporteur": {
+            "term": "Special Rapporteur",
+            "definition": "Independent expert appointed to monitor and report on thematic or country rights issues."
+          },
+          "treaty_body": {
+            "term": "Treaty Body",
+            "definition": "Committee of experts supervising implementation of a specific human-rights treaty."
+          },
+          "public_health_emergency": {
+            "term": "Public Health Emergency",
+            "definition": "Serious outbreak event requiring urgent coordinated national and international response."
+          },
+          "surveillance": {
+            "term": "Epidemiological Surveillance",
+            "definition": "Continuous collection and analysis of health data to detect and track disease trends."
+          },
+          "health_systems": {
+            "term": "Health Systems Strengthening",
+            "definition": "Improving workforce, financing, logistics, and governance for reliable healthcare delivery."
+          },
+          "transnational_crime": {
+            "term": "Transnational Organized Crime",
+            "definition": "Criminal activity coordinated across borders through networks and illicit markets."
+          },
+          "illicit_trafficking": {
+            "term": "Illicit Trafficking",
+            "definition": "Illegal movement of drugs, arms, persons, or goods across jurisdictions."
+          },
+          "rule_of_law_capacity": {
+            "term": "Rule-of-Law Capacity",
+            "definition": "Institutional ability of justice systems to investigate, prosecute, and protect rights fairly."
+          },
+          "sustainable_development": {
+            "term": "Sustainable Development",
+            "definition": "Growth model balancing social progress, economic opportunity, and environmental protection."
+          },
+          "financing_for_development": {
+            "term": "Financing for Development",
+            "definition": "Public and private funding mechanisms that support long-term development priorities."
+          },
+          "policy_coordination": {
+            "term": "Policy Coordination",
+            "definition": "Alignment of state and agency actions to avoid duplication and increase collective impact."
+          },
+          "child_protection": {
+            "term": "Child Protection",
+            "definition": "Measures preventing exploitation, abuse, and violence against children in all settings."
+          },
+          "education_access": {
+            "term": "Education Access",
+            "definition": "Ensuring inclusive, equitable, and continuous learning opportunities for all children."
+          },
+          "humanitarian_response": {
+            "term": "Humanitarian Response",
+            "definition": "Rapid relief actions addressing urgent needs in crises and conflict settings."
+          },
+          "gender_mainstreaming": {
+            "term": "Gender Mainstreaming",
+            "definition": "Integrating gender analysis into policy design, implementation, and evaluation."
+          },
+          "gender_based_violence": {
+            "term": "Gender-Based Violence",
+            "definition": "Harm directed at someone based on gender identity, roles, or unequal power relations."
+          },
+          "economic_empowerment": {
+            "term": "Economic Empowerment",
+            "definition": "Expanding access to decent work, finance, ownership, and decision-making power."
+          },
+          "source_attribution": {
+            "term": "Source Attribution",
+            "definition": "Citing information origin clearly so claims can be verified and contextualized."
+          },
+          "verified_reporting": {
+            "term": "Verified Reporting",
+            "definition": "Journalistic standard requiring corroboration before publishing contested facts."
+          },
+          "editorial_independence": {
+            "term": "Editorial Independence",
+            "definition": "Separation of reporting decisions from political pressure or stakeholder influence."
+          },
+          "climate_mitigation": {
+            "term": "Climate Mitigation",
+            "definition": "Actions that reduce greenhouse-gas emissions or increase long-term carbon removal."
+          },
+          "climate_adaptation": {
+            "term": "Climate Adaptation",
+            "definition": "Policies and investments that reduce vulnerability to climate-related impacts."
+          },
+          "cyber_norms": {
+            "term": "Cyber Norms",
+            "definition": "Shared expectations for responsible state behavior in digital and cyber domains."
+          },
+          "critical_infrastructure": {
+            "term": "Critical Infrastructure",
+            "definition": "Essential systems such as power, water, health, and communications requiring resilience."
+          },
+          "epidemiology": {
+            "term": "Epidemiology",
+            "definition": "Study of disease patterns, causes, and distribution in populations."
+          },
+          "preparedness_response": {
+            "term": "Preparedness and Response",
+            "definition": "Planning, coordination, and surge actions to contain and manage emergencies."
+          },
+          "non_refoulement": {
+            "term": "Non-Refoulement",
+            "definition": "Principle prohibiting return of people to places where they face serious harm."
+          },
+          "durable_solutions": {
+            "term": "Durable Solutions",
+            "definition": "Long-term outcomes for displaced people: return, local integration, or resettlement."
+          },
+          "nuclear_safeguards": {
+            "term": "Nuclear Safeguards",
+            "definition": "Verification measures ensuring nuclear materials are not diverted for weapons use."
+          },
+          "counter_terrorism": {
+            "term": "Counter-Terrorism",
+            "definition": "Integrated legal, preventive, and security measures against terrorist activity."
+          },
+          "due_process": {
+            "term": "Due Process",
+            "definition": "Fair legal procedures protecting rights during investigation, prosecution, and sanctioning."
+          },
+          "resource_security": {
+            "term": "Resource Security",
+            "definition": "Reliable access to food, water, and energy under economic and environmental stress."
+          },
+          "resilience": {
+            "term": "Resilience",
+            "definition": "Capacity of communities and institutions to absorb shocks and recover effectively."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Edit idea",

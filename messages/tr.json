@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "başlık",
       "googleDocsUrlOptional": "Google Dokümanlar URL'si (isteğe bağlı)",
       "markdownContentOptional": "İşaretleme içeriği (isteğe bağlı)",
-      "create": "Yaratmak"
+      "create": "Yaratmak",
+      "glossary": {
+        "title": "MUN Gündemi Sözlüğü",
+        "subtitle": "Komite kurallarınız ve güncel gündem konularınızla eşleşen benzersiz terminoloji.",
+        "committeeCode": "Komite kodu: {code}",
+        "topicTag": "Konu: {konu}",
+        "sources": {
+          "core": "çekirdek",
+          "committee": "komite",
+          "topic": "başlık"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Delegasyon",
+            "definition": "Komitede bir devleti veya birimi temsil eden bir ülke veya gözlemci ekibi."
+          },
+          "placard": {
+            "term": "Pankart",
+            "definition": "Söz istemek, oy vermek ve usul önergelerini bildirmek için kullanılan ülke işareti."
+          },
+          "dais": {
+            "term": "Dais",
+            "definition": "Tartışmayı yöneten, prosedürü uygulayan ve konuşma sırasını yöneten başkanlık ekibi."
+          },
+          "quorum": {
+            "term": "Yeter Sayısı",
+            "definition": "Resmi işleri ve oyları yürütmek için gereken minimum delegasyon sayısı."
+          },
+          "motion": {
+            "term": "Hareket",
+            "definition": "Toplantı türü veya konuşma süresi gibi tartışmanın akışını değiştirmeye yönelik resmi teklif."
+          },
+          "point_of_order": {
+            "term": "Sipariş Noktası",
+            "definition": "Prosedürün komite kurallarına göre yanlış uygulanması durumunda müdahale."
+          },
+          "moderated_caucus": {
+            "term": "Yönetilen Grup Toplantısı",
+            "definition": "Tanımlanmış bir alt konu hakkında kısa süreli konuşmalar içeren yapılandırılmış tartışma bölümü."
+          },
+          "unmoderated_caucus": {
+            "term": "Denetlenmeyen Grup Toplantısı",
+            "definition": "Delegelerin fikirleri taslak haline getirmek ve birleştirmek için serbestçe hareket ettiği resmi olmayan müzakere dönemi."
+          },
+          "draft_resolution": {
+            "term": "Taslak Çözünürlüğü",
+            "definition": "Nihai oylama ve kabul edilmeden önce önerilen komite eyleminin çalışma metni."
+          },
+          "amendment": {
+            "term": "Değişiklik",
+            "definition": "Taslak metinde değişiklik yapılması önerildi; dostane veya düşmanca olarak oylandı."
+          },
+          "operative_clause": {
+            "term": "Geçerli Madde",
+            "definition": "Komitenin ne yapmayı önerdiğini açıklayan eylem odaklı numaralı madde."
+          },
+          "preambulatory_clause": {
+            "term": "Preambulatuar Madde",
+            "definition": "Arka plan ilkelerini, endişeleri ve önceki çerçeveleri belirten bağlam belirleme maddesi."
+          },
+          "right_of_reply": {
+            "term": "Cevap Hakkı",
+            "definition": "Delegasyonun saygınlığını veya konumunu etkileyen doğrudan bir açıklamaya yanıt verme fırsatı."
+          },
+          "veto_power": {
+            "term": "Veto Gücü",
+            "definition": "BMGK daimi üye yetkisi, esaslı karar taslaklarını engelleme yetkisine sahiptir."
+          },
+          "chapter_vii": {
+            "term": "Bölüm VII",
+            "definition": "Barışa yönelik tehditler, yaptırımlar ve güç kullanımı tedbirlerine ilişkin BM Şartı otoritesi."
+          },
+          "sanctions_regime": {
+            "term": "Yaptırım Rejimi",
+            "definition": "Doğrudan askeri eylem olmadan davranışı etkilemek için kullanılan koordineli kısıtlamalar."
+          },
+          "arms_control": {
+            "term": "Silah Kontrolü",
+            "definition": "Silah türlerini, miktarlarını veya konuşlandırılmasını sınırlayan anlaşmalar ve doğrulama sistemleri."
+          },
+          "non_proliferation": {
+            "term": "Nükleer Silahların Yayılmasının Önlenmesi",
+            "definition": "Nükleer, kimyasal, biyolojik veya gelişmiş silah kabiliyetlerinin yayılmasını önlemeye yönelik politikalar."
+          },
+          "confidence_building_measures": {
+            "term": "Güven Artırıcı Önlemler",
+            "definition": "Yanlış anlama ve çatışma riskini azaltan şeffaflık ve iletişim araçları."
+          },
+          "universal_periodic_review": {
+            "term": "Evrensel Periyodik İnceleme",
+            "definition": "Her BM üye devletinin rapor verdiği ve hak önerileri aldığı hakemli süreç."
+          },
+          "special_rapporteur": {
+            "term": "Özel Raportör",
+            "definition": "Tematik veya ülke hakları konularını izlemek ve raporlamak üzere atanan bağımsız uzman."
+          },
+          "treaty_body": {
+            "term": "Anlaşma Organı",
+            "definition": "Belirli bir insan hakları sözleşmesinin uygulanmasını denetleyen uzmanlar komitesi."
+          },
+          "public_health_emergency": {
+            "term": "Halk Sağlığı Acil Durumu",
+            "definition": "Acil koordineli ulusal ve uluslararası müdahaleyi gerektiren ciddi salgın olayı."
+          },
+          "surveillance": {
+            "term": "Epidemiyolojik Sürveyans",
+            "definition": "Hastalık eğilimlerini tespit etmek ve takip etmek için sağlık verilerinin sürekli toplanması ve analizi."
+          },
+          "health_systems": {
+            "term": "Sağlık Sistemlerinin Güçlendirilmesi",
+            "definition": "Güvenilir sağlık hizmeti sunumu için iş gücü, finansman, lojistik ve yönetişimin iyileştirilmesi."
+          },
+          "transnational_crime": {
+            "term": "Sınıraşan Organize Suç",
+            "definition": "Ağlar ve yasa dışı pazarlar aracılığıyla sınırlar ötesinde koordine edilen suç faaliyetleri."
+          },
+          "illicit_trafficking": {
+            "term": "Yasadışı Ticaret",
+            "definition": "Uyuşturucunun, silahların, kişilerin veya malların yargı bölgeleri arasında yasa dışı dolaşımı."
+          },
+          "rule_of_law_capacity": {
+            "term": "Hukukun Üstünlüğü Kapasitesi",
+            "definition": "Adalet sistemlerinin hakları adil bir şekilde soruşturma, kovuşturma ve koruma konusundaki kurumsal yeteneği."
+          },
+          "sustainable_development": {
+            "term": "Sürdürülebilir Kalkınma",
+            "definition": "Sosyal ilerlemeyi, ekonomik fırsatı ve çevre korumayı dengeleyen büyüme modeli."
+          },
+          "financing_for_development": {
+            "term": "Kalkınmanın Finansmanı",
+            "definition": "Uzun vadeli kalkınma önceliklerini destekleyen kamu ve özel finansman mekanizmaları."
+          },
+          "policy_coordination": {
+            "term": "Politika Koordinasyonu",
+            "definition": "Tekrarları önlemek ve kolektif etkiyi artırmak için devlet ve kurum eylemlerinin uyumlu hale getirilmesi."
+          },
+          "child_protection": {
+            "term": "Çocuk Koruma",
+            "definition": "Her ortamda çocuklara yönelik sömürüyü, istismarı ve şiddeti önleyici tedbirler."
+          },
+          "education_access": {
+            "term": "Eğitim Erişimi",
+            "definition": "Tüm çocuklar için kapsayıcı, eşitlikçi ve sürekli öğrenme fırsatlarının sağlanması."
+          },
+          "humanitarian_response": {
+            "term": "İnsani Yardım",
+            "definition": "Kriz ve çatışma ortamlarında acil ihtiyaçları karşılayan hızlı yardım eylemleri."
+          },
+          "gender_mainstreaming": {
+            "term": "Cinsiyet Eşitliği",
+            "definition": "Toplumsal cinsiyet analizinin politika tasarımına, uygulamasına ve değerlendirmesine entegre edilmesi."
+          },
+          "gender_based_violence": {
+            "term": "Cinsiyete Dayalı Şiddet",
+            "definition": "Cinsiyet kimliğine, rollere veya eşit olmayan güç ilişkilerine dayalı olarak birine yönelik zarar verme."
+          },
+          "economic_empowerment": {
+            "term": "Ekonomik Güçlendirme",
+            "definition": "İnsana yakışır işe, finansmana, mülkiyete ve karar alma gücüne erişimin genişletilmesi."
+          },
+          "source_attribution": {
+            "term": "Kaynak İlişkilendirmesi",
+            "definition": "İddiaların doğrulanabilmesi ve bağlamsallaştırılabilmesi için bilgilerin kaynağının açıkça belirtilmesi."
+          },
+          "verified_reporting": {
+            "term": "Doğrulanmış Raporlama",
+            "definition": "Tartışmalı gerçekleri yayınlamadan önce doğrulamayı gerektiren gazetecilik standardı."
+          },
+          "editorial_independence": {
+            "term": "Editoryal Bağımsızlık",
+            "definition": "Raporlama kararlarının siyasi baskıdan veya paydaş etkisinden ayrılması."
+          },
+          "climate_mitigation": {
+            "term": "İklim Azaltımı",
+            "definition": "Sera gazı emisyonlarını azaltan veya uzun vadeli karbon giderimini artıran eylemler."
+          },
+          "climate_adaptation": {
+            "term": "İklime Uyum",
+            "definition": "İklimle ilgili etkilere karşı hassasiyeti azaltan politikalar ve yatırımlar."
+          },
+          "cyber_norms": {
+            "term": "Siber Normlar",
+            "definition": "Dijital ve siber alanlarda sorumlu devlet davranışına ilişkin ortak beklentiler."
+          },
+          "critical_infrastructure": {
+            "term": "Kritik Altyapı",
+            "definition": "Güç, su, sağlık ve iletişim gibi dayanıklılık gerektiren temel sistemler."
+          },
+          "epidemiology": {
+            "term": "Epidemiyoloji",
+            "definition": "Popülasyonlardaki hastalık kalıplarının, nedenlerinin ve dağılımının incelenmesi."
+          },
+          "preparedness_response": {
+            "term": "Hazırlık ve Müdahale",
+            "definition": "Acil durumları kontrol altına almak ve yönetmek için planlama, koordinasyon ve dalgalanma eylemleri."
+          },
+          "non_refoulement": {
+            "term": "Geri Gönderme Yasağı",
+            "definition": "İnsanların ciddi zarara maruz kalacakları yerlere geri dönmesini yasaklayan ilke."
+          },
+          "durable_solutions": {
+            "term": "Dayanıklı Çözümler",
+            "definition": "Yerinden edilmiş kişiler için uzun vadeli sonuçlar: geri dönüş, yerel entegrasyon veya yeniden yerleşim."
+          },
+          "nuclear_safeguards": {
+            "term": "Nükleer Korumalar",
+            "definition": "Nükleer malzemelerin silah kullanımına yönlendirilmemesini sağlayan doğrulama önlemleri."
+          },
+          "counter_terrorism": {
+            "term": "Terörle Mücadele",
+            "definition": "Terörist faaliyetlere karşı entegre yasal, önleyici ve güvenlik tedbirleri."
+          },
+          "due_process": {
+            "term": "Dava Süreci",
+            "definition": "Soruşturma, kovuşturma ve yaptırım sırasında hakları koruyan adil yasal prosedürler."
+          },
+          "resource_security": {
+            "term": "Kaynak Güvenliği",
+            "definition": "Ekonomik ve çevresel stres altında gıdaya, suya ve enerjiye güvenilir erişim."
+          },
+          "resilience": {
+            "term": "Dayanıklılık",
+            "definition": "Toplulukların ve kurumların şokları absorbe etme ve etkili bir şekilde toparlanma kapasitesi."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Fikri düzenle",

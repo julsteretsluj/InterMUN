@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "kichwa",
       "googleDocsUrlOptional": "URL ya Hati za Google (si lazima)",
       "markdownContentOptional": "Maudhui ya alama (hiari)",
-      "create": "Unda"
+      "create": "Unda",
+      "glossary": {
+        "title": "Kamusi ya Agenda ya MUN",
+        "subtitle": "Istilahi za kipekee zinazolingana na msimbo wa kamati yako na mada za ajenda za sasa.",
+        "committeeCode": "Msimbo wa kamati: {code}",
+        "topicTag": "Mada: {mada}",
+        "sources": {
+          "core": "msingi",
+          "committee": "kamati",
+          "topic": "mada"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Ujumbe",
+            "definition": "Nchi au timu ya waangalizi inayowakilisha jimbo au huluki moja katika kamati."
+          },
+          "placard": {
+            "term": "Bango",
+            "definition": "Alama ya nchi inayotumika kuomba nafasi, kupiga kura na kuashiria miondoko ya kiutaratibu."
+          },
+          "dais": {
+            "term": "Dais",
+            "definition": "Timu mwenyekiti anayesimamia mijadala, kutumia utaratibu na kusimamia mpangilio wa kuzungumza."
+          },
+          "quorum": {
+            "term": "Akidi",
+            "definition": "Idadi ya chini zaidi ya wajumbe wanaohitajika kufanya shughuli rasmi na kura."
+          },
+          "motion": {
+            "term": "Mwendo",
+            "definition": "Pendekezo rasmi la kubadilisha mtiririko wa mjadala, kama vile aina ya kikao au wakati wa kuzungumza."
+          },
+          "point_of_order": {
+            "term": "Pointi ya Utaratibu",
+            "definition": "Kuingilia kati wakati utaratibu unatumika kimakosa chini ya kanuni za kamati."
+          },
+          "moderated_caucus": {
+            "term": "Caucus Moderated",
+            "definition": "Sehemu ya mijadala yenye muundo na hotuba fupi zilizopitwa na wakati kwenye mada ndogo iliyobainishwa."
+          },
+          "unmoderated_caucus": {
+            "term": "Caucus Isiyodhibitiwa",
+            "definition": "Kipindi cha mazungumzo yasiyo rasmi ambapo wajumbe husogea kwa uhuru kuandaa na kuunganisha mawazo."
+          },
+          "draft_resolution": {
+            "term": "Rasimu ya Azimio",
+            "definition": "Nakala ya kazi ya hatua iliyopendekezwa ya kamati kabla ya upigaji kura wa mwisho na kupitishwa."
+          },
+          "amendment": {
+            "term": "Marekebisho",
+            "definition": "Mabadiliko yanayopendekezwa kwa maandishi, yawe ya kirafiki au yaliyopigiwa kura kama yasiyofaa."
+          },
+          "operative_clause": {
+            "term": "Kifungu cha Uendeshaji",
+            "definition": "Kifungu chenye namba chenye mwelekeo wa vitendo kinachoelezea kile ambacho kamati inapendekeza kufanya."
+          },
+          "preambulatory_clause": {
+            "term": "Kifungu cha Utangulizi",
+            "definition": "Kifungu cha kuweka muktadha kikinukuu kanuni za usuli, wasiwasi, na mifumo ya awali."
+          },
+          "right_of_reply": {
+            "term": "Haki ya Jibu",
+            "definition": "Fursa ya kujibu taarifa ya moja kwa moja iliyoathiri hadhi au nafasi ya uwakilishi."
+          },
+          "veto_power": {
+            "term": "Nguvu ya Veto",
+            "definition": "Mamlaka ya mwanachama wa kudumu wa UNSC kuzuia rasimu ya maazimio muhimu."
+          },
+          "chapter_vii": {
+            "term": "Sura ya VII",
+            "definition": "Mamlaka ya Mkataba wa Umoja wa Mataifa juu ya vitisho kwa amani, vikwazo, na hatua za matumizi ya nguvu."
+          },
+          "sanctions_regime": {
+            "term": "Utawala wa Vikwazo",
+            "definition": "Vizuizi vilivyoratibiwa vinavyotumika kuathiri tabia bila hatua ya moja kwa moja ya kijeshi."
+          },
+          "arms_control": {
+            "term": "Udhibiti wa Silaha",
+            "definition": "Makubaliano na mifumo ya uthibitishaji ambayo inaweka kikomo aina, idadi, au usambazaji wa silaha."
+          },
+          "non_proliferation": {
+            "term": "Kutoeneza",
+            "definition": "Sera za kuzuia kuenea kwa uwezo wa nyuklia, kemikali, kibayolojia au wa juu wa silaha."
+          },
+          "confidence_building_measures": {
+            "term": "Hatua za Kujenga Imani",
+            "definition": "Vyombo vya uwazi na mawasiliano vinavyopunguza kutokuelewana na hatari ya migogoro."
+          },
+          "universal_periodic_review": {
+            "term": "Uhakiki wa Kipindi wa Jumla",
+            "definition": "Mchakato wa mapitio ya rika ambapo kila nchi mwanachama wa Umoja wa Mataifa inaripoti na kupokea mapendekezo ya haki."
+          },
+          "special_rapporteur": {
+            "term": "Mwandishi Maalum",
+            "definition": "Mtaalamu huru aliyeteuliwa kufuatilia na kutoa ripoti kuhusu masuala ya mada au haki za nchi."
+          },
+          "treaty_body": {
+            "term": "Mwili wa Mkataba",
+            "definition": "Kamati ya wataalam inayosimamia utekelezaji wa mkataba mahususi wa haki za binadamu."
+          },
+          "public_health_emergency": {
+            "term": "Dharura ya Afya ya Umma",
+            "definition": "Tukio kubwa la mlipuko linalohitaji uratibu wa haraka wa kitaifa na kimataifa."
+          },
+          "surveillance": {
+            "term": "Ufuatiliaji wa Epidemiological",
+            "definition": "Ukusanyaji na uchanganuzi endelevu wa data ya afya ili kugundua na kufuatilia mienendo ya magonjwa."
+          },
+          "health_systems": {
+            "term": "Kuimarisha Mifumo ya Afya",
+            "definition": "Kuboresha nguvu kazi, ufadhili, vifaa, na utawala kwa utoaji wa huduma za afya unaotegemewa."
+          },
+          "transnational_crime": {
+            "term": "Uhalifu uliopangwa wa Kimataifa",
+            "definition": "Shughuli za uhalifu zinazoratibiwa katika mipaka kupitia mitandao na masoko haramu."
+          },
+          "illicit_trafficking": {
+            "term": "Usafirishaji Haramu",
+            "definition": "Usafirishaji haramu wa dawa, silaha, watu au bidhaa katika maeneo ya mamlaka."
+          },
+          "rule_of_law_capacity": {
+            "term": "Uwezo wa Utawala wa Sheria",
+            "definition": "Uwezo wa taasisi wa mifumo ya haki kuchunguza, kushtaki na kulinda haki kwa haki."
+          },
+          "sustainable_development": {
+            "term": "Maendeleo Endelevu",
+            "definition": "Kielelezo cha ukuaji kinachosawazisha maendeleo ya kijamii, fursa ya kiuchumi, na ulinzi wa mazingira."
+          },
+          "financing_for_development": {
+            "term": "Ufadhili wa Maendeleo",
+            "definition": "Mifumo ya ufadhili wa umma na ya kibinafsi ambayo inasaidia vipaumbele vya maendeleo ya muda mrefu."
+          },
+          "policy_coordination": {
+            "term": "Uratibu wa Sera",
+            "definition": "Uwiano wa hatua za serikali na wakala ili kuzuia kurudiwa na kuongeza athari ya pamoja."
+          },
+          "child_protection": {
+            "term": "Ulinzi wa Mtoto",
+            "definition": "Hatua za kuzuia unyonyaji, unyanyasaji na unyanyasaji dhidi ya watoto katika mazingira yote."
+          },
+          "education_access": {
+            "term": "Upatikanaji wa Elimu",
+            "definition": "Kuhakikisha fursa jumuishi, za usawa na zinazoendelea za kujifunza kwa watoto wote."
+          },
+          "humanitarian_response": {
+            "term": "Majibu ya kibinadamu",
+            "definition": "Hatua za usaidizi wa haraka zinazoshughulikia mahitaji ya dharura katika mizozo na mazingira ya migogoro."
+          },
+          "gender_mainstreaming": {
+            "term": "Uingizaji wa Jinsia",
+            "definition": "Kuunganisha uchambuzi wa kijinsia katika muundo wa sera, utekelezaji na tathmini."
+          },
+          "gender_based_violence": {
+            "term": "Ukatili wa Kijinsia",
+            "definition": "Madhara yanayoelekezwa kwa mtu kulingana na utambulisho wa kijinsia, majukumu, au uhusiano usio sawa wa mamlaka."
+          },
+          "economic_empowerment": {
+            "term": "Uwezeshaji Kiuchumi",
+            "definition": "Kupanua ufikiaji wa kazi nzuri, fedha, umiliki na uwezo wa kufanya maamuzi."
+          },
+          "source_attribution": {
+            "term": "Chanzo Sifa",
+            "definition": "Inataja asili ya habari kwa uwazi ili madai yaweze kuthibitishwa na kuwekewa muktadha."
+          },
+          "verified_reporting": {
+            "term": "Ripoti Iliyothibitishwa",
+            "definition": "Kiwango cha uandishi wa habari kinachohitaji uthibitisho kabla ya kuchapisha ukweli unaopingwa."
+          },
+          "editorial_independence": {
+            "term": "Uhuru wa Uhariri",
+            "definition": "Kutenganishwa kwa maamuzi ya kuripoti kutoka kwa shinikizo la kisiasa au ushawishi wa wadau."
+          },
+          "climate_mitigation": {
+            "term": "Kupunguza Hali ya Hewa",
+            "definition": "Vitendo vinavyopunguza utoaji wa gesi chafuzi au kuongeza uondoaji wa kaboni wa muda mrefu."
+          },
+          "climate_adaptation": {
+            "term": "Kukabiliana na Hali ya Hewa",
+            "definition": "Sera na uwekezaji unaopunguza uwezekano wa kuathiriwa na athari zinazohusiana na hali ya hewa."
+          },
+          "cyber_norms": {
+            "term": "Kanuni za Cyber",
+            "definition": "Matarajio ya pamoja ya tabia ya serikali inayowajibika katika vikoa vya dijitali na mtandao."
+          },
+          "critical_infrastructure": {
+            "term": "Miundombinu Muhimu",
+            "definition": "Mifumo muhimu kama vile nishati, maji, afya na mawasiliano inayohitaji uthabiti."
+          },
+          "epidemiology": {
+            "term": "Epidemiolojia",
+            "definition": "Utafiti wa mifumo ya magonjwa, sababu, na usambazaji katika idadi ya watu."
+          },
+          "preparedness_response": {
+            "term": "Maandalizi na Majibu",
+            "definition": "Kupanga, kuratibu, na kuongeza hatua za kudhibiti na kudhibiti dharura."
+          },
+          "non_refoulement": {
+            "term": "Kutorudisha",
+            "definition": "Kanuni inayokataza watu kurudi mahali ambapo wanakabiliwa na madhara makubwa."
+          },
+          "durable_solutions": {
+            "term": "Suluhisho za kudumu",
+            "definition": "Matokeo ya muda mrefu kwa watu waliohamishwa makazi yao: kurudi, ushirikiano wa ndani, au makazi mapya."
+          },
+          "nuclear_safeguards": {
+            "term": "Ulinzi wa Nyuklia",
+            "definition": "Hatua za uthibitishaji kuhakikisha nyenzo za nyuklia hazielezwi kwa matumizi ya silaha."
+          },
+          "counter_terrorism": {
+            "term": "Kupambana na Ugaidi",
+            "definition": "Hatua zilizojumuishwa za kisheria, kinga na usalama dhidi ya shughuli za kigaidi."
+          },
+          "due_process": {
+            "term": "Utaratibu Unaolipwa",
+            "definition": "Taratibu za haki za kisheria zinazolinda haki wakati wa uchunguzi, mashtaka, na kuidhinishwa."
+          },
+          "resource_security": {
+            "term": "Usalama wa Rasilimali",
+            "definition": "Upatikanaji wa uhakika wa chakula, maji na nishati chini ya matatizo ya kiuchumi na kimazingira."
+          },
+          "resilience": {
+            "term": "Ustahimilivu",
+            "definition": "Uwezo wa jumuiya na taasisi kuchukua mishtuko na kupona ipasavyo."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Hariri wazo",

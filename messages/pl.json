@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "tytuł",
       "googleDocsUrlOptional": "Adres URL Dokumentów Google (opcjonalnie)",
       "markdownContentOptional": "Treść Markdown (opcjonalnie)",
-      "create": "Tworzyć"
+      "create": "Tworzyć",
+      "glossary": {
+        "title": "Słownik porządku obrad MUN",
+        "subtitle": "Unikalna terminologia dopasowana do kodeksu Twojej komisji i bieżących tematów porządku obrad.",
+        "committeeCode": "Kod komitetu: {code}",
+        "topicTag": "Temat: {temat}",
+        "sources": {
+          "core": "rdzeń",
+          "committee": "komisja",
+          "topic": "temat"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Delegacja",
+            "definition": "Kraj lub zespół obserwatorów reprezentujący w komisji jedno państwo lub podmiot."
+          },
+          "placard": {
+            "term": "Afisz",
+            "definition": "Znak kraju używany do zwracania się o głos, głosowania i sygnalizowania wniosków proceduralnych."
+          },
+          "dais": {
+            "term": "Podium",
+            "definition": "Zespół przewodniczący, który moderuje debatę, stosuje procedury i zarządza kolejnością wystąpień."
+          },
+          "quorum": {
+            "term": "Kworum",
+            "definition": "Minimalna liczba delegacji wymagana do prowadzenia spraw formalnych i głosów."
+          },
+          "motion": {
+            "term": "Ruch",
+            "definition": "Formalna propozycja zmiany przebiegu debaty, np. typu klubu lub czasu wystąpień."
+          },
+          "point_of_order": {
+            "term": "Kwestia formalna",
+            "definition": "Interwencja w przypadku nieprawidłowego stosowania procedury zgodnie z regulaminem komisji."
+          },
+          "moderated_caucus": {
+            "term": "Umiarkowany Klub",
+            "definition": "Ustrukturyzowany segment debaty z krótkimi wystąpieniami na określony temat podrzędny."
+          },
+          "unmoderated_caucus": {
+            "term": "Niemoderowany klub",
+            "definition": "Nieformalny okres negocjacji, podczas którego delegaci swobodnie poruszają się, aby opracowywać i łączyć pomysły."
+          },
+          "draft_resolution": {
+            "term": "Projekt uchwały",
+            "definition": "Tekst roboczy proponowanych działań komisji przed ostatecznym głosowaniem i przyjęciem."
+          },
+          "amendment": {
+            "term": "Poprawka",
+            "definition": "Proponowana zmiana w projekcie tekstu, przyjazna lub uznana za nieprzyjazną."
+          },
+          "operative_clause": {
+            "term": "Klauzula operacyjna",
+            "definition": "Numerowana klauzula zorientowana na działanie, opisująca, co komisja proponuje zrobić."
+          },
+          "preambulatory_clause": {
+            "term": "Klauzula wstępna",
+            "definition": "Klauzula dotycząca ustalania kontekstu, powołująca się na podstawowe zasady, obawy i wcześniejsze ramy."
+          },
+          "right_of_reply": {
+            "term": "Prawo do odpowiedzi",
+            "definition": "Możliwość ustosunkowania się do bezpośredniego oświadczenia, które miało wpływ na godność lub pozycję delegacji."
+          },
+          "veto_power": {
+            "term": "Moc weta",
+            "definition": "Uprawnienie stałego członka Rady Bezpieczeństwa ONZ do blokowania merytorycznych projektów rezolucji."
+          },
+          "chapter_vii": {
+            "term": "Rozdział VII",
+            "definition": "Organ Karty Narodów Zjednoczonych ds. zagrożeń dla pokoju, sankcji i środków użycia siły."
+          },
+          "sanctions_regime": {
+            "term": "System sankcji",
+            "definition": "Skoordynowane ograniczenia stosowane w celu wpływania na zachowanie bez bezpośrednich działań militarnych."
+          },
+          "arms_control": {
+            "term": "Kontrola zbrojeń",
+            "definition": "Porozumienia i systemy weryfikacji ograniczające rodzaje, ilości lub rozmieszczenie broni."
+          },
+          "non_proliferation": {
+            "term": "Nieproliferacja",
+            "definition": "Polityki zapobiegające rozprzestrzenianiu się broni nuklearnej, chemicznej, biologicznej lub zaawansowanej."
+          },
+          "confidence_building_measures": {
+            "term": "Środki budowy zaufania",
+            "definition": "Narzędzia przejrzystości i komunikacji, które zmniejszają ryzyko nieporozumień i konfliktów."
+          },
+          "universal_periodic_review": {
+            "term": "Uniwersalny przegląd okresowy",
+            "definition": "Proces wzajemnej oceny, w ramach którego każde państwo członkowskie ONZ składa sprawozdania i otrzymuje zalecenia dotyczące praw."
+          },
+          "special_rapporteur": {
+            "term": "Specjalny Sprawozdawca",
+            "definition": "Niezależny ekspert powołany do monitorowania i raportowania kwestii tematycznych lub praw krajowych."
+          },
+          "treaty_body": {
+            "term": "Organ Traktatowy",
+            "definition": "Komitet ekspertów nadzorujący wdrażanie konkretnego traktatu dotyczącego praw człowieka."
+          },
+          "public_health_emergency": {
+            "term": "Stan zagrożenia zdrowia publicznego",
+            "definition": "Poważna epidemia wymagająca pilnej skoordynowanej reakcji na poziomie krajowym i międzynarodowym."
+          },
+          "surveillance": {
+            "term": "Nadzór epidemiologiczny",
+            "definition": "Ciągłe gromadzenie i analiza danych zdrowotnych w celu wykrywania i śledzenia trendów chorobowych."
+          },
+          "health_systems": {
+            "term": "Wzmocnienie systemów opieki zdrowotnej",
+            "definition": "Poprawa siły roboczej, finansowania, logistyki i zarządzania w celu zapewnienia niezawodnego świadczenia opieki zdrowotnej."
+          },
+          "transnational_crime": {
+            "term": "Transnarodowa przestępczość zorganizowana",
+            "definition": "Działalność przestępcza koordynowana ponad granicami za pośrednictwem sieci i nielegalnych rynków."
+          },
+          "illicit_trafficking": {
+            "term": "Nielegalny handel",
+            "definition": "Nielegalny przepływ narkotyków, broni, osób lub towarów pomiędzy jurysdykcjami."
+          },
+          "rule_of_law_capacity": {
+            "term": "Potencjał w zakresie praworządności",
+            "definition": "Instytucjonalna zdolność systemów wymiaru sprawiedliwości do sprawiedliwego prowadzenia dochodzeń, ścigania i ochrony praw."
+          },
+          "sustainable_development": {
+            "term": "Zrównoważony rozwój",
+            "definition": "Model wzrostu równoważący postęp społeczny, możliwości gospodarcze i ochronę środowiska."
+          },
+          "financing_for_development": {
+            "term": "Finansowanie Rozwoju",
+            "definition": "Publiczne i prywatne mechanizmy finansowania wspierające długoterminowe priorytety rozwojowe."
+          },
+          "policy_coordination": {
+            "term": "Koordynacja polityki",
+            "definition": "Ujednolicenie działań państwa i agencji, aby uniknąć powielania działań i zwiększyć zbiorowy wpływ."
+          },
+          "child_protection": {
+            "term": "Ochrona dziecka",
+            "definition": "Środki zapobiegające wyzyskowi, znęcaniu się i przemocy wobec dzieci we wszystkich środowiskach."
+          },
+          "education_access": {
+            "term": "Dostęp do edukacji",
+            "definition": "Zapewnienie włączających, sprawiedliwych i ciągłych możliwości uczenia się dla wszystkich dzieci."
+          },
+          "humanitarian_response": {
+            "term": "Odpowiedź humanitarna",
+            "definition": "Szybkie działania pomocowe odpowiadające pilnym potrzebom w sytuacjach kryzysowych i konfliktach."
+          },
+          "gender_mainstreaming": {
+            "term": "Mainstreaming płci",
+            "definition": "Włączanie analizy płci do projektowania, wdrażania i oceny polityki."
+          },
+          "gender_based_violence": {
+            "term": "Przemoc ze względu na płeć",
+            "definition": "Krzywda skierowana przeciwko osobie ze względu na tożsamość płciową, role lub nierówne relacje władzy."
+          },
+          "economic_empowerment": {
+            "term": "Wzmocnienie gospodarcze",
+            "definition": "Zwiększanie dostępu do godnej pracy, finansów, własności i władzy decyzyjnej."
+          },
+          "source_attribution": {
+            "term": "Uznanie źródła",
+            "definition": "Wyraźne powoływanie się na pochodzenie informacji, aby można było zweryfikować twierdzenia i umieścić je w kontekście."
+          },
+          "verified_reporting": {
+            "term": "Zweryfikowane raportowanie",
+            "definition": "Standard dziennikarski wymagający potwierdzenia przed publikacją kwestionowanych faktów."
+          },
+          "editorial_independence": {
+            "term": "Niezależność redakcji",
+            "definition": "Oddzielenie decyzji raportowych od nacisków politycznych czy wpływów interesariuszy."
+          },
+          "climate_mitigation": {
+            "term": "Łagodzenie klimatu",
+            "definition": "Działania redukujące emisję gazów cieplarnianych lub zwiększające długoterminowe usuwanie dwutlenku węgla."
+          },
+          "climate_adaptation": {
+            "term": "Adaptacja klimatyczna",
+            "definition": "Polityki i inwestycje zmniejszające podatność na skutki klimatyczne."
+          },
+          "cyber_norms": {
+            "term": "Normy cybernetyczne",
+            "definition": "Wspólne oczekiwania dotyczące odpowiedzialnego zachowania państwa w domenie cyfrowej i cybernetycznej."
+          },
+          "critical_infrastructure": {
+            "term": "Infrastruktura krytyczna",
+            "definition": "Niezbędne systemy, takie jak energia, woda, opieka zdrowotna i łączność, wymagające odporności."
+          },
+          "epidemiology": {
+            "term": "Epidemiologia",
+            "definition": "Badanie wzorców chorób, ich przyczyn i rozmieszczenia w populacjach."
+          },
+          "preparedness_response": {
+            "term": "Gotowość i reagowanie",
+            "definition": "Planowanie, koordynacja i działania wzrostowe w celu powstrzymania sytuacji awaryjnych i zarządzania nimi."
+          },
+          "non_refoulement": {
+            "term": "Zasada non-refoulement",
+            "definition": "Zasada zakazująca powrotu ludzi do miejsc, w których grozi im poważna krzywda."
+          },
+          "durable_solutions": {
+            "term": "Trwałe rozwiązania",
+            "definition": "Długoterminowe skutki dla wysiedleńców: powrót, integracja lokalna lub przesiedlenie."
+          },
+          "nuclear_safeguards": {
+            "term": "Zabezpieczenia nuklearne",
+            "definition": "Środki weryfikacyjne zapewniające, że materiały jądrowe nie zostaną przeznaczone do wykorzystania w broni."
+          },
+          "counter_terrorism": {
+            "term": "Zwalczanie terroryzmu",
+            "definition": "Zintegrowane środki prawne, zapobiegawcze i zabezpieczające przed działalnością terrorystyczną."
+          },
+          "due_process": {
+            "term": "Należyty proces",
+            "definition": "Uczciwe procedury prawne chroniące prawa podczas dochodzenia, ścigania i nakładania sankcji."
+          },
+          "resource_security": {
+            "term": "Bezpieczeństwo zasobów",
+            "definition": "Niezawodny dostęp do żywności, wody i energii w warunkach presji ekonomicznej i środowiskowej."
+          },
+          "resilience": {
+            "term": "Odporność",
+            "definition": "Zdolność społeczności i instytucji do absorpcji wstrząsów i skutecznej odbudowy."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Edytuj pomysł",

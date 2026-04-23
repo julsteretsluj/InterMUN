@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "tiêu đề",
       "googleDocsUrlOptional": "URL Google Tài liệu (tùy chọn)",
       "markdownContentOptional": "Nội dung đánh dấu (tùy chọn)",
-      "create": "Tạo nên"
+      "create": "Tạo nên",
+      "glossary": {
+        "title": "Bảng chú giải chương trình MUN",
+        "subtitle": "Thuật ngữ độc đáo phù hợp với mã ủy ban của bạn và các chủ đề chương trình nghị sự hiện tại.",
+        "committeeCode": "Mã ủy ban: {code}",
+        "topicTag": "Chủ đề: {chủ đề}",
+        "sources": {
+          "core": "cốt lõi",
+          "committee": "ủy ban",
+          "topic": "đề tài"
+        },
+        "terms": {
+          "delegation": {
+            "term": "Phái đoàn",
+            "definition": "Một quốc gia hoặc nhóm quan sát viên đại diện cho một quốc gia hoặc tổ chức trong ủy ban."
+          },
+          "placard": {
+            "term": "áp phích",
+            "definition": "Ký hiệu quốc gia được sử dụng để yêu cầu phát biểu, biểu quyết và đưa ra các kiến ​​nghị về thủ tục."
+          },
+          "dais": {
+            "term": "Dais",
+            "definition": "Nhóm chủ trì điều hành tranh luận, áp dụng quy trình và quản lý trật tự phát biểu."
+          },
+          "quorum": {
+            "term": "số đại biểu",
+            "definition": "Số lượng đoàn đại biểu tối thiểu cần thiết để tiến hành công việc chính thức và bỏ phiếu."
+          },
+          "motion": {
+            "term": "Cử động",
+            "definition": "Đề xuất chính thức nhằm thay đổi tiến trình tranh luận, chẳng hạn như kiểu họp kín hoặc thời gian phát biểu."
+          },
+          "point_of_order": {
+            "term": "Điểm đặt hàng",
+            "definition": "Can thiệp khi thủ tục được áp dụng không đúng theo quy định của ủy ban."
+          },
+          "moderated_caucus": {
+            "term": "Họp kín được kiểm duyệt",
+            "definition": "Phân đoạn tranh luận có cấu trúc với các bài phát biểu có thời lượng ngắn về một chủ đề phụ được xác định."
+          },
+          "unmoderated_caucus": {
+            "term": "Cuộc họp kín không được kiểm duyệt",
+            "definition": "Giai đoạn đàm phán không chính thức khi các đại biểu tự do soạn thảo và hợp nhất các ý tưởng."
+          },
+          "draft_resolution": {
+            "term": "Dự thảo Nghị quyết",
+            "definition": "Văn bản làm việc về hành động đề xuất của ủy ban trước khi bỏ phiếu cuối cùng và thông qua."
+          },
+          "amendment": {
+            "term": "Sửa đổi",
+            "definition": "Thay đổi được đề xuất đối với văn bản dự thảo, thân thiện hoặc bị bỏ phiếu là không thân thiện."
+          },
+          "operative_clause": {
+            "term": "Điều khoản hoạt động",
+            "definition": "Điều khoản được đánh số theo định hướng hành động mô tả những gì ủy ban đề xuất thực hiện."
+          },
+          "preambulatory_clause": {
+            "term": "Điều khoản mở đầu",
+            "definition": "Mệnh đề thiết lập bối cảnh trích dẫn các nguyên tắc cơ bản, mối quan tâm và các khuôn khổ trước đó."
+          },
+          "right_of_reply": {
+            "term": "Quyền trả lời",
+            "definition": "Cơ hội phản hồi lại một tuyên bố trực tiếp ảnh hưởng đến phẩm giá hoặc vị trí của phái đoàn."
+          },
+          "veto_power": {
+            "term": "Quyền phủ quyết",
+            "definition": "Quyền thành viên thường trực của UNSC ngăn chặn các dự thảo nghị quyết thực chất."
+          },
+          "chapter_vii": {
+            "term": "Chương VII",
+            "definition": "Hiến chương LHQ có thẩm quyền về các mối đe dọa hòa bình, các biện pháp trừng phạt và các biện pháp sử dụng vũ lực."
+          },
+          "sanctions_regime": {
+            "term": "Chế độ trừng phạt",
+            "definition": "Các biện pháp hạn chế phối hợp được sử dụng để tác động đến hành vi mà không có hành động quân sự trực tiếp."
+          },
+          "arms_control": {
+            "term": "Kiểm soát vũ khí",
+            "definition": "Các thỏa thuận và hệ thống xác minh giới hạn loại, số lượng hoặc việc triển khai vũ khí."
+          },
+          "non_proliferation": {
+            "term": "Không phổ biến vũ khí hạt nhân",
+            "definition": "Các chính sách nhằm ngăn chặn sự lan rộng của năng lực vũ khí hạt nhân, hóa học, sinh học hoặc vũ khí tiên tiến."
+          },
+          "confidence_building_measures": {
+            "term": "Các biện pháp xây dựng niềm tin",
+            "definition": "Các công cụ minh bạch và truyền thông giúp giảm thiểu hiểu lầm và nguy cơ xung đột."
+          },
+          "universal_periodic_review": {
+            "term": "Đánh giá định kỳ phổ quát",
+            "definition": "Quá trình đánh giá ngang hàng trong đó mỗi quốc gia thành viên Liên hợp quốc báo cáo và nhận các khuyến nghị về quyền."
+          },
+          "special_rapporteur": {
+            "term": "Báo cáo viên đặc biệt",
+            "definition": "Chuyên gia độc lập được chỉ định để theo dõi và báo cáo về các vấn đề theo chủ đề hoặc quyền quốc gia."
+          },
+          "treaty_body": {
+            "term": "Cơ quan hiệp ước",
+            "definition": "Ủy ban chuyên gia giám sát việc thực hiện một hiệp ước nhân quyền cụ thể."
+          },
+          "public_health_emergency": {
+            "term": "Trường hợp khẩn cấp về sức khỏe cộng đồng",
+            "definition": "Sự kiện bùng phát nghiêm trọng đòi hỏi phải có phản ứng khẩn cấp ở cấp quốc gia và quốc tế."
+          },
+          "surveillance": {
+            "term": "Giám sát dịch tễ học",
+            "definition": "Thu thập và phân tích liên tục dữ liệu sức khỏe để phát hiện và theo dõi xu hướng bệnh tật."
+          },
+          "health_systems": {
+            "term": "Tăng cường hệ thống y tế",
+            "definition": "Cải thiện lực lượng lao động, tài chính, hậu cần và quản trị để cung cấp dịch vụ chăm sóc sức khỏe đáng tin cậy."
+          },
+          "transnational_crime": {
+            "term": "Tội phạm có tổ chức xuyên quốc gia",
+            "definition": "Hoạt động tội phạm phối hợp xuyên biên giới thông qua mạng lưới và thị trường bất hợp pháp."
+          },
+          "illicit_trafficking": {
+            "term": "Buôn bán bất hợp pháp",
+            "definition": "Vận chuyển trái phép ma túy, vũ khí, người hoặc hàng hóa qua các khu vực pháp lý."
+          },
+          "rule_of_law_capacity": {
+            "term": "Năng lực pháp quyền",
+            "definition": "Khả năng thể chế của hệ thống tư pháp để điều tra, truy tố và bảo vệ quyền một cách công bằng."
+          },
+          "sustainable_development": {
+            "term": "Phát triển bền vững",
+            "definition": "Mô hình tăng trưởng cân bằng giữa tiến bộ xã hội, cơ hội kinh tế và bảo vệ môi trường."
+          },
+          "financing_for_development": {
+            "term": "Tài trợ cho phát triển",
+            "definition": "Cơ chế tài trợ công và tư nhân hỗ trợ các ưu tiên phát triển dài hạn."
+          },
+          "policy_coordination": {
+            "term": "Điều phối chính sách",
+            "definition": "Thống nhất các hành động của nhà nước và cơ quan để tránh trùng lặp và tăng tác động tập thể."
+          },
+          "child_protection": {
+            "term": "Bảo vệ trẻ em",
+            "definition": "Các biện pháp ngăn chặn việc bóc lột, lạm dụng và bạo lực đối với trẻ em ở mọi môi trường."
+          },
+          "education_access": {
+            "term": "Tiếp cận giáo dục",
+            "definition": "Đảm bảo cơ hội học tập toàn diện, công bằng và liên tục cho tất cả trẻ em."
+          },
+          "humanitarian_response": {
+            "term": "Phản ứng nhân đạo",
+            "definition": "Các hành động cứu trợ nhanh chóng giải quyết các nhu cầu cấp thiết trong bối cảnh khủng hoảng và xung đột."
+          },
+          "gender_mainstreaming": {
+            "term": "Lồng ghép giới tính",
+            "definition": "Tích hợp phân tích giới vào thiết kế, thực hiện và đánh giá chính sách."
+          },
+          "gender_based_violence": {
+            "term": "Bạo lực trên cơ sở giới",
+            "definition": "Tổn hại nhắm vào ai đó dựa trên bản dạng giới, vai trò hoặc quan hệ quyền lực không bình đẳng."
+          },
+          "economic_empowerment": {
+            "term": "Trao quyền kinh tế",
+            "definition": "Mở rộng khả năng tiếp cận công việc bền vững, tài chính, quyền sở hữu và quyền ra quyết định."
+          },
+          "source_attribution": {
+            "term": "Thuộc tính nguồn",
+            "definition": "Trích dẫn nguồn gốc thông tin rõ ràng để các tuyên bố có thể được xác minh và phù hợp với ngữ cảnh."
+          },
+          "verified_reporting": {
+            "term": "Báo cáo đã được xác minh",
+            "definition": "Tiêu chuẩn báo chí yêu cầu chứng thực trước khi công bố các sự kiện gây tranh cãi."
+          },
+          "editorial_independence": {
+            "term": "Độc lập biên tập",
+            "definition": "Tách biệt các quyết định báo cáo khỏi áp lực chính trị hoặc ảnh hưởng của các bên liên quan."
+          },
+          "climate_mitigation": {
+            "term": "Giảm thiểu khí hậu",
+            "definition": "Các hành động giảm phát thải khí nhà kính hoặc tăng cường loại bỏ carbon dài hạn."
+          },
+          "climate_adaptation": {
+            "term": "Thích ứng khí hậu",
+            "definition": "Các chính sách và đầu tư nhằm giảm thiểu tính dễ bị tổn thương trước các tác động liên quan đến khí hậu."
+          },
+          "cyber_norms": {
+            "term": "Định mức mạng",
+            "definition": "Những kỳ vọng chung về hành vi có trách nhiệm của nhà nước trong lĩnh vực kỹ thuật số và mạng."
+          },
+          "critical_infrastructure": {
+            "term": "Cơ sở hạ tầng quan trọng",
+            "definition": "Các hệ thống thiết yếu như điện, nước, y tế và thông tin liên lạc đòi hỏi khả năng phục hồi."
+          },
+          "epidemiology": {
+            "term": "Dịch tễ học",
+            "definition": "Nghiên cứu về mô hình bệnh tật, nguyên nhân và sự phân bố trong quần thể."
+          },
+          "preparedness_response": {
+            "term": "Sự chuẩn bị và ứng phó",
+            "definition": "Lập kế hoạch, phối hợp và tăng cường các hành động để ngăn chặn và quản lý các trường hợp khẩn cấp."
+          },
+          "non_refoulement": {
+            "term": "Không trả lại",
+            "definition": "Nguyên tắc cấm người dân trở lại nơi mà họ phải đối mặt với tổn hại nghiêm trọng."
+          },
+          "durable_solutions": {
+            "term": "Giải pháp bền vững",
+            "definition": "Kết quả lâu dài đối với người phải di dời: hồi hương, hội nhập địa phương hoặc tái định cư."
+          },
+          "nuclear_safeguards": {
+            "term": "Các biện pháp bảo vệ hạt nhân",
+            "definition": "Các biện pháp xác minh đảm bảo vật liệu hạt nhân không bị chuyển hướng sang sử dụng vũ khí."
+          },
+          "counter_terrorism": {
+            "term": "chống khủng bố",
+            "definition": "Các biện pháp pháp lý, phòng ngừa và an ninh tổng hợp chống lại hoạt động khủng bố."
+          },
+          "due_process": {
+            "term": "Đúng thủ tục",
+            "definition": "Thủ tục pháp lý công bằng bảo vệ quyền lợi trong quá trình điều tra, truy tố và xử phạt."
+          },
+          "resource_security": {
+            "term": "Bảo mật tài nguyên",
+            "definition": "Khả năng tiếp cận đáng tin cậy với thực phẩm, nước và năng lượng trong điều kiện căng thẳng về kinh tế và môi trường."
+          },
+          "resilience": {
+            "term": "khả năng phục hồi",
+            "definition": "Năng lực của cộng đồng và thể chế trong việc hấp thụ các cú sốc và phục hồi một cách hiệu quả."
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "Chỉnh sửa ý tưởng",

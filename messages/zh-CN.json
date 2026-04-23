@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "标题",
       "googleDocsUrlOptional": "Google 文档 URL（可选）",
       "markdownContentOptional": "Markdown 内容（可选）",
-      "create": "创造"
+      "create": "创造",
+      "glossary": {
+        "title": "模拟联合国议程术语表",
+        "subtitle": "与您的委员会代码和当前议程主题相匹配的独特术语。",
+        "committeeCode": "委员会代码：{code}",
+        "topicTag": "主题：{主题}",
+        "sources": {
+          "core": "核",
+          "committee": "委员会",
+          "topic": "话题"
+        },
+        "terms": {
+          "delegation": {
+            "term": "代表团",
+            "definition": "在委员会中代表一个国家或实体的国家或观察员小组。"
+          },
+          "placard": {
+            "term": "标语牌",
+            "definition": "用于请求发言、投票和发出程序性动议的国家标志。"
+          },
+          "dais": {
+            "term": "讲台",
+            "definition": "主持团队主持辩论、应用程序并管理发言顺序。"
+          },
+          "quorum": {
+            "term": "法定人数",
+            "definition": "进行正式事务和投票所需的最低代表团数量。"
+          },
+          "motion": {
+            "term": "运动",
+            "definition": "改变辩论流程的正式提案，例如核心小组类型或发言时间。"
+          },
+          "point_of_order": {
+            "term": "订单问题",
+            "definition": "根据委员会规则错误应用程序时进行干预。"
+          },
+          "moderated_caucus": {
+            "term": "主持的核心会议",
+            "definition": "结构化辩论部分，针对明确的子主题进行短时间演讲。"
+          },
+          "unmoderated_caucus": {
+            "term": "无主持的核心小组",
+            "definition": "非正式谈判阶段，代表们可以自由起草和合并想法。"
+          },
+          "draft_resolution": {
+            "term": "决议草案",
+            "definition": "最终投票和通过之前拟议委员会行动的工作文本。"
+          },
+          "amendment": {
+            "term": "修正案",
+            "definition": "对文本草案提出的修改，要么是友好的，要么被投票为不友好的。"
+          },
+          "operative_clause": {
+            "term": "执行条款",
+            "definition": "以行动为导向的编号条款，描述委员会建议做什么。"
+          },
+          "preambulatory_clause": {
+            "term": "序言条款",
+            "definition": "背景设定条款引用背景原则、关注点和先前的框架。"
+          },
+          "right_of_reply": {
+            "term": "答复权",
+            "definition": "有机会对影响代表团尊严或立场的直接声明做出回应。"
+          },
+          "veto_power": {
+            "term": "否决权",
+            "definition": "联合国安理会常任理事国有权阻止实质性决议草案。"
+          },
+          "chapter_vii": {
+            "term": "第七章",
+            "definition": "《联合国宪章》关于和平威胁、制裁和使用武力措施的权威。"
+          },
+          "sanctions_regime": {
+            "term": "制裁制度",
+            "definition": "协调限制用于在没有直接军事行动的情况下影响行为。"
+          },
+          "arms_control": {
+            "term": "军备控制",
+            "definition": "限制武器类型、数量或部署的协议和核查系统。"
+          },
+          "non_proliferation": {
+            "term": "防扩散",
+            "definition": "防止核、化学、生物或先进武器能力扩散的政策。"
+          },
+          "confidence_building_measures": {
+            "term": "建立信任措施",
+            "definition": "减少误解和冲突风险的透明度和沟通工具。"
+          },
+          "universal_periodic_review": {
+            "term": "普遍定期审议",
+            "definition": "每个联合国成员国报告并接收权利建议的同行评审过程。"
+          },
+          "special_rapporteur": {
+            "term": "特别报告员",
+            "definition": "任命独立专家监测和报告专题或国家权利问题。"
+          },
+          "treaty_body": {
+            "term": "条约机构",
+            "definition": "监督具体人权条约实施情况的专家委员会。"
+          },
+          "public_health_emergency": {
+            "term": "突发公共卫生事件",
+            "definition": "严重的疫情爆发需要国家和国际紧急协调应对。"
+          },
+          "surveillance": {
+            "term": "流行病学监测",
+            "definition": "持续收集和分析健康数据以检测和跟踪疾病趋势。"
+          },
+          "health_systems": {
+            "term": "加强卫生系统",
+            "definition": "改善劳动力、融资、物流和治理，以提供可靠的医疗服务。"
+          },
+          "transnational_crime": {
+            "term": "跨国有组织犯罪",
+            "definition": "通过网络和非法市场跨境协调犯罪活动。"
+          },
+          "illicit_trafficking": {
+            "term": "非法贩运",
+            "definition": "毒品、武器、人员或货物跨司法管辖区非法流动。"
+          },
+          "rule_of_law_capacity": {
+            "term": "法治能力",
+            "definition": "司法系统公平调查、起诉和保护权利的制度能力。"
+          },
+          "sustainable_development": {
+            "term": "可持续发展",
+            "definition": "平衡社会进步、经济机会和环境保护的增长模式。"
+          },
+          "financing_for_development": {
+            "term": "发展融资",
+            "definition": "支持长期发展优先事项的公共和私人融资机制。"
+          },
+          "policy_coordination": {
+            "term": "政策协调",
+            "definition": "协调国家和机构的行动，以避免重复并增加集体影响。"
+          },
+          "child_protection": {
+            "term": "儿童保护",
+            "definition": "防止所有环境下针对儿童的剥削、虐待和暴力行为的措施。"
+          },
+          "education_access": {
+            "term": "教育机会",
+            "definition": "确保所有儿童获得包容、公平和持续的学习机会。"
+          },
+          "humanitarian_response": {
+            "term": "人道主义响应",
+            "definition": "快速救援行动解决危机和冲突环境中的紧急需求。"
+          },
+          "gender_mainstreaming": {
+            "term": "性别主流化",
+            "definition": "将性别分析纳入政策设计、实施和评估。"
+          },
+          "gender_based_violence": {
+            "term": "基于性别的暴力",
+            "definition": "基于性别认同、角色或不平等权力关系而针对某人的伤害。"
+          },
+          "economic_empowerment": {
+            "term": "经济赋权",
+            "definition": "扩大获得体面工作、财务、所有权和决策权的机会。"
+          },
+          "source_attribution": {
+            "term": "来源归属",
+            "definition": "明确引用信息来源，以便可以验证主张并结合上下文。"
+          },
+          "verified_reporting": {
+            "term": "验证报告",
+            "definition": "新闻标准要求在发布有争议的事实之前进行证实。"
+          },
+          "editorial_independence": {
+            "term": "编辑独立性",
+            "definition": "将报告决策与政治压力或利益相关者的影响分开。"
+          },
+          "climate_mitigation": {
+            "term": "减缓气候变化",
+            "definition": "减少温室气体排放或增加长期碳清除的行动。"
+          },
+          "climate_adaptation": {
+            "term": "气候适应",
+            "definition": "减少气候相关影响脆弱性的政策和投资。"
+          },
+          "cyber_norms": {
+            "term": "网络规范",
+            "definition": "对数字和网络领域负责任的国家行为的共同期望。"
+          },
+          "critical_infrastructure": {
+            "term": "关键基础设施",
+            "definition": "电力、水、健康和通信等基本系统需要弹性。"
+          },
+          "epidemiology": {
+            "term": "流行病学",
+            "definition": "研究疾病模式、原因和人群分布。"
+          },
+          "preparedness_response": {
+            "term": "准备和响应",
+            "definition": "规划、协调和紧急行动以遏制和管理紧急情况。"
+          },
+          "non_refoulement": {
+            "term": "不驱回",
+            "definition": "禁止人们返回面临严重伤害的地方的原则。"
+          },
+          "durable_solutions": {
+            "term": "耐用的解决方案",
+            "definition": "流离失所者的长期结果：返回、融入当地社会或重新安置。"
+          },
+          "nuclear_safeguards": {
+            "term": "核保障",
+            "definition": "确保核材料不被转用于武器用途的核查措施。"
+          },
+          "counter_terrorism": {
+            "term": "反恐",
+            "definition": "针对恐怖活动的综合法律、预防和安全措施。"
+          },
+          "due_process": {
+            "term": "正当程序",
+            "definition": "在调查、起诉和制裁过程中，公平的法律程序保护权利。"
+          },
+          "resource_security": {
+            "term": "资源安全",
+            "definition": "在经济和环境压力下可靠地获取食物、水和能源。"
+          },
+          "resilience": {
+            "term": "弹力",
+            "definition": "社区和机构吸收冲击和有效恢复的能力。"
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "编辑想法",

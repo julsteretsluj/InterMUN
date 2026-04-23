@@ -54,7 +54,10 @@ export default async function SmtAwardsPage() {
     { data: nominations, error: nominationsError },
     { data: selectedSingleWinners },
   ] = await Promise.all([
-    supabase.from("conferences").select("id, name, committee, event_id").order("created_at", { ascending: false }),
+    supabase
+      .from("conferences")
+      .select("id, name, committee, committee_code, event_id")
+      .order("created_at", { ascending: false }),
     supabase.from("award_assignments").select("*").order("created_at", { ascending: true }),
     supabase.from("profiles").select("id, name").order("name"),
     supabase

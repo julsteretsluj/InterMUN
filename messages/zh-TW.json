@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "標題",
       "googleDocsUrlOptional": "Google 文件 URL（可選）",
       "markdownContentOptional": "Markdown 內容（可選）",
-      "create": "創造"
+      "create": "創造",
+      "glossary": {
+        "title": "模擬聯合國議程術語表",
+        "subtitle": "與您的委員會代碼和當前議程主題相符的獨特術語。",
+        "committeeCode": "委員會代碼：{code}",
+        "topicTag": "主題：{主題}",
+        "sources": {
+          "core": "核",
+          "committee": "委員會",
+          "topic": "話題"
+        },
+        "terms": {
+          "delegation": {
+            "term": "代表團",
+            "definition": "在委員會中代表一個國家或實體的國家或觀察員小組。"
+          },
+          "placard": {
+            "term": "標語牌",
+            "definition": "用於請求發言、投票和發出程序性動議的國家標誌。"
+          },
+          "dais": {
+            "term": "講台",
+            "definition": "主持團隊主持辯論、應用程式並管理發言順序。"
+          },
+          "quorum": {
+            "term": "法定人數",
+            "definition": "進行正式事務和投票所需的最低代表團數量。"
+          },
+          "motion": {
+            "term": "運動",
+            "definition": "改變辯論流程的正式提案，例如核心小組類型或發言時間。"
+          },
+          "point_of_order": {
+            "term": "訂單問題",
+            "definition": "根據委員會規則錯誤應用程式時進行幹預。"
+          },
+          "moderated_caucus": {
+            "term": "主持的核心會議",
+            "definition": "結構化辯論部分，針對明確的子主題進行短時間演講。"
+          },
+          "unmoderated_caucus": {
+            "term": "無主持的核心小組",
+            "definition": "非正式談判階段，代表可以自由起草和合併想法。"
+          },
+          "draft_resolution": {
+            "term": "決議草案",
+            "definition": "最終投票和通過先前擬議委員會行動的工作文本。"
+          },
+          "amendment": {
+            "term": "修正案",
+            "definition": "對文本草案提出的修改，要么是友好的，要么被投票為不友好的。"
+          },
+          "operative_clause": {
+            "term": "執行條款",
+            "definition": "以行動為導向的編號條款，描述委員會建議該做什麼。"
+          },
+          "preambulatory_clause": {
+            "term": "序言條款",
+            "definition": "背景設定條款引用背景原則、關注點和先前的框架。"
+          },
+          "right_of_reply": {
+            "term": "答覆權",
+            "definition": "有機會對影響代表團尊嚴或立場的直接聲明做出回應。"
+          },
+          "veto_power": {
+            "term": "否決權",
+            "definition": "聯合國安理會常任理事國有權阻止實質決議草案。"
+          },
+          "chapter_vii": {
+            "term": "第七章",
+            "definition": "《聯合國憲章》關於和平威脅、制裁和使用武力措施的權威。"
+          },
+          "sanctions_regime": {
+            "term": "制裁制度",
+            "definition": "協調限制用於在沒有直接軍事行動的情況下影響行為。"
+          },
+          "arms_control": {
+            "term": "軍備控制",
+            "definition": "限制武器類型、數量或部署的協定和核查系統。"
+          },
+          "non_proliferation": {
+            "term": "防擴散",
+            "definition": "防止核武、化學、生物或先進武器能力擴散的政策。"
+          },
+          "confidence_building_measures": {
+            "term": "建立信任措施",
+            "definition": "減少誤解和衝突風險的透明度和溝通工具。"
+          },
+          "universal_periodic_review": {
+            "term": "普遍定期審議",
+            "definition": "每個聯合國成員國報告並接收權利建議的同儕審查過程。"
+          },
+          "special_rapporteur": {
+            "term": "特別報告員",
+            "definition": "任命獨立專家監測和報告專題或國家權利問題。"
+          },
+          "treaty_body": {
+            "term": "條約機構",
+            "definition": "監督具體人權條約實施情形的專家委員會。"
+          },
+          "public_health_emergency": {
+            "term": "突發公共衛生事件",
+            "definition": "嚴重的疫情爆發需要國家和國際緊急協調應對。"
+          },
+          "surveillance": {
+            "term": "流行病學監測",
+            "definition": "持續收集和分析健康數據以檢測和追蹤疾病趨勢。"
+          },
+          "health_systems": {
+            "term": "加強衛生系統",
+            "definition": "改善勞動力、融資、物流和治理，以提供可靠的醫療服務。"
+          },
+          "transnational_crime": {
+            "term": "跨國組織犯罪",
+            "definition": "透過網路和非法市場跨境協調犯罪活動。"
+          },
+          "illicit_trafficking": {
+            "term": "非法販運",
+            "definition": "毒品、武器、人員或貨物跨司法管轄區非法流動。"
+          },
+          "rule_of_law_capacity": {
+            "term": "法治能力",
+            "definition": "司法系統公平調查、起訴和保護權利的製度能力。"
+          },
+          "sustainable_development": {
+            "term": "永續發展",
+            "definition": "平衡社會進步、經濟機會和環境保護的成長模式。"
+          },
+          "financing_for_development": {
+            "term": "發展融資",
+            "definition": "支持長期發展優先事項的公共和私人融資機制。"
+          },
+          "policy_coordination": {
+            "term": "政策協調",
+            "definition": "協調國家和機構的行動，以避免重複並增加集體影響。"
+          },
+          "child_protection": {
+            "term": "兒童保護",
+            "definition": "防止所有環境下針對兒童的剝削、虐待和暴力行為的措施。"
+          },
+          "education_access": {
+            "term": "教育機會",
+            "definition": "確保所有兒童獲得包容、公平和持續的學習機會。"
+          },
+          "humanitarian_response": {
+            "term": "人道主義回應",
+            "definition": "快速救援行動解決危機和衝突環境中的緊急需求。"
+          },
+          "gender_mainstreaming": {
+            "term": "性別主流化",
+            "definition": "將性別分析納入政策設計、實施和評估。"
+          },
+          "gender_based_violence": {
+            "term": "基於性別的暴力",
+            "definition": "基於性別認同、角色或不平等權力關係而針對某人的傷害。"
+          },
+          "economic_empowerment": {
+            "term": "經濟賦權",
+            "definition": "擴大獲得體面工作、財務、所有權和決策權的機會。"
+          },
+          "source_attribution": {
+            "term": "來源歸屬",
+            "definition": "明確引用資訊來源，以便可以驗證主張並結合上下文。"
+          },
+          "verified_reporting": {
+            "term": "驗證報告",
+            "definition": "新聞標準要求在發布有爭議的事實之前進行證實。"
+          },
+          "editorial_independence": {
+            "term": "編輯獨立性",
+            "definition": "將報告決策與政治壓力或利害關係人的影響分開。"
+          },
+          "climate_mitigation": {
+            "term": "減緩氣候變遷",
+            "definition": "減少溫室氣體排放或增加長期碳清除的行動。"
+          },
+          "climate_adaptation": {
+            "term": "氣候適應",
+            "definition": "減少氣候相關影響脆弱性的政策與投資。"
+          },
+          "cyber_norms": {
+            "term": "網路規範",
+            "definition": "對數位和網路領域負責任的國家行為的共同期望。"
+          },
+          "critical_infrastructure": {
+            "term": "關鍵基礎設施",
+            "definition": "電力、水、健康和通訊等基本系統需要彈性。"
+          },
+          "epidemiology": {
+            "term": "流行病學",
+            "definition": "研究疾病模式、原因和人群分佈。"
+          },
+          "preparedness_response": {
+            "term": "準備和回應",
+            "definition": "規劃、協調和緊急行動以遏制和管理緊急情況。"
+          },
+          "non_refoulement": {
+            "term": "不驅回",
+            "definition": "禁止人們返回面臨嚴重傷害的地方的原則。"
+          },
+          "durable_solutions": {
+            "term": "耐用的解決方案",
+            "definition": "流離失所者的長期成果：返回、融入當地社會或重新安置。"
+          },
+          "nuclear_safeguards": {
+            "term": "核子保障",
+            "definition": "確保核子材料不會被轉用於武器用途的核查措施。"
+          },
+          "counter_terrorism": {
+            "term": "反恐",
+            "definition": "針對恐怖活動的綜合法律、預防和安全措施。"
+          },
+          "due_process": {
+            "term": "正當程序",
+            "definition": "在調查、起訴和製裁過程中，公平的法律程序保護權利。"
+          },
+          "resource_security": {
+            "term": "資源安全",
+            "definition": "在經濟和環境壓力下可靠地獲取食物、水和能源。"
+          },
+          "resilience": {
+            "term": "彈性",
+            "definition": "社區和機構吸收衝擊和有效恢復的能力。"
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "編輯想法",

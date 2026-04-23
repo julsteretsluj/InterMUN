@@ -544,7 +544,232 @@
       "titleLowerPlaceholder": "タイトル",
       "googleDocsUrlOptional": "Google ドキュメントの URL (オプション)",
       "markdownContentOptional": "マークダウンコンテンツ (オプション)",
-      "create": "作成する"
+      "create": "作成する",
+      "glossary": {
+        "title": "MUN アジェンダ用語集",
+        "subtitle": "委員会の規約や現在の議題トピックに合わせた独自の用語。",
+        "committeeCode": "委員会コード: {コード}",
+        "topicTag": "トピック: {トピック}",
+        "sources": {
+          "core": "コア",
+          "committee": "委員会",
+          "topic": "トピック"
+        },
+        "terms": {
+          "delegation": {
+            "term": "代表団",
+            "definition": "委員会において 1 つの州または団体を代表する国またはオブザーバー チーム。"
+          },
+          "placard": {
+            "term": "プラカード",
+            "definition": "議場を要求し、投票し、手続き上の動議を合図するために使用される国の標識。"
+          },
+          "dais": {
+            "term": "ダイス",
+            "definition": "討論を司会し、手順を適用し、発言順序を管理する議長チーム。"
+          },
+          "quorum": {
+            "term": "定足数",
+            "definition": "正式な業務と投票を行うために必要な代表団の最小数。"
+          },
+          "motion": {
+            "term": "モーション",
+            "definition": "党員集会の種類や発言時間など、議論の流れを変えるための正式な提案。"
+          },
+          "point_of_order": {
+            "term": "注文時点",
+            "definition": "委員会規則に基づいて手順が誤って適用されている場合の介入。"
+          },
+          "moderated_caucus": {
+            "term": "穏健党員集会",
+            "definition": "定義されたサブトピックに関する短時間のスピーチを含む、構造化されたディベート セグメント。"
+          },
+          "unmoderated_caucus": {
+            "term": "司会なしの党員集会",
+            "definition": "参加者が自由にアイデアを草案したり統合したりできる非公式の交渉期間。"
+          },
+          "draft_resolution": {
+            "term": "決議案",
+            "definition": "最終的な投票と採択の前に提案された委員会の行動の作業テキスト。"
+          },
+          "amendment": {
+            "term": "修正",
+            "definition": "草案テキストに変更が提案され、友好的または非友好的として投票されました。"
+          },
+          "operative_clause": {
+            "term": "運用条項",
+            "definition": "委員会が何を提案するかを説明する行動指向の番号付き条項。"
+          },
+          "preambulatory_clause": {
+            "term": "前出条項",
+            "definition": "背景原則、懸念事項、および以前の枠組みを引用した文脈設定条項。"
+          },
+          "right_of_reply": {
+            "term": "返信する権利",
+            "definition": "代表団の尊厳や地位に影響を与えた直接の発言に応答する機会。"
+          },
+          "veto_power": {
+            "term": "拒否権",
+            "definition": "実質的な決議案を阻止する安保理常任理事国の権限。"
+          },
+          "chapter_vii": {
+            "term": "第 7 章",
+            "definition": "平和に対する脅威、制裁、武力行使に関する国連憲章の権限。"
+          },
+          "sanctions_regime": {
+            "term": "制裁制度",
+            "definition": "直接的な軍事行動をとらずに行動に影響を与えるために使用される調整された制限。"
+          },
+          "arms_control": {
+            "term": "軍備管理",
+            "definition": "武器の種類、数量、配備を制限する協定と検証システム。"
+          },
+          "non_proliferation": {
+            "term": "不拡散",
+            "definition": "核兵器、化学兵器、生物兵器、または先進兵器の能力の拡散を防止する政策。"
+          },
+          "confidence_building_measures": {
+            "term": "信頼醸成措置",
+            "definition": "誤解や紛争のリスクを軽減する透明性とコミュニケーションツール。"
+          },
+          "universal_periodic_review": {
+            "term": "普遍的な定期レビュー",
+            "definition": "各国連加盟国が権利に関する勧告を報告し受け取るピアレビュープロセス。"
+          },
+          "special_rapporteur": {
+            "term": "特別報告者",
+            "definition": "テーマ別または国の権利問題を監視し報告するために任命された独立した専門家。"
+          },
+          "treaty_body": {
+            "term": "条約本体",
+            "definition": "特定の人権条約の履行を監督する専門家委員会。"
+          },
+          "public_health_emergency": {
+            "term": "公衆衛生上の緊急事態",
+            "definition": "緊急に調整された国内および国際的な対応が必要な深刻な流行事象。"
+          },
+          "surveillance": {
+            "term": "疫学監視",
+            "definition": "健康データを継続的に収集および分析して、病気の傾向を検出および追跡します。"
+          },
+          "health_systems": {
+            "term": "医療システムの強化",
+            "definition": "信頼性の高い医療提供のために、労働力、資金調達、物流、ガバナンスを改善します。"
+          },
+          "transnational_crime": {
+            "term": "国際的な組織犯罪",
+            "definition": "ネットワークや違法市場を通じて国境を越えて連携した犯罪活動。"
+          },
+          "illicit_trafficking": {
+            "term": "違法な人身売買",
+            "definition": "管轄区域を越えた麻薬、武器、人、物品の違法な移動。"
+          },
+          "rule_of_law_capacity": {
+            "term": "法の支配能力",
+            "definition": "公正に調査、訴追、権利を保護するための司法制度の制度的能力。"
+          },
+          "sustainable_development": {
+            "term": "持続可能な発展",
+            "definition": "社会の進歩、経済的機会、環境保護のバランスをとった成長モデル。"
+          },
+          "financing_for_development": {
+            "term": "開発のための資金調達",
+            "definition": "長期的な開発優先事項をサポートする公的および民間の資金調達メカニズム。"
+          },
+          "policy_coordination": {
+            "term": "政策調整",
+            "definition": "重複を避け、集団的な影響力を高めるために、州と政府機関の行動を調整する。"
+          },
+          "child_protection": {
+            "term": "児童の保護",
+            "definition": "あらゆる場面での子どもに対する搾取、虐待、暴力を防止するための措置。"
+          },
+          "education_access": {
+            "term": "教育へのアクセス",
+            "definition": "すべての子どもたちに包括的、公平かつ継続的な学習の機会を確保する。"
+          },
+          "humanitarian_response": {
+            "term": "人道的対応",
+            "definition": "危機や紛争状況における緊急のニーズに対処する迅速な救援活動。"
+          },
+          "gender_mainstreaming": {
+            "term": "ジェンダー主流化",
+            "definition": "ジェンダー分析を政策設計、実施、評価に統合する。"
+          },
+          "gender_based_violence": {
+            "term": "ジェンダーに基づく暴力",
+            "definition": "性同一性、役割、または不平等な力関係に基づいて誰かに向けられる危害。"
+          },
+          "economic_empowerment": {
+            "term": "経済的エンパワーメント",
+            "definition": "ディーセント・ワーク、財政、所有権、意思決定権へのアクセスを拡大する。"
+          },
+          "source_attribution": {
+            "term": "出典の帰属",
+            "definition": "情報の出所を明確に引用して、主張を検証し、文脈を説明できるようにします。"
+          },
+          "verified_reporting": {
+            "term": "検証済みレポート",
+            "definition": "争点となっている事実を公表する前に裏付けを要求するジャーナリズムの基準。"
+          },
+          "editorial_independence": {
+            "term": "編集上の独立性",
+            "definition": "報告に関する決定を政治的圧力や利害関係者の影響から分離する。"
+          },
+          "climate_mitigation": {
+            "term": "気候変動の緩和",
+            "definition": "温室効果ガスの排出量を削減したり、長期的な炭素除去を増加させる行動。"
+          },
+          "climate_adaptation": {
+            "term": "気候適応",
+            "definition": "気候関連の影響に対する脆弱性を軽減する政策と投資。"
+          },
+          "cyber_norms": {
+            "term": "サイバー規範",
+            "definition": "デジタルおよびサイバー領域における国家の責任ある行動に対する期待の共有。"
+          },
+          "critical_infrastructure": {
+            "term": "重要なインフラストラクチャ",
+            "definition": "電力、水、医療、通信など、回復力が必要な重要なシステム。"
+          },
+          "epidemiology": {
+            "term": "疫学",
+            "definition": "病気のパターン、原因、集団内の分布の研究。"
+          },
+          "preparedness_response": {
+            "term": "準備と対応",
+            "definition": "緊急事態を封じ込めて管理するための計画、調整、緊急行動。"
+          },
+          "non_refoulement": {
+            "term": "ノンルフールマン",
+            "definition": "重大な危害に直面する場所への人々の帰還を禁止する原則。"
+          },
+          "durable_solutions": {
+            "term": "耐久性のあるソリューション",
+            "definition": "避難民の長期的な成果: 帰還、地域統合、再定住。"
+          },
+          "nuclear_safeguards": {
+            "term": "核保障措置",
+            "definition": "核物質が兵器用途に転用されないことを保証する検証措置。"
+          },
+          "counter_terrorism": {
+            "term": "テロ対策",
+            "definition": "テロ活動に対する統合された法的、予防的、安全対策。"
+          },
+          "due_process": {
+            "term": "適正手続き",
+            "definition": "捜査、訴追、制裁中の権利を保護する公正な法的手続き。"
+          },
+          "resource_security": {
+            "term": "リソースのセキュリティ",
+            "definition": "経済的および環境的ストレス下でも食料、水、エネルギーへの確実なアクセス。"
+          },
+          "resilience": {
+            "term": "回復力",
+            "definition": "ショックを吸収し、効果的に回復するための地域社会や機関の能力。"
+          }
+        }
+      }
     },
     "ideas": {
       "editIdea": "アイデアを編集する",
