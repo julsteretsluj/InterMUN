@@ -179,6 +179,66 @@ type VoteRightsRow = {
   vote_value: "yes" | "no";
   statement: string;
 };
+type EuTimerSlotKey =
+  | (typeof EU_PARLIAMENT_PARTY_KEYS)[number]
+  | "total_time"
+  | "poi_poc_time"
+  | "speaker_time";
+type EuTimerTag =
+  | "moderated caucus"
+  | "unmoderated caucus"
+  | "consultation"
+  | "pois and pocs"
+  | "party timer"
+  | "speaker timer";
+const EU_TIMER_SLOT_ORDER: EuTimerSlotKey[] = [
+  ...EU_PARLIAMENT_PARTY_KEYS,
+  "total_time",
+  "poi_poc_time",
+  "speaker_time",
+];
+const EU_TIMER_TAG_OPTIONS: EuTimerTag[] = [
+  "moderated caucus",
+  "unmoderated caucus",
+  "consultation",
+  "pois and pocs",
+  "party timer",
+  "speaker timer",
+];
+function defaultEuTimerMeta(): Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }> {
+  return {
+    s_and_d: { name: "S&D", tag: "party timer" },
+    epp: { name: "EPP", tag: "party timer" },
+    renew: { name: "Renew", tag: "party timer" },
+    left: { name: "Left", tag: "party timer" },
+    green: { name: "Green", tag: "party timer" },
+    c_and_r: { name: "C&R", tag: "party timer" },
+    patriots: { name: "Patriots", tag: "party timer" },
+    independents: { name: "Independents", tag: "party timer" },
+    total_time: { name: "Total time", tag: "consultation" },
+    poi_poc_time: { name: "POI / POC time", tag: "pois and pocs" },
+    speaker_time: { name: "Speaker time", tag: "speaker timer" },
+  };
+}
+function normalizeEuTimerMeta(
+  raw: unknown
+): Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }> {
+  const base = defaultEuTimerMeta();
+  if (!raw || typeof raw !== "object") return base;
+  const source = raw as Record<string, unknown>;
+  for (const slot of EU_TIMER_SLOT_ORDER) {
+    const slotRaw = source[slot];
+    if (!slotRaw || typeof slotRaw !== "object") continue;
+    const slotObj = slotRaw as Record<string, unknown>;
+    const nextName = typeof slotObj.name === "string" ? slotObj.name.trim() : "";
+    const nextTag = typeof slotObj.tag === "string" ? slotObj.tag : "";
+    if (nextName) base[slot].name = nextName;
+    if ((EU_TIMER_TAG_OPTIONS as string[]).includes(nextTag)) {
+      base[slot].tag = nextTag as EuTimerTag;
+    }
+  }
+  return base;
+}
 type DisciplinaryRow = {
   allocation_id: string;
   voting_rights_lost: boolean;
@@ -461,6 +521,109 @@ export function SessionControlClient({
     motionDraft.consultation_total_minutes,
     procedureProfile,
   ]);
+  const [euTimerSlots, setEuTimerSlots] = useState<Record<EuTimerSlotKey, number>>(() => ({
+    s_and_d: 0,
+    epp: 0,
+    renew: 0,
+    left: 0,
+    green: 0,
+    c_and_r: 0,
+    patriots: 0,
+    independents: 0,
+    total_time: 0,
+    poi_poc_time: 0,
+    speaker_time: 0,
+  }));
+  const [euTimerMeta, setEuTimerMeta] = useState<
+    Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }>
+  >(() => defaultEuTimerMeta());
+  const euTimerSeedRef = useRef("");
+  const euTimerSlotLabel = useCallback((slot: EuTimerSlotKey) => {
+    if (slot in EU_PARTY_LABELS) {
+      return EU_PARTY_LABELS[slot as keyof typeof EU_PARTY_LABELS];
+    }
+    if (slot === "total_time") return "Total time";
+    if (slot === "poi_poc_time") return "POI / POC time";
+    return "Speaker time";
+  }, []);
+  useEffect(() => {
+    if (procedureProfile !== "eu_parliament" || !euPartyAllocationPreview) return;
+    const speakerSeconds =
+      motionDraft.procedure_code === "moderated_caucus"
+        ? Math.max(0, Number(motionDraft.moderated_speaker_seconds) || 0)
+        : 0;
+    const seed = [
+      floorConferenceId,
+      motionDraft.procedure_code,
+      motionDraft.moderated_total_minutes,
+      motionDraft.consultation_total_minutes,
+      motionDraft.moderated_speaker_seconds,
+      euPartyAllocationPreview.speechSeconds,
+      euPartyAllocationPreview.inquirySeconds,
+    ].join("|");
+    if (euTimerSeedRef.current === seed) return;
+    euTimerSeedRef.current = seed;
+    setEuTimerSlots((prev) => {
+      const next = { ...prev };
+      for (const partyKey of EU_PARLIAMENT_PARTY_KEYS) {
+        next[partyKey] =
+          euPartyAllocationPreview.breakdown.find((b) => b.party === partyKey)?.totalSeconds ?? 0;
+      }
+      next.total_time =
+        euPartyAllocationPreview.speechSeconds + euPartyAllocationPreview.inquirySeconds;
+      next.poi_poc_time = euPartyAllocationPreview.inquirySeconds;
+      next.speaker_time = speakerSeconds;
+      return next;
+    });
+  }, [
+    euPartyAllocationPreview,
+    floorConferenceId,
+    motionDraft.consultation_total_minutes,
+    motionDraft.moderated_speaker_seconds,
+    motionDraft.moderated_total_minutes,
+    motionDraft.procedure_code,
+    procedureProfile,
+  ]);
+
+  function setEuTimerSlotSeconds(slot: EuTimerSlotKey, seconds: number) {
+    setEuTimerSlots((prev) => ({ ...prev, [slot]: Math.max(0, seconds) }));
+  }
+
+  function setEuTimerSlotMeta(
+    slot: EuTimerSlotKey,
+    patch: Partial<{ name: string; tag: EuTimerTag }>
+  ) {
+    setEuTimerMeta((prev) => ({
+      ...prev,
+      [slot]: {
+        ...prev[slot],
+        ...patch,
+      },
+    }));
+  }
+
+  function applyEuTimerSlotToFloor(slot: EuTimerSlotKey) {
+    const seconds = Math.max(0, euTimerSlots[slot] ?? 0);
+    if (seconds <= 0) {
+      setMsg("Set a positive time for this EU timer first.");
+      return;
+    }
+    const minutes = Math.floor(seconds / 60);
+    const remainderSeconds = seconds % 60;
+    const slotName = euTimerMeta[slot]?.name?.trim() || euTimerSlotLabel(slot);
+    const slotTag = euTimerMeta[slot]?.tag?.trim() || "party timer";
+    const nextLabel = `${slotName} (${slotTag})`;
+    setTimer((prev) => ({
+      ...prev,
+      floorLabel: nextLabel,
+      leftM: String(minutes),
+      leftS: String(remainderSeconds),
+      totalM: String(minutes),
+      totalS: String(remainderSeconds),
+      perSpeakerMode: slot === "speaker_time" ? true : prev.perSpeakerMode,
+    }));
+    setMsg(`Loaded EU timer: ${nextLabel}. Save timer to publish.`);
+  }
 
   function parseModeratedTiming(description: string | null | undefined): {
     totalMinutes: string;
@@ -926,6 +1089,7 @@ export function SessionControlClient({
         per_speaker_mode?: boolean | null;
         is_running?: boolean | null;
         vote_item_id?: string | null;
+        eu_timer_meta?: unknown;
       };
       const vid = tr.vote_item_id ?? null;
       const floorLabel = (t as { floor_label?: string | null }).floor_label ?? "";
@@ -942,6 +1106,9 @@ export function SessionControlClient({
         boundVoteItemId: vid ?? "",
         floorLabel: floorLabel.trim(),
       });
+      setEuTimerMeta(normalizeEuTimerMeta(tr.eu_timer_meta));
+    } else {
+      setEuTimerMeta(defaultEuTimerMeta());
     }
   }, [supabase, floorConferenceId, rosterConferenceIdList, rosterKey, conferenceId]);
 
@@ -1113,6 +1280,7 @@ export function SessionControlClient({
           per_speaker_mode: timer.perSpeakerMode,
           is_running: timer.isRunning,
           floor_label: timer.floorLabel.trim() || null,
+          eu_timer_meta: euTimerMeta,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "conference_id" }
@@ -3633,6 +3801,96 @@ export function SessionControlClient({
           ) : null}
 
           {timerWorkflowTab === "clock" ? (
+          <div className="space-y-4">
+            {procedureProfile === "eu_parliament" ? (
+              <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
+                <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
+                  EU Parliament timer board (11 timers)
+                </p>
+                <p className="text-xs text-brand-muted">
+                  One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to
+                  copy a row into the live timer fields below.
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {EU_TIMER_SLOT_ORDER.map((slot) => {
+                    const slotSeconds = Math.max(0, euTimerSlots[slot] ?? 0);
+                    const slotMinutes = Math.floor(slotSeconds / 60);
+                    const slotRemainder = slotSeconds % 60;
+                    return (
+                      <div
+                        key={slot}
+                        className="rounded-md border border-brand-navy/15 bg-white/70 px-3 py-2"
+                      >
+                        <p className="text-xs font-medium text-brand-navy">{euTimerSlotLabel(slot)}</p>
+                        <div className="mt-1 grid gap-2 sm:grid-cols-2">
+                          <label className="text-xs text-brand-muted">
+                            Name
+                            <input
+                              className={`mt-1 w-full ${surfaceFieldSm}`}
+                              value={euTimerMeta[slot]?.name ?? ""}
+                              onChange={(e) => setEuTimerSlotMeta(slot, { name: e.target.value })}
+                              placeholder={euTimerSlotLabel(slot)}
+                            />
+                          </label>
+                          <label className="text-xs text-brand-muted">
+                            Tag
+                            <select
+                              className={`mt-1 w-full ${surfaceFieldSm}`}
+                              value={euTimerMeta[slot]?.tag ?? "party timer"}
+                              onChange={(e) =>
+                                setEuTimerSlotMeta(slot, {
+                                  tag: e.target.value as EuTimerTag,
+                                })
+                              }
+                            >
+                              {EU_TIMER_TAG_OPTIONS.map((tag) => (
+                                <option key={tag} value={tag}>
+                                  {tag}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                        </div>
+                        <div className="mt-2 flex flex-wrap items-end gap-2">
+                          <div className="flex items-center gap-1">
+                            <input
+                              className={`w-14 ${surfaceFieldSm}`}
+                              inputMode="numeric"
+                              value={String(slotMinutes)}
+                              onChange={(e) =>
+                                setEuTimerSlotSeconds(slot, parseTime(e.target.value, String(slotRemainder)))
+                              }
+                            />
+                            <span className="text-xs text-brand-muted">m</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <input
+                              className={`w-14 ${surfaceFieldSm}`}
+                              inputMode="numeric"
+                              value={String(slotRemainder)}
+                              onChange={(e) =>
+                                setEuTimerSlotSeconds(slot, parseTime(String(slotMinutes), e.target.value))
+                              }
+                            />
+                            <span className="text-xs text-brand-muted">s</span>
+                          </div>
+                          <button
+                            type="button"
+                            className="ml-auto rounded-md border border-brand-navy/20 bg-white px-2.5 py-1 text-xs font-medium text-brand-navy hover:bg-brand-cream"
+                            onClick={() => applyEuTimerSlotToFloor(slot)}
+                          >
+                            Apply
+                          </button>
+                        </div>
+                        <p className="mt-1 text-[0.65rem] text-brand-muted">
+                          {formatSecondsAsMinSec(slotSeconds)}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
           <div className="flex flex-wrap gap-4 items-end">
             <label className="text-sm text-brand-navy min-w-[10rem]">
               <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>
@@ -3698,6 +3956,7 @@ export function SessionControlClient({
                 {tTimer("advanceSpeakerReset")}
               </button>
             ) : null}
+          </div>
           </div>
           ) : null}
           {timerWorkflowTab === "log" ? (
