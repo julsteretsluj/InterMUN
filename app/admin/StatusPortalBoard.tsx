@@ -4,6 +4,7 @@ import {
   approveAllocationSignupRequestAction,
   rejectAllocationSignupRequestAction,
 } from "@/app/actions/allocationSignup";
+import { getTranslations } from "next-intl/server";
 
 type SignupRequestRow = {
   id: string;
@@ -19,12 +20,13 @@ function firstEmbed<T>(value: T | T[] | null): T | null {
 }
 
 export default async function StatusPortalBoard() {
+  const t = await getTranslations("adminStatusPortal");
   const eventId = await getActiveEventId();
   if (!eventId) {
     return (
       <section className="mun-shell !shadow-none space-y-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">Status portal</h2>
-        <p className="text-sm text-brand-muted">Select an active event first.</p>
+        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+        <p className="text-sm text-brand-muted">{t("selectEventFirst")}</p>
       </section>
     );
   }
@@ -41,8 +43,8 @@ export default async function StatusPortalBoard() {
   if (confIds.length === 0) {
     return (
       <section className="mun-shell !shadow-none space-y-2">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">Status portal</h2>
-        <p className="text-sm text-brand-muted">No committee sessions found for this event yet.</p>
+        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+        <p className="text-sm text-brand-muted">{t("noSessionsYet")}</p>
       </section>
     );
   }
@@ -69,35 +71,39 @@ export default async function StatusPortalBoard() {
     <section className="mun-shell !shadow-none space-y-4">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="font-display text-lg font-semibold text-brand-navy">Status portal (Pipeline)</h2>
+          <h2 className="font-display text-lg font-semibold text-brand-navy">{t("titlePipeline")}</h2>
           <p className="text-sm text-brand-muted">
-            Delegates move from <strong>Pending</strong> to <strong>Confirmed</strong> after approval.
-            Confirming provisions them as a delegate and triggers the Welcome email.
+            {t.rich("intro", {
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
         </div>
         <div className="text-sm text-brand-muted">
-          Pending: <span className="font-semibold text-brand-navy">{pendingRequests.length}</span> · Confirmed:{" "}
-          <span className="font-semibold text-brand-navy">{approvedRequests.length}</span>
+          {t("pending")}: <span className="font-semibold text-brand-navy">{pendingRequests.length}</span>
+          {" · "}
+          {t("confirmed")}: <span className="font-semibold text-brand-navy">{approvedRequests.length}</span>
         </div>
       </div>
 
       <div className="flex gap-4 overflow-x-auto pb-2">
         <div className="min-w-[320px] flex-1 rounded-lg border border-brand-navy/10 bg-brand-paper p-4">
-          <h3 className="font-display text-sm font-semibold text-brand-navy mb-3">Pending</h3>
+          <h3 className="font-display text-sm font-semibold text-brand-navy mb-3">{t("pending")}</h3>
           <div className="space-y-3">
             {pendingRequests.length === 0 ? (
-              <p className="text-sm text-brand-muted">Nothing pending.</p>
+              <p className="text-sm text-brand-muted">{t("nothingPending")}</p>
             ) : (
               pendingRequests.map((req) => {
                 const alloc = firstEmbed(req.allocations);
                 const requester = firstEmbed(req.profiles);
                 const requesterLabel =
                   requester?.name?.trim() || requester?.username?.trim() || req.requested_by.slice(0, 8);
-                const allocLabel = alloc?.country?.trim() || "Unknown allocation";
+                const allocLabel = alloc?.country?.trim() || t("unknownAllocation");
                 return (
                   <div key={req.id} className="rounded-lg border border-brand-navy/10 bg-white/50 p-3">
                     <div className="text-sm font-semibold text-brand-navy">{allocLabel}</div>
-                    <div className="text-xs text-brand-muted mt-1">Requester: {requesterLabel}</div>
+                    <div className="text-xs text-brand-muted mt-1">
+                      {t("requester")} {requesterLabel}
+                    </div>
                     <div className="flex flex-wrap gap-2 mt-3">
                       <form action={approveAllocationSignupRequestAction}>
                         <input type="hidden" name="request_id" value={req.id} />
@@ -105,7 +111,7 @@ export default async function StatusPortalBoard() {
                           type="submit"
                           className="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium hover:opacity-90"
                         >
-                          Confirm
+                          {t("confirm")}
                         </button>
                       </form>
                       <form action={rejectAllocationSignupRequestAction}>
@@ -114,7 +120,7 @@ export default async function StatusPortalBoard() {
                           type="submit"
                           className="text-xs px-2 py-1 rounded border border-red-200 text-red-700 font-medium hover:bg-red-50"
                         >
-                          Reject
+                          {t("reject")}
                         </button>
                       </form>
                     </div>
@@ -126,22 +132,26 @@ export default async function StatusPortalBoard() {
         </div>
 
         <div className="min-w-[320px] flex-1 rounded-lg border border-brand-navy/10 bg-brand-paper p-4">
-          <h3 className="font-display text-sm font-semibold text-brand-navy mb-3">Confirmed</h3>
+          <h3 className="font-display text-sm font-semibold text-brand-navy mb-3">{t("confirmed")}</h3>
           <div className="space-y-3">
             {approvedRequests.length === 0 ? (
-              <p className="text-sm text-brand-muted">No confirmed requests yet.</p>
+              <p className="text-sm text-brand-muted">{t("noConfirmedYet")}</p>
             ) : (
               approvedRequests.map((req) => {
                 const alloc = firstEmbed(req.allocations);
                 const requester = firstEmbed(req.profiles);
                 const requesterLabel =
                   requester?.name?.trim() || requester?.username?.trim() || req.requested_by.slice(0, 8);
-                const allocLabel = alloc?.country?.trim() || "Unknown allocation";
+                const allocLabel = alloc?.country?.trim() || t("unknownAllocation");
                 return (
                   <div key={req.id} className="rounded-lg border border-brand-accent/25 bg-brand-accent/9 p-3">
                     <div className="text-sm font-semibold text-brand-navy">{allocLabel}</div>
-                    <div className="text-xs text-brand-muted mt-1">Requester: {requesterLabel}</div>
-                    <div className="text-[0.68rem] text-brand-navy/85 mt-2 font-medium">Delegate provisioned</div>
+                    <div className="text-xs text-brand-muted mt-1">
+                      {t("requester")} {requesterLabel}
+                    </div>
+                    <div className="text-[0.68rem] text-brand-navy/85 mt-2 font-medium">
+                      {t("delegateProvisioned")}
+                    </div>
                   </div>
                 );
               })

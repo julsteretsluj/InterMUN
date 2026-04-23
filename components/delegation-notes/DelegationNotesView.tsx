@@ -7,12 +7,23 @@ import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
+import { useTranslations } from "next-intl";
 
 type NoteTopic =
   | "bloc forming"
   | "speech pois or pocs"
   | "questions"
   | "informal conversations";
+
+const TOPIC_MSG_KEY: Record<
+  NoteTopic,
+  "blocForming" | "speechPoisOrPocs" | "questions" | "informalConversations"
+> = {
+  "bloc forming": "blocForming",
+  "speech pois or pocs": "speechPoisOrPocs",
+  questions: "questions",
+  "informal conversations": "informalConversations",
+};
 
 type NoteSender =
   | {
@@ -96,7 +107,10 @@ export function DelegationNotesView({
   initialSelectedChairRecipientIds?: string[];
   initialAnyChairRecipient?: boolean;
 }) {
+  const t = useTranslations("delegationNotes");
   const supabase = useMemo(() => createClient(), []);
+
+  const topicLabel = (topicValue: NoteTopic) => t(`topics.${TOPIC_MSG_KEY[topicValue]}`);
 
   const [notes, setNotes] = useState<DelegationNote[]>(initialNotes);
   const [topic, setTopic] = useState<NoteTopic>("bloc forming");
@@ -226,7 +240,7 @@ export function DelegationNotesView({
         }
       }
 
-      const profileNameFallback = myProfileName || "Chair";
+      const profileNameFallback = myProfileName || t("chairFallback");
 
       const mapped: DelegationNote[] = typedNotes.map((n) => {
         const senderAllocationId = n.sender_allocation_id;
@@ -237,7 +251,7 @@ export function DelegationNotesView({
             ? {
                 kind: "allocation",
                 allocationId: senderAllocationId,
-                country: allocationIdToCountry.get(senderAllocationId) ?? "Unknown",
+                country: allocationIdToCountry.get(senderAllocationId) ?? t("unknownCountry"),
               }
             : {
                 kind: "profile",
@@ -245,7 +259,7 @@ export function DelegationNotesView({
                 name:
                   senderProfileId === myUserId
                     ? profileNameFallback
-                    : chairIdToName.get(senderProfileId ?? "") ?? "Chair",
+                    : chairIdToName.get(senderProfileId ?? "") ?? t("chairFallback"),
               };
 
         const recipientRowsForNote = (recipientsByNoteId.get(n.id) ?? []) as Array<{
@@ -261,14 +275,14 @@ export function DelegationNotesView({
             return {
               kind: "allocation",
               allocationId: allocId,
-              country: allocationIdToCountry.get(allocId) ?? "Unknown",
+              country: allocationIdToCountry.get(allocId) ?? t("unknownCountry"),
             };
           }
           if (r.recipient_kind === "chair") {
             return {
               kind: "chair",
               profileId: r.recipient_profile_id ?? "",
-              name: chairIdToName.get(r.recipient_profile_id ?? "") ?? "Chair",
+              name: chairIdToName.get(r.recipient_profile_id ?? "") ?? t("chairFallback"),
             };
           }
           return { kind: "chair_all" };
@@ -341,33 +355,33 @@ export function DelegationNotesView({
     if (sending) return;
     setError(null);
     if (votingProcedureLocked) {
-      setError("Voting procedure is active: note composing is disabled.");
+      setError(t("errors.votingProcedure"));
       return;
     }
     if (!sessionActive) {
-      setError("Notes are disabled while the committee session is not active.");
+      setError(t("errors.sessionInactive"));
       return;
     }
     if (unmoderatedLocked) {
-      setError("Notes are disabled during unmoderated caucus.");
+      setError(t("errors.unmoderated"));
       return;
     }
     if (isSmt && !smtVerified) {
-      setError("Verify with the staff secondary password to send notes to this committee.");
+      setError(t("errors.smtVerify"));
       return;
     }
 
     const trimmed = content.trim();
-    if (!trimmed) return setError("Write the note content first.");
+    if (!trimmed) return setError(t("errors.emptyContent"));
 
     if (selectedAllocationRecipientIds.length === 0 && selectedChairRecipientIds.length === 0) {
-      if (!anyChairRecipient) return setError("Select at least one recipient (delegation or chair).");
+      if (!anyChairRecipient) return setError(t("errors.noRecipients"));
     }
 
     const senderAllo = myAllocationId;
     const senderProfile = senderAllo ? null : isStaffLike ? myUserId : null;
     if (!senderAllo && !senderProfile) {
-      return setError("You need an allocation to send notes (or be a chair).");
+      return setError(t("errors.needAllocation"));
     }
 
     setSending(true);
@@ -426,7 +440,7 @@ export function DelegationNotesView({
         ? {
             kind: "allocation",
             allocationId: senderAllo,
-            country: allocationIdToCountry.get(senderAllo) ?? "Unknown",
+            country: allocationIdToCountry.get(senderAllo) ?? t("unknownCountry"),
           }
         : {
             kind: "profile",
@@ -439,14 +453,14 @@ export function DelegationNotesView({
         recipients.push({
           kind: "allocation",
           allocationId,
-          country: allocationIdToCountry.get(allocationId) ?? "Unknown",
+          country: allocationIdToCountry.get(allocationId) ?? t("unknownCountry"),
         });
       }
       for (const chairId of selectedChairRecipientIds) {
         recipients.push({
           kind: "chair",
           profileId: chairId,
-          name: chairIdToName.get(chairId) ?? "Chair",
+          name: chairIdToName.get(chairId) ?? t("chairFallback"),
         });
       }
       if (anyChairRecipient) recipients.push({ kind: "chair_all" });
@@ -472,7 +486,7 @@ export function DelegationNotesView({
       setSelectedChairRecipientIdsState([]);
       setAnyChairRecipientState(false);
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : "Failed to send note.";
+      const message = e instanceof Error ? e.message : t("errors.sendFailed");
       setError(message);
     } finally {
       setSending(false);
@@ -529,8 +543,8 @@ export function DelegationNotesView({
 
   const recipientSummary = (r: NoteRecipient) => {
     if (r.kind === "allocation") return r.country;
-    if (r.kind === "chair") return r.name || "Chair";
-    return "Any chair";
+    if (r.kind === "chair") return r.name || t("chairFallback");
+    return t("anyChair");
   };
 
   const card = "mun-card";
@@ -542,21 +556,21 @@ export function DelegationNotesView({
   return (
     <div className="space-y-6">
       <div className={card}>
-        <h3 className="mb-3 font-semibold text-brand-navy">Delegation notes</h3>
+        <h3 className="mb-3 font-semibold text-brand-navy">{t("title")}</h3>
 
         <div className="grid grid-cols-1 2xl:grid-cols-3 gap-4">
           <div className="2xl:col-span-2 space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <label className={labelStrong}>Topic</label>
+              <label className={labelStrong}>{t("topicLabel")}</label>
               <select
                 className={`w-full sm:w-auto sm:ml-auto px-3 py-2 text-sm ${field}`}
                 value={topic}
                 onChange={(e) => setTopic(e.target.value as NoteTopic)}
               >
-                <option value="bloc forming">Bloc forming</option>
-                <option value="speech pois or pocs">Speech pois or pocs</option>
-                <option value="questions">Questions</option>
-                <option value="informal conversations">Informal conversations</option>
+                <option value="bloc forming">{topicLabel("bloc forming")}</option>
+                <option value="speech pois or pocs">{topicLabel("speech pois or pocs")}</option>
+                <option value="questions">{topicLabel("questions")}</option>
+                <option value="informal conversations">{topicLabel("informal conversations")}</option>
               </select>
             </div>
 
@@ -568,18 +582,15 @@ export function DelegationNotesView({
                   onChange={(e) => setConcernFlag(e.target.checked)}
                   className="size-4 rounded border-white/25 accent-brand-accent"
                 />
-                <span className="text-brand-navy/90">Concern (auto placeholder)</span>
+                <span className="text-brand-navy/90">{t("concernLabel")}</span>
               </label>
-              <HelpButton title="Concern flag">
-                Use this when your note includes a moderation-sensitive concern. The reader may see a warning,
-                but your note will still send.
-              </HelpButton>
+              <HelpButton title={t("concernHelpTitle")}>{t("concernHelpBody")}</HelpButton>
             </div>
 
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder={canCompose ? "Write your note..." : "Only delegates/chairs/SMT can send notes."}
+              placeholder={canCompose ? t("placeholderCompose") : t("placeholderDisabled")}
               className={`w-full h-28 px-3 py-2 ${field}`}
               disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
             />
@@ -590,14 +601,10 @@ export function DelegationNotesView({
               </p>
             ) : null}
             {!sessionActive ? (
-              <p className={`text-xs ${muted}`}>
-                Notes are available only during active committee sessions.
-              </p>
+              <p className={`text-xs ${muted}`}>{t("sessionOnlyHint")}</p>
             ) : null}
             {unmoderatedLocked ? (
-              <p className={`text-xs ${muted}`}>
-                Notes are disabled during unmoderated caucus.
-              </p>
+              <p className={`text-xs ${muted}`}>{t("unmoderatedHint")}</p>
             ) : null}
 
             <div className="flex gap-3 items-center flex-wrap">
@@ -607,21 +614,18 @@ export function DelegationNotesView({
                 disabled={!canCompose || sending}
                 className="mun-btn-primary disabled:opacity-50"
               >
-                {sending ? "Sending…" : "Send note"}
+                {sending ? t("sending") : t("sendNote")}
               </button>
-              <HelpButton title="Send note">
-                Sends this note to the recipients selected above. It doesn’t prevent sending; it only affects
-                how the reader is warned/flagged.
-              </HelpButton>
+              <HelpButton title={t("sendHelpTitle")}>{t("sendHelpBody")}</HelpButton>
               {isSmt ? (
                 <p className={`text-xs ${muted}`}>
                   {smtVerified ? (
-                    "Viewing full notes (password verified)."
+                    t("smtFullNotes")
                   ) : (
                     <>
-                      Viewing forwarded notes (SMT inbox).{" "}
+                      {t("smtForwardedInbox")}{" "}
                   <Link className="mun-link" href={`/committee-gate?next=${encodeURIComponent(nextPathAfterVerification)}`}>
-                        Enter staff secondary password
+                        {t("enterStaffPassword")}
                       </Link>
                       .
                     </>
@@ -632,10 +636,10 @@ export function DelegationNotesView({
           </div>
 
           <div className="space-y-3">
-            <p className="text-sm font-semibold text-brand-navy">Recipients</p>
+            <p className="text-sm font-semibold text-brand-navy">{t("recipientsTitle")}</p>
 
             <div className="space-y-2">
-              <p className={labelStrong}>Delegations</p>
+              <p className={labelStrong}>{t("delegationsLabel")}</p>
               <div className="mun-inset max-h-40 overflow-y-auto">
                 {allocationOptions.map((a) => {
                   const checked = selectedAllocationRecipientIds.includes(a.id);
@@ -663,16 +667,16 @@ export function DelegationNotesView({
                   );
                 })}
                 {allocationOptions.length === 0 ? (
-                  <p className={`text-xs ${muted} p-1`}>No assigned delegations for this committee.</p>
+                  <p className={`text-xs ${muted} p-1`}>{t("noDelegations")}</p>
                 ) : null}
               </div>
               {isDelegate ? (
-                <p className={`text-xs ${muted}`}>Targets are limited to assigned allocations only.</p>
+                <p className={`text-xs ${muted}`}>{t("delegateTargetsHint")}</p>
               ) : null}
             </div>
 
             <div className="space-y-2">
-              <p className={labelStrong}>Chairs</p>
+              <p className={labelStrong}>{t("chairsLabel")}</p>
 
               <label className="flex cursor-pointer items-center gap-2 px-1 py-1 text-sm text-brand-navy">
                 <input
@@ -686,7 +690,7 @@ export function DelegationNotesView({
                     if (next) setSelectedChairRecipientIdsState([]);
                   }}
                 />
-                <span>Any chair</span>
+                <span>{t("anyChair")}</span>
               </label>
 
               <div className="mun-inset max-h-32 overflow-y-auto">
@@ -715,12 +719,12 @@ export function DelegationNotesView({
                           });
                         }}
                       />
-                      <span className="break-words">{c.name || "Chair"}</span>
+                      <span className="break-words">{c.name || t("chairFallback")}</span>
                     </label>
                   );
                 })}
                 {chairOptions.length === 0 ? (
-                  <p className={`text-xs ${muted} p-1`}>No chair profiles found.</p>
+                  <p className={`text-xs ${muted} p-1`}>{t("noChairs")}</p>
                 ) : null}
               </div>
             </div>
@@ -730,14 +734,12 @@ export function DelegationNotesView({
 
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-semibold text-brand-navy">Notes list</h3>
-          <p className={`text-xs ${muted}`}>
-            {notes.length} note{notes.length === 1 ? "" : "s"}
-          </p>
+          <h3 className="font-semibold text-brand-navy">{t("notesListTitle")}</h3>
+          <p className={`text-xs ${muted}`}>{t("noteCount", { count: notes.length })}</p>
         </div>
 
         {notes.length === 0 ? (
-          <p className={`text-sm ${muted} mt-3`}>No notes yet.</p>
+          <p className={`text-sm ${muted} mt-3`}>{t("emptyList")}</p>
         ) : (
           <div className="mt-3 space-y-3">
             {notes.map((n) => (
@@ -761,9 +763,9 @@ export function DelegationNotesView({
                         )}
                       </span>
                       <span className="text-brand-muted/60">•</span>
-                      <span className="capitalize text-brand-navy">{n.topic}</span>
+                      <span className="text-brand-navy">{topicLabel(n.topic)}</span>
                       {n.forwarded_to_smt ? (
-                        <span className="ml-2 font-semibold text-brand-accent-bright">(forwarded)</span>
+                        <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedBadge")}</span>
                       ) : null}
                     </div>
                     <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">
@@ -771,7 +773,7 @@ export function DelegationNotesView({
                     </div>
                     {noteModerationById.get(n.id)?.length ? (
                       <p className="mt-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
-                        Reader warning: this note may contain inappropriate language.
+                        {t("readerWarning")}
                       </p>
                     ) : null}
                     {n.content.length > 280 ? (
@@ -780,13 +782,13 @@ export function DelegationNotesView({
                         onClick={() => setExpandedNote(n)}
                         className="mt-1 text-xs font-medium text-brand-accent hover:underline"
                       >
-                        View full note
+                        {t("viewFullNote")}
                       </button>
                     ) : null}
                     <div className={`mt-2 text-xs ${muted}`}>
-                      To:{" "}
+                      {t("toLabel")}{" "}
                       {n.recipients.length === 0
-                        ? "—"
+                        ? t("toEmpty")
                         : n.recipients.map(recipientSummary).join(", ")}
                     </div>
                   </div>
@@ -798,7 +800,7 @@ export function DelegationNotesView({
                         onClick={() => void toggleStar(n.id, !n.starred_by_me)}
                         className="mun-btn px-2.5 py-1 text-xs"
                       >
-                        {n.starred_by_me ? "Starred" : "Star"}
+                        {n.starred_by_me ? t("starred") : t("star")}
                       </button>
 
                       <button
@@ -807,7 +809,7 @@ export function DelegationNotesView({
                         disabled={n.forwarded_to_smt}
                         className="mun-btn px-2.5 py-1 text-xs disabled:opacity-50"
                       >
-                        {n.forwarded_to_smt ? "Forwarded" : "Forward to SMT"}
+                        {n.forwarded_to_smt ? t("forwarded") : t("forwardToSmt")}
                       </button>
 
                       <button
@@ -815,7 +817,7 @@ export function DelegationNotesView({
                         onClick={() => void reportNote(n.id)}
                         className="mun-btn-danger px-2.5 py-1 text-xs"
                       >
-                        Report
+                        {t("report")}
                       </button>
                     </div>
                   ) : null}
@@ -830,7 +832,7 @@ export function DelegationNotesView({
           className="fixed inset-0 z-[85] flex items-center justify-center bg-black/55 px-4"
           role="dialog"
           aria-modal="true"
-          aria-label="Full note"
+          aria-label={t("fullNoteAria")}
           onClick={() => setExpandedNote(null)}
         >
           <div
@@ -838,13 +840,13 @@ export function DelegationNotesView({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-3">
-              <h3 className="font-display text-lg font-semibold text-brand-navy">Full note</h3>
+              <h3 className="font-display text-lg font-semibold text-brand-navy">{t("fullNoteTitle")}</h3>
               <button
                 type="button"
                 onClick={() => setExpandedNote(null)}
                 className="text-xs font-medium text-brand-accent hover:underline"
               >
-                Close
+                {t("close")}
               </button>
             </div>
             <div className="mb-2 text-xs text-brand-muted">
@@ -852,11 +854,11 @@ export function DelegationNotesView({
                 ? `${flagEmojiForCountryName(expandedNote.sender.country)} ${expandedNote.sender.country}`
                 : `🏳️ ${expandedNote.sender.name}`}
               {" · "}
-              <span className="capitalize">{expandedNote.topic}</span>
+              <span>{topicLabel(expandedNote.topic)}</span>
             </div>
             {noteModerationById.get(expandedNote.id)?.length ? (
               <p className="mb-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
-                Reader warning: this note may contain inappropriate language.
+                {t("readerWarning")}
               </p>
             ) : null}
             <div className="max-h-[70vh] overflow-y-auto whitespace-pre-wrap break-words text-sm text-brand-navy">

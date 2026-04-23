@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { adminInviteSmtAction, adminSetProfileRoleAction, type AdminUserFormState } from "@/app/actions/adminUsers";
 
 function Flash({ state }: { state: AdminUserFormState | null }) {
@@ -24,48 +25,49 @@ export function AdminDashboardClient({
 }: {
   adminInviteConfigured: boolean;
 }) {
+  const t = useTranslations("adminDashboard");
   const [inviteState, inviteAction, invitePending] = useActionState(adminInviteSmtAction, null);
   const [roleState, roleAction, rolePending] = useActionState(adminSetProfileRoleAction, null);
 
   return (
     <div className="space-y-10">
       <section className="mun-shell !shadow-none">
-        <h2 className="mb-2 font-display text-lg font-semibold text-brand-navy">New conference event</h2>
+        <h2 className="mb-2 font-display text-lg font-semibold text-brand-navy">{t("newEventTitle")}</h2>
         <p className="mb-4 max-w-2xl text-sm text-brand-muted">
-          Creates a conference code (first gate) and the first committee session (second gate). Use{" "}
-          <span className="font-mono text-xs">next=/admin</span> so you return here after setup.
+          {t.rich("newEventBody", {
+            code: (chunks) => <span className="font-mono text-xs">{chunks}</span>,
+          })}
         </p>
         <Link
           href="/conference-setup?next=%2Fadmin"
           className="inline-flex rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-95"
         >
-          Open conference setup
+          {t("openConferenceSetup")}
         </Link>
       </section>
 
       <section className="mun-shell !shadow-none space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">Secretariat (SMT)</h2>
-        <p className="max-w-2xl text-sm text-brand-muted">
-          Invite new SMT accounts by email, or change an existing user to delegate, chair, or SMT.
-          Promoting someone to SMT lets them use the full secretariat dashboard during the event.
-        </p>
+        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("smtTitle")}</h2>
+        <p className="max-w-2xl text-sm text-brand-muted">{t("smtBody")}</p>
 
         {!adminInviteConfigured ? (
           <p className="text-sm text-amber-200/90 bg-amber-950/40 border border-amber-800/50 rounded-lg px-3 py-2">
-            Email invites need <span className="font-mono">SUPABASE_SERVICE_ROLE_KEY</span> on the server.
-            You can still use <strong>Set role</strong> for users who already signed up.
+            {t.rich("inviteNeedsKey", {
+              code: (chunks) => <span className="font-mono">{chunks}</span>,
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
         ) : (
           <form action={inviteAction} className="max-w-md space-y-3">
             <div>
-              <label className="mun-label mb-2 block normal-case">Email</label>
+              <label className="mun-label mb-2 block normal-case">{t("emailLabel")}</label>
               <input
                 name="email"
                 type="email"
                 required
                 autoComplete="email"
                 className="mun-field"
-                placeholder="smt@school.edu"
+                placeholder={t("emailPlaceholderSmt")}
               />
             </div>
             <Flash state={inviteState} />
@@ -74,30 +76,30 @@ export function AdminDashboardClient({
               disabled={invitePending}
               className="mun-btn-primary disabled:opacity-50"
             >
-              {invitePending ? "Sending…" : "Invite as SMT"}
+              {invitePending ? t("inviteSending") : t("inviteSubmit")}
             </button>
           </form>
         )}
 
         <form action={roleAction} className="max-w-md space-y-3 border-t border-white/10 pt-4">
-          <h3 className="text-sm font-medium text-brand-navy">Set role on existing account</h3>
+          <h3 className="text-sm font-medium text-brand-navy">{t("setRoleTitle")}</h3>
           <div>
-            <label className="mun-label mb-2 block normal-case">Email</label>
+            <label className="mun-label mb-2 block normal-case">{t("emailLabel")}</label>
             <input
               name="email"
               type="email"
               required
               autoComplete="email"
               className="mun-field"
-              placeholder="user@school.edu"
+              placeholder={t("emailPlaceholderUser")}
             />
           </div>
           <div>
-            <label className="mun-label mb-2 block normal-case">Role</label>
+            <label className="mun-label mb-2 block normal-case">{t("roleLabel")}</label>
             <select name="role" required className="mun-field">
-              <option value="delegate">Delegate</option>
-              <option value="chair">Chair</option>
-              <option value="smt">SMT (secretariat)</option>
+              <option value="delegate">{t("roleDelegate")}</option>
+              <option value="chair">{t("roleChair")}</option>
+              <option value="smt">{t("roleSmt")}</option>
             </select>
           </div>
           <Flash state={roleState} />
@@ -106,7 +108,7 @@ export function AdminDashboardClient({
             disabled={rolePending}
             className="mun-btn disabled:opacity-50"
           >
-            {rolePending ? "Saving…" : "Save role"}
+            {rolePending ? t("roleSaving") : t("roleSave")}
           </button>
         </form>
       </section>

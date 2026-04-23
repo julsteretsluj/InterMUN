@@ -1,11 +1,13 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { createConferenceAsStaff } from "@/app/actions/conferenceSetup";
 
 type Props = { nextPath: string };
 
 export function ConferenceSetupForm({ nextPath }: Props) {
+  const t = useTranslations("conferenceSetupForm");
   const [state, formAction, pending] = useActionState(
     createConferenceAsStaff,
     null as { error?: string } | null
@@ -60,14 +62,14 @@ export function ConferenceSetupForm({ nextPath }: Props) {
       <input type="hidden" name="next" value={nextPath} />
 
       <div className="rounded-lg border border-brand-accent/30 bg-brand-cream/30 p-4 space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy">Conference (first gate)</p>
+        <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy">{t("sectionConference")}</p>
 
         <div>
           <label
             htmlFor="event-name"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Conference / event name <span className="text-red-600">*</span>
+            {t("eventNameLabel")} <span className="text-red-600">*</span>
           </label>
           <input
             id="event-name"
@@ -77,9 +79,9 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             minLength={2}
             autoComplete="organization"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="e.g. Southeast Asia Model UN 2027"
+            placeholder={t("eventNamePlaceholder")}
           />
-          <p className="text-xs text-brand-muted mt-1">Shown to organisers; delegates see it after they join.</p>
+          <p className="text-xs text-brand-muted mt-1">{t("eventNameHelp")}</p>
         </div>
 
         <div>
@@ -87,7 +89,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             htmlFor="event-code"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Conference code <span className="text-red-600">*</span>
+            {t("eventCodeLabel")} <span className="text-red-600">*</span>
           </label>
           <input
             id="event-code"
@@ -97,24 +99,21 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             minLength={4}
             autoComplete="off"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="e.g. SEAMUNI2027"
+            placeholder={t("eventCodePlaceholder")}
           />
-          <p className="text-xs text-brand-muted mt-1">
-            Everyone enters this first (whole conference). Spaces ignored; stored in capitals. Must be
-            unique.
-          </p>
+          <p className="text-xs text-brand-muted mt-1">{t("eventCodeHelp")}</p>
         </div>
       </div>
 
       <div className="rounded-lg border border-brand-navy/15 bg-black/30 p-4 space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy">First committee (second gate)</p>
+        <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy">{t("sectionFirstCommittee")}</p>
 
         <div>
           <label
             htmlFor="session-name"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Committee session title <span className="text-red-600">*</span>
+            {t("sessionNameLabel")} <span className="text-red-600">*</span>
           </label>
           <input
             id="session-name"
@@ -124,9 +123,9 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             minLength={2}
             autoComplete="off"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="e.g. Topic or agenda title for this committee"
+            placeholder={t("sessionNamePlaceholder")}
           />
-          <p className="text-xs text-brand-muted mt-1">Main heading for this committee in the app header.</p>
+          <p className="text-xs text-brand-muted mt-1">{t("sessionNameHelp")}</p>
         </div>
 
         <div>
@@ -134,7 +133,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             htmlFor="conf-committee"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Chamber / committee label
+            {t("committeeLabel")}
           </label>
           <input
             id="conf-committee"
@@ -143,14 +142,14 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             autoComplete="off"
             list="committee-suggestions"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="e.g. ECOSOC, UNSC"
+            placeholder={t("committeePlaceholder")}
           />
           <datalist id="committee-suggestions">
             {committeeOptions.map((c) => (
               <option key={c} value={c} />
             ))}
           </datalist>
-          <p className="text-xs text-brand-muted mt-1">Optional. Shown next to the session title.</p>
+          <p className="text-xs text-brand-muted mt-1">{t("committeeHelp")}</p>
         </div>
 
         <div>
@@ -158,7 +157,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             htmlFor="conf-tagline"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Tagline or theme
+            {t("taglineLabel")}
           </label>
           <input
             id="conf-tagline"
@@ -166,7 +165,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             type="text"
             autoComplete="off"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="Optional subtitle under the header"
+            placeholder={t("taglinePlaceholder")}
           />
         </div>
 
@@ -175,7 +174,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             htmlFor="committee-code"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Committee code <span className="text-red-600">*</span>
+            {t("committeeCodeLabel")} <span className="text-red-600">*</span>
           </label>
           <input
             id="committee-code"
@@ -185,30 +184,24 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             minLength={6}
             maxLength={6}
             pattern="[A-Za-z0-9]{6}"
-            title="Exactly 6 letters or digits"
+            title={t("committeeCodeTitle")}
             autoComplete="off"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="e.g. ECO741"
+            placeholder={t("committeeCodePlaceholder")}
           />
-          <p className="text-xs text-brand-muted mt-1">
-            Second gate: exactly six letters or digits, unique within this event—typically three letters from
-            the chamber name plus three digits (e.g. ECOSOC → ECO741). Non-alphanumeric characters are
-            stripped when you save.
-          </p>
+          <p className="text-xs text-brand-muted mt-1">{t("committeeCodeHelp")}</p>
         </div>
       </div>
 
       <div className="rounded-lg border border-brand-navy/10 bg-brand-cream/40 p-4 space-y-4">
-        <p className="text-xs font-medium text-brand-navy">Optional: committee password</p>
-        <p className="text-xs text-brand-muted">
-          Delegates confirm allocation + this password after login. Leave blank to skip.
-        </p>
+        <p className="text-xs font-medium text-brand-navy">{t("sectionPassword")}</p>
+        <p className="text-xs text-brand-muted">{t("passwordIntro")}</p>
         <div>
           <label
             htmlFor="conf-pw"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Committee password
+            {t("committeePasswordLabel")}
           </label>
           <input
             id="conf-pw"
@@ -216,7 +209,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             type="password"
             autoComplete="new-password"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="Leave empty to skip"
+            placeholder={t("committeePasswordPlaceholder")}
           />
         </div>
         <div>
@@ -224,7 +217,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             htmlFor="conf-pw2"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
           >
-            Confirm committee password
+            {t("committeePasswordConfirmLabel")}
           </label>
           <input
             id="conf-pw2"
@@ -232,7 +225,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
             type="password"
             autoComplete="new-password"
             className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-            placeholder="Same as above if using a password"
+            placeholder={t("committeePasswordConfirmPlaceholder")}
           />
         </div>
       </div>
@@ -253,7 +246,7 @@ export function ConferenceSetupForm({ nextPath }: Props) {
         disabled={pending}
         className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
       >
-        {pending ? "Creating…" : "Create event + committee and enter"}
+        {pending ? t("creating") : t("submit")}
       </button>
     </form>
   );

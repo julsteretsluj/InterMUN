@@ -220,6 +220,7 @@ export function SessionControlClient({
 }) {
   const tTopics = useTranslations("agendaTopics");
   const tTopicUi = useTranslations("chairTopicTabs");
+  const tTimer = useTranslations("views.session.timerPage");
   const supabase = createClient();
   const rosterConferenceIdList = useMemo(() => {
     if (rosterConferenceIds?.length) return rosterConferenceIds;
@@ -1120,8 +1121,8 @@ export function SessionControlClient({
         error
           ? error.message
           : cappedToTotal
-            ? "Timer saved. Speaker time was longer than total; capped to total."
-            : "Timer saved."
+          ? tTimer("savedCapped")
+          : tTimer("saved")
       );
       if (
         !error &&
@@ -1148,7 +1149,7 @@ export function SessionControlClient({
       return;
     }
     if (!timer.isRunning) {
-      setMsg("Timer is already paused.");
+      setMsg(tTimer("alreadyPaused"));
       return;
     }
     const frozenLeft = Math.max(0, Math.round(liveRemaining));
@@ -1175,7 +1176,7 @@ export function SessionControlClient({
           updated_at: new Date().toISOString(),
         })
         .eq("conference_id", floorConferenceId);
-      setMsg(error ? error.message : "Timer paused for the committee.");
+      setMsg(error ? error.message : tTimer("pausedForCommittee"));
       void refresh();
     });
   }
@@ -1186,7 +1187,7 @@ export function SessionControlClient({
       return;
     }
     if (timer.isRunning) {
-      setMsg("Timer is already running.");
+      setMsg(tTimer("alreadyRunning"));
       return;
     }
     startTransition(async () => {
@@ -1198,7 +1199,7 @@ export function SessionControlClient({
           updated_at: new Date().toISOString(),
         })
         .eq("conference_id", floorConferenceId);
-      setMsg(error ? error.message : "Timer running for the committee.");
+      setMsg(error ? error.message : tTimer("runningForCommittee"));
       void refresh();
     });
   }
@@ -3363,18 +3364,18 @@ export function SessionControlClient({
       {show("timer") ? (
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">Timer</h3>
-          <HelpButton title="Timer controls">
-            Use General floor for overall debate timing, or Motion vote to tie visibility to a specific open vote item.
+          <h3 className="font-display text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
+          <HelpButton title={tTimer("controlsTitle")}>
+            {tTimer("controlsHelp")}
           </HelpButton>
         </div>
         <div className="flex flex-wrap gap-2">
           {(
             [
-              ["setup", "1) Setup"],
-              ["clock", "2) Clock controls"],
-              ["notes", "3) Speech notes"],
-              ["log", "4) Pause log"],
+              ["setup", tTimer("tabSetup")],
+              ["clock", tTimer("tabClock")],
+              ["notes", tTimer("tabNotes")],
+              ["log", tTimer("tabLog")],
             ] as const
           ).map(([id, label]) => {
             const active = timerWorkflowTab === id;
@@ -3400,21 +3401,11 @@ export function SessionControlClient({
           {timerWorkflowTab === "setup" ? (
             <>
           <p className="text-sm text-brand-muted">
-            Choose whether this timer is for <strong className="font-medium text-brand-navy">general floor</strong>{" "}
-            (always visible to delegates) or tied to the{" "}
-            <strong className="font-medium text-brand-navy">motion open for voting</strong> (delegates only see it while
-            that vote is the active item). With <strong className="font-medium text-brand-navy">per-speaker time</strong>{" "}
-            on, the clock stays visible during moderated caucus regardless.{" "}
-            <strong className="font-medium text-brand-navy">Pause clock</strong> /{" "}
-            <strong className="font-medium text-brand-navy">Start clock</strong> freeze or resume the countdown.
-            Set <strong className="font-medium text-brand-navy">Speaker time (remaining)</strong> and{" "}
-            <strong className="font-medium text-brand-navy">Total time</strong> independently, then{" "}
-            <strong className="font-medium text-brand-navy">Save timer</strong>. Presets fill both to the same length;
-            you can edit either field afterward. Pauses are logged with a short reason.
+            {tTimer("setupHelp")}
           </p>
           <div className="flex flex-wrap gap-3 items-end">
             <label className="block text-sm text-brand-navy min-w-[12rem]">
-              <span className={surfaceLabel}>Named preset</span>
+              <span className={surfaceLabel}>{tTimer("namedPreset")}</span>
               <select
                 className={`${surfaceField} mt-1`}
                 value=""
@@ -3433,7 +3424,7 @@ export function SessionControlClient({
                   }
                 }}
               >
-                <option value="">Apply preset…</option>
+                <option value="">{tTimer("applyPreset")}</option>
                 {BUILTIN_TIMER_PRESETS.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.name}
@@ -3442,17 +3433,17 @@ export function SessionControlClient({
               </select>
             </label>
             <label className="block flex-1 min-w-[10rem] text-sm text-brand-navy">
-              <span className={surfaceLabel}>Floor label (delegates)</span>
+              <span className={surfaceLabel}>{tTimer("floorLabelDelegates")}</span>
               <input
                 className={`${surfaceField} mt-1`}
-                placeholder="e.g. GSL 60s"
+                placeholder={tTimer("floorLabelPlaceholder")}
                 value={timer.floorLabel}
                 onChange={(e) => setTimer((t) => ({ ...t, floorLabel: e.target.value }))}
               />
             </label>
           </div>
           <label className="block text-sm text-brand-navy">
-            <span className={surfaceLabel}>Timer purpose</span>
+            <span className={surfaceLabel}>{tTimer("timerPurpose")}</span>
             <select
               className={`${surfaceField} mt-1`}
               value={timer.purpose}
@@ -3465,29 +3456,29 @@ export function SessionControlClient({
                 }));
               }}
             >
-              <option value="general_floor">General debate / floor (not tied to a vote)</option>
-              <option value="motion_vote">Open motion — timer only while that vote is active on the floor</option>
+              <option value="general_floor">{tTimer("purposeGeneralFloor")}</option>
+              <option value="motion_vote">{tTimer("purposeMotionVote")}</option>
             </select>
           </label>
           {timer.purpose === "motion_vote" ? (
             <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>Open motion (must be open for voting)</span>
+              <span className={surfaceLabel}>{tTimer("openMotionForVoting")}</span>
               <select
                 className={`${surfaceField} mt-1`}
                 value={timer.boundVoteItemId}
                 onChange={(e) => setTimer((t) => ({ ...t, boundVoteItemId: e.target.value }))}
               >
-                <option value="">Select motion…</option>
+                <option value="">{tTimer("selectMotion")}</option>
                 {openVotingMotions.map((m) => (
                   <option key={m.id} value={m.id}>
-                    {m.title?.trim() || "Untitled"} · {m.vote_type}
+                    {m.title?.trim() || tTimer("untitled")} · {m.vote_type}
                     {m.procedure_code ? ` (${m.procedure_code})` : ""}
                   </option>
                 ))}
               </select>
               {openVotingMotions.length === 0 ? (
                 <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
-                  No motion is open for voting. Open a vote first, or switch purpose to general floor.
+                  {tTimer("noOpenMotionWarning")}
                 </p>
               ) : null}
             </label>
@@ -3497,17 +3488,17 @@ export function SessionControlClient({
           {timerWorkflowTab === "clock" ? (
             <>
           <p className="text-sm text-brand-navy">
-            <span className={surfaceLabel}>Clock</span>{" "}
-            <span className="font-medium">{timer.isRunning ? "Running" : "Paused"}</span>
+            <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
+            <span className="font-medium">{timer.isRunning ? tTimer("running") : tTimer("paused")}</span>
             {!liveTimerRow ? (
-              <span className="text-brand-muted font-normal"> — save the timer to enable pause/start.</span>
+              <span className="text-brand-muted font-normal"> — {tTimer("saveToEnablePauseStart")}</span>
             ) : null}
           </p>
           <label className="block text-sm text-brand-navy">
-            <span className={surfaceLabel}>Pause reason (logged)</span>
+            <span className={surfaceLabel}>{tTimer("pauseReasonLogged")}</span>
             <input
               className={`${surfaceField} mt-1`}
-              placeholder="e.g. Point of order, tech issue, unmoderated caucus…"
+              placeholder={tTimer("pauseReasonPlaceholder")}
               value={pauseReasonDraft}
               onChange={(e) => setPauseReasonDraft(e.target.value)}
             />
@@ -3520,7 +3511,7 @@ export function SessionControlClient({
               className="inline-flex items-center gap-2 rounded-lg border border-brand-navy/20 bg-white px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream disabled:opacity-50"
             >
               <Pause className="h-4 w-4 shrink-0" aria-hidden />
-              Pause clock
+              {tTimer("pauseClock")}
             </button>
             <button
               type="button"
@@ -3529,7 +3520,7 @@ export function SessionControlClient({
               className="inline-flex items-center gap-2 rounded-lg border border-brand-navy/20 bg-white px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream disabled:opacity-50"
             >
               <Play className="h-4 w-4 shrink-0" aria-hidden />
-              Start clock
+              {tTimer("startClock")}
             </button>
           </div>
           <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
@@ -3540,17 +3531,15 @@ export function SessionControlClient({
               onChange={(e) => setTimer((t) => ({ ...t, perSpeakerMode: e.target.checked }))}
             />
             <span>
-              <span className="font-medium">Per-speaker time (moderated caucus)</span>
+              <span className="font-medium">{tTimer("perSpeakerTitle")}</span>
               <span className="block text-brand-muted text-xs mt-0.5">
-                Set <strong className="font-medium text-brand-navy/90">Total time</strong> as the per-speaker cap and{" "}
-                <strong className="font-medium text-brand-navy/90">Speaker time</strong> as time remaining; Advance moves
-                to the next speaker and resets remaining to the cap.
+                {tTimer("perSpeakerHelp")}
               </span>
             </span>
           </label>
           <div className="grid sm:grid-cols-2 gap-3">
             <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>Current speaker</span>
+              <span className={surfaceLabel}>{tTimer("currentSpeaker")}</span>
               <input
                 className={surfaceField}
                 value={timer.current}
@@ -3558,7 +3547,7 @@ export function SessionControlClient({
               />
             </label>
             <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>Next speaker</span>
+              <span className={surfaceLabel}>{tTimer("nextSpeaker")}</span>
               <input
                 className={surfaceField}
                 value={timer.next}
@@ -3572,20 +3561,19 @@ export function SessionControlClient({
           {timerWorkflowTab === "notes" ? (
           <div className="rounded-lg border border-white/15 bg-black/20 p-3 space-y-3 text-brand-navy">
             <div>
-              <p className={surfaceLabel}>Speech notes (current speaker)</p>
+              <p className={surfaceLabel}>{tTimer("speechNotesCurrentSpeaker")}</p>
               <p className="text-xs text-brand-muted mt-1 leading-snug">
-                Notes are tied to the <strong className="font-medium text-brand-navy/90">Current speaker</strong> timer
-                text and, when the speaker list has someone marked <strong className="font-medium text-brand-navy/90">Current</strong>, their delegation is stored for reference.
+                {tTimer("speechNotesHelp")}
               </p>
             </div>
             <div className="text-sm rounded-md border border-white/10 bg-black/25 px-3 py-2 space-y-1">
               <p>
-                <span className="text-brand-muted">Timer (floor): </span>
+                <span className="text-brand-muted">{tTimer("timerFloorLabel")} </span>
                 <span className="font-medium">{timer.current.trim() || "—"}</span>
               </p>
               {currentSpeakerQueueRow ? (
                 <p>
-                  <span className="text-brand-muted">Speaker list (current): </span>
+                  <span className="text-brand-muted">{tTimer("speakerListCurrent")} </span>
                   <span className="font-medium">
                     {currentSpeakerQueueRow.allocation_id
                       ? (allocations.find((a) => a.id === currentSpeakerQueueRow.allocation_id)?.country ??
@@ -3595,16 +3583,16 @@ export function SessionControlClient({
                   </span>
                 </p>
               ) : (
-                <p className="text-brand-muted text-xs">No delegation is marked Current on the speaker list.</p>
+                <p className="text-brand-muted text-xs">{tTimer("noCurrentDelegation")}</p>
               )}
             </div>
             <label className="block text-sm">
-              <span className={surfaceLabel}>Note</span>
+              <span className={surfaceLabel}>{tTimer("note")}</span>
               <textarea
                 className={`${surfaceInputCore} mt-1 min-h-[88px]`}
                 value={speechNoteDraft}
                 onChange={(e) => setSpeechNoteDraft(e.target.value)}
-                placeholder="Points, POIs, tone, follow-ups…"
+                placeholder={tTimer("notePlaceholder")}
               />
             </label>
             <button
@@ -3613,11 +3601,11 @@ export function SessionControlClient({
               onClick={saveChairSpeechNote}
               className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
-              Save speech note
+              {tTimer("saveSpeechNote")}
             </button>
             {speechNotesRecent.length > 0 ? (
               <div className="border-t border-white/10 pt-3 space-y-2">
-                <p className={surfaceLabel}>Your recent notes (this committee)</p>
+                <p className={surfaceLabel}>{tTimer("recentNotes")}</p>
                 <ul className="max-h-48 overflow-y-auto space-y-2 text-sm">
                   {speechNotesRecent.map((n) => (
                     <li key={n.id} className="rounded-md border border-white/10 bg-black/20 p-2">
@@ -3629,7 +3617,7 @@ export function SessionControlClient({
                           disabled={pending}
                           onClick={() => deleteChairSpeechNote(n.id)}
                         >
-                          Delete
+                          {tTimer("delete")}
                         </button>
                       </div>
                       <p className="text-xs text-brand-muted mt-0.5">
@@ -3647,9 +3635,9 @@ export function SessionControlClient({
           {timerWorkflowTab === "clock" ? (
           <div className="flex flex-wrap gap-4 items-end">
             <label className="text-sm text-brand-navy min-w-[10rem]">
-              <span className={surfaceLabel}>Speaker time (remaining)</span>
+              <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>
               <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
-                Countdown for the current speaker ({timer.perSpeakerMode ? "resets when you Advance" : "can be less than total"}).
+                {timer.perSpeakerMode ? tTimer("remainingHelpPerSpeaker") : tTimer("remainingHelpNormal")}
               </span>
               <div className="flex gap-1 mt-1 items-center">
                 <input
@@ -3669,11 +3657,11 @@ export function SessionControlClient({
               </div>
             </label>
             <label className="text-sm text-brand-navy min-w-[10rem]">
-              <span className={surfaceLabel}>Total time</span>
+              <span className={surfaceLabel}>{tTimer("totalTime")}</span>
               <span className="block text-[0.65rem] font-normal normal-case text-brand-muted mt-0.5">
                 {timer.perSpeakerMode
-                  ? "Per-speaker cap (denominator on the floor; Advance refills remaining to this)."
-                  : "Full length of this timer segment (shown after the slash on the floor)."}
+                  ? tTimer("totalHelpPerSpeaker")
+                  : tTimer("totalHelpNormal")}
               </span>
               <div className="flex gap-1 mt-1 items-center">
                 <input
@@ -3698,7 +3686,7 @@ export function SessionControlClient({
               onClick={saveTimer}
               className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
             >
-              Save timer
+              {tTimer("saveTimer")}
             </button>
             {timer.perSpeakerMode ? (
               <button
@@ -3707,7 +3695,7 @@ export function SessionControlClient({
                 onClick={advanceSpeakerAndResetClock}
                 className="px-4 py-2 rounded-lg border border-brand-navy/20 bg-white text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
               >
-                Advance speaker & reset clock
+                {tTimer("advanceSpeakerReset")}
               </button>
             ) : null}
           </div>
@@ -3715,7 +3703,7 @@ export function SessionControlClient({
           {timerWorkflowTab === "log" ? (
             pauseEvents.length > 0 ? (
               <div className="border-t border-white/12 pt-3">
-                <p className={`${surfaceLabel} mb-2`}>Recent pause log</p>
+                <p className={`${surfaceLabel} mb-2`}>{tTimer("recentPauseLog")}</p>
                 <ul className="max-h-36 space-y-1.5 overflow-y-auto text-xs text-brand-navy/85">
                   {pauseEvents.map((ev) => (
                     <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
@@ -3728,11 +3716,11 @@ export function SessionControlClient({
                 </ul>
               </div>
             ) : (
-              <p className="text-xs text-brand-muted">No pause events logged yet for this committee.</p>
+              <p className="text-xs text-brand-muted">{tTimer("noPauseEvents")}</p>
             )
           ) : (
             <p className="text-xs text-brand-muted">
-              Open Pause log to review recorded pause reasons and timestamps.
+              {tTimer("openPauseLogHint")}
             </p>
           )}
         </div>

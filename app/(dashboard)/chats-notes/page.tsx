@@ -68,6 +68,7 @@ export default async function ChatsNotesPage({
   searchParams: Promise<{ forProfile?: string }>;
 }) {
   const t = await getTranslations("pageTitles");
+  const tDn = await getTranslations("delegationNotes");
   const { forProfile } = await searchParams;
   const supabase = await createClient();
   const {
@@ -87,7 +88,7 @@ export default async function ChatsNotesPage({
     .maybeSingle();
 
   const myRole = (profile?.role ?? "delegate").toString().toLowerCase();
-  const myProfileName = profile?.name ?? "Chair";
+  const myProfileName = profile?.name ?? tDn("chairFallback");
 
   const verifiedConferenceId = await getVerifiedConferenceId();
   const isSmtLike = myRole === "smt";
@@ -170,7 +171,7 @@ export default async function ChatsNotesPage({
   const chairOptions = (chairProfiles ?? [])
     .map((c: { id: string; name: string | null }) => ({
       id: c.id,
-      name: c.name ?? "Chair",
+      name: c.name ?? tDn("chairFallback"),
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -242,7 +243,7 @@ export default async function ChatsNotesPage({
       .in("id", Array.from(neededProfileIds));
 
     for (const p of (neededProfiles ?? []) as { id: string; name: string | null }[]) {
-      profileMap.set(p.id, p.name ?? "Chair");
+      profileMap.set(p.id, p.name ?? tDn("chairFallback"));
     }
   }
 
@@ -272,7 +273,7 @@ export default async function ChatsNotesPage({
     const recipientRows = (recipientsByNoteId.get(n.id) ?? []) as DelegationRecipientRow[];
     const recipients = recipientRows.map<NoteRecipient>((r) => {
       if (r.recipient_kind === "allocation") {
-        const country = allocationMap.get(r.recipient_allocation_id ?? "") ?? "Unknown";
+        const country = allocationMap.get(r.recipient_allocation_id ?? "") ?? tDn("unknownCountry");
         return {
           kind: "allocation",
           allocationId: r.recipient_allocation_id as string,
@@ -283,7 +284,7 @@ export default async function ChatsNotesPage({
         return {
           kind: "chair",
           profileId: r.recipient_profile_id as string,
-          name: profileMap.get(r.recipient_profile_id as string) ?? "Chair",
+          name: profileMap.get(r.recipient_profile_id as string) ?? tDn("chairFallback"),
         } as const;
       }
       return { kind: "chair_all" } as const;

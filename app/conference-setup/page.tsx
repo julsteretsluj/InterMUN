@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceSetupForm } from "./ConferenceSetupForm";
+import { getTranslations } from "next-intl/server";
 
 export default async function ConferenceSetupPage({
   searchParams,
@@ -33,6 +34,8 @@ export default async function ConferenceSetupPage({
     redirect(`/room-gate?next=${encodeURIComponent(nextPath)}&e=create-forbidden`);
   }
 
+  const t = await getTranslations("conferenceSetupPage");
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-brand-cream">
       <div className="relative w-full max-w-lg space-y-8">
@@ -40,12 +43,12 @@ export default async function ConferenceSetupPage({
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10">
           <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
           <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
-            Set up a conference
+            {t("title")}
           </h1>
           <p className="text-sm text-brand-muted text-center mb-6">
-            Secretariat or <strong>website admin</strong>: creates a <strong>conference code</strong>{" "}
-            (first gate) and the first <strong>committee code</strong> (second gate). Add more committees
-            in Supabase or via your workflow; dais chairs edit committee codes under Chair → Committee code.
+            {t.rich("intro", {
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
           <ConferenceSetupForm nextPath={nextPath} />
           <p className="text-center mt-6">
@@ -53,7 +56,7 @@ export default async function ConferenceSetupPage({
               href={`/room-gate?next=${encodeURIComponent(nextPath)}`}
               className="text-sm text-brand-accent hover:underline"
             >
-              Back to join committee
+              {t("backToJoin")}
             </Link>
           </p>
         </div>
