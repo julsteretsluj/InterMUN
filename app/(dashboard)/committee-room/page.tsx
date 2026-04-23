@@ -6,9 +6,16 @@ import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 import { getTranslations } from "next-intl/server";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 export default async function CommitteeRoomPage() {
   const t = await getTranslations("pageTitles");
+  const tc = await getTranslations("common");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const tTopics = await getTranslations("agendaTopics");
   const supabase = await createClient();
   const {
     data: { user },
@@ -56,8 +63,16 @@ export default async function CommitteeRoomPage() {
         floorConferenceId={debateBundle.debateConferenceId}
         canonicalConferenceId={debateBundle.canonicalConferenceId}
         siblingConferenceIds={debateBundle.siblingConferenceIds}
-        conferenceName={payload.conference?.name ?? "Conference"}
-        committeeName={payload.conference?.committee ?? "General Assembly"}
+        conferenceName={
+          payload.conference?.name
+            ? translateAgendaTopicLabel(tTopics, payload.conference.name)
+            : tc("conference")
+        }
+        committeeName={
+          payload.conference?.committee
+            ? translateCommitteeLabel(tCommitteeLabels, payload.conference.committee)
+            : tc("committee")
+        }
         placards={payload.placards}
         dais={payload.dais}
         myRole={myRole}

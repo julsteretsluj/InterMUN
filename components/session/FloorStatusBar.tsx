@@ -8,6 +8,7 @@ import { Timers } from "@/components/timers/Timers";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
+import { useTranslations } from "next-intl";
 import {
   committeeSessionEndTimestampMs,
   formatCountdownOrElapsed,
@@ -69,6 +70,7 @@ export function FloorStatusBar({
   /** When set, show current motion + floor timer above dais / speakers (e.g. delegate committee room). */
   activeMotionVoteItemId?: string | null;
 }) {
+  const t = useTranslations("views.session.floorStatus");
   const supabase = createClient();
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
@@ -173,7 +175,7 @@ export function FloorStatusBar({
           const row = rc as { present?: boolean; attendance?: string | null };
           const att =
             parseRollAttendance(row.attendance) ?? (row.present === true ? "present_voting" : "absent");
-          setRollSelf(`Roll: ${rollAttendanceShortLabel(att)}`);
+          setRollSelf(rollAttendanceShortLabel(att));
         }
       })();
     }
@@ -291,7 +293,7 @@ export function FloorStatusBar({
         }
       >
         <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
-        <span className={muted}>Session time</span>
+        <span className={muted}>{t("sessionTime")}</span>
         <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
           {formatSessionElapsed(sessionStartedAt, limitNow)}
         </span>
@@ -300,7 +302,7 @@ export function FloorStatusBar({
             <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
               ·
             </span>
-            <span className={muted}>Limit</span>
+            <span className={muted}>{t("limit")}</span>
             <span
               className={`font-display font-semibold tabular-nums tracking-tight ${
                 limitFmt.label === "passed"
@@ -311,7 +313,9 @@ export function FloorStatusBar({
               }`}
               suppressHydrationWarning
             >
-              {limitFmt.label === "remaining" ? `${limitFmt.text} left` : `over by ${limitFmt.text}`}
+              {limitFmt.label === "remaining"
+                ? t("limitRemaining", { value: limitFmt.text })
+                : t("limitOverBy", { value: limitFmt.text })}
             </span>
           </>
         ) : null}
@@ -336,9 +340,11 @@ export function FloorStatusBar({
           <Megaphone className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
           <div>
             <span className={`${muted} block`}>
-              Dais
+              {t("dais")}
               {latestDais.is_pinned ? (
-                <span className="ml-2 normal-case text-amber-700 dark:text-amber-300">· Pinned</span>
+                <span className="ml-2 normal-case text-amber-700 dark:text-amber-300">
+                  · {t("pinned")}
+                </span>
               ) : null}
             </span>
             <div className={bodyText}>
@@ -351,7 +357,7 @@ export function FloorStatusBar({
                 onClick={() => setExpandedAnnouncement(latestDais)}
                 className="mt-1 text-xs font-medium text-brand-accent hover:underline"
               >
-                View full announcement
+                {t("viewFullAnnouncement")}
               </button>
             </div>
           </div>
@@ -361,7 +367,7 @@ export function FloorStatusBar({
         <div className={`flex gap-2 items-start pt-1 ${latestDais ? `border-t ${border}` : ""}`}>
           <PauseCircle className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} aria-hidden />
           <div className="min-w-0 flex-1">
-            <span className={`${muted} block`}>Timer pauses (read-only)</span>
+            <span className={`${muted} block`}>{t("timerPausesReadOnly")}</span>
             <ul className={`mt-1 space-y-1 text-xs ${qText}`}>
               {pauseEvents.map((ev) => (
                 <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
@@ -382,12 +388,12 @@ export function FloorStatusBar({
         <div className={`flex gap-2 items-start pt-1 border-t ${border}`}>
           <ListOrdered className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
           <div className="min-w-0 flex-1">
-            <span className={`${muted} block mb-0.5`}>Speaker list</span>
+            <span className={`${muted} block mb-0.5`}>{t("speakerList")}</span>
             <ul className={`flex flex-wrap gap-x-3 gap-y-0.5 text-xs ${qText}`}>
               {displayQueue.map((q) => (
                 <li key={q.id} className="font-medium">
                   <span className={q.status === "current" ? current : undefined}>
-                    {q.label || allocCountry(q.allocations) || "Speaker"}
+                    {q.label || allocCountry(q.allocations) || t("speakerFallback")}
                   </span>
                 </li>
               ))}
@@ -401,7 +407,7 @@ export function FloorStatusBar({
             isLight ? "text-brand-muted" : "text-brand-navy/90"
           }`}
         >
-          Roll call (you):{" "}
+          {t("rollCallYou")}:{" "}
           <span className={`font-medium ${isLight ? "text-brand-navy" : "text-brand-navy"}`}>{rollSelf}</span>
         </p>
       )}
@@ -411,7 +417,7 @@ export function FloorStatusBar({
           className="fixed inset-0 z-[80] flex items-center justify-center bg-black/55 px-4"
           role="dialog"
           aria-modal="true"
-          aria-label="Full announcement"
+          aria-label={t("fullAnnouncement")}
           onClick={() => setExpandedAnnouncement(null)}
         >
           <div
@@ -419,13 +425,13 @@ export function FloorStatusBar({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-3">
-              <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcement</h3>
+              <h3 className="font-display text-lg font-semibold text-brand-navy">{t("daisAnnouncement")}</h3>
               <button
                 type="button"
                 onClick={() => setExpandedAnnouncement(null)}
                 className="text-xs font-medium text-brand-accent hover:underline"
               >
-                Close
+                {t("close")}
               </button>
             </div>
             <div className="max-h-[70vh] overflow-y-auto text-sm text-brand-navy">

@@ -27,6 +27,10 @@ import { ChairDashboardSidebar, ChairMobileDock } from "@/components/dashboard/C
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import type { UserRole } from "@/types/database";
 import { getTranslations } from "next-intl/server";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 export default async function DashboardLayout({
   children,
@@ -34,6 +38,8 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations("dashboardLayout");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const tTopics = await getTranslations("agendaTopics");
   const supabase = await createClient();
   const {
     data: { user },
@@ -101,7 +107,11 @@ export default async function DashboardLayout({
   const appName = getAppName();
   const displayName = profile?.name?.trim() || "Delegate";
   const userEmail = user.email ?? "";
-  const conferenceLine = [activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ") || activeConf.name;
+  const translatedCommittee = activeConf.committee
+    ? translateCommitteeLabel(tCommitteeLabels, activeConf.committee)
+    : "";
+  const translatedTopic = activeConf.name ? translateAgendaTopicLabel(tTopics, activeConf.name) : "";
+  const conferenceLine = [translatedCommittee, activeConf.tagline].filter(Boolean).join(" · ") || translatedTopic;
   const crisisReportingEnabled = isCrisisCommittee(activeConf.committee);
 
   const { count: notificationUnreadCount } = await supabase

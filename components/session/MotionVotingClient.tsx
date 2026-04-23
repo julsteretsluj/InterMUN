@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
+import { useTranslations } from "next-intl";
 
 type VoteItemRow = {
   id: string;
@@ -22,6 +22,7 @@ type VoteTally = {
 };
 
 export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }) {
+  const t = useTranslations("views.session.motionVoting");
   const supabase = useMemo(() => createClient(), []);
   const [voteItem, setVoteItem] = useState<VoteItemRow | null>(null);
   const [motionerCountry, setMotionerCountry] = useState<string | null>(null);
@@ -113,38 +114,39 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
     };
   }, [supabase, voteItemId, load]);
 
+  const majorityLabel = (requiredMajority: string | null | undefined) =>
+    requiredMajority === "2/3" ? "2/3" : t("majoritySimple");
+
   return (
     <div className="rounded-xl border border-white/15 bg-black/25 p-3 space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs uppercase tracking-wider text-brand-muted">Voting procedure</p>
+          <p className="text-xs uppercase tracking-wider text-brand-muted">{t("votingProcedure")}</p>
           <p className="font-semibold text-brand-navy truncate">
-            {voteItem?.title ?? "Current motion"}
+            {voteItem?.title ?? t("currentMotion")}
           </p>
           {voteItem?.description?.trim() ? (
             <p className="text-sm text-brand-navy/85 mt-1 line-clamp-4">{voteItem.description.trim()}</p>
           ) : null}
           <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-brand-muted">
             <span>
-              Motioner:{" "}
-              <span className="font-medium text-brand-navy/90">{motionerCountry || "—"}</span>
+              {t("motioner")}: <span className="font-medium text-brand-navy/90">{motionerCountry || "—"}</span>
             </span>
             <span>
-              Majority:{" "}
+              {t("majority")}:{" "}
               <span className="font-medium text-brand-navy/90">
-                {voteItem ? formatVoteMajorityLabel(voteItem.required_majority) : "—"}
+                {voteItem ? majorityLabel(voteItem.required_majority) : "—"}
               </span>
             </span>
           </div>
         </div>
         <p className="text-xs text-brand-muted shrink-0">
-          Yes {tally.yes} • No {tally.no} • Total {tally.total}
+          {t("tally", { yes: tally.yes, no: tally.no, total: tally.total })}
         </p>
       </div>
 
       <p className="text-xs text-brand-muted leading-relaxed">
-        The dais records each delegation&apos;s vote in session. Motion votes use Yes or No only (no abstain). Totals
-        count only placards where Yes or No was recorded; absent delegations are skipped.
+        {t("help")}
       </p>
     </div>
   );

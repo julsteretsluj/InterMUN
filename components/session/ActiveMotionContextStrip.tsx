@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Clock, Gavel } from "lucide-react";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
-import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
+import { useTranslations } from "next-intl";
 
 type VoteMotionRow = {
   id: string;
@@ -24,6 +24,7 @@ export function ActiveMotionContextStrip({
   voteItemId: string;
   theme?: "dark" | "light";
 }) {
+  const t = useTranslations("views.session.activeMotion");
   const supabase = useMemo(() => createClient(), []);
   const { timer, total, mins, secs, perSpeakerMode, isRunning } = useConferenceTimer(
     conferenceId,
@@ -93,6 +94,8 @@ export function ActiveMotionContextStrip({
   const timerLabel = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-xs uppercase tracking-wider text-brand-navy/75 block mb-0.5";
+  const majorityLabel = (requiredMajority: string | null | undefined) =>
+    requiredMajority === "2/3" ? "2/3" : t("majoritySimple");
 
   return (
     <div className={shell}>
@@ -100,23 +103,23 @@ export function ActiveMotionContextStrip({
         <Gavel className={iconCls} aria-hidden />
         <div className="min-w-0 flex-1 space-y-2">
           <div>
-            <span className={labelCls}>Current motion</span>
-            <p className={`${bodyCls} text-base`}>{row?.title?.trim() || "Motion"}</p>
+            <span className={labelCls}>{t("currentMotion")}</span>
+            <p className={`${bodyCls} text-base`}>{row?.title?.trim() || t("motionFallback")}</p>
             {row?.description?.trim() ? (
               <p className={subCls}>{row.description.trim()}</p>
             ) : null}
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <div>
-              <span className={labelCls}>Motioner</span>
+              <span className={labelCls}>{t("motioner")}</span>
               <p className={bodyCls}>{motionerCountry || "—"}</p>
             </div>
             <div>
-              <span className={labelCls}>Majority</span>
-              <p className={bodyCls}>{row ? formatVoteMajorityLabel(row.required_majority) : "—"}</p>
+              <span className={labelCls}>{t("majority")}</span>
+              <p className={bodyCls}>{row ? majorityLabel(row.required_majority) : "—"}</p>
             </div>
             <div>
-              <span className={labelCls}>Type</span>
+              <span className={labelCls}>{t("type")}</span>
               <p className={`${bodyCls} capitalize`}>{row?.vote_type || "—"}</p>
             </div>
           </div>
@@ -130,39 +133,39 @@ export function ActiveMotionContextStrip({
             <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
               {timer.floor_label?.trim() ? (
                 <div>
-                  <span className={timerLabel}>Timer</span>
+                  <span className={timerLabel}>{t("timer")}</span>
                   <p className="font-semibold text-brand-accent">{timer.floor_label.trim()}</p>
                 </div>
               ) : null}
               <div>
-                <span className={timerLabel}>Current speaker</span>
+                <span className={timerLabel}>{t("currentSpeaker")}</span>
                 <p className="font-medium">{timer.current_speaker || "—"}</p>
               </div>
               <div>
-                <span className={timerLabel}>Next speaker</span>
+                <span className={timerLabel}>{t("nextSpeaker")}</span>
                 <p className="font-medium">{timer.next_speaker || "—"}</p>
               </div>
               <div>
                 <span className={timerLabel}>
-                  {perSpeakerMode ? "Speaker time (left / cap)" : "Speaker time (left / total)"}
+                  {perSpeakerMode ? t("speakerTimeLeftCap") : t("speakerTimeLeftTotal")}
                 </span>
                 <p className="font-mono font-medium tabular-nums">
                   {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
                   {(total % 60).toString().padStart(2, "0")}
                   {perSpeakerMode ? (
                     <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case opacity-80">
-                      (per speaker)
+                      {t("perSpeaker")}
                     </span>
                   ) : null}
                   {!isRunning ? (
                     <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-amber-700 dark:text-amber-300">
-                      (paused)
+                      {t("paused")}
                     </span>
                   ) : null}
                 </p>
                 {!isRunning && timer.current_pause_reason?.trim() ? (
                   <p className="mt-1 max-w-md text-[0.7rem] font-normal normal-case opacity-90">
-                    Pause: {timer.current_pause_reason.trim()}
+                    {t("pauseReason", { reason: timer.current_pause_reason.trim() })}
                   </p>
                 ) : null}
               </div>

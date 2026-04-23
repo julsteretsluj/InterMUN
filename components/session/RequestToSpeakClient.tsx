@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { HelpButton } from "@/components/HelpButton";
+import { useTranslations } from "next-intl";
 
 export function RequestToSpeakClient({
   conferenceId,
@@ -15,16 +16,17 @@ export function RequestToSpeakClient({
   allocationCountry: string | null;
   disabled?: boolean;
 }) {
+  const t = useTranslations("views.session.requestToSpeak");
   const supabase = useMemo(() => createClient(), []);
   const [purpose, setPurpose] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
-  const country = allocationCountry ?? "Delegate";
+  const country = allocationCountry ?? t("delegateFallback");
 
   async function request() {
     if (!allocationId) {
-      setMsg("You need an allocation to request to speak.");
+      setMsg(t("needAllocation"));
       return;
     }
 
@@ -42,7 +44,7 @@ export function RequestToSpeakClient({
       if (existingErr) throw existingErr;
 
       if ((existing ?? []).length > 0) {
-        setMsg("You already have an active speaking request in the queue.");
+        setMsg(t("alreadyQueued"));
         return;
       }
 
@@ -69,10 +71,10 @@ export function RequestToSpeakClient({
 
       if (insErr) throw insErr;
 
-      setMsg("Requested to speak. You’ll appear in the queue.");
+      setMsg(t("requested"));
       setPurpose("");
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : "Failed to request to speak.";
+      const message = e instanceof Error ? e.message : t("requestFailed");
       setMsg(message);
     } finally {
       setPending(false);
@@ -82,24 +84,24 @@ export function RequestToSpeakClient({
   return (
     <div className="rounded-xl border border-brand-navy/10 bg-white/60 p-3 space-y-2">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="font-display text-sm font-semibold text-brand-navy">Request to speak</h3>
-        <HelpButton title="Request to speak">
-          Sends your delegation to the chair queue. You can have one active waiting/current request at a time.
+        <h3 className="font-display text-sm font-semibold text-brand-navy">{t("title")}</h3>
+        <HelpButton title={t("title")}>
+          {t("helpBody")}
         </HelpButton>
       </div>
       <div className="flex items-center justify-between gap-2">
         <label className="block text-xs text-brand-muted uppercase tracking-wider">
-          Optional purpose (shows in queue label)
+          {t("purposeLabel")}
         </label>
-        <HelpButton title="Purpose label">
-          This text is appended to your country name so chairs can see why you are requesting the floor.
+        <HelpButton title={t("purposeHelpTitle")}>
+          {t("purposeHelpBody")}
         </HelpButton>
       </div>
       <input
         className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         value={purpose}
         onChange={(e) => setPurpose(e.target.value)}
-        placeholder="e.g. support + amendment overview"
+        placeholder={t("purposePlaceholder")}
         disabled={pending || !allocationId || disabled}
       />
       <button
@@ -108,7 +110,7 @@ export function RequestToSpeakClient({
         disabled={pending || !allocationId || disabled}
         className="w-full px-3 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
       >
-        {pending ? "Requesting…" : "Request to speak"}
+        {pending ? t("requesting") : t("title")}
       </button>
       {msg ? (
         <p className="text-xs text-brand-muted bg-brand-paper border border-brand-navy/10 rounded-lg px-3 py-2">

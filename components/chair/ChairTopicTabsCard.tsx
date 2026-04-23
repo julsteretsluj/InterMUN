@@ -2,6 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
+import { useTranslations } from "next-intl";
+import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 
 export function ChairTopicTabsCard({
   topics,
@@ -10,6 +12,8 @@ export function ChairTopicTabsCard({
   topics: { id: string; label: string }[];
   activeTopicId: string;
 }) {
+  const t = useTranslations("chairTopicTabs");
+  const tTopics = useTranslations("agendaTopics");
   const [msg, setMsg] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -18,10 +22,10 @@ export function ChairTopicTabsCard({
   return (
     <section className="rounded-xl border border-slate-200/90 bg-white px-4 py-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
       <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-        Select live topic
+        {t("selectLiveTopic")}
       </p>
       <p className="mt-1 text-sm text-slate-600 dark:text-zinc-300">
-        Choose which committee topic the floor tools control right now.
+        {t("chooseTopicHelp")}
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         {topics.map((topic) => {
@@ -45,7 +49,7 @@ export function ChairTopicTabsCard({
               ].join(" ")}
               aria-pressed={active}
             >
-              {topic.label}
+              {translateAgendaTopicLabel(tTopics, topic.label)}
             </button>
           );
         })}

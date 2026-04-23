@@ -21,6 +21,10 @@ import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { getTranslations } from "next-intl/server";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -38,6 +42,8 @@ export default async function SmtCommitteeLivePage({
 }) {
   const t = await getTranslations("smtCards");
   const tNames = await getTranslations("committeeNames.full");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const tTopics = await getTranslations("agendaTopics");
   const { id } = await params;
   const supabase = await createClient();
   const eventId = await getActiveEventId();
@@ -116,8 +122,8 @@ export default async function SmtCommitteeLivePage({
   const displayTitle = (() => {
     const localizedFull = localizeKnownCommitteeFullName(resolveCommitteeFullName(conf.committee_full_name, conf.committee));
     const ac = conf.committee?.trim() || "";
-    if (localizedFull && ac) return `${localizedFull} — ${ac}`;
-    if (ac) return ac;
+    if (localizedFull && ac) return `${localizedFull} — ${translateCommitteeLabel(tCommitteeLabels, ac)}`;
+    if (ac) return translateCommitteeLabel(tCommitteeLabels, ac);
     return t("committeeFallback");
   })();
   const officialName = resolveCommitteeFullName(conf.committee_full_name, conf.committee);
@@ -135,7 +141,9 @@ export default async function SmtCommitteeLivePage({
             {conf.committee_logo_url ? (
               <img
                 src={conf.committee_logo_url}
-                alt={`${conf.committee ?? t("committeeFallback")} logo`}
+                alt={`${conf.committee?.trim()
+                  ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
+                  : t("committeeFallback")} logo`}
                 className="h-14 w-14 object-contain rounded-md bg-white/70 border border-brand-navy/10 mt-1"
               />
             ) : null}
@@ -146,13 +154,15 @@ export default async function SmtCommitteeLivePage({
 
         <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <MetaItem label={t("sessionTopicAgenda")}>
-            {conf.name?.trim() ? conf.name : "—"}
+            {conf.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name) : "—"}
           </MetaItem>
           {conf.tagline?.trim() ? (
             <MetaItem label={t("tagline")}>{conf.tagline}</MetaItem>
           ) : null}
           <MetaItem label={t("officialCommitteeName")}>{localizeKnownCommitteeFullName(officialName) ?? "—"}</MetaItem>
-          <MetaItem label={t("chamberAcronym")}>{conf.committee?.trim() || "—"}</MetaItem>
+          <MetaItem label={t("chamberAcronym")}>
+            {conf.committee?.trim() ? translateCommitteeLabel(tCommitteeLabels, conf.committee) : "—"}
+          </MetaItem>
           <MetaItem label={t("difficulty")}>
             {displayTags?.difficulty ? (
               <span className={difficultyTagClass(displayTags.difficulty)}>{displayTags.difficulty}</span>
@@ -219,8 +229,12 @@ export default async function SmtCommitteeLivePage({
           {t("digitalRoomDescription")}
         </p>
         <VirtualCommitteeRoom
-          conferenceName={conf.name ?? t("conferenceFallback")}
-          committeeName={conf.committee?.trim() || t("committeeFallback")}
+          conferenceName={conf.name ? translateAgendaTopicLabel(tTopics, conf.name) : t("conferenceFallback")}
+          committeeName={
+            conf.committee?.trim()
+              ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
+              : t("committeeFallback")
+          }
           placards={roomPayload.placards}
           dais={roomPayload.dais}
           helperText={t("helperTextSmtPreview")}

@@ -61,6 +61,8 @@ import {
   type EuSessionPhase,
 } from "@/lib/eu-session-phase";
 import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
+import { useTranslations } from "next-intl";
+import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 
 const ROLL_ATTENDANCE_BUTTONS: {
   value: RollAttendance;
@@ -216,6 +218,8 @@ export function SessionControlClient({
   /** Default `"all"` keeps a single scroll (e.g. committee room). */
   activeSection?: SessionFloorSection;
 }) {
+  const tTopics = useTranslations("agendaTopics");
+  const tTopicUi = useTranslations("chairTopicTabs");
   const supabase = createClient();
   const rosterConferenceIdList = useMemo(() => {
     if (rosterConferenceIds?.length) return rosterConferenceIds;
@@ -2406,14 +2410,13 @@ export function SessionControlClient({
                   ].join(" ")}
                   aria-pressed={isActive}
                 >
-                  {t.label}
+                  {translateAgendaTopicLabel(tTopics, t.label)}
                 </button>
               );
             })}
           </div>
           <p className="max-w-2xl text-xs text-brand-muted">
-            Motions, timers, and the speaker list follow this topic row. Roll call still uses each delegate’s
-            allocation.
+            {tTopicUi("sessionControlHint")}
           </p>
         </div>
       ) : null}

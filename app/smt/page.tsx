@@ -11,6 +11,10 @@ import {
 } from "@/lib/committee-tag-styles";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getTranslations } from "next-intl/server";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 function difficultySortRank(level: "Beginner" | "Intermediate" | "Advanced" | null | undefined) {
   if (level === "Beginner") return 0;
@@ -27,6 +31,8 @@ export default async function SmtOverviewPage({
   const { e: overviewErr } = await searchParams;
   const t = await getTranslations("smtOverview");
   const tNames = await getTranslations("committeeNames.full");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const tTopics = await getTranslations("agendaTopics");
   const supabase = await createClient();
   const eventId = await getActiveEventId();
 
@@ -191,7 +197,11 @@ export default async function SmtOverviewPage({
             {g.latestRow.committee_logo_url ? (
               <img
                 src={g.latestRow.committee_logo_url}
-                alt={t("committeeLogoAlt", { name: g.latestRow.committee ?? "Committee" })}
+                alt={t("committeeLogoAlt", {
+                  name: g.latestRow.committee
+                    ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
+                    : "Committee",
+                })}
                 className="h-10 w-10 object-contain rounded-md bg-white/60 border border-brand-navy/10 mb-2"
               />
             ) : null}
@@ -201,8 +211,11 @@ export default async function SmtOverviewPage({
                   resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)
                 );
                 const code = g.latestRow.committee?.trim() || "";
-                if (localizedFull && code) return `${localizedFull} — ${code}`;
-                return formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee);
+                if (localizedFull && code) return `${localizedFull} — ${translateCommitteeLabel(tCommitteeLabels, code)}`;
+                return translateCommitteeLabel(
+                  tCommitteeLabels,
+                  formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee)
+                );
               })()}
             </p>
             {(() => {
@@ -239,7 +252,8 @@ export default async function SmtOverviewPage({
               <div className="mt-2 space-y-1">
                 {g.topics.slice(0, 2).map((topic) => (
                   <p key={topic} className="text-[0.72rem] text-brand-navy/90 leading-snug">
-                    <span className="font-semibold text-brand-navy">{t("topicLabel")}</span> {topic}
+                    <span className="font-semibold text-brand-navy">{t("topicLabel")}</span>{" "}
+                    {translateAgendaTopicLabel(tTopics, topic)}
                   </p>
                 ))}
               </div>

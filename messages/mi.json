@@ -638,7 +638,7 @@
           },
           "special_rapporteur": {
             "term": "Kaipupuri Motuhake",
-            "definition": "Ko te tohunga motuhake kua tohua ki te aro turuki me te tuku korero mo nga take motika kaupapa whenua ranei."
+            "definition": "Ko te tohunga motuhake kua tohua ki te aro turuki me te tuku ripoata mo nga take motika kaupapa whenua ranei."
           },
           "treaty_body": {
             "term": "Te Rōpū Tiriti",
@@ -842,6 +842,75 @@
       "vacantSeatAria": "Nohoa watea",
       "placardAria": "Papaka {whenua}",
       "gavelAria": "Kawhara"
+    },
+    "session": {
+      "requestToSpeak": {
+        "title": "Tono ki te korero",
+        "delegateFallback": "Kaituku",
+        "needAllocation": "Me whai waahi koe ki te tono korero.",
+        "alreadyQueued": "Kei a koe he tono korero kaha i te rarangi.",
+        "requested": "I tono kia korero. Ka puta koe i te rarangi.",
+        "requestFailed": "I rahua te tono kia korero.",
+        "helpBody": "Ka tukuna to tira ki te rarangi tuuru. Ka taea e koe te tono tatari mo te wa kotahi.",
+        "purposeLabel": "Te kaupapa whiriwhiri (ka whakaatuhia ki te tapanga rarangi)",
+        "purposeHelpTitle": "Tapanga kaupapa",
+        "purposeHelpBody": "Kua apitihia tenei tuhinga ki to ingoa whenua kia mohio nga tuuru he aha koe i tono ai i te papa.",
+        "purposePlaceholder": "e.g. tautoko + tirohanga whakatikatika",
+        "requesting": "Kei te tono..."
+      },
+      "motionVoting": {
+        "votingProcedure": "Te tikanga pooti",
+        "currentMotion": "Motini o naianei",
+        "motioner": "Kai-nekeneke",
+        "majority": "Te nuinga",
+        "majoritySimple": "Maamaa",
+        "tally": "Ae {ae} - Kao {no} - Tapeke {tapeke}",
+        "help": "Ka tuhia e te raahi nga pooti a ia roopu i te huihuinga. Ko nga pooti motini e whakamahi ana i te Ae, Kao ranei anake (kaore e mawehe). Ko nga tapeke ka tatau anake i nga tohu i tuhia te Ae, Kao ranei; ka pekehia nga tira karekau."
+      },
+      "activeMotion": {
+        "currentMotion": "Motini o naianei",
+        "motionFallback": "Motini",
+        "motioner": "Kai-nekeneke",
+        "majority": "Te nuinga",
+        "majoritySimple": "Maamaa",
+        "type": "Momo",
+        "timer": "Matawā",
+        "currentSpeaker": "Kaikōrero o nāianei",
+        "nextSpeaker": "Kaikorero o muri",
+        "speakerTimeLeftCap": "Wā tukuoro (mauī / pōtae)",
+        "speakerTimeLeftTotal": "Wā tukuoro (mauī / tapeke)",
+        "perSpeaker": "(ia kaikōrero)",
+        "paused": "(kua okioki)",
+        "pauseReason": "Tatari: {reason}"
+      },
+      "floorStatus": {
+        "sessionTime": "Wā wātū",
+        "limit": "Tepe",
+        "limitRemaining": "{uara} mahue",
+        "limitOverBy": "i runga i te {uara}",
+        "dais": "Dais",
+        "pinned": "Kua titi",
+        "viewFullAnnouncement": "Tirohia te panui katoa",
+        "timerPausesReadOnly": "Tatari taima (panui-anake)",
+        "speakerList": "Rarangi korero",
+        "speakerFallback": "Kaikōrero",
+        "rollCallYou": "Huri waea (koe)",
+        "fullAnnouncement": "Panuitanga katoa",
+        "daisAnnouncement": "Dais panui",
+        "close": "Katia"
+      },
+      "history": {
+        "title": "Hītori wātū",
+        "savedCount": "{count} kua tiakina",
+        "permissionsHint": "Ka taea e nga heamana te whakaingoa i nga whakaurunga. Ka taea e SMT/Admin te whakaingoa me te whakakore i nga whakaurunga.",
+        "empty": "Kaore ano he hitori o te wahanga.",
+        "rename": "Whakaingoa ano",
+        "delete": "Mukua",
+        "deleteConfirm": "Mukua tenei wahanga mai i te hitori?",
+        "sessionNamePrompt": "Ingoa wātū",
+        "rangeClosed": "{awhe}",
+        "rangeOngoing": "{awhe} -> Kei te haere tonu"
+      }
     }
   },
   "dashboardSearch": {
@@ -894,6 +963,44 @@
       "UN_WOMEN": "UN Wahine",
       "INTERPOL": "INTERPOL",
       "PRESS_CORPS": "Press Corps"
+    },
+    "labels": {
+      "AFRICAN_UNION": "Kotahitanga o Awherika",
+      "ARAB_LEAGUE": "Rīki Arapi",
+      "ASEAN": "ASEAN",
+      "CCPCJ": "CCPCJ",
+      "DISEC": "DISEC",
+      "ECOFIN": "ECOFIN",
+      "ECOSOC": "ECOSOC",
+      "EU": "EU",
+      "F1": "F1",
+      "FIFA": "FIFA",
+      "FANTASY_WORLD_COMMITTEE": "Te Komiti o te Ao Fantasy",
+      "HSC": "HSC",
+      "HRC": "HRC",
+      "HCR": "HCR",
+      "IAEA": "IAEA",
+      "ICAO": "ICAO",
+      "ICC": "ICC",
+      "ICJ": "ICJ",
+      "INTERPOL": "INTERPOL",
+      "IOPC": "IOPC",
+      "NATO": "NATO",
+      "PRESS_CORPS": "Press Corps",
+      "US_SENATE": "US Senate",
+      "SOCHUM": "SOCHUM",
+      "SPECPOL": "SPECPOL",
+      "CSA": "CSA",
+      "UNDP": "UNDP",
+      "UNEP": "UNEP",
+      "UNESCO": "UNESCO",
+      "UNICEF": "UNICEF",
+      "UNODC": "UNODC",
+      "UNSC": "UNSC",
+      "WHO": "WHO",
+      "WIPO": "WIPO",
+      "WTO": "WTO",
+      "UN_WOMEN": "UN Wahine"
     }
   },
   "chairDigitalRoom": {
@@ -916,5 +1023,34 @@
     "addToSpeakerList": "Tāpirihia ki te rārangi kaikōrero",
     "reminder": "Whakamaumahara",
     "privateReminderLabel": "Whakamaumahara tūmataiti (tūru anake, tukutahi)"
+  },
+  "chairTopicTabs": {
+    "selectLiveTopic": "Tīpakohia te kaupapa ora",
+    "chooseTopicHelp": "Whiriwhiria ko tehea kaupapa komiti kei te whakahaere nga taputapu papa i naianei.",
+    "sessionControlHint": "Ko nga motini, nga taima, me te rarangi kaikorero e whai ana i tenei rarangi kaupapa. Kei te whakamahi tonu te waea huri i ia toha tuku."
+  },
+  "agendaTopics": {
+    "climateAction": "Nga mahi huarere",
+    "climateChange": "Te huringa o te rangi",
+    "cyberSecurity": "Haumarutanga ipurangi",
+    "aiGovernance": "Whakahaerenga AI",
+    "disarmament": "Te whakakore patu",
+    "nonProliferation": "Whakanui-kore",
+    "refugeeProtection": "Tiaki rerenga",
+    "globalHealth": "Te hauora o te ao",
+    "foodSecurity": "Te haumaru kai",
+    "humanRights": "Tika tangata",
+    "peacekeeping": "Te rangimarie",
+    "disinformation": "Whakakorenga korero",
+    "sustainableDevelopment": "Te whanaketanga tauwhiro",
+    "untitledTopic": "Kaupapa kore taitara",
+    "qClimateCooperation": "Me pehea e taea ai e nga kawanatanga mema te whakapakari i te mahi tahi o te ao mo te mahi huarere?",
+    "qGlobalHealthcareAccess": "Me pehea e taea ai e te hapori o te ao te whakapai ake i te whai waahi ki te hauora kounga?",
+    "qAiGovernance": "Me pehea te whakahaere a nga kawanatanga i te AI me nga hangarau hou?",
+    "qDisinformationImpact": "He aha nga tikanga ka whakaiti i te paanga o te whakamohiotanga o te ao?",
+    "qSecurityHumanRights": "Me pehea e taea ai e nga whenua te whakataurite i te haumarutanga me nga tika tangata i roto i nga mahi whakawetiweti?",
+    "qRefugeeProtection": "Me pehea e taea ai e te punaha UN te tautoko i te whakamarumaru rerenga me nga otinga roa?",
+    "qFoodSecurity": "He aha nga rautaki hei whakapai ake i te oranga kai i nga rohe whakaraerae-rangi?",
+    "qNonProliferation": "Me pehea te hapori o te ao ki te aukati i te tipu karihi?"
   }
 }

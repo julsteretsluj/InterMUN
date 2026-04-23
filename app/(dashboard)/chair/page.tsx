@@ -9,9 +9,15 @@ import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { ChairTopicTabsCard } from "@/components/chair/ChairTopicTabsCard";
 import { getTranslations } from "next-intl/server";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 export default async function ChairOverviewPage() {
   const t = await getTranslations("pageTitles");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const tTopics = await getTranslations("agendaTopics");
   const supabase = await createClient();
   const {
     data: { user },
@@ -35,8 +41,16 @@ export default async function ChairOverviewPage() {
     .select("committee, tagline, name")
     .eq("id", conferenceId)
     .maybeSingle();
-  const committeeLabel = conf?.committee?.trim() || conf?.name?.trim() || "your committee";
-  const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
+  const committeeLabel = conf?.committee?.trim()
+    ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
+    : conf?.name?.trim()
+      ? translateAgendaTopicLabel(tTopics, conf.name)
+      : "your committee";
+  const translatedCommittee = conf?.committee?.trim()
+    ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
+    : null;
+  const translatedTopic = conf?.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name) : null;
+  const line = [translatedCommittee, conf?.tagline].filter(Boolean).join(" · ") || translatedTopic || "Committee";
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string }[] = [
