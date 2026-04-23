@@ -3,8 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairMotionsPointsLog } from "@/components/chair/ChairMotionsPointsLog";
+import { getTranslations } from "next-intl/server";
 
 export default async function ChairMotionsPointsPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -43,7 +45,7 @@ export default async function ChairMotionsPointsPage() {
     .filter((row): row is { allocationId: string; label: string } => row != null);
 
   return (
-    <MunPageShell title="• Points log">
+    <MunPageShell title={t("pointsLog")}>
       <div className="space-y-2">
         <ChairMotionsPointsLog conferenceId={conferenceId} delegateOptions={delegateOptions} />
       </div>

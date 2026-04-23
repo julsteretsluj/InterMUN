@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { CommitteeGateForm } from "./CommitteeGateForm";
 import { StaffNotDelegateBypassForm } from "./StaffNotDelegateBypassForm";
@@ -13,6 +14,8 @@ export default async function CommitteeGatePage({
 }: {
   searchParams: Promise<{ next?: string; allocation?: string }>;
 }) {
+  const t = await getTranslations("committeeGate");
+  const tc = await getTranslations("common");
   const { next: nextRaw, allocation: allocationRaw } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//")
@@ -87,47 +90,45 @@ export default async function CommitteeGatePage({
         <BrandWordmark />
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10">
           <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
-          <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
-            Committee sign-in
-          </h1>
+          <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">{t("title")}</h1>
           <p className="text-sm text-brand-muted text-center mb-6">
-            After your account login, confirm your <strong>allocation</strong> and enter the{" "}
-            <strong>committee password</strong> from your chair.
+            {t.rich("description", {
+              alloc: (chunks) => <strong>{chunks}</strong>,
+              pwd: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
 
           {allocationChoices.length === 0 ? (
             <div className="space-y-5 text-sm text-brand-muted">
-              <p>
-                You do not have an allocation for this committee yet. Ask SMT to assign you in
-                the matrix before you can continue.
-              </p>
+              <p>{t("noAllocation")}</p>
               {staffBypass ? (
                 <StaffNotDelegateBypassForm conferenceId={conference.id} nextPath={nextPath} />
               ) : profile?.role === "chair" ? (
                 <p className="text-xs border border-brand-navy/10 rounded-lg p-3 bg-brand-cream/40">
-                  <strong>Dais chairs</strong> need a committee allocation from secretariat. After SMT
-                  adds your seat, reload and sign in with your allocation and the committee password.
+                  {t.rich("chairHint", {
+                    bold: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </p>
               ) : null}
               <Link
                 href="/room-gate"
                 className="inline-block text-brand-accent font-medium hover:underline"
               >
-                Change room code
+                {t("changeRoomCode")}
               </Link>
             </div>
           ) : (
             <div className="space-y-6">
               <CommitteeGateForm
                 conferenceId={conference.id}
-                conferenceTitle={title || "Conference"}
+                conferenceTitle={title || tc("conference")}
                 allocationChoices={allocationChoices}
                 initialAllocation={preselectedAllocation}
                 nextPath={nextPath}
               />
               {staffBypass ? (
                 <>
-                  <p className="text-center text-xs text-brand-muted">or</p>
+                  <p className="text-center text-xs text-brand-muted">{t("or")}</p>
                   <StaffNotDelegateBypassForm conferenceId={conference.id} nextPath={nextPath} />
                 </>
               ) : null}

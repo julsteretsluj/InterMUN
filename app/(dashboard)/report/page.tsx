@@ -4,12 +4,14 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
+import { getTranslations } from "next-intl/server";
 
 export default async function ReportPage({
   searchParams,
 }: {
   searchParams: Promise<{ about?: string; aboutName?: string }>;
 }) {
+  const t = await getTranslations("pageTitles");
   const { about, aboutName: aboutNameRaw } = await searchParams;
   const supabase = await createClient();
   const {
@@ -46,7 +48,7 @@ export default async function ReportPage({
         : undefined;
 
   return (
-    <MunPageShell title="Report">
+    <MunPageShell title={t("report")}>
       <ReportView
         reports={reports || []}
         canViewAll={canViewAll}

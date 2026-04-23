@@ -7,10 +7,12 @@ import type { ChairSeat } from "@/lib/award-participation-scoring";
 import { DelegateChairFeedbackPanel } from "@/components/delegate/DelegateChairFeedbackPanel";
 import { uniqueSuggestionStrings } from "@/lib/delegate-chair-feedback-suggestions";
 import { getCommitteeAwardScope } from "@/lib/conference-committee-canonical";
+import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function DelegateChairFeedbackPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -118,7 +120,7 @@ export default async function DelegateChairFeedbackPage() {
   );
 
   return (
-    <MunPageShell title="Chair feedback">
+    <MunPageShell title={t("chairFeedback")}>
       <DelegateChairFeedbackPanel
         chairSeats={seats}
         myScores={(myScores ?? []) as AwardParticipationScore[]}

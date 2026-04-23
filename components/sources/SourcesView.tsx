@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { ExternalLink, Link2, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -24,6 +25,8 @@ export function SourcesView({
   currentUserId: string;
   canEditAll: boolean;
 }) {
+  const tc = useTranslations("common");
+  const t = useTranslations("views.sources");
   const router = useRouter();
   const [items, setItems] = useState(sources);
   const [selectedId, setSelectedId] = useState<string | null>(() => sources[0]?.id ?? null);
@@ -154,37 +157,35 @@ export function SourcesView({
         className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
-        Add source
+        {t("addSource")}
       </button>
       {showForm && (
         <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">Source URL</span>
+            <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">{t("sourceUrl")}</span>
             <OpenNewGoogleDocButton />
           </div>
           <input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://docs.google.com/document/d/… (recommended)"
+            placeholder={t("urlPlaceholder")}
             className="mun-field"
           />
-          <p className="text-xs text-brand-muted">
-            For a new Google Doc, use the button and paste the document link here.
-          </p>
+          <p className="text-xs text-brand-muted">{t("urlHelp")}</p>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title (optional)"
+            placeholder={t("titleOptional")}
             className="mun-field"
           />
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => void addSource()} className="mun-btn-primary">
-              Save
+              {tc("save")}
             </button>
             <button type="button" onClick={() => setShowForm(false)} className="mun-btn">
-              Cancel
+              {tc("cancel")}
             </button>
           </div>
         </div>
@@ -192,9 +193,9 @@ export function SourcesView({
 
       {editing && (
         <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
-          <h3 className="font-semibold text-brand-navy dark:text-zinc-100">Edit source</h3>
+          <h3 className="font-semibold text-brand-navy dark:text-zinc-100">{t("editSource")}</h3>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">URL</span>
+            <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">{tc("url")}</span>
             <OpenNewGoogleDocButton />
           </div>
           <input
@@ -202,18 +203,18 @@ export function SourcesView({
             value={editUrl}
             onChange={(e) => setEditUrl(e.target.value)}
             className="mun-field"
-            placeholder="Google Doc or other URL"
+            placeholder={t("urlPlaceholderShort")}
           />
           <input
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
             className="mun-field"
-            placeholder="Title (optional)"
+            placeholder={t("titleOptional")}
           />
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => void saveEdit()} className="mun-btn-primary">
-              Save changes
+              {t("saveChanges")}
             </button>
             <button
               type="button"
@@ -224,20 +225,18 @@ export function SourcesView({
               }}
               className="mun-btn"
             >
-              Cancel
+              {tc("cancel")}
             </button>
           </div>
         </div>
       )}
 
       {items.length === 0 ? (
-        <p className="text-sm text-brand-muted">No sources yet. Add a Google Doc link to open it here.</p>
+        <p className="text-sm text-brand-muted">{t("empty")}</p>
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-56">
-            <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
-              Source
-            </label>
+            <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">{t("sourceLabel")}</label>
             <select
               className="mun-field lg:hidden"
               value={displaySelectedId ?? ""}
@@ -277,7 +276,7 @@ export function SourcesView({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-sm font-medium text-brand-accent hover:underline dark:text-brand-accent-bright"
                 >
-                  {selected.title || "Open link"}
+                  {selected.title || t("openLink")}
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden />
                 </a>
                 {(canEditAll || selected.user_id === currentUserId) && (
@@ -291,25 +290,23 @@ export function SourcesView({
                       }}
                       className="text-sm text-brand-accent hover:underline dark:text-brand-accent-bright"
                     >
-                      Edit
+                      {tc("edit")}
                     </button>
                     <button
                       type="button"
                       onClick={() => void deleteSource(selected.id)}
                       className="text-sm text-red-600 hover:underline"
                     >
-                      Delete
+                      {tc("delete")}
                     </button>
                   </div>
                 )}
               </div>
               {isGoogleDocsDocumentUrl(selected.url) ? (
-                <GoogleDocsEmbed googleDocsUrl={selected.url.trim()} heading="Source document" compact />
+                <GoogleDocsEmbed googleDocsUrl={selected.url.trim()} heading={t("embedHeading")} compact />
               ) : (
                 <div className="rounded-xl border border-amber-200/60 bg-amber-50/80 px-4 py-3 text-sm text-amber-950 dark:border-amber-500/30 dark:bg-amber-950/25 dark:text-amber-100/90">
-                  This URL is not a Google Doc. Use a{" "}
-                  <code className="text-xs">docs.google.com/document/d/…</code> link to embed and edit here;
-                  otherwise open the link above.
+                  {t("notGoogleDoc")}
                 </div>
               )}
             </div>

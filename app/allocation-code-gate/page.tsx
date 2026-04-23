@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
@@ -12,6 +13,8 @@ export default async function AllocationCodeGatePage({
 }: {
   searchParams: Promise<{ next?: string }>;
 }) {
+  const t = await getTranslations("allocationCodeGate");
+  const tc = await getTranslations("common");
   const { next: nextRaw } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//") ? nextRaw : "/delegate";
@@ -81,25 +84,24 @@ export default async function AllocationCodeGatePage({
         <BrandWordmark />
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10">
           <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
-          <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
-            Seat sign-in code
-          </h1>
+          <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">{t("title")}</h1>
           <p className="text-sm text-brand-muted text-center mb-6">
-            Third step after the conference and committee gates: enter the <strong>placard code</strong> for your
-            seat (same list chairs use for materials).
+            {t.rich("description", {
+              seat: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
 
           {countries.length === 0 ? (
             <div className="space-y-4 text-sm text-brand-muted">
-              <p>You do not have an allocation for this committee yet. Ask SMT to assign your seat first.</p>
+              <p>{t("noAllocation")}</p>
               <Link href="/room-gate" className="inline-block text-brand-accent font-medium hover:underline">
-                Change room code
+                {t("changeRoomCode")}
               </Link>
             </div>
           ) : (
             <AllocationCodeGateForm
               conferenceId={conference.id}
-              conferenceTitle={title || "Conference"}
+              conferenceTitle={title || tc("conference")}
               seatLabel={countries.join(", ")}
               nextPath={nextPath}
             />

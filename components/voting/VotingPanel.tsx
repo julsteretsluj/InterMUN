@@ -1,16 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteItem } from "@/types/database";
-import { formatVoteMajorityLabel } from "@/lib/format-vote-majority";
 import { HelpButton } from "@/components/HelpButton";
 import {
   DAIS_SEAT_CO_CHAIR,
   DAIS_SEAT_HEAD_CHAIR,
   sortAllocationsByDisplayCountry,
 } from "@/lib/allocation-display-order";
-import { parseRollAttendance, rollAttendanceRollLabel, type RollAttendance } from "@/lib/roll-attendance";
+import { parseRollAttendance, type RollAttendance } from "@/lib/roll-attendance";
 
 interface Vote {
   value: string;
@@ -32,12 +32,37 @@ export function VotingPanel({
   voteItems: VoteItem[];
   myRole: string;
 }) {
+  const t = useTranslations("views.voting");
   const [votes, setVotes] = useState<Record<string, Vote[]>>({});
   const [drafts, setDrafts] = useState<Record<string, { must_vote: boolean; required_majority: string }>>({});
   const [rosterByConferenceId, setRosterByConferenceId] = useState<Record<string, VotingRosterEntry[]>>({});
   const supabase = createClient();
 
   const canManageVotes = myRole === "chair";
+
+  function majorityLabel(requiredMajority: string): string {
+    return requiredMajority === "2/3" ? t("majorityTwoThirds") : t("majoritySimple");
+  }
+
+  function voteTypeLabel(voteType: string): string {
+    if (voteType === "motion" || voteType === "amendment" || voteType === "resolution") {
+      return t(`voteTypes.${voteType}`);
+    }
+    return voteType.charAt(0).toUpperCase() + voteType.slice(1);
+  }
+
+  function rollAttendanceLabel(att: RollAttendance | undefined): string {
+    switch (att) {
+      case "absent":
+        return t("roll.absent");
+      case "present_abstain":
+        return t("roll.present_abstain");
+      case "present_voting":
+        return t("roll.present_voting");
+      default:
+        return t("roll.unknown");
+    }
+  }
 
   useEffect(() => {
     voteItems.forEach((item) => {
@@ -197,8 +222,8 @@ export function VotingPanel({
     const { yes, no, total, passes } = getResult(item);
     const d = drafts[item.id] || { must_vote: item.must_vote, required_majority: item.required_majority };
     const isClosed = !!item.closed_at;
-    const typeLabel = item.vote_type.charAt(0).toUpperCase() + item.vote_type.slice(1);
-    const titleLine = item.title?.trim() || "Untitled";
+    const typeLabel = voteTypeLabel(item.vote_type);
+    const titleLine = item.title?.trim() || t("untitled");
     const proc = item.procedure_code?.replace(/_/g, " ");
     const roster = rosterByConferenceId[item.conference_id] ?? [];
     const voteMap: Record<string, "yes" | "no" | "abstain"> = {};
@@ -213,11 +238,8 @@ export function VotingPanel({
         <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
           <label className="block text-sm text-brand-navy dark:text-brand-navy">
               <div className="flex items-center justify-between gap-2">
-                <span className="mun-label">Required majority</span>
-                <HelpButton title="Required majority">
-                  Choose the vote threshold used to decide pass/fail. `Simple` is more than half. `2/3`
-                  requires a supermajority.
-                </HelpButton>
+                <span className="mun-label">{t("requiredMajority")}</span>
+                <HelpButton title={t("helpRequiredMajorityTitle")}>{t("helpRequiredMajorityBody")}</HelpButton>
               </div>
             <select
               value={d.required_majority}
@@ -229,8 +251,8 @@ export function VotingPanel({
               }
               className="mun-field mt-1.5"
             >
-              <option value="simple">Simple</option>
-              <option value="2/3">2/3</option>
+              <option value="simple">{t("majoritySimple")}</option>
+              <option value="2/3">{t("majorityTwoThirds")}</option>
             </select>
           </label>
             <div className="flex flex-col items-end gap-1">
@@ -246,12 +268,9 @@ export function VotingPanel({
                     }))
                   }
                 />
-                <span className="font-medium">MUST vote</span>
+                <span className="font-medium">{t("mustVote")}</span>
               </label>
-              <HelpButton title="MUST vote">
-                Marks this motion as a “must-vote” item. This is used to communicate the requirement to
-                participants (depending on your committee’s setup).
-              </HelpButton>
+              <HelpButton title={t("helpMustVoteTitle")}>{t("helpMustVoteBody")}</HelpButton>
             </div>
         </div>
         <button
@@ -259,7 +278,7 @@ export function VotingPanel({
           className="mun-btn-primary w-full sm:w-auto"
           onClick={() => void saveSettings(item.id, d.must_vote, d.required_majority)}
         >
-          Save settings
+          {t("saveSettings")}
         </button>
       </div>
     ) : null;
@@ -285,40 +304,37 @@ export function VotingPanel({
                   : "bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-brand-muted"
               }`}
             >
-              {item.must_vote ? "MUST vote" : "CAN vote"}
+              {item.must_vote ? t("mustVoteBadge") : t("canVoteBadge")}
             </span>
             <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-white/10 dark:text-brand-muted">
-              {formatVoteMajorityLabel(item.required_majority)} majority
+              {t("majorityLine", { label: majorityLabel(item.required_majority) })}
             </span>
           </div>
         </header>
 
         {myRole === "delegate" ? (
-          <p className="mun-muted mt-3 text-sm leading-relaxed">
-            The dais records votes in session (e.g. roll call). Motion votes here follow Yes/No only (abstain is not
-            used). You can follow the tally; delegates do not cast votes in the app.
-          </p>
+          <p className="mun-muted mt-3 text-sm leading-relaxed">{t("delegateBlurb")}</p>
         ) : null}
 
         {isClosed ? (
           <div className="mt-4 space-y-4">
             <div className="mun-inset flex flex-wrap items-center gap-x-6 gap-y-2">
               <div className="text-center sm:text-left">
-                <p className="mun-label">Yes</p>
+                <p className="mun-label">{t("yes")}</p>
                 <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{yes}</p>
               </div>
               <div className="hidden h-8 w-px bg-slate-200 sm:block dark:bg-white/15" aria-hidden />
               <div className="text-center sm:text-left">
-                <p className="mun-label">No</p>
+                <p className="mun-label">{t("no")}</p>
                 <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{no}</p>
               </div>
               <div className="hidden h-8 w-px bg-slate-200 sm:block dark:bg-white/15" aria-hidden />
               <div className="text-center sm:text-left">
-                <p className="mun-label">Ballots</p>
+                <p className="mun-label">{t("ballots")}</p>
                 <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{total}</p>
               </div>
               <div className="w-full border-t border-slate-200 pt-3 sm:ml-auto sm:w-auto sm:border-0 sm:pt-0 dark:border-white/10">
-                <p className="mun-label mb-1">Outcome</p>
+                <p className="mun-label mb-1">{t("outcome")}</p>
                 {total > 0 ? (
                   <p
                     className={`font-display text-lg font-semibold ${
@@ -327,10 +343,10 @@ export function VotingPanel({
                         : "text-rose-700 dark:text-rose-400"
                     }`}
                   >
-                    {passes ? "Passed" : "Failed"}
+                    {passes ? t("passed") : t("failed")}
                   </p>
                 ) : (
-                  <p className="mun-muted text-sm">No recorded votes</p>
+                  <p className="mun-muted text-sm">{t("noRecordedVotes")}</p>
                 )}
               </div>
             </div>
@@ -338,12 +354,14 @@ export function VotingPanel({
             {canManageVotes ? (
               <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
                 <button type="button" className="mun-btn" onClick={() => void setClosed(item.id, false)}>
-                  Reopen motion
+                  {t("reopenMotion")}
                 </button>
                 <details className="group sm:ml-auto">
                   <summary className="mun-btn cursor-pointer list-none py-2 text-center [&::-webkit-details-marker]:hidden">
-                    <span className="text-brand-navy group-open:hidden dark:text-brand-navy">Edit record…</span>
-                    <span className="hidden text-brand-navy group-open:inline dark:text-brand-navy">Hide settings</span>
+                    <span className="text-brand-navy group-open:hidden dark:text-brand-navy">{t("editRecordOpen")}</span>
+                    <span className="hidden text-brand-navy group-open:inline dark:text-brand-navy">
+                      {t("hideSettings")}
+                    </span>
                   </summary>
                   <div className="mt-3 border-t border-slate-200 pt-3 dark:border-white/10">{chairSettings}</div>
                 </details>
@@ -355,15 +373,15 @@ export function VotingPanel({
             {chairSettings}
             <div className="mun-inset flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
               <span>
-                <span className="mun-label mr-1">Yes</span>
+                <span className="mun-label mr-1">{t("yes")}</span>
                 <span className="font-semibold tabular-nums text-brand-navy">{yes}</span>
               </span>
               <span>
-                <span className="mun-label mr-1">No</span>
+                <span className="mun-label mr-1">{t("no")}</span>
                 <span className="font-semibold tabular-nums text-brand-navy">{no}</span>
               </span>
               <span>
-                <span className="mun-label mr-1">Total</span>
+                <span className="mun-label mr-1">{t("total")}</span>
                 <span className="font-semibold tabular-nums text-brand-navy">{total}</span>
               </span>
               {total > 0 ? (
@@ -372,17 +390,15 @@ export function VotingPanel({
                     passes ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-rose-700 dark:text-rose-400"
                   }`}
                 >
-                  {passes ? "Passing" : "Failing"} (preliminary)
+                  {passes ? t("preliminaryPassing") : t("preliminaryFailing")}
                 </span>
               ) : null}
             </div>
             {canManageVotes ? (
               <div className="mun-inset space-y-2">
-                <p className="mun-label">
-                  Delegate roll call ({roster.length})
-                </p>
+                <p className="mun-label">{t("delegateRollCall", { count: roster.length })}</p>
                 {roster.length === 0 ? (
-                  <p className="mun-muted">No seated delegates available for this motion.</p>
+                  <p className="mun-muted">{t("noSeatedDelegates")}</p>
                 ) : (
                   <div className="max-h-[26rem] space-y-2 overflow-y-auto pr-1">
                     {roster.map((row) => {
@@ -399,15 +415,15 @@ export function VotingPanel({
                             <div>
                               <p className="font-medium text-brand-navy">{row.country}</p>
                               <p className="mt-0.5 text-xs text-slate-500 dark:text-brand-muted">
-                                Roll: {rollAttendanceRollLabel(row.rollAttendance)} · Recorded:{" "}
+                                {t("rollPrefix")} {rollAttendanceLabel(row.rollAttendance)} · {t("recordedPrefix")}{" "}
                                 <span className="font-medium text-brand-navy">
                                   {recorded === "yes"
-                                    ? "Yes"
+                                    ? t("recordedYes")
                                     : recorded === "no"
-                                      ? "No"
+                                      ? t("recordedNo")
                                       : recorded === "abstain"
-                                        ? "Abstain"
-                                        : "—"}
+                                        ? t("recordedAbstain")
+                                        : t("recordedNone")}
                                 </span>
                               </p>
                             </div>
@@ -417,7 +433,7 @@ export function VotingPanel({
                                 onClick={() => void recordVoteForMotion(item.id, row.userId, "yes")}
                                 className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
                               >
-                                Yes
+                                {t("yes")}
                               </button>
                               {canAbstain ? (
                                 <button
@@ -425,7 +441,7 @@ export function VotingPanel({
                                   onClick={() => void recordVoteForMotion(item.id, row.userId, "abstain")}
                                   className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500"
                                 >
-                                  Abstain
+                                  {t("abstain")}
                                 </button>
                               ) : null}
                               <button
@@ -433,14 +449,14 @@ export function VotingPanel({
                                 onClick={() => void recordVoteForMotion(item.id, row.userId, "no")}
                                 className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600"
                               >
-                                No
+                                {t("no")}
                               </button>
                               <button
                                 type="button"
                                 onClick={() => void clearVoteForMotion(item.id, row.userId)}
                                 className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-white/20 dark:bg-white/10 dark:text-brand-navy dark:hover:bg-white/15"
                               >
-                                Clear
+                                {t("clear")}
                               </button>
                             </div>
                           </div>
@@ -457,7 +473,7 @@ export function VotingPanel({
                 className="mun-btn border-rose-300/80 text-rose-800 hover:bg-rose-50 dark:border-rose-500/35 dark:text-rose-200 dark:hover:bg-rose-950/40"
                 onClick={() => void setClosed(item.id, true)}
               >
-                Close motion
+                {t("closeMotion")}
               </button>
             ) : null}
           </div>
@@ -469,20 +485,20 @@ export function VotingPanel({
   return (
     <div className="space-y-8">
       {voteItems.length === 0 ? (
-        <p className="mun-muted">No motions yet.</p>
+        <p className="mun-muted">{t("noMotions")}</p>
       ) : (
         <>
           <section className="space-y-3">
-            <h3 className="mun-label">Current open motion</h3>
+            <h3 className="mun-label">{t("currentOpenMotion")}</h3>
             {openItems.length > 0 ? (
               <div className="space-y-4">{openItems.map((i) => renderVoteCard(i as VoteItemRow))}</div>
             ) : (
-              <p className="mun-muted">No open motion right now.</p>
+              <p className="mun-muted">{t("noOpenMotion")}</p>
             )}
           </section>
           {closedItems.length > 0 ? (
             <section className="space-y-3">
-              <h3 className="mun-label">Recent closed motions</h3>
+              <h3 className="mun-label">{t("recentClosedMotions")}</h3>
               <div className="space-y-4">{closedItems.map((i) => renderVoteCard(i as VoteItemRow))}</div>
             </section>
           ) : null}

@@ -1,83 +1,90 @@
-/** Curated official UN & system links (inspired by [SEAMUNs Dashboard](https://thedashboard.seamuns.site/) home). */
+/** Curated official UN & system links — labels resolved via next-intl (`officialLinks.groups.*`, `officialLinks.links.*`). */
 
-export type OfficialLinkGroup = {
-  title: string;
-  links: { label: string; href: string }[];
+export type OfficialLinkGroupDef = {
+  groupKey:
+    | "documentsArticles"
+    | "legislationTreaties"
+    | "mainBodies"
+    | "programmesFunds"
+    | "specializedAgencies"
+    | "peacekeepingMissions"
+    | "foundersMembers";
+  links: { linkKey: string; href: string }[];
 };
 
-export const OFFICIAL_UN_LINK_GROUPS: OfficialLinkGroup[] = [
+export const OFFICIAL_UN_LINK_GROUPS_DEF: OfficialLinkGroupDef[] = [
   {
-    title: "Documents & articles",
+    groupKey: "documentsArticles",
     links: [
-      { label: "UN Official Document System (ODS)", href: "https://documents.un.org/" },
-      { label: "UN Digital Library", href: "https://digitallibrary.un.org/" },
-      { label: "UN News", href: "https://news.un.org/" },
-      { label: "UN Yearbook", href: "https://www.un.org/en/yearbook/" },
-      { label: "UN Press", href: "https://press.un.org/" },
+      { linkKey: "ods", href: "https://documents.un.org/" },
+      { linkKey: "digitalLibrary", href: "https://digitallibrary.un.org/" },
+      { linkKey: "unNews", href: "https://news.un.org/" },
+      { linkKey: "yearbook", href: "https://www.un.org/en/yearbook/" },
+      { linkKey: "unPress", href: "https://press.un.org/" },
     ],
   },
   {
-    title: "Legislation & treaties",
+    groupKey: "legislationTreaties",
     links: [
-      { label: "UN Treaty Collection", href: "https://treaties.un.org/" },
-      { label: "UN Audiovisual Library of International Law", href: "https://legal.un.org/avl/" },
-      { label: "UNCITRAL (International Trade Law)", href: "https://uncitral.un.org/" },
-      { label: "UN Charter", href: "https://www.un.org/en/about-us/un-charter" },
+      { linkKey: "treatyCollection", href: "https://treaties.un.org/" },
+      { linkKey: "avl", href: "https://legal.un.org/avl/" },
+      { linkKey: "uncitral", href: "https://uncitral.un.org/" },
+      { linkKey: "charter", href: "https://www.un.org/en/about-us/un-charter" },
     ],
   },
   {
-    title: "Main bodies",
+    groupKey: "mainBodies",
     links: [
-      { label: "UN General Assembly", href: "https://www.un.org/ga/" },
-      { label: "UN Security Council", href: "https://www.un.org/securitycouncil/" },
-      { label: "UN ECOSOC", href: "https://www.un.org/ecosoc/" },
-      { label: "International Court of Justice (ICJ)", href: "https://www.icj-cij.org/" },
-      { label: "UN Secretariat", href: "https://www.un.org/sg/" },
-      { label: "UN Trusteeship Council", href: "https://www.un.org/en/about-us/trusteeship-council" },
+      { linkKey: "ga", href: "https://www.un.org/ga/" },
+      { linkKey: "sc", href: "https://www.un.org/securitycouncil/" },
+      { linkKey: "ecosoc", href: "https://www.un.org/ecosoc/" },
+      { linkKey: "icj", href: "https://www.icj-cij.org/" },
+      { linkKey: "secretariat", href: "https://www.un.org/sg/" },
+      { linkKey: "trusteeship", href: "https://www.un.org/en/about-us/trusteeship-council" },
     ],
   },
   {
-    title: "Programmes & funds",
+    groupKey: "programmesFunds",
     links: [
-      { label: "UNDP", href: "https://www.undp.org/" },
-      { label: "UNICEF", href: "https://www.unicef.org/" },
-      { label: "UNHCR", href: "https://www.unhcr.org/" },
-      { label: "WFP (World Food Programme)", href: "https://www.wfp.org/" },
-      { label: "UNFPA", href: "https://www.unfpa.org/" },
-      { label: "UN Environment Programme (UNEP)", href: "https://www.unep.org/" },
-      { label: "UN Women", href: "https://www.unwomen.org/" },
-      { label: "UN-Habitat", href: "https://unhabitat.org/" },
+      { linkKey: "undp", href: "https://www.undp.org/" },
+      { linkKey: "unicef", href: "https://www.unicef.org/" },
+      { linkKey: "unhcr", href: "https://www.unhcr.org/" },
+      { linkKey: "wfp", href: "https://www.wfp.org/" },
+      { linkKey: "unfpa", href: "https://www.unfpa.org/" },
+      { linkKey: "unep", href: "https://www.unep.org/" },
+      { linkKey: "unwomen", href: "https://www.unwomen.org/" },
+      { linkKey: "unhabitat", href: "https://unhabitat.org/" },
     ],
   },
   {
-    title: "Specialized agencies & related",
+    groupKey: "specializedAgencies",
     links: [
-      { label: "WHO", href: "https://www.who.int/" },
-      { label: "UNESCO", href: "https://www.unesco.org/" },
-      { label: "IOM (International Organization for Migration)", href: "https://www.iom.int/" },
-      { label: "UN Office on Drugs and Crime (UNODC)", href: "https://www.unodc.org/" },
-      { label: "UN Office for Disarmament Affairs (UNODA)", href: "https://www.un.org/disarmament/" },
-      { label: "UN Human Rights (OHCHR)", href: "https://www.ohchr.org/" },
-      { label: "World Bank", href: "https://www.worldbank.org/" },
-      { label: "IMF", href: "https://www.imf.org/" },
-      { label: "ILO", href: "https://www.ilo.org/" },
-      { label: "FAO", href: "https://www.fao.org/" },
+      { linkKey: "who", href: "https://www.who.int/" },
+      { linkKey: "unesco", href: "https://www.unesco.org/" },
+      { linkKey: "iom", href: "https://www.iom.int/" },
+      { linkKey: "unodc", href: "https://www.unodc.org/" },
+      { linkKey: "unoda", href: "https://www.un.org/disarmament/" },
+      { linkKey: "ohchr", href: "https://www.ohchr.org/" },
+      { linkKey: "worldbank", href: "https://www.worldbank.org/" },
+      { linkKey: "imf", href: "https://www.imf.org/" },
+      { linkKey: "ilo", href: "https://www.ilo.org/" },
+      { linkKey: "fao", href: "https://www.fao.org/" },
     ],
   },
   {
-    title: "Peacekeeping & missions",
+    groupKey: "peacekeepingMissions",
     links: [
-      { label: "UN Peacekeeping", href: "https://peacekeeping.un.org/" },
-      { label: "UN Peacekeeping – current missions", href: "https://peacekeeping.un.org/en/missions" },
-      { label: "UN Special Political Missions", href: "https://dppa.un.org/en/special-political-missions" },
+      { linkKey: "peacekeeping", href: "https://peacekeeping.un.org/" },
+      { linkKey: "peacekeepingCurrent", href: "https://peacekeeping.un.org/en/missions" },
+      { linkKey: "spm", href: "https://dppa.un.org/en/special-political-missions" },
     ],
   },
   {
-    title: "Founders & members",
+    groupKey: "foundersMembers",
     links: [
-      { label: "UN Member States", href: "https://www.un.org/en/about-us/member-states" },
-      { label: "UN System (founders & members)", href: "https://www.un.org/en/about-us/un-system" },
-      { label: "UN History", href: "https://www.un.org/en/about-us/history" },
+      { linkKey: "memberStates", href: "https://www.un.org/en/about-us/member-states" },
+      { linkKey: "unSystem", href: "https://www.un.org/en/about-us/un-system" },
+      { linkKey: "history", href: "https://www.un.org/en/about-us/history" },
     ],
   },
 ];

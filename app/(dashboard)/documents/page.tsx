@@ -1,8 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { DocumentsView } from "@/components/documents/DocumentsView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { getTranslations } from "next-intl/server";
 
 export default async function DocumentsPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -52,7 +54,7 @@ export default async function DocumentsPage() {
   ];
 
   return (
-    <MunPageShell title="Documents">
+    <MunPageShell title={t("documents")}>
       <DocumentsView
         documents={mergedDocs || []}
         currentUserId={user.id}

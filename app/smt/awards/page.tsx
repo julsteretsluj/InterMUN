@@ -24,9 +24,11 @@ import type { ChairNominationRow } from "./ChairNominationsPanel";
 import type { BestDelegateComparisonRow } from "./SmtBestDelegateComparison";
 import { SmtAwardsRefreshOnFocus } from "./SmtAwardsRefreshOnFocus";
 import { SmtAwardsTabs } from "./SmtAwardsTabs";
+import { getTranslations } from "next-intl/server";
 export const dynamic = "force-dynamic";
 
 export default async function SmtAwardsPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -250,7 +252,7 @@ export default async function SmtAwardsPage() {
   }));
 
   return (
-    <MunPageShell title="Awards">
+    <MunPageShell title={t("awardsSmt")}>
       <SmtAwardsRefreshOnFocus />
       {nominationsError ? (
         <div

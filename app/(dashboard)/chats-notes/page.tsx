@@ -5,6 +5,7 @@ import { requireActiveConferenceId } from "@/lib/active-conference";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import { getTranslations } from "next-intl/server";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -66,6 +67,7 @@ export default async function ChatsNotesPage({
 }: {
   searchParams: Promise<{ forProfile?: string }>;
 }) {
+  const t = await getTranslations("pageTitles");
   const { forProfile } = await searchParams;
   const supabase = await createClient();
   const {
@@ -303,7 +305,7 @@ export default async function ChatsNotesPage({
   });
 
   return (
-    <MunPageShell title="Notes">
+    <MunPageShell title={t("notes")}>
       <DelegationNotesView
         conferenceId={conferenceId}
         initialNotes={initialNotes}

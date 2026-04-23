@@ -243,6 +243,7 @@ export function SessionControlClient({
   const [daisEditPublishAt, setDaisEditPublishAt] = useState("");
   const [pauseEvents, setPauseEvents] = useState<PauseEvent[]>([]);
   const [pauseReasonDraft, setPauseReasonDraft] = useState("");
+  const [timerWorkflowTab, setTimerWorkflowTab] = useState<"setup" | "clock" | "notes" | "log">("setup");
   const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
   const [speechNoteDraft, setSpeechNoteDraft] = useState("");
   const [speechNotesRecent, setSpeechNotesRecent] = useState<ChairSpeechNoteRow[]>([]);
@@ -269,6 +270,9 @@ export function SessionControlClient({
   const [motionAudit, setMotionAudit] = useState<MotionAudit[]>([]);
   const [motionTally, setMotionTally] = useState({ yes: 0, no: 0, total: 0 });
   const [motionVoteByUser, setMotionVoteByUser] = useState<Record<string, "yes" | "no" | "abstain">>({});
+  const [motionWorkflowTab, setMotionWorkflowTab] = useState<
+    "setup" | "floor" | "draft" | "votes" | "history"
+  >("setup");
   const [motionDraft, setMotionDraft] = useState({
     vote_type: "motion" as VoteType,
     procedure_code: null as string | null,
@@ -2428,6 +2432,37 @@ export function SessionControlClient({
             motion to finalize pass/fail.
           </HelpButton>
         </div>
+        <div className="flex flex-wrap gap-2">
+          {(
+            [
+              ["setup", "1) Setup"],
+              ["floor", "2) Floor queue"],
+              ["draft", "3) Draft motion"],
+              ["votes", "4) Record votes"],
+              ["history", "5) History"],
+            ] as const
+          ).map(([id, label]) => {
+            const active = motionWorkflowTab === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setMotionWorkflowTab(id)}
+                className={[
+                  "rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
+                  active
+                    ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
+                    : "border-white/20 bg-black/25 text-brand-muted hover:text-brand-navy hover:bg-black/20",
+                ].join(" ")}
+                aria-pressed={active}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+        {motionWorkflowTab === "setup" ? (
+          <>
         <p className="text-xs text-brand-muted">
           Chair-only: one vote open at a time. Delegates do not vote in the app — use{" "}
           <span className="font-medium text-brand-navy/90">Record votes</span> below to call each placard; record{" "}
@@ -2522,6 +2557,8 @@ export function SessionControlClient({
             </p>
           </div>
         ) : null}
+          </>
+        ) : null}
         <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
           <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">Points workflow</p>
           <div className="grid gap-2 md:grid-cols-[1fr_1fr_auto_auto]">
@@ -2599,6 +2636,8 @@ export function SessionControlClient({
           ) : null}
         </div>
         <div className={`${surfaceCard} space-y-3`}>
+          {motionWorkflowTab === "floor" ? (
+            <>
           <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
             <p className="text-sm font-medium text-brand-navy">
               Motion floor:{" "}
@@ -2690,7 +2729,11 @@ export function SessionControlClient({
               </ol>
             </div>
           ) : null}
+            </>
+          ) : null}
 
+          {motionWorkflowTab === "draft" ? (
+            <>
           <label className="text-sm text-brand-navy">
             <span className="flex items-center justify-between gap-2">
               <span className={surfaceLabel}>Procedure preset</span>
@@ -3093,6 +3136,10 @@ export function SessionControlClient({
           {motionDraftValidationError ? (
             <p className="text-xs text-amber-800 dark:text-amber-200">{motionDraftValidationError}</p>
           ) : null}
+            </>
+          ) : null}
+          {motionWorkflowTab === "votes" ? (
+            <>
           <div className="text-xs text-brand-muted font-medium">
             Tally: Yes {motionTally.yes} | No {motionTally.no} | Ballots {motionTally.total}
             <span className="mt-1 block font-normal text-[0.65rem] leading-snug">
@@ -3243,8 +3290,12 @@ export function SessionControlClient({
               )}
             </div>
           ) : null}
+            </>
+          ) : null}
         </div>
 
+        {motionWorkflowTab === "history" ? (
+          <>
         <div className={surfaceCard}>
           <p className={`${surfaceLabel} mb-2 tracking-wider`}>Audit timeline</p>
           {motionAudit.length === 0 ? (
@@ -3301,6 +3352,8 @@ export function SessionControlClient({
             ))}
           </ul>
         </div>
+          </>
+        ) : null}
       </section>
       ) : null}
 
@@ -3312,7 +3365,37 @@ export function SessionControlClient({
             Use General floor for overall debate timing, or Motion vote to tie visibility to a specific open vote item.
           </HelpButton>
         </div>
+        <div className="flex flex-wrap gap-2">
+          {(
+            [
+              ["setup", "1) Setup"],
+              ["clock", "2) Clock controls"],
+              ["notes", "3) Speech notes"],
+              ["log", "4) Pause log"],
+            ] as const
+          ).map(([id, label]) => {
+            const active = timerWorkflowTab === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setTimerWorkflowTab(id)}
+                className={[
+                  "rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
+                  active
+                    ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
+                    : "border-white/20 bg-black/25 text-brand-muted hover:text-brand-navy hover:bg-black/20",
+                ].join(" ")}
+                aria-pressed={active}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
         <div className={`${surfaceCard} space-y-3`}>
+          {timerWorkflowTab === "setup" ? (
+            <>
           <p className="text-sm text-brand-muted">
             Choose whether this timer is for <strong className="font-medium text-brand-navy">general floor</strong>{" "}
             (always visible to delegates) or tied to the{" "}
@@ -3406,6 +3489,10 @@ export function SessionControlClient({
               ) : null}
             </label>
           ) : null}
+            </>
+          ) : null}
+          {timerWorkflowTab === "clock" ? (
+            <>
           <p className="text-sm text-brand-navy">
             <span className={surfaceLabel}>Clock</span>{" "}
             <span className="font-medium">{timer.isRunning ? "Running" : "Paused"}</span>
@@ -3476,7 +3563,10 @@ export function SessionControlClient({
               />
             </label>
           </div>
+            </>
+          ) : null}
 
+          {timerWorkflowTab === "notes" ? (
           <div className="rounded-lg border border-white/15 bg-black/20 p-3 space-y-3 text-brand-navy">
             <div>
               <p className={surfaceLabel}>Speech notes (current speaker)</p>
@@ -3549,7 +3639,9 @@ export function SessionControlClient({
               </div>
             ) : null}
           </div>
+          ) : null}
 
+          {timerWorkflowTab === "clock" ? (
           <div className="flex flex-wrap gap-4 items-end">
             <label className="text-sm text-brand-navy min-w-[10rem]">
               <span className={surfaceLabel}>Speaker time (remaining)</span>
@@ -3616,21 +3708,30 @@ export function SessionControlClient({
               </button>
             ) : null}
           </div>
-          {pauseEvents.length > 0 ? (
-            <div className="border-t border-white/12 pt-3">
-              <p className={`${surfaceLabel} mb-2`}>Recent pause log</p>
-              <ul className="max-h-36 space-y-1.5 overflow-y-auto text-xs text-brand-navy/85">
-                {pauseEvents.map((ev) => (
-                  <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
-                    <time className="shrink-0 text-brand-muted" dateTime={ev.created_at}>
-                      {new Date(ev.created_at).toLocaleString()}
-                    </time>
-                    <span>{ev.reason}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           ) : null}
+          {timerWorkflowTab === "log" ? (
+            pauseEvents.length > 0 ? (
+              <div className="border-t border-white/12 pt-3">
+                <p className={`${surfaceLabel} mb-2`}>Recent pause log</p>
+                <ul className="max-h-36 space-y-1.5 overflow-y-auto text-xs text-brand-navy/85">
+                  {pauseEvents.map((ev) => (
+                    <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
+                      <time className="shrink-0 text-brand-muted" dateTime={ev.created_at}>
+                        {new Date(ev.created_at).toLocaleString()}
+                      </time>
+                      <span>{ev.reason}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="text-xs text-brand-muted">No pause events logged yet for this committee.</p>
+            )
+          ) : (
+            <p className="text-xs text-brand-muted">
+              Open Pause log to review recorded pause reasons and timestamps.
+            </p>
+          )}
         </div>
       </section>
       ) : null}

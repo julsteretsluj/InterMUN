@@ -7,8 +7,12 @@ import { DelegateCountdownCard } from "@/components/delegate/DelegateCountdownCa
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { getTranslations } from "next-intl/server";
 
 export default async function DelegateDashboardPage() {
+  const tp = await getTranslations("pageTitles");
+  const td = await getTranslations("delegateDashboard");
+  const tc = await getTranslations("common");
   const supabase = await createClient();
   const {
     data: { user },
@@ -32,42 +36,47 @@ export default async function DelegateDashboardPage() {
     .select("committee, tagline, name")
     .eq("id", conferenceId)
     .maybeSingle();
-  const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
-  const countryLabel = myAllocation?.country?.trim() || profile?.country?.trim() || "your country";
+  const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || tc("committee");
+  const countryLabel = myAllocation?.country?.trim() || profile?.country?.trim() || tc("yourCountry");
   const countryFlag = flagEmojiForCountryName(countryLabel);
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
-  const tiles: { href: string; label: string; hint: string }[] = [
-    { href: "/stances", label: "Country & stance", hint: "Your position and prep" },
-    { href: "/delegate#countdown", label: "Countdown", hint: "Committee-wide deadlines" },
-    { href: "/committee-room", label: "Committee matrix", hint: "Seats and committee room" },
-    { href: "/speeches", label: "Prep & speeches", hint: "Speech drafts and floor prep" },
-    { href: "/sources", label: "Trusted sources", hint: "Research links and nation sources" },
-    { href: "/guides", label: "Guides & resources", hint: "How-to and chair-facing references" },
-    { href: "/running-notes", label: "Checklist & running notes", hint: "Session scratch pad" },
-    { href: "/official-links", label: "Official UN links", hint: "Documents, bodies, programmes" },
-    { href: "/delegate/chair-feedback", label: "Chair feedback", hint: "Rate your dais (aggregated for SMT)" },
-    { href: "/voting", label: "Voting", hint: "When your chair opens a vote" },
-    { href: "/documents", label: "Archive", hint: "Your documents" },
+  const tileDefs: { href: string; key: string }[] = [
+    { href: "/stances", key: "stances" },
+    { href: "/delegate#countdown", key: "countdown" },
+    { href: "/committee-room", key: "matrix" },
+    { href: "/speeches", key: "speeches" },
+    { href: "/sources", key: "sources" },
+    { href: "/guides", key: "guides" },
+    { href: "/running-notes", key: "running" },
+    { href: "/official-links", key: "officialLinks" },
+    { href: "/delegate/chair-feedback", key: "chairFeedback" },
+    { href: "/voting", key: "voting" },
+    { href: "/documents", key: "archive" },
     ...(crisisReportingEnabled
-      ? ([
-          { href: "/crisis-slides", label: "Crisis slides", hint: "Live deck in the app" },
-          { href: "/report", label: "Crisis / report", hint: "Raise an issue" },
-        ] as const)
+      ? [
+          { href: "/crisis-slides", key: "crisisSlides" },
+          { href: "/report", key: "crisisReport" },
+        ]
       : []),
   ];
 
+  const tiles = tileDefs.map((def) => ({
+    href: def.href,
+    label: td(`tiles.${def.key}.label`),
+    hint: td(`tiles.${def.key}.hint`),
+  }));
+
   return (
-    <MunPageShell title="Delegate dashboard">
+    <MunPageShell title={tp("delegateDashboard")}>
       <div className="space-y-6">
         <header className="space-y-2">
           <h1 className="font-display text-3xl font-semibold text-brand-navy">
-            Welcome, Delegate of {countryFlag} {countryLabel}
+            {td("welcome", { flag: countryFlag, country: countryLabel })}
           </h1>
           <p className="text-sm text-brand-muted">
-            Active committee: <span className="font-semibold text-brand-navy">{line}</span>.
-            Countdown dates are shared with everyone in this committee. Your prep, stances, and documents stay with
-            your account.
+            {td("activeCommitteeIntro", { line })}{" "}
+            {td("activeCommitteeBody")}
           </p>
         </header>
 
@@ -76,17 +85,17 @@ export default async function DelegateDashboardPage() {
 
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-            Jump to
+            {td("jumpTo")}
           </h2>
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-            {tiles.map((t) => (
-              <li key={t.href + t.label}>
+            {tiles.map((tile) => (
+              <li key={tile.href + tile.label}>
                 <Link
-                  href={t.href}
+                  href={tile.href}
                   className="block rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-sm transition hover:border-brand-accent/45 hover:bg-brand-accent/8 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
                 >
-                  <span className="font-semibold text-slate-900 dark:text-zinc-50">{t.label}</span>
-                  <span className="mt-0.5 block text-xs text-slate-500 dark:text-zinc-400">{t.hint}</span>
+                  <span className="font-semibold text-slate-900 dark:text-zinc-50">{tile.label}</span>
+                  <span className="mt-0.5 block text-xs text-slate-500 dark:text-zinc-400">{tile.hint}</span>
                 </Link>
               </li>
             ))}

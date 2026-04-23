@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   Activity,
   CalendarDays,
@@ -17,23 +18,33 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+export type SmtNavKey =
+  | "liveCommittees"
+  | "eventSessions"
+  | "roomCodes"
+  | "awards"
+  | "allocationMatrix"
+  | "allocationPasswords"
+  | "profile"
+  | "follow";
+
 type SmtNavItem = {
   href: string;
-  label: string;
+  navKey: SmtNavKey;
   icon: LucideIcon;
   /** Live committees hub: `/smt` and `/smt/committees/*` */
   isLiveHub?: boolean;
 };
 
 const SMT_NAV_ITEMS: SmtNavItem[] = [
-  { href: "/smt", label: "Live committees", icon: Activity, isLiveHub: true },
-  { href: "/smt/conference", label: "Event & sessions", icon: CalendarDays },
-  { href: "/smt/room-codes", label: "Room codes & chairs", icon: DoorOpen },
-  { href: "/smt/awards", label: "Awards", icon: Trophy },
-  { href: "/smt/allocation-matrix", label: "Allocation matrix", icon: Users },
-  { href: "/smt/allocation-passwords", label: "Allocation passwords", icon: KeyRound },
-  { href: "/smt/profile", label: "Profile", icon: Settings },
-  { href: "/smt/follow", label: "Follow", icon: UserPlus },
+  { href: "/smt", navKey: "liveCommittees", icon: Activity, isLiveHub: true },
+  { href: "/smt/conference", navKey: "eventSessions", icon: CalendarDays },
+  { href: "/smt/room-codes", navKey: "roomCodes", icon: DoorOpen },
+  { href: "/smt/awards", navKey: "awards", icon: Trophy },
+  { href: "/smt/allocation-matrix", navKey: "allocationMatrix", icon: Users },
+  { href: "/smt/allocation-passwords", navKey: "allocationPasswords", icon: KeyRound },
+  { href: "/smt/profile", navKey: "profile", icon: Settings },
+  { href: "/smt/follow", navKey: "follow", icon: UserPlus },
 ];
 
 function smtNavItemIsActive(pathname: string, item: SmtNavItem): boolean {
@@ -43,7 +54,15 @@ function smtNavItemIsActive(pathname: string, item: SmtNavItem): boolean {
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
-function SmtSidebarLink({ item, isActive }: { item: SmtNavItem; isActive: boolean }) {
+function SmtSidebarLink({
+  item,
+  label,
+  isActive,
+}: {
+  item: SmtNavItem;
+  label: string;
+  isActive: boolean;
+}) {
   const Icon = item.icon;
   return (
     <Link
@@ -62,17 +81,17 @@ function SmtSidebarLink({ item, isActive }: { item: SmtNavItem; isActive: boolea
         )}
         strokeWidth={1.75}
       />
-      <span className="hidden truncate group-hover:inline">{item.label}</span>
+      <span className="hidden truncate group-hover:inline">{label}</span>
     </Link>
   );
 }
 
-function SmtDockLink({ item, isActive }: { item: SmtNavItem; isActive: boolean }) {
+function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: string; isActive: boolean }) {
   const Icon = item.icon;
   return (
     <Link
       href={item.href}
-      title={item.label}
+      title={label}
       className="group flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2"
     >
       <span
@@ -91,13 +110,15 @@ function SmtDockLink({ item, isActive }: { item: SmtNavItem; isActive: boolean }
           isActive ? "text-brand-accent dark:text-white" : "text-slate-600 dark:text-discord-muted"
         )}
       >
-        {item.label}
+        {label}
       </span>
     </Link>
   );
 }
 
 export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
+  const tNav = useTranslations("smtNav");
+  const tDash = useTranslations("dashboardLayout");
   const pathname = usePathname();
   const hubActive = pathname === "/smt" || pathname.startsWith("/smt/committees/");
 
@@ -116,17 +137,22 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           <LayoutDashboard className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
           <span className="hidden min-w-0 truncate group-hover:inline">{hubLabel}</span>
           <span className="inline text-base leading-none group-hover:hidden" aria-hidden>
-            SMT
+            {tNav("hubAbbrev")}
           </span>
         </Link>
       </div>
 
       <nav
-        aria-label="SMT dashboard"
+        aria-label={tNav("ariaDashboard")}
         className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-1.5 py-1 [scrollbar-width:thin] group-hover:px-3"
       >
         {SMT_NAV_ITEMS.map((item) => (
-          <SmtSidebarLink key={item.href} item={item} isActive={smtNavItemIsActive(pathname, item)} />
+          <SmtSidebarLink
+            key={item.href}
+            item={item}
+            label={tNav(item.navKey)}
+            isActive={smtNavItemIsActive(pathname, item)}
+          />
         ))}
       </nav>
 
@@ -136,7 +162,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           className="flex items-center justify-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-slate-600 transition group-hover:justify-start group-hover:px-3 hover:bg-slate-100 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
           <HelpCircle className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-          <span className="hidden group-hover:inline">Help center</span>
+          <span className="hidden group-hover:inline">{tDash("helpCenter")}</span>
         </Link>
       </div>
     </div>
@@ -144,13 +170,19 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 }
 
 export function SmtMobileDock() {
+  const tNav = useTranslations("smtNav");
   const pathname = usePathname();
 
   return (
     <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {SMT_NAV_ITEMS.map((item) => (
-          <SmtDockLink key={item.href} item={item} isActive={smtNavItemIsActive(pathname, item)} />
+          <SmtDockLink
+            key={item.href}
+            item={item}
+            label={tNav(item.navKey)}
+            isActive={smtNavItemIsActive(pathname, item)}
+          />
         ))}
       </div>
     </div>

@@ -2,8 +2,10 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { OfficialLinksPanel } from "@/components/OfficialLinksPanel";
+import { getTranslations } from "next-intl/server";
 
 export default async function OfficialLinksPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -11,7 +13,7 @@ export default async function OfficialLinksPage() {
   if (!user) redirect("/login");
 
   return (
-    <MunPageShell title="Official UN links">
+    <MunPageShell title={t("officialUnLinks")}>
       <OfficialLinksPanel />
     </MunPageShell>
   );

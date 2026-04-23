@@ -3,8 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairFlowChecklistClient } from "@/components/chair/ChairChecklistClients";
+import { getTranslations } from "next-intl/server";
 
 export default async function ChairFlowChecklistPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -24,7 +26,7 @@ export default async function ChairFlowChecklistPage() {
   const conferenceId = await requireActiveConferenceId();
 
   return (
-    <MunPageShell title="📋 Committee flow checklist">
+    <MunPageShell title={t("committeeFlowChecklist")}>
       <div className="space-y-3">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           Normal committee flow — tick steps as you go. Shared across chair accounts and devices; reset clears for

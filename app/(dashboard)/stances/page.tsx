@@ -3,8 +3,10 @@ import { StancesView } from "@/components/stances/StancesView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { getTranslations } from "next-intl/server";
 
 export default async function StancesPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -71,7 +73,7 @@ export default async function StancesPage() {
   }
 
   return (
-    <MunPageShell title="Stances">
+    <MunPageShell title={t("stances")}>
       <StancesView
         allocations={allocationsWithNotes}
         stanceOverviewByUser={stanceOverviewByUser}

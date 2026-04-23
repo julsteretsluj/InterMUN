@@ -10,6 +10,7 @@ import {
 import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { getTranslations } from "next-intl/server";
 
 type AllocationRow = {
   id: string;
@@ -55,6 +56,7 @@ function firstEmbed<T>(value: T | T[] | null): T | null {
 }
 
 export default async function ChairAllocationMatrixPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -162,7 +164,7 @@ export default async function ChairAllocationMatrixPage() {
   const pendingRequests = (rawRequests ?? []) as SignupRequestRow[];
 
   return (
-    <MunPageShell title="Allocation matrix">
+    <MunPageShell title={t("allocationMatrix")}>
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
         Committee allocation matrix for your current session. This is read-only for chairs and
         reflects active seat assignments and placard codes.

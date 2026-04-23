@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   Archive,
   BarChart3,
@@ -32,9 +33,30 @@ import { cn } from "@/lib/utils";
 
 const LABELS_STORAGE_KEY = "intermun-chair-nav-hide-labels";
 
+export type ChairNavItemKey =
+  | "prepChecklist"
+  | "flowChecklist"
+  | "delegates"
+  | "digitalRoom"
+  | "rollCall"
+  | "session"
+  | "speakers"
+  | "formalMotions"
+  | "timer"
+  | "announcements"
+  | "motionsPoints"
+  | "voting"
+  | "score"
+  | "crisis"
+  | "crisisSlides"
+  | "archive"
+  | "officialLinks"
+  | "roomCode"
+  | "settings";
+
 type ChairNavItem = {
   href: string;
-  label: string;
+  itemKey: ChairNavItemKey;
   icon: LucideIcon;
   emoji: string;
   /** If set, active when pathname === or starts with this */
@@ -47,61 +69,61 @@ type ChairNavItem = {
 
 /** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
 const CHAIR_NAV_ITEMS: ChairNavItem[] = [
-  { href: "/chair/prep-checklist", label: "Prep checklist", icon: ListChecks, emoji: "✅" },
-  { href: "/chair/flow-checklist", label: "Flow checklist", icon: ClipboardList, emoji: "📋" },
-  { href: "/chair/allocation-matrix", label: "Delegates", icon: Users, emoji: "👥" },
-  { href: "/chair/digital-room", label: "Digital Room", icon: LayoutGrid, emoji: "🖥️" },
+  { href: "/chair/prep-checklist", itemKey: "prepChecklist", icon: ListChecks, emoji: "✅" },
+  { href: "/chair/flow-checklist", itemKey: "flowChecklist", icon: ClipboardList, emoji: "📋" },
+  { href: "/chair/allocation-matrix", itemKey: "delegates", icon: Users, emoji: "👥" },
+  { href: "/chair/digital-room", itemKey: "digitalRoom", icon: LayoutGrid, emoji: "🖥️" },
   {
     href: "/chair/session/roll-call",
-    label: "Roll Call",
+    itemKey: "rollCall",
     icon: UserCheck,
     emoji: "✅",
   },
   {
     href: "/chair/session",
-    label: "Session",
+    itemKey: "session",
     icon: Play,
     emoji: "▶️",
     exactHref: true,
   },
   {
     href: "/chair/session/speakers",
-    label: "Speakers",
+    itemKey: "speakers",
     icon: Mic,
     emoji: "🎤",
   },
   {
     href: "/chair/session/motions",
-    label: "Formal motions",
+    itemKey: "formalMotions",
     icon: Gavel,
     emoji: "📜",
   },
   {
     href: "/chair/session/timer",
-    label: "Timer",
+    itemKey: "timer",
     icon: Clock,
     emoji: "⏱️",
   },
   {
     href: "/chair/session/announcements",
-    label: "Announcements",
+    itemKey: "announcements",
     icon: Megaphone,
     emoji: "📣",
   },
   {
     href: "/chair/motions-points",
-    label: "Motions & Points",
+    itemKey: "motionsPoints",
     icon: FileText,
     emoji: "📜",
   },
-  { href: "/voting", label: "Voting", icon: CheckSquare, emoji: "🗳️" },
-  { href: "/chair/awards", label: "Score", icon: BarChart3, emoji: "📊" },
-  { href: "/report", label: "Crisis", icon: TriangleAlert, emoji: "⚠️", crisisOnly: true },
-  { href: "/crisis-slides", label: "Crisis slides", icon: Presentation, emoji: "🖼️", crisisOnly: true },
-  { href: "/documents", label: "Archive", icon: Archive, emoji: "📁" },
-  { href: "/official-links", label: "Official links", icon: Link2, emoji: "🔗" },
-  { href: "/chair/room-code", label: "Room code", icon: DoorOpen, emoji: "🚪" },
-  { href: "/profile", label: "Settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
+  { href: "/voting", itemKey: "voting", icon: CheckSquare, emoji: "🗳️" },
+  { href: "/chair/awards", itemKey: "score", icon: BarChart3, emoji: "📊" },
+  { href: "/report", itemKey: "crisis", icon: TriangleAlert, emoji: "⚠️", crisisOnly: true },
+  { href: "/crisis-slides", itemKey: "crisisSlides", icon: Presentation, emoji: "🖼️", crisisOnly: true },
+  { href: "/documents", itemKey: "archive", icon: Archive, emoji: "📁" },
+  { href: "/official-links", itemKey: "officialLinks", icon: Link2, emoji: "🔗" },
+  { href: "/chair/room-code", itemKey: "roomCode", icon: DoorOpen, emoji: "🚪" },
+  { href: "/profile", itemKey: "settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
 ];
 
 function navItemIsActive(pathname: string, item: ChairNavItem): boolean {
@@ -117,10 +139,12 @@ function navItemIsActive(pathname: string, item: ChairNavItem): boolean {
 
 function ChairNavRow({
   item,
+  label,
   isActive,
   labelsHidden,
 }: {
   item: ChairNavItem;
+  label: string;
   isActive: boolean;
   labelsHidden: boolean;
 }) {
@@ -128,7 +152,7 @@ function ChairNavRow({
   return (
     <Link
       href={item.href}
-      title={labelsHidden ? item.label : undefined}
+      title={labelsHidden ? label : undefined}
       className={cn(
         "discord-interactive-hover flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
@@ -147,7 +171,7 @@ function ChairNavRow({
         />
         <span className="text-base leading-none">{item.emoji}</span>
       </span>
-      {!labelsHidden ? <span className="min-w-0 truncate">{item.label}</span> : null}
+      {!labelsHidden ? <span className="min-w-0 truncate">{label}</span> : null}
     </Link>
   );
 }
@@ -163,6 +187,8 @@ export function ChairDashboardSidebar({
   conferenceLine: string;
   crisisReportingEnabled: boolean;
 }) {
+  const t = useTranslations("chairNav");
+  const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
   const [labelsHidden, setLabelsHidden] = useState(false);
 
@@ -186,8 +212,7 @@ export function ChairDashboardSidebar({
     });
   }, []);
 
-  const headerText =
-    conferenceLine.trim() || "Committee & topic";
+  const headerText = conferenceLine.trim() || t("committeeTopicFallback");
   const hubActive = pathname === "/chair";
   const navItems = useMemo(
     () => filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled),
@@ -221,7 +246,7 @@ export function ChairDashboardSidebar({
       </div>
 
       <nav
-        aria-label="Chair dashboard"
+        aria-label={t("ariaDashboard")}
         className={cn(
           "flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden py-1 [scrollbar-width:thin]",
           labelsHidden ? "px-1.5" : "px-3"
@@ -229,8 +254,9 @@ export function ChairDashboardSidebar({
       >
         {navItems.map((item) => (
           <ChairNavRow
-            key={item.href + item.label}
+            key={item.href + item.itemKey}
             item={item}
+            label={tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
           />
@@ -252,7 +278,7 @@ export function ChairDashboardSidebar({
           )}
         >
           <PanelLeftClose className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-          {!labelsHidden ? <span>Hide labels</span> : <span className="sr-only">Show labels</span>}
+          {!labelsHidden ? <span>{t("hideLabels")}</span> : <span className="sr-only">{t("showLabels")}</span>}
         </button>
         <Link
           href="/guides"
@@ -262,7 +288,7 @@ export function ChairDashboardSidebar({
           )}
         >
           <HelpCircle className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
-          {!labelsHidden ? "Help center" : <span className="sr-only">Help center</span>}
+          {!labelsHidden ? t("helpCenter") : <span className="sr-only">{t("helpCenter")}</span>}
         </Link>
       </div>
     </div>
@@ -271,10 +297,12 @@ export function ChairDashboardSidebar({
 
 function DockItem({
   item,
+  label,
   isActive,
   labelsHidden,
 }: {
   item: ChairNavItem;
+  label: string;
   isActive: boolean;
   labelsHidden: boolean;
 }) {
@@ -282,7 +310,7 @@ function DockItem({
   return (
     <Link
       href={item.href}
-      title={item.label}
+      title={label}
       className="group flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2"
     >
       <span
@@ -305,7 +333,7 @@ function DockItem({
             isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-600 dark:text-zinc-400"
           )}
         >
-          {item.label}
+          {label}
         </span>
       ) : null}
     </Link>
@@ -319,6 +347,8 @@ export function ChairMobileDock({
   conferenceLine: string;
   crisisReportingEnabled: boolean;
 }) {
+  const t = useTranslations("chairNav");
+  const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
   const [labelsHidden, setLabelsHidden] = useState(false);
 
@@ -354,7 +384,7 @@ export function ChairMobileDock({
         <Link
           href="/chair"
           className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2"
-          title={conferenceLine || "Committee"}
+          title={conferenceLine || t("committeeHub")}
         >
           <span
             className={cn(
@@ -367,14 +397,15 @@ export function ChairMobileDock({
           </span>
           {!labelsHidden ? (
             <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-brand-accent dark:text-brand-accent-bright">
-              Committee
+              {t("committeeHub")}
             </span>
           ) : null}
         </Link>
         {navItems.map((item) => (
           <DockItem
-            key={item.href + item.label}
+            key={item.href + item.itemKey}
             item={item}
+            label={tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
           />
@@ -382,14 +413,14 @@ export function ChairMobileDock({
         <button
           type="button"
           onClick={toggleLabels}
-          title={labelsHidden ? "Show labels" : "Hide labels"}
+          title={labelsHidden ? t("showLabels") : t("hideLabels")}
           className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2 text-slate-500 dark:text-zinc-400"
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white dark:border-zinc-700 dark:bg-zinc-900">
             <PanelLeftClose className="h-5 w-5" strokeWidth={1.75} />
           </span>
           {!labelsHidden ? (
-            <span className="max-w-[4rem] text-center text-[0.625rem] font-medium leading-tight">Labels</span>
+            <span className="max-w-[4rem] text-center text-[0.625rem] font-medium leading-tight">{t("labelsDock")}</span>
           ) : null}
         </button>
       </div>

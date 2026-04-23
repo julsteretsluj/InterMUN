@@ -1,8 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { SourcesView } from "@/components/sources/SourcesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { getTranslations } from "next-intl/server";
 
 export default async function SourcesPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -37,7 +39,7 @@ export default async function SourcesPage() {
   const { data: sources } = await sourcesQuery;
 
   return (
-    <MunPageShell title="Sources">
+    <MunPageShell title={t("sources")}>
       <SourcesView
         sources={sources || []}
         currentUserId={user.id}

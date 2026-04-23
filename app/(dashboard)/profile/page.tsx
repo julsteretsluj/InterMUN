@@ -11,8 +11,10 @@ import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
+import { getTranslations } from "next-intl/server";
 
 export default async function ProfilePage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -218,7 +220,7 @@ export default async function ProfilePage() {
   ) : null;
 
   return (
-    <MunPageShell title="Profile">
+    <MunPageShell title={t("profile")}>
       <div className="mb-4 flex justify-end">
         <LanguageSwitcher />
       </div>

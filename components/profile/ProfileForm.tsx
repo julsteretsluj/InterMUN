@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/client";
@@ -14,31 +15,16 @@ import {
   pronounsFormValueFromProfile,
 } from "@/lib/profile-pronouns";
 
-const schema = z.object({
-  name: z.string().optional(),
-  username: z
-    .string()
-    .trim()
-    .optional()
-    .refine(
-      (v) => v === undefined || v === "" || /^[A-Za-z0-9_.-]{3,32}$/.test(v),
-      "Username must be 3-32 chars (letters, numbers, _, ., -)"
-    ),
-  pronouns: z
-    .string()
-    .optional()
-    .refine(
-      (v) => !v?.trim() || PROFILE_PRONOUN_PRESET_SET.has(v.trim()),
-      "Choose a pronoun from the list."
-    ),
-  school: z.string().optional(),
-  grade: z.string().optional(),
-  allocation: z.string().optional(),
-  conferences_attended: z.number().min(0).optional(),
-  awards: z.string().optional(),
-});
-
-type FormData = z.infer<typeof schema>;
+type FormData = {
+  name?: string;
+  username?: string;
+  pronouns?: string;
+  school?: string;
+  grade?: string;
+  allocation?: string;
+  conferences_attended?: number;
+  awards?: string;
+};
 const GRADE_OPTIONS = [
   "7",
   "8",
@@ -61,7 +47,34 @@ export function ProfileForm({
   canViewPrivate,
   availableAllocations,
 }: ProfileFormProps) {
+  const tp = useTranslations("views.profile");
   const router = useRouter();
+
+  const schema = useMemo(
+    () =>
+      z.object({
+        name: z.string().optional(),
+        username: z
+          .string()
+          .trim()
+          .optional()
+          .refine((v) => v === undefined || v === "" || /^[A-Za-z0-9_.-]{3,32}$/.test(v), {
+            message: tp("errUsernamePattern"),
+          }),
+        pronouns: z
+          .string()
+          .optional()
+          .refine((v) => !v?.trim() || PROFILE_PRONOUN_PRESET_SET.has(v.trim()), {
+            message: tp("errPronounsPreset"),
+          }),
+        school: z.string().optional(),
+        grade: z.string().optional(),
+        allocation: z.string().optional(),
+        conferences_attended: z.number().min(0).optional(),
+        awards: z.string().optional(),
+      }),
+    [tp]
+  );
   const [profilePictureUrl, setProfilePictureUrl] = useState(
     profile?.profile_picture_url || ""
   );
@@ -94,12 +107,12 @@ export function ProfileForm({
     setUploadSuccess(false);
 
     if (!file.type.startsWith("image/")) {
-      setUploadError("Please choose an image file.");
+      setUploadError(tp("errImageType"));
       return;
     }
 
     if (!file.size || file.size > 5 * 1024 * 1024) {
-      setUploadError("Image is too large (max 5 MB).");
+      setUploadError(tp("errImageSize"));
       return;
     }
 
@@ -122,9 +135,7 @@ export function ProfileForm({
       if (uploadErr) {
         const m = uploadErr.message;
         if (/bucket not found/i.test(m)) {
-          throw new Error(
-            "Profile picture storage is not set up. In the Supabase project, run migration 00100_profile_pictures_storage_bucket.sql, or create a public storage bucket named profile-pictures (see README)."
-          );
+          throw new Error(tp("errStorageSetup"));
         }
         throw new Error(m);
       }
@@ -134,7 +145,7 @@ export function ProfileForm({
         .getPublicUrl(objectPath);
 
       if (!publicUrlData?.publicUrl) {
-        throw new Error("Could not resolve public URL for uploaded image.");
+        throw new Error(tp("errPublicUrl"));
       }
 
       // Persist URL immediately so the user doesn't have to click "Save profile".
@@ -160,7 +171,7 @@ export function ProfileForm({
       }
       router.refresh();
     } catch (e) {
-      const msg = e instanceof Error ? e.message : "Upload failed.";
+      const msg = e instanceof Error ? e.message : tp("errUploadFailed");
       setUploadError(msg);
     } finally {
       setUploadPending(false);
@@ -223,12 +234,12 @@ export function ProfileForm({
     if (error) {
       setSubmitFeedback({
         kind: "error",
-        message: error.message || "Could not save profile.",
+        message: error.message || tp("saveFailed"),
       });
       return;
     }
 
-    setSubmitFeedback({ kind: "success", message: "Profile saved." });
+    setSubmitFeedback({ kind: "success", message: tp("saved") });
     router.refresh();
   }
 
@@ -240,14 +251,14 @@ export function ProfileForm({
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_min(18rem,92vw)] lg:items-start xl:grid-cols-[minmax(0,1fr)_20rem]">
         <form onSubmit={handleSubmit(onSubmit)} className="min-w-0 space-y-6">
       <div>
-        <p className="block text-sm font-medium mb-2">Profile picture</p>
+        <p className="block text-sm font-medium mb-2">{tp("profilePicture")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="min-w-0">
             <label
               htmlFor="profile-picture-file"
               className="block text-xs text-brand-muted mb-1"
             >
-              Upload file
+              {tp("uploadFile")}
             </label>
             <input
               ref={profilePictureFileRef}
@@ -264,11 +275,11 @@ export function ProfileForm({
               className="w-full min-w-0"
             />
             {uploadPending && (
-              <p className="text-xs text-brand-muted mt-1">Uploading…</p>
+              <p className="text-xs text-brand-muted mt-1">{tp("uploading")}</p>
             )}
             {uploadSuccess && !uploadPending && (
               <p className="text-xs text-brand-muted mt-1" role="status">
-                Photo uploaded and saved.
+                {tp("photoSaved")}
               </p>
             )}
             {uploadError && (
@@ -279,14 +290,14 @@ export function ProfileForm({
           </div>
           <div className="min-w-0">
             <label className="block text-xs text-brand-muted mb-1">
-              Or set by URL
+              {tp("orUrl")}
             </label>
             <input
               type="url"
               value={profilePictureUrl}
               onChange={(e) => setProfilePictureUrl(e.target.value)}
               className={fieldClass}
-              placeholder="https://..."
+              placeholder={tp("urlPlaceholder")}
             />
           </div>
         </div>
@@ -294,15 +305,15 @@ export function ProfileForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="min-w-0">
-          <label className="block text-sm font-medium mb-1">Name</label>
+          <label className="block text-sm font-medium mb-1">{tp("name")}</label>
           <input {...register("name")} className={fieldClass} />
         </div>
         <div className="min-w-0">
-          <label className="block text-sm font-medium mb-1">Username</label>
+          <label className="block text-sm font-medium mb-1">{tp("username")}</label>
           <input
             {...register("username")}
             className={fieldClass}
-            placeholder="e.g. alex_1999"
+            placeholder={tp("usernamePlaceholder")}
           />
           {errors.username && (
             <p className="text-sm text-red-600 mt-1">{errors.username.message}</p>
@@ -313,7 +324,7 @@ export function ProfileForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="min-w-0">
           <label htmlFor="profile-pronouns-select" className="block text-sm font-medium mb-1">
-            Pronouns
+            {tp("pronouns")}
           </label>
           <select
             id="profile-pronouns-select"
@@ -331,29 +342,26 @@ export function ProfileForm({
             ))}
           </select>
           {legacyCustomPronouns ? (
-            <p className="mt-1.5 text-xs text-brand-muted">
-              Your profile had a custom pronoun set that is no longer accepted here. Pick an option
-              above (or leave blank). Saving replaces the old value.
-            </p>
+            <p className="mt-1.5 text-xs text-brand-muted">{tp("customPronounNote")}</p>
           ) : null}
           {errors.pronouns ? (
             <p className="mt-1 text-sm text-red-600">{errors.pronouns.message}</p>
           ) : null}
         </div>
         <div className="min-w-0">
-          <label className="block text-sm font-medium mb-1">School</label>
+          <label className="block text-sm font-medium mb-1">{tp("school")}</label>
           <input
             {...register("school")}
             className={fieldClass}
-            placeholder="e.g. Lincoln High School"
+            placeholder={tp("schoolPlaceholder")}
           />
         </div>
       </div>
 
       <div className="min-w-0 sm:max-w-xs">
-        <label className="block text-sm font-medium mb-1">Grade</label>
+        <label className="block text-sm font-medium mb-1">{tp("grade")}</label>
         <select {...register("grade")} className={fieldClass}>
-          <option value="">Select grade</option>
+          <option value="">{tp("selectGrade")}</option>
           {GRADE_OPTIONS.map((grade) => (
             <option key={grade} value={grade}>
               {grade}
@@ -365,9 +373,7 @@ export function ProfileForm({
       {canViewPrivate && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="min-w-0">
-            <label className="block text-sm font-medium mb-1">
-              Conferences attended
-            </label>
+            <label className="block text-sm font-medium mb-1">{tp("conferencesAttended")}</label>
             <input
               type="number"
               {...register("conferences_attended", {
@@ -382,26 +388,24 @@ export function ProfileForm({
             />
           </div>
           <div className="min-w-0">
-            <label className="block text-sm font-medium mb-1">
-              Awards (comma-separated)
-            </label>
+            <label className="block text-sm font-medium mb-1">{tp("awardsComma")}</label>
             <input
               {...register("awards")}
               className={fieldClass}
-              placeholder="Best Delegate, Honorable Mention"
+              placeholder={tp("awardsPlaceholder")}
             />
           </div>
         </div>
       )}
 
       <div>
-        <label className="block text-sm font-medium mb-1">Allocation</label>
+        <label className="block text-sm font-medium mb-1">{tp("allocation")}</label>
         {availableAllocations.length > 0 ? (
           <select
             {...register("allocation")}
             className={fieldClass}
           >
-            <option value="">Select allocation</option>
+            <option value="">{tp("selectAllocation")}</option>
             {availableAllocations.map((allocation) => (
               <option key={allocation} value={allocation}>
                 {allocation}
@@ -412,7 +416,7 @@ export function ProfileForm({
           <input
             {...register("allocation")}
             className={fieldClass}
-            placeholder="No committee allocations available"
+            placeholder={tp("noAllocationsPlaceholder")}
           />
         )}
       </div>
@@ -424,7 +428,7 @@ export function ProfileForm({
         disabled={isSubmitting}
         className="px-4 py-2 bg-brand-accent text-white rounded-md hover:opacity-90 disabled:opacity-50"
       >
-        Save profile
+        {tp("saveProfile")}
       </button>
       {submitFeedback ? (
         <p

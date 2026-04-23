@@ -9,7 +9,8 @@
     "lint": "eslint",
     "seed:allocations": "python3 scripts/parse-allocation-matrix.py",
     "i18n:seed": "node scripts/seed-locales.mjs",
-    "i18n:check": "node scripts/check-locale-parity.mjs"
+    "i18n:check": "node scripts/check-locale-parity.mjs",
+    "i18n:translate": "node scripts/translate-locales.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.2.8",
@@ -37,6 +38,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
+    "google-translate-api-x": "^10.7.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

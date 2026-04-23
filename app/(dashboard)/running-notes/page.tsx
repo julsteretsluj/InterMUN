@@ -2,8 +2,10 @@ import { createClient } from "@/lib/supabase/server";
 import { RunningNotesView } from "@/components/running-notes/RunningNotesView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 export default async function RunningNotesPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -26,7 +28,7 @@ export default async function RunningNotesPage() {
   const { data: notes } = await notesQuery.order("updated_at", { ascending: false });
 
   return (
-    <MunPageShell title="Running Notes">
+    <MunPageShell title={t("runningNotes")}>
       <RunningNotesView notes={notes || []} currentUserId={user.id} myRole={myRole} />
     </MunPageShell>
   );

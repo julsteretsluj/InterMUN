@@ -5,6 +5,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { AllocationCodeGateToggle } from "@/components/allocation/AllocationCodeGateToggle";
 import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient";
 import { isSmtRole } from "@/lib/roles";
+import { getTranslations } from "next-intl/server";
 
 type ProfileEmbed = { name: string | null } | null;
 
@@ -26,6 +27,7 @@ export default async function SmtAllocationPasswordsPage({
 }: {
   searchParams: Promise<{ conference?: string }>;
 }) {
+  const t = await getTranslations("pageTitles");
   const { conference: conferenceParam } = await searchParams;
 
   const supabase = await createClient();
@@ -57,7 +59,7 @@ export default async function SmtAllocationPasswordsPage({
 
   if (!conferenceId) {
     return (
-      <MunPageShell title="Allocation passwords">
+      <MunPageShell title={t("allocationPasswords")}>
         <p className="text-sm text-brand-muted">Create a conference first.</p>
       </MunPageShell>
     );
@@ -97,7 +99,7 @@ export default async function SmtAllocationPasswordsPage({
     .maybeSingle();
 
   return (
-    <MunPageShell title="Allocation passwords">
+    <MunPageShell title={t("allocationPasswords")}>
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
         Per-allocation <strong>codes</strong> for placards, binders, or handouts. Optional <strong>third gate</strong>
         : when enabled, each delegate and chair must enter their seat code after committee sign-in. Stored in plain

@@ -26,6 +26,7 @@ import {
 import { DelegateMatrixPanel } from "./DelegateMatrixPanel";
 import { ChairAwardsShell } from "@/components/chair/awards/ChairAwardsShell";
 import { AwardsRubricReference } from "@/components/awards/AwardsRubricReference";
+import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
 
@@ -71,6 +72,7 @@ function nomineeOptionsForSlot(
 }
 
 export default async function ChairAwardsPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -283,7 +285,7 @@ export default async function ChairAwardsPage() {
     : null;
 
   return (
-    <MunPageShell title="Score">
+    <MunPageShell title={t("score")}>
       <ChairAwardsShell
         score={
           <div className="space-y-5">

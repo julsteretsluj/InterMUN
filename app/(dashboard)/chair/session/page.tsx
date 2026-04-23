@@ -3,12 +3,14 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { loadChairSessionConference } from "./loadChairSession";
 import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
 import { SessionFloorOverview } from "./SessionFloorOverview";
+import { getTranslations } from "next-intl/server";
 
 export default async function ChairSessionPage() {
+  const t = await getTranslations("pageTitles");
   const data = await loadChairSessionConference();
   if (!data) {
     return (
-      <MunPageShell title="Committee session">
+      <MunPageShell title={t("committeeSession")}>
         <SessionFloorNoCommittee />
       </MunPageShell>
     );
@@ -43,7 +45,7 @@ export default async function ChairSessionPage() {
   const initialEndsAt = row?.committee_session_ends_at ?? null;
 
   return (
-    <MunPageShell title="Committee session">
+    <MunPageShell title={t("committeeSession")}>
       <SessionFloorOverview
         conferenceId={data.conferenceId}
         conferenceTitle={data.conferenceTitle}

@@ -1,8 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { SpeechesView } from "@/components/speeches/SpeechesView";
 import { MunPageShell } from "@/components/MunPageShell";
+import { getTranslations } from "next-intl/server";
 
 export default async function SpeechesPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -16,7 +18,7 @@ export default async function SpeechesPage() {
     .order("updated_at", { ascending: false });
 
   return (
-    <MunPageShell title="Speeches">
+    <MunPageShell title={t("speeches")}>
       <SpeechesView speeches={speeches || []} />
     </MunPageShell>
   );

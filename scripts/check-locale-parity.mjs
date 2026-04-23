@@ -29,6 +29,7 @@ const locales = [
   "fa",
   "he",
   "sw",
+  "mi",
 ];
 
 function flatten(obj, prefix = "", out = []) {

@@ -2,8 +2,10 @@ import { createClient } from "@/lib/supabase/server";
 import { GuidesView } from "@/components/guides/GuidesView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 export default async function GuidesPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -25,7 +27,7 @@ export default async function GuidesPage() {
     .order("slug");
 
   return (
-    <MunPageShell title="Guides">
+    <MunPageShell title={t("guides")}>
       <GuidesView guides={guides || []} canEdit={canEdit} />
     </MunPageShell>
   );

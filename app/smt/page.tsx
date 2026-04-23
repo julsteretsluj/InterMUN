@@ -10,6 +10,7 @@ import {
   formatTagClass,
 } from "@/lib/committee-tag-styles";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
+import { getTranslations } from "next-intl/server";
 
 function difficultySortRank(level: "Beginner" | "Intermediate" | "Advanced" | null | undefined) {
   if (level === "Beginner") return 0;
@@ -24,18 +25,19 @@ export default async function SmtOverviewPage({
   searchParams: Promise<{ e?: string }>;
 }) {
   const { e: overviewErr } = await searchParams;
+  const t = await getTranslations("smtOverview");
   const supabase = await createClient();
   const eventId = await getActiveEventId();
 
   if (!eventId) {
     return (
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-center text-brand-muted">
-        <p className="mb-4">No conference is selected. Enter your event code first.</p>
+        <p className="mb-4">{t("noEventSelected")}</p>
         <Link
           href="/event-gate?next=%2Fsmt"
           className="inline-block px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft"
         >
-          Enter conference code
+          {t("enterConferenceCode")}
         </Link>
       </div>
     );
@@ -122,11 +124,11 @@ export default async function SmtOverviewPage({
   if (list.length === 0) {
     return (
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-brand-muted text-sm">
-        No committees found for this event. Add them in{" "}
+        {t("noCommittees")}{" "}
         <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
-          Event & committee sessions
+          {t("eventSessionsLink")}
         </Link>{" "}
-        or in Supabase.
+        {t("orSupabase")}
       </div>
     );
   }
@@ -138,15 +140,15 @@ export default async function SmtOverviewPage({
           className="mb-6 rounded-lg border border-brand-gold/40 bg-brand-cream/60 px-4 py-3 text-sm text-brand-navy"
           role="status"
         >
-          <strong>Session floor</strong> (timers, speakers, roll call) is for <strong>dais chairs</strong>{" "}
-          only. Use <strong>Live committees</strong> below for oversight, or enter committee codes like
-          delegates when you need a specific session.
+          {t.rich("sessionFloorBanner", {
+            floor: (chunks) => <strong>{chunks}</strong>,
+            chairs: (chunks) => <strong>{chunks}</strong>,
+            live: (chunks) => <strong>{chunks}</strong>,
+          })}
         </div>
       )}
-      <h1 className="font-display text-3xl font-semibold text-brand-navy mb-2">
-        Welcome Secretary General!
-      </h1>
-      <p className="text-base text-brand-navy mb-6">Which committee would you like to check in on?</p>
+      <h1 className="font-display text-3xl font-semibold text-brand-navy mb-2">{t("welcomeSg")}</h1>
+      <p className="text-base text-brand-navy mb-6">{t("whichCommittee")}</p>
       <div className="mb-6">
         <RoleSetupChecklist role="smt" />
       </div>
@@ -160,7 +162,7 @@ export default async function SmtOverviewPage({
             {g.latestRow.committee_logo_url ? (
               <img
                 src={g.latestRow.committee_logo_url}
-                alt={`${g.latestRow.committee ?? "Committee"} logo`}
+                alt={t("committeeLogoAlt", { name: g.latestRow.committee ?? "Committee" })}
                 className="h-10 w-10 object-contain rounded-md bg-white/60 border border-brand-navy/10 mb-2"
               />
             ) : null}
@@ -176,14 +178,14 @@ export default async function SmtOverviewPage({
                   <span className={formatTagClass(tags.format)}>{tags.format}</span>
                   <span className={ageRangeTagClass()}>{tags.ageRange}</span>
                   {tags.eslFriendly ? (
-                    <span className={eslFriendlyTagClass(true)}>ESL-friendly</span>
+                    <span className={eslFriendlyTagClass(true)}>{t("eslFriendly")}</span>
                   ) : null}
                 </div>
               );
             })()}
             {g.latestRow.chair_names?.trim() ? (
               <p className="text-xs text-brand-muted mt-2">
-                <span className="font-medium text-brand-navy/80">Chairs: </span>
+                <span className="font-medium text-brand-navy/80">{t("chairsLabel")} </span>
                 {g.latestRow.chair_names.trim()}
               </p>
             ) : null}
@@ -193,13 +195,15 @@ export default async function SmtOverviewPage({
               </p>
             ) : null}
             {g.topicCount > 1 ? (
-              <p className="text-[0.72rem] text-brand-navy/85 mt-1 font-medium">{g.topicCount} sessions</p>
+              <p className="text-[0.72rem] text-brand-navy/85 mt-1 font-medium">
+                {t("sessionsCount", { count: g.topicCount })}
+              </p>
             ) : null}
             {g.topics.length > 0 ? (
               <div className="mt-2 space-y-1">
                 {g.topics.slice(0, 2).map((topic) => (
                   <p key={topic} className="text-[0.72rem] text-brand-navy/90 leading-snug">
-                    <span className="font-semibold text-brand-navy">Topic:</span> {topic}
+                    <span className="font-semibold text-brand-navy">{t("topicLabel")}</span> {topic}
                   </p>
                 ))}
               </div>

@@ -2,8 +2,10 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { FollowPeopleClient } from "@/components/follow/FollowPeopleClient";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 export default async function FollowPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -23,7 +25,7 @@ export default async function FollowPage() {
   }
 
   return (
-    <MunPageShell title="Follow">
+    <MunPageShell title={t("follow")}>
       <FollowPeopleClient userId={user.id} />
     </MunPageShell>
   );

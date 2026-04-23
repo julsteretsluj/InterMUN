@@ -5,8 +5,10 @@ import { redirect } from "next/navigation";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { GoogleSlidesEmbed } from "@/components/crisis/GoogleSlidesEmbed";
+import { getTranslations } from "next-intl/server";
 
 export default async function CrisisSlidesPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -33,7 +35,7 @@ export default async function CrisisSlidesPage() {
     [activeConf.committee, activeConf.tagline].filter(Boolean).join(" · ") || activeConf.name;
 
   return (
-    <MunPageShell title="Crisis slides">
+    <MunPageShell title={t("crisisSlides")}>
       <div className="space-y-4 max-w-4xl">
         <p className="text-sm text-brand-muted">
           Live crisis deck for <span className="font-medium text-brand-navy">{committeeLine}</span>. Secretariat

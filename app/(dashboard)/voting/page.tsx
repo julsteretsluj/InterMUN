@@ -3,8 +3,10 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { VotingPanel } from "@/components/voting/VotingPanel";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 export default async function VotingPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -30,7 +32,7 @@ export default async function VotingPage() {
     .limit(50);
 
   return (
-    <MunPageShell title="Voting">
+    <MunPageShell title={t("voting")}>
       <VotingPanel voteItems={voteItems || []} myRole={myRole} />
     </MunPageShell>
   );

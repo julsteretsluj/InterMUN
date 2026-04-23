@@ -8,8 +8,10 @@ import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { ChairTopicTabsCard } from "@/components/chair/ChairTopicTabsCard";
+import { getTranslations } from "next-intl/server";
 
 export default async function ChairOverviewPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -64,7 +66,7 @@ export default async function ChairOverviewPage() {
   ];
 
   return (
-    <MunPageShell title="Chair room">
+    <MunPageShell title={t("chairRoom")}>
       <div className="space-y-6">
         <header className="space-y-2">
           <h1 className="font-display text-3xl font-semibold text-brand-navy">

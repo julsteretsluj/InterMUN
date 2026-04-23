@@ -5,8 +5,10 @@ import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import { getTranslations } from "next-intl/server";
 
 export default async function CommitteeRoomPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -48,7 +50,7 @@ export default async function CommitteeRoomPage() {
     .order("name");
 
   return (
-    <MunPageShell title="Committee room">
+    <MunPageShell title={t("committeeRoom")}>
       <CommitteeRoomDigitalMUNClient
         conferenceId={conferenceId}
         floorConferenceId={debateBundle.debateConferenceId}

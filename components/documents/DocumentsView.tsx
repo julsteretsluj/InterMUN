@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { FileText, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
@@ -34,6 +35,8 @@ export function DocumentsView({
   delegateOptions: { id: string; label: string }[];
   chairOptions: { id: string; label: string }[];
 }) {
+  const t = useTranslations("views.documents");
+  const tc = useTranslations("common");
   const role = myRole.toLowerCase();
   const canManagePositionPapers = role === "chair" || role === "smt" || role === "admin";
   const canManageChairReports = role === "smt" || role === "admin";
@@ -61,6 +64,25 @@ export function DocumentsView({
     chair_feedback: "",
   });
   const supabase = createClient();
+
+  function labelForDocType(dt: string): string {
+    switch (dt) {
+      case "position_paper":
+        return t("types.position_paper");
+      case "prep_doc":
+        return t("types.prep_doc");
+      case "chair_report":
+        return t("types.chair_report");
+      case "rop":
+        return t("types.rop");
+      case "award_criteria":
+        return t("types.award_criteria");
+      case "chair_notes":
+        return t("types.chair_notes");
+      default:
+        return dt.replace(/_/g, " ");
+    }
+  }
 
   const displaySelectedId =
     selectedId != null && docs.some((d) => d.id === selectedId)
@@ -95,24 +117,24 @@ export function DocumentsView({
     if (!user) return;
 
     if (isDelegate && form.doc_type === "position_paper") {
-      alert("Delegates cannot upload Position Papers directly. Use another document type.");
+      alert(t("alertDelegatePositionPaper"));
       return;
     }
 
     if (form.doc_type === "position_paper" && !canManagePositionPapers) {
-      alert("Only chairs/SMT/admin can upload Position Papers.");
+      alert(t("alertOnlyChairsPositionPaper"));
       return;
     }
     if (form.doc_type === "chair_report" && !canManageChairReports) {
-      alert("Only SMT/admin can upload Chair Reports.");
+      alert(t("alertOnlySmtChairReport"));
       return;
     }
     if (form.doc_type === "rop" && !canManageRop) {
-      alert("Only SMT/admin can upload RoP documents.");
+      alert(t("alertOnlySmtRop"));
       return;
     }
     if (form.doc_type === "award_criteria" && !canManageAwardCriteria) {
-      alert("Only SMT/admin can upload Award Criteria documents.");
+      alert(t("alertOnlySmtAwardCriteria"));
       return;
     }
 
@@ -126,7 +148,7 @@ export function DocumentsView({
     const localText = form.content.trim();
     const gUrl = form.google_docs_url.trim() || null;
     if (!localText && !gUrl) {
-      alert("Add either local text content or a Google Docs URL.");
+      alert(t("alertNeedContentOrUrl"));
       return;
     }
     if (editing) {
@@ -196,7 +218,7 @@ export function DocumentsView({
       (canManageRop && src.doc_type === "rop") ||
       (canManageAwardCriteria && src.doc_type === "award_criteria");
     if (!canDeleteThis) return;
-    const ok = confirm("Delete this document?");
+    const ok = confirm(t("confirmDelete"));
     if (!ok) return;
     const { error } = await supabase.from("documents").delete().eq("id", docId);
     if (error) return;
@@ -208,23 +230,23 @@ export function DocumentsView({
     <div className="space-y-4 font-serif">
       {isDelegate ? (
         <div className="rounded-lg border border-brand-accent/28 bg-brand-accent/11 px-4 py-3 text-sm text-brand-navy dark:border-brand-accent/35 dark:bg-brand-accent/12 dark:text-brand-accent-bright">
-          <p className="font-medium">Prep document section</p>
+          <p className="font-medium">{t("delegatePrepTitle")}</p>
           <p className="mt-1">
-            You can upload, view, and edit your own <strong>Prep documents</strong> directly from this page.
+            {t.rich("delegatePrepBody", {
+              prep: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
         </div>
       ) : null}
       <div className="rounded-lg border border-brand-navy/10 bg-brand-paper px-4 py-3 text-sm text-brand-navy">
-        <p className="font-medium">Position paper guide</p>
-        <p className="mt-1 text-brand-muted">
-          Download the placeholder guide while the final PDF is being prepared.
-        </p>
+        <p className="font-medium">{t("positionPaperGuideTitle")}</p>
+        <p className="mt-1 text-brand-muted">{t("positionPaperGuideBlurb")}</p>
         <a
           href="/downloads/position-paper-guide-placeholder.txt"
           download
           className="mt-2 inline-block text-sm font-medium text-brand-diplomatic underline-offset-2 hover:underline"
         >
-          Download placeholder guide
+          {t("downloadPlaceholderGuide")}
         </a>
       </div>
 
@@ -245,16 +267,16 @@ export function DocumentsView({
         className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
-        Add document
+        {t("addDocument")}
       </button>
       {(showForm || editing) && (
         <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
           <h3 className="font-semibold text-brand-navy dark:text-zinc-100">
-            {editing ? "Edit" : "New"} document
+            {editing ? t("editDocumentTitle") : t("newDocumentTitle")}
           </h3>
           <div className="space-y-3">
             <div>
-              <label className="mun-label mb-1 block normal-case">Type</label>
+              <label className="mun-label mb-1 block normal-case">{t("typeLabel")}</label>
               <select
                 value={form.doc_type}
                 onChange={(e) =>
@@ -265,22 +287,28 @@ export function DocumentsView({
                 }
                 className="mun-field"
               >
-                {!isDelegate ? <option value="position_paper">Position paper</option> : null}
-                {canManageChairReports ? <option value="chair_report">Chair report</option> : null}
-                {canManageRop ? <option value="rop">RoP</option> : null}
-                {canManageAwardCriteria ? <option value="award_criteria">Award criteria</option> : null}
-                {!isDelegate ? <option value="chair_notes">Chair notes</option> : null}
-                <option value="prep_doc">Prep document</option>
+                {!isDelegate ? (
+                  <option value="position_paper">{t("types.position_paper")}</option>
+                ) : null}
+                {canManageChairReports ? (
+                  <option value="chair_report">{t("types.chair_report")}</option>
+                ) : null}
+                {canManageRop ? <option value="rop">{t("types.rop")}</option> : null}
+                {canManageAwardCriteria ? (
+                  <option value="award_criteria">{t("types.award_criteria")}</option>
+                ) : null}
+                {!isDelegate ? (
+                  <option value="chair_notes">{t("types.chair_notes")}</option>
+                ) : null}
+                <option value="prep_doc">{t("types.prep_doc")}</option>
               </select>
               {isDelegate ? (
-                <p className="mt-1 text-xs text-brand-muted">
-                  Position papers are uploaded by chairs with feedback.
-                </p>
+                <p className="mt-1 text-xs text-brand-muted">{t("delegatePositionPaperNote")}</p>
               ) : null}
             </div>
             {form.doc_type === "position_paper" && canManagePositionPapers ? (
               <div>
-                <label className="mun-label mb-1 block normal-case">Delegate owner</label>
+                <label className="mun-label mb-1 block normal-case">{t("delegateOwner")}</label>
                 <select
                   value={form.user_id}
                   onChange={(e) => setForm({ ...form, user_id: e.target.value })}
@@ -296,7 +324,7 @@ export function DocumentsView({
             ) : null}
             {form.doc_type === "chair_report" && canManageChairReports ? (
               <div>
-                <label className="mun-label mb-1 block normal-case">Chair recipient</label>
+                <label className="mun-label mb-1 block normal-case">{t("chairRecipient")}</label>
                 <select
                   value={form.user_id}
                   onChange={(e) => setForm({ ...form, user_id: e.target.value })}
@@ -311,17 +339,17 @@ export function DocumentsView({
               </div>
             ) : null}
             <div>
-              <label className="mun-label mb-1 block normal-case">Title</label>
+              <label className="mun-label mb-1 block normal-case">{t("titleLabel")}</label>
               <input
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
                 className="mun-field"
-                placeholder="Document title"
+                placeholder={t("titlePlaceholder")}
               />
             </div>
             <div>
               <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-                <label className="mun-label normal-case">Google Docs URL</label>
+                <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
                 <OpenNewGoogleDocButton />
               </div>
               <input
@@ -329,36 +357,33 @@ export function DocumentsView({
                 onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}
                 className="mun-field"
                 type="url"
-                placeholder="https://docs.google.com/document/d/… (embed view/edit in app)"
+                placeholder={t("googleDocsPlaceholder")}
               />
-              <p className="mt-1 text-xs text-brand-muted">
-                Use New Google Doc to open Google in a new tab, then paste the doc link here. Plain text
-                below is optional. Every document needs either local text, a Google Doc link, or both.
-              </p>
+              <p className="mt-1 text-xs text-brand-muted">{t("googleDocsHelp")}</p>
             </div>
             <div>
-              <label className="mun-label mb-1 block normal-case">Plain text (optional)</label>
+              <label className="mun-label mb-1 block normal-case">{t("plainTextOptional")}</label>
               <textarea
                 value={form.content}
                 onChange={(e) => setForm({ ...form, content: e.target.value })}
                 className="mun-field h-40 resize-y"
-                placeholder="Notes or draft text…"
+                placeholder={t("plainTextPlaceholder")}
               />
             </div>
             {form.doc_type === "position_paper" && canManagePositionPapers ? (
               <div>
-                <label className="mun-label mb-1 block normal-case">Chair feedback</label>
+                <label className="mun-label mb-1 block normal-case">{t("chairFeedbackLabel")}</label>
                 <textarea
                   value={form.chair_feedback}
                   onChange={(e) => setForm({ ...form, chair_feedback: e.target.value })}
                   className="mun-field h-32 resize-y"
-                  placeholder="Feedback for the delegate position paper..."
+                  placeholder={t("chairFeedbackPlaceholder")}
                 />
               </div>
             ) : null}
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => void saveDocument()} className="mun-btn-primary">
-                Save
+                {tc("save")}
               </button>
               <button
                 type="button"
@@ -368,7 +393,7 @@ export function DocumentsView({
                 }}
                 className="mun-btn"
               >
-                Cancel
+                {tc("cancel")}
               </button>
             </div>
           </div>
@@ -376,12 +401,12 @@ export function DocumentsView({
       )}
 
       {docs.length === 0 ? (
-        <p className="text-sm text-brand-muted">No documents yet. Add one or link a Google Doc.</p>
+        <p className="text-sm text-brand-muted">{t("empty")}</p>
       ) : (
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-64">
             <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
-              Document
+              {t("sidebarDocumentLabel")}
             </label>
             <select
               className="mun-field lg:hidden"
@@ -390,14 +415,14 @@ export function DocumentsView({
             >
               {docs.map((d) => (
                 <option key={d.id} value={d.id}>
-                  {d.title || "Untitled"} ({d.doc_type.replace("_", " ")})
+                  {d.title || t("untitled")} ({labelForDocType(d.doc_type)})
                 </option>
               ))}
             </select>
             <div className="hidden max-h-[min(70vh,640px)] flex-col gap-1 overflow-y-auto pr-1 lg:flex">
               {chairReportDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Chair reports
+                  {t("sections.chairReports")}
                 </p>
               ) : null}
               {chairReportDocs.map((d) => (
@@ -413,14 +438,14 @@ export function DocumentsView({
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || "Untitled"}</span>
-                    <span className="text-xs capitalize text-brand-muted">Chair report</span>
+                    <span className="block truncate">{d.title || t("untitled")}</span>
+                    <span className="text-xs capitalize text-brand-muted">{t("types.chair_report")}</span>
                   </span>
                 </button>
               ))}
               {ropDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  RoP
+                  {t("sections.rop")}
                 </p>
               ) : null}
               {ropDocs.map((d) => (
@@ -436,14 +461,14 @@ export function DocumentsView({
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || "Untitled"}</span>
-                    <span className="text-xs capitalize text-brand-muted">RoP</span>
+                    <span className="block truncate">{d.title || t("untitled")}</span>
+                    <span className="text-xs capitalize text-brand-muted">{t("types.rop")}</span>
                   </span>
                 </button>
               ))}
               {awardCriteriaDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Award criteria
+                  {t("sections.awardCriteria")}
                 </p>
               ) : null}
               {awardCriteriaDocs.map((d) => (
@@ -459,14 +484,14 @@ export function DocumentsView({
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || "Untitled"}</span>
-                    <span className="text-xs capitalize text-brand-muted">Award criteria</span>
+                    <span className="block truncate">{d.title || t("untitled")}</span>
+                    <span className="text-xs capitalize text-brand-muted">{t("types.award_criteria")}</span>
                   </span>
                 </button>
               ))}
               {prepDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Prep documents
+                  {t("sections.prepDocuments")}
                 </p>
               ) : null}
               {prepDocs.map((d) => (
@@ -482,14 +507,14 @@ export function DocumentsView({
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || "Untitled"}</span>
-                    <span className="text-xs capitalize text-brand-muted">Prep document</span>
+                    <span className="block truncate">{d.title || t("untitled")}</span>
+                    <span className="text-xs capitalize text-brand-muted">{t("types.prep_doc")}</span>
                   </span>
                 </button>
               ))}
               {chairNotesDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Chair notes
+                  {t("sections.chairNotes")}
                 </p>
               ) : null}
               {chairNotesDocs.map((d) => (
@@ -505,14 +530,14 @@ export function DocumentsView({
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || "Untitled"}</span>
-                    <span className="text-xs capitalize text-brand-muted">Chair notes</span>
+                    <span className="block truncate">{d.title || t("untitled")}</span>
+                    <span className="text-xs capitalize text-brand-muted">{t("types.chair_notes")}</span>
                   </span>
                 </button>
               ))}
               {otherDocs.length > 0 ? (
                 <p className="px-1 pb-1 pt-3 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Other documents
+                  {t("sections.otherDocuments")}
                 </p>
               ) : null}
               {otherDocs.map((d) => (
@@ -528,10 +553,8 @@ export function DocumentsView({
                 >
                   <FileText className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
                   <span className="min-w-0">
-                    <span className="block truncate">{d.title || "Untitled"}</span>
-                    <span className="text-xs capitalize text-brand-muted">
-                      {d.doc_type.replace("_", " ")}
-                    </span>
+                    <span className="block truncate">{d.title || t("untitled")}</span>
+                    <span className="text-xs capitalize text-brand-muted">{labelForDocType(d.doc_type)}</span>
                   </span>
                 </button>
               ))}
@@ -543,11 +566,9 @@ export function DocumentsView({
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-semibold text-brand-navy dark:text-zinc-100">
-                    {selected.title || "Untitled"}
+                    {selected.title || t("untitled")}
                   </h3>
-                  <p className="text-sm capitalize text-brand-muted">
-                    {selected.doc_type.replace("_", " ")}
-                  </p>
+                  <p className="text-sm capitalize text-brand-muted">{labelForDocType(selected.doc_type)}</p>
                 </div>
                 {(canEditAll ||
                   selected.user_id === currentUserId ||
@@ -572,7 +593,7 @@ export function DocumentsView({
                       }}
                       className="text-sm font-medium text-brand-accent hover:underline dark:text-brand-accent-bright"
                     >
-                      Edit
+                      {tc("edit")}
                     </button>
                     <button
                       type="button"
@@ -580,7 +601,7 @@ export function DocumentsView({
                       className="text-sm font-medium text-red-600 hover:underline"
                       disabled={deleteId === selected.id}
                     >
-                      Delete
+                      {tc("delete")}
                     </button>
                   </div>
                 )}
@@ -588,7 +609,7 @@ export function DocumentsView({
               {selected.google_docs_url?.trim() ? (
                 <GoogleDocsEmbed
                   googleDocsUrl={selected.google_docs_url.trim()}
-                  heading="Linked document"
+                  heading={t("linkedDocumentHeading")}
                   compact
                 />
               ) : null}
@@ -596,7 +617,7 @@ export function DocumentsView({
                 <div>
                   {selected.google_docs_url?.trim() ? (
                     <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
-                      Notes
+                      {t("notesHeading")}
                     </p>
                   ) : null}
                   <pre className="whitespace-pre-wrap rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-sans text-sm text-slate-800 dark:border-white/10 dark:bg-black/30 dark:text-zinc-200">
@@ -604,16 +625,15 @@ export function DocumentsView({
                   </pre>
                 </div>
               ) : !selected.google_docs_url?.trim() ? (
-                <p className="text-sm text-brand-muted">
-                  No Google Doc linked yet. Use Edit to add a{" "}
-                  <code className="text-xs">docs.google.com/document/d/…</code> URL.
-                </p>
+                <p className="text-sm text-brand-muted">{t("noGoogleDocYet")}</p>
               ) : null}
               {selected.doc_type === "position_paper" ? (
                 <div className="rounded-xl border border-amber-200/80 bg-amber-50/70 p-4 dark:border-amber-500/30 dark:bg-amber-950/20">
-                  <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">Chair feedback</p>
+                  <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">
+                    {t("chairFeedbackHeading")}
+                  </p>
                   <p className="mt-1 whitespace-pre-wrap text-sm text-amber-900/90 dark:text-amber-100/90">
-                    {selected.chair_feedback?.trim() || "No feedback added yet."}
+                    {selected.chair_feedback?.trim() || t("noFeedbackYet")}
                   </p>
                 </div>
               ) : null}

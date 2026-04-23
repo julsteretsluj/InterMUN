@@ -3,8 +3,10 @@ import { redirect } from "next/navigation";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
+import { getTranslations } from "next-intl/server";
 
 export default async function SmtProfilePage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -36,7 +38,7 @@ export default async function SmtProfilePage() {
   );
 
   return (
-    <MunPageShell title="Profile">
+    <MunPageShell title={t("smtProfile")}>
       {(myAwards?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">Recorded awards</h3>

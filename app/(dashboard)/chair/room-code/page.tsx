@@ -3,8 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { RoomCodeChairForm } from "./RoomCodeChairForm";
 import { canChairSwitchAnyCommitteeForTesting } from "@/lib/testing-overrides";
+import { getTranslations } from "next-intl/server";
 
 export default async function ChairRoomCodePage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -40,7 +42,7 @@ export default async function ChairRoomCodePage() {
     ];
     if (allowedIds.length === 0) {
       return (
-        <MunPageShell title="Committee codes (chair / SMT)">
+        <MunPageShell title={t("committeeCodes")}>
           <p className="text-sm text-brand-muted mb-4 max-w-xl">
             You don&apos;t have a committee seat yet. Ask secretariat to assign you on the allocation
             matrix, then return here.
@@ -54,7 +56,7 @@ export default async function ChairRoomCodePage() {
   const { data: conferences } = await conferencesQuery;
 
   return (
-    <MunPageShell title="Committee codes (chair / SMT)">
+    <MunPageShell title={t("committeeCodes")}>
       <p className="text-sm text-brand-muted mb-6 max-w-xl">
         Each committee has a <strong>committee code</strong> within its conference (second gate after
         delegates enter the conference code). Codes must be unique within the same conference event.

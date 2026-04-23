@@ -9,8 +9,10 @@ import { getAppName } from "@/lib/branding";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
+import { getTranslations } from "next-intl/server";
 
 export default async function SmtLayout({ children }: { children: React.ReactNode }) {
+  const t = await getTranslations("smtLayout");
   const supabase = await createClient();
   const {
     data: { user },
@@ -51,7 +53,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
   const conferenceLine = activeEvent
     ? [activeEvent.name, activeEvent.event_code].filter(Boolean).join(" · ")
     : null;
-  const hubLabel = activeEvent?.name?.trim() || "Enter conference code";
+  const hubLabel = activeEvent?.name?.trim() || t("hubEnterConferenceCode");
 
   return (
     <div className="flex min-h-screen bg-brand-cream text-brand-navy dark:bg-discord-app dark:text-zinc-50">
@@ -86,8 +88,8 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         {activeEvent ? (
           <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-slate-600 dark:border-discord-divider dark:bg-discord-app dark:text-discord-muted sm:px-6">
             <div className="w-full">
-              Active event: <span className="font-medium text-slate-800 dark:text-zinc-100">{activeEvent.name}</span>{" "}
-              · code{" "}
+              {t("activeEvent")}{" "}
+              <span className="font-medium text-slate-800 dark:text-zinc-100">{activeEvent.name}</span> · {t("code")}{" "}
               <span className="font-mono text-discord-blurple dark:text-[#949cfa]">{activeEvent.event_code}</span>
             </div>
           </div>
@@ -95,9 +97,9 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-accent dark:border-discord-divider dark:bg-discord-app dark:text-brand-accent-bright sm:px-6">
             <div className="w-full">
               <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
-                Enter conference code
+                {t("enterConferenceCodeLink")}
               </Link>{" "}
-              to load committees for an event.
+              {t("loadCommitteesPrompt")}
             </div>
           </div>
         )}

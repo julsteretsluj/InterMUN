@@ -5,8 +5,10 @@ import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairDigitalRoomClient } from "@/components/chair/ChairDigitalRoomClient";
 import { type RollAttendance, parseRollAttendance } from "@/lib/roll-attendance";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
+import { getTranslations } from "next-intl/server";
 
 export default async function ChairDigitalRoomPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -61,7 +63,7 @@ export default async function ChairDigitalRoomPage() {
   }
 
   return (
-    <MunPageShell title="Digital Room">
+    <MunPageShell title={t("digitalRoom")}>
       <ChairDigitalRoomClient
         conferenceId={conferenceId}
         committeeLine={committeeLine}

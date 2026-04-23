@@ -3,8 +3,10 @@ import { ResolutionsView } from "@/components/resolutions/ResolutionsView";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { listClauseOutcomesAction } from "@/app/actions/resolutions";
+import { getTranslations } from "next-intl/server";
 
 export default async function ResolutionsPage() {
+  const t = await getTranslations("pageTitles");
   const supabase = await createClient();
   const {
     data: { user },
@@ -97,7 +99,7 @@ export default async function ResolutionsPage() {
   const clauseOutcomes = outcomesResult.ok ? outcomesResult.data : [];
 
   return (
-    <MunPageShell title="Resolutions">
+    <MunPageShell title={t("resolutions")}>
       <ResolutionsView
         resolutions={resolutions}
         blocs={blocs || []}
