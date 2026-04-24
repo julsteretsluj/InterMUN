@@ -14,7 +14,8 @@
     "yourCountry": "votre pays",
     "delegateFallbackName": "Déléguer",
     "smtFallbackName": "CMS",
-    "secretaryGeneral": "Secrétaire Général"
+    "secretaryGeneral": "Secrétaire Général",
+    "returnToProfile": "Retour au profil"
   },
   "language": {
     "label": "Langue",
@@ -154,6 +155,31 @@
     "formalMotions": "Motions formelles",
     "timer": "Minuteur",
     "smtProfile": "Profil"
+  },
+  "setupPage": {
+    "title": "La Supabase n'est pas configurée",
+    "body": "Ce déploiement ne contient pas les variables d'environnement publiques Supabase. Ajoutez-les dans votre hébergeur (par exemple Vercel → Projet → Paramètres → Variables d'environnement), puis redéployez :",
+    "valuesHint": "Les valeurs sont dans Supabase → Paramètres du projet → API. Utilisez les mêmes noms pour Production et Preview si vous utilisez des déploiements en version préliminaire.",
+    "tryAgainLink": "Essayez de vous reconnecter après le redéploiement"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Lien d'inscription invalide",
+    "invalidLinkBody": "Ce lien d'attribution ne contient pas les détails requis. Demandez à votre président ou à votre SMT un nouveau lien d'inscription.",
+    "allocationNotFoundTitle": "Allocation introuvable",
+    "allocationNotFoundBody": "Cette nation/poste n'est plus disponible dans le comité sélectionné.",
+    "allocationTakenTitle": "Allocation déjà prise",
+    "allocationTakenBody": "{country} a déjà été revendiqué par un autre compte. Veuillez choisir une allocation différente.",
+    "submitFailedTitle": "Impossible de soumettre la demande",
+    "requestSubmittedTitle": "Demande d'inscription soumise",
+    "requestSubmittedBody": "Votre demande pour {country} a été envoyée au président du comité pour approbation.",
+    "requestSubmittedHint": "Une fois approuvé, rouvrez ce lien ou continuez à vous connecter au comité pour continuer.",
+    "continueCommitteeSignIn": "Continuer à vous connecter au comité"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Sélectionnez d'abord un événement de conférence.",
+    "enterConferenceCode": "Entrez le code de la conférence",
+    "title": "Codes des chambres et chaises",
+    "subtitle": "Définissez le code du comité de deuxième porte pour chaque session et invitez ou promouvez les présidents de l'estrade sans utiliser le tableau de bord des délégués."
   },
   "delegateDashboard": {
     "welcome": "Bienvenue, Délégué de {flag} {country}",
@@ -506,7 +532,7 @@
       "errImageType": "Veuillez choisir un fichier image.",
       "errImageSize": "L'image est trop grande (max 5 Mo).",
       "errUploadFailed": "Le téléchargement a échoué.",
-      "errStorageSetup": "Le stockage des photos de profil n’est pas configuré. Dans le projet Supabase, exécutez la migration 00100_profile_pictures_storage_bucket.sql ou créez un bucket de stockage public nommé profile-pictures (voir README).",
+      "errStorageSetup": "Le stockage des photos de profil n’est pas configuré. Dans le projet Supabase, exécutez la migration 00100_profile_pictures_storage_bucket.sql ou créez un compartiment de stockage public nommé profile-pictures (voir README).",
       "errPublicUrl": "Impossible de résoudre l'URL publique de l'image téléchargée."
     },
     "guides": {
@@ -898,6 +924,13 @@
         "fullAnnouncement": "Annonce complète",
         "daisAnnouncement": "Annonce de l'estrade",
         "close": "Fermer"
+      },
+      "committeeControl": {
+        "sessionNameLabel": "Nom de la séance",
+        "sessionNamePlaceholder": "par ex. Séance du matin",
+        "sessionNameSaving": "Économie…",
+        "sessionNameSaved": "Enregistrée",
+        "sessionNameHint": "Enregistre automatiquement et apparaît dans l'historique de la session."
       },
       "history": {
         "title": "Historique des sessions",

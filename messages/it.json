@@ -14,7 +14,8 @@
     "yourCountry": "il tuo paese",
     "delegateFallbackName": "Delegare",
     "smtFallbackName": "SMT",
-    "secretaryGeneral": "Segretario generale"
+    "secretaryGeneral": "Segretario generale",
+    "returnToProfile": "Torna al profilo"
   },
   "language": {
     "label": "Lingua",
@@ -154,6 +155,31 @@
     "formalMotions": "Mozioni formali",
     "timer": "Timer",
     "smtProfile": "Profilo"
+  },
+  "setupPage": {
+    "title": "Supabase non è configurato",
+    "body": "In questa distribuzione mancano le variabili di ambiente pubbliche di Supabase. Aggiungili nel tuo host (ad esempio Vercel → Progetto → Impostazioni → Variabili d'ambiente), quindi ridistribuisci:",
+    "valuesHint": "I valori si trovano in Supabase → Impostazioni progetto → API. Utilizza gli stessi nomi per Produzione e Anteprima se utilizzi distribuzioni di anteprima.",
+    "tryAgainLink": "Prova ad accedere di nuovo dopo la ridistribuzione"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Link di registrazione non valido",
+    "invalidLinkBody": "In questo collegamento di allocazione mancano i dettagli richiesti. Chiedi al tuo presidente o SMT un nuovo link di iscrizione.",
+    "allocationNotFoundTitle": "Assegnazione non trovata",
+    "allocationNotFoundBody": "Questa nazione/posizione non è più disponibile nel comitato selezionato.",
+    "allocationTakenTitle": "Assegnazione già presa",
+    "allocationTakenBody": "{country} è già stato rivendicato da un altro account. Scegli un'allocazione diversa.",
+    "submitFailedTitle": "Impossibile inviare la richiesta",
+    "requestSubmittedTitle": "Richiesta di iscrizione inviata",
+    "requestSubmittedBody": "La tua richiesta per {country} è stata inviata al presidente della commissione per l'approvazione.",
+    "requestSubmittedHint": "Una volta approvato, riapri questo collegamento o continua ad accedere al comitato per procedere.",
+    "continueCommitteeSignIn": "Continuare per accedere al comitato"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Seleziona prima un evento della conferenza.",
+    "enterConferenceCode": "Inserisci il codice conferenza",
+    "title": "Codici delle camere e sedie",
+    "subtitle": "Imposta il codice del comitato del secondo cancello per ogni sessione e invita o promuovi sedie a pedana senza utilizzare il dashboard dei delegati."
   },
   "delegateDashboard": {
     "welcome": "Benvenuto, Delegato di {flag} {country}",
@@ -738,7 +764,7 @@
           },
           "preparedness_response": {
             "term": "Preparazione e risposta",
-            "definition": "Pianificazione, coordinamento e azioni urgenti per contenere e gestire le emergenze."
+            "definition": "Pianificazione, coordinamento e azioni di intervento per contenere e gestire le emergenze."
           },
           "non_refoulement": {
             "term": "Non respingimento",
@@ -898,6 +924,13 @@
         "fullAnnouncement": "Annuncio completo",
         "daisAnnouncement": "Annuncio del Dais",
         "close": "Vicina"
+      },
+      "committeeControl": {
+        "sessionNameLabel": "Nome della sessione",
+        "sessionNamePlaceholder": "per esempio. Sessione mattutina",
+        "sessionNameSaving": "Risparmio…",
+        "sessionNameSaved": "Salvato",
+        "sessionNameHint": "Salva automaticamente e appare nella cronologia delle sessioni."
       },
       "history": {
         "title": "Cronologia della sessione",

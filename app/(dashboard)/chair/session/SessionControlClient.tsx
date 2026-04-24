@@ -3566,6 +3566,95 @@ export function SessionControlClient({
           })}
         </div>
         <div className={`${surfaceCard} space-y-3`}>
+          {procedureProfile === "eu_parliament" ? (
+            <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
+                EU Parliament timer board (11 timers)
+              </p>
+              <p className="text-xs text-brand-muted">
+                One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to
+                copy a row into the live timer fields on the Clock tab (speaker time / Save timer).
+              </p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {EU_TIMER_SLOT_ORDER.map((slot) => {
+                  const slotSeconds = Math.max(0, euTimerSlots[slot] ?? 0);
+                  const slotMinutes = Math.floor(slotSeconds / 60);
+                  const slotRemainder = slotSeconds % 60;
+                  return (
+                    <div
+                      key={slot}
+                      className="rounded-md border border-brand-navy/15 bg-white/70 px-3 py-2"
+                    >
+                      <p className="text-xs font-medium text-brand-navy">{euTimerSlotLabel(slot)}</p>
+                      <div className="mt-1 grid gap-2 sm:grid-cols-2">
+                        <label className="text-xs text-brand-muted">
+                          Name
+                          <input
+                            className={`mt-1 w-full ${surfaceFieldSm}`}
+                            value={euTimerMeta[slot]?.name ?? ""}
+                            onChange={(e) => setEuTimerSlotMeta(slot, { name: e.target.value })}
+                            placeholder={euTimerSlotLabel(slot)}
+                          />
+                        </label>
+                        <label className="text-xs text-brand-muted">
+                          Tag
+                          <select
+                            className={`mt-1 w-full ${surfaceFieldSm}`}
+                            value={euTimerMeta[slot]?.tag ?? "party timer"}
+                            onChange={(e) =>
+                              setEuTimerSlotMeta(slot, {
+                                tag: e.target.value as EuTimerTag,
+                              })
+                            }
+                          >
+                            {EU_TIMER_TAG_OPTIONS.map((tag) => (
+                              <option key={tag} value={tag}>
+                                {tag}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      </div>
+                      <div className="mt-2 flex flex-wrap items-end gap-2">
+                        <div className="flex items-center gap-1">
+                          <input
+                            className={`w-14 ${surfaceFieldSm}`}
+                            inputMode="numeric"
+                            value={String(slotMinutes)}
+                            onChange={(e) =>
+                              setEuTimerSlotSeconds(slot, parseTime(e.target.value, String(slotRemainder)))
+                            }
+                          />
+                          <span className="text-xs text-brand-muted">m</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <input
+                            className={`w-14 ${surfaceFieldSm}`}
+                            inputMode="numeric"
+                            value={String(slotRemainder)}
+                            onChange={(e) =>
+                              setEuTimerSlotSeconds(slot, parseTime(String(slotMinutes), e.target.value))
+                            }
+                          />
+                          <span className="text-xs text-brand-muted">s</span>
+                        </div>
+                        <button
+                          type="button"
+                          className="ml-auto rounded-md border border-brand-navy/20 bg-white px-2.5 py-1 text-xs font-medium text-brand-navy hover:bg-brand-cream"
+                          onClick={() => applyEuTimerSlotToFloor(slot)}
+                        >
+                          Apply
+                        </button>
+                      </div>
+                      <p className="mt-1 text-[0.65rem] text-brand-muted">
+                        {formatSecondsAsMinSec(slotSeconds)}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
           {timerWorkflowTab === "setup" ? (
             <>
           <p className="text-sm text-brand-muted">
@@ -3802,95 +3891,6 @@ export function SessionControlClient({
 
           {timerWorkflowTab === "clock" ? (
           <div className="space-y-4">
-            {procedureProfile === "eu_parliament" ? (
-              <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
-                <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
-                  EU Parliament timer board (11 timers)
-                </p>
-                <p className="text-xs text-brand-muted">
-                  One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to
-                  copy a row into the live timer fields below.
-                </p>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {EU_TIMER_SLOT_ORDER.map((slot) => {
-                    const slotSeconds = Math.max(0, euTimerSlots[slot] ?? 0);
-                    const slotMinutes = Math.floor(slotSeconds / 60);
-                    const slotRemainder = slotSeconds % 60;
-                    return (
-                      <div
-                        key={slot}
-                        className="rounded-md border border-brand-navy/15 bg-white/70 px-3 py-2"
-                      >
-                        <p className="text-xs font-medium text-brand-navy">{euTimerSlotLabel(slot)}</p>
-                        <div className="mt-1 grid gap-2 sm:grid-cols-2">
-                          <label className="text-xs text-brand-muted">
-                            Name
-                            <input
-                              className={`mt-1 w-full ${surfaceFieldSm}`}
-                              value={euTimerMeta[slot]?.name ?? ""}
-                              onChange={(e) => setEuTimerSlotMeta(slot, { name: e.target.value })}
-                              placeholder={euTimerSlotLabel(slot)}
-                            />
-                          </label>
-                          <label className="text-xs text-brand-muted">
-                            Tag
-                            <select
-                              className={`mt-1 w-full ${surfaceFieldSm}`}
-                              value={euTimerMeta[slot]?.tag ?? "party timer"}
-                              onChange={(e) =>
-                                setEuTimerSlotMeta(slot, {
-                                  tag: e.target.value as EuTimerTag,
-                                })
-                              }
-                            >
-                              {EU_TIMER_TAG_OPTIONS.map((tag) => (
-                                <option key={tag} value={tag}>
-                                  {tag}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                        </div>
-                        <div className="mt-2 flex flex-wrap items-end gap-2">
-                          <div className="flex items-center gap-1">
-                            <input
-                              className={`w-14 ${surfaceFieldSm}`}
-                              inputMode="numeric"
-                              value={String(slotMinutes)}
-                              onChange={(e) =>
-                                setEuTimerSlotSeconds(slot, parseTime(e.target.value, String(slotRemainder)))
-                              }
-                            />
-                            <span className="text-xs text-brand-muted">m</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <input
-                              className={`w-14 ${surfaceFieldSm}`}
-                              inputMode="numeric"
-                              value={String(slotRemainder)}
-                              onChange={(e) =>
-                                setEuTimerSlotSeconds(slot, parseTime(String(slotMinutes), e.target.value))
-                              }
-                            />
-                            <span className="text-xs text-brand-muted">s</span>
-                          </div>
-                          <button
-                            type="button"
-                            className="ml-auto rounded-md border border-brand-navy/20 bg-white px-2.5 py-1 text-xs font-medium text-brand-navy hover:bg-brand-cream"
-                            onClick={() => applyEuTimerSlotToFloor(slot)}
-                          >
-                            Apply
-                          </button>
-                        </div>
-                        <p className="mt-1 text-[0.65rem] text-brand-muted">
-                          {formatSecondsAsMinSec(slotSeconds)}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ) : null}
           <div className="flex flex-wrap gap-4 items-end">
             <label className="text-sm text-brand-navy min-w-[10rem]">
               <span className={surfaceLabel}>{tTimer("speakerTimeRemaining")}</span>

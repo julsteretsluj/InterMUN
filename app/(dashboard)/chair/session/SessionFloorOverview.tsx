@@ -7,6 +7,7 @@ export function SessionFloorOverview({
   initialCommitteeSessionStartedAt,
   initialCommitteeSessionDurationSeconds,
   initialCommitteeSessionEndsAt,
+  initialCommitteeSessionTitle,
 }: {
   conferenceId: string;
   conferenceTitle: string;
@@ -15,6 +16,7 @@ export function SessionFloorOverview({
   initialCommitteeSessionStartedAt: string | null;
   initialCommitteeSessionDurationSeconds: number | null;
   initialCommitteeSessionEndsAt: string | null;
+  initialCommitteeSessionTitle: string | null;
 }) {
   return (
     <div className="space-y-4">
@@ -24,6 +26,7 @@ export function SessionFloorOverview({
         initialStartedAt={initialCommitteeSessionStartedAt}
         initialDurationSeconds={initialCommitteeSessionDurationSeconds}
         initialEndsAt={initialCommitteeSessionEndsAt}
+        initialSessionTitle={initialCommitteeSessionTitle}
       />
     </div>
   );

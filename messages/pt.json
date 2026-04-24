@@ -14,7 +14,8 @@
     "yourCountry": "seu país",
     "delegateFallbackName": "Delegar",
     "smtFallbackName": "SMT",
-    "secretaryGeneral": "Secretário Geral"
+    "secretaryGeneral": "Secretário Geral",
+    "returnToProfile": "Voltar ao perfil"
   },
   "language": {
     "label": "Linguagem",
@@ -84,7 +85,7 @@
     "delegateHint": "(seu comitê)",
     "secretariat": "Secretariada",
     "secretariatHint": "(equipe do evento)",
-    "nextModeSignup": "criar uma conta",
+    "nextModeSignup": "crie uma conta",
     "nextModeLogin": "entrar"
   },
   "roomGate": {
@@ -154,6 +155,31 @@
     "formalMotions": "Moções formais",
     "timer": "Temporizadora",
     "smtProfile": "Perfil"
+  },
+  "setupPage": {
+    "title": "Supabase não está configurado",
+    "body": "Esta implantação não possui as variáveis ​​de ambiente públicas do Supabase. Adicione-os ao seu host (por exemplo, Vercel → Projeto → Configurações → Variáveis ​​de ambiente) e, em seguida, reimplante:",
+    "valuesHint": "Os valores estão em Supabase → Configurações do projeto → API. Use os mesmos nomes para produção e visualização se usar implantações de visualização.",
+    "tryAgainLink": "Tente fazer login novamente após reimplantar"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Link de inscrição inválido",
+    "invalidLinkBody": "Este link de alocação não contém detalhes obrigatórios. Peça ao seu presidente ou SMT um novo link de inscrição.",
+    "allocationNotFoundTitle": "Alocação não encontrada",
+    "allocationNotFoundBody": "Esta nação/cargo não está mais disponível no comitê selecionado.",
+    "allocationTakenTitle": "Alocação já realizada",
+    "allocationTakenBody": "{country} já foi reivindicado por outra conta. Escolha uma alocação diferente.",
+    "submitFailedTitle": "Não foi possível enviar a solicitação",
+    "requestSubmittedTitle": "Solicitação de inscrição enviada",
+    "requestSubmittedBody": "Sua solicitação para {country} foi enviada ao presidente do comitê para aprovação.",
+    "requestSubmittedHint": "Depois de aprovado, reabra este link ou continue com o login do comitê para prosseguir.",
+    "continueCommitteeSignIn": "Continuar para entrar no comitê"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Selecione um evento de conferência primeiro.",
+    "enterConferenceCode": "Insira o código da conferência",
+    "title": "Códigos de quartos e cadeiras",
+    "subtitle": "Defina o código do comitê do segundo portão para cada sessão e convide ou promova presidentes de palco sem usar o painel de delegados."
   },
   "delegateDashboard": {
     "welcome": "Bem-vindo, Delegado de {flag} {country}",
@@ -246,7 +272,7 @@
     "enterConferenceCode": "Insira o código da conferência",
     "noCommittees": "Nenhum comitê encontrado para este evento. Adicione-os",
     "eventSessionsLink": "Sessões de eventos e comitês",
-    "orSupabase": "ou na Supabase.",
+    "orSupabase": "ou no Supabase.",
     "sessionFloorBanner": "<floor>Piso da sessão</floor> (temporizadores, alto-falantes, chamada) é somente para <chairs>cadeiras de estrado</chairs>. Use <live>Comitês ao vivo</live> abaixo para supervisão ou insira códigos de comitê como delegados quando precisar de uma sessão específica.",
     "welcomeSg": "Bem vindo Secretário Geral!",
     "whichCommittee": "Qual comitê você gostaria de verificar?",
@@ -898,6 +924,13 @@
         "fullAnnouncement": "Anúncio completo",
         "daisAnnouncement": "Anúncio do Dais",
         "close": "Fechar"
+      },
+      "committeeControl": {
+        "sessionNameLabel": "Nome da sessão",
+        "sessionNamePlaceholder": "por exemplo Sessão matinal",
+        "sessionNameSaving": "Salvando…",
+        "sessionNameSaved": "Salvo",
+        "sessionNameHint": "Salva automaticamente e aparece no histórico da sessão."
       },
       "history": {
         "title": "Histórico da sessão",

@@ -14,7 +14,8 @@
     "yourCountry": "твоя страна",
     "delegateFallbackName": "Делегат",
     "smtFallbackName": "СМТ",
-    "secretaryGeneral": "Генеральный секретарь"
+    "secretaryGeneral": "Генеральный секретарь",
+    "returnToProfile": "Return to profile"
   },
   "language": {
     "label": "Язык",
@@ -535,7 +536,7 @@
       "titlePlaceholder": "Заголовок",
       "googleDocsUrl": "URL-адрес Документов Google",
       "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Новый документ Google откроется в другой вкладке. Вставьте ссылку для общего доступа, чтобы делегаты могли открыть документ здесь (просмотр/редактирование зависит от общего доступа Google).",
+      "googleDocsHelp": "Новый документ Google откроется в другой вкладке. Вставьте ссылку для общего доступа, чтобы делегаты могли открыть документ здесь (просмотр/редактирование зависит от совместного использования Google).",
       "markdownOptional": "Примечания Markdown (необязательно, если вы используете Google Doc)",
       "save": "Сохранять",
       "cancel": "Отмена",
@@ -899,6 +900,13 @@
         "daisAnnouncement": "Объявление на возвышении",
         "close": "Закрывать"
       },
+      "committeeControl": {
+        "sessionNameLabel": "Имя сеанса",
+        "sessionNamePlaceholder": "например Утренняя сессия",
+        "sessionNameSaving": "Сохранение…",
+        "sessionNameSaved": "Сохранено",
+        "sessionNameHint": "Сохраняется автоматически и отображается в истории сеансов."
+      },
       "history": {
         "title": "История сеансов",
         "savedCount": "{count} сохранено",
@@ -928,7 +936,7 @@
         "purposeGeneralFloor": "Общие дебаты/заседание (не привязано к голосованию)",
         "purposeMotionVote": "Открытое движение - таймер только пока активно голосование на полу.",
         "openMotionForVoting": "Открытое предложение (должно быть открыто для голосования)",
-        "selectMotion": "Выбрать движение...",
+        "selectMotion": "Выберите движение...",
         "untitled": "Без названия",
         "noOpenMotionWarning": "Никакие предложения не выносятся на голосование. Сначала откройте голосование или переключите цель на общий этаж.",
         "clock": "Часы",
@@ -1247,5 +1255,30 @@
     "committeePasswordConfirmPlaceholder": "То же, что и выше, при использовании пароля",
     "creating": "Создание…",
     "submit": "Создать мероприятие + комитет и войти"
+  },
+  "setupPage": {
+    "title": "Supabase is not configured",
+    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
+    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
+    "tryAgainLink": "Try sign in again after redeploying"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Invalid sign-up link",
+    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
+    "allocationNotFoundTitle": "Allocation not found",
+    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
+    "allocationTakenTitle": "Allocation already taken",
+    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
+    "submitFailedTitle": "Could not submit request",
+    "requestSubmittedTitle": "Sign-up request submitted",
+    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
+    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
+    "continueCommitteeSignIn": "Continue to committee sign-in"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Select a conference event first.",
+    "enterConferenceCode": "Enter conference code",
+    "title": "Room codes & chairs",
+    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
   }
 }

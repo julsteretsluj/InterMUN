@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import { HelpButton } from "@/components/HelpButton";
@@ -17,7 +18,13 @@ type ProcedureRow = {
   committee_session_started_at: string | null;
   committee_session_duration_seconds: number | null;
   committee_session_ends_at: string | null;
+  committee_session_title: string | null;
 };
+
+function normalizeCommitteeSessionTitle(raw: string): string | null {
+  const t = raw.trim();
+  return t.length > 0 ? t : null;
+}
 
 function clampDurationSeconds(hours: number, minutes: number): number {
   const h = Math.max(0, Math.floor(hours));
@@ -50,16 +57,23 @@ export function ChairCommitteeSessionControl({
   initialStartedAt,
   initialDurationSeconds,
   initialEndsAt,
+  initialSessionTitle,
 }: {
   conferenceId: string;
   initialStartedAt: string | null;
   initialDurationSeconds: number | null;
   initialEndsAt: string | null;
+  initialSessionTitle: string | null;
 }) {
+  const t = useTranslations("views.session.committeeControl");
   const supabase = useMemo(() => createClient(), []);
   const [startedAt, setStartedAt] = useState<string | null>(initialStartedAt);
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
+  const [sessionTitle, setSessionTitle] = useState(() => initialSessionTitle ?? "");
+  const [titleSaveStatus, setTitleSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const titleDebounceRef = useRef<number | null>(null);
+  const sessionTitleDirtyRef = useRef(false);
 
   const [endMode, setEndMode] = useState<EndMode>(() =>
     modeFromRow(initialDurationSeconds, initialEndsAt)
@@ -75,7 +89,9 @@ export function ChairCommitteeSessionControl({
     const m = String(message ?? "");
     return (
       /schema cache/i.test(m) &&
-      /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at/i.test(m)
+      /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at|committee_session_title/i.test(
+        m
+      )
     );
   }
 
@@ -96,7 +112,7 @@ export function ChairCommitteeSessionControl({
     const { data, error } = await supabase
       .from("procedure_states")
       .select(
-        "committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at"
+        "committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at, committee_session_title"
       )
       .eq("conference_id", conferenceId)
       .maybeSingle();
@@ -113,12 +129,18 @@ export function ChairCommitteeSessionControl({
       setSupportsSessionEndOptions(false);
       const fallback = await supabase
         .from("procedure_states")
-        .select("committee_session_started_at")
+        .select("committee_session_started_at, committee_session_title")
         .eq("conference_id", conferenceId)
         .maybeSingle();
-      const s = (fallback.data as { committee_session_started_at?: string | null } | null)
-        ?.committee_session_started_at ?? null;
+      const fb = fallback.data as {
+        committee_session_started_at?: string | null;
+        committee_session_title?: string | null;
+      } | null;
+      const s = fb?.committee_session_started_at ?? null;
       setStartedAt(s);
+      if (!sessionTitleDirtyRef.current) {
+        setSessionTitle(fb?.committee_session_title ?? "");
+      }
       return;
     }
     if (!error) {
@@ -128,11 +150,15 @@ export function ChairCommitteeSessionControl({
       committee_session_started_at?: string | null;
       committee_session_duration_seconds?: number | null;
       committee_session_ends_at?: string | null;
+      committee_session_title?: string | null;
     } | null;
     const s = row?.committee_session_started_at ?? null;
     const d = row?.committee_session_duration_seconds ?? null;
     const e = row?.committee_session_ends_at ?? null;
     setStartedAt(s);
+    if (!sessionTitleDirtyRef.current) {
+      setSessionTitle(row?.committee_session_title ?? "");
+    }
     const m = modeFromRow(d, e);
     setEndMode(m);
     if (m === "duration" && d != null && d > 0) {
@@ -141,6 +167,46 @@ export function ChairCommitteeSessionControl({
     }
     if (m === "until" && e) setEndsAtLocal(isoToDatetimeLocalValue(e));
   }, [supabase, conferenceId]);
+
+  const persistSessionTitle = useCallback(
+    async (raw: string) => {
+      if (!supportsSessionStartColumn) return;
+      setTitleSaveStatus("saving");
+      const normalized = normalizeCommitteeSessionTitle(raw);
+      const { error } = await supabase
+        .from("procedure_states")
+        .update({
+          committee_session_title: normalized,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("conference_id", conferenceId);
+      if (error) {
+        setTitleSaveStatus("idle");
+        setMsg(friendlySessionColumnError(error.message) ?? error.message);
+        return;
+      }
+      sessionTitleDirtyRef.current = false;
+      setTitleSaveStatus("saved");
+      window.setTimeout(() => {
+        setTitleSaveStatus((prev) => (prev === "saved" ? "idle" : prev));
+      }, 2000);
+    },
+    [supabase, conferenceId, supportsSessionStartColumn]
+  );
+
+  function schedulePersistSessionTitle(raw: string) {
+    if (titleDebounceRef.current) window.clearTimeout(titleDebounceRef.current);
+    titleDebounceRef.current = window.setTimeout(() => {
+      void persistSessionTitle(raw);
+    }, 550);
+  }
+
+  function onSessionTitleChange(value: string) {
+    sessionTitleDirtyRef.current = true;
+    setSessionTitle(value);
+    setTitleSaveStatus("idle");
+    schedulePersistSessionTitle(value);
+  }
 
   useEffect(() => {
     setStartedAt(initialStartedAt);
@@ -156,6 +222,18 @@ export function ChairCommitteeSessionControl({
     if (m === "until" && initialEndsAt) setEndsAtLocal(isoToDatetimeLocalValue(initialEndsAt));
     else setEndsAtLocal("");
   }, [initialStartedAt, initialDurationSeconds, initialEndsAt]);
+
+  useEffect(() => {
+    if (!sessionTitleDirtyRef.current) {
+      setSessionTitle(initialSessionTitle ?? "");
+    }
+  }, [initialSessionTitle]);
+
+  useEffect(() => {
+    return () => {
+      if (titleDebounceRef.current) window.clearTimeout(titleDebounceRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const ch = supabase
@@ -208,14 +286,16 @@ export function ChairCommitteeSessionControl({
       supabase
         .from("procedure_states")
         .select(
-          "state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at"
+          "state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at, committee_session_title"
         )
         .eq("conference_id", conferenceId)
         .maybeSingle();
     const withoutEndColumns = async () =>
       supabase
         .from("procedure_states")
-        .select("state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at")
+        .select(
+          "state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at, committee_session_title"
+        )
         .eq("conference_id", conferenceId)
         .maybeSingle();
     const withoutSessionColumns = async () =>
@@ -254,6 +334,7 @@ export function ChairCommitteeSessionControl({
         committee_session_started_at: null,
         committee_session_duration_seconds: null,
         committee_session_ends_at: null,
+        committee_session_title: null,
       };
     }
     if (error || !data) return null;
@@ -277,6 +358,7 @@ export function ChairCommitteeSessionControl({
       }
       const row = await loadFullRow();
       const now = new Date().toISOString();
+      const titlePayload = normalizeCommitteeSessionTitle(sessionTitle);
       const timingUpdate = supportsSessionEndOptions
         ? {
             committee_session_duration_seconds: timing.committee_session_duration_seconds,
@@ -288,6 +370,7 @@ export function ChairCommitteeSessionControl({
           .from("procedure_states")
           .update({
             committee_session_started_at: now,
+            committee_session_title: titlePayload,
             ...timingUpdate,
             updated_at: now,
           })
@@ -302,6 +385,7 @@ export function ChairCommitteeSessionControl({
           debate_closed: false,
           motion_floor_open: false,
           committee_session_started_at: now,
+          committee_session_title: titlePayload,
           ...timingUpdate,
           updated_at: now,
         });
@@ -320,11 +404,17 @@ export function ChairCommitteeSessionControl({
         setMsg("Session start timestamp is unavailable until latest migrations are applied.");
         return;
       }
+      if (titleDebounceRef.current) {
+        window.clearTimeout(titleDebounceRef.current);
+        titleDebounceRef.current = null;
+      }
+      sessionTitleDirtyRef.current = false;
       const now = new Date().toISOString();
       const { error } = await supabase
         .from("procedure_states")
         .update({
           committee_session_started_at: null,
+          committee_session_title: null,
           ...(supportsSessionEndOptions
             ? {
                 committee_session_duration_seconds: null,
@@ -399,6 +489,32 @@ export function ChairCommitteeSessionControl({
           </HelpButton>
         </div>
         <p className="mt-1 text-sm text-brand-muted">Start or stop the committee session.</p>
+
+        <div className="mt-4 space-y-1.5">
+          <label className="block text-xs font-semibold uppercase tracking-wide text-brand-muted" htmlFor="committee-session-title">
+            {t("sessionNameLabel")}
+          </label>
+          <input
+            id="committee-session-title"
+            type="text"
+            className="w-full max-w-md rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus:border-brand-accent/40 focus:outline-none focus:ring-2 focus:ring-brand-accent/25"
+            value={sessionTitle}
+            onChange={(e) => onSessionTitleChange(e.target.value)}
+            placeholder={t("sessionNamePlaceholder")}
+            disabled={pending || !supportsSessionStartColumn}
+            maxLength={200}
+            autoComplete="off"
+          />
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-brand-muted">
+            <span>{t("sessionNameHint")}</span>
+            {titleSaveStatus === "saving" ? (
+              <span className="text-brand-navy/90">{t("sessionNameSaving")}</span>
+            ) : null}
+            {titleSaveStatus === "saved" ? (
+              <span className="text-brand-diplomatic dark:text-brand-accent-bright">{t("sessionNameSaved")}</span>
+            ) : null}
+          </div>
+        </div>
 
         {live && startedAt ? (
           <div className="mt-4 space-y-1.5">

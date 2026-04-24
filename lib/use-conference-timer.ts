@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { playTimerExpiryAlarm } from "@/lib/timer-expiry-alarm";
 
 export type ConferenceTimerRow = {
   id: string;
@@ -58,6 +59,8 @@ export function useConferenceTimer(
   const [rawTimer, setRawTimer] = useState<ConferenceTimerRow | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const supabase = useMemo(() => createClient(), []);
+  const prevRemainingRef = useRef<number | null>(null);
+  const canExpireAlarmRef = useRef(false);
 
   const timer = useMemo(() => {
     if (!rawTimer) return null;
@@ -121,6 +124,29 @@ export function useConferenceTimer(
   const isRunning = timer ? timer.is_running !== false : false;
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
+
+  useEffect(() => {
+    if (!timer) {
+      prevRemainingRef.current = null;
+      canExpireAlarmRef.current = false;
+      return;
+    }
+    if (remaining > 0) {
+      canExpireAlarmRef.current = true;
+    }
+    const prev = prevRemainingRef.current;
+    if (
+      isRunning &&
+      remaining === 0 &&
+      prev !== null &&
+      prev > 0 &&
+      canExpireAlarmRef.current
+    ) {
+      playTimerExpiryAlarm();
+      canExpireAlarmRef.current = false;
+    }
+    prevRemainingRef.current = remaining;
+  }, [timer, remaining, isRunning]);
 
   return { timer, remaining, total, mins, secs, perSpeakerMode, isRunning };
 }

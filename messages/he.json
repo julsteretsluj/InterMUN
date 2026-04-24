@@ -14,7 +14,8 @@
     "yourCountry": "המדינה שלך",
     "delegateFallbackName": "נָצִיג",
     "smtFallbackName": "SMT",
-    "secretaryGeneral": "מזכ\"ל"
+    "secretaryGeneral": "מזכ\"ל",
+    "returnToProfile": "Return to profile"
   },
   "language": {
     "label": "שָׂפָה",
@@ -970,6 +971,13 @@
         "pausedForCommittee": "הטיימר נעצר עבור הוועדה.",
         "alreadyRunning": "הטיימר כבר פועל.",
         "runningForCommittee": "טיימר פועל לוועדה."
+      },
+      "committeeControl": {
+        "sessionNameLabel": "Session name",
+        "sessionNamePlaceholder": "e.g. Morning session",
+        "sessionNameSaving": "Saving…",
+        "sessionNameSaved": "Saved",
+        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1247,5 +1255,30 @@
     "committeePasswordConfirmPlaceholder": "זהה לעיל אם משתמשים בסיסמה",
     "creating": "יוצר...",
     "submit": "צור אירוע + ועדה והיכנס"
+  },
+  "setupPage": {
+    "title": "Supabase is not configured",
+    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
+    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
+    "tryAgainLink": "Try sign in again after redeploying"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Invalid sign-up link",
+    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
+    "allocationNotFoundTitle": "Allocation not found",
+    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
+    "allocationTakenTitle": "Allocation already taken",
+    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
+    "submitFailedTitle": "Could not submit request",
+    "requestSubmittedTitle": "Sign-up request submitted",
+    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
+    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
+    "continueCommitteeSignIn": "Continue to committee sign-in"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Select a conference event first.",
+    "enterConferenceCode": "Enter conference code",
+    "title": "Room codes & chairs",
+    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
   }
 }

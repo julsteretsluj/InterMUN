@@ -19,14 +19,18 @@ export default async function ChairSessionPage() {
   const supabase = await createClient();
   const { data: ps, error } = await supabase
     .from("procedure_states")
-    .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
+    .select(
+      "committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at, committee_session_title"
+    )
     .eq("conference_id", data.canonicalConferenceId)
     .maybeSingle();
 
   const errorMessage = String(error?.message ?? "");
   const missingSessionColumns =
     /schema cache/i.test(errorMessage) &&
-    /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at/i.test(errorMessage);
+    /committee_session_started_at|committee_session_duration_seconds|committee_session_ends_at|committee_session_title/i.test(
+      errorMessage
+    );
   const fallback = missingSessionColumns
     ? await supabase
         .from("procedure_states")
@@ -39,10 +43,12 @@ export default async function ChairSessionPage() {
     committee_session_started_at?: string | null;
     committee_session_duration_seconds?: number | null;
     committee_session_ends_at?: string | null;
+    committee_session_title?: string | null;
   } | null;
   const initialStartedAt = row?.committee_session_started_at ?? null;
   const initialDurationSeconds = row?.committee_session_duration_seconds ?? null;
   const initialEndsAt = row?.committee_session_ends_at ?? null;
+  const initialSessionTitle = row?.committee_session_title ?? null;
 
   return (
     <MunPageShell title={t("committeeSession")}>
@@ -53,6 +59,7 @@ export default async function ChairSessionPage() {
         initialCommitteeSessionStartedAt={initialStartedAt}
         initialCommitteeSessionDurationSeconds={initialDurationSeconds}
         initialCommitteeSessionEndsAt={initialEndsAt}
+        initialCommitteeSessionTitle={initialSessionTitle}
       />
     </MunPageShell>
   );

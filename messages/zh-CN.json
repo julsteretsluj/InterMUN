@@ -899,6 +899,13 @@
         "daisAnnouncement": "讲台公告",
         "close": "关闭"
       },
+      "committeeControl": {
+        "sessionNameLabel": "会话名称",
+        "sessionNamePlaceholder": "例如 上午场",
+        "sessionNameSaving": "保存…",
+        "sessionNameSaved": "已保存",
+        "sessionNameHint": "自动保存并显示在会话历史记录中。"
+      },
       "history": {
         "title": "会话历史记录",
         "savedCount": "已保存 {count} 个",

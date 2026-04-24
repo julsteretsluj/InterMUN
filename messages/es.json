@@ -14,7 +14,8 @@
     "yourCountry": "tu pais",
     "delegateFallbackName": "Delegar",
     "smtFallbackName": "SMT",
-    "secretaryGeneral": "secretario general"
+    "secretaryGeneral": "secretario general",
+    "returnToProfile": "Volver al perfil"
   },
   "language": {
     "label": "Idioma",
@@ -93,7 +94,7 @@
     "continueToPlatform": "Continuar a la plataforma",
     "setupConferenceSmt": "Configurar una nueva conferencia (SMT)",
     "goToProfile": "Ir al perfil",
-    "joinCommittee": "Únete a tu comité",
+    "joinCommittee": "Únase a su comité",
     "joinCommitteeDescription": "Ingrese el código de su comité para esta conferencia. Ya deberías haber ingresado el código de la conferencia en la pantalla anterior.",
     "wrongConference": "¿Conferencia equivocada? Ingrese un código de conferencia diferente",
     "openLatestCommittee": "SMT: abrir el último comité (omitir códigos)",
@@ -154,6 +155,31 @@
     "formalMotions": "Mociones formales",
     "timer": "Minutero",
     "smtProfile": "Perfil"
+  },
+  "setupPage": {
+    "title": "Supabase no está configurada",
+    "body": "A esta implementación le faltan las variables de entorno públicas de Supabase. Agréguelos en su host (por ejemplo Vercel → Proyecto → Configuración → Variables de entorno), luego vuelva a implementarlos:",
+    "valuesHint": "Los valores están en Supabase → Configuración del proyecto → API. Utilice los mismos nombres para Producción y Vista previa si utiliza implementaciones de vista previa.",
+    "tryAgainLink": "Intente iniciar sesión nuevamente después de volver a implementar"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Enlace de registro no válido",
+    "invalidLinkBody": "A este enlace de asignación le faltan los detalles requeridos. Pídale a su presidente o SMT un nuevo enlace de registro.",
+    "allocationNotFoundTitle": "Asignación no encontrada",
+    "allocationNotFoundBody": "Esta nación/posición ya no está disponible en el comité seleccionado.",
+    "allocationTakenTitle": "Asignación ya tomada",
+    "allocationTakenBody": "{country} ya ha sido reclamado por otra cuenta. Elija una asignación diferente.",
+    "submitFailedTitle": "No se pudo enviar la solicitud",
+    "requestSubmittedTitle": "Solicitud de registro enviada",
+    "requestSubmittedBody": "Su solicitud para {país} se envió al presidente del comité para su aprobación.",
+    "requestSubmittedHint": "Una vez aprobado, vuelva a abrir este enlace o continúe con el inicio de sesión del comité para continuar.",
+    "continueCommitteeSignIn": "Continuar con el inicio de sesión del comité"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Seleccione primero un evento de conferencia.",
+    "enterConferenceCode": "Ingrese el código de la conferencia",
+    "title": "Códigos de habitación y sillas",
+    "subtitle": "Establezca el código del comité de segunda puerta para cada sesión e invite o ascienda a los presidentes del estrado sin utilizar el panel de delegados."
   },
   "delegateDashboard": {
     "welcome": "Bienvenido, Delegado de {flag} {country}",
@@ -250,7 +276,7 @@
     "sessionFloorBanner": "El <floor>piso de sesión</floor> (cronómetros, oradores, pase de lista) es solo para <chairs>sillas de tarima</chairs>. Utilice los <live>comités en vivo</live> a continuación para supervisión o ingrese códigos de comité como delegados cuando necesite una sesión específica.",
     "welcomeSg": "¡Bienvenido Secretario General!",
     "whichCommittee": "¿A qué comité le gustaría informarle?",
-    "sessionsCount": "{cuenta, plural, una {# sesión} otra {# sesiones}}",
+    "sessionsCount": "{contar, plural, una {# sesión} otra {# sesiones}}",
     "topicLabel": "Tema:",
     "chairsLabel": "Sillas:",
     "committeeLogoAlt": "logotipo de {nombre}",
@@ -524,7 +550,7 @@
           "content": "# Plantillas \n\n## Plantilla de informe del presidente \n- Resumen del comité \n- Puntos clave de discusión \n- Resoluciones aprobadas \n- Recomendaciones"
         },
         "chairReport": {
-          "title": "Informe del presidente",
+          "title": "Informe del Presidente",
           "content": "# Informe del Presidente \n\nDocumente los procedimientos y resultados del comité aquí."
         }
       },
@@ -899,6 +925,13 @@
         "daisAnnouncement": "Anuncio de tarima",
         "close": "Cerca"
       },
+      "committeeControl": {
+        "sessionNameLabel": "Nombre de la sesión",
+        "sessionNamePlaceholder": "p.ej. Sesión de la mañana",
+        "sessionNameSaving": "Ahorro…",
+        "sessionNameSaved": "Guardado",
+        "sessionNameHint": "Se guarda automáticamente y aparece en el historial de sesiones."
+      },
       "history": {
         "title": "Historial de sesiones",
         "savedCount": "{count} guardado",
@@ -1144,7 +1177,7 @@
     "anyChair": "cualquier silla",
     "noChairs": "No se encontraron perfiles de sillas.",
     "notesListTitle": "Lista de notas",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{contar, plural, una {# nota} otra {# notas}}",
     "emptyList": "Aún no hay notas.",
     "forwardedBadge": "(reenviada)",
     "readerWarning": "Advertencia al lector: esta nota puede contener lenguaje inapropiado.",

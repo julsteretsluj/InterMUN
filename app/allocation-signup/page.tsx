@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
@@ -17,6 +18,8 @@ export default async function AllocationSignupPage({
 }: {
   searchParams: Promise<Params>;
 }) {
+  const t = await getTranslations("allocationSignupPage");
+  const tc = await getTranslations("common");
   const { conference, allocation, next } = await searchParams;
   const conferenceId = String(conference ?? "").trim();
   const allocationId = String(allocation ?? "").trim();
@@ -30,13 +33,10 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">Invalid sign-up link</h1>
-          <p className="text-sm text-brand-muted">
-            This allocation link is missing required details. Ask your chair or SMT for a fresh
-            sign-up link.
-          </p>
+          <h1 className="font-display text-xl font-semibold">{t("invalidLinkTitle")}</h1>
+          <p className="text-sm text-brand-muted">{t("invalidLinkBody")}</p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
-            Return to profile
+            {tc("returnToProfile")}
           </Link>
         </div>
       </div>
@@ -64,12 +64,10 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">Allocation not found</h1>
-          <p className="text-sm text-brand-muted">
-            This nation/position is no longer available in the selected committee.
-          </p>
+          <h1 className="font-display text-xl font-semibold">{t("allocationNotFoundTitle")}</h1>
+          <p className="text-sm text-brand-muted">{t("allocationNotFoundBody")}</p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
-            Return to profile
+            {tc("returnToProfile")}
           </Link>
         </div>
       </div>
@@ -80,13 +78,12 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">Allocation already taken</h1>
+          <h1 className="font-display text-xl font-semibold">{t("allocationTakenTitle")}</h1>
           <p className="text-sm text-brand-muted">
-            {targetAllocation.country} has already been claimed by another account. Please choose a
-            different allocation.
+            {t("allocationTakenBody", { country: targetAllocation.country })}
           </p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
-            Return to profile
+            {tc("returnToProfile")}
           </Link>
         </div>
       </div>
@@ -107,10 +104,10 @@ export default async function AllocationSignupPage({
     return (
       <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
         <div className="max-w-md rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-          <h1 className="font-display text-xl font-semibold">Could not submit request</h1>
+          <h1 className="font-display text-xl font-semibold">{t("submitFailedTitle")}</h1>
           <p className="text-sm text-brand-muted">{requestResult.error}</p>
           <Link href="/profile" className="text-sm text-brand-accent hover:underline">
-            Return to profile
+            {tc("returnToProfile")}
           </Link>
         </div>
       </div>
@@ -120,20 +117,17 @@ export default async function AllocationSignupPage({
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy flex items-center justify-center px-4">
       <div className="max-w-lg rounded-xl border border-brand-navy/10 bg-brand-paper p-6 space-y-3">
-        <h1 className="font-display text-xl font-semibold">Sign-up request submitted</h1>
+        <h1 className="font-display text-xl font-semibold">{t("requestSubmittedTitle")}</h1>
         <p className="text-sm text-brand-muted">
-          Your request for <strong className="text-brand-navy">{targetAllocation.country}</strong> has
-          been sent to the committee chair for approval.
+          {t("requestSubmittedBody", { country: targetAllocation.country })}
         </p>
-        <p className="text-xs text-brand-muted">
-          Once approved, reopen this link or continue to committee sign-in to proceed.
-        </p>
+        <p className="text-xs text-brand-muted">{t("requestSubmittedHint")}</p>
         <div className="pt-1">
           <Link
             href={`/committee-gate?next=${encodeURIComponent(nextPath)}&allocation=${encodeURIComponent(targetAllocation.country)}`}
             className="text-sm text-brand-accent hover:underline"
           >
-            Continue to committee sign-in
+            {t("continueCommitteeSignIn")}
           </Link>
         </div>
       </div>

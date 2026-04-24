@@ -14,7 +14,8 @@
     "yourCountry": "Ihr Land",
     "delegateFallbackName": "Delegieren",
     "smtFallbackName": "SMT",
-    "secretaryGeneral": "Generalsekretär"
+    "secretaryGeneral": "Generalsekretär",
+    "returnToProfile": "Zurück zum Profil"
   },
   "language": {
     "label": "Sprache",
@@ -96,7 +97,7 @@
     "joinCommittee": "Treten Sie Ihrem Ausschuss bei",
     "joinCommitteeDescription": "Geben Sie Ihren Ausschusscode für diese Konferenz ein. Sie sollten den Konferenzcode bereits auf dem vorherigen Bildschirm eingegeben haben.",
     "wrongConference": "Falsche Konferenz? Geben Sie einen anderen Konferenzcode ein",
-    "openLatestCommittee": "SMT: Neuestes Komitee öffnen (Codes überspringen)",
+    "openLatestCommittee": "SMT: Neuestes Komitee eröffnen (Codes überspringen)",
     "openLatestCommitteeHelp": "Öffnet die {code}-Sitzung, wenn sie existiert (nach dem Konferenzcode SEAMUNI2027). Podiumsvorsitzende müssen oben ihre Ausschusscodes eingeben.",
     "setupConferenceSmtOnly": "Eine neue Konferenz einrichten (nur SMT)",
     "setupConferenceHelp": "Erstellt den Konferenzcode und den ersten Ausschusscode. Vorsitzende verwalten Ausschusscodes über Vorsitz -> Ausschusscode, nachdem SMT die Veranstaltung erstellt hat.",
@@ -154,6 +155,31 @@
     "formalMotions": "Formelle Anträge",
     "timer": "Timer",
     "smtProfile": "Profil"
+  },
+  "setupPage": {
+    "title": "Supabase ist nicht konfiguriert",
+    "body": "In dieser Bereitstellung fehlen die öffentlichen Supabase-Umgebungsvariablen. Fügen Sie sie Ihrem Host hinzu (z. B. Vercel → Projekt → Einstellungen → Umgebungsvariablen) und stellen Sie sie dann erneut bereit:",
+    "valuesHint": "Die Werte finden Sie in Supabase → Projekteinstellungen → API. Verwenden Sie dieselben Namen für Produktion und Vorschau, wenn Sie Vorschaubereitstellungen verwenden.",
+    "tryAgainLink": "Versuchen Sie, sich nach der erneuten Bereitstellung erneut anzumelden"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Ungültiger Anmeldelink",
+    "invalidLinkBody": "In diesem Zuordnungslink fehlen erforderliche Details. Fragen Sie Ihren Lehrstuhl oder SMT nach einem neuen Anmeldelink.",
+    "allocationNotFoundTitle": "Zuordnung nicht gefunden",
+    "allocationNotFoundBody": "Diese Nation/Position ist im ausgewählten Gremium nicht mehr verfügbar.",
+    "allocationTakenTitle": "Kontingent bereits vergeben",
+    "allocationTakenBody": "{country} wurde bereits von einem anderen Konto beansprucht. Bitte wählen Sie eine andere Zuordnung.",
+    "submitFailedTitle": "Anfrage konnte nicht gesendet werden",
+    "requestSubmittedTitle": "Anmeldeanfrage eingereicht",
+    "requestSubmittedBody": "Ihr Antrag für {country} wurde zur Genehmigung an den Ausschussvorsitzenden gesendet.",
+    "requestSubmittedHint": "Öffnen Sie nach der Genehmigung diesen Link erneut oder fahren Sie mit der Anmeldung im Ausschuss fort, um fortzufahren.",
+    "continueCommitteeSignIn": "Weiter zur Ausschussanmeldung"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Wählen Sie zunächst eine Konferenzveranstaltung aus.",
+    "enterConferenceCode": "Geben Sie den Konferenzcode ein",
+    "title": "Raumcodes und Stühle",
+    "subtitle": "Legen Sie den Ausschusscode für das zweite Tor für jede Sitzung fest und laden Sie Podiumsvorsitzende ein oder befördern Sie sie, ohne das Delegierten-Dashboard zu verwenden."
   },
   "delegateDashboard": {
     "welcome": "Willkommen, Delegierter von {flag} {country}",
@@ -795,7 +821,7 @@
     },
     "stances": {
       "heatmapTitle": "Kurze Haltungsübersicht (Heatmap)",
-      "heatmapHelp": "Inwieweit unterstützt Ihre Zuteilung ___? (Skala 1-5)",
+      "heatmapHelp": "Inwieweit unterstützt Ihre Zuweisung ___? (Skala 1-5)",
       "topicPlaceholder": "z.B. Klimaschutz",
       "extentLabel": "Umfang (1-5):",
       "extentHelpTitle": "Umfang (1-5)",
@@ -898,6 +924,13 @@
         "fullAnnouncement": "Vollständige Ankündigung",
         "daisAnnouncement": "Dais-Ankündigung",
         "close": "Schließen"
+      },
+      "committeeControl": {
+        "sessionNameLabel": "Sitzungsname",
+        "sessionNamePlaceholder": "z.B. Vormittagssitzung",
+        "sessionNameSaving": "Sparen…",
+        "sessionNameSaved": "Gespeichert",
+        "sessionNameHint": "Wird automatisch gespeichert und im Sitzungsverlauf angezeigt."
       },
       "history": {
         "title": "Sitzungsverlauf",
@@ -1005,7 +1038,7 @@
     "switchEvent": "Ereignis wechseln",
     "liveCommittees": "Live-Komitees",
     "digitalCommitteeRoom": "Digitaler Ausschussraum",
-    "digitalRoomDescription": "Die Delegierten sehen dieselbe virtuelle Etage unter Ausschussraum im Delegierten-Dashboard (Plakate und Podium verwenden die Zuweisungen dieses Ausschusses).",
+    "digitalRoomDescription": "Die Delegierten sehen dieselbe virtuelle Etage unter Ausschussraum im Delegierten-Dashboard (Plakate und Podium verwenden die Zuteilungen dieses Ausschusses).",
     "helperTextSmtPreview": "Sekretariatsansicht: Live-Vorschau der Zuweisungsmatrix dieses Ausschusses. Weisen Sie Sitzplätze unten oder in der Zuteilungsmatrix zu.",
     "liveFloor": "Live-Boden",
     "liveFloorDescription": "Live-Sprecherwarteschlange, Appell und Timer für dieses Komitee – dieselben Daten, die Vorsitzende auf der Sitzungsfläche sehen.",

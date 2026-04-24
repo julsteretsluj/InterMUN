@@ -14,7 +14,8 @@
     "yourCountry": "ваша країна",
     "delegateFallbackName": "Делегат",
     "smtFallbackName": "SMT",
-    "secretaryGeneral": "Генеральний секретар"
+    "secretaryGeneral": "Генеральний секретар",
+    "returnToProfile": "Return to profile"
   },
   "language": {
     "label": "Мова",
@@ -183,7 +184,7 @@
       },
       "guides": {
         "label": "Посібники та ресурси",
-        "hint": "Інструкції та рекомендації щодо роботи на стільці"
+        "hint": "Інструкції та довідкові матеріали"
       },
       "running": {
         "label": "Контрольний список і замітки",
@@ -247,7 +248,7 @@
     "noCommittees": "Для цієї події не знайдено комітетів. Додайте їх",
     "eventSessionsLink": "Події та засідання комітетів",
     "orSupabase": "або в Supabase.",
-    "sessionFloorBanner": "<floor>Сеансовий майданчик</floor> (таймери, доповідачі, перекличка) призначений лише для <chairs>крісел на трибуні</chairs>. Використовуйте <live>Живі комітети</live> нижче для контролю або введіть коди комітетів, як делегати, коли вам потрібна конкретна сесія.",
+    "sessionFloorBanner": "<floor>Сесійний майданчик</floor> (таймери, доповідачі, переклички) призначений лише для <chairs>крісел на трибуні</chairs>. Використовуйте <live>Живі комітети</live> нижче для контролю або введіть коди комітетів, як делегати, коли вам потрібна конкретна сесія.",
     "welcomeSg": "Ласкаво просимо, Генеральний секретар!",
     "whichCommittee": "В якому комітеті ви б хотіли перевірити?",
     "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
@@ -424,7 +425,7 @@
     "voting": {
       "requiredMajority": "Необхідна більшість",
       "helpRequiredMajorityTitle": "Необхідна більшість",
-      "helpRequiredMajorityBody": "Виберіть поріг голосування, який використовується для прийняття/непроходження. `Простих` більше половини. `2/3` вимагає супербільшості.",
+      "helpRequiredMajorityBody": "Виберіть поріг голосування, який використовується для прийняття рішення про проходження/незатвердження. `Простих` більше половини. `2/3` вимагає супербільшості.",
       "majoritySimple": "просто",
       "majorityTwoThirds": "2/3",
       "majorityLine": "{label} більшість",
@@ -899,6 +900,13 @@
         "daisAnnouncement": "Оголошення Dais",
         "close": "Закрити"
       },
+      "committeeControl": {
+        "sessionNameLabel": "Назва сеансу",
+        "sessionNamePlaceholder": "напр. Ранкова сесія",
+        "sessionNameSaving": "Збереження…",
+        "sessionNameSaved": "Збережено",
+        "sessionNameHint": "Зберігається автоматично та відображається в історії сеансу."
+      },
       "history": {
         "title": "Історія сесії",
         "savedCount": "{count} збережено",
@@ -1006,7 +1014,7 @@
     "liveCommittees": "Живі комітети",
     "digitalCommitteeRoom": "Цифрова кімната комітету",
     "digitalRoomDescription": "Той самий віртуальний поверх делегати бачать у кімнаті комітету на інформаційній панелі делегатів (плакати та трибуни використовують розподіл цього комітету).",
-    "helperTextSmtPreview": "Вид Секретаріату: попередній перегляд матриці розподілу цього комітету. Призначте місця нижче або в матриці розподілу.",
+    "helperTextSmtPreview": "Вид секретаріату: попередній перегляд матриці розподілу цього комітету. Призначте місця нижче або в матриці розподілу.",
     "liveFloor": "Жива підлога",
     "liveFloorDescription": "Черга доповідачів у прямому ефірі, переклички та таймери для цього комітету — ті самі дані, які голови бачать у сесійній залі.",
     "conferenceFallback": "Конференція",
@@ -1133,7 +1141,7 @@
     "sending": "Надсилання…",
     "sendHelpTitle": "Надіслати записку",
     "sendHelpBody": "Надсилає цю нотатку одержувачам, вибраним вище. Це не перешкоджає надсиланню; це впливає лише на те, як читач отримує попередження/позначення.",
-    "smtFullNotes": "Перегляд повних приміток (пароль перевірено).",
+    "smtFullNotes": "Перегляд повних нотаток (пароль перевірено).",
     "smtForwardedInbox": "Перегляд пересланих нотаток (вхідні SMT).",
     "enterStaffPassword": "Введіть додатковий пароль персоналу",
     "recipientsTitle": "Одержувачі",
@@ -1247,5 +1255,30 @@
     "committeePasswordConfirmPlaceholder": "Те саме, що й вище, якщо використовується пароль",
     "creating": "Створення…",
     "submit": "Створіть подію + комітет і ввійдіть"
+  },
+  "setupPage": {
+    "title": "Supabase is not configured",
+    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
+    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
+    "tryAgainLink": "Try sign in again after redeploying"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Invalid sign-up link",
+    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
+    "allocationNotFoundTitle": "Allocation not found",
+    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
+    "allocationTakenTitle": "Allocation already taken",
+    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
+    "submitFailedTitle": "Could not submit request",
+    "requestSubmittedTitle": "Sign-up request submitted",
+    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
+    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
+    "continueCommitteeSignIn": "Continue to committee sign-in"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Select a conference event first.",
+    "enterConferenceCode": "Enter conference code",
+    "title": "Room codes & chairs",
+    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
   }
 }
