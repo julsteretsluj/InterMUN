@@ -15,7 +15,7 @@
     "delegateFallbackName": "Delegat",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Sekretarz Generalny",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "Wróć do profilu"
   },
   "language": {
     "label": "Język",
@@ -155,6 +155,31 @@
     "formalMotions": "Wnioski formalne",
     "timer": "Regulator czasowy",
     "smtProfile": "Profil"
+  },
+  "setupPage": {
+    "title": "Supabase nie jest skonfigurowany",
+    "body": "W tym wdrożeniu brakuje publicznych zmiennych środowiskowych Supabase. Dodaj je do swojego hosta (na przykład Vercel → Projekt → Ustawienia → Zmienne środowiskowe), a następnie wdróż ponownie:",
+    "valuesHint": "Wartości znajdują się w Supabase → Ustawienia projektu → API. Jeśli korzystasz z wdrożeń w wersji zapoznawczej, użyj tych samych nazw dla wersji produkcyjnej i podglądu.",
+    "tryAgainLink": "Spróbuj zalogować się ponownie po ponownym wdrożeniu"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Nieprawidłowy link rejestracyjny",
+    "invalidLinkBody": "W tym łączu alokacji brakuje wymaganych szczegółów. Poproś swoje krzesło lub SMT o nowy link rejestracyjny.",
+    "allocationNotFoundTitle": "Nie znaleziono alokacji",
+    "allocationNotFoundBody": "Ten naród/stanowisko nie jest już dostępny w wybranej komisji.",
+    "allocationTakenTitle": "Przydział już zajęty",
+    "allocationTakenBody": "{country} zostało już zajęte przez inne konto. Proszę wybrać inny przydział.",
+    "submitFailedTitle": "Nie można przesłać żądania",
+    "requestSubmittedTitle": "Prośba o rejestrację została przesłana",
+    "requestSubmittedBody": "Twoja prośba dotycząca kraju {country} została wysłana do przewodniczącego komisji do zatwierdzenia.",
+    "requestSubmittedHint": "Po zatwierdzeniu otwórz ponownie ten link lub przejdź do logowania się do komisji, aby kontynuować.",
+    "continueCommitteeSignIn": "Przejdź do logowania się do komisji"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Najpierw wybierz wydarzenie konferencyjne.",
+    "enterConferenceCode": "Wprowadź kod konferencji",
+    "title": "Kody pokojowe i krzesła",
+    "subtitle": "Ustaw kod komitetu drugiej bramy dla każdej sesji i zapraszaj lub promuj krzesła na podwyższeniu bez korzystania z pulpitu delegata."
   },
   "delegateDashboard": {
     "welcome": "Witamy, Delegacie z {flag} {country}",
@@ -1255,30 +1280,5 @@
     "committeePasswordConfirmPlaceholder": "To samo co powyżej, jeśli używasz hasła",
     "creating": "Tworzenie…",
     "submit": "Utwórz wydarzenie + komitet i wejdź"
-  },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
-  },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
-  },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
   }
 }
