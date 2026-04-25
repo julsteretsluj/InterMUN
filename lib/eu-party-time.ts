@@ -12,14 +12,14 @@ export const EU_PARLIAMENT_PARTY_KEYS = [
 export type EuPartyKey = (typeof EU_PARLIAMENT_PARTY_KEYS)[number];
 
 export const EU_PARTY_LABELS: Record<EuPartyKey, string> = {
-  s_and_d: "S&D",
-  epp: "EPP",
-  renew: "Renew",
-  left: "Left",
-  green: "Green",
-  c_and_r: "C&R",
-  patriots: "Patriots",
-  independents: "Independents",
+  s_and_d: "Progressive Alliance of Socialists and Democrats (S&D)",
+  epp: "European People's Party (EPP)",
+  renew: "Renew Europe (Renew)",
+  left: "The Left in the European Parliament (The Left)",
+  green: "Greens/European Free Alliance (Greens/EFA)",
+  c_and_r: "European Conservatives and Reformists (ECR)",
+  patriots: "Patriots for Europe (PfE)",
+  independents: "Non-Inscrits / Independents (NI)",
 };
 
 export const EU_PARTY_SPEECH_SHARE: Record<EuPartyKey, number> = {

@@ -207,14 +207,14 @@ const EU_TIMER_TAG_OPTIONS: EuTimerTag[] = [
 ];
 function defaultEuTimerMeta(): Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }> {
   return {
-    s_and_d: { name: "S&D", tag: "party timer" },
-    epp: { name: "EPP", tag: "party timer" },
-    renew: { name: "Renew", tag: "party timer" },
-    left: { name: "Left", tag: "party timer" },
-    green: { name: "Green", tag: "party timer" },
-    c_and_r: { name: "C&R", tag: "party timer" },
-    patriots: { name: "Patriots", tag: "party timer" },
-    independents: { name: "Independents", tag: "party timer" },
+    s_and_d: { name: EU_PARTY_LABELS.s_and_d, tag: "party timer" },
+    epp: { name: EU_PARTY_LABELS.epp, tag: "party timer" },
+    renew: { name: EU_PARTY_LABELS.renew, tag: "party timer" },
+    left: { name: EU_PARTY_LABELS.left, tag: "party timer" },
+    green: { name: EU_PARTY_LABELS.green, tag: "party timer" },
+    c_and_r: { name: EU_PARTY_LABELS.c_and_r, tag: "party timer" },
+    patriots: { name: EU_PARTY_LABELS.patriots, tag: "party timer" },
+    independents: { name: EU_PARTY_LABELS.independents, tag: "party timer" },
     total_time: { name: "Total time", tag: "consultation" },
     poi_poc_time: { name: "POI / POC time", tag: "pois and pocs" },
     speaker_time: { name: "Speaker time", tag: "speaker timer" },
