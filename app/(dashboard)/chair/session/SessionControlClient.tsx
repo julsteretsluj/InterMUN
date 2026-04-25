@@ -239,6 +239,11 @@ function normalizeEuTimerMeta(
   }
   return base;
 }
+
+function isEuTimerMetaCacheError(message: string | null | undefined): boolean {
+  const m = String(message ?? "");
+  return /schema cache/i.test(m) && /eu_timer_meta/i.test(m) && /timers/i.test(m);
+}
 type DisciplinaryRow = {
   allocation_id: string;
   voting_rights_lost: boolean;
@@ -537,6 +542,7 @@ export function SessionControlClient({
   const [euTimerMeta, setEuTimerMeta] = useState<
     Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }>
   >(() => defaultEuTimerMeta());
+  const [supportsEuTimerMeta, setSupportsEuTimerMeta] = useState(true);
   const euTimerSeedRef = useRef("");
   const euTimerSlotLabel = useCallback((slot: EuTimerSlotKey) => {
     if (slot in EU_PARTY_LABELS) {
@@ -1106,11 +1112,13 @@ export function SessionControlClient({
         boundVoteItemId: vid ?? "",
         floorLabel: floorLabel.trim(),
       });
-      setEuTimerMeta(normalizeEuTimerMeta(tr.eu_timer_meta));
+      if (supportsEuTimerMeta) {
+        setEuTimerMeta(normalizeEuTimerMeta(tr.eu_timer_meta));
+      }
     } else {
       setEuTimerMeta(defaultEuTimerMeta());
     }
-  }, [supabase, floorConferenceId, rosterConferenceIdList, rosterKey, conferenceId]);
+  }, [supabase, floorConferenceId, rosterConferenceIdList, rosterKey, conferenceId, supportsEuTimerMeta]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -1269,25 +1277,35 @@ export function SessionControlClient({
         left = total;
         cappedToTotal = true;
       }
-      const { error } = await supabase.from("timers").upsert(
-        {
-          conference_id: floorConferenceId,
-          current_speaker: timer.current.trim() || null,
-          next_speaker: timer.next.trim() || null,
-          time_left_seconds: left,
-          total_time_seconds: total,
-          vote_item_id: voteItemIdToSave,
-          per_speaker_mode: timer.perSpeakerMode,
-          is_running: timer.isRunning,
-          floor_label: timer.floorLabel.trim() || null,
-          eu_timer_meta: euTimerMeta,
-          updated_at: new Date().toISOString(),
-        },
+      const payloadBase = {
+        conference_id: floorConferenceId,
+        current_speaker: timer.current.trim() || null,
+        next_speaker: timer.next.trim() || null,
+        time_left_seconds: left,
+        total_time_seconds: total,
+        vote_item_id: voteItemIdToSave,
+        per_speaker_mode: timer.perSpeakerMode,
+        is_running: timer.isRunning,
+        floor_label: timer.floorLabel.trim() || null,
+        updated_at: new Date().toISOString(),
+      };
+      const firstAttempt = await supabase.from("timers").upsert(
+        supportsEuTimerMeta ? { ...payloadBase, eu_timer_meta: euTimerMeta } : payloadBase,
         { onConflict: "conference_id" }
       );
+      let error = firstAttempt.error;
+      let fallbackWithoutMeta = false;
+      if (error && supportsEuTimerMeta && isEuTimerMetaCacheError(error.message)) {
+        setSupportsEuTimerMeta(false);
+        const retry = await supabase.from("timers").upsert(payloadBase, { onConflict: "conference_id" });
+        error = retry.error;
+        fallbackWithoutMeta = !retry.error;
+      }
       setMsg(
         error
           ? error.message
+          : fallbackWithoutMeta
+          ? `${tTimer("saved")} (EU timer names/tags will sync after database migrations are applied.)`
           : cappedToTotal
           ? tTimer("savedCapped")
           : tTimer("saved")
