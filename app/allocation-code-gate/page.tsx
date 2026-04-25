@@ -75,6 +75,21 @@ export default async function AllocationCodeGatePage({
         .filter((c): c is string => Boolean(c))
     ),
   ]);
+  let pendingSeatCountry: string | null = null;
+  if (countries.length === 0) {
+    const { data: pendingReq } = await supabase
+      .from("allocation_signup_requests")
+      .select("status, allocation:allocations(country)")
+      .eq("conference_id", conference.id)
+      .eq("requested_by", user.id)
+      .eq("status", "pending")
+      .maybeSingle();
+    const rawCountry = pendingReq?.allocation;
+    if (rawCountry && typeof rawCountry === "object" && "country" in rawCountry) {
+      const c = String(rawCountry.country ?? "").trim();
+      pendingSeatCountry = c || null;
+    }
+  }
 
   const title = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
 
@@ -94,6 +109,20 @@ export default async function AllocationCodeGatePage({
           {countries.length === 0 ? (
             <div className="space-y-4 text-sm text-brand-muted">
               <p>{t("noAllocation")}</p>
+              {pendingSeatCountry ? (
+                <p className="rounded-lg border border-brand-navy/10 bg-brand-cream/40 p-3 text-xs text-brand-navy/90">
+                  Your seat request for <strong>{pendingSeatCountry}</strong> is still pending chair approval. The
+                  seat sign-in code input appears automatically once your seat is assigned.
+                </p>
+              ) : (
+                <p className="rounded-lg border border-brand-navy/10 bg-brand-cream/40 p-3 text-xs text-brand-navy/90">
+                  This screen only shows the seat sign-in code input after your account is assigned to a seat in this
+                  committee.
+                </p>
+              )}
+              <Link href="/profile" className="inline-block text-brand-accent font-medium hover:underline">
+                Go to profile
+              </Link>
               <Link href="/room-gate" className="inline-block text-brand-accent font-medium hover:underline">
                 {t("changeRoomCode")}
               </Link>

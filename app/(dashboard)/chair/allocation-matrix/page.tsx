@@ -8,6 +8,7 @@ import {
   rejectAllocationSignupRequestAction,
 } from "@/app/actions/allocationSignup";
 import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmailForm";
+import { ChairAllocationAutoRefresh } from "./ChairAllocationAutoRefresh";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { getTranslations } from "next-intl/server";
@@ -144,17 +145,6 @@ export default async function ChairAllocationMatrixPage() {
       linked_name: r.user_id ? (profileById.get(r.user_id)?.name ?? null) : null,
     }))
   );
-  const ids = rows.map((r) => r.id);
-
-  const { data: codeRows } = ids.length
-    ? await supabase
-        .from("allocation_gate_codes")
-        .select("allocation_id, code")
-        .in("allocation_id", ids)
-    : { data: [] as { allocation_id: string; code: string | null }[] };
-
-  const codeById = new Map((codeRows ?? []).map((c) => [c.allocation_id, c.code ?? null]));
-
   const { data: rawRequests } = await supabase
     .from("allocation_signup_requests")
     .select("id, requested_by, status, allocations(country), profiles(name, username)")
@@ -223,6 +213,7 @@ export default async function ChairAllocationMatrixPage() {
           Chairs approve or reject allocation link sign-ups to ensure delegates use the correct
           account.
         </p>
+        <ChairAllocationAutoRefresh />
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
           <table className="w-full text-sm">
             <thead>

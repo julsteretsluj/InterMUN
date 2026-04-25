@@ -49,7 +49,13 @@ function angleToRoleIndex(angle: number, count: number): number {
   return Math.min(count - 1, Math.floor(angle / segment));
 }
 
-export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
+export function AuthEntryWizard({
+  mode,
+  nextPath,
+}: {
+  mode: "login" | "signup";
+  nextPath?: string;
+}) {
   const t = useTranslations("authWizard");
   const router = useRouter();
   const appName = getAppName();
@@ -164,6 +170,11 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
     const uid = authData.user?.id;
     setLoading(false);
     if (uid) {
+      if (nextPath) {
+        router.push(nextPath);
+        router.refresh();
+        return;
+      }
       const next = await resolveDashboardPathAfterAuth(supabase, uid);
       router.push(next);
       router.refresh();
@@ -200,12 +211,17 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
     const session = data.session;
     setLoading(false);
     if (session && uid) {
+      if (nextPath) {
+        router.push(nextPath);
+        router.refresh();
+        return;
+      }
       const next = await resolveDashboardPathAfterAuth(supabase, uid);
       router.push(next);
       router.refresh();
       return;
     }
-    router.push("/profile");
+    router.push(nextPath ? `/login?next=${encodeURIComponent(nextPath)}` : "/profile");
     router.refresh();
   }
 
@@ -480,14 +496,20 @@ export function AuthEntryWizard({ mode }: { mode: "login" | "signup" }) {
             {mode === "login" ? (
               <>
                 {t("dontHaveAccount")}{" "}
-                <Link href="/signup" className="mun-link font-medium no-underline hover:underline">
+                <Link
+                  href={nextPath ? `/signup?next=${encodeURIComponent(nextPath)}` : "/signup"}
+                  className="mun-link font-medium no-underline hover:underline"
+                >
                   {t("signUp")}
                 </Link>
               </>
             ) : (
               <>
                 {t("alreadyHaveAccount")}{" "}
-                <Link href="/login" className="mun-link font-medium no-underline hover:underline">
+                <Link
+                  href={nextPath ? `/login?next=${encodeURIComponent(nextPath)}` : "/login"}
+                  className="mun-link font-medium no-underline hover:underline"
+                >
                   {t("signIn")}
                 </Link>
               </>
