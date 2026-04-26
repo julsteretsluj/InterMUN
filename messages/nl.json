@@ -1782,5 +1782,308 @@
     "parsedRowsSample": "{count} rij(en) geparseerd. Steekproef:",
     "runImport": "Importeer uitvoeren",
     "generateMissingRandomCodes": "Genereer ontbrekende willekeurige codes"
+  },
+  "awardsRubric": {
+    "criteriaHeader": "Criteria",
+    "bandHeaders": {
+      "0": "Begin",
+      "1": "Ontwikkelen",
+      "2": "Vaardig",
+      "3": "Voorbeeldig"
+    },
+    "tierLow": "Laag",
+    "tierHigh": "Hoog",
+    "tierPromptLocked": "Opgesloten: {band} - {tier} ({score})",
+    "tierPromptPick": "Kies laag of hoog binnen {band} (punten op de schaal van 1-8).",
+    "criteria": {
+      "creativity": {
+        "label": "Creativiteit",
+        "bands": {
+          "0": "Stelt repetitieve of standaardoplossingen voor; denkt zelden buiten het bestaande kader.",
+          "1": "Biedt een aantal originele ideeën, maar heeft moeite om deze aan te passen aan de veranderende commissiedynamiek.",
+          "2": "Stelt regelmatig innovatieve oplossingen en unieke clausules voor ontwerpresoluties voor.",
+          "3": "Zeer creatief; ontwikkelt ‘game-changing’ compromissen die botsende blokken overbruggen."
+        }
+      },
+      "diplomacy": {
+        "label": "Diplomatie",
+        "bands": {
+          "0": "Ontbreekt aan professioneel decorum; af en toe afwijzend tegenover de standpunten van andere afgevaardigden.",
+          "1": "Respectvol maar onopvallend; handhaaft een neutrale aanwezigheid zonder een goede verstandhouding op te bouwen.",
+          "2": "Consequent professioneel; probeert actief tegengestelde standpunten te begrijpen en te integreren.",
+          "3": "Is een voorbeeld van echt staatsmanschap; dwingt respect af en blijft tegelijkertijd nederig en inclusief."
+        }
+      },
+      "collaboration": {
+        "label": "Samenwerking",
+        "bands": {
+          "0": "Werkt geïsoleerd of weigert compromissen te sluiten over kleine details; verstoort het groepswerk.",
+          "1": "Draagt ​​bij aan een blok, maar speelt geen actieve rol bij het opstellen of samenvoegen van ideeën.",
+          "2": "Een sterke teamspeler; helpt resoluties samen te voegen en zorgt ervoor dat alle blokleden een stem hebben.",
+          "3": "De ‘lijm’ van de commissie brengt ongelijksoortige groepen bij elkaar en vergemakkelijkt consensus."
+        }
+      },
+      "leadership": {
+        "label": "Leiderschap",
+        "bands": {
+          "0": "Passief; wacht tot anderen moties indienen of discussies starten tijdens caucuses.",
+          "1": "Toont leiderschap in kleine groepen, maar aarzelt om het huis te leiden of voor het blok aanwezig te zijn.",
+          "2": "Neemt duidelijk initiatief; leidt ongemodereerde caucuses en beheert het redactieproces.",
+          "3": "Visionaire leider; zet de toon voor de kamer en inspireert anderen door actie en begeleiding."
+        }
+      },
+      "knowledge_research": {
+        "label": "Kennis en onderzoek",
+        "bands": {
+          "0": "Vaak verward door het onderwerp; berust op algemeenheden in plaats van op specifieke feiten.",
+          "1": "Heeft een basiskennis van de agenda, maar mist technische of juridische nuances.",
+          "2": "Toont een sterke beheersing van het onderwerp; citeert relevante statistieken en acties uit het verleden van de VN.",
+          "3": "Meesterschap op expertniveau; maakt gebruik van diepgaand onderzoek om technische debatten te doorgronden en valse informatie te ontkrachten."
+        }
+      },
+      "participation": {
+        "label": "Deelname",
+        "bands": {
+          "0": "Spreekt zelden; vaak afwezig tijdens de caucuse of inactief tijdens het stemmen.",
+          "1": "Spreekt af en toe in gematigde caucuses; neemt alleen deel als daarom wordt gevraagd.",
+          "2": "Consequent actief in alle sessies; verhoogt vaak bewegingen en draagt ​​bij aan de vloer.",
+          "3": "Noodzakelijke en consistente aanwezigheid; is van begin tot eind betrokken bij elk aspect van het debat."
+        }
+      },
+      "research_depth": {
+        "label": "Onderzoeksdiepte",
+        "bands": {
+          "0": "Minimale gegevens; mist specifieke VN-resoluties, verdragscitaten of historische context.",
+          "1": "Basisgegevens verstrekt; vermeldt bekende verdragen, maar mist specifiek lokaal bewijs.",
+          "2": "Sterk onderzoek; omvat relevante statistieken, eerdere VN-acties en commissiespecifieke geschiedenis.",
+          "3": "Uitzonderlijke diepte; identificeert niche-wettelijke mazen, specifieke financieringstekorten of zeldzame datapunten."
+        }
+      },
+      "country_stance_alignment": {
+        "label": "Uitlijning van de landenhouding",
+        "bands": {
+          "0": "Is vaak in tegenspraak met de reële geopolitieke belangen of stemgeschiedenis van het toegewezen land.",
+          "1": "Volgt doorgaans het beleid, maar mist duidelijkheid over gevoelige of controversiële nationale standpunten.",
+          "2": "Consequent nauwkeurig; weerspiegelt duidelijk de strategische regionale en mondiale belangen van het land.",
+          "3": "Zeer genuanceerd; richt zich op de complexe regionale dynamiek en definieert duidelijk de nationale ‘rode lijnen’."
+        }
+      },
+      "policy_accuracy": {
+        "label": "Beleidsnauwkeurigheid",
+        "bands": {
+          "0": "Fundamenteel misverstand over het juridisch kader van het onderwerp of het mandaat van de commissie.",
+          "1": "Begrijpt het algemene onderwerp maar mist technische of juridische complexiteiten binnen het huidige beleid.",
+          "2": "Stevig inzicht in complexe beleidskwesties (bijvoorbeeld specifieke clausules in het internationaal recht).",
+          "3": "Nauwkeurigheid op expertniveau; integreert technische feiten om een ​​geavanceerd beleidsargument op te bouwen."
+        }
+      },
+      "proposed_solutions": {
+        "label": "Voorgestelde oplossingen",
+        "bands": {
+          "0": "Vaag of niet uitvoerbaar (bijvoorbeeld: \"landen moeten meer praten\"). Geen implementatieplan.",
+          "1": "Generieke oplossingen; details over financiering, specifieke VN-agentschappen of haalbaarheid ontbreken.",
+          "2": "Innovatief en actiegericht; stelt specifieke mechanismen, taakgroepen of toezichthoudende instanties voor.",
+          "3": "Verfijnd en holistisch; oplossingen zijn origineel, haalbaar en juridisch verantwoord, met duidelijke tijdlijnen."
+        }
+      },
+      "formatting_style_citations": {
+        "label": "Opmaak, stijl en citaten",
+        "bands": {
+          "0": "Significante fouten in de citatiestijl van de VN (bijv. Chicago/APA); onprofessionele toon.",
+          "1": "Standaardopmaak, maar bevat verschillende grammaticale hiaten of inconsistente citatiestijlen.",
+          "2": "Professionele VN-academische opmaak; duidelijke, beknopte en overtuigende diplomatieke taal.",
+          "3": "Vlekkeloze academische VN-stijl; meeslepend verhaal en perfecte bronvermelding."
+        }
+      },
+      "pre_conference_support": {
+        "label": "Ondersteuning vóór de conferentie",
+        "bands": {
+          "0": "Studiegids was te laat of onvolledig; minimale communicatie met SMT/USG's.",
+          "1": "De studiegids voldeed aan de basisvereisten, maar ontbeerde een diepgaande analyse of duidelijke opmaak.",
+          "2": "Uitgebreide studiegids; proactief in het beantwoorden van e-mails van afgevaardigden en voorbereiding.",
+          "3": "Uitzonderlijke studiegids; zorgde voor extra middelen en vroege feedback op position papers."
+        }
+      },
+      "empathy": {
+        "label": "Empathie",
+        "bands": {
+          "0": "Afwijzend tegenover de zorgen van de afgevaardigden; merkt niet wanneer een afgevaardigde het moeilijk heeft of buitengesloten wordt.",
+          "1": "Professioneel maar klinisch; biedt alleen ondersteuning als dit expliciet wordt gevraagd door een afgevaardigde.",
+          "2": "Houdt actief contact met stille afgevaardigden; creëert een veilige ruimte voor beginners om deel te nemen.",
+          "3": "Hoge emotionele intelligentie; anticipeert op stress bij delegeren, gaat zorgvuldig om met verhitte conflicten en zorgt ervoor dat elke stem zich gewaardeerd voelt."
+        }
+      },
+      "collaboration_co_chair": {
+        "label": "Samenwerking met medevoorzitter",
+        "bands": {
+          "0": "Eén stoel domineert; gebrek aan communicatie resulteert in inconsistente uitspraken.",
+          "1": "Het werk is verdeeld, maar de stoelen werken in silo's; minimaal overleg over gunningsbeslissingen.",
+          "2": "Evenwichtig partnerschap; duidelijke communicatie en wederzijdse ondersteuning tijdens sessies.",
+          "3": "Naadloze synergie; stoelen anticiperen op elkaars behoeften en zorgen voor een uniform, professioneel front."
+        }
+      },
+      "mun_knowledge": {
+        "label": "MUN-kennis",
+        "bands": {
+          "0": "Frequente fouten in het Reglement (RoP); is voor hulp sterk afhankelijk van het secretariaat.",
+          "1": "Basis RoP-kennis; kan een standaard gematigde caucus leiden, maar mist nuances van bewegingen.",
+          "2": "Sterke beheersing van RoP; beheert de vloer efficiënt en eerlijk met minimale fouten.",
+          "3": "Absoluut meesterschap; gebruikt RoP om de debatstroom te verbeteren en gaat met gemak om met complexe procedurele situaties."
+        }
+      },
+      "country_stances_topic": {
+        "label": "Landhoudingen en onderwerpkennis",
+        "bands": {
+          "0": "Kan niet identificeren of een afgevaardigde \"buiten zijn karakter\" spreekt; negeert de nauwkeurigheid van het beleid.",
+          "1": "Is zich doorgaans bewust van de standpunten van de grote machten, maar mist verschuivingen in het beleid van kleinere delegaties.",
+          "2": "Houdt actief toezicht op de nauwkeurigheid van beleid; begeleidt de afgevaardigden indien nodig terug naar hun karakter.",
+          "3": "Diep onderzocht in alle toewijzingen; geeft precieze feedback over geopolitieke nuances tijdens debatten."
+        }
+      },
+      "flexibility": {
+        "label": "Flexibiliteit",
+        "bands": {
+          "0": "Strikte naleving van het schema, zelfs als het debat stagneert; bestand tegen SMT-feedback.",
+          "1": "Past zich alleen aan als het secretariaat daarom vraagt; worstelt met plotselinge veranderingen in de blokdynamiek.",
+          "2": "Reageert goed op commissiewisselingen; past spreektijden of moties aan om de debatstroom te bevorderen.",
+          "3": "Zeer adaptief; draait naadloos tijdens crises of onverwachte debatwendingen, terwijl de orde behouden blijft."
+        }
+      },
+      "professionalism": {
+        "label": "Professionaliteit",
+        "bands": {
+          "0": "Onprofessionele kleding of toon getuigt van een duidelijke voorkeur voor specifieke afgevaardigden of scholen.",
+          "1": "Professioneel maar mist autoriteit; af en toe vervalt het diplomatieke decorum.",
+          "2": "Consequent professioneel; handhaaft onpartijdigheid en dwingt respect af van het huis.",
+          "3": "Is een voorbeeld van de standaard van het secretariaat; onberispelijk decorum, onpartijdig en dient als rolmodel."
+        }
+      },
+      "engagement": {
+        "label": "Betrokkenheid",
+        "bands": {
+          "0": "Lijkt verveeld of afgeleid; minimale feedback gegeven aan afgevaardigden tijdens de caucusing.",
+          "1": "Attent maar passief; moedigt stillere afgevaardigden niet actief aan om deel te nemen.",
+          "2": "Hoge energie; geeft constructieve feedback en houdt de commissie voortdurend gemotiveerd.",
+          "3": "Inspirerende aanwezigheid; begeleidt actief afgevaardigden, bevordert een inclusieve omgeving en stimuleert debat op hoog niveau."
+        }
+      },
+      "academic_depth": {
+        "label": "Academische diepgang",
+        "bands": {
+          "0": "Samenvatting op oppervlakteniveau; mist historische context of gegevens.",
+          "1": "Goed overzicht maar mist complexe juridische of technische nuances.",
+          "2": "Sterke analyse; omvat specifieke acties uit het verleden en regionale gegevens.",
+          "3": "Beurs op expertniveau; identificeert unieke invalshoeken voor debat."
+        }
+      },
+      "mandate_clarity": {
+        "label": "Duidelijkheid van het mandaat",
+        "bands": {
+          "0": "Vage \"vragen om over na te denken\"; onduidelijke bevoegdheden van de commissie.",
+          "1": "Standaard vragen; algemene richtlijnen over de reikwijdte van het debat.",
+          "2": "Duidelijke, gerichte vragen die de deelnemers naar specifieke oplossingen leiden.",
+          "3": "Nauwkeurig ontworpen aanwijzingen die stagnerende of off-topic discussies voorkomen."
+        }
+      },
+      "accessibility": {
+        "label": "Toegankelijkheid",
+        "bands": {
+          "0": "Te dicht of ongeorganiseerd; moeilijk te navigeren voor beginners.",
+          "1": "Strakke lay-out, maar mist visuele hulpmiddelen of een verklarende woordenlijst.",
+          "2": "Goed gestructureerd; bevat nuttige links, kaarten en een duidelijke woordenlijst.",
+          "3": "Meesterlijk ontworpen; brengt een hoogwaardige academische wereld in evenwicht met intuïtieve navigatie."
+        }
+      },
+      "resource_quality": {
+        "label": "Kwaliteit van hulpbronnen",
+        "bands": {
+          "0": "Er zijn weinig of verouderde links beschikbaar voor onderzoek van gedelegeerden.",
+          "1": "Standaard VN-links voorzien; behandelt de basisprincipes voor de meeste landen.",
+          "2": "Diverse en samengestelde bibliografie, waaronder NGO's, verdragen en datasets.",
+          "3": "Uitgebreide toolkit; biedt afgevaardigden \"verborgen\" gegevens en nichebronnen."
+        }
+      },
+      "committee_introduction": {
+        "label": "Commissie introductie",
+        "bands": {
+          "0": "Geeft alleen een algemene definitie van de naam van de commissie.",
+          "1": "Geeft een overzicht van het mandaat, maar legt de specifieke bevoegdheden of beperkingen van de commissie niet uit.",
+          "2": "Geeft duidelijk een overzicht van de geschiedenis van de commissie, de reikwijdte van het gezag en de rol binnen het VN-systeem.",
+          "3": "Verbindt op meesterlijke wijze de specifieke juridische ‘tanden’ van de commissie met de actuele agendapunten."
+        }
+      },
+      "topic_introduction": {
+        "label": "Onderwerp introductie",
+        "bands": {
+          "0": "Vaag of overdreven breed; slaagt er niet in het kernprobleem te definiëren.",
+          "1": "Geeft een algemeen overzicht, maar mist actuele gegevens of recente ontwikkelingen.",
+          "2": "Uitgebreid overzicht; definieert technische termen en de huidige mondiale status van het probleem.",
+          "3": "Een meeslepend verhaal dat specifieke ‘blinde vlekken’ in het internationale beleid identificeert."
+        }
+      },
+      "timeline": {
+        "label": "Tijdlijn",
+        "bands": {
+          "0": "Ontbrekende belangrijke historische mijlpalen of verdragen.",
+          "1": "Geeft een overzicht van basisdata, maar legt de betekenis van acties uit het verleden niet uit.",
+          "2": "Nauwkeurige chronologische stroom; legt uit hoe eerdere resoluties tot de huidige situatie hebben geleid.",
+          "3": "Strategische tijdlijn die mislukte versus succesvolle interventies belicht als leidraad voor het toekomstige debat."
+        }
+      },
+      "key_stances": {
+        "label": "Sleutelhoudingen",
+        "bands": {
+          "0": "Vermeldt alleen P5-landen; negeert regionale blokken of kleine belanghebbenden.",
+          "1": "Groepeert landen in grote lijnen (bijvoorbeeld 'Het Westen') zonder genuanceerde beleidsverschillen.",
+          "2": "Details van de specifieke prioriteiten van grote belangengroepen en belangrijke regionale spelers.",
+          "3": "Geavanceerde analyse van botsende ‘rode lijnen’ en potentiële spoilers in het onderhandelingsproces."
+        }
+      },
+      "possible_solutions": {
+        "label": "Mogelijke oplossingen",
+        "bands": {
+          "0": "Algemeen of repetitief (bijvoorbeeld ‘meer financiering’, ‘bewustzijn’).",
+          "1": "Stelt logische stappen voor, maar mist details over implementatie of toezicht.",
+          "2": "Stelt innovatieve, multidimensionale raamwerken voor die aansluiten bij het mandaat van de commissie.",
+          "3": "Hoogwaardige ‘Purposeful Policy’-oplossingen die de diepere oorzaken en technische haalbaarheid aanpakken."
+        }
+      },
+      "debate_productivity": {
+        "label": "Debat over productiviteit",
+        "bands": {
+          "0": "Frequente pauzes in debat; Cirkelredeneringen zonder enige vooruitgang.",
+          "1": "Stabiel debat, maar moeite om verder te gaan dan de algemeenheden van \"Topic A\".",
+          "2": "Discours op hoog niveau; afgevaardigden komen snel tot inhoudelijke oplossingen.",
+          "3": "Dynamisch en evoluerend debat; het huis blijft betrokken en intellectueel scherp."
+        }
+      },
+      "collaborative_spirit": {
+        "label": "Samenwerkende geest",
+        "bands": {
+          "0": "Zeer giftig of kliekachtig; kleinere blokken weigeren met elkaar te praten.",
+          "1": "Standaard diplomatiek gedrag; basissamenwerking tijdens de caucusing.",
+          "2": "Inclusieve sfeer; grotere blokken zoeken actief naar input van kleinere naties.",
+          "3": "Voorbeeldige diplomatie; hoge afstemming van ‘doelgericht beleid’ en het opbouwen van consensus."
+        }
+      },
+      "resolution_quality": {
+        "label": "Resolutie Kwaliteit",
+        "bands": {
+          "0": "Ondiepe resoluties; ‘vage aanmoediging’ in plaats van actie.",
+          "1": "Standaardclausules; pakt de symptomen aan, maar niet de grondoorzaken.",
+          "2": "Technisch verantwoorde resoluties met duidelijke financierings- en toezichtmechanismen.",
+          "3": "Geavanceerde, innovatieve en bruikbare documenten die echte VN-normen weerspiegelen."
+        }
+      },
+      "chair_delegate_synergy": {
+        "label": "Voorzitter-afgevaardigde synergie",
+        "bands": {
+          "0": "Stoelen hebben moeite om de kamer te beheren; weinig respect voor het podium.",
+          "1": "Functionele relatie; stoelen volgen het schema maar geven geen leiding.",
+          "2": "Positieve energie; voorzitters begeleiden afgevaardigden terwijl ze de orde handhaven.",
+          "3": "Naadloze synergie; het podium inspireert een professionele omgeving waar veel op het spel staat."
+        }
+      }
+    }
   }
 }

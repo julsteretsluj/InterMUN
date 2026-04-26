@@ -1,0 +1,5395 @@
+{
+  "generatedAt": "2026-04-26T06:47:21.350Z",
+  "summary": {
+    "localeCount": 27,
+    "hardcodedCount": 649,
+    "placeholderMismatchCount": 0,
+    "localesWithParityIssues": 0,
+    "hardcodedByDomain": {
+      "page_or_layout": 213,
+      "server_action": 121,
+      "api": 3,
+      "component": 189,
+      "library_surface": 123
+    }
+  },
+  "localeParity": [
+    {
+      "locale": "ar",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "bn",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "de",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "el",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "es",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "fa",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "fr",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "he",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "hi",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "id",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "it",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "ja",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "ko",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "mi",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "nl",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "pl",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "pt",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "pt-BR",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "ru",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "sw",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "th",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "tr",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "uk",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "vi",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "zh-CN",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    },
+    {
+      "locale": "zh-TW",
+      "missingCount": 0,
+      "extraCount": 0,
+      "missingPreview": [],
+      "extraPreview": []
+    }
+  ],
+  "placeholderMismatches": [],
+  "hardcodedInventory": [
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/ChairDelegateApprovalByEmailForm.tsx",
+      "line": 42,
+      "kind": "jsx_text",
+      "text": "Delegate email",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 170,
+      "kind": "jsx_text",
+      "text": "Allocation",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 171,
+      "kind": "jsx_text",
+      "text": "Flag",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 172,
+      "kind": "jsx_text",
+      "text": "Email",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 173,
+      "kind": "jsx_text",
+      "text": "Name",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 174,
+      "kind": "jsx_text",
+      "text": "Grade",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 175,
+      "kind": "jsx_text",
+      "text": "Notes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 221,
+      "kind": "jsx_text",
+      "text": "Requested allocation",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 222,
+      "kind": "jsx_text",
+      "text": "Account",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-matrix/page.tsx",
+      "line": 223,
+      "kind": "jsx_text",
+      "text": "Actions",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx",
+      "line": 117,
+      "kind": "attribute_literal",
+      "text": "Allocation sign-in codes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx",
+      "line": 138,
+      "kind": "jsx_text",
+      "text": "Country / allocation",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx",
+      "line": 139,
+      "kind": "jsx_text",
+      "text": "Delegate (allocation)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx",
+      "line": 143,
+      "kind": "attribute_literal",
+      "text": "Password / code field",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardProgressBars.tsx",
+      "line": 51,
+      "kind": "jsx_text",
+      "text": "Overall awards completion",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardProgressBars.tsx",
+      "line": 116,
+      "kind": "jsx_text",
+      "text": "Progress (required)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 237,
+      "kind": "jsx_text",
+      "text": "Certificate list",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 244,
+      "kind": "jsx_text",
+      "text": "Award certificates — selected recipients",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 244,
+      "kind": "jsx_text",
+      "text": "Award",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 244,
+      "kind": "jsx_text",
+      "text": "Committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 244,
+      "kind": "jsx_text",
+      "text": "Recipient",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 244,
+      "kind": "jsx_text",
+      "text": "Notes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 257,
+      "kind": "jsx_text",
+      "text": "Overall",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 258,
+      "kind": "jsx_text",
+      "text": "Chair / collective",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 260,
+      "kind": "jsx_text",
+      "text": "Committee-level",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 278,
+      "kind": "jsx_text",
+      "text": "Add or edit entry",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 283,
+      "kind": "jsx_text",
+      "text": "Award",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 303,
+      "kind": "jsx_text",
+      "text": "Committee session",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 313,
+      "kind": "jsx_text",
+      "text": "Select committee…",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 348,
+      "kind": "attribute_literal",
+      "text": "Band initials",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 364,
+      "kind": "jsx_text",
+      "text": "Recipient (delegate / chair)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 373,
+      "kind": "jsx_text",
+      "text": "— Not set —",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 385,
+      "kind": "jsx_text",
+      "text": "Winning committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 394,
+      "kind": "jsx_text",
+      "text": "— Not set —",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 406,
+      "kind": "jsx_text",
+      "text": "Slot (1 or 2)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 422,
+      "kind": "jsx_text",
+      "text": "Notes (statement of confirmation, evidence)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 429,
+      "kind": "attribute_literal",
+      "text": "Optional internal notes for SMT review…",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 456,
+      "kind": "jsx_text",
+      "text": "Current list",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 459,
+      "kind": "jsx_text",
+      "text": "Certificate printing",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 491,
+      "kind": "jsx_text",
+      "text": "Certificate",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 494,
+      "kind": "jsx_text",
+      "text": "Award",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 495,
+      "kind": "jsx_text",
+      "text": "Committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 496,
+      "kind": "jsx_text",
+      "text": "Recipient",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 497,
+      "kind": "jsx_text",
+      "text": "Rubric",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/AwardsManagerClient.tsx",
+      "line": 498,
+      "kind": "jsx_text",
+      "text": "Notes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 71,
+      "kind": "jsx_text",
+      "text": "= 1 && v",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 78,
+      "kind": "jsx_text",
+      "text": ", keys: string[]): Record",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 82,
+      "kind": "jsx_text",
+      "text": "= 1 && n",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 223,
+      "kind": "attribute_literal",
+      "text": "Expand to edit nomination",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 247,
+      "kind": "jsx_text",
+      "text": "(optional)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 263,
+      "kind": "attribute_literal",
+      "text": "Minimize; show summary only",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 265,
+      "kind": "jsx_text",
+      "text": "Minimize",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 279,
+      "kind": "jsx_text",
+      "text": "Nominee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 321,
+      "kind": "jsx_text",
+      "text": "Statement of confirmation / evidence",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx",
+      "line": 328,
+      "kind": "attribute_literal",
+      "text": "Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions).",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairSubmitToSmtPanel.tsx",
+      "line": 61,
+      "kind": "jsx_text",
+      "text": "Submit to SMT",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/ChairSubmitToSmtPanel.tsx",
+      "line": 63,
+      "kind": "jsx_text",
+      "text": "draft",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/DelegateMatrixPanel.tsx",
+      "line": 62,
+      "kind": "jsx_text",
+      "text": "every seated delegate",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 56,
+      "kind": "object_message_literal",
+      "text": "${d.country} — ${name}",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 177,
+      "kind": "object_message_literal",
+      "text": "${delegateByUserId[uid]?.country ??",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 213,
+      "kind": "object_message_literal",
+      "text": "Best Delegate (committee)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 215,
+      "kind": "object_message_literal",
+      "text": "Best Delegate nominee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 216,
+      "kind": "object_message_literal",
+      "text": "Best Delegate backup",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 223,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention (committee)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 226,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention #1",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 227,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention #2",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 228,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention backup",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 231,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention #1",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 232,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention #2 (optional)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 241,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper (committee)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 243,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper nominee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 244,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper backup",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 251,
+      "kind": "object_message_literal",
+      "text": "Best Delegate (overall conference)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 252,
+      "kind": "object_message_literal",
+      "text": "Overall Best Delegate nominee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 304,
+      "kind": "jsx_text",
+      "text": "Beginning",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 305,
+      "kind": "jsx_text",
+      "text": "Developing",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 306,
+      "kind": "jsx_text",
+      "text": "Proficient",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 307,
+      "kind": "jsx_text",
+      "text": "Exemplary",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 316,
+      "kind": "jsx_text",
+      "text": "Select a nominee for each required Top slot.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 317,
+      "kind": "jsx_text",
+      "text": "Pick exactly one band for every criterion row.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 318,
+      "kind": "jsx_text",
+      "text": "Add concise evidence from debate, drafting, and diplomacy.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 319,
+      "kind": "jsx_text",
+      "text": "Save required slots and add optional slots where applicable.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 320,
+      "kind": "jsx_text",
+      "text": "When ready, submit the full batch to SMT.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/page.tsx",
+      "line": 345,
+      "kind": "jsx_text",
+      "text": "Committee ranking (matrix totals)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 57,
+      "kind": "object_message_literal",
+      "text": "Prep checklist",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 58,
+      "kind": "object_message_literal",
+      "text": "Flow checklist",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 59,
+      "kind": "object_message_literal",
+      "text": "Delegates",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 60,
+      "kind": "object_message_literal",
+      "text": "Digital Room",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 61,
+      "kind": "object_message_literal",
+      "text": "Roll call",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 62,
+      "kind": "object_message_literal",
+      "text": "Session",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 63,
+      "kind": "object_message_literal",
+      "text": "Speakers",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 64,
+      "kind": "object_message_literal",
+      "text": "Formal motions",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 65,
+      "kind": "object_message_literal",
+      "text": "Timer",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 66,
+      "kind": "object_message_literal",
+      "text": "Announcements",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 67,
+      "kind": "object_message_literal",
+      "text": "Motions & Points",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 68,
+      "kind": "object_message_literal",
+      "text": "Voting",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 69,
+      "kind": "object_message_literal",
+      "text": "Score",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 72,
+      "kind": "object_message_literal",
+      "text": "Crisis",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 73,
+      "kind": "object_message_literal",
+      "text": "Crisis slides",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 76,
+      "kind": "object_message_literal",
+      "text": "Archive",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 77,
+      "kind": "object_message_literal",
+      "text": "Official UN links",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 78,
+      "kind": "object_message_literal",
+      "text": "Room code",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/page.tsx",
+      "line": 79,
+      "kind": "object_message_literal",
+      "text": "Committee room (full)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/room-code/page.tsx",
+      "line": 61,
+      "kind": "jsx_text",
+      "text": "committee code",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/room-code/page.tsx",
+      "line": 76,
+      "kind": "jsx_text",
+      "text": "After saving, you can enter that committee or share the code on the dais.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1613,
+      "kind": "object_message_literal",
+      "text": "Advanced speaker and reset per-speaker clock.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1646,
+      "kind": "object_message_literal",
+      "text": "Speech note saved.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1657,
+      "kind": "object_message_literal",
+      "text": "Speech note deleted.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1683,
+      "kind": "object_message_literal",
+      "text": "Announcement posted.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1699,
+      "kind": "object_message_literal",
+      "text": "Pinned for the committee floor.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1705,
+      "kind": "object_message_literal",
+      "text": "Unpinned.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1743,
+      "kind": "object_message_literal",
+      "text": "Announcement updated.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1761,
+      "kind": "object_message_literal",
+      "text": "Announcement deleted.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1790,
+      "kind": "object_message_literal",
+      "text": "Added ${newRows.length} roll call row(s).",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1873,
+      "kind": "object_message_literal",
+      "text": "Motion created and opened.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1927,
+      "kind": "object_message_literal",
+      "text": "Motion updated.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 1947,
+      "kind": "object_message_literal",
+      "text": "Motion closed.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2065,
+      "kind": "object_message_literal",
+      "text": "Motion reopened.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2108,
+      "kind": "object_message_literal",
+      "text": "Motion floor open — record each stated motion below.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2128,
+      "kind": "object_message_literal",
+      "text": "Motion floor closed for statements.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2171,
+      "kind": "object_message_literal",
+      "text": "Stated motion recorded (not yet open for voting).",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2267,
+      "kind": "jsx_text",
+      "text": "= 1 && idx",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2351,
+      "kind": "jsx_text",
+      "text": "= 1 && n",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
+      "line": 2483,
+      "kind": "object_message_literal",
+      "text": "Stated motion removed.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 160,
+      "kind": "attribute_literal",
+      "text": "In committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 209,
+      "kind": "attribute_literal",
+      "text": "Country",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 210,
+      "kind": "attribute_literal",
+      "text": "Name",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 211,
+      "kind": "attribute_literal",
+      "text": "School",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 212,
+      "kind": "attribute_literal",
+      "text": "Pronouns",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 226,
+      "kind": "attribute_literal",
+      "text": "Account name",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 228,
+      "kind": "attribute_literal",
+      "text": "Role",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 230,
+      "kind": "attribute_literal",
+      "text": "Pronouns",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 233,
+      "kind": "attribute_literal",
+      "text": "School",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 243,
+      "kind": "jsx_text",
+      "text": "Dais",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 245,
+      "kind": "attribute_literal",
+      "text": "Role",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/committee-room/person/[profileId]/page.tsx",
+      "line": 246,
+      "kind": "attribute_literal",
+      "text": "Name",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/crisis-slides/page.tsx",
+      "line": 51,
+      "kind": "jsx_text",
+      "text": "No slides linked yet",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 187,
+      "kind": "jsx_text",
+      "text": "What would you like to start with?",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 190,
+      "kind": "object_message_literal",
+      "text": "Documents",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 191,
+      "kind": "object_message_literal",
+      "text": "Notes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 192,
+      "kind": "object_message_literal",
+      "text": "Committee room",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 193,
+      "kind": "object_message_literal",
+      "text": "Running Notes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 194,
+      "kind": "object_message_literal",
+      "text": "Ideas",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 195,
+      "kind": "object_message_literal",
+      "text": "Guides",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 196,
+      "kind": "object_message_literal",
+      "text": "Sources",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 197,
+      "kind": "object_message_literal",
+      "text": "Resolutions",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 198,
+      "kind": "object_message_literal",
+      "text": "Speeches",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 199,
+      "kind": "object_message_literal",
+      "text": "Stances",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 202,
+      "kind": "object_message_literal",
+      "text": "Crisis slides",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 203,
+      "kind": "object_message_literal",
+      "text": "Report",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 206,
+      "kind": "object_message_literal",
+      "text": "Motions",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/profile/page.tsx",
+      "line": 207,
+      "kind": "object_message_literal",
+      "text": "Points",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 11,
+      "kind": "object_message_literal",
+      "text": "Choose a topic.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 17,
+      "kind": "object_message_literal",
+      "text": "You must be signed in.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 27,
+      "kind": "object_message_literal",
+      "text": "Only chairs can change the live debate topic.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 31,
+      "kind": "object_message_literal",
+      "text": "No active committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/activeDebateTopic.ts",
+      "line": 35,
+      "kind": "object_message_literal",
+      "text": "That topic is not part of this committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.activeDebateTopic"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 40,
+      "kind": "object_message_literal",
+      "text": "Enter a valid email address.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 45,
+      "kind": "object_message_literal",
+      "text": "Only website admins can invite SMT members.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 83,
+      "kind": "object_message_literal",
+      "text": "Invite sent, but could not set SMT role: ${profileErr.message}. Use “Set role” after they accept.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 102,
+      "kind": "object_message_literal",
+      "text": "Enter a valid email address.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 105,
+      "kind": "object_message_literal",
+      "text": "Choose delegate, chair, or SMT.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 110,
+      "kind": "object_message_literal",
+      "text": "Only website admins can change user roles.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 121,
+      "kind": "object_message_literal",
+      "text": "No account with that email yet. Send an invite first.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/adminUsers.ts",
+      "line": 124,
+      "kind": "object_message_literal",
+      "text": "You cannot change your own role from here.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.adminUsers"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 23,
+      "kind": "object_message_literal",
+      "text": "Missing committee context.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 31,
+      "kind": "object_message_literal",
+      "text": "You must be signed in.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 42,
+      "kind": "object_message_literal",
+      "text": "Only delegates and chairs use this step.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 57,
+      "kind": "object_message_literal",
+      "text": "Your conference selection does not match this committee. Re-enter your codes if needed.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 66,
+      "kind": "object_message_literal",
+      "text": "Your conference selection does not match this committee. Start from the event gate again.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 95,
+      "kind": "object_message_literal",
+      "text": "Missing committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 102,
+      "kind": "object_message_literal",
+      "text": "Not signed in.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 112,
+      "kind": "object_message_literal",
+      "text": "Only chairs, SMT, and admins can change this.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodeGate.ts",
+      "line": 123,
+      "kind": "object_message_literal",
+      "text": "You do not have a seat on this committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodeGate"
+    },
+    {
+      "file": "app/actions/allocationCodes.ts",
+      "line": 39,
+      "kind": "object_message_literal",
+      "text": "You can only manage codes for your committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodes"
+    },
+    {
+      "file": "app/actions/allocationCodes.ts",
+      "line": 47,
+      "kind": "object_message_literal",
+      "text": "Only chairs, SMT, and website admins can update allocation codes.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodes"
+    },
+    {
+      "file": "app/actions/allocationCodes.ts",
+      "line": 59,
+      "kind": "object_message_literal",
+      "text": "Allocation not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodes"
+    },
+    {
+      "file": "app/actions/allocationCodes.ts",
+      "line": 89,
+      "kind": "object_message_literal",
+      "text": "Only chairs, SMT, and website admins can generate codes.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.allocationCodes"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 19,
+      "kind": "jsx_text",
+      "text": "= 1 && n",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 34,
+      "kind": "object_message_literal",
+      "text": "Sign in required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 38,
+      "kind": "object_message_literal",
+      "text": "Invalid scope.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 42,
+      "kind": "object_message_literal",
+      "text": "Missing committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 52,
+      "kind": "object_message_literal",
+      "text": "Missing subject profile.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 58,
+      "kind": "object_message_literal",
+      "text": "Pick a band and low/high for every criterion.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 61,
+      "kind": "object_message_literal",
+      "text": "Every criterion must be scored 1–8.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 69,
+      "kind": "object_message_literal",
+      "text": "Add a brief evidence statement (${DELEGATE_CHAIR_EVIDENCE_MIN_LEN}+ characters): concrete observations from committee session(s).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 78,
+      "kind": "object_message_literal",
+      "text": "Only chairs can save delegate evaluations.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 80,
+      "kind": "object_message_literal",
+      "text": "Only delegates can submit chair feedback.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/award-participation.ts",
+      "line": 82,
+      "kind": "object_message_literal",
+      "text": "Only SMT can save chair / chair report evaluations.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.award-participation"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 32,
+      "kind": "jsx_text",
+      "text": "= 1 && direct",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 60,
+      "kind": "jsx_text",
+      "text": "= 1 && direct",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 116,
+      "kind": "object_message_literal",
+      "text": "Only chairs, SMT, and website admins can edit awards.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 128,
+      "kind": "object_message_literal",
+      "text": "Invalid award category.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 134,
+      "kind": "object_message_literal",
+      "text": "Select a committee for this award.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 194,
+      "kind": "object_message_literal",
+      "text": "Only chairs, SMT, and website admins can delete awards.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 266,
+      "kind": "object_message_literal",
+      "text": "You must be signed in as a chair, SMT member, or admin.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 280,
+      "kind": "object_message_literal",
+      "text": "Only committee chairs (or admins) can submit nominations to SMT.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 290,
+      "kind": "object_message_literal",
+      "text": "You must be allocated as chair for this committee to submit.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 311,
+      "kind": "object_message_literal",
+      "text": "These nominations were already sent to SMT.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 314,
+      "kind": "object_message_literal",
+      "text": "Nothing to submit yet. Save your required slots first.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 316,
+      "kind": "object_message_literal",
+      "text": "Could not submit nominations. Ensure every required slot is complete.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 324,
+      "kind": "object_message_literal",
+      "text": "You must be signed in as a chair, SMT member, or admin.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 344,
+      "kind": "object_message_literal",
+      "text": "Invalid nomination form data.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 347,
+      "kind": "object_message_literal",
+      "text": "Invalid rank for overall Best Delegate.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 353,
+      "kind": "object_message_literal",
+      "text": "Invalid rank for this nomination type.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 356,
+      "kind": "object_message_literal",
+      "text": "Invalid rank for Honourable Mention.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 375,
+      "kind": "object_message_literal",
+      "text": "Select a nominee for this slot.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 382,
+      "kind": "object_message_literal",
+      "text": "Choose a band and Low or High for every criterion (scores 1–8 each).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 403,
+      "kind": "object_message_literal",
+      "text": "You must be allocated to this committee as chair to save nominations.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 416,
+      "kind": "object_message_literal",
+      "text": "That delegate is not seated in this committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 425,
+      "kind": "object_message_literal",
+      "text": "Nominees must be delegates or country seats, not the committee chair.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 442,
+      "kind": "object_message_literal",
+      "text": "This Honourable Mention slot is not used for your committee size.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 471,
+      "kind": "object_message_literal",
+      "text": "This nomination was already submitted to SMT and cannot be edited here.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 515,
+      "kind": "object_message_literal",
+      "text": "Only SMT and website admins can reject nominations.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 520,
+      "kind": "object_message_literal",
+      "text": "Missing nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 530,
+      "kind": "object_message_literal",
+      "text": "Nomination not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 533,
+      "kind": "object_message_literal",
+      "text": "This nomination is no longer pending.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 562,
+      "kind": "object_message_literal",
+      "text": "Only SMT and website admins can approve nominations.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 568,
+      "kind": "object_message_literal",
+      "text": "Missing nomination or award type.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 571,
+      "kind": "object_message_literal",
+      "text": "Invalid award category.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 579,
+      "kind": "object_message_literal",
+      "text": "This award type cannot be set from a chair nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 588,
+      "kind": "object_message_literal",
+      "text": "Nomination not found.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 591,
+      "kind": "object_message_literal",
+      "text": "This nomination is no longer pending.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 595,
+      "kind": "object_message_literal",
+      "text": "Award type does not match this nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 603,
+      "kind": "object_message_literal",
+      "text": "Award type does not match this nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 607,
+      "kind": "object_message_literal",
+      "text": "Award type does not match this nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 610,
+      "kind": "object_message_literal",
+      "text": "Award type does not match this nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/awards.ts",
+      "line": 616,
+      "kind": "object_message_literal",
+      "text": "Award type does not match this nomination.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.awards"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 32,
+      "kind": "object_message_literal",
+      "text": "Enter a conference / event name (at least 2 characters).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 35,
+      "kind": "object_message_literal",
+      "text": "Conference code must be at least 4 characters (spaces ignored).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 38,
+      "kind": "object_message_literal",
+      "text": "Enter a committee session title (at least 2 characters).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 41,
+      "kind": "object_message_literal",
+      "text": "Committee code must be exactly 6 letters or digits (e.g. ECO741 from chamber initials + 3 digits).",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 44,
+      "kind": "object_message_literal",
+      "text": "Committee password must be at least 6 characters, or leave both password fields empty.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 47,
+      "kind": "object_message_literal",
+      "text": "Committee password and confirmation do not match.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 55,
+      "kind": "object_message_literal",
+      "text": "You must be signed in.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 65,
+      "kind": "object_message_literal",
+      "text": "Only secretariat or website admins can create a new conference event.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/conferenceSetup.ts",
+      "line": 91,
+      "kind": "object_message_literal",
+      "text": "Conference was created but committee password could not be set: ${hashErr.message}",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.conferenceSetup"
+    },
+    {
+      "file": "app/actions/exportMaterials.ts",
+      "line": 178,
+      "kind": "object_message_literal",
+      "text": "Untitled speech",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.exportMaterials"
+    },
+    {
+      "file": "app/actions/exportMaterials.ts",
+      "line": 302,
+      "kind": "error_literal",
+      "text": "Missing env var: ${name}",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.exportMaterials"
+    },
+    {
+      "file": "app/actions/exportMaterials.ts",
+      "line": 343,
+      "kind": "object_message_literal",
+      "text": "Unknown email sending error",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.exportMaterials"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 42,
+      "kind": "object_message_literal",
+      "text": "Only staff can create resolutions.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 44,
+      "kind": "object_message_literal",
+      "text": "Invalid conference id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 51,
+      "kind": "object_message_literal",
+      "text": "Maximum of 3 draft resolutions per committee.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 90,
+      "kind": "object_message_literal",
+      "text": "Only staff can edit clauses.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 93,
+      "kind": "object_message_literal",
+      "text": "Invalid IDs.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 96,
+      "kind": "object_message_literal",
+      "text": "Clause text is required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 127,
+      "kind": "object_message_literal",
+      "text": "Only staff can edit clauses.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 129,
+      "kind": "object_message_literal",
+      "text": "Invalid clause id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 131,
+      "kind": "object_message_literal",
+      "text": "Clause text is required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 146,
+      "kind": "object_message_literal",
+      "text": "Only staff can delete clauses.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 148,
+      "kind": "object_message_literal",
+      "text": "Invalid clause id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 160,
+      "kind": "object_message_literal",
+      "text": "Only delegates can sign resolutions.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 162,
+      "kind": "object_message_literal",
+      "text": "Invalid resolution id.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 179,
+      "kind": "object_message_literal",
+      "text": "Only delegates can join blocs.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 182,
+      "kind": "object_message_literal",
+      "text": "Invalid IDs.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 192,
+      "kind": "object_message_literal",
+      "text": "Bloc does not belong to resolution.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 223,
+      "kind": "object_message_literal",
+      "text": "Only staff can record clause vote outcomes.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 226,
+      "kind": "object_message_literal",
+      "text": "Invalid IDs.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 229,
+      "kind": "object_message_literal",
+      "text": "Invalid clause ids.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 239,
+      "kind": "object_message_literal",
+      "text": "Some clause ids do not belong to resolution.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 285,
+      "kind": "object_message_literal",
+      "text": "Not authenticated.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 287,
+      "kind": "object_message_literal",
+      "text": "Invalid clause ids.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 306,
+      "kind": "object_message_literal",
+      "text": "Only delegates or staff can send resolutions by email.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 309,
+      "kind": "object_message_literal",
+      "text": "Invalid IDs.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 314,
+      "kind": "object_message_literal",
+      "text": "Enter a valid delegate email.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 343,
+      "kind": "object_message_literal",
+      "text": "Email server is not configured. Set SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/resolutions.ts",
+      "line": 376,
+      "kind": "object_message_literal",
+      "text": "Could not send resolution email.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.resolutions"
+    },
+    {
+      "file": "app/actions/smtConference.ts",
+      "line": 21,
+      "kind": "object_message_literal",
+      "text": "Event name (2+ chars) and conference code (4+ chars) are required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.smtConference"
+    },
+    {
+      "file": "app/actions/smtConference.ts",
+      "line": 28,
+      "kind": "object_message_literal",
+      "text": "Not signed in.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.smtConference"
+    },
+    {
+      "file": "app/actions/smtConference.ts",
+      "line": 36,
+      "kind": "object_message_literal",
+      "text": "Only secretariat can edit conference info.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.smtConference"
+    },
+    {
+      "file": "app/actions/smtConference.ts",
+      "line": 70,
+      "kind": "object_message_literal",
+      "text": "Session title and a valid 6-character committee code (letters/digits) are required.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.smtConference"
+    },
+    {
+      "file": "app/actions/smtConference.ts",
+      "line": 77,
+      "kind": "object_message_literal",
+      "text": "Not signed in.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.smtConference"
+    },
+    {
+      "file": "app/actions/smtConference.ts",
+      "line": 85,
+      "kind": "object_message_literal",
+      "text": "Only secretariat can edit committees.",
+      "domain": "server_action",
+      "suggestedKeyPrefix": "serverActions.smtConference"
+    },
+    {
+      "file": "app/admin/layout.tsx",
+      "line": 41,
+      "kind": "jsx_text",
+      "text": "Welcome Admin",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/allocation-signup/page.tsx",
+      "line": 78,
+      "kind": "jsx_text",
+      "text": "Select your allocation",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/api/cron/award-submissions/route.ts",
+      "line": 17,
+      "kind": "object_message_literal",
+      "text": "Unauthorized",
+      "domain": "api",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/api/cron/award-submissions/route.ts",
+      "line": 26,
+      "kind": "object_message_literal",
+      "text": "Service role client not configured",
+      "domain": "api",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/api/me/route.ts",
+      "line": 10,
+      "kind": "object_message_literal",
+      "text": "not signed in",
+      "domain": "api",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/layout.tsx",
+      "line": 50,
+      "kind": "jsx_text",
+      "text": "=0?raw:def;for(var i=0;i",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/layout.tsx",
+      "line": 50,
+      "kind": "jsx_text",
+      "text": "=0&&tn",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/room-gate/AutoJoinSingleton.tsx",
+      "line": 19,
+      "kind": "jsx_text",
+      "text": "Only one conference and one committee are set up — signing you in…",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-matrix/AllocationMatrixManagerClient.tsx",
+      "line": 85,
+      "kind": "object_message_literal",
+      "text": "Head Chair",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-matrix/AllocationMatrixManagerClient.tsx",
+      "line": 395,
+      "kind": "jsx_text",
+      "text": "country,optional_code",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-matrix/page.tsx",
+      "line": 97,
+      "kind": "jsx_text",
+      "text": "Select a conference event first.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-matrix/page.tsx",
+      "line": 228,
+      "kind": "jsx_text",
+      "text": "Allocation matrix",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-passwords/page.tsx",
+      "line": 63,
+      "kind": "jsx_text",
+      "text": "Create a conference first.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-passwords/page.tsx",
+      "line": 104,
+      "kind": "jsx_text",
+      "text": "codes",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-passwords/page.tsx",
+      "line": 104,
+      "kind": "jsx_text",
+      "text": "for placards, binders, or handouts. Optional",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/allocation-passwords/page.tsx",
+      "line": 104,
+      "kind": "jsx_text",
+      "text": "third gate",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 88,
+      "kind": "jsx_text",
+      "text": "Award submissions by chairs",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 99,
+      "kind": "attribute_literal",
+      "text": "Filter by committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 116,
+      "kind": "jsx_text",
+      "text": "Committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 117,
+      "kind": "jsx_text",
+      "text": "Rank",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 118,
+      "kind": "jsx_text",
+      "text": "Award type",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 119,
+      "kind": "jsx_text",
+      "text": "Nominee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 120,
+      "kind": "jsx_text",
+      "text": "Rubric",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 121,
+      "kind": "jsx_text",
+      "text": "Evidence",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 122,
+      "kind": "jsx_text",
+      "text": "Approve / reject",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 129,
+      "kind": "jsx_text",
+      "text": "No pending chair submissions yet.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 131,
+      "kind": "jsx_text",
+      "text": "Save",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 132,
+      "kind": "jsx_text",
+      "text": "draft",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 133,
+      "kind": "jsx_text",
+      "text": "required",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 134,
+      "kind": "jsx_text",
+      "text": "Submit nominations to SMT",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 135,
+      "kind": "jsx_text",
+      "text": "pending",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 142,
+      "kind": "jsx_text",
+      "text": "All committees",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 164,
+      "kind": "attribute_literal",
+      "text": "Band initials: B/D/P/E",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 175,
+      "kind": "attribute_literal",
+      "text": "Approve — Best Delegate",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 183,
+      "kind": "attribute_literal",
+      "text": "Approve — Honourable Mention",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 191,
+      "kind": "attribute_literal",
+      "text": "Approve — Best Position Paper",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/ChairNominationsPanel.tsx",
+      "line": 199,
+      "kind": "attribute_literal",
+      "text": "Approve — Best Delegate (overall)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtAwardsTabs.tsx",
+      "line": 78,
+      "kind": "attribute_literal",
+      "text": "SMT awards",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtAwardsTabs.tsx",
+      "line": 88,
+      "kind": "jsx_text",
+      "text": "Final recorded awards",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtAwardsTabs.tsx",
+      "line": 91,
+      "kind": "jsx_text",
+      "text": "Print selected",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 76,
+      "kind": "jsx_text",
+      "text": "Nominee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 77,
+      "kind": "jsx_text",
+      "text": "Award",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 78,
+      "kind": "jsx_text",
+      "text": "Committee",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 79,
+      "kind": "jsx_text",
+      "text": "Rank",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 80,
+      "kind": "jsx_text",
+      "text": "Status",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 81,
+      "kind": "jsx_text",
+      "text": "Rubric",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 82,
+      "kind": "jsx_text",
+      "text": "Evidence",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtBestDelegateComparison.tsx",
+      "line": 109,
+      "kind": "attribute_literal",
+      "text": "Band initials",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 216,
+      "kind": "jsx_text",
+      "text": "Incomplete",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 241,
+      "kind": "attribute_literal",
+      "text": "Committee scoring",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 283,
+      "kind": "jsx_text",
+      "text": "Chair ranking (highest → lowest)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 284,
+      "kind": "jsx_text",
+      "text": "Secretariat",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 301,
+      "kind": "jsx_text",
+      "text": "Delegate feedback (mean → low)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 302,
+      "kind": "jsx_text",
+      "text": "Aggregated",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 326,
+      "kind": "jsx_text",
+      "text": "No delegate responses yet.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 331,
+      "kind": "jsx_text",
+      "text": "Chair report ranking (highest → lowest)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 332,
+      "kind": "jsx_text",
+      "text": "Secretariat",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 377,
+      "kind": "jsx_text",
+      "text": "No responses yet",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 390,
+      "kind": "jsx_text",
+      "text": "Chairs (performance)",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 453,
+      "kind": "jsx_text",
+      "text": "Chair report",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/SmtParticipationPanel.tsx",
+      "line": 464,
+      "kind": "jsx_text",
+      "text": "Select a committee tab.",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/awards/page.tsx",
+      "line": 267,
+      "kind": "jsx_text",
+      "text": "00092_profiles_restore_staff_select",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/conference/page.tsx",
+      "line": 54,
+      "kind": "jsx_text",
+      "text": "Event & committee sessions",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/smt/profile/page.tsx",
+      "line": 44,
+      "kind": "jsx_text",
+      "text": "Recorded awards",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "components/EmojiQuickInsert.tsx",
+      "line": 8,
+      "kind": "attribute_literal",
+      "text": "Quick emoji",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.EmojiQuickInsert.tsx"
+    },
+    {
+      "file": "components/HelpButton.tsx",
+      "line": 44,
+      "kind": "jsx_text",
+      "text": "Help",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.HelpButton.tsx"
+    },
+    {
+      "file": "components/HelpButton.tsx",
+      "line": 64,
+      "kind": "jsx_text",
+      "text": "Close",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.HelpButton.tsx"
+    },
+    {
+      "file": "components/InterMunEmblem.tsx",
+      "line": 7,
+      "kind": "attribute_literal",
+      "text": "InterMUN",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.InterMunEmblem.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 13,
+      "kind": "object_message_literal",
+      "text": "Recently Played",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 19,
+      "kind": "object_message_literal",
+      "text": "Your Mixes",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 25,
+      "kind": "object_message_literal",
+      "text": "Discover Weekly",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 31,
+      "kind": "object_message_literal",
+      "text": "Made For You",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 37,
+      "kind": "object_message_literal",
+      "text": "Trending Now",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 43,
+      "kind": "object_message_literal",
+      "text": "Your Library",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/TabNav.tsx",
+      "line": 213,
+      "kind": "attribute_literal",
+      "text": "Main navigation",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.TabNav.tsx"
+    },
+    {
+      "file": "components/TabNav.tsx",
+      "line": 264,
+      "kind": "attribute_literal",
+      "text": "Main navigation",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.TabNav.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 133,
+      "kind": "attribute_literal",
+      "text": "Theme: color & appearance",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 134,
+      "kind": "attribute_literal",
+      "text": "Open theme settings",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 143,
+      "kind": "attribute_literal",
+      "text": "Theme settings",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 146,
+      "kind": "jsx_text",
+      "text": "Appearance",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 176,
+      "kind": "jsx_text",
+      "text": "Accent colour",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 180,
+      "kind": "attribute_literal",
+      "text": "Accent colour",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 229,
+      "kind": "jsx_text",
+      "text": "Typography",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 236,
+      "kind": "jsx_text",
+      "text": "Scale",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 256,
+      "kind": "jsx_text",
+      "text": "Small",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 257,
+      "kind": "jsx_text",
+      "text": "Medium",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 258,
+      "kind": "jsx_text",
+      "text": "Large",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/ThemeSelector.tsx",
+      "line": 263,
+      "kind": "attribute_literal",
+      "text": "Uses Atkinson Hyperlegible (legibility-oriented) for UI and document text when enabled.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.ThemeSelector.tsx"
+    },
+    {
+      "file": "components/allocation/AllocationCodeGateToggle.tsx",
+      "line": 32,
+      "kind": "jsx_text",
+      "text": "Third gate (allocation)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.allocation"
+    },
+    {
+      "file": "components/allocation/AllocationCodeGateToggle.tsx",
+      "line": 42,
+      "kind": "jsx_text",
+      "text": "placard / sign-in code",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.allocation"
+    },
+    {
+      "file": "components/allocation/AllocationCodeGateToggle.tsx",
+      "line": 44,
+      "kind": "jsx_text",
+      "text": "Turning this off clears active seat verifications.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.allocation"
+    },
+    {
+      "file": "components/allocation/AllocationCodeGateToggle.tsx",
+      "line": 51,
+      "kind": "jsx_text",
+      "text": "Saved.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.allocation"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 28,
+      "kind": "object_message_literal",
+      "text": "Chair",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 29,
+      "kind": "object_message_literal",
+      "text": "Delegate",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 30,
+      "kind": "object_message_literal",
+      "text": "Secretariat",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 298,
+      "kind": "attribute_literal",
+      "text": "e.g. SEAMUNI2027",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 355,
+      "kind": "attribute_literal",
+      "text": "Previous role",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 366,
+      "kind": "attribute_literal",
+      "text": "Select role",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/auth/AuthEntryWizard.tsx",
+      "line": 408,
+      "kind": "attribute_literal",
+      "text": "Next role",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.auth"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 120,
+      "kind": "jsx_text",
+      "text": "SEAMUN I official award rubrics",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 174,
+      "kind": "attribute_literal",
+      "text": "Position paper (Best Position Paper)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 182,
+      "kind": "attribute_literal",
+      "text": "Delegate (live sessions)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 189,
+      "kind": "attribute_literal",
+      "text": "Chair performance",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 195,
+      "kind": "attribute_literal",
+      "text": "Chair report — overall",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 198,
+      "kind": "attribute_literal",
+      "text": "Chair report — section-specific",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/awards/AwardsRubricReference.tsx",
+      "line": 204,
+      "kind": "attribute_literal",
+      "text": "Best committee",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.awards"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 485,
+      "kind": "jsx_text",
+      "text": "Committee session",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 486,
+      "kind": "attribute_literal",
+      "text": "Committee session",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 491,
+      "kind": "jsx_text",
+      "text": "Start or stop the committee session.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 526,
+      "kind": "jsx_text",
+      "text": "Time in:",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 531,
+      "kind": "jsx_text",
+      "text": "Time until end:",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 539,
+      "kind": "jsx_text",
+      "text": "Mode:",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 545,
+      "kind": "jsx_text",
+      "text": "Session is not running.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 550,
+      "kind": "jsx_text",
+      "text": "Session limit",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 551,
+      "kind": "attribute_literal",
+      "text": "Session limit modes",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 556,
+      "kind": "jsx_text",
+      "text": "None",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 557,
+      "kind": "jsx_text",
+      "text": "Time budget",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 558,
+      "kind": "jsx_text",
+      "text": "End time",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 571,
+      "kind": "jsx_text",
+      "text": "None (indefinite)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 572,
+      "kind": "jsx_text",
+      "text": "No scheduled end; only elapsed time is shown.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 585,
+      "kind": "jsx_text",
+      "text": "Time budget from start",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 589,
+      "kind": "jsx_text",
+      "text": "Hours",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 600,
+      "kind": "jsx_text",
+      "text": "Minutes",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 610,
+      "kind": "jsx_text",
+      "text": "(minimum 1 minute)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 625,
+      "kind": "jsx_text",
+      "text": "End at (local time)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 658,
+      "kind": "attribute_literal",
+      "text": "Save limit",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 687,
+      "kind": "jsx_text",
+      "text": "Roll call",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 688,
+      "kind": "jsx_text",
+      "text": "Speakers",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 689,
+      "kind": "jsx_text",
+      "text": "Formal motions",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 690,
+      "kind": "jsx_text",
+      "text": "Timer",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairCommitteeSessionControl.tsx",
+      "line": 691,
+      "kind": "jsx_text",
+      "text": "Announcements",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairHowToAccordion.tsx",
+      "line": 34,
+      "kind": "jsx_text",
+      "text": "Digital Room",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairHowToAccordion.tsx",
+      "line": 38,
+      "kind": "jsx_text",
+      "text": "Delegates",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairHowToAccordion.tsx",
+      "line": 42,
+      "kind": "jsx_text",
+      "text": "Session",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairHowToAccordion.tsx",
+      "line": 46,
+      "kind": "jsx_text",
+      "text": "Motions &amp; Points",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairHowToAccordion.tsx",
+      "line": 50,
+      "kind": "jsx_text",
+      "text": "Voting",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 230,
+      "kind": "jsx_text",
+      "text": "🎤 Speaker list",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 255,
+      "kind": "jsx_text",
+      "text": "Advance speaker",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 279,
+      "kind": "jsx_text",
+      "text": "add",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 280,
+      "kind": "jsx_text",
+      "text": "Add",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 281,
+      "kind": "jsx_text",
+      "text": "Add selected to list",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 282,
+      "kind": "jsx_text",
+      "text": "remove",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 282,
+      "kind": "jsx_text",
+      "text": "them with",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 282,
+      "kind": "jsx_text",
+      "text": "Remove",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 283,
+      "kind": "jsx_text",
+      "text": "Current",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 371,
+      "kind": "jsx_text",
+      "text": "Add delegation",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 377,
+      "kind": "jsx_text",
+      "text": "Select…",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 417,
+      "kind": "attribute_literal",
+      "text": "Move up",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 418,
+      "kind": "attribute_literal",
+      "text": "Move up",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 431,
+      "kind": "attribute_literal",
+      "text": "Move down",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/ChairSpeakerQueuePanel.tsx",
+      "line": 432,
+      "kind": "attribute_literal",
+      "text": "Move down",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chair/awards/ChairAwardsShell.tsx",
+      "line": 33,
+      "kind": "attribute_literal",
+      "text": "Chair awards",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chair"
+    },
+    {
+      "file": "components/chats-notes/ChatsNotesView.tsx",
+      "line": 134,
+      "kind": "jsx_text",
+      "text": "Chat",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chats-notes"
+    },
+    {
+      "file": "components/chats-notes/ChatsNotesView.tsx",
+      "line": 205,
+      "kind": "jsx_text",
+      "text": "Message list",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chats-notes"
+    },
+    {
+      "file": "components/chats-notes/ChatsNotesView.tsx",
+      "line": 207,
+      "kind": "jsx_text",
+      "text": "No messages yet.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chats-notes"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 289,
+      "kind": "jsx_text",
+      "text": "Your context",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 293,
+      "kind": "jsx_text",
+      "text": "Role",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 307,
+      "kind": "attribute_literal",
+      "text": "Assigned",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 321,
+      "kind": "attribute_literal",
+      "text": "Dais",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 325,
+      "kind": "attribute_literal",
+      "text": "Focus search (dais titles and names match your query)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 327,
+      "kind": "attribute_literal",
+      "text": "Phase",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 422,
+      "kind": "jsx_text",
+      "text": "Floor",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
+      "line": 524,
+      "kind": "jsx_text",
+      "text": "Staff · seats",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 112,
+      "kind": "jsx_text",
+      "text": "Country / position",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 113,
+      "kind": "jsx_text",
+      "text": "Delegate (vacant ok)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 116,
+      "kind": "jsx_text",
+      "text": "Name override",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 117,
+      "kind": "jsx_text",
+      "text": "Pronouns override",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 118,
+      "kind": "jsx_text",
+      "text": "School override",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 121,
+      "kind": "jsx_text",
+      "text": "Save",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
+      "line": 143,
+      "kind": "jsx_text",
+      "text": "Vacant",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 385,
+      "kind": "jsx_text",
+      "text": "country",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 385,
+      "kind": "jsx_text",
+      "text": "(from allocations),",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 385,
+      "kind": "jsx_text",
+      "text": "name",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 386,
+      "kind": "jsx_text",
+      "text": "school",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 386,
+      "kind": "jsx_text",
+      "text": ", and",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 386,
+      "kind": "jsx_text",
+      "text": "pronouns",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 387,
+      "kind": "jsx_text",
+      "text": "Profile",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 388,
+      "kind": "jsx_text",
+      "text": "Vacant",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
+      "line": 389,
+      "kind": "jsx_text",
+      "text": "Click",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.committee-room"
+    },
+    {
+      "file": "components/crisis/GoogleSlidesEmbed.tsx",
+      "line": 27,
+      "kind": "jsx_text",
+      "text": "docs.google.com/presentation/d/…",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.crisis"
+    },
+    {
+      "file": "components/crisis/GoogleSlidesEmbed.tsx",
+      "line": 56,
+      "kind": "jsx_text",
+      "text": "Share",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.crisis"
+    },
+    {
+      "file": "components/dashboard/DashboardNotifications.tsx",
+      "line": 216,
+      "kind": "attribute_literal",
+      "text": "Notifications",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.dashboard"
+    },
+    {
+      "file": "components/dashboard/DashboardNotifications.tsx",
+      "line": 220,
+      "kind": "jsx_text",
+      "text": "Notifications",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.dashboard"
+    },
+    {
+      "file": "components/dashboard/DashboardNotifications.tsx",
+      "line": 233,
+      "kind": "jsx_text",
+      "text": "Loading…",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.dashboard"
+    },
+    {
+      "file": "components/delegate/DelegateChairFeedbackPanel.tsx",
+      "line": 105,
+      "kind": "jsx_text",
+      "text": "Chair feedback",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/delegate/DelegateChairFeedbackPanel.tsx",
+      "line": 108,
+      "kind": "jsx_text",
+      "text": "evidence statement",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/delegate/DelegateChairFeedbackPanel.tsx",
+      "line": 192,
+      "kind": "jsx_text",
+      "text": "Evidence statement (required)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/delegate/DelegateCountdownCard.tsx",
+      "line": 130,
+      "kind": "jsx_text",
+      "text": "Conference start",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/delegate/DelegateCountdownCard.tsx",
+      "line": 139,
+      "kind": "jsx_text",
+      "text": "Position paper deadline",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/delegate/DelegateCountdownCard.tsx",
+      "line": 149,
+      "kind": "attribute_literal",
+      "text": "Until conference",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/delegate/DelegateCountdownCard.tsx",
+      "line": 150,
+      "kind": "attribute_literal",
+      "text": "Until paper deadline",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.delegate"
+    },
+    {
+      "file": "components/google-docs/OpenNewGoogleDocButton.tsx",
+      "line": 22,
+      "kind": "attribute_literal",
+      "text": "Opens Google Docs in a new tab. Sign in if prompted, then copy the document URL from the address bar.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.google-docs"
+    },
+    {
+      "file": "components/materials/DelegateMaterialsExportCard.tsx",
+      "line": 44,
+      "kind": "jsx_text",
+      "text": "Today (UTC)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.materials"
+    },
+    {
+      "file": "components/materials/DelegateMaterialsExportCard.tsx",
+      "line": 45,
+      "kind": "jsx_text",
+      "text": "All time",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.materials"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 14,
+      "kind": "object_message_literal",
+      "text": "Admin setup checklist",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 17,
+      "kind": "object_message_literal",
+      "text": "Create event + first committee",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 18,
+      "kind": "object_message_literal",
+      "text": "Invite or promote SMT accounts",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 19,
+      "kind": "object_message_literal",
+      "text": "Verify status portal pipeline",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 20,
+      "kind": "object_message_literal",
+      "text": "Hand off to SMT dashboard",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 26,
+      "kind": "object_message_literal",
+      "text": "SMT setup checklist",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 29,
+      "kind": "object_message_literal",
+      "text": "Confirm event + committee sessions",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 30,
+      "kind": "object_message_literal",
+      "text": "Set room codes + chair access",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 31,
+      "kind": "object_message_literal",
+      "text": "Prepare allocations + sign-in docs",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 32,
+      "kind": "object_message_literal",
+      "text": "Publish global docs (RoP / criteria)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 38,
+      "kind": "object_message_literal",
+      "text": "Chair setup checklist",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 41,
+      "kind": "object_message_literal",
+      "text": "Check delegate matrix + approvals",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 42,
+      "kind": "object_message_literal",
+      "text": "Run roll call approvals",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 43,
+      "kind": "object_message_literal",
+      "text": "Set timer + speaker flow",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 44,
+      "kind": "object_message_literal",
+      "text": "Open digital room operations",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 49,
+      "kind": "object_message_literal",
+      "text": "Delegate setup checklist",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 52,
+      "kind": "object_message_literal",
+      "text": "Complete profile basics",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 53,
+      "kind": "object_message_literal",
+      "text": "Read RoP + award criteria",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 54,
+      "kind": "object_message_literal",
+      "text": "Create your prep document",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/onboarding/RoleSetupChecklist.tsx",
+      "line": 55,
+      "kind": "object_message_literal",
+      "text": "Join committee room + roll call",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.onboarding"
+    },
+    {
+      "file": "components/profile/ProfileAwardsSummaryTabs.tsx",
+      "line": 17,
+      "kind": "attribute_literal",
+      "text": "Awards on your profile",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.profile"
+    },
+    {
+      "file": "components/profile/ProfileLivePreview.tsx",
+      "line": 65,
+      "kind": "attribute_literal",
+      "text": "Profile preview",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.profile"
+    },
+    {
+      "file": "components/profile/ProfileLivePreview.tsx",
+      "line": 67,
+      "kind": "jsx_text",
+      "text": "Preview",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.profile"
+    },
+    {
+      "file": "components/profile/ProfileLivePreview.tsx",
+      "line": 92,
+      "kind": "jsx_text",
+      "text": "Username not set",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.profile"
+    },
+    {
+      "file": "components/report/ReportView.tsx",
+      "line": 81,
+      "kind": "jsx_text",
+      "text": "Submit report",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.report"
+    },
+    {
+      "file": "components/report/ReportView.tsx",
+      "line": 84,
+      "kind": "jsx_text",
+      "text": "Report type",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.report"
+    },
+    {
+      "file": "components/report/ReportView.tsx",
+      "line": 92,
+      "kind": "jsx_text",
+      "text": "AI use",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.report"
+    },
+    {
+      "file": "components/report/ReportView.tsx",
+      "line": 99,
+      "kind": "jsx_text",
+      "text": "Description",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.report"
+    },
+    {
+      "file": "components/report/ReportView.tsx",
+      "line": 103,
+      "kind": "attribute_literal",
+      "text": "Describe the incident...",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.report"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 159,
+      "kind": "jsx_text",
+      "text": "Draft resolution",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 174,
+      "kind": "jsx_text",
+      "text": "Section",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 180,
+      "kind": "jsx_text",
+      "text": "Preambulatory",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 181,
+      "kind": "jsx_text",
+      "text": "Operative",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 187,
+      "kind": "jsx_text",
+      "text": "Opening presets",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 207,
+      "kind": "jsx_text",
+      "text": "Opening phrase (edit or type your own)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 218,
+      "kind": "jsx_text",
+      "text": "Clause text",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 223,
+      "kind": "attribute_literal",
+      "text": "…the rest of the clause (facts, actions, specifics). Commas after the opening are added when you save.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 228,
+      "kind": "jsx_text",
+      "text": "Preview",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 269,
+      "kind": "jsx_text",
+      "text": "Loading…",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/DelegateResolutionBuilder.tsx",
+      "line": 271,
+      "kind": "jsx_text",
+      "text": "No suggestions yet.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/GoogleDocsEmbed.tsx",
+      "line": 31,
+      "kind": "jsx_text",
+      "text": "docs.google.com/document/d/…",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/GoogleDocsEmbed.tsx",
+      "line": 84,
+      "kind": "jsx_text",
+      "text": "Open in Google Docs",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 215,
+      "kind": "jsx_text",
+      "text": "Google Doc link",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 224,
+      "kind": "attribute_literal",
+      "text": "Google Docs URL (docs.google.com/document/d/… — used for embed + editing)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 235,
+      "kind": "attribute_literal",
+      "text": "Main submitters (user IDs, comma-separated)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 243,
+      "kind": "attribute_literal",
+      "text": "Co-submitters (user IDs, comma-separated)",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 305,
+      "kind": "jsx_text",
+      "text": "No Google Doc link",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 343,
+      "kind": "jsx_text",
+      "text": "Share resolution by email",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 351,
+      "kind": "attribute_literal",
+      "text": "delegate@email.com",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 368,
+      "kind": "jsx_text",
+      "text": "Clause editor",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 370,
+      "kind": "jsx_text",
+      "text": "No clauses yet.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 418,
+      "kind": "attribute_literal",
+      "text": "Add a new clause...",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 432,
+      "kind": "jsx_text",
+      "text": "Clause vote history",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/resolutions/ResolutionsView.tsx",
+      "line": 434,
+      "kind": "jsx_text",
+      "text": "No recorded clause vote outcomes yet.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.resolutions"
+    },
+    {
+      "file": "components/timers/Timers.tsx",
+      "line": 47,
+      "kind": "jsx_text",
+      "text": "Timer",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.timers"
+    },
+    {
+      "file": "components/timers/Timers.tsx",
+      "line": 52,
+      "kind": "jsx_text",
+      "text": "Current speaker",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.timers"
+    },
+    {
+      "file": "components/timers/Timers.tsx",
+      "line": 56,
+      "kind": "jsx_text",
+      "text": "Next speaker",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.timers"
+    },
+    {
+      "file": "components/voting/VotingPanel.tsx",
+      "line": 494,
+      "kind": "jsx_text",
+      "text": "renderVoteCard(i as VoteItemRow))}",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.voting"
+    },
+    {
+      "file": "components/voting/VotingPanel.tsx",
+      "line": 502,
+      "kind": "jsx_text",
+      "text": "renderVoteCard(i as VoteItemRow))}",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.voting"
+    },
+    {
+      "file": "lib/award-committee-submit.ts",
+      "line": 150,
+      "kind": "object_message_literal",
+      "text": "Complete every required slot before submitting. Missing: ${missing.join(",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/award-committee-submit.ts",
+      "line": 168,
+      "kind": "object_message_literal",
+      "text": "Score every seated delegate in the matrix first (${mxOk.missing.length} still incomplete).",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/award-nomination-review.ts",
+      "line": 26,
+      "kind": "jsx_text",
+      "text": "(pending: T[], selectedSingleWinnerGroupKeys: ReadonlySet",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/award-participation-scoring.ts",
+      "line": 36,
+      "kind": "jsx_text",
+      "text": "= 1 && v",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/award-participation-scoring.ts",
+      "line": 88,
+      "kind": "jsx_text",
+      "text": "(rows: T[], conferenceIdToCanonical: Map",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 14,
+      "kind": "object_message_literal",
+      "text": "Best Delegate (Trophy)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 21,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper (conference-wide)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 22,
+      "kind": "object_message_literal",
+      "text": "Most exceptional pre-conference research and policy alignment.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 27,
+      "kind": "object_message_literal",
+      "text": "Best Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 28,
+      "kind": "object_message_literal",
+      "text": "Impartiality, control of the house, delegate growth.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 33,
+      "kind": "object_message_literal",
+      "text": "Honorable Mention — Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 34,
+      "kind": "object_message_literal",
+      "text": "Outstanding support and execution on the dais.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 39,
+      "kind": "object_message_literal",
+      "text": "Best Committee",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 40,
+      "kind": "object_message_literal",
+      "text": "Highest engagement, productivity, and collaborative spirit.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 45,
+      "kind": "object_message_literal",
+      "text": "Best Chair Report",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 46,
+      "kind": "object_message_literal",
+      "text": "Best study guide / chair report—comprehensive and academically sound.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 51,
+      "kind": "object_message_literal",
+      "text": "Best Delegate (committee)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 52,
+      "kind": "object_message_literal",
+      "text": "Top delegate within this committee—drove debate and compromise.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 57,
+      "kind": "object_message_literal",
+      "text": "Honorable Mention (committee)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 58,
+      "kind": "object_message_literal",
+      "text": "Up to two per committee.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 63,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper (committee)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/awards.ts",
+      "line": 64,
+      "kind": "object_message_literal",
+      "text": "Strongest committee-level position paper.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 12,
+      "kind": "object_message_literal",
+      "text": "Rules & procedure",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 14,
+      "kind": "object_message_literal",
+      "text": "Read and understand committee rules of procedure",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 15,
+      "kind": "object_message_literal",
+      "text": "Review parliamentary procedure (motions, points, voting)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 16,
+      "kind": "object_message_literal",
+      "text": "Confirm speaking times and time limits",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 17,
+      "kind": "object_message_literal",
+      "text": "Know quorum and voting requirements",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 22,
+      "kind": "object_message_literal",
+      "text": "Committee & topic",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 24,
+      "kind": "object_message_literal",
+      "text": "Research committee topic and background",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 25,
+      "kind": "object_message_literal",
+      "text": "Read study guide and key documents",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 26,
+      "kind": "object_message_literal",
+      "text": "Set committee name and topic in dashboard",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 27,
+      "kind": "object_message_literal",
+      "text": "Prepare session agenda and flow",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 32,
+      "kind": "object_message_literal",
+      "text": "Room & tech",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 34,
+      "kind": "object_message_literal",
+      "text": "Set up digital room (delegates list, placards)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 35,
+      "kind": "object_message_literal",
+      "text": "Tech check: platform, audio, screen share",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 36,
+      "kind": "object_message_literal",
+      "text": "Have backup plan if tech fails",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 41,
+      "kind": "object_message_literal",
+      "text": "Materials & logistics",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 43,
+      "kind": "object_message_literal",
+      "text": "Prepare roll call list and attendance",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 44,
+      "kind": "object_message_literal",
+      "text": "Plan speakers list management",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 45,
+      "kind": "object_message_literal",
+      "text": "Prepare common motions / points (if using templates)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 46,
+      "kind": "object_message_literal",
+      "text": "Confirm session start time and breaks",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 51,
+      "kind": "object_message_literal",
+      "text": "Crisis (if applicable)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 53,
+      "kind": "object_message_literal",
+      "text": "Review crisis elements and update slides",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 54,
+      "kind": "object_message_literal",
+      "text": "Plan crisis speaker order / cues",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 55,
+      "kind": "object_message_literal",
+      "text": "Prepare crisis pathways and facts",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 60,
+      "kind": "object_message_literal",
+      "text": "Team & communication",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 62,
+      "kind": "object_message_literal",
+      "text": "Coordinate with co-chair(s) on roles",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 63,
+      "kind": "object_message_literal",
+      "text": "Confirm staff / dais support and cues",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 64,
+      "kind": "object_message_literal",
+      "text": "Prepare brief for delegates (rules, timing)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 71,
+      "kind": "object_message_literal",
+      "text": "Roll call",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 72,
+      "kind": "object_message_literal",
+      "text": "Open the floor (points & motions)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 73,
+      "kind": "object_message_literal",
+      "text": "Recognize motions",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 74,
+      "kind": "object_message_literal",
+      "text": "Vote on motion(s)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 75,
+      "kind": "object_message_literal",
+      "text": "Engage in chosen motion or move to GSL",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 76,
+      "kind": "object_message_literal",
+      "text": "Open the floor again",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 77,
+      "kind": "object_message_literal",
+      "text": "Recognize motions (repeat as needed)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 78,
+      "kind": "object_message_literal",
+      "text": "Vote on motion(s)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/chair-dashboard-checklists.ts",
+      "line": 79,
+      "kind": "object_message_literal",
+      "text": "Continue cycle (engage motion / GSL → open floor)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-room-payload.ts",
+      "line": 41,
+      "kind": "object_message_literal",
+      "text": "Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-room-payload.ts",
+      "line": 42,
+      "kind": "object_message_literal",
+      "text": "Vice-Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-room-payload.ts",
+      "line": 81,
+      "kind": "object_message_literal",
+      "text": "Head Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-room-payload.ts",
+      "line": 87,
+      "kind": "object_message_literal",
+      "text": "Co-chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-room-payload.ts",
+      "line": 190,
+      "kind": "object_message_literal",
+      "text": "Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-room-payload.ts",
+      "line": 196,
+      "kind": "object_message_literal",
+      "text": "Vice-Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-session-end.ts",
+      "line": 18,
+      "kind": "object_message_literal",
+      "text": "remaining",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-session-end.ts",
+      "line": 28,
+      "kind": "object_message_literal",
+      "text": "remaining",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/committee-session-end.ts",
+      "line": 33,
+      "kind": "object_message_literal",
+      "text": "passed",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/conference-committee-canonical.ts",
+      "line": 39,
+      "kind": "jsx_text",
+      "text": "(rows: T[], conferenceIdsWithAllocations: Set",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 17,
+      "kind": "object_message_literal",
+      "text": "Best Delegate",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 22,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 30,
+      "kind": "object_message_literal",
+      "text": "Best Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 31,
+      "kind": "object_message_literal",
+      "text": "Impartiality, firm control of the house, and nurturing delegate growth.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 34,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 35,
+      "kind": "object_message_literal",
+      "text": "Outstanding support and execution on the dais.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 38,
+      "kind": "object_message_literal",
+      "text": "Best Committee",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 39,
+      "kind": "object_message_literal",
+      "text": "Highest engagement, productivity, and collaborative spirit.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 42,
+      "kind": "object_message_literal",
+      "text": "Best Chair Report",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 43,
+      "kind": "object_message_literal",
+      "text": "Most comprehensive, accessible, academically sound study guide / chair report.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 49,
+      "kind": "object_message_literal",
+      "text": "Best Delegate",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 50,
+      "kind": "object_message_literal",
+      "text": "Top delegate in-committee—drove debate and brokered key compromises.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 53,
+      "kind": "object_message_literal",
+      "text": "Honourable Mention",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 58,
+      "kind": "object_message_literal",
+      "text": "Best Position Paper",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 59,
+      "kind": "object_message_literal",
+      "text": "Most detailed, policy-accurate committee-level position paper.",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 69,
+      "kind": "object_message_literal",
+      "text": "Scoring framework",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 77,
+      "kind": "object_message_literal",
+      "text": "Evaluation loop",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 84,
+      "kind": "object_message_literal",
+      "text": "Guide, not decision",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 91,
+      "kind": "object_message_literal",
+      "text": "Final decisions & Secretariat oversight",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 103,
+      "kind": "object_message_literal",
+      "text": "Applying the 1–8 scale (no grade inflation)",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 112,
+      "kind": "object_message_literal",
+      "text": "Evidence requirement",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 119,
+      "kind": "object_message_literal",
+      "text": "Managing the evaluation loop",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 132,
+      "kind": "object_message_literal",
+      "text": "Pre-Conference Support",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 142,
+      "kind": "object_message_literal",
+      "text": "Empathy",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 152,
+      "kind": "object_message_literal",
+      "text": "Collaboration with Co-Chair",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 162,
+      "kind": "object_message_literal",
+      "text": "MUN Knowledge",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 172,
+      "kind": "object_message_literal",
+      "text": "Country Stances & Topic Knowledge",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 182,
+      "kind": "object_message_literal",
+      "text": "Flexibility",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 192,
+      "kind": "object_message_literal",
+      "text": "Professionalism",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 202,
+      "kind": "object_message_literal",
+      "text": "Engagement",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 215,
+      "kind": "object_message_literal",
+      "text": "Academic Depth",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 225,
+      "kind": "object_message_literal",
+      "text": "Mandate Clarity",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 235,
+      "kind": "object_message_literal",
+      "text": "Accessibility",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 245,
+      "kind": "object_message_literal",
+      "text": "Resource Quality",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 258,
+      "kind": "object_message_literal",
+      "text": "Committee Introduction",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 268,
+      "kind": "object_message_literal",
+      "text": "Topic Introduction",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 278,
+      "kind": "object_message_literal",
+      "text": "Timeline",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 288,
+      "kind": "object_message_literal",
+      "text": "Key Stances",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 298,
+      "kind": "object_message_literal",
+      "text": "Possible Solutions",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 311,
+      "kind": "object_message_literal",
+      "text": "Debate Productivity",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 321,
+      "kind": "object_message_literal",
+      "text": "Collaborative Spirit",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 331,
+      "kind": "object_message_literal",
+      "text": "Resolution Quality",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamun-awards-rubric-guide.ts",
+      "line": 341,
+      "kind": "object_message_literal",
+      "text": "Chair–Delegate Synergy",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 116,
+      "kind": "object_message_literal",
+      "text": "Creativity",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 126,
+      "kind": "object_message_literal",
+      "text": "Diplomacy",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 136,
+      "kind": "object_message_literal",
+      "text": "Collaboration",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 146,
+      "kind": "object_message_literal",
+      "text": "Leadership",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 156,
+      "kind": "object_message_literal",
+      "text": "Knowledge and Research",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 166,
+      "kind": "object_message_literal",
+      "text": "Participation",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 179,
+      "kind": "object_message_literal",
+      "text": "Research Depth",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 189,
+      "kind": "object_message_literal",
+      "text": "Country Stance Alignment",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 199,
+      "kind": "object_message_literal",
+      "text": "Policy Accuracy",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 209,
+      "kind": "object_message_literal",
+      "text": "Proposed Solutions",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/seamuns-award-scoring.ts",
+      "line": 219,
+      "kind": "object_message_literal",
+      "text": "Formatting, Style and Citations",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/speaker-queue.ts",
+      "line": 46,
+      "kind": "object_message_literal",
+      "text": "That delegation is already on the list (waiting or current).",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+# i18n Audit Report
+
+Generated: 2026-04-26T06:47:21.350Z
+
+## Summary
+
+- Locales: 27
+- Hardcoded string findings: 649
+- Placeholder mismatches: 0
+- Locales with parity issues: 0
+
+### Hardcoded Findings by Domain
+
+- page_or_layout: 213
+- server_action: 121
+- api: 3
+- component: 189
+- library_surface: 123
+
+## Locale Parity
+
+- ar: missing=0, extra=0
+- bn: missing=0, extra=0
+- de: missing=0, extra=0
+- el: missing=0, extra=0
+- es: missing=0, extra=0
+- fa: missing=0, extra=0
+- fr: missing=0, extra=0
+- he: missing=0, extra=0
+- hi: missing=0, extra=0
+- id: missing=0, extra=0
+- it: missing=0, extra=0
+- ja: missing=0, extra=0
+- ko: missing=0, extra=0
+- mi: missing=0, extra=0
+- nl: missing=0, extra=0
+- pl: missing=0, extra=0
+- pt: missing=0, extra=0
+- pt-BR: missing=0, extra=0
+- ru: missing=0, extra=0
+- sw: missing=0, extra=0
+- th: missing=0, extra=0
+- tr: missing=0, extra=0
+- uk: missing=0, extra=0
+- vi: missing=0, extra=0
+- zh-CN: missing=0, extra=0
+- zh-TW: missing=0, extra=0
+
+## Placeholder Mismatches (Preview)
+
+- None
+
+## Hardcoded Inventory (Top 200)
+
+- app/(dashboard)/chair/allocation-matrix/ChairDelegateApprovalByEmailForm.tsx:42 [jsx_text] "Delegate email" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:170 [jsx_text] "Allocation" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:171 [jsx_text] "Flag" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:172 [jsx_text] "Email" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:173 [jsx_text] "Name" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:174 [jsx_text] "Grade" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:175 [jsx_text] "Notes" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:221 [jsx_text] "Requested allocation" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:222 [jsx_text] "Account" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-matrix/page.tsx:223 [jsx_text] "Actions" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:117 [attribute_literal] "Allocation sign-in codes" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:138 [jsx_text] "Country / allocation" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:139 [jsx_text] "Delegate (allocation)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:143 [attribute_literal] "Password / code field" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardProgressBars.tsx:51 [jsx_text] "Overall awards completion" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardProgressBars.tsx:116 [jsx_text] "Progress (required)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:237 [jsx_text] "Certificate list" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Award certificates — selected recipients" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Award" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Committee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Recipient" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Notes" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:257 [jsx_text] "Overall" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:258 [jsx_text] "Chair / collective" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:260 [jsx_text] "Committee-level" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:278 [jsx_text] "Add or edit entry" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:283 [jsx_text] "Award" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:303 [jsx_text] "Committee session" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:313 [jsx_text] "Select committee…" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:348 [attribute_literal] "Band initials" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:364 [jsx_text] "Recipient (delegate / chair)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:373 [jsx_text] "— Not set —" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:385 [jsx_text] "Winning committee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:394 [jsx_text] "— Not set —" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:406 [jsx_text] "Slot (1 or 2)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:422 [jsx_text] "Notes (statement of confirmation, evidence)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:429 [attribute_literal] "Optional internal notes for SMT review…" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:456 [jsx_text] "Current list" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:459 [jsx_text] "Certificate printing" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:491 [jsx_text] "Certificate" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:494 [jsx_text] "Award" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:495 [jsx_text] "Committee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:496 [jsx_text] "Recipient" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:497 [jsx_text] "Rubric" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:498 [jsx_text] "Notes" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:71 [jsx_text] "= 1 && v" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:78 [jsx_text] ", keys: string[]): Record" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:82 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:223 [attribute_literal] "Expand to edit nomination" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:247 [jsx_text] "(optional)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:263 [attribute_literal] "Minimize; show summary only" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:265 [jsx_text] "Minimize" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:279 [jsx_text] "Nominee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:321 [jsx_text] "Statement of confirmation / evidence" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:328 [attribute_literal] "Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions)." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairSubmitToSmtPanel.tsx:61 [jsx_text] "Submit to SMT" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/ChairSubmitToSmtPanel.tsx:63 [jsx_text] "draft" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/DelegateMatrixPanel.tsx:62 [jsx_text] "every seated delegate" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:56 [object_message_literal] "${d.country} — ${name}" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:177 [object_message_literal] "${delegateByUserId[uid]?.country ??" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:213 [object_message_literal] "Best Delegate (committee)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:215 [object_message_literal] "Best Delegate nominee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:216 [object_message_literal] "Best Delegate backup" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:223 [object_message_literal] "Honourable Mention (committee)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:226 [object_message_literal] "Honourable Mention #1" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:227 [object_message_literal] "Honourable Mention #2" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:228 [object_message_literal] "Honourable Mention backup" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:231 [object_message_literal] "Honourable Mention #1" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:232 [object_message_literal] "Honourable Mention #2 (optional)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:241 [object_message_literal] "Best Position Paper (committee)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:243 [object_message_literal] "Best Position Paper nominee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:244 [object_message_literal] "Best Position Paper backup" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:251 [object_message_literal] "Best Delegate (overall conference)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:252 [object_message_literal] "Overall Best Delegate nominee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:304 [jsx_text] "Beginning" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:305 [jsx_text] "Developing" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:306 [jsx_text] "Proficient" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:307 [jsx_text] "Exemplary" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:316 [jsx_text] "Select a nominee for each required Top slot." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:317 [jsx_text] "Pick exactly one band for every criterion row." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:318 [jsx_text] "Add concise evidence from debate, drafting, and diplomacy." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:319 [jsx_text] "Save required slots and add optional slots where applicable." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:320 [jsx_text] "When ready, submit the full batch to SMT." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/awards/page.tsx:345 [jsx_text] "Committee ranking (matrix totals)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:57 [object_message_literal] "Prep checklist" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:58 [object_message_literal] "Flow checklist" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:59 [object_message_literal] "Delegates" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:60 [object_message_literal] "Digital Room" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:61 [object_message_literal] "Roll call" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:62 [object_message_literal] "Session" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:63 [object_message_literal] "Speakers" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:64 [object_message_literal] "Formal motions" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:65 [object_message_literal] "Timer" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:66 [object_message_literal] "Announcements" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:67 [object_message_literal] "Motions & Points" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:68 [object_message_literal] "Voting" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:69 [object_message_literal] "Score" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:72 [object_message_literal] "Crisis" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:73 [object_message_literal] "Crisis slides" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:76 [object_message_literal] "Archive" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:77 [object_message_literal] "Official UN links" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:78 [object_message_literal] "Room code" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/page.tsx:79 [object_message_literal] "Committee room (full)" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/room-code/page.tsx:61 [jsx_text] "committee code" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/room-code/page.tsx:76 [jsx_text] "After saving, you can enter that committee or share the code on the dais." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1613 [object_message_literal] "Advanced speaker and reset per-speaker clock." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1646 [object_message_literal] "Speech note saved." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1657 [object_message_literal] "Speech note deleted." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1683 [object_message_literal] "Announcement posted." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1699 [object_message_literal] "Pinned for the committee floor." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1705 [object_message_literal] "Unpinned." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1743 [object_message_literal] "Announcement updated." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1761 [object_message_literal] "Announcement deleted." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1790 [object_message_literal] "Added ${newRows.length} roll call row(s)." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1873 [object_message_literal] "Motion created and opened." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1927 [object_message_literal] "Motion updated." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1947 [object_message_literal] "Motion closed." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2065 [object_message_literal] "Motion reopened." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2108 [object_message_literal] "Motion floor open — record each stated motion below." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2128 [object_message_literal] "Motion floor closed for statements." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2171 [object_message_literal] "Stated motion recorded (not yet open for voting)." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2267 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2351 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2483 [object_message_literal] "Stated motion removed." -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:160 [attribute_literal] "In committee" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:209 [attribute_literal] "Country" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:210 [attribute_literal] "Name" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:211 [attribute_literal] "School" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:212 [attribute_literal] "Pronouns" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:226 [attribute_literal] "Account name" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:228 [attribute_literal] "Role" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:230 [attribute_literal] "Pronouns" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:233 [attribute_literal] "School" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:243 [jsx_text] "Dais" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:245 [attribute_literal] "Role" -> suggested prefix: `pageTitles`
+- app/(dashboard)/committee-room/person/[profileId]/page.tsx:246 [attribute_literal] "Name" -> suggested prefix: `pageTitles`
+- app/(dashboard)/crisis-slides/page.tsx:51 [jsx_text] "No slides linked yet" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:187 [jsx_text] "What would you like to start with?" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:190 [object_message_literal] "Documents" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:191 [object_message_literal] "Notes" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:192 [object_message_literal] "Committee room" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:193 [object_message_literal] "Running Notes" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:194 [object_message_literal] "Ideas" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:195 [object_message_literal] "Guides" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:196 [object_message_literal] "Sources" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:197 [object_message_literal] "Resolutions" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:198 [object_message_literal] "Speeches" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:199 [object_message_literal] "Stances" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:202 [object_message_literal] "Crisis slides" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:203 [object_message_literal] "Report" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:206 [object_message_literal] "Motions" -> suggested prefix: `pageTitles`
+- app/(dashboard)/profile/page.tsx:207 [object_message_literal] "Points" -> suggested prefix: `pageTitles`
+- app/actions/activeDebateTopic.ts:11 [object_message_literal] "Choose a topic." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:17 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:27 [object_message_literal] "Only chairs can change the live debate topic." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:31 [object_message_literal] "No active committee." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/activeDebateTopic.ts:35 [object_message_literal] "That topic is not part of this committee." -> suggested prefix: `serverActions.activeDebateTopic`
+- app/actions/adminUsers.ts:40 [object_message_literal] "Enter a valid email address." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:45 [object_message_literal] "Only website admins can invite SMT members." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:83 [object_message_literal] "Invite sent, but could not set SMT role: ${profileErr.message}. Use “Set role” after they accept." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:102 [object_message_literal] "Enter a valid email address." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:105 [object_message_literal] "Choose delegate, chair, or SMT." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:110 [object_message_literal] "Only website admins can change user roles." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:121 [object_message_literal] "No account with that email yet. Send an invite first." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/adminUsers.ts:124 [object_message_literal] "You cannot change your own role from here." -> suggested prefix: `serverActions.adminUsers`
+- app/actions/allocationCodeGate.ts:23 [object_message_literal] "Missing committee context." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:31 [object_message_literal] "You must be signed in." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:42 [object_message_literal] "Only delegates and chairs use this step." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:57 [object_message_literal] "Your conference selection does not match this committee. Re-enter your codes if needed." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:66 [object_message_literal] "Your conference selection does not match this committee. Start from the event gate again." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:95 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:102 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:112 [object_message_literal] "Only chairs, SMT, and admins can change this." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodeGate.ts:123 [object_message_literal] "You do not have a seat on this committee." -> suggested prefix: `serverActions.allocationCodeGate`
+- app/actions/allocationCodes.ts:39 [object_message_literal] "You can only manage codes for your committee." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:47 [object_message_literal] "Only chairs, SMT, and website admins can update allocation codes." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:59 [object_message_literal] "Allocation not found." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/allocationCodes.ts:89 [object_message_literal] "Only chairs, SMT, and website admins can generate codes." -> suggested prefix: `serverActions.allocationCodes`
+- app/actions/award-participation.ts:19 [jsx_text] "= 1 && n" -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:34 [object_message_literal] "Sign in required." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:38 [object_message_literal] "Invalid scope." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:42 [object_message_literal] "Missing committee." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:52 [object_message_literal] "Missing subject profile." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:58 [object_message_literal] "Pick a band and low/high for every criterion." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:61 [object_message_literal] "Every criterion must be scored 1–8." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:69 [object_message_literal] "Add a brief evidence statement (${DELEGATE_CHAIR_EVIDENCE_MIN_LEN}+ characters): concrete observations from committee session(s)." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:78 [object_message_literal] "Only chairs can save delegate evaluations." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:80 [object_message_literal] "Only delegates can submit chair feedback." -> suggested prefix: `serverActions.award-participation`
+- app/actions/award-participation.ts:82 [object_message_literal] "Only SMT can save chair / chair report evaluations." -> suggested prefix: `serverActions.award-participation`
+- app/actions/awards.ts:32 [jsx_text] "= 1 && direct" -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:60 [jsx_text] "= 1 && direct" -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:116 [object_message_literal] "Only chairs, SMT, and website admins can edit awards." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:128 [object_message_literal] "Invalid award category." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:134 [object_message_literal] "Select a committee for this award." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:194 [object_message_literal] "Only chairs, SMT, and website admins can delete awards." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:266 [object_message_literal] "You must be signed in as a chair, SMT member, or admin." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:280 [object_message_literal] "Only committee chairs (or admins) can submit nominations to SMT." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:290 [object_message_literal] "You must be allocated as chair for this committee to submit." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:311 [object_message_literal] "These nominations were already sent to SMT." -> suggested prefix: `serverActions.awards`
+- app/actions/awards.ts:314 [object_message_literal] "Nothing to submit yet. Save your required slots first." -> suggested prefix: `serverActions.awards`
+
+Full machine-readable inventory is available at `reports/i18n/i18n-audit.json`.

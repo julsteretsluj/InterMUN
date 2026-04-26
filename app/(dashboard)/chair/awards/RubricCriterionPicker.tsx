@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
-  PROFICIENCY_BAND_LABEL,
   PROFICIENCY_BAND_ORDER,
   bandAndTierToScore,
   bandScoreRange,
@@ -20,6 +20,7 @@ type Props = {
 };
 
 export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, disabled = false }: Props) {
+  const t = useTranslations("awardsRubric");
   const init = scoreToBandAndTier(initialScore);
   const [band, setBand] = useState<ProficiencyBandId | null>(init?.band ?? null);
   const [tier, setTier] = useState<BandTier | null>(init?.tier ?? null);
@@ -55,8 +56,8 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
     <fieldset
       className={`rounded-lg border border-white/10 bg-black/20 p-2 space-y-2 ${disabled ? "opacity-65 pointer-events-none" : ""}`}
     >
-      <legend className="sr-only">{criterion.label}</legend>
-      <p className="px-1 pt-0.5 text-sm font-semibold text-brand-navy">{criterion.label}</p>
+      <legend className="sr-only">{t(`criteria.${criterion.key}.label`)}</legend>
+      <p className="px-1 pt-0.5 text-sm font-semibold text-brand-navy">{t(`criteria.${criterion.key}.label`)}</p>
       <input type="hidden" name={`score_${criterion.key}`} value={score ?? ""} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4 xl:auto-rows-fr">
         {PROFICIENCY_BAND_ORDER.map((bandId, i) => {
@@ -83,9 +84,9 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
                 aria-hidden
               />
               <span className="min-w-0 text-xs leading-snug">
-                <span className="font-semibold text-brand-navy">{PROFICIENCY_BAND_LABEL[bandId]}</span>
+                <span className="font-semibold text-brand-navy">{t(`bandHeaders.${i}`)}</span>
                 <span className="mt-0.5 block whitespace-normal break-words text-brand-navy/80">
-                  {criterion.bandDescriptions[i]}
+                  {t(`criteria.${criterion.key}.bands.${i}`)}
                 </span>
               </span>
             </button>
@@ -96,19 +97,25 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
         <div className="rounded-lg border border-brand-accent/30 bg-black/15 p-2 space-y-2">
           <p className="text-xs font-medium text-brand-navy" id={`tier-prompt-${criterion.key}`}>
             {tier
-              ? `Locked in: ${PROFICIENCY_BAND_LABEL[band]} — ${tier === "low" ? "Low" : "High"} (${score})`
-              : `Pick low or high within ${PROFICIENCY_BAND_LABEL[band]} (points on the 1–8 scale).`}
+              ? t("tierPromptLocked", {
+                  band: t(`bandHeaders.${PROFICIENCY_BAND_ORDER.indexOf(band)}`),
+                  tier: t(tier === "low" ? "tierLow" : "tierHigh"),
+                  score: score ?? "",
+                })
+              : t("tierPromptPick", {
+                  band: t(`bandHeaders.${PROFICIENCY_BAND_ORDER.indexOf(band)}`),
+                })}
           </p>
           <div className="flex flex-wrap gap-2">
-            {(["low", "high"] as const).map((t) => {
+            {(["low", "high"] as const).map((tierId) => {
               const { low, high } = bandScoreRange(band);
-              const pts = t === "low" ? low : high;
-              const active = tier === t;
+              const pts = tierId === "low" ? low : high;
+              const active = tier === tierId;
               return (
                 <button
-                  key={t}
+                  key={tierId}
                   type="button"
-                  onClick={() => selectTier(t)}
+                  onClick={() => selectTier(tierId)}
                   aria-pressed={active}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${
                     active
@@ -116,7 +123,7 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
                       : "bg-white/10 text-brand-navy border-white/20 hover:border-brand-accent/50"
                   }`}
                 >
-                  {t === "low" ? "Low" : "High"} ({pts})
+                  {t(tierId === "low" ? "tierLow" : "tierHigh")} ({pts})
                 </button>
               );
             })}

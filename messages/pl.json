@@ -1782,5 +1782,308 @@
     "parsedRowsSample": "Przeanalizowano {count} wierszy. Próbka:",
     "runImport": "Uruchom import",
     "generateMissingRandomCodes": "Wygeneruj brakujące kody losowe"
+  },
+  "awardsRubric": {
+    "criteriaHeader": "Kryteria",
+    "bandHeaders": {
+      "0": "Początek",
+      "1": "Rozwój",
+      "2": "Biegły",
+      "3": "Przykładowy"
+    },
+    "tierLow": "Niski",
+    "tierHigh": "Wysoki",
+    "tierPromptLocked": "Zablokowani: {band} - {tier} ({score})",
+    "tierPromptPick": "Wybierz niski lub wysoki poziom w zakresie {band} (punkty w skali 1-8).",
+    "criteria": {
+      "creativity": {
+        "label": "Kreatywność",
+        "bands": {
+          "0": "Proponuje rozwiązania powtarzalne lub standardowe; rzadko myśli poza istniejącymi ramami.",
+          "1": "Oferuje kilka oryginalnych pomysłów, ale ma trudności z dostosowaniem ich do zmieniającej się dynamiki prac komisji.",
+          "2": "Często proponuje nowatorskie rozwiązania i unikalne klauzule do projektów uchwał.",
+          "3": "Wysoce kreatywny; opracowuje kompromisy „zmieniające zasady gry”, które łączą zderzające się bloki."
+        }
+      },
+      "diplomacy": {
+        "label": "Dyplomacja",
+        "bands": {
+          "0": "Brakuje mu profesjonalnego przyzwoitości; czasami lekceważąc punkt widzenia innych delegatów.",
+          "1": "Pełny szacunku, ale niczym niezwykłym; utrzymuje neutralną obecność bez budowania relacji.",
+          "2": "Niezmiennie profesjonalny; aktywnie stara się zrozumieć i uwzględnić przeciwstawne poglądy.",
+          "3": "Jest przykładem prawdziwego męża stanu; budzi szacunek, pozostając jednocześnie pokornym i włączającym."
+        }
+      },
+      "collaboration": {
+        "label": "Współpraca",
+        "bands": {
+          "0": "Działa w izolacji lub nie uznaje kompromisów w sprawie drobnych szczegółów; zakłóca pracę w grupie.",
+          "1": "Wnosi wkład w blok, ale nie odgrywa aktywnej roli w opracowywaniu lub łączeniu pomysłów.",
+          "2": "Silny gracz zespołowy; pomaga łączyć uchwały i zapewnia głos wszystkim członkom bloku.",
+          "3": "„Klej” komisji łączy odmienne grupy i ułatwia osiągnięcie konsensusu."
+        }
+      },
+      "leadership": {
+        "label": "Przywództwo",
+        "bands": {
+          "0": "Pasywny; czeka, aż inni zainicjują wnioski lub rozpoczną dyskusję w trakcie klubów.",
+          "1": "Wykazuje przywództwo w małych grupach, ale waha się przed przewodzeniem izbie lub prezentowaniem bloku.",
+          "2": "Podejmuje wyraźną inicjatywę; prowadzi niemoderowane kluby i zarządza procesem tworzenia projektów.",
+          "3": "Lider-wizjoner; nadaje ton pomieszczeniu i inspiruje innych poprzez działanie i wskazówki."
+        }
+      },
+      "knowledge_research": {
+        "label": "Wiedza i badania",
+        "bands": {
+          "0": "Często mylony z tematem; opiera się na ogólnikach, a nie na konkretnych faktach.",
+          "1": "Ma podstawową wiedzę na temat programu obrad, ale pomija niuanse techniczne i prawne.",
+          "2": "Wykazuje dobrą znajomość tematu; przytacza odpowiednie statystyki i przeszłe działania ONZ.",
+          "3": "Mistrzostwo na poziomie eksperckim; wykorzystuje dogłębne badania, aby poruszać się po debatach technicznych i obalać fałszywe informacje."
+        }
+      },
+      "participation": {
+        "label": "Udział",
+        "bands": {
+          "0": "Rzadko mówi; często nieobecni podczas obrad lub nieaktywni podczas głosowania.",
+          "1": "Od czasu do czasu przemawia w moderowanych klubach; uczestniczy tylko wtedy, gdy zostanie o to poproszony.",
+          "2": "Konsekwentnie aktywny we wszystkich sesjach; często podnosi ruchy i przyczynia się do podłogi.",
+          "3": "Niezbędna i konsekwentna obecność; angażuje się w każdy aspekt debaty od początku do końca."
+        }
+      },
+      "research_depth": {
+        "label": "Głębokość badań",
+        "bands": {
+          "0": "Minimalne dane; brakuje w nim konkretnych rezolucji ONZ, cytatów z traktatów ani kontekstu historycznego.",
+          "1": "Podane podstawowe dane; wspomina o dobrze znanych traktatach, ale brakuje mu konkretnych, zlokalizowanych dowodów.",
+          "2": "Silne badania; obejmuje odpowiednie statystyki, przeszłe działania ONZ i historię dotyczącą poszczególnych komisji.",
+          "3": "Wyjątkowa głębia; identyfikuje niszowe luki prawne, konkretne luki w finansowaniu lub rzadkie punkty danych."
+        }
+      },
+      "country_stance_alignment": {
+        "label": "Ujednolicenie stanowiska kraju",
+        "bands": {
+          "0": "Często stoi w sprzeczności z rzeczywistymi interesami geopolitycznymi lub historią głosowania przypisanego kraju.",
+          "1": "Generalnie podąża za polityką, ale brakuje mu jasności w kwestii drażliwych lub kontrowersyjnych stanowisk narodowych.",
+          "2": "Konsekwentnie dokładne; wyraźnie odzwierciedla strategiczne interesy regionalne i globalne kraju.",
+          "3": "Bardzo dopracowany; uwzględnia złożoną dynamikę regionalną i jasno definiuje krajowe „czerwone linie”."
+        }
+      },
+      "policy_accuracy": {
+        "label": "Dokładność polityki",
+        "bands": {
+          "0": "Fundamentalne niezrozumienie ram prawnych tematu lub mandatu komisji.",
+          "1": "Rozumie ogólny temat, ale pomija zawiłości techniczne i prawne w ramach bieżącej polityki.",
+          "2": "Solidne zrozumienie złożonych kwestii politycznych (np. konkretnych klauzul prawa międzynarodowego).",
+          "3": "Dokładność na poziomie eksperckim; integruje fakty techniczne, aby zbudować wyrafinowany argument polityczny."
+        }
+      },
+      "proposed_solutions": {
+        "label": "Proponowane rozwiązania",
+        "bands": {
+          "0": "Niejasne lub niepodlegające zaskarżeniu (np. „kraje powinny więcej rozmawiać”). Brak planu wdrożenia.",
+          "1": "Rozwiązania ogólne; brakuje szczegółów na temat finansowania, konkretnych agencji ONZ lub wykonalności.",
+          "2": "Innowacyjny i praktyczny; proponuje konkretne mechanizmy, grupy zadaniowe lub organy monitorujące.",
+          "3": "Wyrafinowane i całościowe; rozwiązania są oryginalne, wykonalne i uzasadnione prawnie oraz mają jasne ramy czasowe."
+        }
+      },
+      "formatting_style_citations": {
+        "label": "Formatowanie, styl i cytaty",
+        "bands": {
+          "0": "Znaczące błędy w stylu cytowania ONZ (np. Chicago/APA); nieprofesjonalny ton.",
+          "1": "Formatowanie standardowe, ale zawiera kilka luk gramatycznych lub niespójnych stylów cytowania.",
+          "2": "Profesjonalne formatowanie akademickie ONZ; jasny, zwięzły i przekonujący język dyplomatyczny.",
+          "3": "Nieskazitelny styl akademicki ONZ; przekonująca narracja i doskonałe cytowanie wszystkich źródeł."
+        }
+      },
+      "pre_conference_support": {
+        "label": "Wsparcie przedkonferencyjne",
+        "bands": {
+          "0": "Podręcznik do nauki był spóźniony lub niekompletny; minimalna komunikacja z SMT/USG.",
+          "1": "Przewodnik po badaniu spełniał podstawowe wymagania, ale brakowało mu dogłębnej analizy i jasnego formatowania.",
+          "2": "Kompleksowy przewodnik po studiach; proaktywnie odpowiadając na e-maile delegatów i przygotowując się.",
+          "3": "Wyjątkowy przewodnik po nauce; zapewniła dodatkowe zasoby i wczesną informację zwrotną na temat stanowisk."
+        }
+      },
+      "empathy": {
+        "label": "Empatia",
+        "bands": {
+          "0": "Lekceważenie obaw delegatów; nie zauważa, kiedy delegat ma trudności lub jest wykluczony.",
+          "1": "Profesjonalny, ale kliniczny; zapewnia wsparcie tylko wtedy, gdy zostanie o to wyraźnie poproszony przez delegata.",
+          "2": "Aktywnie sprawdza cichych delegatów; tworzy bezpieczną przestrzeń do uczestnictwa dla początkujących.",
+          "3": "Wysoka inteligencja emocjonalna; przewiduje stres delegata, ostrożnie zarządza ostrymi konfliktami i dba o to, aby każdy głos był ceniony."
+        }
+      },
+      "collaboration_co_chair": {
+        "label": "Współpraca ze współprzewodniczącym",
+        "bands": {
+          "0": "Dominuje jedno krzesło; brak komunikacji skutkuje niespójnymi orzeczeniami.",
+          "1": "Praca jest podzielona, ​​ale krzesła działają w silosach; minimalne konsultacje w sprawie decyzji o udzieleniu zamówienia.",
+          "2": "Zrównoważone partnerstwo; jasna komunikacja i wzajemne wsparcie podczas sesji.",
+          "3": "Bezproblemowa synergia; krzesła antycypują wzajemne potrzeby i zapewniają jednolity, profesjonalny front."
+        }
+      },
+      "mun_knowledge": {
+        "label": "Wiedza MUN",
+        "bands": {
+          "0": "Częste błędy w Regulaminie (ROP); w dużym stopniu polega na pomocy Sekretariatu.",
+          "1": "Podstawowa wiedza o RoP; może prowadzić standardowy moderowany klub, ale pomija niuanse wniosków.",
+          "2": "Silne dowodzenie RoP; zarządza podłogą skutecznie i uczciwie, przy minimalnych błędach.",
+          "3": "Absolutne mistrzostwo; wykorzystuje RoP do usprawnienia przebiegu debaty i z łatwością radzi sobie ze złożonymi sytuacjami proceduralnymi."
+        }
+      },
+      "country_stances_topic": {
+        "label": "Postawy krajowe i wiedza tematyczna",
+        "bands": {
+          "0": "Nie można określić, czy delegat mówi „w nietypowy sposób”; ignoruje dokładność polityki.",
+          "1": "Ogólnie rzecz biorąc, świadomy stanowisk głównych sił, ale pomija zmiany w polityce mniejszych delegacji.",
+          "2": "Aktywnie monitoruje dokładność polityki; jeśli to konieczne, prowadzi delegatów z powrotem do postaci.",
+          "3": "Głęboko zbadane we wszystkich przydziałach; zapewnia precyzyjne informacje zwrotne na temat niuansów geopolitycznych podczas debaty."
+        }
+      },
+      "flexibility": {
+        "label": "Elastyczność",
+        "bands": {
+          "0": "sztywne trzymanie się harmonogramu nawet w przypadku zastoju w debacie; odporny na sprzężenie zwrotne SMT.",
+          "1": "Dostosowuje się tylko na żądanie Sekretariatu; zmaga się z nagłymi zmianami dynamiki bloku.",
+          "2": "Dobrze reaguje na zmiany w komisji; dostosowuje godziny wystąpień lub wnioski, aby korzystnie wpłynąć na przebieg debaty.",
+          "3": "Wysoce adaptacyjny; płynnie obraca się podczas kryzysów lub nieoczekiwanych zwrotów w debatach, zachowując porządek."
+        }
+      },
+      "professionalism": {
+        "label": "Profesjonalizm",
+        "bands": {
+          "0": "Nieprofesjonalny strój lub ton wskazuje na wyraźną uprzedzenia wobec określonych delegatów lub szkół.",
+          "1": "Profesjonalny, ale brakuje mu autorytetu; sporadyczne uchybienia w stosunkach dyplomatycznych.",
+          "2": "Niezmiennie profesjonalny; zachowuje bezstronność i wzbudza szacunek w domu.",
+          "3": "Jest przykładem standardu Sekretariatu; nieskazitelną przyzwoitość, bezstronność i służy jako wzór do naśladowania."
+        }
+      },
+      "engagement": {
+        "label": "Zaręczyny",
+        "bands": {
+          "0": "Wydaje się znudzony lub rozproszony; minimalne informacje zwrotne przekazywane delegatom podczas spotkań.",
+          "1": "Uważny, ale pasywny; nie zachęca aktywnie do udziału cichszych delegatów.",
+          "2": "Wysoka energia; zapewnia konstruktywną informację zwrotną i utrzymuje motywację komisji przez cały czas.",
+          "3": "Inspirująca obecność; aktywnie doradza delegatom, sprzyja włączającemu środowisku i napędza debatę na wysokim szczeblu."
+        }
+      },
+      "academic_depth": {
+        "label": "Głębia akademicka",
+        "bands": {
+          "0": "Podsumowanie na poziomie powierzchni; brakuje kontekstu lub danych historycznych.",
+          "1": "Dobry przegląd, ale pomija złożone niuanse prawne i techniczne.",
+          "2": "Silna analiza; obejmuje konkretne działania z przeszłości i dane regionalne.",
+          "3": "Stypendium na poziomie eksperckim; identyfikuje unikalne punkty widzenia na debatę."
+        }
+      },
+      "mandate_clarity": {
+        "label": "Jasność mandatu",
+        "bands": {
+          "0": "Niejasne „Pytania do rozważenia”; niejasne uprawnienia komisji.",
+          "1": "Standardowe pytania; ogólne wytyczne dotyczące zakresu debaty.",
+          "2": "Jasne, konkretne pytania, które prowadzą delegatów do konkretnych rozwiązań.",
+          "3": "Precyzyjnie zaprojektowane podpowiedzi, które zapobiegają stagnacji lub debacie nie na temat."
+        }
+      },
+      "accessibility": {
+        "label": "Dostępność",
+        "bands": {
+          "0": "Zbyt gęste lub zdezorganizowane; początkującym jest trudny w nawigacji.",
+          "1": "Czysty układ, ale brakuje w nim pomocy wizualnych i glosariusza terminów.",
+          "2": "Dobrze zorganizowany; zawiera przydatne linki, mapy i przejrzysty słownik.",
+          "3": "Mistrzowsko zaprojektowane; równoważy środowisko akademickie wysokiego szczebla z intuicyjną nawigacją."
+        }
+      },
+      "resource_quality": {
+        "label": "Jakość zasobów",
+        "bands": {
+          "0": "Niewiele lub nieaktualne linki do badań delegatów.",
+          "1": "Podane standardowe linki ONZ; obejmuje podstawy dla większości krajów.",
+          "2": "Różnorodna i starannie dobrana bibliografia, w tym organizacje pozarządowe, traktaty i zbiory danych.",
+          "3": "Kompleksowy zestaw narzędzi; zapewnia delegatom „ukryte” dane i niszowe źródła."
+        }
+      },
+      "committee_introduction": {
+        "label": "Wprowadzenie Komitetu",
+        "bands": {
+          "0": "Zawiera jedynie ogólną definicję nazwy komitetu.",
+          "1": "Wymienia mandat, ale nie wyjaśnia konkretnych uprawnień ani ograniczeń komisji.",
+          "2": "Jasno przedstawia historię komitetu, zakres władzy i rolę w systemie ONZ.",
+          "3": "Mistrzowsko łączy specyficzne „zęby” prawne komisji z bieżącymi punktami porządku obrad."
+        }
+      },
+      "topic_introduction": {
+        "label": "Wprowadzenie do tematu",
+        "bands": {
+          "0": "Niejasne lub zbyt szerokie; nie definiuje zasadniczego problemu.",
+          "1": "Zawiera ogólne podsumowanie, ale brakuje w nim aktualnych danych i najnowszych osiągnięć.",
+          "2": "Kompleksowy przegląd; określa terminy techniczne i aktualny, globalny status zagadnienia.",
+          "3": "Przekonująca narracja, która identyfikuje konkretne „martwe punkty” w polityce międzynarodowej."
+        }
+      },
+      "timeline": {
+        "label": "Oś czasu",
+        "bands": {
+          "0": "Brak ważnych historycznych kamieni milowych lub traktatów.",
+          "1": "Podaje podstawowe daty, ale nie wyjaśnia znaczenia przeszłych działań.",
+          "2": "Dokładny przepływ chronologiczny; wyjaśnia, w jaki sposób poprzednie uchwały doprowadziły do ​​obecnej sytuacji.",
+          "3": "Strategiczna oś czasu przedstawiająca nieudane i udane interwencje, która będzie wyznaczać kierunek przyszłej debaty."
+        }
+      },
+      "key_stances": {
+        "label": "Kluczowe postawy",
+        "bands": {
+          "0": "Wspomina tylko narody P5; ignoruje bloki regionalne lub mniejszych interesariuszy.",
+          "1": "Grupuje kraje szeroko (np. „Zachód”) bez niuansowych różnic w polityce.",
+          "2": "Wyszczególnia szczegółowe priorytety głównych grup interesu i kluczowych graczy regionalnych.",
+          "3": "Wyrafinowana analiza ścierających się „czerwonych linii” i potencjalnych spoilerów w procesie negocjacji."
+        }
+      },
+      "possible_solutions": {
+        "label": "Możliwe rozwiązania",
+        "bands": {
+          "0": "Ogólne lub powtarzalne (np. „więcej środków”, „świadomość”).",
+          "1": "Sugeruje logiczne kroki, ale brakuje w nim szczegółów dotyczących wdrożenia i nadzoru.",
+          "2": "proponuje innowacyjne, wielowymiarowe ramy dostosowane do mandatu komisji.",
+          "3": "Rozwiązania wysokiego poziomu w zakresie „celowej polityki”, które zajmują się pierwotnymi przyczynami i wykonalnością techniczną."
+        }
+      },
+      "debate_productivity": {
+        "label": "Debata na temat produktywności",
+        "bands": {
+          "0": "Częste przerwy w debacie; argumenty okrężne bez postępu.",
+          "1": "Ciągła debata, ale z wysiłkiem wychodzi poza ogólniki „Tematu A”.",
+          "2": "Dyskurs na wysokim szczeblu; delegaci szybko przechodzą do rozwiązań merytorycznych.",
+          "3": "Dynamiczna i rozwijająca się debata; dom pozostaje zaangażowany i bystry intelektualnie."
+        }
+      },
+      "collaborative_spirit": {
+        "label": "Duch współpracy",
+        "bands": {
+          "0": "Wysoce toksyczny lub klikowy; mniejsze bloki nie chcą ze sobą rozmawiać.",
+          "1": "Standardowe zachowanie dyplomatyczne; podstawowa współpraca podczas caucusingu.",
+          "2": "Włączająca atmosfera; większe bloki aktywnie poszukują wkładu mniejszych narodów.",
+          "3": "Wzorowa dyplomacja; wysokie dostosowanie „celowej polityki” i budowanie konsensusu."
+        }
+      },
+      "resolution_quality": {
+        "label": "Jakość rozdzielczości",
+        "bands": {
+          "0": "Płytkie uchwały; „niejasną zachętę” zamiast działania.",
+          "1": "Klauzule standardowe; leczy objawy, ale nie przyczyny.",
+          "2": "Uchwały prawidłowe pod względem technicznym z jasnymi mechanizmami finansowania i nadzoru.",
+          "3": "Wyrafinowane, innowacyjne i przydatne dokumenty, które odzwierciedlają rzeczywiste standardy ONZ."
+        }
+      },
+      "chair_delegate_synergy": {
+        "label": "Synergia przewodniczącego i delegata",
+        "bands": {
+          "0": "Krzesła mają trudności z zarządzaniem pomieszczeniem; niski szacunek dla podium.",
+          "1": "Związek funkcjonalny; krzesła podążają za harmonogramem, ale nie prowadzą.",
+          "2": "Pozytywna energia; przewodniczy delegatom mentorskim, zachowując porządek.",
+          "3": "Bezproblemowa synergia; podium inspiruje profesjonalne środowisko, w którym stawka jest wysoka."
+        }
+      }
+    }
   }
 }

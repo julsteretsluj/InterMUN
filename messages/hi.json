@@ -1782,5 +1782,308 @@
     "parsedRowsSample": "Parsed {count} row(s). Sample:",
     "runImport": "आयात चलाएँ",
     "generateMissingRandomCodes": "गुम यादृच्छिक कोड उत्पन्न करें"
+  },
+  "awardsRubric": {
+    "criteriaHeader": "मानदंड",
+    "bandHeaders": {
+      "0": "शुरुआत",
+      "1": "विकासशील",
+      "2": "प्रवीण",
+      "3": "अनुकरणीय"
+    },
+    "tierLow": "कम",
+    "tierHigh": "उच्च",
+    "tierPromptLocked": "Locked in: {band} - {tier} ({score})",
+    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "criteria": {
+      "creativity": {
+        "label": "रचनात्मकता",
+        "bands": {
+          "0": "Proposes repetitive or standard solutions; rarely thinks outside the existing framework.",
+          "1": "Offers some original ideas but struggles to adapt them to changing committee dynamics.",
+          "2": "Frequently suggests innovative solutions and unique clauses for draft resolutions.",
+          "3": "Highly creative; develops \"game-changing\" compromises that bridge clashing blocs."
+        }
+      },
+      "diplomacy": {
+        "label": "कूटनीति",
+        "bands": {
+          "0": "Lacks professional decorum; occasionally dismissive of other delegates' viewpoints.",
+          "1": "Respectful but unremarkable; maintains a neutral presence without building rapport.",
+          "2": "Consistently professional; actively seeks to understand and incorporate opposing views.",
+          "3": "Exemplifies true statesmanship; commands respect while remaining humble and inclusive."
+        }
+      },
+      "collaboration": {
+        "label": "सहयोग",
+        "bands": {
+          "0": "Works in isolation or refuses to compromise on minor details; disrupts group work.",
+          "1": "Contributes to a bloc but does not take an active role in drafting or merging ideas.",
+          "2": "A strong team player; helps merge resolutions and ensures all bloc members have a voice.",
+          "3": "The \"glue\" of the committee brings disparate groups together and facilitates consensus."
+        }
+      },
+      "leadership": {
+        "label": "नेतृत्व",
+        "bands": {
+          "0": "Passive; waits for others to initiate motions or start discussions during caucuses.",
+          "1": "Shows leadership in small groups but is hesitant to lead the house or present for the bloc.",
+          "2": "Takes clear initiative; leads unmoderated caucuses and manages the drafting process.",
+          "3": "Visionary leader; sets the tone for the room and inspires others through action and guidance."
+        }
+      },
+      "knowledge_research": {
+        "label": "ज्ञान और अनुसंधान",
+        "bands": {
+          "0": "Frequently confused by the topic; relies on generalities rather than specific facts.",
+          "1": "Has a basic understanding of the agenda but misses technical or legal nuances.",
+          "2": "Demonstrates strong command of the topic; cites relevant stats and UN past actions.",
+          "3": "Expert-level mastery; uses deep research to navigate technical debates and debunk false info."
+        }
+      },
+      "participation": {
+        "label": "भाग लेना",
+        "bands": {
+          "0": "Rarely speaks; frequently absent during caucusing or inactive during voting.",
+          "1": "Speaks occasionally in moderated caucuses; participates only when prompted.",
+          "2": "Consistently active in all sessions; frequently raises motions and contributes to the floor.",
+          "3": "Necessary and consistent presence; engages in every aspect of the debate from start to finish."
+        }
+      },
+      "research_depth": {
+        "label": "अनुसंधान गहराई",
+        "bands": {
+          "0": "Minimal data; lacks specific UN resolutions, treaty citations, or historical context.",
+          "1": "Basic data provided; mentions well-known treaties but lacks specific localised evidence.",
+          "2": "Strong research; includes relevant stats, past UN actions, and committee-specific history.",
+          "3": "Exceptional depth; identifies niche legal loopholes, specific funding gaps, or rare data points."
+        }
+      },
+      "country_stance_alignment": {
+        "label": "देश रुख संरेखण",
+        "bands": {
+          "0": "Frequently contradicts the assigned country's real-world geopolitical interests or voting history.",
+          "1": "Generally follows policy but lacks clarity on sensitive or controversial national stances.",
+          "2": "Consistently accurate; clearly reflects the nation's strategic regional and global interests.",
+          "3": "Highly nuanced; addresses complex regional dynamics and clearly defines national \"red lines.\""
+        }
+      },
+      "policy_accuracy": {
+        "label": "नीति सटीकता",
+        "bands": {
+          "0": "Fundamental misunderstanding of the topic's legal framework or the committee's mandate.",
+          "1": "Understands the general topic but misses technical or legal complexities within current policy.",
+          "2": "Solid grasp of complex policy issues (e.g., specific clauses in international law).",
+          "3": "Expert-level accuracy; integrates technical facts to build a sophisticated policy argument."
+        }
+      },
+      "proposed_solutions": {
+        "label": "प्रस्तावित समाधान",
+        "bands": {
+          "0": "Vague or non-actionable (e.g., \"countries should talk more\"). No implementation plan.",
+          "1": "Generic solutions; lack details on funding, specific UN agencies, or feasibility.",
+          "2": "Innovative and actionable; proposes specific mechanisms, task forces, or monitoring bodies.",
+          "3": "Sophisticated and holistic; solutions are original, feasible, and legally sound with clear timelines."
+        }
+      },
+      "formatting_style_citations": {
+        "label": "स्वरूपण, शैली और उद्धरण",
+        "bands": {
+          "0": "Significant errors in UN citation style (e.g., Chicago/APA); unprofessional tone.",
+          "1": "Standard formatting, but contains several grammatical gaps or inconsistent citation styles.",
+          "2": "Professional UN academic formatting; clear, concise, and persuasive diplomatic language.",
+          "3": "Flawless UN academic style; compelling narrative and perfect citation of all sources."
+        }
+      },
+      "pre_conference_support": {
+        "label": "सम्मेलन-पूर्व समर्थन",
+        "bands": {
+          "0": "Study guide was late or incomplete; minimal communication with SMT/USGs.",
+          "1": "The study guide met basic requirements but lacked deep analysis or clear formatting.",
+          "2": "Comprehensive study guide; proactive in answering delegate emails and prep.",
+          "3": "Exceptional study guide; provided extra resources and early feedback on position papers."
+        }
+      },
+      "empathy": {
+        "label": "समानुभूति",
+        "bands": {
+          "0": "Dismissive of delegate anxieties; fails to notice when a delegate is struggling or excluded.",
+          "1": "Professional but clinical; provides support only when explicitly asked by a delegate.",
+          "2": "Actively checks in on quiet delegates; creates a safe space for beginners to participate.",
+          "3": "High emotional intelligence; anticipates delegate stress, manages heated conflicts with care, and ensures every voice feels valued."
+        }
+      },
+      "collaboration_co_chair": {
+        "label": "सह-अध्यक्ष के साथ सहयोग",
+        "bands": {
+          "0": "One chair dominates; lack of communication results in inconsistent rulings.",
+          "1": "Work is split but chairs operate in silos; minimal consultation on award decisions.",
+          "2": "Balanced partnership; clear communication and mutual support during sessions.",
+          "3": "Seamless synergy; chairs anticipate each other's needs and provide a unified, professional front."
+        }
+      },
+      "mun_knowledge": {
+        "label": "एमयूएन ज्ञान",
+        "bands": {
+          "0": "Frequent errors in Rules of Procedure (RoP); relies heavily on the Secretariat for help.",
+          "1": "Basic RoP knowledge; can run a standard moderated caucus but misses nuances of motions.",
+          "2": "Strong command of RoP; manages the floor efficiently and fairly with minimal errors.",
+          "3": "Absolute mastery; uses RoP to enhance debate flow and handles complex procedural situations with ease."
+        }
+      },
+      "country_stances_topic": {
+        "label": "देश का रुख और विषय ज्ञान",
+        "bands": {
+          "0": "Unable to identify if a delegate is speaking \"out of character\"; ignores policy accuracy.",
+          "1": "Generally aware of major power stances but misses shifts in smaller delegation policies.",
+          "2": "Actively monitors policy accuracy; guides delegates back to character when necessary.",
+          "3": "Deeply researched in all allocations; provides precise feedback on geopolitical nuances during debate."
+        }
+      },
+      "flexibility": {
+        "label": "FLEXIBILITY",
+        "bands": {
+          "0": "Rigid adherence to the schedule even when debate is stagnant; resistant to SMT feedback.",
+          "1": "Adapts only when prompted by the Secretariat; struggles with sudden changes in bloc dynamics.",
+          "2": "Responds well to committee shifts; adjusts speaking times or motions to benefit the debate flow.",
+          "3": "Highly adaptive; pivots seamlessly during crises or unexpected debate turns while maintaining order."
+        }
+      },
+      "professionalism": {
+        "label": "व्यावसायिकता",
+        "bands": {
+          "0": "Unprofessional attire or tone shows clear bias toward specific delegates or schools.",
+          "1": "Professional but lacks authority; occasional lapses in diplomatic decorum.",
+          "2": "Consistently professional; maintains impartiality and commands respect from the house.",
+          "3": "Exemplifies the Secretariat standard; flawless decorum, impartial, and serves as a role model."
+        }
+      },
+      "engagement": {
+        "label": "सगाई",
+        "bands": {
+          "0": "Appears bored or distracted; minimal feedback given to delegates during caucusing.",
+          "1": "Attentive but passive; does not actively encourage quieter delegates to participate.",
+          "2": "High energy; provides constructive feedback and keeps the committee motivated throughout.",
+          "3": "Inspiring presence; actively mentors delegates, fosters an inclusive environment, and drives high-level debate."
+        }
+      },
+      "academic_depth": {
+        "label": "शैक्षणिक गहराई",
+        "bands": {
+          "0": "Surface-level summary; lacks historical context or data.",
+          "1": "Good overview but misses complex legal or technical nuances.",
+          "2": "Strong analysis; includes specific past actions and regional data.",
+          "3": "Expert-level scholarship; identifies unique angles for debate."
+        }
+      },
+      "mandate_clarity": {
+        "label": "जनादेश स्पष्टता",
+        "bands": {
+          "0": "Vague \"Questions to Consider\"; unclear committee powers.",
+          "1": "Standard questions; general guidance on the scope of the debate.",
+          "2": "Clear, focused questions that guide delegates toward specific solutions.",
+          "3": "Precision-engineered prompts that prevent stagnant or off-topic debate."
+        }
+      },
+      "accessibility": {
+        "label": "सरल उपयोग",
+        "bands": {
+          "0": "Overly dense or disorganized; difficult for beginners to navigate.",
+          "1": "Clean layout but lacks visual aids or a glossary of terms.",
+          "2": "Well-structured; includes helpful links, maps, and a clear glossary.",
+          "3": "Masterfully designed; balances high-level academia with intuitive navigation."
+        }
+      },
+      "resource_quality": {
+        "label": "संसाधन गुणवत्ता",
+        "bands": {
+          "0": "Few or outdated links provided for delegate research.",
+          "1": "Standard UN links provided; covers the basics for most nations.",
+          "2": "Diverse and curated bibliography including NGOs, treaties, and data sets.",
+          "3": "Comprehensive toolkit; provides delegates with \"hidden\" data and niche sources."
+        }
+      },
+      "committee_introduction": {
+        "label": "समिति परिचय",
+        "bands": {
+          "0": "Provides only a generic definition of the committee's name.",
+          "1": "Lists the mandate but fails to explain the committee's specific powers or limitations.",
+          "2": "Clearly outlines the committee's history, scope of authority, and role within the UN system.",
+          "3": "Masterfully connects the committee's specific legal \"teeth\" to the current agenda items."
+        }
+      },
+      "topic_introduction": {
+        "label": "विषय परिचय",
+        "bands": {
+          "0": "Vague or overly broad; fails to define the core problem.",
+          "1": "Provides a general summary but lacks current data or recent developments.",
+          "2": "Comprehensive overview; defines technical terms and the current global status of the issue.",
+          "3": "A compelling narrative that identifies specific \"blind spots\" in international policy."
+        }
+      },
+      "timeline": {
+        "label": "समय",
+        "bands": {
+          "0": "Missing major historical milestones or treaties.",
+          "1": "Lists basic dates but fails to explain the significance of past actions.",
+          "2": "Accurate chronological flow; explains how past resolutions led to the current situation.",
+          "3": "Strategic timeline that highlights failed vs successful interventions to guide future debate."
+        }
+      },
+      "key_stances": {
+        "label": "मुख्य रुख",
+        "bands": {
+          "0": "Only mentions P5 nations; ignores regional blocs or minor stakeholders.",
+          "1": "Groups countries broadly (e.g. \"The West\") without nuanced policy differences.",
+          "2": "Details the specific priorities of major interest groups and key regional players.",
+          "3": "Sophisticated analysis of clashing \"red lines\" and potential spoilers in the negotiation process."
+        }
+      },
+      "possible_solutions": {
+        "label": "संभावित समाधान",
+        "bands": {
+          "0": "Generic or repetitive (e.g. \"more funding,\" \"awareness\").",
+          "1": "Suggests logical steps but lacks details on implementation or oversight.",
+          "2": "Proposes innovative, multi-dimensional frameworks aligned with the committee's mandate.",
+          "3": "High-level \"Purposeful Policy\" solutions that address root causes and technical feasibility."
+        }
+      },
+      "debate_productivity": {
+        "label": "बहस उत्पादकता",
+        "bands": {
+          "0": "Frequent lulls in debate; circular arguments with no progress.",
+          "1": "Steady debate but struggles to move beyond \"Topic A\" generalities.",
+          "2": "High-level discourse; delegates move quickly into substantive solutions.",
+          "3": "Dynamic and evolving debate; the house stays engaged and intellectually sharp."
+        }
+      },
+      "collaborative_spirit": {
+        "label": "सहयोगात्मक भावना",
+        "bands": {
+          "0": "Highly toxic or cliquey; minor blocs refuse to speak to one another.",
+          "1": "Standard diplomatic behavior; basic cooperation during caucusing.",
+          "2": "Inclusive atmosphere; larger blocs actively seek input from minor nations.",
+          "3": "Exemplary diplomacy; high \"purposeful policy\" alignment and consensus-building."
+        }
+      },
+      "resolution_quality": {
+        "label": "संकल्प गुणवत्ता",
+        "bands": {
+          "0": "Shallow resolutions; \"vague encouragement\" rather than action.",
+          "1": "Standard clauses; addresses the symptoms but not the root causes.",
+          "2": "Technically sound resolutions with clear funding and oversight mechanisms.",
+          "3": "Sophisticated, innovative, and actionable documents that reflect real UN standards."
+        }
+      },
+      "chair_delegate_synergy": {
+        "label": "अध्यक्ष-प्रतिनिधि तालमेल",
+        "bands": {
+          "0": "Chairs struggle to manage the room; low respect for the dais.",
+          "1": "Functional relationship; chairs follow the schedule but don't lead.",
+          "2": "Positive energy; chairs mentor delegates while maintaining firm order.",
+          "3": "Seamless synergy; the dais inspires a professional and high-stakes environment."
+        }
+      }
+    }
   }
 }

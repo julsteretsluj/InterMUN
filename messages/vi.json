@@ -16,7 +16,303 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Tổng thư ký",
     "returnToProfile": "Quay lại hồ sơ",
-    "useDifferentAccount": "Use a different account"
+    "useDifferentAccount": "Sử dụng một tài khoản khác"
+  },
+  "eventGateForm": {
+    "conferenceCodePlaceholder": "ví dụ. SEAMUNI2027",
+    "continuing": "Tiếp tục…",
+    "continueToCommitteeStep": "Tiếp tục bước ủy ban"
+  },
+  "roomGateForm": {
+    "joining": "Đang tham gia…",
+    "chairOrSmt": "Ghế hay SMT?",
+    "setCommitteeCode": "Đặt mã ủy ban"
+  },
+  "committeeGateForm": {
+    "allocationLabel": "Phân bổ (quốc gia/vị trí)",
+    "selectAllocation": "Chọn phân bổ của bạn",
+    "allocationMatchHint": "Phải phù hợp với phân bổ được chỉ định cho tài khoản của bạn cho hội nghị này.",
+    "preselectedHint": "Được chọn trước từ liên kết đăng ký của bạn.",
+    "committeePasswordPlaceholder": "Được cung cấp bởi ghế của bạn",
+    "verifying": "Đang xác minh…"
+  },
+  "staffBypassForm": {
+    "title": "SMT: không đăng nhập với tư cách đại biểu",
+    "description": "Chỉ có ban thư ký. Nhập <strong>mật khẩu phụ của nhân viên</strong> từ người tổ chức — không phải mật khẩu ủy ban mà đại biểu chia sẻ.",
+    "staffSecondaryPassword": "Mật khẩu phụ của nhân viên",
+    "organiserPasswordPlaceholder": "Mật khẩu tổ chức",
+    "verifying": "Đang xác minh…",
+    "continueAsSmt": "Tiếp tục là SMT (giám sát)"
+  },
+  "allocationCodeGateForm": {
+    "yourSeat": "Chỗ ngồi của bạn",
+    "placardSignInCode": "Biển hiệu/mã đăng nhập",
+    "codePlaceholder": "Từ ghế của bạn (Danh sách mật khẩu đăng nhập)",
+    "codeHelp": "Mã này là duy nhất cho chỗ ngồi của bạn. Chỉ một tài khoản có thể hoàn thành bước này cho mỗi chỗ ngồi — nếu bạn chia sẻ một tài khoản, hãy sử dụng cùng thông tin đăng nhập đó.",
+    "verifying": "Đang xác minh…"
+  },
+  "smtRoomCodesClient": {
+    "dash": "—",
+    "currentCode": "Hiện hành:",
+    "newCommitteeCode": "Mã ủy ban mới",
+    "committeeCodePlaceholder": "ví dụ. DIS795",
+    "saving": "Đang lưu…",
+    "committeeRoomCodes": "Mã ủy ban/phòng",
+    "committeeCodesHelp": "Giá trị tương tự được sử dụng cho <strong>cổng thứ hai</strong> (mã ủy ban) và quy trình tham gia phòng chủ tọa—duy nhất trong sự kiện này. Các đại biểu nhập nó sau mã hội nghị.",
+    "noCommitteesYet": "Chưa có ủy ban nào cho sự kiện này.",
+    "inviteDaisChairs": "Mời ghế dais",
+    "inviteHelp": "Gửi liên kết ma thuật Supabase để họ có thể đặt mật khẩu. Hồ sơ của họ được đặt thành <strong>chủ trì</strong> ngay sau khi lời mời được tạo. Định cấu hình biến env máy chủ <code>SUPABASE_SERVICE_ROLE_KEY</code> và cho phép URL đăng nhập của bạn (ví dụ: <code>…/đăng nhập</code>) trong Xác thực -> Cấu hình URL -> URL chuyển hướng.",
+    "inviteDisabled": "Lời mời bị vô hiệu hóa cho đến khi <code>SUPABASE_SERVICE_ROLE_KEY</code> được đặt trong quá trình triển khai này.",
+    "email": "E-mail",
+    "chairEmailPlaceholder": "ghế@school.edu",
+    "sending": "Đang gửi…",
+    "sendChairInvite": "Gửi giấy mời chủ trì",
+    "grantChairRoleTitle": "Cấp vai trò chủ tịch (tài khoản hiện có)",
+    "grantChairRoleHelp": "Nếu họ đã đăng ký làm đại biểu, hãy thăng chức cho họ tại đây để họ nhận được bảng điều khiển của chủ tịch và các công cụ của ủy ban (không gửi email).",
+    "grantChairRole": "Trao vai trò chủ trì"
+  },
+  "chairDelegateApprovalForm": {
+    "title": "Chấp nhận đại biểu qua email + phân bổ",
+    "helpTitleAcceptDelegate": "Chấp nhận đại biểu",
+    "helpAcceptDelegateBody": "Sử dụng quyền này để gán trực tiếp tài khoản người dùng (qua email) cho một phân bổ cụ thể trong hội nghị này.",
+    "intro": "Chủ tịch có thể trực tiếp phê duyệt tài khoản đại biểu để phân bổ cụ thể.",
+    "delegateEmailLabel": "Email ủy quyền",
+    "delegateEmailHelp": "Nhập email tài khoản chính xác mà người đại diện sử dụng để đăng nhập.",
+    "delegateEmailPlaceholder": "đại biểu@email.com",
+    "allocationHelp": "Chọn quốc gia/chỗ ngồi để chỉ định. \"Hiện được chỉ định\" có nghĩa là người dùng khác đã được liên kết ở đó.",
+    "selectAllocation": "Chọn phân bổ",
+    "currentlyAssigned": "hiện được giao",
+    "accepting": "Chấp nhận...",
+    "acceptDelegate": "Chấp nhận đại biểu",
+    "success": "Đại biểu được chấp nhận và cập nhật phân bổ."
+  },
+  "roomCodeChairForm": {
+    "committeeSelection": "Lựa chọn ủy ban",
+    "committeeCodeSetupTitle": "Thiết lập mã ủy ban",
+    "committeeCodeSetupHelp": "Chọn ủy ban, đặt mã gồm 6 ký tự và lưu lại. Điều này cập nhật mã mà đại biểu/nhân viên sử dụng để vào phòng ủy ban đó.",
+    "findCommittee": "Tìm ủy ban",
+    "searchPlaceholder": "Nhập để lọc theo tên hoặc ủy ban…",
+    "noMatches": "Không có kết quả phù hợp",
+    "currentCommitteeCode": "Mã ủy ban hiện tại:",
+    "newCommitteeCode": "Mã ủy ban mới",
+    "newCommitteeCodeHelp": "Phải có chính xác 6 chữ cái/số. Chỉ chia sẻ thông tin này với những người tham gia ủy ban có quyền truy cập vào phòng này.",
+    "committeeCodePlaceholder": "ví dụ. WHO582",
+    "switching": "Đang chuyển đổi…",
+    "switchToSelectedCommittee": "Chuyển sang ủy ban đã chọn",
+    "saving": "Đang lưu…",
+    "saveCodeGoToProfile": "Lưu mã và đi tới hồ sơ"
+  },
+  "chairMotionsPointsLog": {
+    "intro": "Ghi điểm và chấm điểm cho đại biểu. Các mục nhập được lưu vào từng tài khoản/hồ sơ đại biểu và chỉ hiển thị với đại biểu đó và chủ tịch ủy ban/SMT.",
+    "logTitle": "Nhật ký điểm (được đồng bộ hóa tài khoản)",
+    "formalMotionsPrefix": "Việc bỏ phiếu theo thủ tục chính thức và sàn chuyển động đang diễn ra",
+    "formalMotionsSuffix": ".",
+    "delegate": "Đại biểu",
+    "selectDelegate": "Chọn đại biểu…",
+    "text": "Chữ",
+    "textPlaceholder": "ví dụ. Chuyển động để mở danh sách người phát biểu",
+    "add": "➕ Thêm",
+    "disciplinarySystem": "Hệ thống kỷ luật",
+    "disciplineRules": "Ánh xạ quy tắc: 3 cảnh báo => đình công. Đình công 1: không có quyền biểu quyết. Cuộc đình công 2: quyền phát biểu bị đình chỉ. Cuộc đình công 3: bị loại khỏi ủy ban.",
+    "reasonOptional": "Lý do (tùy chọn)",
+    "reasonPlaceholder": "ví dụ. sự gián đoạn liên tục trong cuộc tranh luận chính thức",
+    "warning": "+ Cảnh báo",
+    "strike": "+ Tấn công",
+    "revokeWarning": "Thu hồi cảnh báo",
+    "revokeStrike": "Thu hồi cảnh cáo",
+    "resetRecord": "Đặt lại bản ghi",
+    "current": "Hiện hành",
+    "warnings": "Cảnh báo",
+    "strikes": "đình công",
+    "votingDisabled": "Bỏ phiếu bị vô hiệu hóa",
+    "speakingSuspended": "Nói bị đình chỉ",
+    "removed": "LOẠI BỎ",
+    "yes": "Đúng",
+    "no": "KHÔNG",
+    "presetOptions": "Tùy chọn đặt trước",
+    "presetHint": "Nhấn vào điểm đặt trước để thêm điểm cho đại biểu đã chọn.",
+    "log": "Nhật ký",
+    "noEntries": "Chưa có mục nào.",
+    "unstar": "Bỏ dấu sao",
+    "star": "Ngôi sao",
+    "point": "Điểm",
+    "remove": "Di dời"
+  },
+  "runningNotesView": {
+    "confirmDelete": "Xóa ghi chú đang chạy này?",
+    "newNote": "Ghi chú mới",
+    "note": "Ghi chú",
+    "viewOnly": "Chỉ xem (bạn chỉ có thể chỉnh sửa ghi chú đang chạy của riêng mình).",
+    "noteName": "Tên ghi chú",
+    "noteNamePlaceholder": "ví dụ. Chuẩn bị khối chủ nhật",
+    "noteNameHelp": "Hiển thị trong danh sách ghi chú. Nếu trống, thẻ hoặc văn bản ghi chú sẽ được sử dụng thay thế.",
+    "tags": "Thẻ",
+    "addAnotherTag": "Thêm một thẻ khác…",
+    "addTag": "Thêm thẻ",
+    "selected": "Đã chọn",
+    "googleDocsUrl": "URL Google Tài liệu",
+    "googleDocsUrlOptional": "URL Google Tài liệu (tùy chọn)",
+    "googleDocsHelp": "Dán liên kết Google Tài liệu được chia sẻ để hiển thị bản xem trước trực tiếp các ghi chú của bạn. Liên kết là tùy chọn; thay vào đó bạn có thể giữ các ghi chú văn bản đơn giản.",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/…",
+    "googleDocsSaveHint": "Tài liệu Google mới sẽ mở trong một tab khác. Lưu sau khi dán liên kết; bản xem trước cập nhật khi bạn nhập.",
+    "runningNotesDocument": "Chạy tài liệu ghi chú",
+    "readerWarning": "Cảnh báo người đọc: ghi chú này có thể chứa ngôn ngữ không phù hợp.",
+    "plainTextOptional": "Văn bản thuần túy (tùy chọn)",
+    "notesPlaceholder": "Ghi lại mọi thứ…",
+    "saveHelp": "Lưu tên ghi chú, thẻ, văn bản ghi chú đang chạy và URL Google Tài liệu (nếu được cung cấp) cho tài khoản của riêng bạn."
+  },
+  "sessionControlClient": {
+    "rollPresent": "Hiện tại",
+    "rollPresentTitle": "Có mặt - có thể bỏ phiếu trắng",
+    "rollPresentVoting": "Trình bày và bỏ phiếu",
+    "rollPresentVotingTitle": "Có mặt và biểu quyết - phải biểu quyết, không thể bỏ phiếu trắng",
+    "rollAbsent": "Vắng mặt",
+    "rollCallForCountry": "Điểm danh cho {country}",
+    "presetCustom": "Phong tục",
+    "presetSetAgenda": "Đề nghị thiết lập chương trình nghị sự",
+    "presetExtendOpeningSpeech": "Kiến nghị kéo dài thời gian phát biểu mở đầu",
+    "presetOpenDebate": "Kiến nghị mở cuộc tranh luận",
+    "presetOpenGsl": "Kiến nghị mở danh sách các diễn giả chung",
+    "presetForAgainst": "Kiến nghị bắt đầu ủng hộ/chống lại các bài phát biểu (nghị quyết)",
+    "presetForAgainstTitle": "Đề nghị bắt đầu phát biểu ủng hộ và phản đối dự thảo Nghị quyết",
+    "presetCloseDebate": "Kiến nghị kết thúc cuộc tranh luận",
+    "presetExcludePublic": "Kiến nghị loại trừ công chúng",
+    "presetSilentPrayerMeditation": "Phút cầu nguyện thầm lặng/Thiền định",
+    "presetSilentPrayerMotionTitle": "Kiến nghị một phút cầu nguyện hoặc thiền định trong im lặng",
+    "presetRollCallVote": "Đề nghị bỏ phiếu điểm danh",
+    "presetMinuteSilentPrayer": "Phút cầu nguyện thầm lặng",
+    "presetUnmoderatedCaucus": "Cuộc họp kín không được kiểm duyệt",
+    "presetUnmoderatedCaucusTitle": "Kiến nghị cho một cuộc họp kín không được kiểm duyệt",
+    "presetModeratedCaucus": "Họp kín được kiểm duyệt",
+    "presetModeratedCaucusTitle": "Kiến nghị tổ chức một cuộc họp kín được kiểm duyệt",
+    "presetConsultation": "Tư vấn",
+    "presetConsultationTitle": "Đề nghị tham vấn",
+    "presetCabinetMeeting": "Họp nội các",
+    "presetCabinetMeetingTitle": "Kiến nghị triệu tập cuộc họp nội các",
+    "presetShadowMeeting": "Cuộc họp bóng tối",
+    "presetShadowMeetingTitle": "Đề nghị tổ chức một cuộc họp bóng tối",
+    "presetAdjournSession": "Phiên hoãn lại",
+    "presetAdjournSessionTitle": "Kiến nghị hoãn phiên họp",
+    "presetSuspendSession": "Đình chỉ phiên",
+    "presetSuspendSessionTitle": "Kiến nghị đình chỉ phiên họp",
+    "presetDivideQuestion": "Chia câu hỏi (cần người biên tập)",
+    "presetDivideQuestionTitle": "Đề nghị chia câu hỏi",
+    "presetClauseByClause": "Từng điều khoản (cần người biên tập)",
+    "presetClauseByClauseTitle": "Đề nghị bỏ phiếu theo điều khoản",
+    "presetAmendments": "Sửa đổi (cần người biên tập)",
+    "presetAmendmentTitle": "Sửa đổi",
+    "guidedStepChooseProcedure": "Bước 1/5: Chọn thủ tục (nhập số).",
+    "invalidProcedureSelection": "Lựa chọn thủ tục không hợp lệ.",
+    "liveDebateTopic": "Chủ đề tranh luận trực tiếp",
+    "motionControlHelp": "Quy trình làm việc của chủ tọa: nắm bắt các chuyển động, mở từng phiếu một, ghi lại các phiếu bầu theo cách phân bổ, sau đó đóng chuyển động để hoàn tất việc đạt/không đạt.",
+    "tabSetup": "1) Thiết lập",
+    "tabFloorQueue": "2) Hàng đợi tầng",
+    "tabDraftMotion": "3) Dự thảo kiến ​​nghị",
+    "tabRecordVotes": "4) Ghi lại phiếu bầu",
+    "tabHistory": "5) Lịch sử",
+    "chairOnlyVotingHelp": "Chỉ dành cho chủ tịch: mỗi lần chỉ có một phiếu bầu. Các đại biểu không bỏ phiếu trong ứng dụng. Sử dụng Ghi lại phiếu bầu để gọi từng bảng hiệu và chỉ ghi Có hoặc Không. Các chuyển động thủ tục không sử dụng phiếu trắng. Đạt/không đạt sử dụng số lượng thành viên có mặt trong danh sách cần thiết.",
+    "euGuidedPhase": "Giai đoạn hướng dẫn của EU",
+    "euGuidedPhaseHint": "Các trình chặn cốt lõi vẫn được hướng dẫn: khi chuyển động không phù hợp với giai đoạn này, ghế vẫn có thể tiếp tục sử dụng xác nhận ghi đè rõ ràng.",
+    "pointsWorkflow": "Quy trình làm việc về điểm",
+    "pointOfInformation": "Điểm thông tin",
+    "pointOfClarification": "Điểm làm rõ",
+    "parliamentaryInquiry": "Điều tra của Quốc hội",
+    "pointOfOrder": "Điểm đặt hàng",
+    "personalPrivilege": "Đặc quyền cá nhân",
+    "rightOfReply": "Quyền trả lời",
+    "factCheck": "Kiểm tra thực tế",
+    "raisedByOptional": "Tăng bởi (tùy chọn)",
+    "detailOptional": "Chi tiết (tùy chọn)",
+    "logPoint": "Điểm đăng nhập",
+    "accept": "Chấp nhận",
+    "deny": "Từ chối",
+    "beginVotingMostDisruptive": "Bắt đầu bỏ phiếu (gây rối nhất trước tiên)",
+    "pendingVoteOrderMostDisruptive": "Đang chờ xử lý - lệnh bỏ phiếu (gây rối nhất trước tiên)",
+    "untitled": "Không có tiêu đề",
+    "withdraw": "Rút",
+    "procedurePreset": "Thủ tục đặt trước",
+    "procedurePresetHelp": "Điền trước các loại chuyển động phổ biến và các trường tiêu đề/thời gian mặc định. Bạn vẫn có thể chỉnh sửa chi tiết trước khi mở.",
+    "targetResolution": "Độ phân giải mục tiêu",
+    "selectResolution": "Chọn độ phân giải…",
+    "targetClauses": "Mệnh đề mục tiêu",
+    "noClausesFound": "Không tìm thấy mệnh đề nào cho độ phân giải đã chọn.",
+    "clause": "khoản",
+    "type": "Kiểu",
+    "motion": "Cử động",
+    "amendment": "Sửa đổi",
+    "resolution": "Nghị quyết",
+    "requiredMajorityRop": "Đa số bắt buộc (RoP)",
+    "auditTimeline": "Dòng thời gian kiểm toán",
+    "noAuditEvents": "Chưa có sự kiện kiểm toán nào.",
+    "recentMotions": "Chuyển động gần đây",
+    "closed": "đóng cửa",
+    "reopen": "Mở lại",
+    "daisAnnouncements": "Thông báo dais",
+    "daisAnnouncementsHelp": "Sử dụng Markdown để in đậm, liệt kê và liên kết. Ghim một dòng cho dải sàn; lên lịch thời gian xuất bản trong tương lai và các đại biểu sẽ chỉ nhìn thấy nó khi thời điểm đó trôi qua. Bạn có thể chỉnh sửa hoặc xóa bất kỳ dòng nào bên dưới.",
+    "message": "Tin nhắn",
+    "messageToCommittee": "Thông điệp gửi Ủy ban…",
+    "format": "Định dạng",
+    "markdown": "Giảm giá",
+    "plainText": "Văn bản thuần túy",
+    "plain": "Đơn giản",
+    "publishAtOptional": "Xuất bản tại (tùy chọn)",
+    "publishAt": "Xuất bản tại",
+    "post": "Bưu kiện",
+    "pinned": "Đã ghim",
+    "scheduled": "Đã lên lịch",
+    "saveChanges": "Lưu thay đổi",
+    "cancel": "Hủy bỏ",
+    "unpin": "Bỏ ghim",
+    "pinToFloor": "Ghim vào sàn",
+    "edit": "Biên tập",
+    "delete": "Xóa bỏ",
+    "rollCallTracker": "Trình theo dõi cuộc gọi cuộn",
+    "rollCallHelp": "Có mặt: có thể bỏ phiếu trắng. Có mặt và biểu quyết: phải biểu quyết có/không. Vắng mặt: không ghi phiếu bầu.",
+    "rollCallIntro": "Với mỗi đại biểu chọn Có mặt (có thể bỏ phiếu trắng), Có mặt và biểu quyết (phải biểu quyết) hoặc Vắng mặt.",
+    "initializeRowsAllAllocations": "Khởi tạo hàng (tất cả phân bổ)",
+    "noRollRowsYet": "Chưa có hàng cuộn nào. Khởi tạo để tạo một hàng cho mỗi bảng hiệu đại biểu từ ma trận phân bổ của ủy ban này.",
+    "delegates": "Đại biểu",
+    "delegateRollStatusHint": "Sử dụng ba nút để đặt trạng thái cuộn của đại biểu đó. Trạng thái hiện tại được đánh dấu.",
+    "majorityHelp": "Đơn giản về các thủ tục tố tụng; hai phần ba cho các nghị quyết, sửa đổi và kiến ​​nghị phê duyệt sửa đổi (Bản sửa đổi được cài sẵn).",
+    "agendaTopicCommittee": "Chủ đề chương trình nghị sự (ủy ban)",
+    "noTopicsAvailable": "Không có chủ đề nào",
+    "topicPurpose": "Chủ đề/mục đích",
+    "topic": "Đề tài",
+    "topicOptional": "Chủ đề (tùy chọn)",
+    "titleOptional": "Tiêu đề (tùy chọn)",
+    "moderatedCaucusTopic": "Chủ đề họp kín được kiểm duyệt",
+    "unmoderatedCaucusTopicOptional": "Chủ đề họp kín chưa được kiểm duyệt (tùy chọn)",
+    "consultationPurposePlaceholder": "Việc tư vấn nhằm mục đích gì",
+    "motionTitleOptional": "Tiêu đề kiến ​​nghị (tùy chọn)",
+    "totalTimeMinutes": "Tổng thời gian (phút)",
+    "speakerTimeSeconds": "Thời gian nói (giây)",
+    "minutesPlaceholder": "ví dụ. 10",
+    "secondsPlaceholder": "ví dụ. 60",
+    "amendmentType": "Loại sửa đổi",
+    "friendly": "Thân thiện",
+    "unfriendly": "Không thân thiện",
+    "debateTimePerSideSeconds": "Thời gian tranh luận mỗi bên (giây)",
+    "debateSecondsPlaceholder": "30-60",
+    "motionerHelp": "Không bắt buộc. Đặt ủy quyền đã di chuyển kiến ​​nghị để hồ sơ và xuất khẩu hiển thị ai là người đưa ra kiến ​​nghị đó.",
+    "notSpecified": "Không được chỉ định",
+    "description": "Sự miêu tả",
+    "mustVoteHelp": "Đánh dấu đây là mục bỏ phiếu bắt buộc theo quy định của ủy ban của bạn.",
+    "createAndOpenMotion": "Tạo và mở chuyển động",
+    "saveEdits": "Lưu chỉnh sửa",
+    "deleteMotionConfirm": "Xóa chuyển động này vĩnh viễn? Tất cả các phiếu bầu đã ghi cho nó sẽ bị xóa và kiến ​​nghị sẽ biến mất khỏi hồ sơ.",
+    "deleteMotion": "Xóa chuyển động",
+    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "ballotsHelp": "Phiếu bầu = bảng hiệu có ghi Có hoặc Không (phiếu trắng được theo dõi riêng và không được tính vào mẫu số này). Xóa bỏ một phiếu bầu đã được ghi lại. Đối với các đề nghị theo thủ tục, kết quả sẽ so sánh Có với các thành viên có mặt trong danh sách (xem phần điểm danh).",
+    "recordVotesLabel": "Ghi phiếu bầu",
+    "currentMotion": "chuyển động hiện tại",
+    "recordVotesHelp": "Chủ tọa đăng ký phiếu bầu theo phân bổ. Phiếu trắng chỉ xuất hiện đối với các phiếu sửa đổi/nghị quyết khi trạng thái cuộn không có mặt và biểu quyết. Trong quá trình chuyển động điểm danh-bỏ phiếu, bạn có thể nắm bắt Có/Không bằng Quyền.",
+    "delegatesCannotVoteHelp": "Các đại biểu không thể bỏ phiếu trong ứng dụng. Chủ tọa ghi phiếu bầu cho mỗi lần phân bổ. Phiếu trắng chỉ xuất hiện đối với phiếu bầu nghị quyết/sửa đổi khi đoàn đại biểu đó không được đánh dấu Có mặt và biểu quyết.",
+    "delegateRollForMotion": "Danh sách đại biểu cho kiến ​​nghị này",
+    "noDelegatesSeatedYet": "Chưa có đại biểu nào tham gia ủy ban này.",
+    "abstain": "kiêng",
+    "unitMinutesShort": "tôi",
+    "unitSecondsShort": "S",
+    "apply": "Áp dụng"
   },
   "language": {
     "label": "Ngôn ngữ",
@@ -280,7 +576,7 @@
     "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
     "topicLabel": "Đề tài:",
     "chairsLabel": "Ghế:",
-    "committeeLogoAlt": "biểu tượng {tên} {name}",
+    "committeeLogoAlt": "{name} logo",
     "eslFriendly": "Thân thiện với ESL"
   },
   "chairNav": {
@@ -454,7 +750,7 @@
       "helpRequiredMajorityBody": "Chọn ngưỡng biểu quyết dùng để quyết định đạt/không đạt. `Đơn giản` là hơn một nửa. `2/3` yêu cầu đa số.",
       "majoritySimple": "Đơn giản",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{nhãn} đa số {label}",
+      "majorityLine": "{label} majority",
       "mustVote": "PHẢI bỏ phiếu",
       "helpMustVoteTitle": "PHẢI bỏ phiếu",
       "helpMustVoteBody": "Đánh dấu đề nghị này là một mục \"phải bỏ phiếu\". Điều này được sử dụng để truyền đạt yêu cầu tới người tham gia (tùy thuộc vào việc thành lập ủy ban của bạn).",
@@ -576,7 +872,7 @@
         "title": "Bảng chú giải chương trình MUN",
         "subtitle": "Thuật ngữ độc đáo phù hợp với mã ủy ban của bạn và các chủ đề chương trình nghị sự hiện tại.",
         "committeeCode": "Mã ủy ban: {code}",
-        "topicTag": "Chủ đề: {chủ đề} {topic}",
+        "topicTag": "Topic: {topic}",
         "sources": {
           "core": "cốt lõi",
           "committee": "ủy ban",
@@ -811,9 +1107,9 @@
       "add": "Thêm vào",
       "noIdeasYet": "Chưa có ý tưởng nào.",
       "ideaLabel": "Ý tưởng",
-      "ideaFallback": "Ý tưởng {số} {number}",
+      "ideaFallback": "Idea {number}",
       "linkedDoc": "Tài liệu được liên kết",
-      "addedOn": "Đã thêm {ngày} {date}",
+      "addedOn": "Added {date}",
       "edit": "Biên tập",
       "delete": "Xóa bỏ",
       "ideaDocument": "Tài liệu ý tưởng",
@@ -862,12 +1158,12 @@
       "searchHint": "Nhập quốc gia, tên đại biểu, trường học, đại từ hoặc \"bỏ trống\" để đánh dấu những kết quả phù hợp trong phòng. Nhấn Enter để chuyển đến trận đấu đầu tiên; Esc xóa. Bấm vào chỗ trống để chuyển sang chỗ trống.",
       "findLabel": "Tìm một phái đoàn hoặc thành viên dais",
       "searchPlaceholder": "Quốc gia, tên, trường học...",
-      "matchesCount": "{matches} trong tổng số {matchs ghế phù hợp {total}",
+      "matchesCount": "{matches} of {total} seats match",
       "searchAria": "Tìm kiếm đoàn",
       "virtualRoomVacant": "trống",
       "profileAria": "Xem hồ sơ: {country}",
       "vacantSeatAria": "Ghế trống",
-      "placardAria": "Tấm bảng {quốc gia} {country}",
+      "placardAria": "Placard {country}",
       "gavelAria": "cái búa"
     },
     "session": {
@@ -900,7 +1196,7 @@
         "motioner": "Người chuyển động",
         "majority": "Số đông",
         "majoritySimple": "Đơn giản",
-        "tally": "Có {có} - Không {không} - Tổng số {total} {yes} {no}",
+        "tally": "Yes {yes} - No {no} - Total {total}",
         "help": "Bục ghi lại phiếu bầu của mỗi đoàn trong phiên họp. Phiếu chuyển động chỉ sử dụng Có hoặc Không (không bỏ phiếu trắng). Tổng số chỉ tính các bảng có ghi Có hoặc Không; các đoàn vắng mặt sẽ bị bỏ qua."
       },
       "activeMotion": {
@@ -917,7 +1213,7 @@
         "speakerTimeLeftTotal": "Thời gian phát biểu (trái / tổng cộng)",
         "perSpeaker": "(mỗi loa)",
         "paused": "(tạm dừng)",
-        "pauseReason": "Tạm dừng: {lý do} {reason}"
+        "pauseReason": "Pause: {reason}"
       },
       "floorStatus": {
         "sessionTime": "Thời gian phiên",
@@ -944,15 +1240,15 @@
       },
       "history": {
         "title": "Lịch sử phiên",
-        "savedCount": "đã lưu {đếm} {count}",
+        "savedCount": "{count} saved",
         "permissionsHint": "Ghế có thể đổi tên các mục. SMT/Admin có thể đổi tên và xóa các mục.",
         "empty": "Chưa có lịch sử phiên nào.",
         "rename": "Đổi tên",
         "delete": "Xóa bỏ",
         "deleteConfirm": "Xóa phiên này khỏi lịch sử?",
         "sessionNamePrompt": "Tên phiên",
-        "rangeClosed": "{phạm vi} {range}",
-        "rangeOngoing": "{phạm vi} -> Đang diễn ra {range}"
+        "rangeClosed": "{range}",
+        "rangeOngoing": "{range} -> Ongoing"
       },
       "timerPage": {
         "title": "hẹn giờ",
@@ -1037,7 +1333,7 @@
     "daisListed": "Dais (được liệt kê)",
     "committeeCodeSecondGate": "Ủy ban / mã phòng (cổng thứ hai)",
     "seats": "Chỗ ngồi",
-    "seatsFilledAllocated": "{đã điền} đã điền · {total} được phân bổ {filled}",
+    "seatsFilledAllocated": "{filled} filled · {total} allocated",
     "resolutions": "Nghị quyết",
     "openVotes": "Mở phiếu bầu",
     "editMetadataIntro": "Chỉnh sửa siêu dữ liệu phiên họp ủy ban và tên chủ tịch bên dưới",
@@ -1111,10 +1407,10 @@
     "delegatesMatrix": "Ma trận đại biểu",
     "clearAllChairNotes": "Xóa tất cả ghi chú ghế",
     "searchCountry": "Tìm kiếm quốc gia...",
-    "roomStats": "{placards} bảng hiệu · {được gắn cờ} có ghi chú trên ghế · Đã ghi cho {count} {flagged}",
+    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
     "loading": "Đang tải...",
     "noDelegationsMatch": "Không có đoàn đại biểu nào phù hợp với tìm kiếm của bạn.",
-    "rollPrefix": "Cuộn {nhãn} {label}",
+    "rollPrefix": "Roll {label}",
     "linkedAccount": "Tài khoản được liên kết",
     "vacantPlacard": "tấm bảng trống",
     "delegateProfile": "Hồ sơ đại biểu ->",
@@ -1380,7 +1676,7 @@
       "welcomeLine3": "Hẹn gặp bạn trên sàn.",
       "chairReminderSubject": "Yêu cầu phân bổ đại biểu đang chờ phê duyệt",
       "chairReminderLine1": "Một đại biểu đã yêu cầu phân bổ và cần xem xét chủ tọa.",
-      "chairReminderConference": "Hội nghị: {hội nghị} {conference}",
+      "chairReminderConference": "Conference: {conference}",
       "chairReminderAllocation": "Phân bổ được yêu cầu: {country}",
       "chairReminderDelegate": "Đại biểu: {name}",
       "chairReminderEmail": "Email tài khoản: {email}",
@@ -1447,13 +1743,13 @@
     "importedRows": "Đã nhập {count} hàng.",
     "skippedDuplicates": "Đã bỏ qua {count} bản sao đã có trong danh sách.",
     "replacedUnassignedSeats": "Thay thế tất cả các ghế chưa được chỉ định.",
-    "generatedRandomCodes": "Đã tạo (các) mã ngẫu nhiên cho các hàng không có mã nào. {count}",
+    "generatedRandomCodes": "Generated {count} random code(s) for rows without one.",
     "addCommitteesFirst": "Thêm ủy ban vào sự kiện này trước tiên trong",
     "eventCommitteeSessionsLink": "Các phiên họp của sự kiện và ủy ban",
     "committeeFallback": "Ủy ban",
     "showingOneCommitteeAtATime": "Hiển thị một ủy ban tại một thời điểm. Chuyển đổi ủy ban bằng cách sử dụng các tab dưới cùng.",
     "editPlacardCodesSheet": "Chỉnh sửa bảng mã bảng hiệu ->",
-    "rosterHeading": "Danh sách · {tiêu đề} {heading}",
+    "rosterHeading": "Roster · {heading}",
     "seatsSummary": "{count} chỗ ngồi.",
     "linkedDelegatesCannotBeDeleted": "Các đại biểu được liên kết không thể bị xóa ở đây.",
     "countryPosition": "Quốc gia/vị trí",
@@ -1480,307 +1776,314 @@
     "append": "Nối thêm",
     "appendHelp": "bỏ qua những cái tên đã có trong ủy ban này.",
     "replaceUnassigned": "Thay thế chưa được chỉ định",
-    "replaceUnassignedHelp": "xóa mọi ghế đang mở (không được liên kết với đại biểu), sau đó tải tệp - giữ an toàn cho các đại biểu được liên kết.",
+    "replaceUnassignedHelp": "xóa mọi ghế đang mở (không được liên kết với đại biểu), sau đó tải tệp trong khi vẫn giữ an toàn cho các đại biểu được liên kết.",
     "replaceUnassignedOnly": "Chỉ thay thế những gì chưa được chỉ định",
     "csvPlaceholder": "Pháp,DIS-001\\nĐức,DIS-002\\nNhật Bản",
     "parsedRowsSample": "Đã phân tích cú pháp {count} hàng. Vật mẫu:",
     "runImport": "Chạy nhập",
     "generateMissingRandomCodes": "Tạo mã ngẫu nhiên bị thiếu"
   },
-  "eventGateForm": {
-    "conferenceCodePlaceholder": "e.g. SEAMUNI2027",
-    "continuing": "Continuing…",
-    "continueToCommitteeStep": "Continue to committee step"
-  },
-  "roomGateForm": {
-    "joining": "Joining…",
-    "chairOrSmt": "Chair or SMT?",
-    "setCommitteeCode": "Set committee code"
-  },
-  "committeeGateForm": {
-    "allocationLabel": "Allocation (country / position)",
-    "selectAllocation": "Select your allocation",
-    "allocationMatchHint": "Must match the allocation assigned to your account for this conference.",
-    "preselectedHint": "Preselected from your sign-up link.",
-    "committeePasswordPlaceholder": "Provided by your chair",
-    "verifying": "Verifying…"
-  },
-  "staffBypassForm": {
-    "title": "SMT: not signing in as a delegate",
-    "description": "Secretariat only. Enter the <strong>staff secondary password</strong> from organisers — not the committee password delegates share.",
-    "staffSecondaryPassword": "Staff secondary password",
-    "organiserPasswordPlaceholder": "Organiser password",
-    "verifying": "Verifying…",
-    "continueAsSmt": "Continue as SMT (oversight)"
-  },
-  "allocationCodeGateForm": {
-    "yourSeat": "Your seat",
-    "placardSignInCode": "Placard / sign-in code",
-    "codePlaceholder": "From your chair (Sign-in passwords list)",
-    "codeHelp": "This code is unique to your seat. Only one account can complete this step per seat — if you share an account, use that same login.",
-    "verifying": "Verifying…"
-  },
-  "smtRoomCodesClient": {
-    "dash": "—",
-    "currentCode": "Current:",
-    "newCommitteeCode": "New committee code",
-    "committeeCodePlaceholder": "e.g. DIS795",
-    "saving": "Saving…",
-    "committeeRoomCodes": "Committee / room codes",
-    "committeeCodesHelp": "Same value is used for the <strong>second gate</strong> (committee code) and the chair room join flow—unique within this event. Delegates enter it after the conference code.",
-    "noCommitteesYet": "No committees for this event yet.",
-    "inviteDaisChairs": "Invite dais chairs",
-    "inviteHelp": "Sends a Supabase magic link so they can set a password. Their profile is set to <strong>chair</strong> as soon as the invite is created. Configure the <code>SUPABASE_SERVICE_ROLE_KEY</code> server env variable and allow your sign-in URL (e.g. <code>…/login</code>) under Authentication -> URL configuration -> Redirect URLs.",
-    "inviteDisabled": "Invites are disabled until <code>SUPABASE_SERVICE_ROLE_KEY</code> is set on this deployment.",
-    "email": "Email",
-    "chairEmailPlaceholder": "chair@school.edu",
-    "sending": "Sending…",
-    "sendChairInvite": "Send chair invite",
-    "grantChairRoleTitle": "Grant chair role (existing account)",
-    "grantChairRoleHelp": "If they already signed up as a delegate, promote them here so they get the chair dashboard and committee tools (no email sent).",
-    "grantChairRole": "Grant chair role"
-  },
-  "chairDelegateApprovalForm": {
-    "title": "Accept delegate by email + allocation",
-    "helpTitleAcceptDelegate": "Accept delegate",
-    "helpAcceptDelegateBody": "Use this to directly assign a user account (by email) to a specific allocation in this conference.",
-    "intro": "Chairs can directly approve a delegate account to a specific allocation.",
-    "delegateEmailLabel": "Delegate email",
-    "delegateEmailHelp": "Enter the exact account email the delegate uses to sign in.",
-    "delegateEmailPlaceholder": "delegate@email.com",
-    "allocationHelp": "Choose which country/seat to assign. \"Currently assigned\" means another user is already linked there.",
-    "selectAllocation": "Select allocation",
-    "currentlyAssigned": "currently assigned",
-    "accepting": "Accepting...",
-    "acceptDelegate": "Accept delegate",
-    "success": "Delegate accepted and allocation updated."
-  },
-  "roomCodeChairForm": {
-    "committeeSelection": "Committee selection",
-    "committeeCodeSetupTitle": "Committee code setup",
-    "committeeCodeSetupHelp": "Pick the committee, set a 6-character code, and save. This updates the code delegates/staff use to enter that committee room.",
-    "findCommittee": "Find committee",
-    "searchPlaceholder": "Type to filter by name or committee…",
-    "noMatches": "No matches",
-    "currentCommitteeCode": "Current committee code:",
-    "newCommitteeCode": "New committee code",
-    "newCommitteeCodeHelp": "Must be exactly 6 letters/numbers. Share this only with the committee participants who should access this room.",
-    "committeeCodePlaceholder": "e.g. WHO582",
-    "switching": "Switching…",
-    "switchToSelectedCommittee": "Switch to selected committee",
-    "saving": "Saving…",
-    "saveCodeGoToProfile": "Save code & go to profile"
-  },
-  "chairMotionsPointsLog": {
-    "intro": "Record and star points for delegates. Entries are saved to each delegate account/profile and are visible only to that delegate plus committee chair/SMT.",
-    "logTitle": "Points log (account-synced)",
-    "formalMotionsPrefix": "Formal procedural votes and the motion floor are in",
-    "formalMotionsSuffix": ".",
-    "delegate": "Delegate",
-    "selectDelegate": "Select delegate…",
-    "text": "Text",
-    "textPlaceholder": "e.g. Motion to open the speaker list",
-    "add": "➕ Add",
-    "disciplinarySystem": "Disciplinary system",
-    "disciplineRules": "Rule mapping: 3 warnings => strike. Strike 1: no voting rights. Strike 2: speaking rights suspended. Strike 3: removed from committee.",
-    "reasonOptional": "Reason (optional)",
-    "reasonPlaceholder": "e.g. repeated disruption during formal debate",
-    "warning": "+ Warning",
-    "strike": "+ Strike",
-    "revokeWarning": "Revoke warning",
-    "revokeStrike": "Revoke strike",
-    "resetRecord": "Reset record",
-    "current": "Current",
-    "warnings": "Warnings",
-    "strikes": "Strikes",
-    "votingDisabled": "Voting disabled",
-    "speakingSuspended": "Speaking suspended",
-    "removed": "Removed",
-    "yes": "Yes",
-    "no": "No",
-    "presetOptions": "Preset options",
-    "presetHint": "Tap a preset to add a point for the selected delegate.",
-    "log": "Log",
-    "noEntries": "No entries yet.",
-    "unstar": "Unstar",
-    "star": "Star",
-    "point": "Point",
-    "remove": "Remove"
-  },
-  "runningNotesView": {
-    "confirmDelete": "Delete this running note?",
-    "newNote": "New note",
-    "note": "Note",
-    "viewOnly": "View-only (you can only edit your own running notes).",
-    "noteName": "Note name",
-    "noteNamePlaceholder": "e.g. Sunday bloc prep",
-    "noteNameHelp": "Shown in the note list. If empty, tags or note text is used instead.",
-    "tags": "Tags",
-    "addAnotherTag": "Add another tag…",
-    "addTag": "Add tag",
-    "selected": "Selected",
-    "googleDocsUrl": "Google Docs URL",
-    "googleDocsUrlOptional": "Google Docs URL (optional)",
-    "googleDocsHelp": "Paste a shared Google Docs link to show a live preview of your notes. The link is optional; you can keep plain text notes instead.",
-    "googleDocsPlaceholder": "https://docs.google.com/document/d/…",
-    "googleDocsSaveHint": "New Google Doc opens in another tab. Save after pasting the link; the preview updates as you type.",
-    "runningNotesDocument": "Running notes document",
-    "readerWarning": "Reader warning: this note may contain inappropriate language.",
-    "plainTextOptional": "Plain text (optional)",
-    "notesPlaceholder": "Keep notes of everything…",
-    "saveHelp": "Saves your note name, tags, running note text, and Google Docs URL (if provided) for your own account."
-  },
-  "sessionControlClient": {
-    "rollPresent": "Present",
-    "rollPresentTitle": "Present — may abstain from voting",
-    "rollPresentVoting": "Present and voting",
-    "rollPresentVotingTitle": "Present and voting — must vote, cannot abstain",
-    "rollAbsent": "Absent",
-    "rollCallForCountry": "Roll call for {country}",
-    "presetCustom": "Custom",
-    "presetSetAgenda": "Motion to Set the Agenda",
-    "presetExtendOpeningSpeech": "Motion to Extend Opening Speech Time",
-    "presetOpenDebate": "Motion to Open Debate",
-    "presetOpenGsl": "Motion to Open the General Speakers' List",
-    "presetForAgainst": "Motion to Begin For/Against Speeches (resolution)",
-    "presetForAgainstTitle": "Motion to Begin For and Against Speeches on the Draft Resolution",
-    "presetCloseDebate": "Motion to Close Debate",
-    "presetExcludePublic": "Motion to Exclude the Public",
-    "presetSilentPrayerMeditation": "Minute of Silent Prayer/Meditation",
-    "presetSilentPrayerMotionTitle": "Motion for a Minute of Silent Prayer or Meditation",
-    "presetRollCallVote": "Motion for a Roll Call Vote",
-    "presetMinuteSilentPrayer": "Minute of Silent Prayer",
-    "presetUnmoderatedCaucus": "Unmoderated Caucus",
-    "presetUnmoderatedCaucusTitle": "Motion for an Unmoderated Caucus",
-    "presetModeratedCaucus": "Moderated Caucus",
-    "presetModeratedCaucusTitle": "Motion for a Moderated Caucus",
-    "presetConsultation": "Consultation",
-    "presetConsultationTitle": "Motion for a Consultation",
-    "presetCabinetMeeting": "Cabinet Meeting",
-    "presetCabinetMeetingTitle": "Motion for a Cabinet Meeting",
-    "presetShadowMeeting": "Shadow Meeting",
-    "presetShadowMeetingTitle": "Motion for a Shadow Meeting",
-    "presetAdjournSession": "Adjourn Session",
-    "presetAdjournSessionTitle": "Motion to Adjourn Session",
-    "presetSuspendSession": "Suspend Session",
-    "presetSuspendSessionTitle": "Motion to Suspend Session",
-    "presetDivideQuestion": "Divide the Question (editor needed)",
-    "presetDivideQuestionTitle": "Motion to Divide the Question",
-    "presetClauseByClause": "Clause-by-Clause (editor needed)",
-    "presetClauseByClauseTitle": "Motion to Vote Clause by Clause",
-    "presetAmendments": "Amendments (editor needed)",
-    "presetAmendmentTitle": "Amendment",
-    "guidedStepChooseProcedure": "Step 1/5: Choose procedure (enter number).",
-    "invalidProcedureSelection": "Invalid procedure selection.",
-    "liveDebateTopic": "Live debate topic",
-    "motionControlHelp": "Chair workflow: capture motions, open one vote at a time, record votes by allocation, then close the motion to finalize pass/fail.",
-    "tabSetup": "1) Setup",
-    "tabFloorQueue": "2) Floor queue",
-    "tabDraftMotion": "3) Draft motion",
-    "tabRecordVotes": "4) Record votes",
-    "tabHistory": "5) History",
-    "chairOnlyVotingHelp": "Chair-only: one vote open at a time. Delegates do not vote in the app. Use Record votes to call each placard and record Yes or No only. Procedural motions do not use abstain. Pass/fail uses the required majority of members present on roll.",
-    "euGuidedPhase": "EU guided phase",
-    "euGuidedPhaseHint": "Core blockers remain guided: when a motion does not match this phase, chairs can still continue using an explicit override confirmation.",
-    "pointsWorkflow": "Points workflow",
-    "pointOfInformation": "Point of Information",
-    "pointOfClarification": "Point of Clarification",
-    "parliamentaryInquiry": "Parliamentary Inquiry",
-    "pointOfOrder": "Point of Order",
-    "personalPrivilege": "Personal Privilege",
-    "rightOfReply": "Right of Reply",
-    "factCheck": "Fact Check",
-    "raisedByOptional": "Raised by (optional)",
-    "detailOptional": "Detail (optional)",
-    "logPoint": "Log point",
-    "accept": "Accept",
-    "deny": "Deny",
-    "beginVotingMostDisruptive": "Begin voting (most disruptive first)",
-    "pendingVoteOrderMostDisruptive": "Pending — vote order (most disruptive first)",
-    "untitled": "Untitled",
-    "withdraw": "Withdraw",
-    "procedurePreset": "Procedure preset",
-    "procedurePresetHelp": "Prefills common motion types and default titles/timing fields. You can still edit details before opening.",
-    "targetResolution": "Target resolution",
-    "selectResolution": "Select resolution…",
-    "targetClauses": "Target clauses",
-    "noClausesFound": "No clauses found for selected resolution.",
-    "clause": "Clause",
-    "type": "Type",
-    "motion": "Motion",
-    "amendment": "Amendment",
-    "resolution": "Resolution",
-    "requiredMajorityRop": "Required majority (RoP)",
-    "auditTimeline": "Audit timeline",
-    "noAuditEvents": "No audit events yet.",
-    "recentMotions": "Recent motions",
-    "closed": "closed",
-    "reopen": "Reopen",
-    "daisAnnouncements": "Dais announcements",
-    "daisAnnouncementsHelp": "Use Markdown for bold, lists, and links. Pin one line for the floor strip; schedule a future publish time and delegates will only see it once that moment passes. You can edit or delete any line below.",
-    "message": "Message",
-    "messageToCommittee": "Message to the committee…",
-    "format": "Format",
-    "markdown": "Markdown",
-    "plainText": "Plain text",
-    "plain": "Plain",
-    "publishAtOptional": "Publish at (optional)",
-    "publishAt": "Publish at",
-    "post": "Post",
-    "pinned": "Pinned",
-    "scheduled": "Scheduled",
-    "saveChanges": "Save changes",
-    "cancel": "Cancel",
-    "unpin": "Unpin",
-    "pinToFloor": "Pin to floor",
-    "edit": "Edit",
-    "delete": "Delete",
-    "rollCallTracker": "Roll Call Tracker",
-    "rollCallHelp": "Present: may abstain. Present and voting: must vote yes/no. Absent: no ballot is recorded.",
-    "rollCallIntro": "For each delegate, choose Present (may abstain), Present and voting (must vote), or Absent.",
-    "initializeRowsAllAllocations": "Initialize rows (all allocations)",
-    "noRollRowsYet": "No roll rows yet. Initialize to create one row per delegate placard from this committee's allocation matrix.",
-    "delegates": "Delegates",
-    "delegateRollStatusHint": "Use the three buttons to set that delegate's roll status. Current status is highlighted.",
-    "majorityHelp": "Simple for procedural motions; two-thirds for resolutions, amendments, and motions to approve an amendment (Amendments preset).",
-    "agendaTopicCommittee": "Agenda topic (committee)",
-    "noTopicsAvailable": "No topics available",
-    "topicPurpose": "Topic / purpose",
-    "topic": "Topic",
-    "topicOptional": "Topic (optional)",
-    "titleOptional": "Title (optional)",
-    "moderatedCaucusTopic": "Moderated caucus topic",
-    "unmoderatedCaucusTopicOptional": "Unmoderated caucus topic (optional)",
-    "consultationPurposePlaceholder": "What the consultation is for",
-    "motionTitleOptional": "Motion title (optional)",
-    "totalTimeMinutes": "Total time (minutes)",
-    "speakerTimeSeconds": "Speaker time (seconds)",
-    "minutesPlaceholder": "e.g. 10",
-    "secondsPlaceholder": "e.g. 60",
-    "amendmentType": "Amendment type",
-    "friendly": "Friendly",
-    "unfriendly": "Unfriendly",
-    "debateTimePerSideSeconds": "Debate time per side (seconds)",
-    "debateSecondsPlaceholder": "30-60",
-    "motionerHelp": "Optional. Set the delegation that moved the motion so records and exports show who introduced it.",
-    "notSpecified": "Not specified",
-    "description": "Description",
-    "mustVoteHelp": "Marks this as a mandatory vote item according to your committee rules.",
-    "createAndOpenMotion": "Create and open motion",
-    "saveEdits": "Save edits",
-    "deleteMotionConfirm": "Delete this motion permanently? All recorded votes for it will be removed and the motion will disappear from the record.",
-    "deleteMotion": "Delete motion",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
-    "ballotsHelp": "Ballots = placards with a recorded Yes or No (abstain is tracked separately and not counted in this denominator). Clear removes a recorded vote. For procedural motions, outcome compares Yes to members present on the roll (see roll call section).",
-    "recordVotesLabel": "Record votes",
-    "currentMotion": "current motion",
-    "recordVotesHelp": "Chairs register votes per allocation. Abstain appears only for amendment/resolution votes when roll status is not Present and voting. During a roll-call-vote motion, you can capture Yes/No with Rights.",
-    "delegatesCannotVoteHelp": "Delegates cannot vote in the app. Chairs record votes for each allocation. Abstain appears only for resolution/amendment votes when that delegation is not marked Present and voting.",
-    "delegateRollForMotion": "Delegate roll for this motion",
-    "noDelegatesSeatedYet": "No delegates are seated for this committee yet.",
-    "abstain": "Abstain",
-    "unitMinutesShort": "m",
-    "unitSecondsShort": "s",
-    "apply": "Apply"
+  "awardsRubric": {
+    "criteriaHeader": "Tiêu chuẩn",
+    "bandHeaders": {
+      "0": "Bắt đầu",
+      "1": "Đang phát triển",
+      "2": "thành thạo",
+      "3": "gương mẫu"
+    },
+    "tierLow": "Thấp",
+    "tierHigh": "Cao",
+    "tierPromptLocked": "Đã khóa: {band} - {tier} ({score})",
+    "tierPromptPick": "Chọn mức thấp hoặc cao trong {band} (điểm theo thang điểm 1-8).",
+    "criteria": {
+      "creativity": {
+        "label": "Sáng tạo",
+        "bands": {
+          "0": "Đề xuất các giải pháp lặp đi lặp lại hoặc tiêu chuẩn; hiếm khi nghĩ ra ngoài khuôn khổ hiện có.",
+          "1": "Đưa ra một số ý tưởng độc đáo nhưng gặp khó khăn trong việc điều chỉnh chúng cho phù hợp với động lực đang thay đổi của ủy ban.",
+          "2": "Thường xuyên đề xuất các giải pháp sáng tạo, điều khoản độc đáo cho dự thảo nghị quyết.",
+          "3": "Có tính sáng tạo cao; phát triển các thỏa hiệp \"thay đổi trò chơi\" để kết nối các khối xung đột."
+        }
+      },
+      "diplomacy": {
+        "label": "ngoại giao",
+        "bands": {
+          "0": "Thiếu trang trí chuyên nghiệp; đôi khi bác bỏ quan điểm của các đại biểu khác.",
+          "1": "Tôn trọng nhưng không đáng kể; duy trì sự hiện diện trung lập mà không xây dựng mối quan hệ.",
+          "2": "Luôn chuyên nghiệp; tích cực tìm cách hiểu và kết hợp các quan điểm đối lập.",
+          "3": "Thể hiện tài năng quản lý thực sự; ra lệnh tôn trọng trong khi vẫn khiêm tốn và hòa nhập."
+        }
+      },
+      "collaboration": {
+        "label": "Sự hợp tác",
+        "bands": {
+          "0": "Làm việc độc lập hoặc từ chối thỏa hiệp ở những chi tiết nhỏ; làm gián đoạn công việc của nhóm.",
+          "1": "Đóng góp cho một khối nhưng không đóng vai trò tích cực trong việc soạn thảo, tổng hợp các ý tưởng.",
+          "2": "Một cầu thủ mạnh mẽ của đội; giúp thống nhất các nghị quyết và đảm bảo tất cả các thành viên trong khối đều có tiếng nói.",
+          "3": "“Chất keo” của ủy ban gắn kết các nhóm khác nhau lại với nhau và tạo điều kiện cho sự đồng thuận."
+        }
+      },
+      "leadership": {
+        "label": "Khả năng lãnh đạo",
+        "bands": {
+          "0": "Thụ động; chờ người khác đưa ra kiến ​​nghị hoặc bắt đầu thảo luận trong các cuộc họp kín.",
+          "1": "Thể hiện khả năng lãnh đạo trong các nhóm nhỏ nhưng ngại lãnh đạo cả nhà hoặc đại diện cho cả nhóm.",
+          "2": "Chủ động rõ ràng; lãnh đạo các cuộc họp kín không được kiểm duyệt và quản lý quá trình soạn thảo.",
+          "3": "Nhà lãnh đạo có tầm nhìn; tạo nên không khí chung cho căn phòng và truyền cảm hứng cho người khác thông qua hành động và hướng dẫn."
+        }
+      },
+      "knowledge_research": {
+        "label": "Kiến thức và nghiên cứu",
+        "bands": {
+          "0": "Thường bị nhầm lẫn bởi chủ đề; dựa vào những điều tổng quát hơn là những sự kiện cụ thể.",
+          "1": "Có hiểu biết cơ bản về chương trình nghị sự nhưng bỏ sót các sắc thái kỹ thuật hoặc pháp lý.",
+          "2": "Thể hiện sự chỉ huy mạnh mẽ của chủ đề; trích dẫn số liệu thống kê có liên quan và các hành động trong quá khứ của Liên Hợp Quốc.",
+          "3": "Làm chủ cấp độ chuyên gia; sử dụng nghiên cứu sâu để điều hướng các cuộc tranh luận kỹ thuật và vạch trần thông tin sai lệch."
+        }
+      },
+      "participation": {
+        "label": "Sự tham gia",
+        "bands": {
+          "0": "Hiếm khi nói; thường xuyên vắng mặt trong cuộc họp kín hoặc không hoạt động trong quá trình bỏ phiếu.",
+          "1": "Thỉnh thoảng phát biểu trong các cuộc họp kín có kiểm duyệt; chỉ tham gia khi được nhắc.",
+          "2": "Tích cực nhất quán trong tất cả các buổi tập; thường xuyên nâng cao chuyển động và góp phần vào sàn.",
+          "3": "Sự hiện diện cần thiết và nhất quán; tham gia vào mọi khía cạnh của cuộc tranh luận từ đầu đến cuối."
+        }
+      },
+      "research_depth": {
+        "label": "Độ sâu nghiên cứu",
+        "bands": {
+          "0": "Dữ liệu tối thiểu; thiếu các nghị quyết cụ thể của Liên hợp quốc, trích dẫn hiệp ước hoặc bối cảnh lịch sử.",
+          "1": "Dữ liệu cơ bản được cung cấp; đề cập đến các hiệp ước nổi tiếng nhưng thiếu bằng chứng cụ thể tại địa phương.",
+          "2": "Nghiên cứu mạnh mẽ; bao gồm các số liệu thống kê liên quan, các hoạt động trước đây của Liên hợp quốc và lịch sử cụ thể của ủy ban.",
+          "3": "Độ sâu đặc biệt; xác định các lỗ hổng pháp lý thích hợp, khoảng trống tài trợ cụ thể hoặc các điểm dữ liệu hiếm."
+        }
+      },
+      "country_stance_alignment": {
+        "label": "Liên kết lập trường quốc gia",
+        "bands": {
+          "0": "Thường xuyên mâu thuẫn với lợi ích địa chính trị trong thế giới thực hoặc lịch sử bỏ phiếu của quốc gia được chỉ định.",
+          "1": "Nói chung tuân theo chính sách nhưng thiếu sự rõ ràng về quan điểm quốc gia nhạy cảm hoặc gây tranh cãi.",
+          "2": "Chính xác nhất quán; phản ánh rõ ràng lợi ích chiến lược khu vực và toàn cầu của đất nước.",
+          "3": "Mang nhiều sắc thái; giải quyết các động lực khu vực phức tạp và xác định rõ ràng các “ranh giới đỏ” quốc gia."
+        }
+      },
+      "policy_accuracy": {
+        "label": "Độ chính xác của chính sách",
+        "bands": {
+          "0": "Hiểu sai cơ bản về khuôn khổ pháp lý của chủ đề hoặc nhiệm vụ của ủy ban.",
+          "1": "Hiểu chủ đề chung nhưng bỏ sót những vấn đề phức tạp về mặt kỹ thuật hoặc pháp lý trong chính sách hiện tại.",
+          "2": "Nắm vững các vấn đề chính sách phức tạp (ví dụ: các điều khoản cụ thể trong luật quốc tế).",
+          "3": "Độ chính xác ở cấp độ chuyên gia; tích hợp các sự kiện kỹ thuật để xây dựng một lập luận chính sách phức tạp."
+        }
+      },
+      "proposed_solutions": {
+        "label": "Giải pháp đề xuất",
+        "bands": {
+          "0": "Mơ hồ hoặc không thể hành động được (ví dụ: \"các quốc gia nên nói nhiều hơn\"). Không có kế hoạch thực hiện.",
+          "1": "Giải pháp chung; thiếu thông tin chi tiết về nguồn tài trợ, các cơ quan cụ thể của Liên hợp quốc hoặc tính khả thi.",
+          "2": "Sáng tạo và khả thi; đề xuất cơ chế, tổ công tác hoặc cơ quan giám sát cụ thể.",
+          "3": "Tinh vi và toàn diện; các giải pháp là nguyên bản, khả thi và hợp pháp với các mốc thời gian rõ ràng."
+        }
+      },
+      "formatting_style_citations": {
+        "label": "Định dạng, Phong cách và Trích dẫn",
+        "bands": {
+          "0": "Lỗi nghiêm trọng trong cách trích dẫn của Liên hợp quốc (ví dụ: Chicago/APA); giọng điệu thiếu chuyên nghiệp.",
+          "1": "Định dạng chuẩn nhưng có một số lỗ hổng ngữ pháp hoặc kiểu trích dẫn không nhất quán.",
+          "2": "Định dạng học thuật chuyên nghiệp của Liên Hợp Quốc; ngôn ngữ ngoại giao rõ ràng, ngắn gọn và thuyết phục.",
+          "3": "Phong cách học thuật hoàn hảo của Liên Hợp Quốc; tường thuật hấp dẫn và trích dẫn hoàn hảo của tất cả các nguồn."
+        }
+      },
+      "pre_conference_support": {
+        "label": "Hỗ trợ trước hội nghị",
+        "bands": {
+          "0": "Hướng dẫn học tập còn muộn hoặc chưa đầy đủ; giao tiếp tối thiểu với SMT/USG.",
+          "1": "Tài liệu hướng dẫn nghiên cứu đáp ứng yêu cầu cơ bản nhưng thiếu sự phân tích sâu sắc hoặc định dạng rõ ràng.",
+          "2": "Hướng dẫn học tập toàn diện; chủ động trả lời email của đại biểu và chuẩn bị.",
+          "3": "Hướng dẫn học tập đặc biệt; đã cung cấp thêm nguồn lực và phản hồi sớm về các giấy tờ quan điểm."
+        }
+      },
+      "empathy": {
+        "label": "đồng cảm",
+        "bands": {
+          "0": "Loại bỏ những lo lắng của đại biểu; không nhận thấy khi nào một đại biểu đang gặp khó khăn hoặc bị loại trừ.",
+          "1": "Chuyên nghiệp nhưng lâm sàng; chỉ cung cấp hỗ trợ khi được đại biểu yêu cầu rõ ràng.",
+          "2": "Tích cực kiểm tra các đại biểu trầm tính; tạo ra một không gian an toàn cho người mới bắt đầu tham gia.",
+          "3": "Trí tuệ cảm xúc cao; dự đoán căng thẳng của đại biểu, xử lý các xung đột nảy lửa một cách cẩn thận và đảm bảo mọi tiếng nói đều được coi trọng."
+        }
+      },
+      "collaboration_co_chair": {
+        "label": "Hợp tác với đồng chủ tịch",
+        "bands": {
+          "0": "Một chiếc ghế chiếm ưu thế; thiếu sự trao đổi thông tin dẫn đến các phán quyết không nhất quán.",
+          "1": "Công việc được phân chia nhưng các ghế hoạt động riêng lẻ; tư vấn tối thiểu về quyết định giải thưởng.",
+          "2": "Quan hệ đối tác cân bằng; giao tiếp rõ ràng và hỗ trợ lẫn nhau trong các buổi học.",
+          "3": "Sức mạnh tổng hợp liền mạch; các ghế dự đoán nhu cầu của nhau và tạo nên một mặt trận thống nhất, chuyên nghiệp."
+        }
+      },
+      "mun_knowledge": {
+        "label": "Kiến thức MUN",
+        "bands": {
+          "0": "Các lỗi thường gặp trong Quy tắc thủ tục (RoP); phụ thuộc rất nhiều vào Ban Thư ký để được giúp đỡ.",
+          "1": "Kiến thức RoP cơ bản; có thể điều hành một cuộc họp kín được kiểm duyệt tiêu chuẩn nhưng bỏ lỡ các sắc thái chuyển động.",
+          "2": "Chỉ huy RoP mạnh mẽ; quản lý sàn hiệu quả và công bằng với sai sót tối thiểu.",
+          "3": "Làm chủ tuyệt đối; sử dụng RoP để tăng cường luồng tranh luận và xử lý các tình huống thủ tục phức tạp một cách dễ dàng."
+        }
+      },
+      "country_stances_topic": {
+        "label": "Quan điểm đất nước & Kiến thức chủ đề",
+        "bands": {
+          "0": "Không thể xác định liệu đại biểu có đang phát biểu \"không bình thường\" hay không; bỏ qua tính chính xác của chính sách.",
+          "1": "Nhìn chung nhận thức được quan điểm của các cường quốc lớn nhưng lại bỏ lỡ những thay đổi trong chính sách ủy quyền nhỏ hơn.",
+          "2": "Tích cực giám sát tính chính xác của chính sách; hướng dẫn các đại biểu trở lại nhân vật khi cần thiết.",
+          "3": "Nghiên cứu sâu sắc trong mọi phân bổ; cung cấp phản hồi chính xác về các sắc thái địa chính trị trong quá trình tranh luận."
+        }
+      },
+      "flexibility": {
+        "label": "Tính linh hoạt",
+        "bands": {
+          "0": "Tuân thủ chặt chẽ lịch trình ngay cả khi cuộc tranh luận bị đình trệ; chống lại phản hồi SMT.",
+          "1": "Chỉ điều chỉnh khi được Ban Thư ký nhắc nhở; đấu tranh với những thay đổi đột ngột trong động lực khối.",
+          "2": "Đáp ứng tốt với sự thay đổi của ủy ban; điều chỉnh thời gian hoặc chuyển động phát biểu để mang lại lợi ích cho luồng tranh luận.",
+          "3": "Khả năng thích ứng cao; xoay chuyển liền mạch trong các cuộc khủng hoảng hoặc các cuộc tranh luận bất ngờ thay đổi trong khi vẫn duy trì trật tự."
+        }
+      },
+      "professionalism": {
+        "label": "Tính chuyên nghiệp",
+        "bands": {
+          "0": "Trang phục hoặc giọng điệu thiếu chuyên nghiệp thể hiện sự thiên vị rõ ràng đối với các đại biểu hoặc trường học cụ thể.",
+          "1": "Chuyên nghiệp nhưng thiếu thẩm quyền; đôi khi có những sai sót trong cách ứng xử ngoại giao.",
+          "2": "Luôn chuyên nghiệp; duy trì sự công bằng và yêu cầu sự tôn trọng từ nhà.",
+          "3": "Nêu gương tiêu chuẩn của Ban Thư ký; trang trí hoàn hảo, vô tư và đóng vai trò là hình mẫu."
+        }
+      },
+      "engagement": {
+        "label": "Hôn ước",
+        "bands": {
+          "0": "Có vẻ buồn chán hoặc mất tập trung; phản hồi tối thiểu được đưa ra cho các đại biểu trong quá trình họp kín.",
+          "1": "Chú ý nhưng thụ động; không tích cực khuyến khích các đại biểu trầm tính hơn tham gia.",
+          "2": "Năng lượng cao; đưa ra những phản hồi mang tính xây dựng và giúp ủy ban luôn có động lực trong suốt quá trình làm việc.",
+          "3": "sự hiện diện đầy cảm hứng; tích cực cố vấn cho các đại biểu, thúc đẩy một môi trường hòa nhập và thúc đẩy các cuộc tranh luận cấp cao."
+        }
+      },
+      "academic_depth": {
+        "label": "Chiều sâu học thuật",
+        "bands": {
+          "0": "Tóm tắt cấp độ bề mặt; thiếu bối cảnh hoặc dữ liệu lịch sử.",
+          "1": "Tổng quan tốt nhưng bỏ sót các sắc thái pháp lý hoặc kỹ thuật phức tạp.",
+          "2": "Phân tích mạnh mẽ; bao gồm các hành động cụ thể trong quá khứ và dữ liệu khu vực.",
+          "3": "Học bổng cấp chuyên gia; xác định các góc độ độc đáo để tranh luận."
+        }
+      },
+      "mandate_clarity": {
+        "label": "Nhiệm vụ rõ ràng",
+        "bands": {
+          "0": "\"Những câu hỏi cần xem xét\" mơ hồ; quyền hạn của ủy ban không rõ ràng.",
+          "1": "Câu hỏi chuẩn; hướng dẫn chung về phạm vi tranh luận.",
+          "2": "Các câu hỏi rõ ràng, tập trung nhằm hướng dẫn các đại biểu hướng tới các giải pháp cụ thể.",
+          "3": "Lời nhắc được thiết kế chính xác nhằm ngăn chặn cuộc tranh luận trì trệ hoặc lạc đề."
+        }
+      },
+      "accessibility": {
+        "label": "Khả năng tiếp cận",
+        "bands": {
+          "0": "Quá dày đặc hoặc vô tổ chức; khó khăn cho người mới bắt đầu điều hướng.",
+          "1": "Bố cục rõ ràng nhưng thiếu trợ giúp trực quan hoặc bảng chú giải thuật ngữ.",
+          "2": "Cấu trúc tốt; bao gồm các liên kết hữu ích, bản đồ và bảng chú giải thuật ngữ rõ ràng.",
+          "3": "Được thiết kế khéo léo; cân bằng học viện cấp cao với điều hướng trực quan."
+        }
+      },
+      "resource_quality": {
+        "label": "Chất lượng tài nguyên",
+        "bands": {
+          "0": "Có rất ít hoặc các liên kết lỗi thời được cung cấp cho nghiên cứu của đại biểu.",
+          "1": "Liên kết tiêu chuẩn của Liên hợp quốc được cung cấp; bao gồm những điều cơ bản cho hầu hết các quốc gia.",
+          "2": "Thư mục đa dạng và được tuyển chọn bao gồm các tổ chức phi chính phủ, hiệp ước và bộ dữ liệu.",
+          "3": "Bộ công cụ toàn diện; cung cấp cho các đại biểu dữ liệu \"ẩn\" và các nguồn thích hợp."
+        }
+      },
+      "committee_introduction": {
+        "label": "Giới thiệu Ủy ban",
+        "bands": {
+          "0": "Chỉ cung cấp một định nghĩa chung về tên của ủy ban.",
+          "1": "Liệt kê nhiệm vụ nhưng không giải thích được quyền hạn hoặc hạn chế cụ thể của ủy ban.",
+          "2": "Nêu rõ lịch sử, phạm vi quyền hạn và vai trò của ủy ban trong hệ thống Liên hợp quốc.",
+          "3": "Kết nối một cách thành thạo các \"răng\" pháp lý cụ thể của ủy ban với các nội dung chương trình nghị sự hiện tại."
+        }
+      },
+      "topic_introduction": {
+        "label": "Giới thiệu chủ đề",
+        "bands": {
+          "0": "Mơ hồ hoặc quá rộng; không xác định được vấn đề cốt lõi.",
+          "1": "Cung cấp một bản tóm tắt chung nhưng thiếu dữ liệu hiện tại hoặc những phát triển gần đây.",
+          "2": "Tổng quan toàn diện; xác định các thuật ngữ kỹ thuật và tình trạng toàn cầu hiện tại của vấn đề.",
+          "3": "Một câu chuyện hấp dẫn xác định những “điểm mù” cụ thể trong chính sách quốc tế."
+        }
+      },
+      "timeline": {
+        "label": "Dòng thời gian",
+        "bands": {
+          "0": "Thiếu các cột mốc lịch sử hoặc hiệp ước quan trọng.",
+          "1": "Liệt kê các ngày tháng cơ bản nhưng không giải thích được tầm quan trọng của các hành động trong quá khứ.",
+          "2": "Dòng thời gian chính xác; giải thích các nghị quyết trong quá khứ đã dẫn đến tình hình hiện tại như thế nào.",
+          "3": "Dòng thời gian chiến lược nêu bật những can thiệp thất bại và thành công để định hướng cuộc tranh luận trong tương lai."
+        }
+      },
+      "key_stances": {
+        "label": "Các thế đứng chính",
+        "bands": {
+          "0": "Chỉ đề cập đến các quốc gia P5; bỏ qua các khối khu vực hoặc các bên liên quan nhỏ.",
+          "1": "Nhóm các quốc gia theo nghĩa rộng (ví dụ: \"Phương Tây\") mà không có sự khác biệt về sắc thái chính sách.",
+          "2": "Nêu chi tiết các ưu tiên cụ thể của các nhóm lợi ích chính và các bên tham gia chủ chốt trong khu vực.",
+          "3": "Phân tích tinh vi về những “ranh giới đỏ” xung đột và những yếu tố có thể phá hoại trong quá trình đàm phán."
+        }
+      },
+      "possible_solutions": {
+        "label": "Giải pháp khả thi",
+        "bands": {
+          "0": "Chung chung hoặc lặp đi lặp lại (ví dụ: \"thêm kinh phí\", \"nhận thức\").",
+          "1": "Đề xuất các bước hợp lý nhưng thiếu chi tiết về việc thực hiện hoặc giám sát.",
+          "2": "Đề xuất các khuôn khổ đổi mới, đa chiều phù hợp với nhiệm vụ của ủy ban.",
+          "3": "Các giải pháp \"Chính sách có mục đích\" cấp cao nhằm giải quyết các nguyên nhân gốc rễ và tính khả thi về mặt kỹ thuật."
+        }
+      },
+      "debate_productivity": {
+        "label": "Tranh luận về năng suất",
+        "bands": {
+          "0": "Thường xuyên tạm lắng trong cuộc tranh luận; đối số vòng tròn không có tiến bộ.",
+          "1": "Cuộc tranh luận ổn định nhưng gặp khó khăn để vượt ra ngoài những điều chung chung về \"Chủ đề A\".",
+          "2": "Diễn ngôn cấp cao; Các đại biểu nhanh chóng chuyển sang các giải pháp thực chất.",
+          "3": "Tranh luận năng động và phát triển; ngôi nhà vẫn gắn kết và sắc bén về mặt trí tuệ."
+        }
+      },
+      "collaborative_spirit": {
+        "label": "Tinh thần hợp tác",
+        "bands": {
+          "0": "Có tính độc hại cao hoặc bè phái; các khối nhỏ từ chối nói chuyện với nhau.",
+          "1": "Hành vi ngoại giao chuẩn mực; hợp tác cơ bản trong quá trình họp kín.",
+          "2": "Bầu không khí hòa nhập; các khối lớn hơn tích cực tìm kiếm ý kiến ​​từ các quốc gia nhỏ.",
+          "3": "Ngoại giao gương mẫu; sự liên kết và xây dựng sự đồng thuận \"chính sách có mục đích\" cao."
+        }
+      },
+      "resolution_quality": {
+        "label": "Chất lượng độ phân giải",
+        "bands": {
+          "0": "Nghị quyết nông cạn; \"sự khuyến khích mơ hồ\" hơn là hành động.",
+          "1": "Điều khoản tiêu chuẩn; giải quyết các triệu chứng nhưng không giải quyết được nguyên nhân gốc rễ.",
+          "2": "Các giải pháp hợp lý về mặt kỹ thuật với cơ chế tài trợ và giám sát rõ ràng.",
+          "3": "Các tài liệu tinh vi, sáng tạo và có tính ứng dụng cao phản ánh các tiêu chuẩn thực tế của Liên hợp quốc."
+        }
+      },
+      "chair_delegate_synergy": {
+        "label": "Sức mạnh tổng hợp của Chủ tịch-Đại biểu",
+        "bands": {
+          "0": "Những chiếc ghế đấu tranh để quản lý căn phòng; sự tôn trọng thấp đối với dai.",
+          "1": "mối quan hệ chức năng; ghế theo lịch trình nhưng không dẫn đầu.",
+          "2": "Năng lượng tích cực; chủ trì cố vấn cho các đại biểu đồng thời duy trì trật tự vững chắc.",
+          "3": "Sức mạnh tổng hợp liền mạch; dais truyền cảm hứng cho một môi trường chuyên nghiệp và có tính cổ phần cao."
+        }
+      }
+    }
   }
 }

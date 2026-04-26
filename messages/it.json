@@ -1782,5 +1782,308 @@
     "parsedRowsSample": "Analizzate {count} riga/e. Campione:",
     "runImport": "Esegui l'importazione",
     "generateMissingRandomCodes": "Genera codici casuali mancanti"
+  },
+  "awardsRubric": {
+    "criteriaHeader": "Criteri",
+    "bandHeaders": {
+      "0": "Inizio",
+      "1": "Sviluppo",
+      "2": "Competente",
+      "3": "Esemplare"
+    },
+    "tierLow": "Basso",
+    "tierHigh": "Alto",
+    "tierPromptLocked": "Bloccato: {band} - {tier} ({score})",
+    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "criteria": {
+      "creativity": {
+        "label": "Creatività",
+        "bands": {
+          "0": "Propone soluzioni ripetitive o standard; raramente pensa al di fuori del quadro esistente.",
+          "1": "Offre alcune idee originali ma fatica ad adattarle alle mutevoli dinamiche del comitato.",
+          "2": "Suggerisce spesso soluzioni innovative e clausole uniche per i progetti di risoluzione.",
+          "3": "Altamente creativo; sviluppa compromessi “rivoluzionari” che colmano blocchi in conflitto."
+        }
+      },
+      "diplomacy": {
+        "label": "Diplomazia",
+        "bands": {
+          "0": "Manca di decoro professionale; occasionalmente sprezzante nei confronti dei punti di vista degli altri delegati.",
+          "1": "Rispettoso ma insignificante; mantiene una presenza neutrale senza costruire rapporti.",
+          "2": "Costantemente professionale; cerca attivamente di comprendere e incorporare punti di vista opposti.",
+          "3": "Esemplifica la vera arte politica; esige rispetto pur rimanendo umile e inclusivo."
+        }
+      },
+      "collaboration": {
+        "label": "Collaborazione",
+        "bands": {
+          "0": "Lavora in isolamento o rifiuta di scendere a compromessi su dettagli minori; disturba il lavoro di gruppo.",
+          "1": "Contribuisce a un blocco ma non assume un ruolo attivo nella stesura o nella fusione delle idee.",
+          "2": "Un forte giocatore di squadra; aiuta a unire le risoluzioni e garantisce che tutti i membri del blocco abbiano voce in capitolo.",
+          "3": "Il \"collante\" del comitato riunisce gruppi disparati e facilita il consenso."
+        }
+      },
+      "leadership": {
+        "label": "Direzione",
+        "bands": {
+          "0": "Passivo; attende che gli altri avviino mozioni o avviino discussioni durante i caucus.",
+          "1": "Mostra leadership in piccoli gruppi ma è riluttante a guidare la casa o a presentare il blocco.",
+          "2": "Prende un'iniziativa chiara; conduce caucus non moderati e gestisce il processo di redazione.",
+          "3": "Leader visionario; dà il tono alla stanza e ispira gli altri attraverso l'azione e la guida."
+        }
+      },
+      "knowledge_research": {
+        "label": "Conoscenza e ricerca",
+        "bands": {
+          "0": "Spesso confuso dall'argomento; si basa su generalità piuttosto che su fatti specifici.",
+          "1": "Ha una conoscenza di base dell'ordine del giorno ma non comprende le sfumature tecniche o legali.",
+          "2": "Dimostra una forte padronanza dell'argomento; cita statistiche rilevanti e azioni passate delle Nazioni Unite.",
+          "3": "Padronanza a livello di esperto; utilizza ricerche approfondite per affrontare dibattiti tecnici e sfatare informazioni false."
+        }
+      },
+      "participation": {
+        "label": "Partecipazione",
+        "bands": {
+          "0": "Parla raramente; spesso assente durante i caucus o inattivo durante le votazioni.",
+          "1": "Parla occasionalmente in caucus moderati; partecipa solo quando richiesto.",
+          "2": "Coerentemente attivo in tutte le sessioni; solleva frequentemente movimenti e contribuisce al pavimento.",
+          "3": "Presenza necessaria e costante; si impegna in ogni aspetto del dibattito dall'inizio alla fine."
+        }
+      },
+      "research_depth": {
+        "label": "Profondità di ricerca",
+        "bands": {
+          "0": "Dati minimi; manca di risoluzioni specifiche delle Nazioni Unite, citazioni di trattati o contesto storico.",
+          "1": "Dati di base forniti; menziona trattati ben noti ma manca di prove specifiche localizzate.",
+          "2": "Ricerca approfondita; include statistiche rilevanti, azioni passate delle Nazioni Unite e storia specifica del comitato.",
+          "3": "Profondità eccezionale; identifica scappatoie legali di nicchia, specifiche lacune di finanziamento o dati rari."
+        }
+      },
+      "country_stance_alignment": {
+        "label": "Allineamento della posizione del Paese",
+        "bands": {
+          "0": "Spesso contraddice gli interessi geopolitici reali del paese assegnato o la cronologia delle votazioni.",
+          "1": "Generalmente segue la politica ma manca di chiarezza sulle posizioni nazionali sensibili o controverse.",
+          "2": "Coerentemente accurato; riflette chiaramente gli interessi strategici regionali e globali della nazione.",
+          "3": "Altamente sfumato; affronta complesse dinamiche regionali e definisce chiaramente le “linee rosse” nazionali."
+        }
+      },
+      "policy_accuracy": {
+        "label": "Precisione della politica",
+        "bands": {
+          "0": "Incomprensione fondamentale del quadro giuridico del tema o del mandato del comitato.",
+          "1": "Comprende l'argomento generale ma non comprende le complessità tecniche o legali all'interno della politica attuale.",
+          "2": "Solida conoscenza di questioni politiche complesse (ad esempio, clausole specifiche del diritto internazionale).",
+          "3": "Precisione di livello esperto; integra fatti tecnici per costruire un argomento politico sofisticato."
+        }
+      },
+      "proposed_solutions": {
+        "label": "Soluzioni proposte",
+        "bands": {
+          "0": "Vago o non attuabile (ad esempio, \"i paesi dovrebbero parlare di più\"). Nessun piano di attuazione.",
+          "1": "Soluzioni generiche; mancano dettagli sui finanziamenti, sulle agenzie specifiche delle Nazioni Unite o sulla fattibilità.",
+          "2": "Innovativo e attuabile; propone meccanismi specifici, task force o organismi di monitoraggio.",
+          "3": "Sofisticato e olistico; le soluzioni siano originali, fattibili e giuridicamente valide con scadenze chiare."
+        }
+      },
+      "formatting_style_citations": {
+        "label": "Formattazione, stile e citazioni",
+        "bands": {
+          "0": "Errori significativi nello stile di citazione delle Nazioni Unite (ad esempio, Chicago/APA); tono poco professionale.",
+          "1": "Formattazione standard, ma contiene numerose lacune grammaticali o stili di citazione incoerenti.",
+          "2": "Formattazione accademica professionale delle Nazioni Unite; linguaggio diplomatico chiaro, conciso e persuasivo.",
+          "3": "Stile accademico impeccabile delle Nazioni Unite; narrativa avvincente e citazione perfetta di tutte le fonti."
+        }
+      },
+      "pre_conference_support": {
+        "label": "Supporto pre-conferenza",
+        "bands": {
+          "0": "La guida allo studio era in ritardo o incompleta; comunicazione minima con SMT/USG.",
+          "1": "La guida allo studio soddisfaceva i requisiti di base ma mancava di un'analisi approfondita o di una formattazione chiara.",
+          "2": "Guida allo studio completa; proattivo nel rispondere alle e-mail dei delegati e nella preparazione.",
+          "3": "Guida allo studio eccezionale; fornito risorse aggiuntive e feedback tempestivo sui documenti di sintesi."
+        }
+      },
+      "empathy": {
+        "label": "Empatia",
+        "bands": {
+          "0": "Sprezzante delle ansie dei delegati; non riesce a notare quando un delegato è in difficoltà o escluso.",
+          "1": "Professionale ma clinico; fornisce supporto solo quando richiesto esplicitamente da un delegato.",
+          "2": "Controlla attivamente i delegati silenziosi; crea uno spazio sicuro per la partecipazione dei principianti.",
+          "3": "Elevata intelligenza emotiva; anticipa lo stress dei delegati, gestisce i conflitti accesi con cura e garantisce che ogni voce si senta apprezzata."
+        }
+      },
+      "collaboration_co_chair": {
+        "label": "Collaborazione con il co-presidente",
+        "bands": {
+          "0": "Una sedia domina; la mancanza di comunicazione si traduce in decisioni incoerenti.",
+          "1": "Il lavoro è suddiviso ma le sedie operano in silos; consultazione minima sulle decisioni di aggiudicazione.",
+          "2": "Partenariato equilibrato; comunicazione chiara e supporto reciproco durante le sessioni.",
+          "3": "Sinergia senza soluzione di continuità; le sedie anticipano le reciproche esigenze e forniscono un fronte unificato e professionale."
+        }
+      },
+      "mun_knowledge": {
+        "label": "MUN Conoscenza",
+        "bands": {
+          "0": "Errori frequenti nel regolamento interno (RoP); fa molto affidamento sull'aiuto del Segretariato.",
+          "1": "Conoscenza di base del RoP; può gestire un caucus moderato standard ma non riesce a cogliere le sfumature delle mozioni.",
+          "2": "Forte padronanza del RoP; gestisce il pavimento in modo efficiente ed equo con errori minimi.",
+          "3": "Padronanza assoluta; utilizza il RoP per migliorare il flusso del dibattito e gestisce con facilità situazioni procedurali complesse."
+        }
+      },
+      "country_stances_topic": {
+        "label": "Posizioni nazionali e conoscenza dell'argomento",
+        "bands": {
+          "0": "Impossibile identificare se un delegato sta parlando \"fuori carattere\"; ignora l’accuratezza della politica.",
+          "1": "Generalmente consapevole delle posizioni delle grandi potenze, ma non nota i cambiamenti nelle politiche di delega più piccola.",
+          "2": "Monitora attivamente l'accuratezza delle policy; guida i delegati al personaggio quando necessario.",
+          "3": "Ricerca approfondita in tutte le allocazioni; fornisce un feedback preciso sulle sfumature geopolitiche durante il dibattito."
+        }
+      },
+      "flexibility": {
+        "label": "Flessibilità",
+        "bands": {
+          "0": "Rispetto rigido del programma anche quando il dibattito è stagnante; resistente al feedback SMT.",
+          "1": "Si adegua solo su sollecitazione della Segreteria; lotta con improvvisi cambiamenti nelle dinamiche del blocco.",
+          "2": "Risponde bene ai turni dei comitati; adegua i tempi di parola o le mozioni per favorire il flusso del dibattito.",
+          "3": "Altamente adattivo; ruota senza soluzione di continuità durante le crisi o le svolte inaspettate del dibattito mantenendo l'ordine."
+        }
+      },
+      "professionalism": {
+        "label": "Professionalità",
+        "bands": {
+          "0": "L'abbigliamento o il tono non professionale mostrano un chiaro pregiudizio verso specifici delegati o scuole.",
+          "1": "Professionale ma privo di autorità; occasionali mancanze di decoro diplomatico.",
+          "2": "Costantemente professionale; mantiene l'imparzialità e esige rispetto da parte della casa.",
+          "3": "Esemplifica lo standard del Segretariato; decoro impeccabile, imparziale e funge da modello."
+        }
+      },
+      "engagement": {
+        "label": "Fidanzamento",
+        "bands": {
+          "0": "Sembra annoiato o distratto; feedback minimo fornito ai delegati durante il caucusing.",
+          "1": "Attento ma passivo; non incoraggia attivamente i delegati più silenziosi a partecipare.",
+          "2": "Alta energia; fornisce un feedback costruttivo e mantiene motivato il comitato durante tutto il processo.",
+          "3": "Presenza stimolante; guida attivamente i delegati, promuove un ambiente inclusivo e guida il dibattito ad alto livello."
+        }
+      },
+      "academic_depth": {
+        "label": "Profondità accademica",
+        "bands": {
+          "0": "Riepilogo a livello di superficie; manca di contesto o dati storici.",
+          "1": "Buona panoramica ma mancano complesse sfumature legali o tecniche.",
+          "2": "Analisi forte; include azioni passate specifiche e dati regionali.",
+          "3": "Borsa di studio di livello esperto; identifica angoli unici di dibattito."
+        }
+      },
+      "mandate_clarity": {
+        "label": "Chiarezza del mandato",
+        "bands": {
+          "0": "Vaghe \"domande da considerare\"; poteri poco chiari della commissione.",
+          "1": "Domande standard; indicazioni generali sulla portata del dibattito.",
+          "2": "Domande chiare e mirate che guidano i delegati verso soluzioni specifiche.",
+          "3": "Suggerimenti progettati con precisione che impediscono dibattiti stagnanti o fuori tema."
+        }
+      },
+      "accessibility": {
+        "label": "Accessibilità",
+        "bands": {
+          "0": "Eccessivamente denso o disorganizzato; difficile da navigare per i principianti.",
+          "1": "Layout pulito ma privo di aiuti visivi o glossario dei termini.",
+          "2": "Ben strutturato; include collegamenti utili, mappe e un glossario chiaro.",
+          "3": "Progettato magistralmente; bilancia il mondo accademico di alto livello con la navigazione intuitiva."
+        }
+      },
+      "resource_quality": {
+        "label": "Qualità delle risorse",
+        "bands": {
+          "0": "Pochi o collegamenti obsoleti forniti per la ricerca dei delegati.",
+          "1": "Collegamenti standard delle Nazioni Unite forniti; copre le nozioni di base per la maggior parte delle nazioni.",
+          "2": "Bibliografia diversificata e curata, comprese ONG, trattati e set di dati.",
+          "3": "Kit di strumenti completo; fornisce ai delegati dati \"nascosti\" e fonti di nicchia."
+        }
+      },
+      "committee_introduction": {
+        "label": "Introduzione del comitato",
+        "bands": {
+          "0": "Fornisce solo una definizione generica del nome del comitato.",
+          "1": "Elenca il mandato ma non spiega i poteri o i limiti specifici del comitato.",
+          "2": "Delinea chiaramente la storia, la portata dell'autorità e il ruolo del comitato all'interno del sistema delle Nazioni Unite.",
+          "3": "Collega magistralmente i \"denti\" giuridici specifici della commissione con i punti all'ordine del giorno attuali."
+        }
+      },
+      "topic_introduction": {
+        "label": "Introduzione all'argomento",
+        "bands": {
+          "0": "Vago o eccessivamente ampio; non riesce a definire il problema principale.",
+          "1": "Fornisce un riepilogo generale ma manca di dati attuali o di sviluppi recenti.",
+          "2": "Panoramica completa; definisce i termini tecnici e lo stato attuale globale del problema.",
+          "3": "Una narrazione avvincente che identifica specifici “punti ciechi” nella politica internazionale."
+        }
+      },
+      "timeline": {
+        "label": "Cronologia",
+        "bands": {
+          "0": "Mancano importanti pietre miliari o trattati storici.",
+          "1": "Elenca le date di base ma non riesce a spiegare il significato delle azioni passate.",
+          "2": "Flusso cronologico accurato; spiega come le risoluzioni passate hanno portato alla situazione attuale.",
+          "3": "Cronologia strategica che evidenzia gli interventi falliti e quelli riusciti per guidare il dibattito futuro."
+        }
+      },
+      "key_stances": {
+        "label": "Posizioni chiave",
+        "bands": {
+          "0": "Menziona solo le nazioni P5; ignora i blocchi regionali o gli stakeholder minori.",
+          "1": "Raggruppa i paesi in modo ampio (ad esempio \"L'Occidente\") senza differenze politiche sfumate.",
+          "2": "Dettaglia le priorità specifiche dei principali gruppi di interesse e dei principali attori regionali.",
+          "3": "Analisi sofisticata delle \"linee rosse\" contrastanti e dei potenziali spoiler nel processo di negoziazione."
+        }
+      },
+      "possible_solutions": {
+        "label": "Possibili soluzioni",
+        "bands": {
+          "0": "Generico o ripetitivo (ad esempio \"più finanziamenti\", \"consapevolezza\").",
+          "1": "Suggerisce passaggi logici ma manca di dettagli sull'implementazione o sulla supervisione.",
+          "2": "Propone quadri innovativi e multidimensionali in linea con il mandato del comitato.",
+          "3": "Soluzioni di \"politica mirata\" di alto livello che affrontano le cause profonde e la fattibilità tecnica."
+        }
+      },
+      "debate_productivity": {
+        "label": "Produttività del dibattito",
+        "bands": {
+          "0": "Frequenti pause nel dibattito; argomenti circolari senza progresso.",
+          "1": "Dibattito costante ma fatica ad andare oltre le generalità dell'\"Argomento A\".",
+          "2": "Discorso di alto livello; i delegati si muovono rapidamente verso soluzioni sostanziali.",
+          "3": "Dibattito dinamico e in evoluzione; la casa rimane impegnata e intellettualmente acuta."
+        }
+      },
+      "collaborative_spirit": {
+        "label": "Spirito collaborativo",
+        "bands": {
+          "0": "Altamente tossico o cricca; i blocchi minori si rifiutano di dialogare tra loro.",
+          "1": "Comportamento diplomatico standard; cooperazione di base durante il caucusing.",
+          "2": "Atmosfera inclusiva; i blocchi più grandi cercano attivamente input dalle nazioni minori.",
+          "3": "Diplomazia esemplare; elevato allineamento di “politiche mirate” e costruzione del consenso."
+        }
+      },
+      "resolution_quality": {
+        "label": "Qualità della risoluzione",
+        "bands": {
+          "0": "Risoluzioni superficiali; \"vago incoraggiamento\" piuttosto che azione.",
+          "1": "Clausole standard; affronta i sintomi ma non le cause profonde.",
+          "2": "Risoluzioni tecnicamente valide con finanziamenti chiari e meccanismi di supervisione.",
+          "3": "Documenti sofisticati, innovativi e attuabili che riflettono i reali standard delle Nazioni Unite."
+        }
+      },
+      "chair_delegate_synergy": {
+        "label": "Sinergia presidente-delegato",
+        "bands": {
+          "0": "Le sedie faticano a gestire la stanza; scarso rispetto per il palco.",
+          "1": "Relazione funzionale; le sedie seguono il programma ma non guidano.",
+          "2": "Energia positiva; presiede il tutoraggio dei delegati mantenendo un ordine fermo.",
+          "3": "Sinergia senza soluzione di continuità; la pedana ispira un ambiente professionale e ad alto rischio."
+        }
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { RubricCriterion } from "@/lib/seamuns-award-scoring";
 import { DELEGATE_CRITERIA, PAPER_CRITERIA } from "@/lib/seamuns-award-scoring";
 import {
@@ -7,7 +8,6 @@ import {
   CHAIR_PERFORMANCE_RUBRIC,
   CHAIR_REPORT_OVERALL_RUBRIC,
   CHAIR_REPORT_SECTION_RUBRIC,
-  RUBRIC_BAND_HEADERS,
   SEAMUN_AWARD_OVERVIEW_PARAGRAPHS,
   SEAMUN_AWARDS_PROCESS_SECTIONS,
   SEAMUN_CHAIR_TRAINING_GUIDE,
@@ -28,6 +28,7 @@ function RubricMatrix({
   maxPoints: number;
   footnote?: string;
 }) {
+  const t = useTranslations("awardsRubric");
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -42,11 +43,11 @@ function RubricMatrix({
                 scope="col"
                 className="sticky left-0 z-10 min-w-[9rem] border-r border-brand-navy/10 bg-brand-cream px-3 py-2.5 font-semibold dark:border-white/10 dark:bg-zinc-900"
               >
-                Criteria
+                {t("criteriaHeader")}
               </th>
-              {RUBRIC_BAND_HEADERS.map((h) => (
-                <th key={h} scope="col" className="min-w-[11rem] px-3 py-2.5 font-semibold text-brand-muted dark:text-discord-muted">
-                  {h}
+              {[0, 1, 2, 3].map((i) => (
+                <th key={i} scope="col" className="min-w-[11rem] px-3 py-2.5 font-semibold text-brand-muted dark:text-discord-muted">
+                  {t(`bandHeaders.${i}`)}
                 </th>
               ))}
             </tr>
@@ -69,11 +70,11 @@ function RubricMatrix({
                       stripe ? "bg-white/95 dark:bg-zinc-950/95" : "bg-brand-cream/95 dark:bg-zinc-900/95"
                     )}
                   >
-                    {row.label}
+                    {t(`criteria.${row.key}.label`)}
                   </th>
-                  {row.bandDescriptions.map((cell, j) => (
+                  {row.bandDescriptions.map((_, j) => (
                     <td key={`${row.key}-${j}`} className="px-3 py-2.5 align-top text-[0.8rem] leading-snug text-brand-navy/95 dark:text-zinc-300">
-                      {cell}
+                      {t(`criteria.${row.key}.bands.${j}`)}
                     </td>
                   ))}
                 </tr>

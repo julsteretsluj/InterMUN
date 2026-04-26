@@ -1782,5 +1782,308 @@
     "parsedRowsSample": "{count} satır ayrıştırıldı. Örnek:",
     "runImport": "İçe aktarmayı çalıştır",
     "generateMissingRandomCodes": "Eksik rastgele kodlar oluşturun"
+  },
+  "awardsRubric": {
+    "criteriaHeader": "Kriterler",
+    "bandHeaders": {
+      "0": "Başlangıç",
+      "1": "gelişen",
+      "2": "Uzman",
+      "3": "Örnek niteliğinde"
+    },
+    "tierLow": "Düşük",
+    "tierHigh": "Yüksek",
+    "tierPromptLocked": "Kilitlendi: {band} - {tier} ({score})",
+    "tierPromptPick": "{band} dahilinde düşük veya yüksek olanı seçin (1-8 ölçeğindeki puanlar).",
+    "criteria": {
+      "creativity": {
+        "label": "Yaratıcılık",
+        "bands": {
+          "0": "Tekrarlayan veya standart çözümler önerir; nadiren mevcut çerçevenin dışında düşünür.",
+          "1": "Bazı orijinal fikirler sunuyor ancak bunları değişen komite dinamiklerine uyarlamakta zorlanıyor.",
+          "2": "Karar taslakları için sıklıkla yenilikçi çözümler ve benzersiz maddeler önerir.",
+          "3": "Son derece yaratıcı; Çatışan bloklar arasında köprü kuran \"oyunu değiştiren\" uzlaşmalar geliştirir."
+        }
+      },
+      "diplomacy": {
+        "label": "Diplomasi",
+        "bands": {
+          "0": "Profesyonel nezaketten yoksundur; zaman zaman diğer delegelerin bakış açılarını önemsemiyor.",
+          "1": "Saygılı ama dikkat çekici değil; yakınlık kurmadan tarafsız bir mevcudiyetini sürdürür.",
+          "2": "Sürekli olarak profesyonel; Aktif olarak karşıt görüşleri anlamaya ve birleştirmeye çalışır.",
+          "3": "Gerçek devlet adamlığını örneklendirir; alçakgönüllü ve kapsayıcı kalarak saygıyı emreder."
+        }
+      },
+      "collaboration": {
+        "label": "İşbirliği",
+        "bands": {
+          "0": "Tek başına çalışır veya küçük ayrıntılardan ödün vermeyi reddeder; Grup çalışmasını bozar.",
+          "1": "Bir bloğa katkıda bulunur ancak fikirlerin taslağının hazırlanmasında veya birleştirilmesinde aktif bir rol üstlenmez.",
+          "2": "Güçlü bir takım oyuncusu; kararların birleştirilmesine yardımcı olur ve tüm blok üyelerinin söz sahibi olmasını sağlar.",
+          "3": "Komitenin \"yapıştırıcısı\" farklı grupları bir araya getirir ve fikir birliğini kolaylaştırır."
+        }
+      },
+      "leadership": {
+        "label": "Liderlik",
+        "bands": {
+          "0": "Pasif; Toplantılar sırasında diğerlerinin öneri başlatmasını veya tartışma başlatmasını bekler.",
+          "1": "Küçük gruplarda liderlik gösterir ancak evi yönetmek veya blok için sunum yapmakta tereddüt eder.",
+          "2": "Açık inisiyatif alır; Denetlenmeyen toplantılara liderlik eder ve taslak hazırlama sürecini yönetir.",
+          "3": "Vizyoner lider; Odanın tonunu belirler ve eylem ve rehberlik yoluyla başkalarına ilham verir."
+        }
+      },
+      "knowledge_research": {
+        "label": "Bilgi ve Araştırma",
+        "bands": {
+          "0": "Konuyla sık sık karıştırılan; belirli gerçeklerden ziyade genellemelere dayanır.",
+          "1": "Gündeme ilişkin temel bir anlayışa sahiptir ancak teknik veya hukuki nüansları gözden kaçırır.",
+          "2": "Konuya güçlü hakimiyet gösterir; ilgili istatistiklere ve BM'nin geçmişteki eylemlerine atıfta bulunuyor.",
+          "3": "Uzman düzeyinde ustalık; Teknik tartışmalarda yön bulmak ve yanlış bilgileri çürütmek için derin araştırmalardan yararlanır."
+        }
+      },
+      "participation": {
+        "label": "Katılım",
+        "bands": {
+          "0": "Nadiren konuşur; toplantı sırasında sıklıkla yok veya oylama sırasında aktif değil.",
+          "1": "Ara sıra moderatörlü toplantılarda konuşur; yalnızca istendiğinde katılır.",
+          "2": "Tüm oturumlarda sürekli olarak aktif; sıklıkla hareketleri yükseltir ve zemine katkıda bulunur.",
+          "3": "Gerekli ve tutarlı mevcudiyet; Tartışmanın başından sonuna kadar her yönüyle ilgileniyor."
+        }
+      },
+      "research_depth": {
+        "label": "Araştırma Derinliği",
+        "bands": {
+          "0": "Minimum veri; belirli BM kararlarından, anlaşma alıntılarından veya tarihsel bağlamdan yoksundur.",
+          "1": "Sağlanan temel veriler; iyi bilinen anlaşmalardan bahsediyor ancak spesifik yerel kanıtlardan yoksun.",
+          "2": "Güçlü araştırma; ilgili istatistikleri, geçmiş BM eylemlerini ve komiteye özgü geçmişi içerir.",
+          "3": "Olağanüstü derinlik; niş yasal boşlukları, belirli finansman boşluklarını veya nadir veri noktalarını tanımlar."
+        }
+      },
+      "country_stance_alignment": {
+        "label": "Ülke Duruş Hizalaması",
+        "bands": {
+          "0": "Atanan ülkenin gerçek dünyadaki jeopolitik çıkarları veya oy verme geçmişiyle sıklıkla çelişiyor.",
+          "1": "Genellikle politikayı takip eder ancak hassas veya tartışmalı ulusal duruşlar konusunda netlikten yoksundur.",
+          "2": "Sürekli olarak doğru; ülkenin stratejik bölgesel ve küresel çıkarlarını açıkça yansıtıyor.",
+          "3": "Son derece incelikli; karmaşık bölgesel dinamikleri ele alır ve ulusal \"kırmızı çizgileri\" açıkça tanımlar."
+        }
+      },
+      "policy_accuracy": {
+        "label": "Politika Doğruluğu",
+        "bands": {
+          "0": "Konunun yasal çerçevesinin veya komitenin görev alanının temelden yanlış anlaşılması.",
+          "1": "Genel konuyu anlıyor ancak mevcut politikadaki teknik veya hukuki karmaşıklıkları gözden kaçırıyor.",
+          "2": "Karmaşık politika konularının sağlam bir şekilde kavranması (örneğin, uluslararası hukuktaki belirli maddeler).",
+          "3": "Uzman düzeyinde doğruluk; Sofistike bir politika argümanı oluşturmak için teknik gerçekleri bütünleştirir."
+        }
+      },
+      "proposed_solutions": {
+        "label": "Önerilen Çözümler",
+        "bands": {
+          "0": "Belirsiz veya dava edilemez (ör. \"ülkeler daha fazla konuşmalı\"). Uygulama planı yok.",
+          "1": "Genel çözümler; finansman, belirli BM kurumları veya fizibilite konusunda ayrıntılar eksik.",
+          "2": "Yenilikçi ve uygulanabilir; spesifik mekanizmalar, görev güçleri veya izleme organları önerir.",
+          "3": "Sofistike ve bütünsel; Çözümler özgün, uygulanabilir ve yasal olarak sağlam olup, net zaman çizelgelerine sahiptir."
+        }
+      },
+      "formatting_style_citations": {
+        "label": "Biçimlendirme, Stil ve Alıntılar",
+        "bands": {
+          "0": "BM alıntı stilinde önemli hatalar (örn. Chicago/APA); profesyonel olmayan ton.",
+          "1": "Standart biçimlendirme, ancak birkaç gramer boşluğu veya tutarsız alıntı stili içeriyor.",
+          "2": "Profesyonel BM akademik formatı; açık, özlü ve ikna edici bir diplomatik dil.",
+          "3": "Kusursuz BM akademik tarzı; ilgi çekici bir anlatım ve tüm kaynaklardan mükemmel alıntılar."
+        }
+      },
+      "pre_conference_support": {
+        "label": "Konferans Öncesi Destek",
+        "bands": {
+          "0": "Çalışma kılavuzu gecikmiş veya eksikti; SMT/USG'lerle minimum iletişim.",
+          "1": "Çalışma kılavuzu temel gereksinimleri karşılıyordu ancak derinlemesine analiz veya net bir formattan yoksundu.",
+          "2": "Kapsamlı çalışma kılavuzu; Delege e-postalarını yanıtlama ve hazırlık konusunda proaktif.",
+          "3": "Olağanüstü çalışma kılavuzu; pozisyon belgelerine ilişkin ekstra kaynaklar ve erken geri bildirim sağladı."
+        }
+      },
+      "empathy": {
+        "label": "Empati",
+        "bands": {
+          "0": "Delegelerin endişelerini umursamamak; bir delegenin mücadele ettiğini veya dışlandığını fark edemez.",
+          "1": "Profesyonel ama klinik; yalnızca bir temsilci tarafından açıkça istendiğinde destek sağlar.",
+          "2": "Sessiz delegeleri aktif olarak kontrol eder; yeni başlayanların katılımı için güvenli bir alan yaratır.",
+          "3": "Yüksek duygusal zeka; delege stresini önceden tahmin eder, hararetli çatışmaları dikkatle yönetir ve her sesin değerli hissetmesini sağlar."
+        }
+      },
+      "collaboration_co_chair": {
+        "label": "Eşbaşkanla işbirliği",
+        "bands": {
+          "0": "Bir sandalye hakimdir; iletişim eksikliği tutarsız kararlara neden olur.",
+          "1": "İş bölünüyor ama sandalyeler silolar halinde çalışıyor; İhale kararlarında asgari düzeyde istişare.",
+          "2": "Dengeli ortaklık; Seanslar sırasında net iletişim ve karşılıklı destek.",
+          "3": "Kesintisiz sinerji; sandalyeler birbirlerinin ihtiyaçlarını önceden tahmin eder ve birleşik, profesyonel bir görünüm sağlar."
+        }
+      },
+      "mun_knowledge": {
+        "label": "MUN Bilgisi",
+        "bands": {
+          "0": "Prosedür Kurallarında (RoP) sık karşılaşılan hatalar; Yardım konusunda büyük ölçüde Sekreterliğe güvenmektedir.",
+          "1": "Temel RoP bilgisi; standart moderatörlü bir toplantı düzenleyebilir ancak hareketlerdeki incelikleri kaçırır.",
+          "2": "RoP'ye güçlü hakimiyet; zemini minimum hatayla verimli ve adil bir şekilde yönetir.",
+          "3": "Mutlak ustalık; Tartışma akışını geliştirmek için RoP'yi kullanır ve karmaşık prosedür durumlarını kolaylıkla ele alır."
+        }
+      },
+      "country_stances_topic": {
+        "label": "Ülke Duruşları ve Konu Bilgisi",
+        "bands": {
+          "0": "Bir delegenin \"karakter dışı\" konuşup konuşmadığı belirlenemiyor; politika doğruluğunu göz ardı eder.",
+          "1": "Genel olarak büyük güçlerin duruşlarının farkındadır ancak daha küçük delegasyon politikalarındaki değişiklikleri kaçırır.",
+          "2": "Politika doğruluğunu aktif olarak izler; Gerektiğinde delegeleri tekrar karaktere yönlendirir.",
+          "3": "Tüm tahsislerde derinlemesine araştırıldı; Tartışma sırasında jeopolitik nüanslar hakkında kesin geri bildirim sağlar."
+        }
+      },
+      "flexibility": {
+        "label": "Esneklik",
+        "bands": {
+          "0": "Tartışmanın durgun olduğu durumlarda bile programa sıkı sıkıya bağlılık; SMT geri bildirimine dayanıklıdır.",
+          "1": "Yalnızca Sekreterlik tarafından istendiğinde uyum sağlar; blok dinamiklerindeki ani değişimlerle mücadele ediyor.",
+          "2": "Komite değişimlerine iyi yanıt verir; Tartışma akışına fayda sağlayacak şekilde konuşma sürelerini veya hareketleri ayarlar.",
+          "3": "Son derece uyarlanabilir; krizler veya beklenmedik tartışma dönüşleri sırasında düzeni korurken sorunsuz bir şekilde döner."
+        }
+      },
+      "professionalism": {
+        "label": "Profesyonellik",
+        "bands": {
+          "0": "Profesyonel olmayan kıyafet veya üslup, belirli delegelere veya okullara karşı açık bir önyargı gösterir.",
+          "1": "Profesyonel ama yetkiden yoksun; diplomatik görgü kurallarında zaman zaman aksaklıklar yaşanıyor.",
+          "2": "Sürekli olarak profesyonel; tarafsızlığını korur ve evin saygısını emreder.",
+          "3": "Sekreterlik standardını örneklendirir; kusursuz terbiyeli, tarafsız ve rol model olarak hizmet vermektedir."
+        }
+      },
+      "engagement": {
+        "label": "Nişanlanmak",
+        "bands": {
+          "0": "Sıkılmış ya da dikkati dağılmış görünüyor; Toplantı sırasında delegelere minimum düzeyde geri bildirim verilmesi.",
+          "1": "Dikkatli ama pasif; daha sessiz delegelerin katılımını aktif olarak teşvik etmez.",
+          "2": "Yüksek enerji; Yapıcı geri bildirim sağlar ve komiteyi baştan sona motive eder.",
+          "3": "İlham veren varlık; delegelere aktif olarak rehberlik eder, kapsayıcı bir ortamı teşvik eder ve üst düzey tartışmaları yönlendirir."
+        }
+      },
+      "academic_depth": {
+        "label": "Akademik Derinlik",
+        "bands": {
+          "0": "Yüzey düzeyinde özet; tarihsel bağlam veya veriden yoksundur.",
+          "1": "İyi bir genel bakış ancak karmaşık hukuki veya teknik nüanslar gözden kaçırılıyor.",
+          "2": "Güçlü analiz; belirli geçmiş eylemleri ve bölgesel verileri içerir.",
+          "3": "Uzman düzeyinde burs; Tartışma için benzersiz açıları tanımlar."
+        }
+      },
+      "mandate_clarity": {
+        "label": "Yetki Açıklığı",
+        "bands": {
+          "0": "Belirsiz \"Dikkate Alınması Gereken Sorular\"; belirsiz komite yetkileri.",
+          "1": "Standart sorular; Tartışmanın kapsamına ilişkin genel rehberlik.",
+          "2": "Delegeleri belirli çözümlere yönlendiren açık ve odaklanmış sorular.",
+          "3": "Durağan veya konu dışı tartışmaları önleyen, hassas şekilde tasarlanmış yönlendirmeler."
+        }
+      },
+      "accessibility": {
+        "label": "Erişilebilirlik",
+        "bands": {
+          "0": "Aşırı yoğun veya düzensiz; yeni başlayanlar için gezinmek zor.",
+          "1": "Temiz düzen ancak görsel yardımlar veya terimler sözlüğü eksik.",
+          "2": "İyi yapılandırılmış; yararlı bağlantılar, haritalar ve anlaşılır bir sözlük içerir.",
+          "3": "Ustaca tasarlanmış; üst düzey akademik yaşamı sezgisel gezinmeyle dengeler."
+        }
+      },
+      "resource_quality": {
+        "label": "Kaynak Kalitesi",
+        "bands": {
+          "0": "Delege araştırması için az sayıda veya eski bağlantı sağlandı.",
+          "1": "Standart BM bağlantıları sağlanmıştır; çoğu ülkenin temellerini kapsar.",
+          "2": "STK'lar, anlaşmalar ve veri kümeleri dahil olmak üzere çeşitli ve derlenmiş kaynakça.",
+          "3": "Kapsamlı araç seti; delegelere \"gizli\" veriler ve niş kaynaklar sağlar."
+        }
+      },
+      "committee_introduction": {
+        "label": "Komite Girişi",
+        "bands": {
+          "0": "Komitenin adının yalnızca genel bir tanımını sağlar.",
+          "1": "Yetkiyi listeliyor ancak komitenin belirli yetkilerini veya sınırlamalarını açıklamıyor.",
+          "2": "Komitenin geçmişini, yetki kapsamını ve BM sistemindeki rolünü açıkça özetlemektedir.",
+          "3": "Komitenin spesifik hukuki \"dişlerini\" mevcut gündem maddeleri ile ustaca birleştiriyor."
+        }
+      },
+      "topic_introduction": {
+        "label": "Konu Girişi",
+        "bands": {
+          "0": "Belirsiz veya aşırı geniş; temel sorunu tanımlamakta başarısız oluyor.",
+          "1": "Genel bir özet sağlar ancak güncel verilerden veya son gelişmelerden yoksundur.",
+          "2": "Kapsamlı genel bakış; teknik terimleri ve konunun mevcut küresel durumunu tanımlar.",
+          "3": "Uluslararası politikadaki belirli \"kör noktaları\" tanımlayan ilgi çekici bir anlatı."
+        }
+      },
+      "timeline": {
+        "label": "Zaman çizelgesi",
+        "bands": {
+          "0": "Önemli tarihi dönüm noktalarının veya anlaşmaların eksik olması.",
+          "1": "Temel tarihleri ​​listeliyor ancak geçmiş eylemlerin önemini açıklayamıyor.",
+          "2": "Doğru kronolojik akış; Geçmiş kararların mevcut duruma nasıl yol açtığını açıklıyor.",
+          "3": "Gelecekteki tartışmalara rehberlik etmek için başarısız ve başarılı müdahaleleri vurgulayan stratejik zaman çizelgesi."
+        }
+      },
+      "key_stances": {
+        "label": "Temel Duruşlar",
+        "bands": {
+          "0": "Yalnızca P5 ülkelerinden bahsediliyor; bölgesel blokları veya küçük paydaşları göz ardı ediyor.",
+          "1": "Ülkeleri, incelikli politika farklılıkları olmaksızın genel olarak gruplandırır (örneğin, \"Batı\").",
+          "2": "Büyük çıkar gruplarının ve önemli bölgesel oyuncuların spesifik önceliklerini detaylandırın.",
+          "3": "Müzakere sürecindeki çatışan \"kırmızı çizgilerin\" ve potansiyel spoiler'ın kapsamlı analizi."
+        }
+      },
+      "possible_solutions": {
+        "label": "Olası Çözümler",
+        "bands": {
+          "0": "Genel veya tekrarlayan (ör. \"daha fazla finansman\", \"farkındalık\").",
+          "1": "Mantıksal adımlar önerir ancak uygulama veya gözetimle ilgili ayrıntılardan yoksundur.",
+          "2": "Komitenin görev alanına uygun yenilikçi, çok boyutlu çerçeveler önerir.",
+          "3": "Temel nedenleri ve teknik fizibiliteyi ele alan üst düzey \"Amaçlı Politika\" çözümleri."
+        }
+      },
+      "debate_productivity": {
+        "label": "Verimliliği Tartışma",
+        "bands": {
+          "0": "Tartışmalarda sık sık yaşanan durgunluklar; ilerleme kaydedilmeyen döngüsel tartışmalar.",
+          "1": "Sürekli bir tartışma sürüyor ancak \"Konu A\" genellemelerinin ötesine geçmekte zorlanıyor.",
+          "2": "Üst düzey söylem; delegeler hızla köklü çözümlere geçiyor.",
+          "3": "Dinamik ve gelişen tartışma; ev meşgul ve entelektüel açıdan keskin kalıyor."
+        }
+      },
+      "collaborative_spirit": {
+        "label": "İşbirliği Ruhu",
+        "bands": {
+          "0": "Oldukça toksik veya klişe; küçük bloklar birbirleriyle konuşmayı reddediyor.",
+          "1": "Standart diplomatik davranış; Toplantı sırasında temel işbirliği.",
+          "2": "Kapsayıcı atmosfer; daha büyük bloklar aktif olarak küçük ülkelerden girdi arıyor.",
+          "3": "Örnek diplomasi; yüksek \"amaçlı politika\" uyumu ve fikir birliği oluşturma."
+        }
+      },
+      "resolution_quality": {
+        "label": "Çözünürlük Kalitesi",
+        "bands": {
+          "0": "Sığ çözünürlükler; eylemden ziyade \"belirsiz teşvik\".",
+          "1": "Standart maddeler; semptomları ele alır ancak temel nedenleri ele almaz.",
+          "2": "Açık finansman ve gözetim mekanizmalarıyla teknik açıdan sağlam çözümler.",
+          "3": "Gerçek BM standartlarını yansıtan gelişmiş, yenilikçi ve uygulanabilir belgeler."
+        }
+      },
+      "chair_delegate_synergy": {
+        "label": "Başkan-Delege Sinerjisi",
+        "bands": {
+          "0": "Sandalyeler odayı idare etmekte zorlanıyor; kürsüye saygının düşük olması.",
+          "1": "Fonksiyonel ilişki; sandalyeler programı takip eder ancak liderlik etmez.",
+          "2": "Pozitif enerji; Sağlam düzeni korurken mentor delegelere başkanlık eder.",
+          "3": "Kesintisiz sinerji; dais, profesyonel ve yüksek riskli bir ortama ilham veriyor."
+        }
+      }
+    }
   }
 }
