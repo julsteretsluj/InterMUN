@@ -81,15 +81,15 @@ export function ActiveMotionContextStrip({
 
   const isLight = theme === "light";
   const shell = isLight
-    ? "rounded-lg border border-brand-navy/10 bg-black/25 text-brand-navy text-sm p-3 space-y-3 shadow-sm"
-    : "rounded-xl border border-white/12 bg-black/20 text-brand-navy/95 text-sm p-3 md:p-4 space-y-3";
+    ? "rounded-lg border border-brand-navy/10 bg-black/25 text-brand-navy text-sm p-2.5 space-y-2.5 shadow-sm"
+    : "rounded-xl border border-white/12 bg-black/20 text-brand-navy/95 text-sm p-2.5 md:p-3 space-y-2.5";
   const labelCls = isLight
     ? "text-[0.65rem] uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/75 block mb-0.5";
   const bodyCls = isLight ? "font-medium text-brand-navy" : "font-medium text-brand-navy/95";
-  const subCls = isLight ? "text-sm text-brand-navy/85 mt-1 line-clamp-4" : "text-sm text-brand-navy/90 mt-1 line-clamp-4";
+  const subCls = isLight ? "text-sm text-brand-navy/85 mt-0.5 line-clamp-3" : "text-sm text-brand-navy/90 mt-0.5 line-clamp-3";
   const iconCls = isLight ? "w-4 h-4 text-brand-accent shrink-0 mt-0.5" : "w-5 h-5 text-brand-accent-bright shrink-0 mt-0.5";
-  const divider = isLight ? "border-t border-brand-navy/10 pt-3" : "border-t border-white/10 pt-3";
+  const divider = isLight ? "border-t border-brand-navy/10 pt-2" : "border-t border-white/10 pt-2";
   const clockCls = isLight ? "w-4 h-4 text-brand-accent shrink-0" : "w-5 h-5 text-brand-accent-bright shrink-0";
   const timerLabel = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
@@ -99,17 +99,17 @@ export function ActiveMotionContextStrip({
 
   return (
     <div className={shell}>
-      <div className="flex gap-3 items-start">
+      <div className="flex gap-2.5 items-start">
         <Gavel className={iconCls} aria-hidden />
-        <div className="min-w-0 flex-1 space-y-2">
+        <div className="min-w-0 flex-1 space-y-1.5">
           <div>
             <span className={labelCls}>{t("currentMotion")}</span>
-            <p className={`${bodyCls} text-base`}>{row?.title?.trim() || t("motionFallback")}</p>
+            <p className={`${bodyCls} text-sm`}>{row?.title?.trim() || t("motionFallback")}</p>
             {row?.description?.trim() ? (
               <p className={subCls}>{row.description.trim()}</p>
             ) : null}
           </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
             <div>
               <span className={labelCls}>{t("motioner")}</span>
               <p className={bodyCls}>{motionerCountry || "—"}</p>
@@ -128,9 +128,9 @@ export function ActiveMotionContextStrip({
 
       {timer && shouldShowLiveFloorTimerUI(timer, isRunning) ? (
         <div className={divider}>
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
             <Clock className={clockCls} />
-            <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
+            <div className="flex flex-wrap gap-3 sm:gap-4 text-sm">
               {timer.floor_label?.trim() ? (
                 <div>
                   <span className={timerLabel}>{t("timer")}</span>
@@ -164,7 +164,7 @@ export function ActiveMotionContextStrip({
                   ) : null}
                 </p>
                 {!isRunning && timer.current_pause_reason?.trim() ? (
-                  <p className="mt-1 max-w-md text-[0.7rem] font-normal normal-case opacity-90">
+                  <p className="mt-0.5 max-w-md text-[0.68rem] font-normal normal-case opacity-90">
                     {t("pauseReason", { reason: timer.current_pause_reason.trim() })}
                   </p>
                 ) : null}

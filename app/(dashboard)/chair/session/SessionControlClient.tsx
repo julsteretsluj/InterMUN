@@ -239,6 +239,7 @@ type DisciplinaryRow = {
 /** Dashboard splits session tools across routes; committee room uses `"all"`. */
 export type SessionFloorSection =
   | "motions"
+  | "discipline"
   | "timer"
   | "announcements"
   | "speakers"
@@ -270,6 +271,7 @@ export function SessionControlClient({
   const tTopicUi = useTranslations("chairTopicTabs");
   const tTimer = useTranslations("views.session.timerPage");
   const tSessionControl = useTranslations("sessionControlClient");
+  const tDiscipline = useTranslations("chairMotionsPointsLog");
   const locale = useLocale();
   const supabase = createClient();
   const rosterConferenceIdList = useMemo(() => {
@@ -354,7 +356,7 @@ export function SessionControlClient({
   const [motionTally, setMotionTally] = useState({ yes: 0, no: 0, total: 0 });
   const [motionVoteByUser, setMotionVoteByUser] = useState<Record<string, "yes" | "no" | "abstain">>({});
   const [motionWorkflowTab, setMotionWorkflowTab] = useState<
-    "setup" | "floor" | "draft" | "votes" | "history"
+    "setup" | "floor" | "draft" | "votes" | "discipline" | "history"
   >("setup");
   const [motionDraft, setMotionDraft] = useState({
     vote_type: "motion" as VoteType,
@@ -380,6 +382,8 @@ export function SessionControlClient({
   const [pointDraftAllocationId, setPointDraftAllocationId] = useState("");
   const [voteRightsByUserId, setVoteRightsByUserId] = useState<Record<string, VoteRightsRow>>({});
   const [disciplineByAllocationId, setDisciplineByAllocationId] = useState<Record<string, DisciplinaryRow>>({});
+  const [disciplineTargetAllocationId, setDisciplineTargetAllocationId] = useState("");
+  const [disciplineReasonDraft, setDisciplineReasonDraft] = useState("");
   const [speakerListChairPrompt, setSpeakerListChairPrompt] = useState<SpeakerListChairPromptKind | null>(
     null
   );
@@ -1520,6 +1524,28 @@ export function SessionControlClient({
     });
   }
 
+  function applyDisciplinaryAction(action: "warning" | "strike" | "revoke_warning" | "revoke_strike" | "reset") {
+    if (!disciplineTargetAllocationId) {
+      setMsg("Choose a delegate first.");
+      return;
+    }
+    startTransition(async () => {
+      const { error } = await supabase.rpc("apply_delegate_disciplinary_action", {
+        p_conference_id: floorConferenceId,
+        p_allocation_id: disciplineTargetAllocationId,
+        p_action: action,
+        p_reason: disciplineReasonDraft.trim() || null,
+      });
+      if (error) {
+        setMsg(error.message);
+        return;
+      }
+      setMsg(null);
+      setDisciplineReasonDraft("");
+      void refresh();
+    });
+  }
+
   function addSessionPoint() {
     const detail = pointDraftDetail.trim();
     startTransition(async () => {
@@ -2592,6 +2618,12 @@ export function SessionControlClient({
     return openMotion;
   }, [openMotion, openVotingMotions, timer.boundVoteItemId]);
 
+  useEffect(() => {
+    if (activeSection === "discipline") {
+      setMotionWorkflowTab("discipline");
+    }
+  }, [activeSection]);
+
   return (
     <div className="space-y-10">
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
@@ -2639,10 +2671,12 @@ export function SessionControlClient({
         </p>
       )}
 
-      {show("motions") ? (
+      {show("motions") || show("discipline") ? (
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("motionControl")}</h3>
+          <h3 className="font-display text-lg font-semibold text-brand-navy">
+            {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
+          </h3>
           <HelpButton title={tSessionControl("motionControl")}>
             {tSessionControl("motionControlHelp")}
           </HelpButton>
@@ -2654,6 +2688,7 @@ export function SessionControlClient({
               ["floor", tSessionControl("tabFloorQueue")],
               ["draft", tSessionControl("tabDraftMotion")],
               ["votes", tSessionControl("tabRecordVotes")],
+              ["discipline", tDiscipline("disciplinarySystem")],
               ["history", tSessionControl("tabHistory")],
             ] as const
           ).map(([id, label]) => {
@@ -3498,6 +3533,88 @@ export function SessionControlClient({
             </>
           ) : null}
         </div>
+        {motionWorkflowTab === "discipline" ? (
+          <div className={surfaceCard}>
+            <div className="space-y-3">
+              <p className={surfaceLabel}>{tDiscipline("disciplinarySystem")}</p>
+              <p className="text-xs text-brand-muted">{tDiscipline("disciplineRules")}</p>
+              <div className="grid gap-2 md:grid-cols-[minmax(0,1fr),minmax(0,1fr),auto,auto,auto,auto,auto]">
+                <select
+                  className={surfaceFieldSm}
+                  value={disciplineTargetAllocationId}
+                  onChange={(e) => setDisciplineTargetAllocationId(e.target.value)}
+                >
+                  <option value="">{tDiscipline("selectDelegate")}</option>
+                  {votingCallOrder.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {displayCountry(a.country)}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  className={surfaceFieldSm}
+                  placeholder={tDiscipline("reasonPlaceholder")}
+                  value={disciplineReasonDraft}
+                  onChange={(e) => setDisciplineReasonDraft(e.target.value)}
+                />
+                <button
+                  type="button"
+                  disabled={pending || !disciplineTargetAllocationId}
+                  onClick={() => applyDisciplinaryAction("warning")}
+                  className="rounded-lg border border-amber-500/45 bg-amber-500/15 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
+                >
+                  {tDiscipline("warning")}
+                </button>
+                <button
+                  type="button"
+                  disabled={pending || !disciplineTargetAllocationId}
+                  onClick={() => applyDisciplinaryAction("strike")}
+                  className="rounded-lg border border-rose-500/45 bg-rose-500/15 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
+                >
+                  {tDiscipline("strike")}
+                </button>
+                <button
+                  type="button"
+                  disabled={pending || !disciplineTargetAllocationId}
+                  onClick={() => applyDisciplinaryAction("revoke_warning")}
+                  className="rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
+                >
+                  {tDiscipline("revokeWarning")}
+                </button>
+                <button
+                  type="button"
+                  disabled={pending || !disciplineTargetAllocationId}
+                  onClick={() => applyDisciplinaryAction("revoke_strike")}
+                  className="rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-xs font-medium text-brand-navy disabled:opacity-50"
+                >
+                  {tDiscipline("revokeStrike")}
+                </button>
+                <button
+                  type="button"
+                  disabled={pending || !disciplineTargetAllocationId}
+                  onClick={() => applyDisciplinaryAction("reset")}
+                  className="rounded-lg border border-rose-500/45 bg-rose-500/10 px-3 py-2 text-xs font-medium text-rose-900 dark:text-rose-100 disabled:opacity-50"
+                >
+                  {tDiscipline("resetRecord")}
+                </button>
+              </div>
+              {disciplineTargetAllocationId ? (
+                <div className="text-xs text-brand-muted">
+                  {(() => {
+                    const row = disciplineByAllocationId[disciplineTargetAllocationId];
+                    if (!row) return `${tDiscipline("current")}: ${tDiscipline("warnings")} 0, ${tDiscipline("strikes")} 0`;
+                    return `${tDiscipline("current")}: ${tDiscipline("warnings")} ${row.warning_count}, ${tDiscipline("strikes")} ${row.strike_count}${
+                      row.voting_rights_lost ? ` · ${tDiscipline("votingDisabled")}` : ""
+                    }${row.speaking_rights_suspended ? ` · ${tDiscipline("speakingSuspended")}` : ""}${
+                      row.removed_from_committee ? ` · ${tDiscipline("removed")}` : ""
+                    }`;
+                  })()}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
 
         {motionWorkflowTab === "history" ? (
           <>

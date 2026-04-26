@@ -266,8 +266,8 @@ export function FloorStatusBar({
   const displayQueue = queue.filter((q) => q.status !== "done").slice(0, 8);
   const isLight = theme === "light";
   const box = isLight
-    ? "rounded-lg border border-brand-navy/10 bg-brand-cream/30 px-3 py-2 text-brand-navy text-sm space-y-2"
-    : "rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-brand-navy text-sm space-y-2";
+    ? "rounded-lg border border-brand-navy/10 bg-brand-cream/30 px-3 py-1.5 text-brand-navy text-sm space-y-1.5"
+    : "rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-brand-navy text-sm space-y-1.5";
   const muted = isLight
     ? "text-[0.65rem] uppercase tracking-wider text-brand-muted"
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/80";
@@ -288,8 +288,8 @@ export function FloorStatusBar({
       <div
         className={
           isLight
-            ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1.5 text-sm text-brand-navy"
-            : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-brand-navy"
+            ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1 text-sm text-brand-navy"
+            : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-sm text-brand-navy"
         }
       >
         <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
@@ -323,7 +323,7 @@ export function FloorStatusBar({
     ) : null;
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       {sessionElapsedRow}
       {activeMotionVoteItemId ? (
         <ActiveMotionContextStrip
@@ -355,7 +355,7 @@ export function FloorStatusBar({
               <button
                 type="button"
                 onClick={() => setExpandedAnnouncement(latestDais)}
-                className="mt-1 text-xs font-medium text-brand-accent hover:underline"
+                className="mt-0.5 text-xs font-medium text-brand-accent hover:underline"
               >
                 {t("viewFullAnnouncement")}
               </button>
@@ -364,11 +364,11 @@ export function FloorStatusBar({
         </div>
       )}
       {pauseEvents.length > 0 ? (
-        <div className={`flex gap-2 items-start pt-1 ${latestDais ? `border-t ${border}` : ""}`}>
+        <div className={`flex gap-2 items-start pt-0.5 ${latestDais ? `border-t ${border}` : ""}`}>
           <PauseCircle className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} aria-hidden />
           <div className="min-w-0 flex-1">
             <span className={`${muted} block`}>{t("timerPausesReadOnly")}</span>
-            <ul className={`mt-1 space-y-1 text-xs ${qText}`}>
+            <ul className={`mt-0.5 space-y-0.5 text-xs ${qText}`}>
               {pauseEvents.map((ev) => (
                 <li key={ev.id} className="flex flex-wrap gap-x-2 gap-y-0.5">
                   <time className="shrink-0 text-brand-muted" dateTime={ev.created_at}>
@@ -385,11 +385,11 @@ export function FloorStatusBar({
         </div>
       ) : null}
       {displayQueue.length > 0 && (
-        <div className={`flex gap-2 items-start pt-1 border-t ${border}`}>
+        <div className={`flex gap-2 items-start pt-0.5 border-t ${border}`}>
           <ListOrdered className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
           <div className="min-w-0 flex-1">
-            <span className={`${muted} block mb-0.5`}>{t("speakerList")}</span>
-            <ul className={`flex flex-wrap gap-x-3 gap-y-0.5 text-xs ${qText}`}>
+            <span className={`${muted} block`}>{t("speakerList")}</span>
+            <ul className={`flex flex-wrap gap-x-2.5 gap-y-0.5 text-xs ${qText}`}>
               {displayQueue.map((q) => (
                 <li key={q.id} className="font-medium">
                   <span className={q.status === "current" ? current : undefined}>
@@ -403,7 +403,7 @@ export function FloorStatusBar({
       )}
       {rollSelf && (
         <p
-          className={`text-[0.65rem] pt-1 border-t ${border} ${
+          className={`text-[0.65rem] pt-0.5 border-t ${border} ${
             isLight ? "text-brand-muted" : "text-brand-navy/90"
           }`}
         >

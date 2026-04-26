@@ -42,6 +42,7 @@ export type ChairNavItemKey =
   | "session"
   | "speakers"
   | "formalMotions"
+  | "discipline"
   | "timer"
   | "announcements"
   | "motionsPoints"
@@ -59,6 +60,7 @@ type ChairNavItem = {
   itemKey: ChairNavItemKey;
   icon: LucideIcon;
   emoji: string;
+  labelOverride?: string;
   /** If set, active when pathname === or starts with this */
   activeMatch?: string;
   /** When true, active only on exact `href` (no `/child` match). */
@@ -97,6 +99,13 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     itemKey: "formalMotions",
     icon: Gavel,
     emoji: "📜",
+  },
+  {
+    href: "/chair/session/discipline",
+    itemKey: "discipline",
+    icon: TriangleAlert,
+    emoji: "⚖️",
+    labelOverride: "Disciplinary",
   },
   {
     href: "/chair/session/timer",
@@ -255,7 +264,7 @@ export function ChairDashboardSidebar({
           <ChairNavRow
             key={item.href + item.itemKey}
             item={item}
-            label={tItems(item.itemKey)}
+            label={item.labelOverride ?? tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
           />
@@ -403,7 +412,7 @@ export function ChairMobileDock({
           <DockItem
             key={item.href + item.itemKey}
             item={item}
-            label={tItems(item.itemKey)}
+            label={item.labelOverride ?? tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
           />

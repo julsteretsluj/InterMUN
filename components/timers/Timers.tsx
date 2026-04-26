@@ -24,8 +24,8 @@ export function Timers({
 
   const isLight = theme === "light";
   const shell = isLight
-    ? "flex flex-wrap items-center gap-4 px-3 py-2.5 rounded-lg bg-black/25 border border-brand-navy/10 text-brand-navy text-sm"
-    : "flex flex-wrap items-center gap-4 px-4 py-3 rounded-xl bg-black/20 border border-white/12 text-brand-navy/95";
+    ? "flex flex-wrap items-center gap-3 px-3 py-2 rounded-lg bg-black/25 border border-brand-navy/10 text-brand-navy text-sm"
+    : "flex flex-wrap items-center gap-3 px-3 py-2 rounded-xl bg-black/20 border border-white/12 text-brand-navy/95";
   const labelCls = isLight
     ? "text-xs uppercase tracking-wider text-brand-muted block mb-0.5"
     : "text-xs uppercase tracking-wider text-brand-navy/75 block mb-0.5";
@@ -41,9 +41,9 @@ export function Timers({
   return (
     <div className={shell}>
       <Clock className={clockCls} />
-      <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
+      <div className="flex flex-wrap gap-3 sm:gap-4 text-sm">
         {floorLabel ? (
-          <div className="min-w-[8rem]">
+          <div className="min-w-[7rem]">
             <span className={labelCls}>Timer</span>
             <p className="font-semibold text-brand-accent">{floorLabel}</p>
           </div>
@@ -75,7 +75,7 @@ export function Timers({
             ) : null}
           </p>
           {!isRunning && pauseReason ? (
-            <p className="mt-1 max-w-md text-[0.7rem] font-normal normal-case text-amber-900/90 dark:text-amber-200/90">
+            <p className="mt-0.5 max-w-md text-[0.68rem] font-normal normal-case text-amber-900/90 dark:text-amber-200/90">
               Pause: {pauseReason}
             </p>
           ) : null}
