@@ -69,9 +69,9 @@ export default async function DelegateDashboardPage() {
 
   return (
     <MunPageShell title={tp("delegateDashboard")}>
-      <div className="space-y-6">
+      <div className="space-y-5">
         <header className="space-y-2">
-          <h1 className="font-display text-3xl font-semibold text-brand-navy">
+          <h1 className="font-display text-[1.85rem] font-semibold text-brand-navy">
             {td("welcome", { flag: countryFlag, country: countryLabel })}
           </h1>
           <p className="text-sm text-brand-muted">
@@ -84,18 +84,18 @@ export default async function DelegateDashboardPage() {
         <RoleSetupChecklist role="delegate" />
 
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">
             {td("jumpTo")}
           </h2>
-          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {tiles.map((tile) => (
               <li key={tile.href + tile.label}>
                 <Link
                   href={tile.href}
-                  className="block rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-sm transition hover:border-brand-accent/45 hover:bg-brand-accent/8 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
+                  className="block rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 shadow-sm transition hover:border-brand-accent/45 hover:bg-brand-accent/8 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
                 >
-                  <span className="font-semibold text-slate-900 dark:text-zinc-50">{tile.label}</span>
-                  <span className="mt-0.5 block text-xs text-slate-500 dark:text-zinc-400">{tile.hint}</span>
+                  <span className="font-semibold text-brand-navy dark:text-zinc-50">{tile.label}</span>
+                  <span className="mt-0.5 block text-xs text-brand-muted dark:text-zinc-400">{tile.hint}</span>
                 </Link>
               </li>
             ))}

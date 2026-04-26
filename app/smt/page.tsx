@@ -60,7 +60,7 @@ export default async function SmtOverviewPage({
         <p className="mb-4">{t("noEventSelected")}</p>
         <Link
           href="/event-gate?next=%2Fsmt"
-          className="inline-block px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft"
+          className="inline-block rounded-lg border border-brand-navy/10 bg-white px-4 py-2 font-medium text-brand-navy hover:bg-brand-navy/5"
         >
           {t("enterConferenceCode")}
         </Link>
@@ -158,7 +158,7 @@ export default async function SmtOverviewPage({
 
   if (list.length === 0) {
     return (
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-brand-muted text-sm">
+      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-sm text-brand-muted">
         {t("noCommittees")}{" "}
         <Link href="/smt/conference" className="text-brand-gold font-medium hover:underline">
           {t("eventSessionsLink")}
@@ -172,7 +172,7 @@ export default async function SmtOverviewPage({
     <div>
       {overviewErr === "smt-no-session-floor" && (
         <div
-          className="mb-6 rounded-lg border border-brand-gold/40 bg-brand-cream/60 px-4 py-3 text-sm text-brand-navy"
+          className="mb-6 rounded-lg border border-brand-gold/40 bg-brand-cream/70 px-4 py-3 text-sm text-brand-navy"
           role="status"
         >
           {t.rich("sessionFloorBanner", {
@@ -182,17 +182,17 @@ export default async function SmtOverviewPage({
           })}
         </div>
       )}
-      <h1 className="font-display text-3xl font-semibold text-brand-navy mb-2">{t("welcomeSg")}</h1>
-      <p className="text-base text-brand-navy mb-6">{t("whichCommittee")}</p>
-      <div className="mb-6">
+      <h1 className="mb-1.5 font-display text-[1.85rem] font-semibold text-brand-navy">{t("welcomeSg")}</h1>
+      <p className="mb-5 text-[0.95rem] text-brand-navy">{t("whichCommittee")}</p>
+      <div className="mb-5">
         <RoleSetupChecklist role="smt" />
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((g) => (
           <Link
             key={g.latestId}
             href={`/smt/committees/${g.latestId}`}
-            className="rounded-xl border border-brand-navy/15 bg-brand-paper px-4 py-3 text-brand-navy shadow-sm hover:bg-brand-cream transition-colors"
+            className="rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
           >
             {g.latestRow.committee_logo_url ? (
               <img
@@ -202,10 +202,10 @@ export default async function SmtOverviewPage({
                     ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
                     : "Committee",
                 })}
-                className="h-10 w-10 object-contain rounded-md bg-white/60 border border-brand-navy/10 mb-2"
+                className="mb-1.5 h-9 w-9 rounded-md border border-brand-navy/10 bg-white/60 object-contain"
               />
             ) : null}
-            <p className="font-semibold text-sm leading-snug">
+            <p className="text-sm font-semibold leading-snug">
               {(() => {
                 const localizedFull = localizeKnownCommitteeFullName(
                   resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)
@@ -222,7 +222,7 @@ export default async function SmtOverviewPage({
               const tags = resolveCommitteeDisplayTags(g.latestRow.committee);
               if (!tags) return null;
               return (
-                <div className="mt-2 flex flex-wrap gap-1.5">
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
                   <span className={difficultyTagClass(tags.difficulty)}>{tags.difficulty}</span>
                   <span className={formatTagClass(tags.format)}>{tags.format}</span>
                   <span className={ageRangeTagClass()}>{tags.ageRange}</span>
@@ -233,23 +233,23 @@ export default async function SmtOverviewPage({
               );
             })()}
             {g.latestRow.chair_names?.trim() ? (
-              <p className="text-xs text-brand-muted mt-2">
+              <p className="mt-1.5 text-xs text-brand-muted">
                 <span className="font-medium text-brand-navy/80">{t("chairsLabel")} </span>
                 {g.latestRow.chair_names.trim()}
               </p>
             ) : null}
             {g.latestRow.committee_code?.trim() ? (
-              <p className="text-xs font-mono text-brand-navy/70 mt-2 tracking-widest">
+              <p className="mt-1.5 text-xs font-mono tracking-widest text-brand-navy/70">
                 {g.latestRow.committee_code.trim().toUpperCase()}
               </p>
             ) : null}
             {g.topicCount > 1 ? (
-              <p className="text-[0.72rem] text-brand-navy/85 mt-1 font-medium">
+              <p className="mt-1 text-[0.72rem] font-medium text-brand-navy/85">
                 {t("sessionsCount", { count: g.topicCount })}
               </p>
             ) : null}
             {g.topics.length > 0 ? (
-              <div className="mt-2 space-y-1">
+              <div className="mt-1.5 space-y-1">
                 {g.topics.slice(0, 2).map((topic) => (
                   <p key={topic} className="text-[0.72rem] text-brand-navy/90 leading-snug">
                     <span className="font-semibold text-brand-navy">{t("topicLabel")}</span>{" "}

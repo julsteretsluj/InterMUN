@@ -57,12 +57,12 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex min-h-screen bg-brand-cream text-brand-navy dark:bg-discord-app dark:text-zinc-50">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-r-white/10 bg-white/35 backdrop-blur-[20px] shadow-[4px_0_32px_rgba(18,18,18,0.06)] transition-[width] duration-200 dark:border-discord-divider dark:bg-discord-sidebar dark:backdrop-blur-none dark:shadow-none lg:flex">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-brand-navy/10 bg-color-surface/90 backdrop-blur-md transition-[width] duration-200 dark:border-discord-divider dark:bg-discord-sidebar dark:backdrop-blur-none lg:flex">
         <div className="orbit-rail-v pointer-events-none absolute bottom-0 left-0 top-0 z-20 opacity-90" aria-hidden />
         <Link
           href="/smt"
           aria-label={`${appName} home`}
-          className="flex shrink-0 items-center justify-center gap-0 border-b border-slate-100 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-slate-50 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex shrink-0 items-center justify-center gap-0 border-b border-brand-navy/10 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-brand-navy/5 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span className="hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright">
@@ -86,15 +86,15 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           profileHref="/smt/profile"
         />
         {activeEvent ? (
-          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-slate-600 dark:border-discord-divider dark:bg-discord-app dark:text-discord-muted sm:px-6">
+          <div className="border-b border-brand-navy/10 bg-brand-cream px-4 py-2 text-xs text-brand-muted dark:border-discord-divider dark:bg-discord-app dark:text-discord-muted sm:px-6">
             <div className="w-full">
               {t("activeEvent")}{" "}
-              <span className="font-medium text-slate-800 dark:text-zinc-100">{activeEvent.name}</span> · {t("code")}{" "}
+              <span className="font-medium text-brand-navy dark:text-zinc-100">{activeEvent.name}</span> · {t("code")}{" "}
               <span className="font-mono text-discord-blurple dark:text-[#949cfa]">{activeEvent.event_code}</span>
             </div>
           </div>
         ) : (
-          <div className="border-b border-slate-200/80 bg-brand-cream px-4 py-2 text-xs text-brand-accent dark:border-discord-divider dark:bg-discord-app dark:text-brand-accent-bright sm:px-6">
+          <div className="border-b border-brand-navy/10 bg-brand-cream px-4 py-2 text-xs text-brand-accent dark:border-discord-divider dark:bg-discord-app dark:text-brand-accent-bright sm:px-6">
             <div className="w-full">
               <Link href="/event-gate?next=%2Fsmt" className="underline hover:no-underline">
                 {t("enterConferenceCodeLink")}

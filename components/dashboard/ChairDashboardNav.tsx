@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Archive,
@@ -157,15 +157,15 @@ function ChairNavRow({
         "discord-interactive-hover flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
-          ? "border border-brand-accent/35 bg-brand-accent/10 font-semibold text-slate-900 shadow-sm dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-zinc-50"
-          : "border border-transparent font-medium text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800/90"
+          ? "border border-brand-accent/35 bg-brand-accent/10 font-semibold text-brand-navy shadow-sm dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-zinc-50"
+          : "border border-transparent font-medium text-brand-muted hover:bg-brand-navy/5 dark:text-zinc-300 dark:hover:bg-zinc-800/90"
       )}
     >
       <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
         <Icon
           className={cn(
             "h-[1.15rem] w-[1.15rem] shrink-0",
-            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-500 dark:text-zinc-400"
+            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-400"
           )}
           strokeWidth={1.75}
         />
@@ -190,15 +190,14 @@ export function ChairDashboardSidebar({
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
-  const [labelsHidden, setLabelsHidden] = useState(false);
-
-  useEffect(() => {
+  const [labelsHidden, setLabelsHidden] = useState(() => {
+    if (typeof window === "undefined") return false;
     try {
-      if (localStorage.getItem(LABELS_STORAGE_KEY) === "1") setLabelsHidden(true);
+      return localStorage.getItem(LABELS_STORAGE_KEY) === "1";
     } catch {
-      /* ignore */
+      return false;
     }
-  }, []);
+  });
 
   const toggleLabels = useCallback(() => {
     setLabelsHidden((prev) => {
@@ -265,7 +264,7 @@ export function ChairDashboardSidebar({
 
       <div
         className={cn(
-          "mt-auto shrink-0 space-y-0.5 border-t border-slate-100 py-3 dark:border-zinc-800",
+          "mt-auto shrink-0 space-y-0.5 border-t border-brand-navy/10 py-3 dark:border-zinc-800",
           labelsHidden ? "px-1.5" : "px-3"
         )}
       >
@@ -273,21 +272,21 @@ export function ChairDashboardSidebar({
           type="button"
           onClick={toggleLabels}
           className={cn(
-            "flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
+            "flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-brand-muted transition hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
             labelsHidden && "justify-center px-2"
           )}
         >
-          <PanelLeftClose className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
+          <PanelLeftClose className="h-5 w-5 shrink-0 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
           {!labelsHidden ? <span>{t("hideLabels")}</span> : <span className="sr-only">{t("showLabels")}</span>}
         </button>
         <Link
           href="/guides"
           className={cn(
-            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
+            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-brand-muted transition hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
             labelsHidden && "justify-center px-2"
           )}
         >
-          <HelpCircle className="h-5 w-5 shrink-0 text-slate-400 dark:text-zinc-500" strokeWidth={1.75} />
+          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
           {!labelsHidden ? t("helpCenter") : <span className="sr-only">{t("helpCenter")}</span>}
         </Link>
       </div>
@@ -317,8 +316,8 @@ function DockItem({
         className={cn(
           "flex h-11 min-w-[2.75rem] items-center justify-center gap-0.5 rounded-xl border px-1.5 shadow-sm transition-all duration-200",
           isActive
-            ? "border-brand-accent/40 bg-brand-accent/10 text-slate-900 dark:border-brand-accent/45 dark:bg-brand-accent/15 dark:text-zinc-50"
-            : "border-slate-200/90 bg-white text-slate-600 group-hover:border-brand-accent/25 group-hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
+            ? "border-brand-accent/40 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/15 dark:text-zinc-50"
+            : "border-brand-navy/10 bg-white text-brand-muted group-hover:border-brand-accent/25 group-hover:bg-brand-navy/5 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
         )}
       >
         <Icon className="h-[1.1rem] w-[1.1rem] shrink-0" strokeWidth={1.75} />
@@ -330,7 +329,7 @@ function DockItem({
         <span
           className={cn(
             "max-w-[4.5rem] text-center text-[0.625rem] font-medium leading-tight",
-            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-slate-600 dark:text-zinc-400"
+            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-400"
           )}
         >
           {label}
@@ -350,15 +349,14 @@ export function ChairMobileDock({
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
-  const [labelsHidden, setLabelsHidden] = useState(false);
-
-  useEffect(() => {
+  const [labelsHidden, setLabelsHidden] = useState(() => {
+    if (typeof window === "undefined") return false;
     try {
-      if (localStorage.getItem(LABELS_STORAGE_KEY) === "1") setLabelsHidden(true);
+      return localStorage.getItem(LABELS_STORAGE_KEY) === "1";
     } catch {
-      /* ignore */
+      return false;
     }
-  }, []);
+  });
 
   const toggleLabels = useCallback(() => {
     setLabelsHidden((prev) => {
@@ -379,7 +377,7 @@ export function ChairMobileDock({
   );
 
   return (
-    <div className="border-t border-slate-200/80 bg-brand-cream/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
+    <div className="border-t border-brand-navy/10 bg-color-surface/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
       <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <Link
           href="/chair"
@@ -414,9 +412,9 @@ export function ChairMobileDock({
           type="button"
           onClick={toggleLabels}
           title={labelsHidden ? t("showLabels") : t("hideLabels")}
-          className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2 text-slate-500 dark:text-zinc-400"
+          className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2 text-brand-muted dark:text-zinc-400"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white dark:border-zinc-700 dark:bg-zinc-900">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-brand-navy/10 bg-white dark:border-zinc-700 dark:bg-zinc-900">
             <PanelLeftClose className="h-5 w-5" strokeWidth={1.75} />
           </span>
           {!labelsHidden ? (

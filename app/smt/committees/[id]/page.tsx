@@ -7,7 +7,6 @@ import { ChairLiveFloor } from "@/components/session/ChairLiveFloor";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
 import {
-  formatCommitteeCardTitle,
   resolveCommitteeDisplayTags,
   resolveCommitteeFullName,
 } from "@/lib/committee-card-display";
@@ -130,29 +129,29 @@ export default async function SmtCommitteeLivePage({
   const displayTags = resolveCommitteeDisplayTags(conf.committee);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <Link href="/smt" className="text-sm text-brand-accent hover:underline inline-block">
         ← {t("allCommittees")}
       </Link>
 
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-6">
+      <div className="space-y-5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
         <div>
-          <div className="flex items-start gap-4">
+          <div className="flex items-start gap-3.5">
             {conf.committee_logo_url ? (
               <img
                 src={conf.committee_logo_url}
                 alt={`${conf.committee?.trim()
                   ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
                   : t("committeeFallback")} logo`}
-                className="h-14 w-14 object-contain rounded-md bg-white/70 border border-brand-navy/10 mt-1"
+                className="mt-1 h-12 w-12 rounded-md border border-brand-navy/10 bg-white/70 object-contain"
               />
             ) : null}
-            <h1 className="font-display text-2xl font-semibold text-brand-navy">{displayTitle}</h1>
+            <h1 className="font-display text-[1.6rem] font-semibold text-brand-navy">{displayTitle}</h1>
           </div>
-          <p className="text-xs text-brand-muted mt-2 uppercase tracking-wide">{t("committeeOverview")}</p>
+          <p className="mt-1.5 text-xs uppercase tracking-wide text-brand-muted">{t("committeeOverview")}</p>
         </div>
 
-        <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <MetaItem label={t("sessionTopicAgenda")}>
             {conf.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name) : "—"}
           </MetaItem>
@@ -223,7 +222,7 @@ export default async function SmtCommitteeLivePage({
         </p>
       </div>
 
-      <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-4">
+      <section className="space-y-3.5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("digitalCommitteeRoom")}</h2>
         <p className="text-sm text-brand-navy/90 max-w-2xl">
           {t("digitalRoomDescription")}
@@ -247,8 +246,8 @@ export default async function SmtCommitteeLivePage({
         />
       </section>
 
-      <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm space-y-8">
-        <section className="space-y-3">
+      <div className="space-y-6 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
+        <section className="space-y-2.5">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("liveFloor")}</h2>
           <ChairLiveFloor
             conferenceId={liveFloorBundle.debateConferenceId}

@@ -90,11 +90,11 @@ function Placard({
     <>
       <div
         className={[
-          "rounded-lg border px-2.5 py-2.5 text-left leading-snug transition-[opacity,transform,box-shadow,border-color,background-color] duration-150",
+          "rounded-md border px-2 py-2 text-left leading-snug transition-[opacity,transform,box-shadow,border-color,background-color] duration-150",
           vacant
-            ? "border-slate-300/75 bg-white/80 text-slate-600"
-            : "border-slate-300/95 bg-white text-slate-800 shadow-[0_3px_10px_rgba(15,23,42,0.09)]",
-          interactive ? "hover:border-slate-500 hover:shadow-[0_8px_18px_rgba(15,23,42,0.14)] hover:-translate-y-[1px]" : "",
+            ? "border-brand-navy/20 bg-white/80 text-brand-muted"
+            : "border-brand-navy/20 bg-white text-brand-navy shadow-[0_3px_10px_rgba(15,23,42,0.09)]",
+          interactive ? "hover:border-brand-accent/45 hover:shadow-[0_8px_18px_rgba(15,23,42,0.14)] hover:-translate-y-[1px]" : "",
           dimmed ? "opacity-[0.32] scale-[0.98]" : "",
           ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/60" : "",
         ].join(" ")}
@@ -120,7 +120,7 @@ function Placard({
               <div className="text-[0.53rem] uppercase tracking-widest text-brand-muted/90 mb-1 border-b border-brand-navy/10 pb-0.5 font-semibold break-words">
                 {country}
               </div>
-              <div className="text-[0.64rem] sm:text-[0.69rem] font-semibold break-words leading-tight text-slate-900">
+              <div className="text-[0.64rem] sm:text-[0.69rem] font-semibold break-words leading-tight text-brand-navy">
                 {dash(name)}
               </div>
               <div className="text-[0.56rem] sm:text-[0.6rem] text-brand-muted mt-0.5 break-words leading-tight">
@@ -136,7 +136,7 @@ function Placard({
       <div
         className={[
           "mx-auto mt-0.5 h-1 rounded-sm",
-          vacant ? "bg-slate-300/60 w-[90%]" : "bg-slate-400/60 w-full",
+          vacant ? "w-[90%] bg-brand-navy/25" : "w-full bg-brand-navy/35",
         ].join(" ")}
       />
     </>
@@ -204,9 +204,9 @@ function DaisStation({
       </div>
       <div
         className={[
-          "rounded-lg bg-white px-1.5 py-1 w-full text-center border border-slate-300/90 transition-[opacity,transform,box-shadow,border-color] duration-200 shadow-[0_3px_10px_rgba(15,23,42,0.1)]",
+          "w-full rounded-md border border-brand-navy/20 bg-white px-1.5 py-1 text-center shadow-[0_3px_10px_rgba(15,23,42,0.1)] transition-[opacity,transform,box-shadow,border-color] duration-200",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
-          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "hover:border-slate-400",
+          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50" : "hover:border-brand-accent/35",
         ].join(" ")}
       >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-accent-bright/90">
@@ -377,7 +377,7 @@ export function VirtualCommitteeRoom({
   }, [scrollToDelegationMatchNonce, searchActive, firstPlacardMatchIndex, qNorm]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {helperText === null ? null : (
         <p className="text-sm text-brand-muted max-w-2xl">
           {helperText ?? (
@@ -394,8 +394,8 @@ export function VirtualCommitteeRoom({
       )}
 
       <figure
-        className="relative w-full overflow-hidden rounded-3xl border border-slate-300/90 bg-white shadow-[0_16px_44px_-22px_rgba(15,23,42,0.2)] select-none ring-1 ring-slate-200/90"
-        aria-label={`Virtual committee room — ${committeeName}`}
+        className="relative w-full select-none overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-[0_14px_36px_-24px_rgba(15,23,42,0.28)] ring-1 ring-brand-navy/10"
+        aria-label={`Virtual committee room — ${committeeName} (${conferenceName})`}
       >
         {searchActive ? (
           <span className="sr-only" aria-live="polite">
@@ -403,15 +403,15 @@ export function VirtualCommitteeRoom({
           </span>
         ) : null}
         <div
-          className="relative aspect-[16/10] min-h-[360px] sm:min-h-[460px] md:min-h-[540px]"
+          className="relative aspect-[16/10] min-h-[350px] sm:min-h-[440px] md:min-h-[520px]"
           style={{
-            background: "linear-gradient(180deg, #eef4fc 0%, #e8eff8 45%, #e3ebf6 100%)",
+            background: "linear-gradient(180deg, #f5f8fd 0%, #eef3fb 45%, #e7eef8 100%)",
           }}
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[20%] rounded-b-2xl border-x border-b border-slate-300/90 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
+            className="absolute top-0 left-[8%] right-[8%] h-[20%] rounded-b-xl border-x border-b border-brand-navy/20 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)]"
           >
-            <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-slate-200/90" />
+            <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-brand-navy/10" />
           </div>
 
           <div className="absolute top-[2%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">
@@ -431,7 +431,7 @@ export function VirtualCommitteeRoom({
             })}
           </div>
 
-          <div className="absolute top-[18%] sm:top-[18.5%] md:top-[17.5%] left-1/2 -translate-x-1/2 z-[6] flex items-center gap-1.5 text-slate-500">
+          <div className="absolute top-[18%] left-1/2 z-[6] flex -translate-x-1/2 items-center gap-1.5 text-brand-muted sm:top-[18.5%] md:top-[17.5%]">
             <Mic className="w-3 h-3" />
             <span className="text-[0.52rem] uppercase tracking-[0.3em]">
               Committee floor

@@ -59,18 +59,10 @@ export function SourcesView({
       return;
     }
 
-    const { data: follows } = await supabase
-      .from("follows")
-      .select("followed_id")
-      .eq("follower_id", currentUserId);
-
-    const followedIds = (follows ?? []).map((f) => f.followed_id as string);
-    const ids = [currentUserId, ...followedIds];
-
     const { data } = await supabase
       .from("sources")
       .select("*")
-      .in("user_id", ids.length > 0 ? ids : [currentUserId])
+      .eq("user_id", currentUserId)
       .order("created_at", { ascending: false });
 
     if (data) setItems(data as Source[]);
@@ -147,20 +139,20 @@ export function SourcesView({
   return (
     <div className="space-y-4">
       {mutationError ? (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-100" role="alert">
+        <p className="rounded-lg border border-red-300/60 bg-red-50/80 px-3 py-2 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-100" role="alert">
           {mutationError}
         </p>
       ) : null}
       <button
         type="button"
         onClick={() => setShowForm(true)}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-95"
       >
         <Plus className="h-4 w-4" />
         {t("addSource")}
       </button>
       {showForm && (
-        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+        <div className="mun-card space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">{t("sourceUrl")}</span>
             <OpenNewGoogleDocButton />
@@ -192,7 +184,7 @@ export function SourcesView({
       )}
 
       {editing && (
-        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+        <div className="mun-card space-y-3">
           <h3 className="font-semibold text-brand-navy dark:text-zinc-100">{t("editSource")}</h3>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">{tc("url")}</span>
@@ -257,7 +249,7 @@ export function SourcesView({
                   className={`flex w-full items-center gap-2 rounded-xl border px-3 py-2 text-left text-sm transition ${
                     displaySelectedId === s.id
                       ? "border-brand-accent/45 bg-brand-accent/10 font-medium text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-brand-navy"
-                      : "border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-black/20"
+                      : "border-brand-navy/10 bg-white text-brand-muted hover:border-brand-navy/25 dark:border-white/10 dark:bg-black/20 dark:text-zinc-300"
                   }`}
                 >
                   <Link2 className="h-4 w-4 shrink-0 opacity-70" />

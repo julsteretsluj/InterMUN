@@ -35,13 +35,13 @@ function StatMiniCard({
 }) {
   const tones = {
     blue: "bg-brand-accent/10 border-brand-accent/28",
-    silver: "bg-slate-200/45 border-slate-400/25",
+    silver: "bg-brand-navy/5 border-brand-navy/15",
     accent: "bg-brand-accent/10 border-brand-accent/30",
-    sky: "bg-cyan-500/10 border-cyan-500/30",
+    sky: "bg-sky-500/10 border-sky-500/30",
   } as const;
   const interactive = Boolean(onPress);
   const className = [
-    "rounded-xl border px-3 py-2.5 shadow-sm text-left w-full",
+    "w-full rounded-lg border px-3 py-2 text-left shadow-sm",
     tones[tint],
     interactive
       ? "cursor-pointer hover:brightness-110 active:scale-[0.98] transition-[transform,filter] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"
@@ -51,16 +51,16 @@ function StatMiniCard({
   if (onPress) {
     return (
       <button type="button" className={className} onClick={onPress} title={title}>
-        <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">{label}</p>
-        <p className="mt-0.5 text-lg font-semibold tabular-nums text-brand-navy">{value}</p>
+        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-muted">{label}</p>
+        <p className="mt-0.5 text-base font-semibold tabular-nums text-brand-navy">{value}</p>
       </button>
     );
   }
 
   return (
     <div className={className}>
-      <p className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">{label}</p>
-      <p className="mt-0.5 text-lg font-semibold tabular-nums text-brand-navy">{value}</p>
+      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-muted">{label}</p>
+      <p className="mt-0.5 text-base font-semibold tabular-nums text-brand-navy">{value}</p>
     </div>
   );
 }
@@ -100,6 +100,7 @@ export function CommitteeRoomDigitalMUNClient({
   chairs: { id: string; name: string | null }[];
 }) {
   const t = useTranslations("views.committeeRoom");
+  const ts = useTranslations("views.session.requestToSpeak");
   const role = myRole.toLowerCase();
   const isDelegate = role === "delegate";
   /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */
@@ -120,10 +121,13 @@ export function CommitteeRoomDigitalMUNClient({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [procedureState, setProcedureState] = useState<"debate_open" | "voting_procedure">("debate_open");
   const [currentVoteItemId, setCurrentVoteItemId] = useState<string | null>(null);
+  const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
   const [delegationSearch, setDelegationSearch] = useState("");
   const [scrollMatchNonce, setScrollMatchNonce] = useState(0);
   const [myRollAttendance, setMyRollAttendance] = useState<RollAttendance | null>(null);
   const [myRollApprovalLoaded, setMyRollApprovalLoaded] = useState(false);
+  const [rollChoicePending, setRollChoicePending] = useState(false);
+  const [rollChoiceError, setRollChoiceError] = useState<string | null>(null);
 
   const delegateFloorUnlocked =
     isDelegate && (myRollAttendance === "present_abstain" || myRollAttendance === "present_voting");
@@ -141,6 +145,7 @@ export function CommitteeRoomDigitalMUNClient({
       if (!isActive) return;
       setProcedureState(ps?.state ?? "debate_open");
       setCurrentVoteItemId(ps?.current_vote_item_id ?? null);
+      setSessionStartedAt(ps?.committee_session_started_at ?? null);
     }
 
     void load();
@@ -163,6 +168,7 @@ export function CommitteeRoomDigitalMUNClient({
           };
           setProcedureState(row?.state ?? "debate_open");
           setCurrentVoteItemId(row?.current_vote_item_id ?? null);
+          setSessionStartedAt(row?.committee_session_started_at ?? null);
         }
       )
       .subscribe();
@@ -223,6 +229,34 @@ export function CommitteeRoomDigitalMUNClient({
   }, [supabase, conferenceId, isDelegate, myAllocationId]);
 
   const votingProcedureActive = procedureState === "voting_procedure";
+  const shouldPromptDelegateRollChoice =
+    isDelegate &&
+    Boolean(myAllocationId) &&
+    Boolean(sessionStartedAt) &&
+    myRollApprovalLoaded &&
+    (!myRollAttendance || myRollAttendance === "absent");
+
+  function trRequestToSpeak(key: string, fallback: string): string {
+    try {
+      return ts(key as never) as string;
+    } catch {
+      return fallback;
+    }
+  }
+
+  async function submitDelegateRollChoice(attendance: "present_abstain" | "present_voting") {
+    if (!shouldPromptDelegateRollChoice) return;
+    setRollChoicePending(true);
+    setRollChoiceError(null);
+    const { error } = await supabase.rpc("delegate_set_roll_attendance", {
+      p_conference_id: conferenceId,
+      p_attendance: attendance,
+    });
+    if (error) {
+      setRollChoiceError(error.message || "Could not save roll-call attendance.");
+    }
+    setRollChoicePending(false);
+  }
 
   const assignedCount = useMemo(() => placards.filter((p) => !p.vacant).length, [placards]);
   const vacantCount = useMemo(() => placards.filter((p) => p.vacant).length, [placards]);
@@ -240,20 +274,20 @@ export function CommitteeRoomDigitalMUNClient({
   }, [dais, qNorm]);
 
   return (
-    <div className="w-full space-y-5">
+    <div className="w-full space-y-4">
       <div className={["xl:grid", layoutColumns, "xl:gap-5 xl:items-start"].join(" ")}>
         {/* Left rail — context & stats (mockup sidebar) */}
-        <aside className="space-y-3 mb-5 xl:mb-0 xl:sticky xl:top-4 h-fit">
-          <div className="rounded-2xl border border-brand-accent/20 bg-brand-paper/90 p-3.5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]">
+        <aside className="mb-4 h-fit space-y-2.5 xl:sticky xl:top-4 xl:mb-0">
+          <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-3 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)]">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("committeeLabel")}</p>
             <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug break-words">
               {committeeName}
             </p>
             <p className="mt-1 text-xs text-brand-muted break-words">{conferenceName}</p>
 
-            <div className="mt-4 pt-4 border-t border-brand-line/50 space-y-2">
+            <div className="mt-3.5 space-y-2 border-t border-brand-line/50 pt-3.5">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Your context</p>
-              <div className="flex items-start gap-2 rounded-xl bg-black/20 px-3 py-2 border border-white/5">
+              <div className="flex items-start gap-2 rounded-lg border border-brand-navy/10 bg-brand-navy/5 px-2.5 py-2">
                 <UserRound className="size-4 shrink-0 text-brand-accent-bright mt-0.5" strokeWidth={1.5} />
                 <div className="min-w-0 text-xs">
                   <p className="text-brand-muted">Role</p>
@@ -268,7 +302,7 @@ export function CommitteeRoomDigitalMUNClient({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5">
             <StatMiniCard
               label="Assigned"
               value={assignedCount}
@@ -293,7 +327,7 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-brand-accent/8 p-3 text-xs text-brand-navy/90 leading-relaxed">
+          <div className="rounded-lg border border-brand-navy/10 bg-brand-accent/8 p-2.5 text-xs leading-relaxed text-brand-navy/90">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
               <Sparkles className="size-3.5 text-brand-silver shrink-0" />
               Tip
@@ -303,13 +337,13 @@ export function CommitteeRoomDigitalMUNClient({
         </aside>
 
         {/* Center — digital display */}
-        <section className="min-w-0 space-y-3 mb-5 xl:mb-0">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl border border-brand-accent/15 bg-brand-paper/85 px-4 py-2.5 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
+        <section className="mb-4 min-w-0 space-y-2.5 xl:mb-0">
+          <div className="flex flex-col gap-2.5 rounded-xl border border-brand-navy/10 bg-brand-paper px-3.5 py-2.5 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)] sm:flex-row sm:items-center sm:gap-3.5">
             <div className="min-w-0 flex-1">
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
                 Digital display
               </p>
-              <p className="font-display text-base sm:text-lg font-semibold text-brand-navy break-words leading-tight">
+              <p className="break-words font-display text-[0.95rem] font-semibold leading-tight text-brand-navy sm:text-base">
                 {committeeName}
               </p>
             </div>
@@ -317,7 +351,7 @@ export function CommitteeRoomDigitalMUNClient({
               <label htmlFor={searchFieldId} className="sr-only">
                 {t("findLabel")}
               </label>
-              <div className="flex items-center gap-1 rounded-full border border-white/10 bg-black/25 pl-3 pr-1 py-1">
+              <div className="flex items-center gap-1 rounded-lg border border-brand-navy/10 bg-brand-navy/5 py-1 pl-2.5 pr-1 dark:border-white/10 dark:bg-black/25">
                 <Search className="size-3.5 opacity-70 shrink-0 text-brand-muted" strokeWidth={2} aria-hidden />
                 <input
                   ref={searchInputRef}
@@ -381,8 +415,8 @@ export function CommitteeRoomDigitalMUNClient({
 
         {/* Right rail — delegate floor (chairs/SMT/admin use Chair → Session) */}
         {showDelegateFloorPanel ? (
-          <aside className="rounded-2xl border border-slate-400/20 bg-brand-paper/35 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] h-fit xl:sticky xl:top-4">
-            <div className="rounded-xl border border-white/5 bg-black/15 p-3">
+          <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] xl:sticky xl:top-4">
+            <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/5 dark:bg-black/15">
               <div className="mb-3 flex items-center gap-2">
                 <CircleDot className="size-4 text-brand-accent-bright" />
                 <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Floor</p>
@@ -399,21 +433,66 @@ export function CommitteeRoomDigitalMUNClient({
                 {isDelegate ? (
                   <>
                     {!delegateFloorUnlocked ? (
-                      <div className="rounded-lg border border-white/10 bg-black/20 p-3">
+                      <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/10 dark:bg-black/20">
                         <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
-                          Chair approval required
+                          {trRequestToSpeak("rollPromptTitle", "Chair approval required")}
                         </p>
                         <p className="mt-1 text-sm text-brand-navy/90">
-                          {myRollApprovalLoaded ? (
-                            myRollAttendance === null ? (
-                              "Waiting for the chair to initialize roll call."
+                          {shouldPromptDelegateRollChoice ? (
+                            trRequestToSpeak(
+                              "rollPromptBodyPickStatus",
+                              "Session has started. Choose your roll-call status to unlock speaking and voting."
+                            )
+                          ) : myRollApprovalLoaded ? (
+                            !sessionStartedAt ? (
+                              trRequestToSpeak(
+                                "rollPromptBodyWaitSessionStart",
+                                "Waiting for the chair to start the committee session."
+                              )
+                            ) : myRollAttendance === null ? (
+                              trRequestToSpeak(
+                                "rollPromptBodyWaitRollPrompt",
+                                "Waiting for roll-call prompt."
+                              )
                             ) : (
-                              "You’re currently marked absent. Ask the chair to mark you Present to speak and vote."
+                              trRequestToSpeak(
+                                "rollPromptBodyMarkedAbsent",
+                                "You’re currently marked absent. Ask the chair to mark you Present to speak and vote."
+                              )
                             )
                           ) : (
-                            "Checking your roll status..."
+                            trRequestToSpeak("rollPromptBodyChecking", "Checking your roll status...")
                           )}
                         </p>
+                        {shouldPromptDelegateRollChoice ? (
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            <button
+                              type="button"
+                              disabled={rollChoicePending}
+                              onClick={() => void submitDelegateRollChoice("present_abstain")}
+                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/12 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/20 disabled:opacity-50"
+                            >
+                              {rollChoicePending
+                                ? trRequestToSpeak("rollPromptSaving", "Saving...")
+                                : trRequestToSpeak("rollPromptPresent", "Present")}
+                            </button>
+                            <button
+                              type="button"
+                              disabled={rollChoicePending}
+                              onClick={() => void submitDelegateRollChoice("present_voting")}
+                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/18 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/25 disabled:opacity-50"
+                            >
+                              {rollChoicePending
+                                ? trRequestToSpeak("rollPromptSaving", "Saving...")
+                                : trRequestToSpeak("rollPromptPresentVoting", "Present and voting")}
+                            </button>
+                          </div>
+                        ) : null}
+                        {rollChoiceError ? (
+                          <p className="mt-2 text-xs text-red-600 dark:text-rose-300" role="alert">
+                            {rollChoiceError}
+                          </p>
+                        ) : null}
                       </div>
                     ) : null}
 
@@ -439,7 +518,7 @@ export function CommitteeRoomDigitalMUNClient({
       </div>
 
       {canManageSeats ? (
-        <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/80 p-4 md:p-5 shadow-sm">
+        <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-5">
           <div className="flex items-center gap-2 mb-4">
             <Gavel className="size-4 text-brand-accent-bright" />
             <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">Staff · seats</h3>

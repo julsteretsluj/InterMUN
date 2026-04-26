@@ -23,7 +23,6 @@ import {
   DoorOpen,
   PanelsTopLeft,
   Trophy,
-  UserPlus,
   LayoutDashboard,
   Layers,
   Library,
@@ -36,7 +35,6 @@ import type { LucideIcon } from "lucide-react";
 const BASE_TABS = [
   { href: "/delegate", labelKey: "delegateHub", icon: LayoutDashboard },
   { href: "/profile", labelKey: "profile", icon: User },
-  { href: "/follow", labelKey: "follow", icon: UserPlus },
   { href: "/chats-notes", labelKey: "notes", icon: MessageSquare },
   { href: "/committee-room", labelKey: "committee", icon: Landmark },
   { href: "/voting", labelKey: "voting", icon: Scale },
@@ -90,7 +88,7 @@ function tabInPath(pathname: string, href: string) {
 }
 
 function tabMainGroup(href: string): MainTabKey {
-  if (href === "/delegate" || href === "/profile" || href === "/follow") return "home";
+  if (href === "/delegate" || href === "/profile") return "home";
   if (
     href === "/chats-notes" ||
     href === "/committee-room" ||
@@ -121,13 +119,13 @@ function AspireSidebarLink({
         "flex items-center justify-center gap-0 group-hover:justify-start group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
         isActive
           ? "bg-brand-accent/12 font-semibold text-brand-navy ring-1 ring-brand-accent/28 dark:bg-brand-accent/18 dark:text-brand-accent-bright dark:ring-white/10"
-          : "font-medium text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          : "font-medium text-brand-muted hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
       )}
     >
       <Icon
         className={cn(
           "h-5 w-5 shrink-0",
-          isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-slate-400 dark:text-zinc-500"
+          isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-500"
         )}
         strokeWidth={1.75}
       />
@@ -157,7 +155,7 @@ function DockLink({
           "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
           isActive
             ? "scale-[1.02] border-brand-accent/35 bg-brand-accent/14 text-brand-navy shadow-md shadow-brand-accent/15 dark:border-brand-accent/45 dark:bg-brand-accent/18 dark:text-brand-accent-bright dark:shadow-none"
-            : "border-slate-200/90 bg-white text-slate-500 group-hover:border-brand-accent/30 group-hover:bg-slate-50 group-hover:text-brand-diplomatic dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-brand-accent/35 dark:group-hover:bg-zinc-800"
+            : "border-brand-navy/10 bg-white text-brand-muted group-hover:border-brand-accent/30 group-hover:bg-brand-navy/5 group-hover:text-brand-diplomatic dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-brand-accent/35 dark:group-hover:bg-zinc-800"
         )}
       >
         <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
@@ -165,7 +163,7 @@ function DockLink({
       <span
         className={cn(
           "max-w-[4.25rem] text-center text-[0.625rem] font-medium leading-tight",
-          isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-slate-600 dark:text-zinc-400"
+          isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-400"
         )}
       >
         {label}
@@ -216,7 +214,7 @@ export function TabNav({
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
         <div className="px-1 pb-2 pt-1 group-hover:px-2">
-          <p className="hidden px-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-zinc-500 group-hover:block">
+          <p className="hidden px-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted dark:text-zinc-500 group-hover:block">
             {t("mainTabs")}
           </p>
           <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
@@ -232,7 +230,7 @@ export function TabNav({
                     "inline-flex items-center justify-center gap-0 rounded-lg px-2 py-1.5 text-[0.7rem] font-medium transition group-hover:gap-1",
                     selected
                       ? "bg-brand-accent/12 text-brand-navy dark:bg-brand-accent/18 dark:text-brand-accent-bright"
-                      : "text-slate-600 hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+                      : "text-brand-muted hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
                   )}
                 >
                   <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
@@ -243,7 +241,7 @@ export function TabNav({
           </div>
         </div>
         <div>
-          <p className="hidden px-3 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-zinc-500 group-hover:block">
+          <p className="hidden px-3 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted dark:text-zinc-500 group-hover:block">
             {t("subtabs")}
           </p>
           <div className="flex flex-col gap-0.5">
@@ -264,7 +262,7 @@ export function TabNav({
   return (
     <nav
       aria-label="Main navigation"
-      className="flex flex-row items-stretch gap-1 overflow-x-auto overflow-y-hidden overscroll-x-contain border-t border-slate-200/80 bg-brand-cream/95 px-2 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md"
+      className="flex flex-row items-stretch gap-1 overflow-x-auto overflow-y-hidden overscroll-x-contain border-t border-brand-navy/10 bg-color-surface/95 px-2 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md"
     >
       <div className="flex flex-col gap-1 min-w-full">
         <div className="flex flex-row gap-1 overflow-x-auto">
@@ -280,7 +278,7 @@ export function TabNav({
                   "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[0.7rem] font-medium transition shrink-0",
                   selected
                     ? "border-brand-accent/35 bg-brand-accent/12 text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/16 dark:text-brand-accent-bright"
-                    : "border-slate-200/90 bg-white text-slate-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400"
+                    : "border-brand-navy/10 bg-white text-brand-muted dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400"
                 )}
               >
                 <Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
