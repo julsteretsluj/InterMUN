@@ -93,6 +93,7 @@ function tabMainGroup(href: string): MainTabKey {
     href === "/chats-notes" ||
     href === "/committee-room" ||
     href === "/voting" ||
+    href === "/resolutions" ||
     href === "/running-notes" ||
     href === "/report" ||
     href === "/crisis-slides"
