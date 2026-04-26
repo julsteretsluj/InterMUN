@@ -146,13 +146,12 @@ export default async function DashboardLayout({
   );
 
   return (
-    <div className="flex min-h-screen bg-brand-cream dark:bg-discord-app">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-brand-navy/10 bg-color-surface/90 backdrop-blur-md transition-[width] duration-200 dark:border-discord-divider dark:bg-discord-sidebar dark:backdrop-blur-none lg:flex">
-        <div className="orbit-rail-v pointer-events-none absolute bottom-0 left-0 top-0 z-20 opacity-90" aria-hidden />
+    <div className="flex min-h-screen bg-[var(--color-bg-page)]">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[var(--material-chrome)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
           aria-label={`${appName} home`}
-          className="flex shrink-0 items-center justify-center gap-0 border-b border-brand-navy/10 px-2 py-5 transition group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-brand-navy/5 dark:border-discord-divider dark:hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex shrink-0 items-center justify-center gap-0 border-b border-[var(--hairline)] px-2 py-5 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-[color:var(--discord-hover-bg)]"
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span
@@ -180,19 +179,19 @@ export default async function DashboardLayout({
           )}
         </div>
         {!isChairRole(normalizedRole) ? (
-          <div className="mt-auto shrink-0 space-y-0.5 border-t border-brand-navy/10 px-3 py-4 dark:border-discord-divider">
+          <div className="mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] px-3 py-4">
             <Link
               href="/guides"
-              className="flex items-center justify-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-brand-muted transition group-hover:justify-start group-hover:px-3 hover:bg-brand-navy/5 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
+              className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <HelpCircle className="h-5 w-5 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
+              <HelpCircle className="h-5 w-5 text-brand-muted" strokeWidth={1.75} />
               <span className="hidden group-hover:inline">{t("helpCenter")}</span>
             </Link>
             <Link
               href="/profile"
-              className="flex items-center justify-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-brand-muted transition group-hover:justify-start group-hover:px-3 hover:bg-brand-navy/5 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
+              className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <Settings className="h-5 w-5 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
+              <Settings className="h-5 w-5 text-brand-muted" strokeWidth={1.75} />
               <span className="hidden group-hover:inline">{t("settings")}</span>
             </Link>
           </div>
@@ -215,7 +214,7 @@ export default async function DashboardLayout({
         />
         <DashboardAnnouncementPopup />
         {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
-          <div className="border-b border-brand-navy/10 bg-brand-cream px-4 py-3 dark:border-discord-divider dark:bg-discord-app sm:px-6">
+          <div className="border-y border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-3 backdrop-blur-xl sm:px-6">
             <div className="w-full">
               <ChairLiveFloorThemed
                 conferenceId={liveFloorConferenceId ?? activeConf.id}
@@ -225,12 +224,12 @@ export default async function DashboardLayout({
             </div>
           </div>
         ) : null}
-        <main className="w-full flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-8">
+        <main className="w-full flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(7.5rem+env(safe-area-inset-bottom))] lg:pb-8">
           {children}
         </main>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
+      <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-40 lg:hidden">
         {isChairRole(normalizedRole) ? (
           <ChairMobileDock
             conferenceLine={conferenceLine || ""}

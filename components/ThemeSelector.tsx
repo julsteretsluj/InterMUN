@@ -108,7 +108,7 @@ export function ThemeSelector({ className }: { className?: string }) {
     return (
       <span
         className={cn(
-          "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white opacity-0 dark:border-white/15 dark:bg-black/20",
+          "inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] opacity-0",
           className
         )}
         aria-hidden
@@ -123,10 +123,9 @@ export function ThemeSelector({ className }: { className?: string }) {
         type="button"
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border transition-colors",
-          "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
-          "dark:border-white/15 dark:bg-black/25 dark:text-brand-navy dark:hover:bg-white/10",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"
+          "inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
+          "border-[var(--hairline)] bg-[var(--material-thin)] hover:bg-[color:var(--discord-hover-bg)]",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         )}
         aria-expanded={open}
         aria-haspopup="dialog"
@@ -141,7 +140,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           ref={panelRef}
           role="dialog"
           aria-label="Theme settings"
-          className="absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18rem)] rounded-xl border border-slate-200/90 bg-white p-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
+          className="absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18.5rem)] rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--material-popover)] p-3 shadow-[0_24px_48px_-20px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150"
         >
           <p className="tag tag-neutral mb-0.5">Appearance</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
@@ -149,10 +148,10 @@ export function ThemeSelector({ className }: { className?: string }) {
               type="button"
               onClick={() => setAppearance("light")}
               className={cn(
-                "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition",
+                "flex items-center justify-center gap-2 rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
                 mode === "light"
-                  ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent dark:bg-brand-accent/16 dark:text-brand-accent-bright"
-                  : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                  ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
+                  : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
               )}
             >
               <Sun className="size-4" strokeWidth={1.75} aria-hidden />
@@ -162,10 +161,10 @@ export function ThemeSelector({ className }: { className?: string }) {
               type="button"
               onClick={() => setAppearance("dark")}
               className={cn(
-                "flex items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition",
+                "flex items-center justify-center gap-2 rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
                 mode === "dark"
-                  ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent dark:bg-brand-accent/16 dark:text-brand-accent-bright"
-                  : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                  ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
+                  : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
               )}
             >
               <Moon className="size-4" strokeWidth={1.75} aria-hidden />
@@ -192,15 +191,15 @@ export function ThemeSelector({ className }: { className?: string }) {
                   title={meta.name}
                   onClick={() => setColorHue(h)}
                   className={cn(
-                    "flex items-center justify-center rounded-lg border p-2 transition",
+                    "flex items-center justify-center rounded-[var(--radius-md)] p-1.5 transition-apple",
                     active
-                      ? "border-brand-accent bg-brand-accent/12 dark:border-brand-accent/45 dark:bg-brand-accent/14"
-                      : "border-transparent hover:bg-slate-50 dark:hover:bg-zinc-800/80"
+                      ? "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_55%,transparent)]"
+                      : "ring-0 ring-transparent"
                   )}
                 >
                   <span
                     className={cn(
-                      "relative flex size-9 items-center justify-center rounded-full shadow-inner",
+                      "relative flex size-9 items-center justify-center rounded-full ring-2 ring-white/90 shadow-sm dark:ring-white/25",
                       h === "neutral"
                         ? mode === "dark"
                           ? meta.swatchDark
@@ -227,7 +226,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           </div>
 
           <p className="tag tag-neutral mt-4 mb-1.5">Typography</p>
-          <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-zinc-400">
+          <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-muted">
             <ALargeSmall className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
             Text size
           </p>
@@ -250,7 +249,7 @@ export function ThemeSelector({ className }: { className?: string }) {
               aria-valuemax={TEXT_SIZE_STEP_MAX}
               aria-valuenow={textSizeStep}
               aria-valuetext={`${TEXT_SIZE_STEP_ROOT_PCT[textSizeStep]} percent base size`}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-[color:var(--accent)] dark:bg-zinc-700"
+              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_8%,var(--color-bg-page))] accent-[color:var(--accent)]"
             />
             <div className="flex justify-between px-0.5 text-[0.65rem] font-medium text-brand-muted">
               <span>Small</span>
@@ -263,10 +262,10 @@ export function ThemeSelector({ className }: { className?: string }) {
             title="Uses Atkinson Hyperlegible (legibility-oriented) for UI and document text when enabled."
             onClick={toggleDyslexicFont}
             className={cn(
-              "mt-3 flex w-full items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-medium transition",
+              "mt-3 flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
               dyslexicFont
-                ? "border-brand-accent/38 bg-brand-accent/10 text-brand-navy dark:border-brand-accent dark:bg-brand-accent/16 dark:text-brand-accent-bright"
-                : "border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
+                : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
             )}
             aria-pressed={dyslexicFont}
           >

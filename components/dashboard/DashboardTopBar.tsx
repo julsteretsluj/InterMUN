@@ -60,8 +60,7 @@ export function DashboardTopBar({
   const initials = initialsFromName(userName, userEmail);
 
   return (
-    <header className="sticky top-0 z-20 flex shrink-0 flex-col border-b border-brand-navy/10 bg-color-surface/90 backdrop-blur-md dark:border-discord-divider dark:bg-discord-app/95 dark:backdrop-blur-md dark:shadow-[0_1px_0_rgba(0,0,0,0.2)]">
-      <div className="orbit-rail-h" aria-hidden />
+    <header className="sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] bg-[var(--material-chrome)] backdrop-blur-2xl backdrop-saturate-150 shadow-[0_1px_0_rgba(0,0,0,0.04)] [transition:backdrop-filter_200ms_var(--ease-apple)] dark:shadow-[0_1px_0_rgba(0,0,0,0.2)]">
       <div className="flex w-full flex-wrap items-center gap-2.5 px-4 py-2.5 sm:gap-3 sm:px-6">
         <Link
           href={brandHomeHref ?? "/profile"}
@@ -77,7 +76,7 @@ export function DashboardTopBar({
           {showDelegateHubLink ? (
             <Link
               href="/delegate"
-              className="hidden rounded-full border border-brand-navy/10 bg-white px-2.5 py-1.5 text-xs font-semibold text-brand-navy shadow-sm transition-colors duration-200 hover:border-brand-accent/45 hover:bg-brand-accent/10 dark:border-discord-divider dark:bg-discord-elevated dark:text-zinc-100 dark:hover:bg-[color:var(--discord-hover-bg)] sm:inline-flex"
+              className="hidden rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2.5 py-1.5 text-xs font-semibold text-brand-navy transition-apple hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] sm:inline-flex"
             >
               📄 {t("delegateHub")}
             </Link>
@@ -88,7 +87,7 @@ export function DashboardTopBar({
             </p>
           ) : null}
           <time
-            className="hidden text-sm text-brand-muted dark:text-discord-muted md:block"
+            className="hidden text-sm text-brand-muted md:block"
             dateTime={new Date().toISOString()}
           >
             {formatHeaderDate(new Date(), locale)}
@@ -96,39 +95,37 @@ export function DashboardTopBar({
           {notifications ?? null}
           <LanguageSwitcher />
           <ThemeSelector />
-          <div className="flex items-center gap-1.5 rounded-xl border border-brand-navy/10 bg-white py-1 pl-1 pr-1.5 shadow-sm dark:border-discord-divider dark:bg-discord-elevated">
+          <div className="flex items-center gap-1.5 rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] py-1 pl-1 pr-1.5">
             <Link
               href={profileHref}
-              className="flex min-w-0 items-center gap-2 rounded-lg pr-1 transition-colors duration-150 ease-out hover:bg-brand-navy/5 dark:hover:bg-[color:var(--discord-hover-bg)]"
+              className="flex min-w-0 items-center gap-2 rounded-[var(--radius-pill)] pr-1 transition-apple hover:bg-[color:var(--discord-hover-bg)]"
             >
               {profilePictureUrl?.trim() ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={profilePictureUrl.trim()}
                   alt={`${userName} profile`}
-                  className="h-8 w-8 shrink-0 rounded-lg object-cover shadow-inner"
+                  className="h-8 w-8 shrink-0 rounded-[var(--radius-md)] object-cover"
                 />
               ) : (
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent text-xs font-bold text-white shadow-inner"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] text-xs font-bold text-white"
                   aria-hidden
                 >
                   {initials}
                 </span>
               )}
               <div className="hidden min-w-0 sm:block">
-                <p className="truncate text-sm font-semibold text-brand-navy dark:text-zinc-100">
-                  {userName}
-                </p>
-                <p className="truncate text-[0.7rem] text-brand-muted dark:text-discord-muted">{userEmail}</p>
+                <p className="truncate text-sm font-semibold text-brand-navy">{userName}</p>
+                <p className="truncate text-[0.7rem] text-brand-muted">{userEmail}</p>
               </div>
               <ChevronDown
-                className="hidden h-4 w-4 shrink-0 text-brand-muted dark:text-discord-muted sm:block"
+                className="hidden h-4 w-4 shrink-0 text-brand-muted sm:block"
                 strokeWidth={1.75}
                 aria-hidden
               />
             </Link>
-            <SignOutButton className="border-l border-brand-navy/10 pl-1.5 text-xs sm:text-sm dark:border-discord-divider" />
+            <SignOutButton className="border-l border-[var(--hairline)] pl-1.5 text-xs sm:text-sm" />
           </div>
         </div>
       </div>

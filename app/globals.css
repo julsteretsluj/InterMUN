@@ -6,49 +6,88 @@
  * InterMUN theme — simplified semantic tokens (TAGS):
  *   PAGE / SURFACE / BORDER — layout layers
  *   TEXT — primary · secondary · muted
- *   ACCENT — interactive emphasis (follows hue picker)
+ *   ACCENT — interactive emphasis (follows hue picker; Apple system color mapping)
  *   STATE — success · warning · danger · info (fixed, distinct)
+ *   MATERIALS / HAIRLINES — Apple-style vibrancy + separator opacity
  * Legacy `brand-*` / `discord-*` names remain as aliases for existing components.
  */
 html {
   /* Base rem scale (Theme: `.text-scale-0` … `.text-scale-6` on `<html>`) */
   font-size: 100%;
 
+  /* —— Apple-style continuous radii —— */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-2xl: 28px;
+  --radius-pill: 999px;
+
+  /* —— Apple motion —— */
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-apple-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+
+  /* —— Apple system colors (light / sRGB) —— */
+  --system-blue: #007aff;
+  --system-green: #34c759;
+  --system-red: #ff3b30;
+  --system-orange: #ff9500;
+  --system-yellow: #ffcc00;
+  --system-purple: #af52de;
+  --system-pink: #ff2d55;
+  --system-teal: #5ac8fa;
+  --system-indigo: #5856d6;
+
+  /* —— Materials (vibrancy — used with backdrop-blur + saturate) —— */
+  --material-chrome: rgba(246, 246, 248, 0.72);
+  --material-thin: rgba(255, 255, 255, 0.55);
+  --material-regular: rgba(255, 255, 255, 0.72);
+  --material-thick: rgba(255, 255, 255, 0.86);
+  --material-popover: rgba(252, 252, 254, 0.78);
+
+  /* —— iOS hairline separators (opaque) —— */
+  --hairline: rgba(60, 60, 67, 0.18);
+  --hairline-strong: rgba(60, 60, 67, 0.29);
+
   /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
   --logo-cyan: #00ccff;
-  --logo-blue: #3366ff;
+  --logo-blue: #007aff;
   --logo-magenta: #ff00ff;
-  --logo-orange: #ff9900;
-  --logo-yellow: #ffff00;
-  --logo-green: #33ff00;
+  --logo-orange: #ff9500;
+  --logo-yellow: #ffcc00;
+  --logo-green: #34c759;
 
   /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
-  --accent: var(--logo-blue);
-  --accent-bright: #1aa8dd;
+  --accent: var(--system-blue);
+  --accent-bright: #5ac8fa;
 
-  /* —— PAGE —— */
-  --color-bg-page: #f2f4f8;
+  /* —— PAGE (iOS systemGroupedBackground) —— */
+  --color-bg-page: #f2f2f7;
   --background: var(--color-bg-page);
-  --foreground: #141414;
+  --foreground: #1c1c1e;
 
   /* —— SURFACE —— */
-  --color-surface: rgba(255, 255, 255, 0.94);
-  --color-surface-subtle: #e8edf5;
-  --color-surface-elevated: #ffffff;
+  --color-surface: var(--material-regular);
+  --color-surface-subtle: #e5e5ea;
+  --color-surface-elevated: var(--material-thick);
   --brand-paper: var(--color-surface);
   --brand-cream: var(--color-surface-subtle);
 
   /* —— TEXT —— */
-  --color-text: #0f172a;
-  --color-text-secondary: #334155;
-  --color-text-muted: #64748b;
+  --color-text: #1c1c1e;
+  --color-text-secondary: #3a3a3c;
+  --color-text-muted: #8e8e93;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
 
   /* —— BORDER / LINE —— */
-  --color-border: rgba(15, 23, 42, 0.12);
-  --color-border-strong: rgba(15, 23, 42, 0.2);
+  --color-border: var(--hairline);
+  --color-border-strong: var(--hairline-strong);
   --brand-line: var(--color-border);
 
   /* —— ACCENT (published to Tailwind / legacy) —— */
@@ -57,10 +96,10 @@ html {
   --brand-diplomatic: color-mix(in srgb, var(--accent) 58%, var(--color-text));
   --brand-gold: #c2a878;
 
-  --brand-navy-soft: rgba(20, 20, 20, 0.06);
-  --brand-silver: #8e949e;
+  --brand-navy-soft: rgba(60, 60, 67, 0.08);
+  --brand-silver: #8e8e93;
 
-  /* —— STATE (distinct tags — same in every hue) —— */
+  /* —— STATE (semantic — tuned for light grouped backgrounds) —— */
   --semantic-success: #15803d;
   --semantic-success-bg: color-mix(in srgb, #15803d 12%, var(--color-bg-page));
   --semantic-warning: #b45309;
@@ -69,6 +108,19 @@ html {
   --semantic-danger-bg: color-mix(in srgb, #b91c1c 12%, var(--color-bg-page));
   --semantic-info: #1d4ed8;
   --semantic-info-bg: color-mix(in srgb, #1d4ed8 12%, var(--color-bg-page));
+
+  /* —— App chrome aliases (light) — same tokens as “discord-*” for backwards compatibility —— */
+  --discord-sidebar: var(--material-chrome);
+  --discord-app: var(--color-bg-page);
+  --discord-elevated: var(--material-thick);
+  --discord-panel-border: var(--hairline);
+  --discord-divider: var(--hairline);
+  --discord-blurple: var(--accent);
+  --discord-blurple-hover: color-mix(in srgb, var(--accent) 88%, #ffffff);
+  --discord-muted: var(--color-text-muted);
+  --discord-hover-bg: color-mix(in srgb, var(--color-text) 6%, transparent);
+  --discord-active-bg: color-mix(in srgb, var(--accent) 16%, var(--color-bg-page));
+  --discord-input: var(--material-thin);
 
   color-scheme: light;
 }
@@ -105,28 +157,49 @@ html.text-size-large {
 }
 
 html.dark {
-  --accent: #60a5fa;
-  --accent-bright: #93c5fd;
+  /* —— Apple system colors (dark, sRGB approximations) —— */
+  --system-blue: #0a84ff;
+  --system-green: #30d158;
+  --system-red: #ff453a;
+  --system-orange: #ff9f0a;
+  --system-yellow: #ffd60a;
+  --system-purple: #bf5af2;
+  --system-pink: #ff375f;
+  --system-teal: #64d2ff;
+  --system-indigo: #5e5ce6;
 
-  --color-bg-page: #0b0f19;
+  --accent: var(--system-blue);
+  --accent-bright: #64b5ff;
+
+  /* —— True black page (glass over black) —— */
+  --color-bg-page: #000000;
   --background: var(--color-bg-page);
-  --foreground: #f4f4f5;
+  --foreground: #f2f2f7;
 
-  --color-surface: rgba(15, 23, 42, 0.82);
-  --color-surface-subtle: rgba(15, 23, 42, 0.62);
-  --color-surface-elevated: #111827;
+  --material-chrome: rgba(28, 28, 30, 0.72);
+  --material-thin: rgba(28, 28, 30, 0.55);
+  --material-regular: rgba(28, 28, 30, 0.72);
+  --material-thick: rgba(44, 44, 46, 0.86);
+  --material-popover: rgba(44, 44, 46, 0.82);
+
+  --hairline: rgba(255, 255, 255, 0.12);
+  --hairline-strong: rgba(255, 255, 255, 0.2);
+
+  --color-surface: var(--material-regular);
+  --color-surface-subtle: rgba(28, 28, 30, 0.65);
+  --color-surface-elevated: var(--material-thick);
   --brand-paper: var(--color-surface);
   --brand-cream: var(--color-surface-subtle);
 
-  --color-text: #f8fafc;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
+  --color-text: #f2f2f7;
+  --color-text-secondary: #d1d1d6;
+  --color-text-muted: #8e8e93;
   --brand-navy: var(--color-text);
   --brand-muted: var(--color-text-muted);
   --brand-accent-ink: var(--color-text);
 
-  --color-border: rgba(148, 163, 184, 0.2);
-  --color-border-strong: rgba(148, 163, 184, 0.34);
+  --color-border: var(--hairline);
+  --color-border-strong: var(--hairline-strong);
   --brand-line: var(--color-border);
 
   --brand-accent: var(--accent);
@@ -134,30 +207,30 @@ html.dark {
   --brand-diplomatic: var(--accent-bright);
   --brand-gold: #d4c4a8;
 
-  --brand-navy-soft: rgba(244, 244, 245, 0.1);
-  --brand-silver: #b4bac4;
+  --brand-navy-soft: rgba(255, 255, 255, 0.1);
+  --brand-silver: #aeaeb2;
 
-  --semantic-success: #4ade80;
-  --semantic-success-bg: rgba(34, 197, 94, 0.14);
-  --semantic-warning: #fbbf24;
-  --semantic-warning-bg: rgba(251, 191, 36, 0.12);
-  --semantic-danger: #fb7185;
-  --semantic-danger-bg: rgba(251, 113, 133, 0.12);
-  --semantic-info: #93c5fd;
-  --semantic-info-bg: rgba(147, 197, 253, 0.12);
+  --semantic-success: #30d158;
+  --semantic-success-bg: rgba(52, 199, 89, 0.16);
+  --semantic-warning: #ff9f0a;
+  --semantic-warning-bg: rgba(255, 159, 10, 0.16);
+  --semantic-danger: #ff453a;
+  --semantic-danger-bg: rgba(255, 69, 58, 0.16);
+  --semantic-info: #64b5f6;
+  --semantic-info-bg: rgba(100, 181, 246, 0.16);
 
-  /* Discord-like chrome (sidebar / app shell) — single family */
-  --discord-sidebar: #0f172a;
-  --discord-app: #0b1220;
-  --discord-elevated: #111827;
-  --discord-panel-border: rgba(148, 163, 184, 0.22);
-  --discord-divider: rgba(148, 163, 184, 0.16);
+  /* Re-aliased: Apple materials (replaces solid Discord look) */
+  --discord-sidebar: var(--material-chrome);
+  --discord-app: var(--background);
+  --discord-elevated: var(--material-thick);
+  --discord-panel-border: var(--hairline);
+  --discord-divider: var(--hairline);
   --discord-blurple: var(--accent);
-  --discord-blurple-hover: color-mix(in srgb, var(--accent) 85%, white);
-  --discord-muted: #94a3b8;
-  --discord-hover-bg: rgba(148, 163, 184, 0.12);
-  --discord-active-bg: rgba(96, 165, 250, 0.2);
-  --discord-input: #1f2937;
+  --discord-blurple-hover: color-mix(in srgb, var(--accent) 88%, #ffffff);
+  --discord-muted: var(--color-text-muted);
+  --discord-hover-bg: rgba(255, 255, 255, 0.08);
+  --discord-active-bg: color-mix(in srgb, var(--accent) 22%, transparent);
+  --discord-input: var(--material-thin);
 
   color-scheme: dark;
 }
@@ -193,8 +266,11 @@ html.dark {
   --color-brand-cream: var(--brand-cream);
   --color-brand-paper: var(--brand-paper);
   --color-brand-muted: var(--brand-muted);
-  --font-sans: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+  /* Prefer SF on Apple; Inter var from next/font still available as --font-ui */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
@@ -230,7 +306,22 @@ html.dyslexic-font body {
   word-spacing: 0.04em;
 }
 
-/* —— PAGE: solid fills (accent only on components, not full-page gradients) —— */
+/* —— Apple-style motion + tap feedback —— */
+@layer utilities {
+  .transition-apple {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity, filter;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-apple);
+  }
+  .spring-tap {
+    transition: transform var(--dur-fast) var(--ease-apple);
+  }
+  .spring-tap:active {
+    transform: scale(0.97);
+  }
+}
+
+/* —— PAGE —— */
 body {
   min-height: 100%;
   background-color: var(--background);
@@ -238,11 +329,11 @@ body {
 }
 
 html.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.dark {
-  scrollbar-color: #202225 #2b2d31;
+  scrollbar-color: #48484a #1c1c1e;
 }
 
 html.dark ::-webkit-scrollbar {
@@ -251,146 +342,147 @@ html.dark ::-webkit-scrollbar {
 }
 
 html.dark ::-webkit-scrollbar-track {
-  background: var(--discord-sidebar);
+  background: #1c1c1e;
 }
 
 html.dark ::-webkit-scrollbar-thumb {
-  background: #202225;
+  background: #48484a;
   border-radius: 999px;
-  border: 2px solid var(--discord-sidebar);
+  border: 2px solid #1c1c1e;
 }
 
 html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #18191c;
+  background: #636366;
 }
 
 /* Subtle solid wash for auth/marketing shells (no radial gradients) */
 .theme-page-glow {
-  background-color: color-mix(in srgb, var(--accent) 6%, var(--background));
+  background-color: color-mix(in srgb, var(--accent) 5%, var(--background));
 }
 html.dark .theme-page-glow {
-  background-color: color-mix(in srgb, var(--accent) 8%, var(--discord-app));
+  background-color: color-mix(in srgb, var(--accent) 8%, var(--background));
 }
 
-/* Hue presets: accent tokens + optional flat page tint */
+/* Hue presets: Apple system tints on accent; page stay grouped / black in dark */
 html.theme-red:not(.dark) {
-  --accent: #dc2626;
-  --accent-bright: #ef4444;
+  --accent: var(--system-red);
+  --accent-bright: #ff6961;
 }
 html.theme-red:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
+  background-color: color-mix(in srgb, var(--accent) 3%, #ffffff);
 }
 html.theme-red.dark {
-  --accent: #f87171;
-  --accent-bright: #fca5a5;
+  --accent: var(--system-red);
+  --accent-bright: #ff6961;
 }
 html.theme-red.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.theme-orange:not(.dark) {
-  --accent: #ea580c;
-  --accent-bright: #fb923c;
+  --accent: var(--system-orange);
+  --accent-bright: #ffb340;
 }
 html.theme-orange:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
+  background-color: color-mix(in srgb, var(--accent) 3%, #ffffff);
 }
 html.theme-orange.dark {
-  --accent: #fb923c;
-  --accent-bright: #fdba74;
+  --accent: var(--system-orange);
+  --accent-bright: #ffb340;
 }
 html.theme-orange.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.theme-yellow:not(.dark) {
   --accent: #ca8a04;
-  --accent-bright: #eab308;
+  --accent-bright: #ffd60a;
 }
 html.theme-yellow:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 5%, #fffef8);
+  background-color: color-mix(in srgb, var(--accent) 4%, #fffef8);
 }
 html.theme-yellow.dark {
-  --accent: #eab308;
-  --accent-bright: #fde047;
+  --accent: var(--system-yellow);
+  --accent-bright: #ffeb80;
 }
 html.theme-yellow.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.theme-blue:not(.dark) {
-  --accent: var(--logo-blue);
-  --accent-bright: var(--logo-cyan);
+  --accent: var(--system-blue);
+  --accent-bright: #5ac8fa;
 }
 html.theme-blue:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 5%, var(--background));
+  background-color: color-mix(in srgb, var(--accent) 3%, var(--background));
 }
 html.theme-blue.dark {
-  --accent: #60a5fa;
-  --accent-bright: #93c5fd;
+  --accent: var(--system-blue);
+  --accent-bright: #64b5ff;
 }
 html.theme-blue.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.theme-purple:not(.dark) {
-  --accent: #7c3aed;
-  --accent-bright: #8b5cf6;
+  --accent: var(--system-purple);
+  --accent-bright: #c4b0ff;
 }
 html.theme-purple:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
+  background-color: color-mix(in srgb, var(--accent) 3%, #ffffff);
 }
 html.theme-purple.dark {
-  --accent: #a78bfa;
-  --accent-bright: #c4b5fd;
+  --accent: var(--system-purple);
+  --accent-bright: #dab8ff;
 }
 html.theme-purple.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.theme-pink:not(.dark) {
-  --accent: #db2777;
-  --accent-bright: #ec4899;
+  --accent: var(--system-pink);
+  --accent-bright: #ff6b9a;
 }
 html.theme-pink:not(.dark) body {
-  background-color: color-mix(in srgb, var(--accent) 4%, #ffffff);
+  background-color: color-mix(in srgb, var(--accent) 3%, #ffffff);
 }
 html.theme-pink.dark {
-  --accent: #f472b6;
-  --accent-bright: #fbcfe8;
+  --accent: var(--system-pink);
+  --accent-bright: #ff8ab4;
 }
 html.theme-pink.dark body {
-  background-color: var(--discord-app);
+  background-color: var(--background);
 }
 
 html.theme-neutral:not(.dark) {
-  --accent: #3f3f46;
-  --accent-bright: #52525b;
+  --accent: #3a3a3c;
+  --accent-bright: #636366;
 }
 html.theme-neutral:not(.dark) body {
-  background-color: #fafafa;
+  background-color: #f2f2f7;
 }
 html.theme-neutral.dark {
-  --accent: #d4d4d8;
-  --accent-bright: #fafafa;
+  --accent: #d1d1d6;
+  --accent-bright: #ebebf0;
 }
 html.theme-neutral.dark body {
-  background-color: #0a0a0a;
+  background-color: #000000;
 }
 
 .bg-brand-paper,
 .bg-brand-cream {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px) saturate(180%);
 }
 
+/* Apple-style focus (blue halo) */
 :focus-visible {
-  outline: 2px solid var(--accent-bright);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 26%, transparent);
 }
 
 html.dark :focus-visible {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 ::selection {
@@ -404,18 +496,18 @@ html.dark ::selection {
 }
 
 @layer components {
-  /* Header / sidebar accent strip — single solid hue */
+  /* Hairline chrome (replaces strong accent rail) */
   .orbit-rail-h {
-    height: 3px;
+    height: 1px;
     width: 100%;
     flex-shrink: 0;
-    background-color: var(--accent);
+    background-color: var(--hairline);
   }
 
   .orbit-rail-v {
-    width: 4px;
-    background-color: var(--accent);
-    opacity: 0.85;
+    width: 1px;
+    background-color: var(--hairline);
+    opacity: 1;
   }
 
   html.dark .smt-nav-row-active {
@@ -425,64 +517,50 @@ html.dark ::selection {
 
   html.dark .smt-dock-tile-active {
     background-image: none !important;
-    background-color: color-mix(in srgb, var(--accent) 24%, var(--discord-elevated));
+    background-color: color-mix(in srgb, var(--accent) 20%, var(--material-thick));
   }
 
-  /* Shell / card: single accent rail (clear, not rainbow) */
   .mun-shell {
-    @apply relative overflow-hidden rounded-2xl border p-5 text-brand-navy shadow-[0_12px_28px_-18px_rgba(15,23,42,0.45)] md:p-7;
-    border-color: var(--color-border);
-    background-color: var(--color-surface-elevated);
-    @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
-    @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-[0_10px_30px_-20px_rgba(0,0,0,0.9)] dark:backdrop-blur-none;
+    @apply relative overflow-hidden p-5 text-brand-navy transition-[box-shadow,background-color,border-color,transform] md:p-7;
+    @apply [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)];
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--hairline);
+    background: var(--material-thick);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 8px 24px -16px rgba(0, 0, 0, 0.2);
   }
 
-  .mun-shell::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    z-index: 1;
-    background-color: var(--accent);
+  html.dark .mun-shell {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 10px 32px -14px rgba(0, 0, 0, 0.65);
   }
 
   .mun-shell-title {
-    @apply mb-5 font-display text-[1.65rem] font-semibold tracking-tight text-brand-navy md:text-[1.85rem];
+    @apply mb-5 font-display text-[1.75rem] font-semibold text-brand-navy;
+    @apply tracking-[-0.02em] md:text-[2rem];
   }
 
   .mun-card {
-    @apply relative overflow-hidden rounded-xl border p-4 text-brand-navy shadow-[0_10px_24px_-18px_rgba(15,23,42,0.45)];
-    border-color: var(--color-border);
-    background-color: var(--color-surface-elevated);
-    @apply transition-[box-shadow,background-color,border-color] duration-200 ease-out;
-    @apply dark:border-[color:var(--discord-panel-border)] dark:bg-discord-elevated dark:shadow-[0_8px_24px_-20px_rgba(0,0,0,0.85)];
+    @apply relative overflow-hidden p-4 text-brand-navy transition-[box-shadow,background-color,border-color,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--hairline);
+    background: var(--material-thick);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 6px 20px -14px rgba(0, 0, 0, 0.18);
   }
-
-  .mun-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    z-index: 1;
-    background-color: var(--accent);
+  html.dark .mun-card {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 8px 28px -14px rgba(0, 0, 0, 0.55);
   }
 
   .mun-card-dense {
-    @apply rounded-lg border p-3 text-brand-navy;
-    border-color: var(--color-border);
-    background-color: var(--color-surface-subtle);
-    @apply dark:border-white/10 dark:bg-black/20;
+    @apply p-3 text-sm text-brand-navy transition-[box-shadow,background-color,border-color,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
+    border-radius: var(--radius-md);
+    border: 1px solid var(--hairline);
+    background: var(--material-thin);
   }
 
   .mun-inset {
-    @apply rounded-lg border p-2 text-sm text-brand-navy;
-    border-color: var(--color-border);
-    background-color: var(--color-surface-subtle);
-    @apply dark:border-white/10 dark:bg-black/30;
+    @apply p-2 text-sm text-brand-navy transition-[box-shadow,background-color,border-color,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
+    border-radius: var(--radius-md);
+    border: 1px solid var(--hairline);
+    background: var(--material-thin);
   }
 
   .mun-label {
@@ -494,45 +572,65 @@ html.dark ::selection {
   }
 
   .mun-field {
-    @apply w-full rounded-lg border px-3 py-2 text-sm text-brand-navy shadow-sm placeholder:text-brand-muted focus:outline-none focus:ring-2;
-    border-color: var(--color-border-strong);
-    background-color: var(--color-surface-elevated);
+    @apply w-full border px-3 py-2 text-sm text-brand-navy transition-[box-shadow,border-color] duration-[var(--dur-base)] ease-[var(--ease-apple)] placeholder:text-brand-muted focus:outline-none focus:ring-2;
+    @apply [border-radius:var(--radius-md)];
+    border-color: var(--hairline);
+    background: var(--material-thin);
     color: var(--color-text);
-    @apply dark:border-white/15 dark:bg-black/30 dark:shadow-inner dark:placeholder:text-brand-muted/60;
+    @apply dark:placeholder:text-brand-muted/60;
   }
   .mun-field:focus {
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--color-border-strong));
-    --tw-ring-color: color-mix(in srgb, var(--accent-bright) 35%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 50%, var(--hairline));
+    --tw-ring-color: color-mix(in srgb, var(--accent-bright) 32%, transparent);
   }
 
   .mun-btn {
-    @apply rounded-lg border px-3 py-2 text-sm font-medium text-brand-navy transition-colors duration-200 ease-out focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
-    border-color: var(--color-border-strong);
-    background-color: var(--color-surface-elevated);
-    @apply dark:border-white/15 dark:bg-white/5 dark:text-zinc-100 dark:hover:bg-white/10;
+    @apply border border-transparent px-3 py-2 text-sm font-semibold transition-[color,background-color,border-color,transform,box-shadow] duration-[var(--dur-base)] ease-[var(--ease-apple)] focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
+    @apply [border-radius:var(--radius-pill)];
+    transition: transform var(--dur-fast) var(--ease-apple), color var(--dur-base) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), border-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
   }
-  html:not(.dark) .mun-btn:hover {
-    background-color: var(--color-surface-subtle);
+  .mun-btn:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .mun-btn:active:not(:disabled) {
+    transform: scale(0.97);
   }
 
   .mun-btn-primary {
-    @apply rounded-lg border border-transparent px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 ease-out disabled:opacity-45;
+    @apply border border-transparent px-4 py-2 text-sm font-semibold text-white disabled:opacity-45;
+    @apply [border-radius:var(--radius-pill)];
+    transition: transform var(--dur-fast) var(--ease-apple), color var(--dur-base) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
     background-color: var(--accent);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset;
   }
   .mun-btn-primary:hover:not(:disabled) {
-    background-color: color-mix(in srgb, var(--accent) 88%, black);
+    background-color: color-mix(in srgb, var(--accent) 92%, #000000);
+  }
+  .mun-btn-primary:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+  html.dark .mun-btn-primary:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--accent) 88%, #ffffff);
   }
 
   .mun-btn-danger {
-    @apply rounded-lg border px-3 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
-    border-color: color-mix(in srgb, var(--semantic-danger) 35%, var(--color-border));
-    background-color: var(--color-surface-elevated);
-    color: var(--semantic-danger);
-    @apply hover:bg-red-50 dark:hover:bg-red-950/40;
+    @apply border border-transparent px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
+    @apply [border-radius:var(--radius-pill)];
+    transition: transform var(--dur-fast) var(--ease-apple), color var(--dur-base) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    color: var(--system-red);
+    background: color-mix(in srgb, var(--system-red) 14%, transparent);
+  }
+  .mun-btn-danger:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--system-red) 24%, transparent);
+  }
+  .mun-btn-danger:active:not(:disabled) {
+    transform: scale(0.97);
   }
 
   .mun-link {
-    @apply font-semibold underline underline-offset-2 transition-colors duration-200 ease-out;
+    @apply font-semibold underline underline-offset-2 transition-[color] duration-[var(--dur-base)] ease-[var(--ease-apple)];
     color: var(--accent);
   }
   .mun-link:hover {
@@ -540,7 +638,7 @@ html.dark ::selection {
   }
 
   .discord-interactive-hover {
-    @apply transition-colors duration-150 ease-out;
+    @apply transition-[background-color] duration-[var(--dur-fast)] ease-[var(--ease-apple)];
     @apply dark:hover:bg-[color:var(--discord-hover-bg)];
   }
 
@@ -549,40 +647,51 @@ html.dark ::selection {
     --tw-ring-color: color-mix(in srgb, var(--accent) 45%, transparent);
   }
 
-  /* —— TAGS: semantic pills (distinct colors) —— */
   .tag {
-    @apply inline-flex items-center rounded-md px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide;
-    border-width: 1px;
-    border-style: solid;
+    @apply inline-flex items-center text-[0.6875rem] font-semibold uppercase tracking-wide;
+    @apply [border-radius:var(--radius-pill)] [padding-block:0.15rem] [padding-inline:0.5rem];
+    border: none;
   }
   .tag-neutral {
     color: var(--color-text-secondary);
-    background-color: var(--color-surface-subtle);
-    border-color: var(--color-border);
+    background-color: color-mix(in srgb, var(--color-text) 8%, var(--color-bg-page));
   }
   .tag-accent {
     color: var(--accent);
-    background-color: color-mix(in srgb, var(--accent) 12%, var(--color-surface-elevated));
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--color-border));
+    background-color: color-mix(in srgb, var(--accent) 16%, var(--color-bg-page));
   }
   .tag-success {
     color: var(--semantic-success);
-    background-color: var(--semantic-success-bg);
-    border-color: color-mix(in srgb, var(--semantic-success) 35%, var(--color-border));
+    background-color: color-mix(in srgb, var(--semantic-success) 16%, var(--color-bg-page));
   }
   .tag-warning {
     color: var(--semantic-warning);
-    background-color: var(--semantic-warning-bg);
-    border-color: color-mix(in srgb, var(--semantic-warning) 35%, var(--color-border));
+    background-color: color-mix(in srgb, var(--semantic-warning) 16%, var(--color-bg-page));
   }
   .tag-danger {
     color: var(--semantic-danger);
-    background-color: var(--semantic-danger-bg);
-    border-color: color-mix(in srgb, var(--semantic-danger) 35%, var(--color-border));
+    background-color: color-mix(in srgb, var(--semantic-danger) 16%, var(--color-bg-page));
   }
   .tag-info {
     color: var(--semantic-info);
-    background-color: var(--semantic-info-bg);
-    border-color: color-mix(in srgb, var(--semantic-info) 35%, var(--color-border));
+    background-color: color-mix(in srgb, var(--semantic-info) 16%, var(--color-bg-page));
+  }
+  html.dark .tag-neutral {
+    background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+  }
+  html.dark .tag-accent {
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  html.dark .tag-success {
+    background-color: color-mix(in srgb, var(--semantic-success) 20%, transparent);
+  }
+  html.dark .tag-warning {
+    background-color: color-mix(in srgb, var(--semantic-warning) 20%, transparent);
+  }
+  html.dark .tag-danger {
+    background-color: color-mix(in srgb, var(--semantic-danger) 20%, transparent);
+  }
+  html.dark .tag-info {
+    background-color: color-mix(in srgb, var(--semantic-info) 20%, transparent);
   }
 }

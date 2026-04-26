@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
 function initialsFromName(name: string): string {
@@ -18,6 +18,28 @@ function awardsToList(raw: string): string[] {
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
+}
+
+function ProfilePreviewAvatar({ imageUrl, initials }: { imageUrl: string; initials: string }) {
+  const [imgBroken, setImgBroken] = useState(false);
+  const showImg = imageUrl.trim().length > 0 && !imgBroken;
+  return (
+    <div className="relative mx-auto mb-4 aspect-square w-28 shrink-0 overflow-hidden rounded-full border border-brand-line/60 bg-brand-navy-soft sm:mx-0">
+      {showImg ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={imageUrl}
+          alt=""
+          className="h-full w-full object-cover"
+          onError={() => setImgBroken(true)}
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-brand-accent/15 font-display text-2xl font-semibold text-brand-navy">
+          {initials}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function ProfileLivePreview({
@@ -45,13 +67,7 @@ export function ProfileLivePreview({
   canViewPrivate: boolean;
   className?: string;
 }) {
-  const [imgBroken, setImgBroken] = useState(false);
-  useEffect(() => {
-    setImgBroken(false);
-  }, [imageUrl]);
-
   const initials = useMemo(() => initialsFromName(name), [name]);
-  const showImg = imageUrl.trim().length > 0 && !imgBroken;
   const gradeLabel = grade.trim() ? `Grade ${grade.trim()}` : null;
   const usernameLine = username.trim().toLowerCase();
   const awardItems = useMemo(() => awardsToList(awardsRaw), [awardsRaw]);
@@ -59,7 +75,7 @@ export function ProfileLivePreview({
   return (
     <aside
       className={cn(
-        "rounded-2xl border border-brand-line/80 bg-brand-paper/95 p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] backdrop-blur-sm dark:border-white/10 dark:bg-discord-elevated dark:shadow-none lg:sticky lg:top-24",
+        "rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] backdrop-blur-xl backdrop-saturate-150 lg:sticky lg:top-24",
         className
       )}
       aria-label="Profile preview"
@@ -67,20 +83,7 @@ export function ProfileLivePreview({
       <p className="mun-label mb-4">Preview</p>
 
       <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-        <div className="relative mx-auto mb-4 aspect-square w-28 shrink-0 overflow-hidden rounded-full border border-brand-line/60 bg-brand-navy-soft dark:border-white/15 sm:mx-0">
-          {showImg ? (
-            <img
-              src={imageUrl}
-              alt=""
-              className="h-full w-full object-cover"
-              onError={() => setImgBroken(true)}
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-brand-accent/15 font-display text-2xl font-semibold text-brand-navy dark:text-brand-accent-bright">
-              {initials}
-            </div>
-          )}
-        </div>
+        <ProfilePreviewAvatar key={imageUrl} imageUrl={imageUrl} initials={initials} />
 
         <h2 className="font-display text-xl font-semibold tracking-tight text-brand-navy dark:text-zinc-100">
           {name.trim() || "Your name"}

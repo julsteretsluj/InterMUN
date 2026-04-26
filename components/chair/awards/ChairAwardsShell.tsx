@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function ChairAwardsShell({
   score,
@@ -18,11 +19,12 @@ export function ChairAwardsShell({
       role="tab"
       aria-selected={tab === id}
       onClick={() => setTab(id)}
-      className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+      className={cn(
+        "min-w-0 flex-1 rounded-[calc(var(--radius-md)-2px)] px-3 py-1.5 text-sm transition-apple sm:flex-initial",
         tab === id
-          ? "border-brand-accent text-brand-navy bg-brand-paper"
-          : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
-      }`}
+          ? "bg-[var(--material-thick)] font-semibold text-brand-navy shadow-sm"
+          : "font-medium text-brand-muted"
+      )}
     >
       {label}
     </button>
@@ -30,7 +32,11 @@ export function ChairAwardsShell({
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label="Chair awards">
+      <div
+        className="inline-flex w-full max-w-full flex-wrap gap-0.5 rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5"
+        role="tablist"
+        aria-label="Chair awards"
+      >
         {btn("score", "Score & nominations", "tab-chair-score")}
         {btn("rubric", "Rubric reference", "tab-chair-rubric")}
       </div>

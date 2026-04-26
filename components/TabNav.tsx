@@ -117,17 +117,14 @@ function AspireSidebarLink({
     <Link
       href={tab.href}
       className={cn(
-        "flex items-center justify-center gap-0 group-hover:justify-start group-hover:gap-3 rounded-xl px-2 group-hover:px-3 py-2.5 text-sm transition-colors",
+        "flex items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2.5 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-3",
         isActive
-          ? "bg-brand-accent/12 font-semibold text-brand-navy ring-1 ring-brand-accent/28 dark:bg-brand-accent/18 dark:text-brand-accent-bright dark:ring-white/10"
-          : "font-medium text-brand-muted hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+          ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] font-semibold text-[var(--accent)]"
+          : "font-medium text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
       )}
     >
       <Icon
-        className={cn(
-          "h-5 w-5 shrink-0",
-          isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-500"
-        )}
+        className={cn("h-5 w-5 shrink-0", isActive ? "text-[var(--accent)]" : "text-brand-muted")}
         strokeWidth={1.75}
       />
       <span className="hidden truncate group-hover:block">{label}</span>
@@ -149,22 +146,23 @@ function DockLink({
     <Link
       href={tab.href}
       title={label}
-      className="group flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2"
+      className="group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
     >
       <span
         className={cn(
-          "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
-          isActive
-            ? "scale-[1.02] border-brand-accent/35 bg-brand-accent/14 text-brand-navy shadow-md shadow-brand-accent/15 dark:border-brand-accent/45 dark:bg-brand-accent/18 dark:text-brand-accent-bright dark:shadow-none"
-            : "border-brand-navy/10 bg-white text-brand-muted group-hover:border-brand-accent/30 group-hover:bg-brand-navy/5 group-hover:text-brand-diplomatic dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-brand-accent/35 dark:group-hover:bg-zinc-800"
+          "flex h-8 w-8 items-center justify-center text-brand-muted transition-apple",
+          isActive && "text-[var(--accent)]"
         )}
       >
-        <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
+        <Icon
+          className={cn("h-6 w-6", isActive && "text-[var(--accent)]")}
+          strokeWidth={isActive ? 2.25 : 1.75}
+        />
       </span>
       <span
         className={cn(
           "max-w-[4.25rem] text-center text-[0.625rem] font-medium leading-tight",
-          isActive ? "text-brand-diplomatic dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-400"
+          isActive ? "font-semibold text-[var(--accent)]" : "text-brand-muted"
         )}
       >
         {label}
@@ -215,7 +213,7 @@ export function TabNav({
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
         <div className="px-1 pb-2 pt-1 group-hover:px-2">
-          <p className="hidden px-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted dark:text-zinc-500 group-hover:block">
+          <p className="hidden px-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted group-hover:block">
             {t("mainTabs")}
           </p>
           <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
@@ -228,10 +226,10 @@ export function TabNav({
                   type="button"
                   onClick={() => setSelectedMain(mt.key)}
                   className={cn(
-                    "inline-flex items-center justify-center gap-0 rounded-lg px-2 py-1.5 text-[0.7rem] font-medium transition group-hover:gap-1",
+                    "inline-flex items-center justify-center gap-0 rounded-[var(--radius-sm)] px-2 py-1.5 text-[0.7rem] font-medium transition-apple group-hover:gap-1",
                     selected
-                      ? "bg-brand-accent/12 text-brand-navy dark:bg-brand-accent/18 dark:text-brand-accent-bright"
-                      : "text-brand-muted hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90"
+                      ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-[var(--accent)]"
+                      : "text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
                   )}
                 >
                   <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
@@ -242,7 +240,7 @@ export function TabNav({
           </div>
         </div>
         <div>
-          <p className="hidden px-3 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted dark:text-zinc-500 group-hover:block">
+          <p className="hidden px-3 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted group-hover:block">
             {t("subtabs")}
           </p>
           <div className="flex flex-col gap-0.5">
@@ -261,39 +259,48 @@ export function TabNav({
   }
 
   return (
-    <nav
-      aria-label="Main navigation"
-      className="flex flex-row items-stretch gap-1 overflow-x-auto overflow-y-hidden overscroll-x-contain border-t border-brand-navy/10 bg-color-surface/95 px-2 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md"
-    >
-      <div className="flex flex-col gap-1 min-w-full">
-        <div className="flex flex-row gap-1 overflow-x-auto">
-          {MAIN_TABS.map((mt) => {
-            const Icon = mt.icon;
-            const selected = selectedMain === mt.key;
-            return (
-              <button
-                key={mt.key}
-                type="button"
-                onClick={() => setSelectedMain(mt.key)}
-                className={cn(
-                  "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[0.7rem] font-medium transition shrink-0",
-                  selected
-                    ? "border-brand-accent/35 bg-brand-accent/12 text-brand-navy dark:border-brand-accent/40 dark:bg-brand-accent/16 dark:text-brand-accent-bright"
-                    : "border-brand-navy/10 bg-white text-brand-muted dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400"
-                )}
-              >
-                <Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
-                {t(mt.labelKey)}
-              </button>
-            );
-          })}
+    <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
+      <nav
+        aria-label="Main navigation"
+        className="mx-auto max-w-2xl overflow-x-auto overflow-y-hidden overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]"
+      >
+        <div className="flex min-w-full flex-col gap-1.5">
+          <div
+            className="inline-flex w-full shrink-0 gap-0.5 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5"
+            role="tablist"
+            aria-label={t("mainTabs")}
+          >
+            {MAIN_TABS.map((mt) => {
+              const Icon = mt.icon;
+              const selected = selectedMain === mt.key;
+              return (
+                <button
+                  key={mt.key}
+                  type="button"
+                  onClick={() => setSelectedMain(mt.key)}
+                  className={cn(
+                    "inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-[calc(var(--radius-md)-2px)] px-2.5 py-1.5 text-[0.7rem] font-medium transition-apple sm:flex-initial",
+                    selected
+                      ? "bg-[var(--material-thick)] font-semibold text-brand-navy shadow-sm"
+                      : "text-brand-muted"
+                  )}
+                >
+                  <Icon
+                    className={cn("h-3.5 w-3.5 shrink-0", selected && "text-[var(--accent)]")}
+                    strokeWidth={1.8}
+                  />
+                  {t(mt.labelKey)}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex flex-row items-stretch gap-0.5 overflow-x-auto px-0.5 pb-0.5">
+            {visibleTabs.map((tab) => (
+              <DockLink key={tab.href} tab={tab} label={t(tab.labelKey)} isActive={tabInPath(pathname, tab.href)} />
+            ))}
+          </div>
         </div>
-        <div className="flex flex-row items-stretch gap-1 overflow-x-auto">
-          {visibleTabs.map((tab) => (
-            <DockLink key={tab.href} tab={tab} label={t(tab.labelKey)} isActive={tabInPath(pathname, tab.href)} />
-          ))}
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }

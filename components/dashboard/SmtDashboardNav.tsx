@@ -65,16 +65,16 @@ function SmtSidebarLink({
     <Link
       href={item.href}
       className={cn(
-        "discord-interactive-hover flex items-center justify-center gap-0 rounded-md px-2 py-2.5 text-sm transition-colors group-hover:justify-start group-hover:gap-3 group-hover:px-3",
+        "discord-interactive-hover flex items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2.5 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-3",
         isActive
-          ? "smt-nav-row-active bg-brand-accent/12 font-semibold text-brand-navy ring-1 ring-brand-accent/28 dark:text-white dark:ring-0"
-          : "font-medium text-brand-muted hover:bg-brand-navy/5 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
+          ? "smt-nav-row-active bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] font-semibold text-[var(--accent)]"
+          : "font-medium text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
       )}
     >
       <Icon
         className={cn(
           "h-5 w-5 shrink-0",
-          isActive ? "text-brand-accent dark:text-discord-blurple" : "text-brand-muted dark:text-zinc-500"
+          isActive ? "text-[var(--accent)]" : "text-brand-muted"
         )}
         strokeWidth={1.75}
       />
@@ -89,22 +89,20 @@ function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: strin
     <Link
       href={item.href}
       title={label}
-      className="group flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2"
+      className="group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
     >
       <span
         className={cn(
-          "flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-all duration-200",
-          isActive
-            ? "smt-dock-tile-active scale-[1.02] border-brand-accent/35 bg-brand-accent/14 text-brand-navy shadow-md shadow-brand-accent/15 dark:border-discord-blurple/55 dark:text-white dark:shadow-none"
-            : "border-brand-navy/10 bg-white text-brand-muted group-hover:border-brand-accent/30 group-hover:bg-brand-navy/5 group-hover:text-brand-diplomatic dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:group-hover:border-white/10 dark:group-hover:bg-[color:var(--discord-hover-bg)]"
+          "smt-dock-tile-active flex h-8 w-8 items-center justify-center text-brand-muted",
+          isActive && "text-[var(--accent)]"
         )}
       >
-        <Icon className="h-[1.35rem] w-[1.35rem] opacity-95" strokeWidth={1.75} />
+        <Icon className="h-6 w-6" strokeWidth={isActive ? 2.25 : 1.75} />
       </span>
       <span
         className={cn(
           "max-w-[4.25rem] text-center text-[0.625rem] font-medium leading-tight",
-          isActive ? "text-brand-accent dark:text-white" : "text-brand-muted dark:text-discord-muted"
+          isActive ? "font-semibold text-[var(--accent)]" : "text-brand-muted"
         )}
       >
         {label}
@@ -126,9 +124,9 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           href="/smt"
           title={hubLabel}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-brand-accent px-3 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-brand-accent/25 transition hover:opacity-95",
+            "flex w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-[var(--accent)] px-3 py-2.5 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95",
             hubActive &&
-              "ring-2 ring-white/50 ring-offset-2 ring-offset-white dark:ring-logo-cyan/60 dark:ring-offset-[#1e1f22]"
+              "ring-2 ring-[color:color-mix(in_srgb,white_45%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
           )}
         >
           <LayoutDashboard className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
@@ -153,12 +151,12 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
         ))}
       </nav>
 
-      <div className="mt-auto shrink-0 space-y-0.5 border-t border-brand-navy/10 px-1.5 py-4 group-hover:px-3 dark:border-discord-divider">
+      <div className="mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] px-1.5 py-4 group-hover:px-3">
         <Link
           href="/guides"
-          className="flex items-center justify-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-brand-muted transition group-hover:justify-start group-hover:px-3 hover:bg-brand-navy/5 dark:text-discord-muted dark:hover:bg-[color:var(--discord-hover-bg)]"
+          className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
         >
-          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
+          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted" strokeWidth={1.75} />
           <span className="hidden group-hover:inline">{tDash("helpCenter")}</span>
         </Link>
       </div>
@@ -171,16 +169,18 @@ export function SmtMobileDock() {
   const pathname = usePathname();
 
   return (
-    <div className="border-t border-brand-navy/10 bg-color-surface/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
-      <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-        {SMT_NAV_ITEMS.map((item) => (
-          <SmtDockLink
-            key={item.href}
-            item={item}
-            label={tNav(item.navKey)}
-            isActive={smtNavItemIsActive(pathname, item)}
-          />
-        ))}
+    <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
+      <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
+        <div className="flex items-center gap-0.5 overflow-x-auto">
+          {SMT_NAV_ITEMS.map((item) => (
+            <SmtDockLink
+              key={item.href}
+              item={item}
+              label={tNav(item.navKey)}
+              isActive={smtNavItemIsActive(pathname, item)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

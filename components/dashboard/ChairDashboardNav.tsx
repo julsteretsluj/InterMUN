@@ -163,18 +163,18 @@ function ChairNavRow({
       href={item.href}
       title={labelsHidden ? label : undefined}
       className={cn(
-        "discord-interactive-hover flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors",
+        "discord-interactive-hover flex items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2.5 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
-          ? "border border-brand-accent/35 bg-brand-accent/10 font-semibold text-brand-navy shadow-sm dark:border-brand-accent/40 dark:bg-brand-accent/15 dark:text-zinc-50"
-          : "border border-transparent font-medium text-brand-muted hover:bg-brand-navy/5 dark:text-zinc-300 dark:hover:bg-zinc-800/90"
+          ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] font-semibold text-[var(--accent)]"
+          : "border border-transparent font-medium text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
       )}
     >
       <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
         <Icon
           className={cn(
             "h-[1.15rem] w-[1.15rem] shrink-0",
-            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-400"
+            isActive ? "text-[var(--accent)]" : "text-brand-muted"
           )}
           strokeWidth={1.75}
         />
@@ -234,10 +234,9 @@ export function ChairDashboardSidebar({
           href="/chair"
           title={headerText}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-full bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:opacity-90 dark:bg-discord-blurple dark:hover:bg-discord-blurple-hover dark:hover:opacity-100",
-            labelsHidden && "mx-auto h-11 w-full rounded-xl px-2 py-0",
-            hubActive &&
-              "ring-2 ring-brand-accent/45 ring-offset-2 ring-offset-white dark:ring-discord-blurple/50 dark:ring-offset-discord-sidebar"
+            "flex w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-[var(--accent)] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95",
+            labelsHidden && "mx-auto h-11 w-full rounded-[var(--radius-lg)] px-2 py-0",
+            hubActive && "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_50%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
           )}
         >
           <BookOpen
@@ -273,7 +272,7 @@ export function ChairDashboardSidebar({
 
       <div
         className={cn(
-          "mt-auto shrink-0 space-y-0.5 border-t border-brand-navy/10 py-3 dark:border-zinc-800",
+          "mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] py-3",
           labelsHidden ? "px-1.5" : "px-3"
         )}
       >
@@ -281,21 +280,21 @@ export function ChairDashboardSidebar({
           type="button"
           onClick={toggleLabels}
           className={cn(
-            "flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-brand-muted transition hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
+            "flex w-full items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium text-brand-muted transition-apple hover:bg-[color:var(--discord-hover-bg)]",
             labelsHidden && "justify-center px-2"
           )}
         >
-          <PanelLeftClose className="h-5 w-5 shrink-0 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
+          <PanelLeftClose className="h-5 w-5 shrink-0 text-brand-muted" strokeWidth={1.75} />
           {!labelsHidden ? <span>{t("hideLabels")}</span> : <span className="sr-only">{t("showLabels")}</span>}
         </button>
         <Link
           href="/guides"
           className={cn(
-            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-brand-muted transition hover:bg-brand-navy/5 dark:text-zinc-400 dark:hover:bg-zinc-800/90",
+            "flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-sm font-medium text-brand-muted transition-apple hover:bg-[color:var(--discord-hover-bg)]",
             labelsHidden && "justify-center px-2"
           )}
         >
-          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted dark:text-zinc-500" strokeWidth={1.75} />
+          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted" strokeWidth={1.75} />
           {!labelsHidden ? t("helpCenter") : <span className="sr-only">{t("helpCenter")}</span>}
         </Link>
       </div>
@@ -319,17 +318,15 @@ function DockItem({
     <Link
       href={item.href}
       title={label}
-      className="group flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2"
+      className="group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
     >
       <span
         className={cn(
-          "flex h-11 min-w-[2.75rem] items-center justify-center gap-0.5 rounded-xl border px-1.5 shadow-sm transition-all duration-200",
-          isActive
-            ? "border-brand-accent/40 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/45 dark:bg-brand-accent/15 dark:text-zinc-50"
-            : "border-brand-navy/10 bg-white text-brand-muted group-hover:border-brand-accent/25 group-hover:bg-brand-navy/5 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-zinc-800"
+          "flex h-8 min-w-8 items-center justify-center gap-0.5 text-brand-muted",
+          isActive && "text-[var(--accent)]"
         )}
       >
-        <Icon className="h-[1.1rem] w-[1.1rem] shrink-0" strokeWidth={1.75} />
+        <Icon className="h-5 w-5 shrink-0" strokeWidth={isActive ? 2.25 : 1.75} />
         <span className="text-sm leading-none" aria-hidden>
           {item.emoji}
         </span>
@@ -338,7 +335,7 @@ function DockItem({
         <span
           className={cn(
             "max-w-[4.5rem] text-center text-[0.625rem] font-medium leading-tight",
-            isActive ? "text-brand-accent dark:text-brand-accent-bright" : "text-brand-muted dark:text-zinc-400"
+            isActive ? "font-semibold text-[var(--accent)]" : "text-brand-muted"
           )}
         >
           {label}
@@ -386,24 +383,24 @@ export function ChairMobileDock({
   );
 
   return (
-    <div className="border-t border-brand-navy/10 bg-color-surface/95 backdrop-blur-md dark:border-discord-divider dark:bg-discord-sidebar/98 dark:backdrop-blur-md">
-      <div className="flex items-center gap-1 overflow-x-auto overscroll-x-contain px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+    <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
+      <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
+        <div className="flex items-center gap-0.5 overflow-x-auto">
         <Link
           href="/chair"
-          className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2"
+          className="flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
           title={conferenceLine || t("committeeHub")}
         >
           <span
             className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-xl bg-brand-accent text-lg text-white shadow-sm",
-              hubActive &&
-                "ring-2 ring-brand-silver/80 ring-offset-2 ring-offset-brand-cream dark:ring-brand-silver/70 dark:ring-offset-[#121212]"
+              "flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] text-lg text-white",
+              hubActive && "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_45%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
             )}
           >
             📌
           </span>
           {!labelsHidden ? (
-            <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-brand-accent dark:text-brand-accent-bright">
+            <span className="max-w-[4rem] text-center text-[0.625rem] font-semibold leading-tight text-[var(--accent)]">
               {t("committeeHub")}
             </span>
           ) : null}
@@ -421,15 +418,16 @@ export function ChairMobileDock({
           type="button"
           onClick={toggleLabels}
           title={labelsHidden ? t("showLabels") : t("hideLabels")}
-          className="flex shrink-0 snap-start flex-col items-center gap-1 px-1 py-2 text-brand-muted dark:text-zinc-400"
+          className="flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 text-brand-muted transition-apple"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-brand-navy/10 bg-white dark:border-zinc-700 dark:bg-zinc-900">
+          <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)]">
             <PanelLeftClose className="h-5 w-5" strokeWidth={1.75} />
           </span>
           {!labelsHidden ? (
             <span className="max-w-[4rem] text-center text-[0.625rem] font-medium leading-tight">{t("labelsDock")}</span>
           ) : null}
         </button>
+        </div>
       </div>
     </div>
   );

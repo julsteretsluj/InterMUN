@@ -92,11 +92,11 @@ function Placard({
         className={[
           "rounded-md border px-2 py-2 text-left leading-snug transition-[opacity,transform,box-shadow,border-color,background-color] duration-150",
           vacant
-            ? "border-brand-navy/20 bg-white/80 text-brand-muted dark:border-white/12 dark:bg-white/6 dark:text-white/70"
-            : "border-brand-navy/20 bg-white text-brand-navy shadow-[0_3px_10px_rgba(15,23,42,0.09)] dark:border-white/15 dark:bg-white/10 dark:text-white dark:shadow-[0_8px_18px_rgba(0,0,0,0.35)]",
-          interactive ? "hover:border-brand-accent/45 hover:shadow-[0_8px_18px_rgba(15,23,42,0.14)] hover:-translate-y-[1px]" : "",
+            ? "border-[var(--hairline)] bg-[var(--material-thin)]/90 text-brand-muted dark:text-white/70"
+            : "border-[var(--hairline)] bg-[var(--material-thick)] text-brand-navy shadow-[0_3px_10px_rgba(0,0,0,0.08)] dark:text-white dark:shadow-[0_8px_18px_rgba(0,0,0,0.35)]",
+          interactive ? "hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:shadow-[0_8px_18px_rgba(0,0,0,0.12)] hover:-translate-y-px transition-apple" : "",
           dimmed ? "opacity-[0.32] scale-[0.98]" : "",
-          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/60 dark:ring-offset-[#0B0B0F]" : "",
+          ringMatch ? "ring-2 ring-[color:color-mix(in_srgb,var(--accent-bright)_70%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)] border-[color:color-mix(in_srgb,var(--accent)_50%,var(--hairline))]" : "",
         ].join(" ")}
       >
         {vacant ? (
@@ -148,7 +148,7 @@ function Placard({
     return (
       <Link
         href={personHref}
-        className={[wrapClass, "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright"].join(
+        className={[wrapClass, "cursor-pointer rounded-[0.35rem] transition-apple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"].join(
           " "
         )}
         aria-label={t("profileAria", { country })}
@@ -204,10 +204,10 @@ function DaisStation({
       </div>
       <div
         className={[
-          "w-full rounded-md border border-brand-navy/20 bg-white px-1.5 py-1 text-center shadow-[0_3px_10px_rgba(15,23,42,0.1)] transition-[opacity,transform,box-shadow,border-color] duration-200",
-          "dark:border-white/15 dark:bg-white/10 dark:shadow-[0_8px_18px_rgba(0,0,0,0.35)]",
+          "w-full rounded-md border border-[var(--hairline)] bg-[var(--material-thick)] px-1.5 py-1 text-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] transition-[opacity,transform,box-shadow,border-color] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)]",
+          "dark:shadow-[0_8px_18px_rgba(0,0,0,0.35)]",
           dimmed ? "opacity-[0.35] scale-[0.97]" : "",
-          ringMatch ? "ring-2 ring-brand-accent-bright/70 ring-offset-2 ring-offset-white border-brand-accent-bright/50 dark:ring-offset-[#0B0B0F]" : "hover:border-brand-accent/35",
+          ringMatch ? "ring-2 ring-[color:color-mix(in_srgb,var(--accent-bright)_70%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)] border-[color:color-mix(in_srgb,var(--accent)_45%,var(--hairline))]" : "hover:border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]",
         ].join(" ")}
       >
         <p className="text-[0.6rem] uppercase tracking-[0.2em] text-brand-accent-bright/90">
@@ -224,7 +224,7 @@ function DaisStation({
   const wrapClass = [
     "flex flex-col items-center gap-1 text-brand-navy dark:text-white min-w-[5rem] sm:min-w-[5.75rem] transition-opacity duration-200",
     dimmed ? "opacity-[0.35]" : "",
-    personHref ? "cursor-pointer rounded-[0.35rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent-bright" : "cursor-default",
+    personHref ? "cursor-pointer rounded-[0.35rem] transition-apple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]" : "cursor-default",
   ].join(" ");
 
   if (personHref) {
@@ -395,7 +395,7 @@ export function VirtualCommitteeRoom({
       )}
 
       <figure
-        className="relative w-full select-none overflow-hidden rounded-2xl border border-brand-navy/15 bg-white shadow-[0_14px_36px_-24px_rgba(15,23,42,0.28)] ring-1 ring-brand-navy/10 dark:border-white/12 dark:bg-[#12121A] dark:ring-white/10 dark:shadow-[0_22px_48px_-30px_rgba(0,0,0,0.65)]"
+        className="relative w-full select-none overflow-hidden rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] shadow-[0_14px_36px_-22px_rgba(0,0,0,0.18)] ring-1 ring-[var(--hairline)] backdrop-blur-xl dark:shadow-[0_22px_48px_-28px_rgba(0,0,0,0.55)]"
         aria-label={`Virtual committee room — ${committeeName} (${conferenceName})`}
       >
         {searchActive ? (
@@ -407,9 +407,9 @@ export function VirtualCommitteeRoom({
           className="relative aspect-[16/10] min-h-[350px] sm:min-h-[440px] md:min-h-[520px] bg-[linear-gradient(180deg,#f5f8fd_0%,#eef3fb_45%,#e7eef8_100%)] dark:bg-[linear-gradient(180deg,#151620_0%,#12131b_45%,#101117_100%)]"
         >
           <div
-            className="absolute top-0 left-[8%] right-[8%] h-[20%] rounded-b-xl border-x border-b border-brand-navy/20 bg-white/95 shadow-[inset_0_-6px_18px_rgba(15,23,42,0.06)] dark:border-white/12 dark:bg-white/8 dark:shadow-[inset_0_-8px_24px_rgba(0,0,0,0.35)]"
+            className="absolute top-0 left-[8%] right-[8%] h-[20%] rounded-b-[var(--radius-lg)] border-x border-b border-[var(--hairline)] bg-[color:color-mix(in_srgb,var(--material-thick)_96%,white)] shadow-[inset_0_-6px_18px_rgba(0,0,0,0.06)] dark:bg-[color:color-mix(in_srgb,var(--material-thin)_80%,transparent)] dark:shadow-[inset_0_-8px_24px_rgba(0,0,0,0.35)]"
           >
-            <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-brand-navy/10 dark:bg-white/10" />
+            <div className="absolute inset-x-6 top-3 h-1 rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_10%,transparent)] dark:bg-white/10" />
           </div>
 
           <div className="absolute top-[2%] left-0 right-0 flex justify-center items-start gap-4 sm:gap-8 md:gap-12 px-2 z-10">

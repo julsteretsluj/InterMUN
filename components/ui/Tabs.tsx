@@ -9,15 +9,15 @@ export type TabOption = {
   label: string;
 };
 
-const baseTabClasses =
-  "rounded-t-lg border-b-2 -mb-px px-4 py-2.5 text-sm font-medium transition-colors";
+const segmentTrackClasses =
+  "inline-flex w-full max-w-full flex-wrap gap-0.5 rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5";
 
 function tabButtonClasses(active: boolean) {
   return cn(
-    baseTabClasses,
+    "rounded-[calc(var(--radius-md)-2px)] px-3 py-1.5 text-sm transition-apple",
     active
-      ? "border-brand-accent text-brand-navy bg-brand-paper"
-      : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+      ? "bg-[var(--material-thick)] font-semibold text-brand-navy shadow-sm"
+      : "font-medium text-brand-muted"
   );
 }
 
@@ -68,7 +68,7 @@ export function LocalTabs({
 
   return (
     <div className={cn("space-y-4", className)}>
-      <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={ariaLabel}>
+      <div className={segmentTrackClasses} role="tablist" aria-label={ariaLabel}>
         {options.map((opt) => (
           <button
             key={opt.id}
@@ -76,7 +76,7 @@ export function LocalTabs({
             type="button"
             role="tab"
             aria-selected={activeTab === opt.id}
-            className={tabButtonClasses(activeTab === opt.id)}
+            className={cn("min-w-0 flex-1 sm:flex-initial", tabButtonClasses(activeTab === opt.id))}
             onClick={() => setActiveTab(opt.id)}
           >
             {opt.label}
@@ -110,7 +110,7 @@ export function QueryTabs({
 
   return (
     <div className={cn("space-y-4", className)}>
-      <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={ariaLabel}>
+      <div className={segmentTrackClasses} role="tablist" aria-label={ariaLabel}>
         {options.map((opt) => (
           <button
             key={opt.id}
@@ -118,7 +118,7 @@ export function QueryTabs({
             type="button"
             role="tab"
             aria-selected={activeTab === opt.id}
-            className={tabButtonClasses(activeTab === opt.id)}
+            className={cn("min-w-0 flex-1 sm:flex-initial", tabButtonClasses(activeTab === opt.id))}
             onClick={() => setActiveTab(opt.id)}
           >
             {opt.label}
