@@ -48,6 +48,54 @@ async function sendWelcomeToInterMUNEmail(args: { to: string; allocationCountry:
   });
 }
 
+async function sendChairAllocationSignupReminderEmail(args: {
+  to: string;
+  allocationCountry: string;
+  conferenceLabel: string;
+  requesterName: string;
+  requesterEmail: string;
+}): Promise<void> {
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT ?? "587");
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  const from = process.env.MATERIALS_EXPORT_FROM || process.env.SMTP_FROM || user;
+
+  if (!host || !user || !pass || !from) return;
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+  });
+
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  const reviewPath = "/chair/allocation-matrix";
+  const reviewUrl = appUrl ? `${appUrl.replace(/\/$/, "")}${reviewPath}` : reviewPath;
+  const subject = "Delegate allocation request pending approval";
+  const text = [
+    "A delegate has requested an allocation and needs chair review.",
+    "",
+    `Conference: ${args.conferenceLabel}`,
+    `Requested allocation: ${args.allocationCountry}`,
+    `Delegate: ${args.requesterName}`,
+    `Account email: ${args.requesterEmail}`,
+    "",
+    "Please approve or reject this request in the chair allocation matrix:",
+    reviewUrl,
+    "",
+    "InterMUN",
+  ].join("\n");
+
+  await transporter.sendMail({
+    from,
+    to: args.to,
+    subject,
+    text,
+  });
+}
+
 async function getAuthedProfile() {
   const supabase = await createClient();
   const {
@@ -118,6 +166,74 @@ export async function createAllocationSignupRequestAction(
       status: "pending",
     });
     if (insErr) return { error: insErr.message };
+  }
+
+  const admin = createAdminClient();
+  if (admin) {
+    try {
+      const { data: conf } = await admin
+        .from("conferences")
+        .select("name, committee")
+        .eq("id", conferenceId)
+        .maybeSingle();
+      const conferenceLabel = [conf?.name?.trim(), conf?.committee?.trim()].filter(Boolean).join(" — ") || conferenceId;
+
+      const { data: requesterProfile } = await admin
+        .from("profiles")
+        .select("name, username")
+        .eq("id", user.id)
+        .maybeSingle();
+      const { data: requesterAuth } = await admin.auth.admin.getUserById(user.id);
+      const requesterEmail = normalizeEmail(requesterAuth?.user?.email);
+      const requesterName =
+        requesterProfile?.name?.toString().trim() ||
+        requesterProfile?.username?.toString().trim() ||
+        requesterEmail ||
+        user.id.slice(0, 8);
+
+      const { data: seatRows } = await admin
+        .from("allocations")
+        .select("user_id")
+        .eq("conference_id", conferenceId)
+        .not("user_id", "is", null);
+      const seatUserIds = [
+        ...new Set((seatRows ?? []).map((row) => row.user_id).filter((id): id is string => Boolean(id))),
+      ];
+      if (seatUserIds.length > 0) {
+        const { data: chairProfiles } = await admin
+          .from("profiles")
+          .select("id")
+          .eq("role", "chair")
+          .in("id", seatUserIds);
+        const chairIds = [
+          ...new Set((chairProfiles ?? []).map((p) => p.id).filter((id): id is string => Boolean(id))),
+        ];
+        if (chairIds.length > 0) {
+          const { data: usersData, error: usersError } = await admin.auth.admin.listUsers({
+            page: 1,
+            perPage: 1000,
+          });
+          if (!usersError) {
+            const chairIdSet = new Set(chairIds);
+            const toList = usersData.users
+              .filter((u) => chairIdSet.has(u.id))
+              .map((u) => normalizeEmail(u.email))
+              .filter(Boolean);
+            for (const to of toList) {
+              await sendChairAllocationSignupReminderEmail({
+                to,
+                allocationCountry: target.country,
+                conferenceLabel,
+                requesterName,
+                requesterEmail: requesterEmail || "(not available)",
+              });
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Failed to send chair allocation signup reminder email:", e);
+    }
   }
 
   revalidatePath("/chair/allocation-matrix");
