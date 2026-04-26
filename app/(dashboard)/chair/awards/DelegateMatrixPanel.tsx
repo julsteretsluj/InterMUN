@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { saveAwardParticipationScore } from "@/app/actions/award-participation";
 import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
@@ -34,19 +34,83 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
   const [liveByProfile, setLiveByProfile] = useState<Record<string, Record<string, number>>>(() => ({
     ...scoresByProfileId,
   }));
+  const [savingByProfile, setSavingByProfile] = useState<Record<string, boolean>>({});
+  const [saveStateByProfile, setSaveStateByProfile] = useState<
+    Record<string, "saving" | "saved" | "error" | null>
+  >({});
+  const dirtyProfilesRef = useRef<Set<string>>(new Set());
+  const saveTimersRef = useRef<Record<string, number>>({});
+  const saveStateTimersRef = useRef<Record<string, number>>({});
 
   useEffect(() => {
     setLiveByProfile({ ...scoresByProfileId });
   }, [scoresByProfileId]);
+
+  useEffect(() => {
+    return () => {
+      for (const id of Object.keys(saveTimersRef.current)) {
+        window.clearTimeout(saveTimersRef.current[id]);
+      }
+      for (const id of Object.keys(saveStateTimersRef.current)) {
+        window.clearTimeout(saveStateTimersRef.current[id]);
+      }
+    };
+  }, []);
+
+  const saveScores = useCallback(
+    (profileId: string, scoreMap: Record<string, number>) => {
+      if (!isRubricScoresComplete(scoreMap, keys)) return;
+      setSavingByProfile((prev) => ({ ...prev, [profileId]: true }));
+      setSaveStateByProfile((prev) => ({ ...prev, [profileId]: "saving" }));
+      setMsg(null);
+      startTransition(async () => {
+        const fd = new FormData();
+        fd.set("scope", "delegate_by_chair");
+        fd.set("committee_conference_id", committeeConferenceId);
+        fd.set("subject_profile_id", profileId);
+        for (const key of keys) {
+          fd.set(`score_${key}`, String(scoreMap[key]));
+        }
+        const res = await saveAwardParticipationScore(fd);
+        setSavingByProfile((prev) => ({ ...prev, [profileId]: false }));
+        if (res.error) {
+          setMsg(res.error);
+          setSaveStateByProfile((prev) => ({ ...prev, [profileId]: "error" }));
+          return;
+        }
+        dirtyProfilesRef.current.delete(profileId);
+        const delegate = delegates.find((d) => d.userId === profileId);
+        setMsg(`Autosaved — ${delegate?.country ?? "delegate"}`);
+        setSaveStateByProfile((prev) => ({ ...prev, [profileId]: "saved" }));
+        if (saveStateTimersRef.current[profileId]) {
+          window.clearTimeout(saveStateTimersRef.current[profileId]);
+        }
+        saveStateTimersRef.current[profileId] = window.setTimeout(() => {
+          setSaveStateByProfile((prev) => ({ ...prev, [profileId]: null }));
+        }, 2200);
+        router.refresh();
+      });
+    },
+    [committeeConferenceId, delegates, keys, router, startTransition]
+  );
 
   const handleScore = useCallback((profileId: string, key: string, score: number | null) => {
     setLiveByProfile((prev) => {
       const row = { ...(prev[profileId] ?? {}) };
       if (score == null || score < 1) delete row[key];
       else row[key] = score;
-      return { ...prev, [profileId]: row };
+      const next = { ...prev, [profileId]: row };
+      dirtyProfilesRef.current.add(profileId);
+      const existingTimer = saveTimersRef.current[profileId];
+      if (existingTimer) window.clearTimeout(existingTimer);
+      saveTimersRef.current[profileId] = window.setTimeout(() => {
+        const latest = next[profileId] ?? {};
+        if (!dirtyProfilesRef.current.has(profileId)) return;
+        saveScores(profileId, latest);
+      }, 900);
+      return next;
     });
-  }, []);
+  }, [saveScores]);
 
   const completeCount = delegates.filter((d) =>
     isRubricScoresComplete(liveByProfile[d.userId] ?? null, keys)
@@ -103,20 +167,7 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
                   className="space-y-3"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    const form = e.currentTarget;
-                    const fd = new FormData(form);
-                    fd.set("scope", "delegate_by_chair");
-                    fd.set("committee_conference_id", committeeConferenceId);
-                    fd.set("subject_profile_id", d.userId);
-                    setMsg(null);
-                    startTransition(async () => {
-                      const res = await saveAwardParticipationScore(fd);
-                      if (res.error) setMsg(res.error);
-                      else {
-                        setMsg(`Saved — ${d.country}`);
-                        router.refresh();
-                      }
-                    });
+                    saveScores(d.userId, scoreMap);
                   }}
                 >
                   <input type="hidden" name="scope" value="delegate_by_chair" />
@@ -129,17 +180,23 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
                         criterion={criterion}
                         initialScore={Number(scoreMap[criterion.key] ?? 0)}
                         onScoreChange={(key, score) => handleScore(d.userId, key, score)}
-                        disabled={pending}
+                        disabled={pending || Boolean(savingByProfile[d.userId])}
                       />
                     ))}
                   </div>
                   <button
                     type="submit"
-                    disabled={pending}
+                    disabled={pending || Boolean(savingByProfile[d.userId])}
                     className="inline-flex px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-semibold disabled:opacity-50"
                   >
-                    {pending ? "Saving…" : "Save this delegate"}
+                    {savingByProfile[d.userId] ? "Saving…" : "Save this delegate"}
                   </button>
+                  {saveStateByProfile[d.userId] === "saved" ? (
+                    <span className="text-xs text-emerald-700 dark:text-emerald-300">Autosaved</span>
+                  ) : null}
+                  {saveStateByProfile[d.userId] === "error" ? (
+                    <span className="text-xs text-rose-700 dark:text-rose-300">Autosave failed</span>
+                  ) : null}
                 </form>
               </div>
             </details>
