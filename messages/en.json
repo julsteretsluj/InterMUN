@@ -482,6 +482,12 @@
     "welcome": "Welcome, Delegate of {flag} {country}",
     "activeCommitteeIntro": "Active committee: {line}.",
     "activeCommitteeBody": "Countdown dates are shared with everyone in this committee. Your prep, stances, and documents stay with your account.",
+    "tabs": {
+      "ariaLabel": "Dashboard sections",
+      "overview": "Overview",
+      "checklist": "Checklist",
+      "jump": "Jump to"
+    },
     "jumpTo": "Jump to",
     "tiles": {
       "stances": {
@@ -585,6 +591,12 @@
     "hideLabels": "Hide labels",
     "showLabels": "Show labels",
     "helpCenter": "Help center",
+    "dashboardTabs": {
+      "ariaLabel": "Chair dashboard sections",
+      "overview": "Overview",
+      "guidance": "Guidance",
+      "jump": "Jump to"
+    },
     "labelsDock": "Labels",
     "committeeHub": "Committee",
     "items": {
@@ -704,6 +716,12 @@
       "positionPaperGuideBlurb": "Download the placeholder guide while the final PDF is being prepared.",
       "downloadPlaceholderGuide": "Download placeholder guide",
       "addDocument": "Add document",
+      "tabs": {
+        "ariaLabel": "Document sections",
+        "library": "Library",
+        "compose": "Compose",
+        "composeHint": "Start a new document or edit an existing draft from this tab."
+      },
       "newDocumentTitle": "New document",
       "editDocumentTitle": "Edit document",
       "typeLabel": "Type",
@@ -745,6 +763,11 @@
       "noFeedbackYet": "No feedback added yet."
     },
     "voting": {
+      "tabs": {
+        "ariaLabel": "Voting sections",
+        "open": "Open",
+        "closed": "Closed"
+      },
       "requiredMajority": "Required majority",
       "helpRequiredMajorityTitle": "Required majority",
       "helpRequiredMajorityBody": "Choose the vote threshold used to decide pass/fail. `Simple` is more than half. `2/3` requires a supermajority.",
@@ -786,6 +809,7 @@
       "currentOpenMotion": "Current open motion",
       "noOpenMotion": "No open motion right now.",
       "recentClosedMotions": "Recent closed motions",
+      "noClosedMotions": "No closed motions yet.",
       "untitled": "Untitled",
       "voteTypes": {
         "motion": "Motion",
@@ -800,6 +824,13 @@
       }
     },
     "profile": {
+      "tabs": {
+        "ariaLabel": "Profile sections",
+        "overview": "Overview",
+        "awards": "Awards",
+        "private": "Private records",
+        "settings": "Profile settings"
+      },
       "profilePicture": "Profile picture",
       "uploadFile": "Upload file",
       "uploading": "Uploading…",
@@ -1346,6 +1377,13 @@
     "digitalCommitteeRoom": "Digital committee room",
     "digitalRoomDescription": "Same virtual floor delegates see under Committee room in the delegate dashboard (placards and dais use this committee's allocations).",
     "helperTextSmtPreview": "Secretariat view: live preview from this committee's allocation matrix. Assign seats below or in Allocation matrix.",
+    "tabs": {
+      "ariaLabel": "Committee sections",
+      "overview": "Overview",
+      "room": "Digital room",
+      "floor": "Live floor",
+      "history": "History"
+    },
     "liveFloor": "Live floor",
     "liveFloorDescription": "Live speaker queue, roll call, and timers for this committee—same data chairs see on the session floor.",
     "conferenceFallback": "Conference",
@@ -1514,7 +1552,13 @@
   "adminPage": {
     "title": "Website administration",
     "intro": "Create conference events and manage who can run the secretariat tools. Day-to-day committee oversight lives in the SMT dashboard.",
-    "noSessionFloor": "The session floor (timers, speakers, roll call) is for <strong>dais chairs</strong> only. Use <strong>SMT dashboard</strong> for live committees, or enter committee codes like delegates when you need a specific session."
+    "noSessionFloor": "The session floor (timers, speakers, roll call) is for <strong>dais chairs</strong> only. Use <strong>SMT dashboard</strong> for live committees, or enter committee codes like delegates when you need a specific session.",
+    "tabs": {
+      "ariaLabel": "Admin sections",
+      "setup": "Setup",
+      "checklist": "Checklist",
+      "portal": "Status portal"
+    }
   },
   "adminDashboard": {
     "newEventTitle": "New conference event",

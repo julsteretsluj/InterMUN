@@ -13,8 +13,13 @@ import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSumm
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { getTranslations } from "next-intl/server";
 
-export default async function ProfilePage() {
+export default async function ProfilePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
   const t = await getTranslations("pageTitles");
+  const tp = await getTranslations("views.profile");
   const supabase = await createClient();
   const {
     data: { user },
@@ -218,15 +223,46 @@ export default async function ProfilePage() {
       </div>
     </div>
   ) : null;
+  const { tab } = await searchParams;
+  const activeTab =
+    tab === "awards" || tab === "private" || tab === "settings"
+      ? tab
+      : "overview";
+  const showOverview = activeTab === "overview";
+  const showAwards = activeTab === "awards";
+  const showPrivate = activeTab === "private";
+  const showSettings = activeTab === "settings";
 
   return (
     <MunPageShell title={t("profile")}>
       <div className="mb-4 flex justify-end">
         <LanguageSwitcher />
       </div>
-      {delegateWelcome}
-      {isDelegate && <DelegateMaterialsExportCard />}
-      {(myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) === 0 ? (
+      <div className="mb-6 flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={tp("tabs.ariaLabel")}>
+        {[
+          { id: "overview", label: tp("tabs.overview") },
+          { id: "awards", label: tp("tabs.awards") },
+          { id: "private", label: tp("tabs.private") },
+          { id: "settings", label: tp("tabs.settings") },
+        ].map((item) => (
+          <Link
+            key={item.id}
+            href={item.id === "overview" ? "/profile" : `/profile?tab=${item.id}`}
+            role="tab"
+            aria-selected={activeTab === item.id}
+            className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              activeTab === item.id
+                ? "border-brand-accent text-brand-navy bg-brand-paper"
+                : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+            }`}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+      {showOverview ? delegateWelcome : null}
+      {showOverview && isDelegate ? <DelegateMaterialsExportCard /> : null}
+      {showAwards && (myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) === 0 ? (
         <div className="mb-8 rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Pending chair nominations
@@ -256,7 +292,7 @@ export default async function ProfilePage() {
           </ul>
         </div>
       ) : null}
-      {(myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) > 0 ? (
+      {showAwards && (myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) > 0 ? (
         <ProfileAwardsSummaryTabs
           pendingSlot={
             <div className="rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
@@ -320,7 +356,7 @@ export default async function ProfilePage() {
           }
         />
       ) : null}
-      {isDelegate && (myDelegatePoints?.length ?? 0) > 0 && (
+      {showPrivate && isDelegate && (myDelegatePoints?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-logo-cyan/35 bg-logo-cyan/10 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Chair points (private)
@@ -346,7 +382,7 @@ export default async function ProfilePage() {
           </ul>
         </div>
       )}
-      {isDelegate && (mySpeechNotes?.length ?? 0) > 0 && (
+      {showPrivate && isDelegate && (mySpeechNotes?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-silver/35 bg-brand-silver/10 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Chair speech notes (private)
@@ -371,7 +407,7 @@ export default async function ProfilePage() {
           </ul>
         </div>
       )}
-      {isDelegate && (myMotions?.length ?? 0) > 0 && (
+      {showPrivate && isDelegate && (myMotions?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-accent/32 bg-brand-accent/8 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Motions you moved
@@ -403,7 +439,7 @@ export default async function ProfilePage() {
           </ul>
         </div>
       )}
-      {isDelegate && (myDiscipline?.length ?? 0) > 0 && (
+      {showPrivate && isDelegate && (myDiscipline?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-rose-300/40 bg-rose-50/35 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
             Disciplinary status (private)
@@ -435,7 +471,7 @@ export default async function ProfilePage() {
           </ul>
         </div>
       )}
-      {(myAwards?.length ?? 0) > 0 && (myPendingNominations?.length ?? 0) === 0 ? (
+      {showAwards && (myAwards?.length ?? 0) > 0 && (myPendingNominations?.length ?? 0) === 0 ? (
         <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
             Recorded awards
@@ -465,12 +501,14 @@ export default async function ProfilePage() {
           </ul>
         </div>
       ) : null}
-      <ProfileForm
-        profile={profile}
-        userId={user.id}
-        canViewPrivate={!!canViewPrivate}
-        availableAllocations={availableAllocations}
-      />
+      {showSettings ? (
+        <ProfileForm
+          profile={profile}
+          userId={user.id}
+          canViewPrivate={!!canViewPrivate}
+          availableAllocations={availableAllocations}
+        />
+      ) : null}
     </MunPageShell>
   );
 }

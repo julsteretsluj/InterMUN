@@ -36,8 +36,10 @@ function MetaItem({ label, children }: { label: string; children: ReactNode }) {
 
 export default async function SmtCommitteeLivePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const t = await getTranslations("smtCards");
   const tNames = await getTranslations("committeeNames.full");
@@ -127,6 +129,8 @@ export default async function SmtCommitteeLivePage({
   })();
   const officialName = resolveCommitteeFullName(conf.committee_full_name, conf.committee);
   const displayTags = resolveCommitteeDisplayTags(conf.committee);
+  const { tab } = await searchParams;
+  const activeTab = tab === "room" || tab === "floor" || tab === "history" ? tab : "overview";
 
   return (
     <div className="space-y-6">
@@ -134,7 +138,31 @@ export default async function SmtCommitteeLivePage({
         ← {t("allCommittees")}
       </Link>
 
-      <div className="space-y-5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
+      <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={t("tabs.ariaLabel")}>
+        {[
+          { id: "overview", label: t("tabs.overview") },
+          { id: "room", label: t("tabs.room") },
+          { id: "floor", label: t("tabs.floor") },
+          { id: "history", label: t("tabs.history") },
+        ].map((item) => (
+          <a
+            key={item.id}
+            href={item.id === "overview" ? `/smt/committees/${id}` : `/smt/committees/${id}?tab=${item.id}`}
+            role="tab"
+            aria-selected={activeTab === item.id}
+            className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              activeTab === item.id
+                ? "border-brand-accent text-brand-navy bg-brand-paper"
+                : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+            }`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      {activeTab === "overview" ? (
+        <div className="space-y-5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
         <div>
           <div className="flex items-start gap-3.5">
             {conf.committee_logo_url ? (
@@ -221,7 +249,9 @@ export default async function SmtCommitteeLivePage({
           .
         </p>
       </div>
+      ) : null}
 
+      {activeTab === "room" ? (
       <section className="space-y-3.5 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("digitalCommitteeRoom")}</h2>
         <p className="text-sm text-brand-navy/90 max-w-2xl">
@@ -245,7 +275,9 @@ export default async function SmtCommitteeLivePage({
           staffRole="smt"
         />
       </section>
+      ) : null}
 
+      {activeTab === "floor" ? (
       <div className="space-y-6 rounded-xl border border-brand-navy/10 bg-brand-paper p-5 shadow-sm md:p-6">
         <section className="space-y-2.5">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{t("liveFloor")}</h2>
@@ -262,8 +294,9 @@ export default async function SmtCommitteeLivePage({
           {t("liveFloorDescription")}
         </p>
       </div>
+      ) : null}
 
-      <SessionHistoryPanel conferenceId={conf.id} />
+      {activeTab === "history" ? <SessionHistoryPanel conferenceId={conf.id} /> : null}
     </div>
   );
 }

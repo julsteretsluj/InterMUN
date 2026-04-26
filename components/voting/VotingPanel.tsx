@@ -11,6 +11,7 @@ import {
   sortAllocationsByDisplayCountry,
 } from "@/lib/allocation-display-order";
 import { parseRollAttendance, type RollAttendance } from "@/lib/roll-attendance";
+import { LocalTabs } from "@/components/ui/Tabs";
 
 interface Vote {
   value: string;
@@ -487,22 +488,35 @@ export function VotingPanel({
       {voteItems.length === 0 ? (
         <p className="mun-muted">{t("noMotions")}</p>
       ) : (
-        <>
-          <section className="space-y-3">
-            <h3 className="mun-label">{t("currentOpenMotion")}</h3>
-            {openItems.length > 0 ? (
-              <div className="space-y-4">{openItems.map((i) => renderVoteCard(i as VoteItemRow))}</div>
+        <LocalTabs
+          ariaLabel={t("tabs.ariaLabel")}
+          options={[
+            { id: "open", label: t("tabs.open") },
+            { id: "closed", label: t("tabs.closed") },
+          ]}
+          defaultTab="open"
+          renderPanel={(activeTab) =>
+            activeTab === "open" ? (
+              <section className="space-y-3">
+                <h3 className="mun-label">{t("currentOpenMotion")}</h3>
+                {openItems.length > 0 ? (
+                  <div className="space-y-4">{openItems.map((i) => renderVoteCard(i as VoteItemRow))}</div>
+                ) : (
+                  <p className="mun-muted">{t("noOpenMotion")}</p>
+                )}
+              </section>
             ) : (
-              <p className="mun-muted">{t("noOpenMotion")}</p>
-            )}
-          </section>
-          {closedItems.length > 0 ? (
-            <section className="space-y-3">
-              <h3 className="mun-label">{t("recentClosedMotions")}</h3>
-              <div className="space-y-4">{closedItems.map((i) => renderVoteCard(i as VoteItemRow))}</div>
-            </section>
-          ) : null}
-        </>
+              <section className="space-y-3">
+                <h3 className="mun-label">{t("recentClosedMotions")}</h3>
+                {closedItems.length > 0 ? (
+                  <div className="space-y-4">{closedItems.map((i) => renderVoteCard(i as VoteItemRow))}</div>
+                ) : (
+                  <p className="mun-muted">{t("noClosedMotions")}</p>
+                )}
+              </section>
+            )
+          }
+        />
       )}
     </div>
   );

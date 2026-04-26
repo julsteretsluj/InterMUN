@@ -14,8 +14,13 @@ import {
   translateCommitteeLabel,
 } from "@/lib/i18n/committee-topic-labels";
 
-export default async function ChairOverviewPage() {
+export default async function ChairOverviewPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
   const t = await getTranslations("pageTitles");
+  const td = await getTranslations("chairNav");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
   const supabase = await createClient();
@@ -78,6 +83,13 @@ export default async function ChairOverviewPage() {
     { href: "/chair/room-code", label: "Room code", hint: "Committee gate code" },
     { href: "/committee-room", label: "Committee room (full)", hint: "Virtual layout & delegate floor" },
   ];
+  const { tab } = await searchParams;
+  const tabs = [
+    { id: "overview", label: td("dashboardTabs.overview") },
+    { id: "guidance", label: td("dashboardTabs.guidance") },
+    { id: "jump", label: td("dashboardTabs.jump") },
+  ] as const;
+  const activeTab = tab === "guidance" || tab === "jump" ? tab : "overview";
 
   return (
     <MunPageShell title={t("chairRoom")}>
@@ -105,17 +117,35 @@ export default async function ChairOverviewPage() {
           </p>
         </header>
 
-        <ChairHowToAccordion />
-        <RoleSetupChecklist role="chair" />
-        <ChairTopicTabsCard
-          topics={debateBundle.debateTopicOptions}
-          activeTopicId={debateBundle.debateConferenceId}
-        />
-
+        <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={td("dashboardTabs.ariaLabel")}>
+          {tabs.map((tabItem) => (
+            <Link
+              href={tabItem.id === "overview" ? "/chair" : `/chair?tab=${tabItem.id}`}
+              key={tabItem.id}
+              role="tab"
+              aria-selected={activeTab === tabItem.id}
+              className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                activeTab === tabItem.id
+                  ? "border-brand-accent text-brand-navy bg-brand-paper"
+                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+              }`}
+            >
+              {tabItem.label}
+            </Link>
+          ))}
+        </div>
+        {activeTab === "overview" ? (
+          <ChairTopicTabsCard topics={debateBundle.debateTopicOptions} activeTopicId={debateBundle.debateConferenceId} />
+        ) : null}
+        {activeTab === "guidance" ? (
+          <>
+            <ChairHowToAccordion />
+            <RoleSetupChecklist role="chair" />
+          </>
+        ) : null}
+        {activeTab === "jump" ? (
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">
-            Jump to
-          </h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("dashboardTabs.jump")}</h3>
           <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {tiles.map((t) => (
               <li key={t.href}>
@@ -130,6 +160,7 @@ export default async function ChairOverviewPage() {
             ))}
           </ul>
         </div>
+        ) : null}
       </div>
     </MunPageShell>
   );

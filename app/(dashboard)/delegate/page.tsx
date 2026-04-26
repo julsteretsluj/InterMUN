@@ -9,7 +9,11 @@ import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { getTranslations } from "next-intl/server";
 
-export default async function DelegateDashboardPage() {
+export default async function DelegateDashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
   const tp = await getTranslations("pageTitles");
   const td = await getTranslations("delegateDashboard");
   const tc = await getTranslations("common");
@@ -66,6 +70,13 @@ export default async function DelegateDashboardPage() {
     label: td(`tiles.${def.key}.label`),
     hint: td(`tiles.${def.key}.hint`),
   }));
+  const { tab } = await searchParams;
+  const dashboardTabs = [
+    { id: "overview", label: td("tabs.overview") },
+    { id: "checklist", label: td("tabs.checklist") },
+    { id: "jump", label: td("tabs.jump") },
+  ] as const;
+  const activeTab = tab === "checklist" || tab === "jump" ? tab : "overview";
 
   return (
     <MunPageShell title={tp("delegateDashboard")}>
@@ -80,13 +91,28 @@ export default async function DelegateDashboardPage() {
           </p>
         </header>
 
-        <DelegateCountdownCard conferenceId={conferenceId} />
-        <RoleSetupChecklist role="delegate" />
-
+        <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={td("tabs.ariaLabel")}>
+          {dashboardTabs.map((tabItem) => (
+            <Link
+              href={tabItem.id === "overview" ? "/delegate" : `/delegate?tab=${tabItem.id}`}
+              key={tabItem.id}
+              role="tab"
+              aria-selected={activeTab === tabItem.id}
+              className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                activeTab === tabItem.id
+                  ? "border-brand-accent text-brand-navy bg-brand-paper"
+                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+              }`}
+            >
+              {tabItem.label}
+            </Link>
+          ))}
+        </div>
+        {activeTab === "overview" ? <DelegateCountdownCard conferenceId={conferenceId} /> : null}
+        {activeTab === "checklist" ? <RoleSetupChecklist role="delegate" /> : null}
+        {activeTab === "jump" ? (
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">
-            {td("jumpTo")}
-          </h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("jumpTo")}</h2>
           <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {tiles.map((tile) => (
               <li key={tile.href + tile.label}>
@@ -101,6 +127,7 @@ export default async function DelegateDashboardPage() {
             ))}
           </ul>
         </div>
+        ) : null}
       </div>
     </MunPageShell>
   );

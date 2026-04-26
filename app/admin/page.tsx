@@ -6,11 +6,15 @@ import { getTranslations } from "next-intl/server";
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ e?: string }>;
+  searchParams: Promise<{ e?: string; tab?: string }>;
 }) {
-  const { e } = await searchParams;
+  const { e, tab } = await searchParams;
   const adminInviteConfigured = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
   const t = await getTranslations("adminPage");
+  const activeTab =
+    tab === "portal" || tab === "checklist" || tab === "setup"
+      ? tab
+      : "setup";
 
   return (
     <div>
@@ -28,14 +32,31 @@ export default async function AdminPage({
         </div>
       )}
 
-      <AdminDashboardClient adminInviteConfigured={adminInviteConfigured} />
-
-      <div className="mt-10">
-        <RoleSetupChecklist role="admin" />
+      <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={t("tabs.ariaLabel")}>
+        {[
+          { id: "setup", label: t("tabs.setup") },
+          { id: "checklist", label: t("tabs.checklist") },
+          { id: "portal", label: t("tabs.portal") },
+        ].map((item) => (
+          <a
+            key={item.id}
+            href={item.id === "setup" ? "/admin" : `/admin?tab=${item.id}`}
+            role="tab"
+            aria-selected={activeTab === item.id}
+            className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              activeTab === item.id
+                ? "border-brand-accent text-brand-navy bg-brand-paper"
+                : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+            }`}
+          >
+            {item.label}
+          </a>
+        ))}
       </div>
-
-      <div className="mt-10">
-        <StatusPortalBoard />
+      <div className="mt-6" role="tabpanel">
+        {activeTab === "setup" ? <AdminDashboardClient adminInviteConfigured={adminInviteConfigured} /> : null}
+        {activeTab === "checklist" ? <RoleSetupChecklist role="admin" /> : null}
+        {activeTab === "portal" ? <StatusPortalBoard /> : null}
       </div>
     </div>
   );

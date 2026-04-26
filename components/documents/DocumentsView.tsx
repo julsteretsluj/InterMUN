@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { FileText, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import { QueryTabs } from "@/components/ui/Tabs";
 
 interface Document {
   id: string;
@@ -64,6 +65,10 @@ export function DocumentsView({
     chair_feedback: "",
   });
   const supabase = createClient();
+  const documentTabs = [
+    { id: "library", label: t("tabs.library") },
+    { id: "compose", label: t("tabs.compose") },
+  ];
 
   function labelForDocType(dt: string): string {
     switch (dt) {
@@ -250,160 +255,169 @@ export function DocumentsView({
         </a>
       </div>
 
-      <button
-        type="button"
-        onClick={() => {
-          setShowForm(true);
-          setEditing(null);
-          setForm({
-            user_id: currentUserId,
-            doc_type: "prep_doc",
-            title: "",
-            content: "",
-            google_docs_url: "",
-            chair_feedback: "",
-          });
-        }}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
-      >
-        <Plus className="h-4 w-4" />
-        {t("addDocument")}
-      </button>
-      {(showForm || editing) && (
-        <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
-          <h3 className="font-semibold text-brand-navy dark:text-zinc-100">
-            {editing ? t("editDocumentTitle") : t("newDocumentTitle")}
-          </h3>
-          <div className="space-y-3">
-            <div>
-              <label className="mun-label mb-1 block normal-case">{t("typeLabel")}</label>
-              <select
-                value={form.doc_type}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    doc_type: e.target.value as "position_paper" | "prep_doc",
-                  })
-                }
-                className="mun-field"
-              >
-                {!isDelegate ? (
-                  <option value="position_paper">{t("types.position_paper")}</option>
-                ) : null}
-                {canManageChairReports ? (
-                  <option value="chair_report">{t("types.chair_report")}</option>
-                ) : null}
-                {canManageRop ? <option value="rop">{t("types.rop")}</option> : null}
-                {canManageAwardCriteria ? (
-                  <option value="award_criteria">{t("types.award_criteria")}</option>
-                ) : null}
-                {!isDelegate ? (
-                  <option value="chair_notes">{t("types.chair_notes")}</option>
-                ) : null}
-                <option value="prep_doc">{t("types.prep_doc")}</option>
-              </select>
-              {isDelegate ? (
-                <p className="mt-1 text-xs text-brand-muted">{t("delegatePositionPaperNote")}</p>
-              ) : null}
-            </div>
-            {form.doc_type === "position_paper" && canManagePositionPapers ? (
-              <div>
-                <label className="mun-label mb-1 block normal-case">{t("delegateOwner")}</label>
-                <select
-                  value={form.user_id}
-                  onChange={(e) => setForm({ ...form, user_id: e.target.value })}
-                  className="mun-field"
-                >
-                  {delegateOptions.map((opt) => (
-                    <option key={opt.id} value={opt.id}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : null}
-            {form.doc_type === "chair_report" && canManageChairReports ? (
-              <div>
-                <label className="mun-label mb-1 block normal-case">{t("chairRecipient")}</label>
-                <select
-                  value={form.user_id}
-                  onChange={(e) => setForm({ ...form, user_id: e.target.value })}
-                  className="mun-field"
-                >
-                  {chairOptions.map((opt) => (
-                    <option key={opt.id} value={opt.id}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : null}
-            <div>
-              <label className="mun-label mb-1 block normal-case">{t("titleLabel")}</label>
-              <input
-                value={form.title}
-                onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="mun-field"
-                placeholder={t("titlePlaceholder")}
-              />
-            </div>
-            <div>
-              <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
-                <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
-                <OpenNewGoogleDocButton />
-              </div>
-              <input
-                value={form.google_docs_url}
-                onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}
-                className="mun-field"
-                type="url"
-                placeholder={t("googleDocsPlaceholder")}
-              />
-              <p className="mt-1 text-xs text-brand-muted">{t("googleDocsHelp")}</p>
-            </div>
-            <div>
-              <label className="mun-label mb-1 block normal-case">{t("plainTextOptional")}</label>
-              <textarea
-                value={form.content}
-                onChange={(e) => setForm({ ...form, content: e.target.value })}
-                className="mun-field h-40 resize-y"
-                placeholder={t("plainTextPlaceholder")}
-              />
-            </div>
-            {form.doc_type === "position_paper" && canManagePositionPapers ? (
-              <div>
-                <label className="mun-label mb-1 block normal-case">{t("chairFeedbackLabel")}</label>
-                <textarea
-                  value={form.chair_feedback}
-                  onChange={(e) => setForm({ ...form, chair_feedback: e.target.value })}
-                  className="mun-field h-32 resize-y"
-                  placeholder={t("chairFeedbackPlaceholder")}
-                />
-              </div>
-            ) : null}
-            <div className="flex flex-wrap gap-2">
-              <button type="button" onClick={() => void saveDocument()} className="mun-btn-primary">
-                {tc("save")}
-              </button>
+      <QueryTabs
+        options={documentTabs}
+        tabKey="docTab"
+        fallbackId="library"
+        ariaLabel={t("tabs.ariaLabel")}
+        renderPanel={(activeTab) =>
+          activeTab === "compose" ? (
+            <div className="space-y-4">
               <button
                 type="button"
                 onClick={() => {
-                  setShowForm(false);
+                  setShowForm(true);
                   setEditing(null);
+                  setForm({
+                    user_id: currentUserId,
+                    doc_type: "prep_doc",
+                    title: "",
+                    content: "",
+                    google_docs_url: "",
+                    chair_feedback: "",
+                  });
                 }}
-                className="mun-btn"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity duration-200 hover:opacity-95"
               >
-                {tc("cancel")}
+                <Plus className="h-4 w-4" />
+                {t("addDocument")}
               </button>
+              {(showForm || editing) && (
+                <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
+                  <h3 className="font-semibold text-brand-navy dark:text-zinc-100">
+                    {editing ? t("editDocumentTitle") : t("newDocumentTitle")}
+                  </h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="mun-label mb-1 block normal-case">{t("typeLabel")}</label>
+                      <select
+                        value={form.doc_type}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            doc_type: e.target.value as "position_paper" | "prep_doc",
+                          })
+                        }
+                        className="mun-field"
+                      >
+                        {!isDelegate ? (
+                          <option value="position_paper">{t("types.position_paper")}</option>
+                        ) : null}
+                        {canManageChairReports ? (
+                          <option value="chair_report">{t("types.chair_report")}</option>
+                        ) : null}
+                        {canManageRop ? <option value="rop">{t("types.rop")}</option> : null}
+                        {canManageAwardCriteria ? (
+                          <option value="award_criteria">{t("types.award_criteria")}</option>
+                        ) : null}
+                        {!isDelegate ? (
+                          <option value="chair_notes">{t("types.chair_notes")}</option>
+                        ) : null}
+                        <option value="prep_doc">{t("types.prep_doc")}</option>
+                      </select>
+                      {isDelegate ? (
+                        <p className="mt-1 text-xs text-brand-muted">{t("delegatePositionPaperNote")}</p>
+                      ) : null}
+                    </div>
+                    {form.doc_type === "position_paper" && canManagePositionPapers ? (
+                      <div>
+                        <label className="mun-label mb-1 block normal-case">{t("delegateOwner")}</label>
+                        <select
+                          value={form.user_id}
+                          onChange={(e) => setForm({ ...form, user_id: e.target.value })}
+                          className="mun-field"
+                        >
+                          {delegateOptions.map((opt) => (
+                            <option key={opt.id} value={opt.id}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ) : null}
+                    {form.doc_type === "chair_report" && canManageChairReports ? (
+                      <div>
+                        <label className="mun-label mb-1 block normal-case">{t("chairRecipient")}</label>
+                        <select
+                          value={form.user_id}
+                          onChange={(e) => setForm({ ...form, user_id: e.target.value })}
+                          className="mun-field"
+                        >
+                          {chairOptions.map((opt) => (
+                            <option key={opt.id} value={opt.id}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ) : null}
+                    <div>
+                      <label className="mun-label mb-1 block normal-case">{t("titleLabel")}</label>
+                      <input
+                        value={form.title}
+                        onChange={(e) => setForm({ ...form, title: e.target.value })}
+                        className="mun-field"
+                        placeholder={t("titlePlaceholder")}
+                      />
+                    </div>
+                    <div>
+                      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+                        <label className="mun-label normal-case">{t("googleDocsUrl")}</label>
+                        <OpenNewGoogleDocButton />
+                      </div>
+                      <input
+                        value={form.google_docs_url}
+                        onChange={(e) => setForm({ ...form, google_docs_url: e.target.value })}
+                        className="mun-field"
+                        type="url"
+                        placeholder={t("googleDocsPlaceholder")}
+                      />
+                      <p className="mt-1 text-xs text-brand-muted">{t("googleDocsHelp")}</p>
+                    </div>
+                    <div>
+                      <label className="mun-label mb-1 block normal-case">{t("plainTextOptional")}</label>
+                      <textarea
+                        value={form.content}
+                        onChange={(e) => setForm({ ...form, content: e.target.value })}
+                        className="mun-field h-40 resize-y"
+                        placeholder={t("plainTextPlaceholder")}
+                      />
+                    </div>
+                    {form.doc_type === "position_paper" && canManagePositionPapers ? (
+                      <div>
+                        <label className="mun-label mb-1 block normal-case">{t("chairFeedbackLabel")}</label>
+                        <textarea
+                          value={form.chair_feedback}
+                          onChange={(e) => setForm({ ...form, chair_feedback: e.target.value })}
+                          className="mun-field h-32 resize-y"
+                          placeholder={t("chairFeedbackPlaceholder")}
+                        />
+                      </div>
+                    ) : null}
+                    <div className="flex flex-wrap gap-2">
+                      <button type="button" onClick={() => void saveDocument()} className="mun-btn-primary">
+                        {tc("save")}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowForm(false);
+                          setEditing(null);
+                        }}
+                        className="mun-btn"
+                      >
+                        {tc("cancel")}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {!showForm && !editing ? <p className="text-sm text-brand-muted">{t("tabs.composeHint")}</p> : null}
             </div>
-          </div>
-        </div>
-      )}
-
-      {docs.length === 0 ? (
-        <p className="text-sm text-brand-muted">{t("empty")}</p>
-      ) : (
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+          ) : docs.length === 0 ? (
+            <p className="text-sm text-brand-muted">{t("empty")}</p>
+          ) : (
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           <div className="w-full shrink-0 space-y-2 lg:w-64">
             <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">
               {t("sidebarDocumentLabel")}
@@ -561,8 +575,8 @@ export function DocumentsView({
             </div>
           </div>
 
-          {selected ? (
-            <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
+              {selected ? (
+                <div className="min-w-0 flex-1 space-y-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/25 sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-semibold text-brand-navy dark:text-zinc-100">
@@ -637,10 +651,12 @@ export function DocumentsView({
                   </p>
                 </div>
               ) : null}
+                </div>
+              ) : null}
             </div>
-          ) : null}
-        </div>
-      )}
+          )
+        }
+      />
     </div>
   );
 }
