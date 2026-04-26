@@ -15,7 +15,7 @@
     "delegateFallbackName": "נָצִיג",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "מזכ\"ל",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "חזור לפרופיל"
   },
   "language": {
     "label": "שָׂפָה",
@@ -78,7 +78,7 @@
     "creatingAccount": "יוצר חשבון...",
     "signUp": "הירשם",
     "dontHaveAccount": "אין לך חשבון?",
-    "alreadyHaveAccount": "יש לך כבר חשבון?",
+    "alreadyHaveAccount": "כבר יש לך חשבון?",
     "chair": "כִּסֵא",
     "chairHint": "(הבמה)",
     "delegate": "נָצִיג",
@@ -98,7 +98,7 @@
     "joinCommitteeDescription": "הזן את קוד הוועדה שלך עבור ועידה זו. כבר היית צריך להזין את קוד הוועידה במסך הקודם.",
     "wrongConference": "כנס לא נכון? הזן קוד ועידה אחר",
     "openLatestCommittee": "SMT: פתח את הוועדה האחרונה (דלג על קודים)",
-    "openLatestCommitteeHelp": "פותח את הפגישה {code} כאשר היא קיימת (לאחר קוד ועידה SEAMUNI2027). יושבי ראש Dais חייבים להזין את קודי הוועדה שלהם למעלה.",
+    "openLatestCommitteeHelp": "פותח את הפגישה {code} כאשר היא קיימת (לאחר קוד הוועידה SEAMUNI2027). יושבי ראש Dais חייבים להזין את קודי הוועדה שלהם למעלה.",
     "setupConferenceSmtOnly": "הגדר ועידה חדשה (SMT בלבד)",
     "setupConferenceHelp": "יוצר את קוד הוועידה ואת קוד הוועדה הראשון. יושבי ראש מנהלים את קודי הוועדה מהיו\"ר -> קוד הוועדה לאחר ש-SMT יוצר את האירוע.",
     "staffErrNoConferences": "אין עדיין כנסים. SMT יכול להגדיר ועידה חדשה למטה, או להוסיף שורות ב-Supabase / run seed.sql.",
@@ -156,9 +156,34 @@
     "timer": "שָׁעוֹן עֶצֶר",
     "smtProfile": "פּרוֹפִיל"
   },
+  "setupPage": {
+    "title": "Supabase אינו מוגדר",
+    "body": "בפריסה זו חסרים משתני הסביבה הציבוריים של Supabase. הוסף אותם במארח שלך (לדוגמה Vercel ← Project ← הגדרות ← משתני סביבה), ואז לפרוס מחדש:",
+    "valuesHint": "הערכים נמצאים ב-Supabase → הגדרות פרויקט → API. השתמש באותם שמות עבור ייצור ותצוגה מקדימה אם אתה משתמש בפריסות תצוגה מקדימה.",
+    "tryAgainLink": "נסה להיכנס שוב לאחר הפריסה מחדש"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "קישור הרשמה לא חוקי",
+    "invalidLinkBody": "בקישור ההקצאה הזה חסרים פרטים נדרשים. בקש מהכיסא או SMT שלך קישור חדש להרשמה.",
+    "allocationNotFoundTitle": "ההקצאה לא נמצאה",
+    "allocationNotFoundBody": "אומה/תפקיד זה אינו זמין עוד בוועדה שנבחרה.",
+    "allocationTakenTitle": "ההקצאה כבר נלקחה",
+    "allocationTakenBody": "{country} כבר נתבע על ידי חשבון אחר. אנא בחר הקצאה אחרת.",
+    "submitFailedTitle": "לא ניתן להגיש בקשה",
+    "requestSubmittedTitle": "הוגשה בקשת הרשמה",
+    "requestSubmittedBody": "בקשתך עבור {country} נשלחה ליו\"ר הוועדה לאישור.",
+    "requestSubmittedHint": "לאחר האישור, פתח מחדש את הקישור הזה או המשך לכניסה לוועדה כדי להמשיך.",
+    "continueCommitteeSignIn": "המשך לכניסה לוועדה"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "בחר תחילה אירוע ועידה.",
+    "enterConferenceCode": "הזן קוד ועידה",
+    "title": "קודי חדרים וכיסאות",
+    "subtitle": "הגדר את קוד הוועדה של השער השני לכל מפגש והזמינו או קדם יו\"רים בלי להשתמש בלוח המחוונים של הנציגים."
+  },
   "delegateDashboard": {
     "welcome": "ברוך הבא, נציג של {flag} {country}",
-    "activeCommitteeIntro": "ועדה פעילה: {שורה}.",
+    "activeCommitteeIntro": "ועדה פעילה: {שורה}. {line}",
     "activeCommitteeBody": "תאריכי הספירה לאחור משותפים עם כולם בוועדה זו. ההכנות, העמדות והמסמכים שלך נשארים בחשבון שלך.",
     "jumpTo": "קפוץ אל",
     "tiles": {
@@ -405,7 +430,7 @@
       "plainTextPlaceholder": "הערות או טיוטת טקסט...",
       "chairFeedbackLabel": "משוב יושב ראש",
       "chairFeedbackPlaceholder": "משוב לנייר עמדת הנציג...",
-      "empty": "עדיין אין מסמכים. הוסף אחד או קשר מסמך Google Doc.",
+      "empty": "עדיין אין מסמכים. הוסף אחד או קישור ל-Google Doc.",
       "sidebarDocumentLabel": "מִסְמָך",
       "sections": {
         "chairReports": "יו\"ר מדווח",
@@ -473,7 +498,7 @@
       "roll": {
         "absent": "נעדר (גלגול)",
         "present_abstain": "הווה - רשאי להימנע (להתגלגל)",
-        "present_voting": "נוכח והצביע (רול)",
+        "present_voting": "הווה והצבעה (גלל)",
         "unknown": "- (גלגול)"
       }
     },
@@ -504,11 +529,11 @@
       "saveFailed": "לא ניתן לשמור את הפרופיל.",
       "errUsernamePattern": "שם המשתמש חייב להיות 3-32 תווים (אותיות, מספרים, _, ., -)",
       "errPronounsPreset": "בחר כינוי מהרשימה.",
-      "errImageType": "נא לבחור קובץ תמונה.",
+      "errImageType": "אנא בחר קובץ תמונה.",
       "errImageSize": "התמונה גדולה מדי (מקסימום 5 MB).",
       "errUploadFailed": "ההעלאה נכשלה.",
       "errStorageSetup": "אחסון תמונת פרופיל אינו מוגדר. בפרויקט Supabase, הפעל את המיגרציה 00100_profile_pictures_storage_bucket.sql, או צור דלי אחסון ציבורי בשם profile-pictures (ראה README).",
-      "errPublicUrl": "לא ניתן היה לפתור כתובת URL ציבורית לתמונה שהועלתה."
+      "errPublicUrl": "לא ניתן היה לפתור כתובת אתר ציבורית לתמונה שהועלתה."
     },
     "guides": {
       "default": {
@@ -582,12 +607,12 @@
             "definition": "התערבות כאשר נוהל מיושם באופן שגוי לפי כללי הוועדה."
           },
           "moderated_caucus": {
-            "term": "מנחה קאוקוס",
+            "term": "מנחה קוקוס",
             "definition": "קטע ויכוח מובנה עם נאומים קצרים בזמן על תת-נושא מוגדר."
           },
           "unmoderated_caucus": {
             "term": "קאוקוס לא מתון",
-            "definition": "תקופת משא ומתן לא פורמלי שבה הנציגים נעים בחופשיות לנסח ולמזג רעיונות."
+            "definition": "תקופת משא ומתן לא רשמית שבה הנציגים נעים בחופשיות לנסח ולמזג רעיונות."
           },
           "draft_resolution": {
             "term": "טיוטת החלטה",
@@ -707,7 +732,7 @@
           },
           "source_attribution": {
             "term": "ייחוס מקור",
-            "definition": "ציטוט של מקור המידע בצורה ברורה כדי שניתן יהיה לאמת את הטענות ולהגדיר אותן בהקשר."
+            "definition": "ציטוט ברור של מקור המידע כדי שניתן יהיה לאמת את הטענות ולהתאים אותן בהקשר."
           },
           "verified_reporting": {
             "term": "דיווח מאומת",
@@ -787,7 +812,7 @@
       "ideaLabel": "רַעְיוֹן",
       "ideaFallback": "רעיון {number}",
       "linkedDoc": "מסמך מקושר",
-      "addedOn": "נוסף {תאריך}",
+      "addedOn": "נוסף {תאריך} {date}",
       "edit": "לַעֲרוֹך",
       "delete": "לִמְחוֹק",
       "ideaDocument": "מסמך רעיון",
@@ -841,7 +866,7 @@
       "virtualRoomVacant": "רֵיק",
       "profileAria": "צפה בפרופיל: {country}",
       "vacantSeatAria": "מושב פנוי",
-      "placardAria": "שלט {מדינה}",
+      "placardAria": "שלט {מדינה} {country}",
       "gavelAria": "גמל"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "תווית מטרה",
         "purposeHelpBody": "טקסט זה מצורף לשם המדינה שלך כדי שהכסאות יוכלו לראות מדוע אתה מבקש את הרצפה.",
         "purposePlaceholder": "לְמָשָׁל סקירת תמיכה + תיקון",
-        "requesting": "מבקש..."
+        "requesting": "מבקש...",
+        "rollPromptTitle": "נדרש אישור הכיסא",
+        "rollPromptBodyPickStatus": "הסשן התחיל. בחר את סטטוס המסדר שלך כדי לבטל את נעילת הדיבור וההצבעה.",
+        "rollPromptBodyWaitSessionStart": "מחכה ליושב ראש שיתחיל את מושב הוועדה.",
+        "rollPromptBodyWaitRollPrompt": "ממתין להנחיית מסדר.",
+        "rollPromptBodyMarkedAbsent": "כרגע אתה מסומן כנעדר. בקש מהיושב ראש לסמן אותך נוכח לדבר ולהצביע.",
+        "rollPromptBodyChecking": "בודק את סטטוס הגלישה שלך...",
+        "rollPromptSaving": "חִסָכוֹן...",
+        "rollPromptPresent": "לְהַצִיג",
+        "rollPromptPresentVoting": "נוכחים ומצביעים"
       },
       "motionVoting": {
         "votingProcedure": "הליך ההצבעה",
@@ -865,7 +899,7 @@
         "motioner": "מניע",
         "majority": "רוֹב",
         "majoritySimple": "פָּשׁוּט",
-        "tally": "כן {yes} - לא {לא} - סך הכל {total}",
+        "tally": "כן {yes} - לא {לא} - סך הכל {total} {no}",
         "help": "הבמה מתעדת את ההצבעה של כל משלחת במושב. הצבעות ההצעות משתמשות בכן או לא בלבד (לא נמנע). הסכומים סופרים רק שלטים שבהם נרשמו כן או לא; מדלגים על משלחות נעדרות."
       },
       "activeMotion": {
@@ -882,7 +916,7 @@
         "speakerTimeLeftTotal": "זמן רמקול (שמאל / סה\"כ)",
         "perSpeaker": "(לכל דובר)",
         "paused": "(מושהה)",
-        "pauseReason": "השהייה: {סיבה}"
+        "pauseReason": "השהייה: {סיבה} {reason}"
       },
       "floorStatus": {
         "sessionTime": "זמן מפגש",
@@ -900,6 +934,13 @@
         "daisAnnouncement": "הכרזת דיי",
         "close": "לִסְגוֹר"
       },
+      "committeeControl": {
+        "sessionNameLabel": "שם הפגישה",
+        "sessionNamePlaceholder": "לְמָשָׁל מפגש בוקר",
+        "sessionNameSaving": "חִסָכוֹן…",
+        "sessionNameSaved": "נשמר",
+        "sessionNameHint": "נשמר אוטומטית ומופיע בהיסטוריית הפעלות."
+      },
       "history": {
         "title": "היסטוריית הפעלות",
         "savedCount": "{count} נשמר",
@@ -909,7 +950,7 @@
         "delete": "לִמְחוֹק",
         "deleteConfirm": "למחוק את הפגישה הזו מההיסטוריה?",
         "sessionNamePrompt": "שם הפגישה",
-        "rangeClosed": "{לָנוּעַ}",
+        "rangeClosed": "{לָנוּעַ} {range}",
         "rangeOngoing": "{range} -> מתמשך"
       },
       "timerPage": {
@@ -937,7 +978,7 @@
         "paused": "מושהה",
         "saveToEnablePauseStart": "שמור את הטיימר כדי לאפשר השהייה/התחלה.",
         "pauseReasonLogged": "סיבה להשהה (נרשמה)",
-        "pauseReasonPlaceholder": "לְמָשָׁל נקודת סדר, בעיה טכנית, ועידה לא ממודרת...",
+        "pauseReasonPlaceholder": "לְמָשָׁל נקודת סדר, בעיה טכנית, אסיפה לא ממודרת...",
         "pauseClock": "השהה שעון",
         "startClock": "הפעל שעון",
         "perSpeakerTitle": "זמן לכל דובר (סמינר מנחה)",
@@ -958,8 +999,8 @@
         "remainingHelpPerSpeaker": "ספירה לאחור עבור הרמקול הנוכחי (מתאפס כאשר אתה מתקדם).",
         "remainingHelpNormal": "ספירה לאחור עבור הרמקול הנוכחי (יכול להיות פחות מהסך הכל).",
         "totalTime": "זמן כולל",
-        "totalHelpPerSpeaker": "מכסה לכל רמקול (מכנה על הרצפה; נותרו מילוי מתקדמות).",
-        "totalHelpNormal": "אורך מלא של קטע טיימר זה (מוצג לאחר החתך על הרצפה).",
+        "totalHelpPerSpeaker": "מכסה לכל רמקול (מכנה על הרצפה; נותרו מילוי מקדמה).",
+        "totalHelpNormal": "האורך המלא של קטע הטיימר הזה (מוצג אחרי הלוכסן על הרצפה).",
         "saveTimer": "שמור טיימר",
         "advanceSpeakerReset": "קדם רמקול ואיפוס שעון",
         "recentPauseLog": "יומן הפסקה אחרון",
@@ -971,13 +1012,6 @@
         "pausedForCommittee": "הטיימר נעצר עבור הוועדה.",
         "alreadyRunning": "הטיימר כבר פועל.",
         "runningForCommittee": "טיימר פועל לוועדה."
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1079,7 +1113,7 @@
     "roomStats": "{placards} שלטים · {flagged} עם הערות כיסא · גליל הוקלט עבור {count}",
     "loading": "טְעִינָה...",
     "noDelegationsMatch": "אין משלחות שתואמות את החיפוש שלך.",
-    "rollPrefix": "רול {תווית}",
+    "rollPrefix": "רול {תווית} {label}",
     "linkedAccount": "חשבון מקושר",
     "vacantPlacard": "שלט פנוי",
     "delegateProfile": "פרופיל נציג ->",
@@ -1112,12 +1146,12 @@
     "disinformation": "מֵידָע מַטעֶה",
     "sustainableDevelopment": "פיתוח בר קיימא",
     "untitledTopic": "נושא ללא כותרת",
-    "qClimateCooperation": "כיצד יכולות המדינות החברות לחזק את שיתוף הפעולה העולמי בפעולת אקלים?",
+    "qClimateCooperation": "כיצד יכולות המדינות החברות לחזק את שיתוף הפעולה העולמי בפעילות אקלים?",
     "qGlobalHealthcareAccess": "כיצד יכולה הקהילה הבינלאומית לשפר את הגישה לשירותי בריאות איכותיים?",
     "qAiGovernance": "כיצד צריכות מדינות להסדיר AI וטכנולוגיות מתפתחות?",
     "qDisinformationImpact": "אילו אמצעים יכולים להפחית את ההשפעה העולמית של דיסאינפורמציה?",
-    "qSecurityHumanRights": "כיצד מדינות יכולות לאזן בין ביטחון וזכויות אדם במלחמה בטרור?",
-    "qRefugeeProtection": "כיצד מערכת האו\"ם יכולה לתמוך בהגנה על פליטים ובפתרונות עמידים?",
+    "qSecurityHumanRights": "כיצד מדינות יכולות לאזן בין ביטחון וזכויות אדם בלוחמה בטרור?",
+    "qRefugeeProtection": "כיצד יכולה מערכת האו\"ם לתמוך בהגנה על פליטים ובפתרונות עמידים?",
     "qFoodSecurity": "אילו אסטרטגיות יכולות לשפר את ביטחון המזון באזורים פגיעים לאקלים?",
     "qNonProliferation": "כיצד על הקהילה הבינלאומית למנוע הפצת נשק גרעיני?"
   },
@@ -1175,7 +1209,7 @@
       "unmoderated": "הערות מושבתות במהלך וועד לא מנחה.",
       "smtVerify": "ודא עם הסיסמה המשנית של הצוות כדי לשלוח הערות לוועדה זו.",
       "emptyContent": "כתוב תחילה את תוכן ההערה.",
-      "noRecipients": "בחר לפחות נמען אחד (משלחת או יו\"ר).",
+      "noRecipients": "בחר נמען אחד לפחות (משלחת או יו\"ר).",
       "needAllocation": "אתה צריך הקצאה כדי לשלוח הערות (או להיות כיסא).",
       "sendFailed": "שליחת ההערה נכשלה."
     }
@@ -1210,7 +1244,7 @@
     "titlePipeline": "פורטל סטטוס (Pipeline)",
     "selectEventFirst": "תחילה בחר אירוע פעיל.",
     "noSessionsYet": "עדיין לא נמצאו ישיבות ועדה לאירוע זה.",
-    "intro": "נציגים עוברים מ<strong>בהמתנה</strong> ל<strong>אושר</strong> לאחר אישור. אישור מספק אותם כנציג ומפעיל את דוא\"ל הפתיחה.",
+    "intro": "נציגים עוברים מ<strong>בהמתנה</strong> ל<strong>אושר</strong> לאחר אישור. אישור מקנה אותם כנציג ומפעיל את דוא\"ל הפתיחה.",
     "pending": "תָלוּי וְעוֹמֵד",
     "confirmed": "מְאוּשָׁר",
     "nothingPending": "שום דבר לא בהמתנה.",
@@ -1256,29 +1290,200 @@
     "creating": "יוצר...",
     "submit": "צור אירוע + ועדה והיכנס"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "יש צורך בכנס, הקצאה וסיסמה.",
+      "mustBeSignedIn": "אתה חייב להיות מחובר.",
+      "contextMismatch": "ההקשר של הוועדה שלך אינו תואם לכניסה זו. הזן מחדש את קודי הוועידה והוועדה שלך במידת הצורך.",
+      "conferenceSelectionMismatch": "בחירת הכנס שלך לא תואמת את הוועדה הזו. הזן מחדש את קודי הוועידה והוועדה שלך.",
+      "conferenceSelectionMismatchWithBackHint": "בחירת הכנס שלך לא תואמת את הוועדה הזו. חזור והזן את קוד הוועידה הנכון, ולאחר מכן את קוד הוועדה.",
+      "conferenceNotFound": "הכנס לא נמצא.",
+      "noAllocationForConference": "אין לך הקצאה לוועידה זו. בקש מכיסא להקצות לך לפני שתמשיך.",
+      "allocationMismatch": "ההקצאה לא תואמת את ההקצאה שלך. הזן את המדינה או המיקום שלך בדיוק כפי שהוקצו (מרווחים והדגשים עשויים להיות שונים).",
+      "incorrectCommitteePassword": "סיסמת ועדה שגויה.",
+      "requiredConferenceAndStaffPassword": "נדרשת סיסמה משנית לוועידה ולצוות.",
+      "onlySmtOrAdminBypass": "רק מנהלי מזכירות או אתר יכולים להשתמש בכניסה זו.",
+      "incorrectStaffPassword": "סיסמה משנית שגויה של הצוות.",
+      "chooseConference": "בחר ועידה.",
+      "passwordMinLength": "הסיסמה חייבת להיות לפחות 6 תווים.",
+      "passwordsDoNotMatch": "הסיסמאות אינן תואמות.",
+      "notSignedIn": "לא מחובר.",
+      "onlyChairSmtAdminSetPassword": "רק יושבי ראש, SMT ומנהלי אתרים יכולים להגדיר את סיסמת הוועדה.",
+      "onlyChairSmtAdminRemovePassword": "רק יושבי ראש, SMT ומנהלי אתרים יכולים להסיר את סיסמת הוועדה."
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "תחילה בחר אירוע עם קוד הכנס (שער האירוע).",
+      "notSignedIn": "לא מחובר.",
+      "onlySmtManageMatrix": "רק המזכירות יכולה לנהל את מטריצת ההקצאה.",
+      "committeeNotInActiveEvent": "ועדה זו אינה חלק מהאירוע הפעיל.",
+      "requiredCommitteeAndCountry": "נדרשות ועדה ומדינה/תפקיד.",
+      "countryTooLong": "המדינה/העמדה ארוכה מדי.",
+      "codeTooLong": "קוד הפלקט ארוך מדי.",
+      "couldNotCreateAllocation": "לא ניתן ליצור הקצאה.",
+      "requiredAllocationAndCountry": "יש צורך בהקצאה ומדינה/תפקיד.",
+      "allocationNotFound": "ההקצאה לא נמצאה.",
+      "missingAllocation": "חסרה הקצאה.",
+      "seatLinkedToDelegate": "מושב זה מקושר לנציג. בטל את הקישור שלהם ב-Supabase או הקצה מחדש לפני המחיקה.",
+      "selectCommittee": "בחר ועדה.",
+      "couldNotParseCsv": "לא ניתן לנתח CSV.",
+      "noDataRowsFound": "לא נמצאו שורות נתונים (צריך לפחות מדינה/מיקום בכל שורה).",
+      "importLimitedRows": "הייבוא ​​מוגבל ל-{max} שורות. פצל את הקובץ שלך.",
+      "rowTooLong": "שורה ארוכה מדי: {שורה}... {row}",
+      "codeTooLongOnRow": "קוד ארוך מדי בשורה: {row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "תחילה בחר אירוע עם קוד הכנס (שער האירוע).",
+      "notSignedIn": "לא מחובר.",
+      "onlySmtChangeCodes": "רק המזכירות יכולה לשנות כאן את קודי הוועדה.",
+      "committeeNotInActiveEvent": "ועדה זו אינה חלק מהאירוע הפעיל שלך.",
+      "missingCommittee": "ועדה חסרה.",
+      "invalidCommitteeCode": "קוד ועדה/חדר חייב להיות בדיוק בן 6 אותיות או ספרות (למשל ECO741).",
+      "unauthorized": "לא מורשה.",
+      "codeSaved": "הקוד נשמר. הנציגים משתמשים בו כשער השני אחרי קוד הוועידה.",
+      "invalidEmail": "הזן כתובת אימייל חוקית.",
+      "onlySmtInviteChair": "רק המזכירות יכולה לשלוח הזמנות ליושב ראש.",
+      "missingServiceRoleKey": "לשרת חסר SUPABASE_SERVICE_ROLE_KEY. הוסף אותו ל-env הפריסה (לעולם אל תחשוף לדפדפן).",
+      "missingPublicAppUrl": "הגדר את NEXT_PUBLIC_APP_URL לכתובת האתר הציבורי שלך (למשל https://your-app.vercel.app) אז קישורי הזמנה ניתנים מחדש בצורה נכונה.",
+      "emailAlreadyHasAccount": "למייל הזה כבר יש חשבון. השתמש ב\"הענקת תפקיד כיסא\" למטה במקום לשלוח הזמנה נוספת.",
+      "inviteSentButRoleSetFailed": "ההזמנה נשלחה, אך לא ניתן היה להגדיר תפקיד כיסא בפרופיל: {error}. השתמש ב\"הענקת תפקיד כיסא\" לאחר שהם מקבלים.",
+      "inviteSentSuccess": "הודעת אימייל שנשלחה אל {email}. הם יהיו כיסא לאחר שיגדירו את הסיסמה שלהם.",
+      "onlySmtGrantChair": "רק המזכירות יכולה להעניק תפקידי יו\"ר.",
+      "noAccountForEmail": "עדיין אין חשבון עם האימייל הזה. תחילה שלח הזמנה לכיסא.",
+      "promotedToChairSuccess": "הפרופיל של {email} הוא כעת כיסא בימת."
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "אתה חייב להיות מחובר.",
+      "onlyDelegateOrChair": "רק חשבונות נציג/יו\"ר יכולים לבקש הרשמה להקצאה.",
+      "allocationNotFound": "ההקצאה לא נמצאה.",
+      "allocationAlreadyAssigned": "ההקצאה הזו כבר הוקצתה.",
+      "requiredConferenceAllocationEmail": "נדרשים ועידה, הקצאה ודוא\"ל של נציג."
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "אנא היכנס תחילה.",
+      "onlyDelegatesCanExport": "רק נציגים יכולים לייצא את החומרים שלהם.",
+      "accountHasNoEmail": "לחשבון שלך לא הוגדרה כתובת אימייל.",
+      "rangeTodayUtc": "היום (UTC)",
+      "rangeAllTime": "כל הזמן",
+      "emailSubject": "ייצוא חומרים InterMUN ({range})",
+      "emailSendConfigHint": "הגדר SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS ובאופן אופציונלי MATERIALS_EXPORT_FROM בשרת.",
+      "exportEmailedTo": "ייצוא נשלח בדוא\"ל אל {email}. אם אתה לא רואה את זה, בדוק ספאם/זבל."
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "InterMUN",
+      "welcomeSubject": "ברוכים הבאים ל-InterMUN",
+      "welcomeLine1": "ברוכים הבאים ל-InterMUN.",
+      "welcomeConfirmedFor": "חשבון הנציג שלך אושר עבור: {country}.",
+      "welcomeLine2": "כעת תוכל להמשיך לכניסה לוועדה ולהצטרף למפגש החי.",
+      "welcomeLine3": "נתראה על הרצפה.",
+      "chairReminderSubject": "בקשת הקצאה ממתינה לאישור",
+      "chairReminderLine1": "נציג ביקש הקצאה וזקוק לבדיקת יו\"ר.",
+      "chairReminderConference": "ועידה: {כנס} {conference}",
+      "chairReminderAllocation": "הקצאה מבוקשת: {country}",
+      "chairReminderDelegate": "נציג: {name}",
+      "chairReminderEmail": "דוא\"ל חשבון: {email}",
+      "chairReminderLine2": "אנא אשר או דחה בקשה זו במטריצת הקצאת הכיסא:"
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "פרטי האירוע",
+    "selectConferenceFirst": "בחר תחילה ועידה עם שער האירוע ולאחר מכן חזור לכאן.",
+    "committeeSessionsTitle": "ישיבות הוועדה באירוע זה",
+    "committeeSessionsBody": "כותרות מושב הוועדה (נושאים בסדר היום) נשארים כאן לתיעוד; הרשת הביתית של SMT מציגה את שם הוועדה הרשמי, ראשי תיבות, כסאות וקוד תצוגה קצר. קודי הוועדה/חדרים (שער שני) חייבים להישאר ייחודיים באירוע זה.",
+    "noCommitteeSessions": "אין ישיבות ועדות לאירוע זה.",
+    "eventName": "שם האירוע",
+    "tagline": "קו תג",
+    "conferenceCodeFirstGate": "קוד ועידה (שער ראשון)",
+    "saved": "נשמר.",
+    "saving": "חִסָכוֹן…",
+    "saveConferenceEvent": "שמור אירוע ועידה",
+    "errorImageFile": "אנא בחר קובץ תמונה.",
+    "errorImageTooLarge": "התמונה גדולה מדי (מקסימום 6 MB).",
+    "errorCommitteeCodeMissing": "חסר קוד הוועדה.",
+    "errorPublicUrl": "לא ניתן היה לפתור כתובת אתר ציבורית לתמונה שהועלתה.",
+    "errorUploadFailed": "ההעלאה נכשלה.",
+    "sessionTitle": "כותרת המושב",
+    "chamberLabel": "תא / תווית",
+    "officialCommitteeName": "שם הוועדה הרשמית (רשת SMT)",
+    "officialCommitteeNamePlaceholder": "לְמָשָׁל ארגון הבריאות העולמי",
+    "chairNames": "שמות כיסאות",
+    "chairNamesPlaceholder": "מופרדים בפסיקים, למשל. אלכס קים, ג'ורדן לי",
+    "committeeLogo": "לוגו הוועדה",
+    "uploading": "מעלה...",
+    "crisisSlidesUrl": "שקופיות משבר (כתובת האתר של Google Slides)",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "מגלשות משבר",
+    "crisisSlidesHelpPrefix": "עבור FWC / UNSC / HSC: מוטבע על נציגים וכיסאות",
+    "crisisSlidesHelpSuffix": "עַמוּד. השאר ריק אם לא נעשה בו שימוש. Deck אמור לאפשר צפייה עבור הקהל שלך (שיתוף קישורים).",
+    "competingMotionsTitle": "תנועות מתחרות (RoP): התייעצות לפני קאוקוס מנחה",
+    "moderatedCaucus": "וועדת מפגש מנחה",
+    "consultation": "יִעוּץ",
+    "competingMotionsHelpPrefix": "בטל את הסימון אם המדריך שלך מדורג א",
+    "competingMotionsHelpMiddle": "תנועה למעלה",
+    "competingMotionsHelpSuffix": "כאשר שניהם בהמתנה.",
+    "procedureProfile": "פרופיל נוהל",
+    "procedureDefault": "RoP של ועדת ברירת מחדל",
+    "procedureEuParliament": "פרלמנט האיחוד האירופי הנחה את RoP",
+    "euGuidedWorkflowChecks": "בדיקות זרימת עבודה מודרכת של האיחוד האירופי",
+    "euGuidedWorkflowHelp": "מאפשר הנחיות בשלב של הפרלמנט של האיחוד האירופי וחוסמי הליבה העיקריים. התעלמו אלא אם פרופיל ההליך מוגדר לפרלמנט האיחוד האירופי.",
+    "committeeRoomCodeSecondGate": "ועדה / קוד חדר (שער שני)",
+    "exactlySixLettersDigits": "בדיוק 6 אותיות או ספרות",
+    "committeeCodePlaceholder": "לְמָשָׁל ECO741",
+    "committeeCodeHelpPrefix": "שישה תווים: ראשי תיבות של חדר + שלוש ספרות (הצעה דטרמיניסטית:",
+    "saveCommittee": "שמור את הוועדה"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "לִפְתוֹחַ",
+    "linkedRoleChair": "כִּסֵא",
+    "linkedRoleDelegate": "נָצִיג",
+    "linkedRoleLinked": "צָמוּד",
+    "addedRow": "נוספה שורה.",
+    "addedSeat": "נוסף מושב {label}.",
+    "updatedRow": "שורה מעודכנת.",
+    "confirmRemoveUnassignedSeat": "להסיר את המושב הלא מוקצה מהמטריצה?",
+    "deletedRow": "שורה נמחקה.",
+    "importedRows": "יובאו {count} שורות.",
+    "skippedDuplicates": "דילג על {count} כפילויות שכבר נמצאות בסגל.",
+    "replacedUnassignedSeats": "החליף את כל המושבים שלא הוקצו.",
+    "generatedRandomCodes": "נוצרו {count} קוד(ים) אקראיים עבור שורות ללא אחד.",
+    "addCommitteesFirst": "הוסף ועדות לאירוע הזה תחילה",
+    "eventCommitteeSessionsLink": "מפגשי אירועים וועדות",
+    "committeeFallback": "וַעֲדָה",
+    "showingOneCommitteeAtATime": "מציג ועדה אחת בכל פעם. החלף ועדה באמצעות הכרטיסיות התחתונות.",
+    "editPlacardCodesSheet": "ערוך גיליון קודי שלטים ->",
+    "rosterHeading": "סגל · {heading}",
+    "seatsSummary": "{count} מושבים.",
+    "linkedDelegatesCannotBeDeleted": "לא ניתן למחוק כאן נציגים מקושרים.",
+    "countryPosition": "מדינה/תפקיד",
+    "placardCode": "קוד פלקט",
+    "assignedAccount": "חשבון שהוקצה",
+    "signupLink": "קישור להרשמה",
+    "actions": "פעולות",
+    "noSeatsYet": "עדיין אין מושבים. הוסף שורות או ייבא CSV.",
+    "allocationSignupLink": "קישור להרשמה להקצאה",
+    "dash": "—",
+    "optional": "אופציונלי",
+    "save": "לְהַצִיל",
+    "remove": "לְהַסִיר",
+    "addOneSeat": "הוסף מושב אחד",
+    "addHeadChairAllocation": "הוסף הקצאת כיסא ראש",
+    "addCoChairAllocation": "הוסף הקצאת יו\"ר משותף",
+    "countryPlaceholder": "לְמָשָׁל צָרְפַת",
+    "placardCodeOptional": "קוד פלקט (אופציונלי)",
+    "placardCodePlaceholder": "לְמָשָׁל DIS-014",
+    "add": "לְהוֹסִיף",
+    "importCsv": "ייבוא ​​CSV",
+    "importHelpPrefix": "מושב אחד בכל שורה:",
+    "importHelpMiddle": "שורת כותרת עם \"מדינה\" היא בסדר. עבודות ייצוא של קבצי UTF-8 מ-Excel/Google Sheets.",
+    "append": "לְצַרֵף",
+    "appendHelp": "מדלג על שמות שכבר נמצאים בוועדה הזו.",
+    "replaceUnassigned": "החלף שלא הוקצה",
+    "replaceUnassignedHelp": "מסיר כל מושב פתוח (לא מקושר לנציג), ואז טוען את הקובץ ושומר על נציגים מקושרים בטוחים.",
+    "replaceUnassignedOnly": "החלף ללא הקצאה בלבד",
+    "csvPlaceholder": "צרפת,DIS-001\\nגרמניה,DIS-002\\nיפן",
+    "parsedRowsSample": "מנותח {count} שורות. לִטעוֹם:",
+    "runImport": "הפעל ייבוא",
+    "generateMissingRandomCodes": "צור קודים אקראיים חסרים"
   }
 }

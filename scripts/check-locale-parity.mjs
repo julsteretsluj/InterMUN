@@ -9,6 +9,7 @@ const locales = [
   "fr",
   "de",
   "pt",
+  "pt-BR",
   "it",
   "nl",
   "ru",

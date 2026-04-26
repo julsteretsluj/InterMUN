@@ -24,6 +24,7 @@ const GOOGLE_LANG = {
   fr: "fr",
   de: "de",
   pt: "pt",
+  "pt-BR": "pt",
   it: "it",
   nl: "nl",
   ru: "ru",

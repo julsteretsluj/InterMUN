@@ -1,7 +1,7 @@
 {
   "common": {
     "continue": "চালিয়ে যান",
-    "back": "ব্যাক",
+    "back": "ফিরে",
     "save": "সংরক্ষণ করুন",
     "cancel": "বাতিল করুন",
     "loading": "লোড হচ্ছে...",
@@ -15,7 +15,7 @@
     "delegateFallbackName": "প্রতিনিধি",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "মহাসচিব মো",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "প্রোফাইলে ফিরে যান"
   },
   "language": {
     "label": "ভাষা",
@@ -38,7 +38,7 @@
     "sources": "সূত্র",
     "resolutions": "রেজুলেশন",
     "speeches": "বক্তৃতা",
-    "running": "চলছে",
+    "running": "চলমান",
     "report": "রিপোর্ট",
     "crisisSlides": "ক্রাইসিস স্লাইড",
     "committeeCode": "কমিটির কোড",
@@ -60,7 +60,7 @@
     "welcomeSignup": "প্রথমে আপনার কনফারেন্স কোড লিখুন, আপনি কীভাবে অংশগ্রহণ করবেন তা চয়ন করুন, তারপর আপনার অ্যাকাউন্ট তৈরি করুন।",
     "welcomeLogin": "প্রথমে আপনার কনফারেন্স কোড লিখুন, আপনি কিভাবে অংশগ্রহণ করবেন তা বেছে নিন, তারপর সাইন ইন করুন।",
     "conferenceTitle": "আপনার সম্মেলনে যোগদান করুন",
-    "conferenceDescription": "আপনার আয়োজকদের থেকে কনফারেন্স কোড লিখুন. এরপর আপনি আপনার ভূমিকা বেছে নেবেন, তারপর {মোড}।",
+    "conferenceDescription": "আপনার আয়োজকদের থেকে কনফারেন্স কোড লিখুন. এরপর আপনি আপনার ভূমিকা বেছে নেবেন, তারপর {মোড}। {mode}",
     "conferenceCode": "কনফারেন্স কোড",
     "conferenceCodeHelp": "পুরো-কনফারেন্স কোড (সমস্ত কমিটি)। স্থান উপেক্ষা করা; ম্যাচিং কেস-সংবেদনশীল।",
     "checking": "পরীক্ষা করা হচ্ছে...",
@@ -156,8 +156,33 @@
     "timer": "টাইমার",
     "smtProfile": "প্রোফাইল"
   },
+  "setupPage": {
+    "title": "সুপাবেস কনফিগার করা নেই",
+    "body": "এই স্থাপনায় সর্বজনীন সুপাবেস পরিবেশের ভেরিয়েবল অনুপস্থিত। সেগুলিকে আপনার হোস্টে যুক্ত করুন (উদাহরণস্বরূপ Vercel → প্রজেক্ট → সেটিংস → এনভায়রনমেন্ট ভেরিয়েবল), তারপর পুনরায় স্থাপন করুন:",
+    "valuesHint": "মানগুলি সুপাবেস → প্রজেক্ট সেটিংস → API এ রয়েছে৷ আপনি যদি পূর্বরূপ স্থাপনা ব্যবহার করেন তবে উত্পাদন এবং পূর্বরূপের জন্য একই নাম ব্যবহার করুন।",
+    "tryAgainLink": "পুনঃনিয়োগ করার পরে আবার সাইন ইন করার চেষ্টা করুন৷"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "অবৈধ সাইন আপ লিঙ্ক",
+    "invalidLinkBody": "এই বরাদ্দ লিঙ্ক প্রয়োজনীয় বিবরণ অনুপস্থিত. একটি নতুন সাইন আপ লিঙ্কের জন্য আপনার চেয়ার বা SMT জিজ্ঞাসা করুন।",
+    "allocationNotFoundTitle": "বরাদ্দ পাওয়া যায়নি",
+    "allocationNotFoundBody": "এই জাতি/পদটি নির্বাচিত কমিটিতে আর উপলব্ধ নেই।",
+    "allocationTakenTitle": "ইতিমধ্যে বরাদ্দ নেওয়া হয়েছে",
+    "allocationTakenBody": "{country} ইতিমধ্যেই অন্য অ্যাকাউন্টের দ্বারা দাবি করা হয়েছে৷ একটি ভিন্ন বরাদ্দ চয়ন করুন.",
+    "submitFailedTitle": "অনুরোধ জমা দেওয়া যায়নি",
+    "requestSubmittedTitle": "সাইন আপ অনুরোধ জমা দেওয়া হয়েছে",
+    "requestSubmittedBody": "{country}-এর জন্য আপনার অনুরোধ অনুমোদনের জন্য কমিটির সভাপতির কাছে পাঠানো হয়েছে।",
+    "requestSubmittedHint": "একবার অনুমোদিত হলে, এই লিঙ্কটি আবার খুলুন বা এগিয়ে যেতে কমিটি সাইন-ইন চালিয়ে যান।",
+    "continueCommitteeSignIn": "কমিটি সাইন-ইন চালিয়ে যান"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "প্রথমে একটি কনফারেন্স ইভেন্ট নির্বাচন করুন।",
+    "enterConferenceCode": "কনফারেন্স কোড লিখুন",
+    "title": "রুম কোড এবং চেয়ার",
+    "subtitle": "প্রতিটি সেশনের জন্য সেকেন্ড-গেট কমিটির কোড সেট করুন এবং ডেলিগেট ড্যাশবোর্ড ব্যবহার না করে ডেস চেয়ারকে আমন্ত্রণ জানান বা প্রচার করুন।"
+  },
   "delegateDashboard": {
-    "welcome": "স্বাগতম, {পতাকা} {দেশের} প্রতিনিধি",
+    "welcome": "স্বাগতম, {পতাকা} {দেশের} প্রতিনিধি {flag} {country}",
     "activeCommitteeIntro": "সক্রিয় কমিটি: {line}।",
     "activeCommitteeBody": "এই কমিটির সবার সাথে কাউন্টডাউন তারিখ শেয়ার করা হয়। আপনার প্রস্তুতি, অবস্থান এবং নথিগুলি আপনার অ্যাকাউন্টের সাথে থাকে।",
     "jumpTo": "ঝাঁপ দাও",
@@ -314,7 +339,7 @@
       "ods": "জাতিসংঘের অফিসিয়াল ডকুমেন্ট সিস্টেম (ODS)",
       "digitalLibrary": "জাতিসংঘের ডিজিটাল লাইব্রেরি",
       "unNews": "জাতিসংঘের খবর",
-      "yearbook": "জাতিসংঘের ইয়ারবুক",
+      "yearbook": "ইউএন ইয়ারবুক",
       "unPress": "জাতিসংঘ প্রেস",
       "treatyCollection": "জাতিসংঘের চুক্তি সংগ্রহ",
       "avl": "আন্তর্জাতিক আইনের জাতিসংঘের অডিওভিজুয়াল লাইব্রেরি",
@@ -381,7 +406,7 @@
       "positionPaperGuideTitle": "পজিশন পেপার গাইড",
       "positionPaperGuideBlurb": "চূড়ান্ত PDF প্রস্তুত করার সময় স্থানধারক নির্দেশিকা ডাউনলোড করুন।",
       "downloadPlaceholderGuide": "প্লেসহোল্ডার গাইড ডাউনলোড করুন",
-      "addDocument": "ডকুমেন্ট যোগ করুন",
+      "addDocument": "নথি যোগ করুন",
       "newDocumentTitle": "নতুন নথি",
       "editDocumentTitle": "নথি সম্পাদনা করুন",
       "typeLabel": "টাইপ",
@@ -467,7 +492,7 @@
       "untitled": "শিরোনামহীন",
       "voteTypes": {
         "motion": "গতি",
-        "amendment": "সংশোধন",
+        "amendment": "সংশোধনী",
         "resolution": "রেজোলিউশন"
       },
       "roll": {
@@ -530,7 +555,7 @@
         }
       },
       "edit": "সম্পাদনা করুন",
-      "guideDocument": "গাইড নথি",
+      "guideDocument": "গাইড ডকুমেন্ট",
       "additionalNotes": "অতিরিক্ত নোট",
       "noContentYet": "কোন বিষয়বস্তু এখনও.",
       "titlePlaceholder": "শিরোনাম",
@@ -586,7 +611,7 @@
             "definition": "একটি সংজ্ঞায়িত উপবিষয়ক স্বল্প সময়ের বক্তৃতা সহ স্ট্রাকচার্ড বিতর্ক সেগমেন্ট।"
           },
           "unmoderated_caucus": {
-            "term": "অনিয়ন্ত্রিত ককাস",
+            "term": "আনমডারেটেড ককাস",
             "definition": "অনানুষ্ঠানিক আলোচনার সময়কাল যেখানে প্রতিনিধিরা স্বাধীনভাবে খসড়া এবং ধারণা একত্রিত করতে যান।"
           },
           "draft_resolution": {
@@ -594,7 +619,7 @@
             "definition": "চূড়ান্ত ভোট গ্রহণ এবং গ্রহণের আগে প্রস্তাবিত কমিটির কর্মকাণ্ডের ওয়ার্কিং টেক্সট।"
           },
           "amendment": {
-            "term": "সংশোধন",
+            "term": "সংশোধনী",
             "definition": "খসড়া টেক্সট পরিবর্তন প্রস্তাবিত, হয় বন্ধুত্বপূর্ণ বা বন্ধুত্বপূর্ণ হিসাবে ভোট."
           },
           "operative_clause": {
@@ -710,7 +735,7 @@
             "definition": "তথ্যের উত্স স্পষ্টভাবে উল্লেখ করা যাতে দাবিগুলি যাচাই করা যায় এবং প্রাসঙ্গিক করা যায়।"
           },
           "verified_reporting": {
-            "term": "যাচাইকৃত রিপোর্টিং",
+            "term": "যাচাইকৃত প্রতিবেদন",
             "definition": "প্রতিদ্বন্দ্বিতাপূর্ণ তথ্য প্রকাশ করার আগে সাংবাদিকতার মানদণ্ডের অনুমোদন প্রয়োজন।"
           },
           "editorial_independence": {
@@ -785,9 +810,9 @@
       "add": "যোগ করুন",
       "noIdeasYet": "এখনও কোন ধারণা.",
       "ideaLabel": "আইডিয়া",
-      "ideaFallback": "ধারণা {সংখ্যা}",
+      "ideaFallback": "ধারণা {সংখ্যা} {number}",
       "linkedDoc": "লিঙ্কড ডক",
-      "addedOn": "যোগ করা হয়েছে {তারিখ}",
+      "addedOn": "যোগ করা হয়েছে {তারিখ} {date}",
       "edit": "সম্পাদনা করুন",
       "delete": "মুছুন",
       "ideaDocument": "ধারণা দলিল",
@@ -836,12 +861,12 @@
       "searchHint": "রুমে মিলগুলি হাইলাইট করতে একটি দেশ, প্রতিনিধির নাম, স্কুল, সর্বনাম বা \"খালি\" টাইপ করুন। প্রথম ম্যাচে ঝাঁপ দিতে এন্টার টিপুন; Esc পরিষ্কার করে। খালি আসনে ঝাঁপ দিতে খালিতে ক্লিক করুন।",
       "findLabel": "একটি প্রতিনিধি দল বা মঞ্চ সদস্য খুঁজুন",
       "searchPlaceholder": "দেশ, নাম, স্কুল...",
-      "matchesCount": "{total}টি আসনের মধ্যে {match} মিলছে",
+      "matchesCount": "{total}টি আসনের মধ্যে {match} মিলছে {matches}",
       "searchAria": "প্রতিনিধি দল অনুসন্ধান করুন",
       "virtualRoomVacant": "খালি",
       "profileAria": "প্রোফাইল দেখুন: {country}",
-      "vacantSeatAria": "খালি আসন",
-      "placardAria": "প্ল্যাকার্ড {দেশ}",
+      "vacantSeatAria": "শূন্য আসন",
+      "placardAria": "প্ল্যাকার্ড {দেশ} {country}",
       "gavelAria": "গেভেল"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "উদ্দেশ্য লেবেল",
         "purposeHelpBody": "এই পাঠ্যটি আপনার দেশের নামের সাথে যুক্ত করা হয়েছে যাতে চেয়ারগুলি দেখতে পারে আপনি কেন মেঝেতে অনুরোধ করছেন৷",
         "purposePlaceholder": "যেমন সমর্থন + সংশোধন ওভারভিউ",
-        "requesting": "অনুরোধ করা হচ্ছে..."
+        "requesting": "অনুরোধ করা হচ্ছে...",
+        "rollPromptTitle": "চেয়ার অনুমোদন প্রয়োজন",
+        "rollPromptBodyPickStatus": "সেশন শুরু হয়েছে। কথা বলা এবং ভোট দেওয়া আনলক করতে আপনার রোল-কল স্ট্যাটাস বেছে নিন।",
+        "rollPromptBodyWaitSessionStart": "কমিটির অধিবেশন শুরুর জন্য চেয়ারম্যানের অপেক্ষায়।",
+        "rollPromptBodyWaitRollPrompt": "রোল-কল প্রম্পটের জন্য অপেক্ষা করা হচ্ছে।",
+        "rollPromptBodyMarkedAbsent": "আপনি বর্তমানে অনুপস্থিত হিসাবে চিহ্নিত। চেয়ারকে বলুন আপনি বক্তৃতা এবং ভোট দেওয়ার জন্য উপস্থিত চিহ্নিত করতে।",
+        "rollPromptBodyChecking": "আপনার রোলের স্থিতি পরীক্ষা করা হচ্ছে...",
+        "rollPromptSaving": "সংরক্ষণ করা হচ্ছে...",
+        "rollPromptPresent": "বর্তমান",
+        "rollPromptPresentVoting": "উপস্থিত এবং ভোটদান"
       },
       "motionVoting": {
         "votingProcedure": "ভোট পদ্ধতি",
@@ -865,7 +899,7 @@
         "motioner": "আন্দোলনকারী",
         "majority": "সংখ্যাগরিষ্ঠ",
         "majoritySimple": "সরল",
-        "tally": "হ্যাঁ {হ্যাঁ} - না {না} - মোট {মোট}",
+        "tally": "হ্যাঁ {হ্যাঁ} - না {না} - মোট {মোট} {yes} {no} {total}",
         "help": "মঞ্চটি সেশনে প্রতিটি প্রতিনিধি দলের ভোট রেকর্ড করে। মোশন ভোট শুধুমাত্র হ্যাঁ বা না ব্যবহার করে (কোন বিরত থাকুন)। মোট শুধুমাত্র প্ল্যাকার্ড গণনা করা হয় যেখানে হ্যাঁ বা না রেকর্ড করা হয়েছে; অনুপস্থিত প্রতিনিধিদের এড়িয়ে যাওয়া হয়।"
       },
       "activeMotion": {
@@ -882,13 +916,13 @@
         "speakerTimeLeftTotal": "স্পিকারের সময় (বাম / মোট)",
         "perSpeaker": "(স্পিকার প্রতি)",
         "paused": "(বিরতি)",
-        "pauseReason": "বিরতি: {কারণ}"
+        "pauseReason": "বিরতি: {কারণ} {reason}"
       },
       "floorStatus": {
         "sessionTime": "সেশনের সময়",
         "limit": "সীমা",
-        "limitRemaining": "{মান} বাকি",
-        "limitOverBy": "{মান} দ্বারা বেশি",
+        "limitRemaining": "{মান} বাকি {value}",
+        "limitOverBy": "{মান} দ্বারা বেশি {value}",
         "dais": "ডাইস",
         "pinned": "পিন করা হয়েছে",
         "viewFullAnnouncement": "সম্পূর্ণ ঘোষণা দেখুন",
@@ -900,6 +934,13 @@
         "daisAnnouncement": "ডাইস ঘোষণা",
         "close": "বন্ধ"
       },
+      "committeeControl": {
+        "sessionNameLabel": "সেশনের নাম",
+        "sessionNamePlaceholder": "যেমন সকালের অধিবেশন",
+        "sessionNameSaving": "সংরক্ষণ করা হচ্ছে...",
+        "sessionNameSaved": "সংরক্ষিত",
+        "sessionNameHint": "স্বয়ংক্রিয়ভাবে সংরক্ষণ করে এবং সেশন ইতিহাসে প্রদর্শিত হয়।"
+      },
       "history": {
         "title": "সেশনের ইতিহাস",
         "savedCount": "{count} সংরক্ষিত",
@@ -909,8 +950,8 @@
         "delete": "মুছুন",
         "deleteConfirm": "ইতিহাস থেকে এই অধিবেশন মুছে ফেলবেন?",
         "sessionNamePrompt": "সেশনের নাম",
-        "rangeClosed": "{পরিসীমা}",
-        "rangeOngoing": "{পরিসীমা} -> চলমান"
+        "rangeClosed": "{পরিসীমা} {range}",
+        "rangeOngoing": "{পরিসীমা} -> চলমান {range}"
       },
       "timerPage": {
         "title": "টাইমার",
@@ -933,7 +974,7 @@
         "untitled": "শিরোনামহীন",
         "noOpenMotionWarning": "ভোটের জন্য কোন আন্দোলন উন্মুক্ত নয়। প্রথমে একটি ভোট খুলুন, বা সাধারণ ফ্লোরে উদ্দেশ্য পরিবর্তন করুন।",
         "clock": "ঘড়ি",
-        "running": "চলছে",
+        "running": "চলমান",
         "paused": "বিরতি দেওয়া হয়েছে",
         "saveToEnablePauseStart": "বিরতি/স্টার্ট সক্ষম করতে টাইমার সংরক্ষণ করুন।",
         "pauseReasonLogged": "বিরতির কারণ (লগ করা)",
@@ -947,7 +988,7 @@
         "speechNotesCurrentSpeaker": "স্পিচ নোট (বর্তমান স্পিকার)",
         "speechNotesHelp": "নোটগুলি বর্তমান স্পিকার টাইমার পাঠ্যের সাথে আবদ্ধ থাকে এবং যখন স্পিকার তালিকায় কেউ বর্তমান চিহ্নিত করে, তাদের প্রতিনিধি দলকে রেফারেন্সের জন্য সংরক্ষণ করা হয়।",
         "timerFloorLabel": "টাইমার (মেঝে):",
-        "speakerListCurrent": "বক্তা তালিকা (বর্তমান):",
+        "speakerListCurrent": "বক্তার তালিকা (বর্তমান):",
         "noCurrentDelegation": "স্পিকার তালিকায় কোনো প্রতিনিধি দলকে বর্তমান হিসেবে চিহ্নিত করা হয়নি।",
         "note": "দ্রষ্টব্য",
         "notePlaceholder": "পয়েন্ট, POI, টোন, ফলো-আপ...",
@@ -971,13 +1012,6 @@
         "pausedForCommittee": "কমিটির জন্য টাইমার বিরতি.",
         "alreadyRunning": "টাইমার ইতিমধ্যেই চলছে৷",
         "runningForCommittee": "কমিটির জন্য টাইমার চলমান."
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1002,7 +1036,7 @@
     "daisListed": "ডাইস (তালিকাভুক্ত)",
     "committeeCodeSecondGate": "কমিটি/রুম কোড (দ্বিতীয় গেট)",
     "seats": "আসন",
-    "seatsFilledAllocated": "{পূর্ণ} ভরা · {মোট} বরাদ্দ",
+    "seatsFilledAllocated": "{পূর্ণ} ভরা · {মোট} বরাদ্দ {filled} {total}",
     "resolutions": "রেজুলেশন",
     "openVotes": "খোলা ভোট",
     "editMetadataIntro": "কমিটির অধিবেশন মেটাডেটা এবং চেয়ারের নাম সম্পাদনা করুন",
@@ -1076,10 +1110,10 @@
     "delegatesMatrix": "প্রতিনিধি ম্যাট্রিক্স",
     "clearAllChairNotes": "সমস্ত চেয়ার নোট সাফ করুন",
     "searchCountry": "দেশ অনুসন্ধান করুন...",
-    "roomStats": "{প্ল্যাকার্ড} প্ল্যাকার্ড · {পতাকা লাগানো} চেয়ার নোট সহ · রোল রেকর্ড করা হয়েছে {count}",
+    "roomStats": "{প্ল্যাকার্ড} প্ল্যাকার্ড · {পতাকা লাগানো} চেয়ার নোট সহ · রোল রেকর্ড করা হয়েছে {count} {placards} {flagged}",
     "loading": "লোড হচ্ছে...",
     "noDelegationsMatch": "কোনো প্রতিনিধি আপনার অনুসন্ধানের সাথে মেলে না।",
-    "rollPrefix": "রোল {লেবেল}",
+    "rollPrefix": "রোল {লেবেল} {label}",
     "linkedAccount": "লিঙ্ক করা অ্যাকাউন্ট",
     "vacantPlacard": "খালি প্ল্যাকার্ড",
     "delegateProfile": "প্রতিনিধি প্রোফাইল ->",
@@ -1188,7 +1222,7 @@
   "adminDashboard": {
     "newEventTitle": "নতুন সম্মেলন অনুষ্ঠান",
     "newEventBody": "একটি কনফারেন্স কোড (প্রথম গেট) এবং প্রথম কমিটির সেশন (দ্বিতীয় গেট) তৈরি করে। <code>next=/admin</code> ব্যবহার করুন যাতে আপনি সেটআপের পরে এখানে ফিরে আসেন।",
-    "openConferenceSetup": "কনফারেন্স সেটআপ খুলুন",
+    "openConferenceSetup": "সম্মেলন সেটআপ খুলুন",
     "smtTitle": "সচিবালয় (এসএমটি)",
     "smtBody": "ইমেলের মাধ্যমে নতুন SMT অ্যাকাউন্টগুলিকে আমন্ত্রণ জানান, অথবা একজন বিদ্যমান ব্যবহারকারীকে প্রতিনিধি, চেয়ার বা SMT-এ পরিবর্তন করুন৷ কাউকে SMT-এ উন্নীত করা তাদের ইভেন্ট চলাকালীন সম্পূর্ণ সচিবালয়ের ড্যাশবোর্ড ব্যবহার করতে দেয়।",
     "inviteNeedsKey": "ইমেল আমন্ত্রণগুলির সার্ভারে <code>SUPABASE_SERVICE_ROLE_KEY</code> প্রয়োজন৷ যারা ইতিমধ্যে সাইন আপ করেছেন তাদের জন্য আপনি এখনও <strong>ভূমিকা সেট করুন</strong> ব্যবহার করতে পারেন৷",
@@ -1210,7 +1244,7 @@
     "titlePipeline": "স্ট্যাটাস পোর্টাল (পাইপলাইন)",
     "selectEventFirst": "প্রথমে একটি সক্রিয় ইভেন্ট নির্বাচন করুন।",
     "noSessionsYet": "এই ইভেন্টের জন্য কোন কমিটির সেশন এখনও পাওয়া যায়নি.",
-    "intro": "প্রতিনিধিরা অনুমোদনের পরে <strong>মুলতুবি</strong> থেকে <strong>নিশ্চিত</strong>-এ চলে যায়৷ একটি প্রতিনিধি হিসাবে তাদের বিধান নিশ্চিত করা এবং স্বাগতম ইমেল ট্রিগার.",
+    "intro": "প্রতিনিধিরা অনুমোদনের পরে <strong>মুলতুবি</strong> থেকে <strong>নিশ্চিত</strong>-এ চলে যায়৷ একটি প্রতিনিধি হিসাবে বিধান নিশ্চিত করা এবং স্বাগতম ইমেল ট্রিগার.",
     "pending": "মুলতুবি",
     "confirmed": "নিশ্চিত করা হয়েছে",
     "nothingPending": "কিছুই মুলতুবি নেই.",
@@ -1256,29 +1290,200 @@
     "creating": "তৈরি করা হচ্ছে...",
     "submit": "ইভেন্ট + কমিটি তৈরি করুন এবং প্রবেশ করুন"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "সম্মেলন, বরাদ্দ, এবং পাসওয়ার্ড প্রয়োজন.",
+      "mustBeSignedIn": "আপনাকে অবশ্যই সাইন ইন করতে হবে।",
+      "contextMismatch": "আপনার কমিটির প্রসঙ্গ এই সাইন-ইন এর সাথে মেলে না। প্রয়োজনে আপনার সম্মেলন এবং কমিটির কোড পুনরায় লিখুন।",
+      "conferenceSelectionMismatch": "আপনার সম্মেলন নির্বাচন এই কমিটির সাথে মেলে না। আপনার সম্মেলন এবং কমিটির কোড পুনরায় লিখুন.",
+      "conferenceSelectionMismatchWithBackHint": "আপনার সম্মেলন নির্বাচন এই কমিটির সাথে মেলে না। ফিরে যান এবং সঠিক কনফারেন্স কোড, তারপর কমিটি কোড লিখুন।",
+      "conferenceNotFound": "সম্মেলন পাওয়া যায়নি।",
+      "noAllocationForConference": "এই সম্মেলনের জন্য আপনার কোন বরাদ্দ নেই। চালিয়ে যাওয়ার আগে আপনাকে একটি চেয়ার বরাদ্দ করতে বলুন।",
+      "allocationMismatch": "বরাদ্দ আপনার অ্যাসাইনমেন্ট মেলে না. ঠিক যেমন বরাদ্দ করা হয়েছে আপনার দেশ বা অবস্থান লিখুন (ব্যবধান এবং উচ্চারণ ভিন্ন হতে পারে)।",
+      "incorrectCommitteePassword": "ভুল কমিটির পাসওয়ার্ড।",
+      "requiredConferenceAndStaffPassword": "সম্মেলন এবং কর্মীদের সেকেন্ডারি পাসওয়ার্ড প্রয়োজন.",
+      "onlySmtOrAdminBypass": "শুধুমাত্র সচিবালয় বা ওয়েবসাইট অ্যাডমিনরা এই সাইন-ইন ব্যবহার করতে পারেন।",
+      "incorrectStaffPassword": "ভুল স্টাফ সেকেন্ডারি পাসওয়ার্ড।",
+      "chooseConference": "একটি সম্মেলন চয়ন করুন.",
+      "passwordMinLength": "পাসওয়ার্ড কমপক্ষে 6 অক্ষরের হতে হবে।",
+      "passwordsDoNotMatch": "পাসওয়ার্ড মেলে না।",
+      "notSignedIn": "সাইন ইন করা হয়নি",
+      "onlyChairSmtAdminSetPassword": "শুধুমাত্র চেয়ার, SMT, এবং ওয়েবসাইট অ্যাডমিনরা কমিটির পাসওয়ার্ড সেট করতে পারেন।",
+      "onlyChairSmtAdminRemovePassword": "শুধুমাত্র চেয়ার, SMT, এবং ওয়েবসাইট অ্যাডমিনরা কমিটির পাসওয়ার্ড মুছে ফেলতে পারেন।"
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "প্রথমে কনফারেন্স কোড (ইভেন্ট গেট) সহ একটি ইভেন্ট বেছে নিন।",
+      "notSignedIn": "সাইন ইন করা হয়নি",
+      "onlySmtManageMatrix": "শুধুমাত্র সচিবালয়ই বরাদ্দের ম্যাট্রিক্স পরিচালনা করতে পারে।",
+      "committeeNotInActiveEvent": "এই কমিটি সক্রিয় ইভেন্টের অংশ নয়।",
+      "requiredCommitteeAndCountry": "কমিটি এবং দেশ/অবস্থান প্রয়োজন।",
+      "countryTooLong": "দেশ/অবস্থান অনেক বড়।",
+      "codeTooLong": "প্ল্যাকার্ড কোড অনেক বড়।",
+      "couldNotCreateAllocation": "বরাদ্দ তৈরি করা যায়নি।",
+      "requiredAllocationAndCountry": "বরাদ্দ এবং দেশ/অবস্থান প্রয়োজন।",
+      "allocationNotFound": "বরাদ্দ পাওয়া যায়নি।",
+      "missingAllocation": "অনুপস্থিত বরাদ্দ.",
+      "seatLinkedToDelegate": "এই আসনটি একজন প্রতিনিধির সাথে যুক্ত। Supabase-এ তাদের লিঙ্কমুক্ত করুন বা মুছে ফেলার আগে পুনরায় বরাদ্দ করুন।",
+      "selectCommittee": "একটি কমিটি নির্বাচন করুন।",
+      "couldNotParseCsv": "CSV পার্স করা যায়নি।",
+      "noDataRowsFound": "কোনো ডেটা সারি পাওয়া যায়নি (প্রতি লাইনে অন্তত একটি দেশ/অবস্থান প্রয়োজন)।",
+      "importLimitedRows": "আমদানি সীমাবদ্ধ {max} সারিতে। আপনার ফাইল বিভক্ত.",
+      "rowTooLong": "সারি অনেক লম্বা: {সারি}… {row}",
+      "codeTooLongOnRow": "সারিতে অনেক বড় কোড: {row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "প্রথমে কনফারেন্স কোড (ইভেন্ট গেট) সহ একটি ইভেন্ট বেছে নিন।",
+      "notSignedIn": "সাইন ইন করা হয়নি",
+      "onlySmtChangeCodes": "শুধুমাত্র সচিবালয় এখানে কমিটির কোড পরিবর্তন করতে পারে।",
+      "committeeNotInActiveEvent": "এই কমিটি আপনার সক্রিয় ইভেন্টের অংশ নয়।",
+      "missingCommittee": "অনুপস্থিত কমিটি।",
+      "invalidCommitteeCode": "কমিটি/রুম কোড অবশ্যই 6 অক্ষর বা সংখ্যার হতে হবে (যেমন ECO741)।",
+      "unauthorized": "অননুমোদিত।",
+      "codeSaved": "কোড সংরক্ষিত। প্রতিনিধিরা এটিকে কনফারেন্স কোডের পরে দ্বিতীয় গেট হিসেবে ব্যবহার করেন।",
+      "invalidEmail": "একটি বৈধ ইমেল ঠিকানা লিখুন.",
+      "onlySmtInviteChair": "শুধুমাত্র সচিবালয় চেয়ার আমন্ত্রণ পাঠাতে পারে।",
+      "missingServiceRoleKey": "সার্ভারে SUPABASE_SERVICE_ROLE_KEY অনুপস্থিত৷ এটিকে ডিপ্লয়মেন্ট env এ যুক্ত করুন (ব্রাউজারে কখনই প্রকাশ করবেন না)।",
+      "missingPublicAppUrl": "আপনার সর্বজনীন সাইটের URL এ NEXT_PUBLIC_APP_URL সেট করুন (যেমন https://your-app.vercel.app) তাই সঠিকভাবে লিঙ্কগুলিকে পুনঃনির্দেশে আমন্ত্রণ জানান৷",
+      "emailAlreadyHasAccount": "সেই ইমেলটির ইতিমধ্যেই একটি অ্যাকাউন্ট রয়েছে৷ অন্য আমন্ত্রণ পাঠানোর পরিবর্তে নীচে \"অনুদান চেয়ার রোল\" ব্যবহার করুন।",
+      "inviteSentButRoleSetFailed": "আমন্ত্রণ পাঠানো হয়েছে, কিন্তু প্রোফাইলে চেয়ারের ভূমিকা সেট করা যায়নি: {ত্রুটি}৷ তারা গ্রহণ করার পরে \"অনুদান চেয়ার ভূমিকা\" ব্যবহার করুন। {error}",
+      "inviteSentSuccess": "আমন্ত্রণ ইমেল পাঠানো হয়েছে {email} এ। তারা তাদের পাসওয়ার্ড সেট করার পরে তারা একটি চেয়ার হবে.",
+      "onlySmtGrantChair": "শুধুমাত্র সচিবালয় চেয়ার রোল মঞ্জুর করতে পারে।",
+      "noAccountForEmail": "সেই ইমেলের সাথে এখনও কোনো অ্যাকাউন্ট নেই। প্রথমে একটি চেয়ার আমন্ত্রণ পাঠান।",
+      "promotedToChairSuccess": "{email}-এর প্রোফাইল এখন একটি মঞ্চের চেয়ার।"
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "আপনাকে অবশ্যই সাইন ইন করতে হবে।",
+      "onlyDelegateOrChair": "শুধুমাত্র প্রতিনিধি/চেয়ার অ্যাকাউন্টগুলি বরাদ্দ সাইন-আপের জন্য অনুরোধ করতে পারে।",
+      "allocationNotFound": "বরাদ্দ পাওয়া যায়নি।",
+      "allocationAlreadyAssigned": "সেই বরাদ্দ ইতিমধ্যে বরাদ্দ করা হয়েছে।",
+      "requiredConferenceAllocationEmail": "সম্মেলন, বরাদ্দ, এবং প্রতিনিধি ইমেল প্রয়োজন."
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "প্রথমে সাইন ইন করুন.",
+      "onlyDelegatesCanExport": "শুধুমাত্র প্রতিনিধিরা তাদের উপকরণ রপ্তানি করতে পারেন।",
+      "accountHasNoEmail": "আপনার অ্যাকাউন্টে কোনো ইমেল ঠিকানা সেট নেই.",
+      "rangeTodayUtc": "আজ (UTC)",
+      "rangeAllTime": "সব সময়",
+      "emailSubject": "InterMUN উপকরণ রপ্তানি ({range})",
+      "emailSendConfigHint": "সার্ভারে SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS এবং ঐচ্ছিকভাবে MATERIALS_EXPORT_FROM সেট করুন৷",
+      "exportEmailedTo": "{email} এ ইমেল রপ্তানি করুন। যদি আপনি এটি দেখতে না পান, স্প্যাম/জাঙ্ক চেক করুন."
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "ইন্টারমুন",
+      "welcomeSubject": "ইন্টারমুনে স্বাগতম",
+      "welcomeLine1": "ইন্টারমুনে স্বাগতম।",
+      "welcomeConfirmedFor": "আপনার প্রতিনিধি অ্যাকাউন্টের জন্য নিশ্চিত করা হয়েছে: {country}।",
+      "welcomeLine2": "আপনি এখন কমিটিতে সাইন-ইন করতে এবং লাইভ সেশনে যোগ দিতে পারেন।",
+      "welcomeLine3": "মেঝেতে দেখা হবে।",
+      "chairReminderSubject": "প্রতিনিধি বরাদ্দের অনুরোধ মুলতুবি অনুমোদন",
+      "chairReminderLine1": "একজন প্রতিনিধি একটি বরাদ্দের অনুরোধ করেছেন এবং চেয়ার পর্যালোচনার প্রয়োজন।",
+      "chairReminderConference": "সম্মেলন: {সম্মেলন} {conference}",
+      "chairReminderAllocation": "অনুরোধ করা বরাদ্দ: {country}",
+      "chairReminderDelegate": "প্রতিনিধি: {name}",
+      "chairReminderEmail": "অ্যাকাউন্ট ইমেল: {email}",
+      "chairReminderLine2": "অনুগ্রহ করে চেয়ার বরাদ্দ ম্যাট্রিক্সে এই অনুরোধটি অনুমোদন বা প্রত্যাখ্যান করুন:"
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "ঘটনা বিবরণ",
+    "selectConferenceFirst": "প্রথমে ইভেন্ট গেট সহ একটি সম্মেলন নির্বাচন করুন, তারপরে এখানে ফিরে আসুন।",
+    "committeeSessionsTitle": "এই অনুষ্ঠানে কমিটির অধিবেশন",
+    "committeeSessionsBody": "কমিটির অধিবেশন শিরোনাম (এজেন্ডা বিষয়) রেকর্ডের জন্য এখানে থাকুন; এসএমটি হোম গ্রিড অফিসিয়াল কমিটির নাম, সংক্ষিপ্ত রূপ, চেয়ার এবং একটি ছোট ডিসপ্লে কোড দেখায়। কমিটি/রুম কোড (দ্বিতীয় গেট) এই ইভেন্টের মধ্যে অনন্য থাকতে হবে।",
+    "noCommitteeSessions": "এই ইভেন্টের জন্য কোন কমিটির অধিবেশন নেই.",
+    "eventName": "ইভেন্টের নাম",
+    "tagline": "ট্যাগলাইন",
+    "conferenceCodeFirstGate": "কনফারেন্স কোড (প্রথম গেট)",
+    "saved": "সংরক্ষিত",
+    "saving": "সংরক্ষণ করা হচ্ছে...",
+    "saveConferenceEvent": "কনফারেন্স ইভেন্ট সংরক্ষণ করুন",
+    "errorImageFile": "একটি ইমেজ ফাইল চয়ন করুন.",
+    "errorImageTooLarge": "ছবি খুব বড় (সর্বোচ্চ 6 MB)।",
+    "errorCommitteeCodeMissing": "কমিটির কোড অনুপস্থিত.",
+    "errorPublicUrl": "আপলোড করা ছবির জন্য সর্বজনীন URL সমাধান করা যায়নি৷",
+    "errorUploadFailed": "আপলোড ব্যর্থ হয়েছে.",
+    "sessionTitle": "অধিবেশন শিরোনাম",
+    "chamberLabel": "চেম্বার/লেবেল",
+    "officialCommitteeName": "অফিসিয়াল কমিটির নাম (SMT গ্রিড)",
+    "officialCommitteeNamePlaceholder": "যেমন বিশ্ব স্বাস্থ্য সংস্থা",
+    "chairNames": "চেয়ারের নাম",
+    "chairNamesPlaceholder": "কমা দ্বারা পৃথক করা, যেমন অ্যালেক্স কিম, জর্ডান লি",
+    "committeeLogo": "কমিটির লোগো",
+    "uploading": "আপলোড হচ্ছে...",
+    "crisisSlidesUrl": "ক্রাইসিস স্লাইড (গুগল স্লাইড ইউআরএল)",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "ক্রাইসিস স্লাইড",
+    "crisisSlidesHelpPrefix": "FWC/UNSC/HSC-এর জন্য: প্রতিনিধিদের 'এবং চেয়ারে' এম্বেড করা",
+    "crisisSlidesHelpSuffix": "পৃষ্ঠা ব্যবহার না করলে খালি রাখুন। ডেক আপনার দর্শকদের জন্য দেখার অনুমতি দেওয়া উচিত (লিঙ্ক ভাগ করা)।",
+    "competingMotionsTitle": "প্রতিযোগিতামূলক গতি (RoP): মডারেটেড ককাসের আগে পরামর্শ",
+    "moderatedCaucus": "মডারেটেড ককাস",
+    "consultation": "পরামর্শ",
+    "competingMotionsHelpPrefix": "আপনার হ্যান্ডবুকের র‍্যাঙ্ক a কিনা তা আনচেক করুন",
+    "competingMotionsHelpMiddle": "উপরে গতি",
+    "competingMotionsHelpSuffix": "যখন উভয়ই বিচারাধীন।",
+    "procedureProfile": "পদ্ধতি প্রোফাইল",
+    "procedureDefault": "ডিফল্ট কমিটি RoP",
+    "procedureEuParliament": "EU পার্লামেন্ট নির্দেশিত RoP",
+    "euGuidedWorkflowChecks": "ইইউ নির্দেশিত ওয়ার্কফ্লো চেক",
+    "euGuidedWorkflowHelp": "EU পার্লামেন্ট ফেজ নির্দেশিকা এবং মূল পদ্ধতিগত ব্লকার সক্ষম করে। পদ্ধতি প্রোফাইল ইইউ পার্লামেন্টে সেট না করা পর্যন্ত উপেক্ষা করা হয়।",
+    "committeeRoomCodeSecondGate": "কমিটি/রুম কোড (দ্বিতীয় গেট)",
+    "exactlySixLettersDigits": "ঠিক 6টি অক্ষর বা অঙ্ক",
+    "committeeCodePlaceholder": "যেমন ECO741",
+    "committeeCodeHelpPrefix": "ছয়টি অক্ষর: চেম্বারের আদ্যক্ষর + তিন অঙ্ক (নির্ধারক পরামর্শ:",
+    "saveCommittee": "কমিটি সংরক্ষণ করুন"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "খোলা",
+    "linkedRoleChair": "চেয়ার",
+    "linkedRoleDelegate": "প্রতিনিধি",
+    "linkedRoleLinked": "লিঙ্কযুক্ত",
+    "addedRow": "সারি যোগ করা হয়েছে।",
+    "addedSeat": "{label} আসন যোগ করা হয়েছে।",
+    "updatedRow": "আপডেট করা সারি।",
+    "confirmRemoveUnassignedSeat": "ম্যাট্রিক্স থেকে এই অনির্ধারিত আসনটি সরান?",
+    "deletedRow": "সারি মুছে ফেলা হয়েছে।",
+    "importedRows": "আমদানি করা {count} সারি(গুলি)।",
+    "skippedDuplicates": "ইতিমধ্যেই রোস্টারে থাকা {count}টি সদৃশ (গুলি) এড়িয়ে গেছে৷",
+    "replacedUnassignedSeats": "সমস্ত অনির্ধারিত আসন প্রতিস্থাপন করা হয়েছে৷",
+    "generatedRandomCodes": "একটি ছাড়া সারিগুলির জন্য {count} এলোমেলো কোড(গুলি) তৈরি করা হয়েছে৷",
+    "addCommitteesFirst": "প্রথমে এই ইভেন্টে কমিটি যোগ করুন",
+    "eventCommitteeSessionsLink": "ইভেন্ট এবং কমিটির অধিবেশন",
+    "committeeFallback": "কমিটি",
+    "showingOneCommitteeAtATime": "একবারে একটি কমিটি দেখাচ্ছে। নীচের ট্যাবগুলি ব্যবহার করে কমিটি পরিবর্তন করুন।",
+    "editPlacardCodesSheet": "প্ল্যাকার্ড কোড শীট সম্পাদনা করুন ->",
+    "rosterHeading": "তালিকা · {শিরোনাম} {heading}",
+    "seatsSummary": "{count}টি আসন(গুলি)।",
+    "linkedDelegatesCannotBeDeleted": "লিঙ্ক করা প্রতিনিধিদের এখানে মুছে ফেলা যাবে না.",
+    "countryPosition": "দেশ / অবস্থান",
+    "placardCode": "প্ল্যাকার্ড কোড",
+    "assignedAccount": "বরাদ্দ করা অ্যাকাউন্ট",
+    "signupLink": "সাইন আপ লিঙ্ক",
+    "actions": "কর্ম",
+    "noSeatsYet": "এখনো কোনো আসন নেই। সারি যোগ করুন বা একটি CSV আমদানি করুন৷",
+    "allocationSignupLink": "বরাদ্দ সাইন আপ লিঙ্ক",
+    "dash": "-",
+    "optional": "ঐচ্ছিক",
+    "save": "সংরক্ষণ করুন",
+    "remove": "সরান",
+    "addOneSeat": "একটি আসন যোগ করুন",
+    "addHeadChairAllocation": "হেড চেয়ার বরাদ্দ যোগ করুন",
+    "addCoChairAllocation": "কো-চেয়ার বরাদ্দ যোগ করুন",
+    "countryPlaceholder": "যেমন ফ্রান্স",
+    "placardCodeOptional": "প্ল্যাকার্ড কোড (ঐচ্ছিক)",
+    "placardCodePlaceholder": "যেমন DIS-014",
+    "add": "যোগ করুন",
+    "importCsv": "CSV আমদানি করুন",
+    "importHelpPrefix": "প্রতি লাইনে একটি আসন:",
+    "importHelpMiddle": "\"দেশ\" সহ একটি হেডার সারি ঠিক আছে। এক্সেল/গুগল শীট এক্সপোর্টের কাজ থেকে UTF-8 ফাইল।",
+    "append": "যোগ করুন",
+    "appendHelp": "ইতিমধ্যে এই কমিটিতে নাম এড়িয়ে গেছে।",
+    "replaceUnassigned": "আনঅ্যাসাইন করা প্রতিস্থাপন করুন",
+    "replaceUnassignedHelp": "প্রতিটি খোলা আসন সরিয়ে দেয় (একটি প্রতিনিধির সাথে লিঙ্ক করা হয় না), তারপর ফাইল লোড করে-সংযুক্ত প্রতিনিধিদের নিরাপদ রাখে।",
+    "replaceUnassignedOnly": "শুধুমাত্র আনঅ্যাসাইন করা প্রতিস্থাপন করুন",
+    "csvPlaceholder": "ফ্রান্স,DIS-001\\nজার্মানি,DIS-002\\nজাপান",
+    "parsedRowsSample": "পার্স করা {count} সারি(গুলি)। নমুনা:",
+    "runImport": "আমদানি চালান",
+    "generateMissingRandomCodes": "অনুপস্থিত র্যান্ডম কোড তৈরি করুন"
   }
 }

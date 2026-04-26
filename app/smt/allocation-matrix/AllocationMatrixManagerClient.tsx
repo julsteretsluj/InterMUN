@@ -12,6 +12,7 @@ import {
 import { generateMissingAllocationCodes } from "@/app/actions/allocationCodes";
 import type { AllocationCsvRow } from "@/lib/parse-allocation-csv";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
+import { useTranslations } from "next-intl";
 
 export type MatrixRow = {
   id: string;
@@ -31,6 +32,7 @@ export function AllocationMatrixManagerClient({
   selectedConferenceId: string | null;
   rows: MatrixRow[];
 }) {
+  const t = useTranslations("allocationMatrixManager");
   const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -54,9 +56,10 @@ export function AllocationMatrixManagerClient({
   }
 
   function linkedLabel(row: { user_id: string | null; linked_role: string | null; linked_name: string | null }) {
-    if (!row.user_id) return "Open";
+    if (!row.user_id) return t("linkedOpen");
     const role = row.linked_role?.trim().toLowerCase();
-    const roleLabel = role === "chair" ? "Chair" : role === "delegate" ? "Delegate" : "Linked";
+    const roleLabel =
+      role === "chair" ? t("linkedRoleChair") : role === "delegate" ? t("linkedRoleDelegate") : t("linkedRoleLinked");
     const name = row.linked_name?.trim();
     return name ? `${roleLabel}: ${name}` : roleLabel;
   }
@@ -73,7 +76,7 @@ export function AllocationMatrixManagerClient({
         flash(null, res.error);
         return;
       }
-      flash("Added row.", null);
+      flash(t("addedRow"), null);
       router.refresh();
       e.currentTarget.reset();
     });
@@ -93,7 +96,7 @@ export function AllocationMatrixManagerClient({
         flash(null, res.error);
         return;
       }
-      flash(`Added ${label} seat.`, null);
+      flash(t("addedSeat", { label }), null);
       router.refresh();
     });
   }
@@ -109,13 +112,13 @@ export function AllocationMatrixManagerClient({
         flash(null, res.error);
         return;
       }
-      flash("Updated row.", null);
+      flash(t("updatedRow"), null);
       router.refresh();
     });
   }
 
   async function onDelete(allocationId: string) {
-    if (!confirm("Remove this unassigned seat from the matrix?")) return;
+    if (!confirm(t("confirmRemoveUnassignedSeat"))) return;
     setError(null);
     setMessage(null);
     startTransition(async () => {
@@ -124,7 +127,7 @@ export function AllocationMatrixManagerClient({
         flash(null, res.error);
         return;
       }
-      flash("Deleted row.", null);
+      flash(t("deletedRow"), null);
       router.refresh();
     });
   }
@@ -141,9 +144,11 @@ export function AllocationMatrixManagerClient({
         flash(null, res.error);
         return;
       }
-      const parts = [`Imported ${res.inserted} row(s).`];
-      if (res.skippedDup) parts.push(`Skipped ${res.skippedDup} duplicate(s) already on the roster.`);
-      if (res.replaceMode) parts.push("Replaced all unassigned seats.");
+      const insertedCount = Number(res.inserted ?? 0);
+      const skippedCount = Number(res.skippedDup ?? 0);
+      const parts = [t("importedRows", { count: insertedCount })];
+      if (skippedCount > 0) parts.push(t("skippedDuplicates", { count: skippedCount }));
+      if (res.replaceMode) parts.push(t("replacedUnassignedSeats"));
       flash(parts.join(" "), null);
       setCsvPreview(null);
       setCsvText("");
@@ -161,8 +166,8 @@ export function AllocationMatrixManagerClient({
         flash(null, res.error);
         return;
       }
-      const n = "generated" in res ? res.generated : 0;
-      flash(`Generated ${n} random code(s) for rows without one.`, null);
+      const n = Number(("generated" in res ? res.generated : 0) ?? 0);
+      flash(t("generatedRandomCodes", { count: n }), null);
       router.refresh();
     });
   }
@@ -185,9 +190,9 @@ export function AllocationMatrixManagerClient({
   if (!selectedConferenceId || conferences.length === 0) {
     return (
       <p className="text-sm text-brand-muted">
-        Add committees to this event first in{" "}
+        {t("addCommitteesFirst")}{" "}
         <Link href="/smt/conference" className="text-brand-accent font-medium hover:underline">
-          Event & committee sessions
+          {t("eventCommitteeSessionsLink")}
         </Link>
         .
       </p>
@@ -197,7 +202,7 @@ export function AllocationMatrixManagerClient({
   const confLabel = conferences.find((c) => c.id === selectedConferenceId);
   const heading = confLabel
     ? [confLabel.name, confLabel.committee].filter(Boolean).join(" — ")
-    : "Committee";
+    : t("committeeFallback");
   const sheetTabs = conferences.map((c) => ({
     id: c.id,
     label: c.committee?.trim() || c.name?.trim() || c.id.slice(0, 8),
@@ -208,13 +213,13 @@ export function AllocationMatrixManagerClient({
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-end gap-4 flex-wrap">
         <div className="text-sm text-brand-muted">
-          Showing one committee at a time. Switch committee using the bottom tabs.
+          {t("showingOneCommitteeAtATime")}
         </div>
         <Link
           href={`/smt/allocation-passwords?conference=${selectedConferenceId}`}
           className="text-sm text-brand-accent hover:underline"
         >
-          Edit placard codes sheet →
+          {t("editPlacardCodesSheet")}
         </Link>
       </div>
 
@@ -230,26 +235,26 @@ export function AllocationMatrixManagerClient({
       )}
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">Roster · {heading}</h2>
+        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("rosterHeading", { heading })}</h2>
         <p className="text-xs text-brand-muted">
-          {rows.length} seat{rows.length === 1 ? "" : "s"}. Linked delegates cannot be deleted here.
+          {t("seatsSummary", { count: rows.length })} {t("linkedDelegatesCannotBeDeleted")}
         </p>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-                <th className="px-3 py-2">Country / position</th>
-                <th className="px-3 py-2">Placard code</th>
-                <th className="px-3 py-2">Assigned account</th>
-                <th className="px-3 py-2">Sign-up link</th>
-                <th className="px-3 py-2 w-[120px]">Actions</th>
+                <th className="px-3 py-2">{t("countryPosition")}</th>
+                <th className="px-3 py-2">{t("placardCode")}</th>
+                <th className="px-3 py-2">{t("assignedAccount")}</th>
+                <th className="px-3 py-2">{t("signupLink")}</th>
+                <th className="px-3 py-2 w-[120px]">{t("actions")}</th>
               </tr>
             </thead>
             <tbody>
               {rows.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
-                    No seats yet. Add rows or import a CSV.
+                    {t("noSeatsYet")}
                   </td>
                 </tr>
               ) : (
@@ -268,10 +273,10 @@ export function AllocationMatrixManagerClient({
                             href={signupHref(selectedConferenceId, r.id)}
                             className="text-xs text-brand-accent hover:underline break-all"
                           >
-                            Allocation sign-up link
+                            {t("allocationSignupLink")}
                           </a>
                         </td>
-                        <td className="px-3 py-2 text-xs text-brand-muted">—</td>
+                        <td className="px-3 py-2 text-xs text-brand-muted">{t("dash")}</td>
                       </tr>
                     );
                   }
@@ -293,7 +298,7 @@ export function AllocationMatrixManagerClient({
                           form={formId}
                           name="code"
                           defaultValue={r.code ?? ""}
-                          placeholder="Optional"
+                          placeholder={t("optional")}
                           className="w-full min-w-[88px] px-2 py-1 rounded border border-brand-navy/15 font-mono text-xs"
                         />
                       </td>
@@ -303,7 +308,7 @@ export function AllocationMatrixManagerClient({
                           href={signupHref(selectedConferenceId, r.id)}
                           className="text-xs text-brand-accent hover:underline break-all"
                         >
-                          Allocation sign-up link
+                          {t("allocationSignupLink")}
                         </a>
                       </td>
                       <td className="px-3 py-2">
@@ -314,7 +319,7 @@ export function AllocationMatrixManagerClient({
                             disabled={pending}
                             className="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium disabled:opacity-50"
                           >
-                            Save
+                            {t("save")}
                           </button>
                           <button
                             type="button"
@@ -322,7 +327,7 @@ export function AllocationMatrixManagerClient({
                             disabled={pending}
                             className="text-xs text-red-700 hover:underline disabled:opacity-50"
                           >
-                            Remove
+                            {t("remove")}
                           </button>
                         </div>
                       </td>
@@ -336,7 +341,7 @@ export function AllocationMatrixManagerClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-3">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">Add one seat</h2>
+        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("addOneSeat")}</h2>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
@@ -344,7 +349,7 @@ export function AllocationMatrixManagerClient({
             disabled={pending}
             className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
           >
-            Add Head Chair allocation
+            {t("addHeadChairAllocation")}
           </button>
           <button
             type="button"
@@ -352,25 +357,25 @@ export function AllocationMatrixManagerClient({
             disabled={pending}
             className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
           >
-            Add Co-chair allocation
+            {t("addCoChairAllocation")}
           </button>
         </div>
         <form onSubmit={onAdd} className="flex flex-wrap gap-2 items-end">
           <input type="hidden" name="conference_id" value={selectedConferenceId} />
           <div>
-            <label className="block text-xs text-brand-muted mb-1">Country / position</label>
+            <label className="block text-xs text-brand-muted mb-1">{t("countryPosition")}</label>
             <input
               name="country"
               required
-              placeholder="e.g. France"
+              placeholder={t("countryPlaceholder")}
               className="px-3 py-2 rounded-lg border border-brand-navy/15 text-sm w-56"
             />
           </div>
           <div>
-            <label className="block text-xs text-brand-muted mb-1">Placard code (optional)</label>
+            <label className="block text-xs text-brand-muted mb-1">{t("placardCodeOptional")}</label>
             <input
               name="code"
-              placeholder="e.g. DIS-014"
+              placeholder={t("placardCodePlaceholder")}
               className="px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm w-36"
             />
           </div>
@@ -379,19 +384,17 @@ export function AllocationMatrixManagerClient({
             disabled={pending}
             className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
           >
-            Add
+            {t("add")}
           </button>
         </form>
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
-        <h2 className="font-display text-lg font-semibold text-brand-navy">Import CSV</h2>
+        <h2 className="font-display text-lg font-semibold text-brand-navy">{t("importCsv")}</h2>
         <p className="text-sm text-brand-muted max-w-2xl">
-          One seat per line: <span className="font-mono">country,optional_code</span>. A header row with
-          &quot;country&quot; is fine. UTF-8 files from Excel/Google Sheets export work.{" "}
-          <strong>Append</strong> skips names already on this committee.{" "}
-          <strong>Replace unassigned</strong> removes every open seat (not linked to a delegate), then
-          loads the file—keeps linked delegates safe.
+          {t("importHelpPrefix")} <span className="font-mono">country,optional_code</span>. {t("importHelpMiddle")}{" "}
+          <strong>{t("append")}</strong> {t("appendHelp")} <strong>{t("replaceUnassigned")}</strong>{" "}
+          {t("replaceUnassignedHelp")}
         </p>
         <form onSubmit={onImport} className="space-y-3">
           <input type="hidden" name="conference_id" value={selectedConferenceId} />
@@ -414,7 +417,7 @@ export function AllocationMatrixManagerClient({
                 checked={importMode === "append"}
                 onChange={() => setImportMode("append")}
               />
-              Append
+              {t("append")}
             </label>
             <label className="flex items-center gap-2 text-sm">
               <input
@@ -423,7 +426,7 @@ export function AllocationMatrixManagerClient({
                 checked={importMode === "replace_unassigned"}
                 onChange={() => setImportMode("replace_unassigned")}
               />
-              Replace unassigned only
+              {t("replaceUnassignedOnly")}
             </label>
           </div>
           <textarea
@@ -440,12 +443,12 @@ export function AllocationMatrixManagerClient({
               }
             }}
             rows={8}
-            placeholder={"France,DIS-001\nGermany,DIS-002\nJapan"}
+            placeholder={t("csvPlaceholder")}
             className="w-full max-w-3xl px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm"
           />
           {csvPreview && csvPreview.n > 0 ? (
             <p className="text-xs text-brand-muted">
-              Parsed <strong>{csvPreview.n}</strong> row(s). Sample:{" "}
+              {t("parsedRowsSample", { count: csvPreview.n })}{" "}
               {csvPreview.sample.map((s) => s.code ? `${s.country} (${s.code})` : s.country).join(" · ")}
             </p>
           ) : null}
@@ -455,7 +458,7 @@ export function AllocationMatrixManagerClient({
               disabled={pending || !csvText.trim()}
               className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
             >
-              Run import
+              {t("runImport")}
             </button>
             <button
               type="button"
@@ -463,7 +466,7 @@ export function AllocationMatrixManagerClient({
               disabled={pending}
               className="px-4 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
             >
-              Generate missing random codes
+              {t("generateMissingRandomCodes")}
             </button>
           </div>
         </form>

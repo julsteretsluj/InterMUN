@@ -15,7 +15,7 @@
     "delegateFallbackName": "Делегат",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Генеральний секретар",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "Повернутися до профілю"
   },
   "language": {
     "label": "Мова",
@@ -62,7 +62,7 @@
     "conferenceTitle": "Приєднуйтесь до вашої конференції",
     "conferenceDescription": "Введіть код конференції від ваших організаторів. Далі ви виберете свою роль, а потім {mode}.",
     "conferenceCode": "Код конференції",
-    "conferenceCodeHelp": "Код всієї конференції (всі комітети). Пробіли ігноруються; зіставлення не залежить від регістру.",
+    "conferenceCodeHelp": "Код усієї конференції (всі комітети). Пробіли ігноруються; зіставлення не залежить від регістру.",
     "checking": "Перевірка…",
     "whatIsYourRole": "Яка твоя роль?",
     "moveCircleRole": "Перемістіть коло, щоб вибрати відповідну роль.",
@@ -117,7 +117,7 @@
     "committeeCodeMustBeSix": "Код комітету має містити рівно 6 літер або цифр (наприклад, ECO741).",
     "notSignedIn": "Не ввійшли.",
     "onlyStaffSetCode": "Тільки голови, SMT та адміністратори можуть установлювати коди комітетів.",
-    "chairSeatOnly": "Ви можете встановити код комітету лише для сесії, де ви маєте місце."
+    "chairSeatOnly": "Ви можете встановити код комітету лише для сесії, на якій ви маєте місце."
   },
   "pageTitles": {
     "crisisSlides": "Кризові слайди",
@@ -155,6 +155,31 @@
     "formalMotions": "Офіційні клопотання",
     "timer": "Таймер",
     "smtProfile": "Профіль"
+  },
+  "setupPage": {
+    "title": "Supabase не налаштовано",
+    "body": "У цьому розгортанні відсутні загальнодоступні змінні середовища Supabase. Додайте їх у свій хост (наприклад, Vercel → Проект → Параметри → Змінні середовища), а потім повторно розгорніть:",
+    "valuesHint": "Значення знаходяться в Supabase → Параметри проекту → API. Використовуйте однакові назви для робочих і попередніх переглядів, якщо ви використовуєте попередній перегляд.",
+    "tryAgainLink": "Спробуйте ввійти знову після перерозподілу"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Недійсне посилання для реєстрації",
+    "invalidLinkBody": "У цьому посиланні розподілу відсутні необхідні дані. Попросіть свого керівника або SMT отримати нове посилання для реєстрації.",
+    "allocationNotFoundTitle": "Виділення не знайдено",
+    "allocationNotFoundBody": "Ця країна/позиція більше не доступна у вибраному комітеті.",
+    "allocationTakenTitle": "Розподіл уже прийнято",
+    "allocationTakenBody": "На {country} вже претендував інший обліковий запис. Будь ласка, виберіть інший розподіл.",
+    "submitFailedTitle": "Не вдалося надіслати запит",
+    "requestSubmittedTitle": "Запит на реєстрацію подано",
+    "requestSubmittedBody": "Ваш запит щодо {country} надіслано голові комітету для затвердження.",
+    "requestSubmittedHint": "Після схвалення знову відкрийте це посилання або продовжте вхід до комітету, щоб продовжити.",
+    "continueCommitteeSignIn": "Продовжити вхід до комітету"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Спочатку виберіть подію конференції.",
+    "enterConferenceCode": "Введіть код конференції",
+    "title": "Коди кімнат і стільці",
+    "subtitle": "Встановіть код комітету другого входу для кожної сесії та запрошуйте або підвищуйте голів, не використовуючи інформаційну панель делегатів."
   },
   "delegateDashboard": {
     "welcome": "Ласкаво просимо, представник {flag} {country}",
@@ -226,7 +251,7 @@
   },
   "allocationCodeGate": {
     "title": "Код входу на місце",
-    "description": "Третій крок після виходу з конференції та комітету: введіть <seat>код плаката</seat> для вашого місця (той самий список стільців використовує для матеріалів).",
+    "description": "Третій крок після виходу на конференцію та комітет: введіть <seat>код плаката</seat> для вашого місця (той самий список стільців використовує для матеріалів).",
     "noAllocation": "У вас ще немає коштів для цього комітету. Спочатку попросіть SMT призначити ваше місце.",
     "changeRoomCode": "Змінити код кімнати"
   },
@@ -239,7 +264,7 @@
     "activeEvent": "Активна подія:",
     "code": "код",
     "enterConferenceCodeLink": "Введіть код конференції",
-    "loadCommitteesPrompt": "завантажити комітети для події.",
+    "loadCommitteesPrompt": "щоб завантажити комітети для події.",
     "hubEnterConferenceCode": "Введіть код конференції"
   },
   "smtOverview": {
@@ -248,7 +273,7 @@
     "noCommittees": "Для цієї події не знайдено комітетів. Додайте їх",
     "eventSessionsLink": "Події та засідання комітетів",
     "orSupabase": "або в Supabase.",
-    "sessionFloorBanner": "<floor>Сесійний майданчик</floor> (таймери, доповідачі, переклички) призначений лише для <chairs>крісел на трибуні</chairs>. Використовуйте <live>Живі комітети</live> нижче для контролю або введіть коди комітетів, як делегати, коли вам потрібна конкретна сесія.",
+    "sessionFloorBanner": "<floor>Сеансовий майданчик</floor> (таймери, доповідачі, перекличка) призначений лише для <chairs>крісел на трибуні</chairs>. Використовуйте <live>Живі комітети</live> нижче для контролю або введіть коди комітетів, як делегати, коли вам потрібна конкретна сесія.",
     "welcomeSg": "Ласкаво просимо, Генеральний секретар!",
     "whichCommittee": "В якому комітеті ви б хотіли перевірити?",
     "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
@@ -305,7 +330,7 @@
       "documentsArticles": "Документи та статті",
       "legislationTreaties": "Законодавство та договори",
       "mainBodies": "Основні органи",
-      "programmesFunds": "Програми та кошти",
+      "programmesFunds": "Програми та фонди",
       "specializedAgencies": "Спеціалізовані агентства та пов'язані з ними",
       "peacekeepingMissions": "Миротворча діяльність і місії",
       "foundersMembers": "Засновники та члени"
@@ -425,7 +450,7 @@
     "voting": {
       "requiredMajority": "Необхідна більшість",
       "helpRequiredMajorityTitle": "Необхідна більшість",
-      "helpRequiredMajorityBody": "Виберіть поріг голосування, який використовується для прийняття рішення про проходження/незатвердження. `Простих` більше половини. `2/3` вимагає супербільшості.",
+      "helpRequiredMajorityBody": "Виберіть поріг голосування, який використовується для прийняття/непроходження. `Простих` більше половини. `2/3` вимагає супербільшості.",
       "majoritySimple": "просто",
       "majorityTwoThirds": "2/3",
       "majorityLine": "{label} більшість",
@@ -473,7 +498,7 @@
       "roll": {
         "absent": "Відсутній (рулон)",
         "present_abstain": "Присутній — може утриматися",
-        "present_voting": "Присутні та голосують (перелік)",
+        "present_voting": "Присутні та голосують (реєстрація)",
         "unknown": "— (рол)"
       }
     },
@@ -505,7 +530,7 @@
       "errUsernamePattern": "Ім'я користувача має містити 3-32 символи (літери, цифри, _, ., -)",
       "errPronounsPreset": "Виберіть займенник зі списку.",
       "errImageType": "Виберіть файл зображення.",
-      "errImageSize": "Зображення завелике (макс. 5 МБ).",
+      "errImageSize": "Зображення завелике (макс. 5 Мб).",
       "errUploadFailed": "Помилка завантаження.",
       "errStorageSetup": "Зберігання фото профілю не налаштовано. У проекті Supabase запустіть міграцію 00100_profile_pictures_storage_bucket.sql або створіть публічне відро для зберігання під назвою profile-pictures (див. README).",
       "errPublicUrl": "Не вдалося визначити загальнодоступну URL-адресу для завантаженого зображення."
@@ -549,7 +574,7 @@
       "glossary": {
         "title": "Глосарій порядку денного MUN",
         "subtitle": "Унікальна термінологія, яка відповідає коду вашого комітету та поточним темам порядку денного.",
-        "committeeCode": "Код комітету: {код}",
+        "committeeCode": "Код комітету: {код} {code}",
         "topicTag": "Тема: {topic}",
         "sources": {
           "core": "ядро",
@@ -559,7 +584,7 @@
         "terms": {
           "delegation": {
             "term": "Делегування",
-            "definition": "Країна або команда спостерігачів, що представляють одну державу або юридичну особу в комітеті."
+            "definition": "Країна або команда спостерігачів, що представляють одну державу чи юридичну особу в комітеті."
           },
           "placard": {
             "term": "Плакат",
@@ -571,7 +596,7 @@
           },
           "quorum": {
             "term": "Кворум",
-            "definition": "Мінімальна кількість делегацій, необхідна для проведення офіційних справ і голосування."
+            "definition": "Мінімальна кількість делегацій, необхідних для проведення офіційних справ і голосування."
           },
           "motion": {
             "term": "Рух",
@@ -619,7 +644,7 @@
           },
           "sanctions_regime": {
             "term": "Режим санкцій",
-            "definition": "Скоординовані обмеження, які використовуються для впливу на поведінку без прямих військових дій."
+            "definition": "Скоординовані обмеження, що використовуються для впливу на поведінку без прямих військових дій."
           },
           "arms_control": {
             "term": "Контроль над озброєннями",
@@ -783,11 +808,11 @@
       "googleDocsCreateHelp": "Новий документ Google відкриється в іншій вкладці; вставте сюди посилання після його створення.",
       "resolutionIdeaPlaceholder": "Ідея вирішення...",
       "add": "додати",
-      "noIdeasYet": "Ідей ще немає.",
+      "noIdeasYet": "Ще немає ідей.",
       "ideaLabel": "Ідея",
-      "ideaFallback": "Ідея {номер}",
+      "ideaFallback": "Ідея {номер} {number}",
       "linkedDoc": "Пов’язаний документ",
-      "addedOn": "Додано {дата}",
+      "addedOn": "Додано {date}",
       "edit": "Редагувати",
       "delete": "Видалити",
       "ideaDocument": "Ідейний документ",
@@ -800,7 +825,7 @@
       "topicPlaceholder": "напр. кліматичні дії",
       "extentLabel": "Обсяг (1-5):",
       "extentHelpTitle": "Обсяг (1-5)",
-      "extentHelpBody": "1 означає, що ваше виділення мало підтримує тему, а 5 означає сильну підтримку. Виберіть номер, який відповідає вашій позиції в комітеті.",
+      "extentHelpBody": "1 означає, що ваше виділення мало підтримує тему, а 5 означає сильну підтримку. Виберіть число, яке відповідає вашій позиції в комітеті.",
       "add": "додати",
       "viewOnlyHeatmap": "Теплова карта лише для перегляду для персоналу.",
       "notesPerAllocation": "Примітки до розподілу",
@@ -841,7 +866,7 @@
       "virtualRoomVacant": "Вакантний",
       "profileAria": "Переглянути профіль: {country}",
       "vacantSeatAria": "Вільне місце",
-      "placardAria": "Плакат {країна}",
+      "placardAria": "Плакат {країна} {country}",
       "gavelAria": "Молоток"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "Метка призначення",
         "purposeHelpBody": "Цей текст додається до назви вашої країни, щоб крісла могли зрозуміти, чому ви просите слово.",
         "purposePlaceholder": "напр. підтримка + огляд поправок",
-        "requesting": "Запит..."
+        "requesting": "Запит...",
+        "rollPromptTitle": "Потрібне схвалення голови",
+        "rollPromptBodyPickStatus": "Сесія почалася. Виберіть свій поіменний статус, щоб розблокувати виступ і голосування.",
+        "rollPromptBodyWaitSessionStart": "Чекаємо головуючого на початок засідання комісії.",
+        "rollPromptBodyWaitRollPrompt": "Очікування підказки про перекличку.",
+        "rollPromptBodyMarkedAbsent": "Зараз ви позначені як відсутні. Попросіть головуючого позначити вас як присутніх для виступу та голосування.",
+        "rollPromptBodyChecking": "Перевірка статусу вашого ролика...",
+        "rollPromptSaving": "Збереження...",
+        "rollPromptPresent": "присутній",
+        "rollPromptPresentVoting": "Присутні та голосують"
       },
       "motionVoting": {
         "votingProcedure": "Процедура голосування",
@@ -865,7 +899,7 @@
         "motioner": "Motioner",
         "majority": "більшість",
         "majoritySimple": "просто",
-        "tally": "Так {так} - Ні {ні} - Усього {усього}",
+        "tally": "Так {так} - Ні {ні} - Усього {усього} {yes} {no} {total}",
         "help": "На трибуні фіксується голосування кожної делегації на сесії. При голосуванні за пропозицію використовується лише «так» або «ні» (без утримання). Підсумки враховують лише таблички, де було записано «Так» або «Ні»; відсутні делегації пропускаються."
       },
       "activeMotion": {
@@ -882,7 +916,7 @@
         "speakerTimeLeftTotal": "Час доповідача (лівий / загальний)",
         "perSpeaker": "(на динаміка)",
         "paused": "(пауза)",
-        "pauseReason": "Пауза: {причина}"
+        "pauseReason": "Пауза: {причина} {reason}"
       },
       "floorStatus": {
         "sessionTime": "Час сеансу",
@@ -916,8 +950,8 @@
         "delete": "Видалити",
         "deleteConfirm": "Видалити цей сеанс з історії?",
         "sessionNamePrompt": "Назва сеансу",
-        "rangeClosed": "{діапазон}",
-        "rangeOngoing": "{діапазон} -> Триває"
+        "rangeClosed": "{діапазон} {range}",
+        "rangeOngoing": "{діапазон} -> Триває {range}"
       },
       "timerPage": {
         "title": "Таймер",
@@ -944,7 +978,7 @@
         "paused": "Призупинено",
         "saveToEnablePauseStart": "збережіть таймер, щоб увімкнути паузу/запуск.",
         "pauseReasonLogged": "Причина призупинення (записано)",
-        "pauseReasonPlaceholder": "напр. Порядок дій, технічна проблема, немодерована зустріч...",
+        "pauseReasonPlaceholder": "напр. Виступ по порядку дій, технічна проблема, немодерована зустріч...",
         "pauseClock": "Призупинити годинник",
         "startClock": "Запустити годинник",
         "perSpeakerTitle": "Час для одного доповідача (модерований кокус)",
@@ -971,7 +1005,7 @@
         "advanceSpeakerReset": "Попередній динамік і скидання годинника",
         "recentPauseLog": "Журнал останніх пауз",
         "noPauseEvents": "Для цього комітету ще не зареєстровано жодної події призупинення.",
-        "openPauseLogHint": "Відкрийте журнал призупинення, щоб переглянути записані причини призупинення та позначки часу.",
+        "openPauseLogHint": "Відкрийте журнал пауз, щоб переглянути записані причини та позначки часу.",
         "saved": "Таймер збережено.",
         "savedCapped": "Таймер збережено. Час виступу був довший, ніж загальний; обмежено загальною сумою.",
         "alreadyPaused": "Таймер уже призупинено.",
@@ -1009,7 +1043,7 @@
     "eventSessionsLink": "Події та засідання комітетів",
     "codesUnder": ". Коди під",
     "roomCodesChairsLink": "Коди кімнат і стільці",
-    "differentEventWarning": "Цей комітет належить до конференції, відмінної від тієї, яку ви вибрали.",
+    "differentEventWarning": "Цей комітет належить до конференції, відмінної від тієї, яку ви обрали.",
     "switchEvent": "Переключити подію",
     "liveCommittees": "Живі комітети",
     "digitalCommitteeRoom": "Цифрова кімната комітету",
@@ -1084,7 +1118,7 @@
     "vacantPlacard": "Вакантний плакат",
     "delegateProfile": "Профіль делегата ->",
     "chairNotePlaceholder": "напр. Дякую Франції за час",
-    "notesSyncSuffix": "— синхронізація нотаток голови для цього комітету (всі облікові записи голови та пристрої).",
+    "notesSyncSuffix": "— синхронізація нотаток голови для цього комітету (всі облікові записи та пристрої голови).",
     "compliment": "комплімент",
     "concern": "Занепокоєння",
     "adding": "Додавання...",
@@ -1112,7 +1146,7 @@
     "disinformation": "Дезінформація",
     "sustainableDevelopment": "Сталий розвиток",
     "untitledTopic": "Тема без назви",
-    "qClimateCooperation": "Як країни-члени можуть зміцнити глобальну співпрацю в боротьбі з кліматом?",
+    "qClimateCooperation": "Як країни-члени можуть зміцнити глобальну співпрацю щодо кліматичних заходів?",
     "qGlobalHealthcareAccess": "Як міжнародна спільнота може покращити доступ до якісної медичної допомоги?",
     "qAiGovernance": "Як держави повинні регулювати ШІ та нові технології?",
     "qDisinformationImpact": "Які заходи можуть зменшити глобальний вплив дезінформації?",
@@ -1141,7 +1175,7 @@
     "sending": "Надсилання…",
     "sendHelpTitle": "Надіслати записку",
     "sendHelpBody": "Надсилає цю нотатку одержувачам, вибраним вище. Це не перешкоджає надсиланню; це впливає лише на те, як читач отримує попередження/позначення.",
-    "smtFullNotes": "Перегляд повних нотаток (пароль перевірено).",
+    "smtFullNotes": "Перегляд повних приміток (пароль перевірено).",
     "smtForwardedInbox": "Перегляд пересланих нотаток (вхідні SMT).",
     "enterStaffPassword": "Введіть додатковий пароль персоналу",
     "recipientsTitle": "Одержувачі",
@@ -1223,7 +1257,7 @@
   },
   "conferenceSetupPage": {
     "title": "Організуйте конференцію",
-    "intro": "Секретаріат або <strong>адміністратор веб-сайту</strong>: створює <strong>код конференції</strong> (перший вихід) і перший <strong>код комітету</strong> (другий вихід). Додайте більше комітетів у Supabase або через свій робочий процес; голови трибуни редагують коди комітетів у розділі Голова → Код комітету.",
+    "intro": "Секретаріат або <strong>адміністратор веб-сайту</strong>: створює <strong>код конференції</strong> (перші ворота) та перший <strong>код комітету</strong> (другі ворота). Додайте більше комітетів у Supabase або за допомогою робочого процесу; голови трибуни редагують коди комітетів у розділі Голова → Код комітету.",
     "backToJoin": "Назад до приєднання до комітету"
   },
   "conferenceSetupForm": {
@@ -1256,29 +1290,200 @@
     "creating": "Створення…",
     "submit": "Створіть подію + комітет і ввійдіть"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "Потрібні конференція, розподіл і пароль.",
+      "mustBeSignedIn": "Ви повинні увійти в систему.",
+      "contextMismatch": "Контекст вашого комітету не відповідає цьому входу. За потреби повторно введіть коди конференції та комітету.",
+      "conferenceSelectionMismatch": "Ваш вибір конференції не відповідає цьому комітету. Повторно введіть коди конференції та комітету.",
+      "conferenceSelectionMismatchWithBackHint": "Ваш вибір конференції не відповідає цьому комітету. Поверніться назад і введіть правильний код конференції, а потім код комітету.",
+      "conferenceNotFound": "Конференція не знайдена.",
+      "noAllocationForConference": "У вас немає коштів для цієї конференції. Перш ніж продовжити, попросіть голову призначити вас.",
+      "allocationMismatch": "Розподіл не відповідає вашому призначенню. Введіть свою країну або позицію точно так, як призначено (пробілі та наголоси можуть відрізнятися).",
+      "incorrectCommitteePassword": "Неправильний пароль комітету.",
+      "requiredConferenceAndStaffPassword": "Потрібен додатковий пароль конференції та персоналу.",
+      "onlySmtOrAdminBypass": "Тільки адміністратори секретаріату або веб-сайту можуть використовувати цей вхід.",
+      "incorrectStaffPassword": "Неправильний додатковий пароль персоналу.",
+      "chooseConference": "Виберіть конференцію.",
+      "passwordMinLength": "Пароль має бути не менше 6 символів.",
+      "passwordsDoNotMatch": "Паролі не збігаються.",
+      "notSignedIn": "Не ввійшли.",
+      "onlyChairSmtAdminSetPassword": "Лише голови, SMT та адміністратори веб-сайтів можуть установлювати пароль комітету.",
+      "onlyChairSmtAdminRemovePassword": "Лише голови, SMT та адміністратори веб-сайтів можуть видалити пароль комітету."
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "Спершу виберіть подію з кодом конференції (вхід для події).",
+      "notSignedIn": "Не ввійшли.",
+      "onlySmtManageMatrix": "Лише секретаріат може керувати матрицею розподілу.",
+      "committeeNotInActiveEvent": "Цей комітет не є частиною активного заходу.",
+      "requiredCommitteeAndCountry": "Необхідно вказати комітет і країну/посаду.",
+      "countryTooLong": "Країна/позиція задовга.",
+      "codeTooLong": "Код таблички задовгий.",
+      "couldNotCreateAllocation": "Не вдалося створити виділення.",
+      "requiredAllocationAndCountry": "Потрібні місце розташування та країна/посада.",
+      "allocationNotFound": "Виділення не знайдено.",
+      "missingAllocation": "Відсутнє виділення.",
+      "seatLinkedToDelegate": "Це місце пов’язане з делегатом. Роз’єднайте їх у Supabase або перепризначте перед видаленням.",
+      "selectCommittee": "Виберіть комітет.",
+      "couldNotParseCsv": "Не вдалося проаналізувати CSV.",
+      "noDataRowsFound": "Не знайдено рядків даних (потрібно принаймні країну/позицію на рядок).",
+      "importLimitedRows": "Імпорт обмежено до {max} рядків. Розділіть файл.",
+      "rowTooLong": "Ряд надто довгий: {row}…",
+      "codeTooLongOnRow": "Задовгий код у рядку: {row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "Спершу виберіть подію з кодом конференції (вхід для події).",
+      "notSignedIn": "Не ввійшли.",
+      "onlySmtChangeCodes": "Лише секретаріат може змінювати тут коди комітетів.",
+      "committeeNotInActiveEvent": "Цей комітет не є частиною вашої активної події.",
+      "missingCommittee": "Відсутній комітет.",
+      "invalidCommitteeCode": "Код комітету/кімнати має містити рівно 6 літер або цифр (наприклад, ECO741).",
+      "unauthorized": "Несанкціонований.",
+      "codeSaved": "Код збережено. Делегати використовують його як другий вихід після коду конференції.",
+      "invalidEmail": "Введіть дійсну адресу електронної пошти.",
+      "onlySmtInviteChair": "Лише секретаріат може надсилати запрошення голови.",
+      "missingServiceRoleKey": "На сервері відсутній SUPABASE_SERVICE_ROLE_KEY. Додайте його до середовища розгортання (ніколи не показуйте в браузері).",
+      "missingPublicAppUrl": "Установіть для NEXT_PUBLIC_APP_URL URL-адресу загальнодоступного сайту (наприклад, https://your-app.vercel.app), щоб посилання для запрошень перенаправляли правильно.",
+      "emailAlreadyHasAccount": "Ця електронна адреса вже має обліковий запис. Скористайтеся пунктом «Надати роль голови» нижче замість того, щоб надсилати інше запрошення.",
+      "inviteSentButRoleSetFailed": "Запрошення надіслано, але не вдалося встановити роль голови в профілі: {error}. Використовуйте «Надати роль голови» після того, як вони погодяться.",
+      "inviteSentSuccess": "Електронний лист із запрошенням надіслано на адресу {email}. Вони стануть головою після встановлення пароля.",
+      "onlySmtGrantChair": "Лише секретаріат може надавати посади голови.",
+      "noAccountForEmail": "Ще немає облікового запису з такою електронною адресою. Спочатку надішліть запрошення на крісло.",
+      "promotedToChairSuccess": "Профіль для {email} тепер є кріслом."
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "Ви повинні увійти в систему.",
+      "onlyDelegateOrChair": "Лише облікові записи делегатів/голови можуть запитувати реєстрацію розподілу.",
+      "allocationNotFound": "Виділення не знайдено.",
+      "allocationAlreadyAssigned": "Це виділення вже призначено.",
+      "requiredConferenceAllocationEmail": "Потрібна електронна адреса конференції, розподілу та делегата."
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "Спочатку увійдіть.",
+      "onlyDelegatesCanExport": "Тільки делегати можуть експортувати свої матеріали.",
+      "accountHasNoEmail": "У вашому обліковому записі не встановлено адресу електронної пошти.",
+      "rangeTodayUtc": "Сьогодні (UTC)",
+      "rangeAllTime": "Весь час",
+      "emailSubject": "Експорт матеріалів InterMUN ({range})",
+      "emailSendConfigHint": "Встановіть SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS і додатково MATERIALS_EXPORT_FROM на сервері.",
+      "exportEmailedTo": "Експорт надіслано на адресу {email}. Якщо ви його не бачите, перевірте спам/сміття."
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "InterMUN",
+      "welcomeSubject": "Ласкаво просимо до InterMUN",
+      "welcomeLine1": "Ласкаво просимо до InterMUN.",
+      "welcomeConfirmedFor": "Ваш делегований обліковий запис підтверджено для: {country}.",
+      "welcomeLine2": "Тепер ви можете перейти до входу в комітет і приєднатися до сесії в прямому ефірі.",
+      "welcomeLine3": "До зустрічі на паркеті.",
+      "chairReminderSubject": "Запит на розподіл делегатів очікує на схвалення",
+      "chairReminderLine1": "Делегат подав запит на розподіл і потребує перегляду голови.",
+      "chairReminderConference": "Конференція: {конференція} {conference}",
+      "chairReminderAllocation": "Запитаний розподіл: {country}",
+      "chairReminderDelegate": "Представник: {name}",
+      "chairReminderEmail": "Електронна адреса облікового запису: {email}",
+      "chairReminderLine2": "Будь ласка, погодьте або відхиліть цей запит у матриці розподілу кафедр:"
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "Деталі події",
+    "selectConferenceFirst": "Спершу виберіть конференцію з пропуском події, а потім поверніться сюди.",
+    "committeeSessionsTitle": "Засідання комітетів у цьому заході",
+    "committeeSessionsBody": "Назви засідань комітетів (теми порядку денного) залишаються тут для записів; домашня сітка SMT показує офіційну назву комітету, абревіатуру, голови та короткий код відображення. Коди комітетів/кімнат (другі ворота) мають залишатися унікальними в межах цієї події.",
+    "noCommitteeSessions": "Немає засідань комітетів для цієї події.",
+    "eventName": "Назва події",
+    "tagline": "Слоган",
+    "conferenceCodeFirstGate": "Код конференції (перші ворота)",
+    "saved": "Збережено.",
+    "saving": "Збереження…",
+    "saveConferenceEvent": "Зберегти подію конференції",
+    "errorImageFile": "Виберіть файл зображення.",
+    "errorImageTooLarge": "Зображення завелике (макс. 6 МБ).",
+    "errorCommitteeCodeMissing": "Код комітету відсутній.",
+    "errorPublicUrl": "Не вдалося визначити загальнодоступну URL-адресу для завантаженого зображення.",
+    "errorUploadFailed": "Помилка завантаження.",
+    "sessionTitle": "Назва сесії",
+    "chamberLabel": "Палата / етикетка",
+    "officialCommitteeName": "Офіційна назва комітету (сітка SMT)",
+    "officialCommitteeNamePlaceholder": "напр. Всесвітня організація охорони здоров’я",
+    "chairNames": "Назви стільців",
+    "chairNamesPlaceholder": "Розділяється комами, напр. Алекс Кім, Джордан Лі",
+    "committeeLogo": "Логотип комітету",
+    "uploading": "Завантаження…",
+    "crisisSlidesUrl": "Кризові слайди (URL-адреса Google Презентацій)",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "Кризові слайди",
+    "crisisSlidesHelpPrefix": "Для FWC / UNSC / HSC: вбудовано в делегатів і голів",
+    "crisisSlidesHelpSuffix": "сторінки. Залиште порожнім, якщо не використовується. Колода має дозволяти перегляд для вашої аудиторії (посилання).",
+    "competingMotionsTitle": "Конкуруючі пропозиції (RoP): консультація перед модерованим кокусом",
+    "moderatedCaucus": "модерований кокус",
+    "consultation": "консультація",
+    "competingMotionsHelpPrefix": "Зніміть позначку, якщо ваш довідник має рейтинг a",
+    "competingMotionsHelpMiddle": "рух вище",
+    "competingMotionsHelpSuffix": "коли обидва знаходяться на розгляді.",
+    "procedureProfile": "Профіль процедури",
+    "procedureDefault": "Комітет за замовчуванням RoP",
+    "procedureEuParliament": "Європейський парламент керував ПП",
+    "euGuidedWorkflowChecks": "Керовані перевірки робочого процесу ЄС",
+    "euGuidedWorkflowHelp": "Вмикає вказівки щодо етапів парламенту ЄС і основні процедурні блокувальники. Ігнорується, якщо профіль процедури не встановлено на Європейський парламент.",
+    "committeeRoomCodeSecondGate": "Комітет/код кімнати (другі ворота)",
+    "exactlySixLettersDigits": "Рівно 6 букв або цифр",
+    "committeeCodePlaceholder": "напр. ECO741",
+    "committeeCodeHelpPrefix": "Шість символів: ініціали камери + три цифри (детермінована пропозиція:",
+    "saveCommittee": "Зберегти комітет"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "ВІДЧИНЕНО",
+    "linkedRoleChair": "Стілець",
+    "linkedRoleDelegate": "Делегат",
+    "linkedRoleLinked": "Пов'язано",
+    "addedRow": "Доданий рядок.",
+    "addedSeat": "Додано місце {label}.",
+    "updatedRow": "Оновлений рядок.",
+    "confirmRemoveUnassignedSeat": "Видалити це непризначене місце з матриці?",
+    "deletedRow": "Видалений рядок.",
+    "importedRows": "Імпортовано {count} рядків.",
+    "skippedDuplicates": "Пропущено {count} дублікатів, які вже є в списку.",
+    "replacedUnassignedSeats": "Замінено всі незакріплені місця.",
+    "generatedRandomCodes": "Згенеровано {count} випадкових кодів для рядків без коду.",
+    "addCommitteesFirst": "Першим додайте комітети до цієї події",
+    "eventCommitteeSessionsLink": "Події та засідання комітетів",
+    "committeeFallback": "Комітет",
+    "showingOneCommitteeAtATime": "Показ одного комітету за раз. Змініть комітет за допомогою нижніх вкладок.",
+    "editPlacardCodesSheet": "Редагувати аркуш кодів плакатів ->",
+    "rosterHeading": "Список · {heading}",
+    "seatsSummary": "{count} місць(а).",
+    "linkedDelegatesCannotBeDeleted": "Тут не можна видалити пов’язаних делегатів.",
+    "countryPosition": "Країна / посада",
+    "placardCode": "Код плаката",
+    "assignedAccount": "Призначений обліковий запис",
+    "signupLink": "Посилання для реєстрації",
+    "actions": "Дії",
+    "noSeatsYet": "Ще немає місць. Додайте рядки або імпортуйте CSV.",
+    "allocationSignupLink": "Посилання для реєстрації на розподіл",
+    "dash": "—",
+    "optional": "Додатково",
+    "save": "зберегти",
+    "remove": "видалити",
+    "addOneSeat": "Додайте одне місце",
+    "addHeadChairAllocation": "Додайте призначення керівника",
+    "addCoChairAllocation": "Додати розподіл співголови",
+    "countryPlaceholder": "напр. Франція",
+    "placardCodeOptional": "Код таблички (необов'язково)",
+    "placardCodePlaceholder": "напр. ДИС-014",
+    "add": "додати",
+    "importCsv": "Імпорт CSV",
+    "importHelpPrefix": "Одне місце на лінію:",
+    "importHelpMiddle": "Рядок заголовка з \"країною\" підходить. Файли UTF-8 з експорту Excel/Google Sheets працюють.",
+    "append": "Додайте",
+    "appendHelp": "пропускає імена, які вже є в цьому комітеті.",
+    "replaceUnassigned": "Замінити непризначений",
+    "replaceUnassignedHelp": "видаляє кожне відкрите місце (не пов’язане з делегатом), а потім завантажує файл, зберігаючи зв’язаних делегатів у безпеці.",
+    "replaceUnassignedOnly": "Замінити лише непризначені",
+    "csvPlaceholder": "Франція, DIS-001\\nНімеччина, DIS-002\\nЯпонія",
+    "parsedRowsSample": "Проаналізовано {count} рядків. Зразок:",
+    "runImport": "Запустіть імпорт",
+    "generateMissingRandomCodes": "Генеруйте відсутні випадкові коди"
   }
 }

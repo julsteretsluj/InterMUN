@@ -15,7 +15,7 @@
     "delegateFallbackName": "Melimpahkan",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Sekretaris Jenderal",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "Kembali ke profil"
   },
   "language": {
     "label": "Bahasa",
@@ -56,7 +56,7 @@
     "settings": "Pengaturan"
   },
   "authWizard": {
-    "enterApp": "Masukkan {nama aplikasi}",
+    "enterApp": "Masukkan {nama aplikasi} {appName}",
     "welcomeSignup": "Masukkan kode konferensi Anda terlebih dahulu, pilih cara Anda berpartisipasi, lalu buat akun Anda.",
     "welcomeLogin": "Masukkan kode konferensi Anda terlebih dahulu, pilih cara Anda berpartisipasi, lalu masuk.",
     "conferenceTitle": "Bergabunglah dengan konferensi Anda",
@@ -156,8 +156,33 @@
     "timer": "pengatur waktu",
     "smtProfile": "Profil"
   },
+  "setupPage": {
+    "title": "Supabase tidak dikonfigurasi",
+    "body": "Penyebaran ini tidak memiliki variabel lingkungan Supabase publik. Tambahkan variabel tersebut di host Anda (misalnya Vercel → Proyek → Pengaturan → Variabel Lingkungan), lalu terapkan ulang:",
+    "valuesHint": "Nilai ada di Supabase → Pengaturan Proyek → API. Gunakan nama yang sama untuk Produksi dan Pratinjau jika Anda menggunakan penerapan pratinjau.",
+    "tryAgainLink": "Coba masuk lagi setelah penerapan ulang"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Tautan pendaftaran tidak valid",
+    "invalidLinkBody": "Tautan alokasi ini tidak memiliki detail yang diperlukan. Tanyakan kepada ketua atau SMT Anda untuk tautan pendaftaran baru.",
+    "allocationNotFoundTitle": "Alokasi tidak ditemukan",
+    "allocationNotFoundBody": "Bangsa/posisi ini tidak lagi tersedia di komite terpilih.",
+    "allocationTakenTitle": "Alokasi sudah diambil",
+    "allocationTakenBody": "{country} telah diklaim oleh akun lain. Silakan pilih alokasi lain.",
+    "submitFailedTitle": "Tidak dapat mengirimkan permintaan",
+    "requestSubmittedTitle": "Permintaan pendaftaran telah dikirimkan",
+    "requestSubmittedBody": "Permintaan Anda untuk {negara} telah dikirim ke ketua komite untuk disetujui. {country}",
+    "requestSubmittedHint": "Setelah disetujui, buka kembali tautan ini atau lanjutkan ke proses masuk panitia untuk melanjutkan.",
+    "continueCommitteeSignIn": "Lanjutkan ke proses masuk panitia"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Pilih acara konferensi terlebih dahulu.",
+    "enterConferenceCode": "Masukkan kode konferensi",
+    "title": "Kode kamar & kursi",
+    "subtitle": "Tetapkan kode komite gerbang kedua untuk setiap sesi dan undang atau promosikan kursi mimbar tanpa menggunakan dasbor delegasi."
+  },
   "delegateDashboard": {
-    "welcome": "Selamat datang, Delegasi {flag} {negara}",
+    "welcome": "Selamat datang, Delegasi {flag} {negara} {country}",
     "activeCommitteeIntro": "Panitia aktif: {line}.",
     "activeCommitteeBody": "Tanggal hitung mundur dibagikan kepada semua orang di komite ini. Persiapan, pendirian, dan dokumen Anda tetap ada di akun Anda.",
     "jumpTo": "Lompat ke",
@@ -254,7 +279,7 @@
     "sessionsCount": "{count, plural, one {# sesi} other {# sesi}}",
     "topicLabel": "Topik:",
     "chairsLabel": "Kursi:",
-    "committeeLogoAlt": "logo {nama}",
+    "committeeLogoAlt": "logo {nama} {name}",
     "eslFriendly": "Ramah ESL"
   },
   "chairNav": {
@@ -550,7 +575,7 @@
         "title": "Daftar Istilah Agenda MUN",
         "subtitle": "Terminologi unik yang disesuaikan dengan kode komite Anda dan topik agenda terkini.",
         "committeeCode": "Kode panitia: {code}",
-        "topicTag": "Topik: {topik}",
+        "topicTag": "Topik: {topik} {topic}",
         "sources": {
           "core": "inti",
           "committee": "komite",
@@ -785,9 +810,9 @@
       "add": "Menambahkan",
       "noIdeasYet": "Belum ada ide.",
       "ideaLabel": "Ide",
-      "ideaFallback": "Ide {angka}",
+      "ideaFallback": "Ide {angka} {number}",
       "linkedDoc": "Dokumen tertaut",
-      "addedOn": "Ditambahkan pada tanggal {tanggal}",
+      "addedOn": "Ditambahkan pada tanggal {tanggal} {date}",
       "edit": "Sunting",
       "delete": "Menghapus",
       "ideaDocument": "Dokumen ide",
@@ -839,9 +864,9 @@
       "matchesCount": "{matches} dari {total} kursi cocok",
       "searchAria": "Delegasi pencarian",
       "virtualRoomVacant": "Kosong",
-      "profileAria": "Lihat profil: {negara}",
+      "profileAria": "Lihat profil: {negara} {country}",
       "vacantSeatAria": "Kursi kosong",
-      "placardAria": "Plakat {negara}",
+      "placardAria": "Plakat {negara} {country}",
       "gavelAria": "Palu"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "Label tujuan",
         "purposeHelpBody": "Teks ini ditambahkan ke nama negara Anda sehingga kursi dapat mengetahui alasan Anda meminta lantai tersebut.",
         "purposePlaceholder": "misalnya dukungan + ikhtisar amandemen",
-        "requesting": "Meminta..."
+        "requesting": "Meminta...",
+        "rollPromptTitle": "Diperlukan persetujuan ketua",
+        "rollPromptBodyPickStatus": "Sesi telah dimulai. Pilih status absensi Anda untuk membuka kunci pembicaraan dan pemungutan suara.",
+        "rollPromptBodyWaitSessionStart": "Menunggu ketua memulai sidang panitia.",
+        "rollPromptBodyWaitRollPrompt": "Menunggu prompt roll-call.",
+        "rollPromptBodyMarkedAbsent": "Anda saat ini ditandai tidak hadir. Minta ketua untuk menandai Anda Hadir untuk berbicara dan memberikan suara.",
+        "rollPromptBodyChecking": "Memeriksa status daftar Anda...",
+        "rollPromptSaving": "Penghematan...",
+        "rollPromptPresent": "Hadiah",
+        "rollPromptPresentVoting": "Hadir dan memberikan suara"
       },
       "motionVoting": {
         "votingProcedure": "Prosedur pemungutan suara",
@@ -865,8 +899,8 @@
         "motioner": "Penggerak",
         "majority": "Mayoritas",
         "majoritySimple": "Sederhana",
-        "tally": "Ya {ya} - Tidak {tidak} - Total {total}",
-        "help": "Panggung mencatat suara setiap delegasi dalam sesi. Pemungutan suara mosi hanya menggunakan Ya atau Tidak (tidak abstain). Jumlah total hanya dihitung pada plakat yang mencantumkan Ya atau Tidak; delegasi yang tidak hadir dilewati."
+        "tally": "Ya {ya} - Tidak {tidak} - Total {total} {yes} {no}",
+        "help": "Panggung mencatat suara setiap delegasi dalam sesi. Pemungutan suara mosi hanya menggunakan Ya atau Tidak (tidak abstain). Jumlah total hanya dihitung pada plakat yang mencatat Ya atau Tidak; delegasi yang tidak hadir dilewati."
       },
       "activeMotion": {
         "currentMotion": "Gerakan saat ini",
@@ -882,12 +916,12 @@
         "speakerTimeLeftTotal": "Waktu pembicara (kiri / total)",
         "perSpeaker": "(per pembicara)",
         "paused": "(dijeda)",
-        "pauseReason": "Jeda: {alasan}"
+        "pauseReason": "Jeda: {alasan} {reason}"
       },
       "floorStatus": {
         "sessionTime": "Waktu sesi",
         "limit": "Membatasi",
-        "limitRemaining": "{nilai} tersisa",
+        "limitRemaining": "{nilai} tersisa {value}",
         "limitOverBy": "berakhir sebesar {value}",
         "dais": "Mimbar",
         "pinned": "Disematkan",
@@ -900,6 +934,13 @@
         "daisAnnouncement": "Pengumuman Dai",
         "close": "Menutup"
       },
+      "committeeControl": {
+        "sessionNameLabel": "Nama sesi",
+        "sessionNamePlaceholder": "misalnya Sesi pagi",
+        "sessionNameSaving": "Penghematan…",
+        "sessionNameSaved": "Disimpan",
+        "sessionNameHint": "Menyimpan secara otomatis dan muncul di riwayat sesi."
+      },
       "history": {
         "title": "Sejarah sesi",
         "savedCount": "{count} disimpan",
@@ -909,8 +950,8 @@
         "delete": "Menghapus",
         "deleteConfirm": "Hapus sesi ini dari riwayat?",
         "sessionNamePrompt": "Nama sesi",
-        "rangeClosed": "{jangkauan}",
-        "rangeOngoing": "{rentang} -> Sedang berlangsung"
+        "rangeClosed": "{jangkauan} {range}",
+        "rangeOngoing": "{rentang} -> Sedang berlangsung {range}"
       },
       "timerPage": {
         "title": "pengatur waktu",
@@ -927,7 +968,7 @@
         "floorLabelPlaceholder": "misalnya GSL tahun 60an",
         "timerPurpose": "Tujuan pengatur waktu",
         "purposeGeneralFloor": "Debat umum/lantai (tidak terikat pada pemungutan suara)",
-        "purposeMotionVote": "Gerakan terbuka - pengatur waktu hanya saat pemungutan suara tersebut aktif di lantai",
+        "purposeMotionVote": "Gerakan terbuka - pengatur waktu hanya saat pemungutan suara tersebut aktif di lapangan",
         "openMotionForVoting": "Gerakan terbuka (harus terbuka untuk pemungutan suara)",
         "selectMotion": "Pilih gerakan...",
         "untitled": "Tanpa judul",
@@ -971,13 +1012,6 @@
         "pausedForCommittee": "Timer dijeda untuk panitia.",
         "alreadyRunning": "Pengatur waktu sudah berjalan.",
         "runningForCommittee": "Timer berjalan untuk panitia."
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1002,7 +1036,7 @@
     "daisListed": "Dais (terdaftar)",
     "committeeCodeSecondGate": "Kode panitia/ruangan (gerbang kedua)",
     "seats": "Kursi",
-    "seatsFilledAllocated": "{terisi} terisi · {total} dialokasikan",
+    "seatsFilledAllocated": "{terisi} terisi · {total} dialokasikan {filled}",
     "resolutions": "Resolusi",
     "openVotes": "Pemungutan suara terbuka",
     "editMetadataIntro": "Edit metadata sesi komite dan nama ketua di bawah",
@@ -1076,7 +1110,7 @@
     "delegatesMatrix": "Matriks delegasi",
     "clearAllChairNotes": "Hapus semua catatan kursi",
     "searchCountry": "Telusuri negara...",
-    "roomStats": "{plakat} plakat · {ditandai} dengan catatan kursi · Gulungan direkam untuk {count}",
+    "roomStats": "{plakat} plakat · {ditandai} dengan catatan kursi · Gulungan direkam untuk {count} {placards} {flagged}",
     "loading": "Memuat...",
     "noDelegationsMatch": "Tidak ada delegasi yang cocok dengan penelusuran Anda.",
     "rollPrefix": "Gulung {label}",
@@ -1256,29 +1290,200 @@
     "creating": "Membuat…",
     "submit": "Buat acara + panitia dan masuk"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "Konferensi, alokasi, dan kata sandi diperlukan.",
+      "mustBeSignedIn": "Anda harus masuk.",
+      "contextMismatch": "Konteks komite Anda tidak cocok dengan proses masuk ini. Masukkan kembali kode konferensi dan komite Anda jika diperlukan.",
+      "conferenceSelectionMismatch": "Pilihan konferensi Anda tidak cocok dengan komite ini. Masukkan kembali kode konferensi dan komite Anda.",
+      "conferenceSelectionMismatchWithBackHint": "Pilihan konferensi Anda tidak cocok dengan komite ini. Kembali dan masukkan kode konferensi yang benar, lalu kode panitia.",
+      "conferenceNotFound": "Konferensi tidak ditemukan.",
+      "noAllocationForConference": "Anda tidak mempunyai alokasi untuk konferensi ini. Mintalah kursi untuk menugaskan Anda sebelum melanjutkan.",
+      "allocationMismatch": "Alokasi tidak sesuai dengan tugas Anda. Masukkan negara atau posisi Anda persis seperti yang ditugaskan (jarak dan aksen mungkin berbeda).",
+      "incorrectCommitteePassword": "Kata sandi panitia salah.",
+      "requiredConferenceAndStaffPassword": "Kata sandi sekunder konferensi dan staf diperlukan.",
+      "onlySmtOrAdminBypass": "Hanya admin sekretariat atau situs web yang dapat menggunakan proses masuk ini.",
+      "incorrectStaffPassword": "Kata sandi sekunder staf salah.",
+      "chooseConference": "Pilih konferensi.",
+      "passwordMinLength": "Kata sandi minimal harus 6 karakter.",
+      "passwordsDoNotMatch": "Kata sandi tidak cocok.",
+      "notSignedIn": "Tidak masuk.",
+      "onlyChairSmtAdminSetPassword": "Hanya admin ketua, SMT, dan website yang dapat mengatur password panitia.",
+      "onlyChairSmtAdminRemovePassword": "Hanya admin ketua, SMT, dan website yang dapat menghapus password panitia."
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "Pilih acara dengan kode konferensi (event gate) terlebih dahulu.",
+      "notSignedIn": "Tidak masuk.",
+      "onlySmtManageMatrix": "Hanya sekretariat yang dapat mengelola matriks alokasi.",
+      "committeeNotInActiveEvent": "Panitia ini bukan bagian dari acara aktif.",
+      "requiredCommitteeAndCountry": "Komite dan negara/posisi diperlukan.",
+      "countryTooLong": "Negara/posisi terlalu panjang.",
+      "codeTooLong": "Kode plakat terlalu panjang.",
+      "couldNotCreateAllocation": "Tidak dapat membuat alokasi.",
+      "requiredAllocationAndCountry": "Alokasi dan negara/posisi diperlukan.",
+      "allocationNotFound": "Alokasi tidak ditemukan.",
+      "missingAllocation": "Alokasi tidak ada.",
+      "seatLinkedToDelegate": "Kursi ini terhubung dengan delegasi. Putuskan tautannya di Supabase atau tetapkan kembali sebelum menghapus.",
+      "selectCommittee": "Pilih komite.",
+      "couldNotParseCsv": "Tidak dapat menguraikan CSV.",
+      "noDataRowsFound": "Tidak ada baris data yang ditemukan (membutuhkan setidaknya satu negara/posisi per baris).",
+      "importLimitedRows": "Impor dibatasi hingga {max} baris. Pisahkan file Anda.",
+      "rowTooLong": "Baris terlalu panjang: {baris}… {row}",
+      "codeTooLongOnRow": "Kode terlalu panjang pada baris: {row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "Pilih acara dengan kode konferensi (event gate) terlebih dahulu.",
+      "notSignedIn": "Tidak masuk.",
+      "onlySmtChangeCodes": "Hanya sekretariat yang dapat mengubah kode panitia di sini.",
+      "committeeNotInActiveEvent": "Panitia ini bukan bagian dari acara aktif Anda.",
+      "missingCommittee": "Panitia tidak ada.",
+      "invalidCommitteeCode": "Kode panitia/ruangan harus tepat 6 huruf atau angka (misal ECO741).",
+      "unauthorized": "Tidak sah.",
+      "codeSaved": "Kode disimpan. Delegasi menggunakannya sebagai gerbang kedua setelah kode konferensi.",
+      "invalidEmail": "Masukkan alamat email yang valid.",
+      "onlySmtInviteChair": "Hanya sekretariat yang dapat mengirimkan undangan ketua.",
+      "missingServiceRoleKey": "Server tidak memiliki SUPABASE_SERVICE_ROLE_KEY. Tambahkan ke env penerapan (jangan pernah diekspos ke browser).",
+      "missingPublicAppUrl": "Tetapkan NEXT_PUBLIC_APP_URL ke URL situs publik Anda (misalnya https://your-app.vercel.app) sehingga tautan undangan dialihkan dengan benar.",
+      "emailAlreadyHasAccount": "Email itu sudah memiliki akun. Gunakan \"Berikan peran ketua\" di bawah daripada mengirim undangan lain.",
+      "inviteSentButRoleSetFailed": "Undangan terkirim, namun tidak dapat menetapkan peran ketua di profil: {error}. Gunakan \"Berikan peran ketua\" setelah mereka menerimanya.",
+      "inviteSentSuccess": "Email undangan dikirim ke {email}. Mereka akan menjadi kursi setelah mereka menetapkan kata sandinya.",
+      "onlySmtGrantChair": "Hanya sekretariat yang dapat memberikan peran ketua.",
+      "noAccountForEmail": "Belum ada akun dengan email itu. Kirim undangan kursi terlebih dahulu.",
+      "promotedToChairSuccess": "Profil untuk {email} sekarang menjadi kursi mimbar."
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "Anda harus masuk.",
+      "onlyDelegateOrChair": "Hanya akun delegasi/ketua yang dapat meminta pendaftaran alokasi.",
+      "allocationNotFound": "Alokasi tidak ditemukan.",
+      "allocationAlreadyAssigned": "Alokasi itu sudah ditetapkan.",
+      "requiredConferenceAllocationEmail": "Konferensi, alokasi, dan email delegasi diperlukan."
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "Silakan masuk terlebih dahulu.",
+      "onlyDelegatesCanExport": "Hanya delegasi yang dapat mengekspor materi mereka.",
+      "accountHasNoEmail": "Akun Anda belum menetapkan alamat email.",
+      "rangeTodayUtc": "Hari ini (UTC)",
+      "rangeAllTime": "Sepanjang waktu",
+      "emailSubject": "Ekspor material InterMUN ({range})",
+      "emailSendConfigHint": "Setel SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS dan opsional MATERIALS_EXPORT_FROM di server.",
+      "exportEmailedTo": "Ekspor dikirim melalui email ke {email}. Jika Anda tidak melihatnya, periksa spam/sampah."
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "antarMUN",
+      "welcomeSubject": "Selamat datang di InterMUN",
+      "welcomeLine1": "Selamat datang di InterMUN.",
+      "welcomeConfirmedFor": "Akun delegasi Anda telah dikonfirmasi untuk: {negara}. {country}",
+      "welcomeLine2": "Anda sekarang dapat melanjutkan ke proses masuk komite dan bergabung dalam sesi langsung.",
+      "welcomeLine3": "Sampai jumpa di lantai.",
+      "chairReminderSubject": "Delegasikan permintaan alokasi menunggu persetujuan",
+      "chairReminderLine1": "Seorang delegasi telah meminta alokasi dan memerlukan peninjauan ketua.",
+      "chairReminderConference": "Konferensi: {konferensi} {conference}",
+      "chairReminderAllocation": "Alokasi yang diminta: {country}",
+      "chairReminderDelegate": "Delegasi: {nama} {name}",
+      "chairReminderEmail": "Email akun: {email}",
+      "chairReminderLine2": "Harap setujui atau tolak permintaan ini dalam matriks alokasi kursi:"
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "Detail acara",
+    "selectConferenceFirst": "Pilih konferensi dengan gerbang acara terlebih dahulu, lalu kembali ke sini.",
+    "committeeSessionsTitle": "Sesi panitia dalam acara ini",
+    "committeeSessionsBody": "Judul sesi komite (topik agenda) tetap di sini untuk dicatat; jaringan beranda SMT menunjukkan nama resmi panitia, akronim, kursi, dan kode tampilan singkat. Kode panitia/ruangan (gerbang kedua) harus tetap unik dalam acara ini.",
+    "noCommitteeSessions": "Tidak ada sesi panitia untuk acara ini.",
+    "eventName": "Nama acara",
+    "tagline": "Slogan",
+    "conferenceCodeFirstGate": "Kode konferensi (gerbang pertama)",
+    "saved": "Disimpan.",
+    "saving": "Penghematan…",
+    "saveConferenceEvent": "Simpan acara konferensi",
+    "errorImageFile": "Silakan pilih file gambar.",
+    "errorImageTooLarge": "Gambar terlalu besar (maks 6 MB).",
+    "errorCommitteeCodeMissing": "Kode panitia tidak ada.",
+    "errorPublicUrl": "Tidak dapat menyelesaikan URL publik untuk gambar yang diunggah.",
+    "errorUploadFailed": "Gagal mengunggah.",
+    "sessionTitle": "Judul sesi",
+    "chamberLabel": "Ruang / label",
+    "officialCommitteeName": "Nama resmi panitia (jaringan SMT)",
+    "officialCommitteeNamePlaceholder": "misalnya Organisasi Kesehatan Dunia",
+    "chairNames": "Nama kursi",
+    "chairNamesPlaceholder": "Dipisahkan koma, mis. Alex Kim, Jordan Lee",
+    "committeeLogo": "Logo panitia",
+    "uploading": "Mengunggah…",
+    "crisisSlidesUrl": "Slide krisis (URL Google Slide)",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "Krisis meluncur",
+    "crisisSlidesHelpPrefix": "Untuk FWC / DK PBB / HSC: tertanam pada delegasi dan ketua",
+    "crisisSlidesHelpSuffix": "halaman. Biarkan kosong jika tidak digunakan. Dek harus memungkinkan pemirsa Anda menonton (berbagi tautan).",
+    "competingMotionsTitle": "Mosi bersaing (RoP): konsultasi sebelum kaukus yang dimoderatori",
+    "moderatedCaucus": "kaukus yang dimoderasi",
+    "consultation": "konsultasi",
+    "competingMotionsHelpPrefix": "Hapus centang apakah buku pegangan Anda berperingkat a",
+    "competingMotionsHelpMiddle": "gerak di atas",
+    "competingMotionsHelpSuffix": "ketika keduanya tertunda.",
+    "procedureProfile": "Profil prosedur",
+    "procedureDefault": "RoP komite default",
+    "procedureEuParliament": "Parlemen Uni Eropa memandu RoP",
+    "euGuidedWorkflowChecks": "Pemeriksaan alur kerja yang dipandu UE",
+    "euGuidedWorkflowHelp": "Mengaktifkan panduan fase Parlemen UE dan pemblokir prosedural inti. Diabaikan kecuali profil prosedur diatur ke Parlemen UE.",
+    "committeeRoomCodeSecondGate": "Kode panitia/ruangan (gerbang kedua)",
+    "exactlySixLettersDigits": "Tepatnya 6 huruf atau angka",
+    "committeeCodePlaceholder": "misalnya ECO741",
+    "committeeCodeHelpPrefix": "Enam karakter: inisial kamar + tiga digit (saran deterministik:",
+    "saveCommittee": "Simpan panitia"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "Membuka",
+    "linkedRoleChair": "Kursi",
+    "linkedRoleDelegate": "Melimpahkan",
+    "linkedRoleLinked": "Tertaut",
+    "addedRow": "Baris yang ditambahkan.",
+    "addedSeat": "Menambahkan kursi {label}.",
+    "updatedRow": "Baris yang diperbarui.",
+    "confirmRemoveUnassignedSeat": "Hapus kursi yang belum ditetapkan ini dari matriks?",
+    "deletedRow": "Baris yang dihapus.",
+    "importedRows": "{count} baris yang diimpor.",
+    "skippedDuplicates": "Melewatkan {count} duplikat yang sudah ada di daftar.",
+    "replacedUnassignedSeats": "Mengganti semua kursi yang belum ditetapkan.",
+    "generatedRandomCodes": "Menghasilkan {count} kode acak untuk baris tanpa kode acak.",
+    "addCommitteesFirst": "Tambahkan panitia ke acara ini terlebih dahulu",
+    "eventCommitteeSessionsLink": "Sesi acara & panitia",
+    "committeeFallback": "Komite",
+    "showingOneCommitteeAtATime": "Menampilkan satu komite pada satu waktu. Ganti panitia menggunakan tab bawah.",
+    "editPlacardCodesSheet": "Edit lembar kode plakat ->",
+    "rosterHeading": "Daftar pemain · {heading}",
+    "seatsSummary": "{count} kursi.",
+    "linkedDelegatesCannotBeDeleted": "Delegasi yang tertaut tidak dapat dihapus di sini.",
+    "countryPosition": "Negara / posisi",
+    "placardCode": "Kode plakat",
+    "assignedAccount": "Akun yang ditugaskan",
+    "signupLink": "Tautan pendaftaran",
+    "actions": "Tindakan",
+    "noSeatsYet": "Belum ada kursi. Tambahkan baris atau impor CSV.",
+    "allocationSignupLink": "Tautan pendaftaran alokasi",
+    "dash": "—",
+    "optional": "Opsional",
+    "save": "Menyimpan",
+    "remove": "Menghapus",
+    "addOneSeat": "Tambahkan satu kursi",
+    "addHeadChairAllocation": "Tambahkan alokasi Ketua Ketua",
+    "addCoChairAllocation": "Tambahkan alokasi Ketua Bersama",
+    "countryPlaceholder": "misalnya Perancis",
+    "placardCodeOptional": "Kode plakat (opsional)",
+    "placardCodePlaceholder": "misalnya DIS-014",
+    "add": "Menambahkan",
+    "importCsv": "Impor CSV",
+    "importHelpPrefix": "Satu kursi per baris:",
+    "importHelpMiddle": "Baris header dengan \"negara\" baik-baik saja. File UTF-8 dari ekspor Excel/Google Sheets berfungsi.",
+    "append": "Menambahkan",
+    "appendHelp": "melewatkan nama-nama yang sudah ada di komite ini.",
+    "replaceUnassigned": "Ganti yang tidak ditugaskan",
+    "replaceUnassignedHelp": "menghapus setiap kursi yang terbuka (tidak tertaut ke delegasi), lalu memuat file-delegasi yang tertaut tetap aman.",
+    "replaceUnassignedOnly": "Ganti yang belum ditetapkan saja",
+    "csvPlaceholder": "Prancis,DIS-001\\nJerman,DIS-002\\nJepang",
+    "parsedRowsSample": "Mengurai {count} baris. Mencicipi:",
+    "runImport": "Jalankan impor",
+    "generateMissingRandomCodes": "Hasilkan kode acak yang hilang"
   }
 }

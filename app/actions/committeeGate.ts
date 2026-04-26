@@ -9,6 +9,7 @@ import { getConferenceForDashboard } from "@/lib/active-conference";
 import { verifyStaffCommitteeBypassPassword } from "@/lib/staff-committee-bypass";
 import { getActiveEventId, setActiveEventId } from "@/lib/active-event-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
+import { getTranslations } from "next-intl/server";
 
 export async function clearCommitteeVerification() {
   await clearVerifiedConference();
@@ -19,13 +20,14 @@ export async function verifyCommitteeSecondaryLogin(
   _prev: { error?: string } | null,
   formData: FormData
 ): Promise<{ error: string } | null> {
+  const t = await getTranslations("serverActions.committeeGate");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const allocation = String(formData.get("allocation") ?? "").trim();
   const password = String(formData.get("password") ?? "");
   const nextPath = String(formData.get("next") ?? "/profile").trim() || "/profile";
 
   if (!conferenceId || !allocation || !password) {
-    return { error: "Conference, allocation, and password are required." };
+    return { error: t("requiredConferenceAllocationPassword") };
   }
 
   const supabase = await createClient();
@@ -33,7 +35,7 @@ export async function verifyCommitteeSecondaryLogin(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { error: "You must be signed in." };
+    return { error: t("mustBeSignedIn") };
   }
 
   const { data: profile } = await supabase
@@ -46,7 +48,7 @@ export async function verifyCommitteeSecondaryLogin(
   if (!ctx || ctx.id !== conferenceId) {
     return {
       error:
-        "Your committee context does not match this sign-in. Re-enter your conference and committee codes if needed.",
+        t("contextMismatch"),
     };
   }
 
@@ -55,7 +57,7 @@ export async function verifyCommitteeSecondaryLogin(
     if (eventId && ctx.event_id !== eventId) {
       return {
         error:
-          "Your conference selection does not match this committee. Re-enter your conference and committee codes.",
+        t("conferenceSelectionMismatch"),
       };
     }
     if (!eventId) {
@@ -64,7 +66,7 @@ export async function verifyCommitteeSecondaryLogin(
   } else if (!eventId || ctx.event_id !== eventId) {
     return {
       error:
-        "Your conference selection does not match this committee. Go back and enter the correct conference code, then committee code.",
+        t("conferenceSelectionMismatchWithBackHint"),
     };
   }
 
@@ -75,7 +77,7 @@ export async function verifyCommitteeSecondaryLogin(
     .maybeSingle();
 
   if (cErr || !conference) {
-    return { error: "Conference not found." };
+    return { error: t("conferenceNotFound") };
   }
 
   const { data: allocs, error: aErr } = await supabase
@@ -87,7 +89,7 @@ export async function verifyCommitteeSecondaryLogin(
   if (aErr || !allocs?.length) {
     return {
       error:
-        "You have no allocation for this conference. Ask a chair to assign you before continuing.",
+        t("noAllocationForConference"),
     };
   }
 
@@ -96,7 +98,7 @@ export async function verifyCommitteeSecondaryLogin(
   if (!match) {
     return {
       error:
-        "Allocation does not match your assignment. Enter your country or position exactly as assigned (spacing and accents may differ).",
+        t("allocationMismatch"),
     };
   }
 
@@ -107,7 +109,7 @@ export async function verifyCommitteeSecondaryLogin(
   }
 
   if (!verifyCommitteePassword(password, conference.committee_password_hash)) {
-    return { error: "Incorrect committee password." };
+    return { error: t("incorrectCommitteePassword") };
   }
 
   await setVerifiedConferenceId(conference.id);
@@ -120,12 +122,13 @@ export async function verifyStaffNotDelegateBypass(
   _prev: { error?: string } | null,
   formData: FormData
 ): Promise<{ error: string } | null> {
+  const t = await getTranslations("serverActions.committeeGate");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const staffPassword = String(formData.get("staff_secondary_password") ?? "");
   const nextPath = String(formData.get("next") ?? "/profile").trim() || "/profile";
 
   if (!conferenceId || !staffPassword) {
-    return { error: "Conference and staff secondary password are required." };
+    return { error: t("requiredConferenceAndStaffPassword") };
   }
 
   const supabase = await createClient();
@@ -133,7 +136,7 @@ export async function verifyStaffNotDelegateBypass(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { error: "You must be signed in." };
+    return { error: t("mustBeSignedIn") };
   }
 
   const { data: profile } = await supabase
@@ -143,14 +146,14 @@ export async function verifyStaffNotDelegateBypass(
     .maybeSingle();
 
   if (profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only secretariat or website admins can use this sign-in." };
+    return { error: t("onlySmtOrAdminBypass") };
   }
 
   const ctx = await getConferenceForDashboard({ role: profile?.role });
   if (!ctx || ctx.id !== conferenceId) {
     return {
       error:
-        "Your committee context does not match this sign-in. Re-enter your conference and committee codes if needed.",
+        t("contextMismatch"),
     };
   }
 
@@ -158,7 +161,7 @@ export async function verifyStaffNotDelegateBypass(
   if (eventId && ctx.event_id !== eventId) {
     return {
       error:
-        "Your conference selection does not match this committee. Re-enter your conference and committee codes.",
+        t("conferenceSelectionMismatch"),
     };
   }
   if (!eventId) {
@@ -166,7 +169,7 @@ export async function verifyStaffNotDelegateBypass(
   }
 
   if (!verifyStaffCommitteeBypassPassword(staffPassword)) {
-    return { error: "Incorrect staff secondary password." };
+    return { error: t("incorrectStaffPassword") };
   }
 
   await setVerifiedConferenceId(conferenceId);
@@ -180,18 +183,19 @@ export async function setCommitteePasswordAction(
   _prev: CommitteePasswordFormState | null,
   formData: FormData
 ): Promise<CommitteePasswordFormState> {
+  const t = await getTranslations("serverActions.committeeGate");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const password = String(formData.get("password") ?? "");
   const confirm = String(formData.get("confirm") ?? "");
 
   if (!conferenceId) {
-    return { error: "Choose a conference." };
+    return { error: t("chooseConference") };
   }
   if (password.length < 6) {
-    return { error: "Password must be at least 6 characters." };
+    return { error: t("passwordMinLength") };
   }
   if (password !== confirm) {
-    return { error: "Passwords do not match." };
+    return { error: t("passwordsDoNotMatch") };
   }
 
   const supabase = await createClient();
@@ -199,7 +203,7 @@ export async function setCommitteePasswordAction(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { error: "Not signed in." };
+    return { error: t("notSignedIn") };
   }
 
   const { data: profile } = await supabase
@@ -209,7 +213,7 @@ export async function setCommitteePasswordAction(
     .maybeSingle();
 
   if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only chairs, SMT, and website admins can set the committee password." };
+    return { error: t("onlyChairSmtAdminSetPassword") };
   }
 
   const hash = hashCommitteePassword(password);
@@ -229,14 +233,15 @@ export async function removeCommitteePasswordAction(
   _prev: CommitteePasswordFormState | null,
   formData: FormData
 ): Promise<CommitteePasswordFormState> {
+  const t = await getTranslations("serverActions.committeeGate");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
-  if (!conferenceId) return { error: "Choose a conference." };
+  if (!conferenceId) return { error: t("chooseConference") };
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Not signed in." };
+  if (!user) return { error: t("notSignedIn") };
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -245,7 +250,7 @@ export async function removeCommitteePasswordAction(
     .maybeSingle();
 
   if (profile?.role !== "chair" && profile?.role !== "smt" && profile?.role !== "admin") {
-    return { error: "Only chairs, SMT, and website admins can remove the committee password." };
+    return { error: t("onlyChairSmtAdminRemovePassword") };
   }
 
   const { error } = await supabase.rpc("set_committee_password_hash", {

@@ -15,7 +15,7 @@
     "delegateFallbackName": "代表",
     "smtFallbackName": "表面貼裝技術",
     "secretaryGeneral": "秘書長",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "返回個人資料"
   },
   "language": {
     "label": "語言",
@@ -56,7 +56,7 @@
     "settings": "設定"
   },
   "authWizard": {
-    "enterApp": "輸入{應用程式名稱}",
+    "enterApp": "輸入{應用程式名稱} {appName}",
     "welcomeSignup": "首先輸入您的會議代碼，選擇您的參與方式，然後建立您的帳戶。",
     "welcomeLogin": "首先輸入您的會議代碼，選擇參與方式，然後登入。",
     "conferenceTitle": "加入您的會議",
@@ -156,6 +156,31 @@
     "timer": "定時器",
     "smtProfile": "輪廓"
   },
+  "setupPage": {
+    "title": "未配置 Supabase",
+    "body": "此部署缺少公共 Supabase 環境變數。 將它們新增至您的主機（例如 Vercel → 專案 → 設定 → 環境變數），然後重新部署：",
+    "valuesHint": "值位於 Supabase → 專案設定 → API 中。 如果您使用預覽部署，請對生產和預覽使用相同的名稱。",
+    "tryAgainLink": "重新部署後嘗試重新登入"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "註冊連結無效",
+    "invalidLinkBody": "此分配連結缺少所需的詳細資訊。 向您的主席或 SMT 索取新的註冊連結。",
+    "allocationNotFoundTitle": "未找到分配",
+    "allocationNotFoundBody": "該國家/職位在選定的委員會中不再可用。",
+    "allocationTakenTitle": "已分配",
+    "allocationTakenBody": "{country} 已被另一個帳戶認領。 請選擇不同的分配。",
+    "submitFailedTitle": "無法提交請求",
+    "requestSubmittedTitle": "已提交註冊請求",
+    "requestSubmittedBody": "您對{country}的請求已發送給委員會主席以供批准。",
+    "requestSubmittedHint": "一旦獲得批准，請重新開啟此連結或繼續登入委員會以繼續。",
+    "continueCommitteeSignIn": "繼續登入委員會"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "首先選擇會議活動。",
+    "enterConferenceCode": "輸入會議代碼",
+    "title": "房間代碼和椅子",
+    "subtitle": "為每次會議設定第二門委員會代碼，並邀請或晉升講台主席，而無需使用代表儀表板。"
+  },
   "delegateDashboard": {
     "welcome": "歡迎，{flag} {country} 的代表",
     "activeCommitteeIntro": "活躍委員會：{line}。",
@@ -254,7 +279,7 @@
     "sessionsCount": "{計數，複數，一個 {# 會話} 其他 {# 會話}}",
     "topicLabel": "話題：",
     "chairsLabel": "椅子：",
-    "committeeLogoAlt": "{名稱}標誌",
+    "committeeLogoAlt": "{名稱}標誌 {name}",
     "eslFriendly": "ESL 友善"
   },
   "chairNav": {
@@ -428,7 +453,7 @@
       "helpRequiredMajorityBody": "選擇用於決定通過/失敗的投票閾值。 「簡單」佔了一半以上。 「2/3」需要絕對多數。",
       "majoritySimple": "簡單的",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{標籤}多數",
+      "majorityLine": "{標籤}多數 {label}",
       "mustVote": "必須投票",
       "helpMustVoteTitle": "必須投票",
       "helpMustVoteBody": "將此動議標記為「必須投票」項目。 這用於向參與者傳達要求（取決於委員會的設置）。",
@@ -550,7 +575,7 @@
         "title": "模擬聯合國議程術語表",
         "subtitle": "與您的委員會代碼和當前議程主題相符的獨特術語。",
         "committeeCode": "委員會代碼：{code}",
-        "topicTag": "主題：{主題}",
+        "topicTag": "主題：{主題} {topic}",
         "sources": {
           "core": "核",
           "committee": "委員會",
@@ -723,7 +748,7 @@
           },
           "climate_adaptation": {
             "term": "氣候適應",
-            "definition": "減少氣候相關影響脆弱性的政策與投資。"
+            "definition": "減少氣候相關影響脆弱性的政策和投資。"
           },
           "cyber_norms": {
             "term": "網路規範",
@@ -785,9 +810,9 @@
       "add": "添加",
       "noIdeasYet": "還沒有想法。",
       "ideaLabel": "主意",
-      "ideaFallback": "想法{編號}",
+      "ideaFallback": "想法{編號} {number}",
       "linkedDoc": "連結文檔",
-      "addedOn": "添加了{日期}",
+      "addedOn": "添加了{日期} {date}",
       "edit": "編輯",
       "delete": "刪除",
       "ideaDocument": "想法文件",
@@ -839,9 +864,9 @@
       "matchesCount": "{matches} 個席位（共 {total} 個）匹配",
       "searchAria": "搜尋代表團",
       "virtualRoomVacant": "空缺",
-      "profileAria": "看個人資料：{國家}",
+      "profileAria": "看個人資料：{國家} {country}",
       "vacantSeatAria": "空座",
-      "placardAria": "標語牌{國家}",
+      "placardAria": "標語牌{國家} {country}",
       "gavelAria": "木槌"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "用途標籤",
         "purposeHelpBody": "該文字附加在您的國家/地區名稱後，以便主席可以了解您要求發言的原因。",
         "purposePlaceholder": "例如支援+修訂概述",
-        "requesting": "請求..."
+        "requesting": "請求...",
+        "rollPromptTitle": "需要主席批准",
+        "rollPromptBodyPickStatus": "會議已經開始。 選擇您的點名狀態以解鎖發言和投票。",
+        "rollPromptBodyWaitSessionStart": "等待主席開始委員會會議。",
+        "rollPromptBodyWaitRollPrompt": "等待點名提示。",
+        "rollPromptBodyMarkedAbsent": "您目前被標記為缺席。 請主席標記您發言並投票。",
+        "rollPromptBodyChecking": "正在檢查您的磁碟區狀態...",
+        "rollPromptSaving": "儲存...",
+        "rollPromptPresent": "展示",
+        "rollPromptPresentVoting": "出席並投票"
       },
       "motionVoting": {
         "votingProcedure": "投票程序",
@@ -882,12 +916,12 @@
         "speakerTimeLeftTotal": "發言時間（左/總）",
         "perSpeaker": "（每個發言者）",
         "paused": "（停頓）",
-        "pauseReason": "暫停：{原因}"
+        "pauseReason": "暫停：{原因} {reason}"
       },
       "floorStatus": {
         "sessionTime": "會議時間",
         "limit": "限制",
-        "limitRemaining": "還剩 {值}",
+        "limitRemaining": "還剩 {值} {value}",
         "limitOverBy": "超過 {value}",
         "dais": "講台",
         "pinned": "已固定",
@@ -900,6 +934,13 @@
         "daisAnnouncement": "講台公告",
         "close": "關閉"
       },
+      "committeeControl": {
+        "sessionNameLabel": "會話名稱",
+        "sessionNamePlaceholder": "例如上午場",
+        "sessionNameSaving": "保存…",
+        "sessionNameSaved": "已儲存",
+        "sessionNameHint": "自動儲存並顯示在會話歷史記錄中。"
+      },
       "history": {
         "title": "會話歷史記錄",
         "savedCount": "已儲存 {count} 個",
@@ -909,8 +950,8 @@
         "delete": "刪除",
         "deleteConfirm": "從歷史記錄中刪除此會話嗎？",
         "sessionNamePrompt": "會話名稱",
-        "rangeClosed": "{範圍}",
-        "rangeOngoing": "{範圍} -> 正在進行"
+        "rangeClosed": "{範圍} {range}",
+        "rangeOngoing": "{範圍} -> 正在進行 {range}"
       },
       "timerPage": {
         "title": "定時器",
@@ -971,13 +1012,6 @@
         "pausedForCommittee": "委員會的計時器暫停。",
         "alreadyRunning": "計時器已經在運作。",
         "runningForCommittee": "委員會正在運行計時器。"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1002,7 +1036,7 @@
     "daisListed": "講台（已列出）",
     "committeeCodeSecondGate": "委員會/房間代碼（第二門）",
     "seats": "座位數",
-    "seatsFilledAllocated": "{已填入}已填入·已指派的{總計}",
+    "seatsFilledAllocated": "{已填入}已填入·已指派的{總計} {filled} {total}",
     "resolutions": "決議",
     "openVotes": "公開投票",
     "editMetadataIntro": "編輯委員會會議元資料和主席姓名",
@@ -1076,10 +1110,10 @@
     "delegatesMatrix": "代表矩陣",
     "clearAllChairNotes": "清除所有主席註釋",
     "searchCountry": "搜尋國家...",
-    "roomStats": "{標語牌} 標語牌 · {已標記} 帶有主席註釋 · 已記錄 {count} 個點名",
+    "roomStats": "{標語牌} 標語牌 · {已標記} 帶有主席註釋 · 已記錄 {count} 個點名 {placards} {flagged}",
     "loading": "載入中...",
     "noDelegationsMatch": "沒有與您的搜尋相符的代表團。",
-    "rollPrefix": "卷{標籤}",
+    "rollPrefix": "卷{標籤} {label}",
     "linkedAccount": "關聯帳戶",
     "vacantPlacard": "空置標語牌",
     "delegateProfile": "代表簡介 ->",
@@ -1256,29 +1290,200 @@
     "creating": "創造…",
     "submit": "創建活動+委員會並進入"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "需要會議、分配和密碼。",
+      "mustBeSignedIn": "您必須登入。",
+      "contextMismatch": "您的委員會上下文與此登入不符。 如果需要，請重新輸入您的會議和委員會代碼。",
+      "conferenceSelectionMismatch": "您的會議選擇與該委員會不符。 重新輸入您的會議和委員會代碼。",
+      "conferenceSelectionMismatchWithBackHint": "您的會議選擇與該委員會不符。 返回並輸入正確的會議代碼，然後輸入委員會代碼。",
+      "conferenceNotFound": "未找到會議。",
+      "noAllocationForConference": "您沒有分配此會議的資源。 在繼續之前請主席為您指派。",
+      "allocationMismatch": "分配與您的分配不符。 完全按照指定的方式輸入您的國家或位置（空格和重音可能有所不同）。",
+      "incorrectCommitteePassword": "委員會密碼不正確。",
+      "requiredConferenceAndStaffPassword": "需要會議和工作人員二級密碼。",
+      "onlySmtOrAdminBypass": "只有秘書處或網站管理員可以使用此登入。",
+      "incorrectStaffPassword": "員工二級密碼不正確。",
+      "chooseConference": "選擇一個會議。",
+      "passwordMinLength": "密碼必須至少包含 6 個字元。",
+      "passwordsDoNotMatch": "密碼不符。",
+      "notSignedIn": "未登入。",
+      "onlyChairSmtAdminSetPassword": "只有主席、SMT 和網站管理員可以設定委員會密碼。",
+      "onlyChairSmtAdminRemovePassword": "只有主席、SMT 和網站管理員才能刪除委員會密碼。"
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "首先選擇具有會議代碼（活動門）的活動。",
+      "notSignedIn": "未登入。",
+      "onlySmtManageMatrix": "只有秘書處可以管理分配矩陣。",
+      "committeeNotInActiveEvent": "該委員會不屬於活動活動的一部分。",
+      "requiredCommitteeAndCountry": "委員會和國家/職位為必填項。",
+      "countryTooLong": "國家/地區/位置太長。",
+      "codeTooLong": "標誌代碼太長。",
+      "couldNotCreateAllocation": "無法建立分配。",
+      "requiredAllocationAndCountry": "需要分配和國家/位置。",
+      "allocationNotFound": "未找到分配。",
+      "missingAllocation": "缺少分配。",
+      "seatLinkedToDelegate": "該席位與代表相關聯。 在 Supabase 中取消連結它們或在刪除之前重新分配。",
+      "selectCommittee": "選擇一個委員會。",
+      "couldNotParseCsv": "無法解析 CSV。",
+      "noDataRowsFound": "未找到資料行（每行至少需要一個國家/地區/位置）。",
+      "importLimitedRows": "導入限制為 {max} 行。 分割你的文件。",
+      "rowTooLong": "行太長：{行}... {row}",
+      "codeTooLongOnRow": "行中的程式碼太長：{row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "首先選擇具有會議代碼（活動門）的活動。",
+      "notSignedIn": "未登入。",
+      "onlySmtChangeCodes": "只有秘書處可以在這裡更改委員會代碼。",
+      "committeeNotInActiveEvent": "該委員會不是您活動活動的一部分。",
+      "missingCommittee": "缺少委員會。",
+      "invalidCommitteeCode": "委員會/房間代碼必須恰好是 6 個字母或數字（例如 ECO741）。",
+      "unauthorized": "未經授權。",
+      "codeSaved": "代碼已儲存。 代表們將其用作會議代碼之後的第二個大門。",
+      "invalidEmail": "輸入有效的電子郵件地址。",
+      "onlySmtInviteChair": "只有秘書處可以發送主席邀請。",
+      "missingServiceRoleKey": "伺服器缺少 SUPABASE_SERVICE_ROLE_KEY。 將其新增至部署環境（切勿暴露給瀏覽器）。",
+      "missingPublicAppUrl": "將 NEXT_PUBLIC_APP_URL 設定為您的公共網站 URL（例如 https://your-app.vercel.app），以便邀請連結正確重新導向。",
+      "emailAlreadyHasAccount": "該電子郵件已經有一個帳戶。 使用下面的“授予主席角色”，而不是發送另一個邀請。",
+      "inviteSentButRoleSetFailed": "邀請已發送，但無法在個人資料上設定主席角色：{錯誤}。 在他們接受後使用“授予主席角色”。 {error}",
+      "inviteSentSuccess": "邀請電子郵件已發送至 {email}。 設定密碼後，他們將成為一張椅子。",
+      "onlySmtGrantChair": "只有秘書處可以授予主席職位。",
+      "noAccountForEmail": "還沒有該電子郵件的帳號。 首先發送主席邀請。",
+      "promotedToChairSuccess": "{email} 的個人資料現在是主席台。"
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "您必須登入。",
+      "onlyDelegateOrChair": "只有代表/主席帳戶可以請求分配註冊。",
+      "allocationNotFound": "未找到分配。",
+      "allocationAlreadyAssigned": "該分配已經分配。",
+      "requiredConferenceAllocationEmail": "需要會議、分配和代表電子郵件。"
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "請先登入。",
+      "onlyDelegatesCanExport": "只有代表才能匯出他們的材料。",
+      "accountHasNoEmail": "您的帳戶沒有設定電子郵件地址。",
+      "rangeTodayUtc": "今天（世界標準時間）",
+      "rangeAllTime": "所有時間",
+      "emailSubject": "InterMUN 材料出口 ({range})",
+      "emailSendConfigHint": "在伺服器上設定 SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS 和可選的 MATERIALS_EXPORT_FROM。",
+      "exportEmailedTo": "匯出透過電子郵件發送至 {email}。 如果您沒有看到它，請檢查垃圾郵件/垃圾郵件。"
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "國際模聯",
+      "welcomeSubject": "歡迎來到 InterMUN",
+      "welcomeLine1": "歡迎來到 InterMUN。",
+      "welcomeConfirmedFor": "您的代理人帳號已確認為：{country}。",
+      "welcomeLine2": "現在您可以繼續登入委員會並加入即時會議。",
+      "welcomeLine3": "地板上見。",
+      "chairReminderSubject": "代表分配請求等待批准",
+      "chairReminderLine1": "一位代表請求分配並需要主席審查。",
+      "chairReminderConference": "會議：{會議} {conference}",
+      "chairReminderAllocation": "請求的分配：{國家} {country}",
+      "chairReminderDelegate": "代表：{姓名} {name}",
+      "chairReminderEmail": "帳戶電子郵件：{email}",
+      "chairReminderLine2": "請在主席分配矩陣中批准或拒絕此請求："
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "活動詳情",
+    "selectConferenceFirst": "首先透過事件門選擇一個會議，然後返回此處。",
+    "committeeSessionsTitle": "本次活動的委員會會議",
+    "committeeSessionsBody": "委員會會議標題（議程主題）保留在此處以供記錄； SMT 主網格顯示官方委員會名稱、縮寫、主席和簡短的顯示代碼。 委員會/房間代碼（第二個門）在此活動中必須保持唯一。",
+    "noCommitteeSessions": "本次活動沒有委員會會議。",
+    "eventName": "活動名稱",
+    "tagline": "標語",
+    "conferenceCodeFirstGate": "會議代碼（第一門）",
+    "saved": "已儲存。",
+    "saving": "保存…",
+    "saveConferenceEvent": "保存會議活動",
+    "errorImageFile": "請選擇一個圖像檔案。",
+    "errorImageTooLarge": "影像太大（最大 6 MB）。",
+    "errorCommitteeCodeMissing": "缺少委員會代碼。",
+    "errorPublicUrl": "無法解析上傳圖像的公共 URL。",
+    "errorUploadFailed": "上傳失敗。",
+    "sessionTitle": "會議標題",
+    "chamberLabel": "室/標籤",
+    "officialCommitteeName": "官方委員會名稱（SMT網格）",
+    "officialCommitteeNamePlaceholder": "例如世界衛生組織",
+    "chairNames": "主席名稱",
+    "chairNamesPlaceholder": "以逗號分隔，例如亞歷克斯金、喬丹李",
+    "committeeLogo": "委員會標誌",
+    "uploading": "正在上傳...",
+    "crisisSlidesUrl": "危機幻燈片（Google 幻燈片 URL）",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "危機幻燈片",
+    "crisisSlidesHelpPrefix": "對於 FWC / UNSC / HSC：嵌入代表和主席",
+    "crisisSlidesHelpSuffix": "頁。 如果不使用則留空。 Deck 應允許您的觀眾觀看（連結共享）。",
+    "competingMotionsTitle": "競爭動議 (RoP)：在主持的核心會議之前進行協商",
+    "moderatedCaucus": "主持的核心小組",
+    "consultation": "諮詢",
+    "competingMotionsHelpPrefix": "取消勾選您的手冊是否排名",
+    "competingMotionsHelpMiddle": "上面的議案",
+    "competingMotionsHelpSuffix": "當兩者都待處理時。",
+    "procedureProfile": "程式簡介",
+    "procedureDefault": "預設委員會 RoP",
+    "procedureEuParliament": "歐盟議會指導 RoP",
+    "euGuidedWorkflowChecks": "歐盟指導的工作流程檢查",
+    "euGuidedWorkflowHelp": "實現歐盟議會階段指導和核心程序障礙。 除非程序配置檔案設定為歐盟議會，否則將被忽略。",
+    "committeeRoomCodeSecondGate": "委員會/房間代碼（第二門）",
+    "exactlySixLettersDigits": "正好 6 個字母或數字",
+    "committeeCodePlaceholder": "例如ECO741",
+    "committeeCodeHelpPrefix": "六個字元：室縮寫+三位數字（確定性建議：",
+    "saveCommittee": "拯救委員會"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "打開",
+    "linkedRoleChair": "椅子",
+    "linkedRoleDelegate": "代表",
+    "linkedRoleLinked": "連結",
+    "addedRow": "新增行。",
+    "addedSeat": "新增了{label}座椅。",
+    "updatedRow": "更新的行。",
+    "confirmRemoveUnassignedSeat": "從矩陣中刪除這個未分配的席位？",
+    "deletedRow": "已刪除行。",
+    "importedRows": "已導入 {count} 行。",
+    "skippedDuplicates": "跳過名冊上已有的 {count} 個重複項。",
+    "replacedUnassignedSeats": "更換了所有未分配的席位。",
+    "generatedRandomCodes": "為沒有隨機程式碼的行產生了 {count} 個隨機程式碼。",
+    "addCommitteesFirst": "首先將委員會加入此活動中",
+    "eventCommitteeSessionsLink": "活動和委員會會議",
+    "committeeFallback": "委員會",
+    "showingOneCommitteeAtATime": "一次顯示一個委員會。 使用底部選項卡切換委員會。",
+    "editPlacardCodesSheet": "編輯標語牌代碼表 ->",
+    "rosterHeading": "名冊·{標題} {heading}",
+    "seatsSummary": "{count} 個座位。",
+    "linkedDelegatesCannotBeDeleted": "此處無法刪除連結的代表。",
+    "countryPosition": "國家 / 職位",
+    "placardCode": "標示牌代碼",
+    "assignedAccount": "指定帳戶",
+    "signupLink": "註冊連結",
+    "actions": "行動",
+    "noSeatsYet": "還沒有座位。 新增行或匯入 CSV。",
+    "allocationSignupLink": "分配註冊連結",
+    "dash": "—",
+    "optional": "選修的",
+    "save": "節省",
+    "remove": "消除",
+    "addOneSeat": "增加一個座位",
+    "addHeadChairAllocation": "新增主席分配",
+    "addCoChairAllocation": "添加聯合主席分配",
+    "countryPlaceholder": "例如法國",
+    "placardCodeOptional": "標誌代碼（可選）",
+    "placardCodePlaceholder": "例如DIS-014",
+    "add": "添加",
+    "importCsv": "導入 CSV",
+    "importHelpPrefix": "每條線一個座位：",
+    "importHelpMiddle": "標題行帶有「國家」就可以了。 Excel/Google Sheets 中的 UTF-8 檔案匯出工作。",
+    "append": "附加",
+    "appendHelp": "跳過該委員會中已有的名字。",
+    "replaceUnassigned": "替換未分配的",
+    "replaceUnassignedHelp": "刪除每個空位（未連結到代表），然後載入檔案 - 確保連結代表的安全。",
+    "replaceUnassignedOnly": "僅替換未分配的",
+    "csvPlaceholder": "法國、DIS-001\\n德國、DIS-002\\n日本",
+    "parsedRowsSample": "已解析 {count} 行。 樣本：",
+    "runImport": "運行導入",
+    "generateMissingRandomCodes": "產生缺少的隨機代碼"
   }
 }

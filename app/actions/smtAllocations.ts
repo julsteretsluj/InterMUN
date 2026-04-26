@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { getTranslations } from "next-intl/server";
 
 const MAX_COUNTRY_LEN = 500;
 const MAX_CODE_LEN = 120;
@@ -14,16 +15,17 @@ type AuthOk = { supabase: Awaited<ReturnType<typeof createClient>>; ok: true };
 type AuthErr = { error: string; ok: false };
 
 async function requireSmt(conferenceId: string): Promise<AuthOk | AuthErr> {
+  const t = await getTranslations("serverActions.smtAllocations");
   const eventId = await getActiveEventId();
   if (!eventId) {
-    return { error: "Choose an event with the conference code (event gate) first.", ok: false };
+    return { error: t("chooseEventFirst"), ok: false };
   }
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Not signed in.", ok: false };
+  if (!user) return { error: t("notSignedIn"), ok: false };
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -31,7 +33,7 @@ async function requireSmt(conferenceId: string): Promise<AuthOk | AuthErr> {
     .eq("id", user.id)
     .maybeSingle();
   if (profile?.role !== "smt") {
-    return { error: "Only secretariat can manage the allocation matrix.", ok: false };
+    return { error: t("onlySmtManageMatrix"), ok: false };
   }
 
   const { data: conf } = await supabase
@@ -41,7 +43,7 @@ async function requireSmt(conferenceId: string): Promise<AuthOk | AuthErr> {
     .eq("event_id", eventId)
     .maybeSingle();
   if (!conf) {
-    return { error: "This committee is not part of the active event.", ok: false };
+    return { error: t("committeeNotInActiveEvent"), ok: false };
   }
 
   return { supabase, ok: true };
@@ -53,18 +55,19 @@ function revalidateAllocationPaths() {
 }
 
 export async function smtAddAllocationRow(formData: FormData) {
+  const t = await getTranslations("serverActions.smtAllocations");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const country = String(formData.get("country") ?? "").trim();
   const code = String(formData.get("code") ?? "").trim();
 
   if (!conferenceId || !country) {
-    return { error: "Committee and country/position are required." };
+    return { error: t("requiredCommitteeAndCountry") };
   }
   if (country.length > MAX_COUNTRY_LEN) {
-    return { error: "Country/position is too long." };
+    return { error: t("countryTooLong") };
   }
   if (code.length > MAX_CODE_LEN) {
-    return { error: "Placard code is too long." };
+    return { error: t("codeTooLong") };
   }
 
   const auth = await requireSmt(conferenceId);
@@ -77,7 +80,7 @@ export async function smtAddAllocationRow(formData: FormData) {
     .single();
 
   if (insErr || !insertRow) {
-    return { error: insErr?.message ?? "Could not create allocation." };
+    return { error: insErr?.message ?? t("couldNotCreateAllocation") };
   }
 
   if (code) {
@@ -98,18 +101,19 @@ export async function smtAddAllocationRow(formData: FormData) {
 }
 
 export async function smtUpdateAllocationRow(formData: FormData) {
+  const t = await getTranslations("serverActions.smtAllocations");
   const allocationId = String(formData.get("allocation_id") ?? "").trim();
   const country = String(formData.get("country") ?? "").trim();
   const code = String(formData.get("code") ?? "").trim();
 
   if (!allocationId || !country) {
-    return { error: "Allocation and country/position are required." };
+    return { error: t("requiredAllocationAndCountry") };
   }
   if (country.length > MAX_COUNTRY_LEN) {
-    return { error: "Country/position is too long." };
+    return { error: t("countryTooLong") };
   }
   if (code.length > MAX_CODE_LEN) {
-    return { error: "Placard code is too long." };
+    return { error: t("codeTooLong") };
   }
 
   const supabase = await createClient();
@@ -119,7 +123,7 @@ export async function smtUpdateAllocationRow(formData: FormData) {
     .eq("id", allocationId)
     .maybeSingle();
   if (fetchErr || !row?.conference_id) {
-    return { error: fetchErr?.message ?? "Allocation not found." };
+    return { error: fetchErr?.message ?? t("allocationNotFound") };
   }
 
   const auth = await requireSmt(row.conference_id);
@@ -150,8 +154,9 @@ export async function smtUpdateAllocationRow(formData: FormData) {
 }
 
 export async function smtDeleteAllocationRow(allocationId: string) {
+  const t = await getTranslations("serverActions.smtAllocations");
   const id = allocationId.trim();
-  if (!id) return { error: "Missing allocation." };
+  if (!id) return { error: t("missingAllocation") };
 
   const supabase = await createClient();
   const { data: row, error: fetchErr } = await supabase
@@ -160,11 +165,11 @@ export async function smtDeleteAllocationRow(allocationId: string) {
     .eq("id", id)
     .maybeSingle();
   if (fetchErr || !row?.conference_id) {
-    return { error: fetchErr?.message ?? "Allocation not found." };
+    return { error: fetchErr?.message ?? t("allocationNotFound") };
   }
   if (row.user_id) {
     return {
-      error: "This seat is linked to a delegate. Unlink them in Supabase or reassign before deleting.",
+      error: t("seatLinkedToDelegate"),
     };
   }
 
@@ -179,11 +184,12 @@ export async function smtDeleteAllocationRow(allocationId: string) {
 }
 
 export async function smtImportAllocationsCsv(formData: FormData) {
+  const t = await getTranslations("serverActions.smtAllocations");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const csvText = String(formData.get("csv_text") ?? "");
   const mode = String(formData.get("mode") ?? "append").trim();
 
-  if (!conferenceId) return { error: "Select a committee." };
+  if (!conferenceId) return { error: t("selectCommittee") };
 
   const auth = await requireSmt(conferenceId);
   if (!auth.ok) return { error: auth.error };
@@ -192,21 +198,21 @@ export async function smtImportAllocationsCsv(formData: FormData) {
   try {
     rows = parseAllocationCsv(csvText);
   } catch {
-    return { error: "Could not parse CSV." };
+    return { error: t("couldNotParseCsv") };
   }
 
   if (rows.length === 0) {
-    return { error: "No data rows found (need at least a country/position per line)." };
+    return { error: t("noDataRowsFound") };
   }
   if (rows.length > MAX_IMPORT_ROWS) {
-    return { error: `Import limited to ${MAX_IMPORT_ROWS} rows. Split your file.` };
+    return { error: t("importLimitedRows", { max: MAX_IMPORT_ROWS }) };
   }
   for (const r of rows) {
     if (r.country.length > MAX_COUNTRY_LEN) {
-      return { error: `Row too long: ${r.country.slice(0, 40)}…` };
+      return { error: t("rowTooLong", { row: r.country.slice(0, 40) }) };
     }
     if (r.code && r.code.length > MAX_CODE_LEN) {
-      return { error: `Code too long on row: ${r.country}` };
+      return { error: t("codeTooLongOnRow", { row: r.country }) };
     }
   }
 

@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { FollowPeopleClient } from "@/components/follow/FollowPeopleClient";
 
 export default async function SmtFollowPage() {
   const supabase = await createClient();
@@ -9,7 +8,6 @@ export default async function SmtFollowPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/login");
-
-  return <FollowPeopleClient userId={user.id} />;
+  redirect("/smt");
 }
 

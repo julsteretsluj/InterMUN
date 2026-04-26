@@ -7,20 +7,22 @@ import { getServerAppOrigin } from "@/lib/app-origin";
 import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getTranslations } from "next-intl/server";
 
 export type StaffAccessFormState = { error?: string; success?: string };
 
 async function requireSmtForConference(conferenceId: string) {
+  const t = await getTranslations("serverActions.smtStaffAccess");
   const eventId = await getActiveEventId();
   if (!eventId) {
-    return { error: "Choose an event with the conference code (event gate) first.", supabase: null as null };
+    return { error: t("chooseEventFirst"), supabase: null as null };
   }
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Not signed in.", supabase: null as null };
+  if (!user) return { error: t("notSignedIn"), supabase: null as null };
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -28,7 +30,7 @@ async function requireSmtForConference(conferenceId: string) {
     .eq("id", user.id)
     .maybeSingle();
   if (profile?.role !== "smt") {
-    return { error: "Only secretariat can change committee codes here.", supabase: null as null };
+    return { error: t("onlySmtChangeCodes"), supabase: null as null };
   }
 
   const { data: conf } = await supabase
@@ -38,7 +40,7 @@ async function requireSmtForConference(conferenceId: string) {
     .eq("event_id", eventId)
     .maybeSingle();
   if (!conf) {
-    return { error: "This committee is not part of your active event.", supabase: null as null };
+    return { error: t("committeeNotInActiveEvent"), supabase: null as null };
   }
 
   return { supabase, error: undefined as undefined };
@@ -48,19 +50,20 @@ export async function smtSetCommitteeCodeOnlyAction(
   _prev: StaffAccessFormState | null,
   formData: FormData
 ): Promise<StaffAccessFormState> {
+  const t = await getTranslations("serverActions.smtStaffAccess");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const code = normalizeCommitteeCode(String(formData.get("code") ?? ""));
 
   if (!conferenceId) {
-    return { error: "Missing committee." };
+    return { error: t("missingCommittee") };
   }
   if (!isValidCommitteeJoinCode(code)) {
-    return { error: "Committee / room code must be exactly 6 letters or digits (e.g. ECO741)." };
+    return { error: t("invalidCommitteeCode") };
   }
 
   const auth = await requireSmtForConference(conferenceId);
   if (auth.error || !auth.supabase) {
-    return { error: auth.error ?? "Unauthorized." };
+    return { error: auth.error ?? t("unauthorized") };
   }
 
   const { error } = await auth.supabase.rpc("set_conference_room_code", {
@@ -73,7 +76,7 @@ export async function smtSetCommitteeCodeOnlyAction(
   revalidatePath("/smt/room-codes");
   revalidatePath("/smt");
   revalidatePath("/smt/conference");
-  return { success: "Code saved. Delegates use it as the second gate after the conference code." };
+  return { success: t("codeSaved") };
 }
 
 function isValidEmail(raw: string): boolean {
@@ -85,16 +88,17 @@ export async function smtInviteChairAction(
   _prev: StaffAccessFormState | null,
   formData: FormData
 ): Promise<StaffAccessFormState> {
+  const t = await getTranslations("serverActions.smtStaffAccess");
   const email = String(formData.get("email") ?? "").trim();
   if (!isValidEmail(email)) {
-    return { error: "Enter a valid email address." };
+    return { error: t("invalidEmail") };
   }
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Not signed in." };
+  if (!user) return { error: t("notSignedIn") };
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -102,22 +106,20 @@ export async function smtInviteChairAction(
     .eq("id", user.id)
     .maybeSingle();
   if (profile?.role !== "smt") {
-    return { error: "Only secretariat can send chair invites." };
+    return { error: t("onlySmtInviteChair") };
   }
 
   const admin = createAdminClient();
   if (!admin) {
     return {
-      error:
-        "Server is missing SUPABASE_SERVICE_ROLE_KEY. Add it to the deployment env (never expose to the browser).",
+      error: t("missingServiceRoleKey"),
     };
   }
 
   const origin = getServerAppOrigin();
   if (!origin) {
     return {
-      error:
-        "Set NEXT_PUBLIC_APP_URL to your public site URL (e.g. https://your-app.vercel.app) so invite links redirect correctly.",
+      error: t("missingPublicAppUrl"),
     };
   }
 
@@ -129,8 +131,7 @@ export async function smtInviteChairAction(
     const msg = error.message?.toLowerCase() ?? "";
     if (msg.includes("already") || msg.includes("registered")) {
       return {
-        error:
-          "That email already has an account. Use “Grant chair role” below instead of sending another invite.",
+        error: t("emailAlreadyHasAccount"),
       };
     }
     return { error: error.message };
@@ -141,29 +142,30 @@ export async function smtInviteChairAction(
     const { error: profileErr } = await admin.from("profiles").update({ role: "chair" }).eq("id", newId);
     if (profileErr) {
       return {
-        error: `Invite sent, but could not set chair role on profile: ${profileErr.message}. Use “Grant chair role” after they accept.`,
+        error: t("inviteSentButRoleSetFailed", { error: profileErr.message }),
       };
     }
   }
 
   revalidatePath("/smt/room-codes");
-  return { success: `Invite email sent to ${email}. They will be a chair after they set their password.` };
+  return { success: t("inviteSentSuccess", { email }) };
 }
 
 export async function smtPromoteToChairByEmailAction(
   _prev: StaffAccessFormState | null,
   formData: FormData
 ): Promise<StaffAccessFormState> {
+  const t = await getTranslations("serverActions.smtStaffAccess");
   const email = String(formData.get("email") ?? "").trim();
   if (!isValidEmail(email)) {
-    return { error: "Enter a valid email address." };
+    return { error: t("invalidEmail") };
   }
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Not signed in." };
+  if (!user) return { error: t("notSignedIn") };
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -171,18 +173,18 @@ export async function smtPromoteToChairByEmailAction(
     .eq("id", user.id)
     .maybeSingle();
   if (profile?.role !== "smt") {
-    return { error: "Only secretariat can grant chair roles." };
+    return { error: t("onlySmtGrantChair") };
   }
 
   const { error } = await supabase.rpc("smt_promote_to_chair_by_email", { p_email: email });
   if (error) {
     const em = error.message ?? "";
     if (em.includes("no user")) {
-      return { error: "No account with that email yet. Send a chair invite first." };
+      return { error: t("noAccountForEmail") };
     }
     return { error: em };
   }
 
   revalidatePath("/smt/room-codes");
-  return { success: `Profile for ${email} is now a dais chair.` };
+  return { success: t("promotedToChairSuccess", { email }) };
 }

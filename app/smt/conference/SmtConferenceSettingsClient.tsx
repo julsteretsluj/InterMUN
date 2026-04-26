@@ -8,6 +8,7 @@ import {
 } from "@/app/actions/smtConference";
 import { generateSixCharCommitteeCode } from "@/lib/committee-join-code";
 import { createClient } from "@/lib/supabase/client";
+import { useTranslations } from "next-intl";
 
 type EventRow = { id: string; name: string; tagline: string | null; event_code: string };
 type CommitteeRow = {
@@ -33,33 +34,32 @@ export function SmtConferenceSettingsClient({
   eventRow: EventRow | null;
   committees: CommitteeRow[];
 }) {
+  const t = useTranslations("smtConferenceSettings");
   return (
     <div className="space-y-10">
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
-        <h2 className="font-display text-xl font-semibold text-brand-navy mb-4">Event details</h2>
+        <h2 className="font-display text-xl font-semibold text-brand-navy mb-4">{t("eventDetails")}</h2>
         {!eventRow ? (
           <p className="text-sm text-brand-muted">
-            Select a conference with the event gate first, then return here.
+            {t("selectConferenceFirst")}
           </p>
         ) : (
-          <EventForm eventRow={eventRow} />
+          <EventForm eventRow={eventRow} t={t} />
         )}
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
         <h2 className="font-display text-xl font-semibold text-brand-navy mb-2">
-          Committee sessions in this event
+          {t("committeeSessionsTitle")}
         </h2>
         <p className="text-sm text-brand-muted mb-6">
-          Committee session titles (agenda topics) stay here for records; the SMT home grid shows the
-          official committee name, acronym, chairs, and a short display code. Committee / room codes
-          (second gate) must stay unique within this event.
+          {t("committeeSessionsBody")}
         </p>
         <div className="space-y-8">
           {committees.length === 0 ? (
-            <p className="text-sm text-brand-muted">No committee sessions for this event.</p>
+            <p className="text-sm text-brand-muted">{t("noCommitteeSessions")}</p>
           ) : (
-            committees.map((c) => <CommitteeForm key={c.id} row={c} />)
+            committees.map((c) => <CommitteeForm key={c.id} row={c} t={t} />)
           )}
         </div>
       </section>
@@ -67,7 +67,7 @@ export function SmtConferenceSettingsClient({
   );
 }
 
-function EventForm({ eventRow }: { eventRow: EventRow }) {
+function EventForm({ eventRow, t }: { eventRow: EventRow; t: ReturnType<typeof useTranslations> }) {
   const [state, action, pending] = useActionState(updateConferenceEventAction, null as SmtFormState | null);
 
   return (
@@ -75,7 +75,7 @@ function EventForm({ eventRow }: { eventRow: EventRow }) {
       <input type="hidden" name="event_id" value={eventRow.id} />
       <div>
         <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
-          Event name
+          {t("eventName")}
         </label>
         <input
           name="name"
@@ -87,7 +87,7 @@ function EventForm({ eventRow }: { eventRow: EventRow }) {
       </div>
       <div>
         <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
-          Tagline
+          {t("tagline")}
         </label>
         <input
           name="tagline"
@@ -97,7 +97,7 @@ function EventForm({ eventRow }: { eventRow: EventRow }) {
       </div>
       <div>
         <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
-          Conference code (first gate)
+          {t("conferenceCodeFirstGate")}
         </label>
         <input
           name="event_code"
@@ -110,19 +110,19 @@ function EventForm({ eventRow }: { eventRow: EventRow }) {
       {state?.error && (
         <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2">{state.error}</p>
       )}
-      {state?.success && <p className="text-sm text-brand-navy">Saved.</p>}
+      {state?.success && <p className="text-sm text-brand-navy">{t("saved")}</p>}
       <button
         type="submit"
         disabled={pending}
         className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium disabled:opacity-50"
       >
-        {pending ? "Saving…" : "Save conference event"}
+        {pending ? t("saving") : t("saveConferenceEvent")}
       </button>
     </form>
   );
 }
 
-function CommitteeForm({ row }: { row: CommitteeRow }) {
+function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof useTranslations> }) {
   const [state, action, pending] = useActionState(updateCommitteeSessionAction, null as SmtFormState | null);
   const suggestedCode = generateSixCharCommitteeCode(row.committee ?? "", row.id);
   const supabase = createClient();
@@ -135,15 +135,15 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
     setUploadError(null);
 
     if (!file.type.startsWith("image/")) {
-      setUploadError("Please choose an image file.");
+      setUploadError(t("errorImageFile"));
       return;
     }
     if (file.size && file.size > 6 * 1024 * 1024) {
-      setUploadError("Image is too large (max 6 MB).");
+      setUploadError(t("errorImageTooLarge"));
       return;
     }
     if (!row.committee_code) {
-      setUploadError("Committee code is missing.");
+      setUploadError(t("errorCommitteeCodeMissing"));
       return;
     }
 
@@ -168,7 +168,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
 
       const { data: publicUrlData } = supabase.storage.from(bucketName).getPublicUrl(objectPath);
       if (!publicUrlData?.publicUrl) {
-        throw new Error("Could not resolve public URL for uploaded image.");
+        throw new Error(t("errorPublicUrl"));
       }
 
       // Persist immediately; apply to all topic rows for this committee in this event.
@@ -184,7 +184,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
 
       setLogoUrl(publicUrlData.publicUrl);
     } catch (e) {
-      const msg = e instanceof Error ? e.message : "Upload failed.";
+      const msg = e instanceof Error ? e.message : t("errorUploadFailed");
       setUploadError(msg);
     } finally {
       setUploadPending(false);
@@ -196,7 +196,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
       <input type="hidden" name="conference_id" value={row.id} />
       <p className="text-xs font-mono text-brand-muted">{row.id.slice(0, 8)}…</p>
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">Session title</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("sessionTitle")}</label>
         <input
           name="name"
           required
@@ -206,7 +206,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">Chamber / label</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("chamberLabel")}</label>
         <input
           name="committee"
           defaultValue={row.committee ?? ""}
@@ -214,7 +214,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">Tagline</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("tagline")}</label>
         <input
           name="tagline"
           defaultValue={row.tagline ?? ""}
@@ -223,32 +223,32 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
       </div>
       <div>
         <label className="block text-xs font-medium text-brand-muted mb-1">
-          Official committee name (SMT grid)
+          {t("officialCommitteeName")}
         </label>
         <input
           name="committee_full_name"
           defaultValue={row.committee_full_name ?? ""}
-          placeholder="e.g. World Health Organization"
+          placeholder={t("officialCommitteeNamePlaceholder")}
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">Chair names</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("chairNames")}</label>
         <input
           name="chair_names"
           defaultValue={row.chair_names ?? ""}
-          placeholder="Comma-separated, e.g. Alex Kim, Jordan Lee"
+          placeholder={t("chairNamesPlaceholder")}
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         />
       </div>
 
       <div className="pt-1">
-        <label className="block text-xs font-medium text-brand-muted mb-1">Committee logo</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("committeeLogo")}</label>
 
         {logoUrl ? (
           <img
             src={logoUrl}
-            alt="Committee logo"
+            alt={t("committeeLogo")}
             className="h-16 w-16 rounded-md object-contain bg-white/70 border border-brand-navy/10 mb-2"
           />
         ) : (
@@ -269,7 +269,7 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           }}
         />
         {uploadPending ? (
-          <p className="text-xs text-brand-muted mt-1">Uploading…</p>
+          <p className="text-xs text-brand-muted mt-1">{t("uploading")}</p>
         ) : null}
         {uploadError ? (
           <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded px-2 py-1 mt-2">
@@ -280,18 +280,18 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
 
       <div>
         <label className="block text-xs font-medium text-brand-muted mb-1">
-          Crisis slides (Google Slides URL)
+          {t("crisisSlidesUrl")}
         </label>
         <input
           name="crisis_slides_url"
           type="url"
           defaultValue={row.crisis_slides_url ?? ""}
-          placeholder="https://docs.google.com/presentation/d/…/edit"
+          placeholder={t("crisisSlidesPlaceholder")}
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm font-mono"
         />
         <p className="text-xs text-brand-muted mt-1">
-          For FWC / UNSC / HSC: embedded on delegates’ and chairs’ <span className="font-medium">Crisis slides</span>{" "}
-          page. Leave blank if not used. Deck should allow viewing for your audience (link sharing).
+          {t("crisisSlidesHelpPrefix")} <span className="font-medium">{t("crisisSlidesLabel")}</span>{" "}
+          {t("crisisSlidesHelpSuffix")}
         </p>
       </div>
 
@@ -304,23 +304,24 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-accent focus:ring-brand-accent"
         />
         <span>
-          <span className="font-medium">Competing motions (RoP): consultation before moderated caucus</span>
+          <span className="font-medium">{t("competingMotionsTitle")}</span>
           <span className="block text-xs text-brand-muted mt-1">
-            Uncheck if your handbook ranks a <span className="font-medium">moderated caucus</span> motion above{" "}
-            <span className="font-medium">consultation</span> when both are pending.
+            {t("competingMotionsHelpPrefix")} <span className="font-medium">{t("moderatedCaucus")}</span>{" "}
+            {t("competingMotionsHelpMiddle")} <span className="font-medium">{t("consultation")}</span>{" "}
+            {t("competingMotionsHelpSuffix")}
           </span>
         </span>
       </label>
 
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">Procedure profile</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("procedureProfile")}</label>
         <select
           name="procedure_profile"
           defaultValue={row.procedure_profile ?? "default"}
           className="w-full rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy"
         >
-          <option value="default">Default committee RoP</option>
-          <option value="eu_parliament">EU Parliament guided RoP</option>
+          <option value="default">{t("procedureDefault")}</option>
+          <option value="eu_parliament">{t("procedureEuParliament")}</option>
         </select>
       </div>
 
@@ -333,17 +334,16 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-accent focus:ring-brand-accent"
         />
         <span>
-          <span className="font-medium">EU guided workflow checks</span>
+          <span className="font-medium">{t("euGuidedWorkflowChecks")}</span>
           <span className="block text-xs text-brand-muted mt-1">
-            Enables EU Parliament phase guidance and core procedural blockers. Ignored unless
-            procedure profile is set to EU Parliament.
+            {t("euGuidedWorkflowHelp")}
           </span>
         </span>
       </label>
 
       <div>
         <label className="block text-xs font-medium text-brand-muted mb-1">
-          Committee / room code (second gate)
+          {t("committeeRoomCodeSecondGate")}
         </label>
         <input
           name="committee_code"
@@ -351,26 +351,26 @@ function CommitteeForm({ row }: { row: CommitteeRow }) {
           minLength={6}
           maxLength={6}
           pattern="[A-Za-z0-9]{6}"
-          title="Exactly 6 letters or digits"
+          title={t("exactlySixLettersDigits")}
           defaultValue={row.committee_code ?? ""}
-          placeholder="e.g. ECO741"
+          placeholder={t("committeeCodePlaceholder")}
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm tracking-widest"
         />
         <p className="text-xs text-brand-muted mt-1">
-          Six characters: chamber initials + three digits (deterministic suggestion:{" "}
+          {t("committeeCodeHelpPrefix")}{" "}
           <span className="font-mono text-brand-navy">{suggestedCode}</span>).
         </p>
       </div>
       {state?.error && (
         <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded px-2 py-1">{state.error}</p>
       )}
-      {state?.success && <p className="text-xs text-brand-navy">Saved.</p>}
+      {state?.success && <p className="text-xs text-brand-navy">{t("saved")}</p>}
       <button
         type="submit"
         disabled={pending}
         className="text-sm px-3 py-1.5 rounded-lg bg-brand-accent text-white font-medium disabled:opacity-50"
       >
-        {pending ? "Saving…" : "Save committee"}
+        {pending ? t("saving") : t("saveCommittee")}
       </button>
     </form>
   );

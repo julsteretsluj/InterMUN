@@ -26,14 +26,7 @@ export default async function SourcesPage() {
     .order("created_at", { ascending: false });
 
   if (!canEditAll) {
-    const { data: follows } = await supabase
-      .from("follows")
-      .select("followed_id")
-      .eq("follower_id", user.id);
-
-    const followedIds = (follows ?? []).map((f) => f.followed_id);
-    const ids = [user.id, ...followedIds];
-    sourcesQuery = sourcesQuery.in("user_id", ids.length > 0 ? ids : [user.id]);
+    sourcesQuery = sourcesQuery.eq("user_id", user.id);
   }
 
   const { data: sources } = await sourcesQuery;

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import nodemailer from "nodemailer";
+import { getTranslations } from "next-intl/server";
 
 type ActionState = { error?: string; success?: boolean };
 
@@ -11,7 +12,11 @@ function normalizeEmail(raw: string | null | undefined): string {
   return (raw ?? "").toLowerCase().trim();
 }
 
-async function sendWelcomeToInterMUNEmail(args: { to: string; allocationCountry: string }): Promise<void> {
+async function sendWelcomeToInterMUNEmail(args: {
+  to: string;
+  allocationCountry: string;
+  locale: string;
+}): Promise<void> {
   // Uses SMTP settings already present for other automated emails (see `exportMaterials.ts`).
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT ?? "587");
@@ -28,16 +33,17 @@ async function sendWelcomeToInterMUNEmail(args: { to: string; allocationCountry:
     auth: { user, pass },
   });
 
-  const subject = "Welcome to InterMUN";
+  const t = await getTranslations({ locale: args.locale, namespace: "emails.allocationSignup" });
+  const subject = t("welcomeSubject");
   const text = [
-    "Welcome to InterMUN.",
+    t("welcomeLine1"),
     "",
-    `Your delegate account has been confirmed for: ${args.allocationCountry}.`,
+    t("welcomeConfirmedFor", { country: args.allocationCountry }),
     "",
-    "You can now proceed to committee sign-in and join the live session.",
+    t("welcomeLine2"),
     "",
-    "See you on the floor.",
-    "InterMUN",
+    t("welcomeLine3"),
+    t("signature"),
   ].join("\n");
 
   await transporter.sendMail({
@@ -54,6 +60,7 @@ async function sendChairAllocationSignupReminderEmail(args: {
   conferenceLabel: string;
   requesterName: string;
   requesterEmail: string;
+  locale: string;
 }): Promise<void> {
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT ?? "587");
@@ -70,22 +77,23 @@ async function sendChairAllocationSignupReminderEmail(args: {
     auth: { user, pass },
   });
 
+  const t = await getTranslations({ locale: args.locale, namespace: "emails.allocationSignup" });
   const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
   const reviewPath = "/chair/allocation-matrix";
   const reviewUrl = appUrl ? `${appUrl.replace(/\/$/, "")}${reviewPath}` : reviewPath;
-  const subject = "Delegate allocation request pending approval";
+  const subject = t("chairReminderSubject");
   const text = [
-    "A delegate has requested an allocation and needs chair review.",
+    t("chairReminderLine1"),
     "",
-    `Conference: ${args.conferenceLabel}`,
-    `Requested allocation: ${args.allocationCountry}`,
-    `Delegate: ${args.requesterName}`,
-    `Account email: ${args.requesterEmail}`,
+    t("chairReminderConference", { conference: args.conferenceLabel }),
+    t("chairReminderAllocation", { country: args.allocationCountry }),
+    t("chairReminderDelegate", { name: args.requesterName }),
+    t("chairReminderEmail", { email: args.requesterEmail }),
     "",
-    "Please approve or reject this request in the chair allocation matrix:",
+    t("chairReminderLine2"),
     reviewUrl,
     "",
-    "InterMUN",
+    t("signature"),
   ].join("\n");
 
   await transporter.sendMail({
@@ -119,10 +127,11 @@ export async function createAllocationSignupRequestAction(
   conferenceId: string,
   allocationId: string
 ): Promise<ActionState> {
+  const t = await getTranslations("serverActions.allocationSignup");
   const { supabase, user, role } = await getAuthedProfile();
-  if (!user) return { error: "You must be signed in." };
+  if (!user) return { error: t("mustBeSignedIn") };
   if (role !== "delegate" && role !== "chair") {
-    return { error: "Only delegate/chair accounts can request allocation sign-up." };
+    return { error: t("onlyDelegateOrChair") };
   }
 
   const { data: target } = await supabase
@@ -132,9 +141,9 @@ export async function createAllocationSignupRequestAction(
     .eq("conference_id", conferenceId)
     .maybeSingle();
 
-  if (!target) return { error: "Allocation not found." };
+  if (!target) return { error: t("allocationNotFound") };
   if (target.user_id && target.user_id !== user.id) {
-    return { error: "That allocation has already been assigned." };
+    return { error: t("allocationAlreadyAssigned") };
   }
   if (target.user_id === user.id) return { success: true };
 
@@ -226,6 +235,7 @@ export async function createAllocationSignupRequestAction(
                 conferenceLabel,
                 requesterName,
                 requesterEmail: requesterEmail || "(not available)",
+                locale: "en",
               });
             }
           }
@@ -354,7 +364,7 @@ export async function approveAllocationSignupRequestAction(
         const loginEmail = toEmail;
         const signUpEmail = toEmail;
         if (loginEmail === signUpEmail) {
-          await sendWelcomeToInterMUNEmail({ to: toEmail, allocationCountry: target.country });
+          await sendWelcomeToInterMUNEmail({ to: toEmail, allocationCountry: target.country, locale: "en" });
         }
       }
     } catch (e) {
@@ -417,16 +427,17 @@ export async function chairAssignDelegateByEmailAction(
   _prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
+  const t = await getTranslations("serverActions.allocationSignup");
   const conferenceId = String(formData.get("conference_id") ?? "").trim();
   const allocationId = String(formData.get("allocation_id") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
 
   if (!conferenceId || !allocationId || !email) {
-    return { error: "Conference, allocation, and delegate email are required." };
+    return { error: t("requiredConferenceAllocationEmail") };
   }
 
   const { supabase, user } = await getAuthedProfile();
-  if (!user) return { error: "You must be signed in." };
+  if (!user) return { error: t("mustBeSignedIn") };
 
   const { error } = await supabase.rpc("chair_assign_delegate_by_email", {
     p_conference_id: conferenceId,

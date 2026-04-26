@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import type { ExportMaterialsRange } from "@/components/materials/DelegateMaterialsExportCard";
 import nodemailer from "nodemailer";
+import { getTranslations } from "next-intl/server";
 
 export type ExportMaterialsActionState = { error?: string; success?: string };
 
@@ -348,6 +349,7 @@ export async function exportDelegateMaterialsAction(
   _prev: ExportMaterialsActionState | null,
   formData: FormData
 ): Promise<ExportMaterialsActionState> {
+  const t = await getTranslations("serverActions.exportMaterials");
   const range = (String(formData.get("range") ?? "today") as ExportMaterialsRange) || "today";
 
   const supabase = await createClient();
@@ -355,7 +357,7 @@ export async function exportDelegateMaterialsAction(
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user?.id) return { error: "Please sign in first." };
+  if (!user?.id) return { error: t("pleaseSignInFirst") };
 
   const profile = await supabase
     .from("profiles")
@@ -368,14 +370,14 @@ export async function exportDelegateMaterialsAction(
   }
 
   if (profile.data?.role !== "delegate") {
-    return { error: "Only delegates can export their materials." };
+    return { error: t("onlyDelegatesCanExport") };
   }
 
   const email = user.email;
-  if (!email) return { error: "Your account has no email address set." };
+  if (!email) return { error: t("accountHasNoEmail") };
 
   const { start, end } = startEndForRange(range);
-  const rangeLabel = range === "today" ? "Today (UTC)" : "All time";
+  const rangeLabel = range === "today" ? t("rangeTodayUtc") : t("rangeAllTime");
   const exportedAt = new Date();
 
   // Delegate-owned content
@@ -545,7 +547,7 @@ export async function exportDelegateMaterialsAction(
   });
 
   const filename = `materials-${range}-${exportedAt.toISOString().slice(0, 10)}.md`;
-  const subject = `InterMUN materials export (${rangeLabel})`;
+  const subject = t("emailSubject", { range: rangeLabel });
 
   const emailResult = await sendMaterialsEmail({
     to: email,
@@ -558,14 +560,13 @@ export async function exportDelegateMaterialsAction(
     return {
       error:
         `Could not send email: ${emailResult.error}. ` +
-        `Set SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS and optionally MATERIALS_EXPORT_FROM on the server.`,
+        t("emailSendConfigHint"),
     };
   }
 
   return {
     success:
-      `Export emailed to ${email}. ` +
-      `If you don't see it, check spam/junk.`,
+      t("exportEmailedTo", { email }),
   };
 }
 

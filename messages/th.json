@@ -15,7 +15,7 @@
     "delegateFallbackName": "มอบหมาย",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "เลขาธิการ",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "กลับไปที่โปรไฟล์"
   },
   "language": {
     "label": "ภาษา",
@@ -56,7 +56,7 @@
     "settings": "การตั้งค่า"
   },
   "authWizard": {
-    "enterApp": "ป้อน {ชื่อแอป}",
+    "enterApp": "ป้อน {ชื่อแอป} {appName}",
     "welcomeSignup": "ป้อนรหัสการประชุมของคุณก่อน เลือกวิธีเข้าร่วม จากนั้นจึงสร้างบัญชีของคุณ",
     "welcomeLogin": "ป้อนรหัสการประชุมของคุณก่อน เลือกวิธีเข้าร่วม จากนั้นลงชื่อเข้าใช้",
     "conferenceTitle": "เข้าร่วมการประชุมของคุณ",
@@ -101,7 +101,7 @@
     "openLatestCommitteeHelp": "เปิดเซสชัน {code} เมื่อมีอยู่ (หลังรหัสการประชุม SEAMUNI2027) เก้าอี้ Dais ต้องกรอกรหัสคณะกรรมการด้านบน",
     "setupConferenceSmtOnly": "ตั้งค่าการประชุมใหม่ (SMT เท่านั้น)",
     "setupConferenceHelp": "สร้างรหัสการประชุมและรหัสคณะกรรมการชุดแรก ประธานจัดการรหัสคณะกรรมการจากประธาน -> รหัสคณะกรรมการหลังจากที่ SMT สร้างกิจกรรม",
-    "staffErrNoConferences": "ยังไม่มีการประชุมใดๆ SMT สามารถตั้งค่าการประชุมใหม่ด้านล่างหรือเพิ่มแถวใน Supabase / run seed.sql",
+    "staffErrNoConferences": "ยังไม่มีการประชุมสัมมนา SMT สามารถตั้งค่าการประชุมใหม่ด้านล่างหรือเพิ่มแถวใน Supabase / run seed.sql",
     "staffErrNotStaff": "ทางลัดนั้นไม่พร้อมใช้งานสำหรับบทบาทของคุณ",
     "staffErrLatestSmtOnly": "การเปิดคณะกรรมการชุดล่าสุดโดยไม่มีรหัสมีไว้สำหรับ SMT (เลขาธิการ) เท่านั้น เก้าอี้ Dais ควรกรอกรหัสการประชุมและรหัสคณะกรรมการ",
     "staffErrCreateForbidden": "มีเพียง SMT (เลขาธิการ) เท่านั้นที่สามารถสร้างกิจกรรมการประชุมใหม่ได้ เข้าร่วมด้วยรหัสของคุณหรือถาม SMT"
@@ -155,6 +155,31 @@
     "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
     "timer": "ตัวจับเวลา",
     "smtProfile": "ประวัติโดยย่อ"
+  },
+  "setupPage": {
+    "title": "ไม่ได้กำหนดค่า Supabase",
+    "body": "การปรับใช้นี้ไม่มีตัวแปรสภาพแวดล้อม Supabase สาธารณะ เพิ่มลงในโฮสต์ของคุณ (เช่น Vercel → Project → Settings → ตัวแปรสภาพแวดล้อม) จากนั้นปรับใช้ใหม่:",
+    "valuesHint": "ค่าอยู่ใน Supabase → การตั้งค่าโครงการ → API ใช้ชื่อเดียวกันสำหรับการผลิตและการแสดงตัวอย่างหากคุณใช้การปรับใช้การแสดงตัวอย่าง",
+    "tryAgainLink": "ลองลงชื่อเข้าใช้อีกครั้งหลังจากปรับใช้อีกครั้ง"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "ลิงก์ลงทะเบียนไม่ถูกต้อง",
+    "invalidLinkBody": "ลิงก์การจัดสรรนี้ไม่มีรายละเอียดที่จำเป็น ขอลิงก์ลงทะเบียนใหม่จากประธานหรือ SMT ของคุณ",
+    "allocationNotFoundTitle": "ไม่พบการจัดสรร",
+    "allocationNotFoundBody": "ชาติ/ตำแหน่งนี้ไม่อยู่ในคณะกรรมการที่เลือกอีกต่อไป",
+    "allocationTakenTitle": "ได้รับการจัดสรรแล้ว",
+    "allocationTakenBody": "{country} ได้รับการอ้างสิทธิ์โดยบัญชีอื่นแล้ว โปรดเลือกการจัดสรรอื่น",
+    "submitFailedTitle": "ไม่สามารถส่งคำขอได้",
+    "requestSubmittedTitle": "ส่งคำขอลงทะเบียนแล้ว",
+    "requestSubmittedBody": "คำขอของคุณสำหรับ {country} ถูกส่งไปยังประธานคณะกรรมการเพื่อขออนุมัติแล้ว",
+    "requestSubmittedHint": "เมื่อได้รับการอนุมัติแล้ว ให้เปิดลิงก์นี้อีกครั้งหรือลงชื่อเข้าใช้งานต่อเพื่อดำเนินการต่อ",
+    "continueCommitteeSignIn": "ดำเนินการต่อเพื่อลงชื่อเข้าใช้คณะกรรมการ"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "เลือกกิจกรรมการประชุมก่อน",
+    "enterConferenceCode": "กรอกรหัสการประชุม",
+    "title": "รหัสห้องและเก้าอี้",
+    "subtitle": "ตั้งรหัสคณะกรรมการประตูที่สองสำหรับแต่ละเซสชัน และเชิญหรือเลื่อนตำแหน่งเก้าอี้เวทีโดยไม่ต้องใช้แดชบอร์ดของผู้ร่วมประชุม"
   },
   "delegateDashboard": {
     "welcome": "ยินดีต้อนรับ ผู้แทนจาก {flag} {country}",
@@ -248,13 +273,13 @@
     "noCommittees": "ไม่พบคณะกรรมการสำหรับกิจกรรมนี้ เพิ่มพวกเขาเข้าไป",
     "eventSessionsLink": "การประชุมกิจกรรมและคณะกรรมการ",
     "orSupabase": "หรือในซูปาเบส",
-    "sessionFloorBanner": "<floor>ชั้นเซสชั่น</floor> (ตัวจับเวลา ลำโพง การโทรแบบม้วน) มีไว้สำหรับ <chairs>เก้าอี้ Dais</chairs> เท่านั้น ใช้ <live>คณะกรรมการสด</live> ด้านล่างเพื่อกำกับดูแล หรือป้อนรหัสคณะกรรมการ เช่น ผู้รับมอบสิทธิ์ เมื่อคุณต้องการเซสชั่นใดเซสชันหนึ่ง",
+    "sessionFloorBanner": "<floor>ชั้นเซสชั่น</floor> (ตัวจับเวลา ลำโพง การโทรแบบม้วน) มีไว้สำหรับ <chairs>เก้าอี้ dais</chairs> เท่านั้น ใช้ <live>คณะกรรมการสด</live> ด้านล่างเพื่อกำกับดูแล หรือป้อนรหัสคณะกรรมการ เช่น ผู้รับมอบสิทธิ์ เมื่อคุณต้องการเซสชั่นใดเซสชันหนึ่ง",
     "welcomeSg": "ยินดีต้อนรับเลขาธิการ!",
     "whichCommittee": "คุณต้องการตรวจสอบกับคณะกรรมการใด?",
     "sessionsCount": "{นับ พหูพจน์ หนึ่ง {# เซสชั่น} อื่นๆ {# เซสชั่น}}",
     "topicLabel": "หัวข้อ:",
     "chairsLabel": "เก้าอี้:",
-    "committeeLogoAlt": "โลโก้ {ชื่อ}",
+    "committeeLogoAlt": "โลโก้ {ชื่อ} {name}",
     "eslFriendly": "เป็นมิตรกับ ESL"
   },
   "chairNav": {
@@ -404,7 +429,7 @@
       "plainTextOptional": "ข้อความธรรมดา (ไม่จำเป็น)",
       "plainTextPlaceholder": "หมายเหตุหรือข้อความร่าง...",
       "chairFeedbackLabel": "ความคิดเห็นของเก้าอี้",
-      "chairFeedbackPlaceholder": "ข้อเสนอแนะสำหรับเอกสารตำแหน่งผู้ร่วมประชุม...",
+      "chairFeedbackPlaceholder": "ข้อเสนอแนะสำหรับกระดาษตำแหน่งผู้ร่วมประชุม...",
       "empty": "ยังไม่มีเอกสาร. เพิ่มหรือลิงก์ Google เอกสาร",
       "sidebarDocumentLabel": "เอกสาร",
       "sections": {
@@ -433,7 +458,7 @@
       "helpMustVoteTitle": "ต้องลงคะแนน",
       "helpMustVoteBody": "ทำเครื่องหมายการเคลื่อนไหวนี้เป็นรายการ \"ต้องโหวต\" ใช้เพื่อสื่อสารข้อกำหนดไปยังผู้เข้าร่วม (ขึ้นอยู่กับการตั้งค่าของคณะกรรมการของคุณ)",
       "saveSettings": "บันทึกการตั้งค่า",
-      "delegateBlurb": "เวทีจะบันทึกการลงคะแนนเสียงในเซสชั่น (เช่น การโทรออก) การลงคะแนนเสียงที่นี่เป็นไปตามใช่/ไม่ใช่เท่านั้น (ไม่ใช้การงดออกเสียง) คุณสามารถติดตามการนับได้ ผู้ได้รับมอบหมายไม่ลงคะแนนเสียงในแอป",
+      "delegateBlurb": "เวทีจะบันทึกการลงคะแนนเสียงในเซสชั่น (เช่น การโทรออก) การลงคะแนนเสียงที่นี่เป็นไปตามใช่/ไม่ใช่เท่านั้น (ไม่ใช้งดออกเสียง) คุณสามารถติดตามการนับได้ ผู้ได้รับมอบหมายไม่ลงคะแนนเสียงในแอป",
       "yes": "ใช่",
       "no": "เลขที่",
       "ballots": "บัตรลงคะแนน",
@@ -550,7 +575,7 @@
         "title": "อภิธานศัพท์วาระ MUN",
         "subtitle": "คำศัพท์เฉพาะที่ตรงกับรหัสคณะกรรมการของคุณและหัวข้อวาระปัจจุบัน",
         "committeeCode": "รหัสคณะกรรมการ: {code}",
-        "topicTag": "หัวข้อ: {หัวข้อ}",
+        "topicTag": "หัวข้อ: {หัวข้อ} {topic}",
         "sources": {
           "core": "แกนกลาง",
           "committee": "คณะกรรมการ",
@@ -599,7 +624,7 @@
           },
           "operative_clause": {
             "term": "ข้อปฏิบัติการ",
-            "definition": "ประโยคลำดับเลขเชิงการกระทำที่อธิบายถึงสิ่งที่คณะกรรมการเสนอให้ทำ"
+            "definition": "ประโยคเชิงตัวเลขเชิงปฏิบัติการที่อธิบายถึงสิ่งที่คณะกรรมการเสนอให้ทำ"
           },
           "preambulatory_clause": {
             "term": "ข้อก่อนเดินทาง",
@@ -666,7 +691,7 @@
             "definition": "การเคลื่อนย้ายยาเสพติด อาวุธ บุคคล หรือสินค้าอย่างผิดกฎหมายข้ามเขตอำนาจศาล"
           },
           "rule_of_law_capacity": {
-            "term": "ความจุของกฎแห่งกฎหมาย",
+            "term": "ความจุหลักนิติธรรม",
             "definition": "ความสามารถของสถาบันในระบบยุติธรรมในการสอบสวน ดำเนินคดี และปกป้องสิทธิอย่างยุติธรรม"
           },
           "sustainable_development": {
@@ -785,9 +810,9 @@
       "add": "เพิ่ม",
       "noIdeasYet": "ยังไม่มีไอเดีย",
       "ideaLabel": "ความคิด",
-      "ideaFallback": "ไอเดีย {จำนวน}",
+      "ideaFallback": "ไอเดีย {จำนวน} {number}",
       "linkedDoc": "เอกสารที่เชื่อมโยง",
-      "addedOn": "เพิ่มแล้ว {วันที่}",
+      "addedOn": "เพิ่มแล้ว {วันที่} {date}",
       "edit": "แก้ไข",
       "delete": "ลบ",
       "ideaDocument": "เอกสารไอเดีย",
@@ -839,9 +864,9 @@
       "matchesCount": "ตรงกัน {matches} จาก {total} ที่นั่ง",
       "searchAria": "ค้นหาการมอบหมาย",
       "virtualRoomVacant": "ว่าง",
-      "profileAria": "ดูโปรไฟล์: {ประเทศ}",
+      "profileAria": "ดูโปรไฟล์: {ประเทศ} {country}",
       "vacantSeatAria": "ที่นั่งว่าง",
-      "placardAria": "ป้ายประกาศ {ประเทศ}",
+      "placardAria": "ป้ายประกาศ {ประเทศ} {country}",
       "gavelAria": "ตะลุมพุก"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "ป้ายวัตถุประสงค์",
         "purposeHelpBody": "ข้อความนี้ต่อท้ายชื่อประเทศของคุณ เพื่อให้เก้าอี้สามารถดูว่าทำไมคุณถึงขอชั้น",
         "purposePlaceholder": "เช่น ภาพรวมการสนับสนุน + การแก้ไข",
-        "requesting": "กำลังขอ..."
+        "requesting": "กำลังขอ...",
+        "rollPromptTitle": "ต้องได้รับอนุมัติจากประธาน",
+        "rollPromptBodyPickStatus": "เซสชันได้เริ่มต้นแล้ว เลือกสถานะการโทรของคุณเพื่อปลดล็อคการพูดและการลงคะแนน",
+        "rollPromptBodyWaitSessionStart": "รอประธานเริ่มประชุมคณะกรรมการ",
+        "rollPromptBodyWaitRollPrompt": "กำลังรอข้อความแจ้งการโทรออก",
+        "rollPromptBodyMarkedAbsent": "ขณะนี้คุณถูกทำเครื่องหมายว่าไม่อยู่ ขอให้เก้าอี้ทำเครื่องหมายให้คุณนำเสนอเพื่อพูดและลงคะแนนเสียง",
+        "rollPromptBodyChecking": "กำลังตรวจสอบสถานะม้วนของคุณ...",
+        "rollPromptSaving": "ประหยัด...",
+        "rollPromptPresent": "ปัจจุบัน",
+        "rollPromptPresentVoting": "นำเสนอและลงคะแนนเสียง"
       },
       "motionVoting": {
         "votingProcedure": "ขั้นตอนการลงคะแนนเสียง",
@@ -865,7 +899,7 @@
         "motioner": "โมชั่นเนอร์",
         "majority": "ส่วนใหญ่",
         "majoritySimple": "เรียบง่าย",
-        "tally": "ใช่ {ใช่} - ไม่ใช่ {no} - รวม {total}",
+        "tally": "ใช่ {ใช่} - ไม่ใช่ {no} - รวม {total} {yes}",
         "help": "เวทีจะบันทึกการลงคะแนนเสียงของคณะผู้แทนแต่ละคนในเซสชั่น การลงมติให้ใช้ใช่หรือไม่ใช่เท่านั้น (ไม่งดออกเสียง) ผลรวมจะนับเฉพาะป้ายที่มีการบันทึกว่าใช่หรือไม่ใช่ การมอบหมายที่ขาดหายไปจะถูกข้ามไป"
       },
       "activeMotion": {
@@ -882,7 +916,7 @@
         "speakerTimeLeftTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
         "perSpeaker": "(ต่อผู้พูด)",
         "paused": "(หยุดชั่วคราว)",
-        "pauseReason": "หยุดชั่วคราว: {เหตุผล}"
+        "pauseReason": "หยุดชั่วคราว: {เหตุผล} {reason}"
       },
       "floorStatus": {
         "sessionTime": "เวลาเซสชัน",
@@ -900,6 +934,13 @@
         "daisAnnouncement": "ประกาศไดส์",
         "close": "ปิด"
       },
+      "committeeControl": {
+        "sessionNameLabel": "ชื่อเซสชัน",
+        "sessionNamePlaceholder": "เช่น ภาคเช้า",
+        "sessionNameSaving": "ประหยัด…",
+        "sessionNameSaved": "บันทึกแล้ว",
+        "sessionNameHint": "บันทึกโดยอัตโนมัติและปรากฏในประวัติเซสชัน"
+      },
       "history": {
         "title": "ประวัติเซสชัน",
         "savedCount": "บันทึกแล้ว {count}",
@@ -909,7 +950,7 @@
         "delete": "ลบ",
         "deleteConfirm": "ลบเซสชันนี้ออกจากประวัติใช่ไหม",
         "sessionNamePrompt": "ชื่อเซสชัน",
-        "rangeClosed": "{พิสัย}",
+        "rangeClosed": "{พิสัย} {range}",
         "rangeOngoing": "{range} -> กำลังดำเนินอยู่"
       },
       "timerPage": {
@@ -971,13 +1012,6 @@
         "pausedForCommittee": "ตัวจับเวลาหยุดชั่วคราวสำหรับคณะกรรมการ",
         "alreadyRunning": "ตัวจับเวลากำลังทำงานอยู่แล้ว",
         "runningForCommittee": "จับเวลาวิ่งให้กับคณะกรรมการ"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1076,10 +1110,10 @@
     "delegatesMatrix": "เมทริกซ์ผู้ได้รับมอบหมาย",
     "clearAllChairNotes": "ล้างบันทึกย่อของเก้าอี้ทั้งหมด",
     "searchCountry": "ค้นหาประเทศ...",
-    "roomStats": "{placards} ป้าย · {ธง} พร้อมบันทึกของเก้าอี้ · บันทึกม้วนสำหรับ {count}",
+    "roomStats": "{placards} ป้าย · {ธง} พร้อมบันทึกของเก้าอี้ · บันทึกม้วนสำหรับ {count} {flagged}",
     "loading": "กำลังโหลด...",
     "noDelegationsMatch": "ไม่มีการมอบหมายที่ตรงกับการค้นหาของคุณ",
-    "rollPrefix": "ม้วน {ฉลาก}",
+    "rollPrefix": "ม้วน {ฉลาก} {label}",
     "linkedAccount": "บัญชีที่เชื่อมโยง",
     "vacantPlacard": "ป้ายว่าง",
     "delegateProfile": "โปรไฟล์การมอบหมาย ->",
@@ -1256,29 +1290,200 @@
     "creating": "กำลังสร้าง...",
     "submit": "สร้างกิจกรรม + คณะกรรมการ และเข้าร่วม"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "จำเป็นต้องมีการประชุม การจัดสรร และรหัสผ่าน",
+      "mustBeSignedIn": "คุณต้องลงชื่อเข้าใช้",
+      "contextMismatch": "บริบทของคณะกรรมการของคุณไม่ตรงกับการลงชื่อเข้าใช้นี้ ป้อนรหัสการประชุมและคณะกรรมการของคุณอีกครั้งหากจำเป็น",
+      "conferenceSelectionMismatch": "การเลือกการประชุมของคุณไม่ตรงกับคณะกรรมการชุดนี้ ป้อนรหัสการประชุมและคณะกรรมการของคุณอีกครั้ง",
+      "conferenceSelectionMismatchWithBackHint": "การเลือกการประชุมของคุณไม่ตรงกับคณะกรรมการชุดนี้ ย้อนกลับไปและป้อนรหัสการประชุมที่ถูกต้อง จากนั้นตามด้วยรหัสคณะกรรมการ",
+      "conferenceNotFound": "ไม่พบการประชุม",
+      "noAllocationForConference": "คุณไม่มีการจัดสรรสำหรับการประชุมครั้งนี้ ขอให้เก้าอี้มอบหมายให้คุณก่อนดำเนินการต่อ",
+      "allocationMismatch": "การจัดสรรไม่ตรงกับงานของคุณ ป้อนประเทศหรือตำแหน่งของคุณให้ตรงตามที่กำหนด (การเว้นวรรคและสำเนียงอาจแตกต่างกัน)",
+      "incorrectCommitteePassword": "รหัสผ่านคณะกรรมการไม่ถูกต้อง",
+      "requiredConferenceAndStaffPassword": "ต้องใช้รหัสผ่านรองสำหรับการประชุมและพนักงาน",
+      "onlySmtOrAdminBypass": "เฉพาะสำนักเลขาธิการหรือผู้ดูแลเว็บไซต์เท่านั้นที่สามารถใช้การลงชื่อเข้าใช้นี้ได้",
+      "incorrectStaffPassword": "รหัสผ่านสำรองของพนักงานไม่ถูกต้อง",
+      "chooseConference": "เลือกการประชุม",
+      "passwordMinLength": "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
+      "passwordsDoNotMatch": "รหัสผ่านไม่ตรงกัน",
+      "notSignedIn": "ไม่ได้ลงชื่อเข้าใช้",
+      "onlyChairSmtAdminSetPassword": "เฉพาะประธาน SMT และผู้ดูแลเว็บไซต์เท่านั้นที่สามารถตั้งรหัสผ่านของคณะกรรมการได้",
+      "onlyChairSmtAdminRemovePassword": "เฉพาะประธาน SMT และผู้ดูแลเว็บไซต์เท่านั้นที่สามารถลบรหัสผ่านของคณะกรรมการได้"
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "เลือกกิจกรรมที่มีรหัสการประชุม (ประตูเหตุการณ์) ก่อน",
+      "notSignedIn": "ไม่ได้ลงชื่อเข้าใช้",
+      "onlySmtManageMatrix": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถจัดการเมทริกซ์การจัดสรรได้",
+      "committeeNotInActiveEvent": "คณะกรรมการชุดนี้ไม่ได้เป็นส่วนหนึ่งของกิจกรรมที่กำลังดำเนินอยู่",
+      "requiredCommitteeAndCountry": "จำเป็นต้องมีคณะกรรมการและประเทศ/ตำแหน่ง",
+      "countryTooLong": "ประเทศ/ตำแหน่งยาวเกินไป",
+      "codeTooLong": "รหัสป้ายประกาศยาวเกินไป",
+      "couldNotCreateAllocation": "ไม่สามารถสร้างการจัดสรรได้",
+      "requiredAllocationAndCountry": "ต้องมีการจัดสรรและประเทศ/ตำแหน่ง",
+      "allocationNotFound": "ไม่พบการจัดสรร",
+      "missingAllocation": "ขาดการจัดสรร",
+      "seatLinkedToDelegate": "ที่นั่งนี้เชื่อมโยงกับผู้รับมอบสิทธิ์ ยกเลิกการลิงก์ใน Supabase หรือมอบหมายใหม่ก่อนที่จะลบ",
+      "selectCommittee": "เลือกคณะกรรมการ",
+      "couldNotParseCsv": "ไม่สามารถแยกวิเคราะห์ CSV",
+      "noDataRowsFound": "ไม่พบแถวข้อมูล (ต้องมีอย่างน้อยประเทศ/ตำแหน่งต่อบรรทัด)",
+      "importLimitedRows": "นำเข้าจำกัดไว้ที่ {max} แถว แยกไฟล์ของคุณ",
+      "rowTooLong": "แถวยาวเกินไป: {row}...",
+      "codeTooLongOnRow": "รหัสยาวเกินไปในแถว: {row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "เลือกกิจกรรมที่มีรหัสการประชุม (ประตูเหตุการณ์) ก่อน",
+      "notSignedIn": "ไม่ได้ลงชื่อเข้าใช้",
+      "onlySmtChangeCodes": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถเปลี่ยนรหัสคณะกรรมการได้ที่นี่",
+      "committeeNotInActiveEvent": "คณะกรรมการชุดนี้ไม่ได้เป็นส่วนหนึ่งของกิจกรรมที่คุณดำเนินอยู่",
+      "missingCommittee": "คณะกรรมการที่หายไป",
+      "invalidCommitteeCode": "คณะกรรมการ / รหัสห้องต้องเป็นตัวอักษรหรือตัวเลข 6 ตัวเท่านั้น (เช่น ECO741)",
+      "unauthorized": "ไม่ได้รับอนุญาต",
+      "codeSaved": "บันทึกรหัสแล้ว ผู้ร่วมประชุมใช้เป็นประตูที่สองหลังรหัสการประชุม",
+      "invalidEmail": "ป้อนที่อยู่อีเมลที่ถูกต้อง",
+      "onlySmtInviteChair": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถส่งคำเชิญเป็นประธานได้",
+      "missingServiceRoleKey": "เซิร์ฟเวอร์ไม่มี SUPABASE_SERVICE_ROLE_KEY เพิ่มลงใน Deployment env (อย่าเปิดเผยต่อเบราว์เซอร์)",
+      "missingPublicAppUrl": "ตั้งค่า NEXT_PUBLIC_APP_URL เป็น URL ไซต์สาธารณะของคุณ (เช่น https://your-app.vercel.app) เพื่อให้ลิงก์เชิญเปลี่ยนเส้นทางได้อย่างถูกต้อง",
+      "emailAlreadyHasAccount": "อีเมลนั้นมีบัญชีอยู่แล้ว ใช้ \"บทบาทประธานมอบทุน\" ด้านล่างแทนการส่งคำเชิญอีกครั้ง",
+      "inviteSentButRoleSetFailed": "ส่งคำเชิญแล้ว แต่ไม่สามารถกำหนดบทบาทประธานในโปรไฟล์ได้: {error} ใช้ \"บทบาทเก้าอี้ให้สิทธิ์\" หลังจากที่พวกเขายอมรับ",
+      "inviteSentSuccess": "ส่งอีเมลคำเชิญไปที่ {email} พวกเขาจะเป็นเก้าอี้หลังจากตั้งรหัสผ่านแล้ว",
+      "onlySmtGrantChair": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถมอบบทบาทประธานได้",
+      "noAccountForEmail": "ยังไม่มีบัญชีที่ใช้อีเมลนั้น ส่งคำเชิญเก้าอี้ก่อน",
+      "promotedToChairSuccess": "โปรไฟล์สำหรับ {email} ตอนนี้เป็นเก้าอี้เตี้ยแล้ว"
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "คุณต้องลงชื่อเข้าใช้",
+      "onlyDelegateOrChair": "เฉพาะบัญชีผู้รับมอบสิทธิ์/ประธานเท่านั้นที่สามารถขอการลงทะเบียนการจัดสรรได้",
+      "allocationNotFound": "ไม่พบการจัดสรร",
+      "allocationAlreadyAssigned": "การจัดสรรนั้นได้ถูกกำหนดไว้แล้ว",
+      "requiredConferenceAllocationEmail": "จำเป็นต้องมีการประชุม การจัดสรร และอีเมลของผู้รับมอบสิทธิ์"
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "กรุณาเข้าสู่ระบบก่อน",
+      "onlyDelegatesCanExport": "มีเพียงผู้รับมอบสิทธิ์เท่านั้นที่สามารถส่งออกเอกสารของตนได้",
+      "accountHasNoEmail": "บัญชีของคุณไม่ได้ตั้งค่าที่อยู่อีเมล",
+      "rangeTodayUtc": "วันนี้ (UTC)",
+      "rangeAllTime": "ตลอดเวลา",
+      "emailSubject": "การส่งออกวัสดุ InterMUN ({range})",
+      "emailSendConfigHint": "ตั้งค่า SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS และสามารถเลือก MATERIALS_EXPORT_FROM บนเซิร์ฟเวอร์",
+      "exportEmailedTo": "ส่งออกอีเมลไปที่ {email} หากคุณไม่เห็น ให้ตรวจสอบสแปม/ขยะ"
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "อินเตอร์มุน",
+      "welcomeSubject": "ยินดีต้อนรับสู่อินเตอร์มุน",
+      "welcomeLine1": "ยินดีต้อนรับสู่อินเตอร์มุน",
+      "welcomeConfirmedFor": "บัญชีผู้รับมอบสิทธิ์ของคุณได้รับการยืนยันแล้วสำหรับ: {country}",
+      "welcomeLine2": "ตอนนี้คุณสามารถลงชื่อเข้าใช้งานของคณะกรรมการและเข้าร่วมเซสชั่นถ่ายทอดสดได้แล้ว",
+      "welcomeLine3": "เจอกันบนพื้นนะ",
+      "chairReminderSubject": "คำขอจัดสรรมอบสิทธิ์ที่รอการอนุมัติ",
+      "chairReminderLine1": "ผู้รับมอบสิทธิ์ได้ร้องขอการจัดสรรและจำเป็นต้องตรวจสอบเก้าอี้",
+      "chairReminderConference": "การประชุม: {การประชุม} {conference}",
+      "chairReminderAllocation": "การจัดสรรที่ร้องขอ: {country}",
+      "chairReminderDelegate": "ผู้รับมอบสิทธิ์: {ชื่อ} {name}",
+      "chairReminderEmail": "อีเมลบัญชี: {อีเมล} {email}",
+      "chairReminderLine2": "โปรดอนุมัติหรือปฏิเสธคำขอนี้ในตารางการจัดสรรเก้าอี้:"
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "รายละเอียดกิจกรรม",
+    "selectConferenceFirst": "เลือกการประชุมที่มีประตูเหตุการณ์ก่อน จากนั้นจึงกลับมาที่นี่",
+    "committeeSessionsTitle": "การประชุมคณะกรรมการในครั้งนี้",
+    "committeeSessionsBody": "ชื่อเซสชั่นของคณะกรรมการ (หัวข้อวาระการประชุม) อยู่ที่นี่เพื่อบันทึก ตารางหลัก SMT จะแสดงชื่อคณะกรรมการอย่างเป็นทางการ ตัวย่อ ประธาน และรหัสแสดงผลแบบสั้น คณะกรรมการ/รหัสห้อง (ประตูที่สอง) จะต้องไม่ซ้ำกันภายในงานนี้",
+    "noCommitteeSessions": "ไม่มีการประชุมคณะกรรมการสำหรับงานนี้",
+    "eventName": "ชื่อกิจกรรม",
+    "tagline": "สโลแกน",
+    "conferenceCodeFirstGate": "รหัสการประชุม (ประตูแรก)",
+    "saved": "บันทึกแล้ว",
+    "saving": "ประหยัด…",
+    "saveConferenceEvent": "บันทึกกิจกรรมการประชุม",
+    "errorImageFile": "กรุณาเลือกไฟล์ภาพ",
+    "errorImageTooLarge": "รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 6 MB)",
+    "errorCommitteeCodeMissing": "รหัสคณะกรรมการหายไป",
+    "errorPublicUrl": "ไม่สามารถแก้ไข URL สาธารณะสำหรับรูปภาพที่อัปโหลด",
+    "errorUploadFailed": "การอัปโหลดล้มเหลว",
+    "sessionTitle": "ชื่อเซสชัน",
+    "chamberLabel": "ห้อง/ฉลาก",
+    "officialCommitteeName": "ชื่อคณะกรรมการอย่างเป็นทางการ (ตาราง SMT)",
+    "officialCommitteeNamePlaceholder": "เช่น องค์การอนามัยโลก",
+    "chairNames": "ชื่อเก้าอี้",
+    "chairNamesPlaceholder": "คั่นด้วยเครื่องหมายจุลภาค เช่น อเล็กซ์ คิม, จอร์แดน ลี",
+    "committeeLogo": "โลโก้ของคณะกรรมการ",
+    "uploading": "กำลังอัปโหลด...",
+    "crisisSlidesUrl": "สไลด์วิกฤต (URL ของ Google สไลด์)",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "สไลด์วิกฤติ",
+    "crisisSlidesHelpPrefix": "สำหรับ FWC / UNSC / HSC: ฝังอยู่บน 'ผู้ร่วมประชุมและเก้าอี้'",
+    "crisisSlidesHelpSuffix": "หน้าหนังสือ. เว้นว่างไว้หากไม่ได้ใช้ สำรับควรอนุญาตให้ผู้ชมของคุณรับชมได้ (การแชร์ลิงก์)",
+    "competingMotionsTitle": "การเคลื่อนไหวที่แข่งขันกัน (RoP): การปรึกษาหารือก่อนการประชุมพรรคการเมืองที่มีการกลั่นกรอง",
+    "moderatedCaucus": "การประชุมพรรคการเมืองที่มีการกลั่นกรอง",
+    "consultation": "การให้คำปรึกษา",
+    "competingMotionsHelpPrefix": "ยกเลิกการเลือกว่าคู่มือของคุณอยู่ในอันดับ a หรือไม่",
+    "competingMotionsHelpMiddle": "การเคลื่อนไหวด้านบน",
+    "competingMotionsHelpSuffix": "เมื่อทั้งสองอยู่ระหว่างการพิจารณา",
+    "procedureProfile": "โปรไฟล์ขั้นตอน",
+    "procedureDefault": "คณะกรรมการเริ่มต้น RoP",
+    "procedureEuParliament": "รัฐสภาสหภาพยุโรปชี้นำ RoP",
+    "euGuidedWorkflowChecks": "การตรวจสอบขั้นตอนการทำงานที่แนะนำของสหภาพยุโรป",
+    "euGuidedWorkflowHelp": "เปิดใช้งานคำแนะนำขั้นตอนของรัฐสภาสหภาพยุโรปและตัวบล็อกขั้นตอนหลัก ละเว้นเว้นแต่จะตั้งค่าโปรไฟล์ขั้นตอนเป็นรัฐสภาสหภาพยุโรป",
+    "committeeRoomCodeSecondGate": "คณะกรรมการ / รหัสห้อง (ประตูที่สอง)",
+    "exactlySixLettersDigits": "6 ตัวอักษรหรือตัวเลขพอดี",
+    "committeeCodePlaceholder": "เช่น อีโค741",
+    "committeeCodeHelpPrefix": "อักขระหกตัว: ชื่อย่อของห้อง + ตัวเลขสามหลัก (ข้อเสนอแนะเชิงกำหนด:",
+    "saveCommittee": "บันทึกคณะกรรมการ"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "เปิด",
+    "linkedRoleChair": "เก้าอี้",
+    "linkedRoleDelegate": "มอบหมาย",
+    "linkedRoleLinked": "เชื่อมโยงแล้ว",
+    "addedRow": "เพิ่มแถวแล้ว",
+    "addedSeat": "เพิ่มที่นั่ง {label}",
+    "updatedRow": "แถวที่อัปเดตแล้ว",
+    "confirmRemoveUnassignedSeat": "ลบที่นั่งที่ยังไม่ได้กำหนดนี้ออกจากเมทริกซ์หรือไม่",
+    "deletedRow": "ลบแถวแล้ว",
+    "importedRows": "นำเข้าแล้ว {count} แถว",
+    "skippedDuplicates": "ข้าม {count} รายการซ้ำในบัญชีรายชื่อแล้ว",
+    "replacedUnassignedSeats": "แทนที่ที่นั่งที่ยังไม่ได้กำหนดทั้งหมด",
+    "generatedRandomCodes": "สร้างรหัสสุ่ม {count} รายการสำหรับแถวที่ไม่มีรหัสเดียว",
+    "addCommitteesFirst": "เพิ่มคณะกรรมการในกิจกรรมนี้ก่อนใน",
+    "eventCommitteeSessionsLink": "การประชุมกิจกรรมและคณะกรรมการ",
+    "committeeFallback": "คณะกรรมการ",
+    "showingOneCommitteeAtATime": "แสดงทีละคณะ สลับคณะกรรมการโดยใช้แท็บด้านล่าง",
+    "editPlacardCodesSheet": "แก้ไขแผ่นรหัสป้ายประกาศ ->",
+    "rosterHeading": "บัญชีรายชื่อ · {หัวเรื่อง} {heading}",
+    "seatsSummary": "{count} ที่นั่ง",
+    "linkedDelegatesCannotBeDeleted": "ไม่สามารถลบผู้รับมอบสิทธิ์ที่เชื่อมโยงได้ที่นี่",
+    "countryPosition": "ประเทศ/ตำแหน่ง",
+    "placardCode": "รหัสป้ายประกาศ",
+    "assignedAccount": "บัญชีที่ได้รับมอบหมาย",
+    "signupLink": "ลิงค์ลงทะเบียน",
+    "actions": "การดำเนินการ",
+    "noSeatsYet": "ยังไม่มีที่นั่ง เพิ่มแถวหรือนำเข้า CSV",
+    "allocationSignupLink": "ลิงค์ลงทะเบียนการจัดสรร",
+    "dash": "—",
+    "optional": "ไม่จำเป็น",
+    "save": "บันทึก",
+    "remove": "ลบ",
+    "addOneSeat": "เพิ่มหนึ่งที่นั่ง",
+    "addHeadChairAllocation": "เพิ่มการจัดสรรประธานใหญ่",
+    "addCoChairAllocation": "เพิ่มการจัดสรรเก้าอี้ร่วม",
+    "countryPlaceholder": "เช่น ฝรั่งเศส",
+    "placardCodeOptional": "รหัสป้ายประกาศ (ไม่บังคับ)",
+    "placardCodePlaceholder": "เช่น DIS-014",
+    "add": "เพิ่ม",
+    "importCsv": "นำเข้า CSV",
+    "importHelpPrefix": "หนึ่งที่นั่งต่อบรรทัด:",
+    "importHelpMiddle": "แถวส่วนหัวที่มี \"ประเทศ\" ก็ใช้ได้ ไฟล์ UTF-8 จากงานส่งออก Excel/Google ชีต",
+    "append": "ผนวก",
+    "appendHelp": "ข้ามชื่อในคณะกรรมการชุดนี้ไปแล้ว",
+    "replaceUnassigned": "แทนที่ยังไม่ได้กำหนด",
+    "replaceUnassignedHelp": "ลบทุกที่นั่งที่เปิดอยู่ (ไม่เชื่อมโยงกับผู้รับมอบสิทธิ์) จากนั้นโหลดไฟล์เพื่อให้ผู้รับมอบสิทธิ์ที่เชื่อมโยงมีความปลอดภัย",
+    "replaceUnassignedOnly": "แทนที่ยังไม่ได้กำหนดเท่านั้น",
+    "csvPlaceholder": "ฝรั่งเศส,DIS-001\\nเยอรมนี,DIS-002\\nญี่ปุ่น",
+    "parsedRowsSample": "แยกวิเคราะห์แล้ว {count} แถว ตัวอย่าง:",
+    "runImport": "เรียกใช้การนำเข้า",
+    "generateMissingRandomCodes": "สร้างรหัสสุ่มที่หายไป"
   }
 }

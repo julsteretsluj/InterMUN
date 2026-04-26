@@ -15,7 +15,7 @@
     "delegateFallbackName": "Mjumbe",
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Katibu Mkuu",
-    "returnToProfile": "Return to profile"
+    "returnToProfile": "Rudi kwa wasifu"
   },
   "language": {
     "label": "Lugha",
@@ -80,7 +80,7 @@
     "dontHaveAccount": "Je, huna akaunti?",
     "alreadyHaveAccount": "Je, tayari una akaunti?",
     "chair": "Mwenyekiti",
-    "chairHint": "(daisi)",
+    "chairHint": "(dais)",
     "delegate": "Mjumbe",
     "delegateHint": "(kamati yako)",
     "secretariat": "Sekretarieti",
@@ -95,7 +95,7 @@
     "setupConferenceSmt": "Sanidi mkutano mpya (SMT)",
     "goToProfile": "Nenda kwa wasifu",
     "joinCommittee": "Jiunge na kamati yako",
-    "joinCommitteeDescription": "Weka msimbo wa kamati yako kwa ajili ya mkutano huu. Unapaswa kuwa tayari umeweka msimbo wa mkutano kwenye skrini iliyotangulia.",
+    "joinCommitteeDescription": "Weka msimbo wako wa kamati ya mkutano huu. Unapaswa kuwa tayari umeweka msimbo wa mkutano kwenye skrini iliyotangulia.",
     "wrongConference": "Kongamano si sahihi? Weka msimbo tofauti wa mkutano",
     "openLatestCommittee": "SMT: fungua kamati ya hivi punde (ruka misimbo)",
     "openLatestCommitteeHelp": "Hufungua kipindi cha {code} kinapokuwepo (baada ya msimbo wa mkutano SEAMUNI2027). Wenyeviti wa Dais lazima waweke kanuni zao za kamati hapo juu.",
@@ -111,7 +111,7 @@
     "eventCodeMissing": "Hakuna mkutano unaolingana na msimbo huo. Angalia tahajia na waandaaji wako.",
     "mustBeSignedIn": "Lazima uwe umeingia.",
     "committeeCodeInvalid": "Weka msimbo wa kamati ya wahusika 6 (herufi na tarakimu pekee, k.m. ECO741). Uliza mwenyekiti wako au angalia SMT -> Misimbo ya vyumba.",
-    "enterConferenceFirst": "Ingiza msimbo wako wa mkutano kwanza (rudi kwenye hatua iliyotangulia).",
+    "enterConferenceFirst": "Weka msimbo wako wa mkutano kwanza (rudi kwenye hatua iliyotangulia).",
     "committeeCodeNoMatch": "Hakuna kamati inayolingana na msimbo huo wa tukio hili. Weka msimbo wa mkutano kwanza, kisha msimbo kamili wa kamati ya wahusika 6 (SMT -> Misimbo ya vyumba au Supabase -> mikutano).",
     "chooseConference": "Chagua mkutano.",
     "committeeCodeMustBeSix": "Msimbo wa kamati lazima uwe na herufi 6 au tarakimu (k.m. ECO741).",
@@ -136,7 +136,7 @@
     "follow": "Fuata",
     "guides": "Waelekezi",
     "committeeCodes": "Nambari za kamati (mwenyekiti / SMT)",
-    "committeeFlowChecklist": "📋 Orodha ya ukaguzi ya mtiririko wa kamati",
+    "committeeFlowChecklist": "📋 Orodha hakiki ya mtiririko wa kamati",
     "officialUnLinks": "Viungo rasmi vya UN",
     "committeeRoom": "Chumba cha kamati",
     "speeches": "Hotuba",
@@ -156,10 +156,35 @@
     "timer": "Kipima muda",
     "smtProfile": "Wasifu"
   },
+  "setupPage": {
+    "title": "Supabase haijasanidiwa",
+    "body": "Usambazaji huu unakosa vigeu vya mazingira vya umma vya Supabase. Waongeze kwenye mwenyeji wako (kwa mfano Vercel → Project → Mipangilio → Vigezo vya Mazingira), kisha upeleke tena:",
+    "valuesHint": "Thamani ziko katika Supabase → Mipangilio ya Mradi → API. Tumia majina yale yale kwa Uzalishaji na Onyesho la Kuchungulia ikiwa unatumia uwekaji onyesho la kukagua.",
+    "tryAgainLink": "Jaribu kuingia tena baada ya kusambaza upya"
+  },
+  "allocationSignupPage": {
+    "invalidLinkTitle": "Kiungo batili cha kujisajili",
+    "invalidLinkBody": "Kiungo hiki cha ugawaji hakina maelezo yanayohitajika. Uliza mwenyekiti wako au SMT kwa kiungo kipya cha kujisajili.",
+    "allocationNotFoundTitle": "Mgao haujapatikana",
+    "allocationNotFoundBody": "Taifa/nafasi hii haipatikani tena katika kamati iliyochaguliwa.",
+    "allocationTakenTitle": "Ugawaji tayari umechukuliwa",
+    "allocationTakenBody": "{country} tayari imedaiwa na akaunti nyingine. Tafadhali chagua mgao tofauti.",
+    "submitFailedTitle": "Haikuweza kuwasilisha ombi",
+    "requestSubmittedTitle": "Ombi la kujisajili limewasilishwa",
+    "requestSubmittedBody": "Ombi lako la {nchi} limetumwa kwa mwenyekiti wa kamati ili kuidhinishwa. {country}",
+    "requestSubmittedHint": "Baada ya kuidhinishwa, fungua upya kiungo hiki au uendelee kuingia kwenye kamati ili kuendelea.",
+    "continueCommitteeSignIn": "Endelea kwa kamati ya kuingia"
+  },
+  "smtRoomCodesPage": {
+    "selectEventFirst": "Chagua tukio la mkutano kwanza.",
+    "enterConferenceCode": "Weka msimbo wa mkutano",
+    "title": "Misimbo ya vyumba na viti",
+    "subtitle": "Weka msimbo wa kamati ya lango la pili kwa kila kikao na uwaalike au ukuze viti vya jukwaa bila kutumia dashibodi ya mjumbe."
+  },
   "delegateDashboard": {
     "welcome": "Karibu, Mjumbe wa {flag} {country}",
     "activeCommitteeIntro": "Kamati hai: {line}.",
-    "activeCommitteeBody": "Tarehe za kuchelewa zinashirikiwa na kila mtu katika kamati hii. Maandalizi, misimamo na hati zako husalia kwenye akaunti yako.",
+    "activeCommitteeBody": "Tarehe za kuchelewa zinashirikiwa na kila mtu katika kamati hii. Maandalizi, misimamo na hati zako hubaki kwenye akaunti yako.",
     "jumpTo": "Rukia kwa",
     "tiles": {
       "stances": {
@@ -248,7 +273,7 @@
     "noCommittees": "Hakuna kamati zilizopatikana za tukio hili. Waongeze ndani",
     "eventSessionsLink": "Matukio na vikao vya kamati",
     "orSupabase": "au katika Supabase.",
-    "sessionFloorBanner": "<floor>Ghorofa ya kikao</floor> (vipima muda, spika, simu ya kupigia kura) ni kwa ajili ya <chairs>viti vya dais</chairs> pekee. Tumia <live>kamati za moja kwa moja</live> hapa chini kwa usimamizi, au uweke misimbo ya kamati kama vile wajumbe unapohitaji kikao mahususi.",
+    "sessionFloorBanner": "<floor>Ghorofa ya kikao</floor> (vipima muda, spika, simu ya kuruka) ni kwa ajili ya <chairs>viti vya dais</chairs> pekee. Tumia <live>kamati za moja kwa moja</live> hapa chini kwa usimamizi, au uweke misimbo ya kamati kama vile wajumbe unapohitaji kikao mahususi.",
     "welcomeSg": "Karibu Katibu Mkuu!",
     "whichCommittee": "Je, ungependa kuingia kwenye kamati gani?",
     "sessionsCount": "{hesabu, wingi, kimoja {# kipindi} kingine {# vipindi}}",
@@ -300,7 +325,7 @@
     "hubAbbrev": "SMT"
   },
   "officialLinks": {
-    "intro": "Hati, mikataba, mashirika makuu, programu, misheni na maelezo ya wanachama. Hufungua katika kichupo kipya.",
+    "intro": "Hati, mikataba, mashirika kuu, programu, misheni na maelezo ya wanachama. Hufungua katika kichupo kipya.",
     "groups": {
       "documentsArticles": "Nyaraka na makala",
       "legislationTreaties": "Sheria na mikataba",
@@ -317,7 +342,7 @@
       "yearbook": "Kitabu cha Mwaka cha UN",
       "unPress": "Vyombo vya habari vya Umoja wa Mataifa",
       "treatyCollection": "Mkusanyiko wa Mkataba wa UN",
-      "avl": "Maktaba ya Sauti na Picha ya UN ya Sheria ya Kimataifa",
+      "avl": "Maktaba ya UN Audiovisual ya Sheria ya Kimataifa",
       "uncitral": "UNCITRAL (Sheria ya Biashara ya Kimataifa)",
       "charter": "Mkataba wa Umoja wa Mataifa",
       "ga": "Baraza Kuu la Umoja wa Mataifa",
@@ -378,7 +403,7 @@
       "confirmDelete": "Ungependa kufuta hati hii?",
       "delegatePrepTitle": "Sehemu ya hati ya maandalizi",
       "delegatePrepBody": "Unaweza kupakia, kutazama, na kuhariri <prep>hati zako za Kutayarisha</prep> moja kwa moja kutoka kwa ukurasa huu.",
-      "positionPaperGuideTitle": "Mwongozo wa karatasi ya msimamo",
+      "positionPaperGuideTitle": "Mwongozo wa karatasi",
       "positionPaperGuideBlurb": "Pakua mwongozo wa kishika nafasi wakati PDF ya mwisho inatayarishwa.",
       "downloadPlaceholderGuide": "Pakua mwongozo wa kishika nafasi",
       "addDocument": "Ongeza hati",
@@ -536,7 +561,7 @@
       "titlePlaceholder": "Kichwa",
       "googleDocsUrl": "URL ya Hati za Google",
       "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Hati mpya ya Google inafunguka katika kichupo kingine. Bandika kiungo kinachoweza kushirikiwa ili wajumbe waweze kufungua hati hapa (tazama/hariri inategemea kushiriki na Google).",
+      "googleDocsHelp": "Hati mpya ya Google inafunguka katika kichupo kingine. Bandika kiungo kinachoweza kushirikiwa ili wajumbe waweze kufungua hati hapa (kuona/kuhariri kunategemea kushiriki na Google).",
       "markdownOptional": "Vidokezo vya Markdown (si lazima utumie Hati ya Google)",
       "save": "Hifadhi",
       "cancel": "Ghairi",
@@ -550,7 +575,7 @@
         "title": "Kamusi ya Agenda ya MUN",
         "subtitle": "Istilahi za kipekee zinazolingana na msimbo wa kamati yako na mada za ajenda za sasa.",
         "committeeCode": "Msimbo wa kamati: {code}",
-        "topicTag": "Mada: {mada}",
+        "topicTag": "Mada: {mada} {topic}",
         "sources": {
           "core": "msingi",
           "committee": "kamati",
@@ -595,7 +620,7 @@
           },
           "amendment": {
             "term": "Marekebisho",
-            "definition": "Mabadiliko yaliyopendekezwa kwa maandishi ya rasimu, yakiwa ya kirafiki au yaliyopigiwa kura kama yasiyofaa."
+            "definition": "Mabadiliko yanayopendekezwa kwa maandishi, yawe ya kirafiki au yaliyopigiwa kura kama yasiyofaa."
           },
           "operative_clause": {
             "term": "Kifungu cha Uendeshaji",
@@ -634,7 +659,7 @@
             "definition": "Vyombo vya uwazi na mawasiliano vinavyopunguza kutokuelewana na hatari ya migogoro."
           },
           "universal_periodic_review": {
-            "term": "Uhakiki wa Kipindi wa Jumla",
+            "term": "Mapitio ya Kipindi ya Jumla",
             "definition": "Mchakato wa mapitio ya rika ambapo kila nchi mwanachama wa Umoja wa Mataifa inaripoti na kupokea mapendekezo ya haki."
           },
           "special_rapporteur": {
@@ -755,11 +780,11 @@
           },
           "counter_terrorism": {
             "term": "Kupambana na Ugaidi",
-            "definition": "Hatua za kisheria, kinga na usalama zilizojumuishwa dhidi ya shughuli za kigaidi."
+            "definition": "Hatua zilizojumuishwa za kisheria, kinga na usalama dhidi ya shughuli za kigaidi."
           },
           "due_process": {
             "term": "Utaratibu Unaolipwa",
-            "definition": "Taratibu za kisheria za haki zinazolinda haki wakati wa uchunguzi, mashtaka, na kuidhinishwa."
+            "definition": "Taratibu za haki za kisheria zinazolinda haki wakati wa uchunguzi, mashtaka, na kuidhinishwa."
           },
           "resource_security": {
             "term": "Usalama wa Rasilimali",
@@ -785,7 +810,7 @@
       "add": "Ongeza",
       "noIdeasYet": "Hakuna mawazo bado.",
       "ideaLabel": "Wazo",
-      "ideaFallback": "Wazo {namba}",
+      "ideaFallback": "Wazo {namba} {number}",
       "linkedDoc": "Hati iliyounganishwa",
       "addedOn": "Imeongezwa {date}",
       "edit": "Hariri",
@@ -800,7 +825,7 @@
       "topicPlaceholder": "k.m. hatua ya hali ya hewa",
       "extentLabel": "Kiwango (1-5):",
       "extentHelpTitle": "Kiwango (1-5)",
-      "extentHelpBody": "1 inamaanisha kuwa mgao wako una uungwaji mkono mdogo kwa mada, na 5 inamaanisha usaidizi thabiti. Chagua nambari inayolingana na msimamo wako katika kamati.",
+      "extentHelpBody": "1 inamaanisha kuwa mgao wako una uungwaji mkono mdogo kwa mada, na 5 inamaanisha usaidizi mkubwa. Chagua nambari inayolingana na msimamo wako katika kamati.",
       "add": "Ongeza",
       "viewOnlyHeatmap": "Mtazamo pekee wa ramani ya joto kwa wafanyikazi.",
       "notesPerAllocation": "Vidokezo kwa kila Mgao",
@@ -833,7 +858,7 @@
       "clearSearchTitle": "Futa utafutaji na uonyeshe wajumbe wote",
       "vacantLabel": "Nafasi",
       "searchVacantTitle": "Tafuta viti \"vilivyo wazi\" kwenye chumba",
-      "searchHint": "Chapa nchi, jina la mjumbe, shule, kiwakilishi, au \"ajabu\" ili kuangazia zinazolingana katika chumba cha mkutano. Bonyeza Enter ili kuruka hadi mechi ya kwanza; Esc inafuta. Bofya Haina ili kurukia viti tupu.",
+      "searchHint": "Charaza nchi, jina la mjumbe, shule, kiwakilishi, au \"nafasi\" ili kuangazia zinazolingana kwenye chumba. Bonyeza Enter ili kuruka hadi mechi ya kwanza; Esc inafuta. Bofya Haina ili kurukia viti tupu.",
       "findLabel": "Tafuta mjumbe au mwanachama wa dais",
       "searchPlaceholder": "Nchi, jina, shule...",
       "matchesCount": "{matches} kati ya {total} viti mechi",
@@ -841,7 +866,7 @@
       "virtualRoomVacant": "Nafasi",
       "profileAria": "Tazama wasifu: {country}",
       "vacantSeatAria": "Kiti kisicho wazi",
-      "placardAria": "Bango {nchi}",
+      "placardAria": "Bango {nchi} {country}",
       "gavelAria": "Gavel"
     },
     "session": {
@@ -857,7 +882,16 @@
         "purposeHelpTitle": "Lebo ya kusudi",
         "purposeHelpBody": "Maandishi haya yameambatishwa kwa jina la nchi yako ili wenyeviti waone ni kwa nini unaomba sakafu.",
         "purposePlaceholder": "k.m. msaada + muhtasari wa marekebisho",
-        "requesting": "Inaomba..."
+        "requesting": "Inaomba...",
+        "rollPromptTitle": "Idhini ya mwenyekiti inahitajika",
+        "rollPromptBodyPickStatus": "Kikao kimeanza. Chagua hali yako ya kumwita ili kufungua kuzungumza na kupiga kura.",
+        "rollPromptBodyWaitSessionStart": "Wakisubiri mwenyekiti aanze kikao cha kamati.",
+        "rollPromptBodyWaitRollPrompt": "Inasubiri ombi la kumwita.",
+        "rollPromptBodyMarkedAbsent": "Kwa sasa umetiwa alama kuwa hupo. Mwambie mwenyekiti akuweke alama kuwa Umehudhuria kuzungumza na kupiga kura.",
+        "rollPromptBodyChecking": "Inakagua hali ya orodha yako...",
+        "rollPromptSaving": "Inahifadhi...",
+        "rollPromptPresent": "Wasilisha",
+        "rollPromptPresentVoting": "Kuwasilisha na kupiga kura"
       },
       "motionVoting": {
         "votingProcedure": "Utaratibu wa kupiga kura",
@@ -865,7 +899,7 @@
         "motioner": "Mwelekezi",
         "majority": "Wengi",
         "majoritySimple": "Rahisi",
-        "tally": "Ndiyo {ndiyo} - Hapana {hapana} - Jumla {jumla}",
+        "tally": "Ndiyo {ndiyo} - Hapana {hapana} - Jumla {jumla} {yes} {no} {total}",
         "help": "Jukwaa hurekodi kura ya kila wajumbe katika kikao. Kura za hoja hutumia Ndiyo au Hapana pekee (hapana pingamizi). Jumla huhesabu mabango pekee ambapo Ndiyo au Hapana ilirekodiwa; wajumbe wasiokuwepo wanarukwa."
       },
       "activeMotion": {
@@ -882,7 +916,7 @@
         "speakerTimeLeftTotal": "Muda wa mzungumzaji (kushoto / jumla)",
         "perSpeaker": "(kwa mzungumzaji)",
         "paused": "(imesitishwa)",
-        "pauseReason": "Sitisha: {sababu}"
+        "pauseReason": "Sitisha: {sababu} {reason}"
       },
       "floorStatus": {
         "sessionTime": "Muda wa kikao",
@@ -899,6 +933,13 @@
         "fullAnnouncement": "Tangazo kamili",
         "daisAnnouncement": "Tangazo la Dais",
         "close": "Funga"
+      },
+      "committeeControl": {
+        "sessionNameLabel": "Jina la kikao",
+        "sessionNamePlaceholder": "k.m. Kikao cha asubuhi",
+        "sessionNameSaving": "Inahifadhi...",
+        "sessionNameSaved": "Imehifadhiwa",
+        "sessionNameHint": "Huhifadhi kiotomatiki na huonekana kwenye historia ya kipindi."
       },
       "history": {
         "title": "Historia ya kikao",
@@ -920,7 +961,7 @@
         "tabClock": "2) Vidhibiti vya saa",
         "tabNotes": "3) Vidokezo vya hotuba",
         "tabLog": "4) Sitisha logi",
-        "setupHelp": "Chagua ikiwa kipima muda hiki ni cha ghorofa ya jumla (kinaonekana kila mara kwa wajumbe) au kiambatanishwe na mwendo uliofunguliwa kwa ajili ya kupiga kura (wajumbe watakiona pekee ilhali kura hiyo ndiyo kipengele kinachotumika). Kwa kuwasha kwa muda wa kila mzungumzaji, saa hubakia kuonekana wakati wa mkutano uliosimamiwa bila kujali. Sitisha saa / Anza kufungia saa au endelea kuhesabu. Weka muda wa Spika (unaosalia) na Muda wa Jumla kwa kujitegemea, kisha Hifadhi kipima muda. Presets kujaza wote kwa urefu sawa; unaweza kuhariri sehemu yoyote baadaye. Usitishaji huwekwa kwa sababu fupi.",
+        "setupHelp": "Chagua ikiwa kipima muda hiki ni cha ghorofa ya jumla (kinaonekana kila mara kwa wajumbe) au kiambatanishwe na mwendo uliofunguliwa kwa ajili ya kupiga kura (wajumbe watakiona pekee ilhali kura hiyo ndiyo kipengele kinachotumika). Kwa muda wa kila mzungumzaji umewashwa, saa hubakia kuonekana wakati wa mkutano uliosimamiwa bila kujali. Sitisha saa / Anza kufungia saa au endelea kuhesabu. Weka muda wa Spika (unaosalia) na Muda wa Jumla kwa kujitegemea, kisha Hifadhi kipima muda. Presets kujaza wote kwa urefu sawa; unaweza kuhariri sehemu yoyote baadaye. Usitishaji huwekwa kwa sababu fupi.",
         "namedPreset": "Imetajwa kuweka mapema",
         "applyPreset": "Tekeleza uwekaji awali...",
         "floorLabelDelegates": "Lebo ya sakafu (wajumbe)",
@@ -945,7 +986,7 @@
         "currentSpeaker": "Mzungumzaji wa sasa",
         "nextSpeaker": "Spika inayofuata",
         "speechNotesCurrentSpeaker": "Vidokezo vya hotuba (mzungumzaji wa sasa)",
-        "speechNotesHelp": "Vidokezo vinaunganishwa na maandishi ya kipima saa cha Sasa cha spika na, orodha ya spika ikiwa na mtu aliyewekewa alama ya Sasa, kaumu yake huhifadhiwa kwa marejeleo.",
+        "speechNotesHelp": "Vidokezo vinahusishwa na maandishi ya kipima saa cha Sasa cha spika na, orodha ya spika ikiwa na mtu aliyetiwa alama ya Sasa, kaumu yake huhifadhiwa kwa marejeleo.",
         "timerFloorLabel": "Kipima muda (sakafu):",
         "speakerListCurrent": "Orodha ya Spika (ya sasa):",
         "noCurrentDelegation": "Hakuna uwakilishi uliotiwa alama kuwa Sasa hivi kwenye orodha ya wazungumzaji.",
@@ -958,7 +999,7 @@
         "remainingHelpPerSpeaker": "Muda uliosalia kwa spika ya sasa (huweka upya unapofanya Mapema).",
         "remainingHelpNormal": "Muda uliosalia kwa spika ya sasa (inaweza kuwa chini ya jumla).",
         "totalTime": "Jumla ya muda",
-        "totalHelpPerSpeaker": "Kofia ya kila mzungumzaji (denominata kwenye sakafu; hujaza Advance iliyosalia kwa hii).",
+        "totalHelpPerSpeaker": "Kofia ya kila mzungumzaji (denominata kwenye sakafu; hujaza tena Advance iliyosalia kwa hii).",
         "totalHelpNormal": "Urefu kamili wa sehemu hii ya kipima muda (iliyoonyeshwa baada ya kufyeka kwenye sakafu).",
         "saveTimer": "Hifadhi kipima muda",
         "advanceSpeakerReset": "Spika ya mapema na weka upya saa",
@@ -971,13 +1012,6 @@
         "pausedForCommittee": "Kipima muda kimesitishwa kwa kamati.",
         "alreadyRunning": "Kipima muda tayari kinaendelea.",
         "runningForCommittee": "Kipima muda kinagombea kwa kamati."
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history."
       }
     }
   },
@@ -1076,10 +1110,10 @@
     "delegatesMatrix": "Matrix ya wajumbe",
     "clearAllChairNotes": "Futa maelezo yote ya kiti",
     "searchCountry": "Tafuta nchi...",
-    "roomStats": "{placards} mabango · {iliyoalamishwa} na maelezo ya kiti · Roll imerekodiwa kwa {count}",
+    "roomStats": "{placards} mabango · {iliyoalamishwa} na maelezo ya kiti · Roll imerekodiwa kwa {count} {flagged}",
     "loading": "Inapakia...",
     "noDelegationsMatch": "Hakuna wajumbe wanaolingana na utafutaji wako.",
-    "rollPrefix": "Roll {lebo}",
+    "rollPrefix": "Roll {lebo} {label}",
     "linkedAccount": "Akaunti iliyounganishwa",
     "vacantPlacard": "Bango tupu",
     "delegateProfile": "Wasifu ->",
@@ -1171,7 +1205,7 @@
     "chairFallback": "Mwenyekiti",
     "errors": {
       "votingProcedure": "Utaratibu wa kupiga kura unatumika: utunzi wa madokezo umezimwa.",
-      "sessionInactive": "Vidokezo vimezimwa wakati kikao cha kamati hakitumiki.",
+      "sessionInactive": "Vidokezo vimezimwa wakati kikao cha kamati hakifanyiki.",
       "unmoderated": "Vidokezo vimezimwa wakati wa mkutano usiodhibitiwa.",
       "smtVerify": "Thibitisha kwa kutumia nenosiri la pili la wafanyikazi ili kutuma madokezo kwa kamati hii.",
       "emptyContent": "Andika maudhui ya dokezo kwanza.",
@@ -1233,14 +1267,14 @@
     "eventNameHelp": "Imeonyeshwa kwa waandaaji; wajumbe kuiona baada ya kujiunga.",
     "eventCodeLabel": "Kanuni ya mkutano",
     "eventCodePlaceholder": "k.m. SEAMUNI2027",
-    "eventCodeHelp": "Kila mtu anaingia kwenye mkutano huu wa kwanza (mkutano mzima). Nafasi zilizopuuzwa; kuhifadhiwa katika herufi kubwa. Lazima iwe ya kipekee.",
+    "eventCodeHelp": "Kila mtu anaingia hii kwanza (mkutano mzima). Nafasi zilizopuuzwa; kuhifadhiwa katika herufi kubwa. Lazima iwe ya kipekee.",
     "sectionFirstCommittee": "Kamati ya kwanza (lango la pili)",
     "sessionNameLabel": "Kichwa cha kikao cha kamati",
     "sessionNamePlaceholder": "k.m. Mada au ajenda ya kamati hii",
     "sessionNameHelp": "Kichwa kikuu cha kamati hii katika kichwa cha programu.",
     "committeeLabel": "Lebo ya chumba/kamati",
     "committeePlaceholder": "k.m. ECOSOC, UNSC",
-    "committeeHelp": "Hiari. Imeonyeshwa kando ya kichwa cha kipindi.",
+    "committeeHelp": "Hiari. Imeonyeshwa kando ya mada ya kipindi.",
     "taglineLabel": "Kaulimbiu au mandhari",
     "taglinePlaceholder": "Manukuu ya hiari chini ya kichwa",
     "committeeCodeLabel": "Kanuni ya kamati",
@@ -1256,29 +1290,200 @@
     "creating": "Inaunda...",
     "submit": "Unda kamati ya tukio + na uingie"
   },
-  "setupPage": {
-    "title": "Supabase is not configured",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
-    "valuesHint": "Values are in Supabase → Project Settings → API. Use the same names for Production and Preview if you use preview deployments.",
-    "tryAgainLink": "Try sign in again after redeploying"
+  "serverActions": {
+    "committeeGate": {
+      "requiredConferenceAllocationPassword": "Mkutano, ugawaji, na nenosiri zinahitajika.",
+      "mustBeSignedIn": "Lazima uwe umeingia.",
+      "contextMismatch": "Muktadha wa kamati yako haulingani na kuingia huku. Weka upya misimbo yako ya mkutano na kamati ikihitajika.",
+      "conferenceSelectionMismatch": "Uchaguzi wako wa mkutano haulingani na kamati hii. Weka upya misimbo yako ya mkutano na kamati.",
+      "conferenceSelectionMismatchWithBackHint": "Uchaguzi wako wa mkutano haulingani na kamati hii. Rudi nyuma na uweke msimbo sahihi wa mkutano, kisha msimbo wa kamati.",
+      "conferenceNotFound": "Mkutano haujapatikana.",
+      "noAllocationForConference": "Huna mgao wa kongamano hili. Uliza mwenyekiti akugawie kabla ya kuendelea.",
+      "allocationMismatch": "Ugawaji haulingani na mgawo wako. Ingiza nchi au nafasi yako kama ulivyokabidhiwa (nafasi na lafudhi zinaweza kutofautiana).",
+      "incorrectCommitteePassword": "Nenosiri la kamati si sahihi.",
+      "requiredConferenceAndStaffPassword": "Nenosiri la pili la mkutano na wafanyikazi linahitajika.",
+      "onlySmtOrAdminBypass": "Sekretarieti au wasimamizi wa tovuti pekee ndio wanaoweza kutumia kuingia huku.",
+      "incorrectStaffPassword": "Nenosiri la pili la wafanyikazi si sahihi.",
+      "chooseConference": "Chagua mkutano.",
+      "passwordMinLength": "Nenosiri lazima liwe na angalau vibambo 6.",
+      "passwordsDoNotMatch": "Manenosiri hayalingani.",
+      "notSignedIn": "Hujaingia.",
+      "onlyChairSmtAdminSetPassword": "Viti, SMT na wasimamizi wa tovuti pekee ndio wanaoweza kuweka nenosiri la kamati.",
+      "onlyChairSmtAdminRemovePassword": "Viti, SMT na wasimamizi wa tovuti pekee ndio wanaoweza kuondoa nenosiri la kamati."
+    },
+    "smtAllocations": {
+      "chooseEventFirst": "Chagua tukio kwa kutumia msimbo wa mkutano (lango la tukio) kwanza.",
+      "notSignedIn": "Hujaingia.",
+      "onlySmtManageMatrix": "Sekretarieti pekee ndiyo inaweza kusimamia matrix ya ugawaji.",
+      "committeeNotInActiveEvent": "Kamati hii si sehemu ya tukio linaloendelea.",
+      "requiredCommitteeAndCountry": "Kamati na nchi/nafasi inahitajika.",
+      "countryTooLong": "Nchi/nafasi ni ndefu sana.",
+      "codeTooLong": "Msimbo wa bango ni mrefu sana.",
+      "couldNotCreateAllocation": "Haikuweza kuunda mgao.",
+      "requiredAllocationAndCountry": "Mgao na nchi/nafasi inahitajika.",
+      "allocationNotFound": "Mgao haujapatikana.",
+      "missingAllocation": "Mgao unaokosekana.",
+      "seatLinkedToDelegate": "Kiti hiki kimeunganishwa na mjumbe. Zitenganishe kwenye Supabase au uzipe upya kabla ya kuzifuta.",
+      "selectCommittee": "Chagua kamati.",
+      "couldNotParseCsv": "Haikuweza kuchanganua CSV.",
+      "noDataRowsFound": "Hakuna safu mlalo za data zilizopatikana (zinahitaji angalau nchi/nafasi kwa kila mstari).",
+      "importLimitedRows": "Ingiza hadi safu mlalo {max} chache. Gawanya faili yako.",
+      "rowTooLong": "Safu mlalo ni ndefu sana: {safu}... {row}",
+      "codeTooLongOnRow": "Msimbo ni mrefu sana kwenye safu mlalo: {row}"
+    },
+    "smtStaffAccess": {
+      "chooseEventFirst": "Chagua tukio kwa kutumia msimbo wa mkutano (lango la tukio) kwanza.",
+      "notSignedIn": "Hujaingia.",
+      "onlySmtChangeCodes": "Sekretarieti pekee ndiyo inaweza kubadilisha kanuni za kamati hapa.",
+      "committeeNotInActiveEvent": "Kamati hii si sehemu ya tukio lako linaloendelea.",
+      "missingCommittee": "Kamati iliyokosekana.",
+      "invalidCommitteeCode": "Kamati/msimbo wa chumba lazima uwe na herufi 6 au tarakimu (k.m. ECO741).",
+      "unauthorized": "Haijaidhinishwa.",
+      "codeSaved": "Msimbo umehifadhiwa. Wajumbe huitumia kama lango la pili baada ya msimbo wa mkutano.",
+      "invalidEmail": "Weka barua pepe halali.",
+      "onlySmtInviteChair": "Sekretarieti pekee ndiyo inaweza kutuma mialiko ya mwenyekiti.",
+      "missingServiceRoleKey": "Seva haina SUPABASE_SERVICE_ROLE_KEY. Iongeze kwenye env ya kupeleka (usiweke wazi kwa kivinjari kamwe).",
+      "missingPublicAppUrl": "Weka NEXT_PUBLIC_APP_URL kwa URL ya tovuti yako ya umma (k.m. https://your-app.vercel.app) kwa hivyo alika viungo vielekezwe kwingine ipasavyo.",
+      "emailAlreadyHasAccount": "Barua pepe hiyo tayari ina akaunti. Tumia \"Toa jukumu la mwenyekiti\" hapa chini badala ya kutuma mwaliko mwingine.",
+      "inviteSentButRoleSetFailed": "Mwaliko umetumwa, lakini haikuweza kuweka jukumu la mwenyekiti kwenye wasifu: {error}. Tumia \"Ruhusu jukumu la mwenyekiti\" baada ya kukubali.",
+      "inviteSentSuccess": "Alika barua pepe iliyotumwa kwa {email}. Watakuwa mwenyekiti baada ya kuweka nywila zao.",
+      "onlySmtGrantChair": "Sekretarieti pekee ndiyo inaweza kutoa majukumu ya mwenyekiti.",
+      "noAccountForEmail": "Bado hakuna akaunti iliyo na barua pepe hiyo. Tuma mwaliko wa mwenyekiti kwanza.",
+      "promotedToChairSuccess": "Wasifu wa {email} sasa ni mwenyekiti wa jukwaa."
+    },
+    "allocationSignup": {
+      "mustBeSignedIn": "Lazima uwe umeingia.",
+      "onlyDelegateOrChair": "Ni akaunti za mjumbe/mwenyekiti pekee ndizo zinazoweza kuomba kujisajili kwa mgao.",
+      "allocationNotFound": "Mgao haujapatikana.",
+      "allocationAlreadyAssigned": "Mgao huo tayari umekabidhiwa.",
+      "requiredConferenceAllocationEmail": "Mkutano, ugawaji, na barua pepe ya kukabidhi zinahitajika."
+    },
+    "exportMaterials": {
+      "pleaseSignInFirst": "Tafadhali ingia kwanza.",
+      "onlyDelegatesCanExport": "Wajumbe pekee wanaweza kuuza nyenzo zao.",
+      "accountHasNoEmail": "Akaunti yako haina anwani ya barua pepe iliyowekwa.",
+      "rangeTodayUtc": "Leo (UTC)",
+      "rangeAllTime": "Wakati wote",
+      "emailSubject": "Usafirishaji wa nyenzo za InterMUN ({range})",
+      "emailSendConfigHint": "Weka SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS na kwa hiari MATERIALS_EXPORT_FROM kwenye seva.",
+      "exportEmailedTo": "Hamisha kwa barua pepe kwa {email}. Ikiwa huioni, angalia barua taka/takataka."
+    }
   },
-  "allocationSignupPage": {
-    "invalidLinkTitle": "Invalid sign-up link",
-    "invalidLinkBody": "This allocation link is missing required details. Ask your chair or SMT for a fresh sign-up link.",
-    "allocationNotFoundTitle": "Allocation not found",
-    "allocationNotFoundBody": "This nation/position is no longer available in the selected committee.",
-    "allocationTakenTitle": "Allocation already taken",
-    "allocationTakenBody": "{country} has already been claimed by another account. Please choose a different allocation.",
-    "submitFailedTitle": "Could not submit request",
-    "requestSubmittedTitle": "Sign-up request submitted",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
-    "requestSubmittedHint": "Once approved, reopen this link or continue to committee sign-in to proceed.",
-    "continueCommitteeSignIn": "Continue to committee sign-in"
+  "emails": {
+    "allocationSignup": {
+      "signature": "InterMUN",
+      "welcomeSubject": "Karibu kwenye InterMUN",
+      "welcomeLine1": "Karibu kwenye InterMUN.",
+      "welcomeConfirmedFor": "Akaunti yako ya mjumbe imethibitishwa kwa ajili ya: {country}.",
+      "welcomeLine2": "Sasa unaweza kuendelea na kuingia kwa kamati na kujiunga na kipindi cha moja kwa moja.",
+      "welcomeLine3": "Tuonane kwenye sakafu.",
+      "chairReminderSubject": "Ombi la ugawaji linasubiri kuidhinishwa",
+      "chairReminderLine1": "Mjumbe ameomba mgao na anahitaji ukaguzi wa mwenyekiti.",
+      "chairReminderConference": "Mkutano: {mkutano} {conference}",
+      "chairReminderAllocation": "Umeomba mgao: {country}",
+      "chairReminderDelegate": "Mjumbe: {name}",
+      "chairReminderEmail": "Barua pepe ya akaunti: {email}",
+      "chairReminderLine2": "Tafadhali kubali au kataa ombi hili katika matrix ya ugawaji wa kiti:"
+    }
   },
-  "smtRoomCodesPage": {
-    "selectEventFirst": "Select a conference event first.",
-    "enterConferenceCode": "Enter conference code",
-    "title": "Room codes & chairs",
-    "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
+  "smtConferenceSettings": {
+    "eventDetails": "Maelezo ya tukio",
+    "selectConferenceFirst": "Chagua kongamano na lango la tukio kwanza, kisha urudi hapa.",
+    "committeeSessionsTitle": "Vikao vya kamati katika hafla hii",
+    "committeeSessionsBody": "Majina ya vikao vya kamati (mada za ajenda) hukaa hapa kwa kumbukumbu; gridi ya nyumbani ya SMT inaonyesha jina la kamati rasmi, kifupi, viti, na msimbo mfupi wa kuonyesha. Misimbo ya kamati/chumba (lango la pili) lazima ibaki ya kipekee ndani ya tukio hili.",
+    "noCommitteeSessions": "Hakuna vikao vya kamati vya tukio hili.",
+    "eventName": "Jina la tukio",
+    "tagline": "Mstari wa tagi",
+    "conferenceCodeFirstGate": "Msimbo wa mkutano (lango la kwanza)",
+    "saved": "Imehifadhiwa.",
+    "saving": "Inahifadhi...",
+    "saveConferenceEvent": "Hifadhi tukio la mkutano",
+    "errorImageFile": "Tafadhali chagua faili ya picha.",
+    "errorImageTooLarge": "Picha ni kubwa mno (isizidi MB 6).",
+    "errorCommitteeCodeMissing": "Kanuni ya kamati haipo.",
+    "errorPublicUrl": "Haikuweza kutatua URL ya umma kwa picha iliyopakiwa.",
+    "errorUploadFailed": "Imeshindwa kupakia.",
+    "sessionTitle": "Kichwa cha kikao",
+    "chamberLabel": "Chumba / lebo",
+    "officialCommitteeName": "Jina la kamati rasmi (gridi ya SMT)",
+    "officialCommitteeNamePlaceholder": "k.m. Shirika la Afya Ulimwenguni",
+    "chairNames": "Majina ya mwenyekiti",
+    "chairNamesPlaceholder": "Kutenganishwa kwa koma, k.m. Alex Kim, Jordan Lee",
+    "committeeLogo": "Nembo ya kamati",
+    "uploading": "Inapakia...",
+    "crisisSlidesUrl": "Slaidi za Migogoro (URL ya Slaidi za Google)",
+    "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
+    "crisisSlidesLabel": "Slaidi za migogoro",
+    "crisisSlidesHelpPrefix": "Kwa FWC / UNSC / HSC: iliyopachikwa kwenye wajumbe na viti'",
+    "crisisSlidesHelpSuffix": "ukurasa. Acha wazi ikiwa haitumiki. Staha inapaswa kuruhusu kutazama kwa hadhira yako (kushiriki kiungo).",
+    "competingMotionsTitle": "Hoja zinazoshindana (RoP): mashauriano kabla ya kikao cha kamati iliyosimamiwa",
+    "moderatedCaucus": "caucus moderated",
+    "consultation": "mashauriano",
+    "competingMotionsHelpPrefix": "Ondoa tiki kama kijitabu chako kinaweka safu ya a",
+    "competingMotionsHelpMiddle": "mwendo juu",
+    "competingMotionsHelpSuffix": "wakati zote mbili zinasubiri.",
+    "procedureProfile": "Wasifu wa utaratibu",
+    "procedureDefault": "Kamati chaguo-msingi RoP",
+    "procedureEuParliament": "Bunge la EU liliongoza RoP",
+    "euGuidedWorkflowChecks": "Ukaguzi wa mtiririko wa kazi unaoongozwa na EU",
+    "euGuidedWorkflowHelp": "Huwasha mwongozo wa awamu ya Bunge la Umoja wa Ulaya na vizuizi vya kimsingi vya utaratibu. Imepuuzwa isipokuwa wasifu wa utaratibu umewekwa kwa Bunge la Umoja wa Ulaya.",
+    "committeeRoomCodeSecondGate": "Kamati/msimbo wa chumba (lango la pili)",
+    "exactlySixLettersDigits": "Herufi 6 au tarakimu haswa",
+    "committeeCodePlaceholder": "k.m. ECO741",
+    "committeeCodeHelpPrefix": "Herufi sita: herufi za kwanza za chumba + tarakimu tatu (pendekezo la kuamua:",
+    "saveCommittee": "Kamati ya kuokoa"
+  },
+  "allocationMatrixManager": {
+    "linkedOpen": "Fungua",
+    "linkedRoleChair": "Mwenyekiti",
+    "linkedRoleDelegate": "Mjumbe",
+    "linkedRoleLinked": "Imeunganishwa",
+    "addedRow": "Safu iliyoongezwa.",
+    "addedSeat": "Kiti {label} kimeongezwa.",
+    "updatedRow": "Safu mlalo iliyosasishwa.",
+    "confirmRemoveUnassignedSeat": "Ungependa kuondoa kiti hiki ambacho hakijakabidhiwa kwenye tumbo?",
+    "deletedRow": "Safu mlalo iliyofutwa.",
+    "importedRows": "Imeingiza safu mlalo {count}.",
+    "skippedDuplicates": "Imeruka nakala {count} ambazo tayari ziko kwenye orodha.",
+    "replacedUnassignedSeats": "Viti vyote ambavyo havijakabidhiwa vimebadilishwa.",
+    "generatedRandomCodes": "Imezalisha misimbo {count} nasibu kwa safu mlalo bila moja.",
+    "addCommitteesFirst": "Ongeza kamati kwenye hafla hii kwanza",
+    "eventCommitteeSessionsLink": "Matukio na vikao vya kamati",
+    "committeeFallback": "Kamati",
+    "showingOneCommitteeAtATime": "Inaonyesha kamati moja kwa wakati mmoja. Badilisha kamati kwa kutumia vichupo vya chini.",
+    "editPlacardCodesSheet": "Hariri laha ya misimbo ya mabango ->",
+    "rosterHeading": "Orodha · {heading}",
+    "seatsSummary": "{count} viti.",
+    "linkedDelegatesCannotBeDeleted": "Wajumbe waliounganishwa hawawezi kufutwa hapa.",
+    "countryPosition": "Nchi / nafasi",
+    "placardCode": "Nambari ya mabango",
+    "assignedAccount": "Akaunti iliyokabidhiwa",
+    "signupLink": "Kiungo cha kujiandikisha",
+    "actions": "Vitendo",
+    "noSeatsYet": "Bado hakuna viti. Ongeza safu mlalo au ulete CSV.",
+    "allocationSignupLink": "Kiungo cha kujisajili kwa mgao",
+    "dash": "-",
+    "optional": "Hiari",
+    "save": "Hifadhi",
+    "remove": "Ondoa",
+    "addOneSeat": "Ongeza kiti kimoja",
+    "addHeadChairAllocation": "Ongeza mgao wa Mwenyekiti Mkuu",
+    "addCoChairAllocation": "Ongeza mgao wa mwenyekiti mwenza",
+    "countryPlaceholder": "k.m. Ufaransa",
+    "placardCodeOptional": "Msimbo wa bango (si lazima)",
+    "placardCodePlaceholder": "k.m. DIS-014",
+    "add": "Ongeza",
+    "importCsv": "Ingiza CSV",
+    "importHelpPrefix": "Kiti kimoja kwa kila mstari:",
+    "importHelpMiddle": "Safu ya kichwa yenye \"nchi\" ni sawa. Faili za UTF-8 kutoka Excel/Google Majedwali zinafanya kazi ya kuhamisha.",
+    "append": "Ongeza",
+    "appendHelp": "ameruka majina ambayo tayari yapo kwenye kamati hii.",
+    "replaceUnassigned": "Badilisha ambayo haijakabidhiwa",
+    "replaceUnassignedHelp": "huondoa kila kiti kilicho wazi (hakijaunganishwa na mjumbe), kisha hupakia wajumbe waliounganishwa waliounganishwa wakiwa salama.",
+    "replaceUnassignedOnly": "Badilisha ambayo haijakabidhiwa pekee",
+    "csvPlaceholder": "Ufaransa,DIS-001\\nUjerumani,DIS-002\\nJapani",
+    "parsedRowsSample": "Imechanganua safu mlalo {count}. Sampuli:",
+    "runImport": "Endesha uingizaji",
+    "generateMissingRandomCodes": "Tengeneza misimbo isiyo na mpangilio"
   }
 }
