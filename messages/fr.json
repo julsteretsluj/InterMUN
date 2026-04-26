@@ -301,7 +301,7 @@
     "saveEdits": "Enregistrer les modifications",
     "deleteMotionConfirm": "Supprimer définitivement cette motion ? Tous les votes enregistrés en faveur de cette motion seront supprimés et la motion disparaîtra du compte rendu.",
     "deleteMotion": "Supprimer le mouvement",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Compte : Oui {oui} | Non {non} | Bulletins de vote {total}",
     "ballotsHelp": "Bulletins de vote = pancartes avec un Oui ou un Non enregistré (l'abstention est enregistrée séparément et n'est pas comptée dans ce dénominateur). Clear supprime un vote enregistré. Pour les motions de procédure, le résultat compare le Oui aux membres présents sur la liste (voir la section appel nominal).",
     "recordVotesLabel": "Enregistrer les votes",
     "currentMotion": "mouvement actuel",
@@ -480,7 +480,7 @@
   },
   "delegateDashboard": {
     "welcome": "Bienvenue, Délégué de {flag} {country}",
-    "activeCommitteeIntro": "Active committee: {line}.",
+    "activeCommitteeIntro": "Comité actif : {ligne}.",
     "activeCommitteeBody": "Les dates du compte à rebours sont partagées avec tous les membres de ce comité. Votre préparation, vos positions et vos documents restent sur votre compte.",
     "jumpTo": "Aller à",
     "tiles": {
@@ -573,10 +573,10 @@
     "sessionFloorBanner": "L'<étage>étage de session</étage> (minuteries, haut-parleurs, appel nominal) est réservé aux <chaises>chaises d'estrade</chaises> uniquement. Utilisez les <live>Comités en direct</live> ci-dessous pour la surveillance, ou saisissez les codes de comité, comme les délégués, lorsque vous avez besoin d'une session spécifique.",
     "welcomeSg": "Bienvenue Secrétaire Général !",
     "whichCommittee": "Dans quelle commission souhaiteriez-vous participer ?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{compte, pluriel, une {# session} autre {# sessions}}",
     "topicLabel": "Sujette:",
     "chairsLabel": "Chaises :",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "logo {nom}",
     "eslFriendly": "Compatible ESL"
   },
   "chairNav": {
@@ -750,7 +750,7 @@
       "helpRequiredMajorityBody": "Choisissez le seuil de vote utilisé pour décider de la réussite ou de l'échec. « Simple » représente plus de la moitié. « 2/3 » nécessite une majorité qualifiée.",
       "majoritySimple": "Simple",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majority",
+      "majorityLine": "{étiquette} majorité",
       "mustVote": "DOIT voter",
       "helpMustVoteTitle": "DOIT voter",
       "helpMustVoteBody": "Marque cette motion comme un élément « à voter obligatoire ». Ceci est utilisé pour communiquer l’exigence aux participants (en fonction de la configuration de votre comité).",
@@ -872,7 +872,7 @@
         "title": "Glossaire de l’agenda de la MUN",
         "subtitle": "Terminologie unique adaptée au code de votre comité et aux sujets actuels de l’ordre du jour.",
         "committeeCode": "Code du comité : {code}",
-        "topicTag": "Topic: {topic}",
+        "topicTag": "Sujet : {sujet}",
         "sources": {
           "core": "cœur",
           "committee": "comité",
@@ -1107,7 +1107,7 @@
       "add": "Ajouter",
       "noIdeasYet": "Aucune idée pour l'instant.",
       "ideaLabel": "Idée",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Idée {numéro}",
       "linkedDoc": "Document lié",
       "addedOn": "Ajouté le {date}",
       "edit": "Modifier",
@@ -1161,9 +1161,9 @@
       "matchesCount": "{matches} sur {total} sièges correspondent",
       "searchAria": "Rechercher des délégations",
       "virtualRoomVacant": "Vacante",
-      "profileAria": "View profile: {country}",
+      "profileAria": "Voir le profil : {pays}",
       "vacantSeatAria": "Siège vacant",
-      "placardAria": "Placard {country}",
+      "placardAria": "Pancarte {pays}",
       "gavelAria": "Marteau"
     },
     "session": {
@@ -1181,7 +1181,7 @@
         "purposePlaceholder": "par ex. soutien + aperçu des modifications",
         "requesting": "Demander...",
         "rollPromptTitle": "Approbation du président requise",
-        "rollPromptBodyPickStatus": "La séance a commencé. Choisissez votre statut d'appel nominal pour débloquer la parole et le vote.",
+        "rollPromptBodyPickStatus": "La séance a commencé. Choisissez votre statut d'appel nominal pour débloquer la parole et le vote. Ce choix ne peut pas être modifié.",
         "rollPromptBodyWaitSessionStart": "En attendant que le président commence la séance du comité.",
         "rollPromptBodyWaitRollPrompt": "En attente de l'invite d'appel.",
         "rollPromptBodyMarkedAbsent": "Vous êtes actuellement marqué comme absent. Demandez au président de vous marquer Présent pour parler et voter.",
@@ -1196,7 +1196,7 @@
         "motioner": "Motioneur",
         "majority": "Majorité",
         "majoritySimple": "Simple",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "Oui {oui} - Non {non} - Total {total}",
         "help": "L'estrade enregistre le vote de chaque délégation en séance. Les votes sur les motions utilisent uniquement Oui ou Non (pas d'abstention). Les totaux ne comptent que les pancartes sur lesquelles un oui ou un non a été enregistré ; les délégations absentes sont ignorées."
       },
       "activeMotion": {
@@ -1213,12 +1213,12 @@
         "speakerTimeLeftTotal": "Temps de parole (gauche / total)",
         "perSpeaker": "(par enceinte)",
         "paused": "(en pause)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Pause : {raison}"
       },
       "floorStatus": {
         "sessionTime": "Durée de la séance",
         "limit": "Limite",
-        "limitRemaining": "{value} left",
+        "limitRemaining": "{valeur} restant",
         "limitOverBy": "plus de {value}",
         "dais": "Estrade",
         "pinned": "Épinglé",
@@ -1247,8 +1247,8 @@
         "delete": "Supprimer",
         "deleteConfirm": "Supprimer cette session de l'historique ?",
         "sessionNamePrompt": "Nom de la séance",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{gamme}",
+        "rangeOngoing": "{plage} -> En cours"
       },
       "timerPage": {
         "title": "Minuteur",
@@ -1333,7 +1333,7 @@
     "daisListed": "Estrade (répertoriée)",
     "committeeCodeSecondGate": "Code comité/salle (deuxième porte)",
     "seats": "Sièges",
-    "seatsFilledAllocated": "{filled} filled · {total} allocated",
+    "seatsFilledAllocated": "{rempli} rempli · {total} alloué",
     "resolutions": "Résolutions",
     "openVotes": "Votes ouverts",
     "editMetadataIntro": "Modifiez les métadonnées des sessions de comité et les noms des présidents sous",
@@ -1407,10 +1407,10 @@
     "delegatesMatrix": "Matrice des délégués",
     "clearAllChairNotes": "Effacer toutes les notes de chaise",
     "searchCountry": "Rechercher un pays...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} pancartes · {drapeau} avec des notes de chaise · Rouleau enregistré pour {count}",
     "loading": "Chargement...",
     "noDelegationsMatch": "Aucune délégation ne correspond à votre recherche.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "Rouleau {étiquette}",
     "linkedAccount": "Compte lié",
     "vacantPlacard": "Pancarte vacante",
     "delegateProfile": "Profil du délégué ->",
@@ -1483,7 +1483,7 @@
     "anyChair": "N'importe quelle chaise",
     "noChairs": "Aucun profil de chaise trouvé.",
     "notesListTitle": "Liste des notes",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{compte, pluriel, un {# note} autre {# notes}}",
     "emptyList": "Aucune note pour l'instant.",
     "forwardedBadge": "(transmis)",
     "readerWarning": "Avertissement du lecteur : cette note peut contenir un langage inapproprié.",
@@ -1642,7 +1642,7 @@
       "missingServiceRoleKey": "Il manque SUPABASE_SERVICE_ROLE_KEY sur le serveur. Ajoutez-le à l'environnement de déploiement (ne l'exposez jamais au navigateur).",
       "missingPublicAppUrl": "Définissez NEXT_PUBLIC_APP_URL sur l'URL de votre site public (par exemple https://your-app.vercel.app) afin que les liens d'invitation soient redirigés correctement.",
       "emailAlreadyHasAccount": "Cet e-mail a déjà un compte. Utilisez « Accorder le rôle de président » ci-dessous au lieu d'envoyer une autre invitation.",
-      "inviteSentButRoleSetFailed": "Invite sent, but could not set chair role on profile: {error}. Use \"Grant chair role\" after they accept.",
+      "inviteSentButRoleSetFailed": "Invitation envoyée, mais impossible de définir le rôle de président sur le profil : {erreur}. Utilisez « Accorder le rôle de président » après avoir accepté.",
       "inviteSentSuccess": "E-mail d'invitation envoyé à {email}. Ils occuperont une chaise après avoir défini leur mot de passe.",
       "onlySmtGrantChair": "Seul le secrétariat peut attribuer des rôles de président.",
       "noAccountForEmail": "Aucun compte avec cette adresse e-mail pour l'instant. Envoyez d’abord une invitation à une chaise.",
@@ -1676,10 +1676,10 @@
       "welcomeLine3": "On se voit sur le terrain.",
       "chairReminderSubject": "Demande d'attribution de délégués en attente d'approbation",
       "chairReminderLine1": "Un délégué a demandé une allocation et nécessite un examen par le président.",
-      "chairReminderConference": "Conference: {conference}",
-      "chairReminderAllocation": "Requested allocation: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
-      "chairReminderEmail": "Account email: {email}",
+      "chairReminderConference": "Conférence : {conférence}",
+      "chairReminderAllocation": "Allocation demandée : {pays}",
+      "chairReminderDelegate": "Délégué : {nom}",
+      "chairReminderEmail": "Adresse e-mail du compte : {e-mail}",
       "chairReminderLine2": "Veuillez approuver ou rejeter cette demande dans la matrice d'attribution des chaires :"
     }
   },
@@ -1749,7 +1749,7 @@
     "committeeFallback": "Comité",
     "showingOneCommitteeAtATime": "Afficher un comité à la fois. Changez de comité en utilisant les onglets du bas.",
     "editPlacardCodesSheet": "Modifier la feuille de codes des pancartes ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "Liste · {titre}",
     "seatsSummary": "{count} siège(s).",
     "linkedDelegatesCannotBeDeleted": "Les délégués liés ne peuvent pas être supprimés ici.",
     "countryPosition": "Pays / poste",
@@ -1794,7 +1794,7 @@
     "tierLow": "Faible",
     "tierHigh": "Haut",
     "tierPromptLocked": "Verrouillé : {band} - {tier} ({score})",
-    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "tierPromptPick": "Choisissez bas ou haut dans {bande} (points sur l'échelle de 1 à 8).",
     "criteria": {
       "creativity": {
         "label": "Créativité",

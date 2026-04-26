@@ -167,7 +167,7 @@
     "rollPresentVoting": "Anwesend und abstimmend",
     "rollPresentVotingTitle": "Anwesend und abstimmend – muss abstimmen, darf sich nicht enthalten",
     "rollAbsent": "Abwesend",
-    "rollCallForCountry": "Roll call for {country}",
+    "rollCallForCountry": "Appell für {Land}",
     "presetCustom": "Brauch",
     "presetSetAgenda": "Antrag zur Festlegung der Tagesordnung",
     "presetExtendOpeningSpeech": "Antrag auf Verlängerung der Eröffnungsrede",
@@ -301,7 +301,7 @@
     "saveEdits": "Änderungen speichern",
     "deleteMotionConfirm": "Diesen Antrag dauerhaft löschen? Alle aufgezeichneten Stimmen dafür werden entfernt und der Antrag verschwindet aus dem Protokoll.",
     "deleteMotion": "Antrag löschen",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Tally: Ja {ja} | Nein {nein} | Stimmzettel {total}",
     "ballotsHelp": "Stimmzettel = Plakate mit einem eingetragenen Ja oder Nein (Enthaltung wird separat erfasst und in diesem Nenner nicht gezählt). Mit „Löschen“ wird eine aufgezeichnete Abstimmung entfernt. Bei Verfahrensanträgen entspricht das Ergebnis dem Ergebnis „Ja“ im Vergleich zu den in der Liste anwesenden Mitgliedern (siehe Abschnitt „Namensaufruf“).",
     "recordVotesLabel": "Stimmen aufzeichnen",
     "currentMotion": "aktuelle Bewegung",
@@ -573,10 +573,10 @@
     "sessionFloorBanner": "<floor>Sitzungsetage</floor> (Timer, Lautsprecher, Appell) ist nur für <chairs>Podiumsstühle</chairs> vorgesehen. Verwenden Sie unten <live>Live-Ausschüsse</live> für die Übersicht oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
     "welcomeSg": "Willkommen, Generalsekretär!",
     "whichCommittee": "In welchem ​​Ausschuss möchten Sie mitmachen?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{Anzahl, Plural, eine {# Sitzung} andere {# Sitzungen}}",
     "topicLabel": "Thema:",
     "chairsLabel": "Stühle:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "{Name}-Logo",
     "eslFriendly": "ESL-freundlich"
   },
   "chairNav": {
@@ -1107,9 +1107,9 @@
       "add": "Hinzufügen",
       "noIdeasYet": "Noch keine Ideen.",
       "ideaLabel": "Idee",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Idee {Nummer}",
       "linkedDoc": "Verlinktes Dokument",
-      "addedOn": "Added {date}",
+      "addedOn": "Hinzugefügt am {Datum}",
       "edit": "Bearbeiten",
       "delete": "Löschen",
       "ideaDocument": "Ideendokument",
@@ -1161,9 +1161,9 @@
       "matchesCount": "{matches} von {total} Sitzplätzen stimmen überein",
       "searchAria": "Suchdelegationen",
       "virtualRoomVacant": "Frei",
-      "profileAria": "View profile: {country}",
+      "profileAria": "Profil anzeigen: {Land}",
       "vacantSeatAria": "Freier Sitzplatz",
-      "placardAria": "Placard {country}",
+      "placardAria": "Plakat {Land}",
       "gavelAria": "Hammer"
     },
     "session": {
@@ -1181,7 +1181,7 @@
         "purposePlaceholder": "z.B. Support + Änderungsübersicht",
         "requesting": "Anfrage...",
         "rollPromptTitle": "Genehmigung des Vorsitzes erforderlich",
-        "rollPromptBodyPickStatus": "Die Sitzung hat begonnen. Wählen Sie Ihren Namensstatus, um das Sprechen und Abstimmen freizuschalten.",
+        "rollPromptBodyPickStatus": "Die Sitzung hat begonnen. Wählen Sie Ihren Aufrufstatus, um Sprechen und Abstimmen freizuschalten. Diese Auswahl kann nicht geändert werden.",
         "rollPromptBodyWaitSessionStart": "Ich warte darauf, dass der Vorsitzende die Ausschusssitzung beginnt.",
         "rollPromptBodyWaitRollPrompt": "Warten auf die Aufforderung zum Appell.",
         "rollPromptBodyMarkedAbsent": "Sie sind derzeit als abwesend markiert. Bitten Sie den Vorsitzenden, Sie als anwesend zu markieren, damit Sie sprechen und abstimmen können.",
@@ -1196,7 +1196,7 @@
         "motioner": "Motioner",
         "majority": "Mehrheitlich",
         "majoritySimple": "Einfach",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "Ja {ja} – Nein {nein} – Gesamt {total}",
         "help": "Das Podium zeichnet die Abstimmung jeder Delegation während der Sitzung auf. Bei der Abstimmung über Anträge erfolgt nur Ja oder Nein (keine Enthaltung). In den Summen werden nur Plakate berücksichtigt, auf denen „Ja“ oder „Nein“ angegeben wurde. abwesende Delegationen werden übersprungen."
       },
       "activeMotion": {
@@ -1213,7 +1213,7 @@
         "speakerTimeLeftTotal": "Sprecherzeit (links / gesamt)",
         "perSpeaker": "(pro Sprecher)",
         "paused": "(pausiert)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Pause: {Grund}"
       },
       "floorStatus": {
         "sessionTime": "Sitzungszeit",
@@ -1247,7 +1247,7 @@
         "delete": "Löschen",
         "deleteConfirm": "Diese Sitzung aus dem Verlauf löschen?",
         "sessionNamePrompt": "Sitzungsname",
-        "rangeClosed": "{range}",
+        "rangeClosed": "{Reichweite}",
         "rangeOngoing": "{range} -> Laufend"
       },
       "timerPage": {
@@ -1407,7 +1407,7 @@
     "delegatesMatrix": "Delegiertenmatrix",
     "clearAllChairNotes": "Löschen Sie alle Stuhlnotizen",
     "searchCountry": "Land suchen...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} Plakate · {markiert} mit Notizen des Vorsitzenden · Liste aufgezeichnet für {count}",
     "loading": "Laden...",
     "noDelegationsMatch": "Keine Delegationen entsprechen Ihrer Suche.",
     "rollPrefix": "Rolle {label}",
@@ -1483,7 +1483,7 @@
     "anyChair": "Jeder Stuhl",
     "noChairs": "Keine Stuhlprofile gefunden.",
     "notesListTitle": "Notizenliste",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{Anzahl, Plural, eine {# Notiz} andere {# Notizen}}",
     "emptyList": "Noch keine Notizen.",
     "forwardedBadge": "(weitergeleitet)",
     "readerWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
@@ -1676,8 +1676,8 @@
       "welcomeLine3": "Wir sehen uns auf dem Boden.",
       "chairReminderSubject": "Zuteilungsanfrage bis zur Genehmigung delegieren",
       "chairReminderLine1": "Ein Delegierter hat eine Zuteilung beantragt und benötigt eine Überprüfung durch den Vorsitzenden.",
-      "chairReminderConference": "Conference: {conference}",
-      "chairReminderAllocation": "Requested allocation: {country}",
+      "chairReminderConference": "Konferenz: {Konferenz}",
+      "chairReminderAllocation": "Angeforderte Zuteilung: {Land}",
       "chairReminderDelegate": "Delegierter: {name}",
       "chairReminderEmail": "Konto-E-Mail: {email}",
       "chairReminderLine2": "Bitte genehmigen oder lehnen Sie diesen Antrag in der Stuhlvergabematrix ab:"
@@ -1794,7 +1794,7 @@
     "tierLow": "Niedrig",
     "tierHigh": "Hoch",
     "tierPromptLocked": "Gesperrt in: {band} – {tier} ({score})",
-    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "tierPromptPick": "Wählen Sie einen niedrigen oder hohen Wert innerhalb von {Band} (Punkte auf der Skala von 1 bis 8).",
     "criteria": {
       "creativity": {
         "label": "Kreativität",

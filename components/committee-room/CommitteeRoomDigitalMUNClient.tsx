@@ -441,7 +441,7 @@ export function CommitteeRoomDigitalMUNClient({
                           {shouldPromptDelegateRollChoice ? (
                             trRequestToSpeak(
                               "rollPromptBodyPickStatus",
-                              "Session has started. Choose your roll-call status to unlock speaking and voting."
+                              "Session has started. Choose your roll-call status to unlock speaking and voting. This choice cannot be changed."
                             )
                           ) : myRollApprovalLoaded ? (
                             !sessionStartedAt ? (

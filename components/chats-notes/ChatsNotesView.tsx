@@ -10,7 +10,7 @@ type ChatMessage = {
   sender_id: string;
   sender_role: string;
   kind: "personal" | "broadcast";
-  audience_scope: "self" | "committee_all";
+  audience_scope: "self" | "committee_all" | "all_committees";
   content: string;
   created_at: string;
   updated_at: string;
@@ -31,6 +31,9 @@ export function ChatsNotesView({
   const [newMessage, setNewMessage] = useState("");
   const [selectedMessage, setSelectedMessage] = useState<ChatMessage | null>(null);
   const [mode, setMode] = useState<"personal" | "broadcast">("personal");
+  const [broadcastScope, setBroadcastScope] = useState<"committee_all" | "all_committees">(
+    "committee_all"
+  );
 
   const supabase = createClient();
 
@@ -61,6 +64,7 @@ export function ChatsNotesView({
 
   const canBroadcast = myRole === "chair" || myRole === "smt" || myRole === "admin";
   const canEditAny = myRole === "smt" || myRole === "admin";
+  const canChooseBroadcastScope = myRole === "smt" || myRole === "admin";
 
   useEffect(() => {
     if (!canBroadcast && mode !== "personal") setMode("personal");
@@ -80,8 +84,8 @@ export function ChatsNotesView({
     if (!newMessage.trim()) return;
 
     const kind: "personal" | "broadcast" = mode;
-    const audience_scope: "self" | "committee_all" =
-      kind === "personal" ? "self" : "committee_all";
+    const audience_scope: "self" | "committee_all" | "all_committees" =
+      kind === "personal" ? "self" : canChooseBroadcastScope ? broadcastScope : "committee_all";
 
     const { error } = await supabase.from("chat_messages").insert({
       conference_id: conferenceId,
@@ -97,6 +101,7 @@ export function ChatsNotesView({
     setNewMessage("");
     setSelectedMessage(null);
     setMode("personal");
+    setBroadcastScope("committee_all");
     await refreshMessages();
   }
 
@@ -134,7 +139,7 @@ export function ChatsNotesView({
         <h3 className="font-semibold mb-2">Chat</h3>
 
         {canBroadcast && (
-          <div className="flex gap-4 items-center mb-3">
+          <div className="mb-3 flex flex-wrap items-center gap-4">
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="radio"
@@ -153,6 +158,21 @@ export function ChatsNotesView({
               />
               Broadcast
             </label>
+            {mode === "broadcast" && canChooseBroadcastScope ? (
+              <label className="flex items-center gap-2 text-sm">
+                Scope
+                <select
+                  value={broadcastScope}
+                  onChange={(e) =>
+                    setBroadcastScope(e.target.value as "committee_all" | "all_committees")
+                  }
+                  className="rounded-md border border-white/20 bg-black/30 px-2 py-1"
+                >
+                  <option value="committee_all">This committee</option>
+                  <option value="all_committees">All committees</option>
+                </select>
+              </label>
+            ) : null}
           </div>
         )}
         <div className="flex gap-4">
@@ -191,6 +211,7 @@ export function ChatsNotesView({
                   setSelectedMessage(m);
                   setNewMessage(m.content);
                   setMode(canBroadcast ? m.kind : "personal");
+                  setBroadcastScope(m.audience_scope === "all_committees" ? "all_committees" : "committee_all");
                 }}
                 className="p-2 rounded hover:bg-white/10 cursor-pointer text-sm truncate"
               >
@@ -213,7 +234,7 @@ export function ChatsNotesView({
                   <div className="min-w-0">
                     <div className="text-xs uppercase tracking-wider text-brand-muted">
                       {m.kind === "broadcast"
-                        ? `Broadcast (${m.sender_role})`
+                        ? `Broadcast (${m.sender_role})${m.audience_scope === "all_committees" ? " · all committees" : ""}`
                         : m.sender_id === myUserId
                           ? "Personal (You)"
                           : "Personal"}
@@ -229,6 +250,9 @@ export function ChatsNotesView({
                           setSelectedMessage(m);
                           setNewMessage(m.content);
                           setMode(canBroadcast ? m.kind : "personal");
+                          setBroadcastScope(
+                            m.audience_scope === "all_committees" ? "all_committees" : "committee_all"
+                          );
                         }}
                       >
                         Edit

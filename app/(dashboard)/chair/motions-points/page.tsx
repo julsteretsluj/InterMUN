@@ -3,10 +3,12 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { ChairMotionsPointsLog } from "@/components/chair/ChairMotionsPointsLog";
-import { getTranslations } from "next-intl/server";
+import { localizeCountryName } from "@/lib/i18n/localize-country-name";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function ChairMotionsPointsPage() {
   const t = await getTranslations("pageTitles");
+  const locale = await getLocale();
   const supabase = await createClient();
   const {
     data: { user },
@@ -37,9 +39,10 @@ export default async function ChairMotionsPointsPage() {
       const roleLower = embed?.role?.toString().trim().toLowerCase();
       if (!r.user_id || roleLower === "chair") return null;
       const name = embed?.name?.trim();
+      const localizedCountry = localizeCountryName(r.country, locale) || r.country;
       return {
         allocationId: r.id,
-        label: name ? `${r.country} — ${name}` : r.country,
+        label: name ? `${localizedCountry} — ${name}` : localizedCountry,
       };
     })
     .filter((row): row is { allocationId: string; label: string } => row != null);

@@ -61,8 +61,9 @@ import {
   type EuSessionPhase,
 } from "@/lib/eu-session-phase";
 import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import { localizeCountryName } from "@/lib/i18n/localize-country-name";
 
 type Alloc = {
   id: string;
@@ -269,6 +270,7 @@ export function SessionControlClient({
   const tTopicUi = useTranslations("chairTopicTabs");
   const tTimer = useTranslations("views.session.timerPage");
   const tSessionControl = useTranslations("sessionControlClient");
+  const locale = useLocale();
   const supabase = createClient();
   const rosterConferenceIdList = useMemo(() => {
     if (rosterConferenceIds?.length) return rosterConferenceIds;
@@ -299,6 +301,10 @@ export function SessionControlClient({
     [tSessionControl]
   );
   const rosterKey = useMemo(() => rosterConferenceIdList.slice().sort().join(","), [rosterConferenceIdList]);
+  const displayCountry = useCallback(
+    (country: string | null | undefined) => localizeCountryName(country, locale) || country || "—",
+    [locale]
+  );
   const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
   const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
   const floorConferenceId = useLiveDebateConferenceId(
@@ -1441,7 +1447,10 @@ export function SessionControlClient({
         setMsg("Vote with rights is only available for Yes/No.");
         return;
       }
-      const drafted = window.prompt(`Statement for ${allocation.country} (${value.toUpperCase()} with rights):`, "");
+      const drafted = window.prompt(
+        `Statement for ${displayCountry(allocation.country)} (${value.toUpperCase()} with rights):`,
+        ""
+      );
       if (drafted === null) return;
       if (!drafted.trim()) {
         setMsg("A statement is required for vote with rights.");
@@ -1628,7 +1637,7 @@ export function SessionControlClient({
       if (!user) return;
       const queueAlloc = currentSpeakerQueueRow?.allocation_id ?? null;
       const queueCountry = queueAlloc
-        ? allocations.find((a) => a.id === queueAlloc)?.country ?? null
+        ? displayCountry(allocations.find((a) => a.id === queueAlloc)?.country ?? null)
         : null;
       const timerLine = timer.current.trim();
       const speakerLabel =
@@ -2257,7 +2266,7 @@ export function SessionControlClient({
       [
         "Step 3/5: Motioner (optional, enter number or leave blank).",
         "0. Not specified",
-        ...allocations.map((a, i) => `${i + 1}. ${a.country}`),
+        ...allocations.map((a, i) => `${i + 1}. ${displayCountry(a.country)}`),
       ].join("\n"),
       "0"
     );
@@ -2777,7 +2786,7 @@ export function SessionControlClient({
               <option value="">{tSessionControl("raisedByOptional")}</option>
               {votingCallOrder.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.country}
+                  {displayCountry(a.country)}
                 </option>
               ))}
             </select>
@@ -3253,7 +3262,7 @@ export function SessionControlClient({
               <option value="">{tSessionControl("notSpecified")}</option>
               {allocations.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.country}
+                  {displayCountry(a.country)}
                 </option>
               ))}
             </select>
@@ -3389,7 +3398,7 @@ export function SessionControlClient({
                       >
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <div>
-                            <p className="font-medium text-brand-navy">{call.country}</p>
+                            <p className="font-medium text-brand-navy">{displayCountry(call.country)}</p>
                             <p className="text-xs text-brand-muted mt-0.5">
                               Roll: {rollLabel} · Recorded:{" "}
                               <span className="font-medium text-brand-navy">
@@ -3859,9 +3868,11 @@ export function SessionControlClient({
                   <span className="text-brand-muted">{tTimer("speakerListCurrent")} </span>
                   <span className="font-medium">
                     {currentSpeakerQueueRow.allocation_id
-                      ? (allocations.find((a) => a.id === currentSpeakerQueueRow.allocation_id)?.country ??
-                        currentSpeakerQueueRow.label ??
-                        "—")
+                      ? displayCountry(
+                          allocations.find((a) => a.id === currentSpeakerQueueRow.allocation_id)?.country ??
+                            currentSpeakerQueueRow.label ??
+                            "—"
+                        )
                       : (currentSpeakerQueueRow.label ?? "—")}
                   </span>
                 </p>
@@ -4231,7 +4242,7 @@ export function SessionControlClient({
                 {roll.map((r) => {
                   const emb = r.allocations;
                   const row = Array.isArray(emb) ? emb[0] : emb;
-                  const country = row?.country ?? r.allocation_id.slice(0, 8);
+                  const country = displayCountry(row?.country ?? r.allocation_id.slice(0, 8));
                   const att = r.attendance;
                   return (
                     <li

@@ -1,11 +1,11 @@
 # i18n Audit Report
 
-Generated: 2026-04-26T06:47:21.350Z
+Generated: 2026-04-26T06:56:35.198Z
 
 ## Summary
 
 - Locales: 27
-- Hardcoded string findings: 649
+- Hardcoded string findings: 650
 - Placeholder mismatches: 0
 - Locales with parity issues: 0
 
@@ -15,7 +15,7 @@ Generated: 2026-04-26T06:47:21.350Z
 - server_action: 121
 - api: 3
 - component: 189
-- library_surface: 123
+- library_surface: 124
 
 ## Locale Parity
 
@@ -157,25 +157,25 @@ Generated: 2026-04-26T06:47:21.350Z
 - app/(dashboard)/chair/page.tsx:79 [object_message_literal] "Committee room (full)" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/room-code/page.tsx:61 [jsx_text] "committee code" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/room-code/page.tsx:76 [jsx_text] "After saving, you can enter that committee or share the code on the dais." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1613 [object_message_literal] "Advanced speaker and reset per-speaker clock." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1646 [object_message_literal] "Speech note saved." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1657 [object_message_literal] "Speech note deleted." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1683 [object_message_literal] "Announcement posted." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1699 [object_message_literal] "Pinned for the committee floor." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1705 [object_message_literal] "Unpinned." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1743 [object_message_literal] "Announcement updated." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1761 [object_message_literal] "Announcement deleted." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1790 [object_message_literal] "Added ${newRows.length} roll call row(s)." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1873 [object_message_literal] "Motion created and opened." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1927 [object_message_literal] "Motion updated." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1947 [object_message_literal] "Motion closed." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2065 [object_message_literal] "Motion reopened." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2108 [object_message_literal] "Motion floor open — record each stated motion below." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2128 [object_message_literal] "Motion floor closed for statements." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2171 [object_message_literal] "Stated motion recorded (not yet open for voting)." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2267 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2351 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2483 [object_message_literal] "Stated motion removed." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1622 [object_message_literal] "Advanced speaker and reset per-speaker clock." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1655 [object_message_literal] "Speech note saved." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1666 [object_message_literal] "Speech note deleted." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1692 [object_message_literal] "Announcement posted." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1708 [object_message_literal] "Pinned for the committee floor." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1714 [object_message_literal] "Unpinned." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1752 [object_message_literal] "Announcement updated." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1770 [object_message_literal] "Announcement deleted." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1799 [object_message_literal] "Added ${newRows.length} roll call row(s)." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1882 [object_message_literal] "Motion created and opened." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1936 [object_message_literal] "Motion updated." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:1956 [object_message_literal] "Motion closed." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2074 [object_message_literal] "Motion reopened." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2117 [object_message_literal] "Motion floor open — record each stated motion below." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2137 [object_message_literal] "Motion floor closed for statements." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2180 [object_message_literal] "Stated motion recorded (not yet open for voting)." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2276 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2360 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2492 [object_message_literal] "Stated motion removed." -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:160 [attribute_literal] "In committee" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:209 [attribute_literal] "Country" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:210 [attribute_literal] "Name" -> suggested prefix: `pageTitles`

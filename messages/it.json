@@ -167,7 +167,7 @@
     "rollPresentVoting": "Presente e votante",
     "rollPresentVotingTitle": "Presente e votante: deve votare, non può astenersi",
     "rollAbsent": "Assente",
-    "rollCallForCountry": "Roll call for {country}",
+    "rollCallForCountry": "Appello per {paese}",
     "presetCustom": "Costume",
     "presetSetAgenda": "Mozione per fissare l'ordine del giorno",
     "presetExtendOpeningSpeech": "Proposta per prolungare il tempo del discorso di apertura",
@@ -198,7 +198,7 @@
     "presetDivideQuestion": "Dividi la domanda (è necessario un editor)",
     "presetDivideQuestionTitle": "Mozione per dividere la questione",
     "presetClauseByClause": "Clausola per clausola (è necessario un editor)",
-    "presetClauseByClauseTitle": "Proposta di voto clausola per clausola",
+    "presetClauseByClauseTitle": "Mozione di voto, clausola per clausola",
     "presetAmendments": "Emendamenti (è necessario un editore)",
     "presetAmendmentTitle": "Emendamento",
     "guidedStepChooseProcedure": "Passo 1/5: Scegli la procedura (inserisci il numero).",
@@ -301,7 +301,7 @@
     "saveEdits": "Salva modifiche",
     "deleteMotionConfirm": "Eliminare questa mozione in modo permanente? Tutti i voti registrati a favore verranno rimossi e la mozione scomparirà dal registro.",
     "deleteMotion": "Elimina movimento",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Tally: Sì {sì} | No {no} | Schede elettorali {totale}",
     "ballotsHelp": "Schede elettorali = cartelli con un Sì o un No registrato (l'astensione viene tracciata separatamente e non viene conteggiata in questo denominatore). Cancella rimuove un voto registrato. Per le mozioni procedurali, l'esito confronta Sì con i membri presenti nell'elenco (vedere la sezione appello).",
     "recordVotesLabel": "Registra voti",
     "currentMotion": "movimento attuale",
@@ -576,7 +576,7 @@
     "sessionsCount": "{count, plural, one {# sessione} other {# sessioni}}",
     "topicLabel": "Argomento:",
     "chairsLabel": "Sedie:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "logo {nome}",
     "eslFriendly": "Adatto all'ESL"
   },
   "chairNav": {
@@ -750,7 +750,7 @@
       "helpRequiredMajorityBody": "Scegli la soglia di voto utilizzata per decidere se superato/fallito. \"Semplice\" è più della metà. \"2/3\" richiede la maggioranza assoluta.",
       "majoritySimple": "Semplice",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majority",
+      "majorityLine": "maggioranza di {etichetta}",
       "mustVote": "DEVE votare",
       "helpMustVoteTitle": "DEVE votare",
       "helpMustVoteBody": "Contrassegna questa mozione come un elemento \"da votare\". Viene utilizzato per comunicare i requisiti ai partecipanti (a seconda della configurazione del comitato).",
@@ -871,8 +871,8 @@
       "glossary": {
         "title": "Glossario dell'agenda MUN",
         "subtitle": "Terminologia unica adattata al codice del tuo comitato e agli argomenti attuali dell'agenda.",
-        "committeeCode": "Committee code: {code}",
-        "topicTag": "Topic: {topic}",
+        "committeeCode": "Codice comitato: {codice}",
+        "topicTag": "Argomento: {argomento}",
         "sources": {
           "core": "nucleo",
           "committee": "comitato",
@@ -1107,9 +1107,9 @@
       "add": "Aggiungere",
       "noIdeasYet": "Nessuna idea ancora.",
       "ideaLabel": "Idea",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Idea {numero}",
       "linkedDoc": "Documento collegato",
-      "addedOn": "Added {date}",
+      "addedOn": "Aggiunto il {data}",
       "edit": "Modificare",
       "delete": "Eliminare",
       "ideaDocument": "Documento di idee",
@@ -1161,9 +1161,9 @@
       "matchesCount": "{matches} di {total} posti corrispondono",
       "searchAria": "Cerca delegazioni",
       "virtualRoomVacant": "Vacante",
-      "profileAria": "View profile: {country}",
+      "profileAria": "Visualizza profilo: {paese}",
       "vacantSeatAria": "Posto vacante",
-      "placardAria": "Placard {country}",
+      "placardAria": "Cartello {paese}",
       "gavelAria": "Martelletto"
     },
     "session": {
@@ -1196,7 +1196,7 @@
         "motioner": "Motioner",
         "majority": "Maggioranza",
         "majoritySimple": "Semplice",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "Sì {sì} - No {no} - Totale {totale}",
         "help": "La pedana registra il voto di ciascuna delegazione in sessione. I voti di mozione utilizzano solo Sì o No (nessuna astensione). Nei totali contano solo i cartelli dove è stato scritto Sì o No; le delegazioni assenti vengono saltate."
       },
       "activeMotion": {
@@ -1213,13 +1213,13 @@
         "speakerTimeLeftTotal": "Tempo del relatore (sinistra/totale)",
         "perSpeaker": "(per altoparlante)",
         "paused": "(in pausa)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Pausa: {motivo}"
       },
       "floorStatus": {
         "sessionTime": "Orario della sessione",
         "limit": "Limite",
-        "limitRemaining": "{value} left",
-        "limitOverBy": "over by {value}",
+        "limitRemaining": "{valore} rimasto",
+        "limitOverBy": "oltre di {valore}",
         "dais": "Palcoscenico",
         "pinned": "Appuntato",
         "viewFullAnnouncement": "Visualizza l'annuncio completo",
@@ -1247,8 +1247,8 @@
         "delete": "Eliminare",
         "deleteConfirm": "Eliminare questa sessione dalla cronologia?",
         "sessionNamePrompt": "Nome della sessione",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{allineare}",
+        "rangeOngoing": "{intervallo} -> In corso"
       },
       "timerPage": {
         "title": "Timer",
@@ -1333,7 +1333,7 @@
     "daisListed": "Dais (elencato)",
     "committeeCodeSecondGate": "Codice Comitato/Camera (secondo cancello)",
     "seats": "Sedili",
-    "seatsFilledAllocated": "{filled} filled · {total} allocated",
+    "seatsFilledAllocated": "{riempito} riempito · {totale} assegnato",
     "resolutions": "Risoluzioni",
     "openVotes": "Votazioni aperte",
     "editMetadataIntro": "Modifica i metadati della sessione della commissione e i nomi dei presidenti in",
@@ -1407,10 +1407,10 @@
     "delegatesMatrix": "Matrice dei delegati",
     "clearAllChairNotes": "Cancella tutte le note sulla sedia",
     "searchCountry": "Cerca paese...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} cartelli · {contrassegnato} con note sulla sedia · Elenco registrato per {count}",
     "loading": "Caricamento...",
     "noDelegationsMatch": "Nessuna delegazione corrisponde alla tua ricerca.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "Rotolo {etichetta}",
     "linkedAccount": "Conto collegato",
     "vacantPlacard": "Cartello vacante",
     "delegateProfile": "Profilo del delegato ->",
@@ -1483,7 +1483,7 @@
     "anyChair": "Qualsiasi sedia",
     "noChairs": "Nessun profilo sedia trovato.",
     "notesListTitle": "Elenco delle note",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{contare, plurale, una {# nota} altra {# note}}",
     "emptyList": "Nessuna nota ancora.",
     "forwardedBadge": "(inoltrato)",
     "readerWarning": "Avviso al lettore: questa nota potrebbe contenere un linguaggio inappropriato.",
@@ -1625,7 +1625,7 @@
       "couldNotParseCsv": "Impossibile analizzare CSV.",
       "noDataRowsFound": "Nessuna riga di dati trovata (è necessario almeno un paese/posizione per riga).",
       "importLimitedRows": "Importazione limitata a {max} righe. Dividi il tuo file.",
-      "rowTooLong": "Row too long: {row}…",
+      "rowTooLong": "Riga troppo lunga: {riga}...",
       "codeTooLongOnRow": "Codice troppo lungo nella riga: {row}"
     },
     "smtStaffAccess": {
@@ -1642,7 +1642,7 @@
       "missingServiceRoleKey": "Nel server manca SUPABASE_SERVICE_ROLE_KEY. Aggiungilo all'ambiente di distribuzione (non esporlo mai al browser).",
       "missingPublicAppUrl": "Imposta NEXT_PUBLIC_APP_URL sull'URL del tuo sito pubblico (ad esempio https://your-app.vercel.app) in modo che i link di invito vengano reindirizzati correttamente.",
       "emailAlreadyHasAccount": "Quell'e-mail ha già un account. Utilizza \"Concedi ruolo di presidente\" di seguito invece di inviare un altro invito.",
-      "inviteSentButRoleSetFailed": "Invite sent, but could not set chair role on profile: {error}. Use \"Grant chair role\" after they accept.",
+      "inviteSentButRoleSetFailed": "Invito inviato, ma non è stato possibile impostare il ruolo di presidente sul profilo: {errore}. Utilizza \"Concedi ruolo di presidente\" dopo l'accettazione.",
       "inviteSentSuccess": "Email di invito inviata a {email}. Saranno una sedia dopo aver impostato la password.",
       "onlySmtGrantChair": "Solo la segreteria può conferire incarichi di presidente.",
       "noAccountForEmail": "Nessun account ancora con quell'e-mail. Invia prima un invito alla presidenza.",
@@ -1676,10 +1676,10 @@
       "welcomeLine3": "Ci vediamo sul pavimento.",
       "chairReminderSubject": "Richiesta di allocazione delegata in attesa di approvazione",
       "chairReminderLine1": "Un delegato ha richiesto un'assegnazione e necessita della revisione della presidenza.",
-      "chairReminderConference": "Conference: {conference}",
-      "chairReminderAllocation": "Requested allocation: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
-      "chairReminderEmail": "Account email: {email}",
+      "chairReminderConference": "Conferenza: {conferenza}",
+      "chairReminderAllocation": "Allocazione richiesta: {paese}",
+      "chairReminderDelegate": "Delegato: {nome}",
+      "chairReminderEmail": "E-mail dell'account: {e-mail}",
       "chairReminderLine2": "Si prega di approvare o respingere questa richiesta nella matrice di assegnazione delle cattedre:"
     }
   },
@@ -1749,7 +1749,7 @@
     "committeeFallback": "Comitato",
     "showingOneCommitteeAtATime": "Mostrando un comitato alla volta. Cambia comitato utilizzando le schede in basso.",
     "editPlacardCodesSheet": "Modifica foglio codici targa ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "Elenco · {intestazione}",
     "seatsSummary": "{count} posto/i.",
     "linkedDelegatesCannotBeDeleted": "I delegati collegati non possono essere eliminati qui.",
     "countryPosition": "Paese/posizione",
@@ -1794,7 +1794,7 @@
     "tierLow": "Basso",
     "tierHigh": "Alto",
     "tierPromptLocked": "Bloccato: {band} - {tier} ({score})",
-    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "tierPromptPick": "Scegli basso o alto all'interno della {banda} (punti sulla scala 1-8).",
     "criteria": {
       "creativity": {
         "label": "Creatività",

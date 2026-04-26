@@ -8,6 +8,7 @@ import { PaperSavedWidget } from "@/components/PaperSavedWidget";
 import { ChairLiveFloorThemed } from "@/components/session/ChairLiveFloorThemed";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
 import { DashboardNotifications } from "@/components/dashboard/DashboardNotifications";
+import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnnouncementPopup";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { getConferenceForDashboard } from "@/lib/active-conference";
@@ -212,6 +213,7 @@ export default async function DashboardLayout({
             <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
           }
         />
+        <DashboardAnnouncementPopup />
         {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
           <div className="border-b border-brand-navy/10 bg-brand-cream px-4 py-3 dark:border-discord-divider dark:bg-discord-app sm:px-6">
             <div className="w-full">

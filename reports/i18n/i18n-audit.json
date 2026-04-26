@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-04-26T06:47:21.350Z",
+  "generatedAt": "2026-04-26T06:56:35.198Z",
   "summary": {
     "localeCount": 27,
-    "hardcodedCount": 649,
+    "hardcodedCount": 650,
     "placeholderMismatchCount": 0,
     "localesWithParityIssues": 0,
     "hardcodedByDomain": {
@@ -10,7 +10,7 @@
       "server_action": 121,
       "api": 3,
       "component": 189,
-      "library_surface": 123
+      "library_surface": 124
     }
   },
   "localeParity": [
@@ -1041,7 +1041,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1613,
+      "line": 1622,
       "kind": "object_message_literal",
       "text": "Advanced speaker and reset per-speaker clock.",
       "domain": "page_or_layout",
@@ -1049,7 +1049,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1646,
+      "line": 1655,
       "kind": "object_message_literal",
       "text": "Speech note saved.",
       "domain": "page_or_layout",
@@ -1057,7 +1057,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1657,
+      "line": 1666,
       "kind": "object_message_literal",
       "text": "Speech note deleted.",
       "domain": "page_or_layout",
@@ -1065,7 +1065,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1683,
+      "line": 1692,
       "kind": "object_message_literal",
       "text": "Announcement posted.",
       "domain": "page_or_layout",
@@ -1073,7 +1073,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1699,
+      "line": 1708,
       "kind": "object_message_literal",
       "text": "Pinned for the committee floor.",
       "domain": "page_or_layout",
@@ -1081,7 +1081,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1705,
+      "line": 1714,
       "kind": "object_message_literal",
       "text": "Unpinned.",
       "domain": "page_or_layout",
@@ -1089,7 +1089,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1743,
+      "line": 1752,
       "kind": "object_message_literal",
       "text": "Announcement updated.",
       "domain": "page_or_layout",
@@ -1097,7 +1097,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1761,
+      "line": 1770,
       "kind": "object_message_literal",
       "text": "Announcement deleted.",
       "domain": "page_or_layout",
@@ -1105,7 +1105,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1790,
+      "line": 1799,
       "kind": "object_message_literal",
       "text": "Added ${newRows.length} roll call row(s).",
       "domain": "page_or_layout",
@@ -1113,7 +1113,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1873,
+      "line": 1882,
       "kind": "object_message_literal",
       "text": "Motion created and opened.",
       "domain": "page_or_layout",
@@ -1121,7 +1121,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1927,
+      "line": 1936,
       "kind": "object_message_literal",
       "text": "Motion updated.",
       "domain": "page_or_layout",
@@ -1129,7 +1129,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1947,
+      "line": 1956,
       "kind": "object_message_literal",
       "text": "Motion closed.",
       "domain": "page_or_layout",
@@ -1137,7 +1137,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2065,
+      "line": 2074,
       "kind": "object_message_literal",
       "text": "Motion reopened.",
       "domain": "page_or_layout",
@@ -1145,7 +1145,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2108,
+      "line": 2117,
       "kind": "object_message_literal",
       "text": "Motion floor open — record each stated motion below.",
       "domain": "page_or_layout",
@@ -1153,7 +1153,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2128,
+      "line": 2137,
       "kind": "object_message_literal",
       "text": "Motion floor closed for statements.",
       "domain": "page_or_layout",
@@ -1161,7 +1161,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2171,
+      "line": 2180,
       "kind": "object_message_literal",
       "text": "Stated motion recorded (not yet open for voting).",
       "domain": "page_or_layout",
@@ -1169,7 +1169,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2267,
+      "line": 2276,
       "kind": "jsx_text",
       "text": "= 1 && idx",
       "domain": "page_or_layout",
@@ -1177,7 +1177,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2351,
+      "line": 2360,
       "kind": "jsx_text",
       "text": "= 1 && n",
       "domain": "page_or_layout",
@@ -1185,7 +1185,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2483,
+      "line": 2492,
       "kind": "object_message_literal",
       "text": "Stated motion removed.",
       "domain": "page_or_layout",
@@ -4948,6 +4948,14 @@
       "line": 39,
       "kind": "jsx_text",
       "text": "(rows: T[], conferenceIdsWithAllocations: Set",
+      "domain": "library_surface",
+      "suggestedKeyPrefix": "common"
+    },
+    {
+      "file": "lib/i18n/localize-country-name.ts",
+      "line": 19,
+      "kind": "jsx_text",
+      "text": "= base && cp",
       "domain": "library_surface",
       "suggestedKeyPrefix": "common"
     },

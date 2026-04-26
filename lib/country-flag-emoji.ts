@@ -10,7 +10,7 @@ const ORG_EMOJI = "🏛️";
 
 // Seeded allocation country names appear in English (e.g. "Costa Rica").
 // Keep this small; add entries as you notice mismatches.
-const NAME_TO_FLAG_EMOJI: Record<string, string> = {
+export const NAME_TO_FLAG_EMOJI: Record<string, string> = {
   "Afghanistan": "🇦🇫",
   "Bahrain": "🇧🇭",
   "Argentina": "🇦🇷",
