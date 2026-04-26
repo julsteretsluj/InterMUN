@@ -49,6 +49,7 @@ export async function setActiveDebateTopicAction(topicConferenceId: string): Pro
 
   revalidatePath("/chair/session");
   revalidatePath("/chair/session/motions");
+  revalidatePath("/chair/session/discipline");
   revalidatePath("/chair/session/timer");
   revalidatePath("/chair/session/speakers");
   revalidatePath("/chair/session/roll-call");

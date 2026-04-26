@@ -67,6 +67,7 @@ export default async function ChairOverviewPage({
     { href: "/chair/session", label: "Session", hint: "Start/stop committee session (timestamp)" },
     { href: "/chair/session/speakers", label: "Speakers", hint: "Same speaker list as Digital Room; syncs to committee room" },
     { href: "/chair/session/motions", label: "Formal motions", hint: "Motion floor & chair-recorded votes" },
+    { href: "/chair/session/discipline", label: "Disciplinary", hint: "Warnings, strikes, and rights restrictions" },
     { href: "/chair/session/timer", label: "Timer", hint: "Floor clock, presets, pause log" },
     { href: "/chair/session/announcements", label: "Announcements", hint: "Dais lines, pin, schedule" },
     { href: "/chair/motions-points", label: "Motions & Points", hint: "Shared log & presets for your committee" },
