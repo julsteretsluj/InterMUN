@@ -196,7 +196,7 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
         ref={btnRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        className="relative flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] sm:h-9 sm:w-9"
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label={`Notifications${unread > 0 ? `, ${unread} unread` : ""}`}
@@ -214,10 +214,10 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
           ref={panelRef}
           role="dialog"
           aria-label="Notifications"
-          className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-[min(100vw-2rem,22rem)] rounded-2xl border border-slate-200/90 bg-white shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
+          className="mun-popover absolute right-0 top-[calc(100%+0.35rem)] z-50 w-[min(100vw-2rem,22rem)]"
         >
-          <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 dark:border-zinc-800">
-            <p className="text-sm font-semibold text-slate-800 dark:text-zinc-100">Notifications</p>
+          <div className="flex items-center justify-between border-b border-[var(--hairline)] px-4 py-3">
+            <p className="text-sm font-semibold text-brand-navy">Notifications</p>
             {items.some((n) => !n.read_at) ? (
               <button
                 type="button"
@@ -230,34 +230,34 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
           </div>
           <div className="max-h-[min(24rem,50vh)] overflow-y-auto">
             {loading ? (
-              <p className="px-4 py-6 text-center text-sm text-slate-500 dark:text-zinc-400">Loading…</p>
+              <p className="px-4 py-6 text-center text-sm text-brand-muted">Loading…</p>
             ) : loadError ? (
               <p className="px-4 py-6 text-center text-sm text-amber-700 dark:text-amber-300/90">{loadError}</p>
             ) : items.length === 0 ? (
-              <p className="px-4 py-6 text-center text-sm text-slate-500 dark:text-zinc-400">
+              <p className="px-4 py-6 text-center text-sm text-brand-muted">
                 No notifications yet. You will see delegation notes, announcements, and resolution sign
                 requests here.
               </p>
             ) : (
-              <ul className="divide-y divide-slate-100 dark:divide-zinc-800">
+              <ul className="divide-y divide-[var(--hairline)]">
                 {items.map((n) => (
                   <li key={n.id}>
                     <button
                       type="button"
                       onClick={() => void onItemActivate(n)}
                       className={cn(
-                        "flex w-full flex-col gap-0.5 px-4 py-3 text-left transition hover:bg-slate-50 dark:hover:bg-zinc-800/80",
-                        !n.read_at && "bg-brand-accent/10 dark:bg-brand-accent/15"
+                        "flex w-full flex-col gap-0.5 px-4 py-3 text-left transition-apple hover:bg-[color:var(--discord-hover-bg)]",
+                        !n.read_at && "bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] dark:bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)]"
                       )}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="text-sm font-medium text-slate-900 dark:text-zinc-100">{n.title}</span>
-                        <span className="shrink-0 text-[0.65rem] text-slate-400 dark:text-zinc-500">
+                        <span className="text-sm font-medium text-brand-navy dark:text-zinc-100">{n.title}</span>
+                        <span className="shrink-0 text-[0.65rem] text-brand-muted">
                           {formatNotifTime(n.created_at)}
                         </span>
                       </div>
                       {n.body ? (
-                        <p className="line-clamp-2 text-xs text-slate-600 dark:text-zinc-400">{n.body}</p>
+                        <p className="line-clamp-2 text-xs text-brand-navy/80 dark:text-zinc-400">{n.body}</p>
                       ) : null}
                       <span className="text-[0.65rem] font-medium text-brand-accent dark:text-brand-accent-bright">
                         Open →
@@ -268,10 +268,10 @@ export function DashboardNotifications({ initialUnreadCount = 0 }: { initialUnre
               </ul>
             )}
           </div>
-          <div className="border-t border-slate-100 px-4 py-2 dark:border-zinc-800">
+          <div className="border-t border-[var(--hairline)] px-4 py-2">
             <Link
               href="/chats-notes"
-              className="text-xs font-medium text-slate-500 hover:text-brand-accent dark:text-zinc-400 dark:hover:text-brand-accent-bright"
+              className="text-xs font-medium text-brand-muted transition-apple hover:text-brand-accent"
               onClick={() => setOpen(false)}
             >
               Go to Notes

@@ -146,8 +146,9 @@ export default async function DashboardLayout({
   );
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-bg-page)]">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[var(--material-chrome)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
+    <div className="min-h-screen bg-[var(--desktop-bg)] lg:p-3">
+      <div className="flex min-h-screen w-full min-w-0 flex-col bg-[var(--color-bg-page)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--window-shadow)] lg:flex-row">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden bg-[var(--sidebar-material)] shadow-[inset_-1px_0_0_0_var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
           aria-label={`${appName} home`}
@@ -198,7 +199,7 @@ export default async function DashboardLayout({
         ) : null}
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] backdrop-blur-xl backdrop-saturate-150">
         <DashboardTopBar
           userName={displayName}
           userEmail={userEmail}
@@ -227,6 +228,7 @@ export default async function DashboardLayout({
         <main className="w-full flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(7.5rem+env(safe-area-inset-bottom))] lg:pb-8">
           {children}
         </main>
+      </div>
       </div>
 
       <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-40 lg:hidden">

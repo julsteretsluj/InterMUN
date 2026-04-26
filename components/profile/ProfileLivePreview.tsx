@@ -95,7 +95,7 @@ export function ProfileLivePreview({
           <p className="mt-1 text-sm text-brand-muted">Username not set</p>
         )}
 
-        <dl className="mt-5 w-full space-y-3 text-sm">
+        <dl className="mun-group-list mt-5 w-full text-sm">
           {pronouns.trim() ? (
             <div>
               <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">

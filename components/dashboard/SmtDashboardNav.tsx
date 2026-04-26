@@ -65,17 +65,14 @@ function SmtSidebarLink({
     <Link
       href={item.href}
       className={cn(
-        "discord-interactive-hover flex items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2.5 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-3",
+        "discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
-          ? "smt-nav-row-active bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] font-semibold text-[var(--accent)]"
-          : "font-medium text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
+          ? "smt-nav-row-active font-semibold"
+          : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
       <Icon
-        className={cn(
-          "h-5 w-5 shrink-0",
-          isActive ? "text-[var(--accent)]" : "text-brand-muted"
-        )}
+        className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-brand-muted")}
         strokeWidth={1.75}
       />
       <span className="hidden truncate group-hover:inline">{label}</span>
@@ -93,8 +90,8 @@ function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: strin
     >
       <span
         className={cn(
-          "smt-dock-tile-active flex h-8 w-8 items-center justify-center text-brand-muted",
-          isActive && "text-[var(--accent)]"
+          "flex h-8 w-8 items-center justify-center text-brand-muted",
+          isActive && "smt-dock-tile-active text-[var(--accent)]"
         )}
       >
         <Icon className="h-6 w-6" strokeWidth={isActive ? 2.25 : 1.75} />

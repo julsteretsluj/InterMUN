@@ -163,19 +163,16 @@ function ChairNavRow({
       href={item.href}
       title={labelsHidden ? label : undefined}
       className={cn(
-        "discord-interactive-hover flex items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2.5 text-sm transition-apple",
+        "discord-interactive-hover flex w-full min-w-0 items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
-          ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] font-semibold text-[var(--accent)]"
-          : "border border-transparent font-medium text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
+          ? "bg-[var(--accent)] font-semibold text-white"
+          : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
       <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
         <Icon
-          className={cn(
-            "h-[1.15rem] w-[1.15rem] shrink-0",
-            isActive ? "text-[var(--accent)]" : "text-brand-muted"
-          )}
+          className={cn("h-[1.15rem] w-[1.15rem] shrink-0", isActive ? "text-white" : "text-brand-muted")}
           strokeWidth={1.75}
         />
         <span className="text-base leading-none">{item.emoji}</span>

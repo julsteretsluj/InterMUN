@@ -83,6 +83,12 @@ const MAIN_TABS: MainTab[] = [
   { key: "library", labelKey: "library", icon: Library },
 ];
 
+const MAIN_TAB_TILE_CLASS: Record<MainTabKey, string> = {
+  home: "bg-[#007AFF]",
+  session: "bg-[#5856D6]",
+  library: "bg-[#FF9500]",
+};
+
 function tabInPath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
@@ -117,14 +123,14 @@ function AspireSidebarLink({
     <Link
       href={tab.href}
       className={cn(
-        "flex items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2.5 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-3",
+        "flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
-          ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] font-semibold text-[var(--accent)]"
-          : "font-medium text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
+          ? "bg-[var(--accent)] font-semibold text-white"
+          : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
       <Icon
-        className={cn("h-5 w-5 shrink-0", isActive ? "text-[var(--accent)]" : "text-brand-muted")}
+        className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-brand-muted")}
         strokeWidth={1.75}
       />
       <span className="hidden truncate group-hover:block">{label}</span>
@@ -213,7 +219,7 @@ export function TabNav({
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
         <div className="px-1 pb-2 pt-1 group-hover:px-2">
-          <p className="hidden px-1 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted group-hover:block">
+          <p className="hidden px-1 pb-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.08em] text-brand-muted group-hover:block">
             {t("mainTabs")}
           </p>
           <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
@@ -226,21 +232,29 @@ export function TabNav({
                   type="button"
                   onClick={() => setSelectedMain(mt.key)}
                   className={cn(
-                    "inline-flex items-center justify-center gap-0 rounded-[var(--radius-sm)] px-2 py-1.5 text-[0.7rem] font-medium transition-apple group-hover:gap-1",
+                    "inline-flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-sm)] py-1.5 pl-1.5 pr-1 text-[0.7rem] font-medium transition-apple group-hover:gap-1.5",
                     selected
-                      ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-[var(--accent)]"
-                      : "text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
+                      ? "text-[var(--color-text)]"
+                      : "text-brand-muted opacity-90 hover:opacity-100"
                   )}
                 >
-                  <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
-                  <span className="hidden group-hover:inline">{t(mt.labelKey)}</span>
+                  <span
+                    className={cn(
+                      "inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[6px] text-white shadow-sm",
+                      MAIN_TAB_TILE_CLASS[mt.key],
+                      !selected && "opacity-50"
+                    )}
+                  >
+                    <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
+                  </span>
+                  <span className="hidden min-w-0 truncate group-hover:inline">{t(mt.labelKey)}</span>
                 </button>
               );
             })}
           </div>
         </div>
         <div>
-          <p className="hidden px-3 pb-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-muted group-hover:block">
+          <p className="hidden px-3 pb-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.08em] text-brand-muted group-hover:block">
             {t("subtabs")}
           </p>
           <div className="flex flex-col gap-0.5">

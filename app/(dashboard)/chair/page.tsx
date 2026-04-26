@@ -20,6 +20,7 @@ export default async function ChairOverviewPage({
   searchParams: Promise<{ tab?: string }>;
 }) {
   const t = await getTranslations("pageTitles");
+  const tPage = await getTranslations("chairOverviewPage");
   const td = await getTranslations("chairNav");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
@@ -50,39 +51,42 @@ export default async function ChairOverviewPage({
     ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
     : conf?.name?.trim()
       ? translateAgendaTopicLabel(tTopics, conf.name)
-      : "your committee";
+      : tPage("fallbackYourCommittee");
   const translatedCommittee = conf?.committee?.trim()
     ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
     : null;
   const translatedTopic = conf?.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name) : null;
-  const line = [translatedCommittee, conf?.tagline].filter(Boolean).join(" · ") || translatedTopic || "Committee";
+  const line =
+    [translatedCommittee, conf?.tagline].filter(Boolean).join(" · ") ||
+    translatedTopic ||
+    tPage("fallbackCommittee");
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
   const tiles: { href: string; label: string; hint: string }[] = [
-    { href: "/chair/prep-checklist", label: "Prep checklist", hint: "Before conference" },
-    { href: "/chair/flow-checklist", label: "Flow checklist", hint: "During session" },
-    { href: "/chair/allocation-matrix", label: "Delegates", hint: "Matrix & assignments" },
-    { href: "/chair/digital-room", label: "Digital Room", hint: "Placards, speaker list, roll status, chair notes (this device)" },
-    { href: "/chair/session/roll-call", label: "Roll call", hint: "Attendance" },
-    { href: "/chair/session", label: "Session", hint: "Start/stop committee session (timestamp)" },
-    { href: "/chair/session/speakers", label: "Speakers", hint: "Same speaker list as Digital Room; syncs to committee room" },
-    { href: "/chair/session/motions", label: "Formal motions", hint: "Motion floor & chair-recorded votes" },
-    { href: "/chair/session/discipline", label: "Disciplinary", hint: "Warnings, strikes, and rights restrictions" },
-    { href: "/chair/session/timer", label: "Timer", hint: "Floor clock, presets, pause log" },
-    { href: "/chair/session/announcements", label: "Announcements", hint: "Dais lines, pin, schedule" },
-    { href: "/chair/motions-points", label: "Motions & Points", hint: "Shared log & presets for your committee" },
-    { href: "/voting", label: "Voting", hint: "Delegate vote display" },
-    { href: "/chair/awards", label: "Score", hint: "Awards & nominations" },
+    { href: "/chair/prep-checklist", label: tPage("tiles.prepChecklist.label"), hint: tPage("tiles.prepChecklist.hint") },
+    { href: "/chair/flow-checklist", label: tPage("tiles.flowChecklist.label"), hint: tPage("tiles.flowChecklist.hint") },
+    { href: "/chair/allocation-matrix", label: tPage("tiles.delegates.label"), hint: tPage("tiles.delegates.hint") },
+    { href: "/chair/digital-room", label: tPage("tiles.digitalRoom.label"), hint: tPage("tiles.digitalRoom.hint") },
+    { href: "/chair/session/roll-call", label: tPage("tiles.rollCall.label"), hint: tPage("tiles.rollCall.hint") },
+    { href: "/chair/session", label: tPage("tiles.session.label"), hint: tPage("tiles.session.hint") },
+    { href: "/chair/session/speakers", label: tPage("tiles.speakers.label"), hint: tPage("tiles.speakers.hint") },
+    { href: "/chair/session/motions", label: tPage("tiles.formalMotions.label"), hint: tPage("tiles.formalMotions.hint") },
+    { href: "/chair/session/discipline", label: tPage("tiles.disciplinary.label"), hint: tPage("tiles.disciplinary.hint") },
+    { href: "/chair/session/timer", label: tPage("tiles.timer.label"), hint: tPage("tiles.timer.hint") },
+    { href: "/chair/session/announcements", label: tPage("tiles.announcements.label"), hint: tPage("tiles.announcements.hint") },
+    { href: "/chair/motions-points", label: tPage("tiles.motionsPoints.label"), hint: tPage("tiles.motionsPoints.hint") },
+    { href: "/voting", label: tPage("tiles.voting.label"), hint: tPage("tiles.voting.hint") },
+    { href: "/chair/awards", label: tPage("tiles.score.label"), hint: tPage("tiles.score.hint") },
     ...(crisisReportingEnabled
       ? ([
-          { href: "/report", label: "Crisis", hint: "Incident reporting" },
-          { href: "/crisis-slides", label: "Crisis slides", hint: "Embedded deck (SMT sets URL)" },
+          { href: "/report", label: tPage("tiles.crisis.label"), hint: tPage("tiles.crisis.hint") },
+          { href: "/crisis-slides", label: tPage("tiles.crisisSlides.label"), hint: tPage("tiles.crisisSlides.hint") },
         ] as const)
       : []),
-    { href: "/documents", label: "Archive", hint: "Committee documents" },
-    { href: "/official-links", label: "Official UN links", hint: "Documents & bodies" },
-    { href: "/chair/room-code", label: "Room code", hint: "Committee gate code" },
-    { href: "/committee-room", label: "Committee room (full)", hint: "Virtual layout & delegate floor" },
+    { href: "/documents", label: tPage("tiles.archive.label"), hint: tPage("tiles.archive.hint") },
+    { href: "/official-links", label: tPage("tiles.officialUnLinks.label"), hint: tPage("tiles.officialUnLinks.hint") },
+    { href: "/chair/room-code", label: tPage("tiles.roomCode.label"), hint: tPage("tiles.roomCode.hint") },
+    { href: "/committee-room", label: tPage("tiles.committeeRoomFull.label"), hint: tPage("tiles.committeeRoomFull.hint") },
   ];
   const { tab } = await searchParams;
   const tabs = [
@@ -97,24 +101,25 @@ export default async function ChairOverviewPage({
       <div className="space-y-5">
         <header className="space-y-2">
           <h1 className="font-display text-[1.85rem] font-semibold text-brand-navy">
-            Welcome, Chair of {committeeLabel}
+            {tPage("welcome", { committee: committeeLabel })}
           </h1>
           <p className="text-base font-medium text-brand-navy dark:text-zinc-100">
-            🖥️ Digital Room · 📜 Motions · 🗳️ Voting · 🎤 Speakers
+            {tPage("featureStrip")}
           </p>
           <p className="text-sm text-brand-muted dark:text-zinc-400">
-            Active committee: <span className="font-semibold text-brand-navy dark:text-zinc-100">{line}</span>. Session
-            data syncs through your account; prep/flow checklists and Motions & Points are saved in this browser
-            for this committee — same idea as{" "}
-            <a
-              href="https://thedashboard.seamuns.site/chair"
-              className="font-medium text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 dark:text-brand-accent-bright"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SEAMUNs Chair Room
-            </a>
-            .
+            {tPage.rich("activeCommitteeLine", {
+              line: () => <span className="font-semibold text-brand-navy dark:text-zinc-100">{line}</span>,
+              seamuns: (chunks) => (
+                <a
+                  href="https://thedashboard.seamuns.site/chair"
+                  className="font-medium text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 dark:text-brand-accent-bright"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
           </p>
         </header>
 

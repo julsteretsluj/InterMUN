@@ -34,7 +34,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       <span className="sr-only">{t("selectorAria")}</span>
       <select
         aria-label={t("selectorAria")}
-        className="rounded-lg border border-slate-200/90 bg-white px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm dark:border-discord-divider dark:bg-discord-elevated dark:text-zinc-200"
+        className="max-w-[8.5rem] min-w-0 cursor-pointer rounded-[var(--radius-sm)] border-0 bg-transparent py-1.5 pl-1.5 pr-0 text-xs font-medium text-brand-navy shadow-none outline-none focus-visible:ring-2 focus-visible:ring-[color:color-mix(in_srgb,var(--accent)_45%,transparent)] dark:text-zinc-100"
         value={locale}
         disabled={pending}
         onChange={(e) => setLocale(e.target.value as AppLocale)}

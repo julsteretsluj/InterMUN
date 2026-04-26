@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-04-26T06:56:35.198Z",
+  "generatedAt": "2026-04-26T08:43:28.758Z",
   "summary": {
     "localeCount": 27,
-    "hardcodedCount": 650,
+    "hardcodedCount": 613,
     "placeholderMismatchCount": 0,
     "localesWithParityIssues": 0,
     "hardcodedByDomain": {
-      "page_or_layout": 213,
+      "page_or_layout": 172,
       "server_action": 121,
       "api": 3,
-      "component": 189,
+      "component": 193,
       "library_surface": 124
     }
   },
@@ -657,9 +657,25 @@
     },
     {
       "file": "app/(dashboard)/chair/awards/DelegateMatrixPanel.tsx",
-      "line": 62,
+      "line": 126,
       "kind": "jsx_text",
       "text": "every seated delegate",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/DelegateMatrixPanel.tsx",
+      "line": 195,
+      "kind": "jsx_text",
+      "text": "Autosaved",
+      "domain": "page_or_layout",
+      "suggestedKeyPrefix": "pageTitles"
+    },
+    {
+      "file": "app/(dashboard)/chair/awards/DelegateMatrixPanel.tsx",
+      "line": 198,
+      "kind": "jsx_text",
+      "text": "Autosave failed",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -673,353 +689,9 @@
     },
     {
       "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 177,
+      "line": 178,
       "kind": "object_message_literal",
       "text": "${delegateByUserId[uid]?.country ??",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 213,
-      "kind": "object_message_literal",
-      "text": "Best Delegate (committee)",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 215,
-      "kind": "object_message_literal",
-      "text": "Best Delegate nominee",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 216,
-      "kind": "object_message_literal",
-      "text": "Best Delegate backup",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 223,
-      "kind": "object_message_literal",
-      "text": "Honourable Mention (committee)",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 226,
-      "kind": "object_message_literal",
-      "text": "Honourable Mention #1",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 227,
-      "kind": "object_message_literal",
-      "text": "Honourable Mention #2",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 228,
-      "kind": "object_message_literal",
-      "text": "Honourable Mention backup",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 231,
-      "kind": "object_message_literal",
-      "text": "Honourable Mention #1",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 232,
-      "kind": "object_message_literal",
-      "text": "Honourable Mention #2 (optional)",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 241,
-      "kind": "object_message_literal",
-      "text": "Best Position Paper (committee)",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 243,
-      "kind": "object_message_literal",
-      "text": "Best Position Paper nominee",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 244,
-      "kind": "object_message_literal",
-      "text": "Best Position Paper backup",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 251,
-      "kind": "object_message_literal",
-      "text": "Best Delegate (overall conference)",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 252,
-      "kind": "object_message_literal",
-      "text": "Overall Best Delegate nominee",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 304,
-      "kind": "jsx_text",
-      "text": "Beginning",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 305,
-      "kind": "jsx_text",
-      "text": "Developing",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 306,
-      "kind": "jsx_text",
-      "text": "Proficient",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 307,
-      "kind": "jsx_text",
-      "text": "Exemplary",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 316,
-      "kind": "jsx_text",
-      "text": "Select a nominee for each required Top slot.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 317,
-      "kind": "jsx_text",
-      "text": "Pick exactly one band for every criterion row.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 318,
-      "kind": "jsx_text",
-      "text": "Add concise evidence from debate, drafting, and diplomacy.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 319,
-      "kind": "jsx_text",
-      "text": "Save required slots and add optional slots where applicable.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 320,
-      "kind": "jsx_text",
-      "text": "When ready, submit the full batch to SMT.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/awards/page.tsx",
-      "line": 345,
-      "kind": "jsx_text",
-      "text": "Committee ranking (matrix totals)",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 57,
-      "kind": "object_message_literal",
-      "text": "Prep checklist",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 58,
-      "kind": "object_message_literal",
-      "text": "Flow checklist",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 59,
-      "kind": "object_message_literal",
-      "text": "Delegates",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 60,
-      "kind": "object_message_literal",
-      "text": "Digital Room",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 61,
-      "kind": "object_message_literal",
-      "text": "Roll call",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 62,
-      "kind": "object_message_literal",
-      "text": "Session",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 63,
-      "kind": "object_message_literal",
-      "text": "Speakers",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 64,
-      "kind": "object_message_literal",
-      "text": "Formal motions",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 65,
-      "kind": "object_message_literal",
-      "text": "Timer",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 66,
-      "kind": "object_message_literal",
-      "text": "Announcements",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 67,
-      "kind": "object_message_literal",
-      "text": "Motions & Points",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 68,
-      "kind": "object_message_literal",
-      "text": "Voting",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 69,
-      "kind": "object_message_literal",
-      "text": "Score",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 72,
-      "kind": "object_message_literal",
-      "text": "Crisis",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 73,
-      "kind": "object_message_literal",
-      "text": "Crisis slides",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 76,
-      "kind": "object_message_literal",
-      "text": "Archive",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 77,
-      "kind": "object_message_literal",
-      "text": "Official UN links",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 78,
-      "kind": "object_message_literal",
-      "text": "Room code",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/page.tsx",
-      "line": 79,
-      "kind": "object_message_literal",
-      "text": "Committee room (full)",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -1041,7 +713,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1622,
+      "line": 1648,
       "kind": "object_message_literal",
       "text": "Advanced speaker and reset per-speaker clock.",
       "domain": "page_or_layout",
@@ -1049,7 +721,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1655,
+      "line": 1681,
       "kind": "object_message_literal",
       "text": "Speech note saved.",
       "domain": "page_or_layout",
@@ -1057,7 +729,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1666,
+      "line": 1692,
       "kind": "object_message_literal",
       "text": "Speech note deleted.",
       "domain": "page_or_layout",
@@ -1065,7 +737,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1692,
+      "line": 1718,
       "kind": "object_message_literal",
       "text": "Announcement posted.",
       "domain": "page_or_layout",
@@ -1073,7 +745,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1708,
+      "line": 1734,
       "kind": "object_message_literal",
       "text": "Pinned for the committee floor.",
       "domain": "page_or_layout",
@@ -1081,7 +753,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1714,
+      "line": 1740,
       "kind": "object_message_literal",
       "text": "Unpinned.",
       "domain": "page_or_layout",
@@ -1089,7 +761,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1752,
+      "line": 1778,
       "kind": "object_message_literal",
       "text": "Announcement updated.",
       "domain": "page_or_layout",
@@ -1097,7 +769,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1770,
+      "line": 1796,
       "kind": "object_message_literal",
       "text": "Announcement deleted.",
       "domain": "page_or_layout",
@@ -1105,7 +777,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1799,
+      "line": 1825,
       "kind": "object_message_literal",
       "text": "Added ${newRows.length} roll call row(s).",
       "domain": "page_or_layout",
@@ -1113,7 +785,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1882,
+      "line": 1908,
       "kind": "object_message_literal",
       "text": "Motion created and opened.",
       "domain": "page_or_layout",
@@ -1121,7 +793,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1936,
+      "line": 1962,
       "kind": "object_message_literal",
       "text": "Motion updated.",
       "domain": "page_or_layout",
@@ -1129,7 +801,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1956,
+      "line": 1982,
       "kind": "object_message_literal",
       "text": "Motion closed.",
       "domain": "page_or_layout",
@@ -1137,7 +809,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2074,
+      "line": 2100,
       "kind": "object_message_literal",
       "text": "Motion reopened.",
       "domain": "page_or_layout",
@@ -1145,7 +817,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2117,
+      "line": 2143,
       "kind": "object_message_literal",
       "text": "Motion floor open — record each stated motion below.",
       "domain": "page_or_layout",
@@ -1153,7 +825,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2137,
+      "line": 2163,
       "kind": "object_message_literal",
       "text": "Motion floor closed for statements.",
       "domain": "page_or_layout",
@@ -1161,7 +833,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2180,
+      "line": 2206,
       "kind": "object_message_literal",
       "text": "Stated motion recorded (not yet open for voting).",
       "domain": "page_or_layout",
@@ -1169,7 +841,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2276,
+      "line": 2302,
       "kind": "jsx_text",
       "text": "= 1 && idx",
       "domain": "page_or_layout",
@@ -1177,7 +849,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2360,
+      "line": 2386,
       "kind": "jsx_text",
       "text": "= 1 && n",
       "domain": "page_or_layout",
@@ -1185,7 +857,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2492,
+      "line": 2518,
       "kind": "object_message_literal",
       "text": "Stated motion removed.",
       "domain": "page_or_layout",
@@ -1297,7 +969,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 187,
+      "line": 192,
       "kind": "jsx_text",
       "text": "What would you like to start with?",
       "domain": "page_or_layout",
@@ -1305,7 +977,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 190,
+      "line": 195,
       "kind": "object_message_literal",
       "text": "Documents",
       "domain": "page_or_layout",
@@ -1313,7 +985,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 191,
+      "line": 196,
       "kind": "object_message_literal",
       "text": "Notes",
       "domain": "page_or_layout",
@@ -1321,7 +993,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 192,
+      "line": 197,
       "kind": "object_message_literal",
       "text": "Committee room",
       "domain": "page_or_layout",
@@ -1329,7 +1001,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 193,
+      "line": 198,
       "kind": "object_message_literal",
       "text": "Running Notes",
       "domain": "page_or_layout",
@@ -1337,7 +1009,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 194,
+      "line": 199,
       "kind": "object_message_literal",
       "text": "Ideas",
       "domain": "page_or_layout",
@@ -1345,7 +1017,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 195,
+      "line": 200,
       "kind": "object_message_literal",
       "text": "Guides",
       "domain": "page_or_layout",
@@ -1353,7 +1025,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 196,
+      "line": 201,
       "kind": "object_message_literal",
       "text": "Sources",
       "domain": "page_or_layout",
@@ -1361,7 +1033,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 197,
+      "line": 202,
       "kind": "object_message_literal",
       "text": "Resolutions",
       "domain": "page_or_layout",
@@ -1369,7 +1041,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 198,
+      "line": 203,
       "kind": "object_message_literal",
       "text": "Speeches",
       "domain": "page_or_layout",
@@ -1377,7 +1049,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 199,
+      "line": 204,
       "kind": "object_message_literal",
       "text": "Stances",
       "domain": "page_or_layout",
@@ -1385,7 +1057,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 202,
+      "line": 207,
       "kind": "object_message_literal",
       "text": "Crisis slides",
       "domain": "page_or_layout",
@@ -1393,7 +1065,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 203,
+      "line": 208,
       "kind": "object_message_literal",
       "text": "Report",
       "domain": "page_or_layout",
@@ -1401,7 +1073,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 206,
+      "line": 211,
       "kind": "object_message_literal",
       "text": "Motions",
       "domain": "page_or_layout",
@@ -1409,7 +1081,7 @@
     },
     {
       "file": "app/(dashboard)/profile/page.tsx",
-      "line": 207,
+      "line": 212,
       "kind": "object_message_literal",
       "text": "Points",
       "domain": "page_or_layout",
@@ -2976,8 +2648,24 @@
       "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
     },
     {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 54,
+      "kind": "jsx_text",
+      "text": "Home",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
+      "file": "components/SpotifyHomeDashboard.tsx",
+      "line": 55,
+      "kind": "jsx_text",
+      "text": "Good evening. Jump back in.",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.SpotifyHomeDashboard.tsx"
+    },
+    {
       "file": "components/TabNav.tsx",
-      "line": 213,
+      "line": 218,
       "kind": "attribute_literal",
       "text": "Main navigation",
       "domain": "component",
@@ -2985,7 +2673,7 @@
     },
     {
       "file": "components/TabNav.tsx",
-      "line": 264,
+      "line": 278,
       "kind": "attribute_literal",
       "text": "Main navigation",
       "domain": "component",
@@ -2993,7 +2681,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 133,
+      "line": 132,
       "kind": "attribute_literal",
       "text": "Theme: color & appearance",
       "domain": "component",
@@ -3001,7 +2689,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 134,
+      "line": 133,
       "kind": "attribute_literal",
       "text": "Open theme settings",
       "domain": "component",
@@ -3009,7 +2697,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 143,
+      "line": 142,
       "kind": "attribute_literal",
       "text": "Theme settings",
       "domain": "component",
@@ -3017,7 +2705,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 146,
+      "line": 145,
       "kind": "jsx_text",
       "text": "Appearance",
       "domain": "component",
@@ -3025,7 +2713,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 176,
+      "line": 175,
       "kind": "jsx_text",
       "text": "Accent colour",
       "domain": "component",
@@ -3033,7 +2721,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 180,
+      "line": 179,
       "kind": "attribute_literal",
       "text": "Accent colour",
       "domain": "component",
@@ -3041,7 +2729,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 229,
+      "line": 228,
       "kind": "jsx_text",
       "text": "Typography",
       "domain": "component",
@@ -3049,7 +2737,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 236,
+      "line": 235,
       "kind": "jsx_text",
       "text": "Scale",
       "domain": "component",
@@ -3057,7 +2745,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 256,
+      "line": 255,
       "kind": "jsx_text",
       "text": "Small",
       "domain": "component",
@@ -3065,7 +2753,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 257,
+      "line": 256,
       "kind": "jsx_text",
       "text": "Medium",
       "domain": "component",
@@ -3073,7 +2761,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 258,
+      "line": 257,
       "kind": "jsx_text",
       "text": "Large",
       "domain": "component",
@@ -3081,7 +2769,7 @@
     },
     {
       "file": "components/ThemeSelector.tsx",
-      "line": 263,
+      "line": 262,
       "kind": "attribute_literal",
       "text": "Uses Atkinson Hyperlegible (legibility-oriented) for UI and document text when enabled.",
       "domain": "component",
@@ -3593,7 +3281,7 @@
     },
     {
       "file": "components/chair/awards/ChairAwardsShell.tsx",
-      "line": 33,
+      "line": 38,
       "kind": "attribute_literal",
       "text": "Chair awards",
       "domain": "component",
@@ -3601,7 +3289,7 @@
     },
     {
       "file": "components/chats-notes/ChatsNotesView.tsx",
-      "line": 134,
+      "line": 139,
       "kind": "jsx_text",
       "text": "Chat",
       "domain": "component",
@@ -3609,7 +3297,23 @@
     },
     {
       "file": "components/chats-notes/ChatsNotesView.tsx",
-      "line": 205,
+      "line": 171,
+      "kind": "jsx_text",
+      "text": "This committee",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chats-notes"
+    },
+    {
+      "file": "components/chats-notes/ChatsNotesView.tsx",
+      "line": 172,
+      "kind": "jsx_text",
+      "text": "All committees",
+      "domain": "component",
+      "suggestedKeyPrefix": "views.chats-notes"
+    },
+    {
+      "file": "components/chats-notes/ChatsNotesView.tsx",
+      "line": 226,
       "kind": "jsx_text",
       "text": "Message list",
       "domain": "component",
@@ -3617,7 +3321,7 @@
     },
     {
       "file": "components/chats-notes/ChatsNotesView.tsx",
-      "line": 207,
+      "line": 228,
       "kind": "jsx_text",
       "text": "No messages yet.",
       "domain": "component",
@@ -3745,7 +3449,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 385,
+      "line": 386,
       "kind": "jsx_text",
       "text": "country",
       "domain": "component",
@@ -3753,7 +3457,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 385,
+      "line": 386,
       "kind": "jsx_text",
       "text": "(from allocations),",
       "domain": "component",
@@ -3761,7 +3465,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 385,
+      "line": 386,
       "kind": "jsx_text",
       "text": "name",
       "domain": "component",
@@ -3769,7 +3473,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 386,
+      "line": 387,
       "kind": "jsx_text",
       "text": "school",
       "domain": "component",
@@ -3777,7 +3481,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 386,
+      "line": 387,
       "kind": "jsx_text",
       "text": ", and",
       "domain": "component",
@@ -3785,7 +3489,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 386,
+      "line": 387,
       "kind": "jsx_text",
       "text": "pronouns",
       "domain": "component",
@@ -3793,7 +3497,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 387,
+      "line": 388,
       "kind": "jsx_text",
       "text": "Profile",
       "domain": "component",
@@ -3801,7 +3505,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 388,
+      "line": 389,
       "kind": "jsx_text",
       "text": "Vacant",
       "domain": "component",
@@ -3809,7 +3513,7 @@
     },
     {
       "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 389,
+      "line": 390,
       "kind": "jsx_text",
       "text": "Click",
       "domain": "component",
@@ -4105,7 +3809,7 @@
     },
     {
       "file": "components/profile/ProfileLivePreview.tsx",
-      "line": 65,
+      "line": 81,
       "kind": "attribute_literal",
       "text": "Profile preview",
       "domain": "component",
@@ -4113,7 +3817,7 @@
     },
     {
       "file": "components/profile/ProfileLivePreview.tsx",
-      "line": 67,
+      "line": 83,
       "kind": "jsx_text",
       "text": "Preview",
       "domain": "component",
@@ -4121,7 +3825,7 @@
     },
     {
       "file": "components/profile/ProfileLivePreview.tsx",
-      "line": 92,
+      "line": 95,
       "kind": "jsx_text",
       "text": "Username not set",
       "domain": "component",
@@ -4393,7 +4097,7 @@
     },
     {
       "file": "components/voting/VotingPanel.tsx",
-      "line": 494,
+      "line": 505,
       "kind": "jsx_text",
       "text": "renderVoteCard(i as VoteItemRow))}",
       "domain": "component",
@@ -4401,7 +4105,7 @@
     },
     {
       "file": "components/voting/VotingPanel.tsx",
-      "line": 502,
+      "line": 514,
       "kind": "jsx_text",
       "text": "renderVoteCard(i as VoteItemRow))}",
       "domain": "component",

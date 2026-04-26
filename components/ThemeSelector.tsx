@@ -140,7 +140,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           ref={panelRef}
           role="dialog"
           aria-label="Theme settings"
-          className="absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18.5rem)] rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--material-popover)] p-3 shadow-[0_24px_48px_-20px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150"
+          className="mun-popover absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18.5rem)] p-3"
         >
           <p className="tag tag-neutral mb-0.5">Appearance</p>
           <div className="mt-2 grid grid-cols-2 gap-2">

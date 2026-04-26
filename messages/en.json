@@ -1827,6 +1827,150 @@
     "runImport": "Run import",
     "generateMissingRandomCodes": "Generate missing random codes"
   },
+  "chairAwardsPage": {
+    "committeeLabel": "Committee",
+    "intro": {
+      "scoringMatches": "Scoring matches the <dashboard>SEAMUNs dashboard</dashboard>: for each criterion choose <beginning>Beginning</beginning>, <developing>Developing</developing>, <proficient>Proficient</proficient>, or <exemplary>Exemplary</exemplary>. Submit Top 2 with evidence; SMT confirms final awards.",
+      "submissionRulePrefix": "Submission to SMT is manual (button below) or automatic after",
+      "submissionRuleSuffix": "UTC when you next open this page (if all required slots are complete).",
+      "steps": {
+        "step1": "Select a nominee for each required Top slot.",
+        "step2": "Pick exactly one band for every criterion row.",
+        "step3": "Add concise evidence from debate, drafting, and diplomacy.",
+        "step4": "Save required slots and add optional slots where applicable.",
+        "step5": "When ready, submit the full batch to SMT."
+      }
+    },
+    "ranking": {
+      "title": "Committee ranking (matrix totals)",
+      "description": "Highest to lowest rubric sum (six session criteria x 8). Tie-break informally via evidence in nomination slots."
+    },
+    "types": {
+      "committeeBestDelegate": {
+        "label": "Best Delegate (committee)",
+        "helper": "Submit one primary Best Delegate nominee and one backup.",
+        "slots": {
+          "nominee": "Best Delegate nominee",
+          "backup": "Best Delegate backup"
+        }
+      },
+      "committeeHonourableMention": {
+        "label": "Honourable Mention (committee)",
+        "helperRequiresTwo": "More than 22 seated delegates: submit 2 Honourable Mentions (required). Optional backup rank for SMT.",
+        "helperOptionalSecond": "Submit at least 1 Honourable Mention (required). Second HM is optional.",
+        "slots": {
+          "required1": "Honourable Mention #1",
+          "required2": "Honourable Mention #2",
+          "optional2": "Honourable Mention #2 (optional)",
+          "backup": "Honourable Mention backup"
+        }
+      },
+      "committeeBestPositionPaper": {
+        "label": "Best Position Paper (committee)",
+        "helper": "Submit one primary Best Position Paper nominee and one backup.",
+        "slots": {
+          "nominee": "Best Position Paper nominee",
+          "backup": "Best Position Paper backup"
+        }
+      },
+      "conferenceBestDelegate": {
+        "label": "Best Delegate (overall conference)",
+        "helper": "Submit one overall Best Delegate nominee from this committee.",
+        "slots": {
+          "nominee": "Overall Best Delegate nominee"
+        }
+      }
+    }
+  },
+  "chairOverviewPage": {
+    "fallbackYourCommittee": "your committee",
+    "fallbackCommittee": "Committee",
+    "welcome": "Welcome, Chair of {committee}",
+    "featureStrip": "Digital Room · Motions · Voting · Speakers",
+    "activeCommitteeLine": "Active committee: <line></line>. Session data syncs through your account; prep/flow checklists and Motions & Points are saved in this browser for this committee - same idea as <seamuns>SEAMUNs Chair Room</seamuns>.",
+    "tiles": {
+      "prepChecklist": {
+        "label": "Prep checklist",
+        "hint": "Before conference"
+      },
+      "flowChecklist": {
+        "label": "Flow checklist",
+        "hint": "During session"
+      },
+      "delegates": {
+        "label": "Delegates",
+        "hint": "Matrix & assignments"
+      },
+      "digitalRoom": {
+        "label": "Digital Room",
+        "hint": "Placards, speaker list, roll status, chair notes (this device)"
+      },
+      "rollCall": {
+        "label": "Roll call",
+        "hint": "Attendance"
+      },
+      "session": {
+        "label": "Session",
+        "hint": "Start/stop committee session (timestamp)"
+      },
+      "speakers": {
+        "label": "Speakers",
+        "hint": "Same speaker list as Digital Room; syncs to committee room"
+      },
+      "formalMotions": {
+        "label": "Formal motions",
+        "hint": "Motion floor & chair-recorded votes"
+      },
+      "disciplinary": {
+        "label": "Disciplinary",
+        "hint": "Warnings, strikes, and rights restrictions"
+      },
+      "timer": {
+        "label": "Timer",
+        "hint": "Floor clock, presets, pause log"
+      },
+      "announcements": {
+        "label": "Announcements",
+        "hint": "Dais lines, pin, schedule"
+      },
+      "motionsPoints": {
+        "label": "Motions & Points",
+        "hint": "Shared log & presets for your committee"
+      },
+      "voting": {
+        "label": "Voting",
+        "hint": "Delegate vote display"
+      },
+      "score": {
+        "label": "Score",
+        "hint": "Awards & nominations"
+      },
+      "crisis": {
+        "label": "Crisis",
+        "hint": "Incident reporting"
+      },
+      "crisisSlides": {
+        "label": "Crisis slides",
+        "hint": "Embedded deck (SMT sets URL)"
+      },
+      "archive": {
+        "label": "Archive",
+        "hint": "Committee documents"
+      },
+      "officialUnLinks": {
+        "label": "Official UN links",
+        "hint": "Documents & bodies"
+      },
+      "roomCode": {
+        "label": "Room code",
+        "hint": "Committee gate code"
+      },
+      "committeeRoomFull": {
+        "label": "Committee room (full)",
+        "hint": "Virtual layout & delegate floor"
+      }
+    }
+  },
   "awardsRubric": {
     "criteriaHeader": "Criteria",
     "bandHeaders": {

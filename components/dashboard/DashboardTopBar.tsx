@@ -60,8 +60,13 @@ export function DashboardTopBar({
   const initials = initialsFromName(userName, userEmail);
 
   return (
-    <header className="sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] bg-[var(--material-chrome)] backdrop-blur-2xl backdrop-saturate-150 shadow-[0_1px_0_rgba(0,0,0,0.04)] [transition:backdrop-filter_200ms_var(--ease-apple)] dark:shadow-[0_1px_0_rgba(0,0,0,0.2)]">
-      <div className="flex w-full flex-wrap items-center gap-2.5 px-4 py-2.5 sm:gap-3 sm:px-6">
+    <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 shadow-[var(--titlebar-shadow)] [transition:backdrop-filter_200ms_var(--ease-apple)]">
+      <div className="flex w-full flex-wrap items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-6 sm:py-1.5">
+        <div className="hidden h-5 items-center gap-1.5 pl-1 pr-2 lg:inline-flex" aria-hidden>
+          <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
+          <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
+          <span className="h-3 w-3 rounded-full bg-[#28C840]" />
+        </div>
         <Link
           href={brandHomeHref ?? "/profile"}
           className="flex shrink-0 items-center gap-2 lg:hidden"
@@ -72,7 +77,7 @@ export function DashboardTopBar({
         <div className="min-w-0 flex-1 basis-[min(100%,12rem)] sm:flex-[1_1_40%]">
           <DashboardSearch />
         </div>
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-1.5 sm:ml-0 sm:flex-nowrap sm:gap-2.5">
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-1.5 sm:ml-0 sm:flex-nowrap sm:gap-2">
           {showDelegateHubLink ? (
             <Link
               href="/delegate"
@@ -92,9 +97,19 @@ export function DashboardTopBar({
           >
             {formatHeaderDate(new Date(), locale)}
           </time>
-          {notifications ?? null}
-          <LanguageSwitcher />
-          <ThemeSelector />
+          <div className="inline-flex min-h-9 min-w-0 max-w-full items-stretch overflow-hidden rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5 [box-shadow:0_1px_0_rgba(0,0,0,0.04)_inset] dark:[box-shadow:0_1px_0_rgba(255,255,255,0.06)_inset] sm:shrink-0 sm:min-h-0">
+            {notifications != null ? (
+              <div className="flex min-w-0 items-center border-r border-[var(--hairline)] pr-0.5">
+                {notifications}
+              </div>
+            ) : null}
+            <div className="flex min-w-0 flex-1 items-center border-r border-[var(--hairline)] px-1.5 pr-0.5 sm:flex-initial">
+              <LanguageSwitcher className="flex w-full min-w-0" />
+            </div>
+            <div className="flex shrink-0 items-stretch pl-0.5 pr-0.5">
+              <ThemeSelector className="shrink-0" />
+            </div>
+          </div>
           <div className="flex items-center gap-1.5 rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] py-1 pl-1 pr-1.5">
             <Link
               href={profileHref}

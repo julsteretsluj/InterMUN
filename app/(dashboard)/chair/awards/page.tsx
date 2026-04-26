@@ -73,6 +73,7 @@ function nomineeOptionsForSlot(
 
 export default async function ChairAwardsPage() {
   const t = await getTranslations("pageTitles");
+  const tPage = await getTranslations("chairAwardsPage");
   const supabase = await createClient();
   const {
     data: { user },
@@ -210,47 +211,47 @@ export default async function ChairAwardsPage() {
   }[] = [
     {
       id: "committee_best_delegate",
-      label: "Best Delegate (committee)",
+      label: tPage("types.committeeBestDelegate.label"),
       slots: [
-        { rank: 1, label: "Best Delegate nominee", required: true },
-        { rank: 2, label: "Best Delegate backup", required: true },
+        { rank: 1, label: tPage("types.committeeBestDelegate.slots.nominee"), required: true },
+        { rank: 2, label: tPage("types.committeeBestDelegate.slots.backup"), required: true },
       ],
-      helper: "Submit one primary Best Delegate nominee and one backup.",
+      helper: tPage("types.committeeBestDelegate.helper"),
       criteria: criteriaForNominationType("committee_best_delegate"),
     },
     {
       id: "committee_honourable_mention",
-      label: "Honourable Mention (committee)",
+      label: tPage("types.committeeHonourableMention.label"),
       slots: hmRequiresTwo
         ? [
-            { rank: 1, label: "Honourable Mention #1", required: true },
-            { rank: 2, label: "Honourable Mention #2", required: true },
-            { rank: 3, label: "Honourable Mention backup", required: false },
+            { rank: 1, label: tPage("types.committeeHonourableMention.slots.required1"), required: true },
+            { rank: 2, label: tPage("types.committeeHonourableMention.slots.required2"), required: true },
+            { rank: 3, label: tPage("types.committeeHonourableMention.slots.backup"), required: false },
           ]
         : [
-            { rank: 1, label: "Honourable Mention #1", required: true },
-            { rank: 2, label: "Honourable Mention #2 (optional)", required: false },
+            { rank: 1, label: tPage("types.committeeHonourableMention.slots.required1"), required: true },
+            { rank: 2, label: tPage("types.committeeHonourableMention.slots.optional2"), required: false },
           ],
       helper: hmRequiresTwo
-        ? "More than 22 seated delegates: submit 2 Honourable Mentions (required). Optional backup rank for SMT."
-        : "Submit at least 1 Honourable Mention (required). Second HM is optional.",
+        ? tPage("types.committeeHonourableMention.helperRequiresTwo")
+        : tPage("types.committeeHonourableMention.helperOptionalSecond"),
       criteria: criteriaForNominationType("committee_best_delegate"),
     },
     {
       id: "committee_best_position_paper",
-      label: "Best Position Paper (committee)",
+      label: tPage("types.committeeBestPositionPaper.label"),
       slots: [
-        { rank: 1, label: "Best Position Paper nominee", required: true },
-        { rank: 2, label: "Best Position Paper backup", required: true },
+        { rank: 1, label: tPage("types.committeeBestPositionPaper.slots.nominee"), required: true },
+        { rank: 2, label: tPage("types.committeeBestPositionPaper.slots.backup"), required: true },
       ],
-      helper: "Submit one primary Best Position Paper nominee and one backup.",
+      helper: tPage("types.committeeBestPositionPaper.helper"),
       criteria: criteriaForNominationType("committee_best_position_paper"),
     },
     {
       id: "conference_best_delegate",
-      label: "Best Delegate (overall conference)",
-      slots: [{ rank: 1, label: "Overall Best Delegate nominee", required: true }],
-      helper: "Submit one overall Best Delegate nominee from this committee.",
+      label: tPage("types.conferenceBestDelegate.label"),
+      slots: [{ rank: 1, label: tPage("types.conferenceBestDelegate.slots.nominee"), required: true }],
+      helper: tPage("types.conferenceBestDelegate.helper"),
       criteria: criteriaForNominationType("conference_best_delegate"),
     },
   ];
@@ -291,33 +292,34 @@ export default async function ChairAwardsPage() {
           <div className="space-y-5">
         <div className="rounded-xl border border-brand-navy/10 bg-logo-cyan/12 p-3 text-sm text-brand-muted">
           <p>
-            Scoring matches the{" "}
-            <a
-              href="https://thedashboard.seamuns.site/chair/awards"
-              className="font-medium text-brand-navy underline decoration-brand-navy/30 underline-offset-2"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SEAMUNs dashboard
-            </a>
-            : for each criterion choose{" "}
-            <strong className="text-brand-navy">Beginning</strong>,{" "}
-            <strong className="text-brand-navy">Developing</strong>,{" "}
-            <strong className="text-brand-navy">Proficient</strong>, or{" "}
-            <strong className="text-brand-navy">Exemplary</strong>. Submit Top 2 with evidence; SMT confirms final
-            awards.
+            {tPage.rich("intro.scoringMatches", {
+              dashboard: (chunks) => (
+                <a
+                  href="https://thedashboard.seamuns.site/chair/awards"
+                  className="font-medium text-brand-navy underline decoration-brand-navy/30 underline-offset-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {chunks}
+                </a>
+              ),
+              beginning: (chunks) => <strong className="text-brand-navy">{chunks}</strong>,
+              developing: (chunks) => <strong className="text-brand-navy">{chunks}</strong>,
+              proficient: (chunks) => <strong className="text-brand-navy">{chunks}</strong>,
+              exemplary: (chunks) => <strong className="text-brand-navy">{chunks}</strong>,
+            })}
           </p>
           <p className="mt-2 text-xs text-brand-navy/85">
-            Submission to SMT is manual (button below) or automatic after{" "}
-            <span className="font-mono text-[0.65rem]">{AWARD_SUBMISSION_DEADLINE_ISO}</span> UTC when you next open
-            this page (if all required slots are complete).
+            {tPage("intro.submissionRulePrefix")}{" "}
+            <span className="font-mono text-[0.65rem]">{AWARD_SUBMISSION_DEADLINE_ISO}</span>{" "}
+            {tPage("intro.submissionRuleSuffix")}
           </p>
           <ol className="mt-2.5 list-decimal space-y-1 pl-5 text-xs leading-relaxed text-brand-navy/85">
-            <li>Select a nominee for each required Top slot.</li>
-            <li>Pick exactly one band for every criterion row.</li>
-            <li>Add concise evidence from debate, drafting, and diplomacy.</li>
-            <li>Save required slots and add optional slots where applicable.</li>
-            <li>When ready, submit the full batch to SMT.</li>
+            <li>{tPage("intro.steps.step1")}</li>
+            <li>{tPage("intro.steps.step2")}</li>
+            <li>{tPage("intro.steps.step3")}</li>
+            <li>{tPage("intro.steps.step4")}</li>
+            <li>{tPage("intro.steps.step5")}</li>
           </ol>
         </div>
         {profile?.role === "chair" && delegateMatrixPayload.length > 0 ? (
@@ -342,10 +344,11 @@ export default async function ChairAwardsPage() {
         />
         {rankingDesc.length > 0 ? (
           <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4">
-            <h3 className="font-display text-base font-semibold text-brand-navy mb-2">Committee ranking (matrix totals)</h3>
+            <h3 className="font-display text-base font-semibold text-brand-navy mb-2">
+              {tPage("ranking.title")}
+            </h3>
             <p className="text-xs text-brand-muted mb-3">
-              Highest to lowest rubric sum (six session criteria × 8). Tie-break informally via evidence in nomination
-              slots.
+              {tPage("ranking.description")}
             </p>
             <ol className="space-y-1.5 text-sm">
               {rankingDesc.map((r, i) => (
@@ -363,7 +366,7 @@ export default async function ChairAwardsPage() {
         ) : null}
         <OverallAwardsProgress serverCompletedKeys={serverCompletedKeys} allRequiredKeys={allRequiredKeys} />
         <p className="text-xs text-brand-muted">
-          Committee: {activeConf.committee?.trim() || activeConf.name}
+          {tPage("committeeLabel")}: {activeConf.committee?.trim() || activeConf.name}
           {activeConf.committee?.trim() && activeConf.name?.trim() ? (
             <span className="text-brand-muted/80"> · {activeConf.name}</span>
           ) : null}

@@ -401,7 +401,8 @@ export function VotingPanel({
                 {roster.length === 0 ? (
                   <p className="mun-muted">{t("noSeatedDelegates")}</p>
                 ) : (
-                  <div className="max-h-[26rem] space-y-2 overflow-y-auto pr-1">
+                  <div className="max-h-[26rem] overflow-y-auto pr-1">
+                    <div className="mun-group-list">
                     {roster.map((row) => {
                       const recorded = voteMap[row.userId];
                       const abstainAllowedByVoteType =
@@ -410,7 +411,7 @@ export function VotingPanel({
                       return (
                         <div
                           key={`${item.id}-${row.allocationId}`}
-                          className="rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 transition-apple"
+                          className="transition-apple"
                         >
                           <div className="flex flex-wrap items-start justify-between gap-2">
                             <div>
@@ -464,6 +465,7 @@ export function VotingPanel({
                         </div>
                       );
                     })}
+                    </div>
                   </div>
                 )}
               </div>
