@@ -101,3 +101,12 @@ data/
 - **delegate** – Default role
 - **chair** – Can manage vote items, allocations, timers; sees all profiles
 - **smt** – Same visibility as chair
+
+## i18n workflow
+
+- Run locale parity check:
+  - `npm run i18n:check`
+- Run full translation audit (hardcoded inventory + parity + placeholder checks):
+  - `npm run i18n:audit`
+- Review key conventions:
+  - `docs/i18n-key-conventions.md`

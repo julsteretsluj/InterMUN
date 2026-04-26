@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { joinEventByCode } from "@/app/actions/eventGate";
 
 type Props = {
@@ -10,6 +11,9 @@ type Props = {
 };
 
 export function EventGateForm({ roomGateNext }: Props) {
+  const tAuth = useTranslations("authWizard");
+  const tCommon = useTranslations("common");
+  const tForm = useTranslations("eventGateForm");
   const [state, formAction, pending] = useActionState(joinEventByCode, null);
 
   useEffect(() => {
@@ -27,7 +31,7 @@ export function EventGateForm({ roomGateNext }: Props) {
           htmlFor="event_code"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          Conference code
+          {tAuth("conferenceCode")}
         </label>
         <input
           id="event_code"
@@ -38,12 +42,9 @@ export function EventGateForm({ roomGateNext }: Props) {
           required
           minLength={4}
           className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-wide text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-          placeholder="e.g. SEAMUNI2027"
+          placeholder={tForm("conferenceCodePlaceholder")}
         />
-        <p className="text-xs text-brand-muted mt-1.5">
-          First step: the code for the whole conference (all committees). Spaces are ignored;
-          matching is case-insensitive.
-        </p>
+        <p className="text-xs text-brand-muted mt-1.5">{tAuth("conferenceCodeHelp")}</p>
       </div>
 
       {state?.error && (
@@ -62,12 +63,12 @@ export function EventGateForm({ roomGateNext }: Props) {
         disabled={pending}
         className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
       >
-        {pending ? "Continuing…" : "Continue to committee step"}
+        {pending ? tForm("continuing") : tForm("continueToCommitteeStep")}
       </button>
 
       <p className="text-center text-sm text-brand-muted">
         <Link href="/login" className="text-brand-accent hover:underline">
-          Use a different account
+          {tCommon("useDifferentAccount")}
         </Link>
       </p>
     </form>

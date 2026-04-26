@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "seed:allocations": "python3 scripts/parse-allocation-matrix.py",
+    "i18n:audit": "node scripts/i18n-audit.mjs",
     "i18n:seed": "node scripts/seed-locales.mjs",
     "i18n:check": "node scripts/check-locale-parity.mjs",
     "i18n:translate": "node scripts/translate-locales.mjs"

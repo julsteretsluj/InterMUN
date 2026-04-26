@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import {
   smtInviteChairAction,
   smtPromoteToChairByEmailAction,
@@ -11,29 +12,32 @@ import {
 type Conf = { id: string; name: string; committee: string | null; committee_code: string | null };
 
 function CommitteeCodeRowForm({ c }: { c: Conf }) {
+  const t = useTranslations("smtRoomCodesClient");
+  const tSetup = useTranslations("conferenceSetupForm");
+  const tCommon = useTranslations("common");
   const [state, action, pending] = useActionState(smtSetCommitteeCodeOnlyAction, null);
   const label = [c.name, c.committee].filter(Boolean).join(" — ");
-  const current = c.committee_code?.trim() || "—";
+  const current = c.committee_code?.trim() || t("dash");
 
   return (
     <form action={action} className="rounded-xl border border-brand-navy/10 p-4 bg-brand-cream/20 space-y-2">
       <input type="hidden" name="conference_id" value={c.id} />
       <p className="text-sm font-medium text-brand-navy">{label}</p>
       <p className="text-xs text-brand-muted">
-        Current: <span className="font-mono text-brand-navy">{current}</span>
+        {t("currentCode")} <span className="font-mono text-brand-navy">{current}</span>
       </p>
       <div className="flex flex-wrap gap-2 items-end">
         <div className="flex-1 min-w-[200px]">
-          <label className="block text-xs text-brand-muted mb-1">New committee code</label>
+          <label className="block text-xs text-brand-muted mb-1">{t("newCommitteeCode")}</label>
           <input
             name="code"
             required
             minLength={6}
             maxLength={6}
             pattern="[A-Za-z0-9]{6}"
-            title="Exactly 6 letters or digits"
+            title={tSetup("committeeCodeTitle")}
             defaultValue={c.committee_code ?? ""}
-            placeholder="e.g. DIS795"
+            placeholder={t("committeeCodePlaceholder")}
             autoComplete="off"
             className="w-full px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy placeholder:text-brand-muted/70 font-mono text-sm uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent"
           />
@@ -43,7 +47,7 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
           disabled={pending}
           className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-semibold disabled:opacity-50 border border-brand-navy/20"
         >
-          {pending ? "Saving…" : "Save"}
+          {pending ? t("saving") : tCommon("save")}
         </button>
       </div>
       {state?.error ? (
@@ -77,6 +81,8 @@ export function RoomCodesAndChairsClient({
   conferences: Conf[];
   adminInviteConfigured: boolean;
 }) {
+  const t = useTranslations("smtRoomCodesClient");
+  const tCommon = useTranslations("common");
   const [inviteState, inviteAction, invitePending] = useActionState(smtInviteChairAction, null);
   const [promoteState, promoteAction, promotePending] = useActionState(
     smtPromoteToChairByEmailAction,
@@ -87,15 +93,16 @@ export function RoomCodesAndChairsClient({
     <div className="space-y-10">
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 shadow-sm">
         <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
-          Committee / room codes
+          {t("committeeRoomCodes")}
         </h2>
         <p className="text-sm text-brand-muted mb-6 max-w-2xl">
-          Same value is used for the <strong>second gate</strong> (committee code) and the chair room
-          join flow—unique within this event. Delegates enter it after the conference code.
+          {t.rich("committeeCodesHelp", {
+            strong: (chunks) => <strong>{chunks}</strong>,
+          })}
         </p>
 
         {conferences.length === 0 ? (
-          <p className="text-sm text-brand-muted">No committees for this event yet.</p>
+          <p className="text-sm text-brand-muted">{t("noCommitteesYet")}</p>
         ) : (
           <div className="space-y-4">
             {conferences.map((c) => (
@@ -106,25 +113,25 @@ export function RoomCodesAndChairsClient({
       </section>
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 shadow-sm">
-        <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">Invite dais chairs</h2>
+        <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">{t("inviteDaisChairs")}</h2>
         <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-          Sends a Supabase magic link so they can set a password. Their profile is set to{" "}
-          <strong>chair</strong> as soon as the invite is created. Configure the{" "}
-          <span className="font-mono text-xs">SUPABASE_SERVICE_ROLE_KEY</span> server env variable and
-          allow your sign-in URL (e.g. <span className="font-mono text-xs">…/login</span>) under
-          Authentication → URL configuration → Redirect URLs.
+          {t.rich("inviteHelp", {
+            strong: (chunks) => <strong>{chunks}</strong>,
+            code: (chunks) => <span className="font-mono text-xs">{chunks}</span>,
+          })}
         </p>
 
         {!adminInviteConfigured ? (
           <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-            Invites are disabled until <span className="font-mono">SUPABASE_SERVICE_ROLE_KEY</span> is
-            set on this deployment.
+            {t.rich("inviteDisabled", {
+              code: (chunks) => <span className="font-mono">{chunks}</span>,
+            })}
           </p>
         ) : (
           <form action={inviteAction} className="max-w-md space-y-3">
             <div>
               <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
-                Email
+                {t("email")}
               </label>
               <input
                 name="email"
@@ -132,7 +139,7 @@ export function RoomCodesAndChairsClient({
                 required
                 autoComplete="email"
                 className="w-full px-3 py-2 rounded-lg border border-brand-navy/15"
-                placeholder="chair@school.edu"
+                placeholder={t("chairEmailPlaceholder")}
               />
             </div>
             <Flash state={inviteState} />
@@ -141,7 +148,7 @@ export function RoomCodesAndChairsClient({
               disabled={invitePending}
               className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
             >
-              {invitePending ? "Sending…" : "Send chair invite"}
+              {invitePending ? t("sending") : t("sendChairInvite")}
             </button>
           </form>
         )}
@@ -149,16 +156,15 @@ export function RoomCodesAndChairsClient({
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 shadow-sm">
         <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">
-          Grant chair role (existing account)
+          {t("grantChairRoleTitle")}
         </h2>
         <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-          If they already signed up as a delegate, promote them here so they get the chair dashboard and
-          committee tools (no email sent).
+          {t("grantChairRoleHelp")}
         </p>
         <form action={promoteAction} className="max-w-md space-y-3">
           <div>
             <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
-              Email
+              {t("email")}
             </label>
             <input
               name="email"
@@ -166,7 +172,7 @@ export function RoomCodesAndChairsClient({
               required
               autoComplete="email"
               className="w-full px-3 py-2 rounded-lg border border-brand-navy/15"
-              placeholder="chair@school.edu"
+              placeholder={t("chairEmailPlaceholder")}
             />
           </div>
           <Flash state={promoteState} />
@@ -175,7 +181,7 @@ export function RoomCodesAndChairsClient({
             disabled={promotePending}
             className="px-4 py-2 rounded-lg border border-brand-navy/25 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
           >
-            {promotePending ? "Saving…" : "Grant chair role"}
+            {promotePending ? t("saving") : t("grantChairRole")}
           </button>
         </form>
       </section>

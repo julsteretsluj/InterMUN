@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { joinRoomByCode } from "@/app/actions/roomGate";
 
 type Props = {
@@ -10,6 +11,11 @@ type Props = {
 };
 
 export function RoomGateForm({ nextPath, showStaffTools }: Props) {
+  const tCommon = useTranslations("common");
+  const tTab = useTranslations("tabNav");
+  const tRoom = useTranslations("roomGate");
+  const tSetup = useTranslations("conferenceSetupForm");
+  const tForm = useTranslations("roomGateForm");
   const [state, formAction, pending] = useActionState(joinRoomByCode, null);
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
           htmlFor="code"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          Committee code
+          {tTab("committeeCode")}
         </label>
         <input
           id="code"
@@ -39,15 +45,11 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
           minLength={6}
           maxLength={6}
           pattern="[A-Za-z0-9]{6}"
-          title="Exactly 6 letters or digits"
+          title={tSetup("committeeCodeTitle")}
           className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-mono tracking-widest text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-          placeholder="e.g. ECO741"
+          placeholder={tSetup("committeeCodePlaceholder")}
         />
-        <p className="text-xs text-brand-muted mt-1.5">
-          Second step: six letters or digits for <strong>your committee</strong> (often three letters from
-          the chamber name plus three digits). Spaces and punctuation are ignored; matching is
-          case-insensitive.
-        </p>
+        <p className="text-xs text-brand-muted mt-1.5">{tSetup("committeeCodeHelp")}</p>
       </div>
 
       {state?.error && (
@@ -66,21 +68,21 @@ export function RoomGateForm({ nextPath, showStaffTools }: Props) {
         disabled={pending}
         className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
       >
-        {pending ? "Joining…" : "Join committee"}
+        {pending ? tForm("joining") : tRoom("joinCommittee")}
       </button>
 
       {showStaffTools && (
         <p className="text-center text-sm text-brand-muted">
-          Chair or SMT?{" "}
+          {tForm("chairOrSmt")}{" "}
           <Link href="/chair/room-code" className="text-brand-accent font-medium hover:underline">
-            Set committee code
+            {tForm("setCommitteeCode")}
           </Link>
         </p>
       )}
 
       <p className="text-center text-sm text-brand-muted">
         <Link href="/login" className="text-brand-accent hover:underline">
-          Use a different account
+          {tCommon("useDifferentAccount")}
         </Link>
       </p>
     </form>

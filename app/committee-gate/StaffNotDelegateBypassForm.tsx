@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { verifyStaffNotDelegateBypass } from "@/app/actions/committeeGate";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
+  const tForm = useTranslations("staffBypassForm");
   const [state, formAction, pending] = useActionState(
     verifyStaffNotDelegateBypass,
     null as { error?: string } | null
@@ -25,10 +27,11 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
       <input type="hidden" name="conference_id" value={conferenceId} />
       <input type="hidden" name="next" value={nextPath} />
 
-      <p className="text-sm font-medium text-brand-navy">SMT: not signing in as a delegate</p>
+      <p className="text-sm font-medium text-brand-navy">{tForm("title")}</p>
       <p className="text-xs text-brand-muted">
-        Secretariat only. Enter the <strong>staff secondary password</strong> from organisers — not
-        the committee password delegates share.
+        {tForm.rich("description", {
+          strong: (chunks) => <strong>{chunks}</strong>,
+        })}
       </p>
 
       <div>
@@ -36,7 +39,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
           htmlFor="staff_secondary_password"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          Staff secondary password
+          {tForm("staffSecondaryPassword")}
         </label>
         <input
           id="staff_secondary_password"
@@ -45,7 +48,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
           autoComplete="off"
           required
           className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-          placeholder="Organiser password"
+          placeholder={tForm("organiserPasswordPlaceholder")}
         />
       </div>
 
@@ -65,7 +68,7 @@ export function StaffNotDelegateBypassForm({ conferenceId, nextPath }: Props) {
         disabled={pending}
         className="w-full py-2.5 rounded-lg border-2 border-brand-accent text-brand-navy font-medium hover:bg-brand-cream/80 transition-colors disabled:opacity-50 text-sm"
       >
-        {pending ? "Verifying…" : "Continue as SMT (oversight)"}
+        {pending ? tForm("verifying") : tForm("continueAsSmt")}
       </button>
     </form>
   );

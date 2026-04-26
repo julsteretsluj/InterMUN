@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
@@ -46,6 +47,8 @@ export function RunningNotesView({
   currentUserId: string;
   myRole: string;
 }) {
+  const t = useTranslations("runningNotesView");
+  const tCommon = useTranslations("common");
   const router = useRouter();
   const [items, setItems] = useState(notes);
   const [activeNote, setActiveNote] = useState<Note | null>(notes[0] || null);
@@ -130,7 +133,7 @@ export function RunningNotesView({
     setMutationError(null);
     if (!activeNote) return;
     if (activeNote.user_id !== currentUserId) return;
-    const confirmed = confirm("Delete this running note?");
+    const confirmed = confirm(t("confirmDelete"));
     if (!confirmed) return;
     const { error } = await supabase.from("notes").delete().eq("id", activeNote.id);
     if (error) {
@@ -219,9 +222,9 @@ export function RunningNotesView({
           onClick={createNote}
           className="w-full rounded-lg border border-slate-200 px-3 py-2 text-left text-sm font-medium hover:bg-slate-50 dark:border-white/15 dark:hover:bg-white/5"
         >
-          + New note
+          + {t("newNote")}
         </button>
-        <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">Note</label>
+        <label className="text-sm font-medium text-brand-navy lg:hidden dark:text-zinc-100">{t("note")}</label>
         <select
           className="mun-field lg:hidden"
           value={activeNote?.id ?? ""}
@@ -266,33 +269,33 @@ export function RunningNotesView({
         <div className="min-w-0 flex-1 space-y-4">
           {activeNote.user_id !== currentUserId && (
             <p className="text-sm text-brand-muted">
-              View-only (you can only edit your own running notes).
+              {t("viewOnly")}
             </p>
           )}
           {canEdit ? (
             <div className="space-y-2">
-              <label className="mun-label normal-case block">Note name</label>
+              <label className="mun-label normal-case block">{t("noteName")}</label>
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="mun-field"
                 type="text"
-                placeholder="e.g. Sunday bloc prep"
+                placeholder={t("noteNamePlaceholder")}
                 maxLength={120}
               />
               <p className="text-xs text-brand-muted">
-                Shown in the note list. If empty, tags or note text is used instead.
+                {t("noteNameHelp")}
               </p>
             </div>
           ) : activeNote.title?.trim() ? (
             <p className="text-sm text-brand-muted">
-              <span className="font-medium text-brand-navy dark:text-zinc-200">Note name: </span>
+              <span className="font-medium text-brand-navy dark:text-zinc-200">{t("noteName")}: </span>
               {activeNote.title.trim()}
             </p>
           ) : null}
           {canEdit ? (
             <div className="space-y-2">
-              <label className="mun-label normal-case block">Tags</label>
+              <label className="mun-label normal-case block">{t("tags")}</label>
               <div className="flex flex-wrap gap-2">
                 {RUNNING_NOTE_TAG_PRESETS.map((preset) => {
                   const on = tags.some((t) => t.toLowerCase() === preset.toLowerCase());
@@ -324,7 +327,7 @@ export function RunningNotesView({
                   }}
                   className="mun-field min-w-[12rem] flex-1"
                   type="text"
-                  placeholder="Add another tag…"
+                  placeholder={t("addAnotherTag")}
                   maxLength={48}
                 />
                 <button
@@ -332,18 +335,18 @@ export function RunningNotesView({
                   onClick={addCustomTag}
                   className="mun-btn shrink-0 px-3 py-2 text-sm"
                 >
-                  Add tag
+                  {t("addTag")}
                 </button>
               </div>
               {tags.length > 0 ? (
                 <p className="text-xs text-brand-muted">
-                  Selected: {normalizeRunningNoteTags(tags).join(", ")}
+                  {t("selected")}: {normalizeRunningNoteTags(tags).join(", ")}
                 </p>
               ) : null}
             </div>
           ) : activeNote.tags && activeNote.tags.length > 0 ? (
             <p className="text-sm text-brand-muted">
-              <span className="font-medium text-brand-navy dark:text-zinc-200">Tags: </span>
+              <span className="font-medium text-brand-navy dark:text-zinc-200">{t("tags")}: </span>
               {normalizeRunningNoteTags(activeNote.tags).join(", ")}
             </p>
           ) : null}
@@ -351,10 +354,9 @@ export function RunningNotesView({
             <div>
               <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <label className="mun-label normal-case">Google Docs URL (optional)</label>
-                  <HelpButton title="Google Docs URL">
-                    Paste a shared Google Docs link to show a live preview of your notes. The link is
-                    optional; you can keep plain text notes instead.
+                  <label className="mun-label normal-case">{t("googleDocsUrlOptional")}</label>
+                  <HelpButton title={t("googleDocsUrl")}>
+                    {t("googleDocsHelp")}
                   </HelpButton>
                 </div>
                 <OpenNewGoogleDocButton />
@@ -364,33 +366,32 @@ export function RunningNotesView({
                 onChange={(e) => setDocsUrl(e.target.value)}
                 className="mun-field"
                 type="url"
-                placeholder="https://docs.google.com/document/d/…"
+                placeholder={t("googleDocsPlaceholder")}
               />
               <p className="mt-1 text-xs text-brand-muted">
-                New Google Doc opens in another tab. Save after pasting the link; the preview updates as you
-                type.
+                {t("googleDocsSaveHint")}
               </p>
             </div>
           ) : null}
           {embedSource ? (
-            <GoogleDocsEmbed googleDocsUrl={embedSource} heading="Running notes document" compact />
+            <GoogleDocsEmbed googleDocsUrl={embedSource} heading={t("runningNotesDocument")} compact />
           ) : null}
           <div>
             {activeNoteFlaggedTerms.length > 0 ? (
               <p className="mb-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
-                Reader warning: this note may contain inappropriate language.
+                {t("readerWarning")}
               </p>
             ) : null}
             {embedSource ? (
               <p className="mb-2 text-sm font-semibold text-slate-600 dark:text-zinc-400">
-                Plain text (optional)
+                {t("plainTextOptional")}
               </p>
             ) : null}
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               className="mun-field h-48 resize-y"
-              placeholder="Keep notes of everything…"
+              placeholder={t("notesPlaceholder")}
               disabled={!canEdit}
             />
             {canEdit ? <EmojiQuickInsert onPick={appendEmoji} /> : null}
@@ -402,12 +403,11 @@ export function RunningNotesView({
               disabled={!canEdit}
               className="mun-btn-primary disabled:opacity-50"
             >
-              Save
+              {tCommon("save")}
             </button>
             {canEdit ? (
-              <HelpButton title="Save">
-                Saves your note name, tags, running note text, and Google Docs URL (if provided) for your own
-                account.
+              <HelpButton title={tCommon("save")}>
+                {t("saveHelp")}
               </HelpButton>
             ) : null}
             <button
@@ -416,7 +416,7 @@ export function RunningNotesView({
               disabled={!canEdit}
               className="mun-btn disabled:opacity-50"
             >
-              Delete
+              {tCommon("delete")}
             </button>
           </div>
         </div>

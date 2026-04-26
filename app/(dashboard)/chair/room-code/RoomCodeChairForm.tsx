@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { setRoomCodeAndEnterAction, switchCommitteeContextAction } from "@/app/actions/roomGate";
 import { HelpButton } from "@/components/HelpButton";
 
@@ -13,6 +14,9 @@ type Conf = {
 };
 
 export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
+  const t = useTranslations("roomCodeChairForm");
+  const tCommon = useTranslations("common");
+  const tSetup = useTranslations("conferenceSetupForm");
   const [query, setQuery] = useState("");
   const [conferenceId, setConferenceId] = useState(conferences[0]?.id ?? "");
   const [state, formAction, pending] = useActionState(setRoomCodeAndEnterAction, null);
@@ -47,16 +51,15 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
 
       <div>
         <div className="mb-2 flex items-center justify-between gap-2">
-          <p className="text-xs font-medium uppercase tracking-wider text-brand-muted">Committee selection</p>
-          <HelpButton title="Committee code setup">
-            Pick the committee, set a 6-character code, and save. This updates the code delegates/staff use to enter
-            that committee room.
+          <p className="text-xs font-medium uppercase tracking-wider text-brand-muted">{t("committeeSelection")}</p>
+          <HelpButton title={t("committeeCodeSetupTitle")}>
+            {t("committeeCodeSetupHelp")}
           </HelpButton>
         </div>
         {singleCommittee ? (
           <>
             <p className="text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
-              Committee
+              {tCommon("committee")}
             </p>
             <p className="text-sm text-brand-navy font-medium leading-snug">
               {[conferences[0].name, conferences[0].committee].filter(Boolean).join(" — ")}
@@ -71,21 +74,21 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
                   htmlFor="committee-search"
                   className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
                 >
-                  Find committee
+                  {t("findCommittee")}
                 </label>
                 <input
                   id="committee-search"
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Type to filter by name or committee…"
+                  placeholder={t("searchPlaceholder")}
                   className={`${fieldClass} placeholder:text-brand-muted/70`}
                   autoComplete="off"
                 />
               </div>
             ) : null}
             <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5">
-              Conference
+              {tCommon("conference")}
             </label>
             <select
               name="conference_id"
@@ -95,7 +98,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
               className={fieldClass}
             >
               {filtered.length === 0 ? (
-                <option value="">No matches</option>
+                <option value="">{t("noMatches")}</option>
               ) : (
                 filtered.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -108,7 +111,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
         )}
         {(selected?.committee_code || selected?.room_code) && (
           <p className="text-xs text-brand-muted mt-2">
-            Current committee code:{" "}
+            {t("currentCommitteeCode")}{" "}
             <span className="font-mono font-semibold text-brand-accent-bright tabular-nums">
               {selected.committee_code ?? selected.room_code}
             </span>
@@ -122,11 +125,10 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
             htmlFor="chair-room-code"
             className="block text-xs font-medium uppercase tracking-wider text-brand-muted"
           >
-            New committee code
+            {t("newCommitteeCode")}
           </label>
-          <HelpButton title="New committee code">
-            Must be exactly 6 letters/numbers. Share this only with the committee participants who should access this
-            room.
+          <HelpButton title={t("newCommitteeCode")}>
+            {t("newCommitteeCodeHelp")}
           </HelpButton>
         </div>
         <input
@@ -137,10 +139,10 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           minLength={6}
           maxLength={6}
           pattern="[A-Za-z0-9]{6}"
-          title="Exactly 6 letters or digits"
+          title={tSetup("committeeCodeTitle")}
           autoComplete="off"
           className={`${fieldClass} font-mono uppercase tracking-widest placeholder:text-brand-muted/70`}
-          placeholder="e.g. WHO582"
+          placeholder={t("committeeCodePlaceholder")}
         />
       </div>
 
@@ -166,7 +168,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           }
           className="px-4 py-2.5 rounded-lg border border-brand-navy/25 bg-white/70 text-brand-navy font-semibold hover:bg-white disabled:opacity-50"
         >
-          {switchPending ? "Switching…" : "Switch to selected committee"}
+          {switchPending ? t("switching") : t("switchToSelectedCommittee")}
         </button>
         <button
           type="submit"
@@ -177,7 +179,7 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
           }
           className="px-4 py-2.5 rounded-lg bg-brand-accent text-white font-semibold hover:opacity-90 disabled:opacity-50 border border-brand-navy/15"
         >
-          {pending ? "Saving…" : "Save code & go to profile"}
+          {pending ? t("saving") : t("saveCodeGoToProfile")}
         </button>
       </div>
     </form>

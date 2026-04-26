@@ -64,24 +64,6 @@ import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
 import { useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 
-const ROLL_ATTENDANCE_BUTTONS: {
-  value: RollAttendance;
-  label: string;
-  title: string;
-}[] = [
-  {
-    value: "present_abstain",
-    label: "Present",
-    title: "Present — may abstain from voting",
-  },
-  {
-    value: "present_voting",
-    label: "Present and voting",
-    title: "Present and voting — must vote, cannot abstain",
-  },
-  { value: "absent", label: "Absent", title: "Absent" },
-];
-
 type Alloc = {
   id: string;
   country: string;
@@ -286,11 +268,36 @@ export function SessionControlClient({
   const tTopics = useTranslations("agendaTopics");
   const tTopicUi = useTranslations("chairTopicTabs");
   const tTimer = useTranslations("views.session.timerPage");
+  const tSessionControl = useTranslations("sessionControlClient");
   const supabase = createClient();
   const rosterConferenceIdList = useMemo(() => {
     if (rosterConferenceIds?.length) return rosterConferenceIds;
     return [conferenceId];
   }, [conferenceId, rosterConferenceIds]);
+  const rollAttendanceButtons: {
+    value: RollAttendance;
+    label: string;
+    title: string;
+  }[] = useMemo(
+    () => [
+      {
+        value: "present_abstain",
+        label: tSessionControl("rollPresent"),
+        title: tSessionControl("rollPresentTitle"),
+      },
+      {
+        value: "present_voting",
+        label: tSessionControl("rollPresentVoting"),
+        title: tSessionControl("rollPresentVotingTitle"),
+      },
+      {
+        value: "absent",
+        label: tSessionControl("rollAbsent"),
+        title: tSessionControl("rollAbsent"),
+      },
+    ],
+    [tSessionControl]
+  );
   const rosterKey = useMemo(() => rosterConferenceIdList.slice().sort().join(","), [rosterConferenceIdList]);
   const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
   const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
@@ -442,43 +449,51 @@ export function SessionControlClient({
       label: string;
       title?: string;
     }[] = [
-      { code: null as string | null, label: "Custom" },
-      { code: "extend_opening_speech", label: "Motion to Extend Opening Speech Time", title: "Motion to Extend Opening Speech Time" },
-      { code: "open_debate", label: "Motion to Open Debate", title: "Motion to Open Debate" },
+      { code: null as string | null, label: tSessionControl("presetCustom") },
+      {
+        code: "extend_opening_speech",
+        label: tSessionControl("presetExtendOpeningSpeech"),
+        title: tSessionControl("presetExtendOpeningSpeech"),
+      },
+      {
+        code: "open_debate",
+        label: tSessionControl("presetOpenDebate"),
+        title: tSessionControl("presetOpenDebate"),
+      },
       {
         code: "open_gsl",
-        label: "Motion to Open the General Speakers' List",
-        title: "Motion to Open the General Speakers' List",
+        label: tSessionControl("presetOpenGsl"),
+        title: tSessionControl("presetOpenGsl"),
       },
       {
         code: "for_against_speeches",
-        label: "Motion to Begin For/Against Speeches (resolution)",
-        title: "Motion to Begin For and Against Speeches on the Draft Resolution",
+        label: tSessionControl("presetForAgainst"),
+        title: tSessionControl("presetForAgainstTitle"),
       },
-      { code: "close_debate", label: "Motion to Close Debate", title: "Motion to Close Debate" },
-      { code: "exclude_public", label: "Motion to Exclude the Public", title: "Motion to Exclude the Public" },
-      { code: "silent_prayer", label: "Minute of Silent Prayer/Meditation", title: "Motion for a Minute of Silent Prayer or Meditation" },
-      { code: "roll_call_vote", label: "Motion for a Roll Call Vote", title: "Motion for a Roll Call Vote" },
-      { code: "minute_silent", label: "Minute of Silent Prayer", title: "Motion for a Minute of Silent Prayer or Meditation" },
-      { code: "unmoderated_caucus", label: "Unmoderated Caucus", title: "Motion for an Unmoderated Caucus" },
-      { code: "moderated_caucus", label: "Moderated Caucus", title: "Motion for a Moderated Caucus" },
-      { code: "consultation", label: "Consultation", title: "Motion for a Consultation" },
-      { code: "cabinet_meeting", label: "Cabinet Meeting", title: "Motion for a Cabinet Meeting" },
-      { code: "shadow_meeting", label: "Shadow Meeting", title: "Motion for a Shadow Meeting" },
-      { code: "adjourn", label: "Adjourn Session", title: "Motion to Adjourn Session" },
-      { code: "suspend", label: "Suspend Session", title: "Motion to Suspend Session" },
-      { code: "divide_question", label: "Divide the Question (editor needed)", title: "Motion to Divide the Question" },
-      { code: "clause_by_clause", label: "Clause-by-Clause (editor needed)", title: "Motion to Vote Clause by Clause" },
-      { code: "amendment", label: "Amendments (editor needed)", title: "Amendment" },
+      { code: "close_debate", label: tSessionControl("presetCloseDebate"), title: tSessionControl("presetCloseDebate") },
+      { code: "exclude_public", label: tSessionControl("presetExcludePublic"), title: tSessionControl("presetExcludePublic") },
+      { code: "silent_prayer", label: tSessionControl("presetSilentPrayerMeditation"), title: tSessionControl("presetSilentPrayerMotionTitle") },
+      { code: "roll_call_vote", label: tSessionControl("presetRollCallVote"), title: tSessionControl("presetRollCallVote") },
+      { code: "minute_silent", label: tSessionControl("presetMinuteSilentPrayer"), title: tSessionControl("presetSilentPrayerMotionTitle") },
+      { code: "unmoderated_caucus", label: tSessionControl("presetUnmoderatedCaucus"), title: tSessionControl("presetUnmoderatedCaucusTitle") },
+      { code: "moderated_caucus", label: tSessionControl("presetModeratedCaucus"), title: tSessionControl("presetModeratedCaucusTitle") },
+      { code: "consultation", label: tSessionControl("presetConsultation"), title: tSessionControl("presetConsultationTitle") },
+      { code: "cabinet_meeting", label: tSessionControl("presetCabinetMeeting"), title: tSessionControl("presetCabinetMeetingTitle") },
+      { code: "shadow_meeting", label: tSessionControl("presetShadowMeeting"), title: tSessionControl("presetShadowMeetingTitle") },
+      { code: "adjourn", label: tSessionControl("presetAdjournSession"), title: tSessionControl("presetAdjournSessionTitle") },
+      { code: "suspend", label: tSessionControl("presetSuspendSession"), title: tSessionControl("presetSuspendSessionTitle") },
+      { code: "divide_question", label: tSessionControl("presetDivideQuestion"), title: tSessionControl("presetDivideQuestionTitle") },
+      { code: "clause_by_clause", label: tSessionControl("presetClauseByClause"), title: tSessionControl("presetClauseByClauseTitle") },
+      { code: "amendment", label: tSessionControl("presetAmendments"), title: tSessionControl("presetAmendmentTitle") },
     ];
 
     // Hide set-agenda when there isn't at least 2 agenda topics left to choose from.
     // But keep it visible if the chair is currently editing a set-agenda motion.
     if (agendaTopicsRemaining.length > 1 || motionDraft.procedure_code === "set_agenda") {
-      base.splice(1, 0, { code: "set_agenda", label: "Motion to Set the Agenda", title: "" });
+      base.splice(1, 0, { code: "set_agenda", label: tSessionControl("presetSetAgenda"), title: "" });
     }
     return base;
-  }, [agendaTopicsRemaining.length, motionDraft.procedure_code]);
+  }, [agendaTopicsRemaining.length, motionDraft.procedure_code, tSessionControl]);
 
   const ropMajorityForDraft = useMemo(
     () => ropRequiredMajority(motionDraft.vote_type, motionDraft.procedure_code, procedureProfile),
@@ -2180,14 +2195,14 @@ export function SessionControlClient({
     const options = procedurePresets.filter((p) => p.code !== null);
     const pickRaw = window.prompt(
       [
-        "Step 1/5: Choose procedure (enter number).",
+        tSessionControl("guidedStepChooseProcedure"),
         ...options.map((p, i) => `${i + 1}. ${p.label}`),
       ].join("\n")
     );
     if (!pickRaw) return;
     const pick = Number(pickRaw);
     if (!Number.isFinite(pick) || pick < 1 || pick > options.length) {
-      setMsg("Invalid procedure selection.");
+      setMsg(tSessionControl("invalidProcedureSelection"));
       return;
     }
     const selected = options[pick - 1]!;
@@ -2573,7 +2588,9 @@ export function SessionControlClient({
       <p className="text-sm text-brand-muted">{conferenceTitle}</p>
       {(debateTopicOptions?.length ?? 0) > 1 ? (
         <div className="rounded-xl border border-white/15 bg-black/20 px-3 py-3 space-y-2.5">
-          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">Live debate topic</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
+            {tSessionControl("liveDebateTopic")}
+          </p>
           <div className="flex flex-wrap gap-2">
             {(debateTopicOptions ?? []).map((t) => {
               const isActive = floorConferenceId === t.id;
@@ -2616,20 +2633,19 @@ export function SessionControlClient({
       {show("motions") ? (
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">Motion control</h3>
-          <HelpButton title="Motion control">
-            Chair workflow: capture motions, open one vote at a time, record votes by allocation, then close the
-            motion to finalize pass/fail.
+          <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("motionControl")}</h3>
+          <HelpButton title={tSessionControl("motionControl")}>
+            {tSessionControl("motionControlHelp")}
           </HelpButton>
         </div>
         <div className="flex flex-wrap gap-2">
           {(
             [
-              ["setup", "1) Setup"],
-              ["floor", "2) Floor queue"],
-              ["draft", "3) Draft motion"],
-              ["votes", "4) Record votes"],
-              ["history", "5) History"],
+              ["setup", tSessionControl("tabSetup")],
+              ["floor", tSessionControl("tabFloorQueue")],
+              ["draft", tSessionControl("tabDraftMotion")],
+              ["votes", tSessionControl("tabRecordVotes")],
+              ["history", tSessionControl("tabHistory")],
             ] as const
           ).map(([id, label]) => {
             const active = motionWorkflowTab === id;
@@ -2653,18 +2669,7 @@ export function SessionControlClient({
         </div>
         {motionWorkflowTab === "setup" ? (
           <>
-        <p className="text-xs text-brand-muted">
-          Chair-only: one vote open at a time. Delegates do not vote in the app — use{" "}
-          <span className="font-medium text-brand-navy/90">Record votes</span> below to call each placard; record{" "}
-          <span className="font-medium text-brand-navy/90">Yes</span> or <span className="font-medium text-brand-navy/90">No</span> only
-          (procedural motions do not use abstain). Skip if absent (skipped delegations are not counted in the yes/no
-          tally). <span className="font-medium text-brand-navy/90">Pass/fail</span> for procedural motions uses a simple
-          or two-thirds majority of <span className="font-medium text-brand-navy/90">members present</span> on the
-          roll, not only the ballots recorded. For several motions at once, open the motion floor, record stated
-          motions, close the floor, then begin voting in{" "}
-          <span className="font-medium text-brand-navy/90">most disruptive first</span> (RoP; caucus order follows your
-          committee session SMT setting unless the handbook default applies).
-        </p>
+        <p className="text-xs text-brand-muted">{tSessionControl("chairOnlyVotingHelp")}</p>
         <p className="text-xs text-brand-muted">
           Quorum gate:{" "}
           <span className="font-medium text-brand-navy">
@@ -2676,7 +2681,7 @@ export function SessionControlClient({
         {isEuGuidedWorkflow ? (
           <div className="rounded-lg border border-brand-accent/35 bg-brand-accent/10 px-3 py-2.5 space-y-2">
             <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
-              EU guided phase
+              {tSessionControl("euGuidedPhase")}
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-md border border-brand-accent/40 bg-brand-accent/15 px-2 py-1 text-sm font-medium text-brand-navy">
@@ -2742,35 +2747,34 @@ export function SessionControlClient({
               ) : null}
             </div>
             <p className="text-xs text-brand-muted">
-              Core blockers remain guided: when a motion does not match this phase, chairs can still continue
-              using an explicit override confirmation.
+              {tSessionControl("euGuidedPhaseHint")}
             </p>
           </div>
         ) : null}
           </>
         ) : null}
         <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
-          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">Points workflow</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">{tSessionControl("pointsWorkflow")}</p>
           <div className="grid gap-2 md:grid-cols-[1fr_1fr_auto_auto]">
             <select
               value={pointDraftCode}
               onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
               className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
             >
-              <option value="poi">Point of Information</option>
-              <option value="poc">Point of Clarification</option>
-              <option value="parliamentary_inquiry">Parliamentary Inquiry</option>
-              <option value="order">Point of Order</option>
-              <option value="personal_privilege">Personal Privilege</option>
-              <option value="right_of_reply">Right of Reply</option>
-              <option value="fact_check">Fact Check</option>
+              <option value="poi">{tSessionControl("pointOfInformation")}</option>
+              <option value="poc">{tSessionControl("pointOfClarification")}</option>
+              <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
+              <option value="order">{tSessionControl("pointOfOrder")}</option>
+              <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
+              <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
+              <option value="fact_check">{tSessionControl("factCheck")}</option>
             </select>
             <select
               value={pointDraftAllocationId}
               onChange={(e) => setPointDraftAllocationId(e.target.value)}
               className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
             >
-              <option value="">Raised by (optional)</option>
+              <option value="">{tSessionControl("raisedByOptional")}</option>
               {votingCallOrder.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.country}
@@ -2780,7 +2784,7 @@ export function SessionControlClient({
             <input
               value={pointDraftDetail}
               onChange={(e) => setPointDraftDetail(e.target.value)}
-              placeholder="Detail (optional)"
+              placeholder={tSessionControl("detailOptional")}
               className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
             />
             <button
@@ -2789,7 +2793,7 @@ export function SessionControlClient({
               onClick={addSessionPoint}
               className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
             >
-              Log point
+              {tSessionControl("logPoint")}
             </button>
           </div>
           {sessionPoints.length > 0 ? (
@@ -2807,14 +2811,14 @@ export function SessionControlClient({
                         onClick={() => setSessionPointStatus(p.id, "accepted")}
                         className="rounded border border-emerald-500/40 px-1.5 py-0.5 text-[10px]"
                       >
-                        Accept
+                        {tSessionControl("accept")}
                       </button>
                       <button
                         type="button"
                         onClick={() => setSessionPointStatus(p.id, "denied")}
                         className="rounded border border-rose-500/40 px-1.5 py-0.5 text-[10px]"
                       >
-                        Deny
+                        {tSessionControl("deny")}
                       </button>
                     </span>
                   ) : (
@@ -2881,20 +2885,20 @@ export function SessionControlClient({
                 onClick={beginVotingInDisruptivenessOrder}
                 className="px-3 py-2 rounded-lg bg-zinc-950 text-white text-sm font-medium hover:bg-zinc-800 disabled:opacity-50"
               >
-                Begin voting (most disruptive first)
+                {tSessionControl("beginVotingMostDisruptive")}
               </button>
             </div>
           </div>
 
           {pendingStatedMotions.length > 0 ? (
             <div className="rounded-lg border border-white/12 bg-black/25 px-3 py-2 space-y-2">
-              <p className={surfaceLabel}>Pending — vote order (most disruptive first)</p>
+              <p className={surfaceLabel}>{tSessionControl("pendingVoteOrderMostDisruptive")}</p>
               <ol className="list-decimal pl-5 space-y-2 text-sm text-brand-navy">
                 {pendingStatedMotions.map((m, i) => (
                   <li key={m.id} className="pl-1">
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <span className="font-medium">#{i + 1}</span> — {m.title || "Untitled"}
+                        <span className="font-medium">#{i + 1}</span> — {m.title || tSessionControl("untitled")}
                         <span className="text-brand-muted/70 text-xs block sm:inline sm:ml-2">
                           ({m.procedure_code ?? m.vote_type}, RoP priority{" "}
                           {motionDisruptivenessScore(
@@ -2911,7 +2915,7 @@ export function SessionControlClient({
                         onClick={() => withdrawStatedMotion(m.id)}
                         className="text-xs text-red-700 font-medium hover:underline shrink-0"
                       >
-                        Withdraw
+                        {tSessionControl("withdraw")}
                       </button>
                     </div>
                   </li>
@@ -2926,10 +2930,9 @@ export function SessionControlClient({
             <>
           <label className="text-sm text-brand-navy">
             <span className="flex items-center justify-between gap-2">
-              <span className={surfaceLabel}>Procedure preset</span>
-              <HelpButton title="Procedure preset">
-                Prefills common motion types and default titles/timing fields. You can still edit details before
-                opening.
+              <span className={surfaceLabel}>{tSessionControl("procedurePreset")}</span>
+              <HelpButton title={tSessionControl("procedurePreset")}>
+                {tSessionControl("procedurePresetHelp")}
               </HelpButton>
             </span>
             <select
@@ -2970,7 +2973,7 @@ export function SessionControlClient({
           motionRequiresResolutionOnly(motionDraft.procedure_code) ? (
             <div className={surfaceSubpanel}>
               <label className="text-sm block">
-                <span className={surfaceLabel}>Target resolution</span>
+                <span className={surfaceLabel}>{tSessionControl("targetResolution")}</span>
                 <select
                   className={surfaceField}
                   value={motionDraft.procedure_resolution_id ?? ""}
@@ -2982,7 +2985,7 @@ export function SessionControlClient({
                     }))
                   }
                 >
-                  <option value="">Select resolution…</option>
+                  <option value="">{tSessionControl("selectResolution")}</option>
                   {resolutions.map((r) => (
                     <option key={r.id} value={r.id}>
                       {r.google_docs_url ? `Resolution ${r.id.slice(0, 8)} (${r.google_docs_url})` : `Resolution ${r.id.slice(0, 8)}`}
@@ -2993,10 +2996,10 @@ export function SessionControlClient({
 
               {motionRequiresClauseTargets(motionDraft.procedure_code) ? (
                 <div className="space-y-1">
-                  <p className={surfaceLabel}>Target clauses</p>
+                  <p className={surfaceLabel}>{tSessionControl("targetClauses")}</p>
                   <div className={surfaceInset}>
                     {selectedResolutionClauses.length === 0 ? (
-                      <p className="text-xs text-brand-muted">No clauses found for selected resolution.</p>
+                      <p className="text-xs text-brand-muted">{tSessionControl("noClausesFound")}</p>
                     ) : (
                       selectedResolutionClauses.map((c) => {
                         const checked = motionDraft.procedure_clause_ids.includes(c.id);
@@ -3018,7 +3021,7 @@ export function SessionControlClient({
                               }}
                             />
                             <span className="line-clamp-2">
-                              Clause {c.clause_number}: {c.clause_text}
+                              {tSessionControl("clause")} {c.clause_number}: {c.clause_text}
                             </span>
                           </label>
                         );
@@ -3032,7 +3035,7 @@ export function SessionControlClient({
 
           <div className="grid sm:grid-cols-2 gap-3">
             <label className="text-sm text-brand-navy">
-              <span className={surfaceLabel}>Type</span>
+              <span className={surfaceLabel}>{tSessionControl("type")}</span>
               <select
                 className={surfaceField}
                 value={motionDraft.vote_type}
@@ -3040,29 +3043,30 @@ export function SessionControlClient({
                   setMotionDraft((d) => ({ ...d, vote_type: e.target.value as VoteType }))
                 }
               >
-                <option value="motion">Motion</option>
-                <option value="amendment">Amendment</option>
-                <option value="resolution">Resolution</option>
+                <option value="motion">{tSessionControl("motion")}</option>
+                <option value="amendment">{tSessionControl("amendment")}</option>
+                <option value="resolution">{tSessionControl("resolution")}</option>
               </select>
             </label>
             <div className="text-sm text-brand-navy rounded-lg border border-white/15 bg-black/20 px-3 py-2">
-              <span className={surfaceLabel}>Required majority (RoP)</span>
+              <span className={surfaceLabel}>{tSessionControl("requiredMajorityRop")}</span>
               <p className="mt-1 font-semibold text-brand-navy">{formatVoteMajorityLabel(ropMajorityForDraft)}</p>
               <p className="text-xs text-brand-muted mt-1 leading-snug">
-                Simple for procedural motions; two-thirds for resolutions, amendments, and motions to approve an
-                amendment (Amendments preset).
+                {tSessionControl("majorityHelp")}
               </p>
             </div>
           </div>
           {motionDraft.procedure_code === "set_agenda" ? (
             <label className="text-sm block text-brand-navy">
-              <span className={surfaceLabel}>Agenda topic (committee)</span>
+              <span className={surfaceLabel}>{tSessionControl("agendaTopicCommittee")}</span>
               <select
                 className={surfaceField}
                 value={motionDraft.title}
                 onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
               >
-                {setAgendaTopicOptions.length === 0 ? <option value="">No topics available</option> : null}
+                {setAgendaTopicOptions.length === 0 ? (
+                  <option value="">{tSessionControl("noTopicsAvailable")}</option>
+                ) : null}
                 {setAgendaTopicOptions
                   .filter((t) => (t.name ?? "").trim().length > 0)
                   .map((t) => {
@@ -3079,12 +3083,12 @@ export function SessionControlClient({
             <label className="text-sm block text-brand-navy">
               <span className={surfaceLabel}>
                 {motionDraft.procedure_code === "consultation"
-                  ? "Topic / purpose"
+                  ? tSessionControl("topicPurpose")
                   : motionDraft.procedure_code === "moderated_caucus"
-                    ? "Topic"
+                    ? tSessionControl("topic")
                     : motionDraft.procedure_code === "unmoderated_caucus"
-                      ? "Topic (optional)"
-                      : "Title (optional)"}
+                      ? tSessionControl("topicOptional")
+                      : tSessionControl("titleOptional")}
               </span>
               <input
                 className={surfaceField}
@@ -3092,12 +3096,12 @@ export function SessionControlClient({
                 onChange={(e) => setMotionDraft((d) => ({ ...d, title: e.target.value }))}
                 placeholder={
                   motionDraft.procedure_code === "moderated_caucus"
-                    ? "Moderated caucus topic"
+                    ? tSessionControl("moderatedCaucusTopic")
                     : motionDraft.procedure_code === "unmoderated_caucus"
-                      ? "Unmoderated caucus topic (optional)"
+                      ? tSessionControl("unmoderatedCaucusTopicOptional")
                       : motionDraft.procedure_code === "consultation"
-                        ? "What the consultation is for"
-                        : "Motion title (optional)"
+                        ? tSessionControl("consultationPurposePlaceholder")
+                        : tSessionControl("motionTitleOptional")
                 }
               />
             </label>
@@ -3105,7 +3109,7 @@ export function SessionControlClient({
           {motionDraft.procedure_code === "moderated_caucus" ? (
             <div className="grid sm:grid-cols-2 gap-3">
               <label className="text-sm block text-brand-navy">
-                <span className={surfaceLabel}>Total time (minutes)</span>
+                <span className={surfaceLabel}>{tSessionControl("totalTimeMinutes")}</span>
                 <input
                   type="number"
                   min={1}
@@ -3114,11 +3118,11 @@ export function SessionControlClient({
                   onChange={(e) =>
                     setMotionDraft((d) => ({ ...d, moderated_total_minutes: e.target.value }))
                   }
-                  placeholder="e.g. 10"
+                  placeholder={tSessionControl("minutesPlaceholder")}
                 />
               </label>
               <label className="text-sm block text-brand-navy">
-                <span className={surfaceLabel}>Speaker time (seconds)</span>
+                <span className={surfaceLabel}>{tSessionControl("speakerTimeSeconds")}</span>
                 <input
                   type="number"
                   min={1}
@@ -3127,13 +3131,13 @@ export function SessionControlClient({
                   onChange={(e) =>
                     setMotionDraft((d) => ({ ...d, moderated_speaker_seconds: e.target.value }))
                   }
-                  placeholder="e.g. 60"
+                  placeholder={tSessionControl("secondsPlaceholder")}
                 />
               </label>
             </div>
           ) : motionDraft.procedure_code === "unmoderated_caucus" ? (
             <label className="text-sm block text-brand-navy">
-              <span className={surfaceLabel}>Total time (minutes)</span>
+              <span className={surfaceLabel}>{tSessionControl("totalTimeMinutes")}</span>
               <input
                 type="number"
                 min={1}
@@ -3142,12 +3146,12 @@ export function SessionControlClient({
                 onChange={(e) =>
                   setMotionDraft((d) => ({ ...d, unmoderated_total_minutes: e.target.value }))
                 }
-                placeholder="e.g. 10"
+                placeholder={tSessionControl("minutesPlaceholder")}
               />
             </label>
           ) : motionDraft.procedure_code === "consultation" ? (
             <label className="text-sm block text-brand-navy">
-              <span className={surfaceLabel}>Total time (minutes)</span>
+              <span className={surfaceLabel}>{tSessionControl("totalTimeMinutes")}</span>
               <input
                 type="number"
                 min={1}
@@ -3156,13 +3160,13 @@ export function SessionControlClient({
                 onChange={(e) =>
                   setMotionDraft((d) => ({ ...d, consultation_total_minutes: e.target.value }))
                 }
-                placeholder="e.g. 10"
+                placeholder={tSessionControl("minutesPlaceholder")}
               />
             </label>
           ) : motionDraft.procedure_code === "amendment" ? (
             <div className="grid sm:grid-cols-2 gap-3">
               <label className="text-sm block text-brand-navy">
-                <span className={surfaceLabel}>Amendment type</span>
+                <span className={surfaceLabel}>{tSessionControl("amendmentType")}</span>
                 <select
                   className={surfaceField}
                   value={motionDraft.amendment_kind}
@@ -3173,13 +3177,13 @@ export function SessionControlClient({
                     }))
                   }
                 >
-                  <option value="friendly">Friendly</option>
-                  <option value="unfriendly">Unfriendly</option>
+                  <option value="friendly">{tSessionControl("friendly")}</option>
+                  <option value="unfriendly">{tSessionControl("unfriendly")}</option>
                 </select>
               </label>
               {motionDraft.amendment_kind === "unfriendly" ? (
                 <label className="text-sm block text-brand-navy">
-                  <span className={surfaceLabel}>Debate time per side (seconds)</span>
+                  <span className={surfaceLabel}>{tSessionControl("debateTimePerSideSeconds")}</span>
                   <input
                     type="number"
                     min={30}
@@ -3189,7 +3193,7 @@ export function SessionControlClient({
                     onChange={(e) =>
                       setMotionDraft((d) => ({ ...d, amendment_debate_seconds: e.target.value }))
                     }
-                    placeholder="30-60"
+                    placeholder={tSessionControl("debateSecondsPlaceholder")}
                   />
                 </label>
               ) : null}
@@ -3231,9 +3235,9 @@ export function SessionControlClient({
           ) : null}
           <label className="text-sm block text-brand-navy">
             <span className="flex items-center justify-between gap-2">
-              <span className={surfaceLabel}>Motioner</span>
-              <HelpButton title="Motioner">
-                Optional. Set the delegation that moved the motion so records and exports show who introduced it.
+              <span className={surfaceLabel}>{tSessionControl("motioner")}</span>
+              <HelpButton title={tSessionControl("motioner")}>
+                {tSessionControl("motionerHelp")}
               </HelpButton>
             </span>
             <select
@@ -3246,7 +3250,7 @@ export function SessionControlClient({
                 }))
               }
             >
-              <option value="">Not specified</option>
+              <option value="">{tSessionControl("notSpecified")}</option>
               {allocations.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.country}
@@ -3255,7 +3259,7 @@ export function SessionControlClient({
             </select>
           </label>
           <label className="text-sm block text-brand-navy">
-            <span className={surfaceLabel}>Description</span>
+            <span className={surfaceLabel}>{tSessionControl("description")}</span>
             <textarea
               className={`${surfaceInputCore} mt-1 min-h-[72px]`}
               value={motionDraft.description}
@@ -3268,9 +3272,9 @@ export function SessionControlClient({
               checked={motionDraft.must_vote}
               onChange={(e) => setMotionDraft((d) => ({ ...d, must_vote: e.target.checked }))}
             />
-            MUST vote
-            <HelpButton title="MUST vote">
-              Marks this as a mandatory vote item according to your committee rules.
+            {tSessionControl("mustVote")}
+            <HelpButton title={tSessionControl("mustVote")}>
+              {tSessionControl("mustVoteHelp")}
             </HelpButton>
           </label>
           <div className="flex flex-wrap gap-2">
@@ -3283,7 +3287,7 @@ export function SessionControlClient({
                 onClick={() => createMotion()}
                 className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium"
               >
-                Create and open motion
+                {tSessionControl("createAndOpenMotion")}
               </button>
             ) : (
               <>
@@ -3293,7 +3297,7 @@ export function SessionControlClient({
                   onClick={saveMotionEdits}
                   className="px-4 py-2 rounded-lg border border-white/25 bg-white/10 text-brand-navy text-sm font-medium hover:bg-white/20 disabled:opacity-50"
                 >
-                  Save edits
+                  {tSessionControl("saveEdits")}
                 </button>
                 <button
                   type="button"
@@ -3301,7 +3305,7 @@ export function SessionControlClient({
                   onClick={closeMotion}
                   className="px-4 py-2 rounded-lg border border-red-600 bg-red-50 text-red-900 text-sm font-medium hover:bg-red-100 disabled:opacity-50"
                 >
-                  Close motion
+                  {tSessionControl("closeMotion")}
                 </button>
                 <button
                   type="button"
@@ -3309,7 +3313,7 @@ export function SessionControlClient({
                   onClick={() => {
                     if (
                       !window.confirm(
-                        "Delete this motion permanently? All recorded votes for it will be removed and the motion will disappear from the record."
+                        tSessionControl("deleteMotionConfirm")
                       )
                     ) {
                       return;
@@ -3318,7 +3322,7 @@ export function SessionControlClient({
                   }}
                   className="px-4 py-2 rounded-lg border border-red-800 bg-red-950/40 text-red-100 text-sm font-medium hover:bg-red-950/60 disabled:opacity-50"
                 >
-                  Delete motion
+                  {tSessionControl("deleteMotion")}
                 </button>
               </>
             )}
@@ -3331,11 +3335,13 @@ export function SessionControlClient({
           {motionWorkflowTab === "votes" ? (
             <>
           <div className="text-xs text-brand-muted font-medium">
-            Tally: Yes {motionTally.yes} | No {motionTally.no} | Ballots {motionTally.total}
+            {tSessionControl("tallyLine", {
+              yes: motionTally.yes,
+              no: motionTally.no,
+              total: motionTally.total,
+            })}
             <span className="mt-1 block font-normal text-[0.65rem] leading-snug">
-              Ballots = placards with a recorded Yes or No (abstain is tracked separately and not counted in this
-              denominator). Clear removes a recorded vote. For procedural motions, outcome compares Yes to members{" "}
-              <span className="font-medium">present</span> on the roll (see roll call section).
+              {tSessionControl("ballotsHelp")}
             </span>
           </div>
 
@@ -3343,22 +3349,22 @@ export function SessionControlClient({
             <div className={surfaceSubpanel}>
               <p className={surfaceLabel}>
                 <span className="inline-flex items-center gap-1.5">
-                  Record votes — {activeMotionForRecordedVotes?.title?.trim() || "current motion"}
-                  <HelpButton title="Record votes">
-                    Chairs register votes per allocation. Abstain appears only for amendment/resolution votes when roll
-                    status is not Present and voting. During a roll-call-vote motion, you can capture Yes/No with Rights.
+                  {tSessionControl("recordVotesLabel")} —{" "}
+                  {activeMotionForRecordedVotes?.title?.trim() || tSessionControl("currentMotion")}
+                  <HelpButton title={tSessionControl("recordVotesLabel")}>
+                    {tSessionControl("recordVotesHelp")}
                   </HelpButton>
                 </span>
               </p>
               <p className="text-sm text-brand-muted">
-                Delegates cannot vote in the app. Chairs record votes for each allocation. Abstain appears only for
-                resolution/amendment votes when that delegation is not marked Present and voting.
+                {tSessionControl("delegatesCannotVoteHelp")}
               </p>
               <p className="text-xs text-brand-muted">
-                Delegate roll for this motion: <span className="font-medium text-brand-navy">{votingCallOrder.length}</span>
+                {tSessionControl("delegateRollForMotion")}:{" "}
+                <span className="font-medium text-brand-navy">{votingCallOrder.length}</span>
               </p>
               {votingCallOrder.length === 0 ? (
-                <p className="text-sm text-brand-muted">No delegates are seated for this committee yet.</p>
+                <p className="text-sm text-brand-muted">{tSessionControl("noDelegatesSeatedYet")}</p>
               ) : (
                 <div className="max-h-[26rem] overflow-y-auto space-y-2 pr-1">
                   {votingCallOrder.map((call) => {
@@ -3388,11 +3394,11 @@ export function SessionControlClient({
                               Roll: {rollLabel} · Recorded:{" "}
                               <span className="font-medium text-brand-navy">
                                 {recorded === "yes"
-                                  ? "Yes"
+                                  ? tSessionControl("yes")
                                   : recorded === "no"
-                                    ? "No"
+                                    ? tSessionControl("no")
                                     : recorded === "abstain"
-                                      ? "Abstain"
+                                      ? tSessionControl("abstain")
                                       : "—"}
                               </span>
                             </p>
@@ -3487,9 +3493,9 @@ export function SessionControlClient({
         {motionWorkflowTab === "history" ? (
           <>
         <div className={surfaceCard}>
-          <p className={`${surfaceLabel} mb-2 tracking-wider`}>Audit timeline</p>
+          <p className={`${surfaceLabel} mb-2 tracking-wider`}>{tSessionControl("auditTimeline")}</p>
           {motionAudit.length === 0 ? (
-            <p className="text-sm text-brand-muted">No audit events yet.</p>
+            <p className="text-sm text-brand-muted">{tSessionControl("noAuditEvents")}</p>
           ) : (
             <ul className="space-y-1 text-sm text-brand-navy">
               {motionAudit.map((e) => (
@@ -3503,13 +3509,13 @@ export function SessionControlClient({
         </div>
 
         <div className={surfaceCard}>
-          <p className={`${surfaceLabel} mb-2 tracking-wider`}>Recent motions</p>
+          <p className={`${surfaceLabel} mb-2 tracking-wider`}>{tSessionControl("recentMotions")}</p>
           <ul className="space-y-2 text-sm text-brand-navy">
             {recentMotions.map((m) => (
               <li key={m.id} className="flex items-center justify-between gap-2">
                 <span className="truncate">
-                  {m.title || "Untitled"}{" "}
-                  <span className="text-brand-muted">(closed)</span>
+                  {m.title || tSessionControl("untitled")}{" "}
+                  <span className="text-brand-muted">({tSessionControl("closed")})</span>
                 </span>
                 <span className="flex shrink-0 items-center gap-2">
                   <button
@@ -3518,7 +3524,7 @@ export function SessionControlClient({
                     onClick={() => reopenMotion(m.id)}
                     className="text-xs text-amber-700 font-medium hover:underline disabled:opacity-50"
                   >
-                    Reopen
+                    {tSessionControl("reopen")}
                   </button>
                   <button
                     type="button"
@@ -3642,7 +3648,9 @@ export function SessionControlClient({
                             setEuTimerSlotSeconds(slot, parseTime(e.target.value, String(slotRemainder)))
                           }
                         />
-                        <span className="text-xs text-brand-muted">m</span>
+                        <span className="text-xs text-brand-muted">
+                          {tSessionControl("unitMinutesShort")}
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <input
@@ -3653,14 +3661,16 @@ export function SessionControlClient({
                             setEuTimerSlotSeconds(slot, parseTime(String(slotMinutes), e.target.value))
                           }
                         />
-                        <span className="text-xs text-brand-muted">s</span>
+                        <span className="text-xs text-brand-muted">
+                          {tSessionControl("unitSecondsShort")}
+                        </span>
                       </div>
                       <button
                         type="button"
                         className="ml-auto rounded-md border border-brand-navy/20 bg-white px-2.5 py-1 text-xs font-medium text-brand-navy hover:bg-brand-cream"
                         onClick={() => applyEuTimerSlotToFloor(slot)}
                       >
-                        Apply
+                        {tSessionControl("apply")}
                       </button>
                     </div>
                     <p className="mt-1 text-[0.65rem] text-brand-muted">
@@ -3920,14 +3930,14 @@ export function SessionControlClient({
                   value={timer.leftM}
                   onChange={(e) => setTimer((t) => ({ ...t, leftM: e.target.value }))}
                 />
-                <span className="py-2 text-brand-muted text-sm">m</span>
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
                 <input
                   className={`w-14 ${surfaceFieldSm}`}
                   inputMode="numeric"
                   value={timer.leftS}
                   onChange={(e) => setTimer((t) => ({ ...t, leftS: e.target.value }))}
                 />
-                <span className="py-2 text-brand-muted text-sm">s</span>
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
               </div>
             </label>
             <label className="text-sm text-brand-navy min-w-[10rem]">
@@ -3944,14 +3954,14 @@ export function SessionControlClient({
                   value={timer.totalM}
                   onChange={(e) => setTimer((t) => ({ ...t, totalM: e.target.value }))}
                 />
-                <span className="py-2 text-brand-muted text-sm">m</span>
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitMinutesShort")}</span>
                 <input
                   className={`w-14 ${surfaceFieldSm}`}
                   inputMode="numeric"
                   value={timer.totalS}
                   onChange={(e) => setTimer((t) => ({ ...t, totalS: e.target.value }))}
                 />
-                <span className="py-2 text-brand-muted text-sm">s</span>
+                <span className="py-2 text-brand-muted text-sm">{tSessionControl("unitSecondsShort")}</span>
               </div>
             </label>
             <button
@@ -4004,37 +4014,32 @@ export function SessionControlClient({
 
       {show("announcements") ? (
       <section className="space-y-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">Dais announcements</h3>
+        <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("daisAnnouncements")}</h3>
         <div className={`${surfaceCard} space-y-3`}>
-          <p className="text-sm text-brand-muted">
-            Use <strong className="font-medium text-brand-navy">Markdown</strong> for bold, lists, and links. Pin one
-            line for the floor strip; schedule a future <strong className="font-medium text-brand-navy">publish</strong>{" "}
-            time and delegates will only see it once that moment passes. You can <strong className="font-medium text-brand-navy">edit</strong> or{" "}
-            <strong className="font-medium text-brand-navy">delete</strong> any line below.
-          </p>
+          <p className="text-sm text-brand-muted">{tSessionControl("daisAnnouncementsHelp")}</p>
           <label className="block text-sm text-brand-navy">
-            <span className={surfaceLabel}>Message</span>
+            <span className={surfaceLabel}>{tSessionControl("message")}</span>
             <textarea
               className={`${surfaceInputCore} mt-1 min-h-[100px] font-mono text-sm`}
-              placeholder="Message to the committee…"
+              placeholder={tSessionControl("messageToCommittee")}
               value={daisBody}
               onChange={(e) => setDaisBody(e.target.value)}
             />
           </label>
           <div className="flex flex-wrap gap-4">
             <label className="block text-sm text-brand-navy">
-              <span className={surfaceLabel}>Format</span>
+              <span className={surfaceLabel}>{tSessionControl("format")}</span>
               <select
                 className={`${surfaceField} mt-1`}
                 value={daisFormat}
                 onChange={(e) => setDaisFormat(e.target.value as "plain" | "markdown")}
               >
-                <option value="markdown">Markdown</option>
-                <option value="plain">Plain text</option>
+                <option value="markdown">{tSessionControl("markdown")}</option>
+                <option value="plain">{tSessionControl("plainText")}</option>
               </select>
             </label>
             <label className="block text-sm text-brand-navy min-w-[12rem]">
-              <span className={surfaceLabel}>Publish at (optional)</span>
+              <span className={surfaceLabel}>{tSessionControl("publishAtOptional")}</span>
               <input
                 type="datetime-local"
                 className={`${surfaceField} mt-1`}
@@ -4049,7 +4054,7 @@ export function SessionControlClient({
             onClick={postDais}
             className="px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
           >
-            Post
+            {tSessionControl("post")}
           </button>
           <ul className="text-sm space-y-3 border-t border-white/12 pt-3 text-brand-navy/85">
             {announcements.map((a) => {
@@ -4067,15 +4072,17 @@ export function SessionControlClient({
                     </time>
                     {a.is_pinned ? (
                       <span className="rounded bg-amber-500/20 px-1.5 py-0.5 font-semibold text-amber-950 dark:text-amber-100">
-                        Pinned
+                        {tSessionControl("pinned")}
                       </span>
                     ) : null}
                     {scheduled ? (
                       <span className="rounded bg-brand-accent/100/15 px-1.5 py-0.5 text-brand-navy dark:text-brand-accent-bright">
-                        Scheduled {new Date(a.publish_at!).toLocaleString()}
+                        {tSessionControl("scheduled")} {new Date(a.publish_at!).toLocaleString()}
                       </span>
                     ) : null}
-                    <span className="text-brand-muted">{fmt === "markdown" ? "Markdown" : "Plain"}</span>
+                    <span className="text-brand-muted">
+                      {fmt === "markdown" ? tSessionControl("markdown") : tSessionControl("plain")}
+                    </span>
                   </div>
                   {editing ? (
                     <div className="space-y-3">
@@ -4086,18 +4093,18 @@ export function SessionControlClient({
                       />
                       <div className="flex flex-wrap gap-4">
                         <label className="block text-sm text-brand-navy">
-                          <span className={surfaceLabel}>Format</span>
+                          <span className={surfaceLabel}>{tSessionControl("format")}</span>
                           <select
                             className={`${surfaceField} mt-1`}
                             value={daisEditFormat}
                             onChange={(e) => setDaisEditFormat(e.target.value as "plain" | "markdown")}
                           >
-                            <option value="markdown">Markdown</option>
-                            <option value="plain">Plain text</option>
+                            <option value="markdown">{tSessionControl("markdown")}</option>
+                            <option value="plain">{tSessionControl("plainText")}</option>
                           </select>
                         </label>
                         <label className="block text-sm text-brand-navy min-w-[12rem]">
-                          <span className={surfaceLabel}>Publish at</span>
+                          <span className={surfaceLabel}>{tSessionControl("publishAt")}</span>
                           <input
                             type="datetime-local"
                             className={`${surfaceField} mt-1`}
@@ -4113,7 +4120,7 @@ export function SessionControlClient({
                           onClick={saveDaisEdit}
                           className="rounded-lg bg-brand-accent px-3 py-1.5 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
                         >
-                          Save changes
+                          {tSessionControl("saveChanges")}
                         </button>
                         <button
                           type="button"
@@ -4121,7 +4128,7 @@ export function SessionControlClient({
                           onClick={cancelEditDais}
                           className="rounded-lg border border-white/20 px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white/10 disabled:opacity-50"
                         >
-                          Cancel
+                          {tSessionControl("cancel")}
                         </button>
                       </div>
                     </div>
@@ -4136,7 +4143,7 @@ export function SessionControlClient({
                             onClick={() => setDaisPinned(a.id, false)}
                             className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
                           >
-                            Unpin
+                            {tSessionControl("unpin")}
                           </button>
                         ) : (
                           <button
@@ -4145,7 +4152,7 @@ export function SessionControlClient({
                             onClick={() => setDaisPinned(a.id, true)}
                             className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
                           >
-                            Pin to floor
+                            {tSessionControl("pinToFloor")}
                           </button>
                         )}
                         <button
@@ -4154,7 +4161,7 @@ export function SessionControlClient({
                           onClick={() => beginEditDais(a)}
                           className="text-xs font-medium text-brand-navy underline hover:no-underline disabled:opacity-50"
                         >
-                          Edit
+                          {tSessionControl("edit")}
                         </button>
                         <button
                           type="button"
@@ -4162,7 +4169,7 @@ export function SessionControlClient({
                           onClick={() => deleteDaisAnnouncement(a.id)}
                           className="text-xs font-medium text-red-800 underline hover:no-underline dark:text-red-300 disabled:opacity-50"
                         >
-                          Delete
+                          {tSessionControl("delete")}
                         </button>
                       </div>
                     </>
@@ -4191,16 +4198,14 @@ export function SessionControlClient({
       {show("roll-call") ? (
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy">✅ Roll Call Tracker</h3>
-          <HelpButton title="Roll call tracker">
-            Present: may abstain. Present and voting: must vote yes/no. Absent: no ballot is recorded.
+          <h3 className="font-display text-lg font-semibold text-brand-navy">
+            ✅ {tSessionControl("rollCallTracker")}
+          </h3>
+          <HelpButton title={tSessionControl("rollCallTracker")}>
+            {tSessionControl("rollCallHelp")}
           </HelpButton>
         </div>
-        <p className="text-sm text-brand-muted">
-          For each delegate, choose <strong className="font-medium text-brand-navy">Present</strong> (may abstain),{" "}
-          <strong className="font-medium text-brand-navy">Present and voting</strong> (must vote), or{" "}
-          <strong className="font-medium text-brand-navy">Absent</strong>.
-        </p>
+        <p className="text-sm text-brand-muted">{tSessionControl("rollCallIntro")}</p>
         <div className={`${surfaceCard} space-y-4`}>
           <button
             type="button"
@@ -4208,19 +4213,18 @@ export function SessionControlClient({
             onClick={initRollCall}
             className="px-4 py-2 rounded-lg border border-white/25 bg-white/10 text-brand-navy text-sm font-medium hover:bg-white/20 disabled:opacity-50"
           >
-            Initialize rows (all allocations)
+            {tSessionControl("initializeRowsAllAllocations")}
           </button>
           {roll.length === 0 ? (
             <p className="text-sm text-brand-muted">
-              No roll rows yet. Initialize to create one row per delegate placard from this committee&apos;s allocation
-              matrix.
+              {tSessionControl("noRollRowsYet")}
             </p>
           ) : (
             <>
               <div>
-                <h4 className="font-display text-base font-semibold text-brand-navy">👥 Delegates</h4>
+                <h4 className="font-display text-base font-semibold text-brand-navy">👥 {tSessionControl("delegates")}</h4>
                 <p className="mt-1 text-sm text-brand-muted">
-                  Use the three buttons to set that delegate&apos;s roll status. Current status is highlighted.
+                  {tSessionControl("delegateRollStatusHint")}
                 </p>
               </div>
               <ul className="space-y-3 text-sm text-brand-navy">
@@ -4238,9 +4242,9 @@ export function SessionControlClient({
                       <div
                         className="flex flex-wrap gap-1.5"
                         role="group"
-                        aria-label={`Roll call for ${country}`}
+                        aria-label={tSessionControl("rollCallForCountry", { country })}
                       >
-                        {ROLL_ATTENDANCE_BUTTONS.map((opt) => {
+                        {rollAttendanceButtons.map((opt) => {
                           const active = att === opt.value;
                           return (
                             <button

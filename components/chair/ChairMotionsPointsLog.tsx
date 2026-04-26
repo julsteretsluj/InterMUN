@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { CHAIR_MOTIONS_POINTS_PRESETS } from "@/lib/chair-motions-points-presets";
 import { createClient } from "@/lib/supabase/client";
 
@@ -38,6 +39,9 @@ export function ChairMotionsPointsLog({
   conferenceId: string;
   delegateOptions: DelegateOption[];
 }) {
+  const t = useTranslations("chairMotionsPointsLog");
+  const tNav = useTranslations("chairNav.items");
+  const tCommon = useTranslations("common");
   const supabase = useMemo(() => createClient(), []);
   const [entries, setEntries] = useState<DelegatePointEntry[]>([]);
   const [ready, setReady] = useState(false);
@@ -74,7 +78,7 @@ export function ChairMotionsPointsLog({
     const rows = (data ?? []) as Row[];
     const mapped: DelegatePointEntry[] = rows.map((r) => {
       const alloc = Array.isArray(r.allocations) ? r.allocations[0] : r.allocations;
-      const country = alloc?.country?.trim() || "Delegate";
+      const country = alloc?.country?.trim() || tCommon("delegateFallbackName");
       return {
         id: r.id,
         allocationId: r.allocation_id,
@@ -114,7 +118,7 @@ export function ChairMotionsPointsLog({
         const alloc = Array.isArray(r.allocations) ? r.allocations[0] : r.allocations;
         return {
           allocationId: r.allocation_id,
-          delegateLabel: alloc?.country?.trim() || "Delegate",
+          delegateLabel: alloc?.country?.trim() || tCommon("delegateFallbackName"),
           warningCount: r.warning_count ?? 0,
           strikeCount: r.strike_count ?? 0,
           votingRightsLost: r.voting_rights_lost === true,
@@ -225,33 +229,32 @@ export function ChairMotionsPointsLog({
   return (
     <div className="space-y-6">
       <p className="text-sm text-slate-600 dark:text-zinc-400">
-        Record and star points for delegates. Entries are saved to each delegate account/profile and are visible only
-        to that delegate plus committee chair/SMT.
+        {t("intro")}
       </p>
 
       <div className="rounded-xl border border-amber-200/80 bg-amber-50/60 p-4 text-sm text-amber-950 dark:border-amber-900/50 dark:bg-amber-950/25 dark:text-amber-100">
-        <p className="font-medium">Points log (account-synced)</p>
+        <p className="font-medium">{t("logTitle")}</p>
         <p className="mt-1 text-amber-900/85 dark:text-amber-200/90">
-          Formal procedural votes and the motion floor are in{" "}
+          {t("formalMotionsPrefix")}{" "}
           <Link
             href="/chair/session/motions"
             className="font-semibold underline decoration-amber-700/50 hover:decoration-amber-900 dark:decoration-amber-400"
           >
-            Formal motions
+            {tNav("formalMotions")}
           </Link>
-          .
+          {t("formalMotionsSuffix")}
         </p>
       </div>
 
       <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80">
         <label className="block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-          Delegate
+          {t("delegate")}
           <select
             value={selectedAllocationId}
             onChange={(e) => setSelectedAllocationId(e.target.value)}
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
-            <option value="">Select delegate…</option>
+            <option value="">{t("selectDelegate")}</option>
             {delegateOptions.map((d) => (
               <option key={d.allocationId} value={d.allocationId}>
                 {d.label}
@@ -260,12 +263,12 @@ export function ChairMotionsPointsLog({
           </select>
         </label>
         <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-          Text
+          {t("text")}
           <input
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), add())}
-            placeholder="e.g. Motion to open the speaker list"
+            placeholder={t("textPlaceholder")}
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           />
         </label>
@@ -276,22 +279,21 @@ export function ChairMotionsPointsLog({
             disabled={!draft.trim() || !selectedAllocationId || !myUserId}
             className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50 dark:bg-brand-accent dark:hover:opacity-90"
           >
-            ➕ Add
+            {t("add")}
           </button>
         </div>
 
         <div className="mt-4 rounded-lg border border-rose-200/70 bg-rose-50/60 p-3 dark:border-rose-900/50 dark:bg-rose-950/20">
-          <p className="text-sm font-medium text-rose-900 dark:text-rose-100">Disciplinary system</p>
+          <p className="text-sm font-medium text-rose-900 dark:text-rose-100">{t("disciplinarySystem")}</p>
           <p className="mt-1 text-xs text-rose-900/80 dark:text-rose-200/90">
-            Rule mapping: 3 warnings {"=>"} strike. Strike 1: no voting rights. Strike 2: speaking rights
-            suspended. Strike 3: removed from committee.
+            {t("disciplineRules")}
           </p>
           <label className="mt-3 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-            Reason (optional)
+            {t("reasonOptional")}
             <input
               value={disciplineReason}
               onChange={(e) => setDisciplineReason(e.target.value)}
-              placeholder="e.g. repeated disruption during formal debate"
+              placeholder={t("reasonPlaceholder")}
               className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/30 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
             />
           </label>
@@ -302,7 +304,7 @@ export function ChairMotionsPointsLog({
               disabled={!selectedAllocationId}
               className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
             >
-              + Warning
+              {t("warning")}
             </button>
             <button
               type="button"
@@ -310,7 +312,7 @@ export function ChairMotionsPointsLog({
               disabled={!selectedAllocationId}
               className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
             >
-              + Strike
+              {t("strike")}
             </button>
             <button
               type="button"
@@ -318,7 +320,7 @@ export function ChairMotionsPointsLog({
               disabled={!selectedAllocationId}
               className="rounded-lg border border-amber-600/50 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 disabled:opacity-50 dark:bg-zinc-900 dark:text-amber-200"
             >
-              Revoke warning
+              {t("revokeWarning")}
             </button>
             <button
               type="button"
@@ -326,7 +328,7 @@ export function ChairMotionsPointsLog({
               disabled={!selectedAllocationId}
               className="rounded-lg border border-rose-700/50 bg-white px-3 py-1.5 text-xs font-semibold text-rose-800 disabled:opacity-50 dark:bg-zinc-900 dark:text-rose-200"
             >
-              Revoke strike
+              {t("revokeStrike")}
             </button>
             <button
               type="button"
@@ -334,24 +336,29 @@ export function ChairMotionsPointsLog({
               disabled={!selectedAllocationId}
               className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:opacity-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
             >
-              Reset record
+              {t("resetRecord")}
             </button>
           </div>
           {selectedDiscipline ? (
             <div className="mt-3 rounded-md border border-rose-300/30 bg-white/75 px-3 py-2 text-xs text-slate-700 dark:border-rose-900/40 dark:bg-zinc-900/50 dark:text-zinc-200">
               <p>
-                <span className="font-semibold">Current:</span> {selectedDiscipline.delegateLabel} · Warnings{" "}
-                <span className="font-semibold">{selectedDiscipline.warningCount}</span> · Strikes{" "}
+                <span className="font-semibold">{t("current")}:</span> {selectedDiscipline.delegateLabel} · {t("warnings")}{" "}
+                <span className="font-semibold">{selectedDiscipline.warningCount}</span> · {t("strikes")}{" "}
                 <span className="font-semibold">{selectedDiscipline.strikeCount}</span>
               </p>
               <p className="mt-1">
-                Voting disabled: <span className="font-semibold">{selectedDiscipline.votingRightsLost ? "Yes" : "No"}</span> ·
-                Speaking suspended:{" "}
+                {t("votingDisabled")}:{" "}
                 <span className="font-semibold">
-                  {selectedDiscipline.speakingRightsSuspended ? "Yes" : "No"}
+                  {selectedDiscipline.votingRightsLost ? t("yes") : t("no")}
                 </span>{" "}
-                · Removed:{" "}
-                <span className="font-semibold">{selectedDiscipline.removedFromCommittee ? "Yes" : "No"}</span>
+                · {t("speakingSuspended")}:{" "}
+                <span className="font-semibold">
+                  {selectedDiscipline.speakingRightsSuspended ? t("yes") : t("no")}
+                </span>{" "}
+                · {t("removed")}:{" "}
+                <span className="font-semibold">
+                  {selectedDiscipline.removedFromCommittee ? t("yes") : t("no")}
+                </span>
               </p>
             </div>
           ) : null}
@@ -359,10 +366,10 @@ export function ChairMotionsPointsLog({
 
         <details className="mt-4 rounded-lg border border-slate-200/90 bg-slate-50/80 p-3 dark:border-zinc-600 dark:bg-zinc-800/40">
           <summary className="cursor-pointer text-sm font-medium text-slate-800 dark:text-zinc-200">
-            Preset options
+            {t("presetOptions")}
           </summary>
           <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400">
-            Tap a preset to add a point for the selected delegate.
+            {t("presetHint")}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {pointsPresets.map((p) => (
@@ -381,11 +388,11 @@ export function ChairMotionsPointsLog({
       </div>
 
       <div>
-        <h3 className="font-display text-base font-semibold text-slate-900 dark:text-zinc-50">📋 Log</h3>
+        <h3 className="font-display text-base font-semibold text-slate-900 dark:text-zinc-50">📋 {t("log")}</h3>
         {!ready ? (
-          <p className="mt-2 text-sm text-slate-500">Loading…</p>
+          <p className="mt-2 text-sm text-slate-500">{tCommon("loading")}</p>
         ) : sorted.length === 0 ? (
-          <p className="mt-2 text-sm text-slate-500 dark:text-zinc-400">No entries yet.</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-zinc-400">{t("noEntries")}</p>
         ) : (
           <ul className="mt-3 space-y-2">
             {sorted.map((e) => (
@@ -397,13 +404,13 @@ export function ChairMotionsPointsLog({
                   type="button"
                   onClick={() => void toggleStar(e)}
                   className="mt-0.5 shrink-0 text-amber-500 hover:text-amber-600 dark:text-amber-400"
-                  aria-label={e.starred ? "Unstar" : "Star"}
+                  aria-label={e.starred ? t("unstar") : t("star")}
                 >
                   <Star className={`h-4 w-4 ${e.starred ? "fill-current" : ""}`} strokeWidth={1.75} />
                 </button>
                 <div className="min-w-0 flex-1">
                   <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-zinc-400">
-                    Point · {e.delegateLabel}
+                    {t("point")} · {e.delegateLabel}
                   </span>
                   <p className="text-slate-900 dark:text-zinc-100">{e.text}</p>
                   <p className="text-xs text-slate-400 dark:text-zinc-500">
@@ -415,7 +422,7 @@ export function ChairMotionsPointsLog({
                   onClick={() => void remove(e.id)}
                   className="shrink-0 text-xs font-medium text-red-700 hover:underline dark:text-red-400"
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </li>
             ))}

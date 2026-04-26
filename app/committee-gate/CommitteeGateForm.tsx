@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { verifyCommitteeSecondaryLogin } from "@/app/actions/committeeGate";
 
 type Props = {
@@ -19,6 +20,10 @@ export function CommitteeGateForm({
   initialAllocation,
   nextPath,
 }: Props) {
+  const tCommon = useTranslations("common");
+  const tGate = useTranslations("committeeGate");
+  const tSetup = useTranslations("conferenceSetupForm");
+  const tForm = useTranslations("committeeGateForm");
   const [state, formAction, pending] = useActionState(
     verifyCommitteeSecondaryLogin,
     null as { error?: string } | null
@@ -37,7 +42,7 @@ export function CommitteeGateForm({
       <input type="hidden" name="next" value={nextPath} />
 
       <div className="rounded-lg border border-brand-navy/10 bg-brand-cream/50 px-3 py-2 text-sm text-brand-muted">
-        <span className="font-medium text-brand-navy">Conference: </span>
+        <span className="font-medium text-brand-navy">{tCommon("conference")}: </span>
         {conferenceTitle}
       </div>
 
@@ -46,7 +51,7 @@ export function CommitteeGateForm({
           htmlFor="allocation"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          Allocation (country / position)
+          {tForm("allocationLabel")}
         </label>
         {allocationChoices.length === 1 ? (
           <>
@@ -65,7 +70,7 @@ export function CommitteeGateForm({
               defaultValue={initialAllocation ?? ""}
             >
               <option value="" disabled>
-                Select your allocation
+                {tForm("selectAllocation")}
               </option>
               {allocationChoices.map((c) => (
                 <option key={c} value={c}>
@@ -74,11 +79,11 @@ export function CommitteeGateForm({
               ))}
             </select>
             <p className="text-xs text-brand-muted mt-1">
-              Must match the allocation assigned to your account for this conference.
+              {tForm("allocationMatchHint")}
             </p>
             {initialAllocation ? (
               <p className="text-xs text-brand-navy/80 mt-1">
-                Preselected from your sign-up link.
+                {tForm("preselectedHint")}
               </p>
             ) : null}
           </>
@@ -90,7 +95,7 @@ export function CommitteeGateForm({
           htmlFor="password"
           className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
         >
-          Committee password
+          {tSetup("committeePasswordLabel")}
         </label>
         <input
           id="password"
@@ -99,7 +104,7 @@ export function CommitteeGateForm({
           autoComplete="off"
           required
           className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-          placeholder="Provided by your chair"
+          placeholder={tForm("committeePasswordPlaceholder")}
         />
       </div>
 
@@ -119,12 +124,12 @@ export function CommitteeGateForm({
         disabled={pending}
         className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
       >
-        {pending ? "Verifying…" : "Continue to platform"}
+        {pending ? tForm("verifying") : tGate("continueToPlatform")}
       </button>
 
       <p className="text-center text-sm text-brand-muted">
         <Link href="/login" className="text-brand-accent hover:underline">
-          Use a different account
+          {tCommon("useDifferentAccount")}
         </Link>
       </p>
     </form>
