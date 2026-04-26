@@ -57,6 +57,7 @@ export function AuthEntryWizard({
   nextPath?: string;
 }) {
   const t = useTranslations("authWizard");
+  const tc = useTranslations("common");
   const router = useRouter();
   const appName = getAppName();
   const [step, setStep] = useState<Step>("welcome");
@@ -248,7 +249,7 @@ export function AuthEntryWizard({
             onClick={() => setStep("conference")}
             className="mun-btn-primary w-full max-w-xs mx-auto rounded-xl py-3.5 text-base font-semibold"
           >
-            {t("continue")}
+            {tc("continue")}
           </button>
         </div>
       ) : null}
@@ -310,7 +311,7 @@ export function AuthEntryWizard({
               disabled={conferencePending}
               className="mun-btn-primary w-full rounded-lg py-3 text-base font-semibold disabled:opacity-50"
             >
-              {conferencePending ? t("checking") : t("continue")}
+              {conferencePending ? t("checking") : tc("continue")}
             </button>
           </form>
         </div>
