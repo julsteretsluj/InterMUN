@@ -23,7 +23,12 @@ export function DashboardBrandLogos({
   }
 
   return (
-    <span className={cn("flex shrink-0 items-center", variant === "sidebar" ? "gap-1.5" : "gap-2")}>
+    <span
+      className={cn(
+        "group/logo-stack flex shrink-0 flex-col items-center justify-center gap-1 transition-all duration-200 hover:flex-row",
+        variant === "sidebar" ? "hover:gap-1.5" : "hover:gap-2"
+      )}
+    >
       <img src={SEAMUN_LOGO_SRC} alt="" className={cn("object-contain", dualClass)} decoding="async" />
       <span
         className={cn(
