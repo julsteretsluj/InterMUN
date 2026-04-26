@@ -34,10 +34,10 @@ function StatMiniCard({
   title?: string;
 }) {
   const tones = {
-    blue: "bg-brand-accent/10 border-brand-accent/28",
-    silver: "bg-brand-navy/5 border-brand-navy/15",
-    accent: "bg-brand-accent/10 border-brand-accent/30",
-    sky: "bg-sky-500/10 border-sky-500/30",
+    blue: "bg-brand-accent/10 border-brand-accent/28 dark:bg-brand-accent/18 dark:border-brand-accent/35",
+    silver: "bg-brand-navy/5 border-brand-navy/15 dark:bg-white/5 dark:border-white/12",
+    accent: "bg-brand-accent/10 border-brand-accent/30 dark:bg-brand-accent/18 dark:border-brand-accent/35",
+    sky: "bg-sky-500/10 border-sky-500/30 dark:bg-sky-500/18 dark:border-sky-500/38",
   } as const;
   const interactive = Boolean(onPress);
   const className = [
@@ -51,16 +51,16 @@ function StatMiniCard({
   if (onPress) {
     return (
       <button type="button" className={className} onClick={onPress} title={title}>
-        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-muted">{label}</p>
-        <p className="mt-0.5 text-base font-semibold tabular-nums text-brand-navy">{value}</p>
+        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-muted dark:text-white/65">{label}</p>
+        <p className="mt-0.5 text-base font-semibold tabular-nums text-brand-navy dark:text-white">{value}</p>
       </button>
     );
   }
 
   return (
     <div className={className}>
-      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-muted">{label}</p>
-      <p className="mt-0.5 text-base font-semibold tabular-nums text-brand-navy">{value}</p>
+      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-muted dark:text-white/65">{label}</p>
+      <p className="mt-0.5 text-base font-semibold tabular-nums text-brand-navy dark:text-white">{value}</p>
     </div>
   );
 }
@@ -278,23 +278,23 @@ export function CommitteeRoomDigitalMUNClient({
       <div className={["xl:grid", layoutColumns, "xl:gap-5 xl:items-start"].join(" ")}>
         {/* Left rail — context & stats (mockup sidebar) */}
         <aside className="mb-4 h-fit space-y-2.5 xl:sticky xl:top-4 xl:mb-0">
-          <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-3 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)]">
+          <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-3 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)] dark:border-white/10 dark:bg-[#12121A] dark:shadow-[0_20px_40px_-28px_rgba(0,0,0,0.75)]">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("committeeLabel")}</p>
-            <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug break-words">
+            <p className="mt-2 font-display text-sm font-semibold text-brand-navy leading-snug break-words dark:text-white">
               {committeeName}
             </p>
             <p className="mt-1 text-xs text-brand-muted break-words">{conferenceName}</p>
 
-            <div className="mt-3.5 space-y-2 border-t border-brand-line/50 pt-3.5">
+            <div className="mt-3.5 space-y-2 border-t border-brand-line/50 pt-3.5 dark:border-white/10">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Your context</p>
-              <div className="flex items-start gap-2 rounded-lg border border-brand-navy/10 bg-brand-navy/5 px-2.5 py-2">
+              <div className="flex items-start gap-2 rounded-lg border border-brand-navy/10 bg-brand-navy/5 px-2.5 py-2 dark:border-white/10 dark:bg-white/5">
                 <UserRound className="size-4 shrink-0 text-brand-accent-bright mt-0.5" strokeWidth={1.5} />
                 <div className="min-w-0 text-xs">
                   <p className="text-brand-muted">Role</p>
-                  <p className="font-medium text-brand-navy capitalize">{role}</p>
+                  <p className="font-medium text-brand-navy capitalize dark:text-white">{role}</p>
                   {myAllocationCountry ? (
                     <p className="text-brand-muted mt-1">
-                      Seat · <span className="text-brand-navy/90">{myAllocationCountry}</span>
+                      Seat · <span className="text-brand-navy/90 dark:text-white/90">{myAllocationCountry}</span>
                     </p>
                   ) : null}
                 </div>
@@ -327,8 +327,8 @@ export function CommitteeRoomDigitalMUNClient({
             <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
           </div>
 
-          <div className="rounded-lg border border-brand-navy/10 bg-brand-accent/8 p-2.5 text-xs leading-relaxed text-brand-navy/90">
-            <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1">
+          <div className="rounded-lg border border-brand-navy/10 bg-brand-accent/8 p-2.5 text-xs leading-relaxed text-brand-navy/90 dark:border-white/10 dark:bg-brand-accent/12 dark:text-white/85">
+            <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1 dark:text-white">
               <Sparkles className="size-3.5 text-brand-silver shrink-0" />
               Tip
             </div>
@@ -338,12 +338,12 @@ export function CommitteeRoomDigitalMUNClient({
 
         {/* Center — digital display */}
         <section className="mb-4 min-w-0 space-y-2.5 xl:mb-0">
-          <div className="flex flex-col gap-2.5 rounded-xl border border-brand-navy/10 bg-brand-paper px-3.5 py-2.5 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)] sm:flex-row sm:items-center sm:gap-3.5">
+          <div className="flex flex-col gap-2.5 rounded-xl border border-brand-navy/10 bg-brand-paper px-3.5 py-2.5 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)] sm:flex-row sm:items-center sm:gap-3.5 dark:border-white/10 dark:bg-[#12121A] dark:shadow-[0_20px_40px_-28px_rgba(0,0,0,0.75)]">
             <div className="min-w-0 flex-1">
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
                 Digital display
               </p>
-              <p className="break-words font-display text-[0.95rem] font-semibold leading-tight text-brand-navy sm:text-base">
+              <p className="break-words font-display text-[0.95rem] font-semibold leading-tight text-brand-navy sm:text-base dark:text-white">
                 {committeeName}
               </p>
             </div>
@@ -371,13 +371,13 @@ export function CommitteeRoomDigitalMUNClient({
                   }}
                   placeholder={t("searchPlaceholder")}
                   autoComplete="off"
-                  className="min-w-0 flex-1 bg-transparent text-xs text-brand-navy placeholder:text-brand-muted/70 focus:outline-none py-1.5"
+                  className="min-w-0 flex-1 bg-transparent text-xs text-brand-navy placeholder:text-brand-muted/70 focus:outline-none py-1.5 dark:text-white dark:placeholder:text-white/45"
                 />
                 {delegationSearch ? (
                   <button
                     type="button"
                     onClick={() => setDelegationSearch("")}
-                    className="rounded-full p-1.5 text-brand-muted hover:text-brand-navy hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright"
+                    className="rounded-full p-1.5 text-brand-muted hover:text-brand-navy hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent-bright dark:hover:text-white dark:hover:bg-white/10"
                     aria-label={t("clearSearchTitle")}
                   >
                     <X className="size-3.5" strokeWidth={2} />
@@ -415,7 +415,7 @@ export function CommitteeRoomDigitalMUNClient({
 
         {/* Right rail — delegate floor (chairs/SMT/admin use Chair → Session) */}
         {showDelegateFloorPanel ? (
-          <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] xl:sticky xl:top-4">
+          <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] xl:sticky xl:top-4 dark:border-white/10 dark:bg-[#12121A]">
             <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/5 dark:bg-black/15">
               <div className="mb-3 flex items-center gap-2">
                 <CircleDot className="size-4 text-brand-accent-bright" />
@@ -437,7 +437,7 @@ export function CommitteeRoomDigitalMUNClient({
                         <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
                           {trRequestToSpeak("rollPromptTitle", "Chair approval required")}
                         </p>
-                        <p className="mt-1 text-sm text-brand-navy/90">
+                        <p className="mt-1 text-sm text-brand-navy/90 dark:text-white/85">
                           {shouldPromptDelegateRollChoice ? (
                             trRequestToSpeak(
                               "rollPromptBodyPickStatus",
@@ -470,7 +470,7 @@ export function CommitteeRoomDigitalMUNClient({
                               type="button"
                               disabled={rollChoicePending}
                               onClick={() => void submitDelegateRollChoice("present_abstain")}
-                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/12 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/20 disabled:opacity-50"
+                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/12 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/20 disabled:opacity-50 dark:text-white"
                             >
                               {rollChoicePending
                                 ? trRequestToSpeak("rollPromptSaving", "Saving...")
@@ -480,7 +480,7 @@ export function CommitteeRoomDigitalMUNClient({
                               type="button"
                               disabled={rollChoicePending}
                               onClick={() => void submitDelegateRollChoice("present_voting")}
-                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/18 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/25 disabled:opacity-50"
+                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/18 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/25 disabled:opacity-50 dark:text-white"
                             >
                               {rollChoicePending
                                 ? trRequestToSpeak("rollPromptSaving", "Saving...")
@@ -518,7 +518,7 @@ export function CommitteeRoomDigitalMUNClient({
       </div>
 
       {canManageSeats ? (
-        <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-5">
+        <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-5 dark:border-white/10 dark:bg-[#12121A]">
           <div className="flex items-center gap-2 mb-4">
             <Gavel className="size-4 text-brand-accent-bright" />
             <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">Staff · seats</h3>

@@ -94,21 +94,21 @@ export function CommitteeRoomStaffControls({
   }
 
   return (
-    <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4">
-      <h2 className="font-display text-lg font-semibold text-brand-navy">
+    <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-4 dark:border-white/10 dark:bg-[#12121A]">
+      <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-white">
         Seat controls
       </h2>
-      <p className="text-sm text-brand-muted">
+      <p className="text-sm text-brand-muted dark:text-white/70">
         Update who&apos;s assigned to each seat.
         {canEditOverrides
           ? " SMT and admins can also override placard text fields for this committee."
           : " Placard text overrides are limited to SMT/admin."}
       </p>
 
-      <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
+      <div className="overflow-x-auto rounded-lg border border-brand-navy/10 dark:border-white/12">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
+            <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted dark:bg-white/5 dark:text-white/70">
               <th className="px-3 py-2">Country / position</th>
               <th className="px-3 py-2 w-[220px]">Delegate (vacant ok)</th>
               {canEditOverrides ? (
@@ -126,8 +126,8 @@ export function CommitteeRoomStaffControls({
               const d = drafts[a.id];
               if (!d) return null;
               return (
-                <tr key={a.id} className="border-t border-brand-navy/5">
-                  <td className="px-3 py-2 font-medium text-brand-navy">{a.country || "—"}</td>
+                <tr key={a.id} className="border-t border-brand-navy/5 dark:border-white/8">
+                  <td className="px-3 py-2 font-medium text-brand-navy dark:text-white">{a.country || "—"}</td>
                   <td className="px-3 py-2">
                     <select
                       value={d.user_id || ""}
@@ -138,7 +138,7 @@ export function CommitteeRoomStaffControls({
                           [a.id]: { ...prev[a.id], user_id: v ? v : null },
                         }));
                       }}
-                      className="w-full px-2 py-1 rounded border border-brand-navy/15 bg-black/25 text-sm"
+                      className="w-full px-2 py-1 rounded border border-brand-navy/15 bg-black/25 text-sm text-brand-navy dark:border-white/15 dark:bg-black/30 dark:text-white"
                     >
                       <option value="">Vacant</option>
                       {(isChairSeat(a.country) ? chairOptions : delegateOptions).map((opt) => (
@@ -160,7 +160,7 @@ export function CommitteeRoomStaffControls({
                               [a.id]: { ...prev[a.id], display_name_override: v },
                             }));
                           }}
-                          className="w-full px-2 py-1 rounded border border-brand-navy/15 text-sm"
+                          className="w-full px-2 py-1 rounded border border-brand-navy/15 text-sm text-brand-navy dark:border-white/15 dark:bg-black/30 dark:text-white"
                         />
                       </td>
                       <td className="px-3 py-2">
@@ -173,7 +173,7 @@ export function CommitteeRoomStaffControls({
                               [a.id]: { ...prev[a.id], display_pronouns_override: v },
                             }));
                           }}
-                          className="w-full px-2 py-1 rounded border border-brand-navy/15 text-sm"
+                          className="w-full px-2 py-1 rounded border border-brand-navy/15 text-sm text-brand-navy dark:border-white/15 dark:bg-black/30 dark:text-white"
                         />
                       </td>
                       <td className="px-3 py-2">
@@ -186,7 +186,7 @@ export function CommitteeRoomStaffControls({
                               [a.id]: { ...prev[a.id], display_school_override: v },
                             }));
                           }}
-                          className="w-full px-2 py-1 rounded border border-brand-navy/15 text-sm"
+                          className="w-full px-2 py-1 rounded border border-brand-navy/15 text-sm text-brand-navy dark:border-white/15 dark:bg-black/30 dark:text-white"
                         />
                       </td>
                     </>
@@ -195,7 +195,7 @@ export function CommitteeRoomStaffControls({
                     <button
                       type="button"
                       onClick={() => void saveAllocation(a.id)}
-                      className="px-3 py-1 rounded bg-brand-paper text-brand-navy text-xs font-medium hover:opacity-90"
+                      className="px-3 py-1 rounded bg-brand-paper text-brand-navy text-xs font-medium hover:opacity-90 dark:bg-white/10 dark:text-white"
                     >
                       {canEditOverrides ? "Save" : "Save seat"}
                     </button>
