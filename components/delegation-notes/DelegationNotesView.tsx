@@ -68,6 +68,7 @@ type DelegationNote = {
 
 type AllocationOption = { id: string; country: string };
 type ChairOption = { id: string; name: string };
+type SupabaseErrorLike = { message?: string };
 
 export function DelegationNotesView({
   conferenceId,
@@ -385,6 +386,7 @@ export function DelegationNotesView({
     }
 
     setSending(true);
+    let insertedNoteId: string | null = null;
     try {
       const { data: inserted, error: insertErr } = await supabase
         .from("delegation_notes")
@@ -399,6 +401,7 @@ export function DelegationNotesView({
         .select("*")
         .single();
       if (insertErr) throw insertErr;
+      insertedNoteId = inserted.id;
 
       for (const allocationId of selectedAllocationRecipientIds) {
         const { error: recipErr } = await supabase
@@ -486,7 +489,36 @@ export function DelegationNotesView({
       setSelectedChairRecipientIdsState([]);
       setAnyChairRecipientState(false);
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : t("errors.sendFailed");
+      const rawMessage =
+        e instanceof Error
+          ? e.message
+          : typeof e === "object" && e !== null && "message" in e
+            ? ((e as SupabaseErrorLike).message ?? "")
+            : "";
+      const normalizedMessage = rawMessage.toLowerCase();
+      const isNotificationTriggerFkError =
+        insertedNoteId !== null &&
+        (normalizedMessage.includes("user_notifications") ||
+          normalizedMessage.includes("fn_notify_delegation_note_recipient") ||
+          normalizedMessage.includes("violates foreign key constraint"));
+      if (isNotificationTriggerFkError) {
+        // The note row is already created; only notification side effects failed.
+        // Refresh list and keep UX successful while DB migration/state catches up.
+        await refreshNotes();
+        setContent("");
+        setConcernFlag(false);
+        setSelectedAllocationRecipientIdsState([]);
+        setSelectedChairRecipientIdsState([]);
+        setAnyChairRecipientState(false);
+        setError(null);
+        return;
+      }
+      const message =
+        e instanceof Error
+          ? e.message
+          : typeof e === "object" && e !== null && "message" in e
+            ? ((e as SupabaseErrorLike).message ?? t("errors.sendFailed"))
+            : t("errors.sendFailed");
       setError(message);
     } finally {
       setSending(false);
