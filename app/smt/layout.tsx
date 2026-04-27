@@ -74,7 +74,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         </div>
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] backdrop-blur-xl backdrop-saturate-150">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] backdrop-blur-xl backdrop-saturate-150 lg:min-h-0">
         <DashboardTopBar
           userName={topBarUserName}
           userEmail={user.email ?? ""}
@@ -103,7 +103,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
             </div>
           </div>
         )}
-        <main className="w-full flex-1 px-4 py-6 sm:px-6 md:py-8 pb-[calc(6.5rem+env(safe-area-inset-bottom))] lg:pb-8">
+        <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(6.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
           {children}
         </main>
       </div>
