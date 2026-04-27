@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Clock, Megaphone, ListOrdered, PauseCircle } from "lucide-react";
-import { ActiveMotionContextStrip } from "@/components/session/ActiveMotionContextStrip";
-import { Timers } from "@/components/timers/Timers";
+import { Clock, Megaphone, PauseCircle } from "lucide-react";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
@@ -24,23 +22,6 @@ type Announcement = {
   publish_at?: string | null;
 };
 type PauseEventRow = { id: string; reason: string; created_at: string };
-
-type QueueRow = {
-  id: string;
-  sort_order: number;
-  label: string | null;
-  status: string;
-  allocation_id: string | null;
-  allocations: { country: string } | { country: string }[] | null;
-};
-
-function allocCountry(
-  a: QueueRow["allocations"]
-): string | null {
-  if (!a) return null;
-  const row = Array.isArray(a) ? a[0] : a;
-  return row?.country?.trim() || null;
-}
 
 type FloorTheme = "dark" | "light";
 
@@ -78,7 +59,6 @@ export function FloorStatusBar({
   const supabase = createClient();
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
-  const [queue, setQueue] = useState<QueueRow[]>([]);
   const [rollSelf, setRollSelf] = useState<string | null>(null);
   const [selfAllocationId, setSelfAllocationId] = useState<string | null>(null);
   const [expandedAnnouncement, setExpandedAnnouncement] = useState<Announcement | null>(null);
@@ -116,15 +96,6 @@ export function FloorStatusBar({
         setSessionDurationSeconds(row?.committee_session_duration_seconds ?? null);
         setSessionEndsAt(row?.committee_session_ends_at ?? null);
       });
-  }, [supabase, conferenceId]);
-
-  const loadQueue = useCallback(() => {
-    return supabase
-      .from("speaker_queue_entries")
-      .select("id, sort_order, label, status, allocation_id, allocations(country)")
-      .eq("conference_id", conferenceId)
-      .order("sort_order", { ascending: true })
-      .then(({ data }) => setQueue((data as QueueRow[]) ?? []));
   }, [supabase, conferenceId]);
 
   const loadDais = useCallback(() => {
@@ -174,8 +145,6 @@ export function FloorStatusBar({
     void loadDais();
     void loadPauseEvents();
 
-    void loadQueue();
-
     if (!observeOnly) {
       void (async () => {
         const {
@@ -193,7 +162,7 @@ export function FloorStatusBar({
         await loadSelfRollCall(alloc.id);
       })();
     }
-  }, [supabase, conferenceId, loadQueue, loadDais, loadPauseEvents, loadSelfRollCall, observeOnly]);
+  }, [supabase, conferenceId, loadDais, loadPauseEvents, loadSelfRollCall, observeOnly]);
 
   useEffect(() => {
     void loadProcedureSession();
@@ -264,25 +233,6 @@ export function FloorStatusBar({
   }, [supabase, conferenceId, loadDais, loadPauseEvents]);
 
   useEffect(() => {
-    const ch = supabase
-      .channel(`floor-queue-${conferenceId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "speaker_queue_entries",
-          filter: `conference_id=eq.${conferenceId}`,
-        },
-        () => void loadQueue()
-      )
-      .subscribe();
-    return () => {
-      void supabase.removeChannel(ch);
-    };
-  }, [supabase, conferenceId, loadQueue]);
-
-  useEffect(() => {
     if (observeOnly || !selfAllocationId) return;
     const ch = supabase
       .channel(`floor-roll-self-${conferenceId}-${selfAllocationId}`)
@@ -308,7 +258,6 @@ export function FloorStatusBar({
     };
   }, [supabase, conferenceId, selfAllocationId, loadSelfRollCall, observeOnly]);
 
-  const displayQueue = queue.filter((q) => q.status !== "done").slice(0, 8);
   const isLight = theme === "light";
   const box = isLight
     ? "rounded-lg border border-brand-navy/10 bg-brand-cream/30 px-3 py-1.5 text-brand-navy text-sm space-y-1.5"
@@ -318,9 +267,7 @@ export function FloorStatusBar({
     : "text-[0.65rem] uppercase tracking-wider text-brand-navy/80";
   const icon = isLight ? "text-brand-accent" : "text-brand-accent-bright";
   const border = isLight ? "border-brand-navy/10" : "border-white/10";
-  const current = isLight ? "text-brand-accent" : "text-brand-accent-bright";
   const bodyText = isLight ? "text-brand-navy/95" : "text-brand-navy/95";
-  const qText = "text-brand-navy/90";
 
   const limitNow = Date.now();
   const limitFmt =
@@ -397,15 +344,6 @@ export function FloorStatusBar({
   return (
     <div className="space-y-1.5">
       {sessionElapsedRow}
-      {activeMotionVoteItemId ? (
-        <ActiveMotionContextStrip
-          conferenceId={conferenceId}
-          voteItemId={activeMotionVoteItemId}
-          theme={theme}
-        />
-      ) : (
-        <Timers conferenceId={conferenceId} theme={theme} activeVoteItemId={null} />
-      )}
       <div className={box}>
       {latestDais && (
         <div className="flex gap-2 items-start">
@@ -456,23 +394,6 @@ export function FloorStatusBar({
           </div>
         </div>
       ) : null}
-      {displayQueue.length > 0 && (
-        <div className={`flex gap-2 items-start pt-0.5 border-t ${border}`}>
-          <ListOrdered className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
-          <div className="min-w-0 flex-1">
-            <span className={`${muted} block`}>{t("speakerList")}</span>
-            <ul className={`flex flex-wrap gap-x-2.5 gap-y-0.5 text-xs ${qText}`}>
-              {displayQueue.map((q) => (
-                <li key={q.id} className="font-medium">
-                  <span className={q.status === "current" ? current : undefined}>
-                    {q.label || allocCountry(q.allocations) || t("speakerFallback")}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
       {rollSelf && (
         <p
           className={`text-[0.65rem] pt-0.5 border-t ${border} ${
