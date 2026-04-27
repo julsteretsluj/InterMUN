@@ -124,26 +124,10 @@ export default async function DashboardLayout({
   const debateBundle = activeConf?.id
     ? await getResolvedDebateConferenceBundle(supabase, activeConf.id)
     : null;
-  const sessionProcedureConferenceId =
-    debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
   const liveFloorConferenceId = debateBundle?.debateConferenceId ?? activeConf?.id ?? null;
   const liveFloorCanonicalId = debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
   const liveFloorSiblings = debateBundle?.siblingConferenceIds ?? (activeConf?.id ? [activeConf.id] : []);
 
-  const { data: procedureState, error: procedureStateError } = sessionProcedureConferenceId
-    ? await supabase
-        .from("procedure_states")
-        .select("committee_session_started_at")
-        .eq("conference_id", sessionProcedureConferenceId)
-        .maybeSingle()
-    : { data: null };
-  const startedAtColumnMissing =
-    /schema cache/i.test(String(procedureStateError?.message ?? "")) &&
-    /committee_session_started_at/i.test(String(procedureStateError?.message ?? ""));
-  const sessionIsActive = !startedAtColumnMissing && Boolean(
-    (procedureState as { committee_session_started_at?: string | null } | null)
-      ?.committee_session_started_at
-  );
 
   return (
     <div className="min-h-screen bg-[var(--desktop-bg)] lg:p-3">
@@ -214,7 +198,7 @@ export default async function DashboardLayout({
           }
         />
         <DashboardAnnouncementPopup />
-        {activeConf?.id && showsDaisTools(role) && sessionIsActive ? (
+        {activeConf?.id && showsDaisTools(role) ? (
           <div className="border-y border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-3 backdrop-blur-xl sm:px-6">
             <div className="w-full">
               <ChairLiveFloorThemed
