@@ -84,8 +84,8 @@ export function ActiveMotionContextStrip({
     ? "rounded-lg border border-brand-navy/10 bg-black/25 text-brand-navy text-sm p-2.5 space-y-2.5 shadow-sm"
     : "rounded-xl border border-white/12 bg-black/20 text-brand-navy/95 text-sm p-2.5 md:p-3 space-y-2.5";
   const labelCls = isLight
-    ? "text-[0.65rem] uppercase tracking-wider text-brand-muted block mb-0.5"
-    : "text-[0.65rem] uppercase tracking-wider text-brand-navy/75 block mb-0.5";
+    ? "text-[0.65rem] uppercase tracking-wider text-brand-muted"
+    : "text-[0.65rem] uppercase tracking-wider text-brand-navy/75";
   const bodyCls = isLight ? "font-medium text-brand-navy" : "font-medium text-brand-navy/95";
   const subCls = isLight ? "text-sm text-brand-navy/85 mt-0.5 line-clamp-3" : "text-sm text-brand-navy/90 mt-0.5 line-clamp-3";
   const iconCls = isLight ? "w-4 h-4 text-brand-accent shrink-0 mt-0.5" : "w-5 h-5 text-brand-accent-bright shrink-0 mt-0.5";
@@ -102,26 +102,26 @@ export function ActiveMotionContextStrip({
       <div className="flex gap-2.5 items-start">
         <Gavel className={iconCls} aria-hidden />
         <div className="min-w-0 flex-1 space-y-1.5">
-          <div>
-            <span className={labelCls}>{t("currentMotion")}</span>
+          <div className="space-y-1">
+            <span className={`${labelCls} block`}>{t("currentMotion")}</span>
             <p className={`${bodyCls} text-sm`}>{row?.title?.trim() || t("motionFallback")}</p>
             {row?.description?.trim() ? (
               <p className={subCls}>{row.description.trim()}</p>
             ) : null}
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1">
-            <div>
-              <span className={labelCls}>{t("motioner")}</span>
-              <p className={bodyCls}>{motionerCountry || "—"}</p>
-            </div>
-            <div>
-              <span className={labelCls}>{t("majority")}</span>
-              <p className={bodyCls}>{row ? majorityLabel(row.required_majority) : "—"}</p>
-            </div>
-            <div>
-              <span className={labelCls}>{t("type")}</span>
-              <p className={`${bodyCls} capitalize`}>{row?.vote_type || "—"}</p>
-            </div>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+            <span className={labelCls}>{t("motioner")}:</span>
+            <span className={bodyCls}>{motionerCountry || "—"}</span>
+            <span className="text-brand-navy/35" aria-hidden>
+              ·
+            </span>
+            <span className={labelCls}>{t("majority")}:</span>
+            <span className={bodyCls}>{row ? majorityLabel(row.required_majority) : "—"}</span>
+            <span className="text-brand-navy/35" aria-hidden>
+              ·
+            </span>
+            <span className={labelCls}>{t("type")}:</span>
+            <span className={`${bodyCls} capitalize`}>{row?.vote_type || "—"}</span>
           </div>
         </div>
       </div>
