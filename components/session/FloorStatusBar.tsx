@@ -7,6 +7,7 @@ import { Clock, Megaphone, PauseCircle } from "lucide-react";
 import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
+import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useTranslations } from "next-intl";
 import {
   committeeSessionEndTimestampMs,
@@ -56,7 +57,9 @@ export function FloorStatusBar({
   sessionMiniControls?: "full" | "minimal" | "none";
 }) {
   const t = useTranslations("views.session.floorStatus");
+  const tActiveMotion = useTranslations("views.session.activeMotion");
   const supabase = createClient();
+  const { timer } = useConferenceTimer(conferenceId, activeMotionVoteItemId);
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
   const [rollSelf, setRollSelf] = useState<string | null>(null);
@@ -268,24 +271,39 @@ export function FloorStatusBar({
   const icon = isLight ? "text-brand-accent" : "text-brand-accent-bright";
   const border = isLight ? "border-brand-navy/10" : "border-white/10";
   const bodyText = isLight ? "text-brand-navy/95" : "text-brand-navy/95";
+  const qText = "text-brand-navy/90";
 
   const limitNow = Date.now();
   const limitFmt =
     sessionStartedAt != null && sessionEndMs != null
       ? formatCountdownOrElapsed(sessionEndMs, limitNow)
       : null;
+  const quickLinkLabel = useCallback(
+    (key: "quickLinkSession" | "quickLinkRoll" | "quickLinkSpeakers" | "quickLinkMotions" | "quickLinkTimer") => {
+      const value = t(key);
+      if (value === `views.session.floorStatus.${key}`) {
+        if (key === "quickLinkSession") return "Session";
+        if (key === "quickLinkRoll") return "Roll";
+        if (key === "quickLinkSpeakers") return "Speakers";
+        if (key === "quickLinkMotions") return "Motions";
+        return "Timer";
+      }
+      return value;
+    },
+    [t]
+  );
   const sessionQuickLinks =
     sessionMiniControls === "minimal"
       ? [
-          { href: "/chair/session", label: t("quickLinkSession") },
-          { href: "/chair/session/timer", label: t("quickLinkTimer") },
+          { href: "/chair/session", label: quickLinkLabel("quickLinkSession") },
+          { href: "/chair/session/timer", label: quickLinkLabel("quickLinkTimer") },
         ]
       : [
-          { href: "/chair/session", label: t("quickLinkSession") },
-          { href: "/chair/session/roll-call", label: t("quickLinkRoll") },
-          { href: "/chair/session/speakers", label: t("quickLinkSpeakers") },
-          { href: "/chair/session/motions", label: t("quickLinkMotions") },
-          { href: "/chair/session/timer", label: t("quickLinkTimer") },
+          { href: "/chair/session", label: quickLinkLabel("quickLinkSession") },
+          { href: "/chair/session/roll-call", label: quickLinkLabel("quickLinkRoll") },
+          { href: "/chair/session/speakers", label: quickLinkLabel("quickLinkSpeakers") },
+          { href: "/chair/session/motions", label: quickLinkLabel("quickLinkMotions") },
+          { href: "/chair/session/timer", label: quickLinkLabel("quickLinkTimer") },
         ];
 
   const sessionElapsedRow = (
@@ -318,6 +336,17 @@ export function FloorStatusBar({
             {limitFmt.label === "remaining"
               ? t("limitRemaining", { value: limitFmt.text })
               : t("limitOverBy", { value: limitFmt.text })}
+          </span>
+        </>
+      ) : null}
+      {timer?.current_speaker?.trim() ? (
+        <>
+          <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
+            ·
+          </span>
+          <span className={isLight ? "text-brand-navy/75" : "text-brand-navy/80"}>
+            {tActiveMotion("currentSpeaker")}:{" "}
+            <span className="font-medium text-brand-navy">{timer.current_speaker.trim()}</span>
           </span>
         </>
       ) : null}
