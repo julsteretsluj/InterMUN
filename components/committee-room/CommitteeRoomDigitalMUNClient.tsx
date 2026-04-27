@@ -415,7 +415,7 @@ export function CommitteeRoomDigitalMUNClient({
 
         {/* Right rail — delegate floor (chairs/SMT/admin use Chair → Session) */}
         {showDelegateFloorPanel ? (
-          <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] xl:sticky xl:top-4 dark:border-white/10 dark:bg-[#12121A]">
+          <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#12121A]">
             <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/5 dark:bg-black/15">
               <div className="mb-3 flex items-center gap-2">
                 <CircleDot className="size-4 text-brand-accent-bright" />

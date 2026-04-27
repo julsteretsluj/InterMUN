@@ -80,6 +80,7 @@ export function FloorStatusBar({
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
   const [queue, setQueue] = useState<QueueRow[]>([]);
   const [rollSelf, setRollSelf] = useState<string | null>(null);
+  const [selfAllocationId, setSelfAllocationId] = useState<string | null>(null);
   const [expandedAnnouncement, setExpandedAnnouncement] = useState<Announcement | null>(null);
   const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
   const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
@@ -150,6 +151,25 @@ export function FloorStatusBar({
       .then(({ data }) => setPauseEvents((data as PauseEventRow[]) ?? []));
   }, [supabase, conferenceId]);
 
+  const loadSelfRollCall = useCallback(
+    async (allocationId: string) => {
+      const { data: rc } = await supabase
+        .from("roll_call_entries")
+        .select("present, attendance")
+        .eq("conference_id", conferenceId)
+        .eq("allocation_id", allocationId)
+        .maybeSingle();
+      if (rc) {
+        const row = rc as { present?: boolean; attendance?: string | null };
+        const att = parseRollAttendance(row.attendance) ?? (row.present === true ? "present_voting" : "absent");
+        setRollSelf(rollAttendanceShortLabel(att));
+        return;
+      }
+      setRollSelf(null);
+    },
+    [supabase, conferenceId]
+  );
+
   useEffect(() => {
     void loadDais();
     void loadPauseEvents();
@@ -169,21 +189,11 @@ export function FloorStatusBar({
           .eq("user_id", user.id)
           .maybeSingle();
         if (!alloc?.id) return;
-        const { data: rc } = await supabase
-          .from("roll_call_entries")
-          .select("present, attendance")
-          .eq("conference_id", conferenceId)
-          .eq("allocation_id", alloc.id)
-          .maybeSingle();
-        if (rc) {
-          const row = rc as { present?: boolean; attendance?: string | null };
-          const att =
-            parseRollAttendance(row.attendance) ?? (row.present === true ? "present_voting" : "absent");
-          setRollSelf(rollAttendanceShortLabel(att));
-        }
+        setSelfAllocationId(alloc.id);
+        await loadSelfRollCall(alloc.id);
       })();
     }
-  }, [supabase, conferenceId, loadQueue, loadDais, loadPauseEvents, observeOnly]);
+  }, [supabase, conferenceId, loadQueue, loadDais, loadPauseEvents, loadSelfRollCall, observeOnly]);
 
   useEffect(() => {
     void loadProcedureSession();
@@ -240,7 +250,7 @@ export function FloorStatusBar({
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "*",
           schema: "public",
           table: "timer_pause_events",
           filter: `conference_id=eq.${conferenceId}`,
@@ -258,7 +268,12 @@ export function FloorStatusBar({
       .channel(`floor-queue-${conferenceId}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "speaker_queue_entries" },
+        {
+          event: "*",
+          schema: "public",
+          table: "speaker_queue_entries",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
         () => void loadQueue()
       )
       .subscribe();
@@ -266,6 +281,32 @@ export function FloorStatusBar({
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId, loadQueue]);
+
+  useEffect(() => {
+    if (observeOnly || !selfAllocationId) return;
+    const ch = supabase
+      .channel(`floor-roll-self-${conferenceId}-${selfAllocationId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "roll_call_entries",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        (payload) => {
+          const row = payload.new as { allocation_id?: string | null } | null;
+          const oldRow = payload.old as { allocation_id?: string | null } | null;
+          if (row?.allocation_id === selfAllocationId || oldRow?.allocation_id === selfAllocationId) {
+            void loadSelfRollCall(selfAllocationId);
+          }
+        }
+      )
+      .subscribe();
+    return () => {
+      void supabase.removeChannel(ch);
+    };
+  }, [supabase, conferenceId, selfAllocationId, loadSelfRollCall, observeOnly]);
 
   const displayQueue = queue.filter((q) => q.status !== "done").slice(0, 8);
   const isLight = theme === "light";
@@ -289,15 +330,15 @@ export function FloorStatusBar({
   const sessionQuickLinks =
     sessionMiniControls === "minimal"
       ? [
-          { href: "/chair/session", label: "Session" },
-          { href: "/chair/session/timer", label: "Timer" },
+          { href: "/chair/session", label: t("quickLinkSession") },
+          { href: "/chair/session/timer", label: t("quickLinkTimer") },
         ]
       : [
-          { href: "/chair/session", label: "Session" },
-          { href: "/chair/session/roll-call", label: "Roll" },
-          { href: "/chair/session/speakers", label: "Speakers" },
-          { href: "/chair/session/motions", label: "Motions" },
-          { href: "/chair/session/timer", label: "Timer" },
+          { href: "/chair/session", label: t("quickLinkSession") },
+          { href: "/chair/session/roll-call", label: t("quickLinkRoll") },
+          { href: "/chair/session/speakers", label: t("quickLinkSpeakers") },
+          { href: "/chair/session/motions", label: t("quickLinkMotions") },
+          { href: "/chair/session/timer", label: t("quickLinkTimer") },
         ];
 
   const sessionElapsedRow = (
