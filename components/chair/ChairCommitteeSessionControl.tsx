@@ -9,6 +9,7 @@ import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { committeeSessionEndTimestampMs, formatCountdownOrElapsed } from "@/lib/committee-session-end";
 
 type EndMode = "none" | "duration" | "until";
+const SESSION_STATE_UPDATED_EVENT = "intermun:committee-session-updated";
 
 type ProcedureRow = {
   state: string;
@@ -375,9 +376,10 @@ export function ChairCommitteeSessionControl({
             updated_at: now,
           })
           .eq("conference_id", conferenceId);
-        setMsg(
-          error ? friendlySessionColumnError(error.message) ?? error.message : null
-        );
+        setMsg(error ? friendlySessionColumnError(error.message) ?? error.message : null);
+        if (!error) {
+          window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
+        }
       } else {
         const { error } = await supabase.from("procedure_states").insert({
           conference_id: conferenceId,
@@ -389,9 +391,10 @@ export function ChairCommitteeSessionControl({
           ...timingUpdate,
           updated_at: now,
         });
-        setMsg(
-          error ? friendlySessionColumnError(error.message) ?? error.message : null
-        );
+        setMsg(error ? friendlySessionColumnError(error.message) ?? error.message : null);
+        if (!error) {
+          window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
+        }
       }
       void refresh();
     });
@@ -427,6 +430,9 @@ export function ChairCommitteeSessionControl({
       setMsg(
         error ? friendlySessionColumnError(error.message) ?? error.message : null
       );
+      if (!error) {
+        window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
+      }
       void refresh();
     });
   }
@@ -459,6 +465,7 @@ export function ChairCommitteeSessionControl({
         setMsg(friendlySessionColumnError(error.message) ?? error.message);
       } else {
         setMsg(`ok:${t("sessionLimitUpdated")}`);
+        window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
       }
       void refresh();
     });

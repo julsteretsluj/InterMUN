@@ -32,6 +32,7 @@ type ActiveMotionRow = {
 };
 
 type FloorTheme = "dark" | "light";
+const SESSION_STATE_UPDATED_EVENT = "intermun:committee-session-updated";
 
 function formatSessionElapsed(startIso: string, nowMs: number): string {
   const t0 = new Date(startIso).getTime();
@@ -206,6 +207,18 @@ export function FloorStatusBar({
       void supabase.removeChannel(ch);
     };
   }, [supabase, conferenceId, loadProcedureSession]);
+
+  useEffect(() => {
+    function handleSessionUpdate(event: Event) {
+      const detail = (event as CustomEvent<{ conferenceId?: string }>).detail;
+      if (detail?.conferenceId && detail.conferenceId !== conferenceId) return;
+      void loadProcedureSession();
+    }
+    window.addEventListener(SESSION_STATE_UPDATED_EVENT, handleSessionUpdate as EventListener);
+    return () => {
+      window.removeEventListener(SESSION_STATE_UPDATED_EVENT, handleSessionUpdate as EventListener);
+    };
+  }, [conferenceId, loadProcedureSession]);
 
   const sessionEndMs =
     sessionStartedAt != null
