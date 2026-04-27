@@ -71,8 +71,8 @@ export function FloorStatusBar({
   theme?: FloorTheme;
   /** When set, show current motion + floor timer above dais / speakers (e.g. delegate committee room). */
   activeMotionVoteItemId?: string | null;
-  /** Session quick links: full for chairs/staff, minimal for delegates/non-chair panels. */
-  sessionMiniControls?: "full" | "minimal";
+  /** Session quick links: full for chairs/staff, minimal for compact chair panels, none for read-only/delegate views. */
+  sessionMiniControls?: "full" | "minimal" | "none";
 }) {
   const t = useTranslations("views.session.floorStatus");
   const supabase = createClient();
@@ -374,21 +374,23 @@ export function FloorStatusBar({
           </span>
         </>
       ) : null}
-      <div className="ml-auto flex flex-wrap items-center gap-1">
-        {sessionQuickLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={
-              isLight
-                ? "rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white"
-                : "rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
-            }
-          >
-            {link.label}
-          </Link>
-        ))}
-      </div>
+      {sessionMiniControls === "none" ? null : (
+        <div className="ml-auto flex flex-wrap items-center gap-1">
+          {sessionQuickLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={
+                isLight
+                  ? "rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white"
+                  : "rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 

@@ -426,7 +426,7 @@ export function CommitteeRoomDigitalMUNClient({
                   conferenceId={floorConferenceId}
                   observeOnly={false}
                   theme="dark"
-                  sessionMiniControls="minimal"
+                  sessionMiniControls="none"
                   activeMotionVoteItemId={
                     procedureState === "voting_procedure" ? (currentVoteItemId ?? null) : null
                   }
