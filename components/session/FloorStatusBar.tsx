@@ -416,7 +416,9 @@ export function FloorStatusBar({
             const title = motion.title?.trim() || tActiveMotion("motionFallback");
             return (
               <div key={motion.id} className={isCurrent ? cardActive : card}>
-                <p className={`${muted} truncate`}>{isCurrent ? tActiveMotion("currentMotion") : t("quickLinkMotions")}</p>
+                <p className={`${muted} truncate`}>
+                  {isCurrent ? tActiveMotion("currentMotion") : tActiveMotion("motionFallback")}
+                </p>
                 <p className="truncate text-xs font-semibold text-brand-navy">{title}</p>
                 <p className="mt-0.5 text-[0.65rem] text-brand-navy/80">
                   {(motion.vote_type || "motion").replace(/_/g, " ")} ·{" "}
