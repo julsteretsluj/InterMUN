@@ -215,7 +215,7 @@ export function TabNav({
   if (variant === "aspire-sidebar") {
     return (
       <nav
-        aria-label="Main navigation"
+        aria-label={t("mainNavigationAria")}
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
         <div className="px-1 pb-2 pt-1 group-hover:px-2">
@@ -275,7 +275,7 @@ export function TabNav({
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <nav
-        aria-label="Main navigation"
+        aria-label={t("mainNavigationAria")}
         className="mx-auto max-w-2xl overflow-x-auto overflow-y-hidden overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]"
       >
         <div className="flex min-w-full flex-col gap-1.5">

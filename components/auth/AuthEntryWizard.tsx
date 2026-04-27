@@ -19,15 +19,13 @@ const ROLE_RING_HEX = ["#1DB954", "#3366FF", "#FF00E5"] as const;
 
 const ROLES: {
   id: InterMunEntryRole;
-  label: string;
-  hint: string;
   Icon: LucideIcon;
   /** Center icon tint */
   accentHex: string;
 }[] = [
-  { id: "chair", label: "Chair", hint: "(the dais)", Icon: Armchair, accentHex: ROLE_RING_HEX[0]! },
-  { id: "delegate", label: "Delegate", hint: "(your committee)", Icon: Users, accentHex: ROLE_RING_HEX[1]! },
-  { id: "secretariat", label: "Secretariat", hint: "(event staff)", Icon: Building2, accentHex: ROLE_RING_HEX[2]! },
+  { id: "chair", Icon: Armchair, accentHex: ROLE_RING_HEX[0]! },
+  { id: "delegate", Icon: Users, accentHex: ROLE_RING_HEX[1]! },
+  { id: "secretariat", Icon: Building2, accentHex: ROLE_RING_HEX[2]! },
 ];
 
 function roleRingConicGradient(): string {
@@ -158,7 +156,7 @@ export function AuthEntryWizard({
       setError(
         err instanceof Error
           ? err.message
-          : "Could not connect to authentication (check Supabase env vars)."
+          : t("authConnectError")
       );
       return;
     }
@@ -194,7 +192,7 @@ export function AuthEntryWizard({
       setError(
         err instanceof Error
           ? err.message
-          : "Could not connect to authentication (check Supabase env vars)."
+          : t("authConnectError")
       );
       return;
     }
@@ -295,7 +293,7 @@ export function AuthEntryWizard({
                 minLength={4}
                 disabled={conferencePending}
                 className="w-full px-3 py-2.5 rounded-lg border border-brand-navy/15 bg-black/[0.06] dark:bg-black/25 text-brand-navy font-mono tracking-wide text-center text-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-                placeholder="e.g. SEAMUNI2027"
+                placeholder={t("conferenceCodePlaceholder")}
               />
               <p className="text-xs text-brand-muted mt-1.5">
                 {t("conferenceCodeHelp")}
@@ -352,7 +350,7 @@ export function AuthEntryWizard({
                   type="button"
                   onClick={() => cycle(-1)}
                   className="rounded-full border border-brand-navy/15 p-2 text-brand-navy hover:bg-brand-navy/5 dark:border-white/20"
-                  aria-label="Previous role"
+                  aria-label={t("previousRoleAria")}
                 >
                   <ChevronLeft className="size-6" />
                 </button>
@@ -363,7 +361,7 @@ export function AuthEntryWizard({
                   aria-valuenow={roleIndex}
                   aria-valuemin={0}
                   aria-valuemax={nRoles - 1}
-                  aria-label="Select role"
+                  aria-label={t("selectRoleAria")}
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowRight" || e.key === "ArrowDown") {
@@ -405,7 +403,7 @@ export function AuthEntryWizard({
                   type="button"
                   onClick={() => cycle(1)}
                   className="rounded-full border border-brand-navy/15 p-2 text-brand-navy hover:bg-brand-navy/5 dark:border-white/20"
-                  aria-label="Next role"
+                  aria-label={t("nextRoleAria")}
                 >
                   <ChevronRight className="size-6" />
                 </button>

@@ -13,6 +13,7 @@ import { saveAwardAssignment, deleteAwardAssignment } from "@/app/actions/awards
 import type { AwardAssignment } from "@/types/database";
 import { Trash2, Plus, Award } from "lucide-react";
 import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
+import { useTranslations } from "next-intl";
 
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
@@ -42,6 +43,7 @@ export function AwardsManagerClient({
   /** When true (SMT final awards tab): add certificate checkboxes and print selected. */
   enableCertificatePrint?: boolean;
 }) {
+  const t = useTranslations("awardsManager");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
@@ -169,7 +171,7 @@ export function AwardsManagerClient({
       const res = await saveAwardAssignment(fd);
       if (res.error) setErr(res.error);
       else {
-        setMsg(form.id ? "Updated." : "Saved.");
+        setMsg(form.id ? t("updated") : t("saved"));
         resetForm();
         await router.refresh();
       }
@@ -177,12 +179,12 @@ export function AwardsManagerClient({
   }
 
   function remove(id: string) {
-    if (!confirm("Remove this award row?")) return;
+    if (!confirm(t("removeConfirm"))) return;
     startTransition(async () => {
       const res = await deleteAwardAssignment(id);
       if (res.error) setErr(res.error);
       else {
-        setMsg("Removed.");
+        setMsg(t("removed"));
         await router.refresh();
       }
     });
@@ -225,23 +227,31 @@ export function AwardsManagerClient({
           a.recipient_profile_id != null
             ? profileById[a.recipient_profile_id] ?? a.recipient_profile_id.slice(0, 8)
             : a.recipient_committee_id != null
-              ? committeeById[a.recipient_committee_id] ?? "—"
-              : "—";
+              ? committeeById[a.recipient_committee_id] ?? t("dash")
+              : t("dash");
         const comm =
-          a.committee_conference_id != null ? committeeById[a.committee_conference_id] ?? "—" : "—";
+          a.committee_conference_id != null
+            ? committeeById[a.committee_conference_id] ?? t("dash")
+            : t("dash");
         return `<tr><td>${escapeHtml(m?.label ?? a.category)}</td><td>${escapeHtml(comm)}</td><td>${escapeHtml(
           String(recip)
-        )}</td><td>${escapeHtml(a.notes?.trim() || "—")}</td></tr>`;
+        )}</td><td>${escapeHtml(a.notes?.trim() || t("dash"))}</td></tr>`;
       })
       .join("");
-    w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Certificate list</title>
+    w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"/><title>${escapeHtml(t("certificateListTitle"))}</title>
 <style>
 body{font-family:system-ui,sans-serif;padding:24px;color:#111}
 h1{font-size:1.25rem;margin-bottom:16px}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{border:1px solid #ccc;padding:8px;text-align:left}
 th{background:#f4f4f5}
-</style></head><body><h1>Award certificates — selected recipients</h1><table><thead><tr><th>Award</th><th>Committee</th><th>Recipient</th><th>Notes</th></tr></thead><tbody>${bodyRows}</tbody></table></body></html>`);
+</style></head><body><h1>${escapeHtml(
+      t("awardCertificatesSelectedRecipients")
+    )}</h1><table><thead><tr><th>${escapeHtml(t("award"))}</th><th>${escapeHtml(
+      t("committee")
+    )}</th><th>${escapeHtml(t("recipient"))}</th><th>${escapeHtml(
+      t("notes")
+    )}</th></tr></thead><tbody>${bodyRows}</tbody></table></body></html>`);
     w.document.close();
     w.focus();
     w.print();
@@ -254,11 +264,10 @@ th{background:#f4f4f5}
         <p className="flex items-start gap-2">
           <Award className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
           <span>
-            SMT award structure: <strong className="text-brand-navy">Overall</strong> and{" "}
-            <strong className="text-brand-navy">Chair / collective</strong> awards use the same SEAMUN band rubric as
-            the chair Score page (every criterion 1–8 before save).{" "}
-            <strong className="text-brand-navy">Committee-level</strong> trophies here are recipient / approval only—scores
-            live in chair nominations (first tab). Delegates see only rows where they are the recipient.
+            {t("smtAwardStructurePrefix")} <strong className="text-brand-navy">{t("overall")}</strong>{" "}
+            {t("smtAwardStructureMiddle")}{" "}
+            <strong className="text-brand-navy">{t("chairCollective")}</strong> {t("smtAwardStructureMiddle2")}{" "}
+            <strong className="text-brand-navy">{t("committeeLevel")}</strong> {t("smtAwardStructureSuffix")}
           </span>
         </p>
       </div>
@@ -275,12 +284,12 @@ th{background:#f4f4f5}
       )}
 
       <section>
-        <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">Add or edit entry</h3>
+        <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">{t("addOrEditEntry")}</h3>
         <form onSubmit={submitForm} className="space-y-4 rounded-xl border border-brand-navy/10 p-4 md:p-5 bg-brand-paper">
           <input type="hidden" name="id" value={form.id} />
           <div className="grid sm:grid-cols-2 gap-4">
             <label className="block text-sm">
-              <span className="text-brand-muted text-xs uppercase">Award</span>
+              <span className="text-brand-muted text-xs uppercase">{t("award")}</span>
               <select
                 name="category"
                 className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
@@ -300,7 +309,7 @@ th{background:#f4f4f5}
             </label>
             {meta?.scope === "committee" && (
               <label className="block text-sm">
-                <span className="text-brand-muted text-xs uppercase">Committee session</span>
+                <span className="text-brand-muted text-xs uppercase">{t("committeeSession")}</span>
                 <select
                   name="committee_conference_id"
                   required
@@ -310,7 +319,7 @@ th{background:#f4f4f5}
                     setForm((f) => ({ ...f, committee_conference_id: e.target.value }))
                   }
                 >
-                  <option value="">Select committee…</option>
+                  <option value="">{t("selectCommittee")}</option>
                   {committeePickerConferences.map((c) => (
                     <option key={c.id} value={c.id}>
                       {committeeOptionLabel(c)}
@@ -329,8 +338,7 @@ th{background:#f4f4f5}
           {rubricCriteria && rubricCriteria.length > 0 ? (
             <div className="space-y-3 rounded-xl border border-brand-accent/28 bg-brand-cream/45 p-3 dark:border-brand-accent/35 dark:bg-black/25">
               <p className="text-xs leading-relaxed text-brand-muted">
-                Individual criteria (Beginning → Exemplary, then low/high). Same mechanism as committee nomination
-                scoring—required before save.
+                {t("individualCriteriaHelp")}
               </p>
               <div className="grid gap-3">
                 {rubricCriteria.map((criterion) => (
@@ -343,17 +351,16 @@ th{background:#f4f4f5}
                 ))}
               </div>
               <p className="font-mono text-xs text-brand-navy dark:text-zinc-200">
-                Rubric total: {rubricNumericTotalForAssignment(rubricScores, form.category)}/
+                {t("rubricTotal")}: {rubricNumericTotalForAssignment(rubricScores, form.category)}/
                 {maxRubricPointsForAwardCategory(form.category)}{" "}
-                <span className="text-brand-muted" title="Band initials">
+                <span className="text-brand-muted" title={t("bandInitials")}>
                   ({rubricBandInitialsForAssignment(rubricScores, form.category)})
                 </span>
               </p>
             </div>
           ) : meta?.scope === "committee" ? (
             <p className="text-xs leading-relaxed text-brand-muted border-l-2 border-slate-300 pl-3 dark:border-zinc-600">
-              Committee-scoped awards: record the recipient here for the public list only. Detailed rubric scores come
-              from approved chair nominations (Award submissions tab)—no duplicate scoring on this row.
+              {t("committeeScopedAwardsHelp")}
             </p>
           ) : null}
 
@@ -361,7 +368,7 @@ th{background:#f4f4f5}
             meta?.scope === "collective_person" ||
             meta?.scope === "committee") && (
             <label className="block text-sm">
-              <span className="text-brand-muted text-xs uppercase">Recipient (delegate / chair)</span>
+              <span className="text-brand-muted text-xs uppercase">{t("recipientDelegateChair")}</span>
               <select
                 name="recipient_profile_id"
                 className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
@@ -370,10 +377,10 @@ th{background:#f4f4f5}
                   setForm((f) => ({ ...f, recipient_profile_id: e.target.value }))
                 }
               >
-                <option value="">— Not set —</option>
+                <option value="">{t("notSet")}</option>
                 {profileOptions.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {(p.name || "No name").trim()} ({p.id.slice(0, 8)}…)
+                    {(p.name || t("noName")).trim()} ({p.id.slice(0, 8)}…)
                   </option>
                 ))}
               </select>
@@ -382,7 +389,7 @@ th{background:#f4f4f5}
 
           {meta?.scope === "collective_committee" && (
             <label className="block text-sm">
-              <span className="text-brand-muted text-xs uppercase">Winning committee</span>
+              <span className="text-brand-muted text-xs uppercase">{t("winningCommittee")}</span>
               <select
                 name="recipient_committee_id"
                 className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/30"
@@ -391,7 +398,7 @@ th{background:#f4f4f5}
                   setForm((f) => ({ ...f, recipient_committee_id: e.target.value }))
                 }
               >
-                <option value="">— Not set —</option>
+                <option value="">{t("notSet")}</option>
                 {committeePickerConferences.map((c) => (
                   <option key={c.id} value={c.id}>
                     {committeeOptionLabel(c)}
@@ -403,7 +410,7 @@ th{background:#f4f4f5}
 
           {meta?.id === "committee_honourable_mention" ? (
             <label className="block text-sm">
-              <span className="text-brand-muted text-xs uppercase">Slot (1 or 2)</span>
+              <span className="text-brand-muted text-xs uppercase">{t("slotOneOrTwo")}</span>
               <input
                 type="number"
                 name="sort_order"
@@ -419,14 +426,14 @@ th{background:#f4f4f5}
           )}
 
           <label className="block text-sm">
-            <span className="text-brand-muted text-xs uppercase">Notes (statement of confirmation, evidence)</span>
+            <span className="text-brand-muted text-xs uppercase">{t("notesConfirmationEvidence")}</span>
             <textarea
               name="notes"
               rows={3}
               className="mt-1 w-full px-3 py-2 rounded-lg border border-brand-navy/15"
               value={form.notes}
               onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
-              placeholder="Optional internal notes for SMT review…"
+              placeholder={t("optionalInternalNotes")}
             />
           </label>
 
@@ -437,7 +444,7 @@ th{background:#f4f4f5}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-accent text-white font-medium disabled:opacity-50"
             >
               <Plus className="w-4 h-4" />
-              {form.id ? "Update" : "Add"} award
+              {form.id ? t("update") : t("add")} {t("awardLower")}
             </button>
             {form.id && (
               <button
@@ -445,7 +452,7 @@ th{background:#f4f4f5}
                 onClick={resetForm}
                 className="px-4 py-2 rounded-lg border border-brand-navy/20 text-sm"
               >
-                Cancel edit
+                {t("cancelEdit")}
               </button>
             )}
           </div>
@@ -453,23 +460,23 @@ th{background:#f4f4f5}
       </section>
 
       <section>
-        <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">Current list</h3>
+        <h3 className="font-display text-lg font-semibold text-brand-navy mb-3">{t("currentList")}</h3>
         {enableCertificatePrint && ordered.length > 0 ? (
           <div className="mb-3 flex flex-wrap items-center gap-3 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-2 text-sm">
-            <span className="text-brand-muted">Certificate printing</span>
+            <span className="text-brand-muted">{t("certificatePrinting")}</span>
             <button
               type="button"
               onClick={selectAllCerts}
               className="rounded-md border border-brand-navy/20 px-2 py-1 text-xs font-medium text-brand-navy hover:bg-brand-paper"
             >
-              Select all
+              {t("selectAll")}
             </button>
             <button
               type="button"
               onClick={clearCertSelection}
               className="rounded-md border border-brand-navy/20 px-2 py-1 text-xs font-medium text-brand-navy hover:bg-brand-paper"
             >
-              Clear
+              {t("clear")}
             </button>
             <button
               type="button"
@@ -477,9 +484,9 @@ th{background:#f4f4f5}
               disabled={certSelected.size === 0}
               className="rounded-md bg-brand-accent px-3 py-1 text-xs font-semibold text-white disabled:opacity-40"
             >
-              Print selected
+              {t("printSelected")}
             </button>
-            <span className="text-xs text-brand-muted">{certSelected.size} selected</span>
+            <span className="text-xs text-brand-muted">{t("selectedCount", { count: certSelected.size })}</span>
           </div>
         ) : null}
         <div className="overflow-x-auto rounded-xl border border-brand-navy/10">
@@ -488,14 +495,14 @@ th{background:#f4f4f5}
               <tr className="border-b border-brand-navy/10 bg-brand-cream/80">
                 {enableCertificatePrint ? (
                   <th className="px-2 py-2 w-10 font-semibold text-brand-navy text-center" scope="col">
-                    <span className="sr-only">Certificate</span>
+                    <span className="sr-only">{t("certificate")}</span>
                   </th>
                 ) : null}
-                <th className="px-3 py-2 font-semibold text-brand-navy">Award</th>
-                <th className="px-3 py-2 font-semibold text-brand-navy">Committee</th>
-                <th className="px-3 py-2 font-semibold text-brand-navy">Recipient</th>
-                <th className="px-3 py-2 font-semibold text-brand-navy">Rubric</th>
-                <th className="px-3 py-2 font-semibold text-brand-navy">Notes</th>
+                <th className="px-3 py-2 font-semibold text-brand-navy">{t("award")}</th>
+                <th className="px-3 py-2 font-semibold text-brand-navy">{t("committee")}</th>
+                <th className="px-3 py-2 font-semibold text-brand-navy">{t("recipient")}</th>
+                <th className="px-3 py-2 font-semibold text-brand-navy">{t("rubric")}</th>
+                <th className="px-3 py-2 font-semibold text-brand-navy">{t("notes")}</th>
                 <th className="px-3 py-2 w-24" />
               </tr>
             </thead>
@@ -503,7 +510,7 @@ th{background:#f4f4f5}
               {ordered.length === 0 ? (
                 <tr>
                   <td colSpan={enableCertificatePrint ? 7 : 6} className="px-3 py-8 text-center text-brand-muted">
-                    No award rows yet.
+                    {t("noAwardRowsYet")}
                   </td>
                 </tr>
               ) : (
@@ -513,12 +520,12 @@ th{background:#f4f4f5}
                     a.recipient_profile_id != null
                       ? profileById[a.recipient_profile_id] ?? a.recipient_profile_id.slice(0, 8)
                       : a.recipient_committee_id != null
-                        ? committeeById[a.recipient_committee_id] ?? "—"
-                        : "—";
+                        ? committeeById[a.recipient_committee_id] ?? t("dash")
+                        : t("dash");
                   const comm =
                     a.committee_conference_id != null
-                      ? committeeById[a.committee_conference_id] ?? "—"
-                      : "—";
+                      ? committeeById[a.committee_conference_id] ?? t("dash")
+                      : t("dash");
                   return (
                     <tr key={a.id} className="border-b border-brand-navy/5">
                       {enableCertificatePrint ? (
@@ -527,7 +534,7 @@ th{background:#f4f4f5}
                             type="checkbox"
                             checked={certSelected.has(a.id)}
                             onChange={(e) => toggleCert(a.id, e.target.checked)}
-                            aria-label={`Include in certificate print: ${m?.label ?? a.category}`}
+                            aria-label={t("includeInCertificatePrint", { label: m?.label ?? a.category })}
                             className="h-4 w-4 rounded border-brand-navy/30"
                           />
                         </td>
@@ -555,11 +562,11 @@ th{background:#f4f4f5}
                             </span>
                           </>
                         ) : (
-                          <span className="text-brand-muted">—</span>
+                          <span className="text-brand-muted">{t("dash")}</span>
                         )}
                       </td>
                       <td className="px-3 py-2 text-brand-muted align-top max-w-xs truncate">
-                        {a.notes || "—"}
+                        {a.notes || t("dash")}
                       </td>
                       <td className="px-3 py-2 align-top">
                         <div className="flex gap-2">
@@ -568,7 +575,7 @@ th{background:#f4f4f5}
                             onClick={() => editRow(a)}
                             className="text-xs text-brand-accent hover:underline"
                           >
-                            Edit
+                            {t("edit")}
                           </button>
                           <button
                             type="button"
@@ -576,7 +583,7 @@ th{background:#f4f4f5}
                             className="text-xs text-red-600 hover:underline inline-flex items-center gap-0.5"
                           >
                             <Trash2 className="w-3 h-3" />
-                            Remove
+                            {t("remove")}
                           </button>
                         </div>
                       </td>

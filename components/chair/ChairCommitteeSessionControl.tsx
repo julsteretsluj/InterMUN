@@ -41,7 +41,7 @@ function modeFromRow(durationSeconds: number | null, endsAt: string | null): End
 
 function formatSessionElapsed(startIso: string, nowMs: number): string {
   const t0 = new Date(startIso).getTime();
-  if (Number.isNaN(t0)) return "—";
+  if (Number.isNaN(t0)) return "--";
   let sec = Math.max(0, Math.floor((nowMs - t0) / 1000));
   const h = Math.floor(sec / 3600);
   sec %= 3600;
@@ -105,7 +105,7 @@ export function ChairCommitteeSessionControl({
 
   function friendlySessionColumnError(message: string | null | undefined): string | null {
     if (!isSessionColumnCacheError(message)) return null;
-    return "Session controls are temporarily unavailable until the latest database migrations are applied.";
+    return t("migrationUnavailable");
   }
 
   const refresh = useCallback(async () => {
@@ -348,12 +348,12 @@ export function ChairCommitteeSessionControl({
       if (endMode === "until" && timing.committee_session_ends_at) {
         const endMs = new Date(timing.committee_session_ends_at).getTime();
         if (!Number.isNaN(endMs) && endMs <= Date.now()) {
-          setMsg("Choose an end time in the future, or switch to no limit.");
+          setMsg(t("endTimeInFuture"));
           return;
         }
       }
       if (!supportsSessionStartColumn) {
-        setMsg("Session start timestamp is unavailable until latest migrations are applied.");
+        setMsg(t("sessionStartUnavailable"));
         return;
       }
       const row = await loadFullRow();
@@ -401,7 +401,7 @@ export function ChairCommitteeSessionControl({
     setMsg(null);
     startTransition(async () => {
       if (!supportsSessionStartColumn) {
-        setMsg("Session start timestamp is unavailable until latest migrations are applied.");
+        setMsg(t("sessionStartUnavailable"));
         return;
       }
       if (titleDebounceRef.current) {
@@ -439,7 +439,7 @@ export function ChairCommitteeSessionControl({
       if (endMode === "until" && timing.committee_session_ends_at) {
         const endMs = new Date(timing.committee_session_ends_at).getTime();
         if (!Number.isNaN(endMs) && endMs <= Date.now()) {
-          setMsg("Choose an end time in the future, or set no limit.");
+          setMsg(t("endTimeInFutureSetNoLimit"));
           return;
         }
       }
@@ -458,7 +458,7 @@ export function ChairCommitteeSessionControl({
       if (error) {
         setMsg(friendlySessionColumnError(error.message) ?? error.message);
       } else {
-        setMsg("ok:Session limit updated.");
+        setMsg(`ok:${t("sessionLimitUpdated")}`);
       }
       void refresh();
     });
@@ -482,13 +482,12 @@ export function ChairCommitteeSessionControl({
     <div className="space-y-6">
       <div className="rounded-2xl border border-white/15 bg-black/25 p-6 shadow-sm backdrop-blur-sm md:p-8">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">Committee session</h3>
-          <HelpButton title="Committee session">
-            Start begins the live committee session timer/status for everyone. Stop ends the session and clears the
-            current time limit.
+          <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
+          <HelpButton title={t("title")}>
+            {t("helpStartStop")}
           </HelpButton>
         </div>
-        <p className="mt-1 text-sm text-brand-muted">Start or stop the committee session.</p>
+        <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
 
         <div className="mt-4 space-y-1.5">
           <label className="block text-xs font-semibold uppercase tracking-wide text-brand-muted" htmlFor="committee-session-title">
@@ -519,44 +518,46 @@ export function ChairCommitteeSessionControl({
         {live && startedAt ? (
           <div className="mt-4 space-y-1.5">
             <p className="text-sm font-medium text-brand-navy">
-              Started:{" "}
+              {t("startedLabel")}{" "}
               <time dateTime={startedAt}>{new Date(startedAt).toLocaleString()}</time>
             </p>
             <p className="text-sm text-brand-navy">
-              <span className="font-semibold">Time in:</span>{" "}
-              <span className="font-mono tabular-nums">{elapsedText ?? "—"}</span>
+              <span className="font-semibold">{t("timeInLabel")}</span>{" "}
+              <span className="font-mono tabular-nums">{elapsedText ?? "--"}</span>
               {countdown ? (
                 <>
                   <span className="mx-2 text-brand-muted/60">•</span>
-                  <span className="font-semibold">Time until end:</span>{" "}
+                  <span className="font-semibold">{t("timeUntilEndLabel")}</span>{" "}
                   <span className="font-mono tabular-nums">
-                    {countdown.label === "remaining" ? countdown.text : `over by ${countdown.text}`}
+                    {countdown.label === "remaining"
+                      ? countdown.text
+                      : t("overByValue", { value: countdown.text })}
                   </span>
                 </>
               ) : (
                 <>
                   <span className="mx-2 text-brand-muted/60">•</span>
-                  <span className="font-semibold">Mode:</span> Stopwatch (no time limit)
+                  <span className="font-semibold">{t("modeLabel")}</span> {t("modeStopwatchNoLimit")}
                 </>
               )}
             </p>
           </div>
         ) : (
-          <p className="mt-4 text-sm text-brand-muted">Session is not running.</p>
+          <p className="mt-4 text-sm text-brand-muted">{t("sessionNotRunning")}</p>
         )}
 
         <div className="mt-6 space-y-4 rounded-xl border border-white/10 bg-black/20 p-4">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Session limit</p>
-            <HelpButton title="Session limit modes">
-              None: no end. Time budget: counts from start. End at: fixed clock time in your local timezone.
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{t("sessionLimit")}</p>
+            <HelpButton title={t("sessionLimitModesTitle")}>
+              {t("sessionLimitModesHelp")}
             </HelpButton>
           </div>
           <p className="text-xs text-brand-muted">
-            Optional. <strong className="font-medium text-brand-navy/90">None</strong> runs until you stop.{" "}
-            <strong className="font-medium text-brand-navy/90">Time budget</strong> counts from the moment you start.{" "}
-            <strong className="font-medium text-brand-navy/90">End time</strong> uses a fixed clock time (overrides
-            budget if both were ever set).
+            {t("sessionLimitOptional")} <strong className="font-medium text-brand-navy/90">{t("noneLabel")}</strong>{" "}
+            {t("noneDescription")} <strong className="font-medium text-brand-navy/90">{t("timeBudgetLabel")}</strong>{" "}
+            {t("timeBudgetDescription")} <strong className="font-medium text-brand-navy/90">{t("endTimeLabel")}</strong>{" "}
+            {t("endTimeDescription")}
           </p>
 
           <label className={radioLabel}>
@@ -568,8 +569,8 @@ export function ChairCommitteeSessionControl({
               onChange={() => setEndMode("none")}
             />
             <span>
-              <span className="font-medium">None (indefinite)</span>
-              <span className="block text-xs text-brand-muted">No scheduled end; only elapsed time is shown.</span>
+              <span className="font-medium">{t("noneIndefinite")}</span>
+              <span className="block text-xs text-brand-muted">{t("noneScheduledEndHint")}</span>
             </span>
           </label>
 
@@ -582,11 +583,11 @@ export function ChairCommitteeSessionControl({
               onChange={() => setEndMode("duration")}
             />
             <span className="min-w-0 flex-1">
-              <span className="font-medium">Time budget from start</span>
+              <span className="font-medium">{t("timeBudgetFromStart")}</span>
               {endMode === "duration" ? (
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <span className={fieldWrap}>
-                    <label className="text-xs text-brand-muted">Hours</label>
+                    <label className="text-xs text-brand-muted">{t("hoursLabel")}</label>
                     <input
                       type="number"
                       min={0}
@@ -597,7 +598,7 @@ export function ChairCommitteeSessionControl({
                     />
                   </span>
                   <span className={fieldWrap}>
-                    <label className="text-xs text-brand-muted">Minutes</label>
+                    <label className="text-xs text-brand-muted">{t("minutesLabel")}</label>
                     <input
                       type="number"
                       min={0}
@@ -607,7 +608,7 @@ export function ChairCommitteeSessionControl({
                       onChange={(e) => setDurMinutes(Number(e.target.value) || 0)}
                     />
                   </span>
-                  <span className="text-xs text-brand-muted">(minimum 1 minute)</span>
+                  <span className="text-xs text-brand-muted">{t("minimumOneMinute")}</span>
                 </div>
               ) : null}
             </span>
@@ -622,7 +623,7 @@ export function ChairCommitteeSessionControl({
               onChange={() => setEndMode("until")}
             />
             <span className="min-w-0 flex-1">
-              <span className="font-medium">End at (local time)</span>
+              <span className="font-medium">{t("endAtLocalTime")}</span>
               {endMode === "until" ? (
                 <input
                   type="datetime-local"
@@ -645,7 +646,7 @@ export function ChairCommitteeSessionControl({
                 className="inline-flex items-center gap-2 rounded-xl border border-rose-400/60 bg-rose-500/10 px-5 py-3 text-sm font-semibold text-rose-800 hover:bg-rose-500/20 disabled:opacity-50 dark:border-rose-400/50 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25"
               >
                 <span aria-hidden>⏹️</span>
-                Stop session
+                {t("stopSession")}
               </button>
               <button
                 type="button"
@@ -653,10 +654,10 @@ export function ChairCommitteeSessionControl({
                 onClick={saveScheduleWhileLive}
                 className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-brand-navy hover:bg-white/15 disabled:opacity-50"
               >
-                Save limit
+                {t("saveLimit")}
               </button>
-              <HelpButton title="Save limit">
-                Applies updated limit settings while the session is already running, without stopping the session.
+              <HelpButton title={t("saveLimit")}>
+                {t("saveLimitHelp")}
               </HelpButton>
             </>
           ) : (
@@ -667,7 +668,7 @@ export function ChairCommitteeSessionControl({
               className="inline-flex items-center gap-2 rounded-xl bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
             >
               <span aria-hidden>▶️</span>
-              Start session
+              {t("startSession")}
             </button>
           )}
         </div>
@@ -684,11 +685,11 @@ export function ChairCommitteeSessionControl({
       </div>
 
       <p className="text-sm text-brand-muted">
-        Use the sidebar for <span className="font-medium text-brand-navy/90">Roll call</span>,{" "}
-        <span className="font-medium text-brand-navy/90">Speakers</span>,{" "}
-        <span className="font-medium text-brand-navy/90">Formal motions</span>,{" "}
-        <span className="font-medium text-brand-navy/90">Timer</span>, and{" "}
-        <span className="font-medium text-brand-navy/90">Announcements</span> — one tool per tab.
+        {t("sidebarUsePrefix")} <span className="font-medium text-brand-navy/90">{t("rollCall")}</span>,{" "}
+        <span className="font-medium text-brand-navy/90">{t("speakers")}</span>,{" "}
+        <span className="font-medium text-brand-navy/90">{t("formalMotions")}</span>,{" "}
+        <span className="font-medium text-brand-navy/90">{t("timer")}</span>, {t("sidebarAnd")}{" "}
+        <span className="font-medium text-brand-navy/90">{t("announcements")}</span> {t("sidebarUseSuffix")}
       </p>
 
       <SessionHistoryPanel conferenceId={conferenceId} />

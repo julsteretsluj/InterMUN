@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { FileCheck, Plus, Users } from "lucide-react";
 import {
   addClauseAction,
@@ -65,6 +66,7 @@ export function ResolutionsView({
   conferenceId: string;
   canCreate: boolean;
 }) {
+  const t = useTranslations("views.resolutions");
   const MAX_RESOLUTIONS_PER_COMMITTEE = 3;
   const canAddResolution = canCreate && resolutions.length < MAX_RESOLUTIONS_PER_COMMITTEE;
   const [showForm, setShowForm] = useState(false);
@@ -177,7 +179,7 @@ export function ResolutionsView({
     setShareStatusByResolution((prev) => ({ ...prev, [resolutionId]: "" }));
     const targetEmail = (shareEmailByResolution[resolutionId] ?? "").trim();
     if (!targetEmail) {
-      setActionError("Enter a delegate email first.");
+      setActionError(t("enterDelegateEmailFirst"));
       return;
     }
 
@@ -190,7 +192,10 @@ export function ResolutionsView({
       setActionError(result.error);
       return;
     }
-    setShareStatusByResolution((prev) => ({ ...prev, [resolutionId]: `Sent to ${result.data.targetEmail}.` }));
+    setShareStatusByResolution((prev) => ({
+      ...prev,
+      [resolutionId]: t("sentToDelegate", { email: result.data.targetEmail }),
+    }));
   }
 
   return (
@@ -201,18 +206,18 @@ export function ResolutionsView({
           className="flex items-center gap-2 px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
         >
           <Plus className="w-4 h-4" />
-          New Resolution
+          {t("newResolution")}
         </button>
       ) : null}
       {canCreate && !canAddResolution ? (
         <p className="text-sm text-brand-muted">
-          This committee already has {MAX_RESOLUTIONS_PER_COMMITTEE} draft resolutions.
+          {t("maxDraftResolutions", { count: MAX_RESOLUTIONS_PER_COMMITTEE })}
         </p>
       ) : null}
       {showForm && (
         <div className="p-4 border rounded-lg border-white/15 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-sm font-medium text-brand-navy">Google Doc link</span>
+            <span className="text-sm font-medium text-brand-navy">{t("googleDocLink")}</span>
             <OpenNewGoogleDocButton className="inline-flex items-center gap-1.5 rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-white/15" />
           </div>
           <input
@@ -221,18 +226,18 @@ export function ResolutionsView({
             onChange={(e) =>
               setForm({ ...form, google_docs_url: e.target.value })
             }
-            placeholder="Google Docs URL (docs.google.com/document/d/… — used for embed + editing)"
+            placeholder={t("googleDocUrlPlaceholder")}
             className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <p className="text-xs text-brand-muted">
-            New Google Doc opens in another tab; copy the URL from the address bar and paste it here.
+            {t("googleDocUrlHelp")}
           </p>
           <input
             value={form.main_submitters}
             onChange={(e) =>
               setForm({ ...form, main_submitters: e.target.value })
             }
-            placeholder="Main submitters (user IDs, comma-separated)"
+            placeholder={t("mainSubmittersPlaceholder")}
             className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <input
@@ -240,7 +245,7 @@ export function ResolutionsView({
             onChange={(e) =>
               setForm({ ...form, co_submitters: e.target.value })
             }
-            placeholder="Co-submitters (user IDs, comma-separated)"
+            placeholder={t("coSubmittersPlaceholder")}
             className="w-full px-3 py-2 border rounded bg-black/30"
           />
           <div className="flex gap-2">
@@ -248,13 +253,13 @@ export function ResolutionsView({
               onClick={createResolution}
               className="px-4 py-2 bg-brand-accent text-white rounded hover:opacity-90"
             >
-              Create
+              {t("create")}
             </button>
             <button
               onClick={() => setShowForm(false)}
               className="px-4 py-2 border rounded hover:bg-white/10"
             >
-              Cancel
+              {t("cancel")}
             </button>
           </div>
         </div>
@@ -279,7 +284,7 @@ export function ResolutionsView({
           const resolutionClauses = clauses.filter((c) => c.resolution_id === r.id);
           const outcomesForResolution = clauseOutcomes.filter((o) => o.resolution_id === r.id);
           const clauseIdToLabel = new Map(
-            resolutionClauses.map((c) => [c.id, `Clause ${c.clause_number}`] as const)
+            resolutionClauses.map((c) => [c.id, t("clauseNumber", { number: c.clause_number })] as const)
           );
           return (
             <div
@@ -297,23 +302,26 @@ export function ResolutionsView({
                         className="text-brand-diplomatic dark:text-brand-accent-bright hover:underline inline-flex items-center gap-2 text-sm font-medium"
                       >
                         <FileCheck className="w-4 h-4 shrink-0" />
-                        Open in new tab
+                        {t("openInNewTab")}
                       </a>
                       <GoogleDocsEmbed googleDocsUrl={r.google_docs_url} />
                     </>
                   ) : (
-                    <span className="text-brand-muted/70 text-brand-muted text-sm">No Google Doc link</span>
+                    <span className="text-brand-muted/70 text-brand-muted text-sm">{t("noGoogleDocLink")}</span>
                   )}
                 </div>
                 {r.visible_to_other_bloc && (
                   <span className="text-xs shrink-0 bg-brand-accent/15 dark:bg-brand-accent/20 text-brand-navy dark:text-brand-accent-bright px-2 py-1 rounded">
-                    Visible to other bloc
+                    {t("visibleToOtherBloc")}
                   </span>
                 )}
               </div>
               <div className="text-sm">
-                Main subs: {r.main_submitters.length} | Co-subs:{" "}
-                {r.co_submitters.length} | Signatories: {r.signatories.length}
+                {t("resolutionCounts", {
+                  main: r.main_submitters.length,
+                  co: r.co_submitters.length,
+                  signatories: r.signatories.length,
+                })}
               </div>
               {resolutionBlocs.length > 0 && (
                 <div className="flex gap-2 items-center">
@@ -328,7 +336,7 @@ export function ResolutionsView({
                           : "bg-black/30 hover:bg-white/10"
                       }`}
                     >
-                      Bloc {b.name} ({b.stance})
+                      {t("blocButton", { name: b.name, stance: b.stance })}
                     </button>
                   ))}
                 </div>
@@ -337,10 +345,10 @@ export function ResolutionsView({
                 onClick={() => signResolution(r.id)}
                 className="text-sm text-brand-diplomatic hover:underline"
               >
-                Sign virtually (main subs notified)
+                {t("signVirtually")}
               </button>
               <div className="rounded border border-white/10 bg-black/15 p-2 space-y-2">
-                <p className="text-xs font-medium text-brand-navy">Share resolution by email</p>
+                <p className="text-xs font-medium text-brand-navy">{t("shareByEmail")}</p>
                 <div className="flex flex-wrap gap-2">
                   <input
                     type="email"
@@ -348,7 +356,7 @@ export function ResolutionsView({
                     onChange={(e) =>
                       setShareEmailByResolution((prev) => ({ ...prev, [r.id]: e.target.value }))
                     }
-                    placeholder="delegate@email.com"
+                    placeholder={t("delegateEmailPlaceholder")}
                     className="min-w-[220px] flex-1 px-2 py-1.5 border rounded bg-black/30 text-sm"
                   />
                   <button
@@ -356,7 +364,7 @@ export function ResolutionsView({
                     onClick={() => void emailResolutionToDelegate(r.id)}
                     className="px-3 py-1.5 rounded bg-brand-accent text-white text-sm hover:opacity-90"
                   >
-                    Send to delegate
+                    {t("sendToDelegate")}
                   </button>
                 </div>
                 {shareStatusByResolution[r.id] ? (
@@ -365,16 +373,16 @@ export function ResolutionsView({
               </div>
 
               <div className="border-t pt-3 mt-2 space-y-2">
-                <p className="text-sm font-medium">Clause editor</p>
+                <p className="text-sm font-medium">{t("clauseEditor")}</p>
                 {resolutionClauses.length === 0 ? (
-                  <p className="text-xs text-brand-muted/70">No clauses yet.</p>
+                  <p className="text-xs text-brand-muted/70">{t("noClausesYet")}</p>
                 ) : (
                   <ul className="space-y-2">
                     {resolutionClauses.map((c) => {
                       const draft = editingClause[c.id] ?? c.clause_text;
                       return (
                         <li key={c.id} className="border rounded p-2 space-y-2">
-                          <p className="text-xs text-brand-muted/70">Clause {c.clause_number}</p>
+                          <p className="text-xs text-brand-muted/70">{t("clauseNumber", { number: c.clause_number })}</p>
                           <textarea
                             className="w-full px-2 py-1 border rounded bg-black/30"
                             value={draft}
@@ -390,14 +398,14 @@ export function ResolutionsView({
                                 className="px-2 py-1 rounded bg-brand-accent text-white text-xs"
                                 onClick={() => void saveClause(c.id)}
                               >
-                                Save clause
+                                {t("saveClause")}
                               </button>
                               <button
                                 type="button"
                                 className="px-2 py-1 rounded border border-red-400/40 text-red-700 text-xs"
                                 onClick={() => void deleteClause(c.id)}
                               >
-                                Delete
+                                {t("delete")}
                               </button>
                             </div>
                           ) : null}
@@ -415,23 +423,23 @@ export function ResolutionsView({
                       onChange={(e) =>
                         setNewClause((prev) => ({ ...prev, [r.id]: e.target.value }))
                       }
-                      placeholder="Add a new clause..."
+                      placeholder={t("addClausePlaceholder")}
                     />
                     <button
                       type="button"
                       className="px-3 py-1 rounded bg-brand-accent text-white text-sm"
                       onClick={() => void addClause(r.id)}
                     >
-                      Add clause
+                      {t("addClause")}
                     </button>
                   </div>
                 ) : null}
               </div>
 
               <div className="border-t pt-3 mt-2 space-y-2">
-                <p className="text-sm font-medium">Clause vote history</p>
+                <p className="text-sm font-medium">{t("clauseVoteHistory")}</p>
                 {outcomesForResolution.length === 0 ? (
-                  <p className="text-xs text-brand-muted/70">No recorded clause vote outcomes yet.</p>
+                  <p className="text-xs text-brand-muted/70">{t("noClauseOutcomesYet")}</p>
                 ) : (
                   <ul className="space-y-1 text-xs">
                     {outcomesForResolution.map((o) => (
@@ -442,12 +450,12 @@ export function ResolutionsView({
                           o.passed ? "border-brand-accent/25 bg-brand-accent/10" : "border-red-200 bg-red-50/60",
                         ].join(" ")}
                       >
-                        <span className="font-medium">{clauseIdToLabel.get(o.clause_id) ?? "Clause"}</span>
+                        <span className="font-medium">{clauseIdToLabel.get(o.clause_id) ?? t("clauseFallback")}</span>
                         <span className={o.passed ? "text-brand-diplomatic" : "text-red-700"}>
-                          {o.passed ? "PASSED" : "FAILED"}
+                          {o.passed ? t("passed") : t("failed")}
                         </span>
                         <span className="text-brand-muted/70">•</span>
-                        <span className="text-brand-muted">Motion {o.vote_item_id.slice(0, 8)}</span>
+                        <span className="text-brand-muted">{t("motionId", { id: o.vote_item_id.slice(0, 8) })}</span>
                         <span className="text-brand-muted/70">•</span>
                         <span className="text-brand-muted/70">{new Date(o.applied_at).toLocaleString()}</span>
                       </li>

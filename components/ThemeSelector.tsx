@@ -21,6 +21,7 @@ import {
   readTextSizeFromStorage,
   readThemeFromStorage,
 } from "@/lib/theme-document";
+import { useTranslations } from "next-intl";
 
 /** Display + accessibility names; picker shows swatches only. */
 const HUE_META: Record<
@@ -41,6 +42,7 @@ const HUE_META: Record<
 };
 
 export function ThemeSelector({ className }: { className?: string }) {
+  const t = useTranslations("themeSelector");
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
   const [hue, setHue] = useState<ThemeHue>(() => readThemeFromStorage().hue);
@@ -129,8 +131,8 @@ export function ThemeSelector({ className }: { className?: string }) {
         )}
         aria-expanded={open}
         aria-haspopup="dialog"
-        title="Theme: color & appearance"
-        aria-label="Open theme settings"
+        title={t("buttonTitle")}
+        aria-label={t("openSettingsAria")}
       >
         <Palette className="size-4" strokeWidth={2} aria-hidden />
       </button>
@@ -139,10 +141,10 @@ export function ThemeSelector({ className }: { className?: string }) {
         <div
           ref={panelRef}
           role="dialog"
-          aria-label="Theme settings"
+          aria-label={t("dialogAria")}
           className="mun-popover absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18.5rem)] p-3"
         >
-          <p className="tag tag-neutral mb-0.5">Appearance</p>
+          <p className="tag tag-neutral mb-0.5">{t("appearance")}</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button
               type="button"
@@ -155,7 +157,7 @@ export function ThemeSelector({ className }: { className?: string }) {
               )}
             >
               <Sun className="size-4" strokeWidth={1.75} aria-hidden />
-              Light
+              {t("light")}
             </button>
             <button
               type="button"
@@ -168,18 +170,19 @@ export function ThemeSelector({ className }: { className?: string }) {
               )}
             >
               <Moon className="size-4" strokeWidth={1.75} aria-hidden />
-              Dark
+              {t("dark")}
             </button>
           </div>
 
-          <p className="tag tag-accent mt-4 mb-1.5">Accent colour</p>
+          <p className="tag tag-accent mt-4 mb-1.5">{t("accentColour")}</p>
           <div
             className="grid grid-cols-4 gap-2"
             role="radiogroup"
-            aria-label="Accent colour"
+            aria-label={t("accentColour")}
           >
             {THEME_HUES.map((h) => {
               const meta = HUE_META[h];
+              const hueLabel = t(`hues.${h}`);
               const active = hue === h;
               return (
                 <button
@@ -187,8 +190,8 @@ export function ThemeSelector({ className }: { className?: string }) {
                   type="button"
                   role="radio"
                   aria-checked={active}
-                  aria-label={meta.name}
-                  title={meta.name}
+                  aria-label={hueLabel}
+                  title={hueLabel}
                   onClick={() => setColorHue(h)}
                   className={cn(
                     "flex items-center justify-center rounded-[var(--radius-md)] p-1.5 transition-apple",
@@ -225,14 +228,14 @@ export function ThemeSelector({ className }: { className?: string }) {
             })}
           </div>
 
-          <p className="tag tag-neutral mt-4 mb-1.5">Typography</p>
+          <p className="tag tag-neutral mt-4 mb-1.5">{t("typography")}</p>
           <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-muted">
             <ALargeSmall className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
-            Text size
+            {t("textSize")}
           </p>
           <div className="space-y-2" role="group" aria-labelledby="text-size-heading">
             <div className="flex items-baseline justify-between gap-2">
-              <span className="text-[0.65rem] font-medium uppercase tracking-wide text-brand-muted">Scale</span>
+              <span className="text-[0.65rem] font-medium uppercase tracking-wide text-brand-muted">{t("scale")}</span>
               <span className="tabular-nums text-sm font-semibold text-brand-navy dark:text-zinc-100">
                 {TEXT_SIZE_STEP_ROOT_PCT[textSizeStep]}%
               </span>
@@ -252,14 +255,14 @@ export function ThemeSelector({ className }: { className?: string }) {
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_8%,var(--color-bg-page))] accent-[color:var(--accent)]"
             />
             <div className="flex justify-between px-0.5 text-[0.65rem] font-medium text-brand-muted">
-              <span>Small</span>
-              <span>Medium</span>
-              <span>Large</span>
+              <span>{t("small")}</span>
+              <span>{t("medium")}</span>
+              <span>{t("large")}</span>
             </div>
           </div>
           <button
             type="button"
-            title="Uses Atkinson Hyperlegible (legibility-oriented) for UI and document text when enabled."
+            title={t("dyslexicTitle")}
             onClick={toggleDyslexicFont}
             className={cn(
               "mt-3 flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
@@ -271,9 +274,9 @@ export function ThemeSelector({ className }: { className?: string }) {
           >
             <span className="inline-flex items-center gap-2">
               <Type className="size-4" strokeWidth={1.75} aria-hidden />
-              Dyslexic-friendly font
+              {t("dyslexicFriendlyFont")}
             </span>
-            <span className="text-xs font-semibold">{dyslexicFont ? "On" : "Off"}</span>
+            <span className="text-xs font-semibold">{dyslexicFont ? t("on") : t("off")}</span>
           </button>
         </div>
       ) : null}

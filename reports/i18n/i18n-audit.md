@@ -1,20 +1,20 @@
 # i18n Audit Report
 
-Generated: 2026-04-26T08:43:28.758Z
+Generated: 2026-04-27T03:03:47.739Z
 
 ## Summary
 
 - Locales: 27
-- Hardcoded string findings: 613
+- Hardcoded string findings: 504
 - Placeholder mismatches: 0
 - Locales with parity issues: 0
 
 ### Hardcoded Findings by Domain
 
-- page_or_layout: 172
+- page_or_layout: 122
 - server_action: 121
 - api: 3
-- component: 193
+- component: 134
 - library_surface: 124
 
 ## Locale Parity
@@ -68,35 +68,6 @@ Generated: 2026-04-26T08:43:28.758Z
 - app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient.tsx:143 [attribute_literal] "Password / code field" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/AwardProgressBars.tsx:51 [jsx_text] "Overall awards completion" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/AwardProgressBars.tsx:116 [jsx_text] "Progress (required)" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:237 [jsx_text] "Certificate list" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Award certificates — selected recipients" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Award" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Committee" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Recipient" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:244 [jsx_text] "Notes" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:257 [jsx_text] "Overall" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:258 [jsx_text] "Chair / collective" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:260 [jsx_text] "Committee-level" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:278 [jsx_text] "Add or edit entry" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:283 [jsx_text] "Award" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:303 [jsx_text] "Committee session" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:313 [jsx_text] "Select committee…" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:348 [attribute_literal] "Band initials" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:364 [jsx_text] "Recipient (delegate / chair)" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:373 [jsx_text] "— Not set —" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:385 [jsx_text] "Winning committee" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:394 [jsx_text] "— Not set —" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:406 [jsx_text] "Slot (1 or 2)" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:422 [jsx_text] "Notes (statement of confirmation, evidence)" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:429 [attribute_literal] "Optional internal notes for SMT review…" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:456 [jsx_text] "Current list" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:459 [jsx_text] "Certificate printing" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:491 [jsx_text] "Certificate" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:494 [jsx_text] "Award" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:495 [jsx_text] "Committee" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:496 [jsx_text] "Recipient" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:497 [jsx_text] "Rubric" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/awards/AwardsManagerClient.tsx:498 [jsx_text] "Notes" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:71 [jsx_text] "= 1 && v" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:78 [jsx_text] ", keys: string[]): Record" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/awards/ChairNominationSlotForm.tsx:82 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
@@ -252,5 +223,34 @@ Generated: 2026-04-26T08:43:28.758Z
 - app/actions/exportMaterials.ts:302 [error_literal] "Missing env var: ${name}" -> suggested prefix: `serverActions.exportMaterials`
 - app/actions/exportMaterials.ts:343 [object_message_literal] "Unknown email sending error" -> suggested prefix: `serverActions.exportMaterials`
 - app/actions/resolutions.ts:42 [object_message_literal] "Only staff can create resolutions." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:44 [object_message_literal] "Invalid conference id." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:51 [object_message_literal] "Maximum of 3 draft resolutions per committee." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:90 [object_message_literal] "Only staff can edit clauses." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:93 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:96 [object_message_literal] "Clause text is required." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:127 [object_message_literal] "Only staff can edit clauses." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:129 [object_message_literal] "Invalid clause id." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:131 [object_message_literal] "Clause text is required." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:146 [object_message_literal] "Only staff can delete clauses." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:148 [object_message_literal] "Invalid clause id." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:160 [object_message_literal] "Only delegates can sign resolutions." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:162 [object_message_literal] "Invalid resolution id." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:179 [object_message_literal] "Only delegates can join blocs." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:182 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:192 [object_message_literal] "Bloc does not belong to resolution." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:223 [object_message_literal] "Only staff can record clause vote outcomes." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:226 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:229 [object_message_literal] "Invalid clause ids." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:239 [object_message_literal] "Some clause ids do not belong to resolution." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:285 [object_message_literal] "Not authenticated." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:287 [object_message_literal] "Invalid clause ids." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:306 [object_message_literal] "Only delegates or staff can send resolutions by email." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:309 [object_message_literal] "Invalid IDs." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:314 [object_message_literal] "Enter a valid delegate email." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:343 [object_message_literal] "Email server is not configured. Set SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS." -> suggested prefix: `serverActions.resolutions`
+- app/actions/resolutions.ts:376 [object_message_literal] "Could not send resolution email." -> suggested prefix: `serverActions.resolutions`
+- app/actions/smtConference.ts:21 [object_message_literal] "Event name (2+ chars) and conference code (4+ chars) are required." -> suggested prefix: `serverActions.smtConference`
+- app/actions/smtConference.ts:28 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.smtConference`
+- app/actions/smtConference.ts:36 [object_message_literal] "Only secretariat can edit conference info." -> suggested prefix: `serverActions.smtConference`
 
 Full machine-readable inventory is available at `reports/i18n/i18n-audit.json`.

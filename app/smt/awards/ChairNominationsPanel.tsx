@@ -9,6 +9,7 @@ import {
 } from "@/lib/seamuns-award-scoring";
 import { PromoteNominationForm } from "./PromoteNominationForm";
 import { RejectNominationForm } from "./RejectNominationForm";
+import { useTranslations } from "next-intl";
 
 export type ChairNominationRow = {
   id: string;
@@ -19,13 +20,6 @@ export type ChairNominationRow = {
   rubric_scores: Record<string, number> | null;
   committee_conference_id: string;
   nominee_profile_id: string;
-};
-
-const nominationTypeLabel: Record<NominationRubricType, string> = {
-  committee_best_delegate: "Best Delegate (committee)",
-  committee_honourable_mention: "Honourable Mention (committee)",
-  committee_best_position_paper: "Best Position Paper (committee)",
-  conference_best_delegate: "Best Delegate (overall)",
 };
 
 type CommitteeTab = { id: string; label: string };
@@ -45,7 +39,14 @@ export function ChairNominationsPanel({
   conferenceIdToCanonical = {},
   committeeTabs = [],
 }: Props) {
+  const t = useTranslations("chairNominationsPanel");
   const [committeeFilter, setCommitteeFilter] = useState<"all" | string>("all");
+  const nominationTypeLabel: Record<NominationRubricType, string> = {
+    committee_best_delegate: t("bestDelegateCommittee"),
+    committee_honourable_mention: t("honourableMentionCommittee"),
+    committee_best_position_paper: t("bestPositionPaperCommittee"),
+    conference_best_delegate: t("bestDelegateOverall"),
+  };
 
   const canonical = (rawConferenceId: string) => conferenceIdToCanonical[rawConferenceId] ?? rawConferenceId;
 
@@ -85,20 +86,17 @@ export function ChairNominationsPanel({
 
   return (
     <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-      <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">Award submissions by chairs</h2>
+      <h2 className="font-display text-lg font-semibold text-brand-navy mb-2">{t("title")}</h2>
       <p className="text-xs text-brand-muted mb-3">
-        Committees submit scored nominations (SEAMUNs-style bands). Rubric totals and band initials (B/D/P/E)
-        summarize each row. For each committee and award type, SMT reviews the chair&apos;s current preference
-        first (Top 1). Approve to record the award, or reject to move to the next backup rank (Top 2, then Top 3
-        for Honourable Mention where applicable).
+        {t("description")}
       </p>
       {committeeTabs.length > 0 && nominations.length > 0 ? (
         <div
           className="mb-3 flex flex-wrap gap-1 overflow-x-auto border-b border-brand-navy/10 pb-px"
           role="tablist"
-          aria-label="Filter by committee"
+          aria-label={t("filterByCommitteeAria")}
         >
-          {tabBtn("all", "All committees", nominations.length, "tab-smt-nom-all")}
+          {tabBtn("all", t("allCommittees"), nominations.length, "tab-smt-nom-all")}
           {committeeTabs.map((c) =>
             tabBtn(
               c.id,
@@ -113,34 +111,30 @@ export function ChairNominationsPanel({
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-              <th className="px-3 py-2">Committee</th>
-              <th className="px-3 py-2">Rank</th>
-              <th className="px-3 py-2">Award type</th>
-              <th className="px-3 py-2">Nominee</th>
-              <th className="px-3 py-2">Rubric</th>
-              <th className="px-3 py-2">Evidence</th>
-              <th className="px-3 py-2">Approve / reject</th>
+              <th className="px-3 py-2">{t("committee")}</th>
+              <th className="px-3 py-2">{t("rank")}</th>
+              <th className="px-3 py-2">{t("awardType")}</th>
+              <th className="px-3 py-2">{t("nominee")}</th>
+              <th className="px-3 py-2">{t("rubric")}</th>
+              <th className="px-3 py-2">{t("evidence")}</th>
+              <th className="px-3 py-2">{t("approveReject")}</th>
             </tr>
           </thead>
           <tbody>
             {nominations.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-3 py-6 text-center text-brand-muted space-y-2">
-                  <p className="font-medium text-brand-navy/90">No pending chair submissions yet.</p>
+                  <p className="font-medium text-brand-navy/90">{t("noPendingSubmissions")}</p>
                   <p className="text-xs leading-relaxed max-w-xl mx-auto text-brand-navy/75">
-                    Chairs <strong className="text-brand-navy">Save</strong> each slot as a{" "}
-                    <strong className="text-brand-navy">draft</strong> on the Score page. Those drafts are not shown
-                    here. Once every <strong className="text-brand-navy">required</strong> slot is complete, the chair
-                    must click <strong className="text-brand-navy">Submit nominations to SMT</strong> — then rows
-                    appear in this table as <strong className="text-brand-navy">pending</strong> for review.
+                    {t("emptyStateGuidance")}
                   </p>
                 </td>
               </tr>
             ) : visibleNominations.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-3 py-6 text-center text-sm text-brand-muted">
-                  No pending rows for this committee. Choose <span className="font-medium text-brand-navy">All committees</span>{" "}
-                  or another tab.
+                  {t("noRowsForCommittee")} <span className="font-medium text-brand-navy">{t("allCommittees")}</span>{" "}
+                  {t("orAnotherTab")}
                 </td>
               </tr>
             ) : (
@@ -153,7 +147,7 @@ export function ChairNominationsPanel({
                       {committeeLabelByConferenceId[n.committee_conference_id] ??
                         n.committee_conference_id.slice(0, 8)}
                     </td>
-                    <td className="px-3 py-2 text-brand-navy font-medium">Top {n.rank}</td>
+                    <td className="px-3 py-2 text-brand-navy font-medium">{t("topRank", { rank: n.rank })}</td>
                     <td className="px-3 py-2 text-brand-navy/85">{nominationTypeLabel[n.nomination_type]}</td>
                     <td className="px-3 py-2">{nomineeLabel}</td>
                     <td className="px-3 py-2 text-brand-navy/90 text-xs align-top">
@@ -161,18 +155,18 @@ export function ChairNominationsPanel({
                         {rubricNumericTotal(n.rubric_scores, n.nomination_type)}/
                         {maxRubricTotal(n.nomination_type)}
                       </span>
-                      <span className="block text-brand-muted mt-0.5" title="Band initials: B/D/P/E">
+                      <span className="block text-brand-muted mt-0.5" title={t("bandInitialsTitle")}>
                         {rubricBandInitials(n.rubric_scores, n.nomination_type)}
                       </span>
                     </td>
-                    <td className="px-3 py-2 text-brand-muted max-w-md">{n.evidence_note?.trim() || "—"}</td>
+                    <td className="px-3 py-2 text-brand-muted max-w-md">{n.evidence_note?.trim() || t("dash")}</td>
                     <td className="px-3 py-2">
                       <div className="flex flex-col gap-2">
                         {n.nomination_type === "committee_best_delegate" ? (
                           <PromoteNominationForm
                             nominationId={n.id}
                             category="committee_best_delegate"
-                            label="Approve — Best Delegate"
+                            label={t("approveBestDelegate")}
                             buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
                           />
                         ) : null}
@@ -180,7 +174,7 @@ export function ChairNominationsPanel({
                           <PromoteNominationForm
                             nominationId={n.id}
                             category="committee_honourable_mention"
-                            label="Approve — Honourable Mention"
+                            label={t("approveHonourableMention")}
                             buttonClassName="text-xs px-2 py-1 rounded border border-brand-navy/20 text-brand-navy"
                           />
                         ) : null}
@@ -188,7 +182,7 @@ export function ChairNominationsPanel({
                           <PromoteNominationForm
                             nominationId={n.id}
                             category="committee_best_position_paper"
-                            label="Approve — Best Position Paper"
+                            label={t("approveBestPositionPaper")}
                             buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
                           />
                         ) : null}
@@ -196,7 +190,7 @@ export function ChairNominationsPanel({
                           <PromoteNominationForm
                             nominationId={n.id}
                             category="conference_best_delegate"
-                            label="Approve — Best Delegate (overall)"
+                            label={t("approveBestDelegateOverall")}
                             buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
                           />
                         ) : null}
