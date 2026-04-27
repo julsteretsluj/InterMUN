@@ -23,6 +23,13 @@ type Announcement = {
   publish_at?: string | null;
 };
 type PauseEventRow = { id: string; reason: string; created_at: string };
+type ActiveMotionRow = {
+  id: string;
+  title: string | null;
+  vote_type: string | null;
+  required_majority: string | null;
+  closed_at: string | null;
+};
 
 type FloorTheme = "dark" | "light";
 
@@ -62,6 +69,7 @@ export function FloorStatusBar({
   const { timer } = useConferenceTimer(conferenceId, activeMotionVoteItemId);
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
   const [pauseEvents, setPauseEvents] = useState<PauseEventRow[]>([]);
+  const [activeMotions, setActiveMotions] = useState<ActiveMotionRow[]>([]);
   const [rollSelf, setRollSelf] = useState<string | null>(null);
   const [selfAllocationId, setSelfAllocationId] = useState<string | null>(null);
   const [expandedAnnouncement, setExpandedAnnouncement] = useState<Announcement | null>(null);
@@ -125,6 +133,17 @@ export function FloorStatusBar({
       .then(({ data }) => setPauseEvents((data as PauseEventRow[]) ?? []));
   }, [supabase, conferenceId]);
 
+  const loadActiveMotions = useCallback(() => {
+    return supabase
+      .from("vote_items")
+      .select("id, title, vote_type, required_majority, closed_at")
+      .eq("conference_id", conferenceId)
+      .is("closed_at", null)
+      .order("created_at", { ascending: false })
+      .limit(6)
+      .then(({ data }) => setActiveMotions((data as ActiveMotionRow[]) ?? []));
+  }, [supabase, conferenceId]);
+
   const loadSelfRollCall = useCallback(
     async (allocationId: string) => {
       const { data: rc } = await supabase
@@ -147,6 +166,7 @@ export function FloorStatusBar({
   useEffect(() => {
     void loadDais();
     void loadPauseEvents();
+    void loadActiveMotions();
 
     if (!observeOnly) {
       void (async () => {
@@ -165,7 +185,7 @@ export function FloorStatusBar({
         await loadSelfRollCall(alloc.id);
       })();
     }
-  }, [supabase, conferenceId, loadDais, loadPauseEvents, loadSelfRollCall, observeOnly]);
+  }, [supabase, conferenceId, loadDais, loadPauseEvents, loadActiveMotions, loadSelfRollCall, observeOnly]);
 
   useEffect(() => {
     void loadProcedureSession();
@@ -229,11 +249,21 @@ export function FloorStatusBar({
         },
         () => void loadPauseEvents()
       )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "vote_items",
+          filter: `conference_id=eq.${conferenceId}`,
+        },
+        () => void loadActiveMotions()
+      )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId, loadDais, loadPauseEvents]);
+  }, [supabase, conferenceId, loadDais, loadPauseEvents, loadActiveMotions]);
 
   useEffect(() => {
     if (observeOnly || !selfAllocationId) return;
@@ -272,6 +302,12 @@ export function FloorStatusBar({
   const border = isLight ? "border-brand-navy/10" : "border-white/10";
   const bodyText = isLight ? "text-brand-navy/95" : "text-brand-navy/95";
   const qText = "text-brand-navy/90";
+  const card = isLight
+    ? "rounded-lg border border-brand-navy/10 bg-white/80 px-2.5 py-1.5 text-brand-navy"
+    : "rounded-lg border border-white/10 bg-black/20 px-2.5 py-1.5 text-brand-navy";
+  const cardActive = isLight
+    ? "rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy"
+    : "rounded-lg border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1.5 text-brand-navy";
 
   const limitNow = Date.now();
   const limitFmt =
@@ -373,6 +409,24 @@ export function FloorStatusBar({
   return (
     <div className="space-y-1.5">
       {sessionElapsedRow}
+      {activeMotions.length > 0 ? (
+        <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+          {activeMotions.map((motion) => {
+            const isCurrent = activeMotionVoteItemId != null && motion.id === activeMotionVoteItemId;
+            const title = motion.title?.trim() || tActiveMotion("motionFallback");
+            return (
+              <div key={motion.id} className={isCurrent ? cardActive : card}>
+                <p className={`${muted} truncate`}>{isCurrent ? tActiveMotion("currentMotion") : t("quickLinkMotions")}</p>
+                <p className="truncate text-xs font-semibold text-brand-navy">{title}</p>
+                <p className="mt-0.5 text-[0.65rem] text-brand-navy/80">
+                  {(motion.vote_type || "motion").replace(/_/g, " ")} ·{" "}
+                  {motion.required_majority === "2/3" ? "2/3" : tActiveMotion("majoritySimple")}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
       <div className={box}>
       {latestDais && (
         <div className="flex gap-2 items-start">
