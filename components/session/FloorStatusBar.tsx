@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Clock, Megaphone, ListOrdered, PauseCircle } from "lucide-react";
@@ -63,12 +64,15 @@ export function FloorStatusBar({
   observeOnly = false,
   theme = "dark",
   activeMotionVoteItemId = null,
+  sessionMiniControls = "full",
 }: {
   conferenceId: string;
   observeOnly?: boolean;
   theme?: FloorTheme;
   /** When set, show current motion + floor timer above dais / speakers (e.g. delegate committee room). */
   activeMotionVoteItemId?: string | null;
+  /** Session quick links: full for chairs/staff, minimal for delegates/non-chair panels. */
+  sessionMiniControls?: "full" | "minimal";
 }) {
   const t = useTranslations("views.session.floorStatus");
   const supabase = createClient();
@@ -282,18 +286,30 @@ export function FloorStatusBar({
     sessionStartedAt != null && sessionEndMs != null
       ? formatCountdownOrElapsed(sessionEndMs, limitNow)
       : null;
+  const sessionQuickLinks =
+    sessionMiniControls === "minimal"
+      ? [
+          { href: "/chair/session", label: "Session" },
+          { href: "/chair/session/timer", label: "Timer" },
+        ]
+      : [
+          { href: "/chair/session", label: "Session" },
+          { href: "/chair/session/roll-call", label: "Roll" },
+          { href: "/chair/session/speakers", label: "Speakers" },
+          { href: "/chair/session/motions", label: "Motions" },
+          { href: "/chair/session/timer", label: "Timer" },
+        ];
 
   const sessionElapsedRow =
     sessionStartedAt != null ? (
       <div
         className={
           isLight
-            ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1 text-sm text-brand-navy"
-            : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1 text-sm text-brand-navy"
+            ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1.5 text-sm text-brand-navy"
+            : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-brand-navy"
         }
       >
         <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
-        <span className={muted}>{t("sessionTime")}</span>
         <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
           {formatSessionElapsed(sessionStartedAt, limitNow)}
         </span>
@@ -302,7 +318,6 @@ export function FloorStatusBar({
             <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
               ·
             </span>
-            <span className={muted}>{t("limit")}</span>
             <span
               className={`font-display font-semibold tabular-nums tracking-tight ${
                 limitFmt.label === "passed"
@@ -319,6 +334,21 @@ export function FloorStatusBar({
             </span>
           </>
         ) : null}
+        <div className="ml-auto flex flex-wrap items-center gap-1">
+          {sessionQuickLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={
+                isLight
+                  ? "rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white"
+                  : "rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
       </div>
     ) : null;
 
