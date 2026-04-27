@@ -1248,6 +1248,7 @@
       },
       "floorStatus": {
         "sessionTime": "Session time",
+        "sessionNotStarted": "Session not started",
         "limit": "Limit",
         "limitRemaining": "{value} left",
         "limitOverBy": "over by {value}",

@@ -300,57 +300,56 @@ export function FloorStatusBar({
           { href: "/chair/session/timer", label: "Timer" },
         ];
 
-  const sessionElapsedRow =
-    sessionStartedAt != null ? (
-      <div
-        className={
-          isLight
-            ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1.5 text-sm text-brand-navy"
-            : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-brand-navy"
-        }
-      >
-        <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
-        <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
-          {formatSessionElapsed(sessionStartedAt, limitNow)}
-        </span>
-        {limitFmt ? (
-          <>
-            <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
-              ·
-            </span>
-            <span
-              className={`font-display font-semibold tabular-nums tracking-tight ${
-                limitFmt.label === "passed"
-                  ? isLight
-                    ? "text-amber-800"
-                    : "text-amber-200"
-                  : undefined
-              }`}
-              suppressHydrationWarning
-            >
-              {limitFmt.label === "remaining"
-                ? t("limitRemaining", { value: limitFmt.text })
-                : t("limitOverBy", { value: limitFmt.text })}
-            </span>
-          </>
-        ) : null}
-        <div className="ml-auto flex flex-wrap items-center gap-1">
-          {sessionQuickLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={
-                isLight
-                  ? "rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white"
-                  : "rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+  const sessionElapsedRow = (
+    <div
+      className={
+        isLight
+          ? "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-brand-navy/10 bg-brand-cream/40 px-3 py-1.5 text-sm text-brand-navy"
+          : "flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-brand-navy"
+      }
+    >
+      <Clock className={`h-4 w-4 shrink-0 ${icon}`} aria-hidden />
+      <span className="font-display font-semibold tabular-nums tracking-tight" suppressHydrationWarning>
+        {sessionStartedAt ? formatSessionElapsed(sessionStartedAt, limitNow) : t("sessionNotStarted")}
+      </span>
+      {sessionStartedAt && limitFmt ? (
+        <>
+          <span className={isLight ? "text-brand-navy/30" : "text-white/25"} aria-hidden>
+            ·
+          </span>
+          <span
+            className={`font-display font-semibold tabular-nums tracking-tight ${
+              limitFmt.label === "passed"
+                ? isLight
+                  ? "text-amber-800"
+                  : "text-amber-200"
+                : undefined
+            }`}
+            suppressHydrationWarning
+          >
+            {limitFmt.label === "remaining"
+              ? t("limitRemaining", { value: limitFmt.text })
+              : t("limitOverBy", { value: limitFmt.text })}
+          </span>
+        </>
+      ) : null}
+      <div className="ml-auto flex flex-wrap items-center gap-1">
+        {sessionQuickLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={
+              isLight
+                ? "rounded-full border border-brand-navy/15 bg-white/70 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white"
+                : "rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[0.7rem] font-medium text-brand-navy hover:bg-white/15"
+            }
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
-    ) : null;
+    </div>
+  );
 
   return (
     <div className="space-y-1.5">

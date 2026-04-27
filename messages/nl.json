@@ -1248,6 +1248,7 @@
       },
       "floorStatus": {
         "sessionTime": "Sessie tijd",
+        "sessionNotStarted": "Sessie nog niet gestart",
         "limit": "Beperken",
         "limitRemaining": "{value} left",
         "limitOverBy": "over by {value}",
