@@ -1429,8 +1429,13 @@ export function SessionControlClient({
       return;
     }
 
-    const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "absent";
+    const hasRollEntry = rollAttendanceByAllocationId.has(allocation.id);
+    const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "present_voting";
     const discipline = disciplineByAllocationId[allocation.id];
+    if (hasRollEntry && attendance === "absent") {
+      setMsg("Absent delegates cannot vote.");
+      return;
+    }
     if (discipline?.voting_rights_lost) {
       setMsg("This delegate lost voting rights due to disciplinary strike(s).");
       return;
@@ -1438,7 +1443,8 @@ export function SessionControlClient({
     const abstainAllowedByVoteType =
       activeMotionForRecordedVotes.vote_type === "resolution" ||
       activeMotionForRecordedVotes.vote_type === "amendment";
-    const canAbstain = abstainAllowedByVoteType && attendance !== "present_voting";
+    const canAbstain =
+      abstainAllowedByVoteType && attendance !== "present_voting" && (!hasRollEntry || attendance !== "absent");
     if (value === "abstain" && !canAbstain) {
       setMsg("Abstain is only available for resolutions/amendments when roll is not Present and voting.");
       return;
@@ -3412,7 +3418,9 @@ export function SessionControlClient({
               ) : (
                 <div className="max-h-[26rem] overflow-y-auto space-y-2 pr-1">
                   {votingCallOrder.map((call) => {
+                    const hasRollEntry = rollAttendanceByAllocationId.has(call.id);
                     const rollA = rollAttendanceByAllocationId.get(call.id);
+                    const absent = hasRollEntry && (rollA ?? "present_voting") === "absent";
                     const rollLabel = rollAttendanceRollLabel(rollA);
                     const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
                     const discipline = disciplineByAllocationId[call.id];
@@ -3425,7 +3433,10 @@ export function SessionControlClient({
                     const abstainAllowedByVoteType =
                       activeMotionForRecordedVotes?.vote_type === "resolution" ||
                       activeMotionForRecordedVotes?.vote_type === "amendment";
-                    const canAbstain = abstainAllowedByVoteType && (rollA ?? "absent") !== "present_voting";
+                    const canAbstain =
+                      abstainAllowedByVoteType &&
+                      (rollA ?? "present_voting") !== "present_voting" &&
+                      !absent;
                     return (
                       <div
                         key={call.id}
@@ -3460,6 +3471,11 @@ export function SessionControlClient({
                                 {discipline.removed_from_committee ? " · removed" : ""}
                               </p>
                             ) : null}
+                            {absent ? (
+                              <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
+                                Delegate marked absent — voting disabled.
+                              </p>
+                            ) : null}
                             {!call.user_id ? (
                               <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
                                 No delegate account on this placard.
@@ -3469,7 +3485,7 @@ export function SessionControlClient({
                           <div className="flex flex-wrap gap-2">
                             <button
                               type="button"
-                              disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                              disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
                               className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                             >
@@ -3478,7 +3494,7 @@ export function SessionControlClient({
                             {supportsVoteWithRights ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                                disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "yes", true)}
                                 className="rounded-lg border border-brand-accent/45 bg-brand-accent/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
                               >
@@ -3488,7 +3504,7 @@ export function SessionControlClient({
                             {canAbstain ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                                disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "abstain")}
                                 className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
                               >
@@ -3497,7 +3513,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                              disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "no")}
                               className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
                             >
@@ -3506,7 +3522,7 @@ export function SessionControlClient({
                             {supportsVoteWithRights ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                                disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "no", true)}
                                 className="rounded-lg border border-rose-500/45 bg-rose-500/10 px-3 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
                               >

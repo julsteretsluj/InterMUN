@@ -12,7 +12,6 @@ import {
   ClipboardList,
   Clock,
   DoorOpen,
-  FileText,
   Gavel,
   HelpCircle,
   LayoutGrid,
@@ -45,7 +44,6 @@ export type ChairNavItemKey =
   | "discipline"
   | "timer"
   | "announcements"
-  | "motionsPoints"
   | "voting"
   | "score"
   | "crisis"
@@ -118,12 +116,6 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     itemKey: "announcements",
     icon: Megaphone,
     emoji: "📣",
-  },
-  {
-    href: "/chair/motions-points",
-    itemKey: "motionsPoints",
-    icon: FileText,
-    emoji: "📜",
   },
   { href: "/voting", itemKey: "voting", icon: CheckSquare, emoji: "🗳️" },
   { href: "/chair/awards", itemKey: "score", icon: BarChart3, emoji: "📊" },

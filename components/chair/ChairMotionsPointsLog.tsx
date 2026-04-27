@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { Star } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { CHAIR_MOTIONS_POINTS_PRESETS } from "@/lib/chair-motions-points-presets";
@@ -43,7 +42,6 @@ export function ChairMotionsPointsLog({
 }) {
   const t = useTranslations("chairMotionsPointsLog");
   const tSessionControl = useTranslations("sessionControlClient");
-  const tNav = useTranslations("chairNav.items");
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const supabase = useMemo(() => createClient(), []);
@@ -283,20 +281,6 @@ export function ChairMotionsPointsLog({
       <p className="text-sm text-slate-600 dark:text-zinc-400">
         {t("intro")}
       </p>
-
-      <div className="rounded-xl border border-amber-200/80 bg-amber-50/60 p-4 text-sm text-amber-950 dark:border-amber-900/50 dark:bg-amber-950/25 dark:text-amber-100">
-        <p className="font-medium">{t("logTitle")}</p>
-        <p className="mt-1 text-amber-900/85 dark:text-amber-200/90">
-          {t("formalMotionsPrefix")}{" "}
-          <Link
-            href="/chair/session/motions"
-            className="font-semibold underline decoration-amber-700/50 hover:decoration-amber-900 dark:decoration-amber-400"
-          >
-            {tNav("formalMotions")}
-          </Link>
-          {t("formalMotionsSuffix")}
-        </p>
-      </div>
 
       <div className="flex flex-wrap gap-2">
         {([

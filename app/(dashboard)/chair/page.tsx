@@ -74,7 +74,6 @@ export default async function ChairOverviewPage({
     { href: "/chair/session/discipline", label: tPage("tiles.disciplinary.label"), hint: tPage("tiles.disciplinary.hint") },
     { href: "/chair/session/timer", label: tPage("tiles.timer.label"), hint: tPage("tiles.timer.hint") },
     { href: "/chair/session/announcements", label: tPage("tiles.announcements.label"), hint: tPage("tiles.announcements.hint") },
-    { href: "/chair/motions-points", label: tPage("tiles.motionsPoints.label"), hint: tPage("tiles.motionsPoints.hint") },
     { href: "/voting", label: tPage("tiles.voting.label"), hint: tPage("tiles.voting.hint") },
     { href: "/chair/awards", label: tPage("tiles.score.label"), hint: tPage("tiles.score.hint") },
     ...(crisisReportingEnabled
