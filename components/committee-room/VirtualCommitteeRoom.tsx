@@ -83,7 +83,6 @@ function Placard({
   const t = useTranslations("views.committeeRoom");
   const { vacant, country, name, school, pronouns, allocationId } = placard;
   const interactive = Boolean(personHref);
-  const dimmed = searchActive && !matchesSearch;
   const ringMatch = searchActive && matchesSearch;
 
   const inner = (
@@ -95,7 +94,6 @@ function Placard({
             ? "border-[var(--hairline)] bg-[var(--material-thin)]/90 text-brand-muted dark:text-white/70"
             : "border-[var(--hairline)] bg-[var(--material-thick)] text-brand-navy shadow-[0_3px_10px_rgba(0,0,0,0.08)] dark:text-white dark:shadow-[0_8px_18px_rgba(0,0,0,0.35)]",
           interactive ? "hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:shadow-[0_8px_18px_rgba(0,0,0,0.12)] hover:-translate-y-px transition-apple" : "",
-          dimmed ? "opacity-[0.32] scale-[0.98]" : "",
           ringMatch ? "ring-2 ring-[color:color-mix(in_srgb,var(--accent-bright)_70%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)] border-[color:color-mix(in_srgb,var(--accent)_50%,var(--hairline))]" : "",
         ].join(" ")}
       >
@@ -142,7 +140,12 @@ function Placard({
     </>
   );
 
-  const wrapClass = "w-[6.25rem] sm:w-[6.5rem] md:w-[7.25rem] text-left block";
+  const wrapClass = [
+    "w-[6.25rem] sm:w-[6.5rem] md:w-[7.25rem] text-left block",
+    searchActive && !matchesSearch ? "hidden" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   if (personHref) {
     return (
@@ -184,7 +187,6 @@ function DaisStation({
   matchesSearch: boolean;
 }) {
   const t = useTranslations("views.committeeRoom");
-  const dimmed = searchActive && !matchesSearch;
   const ringMatch = searchActive && matchesSearch;
 
   const inner = (
@@ -206,7 +208,6 @@ function DaisStation({
         className={[
           "w-full rounded-md border border-[var(--hairline)] bg-[var(--material-thick)] px-1.5 py-1 text-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] transition-[opacity,transform,box-shadow,border-color] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)]",
           "dark:shadow-[0_8px_18px_rgba(0,0,0,0.35)]",
-          dimmed ? "opacity-[0.35] scale-[0.97]" : "",
           ringMatch ? "ring-2 ring-[color:color-mix(in_srgb,var(--accent-bright)_70%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)] border-[color:color-mix(in_srgb,var(--accent)_45%,var(--hairline))]" : "hover:border-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]",
         ].join(" ")}
       >
@@ -223,7 +224,7 @@ function DaisStation({
 
   const wrapClass = [
     "flex flex-col items-center gap-1 text-brand-navy dark:text-white min-w-[5rem] sm:min-w-[5.75rem] transition-opacity duration-200",
-    dimmed ? "opacity-[0.35]" : "",
+    searchActive && !matchesSearch ? "hidden" : "",
     personHref ? "cursor-pointer rounded-[0.35rem] transition-apple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]" : "cursor-default",
   ].join(" ");
 

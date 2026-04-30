@@ -3,18 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import {
-  Activity,
-  CalendarDays,
-  DoorOpen,
-  HelpCircle,
-  KeyRound,
-  LayoutDashboard,
-  Settings,
-  Trophy,
-  Users,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type SmtNavKey =
@@ -29,19 +17,19 @@ export type SmtNavKey =
 type SmtNavItem = {
   href: string;
   navKey: SmtNavKey;
-  icon: LucideIcon;
+  emoji: string;
   /** Live committees hub: `/smt` and `/smt/committees/*` */
   isLiveHub?: boolean;
 };
 
 const SMT_NAV_ITEMS: SmtNavItem[] = [
-  { href: "/smt", navKey: "liveCommittees", icon: Activity, isLiveHub: true },
-  { href: "/smt/conference", navKey: "eventSessions", icon: CalendarDays },
-  { href: "/smt/room-codes", navKey: "roomCodes", icon: DoorOpen },
-  { href: "/smt/awards", navKey: "awards", icon: Trophy },
-  { href: "/smt/allocation-matrix", navKey: "allocationMatrix", icon: Users },
-  { href: "/smt/allocation-passwords", navKey: "allocationPasswords", icon: KeyRound },
-  { href: "/smt/profile", navKey: "profile", icon: Settings },
+  { href: "/smt", navKey: "liveCommittees", emoji: "📡", isLiveHub: true },
+  { href: "/smt/conference", navKey: "eventSessions", emoji: "📅" },
+  { href: "/smt/room-codes", navKey: "roomCodes", emoji: "🚪" },
+  { href: "/smt/awards", navKey: "awards", emoji: "🏆" },
+  { href: "/smt/allocation-matrix", navKey: "allocationMatrix", emoji: "👥" },
+  { href: "/smt/allocation-passwords", navKey: "allocationPasswords", emoji: "🔐" },
+  { href: "/smt/profile", navKey: "profile", emoji: "⚙️" },
 ];
 
 function smtNavItemIsActive(pathname: string, item: SmtNavItem): boolean {
@@ -60,7 +48,6 @@ function SmtSidebarLink({
   label: string;
   isActive: boolean;
 }) {
-  const Icon = item.icon;
   return (
     <Link
       href={item.href}
@@ -71,17 +58,13 @@ function SmtSidebarLink({
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
-      <Icon
-        className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-brand-muted")}
-        strokeWidth={1.75}
-      />
+      <span className="text-base leading-none" aria-hidden>{item.emoji}</span>
       <span className="hidden truncate group-hover:inline">{label}</span>
     </Link>
   );
 }
 
 function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: string; isActive: boolean }) {
-  const Icon = item.icon;
   return (
     <Link
       href={item.href}
@@ -94,7 +77,7 @@ function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: strin
           isActive && "smt-dock-tile-active text-[var(--accent)]"
         )}
       >
-        <Icon className="h-6 w-6" strokeWidth={isActive ? 2.25 : 1.75} />
+        <span className="text-base leading-none" aria-hidden>{item.emoji}</span>
       </span>
       <span
         className={cn(
@@ -126,7 +109,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
               "ring-2 ring-[color:color-mix(in_srgb,white_45%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
           )}
         >
-          <LayoutDashboard className="h-4 w-4 shrink-0 opacity-95" strokeWidth={1.75} aria-hidden />
+          <span className="text-base leading-none" aria-hidden>📌</span>
           <span className="hidden min-w-0 truncate group-hover:inline">{hubLabel}</span>
           <span className="inline text-base leading-none group-hover:hidden" aria-hidden>
             {tNav("hubAbbrev")}
@@ -153,7 +136,7 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
           href="/guides"
           className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
         >
-          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted" strokeWidth={1.75} />
+          <span className="text-base leading-none" aria-hidden>❓</span>
           <span className="hidden group-hover:inline">{tDash("helpCenter")}</span>
         </Link>
       </div>

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { HelpCircle, Settings } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TabNav } from "@/components/TabNav";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
@@ -169,14 +168,14 @@ export default async function DashboardLayout({
               href="/guides"
               className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <HelpCircle className="h-5 w-5 text-brand-muted" strokeWidth={1.75} />
+              <span className="text-base leading-none" aria-hidden>❓</span>
               <span className="hidden group-hover:inline">{t("helpCenter")}</span>
             </Link>
             <Link
               href="/profile"
               className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
-              <Settings className="h-5 w-5 text-brand-muted" strokeWidth={1.75} />
+              <span className="text-base leading-none" aria-hidden>⚙️</span>
               <span className="hidden group-hover:inline">{t("settings")}</span>
             </Link>
           </div>
@@ -198,18 +197,18 @@ export default async function DashboardLayout({
           }
         />
         <DashboardAnnouncementPopup />
-        {activeConf?.id && showsDaisTools(role) ? (
-          <div className="border-y border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-3 backdrop-blur-xl sm:px-6">
-            <div className="w-full">
-              <ChairLiveFloorThemed
-                conferenceId={liveFloorConferenceId ?? activeConf.id}
-                canonicalConferenceId={liveFloorCanonicalId ?? activeConf.id}
-                siblingConferenceIds={liveFloorSiblings}
-              />
-            </div>
-          </div>
-        ) : null}
         <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
+          {activeConf?.id && showsDaisTools(role) ? (
+            <div className="mb-4 border-y border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-3 backdrop-blur-xl sm:px-6">
+              <div className="w-full">
+                <ChairLiveFloorThemed
+                  conferenceId={liveFloorConferenceId ?? activeConf.id}
+                  canonicalConferenceId={liveFloorCanonicalId ?? activeConf.id}
+                  siblingConferenceIds={liveFloorSiblings}
+                />
+              </div>
+            </div>
+          ) : null}
           {children}
         </main>
       </div>

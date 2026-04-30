@@ -272,6 +272,7 @@ export function CommitteeRoomDigitalMUNClient({
     if (!qNorm) return dais.length;
     return dais.filter((s) => daisSeatMatchesSearch(s, qNorm)).length;
   }, [dais, qNorm]);
+  const totalMatchCount = delegationMatchCount + daisMatchCount;
 
   return (
     <div className="w-full space-y-4">
@@ -388,7 +389,7 @@ export function CommitteeRoomDigitalMUNClient({
                 {qNorm ? (
                   <>
                     {t("matchesCount", {
-                      matches: delegationMatchCount + daisMatchCount,
+                      matches: totalMatchCount,
                       total: placards.length + dais.length,
                     })}{" "}
                     · Enter scrolls
@@ -397,6 +398,11 @@ export function CommitteeRoomDigitalMUNClient({
                   "Type to filter · Enter scrolls to first match"
                 )}
               </p>
+              {qNorm && totalMatchCount === 0 ? (
+                <p className="text-[0.65rem] text-right text-brand-muted">
+                  No matching delegations or dais seats.
+                </p>
+              ) : null}
             </div>
           </div>
 

@@ -2688,15 +2688,15 @@ export function SessionControlClient({
           </HelpButton>
         </div>
         <div className="flex flex-wrap gap-2">
-          {(
-            [
-              ["setup", tSessionControl("tabSetup")],
-              ["floor", tSessionControl("tabFloorQueue")],
-              ["draft", tSessionControl("tabDraftMotion")],
-              ["votes", tSessionControl("tabRecordVotes")],
-              ["discipline", tDiscipline("disciplinarySystem")],
-              ["history", tSessionControl("tabHistory")],
-            ] as const
+          {(activeSection === "discipline"
+            ? []
+            : ([
+                ["setup", tSessionControl("tabSetup")],
+                ["floor", tSessionControl("tabFloorQueue")],
+                ["draft", tSessionControl("tabDraftMotion")],
+                ["votes", tSessionControl("tabRecordVotes")],
+                ["history", tSessionControl("tabHistory")],
+              ] as const)
           ).map(([id, label]) => {
             const active = motionWorkflowTab === id;
             return (
@@ -2803,82 +2803,34 @@ export function SessionControlClient({
         ) : null}
           </>
         ) : null}
-        <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
-          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">{tSessionControl("pointsWorkflow")}</p>
-          <div className="grid gap-2 md:grid-cols-[1fr_1fr_auto_auto]">
-            <select
-              value={pointDraftCode}
-              onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
-              className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
-            >
-              <option value="poi">{tSessionControl("pointOfInformation")}</option>
-              <option value="poc">{tSessionControl("pointOfClarification")}</option>
-              <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
-              <option value="order">{tSessionControl("pointOfOrder")}</option>
-              <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
-              <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
-              <option value="fact_check">{tSessionControl("factCheck")}</option>
-            </select>
-            <select
-              value={pointDraftAllocationId}
-              onChange={(e) => setPointDraftAllocationId(e.target.value)}
-              className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
-            >
-              <option value="">{tSessionControl("raisedByOptional")}</option>
-              {votingCallOrder.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {displayCountry(a.country)}
-                </option>
-              ))}
-            </select>
-            <input
-              value={pointDraftDetail}
-              onChange={(e) => setPointDraftDetail(e.target.value)}
-              placeholder={tSessionControl("detailOptional")}
-              className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
-            />
-            <button
-              type="button"
-              disabled={pending}
-              onClick={addSessionPoint}
-              className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
-            >
-              {tSessionControl("logPoint")}
-            </button>
-          </div>
-          {sessionPoints.length > 0 ? (
-            <div className="max-h-28 overflow-y-auto space-y-1 rounded border border-white/12 bg-black/25 p-2">
-              {sessionPoints.slice(0, 8).map((p) => (
-                <div key={p.id} className="flex flex-wrap items-center justify-between gap-2 text-xs text-brand-navy">
-                  <span>
-                    <span className="font-medium">{p.point_code.replaceAll("_", " ")}</span>
-                    {p.detail ? ` — ${p.detail}` : ""}
-                  </span>
-                  {p.status === "pending" ? (
-                    <span className="flex gap-1">
-                      <button
-                        type="button"
-                        onClick={() => setSessionPointStatus(p.id, "accepted")}
-                        className="rounded border border-emerald-500/40 px-1.5 py-0.5 text-[10px]"
-                      >
-                        {tSessionControl("accept")}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSessionPointStatus(p.id, "denied")}
-                        className="rounded border border-rose-500/40 px-1.5 py-0.5 text-[10px]"
-                      >
-                        {tSessionControl("deny")}
-                      </button>
-                    </span>
-                  ) : (
-                    <span className="text-[10px] uppercase tracking-wide text-brand-muted">{p.status}</span>
-                  )}
-                </div>
-              ))}
+        {activeSection !== "discipline" ? (
+          <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
+            <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">{tSessionControl("pointsWorkflow")}</p>
+            <div className="grid gap-2 md:grid-cols-[1fr_auto]">
+              <select
+                value={pointDraftCode}
+                onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
+                className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+              >
+                <option value="poi">{tSessionControl("pointOfInformation")}</option>
+                <option value="poc">{tSessionControl("pointOfClarification")}</option>
+                <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
+                <option value="order">{tSessionControl("pointOfOrder")}</option>
+                <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
+                <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
+                <option value="fact_check">{tSessionControl("factCheck")}</option>
+              </select>
+              <button
+                type="button"
+                disabled={pending}
+                onClick={addSessionPoint}
+                className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
+              >
+                {tSessionControl("logPoint")}
+              </button>
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
         <div className={`${surfaceCard} space-y-3`}>
           {motionWorkflowTab === "floor" ? (
             <>
@@ -3549,7 +3501,7 @@ export function SessionControlClient({
             </>
           ) : null}
         </div>
-        {motionWorkflowTab === "discipline" ? (
+        {activeSection === "discipline" ? (
           <div className={surfaceCard}>
             <div className="space-y-3">
               <p className={surfaceLabel}>{tDiscipline("disciplinarySystem")}</p>

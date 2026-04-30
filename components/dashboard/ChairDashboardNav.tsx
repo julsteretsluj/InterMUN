@@ -4,30 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  Archive,
-  BarChart3,
-  BookOpen,
-  CheckSquare,
-  ClipboardList,
-  Clock,
-  DoorOpen,
-  Gavel,
-  HelpCircle,
-  LayoutGrid,
-  Link2,
-  ListChecks,
-  Megaphone,
-  Mic,
-  PanelLeftClose,
-  Play,
-  Presentation,
-  Settings,
-  TriangleAlert,
-  Users,
-  UserCheck,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LABELS_STORAGE_KEY = "intermun-chair-nav-hide-labels";
@@ -56,7 +32,6 @@ export type ChairNavItemKey =
 type ChairNavItem = {
   href: string;
   itemKey: ChairNavItemKey;
-  icon: LucideIcon;
   emoji: string;
   labelOverride?: string;
   /** If set, active when pathname === or starts with this */
@@ -69,62 +44,55 @@ type ChairNavItem = {
 
 /** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
 const CHAIR_NAV_ITEMS: ChairNavItem[] = [
-  { href: "/chair/prep-checklist", itemKey: "prepChecklist", icon: ListChecks, emoji: "✅" },
-  { href: "/chair/flow-checklist", itemKey: "flowChecklist", icon: ClipboardList, emoji: "📋" },
-  { href: "/chair/allocation-matrix", itemKey: "delegates", icon: Users, emoji: "👥" },
-  { href: "/chair/digital-room", itemKey: "digitalRoom", icon: LayoutGrid, emoji: "🖥️" },
+  { href: "/chair/prep-checklist", itemKey: "prepChecklist", emoji: "✅" },
+  { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "📋" },
+  { href: "/chair/allocation-matrix", itemKey: "delegates", emoji: "👥" },
+  { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },
   {
     href: "/chair/session/roll-call",
     itemKey: "rollCall",
-    icon: UserCheck,
     emoji: "✅",
   },
   {
     href: "/chair/session",
     itemKey: "session",
-    icon: Play,
     emoji: "▶️",
     exactHref: true,
   },
   {
     href: "/chair/session/speakers",
     itemKey: "speakers",
-    icon: Mic,
     emoji: "🎤",
   },
   {
     href: "/chair/session/motions",
     itemKey: "formalMotions",
-    icon: Gavel,
     emoji: "📜",
   },
   {
     href: "/chair/session/discipline",
     itemKey: "discipline",
-    icon: TriangleAlert,
     emoji: "⚖️",
     labelOverride: "Disciplinary",
   },
   {
     href: "/chair/session/timer",
     itemKey: "timer",
-    icon: Clock,
     emoji: "⏱️",
   },
   {
     href: "/chair/session/announcements",
     itemKey: "announcements",
-    icon: Megaphone,
     emoji: "📣",
   },
-  { href: "/voting", itemKey: "voting", icon: CheckSquare, emoji: "🗳️" },
-  { href: "/chair/awards", itemKey: "score", icon: BarChart3, emoji: "📊" },
-  { href: "/report", itemKey: "crisis", icon: TriangleAlert, emoji: "⚠️", crisisOnly: true },
-  { href: "/crisis-slides", itemKey: "crisisSlides", icon: Presentation, emoji: "🖼️", crisisOnly: true },
-  { href: "/documents", itemKey: "archive", icon: Archive, emoji: "📁" },
-  { href: "/official-links", itemKey: "officialLinks", icon: Link2, emoji: "🔗" },
-  { href: "/chair/room-code", itemKey: "roomCode", icon: DoorOpen, emoji: "🚪" },
-  { href: "/profile", itemKey: "settings", icon: Settings, emoji: "⚙️", activeMatch: "/profile" },
+  { href: "/voting", itemKey: "voting", emoji: "🗳️" },
+  { href: "/chair/awards", itemKey: "score", emoji: "📊" },
+  { href: "/report", itemKey: "crisis", emoji: "⚠️", crisisOnly: true },
+  { href: "/crisis-slides", itemKey: "crisisSlides", emoji: "🖼️", crisisOnly: true },
+  { href: "/documents", itemKey: "archive", emoji: "📁" },
+  { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
+  { href: "/chair/room-code", itemKey: "roomCode", emoji: "🚪" },
+  { href: "/profile", itemKey: "settings", emoji: "⚙️", activeMatch: "/profile" },
 ];
 
 function navItemIsActive(pathname: string, item: ChairNavItem): boolean {
@@ -149,7 +117,6 @@ function ChairNavRow({
   isActive: boolean;
   labelsHidden: boolean;
 }) {
-  const Icon = item.icon;
   return (
     <Link
       href={item.href}
@@ -162,11 +129,7 @@ function ChairNavRow({
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
-      <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
-        <Icon
-          className={cn("h-[1.15rem] w-[1.15rem] shrink-0", isActive ? "text-white" : "text-brand-muted")}
-          strokeWidth={1.75}
-        />
+      <span className="flex shrink-0 items-center" aria-hidden>
         <span className="text-base leading-none">{item.emoji}</span>
       </span>
       {!labelsHidden ? <span className="min-w-0 truncate">{label}</span> : null}
@@ -228,11 +191,6 @@ export function ChairDashboardSidebar({
             hubActive && "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_50%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
           )}
         >
-          <BookOpen
-            className={cn("shrink-0 opacity-95", labelsHidden ? "h-5 w-5" : "h-4 w-4")}
-            strokeWidth={labelsHidden ? 1.9 : 1.75}
-            aria-hidden
-          />
           <span className="text-base leading-none" aria-hidden>
             📌
           </span>
@@ -273,7 +231,9 @@ export function ChairDashboardSidebar({
             labelsHidden && "justify-center px-2"
           )}
         >
-          <PanelLeftClose className="h-5 w-5 shrink-0 text-brand-muted" strokeWidth={1.75} />
+          <span className="text-base leading-none" aria-hidden>
+            ↔️
+          </span>
           {!labelsHidden ? <span>{t("hideLabels")}</span> : <span className="sr-only">{t("showLabels")}</span>}
         </button>
         <Link
@@ -283,7 +243,9 @@ export function ChairDashboardSidebar({
             labelsHidden && "justify-center px-2"
           )}
         >
-          <HelpCircle className="h-5 w-5 shrink-0 text-brand-muted" strokeWidth={1.75} />
+          <span className="text-base leading-none" aria-hidden>
+            ❓
+          </span>
           {!labelsHidden ? t("helpCenter") : <span className="sr-only">{t("helpCenter")}</span>}
         </Link>
       </div>
@@ -302,7 +264,6 @@ function DockItem({
   isActive: boolean;
   labelsHidden: boolean;
 }) {
-  const Icon = item.icon;
   return (
     <Link
       href={item.href}
@@ -311,11 +272,10 @@ function DockItem({
     >
       <span
         className={cn(
-          "flex h-8 min-w-8 items-center justify-center gap-0.5 text-brand-muted",
+          "flex h-8 min-w-8 items-center justify-center text-brand-muted",
           isActive && "text-[var(--accent)]"
         )}
       >
-        <Icon className="h-5 w-5 shrink-0" strokeWidth={isActive ? 2.25 : 1.75} />
         <span className="text-sm leading-none" aria-hidden>
           {item.emoji}
         </span>
@@ -410,7 +370,9 @@ export function ChairMobileDock({
           className="flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 text-brand-muted transition-apple"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)]">
-            <PanelLeftClose className="h-5 w-5" strokeWidth={1.75} />
+            <span className="text-sm leading-none" aria-hidden>
+              ↔️
+            </span>
           </span>
           {!labelsHidden ? (
             <span className="max-w-[4rem] text-center text-[0.625rem] font-medium leading-tight">{t("labelsDock")}</span>

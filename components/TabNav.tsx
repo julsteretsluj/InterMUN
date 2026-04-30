@@ -4,50 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  User,
-  MessageSquare,
-  BookOpen,
-  FileText,
-  Compass,
-  Lightbulb,
-  Link2,
-  FileCheck,
-  Scale,
-  Mic,
-  ClipboardList,
-  Flag,
-  Presentation,
-  Landmark,
-  ListOrdered,
-  DoorOpen,
-  PanelsTopLeft,
-  Trophy,
-  LayoutDashboard,
-  Layers,
-  Library,
-  Brain,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/database";
-import type { LucideIcon } from "lucide-react";
 
 const BASE_TABS = [
-  { href: "/delegate", labelKey: "delegateHub", icon: LayoutDashboard },
-  { href: "/profile", labelKey: "profile", icon: User },
-  { href: "/chats-notes", labelKey: "notes", icon: MessageSquare },
-  { href: "/committee-room", labelKey: "committee", icon: Landmark },
-  { href: "/voting", labelKey: "voting", icon: Scale },
-  { href: "/guides", labelKey: "guides", icon: BookOpen },
-  { href: "/documents", labelKey: "documents", icon: FileText },
-  { href: "/stances", labelKey: "stances", icon: Compass },
-  { href: "/ideas", labelKey: "ideas", icon: Lightbulb },
-  { href: "/sources", labelKey: "sources", icon: Link2 },
-  { href: "/resolutions", labelKey: "resolutions", icon: FileCheck },
-  { href: "/speeches", labelKey: "speeches", icon: Mic },
-  { href: "/running-notes", labelKey: "running", icon: ClipboardList },
-  { href: "/report", labelKey: "report", icon: Flag },
-  { href: "/crisis-slides", labelKey: "crisisSlides", icon: Presentation },
+  { href: "/delegate", labelKey: "delegateHub", emoji: "🏠" },
+  { href: "/profile", labelKey: "profile", emoji: "👤" },
+  { href: "/chats-notes", labelKey: "notes", emoji: "📝" },
+  { href: "/committee-room", labelKey: "committee", emoji: "🏛️" },
+  { href: "/voting", labelKey: "voting", emoji: "🗳️" },
+  { href: "/guides", labelKey: "guides", emoji: "📚" },
+  { href: "/documents", labelKey: "documents", emoji: "📄" },
+  { href: "/stances", labelKey: "stances", emoji: "🧭" },
+  { href: "/ideas", labelKey: "ideas", emoji: "💡" },
+  { href: "/sources", labelKey: "sources", emoji: "🔗" },
+  { href: "/resolutions", labelKey: "resolutions", emoji: "✅" },
+  { href: "/speeches", labelKey: "speeches", emoji: "🎤" },
+  { href: "/running-notes", labelKey: "running", emoji: "📋" },
+  { href: "/report", labelKey: "report", emoji: "🚩" },
+  { href: "/crisis-slides", labelKey: "crisisSlides", emoji: "🖼️" },
 ] as const;
 
 const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
@@ -60,27 +35,27 @@ function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabl
   return role === "chair" || role === "smt" || role === "admin"
     ? [
         ...baseTabs.slice(0, 3),
-        { href: "/chair/room-code", labelKey: "committeeCode", icon: DoorOpen },
+        { href: "/chair/room-code", labelKey: "committeeCode", emoji: "🚪" },
         ...(role === "chair"
-          ? ([{ href: "/chair/session", labelKey: "session", icon: PanelsTopLeft }] as const)
+          ? ([{ href: "/chair/session", labelKey: "session", emoji: "🧠" }] as const)
           : []),
         ...(role === "smt" || role === "admin"
-          ? ([{ href: "/smt/allocation-passwords", labelKey: "passwords", icon: ListOrdered }] as const)
+          ? ([{ href: "/smt/allocation-passwords", labelKey: "passwords", emoji: "🔐" }] as const)
           : []),
-        { href: "/chair/allocation-matrix", labelKey: "matrix", icon: ListOrdered },
-        { href: "/chair/awards", labelKey: "awards", icon: Trophy },
+        { href: "/chair/allocation-matrix", labelKey: "matrix", emoji: "🔢" },
+        { href: "/chair/awards", labelKey: "awards", emoji: "🏆" },
         ...baseTabs.slice(3),
       ]
     : [...baseTabs];
 }
 
 type MainTabKey = "home" | "session" | "library";
-type MainTab = { key: MainTabKey; labelKey: "home" | "session" | "library"; icon: LucideIcon };
+type MainTab = { key: MainTabKey; labelKey: "home" | "session" | "library"; emoji: string };
 
 const MAIN_TABS: MainTab[] = [
-  { key: "home", labelKey: "home", icon: Layers },
-  { key: "session", labelKey: "session", icon: Brain },
-  { key: "library", labelKey: "library", icon: Library },
+  { key: "home", labelKey: "home", emoji: "🏠" },
+  { key: "session", labelKey: "session", emoji: "🧠" },
+  { key: "library", labelKey: "library", emoji: "📚" },
 ];
 
 const MAIN_TAB_TILE_CLASS: Record<MainTabKey, string> = {
@@ -114,11 +89,10 @@ function AspireSidebarLink({
   label,
   isActive,
 }: {
-  tab: { href: string; labelKey: string; icon: LucideIcon };
+  tab: { href: string; labelKey: string; emoji: string };
   label: string;
   isActive: boolean;
 }) {
-  const Icon = tab.icon;
   return (
     <Link
       href={tab.href}
@@ -129,10 +103,7 @@ function AspireSidebarLink({
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
-      <Icon
-        className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-brand-muted")}
-        strokeWidth={1.75}
-      />
+      <span className="text-base leading-none" aria-hidden>{tab.emoji}</span>
       <span className="hidden truncate group-hover:block">{label}</span>
     </Link>
   );
@@ -143,11 +114,10 @@ function DockLink({
   label,
   isActive,
 }: {
-  tab: { href: string; labelKey: string; icon: LucideIcon };
+  tab: { href: string; labelKey: string; emoji: string };
   label: string;
   isActive: boolean;
 }) {
-  const Icon = tab.icon;
   return (
     <Link
       href={tab.href}
@@ -160,10 +130,7 @@ function DockLink({
           isActive && "text-[var(--accent)]"
         )}
       >
-        <Icon
-          className={cn("h-6 w-6", isActive && "text-[var(--accent)]")}
-          strokeWidth={isActive ? 2.25 : 1.75}
-        />
+        <span className="text-base leading-none" aria-hidden>{tab.emoji}</span>
       </span>
       <span
         className={cn(
@@ -191,7 +158,7 @@ export function TabNav({
   const pathname = usePathname();
   const tabs = useNavTabs(staffRole, crisisReportingEnabled);
   const groupedTabs = useMemo(() => {
-    const groups: Record<MainTabKey, { href: string; labelKey: string; icon: LucideIcon }[]> = {
+    const groups: Record<MainTabKey, { href: string; labelKey: string; emoji: string }[]> = {
       home: [],
       session: [],
       library: [],
@@ -224,7 +191,6 @@ export function TabNav({
           </p>
           <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
             {MAIN_TABS.map((mt) => {
-              const Icon = mt.icon;
               const selected = selectedMain === mt.key;
               return (
                 <button
@@ -245,7 +211,7 @@ export function TabNav({
                       !selected && "opacity-50"
                     )}
                   >
-                    <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
+                    <span className="text-xs leading-none" aria-hidden>{mt.emoji}</span>
                   </span>
                   <span className="hidden min-w-0 truncate group-hover:inline">{t(mt.labelKey)}</span>
                 </button>
@@ -285,7 +251,6 @@ export function TabNav({
             aria-label={t("mainTabs")}
           >
             {MAIN_TABS.map((mt) => {
-              const Icon = mt.icon;
               const selected = selectedMain === mt.key;
               return (
                 <button
@@ -299,10 +264,7 @@ export function TabNav({
                       : "text-brand-muted"
                   )}
                 >
-                  <Icon
-                    className={cn("h-3.5 w-3.5 shrink-0", selected && "text-[var(--accent)]")}
-                    strokeWidth={1.8}
-                  />
+                  <span className="text-xs leading-none" aria-hidden>{mt.emoji}</span>
                   {t(mt.labelKey)}
                 </button>
               );
