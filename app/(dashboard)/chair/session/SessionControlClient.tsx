@@ -194,6 +194,7 @@ const EU_TIMER_SLOT_ORDER: EuTimerSlotKey[] = [
   "poi_poc_time",
   "speaker_time",
 ];
+const EU_TIMER_SLOT_COUNT = EU_TIMER_SLOT_ORDER.length;
 const EU_TIMER_TAG_OPTIONS: EuTimerTag[] = [
   "moderated caucus",
   "unmoderated caucus",
@@ -476,6 +477,18 @@ export function SessionControlClient({
       if (attendance === "absent") return tSessionControl("roll.absent");
       if (attendance === "present_abstain") return tSessionControl("roll.present_abstain");
       return tSessionControl("roll.present_voting");
+    },
+    [tSessionControl]
+  );
+  const sessionPointCodeLabel = useCallback(
+    (code: SessionPointCode) => {
+      if (code === "poi") return tSessionControl("pointOfInformation");
+      if (code === "poc") return tSessionControl("pointOfClarification");
+      if (code === "order") return tSessionControl("pointOfOrder");
+      if (code === "parliamentary_inquiry") return tSessionControl("parliamentaryInquiry");
+      if (code === "personal_privilege") return tSessionControl("personalPrivilege");
+      if (code === "right_of_reply") return tSessionControl("rightOfReply");
+      return tSessionControl("factCheck");
     },
     [tSessionControl]
   );
@@ -877,7 +890,7 @@ export function SessionControlClient({
 
     const [
       { data: psRow },
-      { data: confRow },
+      { data: confRows },
       { data: allocs },
       { data: r },
       { data: ann },
@@ -900,9 +913,9 @@ export function SessionControlClient({
           .maybeSingle(),
         supabase
           .from("conferences")
-          .select("consultation_before_moderated_caucus, event_id, committee, procedure_profile, eu_guided_workflow_enabled")
-          .eq("id", floorConferenceId)
-          .maybeSingle(),
+          .select("id, consultation_before_moderated_caucus, event_id, committee, procedure_profile, eu_guided_workflow_enabled")
+          .in("id", Array.from(new Set([canonicalConferenceId, floorConferenceId])))
+          .limit(2),
         supabase
           .from("allocations")
           .select("id, country, user_id, conference_id")
@@ -1032,14 +1045,24 @@ export function SessionControlClient({
     setMotionFloorOpen(!!ps?.motion_floor_open);
     setEuSessionPhase(parseEuSessionPhase(ps?.eu_session_phase));
 
-    const confForAgenda = confRow as {
+    const confList = (confRows as Array<{
+      id?: string | null;
       consultation_before_moderated_caucus?: boolean;
       event_id?: string | null;
       committee?: string | null;
       procedure_profile?: string | null;
       eu_guided_workflow_enabled?: boolean | null;
-    } | null;
-    const normalizedProcedureProfile = isEuParliamentProcedure(confForAgenda?.procedure_profile)
+    }> | null) ?? [];
+    const confForAgenda = confList.find((row) => row.id === canonicalConferenceId)
+      ?? confList.find((row) => row.id === floorConferenceId)
+      ?? null;
+    const committeeLabel = confForAgenda?.committee?.toString().trim().toLowerCase() ?? "";
+    const looksLikeEuParliamentCommittee =
+      committeeLabel.includes("eu") &&
+      (committeeLabel.includes("parli") || committeeLabel.includes("parliament"));
+    const normalizedProcedureProfile = (
+      isEuParliamentProcedure(confForAgenda?.procedure_profile) || looksLikeEuParliamentCommittee
+    )
       ? "eu_parliament"
       : "default";
     setProcedureProfile(normalizedProcedureProfile);
@@ -2741,11 +2764,10 @@ export function SessionControlClient({
           {(activeSection === "discipline"
             ? []
             : ([
-                ["setup", tSessionControl("tabSetup")],
-                ["floor", tSessionControl("tabFloorQueue")],
-                ["draft", tSessionControl("tabDraftMotion")],
-                ["votes", tSessionControl("tabRecordVotes")],
-                ["history", tSessionControl("tabHistory")],
+                ["setup", "Points"],
+                ["floor", "Motions"],
+                ["draft", "Create motions"],
+                ["history", "History"],
               ] as const)
           ).map(([id, label]) => {
             const active = motionWorkflowTab === id;
@@ -2768,108 +2790,52 @@ export function SessionControlClient({
           })}
         </div>
         {motionWorkflowTab === "setup" ? (
-          <>
-        <p className="text-xs text-brand-muted">{tSessionControl("chairOnlyVotingHelp")}</p>
-        <p className="text-xs text-brand-muted">
-          Quorum gate:{" "}
-          <span className="font-medium text-brand-navy">
-            {quorumStatus.present}/{votingCallOrder.length}
-          </span>{" "}
-          present on roll (need{" "}
-          <span className="font-medium text-brand-navy">{quorumStatus.required}</span>, two-thirds).
-        </p>
-        {isEuGuidedWorkflow ? (
-          <div className="rounded-lg border border-brand-accent/35 bg-brand-accent/10 px-3 py-2.5 space-y-2">
-            <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
-              {tSessionControl("euGuidedPhase")}
-            </p>
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md border border-brand-accent/40 bg-brand-accent/15 px-2 py-1 text-sm font-medium text-brand-navy">
-                {euSessionPhaseLabel(euSessionPhase)}
-              </span>
-              <button
-                type="button"
-                disabled={pending}
-                onClick={() => {
-                  const next = previousEuSessionPhase(euSessionPhase);
-                  if (next === euSessionPhase) return;
-                  startTransition(async () => {
-                    const ok = await persistEuSessionPhase(next);
-                    if (ok) setMsg(`EU phase moved back to ${euSessionPhaseLabel(next)}.`);
-                    void refresh();
-                  });
-                }}
-                className="rounded-lg border border-white/20 bg-black/25 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
-              >
-                Previous phase
-              </button>
-              <button
-                type="button"
-                disabled={pending}
-                onClick={() => {
-                  const next = nextEuSessionPhase(euSessionPhase);
-                  if (next === euSessionPhase) return;
-                  startTransition(async () => {
-                    const ok = await persistEuSessionPhase(next);
-                    if (ok) setMsg(`EU phase advanced to ${euSessionPhaseLabel(next)}.`);
-                    void refresh();
-                  });
-                }}
-                className="rounded-lg border border-brand-accent/45 bg-brand-accent/15 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
-              >
-                Advance phase
-              </button>
-              {euSessionPhase === "voting_procedure" ? (
-                <button
-                  type="button"
-                  disabled={pending}
-                  onClick={() => {
-                    startTransition(async () => {
-                      const ok = await persistEuSessionPhase("closing_statements");
-                      if (!ok) return;
-                      setTimer((t) => ({
-                        ...t,
-                        floorLabel: "EU closing statements (60s)",
-                        totalM: "1",
-                        totalS: "0",
-                        leftM: "1",
-                        leftS: "0",
-                        perSpeakerMode: true,
-                      }));
-                      setMsg("Closing statements started (default 60 seconds). Save timer to publish.");
-                      void refresh();
-                    });
-                  }}
-                  className="rounded-lg border border-brand-accent/45 bg-brand-accent/20 px-2.5 py-1.5 text-xs font-medium text-brand-navy disabled:opacity-50"
-                >
-                  Start closing statements
-                </button>
-              ) : null}
-            </div>
-            <p className="text-xs text-brand-muted">
-              {tSessionControl("euGuidedPhaseHint")}
-            </p>
-          </div>
-        ) : null}
-          </>
-        ) : null}
-        {activeSection !== "discipline" ? (
-          <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
-            <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">{tSessionControl("pointsWorkflow")}</p>
-            <div className="grid gap-2 md:grid-cols-[1fr_auto]">
-              <select
-                value={pointDraftCode}
-                onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
-                className="rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
-              >
-                <option value="poi">{tSessionControl("pointOfInformation")}</option>
-                <option value="poc">{tSessionControl("pointOfClarification")}</option>
-                <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
-                <option value="order">{tSessionControl("pointOfOrder")}</option>
-                <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
-                <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
-                <option value="fact_check">{tSessionControl("factCheck")}</option>
-              </select>
+          <div className="space-y-3">
+            <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5 space-y-2">
+              <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
+                {tSessionControl("pointsWorkflow")}
+              </p>
+              <div className="grid gap-2 md:grid-cols-2">
+                <label className="text-xs text-brand-muted">
+                  {tSessionControl("pointsWorkflow")}
+                  <select
+                    value={pointDraftCode}
+                    onChange={(e) => setPointDraftCode(e.target.value as SessionPointCode)}
+                    className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+                  >
+                    <option value="poi">{tSessionControl("pointOfInformation")}</option>
+                    <option value="poc">{tSessionControl("pointOfClarification")}</option>
+                    <option value="parliamentary_inquiry">{tSessionControl("parliamentaryInquiry")}</option>
+                    <option value="order">{tSessionControl("pointOfOrder")}</option>
+                    <option value="personal_privilege">{tSessionControl("personalPrivilege")}</option>
+                    <option value="right_of_reply">{tSessionControl("rightOfReply")}</option>
+                    <option value="fact_check">{tSessionControl("factCheck")}</option>
+                  </select>
+                </label>
+                <label className="text-xs text-brand-muted">
+                  {tSessionControl("raisedByOptional")}
+                  <select
+                    value={pointDraftAllocationId}
+                    onChange={(e) => setPointDraftAllocationId(e.target.value)}
+                    className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+                  >
+                    <option value="">{tSessionControl("notSpecified")}</option>
+                    {votingCallOrder.map((a) => (
+                      <option key={a.id} value={a.id}>
+                        {displayCountry(a.country)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <label className="text-xs text-brand-muted block">
+                {tSessionControl("detailOptional")}
+                <input
+                  value={pointDraftDetail}
+                  onChange={(e) => setPointDraftDetail(e.target.value)}
+                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-2 py-1.5 text-xs text-brand-navy"
+                />
+              </label>
               <button
                 type="button"
                 disabled={pending}
@@ -3706,9 +3672,9 @@ export function SessionControlClient({
           {(
             isEuParliamentProfile
               ? ([
-                  ["clock", tTimer("tabClock")],
-                  ["notes", tTimer("tabNotes")],
-                  ["log", tTimer("tabLog")],
+                  ["clock", "EU Parli timers"],
+                  ["notes", "Speech notes"],
+                  ["log", "History"],
                 ] as const)
               : ([
                   ["setup", tTimer("tabSetup")],
@@ -3737,10 +3703,10 @@ export function SessionControlClient({
           })}
         </div>
         <div className={`${surfaceCard} space-y-3`}>
-          {isEuParliamentProfile ? (
+          {isEuParliamentProfile && timerWorkflowTab === "clock" ? (
           <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
             <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
-              {tTimer("euTimerBoardTitle")}
+              {tTimer("euTimerBoardTitle")} ({EU_TIMER_SLOT_COUNT})
             </p>
             <p className="text-xs text-brand-muted">
               {tTimer("euTimerBoardHelp")}
@@ -3919,7 +3885,7 @@ export function SessionControlClient({
           ) : null}
             </>
           ) : null}
-          {timerWorkflowTab === "clock" ? (
+          {!isEuParliamentProfile && timerWorkflowTab === "clock" ? (
             <>
           <p className="text-sm text-brand-navy">
             <span className={surfaceLabel}>{tTimer("clock")}</span>{" "}
@@ -4068,7 +4034,7 @@ export function SessionControlClient({
           </div>
           ) : null}
 
-          {timerWorkflowTab === "clock" ? (
+          {!isEuParliamentProfile && timerWorkflowTab === "clock" ? (
           <div className="space-y-4">
           <div className="flex flex-wrap gap-4 items-end">
             <label className="text-sm text-brand-navy min-w-[10rem]">
@@ -4341,6 +4307,7 @@ export function SessionControlClient({
           conferenceId={floorConferenceId}
           allocations={allocations}
           variant="session"
+          isEuParliament={procedureProfile === "eu_parliament"}
           isCrisisCommittee={isCrisisCommitteeSession}
           speakerListPromptKind={speakerListChairPrompt}
           onDismissSpeakerListPrompt={dismissSpeakerListPrompt}

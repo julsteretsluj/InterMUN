@@ -43,17 +43,21 @@ type ChairNavItem = {
   crisisOnly?: boolean;
 };
 
-/** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
+/** Primary tab order follows chair workflow sequence requested by product. */
 const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/prep-checklist", itemKey: "prepChecklist", emoji: "✅" },
+  {
+    href: "/chair/session/announcements",
+    itemKey: "announcements",
+    emoji: "📣",
+  },
   {
     href: "/chair/session/agenda",
     itemKey: "agenda",
     emoji: "📑",
   },
-  { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "📋" },
   { href: "/chair/allocation-matrix", itemKey: "delegates", emoji: "👥" },
-  { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },
+  { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "📋" },
   {
     href: "/chair/session/roll-call",
     itemKey: "rollCall",
@@ -65,6 +69,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "▶️",
     exactHref: true,
   },
+  { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },
   {
     href: "/chair/session/speakers",
     itemKey: "speakers",
@@ -76,26 +81,21 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "📜",
   },
   {
-    href: "/chair/session/discipline",
-    itemKey: "discipline",
-    emoji: "⚖️",
-  },
-  {
     href: "/chair/session/timer",
     itemKey: "timer",
     emoji: "⏱️",
   },
-  {
-    href: "/chair/session/announcements",
-    itemKey: "announcements",
-    emoji: "📣",
-  },
   { href: "/voting", itemKey: "voting", emoji: "🗳️" },
   { href: "/chair/awards", itemKey: "score", emoji: "📊" },
-  { href: "/report", itemKey: "crisis", emoji: "⚠️", crisisOnly: true },
-  { href: "/crisis-slides", itemKey: "crisisSlides", emoji: "🖼️", crisisOnly: true },
+  {
+    href: "/chair/session/discipline",
+    itemKey: "discipline",
+    emoji: "⚖️",
+  },
   { href: "/documents", itemKey: "archive", emoji: "📁" },
   { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
+  { href: "/report", itemKey: "crisis", emoji: "⚠️", crisisOnly: true },
+  { href: "/crisis-slides", itemKey: "crisisSlides", emoji: "🖼️", crisisOnly: true },
   { href: "/chair/room-code", itemKey: "roomCode", emoji: "🚪" },
   { href: "/profile", itemKey: "settings", emoji: "⚙️", activeMatch: "/profile" },
 ];

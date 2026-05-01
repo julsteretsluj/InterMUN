@@ -6,6 +6,8 @@ import { ChevronDown, ChevronUp, ListOrdered } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { EU_PARLIAMENT_PARTY_KEYS, EU_PARTY_LABELS, type EuPartyKey } from "@/lib/eu-party-time";
 import {
   activeAllocationIdsInQueue,
   addAllocationToSpeakerQueue,
@@ -22,12 +24,93 @@ type ChairSpeakerQueuePanelProps = {
   conferenceId: string;
   allocations: Alloc[];
   variant: "session" | "digital-room";
+  isEuParliament?: boolean;
   /** Crisis committees keep crisis actor seats even when linked to chair-role accounts. */
   isCrisisCommittee?: boolean;
   speakerListPromptKind?: SpeakerListChairPromptKind | null;
   onDismissSpeakerListPrompt?: () => void;
   /** Session page: surface feedback in the shared message strip. */
   onNotify?: (text: string) => void;
+};
+
+const EU_PARTY_SHORT_LABELS: Record<EuPartyKey, string> = {
+  s_and_d: "S&D",
+  epp: "EPP",
+  renew: "Renew",
+  left: "The Left",
+  green: "Greens/EFA",
+  c_and_r: "ECR",
+  patriots: "PfE",
+  independents: "NI",
+};
+
+const EU_PARTY_TOKEN_TO_KEY: Record<string, EuPartyKey> = {
+  "s&d": "s_and_d",
+  "s and d": "s_and_d",
+  "socialists and democrats": "s_and_d",
+  epp: "epp",
+  renew: "renew",
+  "renew europe": "renew",
+  left: "left",
+  "the left": "left",
+  green: "green",
+  greens: "green",
+  "greens efa": "green",
+  "greens/efa": "green",
+  "c&r": "c_and_r",
+  "c and r": "c_and_r",
+  ecr: "c_and_r",
+  patriots: "patriots",
+  pfe: "patriots",
+  "patriots for europe": "patriots",
+  ni: "independents",
+  independents: "independents",
+  "non inscrits": "independents",
+  "non-inscrits": "independents",
+};
+
+function normalizePartyToken(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[()]/g, "")
+    .replace(/[^\w&/+-]+/g, " ")
+    .trim();
+}
+
+function parseEuParty(countryLabel: string): EuPartyKey | null {
+  const trimmed = countryLabel.trim();
+  if (!trimmed) return null;
+  const tailParens = trimmed.match(/\(([^)]+)\)\s*$/)?.[1]?.trim();
+  const dashTail = trimmed.split(/\s[-–—]\s/).at(-1)?.trim();
+  const candidates = [tailParens, dashTail, trimmed];
+  for (const c of candidates) {
+    if (!c) continue;
+    const norm = normalizePartyToken(c);
+    if (!norm) continue;
+    const direct = EU_PARTY_TOKEN_TO_KEY[norm];
+    if (direct) return direct;
+    for (const [token, key] of Object.entries(EU_PARTY_TOKEN_TO_KEY)) {
+      if (norm.includes(token)) return key;
+    }
+  }
+  return null;
+}
+
+function stripTrailingParty(rawCountry: string) {
+  const withoutParens = rawCountry.replace(/\s*\(([^)]+)\)\s*$/g, "").trim();
+  const dashMatch = withoutParens.match(/^(.*?)\s[-–—]\s(.+)$/);
+  if (!dashMatch) return withoutParens;
+  const tail = normalizePartyToken(dashMatch[2] ?? "");
+  if (!tail) return withoutParens;
+  if (EU_PARTY_TOKEN_TO_KEY[tail]) return (dashMatch[1] ?? "").trim();
+  return withoutParens;
+}
+
+type SpeakerAllocation = Alloc & {
+  countryName: string;
+  partyKey: EuPartyKey | null;
+  displayLabel: string;
+  queueLabel: string;
 };
 
 const SESSION_CARD =
@@ -43,6 +126,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
       conferenceId,
       allocations,
       variant,
+      isEuParliament = false,
       isCrisisCommittee = false,
       speakerListPromptKind = null,
       onDismissSpeakerListPrompt,
@@ -94,8 +178,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     }, [supabase, conferenceId, loadQueue]);
 
     const activeQueueAllocationIds = useMemo(() => activeAllocationIdsInQueue(queue), [queue]);
-    const speakerAllocations = useMemo(() => {
-      return allocations.filter((alloc) => {
+    const speakerAllocations = useMemo<SpeakerAllocation[]>(() => {
+      const filtered = allocations.filter((alloc) => {
         const label = alloc.country?.trim() ?? "";
         const key = label.toLowerCase();
         const isDaisSeat =
@@ -108,10 +192,51 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         if (role === "chair") return false;
         return true;
       });
-    }, [allocations]);
+      const decorated = filtered.map((alloc) => {
+        const rawCountry = alloc.country?.trim() || t("dash");
+        const partyKey = isEuParliament ? parseEuParty(rawCountry) : null;
+        const countryName = isEuParliament ? stripTrailingParty(rawCountry) : rawCountry;
+        const flag = flagEmojiForCountryName(countryName);
+        const countryWithFlag = `${flag} ${countryName}`.trim();
+        const partyShort = partyKey ? EU_PARTY_SHORT_LABELS[partyKey] : null;
+        const partyFull = partyKey ? EU_PARTY_LABELS[partyKey] : null;
+        const displayLabel = partyShort ? `${countryWithFlag} - ${partyShort}` : countryWithFlag;
+        const queueLabel = partyFull ? `${countryWithFlag} - ${partyFull}` : countryWithFlag;
+        return {
+          ...alloc,
+          countryName,
+          partyKey,
+          displayLabel,
+          queueLabel,
+        };
+      });
+      if (!isEuParliament) return decorated;
+      const partyOrder = new Map(EU_PARLIAMENT_PARTY_KEYS.map((key, index) => [key, index]));
+      return decorated.sort((a, b) => {
+        const aOrder = a.partyKey ? (partyOrder.get(a.partyKey) ?? 999) : 999;
+        const bOrder = b.partyKey ? (partyOrder.get(b.partyKey) ?? 999) : 999;
+        if (aOrder !== bOrder) return aOrder - bOrder;
+        return a.countryName.localeCompare(b.countryName);
+      });
+    }, [allocations, isEuParliament, t]);
+    const allocationById = useMemo(() => {
+      const map = new Map<string, SpeakerAllocation>();
+      for (const alloc of speakerAllocations) map.set(alloc.id, alloc);
+      return map;
+    }, [speakerAllocations]);
     const sortedQueue = useMemo(
       () => [...queue].sort((a, b) => a.sort_order - b.sort_order),
       [queue]
+    );
+    const queueLabelForRow = useCallback(
+      (row: SpeakerQueueEntry) => {
+        if (row.allocation_id) {
+          const alloc = allocationById.get(row.allocation_id);
+          if (alloc) return alloc.queueLabel;
+        }
+        return row.label || t("dash");
+      },
+      [allocationById, t]
     );
     const statusLabel = useCallback(
       (status: string | null | undefined) => {
@@ -138,7 +263,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           supabase,
           conferenceId,
           a.id,
-          a.country,
+          a.queueLabel,
           rows
         );
         notify(result.ok ? t("addedToSpeakerList") : result.message);
@@ -163,7 +288,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             supabase,
             conferenceId,
             id,
-            alloc?.country ?? t("dash"),
+            alloc?.queueLabel ?? t("dash"),
             rows
           );
           if (!result.ok) {
@@ -310,7 +435,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                         <li key={a.id}>
                           <label className="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" checked={checked} onChange={() => toggleCaucusBulkPick(a.id)} />
-                            <span>{a.country}</span>
+                            <span>{a.displayLabel}</span>
                           </label>
                         </li>
                       );
@@ -383,7 +508,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                 <option value="">{t("select")}</option>
                 {speakerAllocations.map((a) => (
                   <option key={a.id} value={a.id}>
-                    {a.country}
+                    {a.displayLabel}
                   </option>
                 ))}
               </select>
@@ -400,7 +525,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   className={`flex flex-wrap items-center justify-between gap-2 py-2 ${rowBorder}`}
                 >
                   <span className="font-medium">
-                    {q.label || t("dash")}{" "}
+                    {queueLabelForRow(q)}{" "}
                     <span
                       className={
                         isSession

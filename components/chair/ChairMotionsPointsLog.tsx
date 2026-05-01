@@ -36,9 +36,11 @@ export type DelegatePointEntry = {
 export function ChairMotionsPointsLog({
   conferenceId,
   delegateOptions,
+  showDiscipline = true,
 }: {
   conferenceId: string;
   delegateOptions: DelegateOption[];
+  showDiscipline?: boolean;
 }) {
   const t = useTranslations("chairMotionsPointsLog");
   const tSessionControl = useTranslations("sessionControlClient");
@@ -183,9 +185,11 @@ export function ChairMotionsPointsLog({
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadPoints();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    void loadDiscipline();
-  }, [loadDiscipline, loadPoints]);
+    if (showDiscipline) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      void loadDiscipline();
+    }
+  }, [loadDiscipline, loadPoints, showDiscipline]);
 
   useEffect(() => {
     void supabase.auth.getUser().then(({ data }) => {
@@ -204,13 +208,15 @@ export function ChairMotionsPointsLog({
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "chair_delegate_discipline" },
-        () => void loadDiscipline()
+        () => {
+          if (showDiscipline) void loadDiscipline();
+        }
       )
       .subscribe();
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [conferenceId, loadDiscipline, loadPoints, supabase]);
+  }, [conferenceId, loadDiscipline, loadPoints, showDiscipline, supabase]);
 
   const selectedDiscipline = useMemo(
     () => disciplineRows.find((r) => r.allocationId === selectedAllocationId) ?? null,
@@ -283,10 +289,11 @@ export function ChairMotionsPointsLog({
       </p>
 
       <div className="flex flex-wrap gap-2">
-        {([
-          ["points", t("logTitle")],
-          ["discipline", t("disciplinarySystem")],
-        ] as const).map(([id, label]) => {
+        {(
+          showDiscipline
+            ? ([["points", t("logTitle")], ["discipline", t("disciplinarySystem")]] as const)
+            : ([["points", t("logTitle")]] as const)
+        ).map(([id, label]) => {
           const active = activeTab === id;
           return (
             <button
