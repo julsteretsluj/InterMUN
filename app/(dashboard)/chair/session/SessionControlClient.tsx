@@ -1504,9 +1504,12 @@ export function SessionControlClient({
     const abstainAllowedByVoteType =
       activeMotionForRecordedVotes.vote_type === "resolution" ||
       activeMotionForRecordedVotes.vote_type === "amendment";
-    const canAbstain = abstainAllowedByVoteType && attendance !== "present_voting";
+    const canAbstain =
+      !activeMotionForRecordedVotes.must_vote &&
+      abstainAllowedByVoteType &&
+      attendance !== "present_voting";
     if (value === "abstain" && !canAbstain) {
-      setMsg("Abstain is only available for resolutions/amendments when roll is not Present and voting.");
+      setMsg("Abstain is not available for must-vote motions.");
       return;
     }
     const uid = allocation.user_id;
@@ -3404,6 +3407,7 @@ export function SessionControlClient({
                       activeMotionForRecordedVotes?.vote_type === "resolution" ||
                       activeMotionForRecordedVotes?.vote_type === "amendment";
                     const canAbstain =
+                      !activeMotionForRecordedVotes.must_vote &&
                       abstainAllowedByVoteType &&
                       (rollA ?? "present_voting") !== "present_voting" &&
                       !absent;

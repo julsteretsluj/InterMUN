@@ -211,6 +211,13 @@ export function VotingPanel({
     row: Pick<VotingRosterEntry, "allocationId" | "userId">,
     value: "yes" | "no" | "abstain"
   ) {
+    const item = voteItems.find((v) => v.id === itemId);
+    const isAgendaFloor = item ? isAgendaFloorVoteItem(item) : false;
+    const isMustVote = isAgendaFloor || !!item?.must_vote;
+    if (value === "abstain" && isMustVote) {
+      setVoteError(t("abstainNotApplicableMotionType"));
+      return;
+    }
     const { error } = await supabase
       .from("votes")
       .upsert(
@@ -268,7 +275,7 @@ export function VotingPanel({
     const isAgendaFloor = isAgendaFloorVoteItem(item);
     const isMustVote = isAgendaFloor || item.must_vote;
     const abstainAllowedForItem =
-      item.vote_type === "resolution" || item.vote_type === "amendment" || isAgendaFloor;
+      !isMustVote && (item.vote_type === "resolution" || item.vote_type === "amendment" || isAgendaFloor);
     const abstainCount = (votes[item.id] ?? []).filter((x) => x.value === "abstain").length;
     const typeLabel = voteTypeLabel(item.vote_type);
     const rawTitle = item.title?.trim() || "";
