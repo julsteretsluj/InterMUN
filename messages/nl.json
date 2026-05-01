@@ -58,7 +58,7 @@
     "committeeCodePlaceholder": "bijv. DIS795",
     "saving": "Besparing…",
     "committeeRoomCodes": "Commissie-/kamercodes",
-    "committeeCodesHelp": "Dezelfde waarde wordt gebruikt voor de <strong>tweede poort</strong> (commissiecode) en de deelnamestroom van de voorzitterskamer, uniek binnen dit evenement. Deelnemers voeren deze in na de conferentiecode.",
+    "committeeCodesHelp": "Dezelfde waarde wordt gebruikt voor de <strong>tweede poort</strong> (commissiecode) en de deelnamestroom aan de voorzitterskamer, uniek binnen dit evenement. Deelnemers voeren deze in na de conferentiecode.",
     "noCommitteesYet": "Er zijn nog geen commissies voor dit evenement.",
     "inviteDaisChairs": "Nodig podiumstoelen uit",
     "inviteHelp": "Stuurt een magische Supabase-link zodat ze een wachtwoord kunnen instellen. Hun profiel wordt ingesteld op <strong>voorzitter</strong> zodra de uitnodiging is aangemaakt. Configureer de server-env-variabele <code>SUPABASE_SERVICE_ROLE_KEY</code> en sta uw aanmeldings-URL toe (bijvoorbeeld <code>…/login</code>) onder Authenticatie -> URL-configuratie -> Omleidings-URL's.",
@@ -69,7 +69,7 @@
     "sendChairInvite": "Stuur een stoeluitnodiging",
     "grantChairRoleTitle": "Voorzitterrol toekennen (bestaand account)",
     "grantChairRoleHelp": "Als ze zich al hebben aangemeld als afgevaardigde, promoot ze dan hier zodat ze het voorzittersdashboard en de commissietools krijgen (geen e-mail verzonden).",
-    "grantChairRole": "Voorzitterrol toekennen"
+    "grantChairRole": "Voorzitterschap toekennen"
   },
   "chairDelegateApprovalForm": {
     "title": "Accepteer delegeren per e-mail + toewijzing",
@@ -97,7 +97,7 @@
     "newCommitteeCode": "Nieuwe commissiecode",
     "newCommitteeCodeHelp": "Moet precies 6 letters/cijfers bevatten. Deel dit alleen met de commissiedeelnemers die toegang moeten krijgen tot deze ruimte.",
     "committeeCodePlaceholder": "bijv. WIE582",
-    "switching": "Overstappen...",
+    "switching": "Overstappen…",
     "switchToSelectedCommittee": "Schakel over naar de geselecteerde commissie",
     "saving": "Besparing…",
     "saveCodeGoToProfile": "Bewaar code en ga naar profiel"
@@ -151,7 +151,7 @@
     "addTag": "Label toevoegen",
     "selected": "Gekozen",
     "googleDocsUrl": "URL van Google Documenten",
-    "googleDocsUrlOptional": "URL van Google Documenten (optioneel)",
+    "googleDocsUrlOptional": "URL voor Google Documenten (optioneel)",
     "googleDocsHelp": "Plak een gedeelde Google Documenten-link om een ​​live voorbeeld van uw notities weer te geven. De koppeling is optioneel; u kunt in plaats daarvan notities in platte tekst bewaren.",
     "googleDocsPlaceholder": "https://docs.google.com/document/d/…",
     "googleDocsSaveHint": "Een nieuw Google-document wordt op een ander tabblad geopend. Opslaan na het plakken van de link; het voorbeeld wordt bijgewerkt terwijl u typt.",
@@ -189,7 +189,7 @@
     "presetConsultationTitle": "Motie voor overleg",
     "presetCabinetMeeting": "Kabinetsvergadering",
     "presetCabinetMeetingTitle": "Motie voor een kabinetsvergadering",
-    "presetShadowMeeting": "Schaduwvergadering",
+    "presetShadowMeeting": "Schaduw bijeenkomst",
     "presetShadowMeetingTitle": "Motie voor een schaduwbijeenkomst",
     "presetAdjournSession": "Sessie schorsen",
     "presetAdjournSessionTitle": "Motie om de zitting te schorsen",
@@ -242,13 +242,13 @@
     "amendment": "Wijziging",
     "resolution": "Oplossing",
     "requiredMajorityRop": "Vereiste meerderheid (RoP)",
-    "auditTimeline": "Controletijdlijn",
+    "auditTimeline": "Tijdlijn voor audits",
     "noAuditEvents": "Nog geen auditgebeurtenissen.",
     "recentMotions": "Recente moties",
     "closed": "gesloten",
     "reopen": "Heropenen",
     "daisAnnouncements": "Dais-aankondigingen",
-    "daisAnnouncementsHelp": "Gebruik Markdown voor vetgedrukte tekst, lijsten en links. Speld één lijn voor de vloerstrook; plan een toekomstig publicatietijdstip en afgevaardigden zullen het pas zien zodra dat moment voorbij is. U kunt elke onderstaande regel bewerken of verwijderen.",
+    "daisAnnouncementsHelp": "Gebruik Markdown voor vetgedrukte tekst, lijsten en links. Speld één lijn voor de vloerstrook; Plan een toekomstige publicatietijd en afgevaardigden zullen dit pas zien zodra dat moment voorbij is. U kunt elke onderstaande regel bewerken of verwijderen.",
     "message": "Bericht",
     "messageToCommittee": "Bericht aan de commissie…",
     "format": "Formaat",
@@ -270,7 +270,7 @@
     "rollCallHelp": "Aanwezig: onthouding mogelijk. Aanwezig en stemmen: moet ja/nee stemmen. Afwezig: er wordt geen stembiljet geregistreerd.",
     "rollCallIntro": "Kies voor elke afgevaardigde Aanwezig (kan zich onthouden), Aanwezig en stemt (moet stemmen) of Afwezig.",
     "initializeRowsAllAllocations": "Rijen initialiseren (alle toewijzingen)",
-    "noRollRowsYet": "Nog geen rolrijen. Initialiseer om één rij per deelnemersbordje te maken op basis van de toewijzingsmatrix van deze commissie.",
+    "noRollRowsYet": "Nog geen rolrijen. Initialiseer om één rij per deelnemerskaart te maken op basis van de toewijzingsmatrix van deze commissie.",
     "delegates": "Afgevaardigden",
     "delegateRollStatusHint": "Gebruik de drie knoppen om de rolstatus van die afgevaardigde in te stellen. De huidige status is gemarkeerd.",
     "majorityHelp": "Eenvoudig voor procedurele bewegingen; tweederde voor resoluties, amendementen en moties om een ​​amendement goed te keuren (vooraf ingestelde amendementen).",
@@ -301,7 +301,7 @@
     "saveEdits": "Bewaar bewerkingen",
     "deleteMotionConfirm": "Deze beweging definitief verwijderen? Alle geregistreerde stemmen ervoor worden verwijderd en de motie verdwijnt uit het verslag.",
     "deleteMotion": "Beweging verwijderen",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Tally: Ja {ja} | Nee {nee} | Stembiljetten {totaal}",
     "ballotsHelp": "Stembiljetten = plakkaten met een geregistreerd Ja of Nee (onthouding wordt afzonderlijk bijgehouden en niet meegeteld in deze noemer). Clear verwijdert een geregistreerde stem. Voor procedurele moties is de uitkomst 'Ja' vergelijkbaar met de leden die op de lijst aanwezig zijn (zie het hoofdafroepgedeelte).",
     "recordVotesLabel": "Stemmen registreren",
     "currentMotion": "huidige beweging",
@@ -313,7 +313,104 @@
     "unitMinutesShort": "M",
     "unitSecondsShort": "S",
     "apply": "Toepassen",
-    "motionControl": "Motion control"
+    "motionControl": "Bewegingscontrole",
+    "advancedSpeakerResetClock": "Geavanceerde luidspreker en klok per luidspreker opnieuw instellen.",
+    "writeSpeechNoteFirst": "Schrijf iets voordat u een spraaknotitie opslaat.",
+    "speechNoteSaved": "Spraaknotitie opgeslagen.",
+    "speechNoteDeleted": "Toespraaknotitie verwijderd.",
+    "announcementPosted": "Aankondiging geplaatst.",
+    "announcementPinnedToFloor": "Vastgemaakt voor de commissievloer.",
+    "announcementUnpinned": "Losgemaakt.",
+    "announcementBodyRequired": "De aankondigingstekst mag niet leeg zijn.",
+    "announcementUpdated": "Aankondiging bijgewerkt.",
+    "deleteAnnouncementConfirm": "Deze aankondiging definitief verwijderen? Dit kan niet ongedaan worden gemaakt.",
+    "announcementDeleted": "Mededeling verwijderd.",
+    "noAllocationsToAdd": "Er zijn geen toewijzingen om toe te voegen.",
+    "rollCallRowsAlreadyExist": "Appèl heeft al een rij voor elke toewijzing.",
+    "rollCallRowsAdded": "{count} appèlrij(en) toegevoegd.",
+    "motionCreatedOpened": "Beweging gecreëerd en geopend.",
+    "motionUpdated": "Beweging bijgewerkt.",
+    "motionClosed": "Beweging gesloten.",
+    "motionAlreadyOpenReopenBlocked": "Er ligt al een andere motie ter stemming. Sluit het voordat u deze opnieuw opent.",
+    "motionReopened": "Beweging heropend.",
+    "motionFloorOpened": "Bewegingsvloer open - noteer hieronder elke aangegeven beweging.",
+    "motionFloorClosed": "Motievloer gesloten voor verklaringen.",
+    "openMotionFloorFirst": "Open eerst de bewegingsvloer voor uitspraken.",
+    "openMotionBlocksRecording": "Er ligt al een motie ter stemming. Sluit het voordat u verdere verklaringen opneemt.",
+    "statedMotionRecorded": "De motie is opgenomen (nog niet open voor stemming).",
+    "statedMotionRemoved": "Gestelde motie verwijderd."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} voltooid - gesynchroniseerd voor deze commissie",
+      "loading": "Laden...",
+      "resetChecklist": "Controlelijst opnieuw instellen"
+    },
+    "prepPage": {
+      "description": "Vóór de conferentie: regels, onderwerp, ruimte, materialen en team. Gesynchroniseerd voor alle voorzitters van deze commissie; reset wist het voor iedereen.",
+      "crisisHidden": "Voor dit commissietype zijn crisisspecifieke voorbereidingsitems verborgen."
+    },
+    "flowPage": {
+      "description": "Normale commissiestroom: vink de stappen aan terwijl u bezig bent. Gedeeld tussen stoelaccounts en apparaten; resetten is voor iedereen gewist."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "Regels & procedure"
+        },
+        "topic": {
+          "title": "Commissie & onderwerp"
+        },
+        "room": {
+          "title": "Kamer & techniek"
+        },
+        "materials": {
+          "title": "Materialen & logistiek"
+        },
+        "crisis": {
+          "title": "Crisis (indien van toepassing)"
+        },
+        "team": {
+          "title": "Team & communicatie"
+        }
+      },
+      "items": {
+        "rop": "Het reglement van orde van de commissie lezen en begrijpen",
+        "parliamentary": "Herziening parlementaire procedure (moties, punten, stemming)",
+        "speaking-times": "Bevestig spreektijden en tijdslimieten",
+        "quorum": "Ken de quorum- en stemvereisten",
+        "research": "Onderwerp en achtergrond van de onderzoekscommissie",
+        "study-guide": "Lees de studiegids en de belangrijkste documenten",
+        "dashboard-topic": "Stel de commissienaam en het onderwerp in het dashboard in",
+        "agenda": "Bereid de agenda en het verloop van de sessie voor",
+        "digital-room": "Digitale ruimte opzetten (afgevaardigdenlijst, plakkaten)",
+        "tech-check": "Technische check: platform, audio, scherm delen",
+        "backup": "Zorg voor een back-upplan als de technologie faalt",
+        "roll-plan": "Opstellen appèllijst en presentielijst",
+        "speakers-plan": "Plannen van sprekerslijstbeheer",
+        "templates": "Algemene bewegingen/punten voorbereiden (bij gebruik van sjablonen)",
+        "timing": "Bevestig de starttijd en pauzes van de sessie",
+        "crisis-slides": "Bespreek crisiselementen en update dia's",
+        "crisis-cues": "Plan crisissprekerbestelling/cues",
+        "crisis-paths": "Bereid crisistrajecten en feiten voor",
+        "co-chairs": "Overleg met de covoorzitter(s) over de rollen",
+        "staff": "Bevestig de ondersteuning en signalen van personeel/podium",
+        "delegate-brief": "Bereid een briefing voor voor de afgevaardigden (regels, timing)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Naamafroeping",
+        "open-floor": "Open de vloer (punten en bewegingen)",
+        "recognize": "Herken bewegingen",
+        "vote-1": "Stemming over motie(s)",
+        "engage": "Neem deel aan de gekozen beweging of ga naar GSL",
+        "open-again": "Open de vloer opnieuw",
+        "recognize-repeat": "Bewegingen herkennen (herhalen indien nodig)",
+        "vote-2": "Stemming over motie(s)",
+        "cycle": "Cyclus voortzetten (beweging inschakelen / GSL -> open vloer)"
+      }
+    }
   },
   "language": {
     "label": "Taal",
@@ -352,7 +449,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "Helpcentrum",
-    "settings": "Instellingen"
+    "settings": "Instellingen",
+    "appHomeAria": "{appName} thuis",
+    "defaultDisplayName": "Delegeren"
   },
   "authWizard": {
     "enterApp": "Voer {appName} in",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "Stoelen slaan elk slot op als concept op de scorepagina. Deze ontwerpen worden hier niet getoond. Zodra elk vereist slot is voltooid, moet de voorzitter op Nominaties indienen bij SMT klikken. Vervolgens verschijnen de rijen in deze tabel als in afwachting van beoordeling.",
     "noRowsForCommittee": "Geen lopende rijen voor deze commissie. Kiezen",
     "orAnotherTab": "of een ander tabblad.",
-    "topRank": "Top {rank}",
+    "topRank": "Top {rang}",
     "bandInitialsTitle": "Bandinitialen: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Beste Afgevaardigde (commissie)",
@@ -665,7 +764,7 @@
     "title": "Aanmelden commissie",
     "description": "Nadat u bent ingelogd op uw account, bevestigt u uw <alloc>toewijzing</alloc> en voert u vanuit uw stoel het <pwd>commissiewachtwoord</pwd> in.",
     "noAllocation": "U heeft nog geen toewijzing voor deze commissie. Vraag SMT om u in de matrix toe te wijzen voordat u verder kunt gaan.",
-    "chairHint": "<bold>Dais-stoelen</bold> hebben commissietoewijzing nodig van het secretariaat. Nadat SMT uw stoel heeft toegevoegd, herlaadt u en logt u in met uw toewijzing en het commissiewachtwoord.",
+    "chairHint": "<bold>Dais-stoelen</bold> hebben commissietoewijzing nodig van het secretariaat. Nadat SMT uw stoel heeft toegevoegd, kunt u opnieuw laden en inloggen met uw toewijzing en het commissiewachtwoord.",
     "changeRoomCode": "Kamercode wijzigen",
     "or": "of"
   },
@@ -699,7 +798,7 @@
     "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
     "topicLabel": "Onderwerp:",
     "chairsLabel": "Stoelen:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "{naam}-logo",
     "eslFriendly": "ESL-vriendelijk"
   },
   "chairNav": {
@@ -725,6 +824,7 @@
       "session": "Sessie",
       "speakers": "Luidsprekers",
       "formalMotions": "Formele moties",
+      "discipline": "Disciplinair",
       "timer": "Timer",
       "announcements": "Aankondigingen",
       "motionsPoints": "Bewegingen en punten",
@@ -817,7 +917,7 @@
       "sourceLabel": "Bron",
       "openLink": "Link openen",
       "embedHeading": "Brondocument",
-      "notGoogleDoc": "Deze URL is geen Google-document. Gebruik een docs.google.com/document/d/… link om hier in te sluiten en te bewerken; anders opent u de bovenstaande link."
+      "notGoogleDoc": "Deze URL is geen Google-document. Gebruik een docs.google.com/document/d/… link om hier in te sluiten en te bewerken; Open anders de bovenstaande link."
     },
     "documents": {
       "alertDelegatePositionPaper": "Afgevaardigden kunnen Position Papers niet rechtstreeks uploaden. Gebruik een ander documenttype.",
@@ -881,7 +981,7 @@
     },
     "resolutions": {
       "enterDelegateEmailFirst": "Voer eerst een e-mailadres van een gemachtigde in.",
-      "sentToDelegate": "Sent to {email}.",
+      "sentToDelegate": "Verzonden naar {e-mail}.",
       "newResolution": "Nieuwe resolutie",
       "maxDraftResolutions": "Deze commissie heeft al {count} ontwerpresoluties.",
       "googleDocLink": "Google Doc-link",
@@ -894,15 +994,15 @@
       "openInNewTab": "Openen in nieuw tabblad",
       "noGoogleDocLink": "Geen Google Doc-link",
       "visibleToOtherBloc": "Zichtbaar voor ander blok",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
-      "blocButton": "Bloc {name} ({stance})",
+      "resolutionCounts": "Hoofdondertitels: {hoofd} | Co-subs: {co} | Ondertekenaars: {ondertekenaars}",
+      "blocButton": "Blok {naam} ({stand})",
       "signVirtually": "Virtueel ondertekenen (belangrijkste subs op de hoogte gebracht)",
       "shareByEmail": "Deel de oplossing per e-mail",
       "delegateEmailPlaceholder": "delegatie@email.com",
       "sendToDelegate": "Verzenden naar afgevaardigde",
       "clauseEditor": "Clausule-editor",
       "noClausesYet": "Nog geen clausules.",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "Artikel {nummer}",
       "saveClause": "Bewaar clausule",
       "delete": "Verwijderen",
       "addClausePlaceholder": "Een nieuwe clausule toevoegen...",
@@ -1013,7 +1113,79 @@
       "errImageSize": "Afbeelding is te groot (max. 5 MB).",
       "errUploadFailed": "Uploaden mislukt.",
       "errStorageSetup": "Er is geen profielfoto-opslag ingesteld. Voer in het Supabase-project migratie 00100_profile_pictures_storage_bucket.sql uit, of maak een openbare opslagbucket met de naam profile-pictures (zie README).",
-      "errPublicUrl": "Kan de openbare URL voor de geüploade afbeelding niet vinden."
+      "errPublicUrl": "Kan de openbare URL voor de geüploade afbeelding niet vinden.",
+      "fallbacks": {
+        "yourCountry": "jouw land",
+        "committeeSession": "Commissiesessie",
+        "delegate": "Delegeren",
+        "speechNote": "Toespraak notitie",
+        "untitledMotion": "Naamloze beweging",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "Welkom afgevaardigde van {flag} {country}",
+        "subtitle": "Waar zou jij graag mee willen beginnen?",
+        "links": {
+          "documents": "Documenten",
+          "notes": "Opmerkingen",
+          "committeeRoom": "Commissie kamer",
+          "runningNotes": "Notities uitvoeren",
+          "ideas": "Ideeën",
+          "guides": "Gidsen",
+          "sources": "Bronnen",
+          "resolutions": "Resoluties",
+          "speeches": "Toespraken",
+          "stances": "Standpunten",
+          "crisisSlides": "De crisis glijdt",
+          "report": "Rapport",
+          "motions": "Bewegingen",
+          "points": "Punten"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "Prijzen op uw profiel",
+        "rank": "rang {rang}",
+        "pending": {
+          "tab": "Nominaties in behandeling",
+          "title": "In afwachting van voorzittersnominaties",
+          "descriptionSingle": "Opgeslagen door stoelen en ter beoordeling gedeeld met SMT. De definitieve prijzen verschijnen hieronder na bevestiging.",
+          "descriptionTabbed": "Opgeslagen door stoelen en ter beoordeling gedeeld met SMT. De definitieve onderscheidingen verschijnen na bevestiging."
+        },
+        "recorded": {
+          "tab": "Opgenomen onderscheidingen",
+          "title": "Opgenomen onderscheidingen",
+          "description": "Vermeld wanneer stoelen of SMT u toewijzen in de onderscheidingentracker. De definitieve erkenning volgt de regels van uw conferentie."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "Alleen zichtbaar voor u, commissievoorzitters, en SMT voor de betreffende commissie.",
+        "points": {
+          "title": "Stoelpunten (privé)"
+        },
+        "speechNotes": {
+          "title": "Toespraak van de voorzitter (privé)"
+        },
+        "motions": {
+          "title": "Bewegingen die je bewoog",
+          "description": "Opgeslagen in uw profiel voor commissiebeoordeling en SMT-toezicht."
+        }
+      },
+      "discipline": {
+        "title": "Disciplinaire status (privé)",
+        "statusLine": "Waarschuwingen: {warnings} · Waarschuwingen: {strikes}{votingDisabled}{speakerSuspended}{removedFromCommittee}",
+        "votingDisabled": "stemmen uitgeschakeld",
+        "speakingSuspended": "spreken opgeschort",
+        "removedFromCommittee": "uit de commissie verwijderd",
+        "updated": "Bijgewerkt: {waarde}"
+      },
+      "preview": {
+        "ariaLabel": "Profielvoorbeeld",
+        "title": "Voorbeeld",
+        "yourName": "Jouw naam",
+        "usernameNotSet": "Gebruikersnaam niet ingesteld",
+        "gradeValue": "Graad {cijfer}",
+        "awards": "Onderscheidingen"
+      }
     },
     "guides": {
       "default": {
@@ -1048,14 +1220,14 @@
       "createNewGuide": "Nieuwe gids maken",
       "slugPlaceholder": "naaktslak (uniek)",
       "titleLowerPlaceholder": "titel",
-      "googleDocsUrlOptional": "URL van Google Documenten (optioneel)",
+      "googleDocsUrlOptional": "URL voor Google Documenten (optioneel)",
       "markdownContentOptional": "Prijsverlagingsinhoud (optioneel)",
       "create": "Creëren",
       "glossary": {
         "title": "MUN Agenda Woordenlijst",
         "subtitle": "Unieke terminologie afgestemd op uw commissiecode en actuele agendaonderwerpen.",
         "committeeCode": "Commissiecode: {code}",
-        "topicTag": "Topic: {topic}",
+        "topicTag": "Onderwerp: {onderwerp}",
         "sources": {
           "core": "kern",
           "committee": "commissie",
@@ -1290,9 +1462,9 @@
       "add": "Toevoegen",
       "noIdeasYet": "Nog geen ideeën.",
       "ideaLabel": "Idee",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Idee {nummer}",
       "linkedDoc": "Gekoppeld document",
-      "addedOn": "Added {date}",
+      "addedOn": "{datum} toegevoegd",
       "edit": "Bewerking",
       "delete": "Verwijderen",
       "ideaDocument": "Ideedocument",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "Commissie",
+      "yourContext": "Jouw context",
+      "roleLabel": "Rol",
+      "seatLabel": "Zitplaats",
       "clearSearchTitle": "Wis de zoekopdracht en toon alle delegaties",
       "vacantLabel": "Vrij",
+      "assignedLabel": "Toegewezen",
+      "daisLabel": "Dais",
+      "phaseLabel": "Fase",
+      "phaseVoting": "Stemmen",
+      "phaseDebate": "Debat",
+      "focusSearchTitle": "Focus zoeken (podiumtitels en namen komen overeen met uw zoekopdracht)",
+      "tipLabel": "Tip",
       "searchVacantTitle": "Zoek naar \"vrije\" zitplaatsen in de kamer",
       "searchHint": "Typ een land, naam van de afgevaardigde, school, voornaamwoord of 'vacant' om overeenkomsten in de ruimte te markeren. Druk op Enter om naar de eerste wedstrijd te gaan; Esc wordt gewist. Klik op Vacant om naar lege stoelen te gaan.",
       "findLabel": "Zoek een delegatie- of podiumlid",
       "searchPlaceholder": "Land, naam, school...",
       "matchesCount": "{matches} van {total} zitplaatsen komen overeen",
+      "enterScrolls": "Voer rollen in",
+      "typeToFilterHint": "Type om te filteren - Voer scrollt naar de eerste overeenkomst in",
+      "noMatches": "Geen overeenkomende delegaties of podiumstoelen.",
+      "digitalDisplay": "Digitaal display",
+      "floorLabel": "Vloer",
+      "staffSeatsHeading": "Personeel - zitplaatsen",
       "searchAria": "Zoek delegaties",
       "virtualRoomVacant": "Vrij",
       "profileAria": "Bekijk profiel: {country}",
       "vacantSeatAria": "Vrije stoel",
-      "placardAria": "Placard {country}",
-      "gavelAria": "Hamer"
+      "placardAria": "Plakkaat {land}",
+      "gavelAria": "Hamer",
+      "viewProfileAria": "Bekijk profiel: {title}",
+      "noProfileLinkAria": "{title} (geen profiellink)",
+      "committeeFloor": "Comité verdieping",
+      "virtualRoomFigureAria": "Virtuele commissiekamer - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Delegaties filteren. De eerste gemarkeerde stoel is de eerste wedstrijd in de ring.",
+      "helperText": "Op plakkaten worden het land (van toewijzingen), naam, school en voornaamwoorden uit het profiel van elke afgevaardigde vermeld. Bewerk de jouwe onder Profiel. Lege commissiezetels worden weergegeven als Vrij. Klik op een gevuld plakkaat of podiumplaats om de pagina van dat lid te openen (chat en rapporteer vanaf daar).",
+      "virtualRoomCaption": "Virtuele model VN-commissiekamer met borden van afgevaardigden met daarop het land, de naam, de school en de voornaamwoorden."
     },
     "session": {
       "requestToSpeak": {
@@ -1357,7 +1552,7 @@
         "alreadyQueued": "U heeft al een actief spreekverzoek in de wachtrij.",
         "requested": "Gevraagd om te spreken. Je verschijnt in de wachtrij.",
         "requestFailed": "Kan geen spreekverzoek indienen.",
-        "helpBody": "Stuurt uw delegatie naar de stoelwachtrij. U kunt één actief wachtend/lopend verzoek tegelijk hebben.",
+        "helpBody": "Stuurt uw delegatie naar de stoelwachtrij. U kunt één actief wachtend/huidig ​​verzoek tegelijk hebben.",
         "purposeLabel": "Optioneel doel (weergegeven in wachtrijlabel)",
         "purposeHelpTitle": "Doel etiket",
         "purposeHelpBody": "Deze tekst wordt toegevoegd aan uw landnaam, zodat de stoelen kunnen zien waarom u het woord aanvraagt.",
@@ -1379,7 +1574,7 @@
         "motioner": "Beweger",
         "majority": "Meerderheid",
         "majoritySimple": "Eenvoudig",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "Ja {ja} - Nee {nee} - Totaal {totaal}",
         "help": "Het podium registreert de stemming van elke delegatie tijdens de zitting. Voor motiestemmen wordt alleen Ja of Nee gebruikt (geen onthouding). Totalen tellen alleen de plakkaten waar Ja of Nee op stond; afwezige delegaties worden overgeslagen."
       },
       "activeMotion": {
@@ -1396,14 +1591,14 @@
         "speakerTimeLeftTotal": "Sprekertijd (links / totaal)",
         "perSpeaker": "(per spreker)",
         "paused": "(gepauzeerd)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Pauze: {reden}"
       },
       "floorStatus": {
         "sessionTime": "Sessie tijd",
         "sessionNotStarted": "Sessie niet gestart",
         "limit": "Beperken",
-        "limitRemaining": "{value} left",
-        "limitOverBy": "over by {value}",
+        "limitRemaining": "{waarde} over",
+        "limitOverBy": "voorbij met {waarde}",
         "quickLinkSession": "Sessie",
         "quickLinkRoll": "Rollen",
         "quickLinkSpeakers": "Luidsprekers",
@@ -1422,7 +1617,7 @@
       },
       "committeeControl": {
         "sessionNameLabel": "Sessienaam",
-        "sessionNamePlaceholder": "bijv. Ochtendsessie",
+        "sessionNamePlaceholder": "bijv. Ochtend sessie",
         "sessionNameSaving": "Besparing…",
         "sessionNameSaved": "Opgeslagen",
         "sessionNameHint": "Wordt automatisch opgeslagen en verschijnt in de sessiegeschiedenis.",
@@ -1437,7 +1632,7 @@
         "startedLabel": "Gestart:",
         "timeInLabel": "Tijd in:",
         "timeUntilEndLabel": "Tijd tot einde:",
-        "overByValue": "over by {value}",
+        "overByValue": "voorbij met {waarde}",
         "modeLabel": "Modus:",
         "modeStopwatchNoLimit": "Stopwatch (geen tijdslimiet)",
         "sessionNotRunning": "Sessie loopt niet.",
@@ -1480,8 +1675,8 @@
         "delete": "Verwijderen",
         "deleteConfirm": "Deze sessie uit de geschiedenis verwijderen?",
         "sessionNamePrompt": "Sessienaam",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{bereik}",
+        "rangeOngoing": "{bereik} -> Lopend"
       },
       "timerPage": {
         "title": "Timer",
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "Timer is al gepauzeerd.",
         "pausedForCommittee": "Timer pauzeerde voor de commissie.",
         "alreadyRunning": "De timer loopt al.",
-        "runningForCommittee": "Timer loopt voor de commissie."
+        "runningForCommittee": "Timer loopt voor de commissie.",
+        "euTimerBoardTitle": "Timerbord van het EU-Parlement (11 timers)",
+        "euTimerBoardHelp": "Eén timer per party, plus totale tijd, POI/POC-tijd en luidsprekertijd. Gebruik Toepassen om een ​​rij te kopiëren naar de livetimervelden op het tabblad Klok (sprekertijd / Timer opslaan).",
+        "euTimerName": "Naam",
+        "euTimerTag": "Label",
+        "euTotalTime": "Totale tijd",
+        "euPoiPocTime": "POI/POC-tijd",
+        "euSpeakerTime": "Spreker tijd"
       }
     }
   },
@@ -1566,7 +1768,7 @@
     "daisListed": "Dais (vermeld)",
     "committeeCodeSecondGate": "Commissie-/kamercode (tweede poort)",
     "seats": "Zitplaatsen",
-    "seatsFilledAllocated": "{filled} filled · {total} allocated",
+    "seatsFilledAllocated": "{gevuld} gevuld · {totaal} toegewezen",
     "resolutions": "Resoluties",
     "openVotes": "Openstaande stemmen",
     "editMetadataIntro": "Bewerk de metadata van de commissiesessie en de namen van de voorzitters onder",
@@ -1647,7 +1849,7 @@
     "delegatesMatrix": "Delegeert matrix",
     "clearAllChairNotes": "Wis alle stoelnotities",
     "searchCountry": "Zoek land...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} plakkaten · {gemarkeerd} met stoelnotities · Rol opgenomen voor {count}",
     "loading": "Laden...",
     "noDelegationsMatch": "Er zijn geen delegaties die overeenkomen met uw zoekopdracht.",
     "rollPrefix": "Rol {label}",
@@ -1661,7 +1863,11 @@
     "adding": "Toevoegen...",
     "addToSpeakerList": "Toevoegen aan sprekerslijst",
     "reminder": "Herinnering",
-    "privateReminderLabel": "Privéherinnering (alleen stoelen, gesynchroniseerd)"
+    "privateReminderLabel": "Privéherinnering (alleen stoelen, gesynchroniseerd)",
+    "clearAllConfirm": "Duidelijke complimenten, zorgen en herinneringsbriefjes voor elk bordje? Hiermee wordt de gedeelde commissiekopie bijgewerkt.",
+    "addedToSpeakerList": "{country} toegevoegd aan sprekerslijst.",
+    "committeeFallback": "Commissie",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Selecteer live-onderwerp",
@@ -1669,7 +1875,7 @@
     "sessionControlHint": "Bewegingen, timers en de sprekerslijst volgen deze onderwerprij. Het appèl maakt nog steeds gebruik van elke toewijzing van afgevaardigden."
   },
   "agendaTopics": {
-    "climateAction": "Klimaatactie",
+    "climateAction": "Klimaat actie",
     "climateChange": "Klimaatverandering",
     "cyberSecurity": "Cyberbeveiliging",
     "aiGovernance": "AI-beheer",
@@ -1687,7 +1893,7 @@
     "qGlobalHealthcareAccess": "Hoe kan de internationale gemeenschap de toegang tot hoogwaardige gezondheidszorg verbeteren?",
     "qAiGovernance": "Hoe moeten staten AI en opkomende technologieën reguleren?",
     "qDisinformationImpact": "Welke maatregelen kunnen de mondiale impact van desinformatie verminderen?",
-    "qSecurityHumanRights": "Hoe kunnen landen veiligheid en mensenrechten in evenwicht brengen bij de bestrijding van terrorisme?",
+    "qSecurityHumanRights": "Hoe kunnen landen veiligheid en mensenrechten in balans brengen in de strijd tegen terrorisme?",
     "qRefugeeProtection": "Hoe kan het VN-systeem de bescherming van vluchtelingen en duurzame oplossingen ondersteunen?",
     "qFoodSecurity": "Welke strategieën kunnen de voedselzekerheid in klimaatgevoelige regio’s verbeteren?",
     "qNonProliferation": "Hoe moet de internationale gemeenschap nucleaire proliferatie voorkomen?"
@@ -1787,7 +1993,7 @@
     "titlePipeline": "Statusportaal (Pijplijn)",
     "selectEventFirst": "Selecteer eerst een actieve gebeurtenis.",
     "noSessionsYet": "Er zijn nog geen commissiesessies gevonden voor dit evenement.",
-    "intro": "Afgevaardigden gaan na goedkeuring van <strong>In behandeling</strong> naar <strong>Bevestigd</strong>. Als u bevestigt, worden ze als gemachtigde aangemerkt en wordt de welkomst-e-mail geactiveerd.",
+    "intro": "Afgevaardigden gaan na goedkeuring van <strong>In behandeling</strong> naar <strong>Bevestigd</strong>. Als u bevestigt, worden ze als afgevaardigde aangemerkt en wordt de welkomst-e-mail geactiveerd.",
     "pending": "In behandeling",
     "confirmed": "Bevestigd",
     "nothingPending": "Niets in behandeling.",
@@ -1909,7 +2115,7 @@
       "rangeAllTime": "Altijd",
       "emailSubject": "InterMUN-materiaalexport ({range})",
       "emailSendConfigHint": "Stel SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS en optioneel MATERIALS_EXPORT_FROM in op de server.",
-      "exportEmailedTo": "Exporteer gemaild naar {email}. Als je het niet ziet, controleer dan de spam/ongewenste berichten."
+      "exportEmailedTo": "Exporteer een e-mail naar {email}. Als je het niet ziet, controleer dan de spam/ongewenste berichten."
     }
   },
   "emails": {
@@ -1922,9 +2128,9 @@
       "welcomeLine3": "Tot ziens op de vloer.",
       "chairReminderSubject": "Toewijzingsverzoek delegeren in afwachting van goedkeuring",
       "chairReminderLine1": "Een afgevaardigde heeft om een ​​toewijzing verzocht en heeft een voorzittersbeoordeling nodig.",
-      "chairReminderConference": "Conference: {conference}",
+      "chairReminderConference": "Conferentie: {conferentie}",
       "chairReminderAllocation": "Gevraagde toewijzing: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
+      "chairReminderDelegate": "Gedelegeerde: {naam}",
       "chairReminderEmail": "Account-e-mailadres: {email}",
       "chairReminderLine2": "Gelieve dit verzoek goed te keuren of af te wijzen in de stoelverdelingsmatrix:"
     }
@@ -1996,7 +2202,7 @@
     "showingOneCommitteeAtATime": "Eén commissie tegelijk weergeven. Schakel van commissie via de onderste tabbladen.",
     "editPlacardCodesSheet": "Bewerk het plakkaatcodeblad ->",
     "rosterHeading": "Rooster · {heading}",
-    "seatsSummary": "{count} seat(s).",
+    "seatsSummary": "{tel} stoel(en).",
     "linkedDelegatesCannotBeDeleted": "Gekoppelde afgevaardigden kunnen hier niet worden verwijderd.",
     "countryPosition": "Land / positie",
     "placardCode": "Plakkaatcode",
@@ -2038,7 +2244,7 @@
       "steps": {
         "step1": "Selecteer een genomineerde voor elk gewenst Topslot.",
         "step2": "Kies precies één band voor elke criteriumrij.",
-        "step3": "Voeg beknopt bewijsmateriaal toe uit debatten, redacties en diplomatie.",
+        "step3": "Voeg beknopt bewijsmateriaal toe uit debatten, opstellen en diplomatie.",
         "step4": "Sla de vereiste slots op en voeg indien nodig optionele slots toe.",
         "step5": "Wanneer u klaar bent, verzendt u de volledige batch naar SMT."
       }
@@ -2062,7 +2268,7 @@
         "helperOptionalSecond": "Dien minimaal 1 eervolle vermelding in (verplicht). Tweede HM is optioneel.",
         "slots": {
           "required1": "Eervolle vermelding nr. 1",
-          "required2": "Eervolle vermelding #2",
+          "required2": "Eervolle vermelding nr. 2",
           "optional2": "Eervolle vermelding #2 (optioneel)",
           "backup": "Eervolle vermelding back-up"
         }
@@ -2087,7 +2293,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "jouw commissie",
     "fallbackCommittee": "Commissie",
-    "welcome": "Welcome, Chair of {committee}",
+    "welcome": "Welkom, voorzitter van {commissie}",
     "featureStrip": "Digitale Kamer · Bewegingen · Stemmen · Sprekers",
     "activeCommitteeLine": "Actieve commissie: <line></line>. Sessiegegevens worden gesynchroniseerd via uw account; voorbereidings-/stroomchecklists en moties en punten worden voor deze commissie in deze browser opgeslagen - hetzelfde idee als <seamuns>SEAMUNs Chair Room</seamuns>.",
     "tiles": {
@@ -2228,7 +2434,7 @@
           "0": "Vaak verward door het onderwerp; berust op algemeenheden in plaats van op specifieke feiten.",
           "1": "Heeft een basiskennis van de agenda, maar mist technische of juridische nuances.",
           "2": "Toont een sterke beheersing van het onderwerp; citeert relevante statistieken en acties uit het verleden van de VN.",
-          "3": "Meesterschap op expertniveau; maakt gebruik van diepgaand onderzoek om technische debatten te doorgronden en valse informatie te ontkrachten."
+          "3": "Meesterschap op expertniveau; maakt gebruik van diepgaand onderzoek om technische debatten te navigeren en valse informatie te ontkrachten."
         }
       },
       "participation": {
@@ -2262,7 +2468,7 @@
         "label": "Beleidsnauwkeurigheid",
         "bands": {
           "0": "Fundamenteel misverstand over het juridisch kader van het onderwerp of het mandaat van de commissie.",
-          "1": "Begrijpt het algemene onderwerp maar mist technische of juridische complexiteiten binnen het huidige beleid.",
+          "1": "Begrijpt het algemene onderwerp, maar mist technische of juridische complexiteiten binnen het huidige beleid.",
           "2": "Stevig inzicht in complexe beleidskwesties (bijvoorbeeld specifieke clausules in het internationaal recht).",
           "3": "Nauwkeurigheid op expertniveau; integreert technische feiten om een ​​geavanceerd beleidsargument op te bouwen."
         }
@@ -2452,7 +2658,7 @@
         "bands": {
           "0": "Zeer giftig of kliekachtig; kleinere blokken weigeren met elkaar te praten.",
           "1": "Standaard diplomatiek gedrag; basissamenwerking tijdens de caucusing.",
-          "2": "Inclusieve sfeer; grotere blokken zoeken actief naar input van kleinere naties.",
+          "2": "Inclusieve sfeer; grotere blokken zoeken actief naar input van kleinere landen.",
           "3": "Voorbeeldige diplomatie; hoge afstemming van ‘doelgericht beleid’ en het opbouwen van consensus."
         }
       },
@@ -2474,6 +2680,130 @@
           "3": "Naadloze synergie; het podium inspireert een professionele omgeving waar veel op het spel staat."
         }
       }
+    },
+    "maxPoints": "Max. {punten} punten",
+    "reference": {
+      "title": "SEAMUN I officiële onderscheidingsrubrieken",
+      "description": "Referentie-exemplaar: soorten onderscheidingen, evaluatieproces en volledige 1-8-bandmatrices (uit de conferentierubriek). Bij het scoren in InterMUN worden dezelfde criteriumsleutels gebruikt als bij het indienen van nominaties."
+    },
+    "sections": {
+      "catalogue": "Award catalogus",
+      "processOversight": "Toekenningsproces en toezicht",
+      "calibrationTraining": "Kalibratie en training van stoelen (schaal 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Conferentiebreed (algemeen)",
+      "collectiveChair": "Collectief en voorzitter",
+      "committeeLevel": "Op commissieniveau"
+    },
+    "matrices": {
+      "positionPaper": "Positiepapier (Best Position Paper)",
+      "delegateLiveSessions": "Delegeren (live sessies)",
+      "chairPerformance": "Prestaties van de stoel",
+      "chairReportOverall": "Voorzitterschapsverslag - algemeen",
+      "chairReportSectionSpecific": "Voorzitterschapsverslag - sectiespecifiek",
+      "bestCommittee": "Beste commissie"
+    },
+    "evidenceNote": "Voorzitters voltooien bewijsmateriaal en schriftelijke bevestiging voor SMT-records: primair bewijs van uitmuntendheid en rechtvaardiging versus tweede plaats (per gepubliceerd formulier).",
+    "footnotes": {
+      "delegateLiveSessions": "Creativiteit, diplomatie, samenwerking, leiderschap, kennis en onderzoek, participatie - elk 8 punten.",
+      "chairPerformance": "Acht dimensies scoorden elk 8 punten voor de afstemming tussen beste stoel en stoelevaluatie.",
+      "chairReportSectionSpecific": "Gecombineerd met de algemene sectie hierboven voor een totale score van het voorzittersrapport tot 72 op de uitgebreide schaal in het officiële document."
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "Comitétoewijzingsmatrix voor uw huidige sessie. Dit is alleen-lezen voor stoelen en weerspiegelt actieve stoeltoewijzingen en plakkaatcodes.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "Toewijzing",
+      "flag": "Vlag",
+      "email": "E-mail",
+      "name": "Naam",
+      "grade": "Cijfer",
+      "notes": "Opmerkingen",
+      "requestedAllocation": "Gevraagde toewijzing",
+      "account": "Rekening",
+      "actions": "Acties"
+    },
+    "noRows": "Er zijn geen toewijzingsrijen gevonden voor deze commissie.",
+    "pendingApprovalsTitle": "In afwachting van aanmeldingsgoedkeuringen",
+    "pendingApprovalsIntro": "De voorzitters keuren aanmeldingen voor toewijzingslinks goed of weigeren deze om ervoor te zorgen dat de afgevaardigden het juiste account gebruiken.",
+    "noPendingRequests": "Geen openstaande verzoeken.",
+    "unknownAllocation": "Onbekende toewijzing",
+    "approve": "Goedkeuren",
+    "reject": "Afwijzen"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Toewijzingsmatrix",
+    "selectConferenceEventFirst": "Selecteer eerst een conferentiegebeurtenis.",
+    "enterConferenceCode": "Voer de conferentiecode in",
+    "intro": "Bouw of importeer de zetellijst voor elke commissie in het actieve evenement. Afgevaardigden kiezen na aanmelding hun rij bij de commissiepoort; plakkaatcodes kunnen overeenkomen met uw spreadsheet-ID's."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "Sprekerslijst",
+    "addedToSpeakerList": "Toegevoegd aan sprekerslijst.",
+    "chooseDelegationsNotAlreadyQueued": "Kies delegaties die nog niet wachten of op de lijst staan.",
+    "addedSpeakersInOrder": "{count} spreker(s) toegevoegd in de volgorde van de commissielijst.",
+    "introPrefix": "Voeg delegaties toe in spreekvolgorde. Afgevaardigden kunnen nog steeds gebruiken",
+    "requestToSpeak": "Verzoek om te spreken",
+    "introMiddle": "in de commissiekamer. Gebruik",
+    "sessionTimerLink": "Sessie → Timer",
+    "introSuffixPrefix": "voor tijd per spreker en",
+    "advanceSpeaker": "Vooruitgang spreker",
+    "addDelegation": "Delegatie toevoegen",
+    "select": "Selecteer…",
+    "add": "Toevoegen",
+    "addSelectedToList": "Geselecteerde toevoegen aan lijst",
+    "dismissReminder": "Herinnering negeren",
+    "moveUp": "Ga omhoog",
+    "moveDown": "Ga naar beneden",
+    "current": "Huidig",
+    "remove": "Verwijderen",
+    "prompt": {
+      "gslTitle": "Lijst van algemene sprekers (GSL)",
+      "moderatedTimerTitle": "Gemodereerde caucus (timer per spreker)",
+      "moderatedPassedTitle": "Gematigde caucus voorbij",
+      "bodyPrefix": "Gebruik daarvoor onderstaande sprekerslijst",
+      "add": "toevoegen",
+      "bodyAddMiddle": "afgevaardigden (dropdownmenu +",
+      "bodyAddMiddle2": ", of vink delegaties en aan",
+      "bodyRemovePrefix": ") En",
+      "remove": "verwijderen",
+      "bodyRemoveMiddle": "ze mee",
+      "bodyRowSuffix": "op elke rij. Herschik met de pijlen of stel in",
+      "bodyEnd": "wanneer iemand bij de microfoon zit.",
+      "noAllocations": "Er zijn nog geen toewijzingen geladen voor deze commissie. Sluit af wanneer u klaar bent: u kunt later sprekers toevoegen via de lijstknoppen.",
+      "quickAdd": "Snel toevoegen (nog niet wachtend of actueel)",
+      "alreadyQueued": "Elke toewijzing heeft al een wacht- of huidig ​​slot. Verwijder items als u de volgorde wilt wijzigen, of verwijder ze als u klaar bent."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "Timer",
+    "currentSpeaker": "Huidige spreker",
+    "nextSpeaker": "Volgende spreker",
+    "speakerTimePerSpeaker": "Sprekertijd (links / cap)",
+    "speakerTimeTotal": "Sprekertijd (links / totaal)",
+    "perSpeaker": "(per spreker)",
+    "paused": "(gepauzeerd)",
+    "pauseReason": "Pauze: {reden}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "Elke afgevaardigde — sessierubriek (verplicht)",
+    "intro": "Dezelfde zes dimensies als de nominaties voor de beste afgevaardigde van de commissie. U moet <strong>elke zittende afgevaardigde</strong> een score geven voordat u nominaties indient bij SMT ({completeCount}/{total} complete).",
+    "complete": "Compleet",
+    "incomplete": "Onvolledig",
+    "saving": "Besparing...",
+    "saveThisDelegate": "Bewaar deze afgevaardigde",
+    "autosaved": "Automatisch opgeslagen",
+    "autosaveFailed": "Automatisch opslaan mislukt",
+    "autosavedWithCountry": "Automatisch opgeslagen — {country}",
+    "delegateFallback": "delegeren"
   }
 }

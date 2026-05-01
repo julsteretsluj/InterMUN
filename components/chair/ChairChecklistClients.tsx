@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   CHAIR_FLOW_ITEMS,
   CHAIR_PREP_SECTIONS,
@@ -38,6 +39,7 @@ export function ChairPrepChecklistClient({
   /** FWC / UNSC / HSC only — hides the “Crisis (if applicable)” prep block. */
   crisisPrepEnabled: boolean;
 }) {
+  const t = useTranslations("chairChecklists");
   const legacyKey = useMemo(() => `intermun.chair.prep.${conferenceId}.v1`, [conferenceId]);
   const loadLegacy = useCallback(
     () => parseLegacyChecklistArray(typeof window !== "undefined" ? localStorage.getItem(legacyKey) : null),
@@ -60,7 +62,7 @@ export function ChairPrepChecklistClient({
     [crisisPrepEnabled]
   );
 
-  const allIds = useMemo(() => prepSections.flatMap((s) => s.items.map((i) => i.id)), [prepSections]);
+  const allIds = useMemo(() => prepSections.flatMap((s) => s.itemIds), [prepSections]);
   const done = useMemo(() => allIds.filter((id) => checked.has(id)).length, [allIds, checked]);
 
   const toggle = useCallback(
@@ -83,10 +85,10 @@ export function ChairPrepChecklistClient({
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           {ready ? (
             <>
-              {done} / {allIds.length} complete · synced for this committee
+              {t("common.progressSynced", { done, total: allIds.length })}
             </>
           ) : (
-            "Loading…"
+            t("common.loading")
           )}
         </p>
         <button
@@ -94,7 +96,7 @@ export function ChairPrepChecklistClient({
           onClick={reset}
           className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
-          Reset checklist
+          {t("common.resetChecklist")}
         </button>
       </div>
 
@@ -116,22 +118,23 @@ function PrepSectionBlock({
   checked: Set<string>;
   onToggle: (id: string) => void;
 }) {
+  const t = useTranslations("chairChecklists");
   return (
     <div className={surfaceCard}>
       <h3 className="font-display text-base font-semibold text-slate-900 dark:text-zinc-50">
-        {section.title}
+        {t(`prep.sections.${section.id}.title`)}
       </h3>
       <ul className="mt-3 space-y-2">
-        {section.items.map((item) => (
-          <li key={item.id}>
+        {section.itemIds.map((itemId) => (
+          <li key={itemId}>
             <label className="flex cursor-pointer items-start gap-3 rounded-lg py-1 text-sm leading-snug hover:bg-slate-50 dark:hover:bg-zinc-800/50">
               <input
                 type="checkbox"
-                checked={checked.has(item.id)}
-                onChange={() => onToggle(item.id)}
+                checked={checked.has(itemId)}
+                onChange={() => onToggle(itemId)}
                 className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
               />
-              <span>{item.label}</span>
+              <span>{t(`prep.items.${itemId}`)}</span>
             </label>
           </li>
         ))}
@@ -141,6 +144,7 @@ function PrepSectionBlock({
 }
 
 export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: string }) {
+  const t = useTranslations("chairChecklists");
   const legacyKey = useMemo(() => `intermun.chair.flow.${conferenceId}.v1`, [conferenceId]);
   const loadLegacy = useCallback(
     () => parseLegacyChecklistArray(typeof window !== "undefined" ? localStorage.getItem(legacyKey) : null),
@@ -180,10 +184,10 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
         <p className="text-sm text-slate-600 dark:text-zinc-400">
           {ready ? (
             <>
-              {done} / {allIds.length} complete · synced for this committee
+              {t("common.progressSynced", { done, total: allIds.length })}
             </>
           ) : (
-            "Loading…"
+            t("common.loading")
           )}
         </p>
         <button
@@ -191,7 +195,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
           onClick={reset}
           className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
-          Reset checklist
+          {t("common.resetChecklist")}
         </button>
       </div>
 
@@ -206,7 +210,7 @@ export function ChairFlowChecklistClient({ conferenceId }: { conferenceId: strin
                   onChange={() => toggle(item.id)}
                   className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-diplomatic focus:ring-brand-accent dark:border-zinc-600"
                 />
-                <span>{item.label}</span>
+                <span>{t(`flow.items.${item.id}`)}</span>
               </label>
             </li>
           ))}

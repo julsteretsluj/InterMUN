@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function ChairFlowChecklistPage() {
   const t = await getTranslations("pageTitles");
+  const tChecklist = await getTranslations("chairChecklists.flowPage");
   const supabase = await createClient();
   const {
     data: { user },
@@ -29,8 +30,7 @@ export default async function ChairFlowChecklistPage() {
     <MunPageShell title={t("committeeFlowChecklist")}>
       <div className="space-y-3">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
-          Normal committee flow — tick steps as you go. Shared across chair accounts and devices; reset clears for
-          everyone.
+          {tChecklist("description")}
         </p>
         <ChairFlowChecklistClient conferenceId={conferenceId} />
       </div>

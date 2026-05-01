@@ -31,6 +31,10 @@ const locales = [
   "he",
   "sw",
   "mi",
+  "km",
+  "lo",
+  "my",
+  "ms",
 ];
 
 function flatten(obj, prefix = "", out = []) {

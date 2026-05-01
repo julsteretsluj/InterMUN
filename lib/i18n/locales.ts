@@ -28,6 +28,10 @@ export const SUPPORTED_LOCALES = [
   "he",
   "sw",
   "mi",
+  "km",
+  "lo",
+  "my",
+  "ms",
 ] as const;
 
 export type AppLocale = (typeof SUPPORTED_LOCALES)[number];
@@ -64,6 +68,10 @@ export const LOCALE_LABELS: Record<AppLocale, string> = {
   he: "עברית (Hebrew)",
   sw: "Kiswahili (Swahili)",
   mi: "Te Reo Māori (Māori)",
+  km: "ភាសាខ្មែរ (Khmer/Cambodian)",
+  lo: "ລາວ (Lao)",
+  my: "မြန်မာ (Burmese)",
+  ms: "Bahasa Melayu (Malay)",
 };
 
 export function isSupportedLocale(value: string | null | undefined): value is AppLocale {

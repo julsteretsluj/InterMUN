@@ -9,6 +9,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function ChairDigitalRoomPage() {
   const t = await getTranslations("pageTitles");
+  const tRoom = await getTranslations("chairDigitalRoom");
   const supabase = await createClient();
   const {
     data: { user },
@@ -34,7 +35,7 @@ export default async function ChairDigitalRoomPage() {
   ]);
 
   const committeeLine =
-    [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || "Committee";
+    [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || tRoom("committeeFallback");
 
   const allocationUserIds = [
     ...new Set((allocationRows ?? []).map((r) => r.user_id).filter((id): id is string => Boolean(id))),

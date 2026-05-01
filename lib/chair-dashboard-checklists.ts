@@ -2,79 +2,45 @@
 
 export type ChairPrepSection = {
   id: string;
-  title: string;
-  items: { id: string; label: string }[];
+  itemIds: string[];
 };
 
 export const CHAIR_PREP_SECTIONS: ChairPrepSection[] = [
   {
     id: "rules",
-    title: "Rules & procedure",
-    items: [
-      { id: "rop", label: "Read and understand committee rules of procedure" },
-      { id: "parliamentary", label: "Review parliamentary procedure (motions, points, voting)" },
-      { id: "speaking-times", label: "Confirm speaking times and time limits" },
-      { id: "quorum", label: "Know quorum and voting requirements" },
-    ],
+    itemIds: ["rop", "parliamentary", "speaking-times", "quorum"],
   },
   {
     id: "topic",
-    title: "Committee & topic",
-    items: [
-      { id: "research", label: "Research committee topic and background" },
-      { id: "study-guide", label: "Read study guide and key documents" },
-      { id: "dashboard-topic", label: "Set committee name and topic in dashboard" },
-      { id: "agenda", label: "Prepare session agenda and flow" },
-    ],
+    itemIds: ["research", "study-guide", "dashboard-topic", "agenda"],
   },
   {
     id: "room",
-    title: "Room & tech",
-    items: [
-      { id: "digital-room", label: "Set up digital room (delegates list, placards)" },
-      { id: "tech-check", label: "Tech check: platform, audio, screen share" },
-      { id: "backup", label: "Have backup plan if tech fails" },
-    ],
+    itemIds: ["digital-room", "tech-check", "backup"],
   },
   {
     id: "materials",
-    title: "Materials & logistics",
-    items: [
-      { id: "roll-plan", label: "Prepare roll call list and attendance" },
-      { id: "speakers-plan", label: "Plan speakers list management" },
-      { id: "templates", label: "Prepare common motions / points (if using templates)" },
-      { id: "timing", label: "Confirm session start time and breaks" },
-    ],
+    itemIds: ["roll-plan", "speakers-plan", "templates", "timing"],
   },
   {
     id: "crisis",
-    title: "Crisis (if applicable)",
-    items: [
-      { id: "crisis-slides", label: "Review crisis elements and update slides" },
-      { id: "crisis-cues", label: "Plan crisis speaker order / cues" },
-      { id: "crisis-paths", label: "Prepare crisis pathways and facts" },
-    ],
+    itemIds: ["crisis-slides", "crisis-cues", "crisis-paths"],
   },
   {
     id: "team",
-    title: "Team & communication",
-    items: [
-      { id: "co-chairs", label: "Coordinate with co-chair(s) on roles" },
-      { id: "staff", label: "Confirm staff / dais support and cues" },
-      { id: "delegate-brief", label: "Prepare brief for delegates (rules, timing)" },
-    ],
+    itemIds: ["co-chairs", "staff", "delegate-brief"],
   },
 ];
 
 /** Labels match SEAMUNs “Committee flow checklist” checkboxes (thedashboard.seamuns.site/chair → Flow checklist). */
-export const CHAIR_FLOW_ITEMS: { id: string; label: string }[] = [
-  { id: "roll-call", label: "Roll call" },
-  { id: "open-floor", label: "Open the floor (points & motions)" },
-  { id: "recognize", label: "Recognize motions" },
-  { id: "vote-1", label: "Vote on motion(s)" },
-  { id: "engage", label: "Engage in chosen motion or move to GSL" },
-  { id: "open-again", label: "Open the floor again" },
-  { id: "recognize-repeat", label: "Recognize motions (repeat as needed)" },
-  { id: "vote-2", label: "Vote on motion(s)" },
-  { id: "cycle", label: "Continue cycle (engage motion / GSL → open floor)" },
+export const CHAIR_FLOW_ITEMS: { id: string }[] = [
+  { id: "roll-call" },
+  { id: "open-floor" },
+  { id: "recognize" },
+  { id: "vote-1" },
+  { id: "engage" },
+  { id: "open-again" },
+  { id: "recognize-repeat" },
+  { id: "vote-2" },
+  { id: "cycle" },
 ];

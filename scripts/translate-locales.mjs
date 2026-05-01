@@ -46,6 +46,10 @@ const GOOGLE_LANG = {
   he: "he",
   sw: "sw",
   mi: "mi",
+  km: "km",
+  lo: "lo",
+  my: "my",
+  ms: "ms",
 };
 
 function flattenStrings(obj, prefix = "") {
@@ -81,9 +85,15 @@ function sleep(ms) {
 async function translateChunk(texts, to) {
   if (texts.length === 0) return [];
   // Package accepts string arrays and returns TranslationResponse[]
-  const res = await translate(texts, { from: "en", to, forceFrom: true, forceTo: true });
+  const res = await translate(texts, {
+    from: "en",
+    to,
+    forceFrom: true,
+    forceTo: true,
+    rejectOnPartialFail: false,
+  });
   const arr = Array.isArray(res) ? res : [res];
-  return arr.map((r) => r.text);
+  return arr.map((r, idx) => r?.text ?? texts[idx] ?? "");
 }
 
 async function main() {

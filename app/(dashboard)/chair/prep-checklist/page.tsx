@@ -8,6 +8,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function ChairPrepChecklistPage() {
   const t = await getTranslations("pageTitles");
+  const tChecklist = await getTranslations("chairChecklists.prepPage");
   const supabase = await createClient();
   const {
     data: { user },
@@ -36,9 +37,8 @@ export default async function ChairPrepChecklistPage() {
     <MunPageShell title={t("prepChecklist")}>
       <div className="space-y-3">
         <p className="text-sm text-slate-600 dark:text-zinc-400">
-          Before the conference: rules, topic, room, materials, and team. Synced for all chairs on this committee;
-          reset clears it for everyone.
-          {!crisisPrepEnabled ? " Crisis-specific prep items are hidden for this committee type." : null}
+          {tChecklist("description")}
+          {!crisisPrepEnabled ? ` ${tChecklist("crisisHidden")}` : null}
         </p>
         <ChairPrepChecklistClient conferenceId={conferenceId} crisisPrepEnabled={crisisPrepEnabled} />
       </div>

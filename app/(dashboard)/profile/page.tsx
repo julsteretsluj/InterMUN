@@ -180,36 +180,36 @@ export default async function ProfilePage({
         .filter((value): value is string => Boolean(value))
     ),
   ]);
-  const welcomeCountry = myAllocation?.country?.trim() || profile?.country || "your country";
+  const welcomeCountry = myAllocation?.country?.trim() || profile?.country || tp("fallbacks.yourCountry");
   const welcomeFlag = flagEmojiForCountryName(welcomeCountry);
 
   const delegateWelcome = isDelegate ? (
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-10 shadow-sm">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="font-display text-2xl md:text-3xl font-semibold text-brand-navy">
-          Welcome delegate of {welcomeFlag} {welcomeCountry}
+          {tp("delegateWelcome.title", { flag: welcomeFlag, country: welcomeCountry })}
         </h2>
-        <p className="mt-3 text-brand-muted">What would you like to start with?</p>
+        <p className="mt-3 text-brand-muted">{tp("delegateWelcome.subtitle")}</p>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {[
-            { href: "/documents", label: "Documents" },
-            { href: "/chats-notes", label: "Notes" },
-            { href: "/committee-room", label: "Committee room" },
-            { href: "/running-notes", label: "Running Notes" },
-            { href: "/ideas", label: "Ideas" },
-            { href: "/guides", label: "Guides" },
-            { href: "/sources", label: "Sources" },
-            { href: "/resolutions", label: "Resolutions" },
-            { href: "/speeches", label: "Speeches" },
-            { href: "/stances", label: "Stances" },
+            { href: "/documents", label: tp("delegateWelcome.links.documents") },
+            { href: "/chats-notes", label: tp("delegateWelcome.links.notes") },
+            { href: "/committee-room", label: tp("delegateWelcome.links.committeeRoom") },
+            { href: "/running-notes", label: tp("delegateWelcome.links.runningNotes") },
+            { href: "/ideas", label: tp("delegateWelcome.links.ideas") },
+            { href: "/guides", label: tp("delegateWelcome.links.guides") },
+            { href: "/sources", label: tp("delegateWelcome.links.sources") },
+            { href: "/resolutions", label: tp("delegateWelcome.links.resolutions") },
+            { href: "/speeches", label: tp("delegateWelcome.links.speeches") },
+            { href: "/stances", label: tp("delegateWelcome.links.stances") },
             ...(crisisReportingEnabled
               ? ([
-                  { href: "/crisis-slides", label: "Crisis slides" },
-                  { href: "/report", label: "Report" },
+                  { href: "/crisis-slides", label: tp("delegateWelcome.links.crisisSlides") },
+                  { href: "/report", label: tp("delegateWelcome.links.report") },
                 ] as const)
               : []),
-            { href: "/voting", label: "Motions" },
-            { href: "/voting", label: "Points" },
+            { href: "/voting", label: tp("delegateWelcome.links.motions") },
+            { href: "/voting", label: tp("delegateWelcome.links.points") },
           ].map((item) => (
             <Link
               key={`${item.label}-${item.href}`}
@@ -265,23 +265,23 @@ export default async function ProfilePage({
       {showAwards && (myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) === 0 ? (
         <div className="mb-8 rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-            Pending chair nominations
+            {tp("awards.pending.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
-            Saved by chairs and shared with SMT for review. Final awards appear below after confirmation.
+            {tp("awards.pending.descriptionSingle")}
           </p>
           <ul className="space-y-2 text-sm">
             {(myPendingNominations ?? []).map((n) => {
               const category = awardCategoryMeta(n.nomination_type);
               const where = n.committee_conference_id
-                ? committeeLabel[n.committee_conference_id] ?? "Committee session"
+                ? committeeLabel[n.committee_conference_id] ?? tp("fallbacks.committeeSession")
                 : null;
               return (
                 <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
                   <span className="font-medium text-brand-navy">
                     {category?.label ?? n.nomination_type}
                   </span>
-                  <span className="text-brand-muted"> · rank {n.rank}</span>
+                  <span className="text-brand-muted"> · {tp("awards.rank", { rank: n.rank })}</span>
                   {where && <span className="text-brand-muted"> · {where}</span>}
                   {n.evidence_note && (
                     <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
@@ -297,23 +297,23 @@ export default async function ProfilePage({
           pendingSlot={
             <div className="rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
               <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-                Pending chair nominations
+                {tp("awards.pending.title")}
               </h3>
               <p className="mb-3 text-xs text-brand-muted">
-                Saved by chairs and shared with SMT for review. Final awards appear after confirmation.
+                {tp("awards.pending.descriptionTabbed")}
               </p>
               <ul className="space-y-2 text-sm">
                 {(myPendingNominations ?? []).map((n) => {
                   const category = awardCategoryMeta(n.nomination_type);
                   const where = n.committee_conference_id
-                    ? committeeLabel[n.committee_conference_id] ?? "Committee session"
+                    ? committeeLabel[n.committee_conference_id] ?? tp("fallbacks.committeeSession")
                     : null;
                   return (
                     <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
                       <span className="font-medium text-brand-navy">
                         {category?.label ?? n.nomination_type}
                       </span>
-                      <span className="text-brand-muted"> · rank {n.rank}</span>
+                      <span className="text-brand-muted"> · {tp("awards.rank", { rank: n.rank })}</span>
                       {where && <span className="text-brand-muted"> · {where}</span>}
                       {n.evidence_note && (
                         <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
@@ -327,17 +327,16 @@ export default async function ProfilePage({
           recordedSlot={
             <div className="rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
               <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
-                Recorded awards
+                {tp("awards.recorded.title")}
               </h3>
               <p className="text-xs text-brand-muted mb-3">
-                Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your
-                conference&apos;s rules.
+                {tp("awards.recorded.description")}
               </p>
               <ul className="space-y-2 text-sm">
                 {(myAwards ?? []).map((a) => {
                   const m = awardCategoryMeta(a.category);
                   const where = a.committee_conference_id
-                    ? committeeLabel[a.committee_conference_id] ?? "Committee session"
+                    ? committeeLabel[a.committee_conference_id] ?? tp("fallbacks.committeeSession")
                     : null;
                   return (
                     <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
@@ -359,19 +358,19 @@ export default async function ProfilePage({
       {showPrivate && isDelegate && (myDelegatePoints?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-logo-cyan/35 bg-logo-cyan/10 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-            Chair points (private)
+            {tp("privateSections.points.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
-            Visible only to you, committee chairs, and SMT for the relevant committee.
+            {tp("privateSections.sharedVisibility")}
           </p>
           <ul className="space-y-2 text-sm">
             {(myDelegatePoints ?? []).map((p) => {
-              const where = committeeLabel[p.conference_id] ?? "Committee session";
+              const where = committeeLabel[p.conference_id] ?? tp("fallbacks.committeeSession");
               const seat = seatById.get(p.allocation_id);
               return (
                 <li key={p.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
                   <span className="font-medium text-brand-navy">{p.point_text}</span>
-                  <span className="text-brand-muted"> · {seat?.country ?? "Delegate"}</span>
+                  <span className="text-brand-muted"> · {seat?.country ?? tp("fallbacks.delegate")}</span>
                   <span className="text-brand-muted"> · {where}</span>
                   <p className="mt-0.5 text-xs text-brand-muted">
                     {new Date(p.created_at).toLocaleString()}
@@ -385,17 +384,17 @@ export default async function ProfilePage({
       {showPrivate && isDelegate && (mySpeechNotes?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-silver/35 bg-brand-silver/10 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-            Chair speech notes (private)
+            {tp("privateSections.speechNotes.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
-            Visible only to you, committee chairs, and SMT for the relevant committee.
+            {tp("privateSections.sharedVisibility")}
           </p>
           <ul className="space-y-2 text-sm">
             {(mySpeechNotes ?? []).map((n) => {
-              const where = committeeLabel[n.conference_id] ?? "Committee session";
+              const where = committeeLabel[n.conference_id] ?? tp("fallbacks.committeeSession");
               return (
                 <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
-                  <span className="font-medium text-brand-navy">{n.speaker_label || "Speech note"}</span>
+                  <span className="font-medium text-brand-navy">{n.speaker_label || tp("fallbacks.speechNote")}</span>
                   <span className="text-brand-muted"> · {where}</span>
                   <p className="mt-0.5 text-xs text-brand-muted">{n.content}</p>
                   <p className="mt-0.5 text-xs text-brand-muted">
@@ -410,15 +409,16 @@ export default async function ProfilePage({
       {showPrivate && isDelegate && (myMotions?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-accent/32 bg-brand-accent/8 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-            Motions you moved
+            {tp("privateSections.motions.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
-            Saved to your profile for committee review and SMT oversight.
+            {tp("privateSections.motions.description")}
           </p>
           <ul className="space-y-2 text-sm">
             {(myMotions ?? []).map((m) => {
-              const where = committeeLabel[m.conference_id] ?? "Committee session";
-              const title = m.title?.trim() || m.procedure_code?.replace(/_/g, " ") || "Untitled motion";
+              const where = committeeLabel[m.conference_id] ?? tp("fallbacks.committeeSession");
+              const title =
+                m.title?.trim() || m.procedure_code?.replace(/_/g, " ") || tp("fallbacks.untitledMotion");
               return (
                 <li key={m.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
                   <span className="font-medium text-brand-navy">{title}</span>
@@ -442,28 +442,35 @@ export default async function ProfilePage({
       {showPrivate && isDelegate && (myDiscipline?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-rose-300/40 bg-rose-50/35 p-4 md:p-5">
           <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-            Disciplinary status (private)
+            {tp("discipline.title")}
           </h3>
           <p className="mb-3 text-xs text-brand-muted">
-            Visible only to you, committee chairs, and SMT for the relevant committee.
+            {tp("privateSections.sharedVisibility")}
           </p>
           <ul className="space-y-2 text-sm">
             {(myDiscipline ?? []).map((d) => {
-              const where = committeeLabel[d.conference_id] ?? "Committee session";
+              const where = committeeLabel[d.conference_id] ?? tp("fallbacks.committeeSession");
               const seat = seatById.get(d.allocation_id);
               return (
                 <li key={d.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
                   <span className="font-medium text-brand-navy">
-                    {seat?.country ?? "Delegate"} · {where}
+                    {seat?.country ?? tp("fallbacks.delegate")} · {where}
                   </span>
                   <p className="mt-0.5 text-xs text-brand-muted">
-                    Warnings: {d.warning_count} · Strikes: {d.strike_count}
-                    {d.voting_rights_lost ? " · voting disabled" : ""}
-                    {d.speaking_rights_suspended ? " · speaking suspended" : ""}
-                    {d.removed_from_committee ? " · removed from committee" : ""}
+                    {tp("discipline.statusLine", {
+                      warnings: d.warning_count,
+                      strikes: d.strike_count,
+                      votingDisabled: d.voting_rights_lost ? ` · ${tp("discipline.votingDisabled")}` : "",
+                      speakingSuspended: d.speaking_rights_suspended
+                        ? ` · ${tp("discipline.speakingSuspended")}`
+                        : "",
+                      removedFromCommittee: d.removed_from_committee
+                        ? ` · ${tp("discipline.removedFromCommittee")}`
+                        : "",
+                    })}
                   </p>
                   <p className="mt-0.5 text-xs text-brand-muted">
-                    Updated: {new Date(d.updated_at).toLocaleString()}
+                    {tp("discipline.updated", { value: new Date(d.updated_at).toLocaleString() })}
                   </p>
                 </li>
               );
@@ -474,17 +481,16 @@ export default async function ProfilePage({
       {showAwards && (myAwards?.length ?? 0) > 0 && (myPendingNominations?.length ?? 0) === 0 ? (
         <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
           <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
-            Recorded awards
+            {tp("awards.recorded.title")}
           </h3>
           <p className="text-xs text-brand-muted mb-3">
-            Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your
-            conference&apos;s rules.
+            {tp("awards.recorded.description")}
           </p>
           <ul className="space-y-2 text-sm">
             {(myAwards ?? []).map((a) => {
               const m = awardCategoryMeta(a.category);
               const where = a.committee_conference_id
-                ? committeeLabel[a.committee_conference_id] ?? "Committee session"
+                ? committeeLabel[a.committee_conference_id] ?? tp("fallbacks.committeeSession")
                 : null;
               return (
                 <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">

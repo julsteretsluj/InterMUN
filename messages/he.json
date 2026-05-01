@@ -313,7 +313,32 @@
     "unitMinutesShort": "מ",
     "unitSecondsShort": "ס",
     "apply": "לִפְנוֹת",
-    "motionControl": "Motion control"
+    "motionControl": "Motion control",
+    "advancedSpeakerResetClock": "Advanced speaker and reset per-speaker clock.",
+    "writeSpeechNoteFirst": "Write something before saving a speech note.",
+    "speechNoteSaved": "Speech note saved.",
+    "speechNoteDeleted": "Speech note deleted.",
+    "announcementPosted": "Announcement posted.",
+    "announcementPinnedToFloor": "Pinned for the committee floor.",
+    "announcementUnpinned": "Unpinned.",
+    "announcementBodyRequired": "Announcement body cannot be empty.",
+    "announcementUpdated": "Announcement updated.",
+    "deleteAnnouncementConfirm": "Delete this announcement permanently? This cannot be undone.",
+    "announcementDeleted": "Announcement deleted.",
+    "noAllocationsToAdd": "No allocations to add.",
+    "rollCallRowsAlreadyExist": "Roll call already has a row for every allocation.",
+    "rollCallRowsAdded": "Added {count} roll call row(s).",
+    "motionCreatedOpened": "Motion created and opened.",
+    "motionUpdated": "Motion updated.",
+    "motionClosed": "Motion closed.",
+    "motionAlreadyOpenReopenBlocked": "Another motion is already open for voting. Close it before reopening this one.",
+    "motionReopened": "Motion reopened.",
+    "motionFloorOpened": "Motion floor open - record each stated motion below.",
+    "motionFloorClosed": "Motion floor closed for statements.",
+    "openMotionFloorFirst": "Open the motion floor for statements first.",
+    "openMotionBlocksRecording": "A motion is already open for voting. Close it before recording further statements.",
+    "statedMotionRecorded": "Stated motion recorded (not yet open for voting).",
+    "statedMotionRemoved": "Stated motion removed."
   },
   "language": {
     "label": "שָׂפָה",
@@ -352,7 +377,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "מרכז עזרה",
-    "settings": "הגדרות"
+    "settings": "הגדרות",
+    "appHomeAria": "{appName} home",
+    "defaultDisplayName": "Delegate"
   },
   "authWizard": {
     "enterApp": "הזן {appName}",
@@ -735,7 +762,8 @@
       "archive": "ארכיון",
       "officialLinks": "קישורים רשמיים",
       "roomCode": "קוד חדר",
-      "settings": "הגדרות"
+      "settings": "הגדרות",
+      "discipline": "Disciplinary"
     }
   },
   "smtNav": {
@@ -1013,7 +1041,79 @@
       "errImageSize": "התמונה גדולה מדי (מקסימום 5 MB).",
       "errUploadFailed": "ההעלאה נכשלה.",
       "errStorageSetup": "אחסון תמונת פרופיל אינו מוגדר. בפרויקט Supabase, הפעל את המיגרציה 00100_profile_pictures_storage_bucket.sql, או צור דלי אחסון ציבורי בשם profile-pictures (ראה README).",
-      "errPublicUrl": "לא ניתן היה לפתור כתובת אתר ציבורית לתמונה שהועלתה."
+      "errPublicUrl": "לא ניתן היה לפתור כתובת אתר ציבורית לתמונה שהועלתה.",
+      "fallbacks": {
+        "yourCountry": "המדינה שלך",
+        "committeeSession": "מושב הוועדה",
+        "delegate": "נָצִיג",
+        "speechNote": "הערת דיבור",
+        "untitledMotion": "תנועה ללא כותרת",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "נציג ברוך הבא של {flag} {country}",
+        "subtitle": "עם מה היית רוצה להתחיל?",
+        "links": {
+          "documents": "מסמכים",
+          "notes": "הערות",
+          "committeeRoom": "חדר ועדות",
+          "runningNotes": "ריצה הערות",
+          "ideas": "רעיונות",
+          "guides": "מדריכים",
+          "sources": "מקורות",
+          "resolutions": "החלטות",
+          "speeches": "נאומים",
+          "stances": "עמדות",
+          "crisisSlides": "מגלשות משבר",
+          "report": "דִוּוּחַ",
+          "motions": "תנועות",
+          "points": "נקודות"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "פרסים בפרופיל שלך",
+        "rank": "דרגה {דרגה}",
+        "pending": {
+          "tab": "מועמדויות ממתינות",
+          "title": "ממתינים למועמדויות לכסא",
+          "descriptionSingle": "נשמר על ידי כיסאות ושותף עם SMT לסקירה. פרסים סופיים מופיעים למטה לאחר אישור.",
+          "descriptionTabbed": "נשמר על ידי כיסאות ושותף עם SMT לסקירה. פרסים סופיים מופיעים לאחר אישור."
+        },
+        "recorded": {
+          "tab": "פרסים מוקלטים",
+          "title": "פרסים מוקלטים",
+          "description": "רשום כאשר כיסאות או SMT מקצים אותך במעקב אחר הפרסים. הכרה סופית פועלת בהתאם לכללי הוועידה שלך."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "גלוי רק לך, ראשי ועדות ו-SMT עבור הוועדה הרלוונטית.",
+        "points": {
+          "title": "נקודות כיסא (פרטיות)"
+        },
+        "speechNotes": {
+          "title": "הערות נאום של יושב ראש (פרטי)"
+        },
+        "motions": {
+          "title": "תנועות שהזזת",
+          "description": "נשמר בפרופיל שלך לבדיקת ועדה ופיקוח על SMT."
+        }
+      },
+      "discipline": {
+        "title": "מעמד משמעתי (פרטי)",
+        "statusLine": "אזהרות: {אזהרות} · התראות: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+        "votingDisabled": "ההצבעה מושבתת",
+        "speakingSuspended": "דיבור מושעה",
+        "removedFromCommittee": "הוצא מהוועדה",
+        "updated": "עודכן: {value}"
+      },
+      "preview": {
+        "ariaLabel": "תצוגה מקדימה של פרופיל",
+        "title": "תצוגה מקדימה",
+        "yourName": "השם שלך",
+        "usernameNotSet": "שם משתמש לא מוגדר",
+        "gradeValue": "כיתה {כיתה}",
+        "awards": "פרסים"
+      }
     },
     "guides": {
       "default": {
@@ -1347,7 +1447,30 @@
       "profileAria": "צפה בפרופיל: {country}",
       "vacantSeatAria": "מושב פנוי",
       "placardAria": "Placard {country}",
-      "gavelAria": "גמל"
+      "gavelAria": "גמל",
+      "yourContext": "Your context",
+      "roleLabel": "Role",
+      "seatLabel": "Seat",
+      "assignedLabel": "Assigned",
+      "daisLabel": "Dais",
+      "phaseLabel": "Phase",
+      "phaseVoting": "Voting",
+      "phaseDebate": "Debate",
+      "focusSearchTitle": "Focus search (dais titles and names match your query)",
+      "tipLabel": "Tip",
+      "enterScrolls": "Enter scrolls",
+      "typeToFilterHint": "Type to filter - Enter scrolls to first match",
+      "noMatches": "No matching delegations or dais seats.",
+      "digitalDisplay": "Digital display",
+      "floorLabel": "Floor",
+      "staffSeatsHeading": "Staff - seats",
+      "viewProfileAria": "View profile: {title}",
+      "noProfileLinkAria": "{title} (no profile link)",
+      "committeeFloor": "Committee floor",
+      "virtualRoomFigureAria": "Virtual committee room - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Filtering delegations. First highlighted seat is the first match in the ring.",
+      "helperText": "Placards list country (from allocations), name, school, and pronouns from each delegate's profile. Edit yours under Profile. Empty committee seats show as Vacant. Click a filled placard or dais seat to open that member's page (chat and report from there).",
+      "virtualRoomCaption": "Virtual Model UN committee room with delegate placards showing country, name, school, and pronouns."
     },
     "session": {
       "requestToSpeak": {
@@ -1541,7 +1664,14 @@
         "alreadyPaused": "הטיימר כבר מושהה.",
         "pausedForCommittee": "הטיימר נעצר עבור הוועדה.",
         "alreadyRunning": "הטיימר כבר פועל.",
-        "runningForCommittee": "טיימר פועל לוועדה."
+        "runningForCommittee": "טיימר פועל לוועדה.",
+        "euTimerBoardTitle": "לוח טיימר של הפרלמנט של האיחוד האירופי (11 טיימרים)",
+        "euTimerBoardHelp": "טיימר אחד לכל צד, בתוספת זמן כולל, זמן POI/POC וזמן רמקול. השתמש ב-Apply כדי להעתיק שורה לשדות הטיימר החי בכרטיסייה שעון (זמן רמקול / שמור טיימר).",
+        "euTimerName": "שֵׁם",
+        "euTimerTag": "תָג",
+        "euTotalTime": "זמן כולל",
+        "euPoiPocTime": "זמן POI / POC",
+        "euSpeakerTime": "זמן רמקול"
       }
     }
   },
@@ -1661,7 +1791,11 @@
     "adding": "מוֹסִיף...",
     "addToSpeakerList": "הוסף לרשימת הרמקולים",
     "reminder": "תִזכּוֹרֶת",
-    "privateReminderLabel": "תזכורת פרטית (כסאות בלבד, מסונכרנת)"
+    "privateReminderLabel": "תזכורת פרטית (כסאות בלבד, מסונכרנת)",
+    "clearAllConfirm": "מחמאות ברורות, דאגה והערות תזכורת לכל שלט? זה מעדכן את עותק הוועדה המשותפת.",
+    "addedToSpeakerList": "{country} נוסף לרשימת הרמקולים.",
+    "committeeFallback": "וַעֲדָה",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "בחר נושא חי",
@@ -2474,6 +2608,202 @@
           "3": "סינרגיה חלקה; הבמה מעוררת השראה בסביבה מקצועית ובעלת סיכון גבוה."
         }
       }
+    },
+    "maxPoints": "מקסימום {נקודות} נקודות",
+    "reference": {
+      "title": "רובריקות הפרס הרשמי של SEAMUN I",
+      "description": "עותק עזר: סוגי פרסים, תהליך הערכה ומטריצות מלאות של 1-8 להקות (מתוך רובריקת הכנס). ניקוד ב-InterMUN משתמש באותם מפתחות קריטריונים שבהם מוגשות מועמדויות."
+    },
+    "sections": {
+      "catalogue": "קטלוג פרסים",
+      "processOversight": "תהליך פרסים ופיקוח",
+      "calibrationTraining": "כיול והדרכה של כיסא (סולם 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "כלל הכנס (בסך הכל)",
+      "collectiveChair": "קולקטיב וכיסא",
+      "committeeLevel": "ברמת הוועדה"
+    },
+    "matrices": {
+      "positionPaper": "נייר עמדה (נייר העמדה הטוב ביותר)",
+      "delegateLiveSessions": "נציג (מפגשים חיים)",
+      "chairPerformance": "ביצועי כיסא",
+      "chairReportOverall": "דו\"ח יו\"ר - כולל",
+      "chairReportSectionSpecific": "דו\"ח יו\"ר - מדור ספציפי",
+      "bestCommittee": "הוועדה הכי טובה"
+    },
+    "evidenceNote": "היו\"רים משלימים הוכחות ואישור בכתב לרשומות SMT: עדות ראשית למצוינות והצדקה לעומת סגנית (לפי טופס שפורסם).",
+    "footnotes": {
+      "delegateLiveSessions": "יצירתיות, דיפלומטיה, שיתוף פעולה, מנהיגות, ידע ומחקר, השתתפות - 8 נקודות כל אחד.",
+      "chairPerformance": "שמונה ממדים קיבלו ציון של 8 נק' כל אחד עבור יישור הכיסא / הכיסא הטוב ביותר.",
+      "chairReportSectionSpecific": "בשילוב עם הסעיף הכולל לעיל לציון דוח כיסא כולל עד 72 בסולם המורחב במסמך הרשמי."
     }
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} הושלם - מסונכרן עבור ועדה זו",
+      "loading": "טְעִינָה...",
+      "resetChecklist": "אפס את רשימת הבדיקה"
+    },
+    "prepPage": {
+      "description": "לפני הכנס: חוקים, נושא, חדר, חומרים וצוות. מסונכרן עבור כל היו\"רים בוועדה זו; איפוס מנקה את זה לכולם.",
+      "crisisHidden": "פריטי הכנה ספציפיים למשבר מוסתרים עבור סוג ועדה זה."
+    },
+    "flowPage": {
+      "description": "זרימת ועדות רגילה - סמנו צעדים תוך כדי. משותף בין חשבונות כיסא ומכשירים; האיפוס מתנקה לכולם."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "כללים ונוהל"
+        },
+        "topic": {
+          "title": "ועדה ונושא"
+        },
+        "room": {
+          "title": "חדר וטכנולוגיה"
+        },
+        "materials": {
+          "title": "חומרים ולוגיסטיקה"
+        },
+        "crisis": {
+          "title": "משבר (אם רלוונטי)"
+        },
+        "team": {
+          "title": "צוות ותקשורת"
+        }
+      },
+      "items": {
+        "rop": "קרא והבין את תקנון הוועדה",
+        "parliamentary": "סקירת הנוהל הפרלמנטרי (הצעות, נקודות, הצבעות)",
+        "speaking-times": "אשר את זמני הדיבור ומגבלות הזמן",
+        "quorum": "דע את דרישות המניין וההצבעה",
+        "research": "נושא ורקע ועדת המחקר",
+        "study-guide": "קרא את מדריך הלימוד ומסמכי מפתח",
+        "dashboard-topic": "הגדר את שם הוועדה והנושא בלוח המחוונים",
+        "agenda": "הכן סדר יום של הפגישה וזרימה",
+        "digital-room": "הגדר חדר דיגיטלי (רשימת נציגים, שלטים)",
+        "tech-check": "בדיקה טכנית: פלטפורמה, אודיו, שיתוף מסך",
+        "backup": "יש תוכנית גיבוי אם הטכנולוגיה נכשלת",
+        "roll-plan": "הכן רשימת מפקדים ונוכחות",
+        "speakers-plan": "תכנון ניהול רשימת הרמקולים",
+        "templates": "הכן תנועות / נקודות נפוצות (אם אתה משתמש בתבניות)",
+        "timing": "אשר את שעת התחלת הפגישה וההפסקות",
+        "crisis-slides": "סקור מרכיבי משבר ועדכן שקופיות",
+        "crisis-cues": "תכנן סדר/סימנים של דובר משבר",
+        "crisis-paths": "הכן מסלולי משבר ועובדות",
+        "co-chairs": "תיאום עם יו\"ר משותף על תפקידים",
+        "staff": "Confirm staff / dais support and cues",
+        "delegate-brief": "הכן תקציר לנציגים (כללים, תזמון)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "מפקד",
+        "open-floor": "פתח את הרצפה (נקודות ותנועות)",
+        "recognize": "זיהוי תנועות",
+        "vote-1": "הצבעה על הצעות",
+        "engage": "לעסוק בתנועה שנבחרה או לעבור ל-GSL",
+        "open-again": "פתח שוב את הרצפה",
+        "recognize-repeat": "זיהוי תנועות (חזור לפי הצורך)",
+        "vote-2": "הצבעה על הצעות",
+        "cycle": "המשך מחזור (הפעל תנועה / GSL -> רצפה פתוחה)"
+      }
+    }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "מטריצת הקצאת הוועדות למושב הנוכחי שלך. זה מיועד לקריאה בלבד עבור כיסאות ומשקף הקצאות מושבים אקטיביות וקודי שלטים.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "הַקצָאָה",
+      "flag": "דֶגֶל",
+      "email": "אֶלֶקטרוֹנִי",
+      "name": "שֵׁם",
+      "grade": "צִיוּן",
+      "notes": "הערות",
+      "requestedAllocation": "הקצאה מבוקשת",
+      "account": "חֶשְׁבּוֹן",
+      "actions": "פעולות"
+    },
+    "noRows": "לא נמצאו שורות הקצאה לוועדה זו.",
+    "pendingApprovalsTitle": "ממתינים לאישורי הרשמה",
+    "pendingApprovalsIntro": "יושבי ראש מאשרים או דוחים הרשמות לקישורי הקצאה כדי להבטיח שנציגים משתמשים בחשבון הנכון.",
+    "noPendingRequests": "אין בקשות ממתינות.",
+    "unknownAllocation": "הקצאה לא ידועה",
+    "approve": "לְאַשֵׁר",
+    "reject": "לִדחוֹת"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "מטריצת הקצאה",
+    "selectConferenceEventFirst": "בחר תחילה אירוע ועידה.",
+    "enterConferenceCode": "הזן קוד ועידה",
+    "intro": "בנה או ייבא את רשימת המושבים עבור כל ועדה באירוע הפעיל. הנציגים בוחרים את השורה שלהם בשער הוועדה לאחר הכניסה; קודי שלטים יכולים להתאים למזהי הגיליון האלקטרוני שלך."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "רשימת דוברים",
+    "addedToSpeakerList": "נוסף לרשימת הרמקולים.",
+    "chooseDelegationsNotAlreadyQueued": "בחר משלחות שאינן כבר ממתינות או נוכחות ברשימה.",
+    "addedSpeakersInOrder": "נוספו {count} דוברים בסדר רשימת הוועדות.",
+    "introPrefix": "הוסף משלחות לפי סדר דיבור. נציגים עדיין יכולים להשתמש",
+    "requestToSpeak": "בקשה לדבר",
+    "introMiddle": "בחדר הוועדה. לְהִשְׁתַמֵשׁ",
+    "sessionTimerLink": "הפעלה ← טיימר",
+    "introSuffixPrefix": "עבור זמן לכל דובר ו",
+    "advanceSpeaker": "רמקול מתקדם",
+    "addDelegation": "הוסף נציגות",
+    "select": "לִבחוֹר…",
+    "add": "לְהוֹסִיף",
+    "addSelectedToList": "הוסף נבחרים לרשימה",
+    "dismissReminder": "בטל את התזכורת",
+    "moveUp": "לזוז למעלה",
+    "moveDown": "לזוז למטה",
+    "current": "נוֹכְחִי",
+    "remove": "לְהַסִיר",
+    "prompt": {
+      "gslTitle": "רשימת דוברים כללית (GSL)",
+      "moderatedTimerTitle": "מפגש מנחה (טיימר לכל דובר)",
+      "moderatedPassedTitle": "הוועדה המנחה עברה",
+      "bodyPrefix": "השתמש ברשימת הרמקולים למטה כדי",
+      "add": "לְהוֹסִיף",
+      "bodyAddMiddle": "נציגים (תפריט נפתח +",
+      "bodyAddMiddle2": ", או סמן משלחות ו",
+      "bodyRemovePrefix": ") ו",
+      "remove": "לְהַסִיר",
+      "bodyRemoveMiddle": "אותם עם",
+      "bodyRowSuffix": "בכל שורה. סדר מחדש עם החצים או הגדר",
+      "bodyEnd": "כשמישהו ליד המיקרופון.",
+      "noAllocations": "עדיין לא נטענו הקצאות לוועדה זו. סגור כשמוכן - תוכל להוסיף רמקולים מאוחר יותר מבקרי הרשימה.",
+      "quickAdd": "הוספה מהירה (עדיין לא ממתינה או נוכחית)",
+      "alreadyQueued": "לכל הקצאה כבר יש משבצת ממתינה או נוכחית. הסר ערכים אם אתה צריך לסדר מחדש, או סגור כשתסיים."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "שָׁעוֹן עֶצֶר",
+    "currentSpeaker": "רמקול נוכחי",
+    "nextSpeaker": "הדובר הבא",
+    "speakerTimePerSpeaker": "זמן רמקול (שמאל/כובע)",
+    "speakerTimeTotal": "זמן רמקול (שמאל / סה\"כ)",
+    "perSpeaker": "(לכל דובר)",
+    "paused": "(מושהה)",
+    "pauseReason": "השהייה: {סיבה}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "כל נציג - רובריקת הפגישה (חובה)",
+    "intro": "אותם ששת מימדים כמו מועמדויות הנציגים הטובים ביותר לוועדה. עליך להבקיע <strong>כל נציג יושב</strong> לפני הגשת מועמדויות ל-SMT ({completeCount}/{total} הושלם).",
+    "complete": "לְהַשְׁלִים",
+    "incomplete": "לֹא שָׁלֵם",
+    "saving": "חִסָכוֹן...",
+    "saveThisDelegate": "שמור את הנציג הזה",
+    "autosaved": "נשמר אוטומטית",
+    "autosaveFailed": "שמירה אוטומטית נכשלה",
+    "autosavedWithCountry": "נשמר אוטומטית - {country}",
+    "delegateFallback": "נָצִיג"
   }
 }

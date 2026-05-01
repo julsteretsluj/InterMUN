@@ -100,7 +100,7 @@
     "switching": "Đang chuyển đổi…",
     "switchToSelectedCommittee": "Chuyển sang ủy ban đã chọn",
     "saving": "Đang lưu…",
-    "saveCodeGoToProfile": "Lưu mã và đi tới hồ sơ"
+    "saveCodeGoToProfile": "Lưu mã và đi đến hồ sơ"
   },
   "chairMotionsPointsLog": {
     "intro": "Ghi điểm và chấm điểm cho đại biểu. Các mục nhập được lưu vào từng tài khoản/hồ sơ đại biểu và chỉ hiển thị với đại biểu đó và chủ tịch ủy ban/SMT.",
@@ -301,7 +301,7 @@
     "saveEdits": "Lưu chỉnh sửa",
     "deleteMotionConfirm": "Xóa chuyển động này vĩnh viễn? Tất cả các phiếu bầu đã ghi cho nó sẽ bị xóa và kiến ​​nghị sẽ biến mất khỏi hồ sơ.",
     "deleteMotion": "Xóa chuyển động",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Kiểm đếm: Có {có} | Không {không} | Số phiếu bầu {tổng cộng}",
     "ballotsHelp": "Phiếu bầu = bảng hiệu có ghi Có hoặc Không (phiếu trắng được theo dõi riêng và không được tính vào mẫu số này). Xóa bỏ một phiếu bầu đã được ghi lại. Đối với các đề nghị theo thủ tục, kết quả sẽ so sánh Có với các thành viên có mặt trong danh sách (xem phần điểm danh).",
     "recordVotesLabel": "Ghi phiếu bầu",
     "currentMotion": "chuyển động hiện tại",
@@ -313,7 +313,104 @@
     "unitMinutesShort": "tôi",
     "unitSecondsShort": "S",
     "apply": "Áp dụng",
-    "motionControl": "Motion control"
+    "motionControl": "Điều khiển chuyển động",
+    "advancedSpeakerResetClock": "Loa nâng cao và đặt lại đồng hồ cho mỗi loa.",
+    "writeSpeechNoteFirst": "Viết điều gì đó trước khi lưu ghi chú bài phát biểu.",
+    "speechNoteSaved": "Đã lưu ghi chú bài phát biểu.",
+    "speechNoteDeleted": "Đã xóa ghi chú bài phát biểu.",
+    "announcementPosted": "Thông báo đã đăng.",
+    "announcementPinnedToFloor": "Được ghim cho sàn ủy ban.",
+    "announcementUnpinned": "Đã bỏ ghim.",
+    "announcementBodyRequired": "Nội dung thông báo không được để trống.",
+    "announcementUpdated": "Thông báo được cập nhật.",
+    "deleteAnnouncementConfirm": "Xóa thông báo này vĩnh viễn? Điều này không thể hoàn tác được.",
+    "announcementDeleted": "Thông báo đã bị xóa.",
+    "noAllocationsToAdd": "Không có phân bổ để thêm.",
+    "rollCallRowsAlreadyExist": "Cuộc gọi điểm danh đã có một hàng cho mỗi lần phân bổ.",
+    "rollCallRowsAdded": "Đã thêm {count} hàng điểm danh.",
+    "motionCreatedOpened": "Chuyển động được tạo và mở.",
+    "motionUpdated": "Đã cập nhật chuyển động.",
+    "motionClosed": "Chuyển động đã đóng lại.",
+    "motionAlreadyOpenReopenBlocked": "Một kiến ​​nghị khác đã được mở để bỏ phiếu. Hãy đóng nó lại trước khi mở lại cái này.",
+    "motionReopened": "Chuyển động được mở lại.",
+    "motionFloorOpened": "Tầng chuyển động mở - ghi lại từng chuyển động đã nêu bên dưới.",
+    "motionFloorClosed": "Sàn chuyển động đóng cửa để phát biểu.",
+    "openMotionFloorFirst": "Mở sàn chuyển động để phát biểu trước.",
+    "openMotionBlocksRecording": "Một kiến ​​nghị đã được mở để bỏ phiếu. Đóng nó lại trước khi ghi lại các báo cáo tiếp theo.",
+    "statedMotionRecorded": "Kiến nghị đã nêu được ghi lại (chưa mở để bỏ phiếu).",
+    "statedMotionRemoved": "Chuyển động đã nêu bị loại bỏ."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "Đã hoàn thành {done} / {total} - đã đồng bộ hóa cho ủy ban này",
+      "loading": "Đang tải...",
+      "resetChecklist": "Đặt lại danh sách kiểm tra"
+    },
+    "prepPage": {
+      "description": "Trước hội nghị: nội quy, chủ đề, phòng, tài liệu và nhóm. Được đồng bộ hóa cho tất cả các ghế trong ủy ban này; reset sẽ xóa nó cho mọi người.",
+      "crisisHidden": "Các mục chuẩn bị dành riêng cho khủng hoảng được ẩn đối với loại ủy ban này."
+    },
+    "flowPage": {
+      "description": "Quy trình ủy ban bình thường - đánh dấu các bước khi bạn thực hiện. Được chia sẻ trên các tài khoản và thiết bị của ghế; thiết lập lại xóa cho tất cả mọi người."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "Nội quy & thủ tục"
+        },
+        "topic": {
+          "title": "Ủy ban & chủ đề"
+        },
+        "room": {
+          "title": "Phòng & công nghệ"
+        },
+        "materials": {
+          "title": "Vật liệu & hậu cần"
+        },
+        "crisis": {
+          "title": "Khủng hoảng (nếu có)"
+        },
+        "team": {
+          "title": "Đội ngũ & giao tiếp"
+        }
+      },
+      "items": {
+        "rop": "Đọc và hiểu các quy định về thủ tục của ủy ban",
+        "parliamentary": "Xem xét thủ tục nghị viện (kiến nghị, điểm, biểu quyết)",
+        "speaking-times": "Xác nhận thời gian phát biểu và giới hạn thời gian",
+        "quorum": "Biết các yêu cầu về số đại biểu và biểu quyết",
+        "research": "Chủ đề và bối cảnh của ủy ban nghiên cứu",
+        "study-guide": "Đọc hướng dẫn học tập và các tài liệu quan trọng",
+        "dashboard-topic": "Đặt tên ủy ban và chủ đề trong bảng điều khiển",
+        "agenda": "Chuẩn bị chương trình nghị sự và tiến trình của phiên họp",
+        "digital-room": "Thiết lập phòng kỹ thuật số (danh sách đại biểu, bảng hiệu)",
+        "tech-check": "Kiểm tra công nghệ: nền tảng, âm thanh, chia sẻ màn hình",
+        "backup": "Có kế hoạch dự phòng nếu công nghệ thất bại",
+        "roll-plan": "Chuẩn bị danh sách điểm danh và điểm danh",
+        "speakers-plan": "Lập kế hoạch quản lý danh sách diễn giả",
+        "templates": "Chuẩn bị các động tác/điểm chung (nếu sử dụng mẫu)",
+        "timing": "Xác nhận thời gian bắt đầu và nghỉ phiên",
+        "crisis-slides": "Xem lại các yếu tố khủng hoảng và cập nhật các slide",
+        "crisis-cues": "Lập kế hoạch về mệnh lệnh/tín hiệu của người phát biểu khi xảy ra khủng hoảng",
+        "crisis-paths": "Chuẩn bị các lộ trình và sự kiện khủng hoảng",
+        "co-chairs": "Phối hợp với (các) đồng chủ tịch về các vai trò",
+        "staff": "Xác nhận sự hỗ trợ và tín hiệu của nhân viên/dais",
+        "delegate-brief": "Chuẩn bị bản tóm tắt cho đại biểu (thể lệ, thời gian)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Cuộc gọi điểm danh",
+        "open-floor": "Mở sàn (điểm & chuyển động)",
+        "recognize": "Nhận biết chuyển động",
+        "vote-1": "Bỏ phiếu cho (các) kiến ​​nghị",
+        "engage": "Tham gia vào chuyển động đã chọn hoặc chuyển sang GSL",
+        "open-again": "Mở sàn lần nữa",
+        "recognize-repeat": "Nhận biết chuyển động (lặp lại nếu cần)",
+        "vote-2": "Bỏ phiếu cho (các) kiến ​​nghị",
+        "cycle": "Tiếp tục chu trình (tham gia chuyển động / GSL -> sàn mở)"
+      }
+    }
   },
   "language": {
     "label": "Ngôn ngữ",
@@ -343,7 +440,7 @@
     "session": "Phiên họp",
     "passwords": "Mật khẩu",
     "matrix": "Ma trận",
-    "awards": "giải thưởng",
+    "awards": "Giải thưởng",
     "mainTabs": "Các tab chính",
     "subtabs": "Tab phụ",
     "home": "Trang chủ",
@@ -352,7 +449,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "Trung tâm trợ giúp",
-    "settings": "Cài đặt"
+    "settings": "Cài đặt",
+    "appHomeAria": "nhà {appName}",
+    "defaultDisplayName": "Đại biểu"
   },
   "authWizard": {
     "enterApp": "Nhập {appName}",
@@ -404,7 +503,7 @@
     "light": "Ánh sáng",
     "dark": "Tối tăm",
     "accentColour": "Màu nhấn",
-    "typography": "Kiểu chữ",
+    "typography": "kiểu chữ",
     "textSize": "Kích thước văn bản",
     "scale": "Tỉ lệ",
     "small": "Bé nhỏ",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "Ghế lưu từng vị trí dưới dạng bản nháp trên trang Điểm. Những bản nháp đó không được hiển thị ở đây. Sau khi hoàn tất mọi vị trí bắt buộc, chủ tịch phải nhấp vào Gửi đề cử cho SMT — sau đó các hàng sẽ xuất hiện trong bảng này dưới dạng đang chờ xem xét.",
     "noRowsForCommittee": "Không có hàng đang chờ xử lý nào cho ủy ban này. Chọn",
     "orAnotherTab": "hoặc một tab khác.",
-    "topRank": "Top {rank}",
+    "topRank": "{thứ hạng} hàng đầu",
     "bandInitialsTitle": "Tên viết tắt của ban nhạc: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Đại biểu xuất sắc nhất (ủy ban)",
@@ -541,7 +640,7 @@
     "notes": "Ghi chú",
     "rollCallTracker": "✅ Trình theo dõi cuộc gọi cuộn",
     "runningNotes": "Ghi chú đang chạy",
-    "awardsSmt": "giải thưởng",
+    "awardsSmt": "Giải thưởng",
     "delegateDashboard": "Bảng thông tin đại diện",
     "voting": "Bỏ phiếu",
     "digitalRoom": "Phòng kỹ thuật số",
@@ -696,10 +795,10 @@
     "sessionFloorBanner": "<floor>Sàn họp</floor> (bộ hẹn giờ, diễn giả, điểm danh) chỉ dành cho <chairs>ghế dai</chairs>. Sử dụng <live>Ủy ban trực tiếp</live> bên dưới để giám sát hoặc nhập mã ủy ban như đại biểu khi bạn cần một phiên cụ thể.",
     "welcomeSg": "Chào mừng Tổng Bí thư!",
     "whichCommittee": "Bạn muốn kiểm tra ủy ban nào?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{đếm, số nhiều, một {# phiên} khác {# phiên}}",
     "topicLabel": "Đề tài:",
     "chairsLabel": "Ghế:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "biểu tượng {tên}",
     "eslFriendly": "Thân thiện với ESL"
   },
   "chairNav": {
@@ -725,6 +824,7 @@
       "session": "Phiên họp",
       "speakers": "Loa",
       "formalMotions": "Kiến nghị chính thức",
+      "discipline": "kỷ luật",
       "timer": "hẹn giờ",
       "announcements": "Thông báo",
       "motionsPoints": "Chuyển động & Điểm",
@@ -743,7 +843,7 @@
     "liveCommittees": "Ủy ban trực tiếp",
     "eventSessions": "Sự kiện & phiên",
     "roomCodes": "Mã phòng & ghế",
-    "awards": "giải thưởng",
+    "awards": "Giải thưởng",
     "allocationMatrix": "Ma trận phân bổ",
     "allocationPasswords": "Mật khẩu phân bổ",
     "profile": "Hồ sơ",
@@ -894,7 +994,7 @@
       "openInNewTab": "Mở trong tab mới",
       "noGoogleDocLink": "Không có liên kết Google Tài liệu",
       "visibleToOtherBloc": "Hiển thị với khối khác",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
+      "resolutionCounts": "Phụ đề chính: {chính} | Người đồng đăng ký: {co} | Người ký: {signatories}",
       "blocButton": "Khối {name} ({stance})",
       "signVirtually": "Ký ảo (thông báo phụ chính)",
       "shareByEmail": "Chia sẻ giải pháp qua email",
@@ -902,7 +1002,7 @@
       "sendToDelegate": "Gửi cho đại biểu",
       "clauseEditor": "Biên tập điều khoản",
       "noClausesYet": "Chưa có điều khoản nào.",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "Điều khoản {số}",
       "saveClause": "Điều khoản lưu",
       "delete": "Xóa bỏ",
       "addClausePlaceholder": "Thêm một điều khoản mới...",
@@ -925,7 +1025,7 @@
       "helpRequiredMajorityBody": "Chọn ngưỡng biểu quyết dùng để quyết định đạt/không đạt. `Đơn giản` là hơn một nửa. `2/3` yêu cầu đa số.",
       "majoritySimple": "Đơn giản",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majority",
+      "majorityLine": "{nhãn} đa số",
       "mustVote": "PHẢI bỏ phiếu",
       "helpMustVoteTitle": "PHẢI bỏ phiếu",
       "helpMustVoteBody": "Đánh dấu đề nghị này là một mục \"phải bỏ phiếu\". Điều này được sử dụng để truyền đạt yêu cầu tới người tham gia (tùy thuộc vào việc thành lập ủy ban của bạn).",
@@ -979,7 +1079,7 @@
       "tabs": {
         "ariaLabel": "Phần hồ sơ",
         "overview": "Tổng quan",
-        "awards": "giải thưởng",
+        "awards": "Giải thưởng",
         "private": "Hồ sơ riêng tư",
         "settings": "Cài đặt hồ sơ"
       },
@@ -1013,7 +1113,79 @@
       "errImageSize": "Hình ảnh quá lớn (tối đa 5 MB).",
       "errUploadFailed": "Tải lên không thành công.",
       "errStorageSetup": "Lưu trữ ảnh hồ sơ chưa được thiết lập. Trong dự án Supabase, hãy chạy Migration 00100_profile_pictures_storage_bucket.sql hoặc tạo một nhóm lưu trữ công cộng có tên là profile-pictures (xem README).",
-      "errPublicUrl": "Không thể phân giải URL công khai cho hình ảnh được tải lên."
+      "errPublicUrl": "Không thể phân giải URL công khai cho hình ảnh được tải lên.",
+      "fallbacks": {
+        "yourCountry": "đất nước của bạn",
+        "committeeSession": "Phiên họp ủy ban",
+        "delegate": "Đại biểu",
+        "speechNote": "ghi chú bài phát biểu",
+        "untitledMotion": "Chuyển động không có tiêu đề",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "Chào mừng đại biểu của {flag} {country}",
+        "subtitle": "Bạn muốn bắt đầu với điều gì?",
+        "links": {
+          "documents": "Tài liệu",
+          "notes": "Ghi chú",
+          "committeeRoom": "Phòng ủy ban",
+          "runningNotes": "Ghi chú đang chạy",
+          "ideas": "Ý tưởng",
+          "guides": "Hướng dẫn",
+          "sources": "Nguồn",
+          "resolutions": "Nghị quyết",
+          "speeches": "Bài phát biểu",
+          "stances": "thế đứng",
+          "crisisSlides": "Trượt khủng hoảng",
+          "report": "Báo cáo",
+          "motions": "chuyển động",
+          "points": "Điểm"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "Giải thưởng trên hồ sơ của bạn",
+        "rank": "xếp hạng {thứ hạng}",
+        "pending": {
+          "tab": "Đang chờ đề cử",
+          "title": "Đang chờ đề cử chủ tịch",
+          "descriptionSingle": "Được ghế lưu lại và chia sẻ với SMT để xem xét. Giải thưởng cuối cùng xuất hiện bên dưới sau khi xác nhận.",
+          "descriptionTabbed": "Được ghế lưu lại và chia sẻ với SMT để xem xét. Giải thưởng cuối cùng xuất hiện sau khi xác nhận."
+        },
+        "recorded": {
+          "tab": "Giải thưởng được ghi nhận",
+          "title": "Giải thưởng được ghi nhận",
+          "description": "Được liệt kê khi chủ tịch hoặc SMT chỉ định bạn trong danh sách theo dõi giải thưởng. Sự công nhận cuối cùng tuân theo các quy tắc của hội nghị của bạn."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "Chỉ hiển thị với bạn, chủ tịch ủy ban và SMT của ủy ban liên quan.",
+        "points": {
+          "title": "Điểm ghế (riêng)"
+        },
+        "speechNotes": {
+          "title": "Ghi chú bài phát biểu của chủ tọa (riêng tư)"
+        },
+        "motions": {
+          "title": "Chuyển động bạn đã di chuyển",
+          "description": "Đã lưu vào hồ sơ của bạn để ủy ban xem xét và giám sát SMT."
+        }
+      },
+      "discipline": {
+        "title": "Tình trạng kỷ luật (riêng tư)",
+        "statusLine": "Cảnh báo: {warnings} · Cảnh cáo: {strikes}{votingDisabled}{saySuspends}{removedFromCommittee}",
+        "votingDisabled": "bỏ phiếu bị vô hiệu hóa",
+        "speakingSuspended": "đang nói bị đình chỉ",
+        "removedFromCommittee": "bị loại khỏi ủy ban",
+        "updated": "Đã cập nhật: {value}"
+      },
+      "preview": {
+        "ariaLabel": "Xem trước hồ sơ",
+        "title": "Xem trước",
+        "yourName": "Tên của bạn",
+        "usernameNotSet": "Tên người dùng chưa được đặt",
+        "gradeValue": "Lớp {lớp}",
+        "awards": "Giải thưởng"
+      }
     },
     "guides": {
       "default": {
@@ -1055,7 +1227,7 @@
         "title": "Bảng chú giải chương trình MUN",
         "subtitle": "Thuật ngữ độc đáo phù hợp với mã ủy ban của bạn và các chủ đề chương trình nghị sự hiện tại.",
         "committeeCode": "Mã ủy ban: {code}",
-        "topicTag": "Topic: {topic}",
+        "topicTag": "Chủ đề: {chủ đề}",
         "sources": {
           "core": "cốt lõi",
           "committee": "ủy ban",
@@ -1064,11 +1236,11 @@
         "terms": {
           "delegation": {
             "term": "Phái đoàn",
-            "definition": "Một quốc gia hoặc nhóm quan sát viên đại diện cho một quốc gia hoặc tổ chức trong ủy ban."
+            "definition": "Một quốc gia hoặc nhóm quan sát đại diện cho một quốc gia hoặc tổ chức trong ủy ban."
           },
           "placard": {
             "term": "áp phích",
-            "definition": "Ký hiệu quốc gia được sử dụng để yêu cầu phát biểu, bỏ phiếu và đưa ra các kiến ​​nghị về thủ tục."
+            "definition": "Ký hiệu quốc gia được sử dụng để yêu cầu phát biểu, biểu quyết và đưa ra các kiến ​​nghị về thủ tục."
           },
           "dais": {
             "term": "Dais",
@@ -1290,9 +1462,9 @@
       "add": "Thêm vào",
       "noIdeasYet": "Chưa có ý tưởng nào.",
       "ideaLabel": "Ý tưởng",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Ý tưởng {số}",
       "linkedDoc": "Tài liệu được liên kết",
-      "addedOn": "Added {date}",
+      "addedOn": "Đã thêm {ngày}",
       "edit": "Biên tập",
       "delete": "Xóa bỏ",
       "ideaDocument": "Tài liệu ý tưởng",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "Ủy ban",
+      "yourContext": "Bối cảnh của bạn",
+      "roleLabel": "Vai trò",
+      "seatLabel": "Ghế",
       "clearSearchTitle": "Xóa tìm kiếm và hiển thị tất cả các phái đoàn",
       "vacantLabel": "trống",
+      "assignedLabel": "Đã giao",
+      "daisLabel": "Dais",
+      "phaseLabel": "Giai đoạn",
+      "phaseVoting": "Bỏ phiếu",
+      "phaseDebate": "Tranh luận",
+      "focusSearchTitle": "Tìm kiếm tập trung (tiêu đề và tên dais phù hợp với truy vấn của bạn)",
+      "tipLabel": "Mẹo",
       "searchVacantTitle": "Tìm kiếm chỗ ngồi \"trống\" trong phòng",
       "searchHint": "Nhập quốc gia, tên đại biểu, trường học, đại từ hoặc \"bỏ trống\" để đánh dấu những kết quả phù hợp trong phòng. Nhấn Enter để chuyển đến trận đấu đầu tiên; Esc xóa. Bấm vào chỗ trống để chuyển sang chỗ trống.",
       "findLabel": "Tìm một phái đoàn hoặc thành viên dais",
       "searchPlaceholder": "Quốc gia, tên, trường học...",
-      "matchesCount": "{matches} of {total} seats match",
+      "matchesCount": "{matches} trong tổng số {matchs ghế phù hợp",
+      "enterScrolls": "Nhập cuộn",
+      "typeToFilterHint": "Nhập để lọc - Nhập cuộn để khớp đầu tiên",
+      "noMatches": "Không có đoàn đại biểu hoặc ghế ngồi phù hợp.",
+      "digitalDisplay": "Màn hình kỹ thuật số",
+      "floorLabel": "Sàn nhà",
+      "staffSeatsHeading": "Nhân viên - chỗ ngồi",
       "searchAria": "Tìm kiếm đoàn",
       "virtualRoomVacant": "trống",
       "profileAria": "Xem hồ sơ: {country}",
       "vacantSeatAria": "Ghế trống",
-      "placardAria": "Placard {country}",
-      "gavelAria": "cái búa"
+      "placardAria": "Tấm bảng {quốc gia}",
+      "gavelAria": "cái búa",
+      "viewProfileAria": "Xem hồ sơ: {title}",
+      "noProfileLinkAria": "{title} (không có liên kết hồ sơ)",
+      "committeeFloor": "tầng ủy ban",
+      "virtualRoomFigureAria": "Phòng ủy ban ảo - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Lọc các phái đoàn. Chỗ ngồi được đánh dấu đầu tiên là trận đấu đầu tiên trên võ đài.",
+      "helperText": "Các tấm bảng liệt kê quốc gia (từ phân bổ), tên, trường học và đại từ từ hồ sơ của mỗi đại biểu. Chỉnh sửa của bạn trong Hồ sơ. Các ghế ủy ban trống hiển thị là Trống. Nhấp vào biểu ngữ đã điền hoặc chỗ ngồi trên bục để mở trang của thành viên đó (trò chuyện và báo cáo từ đó).",
+      "virtualRoomCaption": "Phòng mô hình ảo của ủy ban LHQ với các bảng biểu đại biểu hiển thị quốc gia, tên, trường học và đại từ."
     },
     "session": {
       "requestToSpeak": {
@@ -1379,7 +1574,7 @@
         "motioner": "Người chuyển động",
         "majority": "Số đông",
         "majoritySimple": "Đơn giản",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "Có {có} - Không {không} - Tổng số {total}",
         "help": "Bục ghi lại phiếu bầu của mỗi đoàn trong phiên họp. Phiếu chuyển động chỉ sử dụng Có hoặc Không (không bỏ phiếu trắng). Tổng số chỉ tính các bảng có ghi Có hoặc Không; các đoàn vắng mặt sẽ bị bỏ qua."
       },
       "activeMotion": {
@@ -1396,7 +1591,7 @@
         "speakerTimeLeftTotal": "Thời gian phát biểu (trái / tổng cộng)",
         "perSpeaker": "(mỗi loa)",
         "paused": "(tạm dừng)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Tạm dừng: {lý do}"
       },
       "floorStatus": {
         "sessionTime": "Thời gian phiên",
@@ -1473,15 +1668,15 @@
       },
       "history": {
         "title": "Lịch sử phiên",
-        "savedCount": "{count} saved",
+        "savedCount": "đã lưu {đếm}",
         "permissionsHint": "Ghế có thể đổi tên các mục. SMT/Admin có thể đổi tên và xóa các mục.",
         "empty": "Chưa có lịch sử phiên nào.",
         "rename": "Đổi tên",
         "delete": "Xóa bỏ",
         "deleteConfirm": "Xóa phiên này khỏi lịch sử?",
         "sessionNamePrompt": "Tên phiên",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{phạm vi}",
+        "rangeOngoing": "{phạm vi} -> Đang diễn ra"
       },
       "timerPage": {
         "title": "hẹn giờ",
@@ -1491,7 +1686,7 @@
         "tabClock": "2) Điều khiển đồng hồ",
         "tabNotes": "3) Ghi chú bài phát biểu",
         "tabLog": "4) Tạm dừng nhật ký",
-        "setupHelp": "Chọn xem đồng hồ bấm giờ này dành cho sàn chung (luôn hiển thị với đại biểu) hay gắn liền với kiến ​​nghị mở biểu quyết (đại biểu chỉ nhìn thấy nó khi phiếu bầu đó là mục đang hoạt động). Khi thời gian của mỗi người phát biểu được bật, đồng hồ vẫn hiển thị trong suốt cuộc họp kín được kiểm duyệt. Tạm dừng đồng hồ/Đồng hồ bắt đầu đóng băng hoặc tiếp tục đếm ngược. Đặt Thời gian loa (còn lại) và Tổng thời gian một cách độc lập, sau đó Lưu bộ hẹn giờ. Các cài đặt trước điền cả hai vào cùng một độ dài; bạn có thể chỉnh sửa một trong hai trường sau đó. Các lần tạm dừng được ghi lại với một lý do ngắn gọn.",
+        "setupHelp": "Chọn xem đồng hồ bấm giờ này dành cho sàn chung (luôn hiển thị với đại biểu) hay gắn liền với kiến ​​nghị mở biểu quyết (đại biểu chỉ nhìn thấy nó khi phiếu bầu đó là mục đang hoạt động). Khi bật thời gian cho mỗi người phát biểu, đồng hồ vẫn hiển thị trong suốt cuộc họp kín được kiểm duyệt. Tạm dừng đồng hồ/Đồng hồ bắt đầu đóng băng hoặc tiếp tục đếm ngược. Đặt Thời gian loa (còn lại) và Tổng thời gian một cách độc lập, sau đó Lưu bộ hẹn giờ. Các cài đặt trước điền cả hai vào cùng một độ dài; bạn có thể chỉnh sửa một trong hai trường sau đó. Các lần tạm dừng được ghi lại với một lý do ngắn gọn.",
         "namedPreset": "Đặt trước được đặt tên",
         "applyPreset": "Áp dụng giá trị đặt trước...",
         "floorLabelDelegates": "Nhãn tầng (đại biểu)",
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "Bộ hẹn giờ đã bị tạm dừng.",
         "pausedForCommittee": "Đồng hồ đã tạm dừng cho ủy ban.",
         "alreadyRunning": "Bộ hẹn giờ đang chạy.",
-        "runningForCommittee": "Hẹn giờ chạy cho ủy ban."
+        "runningForCommittee": "Hẹn giờ chạy cho ủy ban.",
+        "euTimerBoardTitle": "Bảng hẹn giờ của Nghị viện EU (11 bộ hẹn giờ)",
+        "euTimerBoardHelp": "Một bộ hẹn giờ cho mỗi bên, cộng với Tổng thời gian, thời gian POI/POC và thời gian Diễn giả. Sử dụng Áp dụng để sao chép một hàng vào các trường hẹn giờ trực tiếp trên tab Đồng hồ (thời gian loa / Lưu bộ hẹn giờ).",
+        "euTimerName": "Tên",
+        "euTimerTag": "Nhãn",
+        "euTotalTime": "Tổng thời gian",
+        "euPoiPocTime": "Thời gian POI/POC",
+        "euSpeakerTime": "Thời gian phát biểu"
       }
     }
   },
@@ -1566,7 +1768,7 @@
     "daisListed": "Dais (được liệt kê)",
     "committeeCodeSecondGate": "Ủy ban / mã phòng (cổng thứ hai)",
     "seats": "Chỗ ngồi",
-    "seatsFilledAllocated": "{filled} filled · {total} allocated",
+    "seatsFilledAllocated": "{đã điền} đã điền · {total} được phân bổ",
     "resolutions": "Nghị quyết",
     "openVotes": "Mở phiếu bầu",
     "editMetadataIntro": "Chỉnh sửa siêu dữ liệu phiên họp ủy ban và tên chủ tịch bên dưới",
@@ -1647,10 +1849,10 @@
     "delegatesMatrix": "Ma trận đại biểu",
     "clearAllChairNotes": "Xóa tất cả ghi chú ghế",
     "searchCountry": "Tìm kiếm quốc gia...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} bảng hiệu · {được gắn cờ} có ghi chú trên ghế · Đã ghi cho {count}",
     "loading": "Đang tải...",
     "noDelegationsMatch": "Không có đoàn đại biểu nào phù hợp với tìm kiếm của bạn.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "Cuộn {nhãn}",
     "linkedAccount": "Tài khoản được liên kết",
     "vacantPlacard": "tấm bảng trống",
     "delegateProfile": "Hồ sơ đại biểu ->",
@@ -1661,7 +1863,11 @@
     "adding": "Đang thêm...",
     "addToSpeakerList": "Thêm vào danh sách diễn giả",
     "reminder": "Lời nhắc nhở",
-    "privateReminderLabel": "Lời nhắc riêng tư (chỉ dành cho ghế, đã đồng bộ hóa)"
+    "privateReminderLabel": "Lời nhắc riêng tư (chỉ dành cho ghế, đã đồng bộ hóa)",
+    "clearAllConfirm": "Ghi chú khen ngợi, quan tâm và nhắc nhở rõ ràng cho mỗi bảng hiệu? Điều này cập nhật bản sao ủy ban được chia sẻ.",
+    "addedToSpeakerList": "{country} đã được thêm vào danh sách diễn giả.",
+    "committeeFallback": "Ủy ban",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Chọn chủ đề trực tiếp",
@@ -1723,7 +1929,7 @@
     "anyChair": "Bất kỳ chiếc ghế nào",
     "noChairs": "Không tìm thấy hồ sơ ghế.",
     "notesListTitle": "danh sách ghi chú",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{đếm, số nhiều, một {# nốt} khác {# nốt}}",
     "emptyList": "Chưa có ghi chú nào.",
     "forwardedBadge": "(chuyển tiếp)",
     "readerWarning": "Cảnh báo người đọc: ghi chú này có thể chứa ngôn ngữ không phù hợp.",
@@ -1767,7 +1973,7 @@
     "newEventBody": "Tạo mã hội nghị (cổng đầu tiên) và phiên họp ủy ban đầu tiên (cổng thứ hai). Sử dụng <code>next=/admin</code> để bạn quay lại đây sau khi thiết lập.",
     "openConferenceSetup": "Thiết lập hội nghị mở",
     "smtTitle": "Ban thư ký (SMT)",
-    "smtBody": "Mời tài khoản SMT mới qua email hoặc thay đổi người dùng hiện tại thành đại biểu, chủ tịch hoặc SMT. Việc thăng chức ai đó lên SMT cho phép họ sử dụng toàn bộ bảng thông tin của ban thư ký trong sự kiện.",
+    "smtBody": "Mời tài khoản SMT mới qua email hoặc thay đổi người dùng hiện tại thành đại biểu, chủ trì hoặc SMT. Việc thăng chức ai đó lên SMT cho phép họ sử dụng toàn bộ bảng thông tin của ban thư ký trong sự kiện.",
     "inviteNeedsKey": "Lời mời qua email cần có <code>SUPABASE_SERVICE_ROLE_KEY</code> trên máy chủ. Bạn vẫn có thể sử dụng <strong>Đặt vai trò</strong> cho những người dùng đã đăng ký.",
     "emailLabel": "E-mail",
     "emailPlaceholderSmt": "smt@school.edu",
@@ -1922,7 +2128,7 @@
       "welcomeLine3": "Hẹn gặp bạn trên sàn.",
       "chairReminderSubject": "Yêu cầu phân bổ đại biểu đang chờ phê duyệt",
       "chairReminderLine1": "Một đại biểu đã yêu cầu phân bổ và cần xem xét chủ tọa.",
-      "chairReminderConference": "Conference: {conference}",
+      "chairReminderConference": "Hội nghị: {hội nghị}",
       "chairReminderAllocation": "Phân bổ được yêu cầu: {country}",
       "chairReminderDelegate": "Đại biểu: {name}",
       "chairReminderEmail": "Email tài khoản: {email}",
@@ -1989,13 +2195,13 @@
     "importedRows": "Đã nhập {count} hàng.",
     "skippedDuplicates": "Đã bỏ qua {count} bản sao đã có trong danh sách.",
     "replacedUnassignedSeats": "Thay thế tất cả các ghế chưa được chỉ định.",
-    "generatedRandomCodes": "Generated {count} random code(s) for rows without one.",
+    "generatedRandomCodes": "Đã tạo (các) mã ngẫu nhiên cho các hàng không có mã nào.",
     "addCommitteesFirst": "Thêm ủy ban vào sự kiện này trước tiên trong",
     "eventCommitteeSessionsLink": "Các phiên họp của sự kiện và ủy ban",
     "committeeFallback": "Ủy ban",
     "showingOneCommitteeAtATime": "Hiển thị một ủy ban tại một thời điểm. Chuyển đổi ủy ban bằng cách sử dụng các tab dưới cùng.",
     "editPlacardCodesSheet": "Chỉnh sửa bảng mã bảng hiệu ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "Danh sách · {tiêu đề}",
     "seatsSummary": "{count} chỗ ngồi.",
     "linkedDelegatesCannotBeDeleted": "Các đại biểu được liên kết không thể bị xóa ở đây.",
     "countryPosition": "Quốc gia/vị trí",
@@ -2011,7 +2217,7 @@
     "remove": "Di dời",
     "addOneSeat": "Thêm một chỗ ngồi",
     "addHeadChairAllocation": "Thêm phân bổ Chủ tịch",
-    "addCoChairAllocation": "Thêm việc phân bổ đồng chủ trì",
+    "addCoChairAllocation": "Thêm việc phân bổ đồng chủ tịch",
     "countryPlaceholder": "ví dụ. Pháp",
     "placardCodeOptional": "Mã bảng hiệu (tùy chọn)",
     "placardCodePlaceholder": "ví dụ. DIS-014",
@@ -2087,7 +2293,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "ủy ban của bạn",
     "fallbackCommittee": "Ủy ban",
-    "welcome": "Welcome, Chair of {committee}",
+    "welcome": "Chào mừng Chủ tịch {ủy ban}",
     "featureStrip": "Phòng kỹ thuật số · Chuyển động · Biểu quyết · Diễn giả",
     "activeCommitteeLine": "Ủy ban hoạt động: <line></line>. Dữ liệu phiên đồng bộ hóa thông qua tài khoản của bạn; danh sách kiểm tra chuẩn bị/luồng và các Kiến nghị & Điểm được lưu trong trình duyệt này cho ủy ban này - ý tưởng tương tự như <seamuns>Phòng Chủ tịch SEAMUN</seamuns>.",
     "tiles": {
@@ -2299,7 +2505,7 @@
         "bands": {
           "0": "Loại bỏ những lo lắng của đại biểu; không nhận thấy khi nào một đại biểu đang gặp khó khăn hoặc bị loại trừ.",
           "1": "Chuyên nghiệp nhưng lâm sàng; chỉ cung cấp hỗ trợ khi được đại biểu yêu cầu rõ ràng.",
-          "2": "Tích cực kiểm tra các đại biểu trầm tính; tạo ra một không gian an toàn cho người mới bắt đầu tham gia.",
+          "2": "Tích cực kiểm tra các đại biểu trầm lặng; tạo ra một không gian an toàn cho người mới bắt đầu tham gia.",
           "3": "Trí tuệ cảm xúc cao; dự đoán căng thẳng của đại biểu, xử lý các xung đột nảy lửa một cách cẩn thận và đảm bảo mọi tiếng nói đều được coi trọng."
         }
       },
@@ -2381,7 +2587,7 @@
           "0": "Quá dày đặc hoặc vô tổ chức; khó khăn cho người mới bắt đầu điều hướng.",
           "1": "Bố cục rõ ràng nhưng thiếu trợ giúp trực quan hoặc bảng chú giải thuật ngữ.",
           "2": "Cấu trúc tốt; bao gồm các liên kết hữu ích, bản đồ và bảng chú giải thuật ngữ rõ ràng.",
-          "3": "Được thiết kế khéo léo; cân bằng học viện cấp cao với điều hướng trực quan."
+          "3": "Được thiết kế khéo léo; cân bằng học thuật cấp cao với điều hướng trực quan."
         }
       },
       "resource_quality": {
@@ -2474,6 +2680,130 @@
           "3": "Sức mạnh tổng hợp liền mạch; dais truyền cảm hứng cho một môi trường chuyên nghiệp và có tính cổ phần cao."
         }
       }
+    },
+    "maxPoints": "{điểm} điểm tối đa",
+    "reference": {
+      "title": "Tiêu chí giải thưởng chính thức của SEAMUN I",
+      "description": "Bản sao tham khảo: các loại giải thưởng, quy trình đánh giá và ma trận thang điểm 1-8 đầy đủ (từ phiếu tự đánh giá của hội nghị). Việc chấm điểm trong InterMUN sử dụng các khóa tiêu chí giống như nơi gửi đề cử."
+    },
+    "sections": {
+      "catalogue": "Danh mục giải thưởng",
+      "processOversight": "Quy trình và giám sát giải thưởng",
+      "calibrationTraining": "Hiệu chuẩn và đào tạo ghế (thang 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Toàn hội nghị (tổng thể)",
+      "collectiveChair": "Tập thể và ghế",
+      "committeeLevel": "cấp ủy ban"
+    },
+    "matrices": {
+      "positionPaper": "Giấy vị trí (Giấy vị trí tốt nhất)",
+      "delegateLiveSessions": "Đại biểu (phiên trực tiếp)",
+      "chairPerformance": "Hiệu suất ghế",
+      "chairReportOverall": "Báo cáo chủ trì - tổng thể",
+      "chairReportSectionSpecific": "Báo cáo chủ trì - theo từng phần cụ thể",
+      "bestCommittee": "Ủy ban tốt nhất"
+    },
+    "evidenceNote": "Chủ tọa hoàn thiện bằng chứng và xác nhận bằng văn bản cho hồ sơ SMT: bằng chứng chính về sự xuất sắc và biện minh cho người về nhì (theo mẫu đã xuất bản).",
+    "footnotes": {
+      "delegateLiveSessions": "Sáng tạo, ngoại giao, hợp tác, lãnh đạo, kiến ​​thức và nghiên cứu, tham gia - 8 điểm mỗi phần.",
+      "chairPerformance": "Tám khía cạnh đạt điểm 8 điểm cho mỗi khía cạnh cho sự liên kết đánh giá Ghế/ghế Tốt nhất.",
+      "chairReportSectionSpecific": "Kết hợp với phần tổng thể ở trên để có tổng điểm báo cáo của chủ tọa lên tới 72 trên thang điểm mở rộng trong tài liệu chính thức."
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "Ma trận phân bổ ủy ban cho phiên họp hiện tại của bạn. Đây là tùy chọn chỉ đọc dành cho ghế và phản ánh việc phân công chỗ ngồi đang hoạt động cũng như mã bảng hiệu.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "Phân bổ",
+      "flag": "Lá cờ",
+      "email": "E-mail",
+      "name": "Tên",
+      "grade": "Cấp",
+      "notes": "Ghi chú",
+      "requestedAllocation": "Phân bổ được yêu cầu",
+      "account": "Tài khoản",
+      "actions": "hành động"
+    },
+    "noRows": "Không tìm thấy hàng phân bổ nào cho ủy ban này.",
+    "pendingApprovalsTitle": "Đang chờ phê duyệt đăng ký",
+    "pendingApprovalsIntro": "Chủ trì phê duyệt hoặc từ chối đăng ký liên kết phân bổ để đảm bảo đại biểu sử dụng đúng tài khoản.",
+    "noPendingRequests": "Không có yêu cầu đang chờ xử lý.",
+    "unknownAllocation": "Phân bổ không xác định",
+    "approve": "Chấp thuận",
+    "reject": "Từ chối"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Ma trận phân bổ",
+    "selectConferenceEventFirst": "Chọn một sự kiện hội nghị đầu tiên.",
+    "enterConferenceCode": "Nhập mã hội nghị",
+    "intro": "Xây dựng hoặc nhập danh sách chỗ ngồi cho từng ủy ban trong sự kiện đang diễn ra. Các đại biểu chọn hàng tại cổng ủy ban sau khi đăng nhập; mã bảng hiệu có thể khớp với ID bảng tính của bạn."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "Danh sách diễn giả",
+    "addedToSpeakerList": "Đã thêm vào danh sách người phát biểu.",
+    "chooseDelegationsNotAlreadyQueued": "Chọn các đoàn chưa chờ hoặc chưa có trong danh sách.",
+    "addedSpeakersInOrder": "Đã thêm {count} diễn giả theo thứ tự danh sách ủy ban.",
+    "introPrefix": "Thêm các đoàn theo thứ tự phát biểu. Đại biểu vẫn có thể sử dụng",
+    "requestToSpeak": "Yêu cầu được nói",
+    "introMiddle": "trong phòng ủy ban. Sử dụng",
+    "sessionTimerLink": "Phiên → Hẹn giờ",
+    "introSuffixPrefix": "cho thời gian mỗi người nói và",
+    "advanceSpeaker": "Loa nâng cao",
+    "addDelegation": "Thêm ủy quyền",
+    "select": "Lựa chọn…",
+    "add": "Thêm vào",
+    "addSelectedToList": "Thêm đã chọn vào danh sách",
+    "dismissReminder": "Loại bỏ lời nhắc",
+    "moveUp": "Di chuyển lên",
+    "moveDown": "Di chuyển xuống",
+    "current": "Hiện hành",
+    "remove": "Di dời",
+    "prompt": {
+      "gslTitle": "Danh sách các diễn giả chung (GSL)",
+      "moderatedTimerTitle": "Cuộc họp kín được kiểm duyệt (hẹn giờ cho mỗi người phát biểu)",
+      "moderatedPassedTitle": "Cuộc họp kín được kiểm duyệt đã thông qua",
+      "bodyPrefix": "Sử dụng danh sách diễn giả bên dưới để",
+      "add": "thêm vào",
+      "bodyAddMiddle": "đại biểu (thả xuống +",
+      "bodyAddMiddle2": ", hoặc đánh dấu vào các ủy quyền và",
+      "bodyRemovePrefix": ") Và",
+      "remove": "di dời",
+      "bodyRemoveMiddle": "họ với",
+      "bodyRowSuffix": "trên mỗi hàng. Sắp xếp lại bằng mũi tên hoặc đặt",
+      "bodyEnd": "khi có ai đó cầm mic.",
+      "noAllocations": "Chưa có phân bổ nào được tải cho ủy ban này. Loại bỏ khi sẵn sàng—bạn có thể thêm người phát biểu sau từ điều khiển danh sách.",
+      "quickAdd": "Thêm nhanh (chưa chờ hoặc hiện tại)",
+      "alreadyQueued": "Mọi phân bổ đều đã có một vị trí chờ hoặc hiện tại. Xóa các mục nếu bạn cần sắp xếp lại hoặc loại bỏ khi bạn hoàn tất."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "hẹn giờ",
+    "currentSpeaker": "Người nói hiện tại",
+    "nextSpeaker": "Người phát biểu tiếp theo",
+    "speakerTimePerSpeaker": "Thời gian phát biểu (trái / cap)",
+    "speakerTimeTotal": "Thời gian phát biểu (trái / tổng cộng)",
+    "perSpeaker": "(mỗi loa)",
+    "paused": "(tạm dừng)",
+    "pauseReason": "Tạm dừng: {lý do}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "Mỗi đại biểu — phiếu tự đánh giá phiên (bắt buộc)",
+    "intro": "Sáu khía cạnh tương tự như đề cử Đại biểu xuất sắc nhất của ủy ban. Bạn phải chấm điểm <strong>mọi đại biểu ngồi</strong> trước khi gửi đề cử cho SMT (hoàn thành {completeCount}/{total}).",
+    "complete": "Hoàn thành",
+    "incomplete": "Chưa hoàn thành",
+    "saving": "Đang lưu...",
+    "saveThisDelegate": "Lưu đại biểu này",
+    "autosaved": "Tự động lưu",
+    "autosaveFailed": "Tự động lưu không thành công",
+    "autosavedWithCountry": "Được lưu tự động — {country}",
+    "delegateFallback": "đại biểu"
   }
 }

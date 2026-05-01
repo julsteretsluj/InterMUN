@@ -51,7 +51,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   {
     href: "/chair/session/roll-call",
     itemKey: "rollCall",
-    emoji: "✅",
+    emoji: "🧾",
   },
   {
     href: "/chair/session",
@@ -73,7 +73,6 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     href: "/chair/session/discipline",
     itemKey: "discipline",
     emoji: "⚖️",
-    labelOverride: "Disciplinary",
   },
   {
     href: "/chair/session/timer",

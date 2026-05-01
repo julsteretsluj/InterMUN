@@ -12,6 +12,7 @@ import {
 } from "@/lib/award-participation-scoring";
 import { DELEGATE_CRITERIA } from "@/lib/seamuns-award-scoring";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type DelegateRow = {
   userId: string;
@@ -26,6 +27,7 @@ type Props = {
 };
 
 export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresByProfileId }: Props) {
+  const t = useTranslations("chairAwardsDelegateMatrix");
   const router = useRouter();
   const keys = useMemo(() => rubricKeysForParticipationScope("delegate_by_chair"), []);
   const maxPts = maxPointsForParticipationScope("delegate_by_chair");
@@ -80,7 +82,7 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
         }
         dirtyProfilesRef.current.delete(profileId);
         const delegate = delegates.find((d) => d.userId === profileId);
-        setMsg(`Autosaved — ${delegate?.country ?? "delegate"}`);
+        setMsg(t("autosavedWithCountry", { country: delegate?.country ?? t("delegateFallback") }));
         setSaveStateByProfile((prev) => ({ ...prev, [profileId]: "saved" }));
         if (saveStateTimersRef.current[profileId]) {
           window.clearTimeout(saveStateTimersRef.current[profileId]);
@@ -120,11 +122,14 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
     <section className="rounded-xl border border-brand-navy/12 bg-brand-paper p-4 md:p-5 space-y-4">
       <div>
         <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
-          Every delegate — session rubric (required)
+          {t("title")}
         </h3>
         <p className="mt-1 text-xs text-brand-muted leading-relaxed">
-          Same six dimensions as committee Best Delegate nominations. You must score <strong>every seated delegate</strong>{" "}
-          before submitting nominations to SMT ({completeCount}/{delegates.length} complete).
+          {t.rich("intro", {
+            strong: (chunks) => <strong>{chunks}</strong>,
+            completeCount,
+            total: delegates.length,
+          })}
         </p>
       </div>
 
@@ -159,7 +164,7 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
                   >
                     {total}/{maxPts}
                   </span>
-                  <span className="text-brand-muted">{rowComplete ? "Complete" : "Incomplete"}</span>
+                  <span className="text-brand-muted">{rowComplete ? t("complete") : t("incomplete")}</span>
                 </span>
               </summary>
               <div className="border-t border-brand-navy/10 px-4 pb-4 pt-3 space-y-3 dark:border-white/10">
@@ -189,13 +194,13 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
                     disabled={pending || Boolean(savingByProfile[d.userId])}
                     className="inline-flex px-4 py-2 rounded-lg bg-brand-accent text-white text-sm font-semibold disabled:opacity-50"
                   >
-                    {savingByProfile[d.userId] ? "Saving…" : "Save this delegate"}
+                    {savingByProfile[d.userId] ? t("saving") : t("saveThisDelegate")}
                   </button>
                   {saveStateByProfile[d.userId] === "saved" ? (
-                    <span className="text-xs text-emerald-700 dark:text-emerald-300">Autosaved</span>
+                    <span className="text-xs text-emerald-700 dark:text-emerald-300">{t("autosaved")}</span>
                   ) : null}
                   {saveStateByProfile[d.userId] === "error" ? (
-                    <span className="text-xs text-rose-700 dark:text-rose-300">Autosave failed</span>
+                    <span className="text-xs text-rose-700 dark:text-rose-300">{t("autosaveFailed")}</span>
                   ) : null}
                 </form>
               </div>

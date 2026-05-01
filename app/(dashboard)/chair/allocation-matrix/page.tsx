@@ -58,6 +58,7 @@ function firstEmbed<T>(value: T | T[] | null): T | null {
 
 export default async function ChairAllocationMatrixPage() {
   const t = await getTranslations("pageTitles");
+  const tMatrix = await getTranslations("chairAllocationMatrixPage");
   const supabase = await createClient();
   const {
     data: { user },
@@ -156,30 +157,29 @@ export default async function ChairAllocationMatrixPage() {
   return (
     <MunPageShell title={t("allocationMatrix")}>
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-        Committee allocation matrix for your current session. This is read-only for chairs and
-        reflects active seat assignments and placard codes.
+        {tMatrix("intro")}
       </p>
       <p className="text-xs text-brand-muted mb-5">
-        {[activeConf.name, activeConf.committee].filter(Boolean).join(" — ")}
+        {[activeConf.name, activeConf.committee].filter(Boolean).join(` ${tMatrix("separator")} `)}
       </p>
 
       <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-paper">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-              <th className="px-3 py-2">Allocation</th>
-              <th className="px-3 py-2">Flag</th>
-              <th className="px-3 py-2">Email</th>
-              <th className="px-3 py-2">Name</th>
-              <th className="px-3 py-2">Grade</th>
-              <th className="px-3 py-2">Notes</th>
+              <th className="px-3 py-2">{tMatrix("columns.allocation")}</th>
+              <th className="px-3 py-2">{tMatrix("columns.flag")}</th>
+              <th className="px-3 py-2">{tMatrix("columns.email")}</th>
+              <th className="px-3 py-2">{tMatrix("columns.name")}</th>
+              <th className="px-3 py-2">{tMatrix("columns.grade")}</th>
+              <th className="px-3 py-2">{tMatrix("columns.notes")}</th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
-                  No allocation rows found for this committee.
+                  {tMatrix("noRows")}
                 </td>
               </tr>
             ) : (
@@ -187,11 +187,11 @@ export default async function ChairAllocationMatrixPage() {
                 <tr key={r.id} className="border-t border-brand-navy/5">
                   <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
                   <td className="px-3 py-2 text-base">{r.flag}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.email || "—"}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.name || "—"}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || "—"}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted">{r.email || tMatrix("dash")}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted">{r.name || tMatrix("dash")}</td>
+                  <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || tMatrix("dash")}</td>
                   <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
-                    {r.notes?.trim() || "—"}
+                    {r.notes?.trim() || tMatrix("dash")}
                   </td>
                 </tr>
               ))
@@ -207,27 +207,26 @@ export default async function ChairAllocationMatrixPage() {
 
       <section className="mt-6 rounded-lg border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
         <h2 className="font-display text-lg font-semibold text-brand-navy">
-          Pending sign-up approvals
+          {tMatrix("pendingApprovalsTitle")}
         </h2>
         <p className="text-xs text-brand-muted mt-1 mb-3">
-          Chairs approve or reject allocation link sign-ups to ensure delegates use the correct
-          account.
+          {tMatrix("pendingApprovalsIntro")}
         </p>
         <ChairAllocationAutoRefresh />
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-                <th className="px-3 py-2">Requested allocation</th>
-                <th className="px-3 py-2">Account</th>
-                <th className="px-3 py-2 w-[180px]">Actions</th>
+                <th className="px-3 py-2">{tMatrix("columns.requestedAllocation")}</th>
+                <th className="px-3 py-2">{tMatrix("columns.account")}</th>
+                <th className="px-3 py-2 w-[180px]">{tMatrix("columns.actions")}</th>
               </tr>
             </thead>
             <tbody>
               {pendingRequests.length === 0 ? (
                 <tr>
                   <td colSpan={3} className="px-3 py-5 text-center text-brand-muted">
-                    No pending requests.
+                    {tMatrix("noPendingRequests")}
                   </td>
                 </tr>
               ) : (
@@ -241,7 +240,7 @@ export default async function ChairAllocationMatrixPage() {
                   return (
                     <tr key={req.id} className="border-t border-brand-navy/5">
                       <td className="px-3 py-2 font-medium text-brand-navy">
-                        {alloc?.country || "Unknown allocation"}
+                        {alloc?.country || tMatrix("unknownAllocation")}
                       </td>
                       <td className="px-3 py-2 text-brand-muted">{requesterLabel}</td>
                       <td className="px-3 py-2">
@@ -252,7 +251,7 @@ export default async function ChairAllocationMatrixPage() {
                               type="submit"
                               className="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium hover:opacity-90"
                             >
-                              Approve
+                              {tMatrix("approve")}
                             </button>
                           </form>
                           <form action={rejectAllocationSignupRequestAction}>
@@ -261,7 +260,7 @@ export default async function ChairAllocationMatrixPage() {
                               type="submit"
                               className="text-xs px-2 py-1 rounded border border-red-200 text-red-700 font-medium hover:bg-red-50"
                             >
-                              Reject
+                              {tMatrix("reject")}
                             </button>
                           </form>
                         </div>

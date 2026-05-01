@@ -39,7 +39,6 @@ import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import {
   type RollAttendance,
   parseRollAttendance,
-  rollAttendanceRollLabel,
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
@@ -72,6 +71,18 @@ type Alloc = {
   userRole?: string | null;
   conference_id: string;
 };
+
+function isDelegateRollCallAllocation(allocation: Alloc): boolean {
+  if (!allocation.user_id) return false;
+  const role = allocation.userRole?.toString().trim().toLowerCase();
+  if (role === "chair") return false;
+  const countryKey = allocation.country.trim().toLowerCase();
+  return (
+    countryKey !== DAIS_SEAT_HEAD_CHAIR.toLowerCase() &&
+    countryKey !== DAIS_SEAT_CO_CHAIR.toLowerCase() &&
+    countryKey !== "co chair"
+  );
+}
 type RollRow = {
   allocation_id: string;
   conference_id: string;
@@ -395,6 +406,7 @@ export function SessionControlClient({
   const [caucusPrecedence, setCaucusPrecedence] = useState<CaucusDisruptivenessPrecedence>("consultation_first");
   const [procedureProfile, setProcedureProfile] = useState<"default" | "eu_parliament">("default");
   const [isEuGuidedWorkflow, setIsEuGuidedWorkflow] = useState(false);
+  const isEuParliamentProfile = procedureProfile === "eu_parliament";
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
@@ -417,17 +429,7 @@ export function SessionControlClient({
   const votingCallOrder = useMemo(
     () =>
       sortAllocationsByDisplayCountry(
-        allocations.filter((a) => {
-          if (!a.user_id) return false;
-          const role = a.userRole?.toString().trim().toLowerCase();
-          if (role === "chair") return false;
-          const countryKey = a.country.trim().toLowerCase();
-          return (
-            countryKey !== DAIS_SEAT_HEAD_CHAIR.toLowerCase() &&
-            countryKey !== DAIS_SEAT_CO_CHAIR.toLowerCase() &&
-            countryKey !== "co chair"
-          );
-        })
+        allocations.filter(isDelegateRollCallAllocation)
       ),
     [allocations]
   );
@@ -439,6 +441,16 @@ export function SessionControlClient({
     }
     return m;
   }, [roll]);
+
+  const rollAttendanceLabel = useCallback(
+    (attendance: RollAttendance | undefined) => {
+      if (!attendance) return tSessionControl("roll.unknown");
+      if (attendance === "absent") return tSessionControl("roll.absent");
+      if (attendance === "present_abstain") return tSessionControl("roll.present_abstain");
+      return tSessionControl("roll.present_voting");
+    },
+    [tSessionControl]
+  );
 
   const quorumStatus = useMemo(() => {
     const present = membersPresentForMajorityDenominator(
@@ -567,16 +579,21 @@ export function SessionControlClient({
   const [euTimerMeta, setEuTimerMeta] = useState<
     Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }>
   >(() => defaultEuTimerMeta());
+  useEffect(() => {
+    if (isEuParliamentProfile && timerWorkflowTab === "setup") {
+      setTimerWorkflowTab("clock");
+    }
+  }, [isEuParliamentProfile, timerWorkflowTab]);
   const [supportsEuTimerMeta, setSupportsEuTimerMeta] = useState(true);
   const euTimerSeedRef = useRef("");
   const euTimerSlotLabel = useCallback((slot: EuTimerSlotKey) => {
     if (slot in EU_PARTY_LABELS) {
       return EU_PARTY_LABELS[slot as keyof typeof EU_PARTY_LABELS];
     }
-    if (slot === "total_time") return "Total time";
-    if (slot === "poi_poc_time") return "POI / POC time";
-    return "Speaker time";
-  }, []);
+    if (slot === "total_time") return tTimer("euTotalTime");
+    if (slot === "poi_poc_time") return tTimer("euPoiPocTime");
+    return tTimer("euSpeakerTime");
+  }, [tTimer]);
   useEffect(() => {
     if (procedureProfile !== "eu_parliament" || !euPartyAllocationPreview) return;
     const speakerSeconds =
@@ -951,7 +968,9 @@ export function SessionControlClient({
       userRole: a.user_id ? roleByProfileId.get(a.user_id) ?? null : null,
     }));
     const dedupedAllocs = dedupeAllocationsByUserId(sortAllocationsByDisplayCountry(allocationsWithRoles));
-    const allowedAllocIds = new Set(dedupedAllocs.map((a) => a.id));
+    const allowedAllocIds = new Set(
+      dedupedAllocs.filter(isDelegateRollCallAllocation).map((a) => a.id)
+    );
     setAllocations(dedupedAllocs);
     const rollMapped = (
       (r as (Omit<RollRow, "attendance"> & { attendance?: string | null; conference_id?: string })[]) ?? []
@@ -1651,7 +1670,7 @@ export function SessionControlClient({
         isRunning: true,
         floorLabel: prev.floorLabel,
       }));
-      setMsg(error ? error.message : "Advanced speaker and reset per-speaker clock.");
+      setMsg(error ? error.message : tSessionControl("advancedSpeakerResetClock"));
       void refresh();
     });
   }
@@ -1659,7 +1678,7 @@ export function SessionControlClient({
   function saveChairSpeechNote() {
     const text = speechNoteDraft.trim();
     if (!text) {
-      setMsg("Write something before saving a speech note.");
+      setMsg(tSessionControl("writeSpeechNoteFirst"));
       return;
     }
     startTransition(async () => {
@@ -1684,7 +1703,7 @@ export function SessionControlClient({
         speaker_label: speakerLabel,
         content: text,
       });
-      setMsg(error ? error.message : "Speech note saved.");
+      setMsg(error ? error.message : tSessionControl("speechNoteSaved"));
       if (!error) {
         setSpeechNoteDraft("");
         void loadChairSpeechNotes();
@@ -1695,7 +1714,7 @@ export function SessionControlClient({
   function deleteChairSpeechNote(noteId: string) {
     startTransition(async () => {
       const { error } = await supabase.from("chair_speech_notes").delete().eq("id", noteId);
-      setMsg(error ? error.message : "Speech note deleted.");
+      setMsg(error ? error.message : tSessionControl("speechNoteDeleted"));
       if (!error) void loadChairSpeechNotes();
     });
   }
@@ -1721,7 +1740,7 @@ export function SessionControlClient({
         setDaisBody("");
         setDaisPublishAt("");
       }
-      setMsg(error ? error.message : "Announcement posted.");
+      setMsg(error ? error.message : tSessionControl("announcementPosted"));
       void refresh();
     });
   }
@@ -1737,13 +1756,13 @@ export function SessionControlClient({
           .from("dais_announcements")
           .update({ is_pinned: true })
           .eq("id", announcementId);
-        setMsg(error ? error.message : "Pinned for the committee floor.");
+        setMsg(error ? error.message : tSessionControl("announcementPinnedToFloor"));
       } else {
         const { error } = await supabase
           .from("dais_announcements")
           .update({ is_pinned: false })
           .eq("id", announcementId);
-        setMsg(error ? error.message : "Unpinned.");
+        setMsg(error ? error.message : tSessionControl("announcementUnpinned"));
       }
       void refresh();
     });
@@ -1766,7 +1785,7 @@ export function SessionControlClient({
     if (!daisEditingId) return;
     const body = daisEditBody.trim();
     if (!body) {
-      setMsg("Announcement body cannot be empty.");
+      setMsg(tSessionControl("announcementBodyRequired"));
       return;
     }
     const publishAtIso = daisEditPublishAt.trim() ? new Date(daisEditPublishAt).toISOString() : null;
@@ -1781,14 +1800,14 @@ export function SessionControlClient({
         .eq("id", daisEditingId)
         .eq("conference_id", floorConferenceId);
       if (!error) cancelEditDais();
-      setMsg(error ? error.message : "Announcement updated.");
+      setMsg(error ? error.message : tSessionControl("announcementUpdated"));
       void refresh();
     });
   }
 
   function deleteDaisAnnouncement(id: string) {
     if (
-      !window.confirm("Delete this announcement permanently? This cannot be undone.")
+      !window.confirm(tSessionControl("deleteAnnouncementConfirm"))
     ) {
       return;
     }
@@ -1799,21 +1818,23 @@ export function SessionControlClient({
         .delete()
         .eq("id", id)
         .eq("conference_id", floorConferenceId);
-      setMsg(error ? error.message : "Announcement deleted.");
+      setMsg(error ? error.message : tSessionControl("announcementDeleted"));
       void refresh();
     });
   }
 
   function initRollCall() {
     startTransition(async () => {
-      const floorAllocations = allocations.filter((a) => a.conference_id === floorConferenceId);
+      const floorAllocations = allocations.filter(
+        (a) => a.conference_id === floorConferenceId && isDelegateRollCallAllocation(a)
+      );
       const rows = floorAllocations.map((a) => ({
         conference_id: a.conference_id,
         allocation_id: a.id,
         attendance: "absent" as const,
       }));
       if (!rows.length) {
-        setMsg("No allocations to add.");
+        setMsg(tSessionControl("noAllocationsToAdd"));
         return;
       }
       const { data: existing } = await supabase
@@ -1823,12 +1844,14 @@ export function SessionControlClient({
       const have = new Set((existing ?? []).map((r) => r.allocation_id));
       const newRows = rows.filter((r) => !have.has(r.allocation_id));
       if (!newRows.length) {
-        setMsg("Roll call already has a row for every allocation.");
+        setMsg(tSessionControl("rollCallRowsAlreadyExist"));
         void refresh();
         return;
       }
       const { error } = await supabase.from("roll_call_entries").insert(newRows);
-      setMsg(error ? error.message : `Added ${newRows.length} roll call row(s).`);
+      setMsg(
+        error ? error.message : tSessionControl("rollCallRowsAdded", { count: newRows.length })
+      );
       void refresh();
     });
   }
@@ -1911,7 +1934,7 @@ export function SessionControlClient({
         .select("id")
         .maybeSingle();
 
-      setMsg(error ? error.message : "Motion created and opened.");
+      setMsg(error ? error.message : tSessionControl("motionCreatedOpened"));
       if (!error && inserted?.id) {
         await supabase.from("procedure_states").upsert({
           conference_id: floorConferenceId,
@@ -1965,7 +1988,7 @@ export function SessionControlClient({
           motioner_allocation_id: motionDraft.motioner_allocation_id || null,
         })
         .eq("id", openMotion.id);
-      setMsg(error ? error.message : "Motion updated.");
+      setMsg(error ? error.message : tSessionControl("motionUpdated"));
       void refresh();
     });
   }
@@ -1985,7 +2008,7 @@ export function SessionControlClient({
         .from("vote_items")
         .update({ closed_at: new Date().toISOString() })
         .eq("id", openMotion.id);
-      setMsg(error ? error.message : "Motion closed.");
+      setMsg(error ? error.message : tSessionControl("motionClosed"));
       if (!error) {
         const membersPresent = membersPresentForMajorityDenominator(
           rollAttendanceByAllocationId,
@@ -2087,7 +2110,7 @@ export function SessionControlClient({
         .eq("open_for_voting", true)
         .maybeSingle();
       if (blocking && blocking.id !== voteItemId) {
-        setMsg("Another motion is already open for voting. Close it before reopening this one.");
+        setMsg(tSessionControl("motionAlreadyOpenReopenBlocked"));
         return;
       }
 
@@ -2103,7 +2126,7 @@ export function SessionControlClient({
         .from("vote_items")
         .update({ closed_at: null, open_for_voting: true })
         .eq("id", voteItemId);
-      setMsg(error ? error.message : "Motion reopened.");
+      setMsg(error ? error.message : tSessionControl("motionReopened"));
       if (!error) {
         await supabase.from("procedure_states").upsert({
           conference_id: floorConferenceId,
@@ -2146,7 +2169,7 @@ export function SessionControlClient({
         motion_floor_open: true,
         updated_at: new Date().toISOString(),
       });
-      setMsg(error ? error.message : "Motion floor open — record each stated motion below.");
+      setMsg(error ? error.message : tSessionControl("motionFloorOpened"));
       void refresh();
     });
   }
@@ -2166,7 +2189,7 @@ export function SessionControlClient({
         motion_floor_open: false,
         updated_at: new Date().toISOString(),
       });
-      setMsg(error ? error.message : "Motion floor closed for statements.");
+      setMsg(error ? error.message : tSessionControl("motionFloorClosed"));
       void refresh();
     });
   }
@@ -2174,11 +2197,11 @@ export function SessionControlClient({
   function recordStatedMotion(draftOverride?: MotionDraftState) {
     const draft = draftOverride ?? motionDraft;
     if (!motionFloorOpen) {
-      setMsg("Open the motion floor for statements first.");
+      setMsg(tSessionControl("openMotionFloorFirst"));
       return;
     }
     if (openMotion) {
-      setMsg("A motion is already open for voting. Close it before recording further statements.");
+      setMsg(tSessionControl("openMotionBlocksRecording"));
       return;
     }
     const draftError = validateMotionDraft(draft);
@@ -2209,7 +2232,7 @@ export function SessionControlClient({
         motioner_allocation_id: draft.motioner_allocation_id || null,
         open_for_voting: false,
       });
-      setMsg(error ? error.message : "Stated motion recorded (not yet open for voting).");
+      setMsg(error ? error.message : tSessionControl("statedMotionRecorded"));
       if (!error) {
         setMotionDraft({
           vote_type: "motion",
@@ -2521,7 +2544,7 @@ export function SessionControlClient({
         .eq("id", voteItemId)
         .eq("conference_id", floorConferenceId)
         .eq("open_for_voting", false);
-      setMsg(error ? error.message : "Stated motion removed.");
+      setMsg(error ? error.message : tSessionControl("statedMotionRemoved"));
       void refresh();
     });
   }
@@ -3373,7 +3396,7 @@ export function SessionControlClient({
                     const hasRollEntry = rollAttendanceByAllocationId.has(call.id);
                     const rollA = rollAttendanceByAllocationId.get(call.id);
                     const absent = hasRollEntry && (rollA ?? "present_voting") === "absent";
-                    const rollLabel = rollAttendanceRollLabel(rollA);
+                    const rollLabel = rollAttendanceLabel(rollA);
                     const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
                     const discipline = disciplineByAllocationId[call.id];
                     const rights =
@@ -3657,12 +3680,18 @@ export function SessionControlClient({
         </div>
         <div className="flex flex-wrap gap-2">
           {(
-            [
-              ["setup", tTimer("tabSetup")],
-              ["clock", tTimer("tabClock")],
-              ["notes", tTimer("tabNotes")],
-              ["log", tTimer("tabLog")],
-            ] as const
+            isEuParliamentProfile
+              ? ([
+                  ["clock", tTimer("tabClock")],
+                  ["notes", tTimer("tabNotes")],
+                  ["log", tTimer("tabLog")],
+                ] as const)
+              : ([
+                  ["setup", tTimer("tabSetup")],
+                  ["clock", tTimer("tabClock")],
+                  ["notes", tTimer("tabNotes")],
+                  ["log", tTimer("tabLog")],
+                ] as const)
           ).map(([id, label]) => {
             const active = timerWorkflowTab === id;
             return (
@@ -3684,13 +3713,13 @@ export function SessionControlClient({
           })}
         </div>
         <div className={`${surfaceCard} space-y-3`}>
+          {isEuParliamentProfile ? (
           <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
             <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
-              EU Parliament timer board (11 timers)
+              {tTimer("euTimerBoardTitle")}
             </p>
             <p className="text-xs text-brand-muted">
-              One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to
-              copy a row into the live timer fields on the Clock tab (speaker time / Save timer).
+              {tTimer("euTimerBoardHelp")}
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
               {EU_TIMER_SLOT_ORDER.map((slot) => {
@@ -3705,7 +3734,7 @@ export function SessionControlClient({
                     <p className="text-xs font-medium text-brand-navy">{euTimerSlotLabel(slot)}</p>
                     <div className="mt-1 grid gap-2 sm:grid-cols-2">
                       <label className="text-xs text-brand-muted">
-                        Name
+                        {tTimer("euTimerName")}
                         <input
                           className={`mt-1 w-full ${surfaceFieldSm}`}
                           value={euTimerMeta[slot]?.name ?? ""}
@@ -3714,7 +3743,7 @@ export function SessionControlClient({
                         />
                       </label>
                       <label className="text-xs text-brand-muted">
-                        Tag
+                        {tTimer("euTimerTag")}
                         <select
                           className={`mt-1 w-full ${surfaceFieldSm}`}
                           value={euTimerMeta[slot]?.tag ?? "party timer"}
@@ -3775,7 +3804,8 @@ export function SessionControlClient({
               })}
             </div>
           </div>
-          {timerWorkflowTab === "setup" ? (
+          ) : null}
+          {!isEuParliamentProfile && timerWorkflowTab === "setup" ? (
             <>
           <p className="text-sm text-brand-muted">
             {tTimer("setupHelp")}

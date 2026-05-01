@@ -235,7 +235,7 @@
     "targetResolution": "القرار المستهدف",
     "selectResolution": "حدد الدقة...",
     "targetClauses": "البنود المستهدفة",
-    "noClausesFound": "لم يتم العثور على بنود للقرار المحدد.",
+    "noClausesFound": "لم يتم العثور على بنود للحل المحدد.",
     "clause": "بند",
     "type": "يكتب",
     "motion": "حركة",
@@ -301,7 +301,7 @@
     "saveEdits": "حفظ التعديلات",
     "deleteMotionConfirm": "هل تريد حذف هذه الحركة نهائيًا؟ ستتم إزالة جميع الأصوات المسجلة لها وسيختفي الاقتراح من السجل.",
     "deleteMotion": "حذف الحركة",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "تتالي: نعم {نعم} | لا {لا} | بطاقات الاقتراع {المجموع}",
     "ballotsHelp": "بطاقات الاقتراع = لافتات مكتوب عليها نعم أو لا (يتم تتبع الامتناع عن التصويت بشكل منفصل ولا يتم احتسابه في هذا المقام). مسح يزيل التصويت المسجل. بالنسبة للحركات الإجرائية، تقارن النتيجة نعم بالأعضاء الموجودين في القائمة (راجع قسم استدعاء الأسماء).",
     "recordVotesLabel": "تسجيل الأصوات",
     "currentMotion": "الحركة الحالية",
@@ -313,7 +313,104 @@
     "unitMinutesShort": "م",
     "unitSecondsShort": "ق",
     "apply": "يتقدم",
-    "motionControl": "Motion control"
+    "motionControl": "التحكم في الحركة",
+    "advancedSpeakerResetClock": "مكبر صوت متقدم وإعادة ضبط الساعة لكل مكبر صوت.",
+    "writeSpeechNoteFirst": "اكتب شيئًا قبل حفظ ملاحظة الكلام.",
+    "speechNoteSaved": "تم حفظ مذكرة الكلام.",
+    "speechNoteDeleted": "تم حذف ملاحظة الكلام.",
+    "announcementPosted": "تم نشر الإعلان.",
+    "announcementPinnedToFloor": "تم تثبيته على أرضية اللجنة.",
+    "announcementUnpinned": "غير مثبت.",
+    "announcementBodyRequired": "لا يمكن أن يكون نص الإعلان فارغًا.",
+    "announcementUpdated": "تم تحديث الإعلان.",
+    "deleteAnnouncementConfirm": "هل تريد حذف هذا الإعلان نهائيًا؟ لا يمكن التراجع عن هذا.",
+    "announcementDeleted": "تم حذف الإعلان.",
+    "noAllocationsToAdd": "لا يوجد مخصصات لإضافتها.",
+    "rollCallRowsAlreadyExist": "يحتوي استدعاء الأسماء بالفعل على صف لكل تخصيص.",
+    "rollCallRowsAdded": "تمت إضافة {count} من صفوف استدعاء الأسماء.",
+    "motionCreatedOpened": "تم إنشاء الحركة وفتحها.",
+    "motionUpdated": "تم تحديث الحركة.",
+    "motionClosed": "الحركة مغلقة.",
+    "motionAlreadyOpenReopenBlocked": "اقتراح آخر مفتوح بالفعل للتصويت. أغلقه قبل إعادة فتح هذا.",
+    "motionReopened": "أعيد فتح الحركة.",
+    "motionFloorOpened": "أرضية الحركة مفتوحة - سجل كل حركة مذكورة أدناه.",
+    "motionFloorClosed": "أرضية الحركة مغلقة للإدلاء ببيانات.",
+    "openMotionFloorFirst": "افتح أرضية الحركة للبيانات أولاً.",
+    "openMotionBlocksRecording": "الاقتراح مفتوح بالفعل للتصويت. قم بإغلاقه قبل تسجيل المزيد من البيانات.",
+    "statedMotionRecorded": "تم تسجيل الاقتراح المذكور (ليس مفتوحًا للتصويت بعد).",
+    "statedMotionRemoved": "تمت إزالة الحركة المعلنة."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{تم} / {total} مكتمل - تمت مزامنته لهذه اللجنة",
+      "loading": "تحميل...",
+      "resetChecklist": "إعادة تعيين قائمة التحقق"
+    },
+    "prepPage": {
+      "description": "قبل المؤتمر: القواعد، الموضوع، الغرفة، المواد، والفريق. تمت المزامنة لجميع رؤساء هذه اللجنة؛ إعادة التعيين يمسحها للجميع.",
+      "crisisHidden": "يتم إخفاء العناصر التحضيرية الخاصة بالأزمات لهذا النوع من اللجان."
+    },
+    "flowPage": {
+      "description": "التدفق الطبيعي للجنة - حدد الخطوات أثناء تقدمك. تمت مشاركتها عبر حسابات وأجهزة الكرسي؛ إعادة الضبط واضحة للجميع."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "القواعد والإجراءات"
+        },
+        "topic": {
+          "title": "اللجنة والموضوع"
+        },
+        "room": {
+          "title": "الغرفة والتكنولوجيا"
+        },
+        "materials": {
+          "title": "المواد والخدمات اللوجستية"
+        },
+        "crisis": {
+          "title": "الأزمة (إن وجدت)"
+        },
+        "team": {
+          "title": "الفريق والتواصل"
+        }
+      },
+      "items": {
+        "rop": "قراءة وفهم النظام الداخلي للجنة",
+        "parliamentary": "مراجعة الإجراءات البرلمانية (الاقتراحات والنقاط والتصويت)",
+        "speaking-times": "تأكيد أوقات التحدث والحدود الزمنية",
+        "quorum": "معرفة النصاب القانوني ومتطلبات التصويت",
+        "research": "موضوع لجنة البحث وخلفيتها",
+        "study-guide": "قراءة دليل الدراسة والوثائق الرئيسية",
+        "dashboard-topic": "تعيين اسم اللجنة والموضوع في لوحة القيادة",
+        "agenda": "إعداد جدول أعمال الجلسة وتدفقها",
+        "digital-room": "إعداد الغرفة الرقمية (قائمة المندوبين واللافتات)",
+        "tech-check": "الفحص الفني: النظام الأساسي، الصوت، مشاركة الشاشة",
+        "backup": "لديك خطة احتياطية في حالة فشل التكنولوجيا",
+        "roll-plan": "إعداد قائمة النداء والحضور",
+        "speakers-plan": "خطة إدارة قائمة المتحدثين",
+        "templates": "قم بإعداد الاقتراحات / النقاط المشتركة (في حالة استخدام القوالب)",
+        "timing": "تأكيد وقت بدء الجلسة والفواصل",
+        "crisis-slides": "مراجعة عناصر الأزمة وتحديث الشرائح",
+        "crisis-cues": "خطة ترتيب المتحدث الأزمة / الإشارات",
+        "crisis-paths": "إعداد مسارات الأزمة وحقائقها",
+        "co-chairs": "التنسيق مع الرئيس (الرؤساء) المشاركين بشأن الأدوار",
+        "staff": "تأكيد دعم الموظفين/المنصة والإشارات",
+        "delegate-brief": "إعداد ملخص للمندوبين (القواعد والتوقيت)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "نداء رول",
+        "open-floor": "افتح الكلمة (النقاط والحركات)",
+        "recognize": "التعرف على الحركات",
+        "vote-1": "التصويت على الاقتراح (الاقتراحات)",
+        "engage": "انخرط في الحركة المختارة أو انتقل إلى GSL",
+        "open-again": "افتح الأرضية مرة أخرى",
+        "recognize-repeat": "التعرف على الحركات (كرر حسب الحاجة)",
+        "vote-2": "التصويت على الاقتراح (الاقتراحات)",
+        "cycle": "مواصلة الدورة (حركة المشاركة / GSL -> أرضية مفتوحة)"
+      }
+    }
   },
   "language": {
     "label": "لغة",
@@ -352,10 +449,12 @@
   },
   "dashboardLayout": {
     "helpCenter": "مركز المساعدة",
-    "settings": "إعدادات"
+    "settings": "إعدادات",
+    "appHomeAria": "{appName} المنزل",
+    "defaultDisplayName": "مندوب"
   },
   "authWizard": {
-    "enterApp": "Enter {appName}",
+    "enterApp": "أدخل {اسم التطبيق}",
     "welcomeSignup": "أدخل رمز المؤتمر الخاص بك أولاً، واختر كيفية مشاركتك، ثم قم بإنشاء حسابك.",
     "welcomeLogin": "أدخل رمز المؤتمر الخاص بك أولاً، واختر كيفية مشاركتك، ثم قم بتسجيل الدخول.",
     "conferenceTitle": "انضم إلى مؤتمرك",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "يحفظ الكراسي كل فتحة كمسودة في صفحة النتائج. لا يتم عرض تلك المسودات هنا. بمجرد اكتمال كل خانة مطلوبة، يجب على الرئيس النقر فوق إرسال الترشيحات إلى SMT - ثم تظهر الصفوف في هذا الجدول على أنها في انتظار المراجعة.",
     "noRowsForCommittee": "لا توجد صفوف معلقة لهذه اللجنة. يختار",
     "orAnotherTab": "أو علامة تبويب أخرى.",
-    "topRank": "Top {rank}",
+    "topRank": "أعلى {رتبة}",
     "bandInitialsTitle": "الأحرف الأولى من النطاق: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "أفضل مندوب (اللجنة)",
@@ -522,7 +621,7 @@
   },
   "server": {
     "eventCodeMin": "أدخل رمز المؤتمر من المنظمين لديك (4 أحرف على الأقل).",
-    "eventCodeMissing": "لا يوجد مؤتمر يطابق هذا الرمز. قم بالتدقيق الإملائي مع المنظمين.",
+    "eventCodeMissing": "لا يوجد مؤتمر يطابق هذا الرمز. قم بالتدقيق الإملائي مع المنظمين لديك.",
     "mustBeSignedIn": "يجب عليك تسجيل الدخول.",
     "committeeCodeInvalid": "أدخل رمز اللجنة المكون من 6 أحرف (الأحرف والأرقام فقط، على سبيل المثال ECO741). اسأل كرسيك أو تحقق من SMT -> رموز الغرفة.",
     "enterConferenceFirst": "أدخل رمز المؤتمر الخاص بك أولاً (ارجع إلى الخطوة السابقة).",
@@ -596,8 +695,8 @@
     "subtitle": "قم بتعيين رمز لجنة البوابة الثانية لكل جلسة وقم بدعوة أو ترقية رؤساء المنصة دون استخدام لوحة معلومات المندوب."
   },
   "delegateDashboard": {
-    "welcome": "Welcome, Delegate of {flag} {country}",
-    "activeCommitteeIntro": "Active committee: {line}.",
+    "welcome": "مرحبًا، مندوب {علم} {بلد}",
+    "activeCommitteeIntro": "اللجنة النشطة: {خط}.",
     "activeCommitteeBody": "تتم مشاركة مواعيد العد التنازلي مع الجميع في هذه اللجنة. تبقى إعداداتك ومواقفك ومستنداتك في حسابك.",
     "tabs": {
       "ariaLabel": "أقسام لوحة القيادة",
@@ -696,10 +795,10 @@
     "sessionFloorBanner": "<floor>طابق الجلسة</floor> (المؤقتات، ومكبرات الصوت، ونداء الأسماء) مخصص لـ <chairs>كراسي المنصة</chairs> فقط. استخدم <live>اللجان المباشرة</live> أدناه للإشراف، أو أدخل رموز اللجنة مثل المفوضين عندما تحتاج إلى جلسة محددة.",
     "welcomeSg": "مرحباً بالأمين العام!",
     "whichCommittee": "ما هي اللجنة التي ترغب في التحقق منها؟",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{العدد، الجمع، جلسة واحدة {#} أخرى {# جلسات}}",
     "topicLabel": "عنوان:",
     "chairsLabel": "الكراسي:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "شعار {الاسم}.",
     "eslFriendly": "صديقة للغة الإنجليزية كلغة ثانية"
   },
   "chairNav": {
@@ -725,6 +824,7 @@
       "session": "حصة",
       "speakers": "مكبرات الصوت",
       "formalMotions": "الاقتراحات الرسمية",
+      "discipline": "تأديبي",
       "timer": "الموقت",
       "announcements": "إعلانات",
       "motionsPoints": "الحركات والنقاط",
@@ -828,7 +928,7 @@
       "alertNeedContentOrUrl": "قم بإضافة محتوى نصي محلي أو عنوان URL لمحرر مستندات Google.",
       "confirmDelete": "هل تريد حذف هذا المستند؟",
       "delegatePrepTitle": "قسم المستندات التحضيرية",
-      "delegatePrepBody": "يمكنك تحميل وعرض وتحرير <prep>مستندات الإعداد</prep> الخاصة بك مباشرةً من هذه الصفحة.",
+      "delegatePrepBody": "يمكنك تحميل وعرض وتحرير <prep>مستندات الإعداد</prep> الخاصة بك مباشرة من هذه الصفحة.",
       "positionPaperGuideTitle": "دليل ورقة الموقف",
       "positionPaperGuideBlurb": "قم بتنزيل دليل العناصر النائبة أثناء إعداد ملف PDF النهائي.",
       "downloadPlaceholderGuide": "تنزيل دليل العناصر النائبة",
@@ -881,7 +981,7 @@
     },
     "resolutions": {
       "enterDelegateEmailFirst": "أدخل البريد الإلكتروني للمفوض أولاً.",
-      "sentToDelegate": "Sent to {email}.",
+      "sentToDelegate": "تم الإرسال إلى {البريد الإلكتروني}.",
       "newResolution": "قرار جديد",
       "maxDraftResolutions": "لدى هذه اللجنة بالفعل {count} من مشاريع القرارات.",
       "googleDocLink": "رابط مستند جوجل",
@@ -894,15 +994,15 @@
       "openInNewTab": "افتح في علامة تبويب جديدة",
       "noGoogleDocLink": "لا يوجد رابط لمستند Google",
       "visibleToOtherBloc": "مرئية للكتلة الأخرى",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
-      "blocButton": "Bloc {name} ({stance})",
+      "resolutionCounts": "الغواصات الرئيسية: {الرئيسية} | الغواصات المشتركة: {co} | الموقعون: {الموقعون}",
+      "blocButton": "كتلة {اسم} ({موقف})",
       "signVirtually": "قم بالتسجيل افتراضيًا (تم إخطار الغواصات الرئيسية)",
       "shareByEmail": "مشاركة القرار عن طريق البريد الإلكتروني",
       "delegateEmailPlaceholder": "مندوب@email.com",
       "sendToDelegate": "إرسال إلى المندوب",
       "clauseEditor": "محرر جملة",
       "noClausesYet": "لا توجد بنود حتى الآن.",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "بند {رقم}",
       "saveClause": "حفظ الجملة",
       "delete": "يمسح",
       "addClausePlaceholder": "إضافة جملة جديدة...",
@@ -912,7 +1012,7 @@
       "clauseFallback": "بند",
       "passed": "اجتاز",
       "failed": "فشل",
-      "motionId": "Motion {id}"
+      "motionId": "الحركة {معرف}"
     },
     "voting": {
       "tabs": {
@@ -925,7 +1025,7 @@
       "helpRequiredMajorityBody": "اختر حد التصويت المستخدم لتحديد النجاح/الرسوب. \"بسيط\" أكثر من النصف. `2/3` يتطلب أغلبية ساحقة.",
       "majoritySimple": "بسيط",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majority",
+      "majorityLine": "{التسمية} الأغلبية",
       "mustVote": "يجب التصويت",
       "helpMustVoteTitle": "يجب التصويت",
       "helpMustVoteBody": "وضع علامة على هذا الاقتراح باعتباره عنصرًا \"يجب التصويت عليه\". يُستخدم هذا لتوصيل المتطلبات إلى المشاركين (اعتمادًا على تشكيل اللجنة الخاصة بك).",
@@ -1013,7 +1113,79 @@
       "errImageSize": "الصورة كبيرة جدًا (بحد أقصى 5 ميغابايت).",
       "errUploadFailed": "فشل التحميل.",
       "errStorageSetup": "لم يتم إعداد تخزين صورة الملف الشخصي. في مشروع Supabase، قم بتشغيل الترحيل 00100_profile_pictures_storage_bucket.sql، أو قم بإنشاء مجموعة تخزين عامة تسمى صور الملف الشخصي (راجع README).",
-      "errPublicUrl": "تعذر حل عنوان URL العام للصورة التي تم تحميلها."
+      "errPublicUrl": "تعذر حل عنوان URL العام للصورة التي تم تحميلها.",
+      "fallbacks": {
+        "yourCountry": "بلدك",
+        "committeeSession": "جلسة اللجنة",
+        "delegate": "مندوب",
+        "speechNote": "مذكرة الكلام",
+        "untitledMotion": "حركة بلا عنوان",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "مرحبًا بمندوب {علم} {بلد}",
+        "subtitle": "ما الذي تريد أن تبدأ به؟",
+        "links": {
+          "documents": "وثائق",
+          "notes": "ملحوظات",
+          "committeeRoom": "غرفة اللجنة",
+          "runningNotes": "تشغيل الملاحظات",
+          "ideas": "أفكار",
+          "guides": "أدلة",
+          "sources": "مصادر",
+          "resolutions": "القرارات",
+          "speeches": "الخطب",
+          "stances": "مواقف",
+          "crisisSlides": "شرائح الأزمة",
+          "report": "تقرير",
+          "motions": "الحركات",
+          "points": "نقاط"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "الجوائز في ملفك الشخصي",
+        "rank": "رتبة {رتبة}",
+        "pending": {
+          "tab": "في انتظار الترشيحات",
+          "title": "في انتظار الترشيحات للرئاسة",
+          "descriptionSingle": "تم حفظه بواسطة الكراسي ومشاركته مع SMT للمراجعة. تظهر الجوائز النهائية أدناه بعد التأكيد.",
+          "descriptionTabbed": "تم حفظه بواسطة الكراسي ومشاركته مع SMT للمراجعة. تظهر الجوائز النهائية بعد التأكيد."
+        },
+        "recorded": {
+          "tab": "الجوائز المسجلة",
+          "title": "الجوائز المسجلة",
+          "description": "يتم إدراجها عندما تقوم الكراسي أو SMT بتعيينك في متتبع الجوائز. الاعتراف النهائي يتبع قواعد المؤتمر الخاص بك."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "مرئية لك فقط، ولرؤساء اللجان، وفريق الإدارة العليا للجنة ذات الصلة.",
+        "points": {
+          "title": "نقاط الكرسي (خاصة)"
+        },
+        "speechNotes": {
+          "title": "ملاحظات خطاب الرئيس (خاصة)"
+        },
+        "motions": {
+          "title": "الحركات التي تحركتها",
+          "description": "تم الحفظ في ملفك الشخصي لمراجعة اللجنة وإشراف SMT."
+        }
+      },
+      "discipline": {
+        "title": "الحالة التأديبية (خاصة)",
+        "statusLine": "التحذيرات: {warnings} · المخالفات: {strikes}{votingDisabled}{speakingSuspending}{removedFromCommittee}",
+        "votingDisabled": "التصويت معطل",
+        "speakingSuspended": "الكلام معلق",
+        "removedFromCommittee": "تمت إزالته من اللجنة",
+        "updated": "تم التحديث: {القيمة}"
+      },
+      "preview": {
+        "ariaLabel": "معاينة الملف الشخصي",
+        "title": "معاينة",
+        "yourName": "اسمك",
+        "usernameNotSet": "لم يتم تعيين اسم المستخدم",
+        "gradeValue": "الصف {الدرجة}",
+        "awards": "الجوائز"
+      }
     },
     "guides": {
       "default": {
@@ -1055,7 +1227,7 @@
         "title": "مسرد جدول أعمال نموذج الأمم المتحدة (MUN).",
         "subtitle": "مصطلحات فريدة تتوافق مع رمز لجنتك وموضوعات جدول الأعمال الحالية.",
         "committeeCode": "رمز اللجنة: {code}",
-        "topicTag": "Topic: {topic}",
+        "topicTag": "الموضوع: {الموضوع}",
         "sources": {
           "core": "جوهر",
           "committee": "لجنة",
@@ -1290,9 +1462,9 @@
       "add": "يضيف",
       "noIdeasYet": "لا توجد أفكار حتى الآن.",
       "ideaLabel": "فكرة",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "فكرة {رقم}",
       "linkedDoc": "وثيقة مرتبطة",
-      "addedOn": "Added {date}",
+      "addedOn": "تمت الإضافة في {التاريخ}",
       "edit": "يحرر",
       "delete": "يمسح",
       "ideaDocument": "وثيقة الفكرة",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "لجنة",
+      "yourContext": "السياق الخاص بك",
+      "roleLabel": "دور",
+      "seatLabel": "مقعد",
       "clearSearchTitle": "مسح البحث وإظهار كافة الوفود",
       "vacantLabel": "شاغر",
+      "assignedLabel": "مُكَلَّف",
+      "daisLabel": "دايس",
+      "phaseLabel": "مرحلة",
+      "phaseVoting": "التصويت",
+      "phaseDebate": "مناظرة",
+      "focusSearchTitle": "بحث التركيز (عناوين وأسماء المنصة تتطابق مع استعلامك)",
+      "tipLabel": "نصيحة",
       "searchVacantTitle": "البحث عن المقاعد \"الشاغرة\" في الغرفة",
-      "searchHint": "اكتب الدولة أو اسم المندوب أو المدرسة أو الضمير أو \"شاغر\" لتمييز التطابقات في الغرفة. اضغط على Enter للانتقال إلى المباراة الأولى؛ يمسح Esc. انقر فوق شاغر للانتقال إلى المقاعد الفارغة.",
+      "searchHint": "Type a country, delegate name, school, pronoun, or \"vacant\" to highlight matches in the room. اضغط على Enter للانتقال إلى المباراة الأولى؛ يمسح Esc. انقر فوق شاغر للانتقال إلى المقاعد الفارغة.",
       "findLabel": "ابحث عن وفد أو عضو منصة",
       "searchPlaceholder": "البلد، الاسم، المدرسة...",
       "matchesCount": "{matches} من إجمالي {total} عدد المقاعد المتطابقة",
+      "enterScrolls": "أدخل مخطوطات",
+      "typeToFilterHint": "اكتب للتصفية - أدخل التمريرات للمطابقة الأولى",
+      "noMatches": "لا توجد وفود أو مقاعد على المنصة متطابقة.",
+      "digitalDisplay": "العرض الرقمي",
+      "floorLabel": "أرضية",
+      "staffSeatsHeading": "الموظفين - المقاعد",
       "searchAria": "بحث الوفود",
       "virtualRoomVacant": "شاغر",
       "profileAria": "عرض الملف الشخصي: {country}",
       "vacantSeatAria": "مقعد شاغر",
-      "placardAria": "Placard {country}",
-      "gavelAria": "المطرقة"
+      "placardAria": "لافتة {بلد}",
+      "gavelAria": "المطرقة",
+      "viewProfileAria": "عرض الملف الشخصي: {title}",
+      "noProfileLinkAria": "{title} (لا يوجد رابط للملف الشخصي)",
+      "committeeFloor": "أرضية اللجنة",
+      "virtualRoomFigureAria": "غرفة اللجنة الافتراضية - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "تصفية الوفود أول مقعد مميز هو أول مباراة في الحلبة.",
+      "helperText": "تتضمن اللافتات الدولة (من التخصيصات)، والاسم، والمدرسة، والضمائر من الملف الشخصي لكل مندوب. قم بتحرير ملفك الشخصي ضمن الملف الشخصي. تظهر مقاعد اللجنة الفارغة على أنها شاغرة. انقر فوق لافتة مملوءة أو مقعد على المنصة لفتح صفحة ذلك العضو (الدردشة والإبلاغ من هناك).",
+      "virtualRoomCaption": "قاعة لجنة نموذج الأمم المتحدة الافتراضية مع لافتات للمندوبين توضح البلد والاسم والمدرسة والضمائر."
     },
     "session": {
       "requestToSpeak": {
@@ -1379,7 +1574,7 @@
         "motioner": "المحرك",
         "majority": "غالبية",
         "majoritySimple": "بسيط",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "نعم {نعم} - لا {لا} - الإجمالي {المجموع}",
         "help": "تسجل المنصة تصويت كل وفد في الجلسة. تستخدم أصوات الاقتراح نعم أو لا فقط (لا يمتنع عن التصويت). الإجماليات تحسب فقط اللافتات التي تم تسجيل نعم أو لا فيها؛ يتم تخطي الوفود الغائبة."
       },
       "activeMotion": {
@@ -1396,32 +1591,32 @@
         "speakerTimeLeftTotal": "وقت السماعة (يسار/إجمالي)",
         "perSpeaker": "(لكل متحدث)",
         "paused": "(متوقف مؤقتًا)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "وقفة: {السبب}"
       },
       "floorStatus": {
         "sessionTime": "وقت الجلسة",
-        "sessionNotStarted": "لم تبدأ الجلسة",
+        "sessionNotStarted": "Session not started",
         "limit": "حد",
-        "limitRemaining": "{value} left",
+        "limitRemaining": "{القيمة} متبقية",
         "limitOverBy": "أكثر من {value}",
         "quickLinkSession": "حصة",
         "quickLinkRoll": "لفافة",
         "quickLinkSpeakers": "مكبرات الصوت",
-        "quickLinkMotions": "الحركات",
+        "quickLinkMotions": "Motions",
         "quickLinkTimer": "الموقت",
         "dais": "دايس",
         "pinned": "مثبت",
-        "viewFullAnnouncement": "عرض الإعلان الكامل",
+        "viewFullAnnouncement": "View full announcement",
         "timerPausesReadOnly": "توقف المؤقت مؤقتًا (للقراءة فقط)",
-        "speakerList": "قائمة المتحدثين",
+        "speakerList": "Speaker list",
         "speakerFallback": "المتحدث",
-        "rollCallYou": "مكالمة هاتفية (أنت)",
+        "rollCallYou": "Roll call (you)",
         "fullAnnouncement": "اعلان كامل",
         "daisAnnouncement": "اعلان ديس",
         "close": "يغلق"
       },
       "committeeControl": {
-        "sessionNameLabel": "اسم الجلسة",
+        "sessionNameLabel": "Session name",
         "sessionNamePlaceholder": "على سبيل المثال الجلسة الصباحية",
         "sessionNameSaving": "توفير…",
         "sessionNameSaved": "أنقذ",
@@ -1436,14 +1631,14 @@
         "sessionLimitUpdated": "تم تحديث حد الجلسة.",
         "startedLabel": "بدأت:",
         "timeInLabel": "الوقت في:",
-        "timeUntilEndLabel": "الوقت حتى النهاية:",
-        "overByValue": "أكثر من {value}",
+        "timeUntilEndLabel": "Time until end:",
+        "overByValue": "over by {value}",
         "modeLabel": "وضع:",
         "modeStopwatchNoLimit": "ساعة توقيت (لا يوجد حد زمني)",
         "sessionNotRunning": "الجلسة ليست قيد التشغيل.",
-        "sessionLimit": "حد الجلسة",
+        "sessionLimit": "Session limit",
         "sessionLimitModesTitle": "أوضاع حد الجلسة",
-        "sessionLimitModesHelp": "لا شيء: لا نهاية. الميزانية الزمنية: تحسب من البداية. ينتهي عند: توقيت الساعة الثابت في منطقتك الزمنية المحلية.",
+        "sessionLimitModesHelp": "None: no end. الميزانية الزمنية: تحسب من البداية. ينتهي عند: توقيت الساعة الثابت في منطقتك الزمنية المحلية.",
         "sessionLimitOptional": "خياري.",
         "noneLabel": "لا أحد",
         "noneDescription": "يعمل حتى تتوقف.",
@@ -1473,15 +1668,15 @@
       },
       "history": {
         "title": "تاريخ الجلسة",
-        "savedCount": "{count} saved",
+        "savedCount": "تم حفظ {عدد}.",
         "permissionsHint": "يمكن للكراسي إعادة تسمية الإدخالات. يمكن لـ SMT/Admin إعادة تسمية وحذف الإدخالات.",
         "empty": "لا يوجد سجل الجلسة حتى الآن.",
         "rename": "إعادة تسمية",
         "delete": "يمسح",
         "deleteConfirm": "هل تريد حذف هذه الجلسة من السجل؟",
         "sessionNamePrompt": "اسم الجلسة",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{يتراوح}",
+        "rangeOngoing": "{النطاق} -> مستمر"
       },
       "timerPage": {
         "title": "الموقت",
@@ -1494,7 +1689,7 @@
         "setupHelp": "اختر ما إذا كان هذا المؤقت مخصصًا للكلمة العامة (مرئيًا دائمًا للمندوبين) أو مرتبطًا بالحركة المفتوحة للتصويت (لا يراها المندوبون إلا عندما يكون هذا التصويت هو العنصر النشط). مع تشغيل الوقت لكل متحدث، تظل الساعة مرئية أثناء التجمع الانتخابي الخاضع للإشراف بغض النظر. إيقاف الساعة مؤقتًا / بدء تجميد الساعة أو استئناف العد التنازلي. اضبط وقت السماعة (المتبقي) وإجمالي الوقت بشكل مستقل، ثم احفظ المؤقت. تملأ الإعدادات المسبقة كلاهما بنفس الطول؛ يمكنك تعديل أي من الحقلين بعد ذلك. يتم تسجيل الإيقاف المؤقت لسبب قصير.",
         "namedPreset": "اسمه مسبقا",
         "applyPreset": "تطبيق الإعداد المسبق...",
-        "floorLabelDelegates": "تسمية الكلمة (المندوبون)",
+        "floorLabelDelegates": "تسمية الكلمة (المندوبين)",
         "floorLabelPlaceholder": "على سبيل المثال جي إس إل 60 إس",
         "timerPurpose": "الغرض الموقت",
         "purposeGeneralFloor": "المناقشة العامة/الكلمة (غير مرتبطة بالتصويت)",
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "تم إيقاف المؤقت مؤقتًا بالفعل.",
         "pausedForCommittee": "توقف مؤقت للجنة.",
         "alreadyRunning": "الموقّت قيد التشغيل بالفعل.",
-        "runningForCommittee": "تشغيل الموقت للجنة."
+        "runningForCommittee": "تشغيل الموقت للجنة.",
+        "euTimerBoardTitle": "لوحة مؤقت البرلمان الأوروبي (11 مؤقتًا)",
+        "euTimerBoardHelp": "مؤقت واحد لكل حفلة، بالإضافة إلى الوقت الإجمالي، ووقت POI/POC، ووقت المتحدث. استخدم \"تطبيق\" لنسخ صف في حقول المؤقت المباشر في علامة التبويب \"الساعة\" (وقت السماعة / حفظ المؤقت).",
+        "euTimerName": "اسم",
+        "euTimerTag": "علامة",
+        "euTotalTime": "الوقت الإجمالي",
+        "euPoiPocTime": "وقت النقطة المهمة/POC",
+        "euSpeakerTime": "وقت المتحدث"
       }
     }
   },
@@ -1566,7 +1768,7 @@
     "daisListed": "دايس (مدرج)",
     "committeeCodeSecondGate": "رمز اللجنة / الغرفة (البوابة الثانية)",
     "seats": "مقاعد",
-    "seatsFilledAllocated": "{filled} filled · {total} allocated",
+    "seatsFilledAllocated": "{مملوء} معبأ · {إجمالي} مخصص",
     "resolutions": "القرارات",
     "openVotes": "الأصوات المفتوحة",
     "editMetadataIntro": "قم بتحرير البيانات التعريفية لجلسة اللجنة وأسماء الرؤساء ضمن",
@@ -1587,7 +1789,7 @@
       "history": "تاريخ"
     },
     "liveFloor": "أرضية حية",
-    "liveFloorDescription": "قائمة انتظار المتحدثين المباشرين، ونداء الأسماء، والمؤقتات الخاصة بهذه اللجنة - نفس كراسي البيانات التي تراها في قاعة الجلسة.",
+    "liveFloorDescription": "قائمة انتظار المتحدثين المباشرين، ونداء الأسماء، وأجهزة ضبط الوقت الخاصة بهذه اللجنة - نفس كراسي البيانات التي تراها في قاعة الجلسة.",
     "conferenceFallback": "مؤتمر",
     "committeeFallback": "لجنة"
   },
@@ -1647,10 +1849,10 @@
     "delegatesMatrix": "مصفوفة المندوبين",
     "clearAllChairNotes": "مسح جميع ملاحظات الكرسي",
     "searchCountry": "بحث عن الدولة...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{لافتات} لافتات · {تم وضع علامة عليها} مع ملاحظات الكرسي · تم تسجيل لفة لـ {count}",
     "loading": "تحميل...",
     "noDelegationsMatch": "لا توجد تفويضات تطابق بحثك.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "لفة {تسمية}",
     "linkedAccount": "حساب مرتبط",
     "vacantPlacard": "لافتة فارغة",
     "delegateProfile": "ملف تعريف المندوب ->",
@@ -1661,7 +1863,11 @@
     "adding": "جارٍ الإضافة...",
     "addToSpeakerList": "أضف إلى قائمة المتحدثين",
     "reminder": "تذكير",
-    "privateReminderLabel": "تذكير خاص (الكراسي فقط، متزامنة)"
+    "privateReminderLabel": "تذكير خاص (الكراسي فقط، متزامنة)",
+    "clearAllConfirm": "هل تريد توضيح ملاحظات الإطراء والقلق والتذكير لكل لافتة؟ يؤدي هذا إلى تحديث نسخة اللجنة المشتركة.",
+    "addedToSpeakerList": "تمت إضافة {country} إلى قائمة المتحدثين.",
+    "committeeFallback": "لجنة",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "حدد الموضوع المباشر",
@@ -1723,7 +1929,7 @@
     "anyChair": "أي كرسي",
     "noChairs": "لم يتم العثور على ملفات تعريف الكرسي.",
     "notesListTitle": "قائمة الملاحظات",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{عد، جمع، واحدة {# ملاحظة} أخرى {# ملاحظة}}",
     "emptyList": "لا توجد ملاحظات حتى الآن.",
     "forwardedBadge": "(أرسل)",
     "readerWarning": "تحذير للقارئ: قد تحتوي هذه الملاحظة على لغة غير لائقة.",
@@ -1888,7 +2094,7 @@
       "missingServiceRoleKey": "الخادم يفتقد SUPABASE_SERVICE_ROLE_KEY. قم بإضافته إلى بيئة النشر (لا تعرضه أبدًا للمتصفح).",
       "missingPublicAppUrl": "قم بتعيين NEXT_PUBLIC_APP_URL على عنوان URL العام لموقعك (على سبيل المثال https://your-app.vercel.app) حتى تتم إعادة توجيه روابط الدعوة بشكل صحيح.",
       "emailAlreadyHasAccount": "يحتوي هذا البريد الإلكتروني على حساب بالفعل. استخدم \"منح دور الرئيس\" أدناه بدلاً من إرسال دعوة أخرى.",
-      "inviteSentButRoleSetFailed": "Invite sent, but could not set chair role on profile: {error}. Use \"Grant chair role\" after they accept.",
+      "inviteSentButRoleSetFailed": "تم إرسال الدعوة، ولكن تعذر تعيين دور الرئيس في الملف الشخصي: {خطأ}. استخدم \"منح دور الرئيس\" بعد قبولهم.",
       "inviteSentSuccess": "تم إرسال الدعوة بالبريد الإلكتروني إلى {email}. سيكونون كرسيًا بعد أن يضعوا كلمة المرور الخاصة بهم.",
       "onlySmtGrantChair": "يمكن للأمانة فقط منح أدوار الرئيس.",
       "noAccountForEmail": "لا يوجد حساب بهذا البريد الإلكتروني حتى الآن. أرسل دعوة كرسي أولا.",
@@ -1922,9 +2128,9 @@
       "welcomeLine3": "نراكم على الأرض.",
       "chairReminderSubject": "طلب تخصيص المفوض في انتظار الموافقة",
       "chairReminderLine1": "لقد طلب أحد المندوبين تخصيصًا ويحتاج إلى مراجعة الرئيس.",
-      "chairReminderConference": "Conference: {conference}",
+      "chairReminderConference": "مؤتمر: {مؤتمر}",
       "chairReminderAllocation": "التخصيص المطلوب: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
+      "chairReminderDelegate": "مندوب: {الاسم}",
       "chairReminderEmail": "البريد الإلكتروني للحساب: {email}",
       "chairReminderLine2": "يرجى الموافقة على هذا الطلب أو رفضه في مصفوفة تخصيص الكرسي:"
     }
@@ -1957,7 +2163,7 @@
     "crisisSlidesUrl": "شرائح الأزمات (عنوان URL لشرائح Google)",
     "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
     "crisisSlidesLabel": "شرائح الأزمة",
-    "crisisSlidesHelpPrefix": "بالنسبة إلى FWC / UNSC / HSC: مضمن في بيانات المندوبين والرؤساء",
+    "crisisSlidesHelpPrefix": "بالنسبة إلى FWC / UNSC / HSC: مضمن في كتب المندوبين والرؤساء",
     "crisisSlidesHelpSuffix": "صفحة. اتركه فارغًا في حالة عدم استخدامه. يجب أن يسمح العرض لجمهورك بالمشاهدة (مشاركة الارتباط).",
     "competingMotionsTitle": "الاقتراحات المتنافسة (RoP): التشاور قبل التجمع الحزبي الخاضع للإشراف",
     "moderatedCaucus": "كتلة معتدلة",
@@ -1995,7 +2201,7 @@
     "committeeFallback": "لجنة",
     "showingOneCommitteeAtATime": "عرض لجنة واحدة في كل مرة. لجنة التبديل باستخدام علامات التبويب السفلية.",
     "editPlacardCodesSheet": "تحرير ورقة رموز اللافتة ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "القائمة · {العنوان}",
     "seatsSummary": "{count} مقعد (مقاعد).",
     "linkedDelegatesCannotBeDeleted": "لا يمكن حذف المفوضين المرتبطين هنا.",
     "countryPosition": "البلد / الموقف",
@@ -2032,7 +2238,7 @@
   "chairAwardsPage": {
     "committeeLabel": "لجنة",
     "intro": {
-      "scoringMatches": "يتطابق تسجيل النقاط مع <dashboard>لوحة معلومات SEAMUNs</dashboard>: لكل معيار، اختر <beginning>البداية</beginning>، أو <developing>تطوير</developing>، أو <proficient>ماهر</proficient>، أو <exemplary>مثالي</exempalary>. إرسال أعلى 2 مع الأدلة؛ SMT تؤكد الجوائز النهائية.",
+      "scoringMatches": "يتطابق تسجيل النقاط مع <dashboard>لوحة معلومات SEAMUNs</dashboard>: لكل معيار، اختر <beginning>البداية</beginning>، أو <developing>تطوير</developing>، أو <proficient>ماهر</proficient>، أو <exemplary>مثالي</exemplar>. إرسال أعلى 2 مع الأدلة؛ SMT تؤكد الجوائز النهائية.",
       "submissionRulePrefix": "يتم التقديم إلى SMT يدويًا (الزر أدناه) أو تلقائيًا بعد ذلك",
       "submissionRuleSuffix": "UTC عند فتح هذه الصفحة في المرة التالية (إذا كانت جميع الفتحات المطلوبة كاملة).",
       "steps": {
@@ -2087,7 +2293,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "لجنتك",
     "fallbackCommittee": "لجنة",
-    "welcome": "Welcome, Chair of {committee}",
+    "welcome": "أهلاً بك رئيساً {لجنة}",
     "featureStrip": "الغرفة الرقمية · الاقتراحات · التصويت · المتحدثون",
     "activeCommitteeLine": "اللجنة النشطة: <line></line>. تتم مزامنة بيانات الجلسة من خلال حسابك؛ يتم حفظ قوائم مراجعة الإعداد/التدفق والحركات والنقاط في هذا المتصفح لهذه اللجنة - نفس فكرة <seamuns>غرفة كرسي SEAMUNs</seamuns>.",
     "tiles": {
@@ -2184,7 +2390,7 @@
     "tierLow": "قليل",
     "tierHigh": "عالي",
     "tierPromptLocked": "مقفل: {band} - {tier} ({score})",
-    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "tierPromptPick": "اختر منخفضًا أو مرتفعًا ضمن {النطاق} (النقاط على مقياس من 1 إلى 8).",
     "criteria": {
       "creativity": {
         "label": "إِبداع",
@@ -2192,13 +2398,13 @@
           "0": "يقترح حلولاً متكررة أو قياسية؛ نادرا ما يفكر خارج الإطار الحالي.",
           "1": "يقدم بعض الأفكار الأصلية ولكنه يجد صعوبة في تكييفها مع ديناميكيات اللجنة المتغيرة.",
           "2": "يقترح في كثير من الأحيان حلولاً مبتكرة وبنودًا فريدة لمشاريع القرارات.",
-          "3": "مبدع للغاية؛ يطور تسويات \"تغير قواعد اللعبة\" وتربط بين الكتل المتصادمة."
+          "3": "مبدع للغاية؛ يطور تسويات \"تغير قواعد اللعبة\" وتربط بين الكتل المتصارعة."
         }
       },
       "diplomacy": {
         "label": "الدبلوماسية",
         "bands": {
-          "0": "يفتقر إلى اللياقة المهنية؛ أحيانًا يرفض وجهات نظر المندوبين الآخرين.",
+          "0": "يفتقر إلى اللياقة المهنية. أحيانًا يرفض وجهات نظر المندوبين الآخرين.",
           "1": "محترم ولكن غير ملحوظ. يحافظ على وجود محايد دون بناء علاقة.",
           "2": "احترافية باستمرار؛ يسعى بنشاط إلى فهم ودمج وجهات النظر المتعارضة.",
           "3": "يجسد حنكة الدولة الحقيقية. يحظى بالاحترام مع البقاء متواضعًا وشاملاً."
@@ -2474,6 +2680,130 @@
           "3": "التآزر السلس. تلهم المنصة بيئة احترافية وعالية المخاطر."
         }
       }
+    },
+    "maxPoints": "الحد الأقصى {نقاط} نقطة",
+    "reference": {
+      "title": "SEAMUN I معايير الجائزة الرسمية",
+      "description": "نسخة مرجعية: أنواع الجوائز، وعملية التقييم، ومصفوفات النطاقات الكاملة من 1 إلى 8 (من عنوان المؤتمر). يستخدم تسجيل النقاط في InterMUN نفس مفاتيح المعايير التي يتم فيها تقديم الترشيحات."
+    },
+    "sections": {
+      "catalogue": "كتالوج الجائزة",
+      "processOversight": "عملية الجوائز والإشراف عليها",
+      "calibrationTraining": "معايرة الكرسي والتدريب (مقياس 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "على مستوى المؤتمر (الإجمالي)",
+      "collectiveChair": "الجماعية والكرسي",
+      "committeeLevel": "على مستوى اللجنة"
+    },
+    "matrices": {
+      "positionPaper": "ورقة موقف (أفضل ورقة موقف)",
+      "delegateLiveSessions": "مندوب (جلسات حية)",
+      "chairPerformance": "أداء الكرسي",
+      "chairReportOverall": "تقرير الرئيس - بشكل عام",
+      "chairReportSectionSpecific": "تقرير الرئيس - خاص بالقسم",
+      "bestCommittee": "أفضل لجنة"
+    },
+    "evidenceNote": "يكمل الكراسي الأدلة والتأكيد الكتابي لسجلات SMT: الدليل الأساسي على التميز والتبرير مقابل الوصيف (حسب النموذج المنشور).",
+    "footnotes": {
+      "delegateLiveSessions": "الإبداع، الدبلوماسية، التعاون، القيادة، المعرفة والبحث، المشاركة - 8 نقاط لكل منهما.",
+      "chairPerformance": "تم تسجيل ثمانية أبعاد بمعدل 8 نقاط لكل منها لمواءمة تقييم أفضل كرسي / كرسي.",
+      "chairReportSectionSpecific": "يتم دمجها مع القسم الإجمالي أعلاه للحصول على إجمالي درجة تقرير الرئيس تصل إلى 72 على المقياس الموسع في الوثيقة الرسمية."
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "مصفوفة تخصيص اللجنة لدورتك الحالية. هذا للقراءة فقط للكراسي ويعكس تخصيصات المقاعد النشطة ورموز اللافتات.",
+    "columns": {
+      "allocation": "توزيع",
+      "flag": "علَم",
+      "email": "بريد إلكتروني",
+      "name": "اسم",
+      "grade": "درجة",
+      "notes": "ملحوظات",
+      "requestedAllocation": "التخصيص المطلوب",
+      "account": "حساب",
+      "actions": "الإجراءات"
+    },
+    "noRows": "لم يتم العثور على صفوف تخصيص لهذه اللجنة.",
+    "pendingApprovalsTitle": "في انتظار موافقات التسجيل",
+    "pendingApprovalsIntro": "يوافق الرؤساء على عمليات الاشتراك في رابط التخصيص أو يرفضونها لضمان استخدام المندوبين للحساب الصحيح.",
+    "noPendingRequests": "لا توجد طلبات معلقة.",
+    "unknownAllocation": "تخصيص غير معروف",
+    "approve": "يعتمد",
+    "reject": "يرفض",
+    "separator": "—",
+    "dash": "—"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "مصفوفة التخصيص",
+    "selectConferenceEventFirst": "حدد حدث المؤتمر أولاً.",
+    "enterConferenceCode": "أدخل رمز المؤتمر",
+    "intro": "قم ببناء أو استيراد قائمة المقاعد لكل لجنة في الحدث النشط. يختار المندوبون صفهم عند بوابة اللجنة بعد تسجيل الدخول؛ يمكن أن تتطابق رموز اللافتات مع معرفات جداول البيانات الخاصة بك."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "قائمة المتحدثين",
+    "addedToSpeakerList": "تمت إضافته إلى قائمة المتحدثين.",
+    "chooseDelegationsNotAlreadyQueued": "اختر الوفود التي ليست في انتظار أو موجودة بالفعل في القائمة.",
+    "addedSpeakersInOrder": "تمت إضافة {count} من المتحدثين بترتيب قائمة اللجنة.",
+    "introPrefix": "أضف الوفود بترتيب التحدث. لا يزال بإمكان المندوبين استخدام",
+    "requestToSpeak": "طلب التحدث",
+    "introMiddle": "في قاعة اللجنة . يستخدم",
+    "sessionTimerLink": "الجلسة → الموقت",
+    "introSuffixPrefix": "للوقت لكل متحدث و",
+    "advanceSpeaker": "المتحدث المتقدم",
+    "addDelegation": "إضافة تفويض",
+    "select": "يختار…",
+    "add": "يضيف",
+    "addSelectedToList": "إضافة المحدد إلى القائمة",
+    "dismissReminder": "تجاهل التذكير",
+    "moveUp": "تحرك للأعلى",
+    "moveDown": "تحرك للأسفل",
+    "current": "حاضِر",
+    "remove": "يزيل",
+    "prompt": {
+      "gslTitle": "قائمة المتحدثين العامة (GSL)",
+      "moderatedTimerTitle": "تجمع انتخابي خاضع للإشراف (مؤقت لكل متحدث)",
+      "moderatedPassedTitle": "تم تمرير المؤتمر الحزبي المعتدل",
+      "bodyPrefix": "استخدم قائمة المتحدثين أدناه ل",
+      "add": "يضيف",
+      "bodyAddMiddle": "المندوبون (القائمة المنسدلة +",
+      "bodyAddMiddle2": "، أو ضع علامة على الوفود و",
+      "bodyRemovePrefix": ") و",
+      "remove": "يزيل",
+      "bodyRemoveMiddle": "معهم",
+      "bodyRowSuffix": "على كل صف. أعد الترتيب باستخدام الأسهم أو المجموعة",
+      "bodyEnd": "عندما يكون شخص ما في هيئة التصنيع العسكري.",
+      "noAllocations": "ولم يتم تحميل أي مخصصات لهذه اللجنة حتى الآن. الرفض عندما يكون جاهزًا - يمكنك إضافة مكبرات الصوت لاحقًا من عناصر التحكم في القائمة.",
+      "quickAdd": "إضافة سريعة (ليست في انتظار أو حالية بعد)",
+      "alreadyQueued": "يحتوي كل تخصيص بالفعل على فتحة انتظار أو حالية. قم بإزالة الإدخالات إذا كنت بحاجة إلى إعادة الترتيب، أو قم برفضها عند الانتهاء."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "الموقت",
+    "currentSpeaker": "المتحدث الحالي",
+    "nextSpeaker": "المتحدث التالي",
+    "speakerTimePerSpeaker": "وقت السماعة (يسار/غطاء)",
+    "speakerTimeTotal": "وقت السماعة (يسار/إجمالي)",
+    "perSpeaker": "(لكل متحدث)",
+    "paused": "(متوقف مؤقتًا)",
+    "pauseReason": "وقفة: {السبب}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "كل مندوب - عنوان الجلسة (مطلوب)",
+    "intro": "نفس الأبعاد الستة لترشيحات اللجنة لأفضل مندوب. يجب عليك تسجيل <strong>كل مندوب جالس</strong> قبل إرسال الترشيحات إلى SMT ({completeCount}/{total} مكتمل).",
+    "complete": "مكتمل",
+    "incomplete": "غير مكتمل",
+    "saving": "توفير...",
+    "saveThisDelegate": "احفظ هذا المندوب",
+    "autosaved": "تم الحفظ تلقائيًا",
+    "autosaveFailed": "فشل الحفظ التلقائي",
+    "autosavedWithCountry": "تم الحفظ تلقائيًا — {country}",
+    "delegateFallback": "مندوب"
   }
 }

@@ -167,7 +167,7 @@
     "rollPresentVoting": "출석 및 투표",
     "rollPresentVotingTitle": "출석 및 투표 - 투표해야 하며 기권할 수 없음",
     "rollAbsent": "결석한",
-    "rollCallForCountry": "Roll call for {country}",
+    "rollCallForCountry": "{국가}에 대한 점호",
     "presetCustom": "관습",
     "presetSetAgenda": "의제 설정 동의",
     "presetExtendOpeningSpeech": "개회사 시간 연장 발의안",
@@ -210,7 +210,7 @@
     "tabDraftMotion": "3) 드래프트 모션",
     "tabRecordVotes": "4) 기록 투표",
     "tabHistory": "5) 연혁",
-    "chairOnlyVotingHelp": "의장 전용: 한 번에 한 표만 공개됩니다. 대리인은 앱에서 투표하지 않습니다. Record vote를 사용하여 각 플래카드를 호출하고 예 또는 아니요만 기록합니다. 절차적 동의에서는 기권을 사용하지 않습니다. 합격/불합격은 명부에 있는 필수 구성원의 대부분을 사용합니다.",
+    "chairOnlyVotingHelp": "의장 전용: 한 번에 한 표만 공개됩니다. 대리인은 앱에서 투표하지 않습니다. Record vote를 사용하여 각 플래카드를 호출하고 예 또는 아니요만 기록합니다. 절차적 동의에서는 기권을 사용하지 않습니다. 합격/불합격은 명부에 있는 필수 구성원의 대다수를 사용합니다.",
     "euGuidedPhase": "EU 가이드 단계",
     "euGuidedPhaseHint": "코어 차단 장치는 계속 안내됩니다. 동작이 이 단계와 일치하지 않는 경우에도 의자는 명시적인 재정의 확인을 사용하여 계속할 수 있습니다.",
     "pointsWorkflow": "포인트 워크플로",
@@ -301,7 +301,7 @@
     "saveEdits": "수정사항 저장",
     "deleteMotionConfirm": "이 모션을 영구적으로 삭제하시겠습니까? 이에 대해 기록된 모든 투표가 제거되고 해당 동의는 기록에서 사라집니다.",
     "deleteMotion": "모션 삭제",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "집계: 예 {예} | 아니요 {아니요} | 투표용지 {총}",
     "ballotsHelp": "투표지 = 찬성 또는 반대가 기록된 플래카드(기권은 별도로 추적되며 이 분모에 계산되지 않습니다). 지우기(Clear)는 기록된 투표를 제거합니다. 절차적 동작의 경우 결과는 목록에 있는 구성원과 예를 비교합니다(목록 호출 섹션 참조).",
     "recordVotesLabel": "투표 기록",
     "currentMotion": "현재 동작",
@@ -313,7 +313,104 @@
     "unitMinutesShort": "중",
     "unitSecondsShort": "에스",
     "apply": "적용하다",
-    "motionControl": "Motion control"
+    "motionControl": "모션 제어",
+    "advancedSpeakerResetClock": "고급 스피커 및 스피커별 시계 재설정.",
+    "writeSpeechNoteFirst": "음성 메모를 저장하기 전에 무언가를 작성하세요.",
+    "speechNoteSaved": "음성 메모가 저장되었습니다.",
+    "speechNoteDeleted": "음성 메모가 삭제되었습니다.",
+    "announcementPosted": "공지가 게시되었습니다.",
+    "announcementPinnedToFloor": "위원회 층에 고정되었습니다.",
+    "announcementUnpinned": "고정 해제되었습니다.",
+    "announcementBodyRequired": "공지사항 본문은 비워둘 수 없습니다.",
+    "announcementUpdated": "공지 사항이 업데이트되었습니다.",
+    "deleteAnnouncementConfirm": "이 공지사항을 영구적으로 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+    "announcementDeleted": "공지가 삭제되었습니다.",
+    "noAllocationsToAdd": "추가할 할당이 없습니다.",
+    "rollCallRowsAlreadyExist": "롤콜에는 이미 모든 할당에 대한 행이 있습니다.",
+    "rollCallRowsAdded": "{count}개의 점호 행을 추가했습니다.",
+    "motionCreatedOpened": "모션이 생성되고 열렸습니다.",
+    "motionUpdated": "모션이 업데이트되었습니다.",
+    "motionClosed": "모션이 종료되었습니다.",
+    "motionAlreadyOpenReopenBlocked": "또 다른 동의안이 이미 투표를 위해 열려 있습니다. 이것을 다시 열기 전에 닫으세요.",
+    "motionReopened": "모션이 재개되었습니다.",
+    "motionFloorOpened": "모션 플로어 오픈 - 아래에 명시된 각 모션을 기록합니다.",
+    "motionFloorClosed": "성명서를 위해 모션 플로어가 폐쇄되었습니다.",
+    "openMotionFloorFirst": "먼저 발언을 위한 모션 플로어를 엽니다.",
+    "openMotionBlocksRecording": "이미 투표를 위한 동의가 진행 중입니다. 추가 진술을 기록하기 전에 닫으십시오.",
+    "statedMotionRecorded": "명시된 발의안이 기록되었습니다(아직 투표가 진행되지 않음).",
+    "statedMotionRemoved": "명시된 모션이 삭제되었습니다."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} 완료 - 이 위원회에 대해 동기화됨",
+      "loading": "로드 중...",
+      "resetChecklist": "체크리스트 재설정"
+    },
+    "prepPage": {
+      "description": "컨퍼런스 전: 규칙, 주제, 회의실, 자료, 팀. 이 위원회의 모든 의장과 동기화됩니다. 재설정하면 모든 사람이 지워집니다.",
+      "crisisHidden": "이 위원회 유형에는 위기별 준비 항목이 숨겨져 있습니다."
+    },
+    "flowPage": {
+      "description": "일반적인 위원회 흐름 - 진행하면서 단계를 선택하세요. 의장 계정 및 장치 전반에 걸쳐 공유됩니다. 재설정하면 모든 사람이 삭제됩니다."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "규칙 및 절차"
+        },
+        "topic": {
+          "title": "위원회 및 주제"
+        },
+        "room": {
+          "title": "룸 & 테크"
+        },
+        "materials": {
+          "title": "자재 및 물류"
+        },
+        "crisis": {
+          "title": "위기(해당되는 경우)"
+        },
+        "team": {
+          "title": "팀 & 커뮤니케이션"
+        }
+      },
+      "items": {
+        "rop": "위원회 절차 규칙을 읽고 이해합니다.",
+        "parliamentary": "의회 절차 검토(동의, 안건, 투표)",
+        "speaking-times": "발언 시간 및 시간 제한 확인",
+        "quorum": "정족수 및 투표 요구 사항 파악",
+        "research": "연구위원회 주제 및 배경",
+        "study-guide": "학습 가이드 및 주요 문서 읽기",
+        "dashboard-topic": "대시보드에 위원회 이름 및 주제 설정",
+        "agenda": "세션 안건 및 흐름 준비",
+        "digital-room": "디지털 룸 설정(대표단 목록, 플래카드)",
+        "tech-check": "기술 점검: 플랫폼, 오디오, 화면 공유",
+        "backup": "기술이 실패할 경우를 대비한 백업 계획 마련",
+        "roll-plan": "출석부 목록 및 출석 준비",
+        "speakers-plan": "계획 발표자 목록 관리",
+        "templates": "공통 모션/포인트 준비(템플릿을 사용하는 경우)",
+        "timing": "세션 시작 시간 및 휴식 시간 확인",
+        "crisis-slides": "위기 요소 검토 및 슬라이드 업데이트",
+        "crisis-cues": "위기 상황 발표자 명령/신호 계획",
+        "crisis-paths": "위기 경로 및 사실 준비",
+        "co-chairs": "역할에 대해 공동 의장과 조정",
+        "staff": "직원/연단 지원 및 신호 확인",
+        "delegate-brief": "대표자를 위한 브리핑 준비(규칙, 타이밍)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "점호",
+        "open-floor": "바닥 열기(포인트 및 모션)",
+        "recognize": "동작 인식",
+        "vote-1": "동의에 대한 투표",
+        "engage": "선택한 동작에 참여하거나 GSL로 이동",
+        "open-again": "다시 바닥을 열어보세요",
+        "recognize-repeat": "동작 인식(필요에 따라 반복)",
+        "vote-2": "동의에 대한 투표",
+        "cycle": "계속 사이클(결합 동작 / GSL -> 열린 바닥)"
+      }
+    }
   },
   "language": {
     "label": "언어",
@@ -352,10 +449,12 @@
   },
   "dashboardLayout": {
     "helpCenter": "도움말 센터",
-    "settings": "설정"
+    "settings": "설정",
+    "appHomeAria": "{appName} 집",
+    "defaultDisplayName": "대리자"
   },
   "authWizard": {
-    "enterApp": "Enter {appName}",
+    "enterApp": "{앱 이름}을(를) 입력하세요",
     "welcomeSignup": "먼저 컨퍼런스 코드를 입력하고 참여 방법을 선택한 다음 계정을 만드세요.",
     "welcomeLogin": "먼저 컨퍼런스 코드를 입력하고 참여 방법을 선택한 다음 로그인하세요.",
     "conferenceTitle": "회의에 참여하세요",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "의장은 각 슬롯을 점수 페이지에 초안으로 저장합니다. 해당 초안은 여기에 표시되지 않습니다. 모든 필수 슬롯이 완료되면 의장은 SMT에 후보 제출을 클릭해야 합니다. 그러면 이 표에 검토 대기 중인 행이 표시됩니다.",
     "noRowsForCommittee": "이 위원회에 대해 보류 중인 행이 없습니다. 선택하다",
     "orAnotherTab": "또는 다른 탭.",
-    "topRank": "Top {rank}",
+    "topRank": "상위 {순위}",
     "bandInitialsTitle": "밴드 이니셜: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "최고대표(위원회)",
@@ -544,7 +643,7 @@
     "awardsSmt": "수상 내역",
     "delegateDashboard": "대시보드 위임",
     "voting": "투표",
-    "digitalRoom": "디지털룸",
+    "digitalRoom": "디지털실",
     "committeeSession": "위원회 세션",
     "announcements": "공지사항",
     "follow": "따르다",
@@ -585,7 +684,7 @@
     "allocationTakenBody": "{country}은(는) 이미 다른 계정에서 소유권을 주장했습니다. 다른 할당을 선택하세요.",
     "submitFailedTitle": "요청을 제출할 수 없습니다.",
     "requestSubmittedTitle": "가입 요청이 제출되었습니다.",
-    "requestSubmittedBody": "Your request for {country} has been sent to the committee chair for approval.",
+    "requestSubmittedBody": "{국가}에 대한 귀하의 요청이 승인을 위해 위원회 위원장에게 전달되었습니다.",
     "requestSubmittedHint": "승인되면 이 링크를 다시 열거나 계속해서 위원회 로그인을 진행하세요.",
     "continueCommitteeSignIn": "계속해서 위원회 로그인"
   },
@@ -596,7 +695,7 @@
     "subtitle": "대의원 대시보드를 사용하지 않고도 각 세션의 2차 게이트 위원회 코드를 설정하고 단상 의장을 초대하거나 홍보할 수 있습니다."
   },
   "delegateDashboard": {
-    "welcome": "Welcome, Delegate of {flag} {country}",
+    "welcome": "환영합니다, {flag} {국가} 대표님",
     "activeCommitteeIntro": "활동 중인 위원회: {line}.",
     "activeCommitteeBody": "카운트다운 날짜는 이 위원회의 모든 구성원과 공유됩니다. 귀하의 준비, 입장 및 문서는 귀하의 계정에 유지됩니다.",
     "tabs": {
@@ -696,10 +795,10 @@
     "sessionFloorBanner": "<floor>세션 플로어</floor>(타이머, 연설자, 점호)는 <의자>단의자</의자> 전용입니다. 감독을 위해 아래의 <live>실시간 위원회</live>를 사용하거나 특정 세션이 필요할 때 대의원과 같은 위원회 코드를 입력하세요.",
     "welcomeSg": "사무총장님, 환영합니다!",
     "whichCommittee": "어떤 위원회를 확인하고 싶으신가요?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{개수, 복수형, 하나의 {# 세션} 기타 {# 세션}}",
     "topicLabel": "주제:",
     "chairsLabel": "의자:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "{이름} 로고",
     "eslFriendly": "ESL 친화적"
   },
   "chairNav": {
@@ -720,11 +819,12 @@
       "prepChecklist": "준비 체크리스트",
       "flowChecklist": "흐름 체크리스트",
       "delegates": "대표자",
-      "digitalRoom": "디지털룸",
+      "digitalRoom": "디지털실",
       "rollCall": "점호",
       "session": "세션",
       "speakers": "스피커",
       "formalMotions": "공식적인 동의",
+      "discipline": "징계",
       "timer": "시간제 노동자",
       "announcements": "공지사항",
       "motionsPoints": "모션 및 포인트",
@@ -846,7 +946,7 @@
         "position_paper": "입장문",
         "chair_report": "의장보고",
         "rop": "RoP",
-        "award_criteria": "수상 기준",
+        "award_criteria": "수상기준",
         "chair_notes": "의장 노트",
         "prep_doc": "서류 준비"
       },
@@ -867,7 +967,7 @@
       "sections": {
         "chairReports": "의장 보고서",
         "rop": "RoP",
-        "awardCriteria": "수상 기준",
+        "awardCriteria": "수상기준",
         "prepDocuments": "서류 준비",
         "chairNotes": "의장 노트",
         "otherDocuments": "기타 서류"
@@ -881,7 +981,7 @@
     },
     "resolutions": {
       "enterDelegateEmailFirst": "먼저 대리인 이메일을 입력하세요.",
-      "sentToDelegate": "Sent to {email}.",
+      "sentToDelegate": "{이메일}로 보냈습니다.",
       "newResolution": "새로운 결의안",
       "maxDraftResolutions": "이 위원회에는 이미 {count}개의 결의안 초안이 있습니다.",
       "googleDocLink": "구글 문서 링크",
@@ -894,15 +994,15 @@
       "openInNewTab": "새 탭에서 열기",
       "noGoogleDocLink": "Google 문서 링크가 없습니다.",
       "visibleToOtherBloc": "다른 블록에 표시됨",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
-      "blocButton": "Bloc {name} ({stance})",
+      "resolutionCounts": "메인 서브: {main} | 공동 구독자: {co} | 서명자: {서명자}",
+      "blocButton": "블록 {이름} ({입장})",
       "signVirtually": "가상으로 서명(주요 하위 사용자에게 알림)",
       "shareByEmail": "이메일로 해결 방법 공유",
       "delegateEmailPlaceholder": "대리자@email.com",
       "sendToDelegate": "대리인에게 보내기",
       "clauseEditor": "조항 편집자",
       "noClausesYet": "아직 조항이 없습니다.",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "조항 {번호}",
       "saveClause": "조항 저장",
       "delete": "삭제",
       "addClausePlaceholder": "새 조항 추가...",
@@ -925,7 +1025,7 @@
       "helpRequiredMajorityBody": "합격/불합격을 결정하는 데 사용되는 투표 기준을 선택하세요. '단순'이 절반 이상입니다. '2/3'에는 절대다수가 필요합니다.",
       "majoritySimple": "단순한",
       "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majority",
+      "majorityLine": "{라벨} 다수",
       "mustVote": "반드시 투표해야 합니다",
       "helpMustVoteTitle": "반드시 투표해야 합니다",
       "helpMustVoteBody": "이 발의안을 \"필수 투표\" 항목으로 표시합니다. 이는 참가자에게 요구 사항을 전달하는 데 사용됩니다(위원회 설정에 따라 다름).",
@@ -1013,7 +1113,79 @@
       "errImageSize": "이미지가 너무 큽니다(최대 5MB).",
       "errUploadFailed": "업로드에 실패했습니다.",
       "errStorageSetup": "프로필 사진 저장공간이 설정되지 않았습니다. Supabase 프로젝트에서 00100_profile_pictures_storage_bucket.sql 마이그레이션을 실행하거나 profile-pictures라는 공용 저장소 버킷을 생성합니다(README 참조).",
-      "errPublicUrl": "업로드된 이미지의 공개 URL을 확인할 수 없습니다."
+      "errPublicUrl": "업로드된 이미지의 공개 URL을 확인할 수 없습니다.",
+      "fallbacks": {
+        "yourCountry": "당신의 나라",
+        "committeeSession": "위원회 세션",
+        "delegate": "대리자",
+        "speechNote": "연설문",
+        "untitledMotion": "제목 없는 모션",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "{국기} {국가}의 대표를 환영합니다",
+        "subtitle": "무엇부터 시작하시겠습니까?",
+        "links": {
+          "documents": "서류",
+          "notes": "메모",
+          "committeeRoom": "위원회실",
+          "runningNotes": "러닝 노트",
+          "ideas": "아이디어",
+          "guides": "가이드",
+          "sources": "출처",
+          "resolutions": "결의안",
+          "speeches": "연설",
+          "stances": "자세",
+          "crisisSlides": "위기 슬라이드",
+          "report": "보고서",
+          "motions": "변",
+          "points": "전철기"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "귀하의 프로필에 대한 상",
+        "rank": "순위 {순위}",
+        "pending": {
+          "tab": "후보 지명 대기 중",
+          "title": "의장 후보 지명 대기 중",
+          "descriptionSingle": "의자에 의해 저장되고 검토를 위해 SMT와 공유됩니다. 최종 보상은 확인 후 아래에 표시됩니다.",
+          "descriptionTabbed": "의자에 의해 저장되고 검토를 위해 SMT와 공유됩니다. 최종 보상은 확인 후 나타납니다."
+        },
+        "recorded": {
+          "tab": "기록된 수상",
+          "title": "기록된 수상",
+          "description": "의장이나 SMT가 수상 추적기에 귀하를 배정할 때 나열됩니다. 최종 인정은 귀하의 회의 규칙을 따릅니다."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "본인, 위원회 위원장, 해당 위원회의 SMT만 볼 수 있습니다.",
+        "points": {
+          "title": "의자 포인트(비공개)"
+        },
+        "speechNotes": {
+          "title": "의장 연설문 (비공개)"
+        },
+        "motions": {
+          "title": "당신이 움직인 모션",
+          "description": "위원회 검토 및 SMT 감독을 위해 프로필에 저장되었습니다."
+        }
+      },
+      "discipline": {
+        "title": "징계상태(비공개)",
+        "statusLine": "경고: {warnings} · 파업: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+        "votingDisabled": "투표 비활성화됨",
+        "speakingSuspended": "말하기 중단됨",
+        "removedFromCommittee": "위원회에서 제외됨",
+        "updated": "업데이트됨: {value}"
+      },
+      "preview": {
+        "ariaLabel": "프로필 미리보기",
+        "title": "시사",
+        "yourName": "당신의 이름",
+        "usernameNotSet": "사용자 이름이 설정되지 않았습니다.",
+        "gradeValue": "학년 {학년}",
+        "awards": "수상 내역"
+      }
     },
     "guides": {
       "default": {
@@ -1055,7 +1227,7 @@
         "title": "MUN 의제 용어집",
         "subtitle": "위원회 규정 및 현재 안건 주제와 일치하는 고유한 용어입니다.",
         "committeeCode": "위원회 코드: {code}",
-        "topicTag": "Topic: {topic}",
+        "topicTag": "주제: {주제}",
         "sources": {
           "core": "핵심",
           "committee": "위원회",
@@ -1290,9 +1462,9 @@
       "add": "추가하다",
       "noIdeasYet": "아직 아이디어가 없습니다.",
       "ideaLabel": "아이디어",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "아이디어 {번호}",
       "linkedDoc": "연결된 문서",
-      "addedOn": "Added {date}",
+      "addedOn": "{날짜}에 추가됨",
       "edit": "편집하다",
       "delete": "삭제",
       "ideaDocument": "아이디어 문서",
@@ -1308,7 +1480,7 @@
       "extentHelpBody": "1은 해당 주제에 대한 할당이 거의 지원되지 않음을 의미하고, 5는 강력한 지원을 의미합니다. 위원회에서의 귀하의 입장과 일치하는 숫자를 선택하세요.",
       "add": "추가하다",
       "viewOnlyHeatmap": "직원용 보기 전용 히트맵입니다.",
-      "notesPerAllocation": "할당별 참고사항",
+      "notesPerAllocation": "할당별 참고 사항",
       "noAllocationsYet": "아직 할당이 없습니다.",
       "notesPlaceholder": "이 할당에 대한 입장 노트...",
       "noteLanguageWarning": "독자 경고: 이 메모에는 부적절한 언어가 포함되어 있을 수 있습니다.",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "위원회",
+      "yourContext": "귀하의 상황",
+      "roleLabel": "역할",
+      "seatLabel": "좌석",
       "clearSearchTitle": "검색을 지우고 모든 위임을 표시합니다.",
       "vacantLabel": "빈",
+      "assignedLabel": "할당된",
+      "daisLabel": "단",
+      "phaseLabel": "단계",
+      "phaseVoting": "투표",
+      "phaseDebate": "토론",
+      "focusSearchTitle": "중점 검색(연단 제목 및 이름이 귀하의 검색어와 일치함)",
+      "tipLabel": "팁",
       "searchVacantTitle": "객실 내 '빈' 좌석 검색",
       "searchHint": "국가, 대표자 이름, 학교, 대명사 또는 \"공석\"을 입력하여 회의실에서 일치하는 항목을 강조 표시하세요. 첫 번째 일치 항목으로 이동하려면 Enter 키를 누르세요. Esc가 지워집니다. 빈 좌석으로 이동하려면 Vacant를 클릭하세요.",
       "findLabel": "대표단 또는 단원 찾기",
       "searchPlaceholder": "나라, 이름, 학교...",
       "matchesCount": "총 {total} 석 중 {matches} 일치",
+      "enterScrolls": "스크롤 입력",
+      "typeToFilterHint": "필터링하려면 입력하세요 - 첫 번째 일치 항목으로 스크롤하려면 Enter를 누르세요.",
+      "noMatches": "일치하는 대표단이나 단상 좌석이 없습니다.",
+      "digitalDisplay": "디지털 디스플레이",
+      "floorLabel": "바닥",
+      "staffSeatsHeading": "직원 - 좌석",
       "searchAria": "위임 검색",
       "virtualRoomVacant": "빈",
-      "profileAria": "View profile: {country}",
+      "profileAria": "프로필 보기: {국가}",
       "vacantSeatAria": "빈자리",
-      "placardAria": "Placard {country}",
-      "gavelAria": "망치"
+      "placardAria": "플래카드 {국가}",
+      "gavelAria": "망치",
+      "viewProfileAria": "프로필 보기: {제목}",
+      "noProfileLinkAria": "{제목}(프로필 링크 없음)",
+      "committeeFloor": "위원회 층",
+      "virtualRoomFigureAria": "가상 위원회실 - {committeeName}({conferenceName})",
+      "filteringLiveRegion": "위임 필터링. 첫 번째로 강조 표시된 좌석은 링의 첫 번째 경기입니다.",
+      "helperText": "플래카드에는 국가(할당에 따라), 이름, 학교 및 각 대표 프로필의 대명사가 나열되어 있습니다. 프로필에서 편집하세요. 빈 위원회 좌석은 공석으로 표시됩니다. 채워진 플래카드나 단상 좌석을 클릭하면 해당 회원의 페이지가 열립니다(채팅 및 보고).",
+      "virtualRoomCaption": "국가, 이름, 학교 및 대명사가 표시된 대표 플래카드가 있는 가상 모델 UN 위원회실."
     },
     "session": {
       "requestToSpeak": {
@@ -1379,7 +1574,7 @@
         "motioner": "모션머",
         "majority": "다수",
         "majoritySimple": "단순한",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "예 {예} - 아니오 {아니요} - 합계 {total}",
         "help": "연단은 세션 중 각 대표단의 투표를 기록합니다. 동의 투표에서는 예 또는 아니요(기권 없음)만 사용합니다. 총계에는 '예' 또는 '아니요'라고 표시된 플래카드만 포함됩니다. 부재한 위임은 건너뜁니다."
       },
       "activeMotion": {
@@ -1396,7 +1591,7 @@
         "speakerTimeLeftTotal": "스피커 시간(왼쪽/전체)",
         "perSpeaker": "(스피커당)",
         "paused": "(일시중지됨)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "일시중지: {이유}"
       },
       "floorStatus": {
         "sessionTime": "세션 시간",
@@ -1480,8 +1675,8 @@
         "delete": "삭제",
         "deleteConfirm": "기록에서 이 세션을 삭제하시겠습니까?",
         "sessionNamePrompt": "세션 이름",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{범위}",
+        "rangeOngoing": "{범위} -> 진행 중"
       },
       "timerPage": {
         "title": "시간제 노동자",
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "타이머가 이미 일시중지되었습니다.",
         "pausedForCommittee": "위원회의 타이머가 일시 중지되었습니다.",
         "alreadyRunning": "타이머가 이미 실행 중입니다.",
-        "runningForCommittee": "위원회 타이머가 실행 중입니다."
+        "runningForCommittee": "위원회 타이머가 실행 중입니다.",
+        "euTimerBoardTitle": "EU 의회 타이머 보드(11개 타이머)",
+        "euTimerBoardHelp": "파티당 하나의 타이머와 총 시간, POI/POC 시간 및 발표자 시간. 적용을 사용하여 시계 탭(스피커 시간/타이머 저장)의 실시간 타이머 필드에 행을 복사합니다.",
+        "euTimerName": "이름",
+        "euTimerTag": "꼬리표",
+        "euTotalTime": "총 시간",
+        "euPoiPocTime": "POI/POC 시간",
+        "euSpeakerTime": "스피커 시간"
       }
     }
   },
@@ -1577,7 +1779,7 @@
     "switchEvent": "이벤트 전환",
     "liveCommittees": "라이브 위원회",
     "digitalCommitteeRoom": "디지털위원회실",
-    "digitalRoomDescription": "동일한 가상 층 대표자는 대표 대시보드의 위원회 룸 아래에 표시됩니다(플래카드와 연단은 이 위원회의 할당을 사용함).",
+    "digitalRoomDescription": "동일한 가상 층 대표자는 대표 대시보드의 위원회 룸 아래에 표시됩니다(플래카드와 연단은 이 위원회의 할당을 사용합니다).",
     "helperTextSmtPreview": "사무국 보기: 이 위원회 할당 매트릭스의 실시간 미리보기. 아래 또는 할당 매트릭스에서 좌석을 할당하세요.",
     "tabs": {
       "ariaLabel": "위원회 섹션",
@@ -1647,10 +1849,10 @@
     "delegatesMatrix": "대의원 매트릭스",
     "clearAllChairNotes": "의장 노트 모두 지우기",
     "searchCountry": "국가 검색...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} 플래카드 · 의장 메모가 포함된 {flaged} · {count}에 대해 기록된 롤",
     "loading": "로드 중...",
     "noDelegationsMatch": "검색어와 일치하는 위임자가 없습니다.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "롤 {라벨}",
     "linkedAccount": "연결된 계정",
     "vacantPlacard": "빈 플래카드",
     "delegateProfile": "프로필 위임 ->",
@@ -1661,7 +1863,11 @@
     "adding": "첨가...",
     "addToSpeakerList": "발표자 목록에 추가",
     "reminder": "알림",
-    "privateReminderLabel": "비공개 알림(의자만, 동기화됨)"
+    "privateReminderLabel": "비공개 알림(의자만, 동기화됨)",
+    "clearAllConfirm": "모든 플래카드에 대해 명확한 칭찬, 우려 사항 및 알림 메모가 있습니까? 그러면 공유 위원회 사본이 업데이트됩니다.",
+    "addedToSpeakerList": "{국가}가 발표자 목록에 추가되었습니다.",
+    "committeeFallback": "위원회",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "실시간 주제 선택",
@@ -1681,7 +1887,7 @@
     "humanRights": "인권",
     "peacekeeping": "평화 유지",
     "disinformation": "그릇된 정보",
-    "sustainableDevelopment": "지속 가능한 개발",
+    "sustainableDevelopment": "지속 가능한 발전",
     "untitledTopic": "제목 없는 주제",
     "qClimateCooperation": "회원국들은 기후 조치에 대한 글로벌 협력을 어떻게 강화할 수 있습니까?",
     "qGlobalHealthcareAccess": "국제 사회가 양질의 의료 서비스에 대한 접근성을 어떻게 향상시킬 수 있습니까?",
@@ -1723,7 +1929,7 @@
     "anyChair": "모든 의자",
     "noChairs": "의자 프로필을 찾을 수 없습니다.",
     "notesListTitle": "메모 목록",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{개수, 복수형, 하나 {# 음표} 기타 {# 음표}}",
     "emptyList": "아직 메모가 없습니다.",
     "forwardedBadge": "(전달)",
     "readerWarning": "독자 경고: 이 메모에는 부적절한 언어가 포함되어 있을 수 있습니다.",
@@ -1851,7 +2057,7 @@
       "passwordMinLength": "비밀번호는 6자 이상이어야 합니다.",
       "passwordsDoNotMatch": "비밀번호가 일치하지 않습니다.",
       "notSignedIn": "로그인되지 않았습니다.",
-      "onlyChairSmtAdminSetPassword": "위원회 비밀번호는 의장, SMT, 웹사이트 관리자만이 설정할 수 있습니다.",
+      "onlyChairSmtAdminSetPassword": "위원회 비밀번호는 의장, SMT, 웹사이트 관리자만 설정할 수 있습니다.",
       "onlyChairSmtAdminRemovePassword": "의장, SMT, 웹사이트 관리자만이 위원회 비밀번호를 제거할 수 있습니다."
     },
     "smtAllocations": {
@@ -1871,7 +2077,7 @@
       "couldNotParseCsv": "CSV를 구문 분석할 수 없습니다.",
       "noDataRowsFound": "데이터 행을 찾을 수 없습니다(라인당 최소한 국가/위치가 필요함).",
       "importLimitedRows": "가져오기는 {max}개 행으로 제한됩니다. 파일을 분할하세요.",
-      "rowTooLong": "Row too long: {row}…",
+      "rowTooLong": "행이 너무 깁니다: {행}…",
       "codeTooLongOnRow": "행의 코드가 너무 깁니다: {row}"
     },
     "smtStaffAccess": {
@@ -1888,7 +2094,7 @@
       "missingServiceRoleKey": "서버에 SUPABASE_SERVICE_ROLE_KEY가 없습니다. 배포 환경에 추가합니다(브라우저에 노출하지 않음).",
       "missingPublicAppUrl": "NEXT_PUBLIC_APP_URL을 공개 사이트 URL(예: https://your-app.vercel.app)로 설정하여 초대 링크가 올바르게 리디렉션되도록 하세요.",
       "emailAlreadyHasAccount": "해당 이메일에는 이미 계정이 있습니다. 다른 초대를 보내는 대신 아래의 '의장 역할 부여'를 사용하세요.",
-      "inviteSentButRoleSetFailed": "Invite sent, but could not set chair role on profile: {error}. Use \"Grant chair role\" after they accept.",
+      "inviteSentButRoleSetFailed": "초대가 전송되었지만 프로필에 의장 역할을 설정할 수 없습니다: {오류}. 수락한 후 '의장 역할 부여'를 사용하세요.",
       "inviteSentSuccess": "{email}(으)로 초대 이메일이 전송되었습니다. 비밀번호를 설정한 후에는 의자가 됩니다.",
       "onlySmtGrantChair": "사무국만이 의장직을 부여할 수 있습니다.",
       "noAccountForEmail": "아직 해당 이메일을 사용하는 계정이 없습니다. 먼저 의장 초대를 보내십시오.",
@@ -1917,14 +2123,14 @@
       "signature": "인터문",
       "welcomeSubject": "InterMUN에 오신 것을 환영합니다",
       "welcomeLine1": "InterMUN에 오신 것을 환영합니다.",
-      "welcomeConfirmedFor": "Your delegate account has been confirmed for: {country}.",
+      "welcomeConfirmedFor": "귀하의 대리인 계정이 {국가}에 대해 확인되었습니다.",
       "welcomeLine2": "이제 위원회 로그인을 진행하고 라이브 세션에 참여할 수 있습니다.",
       "welcomeLine3": "바닥에서 뵙겠습니다.",
       "chairReminderSubject": "위임 할당 요청이 승인 보류 중입니다.",
       "chairReminderLine1": "대리인이 할당을 요청했으며 의장 검토가 필요합니다.",
-      "chairReminderConference": "Conference: {conference}",
-      "chairReminderAllocation": "Requested allocation: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
+      "chairReminderConference": "컨퍼런스: {컨퍼런스}",
+      "chairReminderAllocation": "요청된 할당: {국가}",
+      "chairReminderDelegate": "대리인: {이름}",
       "chairReminderEmail": "계정 이메일: {email}",
       "chairReminderLine2": "의장 할당 매트릭스에서 이 요청을 승인하거나 거부하십시오."
     }
@@ -1960,7 +2166,7 @@
     "crisisSlidesHelpPrefix": "FWC/UNSC/HSC의 경우: 대표단 및 의자에 내장됨",
     "crisisSlidesHelpSuffix": "페이지. 사용하지 않을 경우 공백으로 남겨두세요. 덱은 청중이 볼 수 있어야 합니다(링크 공유).",
     "competingMotionsTitle": "경쟁 동의(RoP): 중재 전당대회 전 협의",
-    "moderatedCaucus": "중재된 간부회의",
+    "moderatedCaucus": "중재된 간부회",
     "consultation": "상의",
     "competingMotionsHelpPrefix": "귀하의 핸드북이 a 등급이면 선택을 취소하십시오.",
     "competingMotionsHelpMiddle": "위의 모션",
@@ -1995,7 +2201,7 @@
     "committeeFallback": "위원회",
     "showingOneCommitteeAtATime": "한 번에 하나의 위원회를 표시합니다. 하단 탭을 사용하여 위원회를 전환하세요.",
     "editPlacardCodesSheet": "플래카드 코드 시트 편집 ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "명단 · {제목}",
     "seatsSummary": "{count}석.",
     "linkedDelegatesCannotBeDeleted": "연결된 대리인은 여기에서 삭제할 수 없습니다.",
     "countryPosition": "국가/직위",
@@ -2104,7 +2310,7 @@
         "hint": "매트릭스 및 과제"
       },
       "digitalRoom": {
-        "label": "디지털룸",
+        "label": "디지털실",
         "hint": "현수막, 발언자 목록, 출석 현황, 의장 메모(이 장치)"
       },
       "rollCall": {
@@ -2474,6 +2680,130 @@
           "3": "원활한 시너지 효과; 단상은 전문적이고 중요한 환경을 조성합니다."
         }
       }
+    },
+    "maxPoints": "최대 {points}점",
+    "reference": {
+      "title": "SEAMUN I 공식 수상 기준표",
+      "description": "참조 사본: 시상 유형, 평가 과정 및 전체 1-8 밴드 매트릭스(회의 루브릭에서). InterMUN의 채점은 후보가 제출된 것과 동일한 기준 키를 사용합니다."
+    },
+    "sections": {
+      "catalogue": "수상 카탈로그",
+      "processOversight": "수상 과정 및 감독",
+      "calibrationTraining": "의자 교정 및 교육(1-8 스케일)"
+    },
+    "headings": {
+      "conferenceWideOverall": "컨퍼런스 전체(전체)",
+      "collectiveChair": "집단과 의자",
+      "committeeLevel": "위원회 수준"
+    },
+    "matrices": {
+      "positionPaper": "포지션 페이퍼(Best Position Paper)",
+      "delegateLiveSessions": "위임(실시간 세션)",
+      "chairPerformance": "의자 성능",
+      "chairReportOverall": "의장 보고서 - 전체",
+      "chairReportSectionSpecific": "의장 보고서 - 부문별",
+      "bestCommittee": "최고의 위원회"
+    },
+    "evidenceNote": "SMT 기록에 대한 완전한 증거 및 서면 확인을 의장으로 합니다. 우수성과 타당성에 대한 주요 증거와 준우승자(게시된 양식에 따라).",
+    "footnotes": {
+      "delegateLiveSessions": "창의성, 외교, 협력, 리더십, 지식 및 연구, 참여 - 각 8점.",
+      "chairPerformance": "최고의 의자/의자 평가 정렬에 대해 각각 8점으로 8가지 차원이 점수를 매겼습니다.",
+      "chairReportSectionSpecific": "위의 전체 섹션과 결합하여 공식 문서의 확장 척도에서 총 의장 보고서 점수는 최대 72점입니다."
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "현재 세션에 대한 위원회 할당 매트릭스입니다. 이는 의자에 대한 읽기 전용이며 활성 좌석 할당 및 플래카드 코드를 반영합니다.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "배당",
+      "flag": "깃발",
+      "email": "이메일",
+      "name": "이름",
+      "grade": "등급",
+      "notes": "메모",
+      "requestedAllocation": "요청된 할당",
+      "account": "계정",
+      "actions": "행위"
+    },
+    "noRows": "이 위원회에 대한 할당 행을 찾을 수 없습니다.",
+    "pendingApprovalsTitle": "가입 승인 대기 중",
+    "pendingApprovalsIntro": "의장은 대의원들이 올바른 계정을 사용할 수 있도록 할당 링크 가입을 승인하거나 거부합니다.",
+    "noPendingRequests": "대기 중인 요청이 없습니다.",
+    "unknownAllocation": "알 수 없는 할당",
+    "approve": "승인하다",
+    "reject": "거부하다"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "할당 매트릭스",
+    "selectConferenceEventFirst": "먼저 컨퍼런스 이벤트를 선택하세요.",
+    "enterConferenceCode": "회의 코드를 입력하세요",
+    "intro": "활성 이벤트의 각 위원회에 대한 좌석 목록을 작성하거나 가져옵니다. 대표자는 로그인 후 위원회 게이트에서 자신의 행을 선택합니다. 플래카드 코드는 스프레드시트 ID와 일치할 수 있습니다."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "연사 목록",
+    "addedToSpeakerList": "발표자 목록에 추가되었습니다.",
+    "chooseDelegationsNotAlreadyQueued": "아직 대기 중이 아니거나 목록에 있는 위임자를 선택하세요.",
+    "addedSpeakersInOrder": "위원회 목록 순서대로 {count}명의 발언자를 추가했습니다.",
+    "introPrefix": "발언 순서대로 대표단을 추가합니다. 대리인은 계속 사용할 수 있습니다.",
+    "requestToSpeak": "발언 요청",
+    "introMiddle": "위원회실에서. 사용",
+    "sessionTimerLink": "세션 → 타이머",
+    "introSuffixPrefix": "발표자별 시간 및",
+    "advanceSpeaker": "고급 스피커",
+    "addDelegation": "위임 추가",
+    "select": "선택하다…",
+    "add": "추가하다",
+    "addSelectedToList": "선택 항목을 목록에 추가",
+    "dismissReminder": "알림 닫기",
+    "moveUp": "위로 이동",
+    "moveDown": "아래로 이동",
+    "current": "현재의",
+    "remove": "제거하다",
+    "prompt": {
+      "gslTitle": "일반 연사 목록(GSL)",
+      "moderatedTimerTitle": "중재 간부회(연자별 타이머)",
+      "moderatedPassedTitle": "중재 전당대회 통과",
+      "bodyPrefix": "아래 발표자 목록을 사용하여",
+      "add": "추가하다",
+      "bodyAddMiddle": "대리인(드롭다운 +",
+      "bodyAddMiddle2": ", 또는 위임을 선택하고",
+      "bodyRemovePrefix": ") 그리고",
+      "remove": "제거하다",
+      "bodyRemoveMiddle": "그들과 함께",
+      "bodyRowSuffix": "각 행에. 화살표로 재정렬하거나 설정하세요.",
+      "bodyEnd": "누군가가 마이크 앞에 있을 때.",
+      "noAllocations": "아직 이 위원회에 대한 할당이 로드되지 않았습니다. 준비되면 닫습니다. 나중에 목록 컨트롤에서 스피커를 추가할 수 있습니다.",
+      "quickAdd": "빠른 추가(아직 대기 중이거나 현재 진행 중)",
+      "alreadyQueued": "모든 할당에는 이미 대기 중이거나 현재 슬롯이 있습니다. 다시 주문해야 하는 경우 항목을 제거하고, 완료되면 닫습니다."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "시간제 노동자",
+    "currentSpeaker": "현재 발언자",
+    "nextSpeaker": "다음 연사",
+    "speakerTimePerSpeaker": "스피커 시간(왼쪽/캡)",
+    "speakerTimeTotal": "스피커 시간(왼쪽/전체)",
+    "perSpeaker": "(스피커당)",
+    "paused": "(일시중지됨)",
+    "pauseReason": "일시중지: {이유}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "모든 대리인 - 세션 루브릭(필수)",
+    "intro": "위원회 최고 대표 지명과 동일한 6가지 차원. SMT에 후보를 제출하기 전에 <strong>좌석에 있는 모든 대의원</strong>의 점수를 받아야 합니다({completeCount}/{total} 완료).",
+    "complete": "완벽한",
+    "incomplete": "불완전한",
+    "saving": "절약...",
+    "saveThisDelegate": "이 대리인 저장",
+    "autosaved": "자동 저장됨",
+    "autosaveFailed": "자동 저장 실패",
+    "autosavedWithCountry": "자동 저장 — {국가}",
+    "delegateFallback": "대리자"
   }
 }

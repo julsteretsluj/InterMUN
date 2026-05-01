@@ -261,7 +261,7 @@ export function CommitteeRoomDigitalMUNClient({
   const assignedCount = useMemo(() => placards.filter((p) => !p.vacant).length, [placards]);
   const vacantCount = useMemo(() => placards.filter((p) => p.vacant).length, [placards]);
   const daisFilled = useMemo(() => dais.filter((s) => s.profileId).length, [dais]);
-  const phaseLabel = votingProcedureActive ? "Voting" : "Debate";
+  const phaseLabel = votingProcedureActive ? t("phaseVoting") : t("phaseDebate");
 
   const qNorm = useMemo(() => normalizeDelegationSearchQuery(delegationSearch), [delegationSearch]);
   const delegationMatchCount = useMemo(
@@ -287,15 +287,15 @@ export function CommitteeRoomDigitalMUNClient({
             <p className="mt-1 text-xs text-brand-muted break-words">{conferenceName}</p>
 
             <div className="mt-3.5 space-y-2 border-t border-brand-line/50 pt-3.5 dark:border-white/10">
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Your context</p>
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("yourContext")}</p>
               <div className="flex items-start gap-2 rounded-lg border border-brand-navy/10 bg-brand-navy/5 px-2.5 py-2 dark:border-white/10 dark:bg-white/5">
                 <UserRound className="size-4 shrink-0 text-brand-accent-bright mt-0.5" strokeWidth={1.5} />
                 <div className="min-w-0 text-xs">
-                  <p className="text-brand-muted">Role</p>
+                  <p className="text-brand-muted">{t("roleLabel")}</p>
                   <p className="font-medium text-brand-navy capitalize dark:text-white">{role}</p>
                   {myAllocationCountry ? (
                     <p className="text-brand-muted mt-1">
-                      Seat · <span className="text-brand-navy/90 dark:text-white/90">{myAllocationCountry}</span>
+                      {t("seatLabel")} · <span className="text-brand-navy/90 dark:text-white/90">{myAllocationCountry}</span>
                     </p>
                   ) : null}
                 </div>
@@ -305,7 +305,7 @@ export function CommitteeRoomDigitalMUNClient({
 
           <div className="grid grid-cols-2 gap-1.5">
             <StatMiniCard
-              label="Assigned"
+              label={t("assignedLabel")}
               value={assignedCount}
               tint="blue"
               onPress={() => setDelegationSearch("")}
@@ -319,19 +319,19 @@ export function CommitteeRoomDigitalMUNClient({
               title={t("searchVacantTitle")}
             />
             <StatMiniCard
-              label="Dais"
+              label={t("daisLabel")}
               value={daisFilled}
               tint="accent"
               onPress={() => searchInputRef.current?.focus()}
-              title="Focus search (dais titles and names match your query)"
+              title={t("focusSearchTitle")}
             />
-            <StatMiniCard label="Phase" value={phaseLabel} tint="sky" />
+            <StatMiniCard label={t("phaseLabel")} value={phaseLabel} tint="sky" />
           </div>
 
           <div className="rounded-lg border border-brand-navy/10 bg-brand-accent/8 p-2.5 text-xs leading-relaxed text-brand-navy/90 dark:border-white/10 dark:bg-brand-accent/12 dark:text-white/85">
             <div className="flex items-center gap-2 font-semibold text-brand-navy mb-1 dark:text-white">
               <Sparkles className="size-3.5 text-brand-silver shrink-0" />
-              Tip
+              {t("tipLabel")}
             </div>
             {t("searchHint")}
           </div>
@@ -342,7 +342,7 @@ export function CommitteeRoomDigitalMUNClient({
           <div className="flex flex-col gap-2.5 rounded-xl border border-brand-navy/10 bg-brand-paper px-3.5 py-2.5 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.5)] sm:flex-row sm:items-center sm:gap-3.5 dark:border-white/10 dark:bg-[#12121A] dark:shadow-[0_20px_40px_-28px_rgba(0,0,0,0.75)]">
             <div className="min-w-0 flex-1">
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-muted">
-                Digital display
+                {t("digitalDisplay")}
               </p>
               <p className="break-words font-display text-[0.95rem] font-semibold leading-tight text-brand-navy sm:text-base dark:text-white">
                 {committeeName}
@@ -392,15 +392,15 @@ export function CommitteeRoomDigitalMUNClient({
                       matches: totalMatchCount,
                       total: placards.length + dais.length,
                     })}{" "}
-                    · Enter scrolls
+                    · {t("enterScrolls")}
                   </>
                 ) : (
-                  "Type to filter · Enter scrolls to first match"
+                  t("typeToFilterHint")
                 )}
               </p>
               {qNorm && totalMatchCount === 0 ? (
                 <p className="text-[0.65rem] text-right text-brand-muted">
-                  No matching delegations or dais seats.
+                  {t("noMatches")}
                 </p>
               ) : null}
             </div>
@@ -425,7 +425,7 @@ export function CommitteeRoomDigitalMUNClient({
             <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/5 dark:bg-black/15">
               <div className="mb-3 flex items-center gap-2">
                 <CircleDot className="size-4 text-brand-accent-bright" />
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">Floor</p>
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("floorLabel")}</p>
               </div>
               <div className="space-y-4">
                 <FloorStatusBar
@@ -528,7 +528,7 @@ export function CommitteeRoomDigitalMUNClient({
         <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-5 dark:border-white/10 dark:bg-[#12121A]">
           <div className="flex items-center gap-2 mb-4">
             <Gavel className="size-4 text-brand-accent-bright" />
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">Staff · seats</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-muted">{t("staffSeatsHeading")}</h3>
           </div>
           <CommitteeRoomStaffControls
             allocations={staffAllocations}

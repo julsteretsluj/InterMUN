@@ -105,16 +105,16 @@ export function ChairDigitalRoomClient({
   const clearAllFlags = useCallback(() => {
     if (
       !window.confirm(
-        "Clear compliment, concern, and reminder notes for every placard? This updates the shared committee copy."
+        t("clearAllConfirm")
       )
     )
       return;
     persist({});
-  }, [persist]);
+  }, [persist, t]);
 
   const sorted = useMemo(
-    () => sortAllocationsByDisplayCountry(allocations.map((a) => ({ ...a, country: a.country || "—" }))),
-    [allocations]
+    () => sortAllocationsByDisplayCountry(allocations.map((a) => ({ ...a, country: a.country || t("dash") }))),
+    [allocations, t]
   );
 
   const filtered = useMemo(() => {
@@ -124,8 +124,8 @@ export function ChairDigitalRoomClient({
   }, [sorted, query]);
 
   const speakerAllocOptions = useMemo(
-    () => sorted.map((a) => ({ id: a.id, country: a.country || "—", userRole: a.userRole ?? null })),
-    [sorted]
+    () => sorted.map((a) => ({ id: a.id, country: a.country || t("dash"), userRole: a.userRole ?? null })),
+    [sorted, t]
   );
 
   useEffect(() => {
@@ -147,13 +147,13 @@ export function ChairDigitalRoomClient({
           rows
         );
         setSpeakerPlacardMsg(
-          result.ok ? `${country} added to speaker list.` : result.message
+          result.ok ? t("addedToSpeakerList", { country }) : result.message
         );
       } finally {
         setAddingSpeakerId(null);
       }
     },
-    [supabase, conferenceId]
+    [supabase, conferenceId, t]
   );
 
   const flaggedCount = useMemo(() => {
@@ -246,7 +246,7 @@ export function ChairDigitalRoomClient({
           {filtered.map((a) => {
             const f = flagsByAlloc[a.id] ?? {};
             const att = rollAttendanceByAllocationId[a.id];
-            const rollLabel = att !== undefined ? rollAttendanceShortLabel(att) : "—";
+            const rollLabel = att !== undefined ? rollAttendanceShortLabel(att) : t("dash");
             const rollClass =
               att === "present_voting"
                 ? "bg-brand-accent/15 text-brand-navy dark:bg-brand-accent/14 dark:text-brand-accent-bright"
@@ -264,7 +264,7 @@ export function ChairDigitalRoomClient({
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="font-semibold text-slate-900 dark:text-zinc-50">{a.country || "—"}</h3>
+                      <h3 className="font-semibold text-slate-900 dark:text-zinc-50">{a.country || t("dash")}</h3>
                       <span
                         className={cn(
                           "rounded-full px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide",
@@ -323,7 +323,7 @@ export function ChairDigitalRoomClient({
                     <button
                       type="button"
                       disabled={addingSpeakerId === a.id}
-                      onClick={() => void addPlacardToSpeakerList(a.id, a.country || "—")}
+                      onClick={() => void addPlacardToSpeakerList(a.id, a.country || t("dash"))}
                       className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Mic2 className="h-4 w-4" strokeWidth={1.75} aria-hidden />

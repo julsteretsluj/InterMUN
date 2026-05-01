@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function SmtProfilePage() {
   const t = await getTranslations("pageTitles");
+  const tp = await getTranslations("views.profile");
   const supabase = await createClient();
   const {
     data: { user },
@@ -41,16 +42,15 @@ export default async function SmtProfilePage() {
     <MunPageShell title={t("smtProfile")}>
       {(myAwards?.length ?? 0) > 0 && (
         <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
-          <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">Recorded awards</h3>
+          <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">{tp("awards.recorded.title")}</h3>
           <p className="text-xs text-brand-muted mb-3">
-            Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your
-            conference&apos;s rules.
+            {tp("awards.recorded.description")}
           </p>
           <ul className="space-y-2 text-sm">
             {(myAwards ?? []).map((a) => {
               const m = awardCategoryMeta(a.category);
               const where = a.committee_conference_id
-                ? committeeLabel[a.committee_conference_id] ?? "Committee session"
+                ? committeeLabel[a.committee_conference_id] ?? tp("fallbacks.committeeSession")
                 : null;
               return (
                 <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">

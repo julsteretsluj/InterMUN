@@ -313,7 +313,92 @@
     "unitMinutesShort": "m",
     "unitSecondsShort": "s",
     "apply": "Apply",
-    "motionControl": "Motion control"
+    "motionControl": "Motion control",
+    "advancedSpeakerResetClock": "Advanced speaker and reset per-speaker clock.",
+    "writeSpeechNoteFirst": "Write something before saving a speech note.",
+    "speechNoteSaved": "Speech note saved.",
+    "speechNoteDeleted": "Speech note deleted.",
+    "announcementPosted": "Announcement posted.",
+    "announcementPinnedToFloor": "Pinned for the committee floor.",
+    "announcementUnpinned": "Unpinned.",
+    "announcementBodyRequired": "Announcement body cannot be empty.",
+    "announcementUpdated": "Announcement updated.",
+    "deleteAnnouncementConfirm": "Delete this announcement permanently? This cannot be undone.",
+    "announcementDeleted": "Announcement deleted.",
+    "noAllocationsToAdd": "No allocations to add.",
+    "rollCallRowsAlreadyExist": "Roll call already has a row for every allocation.",
+    "rollCallRowsAdded": "Added {count} roll call row(s).",
+    "motionCreatedOpened": "Motion created and opened.",
+    "motionUpdated": "Motion updated.",
+    "motionClosed": "Motion closed.",
+    "motionAlreadyOpenReopenBlocked": "Another motion is already open for voting. Close it before reopening this one.",
+    "motionReopened": "Motion reopened.",
+    "motionFloorOpened": "Motion floor open - record each stated motion below.",
+    "motionFloorClosed": "Motion floor closed for statements.",
+    "openMotionFloorFirst": "Open the motion floor for statements first.",
+    "openMotionBlocksRecording": "A motion is already open for voting. Close it before recording further statements.",
+    "statedMotionRecorded": "Stated motion recorded (not yet open for voting).",
+    "statedMotionRemoved": "Stated motion removed."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} complete - synced for this committee",
+      "loading": "Loading...",
+      "resetChecklist": "Reset checklist"
+    },
+    "prepPage": {
+      "description": "Before the conference: rules, topic, room, materials, and team. Synced for all chairs on this committee; reset clears it for everyone.",
+      "crisisHidden": "Crisis-specific prep items are hidden for this committee type."
+    },
+    "flowPage": {
+      "description": "Normal committee flow - tick steps as you go. Shared across chair accounts and devices; reset clears for everyone."
+    },
+    "prep": {
+      "sections": {
+        "rules": { "title": "Rules & procedure" },
+        "topic": { "title": "Committee & topic" },
+        "room": { "title": "Room & tech" },
+        "materials": { "title": "Materials & logistics" },
+        "crisis": { "title": "Crisis (if applicable)" },
+        "team": { "title": "Team & communication" }
+      },
+      "items": {
+        "rop": "Read and understand committee rules of procedure",
+        "parliamentary": "Review parliamentary procedure (motions, points, voting)",
+        "speaking-times": "Confirm speaking times and time limits",
+        "quorum": "Know quorum and voting requirements",
+        "research": "Research committee topic and background",
+        "study-guide": "Read study guide and key documents",
+        "dashboard-topic": "Set committee name and topic in dashboard",
+        "agenda": "Prepare session agenda and flow",
+        "digital-room": "Set up digital room (delegates list, placards)",
+        "tech-check": "Tech check: platform, audio, screen share",
+        "backup": "Have backup plan if tech fails",
+        "roll-plan": "Prepare roll call list and attendance",
+        "speakers-plan": "Plan speakers list management",
+        "templates": "Prepare common motions / points (if using templates)",
+        "timing": "Confirm session start time and breaks",
+        "crisis-slides": "Review crisis elements and update slides",
+        "crisis-cues": "Plan crisis speaker order / cues",
+        "crisis-paths": "Prepare crisis pathways and facts",
+        "co-chairs": "Coordinate with co-chair(s) on roles",
+        "staff": "Confirm staff / dais support and cues",
+        "delegate-brief": "Prepare brief for delegates (rules, timing)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Roll call",
+        "open-floor": "Open the floor (points & motions)",
+        "recognize": "Recognize motions",
+        "vote-1": "Vote on motion(s)",
+        "engage": "Engage in chosen motion or move to GSL",
+        "open-again": "Open the floor again",
+        "recognize-repeat": "Recognize motions (repeat as needed)",
+        "vote-2": "Vote on motion(s)",
+        "cycle": "Continue cycle (engage motion / GSL -> open floor)"
+      }
+    }
   },
   "language": {
     "label": "Language",
@@ -352,7 +437,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "Help center",
-    "settings": "Settings"
+    "settings": "Settings",
+    "appHomeAria": "{appName} home",
+    "defaultDisplayName": "Delegate"
   },
   "authWizard": {
     "enterApp": "Enter {appName}",
@@ -725,6 +812,7 @@
       "session": "Session",
       "speakers": "Speakers",
       "formalMotions": "Formal motions",
+      "discipline": "Disciplinary",
       "timer": "Timer",
       "announcements": "Announcements",
       "motionsPoints": "Motions & Points",
@@ -976,12 +1064,84 @@
       }
     },
     "profile": {
+      "fallbacks": {
+        "yourCountry": "your country",
+        "committeeSession": "Committee session",
+        "delegate": "Delegate",
+        "speechNote": "Speech note",
+        "untitledMotion": "Untitled motion",
+        "dash": "—"
+      },
       "tabs": {
         "ariaLabel": "Profile sections",
         "overview": "Overview",
         "awards": "Awards",
         "private": "Private records",
         "settings": "Profile settings"
+      },
+      "delegateWelcome": {
+        "title": "Welcome delegate of {flag} {country}",
+        "subtitle": "What would you like to start with?",
+        "links": {
+          "documents": "Documents",
+          "notes": "Notes",
+          "committeeRoom": "Committee room",
+          "runningNotes": "Running Notes",
+          "ideas": "Ideas",
+          "guides": "Guides",
+          "sources": "Sources",
+          "resolutions": "Resolutions",
+          "speeches": "Speeches",
+          "stances": "Stances",
+          "crisisSlides": "Crisis slides",
+          "report": "Report",
+          "motions": "Motions",
+          "points": "Points"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "Awards on your profile",
+        "rank": "rank {rank}",
+        "pending": {
+          "tab": "Pending nominations",
+          "title": "Pending chair nominations",
+          "descriptionSingle": "Saved by chairs and shared with SMT for review. Final awards appear below after confirmation.",
+          "descriptionTabbed": "Saved by chairs and shared with SMT for review. Final awards appear after confirmation."
+        },
+        "recorded": {
+          "tab": "Recorded awards",
+          "title": "Recorded awards",
+          "description": "Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your conference's rules."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "Visible only to you, committee chairs, and SMT for the relevant committee.",
+        "points": {
+          "title": "Chair points (private)"
+        },
+        "speechNotes": {
+          "title": "Chair speech notes (private)"
+        },
+        "motions": {
+          "title": "Motions you moved",
+          "description": "Saved to your profile for committee review and SMT oversight."
+        }
+      },
+      "discipline": {
+        "title": "Disciplinary status (private)",
+        "statusLine": "Warnings: {warnings} · Strikes: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+        "votingDisabled": "voting disabled",
+        "speakingSuspended": "speaking suspended",
+        "removedFromCommittee": "removed from committee",
+        "updated": "Updated: {value}"
+      },
+      "preview": {
+        "ariaLabel": "Profile preview",
+        "title": "Preview",
+        "yourName": "Your name",
+        "usernameNotSet": "Username not set",
+        "gradeValue": "Grade {grade}",
+        "awards": "Awards"
       },
       "profilePicture": "Profile picture",
       "uploadFile": "Upload file",
@@ -1335,19 +1495,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "Committee",
+      "yourContext": "Your context",
+      "roleLabel": "Role",
+      "seatLabel": "Seat",
       "clearSearchTitle": "Clear search and show all delegations",
       "vacantLabel": "Vacant",
+      "assignedLabel": "Assigned",
+      "daisLabel": "Dais",
+      "phaseLabel": "Phase",
+      "phaseVoting": "Voting",
+      "phaseDebate": "Debate",
+      "focusSearchTitle": "Focus search (dais titles and names match your query)",
+      "tipLabel": "Tip",
       "searchVacantTitle": "Search for \"vacant\" seats in the room",
       "searchHint": "Type a country, delegate name, school, pronoun, or \"vacant\" to highlight matches in the room. Press Enter to jump to the first match; Esc clears. Click Vacant to jump to empty seats.",
       "findLabel": "Find a delegation or dais member",
       "searchPlaceholder": "Country, name, school...",
       "matchesCount": "{matches} of {total} seats match",
+      "enterScrolls": "Enter scrolls",
+      "typeToFilterHint": "Type to filter - Enter scrolls to first match",
+      "noMatches": "No matching delegations or dais seats.",
+      "digitalDisplay": "Digital display",
+      "floorLabel": "Floor",
+      "staffSeatsHeading": "Staff - seats",
       "searchAria": "Search delegations",
       "virtualRoomVacant": "Vacant",
       "profileAria": "View profile: {country}",
       "vacantSeatAria": "Vacant seat",
       "placardAria": "Placard {country}",
-      "gavelAria": "Gavel"
+      "gavelAria": "Gavel",
+      "viewProfileAria": "View profile: {title}",
+      "noProfileLinkAria": "{title} (no profile link)",
+      "committeeFloor": "Committee floor",
+      "virtualRoomFigureAria": "Virtual committee room - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Filtering delegations. First highlighted seat is the first match in the ring.",
+      "helperText": "Placards list country (from allocations), name, school, and pronouns from each delegate's profile. Edit yours under Profile. Empty committee seats show as Vacant. Click a filled placard or dais seat to open that member's page (chat and report from there).",
+      "virtualRoomCaption": "Virtual Model UN committee room with delegate placards showing country, name, school, and pronouns."
     },
     "session": {
       "requestToSpeak": {
@@ -1511,6 +1694,13 @@
         "pauseReasonPlaceholder": "e.g. Point of order, tech issue, unmoderated caucus...",
         "pauseClock": "Pause clock",
         "startClock": "Start clock",
+        "euTimerBoardTitle": "EU Parliament timer board (11 timers)",
+        "euTimerBoardHelp": "One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to copy a row into the live timer fields on the Clock tab (speaker time / Save timer).",
+        "euTimerName": "Name",
+        "euTimerTag": "Tag",
+        "euTotalTime": "Total time",
+        "euPoiPocTime": "POI / POC time",
+        "euSpeakerTime": "Speaker time",
         "perSpeakerTitle": "Per-speaker time (moderated caucus)",
         "perSpeakerHelp": "Set Total time as the per-speaker cap and Speaker time as time remaining; Advance moves to the next speaker and resets remaining to the cap.",
         "currentSpeaker": "Current speaker",
@@ -1544,6 +1734,17 @@
         "runningForCommittee": "Timer running for the committee."
       }
     }
+  },
+  "timersWidget": {
+    "timer": "Timer",
+    "currentSpeaker": "Current speaker",
+    "nextSpeaker": "Next speaker",
+    "speakerTimePerSpeaker": "Speaker time (left / cap)",
+    "speakerTimeTotal": "Speaker time (left / total)",
+    "perSpeaker": "(per speaker)",
+    "paused": "(paused)",
+    "pauseReason": "Pause: {reason}",
+    "dash": "—"
   },
   "dashboardSearch": {
     "aria": "Search",
@@ -1646,6 +1847,8 @@
     "openFullCommitteeRoom": "Open full committee room",
     "delegatesMatrix": "Delegates matrix",
     "clearAllChairNotes": "Clear all chair notes",
+    "clearAllConfirm": "Clear compliment, concern, and reminder notes for every placard? This updates the shared committee copy.",
+    "addedToSpeakerList": "{country} added to speaker list.",
     "searchCountry": "Search country...",
     "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
     "loading": "Loading...",
@@ -1661,7 +1864,52 @@
     "adding": "Adding...",
     "addToSpeakerList": "Add to speaker list",
     "reminder": "Reminder",
-    "privateReminderLabel": "Private reminder (chairs only, synced)"
+    "privateReminderLabel": "Private reminder (chairs only, synced)",
+    "committeeFallback": "Committee",
+    "dash": "—"
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "Speaker list",
+    "addedToSpeakerList": "Added to speaker list.",
+    "chooseDelegationsNotAlreadyQueued": "Choose delegations that are not already waiting or current on the list.",
+    "addedSpeakersInOrder": "Added {count} speaker(s) in committee list order.",
+    "introPrefix": "Add delegations in speaking order. Delegates can still use",
+    "requestToSpeak": "Request to speak",
+    "introMiddle": "in the committee room. Use",
+    "sessionTimerLink": "Session → Timer",
+    "introSuffixPrefix": "for per-speaker time and",
+    "advanceSpeaker": "Advance speaker",
+    "addDelegation": "Add delegation",
+    "select": "Select…",
+    "add": "Add",
+    "addSelectedToList": "Add selected to list",
+    "dismissReminder": "Dismiss reminder",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    },
+    "current": "Current",
+    "remove": "Remove",
+    "prompt": {
+      "gslTitle": "General Speakers' List (GSL)",
+      "moderatedTimerTitle": "Moderated caucus (per-speaker timer)",
+      "moderatedPassedTitle": "Moderated caucus passed",
+      "bodyPrefix": "Use the speaker list below to",
+      "add": "add",
+      "bodyAddMiddle": "delegates (dropdown +",
+      "bodyAddMiddle2": ", or tick delegations and",
+      "bodyRemovePrefix": ") and",
+      "remove": "remove",
+      "bodyRemoveMiddle": "them with",
+      "bodyRowSuffix": "on each row. Reorder with the arrows or set",
+      "bodyEnd": "when someone is at the mic.",
+      "noAllocations": "No allocations are loaded for this committee yet. Dismiss when ready—you can add speakers later from the list controls.",
+      "quickAdd": "Quick add (not yet waiting or current)",
+      "alreadyQueued": "Every allocation already has a waiting or current slot. Remove entries if you need to reorder, or dismiss when you are done."
+    }
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Select live topic",
@@ -2029,6 +2277,35 @@
     "runImport": "Run import",
     "generateMissingRandomCodes": "Generate missing random codes"
   },
+  "chairAllocationMatrixPage": {
+    "intro": "Committee allocation matrix for your current session. This is read-only for chairs and reflects active seat assignments and placard codes.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "Allocation",
+      "flag": "Flag",
+      "email": "Email",
+      "name": "Name",
+      "grade": "Grade",
+      "notes": "Notes",
+      "requestedAllocation": "Requested allocation",
+      "account": "Account",
+      "actions": "Actions"
+    },
+    "noRows": "No allocation rows found for this committee.",
+    "pendingApprovalsTitle": "Pending sign-up approvals",
+    "pendingApprovalsIntro": "Chairs approve or reject allocation link sign-ups to ensure delegates use the correct account.",
+    "noPendingRequests": "No pending requests.",
+    "unknownAllocation": "Unknown allocation",
+    "approve": "Approve",
+    "reject": "Reject"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Allocation matrix",
+    "selectConferenceEventFirst": "Select a conference event first.",
+    "enterConferenceCode": "Enter conference code",
+    "intro": "Build or import the seat list for each committee in the active event. Delegates pick their row at the committee gate after sign-in; placard codes can match your spreadsheet IDs."
+  },
   "chairAwardsPage": {
     "committeeLabel": "Committee",
     "intro": {
@@ -2083,6 +2360,18 @@
         }
       }
     }
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "Every delegate — session rubric (required)",
+    "intro": "Same six dimensions as committee Best Delegate nominations. You must score <strong>every seated delegate</strong> before submitting nominations to SMT ({completeCount}/{total} complete).",
+    "complete": "Complete",
+    "incomplete": "Incomplete",
+    "saving": "Saving...",
+    "saveThisDelegate": "Save this delegate",
+    "autosaved": "Autosaved",
+    "autosaveFailed": "Autosave failed",
+    "autosavedWithCountry": "Autosaved — {country}",
+    "delegateFallback": "delegate"
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "your committee",
@@ -2174,6 +2463,35 @@
     }
   },
   "awardsRubric": {
+    "maxPoints": "Max {points} pts",
+    "reference": {
+      "title": "SEAMUN I official award rubrics",
+      "description": "Reference copy: award types, evaluation process, and full 1-8 band matrices (from the conference rubric). Scoring in InterMUN uses the same criterion keys where nominations are submitted."
+    },
+    "sections": {
+      "catalogue": "Award catalogue",
+      "processOversight": "Awards process and oversight",
+      "calibrationTraining": "Chair calibration and training (1-8 scale)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Conference-wide (overall)",
+      "collectiveChair": "Collective and chair",
+      "committeeLevel": "Committee-level"
+    },
+    "matrices": {
+      "positionPaper": "Position paper (Best Position Paper)",
+      "delegateLiveSessions": "Delegate (live sessions)",
+      "chairPerformance": "Chair performance",
+      "chairReportOverall": "Chair report - overall",
+      "chairReportSectionSpecific": "Chair report - section-specific",
+      "bestCommittee": "Best committee"
+    },
+    "evidenceNote": "Chairs complete evidence and written confirmation for SMT records: primary evidence of excellence and justification vs runner-up (per published form).",
+    "footnotes": {
+      "delegateLiveSessions": "Creativity, diplomacy, collaboration, leadership, knowledge and research, participation - 8 pts each.",
+      "chairPerformance": "Eight dimensions scored at 8 pts each for Best Chair / chair evaluation alignment.",
+      "chairReportSectionSpecific": "Combined with overall section above for a total chair report score up to 72 on the extended scale in the official document."
+    },
     "criteriaHeader": "Criteria",
     "bandHeaders": {
       "0": "Beginning",

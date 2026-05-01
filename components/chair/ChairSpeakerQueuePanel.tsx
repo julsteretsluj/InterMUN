@@ -4,6 +4,7 @@ import { forwardRef, useCallback, useEffect, useMemo, useState, useTransition } 
 import Link from "next/link";
 import { ChevronDown, ChevronUp, ListOrdered } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { useTranslations } from "next-intl";
 import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
 import {
   activeAllocationIdsInQueue,
@@ -49,6 +50,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     },
     ref
   ) {
+    const t = useTranslations("chairSpeakerQueuePanel");
     const supabase = useMemo(() => createClient(), []);
     const [queue, setQueue] = useState<SpeakerQueueEntry[]>([]);
     const [pickAlloc, setPickAlloc] = useState("");
@@ -103,16 +105,21 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         if (isDaisSeat) return false;
 
         const role = alloc.userRole?.toString().trim().toLowerCase();
-        if (role === "chair") {
-          // Crisis actors can be chair-role accounts with non-dais allocations.
-          return isCrisisCommittee;
-        }
+        if (role === "chair") return false;
         return true;
       });
-    }, [allocations, isCrisisCommittee]);
+    }, [allocations]);
     const sortedQueue = useMemo(
       () => [...queue].sort((a, b) => a.sort_order - b.sort_order),
       [queue]
+    );
+    const statusLabel = useCallback(
+      (status: string | null | undefined) => {
+        if (status === "current") return t("status.current");
+        if (status === "waiting") return t("status.waiting");
+        return status ?? t("dash");
+      },
+      [t]
     );
 
     function toggleCaucusBulkPick(allocationId: string) {
@@ -134,7 +141,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           a.country,
           rows
         );
-        notify(result.ok ? "Added to speaker list." : result.message);
+        notify(result.ok ? t("addedToSpeakerList") : result.message);
         void loadQueue();
       });
     }
@@ -144,7 +151,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         .map((x) => x.id)
         .filter((id) => caucusBulkPick.includes(id) && !activeQueueAllocationIds.has(id));
       if (!toAdd.length) {
-        notify("Choose delegations that are not already waiting or current on the list.");
+        notify(t("chooseDelegationsNotAlreadyQueued"));
         return;
       }
       startTransition(async () => {
@@ -156,7 +163,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
             supabase,
             conferenceId,
             id,
-            alloc?.country ?? "—",
+            alloc?.country ?? t("dash"),
             rows
           );
           if (!result.ok) {
@@ -166,7 +173,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           }
           rows = await fetchSpeakerQueue(supabase, conferenceId);
         }
-        notify(`Added ${toAdd.length} speaker(s) in committee list order.`);
+        notify(t("addedSpeakersInOrder", { count: toAdd.length }));
         setCaucusBulkPick([]);
         void loadQueue();
       });
@@ -227,21 +234,21 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     return (
       <section ref={ref} className="space-y-3">
         <div>
-          <h3 className={headingClass}>🎤 Speaker list</h3>
+          <h3 className={headingClass}>🎤 {t("speakerList")}</h3>
           <p
             className={`mt-1 text-sm ${
               isSession ? "text-brand-muted" : "text-slate-600 dark:text-zinc-400"
             }`}
           >
-            Add delegations in speaking order. Delegates can still use{" "}
+            {t("introPrefix")}{" "}
             <span
               className={
                 isSession ? "font-medium text-brand-navy" : "font-medium text-slate-800 dark:text-zinc-200"
               }
             >
-              Request to speak
+              {t("requestToSpeak")}
             </span>{" "}
-            in the committee room. Use{" "}
+            {t("introMiddle")}{" "}
             <Link
               href="/chair/session/timer"
               className={
@@ -250,9 +257,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   : "font-medium text-brand-diplomatic underline decoration-brand-diplomatic/35 underline-offset-2 dark:text-brand-accent-bright"
               }
             >
-              Session → Timer
+              {t("sessionTimerLink")}
             </Link>{" "}
-            for per-speaker time and <strong className="font-medium">Advance speaker</strong>.
+            {t("introSuffixPrefix")} <strong className="font-medium">{t("advanceSpeaker")}</strong>.
           </p>
         </div>
 
@@ -270,30 +277,30 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                 <div className="min-w-0 space-y-1">
                   <p className="font-semibold text-amber-950 dark:text-amber-100">
                     {speakerListPromptKind === "gsl"
-                      ? "General Speakers' List (GSL)"
+                      ? t("prompt.gslTitle")
                       : speakerListPromptKind === "moderated_timer"
-                        ? "Moderated caucus (per-speaker timer)"
-                        : "Moderated caucus passed"}
+                        ? t("prompt.moderatedTimerTitle")
+                        : t("prompt.moderatedPassedTitle")}
                   </p>
                   <p className="text-sm text-brand-navy/85 dark:text-amber-100/90">
-                    Use the speaker list below to <strong className="font-medium">add</strong> delegates (dropdown +
-                    <strong className="font-medium"> Add</strong>, or tick delegations and{" "}
-                    <strong className="font-medium">Add selected to list</strong>) and{" "}
-                    <strong className="font-medium">remove</strong> them with <strong className="font-medium">Remove</strong>{" "}
-                    on each row. Reorder with the arrows or set <strong className="font-medium">Current</strong> when someone
-                    is at the mic.
+                    {t("prompt.bodyPrefix")} <strong className="font-medium">{t("prompt.add")}</strong>{" "}
+                    {t("prompt.bodyAddMiddle")} <strong className="font-medium">{t("add")}</strong>
+                    {t("prompt.bodyAddMiddle2")} <strong className="font-medium">{t("addSelectedToList")}</strong>
+                    {t("prompt.bodyRemovePrefix")} <strong className="font-medium">{t("prompt.remove")}</strong>{" "}
+                    {t("prompt.bodyRemoveMiddle")} <strong className="font-medium">{t("remove")}</strong>{" "}
+                    {t("prompt.bodyRowSuffix")} <strong className="font-medium">{t("current")}</strong>{" "}
+                    {t("prompt.bodyEnd")}
                   </p>
                 </div>
               </div>
               {speakerAllocations.length === 0 ? (
                 <p className="text-sm text-brand-muted dark:text-amber-200/80">
-                  No allocations are loaded for this committee yet. Dismiss when ready—you can add speakers later from
-                  the list controls.
+                  {t("prompt.noAllocations")}
                 </p>
               ) : speakerAllocations.some((a) => !activeQueueAllocationIds.has(a.id)) ? (
                 <div className="space-y-2">
                   <p className={`${labelClass} text-brand-muted dark:text-amber-200/70`}>
-                    Quick add (not yet waiting or current)
+                    {t("prompt.quickAdd")}
                   </p>
                   <ul className="max-h-40 overflow-y-auto rounded border border-amber-200/80 bg-black/40 p-2 space-y-1.5 text-sm dark:border-amber-800/50 dark:bg-black/30">
                     {speakerAllocations.map((a) => {
@@ -316,7 +323,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       onClick={addBulkSelectedToQueue}
                       className="px-3 py-2 rounded-lg bg-amber-700 text-white text-sm font-medium hover:bg-amber-800 disabled:opacity-50 dark:bg-amber-600 dark:hover:bg-amber-500"
                     >
-                      Add selected to list
+                      {t("addSelectedToList")}
                     </button>
                     <button
                       type="button"
@@ -327,15 +334,14 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       }}
                       className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
                     >
-                      Dismiss reminder
+                      {t("dismissReminder")}
                     </button>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-2">
                   <p className="text-sm text-brand-muted dark:text-amber-200/80">
-                    Every allocation already has a waiting or current slot. Remove entries if you need to reorder, or
-                    dismiss when you are done.
+                    {t("prompt.alreadyQueued")}
                   </p>
                   <button
                     type="button"
@@ -346,7 +352,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                     }}
                     className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
                   >
-                    Dismiss reminder
+                    {t("dismissReminder")}
                   </button>
                 </div>
               )}
@@ -360,7 +366,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   }}
                   className="px-3 py-2 rounded-lg border border-white/20 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-100"
                 >
-                  Dismiss reminder
+                  {t("dismissReminder")}
                 </button>
               ) : null}
             </div>
@@ -368,13 +374,13 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
 
           <div className="flex flex-wrap gap-2 items-end">
             <label className={`text-sm flex-1 min-w-[12rem] ${isSession ? "text-brand-navy" : "text-slate-800 dark:text-zinc-200"}`}>
-              <span className={labelClass}>Add delegation</span>
+              <span className={labelClass}>{t("addDelegation")}</span>
               <select
                 className={fieldClass}
                 value={pickAlloc}
                 onChange={(e) => setPickAlloc(e.target.value)}
               >
-                <option value="">Select…</option>
+                <option value="">{t("select")}</option>
                 {speakerAllocations.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.country}
@@ -383,7 +389,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
               </select>
             </label>
             <button type="button" disabled={pending} onClick={addSpeaker} className={addButtonClass}>
-              Add
+              {t("add")}
             </button>
           </div>
 
@@ -394,7 +400,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                   className={`flex flex-wrap items-center justify-between gap-2 py-2 ${rowBorder}`}
                 >
                   <span className="font-medium">
-                    {q.label || "—"}{" "}
+                    {q.label || t("dash")}{" "}
                     <span
                       className={
                         isSession
@@ -402,7 +408,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                           : "text-xs font-normal text-slate-500 dark:text-zinc-400"
                       }
                     >
-                      ({q.status})
+                      ({statusLabel(q.status)})
                     </span>
                   </span>
                   <span className="flex flex-wrap gap-1 sm:gap-2">
@@ -414,8 +420,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                           ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-white/10 disabled:opacity-30"
                           : "p-1.5 rounded-md text-slate-600 hover:bg-slate-100 disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       }
-                      title="Move up"
-                      aria-label="Move up"
+                      title={t("moveUp")}
+                      aria-label={t("moveUp")}
                       onClick={() => moveRow(q.id, "up")}
                     >
                       <ChevronUp className="h-4 w-4" strokeWidth={2} />
@@ -428,8 +434,8 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                           ? "p-1.5 rounded-md text-brand-navy/80 hover:bg-white/10 disabled:opacity-30"
                           : "p-1.5 rounded-md text-slate-600 hover:bg-slate-100 disabled:opacity-30 dark:text-zinc-400 dark:hover:bg-zinc-800"
                       }
-                      title="Move down"
-                      aria-label="Move down"
+                      title={t("moveDown")}
+                      aria-label={t("moveDown")}
                       onClick={() => moveRow(q.id, "down")}
                     >
                       <ChevronDown className="h-4 w-4" strokeWidth={2} />
@@ -439,14 +445,14 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
                       className={`text-xs font-medium hover:underline ${isSession ? "text-amber-700 dark:text-amber-400" : "text-amber-800 dark:text-amber-400"}`}
                       onClick={() => setCurrent(q.id)}
                     >
-                      Current
+                      {t("current")}
                     </button>
                     <button
                       type="button"
                       className={`text-xs font-medium hover:underline ${isSession ? "text-red-700 dark:text-red-300" : "text-red-700 dark:text-red-400"}`}
                       onClick={() => removeQueue(q.id)}
                     >
-                      Remove
+                      {t("remove")}
                     </button>
                   </span>
                 </li>

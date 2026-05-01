@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-04-27T03:03:47.739Z",
+  "generatedAt": "2026-04-30T10:17:52.756Z",
   "summary": {
     "localeCount": 27,
-    "hardcodedCount": 504,
-    "placeholderMismatchCount": 0,
+    "hardcodedCount": 434,
+    "placeholderMismatchCount": 533,
     "localesWithParityIssues": 0,
     "hardcodedByDomain": {
-      "page_or_layout": 122,
+      "page_or_layout": 105,
       "server_action": 121,
       "api": 3,
-      "component": 134,
-      "library_surface": 124
+      "component": 117,
+      "library_surface": 88
     }
   },
   "localeParity": [
@@ -197,7 +197,5069 @@
       "extraPreview": []
     }
   ],
-  "placeholderMismatches": [],
+  "placeholderMismatches": [
+    {
+      "locale": "ar",
+      "key": "chairChecklists.common.progressSynced",
+      "expected": [
+        "done",
+        "total"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "Land"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "ja",
+        "nein",
+        "total"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": [
+        "Rang"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "Anzahl"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "Name"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "Unterzeichner",
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "Nummer"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "Nummer"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "Datum"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "Land"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "Land"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "ja",
+        "nein",
+        "total"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "Grund"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "Reichweite"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "markiert",
+        "placards"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "Anzahl"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "Konferenz"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "Land"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": [
+        "Komitees"
+      ]
+    },
+    {
+      "locale": "de",
+      "key": "awardsRubric.tierPromptPick",
+      "expected": [
+        "band"
+      ],
+      "actual": [
+        "Band"
+      ]
+    },
+    {
+      "locale": "el",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "el",
+      "key": "views.resolutions.motionId",
+      "expected": [
+        "id"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "el",
+      "key": "views.committeeRoom.matchesCount",
+      "expected": [
+        "matches",
+        "total"
+      ],
+      "actual": [
+        "match",
+        "total"
+      ]
+    },
+    {
+      "locale": "el",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "el",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "el",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "filled"
+      ]
+    },
+    {
+      "locale": "el",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count"
+      ]
+    },
+    {
+      "locale": "el",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "el",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "no",
+        "total"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "authWizard.conferenceDescription",
+      "expected": [
+        "mode"
+      ],
+      "actual": [
+        "modo"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "roomGate.openLatestCommitteeHelp",
+      "expected": [
+        "code"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "allocationSignupPage.requestSubmittedBody",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contar"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nombre"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "firmantes",
+        "principal"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "nombre",
+        "postura"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.resolutions.motionId",
+      "expected": [
+        "id"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": [
+        "etiqueta"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.guides.glossary.committeeCode",
+      "expected": [
+        "code"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "tema"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "fecha"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.committeeRoom.matchesCount",
+      "expected": [
+        "matches",
+        "total"
+      ],
+      "actual": [
+        "partidos",
+        "total"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.committeeRoom.viewProfileAria",
+      "expected": [
+        "title"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.committeeRoom.noProfileLinkAria",
+      "expected": [
+        "title"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "no",
+        "total"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "motivo"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valor"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.session.floorStatus.limitOverBy",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valor"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.session.committeeControl.overByValue",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valor"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "rango"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "rango"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "llenado",
+        "total"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": [
+        "etiqueta"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contar"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "fila"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "serverActions.smtAllocations.codeTooLongOnRow",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "fila"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "serverActions.exportMaterials.emailSubject",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "rango"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "emails.allocationSignup.welcomeConfirmedFor",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "conferencia"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nombre"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": [
+        "encabezado"
+      ]
+    },
+    {
+      "locale": "es",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "es",
+      "key": "awardsRubric.tierPromptPick",
+      "expected": [
+        "band"
+      ],
+      "actual": [
+        "banda"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "pays"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "non",
+        "oui",
+        "total"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": [
+        "classement"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "delegateDashboard.activeCommitteeIntro",
+      "expected": [
+        "line"
+      ],
+      "actual": [
+        "ligne"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "compte"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nom"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main",
+        "signataires"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "nom",
+        "position"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "views.resolutions.motionId",
+      "expected": [
+        "id"
+      ],
+      "actual": [
+        "identifiant"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "sujet"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "pays"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "pays"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.committeeRoom.viewProfileAria",
+      "expected": [
+        "title"
+      ],
+      "actual": [
+        "titre"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "non",
+        "oui",
+        "total"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "raison"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valeur"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "gamme"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "plage"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "rempli",
+        "total"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "drapeau",
+        "placards"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "compte"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": [
+        "erreur"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "pays"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nom"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": [
+        "titre"
+      ]
+    },
+    {
+      "locale": "fr",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "fr",
+      "key": "awardsRubric.tierPromptPick",
+      "expected": [
+        "band"
+      ],
+      "actual": [
+        "bande"
+      ]
+    },
+    {
+      "locale": "hi",
+      "key": "chairChecklists.common.progressSynced",
+      "expected": [
+        "done",
+        "total"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "id",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "negara"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "tidak",
+        "total",
+        "ya"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "id",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": [
+        "peringkat"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "allocationSignupPage.requestSubmittedBody",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "negara"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "delegateDashboard.welcome",
+      "expected": [
+        "country",
+        "flag"
+      ],
+      "actual": [
+        "flag",
+        "negara"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nama"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main",
+        "penandatangan"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "angka"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "topik"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "angka"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "tanggal"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "negara"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "negara"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "tidak",
+        "total",
+        "ya"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "alasan"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "nilai"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "jangkauan"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "rentang"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "terisi",
+        "total"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "ditandai",
+        "plakat"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "hitungan"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "baris"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "emails.allocationSignup.welcomeConfirmedFor",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "negara"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "konferensi"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nama"
+      ]
+    },
+    {
+      "locale": "id",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": [
+        "komite"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "paese"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "no",
+        "totale"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": [
+        "classifica"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nome"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "it",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "firmatari",
+        "main"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "nome",
+        "posizione"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "numero"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": [
+        "etichetta"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.guides.glossary.committeeCode",
+      "expected": [
+        "code"
+      ],
+      "actual": [
+        "codice"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "argomento"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "numero"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "data"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "paese"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "paese"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.committeeRoom.viewProfileAria",
+      "expected": [
+        "title"
+      ],
+      "actual": [
+        "titolo"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "no",
+        "totale"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "motivo"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valore"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.floorStatus.limitOverBy",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valore"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.committeeControl.overByValue",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valore"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "allineare"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "intervallo"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "riempito",
+        "totale"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "contrassegnato",
+        "count",
+        "placards"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": [
+        "etichetta"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contare"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "riga"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": [
+        "errore"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "conferenza"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "paese"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nome"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "it",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": [
+        "intestazione"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": [
+        "comitato"
+      ]
+    },
+    {
+      "locale": "it",
+      "key": "awardsRubric.tierPromptPick",
+      "expected": [
+        "band"
+      ],
+      "actual": [
+        "banda"
+      ]
+    },
+    {
+      "locale": "ja",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "dashboardLayout.appHomeAria",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "delegateDashboard.welcome",
+      "expected": [
+        "country",
+        "flag"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "delegateDashboard.activeCommitteeIntro",
+      "expected": [
+        "line"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "ja",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.guides.glossary.committeeCode",
+      "expected": [
+        "code"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.committeeRoom.viewProfileAria",
+      "expected": [
+        "title"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.floorStatus.limitOverBy",
+      "expected": [
+        "value"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.committeeControl.overByValue",
+      "expected": [
+        "value"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ja",
+      "key": "awardsRubric.tierPromptLocked",
+      "expected": [
+        "band",
+        "score",
+        "tier"
+      ],
+      "actual": [
+        "score",
+        "tier"
+      ]
+    },
+    {
+      "locale": "ko",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "allocationSignupPage.requestSubmittedBody",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "delegateDashboard.welcome",
+      "expected": [
+        "country",
+        "flag"
+      ],
+      "actual": [
+        "flag"
+      ]
+    },
+    {
+      "locale": "ko",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "ko",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.committeeRoom.viewProfileAria",
+      "expected": [
+        "title"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.committeeRoom.noProfileLinkAria",
+      "expected": [
+        "title"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "ko",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "flaged",
+        "placards"
+      ]
+    },
+    {
+      "locale": "ko",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "emails.allocationSignup.welcomeConfirmedFor",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ko",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "mi",
+      "key": "chairChecklists.common.progressSynced",
+      "expected": [
+        "done",
+        "total"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "ja",
+        "nee",
+        "totaal"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": [
+        "rang"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "naam"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "nl",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "hoofd",
+        "ondertekenaars"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "naam",
+        "stand"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "nummer"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "onderwerp"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "nummer"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "datum"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "land"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "ja",
+        "nee",
+        "totaal"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "reden"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "waarde"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.floorStatus.limitOverBy",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "waarde"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.committeeControl.overByValue",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "waarde"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "bereik"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "bereik"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "gevuld",
+        "totaal"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "gemarkeerd",
+        "placards"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "conferentie"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "naam"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "allocationMatrixManager.seatsSummary",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "tel"
+      ]
+    },
+    {
+      "locale": "nl",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": [
+        "commissie"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "kraju"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "nie",
+        "tak"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "authWizard.conferenceDescription",
+      "expected": [
+        "mode"
+      ],
+      "actual": [
+        "tryb"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": [
+        "ranking"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nazwa"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main",
+        "sygnatariusze"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "nazwa",
+        "stancja"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "numer"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.resolutions.motionId",
+      "expected": [
+        "id"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "temat"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": [
+        "numer"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "data"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "kraj"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "kraj"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "nie",
+        "tak"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "zakres"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "zakres"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": [
+        "etykieta"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "wiersz"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "serverActions.smtAllocations.codeTooLongOnRow",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "wiersz"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "konferencja"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": [
+        "kraj"
+      ]
+    },
+    {
+      "locale": "pl",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "allocationMatrixManager.generatedRandomCodes",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pl",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": [
+        "komitetu"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "sim",
+        "total"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "awardsManager.selectedCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contagem"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contagem"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nome"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "principal"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "nome",
+        "postura"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.guides.glossary.committeeCode",
+      "expected": [
+        "code"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "data"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.committeeRoom.matchesCount",
+      "expected": [
+        "matches",
+        "total"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "sim",
+        "total"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "motivo"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valor"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.session.history.savedCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contagem"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "faixa"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "intervalo"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "preenchido",
+        "total"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "placards",
+        "sinalizado"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contar"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "linha"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nome"
+      ]
+    },
+    {
+      "locale": "pt",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "sim",
+        "total"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "awardsManager.selectedCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contagem"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contagem"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nome"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "principal"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "nome",
+        "postura"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.guides.glossary.committeeCode",
+      "expected": [
+        "code"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "data"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.committeeRoom.matchesCount",
+      "expected": [
+        "matches",
+        "total"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "sim",
+        "total"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "motivo"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": [
+        "valor"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.session.history.savedCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contagem"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "faixa"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "intervalo"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "preenchido",
+        "total"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "placards",
+        "sinalizado"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": [
+        "contar"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": [
+        "linha"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "nome"
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "pt-BR",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "authWizard.conferenceDescription",
+      "expected": [
+        "mode"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "allocationSignupPage.requestSubmittedBody",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "ru",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "flaked",
+        "placards"
+      ]
+    },
+    {
+      "locale": "ru",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "serverActions.exportMaterials.emailSubject",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "ru",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "no"
+      ]
+    },
+    {
+      "locale": "th",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.resolutions.sentToDelegate",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "th",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "no",
+        "total"
+      ]
+    },
+    {
+      "locale": "th",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "placards"
+      ]
+    },
+    {
+      "locale": "th",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "emails.allocationSignup.chairReminderEmail",
+      "expected": [
+        "email"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "th",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "evet",
+        "toplam"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "isim"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "ana",
+        "co"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": [
+        "name"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": [
+        "konu"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": [
+        "tarih"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.committeeRoom.matchesCount",
+      "expected": [
+        "matches",
+        "total"
+      ],
+      "actual": [
+        "matches",
+        "toplam"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "evet",
+        "toplam"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": [
+        "neden"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": [
+        "menzil"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "dolduruldu",
+        "toplam"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "pankart"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": [
+        "etiket"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": [
+        "konferans"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": [
+        "isim"
+      ]
+    },
+    {
+      "locale": "tr",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "tr",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": [
+        "komite"
+      ]
+    },
+    {
+      "locale": "uk",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "uk",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.guides.glossary.committeeCode",
+      "expected": [
+        "code"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "uk",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "signatories"
+      ]
+    },
+    {
+      "locale": "vi",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.committeeRoom.matchesCount",
+      "expected": [
+        "matches",
+        "total"
+      ],
+      "actual": [
+        "matches"
+      ]
+    },
+    {
+      "locale": "vi",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.session.motionVoting.tally",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "vi",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.session.history.savedCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": [
+        "total"
+      ]
+    },
+    {
+      "locale": "vi",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count",
+        "placards"
+      ]
+    },
+    {
+      "locale": "vi",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "allocationMatrixManager.generatedRandomCodes",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "vi",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count"
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-CN",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "sessionControlClient.rollCallForCountry",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "sessionControlClient.tallyLine",
+      "expected": [
+        "no",
+        "total",
+        "yes"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "authWizard.enterApp",
+      "expected": [
+        "appName"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "chairNominationsPanel.topRank",
+      "expected": [
+        "rank"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "smtOverview.sessionsCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "smtOverview.committeeLogoAlt",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.resolutions.resolutionCounts",
+      "expected": [
+        "co",
+        "main",
+        "signatories"
+      ],
+      "actual": [
+        "co",
+        "main"
+      ]
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.resolutions.blocButton",
+      "expected": [
+        "name",
+        "stance"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.resolutions.clauseNumber",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.voting.majorityLine",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.guides.glossary.topicTag",
+      "expected": [
+        "topic"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.ideas.ideaFallback",
+      "expected": [
+        "number"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.ideas.addedOn",
+      "expected": [
+        "date"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.committeeRoom.profileAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.committeeRoom.placardAria",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.session.activeMotion.pauseReason",
+      "expected": [
+        "reason"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.session.floorStatus.limitRemaining",
+      "expected": [
+        "value"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.session.history.rangeClosed",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "views.session.history.rangeOngoing",
+      "expected": [
+        "range"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "smtCards.seatsFilledAllocated",
+      "expected": [
+        "filled",
+        "total"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "chairDigitalRoom.roomStats",
+      "expected": [
+        "count",
+        "flagged",
+        "placards"
+      ],
+      "actual": [
+        "count"
+      ]
+    },
+    {
+      "locale": "zh-TW",
+      "key": "chairDigitalRoom.rollPrefix",
+      "expected": [
+        "label"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "delegationNotes.noteCount",
+      "expected": [
+        "count"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "serverActions.smtAllocations.rowTooLong",
+      "expected": [
+        "row"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "serverActions.smtStaffAccess.inviteSentButRoleSetFailed",
+      "expected": [
+        "error"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "emails.allocationSignup.chairReminderConference",
+      "expected": [
+        "conference"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "emails.allocationSignup.chairReminderAllocation",
+      "expected": [
+        "country"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "emails.allocationSignup.chairReminderDelegate",
+      "expected": [
+        "name"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "allocationMatrixManager.rosterHeading",
+      "expected": [
+        "heading"
+      ],
+      "actual": []
+    },
+    {
+      "locale": "zh-TW",
+      "key": "chairOverviewPage.welcome",
+      "expected": [
+        "committee"
+      ],
+      "actual": []
+    }
+  ],
   "hardcodedInventory": [
     {
       "file": "app/(dashboard)/chair/allocation-matrix/ChairDelegateApprovalByEmailForm.tsx",
@@ -481,135 +5543,7 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1648,
-      "kind": "object_message_literal",
-      "text": "Advanced speaker and reset per-speaker clock.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1681,
-      "kind": "object_message_literal",
-      "text": "Speech note saved.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1692,
-      "kind": "object_message_literal",
-      "text": "Speech note deleted.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1718,
-      "kind": "object_message_literal",
-      "text": "Announcement posted.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1734,
-      "kind": "object_message_literal",
-      "text": "Pinned for the committee floor.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1740,
-      "kind": "object_message_literal",
-      "text": "Unpinned.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1778,
-      "kind": "object_message_literal",
-      "text": "Announcement updated.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1796,
-      "kind": "object_message_literal",
-      "text": "Announcement deleted.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1825,
-      "kind": "object_message_literal",
-      "text": "Added ${newRows.length} roll call row(s).",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1908,
-      "kind": "object_message_literal",
-      "text": "Motion created and opened.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1962,
-      "kind": "object_message_literal",
-      "text": "Motion updated.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 1982,
-      "kind": "object_message_literal",
-      "text": "Motion closed.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2100,
-      "kind": "object_message_literal",
-      "text": "Motion reopened.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2143,
-      "kind": "object_message_literal",
-      "text": "Motion floor open — record each stated motion below.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2163,
-      "kind": "object_message_literal",
-      "text": "Motion floor closed for statements.",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2206,
-      "kind": "object_message_literal",
-      "text": "Stated motion recorded (not yet open for voting).",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2302,
+      "line": 2310,
       "kind": "jsx_text",
       "text": "= 1 && idx",
       "domain": "page_or_layout",
@@ -617,17 +5551,9 @@
     },
     {
       "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2386,
+      "line": 2394,
       "kind": "jsx_text",
       "text": "= 1 && n",
-      "domain": "page_or_layout",
-      "suggestedKeyPrefix": "pageTitles"
-    },
-    {
-      "file": "app/(dashboard)/chair/session/SessionControlClient.tsx",
-      "line": 2518,
-      "kind": "object_message_literal",
-      "text": "Stated motion removed.",
       "domain": "page_or_layout",
       "suggestedKeyPrefix": "pageTitles"
     },
@@ -2560,70 +7486,6 @@
       "suggestedKeyPrefix": "views.chats-notes"
     },
     {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 289,
-      "kind": "jsx_text",
-      "text": "Your context",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 293,
-      "kind": "jsx_text",
-      "text": "Role",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 307,
-      "kind": "attribute_literal",
-      "text": "Assigned",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 321,
-      "kind": "attribute_literal",
-      "text": "Dais",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 325,
-      "kind": "attribute_literal",
-      "text": "Focus search (dais titles and names match your query)",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 327,
-      "kind": "attribute_literal",
-      "text": "Phase",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 422,
-      "kind": "jsx_text",
-      "text": "Floor",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/CommitteeRoomDigitalMUNClient.tsx",
-      "line": 525,
-      "kind": "jsx_text",
-      "text": "Staff · seats",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
       "file": "components/committee-room/CommitteeRoomStaffControls.tsx",
       "line": 112,
       "kind": "jsx_text",
@@ -2676,78 +7538,6 @@
       "line": 143,
       "kind": "jsx_text",
       "text": "Vacant",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 386,
-      "kind": "jsx_text",
-      "text": "country",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 386,
-      "kind": "jsx_text",
-      "text": "(from allocations),",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 386,
-      "kind": "jsx_text",
-      "text": "name",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 387,
-      "kind": "jsx_text",
-      "text": "school",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 387,
-      "kind": "jsx_text",
-      "text": ", and",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 387,
-      "kind": "jsx_text",
-      "text": "pronouns",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 388,
-      "kind": "jsx_text",
-      "text": "Profile",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 389,
-      "kind": "jsx_text",
-      "text": "Vacant",
-      "domain": "component",
-      "suggestedKeyPrefix": "views.committee-room"
-    },
-    {
-      "file": "components/committee-room/VirtualCommitteeRoom.tsx",
-      "line": 390,
-      "kind": "jsx_text",
-      "text": "Click",
       "domain": "component",
       "suggestedKeyPrefix": "views.committee-room"
     },
@@ -3412,294 +8202,6 @@
       "line": 64,
       "kind": "object_message_literal",
       "text": "Strongest committee-level position paper.",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 12,
-      "kind": "object_message_literal",
-      "text": "Rules & procedure",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 14,
-      "kind": "object_message_literal",
-      "text": "Read and understand committee rules of procedure",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 15,
-      "kind": "object_message_literal",
-      "text": "Review parliamentary procedure (motions, points, voting)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 16,
-      "kind": "object_message_literal",
-      "text": "Confirm speaking times and time limits",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 17,
-      "kind": "object_message_literal",
-      "text": "Know quorum and voting requirements",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 22,
-      "kind": "object_message_literal",
-      "text": "Committee & topic",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 24,
-      "kind": "object_message_literal",
-      "text": "Research committee topic and background",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 25,
-      "kind": "object_message_literal",
-      "text": "Read study guide and key documents",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 26,
-      "kind": "object_message_literal",
-      "text": "Set committee name and topic in dashboard",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 27,
-      "kind": "object_message_literal",
-      "text": "Prepare session agenda and flow",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 32,
-      "kind": "object_message_literal",
-      "text": "Room & tech",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 34,
-      "kind": "object_message_literal",
-      "text": "Set up digital room (delegates list, placards)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 35,
-      "kind": "object_message_literal",
-      "text": "Tech check: platform, audio, screen share",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 36,
-      "kind": "object_message_literal",
-      "text": "Have backup plan if tech fails",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 41,
-      "kind": "object_message_literal",
-      "text": "Materials & logistics",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 43,
-      "kind": "object_message_literal",
-      "text": "Prepare roll call list and attendance",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 44,
-      "kind": "object_message_literal",
-      "text": "Plan speakers list management",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 45,
-      "kind": "object_message_literal",
-      "text": "Prepare common motions / points (if using templates)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 46,
-      "kind": "object_message_literal",
-      "text": "Confirm session start time and breaks",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 51,
-      "kind": "object_message_literal",
-      "text": "Crisis (if applicable)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 53,
-      "kind": "object_message_literal",
-      "text": "Review crisis elements and update slides",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 54,
-      "kind": "object_message_literal",
-      "text": "Plan crisis speaker order / cues",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 55,
-      "kind": "object_message_literal",
-      "text": "Prepare crisis pathways and facts",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 60,
-      "kind": "object_message_literal",
-      "text": "Team & communication",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 62,
-      "kind": "object_message_literal",
-      "text": "Coordinate with co-chair(s) on roles",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 63,
-      "kind": "object_message_literal",
-      "text": "Confirm staff / dais support and cues",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 64,
-      "kind": "object_message_literal",
-      "text": "Prepare brief for delegates (rules, timing)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 71,
-      "kind": "object_message_literal",
-      "text": "Roll call",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 72,
-      "kind": "object_message_literal",
-      "text": "Open the floor (points & motions)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 73,
-      "kind": "object_message_literal",
-      "text": "Recognize motions",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 74,
-      "kind": "object_message_literal",
-      "text": "Vote on motion(s)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 75,
-      "kind": "object_message_literal",
-      "text": "Engage in chosen motion or move to GSL",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 76,
-      "kind": "object_message_literal",
-      "text": "Open the floor again",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 77,
-      "kind": "object_message_literal",
-      "text": "Recognize motions (repeat as needed)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 78,
-      "kind": "object_message_literal",
-      "text": "Vote on motion(s)",
-      "domain": "library_surface",
-      "suggestedKeyPrefix": "common"
-    },
-    {
-      "file": "lib/chair-dashboard-checklists.ts",
-      "line": 79,
-      "kind": "object_message_literal",
-      "text": "Continue cycle (engage motion / GSL → open floor)",
       "domain": "library_surface",
       "suggestedKeyPrefix": "common"
     },

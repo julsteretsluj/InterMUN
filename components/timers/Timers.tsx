@@ -2,6 +2,7 @@
 
 import { Clock } from "lucide-react";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
+import { useTranslations } from "next-intl";
 
 type TimerTheme = "dark" | "light";
 
@@ -15,6 +16,7 @@ export function Timers({
   /** Current open motion id when in voting procedure; used to show motion-bound timers only. */
   activeVoteItemId?: string | null;
 }) {
+  const t = useTranslations("timersWidget");
   const { timer, total, mins, secs, perSpeakerMode, isRunning } = useConferenceTimer(
     conferenceId,
     activeVoteItemId
@@ -44,39 +46,39 @@ export function Timers({
       <div className="flex flex-wrap gap-3 sm:gap-4 text-sm">
         {floorLabel ? (
           <div className="min-w-[7rem]">
-            <span className={labelCls}>Timer</span>
+            <span className={labelCls}>{t("timer")}</span>
             <p className="font-semibold text-brand-accent">{floorLabel}</p>
           </div>
         ) : null}
         <div>
-          <span className={labelCls}>Current speaker</span>
-          <p className="font-medium">{timer.current_speaker || "—"}</p>
+          <span className={labelCls}>{t("currentSpeaker")}</span>
+          <p className="font-medium">{timer.current_speaker || t("dash")}</p>
         </div>
         <div>
-          <span className={labelCls}>Next speaker</span>
-          <p className="font-medium">{timer.next_speaker || "—"}</p>
+          <span className={labelCls}>{t("nextSpeaker")}</span>
+          <p className="font-medium">{timer.next_speaker || t("dash")}</p>
         </div>
         <div>
           <span className={labelCls}>
-            {perSpeakerMode ? "Speaker time (left / cap)" : "Speaker time (left / total)"}
+            {perSpeakerMode ? t("speakerTimePerSpeaker") : t("speakerTimeTotal")}
           </span>
           <p className="font-mono font-medium tabular-nums">
             {mins}:{secs.toString().padStart(2, "0")} / {Math.floor(total / 60)}:
             {(total % 60).toString().padStart(2, "0")}
             {perSpeakerMode ? (
               <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-brand-muted">
-                (per speaker)
+                {t("perSpeaker")}
               </span>
             ) : null}
             {!isRunning ? (
               <span className="ml-1 font-sans text-[0.65rem] font-normal normal-case text-amber-700 dark:text-amber-400">
-                (paused)
+                {t("paused")}
               </span>
             ) : null}
           </p>
           {!isRunning && pauseReason ? (
             <p className="mt-0.5 max-w-md text-[0.68rem] font-normal normal-case text-amber-900/90 dark:text-amber-200/90">
-              Pause: {pauseReason}
+              {t("pauseReason", { reason: pauseReason })}
             </p>
           ) : null}
         </div>

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 function initialsFromName(name: string): string {
   const n = name.trim();
@@ -67,8 +68,9 @@ export function ProfileLivePreview({
   canViewPrivate: boolean;
   className?: string;
 }) {
+  const t = useTranslations("views.profile");
   const initials = useMemo(() => initialsFromName(name), [name]);
-  const gradeLabel = grade.trim() ? `Grade ${grade.trim()}` : null;
+  const gradeLabel = grade.trim() ? t("preview.gradeValue", { grade: grade.trim() }) : null;
   const usernameLine = username.trim().toLowerCase();
   const awardItems = useMemo(() => awardsToList(awardsRaw), [awardsRaw]);
 
@@ -78,28 +80,28 @@ export function ProfileLivePreview({
         "rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] backdrop-blur-xl backdrop-saturate-150 lg:sticky lg:top-24",
         className
       )}
-      aria-label="Profile preview"
+      aria-label={t("preview.ariaLabel")}
     >
-      <p className="mun-label mb-4">Preview</p>
+      <p className="mun-label mb-4">{t("preview.title")}</p>
 
       <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
         <ProfilePreviewAvatar key={imageUrl} imageUrl={imageUrl} initials={initials} />
 
         <h2 className="font-display text-xl font-semibold tracking-tight text-brand-navy dark:text-zinc-100">
-          {name.trim() || "Your name"}
+          {name.trim() || t("preview.yourName")}
         </h2>
 
         {usernameLine ? (
           <p className="mt-1 font-mono text-sm text-brand-muted">@{usernameLine}</p>
         ) : (
-          <p className="mt-1 text-sm text-brand-muted">Username not set</p>
+          <p className="mt-1 text-sm text-brand-muted">{t("preview.usernameNotSet")}</p>
         )}
 
         <dl className="mun-group-list mt-5 w-full text-sm">
           {pronouns.trim() ? (
             <div>
               <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                Pronouns
+                {t("pronouns")}
               </dt>
               <dd className="mt-0.5 text-brand-navy dark:text-zinc-200">{pronouns.trim()}</dd>
             </div>
@@ -108,7 +110,7 @@ export function ProfileLivePreview({
           {school.trim() ? (
             <div>
               <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                School
+                {t("school")}
               </dt>
               <dd className="mt-0.5 text-brand-navy dark:text-zinc-200">{school.trim()}</dd>
             </div>
@@ -117,7 +119,7 @@ export function ProfileLivePreview({
           {gradeLabel ? (
             <div>
               <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                Grade
+                {t("grade")}
               </dt>
               <dd className="mt-0.5 text-brand-navy dark:text-zinc-200">{gradeLabel}</dd>
             </div>
@@ -125,10 +127,10 @@ export function ProfileLivePreview({
 
           <div>
             <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              Allocation
+              {t("allocation")}
             </dt>
             <dd className="mt-0.5 font-medium text-brand-navy dark:text-zinc-100">
-              {allocation.trim() || "—"}
+              {allocation.trim() || t("fallbacks.dash")}
             </dd>
           </div>
 
@@ -136,7 +138,7 @@ export function ProfileLivePreview({
             <>
               <div>
                 <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Conferences attended
+                  {t("conferencesAttended")}
                 </dt>
                 <dd className="mt-0.5 tabular-nums text-brand-navy dark:text-zinc-200">
                   {conferencesAttended ?? 0}
@@ -144,7 +146,7 @@ export function ProfileLivePreview({
               </div>
               <div>
                 <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-                  Awards
+                  {t("preview.awards")}
                 </dt>
                 <dd className="mt-0.5 text-brand-navy dark:text-zinc-200">
                   {awardItems.length > 0 ? (
@@ -156,7 +158,7 @@ export function ProfileLivePreview({
                       ))}
                     </ul>
                   ) : (
-                    <span className="text-brand-muted">—</span>
+                    <span className="text-brand-muted">{t("fallbacks.dash")}</span>
                   )}
                 </dd>
               </div>

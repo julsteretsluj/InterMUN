@@ -5,6 +5,7 @@ import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatri
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { getTranslations } from "next-intl/server";
 
 type ConfRow = { id: string; name: string; committee: string | null; committee_code: string | null };
 
@@ -87,6 +88,7 @@ export default async function SmtAllocationMatrixPage({
 }: {
   searchParams: Promise<{ conference?: string }>;
 }) {
+  const t = await getTranslations("smtAllocationMatrixPage");
   const { conference: conferenceParam } = await searchParams;
   const supabase = await createClient();
   const eventId = await getActiveEventId();
@@ -94,12 +96,12 @@ export default async function SmtAllocationMatrixPage({
   if (!eventId) {
     return (
       <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-8 text-center text-brand-muted">
-        <p className="mb-4">Select a conference event first.</p>
+        <p className="mb-4">{t("selectConferenceEventFirst")}</p>
         <Link
           href="/event-gate?next=%2Fsmt%2Fallocation-matrix"
           className="inline-block px-4 py-2 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft"
         >
-          Enter conference code
+          {t("enterConferenceCode")}
         </Link>
       </div>
     );
@@ -225,10 +227,9 @@ export default async function SmtAllocationMatrixPage({
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">Allocation matrix</h1>
+      <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">{t("title")}</h1>
       <p className="text-sm text-brand-muted mb-6 max-w-2xl">
-        Build or import the seat list for each committee in the active event. Delegates pick their row at
-        the committee gate after sign-in; placard codes can match your spreadsheet IDs.
+        {t("intro")}
       </p>
       <AllocationMatrixManagerClient conferences={list} selectedConferenceId={selectedConferenceId} rows={rows} />
     </div>

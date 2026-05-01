@@ -313,7 +313,32 @@
     "unitMinutesShort": "متر",
     "unitSecondsShort": "س",
     "apply": "درخواست کنید",
-    "motionControl": "Motion control"
+    "motionControl": "Motion control",
+    "advancedSpeakerResetClock": "Advanced speaker and reset per-speaker clock.",
+    "writeSpeechNoteFirst": "Write something before saving a speech note.",
+    "speechNoteSaved": "Speech note saved.",
+    "speechNoteDeleted": "Speech note deleted.",
+    "announcementPosted": "Announcement posted.",
+    "announcementPinnedToFloor": "Pinned for the committee floor.",
+    "announcementUnpinned": "Unpinned.",
+    "announcementBodyRequired": "Announcement body cannot be empty.",
+    "announcementUpdated": "Announcement updated.",
+    "deleteAnnouncementConfirm": "Delete this announcement permanently? This cannot be undone.",
+    "announcementDeleted": "Announcement deleted.",
+    "noAllocationsToAdd": "No allocations to add.",
+    "rollCallRowsAlreadyExist": "Roll call already has a row for every allocation.",
+    "rollCallRowsAdded": "Added {count} roll call row(s).",
+    "motionCreatedOpened": "Motion created and opened.",
+    "motionUpdated": "Motion updated.",
+    "motionClosed": "Motion closed.",
+    "motionAlreadyOpenReopenBlocked": "Another motion is already open for voting. Close it before reopening this one.",
+    "motionReopened": "Motion reopened.",
+    "motionFloorOpened": "Motion floor open - record each stated motion below.",
+    "motionFloorClosed": "Motion floor closed for statements.",
+    "openMotionFloorFirst": "Open the motion floor for statements first.",
+    "openMotionBlocksRecording": "A motion is already open for voting. Close it before recording further statements.",
+    "statedMotionRecorded": "Stated motion recorded (not yet open for voting).",
+    "statedMotionRemoved": "Stated motion removed."
   },
   "language": {
     "label": "زبان",
@@ -352,7 +377,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "مرکز راهنمایی",
-    "settings": "تنظیمات"
+    "settings": "تنظیمات",
+    "appHomeAria": "{appName} home",
+    "defaultDisplayName": "Delegate"
   },
   "authWizard": {
     "enterApp": "{appName} را وارد کنید",
@@ -735,7 +762,8 @@
       "archive": "آرشیو",
       "officialLinks": "لینک های رسمی",
       "roomCode": "کد اتاق",
-      "settings": "تنظیمات"
+      "settings": "تنظیمات",
+      "discipline": "Disciplinary"
     }
   },
   "smtNav": {
@@ -1013,7 +1041,79 @@
       "errImageSize": "تصویر خیلی بزرگ است (حداکثر 5 مگابایت).",
       "errUploadFailed": "آپلود انجام نشد.",
       "errStorageSetup": "ذخیره سازی تصویر نمایه تنظیم نشده است. در پروژه Supabase، migration 00100_profile_pictures_storage_bucket.sql را اجرا کنید، یا یک سطل ذخیره سازی عمومی به نام profile-pictures ایجاد کنید (به README مراجعه کنید).",
-      "errPublicUrl": "URL عمومی برای تصویر آپلود شده حل نشد."
+      "errPublicUrl": "URL عمومی برای تصویر آپلود شده حل نشد.",
+      "fallbacks": {
+        "yourCountry": "کشور شما",
+        "committeeSession": "جلسه کمیته",
+        "delegate": "نماینده",
+        "speechNote": "یادداشت سخنرانی",
+        "untitledMotion": "حرکت بدون عنوان",
+        "dash": "-"
+      },
+      "delegateWelcome": {
+        "title": "خوش آمدید نماینده {flag} {country}",
+        "subtitle": "دوست دارید با چه چیزی شروع کنید؟",
+        "links": {
+          "documents": "اسناد",
+          "notes": "یادداشت ها",
+          "committeeRoom": "اتاق کمیته",
+          "runningNotes": "در حال اجرا",
+          "ideas": "ایده ها",
+          "guides": "راهنماها",
+          "sources": "منابع",
+          "resolutions": "قطعنامه ها",
+          "speeches": "سخنرانی ها",
+          "stances": "موضع گیری ها",
+          "crisisSlides": "بحران سقوط می کند",
+          "report": "گزارش دهید",
+          "motions": "حرکات",
+          "points": "امتیاز"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "جوایز در پروفایل شما",
+        "rank": "رتبه {رتبه}",
+        "pending": {
+          "tab": "نامزدهای معلق",
+          "title": "نامزدهای صندلی معلق",
+          "descriptionSingle": "توسط صندلی ذخیره شده و برای بررسی با SMT به اشتراک گذاشته شده است. جوایز نهایی پس از تایید در زیر ظاهر می شوند.",
+          "descriptionTabbed": "توسط صندلی ذخیره شده و برای بررسی با SMT به اشتراک گذاشته شده است. جوایز نهایی پس از تایید ظاهر می شوند."
+        },
+        "recorded": {
+          "tab": "جوایز ثبت شده",
+          "title": "جوایز ثبت شده",
+          "description": "زمانی که صندلی‌ها یا SMT شما را در ردیاب جوایز اختصاص می‌دهند، فهرست می‌شود. تشخیص نهایی از قوانین کنفرانس شما پیروی می کند."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "فقط برای شما، روسای کمیته و SMT برای کمیته مربوطه قابل مشاهده است.",
+        "points": {
+          "title": "امتیاز صندلی (خصوصی)"
+        },
+        "speechNotes": {
+          "title": "یادداشت های سخنرانی صندلی (خصوصی)"
+        },
+        "motions": {
+          "title": "حرکاتی که شما حرکت کردید",
+          "description": "برای بررسی کمیته و نظارت SMT در نمایه شما ذخیره شد."
+        }
+      },
+      "discipline": {
+        "title": "وضعیت انضباطی (خصوصی)",
+        "statusLine": "هشدارها: {warnings} · اخطارها: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+        "votingDisabled": "رای دادن غیر فعال",
+        "speakingSuspended": "صحبت کردن به حالت تعلیق درآمد",
+        "removedFromCommittee": "از کمیته حذف شد",
+        "updated": "به روز شده: {value}"
+      },
+      "preview": {
+        "ariaLabel": "پیش نمایش نمایه",
+        "title": "پیش نمایش",
+        "yourName": "نام شما",
+        "usernameNotSet": "نام کاربری تنظیم نشده است",
+        "gradeValue": "درجه {grade}",
+        "awards": "جوایز"
+      }
     },
     "guides": {
       "default": {
@@ -1347,7 +1447,30 @@
       "profileAria": "مشاهده نمایه: {country}",
       "vacantSeatAria": "صندلی خالی",
       "placardAria": "Placard {country}",
-      "gavelAria": "گاول"
+      "gavelAria": "گاول",
+      "yourContext": "Your context",
+      "roleLabel": "Role",
+      "seatLabel": "Seat",
+      "assignedLabel": "Assigned",
+      "daisLabel": "Dais",
+      "phaseLabel": "Phase",
+      "phaseVoting": "Voting",
+      "phaseDebate": "Debate",
+      "focusSearchTitle": "Focus search (dais titles and names match your query)",
+      "tipLabel": "Tip",
+      "enterScrolls": "Enter scrolls",
+      "typeToFilterHint": "Type to filter - Enter scrolls to first match",
+      "noMatches": "No matching delegations or dais seats.",
+      "digitalDisplay": "Digital display",
+      "floorLabel": "Floor",
+      "staffSeatsHeading": "Staff - seats",
+      "viewProfileAria": "View profile: {title}",
+      "noProfileLinkAria": "{title} (no profile link)",
+      "committeeFloor": "Committee floor",
+      "virtualRoomFigureAria": "Virtual committee room - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Filtering delegations. First highlighted seat is the first match in the ring.",
+      "helperText": "Placards list country (from allocations), name, school, and pronouns from each delegate's profile. Edit yours under Profile. Empty committee seats show as Vacant. Click a filled placard or dais seat to open that member's page (chat and report from there).",
+      "virtualRoomCaption": "Virtual Model UN committee room with delegate placards showing country, name, school, and pronouns."
     },
     "session": {
       "requestToSpeak": {
@@ -1541,7 +1664,14 @@
         "alreadyPaused": "تایمر قبلاً متوقف شده است.",
         "pausedForCommittee": "تایمر برای کمیته متوقف شد.",
         "alreadyRunning": "تایمر از قبل در حال اجرا است.",
-        "runningForCommittee": "تایمر در حال اجرا برای کمیته"
+        "runningForCommittee": "تایمر در حال اجرا برای کمیته",
+        "euTimerBoardTitle": "تایمر پارلمان اتحادیه اروپا (11 تایمر)",
+        "euTimerBoardHelp": "یک تایمر برای هر مهمانی، به اضافه زمان کل، زمان POI/POC، و زمان بلندگو. از Apply برای کپی کردن یک ردیف در فیلدهای تایمر زنده در برگه ساعت (زمان بلندگو / ذخیره تایمر) استفاده کنید.",
+        "euTimerName": "نام",
+        "euTimerTag": "برچسب بزنید",
+        "euTotalTime": "کل زمان",
+        "euPoiPocTime": "زمان POI / POC",
+        "euSpeakerTime": "زمان بلندگو"
       }
     }
   },
@@ -1661,7 +1791,11 @@
     "adding": "در حال افزودن...",
     "addToSpeakerList": "به لیست بلندگوها اضافه کنید",
     "reminder": "یادآوری",
-    "privateReminderLabel": "یادآوری خصوصی (فقط صندلی، همگام‌سازی شده)"
+    "privateReminderLabel": "یادآوری خصوصی (فقط صندلی، همگام‌سازی شده)",
+    "clearAllConfirm": "تمجید، نگرانی، و یادداشت های یادآوری برای هر پلاکارد را پاک کنید؟ این نسخه کمیته مشترک را به روز می کند.",
+    "addedToSpeakerList": "{country} به لیست سخنرانان اضافه شد.",
+    "committeeFallback": "کمیته",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "موضوع زنده را انتخاب کنید",
@@ -2184,7 +2318,7 @@
     "tierLow": "کم",
     "tierHigh": "بالا",
     "tierPromptLocked": "قفل شده: {band} - {tier} ({score})",
-    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "tierPromptPick": "کم یا زیاد را در {باند} (نقاط در مقیاس 1-8) انتخاب کنید.",
     "criteria": {
       "creativity": {
         "label": "خلاقیت",
@@ -2474,6 +2608,202 @@
           "3": "هم افزایی بدون درز؛ دایس الهام بخش یک محیط حرفه ای و پر ریسک است."
         }
       }
+    },
+    "maxPoints": "حداکثر {امتیاز} امتیاز",
+    "reference": {
+      "title": "روبریک های رسمی جایزه SEAMUN I",
+      "description": "نسخه مرجع: انواع جوایز، فرآیند ارزیابی، و ماتریس‌های باند 1-8 کامل (از عنوان کنفرانس). امتیازدهی در InterMUN از همان کلیدهای معیاری که در آن نامزدها ارسال می شود استفاده می کند."
+    },
+    "sections": {
+      "catalogue": "کاتالوگ جوایز",
+      "processOversight": "فرآیند جوایز و نظارت",
+      "calibrationTraining": "کالیبراسیون و آموزش صندلی (مقیاس 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "در سطح کنفرانس (کلی)",
+      "collectiveChair": "جمعی و صندلی",
+      "committeeLevel": "در سطح کمیته"
+    },
+    "matrices": {
+      "positionPaper": "مقاله موقعیت (بهترین مقاله پوزیشن)",
+      "delegateLiveSessions": "نماینده (جلسات زنده)",
+      "chairPerformance": "عملکرد صندلی",
+      "chairReportOverall": "گزارش صندلی - به طور کلی",
+      "chairReportSectionSpecific": "گزارش صندلی - مخصوص بخش",
+      "bestCommittee": "بهترین کمیته"
+    },
+    "evidenceNote": "صندلی ها مدارک کامل و تاییدیه کتبی برای سوابق SMT: شواهد اولیه برتری و توجیه در مقابل نفر دوم (در هر فرم منتشر شده).",
+    "footnotes": {
+      "delegateLiveSessions": "خلاقیت، دیپلماسی، همکاری، رهبری، دانش و تحقیق، مشارکت - هر کدام 8 امتیاز.",
+      "chairPerformance": "هشت بعد با امتیاز 8 برای بهترین تراز ارزیابی صندلی/صندلی به دست آمد.",
+      "chairReportSectionSpecific": "همراه با بخش کلی بالا برای کل امتیاز گزارش صندلی تا 72 در مقیاس گسترده در سند رسمی."
     }
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} کامل شد - برای این کمیته همگام سازی شد",
+      "loading": "در حال بارگیری...",
+      "resetChecklist": "بازنشانی چک لیست"
+    },
+    "prepPage": {
+      "description": "قبل از کنفرانس: قوانین، موضوع، اتاق، مواد و تیم. همگام سازی شده برای همه روسای این کمیته؛ تنظیم مجدد آن را برای همه پاک می کند.",
+      "crisisHidden": "موارد آماده سازی خاص بحران برای این نوع کمیته پنهان است."
+    },
+    "flowPage": {
+      "description": "جریان عادی کمیته - در حین رفتن مراحل را علامت بزنید. به اشتراک گذاشته شده در حساب های صندلی و دستگاه ها؛ تنظیم مجدد برای همه پاک می شود."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "قوانین و رویه"
+        },
+        "topic": {
+          "title": "کمیته و موضوع"
+        },
+        "room": {
+          "title": "اتاق و فناوری"
+        },
+        "materials": {
+          "title": "مواد و تدارکات"
+        },
+        "crisis": {
+          "title": "بحران (در صورت وجود)"
+        },
+        "team": {
+          "title": "تیم و ارتباطات"
+        }
+      },
+      "items": {
+        "rop": "قوانین رویه کمیته را بخوانید و درک کنید",
+        "parliamentary": "بررسی رویه مجلس (پیشنهادات، نکات، رای گیری)",
+        "speaking-times": "زمان صحبت و محدودیت های زمانی را تأیید کنید",
+        "quorum": "حد نصاب و شرایط رای گیری را بدانید",
+        "research": "موضوع و پیشینه کمیته تحقیقات",
+        "study-guide": "راهنمای مطالعه و اسناد کلیدی را بخوانید",
+        "dashboard-topic": "نام کمیته و موضوع را در داشبورد تنظیم کنید",
+        "agenda": "دستور جلسه و جریان را آماده کنید",
+        "digital-room": "راه اندازی اتاق دیجیتال (فهرست نمایندگان، پلاکارد)",
+        "tech-check": "بررسی فنی: پلت فرم، صدا، اشتراک‌گذاری صفحه نمایش",
+        "backup": "در صورت شکست فناوری، برنامه پشتیبان داشته باشید",
+        "roll-plan": "لیست تماس تلفنی و حضور و غیاب را آماده کنید",
+        "speakers-plan": "مدیریت لیست سخنرانان را برنامه ریزی کنید",
+        "templates": "حرکات / نقاط مشترک را آماده کنید (در صورت استفاده از الگوها)",
+        "timing": "زمان شروع جلسه و زمان استراحت را تأیید کنید",
+        "crisis-slides": "عناصر بحران را مرور کنید و اسلایدها را به روز کنید",
+        "crisis-cues": "ترتیب / نشانه های سخنران بحران را برنامه ریزی کنید",
+        "crisis-paths": "مسیرهای بحران و حقایق را آماده کنید",
+        "co-chairs": "در مورد نقش ها با رئیس(های) مشترک هماهنگ کنید",
+        "staff": "پشتیبانی و سرنخ های کارکنان / دایس را تأیید کنید",
+        "delegate-brief": "تهیه خلاصه برای نمایندگان (قوانین، زمان بندی)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "تماس تلفنی",
+        "open-floor": "باز کردن زمین (نقاط و حرکات)",
+        "recognize": "حرکات را بشناسید",
+        "vote-1": "رای دادن به حرکت(ها)",
+        "engage": "در حرکت انتخابی شرکت کنید یا به GSL بروید",
+        "open-again": "دوباره کف را باز کنید",
+        "recognize-repeat": "تشخیص حرکات (در صورت لزوم تکرار کنید)",
+        "vote-2": "رای دادن به حرکت(ها)",
+        "cycle": "ادامه چرخه (درگیر کردن حرکت / GSL -> طبقه باز)"
+      }
+    }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "ماتریس تخصیص کمیته برای جلسه فعلی شما. این فقط برای صندلی ها خواندنی است و منعکس کننده تخصیص صندلی های فعال و کدهای پلاکارد است.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "تخصیص",
+      "flag": "پرچم",
+      "email": "ایمیل",
+      "name": "نام",
+      "grade": "درجه",
+      "notes": "یادداشت ها",
+      "requestedAllocation": "تخصیص درخواست کرد",
+      "account": "حساب",
+      "actions": "اقدامات"
+    },
+    "noRows": "هیچ ردیف تخصیصی برای این کمیته یافت نشد.",
+    "pendingApprovalsTitle": "تاییدیه های ثبت نام در انتظار",
+    "pendingApprovalsIntro": "برای اطمینان از اینکه نمایندگان از حساب صحیح استفاده می‌کنند، رئیس‌ها ثبت‌نام پیوند تخصیص را تأیید یا رد می‌کنند.",
+    "noPendingRequests": "بدون درخواست معلق",
+    "unknownAllocation": "تخصیص ناشناخته",
+    "approve": "تایید کنید",
+    "reject": "رد کردن"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "ماتریس تخصیص",
+    "selectConferenceEventFirst": "ابتدا یک رویداد کنفرانس را انتخاب کنید.",
+    "enterConferenceCode": "کد کنفرانس را وارد کنید",
+    "intro": "فهرست صندلی‌ها را برای هر کمیته در رویداد فعال بسازید یا وارد کنید. نمایندگان پس از ورود به سیستم، ردیف خود را در دروازه کمیته انتخاب می کنند. کدهای پلاکارد می توانند با شناسه های صفحه گسترده شما مطابقت داشته باشند."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "-",
+    "speakerList": "لیست سخنرانان",
+    "addedToSpeakerList": "به لیست بلندگوها اضافه شد",
+    "chooseDelegationsNotAlreadyQueued": "هیئت‌هایی را انتخاب کنید که از قبل در لیست منتظر نیستند یا در حال حاضر در لیست نیستند.",
+    "addedSpeakersInOrder": "{count} سخنران به ترتیب فهرست کمیته اضافه شد.",
+    "introPrefix": "هیئت ها را به ترتیب صحبت اضافه کنید. نمایندگان همچنان می توانند استفاده کنند",
+    "requestToSpeak": "درخواست صحبت کردن",
+    "introMiddle": "در اتاق کمیته استفاده کنید",
+    "sessionTimerLink": "جلسه → تایمر",
+    "introSuffixPrefix": "برای زمان هر گوینده و",
+    "advanceSpeaker": "بلندگوی پیشرفته",
+    "addDelegation": "اضافه کردن نمایندگی",
+    "select": "انتخاب…",
+    "add": "اضافه کنید",
+    "addSelectedToList": "انتخاب شده را به لیست اضافه کنید",
+    "dismissReminder": "رد کردن یادآوری",
+    "moveUp": "حرکت به بالا",
+    "moveDown": "به سمت پایین حرکت کنید",
+    "current": "فعلی",
+    "remove": "حذف کنید",
+    "prompt": {
+      "gslTitle": "فهرست سخنرانان عمومی (GSL)",
+      "moderatedTimerTitle": "جمعی تعدیل شده (تایمر برای هر بلندگو)",
+      "moderatedPassedTitle": "انجمن هیئت علمی معتدل تصویب شد",
+      "bodyPrefix": "از لیست بلندگوهای زیر استفاده کنید",
+      "add": "اضافه کردن",
+      "bodyAddMiddle": "نمایندگان (کشویی +",
+      "bodyAddMiddle2": "، یا تیک هیئت ها و",
+      "bodyRemovePrefix": ") و",
+      "remove": "حذف کنید",
+      "bodyRemoveMiddle": "آنها را با",
+      "bodyRowSuffix": "در هر ردیف با فلش ها یا تنظیم مجدد ترتیب دهید",
+      "bodyEnd": "وقتی کسی پشت میکروفون است",
+      "noAllocations": "هنوز هیچ تخصیصی برای این کمیته بارگیری نشده است. رد کردن در صورت آماده بودن — می‌توانید بعداً بلندگوها را از کنترل‌های فهرست اضافه کنید.",
+      "quickAdd": "افزودن سریع (هنوز در انتظار یا فعلی)",
+      "alreadyQueued": "هر تخصیص قبلاً دارای یک شکاف انتظار یا فعلی است. در صورت نیاز به سفارش مجدد، ورودی‌ها را حذف کنید یا پس از اتمام کار، آن را رد کنید."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "تایمر",
+    "currentSpeaker": "بلندگوی فعلی",
+    "nextSpeaker": "سخنران بعدی",
+    "speakerTimePerSpeaker": "زمان بلندگو (چپ / سرپوش)",
+    "speakerTimeTotal": "زمان بلندگو (سمت چپ / کل)",
+    "perSpeaker": "(به ازای هر گوینده)",
+    "paused": "(مکث شده)",
+    "pauseReason": "مکث: {reason}",
+    "dash": "-"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "هر نماینده - موضوع جلسه (الزامی)",
+    "intro": "همان شش بعد نامزدهای کمیته بهترین نماینده. قبل از ارسال نامزدها به SMT ({completeCount}/{total} تکمیل شده) باید <strong>هر نماینده نشسته</strong> را نمره دهید.",
+    "complete": "کامل",
+    "incomplete": "ناقص",
+    "saving": "در حال ذخیره...",
+    "saveThisDelegate": "این نماینده را ذخیره کنید",
+    "autosaved": "ذخیره خودکار",
+    "autosaveFailed": "ذخیره خودکار انجام نشد",
+    "autosavedWithCountry": "ذخیره خودکار — {country}",
+    "delegateFallback": "نماینده"
   }
 }

@@ -105,7 +105,7 @@ export default async function DashboardLayout({
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
   const navRole = showStaffNav ? role ?? null : null;
   const appName = getAppName();
-  const displayName = profile?.name?.trim() || "Delegate";
+  const displayName = profile?.name?.trim() || t("defaultDisplayName");
   const userEmail = user.email ?? "";
   const translatedCommittee = activeConf.committee
     ? translateCommitteeLabel(tCommitteeLabels, activeConf.committee)
@@ -134,7 +134,7 @@ export default async function DashboardLayout({
       <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden bg-[var(--sidebar-material)] shadow-[inset_-1px_0_0_0_var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
         <Link
           href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
-          aria-label={`${appName} home`}
+          aria-label={t("appHomeAria", { appName })}
           className="flex shrink-0 items-center justify-center gap-0 border-b border-[var(--hairline)] px-2 py-5 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-[color:var(--discord-hover-bg)]"
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />

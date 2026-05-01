@@ -29,7 +29,7 @@
     "setCommitteeCode": "委員会コードを設定する"
   },
   "committeeGateForm": {
-    "allocationLabel": "配属（国・役職）",
+    "allocationLabel": "配置（国・役職）",
     "selectAllocation": "割り当てを選択してください",
     "allocationMatchHint": "この会議のアカウントに割り当てられた割り当てと一致する必要があります。",
     "preselectedHint": "サインアップ リンクから事前に選択されています。",
@@ -167,7 +167,7 @@
     "rollPresentVoting": "プレゼンと投票",
     "rollPresentVotingTitle": "出席と投票 — 必ず投票しなければなりません、棄権はできません",
     "rollAbsent": "不在",
-    "rollCallForCountry": "Roll call for {country}",
+    "rollCallForCountry": "{国}の点呼",
     "presetCustom": "カスタム",
     "presetSetAgenda": "議題設定の動議",
     "presetExtendOpeningSpeech": "冒頭演説時間延長動議",
@@ -227,7 +227,7 @@
     "accept": "受け入れる",
     "deny": "拒否",
     "beginVotingMostDisruptive": "投票を開始します (最も混乱のあるものから順に)",
-    "pendingVoteOrderMostDisruptive": "保留中 — 投票順序 (最も混乱のあるものから順)",
+    "pendingVoteOrderMostDisruptive": "保留中 — 投票順序 (最も混乱を招くものから順)",
     "untitled": "無題",
     "withdraw": "撤回する",
     "procedurePreset": "手順のプリセット",
@@ -273,7 +273,7 @@
     "noRollRowsYet": "まだロール行がありません。 この委員会の割り当てマトリックスから代表者プラカードごとに 1 行を作成するように初期化します。",
     "delegates": "代表者",
     "delegateRollStatusHint": "3 つのボタンを使用して、その代理人のロール ステータスを設定します。 現在のステータスが強調表示されます。",
-    "majorityHelp": "手続き的なモーションの場合はシンプルです。 決議、修正案、および修正案を承認する動議は 3 分の 2 (修正案の事前設定)。",
+    "majorityHelp": "手続き的なモーションの場合はシンプルです。 決議、修正案、および修正案を承認するための動議は 3 分の 2 を占めます (修正案が事前に設定されています)。",
     "agendaTopicCommittee": "議題（委員会）",
     "noTopicsAvailable": "利用可能なトピックがありません",
     "topicPurpose": "テーマ・目的",
@@ -301,10 +301,10 @@
     "saveEdits": "編集を保存する",
     "deleteMotionConfirm": "このモーションを完全に削除しますか? 記録されたすべての投票は削除され、動議は記録から消えます。",
     "deleteMotion": "モーションの削除",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "タリー: はい {はい} | いいえ {いいえ} | 投票用紙 {合計}",
     "ballotsHelp": "投票用紙 = はいまたはいいえが記録されたプラカード (棄権は個別に追跡され、この分母にはカウントされません)。 クリアすると、記録された投票が削除されます。 手続き型モーションの場合、結果はロールに存在するメンバーと [はい] を比較します (ロールコールのセクションを参照)。",
     "recordVotesLabel": "投票を記録する",
-    "currentMotion": "現在の動き",
+    "currentMotion": "現在のモーション",
     "recordVotesHelp": "議長は割り当てごとに投票を登録します。 棄権は、ロールステータスが「存在」で投票していない場合、修正/決議投票の場合にのみ表示されます。 点呼・投票のモーション中に、権利付きの「はい/いいえ」をキャプチャできます。",
     "delegatesCannotVoteHelp": "参加者はアプリ内で投票することはできません。 議長は割り当てごとに投票を記録します。 棄権は、その代表団が「出席および投票」とマークされていない場合、決議/修正の投票に対してのみ表示されます。",
     "delegateRollForMotion": "このモーションの参加者ロール",
@@ -313,7 +313,104 @@
     "unitMinutesShort": "メートル",
     "unitSecondsShort": "s",
     "apply": "適用する",
-    "motionControl": "Motion control"
+    "motionControl": "モーションコントロール",
+    "advancedSpeakerResetClock": "高度なスピーカーとスピーカーごとのクロックのリセット。",
+    "writeSpeechNoteFirst": "スピーチメモを保存する前に何か書いてください。",
+    "speechNoteSaved": "スピーチメモが保存されました。",
+    "speechNoteDeleted": "発言メモは削除されました。",
+    "announcementPosted": "お知らせを掲載しました。",
+    "announcementPinnedToFloor": "委員会フロアにピン留めされています。",
+    "announcementUnpinned": "固定されていません。",
+    "announcementBodyRequired": "アナウンス本文を空にすることはできません。",
+    "announcementUpdated": "お知らせが更新されました。",
+    "deleteAnnouncementConfirm": "このお知らせを完全に削除しますか? これを元に戻すことはできません。",
+    "announcementDeleted": "お知らせが削除されました。",
+    "noAllocationsToAdd": "追加する割り当てはありません。",
+    "rollCallRowsAlreadyExist": "ロールコールには、すべての割り当ての行がすでに存在します。",
+    "rollCallRowsAdded": "{count} 件の点呼行を追加しました。",
+    "motionCreatedOpened": "モーションが作成され、開かれました。",
+    "motionUpdated": "モーションが更新されました。",
+    "motionClosed": "モーションは終了しました。",
+    "motionAlreadyOpenReopenBlocked": "別の動議がすでに投票に向けて開始されている。 これを再度開く前に閉じてください。",
+    "motionReopened": "動きが再開されました。",
+    "motionFloorOpened": "フロアオープンのモーション - 以下に記載されている各モーションを記録します。",
+    "motionFloorClosed": "動議の発言のためのフロアは閉鎖されました。",
+    "openMotionFloorFirst": "まずステートメント用のモーションフロアを開きます。",
+    "openMotionBlocksRecording": "動議はすでに投票に向けて開始されている。 さらにステートメントを記録する前に、それを閉じてください。",
+    "statedMotionRecorded": "記載された動議が記録されました (まだ投票は受け付けられていません)。",
+    "statedMotionRemoved": "記載された動議は削除されました。"
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} 完了 - この委員会に同期済み",
+      "loading": "読み込み中...",
+      "resetChecklist": "チェックリストをリセットする"
+    },
+    "prepPage": {
+      "description": "会議前の確認項目: ルール、議題、会場、資料、運営体制。この委員会の全チェア間で同期され、リセットすると全員分がクリアされます。",
+      "crisisHidden": "この委員会タイプでは、危機（Crisis）専用の準備項目は非表示です。"
+    },
+    "flowPage": {
+      "description": "通常委員会の進行フローです。進行に合わせてチェックを入れてください。チェアのアカウント／端末間で共有され、リセットすると全員分がクリアされます。"
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "ルールと議事手順"
+        },
+        "topic": {
+          "title": "委員会と議題"
+        },
+        "room": {
+          "title": "会場・機材"
+        },
+        "materials": {
+          "title": "資料・運営準備"
+        },
+        "crisis": {
+          "title": "危機（該当する場合）"
+        },
+        "team": {
+          "title": "チーム連携・コミュニケーション"
+        }
+      },
+      "items": {
+        "rop": "委員会の議事規則（RoP）を読み、運用を理解する",
+        "parliamentary": "議事進行手順（モーション、ポイント、採決）を確認する",
+        "speaking-times": "発言時間と制限時間を確認する",
+        "quorum": "定足数と採決要件を確認する",
+        "research": "委員会議題の背景を事前調査する",
+        "study-guide": "スタディガイドと主要文書を読み込む",
+        "dashboard-topic": "ダッシュボード上の委員会名と議題設定を確認する",
+        "agenda": "セッションのアジェンダと進行順を準備する",
+        "digital-room": "デジタルルームを設定する（参加者一覧・プラカード）",
+        "tech-check": "技術チェック（プラットフォーム、音声、画面共有）を行う",
+        "backup": "技術トラブル時のバックアップ手順を用意する",
+        "roll-plan": "点呼リストと出欠確認方法を準備する",
+        "speakers-plan": "スピーカーズリストの運用方法を決める",
+        "templates": "よく使うモーション／ポイントを準備する（テンプレ使用時）",
+        "timing": "セッション開始時刻と休憩時間を確認する",
+        "crisis-slides": "危機要素を確認し、スライドを更新する",
+        "crisis-cues": "危機時の発言順・進行キューを計画する",
+        "crisis-paths": "危機シナリオの分岐と根拠情報を準備する",
+        "co-chairs": "役割分担を共同チェアと調整する",
+        "staff": "スタッフ／ダイスの補助体制と合図を確認する",
+        "delegate-brief": "参加者向けブリーフ（ルール・時間配分）を準備する"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "点呼",
+        "open-floor": "フロアを開く（ポイント／モーション）",
+        "recognize": "モーションを認定する",
+        "vote-1": "モーションを採決する",
+        "engage": "選択されたモーションを進行する、またはGSLへ移行する",
+        "open-again": "再びフロアを開く",
+        "recognize-repeat": "モーションを認定する（必要に応じて繰り返し）",
+        "vote-2": "モーションを採決する",
+        "cycle": "進行サイクルを継続する（モーション進行／GSL → フロア再開）"
+      }
+    }
   },
   "language": {
     "label": "言語",
@@ -352,10 +449,12 @@
   },
   "dashboardLayout": {
     "helpCenter": "ヘルプセンター",
-    "settings": "設定"
+    "settings": "設定",
+    "appHomeAria": "{アプリ名} ホーム",
+    "defaultDisplayName": "代表者"
   },
   "authWizard": {
-    "enterApp": "Enter {appName}",
+    "enterApp": "{アプリ名}を入力してください",
     "welcomeSignup": "最初にカンファレンス コードを入力し、参加方法を選択して、アカウントを作成します。",
     "welcomeLogin": "最初に会議コードを入力し、参加方法を選択して、サインインします。",
     "conferenceTitle": "カンファレンスに参加してください",
@@ -366,7 +465,7 @@
     "whatIsYourRole": "あなたの役割は何ですか?",
     "moveCircleRole": "円を移動して、それぞれの役割を選択します。",
     "confirm": "確認する",
-    "dragHint": "リングの周囲をドラッグするか、矢印/矢印キーを使用して役割を変更します。",
+    "dragHint": "リングの周りをドラッグするか、矢印/矢印キーを使用して役割を変更します。",
     "backToRole": "役割に戻る",
     "signIn": "サインイン",
     "createAccount": "アカウントを作成する",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "議長は、各スロットをスコア ページにドラフトとして保存します。 それらの草案はここには示されていません。 必要なスロットがすべて完了したら、議長は [候補を SMT に送信] をクリックする必要があります。そうすると、この表にレビュー保留中の行が表示されます。",
     "noRowsForCommittee": "この委員会には保留中の行はありません。 選ぶ",
     "orAnotherTab": "または別のタブ。",
-    "topRank": "Top {rank}",
+    "topRank": "トップ {ランク}",
     "bandInitialsTitle": "バンドイニシャル：B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "最優秀代表者（委員会）",
@@ -596,8 +695,8 @@
     "subtitle": "各セッションのセカンドゲート委員会コードを設定し、参加者ダッシュボードを使用せずに演壇の議長を招待または昇進します。"
   },
   "delegateDashboard": {
-    "welcome": "Welcome, Delegate of {flag} {country}",
-    "activeCommitteeIntro": "Active committee: {line}.",
+    "welcome": "ようこそ、{旗} {国} の代表者",
+    "activeCommitteeIntro": "アクティブな委員会: {行}。",
     "activeCommitteeBody": "カウントダウンの日付はこの委員会の全員と共有されます。 あなたの準備、スタンス、書類はあなたのアカウントに残ります。",
     "tabs": {
       "ariaLabel": "ダッシュボードのセクション",
@@ -677,7 +776,7 @@
   },
   "eventGatePage": {
     "title": "カンファレンスに参加してください",
-    "description": "主催者から提供された <conf> 会議コード</conf> を入力します。 次の画面で、特定のセッションの <comm>委員会コード</comm> を入力します。",
+    "description": "主催者から提供された <conf> 会議コード</conf> を入力します。 次の画面で、特定のセッションの <comm>コミッティー コード</comm> を入力します。",
     "alreadyEnteredCommittee": "すでに会議コードを入力していますか? 委員会ステップ→"
   },
   "smtLayout": {
@@ -696,10 +795,10 @@
     "sessionFloorBanner": "<floor>セッションフロア</floor> (タイマー、スピーカー、点呼) は、<chairs>台の椅子</chairs>のみに適用されます。 監視のために以下の <ライブ>ライブ委員会</ライブ> を使用するか、特定のセッションが必要な場合は代表者などの委員会コードを入力します。",
     "welcomeSg": "事務局長さん、ようこそ！",
     "whichCommittee": "どの委員会に参加したいですか?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count、複数、one {# セッション} other {# セッション}}",
     "topicLabel": "トピック：",
     "chairsLabel": "椅子:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "{名前}のロゴ",
     "eslFriendly": "ESLフレンドリー"
   },
   "chairNav": {
@@ -725,6 +824,7 @@
       "session": "セッション",
       "speakers": "スピーカー",
       "formalMotions": "正式な動作",
+      "discipline": "懲戒",
       "timer": "タイマー",
       "announcements": "お知らせ",
       "motionsPoints": "モーションとポイント",
@@ -881,7 +981,7 @@
     },
     "resolutions": {
       "enterDelegateEmailFirst": "最初に代理人のメールアドレスを入力します。",
-      "sentToDelegate": "Sent to {email}.",
+      "sentToDelegate": "{メール} に送信されました。",
       "newResolution": "新しい解決策",
       "maxDraftResolutions": "この委員会にはすでに {count} 件の決議案があります。",
       "googleDocLink": "Googleドキュメントへのリンク",
@@ -894,15 +994,15 @@
       "openInNewTab": "新しいタブで開く",
       "noGoogleDocLink": "Google ドキュメントのリンクがありません",
       "visibleToOtherBloc": "他のブロックからも参照可能",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
-      "blocButton": "Bloc {name} ({stance})",
+      "resolutionCounts": "メインサブ: {main} | 副サブ: {co} | 署名者: {署名者}",
+      "blocButton": "ブロック {名前} ({スタンス})",
       "signVirtually": "バーチャルで署名（メインサブウーファーに通知）",
       "shareByEmail": "解決策をメールで共有する",
       "delegateEmailPlaceholder": "delegate@email.com",
       "sendToDelegate": "代理人に送信",
       "clauseEditor": "条項エディタ",
       "noClausesYet": "まだ条項はありません。",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "条項 {数値}",
       "saveClause": "句の保存",
       "delete": "消去",
       "addClausePlaceholder": "新しい条項を追加...",
@@ -930,7 +1030,7 @@
       "helpMustVoteTitle": "投票しなければなりません",
       "helpMustVoteBody": "この動議を「必須投票」項目としてマークします。 これは、要件を参加者に伝えるために使用されます (委員会の設定に応じて)。",
       "saveSettings": "設定を保存する",
-      "delegateBlurb": "議席は開会中の投票を記録します（点呼など）。 ここでの動議投票は、はい/いいえのみに従います (棄権は使用されません)。 集計を追跡できます。 参加者はアプリで投票しません。",
+      "delegateBlurb": "議席は、開会中の投票を記録します（点呼など）。 ここでの動議投票は、はい/いいえのみに従います (棄権は使用されません)。 集計を追跡できます。 参加者はアプリで投票しません。",
       "yes": "はい",
       "no": "いいえ",
       "ballots": "投票用紙",
@@ -969,9 +1069,9 @@
         "resolution": "解決"
       },
       "roll": {
-        "absent": "不在（ロール）",
+        "absent": "欠席（ロール）",
         "present_abstain": "出席 — 棄権してもよい (ロール)",
-        "present_voting": "プレゼントと投票（ロール）",
+        "present_voting": "出席かつ投票（ロール）",
         "unknown": "— (ロール)"
       }
     },
@@ -1013,7 +1113,79 @@
       "errImageSize": "画像が大きすぎます (最大 5 MB)。",
       "errUploadFailed": "アップロードに失敗しました。",
       "errStorageSetup": "プロフィール画像の保存が設定されていません。 Supabase プロジェクトで、migration 00100_profile_pictures_storage_bucket.sql を実行するか、profile-pictures という名前のパブリック ストレージ バケットを作成します (README を参照)。",
-      "errPublicUrl": "アップロードされた画像のパブリック URL を解決できませんでした。"
+      "errPublicUrl": "アップロードされた画像のパブリック URL を解決できませんでした。",
+      "fallbacks": {
+        "yourCountry": "あなたの国",
+        "committeeSession": "委員会セッション",
+        "delegate": "代表者",
+        "speechNote": "スピーチメモ",
+        "untitledMotion": "無題のモーション",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "{旗} {国} の代表者を歓迎します",
+        "subtitle": "何から始めたいですか?",
+        "links": {
+          "documents": "書類",
+          "notes": "注意事項",
+          "committeeRoom": "委員会室",
+          "runningNotes": "ランニングノート",
+          "ideas": "アイデア",
+          "guides": "ガイド",
+          "sources": "情報源",
+          "resolutions": "決議",
+          "speeches": "スピーチ",
+          "stances": "スタンス",
+          "crisisSlides": "危機のスライド",
+          "report": "報告",
+          "motions": "モーション",
+          "points": "ポイント"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "あなたのプロフィールにある賞",
+        "rank": "ランク {ランク}",
+        "pending": {
+          "tab": "保留中の指名",
+          "title": "保留中の議長指名",
+          "descriptionSingle": "チェアによって保存され、レビューのために SMT と共有されました。確認後、最終的な賞品が以下に表示されます。",
+          "descriptionTabbed": "チェアによって保存され、レビューのために SMT と共有されました。最終的な賞は確認後に表示されます。"
+        },
+        "recorded": {
+          "tab": "受賞歴の記録",
+          "title": "受賞歴の記録",
+          "description": "議長または SMT があなたをアワードトラッカーに割り当てるとリストされます。最終的な評価はカンファレンスのルールに従います。"
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "あなた、委員長、および関連する委員会の SMT のみに表示されます。",
+        "points": {
+          "title": "椅子のポイント（プライベート）"
+        },
+        "speechNotes": {
+          "title": "議長スピーチメモ（非公開）"
+        },
+        "motions": {
+          "title": "移動したモーション",
+          "description": "委員会のレビューと SMT の監視のためにプロファイルに保存されます。"
+        }
+      },
+      "discipline": {
+        "title": "懲戒処分状況（非公開）",
+        "statusLine": "警告: {warnings} · ストライキ: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+        "votingDisabled": "投票が無効になっています",
+        "speakingSuspended": "発言停止",
+        "removedFromCommittee": "委員会から外された",
+        "updated": "更新日: {値}"
+      },
+      "preview": {
+        "ariaLabel": "プロファイルのプレビュー",
+        "title": "プレビュー",
+        "yourName": "あなたの名前",
+        "usernameNotSet": "ユーザー名が設定されていません",
+        "gradeValue": "グレード {グレード}",
+        "awards": "受賞歴"
+      }
     },
     "guides": {
       "default": {
@@ -1054,8 +1226,8 @@
       "glossary": {
         "title": "MUN アジェンダ用語集",
         "subtitle": "委員会の規約や現在の議題トピックに合わせた独自の用語。",
-        "committeeCode": "Committee code: {code}",
-        "topicTag": "Topic: {topic}",
+        "committeeCode": "委員会コード: {コード}",
+        "topicTag": "トピック: {トピック}",
         "sources": {
           "core": "コア",
           "committee": "委員会",
@@ -1290,9 +1462,9 @@
       "add": "追加",
       "noIdeasYet": "まだアイデアはありません。",
       "ideaLabel": "アイデア",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "アイデア {数値}",
       "linkedDoc": "リンクされたドキュメント",
-      "addedOn": "Added {date}",
+      "addedOn": "{日付}を追加しました",
       "edit": "編集",
       "delete": "消去",
       "ideaDocument": "アイデアドキュメント",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "委員会",
+      "yourContext": "あなたのコンテキスト",
+      "roleLabel": "役割",
+      "seatLabel": "シート",
       "clearSearchTitle": "検索をクリアしてすべての委任を表示",
       "vacantLabel": "空いている",
+      "assignedLabel": "割り当て済み",
+      "daisLabel": "ダイス",
+      "phaseLabel": "段階",
+      "phaseVoting": "投票",
+      "phaseDebate": "議論",
+      "focusSearchTitle": "フォーカス検索 (クエリに一致するタイトルと名前)",
+      "tipLabel": "ヒント",
       "searchVacantTitle": "室内の「空席」を検索する",
       "searchHint": "国、代表者名、学校、代名詞、または「空席」を入力して、ルーム内で一致するものを強調表示します。 Enter を押して最初の一致にジャンプします。 Esc でクリアします。 「空席」をクリックして空席にジャンプします。",
       "findLabel": "代表団または演壇メンバーを探す",
       "searchPlaceholder": "国、名前、学校…",
       "matchesCount": "{total} 席中 {matches} が一致",
+      "enterScrolls": "巻物を入力してください",
+      "typeToFilterHint": "フィルターに入力 - 最初に一致するスクロールを入力してください",
+      "noMatches": "一致する代表団や演壇席はありません。",
+      "digitalDisplay": "デジタル表示",
+      "floorLabel": "床",
+      "staffSeatsHeading": "スタッフ - 席",
       "searchAria": "代表団を検索する",
       "virtualRoomVacant": "空いている",
-      "profileAria": "View profile: {country}",
+      "profileAria": "プロフィールを表示: {国}",
       "vacantSeatAria": "空席",
-      "placardAria": "Placard {country}",
-      "gavelAria": "小槌"
+      "placardAria": "プラカード {国}",
+      "gavelAria": "小槌",
+      "viewProfileAria": "プロフィールを見る: {タイトル}",
+      "noProfileLinkAria": "{title} (プロフィールリンクなし)",
+      "committeeFloor": "委員会フロア",
+      "virtualRoomFigureAria": "仮想委員会室 - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "委任のフィルタリング。 最初に強調表示される席は、リングでの最初の試合です。",
+      "helperText": "プラカードには、各代表者のプロフィールにある国 (割り当てから)、名前、学校、代名詞がリストされています。 「プロフィール」で自分のプロフィールを編集します。 空の委員会席は「空席」と表示されます。 記入されたプラカードまたは演壇をクリックすると、そのメンバーのページが開きます (そこからチャットとレポートが表示されます)。",
+      "virtualRoomCaption": "国、名前、学校、代名詞を示す代表者のプラカードを掲げた仮想モデル国連委員会室。"
     },
     "session": {
       "requestToSpeak": {
@@ -1360,7 +1555,7 @@
         "helpBody": "代表団を議長の列に送ります。 一度に 1 つのアクティブな待機中/現在のリクエストを持つことができます。",
         "purposeLabel": "オプションの目的 (キューラベルに表示)",
         "purposeHelpTitle": "目的ラベル",
-        "purposeHelpBody": "このテキストは国名に追加されるため、議長は発言を要求する理由を確認できます。",
+        "purposeHelpBody": "このテキストは国名に追加されるため、議長は発言を要求する理由を理解できます。",
         "purposePlaceholder": "例えば サポート + 修正の概要",
         "requesting": "リクエスト中...",
         "rollPromptTitle": "議長の承認が必要です",
@@ -1379,7 +1574,7 @@
         "motioner": "モーションナー",
         "majority": "過半数",
         "majoritySimple": "単純",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "はい {はい} - いいえ {いいえ} - 合計 {total}",
         "help": "演壇は、会期中の各代表団の投票を記録する。 動議の投票では、「はい」または「いいえ」のみが使用されます (棄権はありません)。 合計には、「はい」または「いいえ」が記録されたプラカードのみがカウントされます。 不在の代表はスキップされます。"
       },
       "activeMotion": {
@@ -1396,14 +1591,14 @@
         "speakerTimeLeftTotal": "講演時間（左/合計）",
         "perSpeaker": "(スピーカーごと)",
         "paused": "(一時停止)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "一時停止: {理由}"
       },
       "floorStatus": {
         "sessionTime": "セッション時間",
         "sessionNotStarted": "セッションが開始されていません",
         "limit": "限界",
-        "limitRemaining": "{value} left",
-        "limitOverBy": "over by {value}",
+        "limitRemaining": "残り {値}",
+        "limitOverBy": "{値}以上",
         "quickLinkSession": "セッション",
         "quickLinkRoll": "ロール",
         "quickLinkSpeakers": "スピーカー",
@@ -1437,7 +1632,7 @@
         "startedLabel": "開始:",
         "timeInLabel": "滞在時間:",
         "timeUntilEndLabel": "終了までの時間:",
-        "overByValue": "over by {value}",
+        "overByValue": "{値}以上",
         "modeLabel": "モード：",
         "modeStopwatchNoLimit": "ストップウォッチ（時間制限なし）",
         "sessionNotRunning": "セッションが実行されていません。",
@@ -1480,8 +1675,8 @@
         "delete": "消去",
         "deleteConfirm": "このセッションを履歴から削除しますか?",
         "sessionNamePrompt": "セッション名",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{範囲}",
+        "rangeOngoing": "{範囲} -> 進行中"
       },
       "timerPage": {
         "title": "タイマー",
@@ -1491,14 +1686,14 @@
         "tabClock": "2) クロック制御",
         "tabNotes": "3) スピーチメモ",
         "tabLog": "4) ログの一時停止",
-        "setupHelp": "このタイマーが一般議案用 (常に参加者に表示される) か、投票のために開かれている動議に関連付けられる (その投票がアクティブなアイテムの間のみ参加者に表示される) かを選択します。 発言者ごとの時間をオンにすると、穏健党員集会中も時計は表示されたままになります。 クロックを一時停止/クロックのフリーズを開始、またはカウントダウンを再開します。 スピーカー時間（残り）と合計時間を個別に設定し、タイマーを保存します。 プリセットは両方を同じ長さまで埋めます。 どちらのフィールドも後で編集できます。 一時停止は短い理由とともに記録されます。",
+        "setupHelp": "このタイマーが一般議決用 (常に参加者に表示される) か、投票のために開かれている動議に関連付けられる (その投票がアクティブなアイテムの間のみ参加者に表示される) かを選択します。 発言者ごとの時間をオンにすると、穏健党員集会中も時計は表示されたままになります。 クロックを一時停止/クロックのフリーズを開始、またはカウントダウンを再開します。 スピーカー時間（残り）と合計時間を個別に設定し、タイマーを保存します。 プリセットは両方を同じ長さまで埋めます。 どちらのフィールドも後で編集できます。 一時停止は短い理由とともに記録されます。",
         "namedPreset": "名前付きプリセット",
         "applyPreset": "プリセットを適用...",
         "floorLabelDelegates": "フロアラベル (参加者)",
         "floorLabelPlaceholder": "例えば GSL 60s",
         "timerPurpose": "タイマーの目的",
         "purposeGeneralFloor": "一般討論/議場（投票には結びつかない）",
-        "purposeMotionVote": "オープンモーション - 議場で投票がアクティブな間のみタイマー",
+        "purposeMotionVote": "オープンモーション - 議場で投票が有効な間のみタイマー",
         "openMotionForVoting": "公開動議 (投票のために公開されている必要があります)",
         "selectMotion": "モーションを選択...",
         "untitled": "無題",
@@ -1516,7 +1711,7 @@
         "currentSpeaker": "現在のスピーカー",
         "nextSpeaker": "次の講演者",
         "speechNotesCurrentSpeaker": "スピーチメモ（現在の講演者）",
-        "speechNotesHelp": "メモは現在の講演者のタイマー テキストに関連付けられており、講演者リストに「現在の」とマークされた人がいる場合、その代表者は参照用に保存されます。",
+        "speechNotesHelp": "メモは現在の講演者のタイマー テキストに関連付けられており、講演者リストに「現在の」とマークされている人がいる場合、その代表は参照用に保存されます。",
         "timerFloorLabel": "タイマー（フロア）：",
         "speakerListCurrent": "講演者リスト (現在):",
         "noCurrentDelegation": "講演者リストで「現在」とマークされている代表団はありません。",
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "タイマーはすでに一時停止されています。",
         "pausedForCommittee": "タイマーは委員会のために一時停止しました。",
         "alreadyRunning": "タイマーはすでに実行中です。",
-        "runningForCommittee": "委員会のためにタイマーが作動しています。"
+        "runningForCommittee": "委員会のためにタイマーが作動しています。",
+        "euTimerBoardTitle": "EU議会タイマーボード（11個のタイマー）",
+        "euTimerBoardHelp": "パーティーごとに 1 つのタイマーに加えて、合計時間、POI/POC 時間、スピーカー時間。 [適用] を使用して、[クロック] タブのライブ タイマー フィールド (スピーカー時間 / タイマーの保存) に行をコピーします。",
+        "euTimerName": "名前",
+        "euTimerTag": "タグ",
+        "euTotalTime": "合計時間",
+        "euPoiPocTime": "POI/POC時間",
+        "euSpeakerTime": "講演時間"
       }
     }
   },
@@ -1568,7 +1770,7 @@
     "seats": "席",
     "seatsFilledAllocated": "{filled} が満たされた · {total} が割り当てられた",
     "resolutions": "決議",
-    "openVotes": "オープン投票",
+    "openVotes": "公開投票",
     "editMetadataIntro": "委員会セッションのメタデータと議長名を編集します。",
     "eventSessionsLink": "イベントと委員会セッション",
     "codesUnder": "。 以下のコード",
@@ -1650,7 +1852,7 @@
     "roomStats": "{placards} 枚のプラカード · {flagged} に議長のメモが付いています · {count} 件のロールが記録されました",
     "loading": "読み込み中...",
     "noDelegationsMatch": "検索に一致する代表団はありません。",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "ロール {ラベル}",
     "linkedAccount": "リンクされたアカウント",
     "vacantPlacard": "空のプラカード",
     "delegateProfile": "代表者プロフィール ->",
@@ -1661,7 +1863,11 @@
     "adding": "追加中...",
     "addToSpeakerList": "スピーカーリストに追加",
     "reminder": "リマインダー",
-    "privateReminderLabel": "プライベートリマインダー（椅子のみ、同期済み）"
+    "privateReminderLabel": "プライベートリマインダー（椅子のみ、同期済み）",
+    "clearAllConfirm": "すべてのプラカードに、明確な賛辞、懸念、リマインダーのメモがありますか?これにより、共有委員会のコピーが更新されます。",
+    "addedToSpeakerList": "{country} が講演者リストに追加されました。",
+    "committeeFallback": "委員会",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "ライブトピックを選択してください",
@@ -1717,13 +1923,13 @@
     "enterStaffPassword": "スタッフの二次パスワードを入力してください",
     "recipientsTitle": "受信者",
     "delegationsLabel": "代表団",
-    "noDelegations": "この委員会には代表団が割り当てられていません。",
+    "noDelegations": "この委員会には割り当てられた代表者がいません。",
     "delegateTargetsHint": "ターゲットは、割り当てられた割り当てのみに制限されます。",
     "chairsLabel": "椅子",
     "anyChair": "どの椅子でも",
     "noChairs": "椅子のプロファイルが見つかりません。",
     "notesListTitle": "メモリスト",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{数、複数、one {# 音符} other {# 音符}}",
     "emptyList": "まだメモはありません。",
     "forwardedBadge": "(転送されました)",
     "readerWarning": "読者への警告: このメモには不適切な表現が含まれている可能性があります。",
@@ -1823,7 +2029,7 @@
     "committeeCodeLabel": "委員会コード",
     "committeeCodeTitle": "ちょうど 6 つの文字または数字",
     "committeeCodePlaceholder": "例えば ECO741",
-    "committeeCodeHelp": "2 番目のゲート: このイベント内で一意の、正確に 6 つの文字または数字。通常は会議室名の 3 文字と 3 桁の数字 (例: ECOSOC → ECO741)。 英数字以外の文字は保存時に削除されます。",
+    "committeeCodeHelp": "2 番目のゲート: このイベント内で一意の正確に 6 つの文字または数字。通常は会議室名の 3 文字と 3 桁の数字 (例: ECOSOC → ECO741)。 英数字以外の文字は保存時に削除されます。",
     "sectionPassword": "オプション: 委員会のパスワード",
     "passwordIntro": "参加者は、ログイン後に割り当てとこのパスワードを確認します。 スキップするには空白のままにします。",
     "committeePasswordLabel": "委員会パスワード",
@@ -1831,7 +2037,7 @@
     "committeePasswordConfirmLabel": "委員会のパスワードを確認する",
     "committeePasswordConfirmPlaceholder": "パスワードを使用する場合も上記と同じ",
     "creating": "作成…",
-    "submit": "イベント＋委員会を作成してエントリーする"
+    "submit": "イベント＋コミティアを作成してエントリー"
   },
   "serverActions": {
     "committeeGate": {
@@ -1846,7 +2052,7 @@
       "incorrectCommitteePassword": "委員会のパスワードが正しくありません。",
       "requiredConferenceAndStaffPassword": "会議およびスタッフの二次パスワードが必要です。",
       "onlySmtOrAdminBypass": "このサインインは事務局またはWebサイト管理者のみが使用できます。",
-      "incorrectStaffPassword": "スタッフの二次パスワードが間違っています。",
+      "incorrectStaffPassword": "スタッフの二次パスワードが正しくありません。",
       "chooseConference": "カンファレンスを選択します。",
       "passwordMinLength": "パスワードは6文字以上である必要があります。",
       "passwordsDoNotMatch": "パスワードが一致しません。",
@@ -1871,7 +2077,7 @@
       "couldNotParseCsv": "CSVを解析できませんでした。",
       "noDataRowsFound": "データ行が見つかりません (行ごとに少なくとも国/位置が必要です)。",
       "importLimitedRows": "インポートは {max} 行に制限されています。 ファイルを分割します。",
-      "rowTooLong": "Row too long: {row}…",
+      "rowTooLong": "行が長すぎます: {行}…",
       "codeTooLongOnRow": "行のコードが長すぎます: {row}"
     },
     "smtStaffAccess": {
@@ -1888,7 +2094,7 @@
       "missingServiceRoleKey": "サーバーに SUPABASE_SERVICE_ROLE_KEY がありません。 これをデプロイメント環境に追加します (ブラウザーには決して公開しないでください)。",
       "missingPublicAppUrl": "NEXT_PUBLIC_APP_URL を公開サイトの URL (例: https://your-app.vercel.app) に設定して、招待リンクが正しくリダイレ​​クトされるようにします。",
       "emailAlreadyHasAccount": "そのメールにはすでにアカウントがあります。 別の招待状を送信する代わりに、以下の「議長の役割を付与」を使用してください。",
-      "inviteSentButRoleSetFailed": "Invite sent, but could not set chair role on profile: {error}. Use \"Grant chair role\" after they accept.",
+      "inviteSentButRoleSetFailed": "招待は送信されましたが、プロフィールに議長の役割を設定できませんでした: {エラー}。 彼らが承諾した後、「議長の役割を付与」を使用します。",
       "inviteSentSuccess": "招待メールを {email} に送信します。 パスワードを設定すると、議長になります。",
       "onlySmtGrantChair": "事務局のみが議長の役割を与えることができます。",
       "noAccountForEmail": "そのメールアドレスにはまだアカウントがありません。 まず、議長への招待状を送信します。",
@@ -1922,10 +2128,10 @@
       "welcomeLine3": "フロアでお会いしましょう。",
       "chairReminderSubject": "承認待ちのデリゲート割り当てリクエスト",
       "chairReminderLine1": "参加者が割り当てを要求しており、議長のレビューが必要です。",
-      "chairReminderConference": "Conference: {conference}",
+      "chairReminderConference": "カンファレンス: {カンファレンス}",
       "chairReminderAllocation": "リクエストされた割り当て: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
-      "chairReminderEmail": "Account email: {email}",
+      "chairReminderDelegate": "代表者: {名前}",
+      "chairReminderEmail": "アカウントのメールアドレス: {メールアドレス}",
       "chairReminderLine2": "議長割り当てマトリックスでこのリクエストを承認または拒否してください。"
     }
   },
@@ -1957,7 +2163,7 @@
     "crisisSlidesUrl": "危機に関するスライド (Google スライドの URL)",
     "crisisSlidesPlaceholder": "https://docs.google.com/presentation/d/…/edit",
     "crisisSlidesLabel": "危機のスライド",
-    "crisisSlidesHelpPrefix": "FWC / UNSC / HSC の場合: 参加者と議長に埋め込み",
+    "crisisSlidesHelpPrefix": "FWC / UNSC / HSC の場合: 参加者と議長に埋め込まれています",
     "crisisSlidesHelpSuffix": "ページ。 使用しない場合は空白のままにしてください。 デッキでは視聴者が閲覧できるようにする必要があります (リンク共有)。",
     "competingMotionsTitle": "競合動議 (RoP): 穏健党員集会前の協議",
     "moderatedCaucus": "穏健党員集会",
@@ -1995,7 +2201,7 @@
     "committeeFallback": "委員会",
     "showingOneCommitteeAtATime": "一度に 1 つの委員会を表示します。 下部のタブを使用して委員会を切り替えます。",
     "editPlacardCodesSheet": "プラカードコードシートを編集 ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "名簿 · {見出し}",
     "seatsSummary": "{count} 席。",
     "linkedDelegatesCannotBeDeleted": "リンクされた代理人はここでは削除できません。",
     "countryPosition": "国・役職",
@@ -2045,7 +2251,7 @@
     },
     "ranking": {
       "title": "委員会ランキング（マトリックス合計）",
-      "description": "ルーブリックの最高値から最低値までの合計 (6 つのセッション基準 x 8)。 指名枠の証拠を介して非公式にタイブレークを行う。"
+      "description": "ルーブリックの最高値から最低値までの合計 (6 つのセッション基準 x 8)。 指名枠の証拠に基づく非公式のタイブレーク。"
     },
     "types": {
       "committeeBestDelegate": {
@@ -2087,7 +2293,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "あなたの委員会",
     "fallbackCommittee": "委員会",
-    "welcome": "Welcome, Chair of {committee}",
+    "welcome": "ようこそ、{委員会}の委員長",
     "featureStrip": "デジタル ルーム · モーション · 投票 · スピーカー",
     "activeCommitteeLine": "アクティブな委員会: <line></line>。 セッションデータはアカウントを通じて同期されます。 この委員会の準備/フローのチェックリストとモーションとポイントはこのブラウザに保存されます。これは、<seamuns>SEAMUNs 議長室</seamuns> と同じ考え方です。",
     "tiles": {
@@ -2183,13 +2389,13 @@
     },
     "tierLow": "低い",
     "tierHigh": "高い",
-    "tierPromptLocked": "Locked in: {band} - {tier} ({score})",
+    "tierPromptLocked": "ロックイン: {バンド} - {tier} ({score})",
     "tierPromptPick": "{band} (1 ～ 8 スケールのポイント) 内で低い値または高い値を選択します。",
     "criteria": {
       "creativity": {
         "label": "創造性",
         "bands": {
-          "0": "反復的な解決策または標準的な解決策を提案します。 既存の枠組みの外で考えることはほとんどありません。",
+          "0": "反復的なソリューションまたは標準的なソリューションを提案します。 既存の枠組みの外で考えることはほとんどありません。",
           "1": "いくつかの独創的なアイデアを提供していますが、変化する委員会の力学にそれを適応させるのに苦労しています。",
           "2": "革新的な解決策や決議案のユニークな条項を頻繁に提案します。",
           "3": "非常に創造的です。 衝突するブロックを橋渡しする「ゲームを変える」妥協策を開発します。"
@@ -2307,7 +2513,7 @@
         "label": "共同議長との連携",
         "bands": {
           "0": "1 つの椅子が優勢です。 コミュニケーションが不足すると、一貫性のない裁定が生じます。",
-          "1": "仕事は分割されていますが、椅子はサイロで動作します。 受賞決定に関する最小限の協議。",
+          "1": "仕事は分割されていますが、椅子はサイロで運営されています。 受賞決定に関する最小限の協議。",
           "2": "バランスのとれたパートナーシップ。 セッション中の明確なコミュニケーションと相互サポート。",
           "3": "シームレスな相乗効果。 椅子は互いのニーズを先取りし、統一されたプロフェッショナルなフロントを提供します。"
         }
@@ -2318,7 +2524,7 @@
           "0": "手順規則 (RoP) における頻繁なエラー。 事務局の支援に大きく依存しています。",
           "1": "基本的な RoP 知識。 標準的な穏健派党員集会を実行することはできるが、動議の微妙なニュアンスを見逃している。",
           "2": "RoP の強力なコマンド。 最小限のエラーで効率的かつ公正にフロアを管理します。",
-          "3": "絶対的な習得。 RoP を使用して議論の流れを強化し、複雑な手続き状況を簡単に処理します。"
+          "3": "絶対的な熟練。 RoP を使用して議論の流れを強化し、複雑な手続き状況を簡単に処理します。"
         }
       },
       "country_stances_topic": {
@@ -2474,6 +2680,130 @@
           "3": "シームレスな相乗効果。 高座はプロフェッショナルで一か八かの環境を刺激します。"
         }
       }
+    },
+    "maxPoints": "最大 {ポイント} ポイント",
+    "reference": {
+      "title": "SEAMUN I 公式賞のルーブリック",
+      "description": "参考コピー: 賞の種類、評価プロセス、および完全な 1 ～ 8 バンド マトリックス (カンファレンスのルーブリックより)。 InterMUN でのスコアリングでは、推薦が提出されたときと同じ基準キーが使用されます。"
+    },
+    "sections": {
+      "catalogue": "受賞カタログ",
+      "processOversight": "受賞プロセスと監督",
+      "calibrationTraining": "椅子のキャリブレーションとトレーニング (1 ～ 8 スケール)"
+    },
+    "headings": {
+      "conferenceWideOverall": "カンファレンス全体（全体）",
+      "collectiveChair": "コレクティブとチェア",
+      "committeeLevel": "委員会レベル"
+    },
+    "matrices": {
+      "positionPaper": "ポジションペーパー（ベストポジションペーパー）",
+      "delegateLiveSessions": "デリゲート (ライブセッション)",
+      "chairPerformance": "椅子のパフォーマンス",
+      "chairReportOverall": "議長報告書 - 全体",
+      "chairReportSectionSpecific": "議長報告書 - セクション別",
+      "bestCommittee": "最優秀委員会"
+    },
+    "evidenceNote": "議長は、SMT 記録の完全な証拠と書面による確認: 優秀性と正当性の主な証拠と次点者に対する証拠 (公開されたフォームによる)。",
+    "footnotes": {
+      "delegateLiveSessions": "創造性、外交、コラボレーション、リーダーシップ、知識と研究、参加 - 各 8 ポイント。",
+      "chairPerformance": "ベストチェア/チェア評価アラインメントでは、8 つの寸法がそれぞれ 8 ポイントでスコア付けされました。",
+      "chairReportSectionSpecific": "上記の全体セクションと組み合わせると、公式文書の拡張スケールで議長レポートの合計スコアは最大 72 になります。"
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "現在のセッションの委員会割り当てマトリックス。 これは椅子の読み取り専用であり、アクティブな座席の割り当てとプラカード コードを反映します。",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "割り当て",
+      "flag": "フラグ",
+      "email": "電子メール",
+      "name": "名前",
+      "grade": "学年",
+      "notes": "注意事項",
+      "requestedAllocation": "要求された割り当て",
+      "account": "アカウント",
+      "actions": "アクション"
+    },
+    "noRows": "この委員会の割り当て行が見つかりません。",
+    "pendingApprovalsTitle": "保留中のサインアップ承認",
+    "pendingApprovalsIntro": "議長は、参加者が正しいアカウントを使用していることを確認するために、割り当てリンクのサインアップを承認または拒否します。",
+    "noPendingRequests": "保留中のリクエストはありません。",
+    "unknownAllocation": "不明な割り当て",
+    "approve": "承認する",
+    "reject": "拒否する"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "割り当てマトリックス",
+    "selectConferenceEventFirst": "最初に会議イベントを選択します。",
+    "enterConferenceCode": "会議コードを入力してください",
+    "intro": "アクティブなイベントの各委員会の座席リストを作成またはインポートします。 参加者はサインイン後、委員会のゲートで自分の列を選択します。 プラカード コードはスプレッドシート ID と一致します。"
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "発言者リスト",
+    "addedToSpeakerList": "講演者リストに追加しました。",
+    "chooseDelegationsNotAlreadyQueued": "まだ待機していないか、リストに現在載っていない代表団を選択してください。",
+    "addedSpeakersInOrder": "委員会リストの順序に {count} 人の講演者を追加しました。",
+    "introPrefix": "発言順に代表を追加します。代表は委員会ルームで引き続き",
+    "requestToSpeak": "発言リクエスト",
+    "introMiddle": "を使えます。1人あたりの発言時間と",
+    "sessionTimerLink": "セッション → タイマー",
+    "introSuffixPrefix": "の操作には",
+    "advanceSpeaker": "次の発言者へ",
+    "addDelegation": "代表を追加",
+    "select": "選択してください…",
+    "add": "追加",
+    "addSelectedToList": "選択したものをリストに追加",
+    "dismissReminder": "リマインダーを閉じる",
+    "moveUp": "上に移動",
+    "moveDown": "下に移動",
+    "status": {
+      "current": "発言中",
+      "waiting": "待機中"
+    },
+    "current": "現在",
+    "remove": "削除",
+    "prompt": {
+      "gslTitle": "一般発言者リスト（GSL）",
+      "moderatedTimerTitle": "モデレーテッド・コーカス（発言者別タイマー）",
+      "moderatedPassedTitle": "モデレーテッド・コーカスが可決されました",
+      "bodyPrefix": "以下の講演者リストを使用して、",
+      "add": "追加",
+      "bodyAddMiddle": "（ドロップダウン +",
+      "bodyAddMiddle2": "、または代表をチェックして",
+      "bodyRemovePrefix": "）し、",
+      "remove": "削除",
+      "bodyRemoveMiddle": "は",
+      "bodyRowSuffix": "で行えます。矢印で並べ替えるか、発言者には",
+      "bodyEnd": "を設定してください。",
+      "noAllocations": "この委員会にはまだ割り当てがロードされていません。準備ができたら閉じます。後でリスト コントロールからスピーカーを追加できます。",
+      "quickAdd": "クイック追加 (まだ待機していないか、現在ではありません)",
+      "alreadyQueued": "すべての割り当てには、待機中のスロットまたは現在のスロットがすでにあります。順序を変更する必要がある場合はエントリを削除するか、完了したら閉じます。"
+    }
+  },
+  "timersWidget": {
+    "timer": "タイマー",
+    "currentSpeaker": "現在のスピーカー",
+    "nextSpeaker": "次の講演者",
+    "speakerTimePerSpeaker": "講演者時間（左/キャップ）",
+    "speakerTimeTotal": "講演時間（左/合計）",
+    "perSpeaker": "(スピーカーごと)",
+    "paused": "(一時停止)",
+    "pauseReason": "一時停止: {理由}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "すべての参加者 — セッションのルーブリック (必須)",
+    "intro": "委員会の最優秀代議員の指名と同じ 6 つの次元。 SMT に推薦を送信する前に、<strong>着席しているすべての参加者</strong>にスコアを付ける必要があります ({completeCount}/{total} complete)。",
+    "complete": "完了",
+    "incomplete": "不完全",
+    "saving": "保存中...",
+    "saveThisDelegate": "この代理人を保存します",
+    "autosaved": "自動保存",
+    "autosaveFailed": "自動保存に失敗しました",
+    "autosavedWithCountry": "自動保存 — {国}",
+    "delegateFallback": "代表者"
   }
 }

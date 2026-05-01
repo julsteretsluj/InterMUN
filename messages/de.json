@@ -31,7 +31,7 @@
   "committeeGateForm": {
     "allocationLabel": "Zuordnung (Land / Position)",
     "selectAllocation": "Wählen Sie Ihre Zuteilung aus",
-    "allocationMatchHint": "Muss mit der Zuweisung übereinstimmen, die Ihrem Konto für diese Konferenz zugewiesen ist.",
+    "allocationMatchHint": "Muss mit der Ihrem Konto für diese Konferenz zugewiesenen Zuteilung übereinstimmen.",
     "preselectedHint": "Vorausgewählt über Ihren Anmeldelink.",
     "committeePasswordPlaceholder": "Wird von Ihrem Lehrstuhl bereitgestellt",
     "verifying": "Überprüfen…"
@@ -79,7 +79,7 @@
     "delegateEmailLabel": "E-Mail delegieren",
     "delegateEmailHelp": "Geben Sie die genaue E-Mail-Adresse des Kontos ein, mit der sich der Stellvertreter anmeldet.",
     "delegateEmailPlaceholder": "elegate@email.com",
-    "allocationHelp": "Wählen Sie aus, welches Land/Sitz Sie zuweisen möchten. „Derzeit zugewiesen“ bedeutet, dass dort bereits ein anderer Benutzer verknüpft ist.",
+    "allocationHelp": "Wählen Sie das Land/den Sitz aus, den Sie zuweisen möchten. „Derzeit zugewiesen“ bedeutet, dass dort bereits ein anderer Benutzer verknüpft ist.",
     "selectAllocation": "Zuordnung auswählen",
     "currentlyAssigned": "derzeit zugewiesen",
     "accepting": "Akzeptieren...",
@@ -154,7 +154,7 @@
     "googleDocsUrlOptional": "Google Docs-URL (optional)",
     "googleDocsHelp": "Fügen Sie einen freigegebenen Google Docs-Link ein, um eine Live-Vorschau Ihrer Notizen anzuzeigen. Der Link ist optional; Sie können stattdessen reine Textnotizen führen.",
     "googleDocsPlaceholder": "https://docs.google.com/document/d/…",
-    "googleDocsSaveHint": "Neues Google-Dokument wird in einem anderen Tab geöffnet. Speichern Sie nach dem Einfügen des Links; Die Vorschau wird während der Eingabe aktualisiert.",
+    "googleDocsSaveHint": "Neues Google-Dokument wird in einem anderen Tab geöffnet. Speichern Sie nach dem Einfügen des Links. Die Vorschau wird während der Eingabe aktualisiert.",
     "runningNotesDocument": "Dokument mit laufenden Notizen",
     "readerWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
     "plainTextOptional": "Klartext (optional)",
@@ -167,7 +167,7 @@
     "rollPresentVoting": "Anwesend und abstimmend",
     "rollPresentVotingTitle": "Anwesend und abstimmend – muss abstimmen, darf sich nicht enthalten",
     "rollAbsent": "Abwesend",
-    "rollCallForCountry": "Roll call for {country}",
+    "rollCallForCountry": "Appell für {Land}",
     "presetCustom": "Brauch",
     "presetSetAgenda": "Antrag zur Festlegung der Tagesordnung",
     "presetExtendOpeningSpeech": "Antrag auf Verlängerung der Eröffnungsrede",
@@ -177,7 +177,7 @@
     "presetForAgainstTitle": "Antrag auf Einleitung von Pro- und Contra-Reden zum Resolutionsentwurf",
     "presetCloseDebate": "Antrag auf Abschluss der Debatte",
     "presetExcludePublic": "Antrag auf Ausschluss der Öffentlichkeit",
-    "presetSilentPrayerMeditation": "Minute des stillen Gebets/Meditation",
+    "presetSilentPrayerMeditation": "Minute des stillen Gebets/der Meditation",
     "presetSilentPrayerMotionTitle": "Antrag auf eine Minute des stillen Gebets oder der Meditation",
     "presetRollCallVote": "Antrag auf namentliche Abstimmung",
     "presetMinuteSilentPrayer": "Minute des stillen Gebets",
@@ -212,7 +212,7 @@
     "tabHistory": "5) Geschichte",
     "chairOnlyVotingHelp": "Nur Vorsitz: jeweils nur eine Abstimmung möglich. Delegierte stimmen nicht in der App ab. Verwenden Sie „Stimmen aufzeichnen“, um jedes Plakat anzurufen und nur „Ja“ oder „Nein“ aufzuzeichnen. Verfahrensanträge enthalten keine Stimmenthaltung. Für „Bestanden/Nicht bestanden“ wird die erforderliche Mehrheit der anwesenden Mitglieder benötigt.",
     "euGuidedPhase": "EU-geführte Phase",
-    "euGuidedPhaseHint": "Kernblocker bleiben geführt: Wenn ein Antrag nicht mit dieser Phase übereinstimmt, können Vorsitzende weiterhin eine explizite Override-Bestätigung verwenden.",
+    "euGuidedPhaseHint": "Kernblocker bleiben geführt: Wenn ein Antrag nicht mit dieser Phase übereinstimmt, können Vorsitzende weiterhin eine explizite Überschreibungsbestätigung verwenden.",
     "pointsWorkflow": "Punkte-Workflow",
     "pointOfInformation": "Informationspunkt",
     "pointOfClarification": "Punkt der Klarstellung",
@@ -248,7 +248,7 @@
     "closed": "geschlossen",
     "reopen": "Wieder öffnen",
     "daisAnnouncements": "Dais-Ankündigungen",
-    "daisAnnouncementsHelp": "Verwenden Sie Markdown für Fettdruck, Listen und Links. Stecken Sie eine Linie für den Bodenstreifen fest; Planen Sie einen Veröffentlichungszeitpunkt für die Zukunft und die Delegierten werden ihn erst sehen, wenn dieser Zeitpunkt verstrichen ist. Sie können jede Zeile unten bearbeiten oder löschen.",
+    "daisAnnouncementsHelp": "Verwenden Sie Markdown für Fettdruck, Listen und Links. Stecken Sie eine Linie für den Bodenstreifen fest; Planen Sie einen zukünftigen Veröffentlichungszeitpunkt und die Delegierten werden ihn erst sehen, wenn dieser Zeitpunkt verstrichen ist. Sie können jede Zeile unten bearbeiten oder löschen.",
     "message": "Nachricht",
     "messageToCommittee": "Nachricht an den Ausschuss…",
     "format": "Format",
@@ -268,7 +268,7 @@
     "delete": "Löschen",
     "rollCallTracker": "Appell-Tracker",
     "rollCallHelp": "Präsens: kann sich enthalten. Anwesend und abstimmend: muss mit Ja/Nein stimmen. Abwesend: Es wird kein Stimmzettel erfasst.",
-    "rollCallIntro": "Wählen Sie für jeden Delegierten „Anwesend“ (kann sich der Stimme enthalten), „Anwesend und abstimmend“ (abstimmen) oder „Abwesend“.",
+    "rollCallIntro": "Wählen Sie für jeden Delegierten „Anwesend“ (kann sich der Stimme enthalten), „Anwesend und abstimmen“ (abstimmen) oder „Abwesend“.",
     "initializeRowsAllAllocations": "Zeilen initialisieren (alle Zuordnungen)",
     "noRollRowsYet": "Noch keine Rollreihen. Initialisieren Sie die Erstellung einer Zeile pro Delegiertenplakat aus der Zuordnungsmatrix dieses Ausschusses.",
     "delegates": "Delegierte",
@@ -299,21 +299,118 @@
     "mustVoteHelp": "Markiert dies gemäß Ihren Ausschussregeln als obligatorischen Abstimmungspunkt.",
     "createAndOpenMotion": "Bewegung erstellen und öffnen",
     "saveEdits": "Änderungen speichern",
-    "deleteMotionConfirm": "Diesen Antrag dauerhaft löschen? Alle aufgezeichneten Stimmen dafür werden entfernt und der Antrag verschwindet aus dem Protokoll.",
+    "deleteMotionConfirm": "Diesen Antrag endgültig löschen? Alle aufgezeichneten Stimmen dafür werden entfernt und der Antrag wird aus dem Protokoll gelöscht.",
     "deleteMotion": "Antrag löschen",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Tally: Ja {ja} | Nein {nein} | Stimmzettel {total}",
     "ballotsHelp": "Stimmzettel = Plakate mit einem eingetragenen Ja oder Nein (Enthaltung wird separat erfasst und in diesem Nenner nicht gezählt). Mit „Löschen“ wird eine aufgezeichnete Abstimmung entfernt. Bei Verfahrensanträgen entspricht das Ergebnis dem Ergebnis „Ja“ im Vergleich zu den in der Liste anwesenden Mitgliedern (siehe Abschnitt „Namensaufruf“).",
     "recordVotesLabel": "Stimmen aufzeichnen",
     "currentMotion": "aktuelle Bewegung",
     "recordVotesHelp": "Vorsitzende registrieren Stimmen pro Zuteilung. „Enthaltung“ wird nur bei Änderungs-/Entschließungsabstimmungen angezeigt, wenn der Listenstatus nicht „Anwesend und Abstimmung“ lautet. Während eines Antrags zur namentlichen Abstimmung können Sie Ja/Nein mit Rechten erfassen.",
-    "delegatesCannotVoteHelp": "Delegierte können nicht in der App abstimmen. Die Vorsitzenden zeichnen die Stimmen für jede Zuteilung auf. „Enthaltung“ erscheint nur bei Beschluss-/Änderungsabstimmungen, wenn diese Delegation nicht als „Anwesend und abstimmend“ markiert ist.",
+    "delegatesCannotVoteHelp": "Delegierte können nicht in der App abstimmen. Die Vorsitzenden zeichnen die Stimmen für jede Zuteilung auf. „Enthaltung“ erscheint nur bei Resolutions-/Änderungsabstimmungen, wenn diese Delegation nicht als „Anwesend und abstimmend“ markiert ist.",
     "delegateRollForMotion": "Delegierter Wurf für diesen Antrag",
     "noDelegatesSeatedYet": "Für diesen Ausschuss sind noch keine Delegierten vertreten.",
     "abstain": "Verzichten",
     "unitMinutesShort": "M",
     "unitSecondsShort": "S",
     "apply": "Anwenden",
-    "motionControl": "Motion control"
+    "motionControl": "Bewegungssteuerung",
+    "advancedSpeakerResetClock": "Erweiterter Lautsprecher und Zurücksetzen der Uhr pro Lautsprecher.",
+    "writeSpeechNoteFirst": "Schreiben Sie etwas, bevor Sie eine Sprachnotiz speichern.",
+    "speechNoteSaved": "Sprachnotiz gespeichert.",
+    "speechNoteDeleted": "Sprachnotiz gelöscht.",
+    "announcementPosted": "Ankündigung veröffentlicht.",
+    "announcementPinnedToFloor": "Für die Ausschusssitzung gepinnt.",
+    "announcementUnpinned": "Nicht angepinnt.",
+    "announcementBodyRequired": "Der Ankündigungstext darf nicht leer sein.",
+    "announcementUpdated": "Ankündigung aktualisiert.",
+    "deleteAnnouncementConfirm": "Diese Ankündigung endgültig löschen? Dies kann nicht rückgängig gemacht werden.",
+    "announcementDeleted": "Ankündigung gelöscht.",
+    "noAllocationsToAdd": "Keine Zuordnungen zum Hinzufügen.",
+    "rollCallRowsAlreadyExist": "Beim Appell gibt es für jede Zuteilung bereits eine Zeile.",
+    "rollCallRowsAdded": "{count} Appellzeile(n) hinzugefügt.",
+    "motionCreatedOpened": "Antrag erstellt und geöffnet.",
+    "motionUpdated": "Antrag aktualisiert.",
+    "motionClosed": "Antrag geschlossen.",
+    "motionAlreadyOpenReopenBlocked": "Ein weiterer Antrag liegt bereits zur Abstimmung vor. Schließen Sie es, bevor Sie dieses erneut öffnen.",
+    "motionReopened": "Antrag erneut eröffnet.",
+    "motionFloorOpened": "Antragsebene offen – notieren Sie jeden unten aufgeführten Antrag.",
+    "motionFloorClosed": "Der Antragssaal ist für Stellungnahmen geschlossen.",
+    "openMotionFloorFirst": "Öffnen Sie zunächst den Antragssaal für Stellungnahmen.",
+    "openMotionBlocksRecording": "Ein Antrag liegt bereits zur Abstimmung vor. Schließen Sie es, bevor Sie weitere Aussagen aufzeichnen.",
+    "statedMotionRecorded": "Der erklärte Antrag wurde aufgezeichnet (noch nicht zur Abstimmung freigegeben).",
+    "statedMotionRemoved": "Angegebener Antrag entfernt."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} abgeschlossen – für dieses Komitee synchronisiert",
+      "loading": "Laden...",
+      "resetChecklist": "Checkliste zurücksetzen"
+    },
+    "prepPage": {
+      "description": "Vor der Konferenz: Regeln, Thema, Raum, Materialien und Team. Für alle Vorsitzenden dieses Ausschusses synchronisiert; Durch Zurücksetzen wird es für alle gelöscht.",
+      "crisisHidden": "Krisenspezifische Vorbereitungselemente sind für diesen Ausschusstyp ausgeblendet."
+    },
+    "flowPage": {
+      "description": "Normaler Ausschussablauf – kreuzen Sie die Schritte an, während Sie fortfahren. Wird über Lehrstuhlkonten und Geräte hinweg geteilt; Zurücksetzen löscht für alle."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "Regeln & Ablauf"
+        },
+        "topic": {
+          "title": "Ausschuss & Thema"
+        },
+        "room": {
+          "title": "Raum & Technik"
+        },
+        "materials": {
+          "title": "Materialien & Logistik"
+        },
+        "crisis": {
+          "title": "Krise (falls zutreffend)"
+        },
+        "team": {
+          "title": "Team & Kommunikation"
+        }
+      },
+      "items": {
+        "rop": "Lesen und verstehen Sie die Geschäftsordnung des Ausschusses",
+        "parliamentary": "Überprüfung des parlamentarischen Verfahrens (Anträge, Punkte, Abstimmung)",
+        "speaking-times": "Sprechzeiten und Fristen bestätigen",
+        "quorum": "Informieren Sie sich über die Anforderungen an Quorum und Abstimmung",
+        "research": "Thema und Hintergrund des Forschungsausschusses",
+        "study-guide": "Lesen Sie den Studienführer und die wichtigsten Dokumente",
+        "dashboard-topic": "Legen Sie den Namen und das Thema des Ausschusses im Dashboard fest",
+        "agenda": "Bereiten Sie die Tagesordnung und den Ablauf der Sitzung vor",
+        "digital-room": "Digitalen Raum einrichten (Delegiertenliste, Plakate)",
+        "tech-check": "Tech-Check: Plattform, Audio, Bildschirmfreigabe",
+        "backup": "Halten Sie einen Backup-Plan bereit, falls die Technik ausfällt",
+        "roll-plan": "Erstellen Sie eine Namens- und Anwesenheitsliste",
+        "speakers-plan": "Planen Sie die Verwaltung der Rednerliste",
+        "templates": "Bereiten Sie gemeinsame Anträge/Punkte vor (bei Verwendung von Vorlagen)",
+        "timing": "Bestätigen Sie die Startzeit und Pausen der Sitzung",
+        "crisis-slides": "Überprüfen Sie Krisenelemente und aktualisieren Sie Folien",
+        "crisis-cues": "Planen Sie die Reihenfolge/Hinweise der Krisenredner",
+        "crisis-paths": "Bereiten Sie Krisenpfade und Fakten vor",
+        "co-chairs": "Koordinieren Sie die Rollen mit den Co-Vorsitzenden",
+        "staff": "Bestätigen Sie die Unterstützung und Hinweise des Personals/Podiums",
+        "delegate-brief": "Bereiten Sie ein Briefing für die Delegierten vor (Regeln, Zeitplan)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Appell",
+        "open-floor": "Öffnen Sie den Boden (Punkte und Bewegungen)",
+        "recognize": "Bewegungen erkennen",
+        "vote-1": "Abstimmung über Anträge",
+        "engage": "Beteiligen Sie sich an der gewählten Aktion oder wechseln Sie zu GSL",
+        "open-again": "Öffnen Sie den Boden erneut",
+        "recognize-repeat": "Bewegungen erkennen (bei Bedarf wiederholen)",
+        "vote-2": "Abstimmung über Anträge",
+        "cycle": "Zyklus fortsetzen (Bewegung einschalten / GSL -> Boden öffnen)"
+      }
+    }
   },
   "language": {
     "label": "Sprache",
@@ -352,7 +449,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "Hilfecenter",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "appHomeAria": "{appName} Zuhause",
+    "defaultDisplayName": "Delegieren"
   },
   "authWizard": {
     "enterApp": "Geben Sie {appName} ein",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "Lehrstühle speichern jeden Slot als Entwurf auf der Seite „Score“. Diese Entwürfe werden hier nicht gezeigt. Sobald alle erforderlichen Plätze belegt sind, muss der Vorsitzende auf „Nominierungen an SMT übermitteln“ klicken – dann werden in dieser Tabelle die Zeilen als zur Überprüfung ausstehend angezeigt.",
     "noRowsForCommittee": "Keine ausstehenden Zeilen für diesen Ausschuss. Wählen",
     "orAnotherTab": "oder eine andere Registerkarte.",
-    "topRank": "Top {rank}",
+    "topRank": "Top {Rang}",
     "bandInitialsTitle": "Bandinitialen: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "Bester Delegierter (Komitee)",
@@ -511,7 +610,7 @@
     "joinCommittee": "Treten Sie Ihrem Ausschuss bei",
     "joinCommitteeDescription": "Geben Sie Ihren Ausschusscode für diese Konferenz ein. Sie sollten den Konferenzcode bereits auf dem vorherigen Bildschirm eingegeben haben.",
     "wrongConference": "Falsche Konferenz? Geben Sie einen anderen Konferenzcode ein",
-    "openLatestCommittee": "SMT: Neuestes Komitee eröffnen (Codes überspringen)",
+    "openLatestCommittee": "SMT: Neuestes Komitee öffnen (Codes überspringen)",
     "openLatestCommitteeHelp": "Öffnet die {code}-Sitzung, wenn sie existiert (nach dem Konferenzcode SEAMUNI2027). Podiumsvorsitzende müssen oben ihre Ausschusscodes eingeben.",
     "setupConferenceSmtOnly": "Eine neue Konferenz einrichten (nur SMT)",
     "setupConferenceHelp": "Erstellt den Konferenzcode und den ersten Ausschusscode. Vorsitzende verwalten Ausschusscodes über Vorsitz -> Ausschusscode, nachdem SMT die Veranstaltung erstellt hat.",
@@ -696,10 +795,10 @@
     "sessionFloorBanner": "<floor>Sitzungsetage</floor> (Timer, Lautsprecher, Appell) ist nur für <chairs>Podiumsstühle</chairs> vorgesehen. Verwenden Sie unten <live>Live-Ausschüsse</live> für die Übersicht oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
     "welcomeSg": "Willkommen, Generalsekretär!",
     "whichCommittee": "In welchem ​​Ausschuss möchten Sie mitmachen?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{Anzahl, Plural, eine {# Sitzung} andere {# Sitzungen}}",
     "topicLabel": "Thema:",
     "chairsLabel": "Stühle:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "{Name}-Logo",
     "eslFriendly": "ESL-freundlich"
   },
   "chairNav": {
@@ -725,6 +824,7 @@
       "session": "Sitzung",
       "speakers": "Lautsprecher",
       "formalMotions": "Formelle Anträge",
+      "discipline": "Disziplinar",
       "timer": "Timer",
       "announcements": "Ankündigungen",
       "motionsPoints": "Anträge und Punkte",
@@ -757,7 +857,7 @@
       "legislationTreaties": "Gesetzgebung und Verträge",
       "mainBodies": "Hauptkörper",
       "programmesFunds": "Programme und Fonds",
-      "specializedAgencies": "Spezialisierte Agenturen und ähnliches",
+      "specializedAgencies": "Spezialisierte Agenturen und Ähnliches",
       "peacekeepingMissions": "Friedenssicherung und Missionen",
       "foundersMembers": "Gründer & Mitglieder"
     },
@@ -793,7 +893,7 @@
       "ohchr": "UN-Menschenrechte (OHCHR)",
       "worldbank": "Weltbank",
       "imf": "IWF",
-      "ilo": "ILO",
+      "ilo": "IAO",
       "fao": "FAO",
       "peacekeeping": "UN-Friedenssicherung",
       "peacekeepingCurrent": "UN-Friedenssicherung – aktuelle Missionen",
@@ -894,7 +994,7 @@
       "openInNewTab": "In neuem Tab öffnen",
       "noGoogleDocLink": "Kein Google Doc-Link",
       "visibleToOtherBloc": "Für andere Blöcke sichtbar",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
+      "resolutionCounts": "Hauptuntertitel: {main} | Co-Subs: {co} | Unterzeichner: {Unterzeichner}",
       "blocButton": "Block {name} ({stance})",
       "signVirtually": "Virtuell unterschreiben (Hauptabonnenten benachrichtigt)",
       "shareByEmail": "Teilen Sie die Lösung per E-Mail",
@@ -902,7 +1002,7 @@
       "sendToDelegate": "An Delegierten senden",
       "clauseEditor": "Klauseleditor",
       "noClausesYet": "Noch keine Klauseln.",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "Klausel {Nummer}",
       "saveClause": "Save-Klausel",
       "delete": "Löschen",
       "addClausePlaceholder": "Eine neue Klausel hinzufügen...",
@@ -1013,7 +1113,79 @@
       "errImageSize": "Das Bild ist zu groß (maximal 5 MB).",
       "errUploadFailed": "Der Upload ist fehlgeschlagen.",
       "errStorageSetup": "Die Speicherung von Profilbildern ist nicht eingerichtet. Führen Sie im Supabase-Projekt die Migration 00100_profile_pictures_storage_bucket.sql aus oder erstellen Sie einen öffentlichen Speicher-Bucket mit dem Namen „profile-pictures“ (siehe README).",
-      "errPublicUrl": "Die öffentliche URL für das hochgeladene Bild konnte nicht aufgelöst werden."
+      "errPublicUrl": "Die öffentliche URL für das hochgeladene Bild konnte nicht aufgelöst werden.",
+      "fallbacks": {
+        "yourCountry": "Ihr Land",
+        "committeeSession": "Ausschusssitzung",
+        "delegate": "Delegieren",
+        "speechNote": "Sprachnotiz",
+        "untitledMotion": "Antrag ohne Titel",
+        "dash": "—"
+      },
+      "delegateWelcome": {
+        "title": "Willkommener Delegierter von {flag} {country}",
+        "subtitle": "Womit möchten Sie beginnen?",
+        "links": {
+          "documents": "Unterlagen",
+          "notes": "Notizen",
+          "committeeRoom": "Ausschussraum",
+          "runningNotes": "Laufnotizen",
+          "ideas": "Ideen",
+          "guides": "Führer",
+          "sources": "Quellen",
+          "resolutions": "Vorsätze",
+          "speeches": "Reden",
+          "stances": "Standpunkte",
+          "crisisSlides": "Krisenrutschen",
+          "report": "Bericht",
+          "motions": "Anträge",
+          "points": "Punkte"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "Auszeichnungen auf Ihrem Profil",
+        "rank": "Rang {Rang}",
+        "pending": {
+          "tab": "Ausstehende Nominierungen",
+          "title": "Ausstehende Nominierungen für Vorsitzende",
+          "descriptionSingle": "Von Lehrstühlen gespeichert und zur Überprüfung mit SMT geteilt. Die endgültigen Auszeichnungen werden nach der Bestätigung unten angezeigt.",
+          "descriptionTabbed": "Von Lehrstühlen gespeichert und zur Überprüfung mit SMT geteilt. Die endgültigen Auszeichnungen erscheinen nach der Bestätigung."
+        },
+        "recorded": {
+          "tab": "Aufgezeichnete Auszeichnungen",
+          "title": "Aufgezeichnete Auszeichnungen",
+          "description": "Wird aufgeführt, wenn Ihnen Lehrstühle oder SMT im Auszeichnungs-Tracker zugewiesen werden. Die endgültige Anerkennung folgt den Regeln Ihrer Konferenz."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "Nur für Sie, Ausschussvorsitzende und SMT des jeweiligen Ausschusses sichtbar.",
+        "points": {
+          "title": "Stuhlpunkte (privat)"
+        },
+        "speechNotes": {
+          "title": "Notizen zur Rede des Vorsitzes (privat)"
+        },
+        "motions": {
+          "title": "Anträge, die Sie verschoben haben",
+          "description": "Zur Prüfung durch den Ausschuss und zur SMT-Überwachung in Ihrem Profil gespeichert."
+        }
+      },
+      "discipline": {
+        "title": "Disziplinarstatus (privat)",
+        "statusLine": "Warnungen: {warnings} · Streiks: {strikes}{votingDisabled}{lookingSuspended}{removedFromCommittee}",
+        "votingDisabled": "Stimmabgabe deaktiviert",
+        "speakingSuspended": "Rede unterbrochen",
+        "removedFromCommittee": "aus dem Ausschuss entfernt",
+        "updated": "Aktualisiert: {value}"
+      },
+      "preview": {
+        "ariaLabel": "Profilvorschau",
+        "title": "Vorschau",
+        "yourName": "Ihr Name",
+        "usernameNotSet": "Benutzername nicht festgelegt",
+        "gradeValue": "Note {grade}",
+        "awards": "Auszeichnungen"
+      }
     },
     "guides": {
       "default": {
@@ -1068,7 +1240,7 @@
           },
           "placard": {
             "term": "Plakat",
-            "definition": "Länderzeichen, das zur Wortmeldung, Abstimmung und zur Signalisierung von Verfahrensanträgen verwendet wird."
+            "definition": "Landesschild, das zur Wortmeldung, Abstimmung und zur Signalisierung von Verfahrensanträgen verwendet wird."
           },
           "dais": {
             "term": "Podium",
@@ -1290,9 +1462,9 @@
       "add": "Hinzufügen",
       "noIdeasYet": "Noch keine Ideen.",
       "ideaLabel": "Idee",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Idee {Nummer}",
       "linkedDoc": "Verlinktes Dokument",
-      "addedOn": "Added {date}",
+      "addedOn": "Hinzugefügt am {Datum}",
       "edit": "Bearbeiten",
       "delete": "Löschen",
       "ideaDocument": "Ideendokument",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "Ausschuss",
+      "yourContext": "Ihr Kontext",
+      "roleLabel": "Rolle",
+      "seatLabel": "Sitz",
       "clearSearchTitle": "Löschen Sie die Suche und zeigen Sie alle Delegationen an",
       "vacantLabel": "Frei",
+      "assignedLabel": "Zugewiesen",
+      "daisLabel": "Podium",
+      "phaseLabel": "Phase",
+      "phaseVoting": "Wählen",
+      "phaseDebate": "Debatte",
+      "focusSearchTitle": "Fokussuche (Podiumstitel und -namen entsprechen Ihrer Suchanfrage)",
+      "tipLabel": "Tipp",
       "searchVacantTitle": "Suchen Sie nach „freien“ Plätzen im Raum",
       "searchHint": "Geben Sie ein Land, den Namen des Delegierten, eine Schule, ein Pronomen oder „frei“ ein, um Übereinstimmungen im Raum hervorzuheben. Drücken Sie die Eingabetaste, um zum ersten Treffer zu springen. Esc löscht. Klicken Sie auf „Frei“, um zu freien Plätzen zu springen.",
       "findLabel": "Finden Sie ein Delegations- oder Podiumsmitglied",
       "searchPlaceholder": "Land, Name, Schule...",
       "matchesCount": "{matches} von {total} Sitzplätzen stimmen überein",
+      "enterScrolls": "Schriftrollen eingeben",
+      "typeToFilterHint": "Zum Filtern eingeben: Die Eingabe scrollt zum ersten Treffer",
+      "noMatches": "Keine passenden Delegationen oder Podiumsplätze.",
+      "digitalDisplay": "Digitale Anzeige",
+      "floorLabel": "Boden",
+      "staffSeatsHeading": "Personal - Sitzplätze",
       "searchAria": "Suchdelegationen",
       "virtualRoomVacant": "Frei",
-      "profileAria": "View profile: {country}",
+      "profileAria": "Profil anzeigen: {Land}",
       "vacantSeatAria": "Freier Sitzplatz",
-      "placardAria": "Placard {country}",
-      "gavelAria": "Hammer"
+      "placardAria": "Plakat {Land}",
+      "gavelAria": "Hammer",
+      "viewProfileAria": "Profil ansehen: {title}",
+      "noProfileLinkAria": "{title} (kein Profillink)",
+      "committeeFloor": "Ausschussetage",
+      "virtualRoomFigureAria": "Virtueller Ausschussraum – {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Delegationen filtern. Der erste hervorgehobene Platz ist das erste Spiel im Ring.",
+      "helperText": "Auf Plakaten sind das Land (aus den Zuteilungen), der Name, die Schule und die Pronomen aus dem Profil jedes Delegierten aufgeführt. Bearbeiten Sie Ihr Profil unter Profil. Leere Ausschusssitze werden als „Frei“ angezeigt. Klicken Sie auf ein ausgefülltes Plakat oder einen Podiumsplatz, um die Seite dieses Mitglieds zu öffnen (von dort aus chatten und berichten).",
+      "virtualRoomCaption": "Virtuelles Modell eines UN-Komiteeraums mit Delegiertenplakaten mit Land, Name, Schule und Pronomen."
     },
     "session": {
       "requestToSpeak": {
@@ -1379,8 +1574,8 @@
         "motioner": "Motioner",
         "majority": "Mehrheitlich",
         "majoritySimple": "Einfach",
-        "tally": "Yes {yes} - No {no} - Total {total}",
-        "help": "Das Podium zeichnet die Abstimmung jeder Delegation während der Sitzung auf. Bei der Abstimmung über Anträge erfolgt nur Ja oder Nein (keine Enthaltung). In den Summen werden nur Plakate berücksichtigt, auf denen „Ja“ oder „Nein“ angegeben wurde. abwesende Delegationen werden übersprungen."
+        "tally": "Ja {ja} – Nein {nein} – Gesamt {total}",
+        "help": "Das Podium zeichnet die Abstimmung jeder Delegation während der Sitzung auf. Bei der Antragsabstimmung wird nur Ja oder Nein verwendet (keine Enthaltung). In den Summen werden nur Plakate berücksichtigt, auf denen „Ja“ oder „Nein“ angegeben wurde. abwesende Delegationen werden übersprungen."
       },
       "activeMotion": {
         "currentMotion": "Aktuelle Bewegung",
@@ -1396,7 +1591,7 @@
         "speakerTimeLeftTotal": "Sprecherzeit (links / gesamt)",
         "perSpeaker": "(pro Sprecher)",
         "paused": "(pausiert)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Pause: {Grund}"
       },
       "floorStatus": {
         "sessionTime": "Sitzungszeit",
@@ -1480,7 +1675,7 @@
         "delete": "Löschen",
         "deleteConfirm": "Diese Sitzung aus dem Verlauf löschen?",
         "sessionNamePrompt": "Sitzungsname",
-        "rangeClosed": "{range}",
+        "rangeClosed": "{Reichweite}",
         "rangeOngoing": "{range} -> Laufend"
       },
       "timerPage": {
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "Der Timer ist bereits angehalten.",
         "pausedForCommittee": "Der Timer hielt für das Komitee an.",
         "alreadyRunning": "Der Timer läuft bereits.",
-        "runningForCommittee": "Timer läuft für das Komitee."
+        "runningForCommittee": "Timer läuft für das Komitee.",
+        "euTimerBoardTitle": "Zeitschalttafel des EU-Parlaments (11 Zeitschaltuhren)",
+        "euTimerBoardHelp": "Ein Timer pro Gruppe, plus Gesamtzeit, POI/POC-Zeit und Rednerzeit. Kopieren Sie mit „Anwenden“ eine Zeile in die Live-Timer-Felder auf der Registerkarte „Uhr“ (Sprecherzeit / Timer speichern).",
+        "euTimerName": "Name",
+        "euTimerTag": "Etikett",
+        "euTotalTime": "Gesamtzeit",
+        "euPoiPocTime": "POI-/POC-Zeit",
+        "euSpeakerTime": "Rednerzeit"
       }
     }
   },
@@ -1587,7 +1789,7 @@
       "history": "Geschichte"
     },
     "liveFloor": "Live-Boden",
-    "liveFloorDescription": "Live-Sprecherwarteschlange, Appell und Timer für dieses Komitee – dieselben Daten, die die Vorsitzenden auch auf der Sitzungsfläche sehen.",
+    "liveFloorDescription": "Live-Sprecherwarteschlange, Appell und Timer für dieses Komitee – dieselben Daten, die Vorsitzende auf der Sitzungsfläche sehen.",
     "conferenceFallback": "Konferenz",
     "committeeFallback": "Ausschuss"
   },
@@ -1618,7 +1820,7 @@
       "HSC": "HSC",
       "HRC": "HRC",
       "HCR": "HCR",
-      "IAEA": "IAEO",
+      "IAEA": "IAEA",
       "ICAO": "ICAO",
       "ICC": "IStGH",
       "ICJ": "IGH",
@@ -1647,7 +1849,7 @@
     "delegatesMatrix": "Delegiertenmatrix",
     "clearAllChairNotes": "Löschen Sie alle Stuhlnotizen",
     "searchCountry": "Land suchen...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} Plakate · {markiert} mit Notizen des Vorsitzenden · Liste aufgezeichnet für {count}",
     "loading": "Laden...",
     "noDelegationsMatch": "Keine Delegationen entsprechen Ihrer Suche.",
     "rollPrefix": "Rolle {label}",
@@ -1661,7 +1863,11 @@
     "adding": "Hinzufügen...",
     "addToSpeakerList": "Zur Rednerliste hinzufügen",
     "reminder": "Erinnerung",
-    "privateReminderLabel": "Private Erinnerung (nur Stühle, synchronisiert)"
+    "privateReminderLabel": "Private Erinnerung (nur Stühle, synchronisiert)",
+    "clearAllConfirm": "Klare Kompliment-, Bedenken- und Erinnerungsnotizen für jedes Plakat? Dadurch wird die gemeinsame Ausschusskopie aktualisiert.",
+    "addedToSpeakerList": "{country} zur Rednerliste hinzugefügt.",
+    "committeeFallback": "Ausschuss",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Live-Thema auswählen",
@@ -1723,7 +1929,7 @@
     "anyChair": "Jeder Stuhl",
     "noChairs": "Keine Stuhlprofile gefunden.",
     "notesListTitle": "Notizenliste",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{Anzahl, Plural, eine {# Notiz} andere {# Notizen}}",
     "emptyList": "Noch keine Notizen.",
     "forwardedBadge": "(weitergeleitet)",
     "readerWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
@@ -1810,7 +2016,7 @@
     "eventNameHelp": "Den Organisatoren gezeigt; Delegierte sehen es, nachdem sie beigetreten sind.",
     "eventCodeLabel": "Konferenzcode",
     "eventCodePlaceholder": "z.B. SEAMUNI2027",
-    "eventCodeHelp": "Jeder betritt diese zuerst (die gesamte Konferenz). Leerzeichen werden ignoriert; in Großbuchstaben gespeichert. Muss einzigartig sein.",
+    "eventCodeHelp": "Hier betreten alle zuerst (die gesamte Konferenz). Leerzeichen werden ignoriert; in Großbuchstaben gespeichert. Muss einzigartig sein.",
     "sectionFirstCommittee": "Erstes Komitee (zweites Tor)",
     "sessionNameLabel": "Titel der Ausschusssitzung",
     "sessionNamePlaceholder": "z.B. Thema oder Tagesordnungstitel für diesen Ausschuss",
@@ -1922,8 +2128,8 @@
       "welcomeLine3": "Wir sehen uns auf dem Boden.",
       "chairReminderSubject": "Zuteilungsanfrage bis zur Genehmigung delegieren",
       "chairReminderLine1": "Ein Delegierter hat eine Zuteilung beantragt und benötigt eine Überprüfung durch den Vorsitzenden.",
-      "chairReminderConference": "Conference: {conference}",
-      "chairReminderAllocation": "Requested allocation: {country}",
+      "chairReminderConference": "Konferenz: {Konferenz}",
+      "chairReminderAllocation": "Angeforderte Zuteilung: {Land}",
       "chairReminderDelegate": "Delegierter: {name}",
       "chairReminderEmail": "Konto-E-Mail: {email}",
       "chairReminderLine2": "Bitte genehmigen oder lehnen Sie diesen Antrag in der Stuhlvergabematrix ab:"
@@ -1933,7 +2139,7 @@
     "eventDetails": "Veranstaltungsdetails",
     "selectConferenceFirst": "Wählen Sie zuerst eine Konferenz mit dem Event-Gate aus und kehren Sie dann hierher zurück.",
     "committeeSessionsTitle": "Ausschusssitzungen in dieser Veranstaltung",
-    "committeeSessionsBody": "Die Titel der Ausschusssitzungen (Tagesordnungsthemen) bleiben hier für Aufzeichnungen. Das SMT-Home-Raster zeigt den offiziellen Namen des Komitees, das Akronym, die Vorsitzenden und einen kurzen Anzeigecode. Ausschuss-/Raumcodes (zweites Tor) müssen innerhalb dieser Veranstaltung eindeutig bleiben.",
+    "committeeSessionsBody": "Die Titel der Ausschusssitzungen (Tagesordnungsthemen) bleiben hier für Aufzeichnungen. Das SMT-Heimraster zeigt den offiziellen Namen des Komitees, das Akronym, die Vorsitzenden und einen kurzen Anzeigecode. Ausschuss-/Raumcodes (zweites Tor) müssen innerhalb dieser Veranstaltung eindeutig bleiben.",
     "noCommitteeSessions": "Für diese Veranstaltung finden keine Ausschusssitzungen statt.",
     "eventName": "Veranstaltungsname",
     "tagline": "Slogan",
@@ -1943,7 +2149,7 @@
     "saveConferenceEvent": "Konferenzveranstaltung speichern",
     "errorImageFile": "Bitte wählen Sie eine Bilddatei aus.",
     "errorImageTooLarge": "Das Bild ist zu groß (maximal 6 MB).",
-    "errorCommitteeCodeMissing": "Der Ausschusscode fehlt.",
+    "errorCommitteeCodeMissing": "Ausschusscode fehlt.",
     "errorPublicUrl": "Die öffentliche URL für das hochgeladene Bild konnte nicht aufgelöst werden.",
     "errorUploadFailed": "Der Upload ist fehlgeschlagen.",
     "sessionTitle": "Sitzungstitel",
@@ -2087,7 +2293,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "Ihr Ausschuss",
     "fallbackCommittee": "Ausschuss",
-    "welcome": "Welcome, Chair of {committee}",
+    "welcome": "Willkommen, Vorsitzender des {Komitees}",
     "featureStrip": "Digitaler Raum · Anträge · Abstimmung · Redner",
     "activeCommitteeLine": "Aktiver Ausschuss: <line></line>. Sitzungsdaten werden über Ihr Konto synchronisiert. Vorbereitungs-/Ablauf-Checklisten sowie Anträge und Punkte werden in diesem Browser für diesen Ausschuss gespeichert – gleiche Idee wie <seamuns>SEAMUNs Chair Room</seamuns>.",
     "tiles": {
@@ -2124,7 +2330,7 @@
         "hint": "Abstimmungen im Plenum und vom Vorsitzenden aufgezeichnet"
       },
       "disciplinary": {
-        "label": "Disziplinarisch",
+        "label": "Disziplinar",
         "hint": "Warnungen, Streiks und Rechteeinschränkungen"
       },
       "timer": {
@@ -2184,7 +2390,7 @@
     "tierLow": "Niedrig",
     "tierHigh": "Hoch",
     "tierPromptLocked": "Gesperrt in: {band} – {tier} ({score})",
-    "tierPromptPick": "Pick low or high within {band} (points on the 1-8 scale).",
+    "tierPromptPick": "Wählen Sie einen niedrigen oder hohen Wert innerhalb von {Band} (Punkte auf der Skala von 1 bis 8).",
     "criteria": {
       "creativity": {
         "label": "Kreativität",
@@ -2315,7 +2521,7 @@
       "mun_knowledge": {
         "label": "MUN-Wissen",
         "bands": {
-          "0": "Häufige Fehler in der Geschäftsordnung (RoP); ist stark auf die Hilfe des Sekretariats angewiesen.",
+          "0": "Häufige Fehler in der Verfahrensordnung (RoP); ist stark auf die Hilfe des Sekretariats angewiesen.",
           "1": "Grundlegende RoP-Kenntnisse; kann einen standardmäßigen moderierten Caucus leiten, vermisst jedoch Nuancen von Anträgen.",
           "2": "Gute RoP-Kenntnisse; verwaltet den Boden effizient und fair mit minimalen Fehlern.",
           "3": "Absolute Meisterschaft; nutzt RoP, um den Debattenfluss zu verbessern und komplexe Verfahrenssituationen problemlos zu bewältigen."
@@ -2363,7 +2569,7 @@
           "0": "Zusammenfassung auf Oberflächenebene; Es fehlen historische Kontexte oder Daten.",
           "1": "Guter Überblick, aber es fehlen komplexe rechtliche oder technische Nuancen.",
           "2": "Starke Analyse; umfasst spezifische vergangene Aktionen und regionale Daten.",
-          "3": "Stipendium auf Expertenniveau; identifiziert einzigartige Blickwinkel für die Debatte."
+          "3": "Stipendium auf Expertenebene; identifiziert einzigartige Blickwinkel für die Debatte."
         }
       },
       "mandate_clarity": {
@@ -2474,6 +2680,130 @@
           "3": "Nahtlose Synergie; Das Podium inspiriert zu einem professionellen und anspruchsvollen Umfeld."
         }
       }
+    },
+    "maxPoints": "Max. {Punkte} Punkte",
+    "reference": {
+      "title": "Offizielle Auszeichnungsrubrik von SEAMUN I",
+      "description": "Referenzexemplar: Auszeichnungsarten, Bewertungsprozess und vollständige 1-8-Band-Matrizen (aus der Konferenzrubrik). Bei der Bewertung in InterMUN werden dieselben Kriterienschlüssel verwendet, bei denen Nominierungen eingereicht werden."
+    },
+    "sections": {
+      "catalogue": "Preiskatalog",
+      "processOversight": "Vergabeverfahren und Aufsicht",
+      "calibrationTraining": "Stuhlkalibrierung und -schulung (Skala 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Konferenzweit (insgesamt)",
+      "collectiveChair": "Kollektiv und Vorsitzender",
+      "committeeLevel": "Ausschussebene"
+    },
+    "matrices": {
+      "positionPaper": "Positionspapier (Bestes Positionspapier)",
+      "delegateLiveSessions": "Delegieren (Live-Sitzungen)",
+      "chairPerformance": "Stuhlleistung",
+      "chairReportOverall": "Bericht des Vorsitzes – insgesamt",
+      "chairReportSectionSpecific": "Lehrstuhlbericht – sektionsspezifisch",
+      "bestCommittee": "Bestes Komitee"
+    },
+    "evidenceNote": "Die Vorsitzenden vervollständigen den Nachweis und die schriftliche Bestätigung für die SMT-Aufzeichnungen: primärer Nachweis der Exzellenz und Rechtfertigung im Vergleich zum Zweitplatzierten (gemäß veröffentlichtem Formular).",
+    "footnotes": {
+      "delegateLiveSessions": "Kreativität, Diplomatie, Zusammenarbeit, Führung, Wissen und Forschung, Teilnahme – jeweils 8 Punkte.",
+      "chairPerformance": "Acht Dimensionen wurden mit jeweils 8 Punkten für die Ausrichtung „Bester Stuhl/Stuhlbewertung“ bewertet.",
+      "chairReportSectionSpecific": "Kombiniert mit dem Gesamtabschnitt oben ergibt sich eine Gesamtpunktzahl im Stuhlbericht von bis zu 72 auf der erweiterten Skala im offiziellen Dokument."
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "Ausschusszuteilungsmatrix für Ihre aktuelle Sitzung. Dies ist für Lehrstühle schreibgeschützt und spiegelt aktive Sitzplatzzuweisungen und Plakatcodes wider.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "Zuweisung",
+      "flag": "Flagge",
+      "email": "E-Mail",
+      "name": "Name",
+      "grade": "Grad",
+      "notes": "Notizen",
+      "requestedAllocation": "Gewünschte Zuteilung",
+      "account": "Konto",
+      "actions": "Aktionen"
+    },
+    "noRows": "Für diesen Ausschuss wurden keine Zuteilungszeilen gefunden.",
+    "pendingApprovalsTitle": "Anmeldegenehmigungen stehen noch aus",
+    "pendingApprovalsIntro": "Vorsitzende genehmigen oder lehnen Anmeldungen über Zuteilungslinks ab, um sicherzustellen, dass die Delegierten das richtige Konto verwenden.",
+    "noPendingRequests": "Keine ausstehenden Anfragen.",
+    "unknownAllocation": "Unbekannte Zuordnung",
+    "approve": "Genehmigen",
+    "reject": "Ablehnen"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Zuordnungsmatrix",
+    "selectConferenceEventFirst": "Wählen Sie zunächst eine Konferenzveranstaltung aus.",
+    "enterConferenceCode": "Geben Sie den Konferenzcode ein",
+    "intro": "Erstellen oder importieren Sie die Sitzliste für jedes Komitee in der aktiven Veranstaltung. Nach der Anmeldung wählen die Delegierten ihre Reihe am Ausschusstor aus; Plakatcodes können mit Ihren Tabellenkalkulations-IDs übereinstimmen."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "Rednerliste",
+    "addedToSpeakerList": "Zur Rednerliste hinzugefügt.",
+    "chooseDelegationsNotAlreadyQueued": "Wählen Sie Delegationen aus, die nicht bereits auf der Liste warten oder aktuell sind.",
+    "addedSpeakersInOrder": "{Anzahl} Redner in der Reihenfolge der Ausschussliste hinzugefügt.",
+    "introPrefix": "Fügen Sie Delegationen in der Reihenfolge ihrer Reden hinzu. Delegierte können weiterhin nutzen",
+    "requestToSpeak": "Bitte um Wortmeldung",
+    "introMiddle": "im Ausschussraum. Verwenden",
+    "sessionTimerLink": "Sitzung → Timer",
+    "introSuffixPrefix": "für die Zeit pro Sprecher und",
+    "advanceSpeaker": "Vorredner",
+    "addDelegation": "Delegation hinzufügen",
+    "select": "Wählen…",
+    "add": "Hinzufügen",
+    "addSelectedToList": "Ausgewählte zur Liste hinzufügen",
+    "dismissReminder": "Mahnung verwerfen",
+    "moveUp": "Bewegen Sie sich nach oben",
+    "moveDown": "Bewegen Sie sich nach unten",
+    "current": "Aktuell",
+    "remove": "Entfernen",
+    "prompt": {
+      "gslTitle": "Allgemeine Rednerliste (GSL)",
+      "moderatedTimerTitle": "Moderierter Caucus (Timer pro Sprecher)",
+      "moderatedPassedTitle": "Moderierter Caucus bestanden",
+      "bodyPrefix": "Nutzen Sie dazu die Rednerliste unten",
+      "add": "hinzufügen",
+      "bodyAddMiddle": "Delegierte (Dropdown +",
+      "bodyAddMiddle2": ", oder kreuzen Sie Delegationen an und",
+      "bodyRemovePrefix": ") Und",
+      "remove": "entfernen",
+      "bodyRemoveMiddle": "sie mit",
+      "bodyRowSuffix": "in jeder Zeile. Mit den Pfeilen neu anordnen oder einstellen",
+      "bodyEnd": "wenn jemand am Mikrofon ist.",
+      "noAllocations": "Für diesen Ausschuss sind noch keine Zuweisungen geladen. Wenn Sie bereit sind, verwerfen: Sie können Redner später über die Listensteuerelemente hinzufügen.",
+      "quickAdd": "Schnell hinzufügen (noch nicht wartend oder aktuell)",
+      "alreadyQueued": "Jede Zuteilung hat bereits einen Warte- oder aktuellen Slot. Entfernen Sie Einträge, wenn Sie sie neu anordnen müssen, oder verwerfen Sie sie, wenn Sie fertig sind."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "Timer",
+    "currentSpeaker": "Aktueller Sprecher",
+    "nextSpeaker": "Nächster Redner",
+    "speakerTimePerSpeaker": "Sprecherzeit (links/Kappe)",
+    "speakerTimeTotal": "Sprecherzeit (links / gesamt)",
+    "perSpeaker": "(pro Sprecher)",
+    "paused": "(pausiert)",
+    "pauseReason": "Pause: {Grund}",
+    "dash": "—"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "Jeder Delegierte – Sitzungsrubrik (erforderlich)",
+    "intro": "Dieselben sechs Dimensionen wie bei den Nominierungen des Ausschusses für den besten Delegierten. Sie müssen <strong>jeden sitzenden Delegierten</strong> bewerten, bevor Sie Nominierungen an SMT übermitteln ({completeCount}/{total} abgeschlossen).",
+    "complete": "Vollständig",
+    "incomplete": "Unvollständig",
+    "saving": "Sparen...",
+    "saveThisDelegate": "Speichern Sie diesen Delegaten",
+    "autosaved": "Automatisch gespeichert",
+    "autosaveFailed": "Die automatische Speicherung ist fehlgeschlagen",
+    "autosavedWithCountry": "Automatisch gespeichert – {Land}",
+    "delegateFallback": "delegieren"
   }
 }

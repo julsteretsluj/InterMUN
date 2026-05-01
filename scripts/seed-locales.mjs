@@ -32,6 +32,10 @@ const locales = [
   "he",
   "sw",
   "mi",
+  "km",
+  "lo",
+  "my",
+  "ms",
 ];
 
 await fs.mkdir(messagesDir, { recursive: true });

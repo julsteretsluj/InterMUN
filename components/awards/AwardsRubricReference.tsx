@@ -33,7 +33,9 @@ function RubricMatrix({
     <div className="space-y-2">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h4 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">{title}</h4>
-        <span className="font-mono text-xs text-brand-muted dark:text-discord-muted">Max {maxPoints} pts</span>
+        <span className="font-mono text-xs text-brand-muted dark:text-discord-muted">
+          {t("maxPoints", { points: maxPoints })}
+        </span>
       </div>
       <div className="overflow-x-auto rounded-xl border border-brand-navy/10 bg-white/60 shadow-sm dark:border-white/10 dark:bg-discord-elevated/60">
         <table className="min-w-[720px] w-full border-collapse text-left text-xs text-brand-navy dark:text-zinc-200">
@@ -114,13 +116,15 @@ function AwardList({
 
 /** Full SEAMUN rubric matrices and award reference copy (chairs + SMT). */
 export function AwardsRubricReference() {
+  const t = useTranslations("awardsRubric");
   return (
     <div className="space-y-6">
       <section className="rounded-xl border border-brand-navy/10 bg-logo-cyan/10 p-4 dark:border-white/10 dark:bg-white/5">
-        <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">SEAMUN I official award rubrics</h2>
+        <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+          {t("reference.title")}
+        </h2>
         <p className="mt-1 text-xs leading-relaxed text-brand-muted dark:text-discord-muted">
-          Reference copy: award types, evaluation process, and full 1–8 band matrices (from the conference rubric).
-          Scoring in InterMUN uses the same criterion keys where nominations are submitted.
+          {t("reference.description")}
         </p>
       </section>
 
@@ -129,7 +133,7 @@ export function AwardsRubricReference() {
           <span className="mr-2 inline-block text-brand-accent transition-transform duration-200 group-open:rotate-90 dark:text-brand-accent-bright">
             ▸
           </span>
-          Award catalogue
+          {t("sections.catalogue")}
         </summary>
         <div className="space-y-5 border-t border-brand-navy/10 px-4 pb-4 pt-3 dark:border-white/10">
           {SEAMUN_AWARD_OVERVIEW_PARAGRAPHS.map((p, i) => (
@@ -137,9 +141,9 @@ export function AwardsRubricReference() {
               {p}
             </p>
           ))}
-          <AwardList heading="Conference-wide (overall)" items={SEAMUN_CONFERENCE_WIDE_AWARDS} />
-          <AwardList heading="Collective & chair" items={SEAMUN_COLLECTIVE_CHAIR_AWARDS} />
-          <AwardList heading="Committee-level" items={SEAMUN_COMMITTEE_LEVEL_AWARDS} />
+          <AwardList heading={t("headings.conferenceWideOverall")} items={SEAMUN_CONFERENCE_WIDE_AWARDS} />
+          <AwardList heading={t("headings.collectiveChair")} items={SEAMUN_COLLECTIVE_CHAIR_AWARDS} />
+          <AwardList heading={t("headings.committeeLevel")} items={SEAMUN_COMMITTEE_LEVEL_AWARDS} />
         </div>
       </details>
 
@@ -148,7 +152,7 @@ export function AwardsRubricReference() {
           <span className="mr-2 inline-block text-brand-accent transition-transform duration-200 group-open:rotate-90 dark:text-brand-accent-bright">
             ▸
           </span>
-          Awards process & oversight
+          {t("sections.processOversight")}
         </summary>
         <div className="space-y-4 border-t border-brand-navy/10 px-4 pb-4 pt-3 dark:border-white/10">
           {SEAMUN_AWARDS_PROCESS_SECTIONS.map((s) => (
@@ -171,44 +175,43 @@ export function AwardsRubricReference() {
         </div>
       </details>
 
-      <RubricMatrix title="Position paper (Best Position Paper)" criteria={PAPER_CRITERIA} maxPoints={40} />
+      <RubricMatrix title={t("matrices.positionPaper")} criteria={PAPER_CRITERIA} maxPoints={40} />
 
       <p className="text-xs text-brand-muted dark:text-discord-muted">
-        Chairs complete evidence and written confirmation for SMT records: primary evidence of excellence and
-        justification vs runner-up (per published form).
+        {t("evidenceNote")}
       </p>
 
       <RubricMatrix
-        title="Delegate (live sessions)"
+        title={t("matrices.delegateLiveSessions")}
         criteria={DELEGATE_CRITERIA}
         maxPoints={48}
-        footnote="Creativity, diplomacy, collaboration, leadership, knowledge & research, participation — 8 pts each."
+        footnote={t("footnotes.delegateLiveSessions")}
       />
 
       <RubricMatrix
-        title="Chair performance"
+        title={t("matrices.chairPerformance")}
         criteria={CHAIR_PERFORMANCE_RUBRIC}
         maxPoints={64}
-        footnote="Eight dimensions scored at 8 pts each for Best Chair / chair evaluation alignment."
+        footnote={t("footnotes.chairPerformance")}
       />
 
-      <RubricMatrix title="Chair report — overall" criteria={CHAIR_REPORT_OVERALL_RUBRIC} maxPoints={32} />
+      <RubricMatrix title={t("matrices.chairReportOverall")} criteria={CHAIR_REPORT_OVERALL_RUBRIC} maxPoints={32} />
 
       <RubricMatrix
-        title="Chair report — section-specific"
+        title={t("matrices.chairReportSectionSpecific")}
         criteria={CHAIR_REPORT_SECTION_RUBRIC}
         maxPoints={40}
-        footnote="Combined with overall section above for a total chair report score up to 72 on the extended scale in the official document."
+        footnote={t("footnotes.chairReportSectionSpecific")}
       />
 
-      <RubricMatrix title="Best committee" criteria={BEST_COMMITTEE_RUBRIC} maxPoints={32} />
+      <RubricMatrix title={t("matrices.bestCommittee")} criteria={BEST_COMMITTEE_RUBRIC} maxPoints={32} />
 
       <details className="group rounded-xl border border-brand-navy/10 bg-brand-paper/80 open:shadow-sm dark:border-white/10 dark:bg-discord-elevated/40">
         <summary className="cursor-pointer list-none px-4 py-3 font-display text-sm font-semibold text-brand-navy marker:content-none dark:text-zinc-100 [&::-webkit-details-marker]:hidden">
           <span className="mr-2 inline-block text-brand-accent transition-transform duration-200 group-open:rotate-90 dark:text-brand-accent-bright">
             ▸
           </span>
-          Chair calibration & training (1–8 scale)
+          {t("sections.calibrationTraining")}
         </summary>
         <div className="space-y-4 border-t border-brand-navy/10 px-4 pb-4 pt-3 dark:border-white/10">
           {SEAMUN_CHAIR_TRAINING_GUIDE.map((block) => (

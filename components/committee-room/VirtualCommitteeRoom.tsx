@@ -230,14 +230,14 @@ function DaisStation({
 
   if (personHref) {
     return (
-      <Link href={personHref} className={wrapClass} aria-label={`View profile: ${seat.title}`}>
+      <Link href={personHref} className={wrapClass} aria-label={t("viewProfileAria", { title: seat.title })}>
         {inner}
       </Link>
     );
   }
 
   return (
-    <div className={wrapClass} aria-label={`${seat.title} (no profile link)`}>
+    <div className={wrapClass} aria-label={t("noProfileLinkAria", { title: seat.title })}>
       {inner}
     </div>
   );
@@ -265,6 +265,7 @@ export function VirtualCommitteeRoom({
   scrollToDelegationMatchNonce = 0,
   compactPlacardDetails = false,
 }: VirtualCommitteeRoomProps) {
+  const t = useTranslations("views.committeeRoom");
   const supabase = useMemo(() => createClient(), []);
   const [livePlacards, setLivePlacards] = useState<DelegatePlacard[]>(placards);
   const placardGridRef = useRef<HTMLDivElement | null>(null);
@@ -382,26 +383,17 @@ export function VirtualCommitteeRoom({
     <div className="space-y-3">
       {helperText === null ? null : (
         <p className="text-sm text-brand-muted max-w-2xl">
-          {helperText ?? (
-            <>
-              Placards list <strong>country</strong> (from allocations), <strong>name</strong>,{" "}
-              <strong>school</strong>, and <strong>pronouns</strong> from each delegate&apos;s profile. Edit
-              yours under <strong>Profile</strong>. Empty committee seats show as{" "}
-              <span className="text-brand-navy dark:text-white font-medium">Vacant</span>.{" "}
-              <strong>Click</strong> a filled placard or dais seat to open that member&apos;s page (chat and
-              report from there).
-            </>
-          )}
+          {helperText ?? t("helperText")}
         </p>
       )}
 
       <figure
         className="relative w-full select-none overflow-hidden rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] shadow-[0_14px_36px_-22px_rgba(0,0,0,0.18)] ring-1 ring-[var(--hairline)] backdrop-blur-xl dark:shadow-[0_22px_48px_-28px_rgba(0,0,0,0.55)]"
-        aria-label={`Virtual committee room — ${committeeName} (${conferenceName})`}
+        aria-label={t("virtualRoomFigureAria", { committeeName, conferenceName })}
       >
         {searchActive ? (
           <span className="sr-only" aria-live="polite">
-            Filtering delegations. First highlighted seat is the first match in the ring.
+            {t("filteringLiveRegion")}
           </span>
         ) : null}
         <div
@@ -433,7 +425,7 @@ export function VirtualCommitteeRoom({
           <div className="absolute top-[18%] left-1/2 z-[6] flex -translate-x-1/2 items-center gap-1.5 text-brand-muted sm:top-[18.5%] md:top-[17.5%]">
             <Mic className="w-3 h-3" />
             <span className="text-[0.52rem] uppercase tracking-[0.3em]">
-              Committee floor
+              {t("committeeFloor")}
             </span>
           </div>
 
@@ -465,8 +457,7 @@ export function VirtualCommitteeRoom({
 
         </div>
         <figcaption className="sr-only">
-          Virtual Model UN committee room with delegate placards showing country,
-          name, school, and pronouns.
+          {t("virtualRoomCaption")}
         </figcaption>
       </figure>
     </div>

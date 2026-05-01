@@ -167,7 +167,7 @@
     "rollPresentVoting": "Presente e votação",
     "rollPresentVotingTitle": "Presentes e votantes – devem votar, não podem abster-se",
     "rollAbsent": "Ausente",
-    "rollCallForCountry": "Roll call for {country}",
+    "rollCallForCountry": "Chamada para {país}",
     "presetCustom": "Personalizada",
     "presetSetAgenda": "Moção para definir a agenda",
     "presetExtendOpeningSpeech": "Moção para estender o tempo do discurso de abertura",
@@ -206,7 +206,7 @@
     "liveDebateTopic": "Tópico de debate ao vivo",
     "motionControlHelp": "Fluxo de trabalho do presidente: capture moções, abra uma votação por vez, registre votos por alocação e feche a moção para finalizar aprovação/reprovação.",
     "tabSetup": "1) Configuração",
-    "tabFloorQueue": "2) Fila de andar",
+    "tabFloorQueue": "2) Fila de chão",
     "tabDraftMotion": "3) Projeto de moção",
     "tabRecordVotes": "4) Registrar votos",
     "tabHistory": "5) História",
@@ -301,7 +301,7 @@
     "saveEdits": "Salvar edições",
     "deleteMotionConfirm": "Excluir este movimento permanentemente? Todos os votos registrados serão removidos e a moção desaparecerá dos registros.",
     "deleteMotion": "Excluir movimento",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "Tally: Sim {sim} | Não {não} | Votações {total}",
     "ballotsHelp": "Cédulas = cartazes com Sim ou Não registrado (a abstenção é rastreada separadamente e não contada neste denominador). Limpar remove um voto registrado. Para moções processuais, o resultado compara Sim com os membros presentes na lista (ver seção de chamada).",
     "recordVotesLabel": "Gravar votos",
     "currentMotion": "movimento atual",
@@ -313,7 +313,104 @@
     "unitMinutesShort": "eu",
     "unitSecondsShort": "é",
     "apply": "Aplicar",
-    "motionControl": "Motion control"
+    "motionControl": "Controle de movimento",
+    "advancedSpeakerResetClock": "Alto-falante avançado e redefinição do relógio por alto-falante.",
+    "writeSpeechNoteFirst": "Escreva algo antes de salvar uma nota de discurso.",
+    "speechNoteSaved": "Nota de fala salva.",
+    "speechNoteDeleted": "Nota de fala excluída.",
+    "announcementPosted": "Anúncio postado.",
+    "announcementPinnedToFloor": "Fixado para o plenário do comitê.",
+    "announcementUnpinned": "Desafixado.",
+    "announcementBodyRequired": "O corpo do anúncio não pode ficar vazio.",
+    "announcementUpdated": "Edital atualizado.",
+    "deleteAnnouncementConfirm": "Excluir este anúncio permanentemente? Isto não pode ser desfeito.",
+    "announcementDeleted": "Anúncio excluído.",
+    "noAllocationsToAdd": "Nenhuma alocação a ser adicionada.",
+    "rollCallRowsAlreadyExist": "A chamada já possui uma linha para cada alocação.",
+    "rollCallRowsAdded": "Adicionadas {count} linhas de chamada.",
+    "motionCreatedOpened": "Movimento criado e aberto.",
+    "motionUpdated": "Movimento atualizado.",
+    "motionClosed": "Moção encerrada.",
+    "motionAlreadyOpenReopenBlocked": "Outra moção já está aberta para votação. Feche-o antes de reabrir este.",
+    "motionReopened": "Moção reaberta.",
+    "motionFloorOpened": "Movimento de piso aberto - registre cada movimento declarado abaixo.",
+    "motionFloorClosed": "Moção encerrada para declarações.",
+    "openMotionFloorFirst": "Abra o espaço de movimento para declarações primeiro.",
+    "openMotionBlocksRecording": "Uma moção já está aberta para votação. Feche-o antes de gravar mais declarações.",
+    "statedMotionRecorded": "Moção declarada registrada (ainda não aberta para votação).",
+    "statedMotionRemoved": "Moção declarada removida."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} concluído - sincronizado para este comitê",
+      "loading": "Carregando...",
+      "resetChecklist": "Redefinir lista de verificação"
+    },
+    "prepPage": {
+      "description": "Antes da conferência: regras, tema, sala, materiais e equipe. Sincronizado para todos os presidentes deste comitê; reset limpa para todos.",
+      "crisisHidden": "Os itens de preparação específicos para crises ficam ocultos para esse tipo de comitê."
+    },
+    "flowPage": {
+      "description": "Fluxo normal do comitê - marque as etapas conforme você avança. Compartilhado entre contas e dispositivos de presidente; redefinir é limpo para todos."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "Regras e procedimentos"
+        },
+        "topic": {
+          "title": "Comitê e tópico"
+        },
+        "room": {
+          "title": "Sala e tecnologia"
+        },
+        "materials": {
+          "title": "Materiais e logística"
+        },
+        "crisis": {
+          "title": "Crise (se aplicável)"
+        },
+        "team": {
+          "title": "Equipe e comunicação"
+        }
+      },
+      "items": {
+        "rop": "Ler e compreender as regras de procedimento do comitê",
+        "parliamentary": "Rever o procedimento parlamentar (moções, pontos, votação)",
+        "speaking-times": "Confirme os tempos de conversação e os limites de tempo",
+        "quorum": "Conheça os requisitos de quórum e votação",
+        "research": "Tópico e histórico do comitê de pesquisa",
+        "study-guide": "Leia o guia de estudo e os principais documentos",
+        "dashboard-topic": "Defina o nome e o tópico do comitê no painel",
+        "agenda": "Preparar a agenda e o fluxo da sessão",
+        "digital-room": "Configurar sala digital (lista de delegados, cartazes)",
+        "tech-check": "Verificação técnica: plataforma, áudio, compartilhamento de tela",
+        "backup": "Tenha um plano de backup se a tecnologia falhar",
+        "roll-plan": "Preparar lista de chamada e presença",
+        "speakers-plan": "Planeje o gerenciamento da lista de palestrantes",
+        "templates": "Prepare movimentos/pontos comuns (se estiver usando modelos)",
+        "timing": "Confirme o horário de início da sessão e os intervalos",
+        "crisis-slides": "Revise os elementos da crise e atualize os slides",
+        "crisis-cues": "Planeje a ordem/sugestões do orador em crise",
+        "crisis-paths": "Preparar caminhos e fatos de crise",
+        "co-chairs": "Coordenar com os copresidentes as funções",
+        "staff": "Confirme o suporte e dicas da equipe / estrado",
+        "delegate-brief": "Prepare um resumo para os delegados (regras, tempo)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Chamada",
+        "open-floor": "Abra o chão (pontos e movimentos)",
+        "recognize": "Reconhecer movimentos",
+        "vote-1": "Votar na(s) moção(ões)",
+        "engage": "Envolva-se no movimento escolhido ou mude para GSL",
+        "open-again": "Abra o chão novamente",
+        "recognize-repeat": "Reconhecer movimentos (repita conforme necessário)",
+        "vote-2": "Votar na(s) moção(ões)",
+        "cycle": "Continuar ciclo (engatar movimento / GSL -> piso aberto)"
+      }
+    }
   },
   "language": {
     "label": "Linguagem",
@@ -352,7 +449,9 @@
   },
   "dashboardLayout": {
     "helpCenter": "Central de ajuda",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "appHomeAria": "Página inicial do {appName}",
+    "defaultDisplayName": "Delegar"
   },
   "authWizard": {
     "enterApp": "Digite {appName}",
@@ -466,7 +565,7 @@
     "selectAll": "Selecionar tudo",
     "clear": "Clara",
     "printSelected": "Imprimir selecionado",
-    "selectedCount": "{count} selected",
+    "selectedCount": "{contagem} selecionados",
     "certificate": "Certificado",
     "rubric": "Rubrica",
     "noAwardRowsYet": "Nenhuma linha de prêmios ainda.",
@@ -490,7 +589,7 @@
     "emptyStateGuidance": "Os presidentes salvam cada vaga como um rascunho na página Pontuação. Esses rascunhos não são mostrados aqui. Depois que cada vaga necessária for preenchida, o presidente deverá clicar em Enviar nomeações ao SMT — então as linhas aparecerão nesta tabela como pendentes para revisão.",
     "noRowsForCommittee": "Não há linhas pendentes para este comitê. Escolher",
     "orAnotherTab": "ou outra guia.",
-    "topRank": "Top {rank}",
+    "topRank": "{classificação} superior",
     "bandInitialsTitle": "Iniciais da banda: B/D/P/E",
     "dash": "-",
     "bestDelegateCommittee": "Melhor Delegado (comitê)",
@@ -693,13 +792,13 @@
     "noCommittees": "Nenhum comitê encontrado para este evento. Adicione-os",
     "eventSessionsLink": "Sessões de eventos e comitês",
     "orSupabase": "ou na Supabase.",
-    "sessionFloorBanner": "<floor>Piso da sessão</floor> (temporizadores, alto-falantes, chamada) é somente para <chairs>cadeiras de estrado</chairs>. Use <live>Comitês ao vivo</live> abaixo para supervisão ou insira códigos de comitê como delegados quando precisar de uma sessão específica.",
+    "sessionFloorBanner": "<floor>Piso da sessão</floor> (temporizadores, alto-falantes, chamada) é apenas para <chairs>cadeiras de estrado</chairs>. Use <live>Comitês ao vivo</live> abaixo para supervisão ou insira códigos de comitê como delegados quando precisar de uma sessão específica.",
     "welcomeSg": "Bem vindo Secretário Geral!",
     "whichCommittee": "Qual comitê você gostaria de verificar?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{contagem, plural, uma {# sessão} other {# sessões}}",
     "topicLabel": "Tópica:",
     "chairsLabel": "Cadeiras:",
-    "committeeLogoAlt": "{name} logo",
+    "committeeLogoAlt": "logotipo de {nome}",
     "eslFriendly": "Compatível com ESL"
   },
   "chairNav": {
@@ -725,6 +824,7 @@
       "session": "Sessão",
       "speakers": "Alto-falantes",
       "formalMotions": "Moções formais",
+      "discipline": "Disciplinar",
       "timer": "Temporizadora",
       "announcements": "Anúncios",
       "motionsPoints": "Movimentos e pontos",
@@ -795,7 +895,7 @@
       "imf": "FMI",
       "ilo": "OIT",
       "fao": "FAO",
-      "peacekeeping": "Manutenção da paz da ONU",
+      "peacekeeping": "Manutenção da Paz da ONU",
       "peacekeepingCurrent": "Manutenção da Paz da ONU – missões atuais",
       "spm": "Missões Políticas Especiais da ONU",
       "memberStates": "Estados Membros da ONU",
@@ -881,7 +981,7 @@
     },
     "resolutions": {
       "enterDelegateEmailFirst": "Insira um e-mail de delegado primeiro.",
-      "sentToDelegate": "Sent to {email}.",
+      "sentToDelegate": "Enviado para {e-mail}.",
       "newResolution": "Nova Resolução",
       "maxDraftResolutions": "Este comitê já possui {count} projetos de resolução.",
       "googleDocLink": "Link do Documento Google",
@@ -894,15 +994,15 @@
       "openInNewTab": "Abrir em nova aba",
       "noGoogleDocLink": "Nenhum link do Documento Google",
       "visibleToOtherBloc": "Visível para outro bloco",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
-      "blocButton": "Bloc {name} ({stance})",
+      "resolutionCounts": "Subs principais: {principal} | Co-subscritores: {co} | Signatários: {signatários}",
+      "blocButton": "Bloco {nome} ({postura})",
       "signVirtually": "Assine virtualmente (subs principais notificados)",
       "shareByEmail": "Compartilhar resolução por e-mail",
       "delegateEmailPlaceholder": "delegado@email.com",
       "sendToDelegate": "Enviar para delegar",
       "clauseEditor": "Editor de cláusulas",
       "noClausesYet": "Ainda não há cláusulas.",
-      "clauseNumber": "Clause {number}",
+      "clauseNumber": "Cláusula {número}",
       "saveClause": "Cláusula de salvamento",
       "delete": "Excluir",
       "addClausePlaceholder": "Adicione uma nova cláusula...",
@@ -969,7 +1069,7 @@
         "resolution": "Resolução"
       },
       "roll": {
-        "absent": "Ausente (rolo)",
+        "absent": "Ausente (rolar)",
         "present_abstain": "Presente - pode abster-se (rolar)",
         "present_voting": "Presente e votação (rolagem)",
         "unknown": "- (rolar)"
@@ -1013,7 +1113,79 @@
       "errImageSize": "A imagem é muito grande (máximo de 5 MB).",
       "errUploadFailed": "Falha no upload.",
       "errStorageSetup": "O armazenamento da foto do perfil não está configurado. No projeto Supabase, execute a migração 00100_profile_pictures_storage_bucket.sql ou crie um bucket de armazenamento público denominado profile-pictures (consulte README).",
-      "errPublicUrl": "Não foi possível resolver o URL público da imagem enviada."
+      "errPublicUrl": "Não foi possível resolver o URL público da imagem enviada.",
+      "fallbacks": {
+        "yourCountry": "seu país",
+        "committeeSession": "Sessão do comitê",
+        "delegate": "Delegar",
+        "speechNote": "Nota de discurso",
+        "untitledMotion": "Movimento sem título",
+        "dash": "-"
+      },
+      "delegateWelcome": {
+        "title": "Bem vindo delegado de {flag} {country}",
+        "subtitle": "Com o que você gostaria de começar?",
+        "links": {
+          "documents": "Documentos",
+          "notes": "Notas",
+          "committeeRoom": "Sala do comitê",
+          "runningNotes": "Notas de execução",
+          "ideas": "Ideias",
+          "guides": "Guias",
+          "sources": "Fontes",
+          "resolutions": "Resoluções",
+          "speeches": "Discursos",
+          "stances": "Posturas",
+          "crisisSlides": "Slides de crise",
+          "report": "Relatório",
+          "motions": "Movimentos",
+          "points": "Pontos"
+        }
+      },
+      "awards": {
+        "tabsAriaLabel": "Prêmios no seu perfil",
+        "rank": "classificação {classificação}",
+        "pending": {
+          "tab": "Nomeações pendentes",
+          "title": "Nomeações de presidente pendentes",
+          "descriptionSingle": "Salvo pelos presidentes e compartilhado com a SMT para revisão. Os prêmios finais aparecem abaixo após a confirmação.",
+          "descriptionTabbed": "Salvo pelos presidentes e compartilhado com a SMT para revisão. Os prêmios finais aparecem após a confirmação."
+        },
+        "recorded": {
+          "tab": "Prêmios gravados",
+          "title": "Prêmios gravados",
+          "description": "Listado quando os presidentes ou SMT atribuem você no rastreador de prêmios. O reconhecimento final segue as regras da sua conferência."
+        }
+      },
+      "privateSections": {
+        "sharedVisibility": "Visível apenas para você, presidentes de comitê e SMT do comitê relevante.",
+        "points": {
+          "title": "Pontos de cadeira (privados)"
+        },
+        "speechNotes": {
+          "title": "Notas do discurso do presidente (privado)"
+        },
+        "motions": {
+          "title": "Movimentos que você moveu",
+          "description": "Salvo em seu perfil para análise do comitê e supervisão do SMT."
+        }
+      },
+      "discipline": {
+        "title": "Status disciplinar (privado)",
+        "statusLine": "Avisos: {warnings} · Avisos: {strikes}{votingDisabled}{peakSuspended}{removedFromCommittee}",
+        "votingDisabled": "votação desativada",
+        "speakingSuspended": "falando suspenso",
+        "removedFromCommittee": "removido da comissão",
+        "updated": "Atualizado: {valor}"
+      },
+      "preview": {
+        "ariaLabel": "Visualização do perfil",
+        "title": "Visualização",
+        "yourName": "Seu nome",
+        "usernameNotSet": "Nome de usuário não definido",
+        "gradeValue": "Nota {nota}",
+        "awards": "Prêmios"
+      }
     },
     "guides": {
       "default": {
@@ -1031,7 +1203,7 @@
         },
         "chairReport": {
           "title": "Relatório do Presidente",
-          "content": "# Relatório do presidente \n\nDocumente os procedimentos e resultados do comitê aqui."
+          "content": "# Relatório do Presidente \n\nDocumente os procedimentos e resultados do comitê aqui."
         }
       },
       "edit": "Editar",
@@ -1054,8 +1226,8 @@
       "glossary": {
         "title": "Glossário da Agenda MUN",
         "subtitle": "Terminologia exclusiva que corresponde ao código do seu comitê e aos tópicos atuais da agenda.",
-        "committeeCode": "Committee code: {code}",
-        "topicTag": "Topic: {topic}",
+        "committeeCode": "Código do comitê: {código}",
+        "topicTag": "Tópico: {tópico}",
         "sources": {
           "core": "essencial",
           "committee": "comitê",
@@ -1095,7 +1267,7 @@
             "definition": "Período de negociação informal onde os delegados se movimentam livremente para redigir e fundir ideias."
           },
           "draft_resolution": {
-            "term": "Projeto de Resolução",
+            "term": "Projeto de resolução",
             "definition": "Texto de trabalho da ação proposta do comitê antes da votação final e adoção."
           },
           "amendment": {
@@ -1290,9 +1462,9 @@
       "add": "Adicionar",
       "noIdeasYet": "Ainda não há ideias.",
       "ideaLabel": "Ideia",
-      "ideaFallback": "Idea {number}",
+      "ideaFallback": "Ideia {número}",
       "linkedDoc": "Documento vinculado",
-      "addedOn": "Added {date}",
+      "addedOn": "Adicionado em {data}",
       "edit": "Editar",
       "delete": "Excluir",
       "ideaDocument": "Documento de ideia",
@@ -1335,19 +1507,42 @@
     },
     "committeeRoom": {
       "committeeLabel": "Comitê",
+      "yourContext": "Seu contexto",
+      "roleLabel": "Papel",
+      "seatLabel": "Assento",
       "clearSearchTitle": "Limpe a pesquisa e mostre todas as delegações",
       "vacantLabel": "Vaga",
+      "assignedLabel": "Atribuída",
+      "daisLabel": "Estrada",
+      "phaseLabel": "Fase",
+      "phaseVoting": "Votação",
+      "phaseDebate": "Debate",
+      "focusSearchTitle": "Pesquisa de foco (títulos e nomes de plataformas correspondem à sua consulta)",
+      "tipLabel": "Dica",
       "searchVacantTitle": "Procure por assentos \"vagos\" na sala",
       "searchHint": "Digite um país, nome do delegado, escola, pronome ou “vago” para destacar correspondências na sala. Pressione Enter para pular para a primeira partida; Esc limpa. Clique em Vagos para ir para os assentos vazios.",
       "findLabel": "Encontre uma delegação ou membro do estrado",
       "searchPlaceholder": "País, nome, escola...",
-      "matchesCount": "{matches} of {total} seats match",
+      "matchesCount": "{correspondências} de {total} vagas correspondentes",
+      "enterScrolls": "Insira pergaminhos",
+      "typeToFilterHint": "Digite para filtrar - Insira a rolagem para a primeira correspondência",
+      "noMatches": "Não há delegações correspondentes ou assentos no estrado.",
+      "digitalDisplay": "Visor digital",
+      "floorLabel": "Chão",
+      "staffSeatsHeading": "Pessoal - assentos",
       "searchAria": "Pesquisar delegações",
       "virtualRoomVacant": "Vaga",
-      "profileAria": "View profile: {country}",
+      "profileAria": "Ver perfil: {país}",
       "vacantSeatAria": "Assento vago",
-      "placardAria": "Placard {country}",
-      "gavelAria": "Martelo"
+      "placardAria": "Placar {país}",
+      "gavelAria": "Martelo",
+      "viewProfileAria": "Ver perfil: {title}",
+      "noProfileLinkAria": "{title} (sem link de perfil)",
+      "committeeFloor": "Piso do comitê",
+      "virtualRoomFigureAria": "Sala virtual do comitê - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "Filtrando delegações. O primeiro assento destacado é a primeira partida no ringue.",
+      "helperText": "Os cartazes listam o país (das alocações), o nome, a escola e os pronomes do perfil de cada delegado. Edite o seu em Perfil. Os assentos vazios do comitê são exibidos como Vagos. Clique em um cartaz preenchido ou assento no estrado para abrir a página desse membro (bate-papo e relatório a partir daí).",
+      "virtualRoomCaption": "Sala virtual do comitê modelo da ONU com cartazes de delegados mostrando país, nome, escola e pronomes."
     },
     "session": {
       "requestToSpeak": {
@@ -1379,7 +1574,7 @@
         "motioner": "Mocionador",
         "majority": "Maioria",
         "majoritySimple": "Simples",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "Sim {sim} - Não {não} - Total {total}",
         "help": "O estrado registra o voto de cada delegação em sessão. As votações de moções usam apenas Sim ou Não (sem abstenção). Os totais contam apenas os cartazes onde foi registrado Sim ou Não; delegações ausentes são ignoradas."
       },
       "activeMotion": {
@@ -1396,13 +1591,13 @@
         "speakerTimeLeftTotal": "Tempo do alto-falante (esquerdo/total)",
         "perSpeaker": "(por palestrante)",
         "paused": "(pausada)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "Pausa: {motivo}"
       },
       "floorStatus": {
         "sessionTime": "Tempo da sessão",
         "sessionNotStarted": "Sessão não iniciada",
         "limit": "Limite",
-        "limitRemaining": "{value} left",
+        "limitRemaining": "{valor} restante",
         "limitOverBy": "acabou por {value}",
         "quickLinkSession": "Sessão",
         "quickLinkRoll": "Rolar",
@@ -1473,15 +1668,15 @@
       },
       "history": {
         "title": "Histórico da sessão",
-        "savedCount": "{count} saved",
+        "savedCount": "{contagem} salvos",
         "permissionsHint": "Os presidentes podem renomear entradas. SMT/Admin pode renomear e excluir entradas.",
         "empty": "Ainda não há histórico de sessão.",
         "rename": "Renomear",
         "delete": "Excluir",
         "deleteConfirm": "Excluir esta sessão do histórico?",
         "sessionNamePrompt": "Nome da sessão",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
+        "rangeClosed": "{faixa}",
+        "rangeOngoing": "{intervalo} -> Em andamento"
       },
       "timerPage": {
         "title": "Temporizadora",
@@ -1541,7 +1736,14 @@
         "alreadyPaused": "O cronômetro já está pausado.",
         "pausedForCommittee": "O cronômetro fez uma pausa para o comitê.",
         "alreadyRunning": "O cronômetro já está funcionando.",
-        "runningForCommittee": "Cronômetro em execução para o comitê."
+        "runningForCommittee": "Cronômetro em execução para o comitê.",
+        "euTimerBoardTitle": "Quadro de cronômetro do Parlamento da UE (11 cronômetros)",
+        "euTimerBoardHelp": "Um cronômetro por grupo, mais tempo total, tempo POI/POC e tempo do alto-falante. Use Aplicar para copiar uma linha nos campos do cronômetro ao vivo na guia Relógio (tempo do alto-falante/Salvar cronômetro).",
+        "euTimerName": "Nome",
+        "euTimerTag": "Marcação",
+        "euTotalTime": "Tempo total",
+        "euPoiPocTime": "Hora do POI/POC",
+        "euSpeakerTime": "Hora do palestrante"
       }
     }
   },
@@ -1566,7 +1768,7 @@
     "daisListed": "Dais (listado)",
     "committeeCodeSecondGate": "Comitê/código da sala (segundo portão)",
     "seats": "Assentos",
-    "seatsFilledAllocated": "{filled} filled · {total} allocated",
+    "seatsFilledAllocated": "{preenchido} preenchido · {total} alocado",
     "resolutions": "Resoluções",
     "openVotes": "Votos abertos",
     "editMetadataIntro": "Edite os metadados da sessão do comitê e os nomes dos presidentes em",
@@ -1647,21 +1849,25 @@
     "delegatesMatrix": "Matriz de delegados",
     "clearAllChairNotes": "Limpar todas as notas da cadeira",
     "searchCountry": "Pesquisar país...",
-    "roomStats": "{placards} placards · {flagged} with chair notes · Roll recorded for {count}",
+    "roomStats": "{placards} cartazes · {sinalizado} com notas de cadeira · Rolo registrado para {count}",
     "loading": "Carregando...",
     "noDelegationsMatch": "Nenhuma delegação corresponde à sua pesquisa.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "Rolar {rótulo}",
     "linkedAccount": "Conta vinculada",
     "vacantPlacard": "Cartaz vago",
     "delegateProfile": "Perfil do delegado ->",
     "chairNotePlaceholder": "por exemplo Agradeça à França por marcar o tempo",
-    "notesSyncSuffix": "— sincronização das notas do presidente para este comitê (todas as contas e dispositivos do presidente).",
+    "notesSyncSuffix": "— sincronização de notas do presidente para este comitê (todas as contas e dispositivos do presidente).",
     "compliment": "Elogio",
     "concern": "Preocupação",
     "adding": "Adicionando...",
     "addToSpeakerList": "Adicionar à lista de palestrantes",
     "reminder": "Lembrete",
-    "privateReminderLabel": "Lembrete privado (somente cadeiras, sincronizado)"
+    "privateReminderLabel": "Lembrete privado (somente cadeiras, sincronizado)",
+    "clearAllConfirm": "Elogios, preocupações e lembretes claros para cada cartaz? Isso atualiza a cópia compartilhada do comitê.",
+    "addedToSpeakerList": "{country} adicionado à lista de palestrantes.",
+    "committeeFallback": "Comitê",
+    "dash": "—"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Selecione o tópico ao vivo",
@@ -1723,7 +1929,7 @@
     "anyChair": "Qualquer cadeira",
     "noChairs": "Nenhum perfil de cadeira encontrado.",
     "notesListTitle": "Lista de notas",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{contar, plural, um {# nota} outro {# notas}}",
     "emptyList": "Ainda não há notas.",
     "forwardedBadge": "(encaminhada)",
     "readerWarning": "Aviso ao leitor: esta nota pode conter linguagem imprópria.",
@@ -1871,7 +2077,7 @@
       "couldNotParseCsv": "Não foi possível analisar o CSV.",
       "noDataRowsFound": "Nenhuma linha de dados encontrada (é necessário pelo menos um país/posição por linha).",
       "importLimitedRows": "Importação limitada a {max} linhas. Divida seu arquivo.",
-      "rowTooLong": "Row too long: {row}…",
+      "rowTooLong": "Linha muito longa: {linha}…",
       "codeTooLongOnRow": "Código muito longo na linha: {row}"
     },
     "smtStaffAccess": {
@@ -1922,10 +2128,10 @@
       "welcomeLine3": "Vejo você no chão.",
       "chairReminderSubject": "Solicitação de alocação de delegado com aprovação pendente",
       "chairReminderLine1": "Um delegado solicitou uma alocação e precisa de revisão pelo presidente.",
-      "chairReminderConference": "Conference: {conference}",
+      "chairReminderConference": "Conferência: {conferência}",
       "chairReminderAllocation": "Alocação solicitada: {country}",
-      "chairReminderDelegate": "Delegate: {name}",
-      "chairReminderEmail": "Account email: {email}",
+      "chairReminderDelegate": "Delegado: {nome}",
+      "chairReminderEmail": "E-mail da conta: {e-mail}",
       "chairReminderLine2": "Aprove ou rejeite esta solicitação na matriz de alocação de presidentes:"
     }
   },
@@ -1995,7 +2201,7 @@
     "committeeFallback": "Comitê",
     "showingOneCommitteeAtATime": "Mostrando um comitê por vez. Troque de comitê usando as guias inferiores.",
     "editPlacardCodesSheet": "Editar folha de códigos de cartazes ->",
-    "rosterHeading": "Roster · {heading}",
+    "rosterHeading": "Lista · {título}",
     "seatsSummary": "{count} assento(s).",
     "linkedDelegatesCannotBeDeleted": "Os delegados vinculados não podem ser excluídos aqui.",
     "countryPosition": "País/posição",
@@ -2218,7 +2424,7 @@
         "bands": {
           "0": "Passiva; espera que outros iniciem moções ou discussões durante os caucuses.",
           "1": "Mostra liderança em pequenos grupos, mas hesita em liderar a casa ou apresentar-se para o bloco.",
-          "2": "Toma uma iniciativa clara; lidera reuniões não moderadas e gerencia o processo de redação.",
+          "2": "Toma uma iniciativa clara; lidera convenções não moderadas e gerencia o processo de redação.",
           "3": "Líder visionário; dá o tom da sala e inspira outras pessoas por meio de ação e orientação."
         }
       },
@@ -2363,7 +2569,7 @@
           "0": "Resumo de nível superficial; carece de contexto histórico ou dados.",
           "1": "Boa visão geral, mas perde nuances jurídicas ou técnicas complexas.",
           "2": "Análise forte; inclui ações passadas específicas e dados regionais.",
-          "3": "Bolsa de nível especializado; identifica ângulos únicos para debate."
+          "3": "Bolsa de nível especialista; identifica ângulos únicos para debate."
         }
       },
       "mandate_clarity": {
@@ -2372,7 +2578,7 @@
           "0": "\"Questões a considerar\" vagas; poderes do comitê pouco claros.",
           "1": "Perguntas padrão; orientações gerais sobre o âmbito do debate.",
           "2": "Perguntas claras e focadas que orientam os delegados em direção a soluções específicas.",
-          "3": "Avisos projetados com precisão que evitam debates estagnados ou fora do assunto."
+          "3": "Prompts projetados com precisão que evitam debates estagnados ou fora do assunto."
         }
       },
       "accessibility": {
@@ -2474,6 +2680,130 @@
           "3": "Sinergia perfeita; o estrado inspira um ambiente profissional e de alto risco."
         }
       }
+    },
+    "maxPoints": "Máximo de {pontos} pontos",
+    "reference": {
+      "title": "Rubricas oficiais do prêmio SEAMUN I",
+      "description": "Cópia de referência: tipos de prêmios, processo de avaliação e matrizes completas de 1 a 8 faixas (da rubrica da conferência). A pontuação no InterMUN usa as mesmas chaves de critério onde as indicações são enviadas."
+    },
+    "sections": {
+      "catalogue": "Catálogo de prêmios",
+      "processOversight": "Processo de premiação e supervisão",
+      "calibrationTraining": "Calibração e treinamento da cadeira (escala 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Em toda a conferência (geral)",
+      "collectiveChair": "Coletivo e cadeira",
+      "committeeLevel": "Nível de comitê"
+    },
+    "matrices": {
+      "positionPaper": "Documento de posição (melhor documento de posição)",
+      "delegateLiveSessions": "Delegado (sessões ao vivo)",
+      "chairPerformance": "Desempenho da cadeira",
+      "chairReportOverall": "Relatório do presidente - geral",
+      "chairReportSectionSpecific": "Relatório do presidente - específico da seção",
+      "bestCommittee": "Melhor comitê"
+    },
+    "evidenceNote": "Os presidentes preenchem evidências e confirmação por escrito para registros SMT: evidência primária de excelência e justificativa versus vice-campeão (por formulário publicado).",
+    "footnotes": {
+      "delegateLiveSessions": "Criatividade, diplomacia, colaboração, liderança, conhecimento e investigação, participação – 8 pts cada.",
+      "chairPerformance": "Oito dimensões pontuadas em 8 pontos cada para melhor alinhamento de avaliação de cadeira/cadeira.",
+      "chairReportSectionSpecific": "Combinado com a seção geral acima para uma pontuação total do relatório do presidente de até 72 na escala estendida do documento oficial."
     }
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "Matriz de alocação de comitês para sua sessão atual. Isto é somente leitura para cadeiras e reflete atribuições de assentos ativos e códigos de cartazes.",
+    "separator": "-",
+    "dash": "-",
+    "columns": {
+      "allocation": "Alocação",
+      "flag": "Bandeira",
+      "email": "E-mail",
+      "name": "Nome",
+      "grade": "Nota",
+      "notes": "Notas",
+      "requestedAllocation": "Alocação solicitada",
+      "account": "Conta",
+      "actions": "Ações"
+    },
+    "noRows": "Nenhuma linha de alocação encontrada para este comitê.",
+    "pendingApprovalsTitle": "Aprovações de inscrição pendentes",
+    "pendingApprovalsIntro": "Os presidentes aprovam ou rejeitam inscrições de links de alocação para garantir que os delegados usem a conta correta.",
+    "noPendingRequests": "Não há solicitações pendentes.",
+    "unknownAllocation": "Alocação desconhecida",
+    "approve": "Aprovar",
+    "reject": "Rejeitar"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Matriz de alocação",
+    "selectConferenceEventFirst": "Selecione um evento de conferência primeiro.",
+    "enterConferenceCode": "Insira o código da conferência",
+    "intro": "Crie ou importe a lista de assentos para cada comitê no evento ativo. Os delegados escolhem sua fila no portão do comitê após o login; os códigos dos cartazes podem corresponder aos IDs da sua planilha."
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "-",
+    "speakerList": "Lista de palestrantes",
+    "addedToSpeakerList": "Adicionado à lista de palestrantes.",
+    "chooseDelegationsNotAlreadyQueued": "Escolha delegações que ainda não estejam aguardando ou presentes na lista.",
+    "addedSpeakersInOrder": "Adicionados {count} palestrantes na ordem da lista do comitê.",
+    "introPrefix": "Adicione delegações em ordem de fala. Os delegados ainda podem usar",
+    "requestToSpeak": "Solicitar para falar",
+    "introMiddle": "na sala da comissão. Usar",
+    "sessionTimerLink": "Sessão → Temporizador",
+    "introSuffixPrefix": "para tempo por alto-falante e",
+    "advanceSpeaker": "Alto-falante avançado",
+    "addDelegation": "Adicionar delegação",
+    "select": "Selecione…",
+    "add": "Adicionar",
+    "addSelectedToList": "Adicionar selecionado à lista",
+    "dismissReminder": "Ignorar lembrete",
+    "moveUp": "Subir",
+    "moveDown": "Mover para baixo",
+    "current": "Atual",
+    "remove": "Remover",
+    "prompt": {
+      "gslTitle": "Lista Geral de Oradores (GSL)",
+      "moderatedTimerTitle": "Convenção moderada (temporizador por palestrante)",
+      "moderatedPassedTitle": "Convenção moderada aprovada",
+      "bodyPrefix": "Use a lista de palestrantes abaixo para",
+      "add": "adicionar",
+      "bodyAddMiddle": "delegados (menu suspenso +",
+      "bodyAddMiddle2": ", ou marque delegações e",
+      "bodyRemovePrefix": ") e",
+      "remove": "remover",
+      "bodyRemoveMiddle": "eles com",
+      "bodyRowSuffix": "em cada linha. Reordene com as setas ou defina",
+      "bodyEnd": "quando alguém está no microfone.",
+      "noAllocations": "Nenhuma alocação foi carregada para este comitê ainda. Ignore quando estiver pronto – você pode adicionar alto-falantes posteriormente nos controles da lista.",
+      "quickAdd": "Adição rápida (ainda não em espera ou atual)",
+      "alreadyQueued": "Cada alocação já possui um slot em espera ou atual. Remova entradas se precisar reordenar ou descarte quando terminar."
+    },
+    "status": {
+      "current": "current",
+      "waiting": "waiting"
+    }
+  },
+  "timersWidget": {
+    "timer": "Temporizador",
+    "currentSpeaker": "Palestrante atual",
+    "nextSpeaker": "Próximo orador",
+    "speakerTimePerSpeaker": "Tempo do alto-falante (esquerda/cap)",
+    "speakerTimeTotal": "Tempo do alto-falante (esquerdo/total)",
+    "perSpeaker": "(por palestrante)",
+    "paused": "(pausado)",
+    "pauseReason": "Pausa: {motivo}",
+    "dash": "-"
+  },
+  "chairAwardsDelegateMatrix": {
+    "title": "Cada delegado — rubrica da sessão (obrigatório)",
+    "intro": "As mesmas seis dimensões das nomeações de Melhor Delegado do comitê. Você deve pontuar <strong>todos os delegados sentados</strong> antes de enviar indicações ao SMT ({completeCount}/{total} complete).",
+    "complete": "Completo",
+    "incomplete": "Incompleto",
+    "saving": "Salvando...",
+    "saveThisDelegate": "Salvar este delegado",
+    "autosaved": "Salva automaticamente",
+    "autosaveFailed": "Falha no salvamento automático",
+    "autosavedWithCountry": "Salva automaticamente — {país}",
+    "delegateFallback": "delegar"
   }
 }

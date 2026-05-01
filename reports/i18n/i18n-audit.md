@@ -1,21 +1,21 @@
 # i18n Audit Report
 
-Generated: 2026-04-27T03:03:47.739Z
+Generated: 2026-04-30T10:17:52.756Z
 
 ## Summary
 
 - Locales: 27
-- Hardcoded string findings: 504
-- Placeholder mismatches: 0
+- Hardcoded string findings: 434
+- Placeholder mismatches: 533
 - Locales with parity issues: 0
 
 ### Hardcoded Findings by Domain
 
-- page_or_layout: 122
+- page_or_layout: 105
 - server_action: 121
 - api: 3
-- component: 134
-- library_surface: 124
+- component: 117
+- library_surface: 88
 
 ## Locale Parity
 
@@ -48,7 +48,56 @@ Generated: 2026-04-27T03:03:47.739Z
 
 ## Placeholder Mismatches (Preview)
 
-- None
+- ar -> chairChecklists.common.progressSynced (expected: done, total; actual: total)
+- de -> sessionControlClient.rollCallForCountry (expected: country; actual: Land)
+- de -> sessionControlClient.tallyLine (expected: no, total, yes; actual: ja, nein, total)
+- de -> chairNominationsPanel.topRank (expected: rank; actual: Rang)
+- de -> smtOverview.sessionsCount (expected: count; actual: Anzahl)
+- de -> smtOverview.committeeLogoAlt (expected: name; actual: Name)
+- de -> views.resolutions.resolutionCounts (expected: co, main, signatories; actual: Unterzeichner, co, main)
+- de -> views.resolutions.clauseNumber (expected: number; actual: Nummer)
+- de -> views.ideas.ideaFallback (expected: number; actual: Nummer)
+- de -> views.ideas.addedOn (expected: date; actual: Datum)
+- de -> views.committeeRoom.profileAria (expected: country; actual: Land)
+- de -> views.committeeRoom.placardAria (expected: country; actual: Land)
+- de -> views.session.motionVoting.tally (expected: no, total, yes; actual: ja, nein, total)
+- de -> views.session.activeMotion.pauseReason (expected: reason; actual: Grund)
+- de -> views.session.history.rangeClosed (expected: range; actual: Reichweite)
+- de -> chairDigitalRoom.roomStats (expected: count, flagged, placards; actual: count, markiert, placards)
+- de -> delegationNotes.noteCount (expected: count; actual: Anzahl)
+- de -> emails.allocationSignup.chairReminderConference (expected: conference; actual: Konferenz)
+- de -> emails.allocationSignup.chairReminderAllocation (expected: country; actual: Land)
+- de -> chairOverviewPage.welcome (expected: committee; actual: Komitees)
+- de -> awardsRubric.tierPromptPick (expected: band; actual: Band)
+- el -> sessionControlClient.tallyLine (expected: no, total, yes; actual: total)
+- el -> views.resolutions.motionId (expected: id; actual: none)
+- el -> views.committeeRoom.matchesCount (expected: matches, total; actual: match, total)
+- el -> views.session.motionVoting.tally (expected: no, total, yes; actual: none)
+- el -> views.session.history.rangeClosed (expected: range; actual: none)
+- el -> smtCards.seatsFilledAllocated (expected: filled, total; actual: filled)
+- el -> chairDigitalRoom.roomStats (expected: count, flagged, placards; actual: count)
+- el -> allocationMatrixManager.rosterHeading (expected: heading; actual: none)
+- el -> chairOverviewPage.welcome (expected: committee; actual: none)
+- es -> sessionControlClient.rollCallForCountry (expected: country; actual: none)
+- es -> sessionControlClient.tallyLine (expected: no, total, yes; actual: no, total)
+- es -> authWizard.enterApp (expected: appName; actual: none)
+- es -> authWizard.conferenceDescription (expected: mode; actual: modo)
+- es -> chairNominationsPanel.topRank (expected: rank; actual: none)
+- es -> roomGate.openLatestCommitteeHelp (expected: code; actual: none)
+- es -> allocationSignupPage.requestSubmittedBody (expected: country; actual: none)
+- es -> smtOverview.sessionsCount (expected: count; actual: contar)
+- es -> smtOverview.committeeLogoAlt (expected: name; actual: nombre)
+- es -> views.resolutions.sentToDelegate (expected: email; actual: none)
+- es -> views.resolutions.resolutionCounts (expected: co, main, signatories; actual: co, firmantes, principal)
+- es -> views.resolutions.blocButton (expected: name, stance; actual: nombre, postura)
+- es -> views.resolutions.clauseNumber (expected: number; actual: none)
+- es -> views.resolutions.motionId (expected: id; actual: none)
+- es -> views.voting.majorityLine (expected: label; actual: etiqueta)
+- es -> views.guides.glossary.committeeCode (expected: code; actual: none)
+- es -> views.guides.glossary.topicTag (expected: topic; actual: tema)
+- es -> views.ideas.ideaFallback (expected: number; actual: none)
+- es -> views.ideas.addedOn (expected: date; actual: fecha)
+- es -> views.committeeRoom.matchesCount (expected: matches, total; actual: partidos, total)
 
 ## Hardcoded Inventory (Top 200)
 
@@ -87,25 +136,8 @@ Generated: 2026-04-27T03:03:47.739Z
 - app/(dashboard)/chair/awards/page.tsx:178 [object_message_literal] "${delegateByUserId[uid]?.country ??" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/room-code/page.tsx:61 [jsx_text] "committee code" -> suggested prefix: `pageTitles`
 - app/(dashboard)/chair/room-code/page.tsx:76 [jsx_text] "After saving, you can enter that committee or share the code on the dais." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1648 [object_message_literal] "Advanced speaker and reset per-speaker clock." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1681 [object_message_literal] "Speech note saved." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1692 [object_message_literal] "Speech note deleted." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1718 [object_message_literal] "Announcement posted." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1734 [object_message_literal] "Pinned for the committee floor." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1740 [object_message_literal] "Unpinned." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1778 [object_message_literal] "Announcement updated." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1796 [object_message_literal] "Announcement deleted." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1825 [object_message_literal] "Added ${newRows.length} roll call row(s)." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1908 [object_message_literal] "Motion created and opened." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1962 [object_message_literal] "Motion updated." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:1982 [object_message_literal] "Motion closed." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2100 [object_message_literal] "Motion reopened." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2143 [object_message_literal] "Motion floor open — record each stated motion below." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2163 [object_message_literal] "Motion floor closed for statements." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2206 [object_message_literal] "Stated motion recorded (not yet open for voting)." -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2302 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2386 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
-- app/(dashboard)/chair/session/SessionControlClient.tsx:2518 [object_message_literal] "Stated motion removed." -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2310 [jsx_text] "= 1 && idx" -> suggested prefix: `pageTitles`
+- app/(dashboard)/chair/session/SessionControlClient.tsx:2394 [jsx_text] "= 1 && n" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:160 [attribute_literal] "In committee" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:209 [attribute_literal] "Country" -> suggested prefix: `pageTitles`
 - app/(dashboard)/committee-room/person/[profileId]/page.tsx:210 [attribute_literal] "Name" -> suggested prefix: `pageTitles`
@@ -252,5 +284,22 @@ Generated: 2026-04-27T03:03:47.739Z
 - app/actions/smtConference.ts:21 [object_message_literal] "Event name (2+ chars) and conference code (4+ chars) are required." -> suggested prefix: `serverActions.smtConference`
 - app/actions/smtConference.ts:28 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.smtConference`
 - app/actions/smtConference.ts:36 [object_message_literal] "Only secretariat can edit conference info." -> suggested prefix: `serverActions.smtConference`
+- app/actions/smtConference.ts:70 [object_message_literal] "Session title and a valid 6-character committee code (letters/digits) are required." -> suggested prefix: `serverActions.smtConference`
+- app/actions/smtConference.ts:77 [object_message_literal] "Not signed in." -> suggested prefix: `serverActions.smtConference`
+- app/actions/smtConference.ts:85 [object_message_literal] "Only secretariat can edit committees." -> suggested prefix: `serverActions.smtConference`
+- app/admin/layout.tsx:41 [jsx_text] "Welcome Admin" -> suggested prefix: `pageTitles`
+- app/allocation-signup/page.tsx:78 [jsx_text] "Select your allocation" -> suggested prefix: `pageTitles`
+- app/api/cron/award-submissions/route.ts:17 [object_message_literal] "Unauthorized" -> suggested prefix: `pageTitles`
+- app/api/cron/award-submissions/route.ts:26 [object_message_literal] "Service role client not configured" -> suggested prefix: `pageTitles`
+- app/api/me/route.ts:10 [object_message_literal] "not signed in" -> suggested prefix: `pageTitles`
+- app/layout.tsx:50 [jsx_text] "=0?raw:def;for(var i=0;i" -> suggested prefix: `pageTitles`
+- app/layout.tsx:50 [jsx_text] "=0&&tn" -> suggested prefix: `pageTitles`
+- app/room-gate/AutoJoinSingleton.tsx:19 [jsx_text] "Only one conference and one committee are set up — signing you in…" -> suggested prefix: `pageTitles`
+- app/smt/allocation-matrix/AllocationMatrixManagerClient.tsx:85 [object_message_literal] "Head Chair" -> suggested prefix: `pageTitles`
+- app/smt/allocation-matrix/AllocationMatrixManagerClient.tsx:395 [jsx_text] "country,optional_code" -> suggested prefix: `pageTitles`
+- app/smt/allocation-matrix/page.tsx:97 [jsx_text] "Select a conference event first." -> suggested prefix: `pageTitles`
+- app/smt/allocation-matrix/page.tsx:228 [jsx_text] "Allocation matrix" -> suggested prefix: `pageTitles`
+- app/smt/allocation-passwords/page.tsx:63 [jsx_text] "Create a conference first." -> suggested prefix: `pageTitles`
+- app/smt/allocation-passwords/page.tsx:104 [jsx_text] "codes" -> suggested prefix: `pageTitles`
 
 Full machine-readable inventory is available at `reports/i18n/i18n-audit.json`.
