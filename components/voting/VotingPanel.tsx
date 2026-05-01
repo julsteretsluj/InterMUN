@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import type { VoteItem } from "@/types/database";
 import { HelpButton } from "@/components/HelpButton";
@@ -15,10 +15,12 @@ import { LocalTabs } from "@/components/ui/Tabs";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { isAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
 import { isStaffRole } from "@/lib/roles";
+import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 
 interface Vote {
   value: string;
-  user_id: string;
+  user_id: string | null;
+  allocation_id: string | null;
 }
 
 type VoteItemRow = VoteItem & { procedure_code?: string | null };
@@ -33,19 +35,24 @@ export function VotingPanel({
   voteItems,
   myRole,
   includeUnseatedDelegatePlacards = true,
+  forceManageVotes = false,
 }: {
   voteItems: VoteItem[];
   myRole: string;
-  /** When true (default), list every delegate placard from the matrix, including seats not yet linked to a user. Chairs can only record votes when a delegate is seated. Pass false for seated delegates only. */
+  /** When true (default), list every delegate placard from the matrix, including seats not yet linked to a user. */
   includeUnseatedDelegatePlacards?: boolean;
+  /** Force-enable chair controls in contexts that are already chair-only (e.g. chair session agenda modal). */
+  forceManageVotes?: boolean;
 }) {
+  const locale = useLocale();
   const t = useTranslations("voting");
+  const tTopics = useTranslations("agendaTopics");
   const [votes, setVotes] = useState<Record<string, Vote[]>>({});
   const [drafts, setDrafts] = useState<Record<string, { must_vote: boolean; required_majority: string }>>({});
   const [rosterByConferenceId, setRosterByConferenceId] = useState<Record<string, VotingRosterEntry[]>>({});
   const supabase = createClient();
 
-  const canManageVotes = isStaffRole(myRole);
+  const canManageVotes = forceManageVotes || isStaffRole(myRole);
   const isDelegateViewer = (myRole ?? "").trim().toLowerCase() === "delegate";
 
   function majorityLabel(requiredMajority: string): string {
@@ -73,7 +80,7 @@ export function VotingPanel({
     voteItems.forEach((item) => {
       supabase
         .from("votes")
-        .select("value, user_id")
+        .select("value, user_id, allocation_id")
         .eq("vote_item_id", item.id)
         .then(({ data }) => {
           if (data) setVotes((v) => ({ ...v, [item.id]: data }));
@@ -159,7 +166,7 @@ export function VotingPanel({
           if (vote?.vote_item_id) {
             supabase
               .from("votes")
-              .select("value, user_id")
+              .select("value, user_id, allocation_id")
               .eq("vote_item_id", vote.vote_item_id)
               .then(({ data }) => {
                 if (data) setVotes((v) => ({ ...v, [vote.vote_item_id]: data }));
@@ -177,7 +184,7 @@ export function VotingPanel({
     const item = voteItems.find((v) => v.id === itemId);
     const isAgendaFloor = item ? isAgendaFloorVoteItem(item) : false;
     const nextMajority = isAgendaFloor ? "2/3" : required_majority;
-    const nextMustVote = isAgendaFloor ? false : must_vote;
+    const nextMustVote = isAgendaFloor ? true : must_vote;
     const { error } = await supabase
       .from("vote_items")
       .update({ must_vote: nextMustVote, required_majority: nextMajority })
@@ -198,23 +205,35 @@ export function VotingPanel({
     location.reload();
   }
 
-  async function recordVoteForMotion(itemId: string, userId: string, value: "yes" | "no" | "abstain") {
+  async function recordVoteForMotion(
+    itemId: string,
+    row: Pick<VotingRosterEntry, "allocationId" | "userId">,
+    value: "yes" | "no" | "abstain"
+  ) {
     const { error } = await supabase
       .from("votes")
-      .upsert({ vote_item_id: itemId, user_id: userId, value }, { onConflict: "vote_item_id,user_id" });
+      .upsert(
+        {
+          vote_item_id: itemId,
+          allocation_id: row.allocationId,
+          user_id: row.userId,
+          value,
+        },
+        { onConflict: "vote_item_id,allocation_id" }
+      );
     if (error) return;
-    const { data } = await supabase.from("votes").select("value, user_id").eq("vote_item_id", itemId);
+    const { data } = await supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", itemId);
     if (data) setVotes((v) => ({ ...v, [itemId]: data }));
   }
 
-  async function clearVoteForMotion(itemId: string, userId: string) {
+  async function clearVoteForMotion(itemId: string, row: Pick<VotingRosterEntry, "allocationId">) {
     const { error } = await supabase
       .from("votes")
       .delete()
       .eq("vote_item_id", itemId)
-      .eq("user_id", userId);
+      .eq("allocation_id", row.allocationId);
     if (error) return;
-    const { data } = await supabase.from("votes").select("value, user_id").eq("vote_item_id", itemId);
+    const { data } = await supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", itemId);
     if (data) setVotes((v) => ({ ...v, [itemId]: data }));
   }
 
@@ -242,17 +261,21 @@ export function VotingPanel({
       item.vote_type === "resolution" || item.vote_type === "amendment" || isAgendaFloor;
     const abstainCount = (votes[item.id] ?? []).filter((x) => x.value === "abstain").length;
     const typeLabel = voteTypeLabel(item.vote_type);
-    const titleLine = item.title?.trim() || t("untitled");
+    const rawTitle = item.title?.trim() || "";
+    const titleLine = rawTitle
+      ? isAgendaFloor
+        ? translateAgendaTopicLabel(tTopics, rawTitle, locale)
+        : rawTitle
+      : t("untitled");
     const proc = item.procedure_code?.replace(/_/g, " ");
     const roster = rosterByConferenceId[item.conference_id] ?? [];
     const voteMap: Record<string, "yes" | "no" | "abstain"> = {};
     for (const row of votes[item.id] ?? []) {
       if (row.value === "yes" || row.value === "no" || row.value === "abstain") {
-        voteMap[row.user_id] = row.value;
+        const voteKey = row.allocation_id ?? row.user_id;
+        if (voteKey) voteMap[voteKey] = row.value;
       }
     }
-    const recordedForRow = (row: VotingRosterEntry) =>
-      row.userId ? voteMap[row.userId] : undefined;
 
     const chairSettings = canManageVotes ? (
       <div className="mun-inset space-y-3">
@@ -451,8 +474,10 @@ export function VotingPanel({
                   <div className="max-h-[26rem] overflow-y-auto pr-1">
                     <div className="mun-group-list">
                     {roster.map((row) => {
-                      const recorded = recordedForRow(row);
-                      const canRecord = Boolean(row.userId);
+                      const recorded =
+                        votes[item.id]?.find((v) => v.allocation_id === row.allocationId)?.value ??
+                        (row.userId ? votes[item.id]?.find((v) => v.user_id === row.userId)?.value : undefined) ??
+                        null;
                       return (
                         <div
                           key={`${item.id}-${row.allocationId}`}
@@ -461,7 +486,7 @@ export function VotingPanel({
                           <div className="flex flex-wrap items-start justify-between gap-3">
                             <div className="min-w-0">
                               <p className="font-medium text-brand-navy">{row.country}</p>
-                              {!canRecord ? (
+                              {!row.userId ? (
                                 <p className="mt-0.5 text-xs text-brand-muted">{t("unseatedPlacard")}</p>
                               ) : null}
                               <p className="mt-0.5 text-xs text-brand-muted">
@@ -477,7 +502,6 @@ export function VotingPanel({
                                 </span>
                               </p>
                             </div>
-                            {canRecord ? (
                             <div
                               className="flex min-w-0 flex-col items-stretch gap-1.5 sm:items-end"
                               role="group"
@@ -489,7 +513,7 @@ export function VotingPanel({
                               <div className="flex flex-wrap gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--color-bg-page)] p-2 sm:justify-end">
                                 <button
                                   type="button"
-                                  onClick={() => void recordVoteForMotion(item.id, row.userId as string, "yes")}
+                                  onClick={() => void recordVoteForMotion(item.id, row, "yes")}
                                   className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
                                 >
                                   {t("yes")}
@@ -497,7 +521,7 @@ export function VotingPanel({
                                 {abstainAllowedForItem ? (
                                   <button
                                     type="button"
-                                    onClick={() => void recordVoteForMotion(item.id, row.userId as string, "abstain")}
+                                    onClick={() => void recordVoteForMotion(item.id, row, "abstain")}
                                     className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500"
                                   >
                                     {t("abstain")}
@@ -514,21 +538,20 @@ export function VotingPanel({
                                 )}
                                 <button
                                   type="button"
-                                  onClick={() => void recordVoteForMotion(item.id, row.userId as string, "no")}
+                                  onClick={() => void recordVoteForMotion(item.id, row, "no")}
                                   className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600"
                                 >
                                   {t("no")}
                                 </button>
                                 <button
                                   type="button"
-                                  onClick={() => void clearVoteForMotion(item.id, row.userId as string)}
+                                  onClick={() => void clearVoteForMotion(item.id, row)}
                                   className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
                                 >
                                   {t("clear")}
                                 </button>
                               </div>
                             </div>
-                            ) : null}
                           </div>
                         </div>
                       );

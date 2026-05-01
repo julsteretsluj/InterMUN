@@ -126,7 +126,7 @@ type MotionAudit = {
   actor_profile_id: string | null;
   metadata: Record<string, unknown> | null;
 };
-type VoteCountRow = { value: string; user_id: string };
+type VoteCountRow = { value: string; user_id: string | null; allocation_id: string | null };
 type ResolutionRow = {
   id: string;
   google_docs_url: string | null;
@@ -1115,7 +1115,7 @@ export function SessionControlClient({
     const motionId = open?.id ?? null;
     if (motionId) {
       const [{ data: openVotes }, { data: auditRows }] = await Promise.all([
-        supabase.from("votes").select("value, user_id").eq("vote_item_id", motionId),
+        supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", motionId),
         supabase
           .from("motion_audit_events")
           .select("id, event_type, created_at, actor_profile_id, metadata")
@@ -1132,7 +1132,8 @@ export function SessionControlClient({
       const vm: Record<string, "yes" | "no" | "abstain"> = {};
       for (const r of rows) {
         if (r.value === "yes" || r.value === "no" || r.value === "abstain") {
-          vm[r.user_id] = r.value;
+          const voteKey = r.allocation_id ?? r.user_id;
+          if (voteKey) vm[voteKey] = r.value;
         }
       }
       setMotionVoteByUser(vm);
@@ -1454,18 +1455,9 @@ export function SessionControlClient({
       setMsg("No motion open for voting.");
       return;
     }
-    if (!allocation.user_id) {
-      setMsg("This placard has no delegate account — vote cannot be recorded.");
-      return;
-    }
-
     const hasRollEntry = rollAttendanceByAllocationId.has(allocation.id);
     const attendance = rollAttendanceByAllocationId.get(allocation.id) ?? "present_voting";
     const discipline = disciplineByAllocationId[allocation.id];
-    if (hasRollEntry && attendance === "absent") {
-      setMsg("Absent delegates cannot vote.");
-      return;
-    }
     if (discipline?.voting_rights_lost) {
       setMsg("This delegate lost voting rights due to disciplinary strike(s).");
       return;
@@ -1473,8 +1465,7 @@ export function SessionControlClient({
     const abstainAllowedByVoteType =
       activeMotionForRecordedVotes.vote_type === "resolution" ||
       activeMotionForRecordedVotes.vote_type === "amendment";
-    const canAbstain =
-      abstainAllowedByVoteType && attendance !== "present_voting" && (!hasRollEntry || attendance !== "absent");
+    const canAbstain = abstainAllowedByVoteType && attendance !== "present_voting";
     if (value === "abstain" && !canAbstain) {
       setMsg("Abstain is only available for resolutions/amendments when roll is not Present and voting.");
       return;
@@ -1500,8 +1491,8 @@ export function SessionControlClient({
     }
     startTransition(async () => {
       const { error } = await supabase.from("votes").upsert(
-        { vote_item_id: voteItemId, user_id: uid, value },
-        { onConflict: "vote_item_id,user_id" }
+        { vote_item_id: voteItemId, allocation_id: allocation.id, user_id: uid, value },
+        { onConflict: "vote_item_id,allocation_id" }
       );
       if (error) {
         setMsg(error.message);
@@ -1522,11 +1513,13 @@ export function SessionControlClient({
           return;
         }
       } else {
-        await supabase
-          .from("vote_rights_statements")
-          .delete()
-          .eq("vote_item_id", voteItemId)
-          .eq("user_id", uid);
+        if (uid) {
+          await supabase
+            .from("vote_rights_statements")
+            .delete()
+            .eq("vote_item_id", voteItemId)
+            .eq("user_id", uid);
+        }
       }
       setMsg(null);
       void refresh();
@@ -1538,23 +1531,24 @@ export function SessionControlClient({
       setMsg("No motion open for voting.");
       return;
     }
-    if (!allocation.user_id) return;
     const voteItemId = activeMotionForRecordedVotes.id;
     startTransition(async () => {
       const { error } = await supabase
         .from("votes")
         .delete()
         .eq("vote_item_id", voteItemId)
-        .eq("user_id", allocation.user_id);
+        .eq("allocation_id", allocation.id);
       if (error) {
         setMsg(error.message);
         return;
       }
-      await supabase
-        .from("vote_rights_statements")
-        .delete()
-        .eq("vote_item_id", voteItemId)
-        .eq("user_id", allocation.user_id);
+      if (allocation.user_id) {
+        await supabase
+          .from("vote_rights_statements")
+          .delete()
+          .eq("vote_item_id", voteItemId)
+          .eq("user_id", allocation.user_id);
+      }
       setMsg(null);
       void refresh();
     });
@@ -2679,9 +2673,17 @@ export function SessionControlClient({
     <div className="space-y-10">
       <p className="text-sm text-brand-muted">{displayConferenceTitle}</p>
       {msg && (
-        <p className="rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
-          {msg}
-        </p>
+        <div className="flex items-start justify-between gap-3 rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
+          <p className="min-w-0 flex-1">{msg}</p>
+          <button
+            type="button"
+            onClick={() => setMsg(null)}
+            className="shrink-0 rounded-md border border-white/20 bg-black/20 px-2 py-1 text-xs font-medium text-brand-navy hover:bg-black/30"
+            aria-label="Dismiss message"
+          >
+            ×
+          </button>
+        </div>
       )}
 
       {show("agenda") ? (
@@ -3408,7 +3410,7 @@ export function SessionControlClient({
                     const rollA = rollAttendanceByAllocationId.get(call.id);
                     const absent = hasRollEntry && (rollA ?? "present_voting") === "absent";
                     const rollLabel = rollAttendanceLabel(rollA);
-                    const recorded = call.user_id ? motionVoteByUser[call.user_id] : undefined;
+                    const recorded = motionVoteByUser[call.id] ?? (call.user_id ? motionVoteByUser[call.user_id] : undefined);
                     const discipline = disciplineByAllocationId[call.id];
                     const rights =
                       call.user_id
@@ -3462,16 +3464,11 @@ export function SessionControlClient({
                                 Delegate marked absent — voting disabled.
                               </p>
                             ) : null}
-                            {!call.user_id ? (
-                              <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">
-                                No delegate account on this placard.
-                              </p>
-                            ) : null}
                           </div>
                           <div className="flex flex-wrap gap-2">
                             <button
                               type="button"
-                              disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
+                              disabled={pending || discipline?.voting_rights_lost || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "yes")}
                               className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:opacity-50"
                             >
@@ -3490,7 +3487,7 @@ export function SessionControlClient({
                             {canAbstain ? (
                               <button
                                 type="button"
-                                disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
+                                disabled={pending || discipline?.voting_rights_lost || absent}
                                 onClick={() => recordDelegateVoteForAllocation(call, "abstain")}
                                 className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:opacity-50"
                               >
@@ -3499,7 +3496,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || !call.user_id || discipline?.voting_rights_lost || absent}
+                              disabled={pending || discipline?.voting_rights_lost || absent}
                               onClick={() => recordDelegateVoteForAllocation(call, "no")}
                               className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600 disabled:opacity-50"
                             >
@@ -3517,7 +3514,7 @@ export function SessionControlClient({
                             ) : null}
                             <button
                               type="button"
-                              disabled={pending || !call.user_id || discipline?.voting_rights_lost}
+                              disabled={pending || discipline?.voting_rights_lost}
                               onClick={() => clearDelegateVoteForAllocation(call)}
                               className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-brand-navy hover:bg-white/15 disabled:opacity-50"
                             >

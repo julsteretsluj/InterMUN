@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import { HelpCircle, X } from "lucide-react";
+import { createPortal } from "react-dom";
 
 export function HelpButton({
   title,
@@ -13,7 +14,12 @@ export function HelpButton({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dialogId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -44,30 +50,36 @@ export function HelpButton({
         <span className="sr-only">Help</span>
       </button>
 
-      {open ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div
-            id={dialogId}
-            role="dialog"
-            aria-modal="true"
-            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-white/90 p-4 shadow-lg backdrop-blur dark:bg-black/70 dark:text-zinc-100"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="text-base font-semibold">{title}</h3>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="rounded-lg border border-slate-200/90 bg-white/60 p-1 text-slate-700 hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200 dark:hover:bg-black/50"
+      {open && mounted
+        ? createPortal(
+            <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-black/40" onMouseDown={() => setOpen(false)} />
+              <div
+                id={dialogId}
+                role="dialog"
+                aria-modal="true"
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-white/90 p-4 shadow-lg backdrop-blur dark:bg-black/70 dark:text-zinc-100"
               >
-                <X className="h-4 w-4" strokeWidth={1.75} />
-                <span className="sr-only">Close</span>
-              </button>
-            </div>
-            <div className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">{children}</div>
-          </div>
-        </div>
-      ) : null}
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-base font-semibold">{title}</h3>
+                  <button
+                    type="button"
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg border border-slate-200/90 bg-white/60 p-1 text-slate-700 hover:bg-white dark:border-white/10 dark:bg-black/30 dark:text-zinc-200 dark:hover:bg-black/50"
+                  >
+                    <X className="h-4 w-4" strokeWidth={1.75} />
+                    <span className="sr-only">Close</span>
+                  </button>
+                </div>
+                <div className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">{children}</div>
+              </div>
+            </div>,
+            document.body
+          )
+        : null}
     </>
   );
 }

@@ -45,7 +45,7 @@ export async function ensureAgendaFloorVoteItem(
       vote_type: "agenda",
       title,
       procedure_code: AGENDA_FLOOR_PROCEDURE_CODE,
-      must_vote: false,
+      must_vote: true,
       required_majority: "2/3",
       open_for_voting: false,
     })

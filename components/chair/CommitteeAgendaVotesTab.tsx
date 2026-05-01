@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import type { VoteItem } from "@/types/database";
 import { VotingPanel } from "@/components/voting/VotingPanel";
-import { ensureAgendaFloorVoteItem, isAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
+import { ensureAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
 
 type Topic = { id: string; label: string };
 
@@ -110,8 +110,14 @@ export function CommitteeAgendaVotesTab({
           .eq("conference_id", topicId)
           .order("created_at", { ascending: false });
         if (e1) throw e1;
-        const motionOnly = (items ?? []).filter((r) => !isAgendaFloorVoteItem(r));
-        const ids = motionOnly.map((r) => r.id);
+        const topicVoteItems = (items ?? []) as Array<{
+          id: string;
+          title: string | null;
+          created_at: string;
+          procedure_code?: string | null;
+          vote_type?: string | null;
+        }>;
+        const ids = topicVoteItems.map((r) => r.id);
         if (ids.length === 0) {
           setMotions([]);
           setGrand({ yes: 0, no: 0, abstain: 0, other: 0 });
@@ -129,7 +135,7 @@ export function CommitteeAgendaVotesTab({
           string,
           { yes: number; no: number; abstain: number; other: number; total: number }
         >();
-        for (const row of motionOnly) {
+        for (const row of topicVoteItems) {
           tallies.set(row.id, { yes: 0, no: 0, abstain: 0, other: 0, total: 0 });
         }
         let gy = 0;
@@ -155,7 +161,7 @@ export function CommitteeAgendaVotesTab({
           }
           row.total++;
         }
-        const withVotes: MotionTally[] = motionOnly
+        const withVotes: MotionTally[] = topicVoteItems
           .map((row) => {
             const tall = tallies.get(row.id)!;
             const rawTitle = (row.title ?? "").trim();
@@ -363,7 +369,11 @@ export function CommitteeAgendaVotesTab({
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
-              <VotingPanel voteItems={modalVoteItems} myRole={myRole} />
+              <VotingPanel
+                voteItems={modalVoteItems}
+                myRole={myRole}
+                forceManageVotes
+              />
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import agendaTopicSlugToKey from "./generated/agenda-topic-slug-to-key.json";
-import { applyEnglishTopicTitleCaseIfLocale } from "./english-topic-title-case";
+import { applyTopicTitleCaseIfLocale } from "./english-topic-title-case";
 
 type Translator = {
   (key: string, values?: Record<string, string | number | Date>): string;
@@ -199,7 +199,7 @@ export function translateAgendaTopicLabel(
 
   const withSuffix = (line: string) =>
     suffix ? `${line} \u2014 ${suffix}` : line;
-  const caseTopic = (line: string) => applyEnglishTopicTitleCaseIfLocale(line, locale);
+  const caseTopic = (line: string) => applyTopicTitleCaseIfLocale(line, locale);
 
   if (key) {
     const inner = tAgendaTopics(key);
