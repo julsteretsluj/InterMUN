@@ -338,17 +338,17 @@
     "openMotionFloorFirst": "เปิดชั้นการเคลื่อนไหวสำหรับแถลงการณ์ก่อน",
     "openMotionBlocksRecording": "ญัตติได้เปิดให้ลงคะแนนเสียงแล้ว ปิดก่อนบันทึกข้อความเพิ่มเติม",
     "statedMotionRecorded": "บันทึกการเคลื่อนไหวที่ระบุ (ยังไม่เปิดให้ลงคะแนน)",
-    "statedMotionRemoved": "Stated motion removed."
+    "statedMotionRemoved": "การเคลื่อนไหวดังกล่าวถูกลบออก"
   },
   "language": {
     "label": "ภาษา",
-    "selectorAria": "Select language"
+    "selectorAria": "เลือกภาษา"
   },
   "dashboardTopBar": {
-    "delegateHub": "Delegate hub"
+    "delegateHub": "ศูนย์กลางการมอบหมาย"
   },
   "tabNav": {
-    "delegateHub": "Delegate hub",
+    "delegateHub": "ศูนย์กลางการมอบหมาย",
     "profile": "ประวัติโดยย่อ",
     "follow": "ติดตาม",
     "notes": "หมายเหตุ",
@@ -356,20 +356,20 @@
     "voting": "การลงคะแนนเสียง",
     "guides": "ไกด์",
     "documents": "เอกสาร",
-    "stances": "Stances",
-    "ideas": "Ideas",
+    "stances": "ท่าทาง",
+    "ideas": "ไอเดีย",
     "sources": "แหล่งที่มา",
-    "resolutions": "Resolutions",
+    "resolutions": "มติ",
     "speeches": "สุนทรพจน์",
     "running": "วิ่ง",
     "report": "รายงาน",
-    "crisisSlides": "Crisis slides",
+    "crisisSlides": "สไลด์วิกฤติ",
     "committeeCode": "รหัสคณะกรรมการ",
     "session": "การประชุม",
-    "passwords": "Passwords",
-    "matrix": "Matrix",
+    "passwords": "รหัสผ่าน",
+    "matrix": "เมทริกซ์",
     "awards": "รางวัล",
-    "mainTabs": "Main tabs",
+    "mainTabs": "แท็บหลัก",
     "subtabs": "แท็บย่อย",
     "home": "บ้าน",
     "library": "ห้องสมุด",
@@ -378,16 +378,16 @@
   "dashboardLayout": {
     "helpCenter": "ศูนย์ช่วยเหลือ",
     "settings": "การตั้งค่า",
-    "appHomeAria": "{appName} home",
+    "appHomeAria": "{appName} บ้าน",
     "defaultDisplayName": "มอบหมาย"
   },
   "authWizard": {
     "enterApp": "ป้อน {ชื่อแอป}",
     "welcomeSignup": "ป้อนรหัสการประชุมของคุณก่อน เลือกวิธีเข้าร่วม จากนั้นจึงสร้างบัญชีของคุณ",
     "welcomeLogin": "ป้อนรหัสการประชุมของคุณก่อน เลือกวิธีเข้าร่วม จากนั้นลงชื่อเข้าใช้",
-    "conferenceTitle": "Join your conference",
+    "conferenceTitle": "เข้าร่วมการประชุมของคุณ",
     "conferenceDescription": "ป้อนรหัสการประชุมจากผู้จัดของคุณ ต่อไป คุณจะต้องเลือกบทบาทของคุณ จากนั้นเลือก {mode}",
-    "conferenceCode": "Conference code",
+    "conferenceCode": "รหัสการประชุม",
     "conferenceCodeHelp": "รหัสการประชุมทั้งหมด (คณะกรรมการทั้งหมด) เว้นวรรค; การจับคู่ไม่คำนึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่",
     "checking": "กำลังตรวจสอบ...",
     "whatIsYourRole": "บทบาทของคุณคืออะไร?",
@@ -723,7 +723,7 @@
     "sessionFloorBanner": "<floor>ชั้นเซสชั่น</floor> (ตัวจับเวลา ลำโพง การโทรแบบม้วน) มีไว้สำหรับ <chairs>เก้าอี้ dais</chairs> เท่านั้น ใช้ <live>คณะกรรมการสด</live> ด้านล่างเพื่อกำกับดูแล หรือป้อนรหัสคณะกรรมการ เช่น ผู้รับมอบสิทธิ์ เมื่อคุณต้องการเซสชั่นใดเซสชันหนึ่ง",
     "welcomeSg": "ยินดีต้อนรับเลขาธิการ!",
     "whichCommittee": "คุณต้องการตรวจสอบกับคณะกรรมการใด?",
-    "sessionsCount": "{นับ พหูพจน์ หนึ่ง {# เซสชั่น} อื่นๆ {# เซสชั่น}}",
+    "sessionsCount": "{count, plural, other {# เซสชัน}}",
     "topicLabel": "หัวข้อ:",
     "chairsLabel": "เก้าอี้:",
     "committeeLogoAlt": "โลโก้ {ชื่อ}",
@@ -1113,7 +1113,12 @@
         "usernameNotSet": "ชื่อผู้ใช้ไม่ได้ตั้งค่า",
         "gradeValue": "เกรด {เกรด}",
         "awards": "รางวัล"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1809,6 +1814,7 @@
     "aiGovernance": "การกำกับดูแลโดย AI",
     "disarmament": "การลดอาวุธ",
     "nonProliferation": "การไม่แพร่ขยาย",
+    "armsDiversionMechanisms": "การพัฒนากลไกเพื่อป้องกันการหันเหของอาวุธตามประเพณีที่มีการซื้อขายอย่างถูกกฎหมายไปยังตลาดที่ผิดกฎหมายและผู้มีบทบาทที่ไม่ใช่ภาครัฐ",
     "refugeeProtection": "การคุ้มครองผู้ลี้ภัย",
     "globalHealth": "สุขภาพโลก",
     "foodSecurity": "ความมั่นคงด้านอาหาร",
@@ -1817,6 +1823,7 @@
     "disinformation": "ข้อมูลบิดเบือน",
     "sustainableDevelopment": "การพัฒนาที่ยั่งยืน",
     "untitledTopic": "หัวข้อที่ไม่มีชื่อ",
+    "topicQuestionOf": "คำถามของ {topic}",
     "qClimateCooperation": "ประเทศสมาชิกจะเสริมสร้างความร่วมมือระดับโลกเกี่ยวกับการดำเนินการด้านสภาพภูมิอากาศได้อย่างไร?",
     "qGlobalHealthcareAccess": "ประชาคมระหว่างประเทศจะปรับปรุงการเข้าถึงการรักษาพยาบาลที่มีคุณภาพได้อย่างไร?",
     "qAiGovernance": "รัฐควรควบคุม AI และเทคโนโลยีเกิดใหม่อย่างไร",
@@ -1857,7 +1864,7 @@
     "anyChair": "เก้าอี้อะไรก็ได้",
     "noChairs": "ไม่พบโปรไฟล์เก้าอี้",
     "notesListTitle": "รายการบันทึก",
-    "noteCount": "{นับ พหูพจน์ หนึ่ง {# บันทึก} อื่น ๆ {# บันทึก}}",
+    "noteCount": "{count, plural, other {# บันทึก}}",
     "emptyList": "ยังไม่มีบันทึก",
     "forwardedBadge": "(ส่งต่อ)",
     "readerWarning": "คำเตือนผู้อ่าน: บันทึกนี้อาจมีภาษาที่ไม่เหมาะสม",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "ทุกการจัดสรรมีช่องรอหรือช่องปัจจุบันอยู่แล้ว ลบรายการออกหากคุณต้องการเรียงลำดับใหม่ หรือยกเลิกเมื่อคุณดำเนินการเสร็จแล้ว"
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "ปัจจุบัน",
+      "waiting": "ซึ่งรอคอย"
     }
   },
   "timersWidget": {

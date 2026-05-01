@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>セッションフロア</floor> (タイマー、スピーカー、点呼) は、<chairs>台の椅子</chairs>のみに適用されます。 監視のために以下の <ライブ>ライブ委員会</ライブ> を使用するか、特定のセッションが必要な場合は代表者などの委員会コードを入力します。",
     "welcomeSg": "事務局長さん、ようこそ！",
     "whichCommittee": "どの委員会に参加したいですか?",
-    "sessionsCount": "{count、複数、one {# セッション} other {# セッション}}",
+    "sessionsCount": "{count, plural, other {# セッション}}",
     "topicLabel": "トピック：",
     "chairsLabel": "椅子:",
     "committeeLogoAlt": "{名前}のロゴ",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "ユーザー名が設定されていません",
         "gradeValue": "グレード {グレード}",
         "awards": "受賞歴"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "AI ガバナンス",
     "disarmament": "軍縮",
     "nonProliferation": "不拡散",
+    "armsDiversionMechanisms": "合法的に取引された通常兵器が違法な市場や非国家主体に転用されることを防ぐメカニズムの開発",
     "refugeeProtection": "難民保護",
     "globalHealth": "世界の健康",
     "foodSecurity": "食料安全保障",
@@ -1889,6 +1895,7 @@
     "disinformation": "偽情報",
     "sustainableDevelopment": "持続可能な発展",
     "untitledTopic": "無題のトピック",
+    "topicQuestionOf": "{topic}の質問",
     "qClimateCooperation": "加盟国は気候変動対策に関する世界的な協力をどのように強化できるでしょうか?",
     "qGlobalHealthcareAccess": "国際社会はどのようにして質の高い医療へのアクセスを改善できるでしょうか?",
     "qAiGovernance": "国家は AI と新興テクノロジーをどのように規制すべきでしょうか?",
@@ -1929,7 +1936,7 @@
     "anyChair": "どの椅子でも",
     "noChairs": "椅子のプロファイルが見つかりません。",
     "notesListTitle": "メモリスト",
-    "noteCount": "{数、複数、one {# 音符} other {# 音符}}",
+    "noteCount": "{count, plural, other {# 件のノート}}",
     "emptyList": "まだメモはありません。",
     "forwardedBadge": "(転送されました)",
     "readerWarning": "読者への警告: このメモには不適切な表現が含まれている可能性があります。",

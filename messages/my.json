@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Session floor</floor> (တိုင်မာများ၊ စပီကာများ၊ roll call) သည် <chairs>dais chairs</chairs> အတွက်သာဖြစ်သည်။ ကြီးကြပ်မှုအတွက် အောက်ဖော်ပြပါ <live>တိုက်ရိုက်ကော်မတီများ</live> ကိုအသုံးပြုပါ သို့မဟုတ် သင်သတ်မှတ်ထားသောစက်ရှင်တစ်ခုလိုအပ်သည့်အခါ ကိုယ်စားလှယ်များကဲ့သို့ ကော်မတီကုဒ်များထည့်ပါ။",
     "welcomeSg": "အတွင်းရေးမှူးချုပ်ကို ကြိုဆိုပါတယ်။",
     "whichCommittee": "ဘယ်ကော်မတီကို ဝင်စစ်ချင်လဲ။",
-    "sessionsCount": "{အရေအတွက်၊ အများကိန်း၊ တစ်ခု {# session} အခြား {# sessions}}",
+    "sessionsCount": "{count, plural, other {# ကြိမ်မြောက် အစည်းအဝေး}}",
     "topicLabel": "ခေါင်းစဉ်-",
     "chairsLabel": "ကုလားထိုင်များ",
     "committeeLogoAlt": "{name} လိုဂို",
@@ -1185,7 +1185,12 @@
       "errImageSize": "ပုံသည် ကြီးလွန်းသည် (အများဆုံး 5 MB)။",
       "errUploadFailed": "အပ်လုဒ် မအောင်မြင်ပါ။",
       "errStorageSetup": "ပရိုဖိုင်ပုံ သိုလှောင်မှုကို ထည့်သွင်းမထားပါ။ Supabase ပရောဂျက်တွင်၊ ရွှေ့ပြောင်းခြင်း 00100_profile_pictures_storage_bucket.sql ကိုဖွင့်ပါ၊ သို့မဟုတ် ပရိုဖိုင်ပုံများဟု အမည်ပေးထားသော အများသူငှာ သိုလှောင်မှုပုံးကို ဖန်တီးပါ (README ကိုကြည့်ပါ)။",
-      "errPublicUrl": "အပ်လုဒ်လုပ်ထားသောပုံအတွက် အများသူငှာ URL ကို မဖြေရှင်းနိုင်ပါ။"
+      "errPublicUrl": "အပ်လုဒ်လုပ်ထားသောပုံအတွက် အများသူငှာ URL ကို မဖြေရှင်းနိုင်ပါ။",
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1919,8 +1924,8 @@
       "alreadyQueued": "ခွဲဝေပေးမှုတိုင်းတွင် စောင့်ဆိုင်းရန် သို့မဟုတ် လက်ရှိအထိုင်တစ်ခု ရှိနှင့်ပြီးဖြစ်သည်။ ပြန်စီရန် လိုအပ်ပါက၊ သို့မဟုတ် ပြီးသောအခါတွင် ထည့်သွင်းမှုများကို ဖယ်ရှားပါ။"
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "လက်ရှိ",
+      "waiting": "စောင့်နေသည်။"
     }
   },
   "chairTopicTabs": {
@@ -1935,6 +1940,7 @@
     "aiGovernance": "AI အုပ်ချုပ်ရေး",
     "disarmament": "လက်နက်ဖျက်သိမ်းရေး",
     "nonProliferation": "မပြန့်ပွားရေး",
+    "armsDiversionMechanisms": "တရားဝင်ရောင်းဝယ်ဖောက်ကားနေသည့် သမားရိုးကျလက်နက်များကို တရားမဝင်ဈေးကွက်များနှင့် အစိုးရမဟုတ်သော အဖွဲ့အစည်းများထံ လွှဲပြောင်းခြင်းမှ တားဆီးရန် ယန္တရားများ ဖော်ဆောင်ခြင်း၊",
     "refugeeProtection": "ဒုက္ခသည်ကာကွယ်ရေး",
     "globalHealth": "ကမ္ဘာ့ကျန်းမာရေး",
     "foodSecurity": "စားနပ်ရိက္ခာဖူလုံရေး",
@@ -1943,6 +1949,7 @@
     "disinformation": "မဟုတ်မမှန်လုပ်ကြံ",
     "sustainableDevelopment": "စဉ်ဆက်မပြတ်ဖွံ့ဖြိုးတိုးတက်မှု",
     "untitledTopic": "ခေါင်းစဉ်မဲ့ အကြောင်းအရာ",
+    "topicQuestionOf": "{topic}မေးခွန်း",
     "qClimateCooperation": "အဖွဲ့ဝင်နိုင်ငံများသည် ရာသီဥတုဆိုင်ရာ ဆောင်ရွက်မှုအပေါ် ကမ္ဘာလုံးဆိုင်ရာ ပူးပေါင်းဆောင်ရွက်မှုကို မည်ကဲ့သို့ ခိုင်မာစေသနည်း။",
     "qGlobalHealthcareAccess": "နိုင်ငံတကာအသိုက်အဝန်းသည် အရည်အသွေးပြည့်ဝသော ကျန်းမာရေးစောင့်ရှောက်မှုရရှိရေး မည်ကဲ့သို့တိုးတက်နိုင်မည်နည်း။",
     "qAiGovernance": "ပြည်နယ်များသည် AI နှင့် ပေါ်ပေါက်လာသော နည်းပညာများကို မည်သို့ ထိန်းကျောင်းသင့်သနည်း။",
@@ -1983,7 +1990,7 @@
     "anyChair": "ထိုင်ခုံတစ်ခုခု",
     "noChairs": "ထိုင်ခုံပရိုဖိုင်ကို ရှာမတွေ့ပါ။",
     "notesListTitle": "မှတ်စုများစာရင်း",
-    "noteCount": "{အရေအတွက်၊ အများကိန်း၊ တစ်ခု {# note} အခြား {# notes}}",
+    "noteCount": "{count, plural, other {# မှတ်ချက်}}",
     "emptyList": "မှတ်စုမရသေးပါ။",
     "forwardedBadge": "(ထပ်ဆင့်)",
     "readerWarning": "စာဖတ်သူသတိပေးချက်- ဤမှတ်စုတွင် မသင့်လျော်သောဘာသာစကား ပါဝင်နိုင်သည်။",
@@ -2688,7 +2695,7 @@
         }
       },
       "academic_depth": {
-        "label": "Academic Depth",
+        "label": "Academic Depth ၊",
         "bands": {
           "0": "မျက်နှာပြင်အဆင့် အနှစ်ချုပ် သမိုင်းဆိုင်ရာ အကြောင်းအရာ သို့မဟုတ် အချက်အလက် ကင်းမဲ့သည်။",
           "1": "ခြုံငုံသုံးသပ်ချက်ကောင်းသော်လည်း ရှုပ်ထွေးသော ဥပဒေ သို့မဟုတ် နည်းပညာဆိုင်ရာ ကွဲလွဲချက်များကို လွတ်သွားပါသည်။",

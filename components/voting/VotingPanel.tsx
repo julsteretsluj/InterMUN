@@ -12,6 +12,7 @@ import {
 } from "@/lib/allocation-display-order";
 import { parseRollAttendance, type RollAttendance } from "@/lib/roll-attendance";
 import { LocalTabs } from "@/components/ui/Tabs";
+import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 
 interface Vote {
   value: string;
@@ -46,10 +47,7 @@ export function VotingPanel({
   }
 
   function voteTypeLabel(voteType: string): string {
-    if (voteType === "motion" || voteType === "amendment" || voteType === "resolution") {
-      return t(`voteTypes.${voteType}`);
-    }
-    return voteType.charAt(0).toUpperCase() + voteType.slice(1);
+    return formatVoteTypeLabel(t, voteType);
   }
 
   function rollAttendanceLabel(att: RollAttendance | undefined): string {

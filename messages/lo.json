@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>ຊັ້ນເຊສຊັນ</floor> (ໂມງຈັບເວລາ, ລຳໂພງ, ໂທລອລ) ແມ່ນສຳລັບ <chairs>ເກົ້າອີ້ Dais</chairs> ເທົ່ານັ້ນ. ໃຊ້ <live>ຄະນະກຳມາທິການສົດ</live> ຂ້າງລຸ່ມເພື່ອກວດກາ, ຫຼືໃສ່ລະຫັດຄະນະກຳມາທິການ ເຊັ່ນ: ຕົວແທນຕ່າງໆ ເມື່ອທ່ານຕ້ອງການນັດໝາຍສະເພາະ.",
     "welcomeSg": "ຕ້ອນຮັບເລຂາທິການໃຫຍ່!",
     "whichCommittee": "ທ່ານຕ້ອງການກວດສອບຄະນະກໍາມະການໃດ?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count, plural, other {# ກອງປະຊຸມ}}",
     "topicLabel": "ຫົວຂໍ້:",
     "chairsLabel": "ເກົ້າອີ້:",
     "committeeLogoAlt": "{name} ໂລໂກ້",
@@ -1185,7 +1185,12 @@
       "errImageSize": "ຮູບພາບໃຫຍ່ເກີນໄປ (ສູງສຸດ 5 MB).",
       "errUploadFailed": "ອັບໂຫຼດບໍ່ສຳເລັດ.",
       "errStorageSetup": "ການເກັບຮັກສາຮູບໂປຣໄຟລ໌ບໍ່ໄດ້ຕັ້ງ. ໃນໂຄງການ Supabase, ດໍາເນີນການ migration 00100_profile_pictures_storage_bucket.sql, ຫຼືສ້າງຖັງເກັບຂໍ້ມູນສາທາລະນະທີ່ມີຊື່ວ່າ profile-pictures (ເບິ່ງ README).",
-      "errPublicUrl": "ບໍ່ສາມາດແກ້ໄຂ URL ສາທາລະນະສໍາລັບຮູບພາບທີ່ອັບໂຫລດໄດ້."
+      "errPublicUrl": "ບໍ່ສາມາດແກ້ໄຂ URL ສາທາລະນະສໍາລັບຮູບພາບທີ່ອັບໂຫລດໄດ້.",
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1919,8 +1924,8 @@
       "alreadyQueued": "ທຸກໆການຈັດສັນມີຊ່ອງລໍຖ້າ ຫຼືປັດຈຸບັນ. ເອົາລາຍການອອກຖ້າທ່ານຕ້ອງການຈັດລໍາດັບໃຫມ່, ຫຼືປິດເມື່ອທ່ານເຮັດແລ້ວ."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "ປະຈຸບັນ",
+      "waiting": "ລໍຖ້າ"
     }
   },
   "chairTopicTabs": {
@@ -1935,6 +1940,7 @@
     "aiGovernance": "ການປົກຄອງ AI",
     "disarmament": "ການປົດອາວຸດ",
     "nonProliferation": "ການບໍ່ແຜ່ຂະຫຍາຍ",
+    "armsDiversionMechanisms": "ພັດທະນາ​ກົນ​ໄກ​ປ້ອງ​ກັນ​ການ​ຫັນປ່ຽນ​ອາວຸດ​ຍຸດ​ໂທ​ປະກອນ​ທຳ​ມະ​ດາ​ທີ່​ມີ​ການ​ຊື້​ຂາຍ​ຢ່າງ​ຖືກຕ້ອງ​ຕາມ​ກົດໝາຍ​ໄປ​ສູ່​ຕະຫຼາດ​ທີ່​ຜິດ​ກົດໝາຍ ​ແລະ ບັນດາ​ອົງການ​ທີ່​ບໍ່​ແມ່ນ​ລັດ.",
     "refugeeProtection": "ການປົກປ້ອງຊາວອົບພະຍົບ",
     "globalHealth": "ສຸຂະພາບທົ່ວໂລກ",
     "foodSecurity": "ຄວາມປອດໄພດ້ານອາຫານ",
@@ -1943,6 +1949,7 @@
     "disinformation": "ຂໍ້ມູນທີ່ບໍ່ຖືກຕ້ອງ",
     "sustainableDevelopment": "ການພັດທະນາແບບຍືນຍົງ",
     "untitledTopic": "ຫົວຂໍ້ທີ່ບໍ່ມີຫົວຂໍ້",
+    "topicQuestionOf": "ຄຳຖາມ {topic}",
     "qClimateCooperation": "ບັນດາ​ປະ​ເທດ​ສະມາຊິກ​ຈະ​ເພີ່ມ​ທະວີ​ການ​ຮ່ວມ​ມື​ທົ່ວ​ໂລກ​ກ່ຽວ​ກັບ​ການ​ເຄື່ອນ​ໄຫວ​ດິນ​ຟ້າ​ອາກາດ​ໄດ້​ແນວ​ໃດ?",
     "qGlobalHealthcareAccess": "ຊຸມຊົນສາກົນສາມາດປັບປຸງການເຂົ້າເຖິງການດູແລສຸຂະພາບທີ່ມີຄຸນນະພາບໄດ້ແນວໃດ?",
     "qAiGovernance": "ລັດຕ່າງໆຄວນຄວບຄຸມ AI ແລະເຕັກໂນໂລຢີທີ່ພົ້ນເດັ່ນຂື້ນແນວໃດ?",
@@ -1983,7 +1990,7 @@
     "anyChair": "ເກົ້າອີ້ໃດໆ",
     "noChairs": "ບໍ່ພົບໂປຣໄຟລ໌ເກົ້າອີ້.",
     "notesListTitle": "ລາຍການບັນທຶກ",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{count, plural, other {# ບັນທຶກ}}",
     "emptyList": "ບໍ່ມີບັນທຶກເທື່ອ.",
     "forwardedBadge": "(ສົ່ງຕໍ່)",
     "readerWarning": "ຄຳເຕືອນຂອງຜູ້ອ່ານ: ບັນທຶກນີ້ອາດມີພາສາທີ່ບໍ່ເໝາະສົມ.",

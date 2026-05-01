@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Sitzungsetage</floor> (Timer, Lautsprecher, Appell) ist nur für <chairs>Podiumsstühle</chairs> vorgesehen. Verwenden Sie unten <live>Live-Ausschüsse</live> für die Übersicht oder geben Sie Ausschusscodes wie Delegierte ein, wenn Sie eine bestimmte Sitzung benötigen.",
     "welcomeSg": "Willkommen, Generalsekretär!",
     "whichCommittee": "In welchem ​​Ausschuss möchten Sie mitmachen?",
-    "sessionsCount": "{Anzahl, Plural, eine {# Sitzung} andere {# Sitzungen}}",
+    "sessionsCount": "{count, plural, one {# Sitzung} other {# Sitzungen}}",
     "topicLabel": "Thema:",
     "chairsLabel": "Stühle:",
     "committeeLogoAlt": "{Name}-Logo",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Benutzername nicht festgelegt",
         "gradeValue": "Note {grade}",
         "awards": "Auszeichnungen"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "KI-Governance",
     "disarmament": "Abrüstung",
     "nonProliferation": "Nichtverbreitung",
+    "armsDiversionMechanisms": "Entwicklung von Mechanismen, um die Umleitung legal gehandelter konventioneller Waffen auf illegale Märkte und nichtstaatliche Akteure zu verhindern",
     "refugeeProtection": "Flüchtlingsschutz",
     "globalHealth": "Globale Gesundheit",
     "foodSecurity": "Ernährungssicherheit",
@@ -1889,6 +1895,7 @@
     "disinformation": "Desinformation",
     "sustainableDevelopment": "Nachhaltige Entwicklung",
     "untitledTopic": "Thema ohne Titel",
+    "topicQuestionOf": "Die Frage von {topic}",
     "qClimateCooperation": "Wie können Mitgliedsstaaten die globale Zusammenarbeit beim Klimaschutz stärken?",
     "qGlobalHealthcareAccess": "Wie kann die internationale Gemeinschaft den Zugang zu hochwertiger Gesundheitsversorgung verbessern?",
     "qAiGovernance": "Wie sollten Staaten KI und neue Technologien regulieren?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Jeder Stuhl",
     "noChairs": "Keine Stuhlprofile gefunden.",
     "notesListTitle": "Notizenliste",
-    "noteCount": "{Anzahl, Plural, eine {# Notiz} andere {# Notizen}}",
+    "noteCount": "{count, plural, one {# Notiz} other {# Notizen}}",
     "emptyList": "Noch keine Notizen.",
     "forwardedBadge": "(weitergeleitet)",
     "readerWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Jede Zuteilung hat bereits einen Warte- oder aktuellen Slot. Entfernen Sie Einträge, wenn Sie sie neu anordnen müssen, oder verwerfen Sie sie, wenn Sie fertig sind."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "aktuell",
+      "waiting": "Warten"
     }
   },
   "timersWidget": {

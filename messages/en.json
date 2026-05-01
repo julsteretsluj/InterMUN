@@ -355,12 +355,24 @@
     },
     "prep": {
       "sections": {
-        "rules": { "title": "Rules & procedure" },
-        "topic": { "title": "Committee & topic" },
-        "room": { "title": "Room & tech" },
-        "materials": { "title": "Materials & logistics" },
-        "crisis": { "title": "Crisis (if applicable)" },
-        "team": { "title": "Team & communication" }
+        "rules": {
+          "title": "Rules & procedure"
+        },
+        "topic": {
+          "title": "Committee & topic"
+        },
+        "room": {
+          "title": "Room & tech"
+        },
+        "materials": {
+          "title": "Materials & logistics"
+        },
+        "crisis": {
+          "title": "Crisis (if applicable)"
+        },
+        "team": {
+          "title": "Team & communication"
+        }
       },
       "items": {
         "rop": "Read and understand committee rules of procedure",
@@ -1162,6 +1174,11 @@
       "awardsComma": "Awards (comma-separated)",
       "awardsPlaceholder": "Best Delegate, Honorable Mention",
       "allocation": "Allocation",
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
       "selectAllocation": "Select allocation",
       "noAllocationsPlaceholder": "No committee allocations available",
       "saveProfile": "Save profile",
@@ -1923,6 +1940,7 @@
     "aiGovernance": "AI governance",
     "disarmament": "Disarmament",
     "nonProliferation": "Non-proliferation",
+    "armsDiversionMechanisms": "Developing mechanisms to prevent the diversion of legally traded conventional arms to illicit markets and non-state actors",
     "refugeeProtection": "Refugee protection",
     "globalHealth": "Global health",
     "foodSecurity": "Food security",
@@ -1931,6 +1949,7 @@
     "disinformation": "Disinformation",
     "sustainableDevelopment": "Sustainable development",
     "untitledTopic": "Untitled topic",
+    "topicQuestionOf": "The question of {topic}",
     "qClimateCooperation": "How can member states strengthen global cooperation on climate action?",
     "qGlobalHealthcareAccess": "How can the international community improve access to quality healthcare?",
     "qAiGovernance": "How should states regulate AI and emerging technologies?",

@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Этаж сеанса</floor> (таймеры, динамики, перекличка) предназначен только для <стульев>кресел</стульев>. Используйте <live>Живые комитеты</live> ниже для контроля или вводите коды комитетов, например делегатов, если вам нужно определенное заседание.",
     "welcomeSg": "Добро пожаловать, Генеральный секретарь!",
     "whichCommittee": "Какой комитет вы хотели бы проверить?",
-    "sessionsCount": "{count, множественное число, one {# сеанс}other {# сеансов}}",
+    "sessionsCount": "{count, plural, one {# сессия} few {# сессии} many {# сессий} other {# сессии}}",
     "topicLabel": "Тема:",
     "chairsLabel": "Стулья:",
     "committeeLogoAlt": "Логотип {имя}",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Имя пользователя не установлено",
         "gradeValue": "Оценка {оценка}",
         "awards": "Награды"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "Управление ИИ",
     "disarmament": "Разоружение",
     "nonProliferation": "Нераспространение",
+    "armsDiversionMechanisms": "Разработка механизмов предотвращения перенаправления законно продаваемых обычных вооружений на незаконные рынки и к негосударственным субъектам.",
     "refugeeProtection": "Защита беженцев",
     "globalHealth": "Глобальное здоровье",
     "foodSecurity": "Продовольственная безопасность",
@@ -1889,6 +1895,7 @@
     "disinformation": "Дезинформация",
     "sustainableDevelopment": "Устойчивое развитие",
     "untitledTopic": "Безымянная тема",
+    "topicQuestionOf": "Вопрос о {topic}",
     "qClimateCooperation": "Как государства-члены могут укрепить глобальное сотрудничество в области борьбы с изменением климата?",
     "qGlobalHealthcareAccess": "Как международное сообщество может улучшить доступ к качественному здравоохранению?",
     "qAiGovernance": "Как государства должны регулировать ИИ и новые технологии?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Любой стул",
     "noChairs": "Профили стульев не найдены.",
     "notesListTitle": "Список заметок",
-    "noteCount": "{число, множественное число, один {# примечание} другое {# примечание}}",
+    "noteCount": "{count, plural, one {# заметка} few {# заметки} many {# заметок} other {# заметки}}",
     "emptyList": "Примечаний пока нет.",
     "forwardedBadge": "(перенаправлено)",
     "readerWarning": "Предупреждение читателя: эта заметка может содержать ненормативную лексику.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Каждое распределение уже имеет ожидающий или текущий слот. Удалите записи, если вам нужно изменить порядок, или закройте их, когда закончите."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "текущий",
+      "waiting": "ожидающий"
     }
   },
   "timersWidget": {

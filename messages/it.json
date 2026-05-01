@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Nome utente non impostato",
         "gradeValue": "Voto {voto}",
         "awards": "Premi"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "La governance dell’intelligenza artificiale",
     "disarmament": "Disarmo",
     "nonProliferation": "Non proliferazione",
+    "armsDiversionMechanisms": "Sviluppare meccanismi per prevenire la diversione delle armi convenzionali commerciate legalmente verso mercati illeciti e attori non statali",
     "refugeeProtection": "Protezione dei rifugiati",
     "globalHealth": "Salute globale",
     "foodSecurity": "Sicurezza alimentare",
@@ -1889,6 +1895,7 @@
     "disinformation": "Disinformazione",
     "sustainableDevelopment": "Sviluppo sostenibile",
     "untitledTopic": "Argomento senza titolo",
+    "topicQuestionOf": "La questione di {topic}",
     "qClimateCooperation": "In che modo gli Stati membri possono rafforzare la cooperazione globale sull’azione per il clima?",
     "qGlobalHealthcareAccess": "Come può la comunità internazionale migliorare l’accesso a un’assistenza sanitaria di qualità?",
     "qAiGovernance": "In che modo gli stati dovrebbero regolamentare l’intelligenza artificiale e le tecnologie emergenti?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Qualsiasi sedia",
     "noChairs": "Nessun profilo sedia trovato.",
     "notesListTitle": "Elenco delle note",
-    "noteCount": "{contare, plurale, una {# nota} altra {# note}}",
+    "noteCount": "{count, plural, one {# nota} other {# note}}",
     "emptyList": "Nessuna nota ancora.",
     "forwardedBadge": "(inoltrato)",
     "readerWarning": "Avviso al lettore: questa nota potrebbe contenere un linguaggio inappropriato.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Ogni allocazione ha già uno slot in attesa o corrente. Rimuovi le voci se devi riordinarle o eliminale quando hai finito."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "attuale",
+      "waiting": "inattesa"
     }
   },
   "timersWidget": {

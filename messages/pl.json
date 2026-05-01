@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Piętro sesyjne</floor> (zegary, głośniki, apele) przeznaczone jest wyłącznie dla <chairs>krzeseł podestowych</chairs>. Użyj <live>Komitetów na żywo</live> poniżej do nadzoru lub wprowadź kody komisji, np. delegatów, gdy potrzebujesz konkretnej sesji.",
     "welcomeSg": "Witamy Sekretarza Generalnego!",
     "whichCommittee": "Do której komisji chciałbyś się zgłosić?",
-    "sessionsCount": "{count, plural, one {# sesja} inne {# sesje}}",
+    "sessionsCount": "{count, plural, one {# sesja} few {# sesje} many {# sesji} other {# sesji}}",
     "topicLabel": "Temat:",
     "chairsLabel": "Krzesła:",
     "committeeLogoAlt": "logo {nazwa}",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Nazwa użytkownika nie została ustawiona",
         "gradeValue": "Ocena",
         "awards": "Nagrody"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "Zarządzanie sztuczną inteligencją",
     "disarmament": "Rozbrojenie",
     "nonProliferation": "Nieproliferacja",
+    "armsDiversionMechanisms": "Opracowanie mechanizmów zapobiegających przekierowaniu legalnie będącej w obrocie broni konwencjonalnej na nielegalne rynki i podmioty niepaństwowe",
     "refugeeProtection": "Ochrona uchodźców",
     "globalHealth": "Globalne zdrowie",
     "foodSecurity": "Bezpieczeństwo żywnościowe",
@@ -1889,6 +1895,7 @@
     "disinformation": "Dezinformacja",
     "sustainableDevelopment": "Zrównoważony rozwój",
     "untitledTopic": "Temat bez tytułu",
+    "topicQuestionOf": "Pytanie {topic}",
     "qClimateCooperation": "W jaki sposób państwa członkowskie mogą wzmocnić globalną współpracę w zakresie działań klimatycznych?",
     "qGlobalHealthcareAccess": "W jaki sposób społeczność międzynarodowa może poprawić dostęp do wysokiej jakości opieki zdrowotnej?",
     "qAiGovernance": "W jaki sposób państwa powinny regulować sztuczną inteligencję i nowe technologie?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Dowolne krzesło",
     "noChairs": "Nie znaleziono profili krzeseł.",
     "notesListTitle": "Lista notatek",
-    "noteCount": "{count, plural, one {# notatka} other {# notatki}}",
+    "noteCount": "{count, plural, one {# notatka} few {# notatki} many {# notatek} other {# notatek}}",
     "emptyList": "Nie ma jeszcze żadnych notatek.",
     "forwardedBadge": "(przesłane)",
     "readerWarning": "Ostrzeżenie czytelnika: ta notatka może zawierać nieodpowiedni język.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Każdy przydział ma już miejsce oczekujące lub bieżące. Usuń wpisy, jeśli chcesz zmienić kolejność, lub zamknij, gdy skończysz."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "aktualny",
+      "waiting": "czekanie"
     }
   },
   "timersWidget": {

@@ -12,6 +12,7 @@ import { ChairAllocationAutoRefresh } from "./ChairAllocationAutoRefresh";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { getTranslations } from "next-intl/server";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
 type AllocationRow = {
   id: string;
@@ -59,6 +60,8 @@ function firstEmbed<T>(value: T | T[] | null): T | null {
 export default async function ChairAllocationMatrixPage() {
   const t = await getTranslations("pageTitles");
   const tMatrix = await getTranslations("chairAllocationMatrixPage");
+  const tTopics = await getTranslations("agendaTopics");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const supabase = await createClient();
   const {
     data: { user },
@@ -160,7 +163,11 @@ export default async function ChairAllocationMatrixPage() {
         {tMatrix("intro")}
       </p>
       <p className="text-xs text-brand-muted mb-5">
-        {[activeConf.name, activeConf.committee].filter(Boolean).join(` ${tMatrix("separator")} `)}
+        {translateConferenceHeadline(
+          tTopics,
+          tCommitteeLabels,
+          [activeConf.name, activeConf.committee].filter(Boolean).join(" — ")
+        )}
       </p>
 
       <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-paper">

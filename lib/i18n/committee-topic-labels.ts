@@ -1,5 +1,7 @@
+import agendaTopicSlugToKey from "./generated/agenda-topic-slug-to-key.json";
+
 type Translator = {
-  (key: string): string;
+  (key: string, values?: Record<string, string | number | Date>): string;
   has?: (key: string) => boolean;
 };
 
@@ -10,6 +12,45 @@ function slugifyLabel(value: string): string {
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "");
+}
+
+/** Strip trailing ellipsis (common when titles are shortened in admin UIs or copy-paste). */
+function normalizeTopicLabelForLookup(value: string): string {
+  return value
+    .trim()
+    .replace(/\s*(\.{2,}|…)+\s*$/u, "")
+    .trim();
+}
+
+const MIN_TOPIC_SLUG_PREFIX = 28;
+
+/** Resolve `agendaTopics` message key from slug; supports truncated DB labels via longest-prefix match. */
+function resolveAgendaTopicKey(slug: string): string | undefined {
+  for (const candidate of agendaTopicSlugCandidates(slug)) {
+    const direct = TOPIC_KEY_BY_SLUG[candidate];
+    if (direct) return direct;
+  }
+  for (const candidate of agendaTopicSlugCandidates(slug)) {
+    if (candidate.length < MIN_TOPIC_SLUG_PREFIX) continue;
+    let bestSlug: string | null = null;
+    for (const mapSlug of Object.keys(TOPIC_KEY_BY_SLUG)) {
+      if (mapSlug.startsWith(candidate)) {
+        if (!bestSlug || mapSlug.length > bestSlug.length) bestSlug = mapSlug;
+      }
+    }
+    if (bestSlug) return TOPIC_KEY_BY_SLUG[bestSlug];
+  }
+  for (const candidate of agendaTopicSlugCandidates(slug)) {
+    if (candidate.length < MIN_TOPIC_SLUG_PREFIX) continue;
+    let bestSlug: string | null = null;
+    for (const mapSlug of Object.keys(TOPIC_KEY_BY_SLUG)) {
+      if (mapSlug.length >= MIN_TOPIC_SLUG_PREFIX && candidate.startsWith(mapSlug)) {
+        if (!bestSlug || mapSlug.length > bestSlug.length) bestSlug = mapSlug;
+      }
+    }
+    if (bestSlug) return TOPIC_KEY_BY_SLUG[bestSlug];
+  }
+  return undefined;
 }
 
 const COMMITTEE_LABEL_KEY_BY_SLUG: Record<string, string> = {
@@ -52,38 +93,27 @@ const COMMITTEE_LABEL_KEY_BY_SLUG: Record<string, string> = {
   unwomen: "UN_WOMEN",
 };
 
+/** From `messages/en.json` agendaTopics via `npm run i18n:generate-agenda-slugs`. */
 const TOPIC_KEY_BY_SLUG: Record<string, string> = {
-  climate_action: "climateAction",
-  climate_change: "climateChange",
-  cyber_security: "cyberSecurity",
-  ai_governance: "aiGovernance",
-  disarmament: "disarmament",
-  non_proliferation: "nonProliferation",
-  refugee_protection: "refugeeProtection",
-  global_health: "globalHealth",
-  food_security: "foodSecurity",
-  human_rights: "humanRights",
-  peacekeeping: "peacekeeping",
-  disinformation: "disinformation",
-  sustainable_development: "sustainableDevelopment",
-  untitled_topic: "untitledTopic",
-  how_can_member_states_strengthen_global_cooperation_on_climate_action:
-    "qClimateCooperation",
-  how_can_the_international_community_improve_access_to_quality_healthcare:
-    "qGlobalHealthcareAccess",
-  how_should_states_regulate_ai_and_emerging_technologies:
-    "qAiGovernance",
-  what_measures_can_reduce_the_global_impact_of_disinformation:
-    "qDisinformationImpact",
-  how_can_countries_balance_security_and_human_rights_in_counter_terrorism:
-    "qSecurityHumanRights",
-  how_can_the_un_system_support_refugee_protection_and_durable_solutions:
-    "qRefugeeProtection",
-  what_strategies_can_improve_food_security_in_climate_vulnerable_regions:
-    "qFoodSecurity",
-  how_should_the_international_community_prevent_nuclear_proliferation:
-    "qNonProliferation",
+  ...(agendaTopicSlugToKey as Record<string, string>),
 };
+
+/** MUN agendas often store topics as "The question of …" / "Topic: …"; strip before slug lookup. */
+function agendaTopicSlugCandidates(slug: string): string[] {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const add = (s: string) => {
+    if (!s || seen.has(s)) return;
+    seen.add(s);
+    out.push(s);
+  };
+  add(slug);
+  const prefixes = ["the_question_of_", "question_of_", "topic_"];
+  for (const p of prefixes) {
+    if (slug.startsWith(p)) add(slug.slice(p.length));
+  }
+  return out;
+}
 
 export function translateCommitteeLabel(
   tCommitteeLabels: Translator,
@@ -98,15 +128,99 @@ export function translateCommitteeLabel(
   return tCommitteeLabels(key);
 }
 
+function isAgendaQuestionKey(key: string): boolean {
+  return key.startsWith("q") && key.length > 1;
+}
+
+/** Strip verbal MUN prefixes from display titles (not already normalized to slug prefixes). */
+function extractMunTopicInnerFromBody(body: string): string | null {
+  const s = body.trim();
+  const patterns = [
+    /^\s*the\s+question\s+of\s+/i,
+    /^\s*question\s+of\s+/i,
+    /^\s*topic\s*:\s*/i,
+  ];
+  for (const p of patterns) {
+    if (p.test(s)) {
+      const rest = s.replace(p, "").trim();
+      if (rest.length > 0) return rest;
+    }
+  }
+  return null;
+}
+
+/** Heuristic: full English question not in catalog — show as-is (no “The question of …” wrapper). */
+function looksLikeFullQuestion(text: string): boolean {
+  return /^(how|what|why|when|which|who|should|can|could|would|does|did|is|are)\b/i.test(
+    text.trim()
+  );
+}
+
+/**
+ * Strip trailing " — COMMITTEE" (MUN agenda lines: DISEC, UNSC, UN WOMEN, …).
+ * Strip for slug lookup, then re-append the captured suffix verbatim after translation.
+ */
+/** EM/en hyphen, non-breaking hyphen, minus sign, ASCII hyphen (committee lines vary by source). */
+const TOPIC_COMMITTEE_DASH = /\s*[\u2014\u2013\u2010\u2011\u2212-]\s*/;
+
+function stripTrailingCommitteeSuffix(raw: string): { body: string; suffix: string | null } {
+  const m = raw.match(
+    new RegExp(`${TOPIC_COMMITTEE_DASH.source}([A-Za-z0-9]+(?:\\s+[A-Za-z0-9]+){0,4})\\s*$`, "u")
+  );
+  if (!m || m.index === undefined) return { body: raw, suffix: null };
+  const suffix = m[1].trim().replace(/\s+/g, " ");
+  if (suffix.length < 2 || suffix.length > 36) return { body: raw, suffix: null };
+  const lower = suffix.toLowerCase();
+  if (/\b(the|and|of|for|with|see|from|subject|question)\b/.test(lower)) {
+    return { body: raw, suffix: null };
+  }
+  return { body: raw.slice(0, m.index).trimEnd(), suffix };
+}
+
 export function translateAgendaTopicLabel(
   tAgendaTopics: Translator,
   rawLabel: string | null | undefined
 ): string {
   const raw = rawLabel?.trim();
   if (!raw) return "";
-  const slug = slugifyLabel(raw);
-  const key = TOPIC_KEY_BY_SLUG[slug];
-  if (!key) return raw;
-  if (typeof tAgendaTopics.has === "function" && !tAgendaTopics.has(key)) return raw;
-  return tAgendaTopics(key);
+  const { body, suffix } = stripTrailingCommitteeSuffix(raw);
+  const normalizedBody = normalizeTopicLabelForLookup(body);
+  const initialSlug = slugifyLabel(normalizedBody);
+  const verbalInner = extractMunTopicInnerFromBody(normalizedBody);
+
+  let key = resolveAgendaTopicKey(initialSlug);
+  if (!key && verbalInner) {
+    key = resolveAgendaTopicKey(slugifyLabel(normalizeTopicLabelForLookup(verbalInner)));
+  }
+
+  const sourceHadVerbalPrefix = verbalInner !== null;
+
+  if (key) {
+    const inner = tAgendaTopics(key);
+    const useWrapper =
+      !isAgendaQuestionKey(key) &&
+      (sourceHadVerbalPrefix ||
+        initialSlug.startsWith("the_question_of_") ||
+        initialSlug.startsWith("question_of_") ||
+        initialSlug.startsWith("topic_"));
+    const line = (() => {
+      if (!useWrapper) return inner;
+      if (typeof tAgendaTopics.has === "function" && !tAgendaTopics.has("topicQuestionOf")) return inner;
+      return tAgendaTopics("topicQuestionOf", { topic: inner });
+    })();
+    return suffix ? `${line} \u2014 ${suffix}` : line;
+  }
+
+  if (verbalInner) {
+    if (looksLikeFullQuestion(verbalInner)) {
+      const line = verbalInner;
+      return suffix ? `${line} \u2014 ${suffix}` : line;
+    }
+    if (typeof tAgendaTopics.has !== "function" || tAgendaTopics.has("topicQuestionOf")) {
+      const line = tAgendaTopics("topicQuestionOf", { topic: verbalInner });
+      return suffix ? `${line} \u2014 ${suffix}` : line;
+    }
+  }
+
+  return raw;
 }

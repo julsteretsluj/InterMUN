@@ -62,6 +62,8 @@ import {
 import { isEuParliamentProcedure } from "@/lib/procedure-profiles";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { localizeCountryName } from "@/lib/i18n/localize-country-name";
 
 type Alloc = {
@@ -283,6 +285,8 @@ export function SessionControlClient({
   const tTimer = useTranslations("views.session.timerPage");
   const tSessionControl = useTranslations("sessionControlClient");
   const tDiscipline = useTranslations("chairMotionsPointsLog");
+  const tVoting = useTranslations("views.voting");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
   const locale = useLocale();
   const supabase = createClient();
   const rosterConferenceIdList = useMemo(() => {
@@ -317,6 +321,10 @@ export function SessionControlClient({
   const displayCountry = useCallback(
     (country: string | null | undefined) => localizeCountryName(country, locale) || country || "—",
     [locale]
+  );
+  const displayConferenceTitle = useMemo(
+    () => translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle),
+    [conferenceTitle, tTopics, tCommitteeLabels]
   );
   const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
   const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
@@ -2655,7 +2663,7 @@ export function SessionControlClient({
 
   return (
     <div className="space-y-10">
-      <p className="text-sm text-brand-muted">{conferenceTitle}</p>
+      <p className="text-sm text-brand-muted">{displayConferenceTitle}</p>
       {(debateTopicOptions?.length ?? 0) > 1 ? (
         <div className="rounded-xl border border-white/15 bg-black/20 px-3 py-3 space-y-2.5">
           <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
@@ -3375,7 +3383,9 @@ export function SessionControlClient({
               <p className={surfaceLabel}>
                 <span className="inline-flex items-center gap-1.5">
                   {tSessionControl("recordVotesLabel")} —{" "}
-                  {activeMotionForRecordedVotes?.title?.trim() || tSessionControl("currentMotion")}
+                  {activeMotionForRecordedVotes?.title?.trim()
+                    ? translateAgendaTopicLabel(tTopics, activeMotionForRecordedVotes.title)
+                    : tSessionControl("currentMotion")}
                   <HelpButton title={tSessionControl("recordVotesLabel")}>
                     {tSessionControl("recordVotesHelp")}
                   </HelpButton>
@@ -3878,7 +3888,10 @@ export function SessionControlClient({
                 <option value="">{tTimer("selectMotion")}</option>
                 {openVotingMotions.map((m) => (
                   <option key={m.id} value={m.id}>
-                    {m.title?.trim() || tTimer("untitled")} · {m.vote_type}
+                    {m.title?.trim()
+                      ? translateAgendaTopicLabel(tTopics, m.title)
+                      : tTimer("untitled")}{" "}
+                    · {formatVoteTypeLabel(tVoting, m.vote_type)}
                     {m.procedure_code ? ` (${m.procedure_code})` : ""}
                   </option>
                 ))}

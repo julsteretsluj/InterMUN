@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Lantai sesi</floor> (pemasa, pembesar suara, panggilan gulung) adalah untuk <kerusi>kerusi pelamin</kerusi> sahaja. Gunakan <live>Jawatankuasa langsung</live> di bawah untuk pengawasan, atau masukkan kod jawatankuasa seperti perwakilan apabila anda memerlukan sesi tertentu.",
     "welcomeSg": "Selamat datang Setiausaha Agung!",
     "whichCommittee": "Jawatankuasa mana yang anda ingin daftar masuk?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count, plural, one {# sesi} other {# sesi}}",
     "topicLabel": "Topik:",
     "chairsLabel": "kerusi:",
     "committeeLogoAlt": "{name} logo",
@@ -1185,7 +1185,12 @@
       "errImageSize": "Imej terlalu besar (maks 5 MB).",
       "errUploadFailed": "Muat naik gagal.",
       "errStorageSetup": "Storan gambar profil tidak disediakan. Dalam projek Supabase, jalankan migrasi 00100_profile_pictures_storage_bucket.sql atau buat baldi storan awam bernama gambar profil (lihat README).",
-      "errPublicUrl": "Tidak dapat menyelesaikan URL awam untuk imej yang dimuat naik."
+      "errPublicUrl": "Tidak dapat menyelesaikan URL awam untuk imej yang dimuat naik.",
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1919,8 +1924,8 @@
       "alreadyQueued": "Setiap peruntukan sudah ada slot menunggu atau semasa. Alih keluar entri jika anda perlu menyusun semula, atau tolak apabila anda selesai."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "semasa",
+      "waiting": "menunggu"
     }
   },
   "chairTopicTabs": {
@@ -1935,6 +1940,7 @@
     "aiGovernance": "tadbir urus AI",
     "disarmament": "pelucutan senjata",
     "nonProliferation": "Bukan percambahan",
+    "armsDiversionMechanisms": "Membangunkan mekanisme untuk menghalang pengalihan senjata konvensional yang didagangkan secara sah kepada pasaran haram dan aktor bukan negara",
     "refugeeProtection": "Perlindungan pelarian",
     "globalHealth": "Kesihatan global",
     "foodSecurity": "Keselamatan makanan",
@@ -1943,10 +1949,11 @@
     "disinformation": "Pemsalah maklumat",
     "sustainableDevelopment": "Pembangunan mampan",
     "untitledTopic": "Topik tanpa tajuk",
+    "topicQuestionOf": "Soalan {topic}",
     "qClimateCooperation": "Bagaimanakah negara anggota boleh mengukuhkan kerjasama global mengenai tindakan iklim?",
     "qGlobalHealthcareAccess": "Bagaimanakah komuniti antarabangsa boleh meningkatkan akses kepada penjagaan kesihatan yang berkualiti?",
     "qAiGovernance": "Bagaimanakah negara harus mengawal AI dan teknologi baru muncul?",
-    "qDisinformationImpact": "Apakah langkah-langkah yang boleh mengurangkan impak global akibat disinformasi?",
+    "qDisinformationImpact": "Apakah langkah-langkah yang boleh mengurangkan kesan global akibat maklumat yang salah?",
     "qSecurityHumanRights": "Bagaimanakah negara boleh mengimbangi keselamatan dan hak asasi manusia dalam memerangi keganasan?",
     "qRefugeeProtection": "Bagaimanakah sistem PBB boleh menyokong perlindungan pelarian dan penyelesaian yang tahan lama?",
     "qFoodSecurity": "Apakah strategi yang boleh meningkatkan keselamatan makanan di kawasan yang terdedah kepada iklim?",
@@ -1983,7 +1990,7 @@
     "anyChair": "Mana-mana kerusi",
     "noChairs": "Tiada profil kerusi ditemui.",
     "notesListTitle": "Senarai nota",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{count, plural, one {# nota} other {# nota}}",
     "emptyList": "Tiada nota lagi.",
     "forwardedBadge": "(majukan)",
     "readerWarning": "Amaran pembaca: nota ini mungkin mengandungi bahasa yang tidak sesuai.",

@@ -723,7 +723,7 @@
     "sessionFloorBanner": "<floor>সেশন ফ্লোর</floor> (টাইমার, স্পিকার, রোল কল) শুধুমাত্র <চেয়ার>ডেইস চেয়ার</চেয়ার> এর জন্য। তত্ত্বাবধানের জন্য নীচে <লাইভ>লাইভ কমিটি</ লাইভ> ব্যবহার করুন, অথবা যখন আপনার একটি নির্দিষ্ট সেশনের প্রয়োজন হয় তখন প্রতিনিধিদের মতো কমিটির কোড লিখুন।",
     "welcomeSg": "স্বাগত মহাসচিব!",
     "whichCommittee": "আপনি কোন কমিটিতে চেক ইন করতে চান?",
-    "sessionsCount": "{গণনা, বহুবচন, একটি {# সেশন} অন্য {# সেশন}}",
+    "sessionsCount": "{count, plural, one {# সেশন} other {# সেশন}}",
     "topicLabel": "বিষয়:",
     "chairsLabel": "চেয়ার:",
     "committeeLogoAlt": "{name} লোগো",
@@ -1113,7 +1113,12 @@
         "usernameNotSet": "ব্যবহারকারীর নাম সেট করা হয়নি",
         "gradeValue": "গ্রেড {grade}",
         "awards": "পুরস্কার"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1795,7 +1800,7 @@
     "clearAllConfirm": "প্রতিটি প্ল্যাকার্ডের জন্য সাফ প্রশংসা, উদ্বেগ, এবং অনুস্মারক নোট? এটি ভাগ করা কমিটির অনুলিপি আপডেট করে।",
     "addedToSpeakerList": "স্পিকার তালিকায় {country} যোগ করা হয়েছে।",
     "committeeFallback": "কমিটি",
-    "dash": "—"
+    "dash": "-"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "লাইভ বিষয় নির্বাচন করুন",
@@ -1809,6 +1814,7 @@
     "aiGovernance": "এআই শাসন",
     "disarmament": "নিরস্ত্রীকরণ",
     "nonProliferation": "অপ্রসারণ",
+    "armsDiversionMechanisms": "অবৈধ বাজার এবং নন-স্টেট অ্যাক্টরদের কাছে বৈধভাবে ব্যবসা করা প্রচলিত অস্ত্রের বিমুখতা রোধ করার জন্য পদ্ধতির বিকাশ",
     "refugeeProtection": "উদ্বাস্তু সুরক্ষা",
     "globalHealth": "বিশ্ব স্বাস্থ্য",
     "foodSecurity": "খাদ্য নিরাপত্তা",
@@ -1817,6 +1823,7 @@
     "disinformation": "বিকৃত তথ্য",
     "sustainableDevelopment": "টেকসই উন্নয়ন",
     "untitledTopic": "শিরোনামহীন বিষয়",
+    "topicQuestionOf": "{topic} এর প্রশ্ন",
     "qClimateCooperation": "কিভাবে সদস্য দেশগুলো জলবায়ু কর্মের উপর বৈশ্বিক সহযোগিতা জোরদার করতে পারে?",
     "qGlobalHealthcareAccess": "আন্তর্জাতিক সম্প্রদায় কীভাবে মানসম্পন্ন স্বাস্থ্যসেবার অ্যাক্সেস উন্নত করতে পারে?",
     "qAiGovernance": "রাজ্যগুলি কীভাবে এআই এবং উদীয়মান প্রযুক্তিগুলিকে নিয়ন্ত্রণ করবে?",
@@ -1857,7 +1864,7 @@
     "anyChair": "যে কোন চেয়ার",
     "noChairs": "কোন চেয়ার প্রোফাইল পাওয়া যায়নি.",
     "notesListTitle": "নোট তালিকা",
-    "noteCount": "{গণনা, বহুবচন, একটি {# নোট} অন্য {# নোট}}",
+    "noteCount": "{count, plural, one {# নোট} other {# নোট}}",
     "emptyList": "এখনও কোন নোট নেই.",
     "forwardedBadge": "(ফরোয়ার্ড করা)",
     "readerWarning": "পাঠক সতর্কতা: এই নোটে অনুপযুক্ত ভাষা থাকতে পারে।",
@@ -2659,8 +2666,8 @@
     "unknownAllocation": "অজানা বরাদ্দ",
     "approve": "অনুমোদন করুন",
     "reject": "প্রত্যাখ্যান করুন",
-    "separator": "—",
-    "dash": "—"
+    "separator": "-",
+    "dash": "-"
   },
   "smtAllocationMatrixPage": {
     "title": "বরাদ্দ ম্যাট্রিক্স",
@@ -2670,73 +2677,73 @@
   },
   "chairChecklists": {
     "common": {
-      "progressSynced": "{done} / {total} complete - synced for this committee",
-      "loading": "Loading...",
-      "resetChecklist": "Reset checklist"
+      "progressSynced": "{done} / {total} সম্পূর্ণ - এই কমিটির জন্য সিঙ্ক করা হয়েছে",
+      "loading": "লোড হচ্ছে...",
+      "resetChecklist": "চেকলিস্ট রিসেট করুন"
     },
     "prepPage": {
-      "description": "Before the conference: rules, topic, room, materials, and team. Synced for all chairs on this committee; reset clears it for everyone.",
-      "crisisHidden": "Crisis-specific prep items are hidden for this committee type."
+      "description": "সম্মেলনের আগে: নিয়ম, বিষয়, ঘর, উপকরণ এবং দল। এই কমিটির সকল চেয়ারের জন্য সিঙ্ক করা হয়েছে; রিসেট প্রত্যেকের জন্য এটি পরিষ্কার করে।",
+      "crisisHidden": "এই কমিটির ধরনের জন্য সংকট-নির্দিষ্ট প্রস্তুতির আইটেম লুকানো আছে।"
     },
     "flowPage": {
-      "description": "Normal committee flow - tick steps as you go. Shared across chair accounts and devices; reset clears for everyone."
+      "description": "সাধারণ কমিটি প্রবাহ - আপনি যেতে পদক্ষেপ টিক. চেয়ার অ্যাকাউন্ট এবং ডিভাইস জুড়ে ভাগ করা; রিসেট ক্লিয়ার সবার জন্য।"
     },
     "prep": {
       "sections": {
         "rules": {
-          "title": "Rules & procedure"
+          "title": "নিয়ম ও পদ্ধতি"
         },
         "topic": {
-          "title": "Committee & topic"
+          "title": "কমিটি এবং বিষয়"
         },
         "room": {
-          "title": "Room & tech"
+          "title": "রুম এবং প্রযুক্তি"
         },
         "materials": {
-          "title": "Materials & logistics"
+          "title": "উপকরণ এবং রসদ"
         },
         "crisis": {
-          "title": "Crisis (if applicable)"
+          "title": "সংকট (যদি প্রযোজ্য হয়)"
         },
         "team": {
-          "title": "Team & communication"
+          "title": "দল ও যোগাযোগ"
         }
       },
       "items": {
-        "rop": "Read and understand committee rules of procedure",
-        "parliamentary": "Review parliamentary procedure (motions, points, voting)",
-        "speaking-times": "Confirm speaking times and time limits",
-        "quorum": "Know quorum and voting requirements",
-        "research": "Research committee topic and background",
-        "study-guide": "Read study guide and key documents",
-        "dashboard-topic": "Set committee name and topic in dashboard",
-        "agenda": "Prepare session agenda and flow",
-        "digital-room": "Set up digital room (delegates list, placards)",
-        "tech-check": "Tech check: platform, audio, screen share",
-        "backup": "Have backup plan if tech fails",
-        "roll-plan": "Prepare roll call list and attendance",
-        "speakers-plan": "Plan speakers list management",
-        "templates": "Prepare common motions / points (if using templates)",
-        "timing": "Confirm session start time and breaks",
-        "crisis-slides": "Review crisis elements and update slides",
-        "crisis-cues": "Plan crisis speaker order / cues",
-        "crisis-paths": "Prepare crisis pathways and facts",
-        "co-chairs": "Coordinate with co-chair(s) on roles",
-        "staff": "Confirm staff / dais support and cues",
-        "delegate-brief": "Prepare brief for delegates (rules, timing)"
+        "rop": "কমিটির পদ্ধতির নিয়মগুলি পড়ুন এবং বুঝুন",
+        "parliamentary": "সংসদীয় পদ্ধতি পর্যালোচনা করুন (গতি, পয়েন্ট, ভোটদান)",
+        "speaking-times": "কথা বলার সময় এবং সময়সীমা নিশ্চিত করুন",
+        "quorum": "কোরাম এবং ভোটের প্রয়োজনীয়তা জানুন",
+        "research": "গবেষণা কমিটির বিষয় এবং পটভূমি",
+        "study-guide": "স্টাডি গাইড এবং মূল নথি পড়ুন",
+        "dashboard-topic": "ড্যাশবোর্ডে কমিটির নাম এবং বিষয় সেট করুন",
+        "agenda": "সেশনের এজেন্ডা এবং প্রবাহ প্রস্তুত করুন",
+        "digital-room": "ডিজিটাল রুম সেট আপ করুন (প্রতিনিধিদের তালিকা, প্ল্যাকার্ড)",
+        "tech-check": "প্রযুক্তি পরীক্ষা: প্ল্যাটফর্ম, অডিও, স্ক্রিন শেয়ার",
+        "backup": "প্রযুক্তি ব্যর্থ হলে ব্যাকআপ পরিকল্পনা আছে",
+        "roll-plan": "রোল কল তালিকা এবং উপস্থিতি প্রস্তুত করুন",
+        "speakers-plan": "পরিকল্পনা স্পিকার তালিকা ব্যবস্থাপনা",
+        "templates": "সাধারণ গতি/বিন্দু প্রস্তুত করুন (যদি টেমপ্লেট ব্যবহার করেন)",
+        "timing": "সেশন শুরুর সময় এবং বিরতি নিশ্চিত করুন",
+        "crisis-slides": "সংকটের উপাদান পর্যালোচনা করুন এবং স্লাইড আপডেট করুন",
+        "crisis-cues": "পরিকল্পনা সংকট স্পিকার আদেশ / cues",
+        "crisis-paths": "সংকটের পথ এবং তথ্য প্রস্তুত করুন",
+        "co-chairs": "ভূমিকা সম্পর্কে সহ-চেয়ার(গুলি) সঙ্গে সমন্বয়",
+        "staff": "কর্মীদের / মঞ্চ সমর্থন এবং cues নিশ্চিত করুন",
+        "delegate-brief": "প্রতিনিধিদের জন্য সংক্ষিপ্ত প্রস্তুত করুন (নিয়ম, সময়)"
       }
     },
     "flow": {
       "items": {
-        "roll-call": "Roll call",
-        "open-floor": "Open the floor (points & motions)",
-        "recognize": "Recognize motions",
-        "vote-1": "Vote on motion(s)",
-        "engage": "Engage in chosen motion or move to GSL",
-        "open-again": "Open the floor again",
-        "recognize-repeat": "Recognize motions (repeat as needed)",
-        "vote-2": "Vote on motion(s)",
-        "cycle": "Continue cycle (engage motion / GSL -> open floor)"
+        "roll-call": "রোল কল",
+        "open-floor": "মেঝে খুলুন (বিন্দু এবং গতি)",
+        "recognize": "গতিবিধি চিনুন",
+        "vote-1": "গতি (গুলি) ভোট",
+        "engage": "নির্বাচিত গতিতে নিযুক্ত হন বা GSL এ যান",
+        "open-again": "আবার মেঝে খুলুন",
+        "recognize-repeat": "গতি শনাক্ত করুন (প্রয়োজনে পুনরাবৃত্তি করুন)",
+        "vote-2": "গতি (গুলি) ভোট",
+        "cycle": "চক্র চালিয়ে যান (এনগেজ মোশন / জিএসএল -> ওপেন ফ্লোর)"
       }
     }
   },
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "প্রতিটি বরাদ্দ ইতিমধ্যে একটি অপেক্ষা বা বর্তমান স্লট আছে. আপনার যদি পুনঃক্রমের প্রয়োজন হয় তবে এন্ট্রিগুলি সরান, বা আপনার কাজ শেষ হয়ে গেলে খারিজ করুন।"
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "বর্তমান",
+      "waiting": "অপেক্ষা"
     }
   },
   "timersWidget": {

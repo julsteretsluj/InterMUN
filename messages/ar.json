@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>طابق الجلسة</floor> (المؤقتات، ومكبرات الصوت، ونداء الأسماء) مخصص لـ <chairs>كراسي المنصة</chairs> فقط. استخدم <live>اللجان المباشرة</live> أدناه للإشراف، أو أدخل رموز اللجنة مثل المفوضين عندما تحتاج إلى جلسة محددة.",
     "welcomeSg": "مرحباً بالأمين العام!",
     "whichCommittee": "ما هي اللجنة التي ترغب في التحقق منها؟",
-    "sessionsCount": "{العدد، الجمع، جلسة واحدة {#} أخرى {# جلسات}}",
+    "sessionsCount": "{count, plural, one {# جلسة} other {# جلسات}}",
     "topicLabel": "عنوان:",
     "chairsLabel": "الكراسي:",
     "committeeLogoAlt": "شعار {الاسم}.",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "لم يتم تعيين اسم المستخدم",
         "gradeValue": "الصف {الدرجة}",
         "awards": "الجوائز"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1595,28 +1600,28 @@
       },
       "floorStatus": {
         "sessionTime": "وقت الجلسة",
-        "sessionNotStarted": "Session not started",
+        "sessionNotStarted": "لم تبدأ الجلسة",
         "limit": "حد",
         "limitRemaining": "{القيمة} متبقية",
         "limitOverBy": "أكثر من {value}",
         "quickLinkSession": "حصة",
         "quickLinkRoll": "لفافة",
         "quickLinkSpeakers": "مكبرات الصوت",
-        "quickLinkMotions": "Motions",
+        "quickLinkMotions": "الحركات",
         "quickLinkTimer": "الموقت",
         "dais": "دايس",
         "pinned": "مثبت",
-        "viewFullAnnouncement": "View full announcement",
+        "viewFullAnnouncement": "عرض الإعلان الكامل",
         "timerPausesReadOnly": "توقف المؤقت مؤقتًا (للقراءة فقط)",
-        "speakerList": "Speaker list",
+        "speakerList": "قائمة المتحدثين",
         "speakerFallback": "المتحدث",
-        "rollCallYou": "Roll call (you)",
+        "rollCallYou": "مكالمة هاتفية (أنت)",
         "fullAnnouncement": "اعلان كامل",
         "daisAnnouncement": "اعلان ديس",
         "close": "يغلق"
       },
       "committeeControl": {
-        "sessionNameLabel": "Session name",
+        "sessionNameLabel": "اسم الجلسة",
         "sessionNamePlaceholder": "على سبيل المثال الجلسة الصباحية",
         "sessionNameSaving": "توفير…",
         "sessionNameSaved": "أنقذ",
@@ -1631,12 +1636,12 @@
         "sessionLimitUpdated": "تم تحديث حد الجلسة.",
         "startedLabel": "بدأت:",
         "timeInLabel": "الوقت في:",
-        "timeUntilEndLabel": "Time until end:",
-        "overByValue": "over by {value}",
+        "timeUntilEndLabel": "الوقت حتى النهاية:",
+        "overByValue": "انتهى بـ {value}",
         "modeLabel": "وضع:",
         "modeStopwatchNoLimit": "ساعة توقيت (لا يوجد حد زمني)",
         "sessionNotRunning": "الجلسة ليست قيد التشغيل.",
-        "sessionLimit": "Session limit",
+        "sessionLimit": "حد الجلسة",
         "sessionLimitModesTitle": "أوضاع حد الجلسة",
         "sessionLimitModesHelp": "None: no end. الميزانية الزمنية: تحسب من البداية. ينتهي عند: توقيت الساعة الثابت في منطقتك الزمنية المحلية.",
         "sessionLimitOptional": "خياري.",
@@ -1881,6 +1886,7 @@
     "aiGovernance": "حوكمة الذكاء الاصطناعي",
     "disarmament": "نزع السلاح",
     "nonProliferation": "عدم الانتشار",
+    "armsDiversionMechanisms": "تطوير آليات لمنع تحويل الأسلحة التقليدية المتداولة بشكل قانوني إلى الأسواق غير المشروعة والجهات الفاعلة غير الحكومية",
     "refugeeProtection": "حماية اللاجئين",
     "globalHealth": "الصحة العالمية",
     "foodSecurity": "الأمن الغذائي",
@@ -1889,6 +1895,7 @@
     "disinformation": "التضليل",
     "sustainableDevelopment": "التنمية المستدامة",
     "untitledTopic": "موضوع بدون عنوان",
+    "topicQuestionOf": "سؤال {topic}",
     "qClimateCooperation": "كيف يمكن للدول الأعضاء تعزيز التعاون العالمي في مجال العمل المناخي؟",
     "qGlobalHealthcareAccess": "كيف يمكن للمجتمع الدولي تحسين الوصول إلى الرعاية الصحية الجيدة؟",
     "qAiGovernance": "كيف ينبغي للدول أن تنظم الذكاء الاصطناعي والتقنيات الناشئة؟",
@@ -1929,7 +1936,7 @@
     "anyChair": "أي كرسي",
     "noChairs": "لم يتم العثور على ملفات تعريف الكرسي.",
     "notesListTitle": "قائمة الملاحظات",
-    "noteCount": "{عد، جمع، واحدة {# ملاحظة} أخرى {# ملاحظة}}",
+    "noteCount": "{count, plural, one {# ملاحظة} other {# ملاحظات}}",
     "emptyList": "لا توجد ملاحظات حتى الآن.",
     "forwardedBadge": "(أرسل)",
     "readerWarning": "تحذير للقارئ: قد تحتوي هذه الملاحظة على لغة غير لائقة.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "يحتوي كل تخصيص بالفعل على فتحة انتظار أو حالية. قم بإزالة الإدخالات إذا كنت بحاجة إلى إعادة الترتيب، أو قم برفضها عند الانتهاء."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "حاضِر",
+      "waiting": "منتظر"
     }
   },
   "timersWidget": {

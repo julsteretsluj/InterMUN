@@ -599,7 +599,7 @@
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasi",
-    "body": "This deployment is missing the public Supabase environment variables. Add them in your host (for example Vercel → Project → Settings → Environment Variables), then redeploy:",
+    "body": "Penyebaran ini tidak memiliki variabel lingkungan Supabase publik. Tambahkan variabel tersebut di host Anda (misalnya Vercel → Proyek → Pengaturan → Variabel Lingkungan), lalu terapkan ulang:",
     "valuesHint": "Nilai ada di Supabase → Pengaturan Proyek → API. Gunakan nama yang sama untuk Produksi dan Pratinjau jika Anda menggunakan penerapan pratinjau.",
     "tryAgainLink": "Coba masuk lagi setelah penerapan ulang"
   },
@@ -723,7 +723,7 @@
     "sessionFloorBanner": "<floor>Lantai sesi</floor> (timer, speaker, absensi) hanya untuk <chairs>daischairs</chairs>. Gunakan <live>Komite langsung</live> di bawah untuk pengawasan, atau masukkan kode komite seperti delegasi ketika Anda memerlukan sesi tertentu.",
     "welcomeSg": "Selamat datang Sekretaris Jenderal!",
     "whichCommittee": "Komite mana yang ingin Anda periksa?",
-    "sessionsCount": "{count, plural, one {# sesi} other {# sesi}}",
+    "sessionsCount": "{count, plural, other {# sesi}}",
     "topicLabel": "Topik:",
     "chairsLabel": "Kursi:",
     "committeeLogoAlt": "logo {nama}",
@@ -1113,7 +1113,12 @@
         "usernameNotSet": "Nama pengguna tidak disetel",
         "gradeValue": "Kelas {kelas}",
         "awards": "Penghargaan"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1123,7 +1128,7 @@
         },
         "examples": {
           "title": "Contoh",
-          "content": "# Examples\n\n## Resolution Format\n```\nThe General Assembly,\n...\n1. Calls upon member states to...\n2. Urges the international community to...\n```\n\n## Position Paper Structure\n1. Background\n2. Country Policy\n3. Proposed Solutions"
+          "content": "#Contoh \n\n## Format Resolusi \n``` \nMajelis Umum, \n... \n1. Menyerukan kepada negara-negara anggota untuk... \n2. Mendesak masyarakat internasional untuk... \n``` \n\n## Struktur Kertas Posisi \n1. Latar Belakang \n2. Kebijakan Negara \n3. Usulan Solusi"
         },
         "templates": {
           "title": "Templat",
@@ -1809,6 +1814,7 @@
     "aiGovernance": "tata kelola AI",
     "disarmament": "Perlucutan senjata",
     "nonProliferation": "Non-proliferasi",
+    "armsDiversionMechanisms": "Mengembangkan mekanisme untuk mencegah pengalihan senjata konvensional yang diperdagangkan secara legal ke pasar gelap dan aktor non-negara",
     "refugeeProtection": "Perlindungan pengungsi",
     "globalHealth": "Kesehatan global",
     "foodSecurity": "Ketahanan pangan",
@@ -1817,6 +1823,7 @@
     "disinformation": "Disinformasi",
     "sustainableDevelopment": "Pembangunan berkelanjutan",
     "untitledTopic": "Topik tanpa judul",
+    "topicQuestionOf": "Pertanyaan tentang {topic}",
     "qClimateCooperation": "Bagaimana negara-negara anggota dapat memperkuat kerja sama global dalam aksi iklim?",
     "qGlobalHealthcareAccess": "Bagaimana komunitas internasional dapat meningkatkan akses terhadap layanan kesehatan yang berkualitas?",
     "qAiGovernance": "Bagaimana seharusnya negara mengatur AI dan teknologi baru?",
@@ -1857,7 +1864,7 @@
     "anyChair": "Kursi apa saja",
     "noChairs": "Profil kursi tidak ditemukan.",
     "notesListTitle": "Daftar catatan",
-    "noteCount": "{hitungan, jamak, satu {# catatan} other {# catatan}}",
+    "noteCount": "{count, plural, other {# catatan}}",
     "emptyList": "Belum ada catatan.",
     "forwardedBadge": "(diteruskan)",
     "readerWarning": "Peringatan pembaca: catatan ini mungkin berisi bahasa yang tidak pantas.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Setiap alokasi sudah memiliki slot tunggu atau slot saat ini. Hapus entri jika Anda perlu menyusun ulang, atau tutup setelah selesai."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "saat ini",
+      "waiting": "menunggu"
     }
   },
   "timersWidget": {

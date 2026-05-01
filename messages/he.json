@@ -301,7 +301,7 @@
     "saveEdits": "שמור עריכות",
     "deleteMotionConfirm": "למחוק את התנועה הזו לצמיתות? כל ההצבעות שנרשמו עבורו יוסרו וההצעה תיעלם מהפרוטוקול.",
     "deleteMotion": "מחק תנועה",
-    "tallyLine": "Tally: Yes {yes} | No {no} | Ballots {total}",
+    "tallyLine": "טלי: כן {yes} | לא {no} | פתקים {total}",
     "ballotsHelp": "פתקי הצבעה = כרזות עם סימן כן או לא רשומים (נמנעות במעקב בנפרד ואינה נספרת במכנה זה). נקה מסיר הצבעה מוקלטת. לגבי בקשות פרוצדורליות, התוצאה משווה את כן לחברים שנכחו ברשימה (ראה סעיף מפקד).",
     "recordVotesLabel": "שיא הצבעות",
     "currentMotion": "תנועה נוכחית",
@@ -313,32 +313,32 @@
     "unitMinutesShort": "מ",
     "unitSecondsShort": "ס",
     "apply": "לִפְנוֹת",
-    "motionControl": "Motion control",
-    "advancedSpeakerResetClock": "Advanced speaker and reset per-speaker clock.",
-    "writeSpeechNoteFirst": "Write something before saving a speech note.",
-    "speechNoteSaved": "Speech note saved.",
-    "speechNoteDeleted": "Speech note deleted.",
-    "announcementPosted": "Announcement posted.",
-    "announcementPinnedToFloor": "Pinned for the committee floor.",
-    "announcementUnpinned": "Unpinned.",
-    "announcementBodyRequired": "Announcement body cannot be empty.",
-    "announcementUpdated": "Announcement updated.",
-    "deleteAnnouncementConfirm": "Delete this announcement permanently? This cannot be undone.",
-    "announcementDeleted": "Announcement deleted.",
-    "noAllocationsToAdd": "No allocations to add.",
-    "rollCallRowsAlreadyExist": "Roll call already has a row for every allocation.",
-    "rollCallRowsAdded": "Added {count} roll call row(s).",
-    "motionCreatedOpened": "Motion created and opened.",
-    "motionUpdated": "Motion updated.",
-    "motionClosed": "Motion closed.",
-    "motionAlreadyOpenReopenBlocked": "Another motion is already open for voting. Close it before reopening this one.",
-    "motionReopened": "Motion reopened.",
-    "motionFloorOpened": "Motion floor open - record each stated motion below.",
-    "motionFloorClosed": "Motion floor closed for statements.",
-    "openMotionFloorFirst": "Open the motion floor for statements first.",
-    "openMotionBlocksRecording": "A motion is already open for voting. Close it before recording further statements.",
-    "statedMotionRecorded": "Stated motion recorded (not yet open for voting).",
-    "statedMotionRemoved": "Stated motion removed."
+    "motionControl": "בקרת תנועה",
+    "advancedSpeakerResetClock": "רמקול מתקדם ואיפוס שעון לכל רמקול.",
+    "writeSpeechNoteFirst": "כתוב משהו לפני שמירת הערת דיבור.",
+    "speechNoteSaved": "הערת הדיבור נשמרה.",
+    "speechNoteDeleted": "הערת דיבור נמחקה.",
+    "announcementPosted": "הודעה פורסמה.",
+    "announcementPinnedToFloor": "מוצמד לקומת הוועדה.",
+    "announcementUnpinned": "בוטלה.",
+    "announcementBodyRequired": "גוף ההודעה לא יכול להיות ריק.",
+    "announcementUpdated": "ההודעה עודכנה.",
+    "deleteAnnouncementConfirm": "למחוק הודעה זו לצמיתות? לא ניתן לבטל זאת.",
+    "announcementDeleted": "ההודעה נמחקה.",
+    "noAllocationsToAdd": "אין הקצאות להוסיף.",
+    "rollCallRowsAlreadyExist": "למפקד כבר יש שורה לכל הקצאה.",
+    "rollCallRowsAdded": "נוספו {count} שורות מפקד.",
+    "motionCreatedOpened": "נוצרה ונפתחה תנועה.",
+    "motionUpdated": "התנועה עודכנה.",
+    "motionClosed": "התנועה נסגרה.",
+    "motionAlreadyOpenReopenBlocked": "הצעה נוספת כבר פתוחה להצבעה. סגור אותו לפני שתפתח מחדש את זה.",
+    "motionReopened": "התנועה נפתחה מחדש.",
+    "motionFloorOpened": "רצפת תנועה פתוחה - רשמו כל תנועה מוצהרת למטה.",
+    "motionFloorClosed": "קומת תנועה נסגרה להצהרות.",
+    "openMotionFloorFirst": "פתח תחילה את רצפת התנועה להצהרות.",
+    "openMotionBlocksRecording": "הצעה כבר פתוחה להצבעה. סגור אותו לפני הקלטת הצהרות נוספות.",
+    "statedMotionRecorded": "הצעה מוצהרת נרשמה (עדיין לא פתוחה להצבעה).",
+    "statedMotionRemoved": "התנועה המוצהרת הוסרה."
   },
   "language": {
     "label": "שָׂפָה",
@@ -378,8 +378,8 @@
   "dashboardLayout": {
     "helpCenter": "מרכז עזרה",
     "settings": "הגדרות",
-    "appHomeAria": "{appName} home",
-    "defaultDisplayName": "Delegate"
+    "appHomeAria": "{appName} הביתה",
+    "defaultDisplayName": "נָצִיג"
   },
   "authWizard": {
     "enterApp": "הזן {appName}",
@@ -517,7 +517,7 @@
     "emptyStateGuidance": "כסאות שומרים כל משבצת כטיוטה בדף הניקוד. הטיוטות האלה לא מוצגות כאן. לאחר השלמת כל משבצת נדרשת, על היו\"ר ללחוץ על שלח מועמדויות ל-SMT - ואז שורות מופיעות בטבלה זו ממתינות לבדיקה.",
     "noRowsForCommittee": "אין שורות ממתינות לוועדה זו. לִבחוֹר",
     "orAnotherTab": "או כרטיסייה אחרת.",
-    "topRank": "Top {rank}",
+    "topRank": "מובילים {rank}",
     "bandInitialsTitle": "ראשי תיבות של להקה: B/D/P/E",
     "dash": "—",
     "bestDelegateCommittee": "הנציג הטוב ביותר (ועדה)",
@@ -624,7 +624,7 @@
   },
   "delegateDashboard": {
     "welcome": "ברוך הבא, נציג של {flag} {country}",
-    "activeCommitteeIntro": "Active committee: {line}.",
+    "activeCommitteeIntro": "ועדה פעילה: {line}.",
     "activeCommitteeBody": "תאריכי הספירה לאחור משותפים עם כולם בוועדה זו. ההכנות, העמדות והמסמכים שלך נשארים בחשבון שלך.",
     "tabs": {
       "ariaLabel": "קטעי לוח מחוונים",
@@ -723,7 +723,7 @@
     "sessionFloorBanner": "<floor>רצפת הפגישה</floor> (טיימרים, רמקולים, מפקד) מיועדת ל-<chairs>כסאות בימת</chairs> בלבד. השתמש ב-<live>וועדות בשידור חי</live> למטה לפיקוח, או הזן קודי ועדה כמו נציגים כאשר אתה צריך מפגש ספציפי.",
     "welcomeSg": "ברוך הבא מזכיר כללי!",
     "whichCommittee": "באיזו ועדה תרצה לבדוק?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count, plural, one {# מושב} other {# מושבים}}",
     "topicLabel": "נוֹשֵׂא:",
     "chairsLabel": "כִּיסְאוֹת:",
     "committeeLogoAlt": "הלוגו של {name}",
@@ -763,7 +763,7 @@
       "officialLinks": "קישורים רשמיים",
       "roomCode": "קוד חדר",
       "settings": "הגדרות",
-      "discipline": "Disciplinary"
+      "discipline": "מִשְׁמַעתִי"
     }
   },
   "smtNav": {
@@ -922,7 +922,7 @@
       "openInNewTab": "פתח בכרטיסייה חדשה",
       "noGoogleDocLink": "אין קישור לגוגל דוק",
       "visibleToOtherBloc": "גלוי לגוש אחר",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
+      "resolutionCounts": "משנה עיקרית: {main} | מנוי משותף: {co} | חותמים: {signatories}",
       "blocButton": "גוש {name} ({stance})",
       "signVirtually": "חתום וירטואלית (המנויים הראשיים קיבלו הודעה)",
       "shareByEmail": "שתף רזולוציה באימייל",
@@ -1113,7 +1113,12 @@
         "usernameNotSet": "שם משתמש לא מוגדר",
         "gradeValue": "כיתה {כיתה}",
         "awards": "פרסים"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1392,7 +1397,7 @@
       "ideaLabel": "רַעְיוֹן",
       "ideaFallback": "רעיון {number}",
       "linkedDoc": "מסמך מקושר",
-      "addedOn": "Added {date}",
+      "addedOn": "נוסף {date}",
       "edit": "לַעֲרוֹך",
       "delete": "לִמְחוֹק",
       "ideaDocument": "מסמך רעיון",
@@ -1446,31 +1451,31 @@
       "virtualRoomVacant": "רֵיק",
       "profileAria": "צפה בפרופיל: {country}",
       "vacantSeatAria": "מושב פנוי",
-      "placardAria": "Placard {country}",
+      "placardAria": "שלט {country}",
       "gavelAria": "גמל",
-      "yourContext": "Your context",
-      "roleLabel": "Role",
-      "seatLabel": "Seat",
-      "assignedLabel": "Assigned",
-      "daisLabel": "Dais",
-      "phaseLabel": "Phase",
-      "phaseVoting": "Voting",
-      "phaseDebate": "Debate",
-      "focusSearchTitle": "Focus search (dais titles and names match your query)",
-      "tipLabel": "Tip",
-      "enterScrolls": "Enter scrolls",
-      "typeToFilterHint": "Type to filter - Enter scrolls to first match",
-      "noMatches": "No matching delegations or dais seats.",
-      "digitalDisplay": "Digital display",
-      "floorLabel": "Floor",
-      "staffSeatsHeading": "Staff - seats",
-      "viewProfileAria": "View profile: {title}",
-      "noProfileLinkAria": "{title} (no profile link)",
-      "committeeFloor": "Committee floor",
-      "virtualRoomFigureAria": "Virtual committee room - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Filtering delegations. First highlighted seat is the first match in the ring.",
-      "helperText": "Placards list country (from allocations), name, school, and pronouns from each delegate's profile. Edit yours under Profile. Empty committee seats show as Vacant. Click a filled placard or dais seat to open that member's page (chat and report from there).",
-      "virtualRoomCaption": "Virtual Model UN committee room with delegate placards showing country, name, school, and pronouns."
+      "yourContext": "ההקשר שלך",
+      "roleLabel": "תַפְקִיד",
+      "seatLabel": "מוֹשָׁב",
+      "assignedLabel": "מוּקצֶה",
+      "daisLabel": "דוּכָן",
+      "phaseLabel": "שָׁלָב",
+      "phaseVoting": "הַצבָּעָה",
+      "phaseDebate": "דִיוּן",
+      "focusSearchTitle": "התמקד בחיפוש (כותרות ושמות של במות תואמים את השאילתה שלך)",
+      "tipLabel": "עֵצָה",
+      "enterScrolls": "הזן מגילות",
+      "typeToFilterHint": "הקלד לסינון - הזן גלילות להתאמה הראשונה",
+      "noMatches": "אין משלחות או מושבים תואמים.",
+      "digitalDisplay": "תצוגה דיגיטלית",
+      "floorLabel": "קוֹמָה",
+      "staffSeatsHeading": "צוות - מושבים",
+      "viewProfileAria": "צפה בפרופיל: {title}",
+      "noProfileLinkAria": "{title} (ללא קישור לפרופיל)",
+      "committeeFloor": "קומת הוועדה",
+      "virtualRoomFigureAria": "חדר ועדות וירטואלי - {committeeName} ({conferenceName})",
+      "filteringLiveRegion": "סינון משלחות. המושב הראשון המודגש הוא המשחק הראשון בזירה.",
+      "helperText": "שלטים מפרטים מדינה (מהקצאות), שם, בית ספר וכינויים מהפרופיל של כל נציג. ערוך את שלך תחת פרופיל. מושבים ריקים בוועדה מוצגים כפנויים. לחץ על שלט מלא או מושב במה כדי לפתוח את הדף של אותו חבר (צ'אט ודווח משם).",
+      "virtualRoomCaption": "דגם וירטואלי של חדר ועדת האו\"ם עם שלטי נציגים המציגים מדינה, שם, בית ספר וכינויים."
     },
     "session": {
       "requestToSpeak": {
@@ -1502,7 +1507,7 @@
         "motioner": "מניע",
         "majority": "רוֹב",
         "majoritySimple": "פָּשׁוּט",
-        "tally": "Yes {yes} - No {no} - Total {total}",
+        "tally": "כן {yes} - לא {no} - סך הכל {total}",
         "help": "הבמה מתעדת את ההצבעה של כל משלחת במושב. הצבעות ההצעות משתמשות בכן או לא בלבד (לא נמנע). הסכומים סופרים רק שלטים שבהם נרשמו כן או לא; מדלגים על משלחות נעדרות."
       },
       "activeMotion": {
@@ -1519,7 +1524,7 @@
         "speakerTimeLeftTotal": "זמן רמקול (שמאל / סה\"כ)",
         "perSpeaker": "(לכל דובר)",
         "paused": "(מושהה)",
-        "pauseReason": "Pause: {reason}"
+        "pauseReason": "השהייה: {reason}"
       },
       "floorStatus": {
         "sessionTime": "זמן מפגש",
@@ -1780,7 +1785,7 @@
     "roomStats": "{placards} שלטים · {flagged} עם הערות כיסא · גליל הוקלט עבור {count}",
     "loading": "טְעִינָה...",
     "noDelegationsMatch": "אין משלחות שתואמות את החיפוש שלך.",
-    "rollPrefix": "Roll {label}",
+    "rollPrefix": "רול {label}",
     "linkedAccount": "חשבון מקושר",
     "vacantPlacard": "שלט פנוי",
     "delegateProfile": "פרופיל נציג ->",
@@ -1809,6 +1814,7 @@
     "aiGovernance": "ממשל בינה מלאכותית",
     "disarmament": "פֵּרוּק הַנֶשֶׁק",
     "nonProliferation": "אי הפצה",
+    "armsDiversionMechanisms": "פיתוח מנגנונים למניעת הסטת נשק קונבנציונלי הנסחר באופן חוקי לשווקים לא חוקיים ולגורמים שאינם ממלכתיים",
     "refugeeProtection": "הגנה על פליטים",
     "globalHealth": "בריאות עולמית",
     "foodSecurity": "ביטחון תזונתי",
@@ -1817,12 +1823,13 @@
     "disinformation": "מֵידָע מַטעֶה",
     "sustainableDevelopment": "פיתוח בר קיימא",
     "untitledTopic": "נושא ללא כותרת",
-    "qClimateCooperation": "כיצד יכולות המדינות החברות לחזק את שיתוף הפעולה העולמי בפעילות אקלים?",
+    "topicQuestionOf": "השאלה של {topic}",
+    "qClimateCooperation": "כיצד יכולות המדינות החברות לחזק את שיתוף הפעולה העולמי בפעולת אקלים?",
     "qGlobalHealthcareAccess": "כיצד יכולה הקהילה הבינלאומית לשפר את הגישה לשירותי בריאות איכותיים?",
     "qAiGovernance": "כיצד צריכות מדינות להסדיר AI וטכנולוגיות מתפתחות?",
     "qDisinformationImpact": "אילו אמצעים יכולים להפחית את ההשפעה העולמית של דיסאינפורמציה?",
     "qSecurityHumanRights": "כיצד מדינות יכולות לאזן בין ביטחון וזכויות אדם בלוחמה בטרור?",
-    "qRefugeeProtection": "כיצד יכולה מערכת האו\"ם לתמוך בהגנה על פליטים ובפתרונות עמידים?",
+    "qRefugeeProtection": "כיצד מערכת האו\"ם יכולה לתמוך בהגנה על פליטים ובפתרונות עמידים?",
     "qFoodSecurity": "אילו אסטרטגיות יכולות לשפר את ביטחון המזון באזורים פגיעים לאקלים?",
     "qNonProliferation": "כיצד על הקהילה הבינלאומית למנוע הפצת נשק גרעיני?"
   },
@@ -1857,7 +1864,7 @@
     "anyChair": "כל כיסא",
     "noChairs": "לא נמצאו פרופילי כיסא.",
     "notesListTitle": "רשימת הערות",
-    "noteCount": "{count, plural, one {# note} אחר {# notes}}",
+    "noteCount": "{count, plural, one {# הערה} other {# הערות}}",
     "emptyList": "עדיין אין הערות.",
     "forwardedBadge": "(הועבר)",
     "readerWarning": "אזהרת קורא: הערה זו עשויה להכיל שפה לא הולמת.",
@@ -2005,7 +2012,7 @@
       "couldNotParseCsv": "לא ניתן לנתח CSV.",
       "noDataRowsFound": "לא נמצאו שורות נתונים (צריך לפחות מדינה/מיקום בכל שורה).",
       "importLimitedRows": "הייבוא ​​מוגבל ל-{max} שורות. פצל את הקובץ שלך.",
-      "rowTooLong": "Row too long: {row}…",
+      "rowTooLong": "שורה ארוכה מדי: {row}…",
       "codeTooLongOnRow": "קוד ארוך מדי בשורה: {row}"
     },
     "smtStaffAccess": {
@@ -2056,7 +2063,7 @@
       "welcomeLine3": "נתראה על הרצפה.",
       "chairReminderSubject": "בקשת הקצאה ממתינה לאישור",
       "chairReminderLine1": "נציג ביקש הקצאה וזקוק לבדיקת יו\"ר.",
-      "chairReminderConference": "Conference: {conference}",
+      "chairReminderConference": "ועידה: {conference}",
       "chairReminderAllocation": "הקצאה מבוקשת: {country}",
       "chairReminderDelegate": "נציג: {name}",
       "chairReminderEmail": "דוא\"ל חשבון: {email}",
@@ -2221,7 +2228,7 @@
   "chairOverviewPage": {
     "fallbackYourCommittee": "הוועדה שלך",
     "fallbackCommittee": "וַעֲדָה",
-    "welcome": "Welcome, Chair of {committee}",
+    "welcome": "ברוך הבא, יו\"ר {committee}",
     "featureStrip": "חדר דיגיטלי · תנועות · הצבעה · דוברים",
     "activeCommitteeLine": "ועדה פעילה: <line></line>. נתוני הפעלה מסתנכרנים דרך החשבון שלך; רשימות הכנה/זרימה ותנועות ונקודות נשמרות בדפדפן זה עבור ועדה זו - אותו רעיון כמו <seamuns>חדר יו\"ר SEAMUNs</seamuns>.",
     "tiles": {
@@ -2693,7 +2700,7 @@
         "crisis-cues": "תכנן סדר/סימנים של דובר משבר",
         "crisis-paths": "הכן מסלולי משבר ועובדות",
         "co-chairs": "תיאום עם יו\"ר משותף על תפקידים",
-        "staff": "Confirm staff / dais support and cues",
+        "staff": "אשר את התמיכה והסימנים של צוות/במה",
         "delegate-brief": "הכן תקציר לנציגים (כללים, תזמון)"
       }
     },
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "לכל הקצאה כבר יש משבצת ממתינה או נוכחית. הסר ערכים אם אתה צריך לסדר מחדש, או סגור כשתסיים."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "נוֹכְחִי",
+      "waiting": "הַמתָנָה"
     }
   },
   "timersWidget": {

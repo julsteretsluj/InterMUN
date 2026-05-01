@@ -1,6 +1,8 @@
 import { ChairCommitteeSessionControl } from "@/components/chair/ChairCommitteeSessionControl";
+import { getTranslations } from "next-intl/server";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
-export function SessionFloorOverview({
+export default async function SessionFloorOverview({
   conferenceId,
   conferenceTitle,
   canonicalConferenceId,
@@ -18,9 +20,13 @@ export function SessionFloorOverview({
   initialCommitteeSessionEndsAt: string | null;
   initialCommitteeSessionTitle: string | null;
 }) {
+  const tTopics = await getTranslations("agendaTopics");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const displayTitle = translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle);
+
   return (
     <div className="space-y-4">
-      <p className="text-sm text-brand-muted">{conferenceTitle}</p>
+      <p className="text-sm text-brand-muted">{displayTitle}</p>
       <ChairCommitteeSessionControl
         conferenceId={canonicalConferenceId}
         initialStartedAt={initialCommitteeSessionStartedAt}

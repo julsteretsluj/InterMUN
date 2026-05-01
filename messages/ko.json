@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>세션 플로어</floor>(타이머, 연설자, 점호)는 <의자>단의자</의자> 전용입니다. 감독을 위해 아래의 <live>실시간 위원회</live>를 사용하거나 특정 세션이 필요할 때 대의원과 같은 위원회 코드를 입력하세요.",
     "welcomeSg": "사무총장님, 환영합니다!",
     "whichCommittee": "어떤 위원회를 확인하고 싶으신가요?",
-    "sessionsCount": "{개수, 복수형, 하나의 {# 세션} 기타 {# 세션}}",
+    "sessionsCount": "{count, plural, other {#개의 세션}}",
     "topicLabel": "주제:",
     "chairsLabel": "의자:",
     "committeeLogoAlt": "{이름} 로고",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "사용자 이름이 설정되지 않았습니다.",
         "gradeValue": "학년 {학년}",
         "awards": "수상 내역"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "AI 거버넌스",
     "disarmament": "군비 축소",
     "nonProliferation": "비확산",
+    "armsDiversionMechanisms": "합법적으로 거래되는 재래식 무기가 불법 시장 및 비국가 행위자에게 유용되는 것을 방지하기 위한 메커니즘 개발",
     "refugeeProtection": "난민 보호",
     "globalHealth": "글로벌 건강",
     "foodSecurity": "식량안보",
@@ -1889,6 +1895,7 @@
     "disinformation": "그릇된 정보",
     "sustainableDevelopment": "지속 가능한 발전",
     "untitledTopic": "제목 없는 주제",
+    "topicQuestionOf": "{topic}의 질문",
     "qClimateCooperation": "회원국들은 기후 조치에 대한 글로벌 협력을 어떻게 강화할 수 있습니까?",
     "qGlobalHealthcareAccess": "국제 사회가 양질의 의료 서비스에 대한 접근성을 어떻게 향상시킬 수 있습니까?",
     "qAiGovernance": "국가는 AI와 신흥 기술을 어떻게 규제해야 합니까?",
@@ -1929,7 +1936,7 @@
     "anyChair": "모든 의자",
     "noChairs": "의자 프로필을 찾을 수 없습니다.",
     "notesListTitle": "메모 목록",
-    "noteCount": "{개수, 복수형, 하나 {# 음표} 기타 {# 음표}}",
+    "noteCount": "{count, plural, other {#개의 메모}}",
     "emptyList": "아직 메모가 없습니다.",
     "forwardedBadge": "(전달)",
     "readerWarning": "독자 경고: 이 메모에는 부적절한 언어가 포함되어 있을 수 있습니다.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "모든 할당에는 이미 대기 중이거나 현재 슬롯이 있습니다. 다시 주문해야 하는 경우 항목을 제거하고, 완료되면 닫습니다."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "현재의",
+      "waiting": "대기 중"
     }
   },
   "timersWidget": {

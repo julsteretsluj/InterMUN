@@ -14,6 +14,7 @@ import {
   PROFILE_PRONOUN_PRESET_SET,
   pronounsFormValueFromProfile,
 } from "@/lib/profile-pronouns";
+import { setHeadChairActiveCommittee } from "@/app/actions/setHeadChairActiveCommittee";
 
 type FormData = {
   name?: string;
@@ -34,11 +35,18 @@ const GRADE_OPTIONS = [
   "12",
 ] as const;
 
+export type HeadChairCommitteeOption = { id: string; label: string };
+
 interface ProfileFormProps {
   profile: Profile | null;
   userId: string;
   canViewPrivate: boolean;
   availableAllocations: string[];
+  /** Allowlisted Head Chair: switch active committee cookie from profile. */
+  headChairCommitteeSwitch?: {
+    conferences: HeadChairCommitteeOption[];
+    activeConferenceId: string | null;
+  };
 }
 
 export function ProfileForm({
@@ -46,9 +54,12 @@ export function ProfileForm({
   userId,
   canViewPrivate,
   availableAllocations,
+  headChairCommitteeSwitch,
 }: ProfileFormProps) {
   const tp = useTranslations("views.profile");
   const router = useRouter();
+  const [committeeSwitchBusy, setCommitteeSwitchBusy] = useState(false);
+  const [committeeSwitchError, setCommitteeSwitchError] = useState<string | null>(null);
 
   const schema = useMemo(
     () =>
@@ -397,6 +408,49 @@ export function ProfileForm({
           </div>
         </div>
       )}
+
+      {headChairCommitteeSwitch && headChairCommitteeSwitch.conferences.length > 0 ? (
+        <div className="rounded-xl border border-brand-accent/25 bg-brand-accent/5 p-4 space-y-2">
+          <label htmlFor="head-chair-dashboard-committee" className="block text-sm font-medium">
+            {tp("headChairDashboardCommittee")}
+          </label>
+          <p className="text-xs text-brand-muted">{tp("headChairDashboardCommitteeHelp")}</p>
+          <select
+            id="head-chair-dashboard-committee"
+            className={fieldClass}
+            disabled={committeeSwitchBusy}
+            value={headChairCommitteeSwitch.activeConferenceId ?? ""}
+            onChange={(e) => {
+              const id = e.target.value;
+              if (!id) return;
+              setCommitteeSwitchError(null);
+              setCommitteeSwitchBusy(true);
+              void setHeadChairActiveCommittee(id).then((result) => {
+                setCommitteeSwitchBusy(false);
+                if (result.ok) router.refresh();
+                else setCommitteeSwitchError(tp("headChairSwitchError"));
+              });
+            }}
+          >
+            <option value="">{tp("headChairSelectCommittee")}</option>
+            {headChairCommitteeSwitch.conferences.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.label}
+              </option>
+            ))}
+          </select>
+          {committeeSwitchBusy ? (
+            <p className="text-xs text-brand-muted" role="status">
+              {tp("headChairSwitchingCommittee")}
+            </p>
+          ) : null}
+          {committeeSwitchError ? (
+            <p className="text-sm text-red-600" role="alert">
+              {committeeSwitchError}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
 
       <div>
         <label className="block text-sm font-medium mb-1">{tp("allocation")}</label>

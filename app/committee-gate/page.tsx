@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { CommitteeGateForm } from "./CommitteeGateForm";
 import { StaffNotDelegateBypassForm } from "./StaffNotDelegateBypassForm";
@@ -16,6 +17,8 @@ export default async function CommitteeGatePage({
 }) {
   const t = await getTranslations("committeeGate");
   const tc = await getTranslations("common");
+  const tTopics = await getTranslations("agendaTopics");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const { next: nextRaw, allocation: allocationRaw } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//")
@@ -81,7 +84,8 @@ export default async function CommitteeGatePage({
         ) ?? null
       : null;
 
-  const title = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
+  const titleRaw = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
+  const title = translateConferenceHeadline(tTopics, tCommitteeLabels, titleRaw);
   const staffBypass = profile?.role === "smt" || profile?.role === "admin";
 
   return (

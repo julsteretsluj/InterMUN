@@ -11,7 +11,10 @@
     "i18n:audit": "node scripts/i18n-audit.mjs",
     "i18n:seed": "node scripts/seed-locales.mjs",
     "i18n:check": "node scripts/check-locale-parity.mjs",
-    "i18n:translate": "node scripts/translate-locales.mjs"
+    "i18n:translate": "node scripts/translate-locales.mjs",
+    "i18n:translate-gaps": "node scripts/translate-locale-gaps.mjs",
+    "i18n:translate-agenda-topics": "node scripts/translate-agenda-topics.mjs",
+    "i18n:generate-agenda-slugs": "node scripts/generate-agenda-topic-slug-map.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.2.8",

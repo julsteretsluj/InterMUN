@@ -16,6 +16,7 @@ import {
 } from "@/lib/roles";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { getTranslations } from "next-intl/server";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
 export default async function RoomGatePage({
   searchParams,
@@ -23,6 +24,8 @@ export default async function RoomGatePage({
   searchParams: Promise<{ next?: string; e?: string }>;
 }) {
   const t = await getTranslations("roomGate");
+  const tTopics = await getTranslations("agendaTopics");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const { next: nextRaw, e: errCode } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//")
@@ -72,6 +75,11 @@ export default async function RoomGatePage({
 
   const existing = await getResolvedActiveConference();
   if (existing?.id) {
+    const existingLabel = translateConferenceHeadline(
+      tTopics,
+      tCommitteeLabels,
+      [existing.name, existing.committee, existing.tagline].filter(Boolean).join(" — ")
+    );
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-brand-cream">
         <div className="relative w-full max-w-md space-y-8">
@@ -83,7 +91,7 @@ export default async function RoomGatePage({
             <p className="text-sm text-brand-muted text-center">
               {t("youAreSetTo")}{" "}
               <strong className="text-brand-navy">
-                {[existing.name, existing.committee, existing.tagline].filter(Boolean).join(" — ")}
+                {existingLabel}
               </strong>
               .
             </p>

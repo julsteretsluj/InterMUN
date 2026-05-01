@@ -723,7 +723,7 @@
     "sessionFloorBanner": "Το <floor>Ο όροφος συνεδρίας</floor> (χρονομετρητές, ηχεία, ονομαστική κλήση) προορίζεται μόνο για <chairs>καρέκλες μαργαριτών</chairs>. Χρησιμοποιήστε τις <live>Ζωντανές επιτροπές</live> παρακάτω για επίβλεψη ή εισαγάγετε κωδικούς επιτροπών όπως αντιπροσώπους όταν χρειάζεστε μια συγκεκριμένη συνεδρία.",
     "welcomeSg": "Καλωσόρισες Γενικέ Γραμματέα!",
     "whichCommittee": "Σε ποια επιτροπή θα θέλατε να κάνετε check in;",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count, plural, one {# συνεδρία} other {# συνεδρίες}}",
     "topicLabel": "Θέμα:",
     "chairsLabel": "Καρέκλες:",
     "committeeLogoAlt": "λογότυπο {name}",
@@ -1113,7 +1113,12 @@
         "usernameNotSet": "Το όνομα χρήστη δεν έχει οριστεί",
         "gradeValue": "Βαθμός {grade}",
         "awards": "Βραβεία"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1809,6 +1814,7 @@
     "aiGovernance": "Διακυβέρνηση AI",
     "disarmament": "Αφοπλισμός",
     "nonProliferation": "Μη διάδοση",
+    "armsDiversionMechanisms": "Ανάπτυξη μηχανισμών για την πρόληψη της εκτροπής συμβατικών όπλων που διακινούνται νόμιμα σε παράνομες αγορές και μη κρατικούς φορείς",
     "refugeeProtection": "Προστασία προσφύγων",
     "globalHealth": "Παγκόσμια υγεία",
     "foodSecurity": "Ασφάλεια τροφίμων",
@@ -1817,6 +1823,7 @@
     "disinformation": "Παραπληροφόρηση",
     "sustainableDevelopment": "Βιώσιμη ανάπτυξη",
     "untitledTopic": "Θέμα χωρίς τίτλο",
+    "topicQuestionOf": "Το ερώτημα του {topic}",
     "qClimateCooperation": "Πώς μπορούν τα κράτη μέλη να ενισχύσουν την παγκόσμια συνεργασία για τη δράση για το κλίμα;",
     "qGlobalHealthcareAccess": "Πώς μπορεί η διεθνής κοινότητα να βελτιώσει την πρόσβαση σε ποιοτική υγειονομική περίθαλψη;",
     "qAiGovernance": "Πώς πρέπει τα κράτη να ρυθμίζουν την τεχνητή νοημοσύνη και τις αναδυόμενες τεχνολογίες;",
@@ -1857,7 +1864,7 @@
     "anyChair": "Οποιαδήποτε καρέκλα",
     "noChairs": "Δεν βρέθηκαν προφίλ καρέκλας.",
     "notesListTitle": "Λίστα σημειώσεων",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{count, plural, one {# σημείωση} other {# σημειώσεις}}",
     "emptyList": "Δεν υπάρχουν σημειώσεις ακόμα.",
     "forwardedBadge": "(διαβιβάστηκε)",
     "readerWarning": "Προειδοποίηση αναγνώστη: αυτή η σημείωση μπορεί να περιέχει ακατάλληλη γλώσσα.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Κάθε κατανομή έχει ήδη μια θέση αναμονής ή τρέχουσα θέση. Καταργήστε τις καταχωρίσεις εάν χρειάζεται να κάνετε εκ νέου παραγγελία ή απορρίψτε όταν τελειώσετε."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "ρεύμα",
+      "waiting": "αναμονή"
     }
   },
   "timersWidget": {

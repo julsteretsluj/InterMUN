@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Sessievloer</floor> (timers, luidsprekers, appèl) is alleen voor <chairs>terrasstoelen</chairs>. Gebruik <live>Live commissies</live> hieronder voor overzicht, of voer commissiecodes zoals afgevaardigden in als je een specifieke sessie nodig hebt.",
     "welcomeSg": "Welkom secretaris-generaal!",
     "whichCommittee": "Bij welke commissie wilt u een kijkje nemen?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count, plural, one {# sessie} other {# sessies}}",
     "topicLabel": "Onderwerp:",
     "chairsLabel": "Stoelen:",
     "committeeLogoAlt": "{naam}-logo",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Gebruikersnaam niet ingesteld",
         "gradeValue": "Graad {cijfer}",
         "awards": "Onderscheidingen"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "AI-beheer",
     "disarmament": "Ontwapening",
     "nonProliferation": "Non-proliferatie",
+    "armsDiversionMechanisms": "Het ontwikkelen van mechanismen om te voorkomen dat legaal verhandelde conventionele wapens naar illegale markten en niet-statelijke actoren worden verlegd",
     "refugeeProtection": "Bescherming van vluchtelingen",
     "globalHealth": "Mondiale gezondheid",
     "foodSecurity": "Voedselzekerheid",
@@ -1889,6 +1895,7 @@
     "disinformation": "Desinformatie",
     "sustainableDevelopment": "Duurzame ontwikkeling",
     "untitledTopic": "Naamloos onderwerp",
+    "topicQuestionOf": "De vraag van {topic}",
     "qClimateCooperation": "Hoe kunnen lidstaten de mondiale samenwerking op het gebied van klimaatactie versterken?",
     "qGlobalHealthcareAccess": "Hoe kan de internationale gemeenschap de toegang tot hoogwaardige gezondheidszorg verbeteren?",
     "qAiGovernance": "Hoe moeten staten AI en opkomende technologieën reguleren?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Elke stoel",
     "noChairs": "Geen stoelprofielen gevonden.",
     "notesListTitle": "Notitielijst",
-    "noteCount": "{count, plural, one {# noot} other {# noten}}",
+    "noteCount": "{count, plural, one {# notitie} other {# notities}}",
     "emptyList": "Nog geen opmerkingen.",
     "forwardedBadge": "(doorgestuurd)",
     "readerWarning": "Waarschuwing van de lezer: deze notitie kan ongepast taalgebruik bevatten.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Elke toewijzing heeft al een wacht- of huidig ​​slot. Verwijder items als u de volgorde wilt wijzigen, of verwijder ze als u klaar bent."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "huidig",
+      "waiting": "wachten"
     }
   },
   "timersWidget": {

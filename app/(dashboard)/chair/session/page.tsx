@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { loadChairSessionConference } from "./loadChairSession";
 import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
-import { SessionFloorOverview } from "./SessionFloorOverview";
+import SessionFloorOverview from "./SessionFloorOverview";
 import { getTranslations } from "next-intl/server";
 
 export default async function ChairSessionPage() {

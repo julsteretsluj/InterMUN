@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Piso da sessão</floor> (temporizadores, alto-falantes, chamada) é apenas para <chairs>cadeiras de estrado</chairs>. Use <live>Comitês ao vivo</live> abaixo para supervisão ou insira códigos de comitê como delegados quando precisar de uma sessão específica.",
     "welcomeSg": "Bem vindo Secretário Geral!",
     "whichCommittee": "Qual comitê você gostaria de verificar?",
-    "sessionsCount": "{contagem, plural, uma {# sessão} other {# sessões}}",
+    "sessionsCount": "{count, plural, one {# sessão} other {# sessões}}",
     "topicLabel": "Tópica:",
     "chairsLabel": "Cadeiras:",
     "committeeLogoAlt": "logotipo de {nome}",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Nome de usuário não definido",
         "gradeValue": "Nota {nota}",
         "awards": "Prêmios"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1867,7 +1872,7 @@
     "clearAllConfirm": "Elogios, preocupações e lembretes claros para cada cartaz? Isso atualiza a cópia compartilhada do comitê.",
     "addedToSpeakerList": "{country} adicionado à lista de palestrantes.",
     "committeeFallback": "Comitê",
-    "dash": "—"
+    "dash": "-"
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Selecione o tópico ao vivo",
@@ -1881,6 +1886,7 @@
     "aiGovernance": "Governança de IA",
     "disarmament": "Desarmamento",
     "nonProliferation": "Não proliferação",
+    "armsDiversionMechanisms": "Desenvolver mecanismos para prevenir o desvio de armas convencionais comercializadas legalmente para mercados ilícitos e intervenientes não estatais",
     "refugeeProtection": "Proteção de refugiados",
     "globalHealth": "Saúde global",
     "foodSecurity": "Segurança alimentar",
@@ -1889,6 +1895,7 @@
     "disinformation": "Desinformação",
     "sustainableDevelopment": "Desenvolvimento sustentável",
     "untitledTopic": "Tópico sem título",
+    "topicQuestionOf": "A questão de {topic}",
     "qClimateCooperation": "Como podem os Estados-Membros reforçar a cooperação global em matéria de ação climática?",
     "qGlobalHealthcareAccess": "Como pode a comunidade internacional melhorar o acesso a cuidados de saúde de qualidade?",
     "qAiGovernance": "Como devem os estados regular a IA e as tecnologias emergentes?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Qualquer cadeira",
     "noChairs": "Nenhum perfil de cadeira encontrado.",
     "notesListTitle": "Lista de notas",
-    "noteCount": "{contar, plural, um {# nota} outro {# notas}}",
+    "noteCount": "{count, plural, one {# nota} other {# notas}}",
     "emptyList": "Ainda não há notas.",
     "forwardedBadge": "(encaminhada)",
     "readerWarning": "Aviso ao leitor: esta nota pode conter linguagem imprópria.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Cada alocação já possui um slot em espera ou atual. Remova entradas se precisar reordenar ou descarte quando terminar."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "atual",
+      "waiting": "esperando"
     }
   },
   "timersWidget": {

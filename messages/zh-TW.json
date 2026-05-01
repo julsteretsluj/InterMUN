@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>會議樓層</floor>（計時器、揚聲器、點名）僅適用於<chairs>講檯椅</chairs>。 使用下面的<live>即時委員會</live>進行監督，或在需要特定會議時輸入委員會代碼（例如代表）。",
     "welcomeSg": "歡迎秘書長！",
     "whichCommittee": "您想查看哪個委員會的情況？",
-    "sessionsCount": "{計數，複數，一個 {# 會話} 其他 {# 會話}}",
+    "sessionsCount": "{count, plural, other {# 場會議}}",
     "topicLabel": "話題：",
     "chairsLabel": "椅子：",
     "committeeLogoAlt": "{名稱}標誌",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "使用者名稱未設定",
         "gradeValue": "年級{年級}",
         "awards": "獎項"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "人工智慧治理",
     "disarmament": "裁軍",
     "nonProliferation": "防擴散",
+    "armsDiversionMechanisms": "制定機制，防止合法交易的常規武器轉入非法市場和非國家行為者",
     "refugeeProtection": "難民保護",
     "globalHealth": "全球健康",
     "foodSecurity": "食品安全",
@@ -1889,6 +1895,7 @@
     "disinformation": "虛假資訊",
     "sustainableDevelopment": "永續發展",
     "untitledTopic": "無標題主題",
+    "topicQuestionOf": "{topic}的問題",
     "qClimateCooperation": "成員國如何加強氣候行動的全球合作？",
     "qGlobalHealthcareAccess": "國際社會如何改善獲得優質醫療保健的機會？",
     "qAiGovernance": "各國應如何監管人工智慧和新興技術？",
@@ -1929,7 +1936,7 @@
     "anyChair": "任何椅子",
     "noChairs": "未找到椅子輪廓。",
     "notesListTitle": "註釋列表",
-    "noteCount": "{計數，複數，一個 {# 註釋} 其他 {# 註釋}}",
+    "noteCount": "{count, plural, other {# 則筆記}}",
     "emptyList": "還沒有筆記。",
     "forwardedBadge": "（轉發）",
     "readerWarning": "讀者警告：本說明可能包含不當語言。",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "每個分配都已經有一個等待或目前的插槽。如果您需要重新排序，請刪除條目，或在完成後關閉。"
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "目前的",
+      "waiting": "等待"
     }
   },
   "timersWidget": {

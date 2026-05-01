@@ -723,7 +723,7 @@
     "sessionFloorBanner": "<तल>सत्र तल</तल> (टाइमर, स्पीकर, रोल कॉल) केवल <कुर्सियों>डेज़ कुर्सियों</कुर्सियों> के लिए है। निरीक्षण के लिए नीचे <लाइव>लाइव समितियों</लाइव> का उपयोग करें, या जब आपको किसी विशिष्ट सत्र की आवश्यकता हो तो प्रतिनिधियों की तरह समिति कोड दर्ज करें।",
     "welcomeSg": "स्वागत है महासचिव!",
     "whichCommittee": "आप किस समिति में जाँच करना चाहेंगे?",
-    "sessionsCount": "{गिनती, बहुवचन, एक {# सत्र} अन्य {# सत्र}}",
+    "sessionsCount": "{count, plural, one {# सत्र} other {# सत्र}}",
     "topicLabel": "विषय:",
     "chairsLabel": "कुर्सियाँ:",
     "committeeLogoAlt": "{नाम} लोगो",
@@ -944,11 +944,11 @@
     },
     "voting": {
       "tabs": {
-        "ariaLabel": "Voting sections",
+        "ariaLabel": "मतदान अनुभाग",
         "open": "खुला",
         "closed": "बंद किया हुआ"
       },
-      "requiredMajority": "Required majority",
+      "requiredMajority": "आवश्यक बहुमत",
       "helpRequiredMajorityTitle": "आवश्यक बहुमत",
       "helpRequiredMajorityBody": "पास/असफल होने का निर्णय लेने के लिए उपयोग की जाने वाली वोट सीमा चुनें। 'सरल' आधे से अधिक है. `2/3` के लिए सर्वोच्च बहुमत की आवश्यकता होती है।",
       "majoritySimple": "सरल",
@@ -1113,7 +1113,12 @@
         "usernameNotSet": "उपयोक्तानाम सेट नहीं है",
         "gradeValue": "ग्रेड {ग्रेड}",
         "awards": "पुरस्कार"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1271,7 +1276,7 @@
             "definition": "न्यायक्षेत्रों में दवाओं, हथियारों, व्यक्तियों या वस्तुओं की अवैध आवाजाही।"
           },
           "rule_of_law_capacity": {
-            "term": "Rule-of-Law Capacity",
+            "term": "क़ानून-सम्मत क्षमता",
             "definition": "निष्पक्षता से जांच करने, मुकदमा चलाने और अधिकारों की रक्षा करने की न्याय प्रणालियों की संस्थागत क्षमता।"
           },
           "sustainable_development": {
@@ -1315,7 +1320,7 @@
             "definition": "जानकारी के मूल स्रोत का स्पष्ट रूप से हवाला दें ताकि दावों को सत्यापित और प्रासंगिक बनाया जा सके।"
           },
           "verified_reporting": {
-            "term": "Verified Reporting",
+            "term": "सत्यापित रिपोर्टिंग",
             "definition": "विवादित तथ्यों को प्रकाशित करने से पहले पुष्टि की आवश्यकता वाले पत्रकारिता मानक।"
           },
           "editorial_independence": {
@@ -1429,8 +1434,8 @@
       "speechLabel": "भाषण",
       "untitled": "शीर्षकहीन",
       "edit": "संपादन करना",
-      "speechDocument": "Speech document",
-      "draftText": "Draft text",
+      "speechDocument": "भाषण दस्तावेज़",
+      "draftText": "मसौदा पाठ",
       "noContentHint": "Google दस्तावेज़ को संपादन के साथ लिंक करें, या फ़ॉर्म में सादा पाठ जोड़ें।"
     },
     "committeeRoom": {
@@ -1452,17 +1457,17 @@
       "findLabel": "एक प्रतिनिधिमंडल या मंच सदस्य खोजें",
       "searchPlaceholder": "देश, नाम, स्कूल...",
       "matchesCount": "{कुल} सीटों का मिलान",
-      "enterScrolls": "Enter scrolls",
+      "enterScrolls": "स्क्रॉल दर्ज करें",
       "typeToFilterHint": "फ़िल्टर करने के लिए टाइप करें - पहले मिलान के लिए स्क्रॉल दर्ज करें",
       "noMatches": "कोई मेल खाने वाला प्रतिनिधिमंडल या मंच की सीटें नहीं।",
       "digitalDisplay": "डिजिटल डिस्प्ले",
       "floorLabel": "ज़मीन",
       "staffSeatsHeading": "स्टाफ - सीटें",
-      "searchAria": "Search delegations",
+      "searchAria": "प्रतिनिधिमंडल खोजें",
       "virtualRoomVacant": "खाली",
       "profileAria": "प्रोफ़ाइल देखें: {देश}",
-      "vacantSeatAria": "Vacant seat",
-      "placardAria": "Placard {country}",
+      "vacantSeatAria": "खाली सीट",
+      "placardAria": "प्लेकार्ड {country}",
       "gavelAria": "भूमि का लगान",
       "viewProfileAria": "प्रोफ़ाइल देखें: {शीर्षक}",
       "noProfileLinkAria": "{शीर्षक} (कोई प्रोफ़ाइल लिंक नहीं)",
@@ -1476,11 +1481,11 @@
       "requestToSpeak": {
         "title": "बोलने का अनुरोध",
         "delegateFallback": "प्रतिनिधि",
-        "needAllocation": "You need an allocation to request to speak.",
+        "needAllocation": "बोलने का अनुरोध करने के लिए आपको आवंटन की आवश्यकता है।",
         "alreadyQueued": "आपके पास कतार में पहले से ही सक्रिय बोलने का अनुरोध है।",
         "requested": "बोलने का अनुरोध किया. आप कतार में दिखाई देंगे.",
         "requestFailed": "बोलने का अनुरोध करने में विफल.",
-        "helpBody": "Sends your delegation to the chair queue. You can have one active waiting/current request at a time.",
+        "helpBody": "आपके प्रतिनिधिमंडल को कुर्सी कतार में भेजता है। आपके पास एक समय में एक सक्रिय प्रतीक्षा/वर्तमान अनुरोध हो सकता है।",
         "purposeLabel": "वैकल्पिक उद्देश्य (कतार लेबल में दिखता है)",
         "purposeHelpTitle": "प्रयोजन लेबल",
         "purposeHelpBody": "यह पाठ आपके देश के नाम के साथ जोड़ा गया है ताकि कुर्सियाँ देख सकें कि आप फर्श के लिए अनुरोध क्यों कर रहे हैं।",
@@ -1809,6 +1814,7 @@
     "aiGovernance": "एआई शासन",
     "disarmament": "निरस्त्रीकरण",
     "nonProliferation": "अप्रसार",
+    "armsDiversionMechanisms": "कानूनी रूप से व्यापार किए जाने वाले पारंपरिक हथियारों को अवैध बाजारों और गैर-राज्य अभिनेताओं की ओर मोड़ने से रोकने के लिए तंत्र विकसित करना",
     "refugeeProtection": "शरणार्थी सुरक्षा",
     "globalHealth": "वैश्विक स्वास्थ्य",
     "foodSecurity": "खाद्य सुरक्षा",
@@ -1817,6 +1823,7 @@
     "disinformation": "दुष्प्रचार",
     "sustainableDevelopment": "सतत विकास",
     "untitledTopic": "शीर्षकहीन विषय",
+    "topicQuestionOf": "{topic} का सवाल",
     "qClimateCooperation": "सदस्य देश जलवायु कार्रवाई पर वैश्विक सहयोग को कैसे मजबूत कर सकते हैं?",
     "qGlobalHealthcareAccess": "अंतर्राष्ट्रीय समुदाय गुणवत्तापूर्ण स्वास्थ्य देखभाल तक पहुंच कैसे सुधार सकता है?",
     "qAiGovernance": "राज्यों को एआई और उभरती प्रौद्योगिकियों को कैसे विनियमित करना चाहिए?",
@@ -1835,19 +1842,19 @@
       "questions": "प्रश्न",
       "informalConversations": "अनौपचारिक बातचीत"
     },
-    "concernLabel": "Concern (auto placeholder)",
+    "concernLabel": "चिंता (ऑटो प्लेसहोल्डर)",
     "concernHelpTitle": "चिंता का झंडा",
     "concernHelpBody": "इसका उपयोग तब करें जब आपके नोट में मॉडरेशन-संवेदनशील चिंता शामिल हो। पाठक को एक चेतावनी दिखाई दे सकती है, लेकिन आपका नोट फिर भी भेजा जाएगा।",
     "placeholderCompose": "अपना नोट लिखें...",
     "placeholderDisabled": "केवल प्रतिनिधि/अध्यक्ष/एसएमटी ही नोट भेज सकते हैं।",
     "sessionOnlyHint": "नोट्स केवल सक्रिय समिति सत्रों के दौरान ही उपलब्ध होते हैं।",
-    "unmoderatedHint": "Notes are disabled during unmoderated caucus.",
+    "unmoderatedHint": "अनमॉडर्ड कॉकस के दौरान नोट्स अक्षम कर दिए जाते हैं।",
     "sendNote": "नोट भेजें",
     "sending": "भेजा जा रहा है...",
     "sendHelpTitle": "नोट भेजें",
     "sendHelpBody": "यह नोट ऊपर चयनित प्राप्तकर्ताओं को भेजता है। यह भेजने से नहीं रोकता; यह केवल इस बात को प्रभावित करता है कि पाठक को कैसे चेतावनी/ध्वजांकित किया जाता है।",
     "smtFullNotes": "संपूर्ण नोट्स देखना (पासवर्ड सत्यापित)।",
-    "smtForwardedInbox": "Viewing forwarded notes (SMT inbox).",
+    "smtForwardedInbox": "अग्रेषित नोट देखना (एसएमटी इनबॉक्स)।",
     "enterStaffPassword": "स्टाफ सेकेंडरी पासवर्ड दर्ज करें",
     "recipientsTitle": "प्राप्तकर्ता",
     "delegationsLabel": "प्रतिनिधि मंडल",
@@ -1857,7 +1864,7 @@
     "anyChair": "कोई कुर्सी",
     "noChairs": "कोई कुर्सी प्रोफ़ाइल नहीं मिली.",
     "notesListTitle": "नोट्स सूची",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{count, plural, one {# नोट} other {# नोट}}",
     "emptyList": "अभी तक कोई नोट नहीं.",
     "forwardedBadge": "(अग्रेषित)",
     "readerWarning": "पाठक चेतावनी: इस नोट में अनुचित भाषा हो सकती है।",
@@ -2036,7 +2043,7 @@
       "requiredConferenceAllocationEmail": "सम्मेलन, आवंटन और प्रतिनिधि ईमेल आवश्यक हैं।"
     },
     "exportMaterials": {
-      "pleaseSignInFirst": "Please sign in first.",
+      "pleaseSignInFirst": "कृपया पहले साइन इन करें.",
       "onlyDelegatesCanExport": "केवल प्रतिनिधि ही अपनी सामग्री निर्यात कर सकते हैं।",
       "accountHasNoEmail": "आपके खाते में कोई ईमेल पता सेट नहीं है.",
       "rangeTodayUtc": "आज (UTC)",
@@ -2053,7 +2060,7 @@
       "welcomeLine1": "इंटरएमयूएन में आपका स्वागत है।",
       "welcomeConfirmedFor": "आपके प्रतिनिधि खाते की पुष्टि की गई है: {देश}।",
       "welcomeLine2": "अब आप समिति साइन-इन के लिए आगे बढ़ सकते हैं और लाइव सत्र में शामिल हो सकते हैं।",
-      "welcomeLine3": "See you on the floor.",
+      "welcomeLine3": "फर्श पर मिलते हैं.",
       "chairReminderSubject": "प्रतिनिधि आवंटन अनुरोध अनुमोदन के लिए लंबित है",
       "chairReminderLine1": "एक प्रतिनिधि ने आवंटन का अनुरोध किया है और अध्यक्ष की समीक्षा की आवश्यकता है।",
       "chairReminderConference": "सम्मेलन: {सम्मेलन}",
@@ -2085,7 +2092,7 @@
     "officialCommitteeName": "आधिकारिक समिति का नाम (एसएमटी ग्रिड)",
     "officialCommitteeNamePlaceholder": "जैसे विश्व स्वास्थ्य संगठन",
     "chairNames": "कुर्सी के नाम",
-    "chairNamesPlaceholder": "Comma-separated, e.g. Alex Kim, Jordan Lee",
+    "chairNamesPlaceholder": "अल्पविराम से अलग किया गया, उदा. एलेक्स किम, जॉर्डन ली",
     "committeeLogo": "समिति का लोगो",
     "uploading": "अपलोड हो रहा है...",
     "crisisSlidesUrl": "संकट स्लाइड (Google स्लाइड URL)",
@@ -2670,73 +2677,73 @@
   },
   "chairChecklists": {
     "common": {
-      "progressSynced": "{done} / {total} complete - synced for this committee",
-      "loading": "Loading...",
-      "resetChecklist": "Reset checklist"
+      "progressSynced": "{done} / {total} पूर्ण - इस समिति के लिए समन्वयित",
+      "loading": "लोड हो रहा है...",
+      "resetChecklist": "चेकलिस्ट रीसेट करें"
     },
     "prepPage": {
-      "description": "Before the conference: rules, topic, room, materials, and team. Synced for all chairs on this committee; reset clears it for everyone.",
-      "crisisHidden": "Crisis-specific prep items are hidden for this committee type."
+      "description": "सम्मेलन से पहले: नियम, विषय, कक्ष, सामग्री और टीम। इस समिति के सभी अध्यक्षों के लिए समन्वयित; रीसेट इसे सभी के लिए साफ़ करता है।",
+      "crisisHidden": "इस समिति प्रकार के लिए संकट-विशिष्ट तैयारी आइटम छिपे हुए हैं।"
     },
     "flowPage": {
-      "description": "Normal committee flow - tick steps as you go. Shared across chair accounts and devices; reset clears for everyone."
+      "description": "सामान्य समिति प्रवाह - जैसे-जैसे आप आगे बढ़ें, चरणों पर निशान लगाएँ। चेयर खातों और उपकरणों में साझा किया गया; रीसेट सभी के लिए साफ़ हो जाता है।"
     },
     "prep": {
       "sections": {
         "rules": {
-          "title": "Rules & procedure"
+          "title": "नियम एवं प्रक्रिया"
         },
         "topic": {
-          "title": "Committee & topic"
+          "title": "समिति एवं विषय"
         },
         "room": {
-          "title": "Room & tech"
+          "title": "कमरा और तकनीक"
         },
         "materials": {
-          "title": "Materials & logistics"
+          "title": "सामग्री एवं रसद"
         },
         "crisis": {
-          "title": "Crisis (if applicable)"
+          "title": "संकट (यदि लागू हो)"
         },
         "team": {
-          "title": "Team & communication"
+          "title": "टीम एवं संचार"
         }
       },
       "items": {
-        "rop": "Read and understand committee rules of procedure",
-        "parliamentary": "Review parliamentary procedure (motions, points, voting)",
-        "speaking-times": "Confirm speaking times and time limits",
-        "quorum": "Know quorum and voting requirements",
-        "research": "Research committee topic and background",
-        "study-guide": "Read study guide and key documents",
-        "dashboard-topic": "Set committee name and topic in dashboard",
-        "agenda": "Prepare session agenda and flow",
-        "digital-room": "Set up digital room (delegates list, placards)",
-        "tech-check": "Tech check: platform, audio, screen share",
-        "backup": "Have backup plan if tech fails",
-        "roll-plan": "Prepare roll call list and attendance",
-        "speakers-plan": "Plan speakers list management",
-        "templates": "Prepare common motions / points (if using templates)",
-        "timing": "Confirm session start time and breaks",
-        "crisis-slides": "Review crisis elements and update slides",
-        "crisis-cues": "Plan crisis speaker order / cues",
-        "crisis-paths": "Prepare crisis pathways and facts",
-        "co-chairs": "Coordinate with co-chair(s) on roles",
-        "staff": "Confirm staff / dais support and cues",
-        "delegate-brief": "Prepare brief for delegates (rules, timing)"
+        "rop": "समिति की प्रक्रिया के नियमों को पढ़ें और समझें",
+        "parliamentary": "संसदीय प्रक्रिया की समीक्षा करें (प्रस्ताव, बिंदु, मतदान)",
+        "speaking-times": "बोलने के समय और समय सीमा की पुष्टि करें",
+        "quorum": "कोरम और मतदान आवश्यकताओं को जानें",
+        "research": "अनुसंधान समिति विषय और पृष्ठभूमि",
+        "study-guide": "अध्ययन मार्गदर्शिका और मुख्य दस्तावेज़ पढ़ें",
+        "dashboard-topic": "डैशबोर्ड में समिति का नाम और विषय सेट करें",
+        "agenda": "सत्र का एजेंडा और प्रवाह तैयार करें",
+        "digital-room": "डिजिटल कक्ष स्थापित करें (प्रतिनिधियों की सूची, तख्तियां)",
+        "tech-check": "तकनीकी जाँच: प्लेटफ़ॉर्म, ऑडियो, स्क्रीन शेयर",
+        "backup": "यदि तकनीक विफल हो जाए तो बैकअप योजना रखें",
+        "roll-plan": "रोल कॉल सूची और उपस्थिति तैयार करें",
+        "speakers-plan": "योजना वक्ता सूची प्रबंधन",
+        "templates": "सामान्य प्रस्ताव/बिंदु तैयार करें (यदि टेम्प्लेट का उपयोग कर रहे हैं)",
+        "timing": "सत्र प्रारंभ समय और विराम की पुष्टि करें",
+        "crisis-slides": "संकट तत्वों की समीक्षा करें और स्लाइड अपडेट करें",
+        "crisis-cues": "योजना संकट वक्ता आदेश/संकेत",
+        "crisis-paths": "संकट के रास्ते और तथ्य तैयार करें",
+        "co-chairs": "भूमिकाओं पर सह-अध्यक्षों के साथ समन्वय करें",
+        "staff": "स्टाफ/मंच के समर्थन और संकेतों की पुष्टि करें",
+        "delegate-brief": "प्रतिनिधियों के लिए संक्षिप्त विवरण तैयार करें (नियम, समय)"
       }
     },
     "flow": {
       "items": {
-        "roll-call": "Roll call",
-        "open-floor": "Open the floor (points & motions)",
-        "recognize": "Recognize motions",
-        "vote-1": "Vote on motion(s)",
-        "engage": "Engage in chosen motion or move to GSL",
-        "open-again": "Open the floor again",
-        "recognize-repeat": "Recognize motions (repeat as needed)",
-        "vote-2": "Vote on motion(s)",
-        "cycle": "Continue cycle (engage motion / GSL -> open floor)"
+        "roll-call": "उपस्थिति",
+        "open-floor": "फर्श खोलें (बिंदु और प्रस्ताव)",
+        "recognize": "गतियों को पहचानें",
+        "vote-1": "प्रस्ताव पर वोट करें",
+        "engage": "चुनी गई गति में संलग्न हों या जीएसएल की ओर बढ़ें",
+        "open-again": "फर्श फिर से खोलो",
+        "recognize-repeat": "गतियों को पहचानें (आवश्यकतानुसार दोहराएँ)",
+        "vote-2": "प्रस्ताव पर वोट करें",
+        "cycle": "चक्र जारी रखें (संलग्न गति / जीएसएल -> खुली मंजिल)"
       }
     }
   },
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "प्रत्येक आवंटन में पहले से ही एक प्रतीक्षा या वर्तमान स्लॉट होता है। यदि आपको पुन: व्यवस्थित करने की आवश्यकता हो तो प्रविष्टियाँ हटा दें, या काम पूरा हो जाने पर ख़ारिज कर दें।"
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "मौजूदा",
+      "waiting": "इंतज़ार में"
     }
   },
   "timersWidget": {

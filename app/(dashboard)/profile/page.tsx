@@ -12,6 +12,13 @@ import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { getTranslations } from "next-intl/server";
+import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
+import {
+  canSwitchCommitteeViaProfile,
+  isHeadChairAllocationLabel,
+} from "@/lib/head-chair-committee-switch";
 
 export default async function ProfilePage({
   searchParams,
@@ -20,6 +27,9 @@ export default async function ProfilePage({
 }) {
   const t = await getTranslations("pageTitles");
   const tp = await getTranslations("views.profile");
+  const tTopics = await getTranslations("agendaTopics");
+  const tVoting = await getTranslations("views.voting");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const supabase = await createClient();
   const {
     data: { user },
@@ -148,7 +158,11 @@ export default async function ProfilePage({
   const committeeLabel = Object.fromEntries(
     (awardConfs ?? []).map((c) => [
       c.id,
-      [c.name, c.committee].filter(Boolean).join(" — "),
+      translateConferenceHeadline(
+        tTopics,
+        tCommitteeLabels,
+        [c.name, c.committee].filter(Boolean).join(" — ")
+      ),
     ])
   );
 
@@ -156,6 +170,40 @@ export default async function ProfilePage({
   const canViewPrivate = !isDelegate;
   const activeConference = await getConferenceForDashboard({ role: roleLower });
   const crisisReportingEnabled = isCrisisCommittee(activeConference?.committee ?? null);
+
+  let headChairCommitteeSwitch:
+    | { conferences: { id: string; label: string }[]; activeConferenceId: string | null }
+    | undefined;
+  if (roleLower === "chair" && canSwitchCommitteeViaProfile(user.email ?? "")) {
+    const { data: headChairAllocRows } = await supabase
+      .from("allocations")
+      .select("conference_id, country, conferences(id, name, committee)")
+      .eq("user_id", user.id);
+    type ConfEmbed = { id: string; name: string; committee: string | null };
+    const options = (headChairAllocRows ?? [])
+      .filter((r) => isHeadChairAllocationLabel(r.country))
+      .map((r) => {
+        const raw = r.conferences as ConfEmbed | ConfEmbed[] | null | undefined;
+        const c = Array.isArray(raw) ? raw[0] : raw;
+        if (!c?.id) return null;
+        const label = translateConferenceHeadline(
+          tTopics,
+          tCommitteeLabels,
+          [c.name, c.committee].filter(Boolean).join(" — ")
+        );
+        return { id: c.id, label };
+      })
+      .filter((x): x is { id: string; label: string } => Boolean(x));
+    const uniqueById = [...new Map(options.map((o) => [o.id, o])).values()].sort((a, b) =>
+      a.label.localeCompare(b.label)
+    );
+    if (uniqueById.length > 0) {
+      headChairCommitteeSwitch = {
+        conferences: uniqueById,
+        activeConferenceId: activeConference?.id ?? null,
+      };
+    }
+  }
 
   const { data: allocationRows } = activeConference?.id
     ? await supabase
@@ -417,14 +465,15 @@ export default async function ProfilePage({
           <ul className="space-y-2 text-sm">
             {(myMotions ?? []).map((m) => {
               const where = committeeLabel[m.conference_id] ?? tp("fallbacks.committeeSession");
-              const title =
-                m.title?.trim() || m.procedure_code?.replace(/_/g, " ") || tp("fallbacks.untitledMotion");
+              const title = m.title?.trim()
+                ? translateAgendaTopicLabel(tTopics, m.title)
+                : m.procedure_code?.replace(/_/g, " ") || tp("fallbacks.untitledMotion");
               return (
                 <li key={m.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
                   <span className="font-medium text-brand-navy">{title}</span>
                   <span className="text-brand-muted"> · {where}</span>
-                  <p className="mt-0.5 text-xs text-brand-muted capitalize">
-                    {m.vote_type}
+                  <p className="mt-0.5 text-xs text-brand-muted">
+                    {formatVoteTypeLabel(tVoting, m.vote_type)}
                     {m.procedure_code ? ` · ${m.procedure_code.replace(/_/g, " ")}` : ""}
                   </p>
                   {m.description?.trim() ? (
@@ -513,6 +562,7 @@ export default async function ProfilePage({
           userId={user.id}
           canViewPrivate={!!canViewPrivate}
           availableAllocations={availableAllocations}
+          headChairCommitteeSwitch={headChairCommitteeSwitch}
         />
       ) : null}
     </MunPageShell>

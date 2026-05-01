@@ -9,6 +9,8 @@ import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { useTranslations } from "next-intl";
+import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import {
   committeeSessionEndTimestampMs,
   formatCountdownOrElapsed,
@@ -66,6 +68,8 @@ export function FloorStatusBar({
 }) {
   const t = useTranslations("views.session.floorStatus");
   const tActiveMotion = useTranslations("views.session.activeMotion");
+  const tTopics = useTranslations("agendaTopics");
+  const tVoting = useTranslations("views.voting");
   const supabase = createClient();
   const { timer } = useConferenceTimer(conferenceId, activeMotionVoteItemId);
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
@@ -426,7 +430,10 @@ export function FloorStatusBar({
         <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
           {activeMotions.map((motion) => {
             const isCurrent = activeMotionVoteItemId != null && motion.id === activeMotionVoteItemId;
-            const title = motion.title?.trim() || tActiveMotion("motionFallback");
+            const rawTitle = motion.title?.trim() ?? "";
+            const title = rawTitle
+              ? translateAgendaTopicLabel(tTopics, rawTitle)
+              : tActiveMotion("motionFallback");
             return (
               <div key={motion.id} className={isCurrent ? cardActive : card}>
                 <p className={`${muted} truncate`}>
@@ -434,7 +441,7 @@ export function FloorStatusBar({
                 </p>
                 <p className="truncate text-xs font-semibold text-brand-navy">{title}</p>
                 <p className="mt-0.5 text-[0.65rem] text-brand-navy/80">
-                  {(motion.vote_type || "motion").replace(/_/g, " ")} ·{" "}
+                  {formatVoteTypeLabel(tVoting, motion.vote_type)} ·{" "}
                   {motion.required_majority === "2/3" ? "2/3" : tActiveMotion("majoritySimple")}
                 </p>
               </div>

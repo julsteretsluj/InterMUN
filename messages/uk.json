@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Сеансовий майданчик</floor> (таймери, доповідачі, перекличка) призначений лише для <chairs>крісел на трибуні</chairs>. Використовуйте <live>Живі комітети</live> нижче для контролю або введіть коди комітетів, як делегати, коли вам потрібна конкретна сесія.",
     "welcomeSg": "Ласкаво просимо, Генеральний секретар!",
     "whichCommittee": "В якому комітеті ви б хотіли перевірити?",
-    "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+    "sessionsCount": "{count, plural, one {# сесія} few {# сесії} many {# сесій} other {# сесій}}",
     "topicLabel": "Тема:",
     "chairsLabel": "Стільці:",
     "committeeLogoAlt": "логотип {name}",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Ім'я користувача не встановлено",
         "gradeValue": "Оцінка {grade}",
         "awards": "Нагороди"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "Управління ШІ",
     "disarmament": "Роззброєння",
     "nonProliferation": "Нерозповсюдження",
+    "armsDiversionMechanisms": "Розробка механізмів запобігання перенаправленню звичайних озброєнь, які легально продаються, на незаконні ринки та до недержавних суб’єктів",
     "refugeeProtection": "Захист біженців",
     "globalHealth": "Глобальне здоров'я",
     "foodSecurity": "Продовольча безпека",
@@ -1889,6 +1895,7 @@
     "disinformation": "Дезінформація",
     "sustainableDevelopment": "Сталий розвиток",
     "untitledTopic": "Тема без назви",
+    "topicQuestionOf": "Питання {topic}",
     "qClimateCooperation": "Як країни-члени можуть зміцнити глобальну співпрацю щодо кліматичних заходів?",
     "qGlobalHealthcareAccess": "Як міжнародна спільнота може покращити доступ до якісної медичної допомоги?",
     "qAiGovernance": "Як держави повинні регулювати ШІ та нові технології?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Будь-який стілець",
     "noChairs": "Профілі крісел не знайдено.",
     "notesListTitle": "Список приміток",
-    "noteCount": "{count, plural, one {# note} other {# notes}}",
+    "noteCount": "{count, plural, one {# нотатка} few {# нотатки} many {# нотаток} other {# нотаток}}",
     "emptyList": "Приміток ще немає.",
     "forwardedBadge": "(переслано)",
     "readerWarning": "Попередження читача: ця примітка може містити ненормативну лексику.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Кожне виділення вже має слот очікування або поточний. Видаліть записи, якщо потрібно змінити порядок, або закрийте, коли закінчите."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "поточний",
+      "waiting": "очікування"
     }
   },
   "timersWidget": {

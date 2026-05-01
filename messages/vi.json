@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Sàn họp</floor> (bộ hẹn giờ, diễn giả, điểm danh) chỉ dành cho <chairs>ghế dai</chairs>. Sử dụng <live>Ủy ban trực tiếp</live> bên dưới để giám sát hoặc nhập mã ủy ban như đại biểu khi bạn cần một phiên cụ thể.",
     "welcomeSg": "Chào mừng Tổng Bí thư!",
     "whichCommittee": "Bạn muốn kiểm tra ủy ban nào?",
-    "sessionsCount": "{đếm, số nhiều, một {# phiên} khác {# phiên}}",
+    "sessionsCount": "{count, plural, other {# phiên họp}}",
     "topicLabel": "Đề tài:",
     "chairsLabel": "Ghế:",
     "committeeLogoAlt": "biểu tượng {tên}",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Tên người dùng chưa được đặt",
         "gradeValue": "Lớp {lớp}",
         "awards": "Giải thưởng"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "Quản trị AI",
     "disarmament": "Giải trừ quân bị",
     "nonProliferation": "Không phổ biến vũ khí hạt nhân",
+    "armsDiversionMechanisms": "Phát triển các cơ chế để ngăn chặn việc chuyển hướng buôn bán vũ khí thông thường hợp pháp sang các thị trường bất hợp pháp và các chủ thể phi nhà nước",
     "refugeeProtection": "Bảo vệ người tị nạn",
     "globalHealth": "Sức khỏe toàn cầu",
     "foodSecurity": "An ninh lương thực",
@@ -1889,6 +1895,7 @@
     "disinformation": "Thông tin sai lệch",
     "sustainableDevelopment": "Phát triển bền vững",
     "untitledTopic": "Chủ đề không có tiêu đề",
+    "topicQuestionOf": "Câu hỏi của {topic}",
     "qClimateCooperation": "Làm thế nào các quốc gia thành viên có thể tăng cường hợp tác toàn cầu về hành động khí hậu?",
     "qGlobalHealthcareAccess": "Cộng đồng quốc tế có thể cải thiện khả năng tiếp cận dịch vụ chăm sóc sức khỏe có chất lượng bằng cách nào?",
     "qAiGovernance": "Các quốc gia nên quản lý AI và các công nghệ mới nổi như thế nào?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Bất kỳ chiếc ghế nào",
     "noChairs": "Không tìm thấy hồ sơ ghế.",
     "notesListTitle": "danh sách ghi chú",
-    "noteCount": "{đếm, số nhiều, một {# nốt} khác {# nốt}}",
+    "noteCount": "{count, plural, other {# ghi chú}}",
     "emptyList": "Chưa có ghi chú nào.",
     "forwardedBadge": "(chuyển tiếp)",
     "readerWarning": "Cảnh báo người đọc: ghi chú này có thể chứa ngôn ngữ không phù hợp.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Mọi phân bổ đều đã có một vị trí chờ hoặc hiện tại. Xóa các mục nếu bạn cần sắp xếp lại hoặc loại bỏ khi bạn hoàn tất."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "hiện hành",
+      "waiting": "chờ"
     }
   },
   "timersWidget": {

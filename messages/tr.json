@@ -795,7 +795,7 @@
     "sessionFloorBanner": "<floor>Oturum katı</floor> (zamanlayıcılar, hoparlörler, yoklama) yalnızca <sandalyeler>dais sandalyeleri</chairs> içindir. Gözetim için aşağıdaki <live>Canlı komiteleri</live> kullanın veya belirli bir oturuma ihtiyacınız olduğunda delegeler gibi komite kodlarını girin.",
     "welcomeSg": "Hoş geldiniz Genel Sekreter!",
     "whichCommittee": "Hangi komiteye başvurmak istiyorsunuz?",
-    "sessionsCount": "{count, plural, bir {# oturum} diğer {# oturum}}",
+    "sessionsCount": "{count, plural, one {# oturum} other {# oturum}}",
     "topicLabel": "Başlık:",
     "chairsLabel": "Sandalyeler:",
     "committeeLogoAlt": "{isim} logosu",
@@ -1185,7 +1185,12 @@
         "usernameNotSet": "Kullanıcı adı ayarlanmadı",
         "gradeValue": "Sınıf {derece}",
         "awards": "Ödüller"
-      }
+      },
+      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
+      "headChairSelectCommittee": "Select committee…",
+      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "headChairSwitchingCommittee": "Switching…",
+      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {
@@ -1881,6 +1886,7 @@
     "aiGovernance": "Yapay zeka yönetişimi",
     "disarmament": "Silahsızlanma",
     "nonProliferation": "Nükleer silahların yayılmasının önlenmesi",
+    "armsDiversionMechanisms": "Yasal olarak ticareti yapılan konvansiyonel silahların yasadışı pazarlara ve devlet dışı aktörlere yönlendirilmesini önleyecek mekanizmalar geliştirmek",
     "refugeeProtection": "Mülteci koruması",
     "globalHealth": "Küresel sağlık",
     "foodSecurity": "Gıda güvenliği",
@@ -1889,6 +1895,7 @@
     "disinformation": "Dezenformasyon",
     "sustainableDevelopment": "Sürdürülebilir kalkınma",
     "untitledTopic": "Başlıksız konu",
+    "topicQuestionOf": "{topic} sorusu",
     "qClimateCooperation": "Üye devletler iklim eylemi konusunda küresel iş birliğini nasıl güçlendirebilir?",
     "qGlobalHealthcareAccess": "Uluslararası toplum kaliteli sağlık hizmetlerine erişimi nasıl geliştirebilir?",
     "qAiGovernance": "Devletler yapay zekayı ve gelişen teknolojileri nasıl düzenlemelidir?",
@@ -1929,7 +1936,7 @@
     "anyChair": "Herhangi bir sandalye",
     "noChairs": "Sandalye profili bulunamadı.",
     "notesListTitle": "Not listesi",
-    "noteCount": "{count, çoğul, bir {# nota} diğer {# nota}}",
+    "noteCount": "{count, plural, one {# not} other {# not}}",
     "emptyList": "Henüz not yok.",
     "forwardedBadge": "(iletildi)",
     "readerWarning": "Okuyucu uyarısı: Bu not uygunsuz dil içerebilir.",
@@ -2779,8 +2786,8 @@
       "alreadyQueued": "Her tahsisin zaten bekleyen veya mevcut bir yuvası vardır. Yeniden sıralamanız gerekiyorsa girişleri kaldırın veya işiniz bittiğinde reddedin."
     },
     "status": {
-      "current": "current",
-      "waiting": "waiting"
+      "current": "akım",
+      "waiting": "beklemek"
     }
   },
   "timersWidget": {
