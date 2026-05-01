@@ -174,12 +174,19 @@ export function VotingPanel({
   }, [supabase]);
 
   async function saveSettings(itemId: string, must_vote: boolean, required_majority: string) {
+    const item = voteItems.find((v) => v.id === itemId);
+    const isAgendaFloor = item ? isAgendaFloorVoteItem(item) : false;
+    const nextMajority = isAgendaFloor ? "2/3" : required_majority;
+    const nextMustVote = isAgendaFloor ? false : must_vote;
     const { error } = await supabase
       .from("vote_items")
-      .update({ must_vote, required_majority })
+      .update({ must_vote: nextMustVote, required_majority: nextMajority })
       .eq("id", itemId);
     if (error) return;
-    setDrafts((prev) => ({ ...prev, [itemId]: { must_vote, required_majority } }));
+    setDrafts((prev) => ({
+      ...prev,
+      [itemId]: { must_vote: nextMustVote, required_majority: nextMajority },
+    }));
   }
 
   async function setClosed(itemId: string, closed: boolean) {
@@ -255,19 +262,25 @@ export function VotingPanel({
                 <span className="mun-label">{t("requiredMajority")}</span>
                 <HelpButton title={t("helpRequiredMajorityTitle")}>{t("helpRequiredMajorityBody")}</HelpButton>
               </div>
-            <select
-              value={d.required_majority}
-              onChange={(e) =>
-                setDrafts((prev) => ({
-                  ...prev,
-                  [item.id]: { ...d, required_majority: e.target.value },
-                }))
-              }
-              className="mun-field mt-1.5"
-            >
-              <option value="simple">{t("majoritySimple")}</option>
-              <option value="2/3">{t("majorityTwoThirds")}</option>
-            </select>
+            {isAgendaFloor ? (
+              <p className="mun-field mt-1.5 flex min-h-10 items-center bg-[var(--material-thin)]">
+                {t("majorityTwoThirds")}
+              </p>
+            ) : (
+              <select
+                value={d.required_majority}
+                onChange={(e) =>
+                  setDrafts((prev) => ({
+                    ...prev,
+                    [item.id]: { ...d, required_majority: e.target.value },
+                  }))
+                }
+                className="mun-field mt-1.5"
+              >
+                <option value="simple">{t("majoritySimple")}</option>
+                <option value="2/3">{t("majorityTwoThirds")}</option>
+              </select>
+            )}
           </label>
             {isAgendaFloor ? null : (
             <div className="flex flex-col items-end gap-1">
@@ -289,13 +302,15 @@ export function VotingPanel({
             </div>
             )}
         </div>
-        <button
-          type="button"
-          className="mun-btn-primary w-full sm:w-auto"
-          onClick={() => void saveSettings(item.id, d.must_vote, d.required_majority)}
-        >
-          {t("saveSettings")}
-        </button>
+        {isAgendaFloor ? null : (
+          <button
+            type="button"
+            className="mun-btn-primary w-full sm:w-auto"
+            onClick={() => void saveSettings(item.id, d.must_vote, d.required_majority)}
+          >
+            {t("saveSettings")}
+          </button>
+        )}
       </div>
     ) : null;
 
@@ -437,8 +452,6 @@ export function VotingPanel({
                     <div className="mun-group-list">
                     {roster.map((row) => {
                       const recorded = recordedForRow(row);
-                      const canClickAbstain =
-                        abstainAllowedForItem && row.rollAttendance !== "present_voting";
                       const canRecord = Boolean(row.userId);
                       return (
                         <div
@@ -484,16 +497,8 @@ export function VotingPanel({
                                 {abstainAllowedForItem ? (
                                   <button
                                     type="button"
-                                    disabled={!canClickAbstain}
-                                    title={
-                                      !canClickAbstain ? t("abstainDisabledPresentVotingRoll") : undefined
-                                    }
-                                    onClick={() =>
-                                      canClickAbstain
-                                        ? void recordVoteForMotion(item.id, row.userId as string, "abstain")
-                                        : undefined
-                                    }
-                                    className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-amber-600"
+                                    onClick={() => void recordVoteForMotion(item.id, row.userId as string, "abstain")}
+                                    className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500"
                                   >
                                     {t("abstain")}
                                   </button>

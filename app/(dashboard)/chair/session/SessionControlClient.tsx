@@ -728,38 +728,38 @@ export function SessionControlClient({
   function validateMotionDraft(draft: typeof motionDraft): string | null {
     if (draft.procedure_code === "moderated_caucus") {
       if (!draft.title.trim()) {
-        return "Moderated caucus requires a topic.";
+        return tSessionControl("guidedModeratedRequiresTopic");
       }
       const total = Number(draft.moderated_total_minutes);
       const speaker = Number(draft.moderated_speaker_seconds);
       if (!Number.isFinite(total) || total <= 0) {
-        return "Moderated caucus requires total time (minutes).";
+        return tSessionControl("guidedModeratedRequiresTotalMinutes");
       }
       if (!Number.isFinite(speaker) || speaker <= 0) {
-        return "Moderated caucus requires speaker time (seconds).";
+        return tSessionControl("guidedModeratedRequiresSpeakerSeconds");
       }
     }
     if (draft.procedure_code === "unmoderated_caucus") {
       const total = Number(draft.unmoderated_total_minutes);
       if (!Number.isFinite(total) || total <= 0) {
-        return "Unmoderated caucus requires total time (minutes).";
+        return tSessionControl("guidedUnmoderatedRequiresTotalMinutes");
       }
     }
     if (draft.procedure_code === "consultation") {
       if (!draft.title.trim()) {
-        return "Consultation requires a topic or purpose.";
+        return tSessionControl("guidedConsultationRequiresTopicOrPurpose");
       }
       const total = Number(draft.consultation_total_minutes);
       if (!Number.isFinite(total) || total <= 0) {
-        return "Consultation requires total time (minutes).";
+        return tSessionControl("guidedConsultationRequiresTotalMinutes");
       }
     }
     if (draft.procedure_code === "set_agenda") {
       const title = draft.title.trim();
-      if (!title) return "Select an agenda topic.";
+      if (!title) return tSessionControl("guidedSelectAgendaTopic");
       // Allow editing an already-stated/past set-agenda motion even if the remaining list is exhausted.
       if (agendaTopicsRemaining.length <= 1 && !agendaUsedNameSet.has(title)) {
-        return "Motion to Set the Agenda is unavailable for this committee (not enough topics remaining).";
+        return tSessionControl("guidedSetAgendaUnavailableNotEnoughTopics");
       }
     }
     if (
@@ -2287,42 +2287,45 @@ export function SessionControlClient({
     if (procedureCode === "set_agenda") {
       const topics = agendaTopicsRemaining.filter((t) => (t.name ?? "").trim().length > 0);
       if (topics.length === 0) {
-        setMsg("No agenda topics available for this committee.");
+        setMsg(tSessionControl("guidedNoAgendaTopics"));
         return;
       }
       const pickTopicRaw = window.prompt(
         [
-          "Step 2/5: Choose agenda topic (enter number).",
-          ...topics.map((t, i) => `${i + 1}. ${String(t.name).trim()}`),
+          tSessionControl("guidedStepChooseAgendaTopic"),
+          ...topics.map(
+            (t, i) =>
+              `${i + 1}. ${translateAgendaTopicLabel(tTopics, String(t.name).trim(), locale)}`
+          ),
         ].join("\n"),
         "1"
       );
       if (!pickTopicRaw) return;
       const pickTopic = Number(pickTopicRaw);
       if (!Number.isFinite(pickTopic) || pickTopic < 1 || pickTopic > topics.length) {
-        setMsg("Invalid agenda topic selection.");
+        setMsg(tSessionControl("guidedInvalidAgendaTopicSelection"));
         return;
       }
       titleTrimmed = String(topics[pickTopic - 1]!.name ?? "").trim();
     } else {
       const titlePrompt =
         procedureCode === "consultation"
-          ? "Step 2/5: Topic / purpose"
+          ? tSessionControl("guidedStepTopicPurpose")
           : procedureCode === "moderated_caucus"
-            ? "Step 2/5: Topic"
+            ? tSessionControl("guidedStepTopic")
             : procedureCode === "unmoderated_caucus"
-              ? "Step 2/5: Topic (optional)"
-              : "Step 2/5: Motion title (optional)";
+              ? tSessionControl("guidedStepTopicOptional")
+              : tSessionControl("guidedStepMotionTitleOptional");
       const titleInput = window.prompt(titlePrompt, selected.title ?? selected.label);
       if (titleInput === null) return;
       titleTrimmed = titleInput.trim();
       if (!titleTrimmed) {
         if (procedureCode === "consultation") {
-          setMsg("Consultation requires a topic or purpose.");
+          setMsg(tSessionControl("guidedConsultationRequiresTopicOrPurpose"));
           return;
         }
         if (procedureCode === "moderated_caucus") {
-          setMsg("Topic is required.");
+          setMsg(tSessionControl("guidedTopicIsRequired"));
           return;
         }
       }
@@ -2330,8 +2333,8 @@ export function SessionControlClient({
 
     const motionerInput = window.prompt(
       [
-        "Step 3/5: Motioner (optional, enter number or leave blank).",
-        "0. Not specified",
+        tSessionControl("guidedStepMotioner"),
+        `0. ${tSessionControl("guidedMotionerNotSpecified")}`,
         ...allocations.map((a, i) => `${i + 1}. ${displayCountry(a.country)}`),
       ].join("\n"),
       "0"
@@ -2344,7 +2347,7 @@ export function SessionControlClient({
       }
     }
 
-    let description = window.prompt("Step 4/5: Description / notes (optional)", "") ?? "";
+    let description = window.prompt(tSessionControl("guidedStepDescriptionNotesOptional"), "") ?? "";
     if (
       procedureCode === "moderated_caucus" ||
       procedureCode === "unmoderated_caucus" ||
@@ -2355,30 +2358,32 @@ export function SessionControlClient({
         procedureCode === "unmoderated_caucus" ||
         procedureCode === "consultation";
       const totalMinutes = window.prompt(
-        `Timing: total minutes${totalRequired ? " (required)" : ""}`,
+        tSessionControl("guidedTimingTotalMinutesRequired", {
+          required: totalRequired ? ` (${tSessionControl("guidedRequired")})` : "",
+        }),
         "10"
       );
       if (procedureCode === "moderated_caucus" && (!totalMinutes || Number(totalMinutes) <= 0)) {
-        setMsg("Moderated caucus requires total time (minutes).");
+        setMsg(tSessionControl("guidedModeratedRequiresTotalMinutes"));
         return;
       }
       if (procedureCode === "unmoderated_caucus" && (!totalMinutes || Number(totalMinutes) <= 0)) {
-        setMsg("Unmoderated caucus requires total time (minutes).");
+        setMsg(tSessionControl("guidedUnmoderatedRequiresTotalMinutes"));
         return;
       }
       if (procedureCode === "consultation" && (!totalMinutes || Number(totalMinutes) <= 0)) {
-        setMsg("Consultation requires total time (minutes).");
+        setMsg(tSessionControl("guidedConsultationRequiresTotalMinutes"));
         return;
       }
       if (totalMinutes && Number(totalMinutes) > 0) {
-        let timing = `Timing: total ${totalMinutes} min`;
+        let timing = tSessionControl("guidedTimingTotalMinutesLine", { minutes: totalMinutes });
         if (procedureCode === "moderated_caucus") {
-          const speakerSeconds = window.prompt("Timing: speaker seconds (required)", "60");
+          const speakerSeconds = window.prompt(tSessionControl("guidedTimingSpeakerSecondsRequired"), "60");
           if (!speakerSeconds || Number(speakerSeconds) <= 0) {
-            setMsg("Moderated caucus requires speaker time (seconds).");
+            setMsg(tSessionControl("guidedModeratedRequiresSpeakerSeconds"));
             return;
           }
-          timing += `, speaker ${speakerSeconds}s`;
+          timing += tSessionControl("guidedTimingSpeakerSecondsLine", { seconds: speakerSeconds });
         }
         description = description.trim() ? `${description.trim()}\n${timing}` : timing;
       }
@@ -2388,18 +2393,18 @@ export function SessionControlClient({
     let clauseIds: string[] = [];
     if (motionRequiresResolutionOnly(procedureCode) || motionRequiresClauseTargets(procedureCode)) {
       if (resolutions.length === 0) {
-        setMsg("No resolutions available for this motion.");
+        setMsg(tSessionControl("guidedNoResolutionsForMotion"));
         return;
       }
       const resPick = window.prompt(
         [
-          "Step 5/5: Select target resolution (number).",
+          tSessionControl("guidedStepSelectTargetResolution"),
           ...resolutions.map((r, i) => `${i + 1}. ${r.id.slice(0, 8)} ${r.google_docs_url ? `(${r.google_docs_url})` : ""}`),
         ].join("\n")
       );
       const rIdx = Number(resPick);
       if (!Number.isFinite(rIdx) || rIdx < 1 || rIdx > resolutions.length) {
-        setMsg("Resolution selection is required.");
+        setMsg(tSessionControl("guidedResolutionSelectionRequired"));
         return;
       }
       resolutionId = resolutions[rIdx - 1]!.id;
@@ -2407,17 +2412,23 @@ export function SessionControlClient({
       if (motionRequiresClauseTargets(procedureCode)) {
         const clauses = resolutionClauses.filter((c) => c.resolution_id === resolutionId);
         if (clauses.length === 0) {
-          setMsg("No clauses available for selected resolution.");
+          setMsg(tSessionControl("guidedNoClausesForResolution"));
           return;
         }
         const clausePick = window.prompt(
           [
-            "Choose clause numbers (comma-separated indexes).",
-            ...clauses.map((c, i) => `${i + 1}. Clause ${c.clause_number}: ${c.clause_text.slice(0, 60)}...`),
+            tSessionControl("guidedStepChooseClauseNumbers"),
+            ...clauses.map(
+              (c, i) =>
+                `${i + 1}. ${tSessionControl("guidedClausePreview", {
+                  number: c.clause_number,
+                  preview: `${c.clause_text.slice(0, 60)}...`,
+                })}`
+            ),
           ].join("\n")
         );
         if (!clausePick) {
-          setMsg("At least one clause is required.");
+          setMsg(tSessionControl("guidedAtLeastOneClauseRequired"));
           return;
         }
         const picked = clausePick
@@ -2427,7 +2438,7 @@ export function SessionControlClient({
           .map((n) => clauses[n - 1]!.id);
         clauseIds = Array.from(new Set(picked));
         if (clauseIds.length === 0) {
-          setMsg("At least one clause is required.");
+          setMsg(tSessionControl("guidedAtLeastOneClauseRequired"));
           return;
         }
       }
@@ -2465,19 +2476,19 @@ export function SessionControlClient({
     setMotionDraft(nextDraft);
 
     if (motionFloorOpen) {
-      if (window.confirm("Record this as a stated motion now?")) {
+      if (window.confirm(tSessionControl("guidedConfirmRecordStatedMotionNow"))) {
         recordStatedMotion(nextDraft);
         return;
       }
-      setMsg("Guided draft loaded. Motion floor is open — click Record stated motion when ready.");
+      setMsg(tSessionControl("guidedDraftLoadedFloorOpen"));
       return;
     }
 
-    if (window.confirm("Create and open this motion for voting now?")) {
+    if (window.confirm(tSessionControl("guidedConfirmCreateOpenMotionNow"))) {
       createMotion(nextDraft);
       return;
     }
-    setMsg("Guided draft loaded. Review and click Create and open motion when ready.");
+    setMsg(tSessionControl("guidedDraftLoadedReviewCreate"));
   }
 
   function beginVotingInDisruptivenessOrder() {

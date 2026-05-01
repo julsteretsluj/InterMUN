@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Merriweather } from "next/font/google";
 import Script from "next/script";
-import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
 import {
@@ -14,6 +13,7 @@ import {
   THEME_STORAGE_KEY,
 } from "@/lib/theme-storage";
 import { localeDirection } from "@/lib/i18n/locales";
+import { IntlProvider } from "@/components/i18n/IntlProvider";
 import "@fontsource/atkinson-hyperlegible/latin-400.css";
 import "@fontsource/atkinson-hyperlegible/latin-700.css";
 import "./globals.css";
@@ -83,7 +83,7 @@ export default async function RootLayout({
       className={`${sans.variable} ${documentSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans text-brand-navy">
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <IntlProvider locale={locale} messages={messages}>
           <Script id="intermun-theme-init" strategy="beforeInteractive">
             {themeInit}
           </Script>
@@ -91,7 +91,7 @@ export default async function RootLayout({
             {mazeInit}
           </Script>
           {children}
-        </NextIntlClientProvider>
+        </IntlProvider>
       </body>
     </html>
   );
