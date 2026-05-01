@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
@@ -130,11 +130,19 @@ function ChairNavRow({
         "discord-interactive-hover flex w-full min-w-0 items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
-          ? "bg-[var(--accent)] font-semibold text-white"
+          ? "font-semibold text-brand-navy"
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
-      <span className="flex shrink-0 items-center" aria-hidden>
+      <span
+        className={cn(
+          "flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent",
+          isActive
+            ? "border-[color:color-mix(in_srgb,var(--accent)_55%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_18%,transparent)_inset]"
+            : "bg-transparent"
+        )}
+        aria-hidden
+      >
         <span className="text-base leading-none">{item.emoji}</span>
       </span>
       {!labelsHidden ? <span className="min-w-0 truncate">{label}</span> : null}
@@ -156,14 +164,15 @@ export function ChairDashboardSidebar({
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
-  const [labelsHidden, setLabelsHidden] = useState(() => {
-    if (typeof window === "undefined") return false;
+  const [labelsHidden, setLabelsHidden] = useState(false);
+
+  useEffect(() => {
     try {
-      return localStorage.getItem(LABELS_STORAGE_KEY) === "1";
+      setLabelsHidden(localStorage.getItem(LABELS_STORAGE_KEY) === "1");
     } catch {
-      return false;
+      setLabelsHidden(false);
     }
-  });
+  }, []);
 
   const toggleLabels = useCallback(() => {
     setLabelsHidden((prev) => {
@@ -277,8 +286,9 @@ function DockItem({
     >
       <span
         className={cn(
-          "flex h-8 min-w-8 items-center justify-center text-brand-muted",
-          isActive && "text-[var(--accent)]"
+          "flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted",
+          isActive &&
+            "border-[color:color-mix(in_srgb,var(--accent)_55%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)] text-[var(--accent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_18%,transparent)_inset]"
         )}
       >
         <span className="text-sm leading-none" aria-hidden>
@@ -309,14 +319,15 @@ export function ChairMobileDock({
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
   const pathname = usePathname();
-  const [labelsHidden, setLabelsHidden] = useState(() => {
-    if (typeof window === "undefined") return false;
+  const [labelsHidden, setLabelsHidden] = useState(false);
+
+  useEffect(() => {
     try {
-      return localStorage.getItem(LABELS_STORAGE_KEY) === "1";
+      setLabelsHidden(localStorage.getItem(LABELS_STORAGE_KEY) === "1");
     } catch {
-      return false;
+      setLabelsHidden(false);
     }
-  });
+  }, []);
 
   const toggleLabels = useCallback(() => {
     setLabelsHidden((prev) => {

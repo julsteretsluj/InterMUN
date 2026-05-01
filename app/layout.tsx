@@ -83,13 +83,13 @@ export default async function RootLayout({
       className={`${sans.variable} ${documentSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans text-brand-navy">
+        <Script id="intermun-theme-init" strategy="beforeInteractive">
+          {themeInit}
+        </Script>
+        <Script id="maze-universal-loader" strategy="afterInteractive">
+          {mazeInit}
+        </Script>
         <IntlProvider locale={locale} messages={messages}>
-          <Script id="intermun-theme-init" strategy="beforeInteractive">
-            {themeInit}
-          </Script>
-          <Script id="maze-universal-loader" strategy="afterInteractive">
-            {mazeInit}
-          </Script>
           {children}
         </IntlProvider>
       </body>

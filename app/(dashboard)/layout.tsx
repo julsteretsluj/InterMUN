@@ -114,16 +114,6 @@ export default async function DashboardLayout({
   const translatedTopic = activeConf.name
     ? translateAgendaTopicLabel(tTopics, activeConf.name, locale)
     : "";
-  /** Elsewhere: committee · tagline, else agenda title. On Profile: committee only (topic lives in agenda). */
-  const defaultConferenceLine =
-    [translatedCommittee, activeConf.tagline].filter(Boolean).join(" · ") || translatedTopic;
-  const profileConferenceLine =
-    translatedCommittee.trim() || (activeConf.committee_code?.trim() ?? "");
-  const conferenceLine = pathname.startsWith("/profile")
-    ? profileConferenceLine
-    : defaultConferenceLine;
-  const crisisReportingEnabled = isCrisisCommittee(activeConf.committee);
-
   const { count: notificationUnreadCount } = await supabase
     .from("user_notifications")
     .select("*", { count: "exact", head: true })
@@ -133,6 +123,22 @@ export default async function DashboardLayout({
   const debateBundle = activeConf?.id
     ? await getResolvedDebateConferenceBundle(supabase, activeConf.id)
     : null;
+  const selectedDebateTopic = debateBundle?.debateTopicOptions.find(
+    (topic) => topic.id === debateBundle.debateConferenceId
+  );
+  const selectedDebateTopicLabel = selectedDebateTopic?.label
+    ? translateAgendaTopicLabel(tTopics, selectedDebateTopic.label, locale)
+    : "";
+  /** Elsewhere: committee + active topic when available, else committee + tagline; fallback to agenda title. */
+  const defaultConferenceLine =
+    [translatedCommittee, selectedDebateTopicLabel || activeConf.tagline].filter(Boolean).join(" · ") ||
+    translatedTopic;
+  const profileConferenceLine =
+    translatedCommittee.trim() || (activeConf.committee_code?.trim() ?? "");
+  const conferenceLine = pathname.startsWith("/profile")
+    ? profileConferenceLine
+    : defaultConferenceLine;
+  const crisisReportingEnabled = isCrisisCommittee(activeConf.committee);
   const liveFloorConferenceId = debateBundle?.debateConferenceId ?? activeConf?.id ?? null;
   const liveFloorCanonicalId = debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
   const liveFloorSiblings = debateBundle?.siblingConferenceIds ?? (activeConf?.id ? [activeConf.id] : []);

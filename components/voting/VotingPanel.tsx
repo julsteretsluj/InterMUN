@@ -50,6 +50,7 @@ export function VotingPanel({
   const [votes, setVotes] = useState<Record<string, Vote[]>>({});
   const [drafts, setDrafts] = useState<Record<string, { must_vote: boolean; required_majority: string }>>({});
   const [rosterByConferenceId, setRosterByConferenceId] = useState<Record<string, VotingRosterEntry[]>>({});
+  const [voteError, setVoteError] = useState<string | null>(null);
   const supabase = createClient();
 
   const canManageVotes = forceManageVotes || isStaffRole(myRole);
@@ -221,7 +222,11 @@ export function VotingPanel({
         },
         { onConflict: "vote_item_id,allocation_id" }
       );
-    if (error) return;
+    if (error) {
+      setVoteError(error.message);
+      return;
+    }
+    setVoteError(null);
     const { data } = await supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", itemId);
     if (data) setVotes((v) => ({ ...v, [itemId]: data }));
   }
@@ -232,7 +237,11 @@ export function VotingPanel({
       .delete()
       .eq("vote_item_id", itemId)
       .eq("allocation_id", row.allocationId);
-    if (error) return;
+    if (error) {
+      setVoteError(error.message);
+      return;
+    }
+    setVoteError(null);
     const { data } = await supabase.from("votes").select("value, user_id, allocation_id").eq("vote_item_id", itemId);
     if (data) setVotes((v) => ({ ...v, [itemId]: data }));
   }
@@ -257,6 +266,7 @@ export function VotingPanel({
     const d = drafts[item.id] || { must_vote: item.must_vote, required_majority: item.required_majority };
     const isClosed = !!item.closed_at;
     const isAgendaFloor = isAgendaFloorVoteItem(item);
+    const isMustVote = isAgendaFloor || item.must_vote;
     const abstainAllowedForItem =
       item.vote_type === "resolution" || item.vote_type === "amendment" || isAgendaFloor;
     const abstainCount = (votes[item.id] ?? []).filter((x) => x.value === "abstain").length;
@@ -353,12 +363,12 @@ export function VotingPanel({
           <div className="flex shrink-0 flex-wrap justify-end gap-2">
             <span
               className={`rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide ${
-                item.must_vote
+                isMustVote
                   ? "bg-amber-100 text-amber-950 dark:bg-amber-500/20 dark:text-amber-100"
                   : "bg-[color:color-mix(in_srgb,var(--color-text)_7%,var(--color-bg-page))] text-brand-navy"
               }`}
             >
-              {item.must_vote ? t("mustVoteBadge") : t("canVoteBadge")}
+              {isMustVote ? t("mustVoteBadge") : t("canVoteBadge")}
             </span>
             <span className="rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_7%,var(--color-bg-page))] px-2.5 py-1 text-xs font-medium text-brand-navy">
               {t("majorityLine", { label: majorityLabel(item.required_majority) })}
@@ -579,6 +589,7 @@ export function VotingPanel({
 
   return (
     <div className="space-y-8">
+      {voteError ? <p className="text-sm text-rose-700 dark:text-rose-300">{voteError}</p> : null}
       {agendaVoteItems.length > 0 ? (
         <section className="space-y-3">
           <h3 className="mun-label">{t("agendaVoteSection")}</h3>

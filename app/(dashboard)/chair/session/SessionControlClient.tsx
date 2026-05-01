@@ -323,10 +323,6 @@ export function SessionControlClient({
     (country: string | null | undefined) => localizeCountryName(country, locale) || country || "—",
     [locale]
   );
-  const displayConferenceTitle = useMemo(
-    () => translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle, locale),
-    [conferenceTitle, locale, tTopics, tCommitteeLabels]
-  );
   const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
   const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
   const floorConferenceId = useLiveDebateConferenceId(
@@ -335,6 +331,14 @@ export function SessionControlClient({
     canonicalConferenceId,
     rosterConferenceIdList
   );
+  const displayConferenceTitle = useMemo(() => {
+    const liveTopicRaw =
+      debateTopicOptions?.find((topic) => topic.id === floorConferenceId)?.label?.trim() ?? "";
+    if (liveTopicRaw) {
+      return translateAgendaTopicLabel(tTopics, liveTopicRaw, locale);
+    }
+    return translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle, locale);
+  }, [conferenceTitle, debateTopicOptions, floorConferenceId, locale, tTopics, tCommitteeLabels]);
   const [allocations, setAllocations] = useState<Alloc[]>([]);
   const [isCrisisCommitteeSession, setIsCrisisCommitteeSession] = useState(false);
   const [roll, setRoll] = useState<RollRow[]>([]);
@@ -352,6 +356,7 @@ export function SessionControlClient({
   const [currentSpeakerQueueRow, setCurrentSpeakerQueueRow] = useState<CurrentSpeakerQueueRow | null>(null);
   const [speechNoteDraft, setSpeechNoteDraft] = useState("");
   const [speechNotesRecent, setSpeechNotesRecent] = useState<ChairSpeechNoteRow[]>([]);
+  const [authUserId, setAuthUserId] = useState<string | null>(null);
   const [timer, setTimer] = useState({
     current: "",
     next: "",
@@ -425,6 +430,20 @@ export function SessionControlClient({
     openMotion?.id ?? null,
     true
   );
+
+  useEffect(() => {
+    let mounted = true;
+    void supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setAuthUserId(data.session?.user?.id ?? null);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setAuthUserId(session?.user?.id ?? null);
+    });
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   useEffect(() => {
     if (timer.purpose !== "motion_vote") return;
@@ -1261,19 +1280,19 @@ export function SessionControlClient({
   }, [supabase, floorConferenceId, rosterKey, refresh]);
 
   const loadChairSpeechNotes = useCallback(async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
+    if (!authUserId) {
+      setSpeechNotesRecent([]);
+      return;
+    }
     const { data, error } = await supabase
       .from("chair_speech_notes")
       .select("id, speaker_label, content, allocation_id, created_at, updated_at")
       .eq("conference_id", floorConferenceId)
-      .eq("chair_user_id", user.id)
+      .eq("chair_user_id", authUserId)
       .order("created_at", { ascending: false })
       .limit(25);
     if (!error && data) setSpeechNotesRecent(data as ChairSpeechNoteRow[]);
-  }, [supabase, floorConferenceId]);
+  }, [supabase, floorConferenceId, authUserId]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -1397,13 +1416,10 @@ export function SessionControlClient({
     const frozenLeft = Math.max(0, Math.round(liveRemaining));
     const reason = pauseReasonDraft.trim() || "Paused by chair";
     startTransition(async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
       const { error: logErr } = await supabase.from("timer_pause_events").insert({
         conference_id: floorConferenceId,
         reason,
-        created_by: user?.id ?? null,
+        created_by: authUserId,
       });
       if (logErr) {
         setMsg(logErr.message);
@@ -1687,10 +1703,10 @@ export function SessionControlClient({
       return;
     }
     startTransition(async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!authUserId) {
+        setMsg("You must be signed in.");
+        return;
+      }
       const queueAlloc = currentSpeakerQueueRow?.allocation_id ?? null;
       const queueCountry = queueAlloc
         ? displayCountry(allocations.find((a) => a.id === queueAlloc)?.country ?? null)
@@ -1703,7 +1719,7 @@ export function SessionControlClient({
         "—";
       const { error } = await supabase.from("chair_speech_notes").insert({
         conference_id: floorConferenceId,
-        chair_user_id: user.id,
+        chair_user_id: authUserId,
         allocation_id: queueAlloc,
         speaker_label: speakerLabel,
         content: text,
@@ -1728,15 +1744,15 @@ export function SessionControlClient({
     const body = daisBody.trim();
     if (!body) return;
     startTransition(async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!authUserId) {
+        setMsg("You must be signed in.");
+        return;
+      }
       const publishAtIso = daisPublishAt.trim() ? new Date(daisPublishAt).toISOString() : null;
       const { error } = await supabase.from("dais_announcements").insert({
         conference_id: floorConferenceId,
         body,
-        created_by: user.id,
+        created_by: authUserId,
         body_format: daisFormat,
         publish_at: publishAtIso,
         is_pinned: false,

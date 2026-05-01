@@ -2210,7 +2210,7 @@
     "noClosedMotions": "No closed motions yet.",
     "untitled": "Untitled",
     "agendaVoteSection": "Agenda vote",
-    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "agendaVoteSectionHelp": "Agenda-setting ballots are MUST-vote and use a fixed two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
     "recordVoteChoice": "Record vote",
     "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
     "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",

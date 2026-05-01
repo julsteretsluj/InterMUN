@@ -83,6 +83,7 @@ export function FloorStatusBar({
   const [sessionStartedAt, setSessionStartedAt] = useState<string | null>(null);
   const [sessionDurationSeconds, setSessionDurationSeconds] = useState<number | null>(null);
   const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
+  const [activeTopicLabel, setActiveTopicLabel] = useState<string | null>(null);
   /** Bumps once per second while a session is running (or a limit is set) so timers update. */
   const [, setSessionTick] = useState(0);
 
@@ -155,6 +156,18 @@ export function FloorStatusBar({
       );
   }, [supabase, conferenceId]);
 
+  const loadActiveTopic = useCallback(() => {
+    return supabase
+      .from("conferences")
+      .select("name")
+      .eq("id", conferenceId)
+      .maybeSingle()
+      .then(({ data }) => {
+        const raw = (data as { name?: string | null } | null)?.name?.trim() ?? "";
+        setActiveTopicLabel(raw ? translateAgendaTopicLabel(tTopics, raw, locale) : null);
+      });
+  }, [supabase, conferenceId, tTopics, locale]);
+
   const loadSelfRollCall = useCallback(
     async (allocationId: string) => {
       const { data: rc } = await supabase
@@ -178,6 +191,7 @@ export function FloorStatusBar({
     void loadDais();
     void loadPauseEvents();
     void loadActiveMotions();
+    void loadActiveTopic();
 
     if (!observeOnly) {
       void (async () => {
@@ -196,7 +210,7 @@ export function FloorStatusBar({
         await loadSelfRollCall(alloc.id);
       })();
     }
-  }, [supabase, conferenceId, loadDais, loadPauseEvents, loadActiveMotions, loadSelfRollCall, observeOnly]);
+  }, [supabase, conferenceId, loadDais, loadPauseEvents, loadActiveMotions, loadActiveTopic, loadSelfRollCall, observeOnly]);
 
   useEffect(() => {
     void loadProcedureSession();
@@ -466,8 +480,14 @@ export function FloorStatusBar({
         </div>
       ) : null}
       <div className={box}>
+      {activeTopicLabel ? (
+        <p className={`text-xs ${qText}`}>
+          <span className={muted}>{t("quickLinkAgenda")}:</span>{" "}
+          <span className="font-medium text-brand-navy">{activeTopicLabel}</span>
+        </p>
+      ) : null}
       {latestDais && (
-        <div className="flex gap-2 items-start">
+        <div className={`flex gap-2 items-start ${activeTopicLabel ? `pt-0.5 border-t ${border}` : ""}`}>
           <Megaphone className={`w-4 h-4 ${icon} shrink-0 mt-0.5`} />
           <div>
             <span className={`${muted} block`}>
