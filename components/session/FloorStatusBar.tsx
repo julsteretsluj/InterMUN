@@ -8,7 +8,7 @@ import { DaisAnnouncementBody } from "@/components/dais/DaisAnnouncementBody";
 import { firstVisibleDaisRow } from "@/lib/dais-visible";
 import { parseRollAttendance, rollAttendanceShortLabel } from "@/lib/roll-attendance";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import {
@@ -31,6 +31,7 @@ type ActiveMotionRow = {
   vote_type: string | null;
   required_majority: string | null;
   closed_at: string | null;
+  procedure_code?: string | null;
 };
 
 type FloorTheme = "dark" | "light";
@@ -63,13 +64,14 @@ export function FloorStatusBar({
   theme?: FloorTheme;
   /** When set, show current motion + floor timer above dais / speakers (e.g. delegate committee room). */
   activeMotionVoteItemId?: string | null;
-  /** Session quick links: full for chairs/staff, minimal for compact chair panels, none for read-only/delegate views. */
+  /** Session quick links: full for chairs/staff, minimal for compact chair panels, none for read-only delegate UI. */
   sessionMiniControls?: "full" | "minimal" | "none";
 }) {
-  const t = useTranslations("views.session.floorStatus");
-  const tActiveMotion = useTranslations("views.session.activeMotion");
+  const locale = useLocale();
+  const t = useTranslations("session.floorStatus");
+  const tActiveMotion = useTranslations("session.activeMotion");
   const tTopics = useTranslations("agendaTopics");
-  const tVoting = useTranslations("views.voting");
+  const tVoting = useTranslations("voting");
   const supabase = createClient();
   const { timer } = useConferenceTimer(conferenceId, activeMotionVoteItemId);
   const [latestDais, setLatestDais] = useState<Announcement | null>(null);
@@ -141,12 +143,16 @@ export function FloorStatusBar({
   const loadActiveMotions = useCallback(() => {
     return supabase
       .from("vote_items")
-      .select("id, title, vote_type, required_majority, closed_at")
+      .select("id, title, vote_type, required_majority, closed_at, procedure_code")
       .eq("conference_id", conferenceId)
       .is("closed_at", null)
       .order("created_at", { ascending: false })
       .limit(6)
-      .then(({ data }) => setActiveMotions((data as ActiveMotionRow[]) ?? []));
+      .then(({ data }) =>
+        setActiveMotions(
+          ((data as ActiveMotionRow[]) ?? []).filter((m) => m.procedure_code !== "agenda_floor")
+        )
+      );
   }, [supabase, conferenceId]);
 
   const loadSelfRollCall = useCallback(
@@ -332,11 +338,20 @@ export function FloorStatusBar({
       ? formatCountdownOrElapsed(sessionEndMs, limitNow)
       : null;
   const quickLinkLabel = useCallback(
-    (key: "quickLinkSession" | "quickLinkRoll" | "quickLinkSpeakers" | "quickLinkMotions" | "quickLinkTimer") => {
+    (
+      key:
+        | "quickLinkSession"
+        | "quickLinkRoll"
+        | "quickLinkAgenda"
+        | "quickLinkSpeakers"
+        | "quickLinkMotions"
+        | "quickLinkTimer"
+    ) => {
       const value = t(key);
-      if (value === `views.session.floorStatus.${key}`) {
+      if (value === `session.floorStatus.${key}`) {
         if (key === "quickLinkSession") return "Session";
         if (key === "quickLinkRoll") return "Roll";
+        if (key === "quickLinkAgenda") return "Agenda";
         if (key === "quickLinkSpeakers") return "Speakers";
         if (key === "quickLinkMotions") return "Motions";
         return "Timer";
@@ -354,6 +369,7 @@ export function FloorStatusBar({
       : [
           { href: "/chair/session", label: quickLinkLabel("quickLinkSession") },
           { href: "/chair/session/roll-call", label: quickLinkLabel("quickLinkRoll") },
+          { href: "/chair/session/agenda", label: quickLinkLabel("quickLinkAgenda") },
           { href: "/chair/session/speakers", label: quickLinkLabel("quickLinkSpeakers") },
           { href: "/chair/session/motions", label: quickLinkLabel("quickLinkMotions") },
           { href: "/chair/session/timer", label: quickLinkLabel("quickLinkTimer") },
@@ -432,7 +448,7 @@ export function FloorStatusBar({
             const isCurrent = activeMotionVoteItemId != null && motion.id === activeMotionVoteItemId;
             const rawTitle = motion.title?.trim() ?? "";
             const title = rawTitle
-              ? translateAgendaTopicLabel(tTopics, rawTitle)
+              ? translateAgendaTopicLabel(tTopics, rawTitle, locale)
               : tActiveMotion("motionFallback");
             return (
               <div key={motion.id} className={isCurrent ? cardActive : card}>

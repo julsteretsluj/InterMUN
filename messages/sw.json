@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Fungua sakafu ya mwendo kwa taarifa kwanza.",
     "openMotionBlocksRecording": "Hoja tayari imefunguliwa kwa ajili ya kupiga kura. Ifunge kabla ya kurekodi taarifa zaidi.",
     "statedMotionRecorded": "Hoja iliyotangazwa imerekodiwa (bado haijafunguliwa kwa ajili ya kupiga kura).",
-    "statedMotionRemoved": "Hoja iliyotamkwa imeondolewa."
+    "statedMotionRemoved": "Hoja iliyotamkwa imeondolewa.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "Lugha",
@@ -595,7 +611,8 @@
     "pointsLog": "• Kumbukumbu ya pointi",
     "formalMotions": "Mwendo rasmi",
     "timer": "Kipima muda",
-    "smtProfile": "Wasifu"
+    "smtProfile": "Wasifu",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase haijasanidiwa",
@@ -763,7 +780,8 @@
       "officialLinks": "Viungo rasmi",
       "roomCode": "Msimbo wa chumba",
       "settings": "Mipangilio",
-      "discipline": "Nidhamu"
+      "discipline": "Nidhamu",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "Nchi Wanachama wa Umoja wa Mataifa",
       "unSystem": "Mfumo wa UN (waanzilishi na wanachama)",
       "history": "Historia ya Umoja wa Mataifa"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Ongeza chanzo",
-      "sourceUrl": "URL Chanzo",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (inapendekezwa)",
-      "urlHelp": "Kwa Hati mpya ya Google, tumia kitufe na ubandike kiungo cha hati hapa.",
-      "titleOptional": "Kichwa (si lazima)",
-      "saveChanges": "Hifadhi mabadiliko",
-      "editSource": "Badilisha chanzo",
-      "urlPlaceholderShort": "Hati ya Google au URL nyingine",
-      "empty": "Bado hakuna vyanzo. Ongeza kiungo cha Hati ya Google ili kuifungua hapa.",
-      "sourceLabel": "Chanzo",
-      "openLink": "Fungua kiungo",
-      "embedHeading": "Hati ya chanzo",
-      "notGoogleDoc": "URL hii si Hati ya Google. Tumia kiungo cha docs.google.com/document/d/… kupachika na kuhariri hapa; vinginevyo fungua link hapo juu."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Wajumbe hawawezi kupakia Hati za Nafasi moja kwa moja. Tumia aina nyingine ya hati.",
-      "alertOnlyChairsPositionPaper": "Viti/SMT/msimamizi pekee ndiye anayeweza kupakia Hati za Nafasi.",
-      "alertOnlySmtChairReport": "SMT/msimamizi pekee ndiye anayeweza kupakia Ripoti za Mwenyekiti.",
-      "alertOnlySmtRop": "SMT/msimamizi pekee ndiye anayeweza kupakia hati za RoP.",
-      "alertOnlySmtAwardCriteria": "SMT/msimamizi pekee ndiye anayeweza kupakia hati za Vigezo vya Tuzo.",
-      "alertNeedContentOrUrl": "Ongeza maudhui ya maandishi ya ndani au URL ya Hati za Google.",
-      "confirmDelete": "Ungependa kufuta hati hii?",
-      "delegatePrepTitle": "Sehemu ya hati ya maandalizi",
-      "delegatePrepBody": "Unaweza kupakia, kutazama, na kuhariri <prep>hati zako za Kutayarisha</prep> moja kwa moja kutoka kwa ukurasa huu.",
-      "positionPaperGuideTitle": "Mwongozo wa karatasi",
-      "positionPaperGuideBlurb": "Pakua mwongozo wa kishika nafasi wakati PDF ya mwisho inatayarishwa.",
-      "downloadPlaceholderGuide": "Pakua mwongozo wa kishika nafasi",
-      "addDocument": "Ongeza hati",
-      "tabs": {
-        "ariaLabel": "Sehemu za hati",
-        "library": "Maktaba",
-        "compose": "Tunga",
-        "composeHint": "Anzisha hati mpya au uhariri rasimu iliyopo kutoka kwa kichupo hiki."
-      },
-      "newDocumentTitle": "Hati mpya",
-      "editDocumentTitle": "Hariri hati",
-      "typeLabel": "Aina",
-      "types": {
-        "position_paper": "Karatasi ya msimamo",
-        "chair_report": "Ripoti ya mwenyekiti",
-        "rop": "RoP",
-        "award_criteria": "Vigezo vya tuzo",
-        "chair_notes": "Vidokezo vya mwenyekiti",
-        "prep_doc": "Hati ya kuandaa"
-      },
-      "delegatePositionPaperNote": "Karatasi za nafasi hupakiwa na viti na maoni.",
-      "delegateOwner": "Mjumbe mmiliki",
-      "chairRecipient": "Mpokeaji mwenyekiti",
-      "titleLabel": "Kichwa",
-      "titlePlaceholder": "Kichwa cha hati",
-      "googleDocsUrl": "URL ya Hati za Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (pachika mwonekano/hariri katika programu)",
-      "googleDocsHelp": "Tumia Hati Mpya ya Google kufungua Google katika kichupo kipya, kisha ubandike kiungo cha hati hapa. Maandishi matupu hapa chini ni ya hiari. Kila hati inahitaji maandishi ya ndani, kiungo cha Hati ya Google, au zote mbili.",
-      "plainTextOptional": "Maandishi matupu (si lazima)",
-      "plainTextPlaceholder": "Vidokezo au rasimu ya maandishi...",
-      "chairFeedbackLabel": "Maoni ya mwenyekiti",
-      "chairFeedbackPlaceholder": "Maoni kwa karatasi ya nafasi ya mjumbe...",
-      "empty": "Bado hakuna hati. Ongeza moja au unganisha Hati ya Google.",
-      "sidebarDocumentLabel": "Hati",
-      "sections": {
-        "chairReports": "Ripoti za mwenyekiti",
-        "rop": "RoP",
-        "awardCriteria": "Vigezo vya tuzo",
-        "prepDocuments": "Nyaraka za kuandaa",
-        "chairNotes": "Vidokezo vya mwenyekiti",
-        "otherDocuments": "Nyaraka zingine"
-      },
-      "untitled": "Haina jina",
-      "linkedDocumentHeading": "Hati iliyounganishwa",
-      "notesHeading": "Vidokezo",
-      "noGoogleDocYet": "Bado hakuna Hati ya Google iliyounganishwa. Tumia Hariri kuongeza docs.google.com/document/d/… URL.",
-      "chairFeedbackHeading": "Maoni ya mwenyekiti",
-      "noFeedbackYet": "Bado hakuna maoni yaliyoongezwa."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Weka barua pepe ya mjumbe kwanza.",
-      "sentToDelegate": "Imetumwa kwa {email}.",
-      "newResolution": "Azimio Jipya",
-      "maxDraftResolutions": "Kamati hii tayari ina rasimu ya maazimio {count}.",
-      "googleDocLink": "Kiungo cha Hati ya Google",
-      "googleDocUrlPlaceholder": "URL ya Hati za Google (docs.google.com/document/d/… — inatumika kupachika + kuhariri)",
-      "googleDocUrlHelp": "Hati mpya ya Google inafungua kwenye kichupo kingine; nakili URL kutoka kwa upau wa anwani na uibandike hapa.",
-      "mainSubmittersPlaceholder": "Wawasilishaji wakuu (Vitambulisho vya mtumiaji, vimetenganishwa kwa koma)",
-      "coSubmittersPlaceholder": "Wawasilishaji wenza (Vitambulisho vya watumiaji, vilivyotenganishwa kwa koma)",
-      "create": "Unda",
-      "cancel": "Ghairi",
-      "openInNewTab": "Fungua kwenye kichupo kipya",
-      "noGoogleDocLink": "Hakuna kiungo cha Hati ya Google",
-      "visibleToOtherBloc": "Inaonekana kwa kambi nyingine",
-      "resolutionCounts": "Wanaofuatilia wakuu: {main} | Wanaofuatilia pamoja: {co} | Waliotia saini: {signatories}",
-      "blocButton": "Kambi {name} ({stance})",
-      "signVirtually": "Saini kwa karibu (watumishi wakuu wamearifiwa)",
-      "shareByEmail": "Shiriki azimio kwa barua pepe",
-      "delegateEmailPlaceholder": "mjumbe@email.com",
-      "sendToDelegate": "Tuma kwa mjumbe",
-      "clauseEditor": "Mhariri wa kifungu",
-      "noClausesYet": "Hakuna vifungu bado.",
-      "clauseNumber": "Kifungu {number}",
-      "saveClause": "Hifadhi kifungu",
-      "delete": "Futa",
-      "addClausePlaceholder": "Ongeza kifungu kipya...",
-      "addClause": "Ongeza kifungu",
-      "clauseVoteHistory": "Kifungu cha historia ya kura",
-      "noClauseOutcomesYet": "Bado hakuna matokeo ya kura yaliyorekodiwa.",
-      "clauseFallback": "Kifungu",
-      "passed": "IMEPITISHWA",
-      "failed": "IMESHINDWA",
-      "motionId": "Mwendo {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Sehemu za kupiga kura",
-        "open": "Fungua",
-        "closed": "Imefungwa"
-      },
-      "requiredMajority": "Wengi wanaohitajika",
-      "helpRequiredMajorityTitle": "Wengi wanaohitajika",
-      "helpRequiredMajorityBody": "Chagua kiwango cha juu cha kura kinachotumika kuamua kupita/kushindwa. `Rahisi` ni zaidi ya nusu. `2/3` inahitaji walio wengi zaidi.",
-      "majoritySimple": "Rahisi",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} wengi",
-      "mustVote": "LAZIMA upige kura",
-      "helpMustVoteTitle": "LAZIMA upige kura",
-      "helpMustVoteBody": "Huweka alama kwenye hoja hii kama kipengee cha \"lazima ipige kura\". Hii inatumika kuwasilisha mahitaji kwa washiriki (kulingana na usanidi wa kamati yako).",
-      "saveSettings": "Hifadhi mipangilio",
-      "delegateBlurb": "Dais hurekodi kura katika kipindi (k.m. wito wa kuorodheshwa). Kura za hoja hapa zinafuata Ndiyo/Hapana pekee (kupiga kura haitumiki). Unaweza kufuata hesabu; wajumbe hawapigi kura katika programu.",
-      "yes": "Ndiyo",
-      "no": "Hapana",
-      "ballots": "Kura",
-      "total": "Jumla",
-      "outcome": "Matokeo",
-      "passed": "Imepitishwa",
-      "failed": "Imeshindwa",
-      "noRecordedVotes": "Hakuna kura zilizorekodiwa",
-      "reopenMotion": "Fungua tena mwendo",
-      "editRecordOpen": "Hariri rekodi...",
-      "hideSettings": "Ficha mipangilio",
-      "preliminaryPassing": "Kupita (ya awali)",
-      "preliminaryFailing": "Kushindwa (awali)",
-      "delegateRollCall": "Mjumbe wa kupigia kura ({count})",
-      "noSeatedDelegates": "Hakuna wajumbe walioketi wanaopatikana kwa hoja hii.",
-      "rollPrefix": "Mzunguko:",
-      "recordedPrefix": "Imerekodiwa:",
-      "recordedYes": "Ndiyo",
-      "recordedNo": "Hapana",
-      "recordedAbstain": "Jiepushe",
-      "recordedNone": "-",
-      "abstain": "Jiepushe",
-      "clear": "Wazi",
-      "closeMotion": "Funga mwendo",
-      "mustVoteBadge": "LAZIMA upige kura",
-      "canVoteBadge": "ANAWEZA kupiga kura",
-      "noMotions": "Bado hakuna miondoko.",
-      "currentOpenMotion": "Mwendo wazi wa sasa",
-      "noOpenMotion": "Hakuna mwendo wazi kwa sasa.",
-      "recentClosedMotions": "Miondoko iliyofungwa hivi majuzi",
-      "noClosedMotions": "Bado hakuna miondoko iliyofungwa.",
-      "untitled": "Haina jina",
-      "voteTypes": {
-        "motion": "Mwendo",
-        "amendment": "Marekebisho",
-        "resolution": "Azimio"
-      },
-      "roll": {
-        "absent": "Haipo (roll)",
-        "present_abstain": "Sasa - inaweza kuacha (kusonga)",
-        "present_voting": "Kuwasilisha na kupiga kura (orodha)",
-        "unknown": "- (roll)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Sehemu za wasifu",
-        "overview": "Muhtasari",
-        "awards": "Tuzo",
-        "private": "Rekodi za kibinafsi",
-        "settings": "Mipangilio ya wasifu"
-      },
-      "profilePicture": "Picha ya wasifu",
-      "uploadFile": "Pakia faili",
-      "uploading": "Inapakia...",
-      "photoSaved": "Picha imepakiwa na kuhifadhiwa.",
-      "orUrl": "Au umewekwa na URL",
-      "urlPlaceholder": "https://...",
-      "name": "Jina",
-      "username": "Jina la mtumiaji",
-      "usernamePlaceholder": "k.m. alex_1999",
-      "pronouns": "Viwakilishi",
-      "customPronounNote": "Wasifu wako ulikuwa na seti ya nomino maalum ambayo haikubaliwi tena hapa. Chagua chaguo hapo juu (au acha tupu). Kuhifadhi kunachukua nafasi ya thamani ya zamani.",
-      "school": "Shule",
-      "schoolPlaceholder": "k.m. Shule ya Upili ya Lincoln",
-      "grade": "Daraja",
-      "selectGrade": "Chagua daraja",
-      "conferencesAttended": "Mikutano iliyohudhuria",
-      "awardsComma": "Tuzo (zilizotenganishwa kwa koma)",
-      "awardsPlaceholder": "Mjumbe Bora, Mheshimiwa Taja",
-      "allocation": "Ugawaji",
-      "selectAllocation": "Chagua mgao",
-      "noAllocationsPlaceholder": "Hakuna mgao wa kamati unaopatikana",
-      "saveProfile": "Hifadhi wasifu",
-      "saved": "Wasifu umehifadhiwa.",
-      "saveFailed": "Haikuweza kuhifadhi wasifu.",
-      "errUsernamePattern": "Jina la mtumiaji lazima liwe na herufi 3-32 (herufi, nambari, _, ., -)",
-      "errPronounsPreset": "Chagua kiwakilishi kutoka kwenye orodha.",
-      "errImageType": "Tafadhali chagua faili ya picha.",
-      "errImageSize": "Picha ni kubwa mno (isizidi MB 5).",
-      "errUploadFailed": "Imeshindwa kupakia.",
-      "errStorageSetup": "Hifadhi ya picha ya wasifu haijawekwa. Katika mradi wa Supabase, endesha uhamishaji 00100_profile_pictures_storage_bucket.sql, au uunde ndoo ya hifadhi ya umma inayoitwa picha za wasifu (angalia README).",
-      "errPublicUrl": "Haikuweza kutatua URL ya umma kwa picha iliyopakiwa.",
-      "fallbacks": {
-        "yourCountry": "nchi yako",
-        "committeeSession": "Kikao cha kamati",
-        "delegate": "Mjumbe",
-        "speechNote": "Ujumbe wa hotuba",
-        "untitledMotion": "Mwendo usio na jina",
-        "dash": "-"
-      },
-      "delegateWelcome": {
-        "title": "Karibu mjumbe wa {flag} {country}",
-        "subtitle": "Je, ungependa kuanza na nini?",
-        "links": {
-          "documents": "Nyaraka",
-          "notes": "Vidokezo",
-          "committeeRoom": "Chumba cha kamati",
-          "runningNotes": "Vidokezo vya Kuendesha",
-          "ideas": "Mawazo",
-          "guides": "Waelekezi",
-          "sources": "Vyanzo",
-          "resolutions": "Maazimio",
-          "speeches": "Hotuba",
-          "stances": "Misimamo",
-          "crisisSlides": "Slaidi za migogoro",
-          "report": "Ripoti",
-          "motions": "Mwendo",
-          "points": "Pointi"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Tuzo kwenye wasifu wako",
-        "rank": "cheo {rank}",
-        "pending": {
-          "tab": "Uteuzi unaosubiri",
-          "title": "Uteuzi wa mwenyekiti unaosubiri",
-          "descriptionSingle": "Imehifadhiwa na viti na kushirikiwa na SMT kwa ukaguzi. Tuzo za mwisho zinaonekana hapa chini baada ya uthibitisho.",
-          "descriptionTabbed": "Imehifadhiwa na viti na kushirikiwa na SMT kwa ukaguzi. Tuzo za mwisho zinaonekana baada ya uthibitisho."
-        },
-        "recorded": {
-          "tab": "Tuzo zilizorekodiwa",
-          "title": "Tuzo zilizorekodiwa",
-          "description": "Imeorodheshwa wakati viti au SMT inakukabidhi katika kifuatiliaji tuzo. Utambuzi wa mwisho hufuata sheria za mkutano wako."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Inaonekana kwako tu, wenyeviti wa kamati, na SMT kwa kamati husika.",
-        "points": {
-          "title": "Pointi za mwenyekiti (binafsi)"
-        },
-        "speechNotes": {
-          "title": "Maelezo ya hotuba ya mwenyekiti (faragha)"
-        },
-        "motions": {
-          "title": "Miondoko uliyohamisha",
-          "description": "Imehifadhiwa kwenye wasifu wako kwa ukaguzi wa kamati na uangalizi wa SMT."
-        }
-      },
-      "discipline": {
-        "title": "Hali ya nidhamu (binafsi)",
-        "statusLine": "Maonyo: {maonyo} · Maonyo: {mgomo}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "upigaji kura umezimwa",
-        "speakingSuspended": "kuzungumza kusimamishwa",
-        "removedFromCommittee": "kuondolewa kwenye kamati",
-        "updated": "Imesasishwa: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Onyesho la kukagua wasifu",
-        "title": "Hakiki",
-        "yourName": "Jina lako",
-        "usernameNotSet": "Jina la mtumiaji halijawekwa",
-        "gradeValue": "Daraja {grade}",
-        "awards": "Tuzo"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Kanuni za Utaratibu (RoP)",
-          "content": "# Kanuni za Utaratibu \n\n## Pointi na Miongozo \n- **Poin of Order**: Utaratibu Sahihi \n- **Hoja ya Habari**: Swali kwa mzungumzaji \n- **Uhakika wa Haki ya Kibinafsi**: Faraja ya kibinafsi \n- **Hoja kwa Jedwali**: Ahirisha mjadala \n- **Hoja ya Kuahirisha**: Maliza kipindi \n\n#Upigaji kura \n- Wengi rahisi kwa masuala ya kiutaratibu \n- 2/3 wengi kwa mambo ya msingi \n- Kura ya kupiga kura ikiwa itaombwa"
-        },
-        "examples": {
-          "title": "Mifano",
-          "content": "#Mifano \n\n## Umbizo la Azimio \n``` \nMkutano Mkuu, \n... \n1. Anatoa wito kwa nchi wanachama... \n2. Inaitaka jumuiya ya kimataifa... \n``` \n\n## Muundo wa Karatasi \n1. Usuli \n2. Sera ya Nchi \n3. Ufumbuzi uliopendekezwa"
-        },
-        "templates": {
-          "title": "Violezo",
-          "content": "Violezo # \n\n## Kiolezo cha Ripoti ya Mwenyekiti \n- Muhtasari wa Kamati \n- Mambo muhimu ya majadiliano \n- Maazimio yamepitishwa \n- Mapendekezo"
-        },
-        "chairReport": {
-          "title": "Ripoti ya Mwenyekiti",
-          "content": "# Ripoti ya Mwenyekiti \n\nShughuli za kamati ya hati na matokeo hapa."
-        }
-      },
-      "edit": "Hariri",
-      "guideDocument": "Hati ya mwongozo",
-      "additionalNotes": "Vidokezo vya ziada",
-      "noContentYet": "Bado hakuna maudhui.",
-      "titlePlaceholder": "Kichwa",
-      "googleDocsUrl": "URL ya Hati za Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Hati mpya ya Google inafunguka katika kichupo kingine. Bandika kiungo kinachoweza kushirikiwa ili wajumbe waweze kufungua hati hapa (kuona/kuhariri kunategemea kushiriki na Google).",
-      "markdownOptional": "Vidokezo vya Markdown (si lazima utumie Hati ya Google)",
-      "save": "Hifadhi",
-      "cancel": "Ghairi",
-      "createNewGuide": "Unda mwongozo mpya",
-      "slugPlaceholder": "koa (kipekee)",
-      "titleLowerPlaceholder": "kichwa",
-      "googleDocsUrlOptional": "URL ya Hati za Google (si lazima)",
-      "markdownContentOptional": "Maudhui ya alama (hiari)",
-      "create": "Unda",
-      "glossary": {
-        "title": "Kamusi ya Agenda ya MUN",
-        "subtitle": "Istilahi za kipekee zinazolingana na msimbo wa kamati yako na mada za ajenda za sasa.",
-        "committeeCode": "Msimbo wa kamati: {code}",
-        "topicTag": "Mada: {topic}",
-        "sources": {
-          "core": "msingi",
-          "committee": "kamati",
-          "topic": "mada"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Ujumbe",
-            "definition": "Nchi au timu ya waangalizi inayowakilisha jimbo au huluki moja katika kamati."
-          },
-          "placard": {
-            "term": "Bango",
-            "definition": "Alama ya nchi inayotumika kuomba nafasi, kupiga kura na kuashiria miondoko ya kiutaratibu."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Timu mwenyekiti anayesimamia mijadala, kutumia utaratibu na kusimamia mpangilio wa kuzungumza."
-          },
-          "quorum": {
-            "term": "Akidi",
-            "definition": "Idadi ya chini zaidi ya wajumbe wanaohitajika kufanya shughuli rasmi na kura."
-          },
-          "motion": {
-            "term": "Mwendo",
-            "definition": "Pendekezo rasmi la kubadilisha mtiririko wa mjadala, kama vile aina ya kikao au wakati wa kuzungumza."
-          },
-          "point_of_order": {
-            "term": "Pointi ya Utaratibu",
-            "definition": "Kuingilia kati wakati utaratibu unatumika kimakosa chini ya kanuni za kamati."
-          },
-          "moderated_caucus": {
-            "term": "Caucus Moderated",
-            "definition": "Sehemu ya mijadala yenye muundo na hotuba fupi zilizopitwa na wakati kwenye mada ndogo iliyobainishwa."
-          },
-          "unmoderated_caucus": {
-            "term": "Caucus Isiyodhibitiwa",
-            "definition": "Kipindi cha mazungumzo yasiyo rasmi ambapo wajumbe husogea kwa uhuru kuandaa na kuunganisha mawazo."
-          },
-          "draft_resolution": {
-            "term": "Rasimu ya Azimio",
-            "definition": "Nakala ya kazi ya hatua iliyopendekezwa ya kamati kabla ya upigaji kura wa mwisho na kupitishwa."
-          },
-          "amendment": {
-            "term": "Marekebisho",
-            "definition": "Mabadiliko yanayopendekezwa kwa maandishi, yawe ya kirafiki au yaliyopigiwa kura kama yasiyofaa."
-          },
-          "operative_clause": {
-            "term": "Kifungu cha Uendeshaji",
-            "definition": "Kifungu chenye namba chenye mwelekeo wa vitendo kinachoelezea kile ambacho kamati inapendekeza kufanya."
-          },
-          "preambulatory_clause": {
-            "term": "Kifungu cha Utangulizi",
-            "definition": "Kifungu cha kuweka muktadha kikinukuu kanuni za usuli, wasiwasi, na mifumo ya awali."
-          },
-          "right_of_reply": {
-            "term": "Haki ya Jibu",
-            "definition": "Fursa ya kujibu taarifa ya moja kwa moja iliyoathiri hadhi au nafasi ya uwakilishi."
-          },
-          "veto_power": {
-            "term": "Nguvu ya Veto",
-            "definition": "Mamlaka ya mwanachama wa kudumu wa UNSC kuzuia rasimu ya maazimio muhimu."
-          },
-          "chapter_vii": {
-            "term": "Sura ya VII",
-            "definition": "Mamlaka ya Mkataba wa Umoja wa Mataifa juu ya vitisho kwa amani, vikwazo, na hatua za matumizi ya nguvu."
-          },
-          "sanctions_regime": {
-            "term": "Utawala wa Vikwazo",
-            "definition": "Vizuizi vilivyoratibiwa vinavyotumika kuathiri tabia bila hatua ya moja kwa moja ya kijeshi."
-          },
-          "arms_control": {
-            "term": "Udhibiti wa Silaha",
-            "definition": "Makubaliano na mifumo ya uthibitishaji ambayo inaweka kikomo aina, idadi, au usambazaji wa silaha."
-          },
-          "non_proliferation": {
-            "term": "Kutoeneza",
-            "definition": "Sera za kuzuia kuenea kwa uwezo wa nyuklia, kemikali, kibayolojia au wa juu wa silaha."
-          },
-          "confidence_building_measures": {
-            "term": "Hatua za Kujenga Imani",
-            "definition": "Vyombo vya uwazi na mawasiliano vinavyopunguza kutokuelewana na hatari ya migogoro."
-          },
-          "universal_periodic_review": {
-            "term": "Mapitio ya Kipindi ya Jumla",
-            "definition": "Mchakato wa mapitio ya rika ambapo kila nchi mwanachama wa Umoja wa Mataifa inaripoti na kupokea mapendekezo ya haki."
-          },
-          "special_rapporteur": {
-            "term": "Mwandishi Maalum",
-            "definition": "Mtaalamu huru aliyeteuliwa kufuatilia na kutoa ripoti kuhusu masuala ya mada au haki za nchi."
-          },
-          "treaty_body": {
-            "term": "Mwili wa Mkataba",
-            "definition": "Kamati ya wataalam inayosimamia utekelezaji wa mkataba mahususi wa haki za binadamu."
-          },
-          "public_health_emergency": {
-            "term": "Dharura ya Afya ya Umma",
-            "definition": "Tukio kubwa la mlipuko linalohitaji uratibu wa haraka wa kitaifa na kimataifa."
-          },
-          "surveillance": {
-            "term": "Ufuatiliaji wa Epidemiological",
-            "definition": "Ukusanyaji na uchanganuzi endelevu wa data ya afya ili kugundua na kufuatilia mienendo ya magonjwa."
-          },
-          "health_systems": {
-            "term": "Kuimarisha Mifumo ya Afya",
-            "definition": "Kuboresha nguvu kazi, ufadhili, vifaa, na utawala kwa utoaji wa huduma za afya unaotegemewa."
-          },
-          "transnational_crime": {
-            "term": "Uhalifu uliopangwa wa Kimataifa",
-            "definition": "Shughuli za uhalifu zinazoratibiwa katika mipaka kupitia mitandao na masoko haramu."
-          },
-          "illicit_trafficking": {
-            "term": "Usafirishaji Haramu",
-            "definition": "Usafirishaji haramu wa dawa, silaha, watu au bidhaa katika maeneo ya mamlaka."
-          },
-          "rule_of_law_capacity": {
-            "term": "Uwezo wa Utawala wa Sheria",
-            "definition": "Uwezo wa taasisi wa mifumo ya haki kuchunguza, kushtaki na kulinda haki kwa haki."
-          },
-          "sustainable_development": {
-            "term": "Maendeleo Endelevu",
-            "definition": "Kielelezo cha ukuaji kinachosawazisha maendeleo ya kijamii, fursa ya kiuchumi, na ulinzi wa mazingira."
-          },
-          "financing_for_development": {
-            "term": "Ufadhili wa Maendeleo",
-            "definition": "Mifumo ya ufadhili wa umma na ya kibinafsi ambayo inasaidia vipaumbele vya maendeleo ya muda mrefu."
-          },
-          "policy_coordination": {
-            "term": "Uratibu wa Sera",
-            "definition": "Uwiano wa hatua za serikali na wakala ili kuzuia kurudiwa na kuongeza athari ya pamoja."
-          },
-          "child_protection": {
-            "term": "Ulinzi wa Mtoto",
-            "definition": "Hatua za kuzuia unyonyaji, unyanyasaji na unyanyasaji dhidi ya watoto katika mazingira yote."
-          },
-          "education_access": {
-            "term": "Upatikanaji wa Elimu",
-            "definition": "Kuhakikisha fursa jumuishi, za usawa na zinazoendelea za kujifunza kwa watoto wote."
-          },
-          "humanitarian_response": {
-            "term": "Majibu ya kibinadamu",
-            "definition": "Hatua za usaidizi wa haraka zinazoshughulikia mahitaji ya dharura katika mizozo na mazingira ya migogoro."
-          },
-          "gender_mainstreaming": {
-            "term": "Uingizaji wa Jinsia",
-            "definition": "Kuunganisha uchambuzi wa kijinsia katika muundo wa sera, utekelezaji na tathmini."
-          },
-          "gender_based_violence": {
-            "term": "Ukatili wa Kijinsia",
-            "definition": "Madhara yanayoelekezwa kwa mtu kulingana na utambulisho wa kijinsia, majukumu, au uhusiano usio sawa wa mamlaka."
-          },
-          "economic_empowerment": {
-            "term": "Uwezeshaji Kiuchumi",
-            "definition": "Kupanua ufikiaji wa kazi nzuri, fedha, umiliki na uwezo wa kufanya maamuzi."
-          },
-          "source_attribution": {
-            "term": "Chanzo Sifa",
-            "definition": "Inataja asili ya habari kwa uwazi ili madai yaweze kuthibitishwa na kuwekewa muktadha."
-          },
-          "verified_reporting": {
-            "term": "Ripoti Iliyothibitishwa",
-            "definition": "Kiwango cha uandishi wa habari kinachohitaji uthibitisho kabla ya kuchapisha ukweli unaopingwa."
-          },
-          "editorial_independence": {
-            "term": "Uhuru wa Uhariri",
-            "definition": "Kutenganishwa kwa maamuzi ya kuripoti kutoka kwa shinikizo la kisiasa au ushawishi wa wadau."
-          },
-          "climate_mitigation": {
-            "term": "Kupunguza Hali ya Hewa",
-            "definition": "Vitendo vinavyopunguza utoaji wa gesi chafuzi au kuongeza uondoaji wa kaboni wa muda mrefu."
-          },
-          "climate_adaptation": {
-            "term": "Kukabiliana na Hali ya Hewa",
-            "definition": "Sera na uwekezaji unaopunguza uwezekano wa kuathiriwa na athari zinazohusiana na hali ya hewa."
-          },
-          "cyber_norms": {
-            "term": "Kanuni za Cyber",
-            "definition": "Matarajio ya pamoja ya tabia ya serikali inayowajibika katika vikoa vya dijitali na mtandao."
-          },
-          "critical_infrastructure": {
-            "term": "Miundombinu Muhimu",
-            "definition": "Mifumo muhimu kama vile nishati, maji, afya na mawasiliano inayohitaji uthabiti."
-          },
-          "epidemiology": {
-            "term": "Epidemiolojia",
-            "definition": "Utafiti wa mifumo ya magonjwa, sababu, na usambazaji katika idadi ya watu."
-          },
-          "preparedness_response": {
-            "term": "Maandalizi na Majibu",
-            "definition": "Kupanga, kuratibu, na kuongeza hatua za kudhibiti na kudhibiti dharura."
-          },
-          "non_refoulement": {
-            "term": "Kutorudisha",
-            "definition": "Kanuni inayokataza watu kurudi mahali ambapo wanakabiliwa na madhara makubwa."
-          },
-          "durable_solutions": {
-            "term": "Suluhisho za kudumu",
-            "definition": "Matokeo ya muda mrefu kwa watu waliohamishwa makazi yao: kurudi, ushirikiano wa ndani, au makazi mapya."
-          },
-          "nuclear_safeguards": {
-            "term": "Ulinzi wa Nyuklia",
-            "definition": "Hatua za uthibitishaji kuhakikisha nyenzo za nyuklia hazielezwi kwa matumizi ya silaha."
-          },
-          "counter_terrorism": {
-            "term": "Kupambana na Ugaidi",
-            "definition": "Hatua zilizojumuishwa za kisheria, kinga na usalama dhidi ya shughuli za kigaidi."
-          },
-          "due_process": {
-            "term": "Utaratibu Unaolipwa",
-            "definition": "Taratibu za haki za kisheria zinazolinda haki wakati wa uchunguzi, mashtaka, na kuidhinishwa."
-          },
-          "resource_security": {
-            "term": "Usalama wa Rasilimali",
-            "definition": "Upatikanaji wa uhakika wa chakula, maji na nishati chini ya matatizo ya kiuchumi na kimazingira."
-          },
-          "resilience": {
-            "term": "Ustahimilivu",
-            "definition": "Uwezo wa jumuiya na taasisi kuchukua mishtuko na kupona ipasavyo."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Hariri wazo",
-      "googleDocsUrl": "URL ya Hati za Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Maandishi ya wazo fupi (si lazima)",
-      "save": "Hifadhi",
-      "cancel": "Ghairi",
-      "addIntro": "Ongeza Hati ya Google ili kuandaa wazo la azimio mahali pake, au charaza dokezo fupi (au zote mbili).",
-      "googleDocsCreateHelp": "Hati mpya ya Google inafungua kwenye kichupo kingine; bandika kiungo hapa baada ya kuundwa.",
-      "resolutionIdeaPlaceholder": "Wazo la azimio...",
-      "add": "Ongeza",
-      "noIdeasYet": "Hakuna mawazo bado.",
-      "ideaLabel": "Wazo",
-      "ideaFallback": "Wazo {number}",
-      "linkedDoc": "Hati iliyounganishwa",
-      "addedOn": "Imeongezwa {date}",
-      "edit": "Hariri",
-      "delete": "Futa",
-      "ideaDocument": "Hati ya wazo",
-      "summary": "Muhtasari",
-      "emptyIdea": "Wazo tupu."
-    },
-    "stances": {
-      "heatmapTitle": "Muhtasari wa Msimamo mfupi (Ramani ya joto)",
-      "heatmapHelp": "Je, mgao wako unasaidia ___ kwa kiwango gani? (Mizani 1-5)",
-      "topicPlaceholder": "k.m. hatua ya hali ya hewa",
-      "extentLabel": "Kiwango (1-5):",
-      "extentHelpTitle": "Kiwango (1-5)",
-      "extentHelpBody": "1 inamaanisha kuwa mgao wako una uungwaji mkono mdogo kwa mada, na 5 inamaanisha usaidizi mkubwa. Chagua nambari inayolingana na msimamo wako katika kamati.",
-      "add": "Ongeza",
-      "viewOnlyHeatmap": "Mtazamo pekee wa ramani ya joto kwa wafanyikazi.",
-      "notesPerAllocation": "Vidokezo kwa kila Mgao",
-      "noAllocationsYet": "Bado hakuna mgao",
-      "notesPlaceholder": "Msimamo wa mgao huu...",
-      "noteLanguageWarning": "Onyo la msomaji: dokezo hili linaweza kuwa na lugha isiyofaa.",
-      "save": "Hifadhi",
-      "saveHelpTitle": "Hifadhi dokezo la msimamo",
-      "saveHelpBody": "Huhifadhi dokezo la msimamo wa mgao huu. Inaweza kutazamwa na wafanyikazi na (kulingana na mipangilio ya kamati) washiriki wengine."
-    },
-    "speeches": {
-      "newSpeech": "Hotuba mpya",
-      "speechTitlePlaceholder": "Kichwa cha hotuba",
-      "googleDocsUrl": "URL ya Hati za Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Hufungua Google katika kichupo kipya; bandika URL ya hati hapa ikiwa tayari.",
-      "plainTextOptional": "Rasimu ya maandishi wazi (si lazima utumie Hati ya Google)",
-      "save": "Hifadhi",
-      "cancel": "Ghairi",
-      "noSpeechesYet": "Hakuna hotuba bado. Unganisha Hati ya Google au ubandike maandishi.",
-      "speechLabel": "Hotuba",
-      "untitled": "Haina jina",
-      "edit": "Hariri",
-      "speechDocument": "Hati ya hotuba",
-      "draftText": "Rasimu ya maandishi",
-      "noContentHint": "Unganisha Hati ya Google na Hariri, au ongeza maandishi wazi katika fomu."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Kamati",
-      "clearSearchTitle": "Futa utafutaji na uonyeshe wajumbe wote",
-      "vacantLabel": "Nafasi",
-      "searchVacantTitle": "Tafuta viti \"vilivyo wazi\" kwenye chumba",
-      "searchHint": "Charaza nchi, jina la mjumbe, shule, kiwakilishi, au \"nafasi\" ili kuangazia zinazolingana kwenye chumba. Bonyeza Enter ili kuruka hadi mechi ya kwanza; Esc inafuta. Bofya Haina ili kurukia viti tupu.",
-      "findLabel": "Tafuta mjumbe au mwanachama wa dais",
-      "searchPlaceholder": "Nchi, jina, shule...",
-      "matchesCount": "{matches} kati ya {total} viti mechi",
-      "searchAria": "Tafuta wajumbe",
-      "virtualRoomVacant": "Nafasi",
-      "profileAria": "Tazama wasifu: {country}",
-      "vacantSeatAria": "Kiti kisicho wazi",
-      "placardAria": "Bango {country}",
-      "gavelAria": "Gavel",
-      "yourContext": "Muktadha wako",
-      "roleLabel": "Jukumu",
-      "seatLabel": "Kiti",
-      "assignedLabel": "Imekabidhiwa",
-      "daisLabel": "Dais",
-      "phaseLabel": "Awamu",
-      "phaseVoting": "Kupiga kura",
-      "phaseDebate": "Mjadala",
-      "focusSearchTitle": "Lenga utafutaji (vichwa na majina ya kila siku yanalingana na hoja yako)",
-      "tipLabel": "Kidokezo",
-      "enterScrolls": "Ingiza vitabu",
-      "typeToFilterHint": "Charaza ili kuchuja - Ingiza kusogeza kwa mechi ya kwanza",
-      "noMatches": "Hakuna wajumbe au viti vinavyolingana.",
-      "digitalDisplay": "Onyesho la kidijitali",
-      "floorLabel": "Sakafu",
-      "staffSeatsHeading": "Wafanyakazi - viti",
-      "viewProfileAria": "Tazama wasifu: {title}",
-      "noProfileLinkAria": "{title} (hakuna kiungo cha wasifu)",
-      "committeeFloor": "Sakafu ya kamati",
-      "virtualRoomFigureAria": "Chumba halisi cha kamati - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Kuchuja wajumbe. Kiti cha kwanza kilichoangaziwa ni mechi ya kwanza kwenye pete.",
-      "helperText": "Orodha ya mabango ya nchi (kutoka kwa mgao), jina, shule, na viwakilishi kutoka kwa wasifu wa kila mjumbe. Hariri yako chini ya Wasifu. Viti vya kamati tupu vinaonyesha kama Nafasi. Bofya bango lililojazwa au kiti cha dais ili kufungua ukurasa wa mwanachama huyo (sogoa na uripoti kutoka hapo).",
-      "virtualRoomCaption": "Chumba cha kamati ya Umoja wa Mataifa cha Muundo Halisi chenye mabango ya wajumbe yanayoonyesha nchi, jina, shule na viwakilishi."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Ombi la kuzungumza",
-        "delegateFallback": "Mjumbe",
-        "needAllocation": "Unahitaji mgao ili kuomba kuzungumza.",
-        "alreadyQueued": "Tayari una ombi linaloendelea la kuzungumza kwenye foleni.",
-        "requested": "Aliomba kuzungumza. Utaonekana kwenye foleni.",
-        "requestFailed": "Imeshindwa kuomba kuzungumza.",
-        "helpBody": "Inatuma wajumbe wako kwenye foleni ya mwenyekiti. Unaweza kuwa na ombi moja la kusubiri/la sasa linaloendelea kwa wakati mmoja.",
-        "purposeLabel": "Kusudi la hiari (inaonyesha kwenye lebo ya foleni)",
-        "purposeHelpTitle": "Lebo ya kusudi",
-        "purposeHelpBody": "Maandishi haya yameambatishwa kwa jina la nchi yako ili wenyeviti waone ni kwa nini unaomba sakafu.",
-        "purposePlaceholder": "k.m. msaada + muhtasari wa marekebisho",
-        "requesting": "Inaomba...",
-        "rollPromptTitle": "Idhini ya mwenyekiti inahitajika",
-        "rollPromptBodyPickStatus": "Kikao kimeanza. Chagua hali yako ya kumwita ili kufungua kuzungumza na kupiga kura. Chaguo hili haliwezi kubadilishwa.",
-        "rollPromptBodyWaitSessionStart": "Wakisubiri mwenyekiti aanze kikao cha kamati.",
-        "rollPromptBodyWaitRollPrompt": "Inasubiri ombi la kumwita.",
-        "rollPromptBodyMarkedAbsent": "Kwa sasa umetiwa alama kuwa hupo. Mwambie mwenyekiti akuweke alama kuwa Umehudhuria kuzungumza na kupiga kura.",
-        "rollPromptBodyChecking": "Inakagua hali ya orodha yako...",
-        "rollPromptSaving": "Inahifadhi...",
-        "rollPromptPresent": "Wasilisha",
-        "rollPromptPresentVoting": "Kuwasilisha na kupiga kura"
-      },
-      "motionVoting": {
-        "votingProcedure": "Utaratibu wa kupiga kura",
-        "currentMotion": "Mwendo wa sasa",
-        "motioner": "Mwelekezi",
-        "majority": "Wengi",
-        "majoritySimple": "Rahisi",
-        "tally": "Ndiyo {yes} - Hapana {no} - Jumla {total}",
-        "help": "Jukwaa hurekodi kura ya kila wajumbe katika kikao. Kura za hoja hutumia Ndiyo au Hapana pekee (hapana pingamizi). Jumla huhesabu mabango pekee ambapo Ndiyo au Hapana ilirekodiwa; wajumbe wasiokuwepo wanarukwa."
-      },
-      "activeMotion": {
-        "currentMotion": "Mwendo wa sasa",
-        "motionFallback": "Mwendo",
-        "motioner": "Mwelekezi",
-        "majority": "Wengi",
-        "majoritySimple": "Rahisi",
-        "type": "Aina",
-        "timer": "Kipima muda",
-        "currentSpeaker": "Mzungumzaji wa sasa",
-        "nextSpeaker": "Spika inayofuata",
-        "speakerTimeLeftCap": "Muda wa mzungumzaji (kushoto / kofia)",
-        "speakerTimeLeftTotal": "Muda wa mzungumzaji (kushoto / jumla)",
-        "perSpeaker": "(kwa mzungumzaji)",
-        "paused": "(imesitishwa)",
-        "pauseReason": "Sitisha: {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "Muda wa kikao",
-        "sessionNotStarted": "Kipindi hakijaanza",
-        "limit": "Kikomo",
-        "limitRemaining": "{value} imesalia",
-        "limitOverBy": "kupita kwa {value}",
-        "quickLinkSession": "Kikao",
-        "quickLinkRoll": "Roll",
-        "quickLinkSpeakers": "Wazungumzaji",
-        "quickLinkMotions": "Mwendo",
-        "quickLinkTimer": "Kipima muda",
-        "dais": "Dais",
-        "pinned": "Imebandikwa",
-        "viewFullAnnouncement": "Tazama tangazo kamili",
-        "timerPausesReadOnly": "Kipima muda kimesitishwa (kusoma pekee)",
-        "speakerList": "Orodha ya Spika",
-        "speakerFallback": "Spika",
-        "rollCallYou": "Piga simu (wewe)",
-        "fullAnnouncement": "Tangazo kamili",
-        "daisAnnouncement": "Tangazo la Dais",
-        "close": "Funga"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Jina la kikao",
-        "sessionNamePlaceholder": "k.m. Kikao cha asubuhi",
-        "sessionNameSaving": "Inahifadhi...",
-        "sessionNameSaved": "Imehifadhiwa",
-        "sessionNameHint": "Huhifadhi kiotomatiki na huonekana kwenye historia ya kipindi.",
-        "title": "Kikao cha kamati",
-        "subtitle": "Anzisha au simamisha kikao cha kamati.",
-        "helpStartStop": "Anza huanza kipima muda/hali ya kikao cha kamati ya moja kwa moja kwa kila mtu. Kukomesha kunamaliza kipindi na kufuta kikomo cha saa kilichopo.",
-        "migrationUnavailable": "Vidhibiti vya kipindi havipatikani kwa muda hadi uhamishaji wa hifadhidata mpya zaidi utumike.",
-        "endTimeInFuture": "Chagua wakati wa mwisho katika siku zijazo, au ubadilishe hadi bila kikomo.",
-        "sessionStartUnavailable": "Muhuri wa muda wa kuanza kwa kipindi haupatikani hadi uhamishaji wa hivi punde utumike.",
-        "endTimeInFutureSetNoLimit": "Chagua muda wa mwisho katika siku zijazo, au usiweke kikomo.",
-        "sessionLimitUpdated": "Kikomo cha kikao kimesasishwa.",
-        "startedLabel": "Ilianza:",
-        "timeInLabel": "Saa katika:",
-        "timeUntilEndLabel": "Muda hadi mwisho:",
-        "overByValue": "kupita kwa {value}",
-        "modeLabel": "Hali:",
-        "modeStopwatchNoLimit": "Kipima saa (hakuna kikomo cha muda)",
-        "sessionNotRunning": "Kipindi hakifanyiki.",
-        "sessionLimit": "Kikomo cha kikao",
-        "sessionLimitModesTitle": "Njia za kikomo cha vipindi",
-        "sessionLimitModesHelp": "Hakuna: hakuna mwisho. Bajeti ya muda: huhesabiwa kuanzia mwanzo. Malizia: saa maalum katika saa za eneo lako.",
-        "sessionLimitOptional": "Hiari.",
-        "noneLabel": "Hakuna",
-        "noneDescription": "inaendesha hadi usimame.",
-        "timeBudgetLabel": "Bajeti ya wakati",
-        "timeBudgetDescription": "huhesabu kuanzia unapoanza.",
-        "endTimeLabel": "Wakati wa mwisho",
-        "endTimeDescription": "hutumia muda maalum wa saa (hubatilisha bajeti ikiwa zote mbili ziliwahi kuwekwa).",
-        "noneIndefinite": "Hakuna (kwa muda usiojulikana)",
-        "noneScheduledEndHint": "Hakuna mwisho uliopangwa; muda uliopita tu umeonyeshwa.",
-        "timeBudgetFromStart": "Bajeti ya muda tangu mwanzo",
-        "hoursLabel": "Saa",
-        "minutesLabel": "Dakika",
-        "minimumOneMinute": "(angalau dakika 1)",
-        "endAtLocalTime": "Mwisho saa (saa za ndani)",
-        "stopSession": "Acha kikao",
-        "saveLimit": "Hifadhi kikomo",
-        "saveLimitHelp": "Hutumia mipangilio iliyosasishwa ya kikomo wakati kipindi tayari kinaendelea, bila kusimamisha kipindi.",
-        "startSession": "Anza kipindi",
-        "sidebarUsePrefix": "Tumia utepe kwa",
-        "rollCall": "Piga simu",
-        "speakers": "Wazungumzaji",
-        "formalMotions": "Mwendo rasmi",
-        "timer": "Kipima muda",
-        "sidebarAnd": "na",
-        "announcements": "Matangazo",
-        "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo."
-      },
-      "history": {
-        "title": "Historia ya kikao",
-        "savedCount": "{count} imehifadhiwa",
-        "permissionsHint": "Viti vinaweza kubadili jina la viingilio. SMT/Msimamizi anaweza kubadilisha na kufuta maingizo.",
-        "empty": "Bado hakuna historia ya kipindi.",
-        "rename": "Badilisha jina",
-        "delete": "Futa",
-        "deleteConfirm": "Ungependa kufuta kipindi hiki kwenye historia?",
-        "sessionNamePrompt": "Jina la kikao",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Inaendelea"
-      },
-      "timerPage": {
-        "title": "Kipima muda",
-        "controlsTitle": "Vidhibiti vya kipima muda",
-        "controlsHelp": "Tumia sakafu ya Jumla kwa muda wa jumla wa mjadala, au kura ya Mwendo ili kuunganisha mwonekano na kipengee mahususi cha kura ya wazi.",
-        "tabSetup": "1) Kuweka",
-        "tabClock": "2) Vidhibiti vya saa",
-        "tabNotes": "3) Vidokezo vya hotuba",
-        "tabLog": "4) Sitisha logi",
-        "setupHelp": "Chagua ikiwa kipima muda hiki ni cha ghorofa ya jumla (kinaonekana kila mara kwa wajumbe) au kiambatanishwe na mwendo uliofunguliwa kwa ajili ya kupiga kura (wajumbe watakiona pekee ilhali kura hiyo ndiyo kipengele kinachotumika). Kwa muda wa kila mzungumzaji umewashwa, saa hubakia kuonekana wakati wa mkutano uliosimamiwa bila kujali. Sitisha saa / Anza kufungia saa au endelea kuhesabu. Weka muda wa Spika (unaosalia) na Muda wa Jumla kwa kujitegemea, kisha Hifadhi kipima muda. Presets kujaza wote kwa urefu sawa; unaweza kuhariri sehemu yoyote baadaye. Usitishaji huwekwa kwa sababu fupi.",
-        "namedPreset": "Imetajwa kuweka mapema",
-        "applyPreset": "Tekeleza uwekaji awali...",
-        "floorLabelDelegates": "Lebo ya sakafu (wajumbe)",
-        "floorLabelPlaceholder": "k.m. GSL 60s",
-        "timerPurpose": "Kusudi la kipima muda",
-        "purposeGeneralFloor": "Mjadala wa jumla / sakafu (haijafungamana na kura)",
-        "purposeMotionVote": "Fungua mwendo - kipima muda pekee wakati kura hiyo inatumika kwenye sakafu",
-        "openMotionForVoting": "Hoja iliyofunguliwa (lazima iwe wazi kwa ajili ya kupiga kura)",
-        "selectMotion": "Chagua mwendo...",
-        "untitled": "Haina jina",
-        "noOpenMotionWarning": "Hakuna hoja iliyofunguliwa kwa ajili ya kupiga kura. Fungua kura kwanza, au ubadilishe kusudi liwe la jumla.",
-        "clock": "Saa",
-        "running": "Kukimbia",
-        "paused": "Imesitishwa",
-        "saveToEnablePauseStart": "hifadhi kipima muda ili kuwezesha kusitisha/kuanza.",
-        "pauseReasonLogged": "Sitisha sababu (iliyoingia)",
-        "pauseReasonPlaceholder": "k.m. Hatua ya utaratibu, suala la teknolojia, mkutano usiodhibitiwa...",
-        "pauseClock": "Sitisha saa",
-        "startClock": "Saa ya kuanza",
-        "perSpeakerTitle": "Muda wa kila mzungumzaji (kasi iliyosimamiwa)",
-        "perSpeakerHelp": "Weka Jumla ya muda kama kikomo cha kila mzungumzaji na muda wa Spika kama muda uliosalia; Advance inasogezwa kwenye spika inayofuata na kuweka upya iliyobaki kwenye kofia.",
-        "currentSpeaker": "Mzungumzaji wa sasa",
-        "nextSpeaker": "Spika inayofuata",
-        "speechNotesCurrentSpeaker": "Vidokezo vya hotuba (mzungumzaji wa sasa)",
-        "speechNotesHelp": "Vidokezo vinahusishwa na maandishi ya kipima saa cha Sasa cha spika na, orodha ya spika ikiwa na mtu aliyetiwa alama ya Sasa, kaumu yake huhifadhiwa kwa marejeleo.",
-        "timerFloorLabel": "Kipima muda (sakafu):",
-        "speakerListCurrent": "Orodha ya Spika (ya sasa):",
-        "noCurrentDelegation": "Hakuna uwakilishi uliotiwa alama kuwa Sasa hivi kwenye orodha ya wazungumzaji.",
-        "note": "Kumbuka",
-        "notePlaceholder": "Pointi, POI, sauti, vifuatilizi...",
-        "saveSpeechNote": "Hifadhi dokezo la hotuba",
-        "recentNotes": "Maelezo yako ya hivi majuzi (kamati hii)",
-        "delete": "Futa",
-        "speakerTimeRemaining": "Muda wa mzungumzaji (uliosalia)",
-        "remainingHelpPerSpeaker": "Muda uliosalia kwa spika ya sasa (huweka upya unapofanya Mapema).",
-        "remainingHelpNormal": "Muda uliosalia kwa spika ya sasa (inaweza kuwa chini ya jumla).",
-        "totalTime": "Jumla ya muda",
-        "totalHelpPerSpeaker": "Kofia ya kila mzungumzaji (denominata kwenye sakafu; hujaza tena Advance iliyosalia kwa hii).",
-        "totalHelpNormal": "Urefu kamili wa sehemu hii ya kipima muda (iliyoonyeshwa baada ya kufyeka kwenye sakafu).",
-        "saveTimer": "Hifadhi kipima muda",
-        "advanceSpeakerReset": "Spika ya mapema na weka upya saa",
-        "recentPauseLog": "Kumbukumbu ya kusitisha hivi majuzi",
-        "noPauseEvents": "Bado hakuna matukio ya kusitisha yaliyowekwa kwa kamati hii.",
-        "openPauseLogHint": "Fungua kumbukumbu ya Sitisha ili ukague sababu za kusitisha zilizorekodiwa na mihuri ya muda.",
-        "saved": "Kipima muda kimehifadhiwa.",
-        "savedCapped": "Kipima muda kimehifadhiwa. Muda wa Spika ulikuwa mrefu kuliko jumla; imefungwa kwa jumla.",
-        "alreadyPaused": "Kipima muda tayari kimesitishwa.",
-        "pausedForCommittee": "Kipima muda kimesitishwa kwa kamati.",
-        "alreadyRunning": "Kipima muda tayari kinaendelea.",
-        "runningForCommittee": "Kipima muda kinagombea kwa kamati.",
-        "euTimerBoardTitle": "Bodi ya kipima muda ya Bunge la EU (vipima muda 11)",
-        "euTimerBoardHelp": "Kipima muda kimoja kwa kila chama, pamoja na Jumla ya muda, muda wa POI/POC na muda wa Spika. Tumia Tumia ili kunakili safu mlalo kwenye sehemu za kipima muda cha moja kwa moja kwenye kichupo cha Saa (saa ya mzungumzaji / Hifadhi kipima muda).",
-        "euTimerName": "Jina",
-        "euTimerTag": "Lebo",
-        "euTotalTime": "Jumla ya muda",
-        "euPoiPocTime": "Muda wa POI / POC",
-        "euSpeakerTime": "Muda wa Spika"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "Chumba cha kamati (kimejaa)",
         "hint": "Mpangilio pepe na sakafu ya kukabidhi"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "Imeshindwa kuhifadhi kiotomatiki",
     "autosavedWithCountry": "Imehifadhiwa kiotomatiki — {country}",
     "delegateFallback": "mjumbe"
+  },
+  "sources": {
+    "addSource": "Ongeza chanzo",
+    "sourceUrl": "URL Chanzo",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (inapendekezwa)",
+    "urlHelp": "Kwa Hati mpya ya Google, tumia kitufe na ubandike kiungo cha hati hapa.",
+    "titleOptional": "Kichwa (si lazima)",
+    "saveChanges": "Hifadhi mabadiliko",
+    "editSource": "Badilisha chanzo",
+    "urlPlaceholderShort": "Hati ya Google au URL nyingine",
+    "empty": "Bado hakuna vyanzo. Ongeza kiungo cha Hati ya Google ili kuifungua hapa.",
+    "sourceLabel": "Chanzo",
+    "openLink": "Fungua kiungo",
+    "embedHeading": "Hati ya chanzo",
+    "notGoogleDoc": "URL hii si Hati ya Google. Tumia kiungo cha docs.google.com/document/d/… kupachika na kuhariri hapa; vinginevyo fungua link hapo juu."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Wajumbe hawawezi kupakia Hati za Nafasi moja kwa moja. Tumia aina nyingine ya hati.",
+    "alertOnlyChairsPositionPaper": "Viti/SMT/msimamizi pekee ndiye anayeweza kupakia Hati za Nafasi.",
+    "alertOnlySmtChairReport": "SMT/msimamizi pekee ndiye anayeweza kupakia Ripoti za Mwenyekiti.",
+    "alertOnlySmtRop": "SMT/msimamizi pekee ndiye anayeweza kupakia hati za RoP.",
+    "alertOnlySmtAwardCriteria": "SMT/msimamizi pekee ndiye anayeweza kupakia hati za Vigezo vya Tuzo.",
+    "alertNeedContentOrUrl": "Ongeza maudhui ya maandishi ya ndani au URL ya Hati za Google.",
+    "confirmDelete": "Ungependa kufuta hati hii?",
+    "delegatePrepTitle": "Sehemu ya hati ya maandalizi",
+    "delegatePrepBody": "Unaweza kupakia, kutazama, na kuhariri <prep>hati zako za Kutayarisha</prep> moja kwa moja kutoka kwa ukurasa huu.",
+    "positionPaperGuideTitle": "Mwongozo wa karatasi",
+    "positionPaperGuideBlurb": "Pakua mwongozo wa kishika nafasi wakati PDF ya mwisho inatayarishwa.",
+    "downloadPlaceholderGuide": "Pakua mwongozo wa kishika nafasi",
+    "addDocument": "Ongeza hati",
+    "tabs": {
+      "ariaLabel": "Sehemu za hati",
+      "library": "Maktaba",
+      "compose": "Tunga",
+      "composeHint": "Anzisha hati mpya au uhariri rasimu iliyopo kutoka kwa kichupo hiki."
+    },
+    "newDocumentTitle": "Hati mpya",
+    "editDocumentTitle": "Hariri hati",
+    "typeLabel": "Aina",
+    "types": {
+      "position_paper": "Karatasi ya msimamo",
+      "chair_report": "Ripoti ya mwenyekiti",
+      "rop": "RoP",
+      "award_criteria": "Vigezo vya tuzo",
+      "chair_notes": "Vidokezo vya mwenyekiti",
+      "prep_doc": "Hati ya kuandaa"
+    },
+    "delegatePositionPaperNote": "Karatasi za nafasi hupakiwa na viti na maoni.",
+    "delegateOwner": "Mjumbe mmiliki",
+    "chairRecipient": "Mpokeaji mwenyekiti",
+    "titleLabel": "Kichwa",
+    "titlePlaceholder": "Kichwa cha hati",
+    "googleDocsUrl": "URL ya Hati za Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (pachika mwonekano/hariri katika programu)",
+    "googleDocsHelp": "Tumia Hati Mpya ya Google kufungua Google katika kichupo kipya, kisha ubandike kiungo cha hati hapa. Maandishi matupu hapa chini ni ya hiari. Kila hati inahitaji maandishi ya ndani, kiungo cha Hati ya Google, au zote mbili.",
+    "plainTextOptional": "Maandishi matupu (si lazima)",
+    "plainTextPlaceholder": "Vidokezo au rasimu ya maandishi...",
+    "chairFeedbackLabel": "Maoni ya mwenyekiti",
+    "chairFeedbackPlaceholder": "Maoni kwa karatasi ya nafasi ya mjumbe...",
+    "empty": "Bado hakuna hati. Ongeza moja au unganisha Hati ya Google.",
+    "sidebarDocumentLabel": "Hati",
+    "sections": {
+      "chairReports": "Ripoti za mwenyekiti",
+      "rop": "RoP",
+      "awardCriteria": "Vigezo vya tuzo",
+      "prepDocuments": "Nyaraka za kuandaa",
+      "chairNotes": "Vidokezo vya mwenyekiti",
+      "otherDocuments": "Nyaraka zingine"
+    },
+    "untitled": "Haina jina",
+    "linkedDocumentHeading": "Hati iliyounganishwa",
+    "notesHeading": "Vidokezo",
+    "noGoogleDocYet": "Bado hakuna Hati ya Google iliyounganishwa. Tumia Hariri kuongeza docs.google.com/document/d/… URL.",
+    "chairFeedbackHeading": "Maoni ya mwenyekiti",
+    "noFeedbackYet": "Bado hakuna maoni yaliyoongezwa."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Weka barua pepe ya mjumbe kwanza.",
+    "sentToDelegate": "Imetumwa kwa {email}.",
+    "newResolution": "Azimio Jipya",
+    "maxDraftResolutions": "Kamati hii tayari ina rasimu ya maazimio {count}.",
+    "googleDocLink": "Kiungo cha Hati ya Google",
+    "googleDocUrlPlaceholder": "URL ya Hati za Google (docs.google.com/document/d/… — inatumika kupachika + kuhariri)",
+    "googleDocUrlHelp": "Hati mpya ya Google inafungua kwenye kichupo kingine; nakili URL kutoka kwa upau wa anwani na uibandike hapa.",
+    "mainSubmittersPlaceholder": "Wawasilishaji wakuu (Vitambulisho vya mtumiaji, vimetenganishwa kwa koma)",
+    "coSubmittersPlaceholder": "Wawasilishaji wenza (Vitambulisho vya watumiaji, vilivyotenganishwa kwa koma)",
+    "create": "Unda",
+    "cancel": "Ghairi",
+    "openInNewTab": "Fungua kwenye kichupo kipya",
+    "noGoogleDocLink": "Hakuna kiungo cha Hati ya Google",
+    "visibleToOtherBloc": "Inaonekana kwa kambi nyingine",
+    "resolutionCounts": "Wanaofuatilia wakuu: {main} | Wanaofuatilia pamoja: {co} | Waliotia saini: {signatories}",
+    "blocButton": "Kambi {name} ({stance})",
+    "signVirtually": "Saini kwa karibu (watumishi wakuu wamearifiwa)",
+    "shareByEmail": "Shiriki azimio kwa barua pepe",
+    "delegateEmailPlaceholder": "mjumbe@email.com",
+    "sendToDelegate": "Tuma kwa mjumbe",
+    "clauseEditor": "Mhariri wa kifungu",
+    "noClausesYet": "Hakuna vifungu bado.",
+    "clauseNumber": "Kifungu {number}",
+    "saveClause": "Hifadhi kifungu",
+    "delete": "Futa",
+    "addClausePlaceholder": "Ongeza kifungu kipya...",
+    "addClause": "Ongeza kifungu",
+    "clauseVoteHistory": "Kifungu cha historia ya kura",
+    "noClauseOutcomesYet": "Bado hakuna matokeo ya kura yaliyorekodiwa.",
+    "clauseFallback": "Kifungu",
+    "passed": "IMEPITISHWA",
+    "failed": "IMESHINDWA",
+    "motionId": "Mwendo {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Sehemu za kupiga kura",
+      "open": "Fungua",
+      "closed": "Imefungwa"
+    },
+    "requiredMajority": "Wengi wanaohitajika",
+    "helpRequiredMajorityTitle": "Wengi wanaohitajika",
+    "helpRequiredMajorityBody": "Chagua kiwango cha juu cha kura kinachotumika kuamua kupita/kushindwa. `Rahisi` ni zaidi ya nusu. `2/3` inahitaji walio wengi zaidi.",
+    "majoritySimple": "Rahisi",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} wengi",
+    "mustVote": "LAZIMA upige kura",
+    "helpMustVoteTitle": "LAZIMA upige kura",
+    "helpMustVoteBody": "Huweka alama kwenye hoja hii kama kipengee cha \"lazima ipige kura\". Hii inatumika kuwasilisha mahitaji kwa washiriki (kulingana na usanidi wa kamati yako).",
+    "saveSettings": "Hifadhi mipangilio",
+    "delegateBlurb": "Dais hurekodi kura katika kipindi (k.m. wito wa kuorodheshwa). Kura za hoja hapa zinafuata Ndiyo/Hapana pekee (kupiga kura haitumiki). Unaweza kufuata hesabu; wajumbe hawapigi kura katika programu.",
+    "yes": "Ndiyo",
+    "no": "Hapana",
+    "ballots": "Kura",
+    "total": "Jumla",
+    "outcome": "Matokeo",
+    "passed": "Imepitishwa",
+    "failed": "Imeshindwa",
+    "noRecordedVotes": "Hakuna kura zilizorekodiwa",
+    "reopenMotion": "Fungua tena mwendo",
+    "editRecordOpen": "Hariri rekodi...",
+    "hideSettings": "Ficha mipangilio",
+    "preliminaryPassing": "Kupita (ya awali)",
+    "preliminaryFailing": "Kushindwa (awali)",
+    "delegateRollCall": "Mjumbe wa kupigia kura ({count})",
+    "noSeatedDelegates": "Hakuna wajumbe walioketi wanaopatikana kwa hoja hii.",
+    "rollPrefix": "Mzunguko:",
+    "recordedPrefix": "Imerekodiwa:",
+    "recordedYes": "Ndiyo",
+    "recordedNo": "Hapana",
+    "recordedAbstain": "Jiepushe",
+    "recordedNone": "-",
+    "abstain": "Jiepushe",
+    "clear": "Wazi",
+    "closeMotion": "Funga mwendo",
+    "mustVoteBadge": "LAZIMA upige kura",
+    "canVoteBadge": "ANAWEZA kupiga kura",
+    "noMotions": "Bado hakuna miondoko.",
+    "currentOpenMotion": "Mwendo wazi wa sasa",
+    "noOpenMotion": "Hakuna mwendo wazi kwa sasa.",
+    "recentClosedMotions": "Miondoko iliyofungwa hivi majuzi",
+    "noClosedMotions": "Bado hakuna miondoko iliyofungwa.",
+    "untitled": "Haina jina",
+    "voteTypes": {
+      "motion": "Mwendo",
+      "amendment": "Marekebisho",
+      "resolution": "Azimio",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Haipo (roll)",
+      "present_abstain": "Sasa - inaweza kuacha (kusonga)",
+      "present_voting": "Kuwasilisha na kupiga kura (orodha)",
+      "unknown": "- (roll)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Sehemu za wasifu",
+      "overview": "Muhtasari",
+      "awards": "Tuzo",
+      "private": "Rekodi za kibinafsi",
+      "settings": "Mipangilio ya wasifu"
+    },
+    "profilePicture": "Picha ya wasifu",
+    "uploadFile": "Pakia faili",
+    "uploading": "Inapakia...",
+    "photoSaved": "Picha imepakiwa na kuhifadhiwa.",
+    "orUrl": "Au umewekwa na URL",
+    "urlPlaceholder": "https://...",
+    "name": "Jina",
+    "username": "Jina la mtumiaji",
+    "usernamePlaceholder": "k.m. alex_1999",
+    "pronouns": "Viwakilishi",
+    "customPronounNote": "Wasifu wako ulikuwa na seti ya nomino maalum ambayo haikubaliwi tena hapa. Chagua chaguo hapo juu (au acha tupu). Kuhifadhi kunachukua nafasi ya thamani ya zamani.",
+    "school": "Shule",
+    "schoolPlaceholder": "k.m. Shule ya Upili ya Lincoln",
+    "grade": "Daraja",
+    "selectGrade": "Chagua daraja",
+    "conferencesAttended": "Mikutano iliyohudhuria",
+    "awardsComma": "Tuzo (zilizotenganishwa kwa koma)",
+    "awardsPlaceholder": "Mjumbe Bora, Mheshimiwa Taja",
+    "allocation": "Ugawaji",
+    "selectAllocation": "Chagua mgao",
+    "noAllocationsPlaceholder": "Hakuna mgao wa kamati unaopatikana",
+    "saveProfile": "Hifadhi wasifu",
+    "saved": "Wasifu umehifadhiwa.",
+    "saveFailed": "Haikuweza kuhifadhi wasifu.",
+    "errUsernamePattern": "Jina la mtumiaji lazima liwe na herufi 3-32 (herufi, nambari, _, ., -)",
+    "errPronounsPreset": "Chagua kiwakilishi kutoka kwenye orodha.",
+    "errImageType": "Tafadhali chagua faili ya picha.",
+    "errImageSize": "Picha ni kubwa mno (isizidi MB 5).",
+    "errUploadFailed": "Imeshindwa kupakia.",
+    "errStorageSetup": "Hifadhi ya picha ya wasifu haijawekwa. Katika mradi wa Supabase, endesha uhamishaji 00100_profile_pictures_storage_bucket.sql, au uunde ndoo ya hifadhi ya umma inayoitwa picha za wasifu (angalia README).",
+    "errPublicUrl": "Haikuweza kutatua URL ya umma kwa picha iliyopakiwa.",
+    "fallbacks": {
+      "yourCountry": "nchi yako",
+      "committeeSession": "Kikao cha kamati",
+      "delegate": "Mjumbe",
+      "speechNote": "Ujumbe wa hotuba",
+      "untitledMotion": "Mwendo usio na jina",
+      "dash": "-"
+    },
+    "delegateWelcome": {
+      "title": "Karibu mjumbe wa {flag} {country}",
+      "subtitle": "Je, ungependa kuanza na nini?",
+      "links": {
+        "documents": "Nyaraka",
+        "notes": "Vidokezo",
+        "committeeRoom": "Chumba cha kamati",
+        "runningNotes": "Vidokezo vya Kuendesha",
+        "ideas": "Mawazo",
+        "guides": "Waelekezi",
+        "sources": "Vyanzo",
+        "resolutions": "Maazimio",
+        "speeches": "Hotuba",
+        "stances": "Misimamo",
+        "crisisSlides": "Slaidi za migogoro",
+        "report": "Ripoti",
+        "motions": "Mwendo",
+        "points": "Pointi"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Tuzo kwenye wasifu wako",
+      "rank": "cheo {rank}",
+      "pending": {
+        "tab": "Uteuzi unaosubiri",
+        "title": "Uteuzi wa mwenyekiti unaosubiri",
+        "descriptionSingle": "Imehifadhiwa na viti na kushirikiwa na SMT kwa ukaguzi. Tuzo za mwisho zinaonekana hapa chini baada ya uthibitisho.",
+        "descriptionTabbed": "Imehifadhiwa na viti na kushirikiwa na SMT kwa ukaguzi. Tuzo za mwisho zinaonekana baada ya uthibitisho."
+      },
+      "recorded": {
+        "tab": "Tuzo zilizorekodiwa",
+        "title": "Tuzo zilizorekodiwa",
+        "description": "Imeorodheshwa wakati viti au SMT inakukabidhi katika kifuatiliaji tuzo. Utambuzi wa mwisho hufuata sheria za mkutano wako."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Inaonekana kwako tu, wenyeviti wa kamati, na SMT kwa kamati husika.",
+      "points": {
+        "title": "Pointi za mwenyekiti (binafsi)"
+      },
+      "speechNotes": {
+        "title": "Maelezo ya hotuba ya mwenyekiti (faragha)"
+      },
+      "motions": {
+        "title": "Miondoko uliyohamisha",
+        "description": "Imehifadhiwa kwenye wasifu wako kwa ukaguzi wa kamati na uangalizi wa SMT."
+      }
+    },
+    "discipline": {
+      "title": "Hali ya nidhamu (binafsi)",
+      "statusLine": "Maonyo: {maonyo} · Maonyo: {mgomo}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "upigaji kura umezimwa",
+      "speakingSuspended": "kuzungumza kusimamishwa",
+      "removedFromCommittee": "kuondolewa kwenye kamati",
+      "updated": "Imesasishwa: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Onyesho la kukagua wasifu",
+      "title": "Hakiki",
+      "yourName": "Jina lako",
+      "usernameNotSet": "Jina la mtumiaji halijawekwa",
+      "gradeValue": "Daraja {grade}",
+      "awards": "Tuzo"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Kanuni za Utaratibu (RoP)",
+        "content": "# Kanuni za Utaratibu \n\n## Pointi na Miongozo \n- **Poin of Order**: Utaratibu Sahihi \n- **Hoja ya Habari**: Swali kwa mzungumzaji \n- **Uhakika wa Haki ya Kibinafsi**: Faraja ya kibinafsi \n- **Hoja kwa Jedwali**: Ahirisha mjadala \n- **Hoja ya Kuahirisha**: Maliza kipindi \n\n#Upigaji kura \n- Wengi rahisi kwa masuala ya kiutaratibu \n- 2/3 wengi kwa mambo ya msingi \n- Kura ya kupiga kura ikiwa itaombwa"
+      },
+      "examples": {
+        "title": "Mifano",
+        "content": "#Mifano \n\n## Umbizo la Azimio \n``` \nMkutano Mkuu, \n... \n1. Anatoa wito kwa nchi wanachama... \n2. Inaitaka jumuiya ya kimataifa... \n``` \n\n## Muundo wa Karatasi \n1. Usuli \n2. Sera ya Nchi \n3. Ufumbuzi uliopendekezwa"
+      },
+      "templates": {
+        "title": "Violezo",
+        "content": "Violezo # \n\n## Kiolezo cha Ripoti ya Mwenyekiti \n- Muhtasari wa Kamati \n- Mambo muhimu ya majadiliano \n- Maazimio yamepitishwa \n- Mapendekezo"
+      },
+      "chairReport": {
+        "title": "Ripoti ya Mwenyekiti",
+        "content": "# Ripoti ya Mwenyekiti \n\nShughuli za kamati ya hati na matokeo hapa."
+      }
+    },
+    "edit": "Hariri",
+    "guideDocument": "Hati ya mwongozo",
+    "additionalNotes": "Vidokezo vya ziada",
+    "noContentYet": "Bado hakuna maudhui.",
+    "titlePlaceholder": "Kichwa",
+    "googleDocsUrl": "URL ya Hati za Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Hati mpya ya Google inafunguka katika kichupo kingine. Bandika kiungo kinachoweza kushirikiwa ili wajumbe waweze kufungua hati hapa (kuona/kuhariri kunategemea kushiriki na Google).",
+    "markdownOptional": "Vidokezo vya Markdown (si lazima utumie Hati ya Google)",
+    "save": "Hifadhi",
+    "cancel": "Ghairi",
+    "createNewGuide": "Unda mwongozo mpya",
+    "slugPlaceholder": "koa (kipekee)",
+    "titleLowerPlaceholder": "kichwa",
+    "googleDocsUrlOptional": "URL ya Hati za Google (si lazima)",
+    "markdownContentOptional": "Maudhui ya alama (hiari)",
+    "create": "Unda",
+    "glossary": {
+      "title": "Kamusi ya Agenda ya MUN",
+      "subtitle": "Istilahi za kipekee zinazolingana na msimbo wa kamati yako na mada za ajenda za sasa.",
+      "committeeCode": "Msimbo wa kamati: {code}",
+      "sources": {
+        "core": "msingi",
+        "committee": "kamati",
+        "topic": "mada"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Ujumbe",
+          "definition": "Nchi au timu ya waangalizi inayowakilisha jimbo au huluki moja katika kamati."
+        },
+        "placard": {
+          "term": "Bango",
+          "definition": "Alama ya nchi inayotumika kuomba nafasi, kupiga kura na kuashiria miondoko ya kiutaratibu."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Timu mwenyekiti anayesimamia mijadala, kutumia utaratibu na kusimamia mpangilio wa kuzungumza."
+        },
+        "quorum": {
+          "term": "Akidi",
+          "definition": "Idadi ya chini zaidi ya wajumbe wanaohitajika kufanya shughuli rasmi na kura."
+        },
+        "motion": {
+          "term": "Mwendo",
+          "definition": "Pendekezo rasmi la kubadilisha mtiririko wa mjadala, kama vile aina ya kikao au wakati wa kuzungumza."
+        },
+        "point_of_order": {
+          "term": "Pointi ya Utaratibu",
+          "definition": "Kuingilia kati wakati utaratibu unatumika kimakosa chini ya kanuni za kamati."
+        },
+        "moderated_caucus": {
+          "term": "Caucus Moderated",
+          "definition": "Sehemu ya mijadala yenye muundo na hotuba fupi zilizopitwa na wakati kwenye mada ndogo iliyobainishwa."
+        },
+        "unmoderated_caucus": {
+          "term": "Caucus Isiyodhibitiwa",
+          "definition": "Kipindi cha mazungumzo yasiyo rasmi ambapo wajumbe husogea kwa uhuru kuandaa na kuunganisha mawazo."
+        },
+        "draft_resolution": {
+          "term": "Rasimu ya Azimio",
+          "definition": "Nakala ya kazi ya hatua iliyopendekezwa ya kamati kabla ya upigaji kura wa mwisho na kupitishwa."
+        },
+        "amendment": {
+          "term": "Marekebisho",
+          "definition": "Mabadiliko yanayopendekezwa kwa maandishi, yawe ya kirafiki au yaliyopigiwa kura kama yasiyofaa."
+        },
+        "operative_clause": {
+          "term": "Kifungu cha Uendeshaji",
+          "definition": "Kifungu chenye namba chenye mwelekeo wa vitendo kinachoelezea kile ambacho kamati inapendekeza kufanya."
+        },
+        "preambulatory_clause": {
+          "term": "Kifungu cha Utangulizi",
+          "definition": "Kifungu cha kuweka muktadha kikinukuu kanuni za usuli, wasiwasi, na mifumo ya awali."
+        },
+        "right_of_reply": {
+          "term": "Haki ya Jibu",
+          "definition": "Fursa ya kujibu taarifa ya moja kwa moja iliyoathiri hadhi au nafasi ya uwakilishi."
+        },
+        "veto_power": {
+          "term": "Nguvu ya Veto",
+          "definition": "Mamlaka ya mwanachama wa kudumu wa UNSC kuzuia rasimu ya maazimio muhimu."
+        },
+        "chapter_vii": {
+          "term": "Sura ya VII",
+          "definition": "Mamlaka ya Mkataba wa Umoja wa Mataifa juu ya vitisho kwa amani, vikwazo, na hatua za matumizi ya nguvu."
+        },
+        "sanctions_regime": {
+          "term": "Utawala wa Vikwazo",
+          "definition": "Vizuizi vilivyoratibiwa vinavyotumika kuathiri tabia bila hatua ya moja kwa moja ya kijeshi."
+        },
+        "arms_control": {
+          "term": "Udhibiti wa Silaha",
+          "definition": "Makubaliano na mifumo ya uthibitishaji ambayo inaweka kikomo aina, idadi, au usambazaji wa silaha."
+        },
+        "non_proliferation": {
+          "term": "Kutoeneza",
+          "definition": "Sera za kuzuia kuenea kwa uwezo wa nyuklia, kemikali, kibayolojia au wa juu wa silaha."
+        },
+        "confidence_building_measures": {
+          "term": "Hatua za Kujenga Imani",
+          "definition": "Vyombo vya uwazi na mawasiliano vinavyopunguza kutokuelewana na hatari ya migogoro."
+        },
+        "universal_periodic_review": {
+          "term": "Mapitio ya Kipindi ya Jumla",
+          "definition": "Mchakato wa mapitio ya rika ambapo kila nchi mwanachama wa Umoja wa Mataifa inaripoti na kupokea mapendekezo ya haki."
+        },
+        "special_rapporteur": {
+          "term": "Mwandishi Maalum",
+          "definition": "Mtaalamu huru aliyeteuliwa kufuatilia na kutoa ripoti kuhusu masuala ya mada au haki za nchi."
+        },
+        "treaty_body": {
+          "term": "Mwili wa Mkataba",
+          "definition": "Kamati ya wataalam inayosimamia utekelezaji wa mkataba mahususi wa haki za binadamu."
+        },
+        "public_health_emergency": {
+          "term": "Dharura ya Afya ya Umma",
+          "definition": "Tukio kubwa la mlipuko linalohitaji uratibu wa haraka wa kitaifa na kimataifa."
+        },
+        "surveillance": {
+          "term": "Ufuatiliaji wa Epidemiological",
+          "definition": "Ukusanyaji na uchanganuzi endelevu wa data ya afya ili kugundua na kufuatilia mienendo ya magonjwa."
+        },
+        "health_systems": {
+          "term": "Kuimarisha Mifumo ya Afya",
+          "definition": "Kuboresha nguvu kazi, ufadhili, vifaa, na utawala kwa utoaji wa huduma za afya unaotegemewa."
+        },
+        "transnational_crime": {
+          "term": "Uhalifu uliopangwa wa Kimataifa",
+          "definition": "Shughuli za uhalifu zinazoratibiwa katika mipaka kupitia mitandao na masoko haramu."
+        },
+        "illicit_trafficking": {
+          "term": "Usafirishaji Haramu",
+          "definition": "Usafirishaji haramu wa dawa, silaha, watu au bidhaa katika maeneo ya mamlaka."
+        },
+        "rule_of_law_capacity": {
+          "term": "Uwezo wa Utawala wa Sheria",
+          "definition": "Uwezo wa taasisi wa mifumo ya haki kuchunguza, kushtaki na kulinda haki kwa haki."
+        },
+        "sustainable_development": {
+          "term": "Maendeleo Endelevu",
+          "definition": "Kielelezo cha ukuaji kinachosawazisha maendeleo ya kijamii, fursa ya kiuchumi, na ulinzi wa mazingira."
+        },
+        "financing_for_development": {
+          "term": "Ufadhili wa Maendeleo",
+          "definition": "Mifumo ya ufadhili wa umma na ya kibinafsi ambayo inasaidia vipaumbele vya maendeleo ya muda mrefu."
+        },
+        "policy_coordination": {
+          "term": "Uratibu wa Sera",
+          "definition": "Uwiano wa hatua za serikali na wakala ili kuzuia kurudiwa na kuongeza athari ya pamoja."
+        },
+        "child_protection": {
+          "term": "Ulinzi wa Mtoto",
+          "definition": "Hatua za kuzuia unyonyaji, unyanyasaji na unyanyasaji dhidi ya watoto katika mazingira yote."
+        },
+        "education_access": {
+          "term": "Upatikanaji wa Elimu",
+          "definition": "Kuhakikisha fursa jumuishi, za usawa na zinazoendelea za kujifunza kwa watoto wote."
+        },
+        "humanitarian_response": {
+          "term": "Majibu ya kibinadamu",
+          "definition": "Hatua za usaidizi wa haraka zinazoshughulikia mahitaji ya dharura katika mizozo na mazingira ya migogoro."
+        },
+        "gender_mainstreaming": {
+          "term": "Uingizaji wa Jinsia",
+          "definition": "Kuunganisha uchambuzi wa kijinsia katika muundo wa sera, utekelezaji na tathmini."
+        },
+        "gender_based_violence": {
+          "term": "Ukatili wa Kijinsia",
+          "definition": "Madhara yanayoelekezwa kwa mtu kulingana na utambulisho wa kijinsia, majukumu, au uhusiano usio sawa wa mamlaka."
+        },
+        "economic_empowerment": {
+          "term": "Uwezeshaji Kiuchumi",
+          "definition": "Kupanua ufikiaji wa kazi nzuri, fedha, umiliki na uwezo wa kufanya maamuzi."
+        },
+        "source_attribution": {
+          "term": "Chanzo Sifa",
+          "definition": "Inataja asili ya habari kwa uwazi ili madai yaweze kuthibitishwa na kuwekewa muktadha."
+        },
+        "verified_reporting": {
+          "term": "Ripoti Iliyothibitishwa",
+          "definition": "Kiwango cha uandishi wa habari kinachohitaji uthibitisho kabla ya kuchapisha ukweli unaopingwa."
+        },
+        "editorial_independence": {
+          "term": "Uhuru wa Uhariri",
+          "definition": "Kutenganishwa kwa maamuzi ya kuripoti kutoka kwa shinikizo la kisiasa au ushawishi wa wadau."
+        },
+        "climate_mitigation": {
+          "term": "Kupunguza Hali ya Hewa",
+          "definition": "Vitendo vinavyopunguza utoaji wa gesi chafuzi au kuongeza uondoaji wa kaboni wa muda mrefu."
+        },
+        "climate_adaptation": {
+          "term": "Kukabiliana na Hali ya Hewa",
+          "definition": "Sera na uwekezaji unaopunguza uwezekano wa kuathiriwa na athari zinazohusiana na hali ya hewa."
+        },
+        "cyber_norms": {
+          "term": "Kanuni za Cyber",
+          "definition": "Matarajio ya pamoja ya tabia ya serikali inayowajibika katika vikoa vya dijitali na mtandao."
+        },
+        "critical_infrastructure": {
+          "term": "Miundombinu Muhimu",
+          "definition": "Mifumo muhimu kama vile nishati, maji, afya na mawasiliano inayohitaji uthabiti."
+        },
+        "epidemiology": {
+          "term": "Epidemiolojia",
+          "definition": "Utafiti wa mifumo ya magonjwa, sababu, na usambazaji katika idadi ya watu."
+        },
+        "preparedness_response": {
+          "term": "Maandalizi na Majibu",
+          "definition": "Kupanga, kuratibu, na kuongeza hatua za kudhibiti na kudhibiti dharura."
+        },
+        "non_refoulement": {
+          "term": "Kutorudisha",
+          "definition": "Kanuni inayokataza watu kurudi mahali ambapo wanakabiliwa na madhara makubwa."
+        },
+        "durable_solutions": {
+          "term": "Suluhisho za kudumu",
+          "definition": "Matokeo ya muda mrefu kwa watu waliohamishwa makazi yao: kurudi, ushirikiano wa ndani, au makazi mapya."
+        },
+        "nuclear_safeguards": {
+          "term": "Ulinzi wa Nyuklia",
+          "definition": "Hatua za uthibitishaji kuhakikisha nyenzo za nyuklia hazielezwi kwa matumizi ya silaha."
+        },
+        "counter_terrorism": {
+          "term": "Kupambana na Ugaidi",
+          "definition": "Hatua zilizojumuishwa za kisheria, kinga na usalama dhidi ya shughuli za kigaidi."
+        },
+        "due_process": {
+          "term": "Utaratibu Unaolipwa",
+          "definition": "Taratibu za haki za kisheria zinazolinda haki wakati wa uchunguzi, mashtaka, na kuidhinishwa."
+        },
+        "resource_security": {
+          "term": "Usalama wa Rasilimali",
+          "definition": "Upatikanaji wa uhakika wa chakula, maji na nishati chini ya matatizo ya kiuchumi na kimazingira."
+        },
+        "resilience": {
+          "term": "Ustahimilivu",
+          "definition": "Uwezo wa jumuiya na taasisi kuchukua mishtuko na kupona ipasavyo."
+        }
+      },
+      "topicLine": "Mada: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Hariri wazo",
+    "googleDocsUrl": "URL ya Hati za Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Maandishi ya wazo fupi (si lazima)",
+    "save": "Hifadhi",
+    "cancel": "Ghairi",
+    "addIntro": "Ongeza Hati ya Google ili kuandaa wazo la azimio mahali pake, au charaza dokezo fupi (au zote mbili).",
+    "googleDocsCreateHelp": "Hati mpya ya Google inafungua kwenye kichupo kingine; bandika kiungo hapa baada ya kuundwa.",
+    "resolutionIdeaPlaceholder": "Wazo la azimio...",
+    "add": "Ongeza",
+    "noIdeasYet": "Hakuna mawazo bado.",
+    "ideaLabel": "Wazo",
+    "ideaFallback": "Wazo {number}",
+    "linkedDoc": "Hati iliyounganishwa",
+    "addedOn": "Imeongezwa {date}",
+    "edit": "Hariri",
+    "delete": "Futa",
+    "ideaDocument": "Hati ya wazo",
+    "summary": "Muhtasari",
+    "emptyIdea": "Wazo tupu."
+  },
+  "stances": {
+    "heatmapTitle": "Muhtasari wa Msimamo mfupi (Ramani ya joto)",
+    "heatmapHelp": "Je, mgao wako unasaidia ___ kwa kiwango gani? (Mizani 1-5)",
+    "topicPlaceholder": "k.m. hatua ya hali ya hewa",
+    "extentLabel": "Kiwango (1-5):",
+    "extentHelpTitle": "Kiwango (1-5)",
+    "extentHelpBody": "1 inamaanisha kuwa mgao wako una uungwaji mkono mdogo kwa mada, na 5 inamaanisha usaidizi mkubwa. Chagua nambari inayolingana na msimamo wako katika kamati.",
+    "add": "Ongeza",
+    "viewOnlyHeatmap": "Mtazamo pekee wa ramani ya joto kwa wafanyikazi.",
+    "notesPerAllocation": "Vidokezo kwa kila Mgao",
+    "noAllocationsYet": "Bado hakuna mgao",
+    "notesPlaceholder": "Msimamo wa mgao huu...",
+    "noteLanguageWarning": "Onyo la msomaji: dokezo hili linaweza kuwa na lugha isiyofaa.",
+    "save": "Hifadhi",
+    "saveHelpTitle": "Hifadhi dokezo la msimamo",
+    "saveHelpBody": "Huhifadhi dokezo la msimamo wa mgao huu. Inaweza kutazamwa na wafanyikazi na (kulingana na mipangilio ya kamati) washiriki wengine."
+  },
+  "speeches": {
+    "newSpeech": "Hotuba mpya",
+    "speechTitlePlaceholder": "Kichwa cha hotuba",
+    "googleDocsUrl": "URL ya Hati za Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Hufungua Google katika kichupo kipya; bandika URL ya hati hapa ikiwa tayari.",
+    "plainTextOptional": "Rasimu ya maandishi wazi (si lazima utumie Hati ya Google)",
+    "save": "Hifadhi",
+    "cancel": "Ghairi",
+    "noSpeechesYet": "Hakuna hotuba bado. Unganisha Hati ya Google au ubandike maandishi.",
+    "speechLabel": "Hotuba",
+    "untitled": "Haina jina",
+    "edit": "Hariri",
+    "speechDocument": "Hati ya hotuba",
+    "draftText": "Rasimu ya maandishi",
+    "noContentHint": "Unganisha Hati ya Google na Hariri, au ongeza maandishi wazi katika fomu."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Kamati",
+    "clearSearchTitle": "Futa utafutaji na uonyeshe wajumbe wote",
+    "vacantLabel": "Nafasi",
+    "searchVacantTitle": "Tafuta viti \"vilivyo wazi\" kwenye chumba",
+    "searchHint": "Charaza nchi, jina la mjumbe, shule, kiwakilishi, au \"nafasi\" ili kuangazia zinazolingana kwenye chumba. Bonyeza Enter ili kuruka hadi mechi ya kwanza; Esc inafuta. Bofya Haina ili kurukia viti tupu.",
+    "findLabel": "Tafuta mjumbe au mwanachama wa dais",
+    "searchPlaceholder": "Nchi, jina, shule...",
+    "matchesCount": "{matches} kati ya {total} viti mechi",
+    "searchAria": "Tafuta wajumbe",
+    "virtualRoomVacant": "Nafasi",
+    "profileAria": "Tazama wasifu: {country}",
+    "vacantSeatAria": "Kiti kisicho wazi",
+    "placardAria": "Bango {country}",
+    "gavelAria": "Gavel",
+    "yourContext": "Muktadha wako",
+    "roleLabel": "Jukumu",
+    "seatLabel": "Kiti",
+    "assignedLabel": "Imekabidhiwa",
+    "daisLabel": "Dais",
+    "phaseLabel": "Awamu",
+    "phaseVoting": "Kupiga kura",
+    "phaseDebate": "Mjadala",
+    "focusSearchTitle": "Lenga utafutaji (vichwa na majina ya kila siku yanalingana na hoja yako)",
+    "tipLabel": "Kidokezo",
+    "enterScrolls": "Ingiza vitabu",
+    "typeToFilterHint": "Charaza ili kuchuja - Ingiza kusogeza kwa mechi ya kwanza",
+    "noMatches": "Hakuna wajumbe au viti vinavyolingana.",
+    "digitalDisplay": "Onyesho la kidijitali",
+    "floorLabel": "Sakafu",
+    "staffSeatsHeading": "Wafanyakazi - viti",
+    "viewProfileAria": "Tazama wasifu: {title}",
+    "noProfileLinkAria": "{title} (hakuna kiungo cha wasifu)",
+    "committeeFloor": "Sakafu ya kamati",
+    "virtualRoomFigureAria": "Chumba halisi cha kamati - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Kuchuja wajumbe. Kiti cha kwanza kilichoangaziwa ni mechi ya kwanza kwenye pete.",
+    "helperText": "Orodha ya mabango ya nchi (kutoka kwa mgao), jina, shule, na viwakilishi kutoka kwa wasifu wa kila mjumbe. Hariri yako chini ya Wasifu. Viti vya kamati tupu vinaonyesha kama Nafasi. Bofya bango lililojazwa au kiti cha dais ili kufungua ukurasa wa mwanachama huyo (sogoa na uripoti kutoka hapo).",
+    "virtualRoomCaption": "Chumba cha kamati ya Umoja wa Mataifa cha Muundo Halisi chenye mabango ya wajumbe yanayoonyesha nchi, jina, shule na viwakilishi."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Ombi la kuzungumza",
+      "delegateFallback": "Mjumbe",
+      "needAllocation": "Unahitaji mgao ili kuomba kuzungumza.",
+      "alreadyQueued": "Tayari una ombi linaloendelea la kuzungumza kwenye foleni.",
+      "requested": "Aliomba kuzungumza. Utaonekana kwenye foleni.",
+      "requestFailed": "Imeshindwa kuomba kuzungumza.",
+      "helpBody": "Inatuma wajumbe wako kwenye foleni ya mwenyekiti. Unaweza kuwa na ombi moja la kusubiri/la sasa linaloendelea kwa wakati mmoja.",
+      "purposeLabel": "Kusudi la hiari (inaonyesha kwenye lebo ya foleni)",
+      "purposeHelpTitle": "Lebo ya kusudi",
+      "purposeHelpBody": "Maandishi haya yameambatishwa kwa jina la nchi yako ili wenyeviti waone ni kwa nini unaomba sakafu.",
+      "purposePlaceholder": "k.m. msaada + muhtasari wa marekebisho",
+      "requesting": "Inaomba...",
+      "rollPromptTitle": "Idhini ya mwenyekiti inahitajika",
+      "rollPromptBodyPickStatus": "Kikao kimeanza. Chagua hali yako ya kumwita ili kufungua kuzungumza na kupiga kura. Chaguo hili haliwezi kubadilishwa.",
+      "rollPromptBodyWaitSessionStart": "Wakisubiri mwenyekiti aanze kikao cha kamati.",
+      "rollPromptBodyWaitRollPrompt": "Inasubiri ombi la kumwita.",
+      "rollPromptBodyMarkedAbsent": "Kwa sasa umetiwa alama kuwa hupo. Mwambie mwenyekiti akuweke alama kuwa Umehudhuria kuzungumza na kupiga kura.",
+      "rollPromptBodyChecking": "Inakagua hali ya orodha yako...",
+      "rollPromptSaving": "Inahifadhi...",
+      "rollPromptPresent": "Wasilisha",
+      "rollPromptPresentVoting": "Kuwasilisha na kupiga kura"
+    },
+    "motionVoting": {
+      "votingProcedure": "Utaratibu wa kupiga kura",
+      "currentMotion": "Mwendo wa sasa",
+      "motioner": "Mwelekezi",
+      "majority": "Wengi",
+      "majoritySimple": "Rahisi",
+      "tally": "Ndiyo {yes} - Hapana {no} - Jumla {total}",
+      "help": "Jukwaa hurekodi kura ya kila wajumbe katika kikao. Kura za hoja hutumia Ndiyo au Hapana pekee (hapana pingamizi). Jumla huhesabu mabango pekee ambapo Ndiyo au Hapana ilirekodiwa; wajumbe wasiokuwepo wanarukwa."
+    },
+    "activeMotion": {
+      "currentMotion": "Mwendo wa sasa",
+      "motionFallback": "Mwendo",
+      "motioner": "Mwelekezi",
+      "majority": "Wengi",
+      "majoritySimple": "Rahisi",
+      "type": "Aina",
+      "timer": "Kipima muda",
+      "currentSpeaker": "Mzungumzaji wa sasa",
+      "nextSpeaker": "Spika inayofuata",
+      "speakerTimeLeftCap": "Muda wa mzungumzaji (kushoto / kofia)",
+      "speakerTimeLeftTotal": "Muda wa mzungumzaji (kushoto / jumla)",
+      "perSpeaker": "(kwa mzungumzaji)",
+      "paused": "(imesitishwa)",
+      "pauseReason": "Sitisha: {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "Muda wa kikao",
+      "sessionNotStarted": "Kipindi hakijaanza",
+      "limit": "Kikomo",
+      "limitRemaining": "{value} imesalia",
+      "limitOverBy": "kupita kwa {value}",
+      "quickLinkSession": "Kikao",
+      "quickLinkRoll": "Roll",
+      "quickLinkSpeakers": "Wazungumzaji",
+      "quickLinkMotions": "Mwendo",
+      "quickLinkTimer": "Kipima muda",
+      "dais": "Dais",
+      "pinned": "Imebandikwa",
+      "viewFullAnnouncement": "Tazama tangazo kamili",
+      "timerPausesReadOnly": "Kipima muda kimesitishwa (kusoma pekee)",
+      "speakerList": "Orodha ya Spika",
+      "speakerFallback": "Spika",
+      "rollCallYou": "Piga simu (wewe)",
+      "fullAnnouncement": "Tangazo kamili",
+      "daisAnnouncement": "Tangazo la Dais",
+      "close": "Funga",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Jina la kikao",
+      "sessionNamePlaceholder": "k.m. Kikao cha asubuhi",
+      "sessionNameSaving": "Inahifadhi...",
+      "sessionNameSaved": "Imehifadhiwa",
+      "sessionNameHint": "Huhifadhi kiotomatiki na huonekana kwenye historia ya kipindi.",
+      "title": "Kikao cha kamati",
+      "subtitle": "Anzisha au simamisha kikao cha kamati.",
+      "helpStartStop": "Anza huanza kipima muda/hali ya kikao cha kamati ya moja kwa moja kwa kila mtu. Kukomesha kunamaliza kipindi na kufuta kikomo cha saa kilichopo.",
+      "migrationUnavailable": "Vidhibiti vya kipindi havipatikani kwa muda hadi uhamishaji wa hifadhidata mpya zaidi utumike.",
+      "endTimeInFuture": "Chagua wakati wa mwisho katika siku zijazo, au ubadilishe hadi bila kikomo.",
+      "sessionStartUnavailable": "Muhuri wa muda wa kuanza kwa kipindi haupatikani hadi uhamishaji wa hivi punde utumike.",
+      "endTimeInFutureSetNoLimit": "Chagua muda wa mwisho katika siku zijazo, au usiweke kikomo.",
+      "sessionLimitUpdated": "Kikomo cha kikao kimesasishwa.",
+      "startedLabel": "Ilianza:",
+      "timeInLabel": "Saa katika:",
+      "timeUntilEndLabel": "Muda hadi mwisho:",
+      "overByValue": "kupita kwa {value}",
+      "modeLabel": "Hali:",
+      "modeStopwatchNoLimit": "Kipima saa (hakuna kikomo cha muda)",
+      "sessionNotRunning": "Kipindi hakifanyiki.",
+      "sessionLimit": "Kikomo cha kikao",
+      "sessionLimitModesTitle": "Njia za kikomo cha vipindi",
+      "sessionLimitModesHelp": "Hakuna: hakuna mwisho. Bajeti ya muda: huhesabiwa kuanzia mwanzo. Malizia: saa maalum katika saa za eneo lako.",
+      "sessionLimitOptional": "Hiari.",
+      "noneLabel": "Hakuna",
+      "noneDescription": "inaendesha hadi usimame.",
+      "timeBudgetLabel": "Bajeti ya wakati",
+      "timeBudgetDescription": "huhesabu kuanzia unapoanza.",
+      "endTimeLabel": "Wakati wa mwisho",
+      "endTimeDescription": "hutumia muda maalum wa saa (hubatilisha bajeti ikiwa zote mbili ziliwahi kuwekwa).",
+      "noneIndefinite": "Hakuna (kwa muda usiojulikana)",
+      "noneScheduledEndHint": "Hakuna mwisho uliopangwa; muda uliopita tu umeonyeshwa.",
+      "timeBudgetFromStart": "Bajeti ya muda tangu mwanzo",
+      "hoursLabel": "Saa",
+      "minutesLabel": "Dakika",
+      "minimumOneMinute": "(angalau dakika 1)",
+      "endAtLocalTime": "Mwisho saa (saa za ndani)",
+      "stopSession": "Acha kikao",
+      "saveLimit": "Hifadhi kikomo",
+      "saveLimitHelp": "Hutumia mipangilio iliyosasishwa ya kikomo wakati kipindi tayari kinaendelea, bila kusimamisha kipindi.",
+      "startSession": "Anza kipindi",
+      "sidebarUsePrefix": "Tumia utepe kwa",
+      "rollCall": "Piga simu",
+      "speakers": "Wazungumzaji",
+      "formalMotions": "Mwendo rasmi",
+      "timer": "Kipima muda",
+      "sidebarAnd": "na",
+      "announcements": "Matangazo",
+      "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Historia ya kikao",
+      "savedCount": "{count} imehifadhiwa",
+      "permissionsHint": "Viti vinaweza kubadili jina la viingilio. SMT/Msimamizi anaweza kubadilisha na kufuta maingizo.",
+      "empty": "Bado hakuna historia ya kipindi.",
+      "rename": "Badilisha jina",
+      "delete": "Futa",
+      "deleteConfirm": "Ungependa kufuta kipindi hiki kwenye historia?",
+      "sessionNamePrompt": "Jina la kikao",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Inaendelea"
+    },
+    "timerPage": {
+      "title": "Kipima muda",
+      "controlsTitle": "Vidhibiti vya kipima muda",
+      "controlsHelp": "Tumia sakafu ya Jumla kwa muda wa jumla wa mjadala, au kura ya Mwendo ili kuunganisha mwonekano na kipengee mahususi cha kura ya wazi.",
+      "tabSetup": "1) Kuweka",
+      "tabClock": "2) Vidhibiti vya saa",
+      "tabNotes": "3) Vidokezo vya hotuba",
+      "tabLog": "4) Sitisha logi",
+      "setupHelp": "Chagua ikiwa kipima muda hiki ni cha ghorofa ya jumla (kinaonekana kila mara kwa wajumbe) au kiambatanishwe na mwendo uliofunguliwa kwa ajili ya kupiga kura (wajumbe watakiona pekee ilhali kura hiyo ndiyo kipengele kinachotumika). Kwa muda wa kila mzungumzaji umewashwa, saa hubakia kuonekana wakati wa mkutano uliosimamiwa bila kujali. Sitisha saa / Anza kufungia saa au endelea kuhesabu. Weka muda wa Spika (unaosalia) na Muda wa Jumla kwa kujitegemea, kisha Hifadhi kipima muda. Presets kujaza wote kwa urefu sawa; unaweza kuhariri sehemu yoyote baadaye. Usitishaji huwekwa kwa sababu fupi.",
+      "namedPreset": "Imetajwa kuweka mapema",
+      "applyPreset": "Tekeleza uwekaji awali...",
+      "floorLabelDelegates": "Lebo ya sakafu (wajumbe)",
+      "floorLabelPlaceholder": "k.m. GSL 60s",
+      "timerPurpose": "Kusudi la kipima muda",
+      "purposeGeneralFloor": "Mjadala wa jumla / sakafu (haijafungamana na kura)",
+      "purposeMotionVote": "Fungua mwendo - kipima muda pekee wakati kura hiyo inatumika kwenye sakafu",
+      "openMotionForVoting": "Hoja iliyofunguliwa (lazima iwe wazi kwa ajili ya kupiga kura)",
+      "selectMotion": "Chagua mwendo...",
+      "untitled": "Haina jina",
+      "noOpenMotionWarning": "Hakuna hoja iliyofunguliwa kwa ajili ya kupiga kura. Fungua kura kwanza, au ubadilishe kusudi liwe la jumla.",
+      "clock": "Saa",
+      "running": "Kukimbia",
+      "paused": "Imesitishwa",
+      "saveToEnablePauseStart": "hifadhi kipima muda ili kuwezesha kusitisha/kuanza.",
+      "pauseReasonLogged": "Sitisha sababu (iliyoingia)",
+      "pauseReasonPlaceholder": "k.m. Hatua ya utaratibu, suala la teknolojia, mkutano usiodhibitiwa...",
+      "pauseClock": "Sitisha saa",
+      "startClock": "Saa ya kuanza",
+      "perSpeakerTitle": "Muda wa kila mzungumzaji (kasi iliyosimamiwa)",
+      "perSpeakerHelp": "Weka Jumla ya muda kama kikomo cha kila mzungumzaji na muda wa Spika kama muda uliosalia; Advance inasogezwa kwenye spika inayofuata na kuweka upya iliyobaki kwenye kofia.",
+      "currentSpeaker": "Mzungumzaji wa sasa",
+      "nextSpeaker": "Spika inayofuata",
+      "speechNotesCurrentSpeaker": "Vidokezo vya hotuba (mzungumzaji wa sasa)",
+      "speechNotesHelp": "Vidokezo vinahusishwa na maandishi ya kipima saa cha Sasa cha spika na, orodha ya spika ikiwa na mtu aliyetiwa alama ya Sasa, kaumu yake huhifadhiwa kwa marejeleo.",
+      "timerFloorLabel": "Kipima muda (sakafu):",
+      "speakerListCurrent": "Orodha ya Spika (ya sasa):",
+      "noCurrentDelegation": "Hakuna uwakilishi uliotiwa alama kuwa Sasa hivi kwenye orodha ya wazungumzaji.",
+      "note": "Kumbuka",
+      "notePlaceholder": "Pointi, POI, sauti, vifuatilizi...",
+      "saveSpeechNote": "Hifadhi dokezo la hotuba",
+      "recentNotes": "Maelezo yako ya hivi majuzi (kamati hii)",
+      "delete": "Futa",
+      "speakerTimeRemaining": "Muda wa mzungumzaji (uliosalia)",
+      "remainingHelpPerSpeaker": "Muda uliosalia kwa spika ya sasa (huweka upya unapofanya Mapema).",
+      "remainingHelpNormal": "Muda uliosalia kwa spika ya sasa (inaweza kuwa chini ya jumla).",
+      "totalTime": "Jumla ya muda",
+      "totalHelpPerSpeaker": "Kofia ya kila mzungumzaji (denominata kwenye sakafu; hujaza tena Advance iliyosalia kwa hii).",
+      "totalHelpNormal": "Urefu kamili wa sehemu hii ya kipima muda (iliyoonyeshwa baada ya kufyeka kwenye sakafu).",
+      "saveTimer": "Hifadhi kipima muda",
+      "advanceSpeakerReset": "Spika ya mapema na weka upya saa",
+      "recentPauseLog": "Kumbukumbu ya kusitisha hivi majuzi",
+      "noPauseEvents": "Bado hakuna matukio ya kusitisha yaliyowekwa kwa kamati hii.",
+      "openPauseLogHint": "Fungua kumbukumbu ya Sitisha ili ukague sababu za kusitisha zilizorekodiwa na mihuri ya muda.",
+      "saved": "Kipima muda kimehifadhiwa.",
+      "savedCapped": "Kipima muda kimehifadhiwa. Muda wa Spika ulikuwa mrefu kuliko jumla; imefungwa kwa jumla.",
+      "alreadyPaused": "Kipima muda tayari kimesitishwa.",
+      "pausedForCommittee": "Kipima muda kimesitishwa kwa kamati.",
+      "alreadyRunning": "Kipima muda tayari kinaendelea.",
+      "runningForCommittee": "Kipima muda kinagombea kwa kamati.",
+      "euTimerBoardTitle": "Bodi ya kipima muda ya Bunge la EU (vipima muda 11)",
+      "euTimerBoardHelp": "Kipima muda kimoja kwa kila chama, pamoja na Jumla ya muda, muda wa POI/POC na muda wa Spika. Tumia Tumia ili kunakili safu mlalo kwenye sehemu za kipima muda cha moja kwa moja kwenye kichupo cha Saa (saa ya mzungumzaji / Hifadhi kipima muda).",
+      "euTimerName": "Jina",
+      "euTimerTag": "Lebo",
+      "euTotalTime": "Jumla ya muda",
+      "euPoiPocTime": "Muda wa POI / POC",
+      "euSpeakerTime": "Muda wa Spika"
+    }
   }
 }

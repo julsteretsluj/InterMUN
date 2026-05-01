@@ -5,7 +5,7 @@ import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { CommitteeRoomDigitalMUNClient } from "@/components/committee-room/CommitteeRoomDigitalMUNClient";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
@@ -16,6 +16,7 @@ export default async function CommitteeRoomPage() {
   const tc = await getTranslations("common");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
+  const locale = await getLocale();
   const supabase = await createClient();
   const {
     data: { user },
@@ -65,7 +66,7 @@ export default async function CommitteeRoomPage() {
         siblingConferenceIds={debateBundle.siblingConferenceIds}
         conferenceName={
           payload.conference?.name
-            ? translateAgendaTopicLabel(tTopics, payload.conference.name)
+            ? translateAgendaTopicLabel(tTopics, payload.conference.name, locale)
             : tc("conference")
         }
         committeeName={

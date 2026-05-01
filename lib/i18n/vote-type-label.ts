@@ -3,10 +3,10 @@ type VoteTypeTranslator = {
   has?: (key: string) => boolean;
 };
 
-/** Localized label for `vote_items.vote_type` (motion / amendment / resolution). Uses `views.voting.voteTypes.*`. */
+/** Localized label for `vote_items.vote_type` (motion / amendment / resolution). Uses `voting.voteTypes.*`. */
 export function formatVoteTypeLabel(t: VoteTypeTranslator, voteType: string | null | undefined): string {
   const raw = (voteType ?? "motion").trim().toLowerCase() || "motion";
-  if (raw === "motion" || raw === "amendment" || raw === "resolution") {
+  if (raw === "motion" || raw === "amendment" || raw === "resolution" || raw === "agenda") {
     const key = `voteTypes.${raw}`;
     if (typeof t.has === "function" && !t.has(key)) {
       return raw.replace(/_/g, " ");

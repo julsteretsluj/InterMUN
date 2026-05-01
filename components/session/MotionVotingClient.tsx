@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 
 type VoteItemRow = {
@@ -23,7 +23,8 @@ type VoteTally = {
 };
 
 export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }) {
-  const t = useTranslations("views.session.motionVoting");
+  const locale = useLocale();
+  const t = useTranslations("session.motionVoting");
   const tTopics = useTranslations("agendaTopics");
   const supabase = useMemo(() => createClient(), []);
   const [voteItem, setVoteItem] = useState<VoteItemRow | null>(null);
@@ -126,7 +127,7 @@ export function MotionVotingClient({ voteItemId }: { voteItemId: string | null }
           <p className="text-xs uppercase tracking-wider text-brand-muted">{t("votingProcedure")}</p>
           <p className="font-semibold text-brand-navy truncate">
             {voteItem?.title?.trim()
-              ? translateAgendaTopicLabel(tTopics, voteItem.title)
+              ? translateAgendaTopicLabel(tTopics, voteItem.title, locale)
               : t("currentMotion")}
           </p>
           {voteItem?.description?.trim() ? (

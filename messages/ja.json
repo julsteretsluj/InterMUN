@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "まずステートメント用のモーションフロアを開きます。",
     "openMotionBlocksRecording": "動議はすでに投票に向けて開始されている。 さらにステートメントを記録する前に、それを閉じてください。",
     "statedMotionRecorded": "記載された動議が記録されました (まだ投票は受け付けられていません)。",
-    "statedMotionRemoved": "記載された動議は削除されました。"
+    "statedMotionRemoved": "記載された動議は削除されました。",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• ポイントログ",
     "formalMotions": "正式な動作",
     "timer": "タイマー",
-    "smtProfile": "プロフィール"
+    "smtProfile": "プロフィール",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -835,7 +852,8 @@
       "archive": "アーカイブ",
       "officialLinks": "公式リンク",
       "roomCode": "ルームコード",
-      "settings": "設定"
+      "settings": "設定",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "国連加盟国",
       "unSystem": "国連システム (創設者とメンバー)",
       "history": "国連の歴史"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "ソースを追加",
-      "sourceUrl": "ソースURL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (推奨)",
-      "urlHelp": "新しい Google ドキュメントの場合は、ボタンを使用してドキュメントのリンクをここに貼り付けます。",
-      "titleOptional": "タイトル (オプション)",
-      "saveChanges": "変更を保存する",
-      "editSource": "ソースを編集する",
-      "urlPlaceholderShort": "Google ドキュメントまたはその他の URL",
-      "empty": "まだソースがありません。 Google ドキュメントのリンクを追加してここに開きます。",
-      "sourceLabel": "ソース",
-      "openLink": "リンクを開く",
-      "embedHeading": "ソースドキュメント",
-      "notGoogleDoc": "この URL は Google ドキュメントではありません。 ここに埋め込んで編集するには、docs.google.com/document/d/… リンクを使用します。 それ以外の場合は、上のリンクを開いてください。"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "参加者はポジションペーパーを直接アップロードすることはできません。 別の種類のドキュメントを使用してください。",
-      "alertOnlyChairsPositionPaper": "議長/SMT/管理者のみがポジションペーパーをアップロードできます。",
-      "alertOnlySmtChairReport": "SMT/管理者のみが議長レポートをアップロードできます。",
-      "alertOnlySmtRop": "SMT/管理者のみが RoP ドキュメントをアップロードできます。",
-      "alertOnlySmtAwardCriteria": "SMT/管理者のみが受賞基準ドキュメントをアップロードできます。",
-      "alertNeedContentOrUrl": "ローカル テキスト コンテンツまたは Google ドキュメント URL を追加します。",
-      "confirmDelete": "この文書を削除しますか?",
-      "delegatePrepTitle": "準備文書セクション",
-      "delegatePrepBody": "このページから、独自の <prep>準備ドキュメント</prep> を直接アップロード、表示、編集できます。",
-      "positionPaperGuideTitle": "用紙ガイドの位置を決める",
-      "positionPaperGuideBlurb": "最終的な PDF が準備されている間に、プレースホルダー ガイドをダウンロードしてください。",
-      "downloadPlaceholderGuide": "プレースホルダー ガイドをダウンロード",
-      "addDocument": "ドキュメントの追加",
-      "tabs": {
-        "ariaLabel": "ドキュメントセクション",
-        "library": "図書館",
-        "compose": "作曲する",
-        "composeHint": "このタブから新しいドキュメントを開始するか、既存の下書きを編集します。"
-      },
-      "newDocumentTitle": "新しいドキュメント",
-      "editDocumentTitle": "ドキュメントの編集",
-      "typeLabel": "タイプ",
-      "types": {
-        "position_paper": "ポジションペーパー",
-        "chair_report": "委員長報告",
-        "rop": "RoP",
-        "award_criteria": "受賞基準",
-        "chair_notes": "議長メモ",
-        "prep_doc": "準備文書"
-      },
-      "delegatePositionPaperNote": "ポジションペーパーは議長によってフィードバックとともにアップロードされます。",
-      "delegateOwner": "代理所有者",
-      "chairRecipient": "議長の受取人",
-      "titleLabel": "タイトル",
-      "titlePlaceholder": "文書のタイトル",
-      "googleDocsUrl": "Google ドキュメントの URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (アプリに表示/編集を埋め込む)",
-      "googleDocsHelp": "新しい Google ドキュメントを使用して新しいタブで Google を開き、ここにドキュメントのリンクを貼り付けます。 以下のプレーンテキストはオプションです。 すべてのドキュメントには、ローカル テキスト、Google ドキュメント リンク、またはその両方が必要です。",
-      "plainTextOptional": "プレーンテキスト (オプション)",
-      "plainTextPlaceholder": "メモまたは下書きテキスト…",
-      "chairFeedbackLabel": "議長のフィードバック",
-      "chairFeedbackPlaceholder": "代表ポジションペーパーに対するフィードバック...",
-      "empty": "まだ書類がありません。 ドキュメントを追加するか、Google ドキュメントをリンクします。",
-      "sidebarDocumentLabel": "書類",
-      "sections": {
-        "chairReports": "委員長報告",
-        "rop": "RoP",
-        "awardCriteria": "受賞基準",
-        "prepDocuments": "準備書類",
-        "chairNotes": "議長メモ",
-        "otherDocuments": "その他の書類"
-      },
-      "untitled": "無題",
-      "linkedDocumentHeading": "リンクされたドキュメント",
-      "notesHeading": "注意事項",
-      "noGoogleDocYet": "まだ Google ドキュメントがリンクされていません。 [編集] を使用して、docs.google.com/document/d/… URL を追加します。",
-      "chairFeedbackHeading": "議長のフィードバック",
-      "noFeedbackYet": "まだフィードバックは追加されていません。"
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "最初に代理人のメールアドレスを入力します。",
-      "sentToDelegate": "{メール} に送信されました。",
-      "newResolution": "新しい解決策",
-      "maxDraftResolutions": "この委員会にはすでに {count} 件の決議案があります。",
-      "googleDocLink": "Googleドキュメントへのリンク",
-      "googleDocUrlPlaceholder": "Google ドキュメント URL (docs.google.com/document/d/… — 埋め込みと編集に使用)",
-      "googleDocUrlHelp": "新しい Google ドキュメントが別のタブで開きます。 アドレスバーから URL をコピーし、ここに貼り付けます。",
-      "mainSubmittersPlaceholder": "主要な送信者 (ユーザー ID、カンマ区切り)",
-      "coSubmittersPlaceholder": "共同提出者 (ユーザー ID、カンマ区切り)",
-      "create": "作成する",
-      "cancel": "キャンセル",
-      "openInNewTab": "新しいタブで開く",
-      "noGoogleDocLink": "Google ドキュメントのリンクがありません",
-      "visibleToOtherBloc": "他のブロックからも参照可能",
-      "resolutionCounts": "メインサブ: {main} | 副サブ: {co} | 署名者: {署名者}",
-      "blocButton": "ブロック {名前} ({スタンス})",
-      "signVirtually": "バーチャルで署名（メインサブウーファーに通知）",
-      "shareByEmail": "解決策をメールで共有する",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "代理人に送信",
-      "clauseEditor": "条項エディタ",
-      "noClausesYet": "まだ条項はありません。",
-      "clauseNumber": "条項 {数値}",
-      "saveClause": "句の保存",
-      "delete": "消去",
-      "addClausePlaceholder": "新しい条項を追加...",
-      "addClause": "句を追加",
-      "clauseVoteHistory": "条項の投票履歴",
-      "noClauseOutcomesYet": "条項の投票結果はまだ記録されていません。",
-      "clauseFallback": "句",
-      "passed": "合格した",
-      "failed": "失敗した",
-      "motionId": "モーション {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "投票セクション",
-        "open": "開ける",
-        "closed": "閉店"
-      },
-      "requiredMajority": "必要な過半数",
-      "helpRequiredMajorityTitle": "必要な過半数",
-      "helpRequiredMajorityBody": "合否を決定するために使用される投票しきい値を選択します。 「シンプル」が半分以上。 「2/3」には超過半数が必要です。",
-      "majoritySimple": "単純",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} 過半数",
-      "mustVote": "投票しなければなりません",
-      "helpMustVoteTitle": "投票しなければなりません",
-      "helpMustVoteBody": "この動議を「必須投票」項目としてマークします。 これは、要件を参加者に伝えるために使用されます (委員会の設定に応じて)。",
-      "saveSettings": "設定を保存する",
-      "delegateBlurb": "議席は、開会中の投票を記録します（点呼など）。 ここでの動議投票は、はい/いいえのみに従います (棄権は使用されません)。 集計を追跡できます。 参加者はアプリで投票しません。",
-      "yes": "はい",
-      "no": "いいえ",
-      "ballots": "投票用紙",
-      "total": "合計",
-      "outcome": "結果",
-      "passed": "合格した",
-      "failed": "失敗した",
-      "noRecordedVotes": "記録された投票はありません",
-      "reopenMotion": "モーションを再開する",
-      "editRecordOpen": "レコードを編集…",
-      "hideSettings": "設定を非表示にする",
-      "preliminaryPassing": "合格（暫定）",
-      "preliminaryFailing": "失敗(暫定)",
-      "delegateRollCall": "参加者点呼 ({count})",
-      "noSeatedDelegates": "この議案には着席可能な参加者がいません。",
-      "rollPrefix": "ロール：",
-      "recordedPrefix": "記録:",
-      "recordedYes": "はい",
-      "recordedNo": "いいえ",
-      "recordedAbstain": "棄権する",
-      "recordedNone": "—",
-      "abstain": "棄権する",
-      "clear": "クリア",
-      "closeMotion": "クローズモーション",
-      "mustVoteBadge": "投票しなければなりません",
-      "canVoteBadge": "投票できます",
-      "noMotions": "まだモーションはありません。",
-      "currentOpenMotion": "現在のオープンモーション",
-      "noOpenMotion": "現在オープンモーションはありません。",
-      "recentClosedMotions": "最近のクローズドモーション",
-      "noClosedMotions": "まだクローズモーションはありません。",
-      "untitled": "無題",
-      "voteTypes": {
-        "motion": "モーション",
-        "amendment": "修正",
-        "resolution": "解決"
-      },
-      "roll": {
-        "absent": "欠席（ロール）",
-        "present_abstain": "出席 — 棄権してもよい (ロール)",
-        "present_voting": "出席かつ投票（ロール）",
-        "unknown": "— (ロール)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "プロフィールセクション",
-        "overview": "概要",
-        "awards": "受賞歴",
-        "private": "個人的な記録",
-        "settings": "プロファイル設定"
-      },
-      "profilePicture": "プロフィール写真",
-      "uploadFile": "ファイルをアップロードする",
-      "uploading": "アップロード中…",
-      "photoSaved": "写真がアップロードされて保存されました。",
-      "orUrl": "またはURLで設定",
-      "urlPlaceholder": "https://...",
-      "name": "名前",
-      "username": "ユーザー名",
-      "usernamePlaceholder": "例えば アレックス_1999",
-      "pronouns": "代名詞",
-      "customPronounNote": "あなたのプロフィールには、ここでは受け入れられなくなったカスタム代名詞セットが含まれていました。 上のオプションを選択します (または空白のままにします)。 保存すると古い値が置き換えられます。",
-      "school": "学校",
-      "schoolPlaceholder": "例えば リンカーン高校",
-      "grade": "学年",
-      "selectGrade": "グレードを選択してください",
-      "conferencesAttended": "出席したカンファレンス",
-      "awardsComma": "受賞歴 (カンマ区切り)",
-      "awardsPlaceholder": "最優秀代表者、佳作",
-      "allocation": "割り当て",
-      "selectAllocation": "割り当ての選択",
-      "noAllocationsPlaceholder": "利用可能な委員会の割り当てはありません",
-      "saveProfile": "プロファイルの保存",
-      "saved": "プロフィールが保存されました。",
-      "saveFailed": "プロフィールを保存できませんでした。",
-      "errUsernamePattern": "ユーザー名は 3 ～ 32 文字 (文字、数字、_、.、-) である必要があります。",
-      "errPronounsPreset": "リストから代名詞を選択します。",
-      "errImageType": "画像ファイルを選択してください。",
-      "errImageSize": "画像が大きすぎます (最大 5 MB)。",
-      "errUploadFailed": "アップロードに失敗しました。",
-      "errStorageSetup": "プロフィール画像の保存が設定されていません。 Supabase プロジェクトで、migration 00100_profile_pictures_storage_bucket.sql を実行するか、profile-pictures という名前のパブリック ストレージ バケットを作成します (README を参照)。",
-      "errPublicUrl": "アップロードされた画像のパブリック URL を解決できませんでした。",
-      "fallbacks": {
-        "yourCountry": "あなたの国",
-        "committeeSession": "委員会セッション",
-        "delegate": "代表者",
-        "speechNote": "スピーチメモ",
-        "untitledMotion": "無題のモーション",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "{旗} {国} の代表者を歓迎します",
-        "subtitle": "何から始めたいですか?",
-        "links": {
-          "documents": "書類",
-          "notes": "注意事項",
-          "committeeRoom": "委員会室",
-          "runningNotes": "ランニングノート",
-          "ideas": "アイデア",
-          "guides": "ガイド",
-          "sources": "情報源",
-          "resolutions": "決議",
-          "speeches": "スピーチ",
-          "stances": "スタンス",
-          "crisisSlides": "危機のスライド",
-          "report": "報告",
-          "motions": "モーション",
-          "points": "ポイント"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "あなたのプロフィールにある賞",
-        "rank": "ランク {ランク}",
-        "pending": {
-          "tab": "保留中の指名",
-          "title": "保留中の議長指名",
-          "descriptionSingle": "チェアによって保存され、レビューのために SMT と共有されました。確認後、最終的な賞品が以下に表示されます。",
-          "descriptionTabbed": "チェアによって保存され、レビューのために SMT と共有されました。最終的な賞は確認後に表示されます。"
-        },
-        "recorded": {
-          "tab": "受賞歴の記録",
-          "title": "受賞歴の記録",
-          "description": "議長または SMT があなたをアワードトラッカーに割り当てるとリストされます。最終的な評価はカンファレンスのルールに従います。"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "あなた、委員長、および関連する委員会の SMT のみに表示されます。",
-        "points": {
-          "title": "椅子のポイント（プライベート）"
-        },
-        "speechNotes": {
-          "title": "議長スピーチメモ（非公開）"
-        },
-        "motions": {
-          "title": "移動したモーション",
-          "description": "委員会のレビューと SMT の監視のためにプロファイルに保存されます。"
-        }
-      },
-      "discipline": {
-        "title": "懲戒処分状況（非公開）",
-        "statusLine": "警告: {warnings} · ストライキ: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "投票が無効になっています",
-        "speakingSuspended": "発言停止",
-        "removedFromCommittee": "委員会から外された",
-        "updated": "更新日: {値}"
-      },
-      "preview": {
-        "ariaLabel": "プロファイルのプレビュー",
-        "title": "プレビュー",
-        "yourName": "あなたの名前",
-        "usernameNotSet": "ユーザー名が設定されていません",
-        "gradeValue": "グレード {グレード}",
-        "awards": "受賞歴"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "手順規則 (RoP)",
-          "content": "# 手続き規則\n\n ## ポイントとモーション\n - **注文時点**: 正しい手順\n - **情報ポイント**: 講演者への質問\n - **個人の特権のポイント**: 個人の快適さ\n - **テーブルへの動議**: 討論を延期する\n - **延期の動議**: セッションを終了します\n\n ## 投票\n - 手続き上の事項については単純過半数\n - 実質的な事項については 2/3 の過半数\n - 要求された場合は点呼投票"
-        },
-        "examples": {
-          "title": "例",
-          "content": "# 例\n\n ## 解像度フォーマット\n 「」\n 総会、\n ...\n 1. 加盟国に対し次のことを求める。 \n2. 国際社会に次のように要請します...\n 「」\n\n ## ポジションペーパーの構造\n 1. 背景\n 2. 国の政策\n 3. 提案されるソリューション"
-        },
-        "templates": {
-          "title": "テンプレート",
-          "content": "# テンプレート\n\n ## 議長レポートのテンプレート\n - 委員会の概要\n - 主要な議論のポイント\n - 可決された決議\n - 推奨事項"
-        },
-        "chairReport": {
-          "title": "議長報告",
-          "content": "# 議長報告\n\n 委員会の議事録と結果をここに文書化します。"
-        }
-      },
-      "edit": "編集",
-      "guideDocument": "ガイド文書",
-      "additionalNotes": "追加の注意事項",
-      "noContentYet": "まだコンテンツはありません。",
-      "titlePlaceholder": "タイトル",
-      "googleDocsUrl": "Google ドキュメントの URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "新しい Google ドキュメントが別のタブで開きます。 共有可能なリンクを貼り付けて、代理人がここでドキュメントを開くことができるようにします (表示/編集は Google 共有に依存します)。",
-      "markdownOptional": "Markdown メモ (Google ドキュメントを使用する場合はオプション)",
-      "save": "保存",
-      "cancel": "キャンセル",
-      "createNewGuide": "新しいガイドを作成する",
-      "slugPlaceholder": "ナメクジ（ユニーク）",
-      "titleLowerPlaceholder": "タイトル",
-      "googleDocsUrlOptional": "Google ドキュメントの URL (オプション)",
-      "markdownContentOptional": "マークダウンコンテンツ (オプション)",
-      "create": "作成する",
-      "glossary": {
-        "title": "MUN アジェンダ用語集",
-        "subtitle": "委員会の規約や現在の議題トピックに合わせた独自の用語。",
-        "committeeCode": "委員会コード: {コード}",
-        "topicTag": "トピック: {トピック}",
-        "sources": {
-          "core": "コア",
-          "committee": "委員会",
-          "topic": "トピック"
-        },
-        "terms": {
-          "delegation": {
-            "term": "代表団",
-            "definition": "委員会において 1 つの州または団体を代表する国またはオブザーバー チーム。"
-          },
-          "placard": {
-            "term": "プラカード",
-            "definition": "議場を要求し、投票し、手続き上の動議を合図するために使用される国の標識。"
-          },
-          "dais": {
-            "term": "ダイス",
-            "definition": "討論を司会し、手順を適用し、発言順序を管理する議長チーム。"
-          },
-          "quorum": {
-            "term": "定足数",
-            "definition": "正式な業務と投票を行うために必要な代表団の最小数。"
-          },
-          "motion": {
-            "term": "モーション",
-            "definition": "党員集会の種類や発言時間など、議論の流れを変えるための正式な提案。"
-          },
-          "point_of_order": {
-            "term": "注文時点",
-            "definition": "委員会規則に基づいて手順が誤って適用されている場合の介入。"
-          },
-          "moderated_caucus": {
-            "term": "穏健党員集会",
-            "definition": "定義されたサブトピックに関する短時間のスピーチを含む、構造化されたディベート セグメント。"
-          },
-          "unmoderated_caucus": {
-            "term": "司会なしの党員集会",
-            "definition": "参加者が自由にアイデアを草案したり統合したりできる非公式の交渉期間。"
-          },
-          "draft_resolution": {
-            "term": "決議案",
-            "definition": "最終的な投票と採択の前に提案された委員会の行動の作業テキスト。"
-          },
-          "amendment": {
-            "term": "修正",
-            "definition": "草案テキストに変更が提案され、友好的または非友好的として投票されました。"
-          },
-          "operative_clause": {
-            "term": "運用条項",
-            "definition": "委員会が何を提案するかを説明する行動指向の番号付き条項。"
-          },
-          "preambulatory_clause": {
-            "term": "前出条項",
-            "definition": "背景原則、懸念事項、および以前の枠組みを引用した文脈設定条項。"
-          },
-          "right_of_reply": {
-            "term": "返信する権利",
-            "definition": "代表団の尊厳や地位に影響を与えた直接の発言に応答する機会。"
-          },
-          "veto_power": {
-            "term": "拒否権",
-            "definition": "実質的な決議案を阻止する安保理常任理事国の権限。"
-          },
-          "chapter_vii": {
-            "term": "第 7 章",
-            "definition": "平和に対する脅威、制裁、武力行使に関する国連憲章の権限。"
-          },
-          "sanctions_regime": {
-            "term": "制裁制度",
-            "definition": "直接的な軍事行動をとらずに行動に影響を与えるために使用される調整された制限。"
-          },
-          "arms_control": {
-            "term": "軍備管理",
-            "definition": "武器の種類、数量、配備を制限する協定と検証システム。"
-          },
-          "non_proliferation": {
-            "term": "不拡散",
-            "definition": "核兵器、化学兵器、生物兵器、または先進兵器の能力の拡散を防止する政策。"
-          },
-          "confidence_building_measures": {
-            "term": "信頼醸成措置",
-            "definition": "誤解や紛争のリスクを軽減する透明性とコミュニケーションツール。"
-          },
-          "universal_periodic_review": {
-            "term": "普遍的な定期レビュー",
-            "definition": "各国連加盟国が権利に関する勧告を報告し受け取るピアレビュープロセス。"
-          },
-          "special_rapporteur": {
-            "term": "特別報告者",
-            "definition": "テーマ別または国の権利問題を監視し報告するために任命された独立した専門家。"
-          },
-          "treaty_body": {
-            "term": "条約本体",
-            "definition": "特定の人権条約の履行を監督する専門家委員会。"
-          },
-          "public_health_emergency": {
-            "term": "公衆衛生上の緊急事態",
-            "definition": "緊急に調整された国内および国際的な対応が必要な深刻な流行事象。"
-          },
-          "surveillance": {
-            "term": "疫学監視",
-            "definition": "健康データを継続的に収集および分析して、病気の傾向を検出および追跡します。"
-          },
-          "health_systems": {
-            "term": "医療システムの強化",
-            "definition": "信頼性の高い医療提供のために、労働力、資金調達、物流、ガバナンスを改善します。"
-          },
-          "transnational_crime": {
-            "term": "国際的な組織犯罪",
-            "definition": "ネットワークや違法市場を通じて国境を越えて連携した犯罪活動。"
-          },
-          "illicit_trafficking": {
-            "term": "違法な人身売買",
-            "definition": "管轄区域を越えた麻薬、武器、人、物品の違法な移動。"
-          },
-          "rule_of_law_capacity": {
-            "term": "法の支配能力",
-            "definition": "公正に調査、訴追、権利を保護するための司法制度の制度的能力。"
-          },
-          "sustainable_development": {
-            "term": "持続可能な発展",
-            "definition": "社会の進歩、経済的機会、環境保護のバランスをとった成長モデル。"
-          },
-          "financing_for_development": {
-            "term": "開発のための資金調達",
-            "definition": "長期的な開発優先事項をサポートする公的および民間の資金調達メカニズム。"
-          },
-          "policy_coordination": {
-            "term": "政策調整",
-            "definition": "重複を避け、集団的な影響力を高めるために、州と政府機関の行動を調整する。"
-          },
-          "child_protection": {
-            "term": "児童の保護",
-            "definition": "あらゆる場面での子どもに対する搾取、虐待、暴力を防止するための措置。"
-          },
-          "education_access": {
-            "term": "教育へのアクセス",
-            "definition": "すべての子どもたちに包括的、公平かつ継続的な学習の機会を確保する。"
-          },
-          "humanitarian_response": {
-            "term": "人道的対応",
-            "definition": "危機や紛争状況における緊急のニーズに対処する迅速な救援活動。"
-          },
-          "gender_mainstreaming": {
-            "term": "ジェンダー主流化",
-            "definition": "ジェンダー分析を政策設計、実施、評価に統合する。"
-          },
-          "gender_based_violence": {
-            "term": "ジェンダーに基づく暴力",
-            "definition": "性同一性、役割、または不平等な力関係に基づいて誰かに向けられる危害。"
-          },
-          "economic_empowerment": {
-            "term": "経済的エンパワーメント",
-            "definition": "ディーセント・ワーク、財政、所有権、意思決定権へのアクセスを拡大する。"
-          },
-          "source_attribution": {
-            "term": "出典の帰属",
-            "definition": "情報の出所を明確に引用して、主張を検証し、文脈を説明できるようにします。"
-          },
-          "verified_reporting": {
-            "term": "検証済みレポート",
-            "definition": "争点となっている事実を公表する前に裏付けを要求するジャーナリズムの基準。"
-          },
-          "editorial_independence": {
-            "term": "編集上の独立性",
-            "definition": "報告に関する決定を政治的圧力や利害関係者の影響から分離する。"
-          },
-          "climate_mitigation": {
-            "term": "気候変動の緩和",
-            "definition": "温室効果ガスの排出量を削減したり、長期的な炭素除去を増加させる行動。"
-          },
-          "climate_adaptation": {
-            "term": "気候適応",
-            "definition": "気候関連の影響に対する脆弱性を軽減する政策と投資。"
-          },
-          "cyber_norms": {
-            "term": "サイバー規範",
-            "definition": "デジタルおよびサイバー領域における国家の責任ある行動に対する期待の共有。"
-          },
-          "critical_infrastructure": {
-            "term": "重要なインフラストラクチャ",
-            "definition": "電力、水、医療、通信など、回復力が必要な重要なシステム。"
-          },
-          "epidemiology": {
-            "term": "疫学",
-            "definition": "病気のパターン、原因、集団内の分布の研究。"
-          },
-          "preparedness_response": {
-            "term": "準備と対応",
-            "definition": "緊急事態を封じ込めて管理するための計画、調整、緊急行動。"
-          },
-          "non_refoulement": {
-            "term": "ノンルフールマン",
-            "definition": "重大な危害に直面する場所への人々の帰還を禁止する原則。"
-          },
-          "durable_solutions": {
-            "term": "耐久性のあるソリューション",
-            "definition": "避難民の長期的な成果: 帰還、地域統合、再定住。"
-          },
-          "nuclear_safeguards": {
-            "term": "核保障措置",
-            "definition": "核物質が兵器用途に転用されないことを保証する検証措置。"
-          },
-          "counter_terrorism": {
-            "term": "テロ対策",
-            "definition": "テロ活動に対する統合された法的、予防的、安全対策。"
-          },
-          "due_process": {
-            "term": "適正手続き",
-            "definition": "捜査、訴追、制裁中の権利を保護する公正な法的手続き。"
-          },
-          "resource_security": {
-            "term": "リソースのセキュリティ",
-            "definition": "経済的および環境的ストレス下でも食料、水、エネルギーへの確実なアクセス。"
-          },
-          "resilience": {
-            "term": "回復力",
-            "definition": "ショックを吸収し、効果的に回復するための地域社会や機関の能力。"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "アイデアを編集する",
-      "googleDocsUrl": "Google ドキュメントの URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "短いアイデアのテキスト (オプション)",
-      "save": "保存",
-      "cancel": "キャンセル",
-      "addIntro": "Google ドキュメントを追加して、解決策のアイデアを作成するか、短いメモ (またはその両方) を入力します。",
-      "googleDocsCreateHelp": "新しい Google ドキュメントが別のタブで開きます。 リンクを作成したら、ここに貼り付けます。",
-      "resolutionIdeaPlaceholder": "解決策のアイデア...",
-      "add": "追加",
-      "noIdeasYet": "まだアイデアはありません。",
-      "ideaLabel": "アイデア",
-      "ideaFallback": "アイデア {数値}",
-      "linkedDoc": "リンクされたドキュメント",
-      "addedOn": "{日付}を追加しました",
-      "edit": "編集",
-      "delete": "消去",
-      "ideaDocument": "アイデアドキュメント",
-      "summary": "まとめ",
-      "emptyIdea": "空虚な考え。"
-    },
-    "stances": {
-      "heatmapTitle": "簡単なスタンスの概要 (ヒートマップ)",
-      "heatmapHelp": "あなたの割り当ては____をどの程度サポートしていますか? (1-5スケール)",
-      "topicPlaceholder": "例えば 気候変動対策",
-      "extentLabel": "範囲 (1 ～ 5):",
-      "extentHelpTitle": "範囲 (1-5)",
-      "extentHelpBody": "1 は、割り当てがそのトピックに対するサポートをほとんど持たないことを意味し、5 は強力なサポートを意味します。 委員会でのあなたの立場に合った番号を選択してください。",
-      "add": "追加",
-      "viewOnlyHeatmap": "スタッフ向けの表示専用ヒートマップ。",
-      "notesPerAllocation": "割り当てごとのメモ",
-      "noAllocationsYet": "まだ割り当てはありません",
-      "notesPlaceholder": "この割り当てのスタンスノート...",
-      "noteLanguageWarning": "読者への警告: このメモには不適切な表現が含まれている可能性があります。",
-      "save": "保存",
-      "saveHelpTitle": "スタンスノートを保存する",
-      "saveHelpBody": "この割り当てのスタンスノートを保存します。 スタッフや（委員会の設定に応じて）他の参加者も閲覧できます。"
-    },
-    "speeches": {
-      "newSpeech": "新しいスピーチ",
-      "speechTitlePlaceholder": "講演タイトル",
-      "googleDocsUrl": "Google ドキュメントの URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "新しいタブで Google を開きます。 準備ができたら、ドキュメントの URL をここに貼り付けます。",
-      "plainTextOptional": "プレーンテキストの下書き (Google ドキュメントを使用する場合はオプション)",
-      "save": "保存",
-      "cancel": "キャンセル",
-      "noSpeechesYet": "まだスピーチはありません。 Google ドキュメントをリンクするか、テキストを貼り付けます。",
-      "speechLabel": "スピーチ",
-      "untitled": "無題",
-      "edit": "編集",
-      "speechDocument": "スピーチ文書",
-      "draftText": "草案テキスト",
-      "noContentHint": "Google ドキュメントを編集にリンクするか、フォームにプレーンテキストを追加します。"
-    },
-    "committeeRoom": {
-      "committeeLabel": "委員会",
-      "yourContext": "あなたのコンテキスト",
-      "roleLabel": "役割",
-      "seatLabel": "シート",
-      "clearSearchTitle": "検索をクリアしてすべての委任を表示",
-      "vacantLabel": "空いている",
-      "assignedLabel": "割り当て済み",
-      "daisLabel": "ダイス",
-      "phaseLabel": "段階",
-      "phaseVoting": "投票",
-      "phaseDebate": "議論",
-      "focusSearchTitle": "フォーカス検索 (クエリに一致するタイトルと名前)",
-      "tipLabel": "ヒント",
-      "searchVacantTitle": "室内の「空席」を検索する",
-      "searchHint": "国、代表者名、学校、代名詞、または「空席」を入力して、ルーム内で一致するものを強調表示します。 Enter を押して最初の一致にジャンプします。 Esc でクリアします。 「空席」をクリックして空席にジャンプします。",
-      "findLabel": "代表団または演壇メンバーを探す",
-      "searchPlaceholder": "国、名前、学校…",
-      "matchesCount": "{total} 席中 {matches} が一致",
-      "enterScrolls": "巻物を入力してください",
-      "typeToFilterHint": "フィルターに入力 - 最初に一致するスクロールを入力してください",
-      "noMatches": "一致する代表団や演壇席はありません。",
-      "digitalDisplay": "デジタル表示",
-      "floorLabel": "床",
-      "staffSeatsHeading": "スタッフ - 席",
-      "searchAria": "代表団を検索する",
-      "virtualRoomVacant": "空いている",
-      "profileAria": "プロフィールを表示: {国}",
-      "vacantSeatAria": "空席",
-      "placardAria": "プラカード {国}",
-      "gavelAria": "小槌",
-      "viewProfileAria": "プロフィールを見る: {タイトル}",
-      "noProfileLinkAria": "{title} (プロフィールリンクなし)",
-      "committeeFloor": "委員会フロア",
-      "virtualRoomFigureAria": "仮想委員会室 - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "委任のフィルタリング。 最初に強調表示される席は、リングでの最初の試合です。",
-      "helperText": "プラカードには、各代表者のプロフィールにある国 (割り当てから)、名前、学校、代名詞がリストされています。 「プロフィール」で自分のプロフィールを編集します。 空の委員会席は「空席」と表示されます。 記入されたプラカードまたは演壇をクリックすると、そのメンバーのページが開きます (そこからチャットとレポートが表示されます)。",
-      "virtualRoomCaption": "国、名前、学校、代名詞を示す代表者のプラカードを掲げた仮想モデル国連委員会室。"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "発言のリクエスト",
-        "delegateFallback": "代表者",
-        "needAllocation": "発言をリクエストするには割り当てが必要です。",
-        "alreadyQueued": "すでにキューにアクティブな発言リクエストがあります。",
-        "requested": "発言を求められた。 列に並びます。",
-        "requestFailed": "発言の要求に失敗しました。",
-        "helpBody": "代表団を議長の列に送ります。 一度に 1 つのアクティブな待機中/現在のリクエストを持つことができます。",
-        "purposeLabel": "オプションの目的 (キューラベルに表示)",
-        "purposeHelpTitle": "目的ラベル",
-        "purposeHelpBody": "このテキストは国名に追加されるため、議長は発言を要求する理由を理解できます。",
-        "purposePlaceholder": "例えば サポート + 修正の概要",
-        "requesting": "リクエスト中...",
-        "rollPromptTitle": "議長の承認が必要です",
-        "rollPromptBodyPickStatus": "セッションが始まりました。 点呼のステータスを選択して、発言と投票のロックを解除します。 この選択は変更できません。",
-        "rollPromptBodyWaitSessionStart": "委員長が委員会を開始するのを待っています。",
-        "rollPromptBodyWaitRollPrompt": "点呼プロンプトを待っています。",
-        "rollPromptBodyMarkedAbsent": "現在欠席マークが付いています。 発言して投票するために出席者にマークを付けるよう議長に依頼してください。",
-        "rollPromptBodyChecking": "ロールのステータスを確認しています...",
-        "rollPromptSaving": "保存中...",
-        "rollPromptPresent": "現在",
-        "rollPromptPresentVoting": "プレゼンと投票"
-      },
-      "motionVoting": {
-        "votingProcedure": "投票手順",
-        "currentMotion": "現在のモーション",
-        "motioner": "モーションナー",
-        "majority": "過半数",
-        "majoritySimple": "単純",
-        "tally": "はい {はい} - いいえ {いいえ} - 合計 {total}",
-        "help": "演壇は、会期中の各代表団の投票を記録する。 動議の投票では、「はい」または「いいえ」のみが使用されます (棄権はありません)。 合計には、「はい」または「いいえ」が記録されたプラカードのみがカウントされます。 不在の代表はスキップされます。"
-      },
-      "activeMotion": {
-        "currentMotion": "現在のモーション",
-        "motionFallback": "モーション",
-        "motioner": "モーションナー",
-        "majority": "過半数",
-        "majoritySimple": "単純",
-        "type": "タイプ",
-        "timer": "タイマー",
-        "currentSpeaker": "現在のスピーカー",
-        "nextSpeaker": "次の講演者",
-        "speakerTimeLeftCap": "講演者時間（左/キャップ）",
-        "speakerTimeLeftTotal": "講演時間（左/合計）",
-        "perSpeaker": "(スピーカーごと)",
-        "paused": "(一時停止)",
-        "pauseReason": "一時停止: {理由}"
-      },
-      "floorStatus": {
-        "sessionTime": "セッション時間",
-        "sessionNotStarted": "セッションが開始されていません",
-        "limit": "限界",
-        "limitRemaining": "残り {値}",
-        "limitOverBy": "{値}以上",
-        "quickLinkSession": "セッション",
-        "quickLinkRoll": "ロール",
-        "quickLinkSpeakers": "スピーカー",
-        "quickLinkMotions": "モーション",
-        "quickLinkTimer": "タイマー",
-        "dais": "ダイス",
-        "pinned": "固定された",
-        "viewFullAnnouncement": "お知らせ全文を表示",
-        "timerPausesReadOnly": "タイマー一時停止 (読み取り専用)",
-        "speakerList": "講演者リスト",
-        "speakerFallback": "スピーカー",
-        "rollCallYou": "点呼（あなた）",
-        "fullAnnouncement": "完全な発表",
-        "daisAnnouncement": "ダイスの発表",
-        "close": "近い"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "セッション名",
-        "sessionNamePlaceholder": "例えば 午前の部",
-        "sessionNameSaving": "保存中…",
-        "sessionNameSaved": "保存されました",
-        "sessionNameHint": "自動的に保存され、セッション履歴に表示されます。",
-        "title": "委員会セッション",
-        "subtitle": "委員会セッションを開始または停止します。",
-        "helpStartStop": "[開始] を選択すると、全員のライブ委員会セッションのタイマー/ステータスが開始されます。 「停止」を選択するとセッションが終了し、現在の制限時間がクリアされます。",
-        "migrationUnavailable": "最新のデータベース移行が適用されるまで、セッション コントロールは一時的に利用できなくなります。",
-        "endTimeInFuture": "将来の終了時刻を選択するか、制限なしに切り替えます。",
-        "sessionStartUnavailable": "セッション開始タイムスタンプは、最新の移行が適用されるまで使用できません。",
-        "endTimeInFutureSetNoLimit": "将来の終了時刻を選択するか、制限を設定しません。",
-        "sessionLimitUpdated": "セッション制限が更新されました。",
-        "startedLabel": "開始:",
-        "timeInLabel": "滞在時間:",
-        "timeUntilEndLabel": "終了までの時間:",
-        "overByValue": "{値}以上",
-        "modeLabel": "モード：",
-        "modeStopwatchNoLimit": "ストップウォッチ（時間制限なし）",
-        "sessionNotRunning": "セッションが実行されていません。",
-        "sessionLimit": "セッション制限",
-        "sessionLimitModesTitle": "セッション制限モード",
-        "sessionLimitModesHelp": "なし: 終わりがありません。 時間の予算: 開始からカウントします。 終了時刻: ローカルタイムゾーンの固定時刻。",
-        "sessionLimitOptional": "オプション。",
-        "noneLabel": "なし",
-        "noneDescription": "止まるまで走ります。",
-        "timeBudgetLabel": "時間の予算",
-        "timeBudgetDescription": "開始した瞬間からカウントされます。",
-        "endTimeLabel": "終了時刻",
-        "endTimeDescription": "固定クロック時間を使用します (両方が設定されている場合は予算を上書きします)。",
-        "noneIndefinite": "なし（無期限）",
-        "noneScheduledEndHint": "終了予定はありません。 経過時間のみが表示されます。",
-        "timeBudgetFromStart": "開始からの時間予算",
-        "hoursLabel": "営業時間",
-        "minutesLabel": "分",
-        "minimumOneMinute": "(最短1分)",
-        "endAtLocalTime": "終了時刻 (現地時間)",
-        "stopSession": "セッションを停止する",
-        "saveLimit": "保存制限",
-        "saveLimitHelp": "セッションがすでに実行されている間に、セッションを停止せずに、更新された制限設定を適用します。",
-        "startSession": "セッションを開始する",
-        "sidebarUsePrefix": "サイドバーを使用して、",
-        "rollCall": "点呼",
-        "speakers": "スピーカー",
-        "formalMotions": "正式な動作",
-        "timer": "タイマー",
-        "sidebarAnd": "そして",
-        "announcements": "お知らせ",
-        "sidebarUseSuffix": "— タブごとに 1 つのツール。"
-      },
-      "history": {
-        "title": "セッション履歴",
-        "savedCount": "{count} 回保存しました",
-        "permissionsHint": "議長はエントリの名前を変更できます。 SMT/管理者はエントリの名前変更と削除を行うことができます。",
-        "empty": "セッション履歴はまだありません。",
-        "rename": "名前の変更",
-        "delete": "消去",
-        "deleteConfirm": "このセッションを履歴から削除しますか?",
-        "sessionNamePrompt": "セッション名",
-        "rangeClosed": "{範囲}",
-        "rangeOngoing": "{範囲} -> 進行中"
-      },
-      "timerPage": {
-        "title": "タイマー",
-        "controlsTitle": "タイマー制御",
-        "controlsHelp": "全体的な討論のタイミングには一般フロアを使用し、公開投票項目を特定の公開投票項目に結び付けるには動議投票を使用します。",
-        "tabSetup": "1) セットアップ",
-        "tabClock": "2) クロック制御",
-        "tabNotes": "3) スピーチメモ",
-        "tabLog": "4) ログの一時停止",
-        "setupHelp": "このタイマーが一般議決用 (常に参加者に表示される) か、投票のために開かれている動議に関連付けられる (その投票がアクティブなアイテムの間のみ参加者に表示される) かを選択します。 発言者ごとの時間をオンにすると、穏健党員集会中も時計は表示されたままになります。 クロックを一時停止/クロックのフリーズを開始、またはカウントダウンを再開します。 スピーカー時間（残り）と合計時間を個別に設定し、タイマーを保存します。 プリセットは両方を同じ長さまで埋めます。 どちらのフィールドも後で編集できます。 一時停止は短い理由とともに記録されます。",
-        "namedPreset": "名前付きプリセット",
-        "applyPreset": "プリセットを適用...",
-        "floorLabelDelegates": "フロアラベル (参加者)",
-        "floorLabelPlaceholder": "例えば GSL 60s",
-        "timerPurpose": "タイマーの目的",
-        "purposeGeneralFloor": "一般討論/議場（投票には結びつかない）",
-        "purposeMotionVote": "オープンモーション - 議場で投票が有効な間のみタイマー",
-        "openMotionForVoting": "公開動議 (投票のために公開されている必要があります)",
-        "selectMotion": "モーションを選択...",
-        "untitled": "無題",
-        "noOpenMotionWarning": "投票できる動議はありません。 最初に投票を開始するか、目的を一般議題に切り替えてください。",
-        "clock": "クロック",
-        "running": "ランニング",
-        "paused": "一時停止中",
-        "saveToEnablePauseStart": "タイマーを保存して一時停止/開始を有効にします。",
-        "pauseReasonLogged": "一時停止の理由 (ログに記録)",
-        "pauseReasonPlaceholder": "例えば 秩序の要点、技術的な問題、司会者のいない党員集会...",
-        "pauseClock": "時計を一時停止する",
-        "startClock": "スタートクロック",
-        "perSpeakerTitle": "発言者ごとの時間 (穏健な党員集会)",
-        "perSpeakerHelp": "合計時間をスピーカーごとの上限として設定し、スピーカー時間を残り時間として設定します。 Advance は次のスピーカーに移動し、残りをキャップにリセットします。",
-        "currentSpeaker": "現在のスピーカー",
-        "nextSpeaker": "次の講演者",
-        "speechNotesCurrentSpeaker": "スピーチメモ（現在の講演者）",
-        "speechNotesHelp": "メモは現在の講演者のタイマー テキストに関連付けられており、講演者リストに「現在の」とマークされている人がいる場合、その代表は参照用に保存されます。",
-        "timerFloorLabel": "タイマー（フロア）：",
-        "speakerListCurrent": "講演者リスト (現在):",
-        "noCurrentDelegation": "講演者リストで「現在」とマークされている代表団はありません。",
-        "note": "注記",
-        "notePlaceholder": "ポイント、POI、トーン、フォローアップ...",
-        "saveSpeechNote": "スピーチメモを保存する",
-        "recentNotes": "最近のメモ（当委員会）",
-        "delete": "消去",
-        "speakerTimeRemaining": "発言時間（残り）",
-        "remainingHelpPerSpeaker": "現在のスピーカーのカウントダウン (進むとリセット)。",
-        "remainingHelpNormal": "現在の発言者のカウントダウン (合計より少なくてもよい)。",
-        "totalTime": "合計時間",
-        "totalHelpPerSpeaker": "スピーカーごとのキャップ (床の分母、これまでのリフィルの残りを進めます)。",
-        "totalHelpNormal": "このタイマー セグメントの全長 (床のスラッシュの後に表示)。",
-        "saveTimer": "保存タイマー",
-        "advanceSpeakerReset": "スピーカーを進めて時計をリセットする",
-        "recentPauseLog": "最近の一時停止ログ",
-        "noPauseEvents": "この委員会ではまだ一時停止イベントが記録されていません。",
-        "openPauseLogHint": "一時停止ログを開いて、記録された一時停止の理由とタイムスタンプを確認します。",
-        "saved": "タイマーが保存されました。",
-        "savedCapped": "タイマーが保存されました。 講演時間は合計よりも長かった。 合計に上限が設定されています。",
-        "alreadyPaused": "タイマーはすでに一時停止されています。",
-        "pausedForCommittee": "タイマーは委員会のために一時停止しました。",
-        "alreadyRunning": "タイマーはすでに実行中です。",
-        "runningForCommittee": "委員会のためにタイマーが作動しています。",
-        "euTimerBoardTitle": "EU議会タイマーボード（11個のタイマー）",
-        "euTimerBoardHelp": "パーティーごとに 1 つのタイマーに加えて、合計時間、POI/POC 時間、スピーカー時間。 [適用] を使用して、[クロック] タブのライブ タイマー フィールド (スピーカー時間 / タイマーの保存) に行をコピーします。",
-        "euTimerName": "名前",
-        "euTimerTag": "タグ",
-        "euTotalTime": "合計時間",
-        "euPoiPocTime": "POI/POC時間",
-        "euSpeakerTime": "講演時間"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "委員会室（満員）",
         "hint": "仮想レイアウトと参加者フロア"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "自動保存に失敗しました",
     "autosavedWithCountry": "自動保存 — {国}",
     "delegateFallback": "代表者"
+  },
+  "sources": {
+    "addSource": "ソースを追加",
+    "sourceUrl": "ソースURL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (推奨)",
+    "urlHelp": "新しい Google ドキュメントの場合は、ボタンを使用してドキュメントのリンクをここに貼り付けます。",
+    "titleOptional": "タイトル (オプション)",
+    "saveChanges": "変更を保存する",
+    "editSource": "ソースを編集する",
+    "urlPlaceholderShort": "Google ドキュメントまたはその他の URL",
+    "empty": "まだソースがありません。 Google ドキュメントのリンクを追加してここに開きます。",
+    "sourceLabel": "ソース",
+    "openLink": "リンクを開く",
+    "embedHeading": "ソースドキュメント",
+    "notGoogleDoc": "この URL は Google ドキュメントではありません。 ここに埋め込んで編集するには、docs.google.com/document/d/… リンクを使用します。 それ以外の場合は、上のリンクを開いてください。"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "参加者はポジションペーパーを直接アップロードすることはできません。 別の種類のドキュメントを使用してください。",
+    "alertOnlyChairsPositionPaper": "議長/SMT/管理者のみがポジションペーパーをアップロードできます。",
+    "alertOnlySmtChairReport": "SMT/管理者のみが議長レポートをアップロードできます。",
+    "alertOnlySmtRop": "SMT/管理者のみが RoP ドキュメントをアップロードできます。",
+    "alertOnlySmtAwardCriteria": "SMT/管理者のみが受賞基準ドキュメントをアップロードできます。",
+    "alertNeedContentOrUrl": "ローカル テキスト コンテンツまたは Google ドキュメント URL を追加します。",
+    "confirmDelete": "この文書を削除しますか?",
+    "delegatePrepTitle": "準備文書セクション",
+    "delegatePrepBody": "このページから、独自の <prep>準備ドキュメント</prep> を直接アップロード、表示、編集できます。",
+    "positionPaperGuideTitle": "用紙ガイドの位置を決める",
+    "positionPaperGuideBlurb": "最終的な PDF が準備されている間に、プレースホルダー ガイドをダウンロードしてください。",
+    "downloadPlaceholderGuide": "プレースホルダー ガイドをダウンロード",
+    "addDocument": "ドキュメントの追加",
+    "tabs": {
+      "ariaLabel": "ドキュメントセクション",
+      "library": "図書館",
+      "compose": "作曲する",
+      "composeHint": "このタブから新しいドキュメントを開始するか、既存の下書きを編集します。"
+    },
+    "newDocumentTitle": "新しいドキュメント",
+    "editDocumentTitle": "ドキュメントの編集",
+    "typeLabel": "タイプ",
+    "types": {
+      "position_paper": "ポジションペーパー",
+      "chair_report": "委員長報告",
+      "rop": "RoP",
+      "award_criteria": "受賞基準",
+      "chair_notes": "議長メモ",
+      "prep_doc": "準備文書"
+    },
+    "delegatePositionPaperNote": "ポジションペーパーは議長によってフィードバックとともにアップロードされます。",
+    "delegateOwner": "代理所有者",
+    "chairRecipient": "議長の受取人",
+    "titleLabel": "タイトル",
+    "titlePlaceholder": "文書のタイトル",
+    "googleDocsUrl": "Google ドキュメントの URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (アプリに表示/編集を埋め込む)",
+    "googleDocsHelp": "新しい Google ドキュメントを使用して新しいタブで Google を開き、ここにドキュメントのリンクを貼り付けます。 以下のプレーンテキストはオプションです。 すべてのドキュメントには、ローカル テキスト、Google ドキュメント リンク、またはその両方が必要です。",
+    "plainTextOptional": "プレーンテキスト (オプション)",
+    "plainTextPlaceholder": "メモまたは下書きテキスト…",
+    "chairFeedbackLabel": "議長のフィードバック",
+    "chairFeedbackPlaceholder": "代表ポジションペーパーに対するフィードバック...",
+    "empty": "まだ書類がありません。 ドキュメントを追加するか、Google ドキュメントをリンクします。",
+    "sidebarDocumentLabel": "書類",
+    "sections": {
+      "chairReports": "委員長報告",
+      "rop": "RoP",
+      "awardCriteria": "受賞基準",
+      "prepDocuments": "準備書類",
+      "chairNotes": "議長メモ",
+      "otherDocuments": "その他の書類"
+    },
+    "untitled": "無題",
+    "linkedDocumentHeading": "リンクされたドキュメント",
+    "notesHeading": "注意事項",
+    "noGoogleDocYet": "まだ Google ドキュメントがリンクされていません。 [編集] を使用して、docs.google.com/document/d/… URL を追加します。",
+    "chairFeedbackHeading": "議長のフィードバック",
+    "noFeedbackYet": "まだフィードバックは追加されていません。"
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "最初に代理人のメールアドレスを入力します。",
+    "sentToDelegate": "{メール} に送信されました。",
+    "newResolution": "新しい解決策",
+    "maxDraftResolutions": "この委員会にはすでに {count} 件の決議案があります。",
+    "googleDocLink": "Googleドキュメントへのリンク",
+    "googleDocUrlPlaceholder": "Google ドキュメント URL (docs.google.com/document/d/… — 埋め込みと編集に使用)",
+    "googleDocUrlHelp": "新しい Google ドキュメントが別のタブで開きます。 アドレスバーから URL をコピーし、ここに貼り付けます。",
+    "mainSubmittersPlaceholder": "主要な送信者 (ユーザー ID、カンマ区切り)",
+    "coSubmittersPlaceholder": "共同提出者 (ユーザー ID、カンマ区切り)",
+    "create": "作成する",
+    "cancel": "キャンセル",
+    "openInNewTab": "新しいタブで開く",
+    "noGoogleDocLink": "Google ドキュメントのリンクがありません",
+    "visibleToOtherBloc": "他のブロックからも参照可能",
+    "resolutionCounts": "メインサブ: {main} | 副サブ: {co} | 署名者: {署名者}",
+    "blocButton": "ブロック {名前} ({スタンス})",
+    "signVirtually": "バーチャルで署名（メインサブウーファーに通知）",
+    "shareByEmail": "解決策をメールで共有する",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "代理人に送信",
+    "clauseEditor": "条項エディタ",
+    "noClausesYet": "まだ条項はありません。",
+    "clauseNumber": "条項 {数値}",
+    "saveClause": "句の保存",
+    "delete": "消去",
+    "addClausePlaceholder": "新しい条項を追加...",
+    "addClause": "句を追加",
+    "clauseVoteHistory": "条項の投票履歴",
+    "noClauseOutcomesYet": "条項の投票結果はまだ記録されていません。",
+    "clauseFallback": "句",
+    "passed": "合格した",
+    "failed": "失敗した",
+    "motionId": "モーション {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "投票セクション",
+      "open": "開ける",
+      "closed": "閉店"
+    },
+    "requiredMajority": "必要な過半数",
+    "helpRequiredMajorityTitle": "必要な過半数",
+    "helpRequiredMajorityBody": "合否を決定するために使用される投票しきい値を選択します。 「シンプル」が半分以上。 「2/3」には超過半数が必要です。",
+    "majoritySimple": "単純",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} 過半数",
+    "mustVote": "投票しなければなりません",
+    "helpMustVoteTitle": "投票しなければなりません",
+    "helpMustVoteBody": "この動議を「必須投票」項目としてマークします。 これは、要件を参加者に伝えるために使用されます (委員会の設定に応じて)。",
+    "saveSettings": "設定を保存する",
+    "delegateBlurb": "議席は、開会中の投票を記録します（点呼など）。 ここでの動議投票は、はい/いいえのみに従います (棄権は使用されません)。 集計を追跡できます。 参加者はアプリで投票しません。",
+    "yes": "はい",
+    "no": "いいえ",
+    "ballots": "投票用紙",
+    "total": "合計",
+    "outcome": "結果",
+    "passed": "合格した",
+    "failed": "失敗した",
+    "noRecordedVotes": "記録された投票はありません",
+    "reopenMotion": "モーションを再開する",
+    "editRecordOpen": "レコードを編集…",
+    "hideSettings": "設定を非表示にする",
+    "preliminaryPassing": "合格（暫定）",
+    "preliminaryFailing": "失敗(暫定)",
+    "delegateRollCall": "参加者点呼 ({count})",
+    "noSeatedDelegates": "この議案には着席可能な参加者がいません。",
+    "rollPrefix": "ロール：",
+    "recordedPrefix": "記録:",
+    "recordedYes": "はい",
+    "recordedNo": "いいえ",
+    "recordedAbstain": "棄権する",
+    "recordedNone": "—",
+    "abstain": "棄権する",
+    "clear": "クリア",
+    "closeMotion": "クローズモーション",
+    "mustVoteBadge": "投票しなければなりません",
+    "canVoteBadge": "投票できます",
+    "noMotions": "まだモーションはありません。",
+    "currentOpenMotion": "現在のオープンモーション",
+    "noOpenMotion": "現在オープンモーションはありません。",
+    "recentClosedMotions": "最近のクローズドモーション",
+    "noClosedMotions": "まだクローズモーションはありません。",
+    "untitled": "無題",
+    "voteTypes": {
+      "motion": "モーション",
+      "amendment": "修正",
+      "resolution": "解決",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "欠席（ロール）",
+      "present_abstain": "出席 — 棄権してもよい (ロール)",
+      "present_voting": "出席かつ投票（ロール）",
+      "unknown": "— (ロール)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "プロフィールセクション",
+      "overview": "概要",
+      "awards": "受賞歴",
+      "private": "個人的な記録",
+      "settings": "プロファイル設定"
+    },
+    "profilePicture": "プロフィール写真",
+    "uploadFile": "ファイルをアップロードする",
+    "uploading": "アップロード中…",
+    "photoSaved": "写真がアップロードされて保存されました。",
+    "orUrl": "またはURLで設定",
+    "urlPlaceholder": "https://...",
+    "name": "名前",
+    "username": "ユーザー名",
+    "usernamePlaceholder": "例えば アレックス_1999",
+    "pronouns": "代名詞",
+    "customPronounNote": "あなたのプロフィールには、ここでは受け入れられなくなったカスタム代名詞セットが含まれていました。 上のオプションを選択します (または空白のままにします)。 保存すると古い値が置き換えられます。",
+    "school": "学校",
+    "schoolPlaceholder": "例えば リンカーン高校",
+    "grade": "学年",
+    "selectGrade": "グレードを選択してください",
+    "conferencesAttended": "出席したカンファレンス",
+    "awardsComma": "受賞歴 (カンマ区切り)",
+    "awardsPlaceholder": "最優秀代表者、佳作",
+    "allocation": "割り当て",
+    "selectAllocation": "割り当ての選択",
+    "noAllocationsPlaceholder": "利用可能な委員会の割り当てはありません",
+    "saveProfile": "プロファイルの保存",
+    "saved": "プロフィールが保存されました。",
+    "saveFailed": "プロフィールを保存できませんでした。",
+    "errUsernamePattern": "ユーザー名は 3 ～ 32 文字 (文字、数字、_、.、-) である必要があります。",
+    "errPronounsPreset": "リストから代名詞を選択します。",
+    "errImageType": "画像ファイルを選択してください。",
+    "errImageSize": "画像が大きすぎます (最大 5 MB)。",
+    "errUploadFailed": "アップロードに失敗しました。",
+    "errStorageSetup": "プロフィール画像の保存が設定されていません。 Supabase プロジェクトで、migration 00100_profile_pictures_storage_bucket.sql を実行するか、profile-pictures という名前のパブリック ストレージ バケットを作成します (README を参照)。",
+    "errPublicUrl": "アップロードされた画像のパブリック URL を解決できませんでした。",
+    "fallbacks": {
+      "yourCountry": "あなたの国",
+      "committeeSession": "委員会セッション",
+      "delegate": "代表者",
+      "speechNote": "スピーチメモ",
+      "untitledMotion": "無題のモーション",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "{旗} {国} の代表者を歓迎します",
+      "subtitle": "何から始めたいですか?",
+      "links": {
+        "documents": "書類",
+        "notes": "注意事項",
+        "committeeRoom": "委員会室",
+        "runningNotes": "ランニングノート",
+        "ideas": "アイデア",
+        "guides": "ガイド",
+        "sources": "情報源",
+        "resolutions": "決議",
+        "speeches": "スピーチ",
+        "stances": "スタンス",
+        "crisisSlides": "危機のスライド",
+        "report": "報告",
+        "motions": "モーション",
+        "points": "ポイント"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "あなたのプロフィールにある賞",
+      "rank": "ランク {ランク}",
+      "pending": {
+        "tab": "保留中の指名",
+        "title": "保留中の議長指名",
+        "descriptionSingle": "チェアによって保存され、レビューのために SMT と共有されました。確認後、最終的な賞品が以下に表示されます。",
+        "descriptionTabbed": "チェアによって保存され、レビューのために SMT と共有されました。最終的な賞は確認後に表示されます。"
+      },
+      "recorded": {
+        "tab": "受賞歴の記録",
+        "title": "受賞歴の記録",
+        "description": "議長または SMT があなたをアワードトラッカーに割り当てるとリストされます。最終的な評価はカンファレンスのルールに従います。"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "あなた、委員長、および関連する委員会の SMT のみに表示されます。",
+      "points": {
+        "title": "椅子のポイント（プライベート）"
+      },
+      "speechNotes": {
+        "title": "議長スピーチメモ（非公開）"
+      },
+      "motions": {
+        "title": "移動したモーション",
+        "description": "委員会のレビューと SMT の監視のためにプロファイルに保存されます。"
+      }
+    },
+    "discipline": {
+      "title": "懲戒処分状況（非公開）",
+      "statusLine": "警告: {warnings} · ストライキ: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "投票が無効になっています",
+      "speakingSuspended": "発言停止",
+      "removedFromCommittee": "委員会から外された",
+      "updated": "更新日: {値}"
+    },
+    "preview": {
+      "ariaLabel": "プロファイルのプレビュー",
+      "title": "プレビュー",
+      "yourName": "あなたの名前",
+      "usernameNotSet": "ユーザー名が設定されていません",
+      "gradeValue": "グレード {グレード}",
+      "awards": "受賞歴"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "手順規則 (RoP)",
+        "content": "# 手続き規則\n\n ## ポイントとモーション\n - **注文時点**: 正しい手順\n - **情報ポイント**: 講演者への質問\n - **個人の特権のポイント**: 個人の快適さ\n - **テーブルへの動議**: 討論を延期する\n - **延期の動議**: セッションを終了します\n\n ## 投票\n - 手続き上の事項については単純過半数\n - 実質的な事項については 2/3 の過半数\n - 要求された場合は点呼投票"
+      },
+      "examples": {
+        "title": "例",
+        "content": "# 例\n\n ## 解像度フォーマット\n 「」\n 総会、\n ...\n 1. 加盟国に対し次のことを求める。 \n2. 国際社会に次のように要請します...\n 「」\n\n ## ポジションペーパーの構造\n 1. 背景\n 2. 国の政策\n 3. 提案されるソリューション"
+      },
+      "templates": {
+        "title": "テンプレート",
+        "content": "# テンプレート\n\n ## 議長レポートのテンプレート\n - 委員会の概要\n - 主要な議論のポイント\n - 可決された決議\n - 推奨事項"
+      },
+      "chairReport": {
+        "title": "議長報告",
+        "content": "# 議長報告\n\n 委員会の議事録と結果をここに文書化します。"
+      }
+    },
+    "edit": "編集",
+    "guideDocument": "ガイド文書",
+    "additionalNotes": "追加の注意事項",
+    "noContentYet": "まだコンテンツはありません。",
+    "titlePlaceholder": "タイトル",
+    "googleDocsUrl": "Google ドキュメントの URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "新しい Google ドキュメントが別のタブで開きます。 共有可能なリンクを貼り付けて、代理人がここでドキュメントを開くことができるようにします (表示/編集は Google 共有に依存します)。",
+    "markdownOptional": "Markdown メモ (Google ドキュメントを使用する場合はオプション)",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "createNewGuide": "新しいガイドを作成する",
+    "slugPlaceholder": "ナメクジ（ユニーク）",
+    "titleLowerPlaceholder": "タイトル",
+    "googleDocsUrlOptional": "Google ドキュメントの URL (オプション)",
+    "markdownContentOptional": "マークダウンコンテンツ (オプション)",
+    "create": "作成する",
+    "glossary": {
+      "title": "MUN アジェンダ用語集",
+      "subtitle": "委員会の規約や現在の議題トピックに合わせた独自の用語。",
+      "committeeCode": "委員会コード: {コード}",
+      "sources": {
+        "core": "コア",
+        "committee": "委員会",
+        "topic": "トピック"
+      },
+      "terms": {
+        "delegation": {
+          "term": "代表団",
+          "definition": "委員会において 1 つの州または団体を代表する国またはオブザーバー チーム。"
+        },
+        "placard": {
+          "term": "プラカード",
+          "definition": "議場を要求し、投票し、手続き上の動議を合図するために使用される国の標識。"
+        },
+        "dais": {
+          "term": "ダイス",
+          "definition": "討論を司会し、手順を適用し、発言順序を管理する議長チーム。"
+        },
+        "quorum": {
+          "term": "定足数",
+          "definition": "正式な業務と投票を行うために必要な代表団の最小数。"
+        },
+        "motion": {
+          "term": "モーション",
+          "definition": "党員集会の種類や発言時間など、議論の流れを変えるための正式な提案。"
+        },
+        "point_of_order": {
+          "term": "注文時点",
+          "definition": "委員会規則に基づいて手順が誤って適用されている場合の介入。"
+        },
+        "moderated_caucus": {
+          "term": "穏健党員集会",
+          "definition": "定義されたサブトピックに関する短時間のスピーチを含む、構造化されたディベート セグメント。"
+        },
+        "unmoderated_caucus": {
+          "term": "司会なしの党員集会",
+          "definition": "参加者が自由にアイデアを草案したり統合したりできる非公式の交渉期間。"
+        },
+        "draft_resolution": {
+          "term": "決議案",
+          "definition": "最終的な投票と採択の前に提案された委員会の行動の作業テキスト。"
+        },
+        "amendment": {
+          "term": "修正",
+          "definition": "草案テキストに変更が提案され、友好的または非友好的として投票されました。"
+        },
+        "operative_clause": {
+          "term": "運用条項",
+          "definition": "委員会が何を提案するかを説明する行動指向の番号付き条項。"
+        },
+        "preambulatory_clause": {
+          "term": "前出条項",
+          "definition": "背景原則、懸念事項、および以前の枠組みを引用した文脈設定条項。"
+        },
+        "right_of_reply": {
+          "term": "返信する権利",
+          "definition": "代表団の尊厳や地位に影響を与えた直接の発言に応答する機会。"
+        },
+        "veto_power": {
+          "term": "拒否権",
+          "definition": "実質的な決議案を阻止する安保理常任理事国の権限。"
+        },
+        "chapter_vii": {
+          "term": "第 7 章",
+          "definition": "平和に対する脅威、制裁、武力行使に関する国連憲章の権限。"
+        },
+        "sanctions_regime": {
+          "term": "制裁制度",
+          "definition": "直接的な軍事行動をとらずに行動に影響を与えるために使用される調整された制限。"
+        },
+        "arms_control": {
+          "term": "軍備管理",
+          "definition": "武器の種類、数量、配備を制限する協定と検証システム。"
+        },
+        "non_proliferation": {
+          "term": "不拡散",
+          "definition": "核兵器、化学兵器、生物兵器、または先進兵器の能力の拡散を防止する政策。"
+        },
+        "confidence_building_measures": {
+          "term": "信頼醸成措置",
+          "definition": "誤解や紛争のリスクを軽減する透明性とコミュニケーションツール。"
+        },
+        "universal_periodic_review": {
+          "term": "普遍的な定期レビュー",
+          "definition": "各国連加盟国が権利に関する勧告を報告し受け取るピアレビュープロセス。"
+        },
+        "special_rapporteur": {
+          "term": "特別報告者",
+          "definition": "テーマ別または国の権利問題を監視し報告するために任命された独立した専門家。"
+        },
+        "treaty_body": {
+          "term": "条約本体",
+          "definition": "特定の人権条約の履行を監督する専門家委員会。"
+        },
+        "public_health_emergency": {
+          "term": "公衆衛生上の緊急事態",
+          "definition": "緊急に調整された国内および国際的な対応が必要な深刻な流行事象。"
+        },
+        "surveillance": {
+          "term": "疫学監視",
+          "definition": "健康データを継続的に収集および分析して、病気の傾向を検出および追跡します。"
+        },
+        "health_systems": {
+          "term": "医療システムの強化",
+          "definition": "信頼性の高い医療提供のために、労働力、資金調達、物流、ガバナンスを改善します。"
+        },
+        "transnational_crime": {
+          "term": "国際的な組織犯罪",
+          "definition": "ネットワークや違法市場を通じて国境を越えて連携した犯罪活動。"
+        },
+        "illicit_trafficking": {
+          "term": "違法な人身売買",
+          "definition": "管轄区域を越えた麻薬、武器、人、物品の違法な移動。"
+        },
+        "rule_of_law_capacity": {
+          "term": "法の支配能力",
+          "definition": "公正に調査、訴追、権利を保護するための司法制度の制度的能力。"
+        },
+        "sustainable_development": {
+          "term": "持続可能な発展",
+          "definition": "社会の進歩、経済的機会、環境保護のバランスをとった成長モデル。"
+        },
+        "financing_for_development": {
+          "term": "開発のための資金調達",
+          "definition": "長期的な開発優先事項をサポートする公的および民間の資金調達メカニズム。"
+        },
+        "policy_coordination": {
+          "term": "政策調整",
+          "definition": "重複を避け、集団的な影響力を高めるために、州と政府機関の行動を調整する。"
+        },
+        "child_protection": {
+          "term": "児童の保護",
+          "definition": "あらゆる場面での子どもに対する搾取、虐待、暴力を防止するための措置。"
+        },
+        "education_access": {
+          "term": "教育へのアクセス",
+          "definition": "すべての子どもたちに包括的、公平かつ継続的な学習の機会を確保する。"
+        },
+        "humanitarian_response": {
+          "term": "人道的対応",
+          "definition": "危機や紛争状況における緊急のニーズに対処する迅速な救援活動。"
+        },
+        "gender_mainstreaming": {
+          "term": "ジェンダー主流化",
+          "definition": "ジェンダー分析を政策設計、実施、評価に統合する。"
+        },
+        "gender_based_violence": {
+          "term": "ジェンダーに基づく暴力",
+          "definition": "性同一性、役割、または不平等な力関係に基づいて誰かに向けられる危害。"
+        },
+        "economic_empowerment": {
+          "term": "経済的エンパワーメント",
+          "definition": "ディーセント・ワーク、財政、所有権、意思決定権へのアクセスを拡大する。"
+        },
+        "source_attribution": {
+          "term": "出典の帰属",
+          "definition": "情報の出所を明確に引用して、主張を検証し、文脈を説明できるようにします。"
+        },
+        "verified_reporting": {
+          "term": "検証済みレポート",
+          "definition": "争点となっている事実を公表する前に裏付けを要求するジャーナリズムの基準。"
+        },
+        "editorial_independence": {
+          "term": "編集上の独立性",
+          "definition": "報告に関する決定を政治的圧力や利害関係者の影響から分離する。"
+        },
+        "climate_mitigation": {
+          "term": "気候変動の緩和",
+          "definition": "温室効果ガスの排出量を削減したり、長期的な炭素除去を増加させる行動。"
+        },
+        "climate_adaptation": {
+          "term": "気候適応",
+          "definition": "気候関連の影響に対する脆弱性を軽減する政策と投資。"
+        },
+        "cyber_norms": {
+          "term": "サイバー規範",
+          "definition": "デジタルおよびサイバー領域における国家の責任ある行動に対する期待の共有。"
+        },
+        "critical_infrastructure": {
+          "term": "重要なインフラストラクチャ",
+          "definition": "電力、水、医療、通信など、回復力が必要な重要なシステム。"
+        },
+        "epidemiology": {
+          "term": "疫学",
+          "definition": "病気のパターン、原因、集団内の分布の研究。"
+        },
+        "preparedness_response": {
+          "term": "準備と対応",
+          "definition": "緊急事態を封じ込めて管理するための計画、調整、緊急行動。"
+        },
+        "non_refoulement": {
+          "term": "ノンルフールマン",
+          "definition": "重大な危害に直面する場所への人々の帰還を禁止する原則。"
+        },
+        "durable_solutions": {
+          "term": "耐久性のあるソリューション",
+          "definition": "避難民の長期的な成果: 帰還、地域統合、再定住。"
+        },
+        "nuclear_safeguards": {
+          "term": "核保障措置",
+          "definition": "核物質が兵器用途に転用されないことを保証する検証措置。"
+        },
+        "counter_terrorism": {
+          "term": "テロ対策",
+          "definition": "テロ活動に対する統合された法的、予防的、安全対策。"
+        },
+        "due_process": {
+          "term": "適正手続き",
+          "definition": "捜査、訴追、制裁中の権利を保護する公正な法的手続き。"
+        },
+        "resource_security": {
+          "term": "リソースのセキュリティ",
+          "definition": "経済的および環境的ストレス下でも食料、水、エネルギーへの確実なアクセス。"
+        },
+        "resilience": {
+          "term": "回復力",
+          "definition": "ショックを吸収し、効果的に回復するための地域社会や機関の能力。"
+        }
+      },
+      "topicLine": "トピック: {トピック}"
+    }
+  },
+  "ideas": {
+    "editIdea": "アイデアを編集する",
+    "googleDocsUrl": "Google ドキュメントの URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "短いアイデアのテキスト (オプション)",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "addIntro": "Google ドキュメントを追加して、解決策のアイデアを作成するか、短いメモ (またはその両方) を入力します。",
+    "googleDocsCreateHelp": "新しい Google ドキュメントが別のタブで開きます。 リンクを作成したら、ここに貼り付けます。",
+    "resolutionIdeaPlaceholder": "解決策のアイデア...",
+    "add": "追加",
+    "noIdeasYet": "まだアイデアはありません。",
+    "ideaLabel": "アイデア",
+    "ideaFallback": "アイデア {数値}",
+    "linkedDoc": "リンクされたドキュメント",
+    "addedOn": "{日付}を追加しました",
+    "edit": "編集",
+    "delete": "消去",
+    "ideaDocument": "アイデアドキュメント",
+    "summary": "まとめ",
+    "emptyIdea": "空虚な考え。"
+  },
+  "stances": {
+    "heatmapTitle": "簡単なスタンスの概要 (ヒートマップ)",
+    "heatmapHelp": "あなたの割り当ては____をどの程度サポートしていますか? (1-5スケール)",
+    "topicPlaceholder": "例えば 気候変動対策",
+    "extentLabel": "範囲 (1 ～ 5):",
+    "extentHelpTitle": "範囲 (1-5)",
+    "extentHelpBody": "1 は、割り当てがそのトピックに対するサポートをほとんど持たないことを意味し、5 は強力なサポートを意味します。 委員会でのあなたの立場に合った番号を選択してください。",
+    "add": "追加",
+    "viewOnlyHeatmap": "スタッフ向けの表示専用ヒートマップ。",
+    "notesPerAllocation": "割り当てごとのメモ",
+    "noAllocationsYet": "まだ割り当てはありません",
+    "notesPlaceholder": "この割り当てのスタンスノート...",
+    "noteLanguageWarning": "読者への警告: このメモには不適切な表現が含まれている可能性があります。",
+    "save": "保存",
+    "saveHelpTitle": "スタンスノートを保存する",
+    "saveHelpBody": "この割り当てのスタンスノートを保存します。 スタッフや（委員会の設定に応じて）他の参加者も閲覧できます。"
+  },
+  "speeches": {
+    "newSpeech": "新しいスピーチ",
+    "speechTitlePlaceholder": "講演タイトル",
+    "googleDocsUrl": "Google ドキュメントの URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "新しいタブで Google を開きます。 準備ができたら、ドキュメントの URL をここに貼り付けます。",
+    "plainTextOptional": "プレーンテキストの下書き (Google ドキュメントを使用する場合はオプション)",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "noSpeechesYet": "まだスピーチはありません。 Google ドキュメントをリンクするか、テキストを貼り付けます。",
+    "speechLabel": "スピーチ",
+    "untitled": "無題",
+    "edit": "編集",
+    "speechDocument": "スピーチ文書",
+    "draftText": "草案テキスト",
+    "noContentHint": "Google ドキュメントを編集にリンクするか、フォームにプレーンテキストを追加します。"
+  },
+  "committeeRoom": {
+    "committeeLabel": "委員会",
+    "yourContext": "あなたのコンテキスト",
+    "roleLabel": "役割",
+    "seatLabel": "シート",
+    "clearSearchTitle": "検索をクリアしてすべての委任を表示",
+    "vacantLabel": "空いている",
+    "assignedLabel": "割り当て済み",
+    "daisLabel": "ダイス",
+    "phaseLabel": "段階",
+    "phaseVoting": "投票",
+    "phaseDebate": "議論",
+    "focusSearchTitle": "フォーカス検索 (クエリに一致するタイトルと名前)",
+    "tipLabel": "ヒント",
+    "searchVacantTitle": "室内の「空席」を検索する",
+    "searchHint": "国、代表者名、学校、代名詞、または「空席」を入力して、ルーム内で一致するものを強調表示します。 Enter を押して最初の一致にジャンプします。 Esc でクリアします。 「空席」をクリックして空席にジャンプします。",
+    "findLabel": "代表団または演壇メンバーを探す",
+    "searchPlaceholder": "国、名前、学校…",
+    "matchesCount": "{total} 席中 {matches} が一致",
+    "enterScrolls": "巻物を入力してください",
+    "typeToFilterHint": "フィルターに入力 - 最初に一致するスクロールを入力してください",
+    "noMatches": "一致する代表団や演壇席はありません。",
+    "digitalDisplay": "デジタル表示",
+    "floorLabel": "床",
+    "staffSeatsHeading": "スタッフ - 席",
+    "searchAria": "代表団を検索する",
+    "virtualRoomVacant": "空いている",
+    "profileAria": "プロフィールを表示: {国}",
+    "vacantSeatAria": "空席",
+    "placardAria": "プラカード {国}",
+    "gavelAria": "小槌",
+    "viewProfileAria": "プロフィールを見る: {タイトル}",
+    "noProfileLinkAria": "{title} (プロフィールリンクなし)",
+    "committeeFloor": "委員会フロア",
+    "virtualRoomFigureAria": "仮想委員会室 - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "委任のフィルタリング。 最初に強調表示される席は、リングでの最初の試合です。",
+    "helperText": "プラカードには、各代表者のプロフィールにある国 (割り当てから)、名前、学校、代名詞がリストされています。 「プロフィール」で自分のプロフィールを編集します。 空の委員会席は「空席」と表示されます。 記入されたプラカードまたは演壇をクリックすると、そのメンバーのページが開きます (そこからチャットとレポートが表示されます)。",
+    "virtualRoomCaption": "国、名前、学校、代名詞を示す代表者のプラカードを掲げた仮想モデル国連委員会室。"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "発言のリクエスト",
+      "delegateFallback": "代表者",
+      "needAllocation": "発言をリクエストするには割り当てが必要です。",
+      "alreadyQueued": "すでにキューにアクティブな発言リクエストがあります。",
+      "requested": "発言を求められた。 列に並びます。",
+      "requestFailed": "発言の要求に失敗しました。",
+      "helpBody": "代表団を議長の列に送ります。 一度に 1 つのアクティブな待機中/現在のリクエストを持つことができます。",
+      "purposeLabel": "オプションの目的 (キューラベルに表示)",
+      "purposeHelpTitle": "目的ラベル",
+      "purposeHelpBody": "このテキストは国名に追加されるため、議長は発言を要求する理由を理解できます。",
+      "purposePlaceholder": "例えば サポート + 修正の概要",
+      "requesting": "リクエスト中...",
+      "rollPromptTitle": "議長の承認が必要です",
+      "rollPromptBodyPickStatus": "セッションが始まりました。 点呼のステータスを選択して、発言と投票のロックを解除します。 この選択は変更できません。",
+      "rollPromptBodyWaitSessionStart": "委員長が委員会を開始するのを待っています。",
+      "rollPromptBodyWaitRollPrompt": "点呼プロンプトを待っています。",
+      "rollPromptBodyMarkedAbsent": "現在欠席マークが付いています。 発言して投票するために出席者にマークを付けるよう議長に依頼してください。",
+      "rollPromptBodyChecking": "ロールのステータスを確認しています...",
+      "rollPromptSaving": "保存中...",
+      "rollPromptPresent": "現在",
+      "rollPromptPresentVoting": "プレゼンと投票"
+    },
+    "motionVoting": {
+      "votingProcedure": "投票手順",
+      "currentMotion": "現在のモーション",
+      "motioner": "モーションナー",
+      "majority": "過半数",
+      "majoritySimple": "単純",
+      "tally": "はい {はい} - いいえ {いいえ} - 合計 {total}",
+      "help": "演壇は、会期中の各代表団の投票を記録する。 動議の投票では、「はい」または「いいえ」のみが使用されます (棄権はありません)。 合計には、「はい」または「いいえ」が記録されたプラカードのみがカウントされます。 不在の代表はスキップされます。"
+    },
+    "activeMotion": {
+      "currentMotion": "現在のモーション",
+      "motionFallback": "モーション",
+      "motioner": "モーションナー",
+      "majority": "過半数",
+      "majoritySimple": "単純",
+      "type": "タイプ",
+      "timer": "タイマー",
+      "currentSpeaker": "現在のスピーカー",
+      "nextSpeaker": "次の講演者",
+      "speakerTimeLeftCap": "講演者時間（左/キャップ）",
+      "speakerTimeLeftTotal": "講演時間（左/合計）",
+      "perSpeaker": "(スピーカーごと)",
+      "paused": "(一時停止)",
+      "pauseReason": "一時停止: {理由}"
+    },
+    "floorStatus": {
+      "sessionTime": "セッション時間",
+      "sessionNotStarted": "セッションが開始されていません",
+      "limit": "限界",
+      "limitRemaining": "残り {値}",
+      "limitOverBy": "{値}以上",
+      "quickLinkSession": "セッション",
+      "quickLinkRoll": "ロール",
+      "quickLinkSpeakers": "スピーカー",
+      "quickLinkMotions": "モーション",
+      "quickLinkTimer": "タイマー",
+      "dais": "ダイス",
+      "pinned": "固定された",
+      "viewFullAnnouncement": "お知らせ全文を表示",
+      "timerPausesReadOnly": "タイマー一時停止 (読み取り専用)",
+      "speakerList": "講演者リスト",
+      "speakerFallback": "スピーカー",
+      "rollCallYou": "点呼（あなた）",
+      "fullAnnouncement": "完全な発表",
+      "daisAnnouncement": "ダイスの発表",
+      "close": "近い",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "セッション名",
+      "sessionNamePlaceholder": "例えば 午前の部",
+      "sessionNameSaving": "保存中…",
+      "sessionNameSaved": "保存されました",
+      "sessionNameHint": "自動的に保存され、セッション履歴に表示されます。",
+      "title": "委員会セッション",
+      "subtitle": "委員会セッションを開始または停止します。",
+      "helpStartStop": "[開始] を選択すると、全員のライブ委員会セッションのタイマー/ステータスが開始されます。 「停止」を選択するとセッションが終了し、現在の制限時間がクリアされます。",
+      "migrationUnavailable": "最新のデータベース移行が適用されるまで、セッション コントロールは一時的に利用できなくなります。",
+      "endTimeInFuture": "将来の終了時刻を選択するか、制限なしに切り替えます。",
+      "sessionStartUnavailable": "セッション開始タイムスタンプは、最新の移行が適用されるまで使用できません。",
+      "endTimeInFutureSetNoLimit": "将来の終了時刻を選択するか、制限を設定しません。",
+      "sessionLimitUpdated": "セッション制限が更新されました。",
+      "startedLabel": "開始:",
+      "timeInLabel": "滞在時間:",
+      "timeUntilEndLabel": "終了までの時間:",
+      "overByValue": "{値}以上",
+      "modeLabel": "モード：",
+      "modeStopwatchNoLimit": "ストップウォッチ（時間制限なし）",
+      "sessionNotRunning": "セッションが実行されていません。",
+      "sessionLimit": "セッション制限",
+      "sessionLimitModesTitle": "セッション制限モード",
+      "sessionLimitModesHelp": "なし: 終わりがありません。 時間の予算: 開始からカウントします。 終了時刻: ローカルタイムゾーンの固定時刻。",
+      "sessionLimitOptional": "オプション。",
+      "noneLabel": "なし",
+      "noneDescription": "止まるまで走ります。",
+      "timeBudgetLabel": "時間の予算",
+      "timeBudgetDescription": "開始した瞬間からカウントされます。",
+      "endTimeLabel": "終了時刻",
+      "endTimeDescription": "固定クロック時間を使用します (両方が設定されている場合は予算を上書きします)。",
+      "noneIndefinite": "なし（無期限）",
+      "noneScheduledEndHint": "終了予定はありません。 経過時間のみが表示されます。",
+      "timeBudgetFromStart": "開始からの時間予算",
+      "hoursLabel": "営業時間",
+      "minutesLabel": "分",
+      "minimumOneMinute": "(最短1分)",
+      "endAtLocalTime": "終了時刻 (現地時間)",
+      "stopSession": "セッションを停止する",
+      "saveLimit": "保存制限",
+      "saveLimitHelp": "セッションがすでに実行されている間に、セッションを停止せずに、更新された制限設定を適用します。",
+      "startSession": "セッションを開始する",
+      "sidebarUsePrefix": "サイドバーを使用して、",
+      "rollCall": "点呼",
+      "speakers": "スピーカー",
+      "formalMotions": "正式な動作",
+      "timer": "タイマー",
+      "sidebarAnd": "そして",
+      "announcements": "お知らせ",
+      "sidebarUseSuffix": "— タブごとに 1 つのツール。",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "セッション履歴",
+      "savedCount": "{count} 回保存しました",
+      "permissionsHint": "議長はエントリの名前を変更できます。 SMT/管理者はエントリの名前変更と削除を行うことができます。",
+      "empty": "セッション履歴はまだありません。",
+      "rename": "名前の変更",
+      "delete": "消去",
+      "deleteConfirm": "このセッションを履歴から削除しますか?",
+      "sessionNamePrompt": "セッション名",
+      "rangeClosed": "{範囲}",
+      "rangeOngoing": "{範囲} -> 進行中"
+    },
+    "timerPage": {
+      "title": "タイマー",
+      "controlsTitle": "タイマー制御",
+      "controlsHelp": "全体的な討論のタイミングには一般フロアを使用し、公開投票項目を特定の公開投票項目に結び付けるには動議投票を使用します。",
+      "tabSetup": "1) セットアップ",
+      "tabClock": "2) クロック制御",
+      "tabNotes": "3) スピーチメモ",
+      "tabLog": "4) ログの一時停止",
+      "setupHelp": "このタイマーが一般議決用 (常に参加者に表示される) か、投票のために開かれている動議に関連付けられる (その投票がアクティブなアイテムの間のみ参加者に表示される) かを選択します。 発言者ごとの時間をオンにすると、穏健党員集会中も時計は表示されたままになります。 クロックを一時停止/クロックのフリーズを開始、またはカウントダウンを再開します。 スピーカー時間（残り）と合計時間を個別に設定し、タイマーを保存します。 プリセットは両方を同じ長さまで埋めます。 どちらのフィールドも後で編集できます。 一時停止は短い理由とともに記録されます。",
+      "namedPreset": "名前付きプリセット",
+      "applyPreset": "プリセットを適用...",
+      "floorLabelDelegates": "フロアラベル (参加者)",
+      "floorLabelPlaceholder": "例えば GSL 60s",
+      "timerPurpose": "タイマーの目的",
+      "purposeGeneralFloor": "一般討論/議場（投票には結びつかない）",
+      "purposeMotionVote": "オープンモーション - 議場で投票が有効な間のみタイマー",
+      "openMotionForVoting": "公開動議 (投票のために公開されている必要があります)",
+      "selectMotion": "モーションを選択...",
+      "untitled": "無題",
+      "noOpenMotionWarning": "投票できる動議はありません。 最初に投票を開始するか、目的を一般議題に切り替えてください。",
+      "clock": "クロック",
+      "running": "ランニング",
+      "paused": "一時停止中",
+      "saveToEnablePauseStart": "タイマーを保存して一時停止/開始を有効にします。",
+      "pauseReasonLogged": "一時停止の理由 (ログに記録)",
+      "pauseReasonPlaceholder": "例えば 秩序の要点、技術的な問題、司会者のいない党員集会...",
+      "pauseClock": "時計を一時停止する",
+      "startClock": "スタートクロック",
+      "perSpeakerTitle": "発言者ごとの時間 (穏健な党員集会)",
+      "perSpeakerHelp": "合計時間をスピーカーごとの上限として設定し、スピーカー時間を残り時間として設定します。 Advance は次のスピーカーに移動し、残りをキャップにリセットします。",
+      "currentSpeaker": "現在のスピーカー",
+      "nextSpeaker": "次の講演者",
+      "speechNotesCurrentSpeaker": "スピーチメモ（現在の講演者）",
+      "speechNotesHelp": "メモは現在の講演者のタイマー テキストに関連付けられており、講演者リストに「現在の」とマークされている人がいる場合、その代表は参照用に保存されます。",
+      "timerFloorLabel": "タイマー（フロア）：",
+      "speakerListCurrent": "講演者リスト (現在):",
+      "noCurrentDelegation": "講演者リストで「現在」とマークされている代表団はありません。",
+      "note": "注記",
+      "notePlaceholder": "ポイント、POI、トーン、フォローアップ...",
+      "saveSpeechNote": "スピーチメモを保存する",
+      "recentNotes": "最近のメモ（当委員会）",
+      "delete": "消去",
+      "speakerTimeRemaining": "発言時間（残り）",
+      "remainingHelpPerSpeaker": "現在のスピーカーのカウントダウン (進むとリセット)。",
+      "remainingHelpNormal": "現在の発言者のカウントダウン (合計より少なくてもよい)。",
+      "totalTime": "合計時間",
+      "totalHelpPerSpeaker": "スピーカーごとのキャップ (床の分母、これまでのリフィルの残りを進めます)。",
+      "totalHelpNormal": "このタイマー セグメントの全長 (床のスラッシュの後に表示)。",
+      "saveTimer": "保存タイマー",
+      "advanceSpeakerReset": "スピーカーを進めて時計をリセットする",
+      "recentPauseLog": "最近の一時停止ログ",
+      "noPauseEvents": "この委員会ではまだ一時停止イベントが記録されていません。",
+      "openPauseLogHint": "一時停止ログを開いて、記録された一時停止の理由とタイムスタンプを確認します。",
+      "saved": "タイマーが保存されました。",
+      "savedCapped": "タイマーが保存されました。 講演時間は合計よりも長かった。 合計に上限が設定されています。",
+      "alreadyPaused": "タイマーはすでに一時停止されています。",
+      "pausedForCommittee": "タイマーは委員会のために一時停止しました。",
+      "alreadyRunning": "タイマーはすでに実行中です。",
+      "runningForCommittee": "委員会のためにタイマーが作動しています。",
+      "euTimerBoardTitle": "EU議会タイマーボード（11個のタイマー）",
+      "euTimerBoardHelp": "パーティーごとに 1 つのタイマーに加えて、合計時間、POI/POC 時間、スピーカー時間。 [適用] を使用して、[クロック] タブのライブ タイマー フィールド (スピーカー時間 / タイマーの保存) に行をコピーします。",
+      "euTimerName": "名前",
+      "euTimerTag": "タグ",
+      "euTotalTime": "合計時間",
+      "euPoiPocTime": "POI/POC時間",
+      "euSpeakerTime": "講演時間"
+    }
   }
 }

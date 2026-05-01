@@ -26,7 +26,7 @@ import {
 import { ChairDashboardSidebar, ChairMobileDock } from "@/components/dashboard/ChairDashboardNav";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import type { UserRole } from "@/types/database";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
@@ -38,6 +38,7 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations("dashboardLayout");
+  const locale = await getLocale();
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
   const supabase = await createClient();
@@ -110,8 +111,17 @@ export default async function DashboardLayout({
   const translatedCommittee = activeConf.committee
     ? translateCommitteeLabel(tCommitteeLabels, activeConf.committee)
     : "";
-  const translatedTopic = activeConf.name ? translateAgendaTopicLabel(tTopics, activeConf.name) : "";
-  const conferenceLine = [translatedCommittee, activeConf.tagline].filter(Boolean).join(" · ") || translatedTopic;
+  const translatedTopic = activeConf.name
+    ? translateAgendaTopicLabel(tTopics, activeConf.name, locale)
+    : "";
+  /** Elsewhere: committee · tagline, else agenda title. On Profile: committee only (topic lives in agenda). */
+  const defaultConferenceLine =
+    [translatedCommittee, activeConf.tagline].filter(Boolean).join(" · ") || translatedTopic;
+  const profileConferenceLine =
+    translatedCommittee.trim() || (activeConf.committee_code?.trim() ?? "");
+  const conferenceLine = pathname.startsWith("/profile")
+    ? profileConferenceLine
+    : defaultConferenceLine;
   const crisisReportingEnabled = isCrisisCommittee(activeConf.committee);
 
   const { count: notificationUnreadCount } = await supabase

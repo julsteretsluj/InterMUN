@@ -15,6 +15,7 @@ export type ChairNavItemKey =
   | "digitalRoom"
   | "rollCall"
   | "session"
+  | "agenda"
   | "speakers"
   | "formalMotions"
   | "discipline"
@@ -45,6 +46,11 @@ type ChairNavItem = {
 /** Order aligned with [SEAMUNs Chair Room](https://thedashboard.seamuns.site/chair); InterMUN-only items follow Official links. */
 const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/prep-checklist", itemKey: "prepChecklist", emoji: "✅" },
+  {
+    href: "/chair/session/agenda",
+    itemKey: "agenda",
+    emoji: "📑",
+  },
   { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "📋" },
   { href: "/chair/allocation-matrix", itemKey: "delegates", emoji: "👥" },
   { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },

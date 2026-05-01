@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { getConferenceForDashboard } from "@/lib/active-conference";
@@ -18,6 +18,7 @@ export default async function AllocationCodeGatePage({
   const tc = await getTranslations("common");
   const tTopics = await getTranslations("agendaTopics");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const locale = await getLocale();
   const { next: nextRaw } = await searchParams;
   const nextPath =
     nextRaw && nextRaw.startsWith("/") && !nextRaw.startsWith("//") ? nextRaw : "/delegate";
@@ -95,7 +96,7 @@ export default async function AllocationCodeGatePage({
   }
 
   const titleRaw = [conference.name, conference.committee, conference.tagline].filter(Boolean).join(" — ");
-  const title = translateConferenceHeadline(tTopics, tCommitteeLabels, titleRaw);
+  const title = translateConferenceHeadline(tTopics, tCommitteeLabels, titleRaw, locale);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-brand-cream">

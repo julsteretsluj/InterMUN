@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "ابتدا صفحه حرکت را برای اظهارات باز کنید.",
     "openMotionBlocksRecording": "یک طرح از قبل برای رای گیری باز است. قبل از ضبط عبارات بعدی آن را ببندید.",
     "statedMotionRecorded": "حرکت اعلام شده ثبت شد (هنوز برای رای گیری باز نشده است).",
-    "statedMotionRemoved": "حرکت بیان شده حذف شد."
+    "statedMotionRemoved": "حرکت بیان شده حذف شد.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "زبان",
@@ -595,7 +611,8 @@
     "pointsLog": "• ثبت امتیاز",
     "formalMotions": "حرکات رسمی",
     "timer": "تایمر",
-    "smtProfile": "نمایه"
+    "smtProfile": "نمایه",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase پیکربندی نشده است",
@@ -763,7 +780,8 @@
       "officialLinks": "لینک های رسمی",
       "roomCode": "کد اتاق",
       "settings": "تنظیمات",
-      "discipline": "انضباطی"
+      "discipline": "انضباطی",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "کشورهای عضو سازمان ملل",
       "unSystem": "سیستم سازمان ملل متحد (بنیانگذاران و اعضا)",
       "history": "تاریخ سازمان ملل متحد"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "اضافه کردن منبع",
-      "sourceUrl": "آدرس منبع",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (توصیه می شود)",
-      "urlHelp": "برای Google Doc جدید، از دکمه استفاده کنید و پیوند سند را در اینجا جای‌گذاری کنید.",
-      "titleOptional": "عنوان (اختیاری)",
-      "saveChanges": "ذخیره تغییرات",
-      "editSource": "ویرایش منبع",
-      "urlPlaceholderShort": "Google Doc یا URL دیگر",
-      "empty": "هنوز هیچ منبعی وجود ندارد. برای باز کردن آن در اینجا یک پیوند Google Doc اضافه کنید.",
-      "sourceLabel": "منبع",
-      "openLink": "پیوند را باز کنید",
-      "embedHeading": "سند منبع",
-      "notGoogleDoc": "این URL یک سند Google نیست. از پیوند docs.google.com/document/d/… برای جاسازی و ویرایش در اینجا استفاده کنید. در غیر این صورت لینک بالا را باز کنید"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "نمایندگان نمی توانند مقالات موقعیت را مستقیماً بارگذاری کنند. از نوع سند دیگری استفاده کنید.",
-      "alertOnlyChairsPositionPaper": "فقط صندلی‌ها/SMT/Admin می‌توانند مقالات موقعیت را آپلود کنند.",
-      "alertOnlySmtChairReport": "فقط SMT/admin می‌تواند گزارش‌های صندلی را آپلود کند.",
-      "alertOnlySmtRop": "فقط SMT/admin می تواند اسناد RoP را آپلود کند.",
-      "alertOnlySmtAwardCriteria": "فقط SMT/admin می تواند اسناد معیارهای جایزه را آپلود کند.",
-      "alertNeedContentOrUrl": "محتوای متنی محلی یا URL سندنگار Google را اضافه کنید.",
-      "confirmDelete": "این سند حذف شود؟",
-      "delegatePrepTitle": "بخش آماده سازی سند",
-      "delegatePrepBody": "می‌توانید <prep>اسناد آماده</prep> خود را مستقیماً از این صفحه آپلود، مشاهده و ویرایش کنید.",
-      "positionPaperGuideTitle": "راهنمای کاغذ موقعیت",
-      "positionPaperGuideBlurb": "در حالی که PDF نهایی در حال آماده شدن است، راهنمای مکان نگهدار را دانلود کنید.",
-      "downloadPlaceholderGuide": "راهنمای مکان‌دار را دانلود کنید",
-      "addDocument": "سند اضافه کنید",
-      "tabs": {
-        "ariaLabel": "بخش های سند",
-        "library": "کتابخانه",
-        "compose": "نوشتن",
-        "composeHint": "یک سند جدید شروع کنید یا یک پیش نویس موجود را از این برگه ویرایش کنید."
-      },
-      "newDocumentTitle": "سند جدید",
-      "editDocumentTitle": "ویرایش سند",
-      "typeLabel": "تایپ کنید",
-      "types": {
-        "position_paper": "کاغذ موقعیت",
-        "chair_report": "گزارش صندلی",
-        "rop": "RoP",
-        "award_criteria": "معیارهای جایزه",
-        "chair_notes": "یادداشت های صندلی",
-        "prep_doc": "سند آماده سازی"
-      },
-      "delegatePositionPaperNote": "مقالات موقعیت توسط صندلی ها با بازخورد آپلود می شوند.",
-      "delegateOwner": "مالک نماینده",
-      "chairRecipient": "گیرنده صندلی",
-      "titleLabel": "عنوان",
-      "titlePlaceholder": "عنوان سند",
-      "googleDocsUrl": "URL سندنگار Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (جاسازی مشاهده/ویرایش در برنامه)",
-      "googleDocsHelp": "از New Google Doc برای باز کردن Google در یک برگه جدید استفاده کنید، سپس پیوند سند را در اینجا جای‌گذاری کنید. متن ساده زیر اختیاری است. هر سندی به متن محلی، پیوند Google Doc یا هر دو نیاز دارد.",
-      "plainTextOptional": "متن ساده (اختیاری)",
-      "plainTextPlaceholder": "یادداشت ها یا متن پیش نویس…",
-      "chairFeedbackLabel": "بازخورد صندلی",
-      "chairFeedbackPlaceholder": "بازخورد برای مقاله موضع نماینده...",
-      "empty": "هنوز هیچ سندی وجود ندارد. یکی اضافه کنید یا یک Google Doc را پیوند دهید.",
-      "sidebarDocumentLabel": "سند",
-      "sections": {
-        "chairReports": "گزارش های کرسی",
-        "rop": "RoP",
-        "awardCriteria": "معیارهای جایزه",
-        "prepDocuments": "اسناد آماده سازی",
-        "chairNotes": "یادداشت های صندلی",
-        "otherDocuments": "اسناد دیگر"
-      },
-      "untitled": "بدون عنوان",
-      "linkedDocumentHeading": "سند پیوند داده شده",
-      "notesHeading": "یادداشت ها",
-      "noGoogleDocYet": "هنوز Google Doc پیوند داده نشده است. از ویرایش برای افزودن URL docs.google.com/document/d/… استفاده کنید.",
-      "chairFeedbackHeading": "بازخورد صندلی",
-      "noFeedbackYet": "هنوز بازخوردی اضافه نشده است."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "ابتدا یک ایمیل نماینده وارد کنید.",
-      "sentToDelegate": "به {email} ارسال شد.",
-      "newResolution": "قطعنامه جدید",
-      "maxDraftResolutions": "این کمیته از قبل دارای {count} پیش نویس قطعنامه است.",
-      "googleDocLink": "پیوند Google Doc",
-      "googleDocUrlPlaceholder": "URL سندنگار Google (docs.google.com/document/d/… — برای جاسازی + ویرایش استفاده می‌شود)",
-      "googleDocUrlHelp": "Google Doc جدید در برگه دیگری باز می شود. URL را از نوار آدرس کپی کرده و در اینجا قرار دهید.",
-      "mainSubmittersPlaceholder": "ارسال کنندگان اصلی (شناسه های کاربری، جدا شده با کاما)",
-      "coSubmittersPlaceholder": "ارسال کنندگان مشترک (شناسه های کاربری، جدا شده با کاما)",
-      "create": "ایجاد کنید",
-      "cancel": "لغو کنید",
-      "openInNewTab": "در برگه جدید باز کنید",
-      "noGoogleDocLink": "پیوند Google Doc وجود ندارد",
-      "visibleToOtherBloc": "برای بلوک های دیگر قابل مشاهده است",
-      "resolutionCounts": "زیرمجموعه های اصلی: {main} | مشترکین: {co} | امضا کنندگان: {signatories}",
-      "blocButton": "بلوک {name} ({stance})",
-      "signVirtually": "به صورت مجازی امضا کنید (زیرهای اصلی مطلع شدند)",
-      "shareByEmail": "وضوح را از طریق ایمیل به اشتراک بگذارید",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "ارسال به نمایندگی",
-      "clauseEditor": "ویرایشگر بند",
-      "noClausesYet": "هنوز هیچ بندی وجود ندارد.",
-      "clauseNumber": "بند {number}",
-      "saveClause": "بند ذخیره",
-      "delete": "حذف کنید",
-      "addClausePlaceholder": "اضافه کردن یک بند جدید ...",
-      "addClause": "اضافه کردن بند",
-      "clauseVoteHistory": "تاریخچه رأی بند",
-      "noClauseOutcomesYet": "هنوز هیچ نتیجه رای گیری در بند ثبت نشده است.",
-      "clauseFallback": "بند",
-      "passed": "گذشت",
-      "failed": "ناموفق",
-      "motionId": "حرکت {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "بخش های رای گیری",
-        "open": "باز کنید",
-        "closed": "بسته شد"
-      },
-      "requiredMajority": "اکثریت لازم",
-      "helpRequiredMajorityTitle": "اکثریت لازم",
-      "helpRequiredMajorityBody": "آستانه رای مورد استفاده برای تصمیم گیری برای قبولی/شکست را انتخاب کنید. \"ساده\" بیش از نصف است. «2/3» نیاز به اکثریت فوق العاده دارد.",
-      "majoritySimple": "ساده",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "اکثریت {label}",
-      "mustVote": "باید رای داد",
-      "helpMustVoteTitle": "باید رای داد",
-      "helpMustVoteBody": "این حرکت را به عنوان یک مورد \"باید رای\" علامت گذاری می کند. این برای برقراری ارتباط با شرکت کنندگان (بسته به تشکیل کمیته شما) استفاده می شود.",
-      "saveSettings": "تنظیمات را ذخیره کنید",
-      "delegateBlurb": "دایس آرا را در جلسه ثبت می کند (مثلاً تماس تلفنی). آرای حرکتی در اینجا فقط بله/خیر را دنبال می‌کنند (از رای ممتنع استفاده نمی‌شود). می توانید آمار را دنبال کنید. نمایندگان در برنامه رای نمی دهند.",
-      "yes": "بله",
-      "no": "خیر",
-      "ballots": "برگه های رای",
-      "total": "مجموع",
-      "outcome": "نتیجه",
-      "passed": "گذشت",
-      "failed": "شکست خورد",
-      "noRecordedVotes": "هیچ رای ثبت نشده",
-      "reopenMotion": "حرکت را دوباره باز کنید",
-      "editRecordOpen": "ویرایش رکورد…",
-      "hideSettings": "تنظیمات را مخفی کنید",
-      "preliminaryPassing": "قبولی ( مقدماتی )",
-      "preliminaryFailing": "شکست (مقدماتی)",
-      "delegateRollCall": "واگذاری تماس تلفنی ({count})",
-      "noSeatedDelegates": "هیچ نماینده نشسته ای برای این پیشنهاد موجود نیست.",
-      "rollPrefix": "رول:",
-      "recordedPrefix": "ثبت شده:",
-      "recordedYes": "بله",
-      "recordedNo": "خیر",
-      "recordedAbstain": "پرهیز کنید",
-      "recordedNone": "-",
-      "abstain": "پرهیز کنید",
-      "clear": "پاک کردن",
-      "closeMotion": "حرکت بسته",
-      "mustVoteBadge": "باید رای داد",
-      "canVoteBadge": "می تواند رای دهد",
-      "noMotions": "هنوز هیچ حرکتی وجود ندارد.",
-      "currentOpenMotion": "حرکت باز فعلی",
-      "noOpenMotion": "در حال حاضر هیچ حرکت باز وجود ندارد.",
-      "recentClosedMotions": "حرکات بسته اخیر",
-      "noClosedMotions": "هنوز هیچ حرکت بسته ای وجود ندارد.",
-      "untitled": "بدون عنوان",
-      "voteTypes": {
-        "motion": "حرکت",
-        "amendment": "اصلاحیه",
-        "resolution": "قطعنامه"
-      },
-      "roll": {
-        "absent": "غایب (رول)",
-        "present_abstain": "حاضر - ممکن است پرهیز کند (رول)",
-        "present_voting": "ارائه و رای دادن (رول)",
-        "unknown": "- (رول)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "بخش های پروفایل",
-        "overview": "نمای کلی",
-        "awards": "جوایز",
-        "private": "سوابق خصوصی",
-        "settings": "تنظیمات پروفایل"
-      },
-      "profilePicture": "عکس پروفایل",
-      "uploadFile": "آپلود فایل",
-      "uploading": "در حال آپلود…",
-      "photoSaved": "عکس آپلود و ذخیره شد.",
-      "orUrl": "یا با URL تنظیم شود",
-      "urlPlaceholder": "https://...",
-      "name": "نام",
-      "username": "نام کاربری",
-      "usernamePlaceholder": "به عنوان مثال alex_1999",
-      "pronouns": "ضمایر",
-      "customPronounNote": "نمایه شما دارای یک مجموعه ضمایر سفارشی بود که دیگر در اینجا پذیرفته نمی شود. یکی از گزینه های بالا را انتخاب کنید (یا خالی بگذارید). ذخیره جایگزین مقدار قدیمی می شود.",
-      "school": "مدرسه",
-      "schoolPlaceholder": "به عنوان مثال دبیرستان لینکلن",
-      "grade": "درجه",
-      "selectGrade": "نمره را انتخاب کنید",
-      "conferencesAttended": "کنفرانس ها شرکت کردند",
-      "awardsComma": "جوایز (با کاما از هم جدا شده اند)",
-      "awardsPlaceholder": "بهترین نماینده، تذکر افتخاری",
-      "allocation": "تخصیص",
-      "selectAllocation": "تخصیص را انتخاب کنید",
-      "noAllocationsPlaceholder": "هیچ تخصیص کمیته ای در دسترس نیست",
-      "saveProfile": "ذخیره نمایه",
-      "saved": "نمایه ذخیره شد.",
-      "saveFailed": "نمایه ذخیره نشد.",
-      "errUsernamePattern": "نام کاربری باید 3-32 کاراکتر باشد (حروف، اعداد، _، .، -)",
-      "errPronounsPreset": "یک ضمیر از لیست انتخاب کنید.",
-      "errImageType": "لطفا یک فایل تصویری انتخاب کنید.",
-      "errImageSize": "تصویر خیلی بزرگ است (حداکثر 5 مگابایت).",
-      "errUploadFailed": "آپلود انجام نشد.",
-      "errStorageSetup": "ذخیره سازی تصویر نمایه تنظیم نشده است. در پروژه Supabase، migration 00100_profile_pictures_storage_bucket.sql را اجرا کنید، یا یک سطل ذخیره سازی عمومی به نام profile-pictures ایجاد کنید (به README مراجعه کنید).",
-      "errPublicUrl": "URL عمومی برای تصویر آپلود شده حل نشد.",
-      "fallbacks": {
-        "yourCountry": "کشور شما",
-        "committeeSession": "جلسه کمیته",
-        "delegate": "نماینده",
-        "speechNote": "یادداشت سخنرانی",
-        "untitledMotion": "حرکت بدون عنوان",
-        "dash": "-"
-      },
-      "delegateWelcome": {
-        "title": "خوش آمدید نماینده {flag} {country}",
-        "subtitle": "دوست دارید با چه چیزی شروع کنید؟",
-        "links": {
-          "documents": "اسناد",
-          "notes": "یادداشت ها",
-          "committeeRoom": "اتاق کمیته",
-          "runningNotes": "در حال اجرا",
-          "ideas": "ایده ها",
-          "guides": "راهنماها",
-          "sources": "منابع",
-          "resolutions": "قطعنامه ها",
-          "speeches": "سخنرانی ها",
-          "stances": "موضع گیری ها",
-          "crisisSlides": "بحران سقوط می کند",
-          "report": "گزارش دهید",
-          "motions": "حرکات",
-          "points": "امتیاز"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "جوایز در پروفایل شما",
-        "rank": "رتبه {رتبه}",
-        "pending": {
-          "tab": "نامزدهای معلق",
-          "title": "نامزدهای صندلی معلق",
-          "descriptionSingle": "توسط صندلی ذخیره شده و برای بررسی با SMT به اشتراک گذاشته شده است. جوایز نهایی پس از تایید در زیر ظاهر می شوند.",
-          "descriptionTabbed": "توسط صندلی ذخیره شده و برای بررسی با SMT به اشتراک گذاشته شده است. جوایز نهایی پس از تایید ظاهر می شوند."
-        },
-        "recorded": {
-          "tab": "جوایز ثبت شده",
-          "title": "جوایز ثبت شده",
-          "description": "زمانی که صندلی‌ها یا SMT شما را در ردیاب جوایز اختصاص می‌دهند، فهرست می‌شود. تشخیص نهایی از قوانین کنفرانس شما پیروی می کند."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "فقط برای شما، روسای کمیته و SMT برای کمیته مربوطه قابل مشاهده است.",
-        "points": {
-          "title": "امتیاز صندلی (خصوصی)"
-        },
-        "speechNotes": {
-          "title": "یادداشت های سخنرانی صندلی (خصوصی)"
-        },
-        "motions": {
-          "title": "حرکاتی که شما حرکت کردید",
-          "description": "برای بررسی کمیته و نظارت SMT در نمایه شما ذخیره شد."
-        }
-      },
-      "discipline": {
-        "title": "وضعیت انضباطی (خصوصی)",
-        "statusLine": "هشدارها: {warnings} · اخطارها: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "رای دادن غیر فعال",
-        "speakingSuspended": "صحبت کردن به حالت تعلیق درآمد",
-        "removedFromCommittee": "از کمیته حذف شد",
-        "updated": "به روز شده: {value}"
-      },
-      "preview": {
-        "ariaLabel": "پیش نمایش نمایه",
-        "title": "پیش نمایش",
-        "yourName": "نام شما",
-        "usernameNotSet": "نام کاربری تنظیم نشده است",
-        "gradeValue": "درجه {grade}",
-        "awards": "جوایز"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "قوانین رویه (RoP)",
-          "content": "# آیین نامه داخلی \n\n## نقاط و حرکات \n- **نقطه سفارش**: رویه صحیح \n- **نقطه اطلاعات**: سوال از سخنران \n- **نقطه امتیاز شخصی**: راحتی شخصی \n- **حرکت به میز**: بحث را به تعویق بیندازید \n- **پیشنهاد به تعویق انداختن**: پایان جلسه \n\n## رای دادن \n- اکثریت ساده برای امور رویه ای \n- اکثریت 2/3 برای مسائل ماهوی \n- رای تلفنی در صورت درخواست"
-        },
-        "examples": {
-          "title": "نمونه ها",
-          "content": "#نمونه ها \n\n## فرمت رزولوشن \n``` \nمجمع عمومی، \n... \n1. از کشورهای عضو می خواهد که ... \n2. از جامعه بین المللی می خواهد که ... \n``` \n\n## ساختار کاغذ موقعیت \n1. پس زمینه \n2. سیاست کشور \n3. راه حل های پیشنهادی"
-        },
-        "templates": {
-          "title": "قالب ها",
-          "content": "# الگوها \n\n## الگوی گزارش صندلی \n- بررسی اجمالی کمیته \n- نکات کلیدی بحث \n- مصوبات تصویب شد \n- توصیه ها"
-        },
-        "chairReport": {
-          "title": "گزارش صندلی",
-          "content": "# گزارش صندلی \n\nمراحل و نتایج کمیته اسناد در اینجا."
-        }
-      },
-      "edit": "ویرایش کنید",
-      "guideDocument": "سند راهنما",
-      "additionalNotes": "یادداشت های اضافی",
-      "noContentYet": "هنوز محتوایی وجود ندارد.",
-      "titlePlaceholder": "عنوان",
-      "googleDocsUrl": "URL سندنگار Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google Doc جدید در برگه دیگری باز می شود. یک پیوند قابل اشتراک‌گذاری را جای‌گذاری کنید تا نمایندگان بتوانند سند را در اینجا باز کنند (مشاهده/ویرایش بستگی به اشتراک‌گذاری Google دارد).",
-      "markdownOptional": "یادداشت‌های Markdown (در صورت استفاده از Google Doc اختیاری است)",
-      "save": "ذخیره کنید",
-      "cancel": "لغو کنید",
-      "createNewGuide": "راهنمای جدید ایجاد کنید",
-      "slugPlaceholder": "حلزون (بی نظیر)",
-      "titleLowerPlaceholder": "عنوان",
-      "googleDocsUrlOptional": "URL سندنگار Google (اختیاری)",
-      "markdownContentOptional": "محتوای نشانه گذاری (اختیاری)",
-      "create": "ایجاد کنید",
-      "glossary": {
-        "title": "واژه نامه دستور کار MUN",
-        "subtitle": "اصطلاحات منحصر به فرد مطابق با کد کمیته شما و موضوعات دستور کار فعلی.",
-        "committeeCode": "کد کمیته: {code}",
-        "topicTag": "موضوع: {topic}",
-        "sources": {
-          "core": "هسته",
-          "committee": "کمیته",
-          "topic": "موضوع"
-        },
-        "terms": {
-          "delegation": {
-            "term": "هیئت نمایندگی",
-            "definition": "یک کشور یا تیم ناظر که نماینده یک ایالت یا نهاد در کمیته است."
-          },
-          "placard": {
-            "term": "پلاکارد",
-            "definition": "علامت کشوری که برای درخواست کف، رای، و علامت دادن به اقدامات رویه ای استفاده می شود."
-          },
-          "dais": {
-            "term": "دایس",
-            "definition": "تیم ریاست که بحث را تعدیل می کند، رویه را اعمال می کند و نظم سخنرانی را مدیریت می کند."
-          },
-          "quorum": {
-            "term": "حد نصاب",
-            "definition": "حداقل تعداد نمایندگان مورد نیاز برای انجام امور رسمی و رای."
-          },
-          "motion": {
-            "term": "حرکت",
-            "definition": "پیشنهاد رسمی برای تغییر جریان بحث، مانند نوع جلسه یا زمان سخنرانی."
-          },
-          "point_of_order": {
-            "term": "نقطه سفارش",
-            "definition": "مداخله زمانی که رویه طبق قوانین کمیته نادرست اعمال می شود."
-          },
-          "moderated_caucus": {
-            "term": "هیئت انجمنی تعدیل شده",
-            "definition": "بخش مناظره ساختاریافته با سخنرانی های زمان بندی شده کوتاه در یک موضوع فرعی تعریف شده."
-          },
-          "unmoderated_caucus": {
-            "term": "گروه غیر تعدیل شده",
-            "definition": "دوره مذاکره غیررسمی که در آن نمایندگان آزادانه برای پیش نویس و ادغام ایده ها حرکت می کنند."
-          },
-          "draft_resolution": {
-            "term": "پیش نویس قطعنامه",
-            "definition": "متن کاری اقدام کمیته پیشنهادی قبل از رای گیری نهایی و تصویب."
-          },
-          "amendment": {
-            "term": "اصلاحیه",
-            "definition": "تغییر پیشنهادی به متن پیش‌نویس، دوستانه یا به‌عنوان غیردوستانه رای‌گیری شده است."
-          },
-          "operative_clause": {
-            "term": "بند اجرایی",
-            "definition": "بند شماره دار اقدام گرا که آنچه را که کمیته پیشنهاد انجام می دهد را توصیف می کند."
-          },
-          "preambulatory_clause": {
-            "term": "بند پیش از سفر",
-            "definition": "بند تنظیم زمینه با ذکر اصول پس زمینه، نگرانی ها و چارچوب های قبلی."
-          },
-          "right_of_reply": {
-            "term": "حق پاسخ",
-            "definition": "فرصتی برای پاسخ به یک بیانیه مستقیم که بر شأن یا موقعیت هیئت تأثیر گذاشته است."
-          },
-          "veto_power": {
-            "term": "قدرت وتو",
-            "definition": "مرجع دائمی شورای امنیت سازمان ملل برای جلوگیری از پیش نویس قطعنامه های اساسی."
-          },
-          "chapter_vii": {
-            "term": "فصل هفتم",
-            "definition": "مرجع منشور ملل متحد در مورد تهدیدات علیه صلح، تحریم ها و اقدامات استفاده از زور."
-          },
-          "sanctions_regime": {
-            "term": "رژیم تحریم ها",
-            "definition": "محدودیت های هماهنگ برای تأثیرگذاری بر رفتار بدون اقدام نظامی مستقیم استفاده می شود."
-          },
-          "arms_control": {
-            "term": "کنترل تسلیحات",
-            "definition": "توافق‌نامه‌ها و سیستم‌های راستی‌آزمایی که نوع، مقدار یا استقرار سلاح‌ها را محدود می‌کند."
-          },
-          "non_proliferation": {
-            "term": "عدم اشاعه",
-            "definition": "سیاست‌های جلوگیری از گسترش قابلیت‌های هسته‌ای، شیمیایی، بیولوژیکی یا سلاح‌های پیشرفته."
-          },
-          "confidence_building_measures": {
-            "term": "اقدامات اعتمادسازی",
-            "definition": "شفافیت و ابزارهای ارتباطی که سوء تفاهم و خطر درگیری را کاهش می دهد."
-          },
-          "universal_periodic_review": {
-            "term": "بررسی دوره ای جهانی",
-            "definition": "فرآیند بررسی همتا که در آن هر کشور عضو سازمان ملل گزارش می دهد و توصیه های حقوقی را دریافت می کند."
-          },
-          "special_rapporteur": {
-            "term": "گزارشگر ویژه",
-            "definition": "کارشناس مستقل برای نظارت و گزارش در مورد موضوعات موضوعی یا حقوق کشور منصوب شد."
-          },
-          "treaty_body": {
-            "term": "بدنه معاهده",
-            "definition": "کمیته کارشناسان نظارت بر اجرای یک معاهده حقوق بشر خاص."
-          },
-          "public_health_emergency": {
-            "term": "اورژانس بهداشت عمومی",
-            "definition": "رویداد شیوع جدی که نیاز به واکنش هماهنگ ملی و بین المللی فوری دارد."
-          },
-          "surveillance": {
-            "term": "نظارت اپیدمیولوژیک",
-            "definition": "جمع آوری و تجزیه و تحلیل مستمر داده های بهداشتی برای شناسایی و پیگیری روند بیماری."
-          },
-          "health_systems": {
-            "term": "تقویت سیستم های سلامت",
-            "definition": "بهبود نیروی کار، تامین مالی، تدارکات و حاکمیت برای ارائه مراقبت های بهداشتی قابل اعتماد."
-          },
-          "transnational_crime": {
-            "term": "جرایم سازمان یافته فراملی",
-            "definition": "فعالیت های مجرمانه که در فراسوی مرزها از طریق شبکه ها و بازارهای غیرقانونی هماهنگ شده است."
-          },
-          "illicit_trafficking": {
-            "term": "قاچاق غیرقانونی",
-            "definition": "جابجایی غیرقانونی مواد مخدر، اسلحه، افراد یا کالاها در سراسر حوزه های قضایی."
-          },
-          "rule_of_law_capacity": {
-            "term": "ظرفیت حاکمیت قانون",
-            "definition": "توانایی نهادی سیستم های قضایی برای تحقیق، تعقیب و حمایت عادلانه از حقوق."
-          },
-          "sustainable_development": {
-            "term": "توسعه پایدار",
-            "definition": "مدل رشد متعادل کننده پیشرفت اجتماعی، فرصت های اقتصادی و حفاظت از محیط زیست."
-          },
-          "financing_for_development": {
-            "term": "تامین مالی برای توسعه",
-            "definition": "مکانیسم های تامین مالی دولتی و خصوصی که از اولویت های توسعه بلندمدت حمایت می کنند."
-          },
-          "policy_coordination": {
-            "term": "هماهنگی سیاست",
-            "definition": "همسویی اقدامات دولت و آژانس برای جلوگیری از تکراری شدن و افزایش تأثیر جمعی."
-          },
-          "child_protection": {
-            "term": "حفاظت از کودک",
-            "definition": "اقداماتی برای جلوگیری از استثمار، سوء استفاده و خشونت علیه کودکان در همه شرایط."
-          },
-          "education_access": {
-            "term": "دسترسی به آموزش",
-            "definition": "تضمین فرصت های یادگیری فراگیر، عادلانه و مستمر برای همه کودکان."
-          },
-          "humanitarian_response": {
-            "term": "واکنش بشردوستانه",
-            "definition": "اقدامات امدادی سریع برای رفع نیازهای فوری در شرایط بحران و درگیری."
-          },
-          "gender_mainstreaming": {
-            "term": "جریان اصلی جنسیت",
-            "definition": "ادغام تحلیل جنسیتی در طراحی، اجرا و ارزیابی سیاست."
-          },
-          "gender_based_violence": {
-            "term": "خشونت مبتنی بر جنسیت",
-            "definition": "آسیبی که بر اساس هویت جنسیتی، نقش ها یا روابط نابرابر قدرت به شخصی وارد می شود."
-          },
-          "economic_empowerment": {
-            "term": "توانمندسازی اقتصادی",
-            "definition": "گسترش دسترسی به کار شایسته، امور مالی، مالکیت و قدرت تصمیم گیری."
-          },
-          "source_attribution": {
-            "term": "منبع منبع",
-            "definition": "ذکر منبع اطلاعات به وضوح تا بتوان ادعاها را تأیید کرد و زمینه سازی کرد."
-          },
-          "verified_reporting": {
-            "term": "گزارش تایید شده",
-            "definition": "استاندارد روزنامه نگاری که نیاز به تایید قبل از انتشار حقایق مورد اعتراض دارد."
-          },
-          "editorial_independence": {
-            "term": "استقلال تحریریه",
-            "definition": "جداسازی تصمیمات گزارش دهی از فشار سیاسی یا نفوذ ذینفعان."
-          },
-          "climate_mitigation": {
-            "term": "کاهش آب و هوا",
-            "definition": "اقداماتی که انتشار گازهای گلخانه ای را کاهش می دهد یا حذف طولانی مدت کربن را افزایش می دهد."
-          },
-          "climate_adaptation": {
-            "term": "سازگاری با آب و هوا",
-            "definition": "سیاست‌ها و سرمایه‌گذاری‌هایی که آسیب‌پذیری را در برابر تأثیرات مرتبط با آب و هوا کاهش می‌دهند."
-          },
-          "cyber_norms": {
-            "term": "هنجارهای سایبری",
-            "definition": "انتظارات مشترک برای رفتار دولت مسئولانه در حوزه های دیجیتال و سایبری."
-          },
-          "critical_infrastructure": {
-            "term": "زیرساخت های حیاتی",
-            "definition": "سیستم های ضروری مانند برق، آب، بهداشت و ارتباطات که نیاز به انعطاف پذیری دارند."
-          },
-          "epidemiology": {
-            "term": "اپیدمیولوژی",
-            "definition": "مطالعه الگوهای بیماری، علل، و توزیع در جمعیت."
-          },
-          "preparedness_response": {
-            "term": "آمادگی و پاسخگویی",
-            "definition": "برنامه ریزی، هماهنگی و اقدامات افزایشی برای مهار و مدیریت شرایط اضطراری."
-          },
-          "non_refoulement": {
-            "term": "عدم بازگشت مجدد",
-            "definition": "اصل منع بازگشت افراد به مکان هایی که با آسیب جدی مواجه می شوند."
-          },
-          "durable_solutions": {
-            "term": "راه حل های بادوام",
-            "definition": "نتایج بلند مدت برای افراد آواره: بازگشت، ادغام محلی، یا اسکان مجدد."
-          },
-          "nuclear_safeguards": {
-            "term": "پادمان های هسته ای",
-            "definition": "اقدامات راستی‌آزمایی که تضمین می‌کند مواد هسته‌ای برای استفاده از سلاح منحرف نمی‌شوند."
-          },
-          "counter_terrorism": {
-            "term": "مبارزه با تروریسم",
-            "definition": "اقدامات قانونی، پیشگیرانه و امنیتی یکپارچه در برابر فعالیت های تروریستی."
-          },
-          "due_process": {
-            "term": "فرآیند مقرر",
-            "definition": "رویه های قانونی منصفانه که از حقوق در حین تحقیق، تعقیب و مجازات حمایت می کند."
-          },
-          "resource_security": {
-            "term": "امنیت منابع",
-            "definition": "دسترسی مطمئن به غذا، آب و انرژی تحت فشارهای اقتصادی و محیطی."
-          },
-          "resilience": {
-            "term": "تاب آوری",
-            "definition": "ظرفیت جوامع و موسسات برای جذب شوک ها و بازیابی موثر."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "ویرایش ایده",
-      "googleDocsUrl": "URL سندنگار Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "متن ایده کوتاه (اختیاری)",
-      "save": "ذخیره کنید",
-      "cancel": "لغو کنید",
-      "addIntro": "برای پیش‌نویس یک ایده حل، یک Google Doc اضافه کنید، یا یک یادداشت کوتاه (یا هر دو) تایپ کنید.",
-      "googleDocsCreateHelp": "Google Doc جدید در برگه دیگری باز می شود. پس از ایجاد پیوند، آن را در اینجا قرار دهید.",
-      "resolutionIdeaPlaceholder": "ایده رزولوشن...",
-      "add": "اضافه کنید",
-      "noIdeasYet": "هنوز ایده ای وجود ندارد.",
-      "ideaLabel": "ایده",
-      "ideaFallback": "ایده {number}",
-      "linkedDoc": "سند مرتبط",
-      "addedOn": "اضافه شد {date}",
-      "edit": "ویرایش کنید",
-      "delete": "حذف کنید",
-      "ideaDocument": "سند ایده",
-      "summary": "خلاصه",
-      "emptyIdea": "ایده خالی"
-    },
-    "stances": {
-      "heatmapTitle": "نمای کلی موضع (Heatmap)",
-      "heatmapHelp": "تخصیص شما تا چه حد از ___ پشتیبانی می کند؟ (مقیاس 1-5)",
-      "topicPlaceholder": "به عنوان مثال اقدام اقلیمی",
-      "extentLabel": "میزان (1-5):",
-      "extentHelpTitle": "میزان (1-5)",
-      "extentHelpBody": "1 به این معنی است که تخصیص شما پشتیبانی کمی از موضوع دارد و 5 به معنای پشتیبانی قوی است. عددی را انتخاب کنید که با موضع شما در کمیته مطابقت داشته باشد.",
-      "add": "اضافه کنید",
-      "viewOnlyHeatmap": "نقشه حرارتی فقط مشاهده برای کارکنان.",
-      "notesPerAllocation": "یادداشت در هر تخصیص",
-      "noAllocationsYet": "هنوز تخصیصی وجود ندارد",
-      "notesPlaceholder": "یادداشت های موضعی برای این تخصیص ...",
-      "noteLanguageWarning": "هشدار خواننده: این یادداشت ممکن است حاوی زبان نامناسب باشد.",
-      "save": "ذخیره کنید",
-      "saveHelpTitle": "یادداشت موضع را ذخیره کنید",
-      "saveHelpBody": "یادداشت موضع را برای این تخصیص ذخیره می کند. این می تواند توسط کارکنان و (بسته به تنظیمات کمیته) دیگر شرکت کنندگان مشاهده شود."
-    },
-    "speeches": {
-      "newSpeech": "سخنرانی جدید",
-      "speechTitlePlaceholder": "عنوان سخنرانی",
-      "googleDocsUrl": "URL سندنگار Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google را در یک برگه جدید باز می کند. پس از آماده شدن، نشانی وب سند را در اینجا بچسبانید.",
-      "plainTextOptional": "پیش نویس متن ساده (اختیاری اگر از Google Doc استفاده می کنید)",
-      "save": "ذخیره کنید",
-      "cancel": "لغو کنید",
-      "noSpeechesYet": "هنوز سخنرانی نشده است. یک Google Doc را پیوند دهید یا متن را جای‌گذاری کنید.",
-      "speechLabel": "گفتار",
-      "untitled": "بدون عنوان",
-      "edit": "ویرایش کنید",
-      "speechDocument": "سند سخنرانی",
-      "draftText": "متن پیش نویس",
-      "noContentHint": "یک Google Doc را با ویرایش پیوند دهید یا متن ساده را در فرم اضافه کنید."
-    },
-    "committeeRoom": {
-      "committeeLabel": "کمیته",
-      "clearSearchTitle": "جستجو را پاک کنید و همه نمایندگان را نشان دهید",
-      "vacantLabel": "خالی",
-      "searchVacantTitle": "صندلی های \"خالی\" را در اتاق جستجو کنید",
-      "searchHint": "کشور، نام نماینده، مدرسه، ضمیر یا «خالی» را برای برجسته کردن موارد منطبق در اتاق تایپ کنید. Enter را فشار دهید تا به اولین مسابقه بروید. Esc پاک می شود. برای پرش به صندلی های خالی روی خالی کلیک کنید.",
-      "findLabel": "یک هیأت یا عضو دایس پیدا کنید",
-      "searchPlaceholder": "کشور، نام، مدرسه ...",
-      "matchesCount": "{matches} از {total} صندلی مطابقت دارد",
-      "searchAria": "هیئت ها را جستجو کنید",
-      "virtualRoomVacant": "خالی",
-      "profileAria": "مشاهده نمایه: {country}",
-      "vacantSeatAria": "صندلی خالی",
-      "placardAria": "پلاکارد {country}",
-      "gavelAria": "گاول",
-      "yourContext": "زمینه شما",
-      "roleLabel": "نقش",
-      "seatLabel": "صندلی",
-      "assignedLabel": "اختصاص داده شده است",
-      "daisLabel": "دایس",
-      "phaseLabel": "فاز",
-      "phaseVoting": "رای دادن",
-      "phaseDebate": "مناظره",
-      "focusSearchTitle": "جستجوی تمرکز (عناوین و نام‌ها با درخواست شما مطابقت دارند)",
-      "tipLabel": "نکته",
-      "enterScrolls": "طومارها را وارد کنید",
-      "typeToFilterHint": "برای فیلتر تایپ کنید - اسکرول ها را برای اولین تطابق وارد کنید",
-      "noMatches": "هیچ هیئت یا صندلی همسانی وجود ندارد.",
-      "digitalDisplay": "نمایشگر دیجیتال",
-      "floorLabel": "طبقه",
-      "staffSeatsHeading": "کارکنان - صندلی",
-      "viewProfileAria": "مشاهده نمایه: {title}",
-      "noProfileLinkAria": "{title} (بدون لینک نمایه)",
-      "committeeFloor": "طبقه کمیته",
-      "virtualRoomFigureAria": "اتاق کمیته مجازی - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "فیلتر کردن هیئت ها اولین صندلی برجسته اولین مسابقه در رینگ است.",
-      "helperText": "پلاکاردها کشور (از تخصیص ها)، نام، مدرسه، و ضمایر را از نمایه هر نماینده فهرست می کنند. مورد خود را در قسمت نمایه ویرایش کنید. صندلی‌های خالی کمیته خالی نشان داده می‌شوند. برای باز کردن صفحه آن عضو (چت و گزارش از آنجا) روی یک پلاکارد یا صندلی پر شده کلیک کنید.",
-      "virtualRoomCaption": "اتاق کمیته سازمان ملل متحد مدل مجازی با پلاکاردهایی که کشور، نام، مدرسه و ضمایر را نشان می‌دهد."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "درخواست صحبت کردن",
-        "delegateFallback": "نماینده",
-        "needAllocation": "برای درخواست صحبت به یک تخصیص نیاز دارید.",
-        "alreadyQueued": "شما قبلاً یک درخواست صحبت فعال در صف دارید.",
-        "requested": "درخواست صحبت کرد. در صف ظاهر می شوید.",
-        "requestFailed": "درخواست صحبت انجام نشد.",
-        "helpBody": "هیئت خود را به صف صندلی می فرستد. می‌توانید هر بار یک درخواست انتظار/فعال فعال داشته باشید.",
-        "purposeLabel": "هدف اختیاری (نمایش در برچسب صف)",
-        "purposeHelpTitle": "برچسب هدف",
-        "purposeHelpBody": "این متن به نام کشور شما اضافه می‌شود تا صندلی‌ها بتوانند دلیل درخواست شما را ببینند.",
-        "purposePlaceholder": "به عنوان مثال پشتیبانی + مرور کلی اصلاحیه",
-        "requesting": "در حال درخواست...",
-        "rollPromptTitle": "تایید صندلی لازم است",
-        "rollPromptBodyPickStatus": "جلسه شروع شد وضعیت تماس تلفنی خود را برای باز کردن قفل صحبت کردن و رای دادن انتخاب کنید. این انتخاب قابل تغییر نیست.",
-        "rollPromptBodyWaitSessionStart": "در انتظار شروع جلسه کمیته توسط رئیس.",
-        "rollPromptBodyWaitRollPrompt": "در حال انتظار برای تماس تلفنی",
-        "rollPromptBodyMarkedAbsent": "شما در حال حاضر غایب علامت‌گذاری شده‌اید. از صندلی بخواهید که برای صحبت و رای دادن، شما را به عنوان \"حضور\" علامت بزند.",
-        "rollPromptBodyChecking": "در حال بررسی وضعیت رول شما...",
-        "rollPromptSaving": "در حال ذخیره...",
-        "rollPromptPresent": "حاضر شود",
-        "rollPromptPresentVoting": "حضور و رای دادن"
-      },
-      "motionVoting": {
-        "votingProcedure": "روش رای گیری",
-        "currentMotion": "حرکت فعلی",
-        "motioner": "حرکت دهنده",
-        "majority": "اکثریت",
-        "majoritySimple": "ساده",
-        "tally": "بله {yes} - خیر {no} - مجموع {total}",
-        "help": "دایس رای هر هیئت را در جلسه ثبت می کند. در رای‌های حرکتی فقط از بله یا خیر (نه ممتنع) استفاده می‌شود. مجموع فقط پلاکاردهایی را که در آن بله یا خیر ثبت شده است، می شمارند. هیئت های غایب حذف می شوند."
-      },
-      "activeMotion": {
-        "currentMotion": "حرکت فعلی",
-        "motionFallback": "حرکت",
-        "motioner": "حرکت دهنده",
-        "majority": "اکثریت",
-        "majoritySimple": "ساده",
-        "type": "تایپ کنید",
-        "timer": "تایمر",
-        "currentSpeaker": "بلندگوی فعلی",
-        "nextSpeaker": "سخنران بعدی",
-        "speakerTimeLeftCap": "زمان بلندگو (چپ / سرپوش)",
-        "speakerTimeLeftTotal": "زمان بلندگو (سمت چپ / کل)",
-        "perSpeaker": "(به ازای هر گوینده)",
-        "paused": "(مکث شده)",
-        "pauseReason": "مکث: {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "زمان جلسه",
-        "sessionNotStarted": "جلسه شروع نشد",
-        "limit": "محدود کنید",
-        "limitRemaining": "{value} باقی مانده است",
-        "limitOverBy": "بیش از {value}",
-        "quickLinkSession": "جلسه",
-        "quickLinkRoll": "رول",
-        "quickLinkSpeakers": "بلندگوها",
-        "quickLinkMotions": "حرکات",
-        "quickLinkTimer": "تایمر",
-        "dais": "دایس",
-        "pinned": "پین شده",
-        "viewFullAnnouncement": "مشاهده اطلاعیه کامل",
-        "timerPausesReadOnly": "مکث تایمر (فقط خواندنی)",
-        "speakerList": "لیست سخنرانان",
-        "speakerFallback": "بلندگو",
-        "rollCallYou": "تماس تلفنی (شما)",
-        "fullAnnouncement": "اطلاعیه کامل",
-        "daisAnnouncement": "اطلاعیه دایس",
-        "close": "بستن"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "نام جلسه",
-        "sessionNamePlaceholder": "به عنوان مثال جلسه صبح",
-        "sessionNameSaving": "در حال ذخیره…",
-        "sessionNameSaved": "ذخیره شد",
-        "sessionNameHint": "به طور خودکار ذخیره می شود و در تاریخچه جلسه ظاهر می شود.",
-        "title": "جلسه کمیته",
-        "subtitle": "شروع یا توقف جلسه کمیته",
-        "helpStartStop": "Start تایمر/وضعیت جلسه کمیته زنده را برای همه شروع می کند. توقف جلسه را پایان می دهد و محدودیت زمانی فعلی را پاک می کند.",
-        "migrationUnavailable": "تا زمانی که آخرین انتقال پایگاه داده اعمال نشود، کنترل‌های جلسه موقتاً در دسترس نیستند.",
-        "endTimeInFuture": "زمان پایان را در آینده انتخاب کنید یا به حالت بدون محدودیت تغییر دهید.",
-        "sessionStartUnavailable": "تا زمانی که آخرین انتقال‌ها اعمال نشود، مهر زمانی شروع جلسه در دسترس نیست.",
-        "endTimeInFutureSetNoLimit": "زمان پایانی را در آینده انتخاب کنید یا محدودیتی تعیین نکنید.",
-        "sessionLimitUpdated": "محدودیت جلسه به روز شد.",
-        "startedLabel": "شروع شد:",
-        "timeInLabel": "زمان در:",
-        "timeUntilEndLabel": "زمان تا پایان:",
-        "overByValue": "بیش از {value}",
-        "modeLabel": "حالت:",
-        "modeStopwatchNoLimit": "کرونومتر (بدون محدودیت زمانی)",
-        "sessionNotRunning": "جلسه اجرا نمی شود",
-        "sessionLimit": "محدودیت جلسه",
-        "sessionLimitModesTitle": "حالت های محدودیت جلسه",
-        "sessionLimitModesHelp": "هیچ: پایانی ندارد. بودجه زمانی: از ابتدا به حساب می آید. پایان در: ساعت ثابت در منطقه زمانی محلی شما.",
-        "sessionLimitOptional": "اختیاری.",
-        "noneLabel": "هیچ کدام",
-        "noneDescription": "می دود تا توقف کنی",
-        "timeBudgetLabel": "بودجه زمانی",
-        "timeBudgetDescription": "از لحظه شروع به حساب می آید",
-        "endTimeLabel": "زمان پایان",
-        "endTimeDescription": "از یک ساعت ثابت استفاده می کند (اگر هر دو تنظیم شده بودند، بودجه را لغو می کند).",
-        "noneIndefinite": "هیچ (نامشخص)",
-        "noneScheduledEndHint": "بدون پایان برنامه ریزی شده؛ فقط زمان سپری شده نشان داده شده است.",
-        "timeBudgetFromStart": "بودجه زمانی از ابتدا",
-        "hoursLabel": "ساعت",
-        "minutesLabel": "دقیقه",
-        "minimumOneMinute": "(حداقل 1 دقیقه)",
-        "endAtLocalTime": "پایان در (به وقت محلی)",
-        "stopSession": "جلسه را متوقف کنید",
-        "saveLimit": "محدودیت ذخیره",
-        "saveLimitHelp": "تنظیمات محدودیت به روز شده را در حالی که جلسه در حال اجرا است، بدون توقف جلسه اعمال می کند.",
-        "startSession": "شروع جلسه",
-        "sidebarUsePrefix": "از نوار کناری برای",
-        "rollCall": "تماس تلفنی",
-        "speakers": "بلندگوها",
-        "formalMotions": "حرکات رسمی",
-        "timer": "تایمر",
-        "sidebarAnd": "و",
-        "announcements": "اطلاعیه ها",
-        "sidebarUseSuffix": "- یک ابزار در هر برگه"
-      },
-      "history": {
-        "title": "تاریخچه جلسه",
-        "savedCount": "{count} ذخیره شد",
-        "permissionsHint": "صندلی ها می توانند ورودی ها را تغییر نام دهند. SMT/Admin می تواند ورودی ها را تغییر نام داده و حذف کند.",
-        "empty": "هنوز سابقه جلسه وجود ندارد.",
-        "rename": "تغییر نام دهید",
-        "delete": "حذف کنید",
-        "deleteConfirm": "این جلسه از تاریخ حذف شود؟",
-        "sessionNamePrompt": "نام جلسه",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> در حال انجام"
-      },
-      "timerPage": {
-        "title": "تایمر",
-        "controlsTitle": "کنترل های تایمر",
-        "controlsHelp": "از طبقه عمومی برای زمان بندی کلی مناظره یا رای حرکت برای گره زدن دید به یک مورد رای باز خاص استفاده کنید.",
-        "tabSetup": "1) راه اندازی",
-        "tabClock": "2) کنترل ساعت",
-        "tabNotes": "3) یادداشت های گفتاری",
-        "tabLog": "4) گزارش مکث",
-        "setupHelp": "انتخاب کنید که آیا این تایمر برای طبقه عمومی باشد (همیشه برای نمایندگان قابل مشاهده است) یا به حرکت باز برای رای گیری مرتبط باشد (نمایندگان فقط زمانی آن را می بینند که آن رای مورد فعال است). با روشن بودن زمان هر بلندگو، بدون در نظر گرفتن این زمان، ساعت در طول جلسه جمعی تعدیل شده قابل مشاهده است. مکث ساعت / شروع ثابت کردن ساعت یا از سرگیری شمارش معکوس. زمان بلندگو (باقیمانده) و زمان کل را به طور مستقل تنظیم کنید، سپس تایمر ذخیره کنید. تنظیمات از پیش تعیین شده هر دو را به یک اندازه پر می کنند. بعد از آن می توانید هر کدام از فیلدها را ویرایش کنید. مکث ها با یک دلیل کوتاه ثبت می شوند.",
-        "namedPreset": "از پیش تعیین شده نامگذاری شده است",
-        "applyPreset": "اعمال از پیش تعیین شده...",
-        "floorLabelDelegates": "برچسب طبقه (نمایندگان)",
-        "floorLabelPlaceholder": "به عنوان مثال GSL 60s",
-        "timerPurpose": "هدف تایمر",
-        "purposeGeneralFloor": "بحث عمومی/طبقه (مرتبط با رای نیست)",
-        "purposeMotionVote": "حرکت باز - تایمر فقط زمانی که آن رأی در زمین فعال است",
-        "openMotionForVoting": "حرکت باز (برای رای دادن باید باز باشد)",
-        "selectMotion": "انتخاب حرکت...",
-        "untitled": "بدون عنوان",
-        "noOpenMotionWarning": "هیچ حرکتی برای رأی گیری باز نیست. ابتدا یک رأی باز کنید یا هدف را به طبقه عمومی تغییر دهید.",
-        "clock": "ساعت",
-        "running": "در حال دویدن",
-        "paused": "مکث کرد",
-        "saveToEnablePauseStart": "برای فعال کردن مکث/شروع، تایمر را ذخیره کنید.",
-        "pauseReasonLogged": "دلیل مکث (ورود به سیستم)",
-        "pauseReasonPlaceholder": "به عنوان مثال نقطه دستوری، مشکل فنی، انجمن غیرمنتظره...",
-        "pauseClock": "مکث ساعت",
-        "startClock": "شروع ساعت",
-        "perSpeakerTitle": "زمان هر سخنران (حزب جمعی تعدیل شده)",
-        "perSpeakerHelp": "کل زمان را به عنوان سقف هر بلندگو و زمان اسپیکر را به عنوان زمان باقیمانده تنظیم کنید. Advance به بلندگوی بعدی منتقل می‌شود و باقیمانده را به درپوش بازنشانی می‌کند.",
-        "currentSpeaker": "بلندگوی فعلی",
-        "nextSpeaker": "سخنران بعدی",
-        "speechNotesCurrentSpeaker": "یادداشت های گفتاری (گوینده فعلی)",
-        "speechNotesHelp": "یادداشت‌ها به متن تایمر بلندگوی کنونی گره می‌خورند و زمانی که در لیست بلندگوها فردی علامت‌گذاری شده به عنوان Current را نشان می‌دهد، تفویض اختیار او برای مرجع ذخیره می‌شود.",
-        "timerFloorLabel": "تایمر (طبقه):",
-        "speakerListCurrent": "لیست سخنرانان (فعالی):",
-        "noCurrentDelegation": "هیچ نمایندگی در لیست سخنرانان علامت گذاری نشده است.",
-        "note": "توجه داشته باشید",
-        "notePlaceholder": "امتیاز، POI، لحن، پیگیری...",
-        "saveSpeechNote": "ذخیره یادداشت گفتار",
-        "recentNotes": "یادداشت های اخیر شما (این کمیته)",
-        "delete": "حذف کنید",
-        "speakerTimeRemaining": "زمان بلندگو (باقی مانده)",
-        "remainingHelpPerSpeaker": "شمارش معکوس برای بلندگوی فعلی (هنگام پیشروی بازنشانی می‌شود).",
-        "remainingHelpNormal": "شمارش معکوس برای بلندگوی فعلی (می تواند کمتر از کل باشد).",
-        "totalTime": "کل زمان",
-        "totalHelpPerSpeaker": "درپوش هر بلندگو (مخرج روی زمین؛ پر کردن مجدد به این قسمت باقی مانده است).",
-        "totalHelpNormal": "طول کامل این بخش تایمر (بعد از اسلش روی زمین نشان داده شده است).",
-        "saveTimer": "ذخیره تایمر",
-        "advanceSpeakerReset": "بلندگو را پیش ببرید و ساعت را بازنشانی کنید",
-        "recentPauseLog": "گزارش مکث اخیر",
-        "noPauseEvents": "هنوز هیچ رویداد مکثی برای این کمیته ثبت نشده است.",
-        "openPauseLogHint": "گزارش مکث را باز کنید تا دلایل مکث ثبت شده و مُهرهای زمانی را مرور کنید.",
-        "saved": "تایمر ذخیره شد.",
-        "savedCapped": "تایمر ذخیره شد. زمان بلندگو بیشتر از کل بود. به کل محدود شده است.",
-        "alreadyPaused": "تایمر قبلاً متوقف شده است.",
-        "pausedForCommittee": "تایمر برای کمیته متوقف شد.",
-        "alreadyRunning": "تایمر از قبل در حال اجرا است.",
-        "runningForCommittee": "تایمر در حال اجرا برای کمیته",
-        "euTimerBoardTitle": "تایمر پارلمان اتحادیه اروپا (11 تایمر)",
-        "euTimerBoardHelp": "یک تایمر برای هر مهمانی، به اضافه زمان کل، زمان POI/POC، و زمان بلندگو. از Apply برای کپی کردن یک ردیف در فیلدهای تایمر زنده در برگه ساعت (زمان بلندگو / ذخیره تایمر) استفاده کنید.",
-        "euTimerName": "نام",
-        "euTimerTag": "برچسب بزنید",
-        "euTotalTime": "کل زمان",
-        "euPoiPocTime": "زمان POI / POC",
-        "euSpeakerTime": "زمان بلندگو"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "اتاق کمیته (پر)",
         "hint": "چیدمان مجازی و طبقه نمایندگی"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "ذخیره خودکار انجام نشد",
     "autosavedWithCountry": "ذخیره خودکار — {country}",
     "delegateFallback": "نماینده"
+  },
+  "sources": {
+    "addSource": "اضافه کردن منبع",
+    "sourceUrl": "آدرس منبع",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (توصیه می شود)",
+    "urlHelp": "برای Google Doc جدید، از دکمه استفاده کنید و پیوند سند را در اینجا جای‌گذاری کنید.",
+    "titleOptional": "عنوان (اختیاری)",
+    "saveChanges": "ذخیره تغییرات",
+    "editSource": "ویرایش منبع",
+    "urlPlaceholderShort": "Google Doc یا URL دیگر",
+    "empty": "هنوز هیچ منبعی وجود ندارد. برای باز کردن آن در اینجا یک پیوند Google Doc اضافه کنید.",
+    "sourceLabel": "منبع",
+    "openLink": "پیوند را باز کنید",
+    "embedHeading": "سند منبع",
+    "notGoogleDoc": "این URL یک سند Google نیست. از پیوند docs.google.com/document/d/… برای جاسازی و ویرایش در اینجا استفاده کنید. در غیر این صورت لینک بالا را باز کنید"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "نمایندگان نمی توانند مقالات موقعیت را مستقیماً بارگذاری کنند. از نوع سند دیگری استفاده کنید.",
+    "alertOnlyChairsPositionPaper": "فقط صندلی‌ها/SMT/Admin می‌توانند مقالات موقعیت را آپلود کنند.",
+    "alertOnlySmtChairReport": "فقط SMT/admin می‌تواند گزارش‌های صندلی را آپلود کند.",
+    "alertOnlySmtRop": "فقط SMT/admin می تواند اسناد RoP را آپلود کند.",
+    "alertOnlySmtAwardCriteria": "فقط SMT/admin می تواند اسناد معیارهای جایزه را آپلود کند.",
+    "alertNeedContentOrUrl": "محتوای متنی محلی یا URL سندنگار Google را اضافه کنید.",
+    "confirmDelete": "این سند حذف شود؟",
+    "delegatePrepTitle": "بخش آماده سازی سند",
+    "delegatePrepBody": "می‌توانید <prep>اسناد آماده</prep> خود را مستقیماً از این صفحه آپلود، مشاهده و ویرایش کنید.",
+    "positionPaperGuideTitle": "راهنمای کاغذ موقعیت",
+    "positionPaperGuideBlurb": "در حالی که PDF نهایی در حال آماده شدن است، راهنمای مکان نگهدار را دانلود کنید.",
+    "downloadPlaceholderGuide": "راهنمای مکان‌دار را دانلود کنید",
+    "addDocument": "سند اضافه کنید",
+    "tabs": {
+      "ariaLabel": "بخش های سند",
+      "library": "کتابخانه",
+      "compose": "نوشتن",
+      "composeHint": "یک سند جدید شروع کنید یا یک پیش نویس موجود را از این برگه ویرایش کنید."
+    },
+    "newDocumentTitle": "سند جدید",
+    "editDocumentTitle": "ویرایش سند",
+    "typeLabel": "تایپ کنید",
+    "types": {
+      "position_paper": "کاغذ موقعیت",
+      "chair_report": "گزارش صندلی",
+      "rop": "RoP",
+      "award_criteria": "معیارهای جایزه",
+      "chair_notes": "یادداشت های صندلی",
+      "prep_doc": "سند آماده سازی"
+    },
+    "delegatePositionPaperNote": "مقالات موقعیت توسط صندلی ها با بازخورد آپلود می شوند.",
+    "delegateOwner": "مالک نماینده",
+    "chairRecipient": "گیرنده صندلی",
+    "titleLabel": "عنوان",
+    "titlePlaceholder": "عنوان سند",
+    "googleDocsUrl": "URL سندنگار Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (جاسازی مشاهده/ویرایش در برنامه)",
+    "googleDocsHelp": "از New Google Doc برای باز کردن Google در یک برگه جدید استفاده کنید، سپس پیوند سند را در اینجا جای‌گذاری کنید. متن ساده زیر اختیاری است. هر سندی به متن محلی، پیوند Google Doc یا هر دو نیاز دارد.",
+    "plainTextOptional": "متن ساده (اختیاری)",
+    "plainTextPlaceholder": "یادداشت ها یا متن پیش نویس…",
+    "chairFeedbackLabel": "بازخورد صندلی",
+    "chairFeedbackPlaceholder": "بازخورد برای مقاله موضع نماینده...",
+    "empty": "هنوز هیچ سندی وجود ندارد. یکی اضافه کنید یا یک Google Doc را پیوند دهید.",
+    "sidebarDocumentLabel": "سند",
+    "sections": {
+      "chairReports": "گزارش های کرسی",
+      "rop": "RoP",
+      "awardCriteria": "معیارهای جایزه",
+      "prepDocuments": "اسناد آماده سازی",
+      "chairNotes": "یادداشت های صندلی",
+      "otherDocuments": "اسناد دیگر"
+    },
+    "untitled": "بدون عنوان",
+    "linkedDocumentHeading": "سند پیوند داده شده",
+    "notesHeading": "یادداشت ها",
+    "noGoogleDocYet": "هنوز Google Doc پیوند داده نشده است. از ویرایش برای افزودن URL docs.google.com/document/d/… استفاده کنید.",
+    "chairFeedbackHeading": "بازخورد صندلی",
+    "noFeedbackYet": "هنوز بازخوردی اضافه نشده است."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "ابتدا یک ایمیل نماینده وارد کنید.",
+    "sentToDelegate": "به {email} ارسال شد.",
+    "newResolution": "قطعنامه جدید",
+    "maxDraftResolutions": "این کمیته از قبل دارای {count} پیش نویس قطعنامه است.",
+    "googleDocLink": "پیوند Google Doc",
+    "googleDocUrlPlaceholder": "URL سندنگار Google (docs.google.com/document/d/… — برای جاسازی + ویرایش استفاده می‌شود)",
+    "googleDocUrlHelp": "Google Doc جدید در برگه دیگری باز می شود. URL را از نوار آدرس کپی کرده و در اینجا قرار دهید.",
+    "mainSubmittersPlaceholder": "ارسال کنندگان اصلی (شناسه های کاربری، جدا شده با کاما)",
+    "coSubmittersPlaceholder": "ارسال کنندگان مشترک (شناسه های کاربری، جدا شده با کاما)",
+    "create": "ایجاد کنید",
+    "cancel": "لغو کنید",
+    "openInNewTab": "در برگه جدید باز کنید",
+    "noGoogleDocLink": "پیوند Google Doc وجود ندارد",
+    "visibleToOtherBloc": "برای بلوک های دیگر قابل مشاهده است",
+    "resolutionCounts": "زیرمجموعه های اصلی: {main} | مشترکین: {co} | امضا کنندگان: {signatories}",
+    "blocButton": "بلوک {name} ({stance})",
+    "signVirtually": "به صورت مجازی امضا کنید (زیرهای اصلی مطلع شدند)",
+    "shareByEmail": "وضوح را از طریق ایمیل به اشتراک بگذارید",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "ارسال به نمایندگی",
+    "clauseEditor": "ویرایشگر بند",
+    "noClausesYet": "هنوز هیچ بندی وجود ندارد.",
+    "clauseNumber": "بند {number}",
+    "saveClause": "بند ذخیره",
+    "delete": "حذف کنید",
+    "addClausePlaceholder": "اضافه کردن یک بند جدید ...",
+    "addClause": "اضافه کردن بند",
+    "clauseVoteHistory": "تاریخچه رأی بند",
+    "noClauseOutcomesYet": "هنوز هیچ نتیجه رای گیری در بند ثبت نشده است.",
+    "clauseFallback": "بند",
+    "passed": "گذشت",
+    "failed": "ناموفق",
+    "motionId": "حرکت {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "بخش های رای گیری",
+      "open": "باز کنید",
+      "closed": "بسته شد"
+    },
+    "requiredMajority": "اکثریت لازم",
+    "helpRequiredMajorityTitle": "اکثریت لازم",
+    "helpRequiredMajorityBody": "آستانه رای مورد استفاده برای تصمیم گیری برای قبولی/شکست را انتخاب کنید. \"ساده\" بیش از نصف است. «2/3» نیاز به اکثریت فوق العاده دارد.",
+    "majoritySimple": "ساده",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "اکثریت {label}",
+    "mustVote": "باید رای داد",
+    "helpMustVoteTitle": "باید رای داد",
+    "helpMustVoteBody": "این حرکت را به عنوان یک مورد \"باید رای\" علامت گذاری می کند. این برای برقراری ارتباط با شرکت کنندگان (بسته به تشکیل کمیته شما) استفاده می شود.",
+    "saveSettings": "تنظیمات را ذخیره کنید",
+    "delegateBlurb": "دایس آرا را در جلسه ثبت می کند (مثلاً تماس تلفنی). آرای حرکتی در اینجا فقط بله/خیر را دنبال می‌کنند (از رای ممتنع استفاده نمی‌شود). می توانید آمار را دنبال کنید. نمایندگان در برنامه رای نمی دهند.",
+    "yes": "بله",
+    "no": "خیر",
+    "ballots": "برگه های رای",
+    "total": "مجموع",
+    "outcome": "نتیجه",
+    "passed": "گذشت",
+    "failed": "شکست خورد",
+    "noRecordedVotes": "هیچ رای ثبت نشده",
+    "reopenMotion": "حرکت را دوباره باز کنید",
+    "editRecordOpen": "ویرایش رکورد…",
+    "hideSettings": "تنظیمات را مخفی کنید",
+    "preliminaryPassing": "قبولی ( مقدماتی )",
+    "preliminaryFailing": "شکست (مقدماتی)",
+    "delegateRollCall": "واگذاری تماس تلفنی ({count})",
+    "noSeatedDelegates": "هیچ نماینده نشسته ای برای این پیشنهاد موجود نیست.",
+    "rollPrefix": "رول:",
+    "recordedPrefix": "ثبت شده:",
+    "recordedYes": "بله",
+    "recordedNo": "خیر",
+    "recordedAbstain": "پرهیز کنید",
+    "recordedNone": "-",
+    "abstain": "پرهیز کنید",
+    "clear": "پاک کردن",
+    "closeMotion": "حرکت بسته",
+    "mustVoteBadge": "باید رای داد",
+    "canVoteBadge": "می تواند رای دهد",
+    "noMotions": "هنوز هیچ حرکتی وجود ندارد.",
+    "currentOpenMotion": "حرکت باز فعلی",
+    "noOpenMotion": "در حال حاضر هیچ حرکت باز وجود ندارد.",
+    "recentClosedMotions": "حرکات بسته اخیر",
+    "noClosedMotions": "هنوز هیچ حرکت بسته ای وجود ندارد.",
+    "untitled": "بدون عنوان",
+    "voteTypes": {
+      "motion": "حرکت",
+      "amendment": "اصلاحیه",
+      "resolution": "قطعنامه",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "غایب (رول)",
+      "present_abstain": "حاضر - ممکن است پرهیز کند (رول)",
+      "present_voting": "ارائه و رای دادن (رول)",
+      "unknown": "- (رول)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "بخش های پروفایل",
+      "overview": "نمای کلی",
+      "awards": "جوایز",
+      "private": "سوابق خصوصی",
+      "settings": "تنظیمات پروفایل"
+    },
+    "profilePicture": "عکس پروفایل",
+    "uploadFile": "آپلود فایل",
+    "uploading": "در حال آپلود…",
+    "photoSaved": "عکس آپلود و ذخیره شد.",
+    "orUrl": "یا با URL تنظیم شود",
+    "urlPlaceholder": "https://...",
+    "name": "نام",
+    "username": "نام کاربری",
+    "usernamePlaceholder": "به عنوان مثال alex_1999",
+    "pronouns": "ضمایر",
+    "customPronounNote": "نمایه شما دارای یک مجموعه ضمایر سفارشی بود که دیگر در اینجا پذیرفته نمی شود. یکی از گزینه های بالا را انتخاب کنید (یا خالی بگذارید). ذخیره جایگزین مقدار قدیمی می شود.",
+    "school": "مدرسه",
+    "schoolPlaceholder": "به عنوان مثال دبیرستان لینکلن",
+    "grade": "درجه",
+    "selectGrade": "نمره را انتخاب کنید",
+    "conferencesAttended": "کنفرانس ها شرکت کردند",
+    "awardsComma": "جوایز (با کاما از هم جدا شده اند)",
+    "awardsPlaceholder": "بهترین نماینده، تذکر افتخاری",
+    "allocation": "تخصیص",
+    "selectAllocation": "تخصیص را انتخاب کنید",
+    "noAllocationsPlaceholder": "هیچ تخصیص کمیته ای در دسترس نیست",
+    "saveProfile": "ذخیره نمایه",
+    "saved": "نمایه ذخیره شد.",
+    "saveFailed": "نمایه ذخیره نشد.",
+    "errUsernamePattern": "نام کاربری باید 3-32 کاراکتر باشد (حروف، اعداد، _، .، -)",
+    "errPronounsPreset": "یک ضمیر از لیست انتخاب کنید.",
+    "errImageType": "لطفا یک فایل تصویری انتخاب کنید.",
+    "errImageSize": "تصویر خیلی بزرگ است (حداکثر 5 مگابایت).",
+    "errUploadFailed": "آپلود انجام نشد.",
+    "errStorageSetup": "ذخیره سازی تصویر نمایه تنظیم نشده است. در پروژه Supabase، migration 00100_profile_pictures_storage_bucket.sql را اجرا کنید، یا یک سطل ذخیره سازی عمومی به نام profile-pictures ایجاد کنید (به README مراجعه کنید).",
+    "errPublicUrl": "URL عمومی برای تصویر آپلود شده حل نشد.",
+    "fallbacks": {
+      "yourCountry": "کشور شما",
+      "committeeSession": "جلسه کمیته",
+      "delegate": "نماینده",
+      "speechNote": "یادداشت سخنرانی",
+      "untitledMotion": "حرکت بدون عنوان",
+      "dash": "-"
+    },
+    "delegateWelcome": {
+      "title": "خوش آمدید نماینده {flag} {country}",
+      "subtitle": "دوست دارید با چه چیزی شروع کنید؟",
+      "links": {
+        "documents": "اسناد",
+        "notes": "یادداشت ها",
+        "committeeRoom": "اتاق کمیته",
+        "runningNotes": "در حال اجرا",
+        "ideas": "ایده ها",
+        "guides": "راهنماها",
+        "sources": "منابع",
+        "resolutions": "قطعنامه ها",
+        "speeches": "سخنرانی ها",
+        "stances": "موضع گیری ها",
+        "crisisSlides": "بحران سقوط می کند",
+        "report": "گزارش دهید",
+        "motions": "حرکات",
+        "points": "امتیاز"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "جوایز در پروفایل شما",
+      "rank": "رتبه {رتبه}",
+      "pending": {
+        "tab": "نامزدهای معلق",
+        "title": "نامزدهای صندلی معلق",
+        "descriptionSingle": "توسط صندلی ذخیره شده و برای بررسی با SMT به اشتراک گذاشته شده است. جوایز نهایی پس از تایید در زیر ظاهر می شوند.",
+        "descriptionTabbed": "توسط صندلی ذخیره شده و برای بررسی با SMT به اشتراک گذاشته شده است. جوایز نهایی پس از تایید ظاهر می شوند."
+      },
+      "recorded": {
+        "tab": "جوایز ثبت شده",
+        "title": "جوایز ثبت شده",
+        "description": "زمانی که صندلی‌ها یا SMT شما را در ردیاب جوایز اختصاص می‌دهند، فهرست می‌شود. تشخیص نهایی از قوانین کنفرانس شما پیروی می کند."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "فقط برای شما، روسای کمیته و SMT برای کمیته مربوطه قابل مشاهده است.",
+      "points": {
+        "title": "امتیاز صندلی (خصوصی)"
+      },
+      "speechNotes": {
+        "title": "یادداشت های سخنرانی صندلی (خصوصی)"
+      },
+      "motions": {
+        "title": "حرکاتی که شما حرکت کردید",
+        "description": "برای بررسی کمیته و نظارت SMT در نمایه شما ذخیره شد."
+      }
+    },
+    "discipline": {
+      "title": "وضعیت انضباطی (خصوصی)",
+      "statusLine": "هشدارها: {warnings} · اخطارها: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "رای دادن غیر فعال",
+      "speakingSuspended": "صحبت کردن به حالت تعلیق درآمد",
+      "removedFromCommittee": "از کمیته حذف شد",
+      "updated": "به روز شده: {value}"
+    },
+    "preview": {
+      "ariaLabel": "پیش نمایش نمایه",
+      "title": "پیش نمایش",
+      "yourName": "نام شما",
+      "usernameNotSet": "نام کاربری تنظیم نشده است",
+      "gradeValue": "درجه {grade}",
+      "awards": "جوایز"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "قوانین رویه (RoP)",
+        "content": "# آیین نامه داخلی \n\n## نقاط و حرکات \n- **نقطه سفارش**: رویه صحیح \n- **نقطه اطلاعات**: سوال از سخنران \n- **نقطه امتیاز شخصی**: راحتی شخصی \n- **حرکت به میز**: بحث را به تعویق بیندازید \n- **پیشنهاد به تعویق انداختن**: پایان جلسه \n\n## رای دادن \n- اکثریت ساده برای امور رویه ای \n- اکثریت 2/3 برای مسائل ماهوی \n- رای تلفنی در صورت درخواست"
+      },
+      "examples": {
+        "title": "نمونه ها",
+        "content": "#نمونه ها \n\n## فرمت رزولوشن \n``` \nمجمع عمومی، \n... \n1. از کشورهای عضو می خواهد که ... \n2. از جامعه بین المللی می خواهد که ... \n``` \n\n## ساختار کاغذ موقعیت \n1. پس زمینه \n2. سیاست کشور \n3. راه حل های پیشنهادی"
+      },
+      "templates": {
+        "title": "قالب ها",
+        "content": "# الگوها \n\n## الگوی گزارش صندلی \n- بررسی اجمالی کمیته \n- نکات کلیدی بحث \n- مصوبات تصویب شد \n- توصیه ها"
+      },
+      "chairReport": {
+        "title": "گزارش صندلی",
+        "content": "# گزارش صندلی \n\nمراحل و نتایج کمیته اسناد در اینجا."
+      }
+    },
+    "edit": "ویرایش کنید",
+    "guideDocument": "سند راهنما",
+    "additionalNotes": "یادداشت های اضافی",
+    "noContentYet": "هنوز محتوایی وجود ندارد.",
+    "titlePlaceholder": "عنوان",
+    "googleDocsUrl": "URL سندنگار Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google Doc جدید در برگه دیگری باز می شود. یک پیوند قابل اشتراک‌گذاری را جای‌گذاری کنید تا نمایندگان بتوانند سند را در اینجا باز کنند (مشاهده/ویرایش بستگی به اشتراک‌گذاری Google دارد).",
+    "markdownOptional": "یادداشت‌های Markdown (در صورت استفاده از Google Doc اختیاری است)",
+    "save": "ذخیره کنید",
+    "cancel": "لغو کنید",
+    "createNewGuide": "راهنمای جدید ایجاد کنید",
+    "slugPlaceholder": "حلزون (بی نظیر)",
+    "titleLowerPlaceholder": "عنوان",
+    "googleDocsUrlOptional": "URL سندنگار Google (اختیاری)",
+    "markdownContentOptional": "محتوای نشانه گذاری (اختیاری)",
+    "create": "ایجاد کنید",
+    "glossary": {
+      "title": "واژه نامه دستور کار MUN",
+      "subtitle": "اصطلاحات منحصر به فرد مطابق با کد کمیته شما و موضوعات دستور کار فعلی.",
+      "committeeCode": "کد کمیته: {code}",
+      "sources": {
+        "core": "هسته",
+        "committee": "کمیته",
+        "topic": "موضوع"
+      },
+      "terms": {
+        "delegation": {
+          "term": "هیئت نمایندگی",
+          "definition": "یک کشور یا تیم ناظر که نماینده یک ایالت یا نهاد در کمیته است."
+        },
+        "placard": {
+          "term": "پلاکارد",
+          "definition": "علامت کشوری که برای درخواست کف، رای، و علامت دادن به اقدامات رویه ای استفاده می شود."
+        },
+        "dais": {
+          "term": "دایس",
+          "definition": "تیم ریاست که بحث را تعدیل می کند، رویه را اعمال می کند و نظم سخنرانی را مدیریت می کند."
+        },
+        "quorum": {
+          "term": "حد نصاب",
+          "definition": "حداقل تعداد نمایندگان مورد نیاز برای انجام امور رسمی و رای."
+        },
+        "motion": {
+          "term": "حرکت",
+          "definition": "پیشنهاد رسمی برای تغییر جریان بحث، مانند نوع جلسه یا زمان سخنرانی."
+        },
+        "point_of_order": {
+          "term": "نقطه سفارش",
+          "definition": "مداخله زمانی که رویه طبق قوانین کمیته نادرست اعمال می شود."
+        },
+        "moderated_caucus": {
+          "term": "هیئت انجمنی تعدیل شده",
+          "definition": "بخش مناظره ساختاریافته با سخنرانی های زمان بندی شده کوتاه در یک موضوع فرعی تعریف شده."
+        },
+        "unmoderated_caucus": {
+          "term": "گروه غیر تعدیل شده",
+          "definition": "دوره مذاکره غیررسمی که در آن نمایندگان آزادانه برای پیش نویس و ادغام ایده ها حرکت می کنند."
+        },
+        "draft_resolution": {
+          "term": "پیش نویس قطعنامه",
+          "definition": "متن کاری اقدام کمیته پیشنهادی قبل از رای گیری نهایی و تصویب."
+        },
+        "amendment": {
+          "term": "اصلاحیه",
+          "definition": "تغییر پیشنهادی به متن پیش‌نویس، دوستانه یا به‌عنوان غیردوستانه رای‌گیری شده است."
+        },
+        "operative_clause": {
+          "term": "بند اجرایی",
+          "definition": "بند شماره دار اقدام گرا که آنچه را که کمیته پیشنهاد انجام می دهد را توصیف می کند."
+        },
+        "preambulatory_clause": {
+          "term": "بند پیش از سفر",
+          "definition": "بند تنظیم زمینه با ذکر اصول پس زمینه، نگرانی ها و چارچوب های قبلی."
+        },
+        "right_of_reply": {
+          "term": "حق پاسخ",
+          "definition": "فرصتی برای پاسخ به یک بیانیه مستقیم که بر شأن یا موقعیت هیئت تأثیر گذاشته است."
+        },
+        "veto_power": {
+          "term": "قدرت وتو",
+          "definition": "مرجع دائمی شورای امنیت سازمان ملل برای جلوگیری از پیش نویس قطعنامه های اساسی."
+        },
+        "chapter_vii": {
+          "term": "فصل هفتم",
+          "definition": "مرجع منشور ملل متحد در مورد تهدیدات علیه صلح، تحریم ها و اقدامات استفاده از زور."
+        },
+        "sanctions_regime": {
+          "term": "رژیم تحریم ها",
+          "definition": "محدودیت های هماهنگ برای تأثیرگذاری بر رفتار بدون اقدام نظامی مستقیم استفاده می شود."
+        },
+        "arms_control": {
+          "term": "کنترل تسلیحات",
+          "definition": "توافق‌نامه‌ها و سیستم‌های راستی‌آزمایی که نوع، مقدار یا استقرار سلاح‌ها را محدود می‌کند."
+        },
+        "non_proliferation": {
+          "term": "عدم اشاعه",
+          "definition": "سیاست‌های جلوگیری از گسترش قابلیت‌های هسته‌ای، شیمیایی، بیولوژیکی یا سلاح‌های پیشرفته."
+        },
+        "confidence_building_measures": {
+          "term": "اقدامات اعتمادسازی",
+          "definition": "شفافیت و ابزارهای ارتباطی که سوء تفاهم و خطر درگیری را کاهش می دهد."
+        },
+        "universal_periodic_review": {
+          "term": "بررسی دوره ای جهانی",
+          "definition": "فرآیند بررسی همتا که در آن هر کشور عضو سازمان ملل گزارش می دهد و توصیه های حقوقی را دریافت می کند."
+        },
+        "special_rapporteur": {
+          "term": "گزارشگر ویژه",
+          "definition": "کارشناس مستقل برای نظارت و گزارش در مورد موضوعات موضوعی یا حقوق کشور منصوب شد."
+        },
+        "treaty_body": {
+          "term": "بدنه معاهده",
+          "definition": "کمیته کارشناسان نظارت بر اجرای یک معاهده حقوق بشر خاص."
+        },
+        "public_health_emergency": {
+          "term": "اورژانس بهداشت عمومی",
+          "definition": "رویداد شیوع جدی که نیاز به واکنش هماهنگ ملی و بین المللی فوری دارد."
+        },
+        "surveillance": {
+          "term": "نظارت اپیدمیولوژیک",
+          "definition": "جمع آوری و تجزیه و تحلیل مستمر داده های بهداشتی برای شناسایی و پیگیری روند بیماری."
+        },
+        "health_systems": {
+          "term": "تقویت سیستم های سلامت",
+          "definition": "بهبود نیروی کار، تامین مالی، تدارکات و حاکمیت برای ارائه مراقبت های بهداشتی قابل اعتماد."
+        },
+        "transnational_crime": {
+          "term": "جرایم سازمان یافته فراملی",
+          "definition": "فعالیت های مجرمانه که در فراسوی مرزها از طریق شبکه ها و بازارهای غیرقانونی هماهنگ شده است."
+        },
+        "illicit_trafficking": {
+          "term": "قاچاق غیرقانونی",
+          "definition": "جابجایی غیرقانونی مواد مخدر، اسلحه، افراد یا کالاها در سراسر حوزه های قضایی."
+        },
+        "rule_of_law_capacity": {
+          "term": "ظرفیت حاکمیت قانون",
+          "definition": "توانایی نهادی سیستم های قضایی برای تحقیق، تعقیب و حمایت عادلانه از حقوق."
+        },
+        "sustainable_development": {
+          "term": "توسعه پایدار",
+          "definition": "مدل رشد متعادل کننده پیشرفت اجتماعی، فرصت های اقتصادی و حفاظت از محیط زیست."
+        },
+        "financing_for_development": {
+          "term": "تامین مالی برای توسعه",
+          "definition": "مکانیسم های تامین مالی دولتی و خصوصی که از اولویت های توسعه بلندمدت حمایت می کنند."
+        },
+        "policy_coordination": {
+          "term": "هماهنگی سیاست",
+          "definition": "همسویی اقدامات دولت و آژانس برای جلوگیری از تکراری شدن و افزایش تأثیر جمعی."
+        },
+        "child_protection": {
+          "term": "حفاظت از کودک",
+          "definition": "اقداماتی برای جلوگیری از استثمار، سوء استفاده و خشونت علیه کودکان در همه شرایط."
+        },
+        "education_access": {
+          "term": "دسترسی به آموزش",
+          "definition": "تضمین فرصت های یادگیری فراگیر، عادلانه و مستمر برای همه کودکان."
+        },
+        "humanitarian_response": {
+          "term": "واکنش بشردوستانه",
+          "definition": "اقدامات امدادی سریع برای رفع نیازهای فوری در شرایط بحران و درگیری."
+        },
+        "gender_mainstreaming": {
+          "term": "جریان اصلی جنسیت",
+          "definition": "ادغام تحلیل جنسیتی در طراحی، اجرا و ارزیابی سیاست."
+        },
+        "gender_based_violence": {
+          "term": "خشونت مبتنی بر جنسیت",
+          "definition": "آسیبی که بر اساس هویت جنسیتی، نقش ها یا روابط نابرابر قدرت به شخصی وارد می شود."
+        },
+        "economic_empowerment": {
+          "term": "توانمندسازی اقتصادی",
+          "definition": "گسترش دسترسی به کار شایسته، امور مالی، مالکیت و قدرت تصمیم گیری."
+        },
+        "source_attribution": {
+          "term": "منبع منبع",
+          "definition": "ذکر منبع اطلاعات به وضوح تا بتوان ادعاها را تأیید کرد و زمینه سازی کرد."
+        },
+        "verified_reporting": {
+          "term": "گزارش تایید شده",
+          "definition": "استاندارد روزنامه نگاری که نیاز به تایید قبل از انتشار حقایق مورد اعتراض دارد."
+        },
+        "editorial_independence": {
+          "term": "استقلال تحریریه",
+          "definition": "جداسازی تصمیمات گزارش دهی از فشار سیاسی یا نفوذ ذینفعان."
+        },
+        "climate_mitigation": {
+          "term": "کاهش آب و هوا",
+          "definition": "اقداماتی که انتشار گازهای گلخانه ای را کاهش می دهد یا حذف طولانی مدت کربن را افزایش می دهد."
+        },
+        "climate_adaptation": {
+          "term": "سازگاری با آب و هوا",
+          "definition": "سیاست‌ها و سرمایه‌گذاری‌هایی که آسیب‌پذیری را در برابر تأثیرات مرتبط با آب و هوا کاهش می‌دهند."
+        },
+        "cyber_norms": {
+          "term": "هنجارهای سایبری",
+          "definition": "انتظارات مشترک برای رفتار دولت مسئولانه در حوزه های دیجیتال و سایبری."
+        },
+        "critical_infrastructure": {
+          "term": "زیرساخت های حیاتی",
+          "definition": "سیستم های ضروری مانند برق، آب، بهداشت و ارتباطات که نیاز به انعطاف پذیری دارند."
+        },
+        "epidemiology": {
+          "term": "اپیدمیولوژی",
+          "definition": "مطالعه الگوهای بیماری، علل، و توزیع در جمعیت."
+        },
+        "preparedness_response": {
+          "term": "آمادگی و پاسخگویی",
+          "definition": "برنامه ریزی، هماهنگی و اقدامات افزایشی برای مهار و مدیریت شرایط اضطراری."
+        },
+        "non_refoulement": {
+          "term": "عدم بازگشت مجدد",
+          "definition": "اصل منع بازگشت افراد به مکان هایی که با آسیب جدی مواجه می شوند."
+        },
+        "durable_solutions": {
+          "term": "راه حل های بادوام",
+          "definition": "نتایج بلند مدت برای افراد آواره: بازگشت، ادغام محلی، یا اسکان مجدد."
+        },
+        "nuclear_safeguards": {
+          "term": "پادمان های هسته ای",
+          "definition": "اقدامات راستی‌آزمایی که تضمین می‌کند مواد هسته‌ای برای استفاده از سلاح منحرف نمی‌شوند."
+        },
+        "counter_terrorism": {
+          "term": "مبارزه با تروریسم",
+          "definition": "اقدامات قانونی، پیشگیرانه و امنیتی یکپارچه در برابر فعالیت های تروریستی."
+        },
+        "due_process": {
+          "term": "فرآیند مقرر",
+          "definition": "رویه های قانونی منصفانه که از حقوق در حین تحقیق، تعقیب و مجازات حمایت می کند."
+        },
+        "resource_security": {
+          "term": "امنیت منابع",
+          "definition": "دسترسی مطمئن به غذا، آب و انرژی تحت فشارهای اقتصادی و محیطی."
+        },
+        "resilience": {
+          "term": "تاب آوری",
+          "definition": "ظرفیت جوامع و موسسات برای جذب شوک ها و بازیابی موثر."
+        }
+      },
+      "topicLine": "موضوع: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "ویرایش ایده",
+    "googleDocsUrl": "URL سندنگار Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "متن ایده کوتاه (اختیاری)",
+    "save": "ذخیره کنید",
+    "cancel": "لغو کنید",
+    "addIntro": "برای پیش‌نویس یک ایده حل، یک Google Doc اضافه کنید، یا یک یادداشت کوتاه (یا هر دو) تایپ کنید.",
+    "googleDocsCreateHelp": "Google Doc جدید در برگه دیگری باز می شود. پس از ایجاد پیوند، آن را در اینجا قرار دهید.",
+    "resolutionIdeaPlaceholder": "ایده رزولوشن...",
+    "add": "اضافه کنید",
+    "noIdeasYet": "هنوز ایده ای وجود ندارد.",
+    "ideaLabel": "ایده",
+    "ideaFallback": "ایده {number}",
+    "linkedDoc": "سند مرتبط",
+    "addedOn": "اضافه شد {date}",
+    "edit": "ویرایش کنید",
+    "delete": "حذف کنید",
+    "ideaDocument": "سند ایده",
+    "summary": "خلاصه",
+    "emptyIdea": "ایده خالی"
+  },
+  "stances": {
+    "heatmapTitle": "نمای کلی موضع (Heatmap)",
+    "heatmapHelp": "تخصیص شما تا چه حد از ___ پشتیبانی می کند؟ (مقیاس 1-5)",
+    "topicPlaceholder": "به عنوان مثال اقدام اقلیمی",
+    "extentLabel": "میزان (1-5):",
+    "extentHelpTitle": "میزان (1-5)",
+    "extentHelpBody": "1 به این معنی است که تخصیص شما پشتیبانی کمی از موضوع دارد و 5 به معنای پشتیبانی قوی است. عددی را انتخاب کنید که با موضع شما در کمیته مطابقت داشته باشد.",
+    "add": "اضافه کنید",
+    "viewOnlyHeatmap": "نقشه حرارتی فقط مشاهده برای کارکنان.",
+    "notesPerAllocation": "یادداشت در هر تخصیص",
+    "noAllocationsYet": "هنوز تخصیصی وجود ندارد",
+    "notesPlaceholder": "یادداشت های موضعی برای این تخصیص ...",
+    "noteLanguageWarning": "هشدار خواننده: این یادداشت ممکن است حاوی زبان نامناسب باشد.",
+    "save": "ذخیره کنید",
+    "saveHelpTitle": "یادداشت موضع را ذخیره کنید",
+    "saveHelpBody": "یادداشت موضع را برای این تخصیص ذخیره می کند. این می تواند توسط کارکنان و (بسته به تنظیمات کمیته) دیگر شرکت کنندگان مشاهده شود."
+  },
+  "speeches": {
+    "newSpeech": "سخنرانی جدید",
+    "speechTitlePlaceholder": "عنوان سخنرانی",
+    "googleDocsUrl": "URL سندنگار Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google را در یک برگه جدید باز می کند. پس از آماده شدن، نشانی وب سند را در اینجا بچسبانید.",
+    "plainTextOptional": "پیش نویس متن ساده (اختیاری اگر از Google Doc استفاده می کنید)",
+    "save": "ذخیره کنید",
+    "cancel": "لغو کنید",
+    "noSpeechesYet": "هنوز سخنرانی نشده است. یک Google Doc را پیوند دهید یا متن را جای‌گذاری کنید.",
+    "speechLabel": "گفتار",
+    "untitled": "بدون عنوان",
+    "edit": "ویرایش کنید",
+    "speechDocument": "سند سخنرانی",
+    "draftText": "متن پیش نویس",
+    "noContentHint": "یک Google Doc را با ویرایش پیوند دهید یا متن ساده را در فرم اضافه کنید."
+  },
+  "committeeRoom": {
+    "committeeLabel": "کمیته",
+    "clearSearchTitle": "جستجو را پاک کنید و همه نمایندگان را نشان دهید",
+    "vacantLabel": "خالی",
+    "searchVacantTitle": "صندلی های \"خالی\" را در اتاق جستجو کنید",
+    "searchHint": "کشور، نام نماینده، مدرسه، ضمیر یا «خالی» را برای برجسته کردن موارد منطبق در اتاق تایپ کنید. Enter را فشار دهید تا به اولین مسابقه بروید. Esc پاک می شود. برای پرش به صندلی های خالی روی خالی کلیک کنید.",
+    "findLabel": "یک هیأت یا عضو دایس پیدا کنید",
+    "searchPlaceholder": "کشور، نام، مدرسه ...",
+    "matchesCount": "{matches} از {total} صندلی مطابقت دارد",
+    "searchAria": "هیئت ها را جستجو کنید",
+    "virtualRoomVacant": "خالی",
+    "profileAria": "مشاهده نمایه: {country}",
+    "vacantSeatAria": "صندلی خالی",
+    "placardAria": "پلاکارد {country}",
+    "gavelAria": "گاول",
+    "yourContext": "زمینه شما",
+    "roleLabel": "نقش",
+    "seatLabel": "صندلی",
+    "assignedLabel": "اختصاص داده شده است",
+    "daisLabel": "دایس",
+    "phaseLabel": "فاز",
+    "phaseVoting": "رای دادن",
+    "phaseDebate": "مناظره",
+    "focusSearchTitle": "جستجوی تمرکز (عناوین و نام‌ها با درخواست شما مطابقت دارند)",
+    "tipLabel": "نکته",
+    "enterScrolls": "طومارها را وارد کنید",
+    "typeToFilterHint": "برای فیلتر تایپ کنید - اسکرول ها را برای اولین تطابق وارد کنید",
+    "noMatches": "هیچ هیئت یا صندلی همسانی وجود ندارد.",
+    "digitalDisplay": "نمایشگر دیجیتال",
+    "floorLabel": "طبقه",
+    "staffSeatsHeading": "کارکنان - صندلی",
+    "viewProfileAria": "مشاهده نمایه: {title}",
+    "noProfileLinkAria": "{title} (بدون لینک نمایه)",
+    "committeeFloor": "طبقه کمیته",
+    "virtualRoomFigureAria": "اتاق کمیته مجازی - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "فیلتر کردن هیئت ها اولین صندلی برجسته اولین مسابقه در رینگ است.",
+    "helperText": "پلاکاردها کشور (از تخصیص ها)، نام، مدرسه، و ضمایر را از نمایه هر نماینده فهرست می کنند. مورد خود را در قسمت نمایه ویرایش کنید. صندلی‌های خالی کمیته خالی نشان داده می‌شوند. برای باز کردن صفحه آن عضو (چت و گزارش از آنجا) روی یک پلاکارد یا صندلی پر شده کلیک کنید.",
+    "virtualRoomCaption": "اتاق کمیته سازمان ملل متحد مدل مجازی با پلاکاردهایی که کشور، نام، مدرسه و ضمایر را نشان می‌دهد."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "درخواست صحبت کردن",
+      "delegateFallback": "نماینده",
+      "needAllocation": "برای درخواست صحبت به یک تخصیص نیاز دارید.",
+      "alreadyQueued": "شما قبلاً یک درخواست صحبت فعال در صف دارید.",
+      "requested": "درخواست صحبت کرد. در صف ظاهر می شوید.",
+      "requestFailed": "درخواست صحبت انجام نشد.",
+      "helpBody": "هیئت خود را به صف صندلی می فرستد. می‌توانید هر بار یک درخواست انتظار/فعال فعال داشته باشید.",
+      "purposeLabel": "هدف اختیاری (نمایش در برچسب صف)",
+      "purposeHelpTitle": "برچسب هدف",
+      "purposeHelpBody": "این متن به نام کشور شما اضافه می‌شود تا صندلی‌ها بتوانند دلیل درخواست شما را ببینند.",
+      "purposePlaceholder": "به عنوان مثال پشتیبانی + مرور کلی اصلاحیه",
+      "requesting": "در حال درخواست...",
+      "rollPromptTitle": "تایید صندلی لازم است",
+      "rollPromptBodyPickStatus": "جلسه شروع شد وضعیت تماس تلفنی خود را برای باز کردن قفل صحبت کردن و رای دادن انتخاب کنید. این انتخاب قابل تغییر نیست.",
+      "rollPromptBodyWaitSessionStart": "در انتظار شروع جلسه کمیته توسط رئیس.",
+      "rollPromptBodyWaitRollPrompt": "در حال انتظار برای تماس تلفنی",
+      "rollPromptBodyMarkedAbsent": "شما در حال حاضر غایب علامت‌گذاری شده‌اید. از صندلی بخواهید که برای صحبت و رای دادن، شما را به عنوان \"حضور\" علامت بزند.",
+      "rollPromptBodyChecking": "در حال بررسی وضعیت رول شما...",
+      "rollPromptSaving": "در حال ذخیره...",
+      "rollPromptPresent": "حاضر شود",
+      "rollPromptPresentVoting": "حضور و رای دادن"
+    },
+    "motionVoting": {
+      "votingProcedure": "روش رای گیری",
+      "currentMotion": "حرکت فعلی",
+      "motioner": "حرکت دهنده",
+      "majority": "اکثریت",
+      "majoritySimple": "ساده",
+      "tally": "بله {yes} - خیر {no} - مجموع {total}",
+      "help": "دایس رای هر هیئت را در جلسه ثبت می کند. در رای‌های حرکتی فقط از بله یا خیر (نه ممتنع) استفاده می‌شود. مجموع فقط پلاکاردهایی را که در آن بله یا خیر ثبت شده است، می شمارند. هیئت های غایب حذف می شوند."
+    },
+    "activeMotion": {
+      "currentMotion": "حرکت فعلی",
+      "motionFallback": "حرکت",
+      "motioner": "حرکت دهنده",
+      "majority": "اکثریت",
+      "majoritySimple": "ساده",
+      "type": "تایپ کنید",
+      "timer": "تایمر",
+      "currentSpeaker": "بلندگوی فعلی",
+      "nextSpeaker": "سخنران بعدی",
+      "speakerTimeLeftCap": "زمان بلندگو (چپ / سرپوش)",
+      "speakerTimeLeftTotal": "زمان بلندگو (سمت چپ / کل)",
+      "perSpeaker": "(به ازای هر گوینده)",
+      "paused": "(مکث شده)",
+      "pauseReason": "مکث: {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "زمان جلسه",
+      "sessionNotStarted": "جلسه شروع نشد",
+      "limit": "محدود کنید",
+      "limitRemaining": "{value} باقی مانده است",
+      "limitOverBy": "بیش از {value}",
+      "quickLinkSession": "جلسه",
+      "quickLinkRoll": "رول",
+      "quickLinkSpeakers": "بلندگوها",
+      "quickLinkMotions": "حرکات",
+      "quickLinkTimer": "تایمر",
+      "dais": "دایس",
+      "pinned": "پین شده",
+      "viewFullAnnouncement": "مشاهده اطلاعیه کامل",
+      "timerPausesReadOnly": "مکث تایمر (فقط خواندنی)",
+      "speakerList": "لیست سخنرانان",
+      "speakerFallback": "بلندگو",
+      "rollCallYou": "تماس تلفنی (شما)",
+      "fullAnnouncement": "اطلاعیه کامل",
+      "daisAnnouncement": "اطلاعیه دایس",
+      "close": "بستن",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "نام جلسه",
+      "sessionNamePlaceholder": "به عنوان مثال جلسه صبح",
+      "sessionNameSaving": "در حال ذخیره…",
+      "sessionNameSaved": "ذخیره شد",
+      "sessionNameHint": "به طور خودکار ذخیره می شود و در تاریخچه جلسه ظاهر می شود.",
+      "title": "جلسه کمیته",
+      "subtitle": "شروع یا توقف جلسه کمیته",
+      "helpStartStop": "Start تایمر/وضعیت جلسه کمیته زنده را برای همه شروع می کند. توقف جلسه را پایان می دهد و محدودیت زمانی فعلی را پاک می کند.",
+      "migrationUnavailable": "تا زمانی که آخرین انتقال پایگاه داده اعمال نشود، کنترل‌های جلسه موقتاً در دسترس نیستند.",
+      "endTimeInFuture": "زمان پایان را در آینده انتخاب کنید یا به حالت بدون محدودیت تغییر دهید.",
+      "sessionStartUnavailable": "تا زمانی که آخرین انتقال‌ها اعمال نشود، مهر زمانی شروع جلسه در دسترس نیست.",
+      "endTimeInFutureSetNoLimit": "زمان پایانی را در آینده انتخاب کنید یا محدودیتی تعیین نکنید.",
+      "sessionLimitUpdated": "محدودیت جلسه به روز شد.",
+      "startedLabel": "شروع شد:",
+      "timeInLabel": "زمان در:",
+      "timeUntilEndLabel": "زمان تا پایان:",
+      "overByValue": "بیش از {value}",
+      "modeLabel": "حالت:",
+      "modeStopwatchNoLimit": "کرونومتر (بدون محدودیت زمانی)",
+      "sessionNotRunning": "جلسه اجرا نمی شود",
+      "sessionLimit": "محدودیت جلسه",
+      "sessionLimitModesTitle": "حالت های محدودیت جلسه",
+      "sessionLimitModesHelp": "هیچ: پایانی ندارد. بودجه زمانی: از ابتدا به حساب می آید. پایان در: ساعت ثابت در منطقه زمانی محلی شما.",
+      "sessionLimitOptional": "اختیاری.",
+      "noneLabel": "هیچ کدام",
+      "noneDescription": "می دود تا توقف کنی",
+      "timeBudgetLabel": "بودجه زمانی",
+      "timeBudgetDescription": "از لحظه شروع به حساب می آید",
+      "endTimeLabel": "زمان پایان",
+      "endTimeDescription": "از یک ساعت ثابت استفاده می کند (اگر هر دو تنظیم شده بودند، بودجه را لغو می کند).",
+      "noneIndefinite": "هیچ (نامشخص)",
+      "noneScheduledEndHint": "بدون پایان برنامه ریزی شده؛ فقط زمان سپری شده نشان داده شده است.",
+      "timeBudgetFromStart": "بودجه زمانی از ابتدا",
+      "hoursLabel": "ساعت",
+      "minutesLabel": "دقیقه",
+      "minimumOneMinute": "(حداقل 1 دقیقه)",
+      "endAtLocalTime": "پایان در (به وقت محلی)",
+      "stopSession": "جلسه را متوقف کنید",
+      "saveLimit": "محدودیت ذخیره",
+      "saveLimitHelp": "تنظیمات محدودیت به روز شده را در حالی که جلسه در حال اجرا است، بدون توقف جلسه اعمال می کند.",
+      "startSession": "شروع جلسه",
+      "sidebarUsePrefix": "از نوار کناری برای",
+      "rollCall": "تماس تلفنی",
+      "speakers": "بلندگوها",
+      "formalMotions": "حرکات رسمی",
+      "timer": "تایمر",
+      "sidebarAnd": "و",
+      "announcements": "اطلاعیه ها",
+      "sidebarUseSuffix": "- یک ابزار در هر برگه",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "تاریخچه جلسه",
+      "savedCount": "{count} ذخیره شد",
+      "permissionsHint": "صندلی ها می توانند ورودی ها را تغییر نام دهند. SMT/Admin می تواند ورودی ها را تغییر نام داده و حذف کند.",
+      "empty": "هنوز سابقه جلسه وجود ندارد.",
+      "rename": "تغییر نام دهید",
+      "delete": "حذف کنید",
+      "deleteConfirm": "این جلسه از تاریخ حذف شود؟",
+      "sessionNamePrompt": "نام جلسه",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> در حال انجام"
+    },
+    "timerPage": {
+      "title": "تایمر",
+      "controlsTitle": "کنترل های تایمر",
+      "controlsHelp": "از طبقه عمومی برای زمان بندی کلی مناظره یا رای حرکت برای گره زدن دید به یک مورد رای باز خاص استفاده کنید.",
+      "tabSetup": "1) راه اندازی",
+      "tabClock": "2) کنترل ساعت",
+      "tabNotes": "3) یادداشت های گفتاری",
+      "tabLog": "4) گزارش مکث",
+      "setupHelp": "انتخاب کنید که آیا این تایمر برای طبقه عمومی باشد (همیشه برای نمایندگان قابل مشاهده است) یا به حرکت باز برای رای گیری مرتبط باشد (نمایندگان فقط زمانی آن را می بینند که آن رای مورد فعال است). با روشن بودن زمان هر بلندگو، بدون در نظر گرفتن این زمان، ساعت در طول جلسه جمعی تعدیل شده قابل مشاهده است. مکث ساعت / شروع ثابت کردن ساعت یا از سرگیری شمارش معکوس. زمان بلندگو (باقیمانده) و زمان کل را به طور مستقل تنظیم کنید، سپس تایمر ذخیره کنید. تنظیمات از پیش تعیین شده هر دو را به یک اندازه پر می کنند. بعد از آن می توانید هر کدام از فیلدها را ویرایش کنید. مکث ها با یک دلیل کوتاه ثبت می شوند.",
+      "namedPreset": "از پیش تعیین شده نامگذاری شده است",
+      "applyPreset": "اعمال از پیش تعیین شده...",
+      "floorLabelDelegates": "برچسب طبقه (نمایندگان)",
+      "floorLabelPlaceholder": "به عنوان مثال GSL 60s",
+      "timerPurpose": "هدف تایمر",
+      "purposeGeneralFloor": "بحث عمومی/طبقه (مرتبط با رای نیست)",
+      "purposeMotionVote": "حرکت باز - تایمر فقط زمانی که آن رأی در زمین فعال است",
+      "openMotionForVoting": "حرکت باز (برای رای دادن باید باز باشد)",
+      "selectMotion": "انتخاب حرکت...",
+      "untitled": "بدون عنوان",
+      "noOpenMotionWarning": "هیچ حرکتی برای رأی گیری باز نیست. ابتدا یک رأی باز کنید یا هدف را به طبقه عمومی تغییر دهید.",
+      "clock": "ساعت",
+      "running": "در حال دویدن",
+      "paused": "مکث کرد",
+      "saveToEnablePauseStart": "برای فعال کردن مکث/شروع، تایمر را ذخیره کنید.",
+      "pauseReasonLogged": "دلیل مکث (ورود به سیستم)",
+      "pauseReasonPlaceholder": "به عنوان مثال نقطه دستوری، مشکل فنی، انجمن غیرمنتظره...",
+      "pauseClock": "مکث ساعت",
+      "startClock": "شروع ساعت",
+      "perSpeakerTitle": "زمان هر سخنران (حزب جمعی تعدیل شده)",
+      "perSpeakerHelp": "کل زمان را به عنوان سقف هر بلندگو و زمان اسپیکر را به عنوان زمان باقیمانده تنظیم کنید. Advance به بلندگوی بعدی منتقل می‌شود و باقیمانده را به درپوش بازنشانی می‌کند.",
+      "currentSpeaker": "بلندگوی فعلی",
+      "nextSpeaker": "سخنران بعدی",
+      "speechNotesCurrentSpeaker": "یادداشت های گفتاری (گوینده فعلی)",
+      "speechNotesHelp": "یادداشت‌ها به متن تایمر بلندگوی کنونی گره می‌خورند و زمانی که در لیست بلندگوها فردی علامت‌گذاری شده به عنوان Current را نشان می‌دهد، تفویض اختیار او برای مرجع ذخیره می‌شود.",
+      "timerFloorLabel": "تایمر (طبقه):",
+      "speakerListCurrent": "لیست سخنرانان (فعالی):",
+      "noCurrentDelegation": "هیچ نمایندگی در لیست سخنرانان علامت گذاری نشده است.",
+      "note": "توجه داشته باشید",
+      "notePlaceholder": "امتیاز، POI، لحن، پیگیری...",
+      "saveSpeechNote": "ذخیره یادداشت گفتار",
+      "recentNotes": "یادداشت های اخیر شما (این کمیته)",
+      "delete": "حذف کنید",
+      "speakerTimeRemaining": "زمان بلندگو (باقی مانده)",
+      "remainingHelpPerSpeaker": "شمارش معکوس برای بلندگوی فعلی (هنگام پیشروی بازنشانی می‌شود).",
+      "remainingHelpNormal": "شمارش معکوس برای بلندگوی فعلی (می تواند کمتر از کل باشد).",
+      "totalTime": "کل زمان",
+      "totalHelpPerSpeaker": "درپوش هر بلندگو (مخرج روی زمین؛ پر کردن مجدد به این قسمت باقی مانده است).",
+      "totalHelpNormal": "طول کامل این بخش تایمر (بعد از اسلش روی زمین نشان داده شده است).",
+      "saveTimer": "ذخیره تایمر",
+      "advanceSpeakerReset": "بلندگو را پیش ببرید و ساعت را بازنشانی کنید",
+      "recentPauseLog": "گزارش مکث اخیر",
+      "noPauseEvents": "هنوز هیچ رویداد مکثی برای این کمیته ثبت نشده است.",
+      "openPauseLogHint": "گزارش مکث را باز کنید تا دلایل مکث ثبت شده و مُهرهای زمانی را مرور کنید.",
+      "saved": "تایمر ذخیره شد.",
+      "savedCapped": "تایمر ذخیره شد. زمان بلندگو بیشتر از کل بود. به کل محدود شده است.",
+      "alreadyPaused": "تایمر قبلاً متوقف شده است.",
+      "pausedForCommittee": "تایمر برای کمیته متوقف شد.",
+      "alreadyRunning": "تایمر از قبل در حال اجرا است.",
+      "runningForCommittee": "تایمر در حال اجرا برای کمیته",
+      "euTimerBoardTitle": "تایمر پارلمان اتحادیه اروپا (11 تایمر)",
+      "euTimerBoardHelp": "یک تایمر برای هر مهمانی، به اضافه زمان کل، زمان POI/POC، و زمان بلندگو. از Apply برای کپی کردن یک ردیف در فیلدهای تایمر زنده در برگه ساعت (زمان بلندگو / ذخیره تایمر) استفاده کنید.",
+      "euTimerName": "نام",
+      "euTimerTag": "برچسب بزنید",
+      "euTotalTime": "کل زمان",
+      "euPoiPocTime": "زمان POI / POC",
+      "euSpeakerTime": "زمان بلندگو"
+    }
   }
 }

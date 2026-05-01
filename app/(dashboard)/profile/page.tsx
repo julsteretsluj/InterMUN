@@ -11,10 +11,70 @@ import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
-import { getTranslations } from "next-intl/server";
-import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import { getLocale, getTranslations } from "next-intl/server";
+import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
+
+type DashboardPickerConferenceRow = {
+  id: string;
+  name: string;
+  committee: string | null;
+  committee_code: string | null;
+};
+
+type CommitteeLabelTranslator = {
+  (key: string, values?: Record<string, string | number | Date>): string;
+  has?: (key: string) => boolean;
+};
+
+/** One picker entry per chamber: merge multiple conference rows (topics) that share the same committee. */
+function mergeConferenceRowsToCommitteePickerOptions(
+  rows: DashboardPickerConferenceRow[],
+  opts: {
+    activeConferenceId: string | null;
+    seatConferenceIdSet: Set<string>;
+    tCommitteeLabels: CommitteeLabelTranslator;
+    fallbackLabel: string;
+  }
+): { id: string; label: string }[] {
+  const mergeKey = (r: DashboardPickerConferenceRow): string => {
+    const committee = (r.committee ?? "").trim();
+    if (committee) return `c:${committee.toLowerCase().replace(/\s+/g, " ")}`;
+    const code = (r.committee_code ?? "").trim().toLowerCase();
+    if (code) return `k:${code}`;
+    return `i:${r.id}`;
+  };
+
+  const buckets = new Map<string, DashboardPickerConferenceRow[]>();
+  for (const r of rows) {
+    const k = mergeKey(r);
+    const arr = buckets.get(k) ?? [];
+    arr.push(r);
+    buckets.set(k, arr);
+  }
+
+  const out: { id: string; label: string }[] = [];
+  for (const group of buckets.values()) {
+    const canon = group[0];
+    const label =
+      translateCommitteeLabel(opts.tCommitteeLabels, canon.committee).trim() || opts.fallbackLabel;
+
+    let id = canon.id;
+    if (opts.activeConferenceId && group.some((r) => r.id === opts.activeConferenceId)) {
+      id = opts.activeConferenceId;
+    } else {
+      const seated = group.find((r) => opts.seatConferenceIdSet.has(r.id));
+      if (seated) id = seated.id;
+      else {
+        const sorted = [...group].sort((a, b) => a.name.localeCompare(b.name));
+        id = sorted[0].id;
+      }
+    }
+    out.push({ id, label });
+  }
+  return out.sort((a, b) => a.label.localeCompare(b.label));
+}
 
 export default async function ProfilePage({
   searchParams,
@@ -22,10 +82,11 @@ export default async function ProfilePage({
   searchParams: Promise<{ tab?: string }>;
 }) {
   const t = await getTranslations("pageTitles");
-  const tp = await getTranslations("views.profile");
+  const tp = await getTranslations("profile");
   const tTopics = await getTranslations("agendaTopics");
-  const tVoting = await getTranslations("views.voting");
+  const tVoting = await getTranslations("voting");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const locale = await getLocale();
   const supabase = await createClient();
   const {
     data: { user },
@@ -157,7 +218,8 @@ export default async function ProfilePage({
       translateConferenceHeadline(
         tTopics,
         tCommitteeLabels,
-        [c.name, c.committee].filter(Boolean).join(" — ")
+        [c.name, c.committee].filter(Boolean).join(" — "),
+        locale
       ),
     ])
   );
@@ -171,27 +233,50 @@ export default async function ProfilePage({
     ...new Set((mySeats ?? []).map((s) => s.conference_id).filter(Boolean)),
   ] as string[];
 
-  let dashboardCommitteeSwitch:
-    | { conferences: { id: string; label: string }[]; activeConferenceId: string | null }
-    | undefined;
+  let rawPickerRows: DashboardPickerConferenceRow[] = [];
+
   if (seatConferenceIds.length > 0) {
     const { data: seatConfRows } = await supabase
       .from("conferences")
-      .select("id, name, committee")
+      .select("id, name, committee, committee_code")
       .in("id", seatConferenceIds);
-    const options = (seatConfRows ?? [])
-      .map((c) => ({
-        id: c.id,
-        label: translateConferenceHeadline(
-          tTopics,
-          tCommitteeLabels,
-          [c.name, c.committee].filter(Boolean).join(" — ")
-        ),
-      }))
-      .sort((a, b) => a.label.localeCompare(b.label));
-    if (options.length > 0) {
+    rawPickerRows = (seatConfRows ?? []) as DashboardPickerConferenceRow[];
+  }
+
+  // Chairs often have dashboard access via the room gate but no linked allocation row; list the whole event.
+  if (rawPickerRows.length === 0 && roleLower === "chair" && activeConference?.event_id) {
+    const { data: eventConfs } = await supabase
+      .from("conferences")
+      .select("id, name, committee, committee_code")
+      .eq("event_id", activeConference.event_id);
+    rawPickerRows = (eventConfs ?? []) as DashboardPickerConferenceRow[];
+  }
+
+  if (rawPickerRows.length === 0 && roleLower === "chair" && activeConference?.id) {
+    rawPickerRows = [
+      {
+        id: activeConference.id,
+        name: activeConference.name,
+        committee: activeConference.committee,
+        committee_code: activeConference.committee_code,
+      },
+    ];
+  }
+
+  let dashboardCommitteeSwitch:
+    | { conferences: { id: string; label: string }[]; activeConferenceId: string | null }
+    | undefined;
+
+  if (rawPickerRows.length > 0) {
+    const committeePickerOptions = mergeConferenceRowsToCommitteePickerOptions(rawPickerRows, {
+      activeConferenceId: activeConference?.id ?? null,
+      seatConferenceIdSet: new Set(seatConferenceIds),
+      tCommitteeLabels,
+      fallbackLabel: tp("fallbacks.committeeSession"),
+    });
+    if (committeePickerOptions.length > 0) {
       dashboardCommitteeSwitch = {
-        conferences: options,
+        conferences: committeePickerOptions,
         activeConferenceId: activeConference?.id ?? null,
       };
     }
@@ -461,7 +546,7 @@ export default async function ProfilePage({
             {(myMotions ?? []).map((m) => {
               const where = committeeLabel[m.conference_id] ?? tp("fallbacks.committeeSession");
               const title = m.title?.trim()
-                ? translateAgendaTopicLabel(tTopics, m.title)
+                ? translateAgendaTopicLabel(tTopics, m.title, locale)
                 : m.procedure_code?.replace(/_/g, " ") || tp("fallbacks.untitledMotion");
               return (
                 <li key={m.id} className="border-b border-brand-navy/5 pb-2 last:border-0">

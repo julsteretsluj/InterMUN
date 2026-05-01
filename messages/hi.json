@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "पहले बयानों के लिए मोशन फ्लोर खोलें।",
     "openMotionBlocksRecording": "एक प्रस्ताव मतदान के लिए पहले से ही खुला है। आगे के बयान दर्ज करने से पहले इसे बंद कर दें.",
     "statedMotionRecorded": "बताया गया प्रस्ताव रिकार्ड किया गया (अभी मतदान के लिए खुला नहीं है)।",
-    "statedMotionRemoved": "बताया गया प्रस्ताव हटा दिया गया."
+    "statedMotionRemoved": "बताया गया प्रस्ताव हटा दिया गया.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "भाषा",
@@ -595,7 +611,8 @@
     "pointsLog": "• अंक लॉग",
     "formalMotions": "औपचारिक प्रस्ताव",
     "timer": "घड़ी",
-    "smtProfile": "प्रोफ़ाइल"
+    "smtProfile": "प्रोफ़ाइल",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "सुपाबेस कॉन्फ़िगर नहीं है",
@@ -763,7 +780,8 @@
       "archive": "पुरालेख",
       "officialLinks": "आधिकारिक लिंक",
       "roomCode": "कक्ष कोड",
-      "settings": "सेटिंग्स"
+      "settings": "सेटिंग्स",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "संयुक्त राष्ट्र के सदस्य देश",
       "unSystem": "संयुक्त राष्ट्र प्रणाली (संस्थापक एवं सदस्य)",
       "history": "संयुक्त राष्ट्र इतिहास"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "स्रोत जोड़ें",
-      "sourceUrl": "स्रोत यूआरएल",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (अनुशंसित)",
-      "urlHelp": "नए Google दस्तावेज़ के लिए, बटन का उपयोग करें और दस्तावेज़ लिंक को यहां पेस्ट करें।",
-      "titleOptional": "शीर्षक (वैकल्पिक)",
-      "saveChanges": "परिवर्तनों को सुरक्षित करें",
-      "editSource": "स्रोत संपादित करें",
-      "urlPlaceholderShort": "Google दस्तावेज़ या अन्य URL",
-      "empty": "अभी तक कोई स्रोत नहीं. इसे यहां खोलने के लिए एक Google Doc लिंक जोड़ें।",
-      "sourceLabel": "स्रोत",
-      "openLink": "खुला लिंक",
-      "embedHeading": "स्रोत दस्तावेज़",
-      "notGoogleDoc": "यह यूआरएल Google Doc नहीं है. यहां एम्बेड और संपादित करने के लिए docs.google.com/document/d/… लिंक का उपयोग करें; अन्यथा ऊपर दिए गए लिंक को खोलें।"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "प्रतिनिधि सीधे स्थिति पत्र अपलोड नहीं कर सकते। किसी अन्य दस्तावेज़ प्रकार का उपयोग करें.",
-      "alertOnlyChairsPositionPaper": "केवल अध्यक्ष/श्रीमती/व्यवस्थापक ही स्थिति पत्र अपलोड कर सकते हैं।",
-      "alertOnlySmtChairReport": "केवल एसएमटी/एडमिन ही चेयर रिपोर्ट अपलोड कर सकता है।",
-      "alertOnlySmtRop": "केवल एसएमटी/एडमिन ही आरओपी दस्तावेज़ अपलोड कर सकता है।",
-      "alertOnlySmtAwardCriteria": "केवल श्रीमती/व्यवस्थापक ही पुरस्कार मानदंड दस्तावेज़ अपलोड कर सकते हैं।",
-      "alertNeedContentOrUrl": "या तो स्थानीय पाठ सामग्री या Google डॉक्स URL जोड़ें।",
-      "confirmDelete": "यह दस्तावेज़ हटाएं?",
-      "delegatePrepTitle": "दस्तावेज़ तैयारी अनुभाग",
-      "delegatePrepBody": "आप सीधे इस पृष्ठ से अपने स्वयं के <prep>तैयारी दस्तावेज़</prep> अपलोड, देख और संपादित कर सकते हैं।",
-      "positionPaperGuideTitle": "पोजीशन पेपर गाइड",
-      "positionPaperGuideBlurb": "अंतिम पीडीएफ तैयार होने तक प्लेसहोल्डर गाइड डाउनलोड करें।",
-      "downloadPlaceholderGuide": "प्लेसहोल्डर गाइड डाउनलोड करें",
-      "addDocument": "दस्तावेज़ जोड़ें",
-      "tabs": {
-        "ariaLabel": "दस्तावेज़ अनुभाग",
-        "library": "पुस्तकालय",
-        "compose": "लिखें",
-        "composeHint": "इस टैब से एक नया दस्तावेज़ प्रारंभ करें या मौजूदा ड्राफ्ट संपादित करें।"
-      },
-      "newDocumentTitle": "नया दस्तावेज़",
-      "editDocumentTitle": "दस्तावेज़ संपादित करें",
-      "typeLabel": "प्रकार",
-      "types": {
-        "position_paper": "स्थिति पेपर",
-        "chair_report": "अध्यक्ष रिपोर्ट",
-        "rop": "आरओपी",
-        "award_criteria": "पुरस्कार का मापदंड",
-        "chair_notes": "चेयर नोट्स",
-        "prep_doc": "तैयारी दस्तावेज़"
-      },
-      "delegatePositionPaperNote": "फीडबैक के साथ स्थिति पत्र कुर्सियों द्वारा अपलोड किए जाते हैं।",
-      "delegateOwner": "प्रतिनिधि स्वामी",
-      "chairRecipient": "कुर्सी प्राप्तकर्ता",
-      "titleLabel": "शीर्षक",
-      "titlePlaceholder": "दस्तावेज़ का शीर्षक",
-      "googleDocsUrl": "गूगल डॉक्स यूआरएल",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (एप्लिकेशन में दृश्य/संपादन एम्बेड करें)",
-      "googleDocsHelp": "Google को एक नए टैब में खोलने के लिए नए Google Doc का उपयोग करें, फिर दस्तावेज़ लिंक को यहां पेस्ट करें। नीचे सादा पाठ वैकल्पिक है. प्रत्येक दस्तावेज़ को या तो स्थानीय पाठ, एक Google डॉक लिंक, या दोनों की आवश्यकता होती है।",
-      "plainTextOptional": "सादा पाठ (वैकल्पिक)",
-      "plainTextPlaceholder": "नोट्स या ड्राफ्ट टेक्स्ट...",
-      "chairFeedbackLabel": "अध्यक्ष की प्रतिक्रिया",
-      "chairFeedbackPlaceholder": "प्रतिनिधि स्थिति पेपर के लिए प्रतिक्रिया...",
-      "empty": "अभी तक कोई दस्तावेज़ नहीं. एक जोड़ें या Google दस्तावेज़ लिंक करें.",
-      "sidebarDocumentLabel": "दस्तावेज़",
-      "sections": {
-        "chairReports": "अध्यक्ष की रिपोर्ट",
-        "rop": "आरओपी",
-        "awardCriteria": "पुरस्कार का मापदंड",
-        "prepDocuments": "तैयारी दस्तावेज़",
-        "chairNotes": "चेयर नोट्स",
-        "otherDocuments": "अन्य दस्तावेज़"
-      },
-      "untitled": "शीर्षकहीन",
-      "linkedDocumentHeading": "लिंक किया गया दस्तावेज़",
-      "notesHeading": "टिप्पणियाँ",
-      "noGoogleDocYet": "अभी तक कोई Google दस्तावेज़ लिंक नहीं किया गया है. Docs.google.com/document/d/… URL जोड़ने के लिए संपादन का उपयोग करें।",
-      "chairFeedbackHeading": "अध्यक्ष की प्रतिक्रिया",
-      "noFeedbackYet": "अभी तक कोई प्रतिक्रिया नहीं जोड़ी गई."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "पहले एक प्रतिनिधि ईमेल दर्ज करें.",
-      "sentToDelegate": "{ईमेल} पर भेजा गया.",
-      "newResolution": "नया संकल्प",
-      "maxDraftResolutions": "इस समिति के पास पहले से ही मसौदा प्रस्ताव मौजूद हैं।",
-      "googleDocLink": "गूगल डॉक लिंक",
-      "googleDocUrlPlaceholder": "Google डॉक्स URL (docs.google.com/document/d/… - एम्बेड + संपादन के लिए उपयोग किया जाता है)",
-      "googleDocUrlHelp": "नया Google दस्तावेज़ दूसरे टैब में खुलता है; एड्रेस बार से यूआरएल कॉपी करें और यहां पेस्ट करें।",
-      "mainSubmittersPlaceholder": "मुख्य प्रस्तुतकर्ता (उपयोगकर्ता आईडी, अल्पविराम से अलग)",
-      "coSubmittersPlaceholder": "सह-प्रस्तुतकर्ता (उपयोगकर्ता आईडी, अल्पविराम से अलग)",
-      "create": "बनाएं",
-      "cancel": "रद्द करना",
-      "openInNewTab": "वेब टेब में खोलें",
-      "noGoogleDocLink": "कोई Google डॉक लिंक नहीं",
-      "visibleToOtherBloc": "अन्य गुट के लिए दृश्यमान",
-      "resolutionCounts": "मुख्य उप: {मुख्य} | सह-उप: {सह} | हस्ताक्षरकर्ता: {हस्ताक्षरकर्ता}",
-      "blocButton": "ब्लॉक {नाम} ({रुख})",
-      "signVirtually": "वस्तुतः हस्ताक्षर करें (मुख्य उप अधिसूचित)",
-      "shareByEmail": "ईमेल द्वारा समाधान साझा करें",
-      "delegateEmailPlaceholder": "प्रतिनिधि@email.com",
-      "sendToDelegate": "प्रतिनिधि को भेजें",
-      "clauseEditor": "खंड संपादक",
-      "noClausesYet": "अभी तक कोई खंड नहीं.",
-      "clauseNumber": "खण्ड {संख्या}",
-      "saveClause": "उपवाक्य सहेजें",
-      "delete": "मिटाना",
-      "addClausePlaceholder": "एक नया उपवाक्य जोड़ें...",
-      "addClause": "उपवाक्य जोड़ें",
-      "clauseVoteHistory": "खंड वोट इतिहास",
-      "noClauseOutcomesYet": "अभी तक कोई क्लॉज़ वोट परिणाम दर्ज नहीं किया गया है।",
-      "clauseFallback": "धारा",
-      "passed": "उत्तीर्ण",
-      "failed": "असफल",
-      "motionId": "मोशन {आईडी}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "मतदान अनुभाग",
-        "open": "खुला",
-        "closed": "बंद किया हुआ"
-      },
-      "requiredMajority": "आवश्यक बहुमत",
-      "helpRequiredMajorityTitle": "आवश्यक बहुमत",
-      "helpRequiredMajorityBody": "पास/असफल होने का निर्णय लेने के लिए उपयोग की जाने वाली वोट सीमा चुनें। 'सरल' आधे से अधिक है. `2/3` के लिए सर्वोच्च बहुमत की आवश्यकता होती है।",
-      "majoritySimple": "सरल",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{लेबल} बहुमत",
-      "mustVote": "वोट अवश्य करें",
-      "helpMustVoteTitle": "वोट अवश्य करें",
-      "helpMustVoteBody": "इस प्रस्ताव को \"अवश्य वोट करें\" आइटम के रूप में चिह्नित करता है। इसका उपयोग प्रतिभागियों को आवश्यकता बताने के लिए किया जाता है (आपकी समिति की स्थापना के आधार पर)।",
-      "saveSettings": "सेटिंग्स सेव करें",
-      "delegateBlurb": "मंच सत्र में वोट रिकॉर्ड करता है (जैसे रोल कॉल)। यहां मोशन वोट केवल हां/नहीं के बाद आते हैं (विरोध का उपयोग नहीं किया जाता है)। आप टैली का अनुसरण कर सकते हैं; प्रतिनिधि ऐप में वोट नहीं डालते हैं।",
-      "yes": "हाँ",
-      "no": "नहीं",
-      "ballots": "मतपत्र",
-      "total": "कुल",
-      "outcome": "नतीजा",
-      "passed": "उत्तीर्ण",
-      "failed": "असफल",
-      "noRecordedVotes": "कोई दर्ज वोट नहीं",
-      "reopenMotion": "गति पुनः खोलें",
-      "editRecordOpen": "रिकॉर्ड संपादित करें...",
-      "hideSettings": "सेटिंग्स छिपाएँ",
-      "preliminaryPassing": "उत्तीर्ण (प्रारंभिक)",
-      "preliminaryFailing": "असफल होना (प्रारंभिक)",
-      "delegateRollCall": "प्रतिनिधि रोल कॉल ({गिनती})",
-      "noSeatedDelegates": "इस प्रस्ताव के लिए कोई बैठा हुआ प्रतिनिधि उपलब्ध नहीं है।",
-      "rollPrefix": "रोल:",
-      "recordedPrefix": "रिकॉर्ड किया गया:",
-      "recordedYes": "हाँ",
-      "recordedNo": "नहीं",
-      "recordedAbstain": "बचना",
-      "recordedNone": "—",
-      "abstain": "बचना",
-      "clear": "स्पष्ट",
-      "closeMotion": "बंद गति",
-      "mustVoteBadge": "वोट अवश्य करें",
-      "canVoteBadge": "वोट कर सकते हैं",
-      "noMotions": "अभी तक कोई प्रस्ताव नहीं.",
-      "currentOpenMotion": "वर्तमान खुली गति",
-      "noOpenMotion": "अभी कोई खुला प्रस्ताव नहीं.",
-      "recentClosedMotions": "हाल ही में बंद गतियाँ",
-      "noClosedMotions": "अभी तक कोई बंद गति नहीं है.",
-      "untitled": "शीर्षकहीन",
-      "voteTypes": {
-        "motion": "गति",
-        "amendment": "संशोधन",
-        "resolution": "संकल्प"
-      },
-      "roll": {
-        "absent": "अनुपस्थित (रोल)",
-        "present_abstain": "उपस्थित - अनुपस्थित रह सकते हैं (रोल)",
-        "present_voting": "प्रस्तुति और मतदान (रोल)",
-        "unknown": "- (रोल)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "प्रोफ़ाइल अनुभाग",
-        "overview": "सिंहावलोकन",
-        "awards": "पुरस्कार",
-        "private": "निजी अभिलेख",
-        "settings": "प्रोफ़ाइल सेटिंग"
-      },
-      "profilePicture": "प्रोफ़ाइल फोटो",
-      "uploadFile": "फ़ाइल अपलोड करें",
-      "uploading": "अपलोड हो रहा है...",
-      "photoSaved": "फ़ोटो अपलोड और सहेजा गया.",
-      "orUrl": "या यूआरएल द्वारा सेट करें",
-      "urlPlaceholder": "https://...",
-      "name": "नाम",
-      "username": "उपयोगकर्ता नाम",
-      "usernamePlaceholder": "जैसे एलेक्स_1999",
-      "pronouns": "सर्वनाम",
-      "customPronounNote": "आपकी प्रोफ़ाइल में एक कस्टम सर्वनाम सेट था जो अब यहां स्वीकार नहीं किया जाता है। ऊपर एक विकल्प चुनें (या खाली छोड़ दें)। सहेजने से पुराना मान बदल जाता है.",
-      "school": "विद्यालय",
-      "schoolPlaceholder": "जैसे लिंकन हाई स्कूल",
-      "grade": "श्रेणी",
-      "selectGrade": "ग्रेड चुनें",
-      "conferencesAttended": "सम्मेलनों में भाग लिया",
-      "awardsComma": "पुरस्कार (अल्पविराम से अलग)",
-      "awardsPlaceholder": "सर्वश्रेष्ठ प्रतिनिधि, माननीय उल्लेख",
-      "allocation": "आवंटन",
-      "selectAllocation": "आवंटन का चयन करें",
-      "noAllocationsPlaceholder": "कोई समिति आवंटन उपलब्ध नहीं है",
-      "saveProfile": "प्रोफ़ाइल बचा",
-      "saved": "प्रोफ़ाइल सहेजी गई.",
-      "saveFailed": "प्रोफ़ाइल सहेजी नहीं जा सकी.",
-      "errUsernamePattern": "उपयोक्तानाम 3-32 अक्षर का होना चाहिए (अक्षर, अंक, _, ., -)",
-      "errPronounsPreset": "सूची में से एक सर्वनाम चुनें.",
-      "errImageType": "कृपया एक छवि फ़ाइल चुनें.",
-      "errImageSize": "छवि बहुत बड़ी है (अधिकतम 5 एमबी)।",
-      "errUploadFailed": "अपलोड विफल रहा.",
-      "errStorageSetup": "प्रोफ़ाइल चित्र संग्रहण सेट नहीं किया गया है. सुपाबेस प्रोजेक्ट में, माइग्रेशन 00100_profile_pictures_storage_bucket.sql चलाएँ, या प्रोफ़ाइल-पिक्चर्स नाम से एक सार्वजनिक स्टोरेज बकेट बनाएँ (README देखें)।",
-      "errPublicUrl": "अपलोड की गई छवि के लिए सार्वजनिक यूआरएल का समाधान नहीं किया जा सका।",
-      "fallbacks": {
-        "yourCountry": "आपका देश",
-        "committeeSession": "समिति सत्र",
-        "delegate": "प्रतिनिधि",
-        "speechNote": "भाषण नोट",
-        "untitledMotion": "शीर्षक रहित प्रस्ताव",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "{ध्वज} {देश} के प्रतिनिधि का स्वागत है",
-        "subtitle": "आप किसके साथ शुरु करना चाहेंगे?",
-        "links": {
-          "documents": "दस्तावेज़",
-          "notes": "टिप्पणियाँ",
-          "committeeRoom": "समिति कक्ष",
-          "runningNotes": "चल रहे नोट्स",
-          "ideas": "विचारों",
-          "guides": "गाइड",
-          "sources": "सूत्रों का कहना है",
-          "resolutions": "प्रस्तावों",
-          "speeches": "भाषण",
-          "stances": "रुख",
-          "crisisSlides": "संकट सरकता है",
-          "report": "प्रतिवेदन",
-          "motions": "प्रस्ताव",
-          "points": "अंक"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "आपकी प्रोफ़ाइल पर पुरस्कार",
-        "rank": "रैंक {रैंक}",
-        "pending": {
-          "tab": "लंबित नामांकन",
-          "title": "अध्यक्ष पद के नामांकन लंबित",
-          "descriptionSingle": "कुर्सियों द्वारा सहेजा गया और समीक्षा के लिए एसएमटी के साथ साझा किया गया। पुष्टि के बाद अंतिम पुरस्कार नीचे दिखाई देंगे।",
-          "descriptionTabbed": "कुर्सियों द्वारा सहेजा गया और समीक्षा के लिए एसएमटी के साथ साझा किया गया। पुष्टि के बाद अंतिम पुरस्कार सामने आते हैं।"
-        },
-        "recorded": {
-          "tab": "रिकार्ड किये गये पुरस्कार",
-          "title": "रिकार्ड किये गये पुरस्कार",
-          "description": "जब कुर्सियाँ या श्रीमती आपको पुरस्कार ट्रैकर में नियुक्त करती हैं तो सूचीबद्ध किया जाता है। अंतिम मान्यता आपके सम्मेलन के नियमों का पालन करती है।"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "केवल आपके लिए, समिति अध्यक्षों और संबंधित समिति की श्रीमती के लिए दृश्यमान।",
-        "points": {
-          "title": "कुर्सी बिंदु (निजी)"
-        },
-        "speechNotes": {
-          "title": "अध्यक्ष भाषण नोट्स (निजी)"
-        },
-        "motions": {
-          "title": "आपने जो प्रस्ताव रखे",
-          "description": "समिति की समीक्षा और एसएमटी निरीक्षण के लिए आपकी प्रोफ़ाइल में सहेजा गया।"
-        }
-      },
-      "discipline": {
-        "title": "अनुशासनात्मक स्थिति (निजी)",
-        "statusLine": "चेतावनियाँ: {चेतावनियाँ} · हड़तालें: {हड़तालें}{वोटिंगअक्षम{बोलनानिलंबित}{कमेटी से हटा दिया गया}",
-        "votingDisabled": "मतदान अक्षम",
-        "speakingSuspended": "बोलना निलंबित",
-        "removedFromCommittee": "समिति से हटा दिया गया",
-        "updated": "अपडेट किया गया: {मूल्य}"
-      },
-      "preview": {
-        "ariaLabel": "प्रोफ़ाइल पूर्वावलोकन",
-        "title": "पूर्व दर्शन",
-        "yourName": "आपका नाम",
-        "usernameNotSet": "उपयोक्तानाम सेट नहीं है",
-        "gradeValue": "ग्रेड {ग्रेड}",
-        "awards": "पुरस्कार"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "प्रक्रिया के नियम (आरओपी)",
-          "content": "#प्रक्रिया के नियम \n\n## बिंदु और प्रस्ताव \n- **आदेश का बिंदु**: सही प्रक्रिया \n- **सूचना का बिंदु**: वक्ता से प्रश्न \n- **व्यक्तिगत विशेषाधिकार का बिंदु**: व्यक्तिगत आराम \n- **टेबल पर प्रस्ताव**: बहस स्थगित करें \n- **स्थगन प्रस्ताव**: सत्र समाप्त \n\n##मतदान \n- प्रक्रियात्मक मामलों के लिए साधारण बहुमत \n- ठोस मामलों के लिए 2/3 बहुमत \n- अनुरोध किए जाने पर रोल-कॉल वोट"
-        },
-        "examples": {
-          "title": "उदाहरण",
-          "content": "# उदाहरण \n\n## संकल्प प्रारूप \n``` \nमहासभा, \n... \n1. सदस्य देशों से आह्वान... \n2. अंतरराष्ट्रीय समुदाय से आग्रह करता हूं कि... \n``` \n\n## स्थिति पेपर संरचना \n1. पृष्ठभूमि \n2. देश नीति \n3. प्रस्तावित समाधान"
-        },
-        "templates": {
-          "title": "टेम्पलेट्स",
-          "content": "# टेम्पलेट्स \n\n## चेयर रिपोर्ट टेम्पलेट \n- समिति सिंहावलोकन \n- मुख्य चर्चा बिंदु \n- प्रस्ताव पारित \n- सिफ़ारिशें"
-        },
-        "chairReport": {
-          "title": "अध्यक्ष रिपोर्ट",
-          "content": "# चेयर रिपोर्ट \n\nदस्तावेज़ समिति की कार्यवाही और परिणाम यहां।"
-        }
-      },
-      "edit": "संपादन करना",
-      "guideDocument": "मार्गदर्शक दस्तावेज़",
-      "additionalNotes": "अतिरिक्त टिप्पणी",
-      "noContentYet": "अभी तक कोई सामग्री नहीं है.",
-      "titlePlaceholder": "शीर्षक",
-      "googleDocsUrl": "गूगल डॉक्स यूआरएल",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "नया Google दस्तावेज़ दूसरे टैब में खुलता है. एक साझा करने योग्य लिंक चिपकाएँ ताकि प्रतिनिधि यहाँ दस्तावेज़ खोल सकें (देखना/संपादित करना Google साझाकरण पर निर्भर करता है)।",
-      "markdownOptional": "मार्कडाउन नोट्स (यदि आप Google दस्तावेज़ का उपयोग करते हैं तो वैकल्पिक)",
-      "save": "बचाना",
-      "cancel": "रद्द करना",
-      "createNewGuide": "नई मार्गदर्शिका बनाएं",
-      "slugPlaceholder": "स्लग (अद्वितीय)",
-      "titleLowerPlaceholder": "शीर्षक",
-      "googleDocsUrlOptional": "Google डॉक्स URL (वैकल्पिक)",
-      "markdownContentOptional": "मार्कडाउन सामग्री (वैकल्पिक)",
-      "create": "बनाएं",
-      "glossary": {
-        "title": "एमयूएन एजेंडा शब्दावली",
-        "subtitle": "आपकी समिति कोड और वर्तमान एजेंडा विषयों से मेल खाने वाली अद्वितीय शब्दावली।",
-        "committeeCode": "समिति कोड: {कोड}",
-        "topicTag": "विषय: {विषय}",
-        "sources": {
-          "core": "मुख्य",
-          "committee": "समिति",
-          "topic": "विषय"
-        },
-        "terms": {
-          "delegation": {
-            "term": "प्रतिनिधि मंडल",
-            "definition": "समिति में एक राज्य या इकाई का प्रतिनिधित्व करने वाला एक देश या पर्यवेक्षक दल।"
-          },
-          "placard": {
-            "term": "घोषणापत्र",
-            "definition": "देश चिह्न का उपयोग सदन का अनुरोध करने, मतदान करने और प्रक्रियात्मक गतियों पर संकेत देने के लिए किया जाता है।"
-          },
-          "dais": {
-            "term": "मंच",
-            "definition": "अध्यक्षता करने वाली टीम जो बहस को नियंत्रित करती है, प्रक्रिया लागू करती है और बोलने के क्रम का प्रबंधन करती है।"
-          },
-          "quorum": {
-            "term": "कोरम",
-            "definition": "औपचारिक कामकाज और मतदान के लिए आवश्यक न्यूनतम संख्या में प्रतिनिधिमंडल।"
-          },
-          "motion": {
-            "term": "गति",
-            "definition": "बहस के प्रवाह को बदलने का औपचारिक प्रस्ताव, जैसे कॉकस प्रकार या बोलने का समय।"
-          },
-          "point_of_order": {
-            "term": "आदेश का बिंदु",
-            "definition": "समिति के नियमों के तहत प्रक्रिया गलत तरीके से लागू होने पर हस्तक्षेप।"
-          },
-          "moderated_caucus": {
-            "term": "संचालित कॉकस",
-            "definition": "एक परिभाषित उपविषय पर कम समय के भाषणों के साथ संरचित बहस खंड।"
-          },
-          "unmoderated_caucus": {
-            "term": "अनियंत्रित कॉकस",
-            "definition": "अनौपचारिक बातचीत की अवधि जहां प्रतिनिधि विचारों का मसौदा तैयार करने और विलय करने के लिए स्वतंत्र रूप से आगे बढ़ते हैं।"
-          },
-          "draft_resolution": {
-            "term": "मसौदा संकल्प",
-            "definition": "अंतिम मतदान और अंगीकरण से पहले प्रस्तावित समिति की कार्रवाई का कार्य पाठ।"
-          },
-          "amendment": {
-            "term": "संशोधन",
-            "definition": "पाठ के मसौदे में बदलाव का प्रस्ताव, या तो मित्रवत या अमित्र के रूप में मतदान किया गया।"
-          },
-          "operative_clause": {
-            "term": "क्रियात्मक उपवाक्य",
-            "definition": "कार्रवाई-उन्मुख क्रमांकित खंड यह बताता है कि समिति क्या करने का प्रस्ताव करती है।"
-          },
-          "preambulatory_clause": {
-            "term": "प्रस्तावना खण्ड",
-            "definition": "पृष्ठभूमि सिद्धांतों, चिंताओं और पूर्व रूपरेखाओं का हवाला देते हुए संदर्भ-निर्धारण खंड।"
-          },
-          "right_of_reply": {
-            "term": "उत्तर देने का अधिकार",
-            "definition": "प्रतिनिधिमंडल की गरिमा या स्थिति को प्रभावित करने वाले सीधे बयान का जवाब देने का अवसर।"
-          },
-          "veto_power": {
-            "term": "वीटो शक्ति",
-            "definition": "यूएनएससी स्थायी सदस्य प्राधिकरण, मूल मसौदा प्रस्तावों को अवरुद्ध करने के लिए।"
-          },
-          "chapter_vii": {
-            "term": "अध्याय सातवीं",
-            "definition": "शांति के खतरों, प्रतिबंधों और बल प्रयोग उपायों पर संयुक्त राष्ट्र चार्टर प्राधिकरण।"
-          },
-          "sanctions_regime": {
-            "term": "प्रतिबंध व्यवस्था",
-            "definition": "प्रत्यक्ष सैन्य कार्रवाई के बिना व्यवहार को प्रभावित करने के लिए समन्वित प्रतिबंधों का उपयोग किया जाता है।"
-          },
-          "arms_control": {
-            "term": "शस्त्र नियंत्रण",
-            "definition": "समझौते और सत्यापन प्रणालियाँ जो हथियारों के प्रकार, मात्रा या तैनाती को सीमित करती हैं।"
-          },
-          "non_proliferation": {
-            "term": "अप्रसार",
-            "definition": "परमाणु, रासायनिक, जैविक या उन्नत हथियार क्षमताओं के प्रसार को रोकने के लिए नीतियां।"
-          },
-          "confidence_building_measures": {
-            "term": "आत्मविश्वास बढ़ाने के उपाय",
-            "definition": "पारदर्शिता और संचार उपकरण जो गलतफहमी और संघर्ष के जोखिम को कम करते हैं।"
-          },
-          "universal_periodic_review": {
-            "term": "सार्वभौमिक आवधिक समीक्षा",
-            "definition": "सहकर्मी-समीक्षा प्रक्रिया जहां प्रत्येक संयुक्त राष्ट्र सदस्य देश रिपोर्ट करता है और अधिकारों की सिफारिशें प्राप्त करता है।"
-          },
-          "special_rapporteur": {
-            "term": "विशेष संवाददाता",
-            "definition": "विषयगत या देश के अधिकारों के मुद्दों पर निगरानी और रिपोर्ट करने के लिए स्वतंत्र विशेषज्ञ नियुक्त।"
-          },
-          "treaty_body": {
-            "term": "संधि निकाय",
-            "definition": "विशिष्ट मानवाधिकार संधि के कार्यान्वयन की निगरानी करने वाली विशेषज्ञों की समिति।"
-          },
-          "public_health_emergency": {
-            "term": "सार्वजनिक स्वास्थ्य आपातकाल",
-            "definition": "गंभीर प्रकोप की घटना के लिए तत्काल समन्वित राष्ट्रीय और अंतर्राष्ट्रीय प्रतिक्रिया की आवश्यकता है।"
-          },
-          "surveillance": {
-            "term": "महामारी विज्ञान निगरानी",
-            "definition": "रोग प्रवृत्तियों का पता लगाने और उन पर नज़र रखने के लिए स्वास्थ्य डेटा का निरंतर संग्रह और विश्लेषण।"
-          },
-          "health_systems": {
-            "term": "स्वास्थ्य प्रणालियों को सुदृढ़ बनाना",
-            "definition": "विश्वसनीय स्वास्थ्य सेवा वितरण के लिए कार्यबल, वित्तपोषण, लॉजिस्टिक्स और प्रशासन में सुधार करना।"
-          },
-          "transnational_crime": {
-            "term": "अंतरराष्ट्रीय संगठित अपराध",
-            "definition": "आपराधिक गतिविधियाँ नेटवर्क और अवैध बाज़ारों के माध्यम से सीमाओं के पार समन्वित होती हैं।"
-          },
-          "illicit_trafficking": {
-            "term": "अवैध तस्करी",
-            "definition": "न्यायक्षेत्रों में दवाओं, हथियारों, व्यक्तियों या वस्तुओं की अवैध आवाजाही।"
-          },
-          "rule_of_law_capacity": {
-            "term": "क़ानून-सम्मत क्षमता",
-            "definition": "निष्पक्षता से जांच करने, मुकदमा चलाने और अधिकारों की रक्षा करने की न्याय प्रणालियों की संस्थागत क्षमता।"
-          },
-          "sustainable_development": {
-            "term": "सतत विकास",
-            "definition": "विकास मॉडल सामाजिक प्रगति, आर्थिक अवसर और पर्यावरण संरक्षण को संतुलित करता है।"
-          },
-          "financing_for_development": {
-            "term": "विकास के लिए वित्तपोषण",
-            "definition": "सार्वजनिक और निजी वित्त पोषण तंत्र जो दीर्घकालिक विकास प्राथमिकताओं का समर्थन करते हैं।"
-          },
-          "policy_coordination": {
-            "term": "नीति समन्वय",
-            "definition": "दोहराव से बचने और सामूहिक प्रभाव को बढ़ाने के लिए राज्य और एजेंसी के कार्यों का संरेखण।"
-          },
-          "child_protection": {
-            "term": "बाल संरक्षण",
-            "definition": "सभी स्थितियों में बच्चों के विरुद्ध शोषण, दुर्व्यवहार और हिंसा को रोकने के उपाय।"
-          },
-          "education_access": {
-            "term": "शिक्षा पहुंच",
-            "definition": "सभी बच्चों के लिए समावेशी, न्यायसंगत और निरंतर सीखने के अवसर सुनिश्चित करना।"
-          },
-          "humanitarian_response": {
-            "term": "मानवीय प्रतिक्रिया",
-            "definition": "संकटों और संघर्ष स्थितियों में तत्काल जरूरतों को संबोधित करते हुए त्वरित राहत कार्यवाहियां।"
-          },
-          "gender_mainstreaming": {
-            "term": "लिंग मुख्यधारा",
-            "definition": "नीति डिजाइन, कार्यान्वयन और मूल्यांकन में लिंग विश्लेषण को एकीकृत करना।"
-          },
-          "gender_based_violence": {
-            "term": "लिंग आधारित हिंसा",
-            "definition": "लिंग पहचान, भूमिका या असमान शक्ति संबंधों के आधार पर किसी को नुकसान पहुँचाना।"
-          },
-          "economic_empowerment": {
-            "term": "आर्थिक सशक्तिकरण",
-            "definition": "सभ्य कार्य, वित्त, स्वामित्व और निर्णय लेने की शक्ति तक पहुंच का विस्तार।"
-          },
-          "source_attribution": {
-            "term": "स्रोत एट्रिब्यूशन",
-            "definition": "जानकारी के मूल स्रोत का स्पष्ट रूप से हवाला दें ताकि दावों को सत्यापित और प्रासंगिक बनाया जा सके।"
-          },
-          "verified_reporting": {
-            "term": "सत्यापित रिपोर्टिंग",
-            "definition": "विवादित तथ्यों को प्रकाशित करने से पहले पुष्टि की आवश्यकता वाले पत्रकारिता मानक।"
-          },
-          "editorial_independence": {
-            "term": "संपादकीय स्वतंत्रता",
-            "definition": "रिपोर्टिंग निर्णयों को राजनीतिक दबाव या हितधारक प्रभाव से अलग करना।"
-          },
-          "climate_mitigation": {
-            "term": "जलवायु शमन",
-            "definition": "ऐसी कार्रवाइयाँ जो ग्रीनहाउस-गैस उत्सर्जन को कम करती हैं या दीर्घकालिक कार्बन निष्कासन को बढ़ाती हैं।"
-          },
-          "climate_adaptation": {
-            "term": "जलवायु अनुकूलन",
-            "definition": "नीतियां और निवेश जो जलवायु संबंधी प्रभावों के प्रति संवेदनशीलता को कम करते हैं।"
-          },
-          "cyber_norms": {
-            "term": "साइबर मानदंड",
-            "definition": "डिजिटल और साइबर डोमेन में जिम्मेदार राज्य व्यवहार के लिए साझा अपेक्षाएं।"
-          },
-          "critical_infrastructure": {
-            "term": "महत्वपूर्ण बुनियादी ढांचा",
-            "definition": "बिजली, पानी, स्वास्थ्य और संचार जैसी आवश्यक प्रणालियों के लिए लचीलेपन की आवश्यकता होती है।"
-          },
-          "epidemiology": {
-            "term": "महामारी विज्ञान",
-            "definition": "जनसंख्या में रोग पैटर्न, कारण और वितरण का अध्ययन।"
-          },
-          "preparedness_response": {
-            "term": "तैयारी और प्रतिक्रिया",
-            "definition": "आपात्कालीन स्थितियों को नियंत्रित करने और प्रबंधित करने के लिए योजना बनाना, समन्वय करना और कार्रवाइयों में वृद्धि करना।"
-          },
-          "non_refoulement": {
-            "term": "गैर refoulement",
-            "definition": "सिद्धांत उन स्थानों पर लोगों की वापसी पर रोक लगाता है जहां उन्हें गंभीर नुकसान होता है।"
-          },
-          "durable_solutions": {
-            "term": "टिकाऊ समाधान",
-            "definition": "विस्थापित लोगों के लिए दीर्घकालिक परिणाम: वापसी, स्थानीय एकीकरण, या पुनर्वास।"
-          },
-          "nuclear_safeguards": {
-            "term": "परमाणु सुरक्षा उपाय",
-            "definition": "सत्यापन के उपाय यह सुनिश्चित करते हैं कि परमाणु सामग्री को हथियारों के उपयोग के लिए नहीं भेजा जाए।"
-          },
-          "counter_terrorism": {
-            "term": "काउंटर आतंकवाद",
-            "definition": "आतंकवादी गतिविधि के विरुद्ध एकीकृत कानूनी, निवारक और सुरक्षा उपाय।"
-          },
-          "due_process": {
-            "term": "उचित प्रक्रिया",
-            "definition": "जांच, अभियोजन और मंजूरी के दौरान अधिकारों की रक्षा करने वाली निष्पक्ष कानूनी प्रक्रियाएं।"
-          },
-          "resource_security": {
-            "term": "संसाधन सुरक्षा",
-            "definition": "आर्थिक और पर्यावरणीय तनाव के तहत भोजन, पानी और ऊर्जा तक विश्वसनीय पहुंच।"
-          },
-          "resilience": {
-            "term": "लचीलापन",
-            "definition": "समुदायों और संस्थानों की झटके सहने और प्रभावी ढंग से उबरने की क्षमता।"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "विचार संपादित करें",
-      "googleDocsUrl": "गूगल डॉक्स यूआरएल",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "संक्षिप्त विचार पाठ (वैकल्पिक)",
-      "save": "बचाना",
-      "cancel": "रद्द करना",
-      "addIntro": "किसी समाधान विचार का मसौदा तैयार करने के लिए एक Google दस्तावेज़ जोड़ें, या एक संक्षिप्त नोट टाइप करें (या दोनों)।",
-      "googleDocsCreateHelp": "नया Google दस्तावेज़ दूसरे टैब में खुलता है; लिंक बनने के बाद यहां पेस्ट करें।",
-      "resolutionIdeaPlaceholder": "संकल्प विचार...",
-      "add": "जोड़ना",
-      "noIdeasYet": "अभी तक कोई विचार नहीं.",
-      "ideaLabel": "विचार",
-      "ideaFallback": "विचार {संख्या}",
-      "linkedDoc": "लिंक किया गया दस्तावेज़",
-      "addedOn": "{दिनांक} जोड़ा गया",
-      "edit": "संपादन करना",
-      "delete": "मिटाना",
-      "ideaDocument": "विचार दस्तावेज़",
-      "summary": "सारांश",
-      "emptyIdea": "खोखला विचार."
-    },
-    "stances": {
-      "heatmapTitle": "संक्षिप्त रुख अवलोकन (हीटमैप)",
-      "heatmapHelp": "आपका आवंटन किस हद तक ___ का समर्थन करता है? (1-5 स्केल)",
-      "topicPlaceholder": "जैसे जलवायु कार्रवाई",
-      "extentLabel": "विस्तार (1-5):",
-      "extentHelpTitle": "विस्तार (1-5)",
-      "extentHelpBody": "1 का अर्थ है कि आपके आवंटन में विषय के लिए बहुत कम समर्थन है, और 5 का अर्थ है मजबूत समर्थन। वह संख्या चुनें जो समिति में आपके रुख से मेल खाती हो।",
-      "add": "जोड़ना",
-      "viewOnlyHeatmap": "कर्मचारियों के लिए केवल-देखें हीटमैप।",
-      "notesPerAllocation": "प्रति आवंटन नोट्स",
-      "noAllocationsYet": "अभी तक कोई आवंटन नहीं",
-      "notesPlaceholder": "इस आवंटन के लिए रुख नोट्स...",
-      "noteLanguageWarning": "पाठक चेतावनी: इस नोट में अनुचित भाषा हो सकती है।",
-      "save": "बचाना",
-      "saveHelpTitle": "स्टांस नोट सहेजें",
-      "saveHelpBody": "इस आवंटन के लिए स्टांस नोट सहेजता है। इसे कर्मचारियों और (समिति सेटिंग्स के आधार पर) अन्य प्रतिभागियों द्वारा देखा जा सकता है।"
-    },
-    "speeches": {
-      "newSpeech": "नया भाषण",
-      "speechTitlePlaceholder": "भाषण शीर्षक",
-      "googleDocsUrl": "गूगल डॉक्स यूआरएल",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google को एक नए टैब में खोलता है; तैयार होने पर दस्तावेज़ का URL यहां चिपकाएँ।",
-      "plainTextOptional": "सादा पाठ ड्राफ्ट (वैकल्पिक यदि आप Google दस्तावेज़ का उपयोग करते हैं)",
-      "save": "बचाना",
-      "cancel": "रद्द करना",
-      "noSpeechesYet": "अभी तक कोई भाषण नहीं. Google डॉक लिंक करें या टेक्स्ट पेस्ट करें.",
-      "speechLabel": "भाषण",
-      "untitled": "शीर्षकहीन",
-      "edit": "संपादन करना",
-      "speechDocument": "भाषण दस्तावेज़",
-      "draftText": "मसौदा पाठ",
-      "noContentHint": "Google दस्तावेज़ को संपादन के साथ लिंक करें, या फ़ॉर्म में सादा पाठ जोड़ें।"
-    },
-    "committeeRoom": {
-      "committeeLabel": "समिति",
-      "yourContext": "आपका सन्दर्भ",
-      "roleLabel": "भूमिका",
-      "seatLabel": "सीट",
-      "clearSearchTitle": "खोज साफ़ करें और सभी प्रतिनिधिमंडल दिखाएं",
-      "vacantLabel": "खाली",
-      "assignedLabel": "सौंपा गया",
-      "daisLabel": "मंच",
-      "phaseLabel": "चरण",
-      "phaseVoting": "मतदान",
-      "phaseDebate": "बहस",
-      "focusSearchTitle": "फ़ोकस खोज (डेज़ शीर्षक और नाम आपकी क्वेरी से मेल खाते हैं)",
-      "tipLabel": "बख्शीश",
-      "searchVacantTitle": "कमरे में \"रिक्त\" सीटें खोजें",
-      "searchHint": "कमरे में मिलानों को हाइलाइट करने के लिए देश, प्रतिनिधि का नाम, स्कूल, सर्वनाम या \"रिक्त\" टाइप करें। पहले मैच पर जाने के लिए एंटर दबाएँ; Esc clears. खाली सीटों पर जाने के लिए रिक्त पर क्लिक करें।",
-      "findLabel": "एक प्रतिनिधिमंडल या मंच सदस्य खोजें",
-      "searchPlaceholder": "देश, नाम, स्कूल...",
-      "matchesCount": "{कुल} सीटों का मिलान",
-      "enterScrolls": "स्क्रॉल दर्ज करें",
-      "typeToFilterHint": "फ़िल्टर करने के लिए टाइप करें - पहले मिलान के लिए स्क्रॉल दर्ज करें",
-      "noMatches": "कोई मेल खाने वाला प्रतिनिधिमंडल या मंच की सीटें नहीं।",
-      "digitalDisplay": "डिजिटल डिस्प्ले",
-      "floorLabel": "ज़मीन",
-      "staffSeatsHeading": "स्टाफ - सीटें",
-      "searchAria": "प्रतिनिधिमंडल खोजें",
-      "virtualRoomVacant": "खाली",
-      "profileAria": "प्रोफ़ाइल देखें: {देश}",
-      "vacantSeatAria": "खाली सीट",
-      "placardAria": "प्लेकार्ड {country}",
-      "gavelAria": "भूमि का लगान",
-      "viewProfileAria": "प्रोफ़ाइल देखें: {शीर्षक}",
-      "noProfileLinkAria": "{शीर्षक} (कोई प्रोफ़ाइल लिंक नहीं)",
-      "committeeFloor": "समिति तल",
-      "virtualRoomFigureAria": "आभासी समिति कक्ष - {समितिनाम} ({conferenceName})",
-      "filteringLiveRegion": "प्रतिनिधिमंडलों को फ़िल्टर करना. पहली हाइलाइट की गई सीट रिंग में पहला मैच है।",
-      "helperText": "तख्तियों में प्रत्येक प्रतिनिधि की प्रोफ़ाइल से देश (आवंटन से), नाम, स्कूल और सर्वनाम की सूची होती है। प्रोफ़ाइल के अंतर्गत अपना संपादन करें. खाली समिति सीटें रिक्त के रूप में दिखाई जाती हैं। उस सदस्य का पेज खोलने के लिए भरे हुए प्लेकार्ड या मंच की सीट पर क्लिक करें (वहां से चैट करें और रिपोर्ट करें)।",
-      "virtualRoomCaption": "देश, नाम, स्कूल और सर्वनाम दर्शाने वाले प्रतिनिधि तख्तियों के साथ वर्चुअल मॉडल संयुक्त राष्ट्र समिति कक्ष।"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "बोलने का अनुरोध",
-        "delegateFallback": "प्रतिनिधि",
-        "needAllocation": "बोलने का अनुरोध करने के लिए आपको आवंटन की आवश्यकता है।",
-        "alreadyQueued": "आपके पास कतार में पहले से ही सक्रिय बोलने का अनुरोध है।",
-        "requested": "बोलने का अनुरोध किया. आप कतार में दिखाई देंगे.",
-        "requestFailed": "बोलने का अनुरोध करने में विफल.",
-        "helpBody": "आपके प्रतिनिधिमंडल को कुर्सी कतार में भेजता है। आपके पास एक समय में एक सक्रिय प्रतीक्षा/वर्तमान अनुरोध हो सकता है।",
-        "purposeLabel": "वैकल्पिक उद्देश्य (कतार लेबल में दिखता है)",
-        "purposeHelpTitle": "प्रयोजन लेबल",
-        "purposeHelpBody": "यह पाठ आपके देश के नाम के साथ जोड़ा गया है ताकि कुर्सियाँ देख सकें कि आप फर्श के लिए अनुरोध क्यों कर रहे हैं।",
-        "purposePlaceholder": "जैसे समर्थन + संशोधन सिंहावलोकन",
-        "requesting": "निवेदन है...",
-        "rollPromptTitle": "अध्यक्ष की मंजूरी आवश्यक",
-        "rollPromptBodyPickStatus": "सत्र शुरू हो गया है. बोलने और मतदान को अनलॉक करने के लिए अपनी रोल-कॉल स्थिति चुनें। इस विकल्प को बदला नहीं जा सकता.",
-        "rollPromptBodyWaitSessionStart": "समिति का सत्र शुरू होने के लिए सभापति का इंतजार किया जा रहा है.",
-        "rollPromptBodyWaitRollPrompt": "रोल-कॉल प्रॉम्प्ट की प्रतीक्षा की जा रही है।",
-        "rollPromptBodyMarkedAbsent": "आपको वर्तमान में अनुपस्थित चिह्नित किया गया है. अध्यक्ष से कहें कि वह आपको बोलने और वोट करने के लिए उपस्थित होने के लिए चिह्नित करें।",
-        "rollPromptBodyChecking": "आपके रोल की स्थिति जाँची जा रही है...",
-        "rollPromptSaving": "सहेजा जा रहा है...",
-        "rollPromptPresent": "उपस्थित",
-        "rollPromptPresentVoting": "उपस्थित रहें और मतदान करें"
-      },
-      "motionVoting": {
-        "votingProcedure": "मतदान प्रक्रिया",
-        "currentMotion": "वर्तमान गति",
-        "motioner": "प्रेरक",
-        "majority": "बहुमत",
-        "majoritySimple": "सरल",
-        "tally": "हाँ {हाँ} - नहीं {नहीं} - कुल {कुल}",
-        "help": "मंच सत्र में प्रत्येक प्रतिनिधिमंडल के वोट को रिकॉर्ड करता है। मोशन वोट में केवल हां या ना (कोई परहेज नहीं) का उपयोग किया जाता है। योग केवल उन तख्तियों को गिना जाता है जहां हाँ या नहीं दर्ज किया गया था; अनुपस्थित प्रतिनिधिमंडलों को छोड़ दिया गया है।"
-      },
-      "activeMotion": {
-        "currentMotion": "वर्तमान गति",
-        "motionFallback": "गति",
-        "motioner": "प्रेरक",
-        "majority": "बहुमत",
-        "majoritySimple": "सरल",
-        "type": "प्रकार",
-        "timer": "घड़ी",
-        "currentSpeaker": "वर्तमान वक्ता",
-        "nextSpeaker": "अगला वक्ता",
-        "speakerTimeLeftCap": "स्पीकर का समय (बाएं/कैप)",
-        "speakerTimeLeftTotal": "स्पीकर का समय (बाएं/कुल)",
-        "perSpeaker": "(प्रति वक्ता)",
-        "paused": "(रुका हुआ)",
-        "pauseReason": "रोकें: {कारण}"
-      },
-      "floorStatus": {
-        "sessionTime": "सत्र का समय",
-        "sessionNotStarted": "सत्र प्रारंभ नहीं हुआ",
-        "limit": "आप LIMIT",
-        "limitRemaining": "{मान} बाएँ",
-        "limitOverBy": "{मूल्य} से अधिक",
-        "quickLinkSession": "सत्र",
-        "quickLinkRoll": "रोल",
-        "quickLinkSpeakers": "वक्ताओं",
-        "quickLinkMotions": "प्रस्ताव",
-        "quickLinkTimer": "घड़ी",
-        "dais": "मंच",
-        "pinned": "पिन की गई",
-        "viewFullAnnouncement": "पूरी घोषणा देखें",
-        "timerPausesReadOnly": "टाइमर रुक जाता है (केवल पढ़ने के लिए)",
-        "speakerList": "वक्ता सूची",
-        "speakerFallback": "वक्ता",
-        "rollCallYou": "रोल कॉल (आप)",
-        "fullAnnouncement": "पूर्ण घोषणा",
-        "daisAnnouncement": "मंच से घोषणा",
-        "close": "बंद करना"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "सत्र का नाम",
-        "sessionNamePlaceholder": "जैसे सुबह का सत्र",
-        "sessionNameSaving": "सहेजा जा रहा है...",
-        "sessionNameSaved": "सहेजा गया",
-        "sessionNameHint": "स्वचालित रूप से सहेजता है और सत्र इतिहास में दिखाई देता है।",
-        "title": "समिति सत्र",
-        "subtitle": "समिति सत्र प्रारंभ करें या बंद करें.",
-        "helpStartStop": "सभी के लिए लाइव समिति सत्र टाइमर/स्थिति प्रारंभ करें। स्टॉप सत्र समाप्त करता है और वर्तमान समय सीमा साफ़ करता है।",
-        "migrationUnavailable": "नवीनतम डेटाबेस माइग्रेशन लागू होने तक सत्र नियंत्रण अस्थायी रूप से अनुपलब्ध हैं।",
-        "endTimeInFuture": "भविष्य में कोई अंतिम समय चुनें, या बिना किसी सीमा के स्विच करें।",
-        "sessionStartUnavailable": "नवीनतम माइग्रेशन लागू होने तक सत्र प्रारंभ टाइमस्टैम्प अनुपलब्ध है।",
-        "endTimeInFutureSetNoLimit": "भविष्य में कोई अंतिम समय चुनें, या कोई सीमा निर्धारित न करें।",
-        "sessionLimitUpdated": "सत्र सीमा अद्यतन की गई.",
-        "startedLabel": "शुरू कर दिया:",
-        "timeInLabel": "समय शुरू:",
-        "timeUntilEndLabel": "अंत तक का समय:",
-        "overByValue": "{मूल्य} से अधिक",
-        "modeLabel": "तरीका:",
-        "modeStopwatchNoLimit": "स्टॉपवॉच (कोई समय सीमा नहीं)",
-        "sessionNotRunning": "सत्र नहीं चल रहा है.",
-        "sessionLimit": "सत्र सीमा",
-        "sessionLimitModesTitle": "सत्र सीमा मोड",
-        "sessionLimitModesHelp": "कोई नहीं: कोई अंत नहीं. समय बजट: प्रारंभ से ही गिना जाता है। समाप्त करें: आपके स्थानीय समयक्षेत्र में निश्चित घड़ी का समय।",
-        "sessionLimitOptional": "वैकल्पिक।",
-        "noneLabel": "कोई नहीं",
-        "noneDescription": "तब तक चलता है जब तक आप रुक नहीं जाते।",
-        "timeBudgetLabel": "समय बजट",
-        "timeBudgetDescription": "आपके शुरू करने के क्षण से ही गिना जाता है।",
-        "endTimeLabel": "अंत समय",
-        "endTimeDescription": "एक निश्चित घड़ी समय का उपयोग करता है (यदि दोनों कभी भी सेट किए गए हों तो बजट ओवरराइड हो जाता है)।",
-        "noneIndefinite": "कोई नहीं (अनिश्चित)",
-        "noneScheduledEndHint": "कोई निर्धारित अंत नहीं; केवल बीता हुआ समय दिखाया गया है।",
-        "timeBudgetFromStart": "शुरू से ही समय का बजट",
-        "hoursLabel": "घंटे",
-        "minutesLabel": "मिनट",
-        "minimumOneMinute": "(न्यूनतम 1 मिनट)",
-        "endAtLocalTime": "(स्थानीय समय) पर समाप्त",
-        "stopSession": "सत्र रोकें",
-        "saveLimit": "सीमा सहेजें",
-        "saveLimitHelp": "जब सत्र पहले से ही चल रहा हो, तो सत्र को रोके बिना अद्यतन सीमा सेटिंग्स लागू करता है।",
-        "startSession": "सत्र प्रारंभ करें",
-        "sidebarUsePrefix": "के लिए साइडबार का उपयोग करें",
-        "rollCall": "उपस्थिति",
-        "speakers": "वक्ताओं",
-        "formalMotions": "औपचारिक प्रस्ताव",
-        "timer": "घड़ी",
-        "sidebarAnd": "और",
-        "announcements": "घोषणाएं",
-        "sidebarUseSuffix": "- प्रति टैब एक उपकरण।"
-      },
-      "history": {
-        "title": "सत्र इतिहास",
-        "savedCount": "{गिनती} सहेजी गई",
-        "permissionsHint": "अध्यक्ष प्रविष्टियों का नाम बदल सकते हैं। एसएमटी/एडमिन प्रविष्टियों का नाम बदल सकता है और हटा सकता है।",
-        "empty": "अभी तक कोई सत्र इतिहास नहीं.",
-        "rename": "नाम बदलें",
-        "delete": "मिटाना",
-        "deleteConfirm": "इस सत्र को इतिहास से हटाएं?",
-        "sessionNamePrompt": "सत्र का नाम",
-        "rangeClosed": "{श्रेणी}",
-        "rangeOngoing": "{श्रेणी} -> जारी है"
-      },
-      "timerPage": {
-        "title": "घड़ी",
-        "controlsTitle": "टाइमर नियंत्रण",
-        "controlsHelp": "समग्र बहस के समय के लिए सामान्य फ्लोर का उपयोग करें, या किसी विशिष्ट ओपन वोट आइटम की दृश्यता को जोड़ने के लिए मोशन वोट का उपयोग करें।",
-        "tabSetup": "1) सेटअप",
-        "tabClock": "2) घड़ी नियंत्रण",
-        "tabNotes": "3) भाषण नोट्स",
-        "tabLog": "4) लॉग रोकें",
-        "setupHelp": "चुनें कि क्या यह टाइमर सामान्य फ्लोर के लिए है (प्रतिनिधियों को हमेशा दिखाई देता है) या वोटिंग के लिए खुले प्रस्ताव से जुड़ा है (प्रतिनिधि इसे केवल तभी देखते हैं जब वह वोट सक्रिय आइटम है)। प्रति वक्ता समय के साथ, घड़ी मॉडरेट कॉकस के दौरान दृश्यमान रहती है। घड़ी को रोकें / घड़ी को प्रारंभ करें फ़्रीज़ करें या उलटी गिनती फिर से शुरू करें। स्पीकर समय (शेष) और कुल समय को स्वतंत्र रूप से सेट करें, फिर टाइमर सहेजें। प्रीसेट दोनों को समान लंबाई तक भरते हैं; आप बाद में किसी भी फ़ील्ड को संपादित कर सकते हैं। एक संक्षिप्त कारण के साथ विराम लॉग किया जाता है।",
-        "namedPreset": "नामित प्रीसेट",
-        "applyPreset": "प्रीसेट लागू करें...",
-        "floorLabelDelegates": "फ़्लोर लेबल (प्रतिनिधि)",
-        "floorLabelPlaceholder": "जैसे जीएसएल 60s",
-        "timerPurpose": "टाइमर उद्देश्य",
-        "purposeGeneralFloor": "सामान्य बहस / मंच (वोट से बंधा नहीं)",
-        "purposeMotionVote": "ओपन मोशन - टाइमर केवल तभी जब वह वोट फर्श पर सक्रिय हो",
-        "openMotionForVoting": "खुला प्रस्ताव (मतदान के लिए खुला होना चाहिए)",
-        "selectMotion": "गति का चयन करें...",
-        "untitled": "शीर्षकहीन",
-        "noOpenMotionWarning": "कोई भी प्रस्ताव मतदान के लिए खुला नहीं है। पहले वोट खोलें, या उद्देश्य को सामान्य स्तर पर बदलें।",
-        "clock": "घड़ी",
-        "running": "दौड़ना",
-        "paused": "रुका हुआ",
-        "saveToEnablePauseStart": "रोकें/प्रारंभ सक्षम करने के लिए टाइमर सहेजें।",
-        "pauseReasonLogged": "कारण रोकें (लॉग इन)",
-        "pauseReasonPlaceholder": "जैसे व्यवस्था का प्रश्न, तकनीकी मुद्दा, अनियंत्रित कॉकस...",
-        "pauseClock": "घड़ी रोकें",
-        "startClock": "घड़ी प्रारंभ करें",
-        "perSpeakerTitle": "प्रति वक्ता समय (संचालित कॉकस)",
-        "perSpeakerHelp": "कुल समय को प्रति-स्पीकर सीमा के रूप में और स्पीकर समय को शेष समय के रूप में सेट करें; अग्रिम अगले स्पीकर पर चला जाता है और शेष को कैप पर रीसेट कर देता है।",
-        "currentSpeaker": "वर्तमान वक्ता",
-        "nextSpeaker": "अगला वक्ता",
-        "speechNotesCurrentSpeaker": "भाषण नोट्स (वर्तमान वक्ता)",
-        "speechNotesHelp": "नोट्स वर्तमान स्पीकर टाइमर टेक्स्ट से जुड़े होते हैं और, जब स्पीकर सूची में किसी को वर्तमान के रूप में चिह्नित किया जाता है, तो उनका प्रतिनिधिमंडल संदर्भ के लिए संग्रहीत किया जाता है।",
-        "timerFloorLabel": "टाइमर (मंजिल):",
-        "speakerListCurrent": "वक्ता सूची (वर्तमान):",
-        "noCurrentDelegation": "स्पीकर सूची में किसी भी प्रतिनिधिमंडल को वर्तमान के रूप में चिह्नित नहीं किया गया है।",
-        "note": "टिप्पणी",
-        "notePlaceholder": "अंक, POI, टोन, फॉलो-अप...",
-        "saveSpeechNote": "भाषण नोट सहेजें",
-        "recentNotes": "आपके हाल के नोट्स (यह समिति)",
-        "delete": "मिटाना",
-        "speakerTimeRemaining": "स्पीकर का समय (शेष)",
-        "remainingHelpPerSpeaker": "वर्तमान स्पीकर के लिए उलटी गिनती (जब आप आगे बढ़ते हैं तो रीसेट हो जाता है)।",
-        "remainingHelpNormal": "वर्तमान स्पीकर के लिए उलटी गिनती (कुल से कम हो सकती है)।",
-        "totalTime": "कुल समय",
-        "totalHelpPerSpeaker": "प्रति-स्पीकर कैप (फर्श पर विभाजक; इसके लिए शेष अग्रिम रिफिल)।",
-        "totalHelpNormal": "इस टाइमर खंड की पूरी लंबाई (फर्श पर स्लैश के बाद दिखाई गई है)।",
-        "saveTimer": "टाइमर सहेजें",
-        "advanceSpeakerReset": "स्पीकर को आगे बढ़ाएं और घड़ी को रीसेट करें",
-        "recentPauseLog": "हालिया विराम लॉग",
-        "noPauseEvents": "इस समिति के लिए अभी तक कोई विराम ईवेंट लॉग नहीं किया गया है।",
-        "openPauseLogHint": "रिकॉर्ड किए गए ठहराव के कारणों और टाइमस्टैम्प की समीक्षा करने के लिए पॉज़ लॉग खोलें।",
-        "saved": "टाइमर सहेजा गया.",
-        "savedCapped": "टाइमर सहेजा गया. वक्ता का समय कुल से अधिक था; कुल तक सीमित।",
-        "alreadyPaused": "टाइमर पहले से ही रुका हुआ है.",
-        "pausedForCommittee": "समिति के लिए टाइमर रुका हुआ है।",
-        "alreadyRunning": "टाइमर पहले से ही चल रहा है.",
-        "runningForCommittee": "समिति के लिए टाइमर चल रहा है।",
-        "euTimerBoardTitle": "ईयू संसद टाइमर बोर्ड (11 टाइमर)",
-        "euTimerBoardHelp": "प्रति पार्टी एक टाइमर, साथ ही कुल समय, POI/POC समय और स्पीकर समय। क्लॉक टैब (स्पीकर टाइम / सेव टाइमर) पर लाइव टाइमर फ़ील्ड में एक पंक्ति को कॉपी करने के लिए अप्लाई का उपयोग करें।",
-        "euTimerName": "नाम",
-        "euTimerTag": "टैग",
-        "euTotalTime": "कुल समय",
-        "euPoiPocTime": "पीओआई/पीओसी समय",
-        "euSpeakerTime": "वक्ता का समय"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "समिति कक्ष (पूर्ण)",
         "hint": "वर्चुअल लेआउट और प्रतिनिधि तल"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "स्वतः सहेजना विफल",
     "autosavedWithCountry": "स्वतः सहेजा गया - {देश}",
     "delegateFallback": "प्रतिनिधि"
+  },
+  "sources": {
+    "addSource": "स्रोत जोड़ें",
+    "sourceUrl": "स्रोत यूआरएल",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (अनुशंसित)",
+    "urlHelp": "नए Google दस्तावेज़ के लिए, बटन का उपयोग करें और दस्तावेज़ लिंक को यहां पेस्ट करें।",
+    "titleOptional": "शीर्षक (वैकल्पिक)",
+    "saveChanges": "परिवर्तनों को सुरक्षित करें",
+    "editSource": "स्रोत संपादित करें",
+    "urlPlaceholderShort": "Google दस्तावेज़ या अन्य URL",
+    "empty": "अभी तक कोई स्रोत नहीं. इसे यहां खोलने के लिए एक Google Doc लिंक जोड़ें।",
+    "sourceLabel": "स्रोत",
+    "openLink": "खुला लिंक",
+    "embedHeading": "स्रोत दस्तावेज़",
+    "notGoogleDoc": "यह यूआरएल Google Doc नहीं है. यहां एम्बेड और संपादित करने के लिए docs.google.com/document/d/… लिंक का उपयोग करें; अन्यथा ऊपर दिए गए लिंक को खोलें।"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "प्रतिनिधि सीधे स्थिति पत्र अपलोड नहीं कर सकते। किसी अन्य दस्तावेज़ प्रकार का उपयोग करें.",
+    "alertOnlyChairsPositionPaper": "केवल अध्यक्ष/श्रीमती/व्यवस्थापक ही स्थिति पत्र अपलोड कर सकते हैं।",
+    "alertOnlySmtChairReport": "केवल एसएमटी/एडमिन ही चेयर रिपोर्ट अपलोड कर सकता है।",
+    "alertOnlySmtRop": "केवल एसएमटी/एडमिन ही आरओपी दस्तावेज़ अपलोड कर सकता है।",
+    "alertOnlySmtAwardCriteria": "केवल श्रीमती/व्यवस्थापक ही पुरस्कार मानदंड दस्तावेज़ अपलोड कर सकते हैं।",
+    "alertNeedContentOrUrl": "या तो स्थानीय पाठ सामग्री या Google डॉक्स URL जोड़ें।",
+    "confirmDelete": "यह दस्तावेज़ हटाएं?",
+    "delegatePrepTitle": "दस्तावेज़ तैयारी अनुभाग",
+    "delegatePrepBody": "आप सीधे इस पृष्ठ से अपने स्वयं के <prep>तैयारी दस्तावेज़</prep> अपलोड, देख और संपादित कर सकते हैं।",
+    "positionPaperGuideTitle": "पोजीशन पेपर गाइड",
+    "positionPaperGuideBlurb": "अंतिम पीडीएफ तैयार होने तक प्लेसहोल्डर गाइड डाउनलोड करें।",
+    "downloadPlaceholderGuide": "प्लेसहोल्डर गाइड डाउनलोड करें",
+    "addDocument": "दस्तावेज़ जोड़ें",
+    "tabs": {
+      "ariaLabel": "दस्तावेज़ अनुभाग",
+      "library": "पुस्तकालय",
+      "compose": "लिखें",
+      "composeHint": "इस टैब से एक नया दस्तावेज़ प्रारंभ करें या मौजूदा ड्राफ्ट संपादित करें।"
+    },
+    "newDocumentTitle": "नया दस्तावेज़",
+    "editDocumentTitle": "दस्तावेज़ संपादित करें",
+    "typeLabel": "प्रकार",
+    "types": {
+      "position_paper": "स्थिति पेपर",
+      "chair_report": "अध्यक्ष रिपोर्ट",
+      "rop": "आरओपी",
+      "award_criteria": "पुरस्कार का मापदंड",
+      "chair_notes": "चेयर नोट्स",
+      "prep_doc": "तैयारी दस्तावेज़"
+    },
+    "delegatePositionPaperNote": "फीडबैक के साथ स्थिति पत्र कुर्सियों द्वारा अपलोड किए जाते हैं।",
+    "delegateOwner": "प्रतिनिधि स्वामी",
+    "chairRecipient": "कुर्सी प्राप्तकर्ता",
+    "titleLabel": "शीर्षक",
+    "titlePlaceholder": "दस्तावेज़ का शीर्षक",
+    "googleDocsUrl": "गूगल डॉक्स यूआरएल",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (एप्लिकेशन में दृश्य/संपादन एम्बेड करें)",
+    "googleDocsHelp": "Google को एक नए टैब में खोलने के लिए नए Google Doc का उपयोग करें, फिर दस्तावेज़ लिंक को यहां पेस्ट करें। नीचे सादा पाठ वैकल्पिक है. प्रत्येक दस्तावेज़ को या तो स्थानीय पाठ, एक Google डॉक लिंक, या दोनों की आवश्यकता होती है।",
+    "plainTextOptional": "सादा पाठ (वैकल्पिक)",
+    "plainTextPlaceholder": "नोट्स या ड्राफ्ट टेक्स्ट...",
+    "chairFeedbackLabel": "अध्यक्ष की प्रतिक्रिया",
+    "chairFeedbackPlaceholder": "प्रतिनिधि स्थिति पेपर के लिए प्रतिक्रिया...",
+    "empty": "अभी तक कोई दस्तावेज़ नहीं. एक जोड़ें या Google दस्तावेज़ लिंक करें.",
+    "sidebarDocumentLabel": "दस्तावेज़",
+    "sections": {
+      "chairReports": "अध्यक्ष की रिपोर्ट",
+      "rop": "आरओपी",
+      "awardCriteria": "पुरस्कार का मापदंड",
+      "prepDocuments": "तैयारी दस्तावेज़",
+      "chairNotes": "चेयर नोट्स",
+      "otherDocuments": "अन्य दस्तावेज़"
+    },
+    "untitled": "शीर्षकहीन",
+    "linkedDocumentHeading": "लिंक किया गया दस्तावेज़",
+    "notesHeading": "टिप्पणियाँ",
+    "noGoogleDocYet": "अभी तक कोई Google दस्तावेज़ लिंक नहीं किया गया है. Docs.google.com/document/d/… URL जोड़ने के लिए संपादन का उपयोग करें।",
+    "chairFeedbackHeading": "अध्यक्ष की प्रतिक्रिया",
+    "noFeedbackYet": "अभी तक कोई प्रतिक्रिया नहीं जोड़ी गई."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "पहले एक प्रतिनिधि ईमेल दर्ज करें.",
+    "sentToDelegate": "{ईमेल} पर भेजा गया.",
+    "newResolution": "नया संकल्प",
+    "maxDraftResolutions": "इस समिति के पास पहले से ही मसौदा प्रस्ताव मौजूद हैं।",
+    "googleDocLink": "गूगल डॉक लिंक",
+    "googleDocUrlPlaceholder": "Google डॉक्स URL (docs.google.com/document/d/… - एम्बेड + संपादन के लिए उपयोग किया जाता है)",
+    "googleDocUrlHelp": "नया Google दस्तावेज़ दूसरे टैब में खुलता है; एड्रेस बार से यूआरएल कॉपी करें और यहां पेस्ट करें।",
+    "mainSubmittersPlaceholder": "मुख्य प्रस्तुतकर्ता (उपयोगकर्ता आईडी, अल्पविराम से अलग)",
+    "coSubmittersPlaceholder": "सह-प्रस्तुतकर्ता (उपयोगकर्ता आईडी, अल्पविराम से अलग)",
+    "create": "बनाएं",
+    "cancel": "रद्द करना",
+    "openInNewTab": "वेब टेब में खोलें",
+    "noGoogleDocLink": "कोई Google डॉक लिंक नहीं",
+    "visibleToOtherBloc": "अन्य गुट के लिए दृश्यमान",
+    "resolutionCounts": "मुख्य उप: {मुख्य} | सह-उप: {सह} | हस्ताक्षरकर्ता: {हस्ताक्षरकर्ता}",
+    "blocButton": "ब्लॉक {नाम} ({रुख})",
+    "signVirtually": "वस्तुतः हस्ताक्षर करें (मुख्य उप अधिसूचित)",
+    "shareByEmail": "ईमेल द्वारा समाधान साझा करें",
+    "delegateEmailPlaceholder": "प्रतिनिधि@email.com",
+    "sendToDelegate": "प्रतिनिधि को भेजें",
+    "clauseEditor": "खंड संपादक",
+    "noClausesYet": "अभी तक कोई खंड नहीं.",
+    "clauseNumber": "खण्ड {संख्या}",
+    "saveClause": "उपवाक्य सहेजें",
+    "delete": "मिटाना",
+    "addClausePlaceholder": "एक नया उपवाक्य जोड़ें...",
+    "addClause": "उपवाक्य जोड़ें",
+    "clauseVoteHistory": "खंड वोट इतिहास",
+    "noClauseOutcomesYet": "अभी तक कोई क्लॉज़ वोट परिणाम दर्ज नहीं किया गया है।",
+    "clauseFallback": "धारा",
+    "passed": "उत्तीर्ण",
+    "failed": "असफल",
+    "motionId": "मोशन {आईडी}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "मतदान अनुभाग",
+      "open": "खुला",
+      "closed": "बंद किया हुआ"
+    },
+    "requiredMajority": "आवश्यक बहुमत",
+    "helpRequiredMajorityTitle": "आवश्यक बहुमत",
+    "helpRequiredMajorityBody": "पास/असफल होने का निर्णय लेने के लिए उपयोग की जाने वाली वोट सीमा चुनें। 'सरल' आधे से अधिक है. `2/3` के लिए सर्वोच्च बहुमत की आवश्यकता होती है।",
+    "majoritySimple": "सरल",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{लेबल} बहुमत",
+    "mustVote": "वोट अवश्य करें",
+    "helpMustVoteTitle": "वोट अवश्य करें",
+    "helpMustVoteBody": "इस प्रस्ताव को \"अवश्य वोट करें\" आइटम के रूप में चिह्नित करता है। इसका उपयोग प्रतिभागियों को आवश्यकता बताने के लिए किया जाता है (आपकी समिति की स्थापना के आधार पर)।",
+    "saveSettings": "सेटिंग्स सेव करें",
+    "delegateBlurb": "मंच सत्र में वोट रिकॉर्ड करता है (जैसे रोल कॉल)। यहां मोशन वोट केवल हां/नहीं के बाद आते हैं (विरोध का उपयोग नहीं किया जाता है)। आप टैली का अनुसरण कर सकते हैं; प्रतिनिधि ऐप में वोट नहीं डालते हैं।",
+    "yes": "हाँ",
+    "no": "नहीं",
+    "ballots": "मतपत्र",
+    "total": "कुल",
+    "outcome": "नतीजा",
+    "passed": "उत्तीर्ण",
+    "failed": "असफल",
+    "noRecordedVotes": "कोई दर्ज वोट नहीं",
+    "reopenMotion": "गति पुनः खोलें",
+    "editRecordOpen": "रिकॉर्ड संपादित करें...",
+    "hideSettings": "सेटिंग्स छिपाएँ",
+    "preliminaryPassing": "उत्तीर्ण (प्रारंभिक)",
+    "preliminaryFailing": "असफल होना (प्रारंभिक)",
+    "delegateRollCall": "प्रतिनिधि रोल कॉल ({गिनती})",
+    "noSeatedDelegates": "इस प्रस्ताव के लिए कोई बैठा हुआ प्रतिनिधि उपलब्ध नहीं है।",
+    "rollPrefix": "रोल:",
+    "recordedPrefix": "रिकॉर्ड किया गया:",
+    "recordedYes": "हाँ",
+    "recordedNo": "नहीं",
+    "recordedAbstain": "बचना",
+    "recordedNone": "—",
+    "abstain": "बचना",
+    "clear": "स्पष्ट",
+    "closeMotion": "बंद गति",
+    "mustVoteBadge": "वोट अवश्य करें",
+    "canVoteBadge": "वोट कर सकते हैं",
+    "noMotions": "अभी तक कोई प्रस्ताव नहीं.",
+    "currentOpenMotion": "वर्तमान खुली गति",
+    "noOpenMotion": "अभी कोई खुला प्रस्ताव नहीं.",
+    "recentClosedMotions": "हाल ही में बंद गतियाँ",
+    "noClosedMotions": "अभी तक कोई बंद गति नहीं है.",
+    "untitled": "शीर्षकहीन",
+    "voteTypes": {
+      "motion": "गति",
+      "amendment": "संशोधन",
+      "resolution": "संकल्प",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "अनुपस्थित (रोल)",
+      "present_abstain": "उपस्थित - अनुपस्थित रह सकते हैं (रोल)",
+      "present_voting": "प्रस्तुति और मतदान (रोल)",
+      "unknown": "- (रोल)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "प्रोफ़ाइल अनुभाग",
+      "overview": "सिंहावलोकन",
+      "awards": "पुरस्कार",
+      "private": "निजी अभिलेख",
+      "settings": "प्रोफ़ाइल सेटिंग"
+    },
+    "profilePicture": "प्रोफ़ाइल फोटो",
+    "uploadFile": "फ़ाइल अपलोड करें",
+    "uploading": "अपलोड हो रहा है...",
+    "photoSaved": "फ़ोटो अपलोड और सहेजा गया.",
+    "orUrl": "या यूआरएल द्वारा सेट करें",
+    "urlPlaceholder": "https://...",
+    "name": "नाम",
+    "username": "उपयोगकर्ता नाम",
+    "usernamePlaceholder": "जैसे एलेक्स_1999",
+    "pronouns": "सर्वनाम",
+    "customPronounNote": "आपकी प्रोफ़ाइल में एक कस्टम सर्वनाम सेट था जो अब यहां स्वीकार नहीं किया जाता है। ऊपर एक विकल्प चुनें (या खाली छोड़ दें)। सहेजने से पुराना मान बदल जाता है.",
+    "school": "विद्यालय",
+    "schoolPlaceholder": "जैसे लिंकन हाई स्कूल",
+    "grade": "श्रेणी",
+    "selectGrade": "ग्रेड चुनें",
+    "conferencesAttended": "सम्मेलनों में भाग लिया",
+    "awardsComma": "पुरस्कार (अल्पविराम से अलग)",
+    "awardsPlaceholder": "सर्वश्रेष्ठ प्रतिनिधि, माननीय उल्लेख",
+    "allocation": "आवंटन",
+    "selectAllocation": "आवंटन का चयन करें",
+    "noAllocationsPlaceholder": "कोई समिति आवंटन उपलब्ध नहीं है",
+    "saveProfile": "प्रोफ़ाइल बचा",
+    "saved": "प्रोफ़ाइल सहेजी गई.",
+    "saveFailed": "प्रोफ़ाइल सहेजी नहीं जा सकी.",
+    "errUsernamePattern": "उपयोक्तानाम 3-32 अक्षर का होना चाहिए (अक्षर, अंक, _, ., -)",
+    "errPronounsPreset": "सूची में से एक सर्वनाम चुनें.",
+    "errImageType": "कृपया एक छवि फ़ाइल चुनें.",
+    "errImageSize": "छवि बहुत बड़ी है (अधिकतम 5 एमबी)।",
+    "errUploadFailed": "अपलोड विफल रहा.",
+    "errStorageSetup": "प्रोफ़ाइल चित्र संग्रहण सेट नहीं किया गया है. सुपाबेस प्रोजेक्ट में, माइग्रेशन 00100_profile_pictures_storage_bucket.sql चलाएँ, या प्रोफ़ाइल-पिक्चर्स नाम से एक सार्वजनिक स्टोरेज बकेट बनाएँ (README देखें)।",
+    "errPublicUrl": "अपलोड की गई छवि के लिए सार्वजनिक यूआरएल का समाधान नहीं किया जा सका।",
+    "fallbacks": {
+      "yourCountry": "आपका देश",
+      "committeeSession": "समिति सत्र",
+      "delegate": "प्रतिनिधि",
+      "speechNote": "भाषण नोट",
+      "untitledMotion": "शीर्षक रहित प्रस्ताव",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "{ध्वज} {देश} के प्रतिनिधि का स्वागत है",
+      "subtitle": "आप किसके साथ शुरु करना चाहेंगे?",
+      "links": {
+        "documents": "दस्तावेज़",
+        "notes": "टिप्पणियाँ",
+        "committeeRoom": "समिति कक्ष",
+        "runningNotes": "चल रहे नोट्स",
+        "ideas": "विचारों",
+        "guides": "गाइड",
+        "sources": "सूत्रों का कहना है",
+        "resolutions": "प्रस्तावों",
+        "speeches": "भाषण",
+        "stances": "रुख",
+        "crisisSlides": "संकट सरकता है",
+        "report": "प्रतिवेदन",
+        "motions": "प्रस्ताव",
+        "points": "अंक"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "आपकी प्रोफ़ाइल पर पुरस्कार",
+      "rank": "रैंक {रैंक}",
+      "pending": {
+        "tab": "लंबित नामांकन",
+        "title": "अध्यक्ष पद के नामांकन लंबित",
+        "descriptionSingle": "कुर्सियों द्वारा सहेजा गया और समीक्षा के लिए एसएमटी के साथ साझा किया गया। पुष्टि के बाद अंतिम पुरस्कार नीचे दिखाई देंगे।",
+        "descriptionTabbed": "कुर्सियों द्वारा सहेजा गया और समीक्षा के लिए एसएमटी के साथ साझा किया गया। पुष्टि के बाद अंतिम पुरस्कार सामने आते हैं।"
+      },
+      "recorded": {
+        "tab": "रिकार्ड किये गये पुरस्कार",
+        "title": "रिकार्ड किये गये पुरस्कार",
+        "description": "जब कुर्सियाँ या श्रीमती आपको पुरस्कार ट्रैकर में नियुक्त करती हैं तो सूचीबद्ध किया जाता है। अंतिम मान्यता आपके सम्मेलन के नियमों का पालन करती है।"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "केवल आपके लिए, समिति अध्यक्षों और संबंधित समिति की श्रीमती के लिए दृश्यमान।",
+      "points": {
+        "title": "कुर्सी बिंदु (निजी)"
+      },
+      "speechNotes": {
+        "title": "अध्यक्ष भाषण नोट्स (निजी)"
+      },
+      "motions": {
+        "title": "आपने जो प्रस्ताव रखे",
+        "description": "समिति की समीक्षा और एसएमटी निरीक्षण के लिए आपकी प्रोफ़ाइल में सहेजा गया।"
+      }
+    },
+    "discipline": {
+      "title": "अनुशासनात्मक स्थिति (निजी)",
+      "statusLine": "चेतावनियाँ: {चेतावनियाँ} · हड़तालें: {हड़तालें}{वोटिंगअक्षम{बोलनानिलंबित}{कमेटी से हटा दिया गया}",
+      "votingDisabled": "मतदान अक्षम",
+      "speakingSuspended": "बोलना निलंबित",
+      "removedFromCommittee": "समिति से हटा दिया गया",
+      "updated": "अपडेट किया गया: {मूल्य}"
+    },
+    "preview": {
+      "ariaLabel": "प्रोफ़ाइल पूर्वावलोकन",
+      "title": "पूर्व दर्शन",
+      "yourName": "आपका नाम",
+      "usernameNotSet": "उपयोक्तानाम सेट नहीं है",
+      "gradeValue": "ग्रेड {ग्रेड}",
+      "awards": "पुरस्कार"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "प्रक्रिया के नियम (आरओपी)",
+        "content": "#प्रक्रिया के नियम \n\n## बिंदु और प्रस्ताव \n- **आदेश का बिंदु**: सही प्रक्रिया \n- **सूचना का बिंदु**: वक्ता से प्रश्न \n- **व्यक्तिगत विशेषाधिकार का बिंदु**: व्यक्तिगत आराम \n- **टेबल पर प्रस्ताव**: बहस स्थगित करें \n- **स्थगन प्रस्ताव**: सत्र समाप्त \n\n##मतदान \n- प्रक्रियात्मक मामलों के लिए साधारण बहुमत \n- ठोस मामलों के लिए 2/3 बहुमत \n- अनुरोध किए जाने पर रोल-कॉल वोट"
+      },
+      "examples": {
+        "title": "उदाहरण",
+        "content": "# उदाहरण \n\n## संकल्प प्रारूप \n``` \nमहासभा, \n... \n1. सदस्य देशों से आह्वान... \n2. अंतरराष्ट्रीय समुदाय से आग्रह करता हूं कि... \n``` \n\n## स्थिति पेपर संरचना \n1. पृष्ठभूमि \n2. देश नीति \n3. प्रस्तावित समाधान"
+      },
+      "templates": {
+        "title": "टेम्पलेट्स",
+        "content": "# टेम्पलेट्स \n\n## चेयर रिपोर्ट टेम्पलेट \n- समिति सिंहावलोकन \n- मुख्य चर्चा बिंदु \n- प्रस्ताव पारित \n- सिफ़ारिशें"
+      },
+      "chairReport": {
+        "title": "अध्यक्ष रिपोर्ट",
+        "content": "# चेयर रिपोर्ट \n\nदस्तावेज़ समिति की कार्यवाही और परिणाम यहां।"
+      }
+    },
+    "edit": "संपादन करना",
+    "guideDocument": "मार्गदर्शक दस्तावेज़",
+    "additionalNotes": "अतिरिक्त टिप्पणी",
+    "noContentYet": "अभी तक कोई सामग्री नहीं है.",
+    "titlePlaceholder": "शीर्षक",
+    "googleDocsUrl": "गूगल डॉक्स यूआरएल",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "नया Google दस्तावेज़ दूसरे टैब में खुलता है. एक साझा करने योग्य लिंक चिपकाएँ ताकि प्रतिनिधि यहाँ दस्तावेज़ खोल सकें (देखना/संपादित करना Google साझाकरण पर निर्भर करता है)।",
+    "markdownOptional": "मार्कडाउन नोट्स (यदि आप Google दस्तावेज़ का उपयोग करते हैं तो वैकल्पिक)",
+    "save": "बचाना",
+    "cancel": "रद्द करना",
+    "createNewGuide": "नई मार्गदर्शिका बनाएं",
+    "slugPlaceholder": "स्लग (अद्वितीय)",
+    "titleLowerPlaceholder": "शीर्षक",
+    "googleDocsUrlOptional": "Google डॉक्स URL (वैकल्पिक)",
+    "markdownContentOptional": "मार्कडाउन सामग्री (वैकल्पिक)",
+    "create": "बनाएं",
+    "glossary": {
+      "title": "एमयूएन एजेंडा शब्दावली",
+      "subtitle": "आपकी समिति कोड और वर्तमान एजेंडा विषयों से मेल खाने वाली अद्वितीय शब्दावली।",
+      "committeeCode": "समिति कोड: {कोड}",
+      "sources": {
+        "core": "मुख्य",
+        "committee": "समिति",
+        "topic": "विषय"
+      },
+      "terms": {
+        "delegation": {
+          "term": "प्रतिनिधि मंडल",
+          "definition": "समिति में एक राज्य या इकाई का प्रतिनिधित्व करने वाला एक देश या पर्यवेक्षक दल।"
+        },
+        "placard": {
+          "term": "घोषणापत्र",
+          "definition": "देश चिह्न का उपयोग सदन का अनुरोध करने, मतदान करने और प्रक्रियात्मक गतियों पर संकेत देने के लिए किया जाता है।"
+        },
+        "dais": {
+          "term": "मंच",
+          "definition": "अध्यक्षता करने वाली टीम जो बहस को नियंत्रित करती है, प्रक्रिया लागू करती है और बोलने के क्रम का प्रबंधन करती है।"
+        },
+        "quorum": {
+          "term": "कोरम",
+          "definition": "औपचारिक कामकाज और मतदान के लिए आवश्यक न्यूनतम संख्या में प्रतिनिधिमंडल।"
+        },
+        "motion": {
+          "term": "गति",
+          "definition": "बहस के प्रवाह को बदलने का औपचारिक प्रस्ताव, जैसे कॉकस प्रकार या बोलने का समय।"
+        },
+        "point_of_order": {
+          "term": "आदेश का बिंदु",
+          "definition": "समिति के नियमों के तहत प्रक्रिया गलत तरीके से लागू होने पर हस्तक्षेप।"
+        },
+        "moderated_caucus": {
+          "term": "संचालित कॉकस",
+          "definition": "एक परिभाषित उपविषय पर कम समय के भाषणों के साथ संरचित बहस खंड।"
+        },
+        "unmoderated_caucus": {
+          "term": "अनियंत्रित कॉकस",
+          "definition": "अनौपचारिक बातचीत की अवधि जहां प्रतिनिधि विचारों का मसौदा तैयार करने और विलय करने के लिए स्वतंत्र रूप से आगे बढ़ते हैं।"
+        },
+        "draft_resolution": {
+          "term": "मसौदा संकल्प",
+          "definition": "अंतिम मतदान और अंगीकरण से पहले प्रस्तावित समिति की कार्रवाई का कार्य पाठ।"
+        },
+        "amendment": {
+          "term": "संशोधन",
+          "definition": "पाठ के मसौदे में बदलाव का प्रस्ताव, या तो मित्रवत या अमित्र के रूप में मतदान किया गया।"
+        },
+        "operative_clause": {
+          "term": "क्रियात्मक उपवाक्य",
+          "definition": "कार्रवाई-उन्मुख क्रमांकित खंड यह बताता है कि समिति क्या करने का प्रस्ताव करती है।"
+        },
+        "preambulatory_clause": {
+          "term": "प्रस्तावना खण्ड",
+          "definition": "पृष्ठभूमि सिद्धांतों, चिंताओं और पूर्व रूपरेखाओं का हवाला देते हुए संदर्भ-निर्धारण खंड।"
+        },
+        "right_of_reply": {
+          "term": "उत्तर देने का अधिकार",
+          "definition": "प्रतिनिधिमंडल की गरिमा या स्थिति को प्रभावित करने वाले सीधे बयान का जवाब देने का अवसर।"
+        },
+        "veto_power": {
+          "term": "वीटो शक्ति",
+          "definition": "यूएनएससी स्थायी सदस्य प्राधिकरण, मूल मसौदा प्रस्तावों को अवरुद्ध करने के लिए।"
+        },
+        "chapter_vii": {
+          "term": "अध्याय सातवीं",
+          "definition": "शांति के खतरों, प्रतिबंधों और बल प्रयोग उपायों पर संयुक्त राष्ट्र चार्टर प्राधिकरण।"
+        },
+        "sanctions_regime": {
+          "term": "प्रतिबंध व्यवस्था",
+          "definition": "प्रत्यक्ष सैन्य कार्रवाई के बिना व्यवहार को प्रभावित करने के लिए समन्वित प्रतिबंधों का उपयोग किया जाता है।"
+        },
+        "arms_control": {
+          "term": "शस्त्र नियंत्रण",
+          "definition": "समझौते और सत्यापन प्रणालियाँ जो हथियारों के प्रकार, मात्रा या तैनाती को सीमित करती हैं।"
+        },
+        "non_proliferation": {
+          "term": "अप्रसार",
+          "definition": "परमाणु, रासायनिक, जैविक या उन्नत हथियार क्षमताओं के प्रसार को रोकने के लिए नीतियां।"
+        },
+        "confidence_building_measures": {
+          "term": "आत्मविश्वास बढ़ाने के उपाय",
+          "definition": "पारदर्शिता और संचार उपकरण जो गलतफहमी और संघर्ष के जोखिम को कम करते हैं।"
+        },
+        "universal_periodic_review": {
+          "term": "सार्वभौमिक आवधिक समीक्षा",
+          "definition": "सहकर्मी-समीक्षा प्रक्रिया जहां प्रत्येक संयुक्त राष्ट्र सदस्य देश रिपोर्ट करता है और अधिकारों की सिफारिशें प्राप्त करता है।"
+        },
+        "special_rapporteur": {
+          "term": "विशेष संवाददाता",
+          "definition": "विषयगत या देश के अधिकारों के मुद्दों पर निगरानी और रिपोर्ट करने के लिए स्वतंत्र विशेषज्ञ नियुक्त।"
+        },
+        "treaty_body": {
+          "term": "संधि निकाय",
+          "definition": "विशिष्ट मानवाधिकार संधि के कार्यान्वयन की निगरानी करने वाली विशेषज्ञों की समिति।"
+        },
+        "public_health_emergency": {
+          "term": "सार्वजनिक स्वास्थ्य आपातकाल",
+          "definition": "गंभीर प्रकोप की घटना के लिए तत्काल समन्वित राष्ट्रीय और अंतर्राष्ट्रीय प्रतिक्रिया की आवश्यकता है।"
+        },
+        "surveillance": {
+          "term": "महामारी विज्ञान निगरानी",
+          "definition": "रोग प्रवृत्तियों का पता लगाने और उन पर नज़र रखने के लिए स्वास्थ्य डेटा का निरंतर संग्रह और विश्लेषण।"
+        },
+        "health_systems": {
+          "term": "स्वास्थ्य प्रणालियों को सुदृढ़ बनाना",
+          "definition": "विश्वसनीय स्वास्थ्य सेवा वितरण के लिए कार्यबल, वित्तपोषण, लॉजिस्टिक्स और प्रशासन में सुधार करना।"
+        },
+        "transnational_crime": {
+          "term": "अंतरराष्ट्रीय संगठित अपराध",
+          "definition": "आपराधिक गतिविधियाँ नेटवर्क और अवैध बाज़ारों के माध्यम से सीमाओं के पार समन्वित होती हैं।"
+        },
+        "illicit_trafficking": {
+          "term": "अवैध तस्करी",
+          "definition": "न्यायक्षेत्रों में दवाओं, हथियारों, व्यक्तियों या वस्तुओं की अवैध आवाजाही।"
+        },
+        "rule_of_law_capacity": {
+          "term": "क़ानून-सम्मत क्षमता",
+          "definition": "निष्पक्षता से जांच करने, मुकदमा चलाने और अधिकारों की रक्षा करने की न्याय प्रणालियों की संस्थागत क्षमता।"
+        },
+        "sustainable_development": {
+          "term": "सतत विकास",
+          "definition": "विकास मॉडल सामाजिक प्रगति, आर्थिक अवसर और पर्यावरण संरक्षण को संतुलित करता है।"
+        },
+        "financing_for_development": {
+          "term": "विकास के लिए वित्तपोषण",
+          "definition": "सार्वजनिक और निजी वित्त पोषण तंत्र जो दीर्घकालिक विकास प्राथमिकताओं का समर्थन करते हैं।"
+        },
+        "policy_coordination": {
+          "term": "नीति समन्वय",
+          "definition": "दोहराव से बचने और सामूहिक प्रभाव को बढ़ाने के लिए राज्य और एजेंसी के कार्यों का संरेखण।"
+        },
+        "child_protection": {
+          "term": "बाल संरक्षण",
+          "definition": "सभी स्थितियों में बच्चों के विरुद्ध शोषण, दुर्व्यवहार और हिंसा को रोकने के उपाय।"
+        },
+        "education_access": {
+          "term": "शिक्षा पहुंच",
+          "definition": "सभी बच्चों के लिए समावेशी, न्यायसंगत और निरंतर सीखने के अवसर सुनिश्चित करना।"
+        },
+        "humanitarian_response": {
+          "term": "मानवीय प्रतिक्रिया",
+          "definition": "संकटों और संघर्ष स्थितियों में तत्काल जरूरतों को संबोधित करते हुए त्वरित राहत कार्यवाहियां।"
+        },
+        "gender_mainstreaming": {
+          "term": "लिंग मुख्यधारा",
+          "definition": "नीति डिजाइन, कार्यान्वयन और मूल्यांकन में लिंग विश्लेषण को एकीकृत करना।"
+        },
+        "gender_based_violence": {
+          "term": "लिंग आधारित हिंसा",
+          "definition": "लिंग पहचान, भूमिका या असमान शक्ति संबंधों के आधार पर किसी को नुकसान पहुँचाना।"
+        },
+        "economic_empowerment": {
+          "term": "आर्थिक सशक्तिकरण",
+          "definition": "सभ्य कार्य, वित्त, स्वामित्व और निर्णय लेने की शक्ति तक पहुंच का विस्तार।"
+        },
+        "source_attribution": {
+          "term": "स्रोत एट्रिब्यूशन",
+          "definition": "जानकारी के मूल स्रोत का स्पष्ट रूप से हवाला दें ताकि दावों को सत्यापित और प्रासंगिक बनाया जा सके।"
+        },
+        "verified_reporting": {
+          "term": "सत्यापित रिपोर्टिंग",
+          "definition": "विवादित तथ्यों को प्रकाशित करने से पहले पुष्टि की आवश्यकता वाले पत्रकारिता मानक।"
+        },
+        "editorial_independence": {
+          "term": "संपादकीय स्वतंत्रता",
+          "definition": "रिपोर्टिंग निर्णयों को राजनीतिक दबाव या हितधारक प्रभाव से अलग करना।"
+        },
+        "climate_mitigation": {
+          "term": "जलवायु शमन",
+          "definition": "ऐसी कार्रवाइयाँ जो ग्रीनहाउस-गैस उत्सर्जन को कम करती हैं या दीर्घकालिक कार्बन निष्कासन को बढ़ाती हैं।"
+        },
+        "climate_adaptation": {
+          "term": "जलवायु अनुकूलन",
+          "definition": "नीतियां और निवेश जो जलवायु संबंधी प्रभावों के प्रति संवेदनशीलता को कम करते हैं।"
+        },
+        "cyber_norms": {
+          "term": "साइबर मानदंड",
+          "definition": "डिजिटल और साइबर डोमेन में जिम्मेदार राज्य व्यवहार के लिए साझा अपेक्षाएं।"
+        },
+        "critical_infrastructure": {
+          "term": "महत्वपूर्ण बुनियादी ढांचा",
+          "definition": "बिजली, पानी, स्वास्थ्य और संचार जैसी आवश्यक प्रणालियों के लिए लचीलेपन की आवश्यकता होती है।"
+        },
+        "epidemiology": {
+          "term": "महामारी विज्ञान",
+          "definition": "जनसंख्या में रोग पैटर्न, कारण और वितरण का अध्ययन।"
+        },
+        "preparedness_response": {
+          "term": "तैयारी और प्रतिक्रिया",
+          "definition": "आपात्कालीन स्थितियों को नियंत्रित करने और प्रबंधित करने के लिए योजना बनाना, समन्वय करना और कार्रवाइयों में वृद्धि करना।"
+        },
+        "non_refoulement": {
+          "term": "गैर refoulement",
+          "definition": "सिद्धांत उन स्थानों पर लोगों की वापसी पर रोक लगाता है जहां उन्हें गंभीर नुकसान होता है।"
+        },
+        "durable_solutions": {
+          "term": "टिकाऊ समाधान",
+          "definition": "विस्थापित लोगों के लिए दीर्घकालिक परिणाम: वापसी, स्थानीय एकीकरण, या पुनर्वास।"
+        },
+        "nuclear_safeguards": {
+          "term": "परमाणु सुरक्षा उपाय",
+          "definition": "सत्यापन के उपाय यह सुनिश्चित करते हैं कि परमाणु सामग्री को हथियारों के उपयोग के लिए नहीं भेजा जाए।"
+        },
+        "counter_terrorism": {
+          "term": "काउंटर आतंकवाद",
+          "definition": "आतंकवादी गतिविधि के विरुद्ध एकीकृत कानूनी, निवारक और सुरक्षा उपाय।"
+        },
+        "due_process": {
+          "term": "उचित प्रक्रिया",
+          "definition": "जांच, अभियोजन और मंजूरी के दौरान अधिकारों की रक्षा करने वाली निष्पक्ष कानूनी प्रक्रियाएं।"
+        },
+        "resource_security": {
+          "term": "संसाधन सुरक्षा",
+          "definition": "आर्थिक और पर्यावरणीय तनाव के तहत भोजन, पानी और ऊर्जा तक विश्वसनीय पहुंच।"
+        },
+        "resilience": {
+          "term": "लचीलापन",
+          "definition": "समुदायों और संस्थानों की झटके सहने और प्रभावी ढंग से उबरने की क्षमता।"
+        }
+      },
+      "topicLine": "विषय: {विषय}"
+    }
+  },
+  "ideas": {
+    "editIdea": "विचार संपादित करें",
+    "googleDocsUrl": "गूगल डॉक्स यूआरएल",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "संक्षिप्त विचार पाठ (वैकल्पिक)",
+    "save": "बचाना",
+    "cancel": "रद्द करना",
+    "addIntro": "किसी समाधान विचार का मसौदा तैयार करने के लिए एक Google दस्तावेज़ जोड़ें, या एक संक्षिप्त नोट टाइप करें (या दोनों)।",
+    "googleDocsCreateHelp": "नया Google दस्तावेज़ दूसरे टैब में खुलता है; लिंक बनने के बाद यहां पेस्ट करें।",
+    "resolutionIdeaPlaceholder": "संकल्प विचार...",
+    "add": "जोड़ना",
+    "noIdeasYet": "अभी तक कोई विचार नहीं.",
+    "ideaLabel": "विचार",
+    "ideaFallback": "विचार {संख्या}",
+    "linkedDoc": "लिंक किया गया दस्तावेज़",
+    "addedOn": "{दिनांक} जोड़ा गया",
+    "edit": "संपादन करना",
+    "delete": "मिटाना",
+    "ideaDocument": "विचार दस्तावेज़",
+    "summary": "सारांश",
+    "emptyIdea": "खोखला विचार."
+  },
+  "stances": {
+    "heatmapTitle": "संक्षिप्त रुख अवलोकन (हीटमैप)",
+    "heatmapHelp": "आपका आवंटन किस हद तक ___ का समर्थन करता है? (1-5 स्केल)",
+    "topicPlaceholder": "जैसे जलवायु कार्रवाई",
+    "extentLabel": "विस्तार (1-5):",
+    "extentHelpTitle": "विस्तार (1-5)",
+    "extentHelpBody": "1 का अर्थ है कि आपके आवंटन में विषय के लिए बहुत कम समर्थन है, और 5 का अर्थ है मजबूत समर्थन। वह संख्या चुनें जो समिति में आपके रुख से मेल खाती हो।",
+    "add": "जोड़ना",
+    "viewOnlyHeatmap": "कर्मचारियों के लिए केवल-देखें हीटमैप।",
+    "notesPerAllocation": "प्रति आवंटन नोट्स",
+    "noAllocationsYet": "अभी तक कोई आवंटन नहीं",
+    "notesPlaceholder": "इस आवंटन के लिए रुख नोट्स...",
+    "noteLanguageWarning": "पाठक चेतावनी: इस नोट में अनुचित भाषा हो सकती है।",
+    "save": "बचाना",
+    "saveHelpTitle": "स्टांस नोट सहेजें",
+    "saveHelpBody": "इस आवंटन के लिए स्टांस नोट सहेजता है। इसे कर्मचारियों और (समिति सेटिंग्स के आधार पर) अन्य प्रतिभागियों द्वारा देखा जा सकता है।"
+  },
+  "speeches": {
+    "newSpeech": "नया भाषण",
+    "speechTitlePlaceholder": "भाषण शीर्षक",
+    "googleDocsUrl": "गूगल डॉक्स यूआरएल",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google को एक नए टैब में खोलता है; तैयार होने पर दस्तावेज़ का URL यहां चिपकाएँ।",
+    "plainTextOptional": "सादा पाठ ड्राफ्ट (वैकल्पिक यदि आप Google दस्तावेज़ का उपयोग करते हैं)",
+    "save": "बचाना",
+    "cancel": "रद्द करना",
+    "noSpeechesYet": "अभी तक कोई भाषण नहीं. Google डॉक लिंक करें या टेक्स्ट पेस्ट करें.",
+    "speechLabel": "भाषण",
+    "untitled": "शीर्षकहीन",
+    "edit": "संपादन करना",
+    "speechDocument": "भाषण दस्तावेज़",
+    "draftText": "मसौदा पाठ",
+    "noContentHint": "Google दस्तावेज़ को संपादन के साथ लिंक करें, या फ़ॉर्म में सादा पाठ जोड़ें।"
+  },
+  "committeeRoom": {
+    "committeeLabel": "समिति",
+    "yourContext": "आपका सन्दर्भ",
+    "roleLabel": "भूमिका",
+    "seatLabel": "सीट",
+    "clearSearchTitle": "खोज साफ़ करें और सभी प्रतिनिधिमंडल दिखाएं",
+    "vacantLabel": "खाली",
+    "assignedLabel": "सौंपा गया",
+    "daisLabel": "मंच",
+    "phaseLabel": "चरण",
+    "phaseVoting": "मतदान",
+    "phaseDebate": "बहस",
+    "focusSearchTitle": "फ़ोकस खोज (डेज़ शीर्षक और नाम आपकी क्वेरी से मेल खाते हैं)",
+    "tipLabel": "बख्शीश",
+    "searchVacantTitle": "कमरे में \"रिक्त\" सीटें खोजें",
+    "searchHint": "कमरे में मिलानों को हाइलाइट करने के लिए देश, प्रतिनिधि का नाम, स्कूल, सर्वनाम या \"रिक्त\" टाइप करें। पहले मैच पर जाने के लिए एंटर दबाएँ; Esc clears. खाली सीटों पर जाने के लिए रिक्त पर क्लिक करें।",
+    "findLabel": "एक प्रतिनिधिमंडल या मंच सदस्य खोजें",
+    "searchPlaceholder": "देश, नाम, स्कूल...",
+    "matchesCount": "{कुल} सीटों का मिलान",
+    "enterScrolls": "स्क्रॉल दर्ज करें",
+    "typeToFilterHint": "फ़िल्टर करने के लिए टाइप करें - पहले मिलान के लिए स्क्रॉल दर्ज करें",
+    "noMatches": "कोई मेल खाने वाला प्रतिनिधिमंडल या मंच की सीटें नहीं।",
+    "digitalDisplay": "डिजिटल डिस्प्ले",
+    "floorLabel": "ज़मीन",
+    "staffSeatsHeading": "स्टाफ - सीटें",
+    "searchAria": "प्रतिनिधिमंडल खोजें",
+    "virtualRoomVacant": "खाली",
+    "profileAria": "प्रोफ़ाइल देखें: {देश}",
+    "vacantSeatAria": "खाली सीट",
+    "placardAria": "प्लेकार्ड {country}",
+    "gavelAria": "भूमि का लगान",
+    "viewProfileAria": "प्रोफ़ाइल देखें: {शीर्षक}",
+    "noProfileLinkAria": "{शीर्षक} (कोई प्रोफ़ाइल लिंक नहीं)",
+    "committeeFloor": "समिति तल",
+    "virtualRoomFigureAria": "आभासी समिति कक्ष - {समितिनाम} ({conferenceName})",
+    "filteringLiveRegion": "प्रतिनिधिमंडलों को फ़िल्टर करना. पहली हाइलाइट की गई सीट रिंग में पहला मैच है।",
+    "helperText": "तख्तियों में प्रत्येक प्रतिनिधि की प्रोफ़ाइल से देश (आवंटन से), नाम, स्कूल और सर्वनाम की सूची होती है। प्रोफ़ाइल के अंतर्गत अपना संपादन करें. खाली समिति सीटें रिक्त के रूप में दिखाई जाती हैं। उस सदस्य का पेज खोलने के लिए भरे हुए प्लेकार्ड या मंच की सीट पर क्लिक करें (वहां से चैट करें और रिपोर्ट करें)।",
+    "virtualRoomCaption": "देश, नाम, स्कूल और सर्वनाम दर्शाने वाले प्रतिनिधि तख्तियों के साथ वर्चुअल मॉडल संयुक्त राष्ट्र समिति कक्ष।"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "बोलने का अनुरोध",
+      "delegateFallback": "प्रतिनिधि",
+      "needAllocation": "बोलने का अनुरोध करने के लिए आपको आवंटन की आवश्यकता है।",
+      "alreadyQueued": "आपके पास कतार में पहले से ही सक्रिय बोलने का अनुरोध है।",
+      "requested": "बोलने का अनुरोध किया. आप कतार में दिखाई देंगे.",
+      "requestFailed": "बोलने का अनुरोध करने में विफल.",
+      "helpBody": "आपके प्रतिनिधिमंडल को कुर्सी कतार में भेजता है। आपके पास एक समय में एक सक्रिय प्रतीक्षा/वर्तमान अनुरोध हो सकता है।",
+      "purposeLabel": "वैकल्पिक उद्देश्य (कतार लेबल में दिखता है)",
+      "purposeHelpTitle": "प्रयोजन लेबल",
+      "purposeHelpBody": "यह पाठ आपके देश के नाम के साथ जोड़ा गया है ताकि कुर्सियाँ देख सकें कि आप फर्श के लिए अनुरोध क्यों कर रहे हैं।",
+      "purposePlaceholder": "जैसे समर्थन + संशोधन सिंहावलोकन",
+      "requesting": "निवेदन है...",
+      "rollPromptTitle": "अध्यक्ष की मंजूरी आवश्यक",
+      "rollPromptBodyPickStatus": "सत्र शुरू हो गया है. बोलने और मतदान को अनलॉक करने के लिए अपनी रोल-कॉल स्थिति चुनें। इस विकल्प को बदला नहीं जा सकता.",
+      "rollPromptBodyWaitSessionStart": "समिति का सत्र शुरू होने के लिए सभापति का इंतजार किया जा रहा है.",
+      "rollPromptBodyWaitRollPrompt": "रोल-कॉल प्रॉम्प्ट की प्रतीक्षा की जा रही है।",
+      "rollPromptBodyMarkedAbsent": "आपको वर्तमान में अनुपस्थित चिह्नित किया गया है. अध्यक्ष से कहें कि वह आपको बोलने और वोट करने के लिए उपस्थित होने के लिए चिह्नित करें।",
+      "rollPromptBodyChecking": "आपके रोल की स्थिति जाँची जा रही है...",
+      "rollPromptSaving": "सहेजा जा रहा है...",
+      "rollPromptPresent": "उपस्थित",
+      "rollPromptPresentVoting": "उपस्थित रहें और मतदान करें"
+    },
+    "motionVoting": {
+      "votingProcedure": "मतदान प्रक्रिया",
+      "currentMotion": "वर्तमान गति",
+      "motioner": "प्रेरक",
+      "majority": "बहुमत",
+      "majoritySimple": "सरल",
+      "tally": "हाँ {हाँ} - नहीं {नहीं} - कुल {कुल}",
+      "help": "मंच सत्र में प्रत्येक प्रतिनिधिमंडल के वोट को रिकॉर्ड करता है। मोशन वोट में केवल हां या ना (कोई परहेज नहीं) का उपयोग किया जाता है। योग केवल उन तख्तियों को गिना जाता है जहां हाँ या नहीं दर्ज किया गया था; अनुपस्थित प्रतिनिधिमंडलों को छोड़ दिया गया है।"
+    },
+    "activeMotion": {
+      "currentMotion": "वर्तमान गति",
+      "motionFallback": "गति",
+      "motioner": "प्रेरक",
+      "majority": "बहुमत",
+      "majoritySimple": "सरल",
+      "type": "प्रकार",
+      "timer": "घड़ी",
+      "currentSpeaker": "वर्तमान वक्ता",
+      "nextSpeaker": "अगला वक्ता",
+      "speakerTimeLeftCap": "स्पीकर का समय (बाएं/कैप)",
+      "speakerTimeLeftTotal": "स्पीकर का समय (बाएं/कुल)",
+      "perSpeaker": "(प्रति वक्ता)",
+      "paused": "(रुका हुआ)",
+      "pauseReason": "रोकें: {कारण}"
+    },
+    "floorStatus": {
+      "sessionTime": "सत्र का समय",
+      "sessionNotStarted": "सत्र प्रारंभ नहीं हुआ",
+      "limit": "आप LIMIT",
+      "limitRemaining": "{मान} बाएँ",
+      "limitOverBy": "{मूल्य} से अधिक",
+      "quickLinkSession": "सत्र",
+      "quickLinkRoll": "रोल",
+      "quickLinkSpeakers": "वक्ताओं",
+      "quickLinkMotions": "प्रस्ताव",
+      "quickLinkTimer": "घड़ी",
+      "dais": "मंच",
+      "pinned": "पिन की गई",
+      "viewFullAnnouncement": "पूरी घोषणा देखें",
+      "timerPausesReadOnly": "टाइमर रुक जाता है (केवल पढ़ने के लिए)",
+      "speakerList": "वक्ता सूची",
+      "speakerFallback": "वक्ता",
+      "rollCallYou": "रोल कॉल (आप)",
+      "fullAnnouncement": "पूर्ण घोषणा",
+      "daisAnnouncement": "मंच से घोषणा",
+      "close": "बंद करना",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "सत्र का नाम",
+      "sessionNamePlaceholder": "जैसे सुबह का सत्र",
+      "sessionNameSaving": "सहेजा जा रहा है...",
+      "sessionNameSaved": "सहेजा गया",
+      "sessionNameHint": "स्वचालित रूप से सहेजता है और सत्र इतिहास में दिखाई देता है।",
+      "title": "समिति सत्र",
+      "subtitle": "समिति सत्र प्रारंभ करें या बंद करें.",
+      "helpStartStop": "सभी के लिए लाइव समिति सत्र टाइमर/स्थिति प्रारंभ करें। स्टॉप सत्र समाप्त करता है और वर्तमान समय सीमा साफ़ करता है।",
+      "migrationUnavailable": "नवीनतम डेटाबेस माइग्रेशन लागू होने तक सत्र नियंत्रण अस्थायी रूप से अनुपलब्ध हैं।",
+      "endTimeInFuture": "भविष्य में कोई अंतिम समय चुनें, या बिना किसी सीमा के स्विच करें।",
+      "sessionStartUnavailable": "नवीनतम माइग्रेशन लागू होने तक सत्र प्रारंभ टाइमस्टैम्प अनुपलब्ध है।",
+      "endTimeInFutureSetNoLimit": "भविष्य में कोई अंतिम समय चुनें, या कोई सीमा निर्धारित न करें।",
+      "sessionLimitUpdated": "सत्र सीमा अद्यतन की गई.",
+      "startedLabel": "शुरू कर दिया:",
+      "timeInLabel": "समय शुरू:",
+      "timeUntilEndLabel": "अंत तक का समय:",
+      "overByValue": "{मूल्य} से अधिक",
+      "modeLabel": "तरीका:",
+      "modeStopwatchNoLimit": "स्टॉपवॉच (कोई समय सीमा नहीं)",
+      "sessionNotRunning": "सत्र नहीं चल रहा है.",
+      "sessionLimit": "सत्र सीमा",
+      "sessionLimitModesTitle": "सत्र सीमा मोड",
+      "sessionLimitModesHelp": "कोई नहीं: कोई अंत नहीं. समय बजट: प्रारंभ से ही गिना जाता है। समाप्त करें: आपके स्थानीय समयक्षेत्र में निश्चित घड़ी का समय।",
+      "sessionLimitOptional": "वैकल्पिक।",
+      "noneLabel": "कोई नहीं",
+      "noneDescription": "तब तक चलता है जब तक आप रुक नहीं जाते।",
+      "timeBudgetLabel": "समय बजट",
+      "timeBudgetDescription": "आपके शुरू करने के क्षण से ही गिना जाता है।",
+      "endTimeLabel": "अंत समय",
+      "endTimeDescription": "एक निश्चित घड़ी समय का उपयोग करता है (यदि दोनों कभी भी सेट किए गए हों तो बजट ओवरराइड हो जाता है)।",
+      "noneIndefinite": "कोई नहीं (अनिश्चित)",
+      "noneScheduledEndHint": "कोई निर्धारित अंत नहीं; केवल बीता हुआ समय दिखाया गया है।",
+      "timeBudgetFromStart": "शुरू से ही समय का बजट",
+      "hoursLabel": "घंटे",
+      "minutesLabel": "मिनट",
+      "minimumOneMinute": "(न्यूनतम 1 मिनट)",
+      "endAtLocalTime": "(स्थानीय समय) पर समाप्त",
+      "stopSession": "सत्र रोकें",
+      "saveLimit": "सीमा सहेजें",
+      "saveLimitHelp": "जब सत्र पहले से ही चल रहा हो, तो सत्र को रोके बिना अद्यतन सीमा सेटिंग्स लागू करता है।",
+      "startSession": "सत्र प्रारंभ करें",
+      "sidebarUsePrefix": "के लिए साइडबार का उपयोग करें",
+      "rollCall": "उपस्थिति",
+      "speakers": "वक्ताओं",
+      "formalMotions": "औपचारिक प्रस्ताव",
+      "timer": "घड़ी",
+      "sidebarAnd": "और",
+      "announcements": "घोषणाएं",
+      "sidebarUseSuffix": "- प्रति टैब एक उपकरण।",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "सत्र इतिहास",
+      "savedCount": "{गिनती} सहेजी गई",
+      "permissionsHint": "अध्यक्ष प्रविष्टियों का नाम बदल सकते हैं। एसएमटी/एडमिन प्रविष्टियों का नाम बदल सकता है और हटा सकता है।",
+      "empty": "अभी तक कोई सत्र इतिहास नहीं.",
+      "rename": "नाम बदलें",
+      "delete": "मिटाना",
+      "deleteConfirm": "इस सत्र को इतिहास से हटाएं?",
+      "sessionNamePrompt": "सत्र का नाम",
+      "rangeClosed": "{श्रेणी}",
+      "rangeOngoing": "{श्रेणी} -> जारी है"
+    },
+    "timerPage": {
+      "title": "घड़ी",
+      "controlsTitle": "टाइमर नियंत्रण",
+      "controlsHelp": "समग्र बहस के समय के लिए सामान्य फ्लोर का उपयोग करें, या किसी विशिष्ट ओपन वोट आइटम की दृश्यता को जोड़ने के लिए मोशन वोट का उपयोग करें।",
+      "tabSetup": "1) सेटअप",
+      "tabClock": "2) घड़ी नियंत्रण",
+      "tabNotes": "3) भाषण नोट्स",
+      "tabLog": "4) लॉग रोकें",
+      "setupHelp": "चुनें कि क्या यह टाइमर सामान्य फ्लोर के लिए है (प्रतिनिधियों को हमेशा दिखाई देता है) या वोटिंग के लिए खुले प्रस्ताव से जुड़ा है (प्रतिनिधि इसे केवल तभी देखते हैं जब वह वोट सक्रिय आइटम है)। प्रति वक्ता समय के साथ, घड़ी मॉडरेट कॉकस के दौरान दृश्यमान रहती है। घड़ी को रोकें / घड़ी को प्रारंभ करें फ़्रीज़ करें या उलटी गिनती फिर से शुरू करें। स्पीकर समय (शेष) और कुल समय को स्वतंत्र रूप से सेट करें, फिर टाइमर सहेजें। प्रीसेट दोनों को समान लंबाई तक भरते हैं; आप बाद में किसी भी फ़ील्ड को संपादित कर सकते हैं। एक संक्षिप्त कारण के साथ विराम लॉग किया जाता है।",
+      "namedPreset": "नामित प्रीसेट",
+      "applyPreset": "प्रीसेट लागू करें...",
+      "floorLabelDelegates": "फ़्लोर लेबल (प्रतिनिधि)",
+      "floorLabelPlaceholder": "जैसे जीएसएल 60s",
+      "timerPurpose": "टाइमर उद्देश्य",
+      "purposeGeneralFloor": "सामान्य बहस / मंच (वोट से बंधा नहीं)",
+      "purposeMotionVote": "ओपन मोशन - टाइमर केवल तभी जब वह वोट फर्श पर सक्रिय हो",
+      "openMotionForVoting": "खुला प्रस्ताव (मतदान के लिए खुला होना चाहिए)",
+      "selectMotion": "गति का चयन करें...",
+      "untitled": "शीर्षकहीन",
+      "noOpenMotionWarning": "कोई भी प्रस्ताव मतदान के लिए खुला नहीं है। पहले वोट खोलें, या उद्देश्य को सामान्य स्तर पर बदलें।",
+      "clock": "घड़ी",
+      "running": "दौड़ना",
+      "paused": "रुका हुआ",
+      "saveToEnablePauseStart": "रोकें/प्रारंभ सक्षम करने के लिए टाइमर सहेजें।",
+      "pauseReasonLogged": "कारण रोकें (लॉग इन)",
+      "pauseReasonPlaceholder": "जैसे व्यवस्था का प्रश्न, तकनीकी मुद्दा, अनियंत्रित कॉकस...",
+      "pauseClock": "घड़ी रोकें",
+      "startClock": "घड़ी प्रारंभ करें",
+      "perSpeakerTitle": "प्रति वक्ता समय (संचालित कॉकस)",
+      "perSpeakerHelp": "कुल समय को प्रति-स्पीकर सीमा के रूप में और स्पीकर समय को शेष समय के रूप में सेट करें; अग्रिम अगले स्पीकर पर चला जाता है और शेष को कैप पर रीसेट कर देता है।",
+      "currentSpeaker": "वर्तमान वक्ता",
+      "nextSpeaker": "अगला वक्ता",
+      "speechNotesCurrentSpeaker": "भाषण नोट्स (वर्तमान वक्ता)",
+      "speechNotesHelp": "नोट्स वर्तमान स्पीकर टाइमर टेक्स्ट से जुड़े होते हैं और, जब स्पीकर सूची में किसी को वर्तमान के रूप में चिह्नित किया जाता है, तो उनका प्रतिनिधिमंडल संदर्भ के लिए संग्रहीत किया जाता है।",
+      "timerFloorLabel": "टाइमर (मंजिल):",
+      "speakerListCurrent": "वक्ता सूची (वर्तमान):",
+      "noCurrentDelegation": "स्पीकर सूची में किसी भी प्रतिनिधिमंडल को वर्तमान के रूप में चिह्नित नहीं किया गया है।",
+      "note": "टिप्पणी",
+      "notePlaceholder": "अंक, POI, टोन, फॉलो-अप...",
+      "saveSpeechNote": "भाषण नोट सहेजें",
+      "recentNotes": "आपके हाल के नोट्स (यह समिति)",
+      "delete": "मिटाना",
+      "speakerTimeRemaining": "स्पीकर का समय (शेष)",
+      "remainingHelpPerSpeaker": "वर्तमान स्पीकर के लिए उलटी गिनती (जब आप आगे बढ़ते हैं तो रीसेट हो जाता है)।",
+      "remainingHelpNormal": "वर्तमान स्पीकर के लिए उलटी गिनती (कुल से कम हो सकती है)।",
+      "totalTime": "कुल समय",
+      "totalHelpPerSpeaker": "प्रति-स्पीकर कैप (फर्श पर विभाजक; इसके लिए शेष अग्रिम रिफिल)।",
+      "totalHelpNormal": "इस टाइमर खंड की पूरी लंबाई (फर्श पर स्लैश के बाद दिखाई गई है)।",
+      "saveTimer": "टाइमर सहेजें",
+      "advanceSpeakerReset": "स्पीकर को आगे बढ़ाएं और घड़ी को रीसेट करें",
+      "recentPauseLog": "हालिया विराम लॉग",
+      "noPauseEvents": "इस समिति के लिए अभी तक कोई विराम ईवेंट लॉग नहीं किया गया है।",
+      "openPauseLogHint": "रिकॉर्ड किए गए ठहराव के कारणों और टाइमस्टैम्प की समीक्षा करने के लिए पॉज़ लॉग खोलें।",
+      "saved": "टाइमर सहेजा गया.",
+      "savedCapped": "टाइमर सहेजा गया. वक्ता का समय कुल से अधिक था; कुल तक सीमित।",
+      "alreadyPaused": "टाइमर पहले से ही रुका हुआ है.",
+      "pausedForCommittee": "समिति के लिए टाइमर रुका हुआ है।",
+      "alreadyRunning": "टाइमर पहले से ही चल रहा है.",
+      "runningForCommittee": "समिति के लिए टाइमर चल रहा है।",
+      "euTimerBoardTitle": "ईयू संसद टाइमर बोर्ड (11 टाइमर)",
+      "euTimerBoardHelp": "प्रति पार्टी एक टाइमर, साथ ही कुल समय, POI/POC समय और स्पीकर समय। क्लॉक टैब (स्पीकर टाइम / सेव टाइमर) पर लाइव टाइमर फ़ील्ड में एक पंक्ति को कॉपी करने के लिए अप्लाई का उपयोग करें।",
+      "euTimerName": "नाम",
+      "euTimerTag": "टैग",
+      "euTotalTime": "कुल समय",
+      "euPoiPocTime": "पीओआई/पीओसी समय",
+      "euSpeakerTime": "वक्ता का समय"
+    }
   }
 }

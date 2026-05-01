@@ -68,7 +68,7 @@ export function ProfileLivePreview({
   canViewPrivate: boolean;
   className?: string;
 }) {
-  const t = useTranslations("views.profile");
+  const t = useTranslations("profile");
   const initials = useMemo(() => initialsFromName(name), [name]);
   const gradeLabel = grade.trim() ? t("preview.gradeValue", { grade: grade.trim() }) : null;
   const usernameLine = username.trim().toLowerCase();

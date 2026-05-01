@@ -10,7 +10,7 @@ import {
   formatTagClass,
 } from "@/lib/committee-tag-styles";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
@@ -33,6 +33,7 @@ export default async function SmtOverviewPage({
   const tNames = await getTranslations("committeeNames.full");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
+  const locale = await getLocale();
   const supabase = await createClient();
   const eventId = await getActiveEventId();
 
@@ -253,7 +254,7 @@ export default async function SmtOverviewPage({
                 {g.topics.slice(0, 2).map((topic) => (
                   <p key={topic} className="text-[0.72rem] text-brand-navy/90 leading-snug">
                     <span className="font-semibold text-brand-navy">{t("topicLabel")}</span>{" "}
-                    {translateAgendaTopicLabel(tTopics, topic)}
+                    {translateAgendaTopicLabel(tTopics, topic, locale)}
                   </p>
                 ))}
               </div>

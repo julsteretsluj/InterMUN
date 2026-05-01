@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Öffnen Sie zunächst den Antragssaal für Stellungnahmen.",
     "openMotionBlocksRecording": "Ein Antrag liegt bereits zur Abstimmung vor. Schließen Sie es, bevor Sie weitere Aussagen aufzeichnen.",
     "statedMotionRecorded": "Der erklärte Antrag wurde aufgezeichnet (noch nicht zur Abstimmung freigegeben).",
-    "statedMotionRemoved": "Angegebener Antrag entfernt."
+    "statedMotionRemoved": "Angegebener Antrag entfernt.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• Punkteprotokoll",
     "formalMotions": "Formelle Anträge",
     "timer": "Timer",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase ist nicht konfiguriert",
@@ -835,7 +852,8 @@
       "archive": "Archiv",
       "officialLinks": "Offizielle Links",
       "roomCode": "Zimmercode",
-      "settings": "Einstellungen"
+      "settings": "Einstellungen",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "UN-Mitgliedstaaten",
       "unSystem": "UN-System (Gründer & Mitglieder)",
       "history": "UN-Geschichte"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Quelle hinzufügen",
-      "sourceUrl": "Quell-URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (empfohlen)",
-      "urlHelp": "Für ein neues Google-Dokument verwenden Sie die Schaltfläche und fügen den Dokumentlink hier ein.",
-      "titleOptional": "Titel (optional)",
-      "saveChanges": "Änderungen speichern",
-      "editSource": "Quelle bearbeiten",
-      "urlPlaceholderShort": "Google Doc oder eine andere URL",
-      "empty": "Noch keine Quellen. Fügen Sie einen Google Doc-Link hinzu, um es hier zu öffnen.",
-      "sourceLabel": "Quelle",
-      "openLink": "Link öffnen",
-      "embedHeading": "Quelldokument",
-      "notGoogleDoc": "Diese URL ist kein Google-Dokument. Verwenden Sie zum Einbetten und Bearbeiten hier einen Link zu docs.google.com/document/d/…; Andernfalls öffnen Sie den Link oben."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Delegierte können Positionspapiere nicht direkt hochladen. Verwenden Sie einen anderen Dokumenttyp.",
-      "alertOnlyChairsPositionPaper": "Nur Lehrkräfte/SMT/Administrator können Positionspapiere hochladen.",
-      "alertOnlySmtChairReport": "Nur SMT/Administrator kann Lehrstuhlberichte hochladen.",
-      "alertOnlySmtRop": "Nur SMT/Administrator kann RoP-Dokumente hochladen.",
-      "alertOnlySmtAwardCriteria": "Nur SMT/Administrator kann Vergabekriteriendokumente hochladen.",
-      "alertNeedContentOrUrl": "Fügen Sie entweder lokalen Textinhalt oder eine Google Docs-URL hinzu.",
-      "confirmDelete": "Dieses Dokument löschen?",
-      "delegatePrepTitle": "Abschnitt „Vorbereitendes Dokument“.",
-      "delegatePrepBody": "Sie können Ihre eigenen <prep>Vorbereitungsdokumente</prep> direkt von dieser Seite aus hochladen, anzeigen und bearbeiten.",
-      "positionPaperGuideTitle": "Positionieren Sie die Papierführung",
-      "positionPaperGuideBlurb": "Laden Sie den Platzhalterleitfaden herunter, während das endgültige PDF vorbereitet wird.",
-      "downloadPlaceholderGuide": "Laden Sie den Platzhalter-Leitfaden herunter",
-      "addDocument": "Dokument hinzufügen",
-      "tabs": {
-        "ariaLabel": "Dokumentabschnitte",
-        "library": "Bibliothek",
-        "compose": "Komponieren",
-        "composeHint": "Starten Sie auf dieser Registerkarte ein neues Dokument oder bearbeiten Sie einen vorhandenen Entwurf."
-      },
-      "newDocumentTitle": "Neues Dokument",
-      "editDocumentTitle": "Dokument bearbeiten",
-      "typeLabel": "Typ",
-      "types": {
-        "position_paper": "Positionspapier",
-        "chair_report": "Bericht des Vorsitzenden",
-        "rop": "RoP",
-        "award_criteria": "Vergabekriterien",
-        "chair_notes": "Anmerkungen des Vorsitzenden",
-        "prep_doc": "Vorbereitungsdokument"
-      },
-      "delegatePositionPaperNote": "Positionspapiere werden von Lehrstühlen mit Rückmeldung hochgeladen.",
-      "delegateOwner": "Eigentümer delegieren",
-      "chairRecipient": "Lehrstuhlinhaber",
-      "titleLabel": "Titel",
-      "titlePlaceholder": "Dokumenttitel",
-      "googleDocsUrl": "Google Docs-URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (Ansicht/Bearbeitung in App einbetten)",
-      "googleDocsHelp": "Verwenden Sie „Neues Google-Dokument“, um Google in einem neuen Tab zu öffnen, und fügen Sie dann den Link zum Dokument hier ein. Der untenstehende Klartext ist optional. Jedes Dokument benötigt entweder lokalen Text, einen Google Doc-Link oder beides.",
-      "plainTextOptional": "Klartext (optional)",
-      "plainTextPlaceholder": "Notizen oder Textentwurf…",
-      "chairFeedbackLabel": "Feedback des Stuhls",
-      "chairFeedbackPlaceholder": "Feedback zum Positionspapier der Delegierten...",
-      "empty": "Noch keine Dokumente. Fügen Sie eines hinzu oder verknüpfen Sie ein Google-Dokument.",
-      "sidebarDocumentLabel": "Dokumentieren",
-      "sections": {
-        "chairReports": "Vorsitzender berichtet",
-        "rop": "RoP",
-        "awardCriteria": "Vergabekriterien",
-        "prepDocuments": "Dokumente vorbereiten",
-        "chairNotes": "Anmerkungen des Vorsitzenden",
-        "otherDocuments": "Andere Dokumente"
-      },
-      "untitled": "Ohne Titel",
-      "linkedDocumentHeading": "Verlinktes Dokument",
-      "notesHeading": "Notizen",
-      "noGoogleDocYet": "Noch kein Google-Dokument verlinkt. Verwenden Sie „Bearbeiten“, um eine docs.google.com/document/d/…-URL hinzuzufügen.",
-      "chairFeedbackHeading": "Feedback des Stuhls",
-      "noFeedbackYet": "Noch kein Feedback hinzugefügt."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Geben Sie zunächst die E-Mail-Adresse eines Delegierten ein.",
-      "sentToDelegate": "Gesendet an {email}.",
-      "newResolution": "Neue Resolution",
-      "maxDraftResolutions": "Dieser Ausschuss hat bereits {count} Resolutionsentwürfe.",
-      "googleDocLink": "Link zu Google Doc",
-      "googleDocUrlPlaceholder": "Google Docs-URL (docs.google.com/document/d/… – wird zum Einbetten und Bearbeiten verwendet)",
-      "googleDocUrlHelp": "Neues Google-Dokument wird in einem anderen Tab geöffnet; Kopieren Sie die URL aus der Adressleiste und fügen Sie sie hier ein.",
-      "mainSubmittersPlaceholder": "Haupteinreicher (Benutzer-IDs, durch Kommas getrennt)",
-      "coSubmittersPlaceholder": "Miteinreicher (Benutzer-IDs, durch Kommas getrennt)",
-      "create": "Erstellen",
-      "cancel": "Stornieren",
-      "openInNewTab": "In neuem Tab öffnen",
-      "noGoogleDocLink": "Kein Google Doc-Link",
-      "visibleToOtherBloc": "Für andere Blöcke sichtbar",
-      "resolutionCounts": "Hauptuntertitel: {main} | Co-Subs: {co} | Unterzeichner: {Unterzeichner}",
-      "blocButton": "Block {name} ({stance})",
-      "signVirtually": "Virtuell unterschreiben (Hauptabonnenten benachrichtigt)",
-      "shareByEmail": "Teilen Sie die Lösung per E-Mail",
-      "delegateEmailPlaceholder": "elegate@email.com",
-      "sendToDelegate": "An Delegierten senden",
-      "clauseEditor": "Klauseleditor",
-      "noClausesYet": "Noch keine Klauseln.",
-      "clauseNumber": "Klausel {Nummer}",
-      "saveClause": "Save-Klausel",
-      "delete": "Löschen",
-      "addClausePlaceholder": "Eine neue Klausel hinzufügen...",
-      "addClause": "Klausel hinzufügen",
-      "clauseVoteHistory": "Verlauf der Klauselabstimmung",
-      "noClauseOutcomesYet": "Es liegen noch keine Ergebnisse der Klauselabstimmung vor.",
-      "clauseFallback": "Klausel",
-      "passed": "BESTANDEN",
-      "failed": "FEHLGESCHLAGEN",
-      "motionId": "Antrag {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Abstimmungsabschnitte",
-        "open": "Offen",
-        "closed": "Geschlossen"
-      },
-      "requiredMajority": "Erforderliche Mehrheit",
-      "helpRequiredMajorityTitle": "Erforderliche Mehrheit",
-      "helpRequiredMajorityBody": "Wählen Sie den Abstimmungsschwellenwert aus, anhand dessen über „Bestanden/Nicht bestanden“ entschieden wird. „Einfach“ ist mehr als die Hälfte. „2/3“ erfordert eine Supermehrheit.",
-      "majoritySimple": "Einfach",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} Mehrheit",
-      "mustVote": "MUSS abstimmen",
-      "helpMustVoteTitle": "MUSS abstimmen",
-      "helpMustVoteBody": "Markiert diesen Antrag als „Pflichtabstimmungspunkt“. Dies wird verwendet, um den Teilnehmern die Anforderung mitzuteilen (abhängig von der Zusammensetzung Ihres Ausschusses).",
-      "saveSettings": "Einstellungen speichern",
-      "delegateBlurb": "Das Podium zeichnet Abstimmungen während der Sitzung auf (z. B. Namensaufruf). Hier erfolgt die Abstimmung über die Anträge nur mit Ja/Nein (Enthaltung wird nicht verwendet). Sie können die Bilanz verfolgen; Delegierte geben ihre Stimme nicht in der App ab.",
-      "yes": "Ja",
-      "no": "NEIN",
-      "ballots": "Stimmzettel",
-      "total": "Gesamt",
-      "outcome": "Ergebnis",
-      "passed": "Bestanden",
-      "failed": "Fehlgeschlagen",
-      "noRecordedVotes": "Keine aufgezeichneten Stimmen",
-      "reopenMotion": "Antrag erneut eröffnen",
-      "editRecordOpen": "Datensatz bearbeiten…",
-      "hideSettings": "Einstellungen ausblenden",
-      "preliminaryPassing": "Bestehen (vorläufig)",
-      "preliminaryFailing": "Nicht bestanden (vorläufig)",
-      "delegateRollCall": "Namensaufruf der Delegierten ({count})",
-      "noSeatedDelegates": "Für diesen Antrag stehen keine sitzenden Delegierten zur Verfügung.",
-      "rollPrefix": "Rollen:",
-      "recordedPrefix": "Aufgezeichnet:",
-      "recordedYes": "Ja",
-      "recordedNo": "NEIN",
-      "recordedAbstain": "Verzichten",
-      "recordedNone": "—",
-      "abstain": "Verzichten",
-      "clear": "Klar",
-      "closeMotion": "Nahbewegung",
-      "mustVoteBadge": "MUSS abstimmen",
-      "canVoteBadge": "KANN abstimmen",
-      "noMotions": "Noch keine Anträge.",
-      "currentOpenMotion": "Aktueller offener Antrag",
-      "noOpenMotion": "Im Moment gibt es keinen offenen Antrag.",
-      "recentClosedMotions": "Aktuelle geschlossene Anträge",
-      "noClosedMotions": "Noch keine geschlossenen Anträge.",
-      "untitled": "Ohne Titel",
-      "voteTypes": {
-        "motion": "Bewegung",
-        "amendment": "Änderung",
-        "resolution": "Auflösung"
-      },
-      "roll": {
-        "absent": "Abwesend (rollen)",
-        "present_abstain": "Präsens – kann sich enthalten (würfeln)",
-        "present_voting": "Anwesend und abstimmend (Rolle)",
-        "unknown": "– (rollen)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Profilabschnitte",
-        "overview": "Überblick",
-        "awards": "Auszeichnungen",
-        "private": "Private Aufzeichnungen",
-        "settings": "Profileinstellungen"
-      },
-      "profilePicture": "Profilbild",
-      "uploadFile": "Datei hochladen",
-      "uploading": "Hochladen…",
-      "photoSaved": "Foto hochgeladen und gespeichert.",
-      "orUrl": "Oder per URL festlegen",
-      "urlPlaceholder": "https://...",
-      "name": "Name",
-      "username": "Benutzername",
-      "usernamePlaceholder": "z.B. alex_1999",
-      "pronouns": "Pronomen",
-      "customPronounNote": "In Ihrem Profil war ein benutzerdefiniertes Pronomen festgelegt, das hier nicht mehr akzeptiert wird. Wählen Sie oben eine Option aus (oder lassen Sie das Feld leer). Beim Sparen wird der alte Wert ersetzt.",
-      "school": "Schule",
-      "schoolPlaceholder": "z.B. Lincoln High School",
-      "grade": "Grad",
-      "selectGrade": "Note auswählen",
-      "conferencesAttended": "Konferenzen besucht",
-      "awardsComma": "Auszeichnungen (durch Kommas getrennt)",
-      "awardsPlaceholder": "Bester Delegierter, lobende Erwähnung",
-      "allocation": "Zuweisung",
-      "selectAllocation": "Zuordnung auswählen",
-      "noAllocationsPlaceholder": "Keine Ausschusszuweisungen verfügbar",
-      "saveProfile": "Profil speichern",
-      "saved": "Profil gespeichert.",
-      "saveFailed": "Profil konnte nicht gespeichert werden.",
-      "errUsernamePattern": "Der Benutzername muss zwischen 3 und 32 Zeichen lang sein (Buchstaben, Zahlen, _, ., -).",
-      "errPronounsPreset": "Wählen Sie ein Pronomen aus der Liste.",
-      "errImageType": "Bitte wählen Sie eine Bilddatei aus.",
-      "errImageSize": "Das Bild ist zu groß (maximal 5 MB).",
-      "errUploadFailed": "Der Upload ist fehlgeschlagen.",
-      "errStorageSetup": "Die Speicherung von Profilbildern ist nicht eingerichtet. Führen Sie im Supabase-Projekt die Migration 00100_profile_pictures_storage_bucket.sql aus oder erstellen Sie einen öffentlichen Speicher-Bucket mit dem Namen „profile-pictures“ (siehe README).",
-      "errPublicUrl": "Die öffentliche URL für das hochgeladene Bild konnte nicht aufgelöst werden.",
-      "fallbacks": {
-        "yourCountry": "Ihr Land",
-        "committeeSession": "Ausschusssitzung",
-        "delegate": "Delegieren",
-        "speechNote": "Sprachnotiz",
-        "untitledMotion": "Antrag ohne Titel",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "Willkommener Delegierter von {flag} {country}",
-        "subtitle": "Womit möchten Sie beginnen?",
-        "links": {
-          "documents": "Unterlagen",
-          "notes": "Notizen",
-          "committeeRoom": "Ausschussraum",
-          "runningNotes": "Laufnotizen",
-          "ideas": "Ideen",
-          "guides": "Führer",
-          "sources": "Quellen",
-          "resolutions": "Vorsätze",
-          "speeches": "Reden",
-          "stances": "Standpunkte",
-          "crisisSlides": "Krisenrutschen",
-          "report": "Bericht",
-          "motions": "Anträge",
-          "points": "Punkte"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Auszeichnungen auf Ihrem Profil",
-        "rank": "Rang {Rang}",
-        "pending": {
-          "tab": "Ausstehende Nominierungen",
-          "title": "Ausstehende Nominierungen für Vorsitzende",
-          "descriptionSingle": "Von Lehrstühlen gespeichert und zur Überprüfung mit SMT geteilt. Die endgültigen Auszeichnungen werden nach der Bestätigung unten angezeigt.",
-          "descriptionTabbed": "Von Lehrstühlen gespeichert und zur Überprüfung mit SMT geteilt. Die endgültigen Auszeichnungen erscheinen nach der Bestätigung."
-        },
-        "recorded": {
-          "tab": "Aufgezeichnete Auszeichnungen",
-          "title": "Aufgezeichnete Auszeichnungen",
-          "description": "Wird aufgeführt, wenn Ihnen Lehrstühle oder SMT im Auszeichnungs-Tracker zugewiesen werden. Die endgültige Anerkennung folgt den Regeln Ihrer Konferenz."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Nur für Sie, Ausschussvorsitzende und SMT des jeweiligen Ausschusses sichtbar.",
-        "points": {
-          "title": "Stuhlpunkte (privat)"
-        },
-        "speechNotes": {
-          "title": "Notizen zur Rede des Vorsitzes (privat)"
-        },
-        "motions": {
-          "title": "Anträge, die Sie verschoben haben",
-          "description": "Zur Prüfung durch den Ausschuss und zur SMT-Überwachung in Ihrem Profil gespeichert."
-        }
-      },
-      "discipline": {
-        "title": "Disziplinarstatus (privat)",
-        "statusLine": "Warnungen: {warnings} · Streiks: {strikes}{votingDisabled}{lookingSuspended}{removedFromCommittee}",
-        "votingDisabled": "Stimmabgabe deaktiviert",
-        "speakingSuspended": "Rede unterbrochen",
-        "removedFromCommittee": "aus dem Ausschuss entfernt",
-        "updated": "Aktualisiert: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Profilvorschau",
-        "title": "Vorschau",
-        "yourName": "Ihr Name",
-        "usernameNotSet": "Benutzername nicht festgelegt",
-        "gradeValue": "Note {grade}",
-        "awards": "Auszeichnungen"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Geschäftsordnung (RoP)",
-          "content": "# Geschäftsordnung \n\n## Punkte und Anträge \n- **Punkt zur Geschäftsordnung**: Korrektes Verfahren \n- **Informationspunkt**: Frage an den Redner \n- **Punkt des persönlichen Privilegs**: Persönlicher Komfort \n- **Antrag an den Tisch**: Debatte verschieben \n- **Antrag auf Vertagung**: Sitzung beenden \n\n## Abstimmung \n- Einfache Mehrheit in Verfahrensfragen \n- 2/3-Mehrheit für Sachfragen \n- Namentliche Abstimmung, falls gewünscht"
-        },
-        "examples": {
-          "title": "Beispiele",
-          "content": "# Beispiele \n\n## Auflösungsformat \n„ \nDie Generalversammlung, \n... \n1. Fordert die Mitgliedstaaten auf,... \n2. fordert die internationale Gemeinschaft auf,... \n„ \n\n## Struktur des Positionspapiers \n1. Hintergrund \n2. Länderpolitik \n3. Lösungsvorschläge"
-        },
-        "templates": {
-          "title": "Vorlagen",
-          "content": "# Vorlagen \n\n## Vorlage für den Stuhlbericht \n- Ausschussübersicht \n- Wichtige Diskussionspunkte \n- Beschlüsse gefasst \n- Empfehlungen"
-        },
-        "chairReport": {
-          "title": "Bericht des Vorsitzenden",
-          "content": "# Bericht des Vorsitzenden \n\nDokumentieren Sie hier die Sitzungen und Ergebnisse des Ausschusses."
-        }
-      },
-      "edit": "Bearbeiten",
-      "guideDocument": "Leitfadendokument",
-      "additionalNotes": "Zusätzliche Hinweise",
-      "noContentYet": "Noch kein Inhalt.",
-      "titlePlaceholder": "Titel",
-      "googleDocsUrl": "Google Docs-URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Neues Google-Dokument wird in einem anderen Tab geöffnet. Fügen Sie einen gemeinsam nutzbaren Link ein, damit Delegierte das Dokument hier öffnen können (Anzeigen/Bearbeiten hängt von der Google-Freigabe ab).",
-      "markdownOptional": "Markdown-Notizen (optional, wenn Sie ein Google-Dokument verwenden)",
-      "save": "Speichern",
-      "cancel": "Stornieren",
-      "createNewGuide": "Erstellen Sie einen neuen Leitfaden",
-      "slugPlaceholder": "Schnecke (einzigartig)",
-      "titleLowerPlaceholder": "Titel",
-      "googleDocsUrlOptional": "Google Docs-URL (optional)",
-      "markdownContentOptional": "Markdown-Inhalt (optional)",
-      "create": "Erstellen",
-      "glossary": {
-        "title": "MUN-Agenda-Glossar",
-        "subtitle": "Einzigartige Terminologie, abgestimmt auf Ihren Ausschusskodex und aktuelle Tagesordnungsthemen.",
-        "committeeCode": "Ausschusscode: {code}",
-        "topicTag": "Thema: {topic}",
-        "sources": {
-          "core": "Kern",
-          "committee": "Ausschuss",
-          "topic": "Thema"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Delegation",
-            "definition": "Ein Land oder ein Beobachterteam, das einen Staat oder eine Einheit im Ausschuss vertritt."
-          },
-          "placard": {
-            "term": "Plakat",
-            "definition": "Landesschild, das zur Wortmeldung, Abstimmung und zur Signalisierung von Verfahrensanträgen verwendet wird."
-          },
-          "dais": {
-            "term": "Podium",
-            "definition": "Leitendes Team, das die Debatte moderiert, das Verfahren anwendet und die Redereihenfolge verwaltet."
-          },
-          "quorum": {
-            "term": "Quorum",
-            "definition": "Mindestanzahl an Delegationen, die für die Durchführung formeller Geschäfte und Abstimmungen erforderlich sind."
-          },
-          "motion": {
-            "term": "Bewegung",
-            "definition": "Formeller Vorschlag zur Änderung des Debattenablaufs, z. B. der Fraktionsart oder der Redezeit."
-          },
-          "point_of_order": {
-            "term": "Zur Geschäftsordnung",
-            "definition": "Eingreifen, wenn das Verfahren nach den Regeln des Ausschusses falsch angewendet wird."
-          },
-          "moderated_caucus": {
-            "term": "Moderierter Caucus",
-            "definition": "Strukturierter Debattenabschnitt mit kurzen Reden zu einem definierten Unterthema."
-          },
-          "unmoderated_caucus": {
-            "term": "Unmoderierter Caucus",
-            "definition": "Informelle Verhandlungsphase, in der sich die Delegierten frei bewegen können, um Ideen auszuarbeiten und zusammenzuführen."
-          },
-          "draft_resolution": {
-            "term": "Resolutionsentwurf",
-            "definition": "Arbeitstext der vorgeschlagenen Ausschussmaßnahme vor der endgültigen Abstimmung und Annahme."
-          },
-          "amendment": {
-            "term": "Änderung",
-            "definition": "Änderung am Textentwurf vorgeschlagen, entweder freundlich oder als unfreundlich abgestimmt."
-          },
-          "operative_clause": {
-            "term": "Operative Klausel",
-            "definition": "Handlungsorientierter, nummerierter Abschnitt, der beschreibt, was der Ausschuss zu tun vorschlägt."
-          },
-          "preambulatory_clause": {
-            "term": "Präambelsatz",
-            "definition": "Kontextbestimmende Klausel, in der Hintergrundprinzipien, Bedenken und frühere Rahmenwerke zitiert werden."
-          },
-          "right_of_reply": {
-            "term": "Recht auf Gegendarstellung",
-            "definition": "Gelegenheit, auf eine direkte Aussage zu antworten, die die Würde oder Position der Delegation berührt."
-          },
-          "veto_power": {
-            "term": "Vetorecht",
-            "definition": "Ständiges Mitglied des Sicherheitsrates der Vereinten Nationen hat die Befugnis, inhaltliche Resolutionsentwürfe zu blockieren."
-          },
-          "chapter_vii": {
-            "term": "Kapitel VII",
-            "definition": "UN-Charta-Autorität für Bedrohungen des Friedens, Sanktionen und Gewaltanwendung."
-          },
-          "sanctions_regime": {
-            "term": "Sanktionsregime",
-            "definition": "Koordinierte Beschränkungen dienten der Beeinflussung des Verhaltens ohne direkte militärische Aktion."
-          },
-          "arms_control": {
-            "term": "Rüstungskontrolle",
-            "definition": "Vereinbarungen und Verifizierungssysteme, die Art, Menge oder Einsatz von Waffen begrenzen."
-          },
-          "non_proliferation": {
-            "term": "Nichtverbreitung",
-            "definition": "Richtlinien zur Verhinderung der Verbreitung nuklearer, chemischer, biologischer oder fortschrittlicher Waffenfähigkeiten."
-          },
-          "confidence_building_measures": {
-            "term": "Vertrauensbildende Maßnahmen",
-            "definition": "Transparenz und Kommunikationstools, die Missverständnisse und Konfliktrisiken reduzieren."
-          },
-          "universal_periodic_review": {
-            "term": "Universelle regelmäßige Überprüfung",
-            "definition": "Peer-Review-Prozess, bei dem jeder UN-Mitgliedsstaat über Rechte berichtet und Empfehlungen erhält."
-          },
-          "special_rapporteur": {
-            "term": "Sonderberichterstatter",
-            "definition": "Unabhängiger Experte, der mit der Überwachung und Berichterstattung über thematische oder Länderrechtsfragen beauftragt ist."
-          },
-          "treaty_body": {
-            "term": "Vertragsorgan",
-            "definition": "Expertenausschuss, der die Umsetzung eines bestimmten Menschenrechtsvertrags überwacht."
-          },
-          "public_health_emergency": {
-            "term": "Notfall im Bereich der öffentlichen Gesundheit",
-            "definition": "Schwerwiegendes Ausbruchsereignis, das dringend eine koordinierte nationale und internationale Reaktion erfordert."
-          },
-          "surveillance": {
-            "term": "Epidemiologische Überwachung",
-            "definition": "Kontinuierliche Sammlung und Analyse von Gesundheitsdaten zur Erkennung und Verfolgung von Krankheitstrends."
-          },
-          "health_systems": {
-            "term": "Stärkung der Gesundheitssysteme",
-            "definition": "Verbesserung von Personal, Finanzierung, Logistik und Governance für eine zuverlässige Gesundheitsversorgung."
-          },
-          "transnational_crime": {
-            "term": "Transnationale organisierte Kriminalität",
-            "definition": "Kriminelle Aktivitäten werden über Netzwerke und illegale Märkte grenzüberschreitend koordiniert."
-          },
-          "illicit_trafficking": {
-            "term": "Illegaler Handel",
-            "definition": "Illegale Bewegung von Drogen, Waffen, Personen oder Gütern über Gerichtsbarkeiten hinweg."
-          },
-          "rule_of_law_capacity": {
-            "term": "Rechtsstaatlichkeit",
-            "definition": "Institutionelle Fähigkeit von Justizsystemen, Rechte fair zu untersuchen, zu verfolgen und zu schützen."
-          },
-          "sustainable_development": {
-            "term": "Nachhaltige Entwicklung",
-            "definition": "Wachstumsmodell, das sozialen Fortschritt, wirtschaftliche Chancen und Umweltschutz in Einklang bringt."
-          },
-          "financing_for_development": {
-            "term": "Finanzierung für Entwicklung",
-            "definition": "Öffentliche und private Finanzierungsmechanismen, die langfristige Entwicklungsprioritäten unterstützen."
-          },
-          "policy_coordination": {
-            "term": "Politische Koordinierung",
-            "definition": "Abstimmung staatlicher und behördlicher Maßnahmen, um Doppelarbeit zu vermeiden und die kollektive Wirkung zu erhöhen."
-          },
-          "child_protection": {
-            "term": "Kinderschutz",
-            "definition": "Maßnahmen zur Verhinderung von Ausbeutung, Missbrauch und Gewalt gegen Kinder in allen Situationen."
-          },
-          "education_access": {
-            "term": "Zugang zu Bildung",
-            "definition": "Gewährleistung inklusiver, gleichberechtigter und kontinuierlicher Lernmöglichkeiten für alle Kinder."
-          },
-          "humanitarian_response": {
-            "term": "Humanitäre Hilfe",
-            "definition": "Schnelle Hilfsmaßnahmen zur Deckung dringender Bedürfnisse in Krisen- und Konfliktsituationen."
-          },
-          "gender_mainstreaming": {
-            "term": "Gender-Mainstreaming",
-            "definition": "Integration der Geschlechteranalyse in die Gestaltung, Umsetzung und Bewertung von Richtlinien."
-          },
-          "gender_based_violence": {
-            "term": "Geschlechtsspezifische Gewalt",
-            "definition": "Gegen jemanden gerichteter Schaden aufgrund von Geschlechtsidentität, Rollen oder ungleichen Machtverhältnissen."
-          },
-          "economic_empowerment": {
-            "term": "Wirtschaftliche Stärkung",
-            "definition": "Erweiterung des Zugangs zu menschenwürdiger Arbeit, Finanzen, Eigentum und Entscheidungsbefugnis."
-          },
-          "source_attribution": {
-            "term": "Quellenangabe",
-            "definition": "Geben Sie den Ursprung der Informationen klar an, damit Behauptungen überprüft und kontextualisiert werden können."
-          },
-          "verified_reporting": {
-            "term": "Verifizierte Berichterstattung",
-            "definition": "Journalistischer Standard, der eine Bestätigung vor der Veröffentlichung umstrittener Fakten erfordert."
-          },
-          "editorial_independence": {
-            "term": "Redaktionelle Unabhängigkeit",
-            "definition": "Trennung von Berichterstattungsentscheidungen vom politischen Druck oder Einfluss von Stakeholdern."
-          },
-          "climate_mitigation": {
-            "term": "Klimaschutz",
-            "definition": "Maßnahmen, die Treibhausgasemissionen reduzieren oder die langfristige Kohlenstoffentfernung erhöhen."
-          },
-          "climate_adaptation": {
-            "term": "Klimaanpassung",
-            "definition": "Richtlinien und Investitionen, die die Anfälligkeit für klimabedingte Auswirkungen verringern."
-          },
-          "cyber_norms": {
-            "term": "Cyber-Normen",
-            "definition": "Gemeinsame Erwartungen an verantwortungsvolles staatliches Verhalten im digitalen und Cyber-Bereich."
-          },
-          "critical_infrastructure": {
-            "term": "Kritische Infrastruktur",
-            "definition": "Wesentliche Systeme wie Strom, Wasser, Gesundheit und Kommunikation erfordern Widerstandsfähigkeit."
-          },
-          "epidemiology": {
-            "term": "Epidemiologie",
-            "definition": "Untersuchung von Krankheitsmustern, -ursachen und -verteilung in Populationen."
-          },
-          "preparedness_response": {
-            "term": "Bereitschaft und Reaktion",
-            "definition": "Planung, Koordination und Notfallmaßnahmen zur Eindämmung und Bewältigung von Notfällen."
-          },
-          "non_refoulement": {
-            "term": "Nichtzurückweisung",
-            "definition": "Grundsatz, der die Rückkehr von Menschen an Orte verbietet, an denen ihnen ernsthafter Schaden droht."
-          },
-          "durable_solutions": {
-            "term": "Langlebige Lösungen",
-            "definition": "Langfristige Folgen für Vertriebene: Rückkehr, lokale Integration oder Neuansiedlung."
-          },
-          "nuclear_safeguards": {
-            "term": "Nukleare Sicherheitsvorkehrungen",
-            "definition": "Überprüfungsmaßnahmen, die sicherstellen, dass Kernmaterial nicht für Waffenzwecke zweckentfremdet wird."
-          },
-          "counter_terrorism": {
-            "term": "Terrorismusbekämpfung",
-            "definition": "Integrierte rechtliche, präventive und Sicherheitsmaßnahmen gegen terroristische Aktivitäten."
-          },
-          "due_process": {
-            "term": "Ordnungsgemäßer Prozess",
-            "definition": "Faire rechtliche Verfahren zum Schutz der Rechte bei Ermittlungen, Strafverfolgung und Sanktionen."
-          },
-          "resource_security": {
-            "term": "Ressourcensicherheit",
-            "definition": "Zuverlässiger Zugang zu Nahrungsmitteln, Wasser und Energie unter wirtschaftlichem und ökologischem Stress."
-          },
-          "resilience": {
-            "term": "Widerstandsfähigkeit",
-            "definition": "Fähigkeit von Gemeinschaften und Institutionen, Schocks zu absorbieren und sich effektiv zu erholen."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Idee bearbeiten",
-      "googleDocsUrl": "Google Docs-URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Kurzer Ideentext (optional)",
-      "save": "Speichern",
-      "cancel": "Stornieren",
-      "addIntro": "Fügen Sie ein Google-Dokument hinzu, um vor Ort eine Lösungsidee zu entwerfen, oder geben Sie eine kurze Notiz ein (oder beides).",
-      "googleDocsCreateHelp": "Neues Google-Dokument wird in einem anderen Tab geöffnet; Fügen Sie den Link hier ein, nachdem er erstellt wurde.",
-      "resolutionIdeaPlaceholder": "Lösungsidee...",
-      "add": "Hinzufügen",
-      "noIdeasYet": "Noch keine Ideen.",
-      "ideaLabel": "Idee",
-      "ideaFallback": "Idee {Nummer}",
-      "linkedDoc": "Verlinktes Dokument",
-      "addedOn": "Hinzugefügt am {Datum}",
-      "edit": "Bearbeiten",
-      "delete": "Löschen",
-      "ideaDocument": "Ideendokument",
-      "summary": "Zusammenfassung",
-      "emptyIdea": "Leere Idee."
-    },
-    "stances": {
-      "heatmapTitle": "Kurze Haltungsübersicht (Heatmap)",
-      "heatmapHelp": "Inwieweit unterstützt Ihre Zuteilung ___? (Skala 1-5)",
-      "topicPlaceholder": "z.B. Klimaschutz",
-      "extentLabel": "Umfang (1-5):",
-      "extentHelpTitle": "Umfang (1-5)",
-      "extentHelpBody": "1 bedeutet, dass Ihre Zuordnung das Thema kaum unterstützt, und 5 bedeutet starke Unterstützung. Wählen Sie eine Zahl, die Ihrer Haltung im Ausschuss entspricht.",
-      "add": "Hinzufügen",
-      "viewOnlyHeatmap": "Nur-Ansicht-Heatmap für Mitarbeiter.",
-      "notesPerAllocation": "Hinweise pro Zuordnung",
-      "noAllocationsYet": "Noch keine Zuteilungen",
-      "notesPlaceholder": "Standpunktnotizen für diese Zuteilung...",
-      "noteLanguageWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
-      "save": "Speichern",
-      "saveHelpTitle": "Standnotiz speichern",
-      "saveHelpBody": "Speichert die Haltungsnotiz für diese Zuordnung. Es kann von Mitarbeitern und (je nach Ausschusseinstellungen) anderen Teilnehmern eingesehen werden."
-    },
-    "speeches": {
-      "newSpeech": "Neue Rede",
-      "speechTitlePlaceholder": "Titel der Rede",
-      "googleDocsUrl": "Google Docs-URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Öffnet Google in einem neuen Tab; Fügen Sie die Dokument-URL hier ein, wenn Sie fertig sind.",
-      "plainTextOptional": "Nur-Text-Entwurf (optional, wenn Sie ein Google-Dokument verwenden)",
-      "save": "Speichern",
-      "cancel": "Stornieren",
-      "noSpeechesYet": "Noch keine Reden. Verknüpfen Sie ein Google-Dokument oder fügen Sie Text ein.",
-      "speechLabel": "Rede",
-      "untitled": "Ohne Titel",
-      "edit": "Bearbeiten",
-      "speechDocument": "Rededokument",
-      "draftText": "Textentwurf",
-      "noContentHint": "Verknüpfen Sie ein Google-Dokument mit „Bearbeiten“ oder fügen Sie einfachen Text in das Formular ein."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Ausschuss",
-      "yourContext": "Ihr Kontext",
-      "roleLabel": "Rolle",
-      "seatLabel": "Sitz",
-      "clearSearchTitle": "Löschen Sie die Suche und zeigen Sie alle Delegationen an",
-      "vacantLabel": "Frei",
-      "assignedLabel": "Zugewiesen",
-      "daisLabel": "Podium",
-      "phaseLabel": "Phase",
-      "phaseVoting": "Wählen",
-      "phaseDebate": "Debatte",
-      "focusSearchTitle": "Fokussuche (Podiumstitel und -namen entsprechen Ihrer Suchanfrage)",
-      "tipLabel": "Tipp",
-      "searchVacantTitle": "Suchen Sie nach „freien“ Plätzen im Raum",
-      "searchHint": "Geben Sie ein Land, den Namen des Delegierten, eine Schule, ein Pronomen oder „frei“ ein, um Übereinstimmungen im Raum hervorzuheben. Drücken Sie die Eingabetaste, um zum ersten Treffer zu springen. Esc löscht. Klicken Sie auf „Frei“, um zu freien Plätzen zu springen.",
-      "findLabel": "Finden Sie ein Delegations- oder Podiumsmitglied",
-      "searchPlaceholder": "Land, Name, Schule...",
-      "matchesCount": "{matches} von {total} Sitzplätzen stimmen überein",
-      "enterScrolls": "Schriftrollen eingeben",
-      "typeToFilterHint": "Zum Filtern eingeben: Die Eingabe scrollt zum ersten Treffer",
-      "noMatches": "Keine passenden Delegationen oder Podiumsplätze.",
-      "digitalDisplay": "Digitale Anzeige",
-      "floorLabel": "Boden",
-      "staffSeatsHeading": "Personal - Sitzplätze",
-      "searchAria": "Suchdelegationen",
-      "virtualRoomVacant": "Frei",
-      "profileAria": "Profil anzeigen: {Land}",
-      "vacantSeatAria": "Freier Sitzplatz",
-      "placardAria": "Plakat {Land}",
-      "gavelAria": "Hammer",
-      "viewProfileAria": "Profil ansehen: {title}",
-      "noProfileLinkAria": "{title} (kein Profillink)",
-      "committeeFloor": "Ausschussetage",
-      "virtualRoomFigureAria": "Virtueller Ausschussraum – {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Delegationen filtern. Der erste hervorgehobene Platz ist das erste Spiel im Ring.",
-      "helperText": "Auf Plakaten sind das Land (aus den Zuteilungen), der Name, die Schule und die Pronomen aus dem Profil jedes Delegierten aufgeführt. Bearbeiten Sie Ihr Profil unter Profil. Leere Ausschusssitze werden als „Frei“ angezeigt. Klicken Sie auf ein ausgefülltes Plakat oder einen Podiumsplatz, um die Seite dieses Mitglieds zu öffnen (von dort aus chatten und berichten).",
-      "virtualRoomCaption": "Virtuelles Modell eines UN-Komiteeraums mit Delegiertenplakaten mit Land, Name, Schule und Pronomen."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Bitte um Wortmeldung",
-        "delegateFallback": "Delegieren",
-        "needAllocation": "Für eine Redeanfrage benötigen Sie ein Kontingent.",
-        "alreadyQueued": "Sie haben bereits eine aktive Redeanfrage in der Warteschlange.",
-        "requested": "Zum Reden aufgefordert. Sie werden in der Warteschlange angezeigt.",
-        "requestFailed": "Die Bitte um Wortmeldung konnte nicht gestellt werden.",
-        "helpBody": "Schickt Ihre Delegation in die Vorsitzwarteschlange. Sie können jeweils eine aktive Warte-/aktuelle Anfrage haben.",
-        "purposeLabel": "Optionaler Zweck (wird im Warteschlangenetikett angezeigt)",
-        "purposeHelpTitle": "Zwecketikett",
-        "purposeHelpBody": "Dieser Text wird an den Namen Ihres Landes angehängt, damit die Vorsitzenden erkennen können, warum Sie das Wort beantragen.",
-        "purposePlaceholder": "z.B. Support + Änderungsübersicht",
-        "requesting": "Anfrage...",
-        "rollPromptTitle": "Genehmigung des Vorsitzes erforderlich",
-        "rollPromptBodyPickStatus": "Die Sitzung hat begonnen. Wählen Sie Ihren Namensstatus, um das Sprechen und Abstimmen freizuschalten. Diese Auswahl kann nicht geändert werden.",
-        "rollPromptBodyWaitSessionStart": "Ich warte darauf, dass der Vorsitzende die Ausschusssitzung beginnt.",
-        "rollPromptBodyWaitRollPrompt": "Warten auf die Aufforderung zum Appell.",
-        "rollPromptBodyMarkedAbsent": "Sie sind derzeit als abwesend markiert. Bitten Sie den Vorsitzenden, Sie als anwesend zu markieren, damit Sie sprechen und abstimmen können.",
-        "rollPromptBodyChecking": "Überprüfen Sie Ihren Rollenstatus...",
-        "rollPromptSaving": "Sparen...",
-        "rollPromptPresent": "Gegenwärtig",
-        "rollPromptPresentVoting": "Anwesend und abstimmend"
-      },
-      "motionVoting": {
-        "votingProcedure": "Abstimmungsverfahren",
-        "currentMotion": "Aktuelle Bewegung",
-        "motioner": "Motioner",
-        "majority": "Mehrheitlich",
-        "majoritySimple": "Einfach",
-        "tally": "Ja {ja} – Nein {nein} – Gesamt {total}",
-        "help": "Das Podium zeichnet die Abstimmung jeder Delegation während der Sitzung auf. Bei der Antragsabstimmung wird nur Ja oder Nein verwendet (keine Enthaltung). In den Summen werden nur Plakate berücksichtigt, auf denen „Ja“ oder „Nein“ angegeben wurde. abwesende Delegationen werden übersprungen."
-      },
-      "activeMotion": {
-        "currentMotion": "Aktuelle Bewegung",
-        "motionFallback": "Bewegung",
-        "motioner": "Motioner",
-        "majority": "Mehrheitlich",
-        "majoritySimple": "Einfach",
-        "type": "Typ",
-        "timer": "Timer",
-        "currentSpeaker": "Aktueller Sprecher",
-        "nextSpeaker": "Nächster Redner",
-        "speakerTimeLeftCap": "Sprecherzeit (links/Kappe)",
-        "speakerTimeLeftTotal": "Sprecherzeit (links / gesamt)",
-        "perSpeaker": "(pro Sprecher)",
-        "paused": "(pausiert)",
-        "pauseReason": "Pause: {Grund}"
-      },
-      "floorStatus": {
-        "sessionTime": "Sitzungszeit",
-        "sessionNotStarted": "Sitzung nicht gestartet",
-        "limit": "Limit",
-        "limitRemaining": "{value} übrig",
-        "limitOverBy": "vorbei um {value}",
-        "quickLinkSession": "Sitzung",
-        "quickLinkRoll": "Rollen",
-        "quickLinkSpeakers": "Lautsprecher",
-        "quickLinkMotions": "Anträge",
-        "quickLinkTimer": "Timer",
-        "dais": "Podium",
-        "pinned": "Angepinnt",
-        "viewFullAnnouncement": "Vollständige Ankündigung ansehen",
-        "timerPausesReadOnly": "Timer-Pausen (schreibgeschützt)",
-        "speakerList": "Rednerliste",
-        "speakerFallback": "Lautsprecher",
-        "rollCallYou": "Appell (Sie)",
-        "fullAnnouncement": "Vollständige Ankündigung",
-        "daisAnnouncement": "Dais-Ankündigung",
-        "close": "Schließen"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Sitzungsname",
-        "sessionNamePlaceholder": "z.B. Vormittagssitzung",
-        "sessionNameSaving": "Sparen…",
-        "sessionNameSaved": "Gespeichert",
-        "sessionNameHint": "Wird automatisch gespeichert und im Sitzungsverlauf angezeigt.",
-        "title": "Ausschusssitzung",
-        "subtitle": "Starten oder stoppen Sie die Ausschusssitzung.",
-        "helpStartStop": "Start startet den Live-Timer/Status der Ausschusssitzung für alle. Stop beendet die Sitzung und löscht das aktuelle Zeitlimit.",
-        "migrationUnavailable": "Sitzungskontrollen sind vorübergehend nicht verfügbar, bis die neuesten Datenbankmigrationen angewendet werden.",
-        "endTimeInFuture": "Wählen Sie eine Endzeit in der Zukunft oder stellen Sie auf „Kein Limit“ um.",
-        "sessionStartUnavailable": "Der Zeitstempel für den Sitzungsstart ist erst verfügbar, wenn die neuesten Migrationen angewendet werden.",
-        "endTimeInFutureSetNoLimit": "Wählen Sie eine Endzeit in der Zukunft oder legen Sie kein Limit fest.",
-        "sessionLimitUpdated": "Sitzungslimit aktualisiert.",
-        "startedLabel": "Begonnen:",
-        "timeInLabel": "Zeit in:",
-        "timeUntilEndLabel": "Zeit bis zum Ende:",
-        "overByValue": "vorbei um {value}",
-        "modeLabel": "Modus:",
-        "modeStopwatchNoLimit": "Stoppuhr (keine Zeitbegrenzung)",
-        "sessionNotRunning": "Sitzung läuft nicht.",
-        "sessionLimit": "Sitzungslimit",
-        "sessionLimitModesTitle": "Sitzungslimitmodi",
-        "sessionLimitModesHelp": "Keine: kein Ende. Zeitbudget: zählt von Anfang an. Ende: feste Uhrzeit in Ihrer lokalen Zeitzone.",
-        "sessionLimitOptional": "Optional.",
-        "noneLabel": "Keiner",
-        "noneDescription": "läuft bis zum Stillstand.",
-        "timeBudgetLabel": "Zeitbudget",
-        "timeBudgetDescription": "zählt vom ersten Moment an.",
-        "endTimeLabel": "Endzeit",
-        "endTimeDescription": "Verwendet eine feste Uhrzeit (überschreibt das Budget, falls beide jemals festgelegt wurden).",
-        "noneIndefinite": "Keine (auf unbestimmte Zeit)",
-        "noneScheduledEndHint": "Kein geplantes Ende; Es wird nur die verstrichene Zeit angezeigt.",
-        "timeBudgetFromStart": "Zeitbudget von Anfang an",
-        "hoursLabel": "Std",
-        "minutesLabel": "Minuten",
-        "minimumOneMinute": "(mindestens 1 Minute)",
-        "endAtLocalTime": "Ende um (Ortszeit)",
-        "stopSession": "Sitzung beenden",
-        "saveLimit": "Limit speichern",
-        "saveLimitHelp": "Wendet aktualisierte Grenzwerteinstellungen an, während die Sitzung bereits ausgeführt wird, ohne die Sitzung zu stoppen.",
-        "startSession": "Sitzung starten",
-        "sidebarUsePrefix": "Verwenden Sie die Seitenleiste für",
-        "rollCall": "Appell",
-        "speakers": "Lautsprecher",
-        "formalMotions": "Formelle Anträge",
-        "timer": "Timer",
-        "sidebarAnd": "Und",
-        "announcements": "Ankündigungen",
-        "sidebarUseSuffix": "— ein Werkzeug pro Registerkarte."
-      },
-      "history": {
-        "title": "Sitzungsverlauf",
-        "savedCount": "{count} gespeichert",
-        "permissionsHint": "Lehrstühle können Einträge umbenennen. SMT/Admin kann Einträge umbenennen und löschen.",
-        "empty": "Noch kein Sitzungsverlauf.",
-        "rename": "Umbenennen",
-        "delete": "Löschen",
-        "deleteConfirm": "Diese Sitzung aus dem Verlauf löschen?",
-        "sessionNamePrompt": "Sitzungsname",
-        "rangeClosed": "{Reichweite}",
-        "rangeOngoing": "{range} -> Laufend"
-      },
-      "timerPage": {
-        "title": "Timer",
-        "controlsTitle": "Timer-Steuerung",
-        "controlsHelp": "Verwenden Sie „Allgemeines Plenum“ für den gesamten Debattenzeitpunkt oder „Antragsabstimmung“, um die Sichtbarkeit auf einen bestimmten offenen Abstimmungspunkt zu binden.",
-        "tabSetup": "1) Einrichtung",
-        "tabClock": "2) Uhrsteuerung",
-        "tabNotes": "3) Sprachnotizen",
-        "tabLog": "4) Protokoll anhalten",
-        "setupHelp": "Wählen Sie, ob dieser Timer für die allgemeine Sitzung gilt (für die Delegierten immer sichtbar) oder an den zur Abstimmung offenen Antrag gebunden ist (die Delegierten sehen ihn nur, solange diese Abstimmung das aktive Element ist). Wenn die Zeit pro Sprecher aktiviert ist, bleibt die Uhr auch während der moderierten Caucus-Sitzung sichtbar. Uhr anhalten / Uhr einfrieren oder Countdown fortsetzen. Stellen Sie die Lautsprecherzeit (verbleibend) und die Gesamtzeit unabhängig voneinander ein und speichern Sie dann den Timer. Voreinstellungen füllen beide auf die gleiche Länge; Sie können jedes Feld anschließend bearbeiten. Pausen werden mit einem kurzen Grund protokolliert.",
-        "namedPreset": "Benannte Voreinstellung",
-        "applyPreset": "Voreinstellung anwenden...",
-        "floorLabelDelegates": "Bodenetikett (Delegierte)",
-        "floorLabelPlaceholder": "z.B. GSL 60er Jahre",
-        "timerPurpose": "Zweck des Timers",
-        "purposeGeneralFloor": "Allgemeine Debatte / Plenum (nicht an eine Abstimmung gebunden)",
-        "purposeMotionVote": "Offene Bewegung – Timer nur, solange die Abstimmung im Plenum aktiv ist",
-        "openMotionForVoting": "Offener Antrag (muss zur Abstimmung offen sein)",
-        "selectMotion": "Bewegung auswählen...",
-        "untitled": "Ohne Titel",
-        "noOpenMotionWarning": "Über keinen Antrag kann abgestimmt werden. Öffnen Sie zunächst eine Abstimmung oder ändern Sie den Zweck auf „Allgemeine Abstimmung“.",
-        "clock": "Uhr",
-        "running": "Läuft",
-        "paused": "Angehalten",
-        "saveToEnablePauseStart": "Speichern Sie den Timer, um Pause/Start zu ermöglichen.",
-        "pauseReasonLogged": "Pausengrund (protokolliert)",
-        "pauseReasonPlaceholder": "z.B. Zur Geschäftsordnung, technisches Problem, nicht moderierte Fraktion ...",
-        "pauseClock": "Uhr anhalten",
-        "startClock": "Startuhr",
-        "perSpeakerTitle": "Zeit pro Redner (moderierter Caucus)",
-        "perSpeakerHelp": "Stellen Sie „Gesamtzeit“ als Obergrenze pro Sprecher und „Sprecherzeit“ als verbleibende Zeit ein; Vorwärts geht zum nächsten Lautsprecher und setzt den Rest auf die Obergrenze zurück.",
-        "currentSpeaker": "Aktueller Sprecher",
-        "nextSpeaker": "Nächster Redner",
-        "speechNotesCurrentSpeaker": "Redenotizen (aktueller Sprecher)",
-        "speechNotesHelp": "Notizen sind mit dem Timer-Text „Aktueller Redner“ verknüpft und wenn in der Rednerliste jemand als „Aktuell“ markiert ist, wird seine Delegation als Referenz gespeichert.",
-        "timerFloorLabel": "Timer (Etage):",
-        "speakerListCurrent": "Rednerliste (aktuell):",
-        "noCurrentDelegation": "In der Rednerliste ist keine Delegation als „Aktuell“ markiert.",
-        "note": "Notiz",
-        "notePlaceholder": "Punkte, POIs, Ton, Follow-ups...",
-        "saveSpeechNote": "Sprachnotiz speichern",
-        "recentNotes": "Ihre letzten Notizen (dieser Ausschuss)",
-        "delete": "Löschen",
-        "speakerTimeRemaining": "Rednerzeit (verbleibend)",
-        "remainingHelpPerSpeaker": "Countdown für den aktuellen Sprecher (wird beim Weiterschalten zurückgesetzt).",
-        "remainingHelpNormal": "Countdown für den aktuellen Sprecher (kann kleiner als der Gesamtwert sein).",
-        "totalTime": "Gesamtzeit",
-        "totalHelpPerSpeaker": "Pro-Sprecher-Kappe (Nenner auf der Etage; verbleibende Vorab-Nachfüllungen).",
-        "totalHelpNormal": "Volle Länge dieses Timer-Segments (angezeigt nach dem Schrägstrich auf dem Boden).",
-        "saveTimer": "Timer speichern",
-        "advanceSpeakerReset": "Lautsprecher vorziehen und Uhr zurücksetzen",
-        "recentPauseLog": "Aktuelles Pausenprotokoll",
-        "noPauseEvents": "Für diesen Ausschuss wurden noch keine Pausenereignisse protokolliert.",
-        "openPauseLogHint": "Öffnen Sie das Pausenprotokoll, um aufgezeichnete Pausengründe und Zeitstempel zu überprüfen.",
-        "saved": "Timer gespeichert.",
-        "savedCapped": "Timer gespeichert. Die Vortragszeit war länger als insgesamt; auf die Gesamtsumme begrenzt.",
-        "alreadyPaused": "Der Timer ist bereits angehalten.",
-        "pausedForCommittee": "Der Timer hielt für das Komitee an.",
-        "alreadyRunning": "Der Timer läuft bereits.",
-        "runningForCommittee": "Timer läuft für das Komitee.",
-        "euTimerBoardTitle": "Zeitschalttafel des EU-Parlaments (11 Zeitschaltuhren)",
-        "euTimerBoardHelp": "Ein Timer pro Gruppe, plus Gesamtzeit, POI/POC-Zeit und Rednerzeit. Kopieren Sie mit „Anwenden“ eine Zeile in die Live-Timer-Felder auf der Registerkarte „Uhr“ (Sprecherzeit / Timer speichern).",
-        "euTimerName": "Name",
-        "euTimerTag": "Etikett",
-        "euTotalTime": "Gesamtzeit",
-        "euPoiPocTime": "POI-/POC-Zeit",
-        "euSpeakerTime": "Rednerzeit"
-      }
     }
   },
   "dashboardSearch": {
@@ -1887,6 +1056,33 @@
     "disarmament": "Abrüstung",
     "nonProliferation": "Nichtverbreitung",
     "armsDiversionMechanisms": "Entwicklung von Mechanismen, um die Umleitung legal gehandelter konventioneller Waffen auf illegale Märkte und nichtstaatliche Akteure zu verhindern",
+    "ecosocImplementingUbiPovertyStability": "Umsetzung des universellen Grundeinkommens (UBIs) als Strategie zur Beseitigung der Armut und zur Wahrung der wirtschaftlichen Stabilität",
+    "ecosocReallocatingMilitaryExpenditurePublicHealth": "Schaffung von Rahmenbedingungen für die Umverteilung globaler Militärausgaben in die öffentliche Gesundheitsinfrastruktur",
+    "f1DurabilityLongevityCarComponents": "Implementierung von Haltbarkeits- und Langlebigkeitsstandards für kritische Fahrzeugkomponenten, um den Lebenszyklus von Komponenten zu optimieren und Material- und Energieverschwendung zu minimieren",
+    "f1GrandPrixBangkok2028Impacts": "Analyse der sozioökonomischen und infrastrukturellen Auswirkungen der Ausrichtung eines neuen Grand Prix, mit Schwerpunkt auf der Verringerung der städtischen Überlastung und der Logistik in dicht besiedelten Städten, mit Schwerpunkt auf dem möglichen F1 Grand Prix 2028 in Bangkok",
+    "pressCorpsJournalisticEthicsPublicHealth": "Bestimmung der journalistischen Ethik bei der Berichterstattung über öffentliche Gesundheit und globale Angelegenheiten",
+    "unicefMaternalNeonatalPostpartumHealthcare": "Stärkung der Gesundheitssysteme für Mütter, Neugeborene und Wochenbetten, um die vermeidbare Mütter- und Säuglingssterblichkeit und -morbidität deutlich zu reduzieren",
+    "unicefFlexibleWorkParentalLeaveEarlyChildhood": "Empfehlung politischer Rahmenbedingungen zur Förderung von arbeitgebergestützten flexiblen Arbeitsregelungen und Elternurlaub, um die frühkindliche Entwicklung zu erleichtern und die Eltern-Kind-Bindung zu stärken",
+    "euParliInflationCostOfLivingEurope": "Bewältigung der sozioökonomischen Auswirkungen der Inflation und der steigenden Lebenshaltungskosten auf gefährdete Bevölkerungsgruppen in ganz Europa",
+    "euParliCriminalSocietalPoliciesPovertyCrime": "Standardisierung der Straf- und Gesellschaftspolitik in ganz Europa, um armutsbedingte Kriminalitätszyklen zu verhindern",
+    "unescoInclusiveEducationNeurodivergent": "Entwicklung und Standardisierung inklusiver Bildungsrichtlinien und notwendiger Vorkehrungen, um neurodivergenten Schülern einen vollständigen und gleichberechtigten Zugang zum Lernen zu gewährleisten",
+    "unescoHistoricalFailuresEducationCurricula": "Festlegung von Richtlinien für die verbindliche und umfassende Integration historischer Misserfolge, Gräueltaten und Menschenrechtsverletzungen in nationale Bildungslehrpläne, um Versöhnung zu fördern und künftige Wiederholungen zu verhindern",
+    "unhrcDeathPenaltyStandardization": "die Standardisierung der Regelung und Anwendung der Todesstrafe",
+    "unhrcJudicialCruelTreatmentFinancialDeficencies": "die Verpflichtung, grausame, unmenschliche oder erniedrigende Behandlung in der Justiz aufgrund finanzieller Defizite zu verhindern",
+    "unodcAlternativesDrugPossessionPersonalUse": "Politische Analyse von Alternativen zur Verurteilung und Bestrafung wegen Drogenbesitzes für den persönlichen Gebrauch",
+    "unodcIntergenerationalSubstanceAbuse": "Bewältigung der generationsübergreifenden Auswirkungen von Drogenmissbrauch und Sucht",
+    "unscPeacekeepingMedicalSupport": "Standardisierung von Friedenssicherungseinsätzen für eine wirksame globale Umsetzung und medizinische Unterstützung",
+    "unWomenReproductiveAutonomyAbortion": "Bestätigung und Gewährleistung der reproduktiven Autonomie von Frauen durch die Festlegung internationaler rechtlicher Standards für den Zugang zu sicherer und legaler Abtreibung",
+    "unWomenUniversalChildcareBirthRates": "Untersuchung der Anerkennung der allgemeinen Kinderbetreuung als grundlegendes Menschenrecht und ihrer Rolle bei der Bewältigung sinkender Geburtenraten",
+    "disecCrossBorderLethalWeaponsLogistics": "Stärkung internationaler Protokolle und Logistik zur Sicherung des grenzüberschreitenden Transports tödlicher Waffen",
+    "fwcPsychicChildExperimentationGiftedMinors": "Verhinderung von Schäden durch psychische/psychokinetische Experimente mit Kindern und Gewährleistung des Schutzes und der Rehabilitation hochbegabter Minderjähriger",
+    "fwcPsychicTechnologiesNonProliferation": "Auseinandersetzung mit der Waffe des menschlichen Geistes und Festlegung internationaler Protokolle zur Eindämmung und Nichtverbreitung psychischer Technologien",
+    "hscSarsOutbreak2002": "SARS-Ausbruch (2002-2004)",
+    "hscBlackDeath1346": "Der Schwarze Tod (1346-1353)",
+    "interpolUndergroundMedicalMarkets": "Bekämpfung der grenzüberschreitenden organisierten Kriminalität auf illegalen medizinischen Märkten und unregulierten chirurgischen Praktiken",
+    "interpolNarcoticsSchengenGoldenTriangle": "Stärkung grenzüberschreitender Sicherheitsrahmen zur Eindämmung des Nexus des Drogenhandels mit Schwerpunkt auf dem Schengen-Raum und dem Goldenen Dreieck",
+    "whoPsychedelicTraumaMentalHealth": "Untersuchung der ethischen und regulatorischen Rahmenbedingungen für den klinischen Einsatz von Psychopharmaka bei der Behandlung traumabedingter psychischer Erkrankungen",
+    "whoPandemicsSevereOutbreaks": "Untersuchung von Maßnahmen zur Bekämpfung, Bewältigung und Erholung von Pandemien oder schweren Ausbrüchen",
     "refugeeProtection": "Flüchtlingsschutz",
     "globalHealth": "Globale Gesundheit",
     "foodSecurity": "Ernährungssicherheit",
@@ -2383,6 +1579,10 @@
       "committeeRoomFull": {
         "label": "Ausschussraum (voll)",
         "hint": "Virtuelles Layout und Delegiertenetage"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +2012,863 @@
     "autosaveFailed": "Die automatische Speicherung ist fehlgeschlagen",
     "autosavedWithCountry": "Automatisch gespeichert – {Land}",
     "delegateFallback": "delegieren"
+  },
+  "sources": {
+    "addSource": "Quelle hinzufügen",
+    "sourceUrl": "Quell-URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (empfohlen)",
+    "urlHelp": "Für ein neues Google-Dokument verwenden Sie die Schaltfläche und fügen den Dokumentlink hier ein.",
+    "titleOptional": "Titel (optional)",
+    "saveChanges": "Änderungen speichern",
+    "editSource": "Quelle bearbeiten",
+    "urlPlaceholderShort": "Google Doc oder eine andere URL",
+    "empty": "Noch keine Quellen. Fügen Sie einen Google Doc-Link hinzu, um es hier zu öffnen.",
+    "sourceLabel": "Quelle",
+    "openLink": "Link öffnen",
+    "embedHeading": "Quelldokument",
+    "notGoogleDoc": "Diese URL ist kein Google-Dokument. Verwenden Sie zum Einbetten und Bearbeiten hier einen Link zu docs.google.com/document/d/…; Andernfalls öffnen Sie den Link oben."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Delegierte können Positionspapiere nicht direkt hochladen. Verwenden Sie einen anderen Dokumenttyp.",
+    "alertOnlyChairsPositionPaper": "Nur Lehrkräfte/SMT/Administrator können Positionspapiere hochladen.",
+    "alertOnlySmtChairReport": "Nur SMT/Administrator kann Lehrstuhlberichte hochladen.",
+    "alertOnlySmtRop": "Nur SMT/Administrator kann RoP-Dokumente hochladen.",
+    "alertOnlySmtAwardCriteria": "Nur SMT/Administrator kann Vergabekriteriendokumente hochladen.",
+    "alertNeedContentOrUrl": "Fügen Sie entweder lokalen Textinhalt oder eine Google Docs-URL hinzu.",
+    "confirmDelete": "Dieses Dokument löschen?",
+    "delegatePrepTitle": "Abschnitt „Vorbereitendes Dokument“.",
+    "delegatePrepBody": "Sie können Ihre eigenen <prep>Vorbereitungsdokumente</prep> direkt von dieser Seite aus hochladen, anzeigen und bearbeiten.",
+    "positionPaperGuideTitle": "Positionieren Sie die Papierführung",
+    "positionPaperGuideBlurb": "Laden Sie den Platzhalterleitfaden herunter, während das endgültige PDF vorbereitet wird.",
+    "downloadPlaceholderGuide": "Laden Sie den Platzhalter-Leitfaden herunter",
+    "addDocument": "Dokument hinzufügen",
+    "tabs": {
+      "ariaLabel": "Dokumentabschnitte",
+      "library": "Bibliothek",
+      "compose": "Komponieren",
+      "composeHint": "Starten Sie auf dieser Registerkarte ein neues Dokument oder bearbeiten Sie einen vorhandenen Entwurf."
+    },
+    "newDocumentTitle": "Neues Dokument",
+    "editDocumentTitle": "Dokument bearbeiten",
+    "typeLabel": "Typ",
+    "types": {
+      "position_paper": "Positionspapier",
+      "chair_report": "Bericht des Vorsitzenden",
+      "rop": "RoP",
+      "award_criteria": "Vergabekriterien",
+      "chair_notes": "Anmerkungen des Vorsitzenden",
+      "prep_doc": "Vorbereitungsdokument"
+    },
+    "delegatePositionPaperNote": "Positionspapiere werden von Lehrstühlen mit Rückmeldung hochgeladen.",
+    "delegateOwner": "Eigentümer delegieren",
+    "chairRecipient": "Lehrstuhlinhaber",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "Dokumenttitel",
+    "googleDocsUrl": "Google Docs-URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (Ansicht/Bearbeitung in App einbetten)",
+    "googleDocsHelp": "Verwenden Sie „Neues Google-Dokument“, um Google in einem neuen Tab zu öffnen, und fügen Sie dann den Link zum Dokument hier ein. Der untenstehende Klartext ist optional. Jedes Dokument benötigt entweder lokalen Text, einen Google Doc-Link oder beides.",
+    "plainTextOptional": "Klartext (optional)",
+    "plainTextPlaceholder": "Notizen oder Textentwurf…",
+    "chairFeedbackLabel": "Feedback des Stuhls",
+    "chairFeedbackPlaceholder": "Feedback zum Positionspapier der Delegierten...",
+    "empty": "Noch keine Dokumente. Fügen Sie eines hinzu oder verknüpfen Sie ein Google-Dokument.",
+    "sidebarDocumentLabel": "Dokumentieren",
+    "sections": {
+      "chairReports": "Vorsitzender berichtet",
+      "rop": "RoP",
+      "awardCriteria": "Vergabekriterien",
+      "prepDocuments": "Dokumente vorbereiten",
+      "chairNotes": "Anmerkungen des Vorsitzenden",
+      "otherDocuments": "Andere Dokumente"
+    },
+    "untitled": "Ohne Titel",
+    "linkedDocumentHeading": "Verlinktes Dokument",
+    "notesHeading": "Notizen",
+    "noGoogleDocYet": "Noch kein Google-Dokument verlinkt. Verwenden Sie „Bearbeiten“, um eine docs.google.com/document/d/…-URL hinzuzufügen.",
+    "chairFeedbackHeading": "Feedback des Stuhls",
+    "noFeedbackYet": "Noch kein Feedback hinzugefügt."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Geben Sie zunächst die E-Mail-Adresse eines Delegierten ein.",
+    "sentToDelegate": "Gesendet an {email}.",
+    "newResolution": "Neue Resolution",
+    "maxDraftResolutions": "Dieser Ausschuss hat bereits {count} Resolutionsentwürfe.",
+    "googleDocLink": "Link zu Google Doc",
+    "googleDocUrlPlaceholder": "Google Docs-URL (docs.google.com/document/d/… – wird zum Einbetten und Bearbeiten verwendet)",
+    "googleDocUrlHelp": "Neues Google-Dokument wird in einem anderen Tab geöffnet; Kopieren Sie die URL aus der Adressleiste und fügen Sie sie hier ein.",
+    "mainSubmittersPlaceholder": "Haupteinreicher (Benutzer-IDs, durch Kommas getrennt)",
+    "coSubmittersPlaceholder": "Miteinreicher (Benutzer-IDs, durch Kommas getrennt)",
+    "create": "Erstellen",
+    "cancel": "Stornieren",
+    "openInNewTab": "In neuem Tab öffnen",
+    "noGoogleDocLink": "Kein Google Doc-Link",
+    "visibleToOtherBloc": "Für andere Blöcke sichtbar",
+    "resolutionCounts": "Hauptuntertitel: {main} | Co-Subs: {co} | Unterzeichner: {Unterzeichner}",
+    "blocButton": "Block {name} ({stance})",
+    "signVirtually": "Virtuell unterschreiben (Hauptabonnenten benachrichtigt)",
+    "shareByEmail": "Teilen Sie die Lösung per E-Mail",
+    "delegateEmailPlaceholder": "elegate@email.com",
+    "sendToDelegate": "An Delegierten senden",
+    "clauseEditor": "Klauseleditor",
+    "noClausesYet": "Noch keine Klauseln.",
+    "clauseNumber": "Klausel {Nummer}",
+    "saveClause": "Save-Klausel",
+    "delete": "Löschen",
+    "addClausePlaceholder": "Eine neue Klausel hinzufügen...",
+    "addClause": "Klausel hinzufügen",
+    "clauseVoteHistory": "Verlauf der Klauselabstimmung",
+    "noClauseOutcomesYet": "Es liegen noch keine Ergebnisse der Klauselabstimmung vor.",
+    "clauseFallback": "Klausel",
+    "passed": "BESTANDEN",
+    "failed": "FEHLGESCHLAGEN",
+    "motionId": "Antrag {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Abstimmungsabschnitte",
+      "open": "Offen",
+      "closed": "Geschlossen"
+    },
+    "requiredMajority": "Erforderliche Mehrheit",
+    "helpRequiredMajorityTitle": "Erforderliche Mehrheit",
+    "helpRequiredMajorityBody": "Wählen Sie den Abstimmungsschwellenwert aus, anhand dessen über „Bestanden/Nicht bestanden“ entschieden wird. „Einfach“ ist mehr als die Hälfte. „2/3“ erfordert eine Supermehrheit.",
+    "majoritySimple": "Einfach",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} Mehrheit",
+    "mustVote": "MUSS abstimmen",
+    "helpMustVoteTitle": "MUSS abstimmen",
+    "helpMustVoteBody": "Markiert diesen Antrag als „Pflichtabstimmungspunkt“. Dies wird verwendet, um den Teilnehmern die Anforderung mitzuteilen (abhängig von der Zusammensetzung Ihres Ausschusses).",
+    "saveSettings": "Einstellungen speichern",
+    "delegateBlurb": "Das Podium zeichnet Abstimmungen während der Sitzung auf (z. B. Namensaufruf). Hier erfolgt die Abstimmung über die Anträge nur mit Ja/Nein (Enthaltung wird nicht verwendet). Sie können die Bilanz verfolgen; Delegierte geben ihre Stimme nicht in der App ab.",
+    "yes": "Ja",
+    "no": "NEIN",
+    "ballots": "Stimmzettel",
+    "total": "Gesamt",
+    "outcome": "Ergebnis",
+    "passed": "Bestanden",
+    "failed": "Fehlgeschlagen",
+    "noRecordedVotes": "Keine aufgezeichneten Stimmen",
+    "reopenMotion": "Antrag erneut eröffnen",
+    "editRecordOpen": "Datensatz bearbeiten…",
+    "hideSettings": "Einstellungen ausblenden",
+    "preliminaryPassing": "Bestehen (vorläufig)",
+    "preliminaryFailing": "Nicht bestanden (vorläufig)",
+    "delegateRollCall": "Namensaufruf der Delegierten ({count})",
+    "noSeatedDelegates": "Für diesen Antrag stehen keine sitzenden Delegierten zur Verfügung.",
+    "rollPrefix": "Rollen:",
+    "recordedPrefix": "Aufgezeichnet:",
+    "recordedYes": "Ja",
+    "recordedNo": "NEIN",
+    "recordedAbstain": "Verzichten",
+    "recordedNone": "—",
+    "abstain": "Verzichten",
+    "clear": "Klar",
+    "closeMotion": "Nahbewegung",
+    "mustVoteBadge": "MUSS abstimmen",
+    "canVoteBadge": "KANN abstimmen",
+    "noMotions": "Noch keine Anträge.",
+    "currentOpenMotion": "Aktueller offener Antrag",
+    "noOpenMotion": "Im Moment gibt es keinen offenen Antrag.",
+    "recentClosedMotions": "Aktuelle geschlossene Anträge",
+    "noClosedMotions": "Noch keine geschlossenen Anträge.",
+    "untitled": "Ohne Titel",
+    "voteTypes": {
+      "motion": "Bewegung",
+      "amendment": "Änderung",
+      "resolution": "Auflösung",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Abwesend (rollen)",
+      "present_abstain": "Präsens – kann sich enthalten (würfeln)",
+      "present_voting": "Anwesend und abstimmend (Rolle)",
+      "unknown": "– (rollen)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Profilabschnitte",
+      "overview": "Überblick",
+      "awards": "Auszeichnungen",
+      "private": "Private Aufzeichnungen",
+      "settings": "Profileinstellungen"
+    },
+    "profilePicture": "Profilbild",
+    "uploadFile": "Datei hochladen",
+    "uploading": "Hochladen…",
+    "photoSaved": "Foto hochgeladen und gespeichert.",
+    "orUrl": "Oder per URL festlegen",
+    "urlPlaceholder": "https://...",
+    "name": "Name",
+    "username": "Benutzername",
+    "usernamePlaceholder": "z.B. alex_1999",
+    "pronouns": "Pronomen",
+    "customPronounNote": "In Ihrem Profil war ein benutzerdefiniertes Pronomen festgelegt, das hier nicht mehr akzeptiert wird. Wählen Sie oben eine Option aus (oder lassen Sie das Feld leer). Beim Sparen wird der alte Wert ersetzt.",
+    "school": "Schule",
+    "schoolPlaceholder": "z.B. Lincoln High School",
+    "grade": "Grad",
+    "selectGrade": "Note auswählen",
+    "conferencesAttended": "Konferenzen besucht",
+    "awardsComma": "Auszeichnungen (durch Kommas getrennt)",
+    "awardsPlaceholder": "Bester Delegierter, lobende Erwähnung",
+    "allocation": "Zuweisung",
+    "selectAllocation": "Zuordnung auswählen",
+    "noAllocationsPlaceholder": "Keine Ausschusszuweisungen verfügbar",
+    "saveProfile": "Profil speichern",
+    "saved": "Profil gespeichert.",
+    "saveFailed": "Profil konnte nicht gespeichert werden.",
+    "errUsernamePattern": "Der Benutzername muss zwischen 3 und 32 Zeichen lang sein (Buchstaben, Zahlen, _, ., -).",
+    "errPronounsPreset": "Wählen Sie ein Pronomen aus der Liste.",
+    "errImageType": "Bitte wählen Sie eine Bilddatei aus.",
+    "errImageSize": "Das Bild ist zu groß (maximal 5 MB).",
+    "errUploadFailed": "Der Upload ist fehlgeschlagen.",
+    "errStorageSetup": "Die Speicherung von Profilbildern ist nicht eingerichtet. Führen Sie im Supabase-Projekt die Migration 00100_profile_pictures_storage_bucket.sql aus oder erstellen Sie einen öffentlichen Speicher-Bucket mit dem Namen „profile-pictures“ (siehe README).",
+    "errPublicUrl": "Die öffentliche URL für das hochgeladene Bild konnte nicht aufgelöst werden.",
+    "fallbacks": {
+      "yourCountry": "Ihr Land",
+      "committeeSession": "Ausschusssitzung",
+      "delegate": "Delegieren",
+      "speechNote": "Sprachnotiz",
+      "untitledMotion": "Antrag ohne Titel",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "Willkommener Delegierter von {flag} {country}",
+      "subtitle": "Womit möchten Sie beginnen?",
+      "links": {
+        "documents": "Unterlagen",
+        "notes": "Notizen",
+        "committeeRoom": "Ausschussraum",
+        "runningNotes": "Laufnotizen",
+        "ideas": "Ideen",
+        "guides": "Führer",
+        "sources": "Quellen",
+        "resolutions": "Vorsätze",
+        "speeches": "Reden",
+        "stances": "Standpunkte",
+        "crisisSlides": "Krisenrutschen",
+        "report": "Bericht",
+        "motions": "Anträge",
+        "points": "Punkte"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Auszeichnungen auf Ihrem Profil",
+      "rank": "Rang {Rang}",
+      "pending": {
+        "tab": "Ausstehende Nominierungen",
+        "title": "Ausstehende Nominierungen für Vorsitzende",
+        "descriptionSingle": "Von Lehrstühlen gespeichert und zur Überprüfung mit SMT geteilt. Die endgültigen Auszeichnungen werden nach der Bestätigung unten angezeigt.",
+        "descriptionTabbed": "Von Lehrstühlen gespeichert und zur Überprüfung mit SMT geteilt. Die endgültigen Auszeichnungen erscheinen nach der Bestätigung."
+      },
+      "recorded": {
+        "tab": "Aufgezeichnete Auszeichnungen",
+        "title": "Aufgezeichnete Auszeichnungen",
+        "description": "Wird aufgeführt, wenn Ihnen Lehrstühle oder SMT im Auszeichnungs-Tracker zugewiesen werden. Die endgültige Anerkennung folgt den Regeln Ihrer Konferenz."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Nur für Sie, Ausschussvorsitzende und SMT des jeweiligen Ausschusses sichtbar.",
+      "points": {
+        "title": "Stuhlpunkte (privat)"
+      },
+      "speechNotes": {
+        "title": "Notizen zur Rede des Vorsitzes (privat)"
+      },
+      "motions": {
+        "title": "Anträge, die Sie verschoben haben",
+        "description": "Zur Prüfung durch den Ausschuss und zur SMT-Überwachung in Ihrem Profil gespeichert."
+      }
+    },
+    "discipline": {
+      "title": "Disziplinarstatus (privat)",
+      "statusLine": "Warnungen: {warnings} · Streiks: {strikes}{votingDisabled}{lookingSuspended}{removedFromCommittee}",
+      "votingDisabled": "Stimmabgabe deaktiviert",
+      "speakingSuspended": "Rede unterbrochen",
+      "removedFromCommittee": "aus dem Ausschuss entfernt",
+      "updated": "Aktualisiert: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Profilvorschau",
+      "title": "Vorschau",
+      "yourName": "Ihr Name",
+      "usernameNotSet": "Benutzername nicht festgelegt",
+      "gradeValue": "Note {grade}",
+      "awards": "Auszeichnungen"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Geschäftsordnung (RoP)",
+        "content": "# Geschäftsordnung \n\n## Punkte und Anträge \n- **Punkt zur Geschäftsordnung**: Korrektes Verfahren \n- **Informationspunkt**: Frage an den Redner \n- **Punkt des persönlichen Privilegs**: Persönlicher Komfort \n- **Antrag an den Tisch**: Debatte verschieben \n- **Antrag auf Vertagung**: Sitzung beenden \n\n## Abstimmung \n- Einfache Mehrheit in Verfahrensfragen \n- 2/3-Mehrheit für Sachfragen \n- Namentliche Abstimmung, falls gewünscht"
+      },
+      "examples": {
+        "title": "Beispiele",
+        "content": "# Beispiele \n\n## Auflösungsformat \n„ \nDie Generalversammlung, \n... \n1. Fordert die Mitgliedstaaten auf,... \n2. fordert die internationale Gemeinschaft auf,... \n„ \n\n## Struktur des Positionspapiers \n1. Hintergrund \n2. Länderpolitik \n3. Lösungsvorschläge"
+      },
+      "templates": {
+        "title": "Vorlagen",
+        "content": "# Vorlagen \n\n## Vorlage für den Stuhlbericht \n- Ausschussübersicht \n- Wichtige Diskussionspunkte \n- Beschlüsse gefasst \n- Empfehlungen"
+      },
+      "chairReport": {
+        "title": "Bericht des Vorsitzenden",
+        "content": "# Bericht des Vorsitzenden \n\nDokumentieren Sie hier die Sitzungen und Ergebnisse des Ausschusses."
+      }
+    },
+    "edit": "Bearbeiten",
+    "guideDocument": "Leitfadendokument",
+    "additionalNotes": "Zusätzliche Hinweise",
+    "noContentYet": "Noch kein Inhalt.",
+    "titlePlaceholder": "Titel",
+    "googleDocsUrl": "Google Docs-URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Neues Google-Dokument wird in einem anderen Tab geöffnet. Fügen Sie einen gemeinsam nutzbaren Link ein, damit Delegierte das Dokument hier öffnen können (Anzeigen/Bearbeiten hängt von der Google-Freigabe ab).",
+    "markdownOptional": "Markdown-Notizen (optional, wenn Sie ein Google-Dokument verwenden)",
+    "save": "Speichern",
+    "cancel": "Stornieren",
+    "createNewGuide": "Erstellen Sie einen neuen Leitfaden",
+    "slugPlaceholder": "Schnecke (einzigartig)",
+    "titleLowerPlaceholder": "Titel",
+    "googleDocsUrlOptional": "Google Docs-URL (optional)",
+    "markdownContentOptional": "Markdown-Inhalt (optional)",
+    "create": "Erstellen",
+    "glossary": {
+      "title": "MUN-Agenda-Glossar",
+      "subtitle": "Einzigartige Terminologie, abgestimmt auf Ihren Ausschusskodex und aktuelle Tagesordnungsthemen.",
+      "committeeCode": "Ausschusscode: {code}",
+      "sources": {
+        "core": "Kern",
+        "committee": "Ausschuss",
+        "topic": "Thema"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Delegation",
+          "definition": "Ein Land oder ein Beobachterteam, das einen Staat oder eine Einheit im Ausschuss vertritt."
+        },
+        "placard": {
+          "term": "Plakat",
+          "definition": "Landesschild, das zur Wortmeldung, Abstimmung und zur Signalisierung von Verfahrensanträgen verwendet wird."
+        },
+        "dais": {
+          "term": "Podium",
+          "definition": "Leitendes Team, das die Debatte moderiert, das Verfahren anwendet und die Redereihenfolge verwaltet."
+        },
+        "quorum": {
+          "term": "Quorum",
+          "definition": "Mindestanzahl an Delegationen, die für die Durchführung formeller Geschäfte und Abstimmungen erforderlich sind."
+        },
+        "motion": {
+          "term": "Bewegung",
+          "definition": "Formeller Vorschlag zur Änderung des Debattenablaufs, z. B. der Fraktionsart oder der Redezeit."
+        },
+        "point_of_order": {
+          "term": "Zur Geschäftsordnung",
+          "definition": "Eingreifen, wenn das Verfahren nach den Regeln des Ausschusses falsch angewendet wird."
+        },
+        "moderated_caucus": {
+          "term": "Moderierter Caucus",
+          "definition": "Strukturierter Debattenabschnitt mit kurzen Reden zu einem definierten Unterthema."
+        },
+        "unmoderated_caucus": {
+          "term": "Unmoderierter Caucus",
+          "definition": "Informelle Verhandlungsphase, in der sich die Delegierten frei bewegen können, um Ideen auszuarbeiten und zusammenzuführen."
+        },
+        "draft_resolution": {
+          "term": "Resolutionsentwurf",
+          "definition": "Arbeitstext der vorgeschlagenen Ausschussmaßnahme vor der endgültigen Abstimmung und Annahme."
+        },
+        "amendment": {
+          "term": "Änderung",
+          "definition": "Änderung am Textentwurf vorgeschlagen, entweder freundlich oder als unfreundlich abgestimmt."
+        },
+        "operative_clause": {
+          "term": "Operative Klausel",
+          "definition": "Handlungsorientierter, nummerierter Abschnitt, der beschreibt, was der Ausschuss zu tun vorschlägt."
+        },
+        "preambulatory_clause": {
+          "term": "Präambelsatz",
+          "definition": "Kontextbestimmende Klausel, in der Hintergrundprinzipien, Bedenken und frühere Rahmenwerke zitiert werden."
+        },
+        "right_of_reply": {
+          "term": "Recht auf Gegendarstellung",
+          "definition": "Gelegenheit, auf eine direkte Aussage zu antworten, die die Würde oder Position der Delegation berührt."
+        },
+        "veto_power": {
+          "term": "Vetorecht",
+          "definition": "Ständiges Mitglied des Sicherheitsrates der Vereinten Nationen hat die Befugnis, inhaltliche Resolutionsentwürfe zu blockieren."
+        },
+        "chapter_vii": {
+          "term": "Kapitel VII",
+          "definition": "UN-Charta-Autorität für Bedrohungen des Friedens, Sanktionen und Gewaltanwendung."
+        },
+        "sanctions_regime": {
+          "term": "Sanktionsregime",
+          "definition": "Koordinierte Beschränkungen dienten der Beeinflussung des Verhaltens ohne direkte militärische Aktion."
+        },
+        "arms_control": {
+          "term": "Rüstungskontrolle",
+          "definition": "Vereinbarungen und Verifizierungssysteme, die Art, Menge oder Einsatz von Waffen begrenzen."
+        },
+        "non_proliferation": {
+          "term": "Nichtverbreitung",
+          "definition": "Richtlinien zur Verhinderung der Verbreitung nuklearer, chemischer, biologischer oder fortschrittlicher Waffenfähigkeiten."
+        },
+        "confidence_building_measures": {
+          "term": "Vertrauensbildende Maßnahmen",
+          "definition": "Transparenz und Kommunikationstools, die Missverständnisse und Konfliktrisiken reduzieren."
+        },
+        "universal_periodic_review": {
+          "term": "Universelle regelmäßige Überprüfung",
+          "definition": "Peer-Review-Prozess, bei dem jeder UN-Mitgliedsstaat über Rechte berichtet und Empfehlungen erhält."
+        },
+        "special_rapporteur": {
+          "term": "Sonderberichterstatter",
+          "definition": "Unabhängiger Experte, der mit der Überwachung und Berichterstattung über thematische oder Länderrechtsfragen beauftragt ist."
+        },
+        "treaty_body": {
+          "term": "Vertragsorgan",
+          "definition": "Expertenausschuss, der die Umsetzung eines bestimmten Menschenrechtsvertrags überwacht."
+        },
+        "public_health_emergency": {
+          "term": "Notfall im Bereich der öffentlichen Gesundheit",
+          "definition": "Schwerwiegendes Ausbruchsereignis, das dringend eine koordinierte nationale und internationale Reaktion erfordert."
+        },
+        "surveillance": {
+          "term": "Epidemiologische Überwachung",
+          "definition": "Kontinuierliche Sammlung und Analyse von Gesundheitsdaten zur Erkennung und Verfolgung von Krankheitstrends."
+        },
+        "health_systems": {
+          "term": "Stärkung der Gesundheitssysteme",
+          "definition": "Verbesserung von Personal, Finanzierung, Logistik und Governance für eine zuverlässige Gesundheitsversorgung."
+        },
+        "transnational_crime": {
+          "term": "Transnationale organisierte Kriminalität",
+          "definition": "Kriminelle Aktivitäten werden über Netzwerke und illegale Märkte grenzüberschreitend koordiniert."
+        },
+        "illicit_trafficking": {
+          "term": "Illegaler Handel",
+          "definition": "Illegale Bewegung von Drogen, Waffen, Personen oder Gütern über Gerichtsbarkeiten hinweg."
+        },
+        "rule_of_law_capacity": {
+          "term": "Rechtsstaatlichkeit",
+          "definition": "Institutionelle Fähigkeit von Justizsystemen, Rechte fair zu untersuchen, zu verfolgen und zu schützen."
+        },
+        "sustainable_development": {
+          "term": "Nachhaltige Entwicklung",
+          "definition": "Wachstumsmodell, das sozialen Fortschritt, wirtschaftliche Chancen und Umweltschutz in Einklang bringt."
+        },
+        "financing_for_development": {
+          "term": "Finanzierung für Entwicklung",
+          "definition": "Öffentliche und private Finanzierungsmechanismen, die langfristige Entwicklungsprioritäten unterstützen."
+        },
+        "policy_coordination": {
+          "term": "Politische Koordinierung",
+          "definition": "Abstimmung staatlicher und behördlicher Maßnahmen, um Doppelarbeit zu vermeiden und die kollektive Wirkung zu erhöhen."
+        },
+        "child_protection": {
+          "term": "Kinderschutz",
+          "definition": "Maßnahmen zur Verhinderung von Ausbeutung, Missbrauch und Gewalt gegen Kinder in allen Situationen."
+        },
+        "education_access": {
+          "term": "Zugang zu Bildung",
+          "definition": "Gewährleistung inklusiver, gleichberechtigter und kontinuierlicher Lernmöglichkeiten für alle Kinder."
+        },
+        "humanitarian_response": {
+          "term": "Humanitäre Hilfe",
+          "definition": "Schnelle Hilfsmaßnahmen zur Deckung dringender Bedürfnisse in Krisen- und Konfliktsituationen."
+        },
+        "gender_mainstreaming": {
+          "term": "Gender-Mainstreaming",
+          "definition": "Integration der Geschlechteranalyse in die Gestaltung, Umsetzung und Bewertung von Richtlinien."
+        },
+        "gender_based_violence": {
+          "term": "Geschlechtsspezifische Gewalt",
+          "definition": "Gegen jemanden gerichteter Schaden aufgrund von Geschlechtsidentität, Rollen oder ungleichen Machtverhältnissen."
+        },
+        "economic_empowerment": {
+          "term": "Wirtschaftliche Stärkung",
+          "definition": "Erweiterung des Zugangs zu menschenwürdiger Arbeit, Finanzen, Eigentum und Entscheidungsbefugnis."
+        },
+        "source_attribution": {
+          "term": "Quellenangabe",
+          "definition": "Geben Sie den Ursprung der Informationen klar an, damit Behauptungen überprüft und kontextualisiert werden können."
+        },
+        "verified_reporting": {
+          "term": "Verifizierte Berichterstattung",
+          "definition": "Journalistischer Standard, der eine Bestätigung vor der Veröffentlichung umstrittener Fakten erfordert."
+        },
+        "editorial_independence": {
+          "term": "Redaktionelle Unabhängigkeit",
+          "definition": "Trennung von Berichterstattungsentscheidungen vom politischen Druck oder Einfluss von Stakeholdern."
+        },
+        "climate_mitigation": {
+          "term": "Klimaschutz",
+          "definition": "Maßnahmen, die Treibhausgasemissionen reduzieren oder die langfristige Kohlenstoffentfernung erhöhen."
+        },
+        "climate_adaptation": {
+          "term": "Klimaanpassung",
+          "definition": "Richtlinien und Investitionen, die die Anfälligkeit für klimabedingte Auswirkungen verringern."
+        },
+        "cyber_norms": {
+          "term": "Cyber-Normen",
+          "definition": "Gemeinsame Erwartungen an verantwortungsvolles staatliches Verhalten im digitalen und Cyber-Bereich."
+        },
+        "critical_infrastructure": {
+          "term": "Kritische Infrastruktur",
+          "definition": "Wesentliche Systeme wie Strom, Wasser, Gesundheit und Kommunikation erfordern Widerstandsfähigkeit."
+        },
+        "epidemiology": {
+          "term": "Epidemiologie",
+          "definition": "Untersuchung von Krankheitsmustern, -ursachen und -verteilung in Populationen."
+        },
+        "preparedness_response": {
+          "term": "Bereitschaft und Reaktion",
+          "definition": "Planung, Koordination und Notfallmaßnahmen zur Eindämmung und Bewältigung von Notfällen."
+        },
+        "non_refoulement": {
+          "term": "Nichtzurückweisung",
+          "definition": "Grundsatz, der die Rückkehr von Menschen an Orte verbietet, an denen ihnen ernsthafter Schaden droht."
+        },
+        "durable_solutions": {
+          "term": "Langlebige Lösungen",
+          "definition": "Langfristige Folgen für Vertriebene: Rückkehr, lokale Integration oder Neuansiedlung."
+        },
+        "nuclear_safeguards": {
+          "term": "Nukleare Sicherheitsvorkehrungen",
+          "definition": "Überprüfungsmaßnahmen, die sicherstellen, dass Kernmaterial nicht für Waffenzwecke zweckentfremdet wird."
+        },
+        "counter_terrorism": {
+          "term": "Terrorismusbekämpfung",
+          "definition": "Integrierte rechtliche, präventive und Sicherheitsmaßnahmen gegen terroristische Aktivitäten."
+        },
+        "due_process": {
+          "term": "Ordnungsgemäßer Prozess",
+          "definition": "Faire rechtliche Verfahren zum Schutz der Rechte bei Ermittlungen, Strafverfolgung und Sanktionen."
+        },
+        "resource_security": {
+          "term": "Ressourcensicherheit",
+          "definition": "Zuverlässiger Zugang zu Nahrungsmitteln, Wasser und Energie unter wirtschaftlichem und ökologischem Stress."
+        },
+        "resilience": {
+          "term": "Widerstandsfähigkeit",
+          "definition": "Fähigkeit von Gemeinschaften und Institutionen, Schocks zu absorbieren und sich effektiv zu erholen."
+        }
+      },
+      "topicLine": "Thema: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Idee bearbeiten",
+    "googleDocsUrl": "Google Docs-URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Kurzer Ideentext (optional)",
+    "save": "Speichern",
+    "cancel": "Stornieren",
+    "addIntro": "Fügen Sie ein Google-Dokument hinzu, um vor Ort eine Lösungsidee zu entwerfen, oder geben Sie eine kurze Notiz ein (oder beides).",
+    "googleDocsCreateHelp": "Neues Google-Dokument wird in einem anderen Tab geöffnet; Fügen Sie den Link hier ein, nachdem er erstellt wurde.",
+    "resolutionIdeaPlaceholder": "Lösungsidee...",
+    "add": "Hinzufügen",
+    "noIdeasYet": "Noch keine Ideen.",
+    "ideaLabel": "Idee",
+    "ideaFallback": "Idee {Nummer}",
+    "linkedDoc": "Verlinktes Dokument",
+    "addedOn": "Hinzugefügt am {Datum}",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "ideaDocument": "Ideendokument",
+    "summary": "Zusammenfassung",
+    "emptyIdea": "Leere Idee."
+  },
+  "stances": {
+    "heatmapTitle": "Kurze Haltungsübersicht (Heatmap)",
+    "heatmapHelp": "Inwieweit unterstützt Ihre Zuteilung ___? (Skala 1-5)",
+    "topicPlaceholder": "z.B. Klimaschutz",
+    "extentLabel": "Umfang (1-5):",
+    "extentHelpTitle": "Umfang (1-5)",
+    "extentHelpBody": "1 bedeutet, dass Ihre Zuordnung das Thema kaum unterstützt, und 5 bedeutet starke Unterstützung. Wählen Sie eine Zahl, die Ihrer Haltung im Ausschuss entspricht.",
+    "add": "Hinzufügen",
+    "viewOnlyHeatmap": "Nur-Ansicht-Heatmap für Mitarbeiter.",
+    "notesPerAllocation": "Hinweise pro Zuordnung",
+    "noAllocationsYet": "Noch keine Zuteilungen",
+    "notesPlaceholder": "Standpunktnotizen für diese Zuteilung...",
+    "noteLanguageWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
+    "save": "Speichern",
+    "saveHelpTitle": "Standnotiz speichern",
+    "saveHelpBody": "Speichert die Haltungsnotiz für diese Zuordnung. Es kann von Mitarbeitern und (je nach Ausschusseinstellungen) anderen Teilnehmern eingesehen werden."
+  },
+  "speeches": {
+    "newSpeech": "Neue Rede",
+    "speechTitlePlaceholder": "Titel der Rede",
+    "googleDocsUrl": "Google Docs-URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Öffnet Google in einem neuen Tab; Fügen Sie die Dokument-URL hier ein, wenn Sie fertig sind.",
+    "plainTextOptional": "Nur-Text-Entwurf (optional, wenn Sie ein Google-Dokument verwenden)",
+    "save": "Speichern",
+    "cancel": "Stornieren",
+    "noSpeechesYet": "Noch keine Reden. Verknüpfen Sie ein Google-Dokument oder fügen Sie Text ein.",
+    "speechLabel": "Rede",
+    "untitled": "Ohne Titel",
+    "edit": "Bearbeiten",
+    "speechDocument": "Rededokument",
+    "draftText": "Textentwurf",
+    "noContentHint": "Verknüpfen Sie ein Google-Dokument mit „Bearbeiten“ oder fügen Sie einfachen Text in das Formular ein."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Ausschuss",
+    "yourContext": "Ihr Kontext",
+    "roleLabel": "Rolle",
+    "seatLabel": "Sitz",
+    "clearSearchTitle": "Löschen Sie die Suche und zeigen Sie alle Delegationen an",
+    "vacantLabel": "Frei",
+    "assignedLabel": "Zugewiesen",
+    "daisLabel": "Podium",
+    "phaseLabel": "Phase",
+    "phaseVoting": "Wählen",
+    "phaseDebate": "Debatte",
+    "focusSearchTitle": "Fokussuche (Podiumstitel und -namen entsprechen Ihrer Suchanfrage)",
+    "tipLabel": "Tipp",
+    "searchVacantTitle": "Suchen Sie nach „freien“ Plätzen im Raum",
+    "searchHint": "Geben Sie ein Land, den Namen des Delegierten, eine Schule, ein Pronomen oder „frei“ ein, um Übereinstimmungen im Raum hervorzuheben. Drücken Sie die Eingabetaste, um zum ersten Treffer zu springen. Esc löscht. Klicken Sie auf „Frei“, um zu freien Plätzen zu springen.",
+    "findLabel": "Finden Sie ein Delegations- oder Podiumsmitglied",
+    "searchPlaceholder": "Land, Name, Schule...",
+    "matchesCount": "{matches} von {total} Sitzplätzen stimmen überein",
+    "enterScrolls": "Schriftrollen eingeben",
+    "typeToFilterHint": "Zum Filtern eingeben: Die Eingabe scrollt zum ersten Treffer",
+    "noMatches": "Keine passenden Delegationen oder Podiumsplätze.",
+    "digitalDisplay": "Digitale Anzeige",
+    "floorLabel": "Boden",
+    "staffSeatsHeading": "Personal - Sitzplätze",
+    "searchAria": "Suchdelegationen",
+    "virtualRoomVacant": "Frei",
+    "profileAria": "Profil anzeigen: {Land}",
+    "vacantSeatAria": "Freier Sitzplatz",
+    "placardAria": "Plakat {Land}",
+    "gavelAria": "Hammer",
+    "viewProfileAria": "Profil ansehen: {title}",
+    "noProfileLinkAria": "{title} (kein Profillink)",
+    "committeeFloor": "Ausschussetage",
+    "virtualRoomFigureAria": "Virtueller Ausschussraum – {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Delegationen filtern. Der erste hervorgehobene Platz ist das erste Spiel im Ring.",
+    "helperText": "Auf Plakaten sind das Land (aus den Zuteilungen), der Name, die Schule und die Pronomen aus dem Profil jedes Delegierten aufgeführt. Bearbeiten Sie Ihr Profil unter Profil. Leere Ausschusssitze werden als „Frei“ angezeigt. Klicken Sie auf ein ausgefülltes Plakat oder einen Podiumsplatz, um die Seite dieses Mitglieds zu öffnen (von dort aus chatten und berichten).",
+    "virtualRoomCaption": "Virtuelles Modell eines UN-Komiteeraums mit Delegiertenplakaten mit Land, Name, Schule und Pronomen."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Bitte um Wortmeldung",
+      "delegateFallback": "Delegieren",
+      "needAllocation": "Für eine Redeanfrage benötigen Sie ein Kontingent.",
+      "alreadyQueued": "Sie haben bereits eine aktive Redeanfrage in der Warteschlange.",
+      "requested": "Zum Reden aufgefordert. Sie werden in der Warteschlange angezeigt.",
+      "requestFailed": "Die Bitte um Wortmeldung konnte nicht gestellt werden.",
+      "helpBody": "Schickt Ihre Delegation in die Vorsitzwarteschlange. Sie können jeweils eine aktive Warte-/aktuelle Anfrage haben.",
+      "purposeLabel": "Optionaler Zweck (wird im Warteschlangenetikett angezeigt)",
+      "purposeHelpTitle": "Zwecketikett",
+      "purposeHelpBody": "Dieser Text wird an den Namen Ihres Landes angehängt, damit die Vorsitzenden erkennen können, warum Sie das Wort beantragen.",
+      "purposePlaceholder": "z.B. Support + Änderungsübersicht",
+      "requesting": "Anfrage...",
+      "rollPromptTitle": "Genehmigung des Vorsitzes erforderlich",
+      "rollPromptBodyPickStatus": "Die Sitzung hat begonnen. Wählen Sie Ihren Namensstatus, um das Sprechen und Abstimmen freizuschalten. Diese Auswahl kann nicht geändert werden.",
+      "rollPromptBodyWaitSessionStart": "Ich warte darauf, dass der Vorsitzende die Ausschusssitzung beginnt.",
+      "rollPromptBodyWaitRollPrompt": "Warten auf die Aufforderung zum Appell.",
+      "rollPromptBodyMarkedAbsent": "Sie sind derzeit als abwesend markiert. Bitten Sie den Vorsitzenden, Sie als anwesend zu markieren, damit Sie sprechen und abstimmen können.",
+      "rollPromptBodyChecking": "Überprüfen Sie Ihren Rollenstatus...",
+      "rollPromptSaving": "Sparen...",
+      "rollPromptPresent": "Gegenwärtig",
+      "rollPromptPresentVoting": "Anwesend und abstimmend"
+    },
+    "motionVoting": {
+      "votingProcedure": "Abstimmungsverfahren",
+      "currentMotion": "Aktuelle Bewegung",
+      "motioner": "Motioner",
+      "majority": "Mehrheitlich",
+      "majoritySimple": "Einfach",
+      "tally": "Ja {ja} – Nein {nein} – Gesamt {total}",
+      "help": "Das Podium zeichnet die Abstimmung jeder Delegation während der Sitzung auf. Bei der Antragsabstimmung wird nur Ja oder Nein verwendet (keine Enthaltung). In den Summen werden nur Plakate berücksichtigt, auf denen „Ja“ oder „Nein“ angegeben wurde. abwesende Delegationen werden übersprungen."
+    },
+    "activeMotion": {
+      "currentMotion": "Aktuelle Bewegung",
+      "motionFallback": "Bewegung",
+      "motioner": "Motioner",
+      "majority": "Mehrheitlich",
+      "majoritySimple": "Einfach",
+      "type": "Typ",
+      "timer": "Timer",
+      "currentSpeaker": "Aktueller Sprecher",
+      "nextSpeaker": "Nächster Redner",
+      "speakerTimeLeftCap": "Sprecherzeit (links/Kappe)",
+      "speakerTimeLeftTotal": "Sprecherzeit (links / gesamt)",
+      "perSpeaker": "(pro Sprecher)",
+      "paused": "(pausiert)",
+      "pauseReason": "Pause: {Grund}"
+    },
+    "floorStatus": {
+      "sessionTime": "Sitzungszeit",
+      "sessionNotStarted": "Sitzung nicht gestartet",
+      "limit": "Limit",
+      "limitRemaining": "{value} übrig",
+      "limitOverBy": "vorbei um {value}",
+      "quickLinkSession": "Sitzung",
+      "quickLinkRoll": "Rollen",
+      "quickLinkSpeakers": "Lautsprecher",
+      "quickLinkMotions": "Anträge",
+      "quickLinkTimer": "Timer",
+      "dais": "Podium",
+      "pinned": "Angepinnt",
+      "viewFullAnnouncement": "Vollständige Ankündigung ansehen",
+      "timerPausesReadOnly": "Timer-Pausen (schreibgeschützt)",
+      "speakerList": "Rednerliste",
+      "speakerFallback": "Lautsprecher",
+      "rollCallYou": "Appell (Sie)",
+      "fullAnnouncement": "Vollständige Ankündigung",
+      "daisAnnouncement": "Dais-Ankündigung",
+      "close": "Schließen",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Sitzungsname",
+      "sessionNamePlaceholder": "z.B. Vormittagssitzung",
+      "sessionNameSaving": "Sparen…",
+      "sessionNameSaved": "Gespeichert",
+      "sessionNameHint": "Wird automatisch gespeichert und im Sitzungsverlauf angezeigt.",
+      "title": "Ausschusssitzung",
+      "subtitle": "Starten oder stoppen Sie die Ausschusssitzung.",
+      "helpStartStop": "Start startet den Live-Timer/Status der Ausschusssitzung für alle. Stop beendet die Sitzung und löscht das aktuelle Zeitlimit.",
+      "migrationUnavailable": "Sitzungskontrollen sind vorübergehend nicht verfügbar, bis die neuesten Datenbankmigrationen angewendet werden.",
+      "endTimeInFuture": "Wählen Sie eine Endzeit in der Zukunft oder stellen Sie auf „Kein Limit“ um.",
+      "sessionStartUnavailable": "Der Zeitstempel für den Sitzungsstart ist erst verfügbar, wenn die neuesten Migrationen angewendet werden.",
+      "endTimeInFutureSetNoLimit": "Wählen Sie eine Endzeit in der Zukunft oder legen Sie kein Limit fest.",
+      "sessionLimitUpdated": "Sitzungslimit aktualisiert.",
+      "startedLabel": "Begonnen:",
+      "timeInLabel": "Zeit in:",
+      "timeUntilEndLabel": "Zeit bis zum Ende:",
+      "overByValue": "vorbei um {value}",
+      "modeLabel": "Modus:",
+      "modeStopwatchNoLimit": "Stoppuhr (keine Zeitbegrenzung)",
+      "sessionNotRunning": "Sitzung läuft nicht.",
+      "sessionLimit": "Sitzungslimit",
+      "sessionLimitModesTitle": "Sitzungslimitmodi",
+      "sessionLimitModesHelp": "Keine: kein Ende. Zeitbudget: zählt von Anfang an. Ende: feste Uhrzeit in Ihrer lokalen Zeitzone.",
+      "sessionLimitOptional": "Optional.",
+      "noneLabel": "Keiner",
+      "noneDescription": "läuft bis zum Stillstand.",
+      "timeBudgetLabel": "Zeitbudget",
+      "timeBudgetDescription": "zählt vom ersten Moment an.",
+      "endTimeLabel": "Endzeit",
+      "endTimeDescription": "Verwendet eine feste Uhrzeit (überschreibt das Budget, falls beide jemals festgelegt wurden).",
+      "noneIndefinite": "Keine (auf unbestimmte Zeit)",
+      "noneScheduledEndHint": "Kein geplantes Ende; Es wird nur die verstrichene Zeit angezeigt.",
+      "timeBudgetFromStart": "Zeitbudget von Anfang an",
+      "hoursLabel": "Std",
+      "minutesLabel": "Minuten",
+      "minimumOneMinute": "(mindestens 1 Minute)",
+      "endAtLocalTime": "Ende um (Ortszeit)",
+      "stopSession": "Sitzung beenden",
+      "saveLimit": "Limit speichern",
+      "saveLimitHelp": "Wendet aktualisierte Grenzwerteinstellungen an, während die Sitzung bereits ausgeführt wird, ohne die Sitzung zu stoppen.",
+      "startSession": "Sitzung starten",
+      "sidebarUsePrefix": "Verwenden Sie die Seitenleiste für",
+      "rollCall": "Appell",
+      "speakers": "Lautsprecher",
+      "formalMotions": "Formelle Anträge",
+      "timer": "Timer",
+      "sidebarAnd": "Und",
+      "announcements": "Ankündigungen",
+      "sidebarUseSuffix": "— ein Werkzeug pro Registerkarte.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Sitzungsverlauf",
+      "savedCount": "{count} gespeichert",
+      "permissionsHint": "Lehrstühle können Einträge umbenennen. SMT/Admin kann Einträge umbenennen und löschen.",
+      "empty": "Noch kein Sitzungsverlauf.",
+      "rename": "Umbenennen",
+      "delete": "Löschen",
+      "deleteConfirm": "Diese Sitzung aus dem Verlauf löschen?",
+      "sessionNamePrompt": "Sitzungsname",
+      "rangeClosed": "{Reichweite}",
+      "rangeOngoing": "{range} -> Laufend"
+    },
+    "timerPage": {
+      "title": "Timer",
+      "controlsTitle": "Timer-Steuerung",
+      "controlsHelp": "Verwenden Sie „Allgemeines Plenum“ für den gesamten Debattenzeitpunkt oder „Antragsabstimmung“, um die Sichtbarkeit auf einen bestimmten offenen Abstimmungspunkt zu binden.",
+      "tabSetup": "1) Einrichtung",
+      "tabClock": "2) Uhrsteuerung",
+      "tabNotes": "3) Sprachnotizen",
+      "tabLog": "4) Protokoll anhalten",
+      "setupHelp": "Wählen Sie, ob dieser Timer für die allgemeine Sitzung gilt (für die Delegierten immer sichtbar) oder an den zur Abstimmung offenen Antrag gebunden ist (die Delegierten sehen ihn nur, solange diese Abstimmung das aktive Element ist). Wenn die Zeit pro Sprecher aktiviert ist, bleibt die Uhr auch während der moderierten Caucus-Sitzung sichtbar. Uhr anhalten / Uhr einfrieren oder Countdown fortsetzen. Stellen Sie die Lautsprecherzeit (verbleibend) und die Gesamtzeit unabhängig voneinander ein und speichern Sie dann den Timer. Voreinstellungen füllen beide auf die gleiche Länge; Sie können jedes Feld anschließend bearbeiten. Pausen werden mit einem kurzen Grund protokolliert.",
+      "namedPreset": "Benannte Voreinstellung",
+      "applyPreset": "Voreinstellung anwenden...",
+      "floorLabelDelegates": "Bodenetikett (Delegierte)",
+      "floorLabelPlaceholder": "z.B. GSL 60er Jahre",
+      "timerPurpose": "Zweck des Timers",
+      "purposeGeneralFloor": "Allgemeine Debatte / Plenum (nicht an eine Abstimmung gebunden)",
+      "purposeMotionVote": "Offene Bewegung – Timer nur, solange die Abstimmung im Plenum aktiv ist",
+      "openMotionForVoting": "Offener Antrag (muss zur Abstimmung offen sein)",
+      "selectMotion": "Bewegung auswählen...",
+      "untitled": "Ohne Titel",
+      "noOpenMotionWarning": "Über keinen Antrag kann abgestimmt werden. Öffnen Sie zunächst eine Abstimmung oder ändern Sie den Zweck auf „Allgemeine Abstimmung“.",
+      "clock": "Uhr",
+      "running": "Läuft",
+      "paused": "Angehalten",
+      "saveToEnablePauseStart": "Speichern Sie den Timer, um Pause/Start zu ermöglichen.",
+      "pauseReasonLogged": "Pausengrund (protokolliert)",
+      "pauseReasonPlaceholder": "z.B. Zur Geschäftsordnung, technisches Problem, nicht moderierte Fraktion ...",
+      "pauseClock": "Uhr anhalten",
+      "startClock": "Startuhr",
+      "perSpeakerTitle": "Zeit pro Redner (moderierter Caucus)",
+      "perSpeakerHelp": "Stellen Sie „Gesamtzeit“ als Obergrenze pro Sprecher und „Sprecherzeit“ als verbleibende Zeit ein; Vorwärts geht zum nächsten Lautsprecher und setzt den Rest auf die Obergrenze zurück.",
+      "currentSpeaker": "Aktueller Sprecher",
+      "nextSpeaker": "Nächster Redner",
+      "speechNotesCurrentSpeaker": "Redenotizen (aktueller Sprecher)",
+      "speechNotesHelp": "Notizen sind mit dem Timer-Text „Aktueller Redner“ verknüpft und wenn in der Rednerliste jemand als „Aktuell“ markiert ist, wird seine Delegation als Referenz gespeichert.",
+      "timerFloorLabel": "Timer (Etage):",
+      "speakerListCurrent": "Rednerliste (aktuell):",
+      "noCurrentDelegation": "In der Rednerliste ist keine Delegation als „Aktuell“ markiert.",
+      "note": "Notiz",
+      "notePlaceholder": "Punkte, POIs, Ton, Follow-ups...",
+      "saveSpeechNote": "Sprachnotiz speichern",
+      "recentNotes": "Ihre letzten Notizen (dieser Ausschuss)",
+      "delete": "Löschen",
+      "speakerTimeRemaining": "Rednerzeit (verbleibend)",
+      "remainingHelpPerSpeaker": "Countdown für den aktuellen Sprecher (wird beim Weiterschalten zurückgesetzt).",
+      "remainingHelpNormal": "Countdown für den aktuellen Sprecher (kann kleiner als der Gesamtwert sein).",
+      "totalTime": "Gesamtzeit",
+      "totalHelpPerSpeaker": "Pro-Sprecher-Kappe (Nenner auf der Etage; verbleibende Vorab-Nachfüllungen).",
+      "totalHelpNormal": "Volle Länge dieses Timer-Segments (angezeigt nach dem Schrägstrich auf dem Boden).",
+      "saveTimer": "Timer speichern",
+      "advanceSpeakerReset": "Lautsprecher vorziehen und Uhr zurücksetzen",
+      "recentPauseLog": "Aktuelles Pausenprotokoll",
+      "noPauseEvents": "Für diesen Ausschuss wurden noch keine Pausenereignisse protokolliert.",
+      "openPauseLogHint": "Öffnen Sie das Pausenprotokoll, um aufgezeichnete Pausengründe und Zeitstempel zu überprüfen.",
+      "saved": "Timer gespeichert.",
+      "savedCapped": "Timer gespeichert. Die Vortragszeit war länger als insgesamt; auf die Gesamtsumme begrenzt.",
+      "alreadyPaused": "Der Timer ist bereits angehalten.",
+      "pausedForCommittee": "Der Timer hielt für das Komitee an.",
+      "alreadyRunning": "Der Timer läuft bereits.",
+      "runningForCommittee": "Timer läuft für das Komitee.",
+      "euTimerBoardTitle": "Zeitschalttafel des EU-Parlaments (11 Zeitschaltuhren)",
+      "euTimerBoardHelp": "Ein Timer pro Gruppe, plus Gesamtzeit, POI/POC-Zeit und Rednerzeit. Kopieren Sie mit „Anwenden“ eine Zeile in die Live-Timer-Felder auf der Registerkarte „Uhr“ (Sprecherzeit / Timer speichern).",
+      "euTimerName": "Name",
+      "euTimerTag": "Etikett",
+      "euTotalTime": "Gesamtzeit",
+      "euPoiPocTime": "POI-/POC-Zeit",
+      "euSpeakerTime": "Rednerzeit"
+    }
   }
 }

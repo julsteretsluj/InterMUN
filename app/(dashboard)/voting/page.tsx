@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { VotingPanel } from "@/components/voting/VotingPanel";
 import { requireActiveConferenceId } from "@/lib/active-conference";
+import { ensureAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
@@ -22,6 +23,8 @@ export default async function VotingPage() {
   const myRole = (profile?.role || "delegate").toString().toLowerCase();
 
   const conferenceId = await requireActiveConferenceId();
+
+  await ensureAgendaFloorVoteItem(supabase, conferenceId);
 
   const { data: voteItems } = await supabase
     .from("vote_items")

@@ -24,7 +24,7 @@ export function GuidesView({
   canEdit: boolean;
   glossaryContext?: GlossaryContext | null;
 }) {
-  const t = useTranslations("views.guides");
+  const t = useTranslations("guides");
   const glossary = useMemo(
     () =>
       resolveGlossaryEntries({
@@ -115,7 +115,7 @@ export function GuidesView({
                   key={topic}
                   className="rounded-full border border-slate-300/80 bg-white px-2 py-0.5 text-slate-700 dark:border-white/15 dark:bg-black/30 dark:text-zinc-200"
                 >
-                  {t("glossary.topicTag", { topic })}
+                  {t("glossary.topicLine", { topic })}
                 </span>
               ))}
             </div>

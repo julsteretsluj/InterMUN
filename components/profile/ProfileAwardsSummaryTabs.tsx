@@ -13,7 +13,7 @@ export function ProfileAwardsSummaryTabs({
   pendingSlot: React.ReactNode | null;
   recordedSlot: React.ReactNode | null;
 }) {
-  const t = useTranslations("views.profile");
+  const t = useTranslations("profile");
   const [tab, setTab] = useState<"pending" | "recorded">("pending");
   const hasPending = pendingSlot != null;
   const hasRecorded = recordedSlot != null;

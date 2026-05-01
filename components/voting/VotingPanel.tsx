@@ -13,6 +13,8 @@ import {
 import { parseRollAttendance, type RollAttendance } from "@/lib/roll-attendance";
 import { LocalTabs } from "@/components/ui/Tabs";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
+import { isAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
+import { isStaffRole } from "@/lib/roles";
 
 interface Vote {
   value: string;
@@ -22,7 +24,7 @@ interface Vote {
 type VoteItemRow = VoteItem & { procedure_code?: string | null };
 type VotingRosterEntry = {
   allocationId: string;
-  userId: string;
+  userId: string | null;
   country: string;
   rollAttendance: RollAttendance;
 };
@@ -30,17 +32,21 @@ type VotingRosterEntry = {
 export function VotingPanel({
   voteItems,
   myRole,
+  includeUnseatedDelegatePlacards = true,
 }: {
   voteItems: VoteItem[];
   myRole: string;
+  /** When true (default), list every delegate placard from the matrix, including seats not yet linked to a user. Chairs can only record votes when a delegate is seated. Pass false for seated delegates only. */
+  includeUnseatedDelegatePlacards?: boolean;
 }) {
-  const t = useTranslations("views.voting");
+  const t = useTranslations("voting");
   const [votes, setVotes] = useState<Record<string, Vote[]>>({});
   const [drafts, setDrafts] = useState<Record<string, { must_vote: boolean; required_majority: string }>>({});
   const [rosterByConferenceId, setRosterByConferenceId] = useState<Record<string, VotingRosterEntry[]>>({});
   const supabase = createClient();
 
-  const canManageVotes = myRole === "chair";
+  const canManageVotes = isStaffRole(myRole);
+  const isDelegateViewer = (myRole ?? "").trim().toLowerCase() === "delegate";
 
   function majorityLabel(requiredMajority: string): string {
     return requiredMajority === "2/3" ? t("majorityTwoThirds") : t("majoritySimple");
@@ -111,19 +117,20 @@ export function VotingPanel({
           profiles: { role?: string | null } | { role?: string | null }[] | null;
         }>)
           .filter((a) => {
-            if (!a.user_id) return false;
             const profile = Array.isArray(a.profiles) ? a.profiles[0] : a.profiles;
             if (profile?.role?.toString().trim().toLowerCase() === "chair") return false;
             const countryKey = (a.country ?? "").trim().toLowerCase();
-            return (
-              countryKey !== DAIS_SEAT_HEAD_CHAIR.toLowerCase() &&
-              countryKey !== DAIS_SEAT_CO_CHAIR.toLowerCase() &&
-              countryKey !== "co chair"
-            );
+            const isDaisSeat =
+              countryKey === DAIS_SEAT_HEAD_CHAIR.toLowerCase() ||
+              countryKey === DAIS_SEAT_CO_CHAIR.toLowerCase() ||
+              countryKey === "co chair";
+            if (isDaisSeat) return false;
+            if (!includeUnseatedDelegatePlacards && !a.user_id) return false;
+            return true;
           })
           .map((a) => ({
             allocationId: a.id,
-            userId: a.user_id as string,
+            userId: a.user_id,
             country: a.country?.trim() || "—",
             rollAttendance: rollMap.get(a.id) ?? "absent",
           }));
@@ -139,7 +146,7 @@ export function VotingPanel({
     return () => {
       cancelled = true;
     };
-  }, [voteItems, supabase]);
+  }, [voteItems, supabase, includeUnseatedDelegatePlacards]);
 
   useEffect(() => {
     const channel = supabase
@@ -214,13 +221,19 @@ export function VotingPanel({
     return { yes, no, total, passes };
   }
 
-  const openItems = voteItems.filter((i) => !i.closed_at);
-  const closedItems = voteItems.filter((i) => !!i.closed_at);
+  const agendaVoteItems = voteItems.filter((i) => isAgendaFloorVoteItem(i));
+  const motionVoteItems = voteItems.filter((i) => !isAgendaFloorVoteItem(i));
+  const openItems = motionVoteItems.filter((i) => !i.closed_at);
+  const closedItems = motionVoteItems.filter((i) => !!i.closed_at);
 
   function renderVoteCard(item: VoteItemRow) {
     const { yes, no, total, passes } = getResult(item);
     const d = drafts[item.id] || { must_vote: item.must_vote, required_majority: item.required_majority };
     const isClosed = !!item.closed_at;
+    const isAgendaFloor = isAgendaFloorVoteItem(item);
+    const abstainAllowedForItem =
+      item.vote_type === "resolution" || item.vote_type === "amendment" || isAgendaFloor;
+    const abstainCount = (votes[item.id] ?? []).filter((x) => x.value === "abstain").length;
     const typeLabel = voteTypeLabel(item.vote_type);
     const titleLine = item.title?.trim() || t("untitled");
     const proc = item.procedure_code?.replace(/_/g, " ");
@@ -231,6 +244,8 @@ export function VotingPanel({
         voteMap[row.user_id] = row.value;
       }
     }
+    const recordedForRow = (row: VotingRosterEntry) =>
+      row.userId ? voteMap[row.userId] : undefined;
 
     const chairSettings = canManageVotes ? (
       <div className="mun-inset space-y-3">
@@ -254,6 +269,7 @@ export function VotingPanel({
               <option value="2/3">{t("majorityTwoThirds")}</option>
             </select>
           </label>
+            {isAgendaFloor ? null : (
             <div className="flex flex-col items-end gap-1">
               <label className="flex cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2.5 text-sm text-brand-navy transition-apple">
                 <input
@@ -271,6 +287,7 @@ export function VotingPanel({
               </label>
               <HelpButton title={t("helpMustVoteTitle")}>{t("helpMustVoteBody")}</HelpButton>
             </div>
+            )}
         </div>
         <button
           type="button"
@@ -311,7 +328,7 @@ export function VotingPanel({
           </div>
         </header>
 
-        {myRole === "delegate" ? (
+        {isDelegateViewer ? (
           <p className="mun-muted mt-3 text-sm leading-relaxed">{t("delegateBlurb")}</p>
         ) : null}
 
@@ -332,6 +349,15 @@ export function VotingPanel({
                 <p className="mun-label">{t("ballots")}</p>
                 <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{total}</p>
               </div>
+              {abstainAllowedForItem && abstainCount > 0 ? (
+                <>
+                  <div className="hidden h-8 w-px bg-[var(--hairline)] sm:block" aria-hidden />
+                  <div className="text-center sm:text-left">
+                    <p className="mun-label">{t("abstain")}</p>
+                    <p className="font-display text-xl font-semibold tabular-nums text-brand-navy">{abstainCount}</p>
+                  </div>
+                </>
+              ) : null}
               <div className="w-full border-t border-[var(--hairline)] pt-3 sm:ml-auto sm:w-auto sm:border-0 sm:pt-0">
                 <p className="mun-label mb-1">{t("outcome")}</p>
                 {total > 0 ? (
@@ -369,7 +395,6 @@ export function VotingPanel({
           </div>
         ) : (
           <div className="mt-4 space-y-4">
-            {chairSettings}
             <div className="mun-inset flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
               <span>
                 <span className="mun-label mr-1">{t("yes")}</span>
@@ -379,6 +404,12 @@ export function VotingPanel({
                 <span className="mun-label mr-1">{t("no")}</span>
                 <span className="font-semibold tabular-nums text-brand-navy">{no}</span>
               </span>
+              {abstainAllowedForItem ? (
+                <span>
+                  <span className="mun-label mr-1">{t("abstain")}</span>
+                  <span className="font-semibold tabular-nums text-brand-navy">{abstainCount}</span>
+                </span>
+              ) : null}
               <span>
                 <span className="mun-label mr-1">{t("total")}</span>
                 <span className="font-semibold tabular-nums text-brand-navy">{total}</span>
@@ -394,26 +425,32 @@ export function VotingPanel({
               ) : null}
             </div>
             {canManageVotes ? (
-              <div className="mun-inset space-y-2">
-                <p className="mun-label">{t("delegateRollCall", { count: roster.length })}</p>
+              <div className="mun-inset space-y-2 border border-[var(--hairline)] bg-[color:color-mix(in_srgb,var(--color-text)_4%,transparent)] px-3 py-3">
+                <div className="space-y-0.5">
+                  <p className="mun-label">{t("delegateRollCall", { count: roster.length })}</p>
+                  <p className="text-xs text-brand-muted leading-relaxed">{t("chairRecordVotesHint")}</p>
+                </div>
                 {roster.length === 0 ? (
                   <p className="mun-muted">{t("noSeatedDelegates")}</p>
                 ) : (
                   <div className="max-h-[26rem] overflow-y-auto pr-1">
                     <div className="mun-group-list">
                     {roster.map((row) => {
-                      const recorded = voteMap[row.userId];
-                      const abstainAllowedByVoteType =
-                        item.vote_type === "resolution" || item.vote_type === "amendment";
-                      const canAbstain = abstainAllowedByVoteType && row.rollAttendance !== "present_voting";
+                      const recorded = recordedForRow(row);
+                      const canClickAbstain =
+                        abstainAllowedForItem && row.rollAttendance !== "present_voting";
+                      const canRecord = Boolean(row.userId);
                       return (
                         <div
                           key={`${item.id}-${row.allocationId}`}
                           className="transition-apple"
                         >
-                          <div className="flex flex-wrap items-start justify-between gap-2">
-                            <div>
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div className="min-w-0">
                               <p className="font-medium text-brand-navy">{row.country}</p>
+                              {!canRecord ? (
+                                <p className="mt-0.5 text-xs text-brand-muted">{t("unseatedPlacard")}</p>
+                              ) : null}
                               <p className="mt-0.5 text-xs text-brand-muted">
                                 {t("rollPrefix")} {rollAttendanceLabel(row.rollAttendance)} · {t("recordedPrefix")}{" "}
                                 <span className="font-medium text-brand-navy">
@@ -427,38 +464,66 @@ export function VotingPanel({
                                 </span>
                               </p>
                             </div>
-                            <div className="flex flex-wrap gap-2">
-                              <button
-                                type="button"
-                                onClick={() => void recordVoteForMotion(item.id, row.userId, "yes")}
-                                className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
-                              >
-                                {t("yes")}
-                              </button>
-                              {canAbstain ? (
+                            {canRecord ? (
+                            <div
+                              className="flex min-w-0 flex-col items-stretch gap-1.5 sm:items-end"
+                              role="group"
+                              aria-label={`${row.country}: ${t("recordVoteChoice")}`}
+                            >
+                              <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted sm:text-right">
+                                {t("recordVoteChoice")}
+                              </p>
+                              <div className="flex flex-wrap gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--color-bg-page)] p-2 sm:justify-end">
                                 <button
                                   type="button"
-                                  onClick={() => void recordVoteForMotion(item.id, row.userId, "abstain")}
-                                  className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500"
+                                  onClick={() => void recordVoteForMotion(item.id, row.userId as string, "yes")}
+                                  className="rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
                                 >
-                                  {t("abstain")}
+                                  {t("yes")}
                                 </button>
-                              ) : null}
-                              <button
-                                type="button"
-                                onClick={() => void recordVoteForMotion(item.id, row.userId, "no")}
-                                className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600"
-                              >
-                                {t("no")}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => void clearVoteForMotion(item.id, row.userId)}
-                                className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
-                              >
-                                {t("clear")}
-                              </button>
+                                {abstainAllowedForItem ? (
+                                  <button
+                                    type="button"
+                                    disabled={!canClickAbstain}
+                                    title={
+                                      !canClickAbstain ? t("abstainDisabledPresentVotingRoll") : undefined
+                                    }
+                                    onClick={() =>
+                                      canClickAbstain
+                                        ? void recordVoteForMotion(item.id, row.userId as string, "abstain")
+                                        : undefined
+                                    }
+                                    className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-amber-600"
+                                  >
+                                    {t("abstain")}
+                                  </button>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    disabled
+                                    title={t("abstainNotApplicableMotionType")}
+                                    className="rounded-lg bg-amber-600/35 px-3 py-1.5 text-xs font-medium text-white/80 cursor-not-allowed opacity-50"
+                                  >
+                                    {t("abstain")}
+                                  </button>
+                                )}
+                                <button
+                                  type="button"
+                                  onClick={() => void recordVoteForMotion(item.id, row.userId as string, "no")}
+                                  className="rounded-lg bg-rose-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-rose-600"
+                                >
+                                  {t("no")}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => void clearVoteForMotion(item.id, row.userId as string)}
+                                  className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
+                                >
+                                  {t("clear")}
+                                </button>
+                              </div>
                             </div>
+                            ) : null}
                           </div>
                         </div>
                       );
@@ -468,13 +533,14 @@ export function VotingPanel({
                 )}
               </div>
             ) : null}
+            {chairSettings}
             {canManageVotes ? (
               <button
                 type="button"
                 className="mun-btn border-rose-300/80 text-rose-800 hover:bg-rose-50 dark:border-rose-500/35 dark:text-rose-200 dark:hover:bg-rose-950/40"
                 onClick={() => void setClosed(item.id, true)}
               >
-                {t("closeMotion")}
+                {isAgendaFloor ? t("closeAgendaBallot") : t("closeMotion")}
               </button>
             ) : null}
           </div>
@@ -485,8 +551,20 @@ export function VotingPanel({
 
   return (
     <div className="space-y-8">
-      {voteItems.length === 0 ? (
-        <p className="mun-muted">{t("noMotions")}</p>
+      {agendaVoteItems.length > 0 ? (
+        <section className="space-y-3">
+          <h3 className="mun-label">{t("agendaVoteSection")}</h3>
+          <p className="mun-muted text-sm leading-relaxed">{t("agendaVoteSectionHelp")}</p>
+          <div className="space-y-4">
+            {agendaVoteItems.map((i) => renderVoteCard(i as VoteItemRow))}
+          </div>
+        </section>
+      ) : null}
+
+      {motionVoteItems.length === 0 ? (
+        agendaVoteItems.length === 0 ? (
+          <p className="mun-muted">{t("noMotions")}</p>
+        ) : null
       ) : (
         <LocalTabs
           ariaLabel={t("tabs.ariaLabel")}

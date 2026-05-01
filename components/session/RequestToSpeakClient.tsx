@@ -16,7 +16,7 @@ export function RequestToSpeakClient({
   allocationCountry: string | null;
   disabled?: boolean;
 }) {
-  const t = useTranslations("views.session.requestToSpeak");
+  const t = useTranslations("session.requestToSpeak");
   const supabase = useMemo(() => createClient(), []);
   const [purpose, setPurpose] = useState("");
   const [msg, setMsg] = useState<string | null>(null);

@@ -99,8 +99,8 @@ export function CommitteeRoomDigitalMUNClient({
   delegates: { id: string; name: string | null }[];
   chairs: { id: string; name: string | null }[];
 }) {
-  const t = useTranslations("views.committeeRoom");
-  const ts = useTranslations("views.session.requestToSpeak");
+  const t = useTranslations("committeeRoom");
+  const ts = useTranslations("session.requestToSpeak");
   const role = myRole.toLowerCase();
   const isDelegate = role === "delegate";
   /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */

@@ -26,7 +26,7 @@ export function SourcesView({
   canEditAll: boolean;
 }) {
   const tc = useTranslations("common");
-  const t = useTranslations("views.sources");
+  const t = useTranslations("sources");
   const router = useRouter();
   const [items, setItems] = useState(sources);
   const [selectedId, setSelectedId] = useState<string | null>(() => sources[0]?.id ?? null);

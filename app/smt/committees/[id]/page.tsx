@@ -19,7 +19,7 @@ import {
 import { loadCommitteeRoomPayload } from "@/lib/committee-room-payload";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
@@ -45,6 +45,7 @@ export default async function SmtCommitteeLivePage({
   const tNames = await getTranslations("committeeNames.full");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
+  const locale = await getLocale();
   const { id } = await params;
   const supabase = await createClient();
   const eventId = await getActiveEventId();
@@ -181,7 +182,7 @@ export default async function SmtCommitteeLivePage({
 
         <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <MetaItem label={t("sessionTopicAgenda")}>
-            {conf.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name) : "—"}
+            {conf.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name, locale) : "—"}
           </MetaItem>
           {conf.tagline?.trim() ? (
             <MetaItem label={t("tagline")}>{conf.tagline}</MetaItem>
@@ -258,7 +259,9 @@ export default async function SmtCommitteeLivePage({
           {t("digitalRoomDescription")}
         </p>
         <VirtualCommitteeRoom
-          conferenceName={conf.name ? translateAgendaTopicLabel(tTopics, conf.name) : t("conferenceFallback")}
+          conferenceName={
+            conf.name ? translateAgendaTopicLabel(tTopics, conf.name, locale) : t("conferenceFallback")
+          }
           committeeName={
             conf.committee?.trim()
               ? translateCommitteeLabel(tCommitteeLabels, conf.committee)

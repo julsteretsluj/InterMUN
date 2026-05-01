@@ -27,6 +27,7 @@ import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
 } from "@/components/chair/ChairSpeakerQueuePanel";
+import { CommitteeAgendaVotesTab } from "@/components/chair/CommitteeAgendaVotesTab";
 import {
   BUILTIN_TIMER_PRESETS,
   presetToTimerFields,
@@ -251,6 +252,7 @@ type DisciplinaryRow = {
 
 /** Dashboard splits session tools across routes; committee room uses `"all"`. */
 export type SessionFloorSection =
+  | "agenda"
   | "motions"
   | "discipline"
   | "timer"
@@ -281,11 +283,10 @@ export function SessionControlClient({
   activeSection?: SessionFloorSection;
 }) {
   const tTopics = useTranslations("agendaTopics");
-  const tTopicUi = useTranslations("chairTopicTabs");
-  const tTimer = useTranslations("views.session.timerPage");
+  const tTimer = useTranslations("session.timerPage");
   const tSessionControl = useTranslations("sessionControlClient");
   const tDiscipline = useTranslations("chairMotionsPointsLog");
-  const tVoting = useTranslations("views.voting");
+  const tVoting = useTranslations("voting");
   const tCommitteeLabels = useTranslations("committeeNames.labels");
   const locale = useLocale();
   const supabase = createClient();
@@ -323,8 +324,8 @@ export function SessionControlClient({
     [locale]
   );
   const displayConferenceTitle = useMemo(
-    () => translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle),
-    [conferenceTitle, tTopics, tCommitteeLabels]
+    () => translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle, locale),
+    [conferenceTitle, locale, tTopics, tCommitteeLabels]
   );
   const canonicalConferenceId = canonicalConferenceIdProp ?? conferenceId;
   const initialDebateConferenceId = debateConferenceIdProp ?? conferenceId;
@@ -1044,7 +1045,9 @@ export function SessionControlClient({
     }
 
     const usedAgendaNames = new Set<string>();
-    const unclosed = (unclosedRows as MotionRow[]) ?? [];
+    const unclosed = ((unclosedRows as MotionRow[]) ?? []).filter(
+      (m) => m.procedure_code !== "agenda_floor"
+    );
     for (const m of unclosed) {
       if (m.procedure_code !== "set_agenda") continue;
       const name = (m.title ?? "").trim();
@@ -2664,49 +2667,36 @@ export function SessionControlClient({
   return (
     <div className="space-y-10">
       <p className="text-sm text-brand-muted">{displayConferenceTitle}</p>
-      {(debateTopicOptions?.length ?? 0) > 1 ? (
-        <div className="rounded-xl border border-white/15 bg-black/20 px-3 py-3 space-y-2.5">
-          <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
-            {tSessionControl("liveDebateTopic")}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {(debateTopicOptions ?? []).map((t) => {
-              const isActive = floorConferenceId === t.id;
-              return (
-                <button
-                  key={t.id}
-                  type="button"
-                  disabled={pending || isActive}
-                  onClick={() => {
-                    startTransition(async () => {
-                      const r = await setActiveDebateTopicAction(t.id);
-                      if (r.error) setMsg(r.error);
-                      else setMsg(null);
-                    });
-                  }}
-                  className={[
-                    "rounded-lg border px-3 py-2 text-sm transition-colors disabled:opacity-60",
-                    isActive
-                      ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy font-medium"
-                      : "border-white/20 bg-black/25 text-brand-navy hover:bg-black/20",
-                  ].join(" ")}
-                  aria-pressed={isActive}
-                >
-                  {translateAgendaTopicLabel(tTopics, t.label)}
-                </button>
-              );
-            })}
-          </div>
-          <p className="max-w-2xl text-xs text-brand-muted">
-            {tTopicUi("sessionControlHint")}
-          </p>
-        </div>
-      ) : null}
       {msg && (
         <p className="rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
           {msg}
         </p>
       )}
+
+      {show("agenda") ? (
+        <section className="space-y-3">
+          <div className="flex items-center justify-between gap-3">
+            <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
+            <HelpButton title={tSessionControl("tabAgenda")}>{tSessionControl("agendaTabHelp")}</HelpButton>
+          </div>
+          {(debateTopicOptions?.length ?? 0) > 0 ? (
+            <CommitteeAgendaVotesTab
+              topics={debateTopicOptions ?? []}
+              liveTopicId={floorConferenceId}
+              pending={pending}
+              onSetLiveTopic={(topicId) => {
+                startTransition(async () => {
+                  const r = await setActiveDebateTopicAction(topicId);
+                  if (r.error) setMsg(r.error);
+                  else setMsg(null);
+                });
+              }}
+            />
+          ) : (
+            <p className="text-sm text-brand-muted">{tSessionControl("noTopicsAvailable")}</p>
+          )}
+        </section>
+      ) : null}
 
       {show("motions") || show("discipline") ? (
       <section className="space-y-3">
@@ -3384,7 +3374,7 @@ export function SessionControlClient({
                 <span className="inline-flex items-center gap-1.5">
                   {tSessionControl("recordVotesLabel")} —{" "}
                   {activeMotionForRecordedVotes?.title?.trim()
-                    ? translateAgendaTopicLabel(tTopics, activeMotionForRecordedVotes.title)
+                    ? translateAgendaTopicLabel(tTopics, activeMotionForRecordedVotes.title, locale)
                     : tSessionControl("currentMotion")}
                   <HelpButton title={tSessionControl("recordVotesLabel")}>
                     {tSessionControl("recordVotesHelp")}
@@ -3889,7 +3879,7 @@ export function SessionControlClient({
                 {openVotingMotions.map((m) => (
                   <option key={m.id} value={m.id}>
                     {m.title?.trim()
-                      ? translateAgendaTopicLabel(tTopics, m.title)
+                      ? translateAgendaTopicLabel(tTopics, m.title, locale)
                       : tTimer("untitled")}{" "}
                     · {formatVoteTypeLabel(tVoting, m.vote_type)}
                     {m.procedure_code ? ` (${m.procedure_code})` : ""}

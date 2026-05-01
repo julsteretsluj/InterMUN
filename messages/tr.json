@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Önce ifadeler için hareket alanını açın.",
     "openMotionBlocksRecording": "Bir önerge zaten oylamaya açık. Daha fazla ifadeyi kaydetmeden önce kapatın.",
     "statedMotionRecorded": "Belirtilen önerge kaydedildi (henüz oylamaya açık değil).",
-    "statedMotionRemoved": "Belirtilen önerge kaldırıldı."
+    "statedMotionRemoved": "Belirtilen önerge kaldırıldı.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• Puan günlüğü",
     "formalMotions": "Resmi hareketler",
     "timer": "Zamanlayıcı",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -835,7 +852,8 @@
       "archive": "Arşiv",
       "officialLinks": "Resmi bağlantılar",
       "roomCode": "Oda kodu",
-      "settings": "Ayarlar"
+      "settings": "Ayarlar",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "BM Üye Devletleri",
       "unSystem": "BM Sistemi (kurucular ve üyeler)",
       "history": "BM Tarihi"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Kaynak ekle",
-      "sourceUrl": "Kaynak URL'si",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (önerilen)",
-      "urlHelp": "Yeni bir Google Dokümanı için düğmeyi kullanın ve doküman bağlantısını buraya yapıştırın.",
-      "titleOptional": "Başlık (isteğe bağlı)",
-      "saveChanges": "Değişiklikleri kaydet",
-      "editSource": "Kaynağı düzenle",
-      "urlPlaceholderShort": "Google Dokümanı veya başka bir URL",
-      "empty": "Henüz kaynak yok. Burada açmak için bir Google Dokümanı bağlantısı ekleyin.",
-      "sourceLabel": "Kaynak",
-      "openLink": "Bağlantıyı aç",
-      "embedHeading": "Kaynak belge",
-      "notGoogleDoc": "Bu URL bir Google Dokümanı değil. Buraya yerleştirmek ve düzenlemek için docs.google.com/document/d/… bağlantısını kullanın; aksi takdirde yukarıdaki bağlantıyı açın."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Delegeler Pozisyon Belgelerini doğrudan yükleyemez. Başka bir belge türü kullanın.",
-      "alertOnlyChairsPositionPaper": "Pozisyon Belgelerini yalnızca başkanlar/SMT/yönetici yükleyebilir.",
-      "alertOnlySmtChairReport": "Başkan Raporlarını yalnızca SMT/yönetici yükleyebilir.",
-      "alertOnlySmtRop": "Yalnızca SMT/yönetici RoP belgelerini yükleyebilir.",
-      "alertOnlySmtAwardCriteria": "Yalnızca SMT/yönetici Ödül Kriterleri belgelerini yükleyebilir.",
-      "alertNeedContentOrUrl": "Yerel metin içeriği veya bir Google Dokümanlar URL'si ekleyin.",
-      "confirmDelete": "Bu doküman silinsin mi?",
-      "delegatePrepTitle": "Belge hazırlama bölümü",
-      "delegatePrepBody": "Kendi <prep>Hazırlık belgelerinizi</prep> doğrudan bu sayfadan yükleyebilir, görüntüleyebilir ve düzenleyebilirsiniz.",
-      "positionPaperGuideTitle": "Kağıt kılavuzunu konumlandırın",
-      "positionPaperGuideBlurb": "Son PDF hazırlanırken yer tutucu kılavuzunu indirin.",
-      "downloadPlaceholderGuide": "Yer tutucu kılavuzunu indirin",
-      "addDocument": "Belge ekle",
-      "tabs": {
-        "ariaLabel": "Belge bölümleri",
-        "library": "Kütüphane",
-        "compose": "Oluştur",
-        "composeHint": "Bu sekmeden yeni bir belge başlatın veya mevcut bir taslağı düzenleyin."
-      },
-      "newDocumentTitle": "Yeni belge",
-      "editDocumentTitle": "Dokümanı düzenle",
-      "typeLabel": "Tip",
-      "types": {
-        "position_paper": "Kağıdı konumlandırın",
-        "chair_report": "Sandalye raporu",
-        "rop": "RoP",
-        "award_criteria": "Ödül kriterleri",
-        "chair_notes": "Sandalye notları",
-        "prep_doc": "Belgeyi hazırlayın"
-      },
-      "delegatePositionPaperNote": "Pozisyon kağıtları geri bildirimle birlikte başkanlar tarafından yüklenir.",
-      "delegateOwner": "Yetki sahibi",
-      "chairRecipient": "Sandalye alıcısı",
-      "titleLabel": "Başlık",
-      "titlePlaceholder": "Belge başlığı",
-      "googleDocsUrl": "Google Dokümanlar URL'si",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (uygulamaya görüntüleme/düzenleme yerleştirme)",
-      "googleDocsHelp": "Google'ı yeni bir sekmede açmak için Yeni Google Dokümanı'nı kullanın, ardından doküman bağlantısını buraya yapıştırın. Aşağıdaki düz metin isteğe bağlıdır. Her belgenin ya yerel metne, bir Google Doküman bağlantısına ya da her ikisine birden ihtiyacı vardır.",
-      "plainTextOptional": "Düz metin (isteğe bağlı)",
-      "plainTextPlaceholder": "Notlar veya taslak metin…",
-      "chairFeedbackLabel": "Sandalye geribildirimi",
-      "chairFeedbackPlaceholder": "Delege pozisyonu belgesi için geri bildirim...",
-      "empty": "Henüz belge yok. Bir tane ekleyin veya bir Google Dokümanı bağlayın.",
-      "sidebarDocumentLabel": "Belge",
-      "sections": {
-        "chairReports": "Sandalye raporları",
-        "rop": "RoP",
-        "awardCriteria": "Ödül kriterleri",
-        "prepDocuments": "Belgeleri hazırlayın",
-        "chairNotes": "Sandalye notları",
-        "otherDocuments": "Diğer belgeler"
-      },
-      "untitled": "İsimsiz",
-      "linkedDocumentHeading": "Bağlantılı belge",
-      "notesHeading": "Notlar",
-      "noGoogleDocYet": "Henüz bağlı bir Google Dokümanı yok. docs.google.com/document/d/… URL'si eklemek için Düzenle'yi kullanın.",
-      "chairFeedbackHeading": "Sandalye geribildirimi",
-      "noFeedbackYet": "Henüz geri bildirim eklenmedi."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Önce bir temsilci e-postası girin.",
-      "sentToDelegate": "{email} adresine gönderildi.",
-      "newResolution": "Yeni Çözünürlük",
-      "maxDraftResolutions": "Bu komitenin halihazırda {count} karar taslağı var.",
-      "googleDocLink": "Google Doküman bağlantısı",
-      "googleDocUrlPlaceholder": "Google Dokümanlar URL'si (docs.google.com/document/d/… — yerleştirme + düzenleme için kullanılır)",
-      "googleDocUrlHelp": "Yeni Google Dokümanı başka bir sekmede açılır; URL'yi adres çubuğundan kopyalayıp buraya yapıştırın.",
-      "mainSubmittersPlaceholder": "Ana gönderenler (kullanıcı kimlikleri, virgülle ayrılmış)",
-      "coSubmittersPlaceholder": "Ortak gönderenler (kullanıcı kimlikleri, virgülle ayrılmış)",
-      "create": "Yaratmak",
-      "cancel": "İptal etmek",
-      "openInNewTab": "Yeni sekmede aç",
-      "noGoogleDocLink": "Google Dokümanı bağlantısı yok",
-      "visibleToOtherBloc": "Diğer blok tarafından görülebilir",
-      "resolutionCounts": "Ana alt bölümler: {ana} | Ortak aboneler: {co} | İmzacılar: {imzacılar}",
-      "blocButton": "Blok {name} ({duruş})",
-      "signVirtually": "Sanal olarak imzalayın (ana abonelere bilgi verilir)",
-      "shareByEmail": "Çözünürlüğü e-postayla paylaşın",
-      "delegateEmailPlaceholder": "delege@e-posta.com",
-      "sendToDelegate": "Temsilciye gönder",
-      "clauseEditor": "Madde düzenleyici",
-      "noClausesYet": "Henüz hüküm yok.",
-      "clauseNumber": "Madde {sayı}",
-      "saveClause": "Maddeyi kaydet",
-      "delete": "Silmek",
-      "addClausePlaceholder": "Yeni bir madde ekle...",
-      "addClause": "Madde ekle",
-      "clauseVoteHistory": "Madde oylama geçmişi",
-      "noClauseOutcomesYet": "Henüz kayıtlı madde oylama sonucu yok.",
-      "clauseFallback": "Madde",
-      "passed": "GEÇTİ",
-      "failed": "ARIZALI",
-      "motionId": "Hareket {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Oylama bölümleri",
-        "open": "Açık",
-        "closed": "Kapalı"
-      },
-      "requiredMajority": "Gerekli çoğunluk",
-      "helpRequiredMajorityTitle": "Gerekli çoğunluk",
-      "helpRequiredMajorityBody": "Başarılı/başarısız kararı vermek için kullanılan oy eşiğini seçin. 'Basit' yarıdan fazladır. '2/3' salt çoğunluk gerektirir.",
-      "majoritySimple": "Basit",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} çoğunluk",
-      "mustVote": "Oy vermek ZORUNLUDUR",
-      "helpMustVoteTitle": "Oy vermek ZORUNLUDUR",
-      "helpMustVoteBody": "Bu önergeyi \"oy verilmesi gereken\" bir madde olarak işaretler. Bu, gereklilikleri katılımcılara iletmek için kullanılır (komitenizin kurulumuna bağlı olarak).",
-      "saveSettings": "Ayarları kaydet",
-      "delegateBlurb": "Kürsü oturumdaki oyları kaydeder (örn. yoklama). Buradaki önerge oyları yalnızca Evet/Hayır'ı takip eder (çekimserlik kullanılmaz). Puantajı takip edebilirsiniz; delegeler uygulamada oy kullanmaz.",
-      "yes": "Evet",
-      "no": "HAYIR",
-      "ballots": "Oy pusulaları",
-      "total": "Toplam",
-      "outcome": "Sonuç",
-      "passed": "Geçti",
-      "failed": "Arızalı",
-      "noRecordedVotes": "Kayıtlı oy yok",
-      "reopenMotion": "Hareketi yeniden aç",
-      "editRecordOpen": "Kaydı düzenle…",
-      "hideSettings": "Ayarları gizle",
-      "preliminaryPassing": "Geçme (ön)",
-      "preliminaryFailing": "Başarısız (ön)",
-      "delegateRollCall": "Delege yoklaması ({count})",
-      "noSeatedDelegates": "Bu önerge için oturan delege yok.",
-      "rollPrefix": "Rulo:",
-      "recordedPrefix": "Kaydedildi:",
-      "recordedYes": "Evet",
-      "recordedNo": "HAYIR",
-      "recordedAbstain": "Çekimser",
-      "recordedNone": "—",
-      "abstain": "Çekimser",
-      "clear": "Temizlemek",
-      "closeMotion": "Hareketi kapat",
-      "mustVoteBadge": "Oy vermek ZORUNLUDUR",
-      "canVoteBadge": "Oy verebilirim",
-      "noMotions": "Henüz herhangi bir hareket yok.",
-      "currentOpenMotion": "Mevcut açık hareket",
-      "noOpenMotion": "Şu anda açık hareket yok.",
-      "recentClosedMotions": "Son kapatılan hareketler",
-      "noClosedMotions": "Henüz kapalı hareket yok.",
-      "untitled": "İsimsiz",
-      "voteTypes": {
-        "motion": "Hareket",
-        "amendment": "Değişiklik",
-        "resolution": "Çözünürlük"
-      },
-      "roll": {
-        "absent": "Yok (rulo)",
-        "present_abstain": "Mevcut - çekimser kalabilir (yuvarlanır)",
-        "present_voting": "Sunum ve oylama (roll)",
-        "unknown": "- (rulo)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Profil bölümleri",
-        "overview": "Genel Bakış",
-        "awards": "Ödüller",
-        "private": "Özel kayıtlar",
-        "settings": "Profil ayarları"
-      },
-      "profilePicture": "Profil resmi",
-      "uploadFile": "Dosya yükle",
-      "uploading": "Yükleniyor…",
-      "photoSaved": "Fotoğraf yüklendi ve kaydedildi.",
-      "orUrl": "Veya URL'ye göre ayarlayın",
-      "urlPlaceholder": "https://...",
-      "name": "İsim",
-      "username": "Kullanıcı adı",
-      "usernamePlaceholder": "örneğin alex_1999",
-      "pronouns": "Zamirler",
-      "customPronounNote": "Profilinizde artık burada kabul edilmeyen özel bir zamir grubu vardı. Yukarıdaki seçeneklerden birini seçin (veya boş bırakın). Kaydetme eski değerin yerini alır.",
-      "school": "Okul",
-      "schoolPlaceholder": "örneğin Lincoln Lisesi",
-      "grade": "Seviye",
-      "selectGrade": "Notu seçin",
-      "conferencesAttended": "Katıldığı konferanslar",
-      "awardsComma": "Ödüller (virgülle ayrılmış)",
-      "awardsPlaceholder": "En İyi Delege, Mansiyon",
-      "allocation": "Paylaştırma",
-      "selectAllocation": "Tahsis seçin",
-      "noAllocationsPlaceholder": "Komite tahsisi mevcut değil",
-      "saveProfile": "Profili kaydet",
-      "saved": "Profil kaydedildi.",
-      "saveFailed": "Profil kaydedilemedi.",
-      "errUsernamePattern": "Kullanıcı adı 3-32 karakterden oluşmalıdır (harfler, sayılar, _, ., -)",
-      "errPronounsPreset": "Listeden bir zamir seçin.",
-      "errImageType": "Lütfen bir resim dosyası seçin.",
-      "errImageSize": "Resim çok büyük (maks. 5 MB).",
-      "errUploadFailed": "Yükleme başarısız oldu.",
-      "errStorageSetup": "Profil resmi depolama alanı ayarlanmadı. Supabase projesinde, 00100_profile_pictures_storage_bucket.sql geçişini çalıştırın veya profil resimleri adında bir genel depolama grubu oluşturun (bkz. README).",
-      "errPublicUrl": "Yüklenen görselin genel URL'si çözümlenemedi.",
-      "fallbacks": {
-        "yourCountry": "senin ülken",
-        "committeeSession": "Komite oturumu",
-        "delegate": "Temsilci",
-        "speechNote": "Konuşma notu",
-        "untitledMotion": "Başlıksız hareket",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "{flag} {country} ülkesinin temsilcisine hoş geldiniz",
-        "subtitle": "Neyle başlamak istersin?",
-        "links": {
-          "documents": "Belgeler",
-          "notes": "Notlar",
-          "committeeRoom": "Komite odası",
-          "runningNotes": "Notları Çalıştırma",
-          "ideas": "Fikirler",
-          "guides": "Kılavuzlar",
-          "sources": "Kaynaklar",
-          "resolutions": "Çözünürlükler",
-          "speeches": "Konuşmalar",
-          "stances": "Duruşlar",
-          "crisisSlides": "Kriz slaytları",
-          "report": "Rapor",
-          "motions": "Hareketler",
-          "points": "Puanlar"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Profilinizdeki ödüller",
-        "rank": "rütbe",
-        "pending": {
-          "tab": "Bekleyen adaylıklar",
-          "title": "Başkanlık adaylıkları bekleniyor",
-          "descriptionSingle": "Sandalyeler tarafından kaydedildi ve incelenmek üzere SMT ile paylaşıldı. Nihai ödüller, onaylandıktan sonra aşağıda görünür.",
-          "descriptionTabbed": "Sandalyeler tarafından kaydedildi ve incelenmek üzere SMT ile paylaşıldı. Nihai ödüller onaylandıktan sonra görünür."
-        },
-        "recorded": {
-          "tab": "Kaydedilen ödüller",
-          "title": "Kaydedilen ödüller",
-          "description": "Ödül izleyicide sandalyeler veya SMT sizi atadığında listelenir. Son tanınma konferansınızın kurallarına göre yapılır."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Yalnızca siz, komite başkanları ve ilgili komitenin SMT'si görebilir.",
-        "points": {
-          "title": "Sandalye noktaları (özel)"
-        },
-        "speechNotes": {
-          "title": "Başkan konuşma notları (özel)"
-        },
-        "motions": {
-          "title": "Taşıdığınız hareketler",
-          "description": "Komite incelemesi ve SMT gözetimi için profilinize kaydedildi."
-        }
-      },
-      "discipline": {
-        "title": "Disiplin durumu (özel)",
-        "statusLine": "Uyarılar: {warnings} · İhtarlar: {strikes}{votingDisabled}{speakingSuspending}{removedFromCommittee}",
-        "votingDisabled": "oylama devre dışı bırakıldı",
-        "speakingSuspended": "konuşma askıya alındı",
-        "removedFromCommittee": "komiteden çıkarıldı",
-        "updated": "Güncellendi: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Profil önizlemesi",
-        "title": "Önizleme",
-        "yourName": "Adınız",
-        "usernameNotSet": "Kullanıcı adı ayarlanmadı",
-        "gradeValue": "Sınıf {derece}",
-        "awards": "Ödüller"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Prosedür Kuralları (RoP)",
-          "content": "# Usul Kuralları \n\n## Noktalar ve Hareketler \n- **Sipariş Noktası**: Doğru prosedür \n- **Bilgi Noktası**: Konuşmacıya soru \n- **Kişisel Ayrıcalık Noktası**: Kişisel konfor \n- **Masaya Öneri**: Tartışmayı erteleyin \n- **Erteleme Önergesi**: Oturumun sonlandırılması \n\n## Oylama \n- Usuli konularda basit çoğunluk \n- Esasa ilişkin konularda 2/3 çoğunluk \n- İstenirse yoklamayla oylama"
-        },
-        "examples": {
-          "title": "Örnekler",
-          "content": "# Örnekler \n\n## Çözünürlük Formatı \n'''' \nGenel Kurul, \n... \n1. Üye devletlere çağrıda bulunur: \n2. Uluslararası topluma çağrıda bulunur: \n'''' \n\n## Kağıt Yapısını Konumlandırın \n1. Arka Plan \n2. Ülke Politikası \n3. Önerilen Çözümler"
-        },
-        "templates": {
-          "title": "Şablonlar",
-          "content": "# Şablonlar \n\n## Sandalye Rapor Şablonu \n- Komiteye genel bakış \n- Temel tartışma noktaları \n- Alınan kararlar \n- Öneriler"
-        },
-        "chairReport": {
-          "title": "Sandalye Raporu",
-          "content": "# Sandalye Raporu \n\nBelge komitesi işlemleri ve sonuçları burada."
-        }
-      },
-      "edit": "Düzenlemek",
-      "guideDocument": "Kılavuz belgesi",
-      "additionalNotes": "Ek notlar",
-      "noContentYet": "Henüz içerik yok.",
-      "titlePlaceholder": "Başlık",
-      "googleDocsUrl": "Google Dokümanlar URL'si",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Yeni Google Dokümanı başka bir sekmede açılır. Yetki verilenlerin dokümanı burada açabilmesi için paylaşılabilir bir bağlantı yapıştırın (görüntüleme/düzenleme Google paylaşımına bağlıdır).",
-      "markdownOptional": "İşaretleme notları (Google Dokümanı kullanıyorsanız isteğe bağlıdır)",
-      "save": "Kaydetmek",
-      "cancel": "İptal etmek",
-      "createNewGuide": "Yeni rehber oluştur",
-      "slugPlaceholder": "sümüklüböcek (benzersiz)",
-      "titleLowerPlaceholder": "başlık",
-      "googleDocsUrlOptional": "Google Dokümanlar URL'si (isteğe bağlı)",
-      "markdownContentOptional": "İşaretleme içeriği (isteğe bağlı)",
-      "create": "Yaratmak",
-      "glossary": {
-        "title": "MUN Gündemi Sözlüğü",
-        "subtitle": "Komite kurallarınız ve güncel gündem konularınızla eşleşen benzersiz terminoloji.",
-        "committeeCode": "Komite kodu: {code}",
-        "topicTag": "Konu: {konu}",
-        "sources": {
-          "core": "çekirdek",
-          "committee": "komite",
-          "topic": "başlık"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Delegasyon",
-            "definition": "Komitede bir devleti veya birimi temsil eden bir ülke veya gözlemci ekibi."
-          },
-          "placard": {
-            "term": "Pankart",
-            "definition": "Söz istemek, oy vermek ve usul önergelerini bildirmek için kullanılan ülke işareti."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Tartışmayı yöneten, prosedürü uygulayan ve konuşma sırasını yöneten başkanlık ekibi."
-          },
-          "quorum": {
-            "term": "Yeter Sayısı",
-            "definition": "Resmi işleri ve oyları yürütmek için gereken minimum delegasyon sayısı."
-          },
-          "motion": {
-            "term": "Hareket",
-            "definition": "Toplantı türü veya konuşma süresi gibi tartışmanın akışını değiştirmeye yönelik resmi teklif."
-          },
-          "point_of_order": {
-            "term": "Sipariş Noktası",
-            "definition": "Prosedürün komite kurallarına göre yanlış uygulanması durumunda müdahale."
-          },
-          "moderated_caucus": {
-            "term": "Yönetilen Grup Toplantısı",
-            "definition": "Tanımlanmış bir alt konu hakkında kısa süreli konuşmalar içeren yapılandırılmış tartışma bölümü."
-          },
-          "unmoderated_caucus": {
-            "term": "Denetlenmeyen Grup Toplantısı",
-            "definition": "Delegelerin fikirleri taslak haline getirmek ve birleştirmek için serbestçe hareket ettiği resmi olmayan müzakere dönemi."
-          },
-          "draft_resolution": {
-            "term": "Taslak Çözünürlüğü",
-            "definition": "Nihai oylama ve kabul edilmeden önce önerilen komite eyleminin çalışma metni."
-          },
-          "amendment": {
-            "term": "Değişiklik",
-            "definition": "Taslak metinde değişiklik yapılması önerildi; dostane veya düşmanca olarak oylandı."
-          },
-          "operative_clause": {
-            "term": "Geçerli Madde",
-            "definition": "Komitenin ne yapmayı önerdiğini açıklayan eylem odaklı numaralı madde."
-          },
-          "preambulatory_clause": {
-            "term": "Preambulatuar Madde",
-            "definition": "Arka plan ilkelerini, endişeleri ve önceki çerçeveleri belirten bağlam belirleme maddesi."
-          },
-          "right_of_reply": {
-            "term": "Cevap Hakkı",
-            "definition": "Delegasyonun saygınlığını veya konumunu etkileyen doğrudan bir açıklamaya yanıt verme fırsatı."
-          },
-          "veto_power": {
-            "term": "Veto Gücü",
-            "definition": "BMGK daimi üye yetkisi, esaslı karar taslaklarını engelleme yetkisine sahiptir."
-          },
-          "chapter_vii": {
-            "term": "Bölüm VII",
-            "definition": "Barışa yönelik tehditler, yaptırımlar ve güç kullanımı tedbirlerine ilişkin BM Şartı otoritesi."
-          },
-          "sanctions_regime": {
-            "term": "Yaptırım Rejimi",
-            "definition": "Doğrudan askeri eylem olmadan davranışı etkilemek için kullanılan koordineli kısıtlamalar."
-          },
-          "arms_control": {
-            "term": "Silah Kontrolü",
-            "definition": "Silah türlerini, miktarlarını veya konuşlandırılmasını sınırlayan anlaşmalar ve doğrulama sistemleri."
-          },
-          "non_proliferation": {
-            "term": "Nükleer Silahların Yayılmasının Önlenmesi",
-            "definition": "Nükleer, kimyasal, biyolojik veya gelişmiş silah kabiliyetlerinin yayılmasını önlemeye yönelik politikalar."
-          },
-          "confidence_building_measures": {
-            "term": "Güven Artırıcı Önlemler",
-            "definition": "Yanlış anlama ve çatışma riskini azaltan şeffaflık ve iletişim araçları."
-          },
-          "universal_periodic_review": {
-            "term": "Evrensel Periyodik İnceleme",
-            "definition": "Her BM üye devletinin rapor verdiği ve hak önerileri aldığı hakemli süreç."
-          },
-          "special_rapporteur": {
-            "term": "Özel Raportör",
-            "definition": "Tematik veya ülke hakları konularını izlemek ve raporlamak üzere atanan bağımsız uzman."
-          },
-          "treaty_body": {
-            "term": "Anlaşma Organı",
-            "definition": "Belirli bir insan hakları sözleşmesinin uygulanmasını denetleyen uzmanlar komitesi."
-          },
-          "public_health_emergency": {
-            "term": "Halk Sağlığı Acil Durumu",
-            "definition": "Acil koordineli ulusal ve uluslararası müdahaleyi gerektiren ciddi salgın olayı."
-          },
-          "surveillance": {
-            "term": "Epidemiyolojik Sürveyans",
-            "definition": "Hastalık eğilimlerini tespit etmek ve takip etmek için sağlık verilerinin sürekli toplanması ve analizi."
-          },
-          "health_systems": {
-            "term": "Sağlık Sistemlerinin Güçlendirilmesi",
-            "definition": "Güvenilir sağlık hizmeti sunumu için iş gücü, finansman, lojistik ve yönetişimin iyileştirilmesi."
-          },
-          "transnational_crime": {
-            "term": "Sınıraşan Organize Suç",
-            "definition": "Ağlar ve yasa dışı pazarlar aracılığıyla sınırlar ötesinde koordine edilen suç faaliyetleri."
-          },
-          "illicit_trafficking": {
-            "term": "Yasadışı Ticaret",
-            "definition": "Uyuşturucunun, silahların, kişilerin veya malların yargı bölgeleri arasında yasa dışı dolaşımı."
-          },
-          "rule_of_law_capacity": {
-            "term": "Hukukun Üstünlüğü Kapasitesi",
-            "definition": "Adalet sistemlerinin hakları adil bir şekilde soruşturma, kovuşturma ve koruma konusundaki kurumsal yeteneği."
-          },
-          "sustainable_development": {
-            "term": "Sürdürülebilir Kalkınma",
-            "definition": "Sosyal ilerlemeyi, ekonomik fırsatı ve çevre korumayı dengeleyen büyüme modeli."
-          },
-          "financing_for_development": {
-            "term": "Kalkınmanın Finansmanı",
-            "definition": "Uzun vadeli kalkınma önceliklerini destekleyen kamu ve özel finansman mekanizmaları."
-          },
-          "policy_coordination": {
-            "term": "Politika Koordinasyonu",
-            "definition": "Tekrarları önlemek ve kolektif etkiyi artırmak için devlet ve kurum eylemlerinin uyumlu hale getirilmesi."
-          },
-          "child_protection": {
-            "term": "Çocuk Koruma",
-            "definition": "Her ortamda çocuklara yönelik sömürüyü, istismarı ve şiddeti önleyici tedbirler."
-          },
-          "education_access": {
-            "term": "Eğitim Erişimi",
-            "definition": "Tüm çocuklar için kapsayıcı, eşitlikçi ve sürekli öğrenme fırsatlarının sağlanması."
-          },
-          "humanitarian_response": {
-            "term": "İnsani Yardım",
-            "definition": "Kriz ve çatışma ortamlarında acil ihtiyaçları karşılayan hızlı yardım eylemleri."
-          },
-          "gender_mainstreaming": {
-            "term": "Cinsiyet Eşitliği",
-            "definition": "Toplumsal cinsiyet analizinin politika tasarımına, uygulamasına ve değerlendirmesine entegre edilmesi."
-          },
-          "gender_based_violence": {
-            "term": "Cinsiyete Dayalı Şiddet",
-            "definition": "Cinsiyet kimliğine, rollere veya eşit olmayan güç ilişkilerine dayalı olarak birine yönelik zarar verme."
-          },
-          "economic_empowerment": {
-            "term": "Ekonomik Güçlendirme",
-            "definition": "İnsana yakışır işe, finansmana, mülkiyete ve karar alma gücüne erişimin genişletilmesi."
-          },
-          "source_attribution": {
-            "term": "Kaynak İlişkilendirmesi",
-            "definition": "İddiaların doğrulanabilmesi ve bağlamsallaştırılabilmesi için bilgilerin kaynağının açıkça belirtilmesi."
-          },
-          "verified_reporting": {
-            "term": "Doğrulanmış Raporlama",
-            "definition": "Tartışmalı gerçekleri yayınlamadan önce onay gerektiren gazetecilik standardı."
-          },
-          "editorial_independence": {
-            "term": "Editoryal Bağımsızlık",
-            "definition": "Raporlama kararlarının siyasi baskıdan veya paydaş etkisinden ayrılması."
-          },
-          "climate_mitigation": {
-            "term": "İklim Azaltımı",
-            "definition": "Sera gazı emisyonlarını azaltan veya uzun vadeli karbon giderimini artıran eylemler."
-          },
-          "climate_adaptation": {
-            "term": "İklime Uyum",
-            "definition": "İklimle ilgili etkilere karşı hassasiyeti azaltan politikalar ve yatırımlar."
-          },
-          "cyber_norms": {
-            "term": "Siber Normlar",
-            "definition": "Dijital ve siber alanlarda sorumlu devlet davranışına ilişkin ortak beklentiler."
-          },
-          "critical_infrastructure": {
-            "term": "Kritik Altyapı",
-            "definition": "Güç, su, sağlık ve iletişim gibi dayanıklılık gerektiren temel sistemler."
-          },
-          "epidemiology": {
-            "term": "Epidemiyoloji",
-            "definition": "Popülasyonlardaki hastalık kalıplarının, nedenlerinin ve dağılımının incelenmesi."
-          },
-          "preparedness_response": {
-            "term": "Hazırlık ve Müdahale",
-            "definition": "Acil durumları kontrol altına almak ve yönetmek için planlama, koordinasyon ve dalgalanma eylemleri."
-          },
-          "non_refoulement": {
-            "term": "Geri Gönderme Yasağı",
-            "definition": "İnsanların ciddi zarara maruz kalacakları yerlere geri dönmesini yasaklayan ilke."
-          },
-          "durable_solutions": {
-            "term": "Dayanıklı Çözümler",
-            "definition": "Yerinden edilmiş kişiler için uzun vadeli sonuçlar: geri dönüş, yerel entegrasyon veya yeniden yerleşim."
-          },
-          "nuclear_safeguards": {
-            "term": "Nükleer Korumalar",
-            "definition": "Nükleer malzemelerin silah kullanımına yönlendirilmemesini sağlayan doğrulama önlemleri."
-          },
-          "counter_terrorism": {
-            "term": "Terörle Mücadele",
-            "definition": "Terörist faaliyetlere karşı entegre yasal, önleyici ve güvenlik tedbirleri."
-          },
-          "due_process": {
-            "term": "Dava Süreci",
-            "definition": "Soruşturma, kovuşturma ve yaptırım sırasında hakları koruyan adil yasal prosedürler."
-          },
-          "resource_security": {
-            "term": "Kaynak Güvenliği",
-            "definition": "Ekonomik ve çevresel stres altında gıdaya, suya ve enerjiye güvenilir erişim."
-          },
-          "resilience": {
-            "term": "Dayanıklılık",
-            "definition": "Toplulukların ve kurumların şokları absorbe etme ve etkili bir şekilde toparlanma kapasitesi."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Fikri düzenle",
-      "googleDocsUrl": "Google Dokümanlar URL'si",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Kısa fikir metni (isteğe bağlı)",
-      "save": "Kaydetmek",
-      "cancel": "İptal etmek",
-      "addIntro": "Bir çözüm fikri taslağını oluşturmak için bir Google Dokümanı ekleyin veya kısa bir not (veya her ikisini birden) yazın.",
-      "googleDocsCreateHelp": "Yeni Google Dokümanı başka bir sekmede açılır; Bağlantıyı oluşturduktan sonra buraya yapıştırın.",
-      "resolutionIdeaPlaceholder": "Çözünürlük fikri...",
-      "add": "Eklemek",
-      "noIdeasYet": "Henüz fikir yok.",
-      "ideaLabel": "Fikir",
-      "ideaFallback": "Fikir {sayı}",
-      "linkedDoc": "Bağlantılı doküman",
-      "addedOn": "{tarih} eklendi",
-      "edit": "Düzenlemek",
-      "delete": "Silmek",
-      "ideaDocument": "Fikir belgesi",
-      "summary": "Özet",
-      "emptyIdea": "Boş fikir."
-    },
-    "stances": {
-      "heatmapTitle": "Kısa Duruşa Genel Bakış (Isı Haritası)",
-      "heatmapHelp": "Tahsisiniz ____'yi ne ölçüde destekliyor? (1-5 ölçek)",
-      "topicPlaceholder": "örneğin iklim eylemi",
-      "extentLabel": "Kapsam (1-5):",
-      "extentHelpTitle": "Kapsam (1-5)",
-      "extentHelpBody": "1, tahsisinizin konuya çok az destek verdiği, 5 ise güçlü destek anlamına gelir. Komitedeki duruşunuza uygun bir sayı seçin.",
-      "add": "Eklemek",
-      "viewOnlyHeatmap": "Personel için salt görüntülenebilen ısı haritası.",
-      "notesPerAllocation": "Tahsis Başına Notlar",
-      "noAllocationsYet": "Henüz tahsis yok",
-      "notesPlaceholder": "Bu tahsise ilişkin duruş notları...",
-      "noteLanguageWarning": "Okuyucu uyarısı: Bu not uygunsuz dil içerebilir.",
-      "save": "Kaydetmek",
-      "saveHelpTitle": "Duruş notunu kaydet",
-      "saveHelpBody": "Bu tahsis için duruş notunu kaydeder. Personel ve (komite ayarlarına bağlı olarak) diğer katılımcılar tarafından görüntülenebilir."
-    },
-    "speeches": {
-      "newSpeech": "Yeni konuşma",
-      "speechTitlePlaceholder": "Konuşma başlığı",
-      "googleDocsUrl": "Google Dokümanlar URL'si",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google'ı yeni bir sekmede açar; Hazır olduğunuzda belge URL'sini buraya yapıştırın.",
-      "plainTextOptional": "Düz metin taslağı (Google Dokümanı kullanıyorsanız isteğe bağlıdır)",
-      "save": "Kaydetmek",
-      "cancel": "İptal etmek",
-      "noSpeechesYet": "Henüz konuşma yok. Bir Google Dokümanı bağlayın veya metni yapıştırın.",
-      "speechLabel": "Konuşma",
-      "untitled": "İsimsiz",
-      "edit": "Düzenlemek",
-      "speechDocument": "Konuşma belgesi",
-      "draftText": "Taslak metin",
-      "noContentHint": "Bir Google Dokümanını Düzenle'ye bağlayın veya forma düz metin ekleyin."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Komite",
-      "yourContext": "Bağlamınız",
-      "roleLabel": "Rol",
-      "seatLabel": "Koltuk",
-      "clearSearchTitle": "Aramayı temizle ve tüm yetkilendirmeleri göster",
-      "vacantLabel": "Boş",
-      "assignedLabel": "Atandı",
-      "daisLabel": "Dais",
-      "phaseLabel": "Faz",
-      "phaseVoting": "Oylama",
-      "phaseDebate": "Çekişme",
-      "focusSearchTitle": "Aramaya odaklanın (dais başlıkları ve adları sorgunuzla eşleşir)",
-      "tipLabel": "Uç",
-      "searchVacantTitle": "Odadaki \"boş\" koltukları arayın",
-      "searchHint": "Odadaki eşleşmeleri vurgulamak için bir ülke, temsilci adı, okul, zamir veya \"boş\" yazın. İlk maça atlamak için Enter'a basın; Esc temizlenir. Boş koltuklara atlamak için Boş'a tıklayın.",
-      "findLabel": "Bir delegasyon veya dais üyesi bulun",
-      "searchPlaceholder": "Ülke, isim, okul...",
-      "matchesCount": "{toplam} koltuktan {matches} tanesi eşleşiyor",
-      "enterScrolls": "Parşömenleri girin",
-      "typeToFilterHint": "Filtrelemek için yazın - İlk eşleşme için kaydırmaları girin",
-      "noMatches": "Eşleşen delegasyon veya kürsü koltuğu yok.",
-      "digitalDisplay": "Dijital ekran",
-      "floorLabel": "Zemin",
-      "staffSeatsHeading": "Personel - koltuklar",
-      "searchAria": "Heyetleri arayın",
-      "virtualRoomVacant": "Boş",
-      "profileAria": "Profili görüntüle: {ülke}",
-      "vacantSeatAria": "Boş koltuk",
-      "placardAria": "Afiş {ülke}",
-      "gavelAria": "Tokmak",
-      "viewProfileAria": "Profili görüntüle: {title}",
-      "noProfileLinkAria": "{title} (profil bağlantısı yok)",
-      "committeeFloor": "Komite katı",
-      "virtualRoomFigureAria": "Sanal komite odası - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Delegasyonların filtrelenmesi. İlk vurgulanan koltuk ringdeki ilk maçtır.",
-      "helperText": "Pankartlarda ülke (tahsislerden), isim, okul ve her delegenin profilindeki zamirler listelenir. Profilinizin altında sizinkini düzenleyin. Boş komite koltukları Boş olarak gösterilir. Söz konusu üyenin sayfasını açmak için doldurulmuş bir pankartı veya kürsü koltuğunu tıklayın (oradan sohbet edin ve rapor verin).",
-      "virtualRoomCaption": "Ülkeyi, adı, okulu ve zamirleri gösteren delege pankartlarının bulunduğu Sanal Model BM komite odası."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Konuşma isteği",
-        "delegateFallback": "Temsilci",
-        "needAllocation": "Konuşma talebinde bulunmak için tahsise ihtiyacınız var.",
-        "alreadyQueued": "Kuyrukta zaten etkin bir konuşma isteğiniz var.",
-        "requested": "Konuşmak istendi. Sırada görüneceksiniz.",
-        "requestFailed": "Konuşma isteği başarısız oldu.",
-        "helpBody": "Delegasyonunuzu başkanlık kuyruğuna gönderir. Aynı anda tek bir etkin bekleyen/geçerli isteğiniz olabilir.",
-        "purposeLabel": "İsteğe bağlı amaç (sıra etiketinde gösterilir)",
-        "purposeHelpTitle": "Amaç etiketi",
-        "purposeHelpBody": "Bu metin ülke adınıza eklenmiştir, böylece sandalyeler neden söz almak istediğinizi görebilir.",
-        "purposePlaceholder": "örneğin destek + değişikliğe genel bakış",
-        "requesting": "Talep ediliyor...",
-        "rollPromptTitle": "Başkanın onayı gerekiyor",
-        "rollPromptBodyPickStatus": "Oturum başladı. Konuşma ve oylamanın kilidini açmak için yoklama durumunuzu seçin. Bu seçim değiştirilemez.",
-        "rollPromptBodyWaitSessionStart": "Başkanın komite oturumunu başlatmasını bekliyorum.",
-        "rollPromptBodyWaitRollPrompt": "Yoklama istemi bekleniyor.",
-        "rollPromptBodyMarkedAbsent": "Şu anda yok olarak işaretlendiniz. Başkandan, konuşmak ve oy vermek için hazır olduğunuzu işaretlemesini isteyin.",
-        "rollPromptBodyChecking": "Yuvarlanma durumunuz kontrol ediliyor...",
-        "rollPromptSaving": "Kaydediliyor...",
-        "rollPromptPresent": "Sunmak",
-        "rollPromptPresentVoting": "Sunum ve oylama"
-      },
-      "motionVoting": {
-        "votingProcedure": "Oylama prosedürü",
-        "currentMotion": "Mevcut hareket",
-        "motioner": "Hareket ettirici",
-        "majority": "Çoğunluk",
-        "majoritySimple": "Basit",
-        "tally": "Evet {evet} - Hayır {hayır} - Toplam {toplam}",
-        "help": "Kürsü her delegasyonun oturumdaki oylarını kaydeder. Önerge oylarında yalnızca Evet veya Hayır kullanılır (çekimser yok). Toplamlar yalnızca Evet veya Hayır'ın kaydedildiği pankartları sayar; bulunmayan delegasyonlar atlanır."
-      },
-      "activeMotion": {
-        "currentMotion": "Mevcut hareket",
-        "motionFallback": "Hareket",
-        "motioner": "Hareket ettirici",
-        "majority": "Çoğunluk",
-        "majoritySimple": "Basit",
-        "type": "Tip",
-        "timer": "Zamanlayıcı",
-        "currentSpeaker": "Geçerli konuşmacı",
-        "nextSpeaker": "Sonraki konuşmacı",
-        "speakerTimeLeftCap": "Konuşmacı süresi (sol / büyük)",
-        "speakerTimeLeftTotal": "Konuşmacı süresi (sol / toplam)",
-        "perSpeaker": "(konuşmacı başına)",
-        "paused": "(duraklatıldı)",
-        "pauseReason": "Duraklat: {neden}"
-      },
-      "floorStatus": {
-        "sessionTime": "Oturum süresi",
-        "sessionNotStarted": "Oturum başlatılmadı",
-        "limit": "Sınır",
-        "limitRemaining": "{value} kaldı",
-        "limitOverBy": "{value} kadar",
-        "quickLinkSession": "Oturum",
-        "quickLinkRoll": "Rulo",
-        "quickLinkSpeakers": "Hoparlörler",
-        "quickLinkMotions": "Hareketler",
-        "quickLinkTimer": "Zamanlayıcı",
-        "dais": "Dais",
-        "pinned": "Sabitlendi",
-        "viewFullAnnouncement": "Duyurunun tamamını görüntüle",
-        "timerPausesReadOnly": "Zamanlayıcı duraklatılır (salt okunur)",
-        "speakerList": "Konuşmacı listesi",
-        "speakerFallback": "Hoparlör",
-        "rollCallYou": "Yoklama (siz)",
-        "fullAnnouncement": "Tam duyuru",
-        "daisAnnouncement": "Dais duyurusu",
-        "close": "Kapalı"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Oturum adı",
-        "sessionNamePlaceholder": "örneğin Sabah oturumu",
-        "sessionNameSaving": "Kaydediliyor…",
-        "sessionNameSaved": "Kaydedildi",
-        "sessionNameHint": "Otomatik olarak kaydeder ve oturum geçmişinde görünür.",
-        "title": "Komite oturumu",
-        "subtitle": "Komite oturumunu başlatın veya durdurun.",
-        "helpStartStop": "Başlat, herkes için canlı komite oturumu zamanlayıcısını/durumunu başlatır. Durdur, oturumu sonlandırır ve geçerli zaman sınırını siler.",
-        "migrationUnavailable": "En son veritabanı geçişleri uygulanana kadar oturum kontrolleri geçici olarak kullanılamaz.",
-        "endTimeInFuture": "Gelecekte bir bitiş zamanı seçin veya sınırsız moda geçin.",
-        "sessionStartUnavailable": "Oturum başlangıç ​​zaman damgası, en son geçiş işlemleri uygulanana kadar kullanılamaz.",
-        "endTimeInFutureSetNoLimit": "Gelecekte bir bitiş zamanı seçin veya herhangi bir sınır belirlemeyin.",
-        "sessionLimitUpdated": "Oturum sınırı güncellendi.",
-        "startedLabel": "Başlatıldı:",
-        "timeInLabel": "Süre:",
-        "timeUntilEndLabel": "Sona kalan süre:",
-        "overByValue": "{value} kadar",
-        "modeLabel": "Mod:",
-        "modeStopwatchNoLimit": "Kronometre (zaman sınırı yok)",
-        "sessionNotRunning": "Oturum çalışmıyor.",
-        "sessionLimit": "Oturum sınırı",
-        "sessionLimitModesTitle": "Oturum sınırı modları",
-        "sessionLimitModesHelp": "Yok: sonu yok. Zaman bütçesi: başlangıçtan itibaren sayılır. Bitiş tarihi: yerel saat diliminizde sabit saat zamanı.",
-        "sessionLimitOptional": "İsteğe bağlı.",
-        "noneLabel": "Hiçbiri",
-        "noneDescription": "siz duruncaya kadar çalışır.",
-        "timeBudgetLabel": "Zaman bütçesi",
-        "timeBudgetDescription": "başladığınız andan itibaren sayılır.",
-        "endTimeLabel": "Bitiş zamanı",
-        "endTimeDescription": "sabit bir saat süresi kullanır (her ikisi de ayarlanmışsa bütçeyi geçersiz kılar).",
-        "noneIndefinite": "Yok (belirsiz)",
-        "noneScheduledEndHint": "Planlanmış bir son yok; yalnızca geçen süre gösterilir.",
-        "timeBudgetFromStart": "Başlangıçtan itibaren zaman bütçesi",
-        "hoursLabel": "Saat",
-        "minutesLabel": "dakika",
-        "minimumOneMinute": "(en az 1 dakika)",
-        "endAtLocalTime": "Bitiş tarihi (yerel saat)",
-        "stopSession": "Oturumu durdur",
-        "saveLimit": "Sınırı kaydet",
-        "saveLimitHelp": "Oturum zaten çalışırken, oturumu durdurmadan güncellenen sınır ayarlarını uygular.",
-        "startSession": "Oturumu başlat",
-        "sidebarUsePrefix": "Kenar çubuğunu şunun için kullanın:",
-        "rollCall": "Yoklama",
-        "speakers": "Hoparlörler",
-        "formalMotions": "Resmi hareketler",
-        "timer": "Zamanlayıcı",
-        "sidebarAnd": "Ve",
-        "announcements": "Duyurular",
-        "sidebarUseSuffix": "— sekme başına bir araç."
-      },
-      "history": {
-        "title": "Oturum geçmişi",
-        "savedCount": "{count} kaydedildi",
-        "permissionsHint": "Sandalyeler girişleri yeniden adlandırabilir. SMT/Yönetici girişleri yeniden adlandırabilir ve silebilir.",
-        "empty": "Henüz oturum geçmişi yok.",
-        "rename": "Yeniden isimlendirmek",
-        "delete": "Silmek",
-        "deleteConfirm": "Bu oturum geçmişten silinsin mi?",
-        "sessionNamePrompt": "Oturum adı",
-        "rangeClosed": "{menzil}",
-        "rangeOngoing": "{aralık} -> Devam Ediyor"
-      },
-      "timerPage": {
-        "title": "Zamanlayıcı",
-        "controlsTitle": "Zamanlayıcı kontrolleri",
-        "controlsHelp": "Genel tartışma zamanlaması için Genel oturum'u veya görünürlüğü belirli bir açık oylama maddesine bağlamak için Önerge oylamasını kullanın.",
-        "tabSetup": "1) Kurulum",
-        "tabClock": "2) Saat kontrolleri",
-        "tabNotes": "3) Konuşma notları",
-        "tabLog": "4) Günlüğü duraklat",
-        "setupHelp": "Bu zamanlayıcının genel oturum için mi (delegeler tarafından her zaman görülebilir) yoksa oylamaya açık önergeye mi bağlı olacağını (delegeler bunu yalnızca o oy aktif öğe olduğunda görür) seçin. Konuşmacı başına süre açıkken, moderatörlü toplantı sırasında saat ne olursa olsun görünür kalır. Saati duraklat / Saati başlat dondur veya geri sayımı sürdür. Hoparlör süresini (kalan) ve Toplam süreyi bağımsız olarak ayarlayın, ardından Zamanlayıcıyı kaydet. Ön ayarlar her ikisini de aynı uzunlukta doldurur; daha sonra her iki alanı da düzenleyebilirsiniz. Duraklamalar kısa bir sebeple günlüğe kaydedilir.",
-        "namedPreset": "Adlandırılmış ön ayar",
-        "applyPreset": "Ön ayarı uygula...",
-        "floorLabelDelegates": "Kat etiketi (delegeler)",
-        "floorLabelPlaceholder": "örneğin GSL 60'lar",
-        "timerPurpose": "Zamanlayıcı amacı",
-        "purposeGeneralFloor": "Genel tartışma / oturum (oylamaya bağlı değil)",
-        "purposeMotionVote": "Açık önerge - yalnızca o oylama sahada etkinken zamanlayıcı",
-        "openMotionForVoting": "Açık önerge (oylamaya açık olmalıdır)",
-        "selectMotion": "Hareketi seç...",
-        "untitled": "İsimsiz",
-        "noOpenMotionWarning": "Oylamaya açık önerge yok. Önce bir oylama açın veya amacınızı genel oturuma değiştirin.",
-        "clock": "Saat",
-        "running": "Koşma",
-        "paused": "Duraklatıldı",
-        "saveToEnablePauseStart": "duraklatmayı/başlatmayı etkinleştirmek için zamanlayıcıyı kaydedin.",
-        "pauseReasonLogged": "Duraklatma nedeni (günlüğe kaydedildi)",
-        "pauseReasonPlaceholder": "örneğin Düzen noktası, teknik sorun, denetlenmeyen toplantı...",
-        "pauseClock": "Saati duraklat",
-        "startClock": "Saati başlat",
-        "perSpeakerTitle": "Konuşmacı başına süre (yönetimli toplantı)",
-        "perSpeakerHelp": "Hoparlör başına sınır olarak Toplam süreyi ve kalan süre olarak Hoparlör süresini ayarlayın; İlerleme bir sonraki hoparlöre geçer ve kalan kısmı kapağa kadar sıfırlar.",
-        "currentSpeaker": "Geçerli konuşmacı",
-        "nextSpeaker": "Sonraki konuşmacı",
-        "speechNotesCurrentSpeaker": "Konuşma notları (mevcut konuşmacı)",
-        "speechNotesHelp": "Notlar Geçerli konuşmacı zamanlayıcı metnine bağlanır ve konuşmacı listesinde Geçerli olarak işaretlenmiş biri varsa, bu kişinin yetkilendirmesi referans olarak saklanır.",
-        "timerFloorLabel": "Zamanlayıcı (kat):",
-        "speakerListCurrent": "Konuşmacı listesi (güncel):",
-        "noCurrentDelegation": "Konuşmacı listesinde hiçbir delegasyon Geçerli olarak işaretlenmez.",
-        "note": "Not",
-        "notePlaceholder": "Noktalar, İÇN'ler, ton, takipler...",
-        "saveSpeechNote": "Konuşma notunu kaydet",
-        "recentNotes": "Son notlarınız (bu komite)",
-        "delete": "Silmek",
-        "speakerTimeRemaining": "Konuşmacı süresi (kalan)",
-        "remainingHelpPerSpeaker": "Geçerli konuşmacı için geri sayım (İlerlediğinizde sıfırlanır).",
-        "remainingHelpNormal": "Geçerli konuşmacı için geri sayım (toplamdan daha az olabilir).",
-        "totalTime": "Toplam süre",
-        "totalHelpPerSpeaker": "Hoparlör başına kapak (yerdeki payda; buna kadar kalan yedekleri önceden doldurun).",
-        "totalHelpNormal": "Bu zamanlayıcı bölümünün tam uzunluğu (yerdeki eğik çizgiden sonra gösterilir).",
-        "saveTimer": "Zamanlayıcıyı kaydet",
-        "advanceSpeakerReset": "Hoparlörü ilerlet ve saati sıfırla",
-        "recentPauseLog": "Son duraklatma günlüğü",
-        "noPauseEvents": "Bu komite için henüz herhangi bir duraklatma etkinliği kaydedilmedi.",
-        "openPauseLogHint": "Kaydedilen duraklatma nedenlerini ve zaman damgalarını incelemek için Duraklatma günlüğünü açın.",
-        "saved": "Zamanlayıcı kaydedildi.",
-        "savedCapped": "Zamanlayıcı kaydedildi. Konuşmacı süresi toplamdan daha uzundu; toplamla sınırlıdır.",
-        "alreadyPaused": "Zamanlayıcı zaten duraklatıldı.",
-        "pausedForCommittee": "Komite için zamanlayıcı duraklatıldı.",
-        "alreadyRunning": "Zamanlayıcı zaten çalışıyor.",
-        "runningForCommittee": "Komite için zamanlayıcı çalışıyor.",
-        "euTimerBoardTitle": "AB Parlamentosu zamanlayıcı panosu (11 zamanlayıcı)",
-        "euTimerBoardHelp": "Grup başına bir zamanlayıcı artı Toplam süre, POI/POC süresi ve Konuşmacı süresi. Bir satırı Saat sekmesindeki canlı zamanlayıcı alanlarına (hoparlör zamanı / Zamanlayıcıyı kaydet) kopyalamak için Uygula'yı kullanın.",
-        "euTimerName": "İsim",
-        "euTimerTag": "Etiket",
-        "euTotalTime": "Toplam süre",
-        "euPoiPocTime": "POI / POC zamanı",
-        "euSpeakerTime": "Konuşmacı süresi"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "Komite odası (dolu)",
         "hint": "Sanal düzen ve delege katı"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "Otomatik kaydetme başarısız oldu",
     "autosavedWithCountry": "Otomatik kaydedildi — {ülke}",
     "delegateFallback": "temsilci"
+  },
+  "sources": {
+    "addSource": "Kaynak ekle",
+    "sourceUrl": "Kaynak URL'si",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (önerilen)",
+    "urlHelp": "Yeni bir Google Dokümanı için düğmeyi kullanın ve doküman bağlantısını buraya yapıştırın.",
+    "titleOptional": "Başlık (isteğe bağlı)",
+    "saveChanges": "Değişiklikleri kaydet",
+    "editSource": "Kaynağı düzenle",
+    "urlPlaceholderShort": "Google Dokümanı veya başka bir URL",
+    "empty": "Henüz kaynak yok. Burada açmak için bir Google Dokümanı bağlantısı ekleyin.",
+    "sourceLabel": "Kaynak",
+    "openLink": "Bağlantıyı aç",
+    "embedHeading": "Kaynak belge",
+    "notGoogleDoc": "Bu URL bir Google Dokümanı değil. Buraya yerleştirmek ve düzenlemek için docs.google.com/document/d/… bağlantısını kullanın; aksi takdirde yukarıdaki bağlantıyı açın."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Delegeler Pozisyon Belgelerini doğrudan yükleyemez. Başka bir belge türü kullanın.",
+    "alertOnlyChairsPositionPaper": "Pozisyon Belgelerini yalnızca başkanlar/SMT/yönetici yükleyebilir.",
+    "alertOnlySmtChairReport": "Başkan Raporlarını yalnızca SMT/yönetici yükleyebilir.",
+    "alertOnlySmtRop": "Yalnızca SMT/yönetici RoP belgelerini yükleyebilir.",
+    "alertOnlySmtAwardCriteria": "Yalnızca SMT/yönetici Ödül Kriterleri belgelerini yükleyebilir.",
+    "alertNeedContentOrUrl": "Yerel metin içeriği veya bir Google Dokümanlar URL'si ekleyin.",
+    "confirmDelete": "Bu doküman silinsin mi?",
+    "delegatePrepTitle": "Belge hazırlama bölümü",
+    "delegatePrepBody": "Kendi <prep>Hazırlık belgelerinizi</prep> doğrudan bu sayfadan yükleyebilir, görüntüleyebilir ve düzenleyebilirsiniz.",
+    "positionPaperGuideTitle": "Kağıt kılavuzunu konumlandırın",
+    "positionPaperGuideBlurb": "Son PDF hazırlanırken yer tutucu kılavuzunu indirin.",
+    "downloadPlaceholderGuide": "Yer tutucu kılavuzunu indirin",
+    "addDocument": "Belge ekle",
+    "tabs": {
+      "ariaLabel": "Belge bölümleri",
+      "library": "Kütüphane",
+      "compose": "Oluştur",
+      "composeHint": "Bu sekmeden yeni bir belge başlatın veya mevcut bir taslağı düzenleyin."
+    },
+    "newDocumentTitle": "Yeni belge",
+    "editDocumentTitle": "Dokümanı düzenle",
+    "typeLabel": "Tip",
+    "types": {
+      "position_paper": "Kağıdı konumlandırın",
+      "chair_report": "Sandalye raporu",
+      "rop": "RoP",
+      "award_criteria": "Ödül kriterleri",
+      "chair_notes": "Sandalye notları",
+      "prep_doc": "Belgeyi hazırlayın"
+    },
+    "delegatePositionPaperNote": "Pozisyon kağıtları geri bildirimle birlikte başkanlar tarafından yüklenir.",
+    "delegateOwner": "Yetki sahibi",
+    "chairRecipient": "Sandalye alıcısı",
+    "titleLabel": "Başlık",
+    "titlePlaceholder": "Belge başlığı",
+    "googleDocsUrl": "Google Dokümanlar URL'si",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (uygulamaya görüntüleme/düzenleme yerleştirme)",
+    "googleDocsHelp": "Google'ı yeni bir sekmede açmak için Yeni Google Dokümanı'nı kullanın, ardından doküman bağlantısını buraya yapıştırın. Aşağıdaki düz metin isteğe bağlıdır. Her belgenin ya yerel metne, bir Google Doküman bağlantısına ya da her ikisine birden ihtiyacı vardır.",
+    "plainTextOptional": "Düz metin (isteğe bağlı)",
+    "plainTextPlaceholder": "Notlar veya taslak metin…",
+    "chairFeedbackLabel": "Sandalye geribildirimi",
+    "chairFeedbackPlaceholder": "Delege pozisyonu belgesi için geri bildirim...",
+    "empty": "Henüz belge yok. Bir tane ekleyin veya bir Google Dokümanı bağlayın.",
+    "sidebarDocumentLabel": "Belge",
+    "sections": {
+      "chairReports": "Sandalye raporları",
+      "rop": "RoP",
+      "awardCriteria": "Ödül kriterleri",
+      "prepDocuments": "Belgeleri hazırlayın",
+      "chairNotes": "Sandalye notları",
+      "otherDocuments": "Diğer belgeler"
+    },
+    "untitled": "İsimsiz",
+    "linkedDocumentHeading": "Bağlantılı belge",
+    "notesHeading": "Notlar",
+    "noGoogleDocYet": "Henüz bağlı bir Google Dokümanı yok. docs.google.com/document/d/… URL'si eklemek için Düzenle'yi kullanın.",
+    "chairFeedbackHeading": "Sandalye geribildirimi",
+    "noFeedbackYet": "Henüz geri bildirim eklenmedi."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Önce bir temsilci e-postası girin.",
+    "sentToDelegate": "{email} adresine gönderildi.",
+    "newResolution": "Yeni Çözünürlük",
+    "maxDraftResolutions": "Bu komitenin halihazırda {count} karar taslağı var.",
+    "googleDocLink": "Google Doküman bağlantısı",
+    "googleDocUrlPlaceholder": "Google Dokümanlar URL'si (docs.google.com/document/d/… — yerleştirme + düzenleme için kullanılır)",
+    "googleDocUrlHelp": "Yeni Google Dokümanı başka bir sekmede açılır; URL'yi adres çubuğundan kopyalayıp buraya yapıştırın.",
+    "mainSubmittersPlaceholder": "Ana gönderenler (kullanıcı kimlikleri, virgülle ayrılmış)",
+    "coSubmittersPlaceholder": "Ortak gönderenler (kullanıcı kimlikleri, virgülle ayrılmış)",
+    "create": "Yaratmak",
+    "cancel": "İptal etmek",
+    "openInNewTab": "Yeni sekmede aç",
+    "noGoogleDocLink": "Google Dokümanı bağlantısı yok",
+    "visibleToOtherBloc": "Diğer blok tarafından görülebilir",
+    "resolutionCounts": "Ana alt bölümler: {ana} | Ortak aboneler: {co} | İmzacılar: {imzacılar}",
+    "blocButton": "Blok {name} ({duruş})",
+    "signVirtually": "Sanal olarak imzalayın (ana abonelere bilgi verilir)",
+    "shareByEmail": "Çözünürlüğü e-postayla paylaşın",
+    "delegateEmailPlaceholder": "delege@e-posta.com",
+    "sendToDelegate": "Temsilciye gönder",
+    "clauseEditor": "Madde düzenleyici",
+    "noClausesYet": "Henüz hüküm yok.",
+    "clauseNumber": "Madde {sayı}",
+    "saveClause": "Maddeyi kaydet",
+    "delete": "Silmek",
+    "addClausePlaceholder": "Yeni bir madde ekle...",
+    "addClause": "Madde ekle",
+    "clauseVoteHistory": "Madde oylama geçmişi",
+    "noClauseOutcomesYet": "Henüz kayıtlı madde oylama sonucu yok.",
+    "clauseFallback": "Madde",
+    "passed": "GEÇTİ",
+    "failed": "ARIZALI",
+    "motionId": "Hareket {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Oylama bölümleri",
+      "open": "Açık",
+      "closed": "Kapalı"
+    },
+    "requiredMajority": "Gerekli çoğunluk",
+    "helpRequiredMajorityTitle": "Gerekli çoğunluk",
+    "helpRequiredMajorityBody": "Başarılı/başarısız kararı vermek için kullanılan oy eşiğini seçin. 'Basit' yarıdan fazladır. '2/3' salt çoğunluk gerektirir.",
+    "majoritySimple": "Basit",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} çoğunluk",
+    "mustVote": "Oy vermek ZORUNLUDUR",
+    "helpMustVoteTitle": "Oy vermek ZORUNLUDUR",
+    "helpMustVoteBody": "Bu önergeyi \"oy verilmesi gereken\" bir madde olarak işaretler. Bu, gereklilikleri katılımcılara iletmek için kullanılır (komitenizin kurulumuna bağlı olarak).",
+    "saveSettings": "Ayarları kaydet",
+    "delegateBlurb": "Kürsü oturumdaki oyları kaydeder (örn. yoklama). Buradaki önerge oyları yalnızca Evet/Hayır'ı takip eder (çekimserlik kullanılmaz). Puantajı takip edebilirsiniz; delegeler uygulamada oy kullanmaz.",
+    "yes": "Evet",
+    "no": "HAYIR",
+    "ballots": "Oy pusulaları",
+    "total": "Toplam",
+    "outcome": "Sonuç",
+    "passed": "Geçti",
+    "failed": "Arızalı",
+    "noRecordedVotes": "Kayıtlı oy yok",
+    "reopenMotion": "Hareketi yeniden aç",
+    "editRecordOpen": "Kaydı düzenle…",
+    "hideSettings": "Ayarları gizle",
+    "preliminaryPassing": "Geçme (ön)",
+    "preliminaryFailing": "Başarısız (ön)",
+    "delegateRollCall": "Delege yoklaması ({count})",
+    "noSeatedDelegates": "Bu önerge için oturan delege yok.",
+    "rollPrefix": "Rulo:",
+    "recordedPrefix": "Kaydedildi:",
+    "recordedYes": "Evet",
+    "recordedNo": "HAYIR",
+    "recordedAbstain": "Çekimser",
+    "recordedNone": "—",
+    "abstain": "Çekimser",
+    "clear": "Temizlemek",
+    "closeMotion": "Hareketi kapat",
+    "mustVoteBadge": "Oy vermek ZORUNLUDUR",
+    "canVoteBadge": "Oy verebilirim",
+    "noMotions": "Henüz herhangi bir hareket yok.",
+    "currentOpenMotion": "Mevcut açık hareket",
+    "noOpenMotion": "Şu anda açık hareket yok.",
+    "recentClosedMotions": "Son kapatılan hareketler",
+    "noClosedMotions": "Henüz kapalı hareket yok.",
+    "untitled": "İsimsiz",
+    "voteTypes": {
+      "motion": "Hareket",
+      "amendment": "Değişiklik",
+      "resolution": "Çözünürlük",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Yok (rulo)",
+      "present_abstain": "Mevcut - çekimser kalabilir (yuvarlanır)",
+      "present_voting": "Sunum ve oylama (roll)",
+      "unknown": "- (rulo)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Profil bölümleri",
+      "overview": "Genel Bakış",
+      "awards": "Ödüller",
+      "private": "Özel kayıtlar",
+      "settings": "Profil ayarları"
+    },
+    "profilePicture": "Profil resmi",
+    "uploadFile": "Dosya yükle",
+    "uploading": "Yükleniyor…",
+    "photoSaved": "Fotoğraf yüklendi ve kaydedildi.",
+    "orUrl": "Veya URL'ye göre ayarlayın",
+    "urlPlaceholder": "https://...",
+    "name": "İsim",
+    "username": "Kullanıcı adı",
+    "usernamePlaceholder": "örneğin alex_1999",
+    "pronouns": "Zamirler",
+    "customPronounNote": "Profilinizde artık burada kabul edilmeyen özel bir zamir grubu vardı. Yukarıdaki seçeneklerden birini seçin (veya boş bırakın). Kaydetme eski değerin yerini alır.",
+    "school": "Okul",
+    "schoolPlaceholder": "örneğin Lincoln Lisesi",
+    "grade": "Seviye",
+    "selectGrade": "Notu seçin",
+    "conferencesAttended": "Katıldığı konferanslar",
+    "awardsComma": "Ödüller (virgülle ayrılmış)",
+    "awardsPlaceholder": "En İyi Delege, Mansiyon",
+    "allocation": "Paylaştırma",
+    "selectAllocation": "Tahsis seçin",
+    "noAllocationsPlaceholder": "Komite tahsisi mevcut değil",
+    "saveProfile": "Profili kaydet",
+    "saved": "Profil kaydedildi.",
+    "saveFailed": "Profil kaydedilemedi.",
+    "errUsernamePattern": "Kullanıcı adı 3-32 karakterden oluşmalıdır (harfler, sayılar, _, ., -)",
+    "errPronounsPreset": "Listeden bir zamir seçin.",
+    "errImageType": "Lütfen bir resim dosyası seçin.",
+    "errImageSize": "Resim çok büyük (maks. 5 MB).",
+    "errUploadFailed": "Yükleme başarısız oldu.",
+    "errStorageSetup": "Profil resmi depolama alanı ayarlanmadı. Supabase projesinde, 00100_profile_pictures_storage_bucket.sql geçişini çalıştırın veya profil resimleri adında bir genel depolama grubu oluşturun (bkz. README).",
+    "errPublicUrl": "Yüklenen görselin genel URL'si çözümlenemedi.",
+    "fallbacks": {
+      "yourCountry": "senin ülken",
+      "committeeSession": "Komite oturumu",
+      "delegate": "Temsilci",
+      "speechNote": "Konuşma notu",
+      "untitledMotion": "Başlıksız hareket",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "{flag} {country} ülkesinin temsilcisine hoş geldiniz",
+      "subtitle": "Neyle başlamak istersin?",
+      "links": {
+        "documents": "Belgeler",
+        "notes": "Notlar",
+        "committeeRoom": "Komite odası",
+        "runningNotes": "Notları Çalıştırma",
+        "ideas": "Fikirler",
+        "guides": "Kılavuzlar",
+        "sources": "Kaynaklar",
+        "resolutions": "Çözünürlükler",
+        "speeches": "Konuşmalar",
+        "stances": "Duruşlar",
+        "crisisSlides": "Kriz slaytları",
+        "report": "Rapor",
+        "motions": "Hareketler",
+        "points": "Puanlar"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Profilinizdeki ödüller",
+      "rank": "rütbe",
+      "pending": {
+        "tab": "Bekleyen adaylıklar",
+        "title": "Başkanlık adaylıkları bekleniyor",
+        "descriptionSingle": "Sandalyeler tarafından kaydedildi ve incelenmek üzere SMT ile paylaşıldı. Nihai ödüller, onaylandıktan sonra aşağıda görünür.",
+        "descriptionTabbed": "Sandalyeler tarafından kaydedildi ve incelenmek üzere SMT ile paylaşıldı. Nihai ödüller onaylandıktan sonra görünür."
+      },
+      "recorded": {
+        "tab": "Kaydedilen ödüller",
+        "title": "Kaydedilen ödüller",
+        "description": "Ödül izleyicide sandalyeler veya SMT sizi atadığında listelenir. Son tanınma konferansınızın kurallarına göre yapılır."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Yalnızca siz, komite başkanları ve ilgili komitenin SMT'si görebilir.",
+      "points": {
+        "title": "Sandalye noktaları (özel)"
+      },
+      "speechNotes": {
+        "title": "Başkan konuşma notları (özel)"
+      },
+      "motions": {
+        "title": "Taşıdığınız hareketler",
+        "description": "Komite incelemesi ve SMT gözetimi için profilinize kaydedildi."
+      }
+    },
+    "discipline": {
+      "title": "Disiplin durumu (özel)",
+      "statusLine": "Uyarılar: {warnings} · İhtarlar: {strikes}{votingDisabled}{speakingSuspending}{removedFromCommittee}",
+      "votingDisabled": "oylama devre dışı bırakıldı",
+      "speakingSuspended": "konuşma askıya alındı",
+      "removedFromCommittee": "komiteden çıkarıldı",
+      "updated": "Güncellendi: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Profil önizlemesi",
+      "title": "Önizleme",
+      "yourName": "Adınız",
+      "usernameNotSet": "Kullanıcı adı ayarlanmadı",
+      "gradeValue": "Sınıf {derece}",
+      "awards": "Ödüller"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Prosedür Kuralları (RoP)",
+        "content": "# Usul Kuralları \n\n## Noktalar ve Hareketler \n- **Sipariş Noktası**: Doğru prosedür \n- **Bilgi Noktası**: Konuşmacıya soru \n- **Kişisel Ayrıcalık Noktası**: Kişisel konfor \n- **Masaya Öneri**: Tartışmayı erteleyin \n- **Erteleme Önergesi**: Oturumun sonlandırılması \n\n## Oylama \n- Usuli konularda basit çoğunluk \n- Esasa ilişkin konularda 2/3 çoğunluk \n- İstenirse yoklamayla oylama"
+      },
+      "examples": {
+        "title": "Örnekler",
+        "content": "# Örnekler \n\n## Çözünürlük Formatı \n'''' \nGenel Kurul, \n... \n1. Üye devletlere çağrıda bulunur: \n2. Uluslararası topluma çağrıda bulunur: \n'''' \n\n## Kağıt Yapısını Konumlandırın \n1. Arka Plan \n2. Ülke Politikası \n3. Önerilen Çözümler"
+      },
+      "templates": {
+        "title": "Şablonlar",
+        "content": "# Şablonlar \n\n## Sandalye Rapor Şablonu \n- Komiteye genel bakış \n- Temel tartışma noktaları \n- Alınan kararlar \n- Öneriler"
+      },
+      "chairReport": {
+        "title": "Sandalye Raporu",
+        "content": "# Sandalye Raporu \n\nBelge komitesi işlemleri ve sonuçları burada."
+      }
+    },
+    "edit": "Düzenlemek",
+    "guideDocument": "Kılavuz belgesi",
+    "additionalNotes": "Ek notlar",
+    "noContentYet": "Henüz içerik yok.",
+    "titlePlaceholder": "Başlık",
+    "googleDocsUrl": "Google Dokümanlar URL'si",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Yeni Google Dokümanı başka bir sekmede açılır. Yetki verilenlerin dokümanı burada açabilmesi için paylaşılabilir bir bağlantı yapıştırın (görüntüleme/düzenleme Google paylaşımına bağlıdır).",
+    "markdownOptional": "İşaretleme notları (Google Dokümanı kullanıyorsanız isteğe bağlıdır)",
+    "save": "Kaydetmek",
+    "cancel": "İptal etmek",
+    "createNewGuide": "Yeni rehber oluştur",
+    "slugPlaceholder": "sümüklüböcek (benzersiz)",
+    "titleLowerPlaceholder": "başlık",
+    "googleDocsUrlOptional": "Google Dokümanlar URL'si (isteğe bağlı)",
+    "markdownContentOptional": "İşaretleme içeriği (isteğe bağlı)",
+    "create": "Yaratmak",
+    "glossary": {
+      "title": "MUN Gündemi Sözlüğü",
+      "subtitle": "Komite kurallarınız ve güncel gündem konularınızla eşleşen benzersiz terminoloji.",
+      "committeeCode": "Komite kodu: {code}",
+      "sources": {
+        "core": "çekirdek",
+        "committee": "komite",
+        "topic": "başlık"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Delegasyon",
+          "definition": "Komitede bir devleti veya birimi temsil eden bir ülke veya gözlemci ekibi."
+        },
+        "placard": {
+          "term": "Pankart",
+          "definition": "Söz istemek, oy vermek ve usul önergelerini bildirmek için kullanılan ülke işareti."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Tartışmayı yöneten, prosedürü uygulayan ve konuşma sırasını yöneten başkanlık ekibi."
+        },
+        "quorum": {
+          "term": "Yeter Sayısı",
+          "definition": "Resmi işleri ve oyları yürütmek için gereken minimum delegasyon sayısı."
+        },
+        "motion": {
+          "term": "Hareket",
+          "definition": "Toplantı türü veya konuşma süresi gibi tartışmanın akışını değiştirmeye yönelik resmi teklif."
+        },
+        "point_of_order": {
+          "term": "Sipariş Noktası",
+          "definition": "Prosedürün komite kurallarına göre yanlış uygulanması durumunda müdahale."
+        },
+        "moderated_caucus": {
+          "term": "Yönetilen Grup Toplantısı",
+          "definition": "Tanımlanmış bir alt konu hakkında kısa süreli konuşmalar içeren yapılandırılmış tartışma bölümü."
+        },
+        "unmoderated_caucus": {
+          "term": "Denetlenmeyen Grup Toplantısı",
+          "definition": "Delegelerin fikirleri taslak haline getirmek ve birleştirmek için serbestçe hareket ettiği resmi olmayan müzakere dönemi."
+        },
+        "draft_resolution": {
+          "term": "Taslak Çözünürlüğü",
+          "definition": "Nihai oylama ve kabul edilmeden önce önerilen komite eyleminin çalışma metni."
+        },
+        "amendment": {
+          "term": "Değişiklik",
+          "definition": "Taslak metinde değişiklik yapılması önerildi; dostane veya düşmanca olarak oylandı."
+        },
+        "operative_clause": {
+          "term": "Geçerli Madde",
+          "definition": "Komitenin ne yapmayı önerdiğini açıklayan eylem odaklı numaralı madde."
+        },
+        "preambulatory_clause": {
+          "term": "Preambulatuar Madde",
+          "definition": "Arka plan ilkelerini, endişeleri ve önceki çerçeveleri belirten bağlam belirleme maddesi."
+        },
+        "right_of_reply": {
+          "term": "Cevap Hakkı",
+          "definition": "Delegasyonun saygınlığını veya konumunu etkileyen doğrudan bir açıklamaya yanıt verme fırsatı."
+        },
+        "veto_power": {
+          "term": "Veto Gücü",
+          "definition": "BMGK daimi üye yetkisi, esaslı karar taslaklarını engelleme yetkisine sahiptir."
+        },
+        "chapter_vii": {
+          "term": "Bölüm VII",
+          "definition": "Barışa yönelik tehditler, yaptırımlar ve güç kullanımı tedbirlerine ilişkin BM Şartı otoritesi."
+        },
+        "sanctions_regime": {
+          "term": "Yaptırım Rejimi",
+          "definition": "Doğrudan askeri eylem olmadan davranışı etkilemek için kullanılan koordineli kısıtlamalar."
+        },
+        "arms_control": {
+          "term": "Silah Kontrolü",
+          "definition": "Silah türlerini, miktarlarını veya konuşlandırılmasını sınırlayan anlaşmalar ve doğrulama sistemleri."
+        },
+        "non_proliferation": {
+          "term": "Nükleer Silahların Yayılmasının Önlenmesi",
+          "definition": "Nükleer, kimyasal, biyolojik veya gelişmiş silah kabiliyetlerinin yayılmasını önlemeye yönelik politikalar."
+        },
+        "confidence_building_measures": {
+          "term": "Güven Artırıcı Önlemler",
+          "definition": "Yanlış anlama ve çatışma riskini azaltan şeffaflık ve iletişim araçları."
+        },
+        "universal_periodic_review": {
+          "term": "Evrensel Periyodik İnceleme",
+          "definition": "Her BM üye devletinin rapor verdiği ve hak önerileri aldığı hakemli süreç."
+        },
+        "special_rapporteur": {
+          "term": "Özel Raportör",
+          "definition": "Tematik veya ülke hakları konularını izlemek ve raporlamak üzere atanan bağımsız uzman."
+        },
+        "treaty_body": {
+          "term": "Anlaşma Organı",
+          "definition": "Belirli bir insan hakları sözleşmesinin uygulanmasını denetleyen uzmanlar komitesi."
+        },
+        "public_health_emergency": {
+          "term": "Halk Sağlığı Acil Durumu",
+          "definition": "Acil koordineli ulusal ve uluslararası müdahaleyi gerektiren ciddi salgın olayı."
+        },
+        "surveillance": {
+          "term": "Epidemiyolojik Sürveyans",
+          "definition": "Hastalık eğilimlerini tespit etmek ve takip etmek için sağlık verilerinin sürekli toplanması ve analizi."
+        },
+        "health_systems": {
+          "term": "Sağlık Sistemlerinin Güçlendirilmesi",
+          "definition": "Güvenilir sağlık hizmeti sunumu için iş gücü, finansman, lojistik ve yönetişimin iyileştirilmesi."
+        },
+        "transnational_crime": {
+          "term": "Sınıraşan Organize Suç",
+          "definition": "Ağlar ve yasa dışı pazarlar aracılığıyla sınırlar ötesinde koordine edilen suç faaliyetleri."
+        },
+        "illicit_trafficking": {
+          "term": "Yasadışı Ticaret",
+          "definition": "Uyuşturucunun, silahların, kişilerin veya malların yargı bölgeleri arasında yasa dışı dolaşımı."
+        },
+        "rule_of_law_capacity": {
+          "term": "Hukukun Üstünlüğü Kapasitesi",
+          "definition": "Adalet sistemlerinin hakları adil bir şekilde soruşturma, kovuşturma ve koruma konusundaki kurumsal yeteneği."
+        },
+        "sustainable_development": {
+          "term": "Sürdürülebilir Kalkınma",
+          "definition": "Sosyal ilerlemeyi, ekonomik fırsatı ve çevre korumayı dengeleyen büyüme modeli."
+        },
+        "financing_for_development": {
+          "term": "Kalkınmanın Finansmanı",
+          "definition": "Uzun vadeli kalkınma önceliklerini destekleyen kamu ve özel finansman mekanizmaları."
+        },
+        "policy_coordination": {
+          "term": "Politika Koordinasyonu",
+          "definition": "Tekrarları önlemek ve kolektif etkiyi artırmak için devlet ve kurum eylemlerinin uyumlu hale getirilmesi."
+        },
+        "child_protection": {
+          "term": "Çocuk Koruma",
+          "definition": "Her ortamda çocuklara yönelik sömürüyü, istismarı ve şiddeti önleyici tedbirler."
+        },
+        "education_access": {
+          "term": "Eğitim Erişimi",
+          "definition": "Tüm çocuklar için kapsayıcı, eşitlikçi ve sürekli öğrenme fırsatlarının sağlanması."
+        },
+        "humanitarian_response": {
+          "term": "İnsani Yardım",
+          "definition": "Kriz ve çatışma ortamlarında acil ihtiyaçları karşılayan hızlı yardım eylemleri."
+        },
+        "gender_mainstreaming": {
+          "term": "Cinsiyet Eşitliği",
+          "definition": "Toplumsal cinsiyet analizinin politika tasarımına, uygulamasına ve değerlendirmesine entegre edilmesi."
+        },
+        "gender_based_violence": {
+          "term": "Cinsiyete Dayalı Şiddet",
+          "definition": "Cinsiyet kimliğine, rollere veya eşit olmayan güç ilişkilerine dayalı olarak birine yönelik zarar verme."
+        },
+        "economic_empowerment": {
+          "term": "Ekonomik Güçlendirme",
+          "definition": "İnsana yakışır işe, finansmana, mülkiyete ve karar alma gücüne erişimin genişletilmesi."
+        },
+        "source_attribution": {
+          "term": "Kaynak İlişkilendirmesi",
+          "definition": "İddiaların doğrulanabilmesi ve bağlamsallaştırılabilmesi için bilgilerin kaynağının açıkça belirtilmesi."
+        },
+        "verified_reporting": {
+          "term": "Doğrulanmış Raporlama",
+          "definition": "Tartışmalı gerçekleri yayınlamadan önce onay gerektiren gazetecilik standardı."
+        },
+        "editorial_independence": {
+          "term": "Editoryal Bağımsızlık",
+          "definition": "Raporlama kararlarının siyasi baskıdan veya paydaş etkisinden ayrılması."
+        },
+        "climate_mitigation": {
+          "term": "İklim Azaltımı",
+          "definition": "Sera gazı emisyonlarını azaltan veya uzun vadeli karbon giderimini artıran eylemler."
+        },
+        "climate_adaptation": {
+          "term": "İklime Uyum",
+          "definition": "İklimle ilgili etkilere karşı hassasiyeti azaltan politikalar ve yatırımlar."
+        },
+        "cyber_norms": {
+          "term": "Siber Normlar",
+          "definition": "Dijital ve siber alanlarda sorumlu devlet davranışına ilişkin ortak beklentiler."
+        },
+        "critical_infrastructure": {
+          "term": "Kritik Altyapı",
+          "definition": "Güç, su, sağlık ve iletişim gibi dayanıklılık gerektiren temel sistemler."
+        },
+        "epidemiology": {
+          "term": "Epidemiyoloji",
+          "definition": "Popülasyonlardaki hastalık kalıplarının, nedenlerinin ve dağılımının incelenmesi."
+        },
+        "preparedness_response": {
+          "term": "Hazırlık ve Müdahale",
+          "definition": "Acil durumları kontrol altına almak ve yönetmek için planlama, koordinasyon ve dalgalanma eylemleri."
+        },
+        "non_refoulement": {
+          "term": "Geri Gönderme Yasağı",
+          "definition": "İnsanların ciddi zarara maruz kalacakları yerlere geri dönmesini yasaklayan ilke."
+        },
+        "durable_solutions": {
+          "term": "Dayanıklı Çözümler",
+          "definition": "Yerinden edilmiş kişiler için uzun vadeli sonuçlar: geri dönüş, yerel entegrasyon veya yeniden yerleşim."
+        },
+        "nuclear_safeguards": {
+          "term": "Nükleer Korumalar",
+          "definition": "Nükleer malzemelerin silah kullanımına yönlendirilmemesini sağlayan doğrulama önlemleri."
+        },
+        "counter_terrorism": {
+          "term": "Terörle Mücadele",
+          "definition": "Terörist faaliyetlere karşı entegre yasal, önleyici ve güvenlik tedbirleri."
+        },
+        "due_process": {
+          "term": "Dava Süreci",
+          "definition": "Soruşturma, kovuşturma ve yaptırım sırasında hakları koruyan adil yasal prosedürler."
+        },
+        "resource_security": {
+          "term": "Kaynak Güvenliği",
+          "definition": "Ekonomik ve çevresel stres altında gıdaya, suya ve enerjiye güvenilir erişim."
+        },
+        "resilience": {
+          "term": "Dayanıklılık",
+          "definition": "Toplulukların ve kurumların şokları absorbe etme ve etkili bir şekilde toparlanma kapasitesi."
+        }
+      },
+      "topicLine": "Konu: {konu}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Fikri düzenle",
+    "googleDocsUrl": "Google Dokümanlar URL'si",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Kısa fikir metni (isteğe bağlı)",
+    "save": "Kaydetmek",
+    "cancel": "İptal etmek",
+    "addIntro": "Bir çözüm fikri taslağını oluşturmak için bir Google Dokümanı ekleyin veya kısa bir not (veya her ikisini birden) yazın.",
+    "googleDocsCreateHelp": "Yeni Google Dokümanı başka bir sekmede açılır; Bağlantıyı oluşturduktan sonra buraya yapıştırın.",
+    "resolutionIdeaPlaceholder": "Çözünürlük fikri...",
+    "add": "Eklemek",
+    "noIdeasYet": "Henüz fikir yok.",
+    "ideaLabel": "Fikir",
+    "ideaFallback": "Fikir {sayı}",
+    "linkedDoc": "Bağlantılı doküman",
+    "addedOn": "{tarih} eklendi",
+    "edit": "Düzenlemek",
+    "delete": "Silmek",
+    "ideaDocument": "Fikir belgesi",
+    "summary": "Özet",
+    "emptyIdea": "Boş fikir."
+  },
+  "stances": {
+    "heatmapTitle": "Kısa Duruşa Genel Bakış (Isı Haritası)",
+    "heatmapHelp": "Tahsisiniz ____'yi ne ölçüde destekliyor? (1-5 ölçek)",
+    "topicPlaceholder": "örneğin iklim eylemi",
+    "extentLabel": "Kapsam (1-5):",
+    "extentHelpTitle": "Kapsam (1-5)",
+    "extentHelpBody": "1, tahsisinizin konuya çok az destek verdiği, 5 ise güçlü destek anlamına gelir. Komitedeki duruşunuza uygun bir sayı seçin.",
+    "add": "Eklemek",
+    "viewOnlyHeatmap": "Personel için salt görüntülenebilen ısı haritası.",
+    "notesPerAllocation": "Tahsis Başına Notlar",
+    "noAllocationsYet": "Henüz tahsis yok",
+    "notesPlaceholder": "Bu tahsise ilişkin duruş notları...",
+    "noteLanguageWarning": "Okuyucu uyarısı: Bu not uygunsuz dil içerebilir.",
+    "save": "Kaydetmek",
+    "saveHelpTitle": "Duruş notunu kaydet",
+    "saveHelpBody": "Bu tahsis için duruş notunu kaydeder. Personel ve (komite ayarlarına bağlı olarak) diğer katılımcılar tarafından görüntülenebilir."
+  },
+  "speeches": {
+    "newSpeech": "Yeni konuşma",
+    "speechTitlePlaceholder": "Konuşma başlığı",
+    "googleDocsUrl": "Google Dokümanlar URL'si",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google'ı yeni bir sekmede açar; Hazır olduğunuzda belge URL'sini buraya yapıştırın.",
+    "plainTextOptional": "Düz metin taslağı (Google Dokümanı kullanıyorsanız isteğe bağlıdır)",
+    "save": "Kaydetmek",
+    "cancel": "İptal etmek",
+    "noSpeechesYet": "Henüz konuşma yok. Bir Google Dokümanı bağlayın veya metni yapıştırın.",
+    "speechLabel": "Konuşma",
+    "untitled": "İsimsiz",
+    "edit": "Düzenlemek",
+    "speechDocument": "Konuşma belgesi",
+    "draftText": "Taslak metin",
+    "noContentHint": "Bir Google Dokümanını Düzenle'ye bağlayın veya forma düz metin ekleyin."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Komite",
+    "yourContext": "Bağlamınız",
+    "roleLabel": "Rol",
+    "seatLabel": "Koltuk",
+    "clearSearchTitle": "Aramayı temizle ve tüm yetkilendirmeleri göster",
+    "vacantLabel": "Boş",
+    "assignedLabel": "Atandı",
+    "daisLabel": "Dais",
+    "phaseLabel": "Faz",
+    "phaseVoting": "Oylama",
+    "phaseDebate": "Çekişme",
+    "focusSearchTitle": "Aramaya odaklanın (dais başlıkları ve adları sorgunuzla eşleşir)",
+    "tipLabel": "Uç",
+    "searchVacantTitle": "Odadaki \"boş\" koltukları arayın",
+    "searchHint": "Odadaki eşleşmeleri vurgulamak için bir ülke, temsilci adı, okul, zamir veya \"boş\" yazın. İlk maça atlamak için Enter'a basın; Esc temizlenir. Boş koltuklara atlamak için Boş'a tıklayın.",
+    "findLabel": "Bir delegasyon veya dais üyesi bulun",
+    "searchPlaceholder": "Ülke, isim, okul...",
+    "matchesCount": "{toplam} koltuktan {matches} tanesi eşleşiyor",
+    "enterScrolls": "Parşömenleri girin",
+    "typeToFilterHint": "Filtrelemek için yazın - İlk eşleşme için kaydırmaları girin",
+    "noMatches": "Eşleşen delegasyon veya kürsü koltuğu yok.",
+    "digitalDisplay": "Dijital ekran",
+    "floorLabel": "Zemin",
+    "staffSeatsHeading": "Personel - koltuklar",
+    "searchAria": "Heyetleri arayın",
+    "virtualRoomVacant": "Boş",
+    "profileAria": "Profili görüntüle: {ülke}",
+    "vacantSeatAria": "Boş koltuk",
+    "placardAria": "Afiş {ülke}",
+    "gavelAria": "Tokmak",
+    "viewProfileAria": "Profili görüntüle: {title}",
+    "noProfileLinkAria": "{title} (profil bağlantısı yok)",
+    "committeeFloor": "Komite katı",
+    "virtualRoomFigureAria": "Sanal komite odası - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Delegasyonların filtrelenmesi. İlk vurgulanan koltuk ringdeki ilk maçtır.",
+    "helperText": "Pankartlarda ülke (tahsislerden), isim, okul ve her delegenin profilindeki zamirler listelenir. Profilinizin altında sizinkini düzenleyin. Boş komite koltukları Boş olarak gösterilir. Söz konusu üyenin sayfasını açmak için doldurulmuş bir pankartı veya kürsü koltuğunu tıklayın (oradan sohbet edin ve rapor verin).",
+    "virtualRoomCaption": "Ülkeyi, adı, okulu ve zamirleri gösteren delege pankartlarının bulunduğu Sanal Model BM komite odası."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Konuşma isteği",
+      "delegateFallback": "Temsilci",
+      "needAllocation": "Konuşma talebinde bulunmak için tahsise ihtiyacınız var.",
+      "alreadyQueued": "Kuyrukta zaten etkin bir konuşma isteğiniz var.",
+      "requested": "Konuşmak istendi. Sırada görüneceksiniz.",
+      "requestFailed": "Konuşma isteği başarısız oldu.",
+      "helpBody": "Delegasyonunuzu başkanlık kuyruğuna gönderir. Aynı anda tek bir etkin bekleyen/geçerli isteğiniz olabilir.",
+      "purposeLabel": "İsteğe bağlı amaç (sıra etiketinde gösterilir)",
+      "purposeHelpTitle": "Amaç etiketi",
+      "purposeHelpBody": "Bu metin ülke adınıza eklenmiştir, böylece sandalyeler neden söz almak istediğinizi görebilir.",
+      "purposePlaceholder": "örneğin destek + değişikliğe genel bakış",
+      "requesting": "Talep ediliyor...",
+      "rollPromptTitle": "Başkanın onayı gerekiyor",
+      "rollPromptBodyPickStatus": "Oturum başladı. Konuşma ve oylamanın kilidini açmak için yoklama durumunuzu seçin. Bu seçim değiştirilemez.",
+      "rollPromptBodyWaitSessionStart": "Başkanın komite oturumunu başlatmasını bekliyorum.",
+      "rollPromptBodyWaitRollPrompt": "Yoklama istemi bekleniyor.",
+      "rollPromptBodyMarkedAbsent": "Şu anda yok olarak işaretlendiniz. Başkandan, konuşmak ve oy vermek için hazır olduğunuzu işaretlemesini isteyin.",
+      "rollPromptBodyChecking": "Yuvarlanma durumunuz kontrol ediliyor...",
+      "rollPromptSaving": "Kaydediliyor...",
+      "rollPromptPresent": "Sunmak",
+      "rollPromptPresentVoting": "Sunum ve oylama"
+    },
+    "motionVoting": {
+      "votingProcedure": "Oylama prosedürü",
+      "currentMotion": "Mevcut hareket",
+      "motioner": "Hareket ettirici",
+      "majority": "Çoğunluk",
+      "majoritySimple": "Basit",
+      "tally": "Evet {evet} - Hayır {hayır} - Toplam {toplam}",
+      "help": "Kürsü her delegasyonun oturumdaki oylarını kaydeder. Önerge oylarında yalnızca Evet veya Hayır kullanılır (çekimser yok). Toplamlar yalnızca Evet veya Hayır'ın kaydedildiği pankartları sayar; bulunmayan delegasyonlar atlanır."
+    },
+    "activeMotion": {
+      "currentMotion": "Mevcut hareket",
+      "motionFallback": "Hareket",
+      "motioner": "Hareket ettirici",
+      "majority": "Çoğunluk",
+      "majoritySimple": "Basit",
+      "type": "Tip",
+      "timer": "Zamanlayıcı",
+      "currentSpeaker": "Geçerli konuşmacı",
+      "nextSpeaker": "Sonraki konuşmacı",
+      "speakerTimeLeftCap": "Konuşmacı süresi (sol / büyük)",
+      "speakerTimeLeftTotal": "Konuşmacı süresi (sol / toplam)",
+      "perSpeaker": "(konuşmacı başına)",
+      "paused": "(duraklatıldı)",
+      "pauseReason": "Duraklat: {neden}"
+    },
+    "floorStatus": {
+      "sessionTime": "Oturum süresi",
+      "sessionNotStarted": "Oturum başlatılmadı",
+      "limit": "Sınır",
+      "limitRemaining": "{value} kaldı",
+      "limitOverBy": "{value} kadar",
+      "quickLinkSession": "Oturum",
+      "quickLinkRoll": "Rulo",
+      "quickLinkSpeakers": "Hoparlörler",
+      "quickLinkMotions": "Hareketler",
+      "quickLinkTimer": "Zamanlayıcı",
+      "dais": "Dais",
+      "pinned": "Sabitlendi",
+      "viewFullAnnouncement": "Duyurunun tamamını görüntüle",
+      "timerPausesReadOnly": "Zamanlayıcı duraklatılır (salt okunur)",
+      "speakerList": "Konuşmacı listesi",
+      "speakerFallback": "Hoparlör",
+      "rollCallYou": "Yoklama (siz)",
+      "fullAnnouncement": "Tam duyuru",
+      "daisAnnouncement": "Dais duyurusu",
+      "close": "Kapalı",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Oturum adı",
+      "sessionNamePlaceholder": "örneğin Sabah oturumu",
+      "sessionNameSaving": "Kaydediliyor…",
+      "sessionNameSaved": "Kaydedildi",
+      "sessionNameHint": "Otomatik olarak kaydeder ve oturum geçmişinde görünür.",
+      "title": "Komite oturumu",
+      "subtitle": "Komite oturumunu başlatın veya durdurun.",
+      "helpStartStop": "Başlat, herkes için canlı komite oturumu zamanlayıcısını/durumunu başlatır. Durdur, oturumu sonlandırır ve geçerli zaman sınırını siler.",
+      "migrationUnavailable": "En son veritabanı geçişleri uygulanana kadar oturum kontrolleri geçici olarak kullanılamaz.",
+      "endTimeInFuture": "Gelecekte bir bitiş zamanı seçin veya sınırsız moda geçin.",
+      "sessionStartUnavailable": "Oturum başlangıç ​​zaman damgası, en son geçiş işlemleri uygulanana kadar kullanılamaz.",
+      "endTimeInFutureSetNoLimit": "Gelecekte bir bitiş zamanı seçin veya herhangi bir sınır belirlemeyin.",
+      "sessionLimitUpdated": "Oturum sınırı güncellendi.",
+      "startedLabel": "Başlatıldı:",
+      "timeInLabel": "Süre:",
+      "timeUntilEndLabel": "Sona kalan süre:",
+      "overByValue": "{value} kadar",
+      "modeLabel": "Mod:",
+      "modeStopwatchNoLimit": "Kronometre (zaman sınırı yok)",
+      "sessionNotRunning": "Oturum çalışmıyor.",
+      "sessionLimit": "Oturum sınırı",
+      "sessionLimitModesTitle": "Oturum sınırı modları",
+      "sessionLimitModesHelp": "Yok: sonu yok. Zaman bütçesi: başlangıçtan itibaren sayılır. Bitiş tarihi: yerel saat diliminizde sabit saat zamanı.",
+      "sessionLimitOptional": "İsteğe bağlı.",
+      "noneLabel": "Hiçbiri",
+      "noneDescription": "siz duruncaya kadar çalışır.",
+      "timeBudgetLabel": "Zaman bütçesi",
+      "timeBudgetDescription": "başladığınız andan itibaren sayılır.",
+      "endTimeLabel": "Bitiş zamanı",
+      "endTimeDescription": "sabit bir saat süresi kullanır (her ikisi de ayarlanmışsa bütçeyi geçersiz kılar).",
+      "noneIndefinite": "Yok (belirsiz)",
+      "noneScheduledEndHint": "Planlanmış bir son yok; yalnızca geçen süre gösterilir.",
+      "timeBudgetFromStart": "Başlangıçtan itibaren zaman bütçesi",
+      "hoursLabel": "Saat",
+      "minutesLabel": "dakika",
+      "minimumOneMinute": "(en az 1 dakika)",
+      "endAtLocalTime": "Bitiş tarihi (yerel saat)",
+      "stopSession": "Oturumu durdur",
+      "saveLimit": "Sınırı kaydet",
+      "saveLimitHelp": "Oturum zaten çalışırken, oturumu durdurmadan güncellenen sınır ayarlarını uygular.",
+      "startSession": "Oturumu başlat",
+      "sidebarUsePrefix": "Kenar çubuğunu şunun için kullanın:",
+      "rollCall": "Yoklama",
+      "speakers": "Hoparlörler",
+      "formalMotions": "Resmi hareketler",
+      "timer": "Zamanlayıcı",
+      "sidebarAnd": "Ve",
+      "announcements": "Duyurular",
+      "sidebarUseSuffix": "— sekme başına bir araç.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Oturum geçmişi",
+      "savedCount": "{count} kaydedildi",
+      "permissionsHint": "Sandalyeler girişleri yeniden adlandırabilir. SMT/Yönetici girişleri yeniden adlandırabilir ve silebilir.",
+      "empty": "Henüz oturum geçmişi yok.",
+      "rename": "Yeniden isimlendirmek",
+      "delete": "Silmek",
+      "deleteConfirm": "Bu oturum geçmişten silinsin mi?",
+      "sessionNamePrompt": "Oturum adı",
+      "rangeClosed": "{menzil}",
+      "rangeOngoing": "{aralık} -> Devam Ediyor"
+    },
+    "timerPage": {
+      "title": "Zamanlayıcı",
+      "controlsTitle": "Zamanlayıcı kontrolleri",
+      "controlsHelp": "Genel tartışma zamanlaması için Genel oturum'u veya görünürlüğü belirli bir açık oylama maddesine bağlamak için Önerge oylamasını kullanın.",
+      "tabSetup": "1) Kurulum",
+      "tabClock": "2) Saat kontrolleri",
+      "tabNotes": "3) Konuşma notları",
+      "tabLog": "4) Günlüğü duraklat",
+      "setupHelp": "Bu zamanlayıcının genel oturum için mi (delegeler tarafından her zaman görülebilir) yoksa oylamaya açık önergeye mi bağlı olacağını (delegeler bunu yalnızca o oy aktif öğe olduğunda görür) seçin. Konuşmacı başına süre açıkken, moderatörlü toplantı sırasında saat ne olursa olsun görünür kalır. Saati duraklat / Saati başlat dondur veya geri sayımı sürdür. Hoparlör süresini (kalan) ve Toplam süreyi bağımsız olarak ayarlayın, ardından Zamanlayıcıyı kaydet. Ön ayarlar her ikisini de aynı uzunlukta doldurur; daha sonra her iki alanı da düzenleyebilirsiniz. Duraklamalar kısa bir sebeple günlüğe kaydedilir.",
+      "namedPreset": "Adlandırılmış ön ayar",
+      "applyPreset": "Ön ayarı uygula...",
+      "floorLabelDelegates": "Kat etiketi (delegeler)",
+      "floorLabelPlaceholder": "örneğin GSL 60'lar",
+      "timerPurpose": "Zamanlayıcı amacı",
+      "purposeGeneralFloor": "Genel tartışma / oturum (oylamaya bağlı değil)",
+      "purposeMotionVote": "Açık önerge - yalnızca o oylama sahada etkinken zamanlayıcı",
+      "openMotionForVoting": "Açık önerge (oylamaya açık olmalıdır)",
+      "selectMotion": "Hareketi seç...",
+      "untitled": "İsimsiz",
+      "noOpenMotionWarning": "Oylamaya açık önerge yok. Önce bir oylama açın veya amacınızı genel oturuma değiştirin.",
+      "clock": "Saat",
+      "running": "Koşma",
+      "paused": "Duraklatıldı",
+      "saveToEnablePauseStart": "duraklatmayı/başlatmayı etkinleştirmek için zamanlayıcıyı kaydedin.",
+      "pauseReasonLogged": "Duraklatma nedeni (günlüğe kaydedildi)",
+      "pauseReasonPlaceholder": "örneğin Düzen noktası, teknik sorun, denetlenmeyen toplantı...",
+      "pauseClock": "Saati duraklat",
+      "startClock": "Saati başlat",
+      "perSpeakerTitle": "Konuşmacı başına süre (yönetimli toplantı)",
+      "perSpeakerHelp": "Hoparlör başına sınır olarak Toplam süreyi ve kalan süre olarak Hoparlör süresini ayarlayın; İlerleme bir sonraki hoparlöre geçer ve kalan kısmı kapağa kadar sıfırlar.",
+      "currentSpeaker": "Geçerli konuşmacı",
+      "nextSpeaker": "Sonraki konuşmacı",
+      "speechNotesCurrentSpeaker": "Konuşma notları (mevcut konuşmacı)",
+      "speechNotesHelp": "Notlar Geçerli konuşmacı zamanlayıcı metnine bağlanır ve konuşmacı listesinde Geçerli olarak işaretlenmiş biri varsa, bu kişinin yetkilendirmesi referans olarak saklanır.",
+      "timerFloorLabel": "Zamanlayıcı (kat):",
+      "speakerListCurrent": "Konuşmacı listesi (güncel):",
+      "noCurrentDelegation": "Konuşmacı listesinde hiçbir delegasyon Geçerli olarak işaretlenmez.",
+      "note": "Not",
+      "notePlaceholder": "Noktalar, İÇN'ler, ton, takipler...",
+      "saveSpeechNote": "Konuşma notunu kaydet",
+      "recentNotes": "Son notlarınız (bu komite)",
+      "delete": "Silmek",
+      "speakerTimeRemaining": "Konuşmacı süresi (kalan)",
+      "remainingHelpPerSpeaker": "Geçerli konuşmacı için geri sayım (İlerlediğinizde sıfırlanır).",
+      "remainingHelpNormal": "Geçerli konuşmacı için geri sayım (toplamdan daha az olabilir).",
+      "totalTime": "Toplam süre",
+      "totalHelpPerSpeaker": "Hoparlör başına kapak (yerdeki payda; buna kadar kalan yedekleri önceden doldurun).",
+      "totalHelpNormal": "Bu zamanlayıcı bölümünün tam uzunluğu (yerdeki eğik çizgiden sonra gösterilir).",
+      "saveTimer": "Zamanlayıcıyı kaydet",
+      "advanceSpeakerReset": "Hoparlörü ilerlet ve saati sıfırla",
+      "recentPauseLog": "Son duraklatma günlüğü",
+      "noPauseEvents": "Bu komite için henüz herhangi bir duraklatma etkinliği kaydedilmedi.",
+      "openPauseLogHint": "Kaydedilen duraklatma nedenlerini ve zaman damgalarını incelemek için Duraklatma günlüğünü açın.",
+      "saved": "Zamanlayıcı kaydedildi.",
+      "savedCapped": "Zamanlayıcı kaydedildi. Konuşmacı süresi toplamdan daha uzundu; toplamla sınırlıdır.",
+      "alreadyPaused": "Zamanlayıcı zaten duraklatıldı.",
+      "pausedForCommittee": "Komite için zamanlayıcı duraklatıldı.",
+      "alreadyRunning": "Zamanlayıcı zaten çalışıyor.",
+      "runningForCommittee": "Komite için zamanlayıcı çalışıyor.",
+      "euTimerBoardTitle": "AB Parlamentosu zamanlayıcı panosu (11 zamanlayıcı)",
+      "euTimerBoardHelp": "Grup başına bir zamanlayıcı artı Toplam süre, POI/POC süresi ve Konuşmacı süresi. Bir satırı Saat sekmesindeki canlı zamanlayıcı alanlarına (hoparlör zamanı / Zamanlayıcıyı kaydet) kopyalamak için Uygula'yı kullanın.",
+      "euTimerName": "İsim",
+      "euTimerTag": "Etiket",
+      "euTotalTime": "Toplam süre",
+      "euPoiPocTime": "POI / POC zamanı",
+      "euSpeakerTime": "Konuşmacı süresi"
+    }
   }
 }

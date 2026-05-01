@@ -7,15 +7,43 @@ type ConfRow = {
   committee_code?: string | null;
 };
 
+/** Normalize chamber label for stable sibling matching (same committee, different topic rows). */
+function normalizeCommitteeLabelForBucket(raw: string): string {
+  const s = raw
+    .trim()
+    .toLowerCase()
+    .replace(/\s*&\s*/g, " and ")
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const alias: Record<string, string> = {
+    "economic and social council": "ecosoc",
+    "un ecosoc": "ecosoc",
+    ecosoc: "ecosoc",
+    "disarmament and international security committee": "disec",
+    "united nations security council": "unsc",
+    "security council": "unsc",
+    "united nations human rights council": "unhrc",
+    "human rights council": "unhrc",
+    "world health organization": "who",
+    "united nations office on drugs and crime": "unodc",
+    "un women": "un women",
+    unwomen: "un women",
+    "eu parliament": "eu parli",
+  };
+  return alias[s] ?? s;
+}
+
 /**
  * Committee bucketing key used by topic/awards canonicalization.
- * Prefer explicit `committee_code` so multiple topic rows for the same chamber always share one scope.
+ * Prefer `committee` (chamber) over `committee_code`: topic rows often use unique gate codes (e.g. ECO032 vs ECO368)
+ * while sharing the same ECOSOC chamber — those must stay one scope for agenda topics, awards, and roster merge.
  */
 export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee" | "committee_code">): string {
+  const comm = c.committee?.trim();
+  if (comm) return `c:${normalizeCommitteeLabelForBucket(comm)}`;
   const code = c.committee_code?.trim().toLowerCase();
   if (code) return `code:${code}`;
-  const comm = c.committee?.trim().toLowerCase();
-  if (comm) return `c:${comm}`;
   const n = c.name?.trim().toLowerCase();
   if (n) return `n:${n}`;
   return `id:${c.id}`;

@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "首先打開議席發言。",
     "openMotionBlocksRecording": "一項動議已開始投票。 在記錄進一步的陳述之前關閉它。",
     "statedMotionRecorded": "所陳述的動議已記錄（尚未開放投票）。",
-    "statedMotionRemoved": "已刪除所述動議。"
+    "statedMotionRemoved": "已刪除所述動議。",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• 積分記錄",
     "formalMotions": "正式動議",
     "timer": "定時器",
-    "smtProfile": "輪廓"
+    "smtProfile": "輪廓",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -835,7 +852,8 @@
       "archive": "檔案",
       "officialLinks": "官方連結",
       "roomCode": "房間代碼",
-      "settings": "設定"
+      "settings": "設定",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "聯合國會員國",
       "unSystem": "聯合國體系（創始人和成員）",
       "history": "聯合國歷史"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "添加來源",
-      "sourceUrl": "來源網址",
-      "urlPlaceholder": "https://docs.google.com/document/d/...（建議）",
-      "urlHelp": "對於新的 Google 文檔，請使用 按鈕並將文檔連結貼到此處。",
-      "titleOptional": "標題（可選）",
-      "saveChanges": "儲存變更",
-      "editSource": "編輯來源",
-      "urlPlaceholderShort": "Google 文件或其他 URL",
-      "empty": "還沒有來源。 新增 Google 文件連結以在此處開啟它。",
-      "sourceLabel": "來源",
-      "openLink": "打開連結",
-      "embedHeading": "原始檔",
-      "notGoogleDoc": "此 URL 不是 Google 文件。 使用 docs.google.com/document/d/... 連結在此處嵌入和編輯；否則打開上面的連結。"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "代表不能直接上傳立場文件。 使用其他文件類型。",
-      "alertOnlyChairsPositionPaper": "只有主席/SMT/管理者可以上傳立場文件。",
-      "alertOnlySmtChairReport": "只有 SMT/管理者可以上傳主席報告。",
-      "alertOnlySmtRop": "只有 SMT/admin 可以上傳 RoP 文件。",
-      "alertOnlySmtAwardCriteria": "只有 SMT/admin 可以上傳獎勵標準檔。",
-      "alertNeedContentOrUrl": "新增本機文字內容或 Google 文件 URL。",
-      "confirmDelete": "刪除這個文件？",
-      "delegatePrepTitle": "準備文件部分",
-      "delegatePrepBody": "您可以直接從此頁面上傳、檢視和編輯您自己的<prep>準備文件</prep>。",
-      "positionPaperGuideTitle": "位置導紙器",
-      "positionPaperGuideBlurb": "在準備最終 PDF 時下載佔位符指南。",
-      "downloadPlaceholderGuide": "下載佔位符指南",
-      "addDocument": "新增文件",
-      "tabs": {
-        "ariaLabel": "文件部分",
-        "library": "圖書館",
-        "compose": "撰寫",
-        "composeHint": "從此選項卡開始新文件或編輯現有草稿。"
-      },
-      "newDocumentTitle": "新文件",
-      "editDocumentTitle": "編輯文檔",
-      "typeLabel": "類型",
-      "types": {
-        "position_paper": "立場文件",
-        "chair_report": "主席報告",
-        "rop": "羅普",
-        "award_criteria": "獎勵標準",
-        "chair_notes": "主席筆記",
-        "prep_doc": "準備文件"
-      },
-      "delegatePositionPaperNote": "立場文件由主席上傳並附上回饋。",
-      "delegateOwner": "委託所有者",
-      "chairRecipient": "主席得獎者",
-      "titleLabel": "標題",
-      "titlePlaceholder": "文件標題",
-      "googleDocsUrl": "谷歌文檔網址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...（在應用程式中嵌入檢視/編輯）",
-      "googleDocsHelp": "使用新 Google 文件在新分頁中開啟 Google，然後將文件連結貼到此處。 下面的純文字是可選的。 每個文件都需要本機文字和/或 Google 文件連結。",
-      "plainTextOptional": "純文字（可選）",
-      "plainTextPlaceholder": "註釋或草稿文字...",
-      "chairFeedbackLabel": "主席回饋",
-      "chairFeedbackPlaceholder": "對代表立場文件的回饋...",
-      "empty": "還沒有文件。 新增一個或連結一個 Google 文件。",
-      "sidebarDocumentLabel": "文件",
-      "sections": {
-        "chairReports": "主席報告",
-        "rop": "羅普",
-        "awardCriteria": "獎勵標準",
-        "prepDocuments": "準備文件",
-        "chairNotes": "主席筆記",
-        "otherDocuments": "其他文件"
-      },
-      "untitled": "無題",
-      "linkedDocumentHeading": "連結文檔",
-      "notesHeading": "筆記",
-      "noGoogleDocYet": "尚未連結 Google 文件。 使用「編輯」新增 docs.google.com/document/d/... 網址。",
-      "chairFeedbackHeading": "主席回饋",
-      "noFeedbackYet": "尚未添加反饋。"
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "首先輸入代表電子郵件。",
-      "sentToDelegate": "發送至{email}。",
-      "newResolution": "新決議",
-      "maxDraftResolutions": "該委員會已有 {count} 項決議草案。",
-      "googleDocLink": "谷歌文檔連結",
-      "googleDocUrlPlaceholder": "Google 文件 URL（docs.google.com/document/d/… — 用於嵌入 + 編輯）",
-      "googleDocUrlHelp": "新的 Google 文件在另一個標籤中開啟；從網址列複製 URL 並將其貼上到此處。",
-      "mainSubmittersPlaceholder": "主要提交者（使用者 ID，以逗號分隔）",
-      "coSubmittersPlaceholder": "共同提交者（使用者 ID，以逗號分隔）",
-      "create": "創造",
-      "cancel": "取消",
-      "openInNewTab": "在新分頁中開啟",
-      "noGoogleDocLink": "沒有 Google 文件連結",
-      "visibleToOtherBloc": "對其他區塊可見",
-      "resolutionCounts": "主子：{main} |共同替補：{co} |簽署人：{簽署人}",
-      "blocButton": "集團{名稱}（{立場}）",
-      "signVirtually": "虛擬簽名（通知主要訂閱者）",
-      "shareByEmail": "透過電子郵件分享解決方案",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "發送給代表",
-      "clauseEditor": "條款編輯",
-      "noClausesYet": "還沒有條款。",
-      "clauseNumber": "條款{編號}",
-      "saveClause": "保存條款",
-      "delete": "刪除",
-      "addClausePlaceholder": "新增條款...",
-      "addClause": "新增條款",
-      "clauseVoteHistory": "條款投票歷史",
-      "noClauseOutcomesYet": "尚未記錄條款投票結果。",
-      "clauseFallback": "條款",
-      "passed": "透過",
-      "failed": "失敗的",
-      "motionId": "運動{id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "投票部分",
-        "open": "打開",
-        "closed": "關閉"
-      },
-      "requiredMajority": "所需多數",
-      "helpRequiredMajorityTitle": "所需多數",
-      "helpRequiredMajorityBody": "選擇用於決定通過/失敗的投票閾值。 「簡單」佔了一半以上。 「2/3」需要絕對多數。",
-      "majoritySimple": "簡單的",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{標籤}多數",
-      "mustVote": "必須投票",
-      "helpMustVoteTitle": "必須投票",
-      "helpMustVoteBody": "將此動議標記為「必須投票」項目。 這用於向參與者傳達要求（取決於委員會的設置）。",
-      "saveSettings": "儲存設定",
-      "delegateBlurb": "講台記錄會議中的投票情況（例如點名）。 這裡的動議投票僅遵循是/否（不使用棄權）。 您可以追蹤統計數據；代表們不在應用程式中投票。",
-      "yes": "是的",
-      "no": "不",
-      "ballots": "選票",
-      "total": "全部的",
-      "outcome": "結果",
-      "passed": "透過",
-      "failed": "失敗的",
-      "noRecordedVotes": "沒有記錄投票",
-      "reopenMotion": "重新開放動議",
-      "editRecordOpen": "編輯記錄...",
-      "hideSettings": "隱藏設定",
-      "preliminaryPassing": "通過（初步）",
-      "preliminaryFailing": "失敗（初步）",
-      "delegateRollCall": "代表點名 ({count})",
-      "noSeatedDelegates": "沒有在座代表參與此項動議。",
-      "rollPrefix": "卷：",
-      "recordedPrefix": "記錄：",
-      "recordedYes": "是的",
-      "recordedNo": "不",
-      "recordedAbstain": "棄權",
-      "recordedNone": "—",
-      "abstain": "棄權",
-      "clear": "清除",
-      "closeMotion": "關閉動作",
-      "mustVoteBadge": "必須投票",
-      "canVoteBadge": "可以投票",
-      "noMotions": "還沒有任何動議。",
-      "currentOpenMotion": "目前打開運動",
-      "noOpenMotion": "目前沒有公開動議。",
-      "recentClosedMotions": "最近的非公開動議",
-      "noClosedMotions": "還沒結束動議。",
-      "untitled": "無題",
-      "voteTypes": {
-        "motion": "運動",
-        "amendment": "修正案",
-        "resolution": "解決"
-      },
-      "roll": {
-        "absent": "缺席（卷）",
-        "present_abstain": "出席 — 可以棄權（投擲）",
-        "present_voting": "出席並投票（點名）",
-        "unknown": "- （卷）"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "型材截面",
-        "overview": "概述",
-        "awards": "獎項",
-        "private": "私人記錄",
-        "settings": "個人資料設定"
-      },
-      "profilePicture": "個人資料圖片",
-      "uploadFile": "上傳文件",
-      "uploading": "正在上傳...",
-      "photoSaved": "照片已上傳並儲存。",
-      "orUrl": "或透過URL設置",
-      "urlPlaceholder": "https://...",
-      "name": "姓名",
-      "username": "使用者名稱",
-      "usernamePlaceholder": "例如亞歷克斯_1999",
-      "pronouns": "代名詞",
-      "customPronounNote": "您的個人資料中有一個自訂代名詞集，此處不再接受。 選擇上面的一個選項（或留空）。 保存替換舊值。",
-      "school": "學校",
-      "schoolPlaceholder": "例如林肯高中",
-      "grade": "年級",
-      "selectGrade": "選擇年級",
-      "conferencesAttended": "參加的會議",
-      "awardsComma": "獎項（以逗號分隔）",
-      "awardsPlaceholder": "最佳代表、榮譽獎",
-      "allocation": "分配",
-      "selectAllocation": "選擇分配",
-      "noAllocationsPlaceholder": "沒有可用的委員會分配",
-      "saveProfile": "儲存個人資料",
-      "saved": "個人資料已儲存。",
-      "saveFailed": "無法儲存個人資料。",
-      "errUsernamePattern": "使用者名稱必須為 3-32 個字元（字母、數字、_、.、-）",
-      "errPronounsPreset": "從清單中選擇一個代名詞。",
-      "errImageType": "請選擇一個圖像檔案。",
-      "errImageSize": "圖片太大（最大 5 MB）。",
-      "errUploadFailed": "上傳失敗。",
-      "errStorageSetup": "未設定個人資料圖片儲存。 在 Supabase 專案中，執行遷移 00100_profile_pictures_storage_bucket.sql，或建立名為 profile-pictures 的公共儲存桶（請參閱 README）。",
-      "errPublicUrl": "無法解析上傳圖像的公共 URL。",
-      "fallbacks": {
-        "yourCountry": "你的國家",
-        "committeeSession": "委員會會議",
-        "delegate": "代表",
-        "speechNote": "演講筆記",
-        "untitledMotion": "無標題動議",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "歡迎來自 {flag} {country} 的代表",
-        "subtitle": "您想從什麼開始？",
-        "links": {
-          "documents": "文件",
-          "notes": "筆記",
-          "committeeRoom": "委員會室",
-          "runningNotes": "跑步筆記",
-          "ideas": "想法",
-          "guides": "指南",
-          "sources": "來源",
-          "resolutions": "決議",
-          "speeches": "演講",
-          "stances": "立場",
-          "crisisSlides": "危機幻燈片",
-          "report": "報告",
-          "motions": "議案",
-          "points": "積分"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "您的個人資料中的獎項",
-        "rank": "排名{排名}",
-        "pending": {
-          "tab": "待定提名",
-          "title": "待定主席提名",
-          "descriptionSingle": "由主席保存並與 SMT 分享以供審核。確認後最終獎項將顯示在下方。",
-          "descriptionTabbed": "由主席保存並與 SMT 分享以供審核。最終獎項在確認後出現。"
-        },
-        "recorded": {
-          "tab": "記錄獎項",
-          "title": "記錄獎項",
-          "description": "當主席或 SMT 在獎勵追蹤器中分配您時列出。最終認可遵循會議規則。"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "僅您、委員會主席和相關委員會的 SMT 可見。",
-        "points": {
-          "title": "主席積分（私人）"
-        },
-        "speechNotes": {
-          "title": "主席演講稿（私人）"
-        },
-        "motions": {
-          "title": "你移動的動作",
-          "description": "儲存到您的個人資料中以供委員會審查和 SMT 監督。"
-        }
-      },
-      "discipline": {
-        "title": "紀律狀況（私人）",
-        "statusLine": "警告：{警告} · 罷工：{strikes}{votingDisabled}{speakingSuspished}{removedFromCommittee}",
-        "votingDisabled": "禁用投票",
-        "speakingSuspended": "發言暫停",
-        "removedFromCommittee": "從委員會中除名",
-        "updated": "更新：{值}"
-      },
-      "preview": {
-        "ariaLabel": "個人資料預覽",
-        "title": "預覽",
-        "yourName": "你的名字",
-        "usernameNotSet": "使用者名稱未設定",
-        "gradeValue": "年級{年級}",
-        "awards": "獎項"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "議事規則 (RoP)",
-          "content": "# 議事規則\n\n## 點和動作\n- **程序要點**：正確的程序\n- **資訊點**：向演講者提問\n- **個人特權點數**：個人舒適度\n- **動議**：延後辯論\n- **休會動議**：結束會議\n\n## 投票\n- 程序事項的簡單多數\n- 實質事項 2/3 多數\n- 如有需要，進行唱名投票"
-        },
-        "examples": {
-          "title": "範例",
-          "content": "# 例子\n\n## 解析度格式\n````\n大會，\n…\n1. 呼籲成員國...\n2. 敦促國際社會…\n````\n\n## 立場文件結構\n一、背景\n2. 國家政策\n3. 建議的解決方案"
-        },
-        "templates": {
-          "title": "範本",
-          "content": "# 模板\n\n## 主席報告模板\n- 委員會概覽\n- 關鍵討論點\n- 通過的決議\n- 建議"
-        },
-        "chairReport": {
-          "title": "主席報告",
-          "content": "# 主席報告\n\n在此記錄委員會的程序和結果。"
-        }
-      },
-      "edit": "編輯",
-      "guideDocument": "指導文件",
-      "additionalNotes": "附加說明",
-      "noContentYet": "還沒有內容。",
-      "titlePlaceholder": "標題",
-      "googleDocsUrl": "谷歌文檔網址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "新的 Google 文件將在另一個選項卡中開啟。 貼上可共享鏈接，以便代表可以在此處打開文件（查看/編輯取決於 Google 共享）。",
-      "markdownOptional": "Markdown 註釋（如果您使用 Google 文檔，則可選）",
-      "save": "節省",
-      "cancel": "取消",
-      "createNewGuide": "建立新指南",
-      "slugPlaceholder": "蛞蝓（獨特）",
-      "titleLowerPlaceholder": "標題",
-      "googleDocsUrlOptional": "Google 文件 URL（可選）",
-      "markdownContentOptional": "Markdown 內容（可選）",
-      "create": "創造",
-      "glossary": {
-        "title": "模擬聯合國議程術語表",
-        "subtitle": "與您的委員會代碼和當前議程主題相符的獨特術語。",
-        "committeeCode": "委員會代碼：{code}",
-        "topicTag": "主題：{主題}",
-        "sources": {
-          "core": "核",
-          "committee": "委員會",
-          "topic": "話題"
-        },
-        "terms": {
-          "delegation": {
-            "term": "代表團",
-            "definition": "在委員會中代表一個國家或實體的國家或觀察員小組。"
-          },
-          "placard": {
-            "term": "標語牌",
-            "definition": "用於請求發言、投票和發出程序性動議的國家標誌。"
-          },
-          "dais": {
-            "term": "講台",
-            "definition": "主持團隊主持辯論、應用程式並管理發言順序。"
-          },
-          "quorum": {
-            "term": "法定人數",
-            "definition": "進行正式事務和投票所需的最低代表團數量。"
-          },
-          "motion": {
-            "term": "運動",
-            "definition": "改變辯論流程的正式提案，例如核心小組類型或發言時間。"
-          },
-          "point_of_order": {
-            "term": "訂單問題",
-            "definition": "根據委員會規則錯誤應用程式時進行幹預。"
-          },
-          "moderated_caucus": {
-            "term": "主持的核心會議",
-            "definition": "結構化辯論部分，針對明確的子主題進行短時間演講。"
-          },
-          "unmoderated_caucus": {
-            "term": "無主持的核心小組",
-            "definition": "非正式談判階段，代表可以自由起草和合併想法。"
-          },
-          "draft_resolution": {
-            "term": "決議草案",
-            "definition": "最終投票和通過先前擬議委員會行動的工作文本。"
-          },
-          "amendment": {
-            "term": "修正案",
-            "definition": "對文本草案提出的修改，要么是友好的，要么被投票為不友好的。"
-          },
-          "operative_clause": {
-            "term": "執行條款",
-            "definition": "以行動為導向的編號條款，描述委員會建議該做什麼。"
-          },
-          "preambulatory_clause": {
-            "term": "序言條款",
-            "definition": "背景設定條款引用背景原則、關注點和先前的框架。"
-          },
-          "right_of_reply": {
-            "term": "答覆權",
-            "definition": "有機會對影響代表團尊嚴或立場的直接聲明做出回應。"
-          },
-          "veto_power": {
-            "term": "否決權",
-            "definition": "聯合國安理會常任理事國有權阻止實質決議草案。"
-          },
-          "chapter_vii": {
-            "term": "第七章",
-            "definition": "《聯合國憲章》關於和平威脅、制裁和使用武力措施的權威。"
-          },
-          "sanctions_regime": {
-            "term": "制裁制度",
-            "definition": "協調限制用於在沒有直接軍事行動的情況下影響行為。"
-          },
-          "arms_control": {
-            "term": "軍備控制",
-            "definition": "限制武器類型、數量或部署的協定和核查系統。"
-          },
-          "non_proliferation": {
-            "term": "防擴散",
-            "definition": "防止核武、化學、生物或先進武器能力擴散的政策。"
-          },
-          "confidence_building_measures": {
-            "term": "建立信任措施",
-            "definition": "減少誤解和衝突風險的透明度和溝通工具。"
-          },
-          "universal_periodic_review": {
-            "term": "普遍定期審議",
-            "definition": "每個聯合國成員國報告並接收權利建議的同儕審查過程。"
-          },
-          "special_rapporteur": {
-            "term": "特別報告員",
-            "definition": "任命獨立專家監測和報告專題或國家權利問題。"
-          },
-          "treaty_body": {
-            "term": "條約機構",
-            "definition": "監督具體人權條約實施情形的專家委員會。"
-          },
-          "public_health_emergency": {
-            "term": "突發公共衛生事件",
-            "definition": "嚴重的疫情爆發需要國家和國際緊急協調應對。"
-          },
-          "surveillance": {
-            "term": "流行病學監測",
-            "definition": "持續收集和分析健康數據以檢測和追蹤疾病趨勢。"
-          },
-          "health_systems": {
-            "term": "加強衛生系統",
-            "definition": "改善勞動力、融資、物流和治理，以提供可靠的醫療服務。"
-          },
-          "transnational_crime": {
-            "term": "跨國組織犯罪",
-            "definition": "透過網路和非法市場跨境協調犯罪活動。"
-          },
-          "illicit_trafficking": {
-            "term": "非法販運",
-            "definition": "毒品、武器、人員或貨物跨司法管轄區非法流動。"
-          },
-          "rule_of_law_capacity": {
-            "term": "法治能力",
-            "definition": "司法系統公平調查、起訴和保護權利的製度能力。"
-          },
-          "sustainable_development": {
-            "term": "永續發展",
-            "definition": "平衡社會進步、經濟機會和環境保護的成長模式。"
-          },
-          "financing_for_development": {
-            "term": "發展融資",
-            "definition": "支持長期發展優先事項的公共和私人融資機制。"
-          },
-          "policy_coordination": {
-            "term": "政策協調",
-            "definition": "協調國家和機構的行動，以避免重複並增加集體影響。"
-          },
-          "child_protection": {
-            "term": "兒童保護",
-            "definition": "防止所有環境下針對兒童的剝削、虐待和暴力行為的措施。"
-          },
-          "education_access": {
-            "term": "教育機會",
-            "definition": "確保所有兒童獲得包容、公平和持續的學習機會。"
-          },
-          "humanitarian_response": {
-            "term": "人道主義回應",
-            "definition": "快速救援行動解決危機和衝突環境中的緊急需求。"
-          },
-          "gender_mainstreaming": {
-            "term": "性別主流化",
-            "definition": "將性別分析納入政策設計、實施和評估。"
-          },
-          "gender_based_violence": {
-            "term": "基於性別的暴力",
-            "definition": "基於性別認同、角色或不平等權力關係而針對某人的傷害。"
-          },
-          "economic_empowerment": {
-            "term": "經濟賦權",
-            "definition": "擴大獲得體面工作、財務、所有權和決策權的機會。"
-          },
-          "source_attribution": {
-            "term": "來源歸屬",
-            "definition": "明確引用資訊來源，以便可以驗證主張並結合上下文。"
-          },
-          "verified_reporting": {
-            "term": "驗證報告",
-            "definition": "新聞標準要求在發布有爭議的事實之前進行證實。"
-          },
-          "editorial_independence": {
-            "term": "編輯獨立性",
-            "definition": "將報告決策與政治壓力或利害關係人的影響分開。"
-          },
-          "climate_mitigation": {
-            "term": "減緩氣候變遷",
-            "definition": "減少溫室氣體排放或增加長期碳清除的行動。"
-          },
-          "climate_adaptation": {
-            "term": "氣候適應",
-            "definition": "減少氣候相關影響脆弱性的政策和投資。"
-          },
-          "cyber_norms": {
-            "term": "網路規範",
-            "definition": "對數位和網路領域負責任的國家行為的共同期望。"
-          },
-          "critical_infrastructure": {
-            "term": "關鍵基礎設施",
-            "definition": "電力、水、健康和通訊等基本系統需要彈性。"
-          },
-          "epidemiology": {
-            "term": "流行病學",
-            "definition": "研究疾病模式、原因和人群分佈。"
-          },
-          "preparedness_response": {
-            "term": "準備和回應",
-            "definition": "規劃、協調和緊急行動以遏制和管理緊急情況。"
-          },
-          "non_refoulement": {
-            "term": "不驅回",
-            "definition": "禁止人們返回面臨嚴重傷害的地方的原則。"
-          },
-          "durable_solutions": {
-            "term": "耐用的解決方案",
-            "definition": "流離失所者的長期成果：返回、融入當地社會或重新安置。"
-          },
-          "nuclear_safeguards": {
-            "term": "核子保障",
-            "definition": "確保核子材料不會被轉用於武器用途的核查措施。"
-          },
-          "counter_terrorism": {
-            "term": "反恐",
-            "definition": "針對恐怖活動的綜合法律、預防和安全措施。"
-          },
-          "due_process": {
-            "term": "正當程序",
-            "definition": "在調查、起訴和製裁過程中，公平的法律程序保護權利。"
-          },
-          "resource_security": {
-            "term": "資源安全",
-            "definition": "在經濟和環境壓力下可靠地獲取食物、水和能源。"
-          },
-          "resilience": {
-            "term": "彈性",
-            "definition": "社區和機構吸收衝擊和有效恢復的能力。"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "編輯想法",
-      "googleDocsUrl": "谷歌文檔網址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "簡短的想法文本（可選）",
-      "save": "節省",
-      "cancel": "取消",
-      "addIntro": "新增 Google 文件以起草適當的解決方案想法，或輸入簡短的註釋（或兩者）。",
-      "googleDocsCreateHelp": "新的 Google 文件在另一個標籤中開啟；建立連結後將連結貼到此處。",
-      "resolutionIdeaPlaceholder": "解決思路...",
-      "add": "添加",
-      "noIdeasYet": "還沒有想法。",
-      "ideaLabel": "主意",
-      "ideaFallback": "想法{編號}",
-      "linkedDoc": "連結文檔",
-      "addedOn": "添加了{日期}",
-      "edit": "編輯",
-      "delete": "刪除",
-      "ideaDocument": "想法文件",
-      "summary": "概括",
-      "emptyIdea": "空洞的想法。"
-    },
-    "stances": {
-      "heatmapTitle": "立場簡要概述（熱圖）",
-      "heatmapHelp": "您的分配在多大程度上支持___？ （1-5級）",
-      "topicPlaceholder": "例如氣候行動",
-      "extentLabel": "範圍（1-5）：",
-      "extentHelpTitle": "範圍（1-5）",
-      "extentHelpBody": "1 表示您的分配對主題的支援很少，5 表示支援很強。 選擇一個與您在委員會中的立場相符的數字。",
-      "add": "添加",
-      "viewOnlyHeatmap": "僅供員工查看的熱圖。",
-      "notesPerAllocation": "每次分配的註釋",
-      "noAllocationsYet": "尚未分配",
-      "notesPlaceholder": "此分配的立場說明...",
-      "noteLanguageWarning": "讀者警告：本說明可能包含不當語言。",
-      "save": "節省",
-      "saveHelpTitle": "保存立場註釋",
-      "saveHelpBody": "保存此分配的立場註釋。 工作人員和（取決於委員會設置）其他參與者可以查看它。"
-    },
-    "speeches": {
-      "newSpeech": "新演講",
-      "speechTitlePlaceholder": "演講標題",
-      "googleDocsUrl": "谷歌文檔網址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "在新分頁中開啟 Google；準備好後，將文件 URL 貼到此處。",
-      "plainTextOptional": "純文字草稿（如果您使用 Google 文檔，則可選）",
-      "save": "節省",
-      "cancel": "取消",
-      "noSpeechesYet": "還沒有發言。 連結 Google 文件或貼上文字。",
-      "speechLabel": "演講",
-      "untitled": "無題",
-      "edit": "編輯",
-      "speechDocument": "演講稿",
-      "draftText": "文字草稿",
-      "noContentHint": "將 Google 文件與「編輯」鏈接，或在表單中添加純文字。"
-    },
-    "committeeRoom": {
-      "committeeLabel": "委員會",
-      "yourContext": "您的背景",
-      "roleLabel": "角色",
-      "seatLabel": "座位",
-      "clearSearchTitle": "清除搜尋並顯示所有代表團",
-      "vacantLabel": "空缺",
-      "assignedLabel": "已分配",
-      "daisLabel": "講台",
-      "phaseLabel": "階段",
-      "phaseVoting": "表決",
-      "phaseDebate": "辯論",
-      "focusSearchTitle": "焦點搜尋（講台標題和名稱與您的查詢相符）",
-      "tipLabel": "提示",
-      "searchVacantTitle": "搜索房間內的“空位”",
-      "searchHint": "輸入國家/地區、代表姓名、學校、代名詞或「空缺」以突出房間中的匹配項。 按 Enter 跳到第一個符合項目； Esc 清除。 點選「空位」可跳到空位。",
-      "findLabel": "尋找代表團或講台成員",
-      "searchPlaceholder": "國家、姓名、學校...",
-      "matchesCount": "{matches} 個席位（共 {total} 個）匹配",
-      "enterScrolls": "輸入捲軸",
-      "typeToFilterHint": "輸入要過濾的內容 - 輸入滾動到第一個匹配項",
-      "noMatches": "沒有符合的代表團或講台席位。",
-      "digitalDisplay": "數字顯示",
-      "floorLabel": "地面",
-      "staffSeatsHeading": "工作人員-座位",
-      "searchAria": "搜尋代表團",
-      "virtualRoomVacant": "空缺",
-      "profileAria": "看個人資料：{國家}",
-      "vacantSeatAria": "空座",
-      "placardAria": "標語牌{國家}",
-      "gavelAria": "木槌",
-      "viewProfileAria": "看個人檔案：{title}",
-      "noProfileLinkAria": "{title}（無個人資料連結）",
-      "committeeFloor": "委員會樓層",
-      "virtualRoomFigureAria": "虛擬委員會會議室 - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "過濾代表團。 第一個突出顯示的座位是環中的第一場比賽。",
-      "helperText": "標語牌列出了每個代表個人資料中的國家（來自分配）、姓名、學校和代名詞。 在“個人資料”下編輯您的。 空的委員會席位顯示為空缺。 點擊已填滿的標語牌或講台座位即可開啟該成員的頁面（從那裡聊天和報告）。",
-      "virtualRoomCaption": "虛擬模擬聯合國委員會會議室，配有代表標語牌，顯示國家、姓名、學校和代名詞。"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "請求發言",
-        "delegateFallback": "代表",
-        "needAllocation": "您需要分配資源才能請求發言。",
-        "alreadyQueued": "隊列中已有一個有效的發言請求。",
-        "requested": "要求發言。 您將出現在佇列中。",
-        "requestFailed": "未能請求發言。",
-        "helpBody": "將您的代表團送至主席隊列。 您一次可以有一個活躍的等待/當前請求。",
-        "purposeLabel": "可選用途（顯示在隊列標籤中）",
-        "purposeHelpTitle": "用途標籤",
-        "purposeHelpBody": "該文字附加在您的國家/地區名稱後，以便主席可以了解您要求發言的原因。",
-        "purposePlaceholder": "例如支援+修訂概述",
-        "requesting": "請求...",
-        "rollPromptTitle": "需要主席批准",
-        "rollPromptBodyPickStatus": "會議已經開始。 選擇您的點名狀態以解鎖發言和投票。 此選擇無法變更。",
-        "rollPromptBodyWaitSessionStart": "等待主席開始委員會會議。",
-        "rollPromptBodyWaitRollPrompt": "等待點名提示。",
-        "rollPromptBodyMarkedAbsent": "您目前被標記為缺席。 請主席標記您發言並投票。",
-        "rollPromptBodyChecking": "正在檢查您的磁碟區狀態...",
-        "rollPromptSaving": "儲存...",
-        "rollPromptPresent": "展示",
-        "rollPromptPresentVoting": "出席並投票"
-      },
-      "motionVoting": {
-        "votingProcedure": "投票程序",
-        "currentMotion": "目前運動",
-        "motioner": "運動者",
-        "majority": "多數",
-        "majoritySimple": "簡單的",
-        "tally": "是 {yes} - 否 {no} - 總計 {total}",
-        "help": "講台上記錄了每個代表團在會議上的投票情況。 動議投票僅使用「是」或「否」（無棄權）。 總計僅計算記錄了「是」或「否」的標誌；缺席的代表團將被跳過。"
-      },
-      "activeMotion": {
-        "currentMotion": "目前運動",
-        "motionFallback": "運動",
-        "motioner": "運動者",
-        "majority": "多數",
-        "majoritySimple": "簡單的",
-        "type": "類型",
-        "timer": "定時器",
-        "currentSpeaker": "目前發言人",
-        "nextSpeaker": "下一位發言者",
-        "speakerTimeLeftCap": "發言時間（左/上限）",
-        "speakerTimeLeftTotal": "發言時間（左/總）",
-        "perSpeaker": "（每個發言者）",
-        "paused": "（停頓）",
-        "pauseReason": "暫停：{原因}"
-      },
-      "floorStatus": {
-        "sessionTime": "會議時間",
-        "sessionNotStarted": "會話未開始",
-        "limit": "限制",
-        "limitRemaining": "還剩 {值}",
-        "limitOverBy": "超過 {value}",
-        "quickLinkSession": "會議",
-        "quickLinkRoll": "卷",
-        "quickLinkSpeakers": "揚聲器",
-        "quickLinkMotions": "議案",
-        "quickLinkTimer": "定時器",
-        "dais": "講台",
-        "pinned": "已固定",
-        "viewFullAnnouncement": "查看完整公告",
-        "timerPausesReadOnly": "定時器暫停（唯讀）",
-        "speakerList": "演講嘉賓名單",
-        "speakerFallback": "揚聲器",
-        "rollCallYou": "點名（你）",
-        "fullAnnouncement": "完整公告",
-        "daisAnnouncement": "講台公告",
-        "close": "關閉"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "會話名稱",
-        "sessionNamePlaceholder": "例如上午場",
-        "sessionNameSaving": "保存…",
-        "sessionNameSaved": "已儲存",
-        "sessionNameHint": "自動儲存並顯示在會話歷史記錄中。",
-        "title": "委員會會議",
-        "subtitle": "開始或停止委員會會議。",
-        "helpStartStop": "開始為每個人開始即時委員會會議計時器/狀態。 停止結束會話並清除目前時間限制。",
-        "migrationUnavailable": "在應用最新的資料庫遷移之前，會話控制暫時無法使用。",
-        "endTimeInFuture": "選擇未來的結束時間，或切換為無限。",
-        "sessionStartUnavailable": "在套用最新遷移之前，會話開始時間戳記不可用。",
-        "endTimeInFutureSetNoLimit": "選擇未來的結束時間，或不設定限制。",
-        "sessionLimitUpdated": "會話限制已更新。",
-        "startedLabel": "開始：",
-        "timeInLabel": "時間：",
-        "timeUntilEndLabel": "距結束時間：",
-        "overByValue": "超過 {value}",
-        "modeLabel": "模式：",
-        "modeStopwatchNoLimit": "秒錶（無時間限制）",
-        "sessionNotRunning": "會話未運行。",
-        "sessionLimit": "會話限制",
-        "sessionLimitModesTitle": "會話限制模式",
-        "sessionLimitModesHelp": "無：沒有盡頭。 時間預算：從開始計算。 結束於：您當地時區的固定時鐘時間。",
-        "sessionLimitOptional": "選修的。",
-        "noneLabel": "沒有任何",
-        "noneDescription": "運行直到你停下來。",
-        "timeBudgetLabel": "時間預算",
-        "timeBudgetDescription": "從你開始的那一刻開始計算。",
-        "endTimeLabel": "結束時間",
-        "endTimeDescription": "使用固定時鐘時間（如果兩者都設定過，則覆蓋預算）。",
-        "noneIndefinite": "無（不確定）",
-        "noneScheduledEndHint": "沒有預定的結束時間；僅顯示經過的時間。",
-        "timeBudgetFromStart": "從開始的時間預算",
-        "hoursLabel": "時間",
-        "minutesLabel": "分分鐘",
-        "minimumOneMinute": "（最少 1 分鐘）",
-        "endAtLocalTime": "結束於（當地時間）",
-        "stopSession": "停止會話",
-        "saveLimit": "保存限額",
-        "saveLimitHelp": "在會話已運行時應用更新的限制設置，而不停止會話。",
-        "startSession": "開始會話",
-        "sidebarUsePrefix": "使用側邊欄",
-        "rollCall": "點名",
-        "speakers": "揚聲器",
-        "formalMotions": "正式動議",
-        "timer": "定時器",
-        "sidebarAnd": "和",
-        "announcements": "公告",
-        "sidebarUseSuffix": "— 每個選項卡一個工具。"
-      },
-      "history": {
-        "title": "會話歷史記錄",
-        "savedCount": "已儲存 {count} 個",
-        "permissionsHint": "主席可以重新命名條目。 SMT/管理員可以重新命名和刪除條目。",
-        "empty": "還沒有會話歷史記錄。",
-        "rename": "重新命名",
-        "delete": "刪除",
-        "deleteConfirm": "從歷史記錄中刪除此會話嗎？",
-        "sessionNamePrompt": "會話名稱",
-        "rangeClosed": "{範圍}",
-        "rangeOngoing": "{範圍} -> 正在進行"
-      },
-      "timerPage": {
-        "title": "定時器",
-        "controlsTitle": "定時器控制",
-        "controlsHelp": "使用全體發言權來確定總體辯論時間，或使用動議投票將可見性與特定的公開投票項目聯繫起來。",
-        "tabSetup": "1) 設定",
-        "tabClock": "2) 時鐘控制",
-        "tabNotes": "3）演講筆記",
-        "tabLog": "4）暫停日誌",
-        "setupHelp": "選擇此計時器是用於全體發言（代表始終可見）還是與開放投票的動議相關（代表僅在該投票為活動項目時才能看到它）。 無論如何，打開每個發言者的時間後，時鐘在主持的預選會議期間仍然可見。 暫停時鐘/開始時鐘凍結或恢復倒數計時。 單獨設定揚聲器時間（剩餘）和總時間，然後儲存計時器。 預設將兩者填入相同的長度；您可以隨後編輯任一欄位。 暫停會記錄一個簡短的原因。",
-        "namedPreset": "命名預設",
-        "applyPreset": "應用預設...",
-        "floorLabelDelegates": "樓層標籤（代表）",
-        "floorLabelPlaceholder": "例如GSL 60年代",
-        "timerPurpose": "定時器用途",
-        "purposeGeneralFloor": "一般性辯論/全體發言（與投票無關）",
-        "purposeMotionVote": "開放動議 - 僅當投票在場上處於活動狀態時才計時器",
-        "openMotionForVoting": "開放動議（必須開放投票）",
-        "selectMotion": "選擇運動...",
-        "untitled": "無題",
-        "noOpenMotionWarning": "沒有動議可供投票。 首先進行投票，或將目的切換到普通樓層。",
-        "clock": "鐘",
-        "running": "跑步",
-        "paused": "已暫停",
-        "saveToEnablePauseStart": "儲存計時器以啟用暫停/啟動。",
-        "pauseReasonLogged": "暫停原因（已記錄）",
-        "pauseReasonPlaceholder": "例如程序問題、技術問題、無主持的核心會議…",
-        "pauseClock": "暫停時鐘",
-        "startClock": "開始時鐘",
-        "perSpeakerTitle": "每位發言人的時間（有主持的核心會議）",
-        "perSpeakerHelp": "將總時間設定為每個發言者的上限，將發言者時間設定為剩餘時間；前進移動到下一個發言者並重置剩餘的上限。",
-        "currentSpeaker": "目前發言人",
-        "nextSpeaker": "下一位發言者",
-        "speechNotesCurrentSpeaker": "演講稿（當前演講者）",
-        "speechNotesHelp": "註釋與當前發言者計時器文本相關聯，當發言者列表中有人標記為“當前”時，他們的代表團將被存儲以供參考。",
-        "timerFloorLabel": "計時器（樓層）：",
-        "speakerListCurrent": "演講者名單（目前）：",
-        "noCurrentDelegation": "發言者名單上沒有標記為「目前」的代表團。",
-        "note": "筆記",
-        "notePlaceholder": "點、POI、語調、後續...",
-        "saveSpeechNote": "儲存演講筆記",
-        "recentNotes": "您最近的筆記（本委員會）",
-        "delete": "刪除",
-        "speakerTimeRemaining": "發言時間（剩餘）",
-        "remainingHelpPerSpeaker": "當前發言者的倒數計時（前進時重置）。",
-        "remainingHelpNormal": "目前發言者的倒數計時（可以小於總數）。",
-        "totalTime": "總時間",
-        "totalHelpPerSpeaker": "每位發言者的上限（分母為場內；提前補充剩餘的金額）。",
-        "totalHelpNormal": "此計時器段的完整長度（顯示在地板上的斜線之後）。",
-        "saveTimer": "儲存計時器",
-        "advanceSpeakerReset": "提前揚聲器和重置時鐘",
-        "recentPauseLog": "最近暫停日誌",
-        "noPauseEvents": "該委員會尚未記錄暫停事件。",
-        "openPauseLogHint": "開啟暫停日誌可查看記錄的暫停原因和時間戳記。",
-        "saved": "計時器已儲存。",
-        "savedCapped": "計時器已儲存。 演講時間比總時間長；上限為總數。",
-        "alreadyPaused": "計時器已暫停。",
-        "pausedForCommittee": "委員會的計時器暫停。",
-        "alreadyRunning": "計時器已經在運作。",
-        "runningForCommittee": "委員會正在運行計時器。",
-        "euTimerBoardTitle": "歐盟議會定時器板（11個定時器）",
-        "euTimerBoardHelp": "每方一個計時器，加上總時間、POI/POC 時間和發言者時間。使用「應用」將一行複製到「時鐘」標籤上的即時計時器欄位（發言者時間/儲存計時器）。",
-        "euTimerName": "姓名",
-        "euTimerTag": "標籤",
-        "euTotalTime": "總時間",
-        "euPoiPocTime": "POI/POC 時間",
-        "euSpeakerTime": "發言時間"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "委員會室（已滿）",
         "hint": "虛擬佈局和代表樓層"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "自動儲存失敗",
     "autosavedWithCountry": "自動儲存 - {國家/地區}",
     "delegateFallback": "代表"
+  },
+  "sources": {
+    "addSource": "添加來源",
+    "sourceUrl": "來源網址",
+    "urlPlaceholder": "https://docs.google.com/document/d/...（建議）",
+    "urlHelp": "對於新的 Google 文檔，請使用 按鈕並將文檔連結貼到此處。",
+    "titleOptional": "標題（可選）",
+    "saveChanges": "儲存變更",
+    "editSource": "編輯來源",
+    "urlPlaceholderShort": "Google 文件或其他 URL",
+    "empty": "還沒有來源。 新增 Google 文件連結以在此處開啟它。",
+    "sourceLabel": "來源",
+    "openLink": "打開連結",
+    "embedHeading": "原始檔",
+    "notGoogleDoc": "此 URL 不是 Google 文件。 使用 docs.google.com/document/d/... 連結在此處嵌入和編輯；否則打開上面的連結。"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "代表不能直接上傳立場文件。 使用其他文件類型。",
+    "alertOnlyChairsPositionPaper": "只有主席/SMT/管理者可以上傳立場文件。",
+    "alertOnlySmtChairReport": "只有 SMT/管理者可以上傳主席報告。",
+    "alertOnlySmtRop": "只有 SMT/admin 可以上傳 RoP 文件。",
+    "alertOnlySmtAwardCriteria": "只有 SMT/admin 可以上傳獎勵標準檔。",
+    "alertNeedContentOrUrl": "新增本機文字內容或 Google 文件 URL。",
+    "confirmDelete": "刪除這個文件？",
+    "delegatePrepTitle": "準備文件部分",
+    "delegatePrepBody": "您可以直接從此頁面上傳、檢視和編輯您自己的<prep>準備文件</prep>。",
+    "positionPaperGuideTitle": "位置導紙器",
+    "positionPaperGuideBlurb": "在準備最終 PDF 時下載佔位符指南。",
+    "downloadPlaceholderGuide": "下載佔位符指南",
+    "addDocument": "新增文件",
+    "tabs": {
+      "ariaLabel": "文件部分",
+      "library": "圖書館",
+      "compose": "撰寫",
+      "composeHint": "從此選項卡開始新文件或編輯現有草稿。"
+    },
+    "newDocumentTitle": "新文件",
+    "editDocumentTitle": "編輯文檔",
+    "typeLabel": "類型",
+    "types": {
+      "position_paper": "立場文件",
+      "chair_report": "主席報告",
+      "rop": "羅普",
+      "award_criteria": "獎勵標準",
+      "chair_notes": "主席筆記",
+      "prep_doc": "準備文件"
+    },
+    "delegatePositionPaperNote": "立場文件由主席上傳並附上回饋。",
+    "delegateOwner": "委託所有者",
+    "chairRecipient": "主席得獎者",
+    "titleLabel": "標題",
+    "titlePlaceholder": "文件標題",
+    "googleDocsUrl": "谷歌文檔網址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...（在應用程式中嵌入檢視/編輯）",
+    "googleDocsHelp": "使用新 Google 文件在新分頁中開啟 Google，然後將文件連結貼到此處。 下面的純文字是可選的。 每個文件都需要本機文字和/或 Google 文件連結。",
+    "plainTextOptional": "純文字（可選）",
+    "plainTextPlaceholder": "註釋或草稿文字...",
+    "chairFeedbackLabel": "主席回饋",
+    "chairFeedbackPlaceholder": "對代表立場文件的回饋...",
+    "empty": "還沒有文件。 新增一個或連結一個 Google 文件。",
+    "sidebarDocumentLabel": "文件",
+    "sections": {
+      "chairReports": "主席報告",
+      "rop": "羅普",
+      "awardCriteria": "獎勵標準",
+      "prepDocuments": "準備文件",
+      "chairNotes": "主席筆記",
+      "otherDocuments": "其他文件"
+    },
+    "untitled": "無題",
+    "linkedDocumentHeading": "連結文檔",
+    "notesHeading": "筆記",
+    "noGoogleDocYet": "尚未連結 Google 文件。 使用「編輯」新增 docs.google.com/document/d/... 網址。",
+    "chairFeedbackHeading": "主席回饋",
+    "noFeedbackYet": "尚未添加反饋。"
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "首先輸入代表電子郵件。",
+    "sentToDelegate": "發送至{email}。",
+    "newResolution": "新決議",
+    "maxDraftResolutions": "該委員會已有 {count} 項決議草案。",
+    "googleDocLink": "谷歌文檔連結",
+    "googleDocUrlPlaceholder": "Google 文件 URL（docs.google.com/document/d/… — 用於嵌入 + 編輯）",
+    "googleDocUrlHelp": "新的 Google 文件在另一個標籤中開啟；從網址列複製 URL 並將其貼上到此處。",
+    "mainSubmittersPlaceholder": "主要提交者（使用者 ID，以逗號分隔）",
+    "coSubmittersPlaceholder": "共同提交者（使用者 ID，以逗號分隔）",
+    "create": "創造",
+    "cancel": "取消",
+    "openInNewTab": "在新分頁中開啟",
+    "noGoogleDocLink": "沒有 Google 文件連結",
+    "visibleToOtherBloc": "對其他區塊可見",
+    "resolutionCounts": "主子：{main} |共同替補：{co} |簽署人：{簽署人}",
+    "blocButton": "集團{名稱}（{立場}）",
+    "signVirtually": "虛擬簽名（通知主要訂閱者）",
+    "shareByEmail": "透過電子郵件分享解決方案",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "發送給代表",
+    "clauseEditor": "條款編輯",
+    "noClausesYet": "還沒有條款。",
+    "clauseNumber": "條款{編號}",
+    "saveClause": "保存條款",
+    "delete": "刪除",
+    "addClausePlaceholder": "新增條款...",
+    "addClause": "新增條款",
+    "clauseVoteHistory": "條款投票歷史",
+    "noClauseOutcomesYet": "尚未記錄條款投票結果。",
+    "clauseFallback": "條款",
+    "passed": "透過",
+    "failed": "失敗的",
+    "motionId": "運動{id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "投票部分",
+      "open": "打開",
+      "closed": "關閉"
+    },
+    "requiredMajority": "所需多數",
+    "helpRequiredMajorityTitle": "所需多數",
+    "helpRequiredMajorityBody": "選擇用於決定通過/失敗的投票閾值。 「簡單」佔了一半以上。 「2/3」需要絕對多數。",
+    "majoritySimple": "簡單的",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{標籤}多數",
+    "mustVote": "必須投票",
+    "helpMustVoteTitle": "必須投票",
+    "helpMustVoteBody": "將此動議標記為「必須投票」項目。 這用於向參與者傳達要求（取決於委員會的設置）。",
+    "saveSettings": "儲存設定",
+    "delegateBlurb": "講台記錄會議中的投票情況（例如點名）。 這裡的動議投票僅遵循是/否（不使用棄權）。 您可以追蹤統計數據；代表們不在應用程式中投票。",
+    "yes": "是的",
+    "no": "不",
+    "ballots": "選票",
+    "total": "全部的",
+    "outcome": "結果",
+    "passed": "透過",
+    "failed": "失敗的",
+    "noRecordedVotes": "沒有記錄投票",
+    "reopenMotion": "重新開放動議",
+    "editRecordOpen": "編輯記錄...",
+    "hideSettings": "隱藏設定",
+    "preliminaryPassing": "通過（初步）",
+    "preliminaryFailing": "失敗（初步）",
+    "delegateRollCall": "代表點名 ({count})",
+    "noSeatedDelegates": "沒有在座代表參與此項動議。",
+    "rollPrefix": "卷：",
+    "recordedPrefix": "記錄：",
+    "recordedYes": "是的",
+    "recordedNo": "不",
+    "recordedAbstain": "棄權",
+    "recordedNone": "—",
+    "abstain": "棄權",
+    "clear": "清除",
+    "closeMotion": "關閉動作",
+    "mustVoteBadge": "必須投票",
+    "canVoteBadge": "可以投票",
+    "noMotions": "還沒有任何動議。",
+    "currentOpenMotion": "目前打開運動",
+    "noOpenMotion": "目前沒有公開動議。",
+    "recentClosedMotions": "最近的非公開動議",
+    "noClosedMotions": "還沒結束動議。",
+    "untitled": "無題",
+    "voteTypes": {
+      "motion": "運動",
+      "amendment": "修正案",
+      "resolution": "解決",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "缺席（卷）",
+      "present_abstain": "出席 — 可以棄權（投擲）",
+      "present_voting": "出席並投票（點名）",
+      "unknown": "- （卷）"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "型材截面",
+      "overview": "概述",
+      "awards": "獎項",
+      "private": "私人記錄",
+      "settings": "個人資料設定"
+    },
+    "profilePicture": "個人資料圖片",
+    "uploadFile": "上傳文件",
+    "uploading": "正在上傳...",
+    "photoSaved": "照片已上傳並儲存。",
+    "orUrl": "或透過URL設置",
+    "urlPlaceholder": "https://...",
+    "name": "姓名",
+    "username": "使用者名稱",
+    "usernamePlaceholder": "例如亞歷克斯_1999",
+    "pronouns": "代名詞",
+    "customPronounNote": "您的個人資料中有一個自訂代名詞集，此處不再接受。 選擇上面的一個選項（或留空）。 保存替換舊值。",
+    "school": "學校",
+    "schoolPlaceholder": "例如林肯高中",
+    "grade": "年級",
+    "selectGrade": "選擇年級",
+    "conferencesAttended": "參加的會議",
+    "awardsComma": "獎項（以逗號分隔）",
+    "awardsPlaceholder": "最佳代表、榮譽獎",
+    "allocation": "分配",
+    "selectAllocation": "選擇分配",
+    "noAllocationsPlaceholder": "沒有可用的委員會分配",
+    "saveProfile": "儲存個人資料",
+    "saved": "個人資料已儲存。",
+    "saveFailed": "無法儲存個人資料。",
+    "errUsernamePattern": "使用者名稱必須為 3-32 個字元（字母、數字、_、.、-）",
+    "errPronounsPreset": "從清單中選擇一個代名詞。",
+    "errImageType": "請選擇一個圖像檔案。",
+    "errImageSize": "圖片太大（最大 5 MB）。",
+    "errUploadFailed": "上傳失敗。",
+    "errStorageSetup": "未設定個人資料圖片儲存。 在 Supabase 專案中，執行遷移 00100_profile_pictures_storage_bucket.sql，或建立名為 profile-pictures 的公共儲存桶（請參閱 README）。",
+    "errPublicUrl": "無法解析上傳圖像的公共 URL。",
+    "fallbacks": {
+      "yourCountry": "你的國家",
+      "committeeSession": "委員會會議",
+      "delegate": "代表",
+      "speechNote": "演講筆記",
+      "untitledMotion": "無標題動議",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "歡迎來自 {flag} {country} 的代表",
+      "subtitle": "您想從什麼開始？",
+      "links": {
+        "documents": "文件",
+        "notes": "筆記",
+        "committeeRoom": "委員會室",
+        "runningNotes": "跑步筆記",
+        "ideas": "想法",
+        "guides": "指南",
+        "sources": "來源",
+        "resolutions": "決議",
+        "speeches": "演講",
+        "stances": "立場",
+        "crisisSlides": "危機幻燈片",
+        "report": "報告",
+        "motions": "議案",
+        "points": "積分"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "您的個人資料中的獎項",
+      "rank": "排名{排名}",
+      "pending": {
+        "tab": "待定提名",
+        "title": "待定主席提名",
+        "descriptionSingle": "由主席保存並與 SMT 分享以供審核。確認後最終獎項將顯示在下方。",
+        "descriptionTabbed": "由主席保存並與 SMT 分享以供審核。最終獎項在確認後出現。"
+      },
+      "recorded": {
+        "tab": "記錄獎項",
+        "title": "記錄獎項",
+        "description": "當主席或 SMT 在獎勵追蹤器中分配您時列出。最終認可遵循會議規則。"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "僅您、委員會主席和相關委員會的 SMT 可見。",
+      "points": {
+        "title": "主席積分（私人）"
+      },
+      "speechNotes": {
+        "title": "主席演講稿（私人）"
+      },
+      "motions": {
+        "title": "你移動的動作",
+        "description": "儲存到您的個人資料中以供委員會審查和 SMT 監督。"
+      }
+    },
+    "discipline": {
+      "title": "紀律狀況（私人）",
+      "statusLine": "警告：{警告} · 罷工：{strikes}{votingDisabled}{speakingSuspished}{removedFromCommittee}",
+      "votingDisabled": "禁用投票",
+      "speakingSuspended": "發言暫停",
+      "removedFromCommittee": "從委員會中除名",
+      "updated": "更新：{值}"
+    },
+    "preview": {
+      "ariaLabel": "個人資料預覽",
+      "title": "預覽",
+      "yourName": "你的名字",
+      "usernameNotSet": "使用者名稱未設定",
+      "gradeValue": "年級{年級}",
+      "awards": "獎項"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "議事規則 (RoP)",
+        "content": "# 議事規則\n\n## 點和動作\n- **程序要點**：正確的程序\n- **資訊點**：向演講者提問\n- **個人特權點數**：個人舒適度\n- **動議**：延後辯論\n- **休會動議**：結束會議\n\n## 投票\n- 程序事項的簡單多數\n- 實質事項 2/3 多數\n- 如有需要，進行唱名投票"
+      },
+      "examples": {
+        "title": "範例",
+        "content": "# 例子\n\n## 解析度格式\n````\n大會，\n…\n1. 呼籲成員國...\n2. 敦促國際社會…\n````\n\n## 立場文件結構\n一、背景\n2. 國家政策\n3. 建議的解決方案"
+      },
+      "templates": {
+        "title": "範本",
+        "content": "# 模板\n\n## 主席報告模板\n- 委員會概覽\n- 關鍵討論點\n- 通過的決議\n- 建議"
+      },
+      "chairReport": {
+        "title": "主席報告",
+        "content": "# 主席報告\n\n在此記錄委員會的程序和結果。"
+      }
+    },
+    "edit": "編輯",
+    "guideDocument": "指導文件",
+    "additionalNotes": "附加說明",
+    "noContentYet": "還沒有內容。",
+    "titlePlaceholder": "標題",
+    "googleDocsUrl": "谷歌文檔網址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "新的 Google 文件將在另一個選項卡中開啟。 貼上可共享鏈接，以便代表可以在此處打開文件（查看/編輯取決於 Google 共享）。",
+    "markdownOptional": "Markdown 註釋（如果您使用 Google 文檔，則可選）",
+    "save": "節省",
+    "cancel": "取消",
+    "createNewGuide": "建立新指南",
+    "slugPlaceholder": "蛞蝓（獨特）",
+    "titleLowerPlaceholder": "標題",
+    "googleDocsUrlOptional": "Google 文件 URL（可選）",
+    "markdownContentOptional": "Markdown 內容（可選）",
+    "create": "創造",
+    "glossary": {
+      "title": "模擬聯合國議程術語表",
+      "subtitle": "與您的委員會代碼和當前議程主題相符的獨特術語。",
+      "committeeCode": "委員會代碼：{code}",
+      "sources": {
+        "core": "核",
+        "committee": "委員會",
+        "topic": "話題"
+      },
+      "terms": {
+        "delegation": {
+          "term": "代表團",
+          "definition": "在委員會中代表一個國家或實體的國家或觀察員小組。"
+        },
+        "placard": {
+          "term": "標語牌",
+          "definition": "用於請求發言、投票和發出程序性動議的國家標誌。"
+        },
+        "dais": {
+          "term": "講台",
+          "definition": "主持團隊主持辯論、應用程式並管理發言順序。"
+        },
+        "quorum": {
+          "term": "法定人數",
+          "definition": "進行正式事務和投票所需的最低代表團數量。"
+        },
+        "motion": {
+          "term": "運動",
+          "definition": "改變辯論流程的正式提案，例如核心小組類型或發言時間。"
+        },
+        "point_of_order": {
+          "term": "訂單問題",
+          "definition": "根據委員會規則錯誤應用程式時進行幹預。"
+        },
+        "moderated_caucus": {
+          "term": "主持的核心會議",
+          "definition": "結構化辯論部分，針對明確的子主題進行短時間演講。"
+        },
+        "unmoderated_caucus": {
+          "term": "無主持的核心小組",
+          "definition": "非正式談判階段，代表可以自由起草和合併想法。"
+        },
+        "draft_resolution": {
+          "term": "決議草案",
+          "definition": "最終投票和通過先前擬議委員會行動的工作文本。"
+        },
+        "amendment": {
+          "term": "修正案",
+          "definition": "對文本草案提出的修改，要么是友好的，要么被投票為不友好的。"
+        },
+        "operative_clause": {
+          "term": "執行條款",
+          "definition": "以行動為導向的編號條款，描述委員會建議該做什麼。"
+        },
+        "preambulatory_clause": {
+          "term": "序言條款",
+          "definition": "背景設定條款引用背景原則、關注點和先前的框架。"
+        },
+        "right_of_reply": {
+          "term": "答覆權",
+          "definition": "有機會對影響代表團尊嚴或立場的直接聲明做出回應。"
+        },
+        "veto_power": {
+          "term": "否決權",
+          "definition": "聯合國安理會常任理事國有權阻止實質決議草案。"
+        },
+        "chapter_vii": {
+          "term": "第七章",
+          "definition": "《聯合國憲章》關於和平威脅、制裁和使用武力措施的權威。"
+        },
+        "sanctions_regime": {
+          "term": "制裁制度",
+          "definition": "協調限制用於在沒有直接軍事行動的情況下影響行為。"
+        },
+        "arms_control": {
+          "term": "軍備控制",
+          "definition": "限制武器類型、數量或部署的協定和核查系統。"
+        },
+        "non_proliferation": {
+          "term": "防擴散",
+          "definition": "防止核武、化學、生物或先進武器能力擴散的政策。"
+        },
+        "confidence_building_measures": {
+          "term": "建立信任措施",
+          "definition": "減少誤解和衝突風險的透明度和溝通工具。"
+        },
+        "universal_periodic_review": {
+          "term": "普遍定期審議",
+          "definition": "每個聯合國成員國報告並接收權利建議的同儕審查過程。"
+        },
+        "special_rapporteur": {
+          "term": "特別報告員",
+          "definition": "任命獨立專家監測和報告專題或國家權利問題。"
+        },
+        "treaty_body": {
+          "term": "條約機構",
+          "definition": "監督具體人權條約實施情形的專家委員會。"
+        },
+        "public_health_emergency": {
+          "term": "突發公共衛生事件",
+          "definition": "嚴重的疫情爆發需要國家和國際緊急協調應對。"
+        },
+        "surveillance": {
+          "term": "流行病學監測",
+          "definition": "持續收集和分析健康數據以檢測和追蹤疾病趨勢。"
+        },
+        "health_systems": {
+          "term": "加強衛生系統",
+          "definition": "改善勞動力、融資、物流和治理，以提供可靠的醫療服務。"
+        },
+        "transnational_crime": {
+          "term": "跨國組織犯罪",
+          "definition": "透過網路和非法市場跨境協調犯罪活動。"
+        },
+        "illicit_trafficking": {
+          "term": "非法販運",
+          "definition": "毒品、武器、人員或貨物跨司法管轄區非法流動。"
+        },
+        "rule_of_law_capacity": {
+          "term": "法治能力",
+          "definition": "司法系統公平調查、起訴和保護權利的製度能力。"
+        },
+        "sustainable_development": {
+          "term": "永續發展",
+          "definition": "平衡社會進步、經濟機會和環境保護的成長模式。"
+        },
+        "financing_for_development": {
+          "term": "發展融資",
+          "definition": "支持長期發展優先事項的公共和私人融資機制。"
+        },
+        "policy_coordination": {
+          "term": "政策協調",
+          "definition": "協調國家和機構的行動，以避免重複並增加集體影響。"
+        },
+        "child_protection": {
+          "term": "兒童保護",
+          "definition": "防止所有環境下針對兒童的剝削、虐待和暴力行為的措施。"
+        },
+        "education_access": {
+          "term": "教育機會",
+          "definition": "確保所有兒童獲得包容、公平和持續的學習機會。"
+        },
+        "humanitarian_response": {
+          "term": "人道主義回應",
+          "definition": "快速救援行動解決危機和衝突環境中的緊急需求。"
+        },
+        "gender_mainstreaming": {
+          "term": "性別主流化",
+          "definition": "將性別分析納入政策設計、實施和評估。"
+        },
+        "gender_based_violence": {
+          "term": "基於性別的暴力",
+          "definition": "基於性別認同、角色或不平等權力關係而針對某人的傷害。"
+        },
+        "economic_empowerment": {
+          "term": "經濟賦權",
+          "definition": "擴大獲得體面工作、財務、所有權和決策權的機會。"
+        },
+        "source_attribution": {
+          "term": "來源歸屬",
+          "definition": "明確引用資訊來源，以便可以驗證主張並結合上下文。"
+        },
+        "verified_reporting": {
+          "term": "驗證報告",
+          "definition": "新聞標準要求在發布有爭議的事實之前進行證實。"
+        },
+        "editorial_independence": {
+          "term": "編輯獨立性",
+          "definition": "將報告決策與政治壓力或利害關係人的影響分開。"
+        },
+        "climate_mitigation": {
+          "term": "減緩氣候變遷",
+          "definition": "減少溫室氣體排放或增加長期碳清除的行動。"
+        },
+        "climate_adaptation": {
+          "term": "氣候適應",
+          "definition": "減少氣候相關影響脆弱性的政策和投資。"
+        },
+        "cyber_norms": {
+          "term": "網路規範",
+          "definition": "對數位和網路領域負責任的國家行為的共同期望。"
+        },
+        "critical_infrastructure": {
+          "term": "關鍵基礎設施",
+          "definition": "電力、水、健康和通訊等基本系統需要彈性。"
+        },
+        "epidemiology": {
+          "term": "流行病學",
+          "definition": "研究疾病模式、原因和人群分佈。"
+        },
+        "preparedness_response": {
+          "term": "準備和回應",
+          "definition": "規劃、協調和緊急行動以遏制和管理緊急情況。"
+        },
+        "non_refoulement": {
+          "term": "不驅回",
+          "definition": "禁止人們返回面臨嚴重傷害的地方的原則。"
+        },
+        "durable_solutions": {
+          "term": "耐用的解決方案",
+          "definition": "流離失所者的長期成果：返回、融入當地社會或重新安置。"
+        },
+        "nuclear_safeguards": {
+          "term": "核子保障",
+          "definition": "確保核子材料不會被轉用於武器用途的核查措施。"
+        },
+        "counter_terrorism": {
+          "term": "反恐",
+          "definition": "針對恐怖活動的綜合法律、預防和安全措施。"
+        },
+        "due_process": {
+          "term": "正當程序",
+          "definition": "在調查、起訴和製裁過程中，公平的法律程序保護權利。"
+        },
+        "resource_security": {
+          "term": "資源安全",
+          "definition": "在經濟和環境壓力下可靠地獲取食物、水和能源。"
+        },
+        "resilience": {
+          "term": "彈性",
+          "definition": "社區和機構吸收衝擊和有效恢復的能力。"
+        }
+      },
+      "topicLine": "主題：{主題}"
+    }
+  },
+  "ideas": {
+    "editIdea": "編輯想法",
+    "googleDocsUrl": "谷歌文檔網址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "簡短的想法文本（可選）",
+    "save": "節省",
+    "cancel": "取消",
+    "addIntro": "新增 Google 文件以起草適當的解決方案想法，或輸入簡短的註釋（或兩者）。",
+    "googleDocsCreateHelp": "新的 Google 文件在另一個標籤中開啟；建立連結後將連結貼到此處。",
+    "resolutionIdeaPlaceholder": "解決思路...",
+    "add": "添加",
+    "noIdeasYet": "還沒有想法。",
+    "ideaLabel": "主意",
+    "ideaFallback": "想法{編號}",
+    "linkedDoc": "連結文檔",
+    "addedOn": "添加了{日期}",
+    "edit": "編輯",
+    "delete": "刪除",
+    "ideaDocument": "想法文件",
+    "summary": "概括",
+    "emptyIdea": "空洞的想法。"
+  },
+  "stances": {
+    "heatmapTitle": "立場簡要概述（熱圖）",
+    "heatmapHelp": "您的分配在多大程度上支持___？ （1-5級）",
+    "topicPlaceholder": "例如氣候行動",
+    "extentLabel": "範圍（1-5）：",
+    "extentHelpTitle": "範圍（1-5）",
+    "extentHelpBody": "1 表示您的分配對主題的支援很少，5 表示支援很強。 選擇一個與您在委員會中的立場相符的數字。",
+    "add": "添加",
+    "viewOnlyHeatmap": "僅供員工查看的熱圖。",
+    "notesPerAllocation": "每次分配的註釋",
+    "noAllocationsYet": "尚未分配",
+    "notesPlaceholder": "此分配的立場說明...",
+    "noteLanguageWarning": "讀者警告：本說明可能包含不當語言。",
+    "save": "節省",
+    "saveHelpTitle": "保存立場註釋",
+    "saveHelpBody": "保存此分配的立場註釋。 工作人員和（取決於委員會設置）其他參與者可以查看它。"
+  },
+  "speeches": {
+    "newSpeech": "新演講",
+    "speechTitlePlaceholder": "演講標題",
+    "googleDocsUrl": "谷歌文檔網址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "在新分頁中開啟 Google；準備好後，將文件 URL 貼到此處。",
+    "plainTextOptional": "純文字草稿（如果您使用 Google 文檔，則可選）",
+    "save": "節省",
+    "cancel": "取消",
+    "noSpeechesYet": "還沒有發言。 連結 Google 文件或貼上文字。",
+    "speechLabel": "演講",
+    "untitled": "無題",
+    "edit": "編輯",
+    "speechDocument": "演講稿",
+    "draftText": "文字草稿",
+    "noContentHint": "將 Google 文件與「編輯」鏈接，或在表單中添加純文字。"
+  },
+  "committeeRoom": {
+    "committeeLabel": "委員會",
+    "yourContext": "您的背景",
+    "roleLabel": "角色",
+    "seatLabel": "座位",
+    "clearSearchTitle": "清除搜尋並顯示所有代表團",
+    "vacantLabel": "空缺",
+    "assignedLabel": "已分配",
+    "daisLabel": "講台",
+    "phaseLabel": "階段",
+    "phaseVoting": "表決",
+    "phaseDebate": "辯論",
+    "focusSearchTitle": "焦點搜尋（講台標題和名稱與您的查詢相符）",
+    "tipLabel": "提示",
+    "searchVacantTitle": "搜索房間內的“空位”",
+    "searchHint": "輸入國家/地區、代表姓名、學校、代名詞或「空缺」以突出房間中的匹配項。 按 Enter 跳到第一個符合項目； Esc 清除。 點選「空位」可跳到空位。",
+    "findLabel": "尋找代表團或講台成員",
+    "searchPlaceholder": "國家、姓名、學校...",
+    "matchesCount": "{matches} 個席位（共 {total} 個）匹配",
+    "enterScrolls": "輸入捲軸",
+    "typeToFilterHint": "輸入要過濾的內容 - 輸入滾動到第一個匹配項",
+    "noMatches": "沒有符合的代表團或講台席位。",
+    "digitalDisplay": "數字顯示",
+    "floorLabel": "地面",
+    "staffSeatsHeading": "工作人員-座位",
+    "searchAria": "搜尋代表團",
+    "virtualRoomVacant": "空缺",
+    "profileAria": "看個人資料：{國家}",
+    "vacantSeatAria": "空座",
+    "placardAria": "標語牌{國家}",
+    "gavelAria": "木槌",
+    "viewProfileAria": "看個人檔案：{title}",
+    "noProfileLinkAria": "{title}（無個人資料連結）",
+    "committeeFloor": "委員會樓層",
+    "virtualRoomFigureAria": "虛擬委員會會議室 - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "過濾代表團。 第一個突出顯示的座位是環中的第一場比賽。",
+    "helperText": "標語牌列出了每個代表個人資料中的國家（來自分配）、姓名、學校和代名詞。 在“個人資料”下編輯您的。 空的委員會席位顯示為空缺。 點擊已填滿的標語牌或講台座位即可開啟該成員的頁面（從那裡聊天和報告）。",
+    "virtualRoomCaption": "虛擬模擬聯合國委員會會議室，配有代表標語牌，顯示國家、姓名、學校和代名詞。"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "請求發言",
+      "delegateFallback": "代表",
+      "needAllocation": "您需要分配資源才能請求發言。",
+      "alreadyQueued": "隊列中已有一個有效的發言請求。",
+      "requested": "要求發言。 您將出現在佇列中。",
+      "requestFailed": "未能請求發言。",
+      "helpBody": "將您的代表團送至主席隊列。 您一次可以有一個活躍的等待/當前請求。",
+      "purposeLabel": "可選用途（顯示在隊列標籤中）",
+      "purposeHelpTitle": "用途標籤",
+      "purposeHelpBody": "該文字附加在您的國家/地區名稱後，以便主席可以了解您要求發言的原因。",
+      "purposePlaceholder": "例如支援+修訂概述",
+      "requesting": "請求...",
+      "rollPromptTitle": "需要主席批准",
+      "rollPromptBodyPickStatus": "會議已經開始。 選擇您的點名狀態以解鎖發言和投票。 此選擇無法變更。",
+      "rollPromptBodyWaitSessionStart": "等待主席開始委員會會議。",
+      "rollPromptBodyWaitRollPrompt": "等待點名提示。",
+      "rollPromptBodyMarkedAbsent": "您目前被標記為缺席。 請主席標記您發言並投票。",
+      "rollPromptBodyChecking": "正在檢查您的磁碟區狀態...",
+      "rollPromptSaving": "儲存...",
+      "rollPromptPresent": "展示",
+      "rollPromptPresentVoting": "出席並投票"
+    },
+    "motionVoting": {
+      "votingProcedure": "投票程序",
+      "currentMotion": "目前運動",
+      "motioner": "運動者",
+      "majority": "多數",
+      "majoritySimple": "簡單的",
+      "tally": "是 {yes} - 否 {no} - 總計 {total}",
+      "help": "講台上記錄了每個代表團在會議上的投票情況。 動議投票僅使用「是」或「否」（無棄權）。 總計僅計算記錄了「是」或「否」的標誌；缺席的代表團將被跳過。"
+    },
+    "activeMotion": {
+      "currentMotion": "目前運動",
+      "motionFallback": "運動",
+      "motioner": "運動者",
+      "majority": "多數",
+      "majoritySimple": "簡單的",
+      "type": "類型",
+      "timer": "定時器",
+      "currentSpeaker": "目前發言人",
+      "nextSpeaker": "下一位發言者",
+      "speakerTimeLeftCap": "發言時間（左/上限）",
+      "speakerTimeLeftTotal": "發言時間（左/總）",
+      "perSpeaker": "（每個發言者）",
+      "paused": "（停頓）",
+      "pauseReason": "暫停：{原因}"
+    },
+    "floorStatus": {
+      "sessionTime": "會議時間",
+      "sessionNotStarted": "會話未開始",
+      "limit": "限制",
+      "limitRemaining": "還剩 {值}",
+      "limitOverBy": "超過 {value}",
+      "quickLinkSession": "會議",
+      "quickLinkRoll": "卷",
+      "quickLinkSpeakers": "揚聲器",
+      "quickLinkMotions": "議案",
+      "quickLinkTimer": "定時器",
+      "dais": "講台",
+      "pinned": "已固定",
+      "viewFullAnnouncement": "查看完整公告",
+      "timerPausesReadOnly": "定時器暫停（唯讀）",
+      "speakerList": "演講嘉賓名單",
+      "speakerFallback": "揚聲器",
+      "rollCallYou": "點名（你）",
+      "fullAnnouncement": "完整公告",
+      "daisAnnouncement": "講台公告",
+      "close": "關閉",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "會話名稱",
+      "sessionNamePlaceholder": "例如上午場",
+      "sessionNameSaving": "保存…",
+      "sessionNameSaved": "已儲存",
+      "sessionNameHint": "自動儲存並顯示在會話歷史記錄中。",
+      "title": "委員會會議",
+      "subtitle": "開始或停止委員會會議。",
+      "helpStartStop": "開始為每個人開始即時委員會會議計時器/狀態。 停止結束會話並清除目前時間限制。",
+      "migrationUnavailable": "在應用最新的資料庫遷移之前，會話控制暫時無法使用。",
+      "endTimeInFuture": "選擇未來的結束時間，或切換為無限。",
+      "sessionStartUnavailable": "在套用最新遷移之前，會話開始時間戳記不可用。",
+      "endTimeInFutureSetNoLimit": "選擇未來的結束時間，或不設定限制。",
+      "sessionLimitUpdated": "會話限制已更新。",
+      "startedLabel": "開始：",
+      "timeInLabel": "時間：",
+      "timeUntilEndLabel": "距結束時間：",
+      "overByValue": "超過 {value}",
+      "modeLabel": "模式：",
+      "modeStopwatchNoLimit": "秒錶（無時間限制）",
+      "sessionNotRunning": "會話未運行。",
+      "sessionLimit": "會話限制",
+      "sessionLimitModesTitle": "會話限制模式",
+      "sessionLimitModesHelp": "無：沒有盡頭。 時間預算：從開始計算。 結束於：您當地時區的固定時鐘時間。",
+      "sessionLimitOptional": "選修的。",
+      "noneLabel": "沒有任何",
+      "noneDescription": "運行直到你停下來。",
+      "timeBudgetLabel": "時間預算",
+      "timeBudgetDescription": "從你開始的那一刻開始計算。",
+      "endTimeLabel": "結束時間",
+      "endTimeDescription": "使用固定時鐘時間（如果兩者都設定過，則覆蓋預算）。",
+      "noneIndefinite": "無（不確定）",
+      "noneScheduledEndHint": "沒有預定的結束時間；僅顯示經過的時間。",
+      "timeBudgetFromStart": "從開始的時間預算",
+      "hoursLabel": "時間",
+      "minutesLabel": "分分鐘",
+      "minimumOneMinute": "（最少 1 分鐘）",
+      "endAtLocalTime": "結束於（當地時間）",
+      "stopSession": "停止會話",
+      "saveLimit": "保存限額",
+      "saveLimitHelp": "在會話已運行時應用更新的限制設置，而不停止會話。",
+      "startSession": "開始會話",
+      "sidebarUsePrefix": "使用側邊欄",
+      "rollCall": "點名",
+      "speakers": "揚聲器",
+      "formalMotions": "正式動議",
+      "timer": "定時器",
+      "sidebarAnd": "和",
+      "announcements": "公告",
+      "sidebarUseSuffix": "— 每個選項卡一個工具。",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "會話歷史記錄",
+      "savedCount": "已儲存 {count} 個",
+      "permissionsHint": "主席可以重新命名條目。 SMT/管理員可以重新命名和刪除條目。",
+      "empty": "還沒有會話歷史記錄。",
+      "rename": "重新命名",
+      "delete": "刪除",
+      "deleteConfirm": "從歷史記錄中刪除此會話嗎？",
+      "sessionNamePrompt": "會話名稱",
+      "rangeClosed": "{範圍}",
+      "rangeOngoing": "{範圍} -> 正在進行"
+    },
+    "timerPage": {
+      "title": "定時器",
+      "controlsTitle": "定時器控制",
+      "controlsHelp": "使用全體發言權來確定總體辯論時間，或使用動議投票將可見性與特定的公開投票項目聯繫起來。",
+      "tabSetup": "1) 設定",
+      "tabClock": "2) 時鐘控制",
+      "tabNotes": "3）演講筆記",
+      "tabLog": "4）暫停日誌",
+      "setupHelp": "選擇此計時器是用於全體發言（代表始終可見）還是與開放投票的動議相關（代表僅在該投票為活動項目時才能看到它）。 無論如何，打開每個發言者的時間後，時鐘在主持的預選會議期間仍然可見。 暫停時鐘/開始時鐘凍結或恢復倒數計時。 單獨設定揚聲器時間（剩餘）和總時間，然後儲存計時器。 預設將兩者填入相同的長度；您可以隨後編輯任一欄位。 暫停會記錄一個簡短的原因。",
+      "namedPreset": "命名預設",
+      "applyPreset": "應用預設...",
+      "floorLabelDelegates": "樓層標籤（代表）",
+      "floorLabelPlaceholder": "例如GSL 60年代",
+      "timerPurpose": "定時器用途",
+      "purposeGeneralFloor": "一般性辯論/全體發言（與投票無關）",
+      "purposeMotionVote": "開放動議 - 僅當投票在場上處於活動狀態時才計時器",
+      "openMotionForVoting": "開放動議（必須開放投票）",
+      "selectMotion": "選擇運動...",
+      "untitled": "無題",
+      "noOpenMotionWarning": "沒有動議可供投票。 首先進行投票，或將目的切換到普通樓層。",
+      "clock": "鐘",
+      "running": "跑步",
+      "paused": "已暫停",
+      "saveToEnablePauseStart": "儲存計時器以啟用暫停/啟動。",
+      "pauseReasonLogged": "暫停原因（已記錄）",
+      "pauseReasonPlaceholder": "例如程序問題、技術問題、無主持的核心會議…",
+      "pauseClock": "暫停時鐘",
+      "startClock": "開始時鐘",
+      "perSpeakerTitle": "每位發言人的時間（有主持的核心會議）",
+      "perSpeakerHelp": "將總時間設定為每個發言者的上限，將發言者時間設定為剩餘時間；前進移動到下一個發言者並重置剩餘的上限。",
+      "currentSpeaker": "目前發言人",
+      "nextSpeaker": "下一位發言者",
+      "speechNotesCurrentSpeaker": "演講稿（當前演講者）",
+      "speechNotesHelp": "註釋與當前發言者計時器文本相關聯，當發言者列表中有人標記為“當前”時，他們的代表團將被存儲以供參考。",
+      "timerFloorLabel": "計時器（樓層）：",
+      "speakerListCurrent": "演講者名單（目前）：",
+      "noCurrentDelegation": "發言者名單上沒有標記為「目前」的代表團。",
+      "note": "筆記",
+      "notePlaceholder": "點、POI、語調、後續...",
+      "saveSpeechNote": "儲存演講筆記",
+      "recentNotes": "您最近的筆記（本委員會）",
+      "delete": "刪除",
+      "speakerTimeRemaining": "發言時間（剩餘）",
+      "remainingHelpPerSpeaker": "當前發言者的倒數計時（前進時重置）。",
+      "remainingHelpNormal": "目前發言者的倒數計時（可以小於總數）。",
+      "totalTime": "總時間",
+      "totalHelpPerSpeaker": "每位發言者的上限（分母為場內；提前補充剩餘的金額）。",
+      "totalHelpNormal": "此計時器段的完整長度（顯示在地板上的斜線之後）。",
+      "saveTimer": "儲存計時器",
+      "advanceSpeakerReset": "提前揚聲器和重置時鐘",
+      "recentPauseLog": "最近暫停日誌",
+      "noPauseEvents": "該委員會尚未記錄暫停事件。",
+      "openPauseLogHint": "開啟暫停日誌可查看記錄的暫停原因和時間戳記。",
+      "saved": "計時器已儲存。",
+      "savedCapped": "計時器已儲存。 演講時間比總時間長；上限為總數。",
+      "alreadyPaused": "計時器已暫停。",
+      "pausedForCommittee": "委員會的計時器暫停。",
+      "alreadyRunning": "計時器已經在運作。",
+      "runningForCommittee": "委員會正在運行計時器。",
+      "euTimerBoardTitle": "歐盟議會定時器板（11個定時器）",
+      "euTimerBoardHelp": "每方一個計時器，加上總時間、POI/POC 時間和發言者時間。使用「應用」將一行複製到「時鐘」標籤上的即時計時器欄位（發言者時間/儲存計時器）。",
+      "euTimerName": "姓名",
+      "euTimerTag": "標籤",
+      "euTotalTime": "總時間",
+      "euPoiPocTime": "POI/POC 時間",
+      "euSpeakerTime": "發言時間"
+    }
   }
 }

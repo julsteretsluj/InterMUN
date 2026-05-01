@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "פתח תחילה את רצפת התנועה להצהרות.",
     "openMotionBlocksRecording": "הצעה כבר פתוחה להצבעה. סגור אותו לפני הקלטת הצהרות נוספות.",
     "statedMotionRecorded": "הצעה מוצהרת נרשמה (עדיין לא פתוחה להצבעה).",
-    "statedMotionRemoved": "התנועה המוצהרת הוסרה."
+    "statedMotionRemoved": "התנועה המוצהרת הוסרה.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "שָׂפָה",
@@ -595,7 +611,8 @@
     "pointsLog": "• יומן נקודות",
     "formalMotions": "הצעות פורמליות",
     "timer": "שָׁעוֹן עֶצֶר",
-    "smtProfile": "פּרוֹפִיל"
+    "smtProfile": "פּרוֹפִיל",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -763,7 +780,8 @@
       "officialLinks": "קישורים רשמיים",
       "roomCode": "קוד חדר",
       "settings": "הגדרות",
-      "discipline": "מִשְׁמַעתִי"
+      "discipline": "מִשְׁמַעתִי",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "המדינות החברות באו\"ם",
       "unSystem": "מערכת האו\"ם (מייסדים וחברים)",
       "history": "היסטוריה של האו\"ם"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "הוסף מקור",
-      "sourceUrl": "כתובת האתר של המקור",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (מומלץ)",
-      "urlHelp": "למסמך Google Doc חדש, השתמש בלחצן והדבק את הקישור למסמך כאן.",
-      "titleOptional": "כותרת (אופציונלי)",
-      "saveChanges": "שמור שינויים",
-      "editSource": "ערוך מקור",
-      "urlPlaceholderShort": "Google Doc או כתובת אתר אחרת",
-      "empty": "עדיין אין מקורות. הוסף קישור ל-Google Doc כדי לפתוח אותו כאן.",
-      "sourceLabel": "מָקוֹר",
-      "openLink": "פתח קישור",
-      "embedHeading": "מסמך מקור",
-      "notGoogleDoc": "כתובת האתר הזו אינה מסמך Google. השתמש בקישור docs.google.com/document/d/… כדי להטמיע ולערוך כאן; אחרת פתח את הקישור למעלה."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "נציגים אינם יכולים להעלות ניירות עמדה ישירות. השתמש בסוג מסמך אחר.",
-      "alertOnlyChairsPositionPaper": "רק כיסאות/SMT/אדמין יכולים להעלות ניירות עמדה.",
-      "alertOnlySmtChairReport": "רק SMT/מנהל יכול להעלות דוחות יו\"ר.",
-      "alertOnlySmtRop": "רק SMT/אדמין יכולים להעלות מסמכי RoP.",
-      "alertOnlySmtAwardCriteria": "רק SMT/אדמין יכולים להעלות מסמכי קריטריוני פרס.",
-      "alertNeedContentOrUrl": "הוסף תוכן טקסט מקומי או כתובת אתר של Google Docs.",
-      "confirmDelete": "למחוק את המסמך הזה?",
-      "delegatePrepTitle": "קטע הכנה למסמך",
-      "delegatePrepBody": "אתה יכול להעלות, להציג ולערוך <prep>מסמכי הכנה</prep> משלך ישירות מדף זה.",
-      "positionPaperGuideTitle": "מקם את מכוון הנייר",
-      "positionPaperGuideBlurb": "הורד את מדריך מציין המיקום בזמן הכנת ה-PDF הסופי.",
-      "downloadPlaceholderGuide": "הורד את המדריך למציין מיקום",
-      "addDocument": "הוסף מסמך",
-      "tabs": {
-        "ariaLabel": "קטעי מסמכים",
-        "library": "סִפְרִיָה",
-        "compose": "לְהַלחִין",
-        "composeHint": "התחל מסמך חדש או ערוך טיוטה קיימת מהכרטיסייה הזו."
-      },
-      "newDocumentTitle": "מסמך חדש",
-      "editDocumentTitle": "ערוך מסמך",
-      "typeLabel": "סוּג",
-      "types": {
-        "position_paper": "נייר מיקום",
-        "chair_report": "דו\"ח יו\"ר",
-        "rop": "RoP",
-        "award_criteria": "קריטריונים לפרס",
-        "chair_notes": "הערות כיסא",
-        "prep_doc": "מסמך הכנה"
-      },
-      "delegatePositionPaperNote": "ניירות עמדה מועלים על ידי כיסאות עם משוב.",
-      "delegateOwner": "בעל נציג",
-      "chairRecipient": "מקבל כיסא",
-      "titleLabel": "כּוֹתֶרֶת",
-      "titlePlaceholder": "כותרת המסמך",
-      "googleDocsUrl": "כתובת האתר של Google Docs",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (הטמעת תצוגה/עריכה באפליקציה)",
-      "googleDocsHelp": "השתמש ב-New Google Doc כדי לפתוח את Google בכרטיסייה חדשה, ולאחר מכן הדבק את הקישור למסמך כאן. טקסט רגיל למטה הוא אופציונלי. כל מסמך צריך טקסט מקומי, קישור ל-Google Doc או שניהם.",
-      "plainTextOptional": "טקסט רגיל (אופציונלי)",
-      "plainTextPlaceholder": "הערות או טיוטת טקסט...",
-      "chairFeedbackLabel": "משוב יושב ראש",
-      "chairFeedbackPlaceholder": "משוב לנייר עמדת הנציג...",
-      "empty": "עדיין אין מסמכים. הוסף אחד או קישור ל-Google Doc.",
-      "sidebarDocumentLabel": "מִסְמָך",
-      "sections": {
-        "chairReports": "יו\"ר מדווח",
-        "rop": "RoP",
-        "awardCriteria": "קריטריונים לפרס",
-        "prepDocuments": "הכנת מסמכים",
-        "chairNotes": "הערות כיסא",
-        "otherDocuments": "מסמכים אחרים"
-      },
-      "untitled": "ללא כותרת",
-      "linkedDocumentHeading": "מסמך מקושר",
-      "notesHeading": "הערות",
-      "noGoogleDocYet": "Google Doc לא מקושר עדיין. השתמש ב-Edit כדי להוסיף כתובת URL של docs.google.com/document/d/….",
-      "chairFeedbackHeading": "משוב יושב ראש",
-      "noFeedbackYet": "עדיין לא נוספו משוב."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "הזן תחילה דוא\"ל של נציג.",
-      "sentToDelegate": "נשלח אל {email}.",
-      "newResolution": "רזולוציה חדשה",
-      "maxDraftResolutions": "לוועדה הזו יש כבר {count} טיוטות החלטות.",
-      "googleDocLink": "קישור לגוגל דוק",
-      "googleDocUrlPlaceholder": "כתובת האתר של Google Docs (docs.google.com/document/d/… - משמשת להטמעה + עריכה)",
-      "googleDocUrlHelp": "Google Doc חדש נפתח בכרטיסייה אחרת; העתק את כתובת האתר משורת הכתובת והדבק אותה כאן.",
-      "mainSubmittersPlaceholder": "שולחים ראשיים (זיהויי משתמש, מופרדים בפסיקים)",
-      "coSubmittersPlaceholder": "שולחים שותפים (מזהי משתמש, מופרדים בפסיק)",
-      "create": "לִיצוֹר",
-      "cancel": "לְבַטֵל",
-      "openInNewTab": "פתח בכרטיסייה חדשה",
-      "noGoogleDocLink": "אין קישור לגוגל דוק",
-      "visibleToOtherBloc": "גלוי לגוש אחר",
-      "resolutionCounts": "משנה עיקרית: {main} | מנוי משותף: {co} | חותמים: {signatories}",
-      "blocButton": "גוש {name} ({stance})",
-      "signVirtually": "חתום וירטואלית (המנויים הראשיים קיבלו הודעה)",
-      "shareByEmail": "שתף רזולוציה באימייל",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "שלח לנציג",
-      "clauseEditor": "עורך סעיפים",
-      "noClausesYet": "עדיין אין סעיפים.",
-      "clauseNumber": "סעיף {number}",
-      "saveClause": "סעיף שמור",
-      "delete": "לִמְחוֹק",
-      "addClausePlaceholder": "הוסף סעיף חדש...",
-      "addClause": "הוסף סעיף",
-      "clauseVoteHistory": "סעיף היסטוריית הצבעות",
-      "noClauseOutcomesYet": "עדיין לא נרשמו תוצאות הצבעה על סעיף.",
-      "clauseFallback": "סָעִיף",
-      "passed": "עבר",
-      "failed": "נִכשָׁל",
-      "motionId": "תנועה {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "מדורי הצבעה",
-        "open": "לִפְתוֹחַ",
-        "closed": "סָגוּר"
-      },
-      "requiredMajority": "רוב נדרש",
-      "helpRequiredMajorityTitle": "רוב נדרש",
-      "helpRequiredMajorityBody": "בחר את סף ההצבעה המשמש להחלטה לעבור/נכשל. 'פשוט' הוא יותר מחצי. `2/3` דורש רוב על.",
-      "majoritySimple": "פָּשׁוּט",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "רוב {label}",
-      "mustVote": "חייבים להצביע",
-      "helpMustVoteTitle": "חייבים להצביע",
-      "helpMustVoteBody": "מסמן הצעה זו כפריט \"חובה להצביע\". זה משמש כדי להעביר את הדרישה למשתתפים (בהתאם להגדרת הוועדה שלך).",
-      "saveSettings": "שמור הגדרות",
-      "delegateBlurb": "הבמה רושמת הצבעות במושב (למשל מפקד). הצבעות ההצעות כאן עוקבות אחר כן/לא בלבד (לא נעשה שימוש בהימנעות). אתה יכול לעקוב אחר הספירה; הנציגים אינם מצביעים באפליקציה.",
-      "yes": "כֵּן",
-      "no": "לֹא",
-      "ballots": "פתקי הצבעה",
-      "total": "סַך הַכֹּל",
-      "outcome": "תוֹצָאָה",
-      "passed": "עבר",
-      "failed": "נִכשָׁל",
-      "noRecordedVotes": "אין קולות רשומים",
-      "reopenMotion": "פתיחה מחדש של תנועה",
-      "editRecordOpen": "ערוך רשומה...",
-      "hideSettings": "הסתר הגדרות",
-      "preliminaryPassing": "עובר (ראשוני)",
-      "preliminaryFailing": "נכשל (ראשוני)",
-      "delegateRollCall": "מפקד נציג ({count})",
-      "noSeatedDelegates": "אין נציגים יושבים זמינים להצעה זו.",
-      "rollPrefix": "גָלִיל:",
-      "recordedPrefix": "מוּקלָט:",
-      "recordedYes": "כֵּן",
-      "recordedNo": "לֹא",
-      "recordedAbstain": "לְהִתְנַזֵר",
-      "recordedNone": "—",
-      "abstain": "לְהִתְנַזֵר",
-      "clear": "בָּרוּר",
-      "closeMotion": "תנועה סגורה",
-      "mustVoteBadge": "חייבים להצביע",
-      "canVoteBadge": "יכול להצביע",
-      "noMotions": "עדיין אין תנועות.",
-      "currentOpenMotion": "תנועה פתוחה נוכחית",
-      "noOpenMotion": "אין תנועה פתוחה כרגע.",
-      "recentClosedMotions": "תנועות סגורות אחרונות",
-      "noClosedMotions": "עדיין אין הצעות סגורות.",
-      "untitled": "ללא כותרת",
-      "voteTypes": {
-        "motion": "תְנוּעָה",
-        "amendment": "תִקוּן",
-        "resolution": "הַחְלָטָה"
-      },
-      "roll": {
-        "absent": "נעדר (גלגול)",
-        "present_abstain": "הווה - רשאי להימנע (להתגלגל)",
-        "present_voting": "הווה והצבעה (גלל)",
-        "unknown": "- (גלגול)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "קטעי פרופיל",
-        "overview": "סקירה כללית",
-        "awards": "פרסים",
-        "private": "רשומות פרטיות",
-        "settings": "הגדרות פרופיל"
-      },
-      "profilePicture": "תמונת פרופיל",
-      "uploadFile": "העלה קובץ",
-      "uploading": "מעלה...",
-      "photoSaved": "התמונה הועלתה ונשמרה.",
-      "orUrl": "או מוגדר לפי כתובת אתר",
-      "urlPlaceholder": "https://...",
-      "name": "שֵׁם",
-      "username": "שם משתמש",
-      "usernamePlaceholder": "לְמָשָׁל alex_1999",
-      "pronouns": "כינויים",
-      "customPronounNote": "לפרופיל שלך היה כינוי מותאם אישית שאינו מקובל כאן יותר. בחר אפשרות למעלה (או השאר ריק). שמירה מחליפה את הערך הישן.",
-      "school": "בֵּית סֵפֶר",
-      "schoolPlaceholder": "לְמָשָׁל תיכון לינקולן",
-      "grade": "צִיוּן",
-      "selectGrade": "בחר ציון",
-      "conferencesAttended": "השתתפו בכנסים",
-      "awardsComma": "פרסים (מופרדים בפסיקים)",
-      "awardsPlaceholder": "הנציג הטוב ביותר, ציון כבוד",
-      "allocation": "הַקצָאָה",
-      "selectAllocation": "בחר הקצאה",
-      "noAllocationsPlaceholder": "אין הקצאות לוועדות זמינות",
-      "saveProfile": "שמור פרופיל",
-      "saved": "הפרופיל נשמר.",
-      "saveFailed": "לא ניתן לשמור את הפרופיל.",
-      "errUsernamePattern": "שם המשתמש חייב להיות 3-32 תווים (אותיות, מספרים, _, ., -)",
-      "errPronounsPreset": "בחר כינוי מהרשימה.",
-      "errImageType": "אנא בחר קובץ תמונה.",
-      "errImageSize": "התמונה גדולה מדי (מקסימום 5 MB).",
-      "errUploadFailed": "ההעלאה נכשלה.",
-      "errStorageSetup": "אחסון תמונת פרופיל אינו מוגדר. בפרויקט Supabase, הפעל את המיגרציה 00100_profile_pictures_storage_bucket.sql, או צור דלי אחסון ציבורי בשם profile-pictures (ראה README).",
-      "errPublicUrl": "לא ניתן היה לפתור כתובת אתר ציבורית לתמונה שהועלתה.",
-      "fallbacks": {
-        "yourCountry": "המדינה שלך",
-        "committeeSession": "מושב הוועדה",
-        "delegate": "נָצִיג",
-        "speechNote": "הערת דיבור",
-        "untitledMotion": "תנועה ללא כותרת",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "נציג ברוך הבא של {flag} {country}",
-        "subtitle": "עם מה היית רוצה להתחיל?",
-        "links": {
-          "documents": "מסמכים",
-          "notes": "הערות",
-          "committeeRoom": "חדר ועדות",
-          "runningNotes": "ריצה הערות",
-          "ideas": "רעיונות",
-          "guides": "מדריכים",
-          "sources": "מקורות",
-          "resolutions": "החלטות",
-          "speeches": "נאומים",
-          "stances": "עמדות",
-          "crisisSlides": "מגלשות משבר",
-          "report": "דִוּוּחַ",
-          "motions": "תנועות",
-          "points": "נקודות"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "פרסים בפרופיל שלך",
-        "rank": "דרגה {דרגה}",
-        "pending": {
-          "tab": "מועמדויות ממתינות",
-          "title": "ממתינים למועמדויות לכסא",
-          "descriptionSingle": "נשמר על ידי כיסאות ושותף עם SMT לסקירה. פרסים סופיים מופיעים למטה לאחר אישור.",
-          "descriptionTabbed": "נשמר על ידי כיסאות ושותף עם SMT לסקירה. פרסים סופיים מופיעים לאחר אישור."
-        },
-        "recorded": {
-          "tab": "פרסים מוקלטים",
-          "title": "פרסים מוקלטים",
-          "description": "רשום כאשר כיסאות או SMT מקצים אותך במעקב אחר הפרסים. הכרה סופית פועלת בהתאם לכללי הוועידה שלך."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "גלוי רק לך, ראשי ועדות ו-SMT עבור הוועדה הרלוונטית.",
-        "points": {
-          "title": "נקודות כיסא (פרטיות)"
-        },
-        "speechNotes": {
-          "title": "הערות נאום של יושב ראש (פרטי)"
-        },
-        "motions": {
-          "title": "תנועות שהזזת",
-          "description": "נשמר בפרופיל שלך לבדיקת ועדה ופיקוח על SMT."
-        }
-      },
-      "discipline": {
-        "title": "מעמד משמעתי (פרטי)",
-        "statusLine": "אזהרות: {אזהרות} · התראות: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "ההצבעה מושבתת",
-        "speakingSuspended": "דיבור מושעה",
-        "removedFromCommittee": "הוצא מהוועדה",
-        "updated": "עודכן: {value}"
-      },
-      "preview": {
-        "ariaLabel": "תצוגה מקדימה של פרופיל",
-        "title": "תצוגה מקדימה",
-        "yourName": "השם שלך",
-        "usernameNotSet": "שם משתמש לא מוגדר",
-        "gradeValue": "כיתה {כיתה}",
-        "awards": "פרסים"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "כללי נוהל (RoP)",
-          "content": "# תקנון \n\n## נקודות ותנועות \n- **נקודת הזמנה**: נוהל נכון \n- **נקודת מידע**: שאלה לדובר \n- **נקודת זכות אישית**: נוחות אישית \n- **הצעה לשולחן**: דחיית הדיון \n- **הצעה לדחייה**: סיום הישיבה \n\n## הצבעה \n- רוב פשוט לעניינים פרוצדורליים \n- 2/3 רוב לעניינים מהותיים \n- הצבעה מסדרת אם תתבקש"
-        },
-        "examples": {
-          "title": "דוגמאות",
-          "content": "# דוגמאות \n\n## פורמט רזולוציה \n``` \nהאסיפה הכללית, \n... \n1. קורא למדינות החברות... \n2. קורא לקהילה הבינלאומית ל... \n``` \n\n## מבנה נייר עמדה \n1. רקע \n2. מדיניות מדינה \n3. פתרונות מוצעים"
-        },
-        "templates": {
-          "title": "תבניות",
-          "content": "# תבניות \n\n## תבנית דוח יו\"ר \n- סקירת הוועדה \n- נקודות דיון מרכזיות \n- התקבלו החלטות \n- המלצות"
-        },
-        "chairReport": {
-          "title": "דו\"ח יו\"ר",
-          "content": "# דו\"ח יו\"ר \n\nתיעוד הליכים ותוצאות של הוועדה כאן."
-        }
-      },
-      "edit": "לַעֲרוֹך",
-      "guideDocument": "מסמך מדריך",
-      "additionalNotes": "הערות נוספות",
-      "noContentYet": "עדיין אין תוכן.",
-      "titlePlaceholder": "כּוֹתֶרֶת",
-      "googleDocsUrl": "כתובת האתר של Google Docs",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google Doc חדש נפתח בכרטיסייה אחרת. הדבק קישור שניתן לשיתוף כדי שהנציגים יוכלו לפתוח את המסמך כאן (הצג/ערוך תלוי בשיתוף Google).",
-      "markdownOptional": "הערות סימון (אופציונלי אם אתה משתמש ב-Google Doc)",
-      "save": "לְהַצִיל",
-      "cancel": "לְבַטֵל",
-      "createNewGuide": "צור מדריך חדש",
-      "slugPlaceholder": "שבלול (ייחודי)",
-      "titleLowerPlaceholder": "כּוֹתֶרֶת",
-      "googleDocsUrlOptional": "כתובת אתר של Google Docs (אופציונלי)",
-      "markdownContentOptional": "תוכן סימון (אופציונלי)",
-      "create": "לִיצוֹר",
-      "glossary": {
-        "title": "מילון מונחים של סדר היום של MUN",
-        "subtitle": "טרמינולוגיה ייחודית התואמת לקוד הוועדה שלך ולנושאי סדר היום הנוכחיים שלך.",
-        "committeeCode": "קוד ועדה: {code}",
-        "topicTag": "נושא: {topic}",
-        "sources": {
-          "core": "ליבה",
-          "committee": "וַעֲדָה",
-          "topic": "נוֹשֵׂא"
-        },
-        "terms": {
-          "delegation": {
-            "term": "מִשׁלַחַת",
-            "definition": "מדינה או צוות משקיפים המייצגים מדינה או ישות אחת בוועדה."
-          },
-          "placard": {
-            "term": "כְּרָזָה",
-            "definition": "שלט מדינה המשמש לבקשת רשות הדיבור, הצבעה ולאותת הצעות פרוצדורליות."
-          },
-          "dais": {
-            "term": "דוּכָן",
-            "definition": "צוות יו\"ר המנחה דיונים, מיישם נוהל ומנהל סדר הדיבור."
-          },
-          "quorum": {
-            "term": "מִניָן",
-            "definition": "מספר מינימלי של משלחות הנדרש לניהול עסקים והצבעות רשמיים."
-          },
-          "motion": {
-            "term": "תְנוּעָה",
-            "definition": "הצעה רשמית לשינוי זרימת הוויכוח, כגון סוג הקוקוס או זמן הדיבור."
-          },
-          "point_of_order": {
-            "term": "נקודת סדר",
-            "definition": "התערבות כאשר נוהל מיושם באופן שגוי לפי כללי הוועדה."
-          },
-          "moderated_caucus": {
-            "term": "מנחה קוקוס",
-            "definition": "קטע ויכוח מובנה עם נאומים קצרים בזמן על תת-נושא מוגדר."
-          },
-          "unmoderated_caucus": {
-            "term": "קאוקוס לא מתון",
-            "definition": "תקופת משא ומתן לא רשמית שבה הנציגים נעים בחופשיות לנסח ולמזג רעיונות."
-          },
-          "draft_resolution": {
-            "term": "טיוטת החלטה",
-            "definition": "טקסט עבודה של פעולת הוועדה המוצעת לפני ההצבעה והאימוץ הסופיים."
-          },
-          "amendment": {
-            "term": "תִקוּן",
-            "definition": "שינוי שהוצע לטיוטת הטקסט, ידידותי או שהצביעו כבלתי ידידותי."
-          },
-          "operative_clause": {
-            "term": "סעיף אופרטיבי",
-            "definition": "סעיף ממוספר מכוון פעולה המתאר את מה שהוועדה מציעה לעשות."
-          },
-          "preambulatory_clause": {
-            "term": "סעיף מקדמי",
-            "definition": "סעיף קביעת הקשר המצטט עקרונות רקע, חששות ומסגרות קודמות."
-          },
-          "right_of_reply": {
-            "term": "זכות תגובה",
-            "definition": "הזדמנות להגיב להצהרה ישירה שהשפיעה על כבוד המשלחת או תפקידה."
-          },
-          "veto_power": {
-            "term": "כוח וטו",
-            "definition": "סמכות החבר הקבוע של UNSC לחסום טיוטות החלטות מהותיות."
-          },
-          "chapter_vii": {
-            "term": "פרק ז'",
-            "definition": "סמכות מגילת האו\"ם על איומים על השלום, סנקציות ואמצעי שימוש בכוח."
-          },
-          "sanctions_regime": {
-            "term": "משטר הסנקציות",
-            "definition": "הגבלות מתואמות משמשות להשפעה על התנהגות ללא פעולה צבאית ישירה."
-          },
-          "arms_control": {
-            "term": "בקרת נשק",
-            "definition": "הסכמים ומערכות אימות המגבילות סוגים, כמויות או פריסה של כלי נשק."
-          },
-          "non_proliferation": {
-            "term": "אי הפצה",
-            "definition": "מדיניות למניעת התפשטות של יכולות נשק גרעיני, כימי, ביולוגי או מתקדם."
-          },
-          "confidence_building_measures": {
-            "term": "אמצעים בוני אמון",
-            "definition": "כלי שקיפות ותקשורת המפחיתים אי הבנה וסיכון לעימותים."
-          },
-          "universal_periodic_review": {
-            "term": "סקירה תקופתית אוניברסלית",
-            "definition": "תהליך ביקורת עמיתים שבו כל מדינה חברה באו\"ם מדווחת ומקבלת המלצות על זכויות."
-          },
-          "special_rapporteur": {
-            "term": "כתב מיוחד",
-            "definition": "מומחה בלתי תלוי שמונה לפקח ולדווח על נושאים נושאיים או זכויות מדינות."
-          },
-          "treaty_body": {
-            "term": "גוף האמנה",
-            "definition": "ועדת מומחים המפקחת על יישום אמנת זכויות אדם ספציפית."
-          },
-          "public_health_emergency": {
-            "term": "מצב חירום לבריאות הציבור",
-            "definition": "אירוע התפרצות חמור הדורש תגובה דחופה לאומית ובינלאומית מתואמת."
-          },
-          "surveillance": {
-            "term": "מעקב אפידמיולוגי",
-            "definition": "איסוף וניתוח מתמשכים של נתוני בריאות כדי לזהות ולעקוב אחר מגמות מחלות."
-          },
-          "health_systems": {
-            "term": "חיזוק מערכות בריאות",
-            "definition": "שיפור כוח העבודה, המימון, הלוגיסטיקה והממשל לאספקת שירותי בריאות אמינה."
-          },
-          "transnational_crime": {
-            "term": "פשע מאורגן חוצה לאומי",
-            "definition": "פעילות פלילית מתואמת חוצה גבולות באמצעות רשתות ושווקים בלתי חוקיים."
-          },
-          "illicit_trafficking": {
-            "term": "סחר לא חוקי",
-            "definition": "תנועה בלתי חוקית של סמים, נשק, אנשים או סחורות בין תחומי שיפוט."
-          },
-          "rule_of_law_capacity": {
-            "term": "יכולת שלטון החוק",
-            "definition": "היכולת המוסדית של מערכות המשפט לחקור, להעמיד לדין ולהגן על זכויות בצורה הוגנת."
-          },
-          "sustainable_development": {
-            "term": "פיתוח בר קיימא",
-            "definition": "מודל צמיחה המאזן קידמה חברתית, הזדמנויות כלכליות והגנה על הסביבה."
-          },
-          "financing_for_development": {
-            "term": "מימון לפיתוח",
-            "definition": "מנגנוני מימון ציבוריים ופרטיים התומכים בסדרי עדיפויות פיתוח לטווח ארוך."
-          },
-          "policy_coordination": {
-            "term": "תיאום מדיניות",
-            "definition": "יישור פעולות המדינה והסוכנות כדי למנוע כפילות ולהגביר את ההשפעה הקולקטיבית."
-          },
-          "child_protection": {
-            "term": "הגנת ילדים",
-            "definition": "אמצעים למניעת ניצול, התעללות ואלימות כלפי ילדים בכל המסגרות."
-          },
-          "education_access": {
-            "term": "גישה לחינוך",
-            "definition": "הבטחת הזדמנויות למידה מכילה, שוויונית ומתמשכת לכל הילדים."
-          },
-          "humanitarian_response": {
-            "term": "תגובה הומניטרית",
-            "definition": "פעולות סיוע מהירות הנותנות מענה לצרכים דחופים במשברים ובמסגרות סכסוכים."
-          },
-          "gender_mainstreaming": {
-            "term": "מיינסטרים מגדר",
-            "definition": "שילוב ניתוח מגדר בתכנון, יישום והערכה של מדיניות."
-          },
-          "gender_based_violence": {
-            "term": "אלימות על בסיס מגדר",
-            "definition": "פגיעה במישהו על סמך זהות מגדרית, תפקידים או יחסי כוח לא שוויוניים."
-          },
-          "economic_empowerment": {
-            "term": "העצמה כלכלית",
-            "definition": "הרחבת הגישה לעבודה הגונה, כספים, בעלות וכוח קבלת החלטות."
-          },
-          "source_attribution": {
-            "term": "ייחוס מקור",
-            "definition": "ציטוט ברור של מקור המידע כדי שניתן יהיה לאמת את הטענות ולהתאים אותן בהקשר."
-          },
-          "verified_reporting": {
-            "term": "דיווח מאומת",
-            "definition": "תקן עיתונאי הדורש אישור לפני פרסום עובדות שנויות במחלוקת."
-          },
-          "editorial_independence": {
-            "term": "עצמאות עריכה",
-            "definition": "הפרדת החלטות דיווח מלחץ פוליטי או השפעה של בעלי עניין."
-          },
-          "climate_mitigation": {
-            "term": "הפחתת אקלים",
-            "definition": "פעולות המפחיתות את פליטת גזי חממה או מגדילות את סילוק הפחמן לטווח ארוך."
-          },
-          "climate_adaptation": {
-            "term": "הסתגלות לאקלים",
-            "definition": "מדיניות והשקעות המפחיתות את הפגיעות להשפעות הקשורות לאקלים."
-          },
-          "cyber_norms": {
-            "term": "נורמות סייבר",
-            "definition": "ציפיות משותפות להתנהגות אחראית של המדינה בתחומי הדיגיטל והסייבר."
-          },
-          "critical_infrastructure": {
-            "term": "תשתית קריטית",
-            "definition": "מערכות חיוניות כמו חשמל, מים, בריאות ותקשורת הדורשות חוסן."
-          },
-          "epidemiology": {
-            "term": "אֶפִּידֶמִיוֹלוֹגִיָה",
-            "definition": "מחקר של דפוסי מחלות, גורמים והתפלגות באוכלוסיות."
-          },
-          "preparedness_response": {
-            "term": "מוכנות ותגובה",
-            "definition": "תכנון, תיאום ופעולות נחשול כדי להכיל ולנהל מצבי חירום."
-          },
-          "non_refoulement": {
-            "term": "אי-החזרה",
-            "definition": "עקרון האוסר על החזרת אנשים למקומות שבהם הם עומדים בפני פגיעה חמורה."
-          },
-          "durable_solutions": {
-            "term": "פתרונות עמידים",
-            "definition": "תוצאות ארוכות טווח עבור עקורים: חזרה, אינטגרציה מקומית או יישוב מחדש."
-          },
-          "nuclear_safeguards": {
-            "term": "אמצעי הגנה גרעיניים",
-            "definition": "אמצעי אימות המבטיחים כי חומרים גרעיניים לא יופנו לשימוש בנשק."
-          },
-          "counter_terrorism": {
-            "term": "סיכול טרור",
-            "definition": "אמצעים משפטיים, מניעה ואבטחה משולבים נגד פעילות טרור."
-          },
-          "due_process": {
-            "term": "הליך תקין",
-            "definition": "הליכים משפטיים הוגנים המגינים על זכויות במהלך חקירה, תביעה וסנקציות."
-          },
-          "resource_security": {
-            "term": "אבטחת משאבים",
-            "definition": "גישה אמינה למזון, מים ואנרגיה תחת לחץ כלכלי וסביבתי."
-          },
-          "resilience": {
-            "term": "כּוֹשֵׁר הִתאוֹשְׁשׁוּת",
-            "definition": "יכולת של קהילות ומוסדות לספוג זעזועים ולהתאושש ביעילות."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "ערוך רעיון",
-      "googleDocsUrl": "כתובת האתר של Google Docs",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "טקסט רעיון קצר (אופציונלי)",
-      "save": "לְהַצִיל",
-      "cancel": "לְבַטֵל",
-      "addIntro": "הוסף מסמך Google כדי לנסח רעיון לפתרון במקום, או הקלד הערה קצרה (או שניהם).",
-      "googleDocsCreateHelp": "Google Doc חדש נפתח בכרטיסייה אחרת; הדבק את הקישור כאן לאחר יצירתו.",
-      "resolutionIdeaPlaceholder": "רעיון לרזולוציה...",
-      "add": "לְהוֹסִיף",
-      "noIdeasYet": "עדיין אין רעיונות.",
-      "ideaLabel": "רַעְיוֹן",
-      "ideaFallback": "רעיון {number}",
-      "linkedDoc": "מסמך מקושר",
-      "addedOn": "נוסף {date}",
-      "edit": "לַעֲרוֹך",
-      "delete": "לִמְחוֹק",
-      "ideaDocument": "מסמך רעיון",
-      "summary": "תַקצִיר",
-      "emptyIdea": "רעיון ריק."
-    },
-    "stances": {
-      "heatmapTitle": "סקירת עמדה קצרה (מפת חום)",
-      "heatmapHelp": "באיזו מידה ההקצאה שלך תומכת ב___? (סולם 1-5)",
-      "topicPlaceholder": "לְמָשָׁל פעולת אקלים",
-      "extentLabel": "היקף (1-5):",
-      "extentHelpTitle": "היקף (1-5)",
-      "extentHelpBody": "1 פירושו שההקצאה שלך תומכת מעט בנושא, ו-5 משמעה תמיכה חזקה. בחר מספר שתואם את עמדתך בוועדה.",
-      "add": "לְהוֹסִיף",
-      "viewOnlyHeatmap": "מפת חום לצפייה בלבד לצוות.",
-      "notesPerAllocation": "הערות לכל הקצאה",
-      "noAllocationsYet": "עדיין אין הקצאות",
-      "notesPlaceholder": "הערות עמדה להקצאה זו...",
-      "noteLanguageWarning": "אזהרת קורא: הערה זו עשויה להכיל שפה לא הולמת.",
-      "save": "לְהַצִיל",
-      "saveHelpTitle": "שמור הערת עמדה",
-      "saveHelpBody": "שומר את הערת העמדה להקצאה זו. ניתן לצפות בו על ידי הצוות ו(בהתאם להגדרות הוועדה) משתתפים אחרים."
-    },
-    "speeches": {
-      "newSpeech": "נאום חדש",
-      "speechTitlePlaceholder": "כותרת הנאום",
-      "googleDocsUrl": "כתובת האתר של Google Docs",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "פותח את Google בכרטיסייה חדשה; הדבק כאן את כתובת האתר של המסמך כשתהיה מוכן.",
-      "plainTextOptional": "טיוטת טקסט רגיל (אופציונלי אם אתה משתמש ב-Google Doc)",
-      "save": "לְהַצִיל",
-      "cancel": "לְבַטֵל",
-      "noSpeechesYet": "עדיין אין נאומים. קשר מסמך Google Doc או הדבק טקסט.",
-      "speechLabel": "נְאוּם",
-      "untitled": "ללא כותרת",
-      "edit": "לַעֲרוֹך",
-      "speechDocument": "מסמך דיבור",
-      "draftText": "טיוטת טקסט",
-      "noContentHint": "קשר מסמך Google עם עריכה, או הוסף טקסט רגיל בטופס."
-    },
-    "committeeRoom": {
-      "committeeLabel": "וַעֲדָה",
-      "clearSearchTitle": "נקה את החיפוש והצג את כל המשלחות",
-      "vacantLabel": "רֵיק",
-      "searchVacantTitle": "חפשו מקומות \"פנויים\" בחדר",
-      "searchHint": "הקלד מדינה, שם נציג, בית ספר, כינוי או \"פנוי\" כדי להדגיש התאמות בחדר. הקש Enter כדי לדלג למשחק הראשון; Esc מתנקה. לחץ על פנוי כדי לדלג למקומות ריקים.",
-      "findLabel": "מצא משלחת או חבר במה",
-      "searchPlaceholder": "מדינה, שם, בית ספר...",
-      "matchesCount": "{matches} של {total} מושבים תואמים",
-      "searchAria": "חפש משלחות",
-      "virtualRoomVacant": "רֵיק",
-      "profileAria": "צפה בפרופיל: {country}",
-      "vacantSeatAria": "מושב פנוי",
-      "placardAria": "שלט {country}",
-      "gavelAria": "גמל",
-      "yourContext": "ההקשר שלך",
-      "roleLabel": "תַפְקִיד",
-      "seatLabel": "מוֹשָׁב",
-      "assignedLabel": "מוּקצֶה",
-      "daisLabel": "דוּכָן",
-      "phaseLabel": "שָׁלָב",
-      "phaseVoting": "הַצבָּעָה",
-      "phaseDebate": "דִיוּן",
-      "focusSearchTitle": "התמקד בחיפוש (כותרות ושמות של במות תואמים את השאילתה שלך)",
-      "tipLabel": "עֵצָה",
-      "enterScrolls": "הזן מגילות",
-      "typeToFilterHint": "הקלד לסינון - הזן גלילות להתאמה הראשונה",
-      "noMatches": "אין משלחות או מושבים תואמים.",
-      "digitalDisplay": "תצוגה דיגיטלית",
-      "floorLabel": "קוֹמָה",
-      "staffSeatsHeading": "צוות - מושבים",
-      "viewProfileAria": "צפה בפרופיל: {title}",
-      "noProfileLinkAria": "{title} (ללא קישור לפרופיל)",
-      "committeeFloor": "קומת הוועדה",
-      "virtualRoomFigureAria": "חדר ועדות וירטואלי - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "סינון משלחות. המושב הראשון המודגש הוא המשחק הראשון בזירה.",
-      "helperText": "שלטים מפרטים מדינה (מהקצאות), שם, בית ספר וכינויים מהפרופיל של כל נציג. ערוך את שלך תחת פרופיל. מושבים ריקים בוועדה מוצגים כפנויים. לחץ על שלט מלא או מושב במה כדי לפתוח את הדף של אותו חבר (צ'אט ודווח משם).",
-      "virtualRoomCaption": "דגם וירטואלי של חדר ועדת האו\"ם עם שלטי נציגים המציגים מדינה, שם, בית ספר וכינויים."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "בקשה לדבר",
-        "delegateFallback": "נָצִיג",
-        "needAllocation": "אתה צריך הקצאה כדי לבקש לדבר.",
-        "alreadyQueued": "כבר יש לך בקשת דיבור פעילה בתור.",
-        "requested": "ביקש לדבר. אתה תופיע בתור.",
-        "requestFailed": "נכשל בבקשת הדיבור.",
-        "helpBody": "שולח את המשלחת שלך לתור הכיסא. אתה יכול לקבל בקשה אחת פעילה המתנה/נוכחית בכל פעם.",
-        "purposeLabel": "מטרה אופציונלית (מוצג בתווית התור)",
-        "purposeHelpTitle": "תווית מטרה",
-        "purposeHelpBody": "טקסט זה מצורף לשם המדינה שלך כדי שהכסאות יוכלו לראות מדוע אתה מבקש את הרצפה.",
-        "purposePlaceholder": "לְמָשָׁל סקירת תמיכה + תיקון",
-        "requesting": "מבקש...",
-        "rollPromptTitle": "נדרש אישור הכיסא",
-        "rollPromptBodyPickStatus": "הסשן התחיל. בחר את סטטוס המסדר שלך כדי לבטל את נעילת הדיבור וההצבעה. אי אפשר לשנות את הבחירה הזו.",
-        "rollPromptBodyWaitSessionStart": "מחכה ליושב ראש שיתחיל את מושב הוועדה.",
-        "rollPromptBodyWaitRollPrompt": "ממתין להנחיית מסדר.",
-        "rollPromptBodyMarkedAbsent": "כרגע אתה מסומן כנעדר. בקש מהיושב ראש לסמן אותך נוכח לדבר ולהצביע.",
-        "rollPromptBodyChecking": "בודק את סטטוס הגלישה שלך...",
-        "rollPromptSaving": "חִסָכוֹן...",
-        "rollPromptPresent": "לְהַצִיג",
-        "rollPromptPresentVoting": "נוכחים ומצביעים"
-      },
-      "motionVoting": {
-        "votingProcedure": "הליך ההצבעה",
-        "currentMotion": "תנועה נוכחית",
-        "motioner": "מניע",
-        "majority": "רוֹב",
-        "majoritySimple": "פָּשׁוּט",
-        "tally": "כן {yes} - לא {no} - סך הכל {total}",
-        "help": "הבמה מתעדת את ההצבעה של כל משלחת במושב. הצבעות ההצעות משתמשות בכן או לא בלבד (לא נמנע). הסכומים סופרים רק שלטים שבהם נרשמו כן או לא; מדלגים על משלחות נעדרות."
-      },
-      "activeMotion": {
-        "currentMotion": "תנועה נוכחית",
-        "motionFallback": "תְנוּעָה",
-        "motioner": "מניע",
-        "majority": "רוֹב",
-        "majoritySimple": "פָּשׁוּט",
-        "type": "סוּג",
-        "timer": "שָׁעוֹן עֶצֶר",
-        "currentSpeaker": "רמקול נוכחי",
-        "nextSpeaker": "הדובר הבא",
-        "speakerTimeLeftCap": "זמן רמקול (שמאל/כובע)",
-        "speakerTimeLeftTotal": "זמן רמקול (שמאל / סה\"כ)",
-        "perSpeaker": "(לכל דובר)",
-        "paused": "(מושהה)",
-        "pauseReason": "השהייה: {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "זמן מפגש",
-        "sessionNotStarted": "הסשן לא התחיל",
-        "limit": "לְהַגבִּיל",
-        "limitRemaining": "נותרו {value}",
-        "limitOverBy": "עבר על ידי {value}",
-        "quickLinkSession": "מוֹשָׁב",
-        "quickLinkRoll": "גָלִיל",
-        "quickLinkSpeakers": "רמקולים",
-        "quickLinkMotions": "תנועות",
-        "quickLinkTimer": "שָׁעוֹן עֶצֶר",
-        "dais": "דוּכָן",
-        "pinned": "מוצמד",
-        "viewFullAnnouncement": "צפו בהודעה המלאה",
-        "timerPausesReadOnly": "הפסקות טיימר (לקריאה בלבד)",
-        "speakerList": "רשימת דוברים",
-        "speakerFallback": "רַמקוֹל",
-        "rollCallYou": "מפקד (אתה)",
-        "fullAnnouncement": "הודעה מלאה",
-        "daisAnnouncement": "הכרזת דיי",
-        "close": "לִסְגוֹר"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "שם הפגישה",
-        "sessionNamePlaceholder": "לְמָשָׁל מפגש בוקר",
-        "sessionNameSaving": "חִסָכוֹן…",
-        "sessionNameSaved": "נשמר",
-        "sessionNameHint": "נשמר אוטומטית ומופיע בהיסטוריית הפעלות.",
-        "title": "מושב הוועדה",
-        "subtitle": "התחל או הפסק את מושב הוועדה.",
-        "helpStartStop": "התחלה מתחילה את הטיימר/סטטוס הישיבה של הוועדה עבור כולם. עצור מסיים את ההפעלה ומנקה את מגבלת הזמן הנוכחית.",
-        "migrationUnavailable": "בקרות הפעלה אינן זמינות באופן זמני עד להחלת העברות מסד הנתונים האחרונות.",
-        "endTimeInFuture": "בחר שעת סיום בעתיד, או עבור ללא הגבלה.",
-        "sessionStartUnavailable": "חותמת הזמן לתחילת ההפעלה אינה זמינה עד להחלת ההגירות האחרונות.",
-        "endTimeInFutureSetNoLimit": "בחר שעת סיום בעתיד, או לא הגדר הגבלה.",
-        "sessionLimitUpdated": "מגבלת הפגישה עודכנה.",
-        "startedLabel": "התחיל:",
-        "timeInLabel": "זמן ב:",
-        "timeUntilEndLabel": "זמן עד הסוף:",
-        "overByValue": "עבר על ידי {value}",
-        "modeLabel": "מצב:",
-        "modeStopwatchNoLimit": "שעון עצר (ללא הגבלת זמן)",
-        "sessionNotRunning": "ההפעלה לא פועלת.",
-        "sessionLimit": "מגבלת הפעלה",
-        "sessionLimitModesTitle": "מצבי הגבלת הפעלה",
-        "sessionLimitModesHelp": "אין: אין סוף. תקציב זמן: נספר מההתחלה. סיים ב: זמן שעון קבוע באזור הזמן המקומי שלך.",
-        "sessionLimitOptional": "אופציונלי.",
-        "noneLabel": "אַף לֹא אֶחָד",
-        "noneDescription": "רץ עד שאתה עוצר.",
-        "timeBudgetLabel": "תקציב זמן",
-        "timeBudgetDescription": "נחשב מהרגע שאתה מתחיל.",
-        "endTimeLabel": "שעת סיום",
-        "endTimeDescription": "משתמש בזמן שעון קבוע (עוקף את התקציב אם שניהם הוגדרו אי פעם).",
-        "noneIndefinite": "אין (ללא הגבלת זמן)",
-        "noneScheduledEndHint": "אין סיום מתוכנן; רק הזמן שחלף מוצג.",
-        "timeBudgetFromStart": "תקציב זמן מההתחלה",
-        "hoursLabel": "שעות",
-        "minutesLabel": "פּרוֹטוֹקוֹל",
-        "minimumOneMinute": "(מינימום דקה אחת)",
-        "endAtLocalTime": "סיים בשעה (זמן מקומי)",
-        "stopSession": "עצור את הפגישה",
-        "saveLimit": "שמור מגבלה",
-        "saveLimitHelp": "מחיל הגדרות מגבלה מעודכנות בזמן שההפעלה כבר פועלת, מבלי להפסיק את ההפעלה.",
-        "startSession": "התחל הפעלה",
-        "sidebarUsePrefix": "השתמש בסרגל הצד עבור",
-        "rollCall": "מפקד",
-        "speakers": "רמקולים",
-        "formalMotions": "הצעות פורמליות",
-        "timer": "שָׁעוֹן עֶצֶר",
-        "sidebarAnd": "ו",
-        "announcements": "הכרזות",
-        "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה."
-      },
-      "history": {
-        "title": "היסטוריית הפעלות",
-        "savedCount": "{count} נשמר",
-        "permissionsHint": "כיסאות יכולים לשנות את שמות הערכים. SMT/Admin יכול לשנות שם ולמחוק ערכים.",
-        "empty": "עדיין אין היסטוריית הפעלה.",
-        "rename": "שנה שם",
-        "delete": "לִמְחוֹק",
-        "deleteConfirm": "למחוק את הפגישה הזו מההיסטוריה?",
-        "sessionNamePrompt": "שם הפגישה",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> מתמשך"
-      },
-      "timerPage": {
-        "title": "שָׁעוֹן עֶצֶר",
-        "controlsTitle": "פקדי טיימר",
-        "controlsHelp": "השתמש בקומה כללית לתזמון הדיון הכולל, או בהצבעת הצעה כדי לקשור את הנראות לפריט ספציפי של הצבעה פתוחה.",
-        "tabSetup": "1) התקנה",
-        "tabClock": "2) בקרות שעון",
-        "tabNotes": "3) הערות דיבור",
-        "tabLog": "4) השהה יומן",
-        "setupHelp": "בחר אם טיימר זה מיועד לקומה כללית (גלוי תמיד לנציגים) או קשור להצעה הפתוחה להצבעה (הנציגים רואים אותה רק בזמן שהצבעה זו היא הפריט הפעיל). עם זמן לכל דובר מופעל, השעון נשאר גלוי במהלך טקס מפגש מתון ללא קשר. השהה את השעון / התחל את הקפאת השעון או המשך את הספירה לאחור. הגדר את זמן הרמקול (נותר) ואת הזמן הכולל בנפרד, ולאחר מכן שמור טיימר. קביעות מוגדרות מראש ממלאות את שניהם באותו אורך; אתה יכול לערוך כל אחד מהשדות לאחר מכן. הפסקות נרשמות עם סיבה קצרה.",
-        "namedPreset": "מוגדר מראש בשם",
-        "applyPreset": "החל הגדרה מראש...",
-        "floorLabelDelegates": "תווית קומה (נציגים)",
-        "floorLabelPlaceholder": "לְמָשָׁל GSL 60s",
-        "timerPurpose": "מטרת טיימר",
-        "purposeGeneralFloor": "דיון כללי / קומה (לא קשור להצבעה)",
-        "purposeMotionVote": "תנועה פתוחה - טיימר רק כאשר ההצבעה הזו פעילה ברצפה",
-        "openMotionForVoting": "הצעה פתוחה (חייב להיות פתוח להצבעה)",
-        "selectMotion": "בחר תנועה...",
-        "untitled": "ללא כותרת",
-        "noOpenMotionWarning": "אין הצעה פתוחה להצבעה. פתח תחילה הצבעה, או החלף מטרה לקומה כללית.",
-        "clock": "שָׁעוֹן",
-        "running": "רִיצָה",
-        "paused": "מושהה",
-        "saveToEnablePauseStart": "שמור את הטיימר כדי לאפשר השהייה/התחלה.",
-        "pauseReasonLogged": "סיבה להשהה (נרשמה)",
-        "pauseReasonPlaceholder": "לְמָשָׁל נקודת סדר, בעיה טכנית, אסיפה לא ממודרת...",
-        "pauseClock": "השהה שעון",
-        "startClock": "הפעל שעון",
-        "perSpeakerTitle": "זמן לכל דובר (סמינר מנחה)",
-        "perSpeakerHelp": "הגדר את הזמן הכולל כמכסה לכל רמקול ואת זמן הרמקול כזמן שנותר; התקדמות עוברת לרמקול הבא ומתאפסת על הכובע.",
-        "currentSpeaker": "רמקול נוכחי",
-        "nextSpeaker": "הדובר הבא",
-        "speechNotesCurrentSpeaker": "הערות דיבור (דובר נוכחי)",
-        "speechNotesHelp": "הערות קשורות לטקסט טיימר הדובר הנוכחי, וכאשר ברשימת הדוברים יש מישהו מסומן כנוכחי, האצלה שלו מאוחסנת לעיון.",
-        "timerFloorLabel": "טיימר (רצפה):",
-        "speakerListCurrent": "רשימת דוברים (נוכחית):",
-        "noCurrentDelegation": "שום משלחת לא מסומנת כנוכחית ברשימת הדוברים.",
-        "note": "פֶּתֶק",
-        "notePlaceholder": "נקודות, נקודות עניין, טון, מעקבים...",
-        "saveSpeechNote": "שמור הערת דיבור",
-        "recentNotes": "ההערות האחרונות שלך (וועדה זו)",
-        "delete": "לִמְחוֹק",
-        "speakerTimeRemaining": "זמן רמקול (נותר)",
-        "remainingHelpPerSpeaker": "ספירה לאחור עבור הרמקול הנוכחי (מתאפס כאשר אתה מתקדם).",
-        "remainingHelpNormal": "ספירה לאחור עבור הרמקול הנוכחי (יכול להיות פחות מהסך הכל).",
-        "totalTime": "זמן כולל",
-        "totalHelpPerSpeaker": "מכסה לכל רמקול (מכנה על הרצפה; נותרו מילוי מקדמה).",
-        "totalHelpNormal": "האורך המלא של קטע הטיימר הזה (מוצג אחרי הלוכסן על הרצפה).",
-        "saveTimer": "שמור טיימר",
-        "advanceSpeakerReset": "קדם רמקול ואיפוס שעון",
-        "recentPauseLog": "יומן הפסקה אחרון",
-        "noPauseEvents": "לא נרשמו עדיין אירועי השהייה עבור ועדה זו.",
-        "openPauseLogHint": "פתח את יומן ההשהיה כדי לסקור את סיבות ההשהיה וחותמות הזמן שהוקלטו.",
-        "saved": "הטיימר נשמר.",
-        "savedCapped": "הטיימר נשמר. זמן הרמקול היה ארוך מהסך הכל; מוגבל לסך הכל.",
-        "alreadyPaused": "הטיימר כבר מושהה.",
-        "pausedForCommittee": "הטיימר נעצר עבור הוועדה.",
-        "alreadyRunning": "הטיימר כבר פועל.",
-        "runningForCommittee": "טיימר פועל לוועדה.",
-        "euTimerBoardTitle": "לוח טיימר של הפרלמנט של האיחוד האירופי (11 טיימרים)",
-        "euTimerBoardHelp": "טיימר אחד לכל צד, בתוספת זמן כולל, זמן POI/POC וזמן רמקול. השתמש ב-Apply כדי להעתיק שורה לשדות הטיימר החי בכרטיסייה שעון (זמן רמקול / שמור טיימר).",
-        "euTimerName": "שֵׁם",
-        "euTimerTag": "תָג",
-        "euTotalTime": "זמן כולל",
-        "euPoiPocTime": "זמן POI / POC",
-        "euSpeakerTime": "זמן רמקול"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "חדר ועדות (מלא)",
         "hint": "פריסה וירטואלית וקומת נציגים"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "שמירה אוטומטית נכשלה",
     "autosavedWithCountry": "נשמר אוטומטית - {country}",
     "delegateFallback": "נָצִיג"
+  },
+  "sources": {
+    "addSource": "הוסף מקור",
+    "sourceUrl": "כתובת האתר של המקור",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (מומלץ)",
+    "urlHelp": "למסמך Google Doc חדש, השתמש בלחצן והדבק את הקישור למסמך כאן.",
+    "titleOptional": "כותרת (אופציונלי)",
+    "saveChanges": "שמור שינויים",
+    "editSource": "ערוך מקור",
+    "urlPlaceholderShort": "Google Doc או כתובת אתר אחרת",
+    "empty": "עדיין אין מקורות. הוסף קישור ל-Google Doc כדי לפתוח אותו כאן.",
+    "sourceLabel": "מָקוֹר",
+    "openLink": "פתח קישור",
+    "embedHeading": "מסמך מקור",
+    "notGoogleDoc": "כתובת האתר הזו אינה מסמך Google. השתמש בקישור docs.google.com/document/d/… כדי להטמיע ולערוך כאן; אחרת פתח את הקישור למעלה."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "נציגים אינם יכולים להעלות ניירות עמדה ישירות. השתמש בסוג מסמך אחר.",
+    "alertOnlyChairsPositionPaper": "רק כיסאות/SMT/אדמין יכולים להעלות ניירות עמדה.",
+    "alertOnlySmtChairReport": "רק SMT/מנהל יכול להעלות דוחות יו\"ר.",
+    "alertOnlySmtRop": "רק SMT/אדמין יכולים להעלות מסמכי RoP.",
+    "alertOnlySmtAwardCriteria": "רק SMT/אדמין יכולים להעלות מסמכי קריטריוני פרס.",
+    "alertNeedContentOrUrl": "הוסף תוכן טקסט מקומי או כתובת אתר של Google Docs.",
+    "confirmDelete": "למחוק את המסמך הזה?",
+    "delegatePrepTitle": "קטע הכנה למסמך",
+    "delegatePrepBody": "אתה יכול להעלות, להציג ולערוך <prep>מסמכי הכנה</prep> משלך ישירות מדף זה.",
+    "positionPaperGuideTitle": "מקם את מכוון הנייר",
+    "positionPaperGuideBlurb": "הורד את מדריך מציין המיקום בזמן הכנת ה-PDF הסופי.",
+    "downloadPlaceholderGuide": "הורד את המדריך למציין מיקום",
+    "addDocument": "הוסף מסמך",
+    "tabs": {
+      "ariaLabel": "קטעי מסמכים",
+      "library": "סִפְרִיָה",
+      "compose": "לְהַלחִין",
+      "composeHint": "התחל מסמך חדש או ערוך טיוטה קיימת מהכרטיסייה הזו."
+    },
+    "newDocumentTitle": "מסמך חדש",
+    "editDocumentTitle": "ערוך מסמך",
+    "typeLabel": "סוּג",
+    "types": {
+      "position_paper": "נייר מיקום",
+      "chair_report": "דו\"ח יו\"ר",
+      "rop": "RoP",
+      "award_criteria": "קריטריונים לפרס",
+      "chair_notes": "הערות כיסא",
+      "prep_doc": "מסמך הכנה"
+    },
+    "delegatePositionPaperNote": "ניירות עמדה מועלים על ידי כיסאות עם משוב.",
+    "delegateOwner": "בעל נציג",
+    "chairRecipient": "מקבל כיסא",
+    "titleLabel": "כּוֹתֶרֶת",
+    "titlePlaceholder": "כותרת המסמך",
+    "googleDocsUrl": "כתובת האתר של Google Docs",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (הטמעת תצוגה/עריכה באפליקציה)",
+    "googleDocsHelp": "השתמש ב-New Google Doc כדי לפתוח את Google בכרטיסייה חדשה, ולאחר מכן הדבק את הקישור למסמך כאן. טקסט רגיל למטה הוא אופציונלי. כל מסמך צריך טקסט מקומי, קישור ל-Google Doc או שניהם.",
+    "plainTextOptional": "טקסט רגיל (אופציונלי)",
+    "plainTextPlaceholder": "הערות או טיוטת טקסט...",
+    "chairFeedbackLabel": "משוב יושב ראש",
+    "chairFeedbackPlaceholder": "משוב לנייר עמדת הנציג...",
+    "empty": "עדיין אין מסמכים. הוסף אחד או קישור ל-Google Doc.",
+    "sidebarDocumentLabel": "מִסְמָך",
+    "sections": {
+      "chairReports": "יו\"ר מדווח",
+      "rop": "RoP",
+      "awardCriteria": "קריטריונים לפרס",
+      "prepDocuments": "הכנת מסמכים",
+      "chairNotes": "הערות כיסא",
+      "otherDocuments": "מסמכים אחרים"
+    },
+    "untitled": "ללא כותרת",
+    "linkedDocumentHeading": "מסמך מקושר",
+    "notesHeading": "הערות",
+    "noGoogleDocYet": "Google Doc לא מקושר עדיין. השתמש ב-Edit כדי להוסיף כתובת URL של docs.google.com/document/d/….",
+    "chairFeedbackHeading": "משוב יושב ראש",
+    "noFeedbackYet": "עדיין לא נוספו משוב."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "הזן תחילה דוא\"ל של נציג.",
+    "sentToDelegate": "נשלח אל {email}.",
+    "newResolution": "רזולוציה חדשה",
+    "maxDraftResolutions": "לוועדה הזו יש כבר {count} טיוטות החלטות.",
+    "googleDocLink": "קישור לגוגל דוק",
+    "googleDocUrlPlaceholder": "כתובת האתר של Google Docs (docs.google.com/document/d/… - משמשת להטמעה + עריכה)",
+    "googleDocUrlHelp": "Google Doc חדש נפתח בכרטיסייה אחרת; העתק את כתובת האתר משורת הכתובת והדבק אותה כאן.",
+    "mainSubmittersPlaceholder": "שולחים ראשיים (זיהויי משתמש, מופרדים בפסיקים)",
+    "coSubmittersPlaceholder": "שולחים שותפים (מזהי משתמש, מופרדים בפסיק)",
+    "create": "לִיצוֹר",
+    "cancel": "לְבַטֵל",
+    "openInNewTab": "פתח בכרטיסייה חדשה",
+    "noGoogleDocLink": "אין קישור לגוגל דוק",
+    "visibleToOtherBloc": "גלוי לגוש אחר",
+    "resolutionCounts": "משנה עיקרית: {main} | מנוי משותף: {co} | חותמים: {signatories}",
+    "blocButton": "גוש {name} ({stance})",
+    "signVirtually": "חתום וירטואלית (המנויים הראשיים קיבלו הודעה)",
+    "shareByEmail": "שתף רזולוציה באימייל",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "שלח לנציג",
+    "clauseEditor": "עורך סעיפים",
+    "noClausesYet": "עדיין אין סעיפים.",
+    "clauseNumber": "סעיף {number}",
+    "saveClause": "סעיף שמור",
+    "delete": "לִמְחוֹק",
+    "addClausePlaceholder": "הוסף סעיף חדש...",
+    "addClause": "הוסף סעיף",
+    "clauseVoteHistory": "סעיף היסטוריית הצבעות",
+    "noClauseOutcomesYet": "עדיין לא נרשמו תוצאות הצבעה על סעיף.",
+    "clauseFallback": "סָעִיף",
+    "passed": "עבר",
+    "failed": "נִכשָׁל",
+    "motionId": "תנועה {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "מדורי הצבעה",
+      "open": "לִפְתוֹחַ",
+      "closed": "סָגוּר"
+    },
+    "requiredMajority": "רוב נדרש",
+    "helpRequiredMajorityTitle": "רוב נדרש",
+    "helpRequiredMajorityBody": "בחר את סף ההצבעה המשמש להחלטה לעבור/נכשל. 'פשוט' הוא יותר מחצי. `2/3` דורש רוב על.",
+    "majoritySimple": "פָּשׁוּט",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "רוב {label}",
+    "mustVote": "חייבים להצביע",
+    "helpMustVoteTitle": "חייבים להצביע",
+    "helpMustVoteBody": "מסמן הצעה זו כפריט \"חובה להצביע\". זה משמש כדי להעביר את הדרישה למשתתפים (בהתאם להגדרת הוועדה שלך).",
+    "saveSettings": "שמור הגדרות",
+    "delegateBlurb": "הבמה רושמת הצבעות במושב (למשל מפקד). הצבעות ההצעות כאן עוקבות אחר כן/לא בלבד (לא נעשה שימוש בהימנעות). אתה יכול לעקוב אחר הספירה; הנציגים אינם מצביעים באפליקציה.",
+    "yes": "כֵּן",
+    "no": "לֹא",
+    "ballots": "פתקי הצבעה",
+    "total": "סַך הַכֹּל",
+    "outcome": "תוֹצָאָה",
+    "passed": "עבר",
+    "failed": "נִכשָׁל",
+    "noRecordedVotes": "אין קולות רשומים",
+    "reopenMotion": "פתיחה מחדש של תנועה",
+    "editRecordOpen": "ערוך רשומה...",
+    "hideSettings": "הסתר הגדרות",
+    "preliminaryPassing": "עובר (ראשוני)",
+    "preliminaryFailing": "נכשל (ראשוני)",
+    "delegateRollCall": "מפקד נציג ({count})",
+    "noSeatedDelegates": "אין נציגים יושבים זמינים להצעה זו.",
+    "rollPrefix": "גָלִיל:",
+    "recordedPrefix": "מוּקלָט:",
+    "recordedYes": "כֵּן",
+    "recordedNo": "לֹא",
+    "recordedAbstain": "לְהִתְנַזֵר",
+    "recordedNone": "—",
+    "abstain": "לְהִתְנַזֵר",
+    "clear": "בָּרוּר",
+    "closeMotion": "תנועה סגורה",
+    "mustVoteBadge": "חייבים להצביע",
+    "canVoteBadge": "יכול להצביע",
+    "noMotions": "עדיין אין תנועות.",
+    "currentOpenMotion": "תנועה פתוחה נוכחית",
+    "noOpenMotion": "אין תנועה פתוחה כרגע.",
+    "recentClosedMotions": "תנועות סגורות אחרונות",
+    "noClosedMotions": "עדיין אין הצעות סגורות.",
+    "untitled": "ללא כותרת",
+    "voteTypes": {
+      "motion": "תְנוּעָה",
+      "amendment": "תִקוּן",
+      "resolution": "הַחְלָטָה",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "נעדר (גלגול)",
+      "present_abstain": "הווה - רשאי להימנע (להתגלגל)",
+      "present_voting": "הווה והצבעה (גלל)",
+      "unknown": "- (גלגול)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "קטעי פרופיל",
+      "overview": "סקירה כללית",
+      "awards": "פרסים",
+      "private": "רשומות פרטיות",
+      "settings": "הגדרות פרופיל"
+    },
+    "profilePicture": "תמונת פרופיל",
+    "uploadFile": "העלה קובץ",
+    "uploading": "מעלה...",
+    "photoSaved": "התמונה הועלתה ונשמרה.",
+    "orUrl": "או מוגדר לפי כתובת אתר",
+    "urlPlaceholder": "https://...",
+    "name": "שֵׁם",
+    "username": "שם משתמש",
+    "usernamePlaceholder": "לְמָשָׁל alex_1999",
+    "pronouns": "כינויים",
+    "customPronounNote": "לפרופיל שלך היה כינוי מותאם אישית שאינו מקובל כאן יותר. בחר אפשרות למעלה (או השאר ריק). שמירה מחליפה את הערך הישן.",
+    "school": "בֵּית סֵפֶר",
+    "schoolPlaceholder": "לְמָשָׁל תיכון לינקולן",
+    "grade": "צִיוּן",
+    "selectGrade": "בחר ציון",
+    "conferencesAttended": "השתתפו בכנסים",
+    "awardsComma": "פרסים (מופרדים בפסיקים)",
+    "awardsPlaceholder": "הנציג הטוב ביותר, ציון כבוד",
+    "allocation": "הַקצָאָה",
+    "selectAllocation": "בחר הקצאה",
+    "noAllocationsPlaceholder": "אין הקצאות לוועדות זמינות",
+    "saveProfile": "שמור פרופיל",
+    "saved": "הפרופיל נשמר.",
+    "saveFailed": "לא ניתן לשמור את הפרופיל.",
+    "errUsernamePattern": "שם המשתמש חייב להיות 3-32 תווים (אותיות, מספרים, _, ., -)",
+    "errPronounsPreset": "בחר כינוי מהרשימה.",
+    "errImageType": "אנא בחר קובץ תמונה.",
+    "errImageSize": "התמונה גדולה מדי (מקסימום 5 MB).",
+    "errUploadFailed": "ההעלאה נכשלה.",
+    "errStorageSetup": "אחסון תמונת פרופיל אינו מוגדר. בפרויקט Supabase, הפעל את המיגרציה 00100_profile_pictures_storage_bucket.sql, או צור דלי אחסון ציבורי בשם profile-pictures (ראה README).",
+    "errPublicUrl": "לא ניתן היה לפתור כתובת אתר ציבורית לתמונה שהועלתה.",
+    "fallbacks": {
+      "yourCountry": "המדינה שלך",
+      "committeeSession": "מושב הוועדה",
+      "delegate": "נָצִיג",
+      "speechNote": "הערת דיבור",
+      "untitledMotion": "תנועה ללא כותרת",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "נציג ברוך הבא של {flag} {country}",
+      "subtitle": "עם מה היית רוצה להתחיל?",
+      "links": {
+        "documents": "מסמכים",
+        "notes": "הערות",
+        "committeeRoom": "חדר ועדות",
+        "runningNotes": "ריצה הערות",
+        "ideas": "רעיונות",
+        "guides": "מדריכים",
+        "sources": "מקורות",
+        "resolutions": "החלטות",
+        "speeches": "נאומים",
+        "stances": "עמדות",
+        "crisisSlides": "מגלשות משבר",
+        "report": "דִוּוּחַ",
+        "motions": "תנועות",
+        "points": "נקודות"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "פרסים בפרופיל שלך",
+      "rank": "דרגה {דרגה}",
+      "pending": {
+        "tab": "מועמדויות ממתינות",
+        "title": "ממתינים למועמדויות לכסא",
+        "descriptionSingle": "נשמר על ידי כיסאות ושותף עם SMT לסקירה. פרסים סופיים מופיעים למטה לאחר אישור.",
+        "descriptionTabbed": "נשמר על ידי כיסאות ושותף עם SMT לסקירה. פרסים סופיים מופיעים לאחר אישור."
+      },
+      "recorded": {
+        "tab": "פרסים מוקלטים",
+        "title": "פרסים מוקלטים",
+        "description": "רשום כאשר כיסאות או SMT מקצים אותך במעקב אחר הפרסים. הכרה סופית פועלת בהתאם לכללי הוועידה שלך."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "גלוי רק לך, ראשי ועדות ו-SMT עבור הוועדה הרלוונטית.",
+      "points": {
+        "title": "נקודות כיסא (פרטיות)"
+      },
+      "speechNotes": {
+        "title": "הערות נאום של יושב ראש (פרטי)"
+      },
+      "motions": {
+        "title": "תנועות שהזזת",
+        "description": "נשמר בפרופיל שלך לבדיקת ועדה ופיקוח על SMT."
+      }
+    },
+    "discipline": {
+      "title": "מעמד משמעתי (פרטי)",
+      "statusLine": "אזהרות: {אזהרות} · התראות: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "ההצבעה מושבתת",
+      "speakingSuspended": "דיבור מושעה",
+      "removedFromCommittee": "הוצא מהוועדה",
+      "updated": "עודכן: {value}"
+    },
+    "preview": {
+      "ariaLabel": "תצוגה מקדימה של פרופיל",
+      "title": "תצוגה מקדימה",
+      "yourName": "השם שלך",
+      "usernameNotSet": "שם משתמש לא מוגדר",
+      "gradeValue": "כיתה {כיתה}",
+      "awards": "פרסים"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "כללי נוהל (RoP)",
+        "content": "# תקנון \n\n## נקודות ותנועות \n- **נקודת הזמנה**: נוהל נכון \n- **נקודת מידע**: שאלה לדובר \n- **נקודת זכות אישית**: נוחות אישית \n- **הצעה לשולחן**: דחיית הדיון \n- **הצעה לדחייה**: סיום הישיבה \n\n## הצבעה \n- רוב פשוט לעניינים פרוצדורליים \n- 2/3 רוב לעניינים מהותיים \n- הצבעה מסדרת אם תתבקש"
+      },
+      "examples": {
+        "title": "דוגמאות",
+        "content": "# דוגמאות \n\n## פורמט רזולוציה \n``` \nהאסיפה הכללית, \n... \n1. קורא למדינות החברות... \n2. קורא לקהילה הבינלאומית ל... \n``` \n\n## מבנה נייר עמדה \n1. רקע \n2. מדיניות מדינה \n3. פתרונות מוצעים"
+      },
+      "templates": {
+        "title": "תבניות",
+        "content": "# תבניות \n\n## תבנית דוח יו\"ר \n- סקירת הוועדה \n- נקודות דיון מרכזיות \n- התקבלו החלטות \n- המלצות"
+      },
+      "chairReport": {
+        "title": "דו\"ח יו\"ר",
+        "content": "# דו\"ח יו\"ר \n\nתיעוד הליכים ותוצאות של הוועדה כאן."
+      }
+    },
+    "edit": "לַעֲרוֹך",
+    "guideDocument": "מסמך מדריך",
+    "additionalNotes": "הערות נוספות",
+    "noContentYet": "עדיין אין תוכן.",
+    "titlePlaceholder": "כּוֹתֶרֶת",
+    "googleDocsUrl": "כתובת האתר של Google Docs",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google Doc חדש נפתח בכרטיסייה אחרת. הדבק קישור שניתן לשיתוף כדי שהנציגים יוכלו לפתוח את המסמך כאן (הצג/ערוך תלוי בשיתוף Google).",
+    "markdownOptional": "הערות סימון (אופציונלי אם אתה משתמש ב-Google Doc)",
+    "save": "לְהַצִיל",
+    "cancel": "לְבַטֵל",
+    "createNewGuide": "צור מדריך חדש",
+    "slugPlaceholder": "שבלול (ייחודי)",
+    "titleLowerPlaceholder": "כּוֹתֶרֶת",
+    "googleDocsUrlOptional": "כתובת אתר של Google Docs (אופציונלי)",
+    "markdownContentOptional": "תוכן סימון (אופציונלי)",
+    "create": "לִיצוֹר",
+    "glossary": {
+      "title": "מילון מונחים של סדר היום של MUN",
+      "subtitle": "טרמינולוגיה ייחודית התואמת לקוד הוועדה שלך ולנושאי סדר היום הנוכחיים שלך.",
+      "committeeCode": "קוד ועדה: {code}",
+      "sources": {
+        "core": "ליבה",
+        "committee": "וַעֲדָה",
+        "topic": "נוֹשֵׂא"
+      },
+      "terms": {
+        "delegation": {
+          "term": "מִשׁלַחַת",
+          "definition": "מדינה או צוות משקיפים המייצגים מדינה או ישות אחת בוועדה."
+        },
+        "placard": {
+          "term": "כְּרָזָה",
+          "definition": "שלט מדינה המשמש לבקשת רשות הדיבור, הצבעה ולאותת הצעות פרוצדורליות."
+        },
+        "dais": {
+          "term": "דוּכָן",
+          "definition": "צוות יו\"ר המנחה דיונים, מיישם נוהל ומנהל סדר הדיבור."
+        },
+        "quorum": {
+          "term": "מִניָן",
+          "definition": "מספר מינימלי של משלחות הנדרש לניהול עסקים והצבעות רשמיים."
+        },
+        "motion": {
+          "term": "תְנוּעָה",
+          "definition": "הצעה רשמית לשינוי זרימת הוויכוח, כגון סוג הקוקוס או זמן הדיבור."
+        },
+        "point_of_order": {
+          "term": "נקודת סדר",
+          "definition": "התערבות כאשר נוהל מיושם באופן שגוי לפי כללי הוועדה."
+        },
+        "moderated_caucus": {
+          "term": "מנחה קוקוס",
+          "definition": "קטע ויכוח מובנה עם נאומים קצרים בזמן על תת-נושא מוגדר."
+        },
+        "unmoderated_caucus": {
+          "term": "קאוקוס לא מתון",
+          "definition": "תקופת משא ומתן לא רשמית שבה הנציגים נעים בחופשיות לנסח ולמזג רעיונות."
+        },
+        "draft_resolution": {
+          "term": "טיוטת החלטה",
+          "definition": "טקסט עבודה של פעולת הוועדה המוצעת לפני ההצבעה והאימוץ הסופיים."
+        },
+        "amendment": {
+          "term": "תִקוּן",
+          "definition": "שינוי שהוצע לטיוטת הטקסט, ידידותי או שהצביעו כבלתי ידידותי."
+        },
+        "operative_clause": {
+          "term": "סעיף אופרטיבי",
+          "definition": "סעיף ממוספר מכוון פעולה המתאר את מה שהוועדה מציעה לעשות."
+        },
+        "preambulatory_clause": {
+          "term": "סעיף מקדמי",
+          "definition": "סעיף קביעת הקשר המצטט עקרונות רקע, חששות ומסגרות קודמות."
+        },
+        "right_of_reply": {
+          "term": "זכות תגובה",
+          "definition": "הזדמנות להגיב להצהרה ישירה שהשפיעה על כבוד המשלחת או תפקידה."
+        },
+        "veto_power": {
+          "term": "כוח וטו",
+          "definition": "סמכות החבר הקבוע של UNSC לחסום טיוטות החלטות מהותיות."
+        },
+        "chapter_vii": {
+          "term": "פרק ז'",
+          "definition": "סמכות מגילת האו\"ם על איומים על השלום, סנקציות ואמצעי שימוש בכוח."
+        },
+        "sanctions_regime": {
+          "term": "משטר הסנקציות",
+          "definition": "הגבלות מתואמות משמשות להשפעה על התנהגות ללא פעולה צבאית ישירה."
+        },
+        "arms_control": {
+          "term": "בקרת נשק",
+          "definition": "הסכמים ומערכות אימות המגבילות סוגים, כמויות או פריסה של כלי נשק."
+        },
+        "non_proliferation": {
+          "term": "אי הפצה",
+          "definition": "מדיניות למניעת התפשטות של יכולות נשק גרעיני, כימי, ביולוגי או מתקדם."
+        },
+        "confidence_building_measures": {
+          "term": "אמצעים בוני אמון",
+          "definition": "כלי שקיפות ותקשורת המפחיתים אי הבנה וסיכון לעימותים."
+        },
+        "universal_periodic_review": {
+          "term": "סקירה תקופתית אוניברסלית",
+          "definition": "תהליך ביקורת עמיתים שבו כל מדינה חברה באו\"ם מדווחת ומקבלת המלצות על זכויות."
+        },
+        "special_rapporteur": {
+          "term": "כתב מיוחד",
+          "definition": "מומחה בלתי תלוי שמונה לפקח ולדווח על נושאים נושאיים או זכויות מדינות."
+        },
+        "treaty_body": {
+          "term": "גוף האמנה",
+          "definition": "ועדת מומחים המפקחת על יישום אמנת זכויות אדם ספציפית."
+        },
+        "public_health_emergency": {
+          "term": "מצב חירום לבריאות הציבור",
+          "definition": "אירוע התפרצות חמור הדורש תגובה דחופה לאומית ובינלאומית מתואמת."
+        },
+        "surveillance": {
+          "term": "מעקב אפידמיולוגי",
+          "definition": "איסוף וניתוח מתמשכים של נתוני בריאות כדי לזהות ולעקוב אחר מגמות מחלות."
+        },
+        "health_systems": {
+          "term": "חיזוק מערכות בריאות",
+          "definition": "שיפור כוח העבודה, המימון, הלוגיסטיקה והממשל לאספקת שירותי בריאות אמינה."
+        },
+        "transnational_crime": {
+          "term": "פשע מאורגן חוצה לאומי",
+          "definition": "פעילות פלילית מתואמת חוצה גבולות באמצעות רשתות ושווקים בלתי חוקיים."
+        },
+        "illicit_trafficking": {
+          "term": "סחר לא חוקי",
+          "definition": "תנועה בלתי חוקית של סמים, נשק, אנשים או סחורות בין תחומי שיפוט."
+        },
+        "rule_of_law_capacity": {
+          "term": "יכולת שלטון החוק",
+          "definition": "היכולת המוסדית של מערכות המשפט לחקור, להעמיד לדין ולהגן על זכויות בצורה הוגנת."
+        },
+        "sustainable_development": {
+          "term": "פיתוח בר קיימא",
+          "definition": "מודל צמיחה המאזן קידמה חברתית, הזדמנויות כלכליות והגנה על הסביבה."
+        },
+        "financing_for_development": {
+          "term": "מימון לפיתוח",
+          "definition": "מנגנוני מימון ציבוריים ופרטיים התומכים בסדרי עדיפויות פיתוח לטווח ארוך."
+        },
+        "policy_coordination": {
+          "term": "תיאום מדיניות",
+          "definition": "יישור פעולות המדינה והסוכנות כדי למנוע כפילות ולהגביר את ההשפעה הקולקטיבית."
+        },
+        "child_protection": {
+          "term": "הגנת ילדים",
+          "definition": "אמצעים למניעת ניצול, התעללות ואלימות כלפי ילדים בכל המסגרות."
+        },
+        "education_access": {
+          "term": "גישה לחינוך",
+          "definition": "הבטחת הזדמנויות למידה מכילה, שוויונית ומתמשכת לכל הילדים."
+        },
+        "humanitarian_response": {
+          "term": "תגובה הומניטרית",
+          "definition": "פעולות סיוע מהירות הנותנות מענה לצרכים דחופים במשברים ובמסגרות סכסוכים."
+        },
+        "gender_mainstreaming": {
+          "term": "מיינסטרים מגדר",
+          "definition": "שילוב ניתוח מגדר בתכנון, יישום והערכה של מדיניות."
+        },
+        "gender_based_violence": {
+          "term": "אלימות על בסיס מגדר",
+          "definition": "פגיעה במישהו על סמך זהות מגדרית, תפקידים או יחסי כוח לא שוויוניים."
+        },
+        "economic_empowerment": {
+          "term": "העצמה כלכלית",
+          "definition": "הרחבת הגישה לעבודה הגונה, כספים, בעלות וכוח קבלת החלטות."
+        },
+        "source_attribution": {
+          "term": "ייחוס מקור",
+          "definition": "ציטוט ברור של מקור המידע כדי שניתן יהיה לאמת את הטענות ולהתאים אותן בהקשר."
+        },
+        "verified_reporting": {
+          "term": "דיווח מאומת",
+          "definition": "תקן עיתונאי הדורש אישור לפני פרסום עובדות שנויות במחלוקת."
+        },
+        "editorial_independence": {
+          "term": "עצמאות עריכה",
+          "definition": "הפרדת החלטות דיווח מלחץ פוליטי או השפעה של בעלי עניין."
+        },
+        "climate_mitigation": {
+          "term": "הפחתת אקלים",
+          "definition": "פעולות המפחיתות את פליטת גזי חממה או מגדילות את סילוק הפחמן לטווח ארוך."
+        },
+        "climate_adaptation": {
+          "term": "הסתגלות לאקלים",
+          "definition": "מדיניות והשקעות המפחיתות את הפגיעות להשפעות הקשורות לאקלים."
+        },
+        "cyber_norms": {
+          "term": "נורמות סייבר",
+          "definition": "ציפיות משותפות להתנהגות אחראית של המדינה בתחומי הדיגיטל והסייבר."
+        },
+        "critical_infrastructure": {
+          "term": "תשתית קריטית",
+          "definition": "מערכות חיוניות כמו חשמל, מים, בריאות ותקשורת הדורשות חוסן."
+        },
+        "epidemiology": {
+          "term": "אֶפִּידֶמִיוֹלוֹגִיָה",
+          "definition": "מחקר של דפוסי מחלות, גורמים והתפלגות באוכלוסיות."
+        },
+        "preparedness_response": {
+          "term": "מוכנות ותגובה",
+          "definition": "תכנון, תיאום ופעולות נחשול כדי להכיל ולנהל מצבי חירום."
+        },
+        "non_refoulement": {
+          "term": "אי-החזרה",
+          "definition": "עקרון האוסר על החזרת אנשים למקומות שבהם הם עומדים בפני פגיעה חמורה."
+        },
+        "durable_solutions": {
+          "term": "פתרונות עמידים",
+          "definition": "תוצאות ארוכות טווח עבור עקורים: חזרה, אינטגרציה מקומית או יישוב מחדש."
+        },
+        "nuclear_safeguards": {
+          "term": "אמצעי הגנה גרעיניים",
+          "definition": "אמצעי אימות המבטיחים כי חומרים גרעיניים לא יופנו לשימוש בנשק."
+        },
+        "counter_terrorism": {
+          "term": "סיכול טרור",
+          "definition": "אמצעים משפטיים, מניעה ואבטחה משולבים נגד פעילות טרור."
+        },
+        "due_process": {
+          "term": "הליך תקין",
+          "definition": "הליכים משפטיים הוגנים המגינים על זכויות במהלך חקירה, תביעה וסנקציות."
+        },
+        "resource_security": {
+          "term": "אבטחת משאבים",
+          "definition": "גישה אמינה למזון, מים ואנרגיה תחת לחץ כלכלי וסביבתי."
+        },
+        "resilience": {
+          "term": "כּוֹשֵׁר הִתאוֹשְׁשׁוּת",
+          "definition": "יכולת של קהילות ומוסדות לספוג זעזועים ולהתאושש ביעילות."
+        }
+      },
+      "topicLine": "נושא: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "ערוך רעיון",
+    "googleDocsUrl": "כתובת האתר של Google Docs",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "טקסט רעיון קצר (אופציונלי)",
+    "save": "לְהַצִיל",
+    "cancel": "לְבַטֵל",
+    "addIntro": "הוסף מסמך Google כדי לנסח רעיון לפתרון במקום, או הקלד הערה קצרה (או שניהם).",
+    "googleDocsCreateHelp": "Google Doc חדש נפתח בכרטיסייה אחרת; הדבק את הקישור כאן לאחר יצירתו.",
+    "resolutionIdeaPlaceholder": "רעיון לרזולוציה...",
+    "add": "לְהוֹסִיף",
+    "noIdeasYet": "עדיין אין רעיונות.",
+    "ideaLabel": "רַעְיוֹן",
+    "ideaFallback": "רעיון {number}",
+    "linkedDoc": "מסמך מקושר",
+    "addedOn": "נוסף {date}",
+    "edit": "לַעֲרוֹך",
+    "delete": "לִמְחוֹק",
+    "ideaDocument": "מסמך רעיון",
+    "summary": "תַקצִיר",
+    "emptyIdea": "רעיון ריק."
+  },
+  "stances": {
+    "heatmapTitle": "סקירת עמדה קצרה (מפת חום)",
+    "heatmapHelp": "באיזו מידה ההקצאה שלך תומכת ב___? (סולם 1-5)",
+    "topicPlaceholder": "לְמָשָׁל פעולת אקלים",
+    "extentLabel": "היקף (1-5):",
+    "extentHelpTitle": "היקף (1-5)",
+    "extentHelpBody": "1 פירושו שההקצאה שלך תומכת מעט בנושא, ו-5 משמעה תמיכה חזקה. בחר מספר שתואם את עמדתך בוועדה.",
+    "add": "לְהוֹסִיף",
+    "viewOnlyHeatmap": "מפת חום לצפייה בלבד לצוות.",
+    "notesPerAllocation": "הערות לכל הקצאה",
+    "noAllocationsYet": "עדיין אין הקצאות",
+    "notesPlaceholder": "הערות עמדה להקצאה זו...",
+    "noteLanguageWarning": "אזהרת קורא: הערה זו עשויה להכיל שפה לא הולמת.",
+    "save": "לְהַצִיל",
+    "saveHelpTitle": "שמור הערת עמדה",
+    "saveHelpBody": "שומר את הערת העמדה להקצאה זו. ניתן לצפות בו על ידי הצוות ו(בהתאם להגדרות הוועדה) משתתפים אחרים."
+  },
+  "speeches": {
+    "newSpeech": "נאום חדש",
+    "speechTitlePlaceholder": "כותרת הנאום",
+    "googleDocsUrl": "כתובת האתר של Google Docs",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "פותח את Google בכרטיסייה חדשה; הדבק כאן את כתובת האתר של המסמך כשתהיה מוכן.",
+    "plainTextOptional": "טיוטת טקסט רגיל (אופציונלי אם אתה משתמש ב-Google Doc)",
+    "save": "לְהַצִיל",
+    "cancel": "לְבַטֵל",
+    "noSpeechesYet": "עדיין אין נאומים. קשר מסמך Google Doc או הדבק טקסט.",
+    "speechLabel": "נְאוּם",
+    "untitled": "ללא כותרת",
+    "edit": "לַעֲרוֹך",
+    "speechDocument": "מסמך דיבור",
+    "draftText": "טיוטת טקסט",
+    "noContentHint": "קשר מסמך Google עם עריכה, או הוסף טקסט רגיל בטופס."
+  },
+  "committeeRoom": {
+    "committeeLabel": "וַעֲדָה",
+    "clearSearchTitle": "נקה את החיפוש והצג את כל המשלחות",
+    "vacantLabel": "רֵיק",
+    "searchVacantTitle": "חפשו מקומות \"פנויים\" בחדר",
+    "searchHint": "הקלד מדינה, שם נציג, בית ספר, כינוי או \"פנוי\" כדי להדגיש התאמות בחדר. הקש Enter כדי לדלג למשחק הראשון; Esc מתנקה. לחץ על פנוי כדי לדלג למקומות ריקים.",
+    "findLabel": "מצא משלחת או חבר במה",
+    "searchPlaceholder": "מדינה, שם, בית ספר...",
+    "matchesCount": "{matches} של {total} מושבים תואמים",
+    "searchAria": "חפש משלחות",
+    "virtualRoomVacant": "רֵיק",
+    "profileAria": "צפה בפרופיל: {country}",
+    "vacantSeatAria": "מושב פנוי",
+    "placardAria": "שלט {country}",
+    "gavelAria": "גמל",
+    "yourContext": "ההקשר שלך",
+    "roleLabel": "תַפְקִיד",
+    "seatLabel": "מוֹשָׁב",
+    "assignedLabel": "מוּקצֶה",
+    "daisLabel": "דוּכָן",
+    "phaseLabel": "שָׁלָב",
+    "phaseVoting": "הַצבָּעָה",
+    "phaseDebate": "דִיוּן",
+    "focusSearchTitle": "התמקד בחיפוש (כותרות ושמות של במות תואמים את השאילתה שלך)",
+    "tipLabel": "עֵצָה",
+    "enterScrolls": "הזן מגילות",
+    "typeToFilterHint": "הקלד לסינון - הזן גלילות להתאמה הראשונה",
+    "noMatches": "אין משלחות או מושבים תואמים.",
+    "digitalDisplay": "תצוגה דיגיטלית",
+    "floorLabel": "קוֹמָה",
+    "staffSeatsHeading": "צוות - מושבים",
+    "viewProfileAria": "צפה בפרופיל: {title}",
+    "noProfileLinkAria": "{title} (ללא קישור לפרופיל)",
+    "committeeFloor": "קומת הוועדה",
+    "virtualRoomFigureAria": "חדר ועדות וירטואלי - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "סינון משלחות. המושב הראשון המודגש הוא המשחק הראשון בזירה.",
+    "helperText": "שלטים מפרטים מדינה (מהקצאות), שם, בית ספר וכינויים מהפרופיל של כל נציג. ערוך את שלך תחת פרופיל. מושבים ריקים בוועדה מוצגים כפנויים. לחץ על שלט מלא או מושב במה כדי לפתוח את הדף של אותו חבר (צ'אט ודווח משם).",
+    "virtualRoomCaption": "דגם וירטואלי של חדר ועדת האו\"ם עם שלטי נציגים המציגים מדינה, שם, בית ספר וכינויים."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "בקשה לדבר",
+      "delegateFallback": "נָצִיג",
+      "needAllocation": "אתה צריך הקצאה כדי לבקש לדבר.",
+      "alreadyQueued": "כבר יש לך בקשת דיבור פעילה בתור.",
+      "requested": "ביקש לדבר. אתה תופיע בתור.",
+      "requestFailed": "נכשל בבקשת הדיבור.",
+      "helpBody": "שולח את המשלחת שלך לתור הכיסא. אתה יכול לקבל בקשה אחת פעילה המתנה/נוכחית בכל פעם.",
+      "purposeLabel": "מטרה אופציונלית (מוצג בתווית התור)",
+      "purposeHelpTitle": "תווית מטרה",
+      "purposeHelpBody": "טקסט זה מצורף לשם המדינה שלך כדי שהכסאות יוכלו לראות מדוע אתה מבקש את הרצפה.",
+      "purposePlaceholder": "לְמָשָׁל סקירת תמיכה + תיקון",
+      "requesting": "מבקש...",
+      "rollPromptTitle": "נדרש אישור הכיסא",
+      "rollPromptBodyPickStatus": "הסשן התחיל. בחר את סטטוס המסדר שלך כדי לבטל את נעילת הדיבור וההצבעה. אי אפשר לשנות את הבחירה הזו.",
+      "rollPromptBodyWaitSessionStart": "מחכה ליושב ראש שיתחיל את מושב הוועדה.",
+      "rollPromptBodyWaitRollPrompt": "ממתין להנחיית מסדר.",
+      "rollPromptBodyMarkedAbsent": "כרגע אתה מסומן כנעדר. בקש מהיושב ראש לסמן אותך נוכח לדבר ולהצביע.",
+      "rollPromptBodyChecking": "בודק את סטטוס הגלישה שלך...",
+      "rollPromptSaving": "חִסָכוֹן...",
+      "rollPromptPresent": "לְהַצִיג",
+      "rollPromptPresentVoting": "נוכחים ומצביעים"
+    },
+    "motionVoting": {
+      "votingProcedure": "הליך ההצבעה",
+      "currentMotion": "תנועה נוכחית",
+      "motioner": "מניע",
+      "majority": "רוֹב",
+      "majoritySimple": "פָּשׁוּט",
+      "tally": "כן {yes} - לא {no} - סך הכל {total}",
+      "help": "הבמה מתעדת את ההצבעה של כל משלחת במושב. הצבעות ההצעות משתמשות בכן או לא בלבד (לא נמנע). הסכומים סופרים רק שלטים שבהם נרשמו כן או לא; מדלגים על משלחות נעדרות."
+    },
+    "activeMotion": {
+      "currentMotion": "תנועה נוכחית",
+      "motionFallback": "תְנוּעָה",
+      "motioner": "מניע",
+      "majority": "רוֹב",
+      "majoritySimple": "פָּשׁוּט",
+      "type": "סוּג",
+      "timer": "שָׁעוֹן עֶצֶר",
+      "currentSpeaker": "רמקול נוכחי",
+      "nextSpeaker": "הדובר הבא",
+      "speakerTimeLeftCap": "זמן רמקול (שמאל/כובע)",
+      "speakerTimeLeftTotal": "זמן רמקול (שמאל / סה\"כ)",
+      "perSpeaker": "(לכל דובר)",
+      "paused": "(מושהה)",
+      "pauseReason": "השהייה: {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "זמן מפגש",
+      "sessionNotStarted": "הסשן לא התחיל",
+      "limit": "לְהַגבִּיל",
+      "limitRemaining": "נותרו {value}",
+      "limitOverBy": "עבר על ידי {value}",
+      "quickLinkSession": "מוֹשָׁב",
+      "quickLinkRoll": "גָלִיל",
+      "quickLinkSpeakers": "רמקולים",
+      "quickLinkMotions": "תנועות",
+      "quickLinkTimer": "שָׁעוֹן עֶצֶר",
+      "dais": "דוּכָן",
+      "pinned": "מוצמד",
+      "viewFullAnnouncement": "צפו בהודעה המלאה",
+      "timerPausesReadOnly": "הפסקות טיימר (לקריאה בלבד)",
+      "speakerList": "רשימת דוברים",
+      "speakerFallback": "רַמקוֹל",
+      "rollCallYou": "מפקד (אתה)",
+      "fullAnnouncement": "הודעה מלאה",
+      "daisAnnouncement": "הכרזת דיי",
+      "close": "לִסְגוֹר",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "שם הפגישה",
+      "sessionNamePlaceholder": "לְמָשָׁל מפגש בוקר",
+      "sessionNameSaving": "חִסָכוֹן…",
+      "sessionNameSaved": "נשמר",
+      "sessionNameHint": "נשמר אוטומטית ומופיע בהיסטוריית הפעלות.",
+      "title": "מושב הוועדה",
+      "subtitle": "התחל או הפסק את מושב הוועדה.",
+      "helpStartStop": "התחלה מתחילה את הטיימר/סטטוס הישיבה של הוועדה עבור כולם. עצור מסיים את ההפעלה ומנקה את מגבלת הזמן הנוכחית.",
+      "migrationUnavailable": "בקרות הפעלה אינן זמינות באופן זמני עד להחלת העברות מסד הנתונים האחרונות.",
+      "endTimeInFuture": "בחר שעת סיום בעתיד, או עבור ללא הגבלה.",
+      "sessionStartUnavailable": "חותמת הזמן לתחילת ההפעלה אינה זמינה עד להחלת ההגירות האחרונות.",
+      "endTimeInFutureSetNoLimit": "בחר שעת סיום בעתיד, או לא הגדר הגבלה.",
+      "sessionLimitUpdated": "מגבלת הפגישה עודכנה.",
+      "startedLabel": "התחיל:",
+      "timeInLabel": "זמן ב:",
+      "timeUntilEndLabel": "זמן עד הסוף:",
+      "overByValue": "עבר על ידי {value}",
+      "modeLabel": "מצב:",
+      "modeStopwatchNoLimit": "שעון עצר (ללא הגבלת זמן)",
+      "sessionNotRunning": "ההפעלה לא פועלת.",
+      "sessionLimit": "מגבלת הפעלה",
+      "sessionLimitModesTitle": "מצבי הגבלת הפעלה",
+      "sessionLimitModesHelp": "אין: אין סוף. תקציב זמן: נספר מההתחלה. סיים ב: זמן שעון קבוע באזור הזמן המקומי שלך.",
+      "sessionLimitOptional": "אופציונלי.",
+      "noneLabel": "אַף לֹא אֶחָד",
+      "noneDescription": "רץ עד שאתה עוצר.",
+      "timeBudgetLabel": "תקציב זמן",
+      "timeBudgetDescription": "נחשב מהרגע שאתה מתחיל.",
+      "endTimeLabel": "שעת סיום",
+      "endTimeDescription": "משתמש בזמן שעון קבוע (עוקף את התקציב אם שניהם הוגדרו אי פעם).",
+      "noneIndefinite": "אין (ללא הגבלת זמן)",
+      "noneScheduledEndHint": "אין סיום מתוכנן; רק הזמן שחלף מוצג.",
+      "timeBudgetFromStart": "תקציב זמן מההתחלה",
+      "hoursLabel": "שעות",
+      "minutesLabel": "פּרוֹטוֹקוֹל",
+      "minimumOneMinute": "(מינימום דקה אחת)",
+      "endAtLocalTime": "סיים בשעה (זמן מקומי)",
+      "stopSession": "עצור את הפגישה",
+      "saveLimit": "שמור מגבלה",
+      "saveLimitHelp": "מחיל הגדרות מגבלה מעודכנות בזמן שההפעלה כבר פועלת, מבלי להפסיק את ההפעלה.",
+      "startSession": "התחל הפעלה",
+      "sidebarUsePrefix": "השתמש בסרגל הצד עבור",
+      "rollCall": "מפקד",
+      "speakers": "רמקולים",
+      "formalMotions": "הצעות פורמליות",
+      "timer": "שָׁעוֹן עֶצֶר",
+      "sidebarAnd": "ו",
+      "announcements": "הכרזות",
+      "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "היסטוריית הפעלות",
+      "savedCount": "{count} נשמר",
+      "permissionsHint": "כיסאות יכולים לשנות את שמות הערכים. SMT/Admin יכול לשנות שם ולמחוק ערכים.",
+      "empty": "עדיין אין היסטוריית הפעלה.",
+      "rename": "שנה שם",
+      "delete": "לִמְחוֹק",
+      "deleteConfirm": "למחוק את הפגישה הזו מההיסטוריה?",
+      "sessionNamePrompt": "שם הפגישה",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> מתמשך"
+    },
+    "timerPage": {
+      "title": "שָׁעוֹן עֶצֶר",
+      "controlsTitle": "פקדי טיימר",
+      "controlsHelp": "השתמש בקומה כללית לתזמון הדיון הכולל, או בהצבעת הצעה כדי לקשור את הנראות לפריט ספציפי של הצבעה פתוחה.",
+      "tabSetup": "1) התקנה",
+      "tabClock": "2) בקרות שעון",
+      "tabNotes": "3) הערות דיבור",
+      "tabLog": "4) השהה יומן",
+      "setupHelp": "בחר אם טיימר זה מיועד לקומה כללית (גלוי תמיד לנציגים) או קשור להצעה הפתוחה להצבעה (הנציגים רואים אותה רק בזמן שהצבעה זו היא הפריט הפעיל). עם זמן לכל דובר מופעל, השעון נשאר גלוי במהלך טקס מפגש מתון ללא קשר. השהה את השעון / התחל את הקפאת השעון או המשך את הספירה לאחור. הגדר את זמן הרמקול (נותר) ואת הזמן הכולל בנפרד, ולאחר מכן שמור טיימר. קביעות מוגדרות מראש ממלאות את שניהם באותו אורך; אתה יכול לערוך כל אחד מהשדות לאחר מכן. הפסקות נרשמות עם סיבה קצרה.",
+      "namedPreset": "מוגדר מראש בשם",
+      "applyPreset": "החל הגדרה מראש...",
+      "floorLabelDelegates": "תווית קומה (נציגים)",
+      "floorLabelPlaceholder": "לְמָשָׁל GSL 60s",
+      "timerPurpose": "מטרת טיימר",
+      "purposeGeneralFloor": "דיון כללי / קומה (לא קשור להצבעה)",
+      "purposeMotionVote": "תנועה פתוחה - טיימר רק כאשר ההצבעה הזו פעילה ברצפה",
+      "openMotionForVoting": "הצעה פתוחה (חייב להיות פתוח להצבעה)",
+      "selectMotion": "בחר תנועה...",
+      "untitled": "ללא כותרת",
+      "noOpenMotionWarning": "אין הצעה פתוחה להצבעה. פתח תחילה הצבעה, או החלף מטרה לקומה כללית.",
+      "clock": "שָׁעוֹן",
+      "running": "רִיצָה",
+      "paused": "מושהה",
+      "saveToEnablePauseStart": "שמור את הטיימר כדי לאפשר השהייה/התחלה.",
+      "pauseReasonLogged": "סיבה להשהה (נרשמה)",
+      "pauseReasonPlaceholder": "לְמָשָׁל נקודת סדר, בעיה טכנית, אסיפה לא ממודרת...",
+      "pauseClock": "השהה שעון",
+      "startClock": "הפעל שעון",
+      "perSpeakerTitle": "זמן לכל דובר (סמינר מנחה)",
+      "perSpeakerHelp": "הגדר את הזמן הכולל כמכסה לכל רמקול ואת זמן הרמקול כזמן שנותר; התקדמות עוברת לרמקול הבא ומתאפסת על הכובע.",
+      "currentSpeaker": "רמקול נוכחי",
+      "nextSpeaker": "הדובר הבא",
+      "speechNotesCurrentSpeaker": "הערות דיבור (דובר נוכחי)",
+      "speechNotesHelp": "הערות קשורות לטקסט טיימר הדובר הנוכחי, וכאשר ברשימת הדוברים יש מישהו מסומן כנוכחי, האצלה שלו מאוחסנת לעיון.",
+      "timerFloorLabel": "טיימר (רצפה):",
+      "speakerListCurrent": "רשימת דוברים (נוכחית):",
+      "noCurrentDelegation": "שום משלחת לא מסומנת כנוכחית ברשימת הדוברים.",
+      "note": "פֶּתֶק",
+      "notePlaceholder": "נקודות, נקודות עניין, טון, מעקבים...",
+      "saveSpeechNote": "שמור הערת דיבור",
+      "recentNotes": "ההערות האחרונות שלך (וועדה זו)",
+      "delete": "לִמְחוֹק",
+      "speakerTimeRemaining": "זמן רמקול (נותר)",
+      "remainingHelpPerSpeaker": "ספירה לאחור עבור הרמקול הנוכחי (מתאפס כאשר אתה מתקדם).",
+      "remainingHelpNormal": "ספירה לאחור עבור הרמקול הנוכחי (יכול להיות פחות מהסך הכל).",
+      "totalTime": "זמן כולל",
+      "totalHelpPerSpeaker": "מכסה לכל רמקול (מכנה על הרצפה; נותרו מילוי מקדמה).",
+      "totalHelpNormal": "האורך המלא של קטע הטיימר הזה (מוצג אחרי הלוכסן על הרצפה).",
+      "saveTimer": "שמור טיימר",
+      "advanceSpeakerReset": "קדם רמקול ואיפוס שעון",
+      "recentPauseLog": "יומן הפסקה אחרון",
+      "noPauseEvents": "לא נרשמו עדיין אירועי השהייה עבור ועדה זו.",
+      "openPauseLogHint": "פתח את יומן ההשהיה כדי לסקור את סיבות ההשהיה וחותמות הזמן שהוקלטו.",
+      "saved": "הטיימר נשמר.",
+      "savedCapped": "הטיימר נשמר. זמן הרמקול היה ארוך מהסך הכל; מוגבל לסך הכל.",
+      "alreadyPaused": "הטיימר כבר מושהה.",
+      "pausedForCommittee": "הטיימר נעצר עבור הוועדה.",
+      "alreadyRunning": "הטיימר כבר פועל.",
+      "runningForCommittee": "טיימר פועל לוועדה.",
+      "euTimerBoardTitle": "לוח טיימר של הפרלמנט של האיחוד האירופי (11 טיימרים)",
+      "euTimerBoardHelp": "טיימר אחד לכל צד, בתוספת זמן כולל, זמן POI/POC וזמן רמקול. השתמש ב-Apply כדי להעתיק שורה לשדות הטיימר החי בכרטיסייה שעון (זמן רמקול / שמור טיימר).",
+      "euTimerName": "שֵׁם",
+      "euTimerTag": "תָג",
+      "euTotalTime": "זמן כולל",
+      "euPoiPocTime": "זמן POI / POC",
+      "euSpeakerTime": "זמן רמקול"
+    }
   }
 }

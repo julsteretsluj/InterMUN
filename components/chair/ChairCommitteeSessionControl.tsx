@@ -66,7 +66,7 @@ export function ChairCommitteeSessionControl({
   initialEndsAt: string | null;
   initialSessionTitle: string | null;
 }) {
-  const t = useTranslations("views.session.committeeControl");
+  const t = useTranslations("session.committeeControl");
   const supabase = useMemo(() => createClient(), []);
   const [startedAt, setStartedAt] = useState<string | null>(initialStartedAt);
   const [pending, startTransition] = useTransition();
@@ -693,6 +693,7 @@ export function ChairCommitteeSessionControl({
 
       <p className="text-sm text-brand-muted">
         {t("sidebarUsePrefix")} <span className="font-medium text-brand-navy/90">{t("rollCall")}</span>,{" "}
+        <span className="font-medium text-brand-navy/90">{t("agenda")}</span>,{" "}
         <span className="font-medium text-brand-navy/90">{t("speakers")}</span>,{" "}
         <span className="font-medium text-brand-navy/90">{t("formalMotions")}</span>,{" "}
         <span className="font-medium text-brand-navy/90">{t("timer")}</span>, {t("sidebarAnd")}{" "}

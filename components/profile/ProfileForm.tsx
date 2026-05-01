@@ -56,7 +56,7 @@ export function ProfileForm({
   availableAllocations,
   dashboardCommitteeSwitch,
 }: ProfileFormProps) {
-  const tp = useTranslations("views.profile");
+  const tp = useTranslations("profile");
   const router = useRouter();
   const [committeeSwitchBusy, setCommitteeSwitchBusy] = useState(false);
   const [committeeSwitchError, setCommitteeSwitchError] = useState<string | null>(null);

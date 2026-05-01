@@ -36,7 +36,7 @@ export function DocumentsView({
   delegateOptions: { id: string; label: string }[];
   chairOptions: { id: string; label: string }[];
 }) {
-  const t = useTranslations("views.documents");
+  const t = useTranslations("documents");
   const tc = useTranslations("common");
   const role = myRole.toLowerCase();
   const canManagePositionPapers = role === "chair" || role === "smt" || role === "admin";

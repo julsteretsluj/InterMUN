@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Whakatuwheratia te papa motini mo nga korero i te tuatahi.",
     "openMotionBlocksRecording": "Kua puare kee he motini mo te pooti. Katia i mua i te tuhi i etahi atu korero.",
     "statedMotionRecorded": "Kua tuhia te motini (kaore ano kia tuwhera mo te pooti).",
-    "statedMotionRemoved": "Kua tangohia te motini kua kiia."
+    "statedMotionRemoved": "Kua tangohia te motini kua kiia.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "Reo",
@@ -595,7 +611,8 @@
     "pointsLog": "• Rangitaki tohu",
     "formalMotions": "Motini okawa",
     "timer": "Matawā",
-    "smtProfile": "Kōtaha"
+    "smtProfile": "Kōtaha",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Ko te Supabase kaore i te whirihora",
@@ -763,7 +780,8 @@
       "officialLinks": "Hononga mana",
       "roomCode": "Waehere ruma",
       "settings": "Tautuhinga",
-      "discipline": "Te whiu"
+      "discipline": "Te whiu",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "Whenua Mema UN",
       "unSystem": "UN Pūnaha (nga kaiwhakarewa me nga mema)",
       "history": "UN History"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Tāpiri puna",
-      "sourceUrl": "URL puna",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (manakohia)",
-      "urlHelp": "Mo te Google Doc hou, whakamahia te paatene ka whakapiri i te hono tuhinga ki konei.",
-      "titleOptional": "Taitara (kōwhiringa)",
-      "saveChanges": "Tiakina nga huringa",
-      "editSource": "Whakatika puna",
-      "urlPlaceholderShort": "Google Doc tetahi atu URL ranei",
-      "empty": "Kaore ano he puna. Tāpirihia he hononga Google Doc hei whakatuwhera i konei.",
-      "sourceLabel": "Puna",
-      "openLink": "Tuwhera hono",
-      "embedHeading": "Tuhinga puna",
-      "notGoogleDoc": "Ehara tenei URL i te Google Doc. Whakamahia he hononga docs.google.com/document/d/… hei whakauru me te whakatika i konei; ki te kore whakatuwheratia te hono i runga."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Kaore e taea e nga Kaituku te tuku tika i nga Pepa Turanga. Whakamahia tetahi atu momo tuhinga.",
-      "alertOnlyChairsPositionPaper": "Ka taea e nga tuuru/SMT/admin anake te tuku Pepa Turanga.",
-      "alertOnlySmtChairReport": "Ka taea e SMT/kaiwhakahaere anake te tuku i nga Purongo Heamana.",
-      "alertOnlySmtRop": "Ka taea e SMT/kaiwhakahaere anake te tuku tuhinga RoP.",
-      "alertOnlySmtAwardCriteria": "Ka taea e SMT/kaiwhakahaere anake te tuku tuhinga Paearu Tohu.",
-      "alertNeedContentOrUrl": "Tāpirihia he ihirangi kuputuhi rohe, he URL Google Docs ranei.",
-      "confirmDelete": "Mukua tenei tuhinga?",
-      "delegatePrepTitle": "Whakaritea te waahanga tuhinga",
-      "delegatePrepBody": "Ka taea e koe te tuku ake, te tiro, me te whakatika i o ake <prep>Prep documents</prep> tika mai i tenei wharangi.",
-      "positionPaperGuideTitle": "Turanga pepa aratohu",
-      "positionPaperGuideBlurb": "Tikiakehia te aratohu waahi i te wa e rite ana te PDF whakamutunga.",
-      "downloadPlaceholderGuide": "Tikiake aratohu puriwāhi",
-      "addDocument": "Tāpiri tuhinga",
-      "tabs": {
-        "ariaLabel": "Nga waahanga tuhinga",
-        "library": "Whare Pukapuka",
-        "compose": "Tito",
-        "composeHint": "Tīmatahia he tuhinga hou, whakatikahia ranei he tauira mai i tenei ripa."
-      },
-      "newDocumentTitle": "Tuhinga hou",
-      "editDocumentTitle": "Whakatika tuhinga",
-      "typeLabel": "Momo",
-      "types": {
-        "position_paper": "Pepa tūnga",
-        "chair_report": "Te ripoata a te heamana",
-        "rop": "RoP",
-        "award_criteria": "Paearu tohu",
-        "chair_notes": "Nga korero a te heamana",
-        "prep_doc": "Tuhinga o mua"
-      },
-      "delegatePositionPaperNote": "Ka tukuna nga pepa tuunga e nga tuuru me nga urupare.",
-      "delegateOwner": "Tukuna te rangatira",
-      "chairRecipient": "Kaiwhiwhi heamana",
-      "titleLabel": "Taitara",
-      "titlePlaceholder": "taitara tuhinga",
-      "googleDocsUrl": "URL Tuhinga Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (whakamautia te tirohanga/whakatika ki te taupānga)",
-      "googleDocsHelp": "Whakamahia te Tuhinga Google Hou hei whakatuwhera i a Google ki te ripa hou, ka whakapiri i te hononga tuhinga ki konei. Ko te kuputuhi tokau kei raro he mea whiriwhiri. Ko nga tuhinga katoa e hiahia ana ki nga tuhinga a-rohe, ki te hono a Google Doc, ki nga mea e rua ranei.",
-      "plainTextOptional": "Kuputuhi noa (he kōwhiringa)",
-      "plainTextPlaceholder": "Nga tuhipoka, tuhinga tuhi ranei…",
-      "chairFeedbackLabel": "He urupare a te heamana",
-      "chairFeedbackPlaceholder": "He urupare mo te pepa tuunga kaikawe...",
-      "empty": "Karekau he tuhinga. Tāpirihia tetahi hono ranei he Google Doc.",
-      "sidebarDocumentLabel": "Tuhinga",
-      "sections": {
-        "chairReports": "Heamana ripoata",
-        "rop": "RoP",
-        "awardCriteria": "Paearu tohu",
-        "prepDocuments": "Whakaritea nga tuhinga",
-        "chairNotes": "Nga korero a te heamana",
-        "otherDocuments": "Ētahi atu tuhinga"
-      },
-      "untitled": "Karekau he taitara",
-      "linkedDocumentHeading": "Tuhinga hono",
-      "notesHeading": "Notes",
-      "noGoogleDocYet": "Kaore ano kia honohia a Google Doc. Whakamahia te Whakatika hei taapiri i te docs.google.com/document/d/… URL.",
-      "chairFeedbackHeading": "He urupare a te heamana",
-      "noFeedbackYet": "Kaore ano kia taapirihia he urupare."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Whakauruhia he imeera kaitono i te tuatahi.",
-      "sentToDelegate": "I tukuna ki {email}.",
-      "newResolution": "Whakatau Hou",
-      "maxDraftResolutions": "Kei tenei komiti {count} nga tauira whakatau.",
-      "googleDocLink": "Hononga a Google Doc",
-      "googleDocUrlPlaceholder": "URL Tuhinga Google (docs.google.com/document/d/… — whakamahia mo te whakauru + whakatika)",
-      "googleDocUrlHelp": "Ka tuwhera a Google Doc hou ki tetahi atu ripa; tāruahia te URL mai i te pae wāhitau ka whakapiri ki konei.",
-      "mainSubmittersPlaceholder": "Kaituku matua (tautuhinga kaiwhakamahi, wehea piko)",
-      "coSubmittersPlaceholder": "Kaituku-tahi (tautuhinga kaiwhakamahi, wehea piko)",
-      "create": "Waihanga",
-      "cancel": "Whakakore",
-      "openInNewTab": "Tuwhera ki te ripa hou",
-      "noGoogleDocLink": "Kaore he hononga a Google Doc",
-      "visibleToOtherBloc": "Ka kitea ki etahi atu poraka",
-      "resolutionCounts": "Nga rarangi matua: {main} | Takirua: {co} | Kaitohu: {signatories}",
-      "blocButton": "Poraka {name} ({stance})",
-      "signVirtually": "Waitohu mariko (kua whakamohiotia nga ohaurunga matua)",
-      "shareByEmail": "Tiria whakatau ma te imeera",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "Tukuna ki te kaitakawaenga",
-      "clauseEditor": "Etita rara",
-      "noClausesYet": "Kare ano he rara.",
-      "clauseNumber": "Rarangi {number}",
-      "saveClause": "Tiaki rara",
-      "delete": "Mukua",
-      "addClausePlaceholder": "Tāpirihia he rara hōu...",
-      "addClause": "Tāpiri rara",
-      "clauseVoteHistory": "Hitori pooti rara",
-      "noClauseOutcomesYet": "Kaore ano kia tuhia nga hua pooti rara.",
-      "clauseFallback": "Rarangi",
-      "passed": "PAHEA",
-      "failed": "I rahua",
-      "motionId": "Motini {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Nga waahanga pooti",
-        "open": "Tuwhera",
-        "closed": "Katia"
-      },
-      "requiredMajority": "Te nuinga e hiahiatia ana",
-      "helpRequiredMajorityTitle": "Te nuinga e hiahiatia ana",
-      "helpRequiredMajorityBody": "Kōwhirihia te paepae pōti i whakamahia hei whakatau i te tuku/rahua. Ko te `Mua` he nui atu i te haurua. `2/3` me whiwhi te nuinga.",
-      "majoritySimple": "Maamaa",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} te nuinga",
-      "mustVote": "ME pooti",
-      "helpMustVoteTitle": "ME pooti",
-      "helpMustVoteBody": "Tohua tenei motini hei mea \"me pooti\". Ka whakamahia tenei ki te whakapuaki i nga whakaritenga ki nga kaiuru (kei runga i te whakaritenga a to komiti).",
-      "saveSettings": "Tiakina nga tautuhinga",
-      "delegateBlurb": "Ka rekotia e te raahi nga pooti i te wa o te huihuinga (hei tauira te piiraa). Ko nga pooti motini i konei ka whai i te Ae/Kao anake (kaore e whakamahia te mawehe). Ka taea e koe te whai i te tatauranga; karekau nga kaikawe pooti i roto i te taupānga.",
-      "yes": "Ae",
-      "no": "Kao",
-      "ballots": "Pooti",
-      "total": "Tapeke",
-      "outcome": "Putanga",
-      "passed": "Paahi",
-      "failed": "I rahua",
-      "noRecordedVotes": "Karekau he pooti kua tuhia",
-      "reopenMotion": "Whakatuwheratia te motini",
-      "editRecordOpen": "Whakatika rekoata…",
-      "hideSettings": "Huna tautuhinga",
-      "preliminaryPassing": "Paahitanga (tomua)",
-      "preliminaryFailing": "Rahua (whakamatamua)",
-      "delegateRollCall": "Tukuna te piiraa ({count})",
-      "noSeatedDelegates": "Karekau he mema kua noho mo tenei motini.",
-      "rollPrefix": "Hurihia:",
-      "recordedPrefix": "Kua tuhia:",
-      "recordedYes": "Ae",
-      "recordedNo": "Kao",
-      "recordedAbstain": "Mawehe atu",
-      "recordedNone": "—",
-      "abstain": "Mawehe atu",
-      "clear": "Maamaa",
-      "closeMotion": "Kati motini",
-      "mustVoteBadge": "ME pooti",
-      "canVoteBadge": "Ka taea te pooti",
-      "noMotions": "Kaore ano kia motini.",
-      "currentOpenMotion": "Motini tuwhera o naianei",
-      "noOpenMotion": "Karekau he motini tuwhera inaianei.",
-      "recentClosedMotions": "Nga motini kati tata",
-      "noClosedMotions": "Kaore ano kia kati nga motini.",
-      "untitled": "Karekau he taitara",
-      "voteTypes": {
-        "motion": "Motini",
-        "amendment": "Whakatikatika",
-        "resolution": "Whakatau"
-      },
-      "roll": {
-        "absent": "Kei te ngaro (roll)",
-        "present_abstain": "I tenei wa — ka taea te karo",
-        "present_voting": "Te whakaatu me te pooti (te rarangi ingoa)",
-        "unknown": "— (roll)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Nga waahanga korero",
-        "overview": "Tirohanga",
-        "awards": "Tohu",
-        "private": "Nga rekoata motuhake",
-        "settings": "Tautuhinga kōtaha"
-      },
-      "profilePicture": "Whakaahua whakaahua",
-      "uploadFile": "Tukuake kōnae",
-      "uploading": "Tukuake ana…",
-      "photoSaved": "Ko te whakaahua i tukuake ka tiakina.",
-      "orUrl": "Ka tautuhia ranei e te URL",
-      "urlPlaceholder": "https://...",
-      "name": "Ingoa",
-      "username": "Ingoa Kaiwhakamahi",
-      "usernamePlaceholder": "e.g. alex_1999",
-      "pronouns": "Huanga",
-      "customPronounNote": "Ko to kōtaha he huinga kupu motuhake kua kore e whakaaetia i konei. Tīpakohia he kōwhiringa kei runga ake (me waiho pātea rānei). Ko te penapena ka whakakapi i te uara tawhito.",
-      "school": "Kura",
-      "schoolPlaceholder": "e.g. Te Kura Tuarua o Lincoln",
-      "grade": "Kōeke",
-      "selectGrade": "Tīpako kōeke",
-      "conferencesAttended": "I tae atu ki nga huihuinga",
-      "awardsComma": "Tohu (whakawehea piko)",
-      "awardsPlaceholder": "Te Kaituku Pai rawa atu, Honore Mention",
-      "allocation": "Te tohatoha",
-      "selectAllocation": "Tīpakohia te tohatoha",
-      "noAllocationsPlaceholder": "Karekau he tohatoha komiti",
-      "saveProfile": "Tiaki kōtaha",
-      "saved": "Kua tiakina te pūkete.",
-      "saveFailed": "Kāore i taea te tiaki kōtaha.",
-      "errUsernamePattern": "Ko te ingoa kaiwhakamahi me 3-32 tohu (reta, tau, _, ., -)",
-      "errPronounsPreset": "Whiriwhiria he kupu mai i te rarangi ingoa.",
-      "errImageType": "Kōwhiria he kōnae atahanga.",
-      "errImageSize": "He nui rawa te ahua (he 5 MB te teitei).",
-      "errUploadFailed": "I rahua te tuku.",
-      "errStorageSetup": "Kaore i te whakaritehia te rokiroki pikitia whakaahua. I roto i te kaupapa Supabase, whakahaerea te hekenga 00100_profile_pictures_storage_bucket.sql, hangaia ranei he peere rokiroki mo te iwi e whakaingoatia ana ko nga whakaahua-whakaahua (tirohia README).",
-      "errPublicUrl": "Kāore i taea te whakatau URL tūmatanui mō te atahanga kua tukuake.",
-      "fallbacks": {
-        "yourCountry": "to whenua",
-        "committeeSession": "Huihuinga komiti",
-        "delegate": "Kaituku",
-        "speechNote": "tuhi korero",
-        "untitledMotion": "Motini kore taitara",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "Nau mai te kaikawe o {flag} {country}",
-        "subtitle": "He aha taau e hiahia ana ki te timata?",
-        "links": {
-          "documents": "Tuhinga",
-          "notes": "Notes",
-          "committeeRoom": "Rua komiti",
-          "runningNotes": "Rere Notes",
-          "ideas": "Nga whakaaro",
-          "guides": "Kaitohutohu",
-          "sources": "Nga puna",
-          "resolutions": "Nga Whakatau",
-          "speeches": "Nga Korero",
-          "stances": "Turanga",
-          "crisisSlides": "Kiriata raruraru",
-          "report": "Ripoata",
-          "motions": "Motini",
-          "points": "Nga tohu"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Tohu i runga i to kōtaha",
-        "rank": "rangatira {rank}",
-        "pending": {
-          "tab": "Ko nga whakaingoatanga e tatari ana",
-          "title": "Ko nga whakaingoatanga heamana e tatari ana",
-          "descriptionSingle": "I tiakina e nga tuuru ka tohaina ki a SMT hei arotake. Ka puta nga tohu whakamutunga i raro i muri i te whakau.",
-          "descriptionTabbed": "I tiakina e nga tuuru ka tohaina ki a SMT hei arotake. Ka puta nga tohu whakamutunga i muri i te whakamanatanga."
-        },
-        "recorded": {
-          "tab": "Nga tohu kua tuhia",
-          "title": "Nga tohu kua tuhia",
-          "description": "Kua whakarārangihia i te wa e tohua ai koe e nga tuuru, SMT ranei ki te kaiwhai tohu. Ko te tohu whakamutunga ka whai i nga ture o to hui."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Ka kitea e koe anake, nga heamana komiti, me te SMT mo te komiti whai take.",
-        "points": {
-          "title": "Ngā tūru (tūmataiti)"
-        },
-        "speechNotes": {
-          "title": "Ko nga korero whaikorero a te heamana (tangata)"
-        },
-        "motions": {
-          "title": "Nga motini i nekehia e koe",
-          "description": "Kua tiakina ki to korero mo te arotake komiti me te tirotiro SMT."
-        }
-      },
-      "discipline": {
-        "title": "Te mana whakahaere (takitahi)",
-        "statusLine": "Whakatupato: {whakatupato} · Patua: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "kua haua te pooti",
-        "speakingSuspended": "kua whakatarewahia te korero",
-        "removedFromCommittee": "tangohia mai i te komiti",
-        "updated": "Whakahoutia: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Arokite kōtaha",
-        "title": "Arokite",
-        "yourName": "To ingoa",
-        "usernameNotSet": "Ko te ingoa kaiwhakamahi kaore i tautuhia",
-        "gradeValue": "Kōeke {grade}",
-        "awards": "Tohu"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Nga Ture Whakahaere (RoP)",
-          "content": "# Ture Whakahaere \n\n## Nga Tohu me nga Motini \n- **Waitohu Whakatau**: Tikanga tika \n- **Point of Information**: Patai ki te kaikorero \n- **Te Tohu Whaimana**: Te whakamarie whaiaro \n- **Motini ki te Ripanga**: Whakaroa te tautohetohe \n- **Motini ki te hiki**: Whakamutua te huihuinga \n\n## Pooti \n- Te nuinga ngawari mo nga take tikanga \n- 2/3 te nuinga mo nga take nui \n- Huri-karanga pooti ina tonoa"
-        },
-        "examples": {
-          "title": "Tauira",
-          "content": "# Tauira \n\n## Hōputu Whakatau \n``` \nTe Runanga Nui, \n... \n1. Ka karanga ki nga whenua mema ki te... \n2. Ka akiaki te hapori o te ao ki te... \n``` \n\n## Hanganga Pepa Turanga \n1. Papamuri \n2. Kaupapahere Whenua \n3. Nga Whakataunga Whakaaro"
-        },
-        "templates": {
-          "title": "Nga tauira",
-          "content": "# Tātauira \n\n## Tauira Ripoata Tiamana \n- Tirohanga a te komiti \n- Nga kaupapa korero matua \n- Kua paahitia nga whakataunga \n- Nga Tohutohu"
-        },
-        "chairReport": {
-          "title": "Heamana Ripoata",
-          "content": "# Heamana Ripoata \n\nTuhia nga mahi a te komiti me nga putanga ki konei."
-        }
-      },
-      "edit": "Whakatikatika",
-      "guideDocument": "Tuhinga aratohu",
-      "additionalNotes": "Nga korero taapiri",
-      "noContentYet": "Karekau he ihirangi.",
-      "titlePlaceholder": "Taitara",
-      "googleDocsUrl": "URL Tuhinga Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Ka tuwhera a Google Doc hou ki tetahi atu ripa. Whakapirihia he hononga tiritiri kia taea e nga kaikawe te whakatuwhera i te tuhinga ki konei (tirohia/whakatika kei te tiritiri a Google).",
-      "markdownOptional": "Ko nga tohu tohu (mehemea ka whakamahi koe i te Google Doc)",
-      "save": "Tiaki",
-      "cancel": "Whakakore",
-      "createNewGuide": "Waihangahia he aratohu hou",
-      "slugPlaceholder": "paraka (ahurei)",
-      "titleLowerPlaceholder": "taitara",
-      "googleDocsUrlOptional": "URL Tuhinga Google (he kōwhiringa)",
-      "markdownContentOptional": "Ihirangi tohu (he kōwhiringa)",
-      "create": "Waihanga",
-      "glossary": {
-        "title": "MUN Agenda Papakupu",
-        "subtitle": "Ko nga kupu ahurei e rite ana ki to waehere komiti me nga kaupapa kaupapa o naianei.",
-        "committeeCode": "Waehere komiti: {code}",
-        "topicTag": "Kaupapa: {topic}",
-        "sources": {
-          "core": "matua",
-          "committee": "komiti",
-          "topic": "kaupapa"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Tukunga",
-            "definition": "He whenua, he roopu kaitirotiro ranei hei kanohi mo tetahi kawanatanga, hinonga ranei i roto i te komiti."
-          },
-          "placard": {
-            "term": "Pepa",
-            "definition": "I whakamahia te tohu whenua ki te tono i te papa, te pooti, ​​me te tohu motini tikanga."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Ko te tiamana o te roopu e whakahaere ana i nga tautohetohe, e whakamahi ana i nga tikanga, e whakahaere ana i te raupapa korero."
-          },
-          "quorum": {
-            "term": "Koorama",
-            "definition": "Ko te iti rawa o nga roopu e tika ana hei whakahaere i nga pakihi me nga pooti."
-          },
-          "motion": {
-            "term": "Motini",
-            "definition": "He tono ōkawa ki te huri i te rere o te tautohetohe, penei i te momo ruuma, te wa korero ranei."
-          },
-          "point_of_order": {
-            "term": "Tohu Whakatau",
-            "definition": "Te wawaotanga i te wa e mahia he ana te tikanga i raro i nga ture komiti."
-          },
-          "moderated_caucus": {
-            "term": "Rūnanga Whakaōrite",
-            "definition": "Wāhanga tautohetohe kua hangahia me nga whaikorero poto mo te kaupapa iti kua tautuhia."
-          },
-          "unmoderated_caucus": {
-            "term": "Rūnanga Whakaōritenga",
-            "definition": "Te wā whiriwhiringa ōpaki ka neke haere noa ngā māngai ki te tuhi me te hanumi whakaaro."
-          },
-          "draft_resolution": {
-            "term": "Whakatau Tauira",
-            "definition": "Tuhituhi mahi mo nga mahi a te komiti i mua i te pooti whakamutunga me te tangohanga."
-          },
-          "amendment": {
-            "term": "Whakatikatika",
-            "definition": "Hurihia ki te tuhi tuhinga, he hoa, he pooti ranei hei kore hoa."
-          },
-          "operative_clause": {
-            "term": "Rarangi Mahi",
-            "definition": "rara tau mahi-a-mahi e whakaatu ana i ta te komiti e whakaaro ana kia mahia."
-          },
-          "preambulatory_clause": {
-            "term": "Tuhinga o mua",
-            "definition": "rara whakatakoto horopaki e whakahua ana i nga maapono papamuri, i nga awangawanga, me nga anga o mua."
-          },
-          "right_of_reply": {
-            "term": "Matau o te Whakautu",
-            "definition": "Te whai waahi ki te whakautu ki tetahi korero tika i pa ki te mana o te tuku, ki te tuunga ranei."
-          },
-          "veto_power": {
-            "term": "Mana Weto",
-            "definition": "Te mana mema-mau a UNSC ki te aukati i nga whakataunga tauira tino nui."
-          },
-          "chapter_vii": {
-            "term": "Upoko VII",
-            "definition": "Te mana o te UN Charter mo nga whakatuma mo te rangimarie, nga whiu, me nga tikanga whakamahi-o-kaha."
-          },
-          "sanctions_regime": {
-            "term": "Tikanga Whakatau",
-            "definition": "Ko nga here kua whakaritea hei whakaawe i te whanonga me te kore he mahi hoia."
-          },
-          "arms_control": {
-            "term": "Mana Whawhai",
-            "definition": "Nga Whakaaetanga me nga punaha manatoko e whakawhāiti ana i nga momo, te rahinga, te horahanga patu ranei."
-          },
-          "non_proliferation": {
-            "term": "Whakanui-kore",
-            "definition": "Nga kaupapa here hei aukati i te horapa o nga kaha patu karihi, matū, koiora, matatau ranei."
-          },
-          "confidence_building_measures": {
-            "term": "Mehua-Hanga Whakapono",
-            "definition": "Ko nga taputapu maamaa me nga taputapu whakawhitiwhiti korero e whakaiti ana i te pohehe me te raruraru raruraru."
-          },
-          "universal_periodic_review": {
-            "term": "Te Arotake Waa Ao",
-            "definition": "Te tukanga arotake-a-hoa i reira ka ripoatahia e ia whenua mema o te UN me te whiwhi i nga taunakitanga motika."
-          },
-          "special_rapporteur": {
-            "term": "Kaipupuri Motuhake",
-            "definition": "Ko te tohunga motuhake kua tohua ki te aro turuki me te tuku korero mo nga take motika kaupapa whenua ranei."
-          },
-          "treaty_body": {
-            "term": "Te Rōpū Tiriti",
-            "definition": "Ko te Komiti o nga tohunga e tirotiro ana i te whakatinanatanga o tetahi tiriti tika tangata."
-          },
-          "public_health_emergency": {
-            "term": "Ohotata Hauora Tūmatanui",
-            "definition": "Ko nga huihuinga pakarutanga nui e hiahia ana kia tere te whakarite urupare a motu me te ao."
-          },
-          "surveillance": {
-            "term": "Te Tirohanga Epidemiological",
-            "definition": "Kohikohi tonu me te tātari i nga raraunga hauora kia kitea me te whai i nga ahuatanga mate."
-          },
-          "health_systems": {
-            "term": "Te Whakapakari i nga Pūnaha Hauora",
-            "definition": "Te whakapai ake i nga kaimahi, te putea putea, te arorau, me te mana whakahaere mo te tuku hauora pono."
-          },
-          "transnational_crime": {
-            "term": "Te Hara-a-Motu o te Whenua",
-            "definition": "Ko nga mahi taihara i ruruku puta noa i nga rohe na roto i nga whatunga me nga maakete kino."
-          },
-          "illicit_trafficking": {
-            "term": "Hokohoko Kore",
-            "definition": "Ko te neke kino o nga raau taero, patu, tangata, taonga ranei puta noa i nga mana whakahaere."
-          },
-          "rule_of_law_capacity": {
-            "term": "Te Kaha Ture-o-Ture",
-            "definition": "Te kaha o nga punaha whakawa ki te whakatewhatewha, ki te whakawa, ki te tiaki tika i nga tika."
-          },
-          "sustainable_development": {
-            "term": "Whanaketanga Taumau",
-            "definition": "Te tauira tipu e whakataurite ana i te ahunga whakamua hapori, whai waahi ohaoha, me te tiaki taiao."
-          },
-          "financing_for_development": {
-            "term": "Putea mo te Whakawhanaketanga",
-            "definition": "Ko nga tikanga tuku putea a te iwi me te tangata motuhake e tautoko ana i nga kaupapa whanaketanga mo te wa roa."
-          },
-          "policy_coordination": {
-            "term": "Whakaritenga Kaupapahere",
-            "definition": "Te whakarite i nga mahi a te kawanatanga me nga umanga hei karo i te taarua me te whakanui i te paanga o te roopu."
-          },
-          "child_protection": {
-            "term": "Tiaki Tamariki",
-            "definition": "Ko nga tikanga hei aukati i te tukino, te tukino, me te tutu ki nga tamariki i nga waahi katoa."
-          },
-          "education_access": {
-            "term": "Te Uru Matauranga",
-            "definition": "Te whakarite i te whakauru, te rite, me te haere tonu o nga huarahi ako mo nga tamariki katoa."
-          },
-          "humanitarian_response": {
-            "term": "Whakautu Tangata",
-            "definition": "Nga mahi whakaora tere ki te whakatutuki i nga hiahia ohorere i roto i nga raru me nga waahi pakanga."
-          },
-          "gender_mainstreaming": {
-            "term": "Te Ira Tangata",
-            "definition": "Te whakauru i te tātaritanga ira tangata ki te hoahoa kaupapa here, te whakatinanatanga, me te arotake."
-          },
-          "gender_based_violence": {
-            "term": "Te tutu i runga i te ira tangata",
-            "definition": "Ko te kino e pa ana ki tetahi i runga i te tuakiri ira tangata, i nga mahi, i nga hononga mana koretake ranei."
-          },
-          "economic_empowerment": {
-            "term": "Whakamana Ohaoha",
-            "definition": "Te whakawhānui i te uru ki nga mahi tika, te putea, te mana rangatira, me te mana whakatau."
-          },
-          "source_attribution": {
-            "term": "Tohunga Puna",
-            "definition": "Te whakahua i te takenga mai o nga korero kia taea ai te manatoko me te whakamohiotanga o nga kereme."
-          },
-          "verified_reporting": {
-            "term": "Pūrongo Manatoko",
-            "definition": "Ko te paerewa kairipoata e hiahia ana kia whakamanahia i mua i te whakaputa i nga meka tautohe."
-          },
-          "editorial_independence": {
-            "term": "Etita Motuhake",
-            "definition": "Te wehewehe i nga whakatau korero mai i te awe torangapu, te awe a te hunga whai paanga ranei."
-          },
-          "climate_mitigation": {
-            "term": "Te Whakaititanga o te Hurirangi",
-            "definition": "Ko nga mahi e whakaiti ana i te tukunga hau-a-roto, te whakanui ake ranei i te tango waro wa-roa."
-          },
-          "climate_adaptation": {
-            "term": "Te Urutaunga Hurirangi",
-            "definition": "Nga kaupapa here me nga haumi e whakaiti ana i te whakaraeraetanga ki nga paanga o te rangi."
-          },
-          "cyber_norms": {
-            "term": "Paerewa Cyber",
-            "definition": "Ko nga tumanakohanga tiritahi mo te whanonga a te kawanatanga i roto i nga rohe mamati me te ipurangi."
-          },
-          "critical_infrastructure": {
-            "term": "Hanganga Haehae",
-            "definition": "Ko nga punaha nui penei i te hiko, te wai, te hauora, me nga whakawhitiwhiti korero e hiahia ana kia kaha."
-          },
-          "epidemiology": {
-            "term": "Epidemiology",
-            "definition": "Te rangahau i nga tauira mate, nga take, me te tohatoha i nga taupori."
-          },
-          "preparedness_response": {
-            "term": "Te Whakarite me te Whakautu",
-            "definition": "Te whakamahere, te ruruku, me nga mahi whakaoho hei pupuri me te whakahaere i nga ohorere."
-          },
-          "non_refoulement": {
-            "term": "Kore-Refoulement",
-            "definition": "Ko te maapono e aukati ana i te hokinga mai o nga tangata ki nga waahi ka pa he kino ki a ratou."
-          },
-          "durable_solutions": {
-            "term": "Rongoa Roa",
-            "definition": "Nga hua mo te wa roa mo te hunga kua heke: te hokinga mai, te whakaurunga o te rohe, te whakanohonoho ranei."
-          },
-          "nuclear_safeguards": {
-            "term": "Nga Tiaki Nuclear",
-            "definition": "Ko nga mehua manatoko kia kaua e whakanekehia nga rawa karihi mo te whakamahi patu."
-          },
-          "counter_terrorism": {
-            "term": "Whakatau-whakatuma",
-            "definition": "Kua whakakotahihia e te ture, te aukati, me te haumaru ki nga mahi kaiwhakatuma."
-          },
-          "due_process": {
-            "term": "Tukatuka Tika",
-            "definition": "Nga tikanga ture tika e tiaki ana i nga tika i te wa o te whakawakanga, te whakawakanga, me te whakamana."
-          },
-          "resource_security": {
-            "term": "Haumarutanga Rauemi",
-            "definition": "Te uru pono ki te kai, te wai, me te kaha i raro i te taumahatanga ohaoha me te taiao."
-          },
-          "resilience": {
-            "term": "Te pakari",
-            "definition": "Te kaha o nga hapori me nga umanga ki te tango i nga ohorere me te whakaora tika."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Whakatika whakaaro",
-      "googleDocsUrl": "URL Tuhinga Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Kuputuhi whakaaro poto (he kōwhiringa)",
-      "save": "Tiaki",
-      "cancel": "Whakakore",
-      "addIntro": "Tāpirihia he Google Doc ki te tuhi i tetahi whakaaro whakatau, patohia he tuhipoka poto (e rua ranei).",
-      "googleDocsCreateHelp": "Ka tuwhera a Google Doc hou ki tetahi atu ripa; whakapiri i te hono ki konei i muri i te hanganga.",
-      "resolutionIdeaPlaceholder": "Whakaaro Whakatau...",
-      "add": "Tāpiri",
-      "noIdeasYet": "Kaore ano he whakaaro.",
-      "ideaLabel": "Whakaaro",
-      "ideaFallback": "Whakaaro {number}",
-      "linkedDoc": "doc hono",
-      "addedOn": "Kua taapirihia {date}",
-      "edit": "Whakatikatika",
-      "delete": "Mukua",
-      "ideaDocument": "Tuhinga whakaaro",
-      "summary": "Whakarāpopototanga",
-      "emptyIdea": "Whakaaro putua."
-    },
-    "stances": {
-      "heatmapTitle": "Tirohanga Turanga Poto (Mahere wera)",
-      "heatmapHelp": "He aha te whānuitanga o to tohatoha i te tautoko ___? (1-5 tauine)",
-      "topicPlaceholder": "e.g. mahi āhuarangi",
-      "extentLabel": "Whānui (1-5):",
-      "extentHelpTitle": "Whānui (1-5)",
-      "extentHelpBody": "Ko te tikanga 1 he iti te tautoko o to tohatoha mo te kaupapa, ko te 5 te tikanga he tautoko kaha. Whiriwhiria he nama e rite ana ki to tuunga i roto i te komiti.",
-      "add": "Tāpiri",
-      "viewOnlyHeatmap": "Tiro-anake mapi wera mo nga kaimahi.",
-      "notesPerAllocation": "Notes mo ia Tohaina",
-      "noAllocationsYet": "Kaore ano kia tohatohahia",
-      "notesPlaceholder": "Tuhi tuhipoka mo tenei tohatoha...",
-      "noteLanguageWarning": "Whakatupato mo te kaipānui: kei roto pea i tenei tuhipoka te reo tika.",
-      "save": "Tiaki",
-      "saveHelpTitle": "Tiakina te tuhipoka tu",
-      "saveHelpBody": "Ka tiakina te tuhipoka tu mo tenei tohatoha. Ka taea te maataki e nga kaimahi me (kei runga i nga whakaritenga komiti) etahi atu kaiuru."
-    },
-    "speeches": {
-      "newSpeech": "Korero hou",
-      "speechTitlePlaceholder": "Te taitara korero",
-      "googleDocsUrl": "URL Tuhinga Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Whakatuwheratia a Google ki te ripa hou; whakapiri te URL tuhinga ki konei ina reri.",
-      "plainTextOptional": "He tuhinga tuhi noa (mehemea ka whakamahi koe i te Google Doc)",
-      "save": "Tiaki",
-      "cancel": "Whakakore",
-      "noSpeechesYet": "Kaore ano kia whai korero. Honoa he Google Doc, whakapiri kuputuhi ranei.",
-      "speechLabel": "Korero",
-      "untitled": "Karekau he taitara",
-      "edit": "Whakatikatika",
-      "speechDocument": "Tuhinga korero",
-      "draftText": "Kuputuhi tauira",
-      "noContentHint": "Honoa he Puka Google me te Whakatika, taapiri ranei i nga tuhinga totika ki te puka."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Komiti",
-      "clearSearchTitle": "Ūkuia te rapu me te whakaatu i nga roopu katoa",
-      "vacantLabel": "Wātea",
-      "searchVacantTitle": "Rapua nga nohoanga \"watea\" i roto i te ruma",
-      "searchHint": "Patohia he whenua, ingoa kaikawe, kura, kupu ingoa, \"watea\" ranei hei whakaatu i nga whakataetae i roto i te ruma. Patohia te Enter ki te peke ki te whakataetae tuatahi; Ka whakakorea e Esc. Patohia te Vacant ki te peke ki nga nohoanga noho kau.",
-      "findLabel": "Kimihia he tira, he mema ranei",
-      "searchPlaceholder": "Whenua, ingoa, kura...",
-      "matchesCount": "{matches} o {total} tūru ōrite",
-      "searchAria": "Rapua nga roopu",
-      "virtualRoomVacant": "Wātea",
-      "profileAria": "Tirohia te kōtaha: {country}",
-      "vacantSeatAria": "Nohoa watea",
-      "placardAria": "Maama {country}",
-      "gavelAria": "Kawhara",
-      "yourContext": "To horopaki",
-      "roleLabel": "Tūnga",
-      "seatLabel": "Noho",
-      "assignedLabel": "Kua tohua",
-      "daisLabel": "Dais",
-      "phaseLabel": "Wāhanga",
-      "phaseVoting": "Pooti",
-      "phaseDebate": "Taupatupatu",
-      "focusSearchTitle": "Rapu Arotahi (ka rite nga taitara me nga ingoa ki to patai)",
-      "tipLabel": "Aki",
-      "enterScrolls": "Whakauruhia nga panuku",
-      "typeToFilterHint": "Patohia ki te tātari - Whakauruhia nga panuku ki te whakataetae tuatahi",
-      "noMatches": "Karekau he roopu korero, he tuuru papa ranei.",
-      "digitalDisplay": "Whakaaturanga Mamati",
-      "floorLabel": "Papa",
-      "staffSeatsHeading": "Kaimahi - nohoanga",
-      "viewProfileAria": "Tirohia te kōtaha: {title}",
-      "noProfileLinkAria": "{title} (karekau he hononga kōtaha)",
-      "committeeFloor": "Papa komiti",
-      "virtualRoomFigureAria": "Rūma komiti mariko - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Te tātari i nga roopu. Ko te nohoanga tuatahi kua tohua ko te tukinga tuatahi i roto i te mowhiti.",
-      "helperText": "Ka whakarārangihia e ngā māra te whenua (mai i ngā tohatoha), te ingoa, te kura, me ngā kupu tūpono mai i te kōtaha o ia kaitono. Whakatikahia o koe i raro i te Profile. Ko nga tuuru komiti kau e whakaatu ana he Watea. Patohia he panui kua whakakiia, he nohoanga papa ranei hei whakatuwhera i te wharangi o taua mema (korerorero me te ripoata mai i reira).",
-      "virtualRoomCaption": "Tauira Mariko rūma komiti UN me nga tohu kaitakawaenga e whakaatu ana i te whenua, te ingoa, te kura, me nga kupu whakahua."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Tono ki te korero",
-        "delegateFallback": "Kaituku",
-        "needAllocation": "Me whai waahi koe ki te tono korero.",
-        "alreadyQueued": "Kei a koe he tono korero kaha i te rarangi.",
-        "requested": "I tono kia korero. Ka puta koe i te rarangi.",
-        "requestFailed": "I rahua te tono kia korero.",
-        "helpBody": "Ka tukuna to tira ki te rarangi tuuru. Ka taea e koe te tono tatari mo te wa kotahi.",
-        "purposeLabel": "Te kaupapa whiriwhiri (ka whakaatuhia ki te tapanga rarangi)",
-        "purposeHelpTitle": "Tapanga kaupapa",
-        "purposeHelpBody": "Kua apitihia tenei tuhinga ki to ingoa whenua kia mohio ai nga tuuru he aha koe i tono ai i te papa.",
-        "purposePlaceholder": "e.g. tautoko + tirohanga whakatikatika",
-        "requesting": "Kei te tono...",
-        "rollPromptTitle": "Me whakaae te heamana",
-        "rollPromptBodyPickStatus": "Kua timata te huihuinga. Kōwhiria tō tūnga karanga-waea ki te iriti i te korero me te pooti. Kaore e taea te whakarereke i tenei whiringa.",
-        "rollPromptBodyWaitSessionStart": "E tatari ana kia timata te heamana i te wahanga o te komiti.",
-        "rollPromptBodyWaitRollPrompt": "E tatari ana mo te tere-waea.",
-        "rollPromptBodyMarkedAbsent": "Kua tohua koe kei te ngaro. Tonoa te heamana ki te tohu i a koe Whakaatuhia ki te korero me te pooti.",
-        "rollPromptBodyChecking": "Kei te taki i to tuunga rarangi ingoa...",
-        "rollPromptSaving": "Tiaki ana...",
-        "rollPromptPresent": "Ko tenei wa",
-        "rollPromptPresentVoting": "Te whakaatu me te pooti"
-      },
-      "motionVoting": {
-        "votingProcedure": "Te tikanga pooti",
-        "currentMotion": "Motini o naianei",
-        "motioner": "Kai-nekeneke",
-        "majority": "Te nuinga",
-        "majoritySimple": "Maamaa",
-        "tally": "Āe {yes} - Kāo {no} - Tapeke {total}",
-        "help": "Ka tuhia e te raahi nga pooti a ia roopu i te huihuinga. Ko nga pooti motini e whakamahi ana i te Ae, Kao ranei anake (kaore e mawehe). Ko nga tapeke ka tatau anake i nga tohu i tuhia te Ae, Kao ranei; ka pekehia nga tira karekau."
-      },
-      "activeMotion": {
-        "currentMotion": "Motini o naianei",
-        "motionFallback": "Motini",
-        "motioner": "Kai-nekeneke",
-        "majority": "Te nuinga",
-        "majoritySimple": "Maamaa",
-        "type": "Momo",
-        "timer": "Matawā",
-        "currentSpeaker": "Kaikōrero o nāianei",
-        "nextSpeaker": "Kaikorero o muri",
-        "speakerTimeLeftCap": "Wā tukuoro (mauī / pōtae)",
-        "speakerTimeLeftTotal": "Wā tukuoro (mauī / tapeke)",
-        "perSpeaker": "(ia kaikōrero)",
-        "paused": "(kua okioki)",
-        "pauseReason": "Tatari: {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "Wā wātū",
-        "sessionNotStarted": "Karekau te wahanga i timata",
-        "limit": "Tepe",
-        "limitRemaining": "{value} ka mahue",
-        "limitOverBy": "i runga i te {value}",
-        "quickLinkSession": "Wātū",
-        "quickLinkRoll": "Hurihia",
-        "quickLinkSpeakers": "Kaikōrero",
-        "quickLinkMotions": "Motini",
-        "quickLinkTimer": "Matawā",
-        "dais": "Dais",
-        "pinned": "Kua titi",
-        "viewFullAnnouncement": "Tirohia te panui katoa",
-        "timerPausesReadOnly": "Tatari taima (panui-anake)",
-        "speakerList": "Rarangi korero",
-        "speakerFallback": "Kaikōrero",
-        "rollCallYou": "Huri waea (koe)",
-        "fullAnnouncement": "Panuitanga katoa",
-        "daisAnnouncement": "Dais panui",
-        "close": "Katia"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Ingoa wātū",
-        "sessionNamePlaceholder": "e.g. Huinga ata",
-        "sessionNameSaving": "Tiaki…",
-        "sessionNameSaved": "Whakaorangia",
-        "sessionNameHint": "Tiaki aunoa ka puta ki te hitori o te wahanga.",
-        "title": "Huihuinga komiti",
-        "subtitle": "Tīmatahia, whakamutua ranei te huihuinga komiti.",
-        "helpStartStop": "Ka tiimata te tiimata o te waahi huihuinga komiti ora mo te katoa. Kati ka mutu te wahanga ka whakawātea i te tepe wā onāianei.",
-        "migrationUnavailable": "Karekau i te watea nga mana hui mo te wa poto kia tukuna ra ano nga hekenga raraunga hou.",
-        "endTimeInFuture": "Kōwhiria he wa mutunga a muri ake nei, huri ranei ki te kore tepe.",
-        "sessionStartUnavailable": "Karekau i te watea te waitohu wa timata hui kia tukuna ra ano nga hekenga hou.",
-        "endTimeInFutureSetNoLimit": "Whiriwhiria he wa mutunga a muri ake nei, kaua ranei e tautuhia he rohe.",
-        "sessionLimitUpdated": "Kua whakahōungia te tepe wātū.",
-        "startedLabel": "I timata:",
-        "timeInLabel": "Wā i roto:",
-        "timeUntilEndLabel": "Te wa ki te mutunga:",
-        "overByValue": "i runga i te {value}",
-        "modeLabel": "Aratau:",
-        "modeStopwatchNoLimit": "Matakitaki (karekau he waahi)",
-        "sessionNotRunning": "Karekau te wahanga e haere ana.",
-        "sessionLimit": "Te rohe o te wahanga",
-        "sessionLimitModesTitle": "Ngā aratau tepe wātū",
-        "sessionLimitModesHelp": "Kore: kahore he mutunga. Te tahua wa: tatau mai i te timatanga. Mutu i: te wa karaka i to rohenga waahi.",
-        "sessionLimitOptional": "Kōwhiringa.",
-        "noneLabel": "Karekau",
-        "noneDescription": "ka oma kia mutu ra ano koe.",
-        "timeBudgetLabel": "Te tahua wa",
-        "timeBudgetDescription": "ka tatau mai i te wa i timata ai koe.",
-        "endTimeLabel": "Te wa mutunga",
-        "endTimeDescription": "ka whakamahi i te wa karaka kua whakaritea (ka takahia te tahua mena ka whakaritea nga mea e rua).",
-        "noneIndefinite": "Kore (kaore e tau)",
-        "noneScheduledEndHint": "Kaore he mutunga kua whakaritea; ko te wa kua hipa anake ka whakaatuhia.",
-        "timeBudgetFromStart": "Te tahua wa mai i te timatanga",
-        "hoursLabel": "Nga haora",
-        "minutesLabel": "Nga meneti",
-        "minimumOneMinute": "(miniti 1 meneti)",
-        "endAtLocalTime": "Mutu i te (waa rohe)",
-        "stopSession": "Kati te wahanga",
-        "saveLimit": "Tiaki tepe",
-        "saveLimitHelp": "Ka hoatu i nga tautuhinga tepe kua whakahouhia i te wa e haere ana te waahi, me te kore e mutu te waahi.",
-        "startSession": "Tīmata wātū",
-        "sidebarUsePrefix": "Whakamahia te paetaha mo",
-        "rollCall": "Huri waea",
-        "speakers": "Kaikōrero",
-        "formalMotions": "Motini okawa",
-        "timer": "Matawā",
-        "sidebarAnd": "a",
-        "announcements": "Panuitanga",
-        "sidebarUseSuffix": "— kotahi taputapu mo ia ripa."
-      },
-      "history": {
-        "title": "Hītori wātū",
-        "savedCount": "{count} kua tiakina",
-        "permissionsHint": "Ka taea e nga heamana te whakaingoa i nga whakaurunga. Ka taea e SMT/Admin te whakaingoa me te whakakore i nga whakaurunga.",
-        "empty": "Kaore ano he hitori o te wahanga.",
-        "rename": "Whakaingoa ano",
-        "delete": "Mukua",
-        "deleteConfirm": "Mukua tenei wahanga mai i te hitori?",
-        "sessionNamePrompt": "Ingoa wātū",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Kei te haere tonu"
-      },
-      "timerPage": {
-        "title": "Matawā",
-        "controlsTitle": "Nga mana taima",
-        "controlsHelp": "Whakamahia te papa Whanui mo te wa tautohetohe katoa, pooti Motini ranei hei here i te tirohanga ki tetahi mea pooti tuwhera motuhake.",
-        "tabSetup": "1) Tatūnga",
-        "tabClock": "2) Mana karaka",
-        "tabNotes": "3) Nga korero korero",
-        "tabLog": "4) Tatari rangitaki",
-        "setupHelp": "Whiriwhiria mehemea mo te papa whanui tenei taima (kei te kitea tonu e nga kaikawe) he here ranei ki te motini e tuwhera ana mo te pooti (ka kite noa nga kaikawe i te mea ko taua pooti te mea kaha). Ka noho tonu te karaka i te wa o te kaikorero, ahakoa he aha. Tatari karaka / Tīmatahia te karaka whakatio, whakaara ano ranei i te tatau. Tautuhia te wa Kaioro (e toe ana) me te Wa Tapeke takitahi, katahi ka Tiaki matawā. Ka whakakiia nga tatūkē kia rite te roa; ka taea e koe te whakatika i tetahi mara i muri mai. Ka takiuru nga okioki me te take poto.",
-        "namedPreset": "Whakaingoatia tatūkē",
-        "applyPreset": "Hoatu tatūkē...",
-        "floorLabelDelegates": "Tapanga papa (nga kaitono)",
-        "floorLabelPlaceholder": "e.g. GSL 60s",
-        "timerPurpose": "Te kaupapa taima",
-        "purposeGeneralFloor": "Taupatupatu whanui / papa (kaore i herea ki te pooti)",
-        "purposeMotionVote": "Whakatuwheratia te motini - taima anake i te wa e kaha ana taua pooti i runga i te papa",
-        "openMotionForVoting": "Motini tuwhera (me tuwhera mo te pooti)",
-        "selectMotion": "Tīpako nekehanga...",
-        "untitled": "Karekau he taitara",
-        "noOpenMotionWarning": "Karekau he motini e tuwhera ana mo te pooti. Whakatuwherahia he pooti i te tuatahi, huri ranei te kaupapa ki te papa whanui.",
-        "clock": "Karaka",
-        "running": "Rere ana",
-        "paused": "Kua whakataa",
-        "saveToEnablePauseStart": "tiakina te taima kia taea te okioki/tīmata.",
-        "pauseReasonLogged": "Tatari take (kua takiuru)",
-        "pauseReasonPlaceholder": "e.g. Te waahi ota, take hangarau, kaunihera kore whakahaere...",
-        "pauseClock": "Tatari karaka",
-        "startClock": "Tīmata karaka",
-        "perSpeakerTitle": "Wā mo ia kaikōrero (whakaōrite rūnanga)",
-        "perSpeakerHelp": "Tautuhia te Wa Tapeke hei potae mo ia kaikorero me te wa Kaioro hei wa e toe ana; Ka neke whakamua ki te kaikorero e whai ake nei ka tautuhi ano ki te potae.",
-        "currentSpeaker": "Kaikōrero o nāianei",
-        "nextSpeaker": "Kaikorero o muri",
-        "speechNotesCurrentSpeaker": "Nga korero korero (kaikorero o naianei)",
-        "speechNotesHelp": "Ka herea nga tuhipoka ki te kupu matawā kaikōrero o nāianei, ā, i te rārangi kaikōrero i tohuhia e te tangata Onāianei, ka penapenahia to ratou tukunga hei tohutoro.",
-        "timerFloorLabel": "Matawā (papa):",
-        "speakerListCurrent": "Rārangi kaikōrero (nāianei):",
-        "noCurrentDelegation": "Karekau he tukunga e tohuhia ana inaianei i te rarangi kaikōrero.",
-        "note": "Tuhipoka",
-        "notePlaceholder": "Nga tohu, POI, reo, whaiwhai...",
-        "saveSpeechNote": "Tiakina te tuhi korero",
-        "recentNotes": "Ko o korero tata nei (tenei komiti)",
-        "delete": "Mukua",
-        "speakerTimeRemaining": "Te wa korero (e toe ana)",
-        "remainingHelpPerSpeaker": "Tatauhia mo te kaikorero o naianei (ka tautuhi ano ina anga whakamua koe).",
-        "remainingHelpNormal": "Tatauhia mo te kaikorero o naianei (ka iti ake i te katoa).",
-        "totalTime": "Te wa katoa",
-        "totalHelpPerSpeaker": "Potae mo ia-kaikorero (te ingoa i runga i te papa; Ko nga whakakī whakamua kei te toe ki tenei).",
-        "totalHelpNormal": "Te roa katoa o tenei wahanga matawā (ka whakaatuhia i muri i te rītaha i runga i te papa).",
-        "saveTimer": "Tiakina matawā",
-        "advanceSpeakerReset": "Whakanuia te korero me te tautuhi i te karaka",
-        "recentPauseLog": "Rangitaki okioki tata nei",
-        "noPauseEvents": "Karekau he takahanga whakataa i tuhia mo tenei komiti.",
-        "openPauseLogHint": "Whakatuwherahia te rangitaki Tatari ki te arotake i nga take okioki me nga tohu waahi kua tuhia.",
-        "saved": "Kua tiakina te taima.",
-        "savedCapped": "Kua tiakina te taima. He roa ake te wa kaikorero i te katoa; kati ki te katoa.",
-        "alreadyPaused": "Kua whakataa kētia te taima.",
-        "pausedForCommittee": "Ka okioki te taima mo te komiti.",
-        "alreadyRunning": "Kei te rere kē te taima.",
-        "runningForCommittee": "Ka rere te taima mo te komiti.",
-        "euTimerBoardTitle": "Papa matawā Paremata EU (11 nga taima)",
-        "euTimerBoardHelp": "Kotahi te taima mo ia roopu, me te wa Tapeke, te wa POI/POC, me te wa Kaikōrero. Whakamahia te Hoatu hei kape i tetahi rarangi ki roto i nga mara matawā ora i te ripa Karaka (wa kaikorero / Tiaki matawā).",
-        "euTimerName": "Ingoa",
-        "euTimerTag": "Tūtohu",
-        "euTotalTime": "Te wa katoa",
-        "euPoiPocTime": "POI / POC wa",
-        "euSpeakerTime": "Te wa korero"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "Rua komiti (ki tonu)",
         "hint": "Tahora mariko me te papa tuku"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "I rahua te tiakiAunoa",
     "autosavedWithCountry": "Tiaki Aunoa — {country}",
     "delegateFallback": "kaikawe"
+  },
+  "sources": {
+    "addSource": "Tāpiri puna",
+    "sourceUrl": "URL puna",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (manakohia)",
+    "urlHelp": "Mo te Google Doc hou, whakamahia te paatene ka whakapiri i te hono tuhinga ki konei.",
+    "titleOptional": "Taitara (kōwhiringa)",
+    "saveChanges": "Tiakina nga huringa",
+    "editSource": "Whakatika puna",
+    "urlPlaceholderShort": "Google Doc tetahi atu URL ranei",
+    "empty": "Kaore ano he puna. Tāpirihia he hononga Google Doc hei whakatuwhera i konei.",
+    "sourceLabel": "Puna",
+    "openLink": "Tuwhera hono",
+    "embedHeading": "Tuhinga puna",
+    "notGoogleDoc": "Ehara tenei URL i te Google Doc. Whakamahia he hononga docs.google.com/document/d/… hei whakauru me te whakatika i konei; ki te kore whakatuwheratia te hono i runga."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Kaore e taea e nga Kaituku te tuku tika i nga Pepa Turanga. Whakamahia tetahi atu momo tuhinga.",
+    "alertOnlyChairsPositionPaper": "Ka taea e nga tuuru/SMT/admin anake te tuku Pepa Turanga.",
+    "alertOnlySmtChairReport": "Ka taea e SMT/kaiwhakahaere anake te tuku i nga Purongo Heamana.",
+    "alertOnlySmtRop": "Ka taea e SMT/kaiwhakahaere anake te tuku tuhinga RoP.",
+    "alertOnlySmtAwardCriteria": "Ka taea e SMT/kaiwhakahaere anake te tuku tuhinga Paearu Tohu.",
+    "alertNeedContentOrUrl": "Tāpirihia he ihirangi kuputuhi rohe, he URL Google Docs ranei.",
+    "confirmDelete": "Mukua tenei tuhinga?",
+    "delegatePrepTitle": "Whakaritea te waahanga tuhinga",
+    "delegatePrepBody": "Ka taea e koe te tuku ake, te tiro, me te whakatika i o ake <prep>Prep documents</prep> tika mai i tenei wharangi.",
+    "positionPaperGuideTitle": "Turanga pepa aratohu",
+    "positionPaperGuideBlurb": "Tikiakehia te aratohu waahi i te wa e rite ana te PDF whakamutunga.",
+    "downloadPlaceholderGuide": "Tikiake aratohu puriwāhi",
+    "addDocument": "Tāpiri tuhinga",
+    "tabs": {
+      "ariaLabel": "Nga waahanga tuhinga",
+      "library": "Whare Pukapuka",
+      "compose": "Tito",
+      "composeHint": "Tīmatahia he tuhinga hou, whakatikahia ranei he tauira mai i tenei ripa."
+    },
+    "newDocumentTitle": "Tuhinga hou",
+    "editDocumentTitle": "Whakatika tuhinga",
+    "typeLabel": "Momo",
+    "types": {
+      "position_paper": "Pepa tūnga",
+      "chair_report": "Te ripoata a te heamana",
+      "rop": "RoP",
+      "award_criteria": "Paearu tohu",
+      "chair_notes": "Nga korero a te heamana",
+      "prep_doc": "Tuhinga o mua"
+    },
+    "delegatePositionPaperNote": "Ka tukuna nga pepa tuunga e nga tuuru me nga urupare.",
+    "delegateOwner": "Tukuna te rangatira",
+    "chairRecipient": "Kaiwhiwhi heamana",
+    "titleLabel": "Taitara",
+    "titlePlaceholder": "taitara tuhinga",
+    "googleDocsUrl": "URL Tuhinga Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (whakamautia te tirohanga/whakatika ki te taupānga)",
+    "googleDocsHelp": "Whakamahia te Tuhinga Google Hou hei whakatuwhera i a Google ki te ripa hou, ka whakapiri i te hononga tuhinga ki konei. Ko te kuputuhi tokau kei raro he mea whiriwhiri. Ko nga tuhinga katoa e hiahia ana ki nga tuhinga a-rohe, ki te hono a Google Doc, ki nga mea e rua ranei.",
+    "plainTextOptional": "Kuputuhi noa (he kōwhiringa)",
+    "plainTextPlaceholder": "Nga tuhipoka, tuhinga tuhi ranei…",
+    "chairFeedbackLabel": "He urupare a te heamana",
+    "chairFeedbackPlaceholder": "He urupare mo te pepa tuunga kaikawe...",
+    "empty": "Karekau he tuhinga. Tāpirihia tetahi hono ranei he Google Doc.",
+    "sidebarDocumentLabel": "Tuhinga",
+    "sections": {
+      "chairReports": "Heamana ripoata",
+      "rop": "RoP",
+      "awardCriteria": "Paearu tohu",
+      "prepDocuments": "Whakaritea nga tuhinga",
+      "chairNotes": "Nga korero a te heamana",
+      "otherDocuments": "Ētahi atu tuhinga"
+    },
+    "untitled": "Karekau he taitara",
+    "linkedDocumentHeading": "Tuhinga hono",
+    "notesHeading": "Notes",
+    "noGoogleDocYet": "Kaore ano kia honohia a Google Doc. Whakamahia te Whakatika hei taapiri i te docs.google.com/document/d/… URL.",
+    "chairFeedbackHeading": "He urupare a te heamana",
+    "noFeedbackYet": "Kaore ano kia taapirihia he urupare."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Whakauruhia he imeera kaitono i te tuatahi.",
+    "sentToDelegate": "I tukuna ki {email}.",
+    "newResolution": "Whakatau Hou",
+    "maxDraftResolutions": "Kei tenei komiti {count} nga tauira whakatau.",
+    "googleDocLink": "Hononga a Google Doc",
+    "googleDocUrlPlaceholder": "URL Tuhinga Google (docs.google.com/document/d/… — whakamahia mo te whakauru + whakatika)",
+    "googleDocUrlHelp": "Ka tuwhera a Google Doc hou ki tetahi atu ripa; tāruahia te URL mai i te pae wāhitau ka whakapiri ki konei.",
+    "mainSubmittersPlaceholder": "Kaituku matua (tautuhinga kaiwhakamahi, wehea piko)",
+    "coSubmittersPlaceholder": "Kaituku-tahi (tautuhinga kaiwhakamahi, wehea piko)",
+    "create": "Waihanga",
+    "cancel": "Whakakore",
+    "openInNewTab": "Tuwhera ki te ripa hou",
+    "noGoogleDocLink": "Kaore he hononga a Google Doc",
+    "visibleToOtherBloc": "Ka kitea ki etahi atu poraka",
+    "resolutionCounts": "Nga rarangi matua: {main} | Takirua: {co} | Kaitohu: {signatories}",
+    "blocButton": "Poraka {name} ({stance})",
+    "signVirtually": "Waitohu mariko (kua whakamohiotia nga ohaurunga matua)",
+    "shareByEmail": "Tiria whakatau ma te imeera",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "Tukuna ki te kaitakawaenga",
+    "clauseEditor": "Etita rara",
+    "noClausesYet": "Kare ano he rara.",
+    "clauseNumber": "Rarangi {number}",
+    "saveClause": "Tiaki rara",
+    "delete": "Mukua",
+    "addClausePlaceholder": "Tāpirihia he rara hōu...",
+    "addClause": "Tāpiri rara",
+    "clauseVoteHistory": "Hitori pooti rara",
+    "noClauseOutcomesYet": "Kaore ano kia tuhia nga hua pooti rara.",
+    "clauseFallback": "Rarangi",
+    "passed": "PAHEA",
+    "failed": "I rahua",
+    "motionId": "Motini {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Nga waahanga pooti",
+      "open": "Tuwhera",
+      "closed": "Katia"
+    },
+    "requiredMajority": "Te nuinga e hiahiatia ana",
+    "helpRequiredMajorityTitle": "Te nuinga e hiahiatia ana",
+    "helpRequiredMajorityBody": "Kōwhirihia te paepae pōti i whakamahia hei whakatau i te tuku/rahua. Ko te `Mua` he nui atu i te haurua. `2/3` me whiwhi te nuinga.",
+    "majoritySimple": "Maamaa",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} te nuinga",
+    "mustVote": "ME pooti",
+    "helpMustVoteTitle": "ME pooti",
+    "helpMustVoteBody": "Tohua tenei motini hei mea \"me pooti\". Ka whakamahia tenei ki te whakapuaki i nga whakaritenga ki nga kaiuru (kei runga i te whakaritenga a to komiti).",
+    "saveSettings": "Tiakina nga tautuhinga",
+    "delegateBlurb": "Ka rekotia e te raahi nga pooti i te wa o te huihuinga (hei tauira te piiraa). Ko nga pooti motini i konei ka whai i te Ae/Kao anake (kaore e whakamahia te mawehe). Ka taea e koe te whai i te tatauranga; karekau nga kaikawe pooti i roto i te taupānga.",
+    "yes": "Ae",
+    "no": "Kao",
+    "ballots": "Pooti",
+    "total": "Tapeke",
+    "outcome": "Putanga",
+    "passed": "Paahi",
+    "failed": "I rahua",
+    "noRecordedVotes": "Karekau he pooti kua tuhia",
+    "reopenMotion": "Whakatuwheratia te motini",
+    "editRecordOpen": "Whakatika rekoata…",
+    "hideSettings": "Huna tautuhinga",
+    "preliminaryPassing": "Paahitanga (tomua)",
+    "preliminaryFailing": "Rahua (whakamatamua)",
+    "delegateRollCall": "Tukuna te piiraa ({count})",
+    "noSeatedDelegates": "Karekau he mema kua noho mo tenei motini.",
+    "rollPrefix": "Hurihia:",
+    "recordedPrefix": "Kua tuhia:",
+    "recordedYes": "Ae",
+    "recordedNo": "Kao",
+    "recordedAbstain": "Mawehe atu",
+    "recordedNone": "—",
+    "abstain": "Mawehe atu",
+    "clear": "Maamaa",
+    "closeMotion": "Kati motini",
+    "mustVoteBadge": "ME pooti",
+    "canVoteBadge": "Ka taea te pooti",
+    "noMotions": "Kaore ano kia motini.",
+    "currentOpenMotion": "Motini tuwhera o naianei",
+    "noOpenMotion": "Karekau he motini tuwhera inaianei.",
+    "recentClosedMotions": "Nga motini kati tata",
+    "noClosedMotions": "Kaore ano kia kati nga motini.",
+    "untitled": "Karekau he taitara",
+    "voteTypes": {
+      "motion": "Motini",
+      "amendment": "Whakatikatika",
+      "resolution": "Whakatau",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Kei te ngaro (roll)",
+      "present_abstain": "I tenei wa — ka taea te karo",
+      "present_voting": "Te whakaatu me te pooti (te rarangi ingoa)",
+      "unknown": "— (roll)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Nga waahanga korero",
+      "overview": "Tirohanga",
+      "awards": "Tohu",
+      "private": "Nga rekoata motuhake",
+      "settings": "Tautuhinga kōtaha"
+    },
+    "profilePicture": "Whakaahua whakaahua",
+    "uploadFile": "Tukuake kōnae",
+    "uploading": "Tukuake ana…",
+    "photoSaved": "Ko te whakaahua i tukuake ka tiakina.",
+    "orUrl": "Ka tautuhia ranei e te URL",
+    "urlPlaceholder": "https://...",
+    "name": "Ingoa",
+    "username": "Ingoa Kaiwhakamahi",
+    "usernamePlaceholder": "e.g. alex_1999",
+    "pronouns": "Huanga",
+    "customPronounNote": "Ko to kōtaha he huinga kupu motuhake kua kore e whakaaetia i konei. Tīpakohia he kōwhiringa kei runga ake (me waiho pātea rānei). Ko te penapena ka whakakapi i te uara tawhito.",
+    "school": "Kura",
+    "schoolPlaceholder": "e.g. Te Kura Tuarua o Lincoln",
+    "grade": "Kōeke",
+    "selectGrade": "Tīpako kōeke",
+    "conferencesAttended": "I tae atu ki nga huihuinga",
+    "awardsComma": "Tohu (whakawehea piko)",
+    "awardsPlaceholder": "Te Kaituku Pai rawa atu, Honore Mention",
+    "allocation": "Te tohatoha",
+    "selectAllocation": "Tīpakohia te tohatoha",
+    "noAllocationsPlaceholder": "Karekau he tohatoha komiti",
+    "saveProfile": "Tiaki kōtaha",
+    "saved": "Kua tiakina te pūkete.",
+    "saveFailed": "Kāore i taea te tiaki kōtaha.",
+    "errUsernamePattern": "Ko te ingoa kaiwhakamahi me 3-32 tohu (reta, tau, _, ., -)",
+    "errPronounsPreset": "Whiriwhiria he kupu mai i te rarangi ingoa.",
+    "errImageType": "Kōwhiria he kōnae atahanga.",
+    "errImageSize": "He nui rawa te ahua (he 5 MB te teitei).",
+    "errUploadFailed": "I rahua te tuku.",
+    "errStorageSetup": "Kaore i te whakaritehia te rokiroki pikitia whakaahua. I roto i te kaupapa Supabase, whakahaerea te hekenga 00100_profile_pictures_storage_bucket.sql, hangaia ranei he peere rokiroki mo te iwi e whakaingoatia ana ko nga whakaahua-whakaahua (tirohia README).",
+    "errPublicUrl": "Kāore i taea te whakatau URL tūmatanui mō te atahanga kua tukuake.",
+    "fallbacks": {
+      "yourCountry": "to whenua",
+      "committeeSession": "Huihuinga komiti",
+      "delegate": "Kaituku",
+      "speechNote": "tuhi korero",
+      "untitledMotion": "Motini kore taitara",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "Nau mai te kaikawe o {flag} {country}",
+      "subtitle": "He aha taau e hiahia ana ki te timata?",
+      "links": {
+        "documents": "Tuhinga",
+        "notes": "Notes",
+        "committeeRoom": "Rua komiti",
+        "runningNotes": "Rere Notes",
+        "ideas": "Nga whakaaro",
+        "guides": "Kaitohutohu",
+        "sources": "Nga puna",
+        "resolutions": "Nga Whakatau",
+        "speeches": "Nga Korero",
+        "stances": "Turanga",
+        "crisisSlides": "Kiriata raruraru",
+        "report": "Ripoata",
+        "motions": "Motini",
+        "points": "Nga tohu"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Tohu i runga i to kōtaha",
+      "rank": "rangatira {rank}",
+      "pending": {
+        "tab": "Ko nga whakaingoatanga e tatari ana",
+        "title": "Ko nga whakaingoatanga heamana e tatari ana",
+        "descriptionSingle": "I tiakina e nga tuuru ka tohaina ki a SMT hei arotake. Ka puta nga tohu whakamutunga i raro i muri i te whakau.",
+        "descriptionTabbed": "I tiakina e nga tuuru ka tohaina ki a SMT hei arotake. Ka puta nga tohu whakamutunga i muri i te whakamanatanga."
+      },
+      "recorded": {
+        "tab": "Nga tohu kua tuhia",
+        "title": "Nga tohu kua tuhia",
+        "description": "Kua whakarārangihia i te wa e tohua ai koe e nga tuuru, SMT ranei ki te kaiwhai tohu. Ko te tohu whakamutunga ka whai i nga ture o to hui."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Ka kitea e koe anake, nga heamana komiti, me te SMT mo te komiti whai take.",
+      "points": {
+        "title": "Ngā tūru (tūmataiti)"
+      },
+      "speechNotes": {
+        "title": "Ko nga korero whaikorero a te heamana (tangata)"
+      },
+      "motions": {
+        "title": "Nga motini i nekehia e koe",
+        "description": "Kua tiakina ki to korero mo te arotake komiti me te tirotiro SMT."
+      }
+    },
+    "discipline": {
+      "title": "Te mana whakahaere (takitahi)",
+      "statusLine": "Whakatupato: {whakatupato} · Patua: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "kua haua te pooti",
+      "speakingSuspended": "kua whakatarewahia te korero",
+      "removedFromCommittee": "tangohia mai i te komiti",
+      "updated": "Whakahoutia: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Arokite kōtaha",
+      "title": "Arokite",
+      "yourName": "To ingoa",
+      "usernameNotSet": "Ko te ingoa kaiwhakamahi kaore i tautuhia",
+      "gradeValue": "Kōeke {grade}",
+      "awards": "Tohu"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Nga Ture Whakahaere (RoP)",
+        "content": "# Ture Whakahaere \n\n## Nga Tohu me nga Motini \n- **Waitohu Whakatau**: Tikanga tika \n- **Point of Information**: Patai ki te kaikorero \n- **Te Tohu Whaimana**: Te whakamarie whaiaro \n- **Motini ki te Ripanga**: Whakaroa te tautohetohe \n- **Motini ki te hiki**: Whakamutua te huihuinga \n\n## Pooti \n- Te nuinga ngawari mo nga take tikanga \n- 2/3 te nuinga mo nga take nui \n- Huri-karanga pooti ina tonoa"
+      },
+      "examples": {
+        "title": "Tauira",
+        "content": "# Tauira \n\n## Hōputu Whakatau \n``` \nTe Runanga Nui, \n... \n1. Ka karanga ki nga whenua mema ki te... \n2. Ka akiaki te hapori o te ao ki te... \n``` \n\n## Hanganga Pepa Turanga \n1. Papamuri \n2. Kaupapahere Whenua \n3. Nga Whakataunga Whakaaro"
+      },
+      "templates": {
+        "title": "Nga tauira",
+        "content": "# Tātauira \n\n## Tauira Ripoata Tiamana \n- Tirohanga a te komiti \n- Nga kaupapa korero matua \n- Kua paahitia nga whakataunga \n- Nga Tohutohu"
+      },
+      "chairReport": {
+        "title": "Heamana Ripoata",
+        "content": "# Heamana Ripoata \n\nTuhia nga mahi a te komiti me nga putanga ki konei."
+      }
+    },
+    "edit": "Whakatikatika",
+    "guideDocument": "Tuhinga aratohu",
+    "additionalNotes": "Nga korero taapiri",
+    "noContentYet": "Karekau he ihirangi.",
+    "titlePlaceholder": "Taitara",
+    "googleDocsUrl": "URL Tuhinga Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Ka tuwhera a Google Doc hou ki tetahi atu ripa. Whakapirihia he hononga tiritiri kia taea e nga kaikawe te whakatuwhera i te tuhinga ki konei (tirohia/whakatika kei te tiritiri a Google).",
+    "markdownOptional": "Ko nga tohu tohu (mehemea ka whakamahi koe i te Google Doc)",
+    "save": "Tiaki",
+    "cancel": "Whakakore",
+    "createNewGuide": "Waihangahia he aratohu hou",
+    "slugPlaceholder": "paraka (ahurei)",
+    "titleLowerPlaceholder": "taitara",
+    "googleDocsUrlOptional": "URL Tuhinga Google (he kōwhiringa)",
+    "markdownContentOptional": "Ihirangi tohu (he kōwhiringa)",
+    "create": "Waihanga",
+    "glossary": {
+      "title": "MUN Agenda Papakupu",
+      "subtitle": "Ko nga kupu ahurei e rite ana ki to waehere komiti me nga kaupapa kaupapa o naianei.",
+      "committeeCode": "Waehere komiti: {code}",
+      "sources": {
+        "core": "matua",
+        "committee": "komiti",
+        "topic": "kaupapa"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Tukunga",
+          "definition": "He whenua, he roopu kaitirotiro ranei hei kanohi mo tetahi kawanatanga, hinonga ranei i roto i te komiti."
+        },
+        "placard": {
+          "term": "Pepa",
+          "definition": "I whakamahia te tohu whenua ki te tono i te papa, te pooti, ​​me te tohu motini tikanga."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Ko te tiamana o te roopu e whakahaere ana i nga tautohetohe, e whakamahi ana i nga tikanga, e whakahaere ana i te raupapa korero."
+        },
+        "quorum": {
+          "term": "Koorama",
+          "definition": "Ko te iti rawa o nga roopu e tika ana hei whakahaere i nga pakihi me nga pooti."
+        },
+        "motion": {
+          "term": "Motini",
+          "definition": "He tono ōkawa ki te huri i te rere o te tautohetohe, penei i te momo ruuma, te wa korero ranei."
+        },
+        "point_of_order": {
+          "term": "Tohu Whakatau",
+          "definition": "Te wawaotanga i te wa e mahia he ana te tikanga i raro i nga ture komiti."
+        },
+        "moderated_caucus": {
+          "term": "Rūnanga Whakaōrite",
+          "definition": "Wāhanga tautohetohe kua hangahia me nga whaikorero poto mo te kaupapa iti kua tautuhia."
+        },
+        "unmoderated_caucus": {
+          "term": "Rūnanga Whakaōritenga",
+          "definition": "Te wā whiriwhiringa ōpaki ka neke haere noa ngā māngai ki te tuhi me te hanumi whakaaro."
+        },
+        "draft_resolution": {
+          "term": "Whakatau Tauira",
+          "definition": "Tuhituhi mahi mo nga mahi a te komiti i mua i te pooti whakamutunga me te tangohanga."
+        },
+        "amendment": {
+          "term": "Whakatikatika",
+          "definition": "Hurihia ki te tuhi tuhinga, he hoa, he pooti ranei hei kore hoa."
+        },
+        "operative_clause": {
+          "term": "Rarangi Mahi",
+          "definition": "rara tau mahi-a-mahi e whakaatu ana i ta te komiti e whakaaro ana kia mahia."
+        },
+        "preambulatory_clause": {
+          "term": "Tuhinga o mua",
+          "definition": "rara whakatakoto horopaki e whakahua ana i nga maapono papamuri, i nga awangawanga, me nga anga o mua."
+        },
+        "right_of_reply": {
+          "term": "Matau o te Whakautu",
+          "definition": "Te whai waahi ki te whakautu ki tetahi korero tika i pa ki te mana o te tuku, ki te tuunga ranei."
+        },
+        "veto_power": {
+          "term": "Mana Weto",
+          "definition": "Te mana mema-mau a UNSC ki te aukati i nga whakataunga tauira tino nui."
+        },
+        "chapter_vii": {
+          "term": "Upoko VII",
+          "definition": "Te mana o te UN Charter mo nga whakatuma mo te rangimarie, nga whiu, me nga tikanga whakamahi-o-kaha."
+        },
+        "sanctions_regime": {
+          "term": "Tikanga Whakatau",
+          "definition": "Ko nga here kua whakaritea hei whakaawe i te whanonga me te kore he mahi hoia."
+        },
+        "arms_control": {
+          "term": "Mana Whawhai",
+          "definition": "Nga Whakaaetanga me nga punaha manatoko e whakawhāiti ana i nga momo, te rahinga, te horahanga patu ranei."
+        },
+        "non_proliferation": {
+          "term": "Whakanui-kore",
+          "definition": "Nga kaupapa here hei aukati i te horapa o nga kaha patu karihi, matū, koiora, matatau ranei."
+        },
+        "confidence_building_measures": {
+          "term": "Mehua-Hanga Whakapono",
+          "definition": "Ko nga taputapu maamaa me nga taputapu whakawhitiwhiti korero e whakaiti ana i te pohehe me te raruraru raruraru."
+        },
+        "universal_periodic_review": {
+          "term": "Te Arotake Waa Ao",
+          "definition": "Te tukanga arotake-a-hoa i reira ka ripoatahia e ia whenua mema o te UN me te whiwhi i nga taunakitanga motika."
+        },
+        "special_rapporteur": {
+          "term": "Kaipupuri Motuhake",
+          "definition": "Ko te tohunga motuhake kua tohua ki te aro turuki me te tuku korero mo nga take motika kaupapa whenua ranei."
+        },
+        "treaty_body": {
+          "term": "Te Rōpū Tiriti",
+          "definition": "Ko te Komiti o nga tohunga e tirotiro ana i te whakatinanatanga o tetahi tiriti tika tangata."
+        },
+        "public_health_emergency": {
+          "term": "Ohotata Hauora Tūmatanui",
+          "definition": "Ko nga huihuinga pakarutanga nui e hiahia ana kia tere te whakarite urupare a motu me te ao."
+        },
+        "surveillance": {
+          "term": "Te Tirohanga Epidemiological",
+          "definition": "Kohikohi tonu me te tātari i nga raraunga hauora kia kitea me te whai i nga ahuatanga mate."
+        },
+        "health_systems": {
+          "term": "Te Whakapakari i nga Pūnaha Hauora",
+          "definition": "Te whakapai ake i nga kaimahi, te putea putea, te arorau, me te mana whakahaere mo te tuku hauora pono."
+        },
+        "transnational_crime": {
+          "term": "Te Hara-a-Motu o te Whenua",
+          "definition": "Ko nga mahi taihara i ruruku puta noa i nga rohe na roto i nga whatunga me nga maakete kino."
+        },
+        "illicit_trafficking": {
+          "term": "Hokohoko Kore",
+          "definition": "Ko te neke kino o nga raau taero, patu, tangata, taonga ranei puta noa i nga mana whakahaere."
+        },
+        "rule_of_law_capacity": {
+          "term": "Te Kaha Ture-o-Ture",
+          "definition": "Te kaha o nga punaha whakawa ki te whakatewhatewha, ki te whakawa, ki te tiaki tika i nga tika."
+        },
+        "sustainable_development": {
+          "term": "Whanaketanga Taumau",
+          "definition": "Te tauira tipu e whakataurite ana i te ahunga whakamua hapori, whai waahi ohaoha, me te tiaki taiao."
+        },
+        "financing_for_development": {
+          "term": "Putea mo te Whakawhanaketanga",
+          "definition": "Ko nga tikanga tuku putea a te iwi me te tangata motuhake e tautoko ana i nga kaupapa whanaketanga mo te wa roa."
+        },
+        "policy_coordination": {
+          "term": "Whakaritenga Kaupapahere",
+          "definition": "Te whakarite i nga mahi a te kawanatanga me nga umanga hei karo i te taarua me te whakanui i te paanga o te roopu."
+        },
+        "child_protection": {
+          "term": "Tiaki Tamariki",
+          "definition": "Ko nga tikanga hei aukati i te tukino, te tukino, me te tutu ki nga tamariki i nga waahi katoa."
+        },
+        "education_access": {
+          "term": "Te Uru Matauranga",
+          "definition": "Te whakarite i te whakauru, te rite, me te haere tonu o nga huarahi ako mo nga tamariki katoa."
+        },
+        "humanitarian_response": {
+          "term": "Whakautu Tangata",
+          "definition": "Nga mahi whakaora tere ki te whakatutuki i nga hiahia ohorere i roto i nga raru me nga waahi pakanga."
+        },
+        "gender_mainstreaming": {
+          "term": "Te Ira Tangata",
+          "definition": "Te whakauru i te tātaritanga ira tangata ki te hoahoa kaupapa here, te whakatinanatanga, me te arotake."
+        },
+        "gender_based_violence": {
+          "term": "Te tutu i runga i te ira tangata",
+          "definition": "Ko te kino e pa ana ki tetahi i runga i te tuakiri ira tangata, i nga mahi, i nga hononga mana koretake ranei."
+        },
+        "economic_empowerment": {
+          "term": "Whakamana Ohaoha",
+          "definition": "Te whakawhānui i te uru ki nga mahi tika, te putea, te mana rangatira, me te mana whakatau."
+        },
+        "source_attribution": {
+          "term": "Tohunga Puna",
+          "definition": "Te whakahua i te takenga mai o nga korero kia taea ai te manatoko me te whakamohiotanga o nga kereme."
+        },
+        "verified_reporting": {
+          "term": "Pūrongo Manatoko",
+          "definition": "Ko te paerewa kairipoata e hiahia ana kia whakamanahia i mua i te whakaputa i nga meka tautohe."
+        },
+        "editorial_independence": {
+          "term": "Etita Motuhake",
+          "definition": "Te wehewehe i nga whakatau korero mai i te awe torangapu, te awe a te hunga whai paanga ranei."
+        },
+        "climate_mitigation": {
+          "term": "Te Whakaititanga o te Hurirangi",
+          "definition": "Ko nga mahi e whakaiti ana i te tukunga hau-a-roto, te whakanui ake ranei i te tango waro wa-roa."
+        },
+        "climate_adaptation": {
+          "term": "Te Urutaunga Hurirangi",
+          "definition": "Nga kaupapa here me nga haumi e whakaiti ana i te whakaraeraetanga ki nga paanga o te rangi."
+        },
+        "cyber_norms": {
+          "term": "Paerewa Cyber",
+          "definition": "Ko nga tumanakohanga tiritahi mo te whanonga a te kawanatanga i roto i nga rohe mamati me te ipurangi."
+        },
+        "critical_infrastructure": {
+          "term": "Hanganga Haehae",
+          "definition": "Ko nga punaha nui penei i te hiko, te wai, te hauora, me nga whakawhitiwhiti korero e hiahia ana kia kaha."
+        },
+        "epidemiology": {
+          "term": "Epidemiology",
+          "definition": "Te rangahau i nga tauira mate, nga take, me te tohatoha i nga taupori."
+        },
+        "preparedness_response": {
+          "term": "Te Whakarite me te Whakautu",
+          "definition": "Te whakamahere, te ruruku, me nga mahi whakaoho hei pupuri me te whakahaere i nga ohorere."
+        },
+        "non_refoulement": {
+          "term": "Kore-Refoulement",
+          "definition": "Ko te maapono e aukati ana i te hokinga mai o nga tangata ki nga waahi ka pa he kino ki a ratou."
+        },
+        "durable_solutions": {
+          "term": "Rongoa Roa",
+          "definition": "Nga hua mo te wa roa mo te hunga kua heke: te hokinga mai, te whakaurunga o te rohe, te whakanohonoho ranei."
+        },
+        "nuclear_safeguards": {
+          "term": "Nga Tiaki Nuclear",
+          "definition": "Ko nga mehua manatoko kia kaua e whakanekehia nga rawa karihi mo te whakamahi patu."
+        },
+        "counter_terrorism": {
+          "term": "Whakatau-whakatuma",
+          "definition": "Kua whakakotahihia e te ture, te aukati, me te haumaru ki nga mahi kaiwhakatuma."
+        },
+        "due_process": {
+          "term": "Tukatuka Tika",
+          "definition": "Nga tikanga ture tika e tiaki ana i nga tika i te wa o te whakawakanga, te whakawakanga, me te whakamana."
+        },
+        "resource_security": {
+          "term": "Haumarutanga Rauemi",
+          "definition": "Te uru pono ki te kai, te wai, me te kaha i raro i te taumahatanga ohaoha me te taiao."
+        },
+        "resilience": {
+          "term": "Te pakari",
+          "definition": "Te kaha o nga hapori me nga umanga ki te tango i nga ohorere me te whakaora tika."
+        }
+      },
+      "topicLine": "Kaupapa: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Whakatika whakaaro",
+    "googleDocsUrl": "URL Tuhinga Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Kuputuhi whakaaro poto (he kōwhiringa)",
+    "save": "Tiaki",
+    "cancel": "Whakakore",
+    "addIntro": "Tāpirihia he Google Doc ki te tuhi i tetahi whakaaro whakatau, patohia he tuhipoka poto (e rua ranei).",
+    "googleDocsCreateHelp": "Ka tuwhera a Google Doc hou ki tetahi atu ripa; whakapiri i te hono ki konei i muri i te hanganga.",
+    "resolutionIdeaPlaceholder": "Whakaaro Whakatau...",
+    "add": "Tāpiri",
+    "noIdeasYet": "Kaore ano he whakaaro.",
+    "ideaLabel": "Whakaaro",
+    "ideaFallback": "Whakaaro {number}",
+    "linkedDoc": "doc hono",
+    "addedOn": "Kua taapirihia {date}",
+    "edit": "Whakatikatika",
+    "delete": "Mukua",
+    "ideaDocument": "Tuhinga whakaaro",
+    "summary": "Whakarāpopototanga",
+    "emptyIdea": "Whakaaro putua."
+  },
+  "stances": {
+    "heatmapTitle": "Tirohanga Turanga Poto (Mahere wera)",
+    "heatmapHelp": "He aha te whānuitanga o to tohatoha i te tautoko ___? (1-5 tauine)",
+    "topicPlaceholder": "e.g. mahi āhuarangi",
+    "extentLabel": "Whānui (1-5):",
+    "extentHelpTitle": "Whānui (1-5)",
+    "extentHelpBody": "Ko te tikanga 1 he iti te tautoko o to tohatoha mo te kaupapa, ko te 5 te tikanga he tautoko kaha. Whiriwhiria he nama e rite ana ki to tuunga i roto i te komiti.",
+    "add": "Tāpiri",
+    "viewOnlyHeatmap": "Tiro-anake mapi wera mo nga kaimahi.",
+    "notesPerAllocation": "Notes mo ia Tohaina",
+    "noAllocationsYet": "Kaore ano kia tohatohahia",
+    "notesPlaceholder": "Tuhi tuhipoka mo tenei tohatoha...",
+    "noteLanguageWarning": "Whakatupato mo te kaipānui: kei roto pea i tenei tuhipoka te reo tika.",
+    "save": "Tiaki",
+    "saveHelpTitle": "Tiakina te tuhipoka tu",
+    "saveHelpBody": "Ka tiakina te tuhipoka tu mo tenei tohatoha. Ka taea te maataki e nga kaimahi me (kei runga i nga whakaritenga komiti) etahi atu kaiuru."
+  },
+  "speeches": {
+    "newSpeech": "Korero hou",
+    "speechTitlePlaceholder": "Te taitara korero",
+    "googleDocsUrl": "URL Tuhinga Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Whakatuwheratia a Google ki te ripa hou; whakapiri te URL tuhinga ki konei ina reri.",
+    "plainTextOptional": "He tuhinga tuhi noa (mehemea ka whakamahi koe i te Google Doc)",
+    "save": "Tiaki",
+    "cancel": "Whakakore",
+    "noSpeechesYet": "Kaore ano kia whai korero. Honoa he Google Doc, whakapiri kuputuhi ranei.",
+    "speechLabel": "Korero",
+    "untitled": "Karekau he taitara",
+    "edit": "Whakatikatika",
+    "speechDocument": "Tuhinga korero",
+    "draftText": "Kuputuhi tauira",
+    "noContentHint": "Honoa he Puka Google me te Whakatika, taapiri ranei i nga tuhinga totika ki te puka."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Komiti",
+    "clearSearchTitle": "Ūkuia te rapu me te whakaatu i nga roopu katoa",
+    "vacantLabel": "Wātea",
+    "searchVacantTitle": "Rapua nga nohoanga \"watea\" i roto i te ruma",
+    "searchHint": "Patohia he whenua, ingoa kaikawe, kura, kupu ingoa, \"watea\" ranei hei whakaatu i nga whakataetae i roto i te ruma. Patohia te Enter ki te peke ki te whakataetae tuatahi; Ka whakakorea e Esc. Patohia te Vacant ki te peke ki nga nohoanga noho kau.",
+    "findLabel": "Kimihia he tira, he mema ranei",
+    "searchPlaceholder": "Whenua, ingoa, kura...",
+    "matchesCount": "{matches} o {total} tūru ōrite",
+    "searchAria": "Rapua nga roopu",
+    "virtualRoomVacant": "Wātea",
+    "profileAria": "Tirohia te kōtaha: {country}",
+    "vacantSeatAria": "Nohoa watea",
+    "placardAria": "Maama {country}",
+    "gavelAria": "Kawhara",
+    "yourContext": "To horopaki",
+    "roleLabel": "Tūnga",
+    "seatLabel": "Noho",
+    "assignedLabel": "Kua tohua",
+    "daisLabel": "Dais",
+    "phaseLabel": "Wāhanga",
+    "phaseVoting": "Pooti",
+    "phaseDebate": "Taupatupatu",
+    "focusSearchTitle": "Rapu Arotahi (ka rite nga taitara me nga ingoa ki to patai)",
+    "tipLabel": "Aki",
+    "enterScrolls": "Whakauruhia nga panuku",
+    "typeToFilterHint": "Patohia ki te tātari - Whakauruhia nga panuku ki te whakataetae tuatahi",
+    "noMatches": "Karekau he roopu korero, he tuuru papa ranei.",
+    "digitalDisplay": "Whakaaturanga Mamati",
+    "floorLabel": "Papa",
+    "staffSeatsHeading": "Kaimahi - nohoanga",
+    "viewProfileAria": "Tirohia te kōtaha: {title}",
+    "noProfileLinkAria": "{title} (karekau he hononga kōtaha)",
+    "committeeFloor": "Papa komiti",
+    "virtualRoomFigureAria": "Rūma komiti mariko - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Te tātari i nga roopu. Ko te nohoanga tuatahi kua tohua ko te tukinga tuatahi i roto i te mowhiti.",
+    "helperText": "Ka whakarārangihia e ngā māra te whenua (mai i ngā tohatoha), te ingoa, te kura, me ngā kupu tūpono mai i te kōtaha o ia kaitono. Whakatikahia o koe i raro i te Profile. Ko nga tuuru komiti kau e whakaatu ana he Watea. Patohia he panui kua whakakiia, he nohoanga papa ranei hei whakatuwhera i te wharangi o taua mema (korerorero me te ripoata mai i reira).",
+    "virtualRoomCaption": "Tauira Mariko rūma komiti UN me nga tohu kaitakawaenga e whakaatu ana i te whenua, te ingoa, te kura, me nga kupu whakahua."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Tono ki te korero",
+      "delegateFallback": "Kaituku",
+      "needAllocation": "Me whai waahi koe ki te tono korero.",
+      "alreadyQueued": "Kei a koe he tono korero kaha i te rarangi.",
+      "requested": "I tono kia korero. Ka puta koe i te rarangi.",
+      "requestFailed": "I rahua te tono kia korero.",
+      "helpBody": "Ka tukuna to tira ki te rarangi tuuru. Ka taea e koe te tono tatari mo te wa kotahi.",
+      "purposeLabel": "Te kaupapa whiriwhiri (ka whakaatuhia ki te tapanga rarangi)",
+      "purposeHelpTitle": "Tapanga kaupapa",
+      "purposeHelpBody": "Kua apitihia tenei tuhinga ki to ingoa whenua kia mohio ai nga tuuru he aha koe i tono ai i te papa.",
+      "purposePlaceholder": "e.g. tautoko + tirohanga whakatikatika",
+      "requesting": "Kei te tono...",
+      "rollPromptTitle": "Me whakaae te heamana",
+      "rollPromptBodyPickStatus": "Kua timata te huihuinga. Kōwhiria tō tūnga karanga-waea ki te iriti i te korero me te pooti. Kaore e taea te whakarereke i tenei whiringa.",
+      "rollPromptBodyWaitSessionStart": "E tatari ana kia timata te heamana i te wahanga o te komiti.",
+      "rollPromptBodyWaitRollPrompt": "E tatari ana mo te tere-waea.",
+      "rollPromptBodyMarkedAbsent": "Kua tohua koe kei te ngaro. Tonoa te heamana ki te tohu i a koe Whakaatuhia ki te korero me te pooti.",
+      "rollPromptBodyChecking": "Kei te taki i to tuunga rarangi ingoa...",
+      "rollPromptSaving": "Tiaki ana...",
+      "rollPromptPresent": "Ko tenei wa",
+      "rollPromptPresentVoting": "Te whakaatu me te pooti"
+    },
+    "motionVoting": {
+      "votingProcedure": "Te tikanga pooti",
+      "currentMotion": "Motini o naianei",
+      "motioner": "Kai-nekeneke",
+      "majority": "Te nuinga",
+      "majoritySimple": "Maamaa",
+      "tally": "Āe {yes} - Kāo {no} - Tapeke {total}",
+      "help": "Ka tuhia e te raahi nga pooti a ia roopu i te huihuinga. Ko nga pooti motini e whakamahi ana i te Ae, Kao ranei anake (kaore e mawehe). Ko nga tapeke ka tatau anake i nga tohu i tuhia te Ae, Kao ranei; ka pekehia nga tira karekau."
+    },
+    "activeMotion": {
+      "currentMotion": "Motini o naianei",
+      "motionFallback": "Motini",
+      "motioner": "Kai-nekeneke",
+      "majority": "Te nuinga",
+      "majoritySimple": "Maamaa",
+      "type": "Momo",
+      "timer": "Matawā",
+      "currentSpeaker": "Kaikōrero o nāianei",
+      "nextSpeaker": "Kaikorero o muri",
+      "speakerTimeLeftCap": "Wā tukuoro (mauī / pōtae)",
+      "speakerTimeLeftTotal": "Wā tukuoro (mauī / tapeke)",
+      "perSpeaker": "(ia kaikōrero)",
+      "paused": "(kua okioki)",
+      "pauseReason": "Tatari: {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "Wā wātū",
+      "sessionNotStarted": "Karekau te wahanga i timata",
+      "limit": "Tepe",
+      "limitRemaining": "{value} ka mahue",
+      "limitOverBy": "i runga i te {value}",
+      "quickLinkSession": "Wātū",
+      "quickLinkRoll": "Hurihia",
+      "quickLinkSpeakers": "Kaikōrero",
+      "quickLinkMotions": "Motini",
+      "quickLinkTimer": "Matawā",
+      "dais": "Dais",
+      "pinned": "Kua titi",
+      "viewFullAnnouncement": "Tirohia te panui katoa",
+      "timerPausesReadOnly": "Tatari taima (panui-anake)",
+      "speakerList": "Rarangi korero",
+      "speakerFallback": "Kaikōrero",
+      "rollCallYou": "Huri waea (koe)",
+      "fullAnnouncement": "Panuitanga katoa",
+      "daisAnnouncement": "Dais panui",
+      "close": "Katia",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Ingoa wātū",
+      "sessionNamePlaceholder": "e.g. Huinga ata",
+      "sessionNameSaving": "Tiaki…",
+      "sessionNameSaved": "Whakaorangia",
+      "sessionNameHint": "Tiaki aunoa ka puta ki te hitori o te wahanga.",
+      "title": "Huihuinga komiti",
+      "subtitle": "Tīmatahia, whakamutua ranei te huihuinga komiti.",
+      "helpStartStop": "Ka tiimata te tiimata o te waahi huihuinga komiti ora mo te katoa. Kati ka mutu te wahanga ka whakawātea i te tepe wā onāianei.",
+      "migrationUnavailable": "Karekau i te watea nga mana hui mo te wa poto kia tukuna ra ano nga hekenga raraunga hou.",
+      "endTimeInFuture": "Kōwhiria he wa mutunga a muri ake nei, huri ranei ki te kore tepe.",
+      "sessionStartUnavailable": "Karekau i te watea te waitohu wa timata hui kia tukuna ra ano nga hekenga hou.",
+      "endTimeInFutureSetNoLimit": "Whiriwhiria he wa mutunga a muri ake nei, kaua ranei e tautuhia he rohe.",
+      "sessionLimitUpdated": "Kua whakahōungia te tepe wātū.",
+      "startedLabel": "I timata:",
+      "timeInLabel": "Wā i roto:",
+      "timeUntilEndLabel": "Te wa ki te mutunga:",
+      "overByValue": "i runga i te {value}",
+      "modeLabel": "Aratau:",
+      "modeStopwatchNoLimit": "Matakitaki (karekau he waahi)",
+      "sessionNotRunning": "Karekau te wahanga e haere ana.",
+      "sessionLimit": "Te rohe o te wahanga",
+      "sessionLimitModesTitle": "Ngā aratau tepe wātū",
+      "sessionLimitModesHelp": "Kore: kahore he mutunga. Te tahua wa: tatau mai i te timatanga. Mutu i: te wa karaka i to rohenga waahi.",
+      "sessionLimitOptional": "Kōwhiringa.",
+      "noneLabel": "Karekau",
+      "noneDescription": "ka oma kia mutu ra ano koe.",
+      "timeBudgetLabel": "Te tahua wa",
+      "timeBudgetDescription": "ka tatau mai i te wa i timata ai koe.",
+      "endTimeLabel": "Te wa mutunga",
+      "endTimeDescription": "ka whakamahi i te wa karaka kua whakaritea (ka takahia te tahua mena ka whakaritea nga mea e rua).",
+      "noneIndefinite": "Kore (kaore e tau)",
+      "noneScheduledEndHint": "Kaore he mutunga kua whakaritea; ko te wa kua hipa anake ka whakaatuhia.",
+      "timeBudgetFromStart": "Te tahua wa mai i te timatanga",
+      "hoursLabel": "Nga haora",
+      "minutesLabel": "Nga meneti",
+      "minimumOneMinute": "(miniti 1 meneti)",
+      "endAtLocalTime": "Mutu i te (waa rohe)",
+      "stopSession": "Kati te wahanga",
+      "saveLimit": "Tiaki tepe",
+      "saveLimitHelp": "Ka hoatu i nga tautuhinga tepe kua whakahouhia i te wa e haere ana te waahi, me te kore e mutu te waahi.",
+      "startSession": "Tīmata wātū",
+      "sidebarUsePrefix": "Whakamahia te paetaha mo",
+      "rollCall": "Huri waea",
+      "speakers": "Kaikōrero",
+      "formalMotions": "Motini okawa",
+      "timer": "Matawā",
+      "sidebarAnd": "a",
+      "announcements": "Panuitanga",
+      "sidebarUseSuffix": "— kotahi taputapu mo ia ripa.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Hītori wātū",
+      "savedCount": "{count} kua tiakina",
+      "permissionsHint": "Ka taea e nga heamana te whakaingoa i nga whakaurunga. Ka taea e SMT/Admin te whakaingoa me te whakakore i nga whakaurunga.",
+      "empty": "Kaore ano he hitori o te wahanga.",
+      "rename": "Whakaingoa ano",
+      "delete": "Mukua",
+      "deleteConfirm": "Mukua tenei wahanga mai i te hitori?",
+      "sessionNamePrompt": "Ingoa wātū",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Kei te haere tonu"
+    },
+    "timerPage": {
+      "title": "Matawā",
+      "controlsTitle": "Nga mana taima",
+      "controlsHelp": "Whakamahia te papa Whanui mo te wa tautohetohe katoa, pooti Motini ranei hei here i te tirohanga ki tetahi mea pooti tuwhera motuhake.",
+      "tabSetup": "1) Tatūnga",
+      "tabClock": "2) Mana karaka",
+      "tabNotes": "3) Nga korero korero",
+      "tabLog": "4) Tatari rangitaki",
+      "setupHelp": "Whiriwhiria mehemea mo te papa whanui tenei taima (kei te kitea tonu e nga kaikawe) he here ranei ki te motini e tuwhera ana mo te pooti (ka kite noa nga kaikawe i te mea ko taua pooti te mea kaha). Ka noho tonu te karaka i te wa o te kaikorero, ahakoa he aha. Tatari karaka / Tīmatahia te karaka whakatio, whakaara ano ranei i te tatau. Tautuhia te wa Kaioro (e toe ana) me te Wa Tapeke takitahi, katahi ka Tiaki matawā. Ka whakakiia nga tatūkē kia rite te roa; ka taea e koe te whakatika i tetahi mara i muri mai. Ka takiuru nga okioki me te take poto.",
+      "namedPreset": "Whakaingoatia tatūkē",
+      "applyPreset": "Hoatu tatūkē...",
+      "floorLabelDelegates": "Tapanga papa (nga kaitono)",
+      "floorLabelPlaceholder": "e.g. GSL 60s",
+      "timerPurpose": "Te kaupapa taima",
+      "purposeGeneralFloor": "Taupatupatu whanui / papa (kaore i herea ki te pooti)",
+      "purposeMotionVote": "Whakatuwheratia te motini - taima anake i te wa e kaha ana taua pooti i runga i te papa",
+      "openMotionForVoting": "Motini tuwhera (me tuwhera mo te pooti)",
+      "selectMotion": "Tīpako nekehanga...",
+      "untitled": "Karekau he taitara",
+      "noOpenMotionWarning": "Karekau he motini e tuwhera ana mo te pooti. Whakatuwherahia he pooti i te tuatahi, huri ranei te kaupapa ki te papa whanui.",
+      "clock": "Karaka",
+      "running": "Rere ana",
+      "paused": "Kua whakataa",
+      "saveToEnablePauseStart": "tiakina te taima kia taea te okioki/tīmata.",
+      "pauseReasonLogged": "Tatari take (kua takiuru)",
+      "pauseReasonPlaceholder": "e.g. Te waahi ota, take hangarau, kaunihera kore whakahaere...",
+      "pauseClock": "Tatari karaka",
+      "startClock": "Tīmata karaka",
+      "perSpeakerTitle": "Wā mo ia kaikōrero (whakaōrite rūnanga)",
+      "perSpeakerHelp": "Tautuhia te Wa Tapeke hei potae mo ia kaikorero me te wa Kaioro hei wa e toe ana; Ka neke whakamua ki te kaikorero e whai ake nei ka tautuhi ano ki te potae.",
+      "currentSpeaker": "Kaikōrero o nāianei",
+      "nextSpeaker": "Kaikorero o muri",
+      "speechNotesCurrentSpeaker": "Nga korero korero (kaikorero o naianei)",
+      "speechNotesHelp": "Ka herea nga tuhipoka ki te kupu matawā kaikōrero o nāianei, ā, i te rārangi kaikōrero i tohuhia e te tangata Onāianei, ka penapenahia to ratou tukunga hei tohutoro.",
+      "timerFloorLabel": "Matawā (papa):",
+      "speakerListCurrent": "Rārangi kaikōrero (nāianei):",
+      "noCurrentDelegation": "Karekau he tukunga e tohuhia ana inaianei i te rarangi kaikōrero.",
+      "note": "Tuhipoka",
+      "notePlaceholder": "Nga tohu, POI, reo, whaiwhai...",
+      "saveSpeechNote": "Tiakina te tuhi korero",
+      "recentNotes": "Ko o korero tata nei (tenei komiti)",
+      "delete": "Mukua",
+      "speakerTimeRemaining": "Te wa korero (e toe ana)",
+      "remainingHelpPerSpeaker": "Tatauhia mo te kaikorero o naianei (ka tautuhi ano ina anga whakamua koe).",
+      "remainingHelpNormal": "Tatauhia mo te kaikorero o naianei (ka iti ake i te katoa).",
+      "totalTime": "Te wa katoa",
+      "totalHelpPerSpeaker": "Potae mo ia-kaikorero (te ingoa i runga i te papa; Ko nga whakakī whakamua kei te toe ki tenei).",
+      "totalHelpNormal": "Te roa katoa o tenei wahanga matawā (ka whakaatuhia i muri i te rītaha i runga i te papa).",
+      "saveTimer": "Tiakina matawā",
+      "advanceSpeakerReset": "Whakanuia te korero me te tautuhi i te karaka",
+      "recentPauseLog": "Rangitaki okioki tata nei",
+      "noPauseEvents": "Karekau he takahanga whakataa i tuhia mo tenei komiti.",
+      "openPauseLogHint": "Whakatuwherahia te rangitaki Tatari ki te arotake i nga take okioki me nga tohu waahi kua tuhia.",
+      "saved": "Kua tiakina te taima.",
+      "savedCapped": "Kua tiakina te taima. He roa ake te wa kaikorero i te katoa; kati ki te katoa.",
+      "alreadyPaused": "Kua whakataa kētia te taima.",
+      "pausedForCommittee": "Ka okioki te taima mo te komiti.",
+      "alreadyRunning": "Kei te rere kē te taima.",
+      "runningForCommittee": "Ka rere te taima mo te komiti.",
+      "euTimerBoardTitle": "Papa matawā Paremata EU (11 nga taima)",
+      "euTimerBoardHelp": "Kotahi te taima mo ia roopu, me te wa Tapeke, te wa POI/POC, me te wa Kaikōrero. Whakamahia te Hoatu hei kape i tetahi rarangi ki roto i nga mara matawā ora i te ripa Karaka (wa kaikorero / Tiaki matawā).",
+      "euTimerName": "Ingoa",
+      "euTimerTag": "Tūtohu",
+      "euTotalTime": "Te wa katoa",
+      "euPoiPocTime": "POI / POC wa",
+      "euSpeakerTime": "Te wa korero"
+    }
   }
 }

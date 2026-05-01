@@ -17,7 +17,7 @@ interface Speech {
 }
 
 export function SpeechesView({ speeches }: { speeches: Speech[] }) {
-  const t = useTranslations("views.speeches");
+  const t = useTranslations("speeches");
   const tc = useTranslations("common");
   const router = useRouter();
   const [items, setItems] = useState(speeches);

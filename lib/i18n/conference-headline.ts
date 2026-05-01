@@ -13,7 +13,8 @@ type HeadlineTranslator = {
 export function translateConferenceHeadline(
   tTopics: HeadlineTranslator,
   tCommitteeLabels: HeadlineTranslator,
-  raw: string | null | undefined
+  raw: string | null | undefined,
+  locale?: string
 ): string {
   const trimmed = raw?.trim() ?? "";
   if (!trimmed) return "";
@@ -23,7 +24,7 @@ export function translateConferenceHeadline(
     .filter(Boolean);
   if (parts.length === 0) return "";
 
-  const topic = translateAgendaTopicLabel(tTopics, parts[0]);
+  const topic = translateAgendaTopicLabel(tTopics, parts[0], locale);
   if (parts.length === 1) return topic;
 
   const committee = translateCommitteeLabel(tCommitteeLabels, parts[1]);

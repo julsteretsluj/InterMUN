@@ -23,7 +23,7 @@ export function IdeasView({
   ideas: Idea[];
   conferenceId: string;
 }) {
-  const t = useTranslations("views.ideas");
+  const t = useTranslations("ideas");
   const tc = useTranslations("common");
   const router = useRouter();
   const [items, setItems] = useState(ideas);

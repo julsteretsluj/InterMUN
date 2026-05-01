@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "먼저 발언을 위한 모션 플로어를 엽니다.",
     "openMotionBlocksRecording": "이미 투표를 위한 동의가 진행 중입니다. 추가 진술을 기록하기 전에 닫으십시오.",
     "statedMotionRecorded": "명시된 발의안이 기록되었습니다(아직 투표가 진행되지 않음).",
-    "statedMotionRemoved": "명시된 모션이 삭제되었습니다."
+    "statedMotionRemoved": "명시된 모션이 삭제되었습니다.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• 포인트 로그",
     "formalMotions": "공식적인 동의",
     "timer": "시간제 노동자",
-    "smtProfile": "윤곽"
+    "smtProfile": "윤곽",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase가 구성되지 않았습니다.",
@@ -835,7 +852,8 @@
       "archive": "보관소",
       "officialLinks": "공식 링크",
       "roomCode": "객실 코드",
-      "settings": "설정"
+      "settings": "설정",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "UN 회원국",
       "unSystem": "UN 시스템(설립자 및 회원)",
       "history": "유엔 역사"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "소스 추가",
-      "sourceUrl": "소스 URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (권장)",
-      "urlHelp": "새 Google 문서의 경우 버튼을 사용하고 여기에 문서 링크를 붙여넣으세요.",
-      "titleOptional": "제목(선택사항)",
-      "saveChanges": "변경사항 저장",
-      "editSource": "소스 수정",
-      "urlPlaceholderShort": "Google 문서 또는 기타 URL",
-      "empty": "아직 소스가 없습니다. 여기에서 열려면 Google 문서 링크를 추가하세요.",
-      "sourceLabel": "원천",
-      "openLink": "링크 열기",
-      "embedHeading": "원본 문서",
-      "notGoogleDoc": "이 URL은 Google 문서가 아닙니다. 여기에 삽입하고 편집하려면 docs.google.com/document/d/… 링크를 사용하세요. 그렇지 않으면 위의 링크를여십시오."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "대리인은 의견서를 직접 업로드할 수 없습니다. 다른 문서 유형을 사용하십시오.",
-      "alertOnlyChairsPositionPaper": "의장/SMT/관리자만이 의견서를 업로드할 수 있습니다.",
-      "alertOnlySmtChairReport": "SMT/관리자만이 의장 보고서를 업로드할 수 있습니다.",
-      "alertOnlySmtRop": "SMT/관리자만 RoP 문서를 업로드할 수 있습니다.",
-      "alertOnlySmtAwardCriteria": "SMT/관리자만 수상 기준 문서를 업로드할 수 있습니다.",
-      "alertNeedContentOrUrl": "로컬 텍스트 콘텐츠 또는 Google Docs URL을 추가하세요.",
-      "confirmDelete": "이 문서를 삭제하시겠습니까?",
-      "delegatePrepTitle": "서류 준비 부분",
-      "delegatePrepBody": "이 페이지에서 직접 <prep>준비 문서</prep>를 업로드하고, 보고, 편집할 수 있습니다.",
-      "positionPaperGuideTitle": "위치 용지 가이드",
-      "positionPaperGuideBlurb": "최종 PDF가 준비되는 동안 자리 표시자 가이드를 다운로드하세요.",
-      "downloadPlaceholderGuide": "자리 표시자 가이드 다운로드",
-      "addDocument": "문서 추가",
-      "tabs": {
-        "ariaLabel": "문서 섹션",
-        "library": "도서관",
-        "compose": "구성하다",
-        "composeHint": "이 탭에서 새 문서를 시작하거나 기존 초안을 편집하세요."
-      },
-      "newDocumentTitle": "새 문서",
-      "editDocumentTitle": "문서 편집",
-      "typeLabel": "유형",
-      "types": {
-        "position_paper": "입장문",
-        "chair_report": "의장보고",
-        "rop": "RoP",
-        "award_criteria": "수상기준",
-        "chair_notes": "의장 노트",
-        "prep_doc": "서류 준비"
-      },
-      "delegatePositionPaperNote": "의견서는 의장이 피드백과 함께 업로드합니다.",
-      "delegateOwner": "소유자 위임",
-      "chairRecipient": "의장 수혜자",
-      "titleLabel": "제목",
-      "titlePlaceholder": "문서 제목",
-      "googleDocsUrl": "Google 문서도구 URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (앱에 보기/수정 삽입)",
-      "googleDocsHelp": "새 Google 문서를 사용하여 새 탭에서 Google을 연 다음 여기에 문서 링크를 붙여넣으세요. 아래의 일반 텍스트는 선택사항입니다. 모든 문서에는 로컬 텍스트, Google 문서 링크 또는 둘 다가 필요합니다.",
-      "plainTextOptional": "일반 텍스트(선택사항)",
-      "plainTextPlaceholder": "메모 또는 초안 텍스트…",
-      "chairFeedbackLabel": "의자 피드백",
-      "chairFeedbackPlaceholder": "대의원 입장 보고서에 대한 피드백...",
-      "empty": "아직 문서가 없습니다. 하나를 추가하거나 Google 문서를 연결하세요.",
-      "sidebarDocumentLabel": "문서",
-      "sections": {
-        "chairReports": "의장 보고서",
-        "rop": "RoP",
-        "awardCriteria": "수상기준",
-        "prepDocuments": "서류 준비",
-        "chairNotes": "의장 노트",
-        "otherDocuments": "기타 서류"
-      },
-      "untitled": "제목 없음",
-      "linkedDocumentHeading": "연결된 문서",
-      "notesHeading": "메모",
-      "noGoogleDocYet": "아직 연결된 Google 문서가 없습니다. 편집을 사용하여 docs.google.com/document/d/… URL을 추가하세요.",
-      "chairFeedbackHeading": "의자 피드백",
-      "noFeedbackYet": "아직 추가된 피드백이 없습니다."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "먼저 대리인 이메일을 입력하세요.",
-      "sentToDelegate": "{이메일}로 보냈습니다.",
-      "newResolution": "새로운 결의안",
-      "maxDraftResolutions": "이 위원회에는 이미 {count}개의 결의안 초안이 있습니다.",
-      "googleDocLink": "구글 문서 링크",
-      "googleDocUrlPlaceholder": "Google Docs URL(docs.google.com/document/d/… — 삽입 및 편집에 사용됨)",
-      "googleDocUrlHelp": "새 Google 문서가 다른 탭에서 열립니다. 주소 표시줄에서 URL을 복사하여 여기에 붙여넣으세요.",
-      "mainSubmittersPlaceholder": "주요 제출자(사용자 ID, 쉼표로 구분)",
-      "coSubmittersPlaceholder": "공동 제출자(사용자 ID, 쉼표로 구분)",
-      "create": "만들다",
-      "cancel": "취소",
-      "openInNewTab": "새 탭에서 열기",
-      "noGoogleDocLink": "Google 문서 링크가 없습니다.",
-      "visibleToOtherBloc": "다른 블록에 표시됨",
-      "resolutionCounts": "메인 서브: {main} | 공동 구독자: {co} | 서명자: {서명자}",
-      "blocButton": "블록 {이름} ({입장})",
-      "signVirtually": "가상으로 서명(주요 하위 사용자에게 알림)",
-      "shareByEmail": "이메일로 해결 방법 공유",
-      "delegateEmailPlaceholder": "대리자@email.com",
-      "sendToDelegate": "대리인에게 보내기",
-      "clauseEditor": "조항 편집자",
-      "noClausesYet": "아직 조항이 없습니다.",
-      "clauseNumber": "조항 {번호}",
-      "saveClause": "조항 저장",
-      "delete": "삭제",
-      "addClausePlaceholder": "새 조항 추가...",
-      "addClause": "조항 추가",
-      "clauseVoteHistory": "조항 투표 내역",
-      "noClauseOutcomesYet": "아직 기록된 조항 투표 결과가 없습니다.",
-      "clauseFallback": "절",
-      "passed": "합격",
-      "failed": "실패한",
-      "motionId": "모션 {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "투표 섹션",
-        "open": "열려 있는",
-        "closed": "닫은"
-      },
-      "requiredMajority": "필수 다수",
-      "helpRequiredMajorityTitle": "필수 다수",
-      "helpRequiredMajorityBody": "합격/불합격을 결정하는 데 사용되는 투표 기준을 선택하세요. '단순'이 절반 이상입니다. '2/3'에는 절대다수가 필요합니다.",
-      "majoritySimple": "단순한",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{라벨} 다수",
-      "mustVote": "반드시 투표해야 합니다",
-      "helpMustVoteTitle": "반드시 투표해야 합니다",
-      "helpMustVoteBody": "이 발의안을 \"필수 투표\" 항목으로 표시합니다. 이는 참가자에게 요구 사항을 전달하는 데 사용됩니다(위원회 설정에 따라 다름).",
-      "saveSettings": "설정 저장",
-      "delegateBlurb": "단은 세션 중 투표를 기록합니다(예: 점호). 여기서 동의 투표는 예/아니오만을 따릅니다(기권은 사용되지 않음). 집계를 따라갈 수 있습니다. 대리인은 앱에서 투표를 하지 않습니다.",
-      "yes": "예",
-      "no": "아니요",
-      "ballots": "투표용지",
-      "total": "총",
-      "outcome": "결과",
-      "passed": "합격",
-      "failed": "실패한",
-      "noRecordedVotes": "기록된 투표가 없습니다.",
-      "reopenMotion": "모션 재개",
-      "editRecordOpen": "기록 편집…",
-      "hideSettings": "설정 숨기기",
-      "preliminaryPassing": "합격(예비)",
-      "preliminaryFailing": "실패(예비)",
-      "delegateRollCall": "대표 출석 통화({count})",
-      "noSeatedDelegates": "이 발의에 참석할 수 있는 대표자가 없습니다.",
-      "rollPrefix": "연타:",
-      "recordedPrefix": "녹음됨:",
-      "recordedYes": "예",
-      "recordedNo": "아니요",
-      "recordedAbstain": "기권",
-      "recordedNone": "—",
-      "abstain": "기권",
-      "clear": "분명한",
-      "closeMotion": "모션 닫기",
-      "mustVoteBadge": "반드시 투표해야 합니다",
-      "canVoteBadge": "투표할 수 있음",
-      "noMotions": "아직 동작이 없습니다.",
-      "currentOpenMotion": "현재 오픈 모션",
-      "noOpenMotion": "지금은 공개 모션이 없습니다.",
-      "recentClosedMotions": "최근 마감 모션",
-      "noClosedMotions": "아직 비공개 모션이 없습니다.",
-      "untitled": "제목 없음",
-      "voteTypes": {
-        "motion": "운동",
-        "amendment": "개정",
-        "resolution": "해결"
-      },
-      "roll": {
-        "absent": "결석 (롤)",
-        "present_abstain": "있음 — 기권할 수 있음(롤)",
-        "present_voting": "현재 및 투표(롤)",
-        "unknown": "— (롤)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "프로필 섹션",
-        "overview": "개요",
-        "awards": "수상 내역",
-        "private": "개인 기록",
-        "settings": "프로필 설정"
-      },
-      "profilePicture": "프로필 사진",
-      "uploadFile": "파일 업로드",
-      "uploading": "업로드 중…",
-      "photoSaved": "사진이 업로드되고 저장되었습니다.",
-      "orUrl": "또는 URL로 설정",
-      "urlPlaceholder": "https://...",
-      "name": "이름",
-      "username": "사용자 이름",
-      "usernamePlaceholder": "예를 들어 알렉스_1999",
-      "pronouns": "대명사",
-      "customPronounNote": "귀하의 프로필에 더 이상 여기에서 허용되지 않는 맞춤 대명사 세트가 있습니다. 위에서 옵션을 선택하세요(또는 비워두세요). 저장하면 이전 값이 대체됩니다.",
-      "school": "학교",
-      "schoolPlaceholder": "예를 들어 링컨 고등학교",
-      "grade": "등급",
-      "selectGrade": "등급 선택",
-      "conferencesAttended": "참석한 컨퍼런스",
-      "awardsComma": "수상 내역(쉼표로 구분)",
-      "awardsPlaceholder": "최우수대표, 명예상",
-      "allocation": "배당",
-      "selectAllocation": "할당 선택",
-      "noAllocationsPlaceholder": "위원회 할당이 불가능합니다.",
-      "saveProfile": "프로필 저장",
-      "saved": "프로필이 저장되었습니다.",
-      "saveFailed": "프로필을 저장할 수 없습니다.",
-      "errUsernamePattern": "사용자 이름은 3~32자(문자, 숫자, _, ., -)여야 합니다.",
-      "errPronounsPreset": "목록에서 대명사를 선택하세요.",
-      "errImageType": "이미지 파일을 선택해주세요.",
-      "errImageSize": "이미지가 너무 큽니다(최대 5MB).",
-      "errUploadFailed": "업로드에 실패했습니다.",
-      "errStorageSetup": "프로필 사진 저장공간이 설정되지 않았습니다. Supabase 프로젝트에서 00100_profile_pictures_storage_bucket.sql 마이그레이션을 실행하거나 profile-pictures라는 공용 저장소 버킷을 생성합니다(README 참조).",
-      "errPublicUrl": "업로드된 이미지의 공개 URL을 확인할 수 없습니다.",
-      "fallbacks": {
-        "yourCountry": "당신의 나라",
-        "committeeSession": "위원회 세션",
-        "delegate": "대리자",
-        "speechNote": "연설문",
-        "untitledMotion": "제목 없는 모션",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "{국기} {국가}의 대표를 환영합니다",
-        "subtitle": "무엇부터 시작하시겠습니까?",
-        "links": {
-          "documents": "서류",
-          "notes": "메모",
-          "committeeRoom": "위원회실",
-          "runningNotes": "러닝 노트",
-          "ideas": "아이디어",
-          "guides": "가이드",
-          "sources": "출처",
-          "resolutions": "결의안",
-          "speeches": "연설",
-          "stances": "자세",
-          "crisisSlides": "위기 슬라이드",
-          "report": "보고서",
-          "motions": "변",
-          "points": "전철기"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "귀하의 프로필에 대한 상",
-        "rank": "순위 {순위}",
-        "pending": {
-          "tab": "후보 지명 대기 중",
-          "title": "의장 후보 지명 대기 중",
-          "descriptionSingle": "의자에 의해 저장되고 검토를 위해 SMT와 공유됩니다. 최종 보상은 확인 후 아래에 표시됩니다.",
-          "descriptionTabbed": "의자에 의해 저장되고 검토를 위해 SMT와 공유됩니다. 최종 보상은 확인 후 나타납니다."
-        },
-        "recorded": {
-          "tab": "기록된 수상",
-          "title": "기록된 수상",
-          "description": "의장이나 SMT가 수상 추적기에 귀하를 배정할 때 나열됩니다. 최종 인정은 귀하의 회의 규칙을 따릅니다."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "본인, 위원회 위원장, 해당 위원회의 SMT만 볼 수 있습니다.",
-        "points": {
-          "title": "의자 포인트(비공개)"
-        },
-        "speechNotes": {
-          "title": "의장 연설문 (비공개)"
-        },
-        "motions": {
-          "title": "당신이 움직인 모션",
-          "description": "위원회 검토 및 SMT 감독을 위해 프로필에 저장되었습니다."
-        }
-      },
-      "discipline": {
-        "title": "징계상태(비공개)",
-        "statusLine": "경고: {warnings} · 파업: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "투표 비활성화됨",
-        "speakingSuspended": "말하기 중단됨",
-        "removedFromCommittee": "위원회에서 제외됨",
-        "updated": "업데이트됨: {value}"
-      },
-      "preview": {
-        "ariaLabel": "프로필 미리보기",
-        "title": "시사",
-        "yourName": "당신의 이름",
-        "usernameNotSet": "사용자 이름이 설정되지 않았습니다.",
-        "gradeValue": "학년 {학년}",
-        "awards": "수상 내역"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "절차 규칙(RoP)",
-          "content": "# 절차 규칙 \n\n## 점과 동작 \n- **주문 시점**: 올바른 절차 \n- **정보 요점**: 발표자에게 질문 \n- **개인적 특전**: 개인적인 편안함 \n- **회의 동의**: 토론 연기 \n- **연회 동의**: 세션 종료 \n\n## 투표 \n- 절차에 관한 사항은 단순다수결 \n- 실질적인 사항은 2/3 다수 \n- 요청 시 출석 투표"
-        },
-        "examples": {
-          "title": "예",
-          "content": "# 예 \n\n## 해상도 형식 \n```` \n총회, \n... \n1. 회원국들에게 다음 사항을 요청합니다. \n2. 국제사회에 다음을 촉구한다. \n```` \n\n## 위치 용지 구조 \n1. 배경 \n2. 국가 정책 \n3. 제안된 솔루션"
-        },
-        "templates": {
-          "title": "템플릿",
-          "content": "# 템플릿 \n\n## 의장 보고서 템플릿 \n- 위원회 개요 \n- 주요 논의사항 \n- 결의안 통과 \n- 추천"
-        },
-        "chairReport": {
-          "title": "의장 보고서",
-          "content": "# 의장보고 \n\n위원회 절차 및 결과를 여기에 기록하세요."
-        }
-      },
-      "edit": "편집하다",
-      "guideDocument": "가이드 문서",
-      "additionalNotes": "추가 참고 사항",
-      "noContentYet": "아직 콘텐츠가 없습니다.",
-      "titlePlaceholder": "제목",
-      "googleDocsUrl": "Google 문서도구 URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "새 Google 문서가 다른 탭에서 열립니다. 대리인이 여기에 문서를 열 수 있도록 공유 가능한 링크를 붙여넣습니다(보기/수정은 Google 공유에 따라 다름).",
-      "markdownOptional": "마크다운 메모(Google Docs를 사용하는 경우 선택 사항)",
-      "save": "구하다",
-      "cancel": "취소",
-      "createNewGuide": "새 가이드 만들기",
-      "slugPlaceholder": "슬러그 (고유)",
-      "titleLowerPlaceholder": "제목",
-      "googleDocsUrlOptional": "Google 문서도구 URL(선택사항)",
-      "markdownContentOptional": "마크다운 콘텐츠(선택사항)",
-      "create": "만들다",
-      "glossary": {
-        "title": "MUN 의제 용어집",
-        "subtitle": "위원회 규정 및 현재 안건 주제와 일치하는 고유한 용어입니다.",
-        "committeeCode": "위원회 코드: {code}",
-        "topicTag": "주제: {주제}",
-        "sources": {
-          "core": "핵심",
-          "committee": "위원회",
-          "topic": "주제"
-        },
-        "terms": {
-          "delegation": {
-            "term": "대표단",
-            "definition": "위원회에서 한 주 또는 단체를 대표하는 국가 또는 관찰자 팀."
-          },
-          "placard": {
-            "term": "방",
-            "definition": "발언, 투표 및 신호 절차 동의를 요청하는 데 사용되는 국가 기호입니다."
-          },
-          "dais": {
-            "term": "단",
-            "definition": "토론을 진행하고 절차를 적용하며 발언 순서를 관리하는 의장팀."
-          },
-          "quorum": {
-            "term": "정족수",
-            "definition": "공식적인 업무와 투표를 수행하는 데 필요한 최소 대표단 수입니다."
-          },
-          "motion": {
-            "term": "운동",
-            "definition": "간부회 형식이나 발언 시간 등 토론의 흐름을 바꾸기 위한 공식 제안입니다."
-          },
-          "point_of_order": {
-            "term": "주문 지점",
-            "definition": "위원회 규칙에 따라 절차가 잘못 적용되는 경우의 개입."
-          },
-          "moderated_caucus": {
-            "term": "중재 간부회",
-            "definition": "정의된 하위 주제에 대해 짧은 시간 동안 연설하는 구조화된 토론 세그먼트입니다."
-          },
-          "unmoderated_caucus": {
-            "term": "중재되지 않은 간부회",
-            "definition": "대표자들이 자유롭게 아이디어 초안을 작성하고 병합하는 비공식 협상 기간입니다."
-          },
-          "draft_resolution": {
-            "term": "초안 해결",
-            "definition": "최종 투표 및 채택 전 제안된 위원회 조치의 작업 텍스트입니다."
-          },
-          "amendment": {
-            "term": "개정",
-            "definition": "초안 텍스트에 대해 우호적이거나 비우호적이라고 투표된 변경 사항이 제안되었습니다."
-          },
-          "operative_clause": {
-            "term": "수술 조항",
-            "definition": "위원회가 제안하는 바를 설명하는 행동 중심의 번호가 매겨진 조항."
-          },
-          "preambulatory_clause": {
-            "term": "예비 조항",
-            "definition": "배경 원칙, 관심사 및 이전 프레임워크를 인용하는 상황 설정 조항입니다."
-          },
-          "right_of_reply": {
-            "term": "답변 권리",
-            "definition": "대표단의 존엄성이나 지위에 영향을 미치는 직접적인 진술에 대응할 수 있는 기회."
-          },
-          "veto_power": {
-            "term": "거부권",
-            "definition": "UNSC 상임이사국은 실질적인 결의안 초안을 차단할 수 있는 권한을 갖고 있습니다."
-          },
-          "chapter_vii": {
-            "term": "제7장",
-            "definition": "평화 위협, 제재, 무력 사용 조치에 관한 UN 헌장 권한."
-          },
-          "sanctions_regime": {
-            "term": "제재 체제",
-            "definition": "직접적인 군사 행동 없이 행동에 영향을 미치기 위해 사용되는 조정된 제한입니다."
-          },
-          "arms_control": {
-            "term": "무기 통제",
-            "definition": "무기의 유형, 수량 또는 배치를 제한하는 계약 및 검증 시스템."
-          },
-          "non_proliferation": {
-            "term": "비확산",
-            "definition": "핵, 화학, 생물학 또는 첨단 무기 능력의 확산을 방지하기 위한 정책."
-          },
-          "confidence_building_measures": {
-            "term": "신뢰 구축 조치",
-            "definition": "오해와 갈등 위험을 줄이는 투명성 및 커뮤니케이션 도구입니다."
-          },
-          "universal_periodic_review": {
-            "term": "보편적 정기 검토",
-            "definition": "각 UN 회원국이 권리 추천을 보고하고 받는 동료 검토 프로세스입니다."
-          },
-          "special_rapporteur": {
-            "term": "특별보고관",
-            "definition": "주제별 또는 국가별 권리 문제를 모니터링하고 보고하기 위해 임명된 독립 전문가."
-          },
-          "treaty_body": {
-            "term": "조약기구",
-            "definition": "특정 인권 조약의 이행을 감독하는 전문가 위원회."
-          },
-          "public_health_emergency": {
-            "term": "공중보건 비상사태",
-            "definition": "긴급하게 조율된 국내 및 국제적 대응이 필요한 심각한 발병 사건."
-          },
-          "surveillance": {
-            "term": "역학감시",
-            "definition": "질병 추세를 감지하고 추적하기 위해 건강 데이터를 지속적으로 수집하고 분석합니다."
-          },
-          "health_systems": {
-            "term": "보건 시스템 강화",
-            "definition": "안정적인 의료 서비스 제공을 위해 인력, 자금 조달, 물류, 거버넌스를 개선합니다."
-          },
-          "transnational_crime": {
-            "term": "초국가적 조직범죄",
-            "definition": "네트워크와 불법 시장을 통해 국경을 넘어 조직된 범죄 활동."
-          },
-          "illicit_trafficking": {
-            "term": "불법 밀매",
-            "definition": "관할권 간 마약, 무기, 사람 또는 물품의 불법 이동."
-          },
-          "rule_of_law_capacity": {
-            "term": "법치적 역량",
-            "definition": "권리를 공정하게 조사, 기소 및 보호할 수 있는 사법 제도의 제도적 능력."
-          },
-          "sustainable_development": {
-            "term": "지속 가능한 개발",
-            "definition": "사회적 진보, 경제적 기회, 환경 보호의 균형을 이루는 성장 모델입니다."
-          },
-          "financing_for_development": {
-            "term": "개발을 위한 자금조달",
-            "definition": "장기적인 개발 우선순위를 지원하는 공공 및 민간 자금 조달 메커니즘."
-          },
-          "policy_coordination": {
-            "term": "정책 조정",
-            "definition": "중복을 피하고 집단적 영향력을 높이기 위해 주정부와 기관의 조치를 조정합니다."
-          },
-          "child_protection": {
-            "term": "아동 보호",
-            "definition": "모든 환경에서 아동에 대한 착취, 학대, 폭력을 방지하는 조치입니다."
-          },
-          "education_access": {
-            "term": "교육 이용",
-            "definition": "모든 어린이에게 포용적이고 공평하며 지속적인 학습 기회를 보장합니다."
-          },
-          "humanitarian_response": {
-            "term": "인도적 대응",
-            "definition": "위기 및 분쟁 상황에서 긴급한 요구 사항을 해결하는 신속한 구호 조치입니다."
-          },
-          "gender_mainstreaming": {
-            "term": "젠더 주류화",
-            "definition": "성별 분석을 정책 설계, 구현 및 평가에 통합합니다."
-          },
-          "gender_based_violence": {
-            "term": "젠더 기반 폭력",
-            "definition": "성 정체성, 역할 또는 불평등한 권력 관계를 기반으로 누군가에게 해를 끼치는 행위입니다."
-          },
-          "economic_empowerment": {
-            "term": "경제적 역량 강화",
-            "definition": "양질의 일자리, 금융, 소유권, 의사결정권에 대한 접근성을 확대합니다."
-          },
-          "source_attribution": {
-            "term": "소스 기여",
-            "definition": "주장을 확인하고 맥락화할 수 있도록 정보 출처를 명확하게 인용합니다."
-          },
-          "verified_reporting": {
-            "term": "검증된 보고",
-            "definition": "논쟁의 여지가 있는 사실을 게시하기 전에 확증을 요구하는 저널리즘 표준입니다."
-          },
-          "editorial_independence": {
-            "term": "편집 독립성",
-            "definition": "정치적 압력이나 이해관계자 영향으로부터 보고 결정을 분리합니다."
-          },
-          "climate_mitigation": {
-            "term": "기후 완화",
-            "definition": "온실가스 배출을 줄이거나 장기적인 탄소 제거를 늘리는 조치."
-          },
-          "climate_adaptation": {
-            "term": "기후 적응",
-            "definition": "기후 관련 영향에 대한 취약성을 줄이는 정책 및 투자."
-          },
-          "cyber_norms": {
-            "term": "사이버 규범",
-            "definition": "디지털 및 사이버 영역에서 책임 있는 국가 행동에 대한 기대를 공유했습니다."
-          },
-          "critical_infrastructure": {
-            "term": "중요 인프라",
-            "definition": "회복력이 필요한 전력, 물, 보건, 통신 등 필수 시스템입니다."
-          },
-          "epidemiology": {
-            "term": "역학",
-            "definition": "인구 집단의 질병 패턴, 원인 및 분포에 대한 연구."
-          },
-          "preparedness_response": {
-            "term": "대비와 대응",
-            "definition": "비상 사태를 억제하고 관리하기 위한 계획, 조정 및 급증 조치."
-          },
-          "non_refoulement": {
-            "term": "강제송환 금지",
-            "definition": "심각한 피해를 입은 장소로 사람들을 돌려보내는 것을 금지하는 원칙."
-          },
-          "durable_solutions": {
-            "term": "내구성 있는 솔루션",
-            "definition": "이재민을 위한 장기적 결과: 귀환, 지역 통합 또는 재정착."
-          },
-          "nuclear_safeguards": {
-            "term": "핵 안전장치",
-            "definition": "핵물질이 무기용으로 전용되지 않도록 보장하는 검증 조치."
-          },
-          "counter_terrorism": {
-            "term": "대테러",
-            "definition": "테러 활동에 대한 통합된 법적, 예방적, 보안 조치입니다."
-          },
-          "due_process": {
-            "term": "적법 절차",
-            "definition": "조사, 기소, 제재 과정에서 권리를 보호하는 공정한 법적 절차."
-          },
-          "resource_security": {
-            "term": "자원 보안",
-            "definition": "경제적, 환경적 스트레스 속에서도 식량, 물, 에너지에 안정적으로 접근할 수 있습니다."
-          },
-          "resilience": {
-            "term": "회복력",
-            "definition": "충격을 흡수하고 효과적으로 회복할 수 있는 지역사회와 기관의 역량."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "아이디어 수정",
-      "googleDocsUrl": "Google 문서도구 URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "짧은 아이디어 텍스트(선택사항)",
-      "save": "구하다",
-      "cancel": "취소",
-      "addIntro": "Google 문서를 추가하여 해결 아이디어 초안을 작성하거나 짧은 메모(또는 둘 다)를 입력하세요.",
-      "googleDocsCreateHelp": "새 Google 문서가 다른 탭에서 열립니다. 링크가 생성된 후 여기에 링크를 붙여넣으세요.",
-      "resolutionIdeaPlaceholder": "해상도 아이디어...",
-      "add": "추가하다",
-      "noIdeasYet": "아직 아이디어가 없습니다.",
-      "ideaLabel": "아이디어",
-      "ideaFallback": "아이디어 {번호}",
-      "linkedDoc": "연결된 문서",
-      "addedOn": "{날짜}에 추가됨",
-      "edit": "편집하다",
-      "delete": "삭제",
-      "ideaDocument": "아이디어 문서",
-      "summary": "요약",
-      "emptyIdea": "빈 생각."
-    },
-    "stances": {
-      "heatmapTitle": "간략한 자세 개요(히트맵)",
-      "heatmapHelp": "귀하의 할당은 ___을(를) 어느 정도 지원합니까? (1-5 스케일)",
-      "topicPlaceholder": "예를 들어 기후 행동",
-      "extentLabel": "범위(1-5):",
-      "extentHelpTitle": "범위(1-5)",
-      "extentHelpBody": "1은 해당 주제에 대한 할당이 거의 지원되지 않음을 의미하고, 5는 강력한 지원을 의미합니다. 위원회에서의 귀하의 입장과 일치하는 숫자를 선택하세요.",
-      "add": "추가하다",
-      "viewOnlyHeatmap": "직원용 보기 전용 히트맵입니다.",
-      "notesPerAllocation": "할당별 참고 사항",
-      "noAllocationsYet": "아직 할당이 없습니다.",
-      "notesPlaceholder": "이 할당에 대한 입장 노트...",
-      "noteLanguageWarning": "독자 경고: 이 메모에는 부적절한 언어가 포함되어 있을 수 있습니다.",
-      "save": "구하다",
-      "saveHelpTitle": "자세 메모 저장",
-      "saveHelpBody": "이 할당에 대한 입장 메모를 저장합니다. 직원과 (위원회 설정에 따라) 다른 참가자가 볼 수 있습니다."
-    },
-    "speeches": {
-      "newSpeech": "새로운 연설",
-      "speechTitlePlaceholder": "연설제목",
-      "googleDocsUrl": "Google 문서도구 URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "새 탭에서 Google을 엽니다. 준비가 되면 여기에 문서 URL을 붙여넣으세요.",
-      "plainTextOptional": "일반 텍스트 초안(Google Docs를 사용하는 경우 선택사항)",
-      "save": "구하다",
-      "cancel": "취소",
-      "noSpeechesYet": "아직 연설이 없습니다. Google Docs를 연결하거나 텍스트를 붙여넣으세요.",
-      "speechLabel": "연설",
-      "untitled": "제목 없음",
-      "edit": "편집하다",
-      "speechDocument": "연설문",
-      "draftText": "초안 텍스트",
-      "noContentHint": "Google 문서를 편집 기능과 연결하거나 양식에 일반 텍스트를 추가하세요."
-    },
-    "committeeRoom": {
-      "committeeLabel": "위원회",
-      "yourContext": "귀하의 상황",
-      "roleLabel": "역할",
-      "seatLabel": "좌석",
-      "clearSearchTitle": "검색을 지우고 모든 위임을 표시합니다.",
-      "vacantLabel": "빈",
-      "assignedLabel": "할당된",
-      "daisLabel": "단",
-      "phaseLabel": "단계",
-      "phaseVoting": "투표",
-      "phaseDebate": "토론",
-      "focusSearchTitle": "중점 검색(연단 제목 및 이름이 귀하의 검색어와 일치함)",
-      "tipLabel": "팁",
-      "searchVacantTitle": "객실 내 '빈' 좌석 검색",
-      "searchHint": "국가, 대표자 이름, 학교, 대명사 또는 \"공석\"을 입력하여 회의실에서 일치하는 항목을 강조 표시하세요. 첫 번째 일치 항목으로 이동하려면 Enter 키를 누르세요. Esc가 지워집니다. 빈 좌석으로 이동하려면 Vacant를 클릭하세요.",
-      "findLabel": "대표단 또는 단원 찾기",
-      "searchPlaceholder": "나라, 이름, 학교...",
-      "matchesCount": "총 {total} 석 중 {matches} 일치",
-      "enterScrolls": "스크롤 입력",
-      "typeToFilterHint": "필터링하려면 입력하세요 - 첫 번째 일치 항목으로 스크롤하려면 Enter를 누르세요.",
-      "noMatches": "일치하는 대표단이나 단상 좌석이 없습니다.",
-      "digitalDisplay": "디지털 디스플레이",
-      "floorLabel": "바닥",
-      "staffSeatsHeading": "직원 - 좌석",
-      "searchAria": "위임 검색",
-      "virtualRoomVacant": "빈",
-      "profileAria": "프로필 보기: {국가}",
-      "vacantSeatAria": "빈자리",
-      "placardAria": "플래카드 {국가}",
-      "gavelAria": "망치",
-      "viewProfileAria": "프로필 보기: {제목}",
-      "noProfileLinkAria": "{제목}(프로필 링크 없음)",
-      "committeeFloor": "위원회 층",
-      "virtualRoomFigureAria": "가상 위원회실 - {committeeName}({conferenceName})",
-      "filteringLiveRegion": "위임 필터링. 첫 번째로 강조 표시된 좌석은 링의 첫 번째 경기입니다.",
-      "helperText": "플래카드에는 국가(할당에 따라), 이름, 학교 및 각 대표 프로필의 대명사가 나열되어 있습니다. 프로필에서 편집하세요. 빈 위원회 좌석은 공석으로 표시됩니다. 채워진 플래카드나 단상 좌석을 클릭하면 해당 회원의 페이지가 열립니다(채팅 및 보고).",
-      "virtualRoomCaption": "국가, 이름, 학교 및 대명사가 표시된 대표 플래카드가 있는 가상 모델 UN 위원회실."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "발언 요청",
-        "delegateFallback": "대리자",
-        "needAllocation": "발언을 요청하려면 할당이 필요합니다.",
-        "alreadyQueued": "대기열에 이미 진행 중인 발언 요청이 있습니다.",
-        "requested": "발언을 요청했습니다. 대기열에 나타납니다.",
-        "requestFailed": "발언을 요청하지 못했습니다.",
-        "helpBody": "대표단을 의장 대기열로 보냅니다. 한 번에 하나의 활성 대기/현재 요청을 가질 수 있습니다.",
-        "purposeLabel": "선택적 목적(대기열 라벨에 표시)",
-        "purposeHelpTitle": "목적 라벨",
-        "purposeHelpBody": "이 텍스트는 귀하의 국가 이름에 추가되므로 의장은 귀하가 발언권을 요청하는 이유를 알 수 있습니다.",
-        "purposePlaceholder": "예를 들어 지원 + 개정 개요",
-        "requesting": "요청 중...",
-        "rollPromptTitle": "의장 승인 필요",
-        "rollPromptBodyPickStatus": "세션이 시작되었습니다. 말하기 및 투표를 잠금 해제하려면 출석 상태를 선택하세요. 이 선택은 변경할 수 없습니다.",
-        "rollPromptBodyWaitSessionStart": "위원장이 위원회 세션을 시작하기를 기다리고 있습니다.",
-        "rollPromptBodyWaitRollPrompt": "출석요청 프롬프트를 기다리고 있습니다.",
-        "rollPromptBodyMarkedAbsent": "현재 부재중으로 표시되어 있습니다. 의장에게 귀하가 발언하고 투표할 수 있음을 표시하도록 요청하십시오.",
-        "rollPromptBodyChecking": "롤 상태를 확인하는 중...",
-        "rollPromptSaving": "절약...",
-        "rollPromptPresent": "현재의",
-        "rollPromptPresentVoting": "출석 및 투표"
-      },
-      "motionVoting": {
-        "votingProcedure": "투표 절차",
-        "currentMotion": "현재 모션",
-        "motioner": "모션머",
-        "majority": "다수",
-        "majoritySimple": "단순한",
-        "tally": "예 {예} - 아니오 {아니요} - 합계 {total}",
-        "help": "연단은 세션 중 각 대표단의 투표를 기록합니다. 동의 투표에서는 예 또는 아니요(기권 없음)만 사용합니다. 총계에는 '예' 또는 '아니요'라고 표시된 플래카드만 포함됩니다. 부재한 위임은 건너뜁니다."
-      },
-      "activeMotion": {
-        "currentMotion": "현재 모션",
-        "motionFallback": "운동",
-        "motioner": "모션머",
-        "majority": "다수",
-        "majoritySimple": "단순한",
-        "type": "유형",
-        "timer": "시간제 노동자",
-        "currentSpeaker": "현재 발언자",
-        "nextSpeaker": "다음 연사",
-        "speakerTimeLeftCap": "스피커 시간(왼쪽/캡)",
-        "speakerTimeLeftTotal": "스피커 시간(왼쪽/전체)",
-        "perSpeaker": "(스피커당)",
-        "paused": "(일시중지됨)",
-        "pauseReason": "일시중지: {이유}"
-      },
-      "floorStatus": {
-        "sessionTime": "세션 시간",
-        "sessionNotStarted": "세션이 시작되지 않았습니다.",
-        "limit": "한계",
-        "limitRemaining": "{value} 남음",
-        "limitOverBy": "{value}만큼 초과",
-        "quickLinkSession": "세션",
-        "quickLinkRoll": "연타",
-        "quickLinkSpeakers": "스피커",
-        "quickLinkMotions": "변",
-        "quickLinkTimer": "시간제 노동자",
-        "dais": "단",
-        "pinned": "고정됨",
-        "viewFullAnnouncement": "전체 공지 보기",
-        "timerPausesReadOnly": "타이머 일시중지(읽기 전용)",
-        "speakerList": "연사 목록",
-        "speakerFallback": "스피커",
-        "rollCallYou": "점호(당신)",
-        "fullAnnouncement": "전체 발표",
-        "daisAnnouncement": "다이스 발표",
-        "close": "닫다"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "세션 이름",
-        "sessionNamePlaceholder": "예를 들어 오전 세션",
-        "sessionNameSaving": "절약…",
-        "sessionNameSaved": "저장됨",
-        "sessionNameHint": "자동으로 저장되고 세션 기록에 나타납니다.",
-        "title": "위원회 세션",
-        "subtitle": "위원회 세션을 시작하거나 중지합니다.",
-        "helpStartStop": "시작은 모든 사람의 실시간 위원회 세션 타이머/상태를 시작합니다. 중지는 세션을 종료하고 현재 시간 제한을 지웁니다.",
-        "migrationUnavailable": "최신 데이터베이스 마이그레이션이 적용될 때까지 세션 제어를 일시적으로 사용할 수 없습니다.",
-        "endTimeInFuture": "종료 시간을 미래로 선택하거나 제한 없음으로 전환하세요.",
-        "sessionStartUnavailable": "최신 마이그레이션이 적용될 때까지 세션 시작 타임스탬프를 사용할 수 없습니다.",
-        "endTimeInFutureSetNoLimit": "종료 시간을 미래로 선택하거나 제한을 설정하지 마세요.",
-        "sessionLimitUpdated": "세션 제한이 업데이트되었습니다.",
-        "startedLabel": "시작됨:",
-        "timeInLabel": "소요 시간:",
-        "timeUntilEndLabel": "종료까지 남은 시간:",
-        "overByValue": "{value}만큼 초과",
-        "modeLabel": "방법:",
-        "modeStopwatchNoLimit": "스톱워치(시간 제한 없음)",
-        "sessionNotRunning": "세션이 실행되고 있지 않습니다.",
-        "sessionLimit": "세션 제한",
-        "sessionLimitModesTitle": "세션 제한 모드",
-        "sessionLimitModesHelp": "없음: 끝이 없습니다. 시간 예산: 처음부터 계산됩니다. 종료 시간: 현지 시간대의 고정 시계 시간입니다.",
-        "sessionLimitOptional": "선택 과목.",
-        "noneLabel": "없음",
-        "noneDescription": "멈출 때까지 달린다.",
-        "timeBudgetLabel": "시간 예산",
-        "timeBudgetDescription": "시작한 순간부터 계산됩니다.",
-        "endTimeLabel": "종료 시간",
-        "endTimeDescription": "고정 시계 시간을 사용합니다(둘 다 설정된 경우 예산을 재정의함).",
-        "noneIndefinite": "없음(무기한)",
-        "noneScheduledEndHint": "예정된 종료가 없습니다. 경과 시간만 표시됩니다.",
-        "timeBudgetFromStart": "시작부터 시간 예산",
-        "hoursLabel": "시간",
-        "minutesLabel": "분",
-        "minimumOneMinute": "(최소 1분)",
-        "endAtLocalTime": "종료 시간(현지 시간)",
-        "stopSession": "세션 중지",
-        "saveLimit": "저장 한도",
-        "saveLimitHelp": "세션을 중지하지 않고 세션이 이미 실행 중인 동안 업데이트된 제한 설정을 적용합니다.",
-        "startSession": "세션 시작",
-        "sidebarUsePrefix": "사이드바를 사용하세요",
-        "rollCall": "점호",
-        "speakers": "스피커",
-        "formalMotions": "공식적인 동의",
-        "timer": "시간제 노동자",
-        "sidebarAnd": "그리고",
-        "announcements": "공지사항",
-        "sidebarUseSuffix": "— 탭당 하나의 도구."
-      },
-      "history": {
-        "title": "세션 기록",
-        "savedCount": "{count} 저장됨",
-        "permissionsHint": "의장은 항목의 이름을 바꿀 수 있습니다. SMT/Admin은 항목의 이름을 바꾸고 삭제할 수 있습니다.",
-        "empty": "아직 세션 기록이 없습니다.",
-        "rename": "이름 바꾸기",
-        "delete": "삭제",
-        "deleteConfirm": "기록에서 이 세션을 삭제하시겠습니까?",
-        "sessionNamePrompt": "세션 이름",
-        "rangeClosed": "{범위}",
-        "rangeOngoing": "{범위} -> 진행 중"
-      },
-      "timerPage": {
-        "title": "시간제 노동자",
-        "controlsTitle": "타이머 제어",
-        "controlsHelp": "전체 토론 시간에 대해서는 일반 플로어를 사용하고 특정 공개 투표 항목에 가시성을 연결하려면 동의 투표를 사용하세요.",
-        "tabSetup": "1) 설정",
-        "tabClock": "2) 시계 제어",
-        "tabNotes": "3) 연설노트",
-        "tabLog": "4) 일시 정지 로그",
-        "setupHelp": "이 타이머가 일반 발언권에 대한 것인지(항상 대표자에게 표시됨) 또는 투표를 위한 동의 개시와 연결되어 있는지 선택합니다(대표자는 해당 투표가 활성 항목인 동안에만 이를 볼 수 있음). 발언자별 시간이 켜져 있으면 중재 간부회 중에도 시계가 계속 표시됩니다. 시계 일시 정지/시계 시작 정지 또는 카운트다운을 재개합니다. 스피커 시간(남은 시간)과 총 시간을 독립적으로 설정한 다음 타이머를 저장하세요. 사전 설정은 둘 다 동일한 길이로 채워집니다. 나중에 두 필드 중 하나를 편집할 수 있습니다. 일시 중지는 짧은 이유와 함께 기록됩니다.",
-        "namedPreset": "명명된 사전 설정",
-        "applyPreset": "사전 설정 적용...",
-        "floorLabelDelegates": "플로어 라벨(대표자)",
-        "floorLabelPlaceholder": "예를 들어 GSL 60년대",
-        "timerPurpose": "타이머 목적",
-        "purposeGeneralFloor": "일반토론/의장(투표에 연결되지 않음)",
-        "purposeMotionVote": "오픈 모션 - 투표가 진행 중인 동안에만 타이머가 작동됩니다.",
-        "openMotionForVoting": "공개 동의(투표를 위해 공개되어야 함)",
-        "selectMotion": "모션 선택...",
-        "untitled": "제목 없음",
-        "noOpenMotionWarning": "투표할 동의가 없습니다. 먼저 투표를 시작하거나 일반 투표로 목적을 전환하세요.",
-        "clock": "시계",
-        "running": "달리기",
-        "paused": "일시중지됨",
-        "saveToEnablePauseStart": "일시 중지/시작을 활성화하려면 타이머를 저장하세요.",
-        "pauseReasonLogged": "일시중지 이유(기록됨)",
-        "pauseReasonPlaceholder": "예를 들어 주문 시점, 기술 문제, 조정되지 않은 간부 회의...",
-        "pauseClock": "시계 일시중지",
-        "startClock": "시계 시작",
-        "perSpeakerTitle": "발언자별 시간(조정 간부회)",
-        "perSpeakerHelp": "총 시간을 스피커별 한도로 설정하고 스피커 시간을 남은 시간으로 설정합니다. Advance는 다음 스피커로 이동하고 나머지는 캡으로 재설정됩니다.",
-        "currentSpeaker": "현재 발언자",
-        "nextSpeaker": "다음 연사",
-        "speechNotesCurrentSpeaker": "연설 메모(현재 발언자)",
-        "speechNotesHelp": "메모는 현재 발언자 타이머 텍스트와 연결되어 있으며, 발언자 목록에 현재로 표시된 사람이 있으면 해당 위임이 참조용으로 저장됩니다.",
-        "timerFloorLabel": "타이머(층):",
-        "speakerListCurrent": "발언자 목록(현재):",
-        "noCurrentDelegation": "발언자 목록에 현재로 표시된 위임이 없습니다.",
-        "note": "메모",
-        "notePlaceholder": "포인트, POI, 어조, 후속 조치...",
-        "saveSpeechNote": "음성 메모 저장",
-        "recentNotes": "최근 메모(본 위원회)",
-        "delete": "삭제",
-        "speakerTimeRemaining": "스피커 시간(남은 시간)",
-        "remainingHelpPerSpeaker": "현재 발언자의 카운트다운(진행 시 재설정됨)",
-        "remainingHelpNormal": "현재 발언자의 카운트다운입니다(전체보다 작을 수 있음).",
-        "totalTime": "총 시간",
-        "totalHelpPerSpeaker": "발언자당 한도(분모는 바닥에 있음, 이에 남은 사전 리필).",
-        "totalHelpNormal": "이 타이머 세그먼트의 전체 길이(바닥의 슬래시 뒤에 표시됨)",
-        "saveTimer": "타이머 저장",
-        "advanceSpeakerReset": "고급 스피커 및 시계 재설정",
-        "recentPauseLog": "최근 일시중지 로그",
-        "noPauseEvents": "이 위원회에 대해 아직 기록된 일시 중지 이벤트가 없습니다.",
-        "openPauseLogHint": "일시중지 로그를 열어 기록된 일시중지 이유와 타임스탬프를 검토하세요.",
-        "saved": "타이머가 저장되었습니다.",
-        "savedCapped": "타이머가 저장되었습니다. 발언 시간이 총 시간보다 길었습니다. 총계로 제한됩니다.",
-        "alreadyPaused": "타이머가 이미 일시중지되었습니다.",
-        "pausedForCommittee": "위원회의 타이머가 일시 중지되었습니다.",
-        "alreadyRunning": "타이머가 이미 실행 중입니다.",
-        "runningForCommittee": "위원회 타이머가 실행 중입니다.",
-        "euTimerBoardTitle": "EU 의회 타이머 보드(11개 타이머)",
-        "euTimerBoardHelp": "파티당 하나의 타이머와 총 시간, POI/POC 시간 및 발표자 시간. 적용을 사용하여 시계 탭(스피커 시간/타이머 저장)의 실시간 타이머 필드에 행을 복사합니다.",
-        "euTimerName": "이름",
-        "euTimerTag": "꼬리표",
-        "euTotalTime": "총 시간",
-        "euPoiPocTime": "POI/POC 시간",
-        "euSpeakerTime": "스피커 시간"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "위원회실(가득 차 있음)",
         "hint": "가상 레이아웃 및 참석자 층"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "자동 저장 실패",
     "autosavedWithCountry": "자동 저장 — {국가}",
     "delegateFallback": "대리자"
+  },
+  "sources": {
+    "addSource": "소스 추가",
+    "sourceUrl": "소스 URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (권장)",
+    "urlHelp": "새 Google 문서의 경우 버튼을 사용하고 여기에 문서 링크를 붙여넣으세요.",
+    "titleOptional": "제목(선택사항)",
+    "saveChanges": "변경사항 저장",
+    "editSource": "소스 수정",
+    "urlPlaceholderShort": "Google 문서 또는 기타 URL",
+    "empty": "아직 소스가 없습니다. 여기에서 열려면 Google 문서 링크를 추가하세요.",
+    "sourceLabel": "원천",
+    "openLink": "링크 열기",
+    "embedHeading": "원본 문서",
+    "notGoogleDoc": "이 URL은 Google 문서가 아닙니다. 여기에 삽입하고 편집하려면 docs.google.com/document/d/… 링크를 사용하세요. 그렇지 않으면 위의 링크를여십시오."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "대리인은 의견서를 직접 업로드할 수 없습니다. 다른 문서 유형을 사용하십시오.",
+    "alertOnlyChairsPositionPaper": "의장/SMT/관리자만이 의견서를 업로드할 수 있습니다.",
+    "alertOnlySmtChairReport": "SMT/관리자만이 의장 보고서를 업로드할 수 있습니다.",
+    "alertOnlySmtRop": "SMT/관리자만 RoP 문서를 업로드할 수 있습니다.",
+    "alertOnlySmtAwardCriteria": "SMT/관리자만 수상 기준 문서를 업로드할 수 있습니다.",
+    "alertNeedContentOrUrl": "로컬 텍스트 콘텐츠 또는 Google Docs URL을 추가하세요.",
+    "confirmDelete": "이 문서를 삭제하시겠습니까?",
+    "delegatePrepTitle": "서류 준비 부분",
+    "delegatePrepBody": "이 페이지에서 직접 <prep>준비 문서</prep>를 업로드하고, 보고, 편집할 수 있습니다.",
+    "positionPaperGuideTitle": "위치 용지 가이드",
+    "positionPaperGuideBlurb": "최종 PDF가 준비되는 동안 자리 표시자 가이드를 다운로드하세요.",
+    "downloadPlaceholderGuide": "자리 표시자 가이드 다운로드",
+    "addDocument": "문서 추가",
+    "tabs": {
+      "ariaLabel": "문서 섹션",
+      "library": "도서관",
+      "compose": "구성하다",
+      "composeHint": "이 탭에서 새 문서를 시작하거나 기존 초안을 편집하세요."
+    },
+    "newDocumentTitle": "새 문서",
+    "editDocumentTitle": "문서 편집",
+    "typeLabel": "유형",
+    "types": {
+      "position_paper": "입장문",
+      "chair_report": "의장보고",
+      "rop": "RoP",
+      "award_criteria": "수상기준",
+      "chair_notes": "의장 노트",
+      "prep_doc": "서류 준비"
+    },
+    "delegatePositionPaperNote": "의견서는 의장이 피드백과 함께 업로드합니다.",
+    "delegateOwner": "소유자 위임",
+    "chairRecipient": "의장 수혜자",
+    "titleLabel": "제목",
+    "titlePlaceholder": "문서 제목",
+    "googleDocsUrl": "Google 문서도구 URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (앱에 보기/수정 삽입)",
+    "googleDocsHelp": "새 Google 문서를 사용하여 새 탭에서 Google을 연 다음 여기에 문서 링크를 붙여넣으세요. 아래의 일반 텍스트는 선택사항입니다. 모든 문서에는 로컬 텍스트, Google 문서 링크 또는 둘 다가 필요합니다.",
+    "plainTextOptional": "일반 텍스트(선택사항)",
+    "plainTextPlaceholder": "메모 또는 초안 텍스트…",
+    "chairFeedbackLabel": "의자 피드백",
+    "chairFeedbackPlaceholder": "대의원 입장 보고서에 대한 피드백...",
+    "empty": "아직 문서가 없습니다. 하나를 추가하거나 Google 문서를 연결하세요.",
+    "sidebarDocumentLabel": "문서",
+    "sections": {
+      "chairReports": "의장 보고서",
+      "rop": "RoP",
+      "awardCriteria": "수상기준",
+      "prepDocuments": "서류 준비",
+      "chairNotes": "의장 노트",
+      "otherDocuments": "기타 서류"
+    },
+    "untitled": "제목 없음",
+    "linkedDocumentHeading": "연결된 문서",
+    "notesHeading": "메모",
+    "noGoogleDocYet": "아직 연결된 Google 문서가 없습니다. 편집을 사용하여 docs.google.com/document/d/… URL을 추가하세요.",
+    "chairFeedbackHeading": "의자 피드백",
+    "noFeedbackYet": "아직 추가된 피드백이 없습니다."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "먼저 대리인 이메일을 입력하세요.",
+    "sentToDelegate": "{이메일}로 보냈습니다.",
+    "newResolution": "새로운 결의안",
+    "maxDraftResolutions": "이 위원회에는 이미 {count}개의 결의안 초안이 있습니다.",
+    "googleDocLink": "구글 문서 링크",
+    "googleDocUrlPlaceholder": "Google Docs URL(docs.google.com/document/d/… — 삽입 및 편집에 사용됨)",
+    "googleDocUrlHelp": "새 Google 문서가 다른 탭에서 열립니다. 주소 표시줄에서 URL을 복사하여 여기에 붙여넣으세요.",
+    "mainSubmittersPlaceholder": "주요 제출자(사용자 ID, 쉼표로 구분)",
+    "coSubmittersPlaceholder": "공동 제출자(사용자 ID, 쉼표로 구분)",
+    "create": "만들다",
+    "cancel": "취소",
+    "openInNewTab": "새 탭에서 열기",
+    "noGoogleDocLink": "Google 문서 링크가 없습니다.",
+    "visibleToOtherBloc": "다른 블록에 표시됨",
+    "resolutionCounts": "메인 서브: {main} | 공동 구독자: {co} | 서명자: {서명자}",
+    "blocButton": "블록 {이름} ({입장})",
+    "signVirtually": "가상으로 서명(주요 하위 사용자에게 알림)",
+    "shareByEmail": "이메일로 해결 방법 공유",
+    "delegateEmailPlaceholder": "대리자@email.com",
+    "sendToDelegate": "대리인에게 보내기",
+    "clauseEditor": "조항 편집자",
+    "noClausesYet": "아직 조항이 없습니다.",
+    "clauseNumber": "조항 {번호}",
+    "saveClause": "조항 저장",
+    "delete": "삭제",
+    "addClausePlaceholder": "새 조항 추가...",
+    "addClause": "조항 추가",
+    "clauseVoteHistory": "조항 투표 내역",
+    "noClauseOutcomesYet": "아직 기록된 조항 투표 결과가 없습니다.",
+    "clauseFallback": "절",
+    "passed": "합격",
+    "failed": "실패한",
+    "motionId": "모션 {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "투표 섹션",
+      "open": "열려 있는",
+      "closed": "닫은"
+    },
+    "requiredMajority": "필수 다수",
+    "helpRequiredMajorityTitle": "필수 다수",
+    "helpRequiredMajorityBody": "합격/불합격을 결정하는 데 사용되는 투표 기준을 선택하세요. '단순'이 절반 이상입니다. '2/3'에는 절대다수가 필요합니다.",
+    "majoritySimple": "단순한",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{라벨} 다수",
+    "mustVote": "반드시 투표해야 합니다",
+    "helpMustVoteTitle": "반드시 투표해야 합니다",
+    "helpMustVoteBody": "이 발의안을 \"필수 투표\" 항목으로 표시합니다. 이는 참가자에게 요구 사항을 전달하는 데 사용됩니다(위원회 설정에 따라 다름).",
+    "saveSettings": "설정 저장",
+    "delegateBlurb": "단은 세션 중 투표를 기록합니다(예: 점호). 여기서 동의 투표는 예/아니오만을 따릅니다(기권은 사용되지 않음). 집계를 따라갈 수 있습니다. 대리인은 앱에서 투표를 하지 않습니다.",
+    "yes": "예",
+    "no": "아니요",
+    "ballots": "투표용지",
+    "total": "총",
+    "outcome": "결과",
+    "passed": "합격",
+    "failed": "실패한",
+    "noRecordedVotes": "기록된 투표가 없습니다.",
+    "reopenMotion": "모션 재개",
+    "editRecordOpen": "기록 편집…",
+    "hideSettings": "설정 숨기기",
+    "preliminaryPassing": "합격(예비)",
+    "preliminaryFailing": "실패(예비)",
+    "delegateRollCall": "대표 출석 통화({count})",
+    "noSeatedDelegates": "이 발의에 참석할 수 있는 대표자가 없습니다.",
+    "rollPrefix": "연타:",
+    "recordedPrefix": "녹음됨:",
+    "recordedYes": "예",
+    "recordedNo": "아니요",
+    "recordedAbstain": "기권",
+    "recordedNone": "—",
+    "abstain": "기권",
+    "clear": "분명한",
+    "closeMotion": "모션 닫기",
+    "mustVoteBadge": "반드시 투표해야 합니다",
+    "canVoteBadge": "투표할 수 있음",
+    "noMotions": "아직 동작이 없습니다.",
+    "currentOpenMotion": "현재 오픈 모션",
+    "noOpenMotion": "지금은 공개 모션이 없습니다.",
+    "recentClosedMotions": "최근 마감 모션",
+    "noClosedMotions": "아직 비공개 모션이 없습니다.",
+    "untitled": "제목 없음",
+    "voteTypes": {
+      "motion": "운동",
+      "amendment": "개정",
+      "resolution": "해결",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "결석 (롤)",
+      "present_abstain": "있음 — 기권할 수 있음(롤)",
+      "present_voting": "현재 및 투표(롤)",
+      "unknown": "— (롤)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "프로필 섹션",
+      "overview": "개요",
+      "awards": "수상 내역",
+      "private": "개인 기록",
+      "settings": "프로필 설정"
+    },
+    "profilePicture": "프로필 사진",
+    "uploadFile": "파일 업로드",
+    "uploading": "업로드 중…",
+    "photoSaved": "사진이 업로드되고 저장되었습니다.",
+    "orUrl": "또는 URL로 설정",
+    "urlPlaceholder": "https://...",
+    "name": "이름",
+    "username": "사용자 이름",
+    "usernamePlaceholder": "예를 들어 알렉스_1999",
+    "pronouns": "대명사",
+    "customPronounNote": "귀하의 프로필에 더 이상 여기에서 허용되지 않는 맞춤 대명사 세트가 있습니다. 위에서 옵션을 선택하세요(또는 비워두세요). 저장하면 이전 값이 대체됩니다.",
+    "school": "학교",
+    "schoolPlaceholder": "예를 들어 링컨 고등학교",
+    "grade": "등급",
+    "selectGrade": "등급 선택",
+    "conferencesAttended": "참석한 컨퍼런스",
+    "awardsComma": "수상 내역(쉼표로 구분)",
+    "awardsPlaceholder": "최우수대표, 명예상",
+    "allocation": "배당",
+    "selectAllocation": "할당 선택",
+    "noAllocationsPlaceholder": "위원회 할당이 불가능합니다.",
+    "saveProfile": "프로필 저장",
+    "saved": "프로필이 저장되었습니다.",
+    "saveFailed": "프로필을 저장할 수 없습니다.",
+    "errUsernamePattern": "사용자 이름은 3~32자(문자, 숫자, _, ., -)여야 합니다.",
+    "errPronounsPreset": "목록에서 대명사를 선택하세요.",
+    "errImageType": "이미지 파일을 선택해주세요.",
+    "errImageSize": "이미지가 너무 큽니다(최대 5MB).",
+    "errUploadFailed": "업로드에 실패했습니다.",
+    "errStorageSetup": "프로필 사진 저장공간이 설정되지 않았습니다. Supabase 프로젝트에서 00100_profile_pictures_storage_bucket.sql 마이그레이션을 실행하거나 profile-pictures라는 공용 저장소 버킷을 생성합니다(README 참조).",
+    "errPublicUrl": "업로드된 이미지의 공개 URL을 확인할 수 없습니다.",
+    "fallbacks": {
+      "yourCountry": "당신의 나라",
+      "committeeSession": "위원회 세션",
+      "delegate": "대리자",
+      "speechNote": "연설문",
+      "untitledMotion": "제목 없는 모션",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "{국기} {국가}의 대표를 환영합니다",
+      "subtitle": "무엇부터 시작하시겠습니까?",
+      "links": {
+        "documents": "서류",
+        "notes": "메모",
+        "committeeRoom": "위원회실",
+        "runningNotes": "러닝 노트",
+        "ideas": "아이디어",
+        "guides": "가이드",
+        "sources": "출처",
+        "resolutions": "결의안",
+        "speeches": "연설",
+        "stances": "자세",
+        "crisisSlides": "위기 슬라이드",
+        "report": "보고서",
+        "motions": "변",
+        "points": "전철기"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "귀하의 프로필에 대한 상",
+      "rank": "순위 {순위}",
+      "pending": {
+        "tab": "후보 지명 대기 중",
+        "title": "의장 후보 지명 대기 중",
+        "descriptionSingle": "의자에 의해 저장되고 검토를 위해 SMT와 공유됩니다. 최종 보상은 확인 후 아래에 표시됩니다.",
+        "descriptionTabbed": "의자에 의해 저장되고 검토를 위해 SMT와 공유됩니다. 최종 보상은 확인 후 나타납니다."
+      },
+      "recorded": {
+        "tab": "기록된 수상",
+        "title": "기록된 수상",
+        "description": "의장이나 SMT가 수상 추적기에 귀하를 배정할 때 나열됩니다. 최종 인정은 귀하의 회의 규칙을 따릅니다."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "본인, 위원회 위원장, 해당 위원회의 SMT만 볼 수 있습니다.",
+      "points": {
+        "title": "의자 포인트(비공개)"
+      },
+      "speechNotes": {
+        "title": "의장 연설문 (비공개)"
+      },
+      "motions": {
+        "title": "당신이 움직인 모션",
+        "description": "위원회 검토 및 SMT 감독을 위해 프로필에 저장되었습니다."
+      }
+    },
+    "discipline": {
+      "title": "징계상태(비공개)",
+      "statusLine": "경고: {warnings} · 파업: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "투표 비활성화됨",
+      "speakingSuspended": "말하기 중단됨",
+      "removedFromCommittee": "위원회에서 제외됨",
+      "updated": "업데이트됨: {value}"
+    },
+    "preview": {
+      "ariaLabel": "프로필 미리보기",
+      "title": "시사",
+      "yourName": "당신의 이름",
+      "usernameNotSet": "사용자 이름이 설정되지 않았습니다.",
+      "gradeValue": "학년 {학년}",
+      "awards": "수상 내역"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "절차 규칙(RoP)",
+        "content": "# 절차 규칙 \n\n## 점과 동작 \n- **주문 시점**: 올바른 절차 \n- **정보 요점**: 발표자에게 질문 \n- **개인적 특전**: 개인적인 편안함 \n- **회의 동의**: 토론 연기 \n- **연회 동의**: 세션 종료 \n\n## 투표 \n- 절차에 관한 사항은 단순다수결 \n- 실질적인 사항은 2/3 다수 \n- 요청 시 출석 투표"
+      },
+      "examples": {
+        "title": "예",
+        "content": "# 예 \n\n## 해상도 형식 \n```` \n총회, \n... \n1. 회원국들에게 다음 사항을 요청합니다. \n2. 국제사회에 다음을 촉구한다. \n```` \n\n## 위치 용지 구조 \n1. 배경 \n2. 국가 정책 \n3. 제안된 솔루션"
+      },
+      "templates": {
+        "title": "템플릿",
+        "content": "# 템플릿 \n\n## 의장 보고서 템플릿 \n- 위원회 개요 \n- 주요 논의사항 \n- 결의안 통과 \n- 추천"
+      },
+      "chairReport": {
+        "title": "의장 보고서",
+        "content": "# 의장보고 \n\n위원회 절차 및 결과를 여기에 기록하세요."
+      }
+    },
+    "edit": "편집하다",
+    "guideDocument": "가이드 문서",
+    "additionalNotes": "추가 참고 사항",
+    "noContentYet": "아직 콘텐츠가 없습니다.",
+    "titlePlaceholder": "제목",
+    "googleDocsUrl": "Google 문서도구 URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "새 Google 문서가 다른 탭에서 열립니다. 대리인이 여기에 문서를 열 수 있도록 공유 가능한 링크를 붙여넣습니다(보기/수정은 Google 공유에 따라 다름).",
+    "markdownOptional": "마크다운 메모(Google Docs를 사용하는 경우 선택 사항)",
+    "save": "구하다",
+    "cancel": "취소",
+    "createNewGuide": "새 가이드 만들기",
+    "slugPlaceholder": "슬러그 (고유)",
+    "titleLowerPlaceholder": "제목",
+    "googleDocsUrlOptional": "Google 문서도구 URL(선택사항)",
+    "markdownContentOptional": "마크다운 콘텐츠(선택사항)",
+    "create": "만들다",
+    "glossary": {
+      "title": "MUN 의제 용어집",
+      "subtitle": "위원회 규정 및 현재 안건 주제와 일치하는 고유한 용어입니다.",
+      "committeeCode": "위원회 코드: {code}",
+      "sources": {
+        "core": "핵심",
+        "committee": "위원회",
+        "topic": "주제"
+      },
+      "terms": {
+        "delegation": {
+          "term": "대표단",
+          "definition": "위원회에서 한 주 또는 단체를 대표하는 국가 또는 관찰자 팀."
+        },
+        "placard": {
+          "term": "방",
+          "definition": "발언, 투표 및 신호 절차 동의를 요청하는 데 사용되는 국가 기호입니다."
+        },
+        "dais": {
+          "term": "단",
+          "definition": "토론을 진행하고 절차를 적용하며 발언 순서를 관리하는 의장팀."
+        },
+        "quorum": {
+          "term": "정족수",
+          "definition": "공식적인 업무와 투표를 수행하는 데 필요한 최소 대표단 수입니다."
+        },
+        "motion": {
+          "term": "운동",
+          "definition": "간부회 형식이나 발언 시간 등 토론의 흐름을 바꾸기 위한 공식 제안입니다."
+        },
+        "point_of_order": {
+          "term": "주문 지점",
+          "definition": "위원회 규칙에 따라 절차가 잘못 적용되는 경우의 개입."
+        },
+        "moderated_caucus": {
+          "term": "중재 간부회",
+          "definition": "정의된 하위 주제에 대해 짧은 시간 동안 연설하는 구조화된 토론 세그먼트입니다."
+        },
+        "unmoderated_caucus": {
+          "term": "중재되지 않은 간부회",
+          "definition": "대표자들이 자유롭게 아이디어 초안을 작성하고 병합하는 비공식 협상 기간입니다."
+        },
+        "draft_resolution": {
+          "term": "초안 해결",
+          "definition": "최종 투표 및 채택 전 제안된 위원회 조치의 작업 텍스트입니다."
+        },
+        "amendment": {
+          "term": "개정",
+          "definition": "초안 텍스트에 대해 우호적이거나 비우호적이라고 투표된 변경 사항이 제안되었습니다."
+        },
+        "operative_clause": {
+          "term": "수술 조항",
+          "definition": "위원회가 제안하는 바를 설명하는 행동 중심의 번호가 매겨진 조항."
+        },
+        "preambulatory_clause": {
+          "term": "예비 조항",
+          "definition": "배경 원칙, 관심사 및 이전 프레임워크를 인용하는 상황 설정 조항입니다."
+        },
+        "right_of_reply": {
+          "term": "답변 권리",
+          "definition": "대표단의 존엄성이나 지위에 영향을 미치는 직접적인 진술에 대응할 수 있는 기회."
+        },
+        "veto_power": {
+          "term": "거부권",
+          "definition": "UNSC 상임이사국은 실질적인 결의안 초안을 차단할 수 있는 권한을 갖고 있습니다."
+        },
+        "chapter_vii": {
+          "term": "제7장",
+          "definition": "평화 위협, 제재, 무력 사용 조치에 관한 UN 헌장 권한."
+        },
+        "sanctions_regime": {
+          "term": "제재 체제",
+          "definition": "직접적인 군사 행동 없이 행동에 영향을 미치기 위해 사용되는 조정된 제한입니다."
+        },
+        "arms_control": {
+          "term": "무기 통제",
+          "definition": "무기의 유형, 수량 또는 배치를 제한하는 계약 및 검증 시스템."
+        },
+        "non_proliferation": {
+          "term": "비확산",
+          "definition": "핵, 화학, 생물학 또는 첨단 무기 능력의 확산을 방지하기 위한 정책."
+        },
+        "confidence_building_measures": {
+          "term": "신뢰 구축 조치",
+          "definition": "오해와 갈등 위험을 줄이는 투명성 및 커뮤니케이션 도구입니다."
+        },
+        "universal_periodic_review": {
+          "term": "보편적 정기 검토",
+          "definition": "각 UN 회원국이 권리 추천을 보고하고 받는 동료 검토 프로세스입니다."
+        },
+        "special_rapporteur": {
+          "term": "특별보고관",
+          "definition": "주제별 또는 국가별 권리 문제를 모니터링하고 보고하기 위해 임명된 독립 전문가."
+        },
+        "treaty_body": {
+          "term": "조약기구",
+          "definition": "특정 인권 조약의 이행을 감독하는 전문가 위원회."
+        },
+        "public_health_emergency": {
+          "term": "공중보건 비상사태",
+          "definition": "긴급하게 조율된 국내 및 국제적 대응이 필요한 심각한 발병 사건."
+        },
+        "surveillance": {
+          "term": "역학감시",
+          "definition": "질병 추세를 감지하고 추적하기 위해 건강 데이터를 지속적으로 수집하고 분석합니다."
+        },
+        "health_systems": {
+          "term": "보건 시스템 강화",
+          "definition": "안정적인 의료 서비스 제공을 위해 인력, 자금 조달, 물류, 거버넌스를 개선합니다."
+        },
+        "transnational_crime": {
+          "term": "초국가적 조직범죄",
+          "definition": "네트워크와 불법 시장을 통해 국경을 넘어 조직된 범죄 활동."
+        },
+        "illicit_trafficking": {
+          "term": "불법 밀매",
+          "definition": "관할권 간 마약, 무기, 사람 또는 물품의 불법 이동."
+        },
+        "rule_of_law_capacity": {
+          "term": "법치적 역량",
+          "definition": "권리를 공정하게 조사, 기소 및 보호할 수 있는 사법 제도의 제도적 능력."
+        },
+        "sustainable_development": {
+          "term": "지속 가능한 개발",
+          "definition": "사회적 진보, 경제적 기회, 환경 보호의 균형을 이루는 성장 모델입니다."
+        },
+        "financing_for_development": {
+          "term": "개발을 위한 자금조달",
+          "definition": "장기적인 개발 우선순위를 지원하는 공공 및 민간 자금 조달 메커니즘."
+        },
+        "policy_coordination": {
+          "term": "정책 조정",
+          "definition": "중복을 피하고 집단적 영향력을 높이기 위해 주정부와 기관의 조치를 조정합니다."
+        },
+        "child_protection": {
+          "term": "아동 보호",
+          "definition": "모든 환경에서 아동에 대한 착취, 학대, 폭력을 방지하는 조치입니다."
+        },
+        "education_access": {
+          "term": "교육 이용",
+          "definition": "모든 어린이에게 포용적이고 공평하며 지속적인 학습 기회를 보장합니다."
+        },
+        "humanitarian_response": {
+          "term": "인도적 대응",
+          "definition": "위기 및 분쟁 상황에서 긴급한 요구 사항을 해결하는 신속한 구호 조치입니다."
+        },
+        "gender_mainstreaming": {
+          "term": "젠더 주류화",
+          "definition": "성별 분석을 정책 설계, 구현 및 평가에 통합합니다."
+        },
+        "gender_based_violence": {
+          "term": "젠더 기반 폭력",
+          "definition": "성 정체성, 역할 또는 불평등한 권력 관계를 기반으로 누군가에게 해를 끼치는 행위입니다."
+        },
+        "economic_empowerment": {
+          "term": "경제적 역량 강화",
+          "definition": "양질의 일자리, 금융, 소유권, 의사결정권에 대한 접근성을 확대합니다."
+        },
+        "source_attribution": {
+          "term": "소스 기여",
+          "definition": "주장을 확인하고 맥락화할 수 있도록 정보 출처를 명확하게 인용합니다."
+        },
+        "verified_reporting": {
+          "term": "검증된 보고",
+          "definition": "논쟁의 여지가 있는 사실을 게시하기 전에 확증을 요구하는 저널리즘 표준입니다."
+        },
+        "editorial_independence": {
+          "term": "편집 독립성",
+          "definition": "정치적 압력이나 이해관계자 영향으로부터 보고 결정을 분리합니다."
+        },
+        "climate_mitigation": {
+          "term": "기후 완화",
+          "definition": "온실가스 배출을 줄이거나 장기적인 탄소 제거를 늘리는 조치."
+        },
+        "climate_adaptation": {
+          "term": "기후 적응",
+          "definition": "기후 관련 영향에 대한 취약성을 줄이는 정책 및 투자."
+        },
+        "cyber_norms": {
+          "term": "사이버 규범",
+          "definition": "디지털 및 사이버 영역에서 책임 있는 국가 행동에 대한 기대를 공유했습니다."
+        },
+        "critical_infrastructure": {
+          "term": "중요 인프라",
+          "definition": "회복력이 필요한 전력, 물, 보건, 통신 등 필수 시스템입니다."
+        },
+        "epidemiology": {
+          "term": "역학",
+          "definition": "인구 집단의 질병 패턴, 원인 및 분포에 대한 연구."
+        },
+        "preparedness_response": {
+          "term": "대비와 대응",
+          "definition": "비상 사태를 억제하고 관리하기 위한 계획, 조정 및 급증 조치."
+        },
+        "non_refoulement": {
+          "term": "강제송환 금지",
+          "definition": "심각한 피해를 입은 장소로 사람들을 돌려보내는 것을 금지하는 원칙."
+        },
+        "durable_solutions": {
+          "term": "내구성 있는 솔루션",
+          "definition": "이재민을 위한 장기적 결과: 귀환, 지역 통합 또는 재정착."
+        },
+        "nuclear_safeguards": {
+          "term": "핵 안전장치",
+          "definition": "핵물질이 무기용으로 전용되지 않도록 보장하는 검증 조치."
+        },
+        "counter_terrorism": {
+          "term": "대테러",
+          "definition": "테러 활동에 대한 통합된 법적, 예방적, 보안 조치입니다."
+        },
+        "due_process": {
+          "term": "적법 절차",
+          "definition": "조사, 기소, 제재 과정에서 권리를 보호하는 공정한 법적 절차."
+        },
+        "resource_security": {
+          "term": "자원 보안",
+          "definition": "경제적, 환경적 스트레스 속에서도 식량, 물, 에너지에 안정적으로 접근할 수 있습니다."
+        },
+        "resilience": {
+          "term": "회복력",
+          "definition": "충격을 흡수하고 효과적으로 회복할 수 있는 지역사회와 기관의 역량."
+        }
+      },
+      "topicLine": "주제: {주제}"
+    }
+  },
+  "ideas": {
+    "editIdea": "아이디어 수정",
+    "googleDocsUrl": "Google 문서도구 URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "짧은 아이디어 텍스트(선택사항)",
+    "save": "구하다",
+    "cancel": "취소",
+    "addIntro": "Google 문서를 추가하여 해결 아이디어 초안을 작성하거나 짧은 메모(또는 둘 다)를 입력하세요.",
+    "googleDocsCreateHelp": "새 Google 문서가 다른 탭에서 열립니다. 링크가 생성된 후 여기에 링크를 붙여넣으세요.",
+    "resolutionIdeaPlaceholder": "해상도 아이디어...",
+    "add": "추가하다",
+    "noIdeasYet": "아직 아이디어가 없습니다.",
+    "ideaLabel": "아이디어",
+    "ideaFallback": "아이디어 {번호}",
+    "linkedDoc": "연결된 문서",
+    "addedOn": "{날짜}에 추가됨",
+    "edit": "편집하다",
+    "delete": "삭제",
+    "ideaDocument": "아이디어 문서",
+    "summary": "요약",
+    "emptyIdea": "빈 생각."
+  },
+  "stances": {
+    "heatmapTitle": "간략한 자세 개요(히트맵)",
+    "heatmapHelp": "귀하의 할당은 ___을(를) 어느 정도 지원합니까? (1-5 스케일)",
+    "topicPlaceholder": "예를 들어 기후 행동",
+    "extentLabel": "범위(1-5):",
+    "extentHelpTitle": "범위(1-5)",
+    "extentHelpBody": "1은 해당 주제에 대한 할당이 거의 지원되지 않음을 의미하고, 5는 강력한 지원을 의미합니다. 위원회에서의 귀하의 입장과 일치하는 숫자를 선택하세요.",
+    "add": "추가하다",
+    "viewOnlyHeatmap": "직원용 보기 전용 히트맵입니다.",
+    "notesPerAllocation": "할당별 참고 사항",
+    "noAllocationsYet": "아직 할당이 없습니다.",
+    "notesPlaceholder": "이 할당에 대한 입장 노트...",
+    "noteLanguageWarning": "독자 경고: 이 메모에는 부적절한 언어가 포함되어 있을 수 있습니다.",
+    "save": "구하다",
+    "saveHelpTitle": "자세 메모 저장",
+    "saveHelpBody": "이 할당에 대한 입장 메모를 저장합니다. 직원과 (위원회 설정에 따라) 다른 참가자가 볼 수 있습니다."
+  },
+  "speeches": {
+    "newSpeech": "새로운 연설",
+    "speechTitlePlaceholder": "연설제목",
+    "googleDocsUrl": "Google 문서도구 URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "새 탭에서 Google을 엽니다. 준비가 되면 여기에 문서 URL을 붙여넣으세요.",
+    "plainTextOptional": "일반 텍스트 초안(Google Docs를 사용하는 경우 선택사항)",
+    "save": "구하다",
+    "cancel": "취소",
+    "noSpeechesYet": "아직 연설이 없습니다. Google Docs를 연결하거나 텍스트를 붙여넣으세요.",
+    "speechLabel": "연설",
+    "untitled": "제목 없음",
+    "edit": "편집하다",
+    "speechDocument": "연설문",
+    "draftText": "초안 텍스트",
+    "noContentHint": "Google 문서를 편집 기능과 연결하거나 양식에 일반 텍스트를 추가하세요."
+  },
+  "committeeRoom": {
+    "committeeLabel": "위원회",
+    "yourContext": "귀하의 상황",
+    "roleLabel": "역할",
+    "seatLabel": "좌석",
+    "clearSearchTitle": "검색을 지우고 모든 위임을 표시합니다.",
+    "vacantLabel": "빈",
+    "assignedLabel": "할당된",
+    "daisLabel": "단",
+    "phaseLabel": "단계",
+    "phaseVoting": "투표",
+    "phaseDebate": "토론",
+    "focusSearchTitle": "중점 검색(연단 제목 및 이름이 귀하의 검색어와 일치함)",
+    "tipLabel": "팁",
+    "searchVacantTitle": "객실 내 '빈' 좌석 검색",
+    "searchHint": "국가, 대표자 이름, 학교, 대명사 또는 \"공석\"을 입력하여 회의실에서 일치하는 항목을 강조 표시하세요. 첫 번째 일치 항목으로 이동하려면 Enter 키를 누르세요. Esc가 지워집니다. 빈 좌석으로 이동하려면 Vacant를 클릭하세요.",
+    "findLabel": "대표단 또는 단원 찾기",
+    "searchPlaceholder": "나라, 이름, 학교...",
+    "matchesCount": "총 {total} 석 중 {matches} 일치",
+    "enterScrolls": "스크롤 입력",
+    "typeToFilterHint": "필터링하려면 입력하세요 - 첫 번째 일치 항목으로 스크롤하려면 Enter를 누르세요.",
+    "noMatches": "일치하는 대표단이나 단상 좌석이 없습니다.",
+    "digitalDisplay": "디지털 디스플레이",
+    "floorLabel": "바닥",
+    "staffSeatsHeading": "직원 - 좌석",
+    "searchAria": "위임 검색",
+    "virtualRoomVacant": "빈",
+    "profileAria": "프로필 보기: {국가}",
+    "vacantSeatAria": "빈자리",
+    "placardAria": "플래카드 {국가}",
+    "gavelAria": "망치",
+    "viewProfileAria": "프로필 보기: {제목}",
+    "noProfileLinkAria": "{제목}(프로필 링크 없음)",
+    "committeeFloor": "위원회 층",
+    "virtualRoomFigureAria": "가상 위원회실 - {committeeName}({conferenceName})",
+    "filteringLiveRegion": "위임 필터링. 첫 번째로 강조 표시된 좌석은 링의 첫 번째 경기입니다.",
+    "helperText": "플래카드에는 국가(할당에 따라), 이름, 학교 및 각 대표 프로필의 대명사가 나열되어 있습니다. 프로필에서 편집하세요. 빈 위원회 좌석은 공석으로 표시됩니다. 채워진 플래카드나 단상 좌석을 클릭하면 해당 회원의 페이지가 열립니다(채팅 및 보고).",
+    "virtualRoomCaption": "국가, 이름, 학교 및 대명사가 표시된 대표 플래카드가 있는 가상 모델 UN 위원회실."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "발언 요청",
+      "delegateFallback": "대리자",
+      "needAllocation": "발언을 요청하려면 할당이 필요합니다.",
+      "alreadyQueued": "대기열에 이미 진행 중인 발언 요청이 있습니다.",
+      "requested": "발언을 요청했습니다. 대기열에 나타납니다.",
+      "requestFailed": "발언을 요청하지 못했습니다.",
+      "helpBody": "대표단을 의장 대기열로 보냅니다. 한 번에 하나의 활성 대기/현재 요청을 가질 수 있습니다.",
+      "purposeLabel": "선택적 목적(대기열 라벨에 표시)",
+      "purposeHelpTitle": "목적 라벨",
+      "purposeHelpBody": "이 텍스트는 귀하의 국가 이름에 추가되므로 의장은 귀하가 발언권을 요청하는 이유를 알 수 있습니다.",
+      "purposePlaceholder": "예를 들어 지원 + 개정 개요",
+      "requesting": "요청 중...",
+      "rollPromptTitle": "의장 승인 필요",
+      "rollPromptBodyPickStatus": "세션이 시작되었습니다. 말하기 및 투표를 잠금 해제하려면 출석 상태를 선택하세요. 이 선택은 변경할 수 없습니다.",
+      "rollPromptBodyWaitSessionStart": "위원장이 위원회 세션을 시작하기를 기다리고 있습니다.",
+      "rollPromptBodyWaitRollPrompt": "출석요청 프롬프트를 기다리고 있습니다.",
+      "rollPromptBodyMarkedAbsent": "현재 부재중으로 표시되어 있습니다. 의장에게 귀하가 발언하고 투표할 수 있음을 표시하도록 요청하십시오.",
+      "rollPromptBodyChecking": "롤 상태를 확인하는 중...",
+      "rollPromptSaving": "절약...",
+      "rollPromptPresent": "현재의",
+      "rollPromptPresentVoting": "출석 및 투표"
+    },
+    "motionVoting": {
+      "votingProcedure": "투표 절차",
+      "currentMotion": "현재 모션",
+      "motioner": "모션머",
+      "majority": "다수",
+      "majoritySimple": "단순한",
+      "tally": "예 {예} - 아니오 {아니요} - 합계 {total}",
+      "help": "연단은 세션 중 각 대표단의 투표를 기록합니다. 동의 투표에서는 예 또는 아니요(기권 없음)만 사용합니다. 총계에는 '예' 또는 '아니요'라고 표시된 플래카드만 포함됩니다. 부재한 위임은 건너뜁니다."
+    },
+    "activeMotion": {
+      "currentMotion": "현재 모션",
+      "motionFallback": "운동",
+      "motioner": "모션머",
+      "majority": "다수",
+      "majoritySimple": "단순한",
+      "type": "유형",
+      "timer": "시간제 노동자",
+      "currentSpeaker": "현재 발언자",
+      "nextSpeaker": "다음 연사",
+      "speakerTimeLeftCap": "스피커 시간(왼쪽/캡)",
+      "speakerTimeLeftTotal": "스피커 시간(왼쪽/전체)",
+      "perSpeaker": "(스피커당)",
+      "paused": "(일시중지됨)",
+      "pauseReason": "일시중지: {이유}"
+    },
+    "floorStatus": {
+      "sessionTime": "세션 시간",
+      "sessionNotStarted": "세션이 시작되지 않았습니다.",
+      "limit": "한계",
+      "limitRemaining": "{value} 남음",
+      "limitOverBy": "{value}만큼 초과",
+      "quickLinkSession": "세션",
+      "quickLinkRoll": "연타",
+      "quickLinkSpeakers": "스피커",
+      "quickLinkMotions": "변",
+      "quickLinkTimer": "시간제 노동자",
+      "dais": "단",
+      "pinned": "고정됨",
+      "viewFullAnnouncement": "전체 공지 보기",
+      "timerPausesReadOnly": "타이머 일시중지(읽기 전용)",
+      "speakerList": "연사 목록",
+      "speakerFallback": "스피커",
+      "rollCallYou": "점호(당신)",
+      "fullAnnouncement": "전체 발표",
+      "daisAnnouncement": "다이스 발표",
+      "close": "닫다",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "세션 이름",
+      "sessionNamePlaceholder": "예를 들어 오전 세션",
+      "sessionNameSaving": "절약…",
+      "sessionNameSaved": "저장됨",
+      "sessionNameHint": "자동으로 저장되고 세션 기록에 나타납니다.",
+      "title": "위원회 세션",
+      "subtitle": "위원회 세션을 시작하거나 중지합니다.",
+      "helpStartStop": "시작은 모든 사람의 실시간 위원회 세션 타이머/상태를 시작합니다. 중지는 세션을 종료하고 현재 시간 제한을 지웁니다.",
+      "migrationUnavailable": "최신 데이터베이스 마이그레이션이 적용될 때까지 세션 제어를 일시적으로 사용할 수 없습니다.",
+      "endTimeInFuture": "종료 시간을 미래로 선택하거나 제한 없음으로 전환하세요.",
+      "sessionStartUnavailable": "최신 마이그레이션이 적용될 때까지 세션 시작 타임스탬프를 사용할 수 없습니다.",
+      "endTimeInFutureSetNoLimit": "종료 시간을 미래로 선택하거나 제한을 설정하지 마세요.",
+      "sessionLimitUpdated": "세션 제한이 업데이트되었습니다.",
+      "startedLabel": "시작됨:",
+      "timeInLabel": "소요 시간:",
+      "timeUntilEndLabel": "종료까지 남은 시간:",
+      "overByValue": "{value}만큼 초과",
+      "modeLabel": "방법:",
+      "modeStopwatchNoLimit": "스톱워치(시간 제한 없음)",
+      "sessionNotRunning": "세션이 실행되고 있지 않습니다.",
+      "sessionLimit": "세션 제한",
+      "sessionLimitModesTitle": "세션 제한 모드",
+      "sessionLimitModesHelp": "없음: 끝이 없습니다. 시간 예산: 처음부터 계산됩니다. 종료 시간: 현지 시간대의 고정 시계 시간입니다.",
+      "sessionLimitOptional": "선택 과목.",
+      "noneLabel": "없음",
+      "noneDescription": "멈출 때까지 달린다.",
+      "timeBudgetLabel": "시간 예산",
+      "timeBudgetDescription": "시작한 순간부터 계산됩니다.",
+      "endTimeLabel": "종료 시간",
+      "endTimeDescription": "고정 시계 시간을 사용합니다(둘 다 설정된 경우 예산을 재정의함).",
+      "noneIndefinite": "없음(무기한)",
+      "noneScheduledEndHint": "예정된 종료가 없습니다. 경과 시간만 표시됩니다.",
+      "timeBudgetFromStart": "시작부터 시간 예산",
+      "hoursLabel": "시간",
+      "minutesLabel": "분",
+      "minimumOneMinute": "(최소 1분)",
+      "endAtLocalTime": "종료 시간(현지 시간)",
+      "stopSession": "세션 중지",
+      "saveLimit": "저장 한도",
+      "saveLimitHelp": "세션을 중지하지 않고 세션이 이미 실행 중인 동안 업데이트된 제한 설정을 적용합니다.",
+      "startSession": "세션 시작",
+      "sidebarUsePrefix": "사이드바를 사용하세요",
+      "rollCall": "점호",
+      "speakers": "스피커",
+      "formalMotions": "공식적인 동의",
+      "timer": "시간제 노동자",
+      "sidebarAnd": "그리고",
+      "announcements": "공지사항",
+      "sidebarUseSuffix": "— 탭당 하나의 도구.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "세션 기록",
+      "savedCount": "{count} 저장됨",
+      "permissionsHint": "의장은 항목의 이름을 바꿀 수 있습니다. SMT/Admin은 항목의 이름을 바꾸고 삭제할 수 있습니다.",
+      "empty": "아직 세션 기록이 없습니다.",
+      "rename": "이름 바꾸기",
+      "delete": "삭제",
+      "deleteConfirm": "기록에서 이 세션을 삭제하시겠습니까?",
+      "sessionNamePrompt": "세션 이름",
+      "rangeClosed": "{범위}",
+      "rangeOngoing": "{범위} -> 진행 중"
+    },
+    "timerPage": {
+      "title": "시간제 노동자",
+      "controlsTitle": "타이머 제어",
+      "controlsHelp": "전체 토론 시간에 대해서는 일반 플로어를 사용하고 특정 공개 투표 항목에 가시성을 연결하려면 동의 투표를 사용하세요.",
+      "tabSetup": "1) 설정",
+      "tabClock": "2) 시계 제어",
+      "tabNotes": "3) 연설노트",
+      "tabLog": "4) 일시 정지 로그",
+      "setupHelp": "이 타이머가 일반 발언권에 대한 것인지(항상 대표자에게 표시됨) 또는 투표를 위한 동의 개시와 연결되어 있는지 선택합니다(대표자는 해당 투표가 활성 항목인 동안에만 이를 볼 수 있음). 발언자별 시간이 켜져 있으면 중재 간부회 중에도 시계가 계속 표시됩니다. 시계 일시 정지/시계 시작 정지 또는 카운트다운을 재개합니다. 스피커 시간(남은 시간)과 총 시간을 독립적으로 설정한 다음 타이머를 저장하세요. 사전 설정은 둘 다 동일한 길이로 채워집니다. 나중에 두 필드 중 하나를 편집할 수 있습니다. 일시 중지는 짧은 이유와 함께 기록됩니다.",
+      "namedPreset": "명명된 사전 설정",
+      "applyPreset": "사전 설정 적용...",
+      "floorLabelDelegates": "플로어 라벨(대표자)",
+      "floorLabelPlaceholder": "예를 들어 GSL 60년대",
+      "timerPurpose": "타이머 목적",
+      "purposeGeneralFloor": "일반토론/의장(투표에 연결되지 않음)",
+      "purposeMotionVote": "오픈 모션 - 투표가 진행 중인 동안에만 타이머가 작동됩니다.",
+      "openMotionForVoting": "공개 동의(투표를 위해 공개되어야 함)",
+      "selectMotion": "모션 선택...",
+      "untitled": "제목 없음",
+      "noOpenMotionWarning": "투표할 동의가 없습니다. 먼저 투표를 시작하거나 일반 투표로 목적을 전환하세요.",
+      "clock": "시계",
+      "running": "달리기",
+      "paused": "일시중지됨",
+      "saveToEnablePauseStart": "일시 중지/시작을 활성화하려면 타이머를 저장하세요.",
+      "pauseReasonLogged": "일시중지 이유(기록됨)",
+      "pauseReasonPlaceholder": "예를 들어 주문 시점, 기술 문제, 조정되지 않은 간부 회의...",
+      "pauseClock": "시계 일시중지",
+      "startClock": "시계 시작",
+      "perSpeakerTitle": "발언자별 시간(조정 간부회)",
+      "perSpeakerHelp": "총 시간을 스피커별 한도로 설정하고 스피커 시간을 남은 시간으로 설정합니다. Advance는 다음 스피커로 이동하고 나머지는 캡으로 재설정됩니다.",
+      "currentSpeaker": "현재 발언자",
+      "nextSpeaker": "다음 연사",
+      "speechNotesCurrentSpeaker": "연설 메모(현재 발언자)",
+      "speechNotesHelp": "메모는 현재 발언자 타이머 텍스트와 연결되어 있으며, 발언자 목록에 현재로 표시된 사람이 있으면 해당 위임이 참조용으로 저장됩니다.",
+      "timerFloorLabel": "타이머(층):",
+      "speakerListCurrent": "발언자 목록(현재):",
+      "noCurrentDelegation": "발언자 목록에 현재로 표시된 위임이 없습니다.",
+      "note": "메모",
+      "notePlaceholder": "포인트, POI, 어조, 후속 조치...",
+      "saveSpeechNote": "음성 메모 저장",
+      "recentNotes": "최근 메모(본 위원회)",
+      "delete": "삭제",
+      "speakerTimeRemaining": "스피커 시간(남은 시간)",
+      "remainingHelpPerSpeaker": "현재 발언자의 카운트다운(진행 시 재설정됨)",
+      "remainingHelpNormal": "현재 발언자의 카운트다운입니다(전체보다 작을 수 있음).",
+      "totalTime": "총 시간",
+      "totalHelpPerSpeaker": "발언자당 한도(분모는 바닥에 있음, 이에 남은 사전 리필).",
+      "totalHelpNormal": "이 타이머 세그먼트의 전체 길이(바닥의 슬래시 뒤에 표시됨)",
+      "saveTimer": "타이머 저장",
+      "advanceSpeakerReset": "고급 스피커 및 시계 재설정",
+      "recentPauseLog": "최근 일시중지 로그",
+      "noPauseEvents": "이 위원회에 대해 아직 기록된 일시 중지 이벤트가 없습니다.",
+      "openPauseLogHint": "일시중지 로그를 열어 기록된 일시중지 이유와 타임스탬프를 검토하세요.",
+      "saved": "타이머가 저장되었습니다.",
+      "savedCapped": "타이머가 저장되었습니다. 발언 시간이 총 시간보다 길었습니다. 총계로 제한됩니다.",
+      "alreadyPaused": "타이머가 이미 일시중지되었습니다.",
+      "pausedForCommittee": "위원회의 타이머가 일시 중지되었습니다.",
+      "alreadyRunning": "타이머가 이미 실행 중입니다.",
+      "runningForCommittee": "위원회 타이머가 실행 중입니다.",
+      "euTimerBoardTitle": "EU 의회 타이머 보드(11개 타이머)",
+      "euTimerBoardHelp": "파티당 하나의 타이머와 총 시간, POI/POC 시간 및 발표자 시간. 적용을 사용하여 시계 탭(스피커 시간/타이머 저장)의 실시간 타이머 필드에 행을 복사합니다.",
+      "euTimerName": "이름",
+      "euTimerTag": "꼬리표",
+      "euTotalTime": "총 시간",
+      "euPoiPocTime": "POI/POC 시간",
+      "euSpeakerTime": "스피커 시간"
+    }
   }
 }

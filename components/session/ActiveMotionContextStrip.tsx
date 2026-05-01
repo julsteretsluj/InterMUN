@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Clock, Gavel } from "lucide-react";
 import { shouldShowLiveFloorTimerUI, useConferenceTimer } from "@/lib/use-conference-timer";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 
@@ -26,9 +26,10 @@ export function ActiveMotionContextStrip({
   voteItemId: string;
   theme?: "dark" | "light";
 }) {
-  const t = useTranslations("views.session.activeMotion");
+  const locale = useLocale();
+  const t = useTranslations("session.activeMotion");
   const tTopics = useTranslations("agendaTopics");
-  const tVoting = useTranslations("views.voting");
+  const tVoting = useTranslations("voting");
   const supabase = useMemo(() => createClient(), []);
   const { timer, total, mins, secs, perSpeakerMode, isRunning } = useConferenceTimer(
     conferenceId,
@@ -110,7 +111,7 @@ export function ActiveMotionContextStrip({
             <span className={`${labelCls} block`}>{t("currentMotion")}</span>
             <p className={`${bodyCls} text-sm`}>
               {row?.title?.trim()
-                ? translateAgendaTopicLabel(tTopics, row.title)
+                ? translateAgendaTopicLabel(tTopics, row.title, locale)
                 : t("motionFallback")}
             </p>
             {row?.description?.trim() ? (

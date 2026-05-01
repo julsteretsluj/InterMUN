@@ -1,4 +1,5 @@
 import agendaTopicSlugToKey from "./generated/agenda-topic-slug-to-key.json";
+import { applyEnglishTopicTitleCaseIfLocale } from "./english-topic-title-case";
 
 type Translator = {
   (key: string, values?: Record<string, string | number | Date>): string;
@@ -179,7 +180,8 @@ function stripTrailingCommitteeSuffix(raw: string): { body: string; suffix: stri
 
 export function translateAgendaTopicLabel(
   tAgendaTopics: Translator,
-  rawLabel: string | null | undefined
+  rawLabel: string | null | undefined,
+  locale?: string
 ): string {
   const raw = rawLabel?.trim();
   if (!raw) return "";
@@ -195,6 +197,10 @@ export function translateAgendaTopicLabel(
 
   const sourceHadVerbalPrefix = verbalInner !== null;
 
+  const withSuffix = (line: string) =>
+    suffix ? `${line} \u2014 ${suffix}` : line;
+  const caseTopic = (line: string) => applyEnglishTopicTitleCaseIfLocale(line, locale);
+
   if (key) {
     const inner = tAgendaTopics(key);
     const useWrapper =
@@ -208,19 +214,18 @@ export function translateAgendaTopicLabel(
       if (typeof tAgendaTopics.has === "function" && !tAgendaTopics.has("topicQuestionOf")) return inner;
       return tAgendaTopics("topicQuestionOf", { topic: inner });
     })();
-    return suffix ? `${line} \u2014 ${suffix}` : line;
+    return withSuffix(caseTopic(line));
   }
 
   if (verbalInner) {
     if (looksLikeFullQuestion(verbalInner)) {
-      const line = verbalInner;
-      return suffix ? `${line} \u2014 ${suffix}` : line;
+      return withSuffix(caseTopic(verbalInner));
     }
     if (typeof tAgendaTopics.has !== "function" || tAgendaTopics.has("topicQuestionOf")) {
       const line = tAgendaTopics("topicQuestionOf", { topic: verbalInner });
-      return suffix ? `${line} \u2014 ${suffix}` : line;
+      return withSuffix(caseTopic(line));
     }
   }
 
-  return raw;
+  return caseTopic(raw);
 }

@@ -80,7 +80,7 @@ function Placard({
   jumpAnchor: boolean;
   compactPlacardDetails?: boolean;
 }) {
-  const t = useTranslations("views.committeeRoom");
+  const t = useTranslations("committeeRoom");
   const { vacant, country, name, school, pronouns, allocationId } = placard;
   const interactive = Boolean(personHref);
   const ringMatch = searchActive && matchesSearch;
@@ -186,7 +186,7 @@ function DaisStation({
   searchActive: boolean;
   matchesSearch: boolean;
 }) {
-  const t = useTranslations("views.committeeRoom");
+  const t = useTranslations("committeeRoom");
   const ringMatch = searchActive && matchesSearch;
 
   const inner = (
@@ -265,7 +265,7 @@ export function VirtualCommitteeRoom({
   scrollToDelegationMatchNonce = 0,
   compactPlacardDetails = false,
 }: VirtualCommitteeRoomProps) {
-  const t = useTranslations("views.committeeRoom");
+  const t = useTranslations("committeeRoom");
   const supabase = useMemo(() => createClient(), []);
   const [livePlacards, setLivePlacards] = useState<DelegatePlacard[]>(placards);
   const placardGridRef = useRef<HTMLDivElement | null>(null);

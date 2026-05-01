@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "افتح أرضية الحركة للبيانات أولاً.",
     "openMotionBlocksRecording": "الاقتراح مفتوح بالفعل للتصويت. قم بإغلاقه قبل تسجيل المزيد من البيانات.",
     "statedMotionRecorded": "تم تسجيل الاقتراح المذكور (ليس مفتوحًا للتصويت بعد).",
-    "statedMotionRemoved": "تمت إزالة الحركة المعلنة."
+    "statedMotionRemoved": "تمت إزالة الحركة المعلنة.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• سجل النقاط",
     "formalMotions": "الاقتراحات الرسمية",
     "timer": "الموقت",
-    "smtProfile": "حساب تعريفي"
+    "smtProfile": "حساب تعريفي",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "لم يتم تكوين Supabase",
@@ -835,7 +852,8 @@
       "archive": "أرشيف",
       "officialLinks": "الروابط الرسمية",
       "roomCode": "رمز الغرفة",
-      "settings": "إعدادات"
+      "settings": "إعدادات",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "الدول الأعضاء في الأمم المتحدة",
       "unSystem": "منظومة الأمم المتحدة (المؤسسون والأعضاء)",
       "history": "تاريخ الأمم المتحدة"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "أضف المصدر",
-      "sourceUrl": "عنوان URL المصدر",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (مستحسن)",
-      "urlHelp": "للحصول على مستند Google جديد، استخدم الزر والصق رابط المستند هنا.",
-      "titleOptional": "العنوان (اختياري)",
-      "saveChanges": "حفظ التغييرات",
-      "editSource": "تحرير المصدر",
-      "urlPlaceholderShort": "مستند Google أو عنوان URL آخر",
-      "empty": "لا توجد مصادر حتى الآن. أضف رابط Google Doc لفتحه هنا.",
-      "sourceLabel": "مصدر",
-      "openLink": "فتح الرابط",
-      "embedHeading": "وثيقة المصدر",
-      "notGoogleDoc": "عنوان URL هذا ليس مستند Google. استخدم الرابط docs.google.com/document/d/... للتضمين والتعديل هنا؛ وإلا افتح الرابط أعلاه."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "لا يمكن للمندوبين تحميل أوراق الموقف مباشرة. استخدم نوع مستند آخر.",
-      "alertOnlyChairsPositionPaper": "يمكن فقط للرؤساء/فريق الإدارة العليا/المشرف تحميل أوراق الموقف.",
-      "alertOnlySmtChairReport": "يمكن فقط لـ SMT/admin تحميل تقارير الرئيس.",
-      "alertOnlySmtRop": "يمكن فقط لـ SMT/admin تحميل مستندات RoP.",
-      "alertOnlySmtAwardCriteria": "يمكن فقط لـ SMT/admin تحميل مستندات معايير الجائزة.",
-      "alertNeedContentOrUrl": "قم بإضافة محتوى نصي محلي أو عنوان URL لمحرر مستندات Google.",
-      "confirmDelete": "هل تريد حذف هذا المستند؟",
-      "delegatePrepTitle": "قسم المستندات التحضيرية",
-      "delegatePrepBody": "يمكنك تحميل وعرض وتحرير <prep>مستندات الإعداد</prep> الخاصة بك مباشرة من هذه الصفحة.",
-      "positionPaperGuideTitle": "دليل ورقة الموقف",
-      "positionPaperGuideBlurb": "قم بتنزيل دليل العناصر النائبة أثناء إعداد ملف PDF النهائي.",
-      "downloadPlaceholderGuide": "تنزيل دليل العناصر النائبة",
-      "addDocument": "أضف وثيقة",
-      "tabs": {
-        "ariaLabel": "أقسام الوثيقة",
-        "library": "مكتبة",
-        "compose": "يؤلف",
-        "composeHint": "ابدأ مستندًا جديدًا أو قم بتحرير مسودة موجودة من علامة التبويب هذه."
-      },
-      "newDocumentTitle": "وثيقة جديدة",
-      "editDocumentTitle": "تحرير المستند",
-      "typeLabel": "يكتب",
-      "types": {
-        "position_paper": "ورقة الموقف",
-        "chair_report": "تقرير الكرسي",
-        "rop": "RoP",
-        "award_criteria": "معايير الجائزة",
-        "chair_notes": "ملاحظات الكرسي",
-        "prep_doc": "وثيقة الإعدادية"
-      },
-      "delegatePositionPaperNote": "يتم تحميل أوراق الموقف من قبل الكراسي مع ردود الفعل.",
-      "delegateOwner": "مالك مندوب",
-      "chairRecipient": "متلقي الكرسي",
-      "titleLabel": "عنوان",
-      "titlePlaceholder": "عنوان الوثيقة",
-      "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (تضمين العرض/التحرير في التطبيق)",
-      "googleDocsHelp": "استخدم مستند Google الجديد لفتح Google في علامة تبويب جديدة، ثم الصق رابط المستند هنا. النص العادي أدناه اختياري. يحتاج كل مستند إما إلى نص محلي أو رابط Google Doc أو كليهما.",
-      "plainTextOptional": "نص عادي (اختياري)",
-      "plainTextPlaceholder": "ملاحظات أو مسودة نص...",
-      "chairFeedbackLabel": "ردود فعل الكرسي",
-      "chairFeedbackPlaceholder": "ردود الفعل على ورقة موقف الوفد...",
-      "empty": "لا توجد وثائق حتى الآن. قم بإضافة واحد أو ربط مستند Google.",
-      "sidebarDocumentLabel": "وثيقة",
-      "sections": {
-        "chairReports": "تقارير الكرسي",
-        "rop": "RoP",
-        "awardCriteria": "معايير الجائزة",
-        "prepDocuments": "الوثائق الإعدادية",
-        "chairNotes": "ملاحظات الكرسي",
-        "otherDocuments": "وثائق أخرى"
-      },
-      "untitled": "بدون عنوان",
-      "linkedDocumentHeading": "وثيقة مرتبطة",
-      "notesHeading": "ملحوظات",
-      "noGoogleDocYet": "لم يتم ربط مستند Google حتى الآن. استخدم \"تحرير\" لإضافة عنوان URL docs.google.com/document/d/....",
-      "chairFeedbackHeading": "ردود فعل الكرسي",
-      "noFeedbackYet": "لم تتم إضافة أي تعليقات حتى الآن."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "أدخل البريد الإلكتروني للمفوض أولاً.",
-      "sentToDelegate": "تم الإرسال إلى {البريد الإلكتروني}.",
-      "newResolution": "قرار جديد",
-      "maxDraftResolutions": "لدى هذه اللجنة بالفعل {count} من مشاريع القرارات.",
-      "googleDocLink": "رابط مستند جوجل",
-      "googleDocUrlPlaceholder": "عنوان URL لمحرّر مستندات Google (docs.google.com/document/d/... — يُستخدم للتضمين + التحرير)",
-      "googleDocUrlHelp": "يتم فتح مستند Google الجديد في علامة تبويب أخرى؛ انسخ عنوان URL من شريط العناوين والصقه هنا.",
-      "mainSubmittersPlaceholder": "المُرسلون الرئيسيون (معرفات المستخدم، مفصولة بفواصل)",
-      "coSubmittersPlaceholder": "المرسلون المشاركون (معرفات المستخدم، مفصولة بفواصل)",
-      "create": "يخلق",
-      "cancel": "يلغي",
-      "openInNewTab": "افتح في علامة تبويب جديدة",
-      "noGoogleDocLink": "لا يوجد رابط لمستند Google",
-      "visibleToOtherBloc": "مرئية للكتلة الأخرى",
-      "resolutionCounts": "الغواصات الرئيسية: {الرئيسية} | الغواصات المشتركة: {co} | الموقعون: {الموقعون}",
-      "blocButton": "كتلة {اسم} ({موقف})",
-      "signVirtually": "قم بالتسجيل افتراضيًا (تم إخطار الغواصات الرئيسية)",
-      "shareByEmail": "مشاركة القرار عن طريق البريد الإلكتروني",
-      "delegateEmailPlaceholder": "مندوب@email.com",
-      "sendToDelegate": "إرسال إلى المندوب",
-      "clauseEditor": "محرر جملة",
-      "noClausesYet": "لا توجد بنود حتى الآن.",
-      "clauseNumber": "بند {رقم}",
-      "saveClause": "حفظ الجملة",
-      "delete": "يمسح",
-      "addClausePlaceholder": "إضافة جملة جديدة...",
-      "addClause": "إضافة جملة",
-      "clauseVoteHistory": "بند التصويت التاريخ",
-      "noClauseOutcomesYet": "لم يتم تسجيل نتائج التصويت على البند حتى الآن.",
-      "clauseFallback": "بند",
-      "passed": "اجتاز",
-      "failed": "فشل",
-      "motionId": "الحركة {معرف}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "أقسام التصويت",
-        "open": "يفتح",
-        "closed": "مغلق"
-      },
-      "requiredMajority": "الأغلبية المطلوبة",
-      "helpRequiredMajorityTitle": "الأغلبية المطلوبة",
-      "helpRequiredMajorityBody": "اختر حد التصويت المستخدم لتحديد النجاح/الرسوب. \"بسيط\" أكثر من النصف. `2/3` يتطلب أغلبية ساحقة.",
-      "majoritySimple": "بسيط",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{التسمية} الأغلبية",
-      "mustVote": "يجب التصويت",
-      "helpMustVoteTitle": "يجب التصويت",
-      "helpMustVoteBody": "وضع علامة على هذا الاقتراح باعتباره عنصرًا \"يجب التصويت عليه\". يُستخدم هذا لتوصيل المتطلبات إلى المشاركين (اعتمادًا على تشكيل اللجنة الخاصة بك).",
-      "saveSettings": "حفظ الإعدادات",
-      "delegateBlurb": "تسجل المنصة الأصوات في الجلسة (على سبيل المثال، نداء الأسماء). تتبع تصويتات الاقتراح هنا نعم/لا فقط (لا يتم استخدام الامتناع عن التصويت). يمكنك متابعة النتيجة. المندوبون لا يدلون بأصواتهم في التطبيق.",
-      "yes": "نعم",
-      "no": "لا",
-      "ballots": "بطاقات الاقتراع",
-      "total": "المجموع",
-      "outcome": "حصيلة",
-      "passed": "اجتاز",
-      "failed": "فشل",
-      "noRecordedVotes": "لا توجد أصوات مسجلة",
-      "reopenMotion": "إعادة فتح الحركة",
-      "editRecordOpen": "تحرير السجل...",
-      "hideSettings": "إخفاء الإعدادات",
-      "preliminaryPassing": "تمرير (أولي)",
-      "preliminaryFailing": "فاشل (مبدئي)",
-      "delegateRollCall": "مندوب الأسماء ({count})",
-      "noSeatedDelegates": "لا يوجد مندوبين جالسين متاحين لهذا الاقتراح.",
-      "rollPrefix": "لفافة:",
-      "recordedPrefix": "المسجلة:",
-      "recordedYes": "نعم",
-      "recordedNo": "لا",
-      "recordedAbstain": "امتنع عن التصويت",
-      "recordedNone": "—",
-      "abstain": "امتنع عن التصويت",
-      "clear": "واضح",
-      "closeMotion": "حركة قريبة",
-      "mustVoteBadge": "يجب التصويت",
-      "canVoteBadge": "يمكن التصويت",
-      "noMotions": "لا توجد حركات حتى الآن.",
-      "currentOpenMotion": "الحركة المفتوحة الحالية",
-      "noOpenMotion": "لا توجد حركة مفتوحة في الوقت الحالي.",
-      "recentClosedMotions": "الحركات المغلقة الأخيرة",
-      "noClosedMotions": "لا توجد إقتراحات مغلقة حتى الآن.",
-      "untitled": "بدون عنوان",
-      "voteTypes": {
-        "motion": "حركة",
-        "amendment": "تعديل",
-        "resolution": "دقة"
-      },
-      "roll": {
-        "absent": "غائب (لفة)",
-        "present_abstain": "حاضر - قد يمتنع عن التصويت (لفة)",
-        "present_voting": "الحاضر والتصويت (لفة)",
-        "unknown": "- (لفافة)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "أقسام الملف الشخصي",
-        "overview": "ملخص",
-        "awards": "الجوائز",
-        "private": "السجلات الخاصة",
-        "settings": "إعدادات الملف الشخصي"
-      },
-      "profilePicture": "صورة الملف الشخصي",
-      "uploadFile": "تحميل الملف",
-      "uploading": "جارٍ التحميل…",
-      "photoSaved": "تم تحميل الصورة وحفظها.",
-      "orUrl": "أو تم تعيينه بواسطة URL",
-      "urlPlaceholder": "https://...",
-      "name": "اسم",
-      "username": "اسم المستخدم",
-      "usernamePlaceholder": "على سبيل المثال alex_1999",
-      "pronouns": "الضمائر",
-      "customPronounNote": "يحتوي ملفك الشخصي على مجموعة ضمائر مخصصة لم تعد مقبولة هنا. حدد خيارًا أعلاه (أو اتركه فارغًا). يستبدل الحفظ القيمة القديمة.",
-      "school": "مدرسة",
-      "schoolPlaceholder": "على سبيل المثال مدرسة لينكولن الثانوية",
-      "grade": "درجة",
-      "selectGrade": "حدد الصف",
-      "conferencesAttended": "المؤتمرات التي حضرها",
-      "awardsComma": "الجوائز (مفصولة بفواصل)",
-      "awardsPlaceholder": "أفضل مندوب، وسام الشرف",
-      "allocation": "توزيع",
-      "selectAllocation": "حدد التخصيص",
-      "noAllocationsPlaceholder": "لا يوجد مخصصات اللجنة المتاحة",
-      "saveProfile": "حفظ الملف الشخصي",
-      "saved": "تم حفظ الملف الشخصي.",
-      "saveFailed": "لا يمكن حفظ الملف الشخصي.",
-      "errUsernamePattern": "يجب أن يتكون اسم المستخدم من 3 إلى 32 حرفًا (أحرف، أرقام، _، .، -)",
-      "errPronounsPreset": "اختر ضميرًا من القائمة.",
-      "errImageType": "الرجاء اختيار ملف الصورة.",
-      "errImageSize": "الصورة كبيرة جدًا (بحد أقصى 5 ميغابايت).",
-      "errUploadFailed": "فشل التحميل.",
-      "errStorageSetup": "لم يتم إعداد تخزين صورة الملف الشخصي. في مشروع Supabase، قم بتشغيل الترحيل 00100_profile_pictures_storage_bucket.sql، أو قم بإنشاء مجموعة تخزين عامة تسمى صور الملف الشخصي (راجع README).",
-      "errPublicUrl": "تعذر حل عنوان URL العام للصورة التي تم تحميلها.",
-      "fallbacks": {
-        "yourCountry": "بلدك",
-        "committeeSession": "جلسة اللجنة",
-        "delegate": "مندوب",
-        "speechNote": "مذكرة الكلام",
-        "untitledMotion": "حركة بلا عنوان",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "مرحبًا بمندوب {علم} {بلد}",
-        "subtitle": "ما الذي تريد أن تبدأ به؟",
-        "links": {
-          "documents": "وثائق",
-          "notes": "ملحوظات",
-          "committeeRoom": "غرفة اللجنة",
-          "runningNotes": "تشغيل الملاحظات",
-          "ideas": "أفكار",
-          "guides": "أدلة",
-          "sources": "مصادر",
-          "resolutions": "القرارات",
-          "speeches": "الخطب",
-          "stances": "مواقف",
-          "crisisSlides": "شرائح الأزمة",
-          "report": "تقرير",
-          "motions": "الحركات",
-          "points": "نقاط"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "الجوائز في ملفك الشخصي",
-        "rank": "رتبة {رتبة}",
-        "pending": {
-          "tab": "في انتظار الترشيحات",
-          "title": "في انتظار الترشيحات للرئاسة",
-          "descriptionSingle": "تم حفظه بواسطة الكراسي ومشاركته مع SMT للمراجعة. تظهر الجوائز النهائية أدناه بعد التأكيد.",
-          "descriptionTabbed": "تم حفظه بواسطة الكراسي ومشاركته مع SMT للمراجعة. تظهر الجوائز النهائية بعد التأكيد."
-        },
-        "recorded": {
-          "tab": "الجوائز المسجلة",
-          "title": "الجوائز المسجلة",
-          "description": "يتم إدراجها عندما تقوم الكراسي أو SMT بتعيينك في متتبع الجوائز. الاعتراف النهائي يتبع قواعد المؤتمر الخاص بك."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "مرئية لك فقط، ولرؤساء اللجان، وفريق الإدارة العليا للجنة ذات الصلة.",
-        "points": {
-          "title": "نقاط الكرسي (خاصة)"
-        },
-        "speechNotes": {
-          "title": "ملاحظات خطاب الرئيس (خاصة)"
-        },
-        "motions": {
-          "title": "الحركات التي تحركتها",
-          "description": "تم الحفظ في ملفك الشخصي لمراجعة اللجنة وإشراف SMT."
-        }
-      },
-      "discipline": {
-        "title": "الحالة التأديبية (خاصة)",
-        "statusLine": "التحذيرات: {warnings} · المخالفات: {strikes}{votingDisabled}{speakingSuspending}{removedFromCommittee}",
-        "votingDisabled": "التصويت معطل",
-        "speakingSuspended": "الكلام معلق",
-        "removedFromCommittee": "تمت إزالته من اللجنة",
-        "updated": "تم التحديث: {القيمة}"
-      },
-      "preview": {
-        "ariaLabel": "معاينة الملف الشخصي",
-        "title": "معاينة",
-        "yourName": "اسمك",
-        "usernameNotSet": "لم يتم تعيين اسم المستخدم",
-        "gradeValue": "الصف {الدرجة}",
-        "awards": "الجوائز"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "القواعد الإجرائية (RoP)",
-          "content": "# القواعد الإجرائية \n\n## النقاط والحركات \n- **نقطة النظام**: الإجراء الصحيح \n- **نقطة المعلومات**: سؤال للمتحدث \n- **نقطة الامتياز الشخصي**: الراحة الشخصية \n- **اقتراح إلى الطاولة**: تأجيل المناقشة \n- **اقتراح التأجيل**: نهاية الجلسة \n\n## التصويت \n- الأغلبية البسيطة في المسائل الإجرائية \n- أغلبية 2/3 للمسائل الموضوعية \n- التصويت بنداء الأسماء إذا طلب ذلك"
-        },
-        "examples": {
-          "title": "أمثلة",
-          "content": "#أمثلة \n\n## تنسيق القرار \n``` \nالجمعية العامة، \n... \n1. يدعو الدول الأعضاء إلى... \n2. يحث المجتمع الدولي على... \n``` \n\n## هيكل ورقة الموقف \n1. الخلفية \n2. سياسة الدولة \n3. الحلول المقترحة"
-        },
-        "templates": {
-          "title": "قوالب",
-          "content": "# القوالب \n\n## قالب تقرير الرئيس \n- نظرة عامة على اللجنة \n- نقاط المناقشة الرئيسية \n- القرارات مرت \n- التوصيات"
-        },
-        "chairReport": {
-          "title": "تقرير الكرسي",
-          "content": "# تقرير الكرسي \n\nقم بتوثيق إجراءات اللجنة ونتائجها هنا."
-        }
-      },
-      "edit": "يحرر",
-      "guideDocument": "وثيقة إرشادية",
-      "additionalNotes": "ملاحظات إضافية",
-      "noContentYet": "لا يوجد محتوى بعد.",
-      "titlePlaceholder": "عنوان",
-      "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "يتم فتح مستند Google الجديد في علامة تبويب أخرى. الصق رابطًا قابلاً للمشاركة حتى يتمكن المندوبون من فتح المستند هنا (يعتمد العرض/التحرير على مشاركة Google).",
-      "markdownOptional": "ملاحظات تخفيض السعر (اختيارية إذا كنت تستخدم مستند Google)",
-      "save": "يحفظ",
-      "cancel": "يلغي",
-      "createNewGuide": "إنشاء دليل جديد",
-      "slugPlaceholder": "سبيكة (فريدة من نوعها)",
-      "titleLowerPlaceholder": "عنوان",
-      "googleDocsUrlOptional": "عنوان URL لمحرّر مستندات Google (اختياري)",
-      "markdownContentOptional": "محتوى تخفيض السعر (اختياري)",
-      "create": "يخلق",
-      "glossary": {
-        "title": "مسرد جدول أعمال نموذج الأمم المتحدة (MUN).",
-        "subtitle": "مصطلحات فريدة تتوافق مع رمز لجنتك وموضوعات جدول الأعمال الحالية.",
-        "committeeCode": "رمز اللجنة: {code}",
-        "topicTag": "الموضوع: {الموضوع}",
-        "sources": {
-          "core": "جوهر",
-          "committee": "لجنة",
-          "topic": "عنوان"
-        },
-        "terms": {
-          "delegation": {
-            "term": "وفد",
-            "definition": "فريق دولة أو مراقب يمثل دولة أو جهة واحدة في اللجنة."
-          },
-          "placard": {
-            "term": "لافتة",
-            "definition": "علامة الدولة المستخدمة لطلب الكلمة والتصويت والإشارة إلى الاقتراحات الإجرائية."
-          },
-          "dais": {
-            "term": "دايس",
-            "definition": "رئاسة الفريق الذي يدير النقاش، ويطبق الإجراءات، ويدير ترتيب التحدث."
-          },
-          "quorum": {
-            "term": "النصاب القانوني",
-            "definition": "الحد الأدنى لعدد الوفود المطلوبة لإجراء الأعمال الرسمية والتصويت."
-          },
-          "motion": {
-            "term": "حركة",
-            "definition": "اقتراح رسمي لتغيير تدفق النقاش، مثل نوع التجمع أو وقت التحدث."
-          },
-          "point_of_order": {
-            "term": "نقطة النظام",
-            "definition": "التدخل عندما يتم تطبيق الإجراء بشكل غير صحيح بموجب قواعد اللجنة."
-          },
-          "moderated_caucus": {
-            "term": "كتلة معتدلة",
-            "definition": "جزء نقاش منظم مع خطابات قصيرة التوقيت حول موضوع فرعي محدد."
-          },
-          "unmoderated_caucus": {
-            "term": "تجمع غير خاضع للإشراف",
-            "definition": "فترة تفاوض غير رسمية يتحرك فيها المندوبون بحرية لصياغة الأفكار ودمجها."
-          },
-          "draft_resolution": {
-            "term": "مشروع القرار",
-            "definition": "النص العملي لإجراءات اللجنة المقترحة قبل التصويت النهائي والاعتماد."
-          },
-          "amendment": {
-            "term": "تعديل",
-            "definition": "التغيير المقترح على مسودة النص، سواء كان وديًا أو تم التصويت عليه على أنه غير ودي."
-          },
-          "operative_clause": {
-            "term": "بند المنطوق",
-            "definition": "عبارة مرقمة ذات توجه عملي تصف ما تقترح اللجنة القيام به."
-          },
-          "preambulatory_clause": {
-            "term": "بند تمهيدي",
-            "definition": "بند تحديد السياق الذي يشير إلى المبادئ الأساسية والاهتمامات والأطر السابقة."
-          },
-          "right_of_reply": {
-            "term": "حق الرد",
-            "definition": "فرصة للرد على بيان مباشر يمس كرامة الوفد أو منصبه."
-          },
-          "veto_power": {
-            "term": "قوة الفيتو",
-            "definition": "سلطة العضو الدائم في مجلس الأمن التابع للأمم المتحدة في منع مشاريع القرارات الموضوعية."
-          },
-          "chapter_vii": {
-            "term": "الفصل السابع",
-            "definition": "سلطة ميثاق الأمم المتحدة بشأن تهديدات السلام والعقوبات وتدابير استخدام القوة."
-          },
-          "sanctions_regime": {
-            "term": "نظام العقوبات",
-            "definition": "القيود المنسقة المستخدمة للتأثير على السلوك دون عمل عسكري مباشر."
-          },
-          "arms_control": {
-            "term": "مراقبة الأسلحة",
-            "definition": "الاتفاقيات وأنظمة التحقق التي تحد من أنواع الأسلحة أو كمياتها أو نشرها."
-          },
-          "non_proliferation": {
-            "term": "عدم الانتشار",
-            "definition": "سياسات لمنع انتشار الأسلحة النووية أو الكيميائية أو البيولوجية أو القدرات المتقدمة."
-          },
-          "confidence_building_measures": {
-            "term": "تدابير بناء الثقة",
-            "definition": "أدوات الشفافية والتواصل التي تقلل من سوء الفهم ومخاطر الصراع."
-          },
-          "universal_periodic_review": {
-            "term": "المراجعة الدورية الشاملة",
-            "definition": "عملية مراجعة النظراء حيث تقدم كل دولة عضو في الأمم المتحدة تقاريرها وتتلقى توصياتها المتعلقة بالحقوق."
-          },
-          "special_rapporteur": {
-            "term": "المقرر الخاص",
-            "definition": "تم تعيين خبير مستقل لرصد قضايا الحقوق المواضيعية أو القطرية وتقديم التقارير عنها."
-          },
-          "treaty_body": {
-            "term": "هيئة المعاهدة",
-            "definition": "لجنة الخبراء المشرفة على تنفيذ معاهدة محددة لحقوق الإنسان."
-          },
-          "public_health_emergency": {
-            "term": "طوارئ الصحة العامة",
-            "definition": "حدث تفشٍ خطير يتطلب استجابة وطنية ودولية منسقة وعاجلة."
-          },
-          "surveillance": {
-            "term": "المراقبة الوبائية",
-            "definition": "جمع وتحليل البيانات الصحية بشكل مستمر لاكتشاف وتتبع اتجاهات المرض."
-          },
-          "health_systems": {
-            "term": "تعزيز النظم الصحية",
-            "definition": "تحسين القوى العاملة والتمويل والخدمات اللوجستية والحوكمة من أجل تقديم رعاية صحية موثوقة."
-          },
-          "transnational_crime": {
-            "term": "الجريمة المنظمة العابرة للحدود الوطنية",
-            "definition": "يتم تنسيق النشاط الإجرامي عبر الحدود من خلال الشبكات والأسواق غير المشروعة."
-          },
-          "illicit_trafficking": {
-            "term": "الاتجار غير المشروع",
-            "definition": "الحركة غير المشروعة للمخدرات أو الأسلحة أو الأشخاص أو البضائع عبر الولايات القضائية."
-          },
-          "rule_of_law_capacity": {
-            "term": "القدرة على سيادة القانون",
-            "definition": "القدرة المؤسسية لأنظمة العدالة على التحقيق والملاحقة القضائية وحماية الحقوق بشكل عادل."
-          },
-          "sustainable_development": {
-            "term": "التنمية المستدامة",
-            "definition": "نموذج النمو الذي يوازن بين التقدم الاجتماعي والفرص الاقتصادية وحماية البيئة."
-          },
-          "financing_for_development": {
-            "term": "تمويل التنمية",
-            "definition": "آليات التمويل العامة والخاصة التي تدعم أولويات التنمية طويلة المدى."
-          },
-          "policy_coordination": {
-            "term": "تنسيق السياسات",
-            "definition": "مواءمة إجراءات الدولة والوكالة لتجنب الازدواجية وزيادة التأثير الجماعي."
-          },
-          "child_protection": {
-            "term": "حماية الطفل",
-            "definition": "تدابير لمنع الاستغلال والإساءة والعنف ضد الأطفال في جميع الأماكن."
-          },
-          "education_access": {
-            "term": "الوصول إلى التعليم",
-            "definition": "ضمان فرص التعلم الشاملة والمنصفة والمستمرة لجميع الأطفال."
-          },
-          "humanitarian_response": {
-            "term": "الاستجابة الإنسانية",
-            "definition": "إجراءات الإغاثة السريعة تلبي الاحتياجات العاجلة في الأزمات وحالات النزاع."
-          },
-          "gender_mainstreaming": {
-            "term": "تعميم مراعاة المنظور الجنساني",
-            "definition": "دمج التحليل الجنساني في تصميم السياسات وتنفيذها وتقييمها."
-          },
-          "gender_based_violence": {
-            "term": "العنف القائم على النوع الاجتماعي",
-            "definition": "الأذى الموجه إلى شخص ما على أساس الهوية الجنسية أو الأدوار أو علاقات القوة غير المتكافئة."
-          },
-          "economic_empowerment": {
-            "term": "التمكين الاقتصادي",
-            "definition": "توسيع نطاق الوصول إلى العمل اللائق، والتمويل، والملكية، وسلطة اتخاذ القرار."
-          },
-          "source_attribution": {
-            "term": "إسناد المصدر",
-            "definition": "الاستشهاد بمصدر المعلومات بوضوح حتى يمكن التحقق من المطالبات ووضعها في سياقها."
-          },
-          "verified_reporting": {
-            "term": "التقارير التي تم التحقق منها",
-            "definition": "معيار صحفي يتطلب التأييد قبل نشر الحقائق المتنازع عليها."
-          },
-          "editorial_independence": {
-            "term": "الاستقلال التحريري",
-            "definition": "فصل قرارات الإبلاغ عن الضغوط السياسية أو تأثير أصحاب المصلحة."
-          },
-          "climate_mitigation": {
-            "term": "التخفيف من آثار المناخ",
-            "definition": "الإجراءات التي تقلل من انبعاثات الغازات الدفيئة أو تزيد من إزالة الكربون على المدى الطويل."
-          },
-          "climate_adaptation": {
-            "term": "التكيف مع المناخ",
-            "definition": "السياسات والاستثمارات التي تقلل من التعرض للتأثيرات المرتبطة بالمناخ."
-          },
-          "cyber_norms": {
-            "term": "المعايير السيبرانية",
-            "definition": "التوقعات المشتركة بشأن سلوك الدولة المسؤول في المجالات الرقمية والسيبرانية."
-          },
-          "critical_infrastructure": {
-            "term": "البنية التحتية الحيوية",
-            "definition": "الأنظمة الأساسية مثل الطاقة والمياه والصحة والاتصالات التي تتطلب المرونة."
-          },
-          "epidemiology": {
-            "term": "علم الأوبئة",
-            "definition": "دراسة أنماط المرض وأسبابه وتوزيعه بين السكان."
-          },
-          "preparedness_response": {
-            "term": "الاستعداد والاستجابة",
-            "definition": "التخطيط والتنسيق والإجراءات المفاجئة لاحتواء حالات الطوارئ وإدارتها."
-          },
-          "non_refoulement": {
-            "term": "عدم الإعادة القسرية",
-            "definition": "مبدأ حظر عودة الأشخاص إلى الأماكن التي يواجهون فيها ضررًا جسيمًا."
-          },
-          "durable_solutions": {
-            "term": "الحلول الدائمة",
-            "definition": "النتائج طويلة المدى للنازحين: العودة، أو الاندماج المحلي، أو إعادة التوطين."
-          },
-          "nuclear_safeguards": {
-            "term": "الضمانات النووية",
-            "definition": "تدابير التحقق التي تضمن عدم تحويل المواد النووية لاستخدامها في الأسلحة."
-          },
-          "counter_terrorism": {
-            "term": "مكافحة الإرهاب",
-            "definition": "إجراءات قانونية ووقائية وأمنية متكاملة ضد النشاط الإرهابي."
-          },
-          "due_process": {
-            "term": "الإجراءات القانونية الواجبة",
-            "definition": "إجراءات قانونية عادلة تحمي الحقوق أثناء التحقيق والملاحقة القضائية والعقوبات."
-          },
-          "resource_security": {
-            "term": "أمن الموارد",
-            "definition": "الوصول الموثوق إلى الغذاء والماء والطاقة في ظل الضغوط الاقتصادية والبيئية."
-          },
-          "resilience": {
-            "term": "صمود",
-            "definition": "قدرة المجتمعات والمؤسسات على امتصاص الصدمات والتعافي بفعالية."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "تحرير الفكرة",
-      "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "نص فكرة قصيرة (اختياري)",
-      "save": "يحفظ",
-      "cancel": "يلغي",
-      "addIntro": "أضف مستند Google لصياغة فكرة الحل في مكانها، أو اكتب ملاحظة قصيرة (أو كليهما).",
-      "googleDocsCreateHelp": "يتم فتح مستند Google الجديد في علامة تبويب أخرى؛ الصق الرابط هنا بعد إنشائه.",
-      "resolutionIdeaPlaceholder": "فكرة القرار...",
-      "add": "يضيف",
-      "noIdeasYet": "لا توجد أفكار حتى الآن.",
-      "ideaLabel": "فكرة",
-      "ideaFallback": "فكرة {رقم}",
-      "linkedDoc": "وثيقة مرتبطة",
-      "addedOn": "تمت الإضافة في {التاريخ}",
-      "edit": "يحرر",
-      "delete": "يمسح",
-      "ideaDocument": "وثيقة الفكرة",
-      "summary": "ملخص",
-      "emptyIdea": "فكرة فارغة."
-    },
-    "stances": {
-      "heatmapTitle": "نظرة عامة مختصرة على الموقف (الخريطة الحرارية)",
-      "heatmapHelp": "إلى أي مدى يدعم تخصيصك ___؟ (مقياس 1-5)",
-      "topicPlaceholder": "على سبيل المثال العمل المناخي",
-      "extentLabel": "المدى (1-5):",
-      "extentHelpTitle": "المدى (1-5)",
-      "extentHelpBody": "1 يعني أن تخصيصك يحظى بدعم قليل للموضوع، و5 يعني دعمًا قويًا. اختر رقمًا يتوافق مع موقفك في اللجنة.",
-      "add": "يضيف",
-      "viewOnlyHeatmap": "عرض الخريطة الحرارية للموظفين فقط.",
-      "notesPerAllocation": "ملاحظات لكل تخصيص",
-      "noAllocationsYet": "لا يوجد مخصصات حتى الآن",
-      "notesPlaceholder": "ملاحظات الموقف لهذا التخصيص...",
-      "noteLanguageWarning": "تحذير للقارئ: قد تحتوي هذه الملاحظة على لغة غير لائقة.",
-      "save": "يحفظ",
-      "saveHelpTitle": "حفظ مذكرة الموقف",
-      "saveHelpBody": "يحفظ مذكرة الموقف لهذا التخصيص. ويمكن الاطلاع عليه من قبل الموظفين والمشاركين الآخرين (حسب إعدادات اللجنة)."
-    },
-    "speeches": {
-      "newSpeech": "خطاب جديد",
-      "speechTitlePlaceholder": "عنوان الكلام",
-      "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "يفتح جوجل في علامة تبويب جديدة؛ الصق عنوان URL للمستند هنا عندما يكون جاهزًا.",
-      "plainTextOptional": "مسودة نص عادي (اختياري إذا كنت تستخدم مستند Google)",
-      "save": "يحفظ",
-      "cancel": "يلغي",
-      "noSpeechesYet": "لا يوجد خطابات بعد. قم بربط مستند Google أو لصق النص.",
-      "speechLabel": "خطاب",
-      "untitled": "بدون عنوان",
-      "edit": "يحرر",
-      "speechDocument": "وثيقة الكلام",
-      "draftText": "مسودة النص",
-      "noContentHint": "اربط مستند Google بالتحرير، أو أضف نصًا عاديًا في النموذج."
-    },
-    "committeeRoom": {
-      "committeeLabel": "لجنة",
-      "yourContext": "السياق الخاص بك",
-      "roleLabel": "دور",
-      "seatLabel": "مقعد",
-      "clearSearchTitle": "مسح البحث وإظهار كافة الوفود",
-      "vacantLabel": "شاغر",
-      "assignedLabel": "مُكَلَّف",
-      "daisLabel": "دايس",
-      "phaseLabel": "مرحلة",
-      "phaseVoting": "التصويت",
-      "phaseDebate": "مناظرة",
-      "focusSearchTitle": "بحث التركيز (عناوين وأسماء المنصة تتطابق مع استعلامك)",
-      "tipLabel": "نصيحة",
-      "searchVacantTitle": "البحث عن المقاعد \"الشاغرة\" في الغرفة",
-      "searchHint": "Type a country, delegate name, school, pronoun, or \"vacant\" to highlight matches in the room. اضغط على Enter للانتقال إلى المباراة الأولى؛ يمسح Esc. انقر فوق شاغر للانتقال إلى المقاعد الفارغة.",
-      "findLabel": "ابحث عن وفد أو عضو منصة",
-      "searchPlaceholder": "البلد، الاسم، المدرسة...",
-      "matchesCount": "{matches} من إجمالي {total} عدد المقاعد المتطابقة",
-      "enterScrolls": "أدخل مخطوطات",
-      "typeToFilterHint": "اكتب للتصفية - أدخل التمريرات للمطابقة الأولى",
-      "noMatches": "لا توجد وفود أو مقاعد على المنصة متطابقة.",
-      "digitalDisplay": "العرض الرقمي",
-      "floorLabel": "أرضية",
-      "staffSeatsHeading": "الموظفين - المقاعد",
-      "searchAria": "بحث الوفود",
-      "virtualRoomVacant": "شاغر",
-      "profileAria": "عرض الملف الشخصي: {country}",
-      "vacantSeatAria": "مقعد شاغر",
-      "placardAria": "لافتة {بلد}",
-      "gavelAria": "المطرقة",
-      "viewProfileAria": "عرض الملف الشخصي: {title}",
-      "noProfileLinkAria": "{title} (لا يوجد رابط للملف الشخصي)",
-      "committeeFloor": "أرضية اللجنة",
-      "virtualRoomFigureAria": "غرفة اللجنة الافتراضية - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "تصفية الوفود أول مقعد مميز هو أول مباراة في الحلبة.",
-      "helperText": "تتضمن اللافتات الدولة (من التخصيصات)، والاسم، والمدرسة، والضمائر من الملف الشخصي لكل مندوب. قم بتحرير ملفك الشخصي ضمن الملف الشخصي. تظهر مقاعد اللجنة الفارغة على أنها شاغرة. انقر فوق لافتة مملوءة أو مقعد على المنصة لفتح صفحة ذلك العضو (الدردشة والإبلاغ من هناك).",
-      "virtualRoomCaption": "قاعة لجنة نموذج الأمم المتحدة الافتراضية مع لافتات للمندوبين توضح البلد والاسم والمدرسة والضمائر."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "طلب التحدث",
-        "delegateFallback": "مندوب",
-        "needAllocation": "أنت بحاجة إلى تخصيص لطلب التحدث.",
-        "alreadyQueued": "لديك بالفعل طلب محادثة نشط في قائمة الانتظار.",
-        "requested": "طلبت التحدث. سوف تظهر في قائمة الانتظار.",
-        "requestFailed": "فشل في طلب التحدث.",
-        "helpBody": "يرسل وفدك إلى قائمة انتظار الكرسي. يمكن أن يكون لديك طلب انتظار/طلب حالي واحد نشط في المرة الواحدة.",
-        "purposeLabel": "غرض اختياري (يظهر في تسمية قائمة الانتظار)",
-        "purposeHelpTitle": "تسمية الغرض",
-        "purposeHelpBody": "يتم إلحاق هذا النص باسم بلدك حتى يتمكن الكراسي من معرفة سبب طلبك الكلمة.",
-        "purposePlaceholder": "على سبيل المثال دعم + نظرة عامة على التعديل",
-        "requesting": "جارٍ الطلب...",
-        "rollPromptTitle": "موافقة الرئيس مطلوبة",
-        "rollPromptBodyPickStatus": "بدأت الجلسة. اختر حالة النداء الخاص بك لفتح التحدث والتصويت. لا يمكن تغيير هذا الاختيار.",
-        "rollPromptBodyWaitSessionStart": "في انتظار الرئيس لبدء جلسة اللجنة.",
-        "rollPromptBodyWaitRollPrompt": "في انتظار مطالبة النداء.",
-        "rollPromptBodyMarkedAbsent": "لقد تم وضع علامة غائب عليك حاليًا. اطلب من الرئيس وضع علامة على حضورك للتحدث والتصويت.",
-        "rollPromptBodyChecking": "التحقق من حالة لفة الخاص بك...",
-        "rollPromptSaving": "توفير...",
-        "rollPromptPresent": "حاضر",
-        "rollPromptPresentVoting": "الحضور والتصويت"
-      },
-      "motionVoting": {
-        "votingProcedure": "إجراءات التصويت",
-        "currentMotion": "الحركة الحالية",
-        "motioner": "المحرك",
-        "majority": "غالبية",
-        "majoritySimple": "بسيط",
-        "tally": "نعم {نعم} - لا {لا} - الإجمالي {المجموع}",
-        "help": "تسجل المنصة تصويت كل وفد في الجلسة. تستخدم أصوات الاقتراح نعم أو لا فقط (لا يمتنع عن التصويت). الإجماليات تحسب فقط اللافتات التي تم تسجيل نعم أو لا فيها؛ يتم تخطي الوفود الغائبة."
-      },
-      "activeMotion": {
-        "currentMotion": "الحركة الحالية",
-        "motionFallback": "حركة",
-        "motioner": "المحرك",
-        "majority": "غالبية",
-        "majoritySimple": "بسيط",
-        "type": "يكتب",
-        "timer": "الموقت",
-        "currentSpeaker": "المتحدث الحالي",
-        "nextSpeaker": "المتحدث التالي",
-        "speakerTimeLeftCap": "وقت السماعة (يسار/غطاء)",
-        "speakerTimeLeftTotal": "وقت السماعة (يسار/إجمالي)",
-        "perSpeaker": "(لكل متحدث)",
-        "paused": "(متوقف مؤقتًا)",
-        "pauseReason": "وقفة: {السبب}"
-      },
-      "floorStatus": {
-        "sessionTime": "وقت الجلسة",
-        "sessionNotStarted": "لم تبدأ الجلسة",
-        "limit": "حد",
-        "limitRemaining": "{القيمة} متبقية",
-        "limitOverBy": "أكثر من {value}",
-        "quickLinkSession": "حصة",
-        "quickLinkRoll": "لفافة",
-        "quickLinkSpeakers": "مكبرات الصوت",
-        "quickLinkMotions": "الحركات",
-        "quickLinkTimer": "الموقت",
-        "dais": "دايس",
-        "pinned": "مثبت",
-        "viewFullAnnouncement": "عرض الإعلان الكامل",
-        "timerPausesReadOnly": "توقف المؤقت مؤقتًا (للقراءة فقط)",
-        "speakerList": "قائمة المتحدثين",
-        "speakerFallback": "المتحدث",
-        "rollCallYou": "مكالمة هاتفية (أنت)",
-        "fullAnnouncement": "اعلان كامل",
-        "daisAnnouncement": "اعلان ديس",
-        "close": "يغلق"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "اسم الجلسة",
-        "sessionNamePlaceholder": "على سبيل المثال الجلسة الصباحية",
-        "sessionNameSaving": "توفير…",
-        "sessionNameSaved": "أنقذ",
-        "sessionNameHint": "يتم حفظه تلقائيًا ويظهر في سجل الجلسة.",
-        "title": "جلسة اللجنة",
-        "subtitle": "بدء أو إيقاف جلسة اللجنة.",
-        "helpStartStop": "البدء يبدأ مؤقت/حالة جلسة اللجنة المباشرة للجميع. يؤدي الإيقاف إلى إنهاء الجلسة ومسح الحد الزمني الحالي.",
-        "migrationUnavailable": "عناصر التحكم في الجلسة غير متاحة مؤقتًا حتى يتم تطبيق أحدث عمليات ترحيل قاعدة البيانات.",
-        "endTimeInFuture": "اختر وقت انتهاء في المستقبل، أو قم بالتبديل إلى بلا حدود.",
-        "sessionStartUnavailable": "الطابع الزمني لبدء الجلسة غير متاح حتى يتم تطبيق أحدث عمليات الترحيل.",
-        "endTimeInFutureSetNoLimit": "اختر وقت انتهاء في المستقبل، أو قم بتعيين أي حد.",
-        "sessionLimitUpdated": "تم تحديث حد الجلسة.",
-        "startedLabel": "بدأت:",
-        "timeInLabel": "الوقت في:",
-        "timeUntilEndLabel": "الوقت حتى النهاية:",
-        "overByValue": "انتهى بـ {value}",
-        "modeLabel": "وضع:",
-        "modeStopwatchNoLimit": "ساعة توقيت (لا يوجد حد زمني)",
-        "sessionNotRunning": "الجلسة ليست قيد التشغيل.",
-        "sessionLimit": "حد الجلسة",
-        "sessionLimitModesTitle": "أوضاع حد الجلسة",
-        "sessionLimitModesHelp": "None: no end. الميزانية الزمنية: تحسب من البداية. ينتهي عند: توقيت الساعة الثابت في منطقتك الزمنية المحلية.",
-        "sessionLimitOptional": "خياري.",
-        "noneLabel": "لا أحد",
-        "noneDescription": "يعمل حتى تتوقف.",
-        "timeBudgetLabel": "ميزانية الوقت",
-        "timeBudgetDescription": "تحسب من لحظة البدء.",
-        "endTimeLabel": "وقت الانتهاء",
-        "endTimeDescription": "يستخدم وقتًا ثابتًا على مدار الساعة (يتجاوز الميزانية إذا تم ضبطهما على حد سواء).",
-        "noneIndefinite": "لا شيء (غير محدد)",
-        "noneScheduledEndHint": "لا يوجد نهاية مجدولة؛ يتم عرض الوقت المنقضي فقط.",
-        "timeBudgetFromStart": "ميزانية الوقت من البداية",
-        "hoursLabel": "ساعات",
-        "minutesLabel": "دقائق",
-        "minimumOneMinute": "(الحد الأدنى 1 دقيقة)",
-        "endAtLocalTime": "تنتهي عند (التوقيت المحلي)",
-        "stopSession": "إيقاف الجلسة",
-        "saveLimit": "حفظ الحد",
-        "saveLimitHelp": "يتم تطبيق إعدادات الحد المحدثة أثناء تشغيل الجلسة بالفعل، دون إيقاف الجلسة.",
-        "startSession": "ابدأ الجلسة",
-        "sidebarUsePrefix": "استخدم الشريط الجانبي لـ",
-        "rollCall": "نداء رول",
-        "speakers": "مكبرات الصوت",
-        "formalMotions": "الاقتراحات الرسمية",
-        "timer": "الموقت",
-        "sidebarAnd": "و",
-        "announcements": "إعلانات",
-        "sidebarUseSuffix": "- أداة واحدة لكل علامة تبويب."
-      },
-      "history": {
-        "title": "تاريخ الجلسة",
-        "savedCount": "تم حفظ {عدد}.",
-        "permissionsHint": "يمكن للكراسي إعادة تسمية الإدخالات. يمكن لـ SMT/Admin إعادة تسمية وحذف الإدخالات.",
-        "empty": "لا يوجد سجل الجلسة حتى الآن.",
-        "rename": "إعادة تسمية",
-        "delete": "يمسح",
-        "deleteConfirm": "هل تريد حذف هذه الجلسة من السجل؟",
-        "sessionNamePrompt": "اسم الجلسة",
-        "rangeClosed": "{يتراوح}",
-        "rangeOngoing": "{النطاق} -> مستمر"
-      },
-      "timerPage": {
-        "title": "الموقت",
-        "controlsTitle": "ضوابط الموقت",
-        "controlsHelp": "استخدم الكلمة العامة لتوقيت المناقشة الشاملة، أو التصويت على الحركة لربط الرؤية بعنصر تصويت مفتوح محدد.",
-        "tabSetup": "1) الإعداد",
-        "tabClock": "2) ضوابط الساعة",
-        "tabNotes": "3) ملاحظات الكلام",
-        "tabLog": "4) سجل الإيقاف المؤقت",
-        "setupHelp": "اختر ما إذا كان هذا المؤقت مخصصًا للكلمة العامة (مرئيًا دائمًا للمندوبين) أو مرتبطًا بالحركة المفتوحة للتصويت (لا يراها المندوبون إلا عندما يكون هذا التصويت هو العنصر النشط). مع تشغيل الوقت لكل متحدث، تظل الساعة مرئية أثناء التجمع الانتخابي الخاضع للإشراف بغض النظر. إيقاف الساعة مؤقتًا / بدء تجميد الساعة أو استئناف العد التنازلي. اضبط وقت السماعة (المتبقي) وإجمالي الوقت بشكل مستقل، ثم احفظ المؤقت. تملأ الإعدادات المسبقة كلاهما بنفس الطول؛ يمكنك تعديل أي من الحقلين بعد ذلك. يتم تسجيل الإيقاف المؤقت لسبب قصير.",
-        "namedPreset": "اسمه مسبقا",
-        "applyPreset": "تطبيق الإعداد المسبق...",
-        "floorLabelDelegates": "تسمية الكلمة (المندوبين)",
-        "floorLabelPlaceholder": "على سبيل المثال جي إس إل 60 إس",
-        "timerPurpose": "الغرض الموقت",
-        "purposeGeneralFloor": "المناقشة العامة/الكلمة (غير مرتبطة بالتصويت)",
-        "purposeMotionVote": "حركة مفتوحة - مؤقت فقط عندما يكون هذا التصويت نشطًا على الأرض",
-        "openMotionForVoting": "اقتراح مفتوح (يجب أن يكون مفتوحًا للتصويت)",
-        "selectMotion": "حدد الحركة...",
-        "untitled": "بدون عنوان",
-        "noOpenMotionWarning": "ولا يوجد أي اقتراح مفتوح للتصويت. افتح التصويت أولاً، أو قم بتبديل الغرض إلى الأرضية العامة.",
-        "clock": "ساعة",
-        "running": "جري",
-        "paused": "متوقف مؤقتًا",
-        "saveToEnablePauseStart": "احفظ المؤقت لتمكين الإيقاف المؤقت/البدء.",
-        "pauseReasonLogged": "سبب الإيقاف المؤقت (تسجيل)",
-        "pauseReasonPlaceholder": "على سبيل المثال نقطة نظام، مشكلة تقنية، تجمع غير خاضع للإشراف...",
-        "pauseClock": "وقفة الساعة",
-        "startClock": "ساعة البداية",
-        "perSpeakerTitle": "الوقت لكل متحدث (تجمع خاضع للإشراف)",
-        "perSpeakerHelp": "اضبط إجمالي الوقت باعتباره الحد الأقصى لكل مكبر صوت ووقت السماعة باعتباره الوقت المتبقي؛ ينتقل التقدم إلى السماعة التالية ويعيد ضبط ما تبقى من الغطاء.",
-        "currentSpeaker": "المتحدث الحالي",
-        "nextSpeaker": "المتحدث التالي",
-        "speechNotesCurrentSpeaker": "ملاحظات الكلام (المتحدث الحالي)",
-        "speechNotesHelp": "ترتبط الملاحظات بنص مؤقت المتحدث الحالي، وعندما تحتوي قائمة المتحدثين على شخص ما يحمل علامة \"حاضر\"، يتم تخزين تفويضه كمرجع.",
-        "timerFloorLabel": "الموقت (الأرضية):",
-        "speakerListCurrent": "قائمة المتحدثين (الحالية):",
-        "noCurrentDelegation": "لم يتم وضع علامة \"حالي\" على التفويض في قائمة المتحدثين.",
-        "note": "ملحوظة",
-        "notePlaceholder": "النقاط، النقاط المهمة، النغمة، المتابعات...",
-        "saveSpeechNote": "حفظ ملاحظة الكلام",
-        "recentNotes": "ملاحظاتك الأخيرة (هذه اللجنة)",
-        "delete": "يمسح",
-        "speakerTimeRemaining": "وقت المتحدث (المتبقي)",
-        "remainingHelpPerSpeaker": "العد التنازلي للمتحدث الحالي (يتم إعادة الضبط عند التقدم).",
-        "remainingHelpNormal": "العد التنازلي للمتحدث الحالي (يمكن أن يكون أقل من الإجمالي).",
-        "totalTime": "الوقت الإجمالي",
-        "totalHelpPerSpeaker": "غطاء لكل مكبر صوت (القاسم على الأرض؛ العبوات المسبقة المتبقية لهذا).",
-        "totalHelpNormal": "الطول الكامل لجزء المؤقت هذا (يظهر بعد الشرطة المائلة على الأرض).",
-        "saveTimer": "حفظ الموقت",
-        "advanceSpeakerReset": "تقدم مكبر الصوت وإعادة ضبط الساعة",
-        "recentPauseLog": "سجل التوقف المؤقت الأخير",
-        "noPauseEvents": "لم يتم تسجيل أي أحداث توقف مؤقت لهذه اللجنة بعد.",
-        "openPauseLogHint": "افتح سجل الإيقاف المؤقت لمراجعة أسباب الإيقاف المؤقت والطوابع الزمنية المسجلة.",
-        "saved": "تم حفظ الموقّت.",
-        "savedCapped": "تم حفظ الموقّت. كان وقت المتحدث أطول من الإجمالي. توج إلى المجموع.",
-        "alreadyPaused": "تم إيقاف المؤقت مؤقتًا بالفعل.",
-        "pausedForCommittee": "توقف مؤقت للجنة.",
-        "alreadyRunning": "الموقّت قيد التشغيل بالفعل.",
-        "runningForCommittee": "تشغيل الموقت للجنة.",
-        "euTimerBoardTitle": "لوحة مؤقت البرلمان الأوروبي (11 مؤقتًا)",
-        "euTimerBoardHelp": "مؤقت واحد لكل حفلة، بالإضافة إلى الوقت الإجمالي، ووقت POI/POC، ووقت المتحدث. استخدم \"تطبيق\" لنسخ صف في حقول المؤقت المباشر في علامة التبويب \"الساعة\" (وقت السماعة / حفظ المؤقت).",
-        "euTimerName": "اسم",
-        "euTimerTag": "علامة",
-        "euTotalTime": "الوقت الإجمالي",
-        "euPoiPocTime": "وقت النقطة المهمة/POC",
-        "euSpeakerTime": "وقت المتحدث"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "قاعة اللجنة (كاملة)",
         "hint": "التخطيط الافتراضي وطابق المندوبين"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "فشل الحفظ التلقائي",
     "autosavedWithCountry": "تم الحفظ تلقائيًا — {country}",
     "delegateFallback": "مندوب"
+  },
+  "sources": {
+    "addSource": "أضف المصدر",
+    "sourceUrl": "عنوان URL المصدر",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (مستحسن)",
+    "urlHelp": "للحصول على مستند Google جديد، استخدم الزر والصق رابط المستند هنا.",
+    "titleOptional": "العنوان (اختياري)",
+    "saveChanges": "حفظ التغييرات",
+    "editSource": "تحرير المصدر",
+    "urlPlaceholderShort": "مستند Google أو عنوان URL آخر",
+    "empty": "لا توجد مصادر حتى الآن. أضف رابط Google Doc لفتحه هنا.",
+    "sourceLabel": "مصدر",
+    "openLink": "فتح الرابط",
+    "embedHeading": "وثيقة المصدر",
+    "notGoogleDoc": "عنوان URL هذا ليس مستند Google. استخدم الرابط docs.google.com/document/d/... للتضمين والتعديل هنا؛ وإلا افتح الرابط أعلاه."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "لا يمكن للمندوبين تحميل أوراق الموقف مباشرة. استخدم نوع مستند آخر.",
+    "alertOnlyChairsPositionPaper": "يمكن فقط للرؤساء/فريق الإدارة العليا/المشرف تحميل أوراق الموقف.",
+    "alertOnlySmtChairReport": "يمكن فقط لـ SMT/admin تحميل تقارير الرئيس.",
+    "alertOnlySmtRop": "يمكن فقط لـ SMT/admin تحميل مستندات RoP.",
+    "alertOnlySmtAwardCriteria": "يمكن فقط لـ SMT/admin تحميل مستندات معايير الجائزة.",
+    "alertNeedContentOrUrl": "قم بإضافة محتوى نصي محلي أو عنوان URL لمحرر مستندات Google.",
+    "confirmDelete": "هل تريد حذف هذا المستند؟",
+    "delegatePrepTitle": "قسم المستندات التحضيرية",
+    "delegatePrepBody": "يمكنك تحميل وعرض وتحرير <prep>مستندات الإعداد</prep> الخاصة بك مباشرة من هذه الصفحة.",
+    "positionPaperGuideTitle": "دليل ورقة الموقف",
+    "positionPaperGuideBlurb": "قم بتنزيل دليل العناصر النائبة أثناء إعداد ملف PDF النهائي.",
+    "downloadPlaceholderGuide": "تنزيل دليل العناصر النائبة",
+    "addDocument": "أضف وثيقة",
+    "tabs": {
+      "ariaLabel": "أقسام الوثيقة",
+      "library": "مكتبة",
+      "compose": "يؤلف",
+      "composeHint": "ابدأ مستندًا جديدًا أو قم بتحرير مسودة موجودة من علامة التبويب هذه."
+    },
+    "newDocumentTitle": "وثيقة جديدة",
+    "editDocumentTitle": "تحرير المستند",
+    "typeLabel": "يكتب",
+    "types": {
+      "position_paper": "ورقة الموقف",
+      "chair_report": "تقرير الكرسي",
+      "rop": "RoP",
+      "award_criteria": "معايير الجائزة",
+      "chair_notes": "ملاحظات الكرسي",
+      "prep_doc": "وثيقة الإعدادية"
+    },
+    "delegatePositionPaperNote": "يتم تحميل أوراق الموقف من قبل الكراسي مع ردود الفعل.",
+    "delegateOwner": "مالك مندوب",
+    "chairRecipient": "متلقي الكرسي",
+    "titleLabel": "عنوان",
+    "titlePlaceholder": "عنوان الوثيقة",
+    "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (تضمين العرض/التحرير في التطبيق)",
+    "googleDocsHelp": "استخدم مستند Google الجديد لفتح Google في علامة تبويب جديدة، ثم الصق رابط المستند هنا. النص العادي أدناه اختياري. يحتاج كل مستند إما إلى نص محلي أو رابط Google Doc أو كليهما.",
+    "plainTextOptional": "نص عادي (اختياري)",
+    "plainTextPlaceholder": "ملاحظات أو مسودة نص...",
+    "chairFeedbackLabel": "ردود فعل الكرسي",
+    "chairFeedbackPlaceholder": "ردود الفعل على ورقة موقف الوفد...",
+    "empty": "لا توجد وثائق حتى الآن. قم بإضافة واحد أو ربط مستند Google.",
+    "sidebarDocumentLabel": "وثيقة",
+    "sections": {
+      "chairReports": "تقارير الكرسي",
+      "rop": "RoP",
+      "awardCriteria": "معايير الجائزة",
+      "prepDocuments": "الوثائق الإعدادية",
+      "chairNotes": "ملاحظات الكرسي",
+      "otherDocuments": "وثائق أخرى"
+    },
+    "untitled": "بدون عنوان",
+    "linkedDocumentHeading": "وثيقة مرتبطة",
+    "notesHeading": "ملحوظات",
+    "noGoogleDocYet": "لم يتم ربط مستند Google حتى الآن. استخدم \"تحرير\" لإضافة عنوان URL docs.google.com/document/d/....",
+    "chairFeedbackHeading": "ردود فعل الكرسي",
+    "noFeedbackYet": "لم تتم إضافة أي تعليقات حتى الآن."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "أدخل البريد الإلكتروني للمفوض أولاً.",
+    "sentToDelegate": "تم الإرسال إلى {البريد الإلكتروني}.",
+    "newResolution": "قرار جديد",
+    "maxDraftResolutions": "لدى هذه اللجنة بالفعل {count} من مشاريع القرارات.",
+    "googleDocLink": "رابط مستند جوجل",
+    "googleDocUrlPlaceholder": "عنوان URL لمحرّر مستندات Google (docs.google.com/document/d/... — يُستخدم للتضمين + التحرير)",
+    "googleDocUrlHelp": "يتم فتح مستند Google الجديد في علامة تبويب أخرى؛ انسخ عنوان URL من شريط العناوين والصقه هنا.",
+    "mainSubmittersPlaceholder": "المُرسلون الرئيسيون (معرفات المستخدم، مفصولة بفواصل)",
+    "coSubmittersPlaceholder": "المرسلون المشاركون (معرفات المستخدم، مفصولة بفواصل)",
+    "create": "يخلق",
+    "cancel": "يلغي",
+    "openInNewTab": "افتح في علامة تبويب جديدة",
+    "noGoogleDocLink": "لا يوجد رابط لمستند Google",
+    "visibleToOtherBloc": "مرئية للكتلة الأخرى",
+    "resolutionCounts": "الغواصات الرئيسية: {الرئيسية} | الغواصات المشتركة: {co} | الموقعون: {الموقعون}",
+    "blocButton": "كتلة {اسم} ({موقف})",
+    "signVirtually": "قم بالتسجيل افتراضيًا (تم إخطار الغواصات الرئيسية)",
+    "shareByEmail": "مشاركة القرار عن طريق البريد الإلكتروني",
+    "delegateEmailPlaceholder": "مندوب@email.com",
+    "sendToDelegate": "إرسال إلى المندوب",
+    "clauseEditor": "محرر جملة",
+    "noClausesYet": "لا توجد بنود حتى الآن.",
+    "clauseNumber": "بند {رقم}",
+    "saveClause": "حفظ الجملة",
+    "delete": "يمسح",
+    "addClausePlaceholder": "إضافة جملة جديدة...",
+    "addClause": "إضافة جملة",
+    "clauseVoteHistory": "بند التصويت التاريخ",
+    "noClauseOutcomesYet": "لم يتم تسجيل نتائج التصويت على البند حتى الآن.",
+    "clauseFallback": "بند",
+    "passed": "اجتاز",
+    "failed": "فشل",
+    "motionId": "الحركة {معرف}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "أقسام التصويت",
+      "open": "يفتح",
+      "closed": "مغلق"
+    },
+    "requiredMajority": "الأغلبية المطلوبة",
+    "helpRequiredMajorityTitle": "الأغلبية المطلوبة",
+    "helpRequiredMajorityBody": "اختر حد التصويت المستخدم لتحديد النجاح/الرسوب. \"بسيط\" أكثر من النصف. `2/3` يتطلب أغلبية ساحقة.",
+    "majoritySimple": "بسيط",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{التسمية} الأغلبية",
+    "mustVote": "يجب التصويت",
+    "helpMustVoteTitle": "يجب التصويت",
+    "helpMustVoteBody": "وضع علامة على هذا الاقتراح باعتباره عنصرًا \"يجب التصويت عليه\". يُستخدم هذا لتوصيل المتطلبات إلى المشاركين (اعتمادًا على تشكيل اللجنة الخاصة بك).",
+    "saveSettings": "حفظ الإعدادات",
+    "delegateBlurb": "تسجل المنصة الأصوات في الجلسة (على سبيل المثال، نداء الأسماء). تتبع تصويتات الاقتراح هنا نعم/لا فقط (لا يتم استخدام الامتناع عن التصويت). يمكنك متابعة النتيجة. المندوبون لا يدلون بأصواتهم في التطبيق.",
+    "yes": "نعم",
+    "no": "لا",
+    "ballots": "بطاقات الاقتراع",
+    "total": "المجموع",
+    "outcome": "حصيلة",
+    "passed": "اجتاز",
+    "failed": "فشل",
+    "noRecordedVotes": "لا توجد أصوات مسجلة",
+    "reopenMotion": "إعادة فتح الحركة",
+    "editRecordOpen": "تحرير السجل...",
+    "hideSettings": "إخفاء الإعدادات",
+    "preliminaryPassing": "تمرير (أولي)",
+    "preliminaryFailing": "فاشل (مبدئي)",
+    "delegateRollCall": "مندوب الأسماء ({count})",
+    "noSeatedDelegates": "لا يوجد مندوبين جالسين متاحين لهذا الاقتراح.",
+    "rollPrefix": "لفافة:",
+    "recordedPrefix": "المسجلة:",
+    "recordedYes": "نعم",
+    "recordedNo": "لا",
+    "recordedAbstain": "امتنع عن التصويت",
+    "recordedNone": "—",
+    "abstain": "امتنع عن التصويت",
+    "clear": "واضح",
+    "closeMotion": "حركة قريبة",
+    "mustVoteBadge": "يجب التصويت",
+    "canVoteBadge": "يمكن التصويت",
+    "noMotions": "لا توجد حركات حتى الآن.",
+    "currentOpenMotion": "الحركة المفتوحة الحالية",
+    "noOpenMotion": "لا توجد حركة مفتوحة في الوقت الحالي.",
+    "recentClosedMotions": "الحركات المغلقة الأخيرة",
+    "noClosedMotions": "لا توجد إقتراحات مغلقة حتى الآن.",
+    "untitled": "بدون عنوان",
+    "voteTypes": {
+      "motion": "حركة",
+      "amendment": "تعديل",
+      "resolution": "دقة",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "غائب (لفة)",
+      "present_abstain": "حاضر - قد يمتنع عن التصويت (لفة)",
+      "present_voting": "الحاضر والتصويت (لفة)",
+      "unknown": "- (لفافة)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "أقسام الملف الشخصي",
+      "overview": "ملخص",
+      "awards": "الجوائز",
+      "private": "السجلات الخاصة",
+      "settings": "إعدادات الملف الشخصي"
+    },
+    "profilePicture": "صورة الملف الشخصي",
+    "uploadFile": "تحميل الملف",
+    "uploading": "جارٍ التحميل…",
+    "photoSaved": "تم تحميل الصورة وحفظها.",
+    "orUrl": "أو تم تعيينه بواسطة URL",
+    "urlPlaceholder": "https://...",
+    "name": "اسم",
+    "username": "اسم المستخدم",
+    "usernamePlaceholder": "على سبيل المثال alex_1999",
+    "pronouns": "الضمائر",
+    "customPronounNote": "يحتوي ملفك الشخصي على مجموعة ضمائر مخصصة لم تعد مقبولة هنا. حدد خيارًا أعلاه (أو اتركه فارغًا). يستبدل الحفظ القيمة القديمة.",
+    "school": "مدرسة",
+    "schoolPlaceholder": "على سبيل المثال مدرسة لينكولن الثانوية",
+    "grade": "درجة",
+    "selectGrade": "حدد الصف",
+    "conferencesAttended": "المؤتمرات التي حضرها",
+    "awardsComma": "الجوائز (مفصولة بفواصل)",
+    "awardsPlaceholder": "أفضل مندوب، وسام الشرف",
+    "allocation": "توزيع",
+    "selectAllocation": "حدد التخصيص",
+    "noAllocationsPlaceholder": "لا يوجد مخصصات اللجنة المتاحة",
+    "saveProfile": "حفظ الملف الشخصي",
+    "saved": "تم حفظ الملف الشخصي.",
+    "saveFailed": "لا يمكن حفظ الملف الشخصي.",
+    "errUsernamePattern": "يجب أن يتكون اسم المستخدم من 3 إلى 32 حرفًا (أحرف، أرقام، _، .، -)",
+    "errPronounsPreset": "اختر ضميرًا من القائمة.",
+    "errImageType": "الرجاء اختيار ملف الصورة.",
+    "errImageSize": "الصورة كبيرة جدًا (بحد أقصى 5 ميغابايت).",
+    "errUploadFailed": "فشل التحميل.",
+    "errStorageSetup": "لم يتم إعداد تخزين صورة الملف الشخصي. في مشروع Supabase، قم بتشغيل الترحيل 00100_profile_pictures_storage_bucket.sql، أو قم بإنشاء مجموعة تخزين عامة تسمى صور الملف الشخصي (راجع README).",
+    "errPublicUrl": "تعذر حل عنوان URL العام للصورة التي تم تحميلها.",
+    "fallbacks": {
+      "yourCountry": "بلدك",
+      "committeeSession": "جلسة اللجنة",
+      "delegate": "مندوب",
+      "speechNote": "مذكرة الكلام",
+      "untitledMotion": "حركة بلا عنوان",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "مرحبًا بمندوب {علم} {بلد}",
+      "subtitle": "ما الذي تريد أن تبدأ به؟",
+      "links": {
+        "documents": "وثائق",
+        "notes": "ملحوظات",
+        "committeeRoom": "غرفة اللجنة",
+        "runningNotes": "تشغيل الملاحظات",
+        "ideas": "أفكار",
+        "guides": "أدلة",
+        "sources": "مصادر",
+        "resolutions": "القرارات",
+        "speeches": "الخطب",
+        "stances": "مواقف",
+        "crisisSlides": "شرائح الأزمة",
+        "report": "تقرير",
+        "motions": "الحركات",
+        "points": "نقاط"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "الجوائز في ملفك الشخصي",
+      "rank": "رتبة {رتبة}",
+      "pending": {
+        "tab": "في انتظار الترشيحات",
+        "title": "في انتظار الترشيحات للرئاسة",
+        "descriptionSingle": "تم حفظه بواسطة الكراسي ومشاركته مع SMT للمراجعة. تظهر الجوائز النهائية أدناه بعد التأكيد.",
+        "descriptionTabbed": "تم حفظه بواسطة الكراسي ومشاركته مع SMT للمراجعة. تظهر الجوائز النهائية بعد التأكيد."
+      },
+      "recorded": {
+        "tab": "الجوائز المسجلة",
+        "title": "الجوائز المسجلة",
+        "description": "يتم إدراجها عندما تقوم الكراسي أو SMT بتعيينك في متتبع الجوائز. الاعتراف النهائي يتبع قواعد المؤتمر الخاص بك."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "مرئية لك فقط، ولرؤساء اللجان، وفريق الإدارة العليا للجنة ذات الصلة.",
+      "points": {
+        "title": "نقاط الكرسي (خاصة)"
+      },
+      "speechNotes": {
+        "title": "ملاحظات خطاب الرئيس (خاصة)"
+      },
+      "motions": {
+        "title": "الحركات التي تحركتها",
+        "description": "تم الحفظ في ملفك الشخصي لمراجعة اللجنة وإشراف SMT."
+      }
+    },
+    "discipline": {
+      "title": "الحالة التأديبية (خاصة)",
+      "statusLine": "التحذيرات: {warnings} · المخالفات: {strikes}{votingDisabled}{speakingSuspending}{removedFromCommittee}",
+      "votingDisabled": "التصويت معطل",
+      "speakingSuspended": "الكلام معلق",
+      "removedFromCommittee": "تمت إزالته من اللجنة",
+      "updated": "تم التحديث: {القيمة}"
+    },
+    "preview": {
+      "ariaLabel": "معاينة الملف الشخصي",
+      "title": "معاينة",
+      "yourName": "اسمك",
+      "usernameNotSet": "لم يتم تعيين اسم المستخدم",
+      "gradeValue": "الصف {الدرجة}",
+      "awards": "الجوائز"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "القواعد الإجرائية (RoP)",
+        "content": "# القواعد الإجرائية \n\n## النقاط والحركات \n- **نقطة النظام**: الإجراء الصحيح \n- **نقطة المعلومات**: سؤال للمتحدث \n- **نقطة الامتياز الشخصي**: الراحة الشخصية \n- **اقتراح إلى الطاولة**: تأجيل المناقشة \n- **اقتراح التأجيل**: نهاية الجلسة \n\n## التصويت \n- الأغلبية البسيطة في المسائل الإجرائية \n- أغلبية 2/3 للمسائل الموضوعية \n- التصويت بنداء الأسماء إذا طلب ذلك"
+      },
+      "examples": {
+        "title": "أمثلة",
+        "content": "#أمثلة \n\n## تنسيق القرار \n``` \nالجمعية العامة، \n... \n1. يدعو الدول الأعضاء إلى... \n2. يحث المجتمع الدولي على... \n``` \n\n## هيكل ورقة الموقف \n1. الخلفية \n2. سياسة الدولة \n3. الحلول المقترحة"
+      },
+      "templates": {
+        "title": "قوالب",
+        "content": "# القوالب \n\n## قالب تقرير الرئيس \n- نظرة عامة على اللجنة \n- نقاط المناقشة الرئيسية \n- القرارات مرت \n- التوصيات"
+      },
+      "chairReport": {
+        "title": "تقرير الكرسي",
+        "content": "# تقرير الكرسي \n\nقم بتوثيق إجراءات اللجنة ونتائجها هنا."
+      }
+    },
+    "edit": "يحرر",
+    "guideDocument": "وثيقة إرشادية",
+    "additionalNotes": "ملاحظات إضافية",
+    "noContentYet": "لا يوجد محتوى بعد.",
+    "titlePlaceholder": "عنوان",
+    "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "يتم فتح مستند Google الجديد في علامة تبويب أخرى. الصق رابطًا قابلاً للمشاركة حتى يتمكن المندوبون من فتح المستند هنا (يعتمد العرض/التحرير على مشاركة Google).",
+    "markdownOptional": "ملاحظات تخفيض السعر (اختيارية إذا كنت تستخدم مستند Google)",
+    "save": "يحفظ",
+    "cancel": "يلغي",
+    "createNewGuide": "إنشاء دليل جديد",
+    "slugPlaceholder": "سبيكة (فريدة من نوعها)",
+    "titleLowerPlaceholder": "عنوان",
+    "googleDocsUrlOptional": "عنوان URL لمحرّر مستندات Google (اختياري)",
+    "markdownContentOptional": "محتوى تخفيض السعر (اختياري)",
+    "create": "يخلق",
+    "glossary": {
+      "title": "مسرد جدول أعمال نموذج الأمم المتحدة (MUN).",
+      "subtitle": "مصطلحات فريدة تتوافق مع رمز لجنتك وموضوعات جدول الأعمال الحالية.",
+      "committeeCode": "رمز اللجنة: {code}",
+      "sources": {
+        "core": "جوهر",
+        "committee": "لجنة",
+        "topic": "عنوان"
+      },
+      "terms": {
+        "delegation": {
+          "term": "وفد",
+          "definition": "فريق دولة أو مراقب يمثل دولة أو جهة واحدة في اللجنة."
+        },
+        "placard": {
+          "term": "لافتة",
+          "definition": "علامة الدولة المستخدمة لطلب الكلمة والتصويت والإشارة إلى الاقتراحات الإجرائية."
+        },
+        "dais": {
+          "term": "دايس",
+          "definition": "رئاسة الفريق الذي يدير النقاش، ويطبق الإجراءات، ويدير ترتيب التحدث."
+        },
+        "quorum": {
+          "term": "النصاب القانوني",
+          "definition": "الحد الأدنى لعدد الوفود المطلوبة لإجراء الأعمال الرسمية والتصويت."
+        },
+        "motion": {
+          "term": "حركة",
+          "definition": "اقتراح رسمي لتغيير تدفق النقاش، مثل نوع التجمع أو وقت التحدث."
+        },
+        "point_of_order": {
+          "term": "نقطة النظام",
+          "definition": "التدخل عندما يتم تطبيق الإجراء بشكل غير صحيح بموجب قواعد اللجنة."
+        },
+        "moderated_caucus": {
+          "term": "كتلة معتدلة",
+          "definition": "جزء نقاش منظم مع خطابات قصيرة التوقيت حول موضوع فرعي محدد."
+        },
+        "unmoderated_caucus": {
+          "term": "تجمع غير خاضع للإشراف",
+          "definition": "فترة تفاوض غير رسمية يتحرك فيها المندوبون بحرية لصياغة الأفكار ودمجها."
+        },
+        "draft_resolution": {
+          "term": "مشروع القرار",
+          "definition": "النص العملي لإجراءات اللجنة المقترحة قبل التصويت النهائي والاعتماد."
+        },
+        "amendment": {
+          "term": "تعديل",
+          "definition": "التغيير المقترح على مسودة النص، سواء كان وديًا أو تم التصويت عليه على أنه غير ودي."
+        },
+        "operative_clause": {
+          "term": "بند المنطوق",
+          "definition": "عبارة مرقمة ذات توجه عملي تصف ما تقترح اللجنة القيام به."
+        },
+        "preambulatory_clause": {
+          "term": "بند تمهيدي",
+          "definition": "بند تحديد السياق الذي يشير إلى المبادئ الأساسية والاهتمامات والأطر السابقة."
+        },
+        "right_of_reply": {
+          "term": "حق الرد",
+          "definition": "فرصة للرد على بيان مباشر يمس كرامة الوفد أو منصبه."
+        },
+        "veto_power": {
+          "term": "قوة الفيتو",
+          "definition": "سلطة العضو الدائم في مجلس الأمن التابع للأمم المتحدة في منع مشاريع القرارات الموضوعية."
+        },
+        "chapter_vii": {
+          "term": "الفصل السابع",
+          "definition": "سلطة ميثاق الأمم المتحدة بشأن تهديدات السلام والعقوبات وتدابير استخدام القوة."
+        },
+        "sanctions_regime": {
+          "term": "نظام العقوبات",
+          "definition": "القيود المنسقة المستخدمة للتأثير على السلوك دون عمل عسكري مباشر."
+        },
+        "arms_control": {
+          "term": "مراقبة الأسلحة",
+          "definition": "الاتفاقيات وأنظمة التحقق التي تحد من أنواع الأسلحة أو كمياتها أو نشرها."
+        },
+        "non_proliferation": {
+          "term": "عدم الانتشار",
+          "definition": "سياسات لمنع انتشار الأسلحة النووية أو الكيميائية أو البيولوجية أو القدرات المتقدمة."
+        },
+        "confidence_building_measures": {
+          "term": "تدابير بناء الثقة",
+          "definition": "أدوات الشفافية والتواصل التي تقلل من سوء الفهم ومخاطر الصراع."
+        },
+        "universal_periodic_review": {
+          "term": "المراجعة الدورية الشاملة",
+          "definition": "عملية مراجعة النظراء حيث تقدم كل دولة عضو في الأمم المتحدة تقاريرها وتتلقى توصياتها المتعلقة بالحقوق."
+        },
+        "special_rapporteur": {
+          "term": "المقرر الخاص",
+          "definition": "تم تعيين خبير مستقل لرصد قضايا الحقوق المواضيعية أو القطرية وتقديم التقارير عنها."
+        },
+        "treaty_body": {
+          "term": "هيئة المعاهدة",
+          "definition": "لجنة الخبراء المشرفة على تنفيذ معاهدة محددة لحقوق الإنسان."
+        },
+        "public_health_emergency": {
+          "term": "طوارئ الصحة العامة",
+          "definition": "حدث تفشٍ خطير يتطلب استجابة وطنية ودولية منسقة وعاجلة."
+        },
+        "surveillance": {
+          "term": "المراقبة الوبائية",
+          "definition": "جمع وتحليل البيانات الصحية بشكل مستمر لاكتشاف وتتبع اتجاهات المرض."
+        },
+        "health_systems": {
+          "term": "تعزيز النظم الصحية",
+          "definition": "تحسين القوى العاملة والتمويل والخدمات اللوجستية والحوكمة من أجل تقديم رعاية صحية موثوقة."
+        },
+        "transnational_crime": {
+          "term": "الجريمة المنظمة العابرة للحدود الوطنية",
+          "definition": "يتم تنسيق النشاط الإجرامي عبر الحدود من خلال الشبكات والأسواق غير المشروعة."
+        },
+        "illicit_trafficking": {
+          "term": "الاتجار غير المشروع",
+          "definition": "الحركة غير المشروعة للمخدرات أو الأسلحة أو الأشخاص أو البضائع عبر الولايات القضائية."
+        },
+        "rule_of_law_capacity": {
+          "term": "القدرة على سيادة القانون",
+          "definition": "القدرة المؤسسية لأنظمة العدالة على التحقيق والملاحقة القضائية وحماية الحقوق بشكل عادل."
+        },
+        "sustainable_development": {
+          "term": "التنمية المستدامة",
+          "definition": "نموذج النمو الذي يوازن بين التقدم الاجتماعي والفرص الاقتصادية وحماية البيئة."
+        },
+        "financing_for_development": {
+          "term": "تمويل التنمية",
+          "definition": "آليات التمويل العامة والخاصة التي تدعم أولويات التنمية طويلة المدى."
+        },
+        "policy_coordination": {
+          "term": "تنسيق السياسات",
+          "definition": "مواءمة إجراءات الدولة والوكالة لتجنب الازدواجية وزيادة التأثير الجماعي."
+        },
+        "child_protection": {
+          "term": "حماية الطفل",
+          "definition": "تدابير لمنع الاستغلال والإساءة والعنف ضد الأطفال في جميع الأماكن."
+        },
+        "education_access": {
+          "term": "الوصول إلى التعليم",
+          "definition": "ضمان فرص التعلم الشاملة والمنصفة والمستمرة لجميع الأطفال."
+        },
+        "humanitarian_response": {
+          "term": "الاستجابة الإنسانية",
+          "definition": "إجراءات الإغاثة السريعة تلبي الاحتياجات العاجلة في الأزمات وحالات النزاع."
+        },
+        "gender_mainstreaming": {
+          "term": "تعميم مراعاة المنظور الجنساني",
+          "definition": "دمج التحليل الجنساني في تصميم السياسات وتنفيذها وتقييمها."
+        },
+        "gender_based_violence": {
+          "term": "العنف القائم على النوع الاجتماعي",
+          "definition": "الأذى الموجه إلى شخص ما على أساس الهوية الجنسية أو الأدوار أو علاقات القوة غير المتكافئة."
+        },
+        "economic_empowerment": {
+          "term": "التمكين الاقتصادي",
+          "definition": "توسيع نطاق الوصول إلى العمل اللائق، والتمويل، والملكية، وسلطة اتخاذ القرار."
+        },
+        "source_attribution": {
+          "term": "إسناد المصدر",
+          "definition": "الاستشهاد بمصدر المعلومات بوضوح حتى يمكن التحقق من المطالبات ووضعها في سياقها."
+        },
+        "verified_reporting": {
+          "term": "التقارير التي تم التحقق منها",
+          "definition": "معيار صحفي يتطلب التأييد قبل نشر الحقائق المتنازع عليها."
+        },
+        "editorial_independence": {
+          "term": "الاستقلال التحريري",
+          "definition": "فصل قرارات الإبلاغ عن الضغوط السياسية أو تأثير أصحاب المصلحة."
+        },
+        "climate_mitigation": {
+          "term": "التخفيف من آثار المناخ",
+          "definition": "الإجراءات التي تقلل من انبعاثات الغازات الدفيئة أو تزيد من إزالة الكربون على المدى الطويل."
+        },
+        "climate_adaptation": {
+          "term": "التكيف مع المناخ",
+          "definition": "السياسات والاستثمارات التي تقلل من التعرض للتأثيرات المرتبطة بالمناخ."
+        },
+        "cyber_norms": {
+          "term": "المعايير السيبرانية",
+          "definition": "التوقعات المشتركة بشأن سلوك الدولة المسؤول في المجالات الرقمية والسيبرانية."
+        },
+        "critical_infrastructure": {
+          "term": "البنية التحتية الحيوية",
+          "definition": "الأنظمة الأساسية مثل الطاقة والمياه والصحة والاتصالات التي تتطلب المرونة."
+        },
+        "epidemiology": {
+          "term": "علم الأوبئة",
+          "definition": "دراسة أنماط المرض وأسبابه وتوزيعه بين السكان."
+        },
+        "preparedness_response": {
+          "term": "الاستعداد والاستجابة",
+          "definition": "التخطيط والتنسيق والإجراءات المفاجئة لاحتواء حالات الطوارئ وإدارتها."
+        },
+        "non_refoulement": {
+          "term": "عدم الإعادة القسرية",
+          "definition": "مبدأ حظر عودة الأشخاص إلى الأماكن التي يواجهون فيها ضررًا جسيمًا."
+        },
+        "durable_solutions": {
+          "term": "الحلول الدائمة",
+          "definition": "النتائج طويلة المدى للنازحين: العودة، أو الاندماج المحلي، أو إعادة التوطين."
+        },
+        "nuclear_safeguards": {
+          "term": "الضمانات النووية",
+          "definition": "تدابير التحقق التي تضمن عدم تحويل المواد النووية لاستخدامها في الأسلحة."
+        },
+        "counter_terrorism": {
+          "term": "مكافحة الإرهاب",
+          "definition": "إجراءات قانونية ووقائية وأمنية متكاملة ضد النشاط الإرهابي."
+        },
+        "due_process": {
+          "term": "الإجراءات القانونية الواجبة",
+          "definition": "إجراءات قانونية عادلة تحمي الحقوق أثناء التحقيق والملاحقة القضائية والعقوبات."
+        },
+        "resource_security": {
+          "term": "أمن الموارد",
+          "definition": "الوصول الموثوق إلى الغذاء والماء والطاقة في ظل الضغوط الاقتصادية والبيئية."
+        },
+        "resilience": {
+          "term": "صمود",
+          "definition": "قدرة المجتمعات والمؤسسات على امتصاص الصدمات والتعافي بفعالية."
+        }
+      },
+      "topicLine": "الموضوع: {الموضوع}"
+    }
+  },
+  "ideas": {
+    "editIdea": "تحرير الفكرة",
+    "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "نص فكرة قصيرة (اختياري)",
+    "save": "يحفظ",
+    "cancel": "يلغي",
+    "addIntro": "أضف مستند Google لصياغة فكرة الحل في مكانها، أو اكتب ملاحظة قصيرة (أو كليهما).",
+    "googleDocsCreateHelp": "يتم فتح مستند Google الجديد في علامة تبويب أخرى؛ الصق الرابط هنا بعد إنشائه.",
+    "resolutionIdeaPlaceholder": "فكرة القرار...",
+    "add": "يضيف",
+    "noIdeasYet": "لا توجد أفكار حتى الآن.",
+    "ideaLabel": "فكرة",
+    "ideaFallback": "فكرة {رقم}",
+    "linkedDoc": "وثيقة مرتبطة",
+    "addedOn": "تمت الإضافة في {التاريخ}",
+    "edit": "يحرر",
+    "delete": "يمسح",
+    "ideaDocument": "وثيقة الفكرة",
+    "summary": "ملخص",
+    "emptyIdea": "فكرة فارغة."
+  },
+  "stances": {
+    "heatmapTitle": "نظرة عامة مختصرة على الموقف (الخريطة الحرارية)",
+    "heatmapHelp": "إلى أي مدى يدعم تخصيصك ___؟ (مقياس 1-5)",
+    "topicPlaceholder": "على سبيل المثال العمل المناخي",
+    "extentLabel": "المدى (1-5):",
+    "extentHelpTitle": "المدى (1-5)",
+    "extentHelpBody": "1 يعني أن تخصيصك يحظى بدعم قليل للموضوع، و5 يعني دعمًا قويًا. اختر رقمًا يتوافق مع موقفك في اللجنة.",
+    "add": "يضيف",
+    "viewOnlyHeatmap": "عرض الخريطة الحرارية للموظفين فقط.",
+    "notesPerAllocation": "ملاحظات لكل تخصيص",
+    "noAllocationsYet": "لا يوجد مخصصات حتى الآن",
+    "notesPlaceholder": "ملاحظات الموقف لهذا التخصيص...",
+    "noteLanguageWarning": "تحذير للقارئ: قد تحتوي هذه الملاحظة على لغة غير لائقة.",
+    "save": "يحفظ",
+    "saveHelpTitle": "حفظ مذكرة الموقف",
+    "saveHelpBody": "يحفظ مذكرة الموقف لهذا التخصيص. ويمكن الاطلاع عليه من قبل الموظفين والمشاركين الآخرين (حسب إعدادات اللجنة)."
+  },
+  "speeches": {
+    "newSpeech": "خطاب جديد",
+    "speechTitlePlaceholder": "عنوان الكلام",
+    "googleDocsUrl": "عنوان URL لمحرر مستندات Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "يفتح جوجل في علامة تبويب جديدة؛ الصق عنوان URL للمستند هنا عندما يكون جاهزًا.",
+    "plainTextOptional": "مسودة نص عادي (اختياري إذا كنت تستخدم مستند Google)",
+    "save": "يحفظ",
+    "cancel": "يلغي",
+    "noSpeechesYet": "لا يوجد خطابات بعد. قم بربط مستند Google أو لصق النص.",
+    "speechLabel": "خطاب",
+    "untitled": "بدون عنوان",
+    "edit": "يحرر",
+    "speechDocument": "وثيقة الكلام",
+    "draftText": "مسودة النص",
+    "noContentHint": "اربط مستند Google بالتحرير، أو أضف نصًا عاديًا في النموذج."
+  },
+  "committeeRoom": {
+    "committeeLabel": "لجنة",
+    "yourContext": "السياق الخاص بك",
+    "roleLabel": "دور",
+    "seatLabel": "مقعد",
+    "clearSearchTitle": "مسح البحث وإظهار كافة الوفود",
+    "vacantLabel": "شاغر",
+    "assignedLabel": "مُكَلَّف",
+    "daisLabel": "دايس",
+    "phaseLabel": "مرحلة",
+    "phaseVoting": "التصويت",
+    "phaseDebate": "مناظرة",
+    "focusSearchTitle": "بحث التركيز (عناوين وأسماء المنصة تتطابق مع استعلامك)",
+    "tipLabel": "نصيحة",
+    "searchVacantTitle": "البحث عن المقاعد \"الشاغرة\" في الغرفة",
+    "searchHint": "Type a country, delegate name, school, pronoun, or \"vacant\" to highlight matches in the room. اضغط على Enter للانتقال إلى المباراة الأولى؛ يمسح Esc. انقر فوق شاغر للانتقال إلى المقاعد الفارغة.",
+    "findLabel": "ابحث عن وفد أو عضو منصة",
+    "searchPlaceholder": "البلد، الاسم، المدرسة...",
+    "matchesCount": "{matches} من إجمالي {total} عدد المقاعد المتطابقة",
+    "enterScrolls": "أدخل مخطوطات",
+    "typeToFilterHint": "اكتب للتصفية - أدخل التمريرات للمطابقة الأولى",
+    "noMatches": "لا توجد وفود أو مقاعد على المنصة متطابقة.",
+    "digitalDisplay": "العرض الرقمي",
+    "floorLabel": "أرضية",
+    "staffSeatsHeading": "الموظفين - المقاعد",
+    "searchAria": "بحث الوفود",
+    "virtualRoomVacant": "شاغر",
+    "profileAria": "عرض الملف الشخصي: {country}",
+    "vacantSeatAria": "مقعد شاغر",
+    "placardAria": "لافتة {بلد}",
+    "gavelAria": "المطرقة",
+    "viewProfileAria": "عرض الملف الشخصي: {title}",
+    "noProfileLinkAria": "{title} (لا يوجد رابط للملف الشخصي)",
+    "committeeFloor": "أرضية اللجنة",
+    "virtualRoomFigureAria": "غرفة اللجنة الافتراضية - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "تصفية الوفود أول مقعد مميز هو أول مباراة في الحلبة.",
+    "helperText": "تتضمن اللافتات الدولة (من التخصيصات)، والاسم، والمدرسة، والضمائر من الملف الشخصي لكل مندوب. قم بتحرير ملفك الشخصي ضمن الملف الشخصي. تظهر مقاعد اللجنة الفارغة على أنها شاغرة. انقر فوق لافتة مملوءة أو مقعد على المنصة لفتح صفحة ذلك العضو (الدردشة والإبلاغ من هناك).",
+    "virtualRoomCaption": "قاعة لجنة نموذج الأمم المتحدة الافتراضية مع لافتات للمندوبين توضح البلد والاسم والمدرسة والضمائر."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "طلب التحدث",
+      "delegateFallback": "مندوب",
+      "needAllocation": "أنت بحاجة إلى تخصيص لطلب التحدث.",
+      "alreadyQueued": "لديك بالفعل طلب محادثة نشط في قائمة الانتظار.",
+      "requested": "طلبت التحدث. سوف تظهر في قائمة الانتظار.",
+      "requestFailed": "فشل في طلب التحدث.",
+      "helpBody": "يرسل وفدك إلى قائمة انتظار الكرسي. يمكن أن يكون لديك طلب انتظار/طلب حالي واحد نشط في المرة الواحدة.",
+      "purposeLabel": "غرض اختياري (يظهر في تسمية قائمة الانتظار)",
+      "purposeHelpTitle": "تسمية الغرض",
+      "purposeHelpBody": "يتم إلحاق هذا النص باسم بلدك حتى يتمكن الكراسي من معرفة سبب طلبك الكلمة.",
+      "purposePlaceholder": "على سبيل المثال دعم + نظرة عامة على التعديل",
+      "requesting": "جارٍ الطلب...",
+      "rollPromptTitle": "موافقة الرئيس مطلوبة",
+      "rollPromptBodyPickStatus": "بدأت الجلسة. اختر حالة النداء الخاص بك لفتح التحدث والتصويت. لا يمكن تغيير هذا الاختيار.",
+      "rollPromptBodyWaitSessionStart": "في انتظار الرئيس لبدء جلسة اللجنة.",
+      "rollPromptBodyWaitRollPrompt": "في انتظار مطالبة النداء.",
+      "rollPromptBodyMarkedAbsent": "لقد تم وضع علامة غائب عليك حاليًا. اطلب من الرئيس وضع علامة على حضورك للتحدث والتصويت.",
+      "rollPromptBodyChecking": "التحقق من حالة لفة الخاص بك...",
+      "rollPromptSaving": "توفير...",
+      "rollPromptPresent": "حاضر",
+      "rollPromptPresentVoting": "الحضور والتصويت"
+    },
+    "motionVoting": {
+      "votingProcedure": "إجراءات التصويت",
+      "currentMotion": "الحركة الحالية",
+      "motioner": "المحرك",
+      "majority": "غالبية",
+      "majoritySimple": "بسيط",
+      "tally": "نعم {نعم} - لا {لا} - الإجمالي {المجموع}",
+      "help": "تسجل المنصة تصويت كل وفد في الجلسة. تستخدم أصوات الاقتراح نعم أو لا فقط (لا يمتنع عن التصويت). الإجماليات تحسب فقط اللافتات التي تم تسجيل نعم أو لا فيها؛ يتم تخطي الوفود الغائبة."
+    },
+    "activeMotion": {
+      "currentMotion": "الحركة الحالية",
+      "motionFallback": "حركة",
+      "motioner": "المحرك",
+      "majority": "غالبية",
+      "majoritySimple": "بسيط",
+      "type": "يكتب",
+      "timer": "الموقت",
+      "currentSpeaker": "المتحدث الحالي",
+      "nextSpeaker": "المتحدث التالي",
+      "speakerTimeLeftCap": "وقت السماعة (يسار/غطاء)",
+      "speakerTimeLeftTotal": "وقت السماعة (يسار/إجمالي)",
+      "perSpeaker": "(لكل متحدث)",
+      "paused": "(متوقف مؤقتًا)",
+      "pauseReason": "وقفة: {السبب}"
+    },
+    "floorStatus": {
+      "sessionTime": "وقت الجلسة",
+      "sessionNotStarted": "لم تبدأ الجلسة",
+      "limit": "حد",
+      "limitRemaining": "{القيمة} متبقية",
+      "limitOverBy": "أكثر من {value}",
+      "quickLinkSession": "حصة",
+      "quickLinkRoll": "لفافة",
+      "quickLinkSpeakers": "مكبرات الصوت",
+      "quickLinkMotions": "الحركات",
+      "quickLinkTimer": "الموقت",
+      "dais": "دايس",
+      "pinned": "مثبت",
+      "viewFullAnnouncement": "عرض الإعلان الكامل",
+      "timerPausesReadOnly": "توقف المؤقت مؤقتًا (للقراءة فقط)",
+      "speakerList": "قائمة المتحدثين",
+      "speakerFallback": "المتحدث",
+      "rollCallYou": "مكالمة هاتفية (أنت)",
+      "fullAnnouncement": "اعلان كامل",
+      "daisAnnouncement": "اعلان ديس",
+      "close": "يغلق",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "اسم الجلسة",
+      "sessionNamePlaceholder": "على سبيل المثال الجلسة الصباحية",
+      "sessionNameSaving": "توفير…",
+      "sessionNameSaved": "أنقذ",
+      "sessionNameHint": "يتم حفظه تلقائيًا ويظهر في سجل الجلسة.",
+      "title": "جلسة اللجنة",
+      "subtitle": "بدء أو إيقاف جلسة اللجنة.",
+      "helpStartStop": "البدء يبدأ مؤقت/حالة جلسة اللجنة المباشرة للجميع. يؤدي الإيقاف إلى إنهاء الجلسة ومسح الحد الزمني الحالي.",
+      "migrationUnavailable": "عناصر التحكم في الجلسة غير متاحة مؤقتًا حتى يتم تطبيق أحدث عمليات ترحيل قاعدة البيانات.",
+      "endTimeInFuture": "اختر وقت انتهاء في المستقبل، أو قم بالتبديل إلى بلا حدود.",
+      "sessionStartUnavailable": "الطابع الزمني لبدء الجلسة غير متاح حتى يتم تطبيق أحدث عمليات الترحيل.",
+      "endTimeInFutureSetNoLimit": "اختر وقت انتهاء في المستقبل، أو قم بتعيين أي حد.",
+      "sessionLimitUpdated": "تم تحديث حد الجلسة.",
+      "startedLabel": "بدأت:",
+      "timeInLabel": "الوقت في:",
+      "timeUntilEndLabel": "الوقت حتى النهاية:",
+      "overByValue": "انتهى بـ {value}",
+      "modeLabel": "وضع:",
+      "modeStopwatchNoLimit": "ساعة توقيت (لا يوجد حد زمني)",
+      "sessionNotRunning": "الجلسة ليست قيد التشغيل.",
+      "sessionLimit": "حد الجلسة",
+      "sessionLimitModesTitle": "أوضاع حد الجلسة",
+      "sessionLimitModesHelp": "None: no end. الميزانية الزمنية: تحسب من البداية. ينتهي عند: توقيت الساعة الثابت في منطقتك الزمنية المحلية.",
+      "sessionLimitOptional": "خياري.",
+      "noneLabel": "لا أحد",
+      "noneDescription": "يعمل حتى تتوقف.",
+      "timeBudgetLabel": "ميزانية الوقت",
+      "timeBudgetDescription": "تحسب من لحظة البدء.",
+      "endTimeLabel": "وقت الانتهاء",
+      "endTimeDescription": "يستخدم وقتًا ثابتًا على مدار الساعة (يتجاوز الميزانية إذا تم ضبطهما على حد سواء).",
+      "noneIndefinite": "لا شيء (غير محدد)",
+      "noneScheduledEndHint": "لا يوجد نهاية مجدولة؛ يتم عرض الوقت المنقضي فقط.",
+      "timeBudgetFromStart": "ميزانية الوقت من البداية",
+      "hoursLabel": "ساعات",
+      "minutesLabel": "دقائق",
+      "minimumOneMinute": "(الحد الأدنى 1 دقيقة)",
+      "endAtLocalTime": "تنتهي عند (التوقيت المحلي)",
+      "stopSession": "إيقاف الجلسة",
+      "saveLimit": "حفظ الحد",
+      "saveLimitHelp": "يتم تطبيق إعدادات الحد المحدثة أثناء تشغيل الجلسة بالفعل، دون إيقاف الجلسة.",
+      "startSession": "ابدأ الجلسة",
+      "sidebarUsePrefix": "استخدم الشريط الجانبي لـ",
+      "rollCall": "نداء رول",
+      "speakers": "مكبرات الصوت",
+      "formalMotions": "الاقتراحات الرسمية",
+      "timer": "الموقت",
+      "sidebarAnd": "و",
+      "announcements": "إعلانات",
+      "sidebarUseSuffix": "- أداة واحدة لكل علامة تبويب.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "تاريخ الجلسة",
+      "savedCount": "تم حفظ {عدد}.",
+      "permissionsHint": "يمكن للكراسي إعادة تسمية الإدخالات. يمكن لـ SMT/Admin إعادة تسمية وحذف الإدخالات.",
+      "empty": "لا يوجد سجل الجلسة حتى الآن.",
+      "rename": "إعادة تسمية",
+      "delete": "يمسح",
+      "deleteConfirm": "هل تريد حذف هذه الجلسة من السجل؟",
+      "sessionNamePrompt": "اسم الجلسة",
+      "rangeClosed": "{يتراوح}",
+      "rangeOngoing": "{النطاق} -> مستمر"
+    },
+    "timerPage": {
+      "title": "الموقت",
+      "controlsTitle": "ضوابط الموقت",
+      "controlsHelp": "استخدم الكلمة العامة لتوقيت المناقشة الشاملة، أو التصويت على الحركة لربط الرؤية بعنصر تصويت مفتوح محدد.",
+      "tabSetup": "1) الإعداد",
+      "tabClock": "2) ضوابط الساعة",
+      "tabNotes": "3) ملاحظات الكلام",
+      "tabLog": "4) سجل الإيقاف المؤقت",
+      "setupHelp": "اختر ما إذا كان هذا المؤقت مخصصًا للكلمة العامة (مرئيًا دائمًا للمندوبين) أو مرتبطًا بالحركة المفتوحة للتصويت (لا يراها المندوبون إلا عندما يكون هذا التصويت هو العنصر النشط). مع تشغيل الوقت لكل متحدث، تظل الساعة مرئية أثناء التجمع الانتخابي الخاضع للإشراف بغض النظر. إيقاف الساعة مؤقتًا / بدء تجميد الساعة أو استئناف العد التنازلي. اضبط وقت السماعة (المتبقي) وإجمالي الوقت بشكل مستقل، ثم احفظ المؤقت. تملأ الإعدادات المسبقة كلاهما بنفس الطول؛ يمكنك تعديل أي من الحقلين بعد ذلك. يتم تسجيل الإيقاف المؤقت لسبب قصير.",
+      "namedPreset": "اسمه مسبقا",
+      "applyPreset": "تطبيق الإعداد المسبق...",
+      "floorLabelDelegates": "تسمية الكلمة (المندوبين)",
+      "floorLabelPlaceholder": "على سبيل المثال جي إس إل 60 إس",
+      "timerPurpose": "الغرض الموقت",
+      "purposeGeneralFloor": "المناقشة العامة/الكلمة (غير مرتبطة بالتصويت)",
+      "purposeMotionVote": "حركة مفتوحة - مؤقت فقط عندما يكون هذا التصويت نشطًا على الأرض",
+      "openMotionForVoting": "اقتراح مفتوح (يجب أن يكون مفتوحًا للتصويت)",
+      "selectMotion": "حدد الحركة...",
+      "untitled": "بدون عنوان",
+      "noOpenMotionWarning": "ولا يوجد أي اقتراح مفتوح للتصويت. افتح التصويت أولاً، أو قم بتبديل الغرض إلى الأرضية العامة.",
+      "clock": "ساعة",
+      "running": "جري",
+      "paused": "متوقف مؤقتًا",
+      "saveToEnablePauseStart": "احفظ المؤقت لتمكين الإيقاف المؤقت/البدء.",
+      "pauseReasonLogged": "سبب الإيقاف المؤقت (تسجيل)",
+      "pauseReasonPlaceholder": "على سبيل المثال نقطة نظام، مشكلة تقنية، تجمع غير خاضع للإشراف...",
+      "pauseClock": "وقفة الساعة",
+      "startClock": "ساعة البداية",
+      "perSpeakerTitle": "الوقت لكل متحدث (تجمع خاضع للإشراف)",
+      "perSpeakerHelp": "اضبط إجمالي الوقت باعتباره الحد الأقصى لكل مكبر صوت ووقت السماعة باعتباره الوقت المتبقي؛ ينتقل التقدم إلى السماعة التالية ويعيد ضبط ما تبقى من الغطاء.",
+      "currentSpeaker": "المتحدث الحالي",
+      "nextSpeaker": "المتحدث التالي",
+      "speechNotesCurrentSpeaker": "ملاحظات الكلام (المتحدث الحالي)",
+      "speechNotesHelp": "ترتبط الملاحظات بنص مؤقت المتحدث الحالي، وعندما تحتوي قائمة المتحدثين على شخص ما يحمل علامة \"حاضر\"، يتم تخزين تفويضه كمرجع.",
+      "timerFloorLabel": "الموقت (الأرضية):",
+      "speakerListCurrent": "قائمة المتحدثين (الحالية):",
+      "noCurrentDelegation": "لم يتم وضع علامة \"حالي\" على التفويض في قائمة المتحدثين.",
+      "note": "ملحوظة",
+      "notePlaceholder": "النقاط، النقاط المهمة، النغمة، المتابعات...",
+      "saveSpeechNote": "حفظ ملاحظة الكلام",
+      "recentNotes": "ملاحظاتك الأخيرة (هذه اللجنة)",
+      "delete": "يمسح",
+      "speakerTimeRemaining": "وقت المتحدث (المتبقي)",
+      "remainingHelpPerSpeaker": "العد التنازلي للمتحدث الحالي (يتم إعادة الضبط عند التقدم).",
+      "remainingHelpNormal": "العد التنازلي للمتحدث الحالي (يمكن أن يكون أقل من الإجمالي).",
+      "totalTime": "الوقت الإجمالي",
+      "totalHelpPerSpeaker": "غطاء لكل مكبر صوت (القاسم على الأرض؛ العبوات المسبقة المتبقية لهذا).",
+      "totalHelpNormal": "الطول الكامل لجزء المؤقت هذا (يظهر بعد الشرطة المائلة على الأرض).",
+      "saveTimer": "حفظ الموقت",
+      "advanceSpeakerReset": "تقدم مكبر الصوت وإعادة ضبط الساعة",
+      "recentPauseLog": "سجل التوقف المؤقت الأخير",
+      "noPauseEvents": "لم يتم تسجيل أي أحداث توقف مؤقت لهذه اللجنة بعد.",
+      "openPauseLogHint": "افتح سجل الإيقاف المؤقت لمراجعة أسباب الإيقاف المؤقت والطوابع الزمنية المسجلة.",
+      "saved": "تم حفظ الموقّت.",
+      "savedCapped": "تم حفظ الموقّت. كان وقت المتحدث أطول من الإجمالي. توج إلى المجموع.",
+      "alreadyPaused": "تم إيقاف المؤقت مؤقتًا بالفعل.",
+      "pausedForCommittee": "توقف مؤقت للجنة.",
+      "alreadyRunning": "الموقّت قيد التشغيل بالفعل.",
+      "runningForCommittee": "تشغيل الموقت للجنة.",
+      "euTimerBoardTitle": "لوحة مؤقت البرلمان الأوروبي (11 مؤقتًا)",
+      "euTimerBoardHelp": "مؤقت واحد لكل حفلة، بالإضافة إلى الوقت الإجمالي، ووقت POI/POC، ووقت المتحدث. استخدم \"تطبيق\" لنسخ صف في حقول المؤقت المباشر في علامة التبويب \"الساعة\" (وقت السماعة / حفظ المؤقت).",
+      "euTimerName": "اسم",
+      "euTimerTag": "علامة",
+      "euTotalTime": "الوقت الإجمالي",
+      "euPoiPocTime": "وقت النقطة المهمة/POC",
+      "euSpeakerTime": "وقت المتحدث"
+    }
   }
 }

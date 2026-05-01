@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 
 export function ChairTopicTabsCard({
@@ -12,6 +12,7 @@ export function ChairTopicTabsCard({
   topics: { id: string; label: string }[];
   activeTopicId: string;
 }) {
+  const locale = useLocale();
   const t = useTranslations("chairTopicTabs");
   const tTopics = useTranslations("agendaTopics");
   const [msg, setMsg] = useState<string | null>(null);
@@ -49,7 +50,7 @@ export function ChairTopicTabsCard({
               ].join(" ")}
               aria-pressed={active}
             >
-              {translateAgendaTopicLabel(tTopics, topic.label)}
+              {translateAgendaTopicLabel(tTopics, topic.label, locale)}
             </button>
           );
         })}

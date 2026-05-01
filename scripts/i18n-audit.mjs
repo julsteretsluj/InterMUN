@@ -137,7 +137,7 @@ function keyPrefixForFile(file) {
   if (file.startsWith("components/")) {
     const parts = file.split("/");
     const area = parts[1] ?? "shared";
-    return `views.${area}`;
+    return `components.${area}`;
   }
   if (file.startsWith("app/")) {
     return "pageTitles";

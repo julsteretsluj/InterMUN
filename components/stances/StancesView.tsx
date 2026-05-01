@@ -27,7 +27,7 @@ export function StancesView({
   currentUserId: string;
   canEdit: boolean;
 }) {
-  const t = useTranslations("views.stances");
+  const t = useTranslations("stances");
   const tc = useTranslations("common");
   const router = useRouter();
   const [selectedAllocation, setSelectedAllocation] =

@@ -205,6 +205,22 @@
     "invalidProcedureSelection": "Invalid procedure selection.",
     "liveDebateTopic": "Live debate topic",
     "motionControlHelp": "Chair workflow: capture motions, open one vote at a time, record votes by allocation, then close the motion to finalize pass/fail.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then tap an agenda topic to open the voting panel with the full delegate list for that topic. Below, pick a topic to see committee vote totals.",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
     "tabSetup": "1) Setup",
     "tabFloorQueue": "2) Floor queue",
     "tabDraftMotion": "3) Draft motion",
@@ -645,6 +661,7 @@
     "voting": "Voting",
     "digitalRoom": "Digital Room",
     "committeeSession": "Committee session",
+    "committeeAgenda": "📑 Agenda",
     "announcements": "Announcements",
     "follow": "Follow",
     "guides": "Guides",
@@ -822,6 +839,7 @@
       "digitalRoom": "Digital Room",
       "rollCall": "Roll Call",
       "session": "Session",
+      "agenda": "Agenda",
       "speakers": "Speakers",
       "formalMotions": "Formal motions",
       "discipline": "Disciplinary",
@@ -901,855 +919,6 @@
       "memberStates": "UN Member States",
       "unSystem": "UN System (founders & members)",
       "history": "UN History"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Add source",
-      "sourceUrl": "Source URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (recommended)",
-      "urlHelp": "For a new Google Doc, use the button and paste the document link here.",
-      "titleOptional": "Title (optional)",
-      "saveChanges": "Save changes",
-      "editSource": "Edit source",
-      "urlPlaceholderShort": "Google Doc or other URL",
-      "empty": "No sources yet. Add a Google Doc link to open it here.",
-      "sourceLabel": "Source",
-      "openLink": "Open link",
-      "embedHeading": "Source document",
-      "notGoogleDoc": "This URL is not a Google Doc. Use a docs.google.com/document/d/… link to embed and edit here; otherwise open the link above."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Delegates cannot upload Position Papers directly. Use another document type.",
-      "alertOnlyChairsPositionPaper": "Only chairs/SMT/admin can upload Position Papers.",
-      "alertOnlySmtChairReport": "Only SMT/admin can upload Chair Reports.",
-      "alertOnlySmtRop": "Only SMT/admin can upload RoP documents.",
-      "alertOnlySmtAwardCriteria": "Only SMT/admin can upload Award Criteria documents.",
-      "alertNeedContentOrUrl": "Add either local text content or a Google Docs URL.",
-      "confirmDelete": "Delete this document?",
-      "delegatePrepTitle": "Prep document section",
-      "delegatePrepBody": "You can upload, view, and edit your own <prep>Prep documents</prep> directly from this page.",
-      "positionPaperGuideTitle": "Position paper guide",
-      "positionPaperGuideBlurb": "Download the placeholder guide while the final PDF is being prepared.",
-      "downloadPlaceholderGuide": "Download placeholder guide",
-      "addDocument": "Add document",
-      "tabs": {
-        "ariaLabel": "Document sections",
-        "library": "Library",
-        "compose": "Compose",
-        "composeHint": "Start a new document or edit an existing draft from this tab."
-      },
-      "newDocumentTitle": "New document",
-      "editDocumentTitle": "Edit document",
-      "typeLabel": "Type",
-      "types": {
-        "position_paper": "Position paper",
-        "chair_report": "Chair report",
-        "rop": "RoP",
-        "award_criteria": "Award criteria",
-        "chair_notes": "Chair notes",
-        "prep_doc": "Prep document"
-      },
-      "delegatePositionPaperNote": "Position papers are uploaded by chairs with feedback.",
-      "delegateOwner": "Delegate owner",
-      "chairRecipient": "Chair recipient",
-      "titleLabel": "Title",
-      "titlePlaceholder": "Document title",
-      "googleDocsUrl": "Google Docs URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (embed view/edit in app)",
-      "googleDocsHelp": "Use New Google Doc to open Google in a new tab, then paste the doc link here. Plain text below is optional. Every document needs either local text, a Google Doc link, or both.",
-      "plainTextOptional": "Plain text (optional)",
-      "plainTextPlaceholder": "Notes or draft text…",
-      "chairFeedbackLabel": "Chair feedback",
-      "chairFeedbackPlaceholder": "Feedback for the delegate position paper...",
-      "empty": "No documents yet. Add one or link a Google Doc.",
-      "sidebarDocumentLabel": "Document",
-      "sections": {
-        "chairReports": "Chair reports",
-        "rop": "RoP",
-        "awardCriteria": "Award criteria",
-        "prepDocuments": "Prep documents",
-        "chairNotes": "Chair notes",
-        "otherDocuments": "Other documents"
-      },
-      "untitled": "Untitled",
-      "linkedDocumentHeading": "Linked document",
-      "notesHeading": "Notes",
-      "noGoogleDocYet": "No Google Doc linked yet. Use Edit to add a docs.google.com/document/d/… URL.",
-      "chairFeedbackHeading": "Chair feedback",
-      "noFeedbackYet": "No feedback added yet."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Enter a delegate email first.",
-      "sentToDelegate": "Sent to {email}.",
-      "newResolution": "New Resolution",
-      "maxDraftResolutions": "This committee already has {count} draft resolutions.",
-      "googleDocLink": "Google Doc link",
-      "googleDocUrlPlaceholder": "Google Docs URL (docs.google.com/document/d/… — used for embed + editing)",
-      "googleDocUrlHelp": "New Google Doc opens in another tab; copy the URL from the address bar and paste it here.",
-      "mainSubmittersPlaceholder": "Main submitters (user IDs, comma-separated)",
-      "coSubmittersPlaceholder": "Co-submitters (user IDs, comma-separated)",
-      "create": "Create",
-      "cancel": "Cancel",
-      "openInNewTab": "Open in new tab",
-      "noGoogleDocLink": "No Google Doc link",
-      "visibleToOtherBloc": "Visible to other bloc",
-      "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
-      "blocButton": "Bloc {name} ({stance})",
-      "signVirtually": "Sign virtually (main subs notified)",
-      "shareByEmail": "Share resolution by email",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "Send to delegate",
-      "clauseEditor": "Clause editor",
-      "noClausesYet": "No clauses yet.",
-      "clauseNumber": "Clause {number}",
-      "saveClause": "Save clause",
-      "delete": "Delete",
-      "addClausePlaceholder": "Add a new clause...",
-      "addClause": "Add clause",
-      "clauseVoteHistory": "Clause vote history",
-      "noClauseOutcomesYet": "No recorded clause vote outcomes yet.",
-      "clauseFallback": "Clause",
-      "passed": "PASSED",
-      "failed": "FAILED",
-      "motionId": "Motion {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Voting sections",
-        "open": "Open",
-        "closed": "Closed"
-      },
-      "requiredMajority": "Required majority",
-      "helpRequiredMajorityTitle": "Required majority",
-      "helpRequiredMajorityBody": "Choose the vote threshold used to decide pass/fail. `Simple` is more than half. `2/3` requires a supermajority.",
-      "majoritySimple": "Simple",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majority",
-      "mustVote": "MUST vote",
-      "helpMustVoteTitle": "MUST vote",
-      "helpMustVoteBody": "Marks this motion as a “must-vote” item. This is used to communicate the requirement to participants (depending on your committee’s setup).",
-      "saveSettings": "Save settings",
-      "delegateBlurb": "The dais records votes in session (e.g. roll call). Motion votes here follow Yes/No only (abstain is not used). You can follow the tally; delegates do not cast votes in the app.",
-      "yes": "Yes",
-      "no": "No",
-      "ballots": "Ballots",
-      "total": "Total",
-      "outcome": "Outcome",
-      "passed": "Passed",
-      "failed": "Failed",
-      "noRecordedVotes": "No recorded votes",
-      "reopenMotion": "Reopen motion",
-      "editRecordOpen": "Edit record…",
-      "hideSettings": "Hide settings",
-      "preliminaryPassing": "Passing (preliminary)",
-      "preliminaryFailing": "Failing (preliminary)",
-      "delegateRollCall": "Delegate roll call ({count})",
-      "noSeatedDelegates": "No seated delegates available for this motion.",
-      "rollPrefix": "Roll:",
-      "recordedPrefix": "Recorded:",
-      "recordedYes": "Yes",
-      "recordedNo": "No",
-      "recordedAbstain": "Abstain",
-      "recordedNone": "—",
-      "abstain": "Abstain",
-      "clear": "Clear",
-      "closeMotion": "Close motion",
-      "mustVoteBadge": "MUST vote",
-      "canVoteBadge": "CAN vote",
-      "noMotions": "No motions yet.",
-      "currentOpenMotion": "Current open motion",
-      "noOpenMotion": "No open motion right now.",
-      "recentClosedMotions": "Recent closed motions",
-      "noClosedMotions": "No closed motions yet.",
-      "untitled": "Untitled",
-      "voteTypes": {
-        "motion": "Motion",
-        "amendment": "Amendment",
-        "resolution": "Resolution"
-      },
-      "roll": {
-        "absent": "Absent (roll)",
-        "present_abstain": "Present — may abstain (roll)",
-        "present_voting": "Present and voting (roll)",
-        "unknown": "— (roll)"
-      }
-    },
-    "profile": {
-      "fallbacks": {
-        "yourCountry": "your country",
-        "committeeSession": "Committee session",
-        "delegate": "Delegate",
-        "speechNote": "Speech note",
-        "untitledMotion": "Untitled motion",
-        "dash": "—"
-      },
-      "tabs": {
-        "ariaLabel": "Profile sections",
-        "overview": "Overview",
-        "awards": "Awards",
-        "private": "Private records",
-        "settings": "Profile settings"
-      },
-      "delegateWelcome": {
-        "title": "Welcome delegate of {flag} {country}",
-        "subtitle": "What would you like to start with?",
-        "links": {
-          "documents": "Documents",
-          "notes": "Notes",
-          "committeeRoom": "Committee room",
-          "runningNotes": "Running Notes",
-          "ideas": "Ideas",
-          "guides": "Guides",
-          "sources": "Sources",
-          "resolutions": "Resolutions",
-          "speeches": "Speeches",
-          "stances": "Stances",
-          "crisisSlides": "Crisis slides",
-          "report": "Report",
-          "motions": "Motions",
-          "points": "Points"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Awards on your profile",
-        "rank": "rank {rank}",
-        "pending": {
-          "tab": "Pending nominations",
-          "title": "Pending chair nominations",
-          "descriptionSingle": "Saved by chairs and shared with SMT for review. Final awards appear below after confirmation.",
-          "descriptionTabbed": "Saved by chairs and shared with SMT for review. Final awards appear after confirmation."
-        },
-        "recorded": {
-          "tab": "Recorded awards",
-          "title": "Recorded awards",
-          "description": "Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your conference's rules."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Visible only to you, committee chairs, and SMT for the relevant committee.",
-        "points": {
-          "title": "Chair points (private)"
-        },
-        "speechNotes": {
-          "title": "Chair speech notes (private)"
-        },
-        "motions": {
-          "title": "Motions you moved",
-          "description": "Saved to your profile for committee review and SMT oversight."
-        }
-      },
-      "discipline": {
-        "title": "Disciplinary status (private)",
-        "statusLine": "Warnings: {warnings} · Strikes: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "voting disabled",
-        "speakingSuspended": "speaking suspended",
-        "removedFromCommittee": "removed from committee",
-        "updated": "Updated: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Profile preview",
-        "title": "Preview",
-        "yourName": "Your name",
-        "usernameNotSet": "Username not set",
-        "gradeValue": "Grade {grade}",
-        "awards": "Awards"
-      },
-      "profilePicture": "Profile picture",
-      "uploadFile": "Upload file",
-      "uploading": "Uploading…",
-      "photoSaved": "Photo uploaded and saved.",
-      "orUrl": "Or set by URL",
-      "urlPlaceholder": "https://...",
-      "name": "Name",
-      "username": "Username",
-      "usernamePlaceholder": "e.g. alex_1999",
-      "pronouns": "Pronouns",
-      "customPronounNote": "Your profile had a custom pronoun set that is no longer accepted here. Pick an option above (or leave blank). Saving replaces the old value.",
-      "school": "School",
-      "schoolPlaceholder": "e.g. Lincoln High School",
-      "grade": "Grade",
-      "selectGrade": "Select grade",
-      "conferencesAttended": "Conferences attended",
-      "awardsComma": "Awards (comma-separated)",
-      "awardsPlaceholder": "Best Delegate, Honorable Mention",
-      "allocation": "Allocation",
-      "selectAllocation": "Select allocation",
-      "noAllocationsPlaceholder": "No committee allocations available",
-      "saveProfile": "Save profile",
-      "saved": "Profile saved.",
-      "saveFailed": "Could not save profile.",
-      "errUsernamePattern": "Username must be 3-32 chars (letters, numbers, _, ., -)",
-      "errPronounsPreset": "Choose a pronoun from the list.",
-      "errImageType": "Please choose an image file.",
-      "errImageSize": "Image is too large (max 5 MB).",
-      "errUploadFailed": "Upload failed.",
-      "errStorageSetup": "Profile picture storage is not set up. In the Supabase project, run migration 00100_profile_pictures_storage_bucket.sql, or create a public storage bucket named profile-pictures (see README).",
-      "errPublicUrl": "Could not resolve public URL for uploaded image.",
-      "dashboardCommittee": "Dashboard committee",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your dashboard and allocation list use. This is saved in this browser (same as the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Rules of Procedure (RoP)",
-          "content": "# Rules of Procedure\n\n## Points and Motions\n- **Point of Order**: Correct procedure\n- **Point of Information**: Question to speaker\n- **Point of Personal Privilege**: Personal comfort\n- **Motion to Table**: Postpone debate\n- **Motion to Adjourn**: End session\n\n## Voting\n- Simple majority for procedural matters\n- 2/3 majority for substantive matters\n- Roll-call vote if requested"
-        },
-        "examples": {
-          "title": "Examples",
-          "content": "# Examples\n\n## Resolution Format\n```\nThe General Assembly,\n...\n1. Calls upon member states to...\n2. Urges the international community to...\n```\n\n## Position Paper Structure\n1. Background\n2. Country Policy\n3. Proposed Solutions"
-        },
-        "templates": {
-          "title": "Templates",
-          "content": "# Templates\n\n## Chair Report Template\n- Committee overview\n- Key discussion points\n- Resolutions passed\n- Recommendations"
-        },
-        "chairReport": {
-          "title": "Chair Report",
-          "content": "# Chair Report\n\nDocument committee proceedings and outcomes here."
-        }
-      },
-      "edit": "Edit",
-      "guideDocument": "Guide document",
-      "additionalNotes": "Additional notes",
-      "noContentYet": "No content yet.",
-      "titlePlaceholder": "Title",
-      "googleDocsUrl": "Google Docs URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "New Google Doc opens in another tab. Paste a shareable link so delegates can open the doc here (view/edit depends on Google sharing).",
-      "markdownOptional": "Markdown notes (optional if you use a Google Doc)",
-      "save": "Save",
-      "cancel": "Cancel",
-      "createNewGuide": "Create new guide",
-      "slugPlaceholder": "slug (unique)",
-      "titleLowerPlaceholder": "title",
-      "googleDocsUrlOptional": "Google Docs URL (optional)",
-      "markdownContentOptional": "Markdown content (optional)",
-      "create": "Create",
-      "glossary": {
-        "title": "MUN Agenda Glossary",
-        "subtitle": "Unique terminology matched to your committee code and current agenda topics.",
-        "committeeCode": "Committee code: {code}",
-        "topicTag": "Topic: {topic}",
-        "sources": {
-          "core": "core",
-          "committee": "committee",
-          "topic": "topic"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Delegation",
-            "definition": "A country or observer team representing one state or entity in committee."
-          },
-          "placard": {
-            "term": "Placard",
-            "definition": "Country sign used to request the floor, vote, and signal procedural motions."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Chairing team that moderates debate, applies procedure, and manages speaking order."
-          },
-          "quorum": {
-            "term": "Quorum",
-            "definition": "Minimum number of delegations required to conduct formal business and votes."
-          },
-          "motion": {
-            "term": "Motion",
-            "definition": "Formal proposal to change the flow of debate, such as caucus type or speaking time."
-          },
-          "point_of_order": {
-            "term": "Point of Order",
-            "definition": "Intervention when procedure is being applied incorrectly under committee rules."
-          },
-          "moderated_caucus": {
-            "term": "Moderated Caucus",
-            "definition": "Structured debate segment with short timed speeches on a defined subtopic."
-          },
-          "unmoderated_caucus": {
-            "term": "Unmoderated Caucus",
-            "definition": "Informal negotiation period where delegates move freely to draft and merge ideas."
-          },
-          "draft_resolution": {
-            "term": "Draft Resolution",
-            "definition": "Working text of proposed committee action before final voting and adoption."
-          },
-          "amendment": {
-            "term": "Amendment",
-            "definition": "Change proposed to draft text, either friendly or voted upon as unfriendly."
-          },
-          "operative_clause": {
-            "term": "Operative Clause",
-            "definition": "Action-oriented numbered clause describing what the committee proposes to do."
-          },
-          "preambulatory_clause": {
-            "term": "Preambulatory Clause",
-            "definition": "Context-setting clause citing background principles, concerns, and prior frameworks."
-          },
-          "right_of_reply": {
-            "term": "Right of Reply",
-            "definition": "Opportunity to respond to a direct statement that affected delegation dignity or position."
-          },
-          "veto_power": {
-            "term": "Veto Power",
-            "definition": "UNSC permanent-member authority to block substantive draft resolutions."
-          },
-          "chapter_vii": {
-            "term": "Chapter VII",
-            "definition": "UN Charter authority on threats to peace, sanctions, and use-of-force measures."
-          },
-          "sanctions_regime": {
-            "term": "Sanctions Regime",
-            "definition": "Coordinated restrictions used to influence behavior without direct military action."
-          },
-          "arms_control": {
-            "term": "Arms Control",
-            "definition": "Agreements and verification systems that limit types, quantities, or deployment of weapons."
-          },
-          "non_proliferation": {
-            "term": "Non-Proliferation",
-            "definition": "Policies to prevent spread of nuclear, chemical, biological, or advanced weapon capabilities."
-          },
-          "confidence_building_measures": {
-            "term": "Confidence-Building Measures",
-            "definition": "Transparency and communication tools that reduce misunderstanding and conflict risk."
-          },
-          "universal_periodic_review": {
-            "term": "Universal Periodic Review",
-            "definition": "Peer-review process where each UN member state reports and receives rights recommendations."
-          },
-          "special_rapporteur": {
-            "term": "Special Rapporteur",
-            "definition": "Independent expert appointed to monitor and report on thematic or country rights issues."
-          },
-          "treaty_body": {
-            "term": "Treaty Body",
-            "definition": "Committee of experts supervising implementation of a specific human-rights treaty."
-          },
-          "public_health_emergency": {
-            "term": "Public Health Emergency",
-            "definition": "Serious outbreak event requiring urgent coordinated national and international response."
-          },
-          "surveillance": {
-            "term": "Epidemiological Surveillance",
-            "definition": "Continuous collection and analysis of health data to detect and track disease trends."
-          },
-          "health_systems": {
-            "term": "Health Systems Strengthening",
-            "definition": "Improving workforce, financing, logistics, and governance for reliable healthcare delivery."
-          },
-          "transnational_crime": {
-            "term": "Transnational Organized Crime",
-            "definition": "Criminal activity coordinated across borders through networks and illicit markets."
-          },
-          "illicit_trafficking": {
-            "term": "Illicit Trafficking",
-            "definition": "Illegal movement of drugs, arms, persons, or goods across jurisdictions."
-          },
-          "rule_of_law_capacity": {
-            "term": "Rule-of-Law Capacity",
-            "definition": "Institutional ability of justice systems to investigate, prosecute, and protect rights fairly."
-          },
-          "sustainable_development": {
-            "term": "Sustainable Development",
-            "definition": "Growth model balancing social progress, economic opportunity, and environmental protection."
-          },
-          "financing_for_development": {
-            "term": "Financing for Development",
-            "definition": "Public and private funding mechanisms that support long-term development priorities."
-          },
-          "policy_coordination": {
-            "term": "Policy Coordination",
-            "definition": "Alignment of state and agency actions to avoid duplication and increase collective impact."
-          },
-          "child_protection": {
-            "term": "Child Protection",
-            "definition": "Measures preventing exploitation, abuse, and violence against children in all settings."
-          },
-          "education_access": {
-            "term": "Education Access",
-            "definition": "Ensuring inclusive, equitable, and continuous learning opportunities for all children."
-          },
-          "humanitarian_response": {
-            "term": "Humanitarian Response",
-            "definition": "Rapid relief actions addressing urgent needs in crises and conflict settings."
-          },
-          "gender_mainstreaming": {
-            "term": "Gender Mainstreaming",
-            "definition": "Integrating gender analysis into policy design, implementation, and evaluation."
-          },
-          "gender_based_violence": {
-            "term": "Gender-Based Violence",
-            "definition": "Harm directed at someone based on gender identity, roles, or unequal power relations."
-          },
-          "economic_empowerment": {
-            "term": "Economic Empowerment",
-            "definition": "Expanding access to decent work, finance, ownership, and decision-making power."
-          },
-          "source_attribution": {
-            "term": "Source Attribution",
-            "definition": "Citing information origin clearly so claims can be verified and contextualized."
-          },
-          "verified_reporting": {
-            "term": "Verified Reporting",
-            "definition": "Journalistic standard requiring corroboration before publishing contested facts."
-          },
-          "editorial_independence": {
-            "term": "Editorial Independence",
-            "definition": "Separation of reporting decisions from political pressure or stakeholder influence."
-          },
-          "climate_mitigation": {
-            "term": "Climate Mitigation",
-            "definition": "Actions that reduce greenhouse-gas emissions or increase long-term carbon removal."
-          },
-          "climate_adaptation": {
-            "term": "Climate Adaptation",
-            "definition": "Policies and investments that reduce vulnerability to climate-related impacts."
-          },
-          "cyber_norms": {
-            "term": "Cyber Norms",
-            "definition": "Shared expectations for responsible state behavior in digital and cyber domains."
-          },
-          "critical_infrastructure": {
-            "term": "Critical Infrastructure",
-            "definition": "Essential systems such as power, water, health, and communications requiring resilience."
-          },
-          "epidemiology": {
-            "term": "Epidemiology",
-            "definition": "Study of disease patterns, causes, and distribution in populations."
-          },
-          "preparedness_response": {
-            "term": "Preparedness and Response",
-            "definition": "Planning, coordination, and surge actions to contain and manage emergencies."
-          },
-          "non_refoulement": {
-            "term": "Non-Refoulement",
-            "definition": "Principle prohibiting return of people to places where they face serious harm."
-          },
-          "durable_solutions": {
-            "term": "Durable Solutions",
-            "definition": "Long-term outcomes for displaced people: return, local integration, or resettlement."
-          },
-          "nuclear_safeguards": {
-            "term": "Nuclear Safeguards",
-            "definition": "Verification measures ensuring nuclear materials are not diverted for weapons use."
-          },
-          "counter_terrorism": {
-            "term": "Counter-Terrorism",
-            "definition": "Integrated legal, preventive, and security measures against terrorist activity."
-          },
-          "due_process": {
-            "term": "Due Process",
-            "definition": "Fair legal procedures protecting rights during investigation, prosecution, and sanctioning."
-          },
-          "resource_security": {
-            "term": "Resource Security",
-            "definition": "Reliable access to food, water, and energy under economic and environmental stress."
-          },
-          "resilience": {
-            "term": "Resilience",
-            "definition": "Capacity of communities and institutions to absorb shocks and recover effectively."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Edit idea",
-      "googleDocsUrl": "Google Docs URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Short idea text (optional)",
-      "save": "Save",
-      "cancel": "Cancel",
-      "addIntro": "Add a Google Doc to draft a resolution idea in place, or type a short note (or both).",
-      "googleDocsCreateHelp": "New Google Doc opens in another tab; paste the link here after it is created.",
-      "resolutionIdeaPlaceholder": "Resolution idea...",
-      "add": "Add",
-      "noIdeasYet": "No ideas yet.",
-      "ideaLabel": "Idea",
-      "ideaFallback": "Idea {number}",
-      "linkedDoc": "Linked doc",
-      "addedOn": "Added {date}",
-      "edit": "Edit",
-      "delete": "Delete",
-      "ideaDocument": "Idea document",
-      "summary": "Summary",
-      "emptyIdea": "Empty idea."
-    },
-    "stances": {
-      "heatmapTitle": "Brief Stance Overview (Heatmap)",
-      "heatmapHelp": "To what extent does your allocation support ___? (1-5 scale)",
-      "topicPlaceholder": "e.g. climate action",
-      "extentLabel": "Extent (1-5):",
-      "extentHelpTitle": "Extent (1-5)",
-      "extentHelpBody": "1 means your allocation has little support for the topic, and 5 means strong support. Pick a number that matches your stance in the committee.",
-      "add": "Add",
-      "viewOnlyHeatmap": "View-only heatmap for staff.",
-      "notesPerAllocation": "Notes per Allocation",
-      "noAllocationsYet": "No allocations yet",
-      "notesPlaceholder": "Stance notes for this allocation...",
-      "noteLanguageWarning": "Reader warning: this note may contain inappropriate language.",
-      "save": "Save",
-      "saveHelpTitle": "Save stance note",
-      "saveHelpBody": "Saves the stance note for this allocation. It can be viewed by staff and (depending on committee settings) other participants."
-    },
-    "speeches": {
-      "newSpeech": "New speech",
-      "speechTitlePlaceholder": "Speech title",
-      "googleDocsUrl": "Google Docs URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Opens Google in a new tab; paste the document URL here when ready.",
-      "plainTextOptional": "Plain text draft (optional if you use a Google Doc)",
-      "save": "Save",
-      "cancel": "Cancel",
-      "noSpeechesYet": "No speeches yet. Link a Google Doc or paste text.",
-      "speechLabel": "Speech",
-      "untitled": "Untitled",
-      "edit": "Edit",
-      "speechDocument": "Speech document",
-      "draftText": "Draft text",
-      "noContentHint": "Link a Google Doc with Edit, or add plain text in the form."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Committee",
-      "yourContext": "Your context",
-      "roleLabel": "Role",
-      "seatLabel": "Seat",
-      "clearSearchTitle": "Clear search and show all delegations",
-      "vacantLabel": "Vacant",
-      "assignedLabel": "Assigned",
-      "daisLabel": "Dais",
-      "phaseLabel": "Phase",
-      "phaseVoting": "Voting",
-      "phaseDebate": "Debate",
-      "focusSearchTitle": "Focus search (dais titles and names match your query)",
-      "tipLabel": "Tip",
-      "searchVacantTitle": "Search for \"vacant\" seats in the room",
-      "searchHint": "Type a country, delegate name, school, pronoun, or \"vacant\" to highlight matches in the room. Press Enter to jump to the first match; Esc clears. Click Vacant to jump to empty seats.",
-      "findLabel": "Find a delegation or dais member",
-      "searchPlaceholder": "Country, name, school...",
-      "matchesCount": "{matches} of {total} seats match",
-      "enterScrolls": "Enter scrolls",
-      "typeToFilterHint": "Type to filter - Enter scrolls to first match",
-      "noMatches": "No matching delegations or dais seats.",
-      "digitalDisplay": "Digital display",
-      "floorLabel": "Floor",
-      "staffSeatsHeading": "Staff - seats",
-      "searchAria": "Search delegations",
-      "virtualRoomVacant": "Vacant",
-      "profileAria": "View profile: {country}",
-      "vacantSeatAria": "Vacant seat",
-      "placardAria": "Placard {country}",
-      "gavelAria": "Gavel",
-      "viewProfileAria": "View profile: {title}",
-      "noProfileLinkAria": "{title} (no profile link)",
-      "committeeFloor": "Committee floor",
-      "virtualRoomFigureAria": "Virtual committee room - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Filtering delegations. First highlighted seat is the first match in the ring.",
-      "helperText": "Placards list country (from allocations), name, school, and pronouns from each delegate's profile. Edit yours under Profile. Empty committee seats show as Vacant. Click a filled placard or dais seat to open that member's page (chat and report from there).",
-      "virtualRoomCaption": "Virtual Model UN committee room with delegate placards showing country, name, school, and pronouns."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Request to speak",
-        "delegateFallback": "Delegate",
-        "needAllocation": "You need an allocation to request to speak.",
-        "alreadyQueued": "You already have an active speaking request in the queue.",
-        "requested": "Requested to speak. You will appear in the queue.",
-        "requestFailed": "Failed to request to speak.",
-        "helpBody": "Sends your delegation to the chair queue. You can have one active waiting/current request at a time.",
-        "purposeLabel": "Optional purpose (shows in queue label)",
-        "purposeHelpTitle": "Purpose label",
-        "purposeHelpBody": "This text is appended to your country name so chairs can see why you are requesting the floor.",
-        "purposePlaceholder": "e.g. support + amendment overview",
-        "requesting": "Requesting...",
-        "rollPromptTitle": "Chair approval required",
-        "rollPromptBodyPickStatus": "Session has started. Choose your roll-call status to unlock speaking and voting. This choice cannot be changed.",
-        "rollPromptBodyWaitSessionStart": "Waiting for the chair to start the committee session.",
-        "rollPromptBodyWaitRollPrompt": "Waiting for roll-call prompt.",
-        "rollPromptBodyMarkedAbsent": "You’re currently marked absent. Ask the chair to mark you Present to speak and vote.",
-        "rollPromptBodyChecking": "Checking your roll status...",
-        "rollPromptSaving": "Saving...",
-        "rollPromptPresent": "Present",
-        "rollPromptPresentVoting": "Present and voting"
-      },
-      "motionVoting": {
-        "votingProcedure": "Voting procedure",
-        "currentMotion": "Current motion",
-        "motioner": "Motioner",
-        "majority": "Majority",
-        "majoritySimple": "Simple",
-        "tally": "Yes {yes} - No {no} - Total {total}",
-        "help": "The dais records each delegation's vote in session. Motion votes use Yes or No only (no abstain). Totals count only placards where Yes or No was recorded; absent delegations are skipped."
-      },
-      "activeMotion": {
-        "currentMotion": "Current motion",
-        "motionFallback": "Motion",
-        "motioner": "Motioner",
-        "majority": "Majority",
-        "majoritySimple": "Simple",
-        "type": "Type",
-        "timer": "Timer",
-        "currentSpeaker": "Current speaker",
-        "nextSpeaker": "Next speaker",
-        "speakerTimeLeftCap": "Speaker time (left / cap)",
-        "speakerTimeLeftTotal": "Speaker time (left / total)",
-        "perSpeaker": "(per speaker)",
-        "paused": "(paused)",
-        "pauseReason": "Pause: {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "Session time",
-        "sessionNotStarted": "Session not started",
-        "limit": "Limit",
-        "limitRemaining": "{value} left",
-        "limitOverBy": "over by {value}",
-        "quickLinkSession": "Session",
-        "quickLinkRoll": "Roll",
-        "quickLinkSpeakers": "Speakers",
-        "quickLinkMotions": "Motions",
-        "quickLinkTimer": "Timer",
-        "dais": "Dais",
-        "pinned": "Pinned",
-        "viewFullAnnouncement": "View full announcement",
-        "timerPausesReadOnly": "Timer pauses (read-only)",
-        "speakerList": "Speaker list",
-        "speakerFallback": "Speaker",
-        "rollCallYou": "Roll call (you)",
-        "fullAnnouncement": "Full announcement",
-        "daisAnnouncement": "Dais announcement",
-        "close": "Close"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Session name",
-        "sessionNamePlaceholder": "e.g. Morning session",
-        "sessionNameSaving": "Saving…",
-        "sessionNameSaved": "Saved",
-        "sessionNameHint": "Saves automatically and appears in session history.",
-        "title": "Committee session",
-        "subtitle": "Start or stop the committee session.",
-        "helpStartStop": "Start begins the live committee session timer/status for everyone. Stop ends the session and clears the current time limit.",
-        "migrationUnavailable": "Session controls are temporarily unavailable until the latest database migrations are applied.",
-        "endTimeInFuture": "Choose an end time in the future, or switch to no limit.",
-        "sessionStartUnavailable": "Session start timestamp is unavailable until latest migrations are applied.",
-        "endTimeInFutureSetNoLimit": "Choose an end time in the future, or set no limit.",
-        "sessionLimitUpdated": "Session limit updated.",
-        "startedLabel": "Started:",
-        "timeInLabel": "Time in:",
-        "timeUntilEndLabel": "Time until end:",
-        "overByValue": "over by {value}",
-        "modeLabel": "Mode:",
-        "modeStopwatchNoLimit": "Stopwatch (no time limit)",
-        "sessionNotRunning": "Session is not running.",
-        "sessionLimit": "Session limit",
-        "sessionLimitModesTitle": "Session limit modes",
-        "sessionLimitModesHelp": "None: no end. Time budget: counts from start. End at: fixed clock time in your local timezone.",
-        "sessionLimitOptional": "Optional.",
-        "noneLabel": "None",
-        "noneDescription": "runs until you stop.",
-        "timeBudgetLabel": "Time budget",
-        "timeBudgetDescription": "counts from the moment you start.",
-        "endTimeLabel": "End time",
-        "endTimeDescription": "uses a fixed clock time (overrides budget if both were ever set).",
-        "noneIndefinite": "None (indefinite)",
-        "noneScheduledEndHint": "No scheduled end; only elapsed time is shown.",
-        "timeBudgetFromStart": "Time budget from start",
-        "hoursLabel": "Hours",
-        "minutesLabel": "Minutes",
-        "minimumOneMinute": "(minimum 1 minute)",
-        "endAtLocalTime": "End at (local time)",
-        "stopSession": "Stop session",
-        "saveLimit": "Save limit",
-        "saveLimitHelp": "Applies updated limit settings while the session is already running, without stopping the session.",
-        "startSession": "Start session",
-        "sidebarUsePrefix": "Use the sidebar for",
-        "rollCall": "Roll call",
-        "speakers": "Speakers",
-        "formalMotions": "Formal motions",
-        "timer": "Timer",
-        "sidebarAnd": "and",
-        "announcements": "Announcements",
-        "sidebarUseSuffix": "— one tool per tab."
-      },
-      "history": {
-        "title": "Session history",
-        "savedCount": "{count} saved",
-        "permissionsHint": "Chairs can rename entries. SMT/Admin can rename and delete entries.",
-        "empty": "No session history yet.",
-        "rename": "Rename",
-        "delete": "Delete",
-        "deleteConfirm": "Delete this session from history?",
-        "sessionNamePrompt": "Session name",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Ongoing"
-      },
-      "timerPage": {
-        "title": "Timer",
-        "controlsTitle": "Timer controls",
-        "controlsHelp": "Use General floor for overall debate timing, or Motion vote to tie visibility to a specific open vote item.",
-        "tabSetup": "1) Setup",
-        "tabClock": "2) Clock controls",
-        "tabNotes": "3) Speech notes",
-        "tabLog": "4) Pause log",
-        "setupHelp": "Choose whether this timer is for general floor (always visible to delegates) or tied to the motion open for voting (delegates only see it while that vote is the active item). With per-speaker time on, the clock stays visible during moderated caucus regardless. Pause clock / Start clock freeze or resume the countdown. Set Speaker time (remaining) and Total time independently, then Save timer. Presets fill both to the same length; you can edit either field afterward. Pauses are logged with a short reason.",
-        "namedPreset": "Named preset",
-        "applyPreset": "Apply preset...",
-        "floorLabelDelegates": "Floor label (delegates)",
-        "floorLabelPlaceholder": "e.g. GSL 60s",
-        "timerPurpose": "Timer purpose",
-        "purposeGeneralFloor": "General debate / floor (not tied to a vote)",
-        "purposeMotionVote": "Open motion - timer only while that vote is active on the floor",
-        "openMotionForVoting": "Open motion (must be open for voting)",
-        "selectMotion": "Select motion...",
-        "untitled": "Untitled",
-        "noOpenMotionWarning": "No motion is open for voting. Open a vote first, or switch purpose to general floor.",
-        "clock": "Clock",
-        "running": "Running",
-        "paused": "Paused",
-        "saveToEnablePauseStart": "save the timer to enable pause/start.",
-        "pauseReasonLogged": "Pause reason (logged)",
-        "pauseReasonPlaceholder": "e.g. Point of order, tech issue, unmoderated caucus...",
-        "pauseClock": "Pause clock",
-        "startClock": "Start clock",
-        "euTimerBoardTitle": "EU Parliament timer board (11 timers)",
-        "euTimerBoardHelp": "One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to copy a row into the live timer fields on the Clock tab (speaker time / Save timer).",
-        "euTimerName": "Name",
-        "euTimerTag": "Tag",
-        "euTotalTime": "Total time",
-        "euPoiPocTime": "POI / POC time",
-        "euSpeakerTime": "Speaker time",
-        "perSpeakerTitle": "Per-speaker time (moderated caucus)",
-        "perSpeakerHelp": "Set Total time as the per-speaker cap and Speaker time as time remaining; Advance moves to the next speaker and resets remaining to the cap.",
-        "currentSpeaker": "Current speaker",
-        "nextSpeaker": "Next speaker",
-        "speechNotesCurrentSpeaker": "Speech notes (current speaker)",
-        "speechNotesHelp": "Notes are tied to the Current speaker timer text and, when the speaker list has someone marked Current, their delegation is stored for reference.",
-        "timerFloorLabel": "Timer (floor):",
-        "speakerListCurrent": "Speaker list (current):",
-        "noCurrentDelegation": "No delegation is marked Current on the speaker list.",
-        "note": "Note",
-        "notePlaceholder": "Points, POIs, tone, follow-ups...",
-        "saveSpeechNote": "Save speech note",
-        "recentNotes": "Your recent notes (this committee)",
-        "delete": "Delete",
-        "speakerTimeRemaining": "Speaker time (remaining)",
-        "remainingHelpPerSpeaker": "Countdown for the current speaker (resets when you Advance).",
-        "remainingHelpNormal": "Countdown for the current speaker (can be less than total).",
-        "totalTime": "Total time",
-        "totalHelpPerSpeaker": "Per-speaker cap (denominator on the floor; Advance refills remaining to this).",
-        "totalHelpNormal": "Full length of this timer segment (shown after the slash on the floor).",
-        "saveTimer": "Save timer",
-        "advanceSpeakerReset": "Advance speaker and reset clock",
-        "recentPauseLog": "Recent pause log",
-        "noPauseEvents": "No pause events logged yet for this committee.",
-        "openPauseLogHint": "Open Pause log to review recorded pause reasons and timestamps.",
-        "saved": "Timer saved.",
-        "savedCapped": "Timer saved. Speaker time was longer than total; capped to total.",
-        "alreadyPaused": "Timer is already paused.",
-        "pausedForCommittee": "Timer paused for the committee.",
-        "alreadyRunning": "Timer is already running.",
-        "runningForCommittee": "Timer running for the committee."
-      }
     }
   },
   "timersWidget": {
@@ -1941,6 +1110,33 @@
     "disarmament": "Disarmament",
     "nonProliferation": "Non-proliferation",
     "armsDiversionMechanisms": "Developing mechanisms to prevent the diversion of legally traded conventional arms to illicit markets and non-state actors",
+    "ecosocImplementingUbiPovertyStability": "Implementing Universal Basic Incomes (UBIs) as a Strategy for Eradicating Poverty and Maintaining Economic Stability",
+    "ecosocReallocatingMilitaryExpenditurePublicHealth": "Establishing Frameworks for Reallocating Global Military Expenditure to Public Health Infrastructure",
+    "f1DurabilityLongevityCarComponents": "Implementing Durability and Longevity Standards for Critical Car Components to Optimize Component Lifecycles and Minimize Material and Energy Waste",
+    "f1GrandPrixBangkok2028Impacts": "Analyzing the Socio-Economic and Infrastructure Impacts of Hosting a New Grand Prix, with a Focus on Mitigating Urban Congestion and Logistics in Highly Populated Cities With a Focus on the Possible F1 Grand Prix of 2028 in Bangkok",
+    "pressCorpsJournalisticEthicsPublicHealth": "Determining Journalistic Ethics in Reporting on Public Health and Global Affairs",
+    "unicefMaternalNeonatalPostpartumHealthcare": "Strengthening Maternal, Neo-Natal, and Post-Partum Healthcare Systems to Significantly Reduce Preventable Maternal and Infant Mortality and Morbidity",
+    "unicefFlexibleWorkParentalLeaveEarlyChildhood": "Recommending Policy Frameworks to Encourage Employer-Supported Flexible Work Arrangements and Parental Leave to Facilitate Early Childhood Development and Strengthen Parent-Child Bonding",
+    "euParliInflationCostOfLivingEurope": "Addressing the Socio-Economic Impact of Inflation and the Rising Cost of Living on Vulnerable Populations across Europe",
+    "euParliCriminalSocietalPoliciesPovertyCrime": "Standardization of Criminal and Societal Policies Across Europe to Prevent Poverty Driven Cycles of Crime",
+    "unescoInclusiveEducationNeurodivergent": "Developing and Standardizing Inclusive Education Policies and Necessary Accommodations to Ensure Full and Equitable Access to Learning for Neurodivergent Students",
+    "unescoHistoricalFailuresEducationCurricula": "Establishing Guidelines for the Mandatory and Comprehensive Inetgration of Historical Failures, Atrocities, and Human Rights Violations into National Education Curricula to Promote Reconcilliation and Prevent Future Recurrence",
+    "unhrcDeathPenaltyStandardization": "the Standardization of the Regulation and Application of the Death Penalty",
+    "unhrcJudicialCruelTreatmentFinancialDeficencies": "the Obligation to Prevent Cruel, Inhuman, or Degrading Treatment within Judicial Systems as a result of Financial Deficencies",
+    "unodcAlternativesDrugPossessionPersonalUse": "Policy Analysis of Alternatives to Conviction and Punishment for Drug Posession for Personal Use",
+    "unodcIntergenerationalSubstanceAbuse": "Addressing the Inter-generational Impact of Substance Abuse and Addiction",
+    "unscPeacekeepingMedicalSupport": "Standardizing Peacekeeping Operations for Effective Global Implementation and Medical Support",
+    "unWomenReproductiveAutonomyAbortion": "Affirming and Guarenteeing Women's Reproductive Autonomy by Establishing International Legal Standards on Access to Safe and Legal Abortion",
+    "unWomenUniversalChildcareBirthRates": "Examining the Recognition of Universal Childcare as a Fundemental Human Right and its Role in Addressing Declining Birth Rates",
+    "disecCrossBorderLethalWeaponsLogistics": "Strengthening International Protocols and Logistics for Securing the Cross-Border Transport of Lethal Weapons",
+    "fwcPsychicChildExperimentationGiftedMinors": "Preventing Harm Caused by Psychic/Psychokinetic Child Experimentation and Ensuring the Protection and Rehabilitation of Gifted Minors",
+    "fwcPsychicTechnologiesNonProliferation": "Addressing the Weaponization of the Human Mind and Establishing International Protocols for the Containment and Non-Proliferation of Psychic Technologies",
+    "hscSarsOutbreak2002": "SARS Outbreak (2002-2004)",
+    "hscBlackDeath1346": "The Black Death (1346-1353)",
+    "interpolUndergroundMedicalMarkets": "Combating Transnational Organized Crime in Underground Medical Markets and Unregulated Surgical Practices",
+    "interpolNarcoticsSchengenGoldenTriangle": "Strengthening Cross-Border Security Frameworks to Mitigate the Nexus of Narcotic Trafficking with a Focus on the Schengen Area and the Golden Triangle",
+    "whoPsychedelicTraumaMentalHealth": "Examining the Ethical and Regulatory Landscape for the Clinical Use of Psychadelic Drugs in the Treatment of Trauma-Based Mental Health Conditions",
+    "whoPandemicsSevereOutbreaks": "Examining Measures for Combating, Addressing, and Recovering from Pandemics or Severe Outbreaks",
     "refugeeProtection": "Refugee protection",
     "globalHealth": "Global health",
     "foodSecurity": "Food security",
@@ -2423,6 +1619,10 @@
         "label": "Session",
         "hint": "Start/stop committee session (timestamp)"
       },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
+      },
       "speakers": {
         "label": "Speakers",
         "hint": "Same speaker list as Digital Room; syncs to committee room"
@@ -2811,6 +2011,864 @@
           "3": "Seamless synergy; the dais inspires a professional and high-stakes environment."
         }
       }
+    }
+  },
+  "sources": {
+    "addSource": "Add source",
+    "sourceUrl": "Source URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (recommended)",
+    "urlHelp": "For a new Google Doc, use the button and paste the document link here.",
+    "titleOptional": "Title (optional)",
+    "saveChanges": "Save changes",
+    "editSource": "Edit source",
+    "urlPlaceholderShort": "Google Doc or other URL",
+    "empty": "No sources yet. Add a Google Doc link to open it here.",
+    "sourceLabel": "Source",
+    "openLink": "Open link",
+    "embedHeading": "Source document",
+    "notGoogleDoc": "This URL is not a Google Doc. Use a docs.google.com/document/d/… link to embed and edit here; otherwise open the link above."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Delegates cannot upload Position Papers directly. Use another document type.",
+    "alertOnlyChairsPositionPaper": "Only chairs/SMT/admin can upload Position Papers.",
+    "alertOnlySmtChairReport": "Only SMT/admin can upload Chair Reports.",
+    "alertOnlySmtRop": "Only SMT/admin can upload RoP documents.",
+    "alertOnlySmtAwardCriteria": "Only SMT/admin can upload Award Criteria documents.",
+    "alertNeedContentOrUrl": "Add either local text content or a Google Docs URL.",
+    "confirmDelete": "Delete this document?",
+    "delegatePrepTitle": "Prep document section",
+    "delegatePrepBody": "You can upload, view, and edit your own <prep>Prep documents</prep> directly from this page.",
+    "positionPaperGuideTitle": "Position paper guide",
+    "positionPaperGuideBlurb": "Download the placeholder guide while the final PDF is being prepared.",
+    "downloadPlaceholderGuide": "Download placeholder guide",
+    "addDocument": "Add document",
+    "tabs": {
+      "ariaLabel": "Document sections",
+      "library": "Library",
+      "compose": "Compose",
+      "composeHint": "Start a new document or edit an existing draft from this tab."
+    },
+    "newDocumentTitle": "New document",
+    "editDocumentTitle": "Edit document",
+    "typeLabel": "Type",
+    "types": {
+      "position_paper": "Position paper",
+      "chair_report": "Chair report",
+      "rop": "RoP",
+      "award_criteria": "Award criteria",
+      "chair_notes": "Chair notes",
+      "prep_doc": "Prep document"
+    },
+    "delegatePositionPaperNote": "Position papers are uploaded by chairs with feedback.",
+    "delegateOwner": "Delegate owner",
+    "chairRecipient": "Chair recipient",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Document title",
+    "googleDocsUrl": "Google Docs URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (embed view/edit in app)",
+    "googleDocsHelp": "Use New Google Doc to open Google in a new tab, then paste the doc link here. Plain text below is optional. Every document needs either local text, a Google Doc link, or both.",
+    "plainTextOptional": "Plain text (optional)",
+    "plainTextPlaceholder": "Notes or draft text…",
+    "chairFeedbackLabel": "Chair feedback",
+    "chairFeedbackPlaceholder": "Feedback for the delegate position paper...",
+    "empty": "No documents yet. Add one or link a Google Doc.",
+    "sidebarDocumentLabel": "Document",
+    "sections": {
+      "chairReports": "Chair reports",
+      "rop": "RoP",
+      "awardCriteria": "Award criteria",
+      "prepDocuments": "Prep documents",
+      "chairNotes": "Chair notes",
+      "otherDocuments": "Other documents"
+    },
+    "untitled": "Untitled",
+    "linkedDocumentHeading": "Linked document",
+    "notesHeading": "Notes",
+    "noGoogleDocYet": "No Google Doc linked yet. Use Edit to add a docs.google.com/document/d/… URL.",
+    "chairFeedbackHeading": "Chair feedback",
+    "noFeedbackYet": "No feedback added yet."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Enter a delegate email first.",
+    "sentToDelegate": "Sent to {email}.",
+    "newResolution": "New Resolution",
+    "maxDraftResolutions": "This committee already has {count} draft resolutions.",
+    "googleDocLink": "Google Doc link",
+    "googleDocUrlPlaceholder": "Google Docs URL (docs.google.com/document/d/… — used for embed + editing)",
+    "googleDocUrlHelp": "New Google Doc opens in another tab; copy the URL from the address bar and paste it here.",
+    "mainSubmittersPlaceholder": "Main submitters (user IDs, comma-separated)",
+    "coSubmittersPlaceholder": "Co-submitters (user IDs, comma-separated)",
+    "create": "Create",
+    "cancel": "Cancel",
+    "openInNewTab": "Open in new tab",
+    "noGoogleDocLink": "No Google Doc link",
+    "visibleToOtherBloc": "Visible to other bloc",
+    "resolutionCounts": "Main subs: {main} | Co-subs: {co} | Signatories: {signatories}",
+    "blocButton": "Bloc {name} ({stance})",
+    "signVirtually": "Sign virtually (main subs notified)",
+    "shareByEmail": "Share resolution by email",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "Send to delegate",
+    "clauseEditor": "Clause editor",
+    "noClausesYet": "No clauses yet.",
+    "clauseNumber": "Clause {number}",
+    "saveClause": "Save clause",
+    "delete": "Delete",
+    "addClausePlaceholder": "Add a new clause...",
+    "addClause": "Add clause",
+    "clauseVoteHistory": "Clause vote history",
+    "noClauseOutcomesYet": "No recorded clause vote outcomes yet.",
+    "clauseFallback": "Clause",
+    "passed": "PASSED",
+    "failed": "FAILED",
+    "motionId": "Motion {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Voting sections",
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "requiredMajority": "Required majority",
+    "helpRequiredMajorityTitle": "Required majority",
+    "helpRequiredMajorityBody": "Choose the vote threshold used to decide pass/fail. `Simple` is more than half. `2/3` requires a supermajority.",
+    "majoritySimple": "Simple",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} majority",
+    "mustVote": "MUST vote",
+    "helpMustVoteTitle": "MUST vote",
+    "helpMustVoteBody": "Marks this motion as a “must-vote” item. This is used to communicate the requirement to participants (depending on your committee’s setup).",
+    "saveSettings": "Save settings",
+    "delegateBlurb": "The dais records votes in session (e.g. roll call). Motion votes here follow Yes/No only (abstain is not used). You can follow the tally; delegates do not cast votes in the app.",
+    "yes": "Yes",
+    "no": "No",
+    "ballots": "Ballots",
+    "total": "Total",
+    "outcome": "Outcome",
+    "passed": "Passed",
+    "failed": "Failed",
+    "noRecordedVotes": "No recorded votes",
+    "reopenMotion": "Reopen motion",
+    "editRecordOpen": "Edit record…",
+    "hideSettings": "Hide settings",
+    "preliminaryPassing": "Passing (preliminary)",
+    "preliminaryFailing": "Failing (preliminary)",
+    "delegateRollCall": "Delegate roll call ({count})",
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "noSeatedDelegates": "No seated delegates available for this motion.",
+    "rollPrefix": "Roll:",
+    "recordedPrefix": "Recorded:",
+    "recordedYes": "Yes",
+    "recordedNo": "No",
+    "recordedAbstain": "Abstain",
+    "recordedNone": "—",
+    "abstain": "Abstain",
+    "clear": "Clear",
+    "closeMotion": "Close motion",
+    "mustVoteBadge": "MUST vote",
+    "canVoteBadge": "CAN vote",
+    "noMotions": "No motions yet.",
+    "currentOpenMotion": "Current open motion",
+    "noOpenMotion": "No open motion right now.",
+    "recentClosedMotions": "Recent closed motions",
+    "noClosedMotions": "No closed motions yet.",
+    "untitled": "Untitled",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "voteTypes": {
+      "motion": "Motion",
+      "amendment": "Amendment",
+      "resolution": "Resolution",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Absent (roll)",
+      "present_abstain": "Present — may abstain (roll)",
+      "present_voting": "Present and voting (roll)",
+      "unknown": "— (roll)"
+    }
+  },
+  "profile": {
+    "fallbacks": {
+      "yourCountry": "your country",
+      "committeeSession": "Committee session",
+      "delegate": "Delegate",
+      "speechNote": "Speech note",
+      "untitledMotion": "Untitled motion",
+      "dash": "—"
+    },
+    "tabs": {
+      "ariaLabel": "Profile sections",
+      "overview": "Overview",
+      "awards": "Awards",
+      "private": "Private records",
+      "settings": "Profile settings"
+    },
+    "delegateWelcome": {
+      "title": "Welcome delegate of {flag} {country}",
+      "subtitle": "What would you like to start with?",
+      "links": {
+        "documents": "Documents",
+        "notes": "Notes",
+        "committeeRoom": "Committee room",
+        "runningNotes": "Running Notes",
+        "ideas": "Ideas",
+        "guides": "Guides",
+        "sources": "Sources",
+        "resolutions": "Resolutions",
+        "speeches": "Speeches",
+        "stances": "Stances",
+        "crisisSlides": "Crisis slides",
+        "report": "Report",
+        "motions": "Motions",
+        "points": "Points"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Awards on your profile",
+      "rank": "rank {rank}",
+      "pending": {
+        "tab": "Pending nominations",
+        "title": "Pending chair nominations",
+        "descriptionSingle": "Saved by chairs and shared with SMT for review. Final awards appear below after confirmation.",
+        "descriptionTabbed": "Saved by chairs and shared with SMT for review. Final awards appear after confirmation."
+      },
+      "recorded": {
+        "tab": "Recorded awards",
+        "title": "Recorded awards",
+        "description": "Listed when chairs or SMT assign you in the awards tracker. Final recognition follows your conference's rules."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Visible only to you, committee chairs, and SMT for the relevant committee.",
+      "points": {
+        "title": "Chair points (private)"
+      },
+      "speechNotes": {
+        "title": "Chair speech notes (private)"
+      },
+      "motions": {
+        "title": "Motions you moved",
+        "description": "Saved to your profile for committee review and SMT oversight."
+      }
+    },
+    "discipline": {
+      "title": "Disciplinary status (private)",
+      "statusLine": "Warnings: {warnings} · Strikes: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "voting disabled",
+      "speakingSuspended": "speaking suspended",
+      "removedFromCommittee": "removed from committee",
+      "updated": "Updated: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Profile preview",
+      "title": "Preview",
+      "yourName": "Your name",
+      "usernameNotSet": "Username not set",
+      "gradeValue": "Grade {grade}",
+      "awards": "Awards"
+    },
+    "profilePicture": "Profile picture",
+    "uploadFile": "Upload file",
+    "uploading": "Uploading…",
+    "photoSaved": "Photo uploaded and saved.",
+    "orUrl": "Or set by URL",
+    "urlPlaceholder": "https://...",
+    "name": "Name",
+    "username": "Username",
+    "usernamePlaceholder": "e.g. alex_1999",
+    "pronouns": "Pronouns",
+    "customPronounNote": "Your profile had a custom pronoun set that is no longer accepted here. Pick an option above (or leave blank). Saving replaces the old value.",
+    "school": "School",
+    "schoolPlaceholder": "e.g. Lincoln High School",
+    "grade": "Grade",
+    "selectGrade": "Select grade",
+    "conferencesAttended": "Conferences attended",
+    "awardsComma": "Awards (comma-separated)",
+    "awardsPlaceholder": "Best Delegate, Honorable Mention",
+    "allocation": "Allocation",
+    "selectAllocation": "Select allocation",
+    "noAllocationsPlaceholder": "No committee allocations available",
+    "saveProfile": "Save profile",
+    "saved": "Profile saved.",
+    "saveFailed": "Could not save profile.",
+    "errUsernamePattern": "Username must be 3-32 chars (letters, numbers, _, ., -)",
+    "errPronounsPreset": "Choose a pronoun from the list.",
+    "errImageType": "Please choose an image file.",
+    "errImageSize": "Image is too large (max 5 MB).",
+    "errUploadFailed": "Upload failed.",
+    "errStorageSetup": "Profile picture storage is not set up. In the Supabase project, run migration 00100_profile_pictures_storage_bucket.sql, or create a public storage bucket named profile-pictures (see README).",
+    "errPublicUrl": "Could not resolve public URL for uploaded image.",
+    "dashboardCommittee": "Dashboard committee",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your dashboard and allocation list use. This is saved in this browser (same as the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Rules of Procedure (RoP)",
+        "content": "# Rules of Procedure\n\n## Points and Motions\n- **Point of Order**: Correct procedure\n- **Point of Information**: Question to speaker\n- **Point of Personal Privilege**: Personal comfort\n- **Motion to Table**: Postpone debate\n- **Motion to Adjourn**: End session\n\n## Voting\n- Simple majority for procedural matters\n- 2/3 majority for substantive matters\n- Roll-call vote if requested"
+      },
+      "examples": {
+        "title": "Examples",
+        "content": "# Examples\n\n## Resolution Format\n```\nThe General Assembly,\n...\n1. Calls upon member states to...\n2. Urges the international community to...\n```\n\n## Position Paper Structure\n1. Background\n2. Country Policy\n3. Proposed Solutions"
+      },
+      "templates": {
+        "title": "Templates",
+        "content": "# Templates\n\n## Chair Report Template\n- Committee overview\n- Key discussion points\n- Resolutions passed\n- Recommendations"
+      },
+      "chairReport": {
+        "title": "Chair Report",
+        "content": "# Chair Report\n\nDocument committee proceedings and outcomes here."
+      }
+    },
+    "edit": "Edit",
+    "guideDocument": "Guide document",
+    "additionalNotes": "Additional notes",
+    "noContentYet": "No content yet.",
+    "titlePlaceholder": "Title",
+    "googleDocsUrl": "Google Docs URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "New Google Doc opens in another tab. Paste a shareable link so delegates can open the doc here (view/edit depends on Google sharing).",
+    "markdownOptional": "Markdown notes (optional if you use a Google Doc)",
+    "save": "Save",
+    "cancel": "Cancel",
+    "createNewGuide": "Create new guide",
+    "slugPlaceholder": "slug (unique)",
+    "titleLowerPlaceholder": "title",
+    "googleDocsUrlOptional": "Google Docs URL (optional)",
+    "markdownContentOptional": "Markdown content (optional)",
+    "create": "Create",
+    "glossary": {
+      "title": "MUN Agenda Glossary",
+      "subtitle": "Unique terminology matched to your committee code and current agenda topics.",
+      "committeeCode": "Committee code: {code}",
+      "sources": {
+        "core": "core",
+        "committee": "committee",
+        "topic": "topic"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Delegation",
+          "definition": "A country or observer team representing one state or entity in committee."
+        },
+        "placard": {
+          "term": "Placard",
+          "definition": "Country sign used to request the floor, vote, and signal procedural motions."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Chairing team that moderates debate, applies procedure, and manages speaking order."
+        },
+        "quorum": {
+          "term": "Quorum",
+          "definition": "Minimum number of delegations required to conduct formal business and votes."
+        },
+        "motion": {
+          "term": "Motion",
+          "definition": "Formal proposal to change the flow of debate, such as caucus type or speaking time."
+        },
+        "point_of_order": {
+          "term": "Point of Order",
+          "definition": "Intervention when procedure is being applied incorrectly under committee rules."
+        },
+        "moderated_caucus": {
+          "term": "Moderated Caucus",
+          "definition": "Structured debate segment with short timed speeches on a defined subtopic."
+        },
+        "unmoderated_caucus": {
+          "term": "Unmoderated Caucus",
+          "definition": "Informal negotiation period where delegates move freely to draft and merge ideas."
+        },
+        "draft_resolution": {
+          "term": "Draft Resolution",
+          "definition": "Working text of proposed committee action before final voting and adoption."
+        },
+        "amendment": {
+          "term": "Amendment",
+          "definition": "Change proposed to draft text, either friendly or voted upon as unfriendly."
+        },
+        "operative_clause": {
+          "term": "Operative Clause",
+          "definition": "Action-oriented numbered clause describing what the committee proposes to do."
+        },
+        "preambulatory_clause": {
+          "term": "Preambulatory Clause",
+          "definition": "Context-setting clause citing background principles, concerns, and prior frameworks."
+        },
+        "right_of_reply": {
+          "term": "Right of Reply",
+          "definition": "Opportunity to respond to a direct statement that affected delegation dignity or position."
+        },
+        "veto_power": {
+          "term": "Veto Power",
+          "definition": "UNSC permanent-member authority to block substantive draft resolutions."
+        },
+        "chapter_vii": {
+          "term": "Chapter VII",
+          "definition": "UN Charter authority on threats to peace, sanctions, and use-of-force measures."
+        },
+        "sanctions_regime": {
+          "term": "Sanctions Regime",
+          "definition": "Coordinated restrictions used to influence behavior without direct military action."
+        },
+        "arms_control": {
+          "term": "Arms Control",
+          "definition": "Agreements and verification systems that limit types, quantities, or deployment of weapons."
+        },
+        "non_proliferation": {
+          "term": "Non-Proliferation",
+          "definition": "Policies to prevent spread of nuclear, chemical, biological, or advanced weapon capabilities."
+        },
+        "confidence_building_measures": {
+          "term": "Confidence-Building Measures",
+          "definition": "Transparency and communication tools that reduce misunderstanding and conflict risk."
+        },
+        "universal_periodic_review": {
+          "term": "Universal Periodic Review",
+          "definition": "Peer-review process where each UN member state reports and receives rights recommendations."
+        },
+        "special_rapporteur": {
+          "term": "Special Rapporteur",
+          "definition": "Independent expert appointed to monitor and report on thematic or country rights issues."
+        },
+        "treaty_body": {
+          "term": "Treaty Body",
+          "definition": "Committee of experts supervising implementation of a specific human-rights treaty."
+        },
+        "public_health_emergency": {
+          "term": "Public Health Emergency",
+          "definition": "Serious outbreak event requiring urgent coordinated national and international response."
+        },
+        "surveillance": {
+          "term": "Epidemiological Surveillance",
+          "definition": "Continuous collection and analysis of health data to detect and track disease trends."
+        },
+        "health_systems": {
+          "term": "Health Systems Strengthening",
+          "definition": "Improving workforce, financing, logistics, and governance for reliable healthcare delivery."
+        },
+        "transnational_crime": {
+          "term": "Transnational Organized Crime",
+          "definition": "Criminal activity coordinated across borders through networks and illicit markets."
+        },
+        "illicit_trafficking": {
+          "term": "Illicit Trafficking",
+          "definition": "Illegal movement of drugs, arms, persons, or goods across jurisdictions."
+        },
+        "rule_of_law_capacity": {
+          "term": "Rule-of-Law Capacity",
+          "definition": "Institutional ability of justice systems to investigate, prosecute, and protect rights fairly."
+        },
+        "sustainable_development": {
+          "term": "Sustainable Development",
+          "definition": "Growth model balancing social progress, economic opportunity, and environmental protection."
+        },
+        "financing_for_development": {
+          "term": "Financing for Development",
+          "definition": "Public and private funding mechanisms that support long-term development priorities."
+        },
+        "policy_coordination": {
+          "term": "Policy Coordination",
+          "definition": "Alignment of state and agency actions to avoid duplication and increase collective impact."
+        },
+        "child_protection": {
+          "term": "Child Protection",
+          "definition": "Measures preventing exploitation, abuse, and violence against children in all settings."
+        },
+        "education_access": {
+          "term": "Education Access",
+          "definition": "Ensuring inclusive, equitable, and continuous learning opportunities for all children."
+        },
+        "humanitarian_response": {
+          "term": "Humanitarian Response",
+          "definition": "Rapid relief actions addressing urgent needs in crises and conflict settings."
+        },
+        "gender_mainstreaming": {
+          "term": "Gender Mainstreaming",
+          "definition": "Integrating gender analysis into policy design, implementation, and evaluation."
+        },
+        "gender_based_violence": {
+          "term": "Gender-Based Violence",
+          "definition": "Harm directed at someone based on gender identity, roles, or unequal power relations."
+        },
+        "economic_empowerment": {
+          "term": "Economic Empowerment",
+          "definition": "Expanding access to decent work, finance, ownership, and decision-making power."
+        },
+        "source_attribution": {
+          "term": "Source Attribution",
+          "definition": "Citing information origin clearly so claims can be verified and contextualized."
+        },
+        "verified_reporting": {
+          "term": "Verified Reporting",
+          "definition": "Journalistic standard requiring corroboration before publishing contested facts."
+        },
+        "editorial_independence": {
+          "term": "Editorial Independence",
+          "definition": "Separation of reporting decisions from political pressure or stakeholder influence."
+        },
+        "climate_mitigation": {
+          "term": "Climate Mitigation",
+          "definition": "Actions that reduce greenhouse-gas emissions or increase long-term carbon removal."
+        },
+        "climate_adaptation": {
+          "term": "Climate Adaptation",
+          "definition": "Policies and investments that reduce vulnerability to climate-related impacts."
+        },
+        "cyber_norms": {
+          "term": "Cyber Norms",
+          "definition": "Shared expectations for responsible state behavior in digital and cyber domains."
+        },
+        "critical_infrastructure": {
+          "term": "Critical Infrastructure",
+          "definition": "Essential systems such as power, water, health, and communications requiring resilience."
+        },
+        "epidemiology": {
+          "term": "Epidemiology",
+          "definition": "Study of disease patterns, causes, and distribution in populations."
+        },
+        "preparedness_response": {
+          "term": "Preparedness and Response",
+          "definition": "Planning, coordination, and surge actions to contain and manage emergencies."
+        },
+        "non_refoulement": {
+          "term": "Non-Refoulement",
+          "definition": "Principle prohibiting return of people to places where they face serious harm."
+        },
+        "durable_solutions": {
+          "term": "Durable Solutions",
+          "definition": "Long-term outcomes for displaced people: return, local integration, or resettlement."
+        },
+        "nuclear_safeguards": {
+          "term": "Nuclear Safeguards",
+          "definition": "Verification measures ensuring nuclear materials are not diverted for weapons use."
+        },
+        "counter_terrorism": {
+          "term": "Counter-Terrorism",
+          "definition": "Integrated legal, preventive, and security measures against terrorist activity."
+        },
+        "due_process": {
+          "term": "Due Process",
+          "definition": "Fair legal procedures protecting rights during investigation, prosecution, and sanctioning."
+        },
+        "resource_security": {
+          "term": "Resource Security",
+          "definition": "Reliable access to food, water, and energy under economic and environmental stress."
+        },
+        "resilience": {
+          "term": "Resilience",
+          "definition": "Capacity of communities and institutions to absorb shocks and recover effectively."
+        }
+      },
+      "topicLine": "Topic: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Edit idea",
+    "googleDocsUrl": "Google Docs URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Short idea text (optional)",
+    "save": "Save",
+    "cancel": "Cancel",
+    "addIntro": "Add a Google Doc to draft a resolution idea in place, or type a short note (or both).",
+    "googleDocsCreateHelp": "New Google Doc opens in another tab; paste the link here after it is created.",
+    "resolutionIdeaPlaceholder": "Resolution idea...",
+    "add": "Add",
+    "noIdeasYet": "No ideas yet.",
+    "ideaLabel": "Idea",
+    "ideaFallback": "Idea {number}",
+    "linkedDoc": "Linked doc",
+    "addedOn": "Added {date}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "ideaDocument": "Idea document",
+    "summary": "Summary",
+    "emptyIdea": "Empty idea."
+  },
+  "stances": {
+    "heatmapTitle": "Brief Stance Overview (Heatmap)",
+    "heatmapHelp": "To what extent does your allocation support ___? (1-5 scale)",
+    "topicPlaceholder": "e.g. climate action",
+    "extentLabel": "Extent (1-5):",
+    "extentHelpTitle": "Extent (1-5)",
+    "extentHelpBody": "1 means your allocation has little support for the topic, and 5 means strong support. Pick a number that matches your stance in the committee.",
+    "add": "Add",
+    "viewOnlyHeatmap": "View-only heatmap for staff.",
+    "notesPerAllocation": "Notes per Allocation",
+    "noAllocationsYet": "No allocations yet",
+    "notesPlaceholder": "Stance notes for this allocation...",
+    "noteLanguageWarning": "Reader warning: this note may contain inappropriate language.",
+    "save": "Save",
+    "saveHelpTitle": "Save stance note",
+    "saveHelpBody": "Saves the stance note for this allocation. It can be viewed by staff and (depending on committee settings) other participants."
+  },
+  "speeches": {
+    "newSpeech": "New speech",
+    "speechTitlePlaceholder": "Speech title",
+    "googleDocsUrl": "Google Docs URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Opens Google in a new tab; paste the document URL here when ready.",
+    "plainTextOptional": "Plain text draft (optional if you use a Google Doc)",
+    "save": "Save",
+    "cancel": "Cancel",
+    "noSpeechesYet": "No speeches yet. Link a Google Doc or paste text.",
+    "speechLabel": "Speech",
+    "untitled": "Untitled",
+    "edit": "Edit",
+    "speechDocument": "Speech document",
+    "draftText": "Draft text",
+    "noContentHint": "Link a Google Doc with Edit, or add plain text in the form."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Committee",
+    "yourContext": "Your context",
+    "roleLabel": "Role",
+    "seatLabel": "Seat",
+    "clearSearchTitle": "Clear search and show all delegations",
+    "vacantLabel": "Vacant",
+    "assignedLabel": "Assigned",
+    "daisLabel": "Dais",
+    "phaseLabel": "Phase",
+    "phaseVoting": "Voting",
+    "phaseDebate": "Debate",
+    "focusSearchTitle": "Focus search (dais titles and names match your query)",
+    "tipLabel": "Tip",
+    "searchVacantTitle": "Search for \"vacant\" seats in the room",
+    "searchHint": "Type a country, delegate name, school, pronoun, or \"vacant\" to highlight matches in the room. Press Enter to jump to the first match; Esc clears. Click Vacant to jump to empty seats.",
+    "findLabel": "Find a delegation or dais member",
+    "searchPlaceholder": "Country, name, school...",
+    "matchesCount": "{matches} of {total} seats match",
+    "enterScrolls": "Enter scrolls",
+    "typeToFilterHint": "Type to filter - Enter scrolls to first match",
+    "noMatches": "No matching delegations or dais seats.",
+    "digitalDisplay": "Digital display",
+    "floorLabel": "Floor",
+    "staffSeatsHeading": "Staff - seats",
+    "searchAria": "Search delegations",
+    "virtualRoomVacant": "Vacant",
+    "profileAria": "View profile: {country}",
+    "vacantSeatAria": "Vacant seat",
+    "placardAria": "Placard {country}",
+    "gavelAria": "Gavel",
+    "viewProfileAria": "View profile: {title}",
+    "noProfileLinkAria": "{title} (no profile link)",
+    "committeeFloor": "Committee floor",
+    "virtualRoomFigureAria": "Virtual committee room - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Filtering delegations. First highlighted seat is the first match in the ring.",
+    "helperText": "Placards list country (from allocations), name, school, and pronouns from each delegate's profile. Edit yours under Profile. Empty committee seats show as Vacant. Click a filled placard or dais seat to open that member's page (chat and report from there).",
+    "virtualRoomCaption": "Virtual Model UN committee room with delegate placards showing country, name, school, and pronouns."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Request to speak",
+      "delegateFallback": "Delegate",
+      "needAllocation": "You need an allocation to request to speak.",
+      "alreadyQueued": "You already have an active speaking request in the queue.",
+      "requested": "Requested to speak. You will appear in the queue.",
+      "requestFailed": "Failed to request to speak.",
+      "helpBody": "Sends your delegation to the chair queue. You can have one active waiting/current request at a time.",
+      "purposeLabel": "Optional purpose (shows in queue label)",
+      "purposeHelpTitle": "Purpose label",
+      "purposeHelpBody": "This text is appended to your country name so chairs can see why you are requesting the floor.",
+      "purposePlaceholder": "e.g. support + amendment overview",
+      "requesting": "Requesting...",
+      "rollPromptTitle": "Chair approval required",
+      "rollPromptBodyPickStatus": "Session has started. Choose your roll-call status to unlock speaking and voting. This choice cannot be changed.",
+      "rollPromptBodyWaitSessionStart": "Waiting for the chair to start the committee session.",
+      "rollPromptBodyWaitRollPrompt": "Waiting for roll-call prompt.",
+      "rollPromptBodyMarkedAbsent": "You’re currently marked absent. Ask the chair to mark you Present to speak and vote.",
+      "rollPromptBodyChecking": "Checking your roll status...",
+      "rollPromptSaving": "Saving...",
+      "rollPromptPresent": "Present",
+      "rollPromptPresentVoting": "Present and voting"
+    },
+    "motionVoting": {
+      "votingProcedure": "Voting procedure",
+      "currentMotion": "Current motion",
+      "motioner": "Motioner",
+      "majority": "Majority",
+      "majoritySimple": "Simple",
+      "tally": "Yes {yes} - No {no} - Total {total}",
+      "help": "The dais records each delegation's vote in session. Motion votes use Yes or No only (no abstain). Totals count only placards where Yes or No was recorded; absent delegations are skipped."
+    },
+    "activeMotion": {
+      "currentMotion": "Current motion",
+      "motionFallback": "Motion",
+      "motioner": "Motioner",
+      "majority": "Majority",
+      "majoritySimple": "Simple",
+      "type": "Type",
+      "timer": "Timer",
+      "currentSpeaker": "Current speaker",
+      "nextSpeaker": "Next speaker",
+      "speakerTimeLeftCap": "Speaker time (left / cap)",
+      "speakerTimeLeftTotal": "Speaker time (left / total)",
+      "perSpeaker": "(per speaker)",
+      "paused": "(paused)",
+      "pauseReason": "Pause: {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "Session time",
+      "sessionNotStarted": "Session not started",
+      "limit": "Limit",
+      "limitRemaining": "{value} left",
+      "limitOverBy": "over by {value}",
+      "quickLinkSession": "Session",
+      "quickLinkRoll": "Roll",
+      "quickLinkAgenda": "Agenda",
+      "quickLinkSpeakers": "Speakers",
+      "quickLinkMotions": "Motions",
+      "quickLinkTimer": "Timer",
+      "dais": "Dais",
+      "pinned": "Pinned",
+      "viewFullAnnouncement": "View full announcement",
+      "timerPausesReadOnly": "Timer pauses (read-only)",
+      "speakerList": "Speaker list",
+      "speakerFallback": "Speaker",
+      "rollCallYou": "Roll call (you)",
+      "fullAnnouncement": "Full announcement",
+      "daisAnnouncement": "Dais announcement",
+      "close": "Close"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Session name",
+      "sessionNamePlaceholder": "e.g. Morning session",
+      "sessionNameSaving": "Saving…",
+      "sessionNameSaved": "Saved",
+      "sessionNameHint": "Saves automatically and appears in session history.",
+      "title": "Committee session",
+      "subtitle": "Start or stop the committee session.",
+      "helpStartStop": "Start begins the live committee session timer/status for everyone. Stop ends the session and clears the current time limit.",
+      "migrationUnavailable": "Session controls are temporarily unavailable until the latest database migrations are applied.",
+      "endTimeInFuture": "Choose an end time in the future, or switch to no limit.",
+      "sessionStartUnavailable": "Session start timestamp is unavailable until latest migrations are applied.",
+      "endTimeInFutureSetNoLimit": "Choose an end time in the future, or set no limit.",
+      "sessionLimitUpdated": "Session limit updated.",
+      "startedLabel": "Started:",
+      "timeInLabel": "Time in:",
+      "timeUntilEndLabel": "Time until end:",
+      "overByValue": "over by {value}",
+      "modeLabel": "Mode:",
+      "modeStopwatchNoLimit": "Stopwatch (no time limit)",
+      "sessionNotRunning": "Session is not running.",
+      "sessionLimit": "Session limit",
+      "sessionLimitModesTitle": "Session limit modes",
+      "sessionLimitModesHelp": "None: no end. Time budget: counts from start. End at: fixed clock time in your local timezone.",
+      "sessionLimitOptional": "Optional.",
+      "noneLabel": "None",
+      "noneDescription": "runs until you stop.",
+      "timeBudgetLabel": "Time budget",
+      "timeBudgetDescription": "counts from the moment you start.",
+      "endTimeLabel": "End time",
+      "endTimeDescription": "uses a fixed clock time (overrides budget if both were ever set).",
+      "noneIndefinite": "None (indefinite)",
+      "noneScheduledEndHint": "No scheduled end; only elapsed time is shown.",
+      "timeBudgetFromStart": "Time budget from start",
+      "hoursLabel": "Hours",
+      "minutesLabel": "Minutes",
+      "minimumOneMinute": "(minimum 1 minute)",
+      "endAtLocalTime": "End at (local time)",
+      "stopSession": "Stop session",
+      "saveLimit": "Save limit",
+      "saveLimitHelp": "Applies updated limit settings while the session is already running, without stopping the session.",
+      "startSession": "Start session",
+      "sidebarUsePrefix": "Use the sidebar for",
+      "rollCall": "Roll call",
+      "agenda": "Agenda",
+      "speakers": "Speakers",
+      "formalMotions": "Formal motions",
+      "timer": "Timer",
+      "sidebarAnd": "and",
+      "announcements": "Announcements",
+      "sidebarUseSuffix": "— one tool per tab."
+    },
+    "history": {
+      "title": "Session history",
+      "savedCount": "{count} saved",
+      "permissionsHint": "Chairs can rename entries. SMT/Admin can rename and delete entries.",
+      "empty": "No session history yet.",
+      "rename": "Rename",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this session from history?",
+      "sessionNamePrompt": "Session name",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Ongoing"
+    },
+    "timerPage": {
+      "title": "Timer",
+      "controlsTitle": "Timer controls",
+      "controlsHelp": "Use General floor for overall debate timing, or Motion vote to tie visibility to a specific open vote item.",
+      "tabSetup": "1) Setup",
+      "tabClock": "2) Clock controls",
+      "tabNotes": "3) Speech notes",
+      "tabLog": "4) Pause log",
+      "setupHelp": "Choose whether this timer is for general floor (always visible to delegates) or tied to the motion open for voting (delegates only see it while that vote is the active item). With per-speaker time on, the clock stays visible during moderated caucus regardless. Pause clock / Start clock freeze or resume the countdown. Set Speaker time (remaining) and Total time independently, then Save timer. Presets fill both to the same length; you can edit either field afterward. Pauses are logged with a short reason.",
+      "namedPreset": "Named preset",
+      "applyPreset": "Apply preset...",
+      "floorLabelDelegates": "Floor label (delegates)",
+      "floorLabelPlaceholder": "e.g. GSL 60s",
+      "timerPurpose": "Timer purpose",
+      "purposeGeneralFloor": "General debate / floor (not tied to a vote)",
+      "purposeMotionVote": "Open motion - timer only while that vote is active on the floor",
+      "openMotionForVoting": "Open motion (must be open for voting)",
+      "selectMotion": "Select motion...",
+      "untitled": "Untitled",
+      "noOpenMotionWarning": "No motion is open for voting. Open a vote first, or switch purpose to general floor.",
+      "clock": "Clock",
+      "running": "Running",
+      "paused": "Paused",
+      "saveToEnablePauseStart": "save the timer to enable pause/start.",
+      "pauseReasonLogged": "Pause reason (logged)",
+      "pauseReasonPlaceholder": "e.g. Point of order, tech issue, unmoderated caucus...",
+      "pauseClock": "Pause clock",
+      "startClock": "Start clock",
+      "euTimerBoardTitle": "EU Parliament timer board (11 timers)",
+      "euTimerBoardHelp": "One timer per party, plus Total time, POI/POC time, and Speaker time. Use Apply to copy a row into the live timer fields on the Clock tab (speaker time / Save timer).",
+      "euTimerName": "Name",
+      "euTimerTag": "Tag",
+      "euTotalTime": "Total time",
+      "euPoiPocTime": "POI / POC time",
+      "euSpeakerTime": "Speaker time",
+      "perSpeakerTitle": "Per-speaker time (moderated caucus)",
+      "perSpeakerHelp": "Set Total time as the per-speaker cap and Speaker time as time remaining; Advance moves to the next speaker and resets remaining to the cap.",
+      "currentSpeaker": "Current speaker",
+      "nextSpeaker": "Next speaker",
+      "speechNotesCurrentSpeaker": "Speech notes (current speaker)",
+      "speechNotesHelp": "Notes are tied to the Current speaker timer text and, when the speaker list has someone marked Current, their delegation is stored for reference.",
+      "timerFloorLabel": "Timer (floor):",
+      "speakerListCurrent": "Speaker list (current):",
+      "noCurrentDelegation": "No delegation is marked Current on the speaker list.",
+      "note": "Note",
+      "notePlaceholder": "Points, POIs, tone, follow-ups...",
+      "saveSpeechNote": "Save speech note",
+      "recentNotes": "Your recent notes (this committee)",
+      "delete": "Delete",
+      "speakerTimeRemaining": "Speaker time (remaining)",
+      "remainingHelpPerSpeaker": "Countdown for the current speaker (resets when you Advance).",
+      "remainingHelpNormal": "Countdown for the current speaker (can be less than total).",
+      "totalTime": "Total time",
+      "totalHelpPerSpeaker": "Per-speaker cap (denominator on the floor; Advance refills remaining to this).",
+      "totalHelpNormal": "Full length of this timer segment (shown after the slash on the floor).",
+      "saveTimer": "Save timer",
+      "advanceSpeakerReset": "Advance speaker and reset clock",
+      "recentPauseLog": "Recent pause log",
+      "noPauseEvents": "No pause events logged yet for this committee.",
+      "openPauseLogHint": "Open Pause log to review recorded pause reasons and timestamps.",
+      "saved": "Timer saved.",
+      "savedCapped": "Timer saved. Speaker time was longer than total; capped to total.",
+      "alreadyPaused": "Timer is already paused.",
+      "pausedForCommittee": "Timer paused for the committee.",
+      "alreadyRunning": "Timer is already running.",
+      "runningForCommittee": "Timer running for the committee."
     }
   }
 }

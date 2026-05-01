@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "首先打开议席发言。",
     "openMotionBlocksRecording": "一项动议已开始投票。 在记录进一步的陈述之前关闭它。",
     "statedMotionRecorded": "所陈述的动议已记录（尚未开放投票）。",
-    "statedMotionRemoved": "已删除所述动议。"
+    "statedMotionRemoved": "已删除所述动议。",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• 积分记录",
     "formalMotions": "正式动议",
     "timer": "定时器",
-    "smtProfile": "轮廓"
+    "smtProfile": "轮廓",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -835,7 +852,8 @@
       "archive": "档案",
       "officialLinks": "官方链接",
       "roomCode": "房间代码",
-      "settings": "设置"
+      "settings": "设置",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "联合国会员国",
       "unSystem": "联合国系统（创始人和成员）",
       "history": "联合国历史"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "添加来源",
-      "sourceUrl": "来源网址",
-      "urlPlaceholder": "https://docs.google.com/document/d/...（推荐）",
-      "urlHelp": "对于新的 Google 文档，请使用 按钮并将文档链接粘贴到此处。",
-      "titleOptional": "标题（可选）",
-      "saveChanges": "保存更改",
-      "editSource": "编辑来源",
-      "urlPlaceholderShort": "Google 文档或其他 URL",
-      "empty": "还没有来源。 添加 Google 文档链接以在此处打开它。",
-      "sourceLabel": "来源",
-      "openLink": "打开链接",
-      "embedHeading": "源文件",
-      "notGoogleDoc": "此 URL 不是 Google 文档。 使用 docs.google.com/document/d/... 链接在此处嵌入和编辑； 否则打开上面的链接。"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "代表不能直接上传立场文件。 使用其他文档类型。",
-      "alertOnlyChairsPositionPaper": "只有主席/SMT/管理员可以上传立场文件。",
-      "alertOnlySmtChairReport": "只有 SMT/管理员可以上传主席报告。",
-      "alertOnlySmtRop": "只有 SMT/admin 可以上传 RoP 文档。",
-      "alertOnlySmtAwardCriteria": "只有 SMT/admin 可以上传奖励标准文件。",
-      "alertNeedContentOrUrl": "添加本地文本内容或 Google 文档 URL。",
-      "confirmDelete": "删除这个文档？",
-      "delegatePrepTitle": "准备文档部分",
-      "delegatePrepBody": "您可以直接从此页面上传、查看和编辑您自己的<prep>准备文档</prep>。",
-      "positionPaperGuideTitle": "位置导纸器",
-      "positionPaperGuideBlurb": "在准备最终 PDF 时下载占位符指南。",
-      "downloadPlaceholderGuide": "下载占位符指南",
-      "addDocument": "添加文档",
-      "tabs": {
-        "ariaLabel": "文档部分",
-        "library": "图书馆",
-        "compose": "撰写",
-        "composeHint": "从此选项卡开始新文档或编辑现有草稿。"
-      },
-      "newDocumentTitle": "新文件",
-      "editDocumentTitle": "编辑文档",
-      "typeLabel": "类型",
-      "types": {
-        "position_paper": "立场文件",
-        "chair_report": "主席报告",
-        "rop": "罗普",
-        "award_criteria": "奖励标准",
-        "chair_notes": "主席笔记",
-        "prep_doc": "准备文件"
-      },
-      "delegatePositionPaperNote": "立场文件由主席上传并附有反馈。",
-      "delegateOwner": "委托所有者",
-      "chairRecipient": "主席获奖者",
-      "titleLabel": "标题",
-      "titlePlaceholder": "文件标题",
-      "googleDocsUrl": "谷歌文档网址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...（在应用程序中嵌入查看/编辑）",
-      "googleDocsHelp": "使用新 Google 文档在新选项卡中打开 Google，然后将文档链接粘贴到此处。 下面的纯文本是可选的。 每个文档都需要本地文本和/或 Google 文档链接。",
-      "plainTextOptional": "纯文本（可选）",
-      "plainTextPlaceholder": "注释或草稿文本...",
-      "chairFeedbackLabel": "主席反馈",
-      "chairFeedbackPlaceholder": "对代表立场文件的反馈...",
-      "empty": "还没有文件。 添加一个或链接一个 Google 文档。",
-      "sidebarDocumentLabel": "文档",
-      "sections": {
-        "chairReports": "主席报告",
-        "rop": "罗普",
-        "awardCriteria": "奖励标准",
-        "prepDocuments": "准备文件",
-        "chairNotes": "主席笔记",
-        "otherDocuments": "其他文件"
-      },
-      "untitled": "无题",
-      "linkedDocumentHeading": "链接文档",
-      "notesHeading": "笔记",
-      "noGoogleDocYet": "尚未链接 Google 文档。 使用“编辑”添加 docs.google.com/document/d/... 网址。",
-      "chairFeedbackHeading": "主席反馈",
-      "noFeedbackYet": "尚未添加反馈。"
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "首先输入代表电子邮件。",
-      "sentToDelegate": "发送至{email}。",
-      "newResolution": "新决议",
-      "maxDraftResolutions": "该委员会已有 {count} 项决议草案。",
-      "googleDocLink": "谷歌文档链接",
-      "googleDocUrlPlaceholder": "Google 文档 URL（docs.google.com/document/d/… — 用于嵌入 + 编辑）",
-      "googleDocUrlHelp": "新的 Google 文档在另一个选项卡中打开； 从地址栏中复制 URL 并将其粘贴到此处。",
-      "mainSubmittersPlaceholder": "主要提交者（用户 ID，以逗号分隔）",
-      "coSubmittersPlaceholder": "共同提交者（用户 ID，以逗号分隔）",
-      "create": "创造",
-      "cancel": "取消",
-      "openInNewTab": "在新选项卡中打开",
-      "noGoogleDocLink": "没有 Google 文档链接",
-      "visibleToOtherBloc": "对其他区块可见",
-      "resolutionCounts": "主子：{main} | 共同替补：{co} | 签署人：{签署人}",
-      "blocButton": "集团{名称}（{立场}）",
-      "signVirtually": "虚拟签名（通知主要订阅者）",
-      "shareByEmail": "通过电子邮件分享解决方案",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "发送给代表",
-      "clauseEditor": "条款编辑",
-      "noClausesYet": "还没有条款。",
-      "clauseNumber": "条款{编号}",
-      "saveClause": "保存条款",
-      "delete": "删除",
-      "addClausePlaceholder": "添加新条款...",
-      "addClause": "添加条款",
-      "clauseVoteHistory": "条款投票历史",
-      "noClauseOutcomesYet": "尚未记录条款投票结果。",
-      "clauseFallback": "条款",
-      "passed": "通过",
-      "failed": "失败的",
-      "motionId": "运动{id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "投票部分",
-        "open": "打开",
-        "closed": "关闭"
-      },
-      "requiredMajority": "所需多数",
-      "helpRequiredMajorityTitle": "所需多数",
-      "helpRequiredMajorityBody": "选择用于决定通过/失败的投票阈值。 “简单”占了一半以上。 “2/3”需要绝对多数。",
-      "majoritySimple": "简单的",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{标签}多数",
-      "mustVote": "必须投票",
-      "helpMustVoteTitle": "必须投票",
-      "helpMustVoteBody": "将此动议标记为“必须投票”项目。 这用于向参与者传达要求（取决于委员会的设置）。",
-      "saveSettings": "保存设置",
-      "delegateBlurb": "讲台记录会议中的投票情况（例如点名）。 这里的动议投票仅遵循是/否（不使用弃权）。 您可以跟踪统计； 代表们不在应用程序中投票。",
-      "yes": "是的",
-      "no": "不",
-      "ballots": "选票",
-      "total": "全部的",
-      "outcome": "结果",
-      "passed": "通过",
-      "failed": "失败的",
-      "noRecordedVotes": "没有记录投票",
-      "reopenMotion": "重新开放动议",
-      "editRecordOpen": "编辑记录...",
-      "hideSettings": "隐藏设置",
-      "preliminaryPassing": "通过（初步）",
-      "preliminaryFailing": "失败（初步）",
-      "delegateRollCall": "代表点名 ({count})",
-      "noSeatedDelegates": "没有在座代表参与此项动议。",
-      "rollPrefix": "卷：",
-      "recordedPrefix": "记录：",
-      "recordedYes": "是的",
-      "recordedNo": "不",
-      "recordedAbstain": "弃权",
-      "recordedNone": "—",
-      "abstain": "弃权",
-      "clear": "清除",
-      "closeMotion": "关闭动作",
-      "mustVoteBadge": "必须投票",
-      "canVoteBadge": "可以投票",
-      "noMotions": "还没有任何动议。",
-      "currentOpenMotion": "当前打开运动",
-      "noOpenMotion": "目前没有公开动议。",
-      "recentClosedMotions": "最近的非公开动议",
-      "noClosedMotions": "还没有结束动议。",
-      "untitled": "无题",
-      "voteTypes": {
-        "motion": "运动",
-        "amendment": "修正案",
-        "resolution": "解决"
-      },
-      "roll": {
-        "absent": "缺席（卷）",
-        "present_abstain": "出席 — 可以弃权（投掷）",
-        "present_voting": "出席并投票（点名）",
-        "unknown": "- （卷）"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "型材截面",
-        "overview": "概述",
-        "awards": "奖项",
-        "private": "私人记录",
-        "settings": "个人资料设置"
-      },
-      "profilePicture": "个人资料图片",
-      "uploadFile": "上传文件",
-      "uploading": "正在上传...",
-      "photoSaved": "照片已上传并保存。",
-      "orUrl": "或者通过URL设置",
-      "urlPlaceholder": "https://...",
-      "name": "姓名",
-      "username": "用户名",
-      "usernamePlaceholder": "例如 亚历克斯_1999",
-      "pronouns": "代词",
-      "customPronounNote": "您的个人资料中有一个自定义代词集，此处不再接受。 选择上面的一个选项（或留空）。 保存替换旧值。",
-      "school": "学校",
-      "schoolPlaceholder": "例如 林肯高中",
-      "grade": "年级",
-      "selectGrade": "选择年级",
-      "conferencesAttended": "参加的会议",
-      "awardsComma": "奖项（以逗号分隔）",
-      "awardsPlaceholder": "最佳代表、荣誉奖",
-      "allocation": "分配",
-      "selectAllocation": "选择分配",
-      "noAllocationsPlaceholder": "没有可用的委员会分配",
-      "saveProfile": "保存个人资料",
-      "saved": "个人资料已保存。",
-      "saveFailed": "无法保存个人资料。",
-      "errUsernamePattern": "用户名必须为 3-32 个字符（字母、数字、_、.、-）",
-      "errPronounsPreset": "从列表中选择一个代词。",
-      "errImageType": "请选择一个图像文件。",
-      "errImageSize": "图片太大（最大 5 MB）。",
-      "errUploadFailed": "上传失败。",
-      "errStorageSetup": "未设置个人资料图片存储。 在 Supabase 项目中，运行迁移 00100_profile_pictures_storage_bucket.sql，或创建名为 profile-pictures 的公共存储桶（请参阅 README）。",
-      "errPublicUrl": "无法解析上传图像的公共 URL。",
-      "fallbacks": {
-        "yourCountry": "你的国家",
-        "committeeSession": "委员会会议",
-        "delegate": "代表",
-        "speechNote": "演讲笔记",
-        "untitledMotion": "无标题动议",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "欢迎来自 {flag} {country} 的代表",
-        "subtitle": "您想从什么开始？",
-        "links": {
-          "documents": "文件",
-          "notes": "笔记",
-          "committeeRoom": "委员会室",
-          "runningNotes": "跑步笔记",
-          "ideas": "想法",
-          "guides": "指南",
-          "sources": "来源",
-          "resolutions": "决议",
-          "speeches": "演讲",
-          "stances": "立场",
-          "crisisSlides": "危机幻灯片",
-          "report": "报告",
-          "motions": "议案",
-          "points": "积分"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "您的个人资料中的奖项",
-        "rank": "排名{排名}",
-        "pending": {
-          "tab": "待定提名",
-          "title": "待定主席提名",
-          "descriptionSingle": "由主席保存并与 SMT 共享以供审核。确认后最终奖项将显示在下方。",
-          "descriptionTabbed": "由主席保存并与 SMT 共享以供审核。最终奖项在确认后出现。"
-        },
-        "recorded": {
-          "tab": "记录奖项",
-          "title": "记录奖项",
-          "description": "当主席或 SMT 在奖励跟踪器中分配您时列出。最终认可遵循会议规则。"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "仅您、委员会主席和相关委员会的 SMT 可见。",
-        "points": {
-          "title": "主席积分（私人）"
-        },
-        "speechNotes": {
-          "title": "主席演讲笔记（私人）"
-        },
-        "motions": {
-          "title": "你移动的动作",
-          "description": "保存到您的个人资料中以供委员会审查和 SMT 监督。"
-        }
-      },
-      "discipline": {
-        "title": "纪律状况（私人）",
-        "statusLine": "警告：{警告} · 罢工：{strikes}{votingDisabled}{speakingSuspished}{removedFromCommittee}",
-        "votingDisabled": "禁用投票",
-        "speakingSuspended": "发言暂停",
-        "removedFromCommittee": "从委员会中除名",
-        "updated": "更新：{值}"
-      },
-      "preview": {
-        "ariaLabel": "个人资料预览",
-        "title": "预览",
-        "yourName": "你的名字",
-        "usernameNotSet": "用户名未设置",
-        "gradeValue": "年级{年级}",
-        "awards": "奖项"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "议事规则 (RoP)",
-          "content": "# 议事规则\n\n ## 点和动作\n - **程序要点**：正确的程序\n - **信息点**：向演讲者提问\n - **个人特权点**：个人舒适度\n - **动议**：推迟辩论\n - **休会动议**：结束会议\n\n ## 投票\n - 程序事项的简单多数\n - 实质性事项 2/3 多数\n - 如果需要，进行唱名投票"
-        },
-        "examples": {
-          "title": "示例",
-          "content": "# 例子\n\n ## 分辨率格式\n ````\n 大会，\n ...\n 1. 呼吁成员国...\n 2. 敦促国际社会……\n ````\n\n ## 立场文件结构\n 一、背景\n 2. 国家政策\n 3. 建议的解决方案"
-        },
-        "templates": {
-          "title": "模板",
-          "content": "# 模板\n\n ## 主席报告模板\n - 委员会概览\n - 关键讨论点\n - 通过的决议\n - 建议"
-        },
-        "chairReport": {
-          "title": "主席报告",
-          "content": "# 主席报告\n\n 在此记录委员会的程序和结果。"
-        }
-      },
-      "edit": "编辑",
-      "guideDocument": "指导文件",
-      "additionalNotes": "附加说明",
-      "noContentYet": "还没有内容。",
-      "titlePlaceholder": "标题",
-      "googleDocsUrl": "谷歌文档网址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "新的 Google 文档将在另一个选项卡中打开。 粘贴可共享链接，以便代表可以在此处打开文档（查看/编辑取决于 Google 共享）。",
-      "markdownOptional": "Markdown 注释（如果您使用 Google 文档，则可选）",
-      "save": "节省",
-      "cancel": "取消",
-      "createNewGuide": "创建新指南",
-      "slugPlaceholder": "蛞蝓（独特）",
-      "titleLowerPlaceholder": "标题",
-      "googleDocsUrlOptional": "Google 文档 URL（可选）",
-      "markdownContentOptional": "Markdown 内容（可选）",
-      "create": "创造",
-      "glossary": {
-        "title": "模拟联合国议程术语表",
-        "subtitle": "与您的委员会代码和当前议程主题相匹配的独特术语。",
-        "committeeCode": "委员会代码：{code}",
-        "topicTag": "主题：{主题}",
-        "sources": {
-          "core": "核",
-          "committee": "委员会",
-          "topic": "话题"
-        },
-        "terms": {
-          "delegation": {
-            "term": "代表团",
-            "definition": "在委员会中代表一个国家或实体的国家或观察员小组。"
-          },
-          "placard": {
-            "term": "标语牌",
-            "definition": "用于请求发言、投票和发出程序性动议的国家标志。"
-          },
-          "dais": {
-            "term": "讲台",
-            "definition": "主持团队主持辩论、应用程序并管理发言顺序。"
-          },
-          "quorum": {
-            "term": "法定人数",
-            "definition": "进行正式事务和投票所需的最低代表团数量。"
-          },
-          "motion": {
-            "term": "运动",
-            "definition": "改变辩论流程的正式提案，例如核心小组类型或发言时间。"
-          },
-          "point_of_order": {
-            "term": "订单问题",
-            "definition": "根据委员会规则错误应用程序时进行干预。"
-          },
-          "moderated_caucus": {
-            "term": "主持的核心会议",
-            "definition": "结构化辩论部分，针对明确的子主题进行短时间演讲。"
-          },
-          "unmoderated_caucus": {
-            "term": "无主持的核心小组",
-            "definition": "非正式谈判阶段，代表们可以自由起草和合并想法。"
-          },
-          "draft_resolution": {
-            "term": "决议草案",
-            "definition": "最终投票和通过之前拟议委员会行动的工作文本。"
-          },
-          "amendment": {
-            "term": "修正案",
-            "definition": "对文本草案提出的修改，要么是友好的，要么被投票为不友好的。"
-          },
-          "operative_clause": {
-            "term": "执行条款",
-            "definition": "以行动为导向的编号条款，描述委员会建议做什么。"
-          },
-          "preambulatory_clause": {
-            "term": "序言条款",
-            "definition": "背景设定条款引用背景原则、关注点和先前的框架。"
-          },
-          "right_of_reply": {
-            "term": "答复权",
-            "definition": "有机会对影响代表团尊严或立场的直接声明做出回应。"
-          },
-          "veto_power": {
-            "term": "否决权",
-            "definition": "联合国安理会常任理事国有权阻止实质性决议草案。"
-          },
-          "chapter_vii": {
-            "term": "第七章",
-            "definition": "《联合国宪章》关于和平威胁、制裁和使用武力措施的权威。"
-          },
-          "sanctions_regime": {
-            "term": "制裁制度",
-            "definition": "协调限制用于在没有直接军事行动的情况下影响行为。"
-          },
-          "arms_control": {
-            "term": "军备控制",
-            "definition": "限制武器类型、数量或部署的协议和核查系统。"
-          },
-          "non_proliferation": {
-            "term": "防扩散",
-            "definition": "防止核、化学、生物或先进武器能力扩散的政策。"
-          },
-          "confidence_building_measures": {
-            "term": "建立信任措施",
-            "definition": "减少误解和冲突风险的透明度和沟通工具。"
-          },
-          "universal_periodic_review": {
-            "term": "普遍定期审议",
-            "definition": "每个联合国成员国报告并接收权利建议的同行评审过程。"
-          },
-          "special_rapporteur": {
-            "term": "特别报告员",
-            "definition": "任命独立专家监测和报告专题或国家权利问题。"
-          },
-          "treaty_body": {
-            "term": "条约机构",
-            "definition": "监督具体人权条约实施情况的专家委员会。"
-          },
-          "public_health_emergency": {
-            "term": "突发公共卫生事件",
-            "definition": "严重的疫情爆发需要国家和国际紧急协调应对。"
-          },
-          "surveillance": {
-            "term": "流行病学监测",
-            "definition": "持续收集和分析健康数据以检测和跟踪疾病趋势。"
-          },
-          "health_systems": {
-            "term": "加强卫生系统",
-            "definition": "改善劳动力、融资、物流和治理，以提供可靠的医疗服务。"
-          },
-          "transnational_crime": {
-            "term": "跨国有组织犯罪",
-            "definition": "通过网络和非法市场跨境协调犯罪活动。"
-          },
-          "illicit_trafficking": {
-            "term": "非法贩运",
-            "definition": "毒品、武器、人员或货物跨司法管辖区非法流动。"
-          },
-          "rule_of_law_capacity": {
-            "term": "法治能力",
-            "definition": "司法系统公平调查、起诉和保护权利的制度能力。"
-          },
-          "sustainable_development": {
-            "term": "可持续发展",
-            "definition": "平衡社会进步、经济机会和环境保护的增长模式。"
-          },
-          "financing_for_development": {
-            "term": "发展融资",
-            "definition": "支持长期发展优先事项的公共和私人融资机制。"
-          },
-          "policy_coordination": {
-            "term": "政策协调",
-            "definition": "协调国家和机构的行动，以避免重复并增加集体影响。"
-          },
-          "child_protection": {
-            "term": "儿童保护",
-            "definition": "防止所有环境下针对儿童的剥削、虐待和暴力行为的措施。"
-          },
-          "education_access": {
-            "term": "教育机会",
-            "definition": "确保所有儿童获得包容、公平和持续的学习机会。"
-          },
-          "humanitarian_response": {
-            "term": "人道主义响应",
-            "definition": "快速救援行动解决危机和冲突环境中的紧急需求。"
-          },
-          "gender_mainstreaming": {
-            "term": "性别主流化",
-            "definition": "将性别分析纳入政策设计、实施和评估。"
-          },
-          "gender_based_violence": {
-            "term": "基于性别的暴力",
-            "definition": "基于性别认同、角色或不平等权力关系而针对某人的伤害。"
-          },
-          "economic_empowerment": {
-            "term": "经济赋权",
-            "definition": "扩大获得体面工作、财务、所有权和决策权的机会。"
-          },
-          "source_attribution": {
-            "term": "来源归属",
-            "definition": "明确引用信息来源，以便可以验证主张并结合上下文。"
-          },
-          "verified_reporting": {
-            "term": "验证报告",
-            "definition": "新闻标准要求在发布有争议的事实之前进行证实。"
-          },
-          "editorial_independence": {
-            "term": "编辑独立性",
-            "definition": "将报告决策与政治压力或利益相关者的影响分开。"
-          },
-          "climate_mitigation": {
-            "term": "减缓气候变化",
-            "definition": "减少温室气体排放或增加长期碳清除的行动。"
-          },
-          "climate_adaptation": {
-            "term": "气候适应",
-            "definition": "减少气候相关影响脆弱性的政策和投资。"
-          },
-          "cyber_norms": {
-            "term": "网络规范",
-            "definition": "对数字和网络领域负责任的国家行为的共同期望。"
-          },
-          "critical_infrastructure": {
-            "term": "关键基础设施",
-            "definition": "电力、水、健康和通信等基本系统需要弹性。"
-          },
-          "epidemiology": {
-            "term": "流行病学",
-            "definition": "研究疾病模式、原因和人群分布。"
-          },
-          "preparedness_response": {
-            "term": "准备和响应",
-            "definition": "规划、协调和紧急行动以遏制和管理紧急情况。"
-          },
-          "non_refoulement": {
-            "term": "不驱回",
-            "definition": "禁止人们返回面临严重伤害的地方的原则。"
-          },
-          "durable_solutions": {
-            "term": "耐用的解决方案",
-            "definition": "流离失所者的长期结果：返回、融入当地社会或重新安置。"
-          },
-          "nuclear_safeguards": {
-            "term": "核保障",
-            "definition": "确保核材料不被转用于武器用途的核查措施。"
-          },
-          "counter_terrorism": {
-            "term": "反恐",
-            "definition": "针对恐怖活动的综合法律、预防和安全措施。"
-          },
-          "due_process": {
-            "term": "正当程序",
-            "definition": "在调查、起诉和制裁过程中，公平的法律程序保护权利。"
-          },
-          "resource_security": {
-            "term": "资源安全",
-            "definition": "在经济和环境压力下可靠地获取食物、水和能源。"
-          },
-          "resilience": {
-            "term": "弹力",
-            "definition": "社区和机构吸收冲击和有效恢复的能力。"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "编辑想法",
-      "googleDocsUrl": "谷歌文档网址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "简短的想法文本（可选）",
-      "save": "节省",
-      "cancel": "取消",
-      "addIntro": "添加 Google 文档以起草适当的解决方案想法，或输入简短的注释（或两者）。",
-      "googleDocsCreateHelp": "新的 Google 文档在另一个选项卡中打开； 创建链接后将链接粘贴到此处。",
-      "resolutionIdeaPlaceholder": "解决思路...",
-      "add": "添加",
-      "noIdeasYet": "还没有想法。",
-      "ideaLabel": "主意",
-      "ideaFallback": "想法{编号}",
-      "linkedDoc": "链接文档",
-      "addedOn": "添加了{日期}",
-      "edit": "编辑",
-      "delete": "删除",
-      "ideaDocument": "想法文件",
-      "summary": "概括",
-      "emptyIdea": "空洞的想法。"
-    },
-    "stances": {
-      "heatmapTitle": "立场简要概述（热图）",
-      "heatmapHelp": "您的分配在多大程度上支持___？ （1-5级）",
-      "topicPlaceholder": "例如 气候行动",
-      "extentLabel": "范围（1-5）：",
-      "extentHelpTitle": "范围（1-5）",
-      "extentHelpBody": "1 表示您的分配对该主题的支持很少，5 表示支持很强。 选择一个与您在委员会中的立场相符的数字。",
-      "add": "添加",
-      "viewOnlyHeatmap": "仅供员工查看的热图。",
-      "notesPerAllocation": "每次分配的注释",
-      "noAllocationsYet": "尚未分配",
-      "notesPlaceholder": "此分配的立场说明...",
-      "noteLanguageWarning": "读者警告：本说明可能包含不当语言。",
-      "save": "节省",
-      "saveHelpTitle": "保存立场注释",
-      "saveHelpBody": "保存此分配的立场注释。 工作人员和（取决于委员会设置）其他参与者可以查看它。"
-    },
-    "speeches": {
-      "newSpeech": "新演讲",
-      "speechTitlePlaceholder": "演讲标题",
-      "googleDocsUrl": "谷歌文档网址",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "在新选项卡中打开 Google； 准备好后，将文档 URL 粘贴到此处。",
-      "plainTextOptional": "纯文本草稿（如果您使用 Google 文档，则可选）",
-      "save": "节省",
-      "cancel": "取消",
-      "noSpeechesYet": "还没有发言。 链接 Google 文档或粘贴文本。",
-      "speechLabel": "演讲",
-      "untitled": "无题",
-      "edit": "编辑",
-      "speechDocument": "演讲稿",
-      "draftText": "文本草稿",
-      "noContentHint": "将 Google 文档与“编辑”链接，或在表单中添加纯文本。"
-    },
-    "committeeRoom": {
-      "committeeLabel": "委员会",
-      "yourContext": "您的背景",
-      "roleLabel": "角色",
-      "seatLabel": "座位",
-      "clearSearchTitle": "清除搜索并显示所有代表团",
-      "vacantLabel": "空缺",
-      "assignedLabel": "已分配",
-      "daisLabel": "讲台",
-      "phaseLabel": "阶段",
-      "phaseVoting": "表决",
-      "phaseDebate": "辩论",
-      "focusSearchTitle": "焦点搜索（讲台标题和名称与您的查询匹配）",
-      "tipLabel": "提示",
-      "searchVacantTitle": "搜索房间内的“空位”",
-      "searchHint": "输入国家/地区、代表姓名、学校、代词或“空缺”以突出显示房间中的匹配项。 按 Enter 跳转到第一个匹配项； Esc 清除。 单击“空位”可跳到空座位。",
-      "findLabel": "寻找代表团或讲台成员",
-      "searchPlaceholder": "国家、姓名、学校...",
-      "matchesCount": "{matches} 个席位（共 {total} 个）匹配",
-      "enterScrolls": "输入卷轴",
-      "typeToFilterHint": "输入要过滤的内容 - 输入滚动到第一个匹配项",
-      "noMatches": "没有匹配的代表团或讲台席位。",
-      "digitalDisplay": "数字显示",
-      "floorLabel": "地面",
-      "staffSeatsHeading": "工作人员-座位",
-      "searchAria": "搜索代表团",
-      "virtualRoomVacant": "空缺",
-      "profileAria": "查看个人资料：{国家}",
-      "vacantSeatAria": "空座",
-      "placardAria": "标语牌{国家}",
-      "gavelAria": "木槌",
-      "viewProfileAria": "查看个人资料：{title}",
-      "noProfileLinkAria": "{title}（无个人资料链接）",
-      "committeeFloor": "委员会楼层",
-      "virtualRoomFigureAria": "虚拟委员会会议室 - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "过滤代表团。 第一个突出显示的座位是环中的第一场比赛。",
-      "helperText": "标语牌列出了每个代表个人资料中的国家（来自分配）、姓名、学校和代词。 在“个人资料”下编辑您的。 空的委员会席位显示为空缺。 单击已填满的标语牌或讲台座位即可打开该成员的页面（从那里聊天和报告）。",
-      "virtualRoomCaption": "虚拟模拟联合国委员会会议室，配有代表标语牌，显示国家、姓名、学校和代词。"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "请求发言",
-        "delegateFallback": "代表",
-        "needAllocation": "您需要分配资源才能请求发言。",
-        "alreadyQueued": "队列中已有一个有效的发言请求。",
-        "requested": "要求发言。 您将出现在队列中。",
-        "requestFailed": "未能请求发言。",
-        "helpBody": "将您的代表团送至主席队列。 您一次可以有一个活跃的等待/当前请求。",
-        "purposeLabel": "可选用途（显示在队列标签中）",
-        "purposeHelpTitle": "用途标签",
-        "purposeHelpBody": "该文本附加在您的国家/地区名称后，以便主席可以了解您请求发言的原因。",
-        "purposePlaceholder": "例如 支持+修订概述",
-        "requesting": "请求...",
-        "rollPromptTitle": "需要主席批准",
-        "rollPromptBodyPickStatus": "会议已经开始。 选择您的点名状态以解锁发言和投票。 此选择无法更改。",
-        "rollPromptBodyWaitSessionStart": "等待主席开始委员会会议。",
-        "rollPromptBodyWaitRollPrompt": "等待点名提示。",
-        "rollPromptBodyMarkedAbsent": "您目前被标记为缺席。 请主席标记您发言并投票。",
-        "rollPromptBodyChecking": "正在检查您的卷状态...",
-        "rollPromptSaving": "保存...",
-        "rollPromptPresent": "展示",
-        "rollPromptPresentVoting": "出席并投票"
-      },
-      "motionVoting": {
-        "votingProcedure": "投票程序",
-        "currentMotion": "当前运动",
-        "motioner": "运动者",
-        "majority": "多数",
-        "majoritySimple": "简单的",
-        "tally": "是 {yes} - 否 {no} - 总计 {total}",
-        "help": "讲台上记录了每个代表团在会议上的投票情况。 动议投票仅使用“是”或“否”（无弃权）。 总计仅计算记录了“是”或“否”的标牌； 缺席的代表团将被跳过。"
-      },
-      "activeMotion": {
-        "currentMotion": "当前运动",
-        "motionFallback": "运动",
-        "motioner": "运动者",
-        "majority": "多数",
-        "majoritySimple": "简单的",
-        "type": "类型",
-        "timer": "定时器",
-        "currentSpeaker": "当前发言人",
-        "nextSpeaker": "下一位发言者",
-        "speakerTimeLeftCap": "发言时间（左/上限）",
-        "speakerTimeLeftTotal": "发言时间（左/总）",
-        "perSpeaker": "（每个发言者）",
-        "paused": "（停顿）",
-        "pauseReason": "暂停：{原因}"
-      },
-      "floorStatus": {
-        "sessionTime": "会议时间",
-        "sessionNotStarted": "会话未开始",
-        "limit": "限制",
-        "limitRemaining": "还剩 {值}",
-        "limitOverBy": "超过 {value}",
-        "quickLinkSession": "会议",
-        "quickLinkRoll": "卷",
-        "quickLinkSpeakers": "扬声器",
-        "quickLinkMotions": "议案",
-        "quickLinkTimer": "定时器",
-        "dais": "讲台",
-        "pinned": "已固定",
-        "viewFullAnnouncement": "查看完整公告",
-        "timerPausesReadOnly": "定时器暂停（只读）",
-        "speakerList": "演讲嘉宾名单",
-        "speakerFallback": "扬声器",
-        "rollCallYou": "点名（你）",
-        "fullAnnouncement": "完整公告",
-        "daisAnnouncement": "讲台公告",
-        "close": "关闭"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "会话名称",
-        "sessionNamePlaceholder": "例如 上午场",
-        "sessionNameSaving": "保存…",
-        "sessionNameSaved": "已保存",
-        "sessionNameHint": "自动保存并显示在会话历史记录中。",
-        "title": "委员会会议",
-        "subtitle": "开始或停止委员会会议。",
-        "helpStartStop": "开始为每个人开始实时委员会会议计时器/状态。 停止结束会话并清除当前时间限制。",
-        "migrationUnavailable": "在应用最新的数据库迁移之前，会话控制暂时不可用。",
-        "endTimeInFuture": "选择未来的结束时间，或切换为无限制。",
-        "sessionStartUnavailable": "在应用最新迁移之前，会话开始时间戳不可用。",
-        "endTimeInFutureSetNoLimit": "选择未来的结束时间，或不设置限制。",
-        "sessionLimitUpdated": "会话限制已更新。",
-        "startedLabel": "开始：",
-        "timeInLabel": "时间：",
-        "timeUntilEndLabel": "距结束时间：",
-        "overByValue": "超过 {value}",
-        "modeLabel": "模式：",
-        "modeStopwatchNoLimit": "秒表（无时间限制）",
-        "sessionNotRunning": "会话未运行。",
-        "sessionLimit": "会话限制",
-        "sessionLimitModesTitle": "会话限制模式",
-        "sessionLimitModesHelp": "无：没有尽头。 时间预算：从开始计算。 结束于：您当地时区的固定时钟时间。",
-        "sessionLimitOptional": "选修的。",
-        "noneLabel": "没有任何",
-        "noneDescription": "运行直到你停下来。",
-        "timeBudgetLabel": "时间预算",
-        "timeBudgetDescription": "从你开始的那一刻开始计算。",
-        "endTimeLabel": "结束时间",
-        "endTimeDescription": "使用固定时钟时间（如果两者都设置过，则覆盖预算）。",
-        "noneIndefinite": "无（不确定）",
-        "noneScheduledEndHint": "没有预定的结束时间； 仅显示经过的时间。",
-        "timeBudgetFromStart": "从开始的时间预算",
-        "hoursLabel": "时间",
-        "minutesLabel": "分钟",
-        "minimumOneMinute": "（最少 1 分钟）",
-        "endAtLocalTime": "结束于（当地时间）",
-        "stopSession": "停止会话",
-        "saveLimit": "保存限额",
-        "saveLimitHelp": "在会话已运行时应用更新的限制设置，而不停止会话。",
-        "startSession": "开始会话",
-        "sidebarUsePrefix": "使用侧边栏",
-        "rollCall": "点名",
-        "speakers": "扬声器",
-        "formalMotions": "正式动议",
-        "timer": "定时器",
-        "sidebarAnd": "和",
-        "announcements": "公告",
-        "sidebarUseSuffix": "— 每个选项卡一个工具。"
-      },
-      "history": {
-        "title": "会话历史记录",
-        "savedCount": "已保存 {count} 个",
-        "permissionsHint": "主席可以重命名条目。 SMT/管理员可以重命名和删除条目。",
-        "empty": "还没有会话历史记录。",
-        "rename": "重命名",
-        "delete": "删除",
-        "deleteConfirm": "从历史记录中删除此会话吗？",
-        "sessionNamePrompt": "会话名称",
-        "rangeClosed": "{范围}",
-        "rangeOngoing": "{范围} -> 正在进行"
-      },
-      "timerPage": {
-        "title": "定时器",
-        "controlsTitle": "定时器控制",
-        "controlsHelp": "使用全体发言权来确定总体辩论时间，或使用动议投票将可见性与特定的公开投票项目联系起来。",
-        "tabSetup": "1) 设置",
-        "tabClock": "2) 时钟控制",
-        "tabNotes": "3）演讲笔记",
-        "tabLog": "4）暂停日志",
-        "setupHelp": "选择此计时器是用于全体发言（代表始终可见）还是与开放投票的动议相关（代表仅在该投票为活动项目时才能看到它）。 无论如何，打开每个发言者的时间后，时钟在主持的预选会议期间仍然可见。 暂停时钟/开始时钟冻结或恢复倒计时。 单独设置扬声器时间（剩余）和总时间，然后保存计时器。 预设将两者填充为相同的长度； 您可以随后编辑任一字段。 暂停会记录一个简短的原因。",
-        "namedPreset": "命名预设",
-        "applyPreset": "应用预设...",
-        "floorLabelDelegates": "楼层标签（代表）",
-        "floorLabelPlaceholder": "例如 GSL 60年代",
-        "timerPurpose": "定时器用途",
-        "purposeGeneralFloor": "一般性辩论/全体发言（与投票无关）",
-        "purposeMotionVote": "开放动议 - 仅当投票在场上处于活动状态时才计时器",
-        "openMotionForVoting": "开放动议（必须开放投票）",
-        "selectMotion": "选择运动...",
-        "untitled": "无题",
-        "noOpenMotionWarning": "没有动议可供投票。 首先进行投票，或者将目的切换到普通楼层。",
-        "clock": "钟",
-        "running": "跑步",
-        "paused": "已暂停",
-        "saveToEnablePauseStart": "保存计时器以启用暂停/启动。",
-        "pauseReasonLogged": "暂停原因（已记录）",
-        "pauseReasonPlaceholder": "例如 程序问题、技术问题、无主持的核心会议……",
-        "pauseClock": "暂停时钟",
-        "startClock": "开始时钟",
-        "perSpeakerTitle": "每个发言人的时间（有主持的核心会议）",
-        "perSpeakerHelp": "将总时间设置为每个发言者的上限，将发言者时间设置为剩余时间； 前进移动到下一个发言者并重置剩余的上限。",
-        "currentSpeaker": "当前发言人",
-        "nextSpeaker": "下一位发言者",
-        "speechNotesCurrentSpeaker": "演讲笔记（当前演讲者）",
-        "speechNotesHelp": "注释与当前发言者计时器文本相关联，当发言者列表中有人标记为“当前”时，他们的代表团将被存储以供参考。",
-        "timerFloorLabel": "计时器（楼层）：",
-        "speakerListCurrent": "演讲者名单（当前）：",
-        "noCurrentDelegation": "发言者名单上没有标记为“当前”的代表团。",
-        "note": "笔记",
-        "notePlaceholder": "点、POI、语气、后续...",
-        "saveSpeechNote": "保存演讲笔记",
-        "recentNotes": "您最近的笔记（本委员会）",
-        "delete": "删除",
-        "speakerTimeRemaining": "发言时间（剩余）",
-        "remainingHelpPerSpeaker": "当前发言者的倒计时（前进时重置）。",
-        "remainingHelpNormal": "当前发言者的倒计时（可以小于总数）。",
-        "totalTime": "总时间",
-        "totalHelpPerSpeaker": "每个发言者的上限（分母为场内；提前补充剩余的金额）。",
-        "totalHelpNormal": "该计时器段的完整长度（显示在地板上的斜线之后）。",
-        "saveTimer": "保存计时器",
-        "advanceSpeakerReset": "提前扬声器和重置时钟",
-        "recentPauseLog": "最近暂停日志",
-        "noPauseEvents": "该委员会尚未记录暂停事件。",
-        "openPauseLogHint": "打开暂停日志可查看记录的暂停原因和时间戳。",
-        "saved": "计时器已保存。",
-        "savedCapped": "计时器已保存。 演讲时间比总时间长； 上限为总数。",
-        "alreadyPaused": "计时器已暂停。",
-        "pausedForCommittee": "委员会的计时器暂停。",
-        "alreadyRunning": "计时器已经在运行。",
-        "runningForCommittee": "委员会正在运行计时器。",
-        "euTimerBoardTitle": "欧盟议会定时器板（11个定时器）",
-        "euTimerBoardHelp": "每方一个计时器，加上总时间、POI/POC 时间和发言者时间。使用“应用”将一行复制到“时钟”选项卡上的实时计时器字段（发言者时间/保存计时器）。",
-        "euTimerName": "姓名",
-        "euTimerTag": "标签",
-        "euTotalTime": "总时间",
-        "euPoiPocTime": "POI/POC 时间",
-        "euSpeakerTime": "发言时间"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "委员会室（已满）",
         "hint": "虚拟布局和代表楼层"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "自动保存失败",
     "autosavedWithCountry": "自动保存 - {国家/地区}",
     "delegateFallback": "代表"
+  },
+  "sources": {
+    "addSource": "添加来源",
+    "sourceUrl": "来源网址",
+    "urlPlaceholder": "https://docs.google.com/document/d/...（推荐）",
+    "urlHelp": "对于新的 Google 文档，请使用 按钮并将文档链接粘贴到此处。",
+    "titleOptional": "标题（可选）",
+    "saveChanges": "保存更改",
+    "editSource": "编辑来源",
+    "urlPlaceholderShort": "Google 文档或其他 URL",
+    "empty": "还没有来源。 添加 Google 文档链接以在此处打开它。",
+    "sourceLabel": "来源",
+    "openLink": "打开链接",
+    "embedHeading": "源文件",
+    "notGoogleDoc": "此 URL 不是 Google 文档。 使用 docs.google.com/document/d/... 链接在此处嵌入和编辑； 否则打开上面的链接。"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "代表不能直接上传立场文件。 使用其他文档类型。",
+    "alertOnlyChairsPositionPaper": "只有主席/SMT/管理员可以上传立场文件。",
+    "alertOnlySmtChairReport": "只有 SMT/管理员可以上传主席报告。",
+    "alertOnlySmtRop": "只有 SMT/admin 可以上传 RoP 文档。",
+    "alertOnlySmtAwardCriteria": "只有 SMT/admin 可以上传奖励标准文件。",
+    "alertNeedContentOrUrl": "添加本地文本内容或 Google 文档 URL。",
+    "confirmDelete": "删除这个文档？",
+    "delegatePrepTitle": "准备文档部分",
+    "delegatePrepBody": "您可以直接从此页面上传、查看和编辑您自己的<prep>准备文档</prep>。",
+    "positionPaperGuideTitle": "位置导纸器",
+    "positionPaperGuideBlurb": "在准备最终 PDF 时下载占位符指南。",
+    "downloadPlaceholderGuide": "下载占位符指南",
+    "addDocument": "添加文档",
+    "tabs": {
+      "ariaLabel": "文档部分",
+      "library": "图书馆",
+      "compose": "撰写",
+      "composeHint": "从此选项卡开始新文档或编辑现有草稿。"
+    },
+    "newDocumentTitle": "新文件",
+    "editDocumentTitle": "编辑文档",
+    "typeLabel": "类型",
+    "types": {
+      "position_paper": "立场文件",
+      "chair_report": "主席报告",
+      "rop": "罗普",
+      "award_criteria": "奖励标准",
+      "chair_notes": "主席笔记",
+      "prep_doc": "准备文件"
+    },
+    "delegatePositionPaperNote": "立场文件由主席上传并附有反馈。",
+    "delegateOwner": "委托所有者",
+    "chairRecipient": "主席获奖者",
+    "titleLabel": "标题",
+    "titlePlaceholder": "文件标题",
+    "googleDocsUrl": "谷歌文档网址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...（在应用程序中嵌入查看/编辑）",
+    "googleDocsHelp": "使用新 Google 文档在新选项卡中打开 Google，然后将文档链接粘贴到此处。 下面的纯文本是可选的。 每个文档都需要本地文本和/或 Google 文档链接。",
+    "plainTextOptional": "纯文本（可选）",
+    "plainTextPlaceholder": "注释或草稿文本...",
+    "chairFeedbackLabel": "主席反馈",
+    "chairFeedbackPlaceholder": "对代表立场文件的反馈...",
+    "empty": "还没有文件。 添加一个或链接一个 Google 文档。",
+    "sidebarDocumentLabel": "文档",
+    "sections": {
+      "chairReports": "主席报告",
+      "rop": "罗普",
+      "awardCriteria": "奖励标准",
+      "prepDocuments": "准备文件",
+      "chairNotes": "主席笔记",
+      "otherDocuments": "其他文件"
+    },
+    "untitled": "无题",
+    "linkedDocumentHeading": "链接文档",
+    "notesHeading": "笔记",
+    "noGoogleDocYet": "尚未链接 Google 文档。 使用“编辑”添加 docs.google.com/document/d/... 网址。",
+    "chairFeedbackHeading": "主席反馈",
+    "noFeedbackYet": "尚未添加反馈。"
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "首先输入代表电子邮件。",
+    "sentToDelegate": "发送至{email}。",
+    "newResolution": "新决议",
+    "maxDraftResolutions": "该委员会已有 {count} 项决议草案。",
+    "googleDocLink": "谷歌文档链接",
+    "googleDocUrlPlaceholder": "Google 文档 URL（docs.google.com/document/d/… — 用于嵌入 + 编辑）",
+    "googleDocUrlHelp": "新的 Google 文档在另一个选项卡中打开； 从地址栏中复制 URL 并将其粘贴到此处。",
+    "mainSubmittersPlaceholder": "主要提交者（用户 ID，以逗号分隔）",
+    "coSubmittersPlaceholder": "共同提交者（用户 ID，以逗号分隔）",
+    "create": "创造",
+    "cancel": "取消",
+    "openInNewTab": "在新选项卡中打开",
+    "noGoogleDocLink": "没有 Google 文档链接",
+    "visibleToOtherBloc": "对其他区块可见",
+    "resolutionCounts": "主子：{main} | 共同替补：{co} | 签署人：{签署人}",
+    "blocButton": "集团{名称}（{立场}）",
+    "signVirtually": "虚拟签名（通知主要订阅者）",
+    "shareByEmail": "通过电子邮件分享解决方案",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "发送给代表",
+    "clauseEditor": "条款编辑",
+    "noClausesYet": "还没有条款。",
+    "clauseNumber": "条款{编号}",
+    "saveClause": "保存条款",
+    "delete": "删除",
+    "addClausePlaceholder": "添加新条款...",
+    "addClause": "添加条款",
+    "clauseVoteHistory": "条款投票历史",
+    "noClauseOutcomesYet": "尚未记录条款投票结果。",
+    "clauseFallback": "条款",
+    "passed": "通过",
+    "failed": "失败的",
+    "motionId": "运动{id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "投票部分",
+      "open": "打开",
+      "closed": "关闭"
+    },
+    "requiredMajority": "所需多数",
+    "helpRequiredMajorityTitle": "所需多数",
+    "helpRequiredMajorityBody": "选择用于决定通过/失败的投票阈值。 “简单”占了一半以上。 “2/3”需要绝对多数。",
+    "majoritySimple": "简单的",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{标签}多数",
+    "mustVote": "必须投票",
+    "helpMustVoteTitle": "必须投票",
+    "helpMustVoteBody": "将此动议标记为“必须投票”项目。 这用于向参与者传达要求（取决于委员会的设置）。",
+    "saveSettings": "保存设置",
+    "delegateBlurb": "讲台记录会议中的投票情况（例如点名）。 这里的动议投票仅遵循是/否（不使用弃权）。 您可以跟踪统计； 代表们不在应用程序中投票。",
+    "yes": "是的",
+    "no": "不",
+    "ballots": "选票",
+    "total": "全部的",
+    "outcome": "结果",
+    "passed": "通过",
+    "failed": "失败的",
+    "noRecordedVotes": "没有记录投票",
+    "reopenMotion": "重新开放动议",
+    "editRecordOpen": "编辑记录...",
+    "hideSettings": "隐藏设置",
+    "preliminaryPassing": "通过（初步）",
+    "preliminaryFailing": "失败（初步）",
+    "delegateRollCall": "代表点名 ({count})",
+    "noSeatedDelegates": "没有在座代表参与此项动议。",
+    "rollPrefix": "卷：",
+    "recordedPrefix": "记录：",
+    "recordedYes": "是的",
+    "recordedNo": "不",
+    "recordedAbstain": "弃权",
+    "recordedNone": "—",
+    "abstain": "弃权",
+    "clear": "清除",
+    "closeMotion": "关闭动作",
+    "mustVoteBadge": "必须投票",
+    "canVoteBadge": "可以投票",
+    "noMotions": "还没有任何动议。",
+    "currentOpenMotion": "当前打开运动",
+    "noOpenMotion": "目前没有公开动议。",
+    "recentClosedMotions": "最近的非公开动议",
+    "noClosedMotions": "还没有结束动议。",
+    "untitled": "无题",
+    "voteTypes": {
+      "motion": "运动",
+      "amendment": "修正案",
+      "resolution": "解决",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "缺席（卷）",
+      "present_abstain": "出席 — 可以弃权（投掷）",
+      "present_voting": "出席并投票（点名）",
+      "unknown": "- （卷）"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "型材截面",
+      "overview": "概述",
+      "awards": "奖项",
+      "private": "私人记录",
+      "settings": "个人资料设置"
+    },
+    "profilePicture": "个人资料图片",
+    "uploadFile": "上传文件",
+    "uploading": "正在上传...",
+    "photoSaved": "照片已上传并保存。",
+    "orUrl": "或者通过URL设置",
+    "urlPlaceholder": "https://...",
+    "name": "姓名",
+    "username": "用户名",
+    "usernamePlaceholder": "例如 亚历克斯_1999",
+    "pronouns": "代词",
+    "customPronounNote": "您的个人资料中有一个自定义代词集，此处不再接受。 选择上面的一个选项（或留空）。 保存替换旧值。",
+    "school": "学校",
+    "schoolPlaceholder": "例如 林肯高中",
+    "grade": "年级",
+    "selectGrade": "选择年级",
+    "conferencesAttended": "参加的会议",
+    "awardsComma": "奖项（以逗号分隔）",
+    "awardsPlaceholder": "最佳代表、荣誉奖",
+    "allocation": "分配",
+    "selectAllocation": "选择分配",
+    "noAllocationsPlaceholder": "没有可用的委员会分配",
+    "saveProfile": "保存个人资料",
+    "saved": "个人资料已保存。",
+    "saveFailed": "无法保存个人资料。",
+    "errUsernamePattern": "用户名必须为 3-32 个字符（字母、数字、_、.、-）",
+    "errPronounsPreset": "从列表中选择一个代词。",
+    "errImageType": "请选择一个图像文件。",
+    "errImageSize": "图片太大（最大 5 MB）。",
+    "errUploadFailed": "上传失败。",
+    "errStorageSetup": "未设置个人资料图片存储。 在 Supabase 项目中，运行迁移 00100_profile_pictures_storage_bucket.sql，或创建名为 profile-pictures 的公共存储桶（请参阅 README）。",
+    "errPublicUrl": "无法解析上传图像的公共 URL。",
+    "fallbacks": {
+      "yourCountry": "你的国家",
+      "committeeSession": "委员会会议",
+      "delegate": "代表",
+      "speechNote": "演讲笔记",
+      "untitledMotion": "无标题动议",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "欢迎来自 {flag} {country} 的代表",
+      "subtitle": "您想从什么开始？",
+      "links": {
+        "documents": "文件",
+        "notes": "笔记",
+        "committeeRoom": "委员会室",
+        "runningNotes": "跑步笔记",
+        "ideas": "想法",
+        "guides": "指南",
+        "sources": "来源",
+        "resolutions": "决议",
+        "speeches": "演讲",
+        "stances": "立场",
+        "crisisSlides": "危机幻灯片",
+        "report": "报告",
+        "motions": "议案",
+        "points": "积分"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "您的个人资料中的奖项",
+      "rank": "排名{排名}",
+      "pending": {
+        "tab": "待定提名",
+        "title": "待定主席提名",
+        "descriptionSingle": "由主席保存并与 SMT 共享以供审核。确认后最终奖项将显示在下方。",
+        "descriptionTabbed": "由主席保存并与 SMT 共享以供审核。最终奖项在确认后出现。"
+      },
+      "recorded": {
+        "tab": "记录奖项",
+        "title": "记录奖项",
+        "description": "当主席或 SMT 在奖励跟踪器中分配您时列出。最终认可遵循会议规则。"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "仅您、委员会主席和相关委员会的 SMT 可见。",
+      "points": {
+        "title": "主席积分（私人）"
+      },
+      "speechNotes": {
+        "title": "主席演讲笔记（私人）"
+      },
+      "motions": {
+        "title": "你移动的动作",
+        "description": "保存到您的个人资料中以供委员会审查和 SMT 监督。"
+      }
+    },
+    "discipline": {
+      "title": "纪律状况（私人）",
+      "statusLine": "警告：{警告} · 罢工：{strikes}{votingDisabled}{speakingSuspished}{removedFromCommittee}",
+      "votingDisabled": "禁用投票",
+      "speakingSuspended": "发言暂停",
+      "removedFromCommittee": "从委员会中除名",
+      "updated": "更新：{值}"
+    },
+    "preview": {
+      "ariaLabel": "个人资料预览",
+      "title": "预览",
+      "yourName": "你的名字",
+      "usernameNotSet": "用户名未设置",
+      "gradeValue": "年级{年级}",
+      "awards": "奖项"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "议事规则 (RoP)",
+        "content": "# 议事规则\n\n ## 点和动作\n - **程序要点**：正确的程序\n - **信息点**：向演讲者提问\n - **个人特权点**：个人舒适度\n - **动议**：推迟辩论\n - **休会动议**：结束会议\n\n ## 投票\n - 程序事项的简单多数\n - 实质性事项 2/3 多数\n - 如果需要，进行唱名投票"
+      },
+      "examples": {
+        "title": "示例",
+        "content": "# 例子\n\n ## 分辨率格式\n ````\n 大会，\n ...\n 1. 呼吁成员国...\n 2. 敦促国际社会……\n ````\n\n ## 立场文件结构\n 一、背景\n 2. 国家政策\n 3. 建议的解决方案"
+      },
+      "templates": {
+        "title": "模板",
+        "content": "# 模板\n\n ## 主席报告模板\n - 委员会概览\n - 关键讨论点\n - 通过的决议\n - 建议"
+      },
+      "chairReport": {
+        "title": "主席报告",
+        "content": "# 主席报告\n\n 在此记录委员会的程序和结果。"
+      }
+    },
+    "edit": "编辑",
+    "guideDocument": "指导文件",
+    "additionalNotes": "附加说明",
+    "noContentYet": "还没有内容。",
+    "titlePlaceholder": "标题",
+    "googleDocsUrl": "谷歌文档网址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "新的 Google 文档将在另一个选项卡中打开。 粘贴可共享链接，以便代表可以在此处打开文档（查看/编辑取决于 Google 共享）。",
+    "markdownOptional": "Markdown 注释（如果您使用 Google 文档，则可选）",
+    "save": "节省",
+    "cancel": "取消",
+    "createNewGuide": "创建新指南",
+    "slugPlaceholder": "蛞蝓（独特）",
+    "titleLowerPlaceholder": "标题",
+    "googleDocsUrlOptional": "Google 文档 URL（可选）",
+    "markdownContentOptional": "Markdown 内容（可选）",
+    "create": "创造",
+    "glossary": {
+      "title": "模拟联合国议程术语表",
+      "subtitle": "与您的委员会代码和当前议程主题相匹配的独特术语。",
+      "committeeCode": "委员会代码：{code}",
+      "sources": {
+        "core": "核",
+        "committee": "委员会",
+        "topic": "话题"
+      },
+      "terms": {
+        "delegation": {
+          "term": "代表团",
+          "definition": "在委员会中代表一个国家或实体的国家或观察员小组。"
+        },
+        "placard": {
+          "term": "标语牌",
+          "definition": "用于请求发言、投票和发出程序性动议的国家标志。"
+        },
+        "dais": {
+          "term": "讲台",
+          "definition": "主持团队主持辩论、应用程序并管理发言顺序。"
+        },
+        "quorum": {
+          "term": "法定人数",
+          "definition": "进行正式事务和投票所需的最低代表团数量。"
+        },
+        "motion": {
+          "term": "运动",
+          "definition": "改变辩论流程的正式提案，例如核心小组类型或发言时间。"
+        },
+        "point_of_order": {
+          "term": "订单问题",
+          "definition": "根据委员会规则错误应用程序时进行干预。"
+        },
+        "moderated_caucus": {
+          "term": "主持的核心会议",
+          "definition": "结构化辩论部分，针对明确的子主题进行短时间演讲。"
+        },
+        "unmoderated_caucus": {
+          "term": "无主持的核心小组",
+          "definition": "非正式谈判阶段，代表们可以自由起草和合并想法。"
+        },
+        "draft_resolution": {
+          "term": "决议草案",
+          "definition": "最终投票和通过之前拟议委员会行动的工作文本。"
+        },
+        "amendment": {
+          "term": "修正案",
+          "definition": "对文本草案提出的修改，要么是友好的，要么被投票为不友好的。"
+        },
+        "operative_clause": {
+          "term": "执行条款",
+          "definition": "以行动为导向的编号条款，描述委员会建议做什么。"
+        },
+        "preambulatory_clause": {
+          "term": "序言条款",
+          "definition": "背景设定条款引用背景原则、关注点和先前的框架。"
+        },
+        "right_of_reply": {
+          "term": "答复权",
+          "definition": "有机会对影响代表团尊严或立场的直接声明做出回应。"
+        },
+        "veto_power": {
+          "term": "否决权",
+          "definition": "联合国安理会常任理事国有权阻止实质性决议草案。"
+        },
+        "chapter_vii": {
+          "term": "第七章",
+          "definition": "《联合国宪章》关于和平威胁、制裁和使用武力措施的权威。"
+        },
+        "sanctions_regime": {
+          "term": "制裁制度",
+          "definition": "协调限制用于在没有直接军事行动的情况下影响行为。"
+        },
+        "arms_control": {
+          "term": "军备控制",
+          "definition": "限制武器类型、数量或部署的协议和核查系统。"
+        },
+        "non_proliferation": {
+          "term": "防扩散",
+          "definition": "防止核、化学、生物或先进武器能力扩散的政策。"
+        },
+        "confidence_building_measures": {
+          "term": "建立信任措施",
+          "definition": "减少误解和冲突风险的透明度和沟通工具。"
+        },
+        "universal_periodic_review": {
+          "term": "普遍定期审议",
+          "definition": "每个联合国成员国报告并接收权利建议的同行评审过程。"
+        },
+        "special_rapporteur": {
+          "term": "特别报告员",
+          "definition": "任命独立专家监测和报告专题或国家权利问题。"
+        },
+        "treaty_body": {
+          "term": "条约机构",
+          "definition": "监督具体人权条约实施情况的专家委员会。"
+        },
+        "public_health_emergency": {
+          "term": "突发公共卫生事件",
+          "definition": "严重的疫情爆发需要国家和国际紧急协调应对。"
+        },
+        "surveillance": {
+          "term": "流行病学监测",
+          "definition": "持续收集和分析健康数据以检测和跟踪疾病趋势。"
+        },
+        "health_systems": {
+          "term": "加强卫生系统",
+          "definition": "改善劳动力、融资、物流和治理，以提供可靠的医疗服务。"
+        },
+        "transnational_crime": {
+          "term": "跨国有组织犯罪",
+          "definition": "通过网络和非法市场跨境协调犯罪活动。"
+        },
+        "illicit_trafficking": {
+          "term": "非法贩运",
+          "definition": "毒品、武器、人员或货物跨司法管辖区非法流动。"
+        },
+        "rule_of_law_capacity": {
+          "term": "法治能力",
+          "definition": "司法系统公平调查、起诉和保护权利的制度能力。"
+        },
+        "sustainable_development": {
+          "term": "可持续发展",
+          "definition": "平衡社会进步、经济机会和环境保护的增长模式。"
+        },
+        "financing_for_development": {
+          "term": "发展融资",
+          "definition": "支持长期发展优先事项的公共和私人融资机制。"
+        },
+        "policy_coordination": {
+          "term": "政策协调",
+          "definition": "协调国家和机构的行动，以避免重复并增加集体影响。"
+        },
+        "child_protection": {
+          "term": "儿童保护",
+          "definition": "防止所有环境下针对儿童的剥削、虐待和暴力行为的措施。"
+        },
+        "education_access": {
+          "term": "教育机会",
+          "definition": "确保所有儿童获得包容、公平和持续的学习机会。"
+        },
+        "humanitarian_response": {
+          "term": "人道主义响应",
+          "definition": "快速救援行动解决危机和冲突环境中的紧急需求。"
+        },
+        "gender_mainstreaming": {
+          "term": "性别主流化",
+          "definition": "将性别分析纳入政策设计、实施和评估。"
+        },
+        "gender_based_violence": {
+          "term": "基于性别的暴力",
+          "definition": "基于性别认同、角色或不平等权力关系而针对某人的伤害。"
+        },
+        "economic_empowerment": {
+          "term": "经济赋权",
+          "definition": "扩大获得体面工作、财务、所有权和决策权的机会。"
+        },
+        "source_attribution": {
+          "term": "来源归属",
+          "definition": "明确引用信息来源，以便可以验证主张并结合上下文。"
+        },
+        "verified_reporting": {
+          "term": "验证报告",
+          "definition": "新闻标准要求在发布有争议的事实之前进行证实。"
+        },
+        "editorial_independence": {
+          "term": "编辑独立性",
+          "definition": "将报告决策与政治压力或利益相关者的影响分开。"
+        },
+        "climate_mitigation": {
+          "term": "减缓气候变化",
+          "definition": "减少温室气体排放或增加长期碳清除的行动。"
+        },
+        "climate_adaptation": {
+          "term": "气候适应",
+          "definition": "减少气候相关影响脆弱性的政策和投资。"
+        },
+        "cyber_norms": {
+          "term": "网络规范",
+          "definition": "对数字和网络领域负责任的国家行为的共同期望。"
+        },
+        "critical_infrastructure": {
+          "term": "关键基础设施",
+          "definition": "电力、水、健康和通信等基本系统需要弹性。"
+        },
+        "epidemiology": {
+          "term": "流行病学",
+          "definition": "研究疾病模式、原因和人群分布。"
+        },
+        "preparedness_response": {
+          "term": "准备和响应",
+          "definition": "规划、协调和紧急行动以遏制和管理紧急情况。"
+        },
+        "non_refoulement": {
+          "term": "不驱回",
+          "definition": "禁止人们返回面临严重伤害的地方的原则。"
+        },
+        "durable_solutions": {
+          "term": "耐用的解决方案",
+          "definition": "流离失所者的长期结果：返回、融入当地社会或重新安置。"
+        },
+        "nuclear_safeguards": {
+          "term": "核保障",
+          "definition": "确保核材料不被转用于武器用途的核查措施。"
+        },
+        "counter_terrorism": {
+          "term": "反恐",
+          "definition": "针对恐怖活动的综合法律、预防和安全措施。"
+        },
+        "due_process": {
+          "term": "正当程序",
+          "definition": "在调查、起诉和制裁过程中，公平的法律程序保护权利。"
+        },
+        "resource_security": {
+          "term": "资源安全",
+          "definition": "在经济和环境压力下可靠地获取食物、水和能源。"
+        },
+        "resilience": {
+          "term": "弹力",
+          "definition": "社区和机构吸收冲击和有效恢复的能力。"
+        }
+      },
+      "topicLine": "主题：{主题}"
+    }
+  },
+  "ideas": {
+    "editIdea": "编辑想法",
+    "googleDocsUrl": "谷歌文档网址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "简短的想法文本（可选）",
+    "save": "节省",
+    "cancel": "取消",
+    "addIntro": "添加 Google 文档以起草适当的解决方案想法，或输入简短的注释（或两者）。",
+    "googleDocsCreateHelp": "新的 Google 文档在另一个选项卡中打开； 创建链接后将链接粘贴到此处。",
+    "resolutionIdeaPlaceholder": "解决思路...",
+    "add": "添加",
+    "noIdeasYet": "还没有想法。",
+    "ideaLabel": "主意",
+    "ideaFallback": "想法{编号}",
+    "linkedDoc": "链接文档",
+    "addedOn": "添加了{日期}",
+    "edit": "编辑",
+    "delete": "删除",
+    "ideaDocument": "想法文件",
+    "summary": "概括",
+    "emptyIdea": "空洞的想法。"
+  },
+  "stances": {
+    "heatmapTitle": "立场简要概述（热图）",
+    "heatmapHelp": "您的分配在多大程度上支持___？ （1-5级）",
+    "topicPlaceholder": "例如 气候行动",
+    "extentLabel": "范围（1-5）：",
+    "extentHelpTitle": "范围（1-5）",
+    "extentHelpBody": "1 表示您的分配对该主题的支持很少，5 表示支持很强。 选择一个与您在委员会中的立场相符的数字。",
+    "add": "添加",
+    "viewOnlyHeatmap": "仅供员工查看的热图。",
+    "notesPerAllocation": "每次分配的注释",
+    "noAllocationsYet": "尚未分配",
+    "notesPlaceholder": "此分配的立场说明...",
+    "noteLanguageWarning": "读者警告：本说明可能包含不当语言。",
+    "save": "节省",
+    "saveHelpTitle": "保存立场注释",
+    "saveHelpBody": "保存此分配的立场注释。 工作人员和（取决于委员会设置）其他参与者可以查看它。"
+  },
+  "speeches": {
+    "newSpeech": "新演讲",
+    "speechTitlePlaceholder": "演讲标题",
+    "googleDocsUrl": "谷歌文档网址",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "在新选项卡中打开 Google； 准备好后，将文档 URL 粘贴到此处。",
+    "plainTextOptional": "纯文本草稿（如果您使用 Google 文档，则可选）",
+    "save": "节省",
+    "cancel": "取消",
+    "noSpeechesYet": "还没有发言。 链接 Google 文档或粘贴文本。",
+    "speechLabel": "演讲",
+    "untitled": "无题",
+    "edit": "编辑",
+    "speechDocument": "演讲稿",
+    "draftText": "文本草稿",
+    "noContentHint": "将 Google 文档与“编辑”链接，或在表单中添加纯文本。"
+  },
+  "committeeRoom": {
+    "committeeLabel": "委员会",
+    "yourContext": "您的背景",
+    "roleLabel": "角色",
+    "seatLabel": "座位",
+    "clearSearchTitle": "清除搜索并显示所有代表团",
+    "vacantLabel": "空缺",
+    "assignedLabel": "已分配",
+    "daisLabel": "讲台",
+    "phaseLabel": "阶段",
+    "phaseVoting": "表决",
+    "phaseDebate": "辩论",
+    "focusSearchTitle": "焦点搜索（讲台标题和名称与您的查询匹配）",
+    "tipLabel": "提示",
+    "searchVacantTitle": "搜索房间内的“空位”",
+    "searchHint": "输入国家/地区、代表姓名、学校、代词或“空缺”以突出显示房间中的匹配项。 按 Enter 跳转到第一个匹配项； Esc 清除。 单击“空位”可跳到空座位。",
+    "findLabel": "寻找代表团或讲台成员",
+    "searchPlaceholder": "国家、姓名、学校...",
+    "matchesCount": "{matches} 个席位（共 {total} 个）匹配",
+    "enterScrolls": "输入卷轴",
+    "typeToFilterHint": "输入要过滤的内容 - 输入滚动到第一个匹配项",
+    "noMatches": "没有匹配的代表团或讲台席位。",
+    "digitalDisplay": "数字显示",
+    "floorLabel": "地面",
+    "staffSeatsHeading": "工作人员-座位",
+    "searchAria": "搜索代表团",
+    "virtualRoomVacant": "空缺",
+    "profileAria": "查看个人资料：{国家}",
+    "vacantSeatAria": "空座",
+    "placardAria": "标语牌{国家}",
+    "gavelAria": "木槌",
+    "viewProfileAria": "查看个人资料：{title}",
+    "noProfileLinkAria": "{title}（无个人资料链接）",
+    "committeeFloor": "委员会楼层",
+    "virtualRoomFigureAria": "虚拟委员会会议室 - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "过滤代表团。 第一个突出显示的座位是环中的第一场比赛。",
+    "helperText": "标语牌列出了每个代表个人资料中的国家（来自分配）、姓名、学校和代词。 在“个人资料”下编辑您的。 空的委员会席位显示为空缺。 单击已填满的标语牌或讲台座位即可打开该成员的页面（从那里聊天和报告）。",
+    "virtualRoomCaption": "虚拟模拟联合国委员会会议室，配有代表标语牌，显示国家、姓名、学校和代词。"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "请求发言",
+      "delegateFallback": "代表",
+      "needAllocation": "您需要分配资源才能请求发言。",
+      "alreadyQueued": "队列中已有一个有效的发言请求。",
+      "requested": "要求发言。 您将出现在队列中。",
+      "requestFailed": "未能请求发言。",
+      "helpBody": "将您的代表团送至主席队列。 您一次可以有一个活跃的等待/当前请求。",
+      "purposeLabel": "可选用途（显示在队列标签中）",
+      "purposeHelpTitle": "用途标签",
+      "purposeHelpBody": "该文本附加在您的国家/地区名称后，以便主席可以了解您请求发言的原因。",
+      "purposePlaceholder": "例如 支持+修订概述",
+      "requesting": "请求...",
+      "rollPromptTitle": "需要主席批准",
+      "rollPromptBodyPickStatus": "会议已经开始。 选择您的点名状态以解锁发言和投票。 此选择无法更改。",
+      "rollPromptBodyWaitSessionStart": "等待主席开始委员会会议。",
+      "rollPromptBodyWaitRollPrompt": "等待点名提示。",
+      "rollPromptBodyMarkedAbsent": "您目前被标记为缺席。 请主席标记您发言并投票。",
+      "rollPromptBodyChecking": "正在检查您的卷状态...",
+      "rollPromptSaving": "保存...",
+      "rollPromptPresent": "展示",
+      "rollPromptPresentVoting": "出席并投票"
+    },
+    "motionVoting": {
+      "votingProcedure": "投票程序",
+      "currentMotion": "当前运动",
+      "motioner": "运动者",
+      "majority": "多数",
+      "majoritySimple": "简单的",
+      "tally": "是 {yes} - 否 {no} - 总计 {total}",
+      "help": "讲台上记录了每个代表团在会议上的投票情况。 动议投票仅使用“是”或“否”（无弃权）。 总计仅计算记录了“是”或“否”的标牌； 缺席的代表团将被跳过。"
+    },
+    "activeMotion": {
+      "currentMotion": "当前运动",
+      "motionFallback": "运动",
+      "motioner": "运动者",
+      "majority": "多数",
+      "majoritySimple": "简单的",
+      "type": "类型",
+      "timer": "定时器",
+      "currentSpeaker": "当前发言人",
+      "nextSpeaker": "下一位发言者",
+      "speakerTimeLeftCap": "发言时间（左/上限）",
+      "speakerTimeLeftTotal": "发言时间（左/总）",
+      "perSpeaker": "（每个发言者）",
+      "paused": "（停顿）",
+      "pauseReason": "暂停：{原因}"
+    },
+    "floorStatus": {
+      "sessionTime": "会议时间",
+      "sessionNotStarted": "会话未开始",
+      "limit": "限制",
+      "limitRemaining": "还剩 {值}",
+      "limitOverBy": "超过 {value}",
+      "quickLinkSession": "会议",
+      "quickLinkRoll": "卷",
+      "quickLinkSpeakers": "扬声器",
+      "quickLinkMotions": "议案",
+      "quickLinkTimer": "定时器",
+      "dais": "讲台",
+      "pinned": "已固定",
+      "viewFullAnnouncement": "查看完整公告",
+      "timerPausesReadOnly": "定时器暂停（只读）",
+      "speakerList": "演讲嘉宾名单",
+      "speakerFallback": "扬声器",
+      "rollCallYou": "点名（你）",
+      "fullAnnouncement": "完整公告",
+      "daisAnnouncement": "讲台公告",
+      "close": "关闭",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "会话名称",
+      "sessionNamePlaceholder": "例如 上午场",
+      "sessionNameSaving": "保存…",
+      "sessionNameSaved": "已保存",
+      "sessionNameHint": "自动保存并显示在会话历史记录中。",
+      "title": "委员会会议",
+      "subtitle": "开始或停止委员会会议。",
+      "helpStartStop": "开始为每个人开始实时委员会会议计时器/状态。 停止结束会话并清除当前时间限制。",
+      "migrationUnavailable": "在应用最新的数据库迁移之前，会话控制暂时不可用。",
+      "endTimeInFuture": "选择未来的结束时间，或切换为无限制。",
+      "sessionStartUnavailable": "在应用最新迁移之前，会话开始时间戳不可用。",
+      "endTimeInFutureSetNoLimit": "选择未来的结束时间，或不设置限制。",
+      "sessionLimitUpdated": "会话限制已更新。",
+      "startedLabel": "开始：",
+      "timeInLabel": "时间：",
+      "timeUntilEndLabel": "距结束时间：",
+      "overByValue": "超过 {value}",
+      "modeLabel": "模式：",
+      "modeStopwatchNoLimit": "秒表（无时间限制）",
+      "sessionNotRunning": "会话未运行。",
+      "sessionLimit": "会话限制",
+      "sessionLimitModesTitle": "会话限制模式",
+      "sessionLimitModesHelp": "无：没有尽头。 时间预算：从开始计算。 结束于：您当地时区的固定时钟时间。",
+      "sessionLimitOptional": "选修的。",
+      "noneLabel": "没有任何",
+      "noneDescription": "运行直到你停下来。",
+      "timeBudgetLabel": "时间预算",
+      "timeBudgetDescription": "从你开始的那一刻开始计算。",
+      "endTimeLabel": "结束时间",
+      "endTimeDescription": "使用固定时钟时间（如果两者都设置过，则覆盖预算）。",
+      "noneIndefinite": "无（不确定）",
+      "noneScheduledEndHint": "没有预定的结束时间； 仅显示经过的时间。",
+      "timeBudgetFromStart": "从开始的时间预算",
+      "hoursLabel": "时间",
+      "minutesLabel": "分钟",
+      "minimumOneMinute": "（最少 1 分钟）",
+      "endAtLocalTime": "结束于（当地时间）",
+      "stopSession": "停止会话",
+      "saveLimit": "保存限额",
+      "saveLimitHelp": "在会话已运行时应用更新的限制设置，而不停止会话。",
+      "startSession": "开始会话",
+      "sidebarUsePrefix": "使用侧边栏",
+      "rollCall": "点名",
+      "speakers": "扬声器",
+      "formalMotions": "正式动议",
+      "timer": "定时器",
+      "sidebarAnd": "和",
+      "announcements": "公告",
+      "sidebarUseSuffix": "— 每个选项卡一个工具。",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "会话历史记录",
+      "savedCount": "已保存 {count} 个",
+      "permissionsHint": "主席可以重命名条目。 SMT/管理员可以重命名和删除条目。",
+      "empty": "还没有会话历史记录。",
+      "rename": "重命名",
+      "delete": "删除",
+      "deleteConfirm": "从历史记录中删除此会话吗？",
+      "sessionNamePrompt": "会话名称",
+      "rangeClosed": "{范围}",
+      "rangeOngoing": "{范围} -> 正在进行"
+    },
+    "timerPage": {
+      "title": "定时器",
+      "controlsTitle": "定时器控制",
+      "controlsHelp": "使用全体发言权来确定总体辩论时间，或使用动议投票将可见性与特定的公开投票项目联系起来。",
+      "tabSetup": "1) 设置",
+      "tabClock": "2) 时钟控制",
+      "tabNotes": "3）演讲笔记",
+      "tabLog": "4）暂停日志",
+      "setupHelp": "选择此计时器是用于全体发言（代表始终可见）还是与开放投票的动议相关（代表仅在该投票为活动项目时才能看到它）。 无论如何，打开每个发言者的时间后，时钟在主持的预选会议期间仍然可见。 暂停时钟/开始时钟冻结或恢复倒计时。 单独设置扬声器时间（剩余）和总时间，然后保存计时器。 预设将两者填充为相同的长度； 您可以随后编辑任一字段。 暂停会记录一个简短的原因。",
+      "namedPreset": "命名预设",
+      "applyPreset": "应用预设...",
+      "floorLabelDelegates": "楼层标签（代表）",
+      "floorLabelPlaceholder": "例如 GSL 60年代",
+      "timerPurpose": "定时器用途",
+      "purposeGeneralFloor": "一般性辩论/全体发言（与投票无关）",
+      "purposeMotionVote": "开放动议 - 仅当投票在场上处于活动状态时才计时器",
+      "openMotionForVoting": "开放动议（必须开放投票）",
+      "selectMotion": "选择运动...",
+      "untitled": "无题",
+      "noOpenMotionWarning": "没有动议可供投票。 首先进行投票，或者将目的切换到普通楼层。",
+      "clock": "钟",
+      "running": "跑步",
+      "paused": "已暂停",
+      "saveToEnablePauseStart": "保存计时器以启用暂停/启动。",
+      "pauseReasonLogged": "暂停原因（已记录）",
+      "pauseReasonPlaceholder": "例如 程序问题、技术问题、无主持的核心会议……",
+      "pauseClock": "暂停时钟",
+      "startClock": "开始时钟",
+      "perSpeakerTitle": "每个发言人的时间（有主持的核心会议）",
+      "perSpeakerHelp": "将总时间设置为每个发言者的上限，将发言者时间设置为剩余时间； 前进移动到下一个发言者并重置剩余的上限。",
+      "currentSpeaker": "当前发言人",
+      "nextSpeaker": "下一位发言者",
+      "speechNotesCurrentSpeaker": "演讲笔记（当前演讲者）",
+      "speechNotesHelp": "注释与当前发言者计时器文本相关联，当发言者列表中有人标记为“当前”时，他们的代表团将被存储以供参考。",
+      "timerFloorLabel": "计时器（楼层）：",
+      "speakerListCurrent": "演讲者名单（当前）：",
+      "noCurrentDelegation": "发言者名单上没有标记为“当前”的代表团。",
+      "note": "笔记",
+      "notePlaceholder": "点、POI、语气、后续...",
+      "saveSpeechNote": "保存演讲笔记",
+      "recentNotes": "您最近的笔记（本委员会）",
+      "delete": "删除",
+      "speakerTimeRemaining": "发言时间（剩余）",
+      "remainingHelpPerSpeaker": "当前发言者的倒计时（前进时重置）。",
+      "remainingHelpNormal": "当前发言者的倒计时（可以小于总数）。",
+      "totalTime": "总时间",
+      "totalHelpPerSpeaker": "每个发言者的上限（分母为场内；提前补充剩余的金额）。",
+      "totalHelpNormal": "该计时器段的完整长度（显示在地板上的斜线之后）。",
+      "saveTimer": "保存计时器",
+      "advanceSpeakerReset": "提前扬声器和重置时钟",
+      "recentPauseLog": "最近暂停日志",
+      "noPauseEvents": "该委员会尚未记录暂停事件。",
+      "openPauseLogHint": "打开暂停日志可查看记录的暂停原因和时间戳。",
+      "saved": "计时器已保存。",
+      "savedCapped": "计时器已保存。 演讲时间比总时间长； 上限为总数。",
+      "alreadyPaused": "计时器已暂停。",
+      "pausedForCommittee": "委员会的计时器暂停。",
+      "alreadyRunning": "计时器已经在运行。",
+      "runningForCommittee": "委员会正在运行计时器。",
+      "euTimerBoardTitle": "欧盟议会定时器板（11个定时器）",
+      "euTimerBoardHelp": "每方一个计时器，加上总时间、POI/POC 时间和发言者时间。使用“应用”将一行复制到“时钟”选项卡上的实时计时器字段（发言者时间/保存计时器）。",
+      "euTimerName": "姓名",
+      "euTimerTag": "标签",
+      "euTotalTime": "总时间",
+      "euPoiPocTime": "POI/POC 时间",
+      "euSpeakerTime": "发言时间"
+    }
   }
 }

@@ -20,7 +20,7 @@ function formatRange(startIso: string, endIso: string | null): string {
 }
 
 export function SessionHistoryPanel({ conferenceId }: { conferenceId: string }) {
-  const t = useTranslations("views.session.history");
+  const t = useTranslations("session.history");
   const supabase = useMemo(() => createClient(), []);
   const [rows, setRows] = useState<SessionHistoryRow[]>([]);
   const [role, setRole] = useState<string | null>(null);

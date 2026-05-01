@@ -8,7 +8,7 @@ import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { ChairTopicTabsCard } from "@/components/chair/ChairTopicTabsCard";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
@@ -24,6 +24,7 @@ export default async function ChairOverviewPage({
   const td = await getTranslations("chairNav");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
+  const locale = await getLocale();
   const supabase = await createClient();
   const {
     data: { user },
@@ -50,12 +51,14 @@ export default async function ChairOverviewPage({
   const committeeLabel = conf?.committee?.trim()
     ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
     : conf?.name?.trim()
-      ? translateAgendaTopicLabel(tTopics, conf.name)
+      ? translateAgendaTopicLabel(tTopics, conf.name, locale)
       : tPage("fallbackYourCommittee");
   const translatedCommittee = conf?.committee?.trim()
     ? translateCommitteeLabel(tCommitteeLabels, conf.committee)
     : null;
-  const translatedTopic = conf?.name?.trim() ? translateAgendaTopicLabel(tTopics, conf.name) : null;
+  const translatedTopic = conf?.name?.trim()
+    ? translateAgendaTopicLabel(tTopics, conf.name, locale)
+    : null;
   const line =
     [translatedCommittee, conf?.tagline].filter(Boolean).join(" · ") ||
     translatedTopic ||
@@ -64,6 +67,7 @@ export default async function ChairOverviewPage({
 
   const tiles: { href: string; label: string; hint: string }[] = [
     { href: "/chair/prep-checklist", label: tPage("tiles.prepChecklist.label"), hint: tPage("tiles.prepChecklist.hint") },
+    { href: "/chair/session/agenda", label: tPage("tiles.agenda.label"), hint: tPage("tiles.agenda.hint") },
     { href: "/chair/flow-checklist", label: tPage("tiles.flowChecklist.label"), hint: tPage("tiles.flowChecklist.hint") },
     { href: "/chair/allocation-matrix", label: tPage("tiles.delegates.label"), hint: tPage("tiles.delegates.hint") },
     { href: "/chair/digital-room", label: tPage("tiles.digitalRoom.label"), hint: tPage("tiles.digitalRoom.hint") },

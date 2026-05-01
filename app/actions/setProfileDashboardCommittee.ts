@@ -2,11 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveEventId } from "@/lib/active-event-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 
 /**
- * Sets active event + committee cookies when the user has an allocation in that conference.
- * Used from profile settings for delegates and chairs with one or more committee seats.
+ * Sets active event + committee cookies.
+ * Delegates: must have an allocation row on that conference.
+ * Chairs: same, or target conference may be any session in the active event (room-gate cookie).
  */
 export async function setProfileDashboardCommittee(
   conferenceId: string
@@ -33,10 +35,29 @@ export async function setProfileDashboardCommittee(
     .eq("conference_id", trimmed)
     .maybeSingle();
 
-  if (!alloc?.id) return { ok: false, error: "no_seat" };
+  if (alloc?.id) {
+    await setActiveConferenceContext(supabase, trimmed);
+    revalidatePath("/profile");
+    revalidatePath("/", "layout");
+    return { ok: true };
+  }
 
-  await setActiveConferenceContext(supabase, trimmed);
-  revalidatePath("/profile");
-  revalidatePath("/", "layout");
-  return { ok: true };
+  if (role === "chair") {
+    const [{ data: targetConf }, activeEventId] = await Promise.all([
+      supabase.from("conferences").select("event_id").eq("id", trimmed).maybeSingle(),
+      getActiveEventId(),
+    ]);
+    if (
+      targetConf?.event_id &&
+      activeEventId &&
+      targetConf.event_id === activeEventId
+    ) {
+      await setActiveConferenceContext(supabase, trimmed);
+      revalidatePath("/profile");
+      revalidatePath("/", "layout");
+      return { ok: true };
+    }
+  }
+
+  return { ok: false, error: "no_seat" };
 }

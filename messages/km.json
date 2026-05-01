@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "បើកចលនាសម្រាប់សេចក្តីថ្លែងការណ៍ជាមុនសិន។",
     "openMotionBlocksRecording": "ចលនាមួយត្រូវបានបើកសម្រាប់ការបោះឆ្នោតរួចហើយ។ បិទវាមុនពេលកត់ត្រាសេចក្តីថ្លែងការបន្ថែម។",
     "statedMotionRecorded": "ចលនាដែលបានកត់ត្រាទុក (មិនទាន់បើកសម្រាប់ការបោះឆ្នោត)",
-    "statedMotionRemoved": "ចលនាដែលបានបញ្ជាក់ត្រូវបានដកចេញ។"
+    "statedMotionRemoved": "ចលនាដែលបានបញ្ជាក់ត្រូវបានដកចេញ។",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• កំណត់ហេតុពិន្ទុ",
     "formalMotions": "ចលនាផ្លូវការ",
     "timer": "កម្មវិធីកំណត់ម៉ោង",
-    "smtProfile": "ប្រវត្តិរូប"
+    "smtProfile": "ប្រវត្តិរូប",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -835,7 +852,8 @@
       "archive": "បណ្ណសារ",
       "officialLinks": "តំណភ្ជាប់ផ្លូវការ",
       "roomCode": "លេខកូដបន្ទប់",
-      "settings": "ការកំណត់"
+      "settings": "ការកំណត់",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "ប្រទេសសមាជិកអង្គការសហប្រជាជាតិ",
       "unSystem": "ប្រព័ន្ធអង្គការសហប្រជាជាតិ (ស្ថាបនិក និងសមាជិក)",
       "history": "ប្រវត្តិសាស្រ្តរបស់អង្គការសហប្រជាជាតិ"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "បន្ថែមប្រភព",
-      "sourceUrl": "ប្រភព URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (បានណែនាំ)",
-      "urlHelp": "សម្រាប់ Google Doc ថ្មី សូមប្រើប៊ូតុង ហើយបិទភ្ជាប់តំណឯកសារនៅទីនេះ។",
-      "titleOptional": "ចំណងជើង (ជាជម្រើស)",
-      "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
-      "editSource": "កែសម្រួលប្រភព",
-      "urlPlaceholderShort": "Google Doc ឬ URL ផ្សេងទៀត។",
-      "empty": "មិនទាន់មានប្រភពនៅឡើយ។ បន្ថែមតំណ Google Doc ដើម្បីបើកវានៅទីនេះ។",
-      "sourceLabel": "ប្រភព",
-      "openLink": "បើកតំណ",
-      "embedHeading": "ឯកសារប្រភព",
-      "notGoogleDoc": "URL នេះមិនមែនជា Google Doc ទេ។ ប្រើតំណ docs.google.com/document/d/… ដើម្បីបង្កប់ និងកែសម្រួលនៅទីនេះ។ បើមិនដូច្នេះទេបើកតំណខាងលើ។"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "ប្រតិភូមិនអាចផ្ទុកឯកសារទីតាំងដោយផ្ទាល់បានទេ។ ប្រើប្រភេទឯកសារផ្សេងទៀត។",
-      "alertOnlyChairsPositionPaper": "មានតែកៅអី/SMT/admin ប៉ុណ្ណោះដែលអាចផ្ទុកឡើងនូវ Position Papers។",
-      "alertOnlySmtChairReport": "មានតែ SMT/admin ប៉ុណ្ណោះដែលអាចបង្ហោះរបាយការណ៍ប្រធានបាន។",
-      "alertOnlySmtRop": "មានតែ SMT/admin ប៉ុណ្ណោះដែលអាចបង្ហោះឯកសារ RoP បាន។",
-      "alertOnlySmtAwardCriteria": "មានតែ SMT/admin ប៉ុណ្ណោះដែលអាចបង្ហោះឯកសារលក្ខណៈវិនិច្ឆ័យពានរង្វាន់។",
-      "alertNeedContentOrUrl": "បន្ថែមមាតិកាអត្ថបទក្នុងស្រុក ឬ URL ឯកសារ Google ។",
-      "confirmDelete": "លុបឯកសារនេះ?",
-      "delegatePrepTitle": "ផ្នែករៀបចំឯកសារ",
-      "delegatePrepBody": "អ្នកអាចបង្ហោះ មើល និងកែសម្រួល <prep>ឯកសាររៀបចំ</prep> ផ្ទាល់ខ្លួនរបស់អ្នកដោយផ្ទាល់ពីទំព័រនេះ។",
-      "positionPaperGuideTitle": "សៀវភៅណែនាំអំពីទីតាំង",
-      "positionPaperGuideBlurb": "ទាញយកមគ្គុទ្ទេសក៍កន្លែងដាក់ខណៈពេលដែល PDF ចុងក្រោយកំពុងត្រូវបានរៀបចំ។",
-      "downloadPlaceholderGuide": "ទាញយកមគ្គុទ្ទេសក៍កន្លែងដាក់",
-      "addDocument": "បន្ថែមឯកសារ",
-      "tabs": {
-        "ariaLabel": "ផ្នែកឯកសារ",
-        "library": "បណ្ណាល័យ",
-        "compose": "តែង",
-        "composeHint": "ចាប់ផ្តើមឯកសារថ្មី ឬកែសម្រួលសេចក្តីព្រាងដែលមានស្រាប់ពីផ្ទាំងនេះ។"
-      },
-      "newDocumentTitle": "ឯកសារថ្មី។",
-      "editDocumentTitle": "កែសម្រួលឯកសារ",
-      "typeLabel": "ប្រភេទ",
-      "types": {
-        "position_paper": "ក្រដាសមុខតំណែង",
-        "chair_report": "របាយការណ៍ប្រធាន",
-        "rop": "RoP",
-        "award_criteria": "លក្ខណៈវិនិច្ឆ័យរង្វាន់",
-        "chair_notes": "កំណត់ចំណាំរបស់ប្រធាន",
-        "prep_doc": "រៀបចំឯកសារ"
-      },
-      "delegatePositionPaperNote": "ឯកសារមុខតំណែងត្រូវបានផ្ទុកឡើងដោយកៅអីដែលមានមតិកែលម្អ។",
-      "delegateOwner": "ម្ចាស់ប្រតិភូ",
-      "chairRecipient": "អ្នកទទួលកៅអី",
-      "titleLabel": "ចំណងជើង",
-      "titlePlaceholder": "ចំណងជើងឯកសារ",
-      "googleDocsUrl": "URL ឯកសារ Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (បង្កប់ទិដ្ឋភាព/កែសម្រួលក្នុងកម្មវិធី)",
-      "googleDocsHelp": "ប្រើ Google Doc ថ្មី ដើម្បីបើក Google នៅក្នុងផ្ទាំងថ្មី បន្ទាប់មកបិទភ្ជាប់តំណឯកសារនៅទីនេះ។ អត្ថបទធម្មតាខាងក្រោមគឺស្រេចចិត្ត។ ឯកសារនីមួយៗត្រូវការអត្ថបទក្នុងស្រុក តំណ Google Doc ឬទាំងពីរ។",
-      "plainTextOptional": "អត្ថបទធម្មតា (ជាជម្រើស)",
-      "plainTextPlaceholder": "កំណត់ចំណាំ ឬអត្ថបទព្រាង…",
-      "chairFeedbackLabel": "មតិកែលម្អរបស់ប្រធាន",
-      "chairFeedbackPlaceholder": "មតិ​សម្រាប់​ឯកសារ​តំណែង​ប្រតិភូ...",
-      "empty": "មិនទាន់មានឯកសារនៅឡើយ។ បន្ថែមមួយ ឬភ្ជាប់ Google Doc ។",
-      "sidebarDocumentLabel": "ឯកសារ",
-      "sections": {
-        "chairReports": "របាយការណ៍របស់ប្រធាន",
-        "rop": "RoP",
-        "awardCriteria": "លក្ខណៈវិនិច្ឆ័យរង្វាន់",
-        "prepDocuments": "រៀបចំឯកសារ",
-        "chairNotes": "កំណត់ចំណាំរបស់ប្រធាន",
-        "otherDocuments": "ឯកសារផ្សេងៗ"
-      },
-      "untitled": "គ្មានចំណងជើង",
-      "linkedDocumentHeading": "ឯកសារភ្ជាប់",
-      "notesHeading": "កំណត់ចំណាំ",
-      "noGoogleDocYet": "មិន​ទាន់​មាន​តំណ Google Doc នៅ​ឡើយ​ទេ។ ប្រើ កែសម្រួល ដើម្បីបន្ថែម docs.google.com/document/d/… URL ។",
-      "chairFeedbackHeading": "មតិកែលម្អរបស់ប្រធាន",
-      "noFeedbackYet": "មិន​មាន​ការ​បន្ថែម​មតិ​ត្រឡប់​នៅ​ឡើយ​ទេ។"
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "បញ្ចូលអ៊ីមែលតំណាងជាមុនសិន។",
-      "sentToDelegate": "បានផ្ញើទៅ {email} ។",
-      "newResolution": "ដំណោះស្រាយថ្មី។",
-      "maxDraftResolutions": "គណៈកម្មាធិការនេះមានសេចក្តីសម្រេចព្រាង {count} រួចហើយ។",
-      "googleDocLink": "តំណ Google Doc",
-      "googleDocUrlPlaceholder": "Google Docs URL (docs.google.com/document/d/… — ប្រើសម្រាប់បង្កប់ + កែសម្រួល)",
-      "googleDocUrlHelp": "Google Doc ថ្មីបើកនៅក្នុងផ្ទាំងមួយផ្សេងទៀត។ ចម្លង URL ពីរបារអាសយដ្ឋាន ហើយបិទភ្ជាប់វានៅទីនេះ។",
-      "mainSubmittersPlaceholder": "អ្នកដាក់ស្នើសំខាន់ៗ (លេខសម្គាល់អ្នកប្រើប្រាស់ បំបែកដោយសញ្ញាក្បៀស)",
-      "coSubmittersPlaceholder": "អ្នកដាក់ស្នើរួមគ្នា (លេខសម្គាល់អ្នកប្រើប្រាស់ បំបែកដោយក្បៀស)",
-      "create": "បង្កើត",
-      "cancel": "បោះបង់",
-      "openInNewTab": "បើកនៅក្នុងផ្ទាំងថ្មី។",
-      "noGoogleDocLink": "មិនមានតំណ Google Doc ទេ។",
-      "visibleToOtherBloc": "អាចមើលឃើញចំពោះប្លុកផ្សេងទៀត។",
-      "resolutionCounts": "អនុមេ៖ {main} | សហការី៖ {co} | ហត្ថលេខី៖ {signatories}",
-      "blocButton": "ប្លុក {name} ({stance})",
-      "signVirtually": "ចុះហត្ថលេខាស្ទើរតែ (បានជូនដំណឹងអ្នករងសំខាន់ៗ)",
-      "shareByEmail": "ចែករំលែកដំណោះស្រាយតាមអ៊ីមែល",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "ផ្ញើទៅប្រតិភូ",
-      "clauseEditor": "កម្មវិធីនិពន្ធឃ្លា",
-      "noClausesYet": "មិនមានឃ្លានៅឡើយទេ។",
-      "clauseNumber": "ប្រការ {number}",
-      "saveClause": "រក្សាទុកឃ្លា",
-      "delete": "លុប",
-      "addClausePlaceholder": "បន្ថែមឃ្លាថ្មី...",
-      "addClause": "បន្ថែមឃ្លា",
-      "clauseVoteHistory": "ប្រវតិ្តនៃការបោះឆ្នោតប្រយោគ",
-      "noClauseOutcomesYet": "មិន​ទាន់​មាន​លទ្ធផល​បោះឆ្នោត​ឃ្លា​ដែល​បាន​កត់ត្រា​នៅ​ឡើយ​ទេ។",
-      "clauseFallback": "ឃ្លា",
-      "passed": "ឆ្លងកាត់",
-      "failed": "បរាជ័យ",
-      "motionId": "ចលនា {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "ផ្នែកបោះឆ្នោត",
-        "open": "បើក",
-        "closed": "បិទ"
-      },
-      "requiredMajority": "ភាគច្រើនដែលត្រូវការ",
-      "helpRequiredMajorityTitle": "ភាគច្រើនដែលត្រូវការ",
-      "helpRequiredMajorityBody": "ជ្រើសរើស​កម្រិត​នៃ​ការ​បោះ​ឆ្នោត​ដែល​ប្រើ​ដើម្បី​សម្រេច​ថា​ឆ្លង/បរាជ័យ។ 'សាមញ្ញ' គឺច្រើនជាងពាក់កណ្តាល។ `2/3` ទាមទារភាគច្រើនលើសលប់។",
-      "majoritySimple": "សាមញ្ញ",
-      "majorityTwoThirds": "២/៣",
-      "majorityLine": "{label} ភាគច្រើន",
-      "mustVote": "ត្រូវតែបោះឆ្នោត",
-      "helpMustVoteTitle": "ត្រូវតែបោះឆ្នោត",
-      "helpMustVoteBody": "សម្គាល់ចលនានេះថាជាធាតុ \"ត្រូវតែបោះឆ្នោត\"។ វា​ត្រូវ​បាន​ប្រើ​ដើម្បី​ទំនាក់​ទំនង​តម្រូវ​ការ​ទៅ​កាន់​អ្នក​ចូល​រួម (អាស្រ័យ​លើ​ការ​រៀបចំ​របស់​គណៈកម្មាធិការ​របស់​អ្នក)។",
-      "saveSettings": "រក្សាទុកការកំណត់",
-      "delegateBlurb": "Dais កត់ត្រាការបោះឆ្នោតនៅក្នុងវគ្គ (ឧ. roll call)។ ការ​បោះ​ឆ្នោត​នៅ​ទី​នេះ​ធ្វើ​តាម​បាទ/ចាស​ប៉ុណ្ណោះ (មិន​ត្រូវ​បាន​ប្រើ​ទេ)។ អ្នកអាចធ្វើតាមការបូកសរុប; ប្រតិភូមិនបោះឆ្នោតនៅក្នុងកម្មវិធីទេ។",
-      "yes": "បាទ",
-      "no": "ទេ",
-      "ballots": "សន្លឹកឆ្នោត",
-      "total": "សរុប",
-      "outcome": "លទ្ធផល",
-      "passed": "ឆ្លងកាត់",
-      "failed": "បរាជ័យ",
-      "noRecordedVotes": "គ្មានការបោះឆ្នោតដែលបានកត់ត្រាទុកទេ។",
-      "reopenMotion": "បើកចលនាឡើងវិញ",
-      "editRecordOpen": "កែសម្រួល​កំណត់​ត្រា…",
-      "hideSettings": "លាក់ការកំណត់",
-      "preliminaryPassing": "ឆ្លងកាត់ (បឋម)",
-      "preliminaryFailing": "បរាជ័យ (បឋម)",
-      "delegateRollCall": "ការ​ហៅ​ជា​តំណាង ({count})",
-      "noSeatedDelegates": "មិន​មាន​ប្រតិភូ​អង្គុយ​សម្រាប់​ចលនា​នេះ​ទេ។",
-      "rollPrefix": "រមៀល៖",
-      "recordedPrefix": "កត់ត្រា៖",
-      "recordedYes": "បាទ",
-      "recordedNo": "ទេ",
-      "recordedAbstain": "ហាមប្រាម",
-      "recordedNone": "—",
-      "abstain": "ហាមប្រាម",
-      "clear": "ច្បាស់",
-      "closeMotion": "ចលនាបិទ",
-      "mustVoteBadge": "ត្រូវតែបោះឆ្នោត",
-      "canVoteBadge": "អាចបោះឆ្នោតបាន។",
-      "noMotions": "មិនទាន់មានចលនានៅឡើយទេ។",
-      "currentOpenMotion": "ចលនាបើកចំហបច្ចុប្បន្ន",
-      "noOpenMotion": "មិនមានចលនាបើកចំហទេឥឡូវនេះ។",
-      "recentClosedMotions": "ចលនាបិទថ្មីៗ",
-      "noClosedMotions": "មិនមានចលនាបិទនៅឡើយទេ។",
-      "untitled": "គ្មានចំណងជើង",
-      "voteTypes": {
-        "motion": "ចលនា",
-        "amendment": "វិសោធនកម្ម",
-        "resolution": "ដំណោះស្រាយ"
-      },
-      "roll": {
-        "absent": "អវត្តមាន (វិល)",
-        "present_abstain": "បច្ចុប្បន្ន - អាចបដិសេធ (វិល)",
-        "present_voting": "វត្តមាន និងការបោះឆ្នោត (វិល)",
-        "unknown": "- (រមៀល)"
-      }
-    },
-    "profile": {
-      "fallbacks": {
-        "yourCountry": "ប្រទេសរបស់អ្នក។",
-        "committeeSession": "សម័យប្រជុំគណៈកម្មាធិការ",
-        "delegate": "ប្រតិភូ",
-        "speechNote": "សុន្ទរកថា",
-        "untitledMotion": "ចលនាគ្មានចំណងជើង",
-        "dash": "—"
-      },
-      "tabs": {
-        "ariaLabel": "ផ្នែកប្រវត្តិរូប",
-        "overview": "ទិដ្ឋភាពទូទៅ",
-        "awards": "រង្វាន់",
-        "private": "កំណត់ត្រាឯកជន",
-        "settings": "ការកំណត់ប្រវត្តិរូប"
-      },
-      "delegateWelcome": {
-        "title": "សូមស្វាគមន៍ប្រតិភូ {flag} {country}",
-        "subtitle": "តើអ្នកចង់ចាប់ផ្តើមជាមួយអ្វី?",
-        "links": {
-          "documents": "ឯកសារ",
-          "notes": "កំណត់ចំណាំ",
-          "committeeRoom": "បន្ទប់គណៈកម្មាធិការ",
-          "runningNotes": "កំពុងដំណើរការចំណាំ",
-          "ideas": "គំនិត",
-          "guides": "មគ្គុទ្ទេសក៍",
-          "sources": "ប្រភព",
-          "resolutions": "ដំណោះស្រាយ",
-          "speeches": "សុន្ទរកថា",
-          "stances": "ជំហរ",
-          "crisisSlides": "វិបត្តិស្លាយ",
-          "report": "រាយការណ៍",
-          "motions": "ចលនា",
-          "points": "ពិន្ទុ"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "រង្វាន់នៅលើប្រវត្តិរូបរបស់អ្នក។",
-        "rank": "ចំណាត់ថ្នាក់ {rank}",
-        "pending": {
-          "tab": "ការតែងតាំងដែលរង់ចាំ",
-          "title": "ការតែងតាំងប្រធានដែលមិនទាន់សម្រេច",
-          "descriptionSingle": "រក្សាទុកដោយកៅអី និងចែករំលែកជាមួយ SMT សម្រាប់ការពិនិត្យ។ រង្វាន់ចុងក្រោយបង្ហាញខាងក្រោមបន្ទាប់ពីការបញ្ជាក់។",
-          "descriptionTabbed": "រក្សាទុកដោយកៅអី និងចែករំលែកជាមួយ SMT សម្រាប់ការពិនិត្យ។ រង្វាន់ចុងក្រោយលេចឡើងបន្ទាប់ពីការបញ្ជាក់។"
-        },
-        "recorded": {
-          "tab": "ពានរង្វាន់ដែលបានកត់ត្រា",
-          "title": "ពានរង្វាន់ដែលបានកត់ត្រា",
-          "description": "បានចុះបញ្ជីនៅពេលដែលកៅអី ឬ SMT ប្រគល់ឱ្យអ្នកនៅក្នុងកម្មវិធីតាមដានពានរង្វាន់។ ការទទួលស្គាល់ចុងក្រោយអនុវត្តតាមច្បាប់នៃសន្និសីទរបស់អ្នក។"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "អាចមើលឃើញចំពោះតែអ្នក ប្រធានគណៈកម្មាធិការ និង SMT សម្រាប់គណៈកម្មាធិការពាក់ព័ន្ធប៉ុណ្ណោះ។",
-        "points": {
-          "title": "ចំណុចកៅអី (ឯកជន)"
-        },
-        "speechNotes": {
-          "title": "សុន្ទរកថារបស់ប្រធាន (ឯកជន)"
-        },
-        "motions": {
-          "title": "ចលនាដែលអ្នកបានផ្លាស់ទី",
-          "description": "បានរក្សាទុកទៅក្នុងកម្រងព័ត៌មានរបស់អ្នកសម្រាប់ការត្រួតពិនិត្យរបស់គណៈកម្មាធិការ និងការត្រួតពិនិត្យ SMT ។"
-        }
-      },
-      "discipline": {
-        "title": "ស្ថានភាពវិន័យ (ឯកជន)",
-        "statusLine": "ការព្រមាន៖ {warnings} · កូដកម្ម៖ {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "ការបោះឆ្នោតត្រូវបានបិទ",
-        "speakingSuspended": "ការនិយាយត្រូវបានផ្អាក",
-        "removedFromCommittee": "ត្រូវបានដកចេញពីគណៈកម្មាធិការ",
-        "updated": "បានធ្វើបច្ចុប្បន្នភាព៖ {value}"
-      },
-      "preview": {
-        "ariaLabel": "ការមើលប្រវត្តិរូបជាមុន",
-        "title": "មើលជាមុន",
-        "yourName": "ឈ្មោះរបស់អ្នក។",
-        "usernameNotSet": "ឈ្មោះ​អ្នក​ប្រើ​មិន​បាន​កំណត់",
-        "gradeValue": "ថ្នាក់ {grade}",
-        "awards": "រង្វាន់"
-      },
-      "profilePicture": "រូបភាពប្រវត្តិរូប",
-      "uploadFile": "ផ្ទុកឡើងឯកសារ",
-      "uploading": "កំពុងបង្ហោះ...",
-      "photoSaved": "រូបថតដែលបានបង្ហោះ និងរក្សាទុក។",
-      "orUrl": "ឬកំណត់ដោយ URL",
-      "urlPlaceholder": "https://...",
-      "name": "ឈ្មោះ",
-      "username": "ឈ្មោះអ្នកប្រើប្រាស់",
-      "usernamePlaceholder": "ឧ. alex_1999",
-      "pronouns": "សព្វនាម",
-      "customPronounNote": "កម្រងព័ត៌មានរបស់អ្នកមានសំណុំសព្វនាមផ្ទាល់ខ្លួន ដែលមិនត្រូវបានទទួលយកនៅទីនេះទៀតទេ។ ជ្រើសរើសជម្រើសខាងលើ (ឬទុកទទេ) ។ ការសន្សំជំនួសតម្លៃចាស់។",
-      "school": "សាលា",
-      "schoolPlaceholder": "ឧ. វិទ្យាល័យ Lincoln",
-      "grade": "ថ្នាក់",
-      "selectGrade": "ជ្រើសរើសថ្នាក់",
-      "conferencesAttended": "សន្និសីទបានចូលរួម",
-      "awardsComma": "រង្វាន់ (បំបែកដោយសញ្ញាក្បៀស)",
-      "awardsPlaceholder": "គណៈប្រតិភូល្អបំផុត, កិត្តិយស",
-      "allocation": "ការបែងចែក",
-      "selectAllocation": "ជ្រើសរើសការបែងចែក",
-      "noAllocationsPlaceholder": "មិនមានការបែងចែកគណៈកម្មការទេ។",
-      "saveProfile": "រក្សាទុកប្រវត្តិរូប",
-      "saved": "ប្រវត្តិរូបត្រូវបានរក្សាទុក។",
-      "saveFailed": "មិនអាចរក្សាទុកកម្រងព័ត៌មានបានទេ។",
-      "errUsernamePattern": "ឈ្មោះអ្នកប្រើត្រូវតែមាន 3-32 តួអក្សរ (អក្សរ, លេខ, _, ., -)",
-      "errPronounsPreset": "ជ្រើសរើសសព្វនាមពីបញ្ជី។",
-      "errImageType": "សូមជ្រើសរើសឯកសាររូបភាព។",
-      "errImageSize": "រូបភាពធំពេក (អតិបរមា 5 MB)។",
-      "errUploadFailed": "ការបង្ហោះបានបរាជ័យ។",
-      "errStorageSetup": "កន្លែងផ្ទុករូបភាពកម្រងព័ត៌មានមិនត្រូវបានតំឡើងទេ។ នៅក្នុងគម្រោង Supabase សូមដំណើរការ migration 00100_profile_pictures_storage_bucket.sql ឬបង្កើតធុងផ្ទុកសាធារណៈដែលមានឈ្មោះថា profile-pictures (សូមមើល README)។",
-      "errPublicUrl": "មិនអាចដោះស្រាយ URL សាធារណៈសម្រាប់រូបភាពដែលបានបង្ហោះទេ។",
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "វិធាននៃនីតិវិធី (RoP)",
-          "content": "# វិធាននៃនីតិវិធី\n\n## ចំណុចនិងចលនា\n- **ចំណុចនៃការបញ្ជាទិញ**៖ នីតិវិធីត្រឹមត្រូវ។\n- ** ចំណុចព័ត៌មាន **៖ សំណួរទៅកាន់វាគ្មិន\n- **ចំណុចនៃឯកសិទ្ធិផ្ទាល់ខ្លួន**៖ ការលួងលោមផ្ទាល់ខ្លួន\n- ** Motion to Table **៖ ពន្យារពេលការពិភាក្សា\n- ** ចលនាដើម្បីផ្អាក **៖ វគ្គបញ្ចប់\n\n## បោះឆ្នោត\n- ភាគច្រើនសាមញ្ញសម្រាប់បញ្ហានីតិវិធី\n- 2/3 ភាគច្រើនសម្រាប់បញ្ហាសំខាន់ៗ\n- បោះឆ្នោត​ជុំ​គ្នា​ប្រសិន​បើ​បាន​ស្នើ​សុំ"
-        },
-        "examples": {
-          "title": "ឧទាហរណ៍",
-          "content": "#ឧទាហរណ៍\n\n## ទម្រង់ដំណោះស្រាយ\n```\nមហាសន្និបាត,\n...\n1. អំពាវនាវឱ្យរដ្ឋជាសមាជិក...\n២-​ជំរុញ​សហគមន៍​អន្តរជាតិ​ឱ្យ...\n```\n\n## រចនាសម្ព័ន្ធក្រដាសទីតាំង\n1. ផ្ទៃខាងក្រោយ\n2. គោលនយោបាយប្រទេស\n3. ដំណោះស្រាយដែលបានស្នើឡើង"
-        },
-        "templates": {
-          "title": "គំរូ",
-          "content": "# គំរូ\n\n## គំរូរបាយការណ៍ប្រធាន\n- ទិដ្ឋភាពទូទៅនៃគណៈកម្មាធិការ\n- ចំណុចពិភាក្សាសំខាន់ៗ\n- ដំណោះស្រាយបានឆ្លងកាត់\n- អនុសាសន៍"
-        },
-        "chairReport": {
-          "title": "របាយការណ៍ប្រធាន",
-          "content": "# របាយការណ៍ប្រធាន\n\nគណៈកម្មាធិការឯកសារដំណើរការ និងលទ្ធផលនៅទីនេះ។"
-        }
-      },
-      "edit": "កែសម្រួល",
-      "guideDocument": "ឯកសារណែនាំ",
-      "additionalNotes": "កំណត់ចំណាំបន្ថែម",
-      "noContentYet": "មិនមានខ្លឹមសារនៅឡើយទេ។",
-      "titlePlaceholder": "ចំណងជើង",
-      "googleDocsUrl": "URL ឯកសារ Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google Doc ថ្មីបើកនៅក្នុងផ្ទាំងផ្សេងទៀត។ បិទភ្ជាប់តំណដែលអាចចែករំលែកបាន ដូច្នេះប្រតិភូអាចបើកឯកសារនៅទីនេះ (មើល/កែសម្រួលអាស្រ័យលើការចែករំលែក Google)។",
-      "markdownOptional": "កំណត់ចំណាំ Markdown (ជាជម្រើស ប្រសិនបើអ្នកប្រើ Google Doc)",
-      "save": "រក្សាទុក",
-      "cancel": "បោះបង់",
-      "createNewGuide": "បង្កើតការណែនាំថ្មី។",
-      "slugPlaceholder": "ខ្យង (ប្លែក)",
-      "titleLowerPlaceholder": "ចំណងជើង",
-      "googleDocsUrlOptional": "Google Docs URL (ជាជម្រើស)",
-      "markdownContentOptional": "មាតិកា Markdown (ជាជម្រើស)",
-      "create": "បង្កើត",
-      "glossary": {
-        "title": "សទ្ទានុក្រមរបៀបវារៈ MUN",
-        "subtitle": "វាក្យសព្ទតែមួយគត់ដែលត្រូវគ្នានឹងកូដគណៈកម្មាធិការរបស់អ្នក និងប្រធានបទរបៀបវារៈបច្ចុប្បន្ន។",
-        "committeeCode": "លេខកូដគណៈកម្មាធិការ៖ {code}",
-        "topicTag": "ប្រធានបទ៖ {topic}",
-        "sources": {
-          "core": "ស្នូល",
-          "committee": "គណៈកម្មាធិការ",
-          "topic": "ប្រធានបទ"
-        },
-        "terms": {
-          "delegation": {
-            "term": "គណៈប្រតិភូ",
-            "definition": "ប្រទេស ឬក្រុមអ្នកសង្កេតការណ៍តំណាងឱ្យរដ្ឋ ឬអង្គភាពមួយនៅក្នុងគណៈកម្មាធិការ។"
-          },
-          "placard": {
-            "term": "បដា",
-            "definition": "ផ្លាកសញ្ញាប្រទេស ប្រើដើម្បីស្នើសុំជាន់ បោះឆ្នោត និងផ្តល់សញ្ញាអំពីចលនានីតិវិធី។"
-          },
-          "dais": {
-            "term": "ដាស",
-            "definition": "ប្រធានក្រុមដែលសម្របសម្រួលការពិភាក្សា អនុវត្តនីតិវិធី និងគ្រប់គ្រងលំដាប់នៃការនិយាយ។"
-          },
-          "quorum": {
-            "term": "កូរ៉ុម",
-            "definition": "ចំនួនគណៈប្រតិភូអប្បរមាដែលតម្រូវឱ្យធ្វើអាជីវកម្មផ្លូវការ និងការបោះឆ្នោត។"
-          },
-          "motion": {
-            "term": "ចលនា",
-            "definition": "សំណើផ្លូវការដើម្បីផ្លាស់ប្តូរលំហូរនៃការជជែកដេញដោល ដូចជាប្រភេទ Caucus ឬពេលនិយាយ។"
-          },
-          "point_of_order": {
-            "term": "ចំណុចនៃការបញ្ជាទិញ",
-            "definition": "អន្តរាគមន៍នៅពេលដែលនីតិវិធីត្រូវបានអនុវត្តមិនត្រឹមត្រូវនៅក្រោមច្បាប់របស់គណៈកម្មាធិការ។"
-          },
-          "moderated_caucus": {
-            "term": "Caucus កម្រិតមធ្យម",
-            "definition": "ផ្នែកជជែកវែកញែកដែលមានរចនាសម្ព័ន្ធជាមួយនឹងសុន្ទរកថាដែលមានរយៈពេលខ្លីលើប្រធានបទរងដែលបានកំណត់។"
-          },
-          "unmoderated_caucus": {
-            "term": "Caucus ដែលមិនមានការសម្របសម្រួល",
-            "definition": "រយៈពេលចរចាក្រៅផ្លូវការ ដែលប្រតិភូផ្លាស់ទីដោយសេរី ដើម្បីពង្រាង និងបញ្ចូលគំនិត។"
-          },
-          "draft_resolution": {
-            "term": "សេចក្តីសម្រេចសេចក្តីព្រាង",
-            "definition": "អត្ថបទការងារនៃសកម្មភាពរបស់គណៈកម្មាធិការមុនការបោះឆ្នោតចុងក្រោយ និងការអនុម័ត។"
-          },
-          "amendment": {
-            "term": "វិសោធនកម្ម",
-            "definition": "ផ្លាស់ប្តូរ​ការ​ស្នើ​ទៅ​សេចក្តីព្រាង​អត្ថបទ ទាំង​មិត្តភាព ឬ​បាន​បោះឆ្នោត​ដោយ​មិន​រាក់ទាក់។"
-          },
-          "operative_clause": {
-            "term": "ឃ្លាប្រតិបត្តិការ",
-            "definition": "ឃ្លាដែលមានលេខតម្រង់ទិសសកម្មភាព ដែលពិពណ៌នាអំពីអ្វីដែលគណៈកម្មាធិការស្នើឱ្យធ្វើ។"
-          },
-          "preambulatory_clause": {
-            "term": "ឃ្លា Preambulatory",
-            "definition": "ឃ្លាកំណត់បរិបទដោយលើកឡើងពីគោលការណ៍ផ្ទៃខាងក្រោយ កង្វល់ និងក្របខ័ណ្ឌមុន។"
-          },
-          "right_of_reply": {
-            "term": "សិទ្ធិនៃការឆ្លើយតប",
-            "definition": "ឱកាសដើម្បីឆ្លើយតបទៅនឹងសេចក្តីថ្លែងការណ៍ផ្ទាល់ដែលប៉ះពាល់ដល់សេចក្តីថ្លៃថ្នូររបស់គណៈប្រតិភូ។"
-          },
-          "veto_power": {
-            "term": "អំណាចវេតូ",
-            "definition": "អាជ្ញាធរ​ជា​សមាជិក​អចិន្ត្រៃយ៍​របស់ UNSC ដើម្បី​រារាំង​សេចក្តីព្រាង​សេចក្តីសម្រេច​សំខាន់ៗ។"
-          },
-          "chapter_vii": {
-            "term": "ជំពូកទី VII",
-            "definition": "សិទ្ធិអំណាចធម្មនុញ្ញអង្គការសហប្រជាជាតិស្តីពីការគំរាមកំហែងដល់សន្តិភាព ការដាក់ទណ្ឌកម្ម និងវិធានការប្រើប្រាស់កម្លាំង។"
-          },
-          "sanctions_regime": {
-            "term": "របបទណ្ឌកម្ម",
-            "definition": "ការរឹតបន្តឹងដែលសម្របសម្រួលបានប្រើដើម្បីមានឥទ្ធិពលលើអាកប្បកិរិយាដោយគ្មានសកម្មភាពយោធាដោយផ្ទាល់។"
-          },
-          "arms_control": {
-            "term": "ការគ្រប់គ្រងអាវុធ",
-            "definition": "កិច្ចព្រមព្រៀង និងប្រព័ន្ធផ្ទៀងផ្ទាត់ដែលកំណត់ប្រភេទ បរិមាណ ឬការដាក់ពង្រាយអាវុធ។"
-          },
-          "non_proliferation": {
-            "term": "ការមិនរីកសាយ",
-            "definition": "គោលនយោបាយដើម្បីទប់ស្កាត់ការរីករាលដាលនៃសមត្ថភាពនុយក្លេអ៊ែរ គីមី ជីវសាស្រ្ត ឬអាវុធទំនើប។"
-          },
-          "confidence_building_measures": {
-            "term": "វិធានការកសាងទំនុកចិត្ត",
-            "definition": "ឧបករណ៍តម្លាភាព និងទំនាក់ទំនងដែលកាត់បន្ថយការយល់ច្រឡំ និងហានិភ័យជម្លោះ។"
-          },
-          "universal_periodic_review": {
-            "term": "ការពិនិត្យឡើងវិញជាសកលតាមកាលកំណត់",
-            "definition": "ដំណើរការពិនិត្យឡើងវិញដោយមិត្តភក្ដិ ដែលរដ្ឋសមាជិកនីមួយៗរាយការណ៍ និងទទួលបានអនុសាសន៍សិទ្ធិ។"
-          },
-          "special_rapporteur": {
-            "term": "អ្នករាយការណ៍ពិសេស",
-            "definition": "អ្នក​ជំនាញ​ឯករាជ្យ​ត្រូវ​បាន​តែងតាំង​ដើម្បី​ត្រួត​ពិនិត្យ​និង​រាយការណ៍​អំពី​បញ្ហា​សិទ្ធិ​តាម​ប្រធានបទ ឬ​ប្រទេស។"
-          },
-          "treaty_body": {
-            "term": "រាងកាយសន្ធិសញ្ញា",
-            "definition": "គណៈកម្មាធិការអ្នកជំនាញត្រួតពិនិត្យការអនុវត្តសន្ធិសញ្ញាសិទ្ធិមនុស្សជាក់លាក់។"
-          },
-          "public_health_emergency": {
-            "term": "គ្រាអាសន្នសុខភាពសាធារណៈ",
-            "definition": "ព្រឹត្តិការណ៍ផ្ទុះឡើងយ៉ាងធ្ងន់ធ្ងរ ដែលទាមទារការឆ្លើយតបជាបន្ទាន់ពីជាតិ និងអន្តរជាតិ។"
-          },
-          "surveillance": {
-            "term": "ការតាមដានរោគរាតត្បាត",
-            "definition": "ការប្រមូល និងវិភាគទិន្នន័យសុខភាពជាបន្តបន្ទាប់ ដើម្បីស្វែងរក និងតាមដាននិន្នាការជំងឺ។"
-          },
-          "health_systems": {
-            "term": "ការពង្រឹងប្រព័ន្ធសុខភាព",
-            "definition": "ការកែលម្អកម្លាំងពលកម្ម ហិរញ្ញប្បទាន ភស្តុភារ និងអភិបាលកិច្ចសម្រាប់ការផ្តល់សេវាថែទាំសុខភាពដែលអាចទុកចិត្តបាន។"
-          },
-          "transnational_crime": {
-            "term": "ឧក្រិដ្ឋកម្ម​ឆ្លង​ដែន",
-            "definition": "សកម្មភាពឧក្រិដ្ឋកម្មសម្របសម្រួលឆ្លងព្រំដែនតាមរយៈបណ្តាញ និងទីផ្សារខុសច្បាប់។"
-          },
-          "illicit_trafficking": {
-            "term": "ការជួញដូរខុសច្បាប់",
-            "definition": "ចលនាខុសច្បាប់នៃគ្រឿងញៀន អាវុធ មនុស្ស ឬទំនិញនៅទូទាំងដែនសមត្ថកិច្ច។"
-          },
-          "rule_of_law_capacity": {
-            "term": "សមត្ថភាពនីតិរដ្ឋ",
-            "definition": "សមត្ថភាពស្ថាប័ននៃប្រព័ន្ធយុត្តិធម៌ក្នុងការស៊ើបអង្កេត កាត់ទោស និងការពារសិទ្ធិដោយយុត្តិធម៌។"
-          },
-          "sustainable_development": {
-            "term": "ការអភិវឌ្ឍន៍ប្រកបដោយនិរន្តរភាព",
-            "definition": "គំរូកំណើន តុល្យភាពវឌ្ឍនភាពសង្គម ឱកាសសេដ្ឋកិច្ច និងការការពារបរិស្ថាន។"
-          },
-          "financing_for_development": {
-            "term": "ហិរញ្ញប្បទានសម្រាប់ការអភិវឌ្ឍន៍",
-            "definition": "យន្តការផ្តល់ហិរញ្ញប្បទានសាធារណៈ និងឯកជន ដែលគាំទ្រដល់អាទិភាពអភិវឌ្ឍន៍រយៈពេលវែង។"
-          },
-          "policy_coordination": {
-            "term": "ការសម្របសម្រួលគោលនយោបាយ",
-            "definition": "ការតម្រឹមសកម្មភាពរបស់រដ្ឋ និងភ្នាក់ងារ ដើម្បីជៀសវាងការចម្លង និងបង្កើនឥទ្ធិពលរួម។"
-          },
-          "child_protection": {
-            "term": "ការការពារកុមារ",
-            "definition": "វិធានការទប់ស្កាត់ការកេងប្រវ័ញ្ច ការរំលោភបំពាន និងអំពើហិង្សាលើកុមារនៅគ្រប់ស្ថានភាពទាំងអស់។"
-          },
-          "education_access": {
-            "term": "ការចូលប្រើការអប់រំ",
-            "definition": "ធានាបាននូវឱកាសសិក្សាដែលរួមបញ្ចូល សមធម៌ និងបន្តសម្រាប់កុមារទាំងអស់។"
-          },
-          "humanitarian_response": {
-            "term": "ការឆ្លើយតបមនុស្សធម៌",
-            "definition": "សកម្មភាពសង្គ្រោះរហ័សដែលដោះស្រាយតម្រូវការបន្ទាន់ក្នុងវិបត្តិ និងការកំណត់ជម្លោះ។"
-          },
-          "gender_mainstreaming": {
-            "term": "ការបញ្ជ្រាបយេនឌ័រ",
-            "definition": "ការរួមបញ្ចូលការវិភាគយេនឌ័រទៅក្នុងការរចនាគោលនយោបាយ ការអនុវត្ត និងការវាយតម្លៃ។"
-          },
-          "gender_based_violence": {
-            "term": "អំពើហឹង្សាផ្អែកលើយេនឌ័រ",
-            "definition": "គ្រោះថ្នាក់សំដៅទៅលើនរណាម្នាក់ដោយផ្អែកលើអត្តសញ្ញាណយេនឌ័រ តួនាទី ឬទំនាក់ទំនងអំណាចមិនស្មើគ្នា។"
-          },
-          "economic_empowerment": {
-            "term": "ការពង្រឹងសេដ្ឋកិច្ច",
-            "definition": "ពង្រីកលទ្ធភាពទទួលបានការងារសមរម្យ ហិរញ្ញវត្ថុ ភាពជាម្ចាស់ និងអំណាចធ្វើការសម្រេចចិត្ត។"
-          },
-          "source_attribution": {
-            "term": "ប្រភពគុណលក្ខណៈ",
-            "definition": "ការដកស្រង់ប្រភពព័ត៌មានយ៉ាងច្បាស់ ដូច្នេះការទាមទារអាចត្រូវបានផ្ទៀងផ្ទាត់ និងបរិបទ។"
-          },
-          "verified_reporting": {
-            "term": "របាយការណ៍ដែលបានផ្ទៀងផ្ទាត់",
-            "definition": "ស្ដង់ដារ​សារព័ត៌មាន​ដែល​តម្រូវ​ឱ្យ​មាន​ការ​បញ្ជាក់​មុន​ពេល​បោះ​ពុម្ព​ផ្សាយ​ការពិត​ដែល​មាន​ការ​ប្រកួតប្រជែង។"
-          },
-          "editorial_independence": {
-            "term": "ឯករាជភាពនៃវិចារណកថា",
-            "definition": "ការបំបែករបាយការណ៍សេចក្តីសម្រេចចេញពីសម្ពាធនយោបាយ ឬឥទ្ធិពលរបស់ភាគីពាក់ព័ន្ធ។"
-          },
-          "climate_mitigation": {
-            "term": "ការកាត់បន្ថយអាកាសធាតុ",
-            "definition": "សកម្មភាពដែលកាត់បន្ថយការបំភាយឧស្ម័នផ្ទះកញ្ចក់ ឬបង្កើនការដកកាបូនចេញក្នុងរយៈពេលយូរ។"
-          },
-          "climate_adaptation": {
-            "term": "ការបន្សាំអាកាសធាតុ",
-            "definition": "គោលនយោបាយ និងការវិនិយោគដែលកាត់បន្ថយភាពងាយរងគ្រោះចំពោះផលប៉ះពាល់ទាក់ទងនឹងអាកាសធាតុ។"
-          },
-          "cyber_norms": {
-            "term": "បទដ្ឋានតាមអ៊ីនធឺណិត",
-            "definition": "ចែករំលែកការរំពឹងទុកសម្រាប់ឥរិយាបថរដ្ឋដែលមានការទទួលខុសត្រូវនៅក្នុងដែនឌីជីថល និងអ៊ីនធឺណិត។"
-          },
-          "critical_infrastructure": {
-            "term": "ហេដ្ឋារចនាសម្ព័ន្ធសំខាន់ៗ",
-            "definition": "ប្រព័ន្ធសំខាន់ៗដូចជា ថាមពល ទឹក សុខភាព និងទំនាក់ទំនងដែលទាមទារភាពធន់។"
-          },
-          "epidemiology": {
-            "term": "រោគរាតត្បាត",
-            "definition": "ការសិក្សាអំពីគំរូជំងឺ មូលហេតុ និងការចែកចាយក្នុងចំនួនប្រជាជន។"
-          },
-          "preparedness_response": {
-            "term": "ការត្រៀមខ្លួននិងការឆ្លើយតប",
-            "definition": "ការធ្វើផែនការ ការសម្របសម្រួល និងសកម្មភាពកើនឡើង ដើម្បីទប់ស្កាត់ និងគ្រប់គ្រងគ្រោះអាសន្ន។"
-          },
-          "non_refoulement": {
-            "term": "ការមិនបំពេញបន្ថែម",
-            "definition": "គោលការណ៍ហាមឃាត់ការបញ្ជូនមនុស្សត្រឡប់ទៅកន្លែងដែលពួកគេប្រឈមមុខនឹងគ្រោះថ្នាក់ធ្ងន់ធ្ងរ។"
-          },
-          "durable_solutions": {
-            "term": "ដំណោះស្រាយជាប់លាប់",
-            "definition": "លទ្ធផលរយៈពេលវែងសម្រាប់ជនភៀសខ្លួន៖ ការវិលត្រឡប់ សមាហរណកម្មមូលដ្ឋាន ឬការតាំងលំនៅថ្មី។"
-          },
-          "nuclear_safeguards": {
-            "term": "ការការពារនុយក្លេអ៊ែរ",
-            "definition": "វិធានការផ្ទៀងផ្ទាត់ដែលធានាថា សម្ភារៈនុយក្លេអ៊ែរមិនត្រូវបានបង្វែរសម្រាប់ការប្រើប្រាស់អាវុធ។"
-          },
-          "counter_terrorism": {
-            "term": "ការប្រឆាំងភេរវកម្ម",
-            "definition": "វិធានការផ្លូវច្បាប់ ការការពារ និងសន្តិសុខរួមបញ្ចូលគ្នាប្រឆាំងនឹងសកម្មភាពភេរវករ។"
-          },
-          "due_process": {
-            "term": "ដំណើរការកំណត់",
-            "definition": "នីតិវិធីច្បាប់ត្រឹមត្រូវ ការពារសិទ្ធិក្នុងអំឡុងពេលស៊ើបអង្កេត ការកាត់ទោស និងការដាក់ទណ្ឌកម្ម។"
-          },
-          "resource_security": {
-            "term": "សុវត្ថិភាពធនធាន",
-            "definition": "លទ្ធភាពទទួលបានអាហារ ទឹក និងថាមពលដែលអាចទុកចិត្តបានក្រោមភាពតានតឹងផ្នែកសេដ្ឋកិច្ច និងបរិស្ថាន។"
-          },
-          "resilience": {
-            "term": "ភាពធន់",
-            "definition": "សមត្ថភាពសហគមន៍ និងស្ថាប័នដើម្បីស្រូបយកភាពតក់ស្លុត និងស្តារឡើងវិញប្រកបដោយប្រសិទ្ធភាព។"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "កែសម្រួលគំនិត",
-      "googleDocsUrl": "URL ឯកសារ Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "អត្ថបទគំនិតខ្លី (ជាជម្រើស)",
-      "save": "រក្សាទុក",
-      "cancel": "បោះបង់",
-      "addIntro": "បន្ថែម Google Doc ដើម្បីពង្រាងគំនិតដំណោះស្រាយនៅនឹងកន្លែង ឬវាយកំណត់ត្រាខ្លី (ឬទាំងពីរ)។",
-      "googleDocsCreateHelp": "Google Doc ថ្មីបើកនៅក្នុងផ្ទាំងមួយផ្សេងទៀត។ បិទភ្ជាប់តំណនៅទីនេះបន្ទាប់ពីវាត្រូវបានបង្កើត។",
-      "resolutionIdeaPlaceholder": "គំនិត​ដំណោះស្រាយ...",
-      "add": "បន្ថែម",
-      "noIdeasYet": "មិនទាន់មានគំនិតនៅឡើយ។",
-      "ideaLabel": "គំនិត",
-      "ideaFallback": "គំនិត {number}",
-      "linkedDoc": "ឯកសារភ្ជាប់",
-      "addedOn": "បានបន្ថែម {date}",
-      "edit": "កែសម្រួល",
-      "delete": "លុប",
-      "ideaDocument": "ឯកសារគំនិត",
-      "summary": "សង្ខេប",
-      "emptyIdea": "គំនិតទទេ។"
-    },
-    "stances": {
-      "heatmapTitle": "ទិដ្ឋភាពទូទៅនៃជំហរសង្ខេប (ផែនទីកំដៅ)",
-      "heatmapHelp": "តើការបែងចែករបស់អ្នកគាំទ្រដល់កម្រិតណា ___? (ខ្នាត ១-៥)",
-      "topicPlaceholder": "ឧ. សកម្មភាពអាកាសធាតុ",
-      "extentLabel": "វិសាលភាព (1-5):",
-      "extentHelpTitle": "វិសាលភាព (1-5)",
-      "extentHelpBody": "1 មានន័យថាការបែងចែករបស់អ្នកមានការគាំទ្រតិចតួចសម្រាប់ប្រធានបទ ហើយ 5 មានន័យថាការគាំទ្រខ្លាំង។ ជ្រើសរើសលេខដែលត្រូវនឹងជំហររបស់អ្នកនៅក្នុងគណៈកម្មាធិការ។",
-      "add": "បន្ថែម",
-      "viewOnlyHeatmap": "មើលតែផែនទីកំដៅសម្រាប់បុគ្គលិក។",
-      "notesPerAllocation": "កំណត់ចំណាំសម្រាប់ការបែងចែក",
-      "noAllocationsYet": "មិនទាន់មានការបែងចែកនៅឡើយទេ",
-      "notesPlaceholder": "កំណត់​ហេតុ​សម្រាប់​ការ​បែងចែក​នេះ...",
-      "noteLanguageWarning": "ការព្រមានរបស់អ្នកអាន៖ កំណត់សម្គាល់នេះអាចមានភាសាមិនសមរម្យ។",
-      "save": "រក្សាទុក",
-      "saveHelpTitle": "រក្សាទុកកំណត់ចំណាំ",
-      "saveHelpBody": "រក្សាទុកកំណត់ចំណាំសម្រាប់ការបែងចែកនេះ។ វាអាចត្រូវបានមើលដោយបុគ្គលិក និង (អាស្រ័យលើការកំណត់របស់គណៈកម្មាធិការ) អ្នកចូលរួមផ្សេងទៀត។"
-    },
-    "speeches": {
-      "newSpeech": "សុន្ទរកថាថ្មី។",
-      "speechTitlePlaceholder": "ចំណងជើងសុន្ទរកថា",
-      "googleDocsUrl": "URL ឯកសារ Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "បើក Google នៅក្នុងផ្ទាំងថ្មី; បិទភ្ជាប់ URL ឯកសារនៅទីនេះនៅពេលរួចរាល់។",
-      "plainTextOptional": "សេចក្តីព្រាងអត្ថបទធម្មតា (ជាជម្រើស ប្រសិនបើអ្នកប្រើ Google Doc)",
-      "save": "រក្សាទុក",
-      "cancel": "បោះបង់",
-      "noSpeechesYet": "មិនទាន់មានសុន្ទរកថានៅឡើយ។ ភ្ជាប់ Google Doc ឬបិទភ្ជាប់អត្ថបទ។",
-      "speechLabel": "សុន្ទរកថា",
-      "untitled": "គ្មានចំណងជើង",
-      "edit": "កែសម្រួល",
-      "speechDocument": "ឯកសារសុន្ទរកថា",
-      "draftText": "អត្ថបទព្រាង",
-      "noContentHint": "ភ្ជាប់ Google Doc ជាមួយនឹងការកែសម្រួល ឬបន្ថែមអត្ថបទធម្មតាក្នុងទម្រង់។"
-    },
-    "committeeRoom": {
-      "committeeLabel": "គណៈកម្មាធិការ",
-      "yourContext": "បរិបទរបស់អ្នក។",
-      "roleLabel": "តួនាទី",
-      "seatLabel": "កៅអី",
-      "clearSearchTitle": "សម្អាតការស្វែងរក និងបង្ហាញគណៈប្រតិភូទាំងអស់។",
-      "vacantLabel": "ទំនេរ",
-      "assignedLabel": "ចាត់តាំង",
-      "daisLabel": "ដាស",
-      "phaseLabel": "ដំណាក់កាល",
-      "phaseVoting": "ការបោះឆ្នោត",
-      "phaseDebate": "ការជជែកវែកញែក",
-      "focusSearchTitle": "ការស្វែងរកផ្តោតអារម្មណ៍ (ចំណងជើង និងឈ្មោះរបស់ Dais ត្រូវនឹងសំណួររបស់អ្នក)",
-      "tipLabel": "ព័ត៌មានជំនួយ",
-      "searchVacantTitle": "ស្វែងរកកៅអី \"ទំនេរ\" នៅក្នុងបន្ទប់",
-      "searchHint": "វាយបញ្ចូលប្រទេស ឈ្មោះអ្នកតំណាង សាលារៀន សព្វនាម ឬ \"ទំនេរ\" ដើម្បីរំលេចការប្រកួតនៅក្នុងបន្ទប់។ ចុច Enter ដើម្បីលោតទៅការប្រកួតដំបូង; Esc ជម្រះ។ ចុច Vacant ដើម្បីលោតទៅកន្លែងទំនេរ។",
-      "findLabel": "ស្វែងរកគណៈប្រតិភូ ឬសមាជិក dais",
-      "searchPlaceholder": "ប្រទេស ឈ្មោះ សាលា...",
-      "matchesCount": "{matches} នៃ {total} កៅអីត្រូវគ្នា។",
-      "enterScrolls": "បញ្ចូលរមូរ",
-      "typeToFilterHint": "វាយបញ្ចូលដើម្បីត្រង - បញ្ចូលរមូរទៅការប្រកួតដំបូង",
-      "noMatches": "មិនមានគណៈប្រតិភូដែលត្រូវគ្នា ឬកៅអី Dais ។",
-      "digitalDisplay": "ការបង្ហាញឌីជីថល",
-      "floorLabel": "ជាន់",
-      "staffSeatsHeading": "បុគ្គលិក - កៅអី",
-      "searchAria": "ស្វែងរកគណៈប្រតិភូ",
-      "virtualRoomVacant": "ទំនេរ",
-      "profileAria": "មើលប្រវត្តិរូប៖ {country}",
-      "vacantSeatAria": "កៅអីទំនេរ",
-      "placardAria": "ផ្លាកសញ្ញា {country}",
-      "gavelAria": "ហ្កាវេល។",
-      "viewProfileAria": "មើលប្រវត្តិរូប៖ {title}",
-      "noProfileLinkAria": "{title} (គ្មានតំណកម្រងព័ត៌មាន)",
-      "committeeFloor": "ជាន់គណៈកម្មាធិការ",
-      "virtualRoomFigureAria": "បន្ទប់គណៈកម្មាធិនិម្មិត - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "ត្រងគណៈប្រតិភូ។ កៅអី​ដែល​បាន​រំលេច​ជា​លើក​ដំបូង​គឺ​ជា​ការ​ប្រកួត​លើក​ដំបូង​នៅ​លើ​សង្វៀន។",
-      "helperText": "ប្លាកែតរាយបញ្ជីប្រទេស (ពីការបែងចែក) ឈ្មោះ សាលារៀន និងសព្វនាមពីប្រវត្តិរូបរបស់ប្រតិភូនីមួយៗ។ កែសម្រួលរបស់អ្នកនៅក្រោម Profile ។ អាសនៈ​គណៈកម្មាធិការ​ទទេ​បង្ហាញ​ថា​ទំនេរ។ ចុចផ្ទាំងបដាដែលបំពេញ ឬកៅអី dais ដើម្បីបើកទំព័ររបស់សមាជិកនោះ (ជជែក និងរាយការណ៍ពីទីនោះ)។",
-      "virtualRoomCaption": "បន្ទប់គណៈកម្មាធិគំរូនិម្មិតរបស់អង្គការសហប្រជាជាតិដែលមានបដាតំណាងដែលបង្ហាញពីប្រទេស ឈ្មោះ សាលារៀន និងសព្វនាម។"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "ស្នើសុំនិយាយ",
-        "delegateFallback": "ប្រតិភូ",
-        "needAllocation": "អ្នកត្រូវការការបែងចែកដើម្បីស្នើសុំនិយាយ។",
-        "alreadyQueued": "អ្នកមានសំណើនិយាយសកម្មនៅក្នុងជួររួចហើយ។",
-        "requested": "បានស្នើឱ្យនិយាយ។ អ្នកនឹងបង្ហាញនៅក្នុងជួរ។",
-        "requestFailed": "បរាជ័យក្នុងការស្នើសុំនិយាយ។",
-        "helpBody": "បញ្ជូនគណៈប្រតិភូរបស់អ្នកទៅកាន់ជួរកៅអី។ អ្នកអាចមានការរង់ចាំសកម្មមួយ/ការស្នើសុំបច្ចុប្បន្នក្នុងពេលតែមួយ។",
-        "purposeLabel": "គោលបំណងស្រេចចិត្ត (បង្ហាញក្នុងស្លាកជួរ)",
-        "purposeHelpTitle": "ស្លាកគោលបំណង",
-        "purposeHelpBody": "អត្ថបទនេះត្រូវបានបន្ថែមទៅឈ្មោះប្រទេសរបស់អ្នក ដូច្នេះកៅអីអាចដឹងពីមូលហេតុដែលអ្នកកំពុងស្នើសុំជាន់។",
-        "purposePlaceholder": "ឧ. ការគាំទ្រ + ទិដ្ឋភាពទូទៅនៃវិសោធនកម្ម",
-        "requesting": "កំពុងស្នើសុំ...",
-        "rollPromptTitle": "តម្រូវឱ្យមានការយល់ព្រមពីប្រធាន",
-        "rollPromptBodyPickStatus": "វគ្គបានចាប់ផ្តើមហើយ។ ជ្រើសរើសស្ថានភាពវិលជុំរបស់អ្នក ដើម្បីដោះសោការនិយាយ និងការបោះឆ្នោត។ ជម្រើសនេះមិនអាចផ្លាស់ប្តូរបានទេ។",
-        "rollPromptBodyWaitSessionStart": "រង់ចាំប្រធានដើម្បីចាប់ផ្តើមសម័យប្រជុំគណៈកម្មាធិការ។",
-        "rollPromptBodyWaitRollPrompt": "កំពុង​រង់ចាំ​ការ​ជំរុញ​ការ​ហៅ​ទូរសព្ទ។",
-        "rollPromptBodyMarkedAbsent": "បច្ចុប្បន្នអ្នកត្រូវបានសម្គាល់ថាអវត្តមាន។ សុំឱ្យកៅអីសម្គាល់អ្នកធ្វើបទបង្ហាញ ដើម្បីនិយាយ និងបោះឆ្នោត។",
-        "rollPromptBodyChecking": "កំពុងពិនិត្យមើលស្ថានភាពវិលរបស់អ្នក...",
-        "rollPromptSaving": "កំពុងរក្សាទុក...",
-        "rollPromptPresent": "បច្ចុប្បន្ន",
-        "rollPromptPresentVoting": "វត្តមាន និងការបោះឆ្នោត"
-      },
-      "motionVoting": {
-        "votingProcedure": "នីតិវិធីបោះឆ្នោត",
-        "currentMotion": "ចលនាបច្ចុប្បន្ន",
-        "motioner": "អ្នកធ្វើចលនា",
-        "majority": "ភាគច្រើន",
-        "majoritySimple": "សាមញ្ញ",
-        "tally": "បាទ/ចាស {yes} - ទេ {no} - សរុប {total}",
-        "help": "Dais កត់ត្រាការបោះឆ្នោតរបស់គណៈប្រតិភូនីមួយៗនៅក្នុងសម័យប្រជុំ។ ការ​បោះ​ឆ្នោត​ប្រើ​តែ​បាទ ឬ​ទេ (មិន​អនុប្បវាទ)។ សរុបរាប់តែផ្ទាំងបដាដែលបាទ ឬទេត្រូវបានកត់ត្រាទុក។ គណៈប្រតិភូអវត្តមានត្រូវបានរំលង។"
-      },
-      "activeMotion": {
-        "currentMotion": "ចលនាបច្ចុប្បន្ន",
-        "motionFallback": "ចលនា",
-        "motioner": "អ្នកធ្វើចលនា",
-        "majority": "ភាគច្រើន",
-        "majoritySimple": "សាមញ្ញ",
-        "type": "ប្រភេទ",
-        "timer": "កម្មវិធីកំណត់ម៉ោង",
-        "currentSpeaker": "វាគ្មិនបច្ចុប្បន្ន",
-        "nextSpeaker": "វាគ្មិនបន្ទាប់",
-        "speakerTimeLeftCap": "ម៉ោង​របស់​វាគ្មិន (ឆ្វេង / មួក)",
-        "speakerTimeLeftTotal": "ម៉ោង​អ្នក​និយាយ (ឆ្វេង / សរុប)",
-        "perSpeaker": "(សម្រាប់វាគ្មិន)",
-        "paused": "(ផ្អាក)",
-        "pauseReason": "ផ្អាក៖ {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "សម័យប្រជុំ",
-        "sessionNotStarted": "វគ្គមិនបានចាប់ផ្តើមទេ។",
-        "limit": "ដែនកំណត់",
-        "limitRemaining": "{value} ឆ្វេង",
-        "limitOverBy": "លើសដោយ {value}",
-        "quickLinkSession": "សម័យ",
-        "quickLinkRoll": "រមៀល",
-        "quickLinkSpeakers": "វាគ្មិន",
-        "quickLinkMotions": "ចលនា",
-        "quickLinkTimer": "កម្មវិធីកំណត់ម៉ោង",
-        "dais": "ដាស",
-        "pinned": "ខ្ទាស់",
-        "viewFullAnnouncement": "មើលសេចក្តីប្រកាសទាំងស្រុង",
-        "timerPausesReadOnly": "កម្មវិធីកំណត់ម៉ោងផ្អាក (បានតែអាន)",
-        "speakerList": "បញ្ជីអ្នកនិយាយ",
-        "speakerFallback": "វាគ្មិន",
-        "rollCallYou": "ហៅទូរស័ព្ទ (អ្នក)",
-        "fullAnnouncement": "សេចក្តីប្រកាសពេញលេញ",
-        "daisAnnouncement": "សេចក្តីប្រកាសរបស់ Dais",
-        "close": "បិទ"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "ឈ្មោះវគ្គ",
-        "sessionNamePlaceholder": "ឧ. វគ្គព្រឹក",
-        "sessionNameSaving": "កំពុងរក្សាទុក...",
-        "sessionNameSaved": "បានរក្សាទុក",
-        "sessionNameHint": "រក្សាទុកដោយស្វ័យប្រវត្តិ ហើយបង្ហាញក្នុងប្រវត្តិសម័យ។",
-        "title": "សម័យប្រជុំគណៈកម្មាធិការ",
-        "subtitle": "ចាប់ផ្តើម ឬបញ្ឈប់សម័យប្រជុំរបស់គណៈកម្មាធិការ។",
-        "helpStartStop": "ចាប់ផ្តើម ចាប់ផ្តើមកម្មវិធីកំណត់ម៉ោងវគ្គ/ស្ថានភាពរបស់គណៈកម្មាធិការបន្តផ្ទាល់សម្រាប់អ្នករាល់គ្នា។ បញ្ឈប់ បញ្ចប់វគ្គ និងសម្អាតដែនកំណត់ពេលវេលាបច្ចុប្បន្ន។",
-        "migrationUnavailable": "ការគ្រប់គ្រងសម័យគឺមិនមានជាបណ្តោះអាសន្នទេ រហូតដល់ការផ្ទេរទិន្នន័យចុងក្រោយបំផុតត្រូវបានអនុវត្ត។",
-        "endTimeInFuture": "ជ្រើសរើសពេលវេលាបញ្ចប់នាពេលអនាគត ឬប្តូរទៅគ្មានដែនកំណត់។",
-        "sessionStartUnavailable": "ការ​បោះត្រា​ពេល​ចាប់ផ្ដើម​សម័យ​គឺ​មិន​អាច​ប្រើ​បាន​រហូត​ដល់​ការ​ធ្វើ​ចំណាក​ស្រុក​ចុងក្រោយ​ត្រូវ​បាន​អនុវត្ត។",
-        "endTimeInFutureSetNoLimit": "ជ្រើសរើសពេលវេលាបញ្ចប់នាពេលអនាគត ឬកំណត់គ្មានដែនកំណត់។",
-        "sessionLimitUpdated": "បានធ្វើបច្ចុប្បន្នភាពដែនកំណត់នៃវគ្គ។",
-        "startedLabel": "បានចាប់ផ្តើម៖",
-        "timeInLabel": "ពេលវេលានៅក្នុង៖",
-        "timeUntilEndLabel": "ពេលវេលារហូតដល់ទីបញ្ចប់៖",
-        "overByValue": "លើសដោយ {value}",
-        "modeLabel": "របៀប៖",
-        "modeStopwatchNoLimit": "នាឡិកាបញ្ឈប់ (មិនកំណត់ពេលវេលា)",
-        "sessionNotRunning": "វគ្គមិនដំណើរការទេ។",
-        "sessionLimit": "ដែនកំណត់សម័យ",
-        "sessionLimitModesTitle": "របៀបកំណត់សម័យ",
-        "sessionLimitModesHelp": "គ្មាន៖ គ្មានទីបញ្ចប់។ ថវិកាពេលវេលា៖ រាប់ពីការចាប់ផ្តើម។ បញ្ចប់នៅម៉ោង៖ ម៉ោងកំណត់ម៉ោងក្នុងតំបន់របស់អ្នក។",
-        "sessionLimitOptional": "ស្រេចចិត្ត។",
-        "noneLabel": "គ្មាន",
-        "noneDescription": "រត់រហូតដល់អ្នកឈប់។",
-        "timeBudgetLabel": "ថវិកាពេលវេលា",
-        "timeBudgetDescription": "រាប់ចាប់ពីពេលដែលអ្នកចាប់ផ្តើម។",
-        "endTimeLabel": "ពេលវេលាបញ្ចប់",
-        "endTimeDescription": "ប្រើពេលវេលានាឡិកាថេរ (បដិសេធថវិកាប្រសិនបើទាំងពីរត្រូវបានកំណត់) ។",
-        "noneIndefinite": "គ្មាន (មិនកំណត់)",
-        "noneScheduledEndHint": "គ្មានការបញ្ចប់ដែលបានគ្រោងទុក; មានតែពេលវេលាដែលកន្លងផុតទៅត្រូវបានបង្ហាញ។",
-        "timeBudgetFromStart": "ថវិកាពេលវេលាពីការចាប់ផ្តើម",
-        "hoursLabel": "ម៉ោង",
-        "minutesLabel": "នាទី",
-        "minimumOneMinute": "(អប្បបរមា 1 នាទី)",
-        "endAtLocalTime": "បញ្ចប់នៅម៉ោង (ម៉ោងក្នុងស្រុក)",
-        "stopSession": "បញ្ឈប់វគ្គ",
-        "saveLimit": "រក្សាទុកដែនកំណត់",
-        "saveLimitHelp": "អនុវត្តការកំណត់ដែនកំណត់ដែលបានធ្វើបច្ចុប្បន្នភាព ខណៈពេលដែលវគ្គកំពុងដំណើរការរួចហើយ ដោយមិនបញ្ឈប់វគ្គនោះទេ។",
-        "startSession": "ចាប់ផ្តើមវគ្គ",
-        "sidebarUsePrefix": "ប្រើរបារចំហៀងសម្រាប់",
-        "rollCall": "ការហៅទូរស័ព្ទ",
-        "speakers": "វាគ្មិន",
-        "formalMotions": "ចលនាផ្លូវការ",
-        "timer": "កម្មវិធីកំណត់ម៉ោង",
-        "sidebarAnd": "និង",
-        "announcements": "សេចក្តីប្រកាស",
-        "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។"
-      },
-      "history": {
-        "title": "ប្រវត្តិសម័យ",
-        "savedCount": "{count} រក្សាទុក",
-        "permissionsHint": "កៅអីអាចប្តូរឈ្មោះធាតុ។ SMT/Admin អាចប្តូរឈ្មោះ និងលុបធាតុ។",
-        "empty": "មិនទាន់មានប្រវត្តិសម័យទេ។",
-        "rename": "ប្តូរឈ្មោះ",
-        "delete": "លុប",
-        "deleteConfirm": "លុបវគ្គនេះចេញពីប្រវត្តិ?",
-        "sessionNamePrompt": "ឈ្មោះវគ្គ",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> កំពុងដំណើរការ"
-      },
-      "timerPage": {
-        "title": "កម្មវិធីកំណត់ម៉ោង",
-        "controlsTitle": "ការគ្រប់គ្រងកម្មវិធីកំណត់ម៉ោង",
-        "controlsHelp": "ប្រើជាន់ទូទៅសម្រាប់ពេលវេលាជជែកដេញដោលរួម ឬចលនាបោះឆ្នោតដើម្បីភ្ជាប់ភាពមើលឃើញទៅនឹងធាតុបោះឆ្នោតបើកចំហជាក់លាក់មួយ។",
-        "tabSetup": "1) ការដំឡើង",
-        "tabClock": "2) ការត្រួតពិនិត្យនាឡិកា",
-        "tabNotes": "3) សុន្ទរកថា",
-        "tabLog": "4) ផ្អាកកំណត់ហេតុ",
-        "setupHelp": "ជ្រើសរើសថាតើកម្មវិធីកំណត់ម៉ោងនេះគឺសម្រាប់ជាន់ទូទៅ (តែងតែអាចមើលឃើញដោយប្រតិភូ) ឬភ្ជាប់ទៅនឹងចលនាដែលបើកចំហសម្រាប់ការបោះឆ្នោត (ប្រតិភូឃើញវាខណៈពេលដែលការបោះឆ្នោតនោះជាធាតុសកម្ម)។ ជាមួយនឹងការបើកពេលវាគ្មិន នាឡិកានៅតែអាចមើលឃើញក្នុងអំឡុងពេលការប្រជុំពិភាក្សាកម្រិតមធ្យមដោយមិនគិតពីអ្វីនោះទេ។ ផ្អាកនាឡិកា / ចាប់ផ្តើមនាឡិកាបង្កក ឬបន្តការរាប់ថយក្រោយ។ កំណត់ម៉ោងវាគ្មិន (នៅសល់) និងម៉ោងសរុបដោយឯករាជ្យ បន្ទាប់មករក្សាទុកកម្មវិធីកំណត់ម៉ោង។ ការកំណត់ជាមុនបំពេញទាំងពីរទៅប្រវែងដូចគ្នា; អ្នកអាចកែសម្រួលវាលណាមួយនៅពេលក្រោយ។ ការផ្អាកត្រូវបានកត់ត្រាដោយមានហេតុផលខ្លី។",
-        "namedPreset": "កំណត់ឈ្មោះជាមុន",
-        "applyPreset": "អនុវត្តការកំណត់ជាមុន...",
-        "floorLabelDelegates": "ស្លាកជាន់ (តំណាង)",
-        "floorLabelPlaceholder": "ឧ. GSL 60s",
-        "timerPurpose": "គោលបំណងកម្មវិធីកំណត់ម៉ោង",
-        "purposeGeneralFloor": "ការពិភាក្សាទូទៅ / ជាន់ (មិនភ្ជាប់ទៅនឹងការបោះឆ្នោត)",
-        "purposeMotionVote": "ចលនាបើកចំហ - កម្មវិធីកំណត់ពេលតែនៅពេលដែលការបោះឆ្នោតនោះសកម្មនៅលើឥដ្ឋ",
-        "openMotionForVoting": "ចលនាបើកចំហ (ត្រូវតែបើកចំហសម្រាប់ការបោះឆ្នោត)",
-        "selectMotion": "ជ្រើសរើសចលនា...",
-        "untitled": "គ្មានចំណងជើង",
-        "noOpenMotionWarning": "គ្មាន​ចលនា​ណា​ត្រូវ​បើក​ឲ្យ​បោះឆ្នោត​ទេ។ បើកការបោះឆ្នោតជាមុន ឬប្តូរគោលបំណងទៅជាន់ទូទៅ។",
-        "clock": "នាឡិកា",
-        "running": "កំពុងរត់",
-        "paused": "ផ្អាក",
-        "saveToEnablePauseStart": "រក្សាទុកកម្មវិធីកំណត់ម៉ោងដើម្បីបើកការផ្អាក/ចាប់ផ្តើម។",
-        "pauseReasonLogged": "ផ្អាកហេតុផល (ចូល)",
-        "pauseReasonPlaceholder": "ឧ. ចំណុច​នៃ​ការ​បញ្ជា​ទិញ បញ្ហា​បច្ចេកវិទ្យា ការ​ប្រជុំ​ដែល​មិន​បាន​សម្របសម្រួល...",
-        "pauseClock": "ផ្អាកនាឡិកា",
-        "startClock": "នាឡិកាចាប់ផ្តើម",
-        "euTimerBoardTitle": "ក្រុមប្រឹក្សាកំណត់ពេលវេលារបស់សភាសហភាពអឺរ៉ុប (11 កម្មវិធីកំណត់ម៉ោង)",
-        "euTimerBoardHelp": "កម្មវិធីកំណត់ម៉ោងមួយក្នុងមួយភាគី បូកសរុបម៉ោង POI/POC និងម៉ោងវាគ្មិន។ ប្រើ Apply ដើម្បីចម្លងជួរដេកមួយទៅក្នុងវាលកម្មវិធីកំណត់ម៉ោងបន្តផ្ទាល់នៅលើផ្ទាំងនាឡិកា (ម៉ោងនិយាយ / រក្សាទុកកម្មវិធីកំណត់ម៉ោង)។",
-        "euTimerName": "ឈ្មោះ",
-        "euTimerTag": "ស្លាក",
-        "euTotalTime": "ពេលវេលាសរុប",
-        "euPoiPocTime": "ម៉ោង POI / POC",
-        "euSpeakerTime": "ម៉ោងអ្នកនិយាយ",
-        "perSpeakerTitle": "ពេល​មួយ​វាគ្មិន (ការ​ប្រជុំ​កម្រិត​មធ្យម)",
-        "perSpeakerHelp": "កំណត់ពេលវេលាសរុបជាមួកសម្រាប់ឧបករណ៍បំពងសំឡេង និងម៉ោងវាគ្មិនជាពេលវេលាដែលនៅសល់។ ជាមុនផ្លាស់ទីទៅឧបករណ៍បំពងសំឡេងបន្ទាប់ ហើយកំណត់ឡើងវិញដែលនៅសល់ទៅមួក។",
-        "currentSpeaker": "វាគ្មិនបច្ចុប្បន្ន",
-        "nextSpeaker": "វាគ្មិនបន្ទាប់",
-        "speechNotesCurrentSpeaker": "កំណត់ចំណាំការនិយាយ (អ្នកនិយាយបច្ចុប្បន្ន)",
-        "speechNotesHelp": "កំណត់ចំណាំត្រូវបានចងភ្ជាប់ជាមួយអត្ថបទកម្មវិធីកំណត់ពេលវាគ្មិនបច្ចុប្បន្ន ហើយនៅពេលដែលបញ្ជីអ្នកនិយាយមាននរណាម្នាក់សម្គាល់ថា បច្ចុប្បន្ន ប្រតិភូរបស់ពួកគេត្រូវបានរក្សាទុកសម្រាប់ជាឯកសារយោង។",
-        "timerFloorLabel": "កម្មវិធីកំណត់ម៉ោង (ជាន់):",
-        "speakerListCurrent": "បញ្ជីអ្នកនិយាយ (បច្ចុប្បន្ន)៖",
-        "noCurrentDelegation": "គ្មាន​គណៈប្រតិភូ​ត្រូវ​បាន​សម្គាល់​ថា បច្ចុប្បន្ន​នៅ​ក្នុង​បញ្ជី​អ្នក​និយាយ​ទេ។",
-        "note": "ចំណាំ",
-        "notePlaceholder": "ពិន្ទុ POIs សម្លេង តាមដាន...",
-        "saveSpeechNote": "រក្សាទុកសុន្ទរកថា",
-        "recentNotes": "កំណត់ចំណាំថ្មីៗរបស់អ្នក (គណៈកម្មាធិការនេះ)",
-        "delete": "លុប",
-        "speakerTimeRemaining": "ម៉ោងអ្នកនិយាយ (នៅសល់)",
-        "remainingHelpPerSpeaker": "ការរាប់ថយក្រោយសម្រាប់ឧបករណ៍បំពងសំឡេងបច្ចុប្បន្ន (កំណត់ឡើងវិញនៅពេលអ្នកទៅមុន)។",
-        "remainingHelpNormal": "ការរាប់ថយក្រោយសម្រាប់ឧបករណ៍បំពងសំឡេងបច្ចុប្បន្ន (អាចតិចជាងសរុប)។",
-        "totalTime": "ពេលវេលាសរុប",
-        "totalHelpPerSpeaker": "មួកសម្រាប់ឧបករណ៍បំពងសំឡេង (ភាគបែងនៅលើឥដ្ឋ ការបំពេញបន្ថែមជាមុនដែលនៅសល់ចំពោះវា)។",
-        "totalHelpNormal": "ប្រវែងពេញនៃផ្នែកកំណត់ម៉ោងនេះ (បង្ហាញបន្ទាប់ពីសញ្ញានៅលើឥដ្ឋ)។",
-        "saveTimer": "រក្សាទុកកម្មវិធីកំណត់ម៉ោង",
-        "advanceSpeakerReset": "ឧបករណ៍បំពងសំឡេងជាមុន និងកំណត់នាឡិកាឡើងវិញ",
-        "recentPauseLog": "កំណត់ហេតុផ្អាកថ្មីៗ",
-        "noPauseEvents": "មិនទាន់បានកត់ត្រាព្រឹត្តិការណ៍ផ្អាកសម្រាប់គណៈកម្មាធិការនេះនៅឡើយទេ។",
-        "openPauseLogHint": "បើក​កំណត់​ហេតុ​ផ្អាក​ដើម្បី​ពិនិត្យ​មើល​ហេតុផល​ផ្អាក​ដែល​បាន​កត់ត្រា​ទុក និង​ត្រា​ពេល​វេលា។",
-        "saved": "កម្មវិធីកំណត់ម៉ោងត្រូវបានរក្សាទុក។",
-        "savedCapped": "កម្មវិធីកំណត់ម៉ោងត្រូវបានរក្សាទុក។ ពេលវេលារបស់អ្នកនិយាយគឺវែងជាងសរុប។ គ្របដណ្តប់សរុប។",
-        "alreadyPaused": "កម្មវិធីកំណត់ម៉ោងត្រូវបានផ្អាករួចហើយ។",
-        "pausedForCommittee": "កម្មវិធីកំណត់ម៉ោងបានផ្អាកសម្រាប់គណៈកម្មាធិការ។",
-        "alreadyRunning": "កម្មវិធីកំណត់ម៉ោងកំពុងដំណើរការហើយ។",
-        "runningForCommittee": "កម្មវិធីកំណត់ម៉ោងដំណើរការសម្រាប់គណៈកម្មាធិការ។"
-      }
     }
   },
   "timersWidget": {
@@ -2478,6 +1647,10 @@
       "committeeRoomFull": {
         "label": "បន្ទប់ប្រជុំ (ពេញ)",
         "hint": "ប្លង់និម្មិត & ជាន់តំណាង"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2811,6 +1984,864 @@
           "3": "ភាពស៊ីសង្វាក់គ្នា; dais បំផុសគំនិតបរិយាកាសវិជ្ជាជីវៈនិងភាគហ៊ុនខ្ពស់។"
         }
       }
+    }
+  },
+  "sources": {
+    "addSource": "បន្ថែមប្រភព",
+    "sourceUrl": "ប្រភព URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (បានណែនាំ)",
+    "urlHelp": "សម្រាប់ Google Doc ថ្មី សូមប្រើប៊ូតុង ហើយបិទភ្ជាប់តំណឯកសារនៅទីនេះ។",
+    "titleOptional": "ចំណងជើង (ជាជម្រើស)",
+    "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
+    "editSource": "កែសម្រួលប្រភព",
+    "urlPlaceholderShort": "Google Doc ឬ URL ផ្សេងទៀត។",
+    "empty": "មិនទាន់មានប្រភពនៅឡើយ។ បន្ថែមតំណ Google Doc ដើម្បីបើកវានៅទីនេះ។",
+    "sourceLabel": "ប្រភព",
+    "openLink": "បើកតំណ",
+    "embedHeading": "ឯកសារប្រភព",
+    "notGoogleDoc": "URL នេះមិនមែនជា Google Doc ទេ។ ប្រើតំណ docs.google.com/document/d/… ដើម្បីបង្កប់ និងកែសម្រួលនៅទីនេះ។ បើមិនដូច្នេះទេបើកតំណខាងលើ។"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "ប្រតិភូមិនអាចផ្ទុកឯកសារទីតាំងដោយផ្ទាល់បានទេ។ ប្រើប្រភេទឯកសារផ្សេងទៀត។",
+    "alertOnlyChairsPositionPaper": "មានតែកៅអី/SMT/admin ប៉ុណ្ណោះដែលអាចផ្ទុកឡើងនូវ Position Papers។",
+    "alertOnlySmtChairReport": "មានតែ SMT/admin ប៉ុណ្ណោះដែលអាចបង្ហោះរបាយការណ៍ប្រធានបាន។",
+    "alertOnlySmtRop": "មានតែ SMT/admin ប៉ុណ្ណោះដែលអាចបង្ហោះឯកសារ RoP បាន។",
+    "alertOnlySmtAwardCriteria": "មានតែ SMT/admin ប៉ុណ្ណោះដែលអាចបង្ហោះឯកសារលក្ខណៈវិនិច្ឆ័យពានរង្វាន់។",
+    "alertNeedContentOrUrl": "បន្ថែមមាតិកាអត្ថបទក្នុងស្រុក ឬ URL ឯកសារ Google ។",
+    "confirmDelete": "លុបឯកសារនេះ?",
+    "delegatePrepTitle": "ផ្នែករៀបចំឯកសារ",
+    "delegatePrepBody": "អ្នកអាចបង្ហោះ មើល និងកែសម្រួល <prep>ឯកសាររៀបចំ</prep> ផ្ទាល់ខ្លួនរបស់អ្នកដោយផ្ទាល់ពីទំព័រនេះ។",
+    "positionPaperGuideTitle": "សៀវភៅណែនាំអំពីទីតាំង",
+    "positionPaperGuideBlurb": "ទាញយកមគ្គុទ្ទេសក៍កន្លែងដាក់ខណៈពេលដែល PDF ចុងក្រោយកំពុងត្រូវបានរៀបចំ។",
+    "downloadPlaceholderGuide": "ទាញយកមគ្គុទ្ទេសក៍កន្លែងដាក់",
+    "addDocument": "បន្ថែមឯកសារ",
+    "tabs": {
+      "ariaLabel": "ផ្នែកឯកសារ",
+      "library": "បណ្ណាល័យ",
+      "compose": "តែង",
+      "composeHint": "ចាប់ផ្តើមឯកសារថ្មី ឬកែសម្រួលសេចក្តីព្រាងដែលមានស្រាប់ពីផ្ទាំងនេះ។"
+    },
+    "newDocumentTitle": "ឯកសារថ្មី។",
+    "editDocumentTitle": "កែសម្រួលឯកសារ",
+    "typeLabel": "ប្រភេទ",
+    "types": {
+      "position_paper": "ក្រដាសមុខតំណែង",
+      "chair_report": "របាយការណ៍ប្រធាន",
+      "rop": "RoP",
+      "award_criteria": "លក្ខណៈវិនិច្ឆ័យរង្វាន់",
+      "chair_notes": "កំណត់ចំណាំរបស់ប្រធាន",
+      "prep_doc": "រៀបចំឯកសារ"
+    },
+    "delegatePositionPaperNote": "ឯកសារមុខតំណែងត្រូវបានផ្ទុកឡើងដោយកៅអីដែលមានមតិកែលម្អ។",
+    "delegateOwner": "ម្ចាស់ប្រតិភូ",
+    "chairRecipient": "អ្នកទទួលកៅអី",
+    "titleLabel": "ចំណងជើង",
+    "titlePlaceholder": "ចំណងជើងឯកសារ",
+    "googleDocsUrl": "URL ឯកសារ Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (បង្កប់ទិដ្ឋភាព/កែសម្រួលក្នុងកម្មវិធី)",
+    "googleDocsHelp": "ប្រើ Google Doc ថ្មី ដើម្បីបើក Google នៅក្នុងផ្ទាំងថ្មី បន្ទាប់មកបិទភ្ជាប់តំណឯកសារនៅទីនេះ។ អត្ថបទធម្មតាខាងក្រោមគឺស្រេចចិត្ត។ ឯកសារនីមួយៗត្រូវការអត្ថបទក្នុងស្រុក តំណ Google Doc ឬទាំងពីរ។",
+    "plainTextOptional": "អត្ថបទធម្មតា (ជាជម្រើស)",
+    "plainTextPlaceholder": "កំណត់ចំណាំ ឬអត្ថបទព្រាង…",
+    "chairFeedbackLabel": "មតិកែលម្អរបស់ប្រធាន",
+    "chairFeedbackPlaceholder": "មតិ​សម្រាប់​ឯកសារ​តំណែង​ប្រតិភូ...",
+    "empty": "មិនទាន់មានឯកសារនៅឡើយ។ បន្ថែមមួយ ឬភ្ជាប់ Google Doc ។",
+    "sidebarDocumentLabel": "ឯកសារ",
+    "sections": {
+      "chairReports": "របាយការណ៍របស់ប្រធាន",
+      "rop": "RoP",
+      "awardCriteria": "លក្ខណៈវិនិច្ឆ័យរង្វាន់",
+      "prepDocuments": "រៀបចំឯកសារ",
+      "chairNotes": "កំណត់ចំណាំរបស់ប្រធាន",
+      "otherDocuments": "ឯកសារផ្សេងៗ"
+    },
+    "untitled": "គ្មានចំណងជើង",
+    "linkedDocumentHeading": "ឯកសារភ្ជាប់",
+    "notesHeading": "កំណត់ចំណាំ",
+    "noGoogleDocYet": "មិន​ទាន់​មាន​តំណ Google Doc នៅ​ឡើយ​ទេ។ ប្រើ កែសម្រួល ដើម្បីបន្ថែម docs.google.com/document/d/… URL ។",
+    "chairFeedbackHeading": "មតិកែលម្អរបស់ប្រធាន",
+    "noFeedbackYet": "មិន​មាន​ការ​បន្ថែម​មតិ​ត្រឡប់​នៅ​ឡើយ​ទេ។"
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "បញ្ចូលអ៊ីមែលតំណាងជាមុនសិន។",
+    "sentToDelegate": "បានផ្ញើទៅ {email} ។",
+    "newResolution": "ដំណោះស្រាយថ្មី។",
+    "maxDraftResolutions": "គណៈកម្មាធិការនេះមានសេចក្តីសម្រេចព្រាង {count} រួចហើយ។",
+    "googleDocLink": "តំណ Google Doc",
+    "googleDocUrlPlaceholder": "Google Docs URL (docs.google.com/document/d/… — ប្រើសម្រាប់បង្កប់ + កែសម្រួល)",
+    "googleDocUrlHelp": "Google Doc ថ្មីបើកនៅក្នុងផ្ទាំងមួយផ្សេងទៀត។ ចម្លង URL ពីរបារអាសយដ្ឋាន ហើយបិទភ្ជាប់វានៅទីនេះ។",
+    "mainSubmittersPlaceholder": "អ្នកដាក់ស្នើសំខាន់ៗ (លេខសម្គាល់អ្នកប្រើប្រាស់ បំបែកដោយសញ្ញាក្បៀស)",
+    "coSubmittersPlaceholder": "អ្នកដាក់ស្នើរួមគ្នា (លេខសម្គាល់អ្នកប្រើប្រាស់ បំបែកដោយក្បៀស)",
+    "create": "បង្កើត",
+    "cancel": "បោះបង់",
+    "openInNewTab": "បើកនៅក្នុងផ្ទាំងថ្មី។",
+    "noGoogleDocLink": "មិនមានតំណ Google Doc ទេ។",
+    "visibleToOtherBloc": "អាចមើលឃើញចំពោះប្លុកផ្សេងទៀត។",
+    "resolutionCounts": "អនុមេ៖ {main} | សហការី៖ {co} | ហត្ថលេខី៖ {signatories}",
+    "blocButton": "ប្លុក {name} ({stance})",
+    "signVirtually": "ចុះហត្ថលេខាស្ទើរតែ (បានជូនដំណឹងអ្នករងសំខាន់ៗ)",
+    "shareByEmail": "ចែករំលែកដំណោះស្រាយតាមអ៊ីមែល",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "ផ្ញើទៅប្រតិភូ",
+    "clauseEditor": "កម្មវិធីនិពន្ធឃ្លា",
+    "noClausesYet": "មិនមានឃ្លានៅឡើយទេ។",
+    "clauseNumber": "ប្រការ {number}",
+    "saveClause": "រក្សាទុកឃ្លា",
+    "delete": "លុប",
+    "addClausePlaceholder": "បន្ថែមឃ្លាថ្មី...",
+    "addClause": "បន្ថែមឃ្លា",
+    "clauseVoteHistory": "ប្រវតិ្តនៃការបោះឆ្នោតប្រយោគ",
+    "noClauseOutcomesYet": "មិន​ទាន់​មាន​លទ្ធផល​បោះឆ្នោត​ឃ្លា​ដែល​បាន​កត់ត្រា​នៅ​ឡើយ​ទេ។",
+    "clauseFallback": "ឃ្លា",
+    "passed": "ឆ្លងកាត់",
+    "failed": "បរាជ័យ",
+    "motionId": "ចលនា {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "ផ្នែកបោះឆ្នោត",
+      "open": "បើក",
+      "closed": "បិទ"
+    },
+    "requiredMajority": "ភាគច្រើនដែលត្រូវការ",
+    "helpRequiredMajorityTitle": "ភាគច្រើនដែលត្រូវការ",
+    "helpRequiredMajorityBody": "ជ្រើសរើស​កម្រិត​នៃ​ការ​បោះ​ឆ្នោត​ដែល​ប្រើ​ដើម្បី​សម្រេច​ថា​ឆ្លង/បរាជ័យ។ 'សាមញ្ញ' គឺច្រើនជាងពាក់កណ្តាល។ `2/3` ទាមទារភាគច្រើនលើសលប់។",
+    "majoritySimple": "សាមញ្ញ",
+    "majorityTwoThirds": "២/៣",
+    "majorityLine": "{label} ភាគច្រើន",
+    "mustVote": "ត្រូវតែបោះឆ្នោត",
+    "helpMustVoteTitle": "ត្រូវតែបោះឆ្នោត",
+    "helpMustVoteBody": "សម្គាល់ចលនានេះថាជាធាតុ \"ត្រូវតែបោះឆ្នោត\"។ វា​ត្រូវ​បាន​ប្រើ​ដើម្បី​ទំនាក់​ទំនង​តម្រូវ​ការ​ទៅ​កាន់​អ្នក​ចូល​រួម (អាស្រ័យ​លើ​ការ​រៀបចំ​របស់​គណៈកម្មាធិការ​របស់​អ្នក)។",
+    "saveSettings": "រក្សាទុកការកំណត់",
+    "delegateBlurb": "Dais កត់ត្រាការបោះឆ្នោតនៅក្នុងវគ្គ (ឧ. roll call)។ ការ​បោះ​ឆ្នោត​នៅ​ទី​នេះ​ធ្វើ​តាម​បាទ/ចាស​ប៉ុណ្ណោះ (មិន​ត្រូវ​បាន​ប្រើ​ទេ)។ អ្នកអាចធ្វើតាមការបូកសរុប; ប្រតិភូមិនបោះឆ្នោតនៅក្នុងកម្មវិធីទេ។",
+    "yes": "បាទ",
+    "no": "ទេ",
+    "ballots": "សន្លឹកឆ្នោត",
+    "total": "សរុប",
+    "outcome": "លទ្ធផល",
+    "passed": "ឆ្លងកាត់",
+    "failed": "បរាជ័យ",
+    "noRecordedVotes": "គ្មានការបោះឆ្នោតដែលបានកត់ត្រាទុកទេ។",
+    "reopenMotion": "បើកចលនាឡើងវិញ",
+    "editRecordOpen": "កែសម្រួល​កំណត់​ត្រា…",
+    "hideSettings": "លាក់ការកំណត់",
+    "preliminaryPassing": "ឆ្លងកាត់ (បឋម)",
+    "preliminaryFailing": "បរាជ័យ (បឋម)",
+    "delegateRollCall": "ការ​ហៅ​ជា​តំណាង ({count})",
+    "noSeatedDelegates": "មិន​មាន​ប្រតិភូ​អង្គុយ​សម្រាប់​ចលនា​នេះ​ទេ។",
+    "rollPrefix": "រមៀល៖",
+    "recordedPrefix": "កត់ត្រា៖",
+    "recordedYes": "បាទ",
+    "recordedNo": "ទេ",
+    "recordedAbstain": "ហាមប្រាម",
+    "recordedNone": "—",
+    "abstain": "ហាមប្រាម",
+    "clear": "ច្បាស់",
+    "closeMotion": "ចលនាបិទ",
+    "mustVoteBadge": "ត្រូវតែបោះឆ្នោត",
+    "canVoteBadge": "អាចបោះឆ្នោតបាន។",
+    "noMotions": "មិនទាន់មានចលនានៅឡើយទេ។",
+    "currentOpenMotion": "ចលនាបើកចំហបច្ចុប្បន្ន",
+    "noOpenMotion": "មិនមានចលនាបើកចំហទេឥឡូវនេះ។",
+    "recentClosedMotions": "ចលនាបិទថ្មីៗ",
+    "noClosedMotions": "មិនមានចលនាបិទនៅឡើយទេ។",
+    "untitled": "គ្មានចំណងជើង",
+    "voteTypes": {
+      "motion": "ចលនា",
+      "amendment": "វិសោធនកម្ម",
+      "resolution": "ដំណោះស្រាយ",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "អវត្តមាន (វិល)",
+      "present_abstain": "បច្ចុប្បន្ន - អាចបដិសេធ (វិល)",
+      "present_voting": "វត្តមាន និងការបោះឆ្នោត (វិល)",
+      "unknown": "- (រមៀល)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "fallbacks": {
+      "yourCountry": "ប្រទេសរបស់អ្នក។",
+      "committeeSession": "សម័យប្រជុំគណៈកម្មាធិការ",
+      "delegate": "ប្រតិភូ",
+      "speechNote": "សុន្ទរកថា",
+      "untitledMotion": "ចលនាគ្មានចំណងជើង",
+      "dash": "—"
+    },
+    "tabs": {
+      "ariaLabel": "ផ្នែកប្រវត្តិរូប",
+      "overview": "ទិដ្ឋភាពទូទៅ",
+      "awards": "រង្វាន់",
+      "private": "កំណត់ត្រាឯកជន",
+      "settings": "ការកំណត់ប្រវត្តិរូប"
+    },
+    "delegateWelcome": {
+      "title": "សូមស្វាគមន៍ប្រតិភូ {flag} {country}",
+      "subtitle": "តើអ្នកចង់ចាប់ផ្តើមជាមួយអ្វី?",
+      "links": {
+        "documents": "ឯកសារ",
+        "notes": "កំណត់ចំណាំ",
+        "committeeRoom": "បន្ទប់គណៈកម្មាធិការ",
+        "runningNotes": "កំពុងដំណើរការចំណាំ",
+        "ideas": "គំនិត",
+        "guides": "មគ្គុទ្ទេសក៍",
+        "sources": "ប្រភព",
+        "resolutions": "ដំណោះស្រាយ",
+        "speeches": "សុន្ទរកថា",
+        "stances": "ជំហរ",
+        "crisisSlides": "វិបត្តិស្លាយ",
+        "report": "រាយការណ៍",
+        "motions": "ចលនា",
+        "points": "ពិន្ទុ"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "រង្វាន់នៅលើប្រវត្តិរូបរបស់អ្នក។",
+      "rank": "ចំណាត់ថ្នាក់ {rank}",
+      "pending": {
+        "tab": "ការតែងតាំងដែលរង់ចាំ",
+        "title": "ការតែងតាំងប្រធានដែលមិនទាន់សម្រេច",
+        "descriptionSingle": "រក្សាទុកដោយកៅអី និងចែករំលែកជាមួយ SMT សម្រាប់ការពិនិត្យ។ រង្វាន់ចុងក្រោយបង្ហាញខាងក្រោមបន្ទាប់ពីការបញ្ជាក់។",
+        "descriptionTabbed": "រក្សាទុកដោយកៅអី និងចែករំលែកជាមួយ SMT សម្រាប់ការពិនិត្យ។ រង្វាន់ចុងក្រោយលេចឡើងបន្ទាប់ពីការបញ្ជាក់។"
+      },
+      "recorded": {
+        "tab": "ពានរង្វាន់ដែលបានកត់ត្រា",
+        "title": "ពានរង្វាន់ដែលបានកត់ត្រា",
+        "description": "បានចុះបញ្ជីនៅពេលដែលកៅអី ឬ SMT ប្រគល់ឱ្យអ្នកនៅក្នុងកម្មវិធីតាមដានពានរង្វាន់។ ការទទួលស្គាល់ចុងក្រោយអនុវត្តតាមច្បាប់នៃសន្និសីទរបស់អ្នក។"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "អាចមើលឃើញចំពោះតែអ្នក ប្រធានគណៈកម្មាធិការ និង SMT សម្រាប់គណៈកម្មាធិការពាក់ព័ន្ធប៉ុណ្ណោះ។",
+      "points": {
+        "title": "ចំណុចកៅអី (ឯកជន)"
+      },
+      "speechNotes": {
+        "title": "សុន្ទរកថារបស់ប្រធាន (ឯកជន)"
+      },
+      "motions": {
+        "title": "ចលនាដែលអ្នកបានផ្លាស់ទី",
+        "description": "បានរក្សាទុកទៅក្នុងកម្រងព័ត៌មានរបស់អ្នកសម្រាប់ការត្រួតពិនិត្យរបស់គណៈកម្មាធិការ និងការត្រួតពិនិត្យ SMT ។"
+      }
+    },
+    "discipline": {
+      "title": "ស្ថានភាពវិន័យ (ឯកជន)",
+      "statusLine": "ការព្រមាន៖ {warnings} · កូដកម្ម៖ {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "ការបោះឆ្នោតត្រូវបានបិទ",
+      "speakingSuspended": "ការនិយាយត្រូវបានផ្អាក",
+      "removedFromCommittee": "ត្រូវបានដកចេញពីគណៈកម្មាធិការ",
+      "updated": "បានធ្វើបច្ចុប្បន្នភាព៖ {value}"
+    },
+    "preview": {
+      "ariaLabel": "ការមើលប្រវត្តិរូបជាមុន",
+      "title": "មើលជាមុន",
+      "yourName": "ឈ្មោះរបស់អ្នក។",
+      "usernameNotSet": "ឈ្មោះ​អ្នក​ប្រើ​មិន​បាន​កំណត់",
+      "gradeValue": "ថ្នាក់ {grade}",
+      "awards": "រង្វាន់"
+    },
+    "profilePicture": "រូបភាពប្រវត្តិរូប",
+    "uploadFile": "ផ្ទុកឡើងឯកសារ",
+    "uploading": "កំពុងបង្ហោះ...",
+    "photoSaved": "រូបថតដែលបានបង្ហោះ និងរក្សាទុក។",
+    "orUrl": "ឬកំណត់ដោយ URL",
+    "urlPlaceholder": "https://...",
+    "name": "ឈ្មោះ",
+    "username": "ឈ្មោះអ្នកប្រើប្រាស់",
+    "usernamePlaceholder": "ឧ. alex_1999",
+    "pronouns": "សព្វនាម",
+    "customPronounNote": "កម្រងព័ត៌មានរបស់អ្នកមានសំណុំសព្វនាមផ្ទាល់ខ្លួន ដែលមិនត្រូវបានទទួលយកនៅទីនេះទៀតទេ។ ជ្រើសរើសជម្រើសខាងលើ (ឬទុកទទេ) ។ ការសន្សំជំនួសតម្លៃចាស់។",
+    "school": "សាលា",
+    "schoolPlaceholder": "ឧ. វិទ្យាល័យ Lincoln",
+    "grade": "ថ្នាក់",
+    "selectGrade": "ជ្រើសរើសថ្នាក់",
+    "conferencesAttended": "សន្និសីទបានចូលរួម",
+    "awardsComma": "រង្វាន់ (បំបែកដោយសញ្ញាក្បៀស)",
+    "awardsPlaceholder": "គណៈប្រតិភូល្អបំផុត, កិត្តិយស",
+    "allocation": "ការបែងចែក",
+    "selectAllocation": "ជ្រើសរើសការបែងចែក",
+    "noAllocationsPlaceholder": "មិនមានការបែងចែកគណៈកម្មការទេ។",
+    "saveProfile": "រក្សាទុកប្រវត្តិរូប",
+    "saved": "ប្រវត្តិរូបត្រូវបានរក្សាទុក។",
+    "saveFailed": "មិនអាចរក្សាទុកកម្រងព័ត៌មានបានទេ។",
+    "errUsernamePattern": "ឈ្មោះអ្នកប្រើត្រូវតែមាន 3-32 តួអក្សរ (អក្សរ, លេខ, _, ., -)",
+    "errPronounsPreset": "ជ្រើសរើសសព្វនាមពីបញ្ជី។",
+    "errImageType": "សូមជ្រើសរើសឯកសាររូបភាព។",
+    "errImageSize": "រូបភាពធំពេក (អតិបរមា 5 MB)។",
+    "errUploadFailed": "ការបង្ហោះបានបរាជ័យ។",
+    "errStorageSetup": "កន្លែងផ្ទុករូបភាពកម្រងព័ត៌មានមិនត្រូវបានតំឡើងទេ។ នៅក្នុងគម្រោង Supabase សូមដំណើរការ migration 00100_profile_pictures_storage_bucket.sql ឬបង្កើតធុងផ្ទុកសាធារណៈដែលមានឈ្មោះថា profile-pictures (សូមមើល README)។",
+    "errPublicUrl": "មិនអាចដោះស្រាយ URL សាធារណៈសម្រាប់រូបភាពដែលបានបង្ហោះទេ។",
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "វិធាននៃនីតិវិធី (RoP)",
+        "content": "# វិធាននៃនីតិវិធី\n\n## ចំណុចនិងចលនា\n- **ចំណុចនៃការបញ្ជាទិញ**៖ នីតិវិធីត្រឹមត្រូវ។\n- ** ចំណុចព័ត៌មាន **៖ សំណួរទៅកាន់វាគ្មិន\n- **ចំណុចនៃឯកសិទ្ធិផ្ទាល់ខ្លួន**៖ ការលួងលោមផ្ទាល់ខ្លួន\n- ** Motion to Table **៖ ពន្យារពេលការពិភាក្សា\n- ** ចលនាដើម្បីផ្អាក **៖ វគ្គបញ្ចប់\n\n## បោះឆ្នោត\n- ភាគច្រើនសាមញ្ញសម្រាប់បញ្ហានីតិវិធី\n- 2/3 ភាគច្រើនសម្រាប់បញ្ហាសំខាន់ៗ\n- បោះឆ្នោត​ជុំ​គ្នា​ប្រសិន​បើ​បាន​ស្នើ​សុំ"
+      },
+      "examples": {
+        "title": "ឧទាហរណ៍",
+        "content": "#ឧទាហរណ៍\n\n## ទម្រង់ដំណោះស្រាយ\n```\nមហាសន្និបាត,\n...\n1. អំពាវនាវឱ្យរដ្ឋជាសមាជិក...\n២-​ជំរុញ​សហគមន៍​អន្តរជាតិ​ឱ្យ...\n```\n\n## រចនាសម្ព័ន្ធក្រដាសទីតាំង\n1. ផ្ទៃខាងក្រោយ\n2. គោលនយោបាយប្រទេស\n3. ដំណោះស្រាយដែលបានស្នើឡើង"
+      },
+      "templates": {
+        "title": "គំរូ",
+        "content": "# គំរូ\n\n## គំរូរបាយការណ៍ប្រធាន\n- ទិដ្ឋភាពទូទៅនៃគណៈកម្មាធិការ\n- ចំណុចពិភាក្សាសំខាន់ៗ\n- ដំណោះស្រាយបានឆ្លងកាត់\n- អនុសាសន៍"
+      },
+      "chairReport": {
+        "title": "របាយការណ៍ប្រធាន",
+        "content": "# របាយការណ៍ប្រធាន\n\nគណៈកម្មាធិការឯកសារដំណើរការ និងលទ្ធផលនៅទីនេះ។"
+      }
+    },
+    "edit": "កែសម្រួល",
+    "guideDocument": "ឯកសារណែនាំ",
+    "additionalNotes": "កំណត់ចំណាំបន្ថែម",
+    "noContentYet": "មិនមានខ្លឹមសារនៅឡើយទេ។",
+    "titlePlaceholder": "ចំណងជើង",
+    "googleDocsUrl": "URL ឯកសារ Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google Doc ថ្មីបើកនៅក្នុងផ្ទាំងផ្សេងទៀត។ បិទភ្ជាប់តំណដែលអាចចែករំលែកបាន ដូច្នេះប្រតិភូអាចបើកឯកសារនៅទីនេះ (មើល/កែសម្រួលអាស្រ័យលើការចែករំលែក Google)។",
+    "markdownOptional": "កំណត់ចំណាំ Markdown (ជាជម្រើស ប្រសិនបើអ្នកប្រើ Google Doc)",
+    "save": "រក្សាទុក",
+    "cancel": "បោះបង់",
+    "createNewGuide": "បង្កើតការណែនាំថ្មី។",
+    "slugPlaceholder": "ខ្យង (ប្លែក)",
+    "titleLowerPlaceholder": "ចំណងជើង",
+    "googleDocsUrlOptional": "Google Docs URL (ជាជម្រើស)",
+    "markdownContentOptional": "មាតិកា Markdown (ជាជម្រើស)",
+    "create": "បង្កើត",
+    "glossary": {
+      "title": "សទ្ទានុក្រមរបៀបវារៈ MUN",
+      "subtitle": "វាក្យសព្ទតែមួយគត់ដែលត្រូវគ្នានឹងកូដគណៈកម្មាធិការរបស់អ្នក និងប្រធានបទរបៀបវារៈបច្ចុប្បន្ន។",
+      "committeeCode": "លេខកូដគណៈកម្មាធិការ៖ {code}",
+      "sources": {
+        "core": "ស្នូល",
+        "committee": "គណៈកម្មាធិការ",
+        "topic": "ប្រធានបទ"
+      },
+      "terms": {
+        "delegation": {
+          "term": "គណៈប្រតិភូ",
+          "definition": "ប្រទេស ឬក្រុមអ្នកសង្កេតការណ៍តំណាងឱ្យរដ្ឋ ឬអង្គភាពមួយនៅក្នុងគណៈកម្មាធិការ។"
+        },
+        "placard": {
+          "term": "បដា",
+          "definition": "ផ្លាកសញ្ញាប្រទេស ប្រើដើម្បីស្នើសុំជាន់ បោះឆ្នោត និងផ្តល់សញ្ញាអំពីចលនានីតិវិធី។"
+        },
+        "dais": {
+          "term": "ដាស",
+          "definition": "ប្រធានក្រុមដែលសម្របសម្រួលការពិភាក្សា អនុវត្តនីតិវិធី និងគ្រប់គ្រងលំដាប់នៃការនិយាយ។"
+        },
+        "quorum": {
+          "term": "កូរ៉ុម",
+          "definition": "ចំនួនគណៈប្រតិភូអប្បរមាដែលតម្រូវឱ្យធ្វើអាជីវកម្មផ្លូវការ និងការបោះឆ្នោត។"
+        },
+        "motion": {
+          "term": "ចលនា",
+          "definition": "សំណើផ្លូវការដើម្បីផ្លាស់ប្តូរលំហូរនៃការជជែកដេញដោល ដូចជាប្រភេទ Caucus ឬពេលនិយាយ។"
+        },
+        "point_of_order": {
+          "term": "ចំណុចនៃការបញ្ជាទិញ",
+          "definition": "អន្តរាគមន៍នៅពេលដែលនីតិវិធីត្រូវបានអនុវត្តមិនត្រឹមត្រូវនៅក្រោមច្បាប់របស់គណៈកម្មាធិការ។"
+        },
+        "moderated_caucus": {
+          "term": "Caucus កម្រិតមធ្យម",
+          "definition": "ផ្នែកជជែកវែកញែកដែលមានរចនាសម្ព័ន្ធជាមួយនឹងសុន្ទរកថាដែលមានរយៈពេលខ្លីលើប្រធានបទរងដែលបានកំណត់។"
+        },
+        "unmoderated_caucus": {
+          "term": "Caucus ដែលមិនមានការសម្របសម្រួល",
+          "definition": "រយៈពេលចរចាក្រៅផ្លូវការ ដែលប្រតិភូផ្លាស់ទីដោយសេរី ដើម្បីពង្រាង និងបញ្ចូលគំនិត។"
+        },
+        "draft_resolution": {
+          "term": "សេចក្តីសម្រេចសេចក្តីព្រាង",
+          "definition": "អត្ថបទការងារនៃសកម្មភាពរបស់គណៈកម្មាធិការមុនការបោះឆ្នោតចុងក្រោយ និងការអនុម័ត។"
+        },
+        "amendment": {
+          "term": "វិសោធនកម្ម",
+          "definition": "ផ្លាស់ប្តូរ​ការ​ស្នើ​ទៅ​សេចក្តីព្រាង​អត្ថបទ ទាំង​មិត្តភាព ឬ​បាន​បោះឆ្នោត​ដោយ​មិន​រាក់ទាក់។"
+        },
+        "operative_clause": {
+          "term": "ឃ្លាប្រតិបត្តិការ",
+          "definition": "ឃ្លាដែលមានលេខតម្រង់ទិសសកម្មភាព ដែលពិពណ៌នាអំពីអ្វីដែលគណៈកម្មាធិការស្នើឱ្យធ្វើ។"
+        },
+        "preambulatory_clause": {
+          "term": "ឃ្លា Preambulatory",
+          "definition": "ឃ្លាកំណត់បរិបទដោយលើកឡើងពីគោលការណ៍ផ្ទៃខាងក្រោយ កង្វល់ និងក្របខ័ណ្ឌមុន។"
+        },
+        "right_of_reply": {
+          "term": "សិទ្ធិនៃការឆ្លើយតប",
+          "definition": "ឱកាសដើម្បីឆ្លើយតបទៅនឹងសេចក្តីថ្លែងការណ៍ផ្ទាល់ដែលប៉ះពាល់ដល់សេចក្តីថ្លៃថ្នូររបស់គណៈប្រតិភូ។"
+        },
+        "veto_power": {
+          "term": "អំណាចវេតូ",
+          "definition": "អាជ្ញាធរ​ជា​សមាជិក​អចិន្ត្រៃយ៍​របស់ UNSC ដើម្បី​រារាំង​សេចក្តីព្រាង​សេចក្តីសម្រេច​សំខាន់ៗ។"
+        },
+        "chapter_vii": {
+          "term": "ជំពូកទី VII",
+          "definition": "សិទ្ធិអំណាចធម្មនុញ្ញអង្គការសហប្រជាជាតិស្តីពីការគំរាមកំហែងដល់សន្តិភាព ការដាក់ទណ្ឌកម្ម និងវិធានការប្រើប្រាស់កម្លាំង។"
+        },
+        "sanctions_regime": {
+          "term": "របបទណ្ឌកម្ម",
+          "definition": "ការរឹតបន្តឹងដែលសម្របសម្រួលបានប្រើដើម្បីមានឥទ្ធិពលលើអាកប្បកិរិយាដោយគ្មានសកម្មភាពយោធាដោយផ្ទាល់។"
+        },
+        "arms_control": {
+          "term": "ការគ្រប់គ្រងអាវុធ",
+          "definition": "កិច្ចព្រមព្រៀង និងប្រព័ន្ធផ្ទៀងផ្ទាត់ដែលកំណត់ប្រភេទ បរិមាណ ឬការដាក់ពង្រាយអាវុធ។"
+        },
+        "non_proliferation": {
+          "term": "ការមិនរីកសាយ",
+          "definition": "គោលនយោបាយដើម្បីទប់ស្កាត់ការរីករាលដាលនៃសមត្ថភាពនុយក្លេអ៊ែរ គីមី ជីវសាស្រ្ត ឬអាវុធទំនើប។"
+        },
+        "confidence_building_measures": {
+          "term": "វិធានការកសាងទំនុកចិត្ត",
+          "definition": "ឧបករណ៍តម្លាភាព និងទំនាក់ទំនងដែលកាត់បន្ថយការយល់ច្រឡំ និងហានិភ័យជម្លោះ។"
+        },
+        "universal_periodic_review": {
+          "term": "ការពិនិត្យឡើងវិញជាសកលតាមកាលកំណត់",
+          "definition": "ដំណើរការពិនិត្យឡើងវិញដោយមិត្តភក្ដិ ដែលរដ្ឋសមាជិកនីមួយៗរាយការណ៍ និងទទួលបានអនុសាសន៍សិទ្ធិ។"
+        },
+        "special_rapporteur": {
+          "term": "អ្នករាយការណ៍ពិសេស",
+          "definition": "អ្នក​ជំនាញ​ឯករាជ្យ​ត្រូវ​បាន​តែងតាំង​ដើម្បី​ត្រួត​ពិនិត្យ​និង​រាយការណ៍​អំពី​បញ្ហា​សិទ្ធិ​តាម​ប្រធានបទ ឬ​ប្រទេស។"
+        },
+        "treaty_body": {
+          "term": "រាងកាយសន្ធិសញ្ញា",
+          "definition": "គណៈកម្មាធិការអ្នកជំនាញត្រួតពិនិត្យការអនុវត្តសន្ធិសញ្ញាសិទ្ធិមនុស្សជាក់លាក់។"
+        },
+        "public_health_emergency": {
+          "term": "គ្រាអាសន្នសុខភាពសាធារណៈ",
+          "definition": "ព្រឹត្តិការណ៍ផ្ទុះឡើងយ៉ាងធ្ងន់ធ្ងរ ដែលទាមទារការឆ្លើយតបជាបន្ទាន់ពីជាតិ និងអន្តរជាតិ។"
+        },
+        "surveillance": {
+          "term": "ការតាមដានរោគរាតត្បាត",
+          "definition": "ការប្រមូល និងវិភាគទិន្នន័យសុខភាពជាបន្តបន្ទាប់ ដើម្បីស្វែងរក និងតាមដាននិន្នាការជំងឺ។"
+        },
+        "health_systems": {
+          "term": "ការពង្រឹងប្រព័ន្ធសុខភាព",
+          "definition": "ការកែលម្អកម្លាំងពលកម្ម ហិរញ្ញប្បទាន ភស្តុភារ និងអភិបាលកិច្ចសម្រាប់ការផ្តល់សេវាថែទាំសុខភាពដែលអាចទុកចិត្តបាន។"
+        },
+        "transnational_crime": {
+          "term": "ឧក្រិដ្ឋកម្ម​ឆ្លង​ដែន",
+          "definition": "សកម្មភាពឧក្រិដ្ឋកម្មសម្របសម្រួលឆ្លងព្រំដែនតាមរយៈបណ្តាញ និងទីផ្សារខុសច្បាប់។"
+        },
+        "illicit_trafficking": {
+          "term": "ការជួញដូរខុសច្បាប់",
+          "definition": "ចលនាខុសច្បាប់នៃគ្រឿងញៀន អាវុធ មនុស្ស ឬទំនិញនៅទូទាំងដែនសមត្ថកិច្ច។"
+        },
+        "rule_of_law_capacity": {
+          "term": "សមត្ថភាពនីតិរដ្ឋ",
+          "definition": "សមត្ថភាពស្ថាប័ននៃប្រព័ន្ធយុត្តិធម៌ក្នុងការស៊ើបអង្កេត កាត់ទោស និងការពារសិទ្ធិដោយយុត្តិធម៌។"
+        },
+        "sustainable_development": {
+          "term": "ការអភិវឌ្ឍន៍ប្រកបដោយនិរន្តរភាព",
+          "definition": "គំរូកំណើន តុល្យភាពវឌ្ឍនភាពសង្គម ឱកាសសេដ្ឋកិច្ច និងការការពារបរិស្ថាន។"
+        },
+        "financing_for_development": {
+          "term": "ហិរញ្ញប្បទានសម្រាប់ការអភិវឌ្ឍន៍",
+          "definition": "យន្តការផ្តល់ហិរញ្ញប្បទានសាធារណៈ និងឯកជន ដែលគាំទ្រដល់អាទិភាពអភិវឌ្ឍន៍រយៈពេលវែង។"
+        },
+        "policy_coordination": {
+          "term": "ការសម្របសម្រួលគោលនយោបាយ",
+          "definition": "ការតម្រឹមសកម្មភាពរបស់រដ្ឋ និងភ្នាក់ងារ ដើម្បីជៀសវាងការចម្លង និងបង្កើនឥទ្ធិពលរួម។"
+        },
+        "child_protection": {
+          "term": "ការការពារកុមារ",
+          "definition": "វិធានការទប់ស្កាត់ការកេងប្រវ័ញ្ច ការរំលោភបំពាន និងអំពើហិង្សាលើកុមារនៅគ្រប់ស្ថានភាពទាំងអស់។"
+        },
+        "education_access": {
+          "term": "ការចូលប្រើការអប់រំ",
+          "definition": "ធានាបាននូវឱកាសសិក្សាដែលរួមបញ្ចូល សមធម៌ និងបន្តសម្រាប់កុមារទាំងអស់។"
+        },
+        "humanitarian_response": {
+          "term": "ការឆ្លើយតបមនុស្សធម៌",
+          "definition": "សកម្មភាពសង្គ្រោះរហ័សដែលដោះស្រាយតម្រូវការបន្ទាន់ក្នុងវិបត្តិ និងការកំណត់ជម្លោះ។"
+        },
+        "gender_mainstreaming": {
+          "term": "ការបញ្ជ្រាបយេនឌ័រ",
+          "definition": "ការរួមបញ្ចូលការវិភាគយេនឌ័រទៅក្នុងការរចនាគោលនយោបាយ ការអនុវត្ត និងការវាយតម្លៃ។"
+        },
+        "gender_based_violence": {
+          "term": "អំពើហឹង្សាផ្អែកលើយេនឌ័រ",
+          "definition": "គ្រោះថ្នាក់សំដៅទៅលើនរណាម្នាក់ដោយផ្អែកលើអត្តសញ្ញាណយេនឌ័រ តួនាទី ឬទំនាក់ទំនងអំណាចមិនស្មើគ្នា។"
+        },
+        "economic_empowerment": {
+          "term": "ការពង្រឹងសេដ្ឋកិច្ច",
+          "definition": "ពង្រីកលទ្ធភាពទទួលបានការងារសមរម្យ ហិរញ្ញវត្ថុ ភាពជាម្ចាស់ និងអំណាចធ្វើការសម្រេចចិត្ត។"
+        },
+        "source_attribution": {
+          "term": "ប្រភពគុណលក្ខណៈ",
+          "definition": "ការដកស្រង់ប្រភពព័ត៌មានយ៉ាងច្បាស់ ដូច្នេះការទាមទារអាចត្រូវបានផ្ទៀងផ្ទាត់ និងបរិបទ។"
+        },
+        "verified_reporting": {
+          "term": "របាយការណ៍ដែលបានផ្ទៀងផ្ទាត់",
+          "definition": "ស្ដង់ដារ​សារព័ត៌មាន​ដែល​តម្រូវ​ឱ្យ​មាន​ការ​បញ្ជាក់​មុន​ពេល​បោះ​ពុម្ព​ផ្សាយ​ការពិត​ដែល​មាន​ការ​ប្រកួតប្រជែង។"
+        },
+        "editorial_independence": {
+          "term": "ឯករាជភាពនៃវិចារណកថា",
+          "definition": "ការបំបែករបាយការណ៍សេចក្តីសម្រេចចេញពីសម្ពាធនយោបាយ ឬឥទ្ធិពលរបស់ភាគីពាក់ព័ន្ធ។"
+        },
+        "climate_mitigation": {
+          "term": "ការកាត់បន្ថយអាកាសធាតុ",
+          "definition": "សកម្មភាពដែលកាត់បន្ថយការបំភាយឧស្ម័នផ្ទះកញ្ចក់ ឬបង្កើនការដកកាបូនចេញក្នុងរយៈពេលយូរ។"
+        },
+        "climate_adaptation": {
+          "term": "ការបន្សាំអាកាសធាតុ",
+          "definition": "គោលនយោបាយ និងការវិនិយោគដែលកាត់បន្ថយភាពងាយរងគ្រោះចំពោះផលប៉ះពាល់ទាក់ទងនឹងអាកាសធាតុ។"
+        },
+        "cyber_norms": {
+          "term": "បទដ្ឋានតាមអ៊ីនធឺណិត",
+          "definition": "ចែករំលែកការរំពឹងទុកសម្រាប់ឥរិយាបថរដ្ឋដែលមានការទទួលខុសត្រូវនៅក្នុងដែនឌីជីថល និងអ៊ីនធឺណិត។"
+        },
+        "critical_infrastructure": {
+          "term": "ហេដ្ឋារចនាសម្ព័ន្ធសំខាន់ៗ",
+          "definition": "ប្រព័ន្ធសំខាន់ៗដូចជា ថាមពល ទឹក សុខភាព និងទំនាក់ទំនងដែលទាមទារភាពធន់។"
+        },
+        "epidemiology": {
+          "term": "រោគរាតត្បាត",
+          "definition": "ការសិក្សាអំពីគំរូជំងឺ មូលហេតុ និងការចែកចាយក្នុងចំនួនប្រជាជន។"
+        },
+        "preparedness_response": {
+          "term": "ការត្រៀមខ្លួននិងការឆ្លើយតប",
+          "definition": "ការធ្វើផែនការ ការសម្របសម្រួល និងសកម្មភាពកើនឡើង ដើម្បីទប់ស្កាត់ និងគ្រប់គ្រងគ្រោះអាសន្ន។"
+        },
+        "non_refoulement": {
+          "term": "ការមិនបំពេញបន្ថែម",
+          "definition": "គោលការណ៍ហាមឃាត់ការបញ្ជូនមនុស្សត្រឡប់ទៅកន្លែងដែលពួកគេប្រឈមមុខនឹងគ្រោះថ្នាក់ធ្ងន់ធ្ងរ។"
+        },
+        "durable_solutions": {
+          "term": "ដំណោះស្រាយជាប់លាប់",
+          "definition": "លទ្ធផលរយៈពេលវែងសម្រាប់ជនភៀសខ្លួន៖ ការវិលត្រឡប់ សមាហរណកម្មមូលដ្ឋាន ឬការតាំងលំនៅថ្មី។"
+        },
+        "nuclear_safeguards": {
+          "term": "ការការពារនុយក្លេអ៊ែរ",
+          "definition": "វិធានការផ្ទៀងផ្ទាត់ដែលធានាថា សម្ភារៈនុយក្លេអ៊ែរមិនត្រូវបានបង្វែរសម្រាប់ការប្រើប្រាស់អាវុធ។"
+        },
+        "counter_terrorism": {
+          "term": "ការប្រឆាំងភេរវកម្ម",
+          "definition": "វិធានការផ្លូវច្បាប់ ការការពារ និងសន្តិសុខរួមបញ្ចូលគ្នាប្រឆាំងនឹងសកម្មភាពភេរវករ។"
+        },
+        "due_process": {
+          "term": "ដំណើរការកំណត់",
+          "definition": "នីតិវិធីច្បាប់ត្រឹមត្រូវ ការពារសិទ្ធិក្នុងអំឡុងពេលស៊ើបអង្កេត ការកាត់ទោស និងការដាក់ទណ្ឌកម្ម។"
+        },
+        "resource_security": {
+          "term": "សុវត្ថិភាពធនធាន",
+          "definition": "លទ្ធភាពទទួលបានអាហារ ទឹក និងថាមពលដែលអាចទុកចិត្តបានក្រោមភាពតានតឹងផ្នែកសេដ្ឋកិច្ច និងបរិស្ថាន។"
+        },
+        "resilience": {
+          "term": "ភាពធន់",
+          "definition": "សមត្ថភាពសហគមន៍ និងស្ថាប័នដើម្បីស្រូបយកភាពតក់ស្លុត និងស្តារឡើងវិញប្រកបដោយប្រសិទ្ធភាព។"
+        }
+      },
+      "topicLine": "ប្រធានបទ៖ {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "កែសម្រួលគំនិត",
+    "googleDocsUrl": "URL ឯកសារ Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "អត្ថបទគំនិតខ្លី (ជាជម្រើស)",
+    "save": "រក្សាទុក",
+    "cancel": "បោះបង់",
+    "addIntro": "បន្ថែម Google Doc ដើម្បីពង្រាងគំនិតដំណោះស្រាយនៅនឹងកន្លែង ឬវាយកំណត់ត្រាខ្លី (ឬទាំងពីរ)។",
+    "googleDocsCreateHelp": "Google Doc ថ្មីបើកនៅក្នុងផ្ទាំងមួយផ្សេងទៀត។ បិទភ្ជាប់តំណនៅទីនេះបន្ទាប់ពីវាត្រូវបានបង្កើត។",
+    "resolutionIdeaPlaceholder": "គំនិត​ដំណោះស្រាយ...",
+    "add": "បន្ថែម",
+    "noIdeasYet": "មិនទាន់មានគំនិតនៅឡើយ។",
+    "ideaLabel": "គំនិត",
+    "ideaFallback": "គំនិត {number}",
+    "linkedDoc": "ឯកសារភ្ជាប់",
+    "addedOn": "បានបន្ថែម {date}",
+    "edit": "កែសម្រួល",
+    "delete": "លុប",
+    "ideaDocument": "ឯកសារគំនិត",
+    "summary": "សង្ខេប",
+    "emptyIdea": "គំនិតទទេ។"
+  },
+  "stances": {
+    "heatmapTitle": "ទិដ្ឋភាពទូទៅនៃជំហរសង្ខេប (ផែនទីកំដៅ)",
+    "heatmapHelp": "តើការបែងចែករបស់អ្នកគាំទ្រដល់កម្រិតណា ___? (ខ្នាត ១-៥)",
+    "topicPlaceholder": "ឧ. សកម្មភាពអាកាសធាតុ",
+    "extentLabel": "វិសាលភាព (1-5):",
+    "extentHelpTitle": "វិសាលភាព (1-5)",
+    "extentHelpBody": "1 មានន័យថាការបែងចែករបស់អ្នកមានការគាំទ្រតិចតួចសម្រាប់ប្រធានបទ ហើយ 5 មានន័យថាការគាំទ្រខ្លាំង។ ជ្រើសរើសលេខដែលត្រូវនឹងជំហររបស់អ្នកនៅក្នុងគណៈកម្មាធិការ។",
+    "add": "បន្ថែម",
+    "viewOnlyHeatmap": "មើលតែផែនទីកំដៅសម្រាប់បុគ្គលិក។",
+    "notesPerAllocation": "កំណត់ចំណាំសម្រាប់ការបែងចែក",
+    "noAllocationsYet": "មិនទាន់មានការបែងចែកនៅឡើយទេ",
+    "notesPlaceholder": "កំណត់​ហេតុ​សម្រាប់​ការ​បែងចែក​នេះ...",
+    "noteLanguageWarning": "ការព្រមានរបស់អ្នកអាន៖ កំណត់សម្គាល់នេះអាចមានភាសាមិនសមរម្យ។",
+    "save": "រក្សាទុក",
+    "saveHelpTitle": "រក្សាទុកកំណត់ចំណាំ",
+    "saveHelpBody": "រក្សាទុកកំណត់ចំណាំសម្រាប់ការបែងចែកនេះ។ វាអាចត្រូវបានមើលដោយបុគ្គលិក និង (អាស្រ័យលើការកំណត់របស់គណៈកម្មាធិការ) អ្នកចូលរួមផ្សេងទៀត។"
+  },
+  "speeches": {
+    "newSpeech": "សុន្ទរកថាថ្មី។",
+    "speechTitlePlaceholder": "ចំណងជើងសុន្ទរកថា",
+    "googleDocsUrl": "URL ឯកសារ Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "បើក Google នៅក្នុងផ្ទាំងថ្មី; បិទភ្ជាប់ URL ឯកសារនៅទីនេះនៅពេលរួចរាល់។",
+    "plainTextOptional": "សេចក្តីព្រាងអត្ថបទធម្មតា (ជាជម្រើស ប្រសិនបើអ្នកប្រើ Google Doc)",
+    "save": "រក្សាទុក",
+    "cancel": "បោះបង់",
+    "noSpeechesYet": "មិនទាន់មានសុន្ទរកថានៅឡើយ។ ភ្ជាប់ Google Doc ឬបិទភ្ជាប់អត្ថបទ។",
+    "speechLabel": "សុន្ទរកថា",
+    "untitled": "គ្មានចំណងជើង",
+    "edit": "កែសម្រួល",
+    "speechDocument": "ឯកសារសុន្ទរកថា",
+    "draftText": "អត្ថបទព្រាង",
+    "noContentHint": "ភ្ជាប់ Google Doc ជាមួយនឹងការកែសម្រួល ឬបន្ថែមអត្ថបទធម្មតាក្នុងទម្រង់។"
+  },
+  "committeeRoom": {
+    "committeeLabel": "គណៈកម្មាធិការ",
+    "yourContext": "បរិបទរបស់អ្នក។",
+    "roleLabel": "តួនាទី",
+    "seatLabel": "កៅអី",
+    "clearSearchTitle": "សម្អាតការស្វែងរក និងបង្ហាញគណៈប្រតិភូទាំងអស់។",
+    "vacantLabel": "ទំនេរ",
+    "assignedLabel": "ចាត់តាំង",
+    "daisLabel": "ដាស",
+    "phaseLabel": "ដំណាក់កាល",
+    "phaseVoting": "ការបោះឆ្នោត",
+    "phaseDebate": "ការជជែកវែកញែក",
+    "focusSearchTitle": "ការស្វែងរកផ្តោតអារម្មណ៍ (ចំណងជើង និងឈ្មោះរបស់ Dais ត្រូវនឹងសំណួររបស់អ្នក)",
+    "tipLabel": "ព័ត៌មានជំនួយ",
+    "searchVacantTitle": "ស្វែងរកកៅអី \"ទំនេរ\" នៅក្នុងបន្ទប់",
+    "searchHint": "វាយបញ្ចូលប្រទេស ឈ្មោះអ្នកតំណាង សាលារៀន សព្វនាម ឬ \"ទំនេរ\" ដើម្បីរំលេចការប្រកួតនៅក្នុងបន្ទប់។ ចុច Enter ដើម្បីលោតទៅការប្រកួតដំបូង; Esc ជម្រះ។ ចុច Vacant ដើម្បីលោតទៅកន្លែងទំនេរ។",
+    "findLabel": "ស្វែងរកគណៈប្រតិភូ ឬសមាជិក dais",
+    "searchPlaceholder": "ប្រទេស ឈ្មោះ សាលា...",
+    "matchesCount": "{matches} នៃ {total} កៅអីត្រូវគ្នា។",
+    "enterScrolls": "បញ្ចូលរមូរ",
+    "typeToFilterHint": "វាយបញ្ចូលដើម្បីត្រង - បញ្ចូលរមូរទៅការប្រកួតដំបូង",
+    "noMatches": "មិនមានគណៈប្រតិភូដែលត្រូវគ្នា ឬកៅអី Dais ។",
+    "digitalDisplay": "ការបង្ហាញឌីជីថល",
+    "floorLabel": "ជាន់",
+    "staffSeatsHeading": "បុគ្គលិក - កៅអី",
+    "searchAria": "ស្វែងរកគណៈប្រតិភូ",
+    "virtualRoomVacant": "ទំនេរ",
+    "profileAria": "មើលប្រវត្តិរូប៖ {country}",
+    "vacantSeatAria": "កៅអីទំនេរ",
+    "placardAria": "ផ្លាកសញ្ញា {country}",
+    "gavelAria": "ហ្កាវេល។",
+    "viewProfileAria": "មើលប្រវត្តិរូប៖ {title}",
+    "noProfileLinkAria": "{title} (គ្មានតំណកម្រងព័ត៌មាន)",
+    "committeeFloor": "ជាន់គណៈកម្មាធិការ",
+    "virtualRoomFigureAria": "បន្ទប់គណៈកម្មាធិនិម្មិត - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "ត្រងគណៈប្រតិភូ។ កៅអី​ដែល​បាន​រំលេច​ជា​លើក​ដំបូង​គឺ​ជា​ការ​ប្រកួត​លើក​ដំបូង​នៅ​លើ​សង្វៀន។",
+    "helperText": "ប្លាកែតរាយបញ្ជីប្រទេស (ពីការបែងចែក) ឈ្មោះ សាលារៀន និងសព្វនាមពីប្រវត្តិរូបរបស់ប្រតិភូនីមួយៗ។ កែសម្រួលរបស់អ្នកនៅក្រោម Profile ។ អាសនៈ​គណៈកម្មាធិការ​ទទេ​បង្ហាញ​ថា​ទំនេរ។ ចុចផ្ទាំងបដាដែលបំពេញ ឬកៅអី dais ដើម្បីបើកទំព័ររបស់សមាជិកនោះ (ជជែក និងរាយការណ៍ពីទីនោះ)។",
+    "virtualRoomCaption": "បន្ទប់គណៈកម្មាធិគំរូនិម្មិតរបស់អង្គការសហប្រជាជាតិដែលមានបដាតំណាងដែលបង្ហាញពីប្រទេស ឈ្មោះ សាលារៀន និងសព្វនាម។"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "ស្នើសុំនិយាយ",
+      "delegateFallback": "ប្រតិភូ",
+      "needAllocation": "អ្នកត្រូវការការបែងចែកដើម្បីស្នើសុំនិយាយ។",
+      "alreadyQueued": "អ្នកមានសំណើនិយាយសកម្មនៅក្នុងជួររួចហើយ។",
+      "requested": "បានស្នើឱ្យនិយាយ។ អ្នកនឹងបង្ហាញនៅក្នុងជួរ។",
+      "requestFailed": "បរាជ័យក្នុងការស្នើសុំនិយាយ។",
+      "helpBody": "បញ្ជូនគណៈប្រតិភូរបស់អ្នកទៅកាន់ជួរកៅអី។ អ្នកអាចមានការរង់ចាំសកម្មមួយ/ការស្នើសុំបច្ចុប្បន្នក្នុងពេលតែមួយ។",
+      "purposeLabel": "គោលបំណងស្រេចចិត្ត (បង្ហាញក្នុងស្លាកជួរ)",
+      "purposeHelpTitle": "ស្លាកគោលបំណង",
+      "purposeHelpBody": "អត្ថបទនេះត្រូវបានបន្ថែមទៅឈ្មោះប្រទេសរបស់អ្នក ដូច្នេះកៅអីអាចដឹងពីមូលហេតុដែលអ្នកកំពុងស្នើសុំជាន់។",
+      "purposePlaceholder": "ឧ. ការគាំទ្រ + ទិដ្ឋភាពទូទៅនៃវិសោធនកម្ម",
+      "requesting": "កំពុងស្នើសុំ...",
+      "rollPromptTitle": "តម្រូវឱ្យមានការយល់ព្រមពីប្រធាន",
+      "rollPromptBodyPickStatus": "វគ្គបានចាប់ផ្តើមហើយ។ ជ្រើសរើសស្ថានភាពវិលជុំរបស់អ្នក ដើម្បីដោះសោការនិយាយ និងការបោះឆ្នោត។ ជម្រើសនេះមិនអាចផ្លាស់ប្តូរបានទេ។",
+      "rollPromptBodyWaitSessionStart": "រង់ចាំប្រធានដើម្បីចាប់ផ្តើមសម័យប្រជុំគណៈកម្មាធិការ។",
+      "rollPromptBodyWaitRollPrompt": "កំពុង​រង់ចាំ​ការ​ជំរុញ​ការ​ហៅ​ទូរសព្ទ។",
+      "rollPromptBodyMarkedAbsent": "បច្ចុប្បន្នអ្នកត្រូវបានសម្គាល់ថាអវត្តមាន។ សុំឱ្យកៅអីសម្គាល់អ្នកធ្វើបទបង្ហាញ ដើម្បីនិយាយ និងបោះឆ្នោត។",
+      "rollPromptBodyChecking": "កំពុងពិនិត្យមើលស្ថានភាពវិលរបស់អ្នក...",
+      "rollPromptSaving": "កំពុងរក្សាទុក...",
+      "rollPromptPresent": "បច្ចុប្បន្ន",
+      "rollPromptPresentVoting": "វត្តមាន និងការបោះឆ្នោត"
+    },
+    "motionVoting": {
+      "votingProcedure": "នីតិវិធីបោះឆ្នោត",
+      "currentMotion": "ចលនាបច្ចុប្បន្ន",
+      "motioner": "អ្នកធ្វើចលនា",
+      "majority": "ភាគច្រើន",
+      "majoritySimple": "សាមញ្ញ",
+      "tally": "បាទ/ចាស {yes} - ទេ {no} - សរុប {total}",
+      "help": "Dais កត់ត្រាការបោះឆ្នោតរបស់គណៈប្រតិភូនីមួយៗនៅក្នុងសម័យប្រជុំ។ ការ​បោះ​ឆ្នោត​ប្រើ​តែ​បាទ ឬ​ទេ (មិន​អនុប្បវាទ)។ សរុបរាប់តែផ្ទាំងបដាដែលបាទ ឬទេត្រូវបានកត់ត្រាទុក។ គណៈប្រតិភូអវត្តមានត្រូវបានរំលង។"
+    },
+    "activeMotion": {
+      "currentMotion": "ចលនាបច្ចុប្បន្ន",
+      "motionFallback": "ចលនា",
+      "motioner": "អ្នកធ្វើចលនា",
+      "majority": "ភាគច្រើន",
+      "majoritySimple": "សាមញ្ញ",
+      "type": "ប្រភេទ",
+      "timer": "កម្មវិធីកំណត់ម៉ោង",
+      "currentSpeaker": "វាគ្មិនបច្ចុប្បន្ន",
+      "nextSpeaker": "វាគ្មិនបន្ទាប់",
+      "speakerTimeLeftCap": "ម៉ោង​របស់​វាគ្មិន (ឆ្វេង / មួក)",
+      "speakerTimeLeftTotal": "ម៉ោង​អ្នក​និយាយ (ឆ្វេង / សរុប)",
+      "perSpeaker": "(សម្រាប់វាគ្មិន)",
+      "paused": "(ផ្អាក)",
+      "pauseReason": "ផ្អាក៖ {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "សម័យប្រជុំ",
+      "sessionNotStarted": "វគ្គមិនបានចាប់ផ្តើមទេ។",
+      "limit": "ដែនកំណត់",
+      "limitRemaining": "{value} ឆ្វេង",
+      "limitOverBy": "លើសដោយ {value}",
+      "quickLinkSession": "សម័យ",
+      "quickLinkRoll": "រមៀល",
+      "quickLinkSpeakers": "វាគ្មិន",
+      "quickLinkMotions": "ចលនា",
+      "quickLinkTimer": "កម្មវិធីកំណត់ម៉ោង",
+      "dais": "ដាស",
+      "pinned": "ខ្ទាស់",
+      "viewFullAnnouncement": "មើលសេចក្តីប្រកាសទាំងស្រុង",
+      "timerPausesReadOnly": "កម្មវិធីកំណត់ម៉ោងផ្អាក (បានតែអាន)",
+      "speakerList": "បញ្ជីអ្នកនិយាយ",
+      "speakerFallback": "វាគ្មិន",
+      "rollCallYou": "ហៅទូរស័ព្ទ (អ្នក)",
+      "fullAnnouncement": "សេចក្តីប្រកាសពេញលេញ",
+      "daisAnnouncement": "សេចក្តីប្រកាសរបស់ Dais",
+      "close": "បិទ",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "ឈ្មោះវគ្គ",
+      "sessionNamePlaceholder": "ឧ. វគ្គព្រឹក",
+      "sessionNameSaving": "កំពុងរក្សាទុក...",
+      "sessionNameSaved": "បានរក្សាទុក",
+      "sessionNameHint": "រក្សាទុកដោយស្វ័យប្រវត្តិ ហើយបង្ហាញក្នុងប្រវត្តិសម័យ។",
+      "title": "សម័យប្រជុំគណៈកម្មាធិការ",
+      "subtitle": "ចាប់ផ្តើម ឬបញ្ឈប់សម័យប្រជុំរបស់គណៈកម្មាធិការ។",
+      "helpStartStop": "ចាប់ផ្តើម ចាប់ផ្តើមកម្មវិធីកំណត់ម៉ោងវគ្គ/ស្ថានភាពរបស់គណៈកម្មាធិការបន្តផ្ទាល់សម្រាប់អ្នករាល់គ្នា។ បញ្ឈប់ បញ្ចប់វគ្គ និងសម្អាតដែនកំណត់ពេលវេលាបច្ចុប្បន្ន។",
+      "migrationUnavailable": "ការគ្រប់គ្រងសម័យគឺមិនមានជាបណ្តោះអាសន្នទេ រហូតដល់ការផ្ទេរទិន្នន័យចុងក្រោយបំផុតត្រូវបានអនុវត្ត។",
+      "endTimeInFuture": "ជ្រើសរើសពេលវេលាបញ្ចប់នាពេលអនាគត ឬប្តូរទៅគ្មានដែនកំណត់។",
+      "sessionStartUnavailable": "ការ​បោះត្រា​ពេល​ចាប់ផ្ដើម​សម័យ​គឺ​មិន​អាច​ប្រើ​បាន​រហូត​ដល់​ការ​ធ្វើ​ចំណាក​ស្រុក​ចុងក្រោយ​ត្រូវ​បាន​អនុវត្ត។",
+      "endTimeInFutureSetNoLimit": "ជ្រើសរើសពេលវេលាបញ្ចប់នាពេលអនាគត ឬកំណត់គ្មានដែនកំណត់។",
+      "sessionLimitUpdated": "បានធ្វើបច្ចុប្បន្នភាពដែនកំណត់នៃវគ្គ។",
+      "startedLabel": "បានចាប់ផ្តើម៖",
+      "timeInLabel": "ពេលវេលានៅក្នុង៖",
+      "timeUntilEndLabel": "ពេលវេលារហូតដល់ទីបញ្ចប់៖",
+      "overByValue": "លើសដោយ {value}",
+      "modeLabel": "របៀប៖",
+      "modeStopwatchNoLimit": "នាឡិកាបញ្ឈប់ (មិនកំណត់ពេលវេលា)",
+      "sessionNotRunning": "វគ្គមិនដំណើរការទេ។",
+      "sessionLimit": "ដែនកំណត់សម័យ",
+      "sessionLimitModesTitle": "របៀបកំណត់សម័យ",
+      "sessionLimitModesHelp": "គ្មាន៖ គ្មានទីបញ្ចប់។ ថវិកាពេលវេលា៖ រាប់ពីការចាប់ផ្តើម។ បញ្ចប់នៅម៉ោង៖ ម៉ោងកំណត់ម៉ោងក្នុងតំបន់របស់អ្នក។",
+      "sessionLimitOptional": "ស្រេចចិត្ត។",
+      "noneLabel": "គ្មាន",
+      "noneDescription": "រត់រហូតដល់អ្នកឈប់។",
+      "timeBudgetLabel": "ថវិកាពេលវេលា",
+      "timeBudgetDescription": "រាប់ចាប់ពីពេលដែលអ្នកចាប់ផ្តើម។",
+      "endTimeLabel": "ពេលវេលាបញ្ចប់",
+      "endTimeDescription": "ប្រើពេលវេលានាឡិកាថេរ (បដិសេធថវិកាប្រសិនបើទាំងពីរត្រូវបានកំណត់) ។",
+      "noneIndefinite": "គ្មាន (មិនកំណត់)",
+      "noneScheduledEndHint": "គ្មានការបញ្ចប់ដែលបានគ្រោងទុក; មានតែពេលវេលាដែលកន្លងផុតទៅត្រូវបានបង្ហាញ។",
+      "timeBudgetFromStart": "ថវិកាពេលវេលាពីការចាប់ផ្តើម",
+      "hoursLabel": "ម៉ោង",
+      "minutesLabel": "នាទី",
+      "minimumOneMinute": "(អប្បបរមា 1 នាទី)",
+      "endAtLocalTime": "បញ្ចប់នៅម៉ោង (ម៉ោងក្នុងស្រុក)",
+      "stopSession": "បញ្ឈប់វគ្គ",
+      "saveLimit": "រក្សាទុកដែនកំណត់",
+      "saveLimitHelp": "អនុវត្តការកំណត់ដែនកំណត់ដែលបានធ្វើបច្ចុប្បន្នភាព ខណៈពេលដែលវគ្គកំពុងដំណើរការរួចហើយ ដោយមិនបញ្ឈប់វគ្គនោះទេ។",
+      "startSession": "ចាប់ផ្តើមវគ្គ",
+      "sidebarUsePrefix": "ប្រើរបារចំហៀងសម្រាប់",
+      "rollCall": "ការហៅទូរស័ព្ទ",
+      "speakers": "វាគ្មិន",
+      "formalMotions": "ចលនាផ្លូវការ",
+      "timer": "កម្មវិធីកំណត់ម៉ោង",
+      "sidebarAnd": "និង",
+      "announcements": "សេចក្តីប្រកាស",
+      "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "ប្រវត្តិសម័យ",
+      "savedCount": "{count} រក្សាទុក",
+      "permissionsHint": "កៅអីអាចប្តូរឈ្មោះធាតុ។ SMT/Admin អាចប្តូរឈ្មោះ និងលុបធាតុ។",
+      "empty": "មិនទាន់មានប្រវត្តិសម័យទេ។",
+      "rename": "ប្តូរឈ្មោះ",
+      "delete": "លុប",
+      "deleteConfirm": "លុបវគ្គនេះចេញពីប្រវត្តិ?",
+      "sessionNamePrompt": "ឈ្មោះវគ្គ",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> កំពុងដំណើរការ"
+    },
+    "timerPage": {
+      "title": "កម្មវិធីកំណត់ម៉ោង",
+      "controlsTitle": "ការគ្រប់គ្រងកម្មវិធីកំណត់ម៉ោង",
+      "controlsHelp": "ប្រើជាន់ទូទៅសម្រាប់ពេលវេលាជជែកដេញដោលរួម ឬចលនាបោះឆ្នោតដើម្បីភ្ជាប់ភាពមើលឃើញទៅនឹងធាតុបោះឆ្នោតបើកចំហជាក់លាក់មួយ។",
+      "tabSetup": "1) ការដំឡើង",
+      "tabClock": "2) ការត្រួតពិនិត្យនាឡិកា",
+      "tabNotes": "3) សុន្ទរកថា",
+      "tabLog": "4) ផ្អាកកំណត់ហេតុ",
+      "setupHelp": "ជ្រើសរើសថាតើកម្មវិធីកំណត់ម៉ោងនេះគឺសម្រាប់ជាន់ទូទៅ (តែងតែអាចមើលឃើញដោយប្រតិភូ) ឬភ្ជាប់ទៅនឹងចលនាដែលបើកចំហសម្រាប់ការបោះឆ្នោត (ប្រតិភូឃើញវាខណៈពេលដែលការបោះឆ្នោតនោះជាធាតុសកម្ម)។ ជាមួយនឹងការបើកពេលវាគ្មិន នាឡិកានៅតែអាចមើលឃើញក្នុងអំឡុងពេលការប្រជុំពិភាក្សាកម្រិតមធ្យមដោយមិនគិតពីអ្វីនោះទេ។ ផ្អាកនាឡិកា / ចាប់ផ្តើមនាឡិកាបង្កក ឬបន្តការរាប់ថយក្រោយ។ កំណត់ម៉ោងវាគ្មិន (នៅសល់) និងម៉ោងសរុបដោយឯករាជ្យ បន្ទាប់មករក្សាទុកកម្មវិធីកំណត់ម៉ោង។ ការកំណត់ជាមុនបំពេញទាំងពីរទៅប្រវែងដូចគ្នា; អ្នកអាចកែសម្រួលវាលណាមួយនៅពេលក្រោយ។ ការផ្អាកត្រូវបានកត់ត្រាដោយមានហេតុផលខ្លី។",
+      "namedPreset": "កំណត់ឈ្មោះជាមុន",
+      "applyPreset": "អនុវត្តការកំណត់ជាមុន...",
+      "floorLabelDelegates": "ស្លាកជាន់ (តំណាង)",
+      "floorLabelPlaceholder": "ឧ. GSL 60s",
+      "timerPurpose": "គោលបំណងកម្មវិធីកំណត់ម៉ោង",
+      "purposeGeneralFloor": "ការពិភាក្សាទូទៅ / ជាន់ (មិនភ្ជាប់ទៅនឹងការបោះឆ្នោត)",
+      "purposeMotionVote": "ចលនាបើកចំហ - កម្មវិធីកំណត់ពេលតែនៅពេលដែលការបោះឆ្នោតនោះសកម្មនៅលើឥដ្ឋ",
+      "openMotionForVoting": "ចលនាបើកចំហ (ត្រូវតែបើកចំហសម្រាប់ការបោះឆ្នោត)",
+      "selectMotion": "ជ្រើសរើសចលនា...",
+      "untitled": "គ្មានចំណងជើង",
+      "noOpenMotionWarning": "គ្មាន​ចលនា​ណា​ត្រូវ​បើក​ឲ្យ​បោះឆ្នោត​ទេ។ បើកការបោះឆ្នោតជាមុន ឬប្តូរគោលបំណងទៅជាន់ទូទៅ។",
+      "clock": "នាឡិកា",
+      "running": "កំពុងរត់",
+      "paused": "ផ្អាក",
+      "saveToEnablePauseStart": "រក្សាទុកកម្មវិធីកំណត់ម៉ោងដើម្បីបើកការផ្អាក/ចាប់ផ្តើម។",
+      "pauseReasonLogged": "ផ្អាកហេតុផល (ចូល)",
+      "pauseReasonPlaceholder": "ឧ. ចំណុច​នៃ​ការ​បញ្ជា​ទិញ បញ្ហា​បច្ចេកវិទ្យា ការ​ប្រជុំ​ដែល​មិន​បាន​សម្របសម្រួល...",
+      "pauseClock": "ផ្អាកនាឡិកា",
+      "startClock": "នាឡិកាចាប់ផ្តើម",
+      "euTimerBoardTitle": "ក្រុមប្រឹក្សាកំណត់ពេលវេលារបស់សភាសហភាពអឺរ៉ុប (11 កម្មវិធីកំណត់ម៉ោង)",
+      "euTimerBoardHelp": "កម្មវិធីកំណត់ម៉ោងមួយក្នុងមួយភាគី បូកសរុបម៉ោង POI/POC និងម៉ោងវាគ្មិន។ ប្រើ Apply ដើម្បីចម្លងជួរដេកមួយទៅក្នុងវាលកម្មវិធីកំណត់ម៉ោងបន្តផ្ទាល់នៅលើផ្ទាំងនាឡិកា (ម៉ោងនិយាយ / រក្សាទុកកម្មវិធីកំណត់ម៉ោង)។",
+      "euTimerName": "ឈ្មោះ",
+      "euTimerTag": "ស្លាក",
+      "euTotalTime": "ពេលវេលាសរុប",
+      "euPoiPocTime": "ម៉ោង POI / POC",
+      "euSpeakerTime": "ម៉ោងអ្នកនិយាយ",
+      "perSpeakerTitle": "ពេល​មួយ​វាគ្មិន (ការ​ប្រជុំ​កម្រិត​មធ្យម)",
+      "perSpeakerHelp": "កំណត់ពេលវេលាសរុបជាមួកសម្រាប់ឧបករណ៍បំពងសំឡេង និងម៉ោងវាគ្មិនជាពេលវេលាដែលនៅសល់។ ជាមុនផ្លាស់ទីទៅឧបករណ៍បំពងសំឡេងបន្ទាប់ ហើយកំណត់ឡើងវិញដែលនៅសល់ទៅមួក។",
+      "currentSpeaker": "វាគ្មិនបច្ចុប្បន្ន",
+      "nextSpeaker": "វាគ្មិនបន្ទាប់",
+      "speechNotesCurrentSpeaker": "កំណត់ចំណាំការនិយាយ (អ្នកនិយាយបច្ចុប្បន្ន)",
+      "speechNotesHelp": "កំណត់ចំណាំត្រូវបានចងភ្ជាប់ជាមួយអត្ថបទកម្មវិធីកំណត់ពេលវាគ្មិនបច្ចុប្បន្ន ហើយនៅពេលដែលបញ្ជីអ្នកនិយាយមាននរណាម្នាក់សម្គាល់ថា បច្ចុប្បន្ន ប្រតិភូរបស់ពួកគេត្រូវបានរក្សាទុកសម្រាប់ជាឯកសារយោង។",
+      "timerFloorLabel": "កម្មវិធីកំណត់ម៉ោង (ជាន់):",
+      "speakerListCurrent": "បញ្ជីអ្នកនិយាយ (បច្ចុប្បន្ន)៖",
+      "noCurrentDelegation": "គ្មាន​គណៈប្រតិភូ​ត្រូវ​បាន​សម្គាល់​ថា បច្ចុប្បន្ន​នៅ​ក្នុង​បញ្ជី​អ្នក​និយាយ​ទេ។",
+      "note": "ចំណាំ",
+      "notePlaceholder": "ពិន្ទុ POIs សម្លេង តាមដាន...",
+      "saveSpeechNote": "រក្សាទុកសុន្ទរកថា",
+      "recentNotes": "កំណត់ចំណាំថ្មីៗរបស់អ្នក (គណៈកម្មាធិការនេះ)",
+      "delete": "លុប",
+      "speakerTimeRemaining": "ម៉ោងអ្នកនិយាយ (នៅសល់)",
+      "remainingHelpPerSpeaker": "ការរាប់ថយក្រោយសម្រាប់ឧបករណ៍បំពងសំឡេងបច្ចុប្បន្ន (កំណត់ឡើងវិញនៅពេលអ្នកទៅមុន)។",
+      "remainingHelpNormal": "ការរាប់ថយក្រោយសម្រាប់ឧបករណ៍បំពងសំឡេងបច្ចុប្បន្ន (អាចតិចជាងសរុប)។",
+      "totalTime": "ពេលវេលាសរុប",
+      "totalHelpPerSpeaker": "មួកសម្រាប់ឧបករណ៍បំពងសំឡេង (ភាគបែងនៅលើឥដ្ឋ ការបំពេញបន្ថែមជាមុនដែលនៅសល់ចំពោះវា)។",
+      "totalHelpNormal": "ប្រវែងពេញនៃផ្នែកកំណត់ម៉ោងនេះ (បង្ហាញបន្ទាប់ពីសញ្ញានៅលើឥដ្ឋ)។",
+      "saveTimer": "រក្សាទុកកម្មវិធីកំណត់ម៉ោង",
+      "advanceSpeakerReset": "ឧបករណ៍បំពងសំឡេងជាមុន និងកំណត់នាឡិកាឡើងវិញ",
+      "recentPauseLog": "កំណត់ហេតុផ្អាកថ្មីៗ",
+      "noPauseEvents": "មិនទាន់បានកត់ត្រាព្រឹត្តិការណ៍ផ្អាកសម្រាប់គណៈកម្មាធិការនេះនៅឡើយទេ។",
+      "openPauseLogHint": "បើក​កំណត់​ហេតុ​ផ្អាក​ដើម្បី​ពិនិត្យ​មើល​ហេតុផល​ផ្អាក​ដែល​បាន​កត់ត្រា​ទុក និង​ត្រា​ពេល​វេលា។",
+      "saved": "កម្មវិធីកំណត់ម៉ោងត្រូវបានរក្សាទុក។",
+      "savedCapped": "កម្មវិធីកំណត់ម៉ោងត្រូវបានរក្សាទុក។ ពេលវេលារបស់អ្នកនិយាយគឺវែងជាងសរុប។ គ្របដណ្តប់សរុប។",
+      "alreadyPaused": "កម្មវិធីកំណត់ម៉ោងត្រូវបានផ្អាករួចហើយ។",
+      "pausedForCommittee": "កម្មវិធីកំណត់ម៉ោងបានផ្អាកសម្រាប់គណៈកម្មាធិការ។",
+      "alreadyRunning": "កម្មវិធីកំណត់ម៉ោងកំពុងដំណើរការហើយ។",
+      "runningForCommittee": "កម្មវិធីកំណត់ម៉ោងដំណើរការសម្រាប់គណៈកម្មាធិការ។"
     }
   }
 }

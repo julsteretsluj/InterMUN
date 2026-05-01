@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Najpierw otwórz parkiet do składania oświadczeń.",
     "openMotionBlocksRecording": "Wniosek jest już poddany pod głosowanie. Zamknij je przed zapisaniem dalszych wypowiedzi.",
     "statedMotionRecorded": "Zarejestrowano wniosek zgłoszony (jeszcze nie otwarty do głosowania).",
-    "statedMotionRemoved": "Stwierdzony wniosek usunięty."
+    "statedMotionRemoved": "Stwierdzony wniosek usunięty.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• Dziennik punktów",
     "formalMotions": "Wnioski formalne",
     "timer": "Regulator czasowy",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase nie jest skonfigurowany",
@@ -835,7 +852,8 @@
       "archive": "Archiwum",
       "officialLinks": "Oficjalne linki",
       "roomCode": "Kod pokoju",
-      "settings": "Ustawienia"
+      "settings": "Ustawienia",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "Państwa członkowskie ONZ",
       "unSystem": "System ONZ (założyciele i członkowie)",
       "history": "Historia ONZ"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Dodaj źródło",
-      "sourceUrl": "Źródłowy adres URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (zalecane)",
-      "urlHelp": "Aby utworzyć nowy Dokument Google, użyj przycisku i wklej tutaj link do dokumentu.",
-      "titleOptional": "Tytuł (opcjonalnie)",
-      "saveChanges": "Zapisz zmiany",
-      "editSource": "Edytuj źródło",
-      "urlPlaceholderShort": "Dokument Google lub inny adres URL",
-      "empty": "Nie ma jeszcze żadnych źródeł. Dodaj link do Dokumentu Google, aby otworzyć go tutaj.",
-      "sourceLabel": "Źródło",
-      "openLink": "Otwórz łącze",
-      "embedHeading": "Dokument źródłowy",
-      "notGoogleDoc": "Ten adres URL nie jest Dokumentem Google. Użyj linku docs.google.com/document/d/…, aby osadzić i edytować tutaj; w przeciwnym razie otwórz powyższy link."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Delegaci nie mogą bezpośrednio przesyłać dokumentów przedstawiających stanowisko. Użyj innego typu dokumentu.",
-      "alertOnlyChairsPositionPaper": "Tylko przewodniczący/SMT/administrator mogą przesyłać dokumenty przedstawiające stanowisko.",
-      "alertOnlySmtChairReport": "Tylko SMT/administrator może przesyłać raporty przewodniczącego.",
-      "alertOnlySmtRop": "Tylko SMT/administrator może przesyłać dokumenty RoP.",
-      "alertOnlySmtAwardCriteria": "Tylko SMT/administrator może przesyłać dokumenty zawierające kryteria przyznania nagrody.",
-      "alertNeedContentOrUrl": "Dodaj lokalną treść tekstową lub adres URL Dokumentów Google.",
-      "confirmDelete": "Usunąć ten dokument?",
-      "delegatePrepTitle": "Przygotuj sekcję dokumentu",
-      "delegatePrepBody": "Możesz przesyłać, przeglądać i edytować własne <prep>dokumenty przygotowawcze</prep> bezpośrednio z tej strony.",
-      "positionPaperGuideTitle": "Ustaw prowadnicę papieru",
-      "positionPaperGuideBlurb": "Pobierz przewodnik zastępczy na czas przygotowywania ostatecznego pliku PDF.",
-      "downloadPlaceholderGuide": "Pobierz przewodnik zastępczy",
-      "addDocument": "Dodaj dokument",
-      "tabs": {
-        "ariaLabel": "Sekcje dokumentu",
-        "library": "Biblioteka",
-        "compose": "Komponować",
-        "composeHint": "Na tej karcie rozpocznij nowy dokument lub edytuj istniejącą wersję roboczą."
-      },
-      "newDocumentTitle": "Nowy dokument",
-      "editDocumentTitle": "Edytuj dokument",
-      "typeLabel": "Typ",
-      "types": {
-        "position_paper": "Stanowisko",
-        "chair_report": "Sprawozdanie przewodniczącego",
-        "rop": "RoP",
-        "award_criteria": "Kryteria przyznania nagrody",
-        "chair_notes": "Notatki na krześle",
-        "prep_doc": "Przygotuj dokument"
-      },
-      "delegatePositionPaperNote": "Dokumenty przedstawiające stanowisko są przesyłane przez przewodniczących wraz z informacją zwrotną.",
-      "delegateOwner": "Delegat właściciela",
-      "chairRecipient": "Odbiorca krzesła",
-      "titleLabel": "Tytuł",
-      "titlePlaceholder": "Tytuł dokumentu",
-      "googleDocsUrl": "Adres URL Dokumentów Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (umieść widok/edycję w aplikacji)",
-      "googleDocsHelp": "Użyj opcji Nowy dokument Google, aby otworzyć Google w nowej karcie, a następnie wklej tutaj link do dokumentu. Zwykły tekst poniżej jest opcjonalny. Każdy dokument wymaga tekstu lokalnego, linku do Dokumentu Google lub obu.",
-      "plainTextOptional": "Zwykły tekst (opcjonalnie)",
-      "plainTextPlaceholder": "Notatki lub projekt tekstu…",
-      "chairFeedbackLabel": "Informacje zwrotne od krzesła",
-      "chairFeedbackPlaceholder": "Opinia na temat stanowiska delegata…",
-      "empty": "Nie ma jeszcze dokumentów. Dodaj jeden lub połącz Dokument Google.",
-      "sidebarDocumentLabel": "Dokument",
-      "sections": {
-        "chairReports": "Sprawozdania przewodniczącego",
-        "rop": "RoP",
-        "awardCriteria": "Kryteria przyznania nagrody",
-        "prepDocuments": "Przygotuj dokumenty",
-        "chairNotes": "Notatki na krześle",
-        "otherDocuments": "Inne dokumenty"
-      },
-      "untitled": "Nieuprawny",
-      "linkedDocumentHeading": "Powiązany dokument",
-      "notesHeading": "Notatki",
-      "noGoogleDocYet": "Nie powiązano jeszcze żadnego Dokumentu Google. Użyj opcji Edytuj, aby dodać adres URL docs.google.com/document/d/….",
-      "chairFeedbackHeading": "Informacje zwrotne od krzesła",
-      "noFeedbackYet": "Nie dodano jeszcze żadnej opinii."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Najpierw wpisz adres e-mail delegata.",
-      "sentToDelegate": "Wysłano na adres {e-mail}.",
-      "newResolution": "Nowa uchwała",
-      "maxDraftResolutions": "Ta komisja ma już projekty uchwał: {count}.",
-      "googleDocLink": "Link do Dokumentu Google",
-      "googleDocUrlPlaceholder": "Adres URL Dokumentów Google (docs.google.com/document/d/… — używany do osadzania i edytowania)",
-      "googleDocUrlHelp": "Nowy Dokument Google otwiera się w innej karcie; skopiuj adres URL z paska adresu i wklej go tutaj.",
-      "mainSubmittersPlaceholder": "Główni przesyłający (identyfikatory użytkowników, rozdzielone przecinkami)",
-      "coSubmittersPlaceholder": "Współdostawcy (identyfikatory użytkowników, rozdzielone przecinkami)",
-      "create": "Tworzyć",
-      "cancel": "Anulować",
-      "openInNewTab": "Otwórz w nowej karcie",
-      "noGoogleDocLink": "Brak linku do Dokumentu Google",
-      "visibleToOtherBloc": "Widoczne dla innego bloku",
-      "resolutionCounts": "Główne subskrypcje: {main} | Współsubskrybenci: {co} | Sygnatariusze: {sygnatariusze}",
-      "blocButton": "Blok {nazwa} ({stancja})",
-      "signVirtually": "Podpisz wirtualnie (powiadomienia głównych subskrybentów)",
-      "shareByEmail": "Udostępnij uchwałę e-mailem",
-      "delegateEmailPlaceholder": "delegat@email.com",
-      "sendToDelegate": "Wyślij do delegata",
-      "clauseEditor": "Edytor klauzul",
-      "noClausesYet": "Nie ma jeszcze żadnych klauzul.",
-      "clauseNumber": "Klauzula {numer}",
-      "saveClause": "Zapisz klauzulę",
-      "delete": "Usuwać",
-      "addClausePlaceholder": "Dodaj nową klauzulę...",
-      "addClause": "Dodaj klauzulę",
-      "clauseVoteHistory": "Historia głosowania klauzuli",
-      "noClauseOutcomesYet": "Nie zarejestrowano jeszcze wyników głosowania w sprawie klauzuli.",
-      "clauseFallback": "Klauzula",
-      "passed": "PRZESZEDŁ",
-      "failed": "PRZEGRANY",
-      "motionId": "Ruch"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Sekcje głosowania",
-        "open": "Otwarte",
-        "closed": "Zamknięte"
-      },
-      "requiredMajority": "Wymagana większość",
-      "helpRequiredMajorityTitle": "Wymagana większość",
-      "helpRequiredMajorityBody": "Wybierz próg głosowania używany do podjęcia decyzji o zaliczeniu/odrzuceniu. „Proste” to więcej niż połowa. „2/3” wymaga większości.",
-      "majoritySimple": "Prosty",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} większość",
-      "mustVote": "MUSI głosować",
-      "helpMustVoteTitle": "MUSI głosować",
-      "helpMustVoteBody": "Oznacza ten wniosek jako element wymagający głosowania. Służy do komunikowania wymagań uczestnikom (w zależności od konfiguracji komisji).",
-      "saveSettings": "Zapisz ustawienia",
-      "delegateBlurb": "Na podwyższeniu rejestrowane są głosy na sesji (np. imienne). W tym przypadku głosowanie nad wnioskiem następuje wyłącznie w trybie „tak/nie” (wstrzymanie się nie jest stosowane). Możesz śledzić wynik; delegaci nie głosują w aplikacji.",
-      "yes": "Tak",
-      "no": "NIE",
-      "ballots": "Karty do głosowania",
-      "total": "Całkowity",
-      "outcome": "Wynik",
-      "passed": "Przeszedł",
-      "failed": "Przegrany",
-      "noRecordedVotes": "Brak zarejestrowanych głosów",
-      "reopenMotion": "Otwórz ponownie ruch",
-      "editRecordOpen": "Edytuj rekord…",
-      "hideSettings": "Ukryj ustawienia",
-      "preliminaryPassing": "Podanie (wstępne)",
-      "preliminaryFailing": "Niepowodzenie (wstępne)",
-      "delegateRollCall": "Delegat apelowy ({count})",
-      "noSeatedDelegates": "Brak dostępnych delegatów na miejscu dla tego wniosku.",
-      "rollPrefix": "Rolka:",
-      "recordedPrefix": "Nagrany:",
-      "recordedYes": "Tak",
-      "recordedNo": "NIE",
-      "recordedAbstain": "Wstrzymać się",
-      "recordedNone": "—",
-      "abstain": "Wstrzymać się",
-      "clear": "Jasne",
-      "closeMotion": "Zamknij ruch",
-      "mustVoteBadge": "MUSI głosować",
-      "canVoteBadge": "MOŻE głosować",
-      "noMotions": "Nie ma jeszcze żadnych wniosków.",
-      "currentOpenMotion": "Bieżący ruch otwarty",
-      "noOpenMotion": "W tej chwili nie ma otwartego ruchu.",
-      "recentClosedMotions": "Ostatnie zamknięte wnioski",
-      "noClosedMotions": "Nie ma jeszcze żadnych zamkniętych wniosków.",
-      "untitled": "Nieuprawny",
-      "voteTypes": {
-        "motion": "Ruch",
-        "amendment": "Poprawka",
-        "resolution": "Rezolucja"
-      },
-      "roll": {
-        "absent": "Nieobecny (rolka)",
-        "present_abstain": "Obecny — może wstrzymać się od głosu (roll)",
-        "present_voting": "Obecność i głosowanie (rolka)",
-        "unknown": "- (rolka)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Sekcje profilu",
-        "overview": "Przegląd",
-        "awards": "Nagrody",
-        "private": "Zapisy prywatne",
-        "settings": "Ustawienia profilu"
-      },
-      "profilePicture": "Zdjęcie profilowe",
-      "uploadFile": "Prześlij plik",
-      "uploading": "Przesyłanie…",
-      "photoSaved": "Zdjęcie przesłane i zapisane.",
-      "orUrl": "Lub ustaw według adresu URL",
-      "urlPlaceholder": "https://...",
-      "name": "Nazwa",
-      "username": "Nazwa użytkownika",
-      "usernamePlaceholder": "np. alex_1999",
-      "pronouns": "Zaimki",
-      "customPronounNote": "Twój profil zawierał niestandardowy zestaw zaimków, który nie jest już tutaj akceptowany. Wybierz opcję powyżej (lub pozostaw pustą). Zapisanie zastępuje starą wartość.",
-      "school": "Szkoła",
-      "schoolPlaceholder": "np. Szkoła średnia Lincolna",
-      "grade": "Stopień",
-      "selectGrade": "Wybierz ocenę",
-      "conferencesAttended": "Konferencje, w których uczestniczyło",
-      "awardsComma": "Nagrody (oddzielone przecinkami)",
-      "awardsPlaceholder": "Najlepszy Delegat, Wyróżnienie",
-      "allocation": "Przydział",
-      "selectAllocation": "Wybierz alokację",
-      "noAllocationsPlaceholder": "Brak dostępnych przydziałów dla komisji",
-      "saveProfile": "Zapisz profil",
-      "saved": "Profil został zapisany.",
-      "saveFailed": "Nie udało się zapisać profilu.",
-      "errUsernamePattern": "Nazwa użytkownika musi zawierać od 3 do 32 znaków (litery, cyfry, _, ., -)",
-      "errPronounsPreset": "Wybierz zaimek z listy.",
-      "errImageType": "Proszę wybrać plik obrazu.",
-      "errImageSize": "Obraz jest za duży (maks. 5 MB).",
-      "errUploadFailed": "Przesyłanie nie powiodło się.",
-      "errStorageSetup": "Przechowywanie zdjęć profilowych nie jest skonfigurowane. W projekcie Supabase uruchom migrację 00100_profile_pictures_storage_bucket.sql lub utwórz wiadro pamięci publicznej o nazwie profile-pictures (patrz README).",
-      "errPublicUrl": "Nie można znaleźć publicznego adresu URL przesłanego obrazu.",
-      "fallbacks": {
-        "yourCountry": "twój kraj",
-        "committeeSession": "Posiedzenie komisji",
-        "delegate": "Delegat",
-        "speechNote": "Notatka z przemówienia",
-        "untitledMotion": "Ruch bez tytułu",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "Witamy delegata z {flag} {kraj}",
-        "subtitle": "Od czego chciałbyś zacząć?",
-        "links": {
-          "documents": "Dokumenty",
-          "notes": "Notatki",
-          "committeeRoom": "Pokój komisji",
-          "runningNotes": "Uruchamianie notatek",
-          "ideas": "Pomysły",
-          "guides": "Przewodniki",
-          "sources": "Źródła",
-          "resolutions": "Postanowienia",
-          "speeches": "Przemówienia",
-          "stances": "Postawy",
-          "crisisSlides": "Slajdy kryzysowe",
-          "report": "Raport",
-          "motions": "Ruchy",
-          "points": "Zwrotnica"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Nagrody na Twoim profilu",
-        "rank": "ranga",
-        "pending": {
-          "tab": "Oczekujące nominacje",
-          "title": "Oczekujące nominacje na przewodniczącego",
-          "descriptionSingle": "Zapisane przez krzesła i udostępnione SMT do przeglądu. Nagrody końcowe pojawią się poniżej po potwierdzeniu.",
-          "descriptionTabbed": "Zapisane przez krzesła i udostępnione SMT do przeglądu. Nagrody końcowe pojawiają się po potwierdzeniu."
-        },
-        "recorded": {
-          "tab": "Nagrane nagrody",
-          "title": "Nagrane nagrody",
-          "description": "Wyświetlane, gdy krzesła lub SMT przydzielą Cię w narzędziu do śledzenia nagród. Ostateczne uznanie następuje zgodnie z regulaminem konferencji."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Widoczne tylko dla Ciebie, przewodniczących komisji i SMT dla odpowiedniej komisji.",
-        "points": {
-          "title": "Punkty krzesełkowe (prywatne)"
-        },
-        "speechNotes": {
-          "title": "Notatki przemówień przewodniczącego (prywatne)"
-        },
-        "motions": {
-          "title": "Ruchy, które poruszyłeś",
-          "description": "Zapisane w Twoim profilu do przeglądu przez komisję i nadzoru nad SMT."
-        }
-      },
-      "discipline": {
-        "title": "Status dyscyplinarny (prywatny)",
-        "statusLine": "Ostrzeżenia: {warnings} · Strajki: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "głosowanie wyłączone",
-        "speakingSuspended": "mówienie zawieszone",
-        "removedFromCommittee": "usunięty z komisji",
-        "updated": "Zaktualizowano: {wartość}"
-      },
-      "preview": {
-        "ariaLabel": "Podgląd profilu",
-        "title": "Zapowiedź",
-        "yourName": "Twoje imię",
-        "usernameNotSet": "Nazwa użytkownika nie została ustawiona",
-        "gradeValue": "Ocena",
-        "awards": "Nagrody"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Regulamin (ROP)",
-          "content": "# Regulamin \n\n## Punkty i wnioski \n- **Zlecenie**: Prawidłowa procedura \n- **Punkt informacyjny**: Pytanie do prelegenta \n- **Punkt osobistego przywileju**: Komfort osobisty \n- **Wniosek do złożenia**: Odroczenie debaty \n- **Wniosek o odroczenie**: Zakończenie sesji \n\n## Głosowanie \n- Zwykła większość w sprawach proceduralnych \n- Większość 2/3 w sprawach merytorycznych \n- Głosowanie imienne, jeśli zostanie o to poproszone"
-        },
-        "examples": {
-          "title": "Przykłady",
-          "content": "# Przykłady \n\n## Format rozdzielczości \n``` \nWalne Zgromadzenie, \n... \n1. wzywa państwa członkowskie do... \n2. wzywa społeczność międzynarodową do... \n``` \n\n## Struktura papieru pozycji \n1. Tło \n2. Polityka krajowa \n3. Proponowane rozwiązania"
-        },
-        "templates": {
-          "title": "Szablony",
-          "content": "# Szablony \n\n## Szablon raportu przewodniczącego \n- Przegląd komisji \n- Kluczowe punkty dyskusji \n- Uchwały podjęte \n- Zalecenia"
-        },
-        "chairReport": {
-          "title": "Raport przewodniczącego",
-          "content": "# Raport przewodniczącego \n\nDokumentuj tutaj obrady komisji i jej wyniki."
-        }
-      },
-      "edit": "Redagować",
-      "guideDocument": "Dokument przewodnik",
-      "additionalNotes": "Dodatkowe uwagi",
-      "noContentYet": "Brak treści.",
-      "titlePlaceholder": "Tytuł",
-      "googleDocsUrl": "Adres URL Dokumentów Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Nowy Dokument Google otwiera się w innej karcie. Wklej link, który można udostępnić, aby delegaci mogli otworzyć dokument tutaj (wyświetlanie/edytowanie zależy od udostępniania przez Google).",
-      "markdownOptional": "Notatki z Markdown (opcjonalne, jeśli korzystasz z Dokumentu Google)",
-      "save": "Ratować",
-      "cancel": "Anulować",
-      "createNewGuide": "Utwórz nowy przewodnik",
-      "slugPlaceholder": "ślimak (unikalny)",
-      "titleLowerPlaceholder": "tytuł",
-      "googleDocsUrlOptional": "Adres URL Dokumentów Google (opcjonalnie)",
-      "markdownContentOptional": "Treść Markdown (opcjonalnie)",
-      "create": "Tworzyć",
-      "glossary": {
-        "title": "Glosariusz programu MUN",
-        "subtitle": "Unikalna terminologia dopasowana do kodeksu Twojej komisji i bieżących tematów porządku obrad.",
-        "committeeCode": "Kod komitetu: {code}",
-        "topicTag": "Temat: {temat}",
-        "sources": {
-          "core": "rdzeń",
-          "committee": "komisja",
-          "topic": "temat"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Delegacja",
-            "definition": "Kraj lub zespół obserwatorów reprezentujący w komisji jedno państwo lub podmiot."
-          },
-          "placard": {
-            "term": "Afisz",
-            "definition": "Znak kraju używany do zwracania się o głos, głosowania i sygnalizowania wniosków proceduralnych."
-          },
-          "dais": {
-            "term": "Podium",
-            "definition": "Zespół przewodniczący, który moderuje debatę, stosuje procedury i zarządza kolejnością wystąpień."
-          },
-          "quorum": {
-            "term": "Kworum",
-            "definition": "Minimalna liczba delegacji wymagana do prowadzenia spraw formalnych i głosów."
-          },
-          "motion": {
-            "term": "Ruch",
-            "definition": "Formalna propozycja zmiany przebiegu debaty, np. typu klubu lub czasu wystąpień."
-          },
-          "point_of_order": {
-            "term": "Kwestia formalna",
-            "definition": "Interwencja w przypadku nieprawidłowego stosowania procedury zgodnie z regulaminem komisji."
-          },
-          "moderated_caucus": {
-            "term": "Klub moderowany",
-            "definition": "Ustrukturyzowany segment debaty z krótkimi wystąpieniami na określony temat podrzędny."
-          },
-          "unmoderated_caucus": {
-            "term": "Niemoderowany klub",
-            "definition": "Nieformalny okres negocjacji, podczas którego delegaci swobodnie poruszają się, aby opracowywać i łączyć pomysły."
-          },
-          "draft_resolution": {
-            "term": "Projekt uchwały",
-            "definition": "Tekst roboczy proponowanych działań komisji przed ostatecznym głosowaniem i przyjęciem."
-          },
-          "amendment": {
-            "term": "Poprawka",
-            "definition": "Proponowana zmiana w projekcie tekstu, przyjazna lub uznana w głosowaniu za nieprzyjazną."
-          },
-          "operative_clause": {
-            "term": "Klauzula operacyjna",
-            "definition": "Numerowana klauzula zorientowana na działanie, opisująca, co komisja proponuje zrobić."
-          },
-          "preambulatory_clause": {
-            "term": "Klauzula wstępna",
-            "definition": "Klauzula dotycząca ustalania kontekstu, powołująca się na podstawowe zasady, obawy i wcześniejsze ramy."
-          },
-          "right_of_reply": {
-            "term": "Prawo do odpowiedzi",
-            "definition": "Możliwość ustosunkowania się do bezpośredniego oświadczenia, które miało wpływ na godność lub pozycję delegacji."
-          },
-          "veto_power": {
-            "term": "Moc weta",
-            "definition": "Uprawnienie stałego członka Rady Bezpieczeństwa ONZ do blokowania merytorycznych projektów rezolucji."
-          },
-          "chapter_vii": {
-            "term": "Rozdział VII",
-            "definition": "Organ Karty Narodów Zjednoczonych ds. zagrożeń dla pokoju, sankcji i środków użycia siły."
-          },
-          "sanctions_regime": {
-            "term": "System sankcji",
-            "definition": "Skoordynowane ograniczenia stosowane w celu wpływania na zachowanie bez bezpośrednich działań militarnych."
-          },
-          "arms_control": {
-            "term": "Kontrola zbrojeń",
-            "definition": "Porozumienia i systemy weryfikacji ograniczające rodzaje, ilości lub rozmieszczenie broni."
-          },
-          "non_proliferation": {
-            "term": "Nieproliferacja",
-            "definition": "Polityki zapobiegające rozprzestrzenianiu się broni nuklearnej, chemicznej, biologicznej lub zaawansowanej."
-          },
-          "confidence_building_measures": {
-            "term": "Środki budowy zaufania",
-            "definition": "Narzędzia przejrzystości i komunikacji, które zmniejszają ryzyko nieporozumień i konfliktów."
-          },
-          "universal_periodic_review": {
-            "term": "Uniwersalny przegląd okresowy",
-            "definition": "Proces wzajemnej oceny, w ramach którego każde państwo członkowskie ONZ składa sprawozdania i otrzymuje zalecenia dotyczące praw."
-          },
-          "special_rapporteur": {
-            "term": "Specjalny Sprawozdawca",
-            "definition": "Niezależny ekspert powołany do monitorowania i raportowania kwestii tematycznych lub praw krajowych."
-          },
-          "treaty_body": {
-            "term": "Organ Traktatowy",
-            "definition": "Komitet ekspertów nadzorujący wdrażanie konkretnego traktatu dotyczącego praw człowieka."
-          },
-          "public_health_emergency": {
-            "term": "Stan zagrożenia zdrowia publicznego",
-            "definition": "Poważna epidemia wymagająca pilnej skoordynowanej reakcji na poziomie krajowym i międzynarodowym."
-          },
-          "surveillance": {
-            "term": "Nadzór epidemiologiczny",
-            "definition": "Ciągłe gromadzenie i analiza danych zdrowotnych w celu wykrywania i śledzenia trendów chorobowych."
-          },
-          "health_systems": {
-            "term": "Wzmocnienie systemów opieki zdrowotnej",
-            "definition": "Poprawa siły roboczej, finansowania, logistyki i zarządzania w celu zapewnienia niezawodnego świadczenia opieki zdrowotnej."
-          },
-          "transnational_crime": {
-            "term": "Transnarodowa przestępczość zorganizowana",
-            "definition": "Działalność przestępcza koordynowana ponad granicami za pośrednictwem sieci i nielegalnych rynków."
-          },
-          "illicit_trafficking": {
-            "term": "Nielegalny handel",
-            "definition": "Nielegalny przepływ narkotyków, broni, osób lub towarów pomiędzy jurysdykcjami."
-          },
-          "rule_of_law_capacity": {
-            "term": "Potencjał w zakresie praworządności",
-            "definition": "Instytucjonalna zdolność systemów wymiaru sprawiedliwości do sprawiedliwego prowadzenia dochodzeń, ścigania i ochrony praw."
-          },
-          "sustainable_development": {
-            "term": "Zrównoważony rozwój",
-            "definition": "Model wzrostu równoważący postęp społeczny, możliwości gospodarcze i ochronę środowiska."
-          },
-          "financing_for_development": {
-            "term": "Finansowanie Rozwoju",
-            "definition": "Publiczne i prywatne mechanizmy finansowania wspierające długoterminowe priorytety rozwojowe."
-          },
-          "policy_coordination": {
-            "term": "Koordynacja polityki",
-            "definition": "Ujednolicenie działań państwa i agencji, aby uniknąć powielania działań i zwiększyć zbiorowy wpływ."
-          },
-          "child_protection": {
-            "term": "Ochrona dziecka",
-            "definition": "Środki zapobiegające wyzyskowi, znęcaniu się i przemocy wobec dzieci we wszystkich środowiskach."
-          },
-          "education_access": {
-            "term": "Dostęp do edukacji",
-            "definition": "Zapewnienie włączających, sprawiedliwych i ciągłych możliwości uczenia się dla wszystkich dzieci."
-          },
-          "humanitarian_response": {
-            "term": "Odpowiedź humanitarna",
-            "definition": "Szybkie działania pomocowe odpowiadające pilnym potrzebom w sytuacjach kryzysowych i konfliktach."
-          },
-          "gender_mainstreaming": {
-            "term": "Mainstreaming płci",
-            "definition": "Włączanie analizy płci do projektowania, wdrażania i oceny polityki."
-          },
-          "gender_based_violence": {
-            "term": "Przemoc ze względu na płeć",
-            "definition": "Krzywda skierowana przeciwko osobie ze względu na tożsamość płciową, role lub nierówne relacje władzy."
-          },
-          "economic_empowerment": {
-            "term": "Wzmocnienie gospodarcze",
-            "definition": "Zwiększanie dostępu do godnej pracy, finansów, własności i władzy decyzyjnej."
-          },
-          "source_attribution": {
-            "term": "Uznanie źródła",
-            "definition": "Wyraźne powoływanie się na pochodzenie informacji, aby można było zweryfikować twierdzenia i umieścić je w kontekście."
-          },
-          "verified_reporting": {
-            "term": "Zweryfikowane raportowanie",
-            "definition": "Standard dziennikarski wymagający potwierdzenia przed publikacją kwestionowanych faktów."
-          },
-          "editorial_independence": {
-            "term": "Niezależność redakcji",
-            "definition": "Oddzielenie decyzji raportowych od nacisków politycznych czy wpływów interesariuszy."
-          },
-          "climate_mitigation": {
-            "term": "Łagodzenie klimatu",
-            "definition": "Działania redukujące emisję gazów cieplarnianych lub zwiększające długoterminowe usuwanie dwutlenku węgla."
-          },
-          "climate_adaptation": {
-            "term": "Adaptacja klimatyczna",
-            "definition": "Polityki i inwestycje zmniejszające podatność na skutki klimatyczne."
-          },
-          "cyber_norms": {
-            "term": "Normy cybernetyczne",
-            "definition": "Wspólne oczekiwania dotyczące odpowiedzialnego zachowania państwa w domenie cyfrowej i cybernetycznej."
-          },
-          "critical_infrastructure": {
-            "term": "Infrastruktura krytyczna",
-            "definition": "Niezbędne systemy, takie jak zasilanie, woda, opieka zdrowotna i łączność, wymagające odporności."
-          },
-          "epidemiology": {
-            "term": "Epidemiologia",
-            "definition": "Badanie wzorców chorób, ich przyczyn i rozmieszczenia w populacjach."
-          },
-          "preparedness_response": {
-            "term": "Gotowość i reagowanie",
-            "definition": "Planowanie, koordynacja i działania wzrostowe w celu powstrzymania sytuacji awaryjnych i zarządzania nimi."
-          },
-          "non_refoulement": {
-            "term": "Zasada non-refoulement",
-            "definition": "Zasada zakazująca powrotu ludzi do miejsc, w których grozi im poważna krzywda."
-          },
-          "durable_solutions": {
-            "term": "Trwałe rozwiązania",
-            "definition": "Długoterminowe skutki dla wysiedleńców: powrót, integracja lokalna lub przesiedlenie."
-          },
-          "nuclear_safeguards": {
-            "term": "Zabezpieczenia nuklearne",
-            "definition": "Środki weryfikacyjne zapewniające, że materiały jądrowe nie zostaną przeznaczone do wykorzystania w broni."
-          },
-          "counter_terrorism": {
-            "term": "Zwalczanie terroryzmu",
-            "definition": "Zintegrowane środki prawne, zapobiegawcze i zabezpieczające przed działalnością terrorystyczną."
-          },
-          "due_process": {
-            "term": "Należyty proces",
-            "definition": "Uczciwe procedury prawne chroniące prawa podczas dochodzenia, ścigania i nakładania sankcji."
-          },
-          "resource_security": {
-            "term": "Bezpieczeństwo zasobów",
-            "definition": "Niezawodny dostęp do żywności, wody i energii w warunkach presji ekonomicznej i środowiskowej."
-          },
-          "resilience": {
-            "term": "Odporność",
-            "definition": "Zdolność społeczności i instytucji do absorpcji wstrząsów i skutecznej odbudowy."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Edytuj pomysł",
-      "googleDocsUrl": "Adres URL Dokumentów Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Krótki tekst pomysłu (opcjonalnie)",
-      "save": "Ratować",
-      "cancel": "Anulować",
-      "addIntro": "Dodaj Dokument Google, aby przygotować projekt rozwiązania, lub wpisz krótką notatkę (lub jedno i drugie).",
-      "googleDocsCreateHelp": "Nowy Dokument Google otwiera się w innej karcie; wklej tutaj link po jego utworzeniu.",
-      "resolutionIdeaPlaceholder": "Pomysł na rozwiązanie...",
-      "add": "Dodać",
-      "noIdeasYet": "Nie ma jeszcze pomysłów.",
-      "ideaLabel": "Pomysł",
-      "ideaFallback": "Pomysł {numer}",
-      "linkedDoc": "Powiązany dokument",
-      "addedOn": "Dodano {data}",
-      "edit": "Redagować",
-      "delete": "Usuwać",
-      "ideaDocument": "Dokument pomysłu",
-      "summary": "Streszczenie",
-      "emptyIdea": "Pusty pomysł."
-    },
-    "stances": {
-      "heatmapTitle": "Krótki przegląd postaw (mapa cieplna)",
-      "heatmapHelp": "W jakim stopniu Twoja alokacja wspiera ___? (skala 1-5)",
-      "topicPlaceholder": "np. akcja klimatyczna",
-      "extentLabel": "Zakres (1-5):",
-      "extentHelpTitle": "Zakres (1-5)",
-      "extentHelpBody": "1 oznacza, że ​​Twój przydział ma niewielkie poparcie dla danego tematu, a 5 oznacza silne poparcie. Wybierz liczbę, która odpowiada Twojemu stanowisku w komisji.",
-      "add": "Dodać",
-      "viewOnlyHeatmap": "Mapa cieplna przeznaczona tylko do przeglądania dla personelu.",
-      "notesPerAllocation": "Uwagi na alokację",
-      "noAllocationsYet": "Nie ma jeszcze przydziałów",
-      "notesPlaceholder": "Uwagi dotyczące stanowiska dla tego przydziału...",
-      "noteLanguageWarning": "Ostrzeżenie czytelnika: ta notatka może zawierać nieodpowiedni język.",
-      "save": "Ratować",
-      "saveHelpTitle": "Zapisz notatkę dotyczącą stanowiska",
-      "saveHelpBody": "Zapisuje notatkę dotyczącą stanowiska dla tej alokacji. Może go przeglądać personel i (w zależności od ustawień komisji) inni uczestnicy."
-    },
-    "speeches": {
-      "newSpeech": "Nowe przemówienie",
-      "speechTitlePlaceholder": "Tytuł przemówienia",
-      "googleDocsUrl": "Adres URL Dokumentów Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Otwiera Google w nowej karcie; gdy będzie gotowy, wklej tutaj adres URL dokumentu.",
-      "plainTextOptional": "Wersja robocza zwykłego tekstu (opcjonalnie, jeśli korzystasz z Dokumentu Google)",
-      "save": "Ratować",
-      "cancel": "Anulować",
-      "noSpeechesYet": "Nie ma jeszcze żadnych przemówień. Połącz dokument Google lub wklej tekst.",
-      "speechLabel": "Przemówienie",
-      "untitled": "Nieuprawny",
-      "edit": "Redagować",
-      "speechDocument": "Dokument przemówienia",
-      "draftText": "Projekt tekstu",
-      "noContentHint": "Połącz Dokument Google z opcją Edytuj lub dodaj zwykły tekst w formularzu."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Komisja",
-      "yourContext": "Twój kontekst",
-      "roleLabel": "Rola",
-      "seatLabel": "Siedziba",
-      "clearSearchTitle": "Wyczyść wyszukiwanie i pokaż wszystkie delegacje",
-      "vacantLabel": "Pusty",
-      "assignedLabel": "Przydzielony",
-      "daisLabel": "Podium",
-      "phaseLabel": "Faza",
-      "phaseVoting": "Głosowanie",
-      "phaseDebate": "Debata",
-      "focusSearchTitle": "Wyszukiwanie fokusowe (tytuły i nazwy podestów pasują do zapytania)",
-      "tipLabel": "Wskazówka",
-      "searchVacantTitle": "Wyszukaj „wolne” miejsca w sali",
-      "searchHint": "Wpisz kraj, imię i nazwisko delegata, szkołę, zaimek lub „wolny”, aby wyróżnić dopasowania w pokoju. Naciśnij Enter, aby przejść do pierwszego dopasowania; Esc kasuje. Kliknij opcję Wolne, aby przejść do pustych miejsc.",
-      "findLabel": "Znajdź członka delegacji lub podestu",
-      "searchPlaceholder": "Kraj, imię, szkoła...",
-      "matchesCount": "Dopasowane miejsca: {matches} z {total} miejsc",
-      "enterScrolls": "Wprowadź zwoje",
-      "typeToFilterHint": "Wpisz do filtrowania — wprowadź przewijanie do pierwszego dopasowania",
-      "noMatches": "Brak pasujących delegacji lub miejsc na podwyższeniu.",
-      "digitalDisplay": "Cyfrowy wyświetlacz",
-      "floorLabel": "Podłoga",
-      "staffSeatsHeading": "Personel - miejsca",
-      "searchAria": "Szukaj delegacji",
-      "virtualRoomVacant": "Pusty",
-      "profileAria": "Zobacz profil: {kraj}",
-      "vacantSeatAria": "Wolne miejsce",
-      "placardAria": "Afisz {kraj}",
-      "gavelAria": "Młotek licytacyjny",
-      "viewProfileAria": "Zobacz profil: {title}",
-      "noProfileLinkAria": "{title} (brak linku do profilu)",
-      "committeeFloor": "Piętro komisji",
-      "virtualRoomFigureAria": "Sala komisji wirtualnej – {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Filtrowanie delegacji. Pierwsze podświetlone miejsce to pierwszy mecz na ringu.",
-      "helperText": "Na plakatach znajduje się lista krajów (z przydziałów), imię i nazwisko, szkoła i zaimki z profilu każdego delegata. Edytuj swoje w sekcji Profil. Puste miejsca w komisjach są oznaczone jako wolne. Kliknij wypełniony plakat lub miejsce na podwyższeniu, aby otworzyć stronę danego członka (czat i raporty).",
-      "virtualRoomCaption": "Wirtualny model sali komitetu ONZ z plakatami delegatów przedstawiającymi kraj, imię i nazwisko, szkołę i zaimki."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Prośba o zabranie głosu",
-        "delegateFallback": "Delegat",
-        "needAllocation": "Aby poprosić o zabranie głosu, potrzebujesz przydziału.",
-        "alreadyQueued": "Masz już aktywną prośbę o wypowiedź w kolejce.",
-        "requested": "Poproszono o zabranie głosu. Pojawisz się w kolejce.",
-        "requestFailed": "Nie udało się poprosić o rozmowę.",
-        "helpBody": "Wysyła Twoją delegację do kolejki krzeseł. Jednocześnie możesz mieć jedno aktywne oczekujące/bieżące żądanie.",
-        "purposeLabel": "Opcjonalny cel (pokazany na etykiecie kolejki)",
-        "purposeHelpTitle": "Etykieta przeznaczenia",
-        "purposeHelpBody": "Ten tekst jest dołączany do nazwy Twojego kraju, aby krzesła mogły zobaczyć, dlaczego zamawiasz piętro.",
-        "purposePlaceholder": "np. wsparcie + przegląd poprawek",
-        "requesting": "Żądanie...",
-        "rollPromptTitle": "Wymagana zgoda przewodniczącego",
-        "rollPromptBodyPickStatus": "Sesja się rozpoczęła. Wybierz swój status imienny, aby odblokować możliwość mówienia i głosowania. Wyboru tego nie można zmienić.",
-        "rollPromptBodyWaitSessionStart": "Oczekiwanie, aż przewodniczący rozpocznie posiedzenie komisji.",
-        "rollPromptBodyWaitRollPrompt": "Oczekiwanie na wezwanie imienne.",
-        "rollPromptBodyMarkedAbsent": "Obecnie jesteś oznaczony jako nieobecny. Poproś przewodniczącego o oznaczenie Cię jako obecnego, abyś mógł zabrać głos i głosować.",
-        "rollPromptBodyChecking": "Sprawdzam status rolki...",
-        "rollPromptSaving": "Oszczędność...",
-        "rollPromptPresent": "Obecny",
-        "rollPromptPresentVoting": "Obecny i głosujący"
-      },
-      "motionVoting": {
-        "votingProcedure": "Procedura głosowania",
-        "currentMotion": "Aktualny ruch",
-        "motioner": "Osoba poruszająca się",
-        "majority": "Większość",
-        "majoritySimple": "Prosty",
-        "tally": "Tak {tak} - Nie {nie} - Razem {ogółem}",
-        "help": "Na podium rejestruje się głosy każdej delegacji podczas sesji. W głosowaniu nad wnioskiem stosuje się wyłącznie opcję Tak lub Nie (żadnych głosów wstrzymujących się). Sumy uwzględniają tylko tabliczki, na których widniała informacja Tak lub Nie; delegacje nieobecne są pomijane."
-      },
-      "activeMotion": {
-        "currentMotion": "Aktualny ruch",
-        "motionFallback": "Ruch",
-        "motioner": "Osoba poruszająca się",
-        "majority": "Większość",
-        "majoritySimple": "Prosty",
-        "type": "Typ",
-        "timer": "Regulator czasowy",
-        "currentSpeaker": "Obecny mówca",
-        "nextSpeaker": "Następny mówca",
-        "speakerTimeLeftCap": "Czas głośnika (lewy / czapka)",
-        "speakerTimeLeftTotal": "Czas głośnika (lewy / całkowity)",
-        "perSpeaker": "(na głośnik)",
-        "paused": "(pauza)",
-        "pauseReason": "Pauza: {powód}"
-      },
-      "floorStatus": {
-        "sessionTime": "Czas sesji",
-        "sessionNotStarted": "Sesja nie została rozpoczęta",
-        "limit": "Limit",
-        "limitRemaining": "Pozostało {wartość}",
-        "limitOverBy": "ponad o {value}",
-        "quickLinkSession": "Sesja",
-        "quickLinkRoll": "Rolka",
-        "quickLinkSpeakers": "Głośniki",
-        "quickLinkMotions": "Ruchy",
-        "quickLinkTimer": "Regulator czasowy",
-        "dais": "Podium",
-        "pinned": "Przypięty",
-        "viewFullAnnouncement": "Zobacz całe ogłoszenie",
-        "timerPausesReadOnly": "Timer zostaje wstrzymany (tylko do odczytu)",
-        "speakerList": "Lista mówców",
-        "speakerFallback": "Głośnik",
-        "rollCallYou": "Apel (ty)",
-        "fullAnnouncement": "Pełne ogłoszenie",
-        "daisAnnouncement": "Ogłoszenie Daisa",
-        "close": "Zamknąć"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Nazwa sesji",
-        "sessionNamePlaceholder": "np. Poranna sesja",
-        "sessionNameSaving": "Oszczędność…",
-        "sessionNameSaved": "Zapisano",
-        "sessionNameHint": "Zapisuje się automatycznie i pojawia się w historii sesji.",
-        "title": "Posiedzenie komisji",
-        "subtitle": "Rozpoczęcie lub zakończenie posiedzenia komisji.",
-        "helpStartStop": "Start rozpoczyna licznik czasu/status sesji komisji na żywo dla wszystkich. Stop kończy sesję i kasuje bieżący limit czasu.",
-        "migrationUnavailable": "Kontrole sesji są tymczasowo niedostępne do czasu zastosowania najnowszych migracji baz danych.",
-        "endTimeInFuture": "Wybierz godzinę zakończenia w przyszłości lub przejdź na opcję bez limitu.",
-        "sessionStartUnavailable": "Sygnatura czasowa rozpoczęcia sesji jest niedostępna do czasu zastosowania najnowszych migracji.",
-        "endTimeInFutureSetNoLimit": "Wybierz godzinę zakończenia w przyszłości lub nie ustawiaj żadnego limitu.",
-        "sessionLimitUpdated": "Zaktualizowano limit sesji.",
-        "startedLabel": "Rozpoczęto:",
-        "timeInLabel": "Czas w:",
-        "timeUntilEndLabel": "Czas do końca:",
-        "overByValue": "ponad o {value}",
-        "modeLabel": "Tryb:",
-        "modeStopwatchNoLimit": "Stoper (bez limitu czasu)",
-        "sessionNotRunning": "Sesja nie jest uruchomiona.",
-        "sessionLimit": "Limit sesji",
-        "sessionLimitModesTitle": "Tryby limitu sesji",
-        "sessionLimitModesHelp": "Brak: bez końca. Budżet czasu: liczy się od początku. Koniec o: ustalony czas zegarowy w lokalnej strefie czasowej.",
-        "sessionLimitOptional": "Fakultatywny.",
-        "noneLabel": "Nic",
-        "noneDescription": "biegnie, aż się zatrzymasz.",
-        "timeBudgetLabel": "Budżet czasu",
-        "timeBudgetDescription": "liczy się od momentu rozpoczęcia.",
-        "endTimeLabel": "Koniec czasu",
-        "endTimeDescription": "używa stałego czasu zegarowego (zastępuje budżet, jeśli oba zostały kiedykolwiek ustawione).",
-        "noneIndefinite": "Brak (nieokreślony)",
-        "noneScheduledEndHint": "Brak zaplanowanego zakończenia; pokazywany jest tylko czas, który upłynął.",
-        "timeBudgetFromStart": "Budżet czasu od początku",
-        "hoursLabel": "Godziny",
-        "minutesLabel": "Protokół",
-        "minimumOneMinute": "(minimum 1 minuta)",
-        "endAtLocalTime": "Koniec o (czasu lokalnego)",
-        "stopSession": "Zatrzymaj sesję",
-        "saveLimit": "Zapisz limit",
-        "saveLimitHelp": "Stosuje zaktualizowane ustawienia limitów, gdy sesja jest już uruchomiona, bez zatrzymywania sesji.",
-        "startSession": "Rozpocznij sesję",
-        "sidebarUsePrefix": "Użyj paska bocznego do",
-        "rollCall": "Apel",
-        "speakers": "Głośniki",
-        "formalMotions": "Wnioski formalne",
-        "timer": "Regulator czasowy",
-        "sidebarAnd": "I",
-        "announcements": "Ogłoszenia",
-        "sidebarUseSuffix": "— jedno narzędzie na kartę."
-      },
-      "history": {
-        "title": "Historia sesji",
-        "savedCount": "Zapisano {count}",
-        "permissionsHint": "Krzesła mogą zmieniać nazwy wpisów. SMT/Admin może zmieniać nazwy i usuwać wpisy.",
-        "empty": "Nie ma jeszcze historii sesji.",
-        "rename": "Przemianować",
-        "delete": "Usuwać",
-        "deleteConfirm": "Usunąć tę sesję z historii?",
-        "sessionNamePrompt": "Nazwa sesji",
-        "rangeClosed": "{zakres}",
-        "rangeOngoing": "{zakres} -> W toku"
-      },
-      "timerPage": {
-        "title": "Regulator czasowy",
-        "controlsTitle": "Sterowanie timerem",
-        "controlsHelp": "Użyj głosu ogólnego, aby określić ogólny harmonogram debaty, lub głosowania nad wnioskiem, aby powiązać widoczność z konkretnym punktem głosowania otwartego.",
-        "tabSetup": "1) Konfiguracja",
-        "tabClock": "2) Sterowanie zegarem",
-        "tabNotes": "3) Notatki z przemowy",
-        "tabLog": "4) Wstrzymaj dziennik",
-        "setupHelp": "Wybierz, czy ten licznik czasu dotyczy głosu ogólnego (zawsze widoczny dla delegatów), czy też jest powiązany z wnioskiem otwartym do głosowania (delegaci widzą go tylko wtedy, gdy głosowanie jest aktywnym elementem). Jeśli czas na mówcę jest włączony, zegar pozostaje widoczny podczas moderowanych spotkań. Wstrzymaj zegar / Uruchom zegar, zatrzymaj lub wznów odliczanie. Ustaw niezależnie czas głośnika (pozostały) i czas całkowity, a następnie Zapisz licznik czasu. Presety wypełniają oba do tej samej długości; możesz później edytować którekolwiek pole. Przerwy są rejestrowane z krótkim powodem.",
-        "namedPreset": "Nazwane ustawienie wstępne",
-        "applyPreset": "Zastosuj gotowe ustawienia...",
-        "floorLabelDelegates": "Etykieta piętra (delegaci)",
-        "floorLabelPlaceholder": "np. GSL 60",
-        "timerPurpose": "Cel timera",
-        "purposeGeneralFloor": "Debata ogólna / głos (niepowiązany z głosowaniem)",
-        "purposeMotionVote": "Otwarty ruch — licznik czasu tylko wtedy, gdy głosowanie jest aktywne na parkiecie",
-        "openMotionForVoting": "Wniosek otwarty (musi być otwarty do głosowania)",
-        "selectMotion": "Wybierz ruch...",
-        "untitled": "Nieuprawny",
-        "noOpenMotionWarning": "Żaden wniosek nie podlega głosowaniu. Najpierw otwórz głosowanie lub zmień cel na ogólne.",
-        "clock": "Zegar",
-        "running": "Działanie",
-        "paused": "Wstrzymano",
-        "saveToEnablePauseStart": "zapisz timer, aby włączyć pauzę/start.",
-        "pauseReasonLogged": "Powód wstrzymania (zalogowany)",
-        "pauseReasonPlaceholder": "np. Punkt porządku, problem techniczny, niemoderowane zebranie...",
-        "pauseClock": "Zatrzymaj zegar",
-        "startClock": "Uruchom zegar",
-        "perSpeakerTitle": "Czas wystąpienia na mówcę (moderowany klub)",
-        "perSpeakerHelp": "Ustaw Całkowity czas jako limit na głośnik i Czas głośnika jako pozostały czas; Advance przechodzi do następnego głośnika i resetuje pozostałe do limitu.",
-        "currentSpeaker": "Obecny mówca",
-        "nextSpeaker": "Następny mówca",
-        "speechNotesCurrentSpeaker": "Notatki przemówienia (obecny mówca)",
-        "speechNotesHelp": "Notatki są powiązane z tekstem licznika czasu bieżącego mówcy, a jeśli na liście mówców znajduje się osoba oznaczona jako Obecna, jej delegacja jest przechowywana w celach informacyjnych.",
-        "timerFloorLabel": "Timer (podłoga):",
-        "speakerListCurrent": "Lista prelegentów (aktualna):",
-        "noCurrentDelegation": "Żadna delegacja nie jest oznaczona jako Obecna na liście mówców.",
-        "note": "Notatka",
-        "notePlaceholder": "Punkty, POI, ton, dalsze działania...",
-        "saveSpeechNote": "Zapisz notatkę przemówienia",
-        "recentNotes": "Twoje ostatnie notatki (ta komisja)",
-        "delete": "Usuwać",
-        "speakerTimeRemaining": "Czas głośnika (pozostały)",
-        "remainingHelpPerSpeaker": "Odliczanie dla bieżącego mówcy (resetuje się po przejściu).",
-        "remainingHelpNormal": "Odliczanie dla bieżącego mówcy (może być mniejsze niż całkowite).",
-        "totalTime": "Całkowity czas",
-        "totalHelpPerSpeaker": "Zatyczka na głośnik (mianownik na podłodze; do tego pozostały wkłady Advance).",
-        "totalHelpNormal": "Pełna długość tego segmentu timera (pokazana po ukośniku na podłodze).",
-        "saveTimer": "Zapisz timer",
-        "advanceSpeakerReset": "Włącz głośnik i zresetuj zegar",
-        "recentPauseLog": "Ostatni dziennik pauz",
-        "noPauseEvents": "Dla tej komisji nie zarejestrowano jeszcze żadnych zdarzeń wstrzymania.",
-        "openPauseLogHint": "Otwórz dziennik pauz, aby przejrzeć zapisane przyczyny wstrzymań i sygnatury czasowe.",
-        "saved": "Minutnik zapisany.",
-        "savedCapped": "Minutnik zapisany. Czas mówcy był dłuższy niż całkowity; ograniczone do sumy.",
-        "alreadyPaused": "Minutnik jest już wstrzymany.",
-        "pausedForCommittee": "Timer zatrzymał się dla komisji.",
-        "alreadyRunning": "Minutnik już działa.",
-        "runningForCommittee": "Licznik czasu dla komisji.",
-        "euTimerBoardTitle": "Tablica liczników czasu Parlamentu Europejskiego (11 liczników)",
-        "euTimerBoardHelp": "Jeden licznik czasu na imprezę plus czas całkowity, czas POI/POC i czas głośnika. Użyj opcji Zastosuj, aby skopiować wiersz do pól licznika czasu na żywo na karcie Zegar (czas głośnika / Zapisz licznik czasu).",
-        "euTimerName": "Nazwa",
-        "euTimerTag": "Etykietka",
-        "euTotalTime": "Całkowity czas",
-        "euPoiPocTime": "Czas POI/POC",
-        "euSpeakerTime": "Czas na mówcę"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "Sala komisji (pełna)",
         "hint": "Wirtualny układ i piętro delegata"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "Autozapis nie powiódł się",
     "autosavedWithCountry": "Zapisano automatycznie — {kraj}",
     "delegateFallback": "delegat"
+  },
+  "sources": {
+    "addSource": "Dodaj źródło",
+    "sourceUrl": "Źródłowy adres URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (zalecane)",
+    "urlHelp": "Aby utworzyć nowy Dokument Google, użyj przycisku i wklej tutaj link do dokumentu.",
+    "titleOptional": "Tytuł (opcjonalnie)",
+    "saveChanges": "Zapisz zmiany",
+    "editSource": "Edytuj źródło",
+    "urlPlaceholderShort": "Dokument Google lub inny adres URL",
+    "empty": "Nie ma jeszcze żadnych źródeł. Dodaj link do Dokumentu Google, aby otworzyć go tutaj.",
+    "sourceLabel": "Źródło",
+    "openLink": "Otwórz łącze",
+    "embedHeading": "Dokument źródłowy",
+    "notGoogleDoc": "Ten adres URL nie jest Dokumentem Google. Użyj linku docs.google.com/document/d/…, aby osadzić i edytować tutaj; w przeciwnym razie otwórz powyższy link."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Delegaci nie mogą bezpośrednio przesyłać dokumentów przedstawiających stanowisko. Użyj innego typu dokumentu.",
+    "alertOnlyChairsPositionPaper": "Tylko przewodniczący/SMT/administrator mogą przesyłać dokumenty przedstawiające stanowisko.",
+    "alertOnlySmtChairReport": "Tylko SMT/administrator może przesyłać raporty przewodniczącego.",
+    "alertOnlySmtRop": "Tylko SMT/administrator może przesyłać dokumenty RoP.",
+    "alertOnlySmtAwardCriteria": "Tylko SMT/administrator może przesyłać dokumenty zawierające kryteria przyznania nagrody.",
+    "alertNeedContentOrUrl": "Dodaj lokalną treść tekstową lub adres URL Dokumentów Google.",
+    "confirmDelete": "Usunąć ten dokument?",
+    "delegatePrepTitle": "Przygotuj sekcję dokumentu",
+    "delegatePrepBody": "Możesz przesyłać, przeglądać i edytować własne <prep>dokumenty przygotowawcze</prep> bezpośrednio z tej strony.",
+    "positionPaperGuideTitle": "Ustaw prowadnicę papieru",
+    "positionPaperGuideBlurb": "Pobierz przewodnik zastępczy na czas przygotowywania ostatecznego pliku PDF.",
+    "downloadPlaceholderGuide": "Pobierz przewodnik zastępczy",
+    "addDocument": "Dodaj dokument",
+    "tabs": {
+      "ariaLabel": "Sekcje dokumentu",
+      "library": "Biblioteka",
+      "compose": "Komponować",
+      "composeHint": "Na tej karcie rozpocznij nowy dokument lub edytuj istniejącą wersję roboczą."
+    },
+    "newDocumentTitle": "Nowy dokument",
+    "editDocumentTitle": "Edytuj dokument",
+    "typeLabel": "Typ",
+    "types": {
+      "position_paper": "Stanowisko",
+      "chair_report": "Sprawozdanie przewodniczącego",
+      "rop": "RoP",
+      "award_criteria": "Kryteria przyznania nagrody",
+      "chair_notes": "Notatki na krześle",
+      "prep_doc": "Przygotuj dokument"
+    },
+    "delegatePositionPaperNote": "Dokumenty przedstawiające stanowisko są przesyłane przez przewodniczących wraz z informacją zwrotną.",
+    "delegateOwner": "Delegat właściciela",
+    "chairRecipient": "Odbiorca krzesła",
+    "titleLabel": "Tytuł",
+    "titlePlaceholder": "Tytuł dokumentu",
+    "googleDocsUrl": "Adres URL Dokumentów Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (umieść widok/edycję w aplikacji)",
+    "googleDocsHelp": "Użyj opcji Nowy dokument Google, aby otworzyć Google w nowej karcie, a następnie wklej tutaj link do dokumentu. Zwykły tekst poniżej jest opcjonalny. Każdy dokument wymaga tekstu lokalnego, linku do Dokumentu Google lub obu.",
+    "plainTextOptional": "Zwykły tekst (opcjonalnie)",
+    "plainTextPlaceholder": "Notatki lub projekt tekstu…",
+    "chairFeedbackLabel": "Informacje zwrotne od krzesła",
+    "chairFeedbackPlaceholder": "Opinia na temat stanowiska delegata…",
+    "empty": "Nie ma jeszcze dokumentów. Dodaj jeden lub połącz Dokument Google.",
+    "sidebarDocumentLabel": "Dokument",
+    "sections": {
+      "chairReports": "Sprawozdania przewodniczącego",
+      "rop": "RoP",
+      "awardCriteria": "Kryteria przyznania nagrody",
+      "prepDocuments": "Przygotuj dokumenty",
+      "chairNotes": "Notatki na krześle",
+      "otherDocuments": "Inne dokumenty"
+    },
+    "untitled": "Nieuprawny",
+    "linkedDocumentHeading": "Powiązany dokument",
+    "notesHeading": "Notatki",
+    "noGoogleDocYet": "Nie powiązano jeszcze żadnego Dokumentu Google. Użyj opcji Edytuj, aby dodać adres URL docs.google.com/document/d/….",
+    "chairFeedbackHeading": "Informacje zwrotne od krzesła",
+    "noFeedbackYet": "Nie dodano jeszcze żadnej opinii."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Najpierw wpisz adres e-mail delegata.",
+    "sentToDelegate": "Wysłano na adres {e-mail}.",
+    "newResolution": "Nowa uchwała",
+    "maxDraftResolutions": "Ta komisja ma już projekty uchwał: {count}.",
+    "googleDocLink": "Link do Dokumentu Google",
+    "googleDocUrlPlaceholder": "Adres URL Dokumentów Google (docs.google.com/document/d/… — używany do osadzania i edytowania)",
+    "googleDocUrlHelp": "Nowy Dokument Google otwiera się w innej karcie; skopiuj adres URL z paska adresu i wklej go tutaj.",
+    "mainSubmittersPlaceholder": "Główni przesyłający (identyfikatory użytkowników, rozdzielone przecinkami)",
+    "coSubmittersPlaceholder": "Współdostawcy (identyfikatory użytkowników, rozdzielone przecinkami)",
+    "create": "Tworzyć",
+    "cancel": "Anulować",
+    "openInNewTab": "Otwórz w nowej karcie",
+    "noGoogleDocLink": "Brak linku do Dokumentu Google",
+    "visibleToOtherBloc": "Widoczne dla innego bloku",
+    "resolutionCounts": "Główne subskrypcje: {main} | Współsubskrybenci: {co} | Sygnatariusze: {sygnatariusze}",
+    "blocButton": "Blok {nazwa} ({stancja})",
+    "signVirtually": "Podpisz wirtualnie (powiadomienia głównych subskrybentów)",
+    "shareByEmail": "Udostępnij uchwałę e-mailem",
+    "delegateEmailPlaceholder": "delegat@email.com",
+    "sendToDelegate": "Wyślij do delegata",
+    "clauseEditor": "Edytor klauzul",
+    "noClausesYet": "Nie ma jeszcze żadnych klauzul.",
+    "clauseNumber": "Klauzula {numer}",
+    "saveClause": "Zapisz klauzulę",
+    "delete": "Usuwać",
+    "addClausePlaceholder": "Dodaj nową klauzulę...",
+    "addClause": "Dodaj klauzulę",
+    "clauseVoteHistory": "Historia głosowania klauzuli",
+    "noClauseOutcomesYet": "Nie zarejestrowano jeszcze wyników głosowania w sprawie klauzuli.",
+    "clauseFallback": "Klauzula",
+    "passed": "PRZESZEDŁ",
+    "failed": "PRZEGRANY",
+    "motionId": "Ruch"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Sekcje głosowania",
+      "open": "Otwarte",
+      "closed": "Zamknięte"
+    },
+    "requiredMajority": "Wymagana większość",
+    "helpRequiredMajorityTitle": "Wymagana większość",
+    "helpRequiredMajorityBody": "Wybierz próg głosowania używany do podjęcia decyzji o zaliczeniu/odrzuceniu. „Proste” to więcej niż połowa. „2/3” wymaga większości.",
+    "majoritySimple": "Prosty",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} większość",
+    "mustVote": "MUSI głosować",
+    "helpMustVoteTitle": "MUSI głosować",
+    "helpMustVoteBody": "Oznacza ten wniosek jako element wymagający głosowania. Służy do komunikowania wymagań uczestnikom (w zależności od konfiguracji komisji).",
+    "saveSettings": "Zapisz ustawienia",
+    "delegateBlurb": "Na podwyższeniu rejestrowane są głosy na sesji (np. imienne). W tym przypadku głosowanie nad wnioskiem następuje wyłącznie w trybie „tak/nie” (wstrzymanie się nie jest stosowane). Możesz śledzić wynik; delegaci nie głosują w aplikacji.",
+    "yes": "Tak",
+    "no": "NIE",
+    "ballots": "Karty do głosowania",
+    "total": "Całkowity",
+    "outcome": "Wynik",
+    "passed": "Przeszedł",
+    "failed": "Przegrany",
+    "noRecordedVotes": "Brak zarejestrowanych głosów",
+    "reopenMotion": "Otwórz ponownie ruch",
+    "editRecordOpen": "Edytuj rekord…",
+    "hideSettings": "Ukryj ustawienia",
+    "preliminaryPassing": "Podanie (wstępne)",
+    "preliminaryFailing": "Niepowodzenie (wstępne)",
+    "delegateRollCall": "Delegat apelowy ({count})",
+    "noSeatedDelegates": "Brak dostępnych delegatów na miejscu dla tego wniosku.",
+    "rollPrefix": "Rolka:",
+    "recordedPrefix": "Nagrany:",
+    "recordedYes": "Tak",
+    "recordedNo": "NIE",
+    "recordedAbstain": "Wstrzymać się",
+    "recordedNone": "—",
+    "abstain": "Wstrzymać się",
+    "clear": "Jasne",
+    "closeMotion": "Zamknij ruch",
+    "mustVoteBadge": "MUSI głosować",
+    "canVoteBadge": "MOŻE głosować",
+    "noMotions": "Nie ma jeszcze żadnych wniosków.",
+    "currentOpenMotion": "Bieżący ruch otwarty",
+    "noOpenMotion": "W tej chwili nie ma otwartego ruchu.",
+    "recentClosedMotions": "Ostatnie zamknięte wnioski",
+    "noClosedMotions": "Nie ma jeszcze żadnych zamkniętych wniosków.",
+    "untitled": "Nieuprawny",
+    "voteTypes": {
+      "motion": "Ruch",
+      "amendment": "Poprawka",
+      "resolution": "Rezolucja",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Nieobecny (rolka)",
+      "present_abstain": "Obecny — może wstrzymać się od głosu (roll)",
+      "present_voting": "Obecność i głosowanie (rolka)",
+      "unknown": "- (rolka)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Sekcje profilu",
+      "overview": "Przegląd",
+      "awards": "Nagrody",
+      "private": "Zapisy prywatne",
+      "settings": "Ustawienia profilu"
+    },
+    "profilePicture": "Zdjęcie profilowe",
+    "uploadFile": "Prześlij plik",
+    "uploading": "Przesyłanie…",
+    "photoSaved": "Zdjęcie przesłane i zapisane.",
+    "orUrl": "Lub ustaw według adresu URL",
+    "urlPlaceholder": "https://...",
+    "name": "Nazwa",
+    "username": "Nazwa użytkownika",
+    "usernamePlaceholder": "np. alex_1999",
+    "pronouns": "Zaimki",
+    "customPronounNote": "Twój profil zawierał niestandardowy zestaw zaimków, który nie jest już tutaj akceptowany. Wybierz opcję powyżej (lub pozostaw pustą). Zapisanie zastępuje starą wartość.",
+    "school": "Szkoła",
+    "schoolPlaceholder": "np. Szkoła średnia Lincolna",
+    "grade": "Stopień",
+    "selectGrade": "Wybierz ocenę",
+    "conferencesAttended": "Konferencje, w których uczestniczyło",
+    "awardsComma": "Nagrody (oddzielone przecinkami)",
+    "awardsPlaceholder": "Najlepszy Delegat, Wyróżnienie",
+    "allocation": "Przydział",
+    "selectAllocation": "Wybierz alokację",
+    "noAllocationsPlaceholder": "Brak dostępnych przydziałów dla komisji",
+    "saveProfile": "Zapisz profil",
+    "saved": "Profil został zapisany.",
+    "saveFailed": "Nie udało się zapisać profilu.",
+    "errUsernamePattern": "Nazwa użytkownika musi zawierać od 3 do 32 znaków (litery, cyfry, _, ., -)",
+    "errPronounsPreset": "Wybierz zaimek z listy.",
+    "errImageType": "Proszę wybrać plik obrazu.",
+    "errImageSize": "Obraz jest za duży (maks. 5 MB).",
+    "errUploadFailed": "Przesyłanie nie powiodło się.",
+    "errStorageSetup": "Przechowywanie zdjęć profilowych nie jest skonfigurowane. W projekcie Supabase uruchom migrację 00100_profile_pictures_storage_bucket.sql lub utwórz wiadro pamięci publicznej o nazwie profile-pictures (patrz README).",
+    "errPublicUrl": "Nie można znaleźć publicznego adresu URL przesłanego obrazu.",
+    "fallbacks": {
+      "yourCountry": "twój kraj",
+      "committeeSession": "Posiedzenie komisji",
+      "delegate": "Delegat",
+      "speechNote": "Notatka z przemówienia",
+      "untitledMotion": "Ruch bez tytułu",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "Witamy delegata z {flag} {kraj}",
+      "subtitle": "Od czego chciałbyś zacząć?",
+      "links": {
+        "documents": "Dokumenty",
+        "notes": "Notatki",
+        "committeeRoom": "Pokój komisji",
+        "runningNotes": "Uruchamianie notatek",
+        "ideas": "Pomysły",
+        "guides": "Przewodniki",
+        "sources": "Źródła",
+        "resolutions": "Postanowienia",
+        "speeches": "Przemówienia",
+        "stances": "Postawy",
+        "crisisSlides": "Slajdy kryzysowe",
+        "report": "Raport",
+        "motions": "Ruchy",
+        "points": "Zwrotnica"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Nagrody na Twoim profilu",
+      "rank": "ranga",
+      "pending": {
+        "tab": "Oczekujące nominacje",
+        "title": "Oczekujące nominacje na przewodniczącego",
+        "descriptionSingle": "Zapisane przez krzesła i udostępnione SMT do przeglądu. Nagrody końcowe pojawią się poniżej po potwierdzeniu.",
+        "descriptionTabbed": "Zapisane przez krzesła i udostępnione SMT do przeglądu. Nagrody końcowe pojawiają się po potwierdzeniu."
+      },
+      "recorded": {
+        "tab": "Nagrane nagrody",
+        "title": "Nagrane nagrody",
+        "description": "Wyświetlane, gdy krzesła lub SMT przydzielą Cię w narzędziu do śledzenia nagród. Ostateczne uznanie następuje zgodnie z regulaminem konferencji."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Widoczne tylko dla Ciebie, przewodniczących komisji i SMT dla odpowiedniej komisji.",
+      "points": {
+        "title": "Punkty krzesełkowe (prywatne)"
+      },
+      "speechNotes": {
+        "title": "Notatki przemówień przewodniczącego (prywatne)"
+      },
+      "motions": {
+        "title": "Ruchy, które poruszyłeś",
+        "description": "Zapisane w Twoim profilu do przeglądu przez komisję i nadzoru nad SMT."
+      }
+    },
+    "discipline": {
+      "title": "Status dyscyplinarny (prywatny)",
+      "statusLine": "Ostrzeżenia: {warnings} · Strajki: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "głosowanie wyłączone",
+      "speakingSuspended": "mówienie zawieszone",
+      "removedFromCommittee": "usunięty z komisji",
+      "updated": "Zaktualizowano: {wartość}"
+    },
+    "preview": {
+      "ariaLabel": "Podgląd profilu",
+      "title": "Zapowiedź",
+      "yourName": "Twoje imię",
+      "usernameNotSet": "Nazwa użytkownika nie została ustawiona",
+      "gradeValue": "Ocena",
+      "awards": "Nagrody"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Regulamin (ROP)",
+        "content": "# Regulamin \n\n## Punkty i wnioski \n- **Zlecenie**: Prawidłowa procedura \n- **Punkt informacyjny**: Pytanie do prelegenta \n- **Punkt osobistego przywileju**: Komfort osobisty \n- **Wniosek do złożenia**: Odroczenie debaty \n- **Wniosek o odroczenie**: Zakończenie sesji \n\n## Głosowanie \n- Zwykła większość w sprawach proceduralnych \n- Większość 2/3 w sprawach merytorycznych \n- Głosowanie imienne, jeśli zostanie o to poproszone"
+      },
+      "examples": {
+        "title": "Przykłady",
+        "content": "# Przykłady \n\n## Format rozdzielczości \n``` \nWalne Zgromadzenie, \n... \n1. wzywa państwa członkowskie do... \n2. wzywa społeczność międzynarodową do... \n``` \n\n## Struktura papieru pozycji \n1. Tło \n2. Polityka krajowa \n3. Proponowane rozwiązania"
+      },
+      "templates": {
+        "title": "Szablony",
+        "content": "# Szablony \n\n## Szablon raportu przewodniczącego \n- Przegląd komisji \n- Kluczowe punkty dyskusji \n- Uchwały podjęte \n- Zalecenia"
+      },
+      "chairReport": {
+        "title": "Raport przewodniczącego",
+        "content": "# Raport przewodniczącego \n\nDokumentuj tutaj obrady komisji i jej wyniki."
+      }
+    },
+    "edit": "Redagować",
+    "guideDocument": "Dokument przewodnik",
+    "additionalNotes": "Dodatkowe uwagi",
+    "noContentYet": "Brak treści.",
+    "titlePlaceholder": "Tytuł",
+    "googleDocsUrl": "Adres URL Dokumentów Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Nowy Dokument Google otwiera się w innej karcie. Wklej link, który można udostępnić, aby delegaci mogli otworzyć dokument tutaj (wyświetlanie/edytowanie zależy od udostępniania przez Google).",
+    "markdownOptional": "Notatki z Markdown (opcjonalne, jeśli korzystasz z Dokumentu Google)",
+    "save": "Ratować",
+    "cancel": "Anulować",
+    "createNewGuide": "Utwórz nowy przewodnik",
+    "slugPlaceholder": "ślimak (unikalny)",
+    "titleLowerPlaceholder": "tytuł",
+    "googleDocsUrlOptional": "Adres URL Dokumentów Google (opcjonalnie)",
+    "markdownContentOptional": "Treść Markdown (opcjonalnie)",
+    "create": "Tworzyć",
+    "glossary": {
+      "title": "Glosariusz programu MUN",
+      "subtitle": "Unikalna terminologia dopasowana do kodeksu Twojej komisji i bieżących tematów porządku obrad.",
+      "committeeCode": "Kod komitetu: {code}",
+      "sources": {
+        "core": "rdzeń",
+        "committee": "komisja",
+        "topic": "temat"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Delegacja",
+          "definition": "Kraj lub zespół obserwatorów reprezentujący w komisji jedno państwo lub podmiot."
+        },
+        "placard": {
+          "term": "Afisz",
+          "definition": "Znak kraju używany do zwracania się o głos, głosowania i sygnalizowania wniosków proceduralnych."
+        },
+        "dais": {
+          "term": "Podium",
+          "definition": "Zespół przewodniczący, który moderuje debatę, stosuje procedury i zarządza kolejnością wystąpień."
+        },
+        "quorum": {
+          "term": "Kworum",
+          "definition": "Minimalna liczba delegacji wymagana do prowadzenia spraw formalnych i głosów."
+        },
+        "motion": {
+          "term": "Ruch",
+          "definition": "Formalna propozycja zmiany przebiegu debaty, np. typu klubu lub czasu wystąpień."
+        },
+        "point_of_order": {
+          "term": "Kwestia formalna",
+          "definition": "Interwencja w przypadku nieprawidłowego stosowania procedury zgodnie z regulaminem komisji."
+        },
+        "moderated_caucus": {
+          "term": "Klub moderowany",
+          "definition": "Ustrukturyzowany segment debaty z krótkimi wystąpieniami na określony temat podrzędny."
+        },
+        "unmoderated_caucus": {
+          "term": "Niemoderowany klub",
+          "definition": "Nieformalny okres negocjacji, podczas którego delegaci swobodnie poruszają się, aby opracowywać i łączyć pomysły."
+        },
+        "draft_resolution": {
+          "term": "Projekt uchwały",
+          "definition": "Tekst roboczy proponowanych działań komisji przed ostatecznym głosowaniem i przyjęciem."
+        },
+        "amendment": {
+          "term": "Poprawka",
+          "definition": "Proponowana zmiana w projekcie tekstu, przyjazna lub uznana w głosowaniu za nieprzyjazną."
+        },
+        "operative_clause": {
+          "term": "Klauzula operacyjna",
+          "definition": "Numerowana klauzula zorientowana na działanie, opisująca, co komisja proponuje zrobić."
+        },
+        "preambulatory_clause": {
+          "term": "Klauzula wstępna",
+          "definition": "Klauzula dotycząca ustalania kontekstu, powołująca się na podstawowe zasady, obawy i wcześniejsze ramy."
+        },
+        "right_of_reply": {
+          "term": "Prawo do odpowiedzi",
+          "definition": "Możliwość ustosunkowania się do bezpośredniego oświadczenia, które miało wpływ na godność lub pozycję delegacji."
+        },
+        "veto_power": {
+          "term": "Moc weta",
+          "definition": "Uprawnienie stałego członka Rady Bezpieczeństwa ONZ do blokowania merytorycznych projektów rezolucji."
+        },
+        "chapter_vii": {
+          "term": "Rozdział VII",
+          "definition": "Organ Karty Narodów Zjednoczonych ds. zagrożeń dla pokoju, sankcji i środków użycia siły."
+        },
+        "sanctions_regime": {
+          "term": "System sankcji",
+          "definition": "Skoordynowane ograniczenia stosowane w celu wpływania na zachowanie bez bezpośrednich działań militarnych."
+        },
+        "arms_control": {
+          "term": "Kontrola zbrojeń",
+          "definition": "Porozumienia i systemy weryfikacji ograniczające rodzaje, ilości lub rozmieszczenie broni."
+        },
+        "non_proliferation": {
+          "term": "Nieproliferacja",
+          "definition": "Polityki zapobiegające rozprzestrzenianiu się broni nuklearnej, chemicznej, biologicznej lub zaawansowanej."
+        },
+        "confidence_building_measures": {
+          "term": "Środki budowy zaufania",
+          "definition": "Narzędzia przejrzystości i komunikacji, które zmniejszają ryzyko nieporozumień i konfliktów."
+        },
+        "universal_periodic_review": {
+          "term": "Uniwersalny przegląd okresowy",
+          "definition": "Proces wzajemnej oceny, w ramach którego każde państwo członkowskie ONZ składa sprawozdania i otrzymuje zalecenia dotyczące praw."
+        },
+        "special_rapporteur": {
+          "term": "Specjalny Sprawozdawca",
+          "definition": "Niezależny ekspert powołany do monitorowania i raportowania kwestii tematycznych lub praw krajowych."
+        },
+        "treaty_body": {
+          "term": "Organ Traktatowy",
+          "definition": "Komitet ekspertów nadzorujący wdrażanie konkretnego traktatu dotyczącego praw człowieka."
+        },
+        "public_health_emergency": {
+          "term": "Stan zagrożenia zdrowia publicznego",
+          "definition": "Poważna epidemia wymagająca pilnej skoordynowanej reakcji na poziomie krajowym i międzynarodowym."
+        },
+        "surveillance": {
+          "term": "Nadzór epidemiologiczny",
+          "definition": "Ciągłe gromadzenie i analiza danych zdrowotnych w celu wykrywania i śledzenia trendów chorobowych."
+        },
+        "health_systems": {
+          "term": "Wzmocnienie systemów opieki zdrowotnej",
+          "definition": "Poprawa siły roboczej, finansowania, logistyki i zarządzania w celu zapewnienia niezawodnego świadczenia opieki zdrowotnej."
+        },
+        "transnational_crime": {
+          "term": "Transnarodowa przestępczość zorganizowana",
+          "definition": "Działalność przestępcza koordynowana ponad granicami za pośrednictwem sieci i nielegalnych rynków."
+        },
+        "illicit_trafficking": {
+          "term": "Nielegalny handel",
+          "definition": "Nielegalny przepływ narkotyków, broni, osób lub towarów pomiędzy jurysdykcjami."
+        },
+        "rule_of_law_capacity": {
+          "term": "Potencjał w zakresie praworządności",
+          "definition": "Instytucjonalna zdolność systemów wymiaru sprawiedliwości do sprawiedliwego prowadzenia dochodzeń, ścigania i ochrony praw."
+        },
+        "sustainable_development": {
+          "term": "Zrównoważony rozwój",
+          "definition": "Model wzrostu równoważący postęp społeczny, możliwości gospodarcze i ochronę środowiska."
+        },
+        "financing_for_development": {
+          "term": "Finansowanie Rozwoju",
+          "definition": "Publiczne i prywatne mechanizmy finansowania wspierające długoterminowe priorytety rozwojowe."
+        },
+        "policy_coordination": {
+          "term": "Koordynacja polityki",
+          "definition": "Ujednolicenie działań państwa i agencji, aby uniknąć powielania działań i zwiększyć zbiorowy wpływ."
+        },
+        "child_protection": {
+          "term": "Ochrona dziecka",
+          "definition": "Środki zapobiegające wyzyskowi, znęcaniu się i przemocy wobec dzieci we wszystkich środowiskach."
+        },
+        "education_access": {
+          "term": "Dostęp do edukacji",
+          "definition": "Zapewnienie włączających, sprawiedliwych i ciągłych możliwości uczenia się dla wszystkich dzieci."
+        },
+        "humanitarian_response": {
+          "term": "Odpowiedź humanitarna",
+          "definition": "Szybkie działania pomocowe odpowiadające pilnym potrzebom w sytuacjach kryzysowych i konfliktach."
+        },
+        "gender_mainstreaming": {
+          "term": "Mainstreaming płci",
+          "definition": "Włączanie analizy płci do projektowania, wdrażania i oceny polityki."
+        },
+        "gender_based_violence": {
+          "term": "Przemoc ze względu na płeć",
+          "definition": "Krzywda skierowana przeciwko osobie ze względu na tożsamość płciową, role lub nierówne relacje władzy."
+        },
+        "economic_empowerment": {
+          "term": "Wzmocnienie gospodarcze",
+          "definition": "Zwiększanie dostępu do godnej pracy, finansów, własności i władzy decyzyjnej."
+        },
+        "source_attribution": {
+          "term": "Uznanie źródła",
+          "definition": "Wyraźne powoływanie się na pochodzenie informacji, aby można było zweryfikować twierdzenia i umieścić je w kontekście."
+        },
+        "verified_reporting": {
+          "term": "Zweryfikowane raportowanie",
+          "definition": "Standard dziennikarski wymagający potwierdzenia przed publikacją kwestionowanych faktów."
+        },
+        "editorial_independence": {
+          "term": "Niezależność redakcji",
+          "definition": "Oddzielenie decyzji raportowych od nacisków politycznych czy wpływów interesariuszy."
+        },
+        "climate_mitigation": {
+          "term": "Łagodzenie klimatu",
+          "definition": "Działania redukujące emisję gazów cieplarnianych lub zwiększające długoterminowe usuwanie dwutlenku węgla."
+        },
+        "climate_adaptation": {
+          "term": "Adaptacja klimatyczna",
+          "definition": "Polityki i inwestycje zmniejszające podatność na skutki klimatyczne."
+        },
+        "cyber_norms": {
+          "term": "Normy cybernetyczne",
+          "definition": "Wspólne oczekiwania dotyczące odpowiedzialnego zachowania państwa w domenie cyfrowej i cybernetycznej."
+        },
+        "critical_infrastructure": {
+          "term": "Infrastruktura krytyczna",
+          "definition": "Niezbędne systemy, takie jak zasilanie, woda, opieka zdrowotna i łączność, wymagające odporności."
+        },
+        "epidemiology": {
+          "term": "Epidemiologia",
+          "definition": "Badanie wzorców chorób, ich przyczyn i rozmieszczenia w populacjach."
+        },
+        "preparedness_response": {
+          "term": "Gotowość i reagowanie",
+          "definition": "Planowanie, koordynacja i działania wzrostowe w celu powstrzymania sytuacji awaryjnych i zarządzania nimi."
+        },
+        "non_refoulement": {
+          "term": "Zasada non-refoulement",
+          "definition": "Zasada zakazująca powrotu ludzi do miejsc, w których grozi im poważna krzywda."
+        },
+        "durable_solutions": {
+          "term": "Trwałe rozwiązania",
+          "definition": "Długoterminowe skutki dla wysiedleńców: powrót, integracja lokalna lub przesiedlenie."
+        },
+        "nuclear_safeguards": {
+          "term": "Zabezpieczenia nuklearne",
+          "definition": "Środki weryfikacyjne zapewniające, że materiały jądrowe nie zostaną przeznaczone do wykorzystania w broni."
+        },
+        "counter_terrorism": {
+          "term": "Zwalczanie terroryzmu",
+          "definition": "Zintegrowane środki prawne, zapobiegawcze i zabezpieczające przed działalnością terrorystyczną."
+        },
+        "due_process": {
+          "term": "Należyty proces",
+          "definition": "Uczciwe procedury prawne chroniące prawa podczas dochodzenia, ścigania i nakładania sankcji."
+        },
+        "resource_security": {
+          "term": "Bezpieczeństwo zasobów",
+          "definition": "Niezawodny dostęp do żywności, wody i energii w warunkach presji ekonomicznej i środowiskowej."
+        },
+        "resilience": {
+          "term": "Odporność",
+          "definition": "Zdolność społeczności i instytucji do absorpcji wstrząsów i skutecznej odbudowy."
+        }
+      },
+      "topicLine": "Temat: {temat}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Edytuj pomysł",
+    "googleDocsUrl": "Adres URL Dokumentów Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Krótki tekst pomysłu (opcjonalnie)",
+    "save": "Ratować",
+    "cancel": "Anulować",
+    "addIntro": "Dodaj Dokument Google, aby przygotować projekt rozwiązania, lub wpisz krótką notatkę (lub jedno i drugie).",
+    "googleDocsCreateHelp": "Nowy Dokument Google otwiera się w innej karcie; wklej tutaj link po jego utworzeniu.",
+    "resolutionIdeaPlaceholder": "Pomysł na rozwiązanie...",
+    "add": "Dodać",
+    "noIdeasYet": "Nie ma jeszcze pomysłów.",
+    "ideaLabel": "Pomysł",
+    "ideaFallback": "Pomysł {numer}",
+    "linkedDoc": "Powiązany dokument",
+    "addedOn": "Dodano {data}",
+    "edit": "Redagować",
+    "delete": "Usuwać",
+    "ideaDocument": "Dokument pomysłu",
+    "summary": "Streszczenie",
+    "emptyIdea": "Pusty pomysł."
+  },
+  "stances": {
+    "heatmapTitle": "Krótki przegląd postaw (mapa cieplna)",
+    "heatmapHelp": "W jakim stopniu Twoja alokacja wspiera ___? (skala 1-5)",
+    "topicPlaceholder": "np. akcja klimatyczna",
+    "extentLabel": "Zakres (1-5):",
+    "extentHelpTitle": "Zakres (1-5)",
+    "extentHelpBody": "1 oznacza, że ​​Twój przydział ma niewielkie poparcie dla danego tematu, a 5 oznacza silne poparcie. Wybierz liczbę, która odpowiada Twojemu stanowisku w komisji.",
+    "add": "Dodać",
+    "viewOnlyHeatmap": "Mapa cieplna przeznaczona tylko do przeglądania dla personelu.",
+    "notesPerAllocation": "Uwagi na alokację",
+    "noAllocationsYet": "Nie ma jeszcze przydziałów",
+    "notesPlaceholder": "Uwagi dotyczące stanowiska dla tego przydziału...",
+    "noteLanguageWarning": "Ostrzeżenie czytelnika: ta notatka może zawierać nieodpowiedni język.",
+    "save": "Ratować",
+    "saveHelpTitle": "Zapisz notatkę dotyczącą stanowiska",
+    "saveHelpBody": "Zapisuje notatkę dotyczącą stanowiska dla tej alokacji. Może go przeglądać personel i (w zależności od ustawień komisji) inni uczestnicy."
+  },
+  "speeches": {
+    "newSpeech": "Nowe przemówienie",
+    "speechTitlePlaceholder": "Tytuł przemówienia",
+    "googleDocsUrl": "Adres URL Dokumentów Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Otwiera Google w nowej karcie; gdy będzie gotowy, wklej tutaj adres URL dokumentu.",
+    "plainTextOptional": "Wersja robocza zwykłego tekstu (opcjonalnie, jeśli korzystasz z Dokumentu Google)",
+    "save": "Ratować",
+    "cancel": "Anulować",
+    "noSpeechesYet": "Nie ma jeszcze żadnych przemówień. Połącz dokument Google lub wklej tekst.",
+    "speechLabel": "Przemówienie",
+    "untitled": "Nieuprawny",
+    "edit": "Redagować",
+    "speechDocument": "Dokument przemówienia",
+    "draftText": "Projekt tekstu",
+    "noContentHint": "Połącz Dokument Google z opcją Edytuj lub dodaj zwykły tekst w formularzu."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Komisja",
+    "yourContext": "Twój kontekst",
+    "roleLabel": "Rola",
+    "seatLabel": "Siedziba",
+    "clearSearchTitle": "Wyczyść wyszukiwanie i pokaż wszystkie delegacje",
+    "vacantLabel": "Pusty",
+    "assignedLabel": "Przydzielony",
+    "daisLabel": "Podium",
+    "phaseLabel": "Faza",
+    "phaseVoting": "Głosowanie",
+    "phaseDebate": "Debata",
+    "focusSearchTitle": "Wyszukiwanie fokusowe (tytuły i nazwy podestów pasują do zapytania)",
+    "tipLabel": "Wskazówka",
+    "searchVacantTitle": "Wyszukaj „wolne” miejsca w sali",
+    "searchHint": "Wpisz kraj, imię i nazwisko delegata, szkołę, zaimek lub „wolny”, aby wyróżnić dopasowania w pokoju. Naciśnij Enter, aby przejść do pierwszego dopasowania; Esc kasuje. Kliknij opcję Wolne, aby przejść do pustych miejsc.",
+    "findLabel": "Znajdź członka delegacji lub podestu",
+    "searchPlaceholder": "Kraj, imię, szkoła...",
+    "matchesCount": "Dopasowane miejsca: {matches} z {total} miejsc",
+    "enterScrolls": "Wprowadź zwoje",
+    "typeToFilterHint": "Wpisz do filtrowania — wprowadź przewijanie do pierwszego dopasowania",
+    "noMatches": "Brak pasujących delegacji lub miejsc na podwyższeniu.",
+    "digitalDisplay": "Cyfrowy wyświetlacz",
+    "floorLabel": "Podłoga",
+    "staffSeatsHeading": "Personel - miejsca",
+    "searchAria": "Szukaj delegacji",
+    "virtualRoomVacant": "Pusty",
+    "profileAria": "Zobacz profil: {kraj}",
+    "vacantSeatAria": "Wolne miejsce",
+    "placardAria": "Afisz {kraj}",
+    "gavelAria": "Młotek licytacyjny",
+    "viewProfileAria": "Zobacz profil: {title}",
+    "noProfileLinkAria": "{title} (brak linku do profilu)",
+    "committeeFloor": "Piętro komisji",
+    "virtualRoomFigureAria": "Sala komisji wirtualnej – {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Filtrowanie delegacji. Pierwsze podświetlone miejsce to pierwszy mecz na ringu.",
+    "helperText": "Na plakatach znajduje się lista krajów (z przydziałów), imię i nazwisko, szkoła i zaimki z profilu każdego delegata. Edytuj swoje w sekcji Profil. Puste miejsca w komisjach są oznaczone jako wolne. Kliknij wypełniony plakat lub miejsce na podwyższeniu, aby otworzyć stronę danego członka (czat i raporty).",
+    "virtualRoomCaption": "Wirtualny model sali komitetu ONZ z plakatami delegatów przedstawiającymi kraj, imię i nazwisko, szkołę i zaimki."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Prośba o zabranie głosu",
+      "delegateFallback": "Delegat",
+      "needAllocation": "Aby poprosić o zabranie głosu, potrzebujesz przydziału.",
+      "alreadyQueued": "Masz już aktywną prośbę o wypowiedź w kolejce.",
+      "requested": "Poproszono o zabranie głosu. Pojawisz się w kolejce.",
+      "requestFailed": "Nie udało się poprosić o rozmowę.",
+      "helpBody": "Wysyła Twoją delegację do kolejki krzeseł. Jednocześnie możesz mieć jedno aktywne oczekujące/bieżące żądanie.",
+      "purposeLabel": "Opcjonalny cel (pokazany na etykiecie kolejki)",
+      "purposeHelpTitle": "Etykieta przeznaczenia",
+      "purposeHelpBody": "Ten tekst jest dołączany do nazwy Twojego kraju, aby krzesła mogły zobaczyć, dlaczego zamawiasz piętro.",
+      "purposePlaceholder": "np. wsparcie + przegląd poprawek",
+      "requesting": "Żądanie...",
+      "rollPromptTitle": "Wymagana zgoda przewodniczącego",
+      "rollPromptBodyPickStatus": "Sesja się rozpoczęła. Wybierz swój status imienny, aby odblokować możliwość mówienia i głosowania. Wyboru tego nie można zmienić.",
+      "rollPromptBodyWaitSessionStart": "Oczekiwanie, aż przewodniczący rozpocznie posiedzenie komisji.",
+      "rollPromptBodyWaitRollPrompt": "Oczekiwanie na wezwanie imienne.",
+      "rollPromptBodyMarkedAbsent": "Obecnie jesteś oznaczony jako nieobecny. Poproś przewodniczącego o oznaczenie Cię jako obecnego, abyś mógł zabrać głos i głosować.",
+      "rollPromptBodyChecking": "Sprawdzam status rolki...",
+      "rollPromptSaving": "Oszczędność...",
+      "rollPromptPresent": "Obecny",
+      "rollPromptPresentVoting": "Obecny i głosujący"
+    },
+    "motionVoting": {
+      "votingProcedure": "Procedura głosowania",
+      "currentMotion": "Aktualny ruch",
+      "motioner": "Osoba poruszająca się",
+      "majority": "Większość",
+      "majoritySimple": "Prosty",
+      "tally": "Tak {tak} - Nie {nie} - Razem {ogółem}",
+      "help": "Na podium rejestruje się głosy każdej delegacji podczas sesji. W głosowaniu nad wnioskiem stosuje się wyłącznie opcję Tak lub Nie (żadnych głosów wstrzymujących się). Sumy uwzględniają tylko tabliczki, na których widniała informacja Tak lub Nie; delegacje nieobecne są pomijane."
+    },
+    "activeMotion": {
+      "currentMotion": "Aktualny ruch",
+      "motionFallback": "Ruch",
+      "motioner": "Osoba poruszająca się",
+      "majority": "Większość",
+      "majoritySimple": "Prosty",
+      "type": "Typ",
+      "timer": "Regulator czasowy",
+      "currentSpeaker": "Obecny mówca",
+      "nextSpeaker": "Następny mówca",
+      "speakerTimeLeftCap": "Czas głośnika (lewy / czapka)",
+      "speakerTimeLeftTotal": "Czas głośnika (lewy / całkowity)",
+      "perSpeaker": "(na głośnik)",
+      "paused": "(pauza)",
+      "pauseReason": "Pauza: {powód}"
+    },
+    "floorStatus": {
+      "sessionTime": "Czas sesji",
+      "sessionNotStarted": "Sesja nie została rozpoczęta",
+      "limit": "Limit",
+      "limitRemaining": "Pozostało {wartość}",
+      "limitOverBy": "ponad o {value}",
+      "quickLinkSession": "Sesja",
+      "quickLinkRoll": "Rolka",
+      "quickLinkSpeakers": "Głośniki",
+      "quickLinkMotions": "Ruchy",
+      "quickLinkTimer": "Regulator czasowy",
+      "dais": "Podium",
+      "pinned": "Przypięty",
+      "viewFullAnnouncement": "Zobacz całe ogłoszenie",
+      "timerPausesReadOnly": "Timer zostaje wstrzymany (tylko do odczytu)",
+      "speakerList": "Lista mówców",
+      "speakerFallback": "Głośnik",
+      "rollCallYou": "Apel (ty)",
+      "fullAnnouncement": "Pełne ogłoszenie",
+      "daisAnnouncement": "Ogłoszenie Daisa",
+      "close": "Zamknąć",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Nazwa sesji",
+      "sessionNamePlaceholder": "np. Poranna sesja",
+      "sessionNameSaving": "Oszczędność…",
+      "sessionNameSaved": "Zapisano",
+      "sessionNameHint": "Zapisuje się automatycznie i pojawia się w historii sesji.",
+      "title": "Posiedzenie komisji",
+      "subtitle": "Rozpoczęcie lub zakończenie posiedzenia komisji.",
+      "helpStartStop": "Start rozpoczyna licznik czasu/status sesji komisji na żywo dla wszystkich. Stop kończy sesję i kasuje bieżący limit czasu.",
+      "migrationUnavailable": "Kontrole sesji są tymczasowo niedostępne do czasu zastosowania najnowszych migracji baz danych.",
+      "endTimeInFuture": "Wybierz godzinę zakończenia w przyszłości lub przejdź na opcję bez limitu.",
+      "sessionStartUnavailable": "Sygnatura czasowa rozpoczęcia sesji jest niedostępna do czasu zastosowania najnowszych migracji.",
+      "endTimeInFutureSetNoLimit": "Wybierz godzinę zakończenia w przyszłości lub nie ustawiaj żadnego limitu.",
+      "sessionLimitUpdated": "Zaktualizowano limit sesji.",
+      "startedLabel": "Rozpoczęto:",
+      "timeInLabel": "Czas w:",
+      "timeUntilEndLabel": "Czas do końca:",
+      "overByValue": "ponad o {value}",
+      "modeLabel": "Tryb:",
+      "modeStopwatchNoLimit": "Stoper (bez limitu czasu)",
+      "sessionNotRunning": "Sesja nie jest uruchomiona.",
+      "sessionLimit": "Limit sesji",
+      "sessionLimitModesTitle": "Tryby limitu sesji",
+      "sessionLimitModesHelp": "Brak: bez końca. Budżet czasu: liczy się od początku. Koniec o: ustalony czas zegarowy w lokalnej strefie czasowej.",
+      "sessionLimitOptional": "Fakultatywny.",
+      "noneLabel": "Nic",
+      "noneDescription": "biegnie, aż się zatrzymasz.",
+      "timeBudgetLabel": "Budżet czasu",
+      "timeBudgetDescription": "liczy się od momentu rozpoczęcia.",
+      "endTimeLabel": "Koniec czasu",
+      "endTimeDescription": "używa stałego czasu zegarowego (zastępuje budżet, jeśli oba zostały kiedykolwiek ustawione).",
+      "noneIndefinite": "Brak (nieokreślony)",
+      "noneScheduledEndHint": "Brak zaplanowanego zakończenia; pokazywany jest tylko czas, który upłynął.",
+      "timeBudgetFromStart": "Budżet czasu od początku",
+      "hoursLabel": "Godziny",
+      "minutesLabel": "Protokół",
+      "minimumOneMinute": "(minimum 1 minuta)",
+      "endAtLocalTime": "Koniec o (czasu lokalnego)",
+      "stopSession": "Zatrzymaj sesję",
+      "saveLimit": "Zapisz limit",
+      "saveLimitHelp": "Stosuje zaktualizowane ustawienia limitów, gdy sesja jest już uruchomiona, bez zatrzymywania sesji.",
+      "startSession": "Rozpocznij sesję",
+      "sidebarUsePrefix": "Użyj paska bocznego do",
+      "rollCall": "Apel",
+      "speakers": "Głośniki",
+      "formalMotions": "Wnioski formalne",
+      "timer": "Regulator czasowy",
+      "sidebarAnd": "I",
+      "announcements": "Ogłoszenia",
+      "sidebarUseSuffix": "— jedno narzędzie na kartę.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Historia sesji",
+      "savedCount": "Zapisano {count}",
+      "permissionsHint": "Krzesła mogą zmieniać nazwy wpisów. SMT/Admin może zmieniać nazwy i usuwać wpisy.",
+      "empty": "Nie ma jeszcze historii sesji.",
+      "rename": "Przemianować",
+      "delete": "Usuwać",
+      "deleteConfirm": "Usunąć tę sesję z historii?",
+      "sessionNamePrompt": "Nazwa sesji",
+      "rangeClosed": "{zakres}",
+      "rangeOngoing": "{zakres} -> W toku"
+    },
+    "timerPage": {
+      "title": "Regulator czasowy",
+      "controlsTitle": "Sterowanie timerem",
+      "controlsHelp": "Użyj głosu ogólnego, aby określić ogólny harmonogram debaty, lub głosowania nad wnioskiem, aby powiązać widoczność z konkretnym punktem głosowania otwartego.",
+      "tabSetup": "1) Konfiguracja",
+      "tabClock": "2) Sterowanie zegarem",
+      "tabNotes": "3) Notatki z przemowy",
+      "tabLog": "4) Wstrzymaj dziennik",
+      "setupHelp": "Wybierz, czy ten licznik czasu dotyczy głosu ogólnego (zawsze widoczny dla delegatów), czy też jest powiązany z wnioskiem otwartym do głosowania (delegaci widzą go tylko wtedy, gdy głosowanie jest aktywnym elementem). Jeśli czas na mówcę jest włączony, zegar pozostaje widoczny podczas moderowanych spotkań. Wstrzymaj zegar / Uruchom zegar, zatrzymaj lub wznów odliczanie. Ustaw niezależnie czas głośnika (pozostały) i czas całkowity, a następnie Zapisz licznik czasu. Presety wypełniają oba do tej samej długości; możesz później edytować którekolwiek pole. Przerwy są rejestrowane z krótkim powodem.",
+      "namedPreset": "Nazwane ustawienie wstępne",
+      "applyPreset": "Zastosuj gotowe ustawienia...",
+      "floorLabelDelegates": "Etykieta piętra (delegaci)",
+      "floorLabelPlaceholder": "np. GSL 60",
+      "timerPurpose": "Cel timera",
+      "purposeGeneralFloor": "Debata ogólna / głos (niepowiązany z głosowaniem)",
+      "purposeMotionVote": "Otwarty ruch — licznik czasu tylko wtedy, gdy głosowanie jest aktywne na parkiecie",
+      "openMotionForVoting": "Wniosek otwarty (musi być otwarty do głosowania)",
+      "selectMotion": "Wybierz ruch...",
+      "untitled": "Nieuprawny",
+      "noOpenMotionWarning": "Żaden wniosek nie podlega głosowaniu. Najpierw otwórz głosowanie lub zmień cel na ogólne.",
+      "clock": "Zegar",
+      "running": "Działanie",
+      "paused": "Wstrzymano",
+      "saveToEnablePauseStart": "zapisz timer, aby włączyć pauzę/start.",
+      "pauseReasonLogged": "Powód wstrzymania (zalogowany)",
+      "pauseReasonPlaceholder": "np. Punkt porządku, problem techniczny, niemoderowane zebranie...",
+      "pauseClock": "Zatrzymaj zegar",
+      "startClock": "Uruchom zegar",
+      "perSpeakerTitle": "Czas wystąpienia na mówcę (moderowany klub)",
+      "perSpeakerHelp": "Ustaw Całkowity czas jako limit na głośnik i Czas głośnika jako pozostały czas; Advance przechodzi do następnego głośnika i resetuje pozostałe do limitu.",
+      "currentSpeaker": "Obecny mówca",
+      "nextSpeaker": "Następny mówca",
+      "speechNotesCurrentSpeaker": "Notatki przemówienia (obecny mówca)",
+      "speechNotesHelp": "Notatki są powiązane z tekstem licznika czasu bieżącego mówcy, a jeśli na liście mówców znajduje się osoba oznaczona jako Obecna, jej delegacja jest przechowywana w celach informacyjnych.",
+      "timerFloorLabel": "Timer (podłoga):",
+      "speakerListCurrent": "Lista prelegentów (aktualna):",
+      "noCurrentDelegation": "Żadna delegacja nie jest oznaczona jako Obecna na liście mówców.",
+      "note": "Notatka",
+      "notePlaceholder": "Punkty, POI, ton, dalsze działania...",
+      "saveSpeechNote": "Zapisz notatkę przemówienia",
+      "recentNotes": "Twoje ostatnie notatki (ta komisja)",
+      "delete": "Usuwać",
+      "speakerTimeRemaining": "Czas głośnika (pozostały)",
+      "remainingHelpPerSpeaker": "Odliczanie dla bieżącego mówcy (resetuje się po przejściu).",
+      "remainingHelpNormal": "Odliczanie dla bieżącego mówcy (może być mniejsze niż całkowite).",
+      "totalTime": "Całkowity czas",
+      "totalHelpPerSpeaker": "Zatyczka na głośnik (mianownik na podłodze; do tego pozostały wkłady Advance).",
+      "totalHelpNormal": "Pełna długość tego segmentu timera (pokazana po ukośniku na podłodze).",
+      "saveTimer": "Zapisz timer",
+      "advanceSpeakerReset": "Włącz głośnik i zresetuj zegar",
+      "recentPauseLog": "Ostatni dziennik pauz",
+      "noPauseEvents": "Dla tej komisji nie zarejestrowano jeszcze żadnych zdarzeń wstrzymania.",
+      "openPauseLogHint": "Otwórz dziennik pauz, aby przejrzeć zapisane przyczyny wstrzymań i sygnatury czasowe.",
+      "saved": "Minutnik zapisany.",
+      "savedCapped": "Minutnik zapisany. Czas mówcy był dłuższy niż całkowity; ograniczone do sumy.",
+      "alreadyPaused": "Minutnik jest już wstrzymany.",
+      "pausedForCommittee": "Timer zatrzymał się dla komisji.",
+      "alreadyRunning": "Minutnik już działa.",
+      "runningForCommittee": "Licznik czasu dla komisji.",
+      "euTimerBoardTitle": "Tablica liczników czasu Parlamentu Europejskiego (11 liczników)",
+      "euTimerBoardHelp": "Jeden licznik czasu na imprezę plus czas całkowity, czas POI/POC i czas głośnika. Użyj opcji Zastosuj, aby skopiować wiersz do pól licznika czasu na żywo na karcie Zegar (czas głośnika / Zapisz licznik czasu).",
+      "euTimerName": "Nazwa",
+      "euTimerTag": "Etykietka",
+      "euTotalTime": "Całkowity czas",
+      "euPoiPocTime": "Czas POI/POC",
+      "euSpeakerTime": "Czas na mówcę"
+    }
   }
 }

@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "เปิดชั้นการเคลื่อนไหวสำหรับแถลงการณ์ก่อน",
     "openMotionBlocksRecording": "ญัตติได้เปิดให้ลงคะแนนเสียงแล้ว ปิดก่อนบันทึกข้อความเพิ่มเติม",
     "statedMotionRecorded": "บันทึกการเคลื่อนไหวที่ระบุ (ยังไม่เปิดให้ลงคะแนน)",
-    "statedMotionRemoved": "การเคลื่อนไหวดังกล่าวถูกลบออก"
+    "statedMotionRemoved": "การเคลื่อนไหวดังกล่าวถูกลบออก",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "ภาษา",
@@ -595,7 +611,8 @@
     "pointsLog": "• บันทึกคะแนน",
     "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
     "timer": "ตัวจับเวลา",
-    "smtProfile": "ประวัติโดยย่อ"
+    "smtProfile": "ประวัติโดยย่อ",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "ไม่ได้กำหนดค่า Supabase",
@@ -763,7 +780,8 @@
       "archive": "คลังเก็บเอกสารสำคัญ",
       "officialLinks": "ลิงค์อย่างเป็นทางการ",
       "roomCode": "รหัสห้อง",
-      "settings": "การตั้งค่า"
+      "settings": "การตั้งค่า",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "ประเทศสมาชิกของสหประชาชาติ",
       "unSystem": "UN System (ผู้ก่อตั้งและสมาชิก)",
       "history": "ประวัติศาสตร์สหประชาชาติ"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "เพิ่มแหล่งที่มา",
-      "sourceUrl": "URL แหล่งที่มา",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (แนะนำ)",
-      "urlHelp": "สำหรับ Google เอกสารใหม่ ให้ใช้ปุ่มและวางลิงก์เอกสารที่นี่",
-      "titleOptional": "ชื่อเรื่อง (ไม่บังคับ)",
-      "saveChanges": "บันทึกการเปลี่ยนแปลง",
-      "editSource": "แก้ไขแหล่งที่มา",
-      "urlPlaceholderShort": "Google Doc หรือ URL อื่นๆ",
-      "empty": "ยังไม่มีแหล่งที่มา เพิ่มลิงก์ Google Doc เพื่อเปิดที่นี่",
-      "sourceLabel": "แหล่งที่มา",
-      "openLink": "เปิดลิงก์",
-      "embedHeading": "เอกสารต้นทาง",
-      "notGoogleDoc": "URL นี้ไม่ใช่ Google เอกสาร ใช้ลิงก์ docs.google.com/document/d/… เพื่อฝังและแก้ไขที่นี่ หรือเปิดลิงก์ด้านบน"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "ผู้ร่วมประชุมไม่สามารถอัพโหลดเอกสารตำแหน่งได้โดยตรง ใช้เอกสารประเภทอื่น",
-      "alertOnlyChairsPositionPaper": "เฉพาะประธาน/SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดเอกสารตำแหน่งได้",
-      "alertOnlySmtChairReport": "มีเพียง SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดรายงานประธานได้",
-      "alertOnlySmtRop": "มีเพียง SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดเอกสาร RoP",
-      "alertOnlySmtAwardCriteria": "มีเพียง SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดเอกสารเกณฑ์รางวัลได้",
-      "alertNeedContentOrUrl": "เพิ่มเนื้อหาข้อความในเครื่องหรือ URL ของ Google เอกสาร",
-      "confirmDelete": "ลบเอกสารนี้ใช่ไหม",
-      "delegatePrepTitle": "ส่วนเตรียมเอกสาร",
-      "delegatePrepBody": "คุณสามารถอัปโหลด ดู และแก้ไข <prep>เตรียมเอกสาร</prep> ของคุณเองได้โดยตรงจากหน้านี้",
-      "positionPaperGuideTitle": "ตำแหน่งตัวกั้นกระดาษ",
-      "positionPaperGuideBlurb": "ดาวน์โหลดคู่มือตัวยึดตำแหน่งในขณะที่กำลังเตรียม PDF สุดท้าย",
-      "downloadPlaceholderGuide": "ดาวน์โหลดคู่มือตัวยึดตำแหน่ง",
-      "addDocument": "เพิ่มเอกสาร",
-      "tabs": {
-        "ariaLabel": "ส่วนเอกสาร",
-        "library": "ห้องสมุด",
-        "compose": "เขียน",
-        "composeHint": "เริ่มเอกสารใหม่หรือแก้ไขแบบร่างที่มีอยู่จากแท็บนี้"
-      },
-      "newDocumentTitle": "เอกสารใหม่",
-      "editDocumentTitle": "แก้ไขเอกสาร",
-      "typeLabel": "พิมพ์",
-      "types": {
-        "position_paper": "ตำแหน่งกระดาษ",
-        "chair_report": "รายงานเก้าอี้",
-        "rop": "รป",
-        "award_criteria": "เกณฑ์การได้รับรางวัล",
-        "chair_notes": "บันทึกของเก้าอี้",
-        "prep_doc": "เตรียมเอกสาร"
-      },
-      "delegatePositionPaperNote": "เก้าอี้จะอัพโหลดเอกสารแสดงตำแหน่งพร้อมคำติชม",
-      "delegateOwner": "เจ้าของผู้รับมอบสิทธิ์",
-      "chairRecipient": "ผู้รับเก้าอี้",
-      "titleLabel": "ชื่อ",
-      "titlePlaceholder": "ชื่อเอกสาร",
-      "googleDocsUrl": "URL ของ Google เอกสาร",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (ฝังมุมมอง/แก้ไขในแอป)",
-      "googleDocsHelp": "ใช้ Google Doc ใหม่เพื่อเปิด Google ในแท็บใหม่ จากนั้นวางลิงก์เอกสารที่นี่ ข้อความธรรมดาด้านล่างเป็นทางเลือก เอกสารทุกฉบับต้องมีข้อความในเครื่อง ลิงก์ Google เอกสาร หรือทั้งสองอย่าง",
-      "plainTextOptional": "ข้อความธรรมดา (ไม่จำเป็น)",
-      "plainTextPlaceholder": "หมายเหตุหรือข้อความร่าง...",
-      "chairFeedbackLabel": "ความคิดเห็นของเก้าอี้",
-      "chairFeedbackPlaceholder": "ข้อเสนอแนะสำหรับเอกสารตำแหน่งผู้ร่วมประชุม...",
-      "empty": "ยังไม่มีเอกสาร. เพิ่มหรือลิงก์ Google เอกสาร",
-      "sidebarDocumentLabel": "เอกสาร",
-      "sections": {
-        "chairReports": "ประธานรายงาน.",
-        "rop": "รป",
-        "awardCriteria": "เกณฑ์การได้รับรางวัล",
-        "prepDocuments": "เตรียมเอกสาร",
-        "chairNotes": "บันทึกของเก้าอี้",
-        "otherDocuments": "เอกสารอื่นๆ"
-      },
-      "untitled": "ไม่มีชื่อ",
-      "linkedDocumentHeading": "เอกสารที่เชื่อมโยง",
-      "notesHeading": "หมายเหตุ",
-      "noGoogleDocYet": "ยังไม่มีการเชื่อมโยง Google Doc ใช้การแก้ไขเพื่อเพิ่ม docs.google.com/document/d/… URL",
-      "chairFeedbackHeading": "ความคิดเห็นของเก้าอี้",
-      "noFeedbackYet": "ยังไม่มีการเพิ่มความคิดเห็น"
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "ป้อนอีเมลของผู้รับมอบสิทธิ์ก่อน",
-      "sentToDelegate": "ส่งไปที่ {อีเมล}",
-      "newResolution": "ความละเอียดใหม่",
-      "maxDraftResolutions": "คณะกรรมการชุดนี้มีมติร่างแล้ว {count} รายการ",
-      "googleDocLink": "ลิงก์ Google เอกสาร",
-      "googleDocUrlPlaceholder": "URL ของ Google เอกสาร (docs.google.com/document/d/… — ใช้สำหรับการฝังและการแก้ไข)",
-      "googleDocUrlHelp": "Google Doc ใหม่จะเปิดขึ้นในแท็บอื่น คัดลอก URL จากแถบที่อยู่และวางที่นี่",
-      "mainSubmittersPlaceholder": "ผู้ส่งหลัก (รหัสผู้ใช้ คั่นด้วยเครื่องหมายจุลภาค)",
-      "coSubmittersPlaceholder": "ผู้ส่งร่วม (รหัสผู้ใช้ คั่นด้วยเครื่องหมายจุลภาค)",
-      "create": "สร้าง",
-      "cancel": "ยกเลิก",
-      "openInNewTab": "เปิดในแท็บใหม่",
-      "noGoogleDocLink": "ไม่มีลิงก์ Google เอกสาร",
-      "visibleToOtherBloc": "ปรากฏแก่บล็อกอื่น",
-      "resolutionCounts": "หมวดย่อยหลัก: {main} | ผู้ร่วมย่อย: {co} | ผู้ลงนาม: {ผู้ลงนาม}",
-      "blocButton": "กลุ่ม {name} ({stance})",
-      "signVirtually": "ลงชื่อเสมือนจริง (แจ้งหมวดย่อยหลัก)",
-      "shareByEmail": "แบ่งปันความละเอียดทางอีเมล",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "ส่งให้ผู้รับมอบสิทธิ์",
-      "clauseEditor": "บรรณาธิการข้อ",
-      "noClausesYet": "ยังไม่มีข้อ.",
-      "clauseNumber": "ข้อ {หมายเลข}",
-      "saveClause": "บันทึกข้อ",
-      "delete": "ลบ",
-      "addClausePlaceholder": "เพิ่มมาตราใหม่...",
-      "addClause": "เพิ่มข้อ",
-      "clauseVoteHistory": "ประวัติการลงคะแนนเสียงข้อ",
-      "noClauseOutcomesYet": "ยังไม่มีผลการลงคะแนนเสียงที่บันทึกไว้",
-      "clauseFallback": "ข้อ",
-      "passed": "ผ่านแล้ว",
-      "failed": "ล้มเหลว",
-      "motionId": "การเคลื่อนไหว {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "ส่วนการลงคะแนนเสียง",
-        "open": "เปิด",
-        "closed": "ปิด"
-      },
-      "requiredMajority": "ส่วนใหญ่ที่ต้องการ",
-      "helpRequiredMajorityTitle": "ส่วนใหญ่ที่ต้องการ",
-      "helpRequiredMajorityBody": "เลือกเกณฑ์การโหวตที่ใช้ในการตัดสินว่าผ่าน/ไม่ผ่าน 'ความเรียบง่าย' มีมากกว่าครึ่ง `2/3` ต้องใช้คะแนนเสียงข้างมาก",
-      "majoritySimple": "เรียบง่าย",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} ส่วนใหญ่",
-      "mustVote": "ต้องลงคะแนน",
-      "helpMustVoteTitle": "ต้องลงคะแนน",
-      "helpMustVoteBody": "ทำเครื่องหมายการเคลื่อนไหวนี้เป็นรายการ \"ต้องโหวต\" ใช้เพื่อสื่อสารข้อกำหนดไปยังผู้เข้าร่วม (ขึ้นอยู่กับการตั้งค่าของคณะกรรมการของคุณ)",
-      "saveSettings": "บันทึกการตั้งค่า",
-      "delegateBlurb": "เวทีจะบันทึกการลงคะแนนเสียงในเซสชั่น (เช่น การโทรออก) การลงคะแนนเสียงที่นี่เป็นไปตามใช่/ไม่ใช่เท่านั้น (ไม่ใช้การงดออกเสียง) คุณสามารถติดตามการนับได้ ผู้ได้รับมอบหมายไม่ลงคะแนนเสียงในแอป",
-      "yes": "ใช่",
-      "no": "เลขที่",
-      "ballots": "บัตรลงคะแนน",
-      "total": "ทั้งหมด",
-      "outcome": "ผลลัพธ์",
-      "passed": "ผ่านไป",
-      "failed": "ล้มเหลว",
-      "noRecordedVotes": "ไม่มีการลงคะแนนเสียงที่บันทึกไว้",
-      "reopenMotion": "เปิดการเคลื่อนไหวอีกครั้ง",
-      "editRecordOpen": "แก้ไขบันทึก...",
-      "hideSettings": "ซ่อนการตั้งค่า",
-      "preliminaryPassing": "ผ่าน (เบื้องต้น)",
-      "preliminaryFailing": "ล้มเหลว (เบื้องต้น)",
-      "delegateRollCall": "มอบหมายการโทร ({count})",
-      "noSeatedDelegates": "ไม่มีผู้ร่วมประชุมที่นั่งว่างสำหรับการเคลื่อนไหวนี้",
-      "rollPrefix": "ม้วน:",
-      "recordedPrefix": "บันทึก:",
-      "recordedYes": "ใช่",
-      "recordedNo": "เลขที่",
-      "recordedAbstain": "งดเว้น",
-      "recordedNone": "—",
-      "abstain": "งดเว้น",
-      "clear": "ชัดเจน",
-      "closeMotion": "ปิดการเคลื่อนไหว",
-      "mustVoteBadge": "ต้องลงคะแนน",
-      "canVoteBadge": "โหวตได้",
-      "noMotions": "ยังไม่มีการเคลื่อนไหว",
-      "currentOpenMotion": "การเคลื่อนไหวแบบเปิดปัจจุบัน",
-      "noOpenMotion": "ไม่มีการเคลื่อนไหวแบบเปิดในขณะนี้",
-      "recentClosedMotions": "การเคลื่อนไหวปิดล่าสุด",
-      "noClosedMotions": "ยังไม่มีการเคลื่อนไหวปิด",
-      "untitled": "ไม่มีชื่อ",
-      "voteTypes": {
-        "motion": "การเคลื่อนไหว",
-        "amendment": "การแก้ไข",
-        "resolution": "ปณิธาน"
-      },
-      "roll": {
-        "absent": "ขาด (ม้วน)",
-        "present_abstain": "ปัจจุบัน — อาจงด (ม้วน)",
-        "present_voting": "นำเสนอและลงคะแนนเสียง (ม้วน)",
-        "unknown": "- (ม้วน)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "ส่วนโปรไฟล์",
-        "overview": "ภาพรวม",
-        "awards": "รางวัล",
-        "private": "บันทึกส่วนตัว",
-        "settings": "การตั้งค่าโปรไฟล์"
-      },
-      "profilePicture": "รูปโปรไฟล์",
-      "uploadFile": "อัพโหลดไฟล์",
-      "uploading": "กำลังอัปโหลด...",
-      "photoSaved": "อัปโหลดและบันทึกรูปภาพแล้ว",
-      "orUrl": "หรือกำหนดโดย URL",
-      "urlPlaceholder": "https://...",
-      "name": "ชื่อ",
-      "username": "ชื่อผู้ใช้",
-      "usernamePlaceholder": "เช่น alex_1999",
-      "pronouns": "คำสรรพนาม",
-      "customPronounNote": "โปรไฟล์ของคุณมีชุดสรรพนามที่กำหนดเองซึ่งไม่ได้รับการยอมรับที่นี่อีกต่อไป เลือกตัวเลือกด้านบน (หรือเว้นว่างไว้) การบันทึกจะแทนที่ค่าเก่า",
-      "school": "โรงเรียน",
-      "schoolPlaceholder": "เช่น โรงเรียนมัธยมลินคอล์น",
-      "grade": "ระดับ",
-      "selectGrade": "เลือกเกรด",
-      "conferencesAttended": "การประชุมเข้าร่วม",
-      "awardsComma": "รางวัล (คั่นด้วยลูกน้ำ)",
-      "awardsPlaceholder": "ผู้แทนที่ดีที่สุด, รางวัลชมเชย",
-      "allocation": "การจัดสรร",
-      "selectAllocation": "เลือกการจัดสรร",
-      "noAllocationsPlaceholder": "ไม่มีการจัดสรรคณะกรรมการ",
-      "saveProfile": "บันทึกโปรไฟล์",
-      "saved": "บันทึกโปรไฟล์แล้ว",
-      "saveFailed": "ไม่สามารถบันทึกโปรไฟล์ได้",
-      "errUsernamePattern": "Username ต้องมีความยาว 3-32 ตัวอักษร (ตัวอักษร, ตัวเลข, _, ., -)",
-      "errPronounsPreset": "เลือกสรรพนามจากรายการ",
-      "errImageType": "กรุณาเลือกไฟล์ภาพ",
-      "errImageSize": "รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 5 MB)",
-      "errUploadFailed": "การอัปโหลดล้มเหลว",
-      "errStorageSetup": "ไม่ได้ตั้งค่าการจัดเก็บรูปโปรไฟล์ ในโปรเจ็กต์ Supabase ให้เรียกใช้การโยกย้าย 00100_profile_pictures_storage_bucket.sql หรือสร้างที่เก็บข้อมูลสาธารณะชื่อโปรไฟล์-รูปภาพ (ดู README)",
-      "errPublicUrl": "ไม่สามารถแก้ไข URL สาธารณะสำหรับรูปภาพที่อัปโหลด",
-      "fallbacks": {
-        "yourCountry": "ประเทศของคุณ",
-        "committeeSession": "สมัยประชุมคณะกรรมการ",
-        "delegate": "มอบหมาย",
-        "speechNote": "บันทึกคำพูด",
-        "untitledMotion": "ความเคลื่อนไหวที่ไม่มีชื่อ",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "ยินดีต้อนรับผู้แทนจาก {flag} {country}",
-        "subtitle": "คุณต้องการเริ่มต้นด้วยอะไร?",
-        "links": {
-          "documents": "เอกสาร",
-          "notes": "หมายเหตุ",
-          "committeeRoom": "ห้องกรรมการ",
-          "runningNotes": "หมายเหตุการวิ่ง",
-          "ideas": "ไอเดีย",
-          "guides": "คำแนะนำ",
-          "sources": "แหล่งที่มา",
-          "resolutions": "มติ",
-          "speeches": "สุนทรพจน์",
-          "stances": "ท่าทาง",
-          "crisisSlides": "สไลด์วิกฤติ",
-          "report": "รายงาน",
-          "motions": "การเคลื่อนไหว",
-          "points": "คะแนน"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "รางวัลในโปรไฟล์ของคุณ",
-        "rank": "อันดับ {อันดับ}",
-        "pending": {
-          "tab": "อยู่ระหว่างการพิจารณาเสนอชื่อ",
-          "title": "อยู่ระหว่างการเสนอชื่อเก้าอี้",
-          "descriptionSingle": "บันทึกโดยเก้าอี้และแบ่งปันกับ SMT เพื่อตรวจสอบ รางวัลสุดท้ายจะปรากฏด้านล่างหลังจากการยืนยัน",
-          "descriptionTabbed": "บันทึกโดยเก้าอี้และแบ่งปันกับ SMT เพื่อตรวจสอบ รางวัลสุดท้ายจะปรากฏหลังจากการยืนยัน"
-        },
-        "recorded": {
-          "tab": "รางวัลที่บันทึกไว้",
-          "title": "รางวัลที่บันทึกไว้",
-          "description": "แสดงรายการเมื่อประธานหรือ SMT มอบหมายให้คุณติดตามรางวัล การยกย่องชมเชยครั้งสุดท้ายเป็นไปตามกฎการประชุมของคุณ"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "ปรากฏเฉพาะกับคุณ ประธานคณะกรรมการ และ SMT สำหรับคณะกรรมการที่เกี่ยวข้อง",
-        "points": {
-          "title": "จุดเก้าอี้ (ส่วนตัว)"
-        },
-        "speechNotes": {
-          "title": "บันทึกสุนทรพจน์ของประธาน (ส่วนตัว)"
-        },
-        "motions": {
-          "title": "การเคลื่อนไหวที่คุณเคลื่อนไหว",
-          "description": "บันทึกลงในโปรไฟล์ของคุณเพื่อการตรวจสอบของคณะกรรมการและการกำกับดูแล SMT"
-        }
-      },
-      "discipline": {
-        "title": "สถานะทางวินัย (เอกชน)",
-        "statusLine": "คำเตือน: {warnings} · การประท้วง: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "ปิดการใช้งานการลงคะแนน",
-        "speakingSuspended": "การพูดถูกระงับ",
-        "removedFromCommittee": "ถอดออกจากคณะกรรมการ",
-        "updated": "อัปเดต: {value}"
-      },
-      "preview": {
-        "ariaLabel": "ดูตัวอย่างโปรไฟล์",
-        "title": "ดูตัวอย่าง",
-        "yourName": "ชื่อของคุณ",
-        "usernameNotSet": "ชื่อผู้ใช้ไม่ได้ตั้งค่า",
-        "gradeValue": "เกรด {เกรด}",
-        "awards": "รางวัล"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "กฎขั้นตอน (RoP)",
-          "content": "#กฏระเบียบการ \n\n## คะแนนและการเคลื่อนไหว \n- **จุดสั่งซื้อ**: เป็นขั้นตอนที่ถูกต้อง \n- **ประเด็นข้อมูล**: คำถามถึงวิทยากร \n- **คะแนนสิทธิพิเศษส่วนบุคคล**: ความสะดวกสบายส่วนบุคคล \n- **การเคลื่อนไหวสู่โต๊ะ**: เลื่อนการอภิปราย \n- **การเคลื่อนไหวเพื่อเลื่อน**: สิ้นสุดเซสชั่น \n\n## โหวต \n- ส่วนใหญ่อย่างง่ายสำหรับเรื่องขั้นตอน \n- 2/3 ส่วนใหญ่สำหรับเรื่องสำคัญ \n- การลงคะแนนเสียงแบบเรียกขานหากมีการร้องขอ"
-        },
-        "examples": {
-          "title": "ตัวอย่าง",
-          "content": "#ตัวอย่าง \n\n## รูปแบบความละเอียด \n``` \nสมัชชาใหญ่ \n... \n1. เรียกร้องให้รัฐสมาชิก... \n2. กระตุ้นให้ประชาคมระหว่างประเทศ... \n``` \n\n## ตำแหน่ง โครงสร้างกระดาษ \n1. ความเป็นมา \n2. นโยบายประเทศ \n3. แนวทางแก้ไขที่เสนอ"
-        },
-        "templates": {
-          "title": "เทมเพลต",
-          "content": "# เทมเพลต \n\n## เทมเพลตรายงานเก้าอี้ \n- ภาพรวมของคณะกรรมการ \n- ประเด็นการอภิปรายที่สำคัญ \n- มติผ่านไปแล้ว \n- คำแนะนำ"
-        },
-        "chairReport": {
-          "title": "รายงานเก้าอี้",
-          "content": "#รายงานประธาน \n\nเอกสารการดำเนินการของคณะกรรมการและผลลัพธ์ที่นี่"
-        }
-      },
-      "edit": "แก้ไข",
-      "guideDocument": "เอกสารแนะนำ",
-      "additionalNotes": "หมายเหตุเพิ่มเติม",
-      "noContentYet": "ยังไม่มีเนื้อหา",
-      "titlePlaceholder": "ชื่อ",
-      "googleDocsUrl": "URL ของ Google เอกสาร",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Google Doc ใหม่จะเปิดขึ้นในแท็บอื่น วางลิงก์ที่แชร์ได้เพื่อให้ผู้รับมอบสิทธิ์สามารถเปิดเอกสารได้ที่นี่ (ดู/แก้ไขขึ้นอยู่กับการแชร์ของ Google)",
-      "markdownOptional": "บันทึกย่อ Markdown (ไม่บังคับหากคุณใช้ Google Doc)",
-      "save": "บันทึก",
-      "cancel": "ยกเลิก",
-      "createNewGuide": "สร้างคำแนะนำใหม่",
-      "slugPlaceholder": "ทาก (ไม่ซ้ำกัน)",
-      "titleLowerPlaceholder": "ชื่อ",
-      "googleDocsUrlOptional": "URL ของ Google เอกสาร (ไม่บังคับ)",
-      "markdownContentOptional": "เนื้อหามาร์กดาวน์ (ไม่บังคับ)",
-      "create": "สร้าง",
-      "glossary": {
-        "title": "อภิธานศัพท์วาระ MUN",
-        "subtitle": "คำศัพท์เฉพาะที่ตรงกับรหัสคณะกรรมการของคุณและหัวข้อวาระปัจจุบัน",
-        "committeeCode": "รหัสคณะกรรมการ: {code}",
-        "topicTag": "หัวข้อ: {หัวข้อ}",
-        "sources": {
-          "core": "แกนกลาง",
-          "committee": "คณะกรรมการ",
-          "topic": "หัวข้อ"
-        },
-        "terms": {
-          "delegation": {
-            "term": "การมอบหมาย",
-            "definition": "ประเทศหรือทีมผู้สังเกตการณ์ที่เป็นตัวแทนของรัฐหรือหน่วยงานหนึ่งในคณะกรรมการ"
-          },
-          "placard": {
-            "term": "ป้ายประกาศ",
-            "definition": "ป้ายประเทศที่ใช้เพื่อขอที่ประชุม ลงคะแนนเสียง และให้สัญญาณการเคลื่อนไหวตามขั้นตอน"
-          },
-          "dais": {
-            "term": "เวที",
-            "definition": "เป็นประธานทีมที่ทำหน้าที่กลั่นกรองการอภิปราย ใช้ขั้นตอน และจัดการลำดับการพูด"
-          },
-          "quorum": {
-            "term": "องค์ประชุม",
-            "definition": "จำนวนการมอบหมายขั้นต่ำที่จำเป็นในการดำเนินธุรกิจและการลงคะแนนเสียงอย่างเป็นทางการ"
-          },
-          "motion": {
-            "term": "การเคลื่อนไหว",
-            "definition": "ข้อเสนออย่างเป็นทางการเพื่อเปลี่ยนกระแสการอภิปราย เช่น ประเภทการประชุมใหญ่หรือเวลาพูด"
-          },
-          "point_of_order": {
-            "term": "จุดสั่งซื้อ",
-            "definition": "การแทรกแซงเมื่อมีการใช้ขั้นตอนไม่ถูกต้องตามกฎของคณะกรรมการ"
-          },
-          "moderated_caucus": {
-            "term": "กลั่นกรองพรรคการเมือง",
-            "definition": "ส่วนการอภิปรายที่มีโครงสร้างพร้อมการกล่าวสุนทรพจน์ในช่วงเวลาสั้น ๆ ในหัวข้อย่อยที่กำหนดไว้"
-          },
-          "unmoderated_caucus": {
-            "term": "พรรคการเมืองที่ไม่ได้รับการตรวจสอบ",
-            "definition": "ระยะเวลาการเจรจาอย่างไม่เป็นทางการซึ่งผู้ได้รับมอบหมายเคลื่อนไหวอย่างอิสระเพื่อร่างและรวมความคิด"
-          },
-          "draft_resolution": {
-            "term": "ความละเอียดร่าง",
-            "definition": "ข้อความการทำงานของการดำเนินการของคณะกรรมการที่เสนอก่อนการลงคะแนนเสียงครั้งสุดท้ายและการรับเลี้ยงบุตรบุญธรรม"
-          },
-          "amendment": {
-            "term": "การแก้ไข",
-            "definition": "การเปลี่ยนแปลงที่เสนอเป็นข้อความร่าง ทั้งที่เป็นมิตรหรือโหวตว่าไม่เป็นมิตร"
-          },
-          "operative_clause": {
-            "term": "ข้อปฏิบัติการ",
-            "definition": "ประโยคเชิงตัวเลขเชิงปฏิบัติการที่อธิบายถึงสิ่งที่คณะกรรมการเสนอให้ทำ"
-          },
-          "preambulatory_clause": {
-            "term": "ข้อก่อนเดินทาง",
-            "definition": "ข้อกำหนดบริบทที่อ้างถึงหลักการเบื้องหลัง ข้อกังวล และกรอบการทำงานก่อนหน้านี้"
-          },
-          "right_of_reply": {
-            "term": "สิทธิในการตอบกลับ",
-            "definition": "โอกาสในการตอบสนองต่อคำกล่าวโดยตรงที่ส่งผลต่อศักดิ์ศรีหรือตำแหน่งการมอบหมาย"
-          },
-          "veto_power": {
-            "term": "วีโต้ พาวเวอร์",
-            "definition": "อำนาจสมาชิกถาวรของ UNSC ในการขัดขวางมติร่างสาระสำคัญ"
-          },
-          "chapter_vii": {
-            "term": "บทที่เจ็ด",
-            "definition": "หน่วยงานกำกับดูแลกฎบัตรสหประชาชาติว่าด้วยภัยคุกคามต่อสันติภาพ มาตรการคว่ำบาตร และการใช้กำลัง"
-          },
-          "sanctions_regime": {
-            "term": "ระบอบการลงโทษ",
-            "definition": "ข้อจำกัดที่ประสานงานกันใช้เพื่อโน้มน้าวพฤติกรรมโดยไม่ต้องมีการปฏิบัติการทางทหารโดยตรง"
-          },
-          "arms_control": {
-            "term": "การควบคุมอาวุธ",
-            "definition": "ข้อตกลงและระบบตรวจสอบที่จำกัดประเภท ปริมาณ หรือการนำอาวุธไปใช้"
-          },
-          "non_proliferation": {
-            "term": "การไม่แพร่ขยาย",
-            "definition": "นโยบายเพื่อป้องกันการแพร่กระจายของศักยภาพด้านนิวเคลียร์ เคมี ชีวภาพ หรืออาวุธขั้นสูง"
-          },
-          "confidence_building_measures": {
-            "term": "มาตรการสร้างความมั่นใจ",
-            "definition": "เครื่องมือความโปร่งใสและการสื่อสารที่ช่วยลดความเข้าใจผิดและความเสี่ยงด้านความขัดแย้ง"
-          },
-          "universal_periodic_review": {
-            "term": "การทบทวนเป็นระยะสากล",
-            "definition": "กระบวนการทบทวนโดยผู้ทรงคุณวุฒิซึ่งรัฐสมาชิกสหประชาชาติแต่ละประเทศรายงานและรับคำแนะนำด้านสิทธิ"
-          },
-          "special_rapporteur": {
-            "term": "ผู้รายงานพิเศษ",
-            "definition": "ผู้เชี่ยวชาญอิสระที่ได้รับการแต่งตั้งให้ติดตามและรายงานประเด็นปัญหาสิทธิเฉพาะเรื่องหรือประเทศ"
-          },
-          "treaty_body": {
-            "term": "ร่างสนธิสัญญา",
-            "definition": "คณะกรรมการผู้เชี่ยวชาญที่กำกับดูแลการดำเนินการตามสนธิสัญญาสิทธิมนุษยชนโดยเฉพาะ"
-          },
-          "public_health_emergency": {
-            "term": "เหตุฉุกเฉินด้านสาธารณสุข",
-            "definition": "เหตุการณ์การระบาดที่รุนแรงซึ่งต้องอาศัยการประสานงานอย่างเร่งด่วนทั้งในประเทศและต่างประเทศ"
-          },
-          "surveillance": {
-            "term": "การเฝ้าระวังทางระบาดวิทยา",
-            "definition": "การรวบรวมและวิเคราะห์ข้อมูลสุขภาพอย่างต่อเนื่องเพื่อตรวจจับและติดตามแนวโน้มโรค"
-          },
-          "health_systems": {
-            "term": "การเสริมสร้างความเข้มแข็งของระบบสุขภาพ",
-            "definition": "การปรับปรุงบุคลากร การเงิน การขนส่ง และการกำกับดูแลเพื่อการส่งมอบการดูแลสุขภาพที่เชื่อถือได้"
-          },
-          "transnational_crime": {
-            "term": "กลุ่มอาชญากรข้ามชาติ",
-            "definition": "กิจกรรมทางอาญาที่ประสานงานข้ามพรมแดนผ่านเครือข่ายและตลาดที่ผิดกฎหมาย"
-          },
-          "illicit_trafficking": {
-            "term": "การค้ามนุษย์ที่ผิดกฎหมาย",
-            "definition": "การเคลื่อนย้ายยาเสพติด อาวุธ บุคคล หรือสินค้าอย่างผิดกฎหมายข้ามเขตอำนาจศาล"
-          },
-          "rule_of_law_capacity": {
-            "term": "ความจุของกฎแห่งกฎหมาย",
-            "definition": "ความสามารถของสถาบันในระบบยุติธรรมในการสอบสวน ดำเนินคดี และปกป้องสิทธิอย่างยุติธรรม"
-          },
-          "sustainable_development": {
-            "term": "การพัฒนาที่ยั่งยืน",
-            "definition": "โมเดลการเติบโตที่สมดุลระหว่างความก้าวหน้าทางสังคม โอกาสทางเศรษฐกิจ และการปกป้องสิ่งแวดล้อม"
-          },
-          "financing_for_development": {
-            "term": "การจัดหาเงินทุนเพื่อการพัฒนา",
-            "definition": "กลไกการระดมทุนภาครัฐและเอกชนที่สนับสนุนลำดับความสำคัญของการพัฒนาในระยะยาว"
-          },
-          "policy_coordination": {
-            "term": "การประสานงานนโยบาย",
-            "definition": "การจัดแนวการดำเนินการของรัฐและหน่วยงานเพื่อหลีกเลี่ยงความซ้ำซ้อนและเพิ่มผลกระทบโดยรวม"
-          },
-          "child_protection": {
-            "term": "การคุ้มครองเด็ก",
-            "definition": "มาตรการป้องกันการแสวงหาผลประโยชน์ การละเมิด และความรุนแรงต่อเด็กในทุกพื้นที่"
-          },
-          "education_access": {
-            "term": "การเข้าถึงการศึกษา",
-            "definition": "สร้างความมั่นใจในโอกาสการเรียนรู้ที่ครอบคลุม เสมอภาค และต่อเนื่องสำหรับเด็กทุกคน"
-          },
-          "humanitarian_response": {
-            "term": "การตอบสนองด้านมนุษยธรรม",
-            "definition": "การดำเนินการบรรเทาทุกข์อย่างรวดเร็วเพื่อตอบสนองความต้องการเร่งด่วนในภาวะวิกฤติและความขัดแย้ง"
-          },
-          "gender_mainstreaming": {
-            "term": "การบูรณาการเรื่องเพศ",
-            "definition": "บูรณาการการวิเคราะห์เพศภาวะในการออกแบบนโยบาย การนำไปปฏิบัติ และการประเมินผล"
-          },
-          "gender_based_violence": {
-            "term": "ความรุนแรงบนพื้นฐานของเพศสภาพ",
-            "definition": "อันตรายที่มุ่งเป้าไปที่บุคคลตามอัตลักษณ์ทางเพศ บทบาท หรือความสัมพันธ์ทางอำนาจที่ไม่เท่าเทียมกัน"
-          },
-          "economic_empowerment": {
-            "term": "การเสริมอำนาจทางเศรษฐกิจ",
-            "definition": "ขยายการเข้าถึงงานที่มีคุณค่า การเงิน ความเป็นเจ้าของ และอำนาจในการตัดสินใจ"
-          },
-          "source_attribution": {
-            "term": "การระบุแหล่งที่มา",
-            "definition": "อ้างอิงแหล่งที่มาของข้อมูลอย่างชัดเจนเพื่อให้สามารถตรวจสอบการอ้างสิทธิ์และปรับบริบทได้"
-          },
-          "verified_reporting": {
-            "term": "การรายงานที่ได้รับการยืนยัน",
-            "definition": "มาตรฐานวารสารศาสตร์ที่ต้องได้รับการตรวจสอบก่อนเผยแพร่ข้อเท็จจริงที่มีการโต้แย้ง"
-          },
-          "editorial_independence": {
-            "term": "บรรณาธิการอิสระ",
-            "definition": "แยกการรายงานการตัดสินใจออกจากแรงกดดันทางการเมืองหรืออิทธิพลของผู้มีส่วนได้ส่วนเสีย"
-          },
-          "climate_mitigation": {
-            "term": "การบรรเทาสภาพภูมิอากาศ",
-            "definition": "การดำเนินการที่ลดการปล่อยก๊าซเรือนกระจกหรือเพิ่มการกำจัดคาร์บอนในระยะยาว"
-          },
-          "climate_adaptation": {
-            "term": "การปรับตัวต่อสภาพภูมิอากาศ",
-            "definition": "นโยบายและการลงทุนที่ลดความเสี่ยงต่อผลกระทบที่เกี่ยวข้องกับสภาพภูมิอากาศ"
-          },
-          "cyber_norms": {
-            "term": "บรรทัดฐานทางไซเบอร์",
-            "definition": "ความคาดหวังร่วมกันสำหรับพฤติกรรมของรัฐที่มีความรับผิดชอบในโดเมนดิจิทัลและไซเบอร์"
-          },
-          "critical_infrastructure": {
-            "term": "โครงสร้างพื้นฐานที่สำคัญ",
-            "definition": "ระบบที่จำเป็น เช่น ไฟฟ้า น้ำ สุขภาพ และการสื่อสารที่ต้องการความยืดหยุ่น"
-          },
-          "epidemiology": {
-            "term": "ระบาดวิทยา",
-            "definition": "ศึกษารูปแบบโรค สาเหตุ และการแพร่กระจายในประชากร"
-          },
-          "preparedness_response": {
-            "term": "การเตรียมความพร้อมและการตอบสนอง",
-            "definition": "การวางแผน การประสานงาน และการดำเนินการที่เพิ่มขึ้นอย่างรวดเร็วเพื่อควบคุมและจัดการเหตุฉุกเฉิน"
-          },
-          "non_refoulement": {
-            "term": "การไม่ส่งกลับ",
-            "definition": "หลักการห้ามส่งบุคคลไปยังสถานที่ซึ่งได้รับอันตรายร้ายแรง"
-          },
-          "durable_solutions": {
-            "term": "โซลูชั่นที่ทนทาน",
-            "definition": "ผลลัพธ์ระยะยาวสำหรับผู้พลัดถิ่น: การกลับมา การบูรณาการในท้องถิ่น หรือการตั้งถิ่นฐานใหม่"
-          },
-          "nuclear_safeguards": {
-            "term": "การคุ้มครองนิวเคลียร์",
-            "definition": "มาตรการตรวจสอบเพื่อให้แน่ใจว่าวัสดุนิวเคลียร์จะไม่เปลี่ยนไปใช้อาวุธ"
-          },
-          "counter_terrorism": {
-            "term": "การต่อต้านการก่อการร้าย",
-            "definition": "มาตรการทางกฎหมาย การป้องกัน และการรักษาความปลอดภัยแบบบูรณาการต่อกิจกรรมการก่อการร้าย"
-          },
-          "due_process": {
-            "term": "กระบวนการครบกำหนด",
-            "definition": "กระบวนการทางกฎหมายที่เป็นธรรมเพื่อปกป้องสิทธิในระหว่างการสอบสวน การดำเนินคดี และการลงโทษ"
-          },
-          "resource_security": {
-            "term": "ความปลอดภัยของทรัพยากร",
-            "definition": "การเข้าถึงอาหาร น้ำ และพลังงานที่เชื่อถือได้ภายใต้ความเครียดทางเศรษฐกิจและสิ่งแวดล้อม"
-          },
-          "resilience": {
-            "term": "ความยืดหยุ่น",
-            "definition": "ความสามารถของชุมชนและสถาบันในการดูดซับแรงกระแทกและฟื้นตัวอย่างมีประสิทธิภาพ"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "แก้ไขแนวคิด",
-      "googleDocsUrl": "URL ของ Google เอกสาร",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "ข้อความแนวคิดสั้นๆ (ไม่บังคับ)",
-      "save": "บันทึก",
-      "cancel": "ยกเลิก",
-      "addIntro": "เพิ่ม Google เอกสารเพื่อร่างแนวคิดการแก้ปัญหา หรือพิมพ์บันทึกสั้นๆ (หรือทั้งสองอย่าง)",
-      "googleDocsCreateHelp": "Google Doc ใหม่จะเปิดขึ้นในแท็บอื่น วางลิงก์ที่นี่หลังจากสร้างแล้ว",
-      "resolutionIdeaPlaceholder": "แนวความคิด...",
-      "add": "เพิ่ม",
-      "noIdeasYet": "ยังไม่มีไอเดีย",
-      "ideaLabel": "ความคิด",
-      "ideaFallback": "ไอเดีย {จำนวน}",
-      "linkedDoc": "เอกสารที่เชื่อมโยง",
-      "addedOn": "เพิ่มแล้ว {วันที่}",
-      "edit": "แก้ไข",
-      "delete": "ลบ",
-      "ideaDocument": "เอกสารไอเดีย",
-      "summary": "สรุป",
-      "emptyIdea": "ความคิดที่ว่างเปล่า"
-    },
-    "stances": {
-      "heatmapTitle": "ภาพรวมท่าทางโดยย่อ (แผนที่ความร้อน)",
-      "heatmapHelp": "การจัดสรรของคุณรองรับ ___ มากน้อยเพียงใด? (สเกล 1-5)",
-      "topicPlaceholder": "เช่น การกระทำของสภาพอากาศ",
-      "extentLabel": "ขอบเขต (1-5):",
-      "extentHelpTitle": "ขอบเขต (1-5)",
-      "extentHelpBody": "1 หมายความว่าการจัดสรรของคุณได้รับการสนับสนุนเพียงเล็กน้อยสำหรับหัวข้อ และ 5 หมายถึงการสนับสนุนอย่างมาก เลือกหมายเลขที่ตรงกับจุดยืนของคุณในคณะกรรมการ",
-      "add": "เพิ่ม",
-      "viewOnlyHeatmap": "แผนที่ความร้อนแบบดูอย่างเดียวสำหรับพนักงาน",
-      "notesPerAllocation": "หมายเหตุต่อการจัดสรร",
-      "noAllocationsYet": "ยังไม่มีการจัดสรร",
-      "notesPlaceholder": "หมายเหตุจุดยืนสำหรับการจัดสรรนี้...",
-      "noteLanguageWarning": "คำเตือนผู้อ่าน: บันทึกนี้อาจมีภาษาที่ไม่เหมาะสม",
-      "save": "บันทึก",
-      "saveHelpTitle": "บันทึกจุดยืน",
-      "saveHelpBody": "บันทึกจุดยืนสำหรับการจัดสรรนี้ สามารถดูได้โดยเจ้าหน้าที่และผู้เข้าร่วมคนอื่นๆ (ขึ้นอยู่กับการตั้งค่าของคณะกรรมการ)"
-    },
-    "speeches": {
-      "newSpeech": "คำพูดใหม่",
-      "speechTitlePlaceholder": "ชื่อคำพูด",
-      "googleDocsUrl": "URL ของ Google เอกสาร",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "เปิด Google ในแท็บใหม่ วาง URL เอกสารที่นี่เมื่อพร้อม",
-      "plainTextOptional": "ร่างข้อความธรรมดา (ไม่บังคับหากคุณใช้ Google เอกสาร)",
-      "save": "บันทึก",
-      "cancel": "ยกเลิก",
-      "noSpeechesYet": "ยังไม่มีสุนทรพจน์ เชื่อมโยง Google เอกสารหรือวางข้อความ",
-      "speechLabel": "คำพูด",
-      "untitled": "ไม่มีชื่อ",
-      "edit": "แก้ไข",
-      "speechDocument": "เอกสารคำพูด",
-      "draftText": "ข้อความร่าง",
-      "noContentHint": "เชื่อมโยง Google เอกสารกับการแก้ไข หรือเพิ่มข้อความธรรมดาในแบบฟอร์ม"
-    },
-    "committeeRoom": {
-      "committeeLabel": "คณะกรรมการ",
-      "yourContext": "บริบทของคุณ",
-      "roleLabel": "บทบาท",
-      "seatLabel": "ที่นั่ง",
-      "clearSearchTitle": "ล้างการค้นหาและแสดงการมอบหมายทั้งหมด",
-      "vacantLabel": "ว่าง",
-      "assignedLabel": "มอบหมายแล้ว",
-      "daisLabel": "เวที",
-      "phaseLabel": "เฟส",
-      "phaseVoting": "การลงคะแนนเสียง",
-      "phaseDebate": "อภิปราย",
-      "focusSearchTitle": "มุ่งเน้นการค้นหา (ชื่อและชื่อ dais ตรงกับข้อความค้นหาของคุณ)",
-      "tipLabel": "เคล็ดลับ",
-      "searchVacantTitle": "ค้นหาที่นั่ง \"ว่าง\" ในห้อง",
-      "searchHint": "พิมพ์ประเทศ ชื่อผู้แทน โรงเรียน สรรพนาม หรือ \"ว่าง\" เพื่อเน้นการแข่งขันในห้อง กด Enter เพื่อข้ามไปยังนัดแรก Esc เคลียร์แล้ว คลิกว่างเพื่อข้ามไปยังที่นั่งว่าง",
-      "findLabel": "ค้นหาคณะผู้แทนหรือสมาชิกเวที",
-      "searchPlaceholder": "ประเทศ ชื่อ โรงเรียน...",
-      "matchesCount": "ตรงกัน {matches} จาก {total} ที่นั่ง",
-      "enterScrolls": "ป้อนการเลื่อน",
-      "typeToFilterHint": "พิมพ์เพื่อกรอง - ป้อนการเลื่อนเพื่อให้ตรงกันก่อน",
-      "noMatches": "ไม่มีการมอบหมายที่ตรงกันหรือที่นั่งในเวที",
-      "digitalDisplay": "จอแสดงผลดิจิตอล",
-      "floorLabel": "พื้น",
-      "staffSeatsHeading": "พนักงาน-ที่นั่ง",
-      "searchAria": "ค้นหาการมอบหมาย",
-      "virtualRoomVacant": "ว่าง",
-      "profileAria": "ดูโปรไฟล์: {ประเทศ}",
-      "vacantSeatAria": "ที่นั่งว่าง",
-      "placardAria": "ป้ายประกาศ {ประเทศ}",
-      "gavelAria": "ตะลุมพุก",
-      "viewProfileAria": "ดูโปรไฟล์: {title}",
-      "noProfileLinkAria": "{title} (ไม่มีลิงก์โปรไฟล์)",
-      "committeeFloor": "ชั้นคณะกรรมการ",
-      "virtualRoomFigureAria": "ห้องคณะกรรมการเสมือน - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "การกรองการมอบหมาย ไฮไลท์ที่นั่งแรกคือนัดแรกในสังเวียน",
-      "helperText": "ป้ายประกาศรายชื่อประเทศ (จากการจัดสรร) ชื่อ โรงเรียน และคำสรรพนามจากโปรไฟล์ของผู้ร่วมประชุมแต่ละคน แก้ไขของคุณภายใต้โปรไฟล์ ที่นั่งคณะกรรมการว่างจะแสดงว่าว่าง คลิกป้ายหรือที่นั่งที่มีข้อความเต็มเพื่อเปิดหน้าของสมาชิกนั้น (แชทและรายงานจากที่นั่น)",
-      "virtualRoomCaption": "ห้องคณะกรรมการจำลองสหประชาชาติเสมือนจริงพร้อมป้ายผู้แทนแสดงประเทศ ชื่อ โรงเรียน และคำสรรพนาม"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "ขอพูด",
-        "delegateFallback": "มอบหมาย",
-        "needAllocation": "คุณต้องมีการจัดสรรเพื่อขอพูด",
-        "alreadyQueued": "คุณมีคำขอพูดที่ใช้งานอยู่ในคิวแล้ว",
-        "requested": "ก็ขอพูด. คุณจะปรากฏในคิว",
-        "requestFailed": "ไม่สามารถขอพูดได้",
-        "helpBody": "ส่งการมอบหมายของคุณไปที่คิวประธาน คุณสามารถมีคำขอรอ/ปัจจุบันที่ใช้งานอยู่ได้ครั้งละหนึ่งคำขอ",
-        "purposeLabel": "วัตถุประสงค์เพิ่มเติม (แสดงในป้ายคิว)",
-        "purposeHelpTitle": "ป้ายวัตถุประสงค์",
-        "purposeHelpBody": "ข้อความนี้ต่อท้ายชื่อประเทศของคุณ เพื่อให้เก้าอี้สามารถดูว่าทำไมคุณถึงขอชั้น",
-        "purposePlaceholder": "เช่น ภาพรวมการสนับสนุน + การแก้ไข",
-        "requesting": "กำลังขอ...",
-        "rollPromptTitle": "ต้องได้รับอนุมัติจากประธาน",
-        "rollPromptBodyPickStatus": "เซสชันได้เริ่มต้นแล้ว เลือกสถานะการโทรของคุณเพื่อปลดล็อคการพูดและการลงคะแนน ตัวเลือกนี้ไม่สามารถเปลี่ยนแปลงได้",
-        "rollPromptBodyWaitSessionStart": "รอประธานเริ่มประชุมคณะกรรมการ",
-        "rollPromptBodyWaitRollPrompt": "กำลังรอข้อความแจ้งการโทรออก",
-        "rollPromptBodyMarkedAbsent": "ขณะนี้คุณถูกทำเครื่องหมายว่าไม่อยู่ ขอให้เก้าอี้ทำเครื่องหมายให้คุณนำเสนอเพื่อพูดและลงคะแนนเสียง",
-        "rollPromptBodyChecking": "กำลังตรวจสอบสถานะม้วนของคุณ...",
-        "rollPromptSaving": "ประหยัด...",
-        "rollPromptPresent": "ปัจจุบัน",
-        "rollPromptPresentVoting": "นำเสนอและลงคะแนนเสียง"
-      },
-      "motionVoting": {
-        "votingProcedure": "ขั้นตอนการลงคะแนนเสียง",
-        "currentMotion": "การเคลื่อนไหวในปัจจุบัน",
-        "motioner": "โมชั่นเนอร์",
-        "majority": "ส่วนใหญ่",
-        "majoritySimple": "เรียบง่าย",
-        "tally": "ใช่ {ใช่} - ไม่ใช่ {no} - รวม {total}",
-        "help": "เวทีจะบันทึกการลงคะแนนเสียงของคณะผู้แทนแต่ละคนในเซสชั่น การลงมติให้ใช้ใช่หรือไม่ใช่เท่านั้น (ไม่งดออกเสียง) ผลรวมจะนับเฉพาะป้ายที่มีการบันทึกว่าใช่หรือไม่ใช่ การมอบหมายที่ขาดหายไปจะถูกข้ามไป"
-      },
-      "activeMotion": {
-        "currentMotion": "การเคลื่อนไหวในปัจจุบัน",
-        "motionFallback": "การเคลื่อนไหว",
-        "motioner": "โมชั่นเนอร์",
-        "majority": "ส่วนใหญ่",
-        "majoritySimple": "เรียบง่าย",
-        "type": "พิมพ์",
-        "timer": "ตัวจับเวลา",
-        "currentSpeaker": "วิทยากรคนปัจจุบัน",
-        "nextSpeaker": "ผู้บรรยายคนต่อไป",
-        "speakerTimeLeftCap": "เวลาผู้พูด (ซ้าย / ฝาครอบ)",
-        "speakerTimeLeftTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
-        "perSpeaker": "(ต่อผู้พูด)",
-        "paused": "(หยุดชั่วคราว)",
-        "pauseReason": "หยุดชั่วคราว: {เหตุผล}"
-      },
-      "floorStatus": {
-        "sessionTime": "เวลาเซสชัน",
-        "sessionNotStarted": "เซสชันไม่ได้เริ่มต้น",
-        "limit": "ขีดจำกัด",
-        "limitRemaining": "เหลือ {value}",
-        "limitOverBy": "เกินด้วย {value}",
-        "quickLinkSession": "การประชุม",
-        "quickLinkRoll": "ม้วน",
-        "quickLinkSpeakers": "ลำโพง",
-        "quickLinkMotions": "การเคลื่อนไหว",
-        "quickLinkTimer": "ตัวจับเวลา",
-        "dais": "เวที",
-        "pinned": "ปักหมุดแล้ว",
-        "viewFullAnnouncement": "ดูประกาศฉบับเต็ม",
-        "timerPausesReadOnly": "ตัวจับเวลาหยุดชั่วคราว (อ่านอย่างเดียว)",
-        "speakerList": "รายชื่อวิทยากร",
-        "speakerFallback": "วิทยากร",
-        "rollCallYou": "ม้วนสาย (คุณ)",
-        "fullAnnouncement": "ประกาศฉบับเต็ม",
-        "daisAnnouncement": "ประกาศไดส์",
-        "close": "ปิด"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "ชื่อเซสชัน",
-        "sessionNamePlaceholder": "เช่น ภาคเช้า",
-        "sessionNameSaving": "ประหยัด…",
-        "sessionNameSaved": "บันทึกแล้ว",
-        "sessionNameHint": "บันทึกโดยอัตโนมัติและปรากฏในประวัติเซสชัน",
-        "title": "สมัยประชุมคณะกรรมการ",
-        "subtitle": "เริ่มหรือหยุดการประชุมของคณะกรรมการ",
-        "helpStartStop": "เริ่ม เริ่มตัวจับเวลา/สถานะเซสชั่นของคณะกรรมการถ่ายทอดสดสำหรับทุกคน หยุด สิ้นสุดเซสชันและล้างขีดจำกัดเวลาปัจจุบัน",
-        "migrationUnavailable": "การควบคุมเซสชันไม่พร้อมใช้งานชั่วคราวจนกว่าจะใช้การย้ายฐานข้อมูลล่าสุด",
-        "endTimeInFuture": "เลือกเวลาสิ้นสุดในอนาคตหรือเปลี่ยนเป็นไม่มีขีดจำกัด",
-        "sessionStartUnavailable": "การประทับเวลาเริ่มต้นเซสชันไม่พร้อมใช้งานจนกว่าจะใช้การย้ายข้อมูลล่าสุด",
-        "endTimeInFutureSetNoLimit": "เลือกเวลาสิ้นสุดในอนาคตหรือกำหนดไม่จำกัด",
-        "sessionLimitUpdated": "อัปเดตขีดจำกัดเซสชันแล้ว",
-        "startedLabel": "เริ่ม:",
-        "timeInLabel": "เวลาใน:",
-        "timeUntilEndLabel": "เวลาสิ้นสุด:",
-        "overByValue": "เกินด้วย {value}",
-        "modeLabel": "โหมด:",
-        "modeStopwatchNoLimit": "นาฬิกาจับเวลา (ไม่จำกัดเวลา)",
-        "sessionNotRunning": "เซสชันไม่ทำงาน",
-        "sessionLimit": "ขีดจำกัดเซสชัน",
-        "sessionLimitModesTitle": "โหมดจำกัดเซสชัน",
-        "sessionLimitModesHelp": "ไม่มี: ไม่มีที่สิ้นสุด. งบประมาณเวลา: นับตั้งแต่เริ่มต้น สิ้นสุดที่: เวลานาฬิกาคงที่ในเขตเวลาท้องถิ่นของคุณ",
-        "sessionLimitOptional": "ไม่จำเป็น.",
-        "noneLabel": "ไม่มี",
-        "noneDescription": "วิ่งจนกว่าคุณจะหยุด",
-        "timeBudgetLabel": "งบประมาณเวลา",
-        "timeBudgetDescription": "นับจากวินาทีที่คุณเริ่มต้น",
-        "endTimeLabel": "เวลาสิ้นสุด",
-        "endTimeDescription": "ใช้เวลานาฬิกาคงที่ (แทนที่งบประมาณหากเคยตั้งค่าไว้ทั้งคู่)",
-        "noneIndefinite": "ไม่มี (ไม่มีกำหนด)",
-        "noneScheduledEndHint": "ไม่มีกำหนดเวลาสิ้นสุด จะแสดงเฉพาะเวลาที่ผ่านไปเท่านั้น",
-        "timeBudgetFromStart": "งบประมาณเวลาตั้งแต่เริ่มต้น",
-        "hoursLabel": "ชั่วโมง",
-        "minutesLabel": "นาที",
-        "minimumOneMinute": "(ขั้นต่ำ 1 นาที)",
-        "endAtLocalTime": "สิ้นสุดเวลา (เวลาท้องถิ่น)",
-        "stopSession": "หยุดเซสชัน",
-        "saveLimit": "บันทึกขีดจำกัด",
-        "saveLimitHelp": "ใช้การตั้งค่าขีดจำกัดที่อัปเดตในขณะที่เซสชันกำลังทำงานอยู่ โดยไม่หยุดเซสชัน",
-        "startSession": "เริ่มเซสชัน",
-        "sidebarUsePrefix": "ใช้แถบด้านข้างสำหรับ",
-        "rollCall": "ม้วนสาย",
-        "speakers": "ลำโพง",
-        "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
-        "timer": "ตัวจับเวลา",
-        "sidebarAnd": "และ",
-        "announcements": "ประกาศ",
-        "sidebarUseSuffix": "— หนึ่งเครื่องมือต่อแท็บ"
-      },
-      "history": {
-        "title": "ประวัติเซสชัน",
-        "savedCount": "บันทึกแล้ว {count}",
-        "permissionsHint": "เก้าอี้สามารถเปลี่ยนชื่อรายการได้ SMT/ผู้ดูแลระบบสามารถเปลี่ยนชื่อและลบรายการได้",
-        "empty": "ยังไม่มีประวัติเซสชัน",
-        "rename": "เปลี่ยนชื่อ",
-        "delete": "ลบ",
-        "deleteConfirm": "ลบเซสชันนี้ออกจากประวัติใช่ไหม",
-        "sessionNamePrompt": "ชื่อเซสชัน",
-        "rangeClosed": "{พิสัย}",
-        "rangeOngoing": "{range} -> กำลังดำเนินอยู่"
-      },
-      "timerPage": {
-        "title": "ตัวจับเวลา",
-        "controlsTitle": "การควบคุมการจับเวลา",
-        "controlsHelp": "ใช้พื้นทั่วไปสำหรับกำหนดเวลาการอภิปรายโดยรวม หรือใช้การโหวตแบบเคลื่อนไหวเพื่อเชื่อมโยงการมองเห็นรายการโหวตแบบเปิดเฉพาะ",
-        "tabSetup": "1) การตั้งค่า",
-        "tabClock": "2) การควบคุมนาฬิกา",
-        "tabNotes": "3) บันทึกคำพูด",
-        "tabLog": "4) หยุดบันทึกชั่วคราว",
-        "setupHelp": "เลือกว่าตัวจับเวลานี้ใช้สำหรับชั้นทั่วไป (ปรากฏแก่ผู้ร่วมประชุมเสมอ) หรือเชื่อมโยงกับการเคลื่อนไหวที่เปิดสำหรับการลงคะแนน (ผู้ร่วมประชุมจะเห็นเฉพาะในขณะที่การลงคะแนนนั้นอยู่ในรายการที่ใช้งานอยู่) เมื่อเปิดเวลาต่อผู้พูด นาฬิกาจะยังคงมองเห็นได้ในระหว่างการประชุมกลุ่มที่มีการกลั่นกรองโดยไม่คำนึงถึง หยุดนาฬิกาชั่วคราว / นาฬิกาเริ่มหยุดหรือนับถอยหลังต่อ ตั้งเวลาของลำโพง (ที่เหลืออยู่) และเวลาทั้งหมดแยกจากกัน จากนั้นบันทึกตัวจับเวลา ค่าที่ตั้งล่วงหน้าจะเติมทั้งสองให้มีความยาวเท่ากัน คุณสามารถแก้ไขฟิลด์ใดฟิลด์หนึ่งได้ในภายหลัง การหยุดชั่วคราวจะถูกบันทึกด้วยเหตุผลสั้นๆ",
-        "namedPreset": "ชื่อที่ตั้งไว้ล่วงหน้า",
-        "applyPreset": "ใช้ค่าที่ตั้งล่วงหน้า...",
-        "floorLabelDelegates": "ป้ายตั้งพื้น (ผู้ร่วมประชุม)",
-        "floorLabelPlaceholder": "เช่น จีเอสแอล 60s",
-        "timerPurpose": "วัตถุประสงค์ของการจับเวลา",
-        "purposeGeneralFloor": "อภิปรายการทั่วไป/ชั้น (ไม่ผูกกับการลงคะแนนเสียง)",
-        "purposeMotionVote": "การเคลื่อนไหวแบบเปิด - จับเวลาเฉพาะในขณะที่การโหวตนั้นทำงานอยู่บนพื้นเท่านั้น",
-        "openMotionForVoting": "ญัตติเปิด (ต้องเปิดให้ลงคะแนนเสียง)",
-        "selectMotion": "เลือกการเคลื่อนไหว...",
-        "untitled": "ไม่มีชื่อ",
-        "noOpenMotionWarning": "ไม่มีการเคลื่อนไหวใดเปิดให้ลงคะแนนเสียง เปิดการโหวตก่อนหรือเปลี่ยนวัตถุประสงค์เป็นชั้นทั่วไป",
-        "clock": "นาฬิกา",
-        "running": "วิ่ง",
-        "paused": "หยุดชั่วคราว",
-        "saveToEnablePauseStart": "บันทึกตัวจับเวลาเพื่อเปิดใช้งานการหยุดชั่วคราว/เริ่มต้น",
-        "pauseReasonLogged": "เหตุผลที่หยุดชั่วคราว (บันทึกไว้)",
-        "pauseReasonPlaceholder": "เช่น ประเด็นสำคัญ ปัญหาทางเทคโนโลยี การประชุมคอคัสที่ไม่มีการกลั่นกรอง...",
-        "pauseClock": "นาฬิกาหยุดชั่วคราว",
-        "startClock": "เริ่มนาฬิกา",
-        "perSpeakerTitle": "เวลาต่อผู้พูด (การประชุมกลุ่มย่อยแบบมีผู้ดูแล)",
-        "perSpeakerHelp": "ตั้งค่าเวลาทั้งหมดเป็นขีดจำกัดต่อลำโพง และเวลาของลำโพงเป็นเวลาที่เหลือ การเลื่อนขั้นสูงไปยังลำโพงตัวถัดไปและรีเซ็ตที่เหลืออยู่ที่ฝาปิด",
-        "currentSpeaker": "วิทยากรคนปัจจุบัน",
-        "nextSpeaker": "ผู้บรรยายคนต่อไป",
-        "speechNotesCurrentSpeaker": "บันทึกคำพูด (วิทยากรปัจจุบัน)",
-        "speechNotesHelp": "หมายเหตุจะเชื่อมโยงกับข้อความตัวจับเวลาผู้พูดปัจจุบัน และเมื่อรายชื่อผู้พูดมีคนทำเครื่องหมายว่าปัจจุบัน การมอบหมายของผู้พูดจะถูกเก็บไว้เพื่อใช้อ้างอิง",
-        "timerFloorLabel": "ตั้งเวลา(พื้น):",
-        "speakerListCurrent": "รายชื่อวิทยากร (ปัจจุบัน):",
-        "noCurrentDelegation": "ไม่มีการมอบหมายการมอบหมายถูกทำเครื่องหมายเป็นปัจจุบันในรายการวิทยากร",
-        "note": "บันทึก",
-        "notePlaceholder": "คะแนน POI น้ำเสียง การติดตามผล...",
-        "saveSpeechNote": "บันทึกบันทึกคำพูด",
-        "recentNotes": "บันทึกล่าสุดของคุณ (คณะกรรมการนี้)",
-        "delete": "ลบ",
-        "speakerTimeRemaining": "เวลาผู้พูด (ที่เหลืออยู่)",
-        "remainingHelpPerSpeaker": "การนับถอยหลังสำหรับผู้พูดคนปัจจุบัน (รีเซ็ตเมื่อคุณขั้นสูง)",
-        "remainingHelpNormal": "การนับถอยหลังสำหรับผู้พูดคนปัจจุบัน (อาจน้อยกว่าทั้งหมด)",
-        "totalTime": "เวลาทั้งหมด",
-        "totalHelpPerSpeaker": "ฝาครอบลำโพงต่อตัว (ตัวหารบนพื้น ส่วนเติมล่วงหน้าเหลือเท่านี้)",
-        "totalHelpNormal": "ความยาวเต็มของส่วนของตัวจับเวลานี้ (แสดงหลังเครื่องหมายทับบนพื้น)",
-        "saveTimer": "บันทึกตัวจับเวลา",
-        "advanceSpeakerReset": "ลำโพงล่วงหน้าและรีเซ็ตนาฬิกา",
-        "recentPauseLog": "บันทึกการหยุดชั่วคราวล่าสุด",
-        "noPauseEvents": "ยังไม่มีการบันทึกเหตุการณ์การหยุดชั่วคราวสำหรับคณะกรรมการชุดนี้",
-        "openPauseLogHint": "เปิดบันทึกการหยุดชั่วคราวเพื่อตรวจสอบเหตุผลของการหยุดชั่วคราวและการประทับเวลาที่บันทึกไว้",
-        "saved": "บันทึกตัวจับเวลาแล้ว",
-        "savedCapped": "บันทึกตัวจับเวลาแล้ว เวลาของผู้พูดนานกว่าเวลาทั้งหมด ต่อยอดรวม",
-        "alreadyPaused": "ตัวจับเวลาหยุดชั่วคราวแล้ว",
-        "pausedForCommittee": "ตัวจับเวลาหยุดชั่วคราวสำหรับคณะกรรมการ",
-        "alreadyRunning": "ตัวจับเวลากำลังทำงานอยู่แล้ว",
-        "runningForCommittee": "จับเวลาวิ่งให้กับคณะกรรมการ",
-        "euTimerBoardTitle": "คณะกรรมการจับเวลารัฐสภาสหภาพยุโรป (11 ตัวจับเวลา)",
-        "euTimerBoardHelp": "ตัวจับเวลาหนึ่งครั้งต่อปาร์ตี้ บวกเวลาทั้งหมด เวลา POI/POC และเวลาของวิทยากร ใช้นำไปใช้เพื่อคัดลอกแถวลงในช่องตัวจับเวลาถ่ายทอดสดบนแท็บนาฬิกา (เวลาของผู้พูด / ตัวจับเวลาบันทึก)",
-        "euTimerName": "ชื่อ",
-        "euTimerTag": "แท็ก",
-        "euTotalTime": "เวลาทั้งหมด",
-        "euPoiPocTime": "เวลาที่น่าสนใจ/POC",
-        "euSpeakerTime": "เวลาผู้พูด"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "ห้องกรรมการ (เต็ม)",
         "hint": "เค้าโครงเสมือนจริงและพื้นของผู้ร่วมประชุม"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "บันทึกอัตโนมัติล้มเหลว",
     "autosavedWithCountry": "บันทึกอัตโนมัติ — {ประเทศ}",
     "delegateFallback": "ผู้รับมอบสิทธิ์"
+  },
+  "sources": {
+    "addSource": "เพิ่มแหล่งที่มา",
+    "sourceUrl": "URL แหล่งที่มา",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (แนะนำ)",
+    "urlHelp": "สำหรับ Google เอกสารใหม่ ให้ใช้ปุ่มและวางลิงก์เอกสารที่นี่",
+    "titleOptional": "ชื่อเรื่อง (ไม่บังคับ)",
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "editSource": "แก้ไขแหล่งที่มา",
+    "urlPlaceholderShort": "Google Doc หรือ URL อื่นๆ",
+    "empty": "ยังไม่มีแหล่งที่มา เพิ่มลิงก์ Google Doc เพื่อเปิดที่นี่",
+    "sourceLabel": "แหล่งที่มา",
+    "openLink": "เปิดลิงก์",
+    "embedHeading": "เอกสารต้นทาง",
+    "notGoogleDoc": "URL นี้ไม่ใช่ Google เอกสาร ใช้ลิงก์ docs.google.com/document/d/… เพื่อฝังและแก้ไขที่นี่ หรือเปิดลิงก์ด้านบน"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "ผู้ร่วมประชุมไม่สามารถอัพโหลดเอกสารตำแหน่งได้โดยตรง ใช้เอกสารประเภทอื่น",
+    "alertOnlyChairsPositionPaper": "เฉพาะประธาน/SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดเอกสารตำแหน่งได้",
+    "alertOnlySmtChairReport": "มีเพียง SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดรายงานประธานได้",
+    "alertOnlySmtRop": "มีเพียง SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดเอกสาร RoP",
+    "alertOnlySmtAwardCriteria": "มีเพียง SMT/ผู้ดูแลระบบเท่านั้นที่สามารถอัปโหลดเอกสารเกณฑ์รางวัลได้",
+    "alertNeedContentOrUrl": "เพิ่มเนื้อหาข้อความในเครื่องหรือ URL ของ Google เอกสาร",
+    "confirmDelete": "ลบเอกสารนี้ใช่ไหม",
+    "delegatePrepTitle": "ส่วนเตรียมเอกสาร",
+    "delegatePrepBody": "คุณสามารถอัปโหลด ดู และแก้ไข <prep>เตรียมเอกสาร</prep> ของคุณเองได้โดยตรงจากหน้านี้",
+    "positionPaperGuideTitle": "ตำแหน่งตัวกั้นกระดาษ",
+    "positionPaperGuideBlurb": "ดาวน์โหลดคู่มือตัวยึดตำแหน่งในขณะที่กำลังเตรียม PDF สุดท้าย",
+    "downloadPlaceholderGuide": "ดาวน์โหลดคู่มือตัวยึดตำแหน่ง",
+    "addDocument": "เพิ่มเอกสาร",
+    "tabs": {
+      "ariaLabel": "ส่วนเอกสาร",
+      "library": "ห้องสมุด",
+      "compose": "เขียน",
+      "composeHint": "เริ่มเอกสารใหม่หรือแก้ไขแบบร่างที่มีอยู่จากแท็บนี้"
+    },
+    "newDocumentTitle": "เอกสารใหม่",
+    "editDocumentTitle": "แก้ไขเอกสาร",
+    "typeLabel": "พิมพ์",
+    "types": {
+      "position_paper": "ตำแหน่งกระดาษ",
+      "chair_report": "รายงานเก้าอี้",
+      "rop": "รป",
+      "award_criteria": "เกณฑ์การได้รับรางวัล",
+      "chair_notes": "บันทึกของเก้าอี้",
+      "prep_doc": "เตรียมเอกสาร"
+    },
+    "delegatePositionPaperNote": "เก้าอี้จะอัพโหลดเอกสารแสดงตำแหน่งพร้อมคำติชม",
+    "delegateOwner": "เจ้าของผู้รับมอบสิทธิ์",
+    "chairRecipient": "ผู้รับเก้าอี้",
+    "titleLabel": "ชื่อ",
+    "titlePlaceholder": "ชื่อเอกสาร",
+    "googleDocsUrl": "URL ของ Google เอกสาร",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (ฝังมุมมอง/แก้ไขในแอป)",
+    "googleDocsHelp": "ใช้ Google Doc ใหม่เพื่อเปิด Google ในแท็บใหม่ จากนั้นวางลิงก์เอกสารที่นี่ ข้อความธรรมดาด้านล่างเป็นทางเลือก เอกสารทุกฉบับต้องมีข้อความในเครื่อง ลิงก์ Google เอกสาร หรือทั้งสองอย่าง",
+    "plainTextOptional": "ข้อความธรรมดา (ไม่จำเป็น)",
+    "plainTextPlaceholder": "หมายเหตุหรือข้อความร่าง...",
+    "chairFeedbackLabel": "ความคิดเห็นของเก้าอี้",
+    "chairFeedbackPlaceholder": "ข้อเสนอแนะสำหรับเอกสารตำแหน่งผู้ร่วมประชุม...",
+    "empty": "ยังไม่มีเอกสาร. เพิ่มหรือลิงก์ Google เอกสาร",
+    "sidebarDocumentLabel": "เอกสาร",
+    "sections": {
+      "chairReports": "ประธานรายงาน.",
+      "rop": "รป",
+      "awardCriteria": "เกณฑ์การได้รับรางวัล",
+      "prepDocuments": "เตรียมเอกสาร",
+      "chairNotes": "บันทึกของเก้าอี้",
+      "otherDocuments": "เอกสารอื่นๆ"
+    },
+    "untitled": "ไม่มีชื่อ",
+    "linkedDocumentHeading": "เอกสารที่เชื่อมโยง",
+    "notesHeading": "หมายเหตุ",
+    "noGoogleDocYet": "ยังไม่มีการเชื่อมโยง Google Doc ใช้การแก้ไขเพื่อเพิ่ม docs.google.com/document/d/… URL",
+    "chairFeedbackHeading": "ความคิดเห็นของเก้าอี้",
+    "noFeedbackYet": "ยังไม่มีการเพิ่มความคิดเห็น"
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "ป้อนอีเมลของผู้รับมอบสิทธิ์ก่อน",
+    "sentToDelegate": "ส่งไปที่ {อีเมล}",
+    "newResolution": "ความละเอียดใหม่",
+    "maxDraftResolutions": "คณะกรรมการชุดนี้มีมติร่างแล้ว {count} รายการ",
+    "googleDocLink": "ลิงก์ Google เอกสาร",
+    "googleDocUrlPlaceholder": "URL ของ Google เอกสาร (docs.google.com/document/d/… — ใช้สำหรับการฝังและการแก้ไข)",
+    "googleDocUrlHelp": "Google Doc ใหม่จะเปิดขึ้นในแท็บอื่น คัดลอก URL จากแถบที่อยู่และวางที่นี่",
+    "mainSubmittersPlaceholder": "ผู้ส่งหลัก (รหัสผู้ใช้ คั่นด้วยเครื่องหมายจุลภาค)",
+    "coSubmittersPlaceholder": "ผู้ส่งร่วม (รหัสผู้ใช้ คั่นด้วยเครื่องหมายจุลภาค)",
+    "create": "สร้าง",
+    "cancel": "ยกเลิก",
+    "openInNewTab": "เปิดในแท็บใหม่",
+    "noGoogleDocLink": "ไม่มีลิงก์ Google เอกสาร",
+    "visibleToOtherBloc": "ปรากฏแก่บล็อกอื่น",
+    "resolutionCounts": "หมวดย่อยหลัก: {main} | ผู้ร่วมย่อย: {co} | ผู้ลงนาม: {ผู้ลงนาม}",
+    "blocButton": "กลุ่ม {name} ({stance})",
+    "signVirtually": "ลงชื่อเสมือนจริง (แจ้งหมวดย่อยหลัก)",
+    "shareByEmail": "แบ่งปันความละเอียดทางอีเมล",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "ส่งให้ผู้รับมอบสิทธิ์",
+    "clauseEditor": "บรรณาธิการข้อ",
+    "noClausesYet": "ยังไม่มีข้อ.",
+    "clauseNumber": "ข้อ {หมายเลข}",
+    "saveClause": "บันทึกข้อ",
+    "delete": "ลบ",
+    "addClausePlaceholder": "เพิ่มมาตราใหม่...",
+    "addClause": "เพิ่มข้อ",
+    "clauseVoteHistory": "ประวัติการลงคะแนนเสียงข้อ",
+    "noClauseOutcomesYet": "ยังไม่มีผลการลงคะแนนเสียงที่บันทึกไว้",
+    "clauseFallback": "ข้อ",
+    "passed": "ผ่านแล้ว",
+    "failed": "ล้มเหลว",
+    "motionId": "การเคลื่อนไหว {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "ส่วนการลงคะแนนเสียง",
+      "open": "เปิด",
+      "closed": "ปิด"
+    },
+    "requiredMajority": "ส่วนใหญ่ที่ต้องการ",
+    "helpRequiredMajorityTitle": "ส่วนใหญ่ที่ต้องการ",
+    "helpRequiredMajorityBody": "เลือกเกณฑ์การโหวตที่ใช้ในการตัดสินว่าผ่าน/ไม่ผ่าน 'ความเรียบง่าย' มีมากกว่าครึ่ง `2/3` ต้องใช้คะแนนเสียงข้างมาก",
+    "majoritySimple": "เรียบง่าย",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} ส่วนใหญ่",
+    "mustVote": "ต้องลงคะแนน",
+    "helpMustVoteTitle": "ต้องลงคะแนน",
+    "helpMustVoteBody": "ทำเครื่องหมายการเคลื่อนไหวนี้เป็นรายการ \"ต้องโหวต\" ใช้เพื่อสื่อสารข้อกำหนดไปยังผู้เข้าร่วม (ขึ้นอยู่กับการตั้งค่าของคณะกรรมการของคุณ)",
+    "saveSettings": "บันทึกการตั้งค่า",
+    "delegateBlurb": "เวทีจะบันทึกการลงคะแนนเสียงในเซสชั่น (เช่น การโทรออก) การลงคะแนนเสียงที่นี่เป็นไปตามใช่/ไม่ใช่เท่านั้น (ไม่ใช้การงดออกเสียง) คุณสามารถติดตามการนับได้ ผู้ได้รับมอบหมายไม่ลงคะแนนเสียงในแอป",
+    "yes": "ใช่",
+    "no": "เลขที่",
+    "ballots": "บัตรลงคะแนน",
+    "total": "ทั้งหมด",
+    "outcome": "ผลลัพธ์",
+    "passed": "ผ่านไป",
+    "failed": "ล้มเหลว",
+    "noRecordedVotes": "ไม่มีการลงคะแนนเสียงที่บันทึกไว้",
+    "reopenMotion": "เปิดการเคลื่อนไหวอีกครั้ง",
+    "editRecordOpen": "แก้ไขบันทึก...",
+    "hideSettings": "ซ่อนการตั้งค่า",
+    "preliminaryPassing": "ผ่าน (เบื้องต้น)",
+    "preliminaryFailing": "ล้มเหลว (เบื้องต้น)",
+    "delegateRollCall": "มอบหมายการโทร ({count})",
+    "noSeatedDelegates": "ไม่มีผู้ร่วมประชุมที่นั่งว่างสำหรับการเคลื่อนไหวนี้",
+    "rollPrefix": "ม้วน:",
+    "recordedPrefix": "บันทึก:",
+    "recordedYes": "ใช่",
+    "recordedNo": "เลขที่",
+    "recordedAbstain": "งดเว้น",
+    "recordedNone": "—",
+    "abstain": "งดเว้น",
+    "clear": "ชัดเจน",
+    "closeMotion": "ปิดการเคลื่อนไหว",
+    "mustVoteBadge": "ต้องลงคะแนน",
+    "canVoteBadge": "โหวตได้",
+    "noMotions": "ยังไม่มีการเคลื่อนไหว",
+    "currentOpenMotion": "การเคลื่อนไหวแบบเปิดปัจจุบัน",
+    "noOpenMotion": "ไม่มีการเคลื่อนไหวแบบเปิดในขณะนี้",
+    "recentClosedMotions": "การเคลื่อนไหวปิดล่าสุด",
+    "noClosedMotions": "ยังไม่มีการเคลื่อนไหวปิด",
+    "untitled": "ไม่มีชื่อ",
+    "voteTypes": {
+      "motion": "การเคลื่อนไหว",
+      "amendment": "การแก้ไข",
+      "resolution": "ปณิธาน",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "ขาด (ม้วน)",
+      "present_abstain": "ปัจจุบัน — อาจงด (ม้วน)",
+      "present_voting": "นำเสนอและลงคะแนนเสียง (ม้วน)",
+      "unknown": "- (ม้วน)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "ส่วนโปรไฟล์",
+      "overview": "ภาพรวม",
+      "awards": "รางวัล",
+      "private": "บันทึกส่วนตัว",
+      "settings": "การตั้งค่าโปรไฟล์"
+    },
+    "profilePicture": "รูปโปรไฟล์",
+    "uploadFile": "อัพโหลดไฟล์",
+    "uploading": "กำลังอัปโหลด...",
+    "photoSaved": "อัปโหลดและบันทึกรูปภาพแล้ว",
+    "orUrl": "หรือกำหนดโดย URL",
+    "urlPlaceholder": "https://...",
+    "name": "ชื่อ",
+    "username": "ชื่อผู้ใช้",
+    "usernamePlaceholder": "เช่น alex_1999",
+    "pronouns": "คำสรรพนาม",
+    "customPronounNote": "โปรไฟล์ของคุณมีชุดสรรพนามที่กำหนดเองซึ่งไม่ได้รับการยอมรับที่นี่อีกต่อไป เลือกตัวเลือกด้านบน (หรือเว้นว่างไว้) การบันทึกจะแทนที่ค่าเก่า",
+    "school": "โรงเรียน",
+    "schoolPlaceholder": "เช่น โรงเรียนมัธยมลินคอล์น",
+    "grade": "ระดับ",
+    "selectGrade": "เลือกเกรด",
+    "conferencesAttended": "การประชุมเข้าร่วม",
+    "awardsComma": "รางวัล (คั่นด้วยลูกน้ำ)",
+    "awardsPlaceholder": "ผู้แทนที่ดีที่สุด, รางวัลชมเชย",
+    "allocation": "การจัดสรร",
+    "selectAllocation": "เลือกการจัดสรร",
+    "noAllocationsPlaceholder": "ไม่มีการจัดสรรคณะกรรมการ",
+    "saveProfile": "บันทึกโปรไฟล์",
+    "saved": "บันทึกโปรไฟล์แล้ว",
+    "saveFailed": "ไม่สามารถบันทึกโปรไฟล์ได้",
+    "errUsernamePattern": "Username ต้องมีความยาว 3-32 ตัวอักษร (ตัวอักษร, ตัวเลข, _, ., -)",
+    "errPronounsPreset": "เลือกสรรพนามจากรายการ",
+    "errImageType": "กรุณาเลือกไฟล์ภาพ",
+    "errImageSize": "รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 5 MB)",
+    "errUploadFailed": "การอัปโหลดล้มเหลว",
+    "errStorageSetup": "ไม่ได้ตั้งค่าการจัดเก็บรูปโปรไฟล์ ในโปรเจ็กต์ Supabase ให้เรียกใช้การโยกย้าย 00100_profile_pictures_storage_bucket.sql หรือสร้างที่เก็บข้อมูลสาธารณะชื่อโปรไฟล์-รูปภาพ (ดู README)",
+    "errPublicUrl": "ไม่สามารถแก้ไข URL สาธารณะสำหรับรูปภาพที่อัปโหลด",
+    "fallbacks": {
+      "yourCountry": "ประเทศของคุณ",
+      "committeeSession": "สมัยประชุมคณะกรรมการ",
+      "delegate": "มอบหมาย",
+      "speechNote": "บันทึกคำพูด",
+      "untitledMotion": "ความเคลื่อนไหวที่ไม่มีชื่อ",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "ยินดีต้อนรับผู้แทนจาก {flag} {country}",
+      "subtitle": "คุณต้องการเริ่มต้นด้วยอะไร?",
+      "links": {
+        "documents": "เอกสาร",
+        "notes": "หมายเหตุ",
+        "committeeRoom": "ห้องกรรมการ",
+        "runningNotes": "หมายเหตุการวิ่ง",
+        "ideas": "ไอเดีย",
+        "guides": "คำแนะนำ",
+        "sources": "แหล่งที่มา",
+        "resolutions": "มติ",
+        "speeches": "สุนทรพจน์",
+        "stances": "ท่าทาง",
+        "crisisSlides": "สไลด์วิกฤติ",
+        "report": "รายงาน",
+        "motions": "การเคลื่อนไหว",
+        "points": "คะแนน"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "รางวัลในโปรไฟล์ของคุณ",
+      "rank": "อันดับ {อันดับ}",
+      "pending": {
+        "tab": "อยู่ระหว่างการพิจารณาเสนอชื่อ",
+        "title": "อยู่ระหว่างการเสนอชื่อเก้าอี้",
+        "descriptionSingle": "บันทึกโดยเก้าอี้และแบ่งปันกับ SMT เพื่อตรวจสอบ รางวัลสุดท้ายจะปรากฏด้านล่างหลังจากการยืนยัน",
+        "descriptionTabbed": "บันทึกโดยเก้าอี้และแบ่งปันกับ SMT เพื่อตรวจสอบ รางวัลสุดท้ายจะปรากฏหลังจากการยืนยัน"
+      },
+      "recorded": {
+        "tab": "รางวัลที่บันทึกไว้",
+        "title": "รางวัลที่บันทึกไว้",
+        "description": "แสดงรายการเมื่อประธานหรือ SMT มอบหมายให้คุณติดตามรางวัล การยกย่องชมเชยครั้งสุดท้ายเป็นไปตามกฎการประชุมของคุณ"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "ปรากฏเฉพาะกับคุณ ประธานคณะกรรมการ และ SMT สำหรับคณะกรรมการที่เกี่ยวข้อง",
+      "points": {
+        "title": "จุดเก้าอี้ (ส่วนตัว)"
+      },
+      "speechNotes": {
+        "title": "บันทึกสุนทรพจน์ของประธาน (ส่วนตัว)"
+      },
+      "motions": {
+        "title": "การเคลื่อนไหวที่คุณเคลื่อนไหว",
+        "description": "บันทึกลงในโปรไฟล์ของคุณเพื่อการตรวจสอบของคณะกรรมการและการกำกับดูแล SMT"
+      }
+    },
+    "discipline": {
+      "title": "สถานะทางวินัย (เอกชน)",
+      "statusLine": "คำเตือน: {warnings} · การประท้วง: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "ปิดการใช้งานการลงคะแนน",
+      "speakingSuspended": "การพูดถูกระงับ",
+      "removedFromCommittee": "ถอดออกจากคณะกรรมการ",
+      "updated": "อัปเดต: {value}"
+    },
+    "preview": {
+      "ariaLabel": "ดูตัวอย่างโปรไฟล์",
+      "title": "ดูตัวอย่าง",
+      "yourName": "ชื่อของคุณ",
+      "usernameNotSet": "ชื่อผู้ใช้ไม่ได้ตั้งค่า",
+      "gradeValue": "เกรด {เกรด}",
+      "awards": "รางวัล"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "กฎขั้นตอน (RoP)",
+        "content": "#กฏระเบียบการ \n\n## คะแนนและการเคลื่อนไหว \n- **จุดสั่งซื้อ**: เป็นขั้นตอนที่ถูกต้อง \n- **ประเด็นข้อมูล**: คำถามถึงวิทยากร \n- **คะแนนสิทธิพิเศษส่วนบุคคล**: ความสะดวกสบายส่วนบุคคล \n- **การเคลื่อนไหวสู่โต๊ะ**: เลื่อนการอภิปราย \n- **การเคลื่อนไหวเพื่อเลื่อน**: สิ้นสุดเซสชั่น \n\n## โหวต \n- ส่วนใหญ่อย่างง่ายสำหรับเรื่องขั้นตอน \n- 2/3 ส่วนใหญ่สำหรับเรื่องสำคัญ \n- การลงคะแนนเสียงแบบเรียกขานหากมีการร้องขอ"
+      },
+      "examples": {
+        "title": "ตัวอย่าง",
+        "content": "#ตัวอย่าง \n\n## รูปแบบความละเอียด \n``` \nสมัชชาใหญ่ \n... \n1. เรียกร้องให้รัฐสมาชิก... \n2. กระตุ้นให้ประชาคมระหว่างประเทศ... \n``` \n\n## ตำแหน่ง โครงสร้างกระดาษ \n1. ความเป็นมา \n2. นโยบายประเทศ \n3. แนวทางแก้ไขที่เสนอ"
+      },
+      "templates": {
+        "title": "เทมเพลต",
+        "content": "# เทมเพลต \n\n## เทมเพลตรายงานเก้าอี้ \n- ภาพรวมของคณะกรรมการ \n- ประเด็นการอภิปรายที่สำคัญ \n- มติผ่านไปแล้ว \n- คำแนะนำ"
+      },
+      "chairReport": {
+        "title": "รายงานเก้าอี้",
+        "content": "#รายงานประธาน \n\nเอกสารการดำเนินการของคณะกรรมการและผลลัพธ์ที่นี่"
+      }
+    },
+    "edit": "แก้ไข",
+    "guideDocument": "เอกสารแนะนำ",
+    "additionalNotes": "หมายเหตุเพิ่มเติม",
+    "noContentYet": "ยังไม่มีเนื้อหา",
+    "titlePlaceholder": "ชื่อ",
+    "googleDocsUrl": "URL ของ Google เอกสาร",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Google Doc ใหม่จะเปิดขึ้นในแท็บอื่น วางลิงก์ที่แชร์ได้เพื่อให้ผู้รับมอบสิทธิ์สามารถเปิดเอกสารได้ที่นี่ (ดู/แก้ไขขึ้นอยู่กับการแชร์ของ Google)",
+    "markdownOptional": "บันทึกย่อ Markdown (ไม่บังคับหากคุณใช้ Google Doc)",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "createNewGuide": "สร้างคำแนะนำใหม่",
+    "slugPlaceholder": "ทาก (ไม่ซ้ำกัน)",
+    "titleLowerPlaceholder": "ชื่อ",
+    "googleDocsUrlOptional": "URL ของ Google เอกสาร (ไม่บังคับ)",
+    "markdownContentOptional": "เนื้อหามาร์กดาวน์ (ไม่บังคับ)",
+    "create": "สร้าง",
+    "glossary": {
+      "title": "อภิธานศัพท์วาระ MUN",
+      "subtitle": "คำศัพท์เฉพาะที่ตรงกับรหัสคณะกรรมการของคุณและหัวข้อวาระปัจจุบัน",
+      "committeeCode": "รหัสคณะกรรมการ: {code}",
+      "sources": {
+        "core": "แกนกลาง",
+        "committee": "คณะกรรมการ",
+        "topic": "หัวข้อ"
+      },
+      "terms": {
+        "delegation": {
+          "term": "การมอบหมาย",
+          "definition": "ประเทศหรือทีมผู้สังเกตการณ์ที่เป็นตัวแทนของรัฐหรือหน่วยงานหนึ่งในคณะกรรมการ"
+        },
+        "placard": {
+          "term": "ป้ายประกาศ",
+          "definition": "ป้ายประเทศที่ใช้เพื่อขอที่ประชุม ลงคะแนนเสียง และให้สัญญาณการเคลื่อนไหวตามขั้นตอน"
+        },
+        "dais": {
+          "term": "เวที",
+          "definition": "เป็นประธานทีมที่ทำหน้าที่กลั่นกรองการอภิปราย ใช้ขั้นตอน และจัดการลำดับการพูด"
+        },
+        "quorum": {
+          "term": "องค์ประชุม",
+          "definition": "จำนวนการมอบหมายขั้นต่ำที่จำเป็นในการดำเนินธุรกิจและการลงคะแนนเสียงอย่างเป็นทางการ"
+        },
+        "motion": {
+          "term": "การเคลื่อนไหว",
+          "definition": "ข้อเสนออย่างเป็นทางการเพื่อเปลี่ยนกระแสการอภิปราย เช่น ประเภทการประชุมใหญ่หรือเวลาพูด"
+        },
+        "point_of_order": {
+          "term": "จุดสั่งซื้อ",
+          "definition": "การแทรกแซงเมื่อมีการใช้ขั้นตอนไม่ถูกต้องตามกฎของคณะกรรมการ"
+        },
+        "moderated_caucus": {
+          "term": "กลั่นกรองพรรคการเมือง",
+          "definition": "ส่วนการอภิปรายที่มีโครงสร้างพร้อมการกล่าวสุนทรพจน์ในช่วงเวลาสั้น ๆ ในหัวข้อย่อยที่กำหนดไว้"
+        },
+        "unmoderated_caucus": {
+          "term": "พรรคการเมืองที่ไม่ได้รับการตรวจสอบ",
+          "definition": "ระยะเวลาการเจรจาอย่างไม่เป็นทางการซึ่งผู้ได้รับมอบหมายเคลื่อนไหวอย่างอิสระเพื่อร่างและรวมความคิด"
+        },
+        "draft_resolution": {
+          "term": "ความละเอียดร่าง",
+          "definition": "ข้อความการทำงานของการดำเนินการของคณะกรรมการที่เสนอก่อนการลงคะแนนเสียงครั้งสุดท้ายและการรับเลี้ยงบุตรบุญธรรม"
+        },
+        "amendment": {
+          "term": "การแก้ไข",
+          "definition": "การเปลี่ยนแปลงที่เสนอเป็นข้อความร่าง ทั้งที่เป็นมิตรหรือโหวตว่าไม่เป็นมิตร"
+        },
+        "operative_clause": {
+          "term": "ข้อปฏิบัติการ",
+          "definition": "ประโยคเชิงตัวเลขเชิงปฏิบัติการที่อธิบายถึงสิ่งที่คณะกรรมการเสนอให้ทำ"
+        },
+        "preambulatory_clause": {
+          "term": "ข้อก่อนเดินทาง",
+          "definition": "ข้อกำหนดบริบทที่อ้างถึงหลักการเบื้องหลัง ข้อกังวล และกรอบการทำงานก่อนหน้านี้"
+        },
+        "right_of_reply": {
+          "term": "สิทธิในการตอบกลับ",
+          "definition": "โอกาสในการตอบสนองต่อคำกล่าวโดยตรงที่ส่งผลต่อศักดิ์ศรีหรือตำแหน่งการมอบหมาย"
+        },
+        "veto_power": {
+          "term": "วีโต้ พาวเวอร์",
+          "definition": "อำนาจสมาชิกถาวรของ UNSC ในการขัดขวางมติร่างสาระสำคัญ"
+        },
+        "chapter_vii": {
+          "term": "บทที่เจ็ด",
+          "definition": "หน่วยงานกำกับดูแลกฎบัตรสหประชาชาติว่าด้วยภัยคุกคามต่อสันติภาพ มาตรการคว่ำบาตร และการใช้กำลัง"
+        },
+        "sanctions_regime": {
+          "term": "ระบอบการลงโทษ",
+          "definition": "ข้อจำกัดที่ประสานงานกันใช้เพื่อโน้มน้าวพฤติกรรมโดยไม่ต้องมีการปฏิบัติการทางทหารโดยตรง"
+        },
+        "arms_control": {
+          "term": "การควบคุมอาวุธ",
+          "definition": "ข้อตกลงและระบบตรวจสอบที่จำกัดประเภท ปริมาณ หรือการนำอาวุธไปใช้"
+        },
+        "non_proliferation": {
+          "term": "การไม่แพร่ขยาย",
+          "definition": "นโยบายเพื่อป้องกันการแพร่กระจายของศักยภาพด้านนิวเคลียร์ เคมี ชีวภาพ หรืออาวุธขั้นสูง"
+        },
+        "confidence_building_measures": {
+          "term": "มาตรการสร้างความมั่นใจ",
+          "definition": "เครื่องมือความโปร่งใสและการสื่อสารที่ช่วยลดความเข้าใจผิดและความเสี่ยงด้านความขัดแย้ง"
+        },
+        "universal_periodic_review": {
+          "term": "การทบทวนเป็นระยะสากล",
+          "definition": "กระบวนการทบทวนโดยผู้ทรงคุณวุฒิซึ่งรัฐสมาชิกสหประชาชาติแต่ละประเทศรายงานและรับคำแนะนำด้านสิทธิ"
+        },
+        "special_rapporteur": {
+          "term": "ผู้รายงานพิเศษ",
+          "definition": "ผู้เชี่ยวชาญอิสระที่ได้รับการแต่งตั้งให้ติดตามและรายงานประเด็นปัญหาสิทธิเฉพาะเรื่องหรือประเทศ"
+        },
+        "treaty_body": {
+          "term": "ร่างสนธิสัญญา",
+          "definition": "คณะกรรมการผู้เชี่ยวชาญที่กำกับดูแลการดำเนินการตามสนธิสัญญาสิทธิมนุษยชนโดยเฉพาะ"
+        },
+        "public_health_emergency": {
+          "term": "เหตุฉุกเฉินด้านสาธารณสุข",
+          "definition": "เหตุการณ์การระบาดที่รุนแรงซึ่งต้องอาศัยการประสานงานอย่างเร่งด่วนทั้งในประเทศและต่างประเทศ"
+        },
+        "surveillance": {
+          "term": "การเฝ้าระวังทางระบาดวิทยา",
+          "definition": "การรวบรวมและวิเคราะห์ข้อมูลสุขภาพอย่างต่อเนื่องเพื่อตรวจจับและติดตามแนวโน้มโรค"
+        },
+        "health_systems": {
+          "term": "การเสริมสร้างความเข้มแข็งของระบบสุขภาพ",
+          "definition": "การปรับปรุงบุคลากร การเงิน การขนส่ง และการกำกับดูแลเพื่อการส่งมอบการดูแลสุขภาพที่เชื่อถือได้"
+        },
+        "transnational_crime": {
+          "term": "กลุ่มอาชญากรข้ามชาติ",
+          "definition": "กิจกรรมทางอาญาที่ประสานงานข้ามพรมแดนผ่านเครือข่ายและตลาดที่ผิดกฎหมาย"
+        },
+        "illicit_trafficking": {
+          "term": "การค้ามนุษย์ที่ผิดกฎหมาย",
+          "definition": "การเคลื่อนย้ายยาเสพติด อาวุธ บุคคล หรือสินค้าอย่างผิดกฎหมายข้ามเขตอำนาจศาล"
+        },
+        "rule_of_law_capacity": {
+          "term": "ความจุของกฎแห่งกฎหมาย",
+          "definition": "ความสามารถของสถาบันในระบบยุติธรรมในการสอบสวน ดำเนินคดี และปกป้องสิทธิอย่างยุติธรรม"
+        },
+        "sustainable_development": {
+          "term": "การพัฒนาที่ยั่งยืน",
+          "definition": "โมเดลการเติบโตที่สมดุลระหว่างความก้าวหน้าทางสังคม โอกาสทางเศรษฐกิจ และการปกป้องสิ่งแวดล้อม"
+        },
+        "financing_for_development": {
+          "term": "การจัดหาเงินทุนเพื่อการพัฒนา",
+          "definition": "กลไกการระดมทุนภาครัฐและเอกชนที่สนับสนุนลำดับความสำคัญของการพัฒนาในระยะยาว"
+        },
+        "policy_coordination": {
+          "term": "การประสานงานนโยบาย",
+          "definition": "การจัดแนวการดำเนินการของรัฐและหน่วยงานเพื่อหลีกเลี่ยงความซ้ำซ้อนและเพิ่มผลกระทบโดยรวม"
+        },
+        "child_protection": {
+          "term": "การคุ้มครองเด็ก",
+          "definition": "มาตรการป้องกันการแสวงหาผลประโยชน์ การละเมิด และความรุนแรงต่อเด็กในทุกพื้นที่"
+        },
+        "education_access": {
+          "term": "การเข้าถึงการศึกษา",
+          "definition": "สร้างความมั่นใจในโอกาสการเรียนรู้ที่ครอบคลุม เสมอภาค และต่อเนื่องสำหรับเด็กทุกคน"
+        },
+        "humanitarian_response": {
+          "term": "การตอบสนองด้านมนุษยธรรม",
+          "definition": "การดำเนินการบรรเทาทุกข์อย่างรวดเร็วเพื่อตอบสนองความต้องการเร่งด่วนในภาวะวิกฤติและความขัดแย้ง"
+        },
+        "gender_mainstreaming": {
+          "term": "การบูรณาการเรื่องเพศ",
+          "definition": "บูรณาการการวิเคราะห์เพศภาวะในการออกแบบนโยบาย การนำไปปฏิบัติ และการประเมินผล"
+        },
+        "gender_based_violence": {
+          "term": "ความรุนแรงบนพื้นฐานของเพศสภาพ",
+          "definition": "อันตรายที่มุ่งเป้าไปที่บุคคลตามอัตลักษณ์ทางเพศ บทบาท หรือความสัมพันธ์ทางอำนาจที่ไม่เท่าเทียมกัน"
+        },
+        "economic_empowerment": {
+          "term": "การเสริมอำนาจทางเศรษฐกิจ",
+          "definition": "ขยายการเข้าถึงงานที่มีคุณค่า การเงิน ความเป็นเจ้าของ และอำนาจในการตัดสินใจ"
+        },
+        "source_attribution": {
+          "term": "การระบุแหล่งที่มา",
+          "definition": "อ้างอิงแหล่งที่มาของข้อมูลอย่างชัดเจนเพื่อให้สามารถตรวจสอบการอ้างสิทธิ์และปรับบริบทได้"
+        },
+        "verified_reporting": {
+          "term": "การรายงานที่ได้รับการยืนยัน",
+          "definition": "มาตรฐานวารสารศาสตร์ที่ต้องได้รับการตรวจสอบก่อนเผยแพร่ข้อเท็จจริงที่มีการโต้แย้ง"
+        },
+        "editorial_independence": {
+          "term": "บรรณาธิการอิสระ",
+          "definition": "แยกการรายงานการตัดสินใจออกจากแรงกดดันทางการเมืองหรืออิทธิพลของผู้มีส่วนได้ส่วนเสีย"
+        },
+        "climate_mitigation": {
+          "term": "การบรรเทาสภาพภูมิอากาศ",
+          "definition": "การดำเนินการที่ลดการปล่อยก๊าซเรือนกระจกหรือเพิ่มการกำจัดคาร์บอนในระยะยาว"
+        },
+        "climate_adaptation": {
+          "term": "การปรับตัวต่อสภาพภูมิอากาศ",
+          "definition": "นโยบายและการลงทุนที่ลดความเสี่ยงต่อผลกระทบที่เกี่ยวข้องกับสภาพภูมิอากาศ"
+        },
+        "cyber_norms": {
+          "term": "บรรทัดฐานทางไซเบอร์",
+          "definition": "ความคาดหวังร่วมกันสำหรับพฤติกรรมของรัฐที่มีความรับผิดชอบในโดเมนดิจิทัลและไซเบอร์"
+        },
+        "critical_infrastructure": {
+          "term": "โครงสร้างพื้นฐานที่สำคัญ",
+          "definition": "ระบบที่จำเป็น เช่น ไฟฟ้า น้ำ สุขภาพ และการสื่อสารที่ต้องการความยืดหยุ่น"
+        },
+        "epidemiology": {
+          "term": "ระบาดวิทยา",
+          "definition": "ศึกษารูปแบบโรค สาเหตุ และการแพร่กระจายในประชากร"
+        },
+        "preparedness_response": {
+          "term": "การเตรียมความพร้อมและการตอบสนอง",
+          "definition": "การวางแผน การประสานงาน และการดำเนินการที่เพิ่มขึ้นอย่างรวดเร็วเพื่อควบคุมและจัดการเหตุฉุกเฉิน"
+        },
+        "non_refoulement": {
+          "term": "การไม่ส่งกลับ",
+          "definition": "หลักการห้ามส่งบุคคลไปยังสถานที่ซึ่งได้รับอันตรายร้ายแรง"
+        },
+        "durable_solutions": {
+          "term": "โซลูชั่นที่ทนทาน",
+          "definition": "ผลลัพธ์ระยะยาวสำหรับผู้พลัดถิ่น: การกลับมา การบูรณาการในท้องถิ่น หรือการตั้งถิ่นฐานใหม่"
+        },
+        "nuclear_safeguards": {
+          "term": "การคุ้มครองนิวเคลียร์",
+          "definition": "มาตรการตรวจสอบเพื่อให้แน่ใจว่าวัสดุนิวเคลียร์จะไม่เปลี่ยนไปใช้อาวุธ"
+        },
+        "counter_terrorism": {
+          "term": "การต่อต้านการก่อการร้าย",
+          "definition": "มาตรการทางกฎหมาย การป้องกัน และการรักษาความปลอดภัยแบบบูรณาการต่อกิจกรรมการก่อการร้าย"
+        },
+        "due_process": {
+          "term": "กระบวนการครบกำหนด",
+          "definition": "กระบวนการทางกฎหมายที่เป็นธรรมเพื่อปกป้องสิทธิในระหว่างการสอบสวน การดำเนินคดี และการลงโทษ"
+        },
+        "resource_security": {
+          "term": "ความปลอดภัยของทรัพยากร",
+          "definition": "การเข้าถึงอาหาร น้ำ และพลังงานที่เชื่อถือได้ภายใต้ความเครียดทางเศรษฐกิจและสิ่งแวดล้อม"
+        },
+        "resilience": {
+          "term": "ความยืดหยุ่น",
+          "definition": "ความสามารถของชุมชนและสถาบันในการดูดซับแรงกระแทกและฟื้นตัวอย่างมีประสิทธิภาพ"
+        }
+      },
+      "topicLine": "หัวข้อ: {หัวข้อ}"
+    }
+  },
+  "ideas": {
+    "editIdea": "แก้ไขแนวคิด",
+    "googleDocsUrl": "URL ของ Google เอกสาร",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "ข้อความแนวคิดสั้นๆ (ไม่บังคับ)",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "addIntro": "เพิ่ม Google เอกสารเพื่อร่างแนวคิดการแก้ปัญหา หรือพิมพ์บันทึกสั้นๆ (หรือทั้งสองอย่าง)",
+    "googleDocsCreateHelp": "Google Doc ใหม่จะเปิดขึ้นในแท็บอื่น วางลิงก์ที่นี่หลังจากสร้างแล้ว",
+    "resolutionIdeaPlaceholder": "แนวความคิด...",
+    "add": "เพิ่ม",
+    "noIdeasYet": "ยังไม่มีไอเดีย",
+    "ideaLabel": "ความคิด",
+    "ideaFallback": "ไอเดีย {จำนวน}",
+    "linkedDoc": "เอกสารที่เชื่อมโยง",
+    "addedOn": "เพิ่มแล้ว {วันที่}",
+    "edit": "แก้ไข",
+    "delete": "ลบ",
+    "ideaDocument": "เอกสารไอเดีย",
+    "summary": "สรุป",
+    "emptyIdea": "ความคิดที่ว่างเปล่า"
+  },
+  "stances": {
+    "heatmapTitle": "ภาพรวมท่าทางโดยย่อ (แผนที่ความร้อน)",
+    "heatmapHelp": "การจัดสรรของคุณรองรับ ___ มากน้อยเพียงใด? (สเกล 1-5)",
+    "topicPlaceholder": "เช่น การกระทำของสภาพอากาศ",
+    "extentLabel": "ขอบเขต (1-5):",
+    "extentHelpTitle": "ขอบเขต (1-5)",
+    "extentHelpBody": "1 หมายความว่าการจัดสรรของคุณได้รับการสนับสนุนเพียงเล็กน้อยสำหรับหัวข้อ และ 5 หมายถึงการสนับสนุนอย่างมาก เลือกหมายเลขที่ตรงกับจุดยืนของคุณในคณะกรรมการ",
+    "add": "เพิ่ม",
+    "viewOnlyHeatmap": "แผนที่ความร้อนแบบดูอย่างเดียวสำหรับพนักงาน",
+    "notesPerAllocation": "หมายเหตุต่อการจัดสรร",
+    "noAllocationsYet": "ยังไม่มีการจัดสรร",
+    "notesPlaceholder": "หมายเหตุจุดยืนสำหรับการจัดสรรนี้...",
+    "noteLanguageWarning": "คำเตือนผู้อ่าน: บันทึกนี้อาจมีภาษาที่ไม่เหมาะสม",
+    "save": "บันทึก",
+    "saveHelpTitle": "บันทึกจุดยืน",
+    "saveHelpBody": "บันทึกจุดยืนสำหรับการจัดสรรนี้ สามารถดูได้โดยเจ้าหน้าที่และผู้เข้าร่วมคนอื่นๆ (ขึ้นอยู่กับการตั้งค่าของคณะกรรมการ)"
+  },
+  "speeches": {
+    "newSpeech": "คำพูดใหม่",
+    "speechTitlePlaceholder": "ชื่อคำพูด",
+    "googleDocsUrl": "URL ของ Google เอกสาร",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "เปิด Google ในแท็บใหม่ วาง URL เอกสารที่นี่เมื่อพร้อม",
+    "plainTextOptional": "ร่างข้อความธรรมดา (ไม่บังคับหากคุณใช้ Google เอกสาร)",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "noSpeechesYet": "ยังไม่มีสุนทรพจน์ เชื่อมโยง Google เอกสารหรือวางข้อความ",
+    "speechLabel": "คำพูด",
+    "untitled": "ไม่มีชื่อ",
+    "edit": "แก้ไข",
+    "speechDocument": "เอกสารคำพูด",
+    "draftText": "ข้อความร่าง",
+    "noContentHint": "เชื่อมโยง Google เอกสารกับการแก้ไข หรือเพิ่มข้อความธรรมดาในแบบฟอร์ม"
+  },
+  "committeeRoom": {
+    "committeeLabel": "คณะกรรมการ",
+    "yourContext": "บริบทของคุณ",
+    "roleLabel": "บทบาท",
+    "seatLabel": "ที่นั่ง",
+    "clearSearchTitle": "ล้างการค้นหาและแสดงการมอบหมายทั้งหมด",
+    "vacantLabel": "ว่าง",
+    "assignedLabel": "มอบหมายแล้ว",
+    "daisLabel": "เวที",
+    "phaseLabel": "เฟส",
+    "phaseVoting": "การลงคะแนนเสียง",
+    "phaseDebate": "อภิปราย",
+    "focusSearchTitle": "มุ่งเน้นการค้นหา (ชื่อและชื่อ dais ตรงกับข้อความค้นหาของคุณ)",
+    "tipLabel": "เคล็ดลับ",
+    "searchVacantTitle": "ค้นหาที่นั่ง \"ว่าง\" ในห้อง",
+    "searchHint": "พิมพ์ประเทศ ชื่อผู้แทน โรงเรียน สรรพนาม หรือ \"ว่าง\" เพื่อเน้นการแข่งขันในห้อง กด Enter เพื่อข้ามไปยังนัดแรก Esc เคลียร์แล้ว คลิกว่างเพื่อข้ามไปยังที่นั่งว่าง",
+    "findLabel": "ค้นหาคณะผู้แทนหรือสมาชิกเวที",
+    "searchPlaceholder": "ประเทศ ชื่อ โรงเรียน...",
+    "matchesCount": "ตรงกัน {matches} จาก {total} ที่นั่ง",
+    "enterScrolls": "ป้อนการเลื่อน",
+    "typeToFilterHint": "พิมพ์เพื่อกรอง - ป้อนการเลื่อนเพื่อให้ตรงกันก่อน",
+    "noMatches": "ไม่มีการมอบหมายที่ตรงกันหรือที่นั่งในเวที",
+    "digitalDisplay": "จอแสดงผลดิจิตอล",
+    "floorLabel": "พื้น",
+    "staffSeatsHeading": "พนักงาน-ที่นั่ง",
+    "searchAria": "ค้นหาการมอบหมาย",
+    "virtualRoomVacant": "ว่าง",
+    "profileAria": "ดูโปรไฟล์: {ประเทศ}",
+    "vacantSeatAria": "ที่นั่งว่าง",
+    "placardAria": "ป้ายประกาศ {ประเทศ}",
+    "gavelAria": "ตะลุมพุก",
+    "viewProfileAria": "ดูโปรไฟล์: {title}",
+    "noProfileLinkAria": "{title} (ไม่มีลิงก์โปรไฟล์)",
+    "committeeFloor": "ชั้นคณะกรรมการ",
+    "virtualRoomFigureAria": "ห้องคณะกรรมการเสมือน - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "การกรองการมอบหมาย ไฮไลท์ที่นั่งแรกคือนัดแรกในสังเวียน",
+    "helperText": "ป้ายประกาศรายชื่อประเทศ (จากการจัดสรร) ชื่อ โรงเรียน และคำสรรพนามจากโปรไฟล์ของผู้ร่วมประชุมแต่ละคน แก้ไขของคุณภายใต้โปรไฟล์ ที่นั่งคณะกรรมการว่างจะแสดงว่าว่าง คลิกป้ายหรือที่นั่งที่มีข้อความเต็มเพื่อเปิดหน้าของสมาชิกนั้น (แชทและรายงานจากที่นั่น)",
+    "virtualRoomCaption": "ห้องคณะกรรมการจำลองสหประชาชาติเสมือนจริงพร้อมป้ายผู้แทนแสดงประเทศ ชื่อ โรงเรียน และคำสรรพนาม"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "ขอพูด",
+      "delegateFallback": "มอบหมาย",
+      "needAllocation": "คุณต้องมีการจัดสรรเพื่อขอพูด",
+      "alreadyQueued": "คุณมีคำขอพูดที่ใช้งานอยู่ในคิวแล้ว",
+      "requested": "ก็ขอพูด. คุณจะปรากฏในคิว",
+      "requestFailed": "ไม่สามารถขอพูดได้",
+      "helpBody": "ส่งการมอบหมายของคุณไปที่คิวประธาน คุณสามารถมีคำขอรอ/ปัจจุบันที่ใช้งานอยู่ได้ครั้งละหนึ่งคำขอ",
+      "purposeLabel": "วัตถุประสงค์เพิ่มเติม (แสดงในป้ายคิว)",
+      "purposeHelpTitle": "ป้ายวัตถุประสงค์",
+      "purposeHelpBody": "ข้อความนี้ต่อท้ายชื่อประเทศของคุณ เพื่อให้เก้าอี้สามารถดูว่าทำไมคุณถึงขอชั้น",
+      "purposePlaceholder": "เช่น ภาพรวมการสนับสนุน + การแก้ไข",
+      "requesting": "กำลังขอ...",
+      "rollPromptTitle": "ต้องได้รับอนุมัติจากประธาน",
+      "rollPromptBodyPickStatus": "เซสชันได้เริ่มต้นแล้ว เลือกสถานะการโทรของคุณเพื่อปลดล็อคการพูดและการลงคะแนน ตัวเลือกนี้ไม่สามารถเปลี่ยนแปลงได้",
+      "rollPromptBodyWaitSessionStart": "รอประธานเริ่มประชุมคณะกรรมการ",
+      "rollPromptBodyWaitRollPrompt": "กำลังรอข้อความแจ้งการโทรออก",
+      "rollPromptBodyMarkedAbsent": "ขณะนี้คุณถูกทำเครื่องหมายว่าไม่อยู่ ขอให้เก้าอี้ทำเครื่องหมายให้คุณนำเสนอเพื่อพูดและลงคะแนนเสียง",
+      "rollPromptBodyChecking": "กำลังตรวจสอบสถานะม้วนของคุณ...",
+      "rollPromptSaving": "ประหยัด...",
+      "rollPromptPresent": "ปัจจุบัน",
+      "rollPromptPresentVoting": "นำเสนอและลงคะแนนเสียง"
+    },
+    "motionVoting": {
+      "votingProcedure": "ขั้นตอนการลงคะแนนเสียง",
+      "currentMotion": "การเคลื่อนไหวในปัจจุบัน",
+      "motioner": "โมชั่นเนอร์",
+      "majority": "ส่วนใหญ่",
+      "majoritySimple": "เรียบง่าย",
+      "tally": "ใช่ {ใช่} - ไม่ใช่ {no} - รวม {total}",
+      "help": "เวทีจะบันทึกการลงคะแนนเสียงของคณะผู้แทนแต่ละคนในเซสชั่น การลงมติให้ใช้ใช่หรือไม่ใช่เท่านั้น (ไม่งดออกเสียง) ผลรวมจะนับเฉพาะป้ายที่มีการบันทึกว่าใช่หรือไม่ใช่ การมอบหมายที่ขาดหายไปจะถูกข้ามไป"
+    },
+    "activeMotion": {
+      "currentMotion": "การเคลื่อนไหวในปัจจุบัน",
+      "motionFallback": "การเคลื่อนไหว",
+      "motioner": "โมชั่นเนอร์",
+      "majority": "ส่วนใหญ่",
+      "majoritySimple": "เรียบง่าย",
+      "type": "พิมพ์",
+      "timer": "ตัวจับเวลา",
+      "currentSpeaker": "วิทยากรคนปัจจุบัน",
+      "nextSpeaker": "ผู้บรรยายคนต่อไป",
+      "speakerTimeLeftCap": "เวลาผู้พูด (ซ้าย / ฝาครอบ)",
+      "speakerTimeLeftTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
+      "perSpeaker": "(ต่อผู้พูด)",
+      "paused": "(หยุดชั่วคราว)",
+      "pauseReason": "หยุดชั่วคราว: {เหตุผล}"
+    },
+    "floorStatus": {
+      "sessionTime": "เวลาเซสชัน",
+      "sessionNotStarted": "เซสชันไม่ได้เริ่มต้น",
+      "limit": "ขีดจำกัด",
+      "limitRemaining": "เหลือ {value}",
+      "limitOverBy": "เกินด้วย {value}",
+      "quickLinkSession": "การประชุม",
+      "quickLinkRoll": "ม้วน",
+      "quickLinkSpeakers": "ลำโพง",
+      "quickLinkMotions": "การเคลื่อนไหว",
+      "quickLinkTimer": "ตัวจับเวลา",
+      "dais": "เวที",
+      "pinned": "ปักหมุดแล้ว",
+      "viewFullAnnouncement": "ดูประกาศฉบับเต็ม",
+      "timerPausesReadOnly": "ตัวจับเวลาหยุดชั่วคราว (อ่านอย่างเดียว)",
+      "speakerList": "รายชื่อวิทยากร",
+      "speakerFallback": "วิทยากร",
+      "rollCallYou": "ม้วนสาย (คุณ)",
+      "fullAnnouncement": "ประกาศฉบับเต็ม",
+      "daisAnnouncement": "ประกาศไดส์",
+      "close": "ปิด",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "ชื่อเซสชัน",
+      "sessionNamePlaceholder": "เช่น ภาคเช้า",
+      "sessionNameSaving": "ประหยัด…",
+      "sessionNameSaved": "บันทึกแล้ว",
+      "sessionNameHint": "บันทึกโดยอัตโนมัติและปรากฏในประวัติเซสชัน",
+      "title": "สมัยประชุมคณะกรรมการ",
+      "subtitle": "เริ่มหรือหยุดการประชุมของคณะกรรมการ",
+      "helpStartStop": "เริ่ม เริ่มตัวจับเวลา/สถานะเซสชั่นของคณะกรรมการถ่ายทอดสดสำหรับทุกคน หยุด สิ้นสุดเซสชันและล้างขีดจำกัดเวลาปัจจุบัน",
+      "migrationUnavailable": "การควบคุมเซสชันไม่พร้อมใช้งานชั่วคราวจนกว่าจะใช้การย้ายฐานข้อมูลล่าสุด",
+      "endTimeInFuture": "เลือกเวลาสิ้นสุดในอนาคตหรือเปลี่ยนเป็นไม่มีขีดจำกัด",
+      "sessionStartUnavailable": "การประทับเวลาเริ่มต้นเซสชันไม่พร้อมใช้งานจนกว่าจะใช้การย้ายข้อมูลล่าสุด",
+      "endTimeInFutureSetNoLimit": "เลือกเวลาสิ้นสุดในอนาคตหรือกำหนดไม่จำกัด",
+      "sessionLimitUpdated": "อัปเดตขีดจำกัดเซสชันแล้ว",
+      "startedLabel": "เริ่ม:",
+      "timeInLabel": "เวลาใน:",
+      "timeUntilEndLabel": "เวลาสิ้นสุด:",
+      "overByValue": "เกินด้วย {value}",
+      "modeLabel": "โหมด:",
+      "modeStopwatchNoLimit": "นาฬิกาจับเวลา (ไม่จำกัดเวลา)",
+      "sessionNotRunning": "เซสชันไม่ทำงาน",
+      "sessionLimit": "ขีดจำกัดเซสชัน",
+      "sessionLimitModesTitle": "โหมดจำกัดเซสชัน",
+      "sessionLimitModesHelp": "ไม่มี: ไม่มีที่สิ้นสุด. งบประมาณเวลา: นับตั้งแต่เริ่มต้น สิ้นสุดที่: เวลานาฬิกาคงที่ในเขตเวลาท้องถิ่นของคุณ",
+      "sessionLimitOptional": "ไม่จำเป็น.",
+      "noneLabel": "ไม่มี",
+      "noneDescription": "วิ่งจนกว่าคุณจะหยุด",
+      "timeBudgetLabel": "งบประมาณเวลา",
+      "timeBudgetDescription": "นับจากวินาทีที่คุณเริ่มต้น",
+      "endTimeLabel": "เวลาสิ้นสุด",
+      "endTimeDescription": "ใช้เวลานาฬิกาคงที่ (แทนที่งบประมาณหากเคยตั้งค่าไว้ทั้งคู่)",
+      "noneIndefinite": "ไม่มี (ไม่มีกำหนด)",
+      "noneScheduledEndHint": "ไม่มีกำหนดเวลาสิ้นสุด จะแสดงเฉพาะเวลาที่ผ่านไปเท่านั้น",
+      "timeBudgetFromStart": "งบประมาณเวลาตั้งแต่เริ่มต้น",
+      "hoursLabel": "ชั่วโมง",
+      "minutesLabel": "นาที",
+      "minimumOneMinute": "(ขั้นต่ำ 1 นาที)",
+      "endAtLocalTime": "สิ้นสุดเวลา (เวลาท้องถิ่น)",
+      "stopSession": "หยุดเซสชัน",
+      "saveLimit": "บันทึกขีดจำกัด",
+      "saveLimitHelp": "ใช้การตั้งค่าขีดจำกัดที่อัปเดตในขณะที่เซสชันกำลังทำงานอยู่ โดยไม่หยุดเซสชัน",
+      "startSession": "เริ่มเซสชัน",
+      "sidebarUsePrefix": "ใช้แถบด้านข้างสำหรับ",
+      "rollCall": "ม้วนสาย",
+      "speakers": "ลำโพง",
+      "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
+      "timer": "ตัวจับเวลา",
+      "sidebarAnd": "และ",
+      "announcements": "ประกาศ",
+      "sidebarUseSuffix": "— หนึ่งเครื่องมือต่อแท็บ",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "ประวัติเซสชัน",
+      "savedCount": "บันทึกแล้ว {count}",
+      "permissionsHint": "เก้าอี้สามารถเปลี่ยนชื่อรายการได้ SMT/ผู้ดูแลระบบสามารถเปลี่ยนชื่อและลบรายการได้",
+      "empty": "ยังไม่มีประวัติเซสชัน",
+      "rename": "เปลี่ยนชื่อ",
+      "delete": "ลบ",
+      "deleteConfirm": "ลบเซสชันนี้ออกจากประวัติใช่ไหม",
+      "sessionNamePrompt": "ชื่อเซสชัน",
+      "rangeClosed": "{พิสัย}",
+      "rangeOngoing": "{range} -> กำลังดำเนินอยู่"
+    },
+    "timerPage": {
+      "title": "ตัวจับเวลา",
+      "controlsTitle": "การควบคุมการจับเวลา",
+      "controlsHelp": "ใช้พื้นทั่วไปสำหรับกำหนดเวลาการอภิปรายโดยรวม หรือใช้การโหวตแบบเคลื่อนไหวเพื่อเชื่อมโยงการมองเห็นรายการโหวตแบบเปิดเฉพาะ",
+      "tabSetup": "1) การตั้งค่า",
+      "tabClock": "2) การควบคุมนาฬิกา",
+      "tabNotes": "3) บันทึกคำพูด",
+      "tabLog": "4) หยุดบันทึกชั่วคราว",
+      "setupHelp": "เลือกว่าตัวจับเวลานี้ใช้สำหรับชั้นทั่วไป (ปรากฏแก่ผู้ร่วมประชุมเสมอ) หรือเชื่อมโยงกับการเคลื่อนไหวที่เปิดสำหรับการลงคะแนน (ผู้ร่วมประชุมจะเห็นเฉพาะในขณะที่การลงคะแนนนั้นอยู่ในรายการที่ใช้งานอยู่) เมื่อเปิดเวลาต่อผู้พูด นาฬิกาจะยังคงมองเห็นได้ในระหว่างการประชุมกลุ่มที่มีการกลั่นกรองโดยไม่คำนึงถึง หยุดนาฬิกาชั่วคราว / นาฬิกาเริ่มหยุดหรือนับถอยหลังต่อ ตั้งเวลาของลำโพง (ที่เหลืออยู่) และเวลาทั้งหมดแยกจากกัน จากนั้นบันทึกตัวจับเวลา ค่าที่ตั้งล่วงหน้าจะเติมทั้งสองให้มีความยาวเท่ากัน คุณสามารถแก้ไขฟิลด์ใดฟิลด์หนึ่งได้ในภายหลัง การหยุดชั่วคราวจะถูกบันทึกด้วยเหตุผลสั้นๆ",
+      "namedPreset": "ชื่อที่ตั้งไว้ล่วงหน้า",
+      "applyPreset": "ใช้ค่าที่ตั้งล่วงหน้า...",
+      "floorLabelDelegates": "ป้ายตั้งพื้น (ผู้ร่วมประชุม)",
+      "floorLabelPlaceholder": "เช่น จีเอสแอล 60s",
+      "timerPurpose": "วัตถุประสงค์ของการจับเวลา",
+      "purposeGeneralFloor": "อภิปรายการทั่วไป/ชั้น (ไม่ผูกกับการลงคะแนนเสียง)",
+      "purposeMotionVote": "การเคลื่อนไหวแบบเปิด - จับเวลาเฉพาะในขณะที่การโหวตนั้นทำงานอยู่บนพื้นเท่านั้น",
+      "openMotionForVoting": "ญัตติเปิด (ต้องเปิดให้ลงคะแนนเสียง)",
+      "selectMotion": "เลือกการเคลื่อนไหว...",
+      "untitled": "ไม่มีชื่อ",
+      "noOpenMotionWarning": "ไม่มีการเคลื่อนไหวใดเปิดให้ลงคะแนนเสียง เปิดการโหวตก่อนหรือเปลี่ยนวัตถุประสงค์เป็นชั้นทั่วไป",
+      "clock": "นาฬิกา",
+      "running": "วิ่ง",
+      "paused": "หยุดชั่วคราว",
+      "saveToEnablePauseStart": "บันทึกตัวจับเวลาเพื่อเปิดใช้งานการหยุดชั่วคราว/เริ่มต้น",
+      "pauseReasonLogged": "เหตุผลที่หยุดชั่วคราว (บันทึกไว้)",
+      "pauseReasonPlaceholder": "เช่น ประเด็นสำคัญ ปัญหาทางเทคโนโลยี การประชุมคอคัสที่ไม่มีการกลั่นกรอง...",
+      "pauseClock": "นาฬิกาหยุดชั่วคราว",
+      "startClock": "เริ่มนาฬิกา",
+      "perSpeakerTitle": "เวลาต่อผู้พูด (การประชุมกลุ่มย่อยแบบมีผู้ดูแล)",
+      "perSpeakerHelp": "ตั้งค่าเวลาทั้งหมดเป็นขีดจำกัดต่อลำโพง และเวลาของลำโพงเป็นเวลาที่เหลือ การเลื่อนขั้นสูงไปยังลำโพงตัวถัดไปและรีเซ็ตที่เหลืออยู่ที่ฝาปิด",
+      "currentSpeaker": "วิทยากรคนปัจจุบัน",
+      "nextSpeaker": "ผู้บรรยายคนต่อไป",
+      "speechNotesCurrentSpeaker": "บันทึกคำพูด (วิทยากรปัจจุบัน)",
+      "speechNotesHelp": "หมายเหตุจะเชื่อมโยงกับข้อความตัวจับเวลาผู้พูดปัจจุบัน และเมื่อรายชื่อผู้พูดมีคนทำเครื่องหมายว่าปัจจุบัน การมอบหมายของผู้พูดจะถูกเก็บไว้เพื่อใช้อ้างอิง",
+      "timerFloorLabel": "ตั้งเวลา(พื้น):",
+      "speakerListCurrent": "รายชื่อวิทยากร (ปัจจุบัน):",
+      "noCurrentDelegation": "ไม่มีการมอบหมายการมอบหมายถูกทำเครื่องหมายเป็นปัจจุบันในรายการวิทยากร",
+      "note": "บันทึก",
+      "notePlaceholder": "คะแนน POI น้ำเสียง การติดตามผล...",
+      "saveSpeechNote": "บันทึกบันทึกคำพูด",
+      "recentNotes": "บันทึกล่าสุดของคุณ (คณะกรรมการนี้)",
+      "delete": "ลบ",
+      "speakerTimeRemaining": "เวลาผู้พูด (ที่เหลืออยู่)",
+      "remainingHelpPerSpeaker": "การนับถอยหลังสำหรับผู้พูดคนปัจจุบัน (รีเซ็ตเมื่อคุณขั้นสูง)",
+      "remainingHelpNormal": "การนับถอยหลังสำหรับผู้พูดคนปัจจุบัน (อาจน้อยกว่าทั้งหมด)",
+      "totalTime": "เวลาทั้งหมด",
+      "totalHelpPerSpeaker": "ฝาครอบลำโพงต่อตัว (ตัวหารบนพื้น ส่วนเติมล่วงหน้าเหลือเท่านี้)",
+      "totalHelpNormal": "ความยาวเต็มของส่วนของตัวจับเวลานี้ (แสดงหลังเครื่องหมายทับบนพื้น)",
+      "saveTimer": "บันทึกตัวจับเวลา",
+      "advanceSpeakerReset": "ลำโพงล่วงหน้าและรีเซ็ตนาฬิกา",
+      "recentPauseLog": "บันทึกการหยุดชั่วคราวล่าสุด",
+      "noPauseEvents": "ยังไม่มีการบันทึกเหตุการณ์การหยุดชั่วคราวสำหรับคณะกรรมการชุดนี้",
+      "openPauseLogHint": "เปิดบันทึกการหยุดชั่วคราวเพื่อตรวจสอบเหตุผลของการหยุดชั่วคราวและการประทับเวลาที่บันทึกไว้",
+      "saved": "บันทึกตัวจับเวลาแล้ว",
+      "savedCapped": "บันทึกตัวจับเวลาแล้ว เวลาของผู้พูดนานกว่าเวลาทั้งหมด ต่อยอดรวม",
+      "alreadyPaused": "ตัวจับเวลาหยุดชั่วคราวแล้ว",
+      "pausedForCommittee": "ตัวจับเวลาหยุดชั่วคราวสำหรับคณะกรรมการ",
+      "alreadyRunning": "ตัวจับเวลากำลังทำงานอยู่แล้ว",
+      "runningForCommittee": "จับเวลาวิ่งให้กับคณะกรรมการ",
+      "euTimerBoardTitle": "คณะกรรมการจับเวลารัฐสภาสหภาพยุโรป (11 ตัวจับเวลา)",
+      "euTimerBoardHelp": "ตัวจับเวลาหนึ่งครั้งต่อปาร์ตี้ บวกเวลาทั้งหมด เวลา POI/POC และเวลาของวิทยากร ใช้นำไปใช้เพื่อคัดลอกแถวลงในช่องตัวจับเวลาถ่ายทอดสดบนแท็บนาฬิกา (เวลาของผู้พูด / ตัวจับเวลาบันทึก)",
+      "euTimerName": "ชื่อ",
+      "euTimerTag": "แท็ก",
+      "euTotalTime": "เวลาทั้งหมด",
+      "euPoiPocTime": "เวลาที่น่าสนใจ/POC",
+      "euSpeakerTime": "เวลาผู้พูด"
+    }
   }
 }

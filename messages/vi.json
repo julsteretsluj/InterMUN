@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Mở sàn chuyển động để phát biểu trước.",
     "openMotionBlocksRecording": "Một kiến ​​nghị đã được mở để bỏ phiếu. Đóng nó lại trước khi ghi lại các báo cáo tiếp theo.",
     "statedMotionRecorded": "Kiến nghị đã nêu được ghi lại (chưa mở để bỏ phiếu).",
-    "statedMotionRemoved": "Chuyển động đã nêu bị loại bỏ."
+    "statedMotionRemoved": "Chuyển động đã nêu bị loại bỏ.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• Nhật ký điểm",
     "formalMotions": "Kiến nghị chính thức",
     "timer": "hẹn giờ",
-    "smtProfile": "Hồ sơ"
+    "smtProfile": "Hồ sơ",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase chưa được cấu hình",
@@ -835,7 +852,8 @@
       "archive": "Lưu trữ",
       "officialLinks": "Liên kết chính thức",
       "roomCode": "Mã phòng",
-      "settings": "Cài đặt"
+      "settings": "Cài đặt",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "Các quốc gia thành viên Liên hợp quốc",
       "unSystem": "Hệ thống LHQ (người sáng lập và thành viên)",
       "history": "Lịch sử LHQ"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Thêm nguồn",
-      "sourceUrl": "URL nguồn",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (được khuyến nghị)",
-      "urlHelp": "Đối với Google Tài liệu mới, hãy sử dụng nút và dán liên kết tài liệu vào đây.",
-      "titleOptional": "Tiêu đề (tùy chọn)",
-      "saveChanges": "Lưu thay đổi",
-      "editSource": "Chỉnh sửa nguồn",
-      "urlPlaceholderShort": "Google Tài liệu hoặc URL khác",
-      "empty": "Chưa có nguồn. Thêm liên kết Google Doc để mở nó ở đây.",
-      "sourceLabel": "Nguồn",
-      "openLink": "Mở liên kết",
-      "embedHeading": "Tài liệu nguồn",
-      "notGoogleDoc": "URL này không phải là Google Tài liệu. Sử dụng liên kết docs.google.com/document/d/… để nhúng và chỉnh sửa tại đây; nếu không hãy mở liên kết ở trên."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Các đại biểu không thể trực tiếp tải lên các Giấy tờ quan điểm. Sử dụng loại tài liệu khác.",
-      "alertOnlyChairsPositionPaper": "Chỉ có chủ tịch/SMT/quản trị viên mới có thể tải lên Giấy tờ vị trí.",
-      "alertOnlySmtChairReport": "Chỉ SMT/quản trị viên mới có thể tải lên Báo cáo của Chủ tịch.",
-      "alertOnlySmtRop": "Chỉ SMT/quản trị viên mới có thể tải lên tài liệu RoP.",
-      "alertOnlySmtAwardCriteria": "Chỉ SMT/quản trị viên mới có thể tải lên tài liệu Tiêu chí Giải thưởng.",
-      "alertNeedContentOrUrl": "Thêm nội dung văn bản cục bộ hoặc URL Google Tài liệu.",
-      "confirmDelete": "Xóa tài liệu này?",
-      "delegatePrepTitle": "Phần chuẩn bị tài liệu",
-      "delegatePrepBody": "Bạn có thể tải lên, xem và chỉnh sửa <prep>Tài liệu chuẩn bị</prep> của riêng mình trực tiếp từ trang này.",
-      "positionPaperGuideTitle": "Hướng dẫn định vị giấy",
-      "positionPaperGuideBlurb": "Tải xuống hướng dẫn giữ chỗ trong khi bản PDF cuối cùng đang được chuẩn bị.",
-      "downloadPlaceholderGuide": "Tải xuống hướng dẫn giữ chỗ",
-      "addDocument": "Thêm tài liệu",
-      "tabs": {
-        "ariaLabel": "Phần tài liệu",
-        "library": "Thư viện",
-        "compose": "Soạn",
-        "composeHint": "Bắt đầu một tài liệu mới hoặc chỉnh sửa bản nháp hiện có từ tab này."
-      },
-      "newDocumentTitle": "Tài liệu mới",
-      "editDocumentTitle": "Chỉnh sửa tài liệu",
-      "typeLabel": "Kiểu",
-      "types": {
-        "position_paper": "Giấy định vị",
-        "chair_report": "báo cáo chủ trì",
-        "rop": "RoP",
-        "award_criteria": "Tiêu chí giải thưởng",
-        "chair_notes": "ghi chú ghế",
-        "prep_doc": "chuẩn bị tài liệu"
-      },
-      "delegatePositionPaperNote": "Các bài viết quan điểm được các chủ tọa tải lên kèm theo các phản hồi.",
-      "delegateOwner": "Chủ sở hữu đại diện",
-      "chairRecipient": "Người nhận ghế",
-      "titleLabel": "Tiêu đề",
-      "titlePlaceholder": "Tiêu đề tài liệu",
-      "googleDocsUrl": "URL Google Tài liệu",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (nhúng xem/chỉnh sửa trong ứng dụng)",
-      "googleDocsHelp": "Sử dụng Google Doc mới để mở Google trong tab mới, sau đó dán liên kết tài liệu vào đây. Văn bản thuần túy bên dưới là tùy chọn. Mọi tài liệu đều cần văn bản cục bộ, liên kết Google Doc hoặc cả hai.",
-      "plainTextOptional": "Văn bản thuần túy (tùy chọn)",
-      "plainTextPlaceholder": "Ghi chú hoặc văn bản nháp…",
-      "chairFeedbackLabel": "Phản hồi về ghế",
-      "chairFeedbackPlaceholder": "Phản hồi về bài viết lập trường của đại biểu...",
-      "empty": "Chưa có tài liệu nào. Thêm một hoặc liên kết một tài liệu Google.",
-      "sidebarDocumentLabel": "Tài liệu",
-      "sections": {
-        "chairReports": "Báo cáo chủ trì",
-        "rop": "RoP",
-        "awardCriteria": "Tiêu chí giải thưởng",
-        "prepDocuments": "Chuẩn bị hồ sơ",
-        "chairNotes": "ghi chú ghế",
-        "otherDocuments": "Các tài liệu khác"
-      },
-      "untitled": "Không có tiêu đề",
-      "linkedDocumentHeading": "Tài liệu được liên kết",
-      "notesHeading": "Ghi chú",
-      "noGoogleDocYet": "Chưa có tài liệu Google nào được liên kết. Sử dụng Chỉnh sửa để thêm URL docs.google.com/document/d/….",
-      "chairFeedbackHeading": "Phản hồi về ghế",
-      "noFeedbackYet": "Chưa có phản hồi nào được thêm vào."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Nhập email đại biểu trước.",
-      "sentToDelegate": "Đã gửi tới {email}.",
-      "newResolution": "Độ phân giải mới",
-      "maxDraftResolutions": "Ủy ban này đã có {count} dự thảo nghị quyết.",
-      "googleDocLink": "Liên kết Google Tài liệu",
-      "googleDocUrlPlaceholder": "URL Google Documents (docs.google.com/document/d/… — được sử dụng để nhúng + chỉnh sửa)",
-      "googleDocUrlHelp": "Google Tài liệu mới sẽ mở trong một tab khác; sao chép URL từ thanh địa chỉ và dán vào đây.",
-      "mainSubmittersPlaceholder": "Người gửi chính (ID người dùng, được phân tách bằng dấu phẩy)",
-      "coSubmittersPlaceholder": "Người đồng gửi (ID người dùng, được phân tách bằng dấu phẩy)",
-      "create": "Tạo nên",
-      "cancel": "Hủy bỏ",
-      "openInNewTab": "Mở trong tab mới",
-      "noGoogleDocLink": "Không có liên kết Google Tài liệu",
-      "visibleToOtherBloc": "Hiển thị với khối khác",
-      "resolutionCounts": "Phụ đề chính: {chính} | Người đồng đăng ký: {co} | Người ký: {signatories}",
-      "blocButton": "Khối {name} ({stance})",
-      "signVirtually": "Ký ảo (thông báo phụ chính)",
-      "shareByEmail": "Chia sẻ giải pháp qua email",
-      "delegateEmailPlaceholder": "đại biểu@email.com",
-      "sendToDelegate": "Gửi cho đại biểu",
-      "clauseEditor": "Biên tập điều khoản",
-      "noClausesYet": "Chưa có điều khoản nào.",
-      "clauseNumber": "Điều khoản {số}",
-      "saveClause": "Điều khoản lưu",
-      "delete": "Xóa bỏ",
-      "addClausePlaceholder": "Thêm một điều khoản mới...",
-      "addClause": "Thêm mệnh đề",
-      "clauseVoteHistory": "Lịch sử bỏ phiếu điều khoản",
-      "noClauseOutcomesYet": "Chưa có kết quả bỏ phiếu điều khoản nào được ghi nhận.",
-      "clauseFallback": "khoản",
-      "passed": "ĐI QUA",
-      "failed": "THẤT ​​BẠI",
-      "motionId": "Chuyển động {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Phần bình chọn",
-        "open": "Mở",
-        "closed": "Đã đóng"
-      },
-      "requiredMajority": "Đa số bắt buộc",
-      "helpRequiredMajorityTitle": "Đa số bắt buộc",
-      "helpRequiredMajorityBody": "Chọn ngưỡng biểu quyết dùng để quyết định đạt/không đạt. `Đơn giản` là hơn một nửa. `2/3` yêu cầu đa số.",
-      "majoritySimple": "Đơn giản",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{nhãn} đa số",
-      "mustVote": "PHẢI bỏ phiếu",
-      "helpMustVoteTitle": "PHẢI bỏ phiếu",
-      "helpMustVoteBody": "Đánh dấu đề nghị này là một mục \"phải bỏ phiếu\". Điều này được sử dụng để truyền đạt yêu cầu tới người tham gia (tùy thuộc vào việc thành lập ủy ban của bạn).",
-      "saveSettings": "Lưu cài đặt",
-      "delegateBlurb": "Dais ghi lại phiếu bầu trong phiên (ví dụ: điểm danh). Ở đây phiếu kiến ​​nghị chỉ theo Có/Không (không sử dụng phiếu trắng). Bạn có thể theo dõi việc kiểm đếm; đại biểu không bỏ phiếu trong ứng dụng.",
-      "yes": "Đúng",
-      "no": "KHÔNG",
-      "ballots": "Lá phiếu",
-      "total": "Tổng cộng",
-      "outcome": "kết quả",
-      "passed": "Đi qua",
-      "failed": "Thất bại",
-      "noRecordedVotes": "Không có phiếu bầu nào được ghi lại",
-      "reopenMotion": "Chuyển động mở lại",
-      "editRecordOpen": "Chỉnh sửa bản ghi…",
-      "hideSettings": "Ẩn cài đặt",
-      "preliminaryPassing": "Đạt (sơ bộ)",
-      "preliminaryFailing": "Thất bại (sơ bộ)",
-      "delegateRollCall": "Cuộc gọi điểm danh của đại biểu ({count})",
-      "noSeatedDelegates": "Không có đại biểu ngồi nào sẵn sàng cho kiến ​​nghị này.",
-      "rollPrefix": "Cuộn:",
-      "recordedPrefix": "Đã ghi lại:",
-      "recordedYes": "Đúng",
-      "recordedNo": "KHÔNG",
-      "recordedAbstain": "kiêng",
-      "recordedNone": "—",
-      "abstain": "kiêng",
-      "clear": "Thông thoáng",
-      "closeMotion": "Đóng chuyển động",
-      "mustVoteBadge": "PHẢI bỏ phiếu",
-      "canVoteBadge": "CÓ THỂ bỏ phiếu",
-      "noMotions": "Chưa có chuyển động nào.",
-      "currentOpenMotion": "Chuyển động mở hiện tại",
-      "noOpenMotion": "Không có chuyển động mở ngay bây giờ.",
-      "recentClosedMotions": "Chuyển động đã đóng gần đây",
-      "noClosedMotions": "Chưa có chuyển động khép kín nào.",
-      "untitled": "Không có tiêu đề",
-      "voteTypes": {
-        "motion": "Cử động",
-        "amendment": "Sửa đổi",
-        "resolution": "Nghị quyết"
-      },
-      "roll": {
-        "absent": "Vắng mặt (cuộn)",
-        "present_abstain": "Hiện tại - có thể bỏ phiếu trắng (cuộn)",
-        "present_voting": "Trình bày và biểu quyết (cuộn)",
-        "unknown": "- (cuộn)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Phần hồ sơ",
-        "overview": "Tổng quan",
-        "awards": "Giải thưởng",
-        "private": "Hồ sơ riêng tư",
-        "settings": "Cài đặt hồ sơ"
-      },
-      "profilePicture": "Ảnh hồ sơ",
-      "uploadFile": "Tải tập tin lên",
-      "uploading": "Đang tải lên…",
-      "photoSaved": "Ảnh đã được tải lên và lưu.",
-      "orUrl": "Hoặc đặt theo URL",
-      "urlPlaceholder": "https://...",
-      "name": "Tên",
-      "username": "Tên người dùng",
-      "usernamePlaceholder": "ví dụ. alex_1999",
-      "pronouns": "Đại từ",
-      "customPronounNote": "Hồ sơ của bạn có một bộ đại từ tùy chỉnh không còn được chấp nhận ở đây. Chọn một tùy chọn ở trên (hoặc để trống). Tiết kiệm thay thế giá trị cũ.",
-      "school": "Trường học",
-      "schoolPlaceholder": "ví dụ. Trường trung học Lincoln",
-      "grade": "Cấp",
-      "selectGrade": "Chọn lớp",
-      "conferencesAttended": "Hội nghị tham dự",
-      "awardsComma": "Giải thưởng (được phân tách bằng dấu phẩy)",
-      "awardsPlaceholder": "Đại biểu xuất sắc nhất, được vinh danh",
-      "allocation": "Phân bổ",
-      "selectAllocation": "Chọn phân bổ",
-      "noAllocationsPlaceholder": "Không có sự phân bổ của ủy ban",
-      "saveProfile": "Lưu hồ sơ",
-      "saved": "Đã lưu hồ sơ.",
-      "saveFailed": "Không thể lưu hồ sơ.",
-      "errUsernamePattern": "Tên đăng nhập phải từ 3-32 ký tự (chữ cái, số, _, ., -)",
-      "errPronounsPreset": "Chọn một đại từ từ danh sách.",
-      "errImageType": "Vui lòng chọn một tập tin hình ảnh.",
-      "errImageSize": "Hình ảnh quá lớn (tối đa 5 MB).",
-      "errUploadFailed": "Tải lên không thành công.",
-      "errStorageSetup": "Lưu trữ ảnh hồ sơ chưa được thiết lập. Trong dự án Supabase, hãy chạy Migration 00100_profile_pictures_storage_bucket.sql hoặc tạo một nhóm lưu trữ công cộng có tên là profile-pictures (xem README).",
-      "errPublicUrl": "Không thể phân giải URL công khai cho hình ảnh được tải lên.",
-      "fallbacks": {
-        "yourCountry": "đất nước của bạn",
-        "committeeSession": "Phiên họp ủy ban",
-        "delegate": "Đại biểu",
-        "speechNote": "ghi chú bài phát biểu",
-        "untitledMotion": "Chuyển động không có tiêu đề",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "Chào mừng đại biểu của {flag} {country}",
-        "subtitle": "Bạn muốn bắt đầu với điều gì?",
-        "links": {
-          "documents": "Tài liệu",
-          "notes": "Ghi chú",
-          "committeeRoom": "Phòng ủy ban",
-          "runningNotes": "Ghi chú đang chạy",
-          "ideas": "Ý tưởng",
-          "guides": "Hướng dẫn",
-          "sources": "Nguồn",
-          "resolutions": "Nghị quyết",
-          "speeches": "Bài phát biểu",
-          "stances": "thế đứng",
-          "crisisSlides": "Trượt khủng hoảng",
-          "report": "Báo cáo",
-          "motions": "chuyển động",
-          "points": "Điểm"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Giải thưởng trên hồ sơ của bạn",
-        "rank": "xếp hạng {thứ hạng}",
-        "pending": {
-          "tab": "Đang chờ đề cử",
-          "title": "Đang chờ đề cử chủ tịch",
-          "descriptionSingle": "Được ghế lưu lại và chia sẻ với SMT để xem xét. Giải thưởng cuối cùng xuất hiện bên dưới sau khi xác nhận.",
-          "descriptionTabbed": "Được ghế lưu lại và chia sẻ với SMT để xem xét. Giải thưởng cuối cùng xuất hiện sau khi xác nhận."
-        },
-        "recorded": {
-          "tab": "Giải thưởng được ghi nhận",
-          "title": "Giải thưởng được ghi nhận",
-          "description": "Được liệt kê khi chủ tịch hoặc SMT chỉ định bạn trong danh sách theo dõi giải thưởng. Sự công nhận cuối cùng tuân theo các quy tắc của hội nghị của bạn."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Chỉ hiển thị với bạn, chủ tịch ủy ban và SMT của ủy ban liên quan.",
-        "points": {
-          "title": "Điểm ghế (riêng)"
-        },
-        "speechNotes": {
-          "title": "Ghi chú bài phát biểu của chủ tọa (riêng tư)"
-        },
-        "motions": {
-          "title": "Chuyển động bạn đã di chuyển",
-          "description": "Đã lưu vào hồ sơ của bạn để ủy ban xem xét và giám sát SMT."
-        }
-      },
-      "discipline": {
-        "title": "Tình trạng kỷ luật (riêng tư)",
-        "statusLine": "Cảnh báo: {warnings} · Cảnh cáo: {strikes}{votingDisabled}{saySuspends}{removedFromCommittee}",
-        "votingDisabled": "bỏ phiếu bị vô hiệu hóa",
-        "speakingSuspended": "đang nói bị đình chỉ",
-        "removedFromCommittee": "bị loại khỏi ủy ban",
-        "updated": "Đã cập nhật: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Xem trước hồ sơ",
-        "title": "Xem trước",
-        "yourName": "Tên của bạn",
-        "usernameNotSet": "Tên người dùng chưa được đặt",
-        "gradeValue": "Lớp {lớp}",
-        "awards": "Giải thưởng"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Quy tắc thủ tục (RoP)",
-          "content": "# Quy tắc thủ tục \n\n## Điểm và chuyển động \n- **Điểm đặt hàng**: Đúng quy trình \n- **Điểm thông tin**: Câu hỏi dành cho diễn giả \n- **Điểm đặc quyền cá nhân**: Sự thoải mái cá nhân \n- **Motion to Table**: Hoãn tranh luận \n- **Đề nghị hoãn**: Kết thúc phiên họp \n\n## Bỏ phiếu \n- Đa số đơn giản cho các vấn đề thủ tục \n- 2/3 đa số cho những vấn đề quan trọng \n- Điểm danh bỏ phiếu nếu được yêu cầu"
-        },
-        "examples": {
-          "title": "Ví dụ",
-          "content": "# Ví dụ \n\n## Định dạng độ phân giải \n``` \nĐại hội đồng, \n... \n1. Kêu gọi các quốc gia thành viên... \n2. Kêu gọi cộng đồng quốc tế... \n``` \n\n## Cấu trúc giấy vị trí \n1. Bối cảnh \n2. Chính sách quốc gia \n3. Giải pháp đề xuất"
-        },
-        "templates": {
-          "title": "Mẫu",
-          "content": "# Mẫu \n\n## Mẫu báo cáo của Chủ tịch \n- Tổng quan về ủy ban \n- Các điểm thảo luận chính \n- Các nghị quyết được thông qua \n- Khuyến nghị"
-        },
-        "chairReport": {
-          "title": "báo cáo chủ tịch",
-          "content": "# Báo cáo của Chủ tịch \n\nTài liệu thủ tục tố tụng và kết quả của ủy ban ở đây."
-        }
-      },
-      "edit": "Biên tập",
-      "guideDocument": "Tài liệu hướng dẫn",
-      "additionalNotes": "Ghi chú bổ sung",
-      "noContentYet": "Chưa có nội dung.",
-      "titlePlaceholder": "Tiêu đề",
-      "googleDocsUrl": "URL Google Tài liệu",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Tài liệu Google mới sẽ mở trong một tab khác. Dán liên kết có thể chia sẻ để đại biểu có thể mở tài liệu tại đây (xem/chỉnh sửa tùy thuộc vào chia sẻ của Google).",
-      "markdownOptional": "Ghi chú đánh dấu (tùy chọn nếu bạn sử dụng Google Doc)",
-      "save": "Cứu",
-      "cancel": "Hủy bỏ",
-      "createNewGuide": "Tạo hướng dẫn mới",
-      "slugPlaceholder": "sên (độc nhất)",
-      "titleLowerPlaceholder": "tiêu đề",
-      "googleDocsUrlOptional": "URL Google Tài liệu (tùy chọn)",
-      "markdownContentOptional": "Nội dung đánh dấu (tùy chọn)",
-      "create": "Tạo nên",
-      "glossary": {
-        "title": "Bảng chú giải chương trình MUN",
-        "subtitle": "Thuật ngữ độc đáo phù hợp với mã ủy ban của bạn và các chủ đề chương trình nghị sự hiện tại.",
-        "committeeCode": "Mã ủy ban: {code}",
-        "topicTag": "Chủ đề: {chủ đề}",
-        "sources": {
-          "core": "cốt lõi",
-          "committee": "ủy ban",
-          "topic": "đề tài"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Phái đoàn",
-            "definition": "Một quốc gia hoặc nhóm quan sát đại diện cho một quốc gia hoặc tổ chức trong ủy ban."
-          },
-          "placard": {
-            "term": "áp phích",
-            "definition": "Ký hiệu quốc gia được sử dụng để yêu cầu phát biểu, biểu quyết và đưa ra các kiến ​​nghị về thủ tục."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Nhóm chủ trì điều hành tranh luận, áp dụng quy trình và quản lý trật tự phát biểu."
-          },
-          "quorum": {
-            "term": "số đại biểu",
-            "definition": "Số lượng đoàn đại biểu tối thiểu cần thiết để tiến hành công việc chính thức và bỏ phiếu."
-          },
-          "motion": {
-            "term": "Cử động",
-            "definition": "Đề xuất chính thức nhằm thay đổi tiến trình tranh luận, chẳng hạn như kiểu họp kín hoặc thời gian phát biểu."
-          },
-          "point_of_order": {
-            "term": "Điểm đặt hàng",
-            "definition": "Can thiệp khi thủ tục được áp dụng không đúng theo quy định của ủy ban."
-          },
-          "moderated_caucus": {
-            "term": "Họp kín được kiểm duyệt",
-            "definition": "Phân đoạn tranh luận có cấu trúc với các bài phát biểu có thời lượng ngắn về một chủ đề phụ được xác định."
-          },
-          "unmoderated_caucus": {
-            "term": "Cuộc họp kín không được kiểm duyệt",
-            "definition": "Giai đoạn đàm phán không chính thức khi các đại biểu tự do soạn thảo và hợp nhất các ý tưởng."
-          },
-          "draft_resolution": {
-            "term": "Dự thảo Nghị quyết",
-            "definition": "Văn bản làm việc về hành động đề xuất của ủy ban trước khi bỏ phiếu cuối cùng và thông qua."
-          },
-          "amendment": {
-            "term": "Sửa đổi",
-            "definition": "Thay đổi được đề xuất đối với văn bản dự thảo, thân thiện hoặc bị bỏ phiếu là không thân thiện."
-          },
-          "operative_clause": {
-            "term": "Điều khoản hoạt động",
-            "definition": "Điều khoản được đánh số theo định hướng hành động mô tả những gì ủy ban đề xuất thực hiện."
-          },
-          "preambulatory_clause": {
-            "term": "Điều khoản mở đầu",
-            "definition": "Mệnh đề thiết lập bối cảnh trích dẫn các nguyên tắc cơ bản, mối quan tâm và các khuôn khổ trước đó."
-          },
-          "right_of_reply": {
-            "term": "Quyền trả lời",
-            "definition": "Cơ hội phản hồi lại một tuyên bố trực tiếp ảnh hưởng đến phẩm giá hoặc vị trí của phái đoàn."
-          },
-          "veto_power": {
-            "term": "Quyền phủ quyết",
-            "definition": "Quyền thành viên thường trực của UNSC ngăn chặn các dự thảo nghị quyết thực chất."
-          },
-          "chapter_vii": {
-            "term": "Chương VII",
-            "definition": "Hiến chương LHQ có thẩm quyền về các mối đe dọa hòa bình, các biện pháp trừng phạt và các biện pháp sử dụng vũ lực."
-          },
-          "sanctions_regime": {
-            "term": "Chế độ trừng phạt",
-            "definition": "Các biện pháp hạn chế phối hợp được sử dụng để tác động đến hành vi mà không có hành động quân sự trực tiếp."
-          },
-          "arms_control": {
-            "term": "Kiểm soát vũ khí",
-            "definition": "Các thỏa thuận và hệ thống xác minh giới hạn loại, số lượng hoặc việc triển khai vũ khí."
-          },
-          "non_proliferation": {
-            "term": "Không phổ biến vũ khí hạt nhân",
-            "definition": "Các chính sách nhằm ngăn chặn sự lan rộng của năng lực vũ khí hạt nhân, hóa học, sinh học hoặc vũ khí tiên tiến."
-          },
-          "confidence_building_measures": {
-            "term": "Các biện pháp xây dựng niềm tin",
-            "definition": "Các công cụ minh bạch và truyền thông giúp giảm thiểu hiểu lầm và nguy cơ xung đột."
-          },
-          "universal_periodic_review": {
-            "term": "Đánh giá định kỳ phổ quát",
-            "definition": "Quá trình đánh giá ngang hàng trong đó mỗi quốc gia thành viên Liên hợp quốc báo cáo và nhận các khuyến nghị về quyền."
-          },
-          "special_rapporteur": {
-            "term": "Báo cáo viên đặc biệt",
-            "definition": "Chuyên gia độc lập được chỉ định để theo dõi và báo cáo về các vấn đề theo chủ đề hoặc quyền quốc gia."
-          },
-          "treaty_body": {
-            "term": "Cơ quan hiệp ước",
-            "definition": "Ủy ban chuyên gia giám sát việc thực hiện một hiệp ước nhân quyền cụ thể."
-          },
-          "public_health_emergency": {
-            "term": "Trường hợp khẩn cấp về sức khỏe cộng đồng",
-            "definition": "Sự kiện bùng phát nghiêm trọng đòi hỏi phải có phản ứng khẩn cấp ở cấp quốc gia và quốc tế."
-          },
-          "surveillance": {
-            "term": "Giám sát dịch tễ học",
-            "definition": "Thu thập và phân tích liên tục dữ liệu sức khỏe để phát hiện và theo dõi xu hướng bệnh tật."
-          },
-          "health_systems": {
-            "term": "Tăng cường hệ thống y tế",
-            "definition": "Cải thiện lực lượng lao động, tài chính, hậu cần và quản trị để cung cấp dịch vụ chăm sóc sức khỏe đáng tin cậy."
-          },
-          "transnational_crime": {
-            "term": "Tội phạm có tổ chức xuyên quốc gia",
-            "definition": "Hoạt động tội phạm phối hợp xuyên biên giới thông qua mạng lưới và thị trường bất hợp pháp."
-          },
-          "illicit_trafficking": {
-            "term": "Buôn bán bất hợp pháp",
-            "definition": "Vận chuyển trái phép ma túy, vũ khí, người hoặc hàng hóa qua các khu vực pháp lý."
-          },
-          "rule_of_law_capacity": {
-            "term": "Năng lực pháp quyền",
-            "definition": "Khả năng thể chế của hệ thống tư pháp để điều tra, truy tố và bảo vệ quyền một cách công bằng."
-          },
-          "sustainable_development": {
-            "term": "Phát triển bền vững",
-            "definition": "Mô hình tăng trưởng cân bằng giữa tiến bộ xã hội, cơ hội kinh tế và bảo vệ môi trường."
-          },
-          "financing_for_development": {
-            "term": "Tài trợ cho phát triển",
-            "definition": "Cơ chế tài trợ công và tư nhân hỗ trợ các ưu tiên phát triển dài hạn."
-          },
-          "policy_coordination": {
-            "term": "Điều phối chính sách",
-            "definition": "Thống nhất các hành động của nhà nước và cơ quan để tránh trùng lặp và tăng tác động tập thể."
-          },
-          "child_protection": {
-            "term": "Bảo vệ trẻ em",
-            "definition": "Các biện pháp ngăn chặn việc bóc lột, lạm dụng và bạo lực đối với trẻ em ở mọi môi trường."
-          },
-          "education_access": {
-            "term": "Tiếp cận giáo dục",
-            "definition": "Đảm bảo cơ hội học tập toàn diện, công bằng và liên tục cho tất cả trẻ em."
-          },
-          "humanitarian_response": {
-            "term": "Phản ứng nhân đạo",
-            "definition": "Các hành động cứu trợ nhanh chóng giải quyết các nhu cầu cấp thiết trong bối cảnh khủng hoảng và xung đột."
-          },
-          "gender_mainstreaming": {
-            "term": "Lồng ghép giới tính",
-            "definition": "Tích hợp phân tích giới vào thiết kế, thực hiện và đánh giá chính sách."
-          },
-          "gender_based_violence": {
-            "term": "Bạo lực trên cơ sở giới",
-            "definition": "Tổn hại nhắm vào ai đó dựa trên bản dạng giới, vai trò hoặc quan hệ quyền lực không bình đẳng."
-          },
-          "economic_empowerment": {
-            "term": "Trao quyền kinh tế",
-            "definition": "Mở rộng khả năng tiếp cận công việc bền vững, tài chính, quyền sở hữu và quyền ra quyết định."
-          },
-          "source_attribution": {
-            "term": "Thuộc tính nguồn",
-            "definition": "Trích dẫn nguồn gốc thông tin rõ ràng để các tuyên bố có thể được xác minh và phù hợp với ngữ cảnh."
-          },
-          "verified_reporting": {
-            "term": "Báo cáo đã được xác minh",
-            "definition": "Tiêu chuẩn báo chí yêu cầu chứng thực trước khi công bố các sự kiện gây tranh cãi."
-          },
-          "editorial_independence": {
-            "term": "Độc lập biên tập",
-            "definition": "Tách biệt các quyết định báo cáo khỏi áp lực chính trị hoặc ảnh hưởng của các bên liên quan."
-          },
-          "climate_mitigation": {
-            "term": "Giảm thiểu khí hậu",
-            "definition": "Các hành động giảm phát thải khí nhà kính hoặc tăng cường loại bỏ carbon dài hạn."
-          },
-          "climate_adaptation": {
-            "term": "Thích ứng khí hậu",
-            "definition": "Các chính sách và đầu tư nhằm giảm thiểu tính dễ bị tổn thương trước các tác động liên quan đến khí hậu."
-          },
-          "cyber_norms": {
-            "term": "Định mức mạng",
-            "definition": "Những kỳ vọng chung về hành vi có trách nhiệm của nhà nước trong lĩnh vực kỹ thuật số và mạng."
-          },
-          "critical_infrastructure": {
-            "term": "Cơ sở hạ tầng quan trọng",
-            "definition": "Các hệ thống thiết yếu như điện, nước, y tế và thông tin liên lạc đòi hỏi khả năng phục hồi."
-          },
-          "epidemiology": {
-            "term": "Dịch tễ học",
-            "definition": "Nghiên cứu về mô hình bệnh tật, nguyên nhân và sự phân bố trong quần thể."
-          },
-          "preparedness_response": {
-            "term": "Sự chuẩn bị và ứng phó",
-            "definition": "Lập kế hoạch, phối hợp và tăng cường các hành động để ngăn chặn và quản lý các trường hợp khẩn cấp."
-          },
-          "non_refoulement": {
-            "term": "Không trả lại",
-            "definition": "Nguyên tắc cấm người dân trở lại nơi mà họ phải đối mặt với tổn hại nghiêm trọng."
-          },
-          "durable_solutions": {
-            "term": "Giải pháp bền vững",
-            "definition": "Kết quả lâu dài đối với người phải di dời: hồi hương, hội nhập địa phương hoặc tái định cư."
-          },
-          "nuclear_safeguards": {
-            "term": "Các biện pháp bảo vệ hạt nhân",
-            "definition": "Các biện pháp xác minh đảm bảo vật liệu hạt nhân không bị chuyển hướng sang sử dụng vũ khí."
-          },
-          "counter_terrorism": {
-            "term": "chống khủng bố",
-            "definition": "Các biện pháp pháp lý, phòng ngừa và an ninh tổng hợp chống lại hoạt động khủng bố."
-          },
-          "due_process": {
-            "term": "Đúng thủ tục",
-            "definition": "Thủ tục pháp lý công bằng bảo vệ quyền lợi trong quá trình điều tra, truy tố và xử phạt."
-          },
-          "resource_security": {
-            "term": "Bảo mật tài nguyên",
-            "definition": "Khả năng tiếp cận đáng tin cậy với thực phẩm, nước và năng lượng trong điều kiện căng thẳng về kinh tế và môi trường."
-          },
-          "resilience": {
-            "term": "khả năng phục hồi",
-            "definition": "Năng lực của cộng đồng và thể chế trong việc hấp thụ các cú sốc và phục hồi một cách hiệu quả."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Chỉnh sửa ý tưởng",
-      "googleDocsUrl": "URL Google Tài liệu",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Văn bản ý tưởng ngắn (tùy chọn)",
-      "save": "Cứu",
-      "cancel": "Hủy bỏ",
-      "addIntro": "Thêm Google Tài liệu để soạn thảo ý tưởng giải quyết tại chỗ hoặc nhập một ghi chú ngắn (hoặc cả hai).",
-      "googleDocsCreateHelp": "Google Tài liệu mới sẽ mở trong một tab khác; dán liên kết vào đây sau khi nó được tạo.",
-      "resolutionIdeaPlaceholder": "Ý tưởng giải quyết...",
-      "add": "Thêm vào",
-      "noIdeasYet": "Chưa có ý tưởng nào.",
-      "ideaLabel": "Ý tưởng",
-      "ideaFallback": "Ý tưởng {số}",
-      "linkedDoc": "Tài liệu được liên kết",
-      "addedOn": "Đã thêm {ngày}",
-      "edit": "Biên tập",
-      "delete": "Xóa bỏ",
-      "ideaDocument": "Tài liệu ý tưởng",
-      "summary": "Bản tóm tắt",
-      "emptyIdea": "Ý tưởng trống rỗng."
-    },
-    "stances": {
-      "heatmapTitle": "Tổng quan về lập trường ngắn gọn (Bản đồ nhiệt)",
-      "heatmapHelp": "Sự phân bổ của bạn hỗ trợ ___ ở mức độ nào? (thang đo 1-5)",
-      "topicPlaceholder": "ví dụ. hành động về khí hậu",
-      "extentLabel": "Mức độ (1-5):",
-      "extentHelpTitle": "Mức độ (1-5)",
-      "extentHelpBody": "1 nghĩa là phân bổ của bạn có ít sự hỗ trợ cho chủ đề và 5 nghĩa là sự hỗ trợ mạnh mẽ. Chọn một con số phù hợp với quan điểm của bạn trong ủy ban.",
-      "add": "Thêm vào",
-      "viewOnlyHeatmap": "Bản đồ nhiệt chỉ xem cho nhân viên.",
-      "notesPerAllocation": "Ghi chú cho mỗi phân bổ",
-      "noAllocationsYet": "Chưa có sự phân bổ nào",
-      "notesPlaceholder": "Ghi chú lập trường cho việc phân bổ này...",
-      "noteLanguageWarning": "Cảnh báo người đọc: ghi chú này có thể chứa ngôn ngữ không phù hợp.",
-      "save": "Cứu",
-      "saveHelpTitle": "Lưu ghi chú lập trường",
-      "saveHelpBody": "Lưu ghi chú lập trường cho việc phân bổ này. Nhân viên và những người tham gia khác (tùy thuộc vào cài đặt của ủy ban) có thể xem nó."
-    },
-    "speeches": {
-      "newSpeech": "Bài phát biểu mới",
-      "speechTitlePlaceholder": "Tiêu đề bài phát biểu",
-      "googleDocsUrl": "URL Google Tài liệu",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Mở Google trong tab mới; dán URL tài liệu vào đây khi sẵn sàng.",
-      "plainTextOptional": "Bản nháp văn bản thuần túy (tùy chọn nếu bạn sử dụng Google Doc)",
-      "save": "Cứu",
-      "cancel": "Hủy bỏ",
-      "noSpeechesYet": "Chưa có bài phát biểu nào Liên kết Google Tài liệu hoặc dán văn bản.",
-      "speechLabel": "Lời nói",
-      "untitled": "Không có tiêu đề",
-      "edit": "Biên tập",
-      "speechDocument": "Tài liệu phát biểu",
-      "draftText": "Văn bản nháp",
-      "noContentHint": "Liên kết Google Tài liệu với Chỉnh sửa hoặc thêm văn bản thuần túy vào biểu mẫu."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Ủy ban",
-      "yourContext": "Bối cảnh của bạn",
-      "roleLabel": "Vai trò",
-      "seatLabel": "Ghế",
-      "clearSearchTitle": "Xóa tìm kiếm và hiển thị tất cả các phái đoàn",
-      "vacantLabel": "trống",
-      "assignedLabel": "Đã giao",
-      "daisLabel": "Dais",
-      "phaseLabel": "Giai đoạn",
-      "phaseVoting": "Bỏ phiếu",
-      "phaseDebate": "Tranh luận",
-      "focusSearchTitle": "Tìm kiếm tập trung (tiêu đề và tên dais phù hợp với truy vấn của bạn)",
-      "tipLabel": "Mẹo",
-      "searchVacantTitle": "Tìm kiếm chỗ ngồi \"trống\" trong phòng",
-      "searchHint": "Nhập quốc gia, tên đại biểu, trường học, đại từ hoặc \"bỏ trống\" để đánh dấu những kết quả phù hợp trong phòng. Nhấn Enter để chuyển đến trận đấu đầu tiên; Esc xóa. Bấm vào chỗ trống để chuyển sang chỗ trống.",
-      "findLabel": "Tìm một phái đoàn hoặc thành viên dais",
-      "searchPlaceholder": "Quốc gia, tên, trường học...",
-      "matchesCount": "{matches} trong tổng số {matchs ghế phù hợp",
-      "enterScrolls": "Nhập cuộn",
-      "typeToFilterHint": "Nhập để lọc - Nhập cuộn để khớp đầu tiên",
-      "noMatches": "Không có đoàn đại biểu hoặc ghế ngồi phù hợp.",
-      "digitalDisplay": "Màn hình kỹ thuật số",
-      "floorLabel": "Sàn nhà",
-      "staffSeatsHeading": "Nhân viên - chỗ ngồi",
-      "searchAria": "Tìm kiếm đoàn",
-      "virtualRoomVacant": "trống",
-      "profileAria": "Xem hồ sơ: {country}",
-      "vacantSeatAria": "Ghế trống",
-      "placardAria": "Tấm bảng {quốc gia}",
-      "gavelAria": "cái búa",
-      "viewProfileAria": "Xem hồ sơ: {title}",
-      "noProfileLinkAria": "{title} (không có liên kết hồ sơ)",
-      "committeeFloor": "tầng ủy ban",
-      "virtualRoomFigureAria": "Phòng ủy ban ảo - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Lọc các phái đoàn. Chỗ ngồi được đánh dấu đầu tiên là trận đấu đầu tiên trên võ đài.",
-      "helperText": "Các tấm bảng liệt kê quốc gia (từ phân bổ), tên, trường học và đại từ từ hồ sơ của mỗi đại biểu. Chỉnh sửa của bạn trong Hồ sơ. Các ghế ủy ban trống hiển thị là Trống. Nhấp vào biểu ngữ đã điền hoặc chỗ ngồi trên bục để mở trang của thành viên đó (trò chuyện và báo cáo từ đó).",
-      "virtualRoomCaption": "Phòng mô hình ảo của ủy ban LHQ với các bảng biểu đại biểu hiển thị quốc gia, tên, trường học và đại từ."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Yêu cầu được nói",
-        "delegateFallback": "Đại biểu",
-        "needAllocation": "Bạn cần một sự phân bổ để yêu cầu phát biểu.",
-        "alreadyQueued": "Bạn đã có một yêu cầu nói đang hoạt động trong hàng đợi.",
-        "requested": "Yêu cầu được nói chuyện. Bạn sẽ xuất hiện trong hàng đợi.",
-        "requestFailed": "Không thể yêu cầu phát biểu.",
-        "helpBody": "Gửi phái đoàn của bạn đến hàng ghế. Bạn có thể có một yêu cầu chờ/hiện tại đang hoạt động tại một thời điểm.",
-        "purposeLabel": "Mục đích tùy chọn (hiển thị trong nhãn hàng đợi)",
-        "purposeHelpTitle": "Nhãn mục đích",
-        "purposeHelpBody": "Văn bản này được thêm vào tên quốc gia của bạn để những người chủ trì có thể biết lý do tại sao bạn yêu cầu phát biểu.",
-        "purposePlaceholder": "ví dụ. tổng quan về hỗ trợ + sửa đổi",
-        "requesting": "Đang yêu cầu...",
-        "rollPromptTitle": "Cần có sự phê duyệt của chủ tịch",
-        "rollPromptBodyPickStatus": "Phiên đã bắt đầu. Chọn trạng thái điểm danh của bạn để mở khóa khả năng phát biểu và biểu quyết. Sự lựa chọn này không thể thay đổi.",
-        "rollPromptBodyWaitSessionStart": "Chờ chủ tọa bắt đầu phiên họp.",
-        "rollPromptBodyWaitRollPrompt": "Đang chờ lời nhắc điểm danh.",
-        "rollPromptBodyMarkedAbsent": "Bạn hiện đang được đánh dấu vắng mặt. Yêu cầu chủ tọa đánh dấu bạn Có mặt để phát biểu và biểu quyết.",
-        "rollPromptBodyChecking": "Đang kiểm tra trạng thái cuộn của bạn...",
-        "rollPromptSaving": "Đang lưu...",
-        "rollPromptPresent": "Hiện tại",
-        "rollPromptPresentVoting": "Trình bày và bỏ phiếu"
-      },
-      "motionVoting": {
-        "votingProcedure": "Thủ tục biểu quyết",
-        "currentMotion": "chuyển động hiện tại",
-        "motioner": "Người chuyển động",
-        "majority": "Số đông",
-        "majoritySimple": "Đơn giản",
-        "tally": "Có {có} - Không {không} - Tổng số {total}",
-        "help": "Bục ghi lại phiếu bầu của mỗi đoàn trong phiên họp. Phiếu chuyển động chỉ sử dụng Có hoặc Không (không bỏ phiếu trắng). Tổng số chỉ tính các bảng có ghi Có hoặc Không; các đoàn vắng mặt sẽ bị bỏ qua."
-      },
-      "activeMotion": {
-        "currentMotion": "chuyển động hiện tại",
-        "motionFallback": "Cử động",
-        "motioner": "Người chuyển động",
-        "majority": "Số đông",
-        "majoritySimple": "Đơn giản",
-        "type": "Kiểu",
-        "timer": "hẹn giờ",
-        "currentSpeaker": "Người nói hiện tại",
-        "nextSpeaker": "Người phát biểu tiếp theo",
-        "speakerTimeLeftCap": "Thời gian phát biểu (trái / cap)",
-        "speakerTimeLeftTotal": "Thời gian phát biểu (trái / tổng cộng)",
-        "perSpeaker": "(mỗi loa)",
-        "paused": "(tạm dừng)",
-        "pauseReason": "Tạm dừng: {lý do}"
-      },
-      "floorStatus": {
-        "sessionTime": "Thời gian phiên",
-        "sessionNotStarted": "Phiên chưa bắt đầu",
-        "limit": "Giới hạn",
-        "limitRemaining": "còn lại {value}",
-        "limitOverBy": "hơn {value}",
-        "quickLinkSession": "Phiên họp",
-        "quickLinkRoll": "Cuộn",
-        "quickLinkSpeakers": "Loa",
-        "quickLinkMotions": "chuyển động",
-        "quickLinkTimer": "hẹn giờ",
-        "dais": "Dais",
-        "pinned": "Đã ghim",
-        "viewFullAnnouncement": "Xem thông báo đầy đủ",
-        "timerPausesReadOnly": "Tạm dừng hẹn giờ (chỉ đọc)",
-        "speakerList": "Danh sách diễn giả",
-        "speakerFallback": "Loa",
-        "rollCallYou": "Điểm danh (bạn)",
-        "fullAnnouncement": "Thông báo đầy đủ",
-        "daisAnnouncement": "thông báo dais",
-        "close": "Đóng"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Tên phiên",
-        "sessionNamePlaceholder": "ví dụ. Phiên buổi sáng",
-        "sessionNameSaving": "Đang lưu…",
-        "sessionNameSaved": "Đã lưu",
-        "sessionNameHint": "Tự động lưu và xuất hiện trong lịch sử phiên.",
-        "title": "Phiên họp ủy ban",
-        "subtitle": "Bắt đầu hoặc dừng phiên họp của ủy ban.",
-        "helpStartStop": "Bắt đầu bắt đầu tính giờ/trạng thái phiên họp trực tiếp của ủy ban cho mọi người. Dừng kết thúc phiên và xóa giới hạn thời gian hiện tại.",
-        "migrationUnavailable": "Kiểm soát phiên tạm thời không khả dụng cho đến khi áp dụng di chuyển cơ sở dữ liệu mới nhất.",
-        "endTimeInFuture": "Chọn thời gian kết thúc trong tương lai hoặc chuyển sang không giới hạn.",
-        "sessionStartUnavailable": "Dấu thời gian bắt đầu phiên không có sẵn cho đến khi áp dụng các lần di chuyển mới nhất.",
-        "endTimeInFutureSetNoLimit": "Chọn thời điểm kết thúc trong tương lai hoặc không đặt giới hạn.",
-        "sessionLimitUpdated": "Đã cập nhật giới hạn phiên.",
-        "startedLabel": "Bắt đầu:",
-        "timeInLabel": "Thời gian trong:",
-        "timeUntilEndLabel": "Thời gian cho đến khi kết thúc:",
-        "overByValue": "hơn {value}",
-        "modeLabel": "Cách thức:",
-        "modeStopwatchNoLimit": "Đồng hồ bấm giờ (không giới hạn thời gian)",
-        "sessionNotRunning": "Phiên không chạy.",
-        "sessionLimit": "Giới hạn phiên",
-        "sessionLimitModesTitle": "Chế độ giới hạn phiên",
-        "sessionLimitModesHelp": "Không có: không có kết thúc. Ngân sách thời gian: tính từ đầu. Kết thúc lúc: giờ cố định theo múi giờ địa phương của bạn.",
-        "sessionLimitOptional": "Không bắt buộc.",
-        "noneLabel": "Không có",
-        "noneDescription": "chạy cho đến khi bạn dừng lại.",
-        "timeBudgetLabel": "Ngân sách thời gian",
-        "timeBudgetDescription": "tính từ thời điểm bạn bắt đầu.",
-        "endTimeLabel": "Thời gian kết thúc",
-        "endTimeDescription": "sử dụng thời gian đồng hồ cố định (ghi đè ngân sách nếu cả hai đều đã được đặt).",
-        "noneIndefinite": "Không có (không xác định)",
-        "noneScheduledEndHint": "Không có kết thúc theo lịch trình; chỉ có thời gian trôi qua được hiển thị.",
-        "timeBudgetFromStart": "Ngân sách thời gian từ đầu",
-        "hoursLabel": "Giờ",
-        "minutesLabel": "Phút",
-        "minimumOneMinute": "(tối thiểu 1 phút)",
-        "endAtLocalTime": "Kết thúc lúc (giờ địa phương)",
-        "stopSession": "Dừng phiên",
-        "saveLimit": "Lưu giới hạn",
-        "saveLimitHelp": "Áp dụng cài đặt giới hạn được cập nhật trong khi phiên đang chạy mà không dừng phiên.",
-        "startSession": "Bắt đầu phiên",
-        "sidebarUsePrefix": "Sử dụng thanh bên cho",
-        "rollCall": "Cuộc gọi điểm danh",
-        "speakers": "Loa",
-        "formalMotions": "Kiến nghị chính thức",
-        "timer": "hẹn giờ",
-        "sidebarAnd": "Và",
-        "announcements": "Thông báo",
-        "sidebarUseSuffix": "- một công cụ trên mỗi tab."
-      },
-      "history": {
-        "title": "Lịch sử phiên",
-        "savedCount": "đã lưu {đếm}",
-        "permissionsHint": "Ghế có thể đổi tên các mục. SMT/Admin có thể đổi tên và xóa các mục.",
-        "empty": "Chưa có lịch sử phiên nào.",
-        "rename": "Đổi tên",
-        "delete": "Xóa bỏ",
-        "deleteConfirm": "Xóa phiên này khỏi lịch sử?",
-        "sessionNamePrompt": "Tên phiên",
-        "rangeClosed": "{phạm vi}",
-        "rangeOngoing": "{phạm vi} -> Đang diễn ra"
-      },
-      "timerPage": {
-        "title": "hẹn giờ",
-        "controlsTitle": "Điều khiển hẹn giờ",
-        "controlsHelp": "Sử dụng Sàn chung để biết thời gian tranh luận tổng thể hoặc Biểu quyết kiến ​​nghị để gắn khả năng hiển thị với một mục biểu quyết mở cụ thể.",
-        "tabSetup": "1) Thiết lập",
-        "tabClock": "2) Điều khiển đồng hồ",
-        "tabNotes": "3) Ghi chú bài phát biểu",
-        "tabLog": "4) Tạm dừng nhật ký",
-        "setupHelp": "Chọn xem đồng hồ bấm giờ này dành cho sàn chung (luôn hiển thị với đại biểu) hay gắn liền với kiến ​​nghị mở biểu quyết (đại biểu chỉ nhìn thấy nó khi phiếu bầu đó là mục đang hoạt động). Khi bật thời gian cho mỗi người phát biểu, đồng hồ vẫn hiển thị trong suốt cuộc họp kín được kiểm duyệt. Tạm dừng đồng hồ/Đồng hồ bắt đầu đóng băng hoặc tiếp tục đếm ngược. Đặt Thời gian loa (còn lại) và Tổng thời gian một cách độc lập, sau đó Lưu bộ hẹn giờ. Các cài đặt trước điền cả hai vào cùng một độ dài; bạn có thể chỉnh sửa một trong hai trường sau đó. Các lần tạm dừng được ghi lại với một lý do ngắn gọn.",
-        "namedPreset": "Đặt trước được đặt tên",
-        "applyPreset": "Áp dụng giá trị đặt trước...",
-        "floorLabelDelegates": "Nhãn tầng (đại biểu)",
-        "floorLabelPlaceholder": "ví dụ. GSL thập niên 60",
-        "timerPurpose": "Mục đích hẹn giờ",
-        "purposeGeneralFloor": "Tranh luận chung/sàn (không gắn với biểu quyết)",
-        "purposeMotionVote": "Chuyển động mở - chỉ hẹn giờ khi phiếu bầu đó đang hoạt động trên sàn",
-        "openMotionForVoting": "Kiến nghị mở (phải được mở để bỏ phiếu)",
-        "selectMotion": "Chọn chuyển động...",
-        "untitled": "Không có tiêu đề",
-        "noOpenMotionWarning": "Không có chuyển động nào được mở để bỏ phiếu. Mở biểu quyết trước hoặc chuyển mục đích sang sàn chung.",
-        "clock": "Cái đồng hồ",
-        "running": "Đang chạy",
-        "paused": "Đã tạm dừng",
-        "saveToEnablePauseStart": "lưu bộ đếm thời gian để cho phép tạm dừng/bắt đầu.",
-        "pauseReasonLogged": "Lý do tạm dừng (đã đăng nhập)",
-        "pauseReasonPlaceholder": "ví dụ. Điểm đặt hàng, vấn đề công nghệ, cuộc họp kín không được kiểm duyệt...",
-        "pauseClock": "Tạm dừng đồng hồ",
-        "startClock": "Đồng hồ bắt đầu",
-        "perSpeakerTitle": "Thời gian mỗi người phát biểu (họp kín được kiểm duyệt)",
-        "perSpeakerHelp": "Đặt Tổng thời gian làm giới hạn mỗi loa và Thời gian loa làm thời gian còn lại; Chuyển tiếp tới loa tiếp theo và đặt lại phần còn lại về giới hạn.",
-        "currentSpeaker": "Người nói hiện tại",
-        "nextSpeaker": "Người phát biểu tiếp theo",
-        "speechNotesCurrentSpeaker": "Ghi chú bài phát biểu (người nói hiện tại)",
-        "speechNotesHelp": "Các ghi chú được liên kết với văn bản bộ hẹn giờ của người phát biểu hiện tại và khi danh sách người phát biểu có ai đó được đánh dấu là Hiện tại thì việc ủy ​​quyền của họ sẽ được lưu trữ để tham khảo.",
-        "timerFloorLabel": "Hẹn giờ (tầng):",
-        "speakerListCurrent": "Danh sách diễn giả (hiện tại):",
-        "noCurrentDelegation": "Không có phái đoàn nào được đánh dấu Hiện tại trên danh sách người phát biểu.",
-        "note": "Ghi chú",
-        "notePlaceholder": "Điểm, POI, giai điệu, theo dõi...",
-        "saveSpeechNote": "Lưu ghi chú bài phát biểu",
-        "recentNotes": "Ghi chú gần đây của bạn (ủy ban này)",
-        "delete": "Xóa bỏ",
-        "speakerTimeRemaining": "Thời gian phát biểu (còn lại)",
-        "remainingHelpPerSpeaker": "Đếm ngược cho người phát biểu hiện tại (đặt lại khi bạn Tiến lên).",
-        "remainingHelpNormal": "Đếm ngược cho người phát biểu hiện tại (có thể nhỏ hơn tổng số).",
-        "totalTime": "Tổng thời gian",
-        "totalHelpPerSpeaker": "Nắp mỗi loa (mẫu số trên sàn; Nạp trước còn lại cho phần này).",
-        "totalHelpNormal": "Toàn bộ chiều dài của đoạn hẹn giờ này (hiển thị sau dấu gạch chéo trên sàn).",
-        "saveTimer": "Lưu bộ đếm thời gian",
-        "advanceSpeakerReset": "Loa nâng cao và đồng hồ đặt lại",
-        "recentPauseLog": "Nhật ký tạm dừng gần đây",
-        "noPauseEvents": "Chưa có sự kiện tạm dừng nào được ghi lại cho ủy ban này.",
-        "openPauseLogHint": "Mở nhật ký Tạm dừng để xem lại lý do tạm dừng và dấu thời gian đã ghi.",
-        "saved": "Đã lưu bộ hẹn giờ.",
-        "savedCapped": "Đã lưu bộ hẹn giờ. Thời gian diễn thuyết dài hơn tổng thời gian; giới hạn về tổng số.",
-        "alreadyPaused": "Bộ hẹn giờ đã bị tạm dừng.",
-        "pausedForCommittee": "Đồng hồ đã tạm dừng cho ủy ban.",
-        "alreadyRunning": "Bộ hẹn giờ đang chạy.",
-        "runningForCommittee": "Hẹn giờ chạy cho ủy ban.",
-        "euTimerBoardTitle": "Bảng hẹn giờ của Nghị viện EU (11 bộ hẹn giờ)",
-        "euTimerBoardHelp": "Một bộ hẹn giờ cho mỗi bên, cộng với Tổng thời gian, thời gian POI/POC và thời gian Diễn giả. Sử dụng Áp dụng để sao chép một hàng vào các trường hẹn giờ trực tiếp trên tab Đồng hồ (thời gian loa / Lưu bộ hẹn giờ).",
-        "euTimerName": "Tên",
-        "euTimerTag": "Nhãn",
-        "euTotalTime": "Tổng thời gian",
-        "euPoiPocTime": "Thời gian POI/POC",
-        "euSpeakerTime": "Thời gian phát biểu"
-      }
     }
   },
   "dashboardSearch": {
@@ -2383,6 +1552,10 @@
       "committeeRoomFull": {
         "label": "Phòng ủy ban (đầy đủ)",
         "hint": "Bố trí ảo & sàn đại biểu"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "Tự động lưu không thành công",
     "autosavedWithCountry": "Được lưu tự động — {country}",
     "delegateFallback": "đại biểu"
+  },
+  "sources": {
+    "addSource": "Thêm nguồn",
+    "sourceUrl": "URL nguồn",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (được khuyến nghị)",
+    "urlHelp": "Đối với Google Tài liệu mới, hãy sử dụng nút và dán liên kết tài liệu vào đây.",
+    "titleOptional": "Tiêu đề (tùy chọn)",
+    "saveChanges": "Lưu thay đổi",
+    "editSource": "Chỉnh sửa nguồn",
+    "urlPlaceholderShort": "Google Tài liệu hoặc URL khác",
+    "empty": "Chưa có nguồn. Thêm liên kết Google Doc để mở nó ở đây.",
+    "sourceLabel": "Nguồn",
+    "openLink": "Mở liên kết",
+    "embedHeading": "Tài liệu nguồn",
+    "notGoogleDoc": "URL này không phải là Google Tài liệu. Sử dụng liên kết docs.google.com/document/d/… để nhúng và chỉnh sửa tại đây; nếu không hãy mở liên kết ở trên."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Các đại biểu không thể trực tiếp tải lên các Giấy tờ quan điểm. Sử dụng loại tài liệu khác.",
+    "alertOnlyChairsPositionPaper": "Chỉ có chủ tịch/SMT/quản trị viên mới có thể tải lên Giấy tờ vị trí.",
+    "alertOnlySmtChairReport": "Chỉ SMT/quản trị viên mới có thể tải lên Báo cáo của Chủ tịch.",
+    "alertOnlySmtRop": "Chỉ SMT/quản trị viên mới có thể tải lên tài liệu RoP.",
+    "alertOnlySmtAwardCriteria": "Chỉ SMT/quản trị viên mới có thể tải lên tài liệu Tiêu chí Giải thưởng.",
+    "alertNeedContentOrUrl": "Thêm nội dung văn bản cục bộ hoặc URL Google Tài liệu.",
+    "confirmDelete": "Xóa tài liệu này?",
+    "delegatePrepTitle": "Phần chuẩn bị tài liệu",
+    "delegatePrepBody": "Bạn có thể tải lên, xem và chỉnh sửa <prep>Tài liệu chuẩn bị</prep> của riêng mình trực tiếp từ trang này.",
+    "positionPaperGuideTitle": "Hướng dẫn định vị giấy",
+    "positionPaperGuideBlurb": "Tải xuống hướng dẫn giữ chỗ trong khi bản PDF cuối cùng đang được chuẩn bị.",
+    "downloadPlaceholderGuide": "Tải xuống hướng dẫn giữ chỗ",
+    "addDocument": "Thêm tài liệu",
+    "tabs": {
+      "ariaLabel": "Phần tài liệu",
+      "library": "Thư viện",
+      "compose": "Soạn",
+      "composeHint": "Bắt đầu một tài liệu mới hoặc chỉnh sửa bản nháp hiện có từ tab này."
+    },
+    "newDocumentTitle": "Tài liệu mới",
+    "editDocumentTitle": "Chỉnh sửa tài liệu",
+    "typeLabel": "Kiểu",
+    "types": {
+      "position_paper": "Giấy định vị",
+      "chair_report": "báo cáo chủ trì",
+      "rop": "RoP",
+      "award_criteria": "Tiêu chí giải thưởng",
+      "chair_notes": "ghi chú ghế",
+      "prep_doc": "chuẩn bị tài liệu"
+    },
+    "delegatePositionPaperNote": "Các bài viết quan điểm được các chủ tọa tải lên kèm theo các phản hồi.",
+    "delegateOwner": "Chủ sở hữu đại diện",
+    "chairRecipient": "Người nhận ghế",
+    "titleLabel": "Tiêu đề",
+    "titlePlaceholder": "Tiêu đề tài liệu",
+    "googleDocsUrl": "URL Google Tài liệu",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (nhúng xem/chỉnh sửa trong ứng dụng)",
+    "googleDocsHelp": "Sử dụng Google Doc mới để mở Google trong tab mới, sau đó dán liên kết tài liệu vào đây. Văn bản thuần túy bên dưới là tùy chọn. Mọi tài liệu đều cần văn bản cục bộ, liên kết Google Doc hoặc cả hai.",
+    "plainTextOptional": "Văn bản thuần túy (tùy chọn)",
+    "plainTextPlaceholder": "Ghi chú hoặc văn bản nháp…",
+    "chairFeedbackLabel": "Phản hồi về ghế",
+    "chairFeedbackPlaceholder": "Phản hồi về bài viết lập trường của đại biểu...",
+    "empty": "Chưa có tài liệu nào. Thêm một hoặc liên kết một tài liệu Google.",
+    "sidebarDocumentLabel": "Tài liệu",
+    "sections": {
+      "chairReports": "Báo cáo chủ trì",
+      "rop": "RoP",
+      "awardCriteria": "Tiêu chí giải thưởng",
+      "prepDocuments": "Chuẩn bị hồ sơ",
+      "chairNotes": "ghi chú ghế",
+      "otherDocuments": "Các tài liệu khác"
+    },
+    "untitled": "Không có tiêu đề",
+    "linkedDocumentHeading": "Tài liệu được liên kết",
+    "notesHeading": "Ghi chú",
+    "noGoogleDocYet": "Chưa có tài liệu Google nào được liên kết. Sử dụng Chỉnh sửa để thêm URL docs.google.com/document/d/….",
+    "chairFeedbackHeading": "Phản hồi về ghế",
+    "noFeedbackYet": "Chưa có phản hồi nào được thêm vào."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Nhập email đại biểu trước.",
+    "sentToDelegate": "Đã gửi tới {email}.",
+    "newResolution": "Độ phân giải mới",
+    "maxDraftResolutions": "Ủy ban này đã có {count} dự thảo nghị quyết.",
+    "googleDocLink": "Liên kết Google Tài liệu",
+    "googleDocUrlPlaceholder": "URL Google Documents (docs.google.com/document/d/… — được sử dụng để nhúng + chỉnh sửa)",
+    "googleDocUrlHelp": "Google Tài liệu mới sẽ mở trong một tab khác; sao chép URL từ thanh địa chỉ và dán vào đây.",
+    "mainSubmittersPlaceholder": "Người gửi chính (ID người dùng, được phân tách bằng dấu phẩy)",
+    "coSubmittersPlaceholder": "Người đồng gửi (ID người dùng, được phân tách bằng dấu phẩy)",
+    "create": "Tạo nên",
+    "cancel": "Hủy bỏ",
+    "openInNewTab": "Mở trong tab mới",
+    "noGoogleDocLink": "Không có liên kết Google Tài liệu",
+    "visibleToOtherBloc": "Hiển thị với khối khác",
+    "resolutionCounts": "Phụ đề chính: {chính} | Người đồng đăng ký: {co} | Người ký: {signatories}",
+    "blocButton": "Khối {name} ({stance})",
+    "signVirtually": "Ký ảo (thông báo phụ chính)",
+    "shareByEmail": "Chia sẻ giải pháp qua email",
+    "delegateEmailPlaceholder": "đại biểu@email.com",
+    "sendToDelegate": "Gửi cho đại biểu",
+    "clauseEditor": "Biên tập điều khoản",
+    "noClausesYet": "Chưa có điều khoản nào.",
+    "clauseNumber": "Điều khoản {số}",
+    "saveClause": "Điều khoản lưu",
+    "delete": "Xóa bỏ",
+    "addClausePlaceholder": "Thêm một điều khoản mới...",
+    "addClause": "Thêm mệnh đề",
+    "clauseVoteHistory": "Lịch sử bỏ phiếu điều khoản",
+    "noClauseOutcomesYet": "Chưa có kết quả bỏ phiếu điều khoản nào được ghi nhận.",
+    "clauseFallback": "khoản",
+    "passed": "ĐI QUA",
+    "failed": "THẤT ​​BẠI",
+    "motionId": "Chuyển động {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Phần bình chọn",
+      "open": "Mở",
+      "closed": "Đã đóng"
+    },
+    "requiredMajority": "Đa số bắt buộc",
+    "helpRequiredMajorityTitle": "Đa số bắt buộc",
+    "helpRequiredMajorityBody": "Chọn ngưỡng biểu quyết dùng để quyết định đạt/không đạt. `Đơn giản` là hơn một nửa. `2/3` yêu cầu đa số.",
+    "majoritySimple": "Đơn giản",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{nhãn} đa số",
+    "mustVote": "PHẢI bỏ phiếu",
+    "helpMustVoteTitle": "PHẢI bỏ phiếu",
+    "helpMustVoteBody": "Đánh dấu đề nghị này là một mục \"phải bỏ phiếu\". Điều này được sử dụng để truyền đạt yêu cầu tới người tham gia (tùy thuộc vào việc thành lập ủy ban của bạn).",
+    "saveSettings": "Lưu cài đặt",
+    "delegateBlurb": "Dais ghi lại phiếu bầu trong phiên (ví dụ: điểm danh). Ở đây phiếu kiến ​​nghị chỉ theo Có/Không (không sử dụng phiếu trắng). Bạn có thể theo dõi việc kiểm đếm; đại biểu không bỏ phiếu trong ứng dụng.",
+    "yes": "Đúng",
+    "no": "KHÔNG",
+    "ballots": "Lá phiếu",
+    "total": "Tổng cộng",
+    "outcome": "kết quả",
+    "passed": "Đi qua",
+    "failed": "Thất bại",
+    "noRecordedVotes": "Không có phiếu bầu nào được ghi lại",
+    "reopenMotion": "Chuyển động mở lại",
+    "editRecordOpen": "Chỉnh sửa bản ghi…",
+    "hideSettings": "Ẩn cài đặt",
+    "preliminaryPassing": "Đạt (sơ bộ)",
+    "preliminaryFailing": "Thất bại (sơ bộ)",
+    "delegateRollCall": "Cuộc gọi điểm danh của đại biểu ({count})",
+    "noSeatedDelegates": "Không có đại biểu ngồi nào sẵn sàng cho kiến ​​nghị này.",
+    "rollPrefix": "Cuộn:",
+    "recordedPrefix": "Đã ghi lại:",
+    "recordedYes": "Đúng",
+    "recordedNo": "KHÔNG",
+    "recordedAbstain": "kiêng",
+    "recordedNone": "—",
+    "abstain": "kiêng",
+    "clear": "Thông thoáng",
+    "closeMotion": "Đóng chuyển động",
+    "mustVoteBadge": "PHẢI bỏ phiếu",
+    "canVoteBadge": "CÓ THỂ bỏ phiếu",
+    "noMotions": "Chưa có chuyển động nào.",
+    "currentOpenMotion": "Chuyển động mở hiện tại",
+    "noOpenMotion": "Không có chuyển động mở ngay bây giờ.",
+    "recentClosedMotions": "Chuyển động đã đóng gần đây",
+    "noClosedMotions": "Chưa có chuyển động khép kín nào.",
+    "untitled": "Không có tiêu đề",
+    "voteTypes": {
+      "motion": "Cử động",
+      "amendment": "Sửa đổi",
+      "resolution": "Nghị quyết",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Vắng mặt (cuộn)",
+      "present_abstain": "Hiện tại - có thể bỏ phiếu trắng (cuộn)",
+      "present_voting": "Trình bày và biểu quyết (cuộn)",
+      "unknown": "- (cuộn)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Phần hồ sơ",
+      "overview": "Tổng quan",
+      "awards": "Giải thưởng",
+      "private": "Hồ sơ riêng tư",
+      "settings": "Cài đặt hồ sơ"
+    },
+    "profilePicture": "Ảnh hồ sơ",
+    "uploadFile": "Tải tập tin lên",
+    "uploading": "Đang tải lên…",
+    "photoSaved": "Ảnh đã được tải lên và lưu.",
+    "orUrl": "Hoặc đặt theo URL",
+    "urlPlaceholder": "https://...",
+    "name": "Tên",
+    "username": "Tên người dùng",
+    "usernamePlaceholder": "ví dụ. alex_1999",
+    "pronouns": "Đại từ",
+    "customPronounNote": "Hồ sơ của bạn có một bộ đại từ tùy chỉnh không còn được chấp nhận ở đây. Chọn một tùy chọn ở trên (hoặc để trống). Tiết kiệm thay thế giá trị cũ.",
+    "school": "Trường học",
+    "schoolPlaceholder": "ví dụ. Trường trung học Lincoln",
+    "grade": "Cấp",
+    "selectGrade": "Chọn lớp",
+    "conferencesAttended": "Hội nghị tham dự",
+    "awardsComma": "Giải thưởng (được phân tách bằng dấu phẩy)",
+    "awardsPlaceholder": "Đại biểu xuất sắc nhất, được vinh danh",
+    "allocation": "Phân bổ",
+    "selectAllocation": "Chọn phân bổ",
+    "noAllocationsPlaceholder": "Không có sự phân bổ của ủy ban",
+    "saveProfile": "Lưu hồ sơ",
+    "saved": "Đã lưu hồ sơ.",
+    "saveFailed": "Không thể lưu hồ sơ.",
+    "errUsernamePattern": "Tên đăng nhập phải từ 3-32 ký tự (chữ cái, số, _, ., -)",
+    "errPronounsPreset": "Chọn một đại từ từ danh sách.",
+    "errImageType": "Vui lòng chọn một tập tin hình ảnh.",
+    "errImageSize": "Hình ảnh quá lớn (tối đa 5 MB).",
+    "errUploadFailed": "Tải lên không thành công.",
+    "errStorageSetup": "Lưu trữ ảnh hồ sơ chưa được thiết lập. Trong dự án Supabase, hãy chạy Migration 00100_profile_pictures_storage_bucket.sql hoặc tạo một nhóm lưu trữ công cộng có tên là profile-pictures (xem README).",
+    "errPublicUrl": "Không thể phân giải URL công khai cho hình ảnh được tải lên.",
+    "fallbacks": {
+      "yourCountry": "đất nước của bạn",
+      "committeeSession": "Phiên họp ủy ban",
+      "delegate": "Đại biểu",
+      "speechNote": "ghi chú bài phát biểu",
+      "untitledMotion": "Chuyển động không có tiêu đề",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "Chào mừng đại biểu của {flag} {country}",
+      "subtitle": "Bạn muốn bắt đầu với điều gì?",
+      "links": {
+        "documents": "Tài liệu",
+        "notes": "Ghi chú",
+        "committeeRoom": "Phòng ủy ban",
+        "runningNotes": "Ghi chú đang chạy",
+        "ideas": "Ý tưởng",
+        "guides": "Hướng dẫn",
+        "sources": "Nguồn",
+        "resolutions": "Nghị quyết",
+        "speeches": "Bài phát biểu",
+        "stances": "thế đứng",
+        "crisisSlides": "Trượt khủng hoảng",
+        "report": "Báo cáo",
+        "motions": "chuyển động",
+        "points": "Điểm"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Giải thưởng trên hồ sơ của bạn",
+      "rank": "xếp hạng {thứ hạng}",
+      "pending": {
+        "tab": "Đang chờ đề cử",
+        "title": "Đang chờ đề cử chủ tịch",
+        "descriptionSingle": "Được ghế lưu lại và chia sẻ với SMT để xem xét. Giải thưởng cuối cùng xuất hiện bên dưới sau khi xác nhận.",
+        "descriptionTabbed": "Được ghế lưu lại và chia sẻ với SMT để xem xét. Giải thưởng cuối cùng xuất hiện sau khi xác nhận."
+      },
+      "recorded": {
+        "tab": "Giải thưởng được ghi nhận",
+        "title": "Giải thưởng được ghi nhận",
+        "description": "Được liệt kê khi chủ tịch hoặc SMT chỉ định bạn trong danh sách theo dõi giải thưởng. Sự công nhận cuối cùng tuân theo các quy tắc của hội nghị của bạn."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Chỉ hiển thị với bạn, chủ tịch ủy ban và SMT của ủy ban liên quan.",
+      "points": {
+        "title": "Điểm ghế (riêng)"
+      },
+      "speechNotes": {
+        "title": "Ghi chú bài phát biểu của chủ tọa (riêng tư)"
+      },
+      "motions": {
+        "title": "Chuyển động bạn đã di chuyển",
+        "description": "Đã lưu vào hồ sơ của bạn để ủy ban xem xét và giám sát SMT."
+      }
+    },
+    "discipline": {
+      "title": "Tình trạng kỷ luật (riêng tư)",
+      "statusLine": "Cảnh báo: {warnings} · Cảnh cáo: {strikes}{votingDisabled}{saySuspends}{removedFromCommittee}",
+      "votingDisabled": "bỏ phiếu bị vô hiệu hóa",
+      "speakingSuspended": "đang nói bị đình chỉ",
+      "removedFromCommittee": "bị loại khỏi ủy ban",
+      "updated": "Đã cập nhật: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Xem trước hồ sơ",
+      "title": "Xem trước",
+      "yourName": "Tên của bạn",
+      "usernameNotSet": "Tên người dùng chưa được đặt",
+      "gradeValue": "Lớp {lớp}",
+      "awards": "Giải thưởng"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Quy tắc thủ tục (RoP)",
+        "content": "# Quy tắc thủ tục \n\n## Điểm và chuyển động \n- **Điểm đặt hàng**: Đúng quy trình \n- **Điểm thông tin**: Câu hỏi dành cho diễn giả \n- **Điểm đặc quyền cá nhân**: Sự thoải mái cá nhân \n- **Motion to Table**: Hoãn tranh luận \n- **Đề nghị hoãn**: Kết thúc phiên họp \n\n## Bỏ phiếu \n- Đa số đơn giản cho các vấn đề thủ tục \n- 2/3 đa số cho những vấn đề quan trọng \n- Điểm danh bỏ phiếu nếu được yêu cầu"
+      },
+      "examples": {
+        "title": "Ví dụ",
+        "content": "# Ví dụ \n\n## Định dạng độ phân giải \n``` \nĐại hội đồng, \n... \n1. Kêu gọi các quốc gia thành viên... \n2. Kêu gọi cộng đồng quốc tế... \n``` \n\n## Cấu trúc giấy vị trí \n1. Bối cảnh \n2. Chính sách quốc gia \n3. Giải pháp đề xuất"
+      },
+      "templates": {
+        "title": "Mẫu",
+        "content": "# Mẫu \n\n## Mẫu báo cáo của Chủ tịch \n- Tổng quan về ủy ban \n- Các điểm thảo luận chính \n- Các nghị quyết được thông qua \n- Khuyến nghị"
+      },
+      "chairReport": {
+        "title": "báo cáo chủ tịch",
+        "content": "# Báo cáo của Chủ tịch \n\nTài liệu thủ tục tố tụng và kết quả của ủy ban ở đây."
+      }
+    },
+    "edit": "Biên tập",
+    "guideDocument": "Tài liệu hướng dẫn",
+    "additionalNotes": "Ghi chú bổ sung",
+    "noContentYet": "Chưa có nội dung.",
+    "titlePlaceholder": "Tiêu đề",
+    "googleDocsUrl": "URL Google Tài liệu",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Tài liệu Google mới sẽ mở trong một tab khác. Dán liên kết có thể chia sẻ để đại biểu có thể mở tài liệu tại đây (xem/chỉnh sửa tùy thuộc vào chia sẻ của Google).",
+    "markdownOptional": "Ghi chú đánh dấu (tùy chọn nếu bạn sử dụng Google Doc)",
+    "save": "Cứu",
+    "cancel": "Hủy bỏ",
+    "createNewGuide": "Tạo hướng dẫn mới",
+    "slugPlaceholder": "sên (độc nhất)",
+    "titleLowerPlaceholder": "tiêu đề",
+    "googleDocsUrlOptional": "URL Google Tài liệu (tùy chọn)",
+    "markdownContentOptional": "Nội dung đánh dấu (tùy chọn)",
+    "create": "Tạo nên",
+    "glossary": {
+      "title": "Bảng chú giải chương trình MUN",
+      "subtitle": "Thuật ngữ độc đáo phù hợp với mã ủy ban của bạn và các chủ đề chương trình nghị sự hiện tại.",
+      "committeeCode": "Mã ủy ban: {code}",
+      "sources": {
+        "core": "cốt lõi",
+        "committee": "ủy ban",
+        "topic": "đề tài"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Phái đoàn",
+          "definition": "Một quốc gia hoặc nhóm quan sát đại diện cho một quốc gia hoặc tổ chức trong ủy ban."
+        },
+        "placard": {
+          "term": "áp phích",
+          "definition": "Ký hiệu quốc gia được sử dụng để yêu cầu phát biểu, biểu quyết và đưa ra các kiến ​​nghị về thủ tục."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Nhóm chủ trì điều hành tranh luận, áp dụng quy trình và quản lý trật tự phát biểu."
+        },
+        "quorum": {
+          "term": "số đại biểu",
+          "definition": "Số lượng đoàn đại biểu tối thiểu cần thiết để tiến hành công việc chính thức và bỏ phiếu."
+        },
+        "motion": {
+          "term": "Cử động",
+          "definition": "Đề xuất chính thức nhằm thay đổi tiến trình tranh luận, chẳng hạn như kiểu họp kín hoặc thời gian phát biểu."
+        },
+        "point_of_order": {
+          "term": "Điểm đặt hàng",
+          "definition": "Can thiệp khi thủ tục được áp dụng không đúng theo quy định của ủy ban."
+        },
+        "moderated_caucus": {
+          "term": "Họp kín được kiểm duyệt",
+          "definition": "Phân đoạn tranh luận có cấu trúc với các bài phát biểu có thời lượng ngắn về một chủ đề phụ được xác định."
+        },
+        "unmoderated_caucus": {
+          "term": "Cuộc họp kín không được kiểm duyệt",
+          "definition": "Giai đoạn đàm phán không chính thức khi các đại biểu tự do soạn thảo và hợp nhất các ý tưởng."
+        },
+        "draft_resolution": {
+          "term": "Dự thảo Nghị quyết",
+          "definition": "Văn bản làm việc về hành động đề xuất của ủy ban trước khi bỏ phiếu cuối cùng và thông qua."
+        },
+        "amendment": {
+          "term": "Sửa đổi",
+          "definition": "Thay đổi được đề xuất đối với văn bản dự thảo, thân thiện hoặc bị bỏ phiếu là không thân thiện."
+        },
+        "operative_clause": {
+          "term": "Điều khoản hoạt động",
+          "definition": "Điều khoản được đánh số theo định hướng hành động mô tả những gì ủy ban đề xuất thực hiện."
+        },
+        "preambulatory_clause": {
+          "term": "Điều khoản mở đầu",
+          "definition": "Mệnh đề thiết lập bối cảnh trích dẫn các nguyên tắc cơ bản, mối quan tâm và các khuôn khổ trước đó."
+        },
+        "right_of_reply": {
+          "term": "Quyền trả lời",
+          "definition": "Cơ hội phản hồi lại một tuyên bố trực tiếp ảnh hưởng đến phẩm giá hoặc vị trí của phái đoàn."
+        },
+        "veto_power": {
+          "term": "Quyền phủ quyết",
+          "definition": "Quyền thành viên thường trực của UNSC ngăn chặn các dự thảo nghị quyết thực chất."
+        },
+        "chapter_vii": {
+          "term": "Chương VII",
+          "definition": "Hiến chương LHQ có thẩm quyền về các mối đe dọa hòa bình, các biện pháp trừng phạt và các biện pháp sử dụng vũ lực."
+        },
+        "sanctions_regime": {
+          "term": "Chế độ trừng phạt",
+          "definition": "Các biện pháp hạn chế phối hợp được sử dụng để tác động đến hành vi mà không có hành động quân sự trực tiếp."
+        },
+        "arms_control": {
+          "term": "Kiểm soát vũ khí",
+          "definition": "Các thỏa thuận và hệ thống xác minh giới hạn loại, số lượng hoặc việc triển khai vũ khí."
+        },
+        "non_proliferation": {
+          "term": "Không phổ biến vũ khí hạt nhân",
+          "definition": "Các chính sách nhằm ngăn chặn sự lan rộng của năng lực vũ khí hạt nhân, hóa học, sinh học hoặc vũ khí tiên tiến."
+        },
+        "confidence_building_measures": {
+          "term": "Các biện pháp xây dựng niềm tin",
+          "definition": "Các công cụ minh bạch và truyền thông giúp giảm thiểu hiểu lầm và nguy cơ xung đột."
+        },
+        "universal_periodic_review": {
+          "term": "Đánh giá định kỳ phổ quát",
+          "definition": "Quá trình đánh giá ngang hàng trong đó mỗi quốc gia thành viên Liên hợp quốc báo cáo và nhận các khuyến nghị về quyền."
+        },
+        "special_rapporteur": {
+          "term": "Báo cáo viên đặc biệt",
+          "definition": "Chuyên gia độc lập được chỉ định để theo dõi và báo cáo về các vấn đề theo chủ đề hoặc quyền quốc gia."
+        },
+        "treaty_body": {
+          "term": "Cơ quan hiệp ước",
+          "definition": "Ủy ban chuyên gia giám sát việc thực hiện một hiệp ước nhân quyền cụ thể."
+        },
+        "public_health_emergency": {
+          "term": "Trường hợp khẩn cấp về sức khỏe cộng đồng",
+          "definition": "Sự kiện bùng phát nghiêm trọng đòi hỏi phải có phản ứng khẩn cấp ở cấp quốc gia và quốc tế."
+        },
+        "surveillance": {
+          "term": "Giám sát dịch tễ học",
+          "definition": "Thu thập và phân tích liên tục dữ liệu sức khỏe để phát hiện và theo dõi xu hướng bệnh tật."
+        },
+        "health_systems": {
+          "term": "Tăng cường hệ thống y tế",
+          "definition": "Cải thiện lực lượng lao động, tài chính, hậu cần và quản trị để cung cấp dịch vụ chăm sóc sức khỏe đáng tin cậy."
+        },
+        "transnational_crime": {
+          "term": "Tội phạm có tổ chức xuyên quốc gia",
+          "definition": "Hoạt động tội phạm phối hợp xuyên biên giới thông qua mạng lưới và thị trường bất hợp pháp."
+        },
+        "illicit_trafficking": {
+          "term": "Buôn bán bất hợp pháp",
+          "definition": "Vận chuyển trái phép ma túy, vũ khí, người hoặc hàng hóa qua các khu vực pháp lý."
+        },
+        "rule_of_law_capacity": {
+          "term": "Năng lực pháp quyền",
+          "definition": "Khả năng thể chế của hệ thống tư pháp để điều tra, truy tố và bảo vệ quyền một cách công bằng."
+        },
+        "sustainable_development": {
+          "term": "Phát triển bền vững",
+          "definition": "Mô hình tăng trưởng cân bằng giữa tiến bộ xã hội, cơ hội kinh tế và bảo vệ môi trường."
+        },
+        "financing_for_development": {
+          "term": "Tài trợ cho phát triển",
+          "definition": "Cơ chế tài trợ công và tư nhân hỗ trợ các ưu tiên phát triển dài hạn."
+        },
+        "policy_coordination": {
+          "term": "Điều phối chính sách",
+          "definition": "Thống nhất các hành động của nhà nước và cơ quan để tránh trùng lặp và tăng tác động tập thể."
+        },
+        "child_protection": {
+          "term": "Bảo vệ trẻ em",
+          "definition": "Các biện pháp ngăn chặn việc bóc lột, lạm dụng và bạo lực đối với trẻ em ở mọi môi trường."
+        },
+        "education_access": {
+          "term": "Tiếp cận giáo dục",
+          "definition": "Đảm bảo cơ hội học tập toàn diện, công bằng và liên tục cho tất cả trẻ em."
+        },
+        "humanitarian_response": {
+          "term": "Phản ứng nhân đạo",
+          "definition": "Các hành động cứu trợ nhanh chóng giải quyết các nhu cầu cấp thiết trong bối cảnh khủng hoảng và xung đột."
+        },
+        "gender_mainstreaming": {
+          "term": "Lồng ghép giới tính",
+          "definition": "Tích hợp phân tích giới vào thiết kế, thực hiện và đánh giá chính sách."
+        },
+        "gender_based_violence": {
+          "term": "Bạo lực trên cơ sở giới",
+          "definition": "Tổn hại nhắm vào ai đó dựa trên bản dạng giới, vai trò hoặc quan hệ quyền lực không bình đẳng."
+        },
+        "economic_empowerment": {
+          "term": "Trao quyền kinh tế",
+          "definition": "Mở rộng khả năng tiếp cận công việc bền vững, tài chính, quyền sở hữu và quyền ra quyết định."
+        },
+        "source_attribution": {
+          "term": "Thuộc tính nguồn",
+          "definition": "Trích dẫn nguồn gốc thông tin rõ ràng để các tuyên bố có thể được xác minh và phù hợp với ngữ cảnh."
+        },
+        "verified_reporting": {
+          "term": "Báo cáo đã được xác minh",
+          "definition": "Tiêu chuẩn báo chí yêu cầu chứng thực trước khi công bố các sự kiện gây tranh cãi."
+        },
+        "editorial_independence": {
+          "term": "Độc lập biên tập",
+          "definition": "Tách biệt các quyết định báo cáo khỏi áp lực chính trị hoặc ảnh hưởng của các bên liên quan."
+        },
+        "climate_mitigation": {
+          "term": "Giảm thiểu khí hậu",
+          "definition": "Các hành động giảm phát thải khí nhà kính hoặc tăng cường loại bỏ carbon dài hạn."
+        },
+        "climate_adaptation": {
+          "term": "Thích ứng khí hậu",
+          "definition": "Các chính sách và đầu tư nhằm giảm thiểu tính dễ bị tổn thương trước các tác động liên quan đến khí hậu."
+        },
+        "cyber_norms": {
+          "term": "Định mức mạng",
+          "definition": "Những kỳ vọng chung về hành vi có trách nhiệm của nhà nước trong lĩnh vực kỹ thuật số và mạng."
+        },
+        "critical_infrastructure": {
+          "term": "Cơ sở hạ tầng quan trọng",
+          "definition": "Các hệ thống thiết yếu như điện, nước, y tế và thông tin liên lạc đòi hỏi khả năng phục hồi."
+        },
+        "epidemiology": {
+          "term": "Dịch tễ học",
+          "definition": "Nghiên cứu về mô hình bệnh tật, nguyên nhân và sự phân bố trong quần thể."
+        },
+        "preparedness_response": {
+          "term": "Sự chuẩn bị và ứng phó",
+          "definition": "Lập kế hoạch, phối hợp và tăng cường các hành động để ngăn chặn và quản lý các trường hợp khẩn cấp."
+        },
+        "non_refoulement": {
+          "term": "Không trả lại",
+          "definition": "Nguyên tắc cấm người dân trở lại nơi mà họ phải đối mặt với tổn hại nghiêm trọng."
+        },
+        "durable_solutions": {
+          "term": "Giải pháp bền vững",
+          "definition": "Kết quả lâu dài đối với người phải di dời: hồi hương, hội nhập địa phương hoặc tái định cư."
+        },
+        "nuclear_safeguards": {
+          "term": "Các biện pháp bảo vệ hạt nhân",
+          "definition": "Các biện pháp xác minh đảm bảo vật liệu hạt nhân không bị chuyển hướng sang sử dụng vũ khí."
+        },
+        "counter_terrorism": {
+          "term": "chống khủng bố",
+          "definition": "Các biện pháp pháp lý, phòng ngừa và an ninh tổng hợp chống lại hoạt động khủng bố."
+        },
+        "due_process": {
+          "term": "Đúng thủ tục",
+          "definition": "Thủ tục pháp lý công bằng bảo vệ quyền lợi trong quá trình điều tra, truy tố và xử phạt."
+        },
+        "resource_security": {
+          "term": "Bảo mật tài nguyên",
+          "definition": "Khả năng tiếp cận đáng tin cậy với thực phẩm, nước và năng lượng trong điều kiện căng thẳng về kinh tế và môi trường."
+        },
+        "resilience": {
+          "term": "khả năng phục hồi",
+          "definition": "Năng lực của cộng đồng và thể chế trong việc hấp thụ các cú sốc và phục hồi một cách hiệu quả."
+        }
+      },
+      "topicLine": "Chủ đề: {chủ đề}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Chỉnh sửa ý tưởng",
+    "googleDocsUrl": "URL Google Tài liệu",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Văn bản ý tưởng ngắn (tùy chọn)",
+    "save": "Cứu",
+    "cancel": "Hủy bỏ",
+    "addIntro": "Thêm Google Tài liệu để soạn thảo ý tưởng giải quyết tại chỗ hoặc nhập một ghi chú ngắn (hoặc cả hai).",
+    "googleDocsCreateHelp": "Google Tài liệu mới sẽ mở trong một tab khác; dán liên kết vào đây sau khi nó được tạo.",
+    "resolutionIdeaPlaceholder": "Ý tưởng giải quyết...",
+    "add": "Thêm vào",
+    "noIdeasYet": "Chưa có ý tưởng nào.",
+    "ideaLabel": "Ý tưởng",
+    "ideaFallback": "Ý tưởng {số}",
+    "linkedDoc": "Tài liệu được liên kết",
+    "addedOn": "Đã thêm {ngày}",
+    "edit": "Biên tập",
+    "delete": "Xóa bỏ",
+    "ideaDocument": "Tài liệu ý tưởng",
+    "summary": "Bản tóm tắt",
+    "emptyIdea": "Ý tưởng trống rỗng."
+  },
+  "stances": {
+    "heatmapTitle": "Tổng quan về lập trường ngắn gọn (Bản đồ nhiệt)",
+    "heatmapHelp": "Sự phân bổ của bạn hỗ trợ ___ ở mức độ nào? (thang đo 1-5)",
+    "topicPlaceholder": "ví dụ. hành động về khí hậu",
+    "extentLabel": "Mức độ (1-5):",
+    "extentHelpTitle": "Mức độ (1-5)",
+    "extentHelpBody": "1 nghĩa là phân bổ của bạn có ít sự hỗ trợ cho chủ đề và 5 nghĩa là sự hỗ trợ mạnh mẽ. Chọn một con số phù hợp với quan điểm của bạn trong ủy ban.",
+    "add": "Thêm vào",
+    "viewOnlyHeatmap": "Bản đồ nhiệt chỉ xem cho nhân viên.",
+    "notesPerAllocation": "Ghi chú cho mỗi phân bổ",
+    "noAllocationsYet": "Chưa có sự phân bổ nào",
+    "notesPlaceholder": "Ghi chú lập trường cho việc phân bổ này...",
+    "noteLanguageWarning": "Cảnh báo người đọc: ghi chú này có thể chứa ngôn ngữ không phù hợp.",
+    "save": "Cứu",
+    "saveHelpTitle": "Lưu ghi chú lập trường",
+    "saveHelpBody": "Lưu ghi chú lập trường cho việc phân bổ này. Nhân viên và những người tham gia khác (tùy thuộc vào cài đặt của ủy ban) có thể xem nó."
+  },
+  "speeches": {
+    "newSpeech": "Bài phát biểu mới",
+    "speechTitlePlaceholder": "Tiêu đề bài phát biểu",
+    "googleDocsUrl": "URL Google Tài liệu",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Mở Google trong tab mới; dán URL tài liệu vào đây khi sẵn sàng.",
+    "plainTextOptional": "Bản nháp văn bản thuần túy (tùy chọn nếu bạn sử dụng Google Doc)",
+    "save": "Cứu",
+    "cancel": "Hủy bỏ",
+    "noSpeechesYet": "Chưa có bài phát biểu nào Liên kết Google Tài liệu hoặc dán văn bản.",
+    "speechLabel": "Lời nói",
+    "untitled": "Không có tiêu đề",
+    "edit": "Biên tập",
+    "speechDocument": "Tài liệu phát biểu",
+    "draftText": "Văn bản nháp",
+    "noContentHint": "Liên kết Google Tài liệu với Chỉnh sửa hoặc thêm văn bản thuần túy vào biểu mẫu."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Ủy ban",
+    "yourContext": "Bối cảnh của bạn",
+    "roleLabel": "Vai trò",
+    "seatLabel": "Ghế",
+    "clearSearchTitle": "Xóa tìm kiếm và hiển thị tất cả các phái đoàn",
+    "vacantLabel": "trống",
+    "assignedLabel": "Đã giao",
+    "daisLabel": "Dais",
+    "phaseLabel": "Giai đoạn",
+    "phaseVoting": "Bỏ phiếu",
+    "phaseDebate": "Tranh luận",
+    "focusSearchTitle": "Tìm kiếm tập trung (tiêu đề và tên dais phù hợp với truy vấn của bạn)",
+    "tipLabel": "Mẹo",
+    "searchVacantTitle": "Tìm kiếm chỗ ngồi \"trống\" trong phòng",
+    "searchHint": "Nhập quốc gia, tên đại biểu, trường học, đại từ hoặc \"bỏ trống\" để đánh dấu những kết quả phù hợp trong phòng. Nhấn Enter để chuyển đến trận đấu đầu tiên; Esc xóa. Bấm vào chỗ trống để chuyển sang chỗ trống.",
+    "findLabel": "Tìm một phái đoàn hoặc thành viên dais",
+    "searchPlaceholder": "Quốc gia, tên, trường học...",
+    "matchesCount": "{matches} trong tổng số {matchs ghế phù hợp",
+    "enterScrolls": "Nhập cuộn",
+    "typeToFilterHint": "Nhập để lọc - Nhập cuộn để khớp đầu tiên",
+    "noMatches": "Không có đoàn đại biểu hoặc ghế ngồi phù hợp.",
+    "digitalDisplay": "Màn hình kỹ thuật số",
+    "floorLabel": "Sàn nhà",
+    "staffSeatsHeading": "Nhân viên - chỗ ngồi",
+    "searchAria": "Tìm kiếm đoàn",
+    "virtualRoomVacant": "trống",
+    "profileAria": "Xem hồ sơ: {country}",
+    "vacantSeatAria": "Ghế trống",
+    "placardAria": "Tấm bảng {quốc gia}",
+    "gavelAria": "cái búa",
+    "viewProfileAria": "Xem hồ sơ: {title}",
+    "noProfileLinkAria": "{title} (không có liên kết hồ sơ)",
+    "committeeFloor": "tầng ủy ban",
+    "virtualRoomFigureAria": "Phòng ủy ban ảo - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Lọc các phái đoàn. Chỗ ngồi được đánh dấu đầu tiên là trận đấu đầu tiên trên võ đài.",
+    "helperText": "Các tấm bảng liệt kê quốc gia (từ phân bổ), tên, trường học và đại từ từ hồ sơ của mỗi đại biểu. Chỉnh sửa của bạn trong Hồ sơ. Các ghế ủy ban trống hiển thị là Trống. Nhấp vào biểu ngữ đã điền hoặc chỗ ngồi trên bục để mở trang của thành viên đó (trò chuyện và báo cáo từ đó).",
+    "virtualRoomCaption": "Phòng mô hình ảo của ủy ban LHQ với các bảng biểu đại biểu hiển thị quốc gia, tên, trường học và đại từ."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Yêu cầu được nói",
+      "delegateFallback": "Đại biểu",
+      "needAllocation": "Bạn cần một sự phân bổ để yêu cầu phát biểu.",
+      "alreadyQueued": "Bạn đã có một yêu cầu nói đang hoạt động trong hàng đợi.",
+      "requested": "Yêu cầu được nói chuyện. Bạn sẽ xuất hiện trong hàng đợi.",
+      "requestFailed": "Không thể yêu cầu phát biểu.",
+      "helpBody": "Gửi phái đoàn của bạn đến hàng ghế. Bạn có thể có một yêu cầu chờ/hiện tại đang hoạt động tại một thời điểm.",
+      "purposeLabel": "Mục đích tùy chọn (hiển thị trong nhãn hàng đợi)",
+      "purposeHelpTitle": "Nhãn mục đích",
+      "purposeHelpBody": "Văn bản này được thêm vào tên quốc gia của bạn để những người chủ trì có thể biết lý do tại sao bạn yêu cầu phát biểu.",
+      "purposePlaceholder": "ví dụ. tổng quan về hỗ trợ + sửa đổi",
+      "requesting": "Đang yêu cầu...",
+      "rollPromptTitle": "Cần có sự phê duyệt của chủ tịch",
+      "rollPromptBodyPickStatus": "Phiên đã bắt đầu. Chọn trạng thái điểm danh của bạn để mở khóa khả năng phát biểu và biểu quyết. Sự lựa chọn này không thể thay đổi.",
+      "rollPromptBodyWaitSessionStart": "Chờ chủ tọa bắt đầu phiên họp.",
+      "rollPromptBodyWaitRollPrompt": "Đang chờ lời nhắc điểm danh.",
+      "rollPromptBodyMarkedAbsent": "Bạn hiện đang được đánh dấu vắng mặt. Yêu cầu chủ tọa đánh dấu bạn Có mặt để phát biểu và biểu quyết.",
+      "rollPromptBodyChecking": "Đang kiểm tra trạng thái cuộn của bạn...",
+      "rollPromptSaving": "Đang lưu...",
+      "rollPromptPresent": "Hiện tại",
+      "rollPromptPresentVoting": "Trình bày và bỏ phiếu"
+    },
+    "motionVoting": {
+      "votingProcedure": "Thủ tục biểu quyết",
+      "currentMotion": "chuyển động hiện tại",
+      "motioner": "Người chuyển động",
+      "majority": "Số đông",
+      "majoritySimple": "Đơn giản",
+      "tally": "Có {có} - Không {không} - Tổng số {total}",
+      "help": "Bục ghi lại phiếu bầu của mỗi đoàn trong phiên họp. Phiếu chuyển động chỉ sử dụng Có hoặc Không (không bỏ phiếu trắng). Tổng số chỉ tính các bảng có ghi Có hoặc Không; các đoàn vắng mặt sẽ bị bỏ qua."
+    },
+    "activeMotion": {
+      "currentMotion": "chuyển động hiện tại",
+      "motionFallback": "Cử động",
+      "motioner": "Người chuyển động",
+      "majority": "Số đông",
+      "majoritySimple": "Đơn giản",
+      "type": "Kiểu",
+      "timer": "hẹn giờ",
+      "currentSpeaker": "Người nói hiện tại",
+      "nextSpeaker": "Người phát biểu tiếp theo",
+      "speakerTimeLeftCap": "Thời gian phát biểu (trái / cap)",
+      "speakerTimeLeftTotal": "Thời gian phát biểu (trái / tổng cộng)",
+      "perSpeaker": "(mỗi loa)",
+      "paused": "(tạm dừng)",
+      "pauseReason": "Tạm dừng: {lý do}"
+    },
+    "floorStatus": {
+      "sessionTime": "Thời gian phiên",
+      "sessionNotStarted": "Phiên chưa bắt đầu",
+      "limit": "Giới hạn",
+      "limitRemaining": "còn lại {value}",
+      "limitOverBy": "hơn {value}",
+      "quickLinkSession": "Phiên họp",
+      "quickLinkRoll": "Cuộn",
+      "quickLinkSpeakers": "Loa",
+      "quickLinkMotions": "chuyển động",
+      "quickLinkTimer": "hẹn giờ",
+      "dais": "Dais",
+      "pinned": "Đã ghim",
+      "viewFullAnnouncement": "Xem thông báo đầy đủ",
+      "timerPausesReadOnly": "Tạm dừng hẹn giờ (chỉ đọc)",
+      "speakerList": "Danh sách diễn giả",
+      "speakerFallback": "Loa",
+      "rollCallYou": "Điểm danh (bạn)",
+      "fullAnnouncement": "Thông báo đầy đủ",
+      "daisAnnouncement": "thông báo dais",
+      "close": "Đóng",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Tên phiên",
+      "sessionNamePlaceholder": "ví dụ. Phiên buổi sáng",
+      "sessionNameSaving": "Đang lưu…",
+      "sessionNameSaved": "Đã lưu",
+      "sessionNameHint": "Tự động lưu và xuất hiện trong lịch sử phiên.",
+      "title": "Phiên họp ủy ban",
+      "subtitle": "Bắt đầu hoặc dừng phiên họp của ủy ban.",
+      "helpStartStop": "Bắt đầu bắt đầu tính giờ/trạng thái phiên họp trực tiếp của ủy ban cho mọi người. Dừng kết thúc phiên và xóa giới hạn thời gian hiện tại.",
+      "migrationUnavailable": "Kiểm soát phiên tạm thời không khả dụng cho đến khi áp dụng di chuyển cơ sở dữ liệu mới nhất.",
+      "endTimeInFuture": "Chọn thời gian kết thúc trong tương lai hoặc chuyển sang không giới hạn.",
+      "sessionStartUnavailable": "Dấu thời gian bắt đầu phiên không có sẵn cho đến khi áp dụng các lần di chuyển mới nhất.",
+      "endTimeInFutureSetNoLimit": "Chọn thời điểm kết thúc trong tương lai hoặc không đặt giới hạn.",
+      "sessionLimitUpdated": "Đã cập nhật giới hạn phiên.",
+      "startedLabel": "Bắt đầu:",
+      "timeInLabel": "Thời gian trong:",
+      "timeUntilEndLabel": "Thời gian cho đến khi kết thúc:",
+      "overByValue": "hơn {value}",
+      "modeLabel": "Cách thức:",
+      "modeStopwatchNoLimit": "Đồng hồ bấm giờ (không giới hạn thời gian)",
+      "sessionNotRunning": "Phiên không chạy.",
+      "sessionLimit": "Giới hạn phiên",
+      "sessionLimitModesTitle": "Chế độ giới hạn phiên",
+      "sessionLimitModesHelp": "Không có: không có kết thúc. Ngân sách thời gian: tính từ đầu. Kết thúc lúc: giờ cố định theo múi giờ địa phương của bạn.",
+      "sessionLimitOptional": "Không bắt buộc.",
+      "noneLabel": "Không có",
+      "noneDescription": "chạy cho đến khi bạn dừng lại.",
+      "timeBudgetLabel": "Ngân sách thời gian",
+      "timeBudgetDescription": "tính từ thời điểm bạn bắt đầu.",
+      "endTimeLabel": "Thời gian kết thúc",
+      "endTimeDescription": "sử dụng thời gian đồng hồ cố định (ghi đè ngân sách nếu cả hai đều đã được đặt).",
+      "noneIndefinite": "Không có (không xác định)",
+      "noneScheduledEndHint": "Không có kết thúc theo lịch trình; chỉ có thời gian trôi qua được hiển thị.",
+      "timeBudgetFromStart": "Ngân sách thời gian từ đầu",
+      "hoursLabel": "Giờ",
+      "minutesLabel": "Phút",
+      "minimumOneMinute": "(tối thiểu 1 phút)",
+      "endAtLocalTime": "Kết thúc lúc (giờ địa phương)",
+      "stopSession": "Dừng phiên",
+      "saveLimit": "Lưu giới hạn",
+      "saveLimitHelp": "Áp dụng cài đặt giới hạn được cập nhật trong khi phiên đang chạy mà không dừng phiên.",
+      "startSession": "Bắt đầu phiên",
+      "sidebarUsePrefix": "Sử dụng thanh bên cho",
+      "rollCall": "Cuộc gọi điểm danh",
+      "speakers": "Loa",
+      "formalMotions": "Kiến nghị chính thức",
+      "timer": "hẹn giờ",
+      "sidebarAnd": "Và",
+      "announcements": "Thông báo",
+      "sidebarUseSuffix": "- một công cụ trên mỗi tab.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Lịch sử phiên",
+      "savedCount": "đã lưu {đếm}",
+      "permissionsHint": "Ghế có thể đổi tên các mục. SMT/Admin có thể đổi tên và xóa các mục.",
+      "empty": "Chưa có lịch sử phiên nào.",
+      "rename": "Đổi tên",
+      "delete": "Xóa bỏ",
+      "deleteConfirm": "Xóa phiên này khỏi lịch sử?",
+      "sessionNamePrompt": "Tên phiên",
+      "rangeClosed": "{phạm vi}",
+      "rangeOngoing": "{phạm vi} -> Đang diễn ra"
+    },
+    "timerPage": {
+      "title": "hẹn giờ",
+      "controlsTitle": "Điều khiển hẹn giờ",
+      "controlsHelp": "Sử dụng Sàn chung để biết thời gian tranh luận tổng thể hoặc Biểu quyết kiến ​​nghị để gắn khả năng hiển thị với một mục biểu quyết mở cụ thể.",
+      "tabSetup": "1) Thiết lập",
+      "tabClock": "2) Điều khiển đồng hồ",
+      "tabNotes": "3) Ghi chú bài phát biểu",
+      "tabLog": "4) Tạm dừng nhật ký",
+      "setupHelp": "Chọn xem đồng hồ bấm giờ này dành cho sàn chung (luôn hiển thị với đại biểu) hay gắn liền với kiến ​​nghị mở biểu quyết (đại biểu chỉ nhìn thấy nó khi phiếu bầu đó là mục đang hoạt động). Khi bật thời gian cho mỗi người phát biểu, đồng hồ vẫn hiển thị trong suốt cuộc họp kín được kiểm duyệt. Tạm dừng đồng hồ/Đồng hồ bắt đầu đóng băng hoặc tiếp tục đếm ngược. Đặt Thời gian loa (còn lại) và Tổng thời gian một cách độc lập, sau đó Lưu bộ hẹn giờ. Các cài đặt trước điền cả hai vào cùng một độ dài; bạn có thể chỉnh sửa một trong hai trường sau đó. Các lần tạm dừng được ghi lại với một lý do ngắn gọn.",
+      "namedPreset": "Đặt trước được đặt tên",
+      "applyPreset": "Áp dụng giá trị đặt trước...",
+      "floorLabelDelegates": "Nhãn tầng (đại biểu)",
+      "floorLabelPlaceholder": "ví dụ. GSL thập niên 60",
+      "timerPurpose": "Mục đích hẹn giờ",
+      "purposeGeneralFloor": "Tranh luận chung/sàn (không gắn với biểu quyết)",
+      "purposeMotionVote": "Chuyển động mở - chỉ hẹn giờ khi phiếu bầu đó đang hoạt động trên sàn",
+      "openMotionForVoting": "Kiến nghị mở (phải được mở để bỏ phiếu)",
+      "selectMotion": "Chọn chuyển động...",
+      "untitled": "Không có tiêu đề",
+      "noOpenMotionWarning": "Không có chuyển động nào được mở để bỏ phiếu. Mở biểu quyết trước hoặc chuyển mục đích sang sàn chung.",
+      "clock": "Cái đồng hồ",
+      "running": "Đang chạy",
+      "paused": "Đã tạm dừng",
+      "saveToEnablePauseStart": "lưu bộ đếm thời gian để cho phép tạm dừng/bắt đầu.",
+      "pauseReasonLogged": "Lý do tạm dừng (đã đăng nhập)",
+      "pauseReasonPlaceholder": "ví dụ. Điểm đặt hàng, vấn đề công nghệ, cuộc họp kín không được kiểm duyệt...",
+      "pauseClock": "Tạm dừng đồng hồ",
+      "startClock": "Đồng hồ bắt đầu",
+      "perSpeakerTitle": "Thời gian mỗi người phát biểu (họp kín được kiểm duyệt)",
+      "perSpeakerHelp": "Đặt Tổng thời gian làm giới hạn mỗi loa và Thời gian loa làm thời gian còn lại; Chuyển tiếp tới loa tiếp theo và đặt lại phần còn lại về giới hạn.",
+      "currentSpeaker": "Người nói hiện tại",
+      "nextSpeaker": "Người phát biểu tiếp theo",
+      "speechNotesCurrentSpeaker": "Ghi chú bài phát biểu (người nói hiện tại)",
+      "speechNotesHelp": "Các ghi chú được liên kết với văn bản bộ hẹn giờ của người phát biểu hiện tại và khi danh sách người phát biểu có ai đó được đánh dấu là Hiện tại thì việc ủy ​​quyền của họ sẽ được lưu trữ để tham khảo.",
+      "timerFloorLabel": "Hẹn giờ (tầng):",
+      "speakerListCurrent": "Danh sách diễn giả (hiện tại):",
+      "noCurrentDelegation": "Không có phái đoàn nào được đánh dấu Hiện tại trên danh sách người phát biểu.",
+      "note": "Ghi chú",
+      "notePlaceholder": "Điểm, POI, giai điệu, theo dõi...",
+      "saveSpeechNote": "Lưu ghi chú bài phát biểu",
+      "recentNotes": "Ghi chú gần đây của bạn (ủy ban này)",
+      "delete": "Xóa bỏ",
+      "speakerTimeRemaining": "Thời gian phát biểu (còn lại)",
+      "remainingHelpPerSpeaker": "Đếm ngược cho người phát biểu hiện tại (đặt lại khi bạn Tiến lên).",
+      "remainingHelpNormal": "Đếm ngược cho người phát biểu hiện tại (có thể nhỏ hơn tổng số).",
+      "totalTime": "Tổng thời gian",
+      "totalHelpPerSpeaker": "Nắp mỗi loa (mẫu số trên sàn; Nạp trước còn lại cho phần này).",
+      "totalHelpNormal": "Toàn bộ chiều dài của đoạn hẹn giờ này (hiển thị sau dấu gạch chéo trên sàn).",
+      "saveTimer": "Lưu bộ đếm thời gian",
+      "advanceSpeakerReset": "Loa nâng cao và đồng hồ đặt lại",
+      "recentPauseLog": "Nhật ký tạm dừng gần đây",
+      "noPauseEvents": "Chưa có sự kiện tạm dừng nào được ghi lại cho ủy ban này.",
+      "openPauseLogHint": "Mở nhật ký Tạm dừng để xem lại lý do tạm dừng và dấu thời gian đã ghi.",
+      "saved": "Đã lưu bộ hẹn giờ.",
+      "savedCapped": "Đã lưu bộ hẹn giờ. Thời gian diễn thuyết dài hơn tổng thời gian; giới hạn về tổng số.",
+      "alreadyPaused": "Bộ hẹn giờ đã bị tạm dừng.",
+      "pausedForCommittee": "Đồng hồ đã tạm dừng cho ủy ban.",
+      "alreadyRunning": "Bộ hẹn giờ đang chạy.",
+      "runningForCommittee": "Hẹn giờ chạy cho ủy ban.",
+      "euTimerBoardTitle": "Bảng hẹn giờ của Nghị viện EU (11 bộ hẹn giờ)",
+      "euTimerBoardHelp": "Một bộ hẹn giờ cho mỗi bên, cộng với Tổng thời gian, thời gian POI/POC và thời gian Diễn giả. Sử dụng Áp dụng để sao chép một hàng vào các trường hẹn giờ trực tiếp trên tab Đồng hồ (thời gian loa / Lưu bộ hẹn giờ).",
+      "euTimerName": "Tên",
+      "euTimerTag": "Nhãn",
+      "euTotalTime": "Tổng thời gian",
+      "euPoiPocTime": "Thời gian POI/POC",
+      "euSpeakerTime": "Thời gian phát biểu"
+    }
   }
 }

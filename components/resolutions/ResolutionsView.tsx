@@ -66,7 +66,7 @@ export function ResolutionsView({
   conferenceId: string;
   canCreate: boolean;
 }) {
-  const t = useTranslations("views.resolutions");
+  const t = useTranslations("resolutions");
   const MAX_RESOLUTIONS_PER_COMMITTEE = 3;
   const canAddResolution = canCreate && resolutions.length < MAX_RESOLUTIONS_PER_COMMITTEE;
   const [showForm, setShowForm] = useState(false);

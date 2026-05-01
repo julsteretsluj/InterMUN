@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 
 export default async function SmtProfilePage() {
   const t = await getTranslations("pageTitles");
-  const tp = await getTranslations("views.profile");
+  const tp = await getTranslations("profile");
   const supabase = await createClient();
   const {
     data: { user },

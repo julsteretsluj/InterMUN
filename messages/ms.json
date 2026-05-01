@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Buka lantai usul untuk kenyataan dahulu.",
     "openMotionBlocksRecording": "Usul sudah dibuka untuk pengundian. Tutupnya sebelum merekodkan kenyataan selanjutnya.",
     "statedMotionRecorded": "Menyatakan usul direkodkan (belum dibuka untuk pengundian).",
-    "statedMotionRemoved": "Usul yang dinyatakan dikeluarkan."
+    "statedMotionRemoved": "Usul yang dinyatakan dikeluarkan.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• Log mata",
     "formalMotions": "usul rasmi",
     "timer": "Pemasa",
-    "smtProfile": "Profil"
+    "smtProfile": "Profil",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasikan",
@@ -835,7 +852,8 @@
       "archive": "Arkib",
       "officialLinks": "Pautan rasmi",
       "roomCode": "Kod bilik",
-      "settings": "tetapan"
+      "settings": "tetapan",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "Negara Anggota PBB",
       "unSystem": "Sistem PBB (pengasas & ahli)",
       "history": "Sejarah PBB"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Tambah sumber",
-      "sourceUrl": "URL sumber",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (disyorkan)",
-      "urlHelp": "Untuk Dokumen Google baharu, gunakan butang dan tampal pautan dokumen di sini.",
-      "titleOptional": "Tajuk (pilihan)",
-      "saveChanges": "Simpan perubahan",
-      "editSource": "Edit sumber",
-      "urlPlaceholderShort": "Dokumen Google atau URL lain",
-      "empty": "Tiada sumber lagi. Tambahkan pautan Dokumen Google untuk membukanya di sini.",
-      "sourceLabel": "Sumber",
-      "openLink": "Buka pautan",
-      "embedHeading": "Dokumen sumber",
-      "notGoogleDoc": "URL ini bukan Dokumen Google. Gunakan pautan docs.google.com/document/d/… untuk membenamkan dan mengedit di sini; jika tidak buka pautan di atas."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Perwakilan tidak boleh memuat naik Kertas Kedudukan secara langsung. Gunakan jenis dokumen lain.",
-      "alertOnlyChairsPositionPaper": "Hanya kerusi/SMT/admin boleh memuat naik Kertas Jawatan.",
-      "alertOnlySmtChairReport": "Hanya SMT/admin boleh memuat naik Laporan Kerusi.",
-      "alertOnlySmtRop": "Hanya SMT/admin boleh memuat naik dokumen RoP.",
-      "alertOnlySmtAwardCriteria": "Hanya SMT/admin boleh memuat naik dokumen Kriteria Anugerah.",
-      "alertNeedContentOrUrl": "Tambahkan sama ada kandungan teks tempatan atau URL Dokumen Google.",
-      "confirmDelete": "Padamkan dokumen ini?",
-      "delegatePrepTitle": "Bahagian dokumen persediaan",
-      "delegatePrepBody": "Anda boleh memuat naik, melihat dan mengedit <prep>Dokumen Persediaan</prep> anda sendiri terus dari halaman ini.",
-      "positionPaperGuideTitle": "Panduan kertas kedudukan",
-      "positionPaperGuideBlurb": "Muat turun panduan pemegang tempat semasa PDF akhir sedang disediakan.",
-      "downloadPlaceholderGuide": "Muat turun panduan pemegang tempat",
-      "addDocument": "Tambah dokumen",
-      "tabs": {
-        "ariaLabel": "Bahagian dokumen",
-        "library": "Perpustakaan",
-        "compose": "Karang",
-        "composeHint": "Mulakan dokumen baharu atau edit draf sedia ada daripada tab ini."
-      },
-      "newDocumentTitle": "Dokumen baharu",
-      "editDocumentTitle": "Edit dokumen",
-      "typeLabel": "taip",
-      "types": {
-        "position_paper": "Kertas kedudukan",
-        "chair_report": "Laporan pengerusi",
-        "rop": "RoP",
-        "award_criteria": "Kriteria anugerah",
-        "chair_notes": "Nota kerusi",
-        "prep_doc": "Dokumen persediaan"
-      },
-      "delegatePositionPaperNote": "Kertas jawatan dimuat naik oleh kerusi dengan maklum balas.",
-      "delegateOwner": "Wakilkan pemilik",
-      "chairRecipient": "Penerima kerusi",
-      "titleLabel": "Tajuk",
-      "titlePlaceholder": "Tajuk dokumen",
-      "googleDocsUrl": "URL Dokumen Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (benamkan paparan/edit dalam apl)",
-      "googleDocsHelp": "Gunakan Dokumen Google Baharu untuk membuka Google dalam tab baharu, kemudian tampal pautan dokumen di sini. Teks biasa di bawah adalah pilihan. Setiap dokumen memerlukan sama ada teks setempat, pautan Dokumen Google atau kedua-duanya.",
-      "plainTextOptional": "Teks biasa (pilihan)",
-      "plainTextPlaceholder": "Nota atau teks draf…",
-      "chairFeedbackLabel": "Maklum balas kerusi",
-      "chairFeedbackPlaceholder": "Maklum balas untuk kertas jawatan perwakilan...",
-      "empty": "Tiada dokumen lagi. Tambahkan satu atau pautkan Dokumen Google.",
-      "sidebarDocumentLabel": "Dokumen",
-      "sections": {
-        "chairReports": "Laporan pengerusi",
-        "rop": "RoP",
-        "awardCriteria": "Kriteria anugerah",
-        "prepDocuments": "Dokumen persediaan",
-        "chairNotes": "Nota kerusi",
-        "otherDocuments": "Dokumen lain"
-      },
-      "untitled": "Tidak bertajuk",
-      "linkedDocumentHeading": "Dokumen yang dipautkan",
-      "notesHeading": "Nota",
-      "noGoogleDocYet": "Tiada Dokumen Google dipautkan lagi. Gunakan Edit untuk menambah URL docs.google.com/document/d/…",
-      "chairFeedbackHeading": "Maklum balas kerusi",
-      "noFeedbackYet": "Tiada maklum balas ditambah lagi."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Masukkan e-mel perwakilan dahulu.",
-      "sentToDelegate": "Dihantar kepada {email}.",
-      "newResolution": "Resolusi Baru",
-      "maxDraftResolutions": "Jawatankuasa ini sudah mempunyai {count} draf resolusi.",
-      "googleDocLink": "Pautan Dokumen Google",
-      "googleDocUrlPlaceholder": "URL Google Docs (docs.google.com/document/d/… — digunakan untuk benam + penyuntingan)",
-      "googleDocUrlHelp": "Dokumen Google baharu dibuka dalam tab lain; salin URL dari bar alamat dan tampalkannya di sini.",
-      "mainSubmittersPlaceholder": "Pengirim utama (ID pengguna, dipisahkan koma)",
-      "coSubmittersPlaceholder": "Pengirim bersama (ID pengguna, dipisahkan koma)",
-      "create": "Buat",
-      "cancel": "Batal",
-      "openInNewTab": "Buka dalam tab baharu",
-      "noGoogleDocLink": "Tiada pautan Dokumen Google",
-      "visibleToOtherBloc": "Kelihatan kepada blok lain",
-      "resolutionCounts": "Subs utama: {main} | Subs bersama: {co} | Penandatangan: {signatories}",
-      "blocButton": "Blok {name} ({stance})",
-      "signVirtually": "Tandatangan secara maya (subsub utama diberitahu)",
-      "shareByEmail": "Kongsi resolusi melalui e-mel",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "Hantar kepada perwakilan",
-      "clauseEditor": "Editor klausa",
-      "noClausesYet": "Tiada fasal lagi.",
-      "clauseNumber": "Fasal {number}",
-      "saveClause": "Fasal simpan",
-      "delete": "Padam",
-      "addClausePlaceholder": "Tambah klausa baharu...",
-      "addClause": "Tambah klausa",
-      "clauseVoteHistory": "Fasal sejarah undian",
-      "noClauseOutcomesYet": "Tiada keputusan undian klausa yang direkodkan lagi.",
-      "clauseFallback": "Fasal",
-      "passed": "LULUS",
-      "failed": "GAGAL",
-      "motionId": "Gerakan {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Bahagian mengundi",
-        "open": "Buka",
-        "closed": "tertutup"
-      },
-      "requiredMajority": "Memerlukan majoriti",
-      "helpRequiredMajorityTitle": "Memerlukan majoriti",
-      "helpRequiredMajorityBody": "Pilih ambang undi yang digunakan untuk memutuskan lulus/gagal. `Mudah` adalah lebih daripada separuh. `2/3` memerlukan majoriti besar.",
-      "majoritySimple": "Mudah",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} majoriti",
-      "mustVote": "WAJIB mengundi",
-      "helpMustVoteTitle": "WAJIB mengundi",
-      "helpMustVoteBody": "Menandai usul ini sebagai item \"mesti mengundi\". Ini digunakan untuk menyampaikan keperluan kepada peserta (bergantung pada persediaan jawatankuasa anda).",
-      "saveSettings": "Simpan tetapan",
-      "delegateBlurb": "Pentas merekodkan undian dalam sesi (cth. roll call). Undi usul di sini ikut Ya/Tidak sahaja (berpantang tidak digunakan). Anda boleh mengikuti pengiraan; perwakilan tidak membuang undi dalam apl.",
-      "yes": "ya",
-      "no": "Tidak",
-      "ballots": "undi",
-      "total": "Jumlah",
-      "outcome": "Hasil",
-      "passed": "lulus",
-      "failed": "gagal",
-      "noRecordedVotes": "Tiada undian direkodkan",
-      "reopenMotion": "Buka semula gerakan",
-      "editRecordOpen": "Edit rekod…",
-      "hideSettings": "Sembunyikan tetapan",
-      "preliminaryPassing": "Lulus (permulaan)",
-      "preliminaryFailing": "Gagal (permulaan)",
-      "delegateRollCall": "Perwakilan panggilan panggilan ({count})",
-      "noSeatedDelegates": "Tiada perwakilan duduk tersedia untuk usul ini.",
-      "rollPrefix": "Gulung:",
-      "recordedPrefix": "Dirakam:",
-      "recordedYes": "ya",
-      "recordedNo": "Tidak",
-      "recordedAbstain": "berpantang",
-      "recordedNone": "—",
-      "abstain": "berpantang",
-      "clear": "Jelas",
-      "closeMotion": "Tutup gerakan",
-      "mustVoteBadge": "WAJIB mengundi",
-      "canVoteBadge": "BOLEH mengundi",
-      "noMotions": "Belum ada usul.",
-      "currentOpenMotion": "Gerakan terbuka semasa",
-      "noOpenMotion": "Tiada gerakan terbuka sekarang.",
-      "recentClosedMotions": "Usul tertutup baru-baru ini",
-      "noClosedMotions": "Tiada gerakan tertutup lagi.",
-      "untitled": "Tidak bertajuk",
-      "voteTypes": {
-        "motion": "gerakan",
-        "amendment": "Pindaan",
-        "resolution": "Resolusi"
-      },
-      "roll": {
-        "absent": "Tidak hadir (gulungan)",
-        "present_abstain": "Hadir — boleh berpantang (gulung)",
-        "present_voting": "Bentangkan dan undian (gulungan)",
-        "unknown": "- (gulung)"
-      }
-    },
-    "profile": {
-      "fallbacks": {
-        "yourCountry": "negara anda",
-        "committeeSession": "Sesi AJK",
-        "delegate": "Perwakilan",
-        "speechNote": "Nota ucapan",
-        "untitledMotion": "Usul tanpa tajuk",
-        "dash": "—"
-      },
-      "tabs": {
-        "ariaLabel": "Bahagian profil",
-        "overview": "Gambaran keseluruhan",
-        "awards": "Anugerah",
-        "private": "Rekod peribadi",
-        "settings": "Tetapan profil"
-      },
-      "delegateWelcome": {
-        "title": "Selamat datang perwakilan {flag} {country}",
-        "subtitle": "Apa yang anda ingin mulakan?",
-        "links": {
-          "documents": "Dokumen",
-          "notes": "Nota",
-          "committeeRoom": "Bilik panitia",
-          "runningNotes": "Nota Larian",
-          "ideas": "Idea",
-          "guides": "Pemandu",
-          "sources": "Sumber",
-          "resolutions": "Resolusi",
-          "speeches": "Ucapan",
-          "stances": "Pendirian",
-          "crisisSlides": "Slaid krisis",
-          "report": "Laporan",
-          "motions": "usul",
-          "points": "mata"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Anugerah pada profil anda",
-        "rank": "pangkat {rank}",
-        "pending": {
-          "tab": "Pencalonan belum selesai",
-          "title": "Pencalonan kerusi menunggu",
-          "descriptionSingle": "Disimpan oleh kerusi dan dikongsi dengan SMT untuk semakan. Anugerah akhir dipaparkan di bawah selepas pengesahan.",
-          "descriptionTabbed": "Disimpan oleh kerusi dan dikongsi dengan SMT untuk semakan. Anugerah akhir muncul selepas pengesahan."
-        },
-        "recorded": {
-          "tab": "Anugerah tercatat",
-          "title": "Anugerah tercatat",
-          "description": "Disenaraikan apabila kerusi atau SMT menugaskan anda dalam penjejak anugerah. Pengiktirafan akhir mengikut peraturan persidangan anda."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Kelihatan hanya kepada anda, pengerusi jawatankuasa, dan SMT untuk jawatankuasa yang berkaitan.",
-        "points": {
-          "title": "Mata kerusi (peribadi)"
-        },
-        "speechNotes": {
-          "title": "Nota ucapan pengerusi (peribadi)"
-        },
-        "motions": {
-          "title": "Usul yang anda alihkan",
-          "description": "Disimpan ke profil anda untuk semakan jawatankuasa dan pengawasan SMT."
-        }
-      },
-      "discipline": {
-        "title": "Status tatatertib (swasta)",
-        "statusLine": "Amaran: {warnings} · Mogok: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "pengundian dilumpuhkan",
-        "speakingSuspended": "bercakap digantung",
-        "removedFromCommittee": "dikeluarkan daripada jawatankuasa",
-        "updated": "Dikemas kini: {value}"
-      },
-      "preview": {
-        "ariaLabel": "Pratonton profil",
-        "title": "Pratonton",
-        "yourName": "nama awak",
-        "usernameNotSet": "Nama pengguna tidak ditetapkan",
-        "gradeValue": "Gred {grade}",
-        "awards": "Anugerah"
-      },
-      "profilePicture": "Gambar profil",
-      "uploadFile": "Muat naik fail",
-      "uploading": "Memuat naik…",
-      "photoSaved": "Foto dimuat naik dan disimpan.",
-      "orUrl": "Atau ditetapkan mengikut URL",
-      "urlPlaceholder": "https://...",
-      "name": "Nama",
-      "username": "Nama pengguna",
-      "usernamePlaceholder": "cth. alex_1999",
-      "pronouns": "Kata ganti nama",
-      "customPronounNote": "Profil anda mempunyai set kata ganti tersuai yang tidak lagi diterima di sini. Pilih pilihan di atas (atau biarkan kosong). Simpanan menggantikan nilai lama.",
-      "school": "Sekolah",
-      "schoolPlaceholder": "cth. Sekolah Menengah Lincoln",
-      "grade": "Gred",
-      "selectGrade": "Pilih gred",
-      "conferencesAttended": "Persidangan yang dihadiri",
-      "awardsComma": "Anugerah (dipisahkan koma)",
-      "awardsPlaceholder": "Perwakilan Terbaik, Sebutan Yang Berhormat",
-      "allocation": "Peruntukan",
-      "selectAllocation": "Pilih peruntukan",
-      "noAllocationsPlaceholder": "Tiada peruntukan jawatankuasa disediakan",
-      "saveProfile": "Simpan profil",
-      "saved": "Profil disimpan.",
-      "saveFailed": "Tidak dapat menyimpan profil.",
-      "errUsernamePattern": "Nama pengguna mestilah 3-32 aksara (huruf, nombor, _, ., -)",
-      "errPronounsPreset": "Pilih kata ganti nama daripada senarai.",
-      "errImageType": "Sila pilih fail imej.",
-      "errImageSize": "Imej terlalu besar (maks 5 MB).",
-      "errUploadFailed": "Muat naik gagal.",
-      "errStorageSetup": "Storan gambar profil tidak disediakan. Dalam projek Supabase, jalankan migrasi 00100_profile_pictures_storage_bucket.sql atau buat baldi storan awam bernama gambar profil (lihat README).",
-      "errPublicUrl": "Tidak dapat menyelesaikan URL awam untuk imej yang dimuat naik.",
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Peraturan Prosedur (RoP)",
-          "content": "# Peraturan Prosedur\n\n## Mata dan Usul\n- **Point of Order**: Prosedur yang betul\n- **Maklumat**: Soalan kepada penceramah\n- **Titik Keistimewaan Peribadi**: Keselesaan peribadi\n- **Usul ke Meja**: Tangguhkan perbahasan\n- **Usul Penangguhan**: Tamat sesi\n\n## Mengundi\n- Majoriti mudah untuk urusan prosedur\n- 2/3 majoriti untuk perkara substantif\n- Undi gulung suara jika diminta"
-        },
-        "examples": {
-          "title": "Contoh",
-          "content": "# Contoh\n\n## Format Resolusi\n```\nPerhimpunan Agung,\n...\n1. Menyeru negara anggota untuk...\n2. Mendesak masyarakat antarabangsa untuk...\n```\n\n## Struktur Kertas Kedudukan\n1. Latar belakang\n2. Dasar Negara\n3. Cadangan Penyelesaian"
-        },
-        "templates": {
-          "title": "templat",
-          "content": "# Templat\n\n## Templat Laporan Kerusi\n- Gambaran keseluruhan jawatankuasa\n- Perkara perbincangan utama\n- Resolusi diluluskan\n- Cadangan"
-        },
-        "chairReport": {
-          "title": "Laporan Pengerusi",
-          "content": "# Laporan Pengerusi\n\nDokumentasikan prosiding dan keputusan jawatankuasa di sini."
-        }
-      },
-      "edit": "Sunting",
-      "guideDocument": "Dokumen panduan",
-      "additionalNotes": "Nota tambahan",
-      "noContentYet": "Tiada kandungan lagi.",
-      "titlePlaceholder": "Tajuk",
-      "googleDocsUrl": "URL Dokumen Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Dokumen Google baharu dibuka dalam tab lain. Tampalkan pautan boleh kongsi supaya perwakilan boleh membuka dokumen di sini (lihat/edit bergantung pada perkongsian Google).",
-      "markdownOptional": "Nota penurunan harga (pilihan jika anda menggunakan Dokumen Google)",
-      "save": "Jimat",
-      "cancel": "Batal",
-      "createNewGuide": "Buat panduan baharu",
-      "slugPlaceholder": "slug (unik)",
-      "titleLowerPlaceholder": "tajuk",
-      "googleDocsUrlOptional": "URL Google Docs (pilihan)",
-      "markdownContentOptional": "Kandungan markdown (pilihan)",
-      "create": "Buat",
-      "glossary": {
-        "title": "Glosari Agenda MUN",
-        "subtitle": "Terminologi unik dipadankan dengan kod jawatankuasa anda dan topik agenda semasa.",
-        "committeeCode": "Kod jawatankuasa: {code}",
-        "topicTag": "Topik: {topic}",
-        "sources": {
-          "core": "teras",
-          "committee": "jawatankuasa",
-          "topic": "topik"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Perwakilan",
-            "definition": "Sebuah negara atau pasukan pemerhati yang mewakili satu negeri atau entiti dalam jawatankuasa."
-          },
-          "placard": {
-            "term": "Plakat",
-            "definition": "Papan tanda negara digunakan untuk meminta usul lantai, undi dan isyarat prosedur."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Mempengerusikan pasukan yang menyederhanakan perbahasan, menggunakan prosedur dan mengurus susunan ucapan."
-          },
-          "quorum": {
-            "term": "Kuorum",
-            "definition": "Bilangan minimum perwakilan yang diperlukan untuk menjalankan urusan rasmi dan undian."
-          },
-          "motion": {
-            "term": "gerakan",
-            "definition": "Cadangan rasmi untuk menukar aliran perbahasan, seperti jenis kaukus atau masa bercakap."
-          },
-          "point_of_order": {
-            "term": "Titik Perintah",
-            "definition": "Intervensi apabila prosedur digunakan secara tidak betul di bawah peraturan jawatankuasa."
-          },
-          "moderated_caucus": {
-            "term": "Kaukus Disederhanakan",
-            "definition": "Segmen perbahasan berstruktur dengan ucapan singkat mengenai subtopik yang ditentukan."
-          },
-          "unmoderated_caucus": {
-            "term": "Kaukus Tidak Disederhanakan",
-            "definition": "Tempoh rundingan tidak formal di mana perwakilan bergerak bebas untuk merangka dan menggabungkan idea."
-          },
-          "draft_resolution": {
-            "term": "Draf Resolusi",
-            "definition": "Teks kerja cadangan tindakan jawatankuasa sebelum pengundian dan penerimaan muktamad."
-          },
-          "amendment": {
-            "term": "Pindaan",
-            "definition": "Ubah yang dicadangkan kepada draf teks, sama ada mesra atau diundi sebagai tidak mesra."
-          },
-          "operative_clause": {
-            "term": "Klausa Operatif",
-            "definition": "Klausa bernombor berorientasikan tindakan yang menerangkan perkara yang dicadangkan oleh jawatankuasa untuk dilakukan."
-          },
-          "preambulatory_clause": {
-            "term": "Klausa Preambulatory",
-            "definition": "Klausa penetapan konteks yang memetik prinsip latar belakang, kebimbangan dan rangka kerja terdahulu."
-          },
-          "right_of_reply": {
-            "term": "Hak Balas",
-            "definition": "Peluang untuk membalas kenyataan langsung yang menjejaskan maruah atau kedudukan perwakilan."
-          },
-          "veto_power": {
-            "term": "Kuasa Veto",
-            "definition": "Pihak berkuasa anggota tetap UNSC untuk menyekat draf resolusi substantif."
-          },
-          "chapter_vii": {
-            "term": "Bab VII",
-            "definition": "Pihak berkuasa Piagam PBB mengenai ancaman terhadap keamanan, sekatan, dan langkah penggunaan kekerasan."
-          },
-          "sanctions_regime": {
-            "term": "Rejim Sekatan",
-            "definition": "Sekatan yang diselaraskan digunakan untuk mempengaruhi tingkah laku tanpa tindakan ketenteraan langsung."
-          },
-          "arms_control": {
-            "term": "Kawalan Senjata",
-            "definition": "Perjanjian dan sistem pengesahan yang mengehadkan jenis, kuantiti atau penggunaan senjata."
-          },
-          "non_proliferation": {
-            "term": "Tidak Percambahan",
-            "definition": "Dasar untuk menghalang penyebaran keupayaan senjata nuklear, kimia, biologi atau canggih."
-          },
-          "confidence_building_measures": {
-            "term": "Langkah Membina Keyakinan",
-            "definition": "Alat ketelusan dan komunikasi yang mengurangkan salah faham dan risiko konflik."
-          },
-          "universal_periodic_review": {
-            "term": "Semakan Berkala Sejagat",
-            "definition": "Proses semakan rakan sebaya di mana setiap negara anggota PBB melaporkan dan menerima cadangan hak."
-          },
-          "special_rapporteur": {
-            "term": "Pelapor Khas",
-            "definition": "Pakar bebas yang dilantik untuk memantau dan melaporkan isu tematik atau hak negara."
-          },
-          "treaty_body": {
-            "term": "Badan Perjanjian",
-            "definition": "Jawatankuasa pakar yang menyelia pelaksanaan perjanjian hak asasi manusia tertentu."
-          },
-          "public_health_emergency": {
-            "term": "Kecemasan Kesihatan Awam",
-            "definition": "Peristiwa wabak yang serius memerlukan tindak balas nasional dan antarabangsa yang diselaraskan segera."
-          },
-          "surveillance": {
-            "term": "Pengawasan Epidemiologi",
-            "definition": "Pengumpulan dan analisis berterusan data kesihatan untuk mengesan dan menjejaki trend penyakit."
-          },
-          "health_systems": {
-            "term": "Pengukuhan Sistem Kesihatan",
-            "definition": "Meningkatkan tenaga kerja, pembiayaan, logistik dan tadbir urus untuk penyampaian penjagaan kesihatan yang boleh dipercayai."
-          },
-          "transnational_crime": {
-            "term": "Jenayah Terancang Transnasional",
-            "definition": "Aktiviti jenayah diselaraskan merentasi sempadan melalui rangkaian dan pasaran haram."
-          },
-          "illicit_trafficking": {
-            "term": "Pemerdagangan Haram",
-            "definition": "Pergerakan haram dadah, senjata, orang atau barangan merentasi bidang kuasa."
-          },
-          "rule_of_law_capacity": {
-            "term": "Kapasiti Kedaulatan Undang-undang",
-            "definition": "Keupayaan institusi sistem keadilan untuk menyiasat, mendakwa, dan melindungi hak secara adil."
-          },
-          "sustainable_development": {
-            "term": "Pembangunan Mampan",
-            "definition": "Model pertumbuhan mengimbangi kemajuan sosial, peluang ekonomi dan perlindungan alam sekitar."
-          },
-          "financing_for_development": {
-            "term": "Pembiayaan untuk Pembangunan",
-            "definition": "Mekanisme pembiayaan awam dan swasta yang menyokong keutamaan pembangunan jangka panjang."
-          },
-          "policy_coordination": {
-            "term": "Penyelarasan Dasar",
-            "definition": "Penjajaran tindakan negara dan agensi untuk mengelakkan pertindihan dan meningkatkan impak kolektif."
-          },
-          "child_protection": {
-            "term": "Perlindungan Kanak-kanak",
-            "definition": "Langkah-langkah mencegah eksploitasi, penderaan dan keganasan terhadap kanak-kanak dalam semua tetapan."
-          },
-          "education_access": {
-            "term": "Akses Pendidikan",
-            "definition": "Memastikan peluang pembelajaran yang inklusif, saksama dan berterusan untuk semua kanak-kanak."
-          },
-          "humanitarian_response": {
-            "term": "Respon Kemanusiaan",
-            "definition": "Tindakan bantuan pantas menangani keperluan mendesak dalam keadaan krisis dan konflik."
-          },
-          "gender_mainstreaming": {
-            "term": "Pengarusperdanaan Jantina",
-            "definition": "Mengintegrasikan analisis jantina ke dalam reka bentuk dasar, pelaksanaan dan penilaian."
-          },
-          "gender_based_violence": {
-            "term": "Keganasan Berasaskan Jantina",
-            "definition": "Kemudaratan yang ditujukan kepada seseorang berdasarkan identiti jantina, peranan atau hubungan kuasa yang tidak sama rata."
-          },
-          "economic_empowerment": {
-            "term": "Pemerkasaan Ekonomi",
-            "definition": "Meluaskan akses kepada kerja yang layak, kewangan, pemilikan dan kuasa membuat keputusan."
-          },
-          "source_attribution": {
-            "term": "Atribusi Sumber",
-            "definition": "Memetik asal maklumat dengan jelas supaya tuntutan boleh disahkan dan dikontekstualkan."
-          },
-          "verified_reporting": {
-            "term": "Pelaporan Disahkan",
-            "definition": "Standard kewartawanan yang memerlukan pengesahan sebelum menerbitkan fakta yang dipertikaikan."
-          },
-          "editorial_independence": {
-            "term": "Kemerdekaan Editorial",
-            "definition": "Pengasingan keputusan pelaporan daripada tekanan politik atau pengaruh pihak berkepentingan."
-          },
-          "climate_mitigation": {
-            "term": "Tebatan Iklim",
-            "definition": "Tindakan yang mengurangkan pelepasan gas rumah hijau atau meningkatkan penyingkiran karbon jangka panjang."
-          },
-          "climate_adaptation": {
-            "term": "Penyesuaian Iklim",
-            "definition": "Dasar dan pelaburan yang mengurangkan kerentanan kepada kesan berkaitan iklim."
-          },
-          "cyber_norms": {
-            "term": "Norma Siber",
-            "definition": "Jangkaan yang dikongsi untuk tingkah laku negara yang bertanggungjawab dalam domain digital dan siber."
-          },
-          "critical_infrastructure": {
-            "term": "Infrastruktur Kritikal",
-            "definition": "Sistem penting seperti kuasa, air, kesihatan dan komunikasi yang memerlukan daya tahan."
-          },
-          "epidemiology": {
-            "term": "Epidemiologi",
-            "definition": "Kajian corak penyakit, punca dan pengedaran dalam populasi."
-          },
-          "preparedness_response": {
-            "term": "Kesediaan dan Tindak Balas",
-            "definition": "Perancangan, penyelarasan dan tindakan lonjakan untuk membendung dan mengurus kecemasan."
-          },
-          "non_refoulement": {
-            "term": "Non-Refoulement",
-            "definition": "Prinsip melarang orang kembali ke tempat di mana mereka menghadapi bahaya yang serius."
-          },
-          "durable_solutions": {
-            "term": "Penyelesaian Tahan Lama",
-            "definition": "Hasil jangka panjang untuk orang yang dipindahkan: kepulangan, penyepaduan setempat atau penempatan semula."
-          },
-          "nuclear_safeguards": {
-            "term": "Perlindungan Nuklear",
-            "definition": "Langkah pengesahan memastikan bahan nuklear tidak dialihkan untuk kegunaan senjata."
-          },
-          "counter_terrorism": {
-            "term": "Counter-Terrorism",
-            "definition": "Langkah perundangan, pencegahan dan keselamatan bersepadu terhadap aktiviti pengganas."
-          },
-          "due_process": {
-            "term": "Proses Sewajarnya",
-            "definition": "Prosedur undang-undang yang adil melindungi hak semasa penyiasatan, pendakwaan dan sekatan."
-          },
-          "resource_security": {
-            "term": "Keselamatan Sumber",
-            "definition": "Akses yang boleh dipercayai kepada makanan, air dan tenaga di bawah tekanan ekonomi dan alam sekitar."
-          },
-          "resilience": {
-            "term": "Ketahanan",
-            "definition": "Kapasiti komuniti dan institusi untuk menyerap kejutan dan pulih dengan berkesan."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Edit idea",
-      "googleDocsUrl": "URL Dokumen Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Teks idea pendek (pilihan)",
-      "save": "Jimat",
-      "cancel": "Batal",
-      "addIntro": "Tambahkan Dokumen Google untuk mendraf idea resolusi di tempat, atau taip nota ringkas (atau kedua-duanya).",
-      "googleDocsCreateHelp": "Dokumen Google baharu dibuka dalam tab lain; tampal pautan di sini selepas ia dibuat.",
-      "resolutionIdeaPlaceholder": "Idea resolusi...",
-      "add": "Tambah",
-      "noIdeasYet": "Tiada idea lagi.",
-      "ideaLabel": "Idea",
-      "ideaFallback": "Idea {number}",
-      "linkedDoc": "Dokumen yang dipautkan",
-      "addedOn": "Ditambahkan {date}",
-      "edit": "Sunting",
-      "delete": "Padam",
-      "ideaDocument": "Dokumen idea",
-      "summary": "Ringkasan",
-      "emptyIdea": "Idea kosong."
-    },
-    "stances": {
-      "heatmapTitle": "Gambaran Keseluruhan Sikap Ringkas (Peta Haba)",
-      "heatmapHelp": "Sejauh manakah peruntukan anda menyokong ___? (skala 1-5)",
-      "topicPlaceholder": "cth. tindakan iklim",
-      "extentLabel": "Keluasan (1-5):",
-      "extentHelpTitle": "Keluasan (1-5)",
-      "extentHelpBody": "1 bermakna peruntukan anda mempunyai sedikit sokongan untuk topik tersebut, dan 5 bermakna sokongan padu. Pilih nombor yang sepadan dengan pendirian anda dalam jawatankuasa.",
-      "add": "Tambah",
-      "viewOnlyHeatmap": "Peta haba lihat sahaja untuk kakitangan.",
-      "notesPerAllocation": "Nota setiap Peruntukan",
-      "noAllocationsYet": "Tiada peruntukan lagi",
-      "notesPlaceholder": "Nota pendirian untuk peruntukan ini...",
-      "noteLanguageWarning": "Amaran pembaca: nota ini mungkin mengandungi bahasa yang tidak sesuai.",
-      "save": "Jimat",
-      "saveHelpTitle": "Simpan nota pendirian",
-      "saveHelpBody": "Menyimpan nota pendirian untuk peruntukan ini. Ia boleh dilihat oleh kakitangan dan (bergantung kepada tetapan jawatankuasa) peserta lain."
-    },
-    "speeches": {
-      "newSpeech": "Ucapan baharu",
-      "speechTitlePlaceholder": "Tajuk ucapan",
-      "googleDocsUrl": "URL Dokumen Google",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Membuka Google dalam tab baharu; tampal URL dokumen di sini apabila sedia.",
-      "plainTextOptional": "Draf teks biasa (pilihan jika anda menggunakan Dokumen Google)",
-      "save": "Jimat",
-      "cancel": "Batal",
-      "noSpeechesYet": "Tiada ucapan lagi. Pautkan Dokumen Google atau tampal teks.",
-      "speechLabel": "ucapan",
-      "untitled": "Tidak bertajuk",
-      "edit": "Sunting",
-      "speechDocument": "Dokumen ucapan",
-      "draftText": "Teks draf",
-      "noContentHint": "Pautkan Dokumen Google dengan Edit atau tambahkan teks biasa dalam borang."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Jawatankuasa",
-      "yourContext": "Konteks anda",
-      "roleLabel": "Peranan",
-      "seatLabel": "tempat duduk",
-      "clearSearchTitle": "Kosongkan carian dan tunjukkan semua perwakilan",
-      "vacantLabel": "kosong",
-      "assignedLabel": "Ditugaskan",
-      "daisLabel": "Dais",
-      "phaseLabel": "fasa",
-      "phaseVoting": "Mengundi",
-      "phaseDebate": "Perbahasan",
-      "focusSearchTitle": "Carian fokus (tajuk dan nama dais sepadan dengan pertanyaan anda)",
-      "tipLabel": "Petua",
-      "searchVacantTitle": "Cari tempat duduk \"kosong\" di dalam bilik",
-      "searchHint": "Taip negara, nama perwakilan, sekolah, kata ganti nama atau \"kosong\" untuk menyerlahkan padanan di dalam bilik. Tekan Enter untuk melompat ke perlawanan pertama; Esc hilang. Klik Kosong untuk melompat ke tempat duduk kosong.",
-      "findLabel": "Cari delegasi atau ahli pelamin",
-      "searchPlaceholder": "Negara, nama, sekolah...",
-      "matchesCount": "{matches} daripada {total} tempat duduk perlawanan",
-      "enterScrolls": "Masukkan skrol",
-      "typeToFilterHint": "Taip untuk menapis - Masukkan skrol untuk padanan pertama",
-      "noMatches": "Tiada delegasi atau kerusi pelamin yang sepadan.",
-      "digitalDisplay": "Paparan digital",
-      "floorLabel": "Lantai",
-      "staffSeatsHeading": "Kakitangan - tempat duduk",
-      "searchAria": "Cari delegasi",
-      "virtualRoomVacant": "kosong",
-      "profileAria": "Lihat profil: {country}",
-      "vacantSeatAria": "Kerusi kosong",
-      "placardAria": "Plakat {country}",
-      "gavelAria": "Gavel",
-      "viewProfileAria": "Lihat profil: {title}",
-      "noProfileLinkAria": "{title} (tiada pautan profil)",
-      "committeeFloor": "Lantai panitia",
-      "virtualRoomFigureAria": "Bilik jawatankuasa maya - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Penapisan delegasi. Tempat duduk pertama yang ditonjolkan ialah perlawanan pertama di gelanggang.",
-      "helperText": "Plakat menyenaraikan negara (daripada peruntukan), nama, sekolah dan kata ganti nama daripada setiap profil perwakilan. Edit milik anda di bawah Profil. Kerusi jawatankuasa kosong ditunjukkan sebagai Kosong. Klik plakad atau tempat duduk pelamin yang penuh untuk membuka halaman ahli tersebut (sembang dan laporkan dari sana).",
-      "virtualRoomCaption": "Bilik jawatankuasa PBB Model Maya dengan plakad perwakilan yang menunjukkan negara, nama, sekolah dan kata ganti nama."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Minta bercakap",
-        "delegateFallback": "Perwakilan",
-        "needAllocation": "Anda memerlukan peruntukan untuk meminta bercakap.",
-        "alreadyQueued": "Anda sudah mempunyai permintaan bercakap aktif dalam baris gilir.",
-        "requested": "Diminta untuk bercakap. Anda akan muncul dalam baris gilir.",
-        "requestFailed": "Gagal meminta untuk bercakap.",
-        "helpBody": "Menghantar delegasi anda ke barisan kerusi. Anda boleh mempunyai satu permintaan menunggu/semasa aktif pada satu masa.",
-        "purposeLabel": "Tujuan pilihan (ditunjukkan dalam label baris gilir)",
-        "purposeHelpTitle": "Label tujuan",
-        "purposeHelpBody": "Teks ini dilampirkan pada nama negara anda supaya kerusi boleh melihat sebab anda meminta lantai.",
-        "purposePlaceholder": "cth. sokongan + gambaran keseluruhan pindaan",
-        "requesting": "Meminta...",
-        "rollPromptTitle": "Kelulusan kerusi diperlukan",
-        "rollPromptBodyPickStatus": "Sesi telah bermula. Pilih status panggilan gulung anda untuk membuka kunci pertuturan dan pengundian. Pilihan ini tidak boleh diubah.",
-        "rollPromptBodyWaitSessionStart": "Menunggu pengerusi memulakan sesi panitia.",
-        "rollPromptBodyWaitRollPrompt": "Menunggu gesaan panggilan masuk.",
-        "rollPromptBodyMarkedAbsent": "Anda kini ditandakan tidak hadir. Minta kerusi menandakan anda Hadir untuk bercakap dan mengundi.",
-        "rollPromptBodyChecking": "Menyemak status senarai anda...",
-        "rollPromptSaving": "Menyimpan...",
-        "rollPromptPresent": "Hadir",
-        "rollPromptPresentVoting": "Hadir dan mengundi"
-      },
-      "motionVoting": {
-        "votingProcedure": "Prosedur pengundian",
-        "currentMotion": "Gerakan semasa",
-        "motioner": "Penggerak",
-        "majority": "Majoriti",
-        "majoritySimple": "Mudah",
-        "tally": "Ya {yes} - Tidak {no} - Jumlah {total}",
-        "help": "Pelamin merekodkan undian setiap perwakilan dalam sesi. Undi usul menggunakan Ya atau Tidak sahaja (tidak berpantang). Jumlah hanya mengira plakad di mana Ya atau Tidak direkodkan; delegasi yang tidak hadir dilangkau."
-      },
-      "activeMotion": {
-        "currentMotion": "Gerakan semasa",
-        "motionFallback": "gerakan",
-        "motioner": "Penggerak",
-        "majority": "Majoriti",
-        "majoritySimple": "Mudah",
-        "type": "taip",
-        "timer": "Pemasa",
-        "currentSpeaker": "Pembesar suara semasa",
-        "nextSpeaker": "Penceramah seterusnya",
-        "speakerTimeLeftCap": "Masa pembesar suara (kiri / penutup)",
-        "speakerTimeLeftTotal": "Masa pembesar suara (kiri / jumlah)",
-        "perSpeaker": "(setiap pembesar suara)",
-        "paused": "(jeda)",
-        "pauseReason": "Jeda: {reason}"
-      },
-      "floorStatus": {
-        "sessionTime": "Masa sesi",
-        "sessionNotStarted": "Sesi tidak bermula",
-        "limit": "had",
-        "limitRemaining": "{value} tinggal",
-        "limitOverBy": "berakhir oleh {value}",
-        "quickLinkSession": "Sesi",
-        "quickLinkRoll": "gulung",
-        "quickLinkSpeakers": "Penceramah",
-        "quickLinkMotions": "usul",
-        "quickLinkTimer": "Pemasa",
-        "dais": "Dais",
-        "pinned": "Disemat",
-        "viewFullAnnouncement": "Lihat pengumuman penuh",
-        "timerPausesReadOnly": "Pemasa dijeda (baca sahaja)",
-        "speakerList": "Senarai pembesar suara",
-        "speakerFallback": "Penceramah",
-        "rollCallYou": "Panggilan lancar (anda)",
-        "fullAnnouncement": "Pengumuman penuh",
-        "daisAnnouncement": "Pengumuman Dais",
-        "close": "tutup"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Nama sesi",
-        "sessionNamePlaceholder": "cth. Sesi pagi",
-        "sessionNameSaving": "Menyimpan…",
-        "sessionNameSaved": "Disimpan",
-        "sessionNameHint": "Menyimpan secara automatik dan muncul dalam sejarah sesi.",
-        "title": "Sesi AJK",
-        "subtitle": "Mulakan atau hentikan sesi panitia.",
-        "helpStartStop": "Mulakan pemasa/status sesi jawatankuasa secara langsung untuk semua orang. Berhenti menamatkan sesi dan mengosongkan had masa semasa.",
-        "migrationUnavailable": "Kawalan sesi tidak tersedia buat sementara waktu sehingga migrasi pangkalan data terkini digunakan.",
-        "endTimeInFuture": "Pilih masa tamat pada masa hadapan atau tukar kepada tiada had.",
-        "sessionStartUnavailable": "Cap masa permulaan sesi tidak tersedia sehingga migrasi terkini digunakan.",
-        "endTimeInFutureSetNoLimit": "Pilih masa tamat pada masa hadapan atau tetapkan tiada had.",
-        "sessionLimitUpdated": "Had sesi dikemas kini.",
-        "startedLabel": "Dimulakan:",
-        "timeInLabel": "Masa dalam:",
-        "timeUntilEndLabel": "Masa sehingga tamat:",
-        "overByValue": "berakhir oleh {value}",
-        "modeLabel": "Mod:",
-        "modeStopwatchNoLimit": "Jam randik (tiada had masa)",
-        "sessionNotRunning": "Sesi tidak berjalan.",
-        "sessionLimit": "Had sesi",
-        "sessionLimitModesTitle": "Mod had sesi",
-        "sessionLimitModesHelp": "Tiada: tiada penghujung. Belanjawan masa: dikira dari mula. Tamat pada: masa jam tetap dalam zon waktu tempatan anda.",
-        "sessionLimitOptional": "Pilihan.",
-        "noneLabel": "tiada",
-        "noneDescription": "berjalan sehingga anda berhenti.",
-        "timeBudgetLabel": "Bajet masa",
-        "timeBudgetDescription": "dikira dari saat anda mula.",
-        "endTimeLabel": "Masa tamat",
-        "endTimeDescription": "menggunakan masa jam tetap (mengatasi belanjawan jika kedua-duanya pernah ditetapkan).",
-        "noneIndefinite": "Tiada (tidak pasti)",
-        "noneScheduledEndHint": "Tiada penamat yang dijadualkan; hanya masa berlalu ditunjukkan.",
-        "timeBudgetFromStart": "Belanjawan masa dari mula",
-        "hoursLabel": "jam",
-        "minutesLabel": "minit",
-        "minimumOneMinute": "(minimum 1 minit)",
-        "endAtLocalTime": "Tamat pada (waktu tempatan)",
-        "stopSession": "Hentikan sesi",
-        "saveLimit": "Jimat had",
-        "saveLimitHelp": "Menggunakan tetapan had yang dikemas kini semasa sesi sedang berjalan, tanpa menghentikan sesi.",
-        "startSession": "Mulakan sesi",
-        "sidebarUsePrefix": "Gunakan bar sisi untuk",
-        "rollCall": "Roll call",
-        "speakers": "Penceramah",
-        "formalMotions": "usul rasmi",
-        "timer": "Pemasa",
-        "sidebarAnd": "dan",
-        "announcements": "Pengumuman",
-        "sidebarUseSuffix": "— satu alat setiap tab."
-      },
-      "history": {
-        "title": "Sejarah sesi",
-        "savedCount": "{count} disimpan",
-        "permissionsHint": "Kerusi boleh menamakan semula penyertaan. SMT/Admin boleh menamakan semula dan memadam entri.",
-        "empty": "Tiada sejarah sesi lagi.",
-        "rename": "Namakan semula",
-        "delete": "Padam",
-        "deleteConfirm": "Padamkan sesi ini daripada sejarah?",
-        "sessionNamePrompt": "Nama sesi",
-        "rangeClosed": "{range}",
-        "rangeOngoing": "{range} -> Sedang berlangsung"
-      },
-      "timerPage": {
-        "title": "Pemasa",
-        "controlsTitle": "Kawalan pemasa",
-        "controlsHelp": "Gunakan lantai Umum untuk masa perbahasan keseluruhan, atau undian Usul untuk mengikat keterlihatan pada item undian terbuka tertentu.",
-        "tabSetup": "1) Persediaan",
-        "tabClock": "2) Kawalan jam",
-        "tabNotes": "3) Nota ucapan",
-        "tabLog": "4) Jeda log",
-        "setupHelp": "Pilih sama ada pemasa ini untuk tingkat umum (sentiasa kelihatan kepada perwakilan) atau terikat dengan usul terbuka untuk pengundian (perwakilan hanya melihatnya semasa undian itu adalah item aktif). Dengan masa setiap pembesar suara dihidupkan, jam kekal kelihatan semasa kaukus sederhana tanpa mengira. Jeda jam / Mulakan pembekuan jam atau sambung kira detik. Tetapkan masa Speaker (baki) dan Jumlah masa secara berasingan, kemudian Simpan pemasa. Pratetap mengisi kedua-duanya dengan panjang yang sama; anda boleh mengedit mana-mana medan selepas itu. Jeda dilog dengan alasan yang singkat.",
-        "namedPreset": "Pratetap bernama",
-        "applyPreset": "Gunakan pratetap...",
-        "floorLabelDelegates": "Label lantai (wakil)",
-        "floorLabelPlaceholder": "cth. GSL 60an",
-        "timerPurpose": "Tujuan pemasa",
-        "purposeGeneralFloor": "Perbahasan umum / lantai (tidak terikat dengan undian)",
-        "purposeMotionVote": "Gerakan terbuka - pemasa hanya semasa undian itu aktif di atas lantai",
-        "openMotionForVoting": "Usul terbuka (mesti terbuka untuk mengundi)",
-        "selectMotion": "Pilih gerakan...",
-        "untitled": "Tidak bertajuk",
-        "noOpenMotionWarning": "Tiada usul terbuka untuk mengundi. Buka undian dahulu, atau tukar tujuan kepada tingkat umum.",
-        "clock": "jam",
-        "running": "Berlari",
-        "paused": "Dijeda",
-        "saveToEnablePauseStart": "simpan pemasa untuk membolehkan jeda/mula.",
-        "pauseReasonLogged": "Jeda sebab (dilog)",
-        "pauseReasonPlaceholder": "cth. Titik tertib, isu teknologi, kaukus tidak dikendalikan...",
-        "pauseClock": "Jeda jam",
-        "startClock": "Mulakan jam",
-        "euTimerBoardTitle": "Papan pemasa Parlimen EU (11 pemasa)",
-        "euTimerBoardHelp": "Satu pemasa setiap parti, ditambah Jumlah masa, masa POI/POC dan masa Speaker. Gunakan Guna untuk menyalin baris ke dalam medan pemasa langsung pada tab Jam (masa pembesar suara / Simpan pemasa).",
-        "euTimerName": "Nama",
-        "euTimerTag": "Tag",
-        "euTotalTime": "Jumlah masa",
-        "euPoiPocTime": "Masa POI / POC",
-        "euSpeakerTime": "Masa pembesar suara",
-        "perSpeakerTitle": "Masa per-speaker (kaukus sederhana)",
-        "perSpeakerHelp": "Tetapkan Jumlah masa sebagai had per-speaker dan masa Speaker sebagai baki masa; Maju beralih ke pembesar suara seterusnya dan menetapkan semula yang tinggal pada penutup.",
-        "currentSpeaker": "Pembesar suara semasa",
-        "nextSpeaker": "Penceramah seterusnya",
-        "speechNotesCurrentSpeaker": "Nota ucapan (penceramah semasa)",
-        "speechNotesHelp": "Nota terikat pada teks pemasa pembesar suara Semasa dan, apabila senarai pembesar suara mempunyai seseorang menandakan Semasa, perwakilan mereka disimpan untuk rujukan.",
-        "timerFloorLabel": "Pemasa (lantai):",
-        "speakerListCurrent": "Senarai pembesar suara (semasa):",
-        "noCurrentDelegation": "Tiada perwakilan ditanda Semasa pada senarai pembesar suara.",
-        "note": "Nota",
-        "notePlaceholder": "Mata, POI, nada, susulan...",
-        "saveSpeechNote": "Simpan nota ucapan",
-        "recentNotes": "Nota terbaru anda (jawatankuasa ini)",
-        "delete": "Padam",
-        "speakerTimeRemaining": "Masa pembesar suara (baki)",
-        "remainingHelpPerSpeaker": "Undur untuk pembesar suara semasa (ditetapkan semula apabila anda Maju).",
-        "remainingHelpNormal": "Kira detik untuk pembesar suara semasa (boleh kurang daripada jumlah).",
-        "totalTime": "Jumlah masa",
-        "totalHelpPerSpeaker": "Tudung per-speaker (penyebut di atas lantai; Isi semula pendahuluan yang tinggal untuk ini).",
-        "totalHelpNormal": "Panjang penuh segmen pemasa ini (ditunjukkan selepas garis miring pada lantai).",
-        "saveTimer": "Simpan pemasa",
-        "advanceSpeakerReset": "Majukan pembesar suara dan tetapkan semula jam",
-        "recentPauseLog": "Log jeda baru-baru ini",
-        "noPauseEvents": "Tiada acara jeda dilog lagi untuk jawatankuasa ini.",
-        "openPauseLogHint": "Buka log Jeda untuk menyemak sebab jeda dan cap masa yang direkodkan.",
-        "saved": "Pemasa disimpan.",
-        "savedCapped": "Pemasa disimpan. Masa pembesar suara lebih lama daripada jumlah keseluruhan; dihadkan kepada jumlah.",
-        "alreadyPaused": "Pemasa sudah dijeda.",
-        "pausedForCommittee": "Pemasa berhenti seketika untuk jawatankuasa.",
-        "alreadyRunning": "Pemasa sudah berjalan.",
-        "runningForCommittee": "Pemasa berjalan untuk jawatankuasa."
-      }
     }
   },
   "timersWidget": {
@@ -2478,6 +1647,10 @@
       "committeeRoomFull": {
         "label": "Bilik panitia (penuh)",
         "hint": "Susun atur maya & lantai perwakilan"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2811,6 +1984,864 @@
           "3": "Sinergi lancar; pelamin memberi inspirasi kepada persekitaran profesional dan berkepentingan tinggi."
         }
       }
+    }
+  },
+  "sources": {
+    "addSource": "Tambah sumber",
+    "sourceUrl": "URL sumber",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (disyorkan)",
+    "urlHelp": "Untuk Dokumen Google baharu, gunakan butang dan tampal pautan dokumen di sini.",
+    "titleOptional": "Tajuk (pilihan)",
+    "saveChanges": "Simpan perubahan",
+    "editSource": "Edit sumber",
+    "urlPlaceholderShort": "Dokumen Google atau URL lain",
+    "empty": "Tiada sumber lagi. Tambahkan pautan Dokumen Google untuk membukanya di sini.",
+    "sourceLabel": "Sumber",
+    "openLink": "Buka pautan",
+    "embedHeading": "Dokumen sumber",
+    "notGoogleDoc": "URL ini bukan Dokumen Google. Gunakan pautan docs.google.com/document/d/… untuk membenamkan dan mengedit di sini; jika tidak buka pautan di atas."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Perwakilan tidak boleh memuat naik Kertas Kedudukan secara langsung. Gunakan jenis dokumen lain.",
+    "alertOnlyChairsPositionPaper": "Hanya kerusi/SMT/admin boleh memuat naik Kertas Jawatan.",
+    "alertOnlySmtChairReport": "Hanya SMT/admin boleh memuat naik Laporan Kerusi.",
+    "alertOnlySmtRop": "Hanya SMT/admin boleh memuat naik dokumen RoP.",
+    "alertOnlySmtAwardCriteria": "Hanya SMT/admin boleh memuat naik dokumen Kriteria Anugerah.",
+    "alertNeedContentOrUrl": "Tambahkan sama ada kandungan teks tempatan atau URL Dokumen Google.",
+    "confirmDelete": "Padamkan dokumen ini?",
+    "delegatePrepTitle": "Bahagian dokumen persediaan",
+    "delegatePrepBody": "Anda boleh memuat naik, melihat dan mengedit <prep>Dokumen Persediaan</prep> anda sendiri terus dari halaman ini.",
+    "positionPaperGuideTitle": "Panduan kertas kedudukan",
+    "positionPaperGuideBlurb": "Muat turun panduan pemegang tempat semasa PDF akhir sedang disediakan.",
+    "downloadPlaceholderGuide": "Muat turun panduan pemegang tempat",
+    "addDocument": "Tambah dokumen",
+    "tabs": {
+      "ariaLabel": "Bahagian dokumen",
+      "library": "Perpustakaan",
+      "compose": "Karang",
+      "composeHint": "Mulakan dokumen baharu atau edit draf sedia ada daripada tab ini."
+    },
+    "newDocumentTitle": "Dokumen baharu",
+    "editDocumentTitle": "Edit dokumen",
+    "typeLabel": "taip",
+    "types": {
+      "position_paper": "Kertas kedudukan",
+      "chair_report": "Laporan pengerusi",
+      "rop": "RoP",
+      "award_criteria": "Kriteria anugerah",
+      "chair_notes": "Nota kerusi",
+      "prep_doc": "Dokumen persediaan"
+    },
+    "delegatePositionPaperNote": "Kertas jawatan dimuat naik oleh kerusi dengan maklum balas.",
+    "delegateOwner": "Wakilkan pemilik",
+    "chairRecipient": "Penerima kerusi",
+    "titleLabel": "Tajuk",
+    "titlePlaceholder": "Tajuk dokumen",
+    "googleDocsUrl": "URL Dokumen Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (benamkan paparan/edit dalam apl)",
+    "googleDocsHelp": "Gunakan Dokumen Google Baharu untuk membuka Google dalam tab baharu, kemudian tampal pautan dokumen di sini. Teks biasa di bawah adalah pilihan. Setiap dokumen memerlukan sama ada teks setempat, pautan Dokumen Google atau kedua-duanya.",
+    "plainTextOptional": "Teks biasa (pilihan)",
+    "plainTextPlaceholder": "Nota atau teks draf…",
+    "chairFeedbackLabel": "Maklum balas kerusi",
+    "chairFeedbackPlaceholder": "Maklum balas untuk kertas jawatan perwakilan...",
+    "empty": "Tiada dokumen lagi. Tambahkan satu atau pautkan Dokumen Google.",
+    "sidebarDocumentLabel": "Dokumen",
+    "sections": {
+      "chairReports": "Laporan pengerusi",
+      "rop": "RoP",
+      "awardCriteria": "Kriteria anugerah",
+      "prepDocuments": "Dokumen persediaan",
+      "chairNotes": "Nota kerusi",
+      "otherDocuments": "Dokumen lain"
+    },
+    "untitled": "Tidak bertajuk",
+    "linkedDocumentHeading": "Dokumen yang dipautkan",
+    "notesHeading": "Nota",
+    "noGoogleDocYet": "Tiada Dokumen Google dipautkan lagi. Gunakan Edit untuk menambah URL docs.google.com/document/d/…",
+    "chairFeedbackHeading": "Maklum balas kerusi",
+    "noFeedbackYet": "Tiada maklum balas ditambah lagi."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Masukkan e-mel perwakilan dahulu.",
+    "sentToDelegate": "Dihantar kepada {email}.",
+    "newResolution": "Resolusi Baru",
+    "maxDraftResolutions": "Jawatankuasa ini sudah mempunyai {count} draf resolusi.",
+    "googleDocLink": "Pautan Dokumen Google",
+    "googleDocUrlPlaceholder": "URL Google Docs (docs.google.com/document/d/… — digunakan untuk benam + penyuntingan)",
+    "googleDocUrlHelp": "Dokumen Google baharu dibuka dalam tab lain; salin URL dari bar alamat dan tampalkannya di sini.",
+    "mainSubmittersPlaceholder": "Pengirim utama (ID pengguna, dipisahkan koma)",
+    "coSubmittersPlaceholder": "Pengirim bersama (ID pengguna, dipisahkan koma)",
+    "create": "Buat",
+    "cancel": "Batal",
+    "openInNewTab": "Buka dalam tab baharu",
+    "noGoogleDocLink": "Tiada pautan Dokumen Google",
+    "visibleToOtherBloc": "Kelihatan kepada blok lain",
+    "resolutionCounts": "Subs utama: {main} | Subs bersama: {co} | Penandatangan: {signatories}",
+    "blocButton": "Blok {name} ({stance})",
+    "signVirtually": "Tandatangan secara maya (subsub utama diberitahu)",
+    "shareByEmail": "Kongsi resolusi melalui e-mel",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "Hantar kepada perwakilan",
+    "clauseEditor": "Editor klausa",
+    "noClausesYet": "Tiada fasal lagi.",
+    "clauseNumber": "Fasal {number}",
+    "saveClause": "Fasal simpan",
+    "delete": "Padam",
+    "addClausePlaceholder": "Tambah klausa baharu...",
+    "addClause": "Tambah klausa",
+    "clauseVoteHistory": "Fasal sejarah undian",
+    "noClauseOutcomesYet": "Tiada keputusan undian klausa yang direkodkan lagi.",
+    "clauseFallback": "Fasal",
+    "passed": "LULUS",
+    "failed": "GAGAL",
+    "motionId": "Gerakan {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Bahagian mengundi",
+      "open": "Buka",
+      "closed": "tertutup"
+    },
+    "requiredMajority": "Memerlukan majoriti",
+    "helpRequiredMajorityTitle": "Memerlukan majoriti",
+    "helpRequiredMajorityBody": "Pilih ambang undi yang digunakan untuk memutuskan lulus/gagal. `Mudah` adalah lebih daripada separuh. `2/3` memerlukan majoriti besar.",
+    "majoritySimple": "Mudah",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} majoriti",
+    "mustVote": "WAJIB mengundi",
+    "helpMustVoteTitle": "WAJIB mengundi",
+    "helpMustVoteBody": "Menandai usul ini sebagai item \"mesti mengundi\". Ini digunakan untuk menyampaikan keperluan kepada peserta (bergantung pada persediaan jawatankuasa anda).",
+    "saveSettings": "Simpan tetapan",
+    "delegateBlurb": "Pentas merekodkan undian dalam sesi (cth. roll call). Undi usul di sini ikut Ya/Tidak sahaja (berpantang tidak digunakan). Anda boleh mengikuti pengiraan; perwakilan tidak membuang undi dalam apl.",
+    "yes": "ya",
+    "no": "Tidak",
+    "ballots": "undi",
+    "total": "Jumlah",
+    "outcome": "Hasil",
+    "passed": "lulus",
+    "failed": "gagal",
+    "noRecordedVotes": "Tiada undian direkodkan",
+    "reopenMotion": "Buka semula gerakan",
+    "editRecordOpen": "Edit rekod…",
+    "hideSettings": "Sembunyikan tetapan",
+    "preliminaryPassing": "Lulus (permulaan)",
+    "preliminaryFailing": "Gagal (permulaan)",
+    "delegateRollCall": "Perwakilan panggilan panggilan ({count})",
+    "noSeatedDelegates": "Tiada perwakilan duduk tersedia untuk usul ini.",
+    "rollPrefix": "Gulung:",
+    "recordedPrefix": "Dirakam:",
+    "recordedYes": "ya",
+    "recordedNo": "Tidak",
+    "recordedAbstain": "berpantang",
+    "recordedNone": "—",
+    "abstain": "berpantang",
+    "clear": "Jelas",
+    "closeMotion": "Tutup gerakan",
+    "mustVoteBadge": "WAJIB mengundi",
+    "canVoteBadge": "BOLEH mengundi",
+    "noMotions": "Belum ada usul.",
+    "currentOpenMotion": "Gerakan terbuka semasa",
+    "noOpenMotion": "Tiada gerakan terbuka sekarang.",
+    "recentClosedMotions": "Usul tertutup baru-baru ini",
+    "noClosedMotions": "Tiada gerakan tertutup lagi.",
+    "untitled": "Tidak bertajuk",
+    "voteTypes": {
+      "motion": "gerakan",
+      "amendment": "Pindaan",
+      "resolution": "Resolusi",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Tidak hadir (gulungan)",
+      "present_abstain": "Hadir — boleh berpantang (gulung)",
+      "present_voting": "Bentangkan dan undian (gulungan)",
+      "unknown": "- (gulung)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "fallbacks": {
+      "yourCountry": "negara anda",
+      "committeeSession": "Sesi AJK",
+      "delegate": "Perwakilan",
+      "speechNote": "Nota ucapan",
+      "untitledMotion": "Usul tanpa tajuk",
+      "dash": "—"
+    },
+    "tabs": {
+      "ariaLabel": "Bahagian profil",
+      "overview": "Gambaran keseluruhan",
+      "awards": "Anugerah",
+      "private": "Rekod peribadi",
+      "settings": "Tetapan profil"
+    },
+    "delegateWelcome": {
+      "title": "Selamat datang perwakilan {flag} {country}",
+      "subtitle": "Apa yang anda ingin mulakan?",
+      "links": {
+        "documents": "Dokumen",
+        "notes": "Nota",
+        "committeeRoom": "Bilik panitia",
+        "runningNotes": "Nota Larian",
+        "ideas": "Idea",
+        "guides": "Pemandu",
+        "sources": "Sumber",
+        "resolutions": "Resolusi",
+        "speeches": "Ucapan",
+        "stances": "Pendirian",
+        "crisisSlides": "Slaid krisis",
+        "report": "Laporan",
+        "motions": "usul",
+        "points": "mata"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Anugerah pada profil anda",
+      "rank": "pangkat {rank}",
+      "pending": {
+        "tab": "Pencalonan belum selesai",
+        "title": "Pencalonan kerusi menunggu",
+        "descriptionSingle": "Disimpan oleh kerusi dan dikongsi dengan SMT untuk semakan. Anugerah akhir dipaparkan di bawah selepas pengesahan.",
+        "descriptionTabbed": "Disimpan oleh kerusi dan dikongsi dengan SMT untuk semakan. Anugerah akhir muncul selepas pengesahan."
+      },
+      "recorded": {
+        "tab": "Anugerah tercatat",
+        "title": "Anugerah tercatat",
+        "description": "Disenaraikan apabila kerusi atau SMT menugaskan anda dalam penjejak anugerah. Pengiktirafan akhir mengikut peraturan persidangan anda."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Kelihatan hanya kepada anda, pengerusi jawatankuasa, dan SMT untuk jawatankuasa yang berkaitan.",
+      "points": {
+        "title": "Mata kerusi (peribadi)"
+      },
+      "speechNotes": {
+        "title": "Nota ucapan pengerusi (peribadi)"
+      },
+      "motions": {
+        "title": "Usul yang anda alihkan",
+        "description": "Disimpan ke profil anda untuk semakan jawatankuasa dan pengawasan SMT."
+      }
+    },
+    "discipline": {
+      "title": "Status tatatertib (swasta)",
+      "statusLine": "Amaran: {warnings} · Mogok: {strikes}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "pengundian dilumpuhkan",
+      "speakingSuspended": "bercakap digantung",
+      "removedFromCommittee": "dikeluarkan daripada jawatankuasa",
+      "updated": "Dikemas kini: {value}"
+    },
+    "preview": {
+      "ariaLabel": "Pratonton profil",
+      "title": "Pratonton",
+      "yourName": "nama awak",
+      "usernameNotSet": "Nama pengguna tidak ditetapkan",
+      "gradeValue": "Gred {grade}",
+      "awards": "Anugerah"
+    },
+    "profilePicture": "Gambar profil",
+    "uploadFile": "Muat naik fail",
+    "uploading": "Memuat naik…",
+    "photoSaved": "Foto dimuat naik dan disimpan.",
+    "orUrl": "Atau ditetapkan mengikut URL",
+    "urlPlaceholder": "https://...",
+    "name": "Nama",
+    "username": "Nama pengguna",
+    "usernamePlaceholder": "cth. alex_1999",
+    "pronouns": "Kata ganti nama",
+    "customPronounNote": "Profil anda mempunyai set kata ganti tersuai yang tidak lagi diterima di sini. Pilih pilihan di atas (atau biarkan kosong). Simpanan menggantikan nilai lama.",
+    "school": "Sekolah",
+    "schoolPlaceholder": "cth. Sekolah Menengah Lincoln",
+    "grade": "Gred",
+    "selectGrade": "Pilih gred",
+    "conferencesAttended": "Persidangan yang dihadiri",
+    "awardsComma": "Anugerah (dipisahkan koma)",
+    "awardsPlaceholder": "Perwakilan Terbaik, Sebutan Yang Berhormat",
+    "allocation": "Peruntukan",
+    "selectAllocation": "Pilih peruntukan",
+    "noAllocationsPlaceholder": "Tiada peruntukan jawatankuasa disediakan",
+    "saveProfile": "Simpan profil",
+    "saved": "Profil disimpan.",
+    "saveFailed": "Tidak dapat menyimpan profil.",
+    "errUsernamePattern": "Nama pengguna mestilah 3-32 aksara (huruf, nombor, _, ., -)",
+    "errPronounsPreset": "Pilih kata ganti nama daripada senarai.",
+    "errImageType": "Sila pilih fail imej.",
+    "errImageSize": "Imej terlalu besar (maks 5 MB).",
+    "errUploadFailed": "Muat naik gagal.",
+    "errStorageSetup": "Storan gambar profil tidak disediakan. Dalam projek Supabase, jalankan migrasi 00100_profile_pictures_storage_bucket.sql atau buat baldi storan awam bernama gambar profil (lihat README).",
+    "errPublicUrl": "Tidak dapat menyelesaikan URL awam untuk imej yang dimuat naik.",
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Peraturan Prosedur (RoP)",
+        "content": "# Peraturan Prosedur\n\n## Mata dan Usul\n- **Point of Order**: Prosedur yang betul\n- **Maklumat**: Soalan kepada penceramah\n- **Titik Keistimewaan Peribadi**: Keselesaan peribadi\n- **Usul ke Meja**: Tangguhkan perbahasan\n- **Usul Penangguhan**: Tamat sesi\n\n## Mengundi\n- Majoriti mudah untuk urusan prosedur\n- 2/3 majoriti untuk perkara substantif\n- Undi gulung suara jika diminta"
+      },
+      "examples": {
+        "title": "Contoh",
+        "content": "# Contoh\n\n## Format Resolusi\n```\nPerhimpunan Agung,\n...\n1. Menyeru negara anggota untuk...\n2. Mendesak masyarakat antarabangsa untuk...\n```\n\n## Struktur Kertas Kedudukan\n1. Latar belakang\n2. Dasar Negara\n3. Cadangan Penyelesaian"
+      },
+      "templates": {
+        "title": "templat",
+        "content": "# Templat\n\n## Templat Laporan Kerusi\n- Gambaran keseluruhan jawatankuasa\n- Perkara perbincangan utama\n- Resolusi diluluskan\n- Cadangan"
+      },
+      "chairReport": {
+        "title": "Laporan Pengerusi",
+        "content": "# Laporan Pengerusi\n\nDokumentasikan prosiding dan keputusan jawatankuasa di sini."
+      }
+    },
+    "edit": "Sunting",
+    "guideDocument": "Dokumen panduan",
+    "additionalNotes": "Nota tambahan",
+    "noContentYet": "Tiada kandungan lagi.",
+    "titlePlaceholder": "Tajuk",
+    "googleDocsUrl": "URL Dokumen Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Dokumen Google baharu dibuka dalam tab lain. Tampalkan pautan boleh kongsi supaya perwakilan boleh membuka dokumen di sini (lihat/edit bergantung pada perkongsian Google).",
+    "markdownOptional": "Nota penurunan harga (pilihan jika anda menggunakan Dokumen Google)",
+    "save": "Jimat",
+    "cancel": "Batal",
+    "createNewGuide": "Buat panduan baharu",
+    "slugPlaceholder": "slug (unik)",
+    "titleLowerPlaceholder": "tajuk",
+    "googleDocsUrlOptional": "URL Google Docs (pilihan)",
+    "markdownContentOptional": "Kandungan markdown (pilihan)",
+    "create": "Buat",
+    "glossary": {
+      "title": "Glosari Agenda MUN",
+      "subtitle": "Terminologi unik dipadankan dengan kod jawatankuasa anda dan topik agenda semasa.",
+      "committeeCode": "Kod jawatankuasa: {code}",
+      "sources": {
+        "core": "teras",
+        "committee": "jawatankuasa",
+        "topic": "topik"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Perwakilan",
+          "definition": "Sebuah negara atau pasukan pemerhati yang mewakili satu negeri atau entiti dalam jawatankuasa."
+        },
+        "placard": {
+          "term": "Plakat",
+          "definition": "Papan tanda negara digunakan untuk meminta usul lantai, undi dan isyarat prosedur."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Mempengerusikan pasukan yang menyederhanakan perbahasan, menggunakan prosedur dan mengurus susunan ucapan."
+        },
+        "quorum": {
+          "term": "Kuorum",
+          "definition": "Bilangan minimum perwakilan yang diperlukan untuk menjalankan urusan rasmi dan undian."
+        },
+        "motion": {
+          "term": "gerakan",
+          "definition": "Cadangan rasmi untuk menukar aliran perbahasan, seperti jenis kaukus atau masa bercakap."
+        },
+        "point_of_order": {
+          "term": "Titik Perintah",
+          "definition": "Intervensi apabila prosedur digunakan secara tidak betul di bawah peraturan jawatankuasa."
+        },
+        "moderated_caucus": {
+          "term": "Kaukus Disederhanakan",
+          "definition": "Segmen perbahasan berstruktur dengan ucapan singkat mengenai subtopik yang ditentukan."
+        },
+        "unmoderated_caucus": {
+          "term": "Kaukus Tidak Disederhanakan",
+          "definition": "Tempoh rundingan tidak formal di mana perwakilan bergerak bebas untuk merangka dan menggabungkan idea."
+        },
+        "draft_resolution": {
+          "term": "Draf Resolusi",
+          "definition": "Teks kerja cadangan tindakan jawatankuasa sebelum pengundian dan penerimaan muktamad."
+        },
+        "amendment": {
+          "term": "Pindaan",
+          "definition": "Ubah yang dicadangkan kepada draf teks, sama ada mesra atau diundi sebagai tidak mesra."
+        },
+        "operative_clause": {
+          "term": "Klausa Operatif",
+          "definition": "Klausa bernombor berorientasikan tindakan yang menerangkan perkara yang dicadangkan oleh jawatankuasa untuk dilakukan."
+        },
+        "preambulatory_clause": {
+          "term": "Klausa Preambulatory",
+          "definition": "Klausa penetapan konteks yang memetik prinsip latar belakang, kebimbangan dan rangka kerja terdahulu."
+        },
+        "right_of_reply": {
+          "term": "Hak Balas",
+          "definition": "Peluang untuk membalas kenyataan langsung yang menjejaskan maruah atau kedudukan perwakilan."
+        },
+        "veto_power": {
+          "term": "Kuasa Veto",
+          "definition": "Pihak berkuasa anggota tetap UNSC untuk menyekat draf resolusi substantif."
+        },
+        "chapter_vii": {
+          "term": "Bab VII",
+          "definition": "Pihak berkuasa Piagam PBB mengenai ancaman terhadap keamanan, sekatan, dan langkah penggunaan kekerasan."
+        },
+        "sanctions_regime": {
+          "term": "Rejim Sekatan",
+          "definition": "Sekatan yang diselaraskan digunakan untuk mempengaruhi tingkah laku tanpa tindakan ketenteraan langsung."
+        },
+        "arms_control": {
+          "term": "Kawalan Senjata",
+          "definition": "Perjanjian dan sistem pengesahan yang mengehadkan jenis, kuantiti atau penggunaan senjata."
+        },
+        "non_proliferation": {
+          "term": "Tidak Percambahan",
+          "definition": "Dasar untuk menghalang penyebaran keupayaan senjata nuklear, kimia, biologi atau canggih."
+        },
+        "confidence_building_measures": {
+          "term": "Langkah Membina Keyakinan",
+          "definition": "Alat ketelusan dan komunikasi yang mengurangkan salah faham dan risiko konflik."
+        },
+        "universal_periodic_review": {
+          "term": "Semakan Berkala Sejagat",
+          "definition": "Proses semakan rakan sebaya di mana setiap negara anggota PBB melaporkan dan menerima cadangan hak."
+        },
+        "special_rapporteur": {
+          "term": "Pelapor Khas",
+          "definition": "Pakar bebas yang dilantik untuk memantau dan melaporkan isu tematik atau hak negara."
+        },
+        "treaty_body": {
+          "term": "Badan Perjanjian",
+          "definition": "Jawatankuasa pakar yang menyelia pelaksanaan perjanjian hak asasi manusia tertentu."
+        },
+        "public_health_emergency": {
+          "term": "Kecemasan Kesihatan Awam",
+          "definition": "Peristiwa wabak yang serius memerlukan tindak balas nasional dan antarabangsa yang diselaraskan segera."
+        },
+        "surveillance": {
+          "term": "Pengawasan Epidemiologi",
+          "definition": "Pengumpulan dan analisis berterusan data kesihatan untuk mengesan dan menjejaki trend penyakit."
+        },
+        "health_systems": {
+          "term": "Pengukuhan Sistem Kesihatan",
+          "definition": "Meningkatkan tenaga kerja, pembiayaan, logistik dan tadbir urus untuk penyampaian penjagaan kesihatan yang boleh dipercayai."
+        },
+        "transnational_crime": {
+          "term": "Jenayah Terancang Transnasional",
+          "definition": "Aktiviti jenayah diselaraskan merentasi sempadan melalui rangkaian dan pasaran haram."
+        },
+        "illicit_trafficking": {
+          "term": "Pemerdagangan Haram",
+          "definition": "Pergerakan haram dadah, senjata, orang atau barangan merentasi bidang kuasa."
+        },
+        "rule_of_law_capacity": {
+          "term": "Kapasiti Kedaulatan Undang-undang",
+          "definition": "Keupayaan institusi sistem keadilan untuk menyiasat, mendakwa, dan melindungi hak secara adil."
+        },
+        "sustainable_development": {
+          "term": "Pembangunan Mampan",
+          "definition": "Model pertumbuhan mengimbangi kemajuan sosial, peluang ekonomi dan perlindungan alam sekitar."
+        },
+        "financing_for_development": {
+          "term": "Pembiayaan untuk Pembangunan",
+          "definition": "Mekanisme pembiayaan awam dan swasta yang menyokong keutamaan pembangunan jangka panjang."
+        },
+        "policy_coordination": {
+          "term": "Penyelarasan Dasar",
+          "definition": "Penjajaran tindakan negara dan agensi untuk mengelakkan pertindihan dan meningkatkan impak kolektif."
+        },
+        "child_protection": {
+          "term": "Perlindungan Kanak-kanak",
+          "definition": "Langkah-langkah mencegah eksploitasi, penderaan dan keganasan terhadap kanak-kanak dalam semua tetapan."
+        },
+        "education_access": {
+          "term": "Akses Pendidikan",
+          "definition": "Memastikan peluang pembelajaran yang inklusif, saksama dan berterusan untuk semua kanak-kanak."
+        },
+        "humanitarian_response": {
+          "term": "Respon Kemanusiaan",
+          "definition": "Tindakan bantuan pantas menangani keperluan mendesak dalam keadaan krisis dan konflik."
+        },
+        "gender_mainstreaming": {
+          "term": "Pengarusperdanaan Jantina",
+          "definition": "Mengintegrasikan analisis jantina ke dalam reka bentuk dasar, pelaksanaan dan penilaian."
+        },
+        "gender_based_violence": {
+          "term": "Keganasan Berasaskan Jantina",
+          "definition": "Kemudaratan yang ditujukan kepada seseorang berdasarkan identiti jantina, peranan atau hubungan kuasa yang tidak sama rata."
+        },
+        "economic_empowerment": {
+          "term": "Pemerkasaan Ekonomi",
+          "definition": "Meluaskan akses kepada kerja yang layak, kewangan, pemilikan dan kuasa membuat keputusan."
+        },
+        "source_attribution": {
+          "term": "Atribusi Sumber",
+          "definition": "Memetik asal maklumat dengan jelas supaya tuntutan boleh disahkan dan dikontekstualkan."
+        },
+        "verified_reporting": {
+          "term": "Pelaporan Disahkan",
+          "definition": "Standard kewartawanan yang memerlukan pengesahan sebelum menerbitkan fakta yang dipertikaikan."
+        },
+        "editorial_independence": {
+          "term": "Kemerdekaan Editorial",
+          "definition": "Pengasingan keputusan pelaporan daripada tekanan politik atau pengaruh pihak berkepentingan."
+        },
+        "climate_mitigation": {
+          "term": "Tebatan Iklim",
+          "definition": "Tindakan yang mengurangkan pelepasan gas rumah hijau atau meningkatkan penyingkiran karbon jangka panjang."
+        },
+        "climate_adaptation": {
+          "term": "Penyesuaian Iklim",
+          "definition": "Dasar dan pelaburan yang mengurangkan kerentanan kepada kesan berkaitan iklim."
+        },
+        "cyber_norms": {
+          "term": "Norma Siber",
+          "definition": "Jangkaan yang dikongsi untuk tingkah laku negara yang bertanggungjawab dalam domain digital dan siber."
+        },
+        "critical_infrastructure": {
+          "term": "Infrastruktur Kritikal",
+          "definition": "Sistem penting seperti kuasa, air, kesihatan dan komunikasi yang memerlukan daya tahan."
+        },
+        "epidemiology": {
+          "term": "Epidemiologi",
+          "definition": "Kajian corak penyakit, punca dan pengedaran dalam populasi."
+        },
+        "preparedness_response": {
+          "term": "Kesediaan dan Tindak Balas",
+          "definition": "Perancangan, penyelarasan dan tindakan lonjakan untuk membendung dan mengurus kecemasan."
+        },
+        "non_refoulement": {
+          "term": "Non-Refoulement",
+          "definition": "Prinsip melarang orang kembali ke tempat di mana mereka menghadapi bahaya yang serius."
+        },
+        "durable_solutions": {
+          "term": "Penyelesaian Tahan Lama",
+          "definition": "Hasil jangka panjang untuk orang yang dipindahkan: kepulangan, penyepaduan setempat atau penempatan semula."
+        },
+        "nuclear_safeguards": {
+          "term": "Perlindungan Nuklear",
+          "definition": "Langkah pengesahan memastikan bahan nuklear tidak dialihkan untuk kegunaan senjata."
+        },
+        "counter_terrorism": {
+          "term": "Counter-Terrorism",
+          "definition": "Langkah perundangan, pencegahan dan keselamatan bersepadu terhadap aktiviti pengganas."
+        },
+        "due_process": {
+          "term": "Proses Sewajarnya",
+          "definition": "Prosedur undang-undang yang adil melindungi hak semasa penyiasatan, pendakwaan dan sekatan."
+        },
+        "resource_security": {
+          "term": "Keselamatan Sumber",
+          "definition": "Akses yang boleh dipercayai kepada makanan, air dan tenaga di bawah tekanan ekonomi dan alam sekitar."
+        },
+        "resilience": {
+          "term": "Ketahanan",
+          "definition": "Kapasiti komuniti dan institusi untuk menyerap kejutan dan pulih dengan berkesan."
+        }
+      },
+      "topicLine": "Topik: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Edit idea",
+    "googleDocsUrl": "URL Dokumen Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Teks idea pendek (pilihan)",
+    "save": "Jimat",
+    "cancel": "Batal",
+    "addIntro": "Tambahkan Dokumen Google untuk mendraf idea resolusi di tempat, atau taip nota ringkas (atau kedua-duanya).",
+    "googleDocsCreateHelp": "Dokumen Google baharu dibuka dalam tab lain; tampal pautan di sini selepas ia dibuat.",
+    "resolutionIdeaPlaceholder": "Idea resolusi...",
+    "add": "Tambah",
+    "noIdeasYet": "Tiada idea lagi.",
+    "ideaLabel": "Idea",
+    "ideaFallback": "Idea {number}",
+    "linkedDoc": "Dokumen yang dipautkan",
+    "addedOn": "Ditambahkan {date}",
+    "edit": "Sunting",
+    "delete": "Padam",
+    "ideaDocument": "Dokumen idea",
+    "summary": "Ringkasan",
+    "emptyIdea": "Idea kosong."
+  },
+  "stances": {
+    "heatmapTitle": "Gambaran Keseluruhan Sikap Ringkas (Peta Haba)",
+    "heatmapHelp": "Sejauh manakah peruntukan anda menyokong ___? (skala 1-5)",
+    "topicPlaceholder": "cth. tindakan iklim",
+    "extentLabel": "Keluasan (1-5):",
+    "extentHelpTitle": "Keluasan (1-5)",
+    "extentHelpBody": "1 bermakna peruntukan anda mempunyai sedikit sokongan untuk topik tersebut, dan 5 bermakna sokongan padu. Pilih nombor yang sepadan dengan pendirian anda dalam jawatankuasa.",
+    "add": "Tambah",
+    "viewOnlyHeatmap": "Peta haba lihat sahaja untuk kakitangan.",
+    "notesPerAllocation": "Nota setiap Peruntukan",
+    "noAllocationsYet": "Tiada peruntukan lagi",
+    "notesPlaceholder": "Nota pendirian untuk peruntukan ini...",
+    "noteLanguageWarning": "Amaran pembaca: nota ini mungkin mengandungi bahasa yang tidak sesuai.",
+    "save": "Jimat",
+    "saveHelpTitle": "Simpan nota pendirian",
+    "saveHelpBody": "Menyimpan nota pendirian untuk peruntukan ini. Ia boleh dilihat oleh kakitangan dan (bergantung kepada tetapan jawatankuasa) peserta lain."
+  },
+  "speeches": {
+    "newSpeech": "Ucapan baharu",
+    "speechTitlePlaceholder": "Tajuk ucapan",
+    "googleDocsUrl": "URL Dokumen Google",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Membuka Google dalam tab baharu; tampal URL dokumen di sini apabila sedia.",
+    "plainTextOptional": "Draf teks biasa (pilihan jika anda menggunakan Dokumen Google)",
+    "save": "Jimat",
+    "cancel": "Batal",
+    "noSpeechesYet": "Tiada ucapan lagi. Pautkan Dokumen Google atau tampal teks.",
+    "speechLabel": "ucapan",
+    "untitled": "Tidak bertajuk",
+    "edit": "Sunting",
+    "speechDocument": "Dokumen ucapan",
+    "draftText": "Teks draf",
+    "noContentHint": "Pautkan Dokumen Google dengan Edit atau tambahkan teks biasa dalam borang."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Jawatankuasa",
+    "yourContext": "Konteks anda",
+    "roleLabel": "Peranan",
+    "seatLabel": "tempat duduk",
+    "clearSearchTitle": "Kosongkan carian dan tunjukkan semua perwakilan",
+    "vacantLabel": "kosong",
+    "assignedLabel": "Ditugaskan",
+    "daisLabel": "Dais",
+    "phaseLabel": "fasa",
+    "phaseVoting": "Mengundi",
+    "phaseDebate": "Perbahasan",
+    "focusSearchTitle": "Carian fokus (tajuk dan nama dais sepadan dengan pertanyaan anda)",
+    "tipLabel": "Petua",
+    "searchVacantTitle": "Cari tempat duduk \"kosong\" di dalam bilik",
+    "searchHint": "Taip negara, nama perwakilan, sekolah, kata ganti nama atau \"kosong\" untuk menyerlahkan padanan di dalam bilik. Tekan Enter untuk melompat ke perlawanan pertama; Esc hilang. Klik Kosong untuk melompat ke tempat duduk kosong.",
+    "findLabel": "Cari delegasi atau ahli pelamin",
+    "searchPlaceholder": "Negara, nama, sekolah...",
+    "matchesCount": "{matches} daripada {total} tempat duduk perlawanan",
+    "enterScrolls": "Masukkan skrol",
+    "typeToFilterHint": "Taip untuk menapis - Masukkan skrol untuk padanan pertama",
+    "noMatches": "Tiada delegasi atau kerusi pelamin yang sepadan.",
+    "digitalDisplay": "Paparan digital",
+    "floorLabel": "Lantai",
+    "staffSeatsHeading": "Kakitangan - tempat duduk",
+    "searchAria": "Cari delegasi",
+    "virtualRoomVacant": "kosong",
+    "profileAria": "Lihat profil: {country}",
+    "vacantSeatAria": "Kerusi kosong",
+    "placardAria": "Plakat {country}",
+    "gavelAria": "Gavel",
+    "viewProfileAria": "Lihat profil: {title}",
+    "noProfileLinkAria": "{title} (tiada pautan profil)",
+    "committeeFloor": "Lantai panitia",
+    "virtualRoomFigureAria": "Bilik jawatankuasa maya - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Penapisan delegasi. Tempat duduk pertama yang ditonjolkan ialah perlawanan pertama di gelanggang.",
+    "helperText": "Plakat menyenaraikan negara (daripada peruntukan), nama, sekolah dan kata ganti nama daripada setiap profil perwakilan. Edit milik anda di bawah Profil. Kerusi jawatankuasa kosong ditunjukkan sebagai Kosong. Klik plakad atau tempat duduk pelamin yang penuh untuk membuka halaman ahli tersebut (sembang dan laporkan dari sana).",
+    "virtualRoomCaption": "Bilik jawatankuasa PBB Model Maya dengan plakad perwakilan yang menunjukkan negara, nama, sekolah dan kata ganti nama."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Minta bercakap",
+      "delegateFallback": "Perwakilan",
+      "needAllocation": "Anda memerlukan peruntukan untuk meminta bercakap.",
+      "alreadyQueued": "Anda sudah mempunyai permintaan bercakap aktif dalam baris gilir.",
+      "requested": "Diminta untuk bercakap. Anda akan muncul dalam baris gilir.",
+      "requestFailed": "Gagal meminta untuk bercakap.",
+      "helpBody": "Menghantar delegasi anda ke barisan kerusi. Anda boleh mempunyai satu permintaan menunggu/semasa aktif pada satu masa.",
+      "purposeLabel": "Tujuan pilihan (ditunjukkan dalam label baris gilir)",
+      "purposeHelpTitle": "Label tujuan",
+      "purposeHelpBody": "Teks ini dilampirkan pada nama negara anda supaya kerusi boleh melihat sebab anda meminta lantai.",
+      "purposePlaceholder": "cth. sokongan + gambaran keseluruhan pindaan",
+      "requesting": "Meminta...",
+      "rollPromptTitle": "Kelulusan kerusi diperlukan",
+      "rollPromptBodyPickStatus": "Sesi telah bermula. Pilih status panggilan gulung anda untuk membuka kunci pertuturan dan pengundian. Pilihan ini tidak boleh diubah.",
+      "rollPromptBodyWaitSessionStart": "Menunggu pengerusi memulakan sesi panitia.",
+      "rollPromptBodyWaitRollPrompt": "Menunggu gesaan panggilan masuk.",
+      "rollPromptBodyMarkedAbsent": "Anda kini ditandakan tidak hadir. Minta kerusi menandakan anda Hadir untuk bercakap dan mengundi.",
+      "rollPromptBodyChecking": "Menyemak status senarai anda...",
+      "rollPromptSaving": "Menyimpan...",
+      "rollPromptPresent": "Hadir",
+      "rollPromptPresentVoting": "Hadir dan mengundi"
+    },
+    "motionVoting": {
+      "votingProcedure": "Prosedur pengundian",
+      "currentMotion": "Gerakan semasa",
+      "motioner": "Penggerak",
+      "majority": "Majoriti",
+      "majoritySimple": "Mudah",
+      "tally": "Ya {yes} - Tidak {no} - Jumlah {total}",
+      "help": "Pelamin merekodkan undian setiap perwakilan dalam sesi. Undi usul menggunakan Ya atau Tidak sahaja (tidak berpantang). Jumlah hanya mengira plakad di mana Ya atau Tidak direkodkan; delegasi yang tidak hadir dilangkau."
+    },
+    "activeMotion": {
+      "currentMotion": "Gerakan semasa",
+      "motionFallback": "gerakan",
+      "motioner": "Penggerak",
+      "majority": "Majoriti",
+      "majoritySimple": "Mudah",
+      "type": "taip",
+      "timer": "Pemasa",
+      "currentSpeaker": "Pembesar suara semasa",
+      "nextSpeaker": "Penceramah seterusnya",
+      "speakerTimeLeftCap": "Masa pembesar suara (kiri / penutup)",
+      "speakerTimeLeftTotal": "Masa pembesar suara (kiri / jumlah)",
+      "perSpeaker": "(setiap pembesar suara)",
+      "paused": "(jeda)",
+      "pauseReason": "Jeda: {reason}"
+    },
+    "floorStatus": {
+      "sessionTime": "Masa sesi",
+      "sessionNotStarted": "Sesi tidak bermula",
+      "limit": "had",
+      "limitRemaining": "{value} tinggal",
+      "limitOverBy": "berakhir oleh {value}",
+      "quickLinkSession": "Sesi",
+      "quickLinkRoll": "gulung",
+      "quickLinkSpeakers": "Penceramah",
+      "quickLinkMotions": "usul",
+      "quickLinkTimer": "Pemasa",
+      "dais": "Dais",
+      "pinned": "Disemat",
+      "viewFullAnnouncement": "Lihat pengumuman penuh",
+      "timerPausesReadOnly": "Pemasa dijeda (baca sahaja)",
+      "speakerList": "Senarai pembesar suara",
+      "speakerFallback": "Penceramah",
+      "rollCallYou": "Panggilan lancar (anda)",
+      "fullAnnouncement": "Pengumuman penuh",
+      "daisAnnouncement": "Pengumuman Dais",
+      "close": "tutup",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Nama sesi",
+      "sessionNamePlaceholder": "cth. Sesi pagi",
+      "sessionNameSaving": "Menyimpan…",
+      "sessionNameSaved": "Disimpan",
+      "sessionNameHint": "Menyimpan secara automatik dan muncul dalam sejarah sesi.",
+      "title": "Sesi AJK",
+      "subtitle": "Mulakan atau hentikan sesi panitia.",
+      "helpStartStop": "Mulakan pemasa/status sesi jawatankuasa secara langsung untuk semua orang. Berhenti menamatkan sesi dan mengosongkan had masa semasa.",
+      "migrationUnavailable": "Kawalan sesi tidak tersedia buat sementara waktu sehingga migrasi pangkalan data terkini digunakan.",
+      "endTimeInFuture": "Pilih masa tamat pada masa hadapan atau tukar kepada tiada had.",
+      "sessionStartUnavailable": "Cap masa permulaan sesi tidak tersedia sehingga migrasi terkini digunakan.",
+      "endTimeInFutureSetNoLimit": "Pilih masa tamat pada masa hadapan atau tetapkan tiada had.",
+      "sessionLimitUpdated": "Had sesi dikemas kini.",
+      "startedLabel": "Dimulakan:",
+      "timeInLabel": "Masa dalam:",
+      "timeUntilEndLabel": "Masa sehingga tamat:",
+      "overByValue": "berakhir oleh {value}",
+      "modeLabel": "Mod:",
+      "modeStopwatchNoLimit": "Jam randik (tiada had masa)",
+      "sessionNotRunning": "Sesi tidak berjalan.",
+      "sessionLimit": "Had sesi",
+      "sessionLimitModesTitle": "Mod had sesi",
+      "sessionLimitModesHelp": "Tiada: tiada penghujung. Belanjawan masa: dikira dari mula. Tamat pada: masa jam tetap dalam zon waktu tempatan anda.",
+      "sessionLimitOptional": "Pilihan.",
+      "noneLabel": "tiada",
+      "noneDescription": "berjalan sehingga anda berhenti.",
+      "timeBudgetLabel": "Bajet masa",
+      "timeBudgetDescription": "dikira dari saat anda mula.",
+      "endTimeLabel": "Masa tamat",
+      "endTimeDescription": "menggunakan masa jam tetap (mengatasi belanjawan jika kedua-duanya pernah ditetapkan).",
+      "noneIndefinite": "Tiada (tidak pasti)",
+      "noneScheduledEndHint": "Tiada penamat yang dijadualkan; hanya masa berlalu ditunjukkan.",
+      "timeBudgetFromStart": "Belanjawan masa dari mula",
+      "hoursLabel": "jam",
+      "minutesLabel": "minit",
+      "minimumOneMinute": "(minimum 1 minit)",
+      "endAtLocalTime": "Tamat pada (waktu tempatan)",
+      "stopSession": "Hentikan sesi",
+      "saveLimit": "Jimat had",
+      "saveLimitHelp": "Menggunakan tetapan had yang dikemas kini semasa sesi sedang berjalan, tanpa menghentikan sesi.",
+      "startSession": "Mulakan sesi",
+      "sidebarUsePrefix": "Gunakan bar sisi untuk",
+      "rollCall": "Roll call",
+      "speakers": "Penceramah",
+      "formalMotions": "usul rasmi",
+      "timer": "Pemasa",
+      "sidebarAnd": "dan",
+      "announcements": "Pengumuman",
+      "sidebarUseSuffix": "— satu alat setiap tab.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Sejarah sesi",
+      "savedCount": "{count} disimpan",
+      "permissionsHint": "Kerusi boleh menamakan semula penyertaan. SMT/Admin boleh menamakan semula dan memadam entri.",
+      "empty": "Tiada sejarah sesi lagi.",
+      "rename": "Namakan semula",
+      "delete": "Padam",
+      "deleteConfirm": "Padamkan sesi ini daripada sejarah?",
+      "sessionNamePrompt": "Nama sesi",
+      "rangeClosed": "{range}",
+      "rangeOngoing": "{range} -> Sedang berlangsung"
+    },
+    "timerPage": {
+      "title": "Pemasa",
+      "controlsTitle": "Kawalan pemasa",
+      "controlsHelp": "Gunakan lantai Umum untuk masa perbahasan keseluruhan, atau undian Usul untuk mengikat keterlihatan pada item undian terbuka tertentu.",
+      "tabSetup": "1) Persediaan",
+      "tabClock": "2) Kawalan jam",
+      "tabNotes": "3) Nota ucapan",
+      "tabLog": "4) Jeda log",
+      "setupHelp": "Pilih sama ada pemasa ini untuk tingkat umum (sentiasa kelihatan kepada perwakilan) atau terikat dengan usul terbuka untuk pengundian (perwakilan hanya melihatnya semasa undian itu adalah item aktif). Dengan masa setiap pembesar suara dihidupkan, jam kekal kelihatan semasa kaukus sederhana tanpa mengira. Jeda jam / Mulakan pembekuan jam atau sambung kira detik. Tetapkan masa Speaker (baki) dan Jumlah masa secara berasingan, kemudian Simpan pemasa. Pratetap mengisi kedua-duanya dengan panjang yang sama; anda boleh mengedit mana-mana medan selepas itu. Jeda dilog dengan alasan yang singkat.",
+      "namedPreset": "Pratetap bernama",
+      "applyPreset": "Gunakan pratetap...",
+      "floorLabelDelegates": "Label lantai (wakil)",
+      "floorLabelPlaceholder": "cth. GSL 60an",
+      "timerPurpose": "Tujuan pemasa",
+      "purposeGeneralFloor": "Perbahasan umum / lantai (tidak terikat dengan undian)",
+      "purposeMotionVote": "Gerakan terbuka - pemasa hanya semasa undian itu aktif di atas lantai",
+      "openMotionForVoting": "Usul terbuka (mesti terbuka untuk mengundi)",
+      "selectMotion": "Pilih gerakan...",
+      "untitled": "Tidak bertajuk",
+      "noOpenMotionWarning": "Tiada usul terbuka untuk mengundi. Buka undian dahulu, atau tukar tujuan kepada tingkat umum.",
+      "clock": "jam",
+      "running": "Berlari",
+      "paused": "Dijeda",
+      "saveToEnablePauseStart": "simpan pemasa untuk membolehkan jeda/mula.",
+      "pauseReasonLogged": "Jeda sebab (dilog)",
+      "pauseReasonPlaceholder": "cth. Titik tertib, isu teknologi, kaukus tidak dikendalikan...",
+      "pauseClock": "Jeda jam",
+      "startClock": "Mulakan jam",
+      "euTimerBoardTitle": "Papan pemasa Parlimen EU (11 pemasa)",
+      "euTimerBoardHelp": "Satu pemasa setiap parti, ditambah Jumlah masa, masa POI/POC dan masa Speaker. Gunakan Guna untuk menyalin baris ke dalam medan pemasa langsung pada tab Jam (masa pembesar suara / Simpan pemasa).",
+      "euTimerName": "Nama",
+      "euTimerTag": "Tag",
+      "euTotalTime": "Jumlah masa",
+      "euPoiPocTime": "Masa POI / POC",
+      "euSpeakerTime": "Masa pembesar suara",
+      "perSpeakerTitle": "Masa per-speaker (kaukus sederhana)",
+      "perSpeakerHelp": "Tetapkan Jumlah masa sebagai had per-speaker dan masa Speaker sebagai baki masa; Maju beralih ke pembesar suara seterusnya dan menetapkan semula yang tinggal pada penutup.",
+      "currentSpeaker": "Pembesar suara semasa",
+      "nextSpeaker": "Penceramah seterusnya",
+      "speechNotesCurrentSpeaker": "Nota ucapan (penceramah semasa)",
+      "speechNotesHelp": "Nota terikat pada teks pemasa pembesar suara Semasa dan, apabila senarai pembesar suara mempunyai seseorang menandakan Semasa, perwakilan mereka disimpan untuk rujukan.",
+      "timerFloorLabel": "Pemasa (lantai):",
+      "speakerListCurrent": "Senarai pembesar suara (semasa):",
+      "noCurrentDelegation": "Tiada perwakilan ditanda Semasa pada senarai pembesar suara.",
+      "note": "Nota",
+      "notePlaceholder": "Mata, POI, nada, susulan...",
+      "saveSpeechNote": "Simpan nota ucapan",
+      "recentNotes": "Nota terbaru anda (jawatankuasa ini)",
+      "delete": "Padam",
+      "speakerTimeRemaining": "Masa pembesar suara (baki)",
+      "remainingHelpPerSpeaker": "Undur untuk pembesar suara semasa (ditetapkan semula apabila anda Maju).",
+      "remainingHelpNormal": "Kira detik untuk pembesar suara semasa (boleh kurang daripada jumlah).",
+      "totalTime": "Jumlah masa",
+      "totalHelpPerSpeaker": "Tudung per-speaker (penyebut di atas lantai; Isi semula pendahuluan yang tinggal untuk ini).",
+      "totalHelpNormal": "Panjang penuh segmen pemasa ini (ditunjukkan selepas garis miring pada lantai).",
+      "saveTimer": "Simpan pemasa",
+      "advanceSpeakerReset": "Majukan pembesar suara dan tetapkan semula jam",
+      "recentPauseLog": "Log jeda baru-baru ini",
+      "noPauseEvents": "Tiada acara jeda dilog lagi untuk jawatankuasa ini.",
+      "openPauseLogHint": "Buka log Jeda untuk menyemak sebab jeda dan cap masa yang direkodkan.",
+      "saved": "Pemasa disimpan.",
+      "savedCapped": "Pemasa disimpan. Masa pembesar suara lebih lama daripada jumlah keseluruhan; dihadkan kepada jumlah.",
+      "alreadyPaused": "Pemasa sudah dijeda.",
+      "pausedForCommittee": "Pemasa berhenti seketika untuk jawatankuasa.",
+      "alreadyRunning": "Pemasa sudah berjalan.",
+      "runningForCommittee": "Pemasa berjalan untuk jawatankuasa."
     }
   }
 }

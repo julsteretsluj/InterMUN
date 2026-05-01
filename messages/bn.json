@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "প্রথমে বিবৃতির জন্য মোশন ফ্লোর খুলুন।",
     "openMotionBlocksRecording": "একটি প্রস্তাব ইতিমধ্যেই ভোটের জন্য উন্মুক্ত। আরও বিবৃতি রেকর্ড করার আগে এটি বন্ধ করুন।",
     "statedMotionRecorded": "বিবৃত গতি রেকর্ড করা হয়েছে (এখনও ভোট দেওয়ার জন্য খোলা হয়নি)।",
-    "statedMotionRemoved": "বিবৃত গতি সরানো হয়েছে."
+    "statedMotionRemoved": "বিবৃত গতি সরানো হয়েছে.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "language": {
     "label": "ভাষা",
@@ -595,7 +611,8 @@
     "pointsLog": "• পয়েন্ট লগ",
     "formalMotions": "আনুষ্ঠানিক গতিবিধি",
     "timer": "টাইমার",
-    "smtProfile": "প্রোফাইল"
+    "smtProfile": "প্রোফাইল",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "সুপাবেস কনফিগার করা নেই",
@@ -763,7 +780,8 @@
       "archive": "সংরক্ষণাগার",
       "officialLinks": "অফিসিয়াল লিঙ্ক",
       "roomCode": "রুম কোড",
-      "settings": "সেটিংস"
+      "settings": "সেটিংস",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -829,855 +847,6 @@
       "memberStates": "জাতিসংঘের সদস্য রাষ্ট্রসমূহ",
       "unSystem": "ইউএন সিস্টেম (প্রতিষ্ঠাতা ও সদস্য)",
       "history": "জাতিসংঘের ইতিহাস"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "উৎস যোগ করুন",
-      "sourceUrl": "উৎস URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (প্রস্তাবিত)",
-      "urlHelp": "একটি নতুন Google ডকের জন্য, বোতামটি ব্যবহার করুন এবং এখানে নথির লিঙ্কটি আটকান৷",
-      "titleOptional": "শিরোনাম (ঐচ্ছিক)",
-      "saveChanges": "পরিবর্তনগুলি সংরক্ষণ করুন",
-      "editSource": "উৎস সম্পাদনা করুন",
-      "urlPlaceholderShort": "Google ডক বা অন্য URL",
-      "empty": "এখনো কোনো সূত্র নেই। এটি এখানে খুলতে একটি Google ডক লিঙ্ক যোগ করুন।",
-      "sourceLabel": "উৎস",
-      "openLink": "লিঙ্ক খুলুন",
-      "embedHeading": "উৎস নথি",
-      "notGoogleDoc": "এই URLটি একটি Google ডক নয়৷ এখানে এম্বেড এবং সম্পাদনা করতে একটি docs.google.com/document/d/… লিঙ্ক ব্যবহার করুন; অন্যথায় উপরের লিঙ্কটি খুলুন।"
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "প্রতিনিধিরা সরাসরি অবস্থানের কাগজপত্র আপলোড করতে পারবেন না। অন্য ডকুমেন্ট টাইপ ব্যবহার করুন।",
-      "alertOnlyChairsPositionPaper": "শুধুমাত্র চেয়ার/এসএমটি/অ্যাডমিন পজিশন পেপার আপলোড করতে পারবেন।",
-      "alertOnlySmtChairReport": "শুধুমাত্র SMT/এডমিন চেয়ার রিপোর্ট আপলোড করতে পারেন।",
-      "alertOnlySmtRop": "শুধুমাত্র এসএমটি/অ্যাডমিনরা RoP নথি আপলোড করতে পারে।",
-      "alertOnlySmtAwardCriteria": "শুধুমাত্র এসএমটি/প্রশাসক পুরস্কারের মানদণ্ডের নথি আপলোড করতে পারেন।",
-      "alertNeedContentOrUrl": "স্থানীয় পাঠ্য সামগ্রী বা একটি Google ডক্স URL যোগ করুন৷",
-      "confirmDelete": "এই নথিটি মুছবেন?",
-      "delegatePrepTitle": "প্রস্তুতি নথি বিভাগ",
-      "delegatePrepBody": "আপনি সরাসরি এই পৃষ্ঠা থেকে আপনার নিজস্ব <prep>প্রস্তুতি নথি</prep> আপলোড, দেখতে এবং সম্পাদনা করতে পারেন।",
-      "positionPaperGuideTitle": "পজিশন পেপার গাইড",
-      "positionPaperGuideBlurb": "চূড়ান্ত PDF প্রস্তুত করার সময় স্থানধারক নির্দেশিকা ডাউনলোড করুন।",
-      "downloadPlaceholderGuide": "প্লেসহোল্ডার গাইড ডাউনলোড করুন",
-      "addDocument": "ডকুমেন্ট যোগ করুন",
-      "tabs": {
-        "ariaLabel": "নথি বিভাগ",
-        "library": "লাইব্রেরি",
-        "compose": "রচনা করুন",
-        "composeHint": "একটি নতুন দস্তাবেজ শুরু করুন বা এই ট্যাব থেকে একটি বিদ্যমান খসড়া সম্পাদনা করুন৷"
-      },
-      "newDocumentTitle": "নতুন নথি",
-      "editDocumentTitle": "নথি সম্পাদনা করুন",
-      "typeLabel": "টাইপ",
-      "types": {
-        "position_paper": "পজিশন পেপার",
-        "chair_report": "চেয়ার রিপোর্ট",
-        "rop": "RoP",
-        "award_criteria": "পুরস্কারের মানদণ্ড",
-        "chair_notes": "চেয়ার নোট",
-        "prep_doc": "প্রস্তুতি নথি"
-      },
-      "delegatePositionPaperNote": "প্রতিক্রিয়া সহ চেয়ার দ্বারা অবস্থানের কাগজপত্র আপলোড করা হয়।",
-      "delegateOwner": "প্রতিনিধি মালিক",
-      "chairRecipient": "চেয়ার প্রাপক",
-      "titleLabel": "শিরোনাম",
-      "titlePlaceholder": "নথির শিরোনাম",
-      "googleDocsUrl": "Google ডক্স URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (অ্যাপ্লিকেশানে দৃশ্য/সম্পাদনা এম্বেড করুন)",
-      "googleDocsHelp": "একটি নতুন ট্যাবে Google খুলতে নতুন Google ডক ব্যবহার করুন, তারপর ডক লিঙ্কটি এখানে আটকান৷ নিচের প্লেইন টেক্সট ঐচ্ছিক। প্রতিটি নথির স্থানীয় পাঠ্য, একটি Google ডক লিঙ্ক, বা উভয়েরই প্রয়োজন।",
-      "plainTextOptional": "প্লেইন টেক্সট (ঐচ্ছিক)",
-      "plainTextPlaceholder": "নোট বা খসড়া পাঠ্য...",
-      "chairFeedbackLabel": "চেয়ার প্রতিক্রিয়া",
-      "chairFeedbackPlaceholder": "প্রতিনিধি অবস্থানের কাগজের জন্য প্রতিক্রিয়া...",
-      "empty": "এখনো কোনো নথি নেই। একটি যোগ করুন বা একটি Google ডক লিঙ্ক করুন।",
-      "sidebarDocumentLabel": "দলিল",
-      "sections": {
-        "chairReports": "চেয়ার রিপোর্ট",
-        "rop": "RoP",
-        "awardCriteria": "পুরস্কারের মানদণ্ড",
-        "prepDocuments": "প্রস্তুতি নথি",
-        "chairNotes": "চেয়ার নোট",
-        "otherDocuments": "অন্যান্য নথি"
-      },
-      "untitled": "শিরোনামহীন",
-      "linkedDocumentHeading": "লিঙ্কড নথি",
-      "notesHeading": "নোট",
-      "noGoogleDocYet": "এখনও কোনো Google ডক লিঙ্ক করা হয়নি৷ একটি docs.google.com/document/d/… URL যোগ করতে সম্পাদনা ব্যবহার করুন৷",
-      "chairFeedbackHeading": "চেয়ার প্রতিক্রিয়া",
-      "noFeedbackYet": "এখনো কোনো প্রতিক্রিয়া যোগ করা হয়েছে."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "প্রথমে একটি প্রতিনিধি ইমেল লিখুন।",
-      "sentToDelegate": "{email} এ পাঠানো হয়েছে।",
-      "newResolution": "নতুন রেজোলিউশন",
-      "maxDraftResolutions": "এই কমিটির ইতিমধ্যেই {count}টি খসড়া রেজোলিউশন রয়েছে৷",
-      "googleDocLink": "গুগল ডক লিঙ্ক",
-      "googleDocUrlPlaceholder": "Google ডক্স URL (docs.google.com/document/d/… — এম্বেড + সম্পাদনার জন্য ব্যবহৃত)",
-      "googleDocUrlHelp": "নতুন Google ডক অন্য ট্যাবে খোলে; ঠিকানা বার থেকে URL টি অনুলিপি করুন এবং এটি এখানে পেস্ট করুন।",
-      "mainSubmittersPlaceholder": "প্রধান জমাদানকারী (ব্যবহারকারীর আইডি, কমা দ্বারা পৃথক করা)",
-      "coSubmittersPlaceholder": "সহ জমাকারীরা (ব্যবহারকারী আইডি, কমা দ্বারা পৃথক করা)",
-      "create": "তৈরি করুন",
-      "cancel": "বাতিল করুন",
-      "openInNewTab": "নতুন ট্যাবে খুলুন",
-      "noGoogleDocLink": "কোন Google ডক লিঙ্ক নেই",
-      "visibleToOtherBloc": "অন্য ব্লকের কাছে দৃশ্যমান",
-      "resolutionCounts": "প্রধান সদস্য: {প্রধান} | সহ-সদস্য: {co} | স্বাক্ষরকারী: {signatories}",
-      "blocButton": "ব্লক {name} ({stance})",
-      "signVirtually": "কার্যত সাইন ইন করুন (প্রধান সদস্যদের বিজ্ঞপ্তি দেওয়া হয়েছে)",
-      "shareByEmail": "ইমেলের মাধ্যমে রেজোলিউশন শেয়ার করুন",
-      "delegateEmailPlaceholder": "delegate@email.com",
-      "sendToDelegate": "প্রতিনিধি পাঠান",
-      "clauseEditor": "ধারা সম্পাদক",
-      "noClausesYet": "এখনও কোন ধারা.",
-      "clauseNumber": "ধারা {সংখ্যা}",
-      "saveClause": "ধারা সংরক্ষণ করুন",
-      "delete": "মুছুন",
-      "addClausePlaceholder": "একটি নতুন ধারা যোগ করুন...",
-      "addClause": "ধারা যোগ করুন",
-      "clauseVoteHistory": "ধারা ভোটের ইতিহাস",
-      "noClauseOutcomesYet": "এখনও কোন রেকর্ড করা ধারা ভোট ফলাফল.",
-      "clauseFallback": "ধারা",
-      "passed": "উত্তীর্ণ",
-      "failed": "ব্যর্থ হয়েছে",
-      "motionId": "গতি {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "ভোটিং বিভাগ",
-        "open": "খোলা",
-        "closed": "বন্ধ"
-      },
-      "requiredMajority": "সংখ্যাগরিষ্ঠতা প্রয়োজন",
-      "helpRequiredMajorityTitle": "সংখ্যাগরিষ্ঠতা প্রয়োজন",
-      "helpRequiredMajorityBody": "পাস/ফেল করার সিদ্ধান্ত নিতে ব্যবহৃত ভোটের থ্রেশহোল্ড বেছে নিন। 'সহজ' অর্ধেকেরও বেশি। `2/3`-এর জন্য একটি অতিসংখ্যার প্রয়োজন।",
-      "majoritySimple": "সরল",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} সংখ্যাগরিষ্ঠ",
-      "mustVote": "ভোট দিতে হবে",
-      "helpMustVoteTitle": "ভোট দিতে হবে",
-      "helpMustVoteBody": "এই গতিকে \"অবশ্যই ভোট\" আইটেম হিসাবে চিহ্নিত করে৷ এটি অংশগ্রহণকারীদের (আপনার কমিটির সেটআপের উপর নির্ভর করে) প্রয়োজনীয়তার সাথে যোগাযোগ করতে ব্যবহৃত হয়।",
-      "saveSettings": "সেটিংস সংরক্ষণ করুন",
-      "delegateBlurb": "মঞ্চ সেশনে ভোট রেকর্ড করে (যেমন রোল কল)। এখানে মোশন ভোট শুধুমাত্র হ্যাঁ/না অনুসরণ করে (ব্যবহার করা হয় না)। আপনি ট্যালি অনুসরণ করতে পারেন; প্রতিনিধিরা অ্যাপটিতে ভোট দেবেন না।",
-      "yes": "হ্যাঁ",
-      "no": "না",
-      "ballots": "ব্যালট",
-      "total": "মোট",
-      "outcome": "ফলাফল",
-      "passed": "পাস করেছে",
-      "failed": "ব্যর্থ হয়েছে",
-      "noRecordedVotes": "কোন রেকর্ড করা ভোট",
-      "reopenMotion": "গতি পুনরায় খুলুন",
-      "editRecordOpen": "রেকর্ড সম্পাদনা করুন...",
-      "hideSettings": "সেটিংস লুকান",
-      "preliminaryPassing": "উত্তীর্ণ (প্রাথমিক)",
-      "preliminaryFailing": "ব্যর্থ (প্রাথমিক)",
-      "delegateRollCall": "প্রতিনিধি রোল কল ({count})",
-      "noSeatedDelegates": "এই প্রস্তাবের জন্য উপলভ্য কোনো উপবিষ্ট প্রতিনিধি নেই।",
-      "rollPrefix": "রোল:",
-      "recordedPrefix": "রেকর্ড করা:",
-      "recordedYes": "হ্যাঁ",
-      "recordedNo": "না",
-      "recordedAbstain": "বিরত থাকুন",
-      "recordedNone": "-",
-      "abstain": "বিরত থাকুন",
-      "clear": "পরিষ্কার",
-      "closeMotion": "বন্ধ গতি",
-      "mustVoteBadge": "ভোট দিতে হবে",
-      "canVoteBadge": "ভোট দিতে পারেন",
-      "noMotions": "এখনও কোন গতি নেই.",
-      "currentOpenMotion": "বর্তমান খোলা গতি",
-      "noOpenMotion": "এখন কোন খোলা গতি নেই.",
-      "recentClosedMotions": "সাম্প্রতিক বন্ধ গতি",
-      "noClosedMotions": "এখনও কোন বন্ধ গতি.",
-      "untitled": "শিরোনামহীন",
-      "voteTypes": {
-        "motion": "গতি",
-        "amendment": "সংশোধন",
-        "resolution": "রেজোলিউশন"
-      },
-      "roll": {
-        "absent": "অনুপস্থিত (রোল)",
-        "present_abstain": "বর্তমান - বিরত থাকতে পারে (রোল)",
-        "present_voting": "বর্তমান এবং ভোটদান (রোল)",
-        "unknown": "— (রোল)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "প্রোফাইল বিভাগ",
-        "overview": "ওভারভিউ",
-        "awards": "পুরস্কার",
-        "private": "ব্যক্তিগত রেকর্ড",
-        "settings": "প্রোফাইল সেটিংস"
-      },
-      "profilePicture": "প্রোফাইল ছবি",
-      "uploadFile": "ফাইল আপলোড করুন",
-      "uploading": "আপলোড হচ্ছে...",
-      "photoSaved": "ছবি আপলোড এবং সংরক্ষিত.",
-      "orUrl": "অথবা URL দ্বারা সেট করুন",
-      "urlPlaceholder": "https://...",
-      "name": "নাম",
-      "username": "ব্যবহারকারীর নাম",
-      "usernamePlaceholder": "যেমন alex_1999",
-      "pronouns": "সর্বনাম",
-      "customPronounNote": "আপনার প্রোফাইলে একটি কাস্টম সর্বনাম সেট ছিল যা এখানে আর গ্রহণযোগ্য নয়৷ উপরে একটি বিকল্প বেছে নিন (বা ফাঁকা ছেড়ে দিন)। সংরক্ষণ পুরানো মান প্রতিস্থাপন.",
-      "school": "স্কুল",
-      "schoolPlaceholder": "যেমন লিংকন হাই স্কুল",
-      "grade": "গ্রেড",
-      "selectGrade": "গ্রেড নির্বাচন করুন",
-      "conferencesAttended": "সম্মেলনে অংশগ্রহণ করেন",
-      "awardsComma": "পুরস্কার (কমা দিয়ে আলাদা করা)",
-      "awardsPlaceholder": "সেরা প্রতিনিধি, সম্মানিত উল্লেখ",
-      "allocation": "বরাদ্দ",
-      "selectAllocation": "বরাদ্দ নির্বাচন করুন",
-      "noAllocationsPlaceholder": "কোন কমিটি বরাদ্দ উপলব্ধ",
-      "saveProfile": "প্রোফাইল সংরক্ষণ করুন",
-      "saved": "প্রোফাইল সংরক্ষিত.",
-      "saveFailed": "প্রোফাইল সংরক্ষণ করা যায়নি.",
-      "errUsernamePattern": "ব্যবহারকারীর নাম অবশ্যই 3-32 অক্ষর হতে হবে (অক্ষর, সংখ্যা, _, ., -)",
-      "errPronounsPreset": "তালিকা থেকে একটি সর্বনাম চয়ন করুন।",
-      "errImageType": "একটি ইমেজ ফাইল চয়ন করুন.",
-      "errImageSize": "ছবি খুব বড় (সর্বোচ্চ 5 MB)।",
-      "errUploadFailed": "আপলোড ব্যর্থ হয়েছে.",
-      "errStorageSetup": "প্রোফাইল ছবি সঞ্চয়স্থান সেট আপ করা হয় না. সুপাবেস প্রকল্পে, মাইগ্রেশন 00100_profile_pictures_storage_bucket.sql চালান, অথবা প্রোফাইল-পিকচার নামে একটি পাবলিক স্টোরেজ বাকেট তৈরি করুন (README দেখুন)।",
-      "errPublicUrl": "আপলোড করা ছবির জন্য সর্বজনীন URL সমাধান করা যায়নি৷",
-      "fallbacks": {
-        "yourCountry": "আপনার দেশ",
-        "committeeSession": "কমিটির অধিবেশন",
-        "delegate": "প্রতিনিধি",
-        "speechNote": "বক্তৃতা নোট",
-        "untitledMotion": "শিরোনামহীন গতি",
-        "dash": "-"
-      },
-      "delegateWelcome": {
-        "title": "স্বাগত প্রতিনিধি {পতাকা} {দেশ}",
-        "subtitle": "আপনি কি দিয়ে শুরু করতে চান?",
-        "links": {
-          "documents": "নথিপত্র",
-          "notes": "নোট",
-          "committeeRoom": "কমিটি রুম",
-          "runningNotes": "চলমান নোট",
-          "ideas": "ধারনা",
-          "guides": "গাইড",
-          "sources": "সূত্র",
-          "resolutions": "রেজুলেশন",
-          "speeches": "বক্তৃতা",
-          "stances": "অবস্থান",
-          "crisisSlides": "ক্রাইসিস স্লাইড",
-          "report": "রিপোর্ট",
-          "motions": "গতিবিধি",
-          "points": "পয়েন্ট"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "আপনার প্রোফাইলে পুরস্কার",
-        "rank": "পদ {র্যাঙ্ক}",
-        "pending": {
-          "tab": "মুলতুবি মনোনয়ন",
-          "title": "মুলতুবি চেয়ার মনোনয়ন",
-          "descriptionSingle": "চেয়ার দ্বারা সংরক্ষিত এবং পর্যালোচনার জন্য SMT এর সাথে শেয়ার করুন৷ চূড়ান্ত পুরস্কার নিশ্চিতকরণের পরে নীচে প্রদর্শিত হবে.",
-          "descriptionTabbed": "চেয়ার দ্বারা সংরক্ষিত এবং পর্যালোচনার জন্য SMT এর সাথে শেয়ার করুন৷ চূড়ান্ত পুরস্কার নিশ্চিত করার পরে প্রদর্শিত হবে."
-        },
-        "recorded": {
-          "tab": "রেকর্ড করা পুরস্কার",
-          "title": "রেকর্ড করা পুরস্কার",
-          "description": "যখন চেয়ার বা SMT আপনাকে পুরস্কার ট্র্যাকারে বরাদ্দ করে তখন তালিকাভুক্ত করা হয়। চূড়ান্ত স্বীকৃতি আপনার সম্মেলনের নিয়ম অনুসরণ করে।"
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "শুধুমাত্র আপনার কাছে দৃশ্যমান, কমিটির চেয়ার এবং প্রাসঙ্গিক কমিটির জন্য SMT।",
-        "points": {
-          "title": "চেয়ার পয়েন্ট (ব্যক্তিগত)"
-        },
-        "speechNotes": {
-          "title": "চেয়ার বক্তৃতা নোট (ব্যক্তিগত)"
-        },
-        "motions": {
-          "title": "আপনি সরানো গতি",
-          "description": "কমিটির পর্যালোচনা এবং SMT তত্ত্বাবধানের জন্য আপনার প্রোফাইলে সংরক্ষিত।"
-        }
-      },
-      "discipline": {
-        "title": "শৃঙ্খলামূলক অবস্থা (ব্যক্তিগত)",
-        "statusLine": "সতর্কতা: {সতর্কতা} · স্ট্রাইক: {স্ট্রাইক}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
-        "votingDisabled": "ভোট প্রদান নিষ্ক্রিয়",
-        "speakingSuspended": "কথা বলা স্থগিত",
-        "removedFromCommittee": "কমিটি থেকে অপসারিত",
-        "updated": "আপডেট করা হয়েছে: {value}"
-      },
-      "preview": {
-        "ariaLabel": "প্রোফাইল প্রিভিউ",
-        "title": "পূর্বরূপ",
-        "yourName": "তোমার নাম",
-        "usernameNotSet": "ব্যবহারকারীর নাম সেট করা হয়নি",
-        "gradeValue": "গ্রেড {grade}",
-        "awards": "পুরস্কার"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "পদ্ধতির নিয়ম (RoP)",
-          "content": "# পদ্ধতির নিয়ম \n\n## পয়েন্ট এবং মোশন \n- **পয়েন্ট অফ অর্ডার**: সঠিক পদ্ধতি \n- **পয়েন্ট অফ ইনফরমেশন**: স্পিকারের কাছে প্রশ্ন \n- **ব্যক্তিগত সুবিধার পয়েন্ট**: ব্যক্তিগত আরাম \n- **টেবিল মোশন**: বিতর্ক স্থগিত করুন \n- **মোশন টু মুলতুবি**: সেশন শেষ করুন \n\n## ভোট \n- পদ্ধতিগত বিষয়ের জন্য সহজ সংখ্যাগরিষ্ঠ \n- মূল বিষয়ের জন্য 2/3 সংখ্যাগরিষ্ঠ \n- অনুরোধ করা হলে রোল-কল ভোট"
-        },
-        "examples": {
-          "title": "উদাহরণ",
-          "content": "# উদাহরণ \n\n## রেজোলিউশন ফরম্যাট \n``` \nসাধারণ পরিষদ, \n... \n1. সদস্য দেশগুলোর প্রতি আহ্বান... \n2. আন্তর্জাতিক সম্প্রদায়কে অনুরোধ করে... \n``` \n\n## অবস্থানের কাগজের কাঠামো \n1. পটভূমি \n2. দেশের নীতি \n3. প্রস্তাবিত সমাধান"
-        },
-        "templates": {
-          "title": "টেমপ্লেট",
-          "content": "# টেমপ্লেট \n\n## চেয়ার রিপোর্ট টেমপ্লেট \n- কমিটি ওভারভিউ \n- মূল আলোচনার পয়েন্ট \n- রেজুলেশন পাস হয়েছে \n- সুপারিশ"
-        },
-        "chairReport": {
-          "title": "চেয়ার রিপোর্ট",
-          "content": "#চেয়ার রিপোর্ট \n\nডকুমেন্ট কমিটির কার্যক্রম এবং ফলাফল এখানে."
-        }
-      },
-      "edit": "সম্পাদনা করুন",
-      "guideDocument": "গাইড ডকুমেন্ট",
-      "additionalNotes": "অতিরিক্ত নোট",
-      "noContentYet": "কোন বিষয়বস্তু এখনও.",
-      "titlePlaceholder": "শিরোনাম",
-      "googleDocsUrl": "Google ডক্স URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "নতুন Google ডক অন্য ট্যাবে খোলে৷ একটি শেয়ারযোগ্য লিঙ্ক পেস্ট করুন যাতে প্রতিনিধিরা এখানে ডক খুলতে পারেন (দেখুন/সম্পাদনা Google ভাগ করার উপর নির্ভর করে)।",
-      "markdownOptional": "মার্কডাউন নোট (ঐচ্ছিক যদি আপনি একটি Google ডক ব্যবহার করেন)",
-      "save": "সংরক্ষণ করুন",
-      "cancel": "বাতিল করুন",
-      "createNewGuide": "নতুন গাইড তৈরি করুন",
-      "slugPlaceholder": "স্লাগ (অনন্য)",
-      "titleLowerPlaceholder": "শিরোনাম",
-      "googleDocsUrlOptional": "Google ডক্স URL (ঐচ্ছিক)",
-      "markdownContentOptional": "মার্কডাউন সামগ্রী (ঐচ্ছিক)",
-      "create": "তৈরি করুন",
-      "glossary": {
-        "title": "MUN এজেন্ডা শব্দকোষ",
-        "subtitle": "আপনার কমিটির কোড এবং বর্তমান এজেন্ডার বিষয়গুলির সাথে মিলিত অনন্য পরিভাষা।",
-        "committeeCode": "কমিটির কোড: {code}",
-        "topicTag": "বিষয়: {topic}",
-        "sources": {
-          "core": "মূল",
-          "committee": "কমিটি",
-          "topic": "বিষয়"
-        },
-        "terms": {
-          "delegation": {
-            "term": "প্রতিনিধি দল",
-            "definition": "কমিটিতে একটি রাষ্ট্র বা সত্তার প্রতিনিধিত্বকারী একটি দেশ বা পর্যবেক্ষক দল।"
-          },
-          "placard": {
-            "term": "প্ল্যাকার্ড",
-            "definition": "দেশের চিহ্ন মেঝে, ভোট এবং সংকেত পদ্ধতিগত গতির অনুরোধ করতে ব্যবহৃত হয়।"
-          },
-          "dais": {
-            "term": "ডাইস",
-            "definition": "দলের সভাপতিত্ব করে যারা বিতর্ককে নিয়ন্ত্রণ করে, পদ্ধতি প্রয়োগ করে এবং কথা বলার ক্রম পরিচালনা করে।"
-          },
-          "quorum": {
-            "term": "কোরাম",
-            "definition": "আনুষ্ঠানিক ব্যবসা এবং ভোট পরিচালনার জন্য ন্যূনতম সংখ্যক প্রতিনিধি দলের প্রয়োজন।"
-          },
-          "motion": {
-            "term": "গতি",
-            "definition": "বিতর্কের প্রবাহ পরিবর্তনের জন্য আনুষ্ঠানিক প্রস্তাব, যেমন ককাসের ধরন বা কথা বলার সময়।"
-          },
-          "point_of_order": {
-            "term": "পয়েন্ট অফ অর্ডার",
-            "definition": "কমিটির নিয়মের অধীনে পদ্ধতিটি ভুলভাবে প্রয়োগ করা হলে হস্তক্ষেপ।"
-          },
-          "moderated_caucus": {
-            "term": "মডারেটেড ককাস",
-            "definition": "একটি সংজ্ঞায়িত উপবিষয়ক স্বল্প সময়ের বক্তৃতা সহ স্ট্রাকচার্ড বিতর্ক সেগমেন্ট।"
-          },
-          "unmoderated_caucus": {
-            "term": "আনমডারেটেড ককাস",
-            "definition": "অনানুষ্ঠানিক আলোচনার সময়কাল যেখানে প্রতিনিধিরা স্বাধীনভাবে খসড়া এবং ধারণা একত্রিত করতে যান।"
-          },
-          "draft_resolution": {
-            "term": "খসড়া রেজোলিউশন",
-            "definition": "চূড়ান্ত ভোট গ্রহণ এবং গ্রহণের আগে প্রস্তাবিত কমিটির কর্মকাণ্ডের ওয়ার্কিং টেক্সট।"
-          },
-          "amendment": {
-            "term": "সংশোধন",
-            "definition": "খসড়া টেক্সট পরিবর্তন প্রস্তাবিত, হয় বন্ধুত্বপূর্ণ বা বন্ধুত্বপূর্ণ হিসাবে ভোট."
-          },
-          "operative_clause": {
-            "term": "অপারেটিভ ক্লজ",
-            "definition": "কমিটি কী করার প্রস্তাব দেয় তা বর্ণনা করে অ্যাকশন-ভিত্তিক সংখ্যাযুক্ত ধারা।"
-          },
-          "preambulatory_clause": {
-            "term": "Preambulatory Clause",
-            "definition": "পটভূমি নীতি, উদ্বেগ, এবং পূর্ববর্তী কাঠামো উদ্ধৃত করে প্রসঙ্গ-সেটিং ধারা।"
-          },
-          "right_of_reply": {
-            "term": "উত্তরের অধিকার",
-            "definition": "প্রতিনিধিদলের মর্যাদা বা অবস্থানকে প্রভাবিত করে এমন একটি সরাসরি বিবৃতিতে প্রতিক্রিয়া জানানোর সুযোগ।"
-          },
-          "veto_power": {
-            "term": "ভেটো ক্ষমতা",
-            "definition": "মূল খসড়া রেজুলেশন ব্লক করার জন্য UNSC স্থায়ী-সদস্য কর্তৃপক্ষ।"
-          },
-          "chapter_vii": {
-            "term": "সপ্তম অধ্যায়",
-            "definition": "শান্তির জন্য হুমকি, নিষেধাজ্ঞা, এবং বল প্রয়োগের ব্যবস্থা নিয়ে জাতিসংঘের চার্টার কর্তৃপক্ষ।"
-          },
-          "sanctions_regime": {
-            "term": "নিষেধাজ্ঞা শাসন",
-            "definition": "সমন্বিত বিধিনিষেধ সরাসরি সামরিক পদক্ষেপ ছাড়াই আচরণকে প্রভাবিত করতে ব্যবহৃত হয়।"
-          },
-          "arms_control": {
-            "term": "অস্ত্র নিয়ন্ত্রণ",
-            "definition": "চুক্তি এবং যাচাইকরণ ব্যবস্থা যা অস্ত্রের ধরন, পরিমাণ বা স্থাপনা সীমিত করে।"
-          },
-          "non_proliferation": {
-            "term": "অপ্রসারণ",
-            "definition": "পারমাণবিক, রাসায়নিক, জৈবিক, বা উন্নত অস্ত্র ক্ষমতার বিস্তার রোধ করার নীতি।"
-          },
-          "confidence_building_measures": {
-            "term": "আত্মবিশ্বাস-বিল্ডিং ব্যবস্থা",
-            "definition": "স্বচ্ছতা এবং যোগাযোগের সরঞ্জাম যা ভুল বোঝাবুঝি এবং সংঘর্ষের ঝুঁকি কমায়।"
-          },
-          "universal_periodic_review": {
-            "term": "সার্বজনীন পর্যায়ক্রমিক পর্যালোচনা",
-            "definition": "পিয়ার-রিভিউ প্রক্রিয়া যেখানে প্রতিটি জাতিসংঘের সদস্য রাষ্ট্র রিপোর্ট করে এবং অধিকার সুপারিশ গ্রহণ করে।"
-          },
-          "special_rapporteur": {
-            "term": "বিশেষ প্রতিবেদক",
-            "definition": "থিম্যাটিক বা দেশের অধিকার সংক্রান্ত বিষয়গুলির উপর নজরদারি এবং রিপোর্ট করার জন্য স্বাধীন বিশেষজ্ঞ নিয়োগ করা হয়েছে।"
-          },
-          "treaty_body": {
-            "term": "সন্ধি সংস্থা",
-            "definition": "একটি নির্দিষ্ট মানবাধিকার চুক্তির বাস্তবায়ন তদারকিকারী বিশেষজ্ঞদের কমিটি।"
-          },
-          "public_health_emergency": {
-            "term": "জনস্বাস্থ্য জরুরী",
-            "definition": "গুরুতর প্রাদুর্ভাবের ঘটনার জন্য জরুরি সমন্বিত জাতীয় ও আন্তর্জাতিক প্রতিক্রিয়া প্রয়োজন।"
-          },
-          "surveillance": {
-            "term": "এপিডেমিওলজিকাল নজরদারি",
-            "definition": "রোগের প্রবণতা সনাক্ত এবং ট্র্যাক করতে স্বাস্থ্য তথ্যের ক্রমাগত সংগ্রহ এবং বিশ্লেষণ।"
-          },
-          "health_systems": {
-            "term": "স্বাস্থ্য সিস্টেম শক্তিশালীকরণ",
-            "definition": "নির্ভরযোগ্য স্বাস্থ্যসেবা সরবরাহের জন্য কর্মীবাহিনী, অর্থায়ন, রসদ এবং শাসন ব্যবস্থার উন্নতি।"
-          },
-          "transnational_crime": {
-            "term": "ট্রান্সন্যাশনাল অর্গানাইজড ক্রাইম",
-            "definition": "নেটওয়ার্ক এবং অবৈধ বাজারের মাধ্যমে সীমান্ত জুড়ে অপরাধমূলক কার্যকলাপ সমন্বিত।"
-          },
-          "illicit_trafficking": {
-            "term": "অবৈধ পাচার",
-            "definition": "এখতিয়ার জুড়ে মাদক, অস্ত্র, ব্যক্তি বা পণ্যের অবৈধ চলাচল।"
-          },
-          "rule_of_law_capacity": {
-            "term": "আইনের শাসন ক্ষমতা",
-            "definition": "বিচার ব্যবস্থার প্রাতিষ্ঠানিক ক্ষমতা তদন্ত, বিচার এবং ন্যায্যভাবে অধিকার রক্ষা করতে।"
-          },
-          "sustainable_development": {
-            "term": "টেকসই উন্নয়ন",
-            "definition": "সামাজিক অগ্রগতি, অর্থনৈতিক সুযোগ, এবং পরিবেশগত সুরক্ষার ভারসাম্য বজায় রাখা বৃদ্ধির মডেল।"
-          },
-          "financing_for_development": {
-            "term": "উন্নয়নের জন্য অর্থায়ন",
-            "definition": "সরকারী এবং বেসরকারী অর্থায়ন প্রক্রিয়া যা দীর্ঘমেয়াদী উন্নয়ন অগ্রাধিকার সমর্থন করে।"
-          },
-          "policy_coordination": {
-            "term": "নীতি সমন্বয়",
-            "definition": "নকল এড়াতে এবং সম্মিলিত প্রভাব বাড়ানোর জন্য রাষ্ট্র এবং সংস্থার কর্মের সারিবদ্ধতা।"
-          },
-          "child_protection": {
-            "term": "শিশু সুরক্ষা",
-            "definition": "সমস্ত সেটিংসে শিশুদের বিরুদ্ধে শোষণ, অপব্যবহার এবং সহিংসতা প্রতিরোধের ব্যবস্থা।"
-          },
-          "education_access": {
-            "term": "শিক্ষা অ্যাক্সেস",
-            "definition": "সমস্ত শিশুর জন্য অন্তর্ভুক্তিমূলক, ন্যায়সঙ্গত এবং অবিচ্ছিন্ন শেখার সুযোগ নিশ্চিত করা।"
-          },
-          "humanitarian_response": {
-            "term": "মানবিক প্রতিক্রিয়া",
-            "definition": "দ্রুত ত্রাণ কর্ম সঙ্কট এবং দ্বন্দ্ব সেটিংস মধ্যে জরুরী প্রয়োজন মোকাবেলা."
-          },
-          "gender_mainstreaming": {
-            "term": "জেন্ডার মেইনস্ট্রিমিং",
-            "definition": "নীতির নকশা, বাস্তবায়ন এবং মূল্যায়নে লিঙ্গ বিশ্লেষণকে একীভূত করা।"
-          },
-          "gender_based_violence": {
-            "term": "লিঙ্গ-ভিত্তিক সহিংসতা",
-            "definition": "লিঙ্গ পরিচয়, ভূমিকা বা অসম ক্ষমতা সম্পর্কের উপর ভিত্তি করে কাউকে আঘাত করা।"
-          },
-          "economic_empowerment": {
-            "term": "অর্থনৈতিক ক্ষমতায়ন",
-            "definition": "শালীন কাজ, অর্থ, মালিকানা এবং সিদ্ধান্ত নেওয়ার ক্ষমতার অ্যাক্সেস প্রসারিত করা।"
-          },
-          "source_attribution": {
-            "term": "উৎস অ্যাট্রিবিউশন",
-            "definition": "তথ্যের উত্স স্পষ্টভাবে উল্লেখ করা যাতে দাবিগুলি যাচাই করা যায় এবং প্রাসঙ্গিক করা যায়।"
-          },
-          "verified_reporting": {
-            "term": "যাচাইকৃত রিপোর্টিং",
-            "definition": "প্রতিদ্বন্দ্বিতাপূর্ণ তথ্য প্রকাশ করার আগে সাংবাদিকতার মানদণ্ডের অনুমোদন প্রয়োজন।"
-          },
-          "editorial_independence": {
-            "term": "সম্পাদকীয় স্বাধীনতা",
-            "definition": "রাজনৈতিক চাপ বা স্টেকহোল্ডারদের প্রভাব থেকে রিপোর্টিং সিদ্ধান্তের পৃথকীকরণ।"
-          },
-          "climate_mitigation": {
-            "term": "জলবায়ু প্রশমন",
-            "definition": "গ্রীনহাউস-গ্যাস নির্গমন কমায় বা দীর্ঘমেয়াদী কার্বন অপসারণ বাড়ায় এমন কর্ম।"
-          },
-          "climate_adaptation": {
-            "term": "জলবায়ু অভিযোজন",
-            "definition": "নীতি এবং বিনিয়োগ যা জলবায়ু-সম্পর্কিত প্রভাবগুলির দুর্বলতা হ্রাস করে৷"
-          },
-          "cyber_norms": {
-            "term": "সাইবার নিয়ম",
-            "definition": "ডিজিটাল এবং সাইবার ডোমেনে দায়িত্বশীল রাষ্ট্রীয় আচরণের জন্য শেয়ার করা প্রত্যাশা।"
-          },
-          "critical_infrastructure": {
-            "term": "ক্রিটিক্যাল ইনফ্রাস্ট্রাকচার",
-            "definition": "প্রয়োজনীয় সিস্টেম যেমন বিদ্যুৎ, জল, স্বাস্থ্য, এবং যোগাযোগের স্থিতিস্থাপকতা প্রয়োজন।"
-          },
-          "epidemiology": {
-            "term": "এপিডেমিওলজি",
-            "definition": "রোগের ধরণ, কারণ এবং জনসংখ্যার মধ্যে বিতরণের অধ্যয়ন।"
-          },
-          "preparedness_response": {
-            "term": "প্রস্তুতি এবং প্রতিক্রিয়া",
-            "definition": "জরুরী অবস্থা ধারণ ও পরিচালনার জন্য পরিকল্পনা, সমন্বয় এবং বৃদ্ধি কর্ম।"
-          },
-          "non_refoulement": {
-            "term": "নন-রিফাউলমেন্ট",
-            "definition": "নীতিটি লোকেদের এমন জায়গায় ফিরে আসা নিষিদ্ধ করে যেখানে তারা গুরুতর ক্ষতির সম্মুখীন হয়।"
-          },
-          "durable_solutions": {
-            "term": "টেকসই সমাধান",
-            "definition": "বাস্তুচ্যুত মানুষের জন্য দীর্ঘমেয়াদী ফলাফল: প্রত্যাবর্তন, স্থানীয় একীকরণ, বা পুনর্বাসন।"
-          },
-          "nuclear_safeguards": {
-            "term": "নিউক্লিয়ার সেফগার্ডস",
-            "definition": "অস্ত্র ব্যবহারের জন্য পারমাণবিক উপকরণগুলিকে অন্য দিকে সরিয়ে না দেওয়া নিশ্চিত করার জন্য যাচাইকরণ ব্যবস্থা।"
-          },
-          "counter_terrorism": {
-            "term": "কাউন্টার টেররিজম",
-            "definition": "সন্ত্রাসী কার্যকলাপের বিরুদ্ধে সমন্বিত আইনি, প্রতিরোধমূলক এবং নিরাপত্তা ব্যবস্থা।"
-          },
-          "due_process": {
-            "term": "ডিউ প্রসেস",
-            "definition": "তদন্ত, প্রসিকিউশন এবং অনুমোদনের সময় অধিকার রক্ষাকারী ন্যায্য আইনি প্রক্রিয়া।"
-          },
-          "resource_security": {
-            "term": "সম্পদ নিরাপত্তা",
-            "definition": "অর্থনৈতিক এবং পরিবেশগত চাপের অধীনে খাদ্য, জল এবং শক্তিতে নির্ভরযোগ্য অ্যাক্সেস।"
-          },
-          "resilience": {
-            "term": "স্থিতিস্থাপকতা",
-            "definition": "ধাক্কা শোষণ এবং কার্যকরভাবে পুনরুদ্ধার করার জন্য সম্প্রদায় এবং প্রতিষ্ঠানের ক্ষমতা।"
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "ধারণা সম্পাদনা করুন",
-      "googleDocsUrl": "Google ডক্স URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "সংক্ষিপ্ত ধারণা পাঠ্য (ঐচ্ছিক)",
-      "save": "সংরক্ষণ করুন",
-      "cancel": "বাতিল করুন",
-      "addIntro": "জায়গায় একটি রেজোলিউশন ধারণা খসড়া করতে একটি Google ডক যোগ করুন, বা একটি ছোট নোট (বা উভয়) টাইপ করুন।",
-      "googleDocsCreateHelp": "নতুন Google ডক অন্য ট্যাবে খোলে; লিঙ্কটি তৈরি হওয়ার পরে এখানে পেস্ট করুন।",
-      "resolutionIdeaPlaceholder": "সমাধান ধারণা...",
-      "add": "যোগ করুন",
-      "noIdeasYet": "এখনও কোন ধারণা.",
-      "ideaLabel": "আইডিয়া",
-      "ideaFallback": "ধারণা {সংখ্যা}",
-      "linkedDoc": "লিঙ্কড ডক",
-      "addedOn": "যোগ করা হয়েছে {তারিখ}",
-      "edit": "সম্পাদনা করুন",
-      "delete": "মুছুন",
-      "ideaDocument": "ধারণা দলিল",
-      "summary": "সারাংশ",
-      "emptyIdea": "খালি ধারণা।"
-    },
-    "stances": {
-      "heatmapTitle": "সংক্ষিপ্ত অবস্থান ওভারভিউ (হিটম্যাপ)",
-      "heatmapHelp": "আপনার বরাদ্দ কতটা ___ সমর্থন করে? (1-5 স্কেল)",
-      "topicPlaceholder": "যেমন জলবায়ু কর্ম",
-      "extentLabel": "ব্যাপ্তি (1-5):",
-      "extentHelpTitle": "ব্যাপ্তি (1-5)",
-      "extentHelpBody": "1 মানে আপনার বরাদ্দের বিষয়টির জন্য সামান্য সমর্থন আছে, এবং 5 মানে শক্তিশালী সমর্থন। কমিটিতে আপনার অবস্থানের সাথে মেলে এমন একটি নম্বর বেছে নিন।",
-      "add": "যোগ করুন",
-      "viewOnlyHeatmap": "কর্মীদের জন্য শুধুমাত্র দেখার হিটম্যাপ।",
-      "notesPerAllocation": "বরাদ্দ প্রতি নোট",
-      "noAllocationsYet": "এখনো কোনো বরাদ্দ নেই",
-      "notesPlaceholder": "এই বরাদ্দের জন্য স্ট্যান্স নোট...",
-      "noteLanguageWarning": "পাঠক সতর্কতা: এই নোটে অনুপযুক্ত ভাষা থাকতে পারে।",
-      "save": "সংরক্ষণ করুন",
-      "saveHelpTitle": "অবস্থান নোট সংরক্ষণ করুন",
-      "saveHelpBody": "এই বরাদ্দের জন্য স্ট্যান্স নোট সংরক্ষণ করে। এটি কর্মীরা এবং (কমিটির সেটিংসের উপর নির্ভর করে) অন্যান্য অংশগ্রহণকারীদের দ্বারা দেখা যেতে পারে।"
-    },
-    "speeches": {
-      "newSpeech": "নতুন বক্তৃতা",
-      "speechTitlePlaceholder": "বক্তৃতা শিরোনাম",
-      "googleDocsUrl": "Google ডক্স URL",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "একটি নতুন ট্যাবে Google খোলে; প্রস্তুত হলে এখানে নথির URL পেস্ট করুন।",
-      "plainTextOptional": "প্লেইন টেক্সট ড্রাফ্ট (আপনি যদি Google ডক ব্যবহার করেন তাহলে ঐচ্ছিক)",
-      "save": "সংরক্ষণ করুন",
-      "cancel": "বাতিল করুন",
-      "noSpeechesYet": "এখনো কোনো বক্তৃতা নেই। একটি Google ডক লিঙ্ক করুন বা পাঠ্য পেস্ট করুন।",
-      "speechLabel": "বক্তৃতা",
-      "untitled": "শিরোনামহীন",
-      "edit": "সম্পাদনা করুন",
-      "speechDocument": "বক্তৃতা নথি",
-      "draftText": "খসড়া পাঠ্য",
-      "noContentHint": "সম্পাদনার সাথে একটি Google ডক লিঙ্ক করুন, বা ফর্মে প্লেইন টেক্সট যোগ করুন।"
-    },
-    "committeeRoom": {
-      "committeeLabel": "কমিটি",
-      "yourContext": "আপনার প্রসঙ্গ",
-      "roleLabel": "ভূমিকা",
-      "seatLabel": "আসন",
-      "clearSearchTitle": "অনুসন্ধান সাফ করুন এবং সমস্ত প্রতিনিধি দল দেখান",
-      "vacantLabel": "খালি",
-      "assignedLabel": "বরাদ্দ করা হয়েছে",
-      "daisLabel": "ডাইস",
-      "phaseLabel": "পর্যায়",
-      "phaseVoting": "ভোট",
-      "phaseDebate": "বিতর্ক",
-      "focusSearchTitle": "ফোকাস অনুসন্ধান (ডেইস শিরোনাম এবং নাম আপনার প্রশ্নের সাথে মেলে)",
-      "tipLabel": "টিপ",
-      "searchVacantTitle": "রুমে \"খালি\" আসন অনুসন্ধান করুন",
-      "searchHint": "রুমে মিলগুলি হাইলাইট করতে একটি দেশ, প্রতিনিধির নাম, স্কুল, সর্বনাম বা \"খালি\" টাইপ করুন। প্রথম ম্যাচে ঝাঁপ দিতে এন্টার টিপুন; Esc পরিষ্কার করে। খালি আসনে ঝাঁপ দিতে খালিতে ক্লিক করুন।",
-      "findLabel": "একটি প্রতিনিধি দল বা মঞ্চ সদস্য খুঁজুন",
-      "searchPlaceholder": "দেশ, নাম, স্কুল...",
-      "matchesCount": "{total}টি আসনের মধ্যে {match} মিলছে",
-      "enterScrolls": "স্ক্রোল লিখুন",
-      "typeToFilterHint": "ফিল্টার করতে টাইপ করুন - প্রথম মিলের জন্য স্ক্রোল লিখুন",
-      "noMatches": "কোন মিলিত প্রতিনিধি দল বা মঞ্চ আসন.",
-      "digitalDisplay": "ডিজিটাল ডিসপ্লে",
-      "floorLabel": "মেঝে",
-      "staffSeatsHeading": "স্টাফ - আসন",
-      "searchAria": "প্রতিনিধি দল অনুসন্ধান করুন",
-      "virtualRoomVacant": "খালি",
-      "profileAria": "প্রোফাইল দেখুন: {country}",
-      "vacantSeatAria": "খালি আসন",
-      "placardAria": "প্ল্যাকার্ড {দেশ}",
-      "gavelAria": "গেভেল",
-      "viewProfileAria": "প্রোফাইল দেখুন: {title}",
-      "noProfileLinkAria": "{title} (কোন প্রোফাইল লিঙ্ক নেই)",
-      "committeeFloor": "কমিটির ফ্লোর",
-      "virtualRoomFigureAria": "ভার্চুয়াল কমিটি রুম - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "প্রতিনিধিদের ফিল্টারিং. প্রথম হাইলাইট করা আসনটি রিংয়ে প্রথম ম্যাচ।",
-      "helperText": "প্ল্যাকার্ড তালিকাভুক্ত দেশ (বরাদ্দ থেকে), নাম, স্কুল, এবং প্রতিটি প্রতিনিধির প্রোফাইল থেকে সর্বনাম। প্রোফাইলের অধীনে আপনার সম্পাদনা করুন. খালি কমিটির আসনগুলি খালি হিসাবে দেখায়। সেই সদস্যের পৃষ্ঠা খুলতে একটি ভরা প্ল্যাকার্ড বা ডেস সিটে ক্লিক করুন (সেখান থেকে চ্যাট করুন এবং রিপোর্ট করুন)।",
-      "virtualRoomCaption": "ভার্চুয়াল মডেল ইউএন কমিটির কক্ষে দেশ, নাম, স্কুল এবং সর্বনাম দেখানো প্রতিনিধি প্ল্যাকার্ড।"
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "কথা বলার অনুরোধ",
-        "delegateFallback": "প্রতিনিধি",
-        "needAllocation": "কথা বলার অনুরোধ করার জন্য আপনার একটি বরাদ্দ প্রয়োজন।",
-        "alreadyQueued": "সারিতে আপনার কাছে ইতিমধ্যেই একটি সক্রিয় কথা বলার অনুরোধ রয়েছে৷",
-        "requested": "কথা বলার অনুরোধ রইল। আপনি সারিতে উপস্থিত হবে.",
-        "requestFailed": "কথা বলার অনুরোধ করতে ব্যর্থ।",
-        "helpBody": "আপনার প্রতিনিধি দলকে চেয়ারের সারিতে পাঠান। আপনার কাছে একবারে একটি সক্রিয় অপেক্ষা/বর্তমান অনুরোধ থাকতে পারে।",
-        "purposeLabel": "ঐচ্ছিক উদ্দেশ্য (সারি লেবেলে দেখায়)",
-        "purposeHelpTitle": "উদ্দেশ্য লেবেল",
-        "purposeHelpBody": "এই পাঠ্যটি আপনার দেশের নামের সাথে যুক্ত করা হয়েছে যাতে চেয়ারগুলি দেখতে পারে আপনি কেন মেঝেতে অনুরোধ করছেন৷",
-        "purposePlaceholder": "যেমন সমর্থন + সংশোধন ওভারভিউ",
-        "requesting": "অনুরোধ করা হচ্ছে...",
-        "rollPromptTitle": "চেয়ার অনুমোদন প্রয়োজন",
-        "rollPromptBodyPickStatus": "সেশন শুরু হয়েছে। কথা বলা এবং ভোট দেওয়া আনলক করতে আপনার রোল-কল স্ট্যাটাস বেছে নিন। এই পছন্দ পরিবর্তন করা যাবে না.",
-        "rollPromptBodyWaitSessionStart": "কমিটির অধিবেশন শুরুর জন্য চেয়ারম্যানের অপেক্ষায়।",
-        "rollPromptBodyWaitRollPrompt": "রোল-কল প্রম্পটের জন্য অপেক্ষা করা হচ্ছে।",
-        "rollPromptBodyMarkedAbsent": "আপনি বর্তমানে অনুপস্থিত হিসাবে চিহ্নিত। চেয়ারকে বলুন আপনি বক্তৃতা এবং ভোট দেওয়ার জন্য উপস্থিত চিহ্নিত করতে।",
-        "rollPromptBodyChecking": "আপনার রোলের স্থিতি পরীক্ষা করা হচ্ছে...",
-        "rollPromptSaving": "সংরক্ষণ করা হচ্ছে...",
-        "rollPromptPresent": "বর্তমান",
-        "rollPromptPresentVoting": "উপস্থিত এবং ভোটদান"
-      },
-      "motionVoting": {
-        "votingProcedure": "ভোট পদ্ধতি",
-        "currentMotion": "বর্তমান গতি",
-        "motioner": "আন্দোলনকারী",
-        "majority": "সংখ্যাগরিষ্ঠ",
-        "majoritySimple": "সরল",
-        "tally": "হ্যাঁ {হ্যাঁ} - না {না} - মোট {মোট}",
-        "help": "মঞ্চটি সেশনে প্রতিটি প্রতিনিধি দলের ভোট রেকর্ড করে। মোশন ভোট শুধুমাত্র হ্যাঁ বা না ব্যবহার করে (কোন বিরত থাকুন)। মোট শুধুমাত্র প্ল্যাকার্ড গণনা করা হয় যেখানে হ্যাঁ বা না রেকর্ড করা হয়েছে; অনুপস্থিত প্রতিনিধিদের এড়িয়ে যাওয়া হয়।"
-      },
-      "activeMotion": {
-        "currentMotion": "বর্তমান গতি",
-        "motionFallback": "গতি",
-        "motioner": "আন্দোলনকারী",
-        "majority": "সংখ্যাগরিষ্ঠ",
-        "majoritySimple": "সরল",
-        "type": "টাইপ",
-        "timer": "টাইমার",
-        "currentSpeaker": "বর্তমান বক্তা",
-        "nextSpeaker": "পরবর্তী স্পিকার",
-        "speakerTimeLeftCap": "স্পিকার সময় (বাম / ক্যাপ)",
-        "speakerTimeLeftTotal": "স্পিকারের সময় (বাম / মোট)",
-        "perSpeaker": "(স্পিকার প্রতি)",
-        "paused": "(বিরতি)",
-        "pauseReason": "বিরতি: {কারণ}"
-      },
-      "floorStatus": {
-        "sessionTime": "সেশনের সময়",
-        "sessionNotStarted": "সেশন শুরু হয়নি",
-        "limit": "সীমা",
-        "limitRemaining": "{মান} বাকি",
-        "limitOverBy": "{মান} দ্বারা বেশি",
-        "quickLinkSession": "অধিবেশন",
-        "quickLinkRoll": "রোল",
-        "quickLinkSpeakers": "বক্তারা",
-        "quickLinkMotions": "গতিবিধি",
-        "quickLinkTimer": "টাইমার",
-        "dais": "ডাইস",
-        "pinned": "পিন করা হয়েছে",
-        "viewFullAnnouncement": "সম্পূর্ণ ঘোষণা দেখুন",
-        "timerPausesReadOnly": "টাইমার বিরতি (শুধু পড়ার জন্য)",
-        "speakerList": "স্পিকারের তালিকা",
-        "speakerFallback": "স্পিকার",
-        "rollCallYou": "রোল কল (আপনি)",
-        "fullAnnouncement": "সম্পূর্ণ ঘোষণা",
-        "daisAnnouncement": "ডাইস ঘোষণা",
-        "close": "বন্ধ"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "সেশনের নাম",
-        "sessionNamePlaceholder": "যেমন সকালের অধিবেশন",
-        "sessionNameSaving": "সংরক্ষণ করা হচ্ছে...",
-        "sessionNameSaved": "সংরক্ষিত",
-        "sessionNameHint": "স্বয়ংক্রিয়ভাবে সংরক্ষণ করে এবং সেশন ইতিহাসে প্রদর্শিত হয়।",
-        "title": "কমিটির অধিবেশন",
-        "subtitle": "কমিটির অধিবেশন শুরু বা বন্ধ করুন।",
-        "helpStartStop": "প্রত্যেকের জন্য লাইভ কমিটির সেশন টাইমার/স্ট্যাটাস শুরু করে। স্টপ সেশন শেষ করে এবং বর্তমান সময়সীমা সাফ করে।",
-        "migrationUnavailable": "সর্বশেষ ডাটাবেস মাইগ্রেশন প্রয়োগ না হওয়া পর্যন্ত সেশন নিয়ন্ত্রণগুলি সাময়িকভাবে অনুপলব্ধ।",
-        "endTimeInFuture": "ভবিষ্যতে একটি সমাপ্তির সময় বেছে নিন, অথবা কোন সীমাতে স্যুইচ করুন।",
-        "sessionStartUnavailable": "সর্বশেষ মাইগ্রেশন প্রয়োগ না হওয়া পর্যন্ত সেশন শুরুর টাইমস্ট্যাম্প অনুপলব্ধ।",
-        "endTimeInFutureSetNoLimit": "ভবিষ্যতে একটি শেষ সময় চয়ন করুন, বা কোন সীমা সেট করবেন না।",
-        "sessionLimitUpdated": "সেশনের সীমা আপডেট করা হয়েছে।",
-        "startedLabel": "শুরু হয়েছে:",
-        "timeInLabel": "সময়:",
-        "timeUntilEndLabel": "শেষ পর্যন্ত সময়:",
-        "overByValue": "{মান} দ্বারা বেশি",
-        "modeLabel": "মোড:",
-        "modeStopwatchNoLimit": "স্টপওয়াচ (কোন সময় সীমা নেই)",
-        "sessionNotRunning": "সেশন চলছে না।",
-        "sessionLimit": "সেশন সীমা",
-        "sessionLimitModesTitle": "সেশন সীমা মোড",
-        "sessionLimitModesHelp": "কোনটি: শেষ নেই। সময় বাজেট: শুরু থেকে গণনা। শেষ: আপনার স্থানীয় টাইমজোনে নির্দিষ্ট ঘড়ির সময়।",
-        "sessionLimitOptional": "ঐচ্ছিক।",
-        "noneLabel": "কোনোটিই নয়",
-        "noneDescription": "আপনি থামা পর্যন্ত চলে।",
-        "timeBudgetLabel": "সময় বাজেট",
-        "timeBudgetDescription": "আপনি শুরু মুহূর্ত থেকে গণনা.",
-        "endTimeLabel": "শেষ সময়",
-        "endTimeDescription": "একটি নির্দিষ্ট ঘড়ির সময় ব্যবহার করে (যদি উভয়ই সেট করা থাকে তবে বাজেট ওভাররাইড করে)।",
-        "noneIndefinite": "কোনোটিই নয় (অনির্দিষ্টকালের)",
-        "noneScheduledEndHint": "কোন নির্ধারিত শেষ নেই; শুধুমাত্র অতিবাহিত সময় দেখানো হয়.",
-        "timeBudgetFromStart": "শুরু থেকে সময় বাজেট",
-        "hoursLabel": "ঘন্টা",
-        "minutesLabel": "মিনিট",
-        "minimumOneMinute": "(সর্বনিম্ন 1 মিনিট)",
-        "endAtLocalTime": "শেষ হবে (স্থানীয় সময়)",
-        "stopSession": "সেশন বন্ধ করুন",
-        "saveLimit": "সীমা সংরক্ষণ করুন",
-        "saveLimitHelp": "সেশন বন্ধ না করেই সেশন চলাকালীন আপডেট করা সীমা সেটিংস প্রয়োগ করে।",
-        "startSession": "সেশন শুরু করুন",
-        "sidebarUsePrefix": "জন্য সাইডবার ব্যবহার করুন",
-        "rollCall": "রোল কল",
-        "speakers": "বক্তারা",
-        "formalMotions": "আনুষ্ঠানিক গতিবিধি",
-        "timer": "টাইমার",
-        "sidebarAnd": "এবং",
-        "announcements": "ঘোষণা",
-        "sidebarUseSuffix": "- প্রতি ট্যাবে একটি টুল।"
-      },
-      "history": {
-        "title": "সেশনের ইতিহাস",
-        "savedCount": "{count} সংরক্ষিত",
-        "permissionsHint": "চেয়ার এন্ট্রি নাম পরিবর্তন করতে পারেন. SMT/প্রশাসক এন্ট্রির নাম পরিবর্তন এবং মুছে ফেলতে পারেন।",
-        "empty": "এখনো কোনো সেশনের ইতিহাস নেই।",
-        "rename": "নাম পরিবর্তন করুন",
-        "delete": "মুছুন",
-        "deleteConfirm": "ইতিহাস থেকে এই অধিবেশন মুছে ফেলবেন?",
-        "sessionNamePrompt": "সেশনের নাম",
-        "rangeClosed": "{পরিসীমা}",
-        "rangeOngoing": "{পরিসীমা} -> চলমান"
-      },
-      "timerPage": {
-        "title": "টাইমার",
-        "controlsTitle": "টাইমার নিয়ন্ত্রণ",
-        "controlsHelp": "সামগ্রিক বিতর্কের সময়ের জন্য সাধারণ ফ্লোর ব্যবহার করুন, অথবা একটি নির্দিষ্ট খোলা ভোট আইটেমের সাথে দৃশ্যমানতা বাঁধতে মোশন ভোট ব্যবহার করুন।",
-        "tabSetup": "1) সেটআপ",
-        "tabClock": "2) ঘড়ি নিয়ন্ত্রণ",
-        "tabNotes": "3) স্পিচ নোট",
-        "tabLog": "4) পজ লগ",
-        "setupHelp": "এই টাইমারটি সাধারণ ফ্লোরের জন্য (সর্বদা প্রতিনিধিদের কাছে দৃশ্যমান) বা ভোট দেওয়ার জন্য খোলা গতির সাথে আবদ্ধ কিনা তা চয়ন করুন (প্রতিনিধিরা কেবলমাত্র ভোটটি সক্রিয় আইটেম হলে এটি দেখতে পান)৷ প্রতি-স্পীকার সময় চালু থাকলে, মডারেটেড ককাস নির্বিশেষে ঘড়িটি দৃশ্যমান থাকে। ঘড়ি বিরাম দিন / স্টার্ট ক্লক ফ্রিজ বা কাউন্টডাউন পুনরায় শুরু করুন। স্পীকার সময় (বাকি) এবং মোট সময় স্বাধীনভাবে সেট করুন, তারপর টাইমার সংরক্ষণ করুন। প্রিসেট একই দৈর্ঘ্য উভয় পূরণ; আপনি পরে উভয় ক্ষেত্রের সম্পাদনা করতে পারেন। বিরতি একটি সংক্ষিপ্ত কারণ সঙ্গে লগ করা হয়.",
-        "namedPreset": "নাম প্রিসেট",
-        "applyPreset": "প্রিসেট প্রয়োগ করুন...",
-        "floorLabelDelegates": "ফ্লোর লেবেল (প্রতিনিধি)",
-        "floorLabelPlaceholder": "যেমন GSL 60s",
-        "timerPurpose": "টাইমার উদ্দেশ্য",
-        "purposeGeneralFloor": "সাধারণ বিতর্ক / ফ্লোর (ভোটের সাথে আবদ্ধ নয়)",
-        "purposeMotionVote": "ওপেন মোশন - টাইমার শুধুমাত্র যখন সেই ভোট মেঝেতে সক্রিয় থাকে",
-        "openMotionForVoting": "উন্মুক্ত গতি (ভোট দেওয়ার জন্য উন্মুক্ত হতে হবে)",
-        "selectMotion": "গতি নির্বাচন করুন...",
-        "untitled": "শিরোনামহীন",
-        "noOpenMotionWarning": "ভোটের জন্য কোন আন্দোলন উন্মুক্ত নয়। প্রথমে একটি ভোট খুলুন, বা সাধারণ ফ্লোরে উদ্দেশ্য পরিবর্তন করুন।",
-        "clock": "ঘড়ি",
-        "running": "চলমান",
-        "paused": "বিরতি দেওয়া হয়েছে",
-        "saveToEnablePauseStart": "বিরতি/স্টার্ট সক্ষম করতে টাইমার সংরক্ষণ করুন।",
-        "pauseReasonLogged": "বিরতির কারণ (লগ করা)",
-        "pauseReasonPlaceholder": "যেমন পয়েন্ট অফ অর্ডার, প্রযুক্তিগত সমস্যা, অনিয়ন্ত্রিত ককাস...",
-        "pauseClock": "ঘড়ি থামান",
-        "startClock": "ঘড়ি শুরু করুন",
-        "perSpeakerTitle": "প্রতি-স্পীকার সময় (পরিমিত ককাস)",
-        "perSpeakerHelp": "প্রতি-স্পীকার ক্যাপ হিসাবে মোট সময় এবং অবশিষ্ট সময় হিসাবে স্পীকার সময় সেট করুন; অগ্রিম পরবর্তী স্পীকারে চলে যায় এবং ক্যাপে অবশিষ্ট রিসেট করে।",
-        "currentSpeaker": "বর্তমান বক্তা",
-        "nextSpeaker": "পরবর্তী স্পিকার",
-        "speechNotesCurrentSpeaker": "স্পিচ নোট (বর্তমান স্পিকার)",
-        "speechNotesHelp": "নোটগুলি বর্তমান স্পিকার টাইমার পাঠ্যের সাথে আবদ্ধ থাকে এবং যখন স্পিকার তালিকায় কেউ বর্তমান চিহ্নিত করে, তাদের প্রতিনিধি দলকে রেফারেন্সের জন্য সংরক্ষণ করা হয়।",
-        "timerFloorLabel": "টাইমার (মেঝে):",
-        "speakerListCurrent": "বক্তা তালিকা (বর্তমান):",
-        "noCurrentDelegation": "স্পিকার তালিকায় কোনো প্রতিনিধি দলকে বর্তমান হিসেবে চিহ্নিত করা হয়নি।",
-        "note": "দ্রষ্টব্য",
-        "notePlaceholder": "পয়েন্ট, POI, টোন, ফলো-আপ...",
-        "saveSpeechNote": "বক্তৃতা নোট সংরক্ষণ করুন",
-        "recentNotes": "আপনার সাম্প্রতিক নোট (এই কমিটি)",
-        "delete": "মুছুন",
-        "speakerTimeRemaining": "স্পিকারের সময় (বাকি)",
-        "remainingHelpPerSpeaker": "বর্তমান স্পিকারের জন্য কাউন্টডাউন (আপনি অগ্রসর হলে পুনরায় সেট করুন)।",
-        "remainingHelpNormal": "বর্তমান স্পিকারের জন্য কাউন্টডাউন (মোট থেকে কম হতে পারে)।",
-        "totalTime": "মোট সময়",
-        "totalHelpPerSpeaker": "প্রতি-স্পীকার ক্যাপ (মেঝে হর; এর জন্য অগ্রিম রিফিল বাকি)।",
-        "totalHelpNormal": "এই টাইমার সেগমেন্টের সম্পূর্ণ দৈর্ঘ্য (মেঝেতে স্ল্যাশের পরে দেখানো হয়েছে)।",
-        "saveTimer": "টাইমার সংরক্ষণ করুন",
-        "advanceSpeakerReset": "অগ্রিম স্পিকার এবং রিসেট ঘড়ি",
-        "recentPauseLog": "সাম্প্রতিক বিরতি লগ",
-        "noPauseEvents": "এই কমিটির জন্য এখনও কোনো বিরতি ইভেন্ট লগ করা হয়নি.",
-        "openPauseLogHint": "রেকর্ড করা বিরতির কারণ এবং টাইমস্ট্যাম্প পর্যালোচনা করতে পজ লগ খুলুন।",
-        "saved": "টাইমার সংরক্ষিত।",
-        "savedCapped": "টাইমার সংরক্ষিত। স্পিকারের সময় মোটের চেয়ে বেশি ছিল; মোট সীমাবদ্ধ।",
-        "alreadyPaused": "টাইমার ইতিমধ্যেই বিরাম দেওয়া হয়েছে৷",
-        "pausedForCommittee": "কমিটির জন্য টাইমার বিরতি.",
-        "alreadyRunning": "টাইমার ইতিমধ্যেই চলছে৷",
-        "runningForCommittee": "কমিটির জন্য টাইমার চলমান.",
-        "euTimerBoardTitle": "ইইউ পার্লামেন্ট টাইমার বোর্ড (11 টাইমার)",
-        "euTimerBoardHelp": "পার্টি প্রতি একটি টাইমার, প্লাস মোট সময়, POI/POC সময় এবং স্পীকার সময়। ঘড়ি ট্যাবে লাইভ টাইমার ক্ষেত্রগুলিতে একটি সারি অনুলিপি করতে প্রয়োগ করুন (স্পিকার সময় / টাইমার সংরক্ষণ করুন)।",
-        "euTimerName": "নাম",
-        "euTimerTag": "ট্যাগ",
-        "euTotalTime": "মোট সময়",
-        "euPoiPocTime": "POI / POC সময়",
-        "euSpeakerTime": "স্পিকার সময়"
-      }
     }
   },
   "dashboardSearch": {
@@ -2311,6 +1480,10 @@
       "committeeRoomFull": {
         "label": "কমিটি রুম (পূর্ণ)",
         "hint": "ভার্চুয়াল লেআউট এবং প্রতিনিধি ফ্লোর"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +1985,863 @@
     "autosaveFailed": "স্বতঃসংরক্ষণ ব্যর্থ হয়েছে৷",
     "autosavedWithCountry": "স্বতঃসংরক্ষিত — {country}",
     "delegateFallback": "প্রতিনিধি"
+  },
+  "sources": {
+    "addSource": "উৎস যোগ করুন",
+    "sourceUrl": "উৎস URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (প্রস্তাবিত)",
+    "urlHelp": "একটি নতুন Google ডকের জন্য, বোতামটি ব্যবহার করুন এবং এখানে নথির লিঙ্কটি আটকান৷",
+    "titleOptional": "শিরোনাম (ঐচ্ছিক)",
+    "saveChanges": "পরিবর্তনগুলি সংরক্ষণ করুন",
+    "editSource": "উৎস সম্পাদনা করুন",
+    "urlPlaceholderShort": "Google ডক বা অন্য URL",
+    "empty": "এখনো কোনো সূত্র নেই। এটি এখানে খুলতে একটি Google ডক লিঙ্ক যোগ করুন।",
+    "sourceLabel": "উৎস",
+    "openLink": "লিঙ্ক খুলুন",
+    "embedHeading": "উৎস নথি",
+    "notGoogleDoc": "এই URLটি একটি Google ডক নয়৷ এখানে এম্বেড এবং সম্পাদনা করতে একটি docs.google.com/document/d/… লিঙ্ক ব্যবহার করুন; অন্যথায় উপরের লিঙ্কটি খুলুন।"
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "প্রতিনিধিরা সরাসরি অবস্থানের কাগজপত্র আপলোড করতে পারবেন না। অন্য ডকুমেন্ট টাইপ ব্যবহার করুন।",
+    "alertOnlyChairsPositionPaper": "শুধুমাত্র চেয়ার/এসএমটি/অ্যাডমিন পজিশন পেপার আপলোড করতে পারবেন।",
+    "alertOnlySmtChairReport": "শুধুমাত্র SMT/এডমিন চেয়ার রিপোর্ট আপলোড করতে পারেন।",
+    "alertOnlySmtRop": "শুধুমাত্র এসএমটি/অ্যাডমিনরা RoP নথি আপলোড করতে পারে।",
+    "alertOnlySmtAwardCriteria": "শুধুমাত্র এসএমটি/প্রশাসক পুরস্কারের মানদণ্ডের নথি আপলোড করতে পারেন।",
+    "alertNeedContentOrUrl": "স্থানীয় পাঠ্য সামগ্রী বা একটি Google ডক্স URL যোগ করুন৷",
+    "confirmDelete": "এই নথিটি মুছবেন?",
+    "delegatePrepTitle": "প্রস্তুতি নথি বিভাগ",
+    "delegatePrepBody": "আপনি সরাসরি এই পৃষ্ঠা থেকে আপনার নিজস্ব <prep>প্রস্তুতি নথি</prep> আপলোড, দেখতে এবং সম্পাদনা করতে পারেন।",
+    "positionPaperGuideTitle": "পজিশন পেপার গাইড",
+    "positionPaperGuideBlurb": "চূড়ান্ত PDF প্রস্তুত করার সময় স্থানধারক নির্দেশিকা ডাউনলোড করুন।",
+    "downloadPlaceholderGuide": "প্লেসহোল্ডার গাইড ডাউনলোড করুন",
+    "addDocument": "ডকুমেন্ট যোগ করুন",
+    "tabs": {
+      "ariaLabel": "নথি বিভাগ",
+      "library": "লাইব্রেরি",
+      "compose": "রচনা করুন",
+      "composeHint": "একটি নতুন দস্তাবেজ শুরু করুন বা এই ট্যাব থেকে একটি বিদ্যমান খসড়া সম্পাদনা করুন৷"
+    },
+    "newDocumentTitle": "নতুন নথি",
+    "editDocumentTitle": "নথি সম্পাদনা করুন",
+    "typeLabel": "টাইপ",
+    "types": {
+      "position_paper": "পজিশন পেপার",
+      "chair_report": "চেয়ার রিপোর্ট",
+      "rop": "RoP",
+      "award_criteria": "পুরস্কারের মানদণ্ড",
+      "chair_notes": "চেয়ার নোট",
+      "prep_doc": "প্রস্তুতি নথি"
+    },
+    "delegatePositionPaperNote": "প্রতিক্রিয়া সহ চেয়ার দ্বারা অবস্থানের কাগজপত্র আপলোড করা হয়।",
+    "delegateOwner": "প্রতিনিধি মালিক",
+    "chairRecipient": "চেয়ার প্রাপক",
+    "titleLabel": "শিরোনাম",
+    "titlePlaceholder": "নথির শিরোনাম",
+    "googleDocsUrl": "Google ডক্স URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (অ্যাপ্লিকেশানে দৃশ্য/সম্পাদনা এম্বেড করুন)",
+    "googleDocsHelp": "একটি নতুন ট্যাবে Google খুলতে নতুন Google ডক ব্যবহার করুন, তারপর ডক লিঙ্কটি এখানে আটকান৷ নিচের প্লেইন টেক্সট ঐচ্ছিক। প্রতিটি নথির স্থানীয় পাঠ্য, একটি Google ডক লিঙ্ক, বা উভয়েরই প্রয়োজন।",
+    "plainTextOptional": "প্লেইন টেক্সট (ঐচ্ছিক)",
+    "plainTextPlaceholder": "নোট বা খসড়া পাঠ্য...",
+    "chairFeedbackLabel": "চেয়ার প্রতিক্রিয়া",
+    "chairFeedbackPlaceholder": "প্রতিনিধি অবস্থানের কাগজের জন্য প্রতিক্রিয়া...",
+    "empty": "এখনো কোনো নথি নেই। একটি যোগ করুন বা একটি Google ডক লিঙ্ক করুন।",
+    "sidebarDocumentLabel": "দলিল",
+    "sections": {
+      "chairReports": "চেয়ার রিপোর্ট",
+      "rop": "RoP",
+      "awardCriteria": "পুরস্কারের মানদণ্ড",
+      "prepDocuments": "প্রস্তুতি নথি",
+      "chairNotes": "চেয়ার নোট",
+      "otherDocuments": "অন্যান্য নথি"
+    },
+    "untitled": "শিরোনামহীন",
+    "linkedDocumentHeading": "লিঙ্কড নথি",
+    "notesHeading": "নোট",
+    "noGoogleDocYet": "এখনও কোনো Google ডক লিঙ্ক করা হয়নি৷ একটি docs.google.com/document/d/… URL যোগ করতে সম্পাদনা ব্যবহার করুন৷",
+    "chairFeedbackHeading": "চেয়ার প্রতিক্রিয়া",
+    "noFeedbackYet": "এখনো কোনো প্রতিক্রিয়া যোগ করা হয়েছে."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "প্রথমে একটি প্রতিনিধি ইমেল লিখুন।",
+    "sentToDelegate": "{email} এ পাঠানো হয়েছে।",
+    "newResolution": "নতুন রেজোলিউশন",
+    "maxDraftResolutions": "এই কমিটির ইতিমধ্যেই {count}টি খসড়া রেজোলিউশন রয়েছে৷",
+    "googleDocLink": "গুগল ডক লিঙ্ক",
+    "googleDocUrlPlaceholder": "Google ডক্স URL (docs.google.com/document/d/… — এম্বেড + সম্পাদনার জন্য ব্যবহৃত)",
+    "googleDocUrlHelp": "নতুন Google ডক অন্য ট্যাবে খোলে; ঠিকানা বার থেকে URL টি অনুলিপি করুন এবং এটি এখানে পেস্ট করুন।",
+    "mainSubmittersPlaceholder": "প্রধান জমাদানকারী (ব্যবহারকারীর আইডি, কমা দ্বারা পৃথক করা)",
+    "coSubmittersPlaceholder": "সহ জমাকারীরা (ব্যবহারকারী আইডি, কমা দ্বারা পৃথক করা)",
+    "create": "তৈরি করুন",
+    "cancel": "বাতিল করুন",
+    "openInNewTab": "নতুন ট্যাবে খুলুন",
+    "noGoogleDocLink": "কোন Google ডক লিঙ্ক নেই",
+    "visibleToOtherBloc": "অন্য ব্লকের কাছে দৃশ্যমান",
+    "resolutionCounts": "প্রধান সদস্য: {প্রধান} | সহ-সদস্য: {co} | স্বাক্ষরকারী: {signatories}",
+    "blocButton": "ব্লক {name} ({stance})",
+    "signVirtually": "কার্যত সাইন ইন করুন (প্রধান সদস্যদের বিজ্ঞপ্তি দেওয়া হয়েছে)",
+    "shareByEmail": "ইমেলের মাধ্যমে রেজোলিউশন শেয়ার করুন",
+    "delegateEmailPlaceholder": "delegate@email.com",
+    "sendToDelegate": "প্রতিনিধি পাঠান",
+    "clauseEditor": "ধারা সম্পাদক",
+    "noClausesYet": "এখনও কোন ধারা.",
+    "clauseNumber": "ধারা {সংখ্যা}",
+    "saveClause": "ধারা সংরক্ষণ করুন",
+    "delete": "মুছুন",
+    "addClausePlaceholder": "একটি নতুন ধারা যোগ করুন...",
+    "addClause": "ধারা যোগ করুন",
+    "clauseVoteHistory": "ধারা ভোটের ইতিহাস",
+    "noClauseOutcomesYet": "এখনও কোন রেকর্ড করা ধারা ভোট ফলাফল.",
+    "clauseFallback": "ধারা",
+    "passed": "উত্তীর্ণ",
+    "failed": "ব্যর্থ হয়েছে",
+    "motionId": "গতি {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "ভোটিং বিভাগ",
+      "open": "খোলা",
+      "closed": "বন্ধ"
+    },
+    "requiredMajority": "সংখ্যাগরিষ্ঠতা প্রয়োজন",
+    "helpRequiredMajorityTitle": "সংখ্যাগরিষ্ঠতা প্রয়োজন",
+    "helpRequiredMajorityBody": "পাস/ফেল করার সিদ্ধান্ত নিতে ব্যবহৃত ভোটের থ্রেশহোল্ড বেছে নিন। 'সহজ' অর্ধেকেরও বেশি। `2/3`-এর জন্য একটি অতিসংখ্যার প্রয়োজন।",
+    "majoritySimple": "সরল",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} সংখ্যাগরিষ্ঠ",
+    "mustVote": "ভোট দিতে হবে",
+    "helpMustVoteTitle": "ভোট দিতে হবে",
+    "helpMustVoteBody": "এই গতিকে \"অবশ্যই ভোট\" আইটেম হিসাবে চিহ্নিত করে৷ এটি অংশগ্রহণকারীদের (আপনার কমিটির সেটআপের উপর নির্ভর করে) প্রয়োজনীয়তার সাথে যোগাযোগ করতে ব্যবহৃত হয়।",
+    "saveSettings": "সেটিংস সংরক্ষণ করুন",
+    "delegateBlurb": "মঞ্চ সেশনে ভোট রেকর্ড করে (যেমন রোল কল)। এখানে মোশন ভোট শুধুমাত্র হ্যাঁ/না অনুসরণ করে (ব্যবহার করা হয় না)। আপনি ট্যালি অনুসরণ করতে পারেন; প্রতিনিধিরা অ্যাপটিতে ভোট দেবেন না।",
+    "yes": "হ্যাঁ",
+    "no": "না",
+    "ballots": "ব্যালট",
+    "total": "মোট",
+    "outcome": "ফলাফল",
+    "passed": "পাস করেছে",
+    "failed": "ব্যর্থ হয়েছে",
+    "noRecordedVotes": "কোন রেকর্ড করা ভোট",
+    "reopenMotion": "গতি পুনরায় খুলুন",
+    "editRecordOpen": "রেকর্ড সম্পাদনা করুন...",
+    "hideSettings": "সেটিংস লুকান",
+    "preliminaryPassing": "উত্তীর্ণ (প্রাথমিক)",
+    "preliminaryFailing": "ব্যর্থ (প্রাথমিক)",
+    "delegateRollCall": "প্রতিনিধি রোল কল ({count})",
+    "noSeatedDelegates": "এই প্রস্তাবের জন্য উপলভ্য কোনো উপবিষ্ট প্রতিনিধি নেই।",
+    "rollPrefix": "রোল:",
+    "recordedPrefix": "রেকর্ড করা:",
+    "recordedYes": "হ্যাঁ",
+    "recordedNo": "না",
+    "recordedAbstain": "বিরত থাকুন",
+    "recordedNone": "-",
+    "abstain": "বিরত থাকুন",
+    "clear": "পরিষ্কার",
+    "closeMotion": "বন্ধ গতি",
+    "mustVoteBadge": "ভোট দিতে হবে",
+    "canVoteBadge": "ভোট দিতে পারেন",
+    "noMotions": "এখনও কোন গতি নেই.",
+    "currentOpenMotion": "বর্তমান খোলা গতি",
+    "noOpenMotion": "এখন কোন খোলা গতি নেই.",
+    "recentClosedMotions": "সাম্প্রতিক বন্ধ গতি",
+    "noClosedMotions": "এখনও কোন বন্ধ গতি.",
+    "untitled": "শিরোনামহীন",
+    "voteTypes": {
+      "motion": "গতি",
+      "amendment": "সংশোধন",
+      "resolution": "রেজোলিউশন",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "অনুপস্থিত (রোল)",
+      "present_abstain": "বর্তমান - বিরত থাকতে পারে (রোল)",
+      "present_voting": "বর্তমান এবং ভোটদান (রোল)",
+      "unknown": "— (রোল)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "প্রোফাইল বিভাগ",
+      "overview": "ওভারভিউ",
+      "awards": "পুরস্কার",
+      "private": "ব্যক্তিগত রেকর্ড",
+      "settings": "প্রোফাইল সেটিংস"
+    },
+    "profilePicture": "প্রোফাইল ছবি",
+    "uploadFile": "ফাইল আপলোড করুন",
+    "uploading": "আপলোড হচ্ছে...",
+    "photoSaved": "ছবি আপলোড এবং সংরক্ষিত.",
+    "orUrl": "অথবা URL দ্বারা সেট করুন",
+    "urlPlaceholder": "https://...",
+    "name": "নাম",
+    "username": "ব্যবহারকারীর নাম",
+    "usernamePlaceholder": "যেমন alex_1999",
+    "pronouns": "সর্বনাম",
+    "customPronounNote": "আপনার প্রোফাইলে একটি কাস্টম সর্বনাম সেট ছিল যা এখানে আর গ্রহণযোগ্য নয়৷ উপরে একটি বিকল্প বেছে নিন (বা ফাঁকা ছেড়ে দিন)। সংরক্ষণ পুরানো মান প্রতিস্থাপন.",
+    "school": "স্কুল",
+    "schoolPlaceholder": "যেমন লিংকন হাই স্কুল",
+    "grade": "গ্রেড",
+    "selectGrade": "গ্রেড নির্বাচন করুন",
+    "conferencesAttended": "সম্মেলনে অংশগ্রহণ করেন",
+    "awardsComma": "পুরস্কার (কমা দিয়ে আলাদা করা)",
+    "awardsPlaceholder": "সেরা প্রতিনিধি, সম্মানিত উল্লেখ",
+    "allocation": "বরাদ্দ",
+    "selectAllocation": "বরাদ্দ নির্বাচন করুন",
+    "noAllocationsPlaceholder": "কোন কমিটি বরাদ্দ উপলব্ধ",
+    "saveProfile": "প্রোফাইল সংরক্ষণ করুন",
+    "saved": "প্রোফাইল সংরক্ষিত.",
+    "saveFailed": "প্রোফাইল সংরক্ষণ করা যায়নি.",
+    "errUsernamePattern": "ব্যবহারকারীর নাম অবশ্যই 3-32 অক্ষর হতে হবে (অক্ষর, সংখ্যা, _, ., -)",
+    "errPronounsPreset": "তালিকা থেকে একটি সর্বনাম চয়ন করুন।",
+    "errImageType": "একটি ইমেজ ফাইল চয়ন করুন.",
+    "errImageSize": "ছবি খুব বড় (সর্বোচ্চ 5 MB)।",
+    "errUploadFailed": "আপলোড ব্যর্থ হয়েছে.",
+    "errStorageSetup": "প্রোফাইল ছবি সঞ্চয়স্থান সেট আপ করা হয় না. সুপাবেস প্রকল্পে, মাইগ্রেশন 00100_profile_pictures_storage_bucket.sql চালান, অথবা প্রোফাইল-পিকচার নামে একটি পাবলিক স্টোরেজ বাকেট তৈরি করুন (README দেখুন)।",
+    "errPublicUrl": "আপলোড করা ছবির জন্য সর্বজনীন URL সমাধান করা যায়নি৷",
+    "fallbacks": {
+      "yourCountry": "আপনার দেশ",
+      "committeeSession": "কমিটির অধিবেশন",
+      "delegate": "প্রতিনিধি",
+      "speechNote": "বক্তৃতা নোট",
+      "untitledMotion": "শিরোনামহীন গতি",
+      "dash": "-"
+    },
+    "delegateWelcome": {
+      "title": "স্বাগত প্রতিনিধি {পতাকা} {দেশ}",
+      "subtitle": "আপনি কি দিয়ে শুরু করতে চান?",
+      "links": {
+        "documents": "নথিপত্র",
+        "notes": "নোট",
+        "committeeRoom": "কমিটি রুম",
+        "runningNotes": "চলমান নোট",
+        "ideas": "ধারনা",
+        "guides": "গাইড",
+        "sources": "সূত্র",
+        "resolutions": "রেজুলেশন",
+        "speeches": "বক্তৃতা",
+        "stances": "অবস্থান",
+        "crisisSlides": "ক্রাইসিস স্লাইড",
+        "report": "রিপোর্ট",
+        "motions": "গতিবিধি",
+        "points": "পয়েন্ট"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "আপনার প্রোফাইলে পুরস্কার",
+      "rank": "পদ {র্যাঙ্ক}",
+      "pending": {
+        "tab": "মুলতুবি মনোনয়ন",
+        "title": "মুলতুবি চেয়ার মনোনয়ন",
+        "descriptionSingle": "চেয়ার দ্বারা সংরক্ষিত এবং পর্যালোচনার জন্য SMT এর সাথে শেয়ার করুন৷ চূড়ান্ত পুরস্কার নিশ্চিতকরণের পরে নীচে প্রদর্শিত হবে.",
+        "descriptionTabbed": "চেয়ার দ্বারা সংরক্ষিত এবং পর্যালোচনার জন্য SMT এর সাথে শেয়ার করুন৷ চূড়ান্ত পুরস্কার নিশ্চিত করার পরে প্রদর্শিত হবে."
+      },
+      "recorded": {
+        "tab": "রেকর্ড করা পুরস্কার",
+        "title": "রেকর্ড করা পুরস্কার",
+        "description": "যখন চেয়ার বা SMT আপনাকে পুরস্কার ট্র্যাকারে বরাদ্দ করে তখন তালিকাভুক্ত করা হয়। চূড়ান্ত স্বীকৃতি আপনার সম্মেলনের নিয়ম অনুসরণ করে।"
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "শুধুমাত্র আপনার কাছে দৃশ্যমান, কমিটির চেয়ার এবং প্রাসঙ্গিক কমিটির জন্য SMT।",
+      "points": {
+        "title": "চেয়ার পয়েন্ট (ব্যক্তিগত)"
+      },
+      "speechNotes": {
+        "title": "চেয়ার বক্তৃতা নোট (ব্যক্তিগত)"
+      },
+      "motions": {
+        "title": "আপনি সরানো গতি",
+        "description": "কমিটির পর্যালোচনা এবং SMT তত্ত্বাবধানের জন্য আপনার প্রোফাইলে সংরক্ষিত।"
+      }
+    },
+    "discipline": {
+      "title": "শৃঙ্খলামূলক অবস্থা (ব্যক্তিগত)",
+      "statusLine": "সতর্কতা: {সতর্কতা} · স্ট্রাইক: {স্ট্রাইক}{votingDisabled}{speakingSuspended}{removedFromCommittee}",
+      "votingDisabled": "ভোট প্রদান নিষ্ক্রিয়",
+      "speakingSuspended": "কথা বলা স্থগিত",
+      "removedFromCommittee": "কমিটি থেকে অপসারিত",
+      "updated": "আপডেট করা হয়েছে: {value}"
+    },
+    "preview": {
+      "ariaLabel": "প্রোফাইল প্রিভিউ",
+      "title": "পূর্বরূপ",
+      "yourName": "তোমার নাম",
+      "usernameNotSet": "ব্যবহারকারীর নাম সেট করা হয়নি",
+      "gradeValue": "গ্রেড {grade}",
+      "awards": "পুরস্কার"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "পদ্ধতির নিয়ম (RoP)",
+        "content": "# পদ্ধতির নিয়ম \n\n## পয়েন্ট এবং মোশন \n- **পয়েন্ট অফ অর্ডার**: সঠিক পদ্ধতি \n- **পয়েন্ট অফ ইনফরমেশন**: স্পিকারের কাছে প্রশ্ন \n- **ব্যক্তিগত সুবিধার পয়েন্ট**: ব্যক্তিগত আরাম \n- **টেবিল মোশন**: বিতর্ক স্থগিত করুন \n- **মোশন টু মুলতুবি**: সেশন শেষ করুন \n\n## ভোট \n- পদ্ধতিগত বিষয়ের জন্য সহজ সংখ্যাগরিষ্ঠ \n- মূল বিষয়ের জন্য 2/3 সংখ্যাগরিষ্ঠ \n- অনুরোধ করা হলে রোল-কল ভোট"
+      },
+      "examples": {
+        "title": "উদাহরণ",
+        "content": "# উদাহরণ \n\n## রেজোলিউশন ফরম্যাট \n``` \nসাধারণ পরিষদ, \n... \n1. সদস্য দেশগুলোর প্রতি আহ্বান... \n2. আন্তর্জাতিক সম্প্রদায়কে অনুরোধ করে... \n``` \n\n## অবস্থানের কাগজের কাঠামো \n1. পটভূমি \n2. দেশের নীতি \n3. প্রস্তাবিত সমাধান"
+      },
+      "templates": {
+        "title": "টেমপ্লেট",
+        "content": "# টেমপ্লেট \n\n## চেয়ার রিপোর্ট টেমপ্লেট \n- কমিটি ওভারভিউ \n- মূল আলোচনার পয়েন্ট \n- রেজুলেশন পাস হয়েছে \n- সুপারিশ"
+      },
+      "chairReport": {
+        "title": "চেয়ার রিপোর্ট",
+        "content": "#চেয়ার রিপোর্ট \n\nডকুমেন্ট কমিটির কার্যক্রম এবং ফলাফল এখানে."
+      }
+    },
+    "edit": "সম্পাদনা করুন",
+    "guideDocument": "গাইড ডকুমেন্ট",
+    "additionalNotes": "অতিরিক্ত নোট",
+    "noContentYet": "কোন বিষয়বস্তু এখনও.",
+    "titlePlaceholder": "শিরোনাম",
+    "googleDocsUrl": "Google ডক্স URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "নতুন Google ডক অন্য ট্যাবে খোলে৷ একটি শেয়ারযোগ্য লিঙ্ক পেস্ট করুন যাতে প্রতিনিধিরা এখানে ডক খুলতে পারেন (দেখুন/সম্পাদনা Google ভাগ করার উপর নির্ভর করে)।",
+    "markdownOptional": "মার্কডাউন নোট (ঐচ্ছিক যদি আপনি একটি Google ডক ব্যবহার করেন)",
+    "save": "সংরক্ষণ করুন",
+    "cancel": "বাতিল করুন",
+    "createNewGuide": "নতুন গাইড তৈরি করুন",
+    "slugPlaceholder": "স্লাগ (অনন্য)",
+    "titleLowerPlaceholder": "শিরোনাম",
+    "googleDocsUrlOptional": "Google ডক্স URL (ঐচ্ছিক)",
+    "markdownContentOptional": "মার্কডাউন সামগ্রী (ঐচ্ছিক)",
+    "create": "তৈরি করুন",
+    "glossary": {
+      "title": "MUN এজেন্ডা শব্দকোষ",
+      "subtitle": "আপনার কমিটির কোড এবং বর্তমান এজেন্ডার বিষয়গুলির সাথে মিলিত অনন্য পরিভাষা।",
+      "committeeCode": "কমিটির কোড: {code}",
+      "sources": {
+        "core": "মূল",
+        "committee": "কমিটি",
+        "topic": "বিষয়"
+      },
+      "terms": {
+        "delegation": {
+          "term": "প্রতিনিধি দল",
+          "definition": "কমিটিতে একটি রাষ্ট্র বা সত্তার প্রতিনিধিত্বকারী একটি দেশ বা পর্যবেক্ষক দল।"
+        },
+        "placard": {
+          "term": "প্ল্যাকার্ড",
+          "definition": "দেশের চিহ্ন মেঝে, ভোট এবং সংকেত পদ্ধতিগত গতির অনুরোধ করতে ব্যবহৃত হয়।"
+        },
+        "dais": {
+          "term": "ডাইস",
+          "definition": "দলের সভাপতিত্ব করে যারা বিতর্ককে নিয়ন্ত্রণ করে, পদ্ধতি প্রয়োগ করে এবং কথা বলার ক্রম পরিচালনা করে।"
+        },
+        "quorum": {
+          "term": "কোরাম",
+          "definition": "আনুষ্ঠানিক ব্যবসা এবং ভোট পরিচালনার জন্য ন্যূনতম সংখ্যক প্রতিনিধি দলের প্রয়োজন।"
+        },
+        "motion": {
+          "term": "গতি",
+          "definition": "বিতর্কের প্রবাহ পরিবর্তনের জন্য আনুষ্ঠানিক প্রস্তাব, যেমন ককাসের ধরন বা কথা বলার সময়।"
+        },
+        "point_of_order": {
+          "term": "পয়েন্ট অফ অর্ডার",
+          "definition": "কমিটির নিয়মের অধীনে পদ্ধতিটি ভুলভাবে প্রয়োগ করা হলে হস্তক্ষেপ।"
+        },
+        "moderated_caucus": {
+          "term": "মডারেটেড ককাস",
+          "definition": "একটি সংজ্ঞায়িত উপবিষয়ক স্বল্প সময়ের বক্তৃতা সহ স্ট্রাকচার্ড বিতর্ক সেগমেন্ট।"
+        },
+        "unmoderated_caucus": {
+          "term": "আনমডারেটেড ককাস",
+          "definition": "অনানুষ্ঠানিক আলোচনার সময়কাল যেখানে প্রতিনিধিরা স্বাধীনভাবে খসড়া এবং ধারণা একত্রিত করতে যান।"
+        },
+        "draft_resolution": {
+          "term": "খসড়া রেজোলিউশন",
+          "definition": "চূড়ান্ত ভোট গ্রহণ এবং গ্রহণের আগে প্রস্তাবিত কমিটির কর্মকাণ্ডের ওয়ার্কিং টেক্সট।"
+        },
+        "amendment": {
+          "term": "সংশোধন",
+          "definition": "খসড়া টেক্সট পরিবর্তন প্রস্তাবিত, হয় বন্ধুত্বপূর্ণ বা বন্ধুত্বপূর্ণ হিসাবে ভোট."
+        },
+        "operative_clause": {
+          "term": "অপারেটিভ ক্লজ",
+          "definition": "কমিটি কী করার প্রস্তাব দেয় তা বর্ণনা করে অ্যাকশন-ভিত্তিক সংখ্যাযুক্ত ধারা।"
+        },
+        "preambulatory_clause": {
+          "term": "Preambulatory Clause",
+          "definition": "পটভূমি নীতি, উদ্বেগ, এবং পূর্ববর্তী কাঠামো উদ্ধৃত করে প্রসঙ্গ-সেটিং ধারা।"
+        },
+        "right_of_reply": {
+          "term": "উত্তরের অধিকার",
+          "definition": "প্রতিনিধিদলের মর্যাদা বা অবস্থানকে প্রভাবিত করে এমন একটি সরাসরি বিবৃতিতে প্রতিক্রিয়া জানানোর সুযোগ।"
+        },
+        "veto_power": {
+          "term": "ভেটো ক্ষমতা",
+          "definition": "মূল খসড়া রেজুলেশন ব্লক করার জন্য UNSC স্থায়ী-সদস্য কর্তৃপক্ষ।"
+        },
+        "chapter_vii": {
+          "term": "সপ্তম অধ্যায়",
+          "definition": "শান্তির জন্য হুমকি, নিষেধাজ্ঞা, এবং বল প্রয়োগের ব্যবস্থা নিয়ে জাতিসংঘের চার্টার কর্তৃপক্ষ।"
+        },
+        "sanctions_regime": {
+          "term": "নিষেধাজ্ঞা শাসন",
+          "definition": "সমন্বিত বিধিনিষেধ সরাসরি সামরিক পদক্ষেপ ছাড়াই আচরণকে প্রভাবিত করতে ব্যবহৃত হয়।"
+        },
+        "arms_control": {
+          "term": "অস্ত্র নিয়ন্ত্রণ",
+          "definition": "চুক্তি এবং যাচাইকরণ ব্যবস্থা যা অস্ত্রের ধরন, পরিমাণ বা স্থাপনা সীমিত করে।"
+        },
+        "non_proliferation": {
+          "term": "অপ্রসারণ",
+          "definition": "পারমাণবিক, রাসায়নিক, জৈবিক, বা উন্নত অস্ত্র ক্ষমতার বিস্তার রোধ করার নীতি।"
+        },
+        "confidence_building_measures": {
+          "term": "আত্মবিশ্বাস-বিল্ডিং ব্যবস্থা",
+          "definition": "স্বচ্ছতা এবং যোগাযোগের সরঞ্জাম যা ভুল বোঝাবুঝি এবং সংঘর্ষের ঝুঁকি কমায়।"
+        },
+        "universal_periodic_review": {
+          "term": "সার্বজনীন পর্যায়ক্রমিক পর্যালোচনা",
+          "definition": "পিয়ার-রিভিউ প্রক্রিয়া যেখানে প্রতিটি জাতিসংঘের সদস্য রাষ্ট্র রিপোর্ট করে এবং অধিকার সুপারিশ গ্রহণ করে।"
+        },
+        "special_rapporteur": {
+          "term": "বিশেষ প্রতিবেদক",
+          "definition": "থিম্যাটিক বা দেশের অধিকার সংক্রান্ত বিষয়গুলির উপর নজরদারি এবং রিপোর্ট করার জন্য স্বাধীন বিশেষজ্ঞ নিয়োগ করা হয়েছে।"
+        },
+        "treaty_body": {
+          "term": "সন্ধি সংস্থা",
+          "definition": "একটি নির্দিষ্ট মানবাধিকার চুক্তির বাস্তবায়ন তদারকিকারী বিশেষজ্ঞদের কমিটি।"
+        },
+        "public_health_emergency": {
+          "term": "জনস্বাস্থ্য জরুরী",
+          "definition": "গুরুতর প্রাদুর্ভাবের ঘটনার জন্য জরুরি সমন্বিত জাতীয় ও আন্তর্জাতিক প্রতিক্রিয়া প্রয়োজন।"
+        },
+        "surveillance": {
+          "term": "এপিডেমিওলজিকাল নজরদারি",
+          "definition": "রোগের প্রবণতা সনাক্ত এবং ট্র্যাক করতে স্বাস্থ্য তথ্যের ক্রমাগত সংগ্রহ এবং বিশ্লেষণ।"
+        },
+        "health_systems": {
+          "term": "স্বাস্থ্য সিস্টেম শক্তিশালীকরণ",
+          "definition": "নির্ভরযোগ্য স্বাস্থ্যসেবা সরবরাহের জন্য কর্মীবাহিনী, অর্থায়ন, রসদ এবং শাসন ব্যবস্থার উন্নতি।"
+        },
+        "transnational_crime": {
+          "term": "ট্রান্সন্যাশনাল অর্গানাইজড ক্রাইম",
+          "definition": "নেটওয়ার্ক এবং অবৈধ বাজারের মাধ্যমে সীমান্ত জুড়ে অপরাধমূলক কার্যকলাপ সমন্বিত।"
+        },
+        "illicit_trafficking": {
+          "term": "অবৈধ পাচার",
+          "definition": "এখতিয়ার জুড়ে মাদক, অস্ত্র, ব্যক্তি বা পণ্যের অবৈধ চলাচল।"
+        },
+        "rule_of_law_capacity": {
+          "term": "আইনের শাসন ক্ষমতা",
+          "definition": "বিচার ব্যবস্থার প্রাতিষ্ঠানিক ক্ষমতা তদন্ত, বিচার এবং ন্যায্যভাবে অধিকার রক্ষা করতে।"
+        },
+        "sustainable_development": {
+          "term": "টেকসই উন্নয়ন",
+          "definition": "সামাজিক অগ্রগতি, অর্থনৈতিক সুযোগ, এবং পরিবেশগত সুরক্ষার ভারসাম্য বজায় রাখা বৃদ্ধির মডেল।"
+        },
+        "financing_for_development": {
+          "term": "উন্নয়নের জন্য অর্থায়ন",
+          "definition": "সরকারী এবং বেসরকারী অর্থায়ন প্রক্রিয়া যা দীর্ঘমেয়াদী উন্নয়ন অগ্রাধিকার সমর্থন করে।"
+        },
+        "policy_coordination": {
+          "term": "নীতি সমন্বয়",
+          "definition": "নকল এড়াতে এবং সম্মিলিত প্রভাব বাড়ানোর জন্য রাষ্ট্র এবং সংস্থার কর্মের সারিবদ্ধতা।"
+        },
+        "child_protection": {
+          "term": "শিশু সুরক্ষা",
+          "definition": "সমস্ত সেটিংসে শিশুদের বিরুদ্ধে শোষণ, অপব্যবহার এবং সহিংসতা প্রতিরোধের ব্যবস্থা।"
+        },
+        "education_access": {
+          "term": "শিক্ষা অ্যাক্সেস",
+          "definition": "সমস্ত শিশুর জন্য অন্তর্ভুক্তিমূলক, ন্যায়সঙ্গত এবং অবিচ্ছিন্ন শেখার সুযোগ নিশ্চিত করা।"
+        },
+        "humanitarian_response": {
+          "term": "মানবিক প্রতিক্রিয়া",
+          "definition": "দ্রুত ত্রাণ কর্ম সঙ্কট এবং দ্বন্দ্ব সেটিংস মধ্যে জরুরী প্রয়োজন মোকাবেলা."
+        },
+        "gender_mainstreaming": {
+          "term": "জেন্ডার মেইনস্ট্রিমিং",
+          "definition": "নীতির নকশা, বাস্তবায়ন এবং মূল্যায়নে লিঙ্গ বিশ্লেষণকে একীভূত করা।"
+        },
+        "gender_based_violence": {
+          "term": "লিঙ্গ-ভিত্তিক সহিংসতা",
+          "definition": "লিঙ্গ পরিচয়, ভূমিকা বা অসম ক্ষমতা সম্পর্কের উপর ভিত্তি করে কাউকে আঘাত করা।"
+        },
+        "economic_empowerment": {
+          "term": "অর্থনৈতিক ক্ষমতায়ন",
+          "definition": "শালীন কাজ, অর্থ, মালিকানা এবং সিদ্ধান্ত নেওয়ার ক্ষমতার অ্যাক্সেস প্রসারিত করা।"
+        },
+        "source_attribution": {
+          "term": "উৎস অ্যাট্রিবিউশন",
+          "definition": "তথ্যের উত্স স্পষ্টভাবে উল্লেখ করা যাতে দাবিগুলি যাচাই করা যায় এবং প্রাসঙ্গিক করা যায়।"
+        },
+        "verified_reporting": {
+          "term": "যাচাইকৃত রিপোর্টিং",
+          "definition": "প্রতিদ্বন্দ্বিতাপূর্ণ তথ্য প্রকাশ করার আগে সাংবাদিকতার মানদণ্ডের অনুমোদন প্রয়োজন।"
+        },
+        "editorial_independence": {
+          "term": "সম্পাদকীয় স্বাধীনতা",
+          "definition": "রাজনৈতিক চাপ বা স্টেকহোল্ডারদের প্রভাব থেকে রিপোর্টিং সিদ্ধান্তের পৃথকীকরণ।"
+        },
+        "climate_mitigation": {
+          "term": "জলবায়ু প্রশমন",
+          "definition": "গ্রীনহাউস-গ্যাস নির্গমন কমায় বা দীর্ঘমেয়াদী কার্বন অপসারণ বাড়ায় এমন কর্ম।"
+        },
+        "climate_adaptation": {
+          "term": "জলবায়ু অভিযোজন",
+          "definition": "নীতি এবং বিনিয়োগ যা জলবায়ু-সম্পর্কিত প্রভাবগুলির দুর্বলতা হ্রাস করে৷"
+        },
+        "cyber_norms": {
+          "term": "সাইবার নিয়ম",
+          "definition": "ডিজিটাল এবং সাইবার ডোমেনে দায়িত্বশীল রাষ্ট্রীয় আচরণের জন্য শেয়ার করা প্রত্যাশা।"
+        },
+        "critical_infrastructure": {
+          "term": "ক্রিটিক্যাল ইনফ্রাস্ট্রাকচার",
+          "definition": "প্রয়োজনীয় সিস্টেম যেমন বিদ্যুৎ, জল, স্বাস্থ্য, এবং যোগাযোগের স্থিতিস্থাপকতা প্রয়োজন।"
+        },
+        "epidemiology": {
+          "term": "এপিডেমিওলজি",
+          "definition": "রোগের ধরণ, কারণ এবং জনসংখ্যার মধ্যে বিতরণের অধ্যয়ন।"
+        },
+        "preparedness_response": {
+          "term": "প্রস্তুতি এবং প্রতিক্রিয়া",
+          "definition": "জরুরী অবস্থা ধারণ ও পরিচালনার জন্য পরিকল্পনা, সমন্বয় এবং বৃদ্ধি কর্ম।"
+        },
+        "non_refoulement": {
+          "term": "নন-রিফাউলমেন্ট",
+          "definition": "নীতিটি লোকেদের এমন জায়গায় ফিরে আসা নিষিদ্ধ করে যেখানে তারা গুরুতর ক্ষতির সম্মুখীন হয়।"
+        },
+        "durable_solutions": {
+          "term": "টেকসই সমাধান",
+          "definition": "বাস্তুচ্যুত মানুষের জন্য দীর্ঘমেয়াদী ফলাফল: প্রত্যাবর্তন, স্থানীয় একীকরণ, বা পুনর্বাসন।"
+        },
+        "nuclear_safeguards": {
+          "term": "নিউক্লিয়ার সেফগার্ডস",
+          "definition": "অস্ত্র ব্যবহারের জন্য পারমাণবিক উপকরণগুলিকে অন্য দিকে সরিয়ে না দেওয়া নিশ্চিত করার জন্য যাচাইকরণ ব্যবস্থা।"
+        },
+        "counter_terrorism": {
+          "term": "কাউন্টার টেররিজম",
+          "definition": "সন্ত্রাসী কার্যকলাপের বিরুদ্ধে সমন্বিত আইনি, প্রতিরোধমূলক এবং নিরাপত্তা ব্যবস্থা।"
+        },
+        "due_process": {
+          "term": "ডিউ প্রসেস",
+          "definition": "তদন্ত, প্রসিকিউশন এবং অনুমোদনের সময় অধিকার রক্ষাকারী ন্যায্য আইনি প্রক্রিয়া।"
+        },
+        "resource_security": {
+          "term": "সম্পদ নিরাপত্তা",
+          "definition": "অর্থনৈতিক এবং পরিবেশগত চাপের অধীনে খাদ্য, জল এবং শক্তিতে নির্ভরযোগ্য অ্যাক্সেস।"
+        },
+        "resilience": {
+          "term": "স্থিতিস্থাপকতা",
+          "definition": "ধাক্কা শোষণ এবং কার্যকরভাবে পুনরুদ্ধার করার জন্য সম্প্রদায় এবং প্রতিষ্ঠানের ক্ষমতা।"
+        }
+      },
+      "topicLine": "বিষয়: {topic}"
+    }
+  },
+  "ideas": {
+    "editIdea": "ধারণা সম্পাদনা করুন",
+    "googleDocsUrl": "Google ডক্স URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "সংক্ষিপ্ত ধারণা পাঠ্য (ঐচ্ছিক)",
+    "save": "সংরক্ষণ করুন",
+    "cancel": "বাতিল করুন",
+    "addIntro": "জায়গায় একটি রেজোলিউশন ধারণা খসড়া করতে একটি Google ডক যোগ করুন, বা একটি ছোট নোট (বা উভয়) টাইপ করুন।",
+    "googleDocsCreateHelp": "নতুন Google ডক অন্য ট্যাবে খোলে; লিঙ্কটি তৈরি হওয়ার পরে এখানে পেস্ট করুন।",
+    "resolutionIdeaPlaceholder": "সমাধান ধারণা...",
+    "add": "যোগ করুন",
+    "noIdeasYet": "এখনও কোন ধারণা.",
+    "ideaLabel": "আইডিয়া",
+    "ideaFallback": "ধারণা {সংখ্যা}",
+    "linkedDoc": "লিঙ্কড ডক",
+    "addedOn": "যোগ করা হয়েছে {তারিখ}",
+    "edit": "সম্পাদনা করুন",
+    "delete": "মুছুন",
+    "ideaDocument": "ধারণা দলিল",
+    "summary": "সারাংশ",
+    "emptyIdea": "খালি ধারণা।"
+  },
+  "stances": {
+    "heatmapTitle": "সংক্ষিপ্ত অবস্থান ওভারভিউ (হিটম্যাপ)",
+    "heatmapHelp": "আপনার বরাদ্দ কতটা ___ সমর্থন করে? (1-5 স্কেল)",
+    "topicPlaceholder": "যেমন জলবায়ু কর্ম",
+    "extentLabel": "ব্যাপ্তি (1-5):",
+    "extentHelpTitle": "ব্যাপ্তি (1-5)",
+    "extentHelpBody": "1 মানে আপনার বরাদ্দের বিষয়টির জন্য সামান্য সমর্থন আছে, এবং 5 মানে শক্তিশালী সমর্থন। কমিটিতে আপনার অবস্থানের সাথে মেলে এমন একটি নম্বর বেছে নিন।",
+    "add": "যোগ করুন",
+    "viewOnlyHeatmap": "কর্মীদের জন্য শুধুমাত্র দেখার হিটম্যাপ।",
+    "notesPerAllocation": "বরাদ্দ প্রতি নোট",
+    "noAllocationsYet": "এখনো কোনো বরাদ্দ নেই",
+    "notesPlaceholder": "এই বরাদ্দের জন্য স্ট্যান্স নোট...",
+    "noteLanguageWarning": "পাঠক সতর্কতা: এই নোটে অনুপযুক্ত ভাষা থাকতে পারে।",
+    "save": "সংরক্ষণ করুন",
+    "saveHelpTitle": "অবস্থান নোট সংরক্ষণ করুন",
+    "saveHelpBody": "এই বরাদ্দের জন্য স্ট্যান্স নোট সংরক্ষণ করে। এটি কর্মীরা এবং (কমিটির সেটিংসের উপর নির্ভর করে) অন্যান্য অংশগ্রহণকারীদের দ্বারা দেখা যেতে পারে।"
+  },
+  "speeches": {
+    "newSpeech": "নতুন বক্তৃতা",
+    "speechTitlePlaceholder": "বক্তৃতা শিরোনাম",
+    "googleDocsUrl": "Google ডক্স URL",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "একটি নতুন ট্যাবে Google খোলে; প্রস্তুত হলে এখানে নথির URL পেস্ট করুন।",
+    "plainTextOptional": "প্লেইন টেক্সট ড্রাফ্ট (আপনি যদি Google ডক ব্যবহার করেন তাহলে ঐচ্ছিক)",
+    "save": "সংরক্ষণ করুন",
+    "cancel": "বাতিল করুন",
+    "noSpeechesYet": "এখনো কোনো বক্তৃতা নেই। একটি Google ডক লিঙ্ক করুন বা পাঠ্য পেস্ট করুন।",
+    "speechLabel": "বক্তৃতা",
+    "untitled": "শিরোনামহীন",
+    "edit": "সম্পাদনা করুন",
+    "speechDocument": "বক্তৃতা নথি",
+    "draftText": "খসড়া পাঠ্য",
+    "noContentHint": "সম্পাদনার সাথে একটি Google ডক লিঙ্ক করুন, বা ফর্মে প্লেইন টেক্সট যোগ করুন।"
+  },
+  "committeeRoom": {
+    "committeeLabel": "কমিটি",
+    "yourContext": "আপনার প্রসঙ্গ",
+    "roleLabel": "ভূমিকা",
+    "seatLabel": "আসন",
+    "clearSearchTitle": "অনুসন্ধান সাফ করুন এবং সমস্ত প্রতিনিধি দল দেখান",
+    "vacantLabel": "খালি",
+    "assignedLabel": "বরাদ্দ করা হয়েছে",
+    "daisLabel": "ডাইস",
+    "phaseLabel": "পর্যায়",
+    "phaseVoting": "ভোট",
+    "phaseDebate": "বিতর্ক",
+    "focusSearchTitle": "ফোকাস অনুসন্ধান (ডেইস শিরোনাম এবং নাম আপনার প্রশ্নের সাথে মেলে)",
+    "tipLabel": "টিপ",
+    "searchVacantTitle": "রুমে \"খালি\" আসন অনুসন্ধান করুন",
+    "searchHint": "রুমে মিলগুলি হাইলাইট করতে একটি দেশ, প্রতিনিধির নাম, স্কুল, সর্বনাম বা \"খালি\" টাইপ করুন। প্রথম ম্যাচে ঝাঁপ দিতে এন্টার টিপুন; Esc পরিষ্কার করে। খালি আসনে ঝাঁপ দিতে খালিতে ক্লিক করুন।",
+    "findLabel": "একটি প্রতিনিধি দল বা মঞ্চ সদস্য খুঁজুন",
+    "searchPlaceholder": "দেশ, নাম, স্কুল...",
+    "matchesCount": "{total}টি আসনের মধ্যে {match} মিলছে",
+    "enterScrolls": "স্ক্রোল লিখুন",
+    "typeToFilterHint": "ফিল্টার করতে টাইপ করুন - প্রথম মিলের জন্য স্ক্রোল লিখুন",
+    "noMatches": "কোন মিলিত প্রতিনিধি দল বা মঞ্চ আসন.",
+    "digitalDisplay": "ডিজিটাল ডিসপ্লে",
+    "floorLabel": "মেঝে",
+    "staffSeatsHeading": "স্টাফ - আসন",
+    "searchAria": "প্রতিনিধি দল অনুসন্ধান করুন",
+    "virtualRoomVacant": "খালি",
+    "profileAria": "প্রোফাইল দেখুন: {country}",
+    "vacantSeatAria": "খালি আসন",
+    "placardAria": "প্ল্যাকার্ড {দেশ}",
+    "gavelAria": "গেভেল",
+    "viewProfileAria": "প্রোফাইল দেখুন: {title}",
+    "noProfileLinkAria": "{title} (কোন প্রোফাইল লিঙ্ক নেই)",
+    "committeeFloor": "কমিটির ফ্লোর",
+    "virtualRoomFigureAria": "ভার্চুয়াল কমিটি রুম - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "প্রতিনিধিদের ফিল্টারিং. প্রথম হাইলাইট করা আসনটি রিংয়ে প্রথম ম্যাচ।",
+    "helperText": "প্ল্যাকার্ড তালিকাভুক্ত দেশ (বরাদ্দ থেকে), নাম, স্কুল, এবং প্রতিটি প্রতিনিধির প্রোফাইল থেকে সর্বনাম। প্রোফাইলের অধীনে আপনার সম্পাদনা করুন. খালি কমিটির আসনগুলি খালি হিসাবে দেখায়। সেই সদস্যের পৃষ্ঠা খুলতে একটি ভরা প্ল্যাকার্ড বা ডেস সিটে ক্লিক করুন (সেখান থেকে চ্যাট করুন এবং রিপোর্ট করুন)।",
+    "virtualRoomCaption": "ভার্চুয়াল মডেল ইউএন কমিটির কক্ষে দেশ, নাম, স্কুল এবং সর্বনাম দেখানো প্রতিনিধি প্ল্যাকার্ড।"
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "কথা বলার অনুরোধ",
+      "delegateFallback": "প্রতিনিধি",
+      "needAllocation": "কথা বলার অনুরোধ করার জন্য আপনার একটি বরাদ্দ প্রয়োজন।",
+      "alreadyQueued": "সারিতে আপনার কাছে ইতিমধ্যেই একটি সক্রিয় কথা বলার অনুরোধ রয়েছে৷",
+      "requested": "কথা বলার অনুরোধ রইল। আপনি সারিতে উপস্থিত হবে.",
+      "requestFailed": "কথা বলার অনুরোধ করতে ব্যর্থ।",
+      "helpBody": "আপনার প্রতিনিধি দলকে চেয়ারের সারিতে পাঠান। আপনার কাছে একবারে একটি সক্রিয় অপেক্ষা/বর্তমান অনুরোধ থাকতে পারে।",
+      "purposeLabel": "ঐচ্ছিক উদ্দেশ্য (সারি লেবেলে দেখায়)",
+      "purposeHelpTitle": "উদ্দেশ্য লেবেল",
+      "purposeHelpBody": "এই পাঠ্যটি আপনার দেশের নামের সাথে যুক্ত করা হয়েছে যাতে চেয়ারগুলি দেখতে পারে আপনি কেন মেঝেতে অনুরোধ করছেন৷",
+      "purposePlaceholder": "যেমন সমর্থন + সংশোধন ওভারভিউ",
+      "requesting": "অনুরোধ করা হচ্ছে...",
+      "rollPromptTitle": "চেয়ার অনুমোদন প্রয়োজন",
+      "rollPromptBodyPickStatus": "সেশন শুরু হয়েছে। কথা বলা এবং ভোট দেওয়া আনলক করতে আপনার রোল-কল স্ট্যাটাস বেছে নিন। এই পছন্দ পরিবর্তন করা যাবে না.",
+      "rollPromptBodyWaitSessionStart": "কমিটির অধিবেশন শুরুর জন্য চেয়ারম্যানের অপেক্ষায়।",
+      "rollPromptBodyWaitRollPrompt": "রোল-কল প্রম্পটের জন্য অপেক্ষা করা হচ্ছে।",
+      "rollPromptBodyMarkedAbsent": "আপনি বর্তমানে অনুপস্থিত হিসাবে চিহ্নিত। চেয়ারকে বলুন আপনি বক্তৃতা এবং ভোট দেওয়ার জন্য উপস্থিত চিহ্নিত করতে।",
+      "rollPromptBodyChecking": "আপনার রোলের স্থিতি পরীক্ষা করা হচ্ছে...",
+      "rollPromptSaving": "সংরক্ষণ করা হচ্ছে...",
+      "rollPromptPresent": "বর্তমান",
+      "rollPromptPresentVoting": "উপস্থিত এবং ভোটদান"
+    },
+    "motionVoting": {
+      "votingProcedure": "ভোট পদ্ধতি",
+      "currentMotion": "বর্তমান গতি",
+      "motioner": "আন্দোলনকারী",
+      "majority": "সংখ্যাগরিষ্ঠ",
+      "majoritySimple": "সরল",
+      "tally": "হ্যাঁ {হ্যাঁ} - না {না} - মোট {মোট}",
+      "help": "মঞ্চটি সেশনে প্রতিটি প্রতিনিধি দলের ভোট রেকর্ড করে। মোশন ভোট শুধুমাত্র হ্যাঁ বা না ব্যবহার করে (কোন বিরত থাকুন)। মোট শুধুমাত্র প্ল্যাকার্ড গণনা করা হয় যেখানে হ্যাঁ বা না রেকর্ড করা হয়েছে; অনুপস্থিত প্রতিনিধিদের এড়িয়ে যাওয়া হয়।"
+    },
+    "activeMotion": {
+      "currentMotion": "বর্তমান গতি",
+      "motionFallback": "গতি",
+      "motioner": "আন্দোলনকারী",
+      "majority": "সংখ্যাগরিষ্ঠ",
+      "majoritySimple": "সরল",
+      "type": "টাইপ",
+      "timer": "টাইমার",
+      "currentSpeaker": "বর্তমান বক্তা",
+      "nextSpeaker": "পরবর্তী স্পিকার",
+      "speakerTimeLeftCap": "স্পিকার সময় (বাম / ক্যাপ)",
+      "speakerTimeLeftTotal": "স্পিকারের সময় (বাম / মোট)",
+      "perSpeaker": "(স্পিকার প্রতি)",
+      "paused": "(বিরতি)",
+      "pauseReason": "বিরতি: {কারণ}"
+    },
+    "floorStatus": {
+      "sessionTime": "সেশনের সময়",
+      "sessionNotStarted": "সেশন শুরু হয়নি",
+      "limit": "সীমা",
+      "limitRemaining": "{মান} বাকি",
+      "limitOverBy": "{মান} দ্বারা বেশি",
+      "quickLinkSession": "অধিবেশন",
+      "quickLinkRoll": "রোল",
+      "quickLinkSpeakers": "বক্তারা",
+      "quickLinkMotions": "গতিবিধি",
+      "quickLinkTimer": "টাইমার",
+      "dais": "ডাইস",
+      "pinned": "পিন করা হয়েছে",
+      "viewFullAnnouncement": "সম্পূর্ণ ঘোষণা দেখুন",
+      "timerPausesReadOnly": "টাইমার বিরতি (শুধু পড়ার জন্য)",
+      "speakerList": "স্পিকারের তালিকা",
+      "speakerFallback": "স্পিকার",
+      "rollCallYou": "রোল কল (আপনি)",
+      "fullAnnouncement": "সম্পূর্ণ ঘোষণা",
+      "daisAnnouncement": "ডাইস ঘোষণা",
+      "close": "বন্ধ",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "সেশনের নাম",
+      "sessionNamePlaceholder": "যেমন সকালের অধিবেশন",
+      "sessionNameSaving": "সংরক্ষণ করা হচ্ছে...",
+      "sessionNameSaved": "সংরক্ষিত",
+      "sessionNameHint": "স্বয়ংক্রিয়ভাবে সংরক্ষণ করে এবং সেশন ইতিহাসে প্রদর্শিত হয়।",
+      "title": "কমিটির অধিবেশন",
+      "subtitle": "কমিটির অধিবেশন শুরু বা বন্ধ করুন।",
+      "helpStartStop": "প্রত্যেকের জন্য লাইভ কমিটির সেশন টাইমার/স্ট্যাটাস শুরু করে। স্টপ সেশন শেষ করে এবং বর্তমান সময়সীমা সাফ করে।",
+      "migrationUnavailable": "সর্বশেষ ডাটাবেস মাইগ্রেশন প্রয়োগ না হওয়া পর্যন্ত সেশন নিয়ন্ত্রণগুলি সাময়িকভাবে অনুপলব্ধ।",
+      "endTimeInFuture": "ভবিষ্যতে একটি সমাপ্তির সময় বেছে নিন, অথবা কোন সীমাতে স্যুইচ করুন।",
+      "sessionStartUnavailable": "সর্বশেষ মাইগ্রেশন প্রয়োগ না হওয়া পর্যন্ত সেশন শুরুর টাইমস্ট্যাম্প অনুপলব্ধ।",
+      "endTimeInFutureSetNoLimit": "ভবিষ্যতে একটি শেষ সময় চয়ন করুন, বা কোন সীমা সেট করবেন না।",
+      "sessionLimitUpdated": "সেশনের সীমা আপডেট করা হয়েছে।",
+      "startedLabel": "শুরু হয়েছে:",
+      "timeInLabel": "সময়:",
+      "timeUntilEndLabel": "শেষ পর্যন্ত সময়:",
+      "overByValue": "{মান} দ্বারা বেশি",
+      "modeLabel": "মোড:",
+      "modeStopwatchNoLimit": "স্টপওয়াচ (কোন সময় সীমা নেই)",
+      "sessionNotRunning": "সেশন চলছে না।",
+      "sessionLimit": "সেশন সীমা",
+      "sessionLimitModesTitle": "সেশন সীমা মোড",
+      "sessionLimitModesHelp": "কোনটি: শেষ নেই। সময় বাজেট: শুরু থেকে গণনা। শেষ: আপনার স্থানীয় টাইমজোনে নির্দিষ্ট ঘড়ির সময়।",
+      "sessionLimitOptional": "ঐচ্ছিক।",
+      "noneLabel": "কোনোটিই নয়",
+      "noneDescription": "আপনি থামা পর্যন্ত চলে।",
+      "timeBudgetLabel": "সময় বাজেট",
+      "timeBudgetDescription": "আপনি শুরু মুহূর্ত থেকে গণনা.",
+      "endTimeLabel": "শেষ সময়",
+      "endTimeDescription": "একটি নির্দিষ্ট ঘড়ির সময় ব্যবহার করে (যদি উভয়ই সেট করা থাকে তবে বাজেট ওভাররাইড করে)।",
+      "noneIndefinite": "কোনোটিই নয় (অনির্দিষ্টকালের)",
+      "noneScheduledEndHint": "কোন নির্ধারিত শেষ নেই; শুধুমাত্র অতিবাহিত সময় দেখানো হয়.",
+      "timeBudgetFromStart": "শুরু থেকে সময় বাজেট",
+      "hoursLabel": "ঘন্টা",
+      "minutesLabel": "মিনিট",
+      "minimumOneMinute": "(সর্বনিম্ন 1 মিনিট)",
+      "endAtLocalTime": "শেষ হবে (স্থানীয় সময়)",
+      "stopSession": "সেশন বন্ধ করুন",
+      "saveLimit": "সীমা সংরক্ষণ করুন",
+      "saveLimitHelp": "সেশন বন্ধ না করেই সেশন চলাকালীন আপডেট করা সীমা সেটিংস প্রয়োগ করে।",
+      "startSession": "সেশন শুরু করুন",
+      "sidebarUsePrefix": "জন্য সাইডবার ব্যবহার করুন",
+      "rollCall": "রোল কল",
+      "speakers": "বক্তারা",
+      "formalMotions": "আনুষ্ঠানিক গতিবিধি",
+      "timer": "টাইমার",
+      "sidebarAnd": "এবং",
+      "announcements": "ঘোষণা",
+      "sidebarUseSuffix": "- প্রতি ট্যাবে একটি টুল।",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "সেশনের ইতিহাস",
+      "savedCount": "{count} সংরক্ষিত",
+      "permissionsHint": "চেয়ার এন্ট্রি নাম পরিবর্তন করতে পারেন. SMT/প্রশাসক এন্ট্রির নাম পরিবর্তন এবং মুছে ফেলতে পারেন।",
+      "empty": "এখনো কোনো সেশনের ইতিহাস নেই।",
+      "rename": "নাম পরিবর্তন করুন",
+      "delete": "মুছুন",
+      "deleteConfirm": "ইতিহাস থেকে এই অধিবেশন মুছে ফেলবেন?",
+      "sessionNamePrompt": "সেশনের নাম",
+      "rangeClosed": "{পরিসীমা}",
+      "rangeOngoing": "{পরিসীমা} -> চলমান"
+    },
+    "timerPage": {
+      "title": "টাইমার",
+      "controlsTitle": "টাইমার নিয়ন্ত্রণ",
+      "controlsHelp": "সামগ্রিক বিতর্কের সময়ের জন্য সাধারণ ফ্লোর ব্যবহার করুন, অথবা একটি নির্দিষ্ট খোলা ভোট আইটেমের সাথে দৃশ্যমানতা বাঁধতে মোশন ভোট ব্যবহার করুন।",
+      "tabSetup": "1) সেটআপ",
+      "tabClock": "2) ঘড়ি নিয়ন্ত্রণ",
+      "tabNotes": "3) স্পিচ নোট",
+      "tabLog": "4) পজ লগ",
+      "setupHelp": "এই টাইমারটি সাধারণ ফ্লোরের জন্য (সর্বদা প্রতিনিধিদের কাছে দৃশ্যমান) বা ভোট দেওয়ার জন্য খোলা গতির সাথে আবদ্ধ কিনা তা চয়ন করুন (প্রতিনিধিরা কেবলমাত্র ভোটটি সক্রিয় আইটেম হলে এটি দেখতে পান)৷ প্রতি-স্পীকার সময় চালু থাকলে, মডারেটেড ককাস নির্বিশেষে ঘড়িটি দৃশ্যমান থাকে। ঘড়ি বিরাম দিন / স্টার্ট ক্লক ফ্রিজ বা কাউন্টডাউন পুনরায় শুরু করুন। স্পীকার সময় (বাকি) এবং মোট সময় স্বাধীনভাবে সেট করুন, তারপর টাইমার সংরক্ষণ করুন। প্রিসেট একই দৈর্ঘ্য উভয় পূরণ; আপনি পরে উভয় ক্ষেত্রের সম্পাদনা করতে পারেন। বিরতি একটি সংক্ষিপ্ত কারণ সঙ্গে লগ করা হয়.",
+      "namedPreset": "নাম প্রিসেট",
+      "applyPreset": "প্রিসেট প্রয়োগ করুন...",
+      "floorLabelDelegates": "ফ্লোর লেবেল (প্রতিনিধি)",
+      "floorLabelPlaceholder": "যেমন GSL 60s",
+      "timerPurpose": "টাইমার উদ্দেশ্য",
+      "purposeGeneralFloor": "সাধারণ বিতর্ক / ফ্লোর (ভোটের সাথে আবদ্ধ নয়)",
+      "purposeMotionVote": "ওপেন মোশন - টাইমার শুধুমাত্র যখন সেই ভোট মেঝেতে সক্রিয় থাকে",
+      "openMotionForVoting": "উন্মুক্ত গতি (ভোট দেওয়ার জন্য উন্মুক্ত হতে হবে)",
+      "selectMotion": "গতি নির্বাচন করুন...",
+      "untitled": "শিরোনামহীন",
+      "noOpenMotionWarning": "ভোটের জন্য কোন আন্দোলন উন্মুক্ত নয়। প্রথমে একটি ভোট খুলুন, বা সাধারণ ফ্লোরে উদ্দেশ্য পরিবর্তন করুন।",
+      "clock": "ঘড়ি",
+      "running": "চলমান",
+      "paused": "বিরতি দেওয়া হয়েছে",
+      "saveToEnablePauseStart": "বিরতি/স্টার্ট সক্ষম করতে টাইমার সংরক্ষণ করুন।",
+      "pauseReasonLogged": "বিরতির কারণ (লগ করা)",
+      "pauseReasonPlaceholder": "যেমন পয়েন্ট অফ অর্ডার, প্রযুক্তিগত সমস্যা, অনিয়ন্ত্রিত ককাস...",
+      "pauseClock": "ঘড়ি থামান",
+      "startClock": "ঘড়ি শুরু করুন",
+      "perSpeakerTitle": "প্রতি-স্পীকার সময় (পরিমিত ককাস)",
+      "perSpeakerHelp": "প্রতি-স্পীকার ক্যাপ হিসাবে মোট সময় এবং অবশিষ্ট সময় হিসাবে স্পীকার সময় সেট করুন; অগ্রিম পরবর্তী স্পীকারে চলে যায় এবং ক্যাপে অবশিষ্ট রিসেট করে।",
+      "currentSpeaker": "বর্তমান বক্তা",
+      "nextSpeaker": "পরবর্তী স্পিকার",
+      "speechNotesCurrentSpeaker": "স্পিচ নোট (বর্তমান স্পিকার)",
+      "speechNotesHelp": "নোটগুলি বর্তমান স্পিকার টাইমার পাঠ্যের সাথে আবদ্ধ থাকে এবং যখন স্পিকার তালিকায় কেউ বর্তমান চিহ্নিত করে, তাদের প্রতিনিধি দলকে রেফারেন্সের জন্য সংরক্ষণ করা হয়।",
+      "timerFloorLabel": "টাইমার (মেঝে):",
+      "speakerListCurrent": "বক্তা তালিকা (বর্তমান):",
+      "noCurrentDelegation": "স্পিকার তালিকায় কোনো প্রতিনিধি দলকে বর্তমান হিসেবে চিহ্নিত করা হয়নি।",
+      "note": "দ্রষ্টব্য",
+      "notePlaceholder": "পয়েন্ট, POI, টোন, ফলো-আপ...",
+      "saveSpeechNote": "বক্তৃতা নোট সংরক্ষণ করুন",
+      "recentNotes": "আপনার সাম্প্রতিক নোট (এই কমিটি)",
+      "delete": "মুছুন",
+      "speakerTimeRemaining": "স্পিকারের সময় (বাকি)",
+      "remainingHelpPerSpeaker": "বর্তমান স্পিকারের জন্য কাউন্টডাউন (আপনি অগ্রসর হলে পুনরায় সেট করুন)।",
+      "remainingHelpNormal": "বর্তমান স্পিকারের জন্য কাউন্টডাউন (মোট থেকে কম হতে পারে)।",
+      "totalTime": "মোট সময়",
+      "totalHelpPerSpeaker": "প্রতি-স্পীকার ক্যাপ (মেঝে হর; এর জন্য অগ্রিম রিফিল বাকি)।",
+      "totalHelpNormal": "এই টাইমার সেগমেন্টের সম্পূর্ণ দৈর্ঘ্য (মেঝেতে স্ল্যাশের পরে দেখানো হয়েছে)।",
+      "saveTimer": "টাইমার সংরক্ষণ করুন",
+      "advanceSpeakerReset": "অগ্রিম স্পিকার এবং রিসেট ঘড়ি",
+      "recentPauseLog": "সাম্প্রতিক বিরতি লগ",
+      "noPauseEvents": "এই কমিটির জন্য এখনও কোনো বিরতি ইভেন্ট লগ করা হয়নি.",
+      "openPauseLogHint": "রেকর্ড করা বিরতির কারণ এবং টাইমস্ট্যাম্প পর্যালোচনা করতে পজ লগ খুলুন।",
+      "saved": "টাইমার সংরক্ষিত।",
+      "savedCapped": "টাইমার সংরক্ষিত। স্পিকারের সময় মোটের চেয়ে বেশি ছিল; মোট সীমাবদ্ধ।",
+      "alreadyPaused": "টাইমার ইতিমধ্যেই বিরাম দেওয়া হয়েছে৷",
+      "pausedForCommittee": "কমিটির জন্য টাইমার বিরতি.",
+      "alreadyRunning": "টাইমার ইতিমধ্যেই চলছে৷",
+      "runningForCommittee": "কমিটির জন্য টাইমার চলমান.",
+      "euTimerBoardTitle": "ইইউ পার্লামেন্ট টাইমার বোর্ড (11 টাইমার)",
+      "euTimerBoardHelp": "পার্টি প্রতি একটি টাইমার, প্লাস মোট সময়, POI/POC সময় এবং স্পীকার সময়। ঘড়ি ট্যাবে লাইভ টাইমার ক্ষেত্রগুলিতে একটি সারি অনুলিপি করতে প্রয়োগ করুন (স্পিকার সময় / টাইমার সংরক্ষণ করুন)।",
+      "euTimerName": "নাম",
+      "euTimerTag": "ট্যাগ",
+      "euTotalTime": "মোট সময়",
+      "euPoiPocTime": "POI / POC সময়",
+      "euSpeakerTime": "স্পিকার সময়"
+    }
   }
 }

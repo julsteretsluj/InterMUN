@@ -11,7 +11,7 @@ import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmail
 import { ChairAllocationAutoRefresh } from "./ChairAllocationAutoRefresh";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
 type AllocationRow = {
@@ -62,6 +62,7 @@ export default async function ChairAllocationMatrixPage() {
   const tMatrix = await getTranslations("chairAllocationMatrixPage");
   const tTopics = await getTranslations("agendaTopics");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const locale = await getLocale();
   const supabase = await createClient();
   const {
     data: { user },
@@ -166,7 +167,8 @@ export default async function ChairAllocationMatrixPage() {
         {translateConferenceHeadline(
           tTopics,
           tCommitteeLabels,
-          [activeConf.name, activeConf.committee].filter(Boolean).join(" — ")
+          [activeConf.name, activeConf.committee].filter(Boolean).join(" — "),
+          locale
         )}
       </p>
 

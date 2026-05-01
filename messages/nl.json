@@ -338,7 +338,23 @@
     "openMotionFloorFirst": "Open eerst de bewegingsvloer voor uitspraken.",
     "openMotionBlocksRecording": "Er ligt al een motie ter stemming. Sluit het voordat u verdere verklaringen opneemt.",
     "statedMotionRecorded": "De motie is opgenomen (nog niet open voor stemming).",
-    "statedMotionRemoved": "Gestelde motie verwijderd."
+    "statedMotionRemoved": "Gestelde motie verwijderd.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Set the live topic for the floor, then select a topic below to see recorded ballots for that agenda item.",
+    "agendaLiveBadge": "Live",
+    "agendaSetLive": "Set live topic",
+    "agendaViewingVotes": "Committee vote totals",
+    "agendaRefresh": "Refresh",
+    "agendaLoadingCounts": "Loading vote counts…",
+    "agendaBallotsRecorded": "{count} ballots recorded",
+    "agendaMotionsWithBallots": "{count} motions with ballots",
+    "agendaYesNoAbstainLine": "Yes {yes} · No {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Other {count}",
+    "agendaNoBallotsForTopic": "No ballots recorded for this topic yet.",
+    "agendaNoMotionsYet": "No motions on file for this topic yet.",
+    "agendaByMotion": "By motion",
+    "agendaOpenVotingPanel": "Voting",
+    "agendaCloseVotingPanel": "Close"
   },
   "chairChecklists": {
     "common": {
@@ -667,7 +683,8 @@
     "pointsLog": "• Puntenlog",
     "formalMotions": "Formele moties",
     "timer": "Timer",
-    "smtProfile": "Profiel"
+    "smtProfile": "Profiel",
+    "committeeAgenda": "📑 Agenda"
   },
   "setupPage": {
     "title": "Supabase is niet geconfigureerd",
@@ -835,7 +852,8 @@
       "archive": "Archief",
       "officialLinks": "Officiële koppelingen",
       "roomCode": "Kamercode",
-      "settings": "Instellingen"
+      "settings": "Instellingen",
+      "agenda": "Agenda"
     }
   },
   "smtNav": {
@@ -901,855 +919,6 @@
       "memberStates": "VN-lidstaten",
       "unSystem": "VN-systeem (oprichters en leden)",
       "history": "VN-geschiedenis"
-    }
-  },
-  "views": {
-    "sources": {
-      "addSource": "Bron toevoegen",
-      "sourceUrl": "Bron-URL",
-      "urlPlaceholder": "https://docs.google.com/document/d/… (aanbevolen)",
-      "urlHelp": "Voor een nieuw Google-document gebruikt u de knop en plakt u de documentlink hier.",
-      "titleOptional": "Titel (optioneel)",
-      "saveChanges": "Wijzigingen opslaan",
-      "editSource": "Bron bewerken",
-      "urlPlaceholderShort": "Google Document of andere URL",
-      "empty": "Nog geen bronnen. Voeg een Google Doc-link toe om deze hier te openen.",
-      "sourceLabel": "Bron",
-      "openLink": "Link openen",
-      "embedHeading": "Brondocument",
-      "notGoogleDoc": "Deze URL is geen Google-document. Gebruik een docs.google.com/document/d/… link om hier in te sluiten en te bewerken; Open anders de bovenstaande link."
-    },
-    "documents": {
-      "alertDelegatePositionPaper": "Afgevaardigden kunnen Position Papers niet rechtstreeks uploaden. Gebruik een ander documenttype.",
-      "alertOnlyChairsPositionPaper": "Alleen voorzitters/SMT/admin kunnen Position Papers uploaden.",
-      "alertOnlySmtChairReport": "Alleen SMT/admin kan voorzittersrapporten uploaden.",
-      "alertOnlySmtRop": "Alleen SMT/admin kan RoP-documenten uploaden.",
-      "alertOnlySmtAwardCriteria": "Alleen SMT/admin kan Award Criteria-documenten uploaden.",
-      "alertNeedContentOrUrl": "Voeg lokale tekstinhoud of een Google Documenten-URL toe.",
-      "confirmDelete": "Dit document verwijderen?",
-      "delegatePrepTitle": "Documentgedeelte voorbereiden",
-      "delegatePrepBody": "U kunt uw eigen <prep>Prep-documenten</prep> rechtstreeks vanaf deze pagina uploaden, bekijken en bewerken.",
-      "positionPaperGuideTitle": "Plaats de papiergeleider",
-      "positionPaperGuideBlurb": "Download de gids voor tijdelijke aanduidingen terwijl de definitieve PDF wordt voorbereid.",
-      "downloadPlaceholderGuide": "Gids voor tijdelijke aanduidingen downloaden",
-      "addDocument": "Document toevoegen",
-      "tabs": {
-        "ariaLabel": "Documentsecties",
-        "library": "Bibliotheek",
-        "compose": "Componeren",
-        "composeHint": "Start een nieuw document of bewerk een bestaand concept vanaf dit tabblad."
-      },
-      "newDocumentTitle": "Nieuw document",
-      "editDocumentTitle": "Document bewerken",
-      "typeLabel": "Type",
-      "types": {
-        "position_paper": "Positie papier",
-        "chair_report": "Voorzitter verslag",
-        "rop": "RoP",
-        "award_criteria": "Gunningscriteria",
-        "chair_notes": "Aantekeningen van de voorzitter",
-        "prep_doc": "Document voorbereiden"
-      },
-      "delegatePositionPaperNote": "Standpunten worden door de voorzitters geüpload met feedback.",
-      "delegateOwner": "Gedelegeerde eigenaar",
-      "chairRecipient": "Ontvanger van de stoel",
-      "titleLabel": "Titel",
-      "titlePlaceholder": "Documenttitel",
-      "googleDocsUrl": "URL van Google Documenten",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/… (weergave/bewerken insluiten in app)",
-      "googleDocsHelp": "Gebruik Nieuw Google-document om Google op een nieuw tabblad te openen en plak vervolgens de documentlink hier. Platte tekst hieronder is optioneel. Elk document heeft lokale tekst, een Google Doc-link of beide nodig.",
-      "plainTextOptional": "Platte tekst (optioneel)",
-      "plainTextPlaceholder": "Notities of concepttekst…",
-      "chairFeedbackLabel": "Feedback van de voorzitter",
-      "chairFeedbackPlaceholder": "Feedback voor het standpunt van de afgevaardigde...",
-      "empty": "Nog geen documenten. Voeg er een toe of koppel een Google-document.",
-      "sidebarDocumentLabel": "Document",
-      "sections": {
-        "chairReports": "Voorzitter rapporteert",
-        "rop": "RoP",
-        "awardCriteria": "Gunningscriteria",
-        "prepDocuments": "Documenten voorbereiden",
-        "chairNotes": "Aantekeningen van de voorzitter",
-        "otherDocuments": "Andere documenten"
-      },
-      "untitled": "Zonder titel",
-      "linkedDocumentHeading": "Gekoppeld document",
-      "notesHeading": "Opmerkingen",
-      "noGoogleDocYet": "Nog geen Google-document gekoppeld. Gebruik Bewerken om een ​​docs.google.com/document/d/… URL toe te voegen.",
-      "chairFeedbackHeading": "Feedback van de voorzitter",
-      "noFeedbackYet": "Nog geen feedback toegevoegd."
-    },
-    "resolutions": {
-      "enterDelegateEmailFirst": "Voer eerst een e-mailadres van een gemachtigde in.",
-      "sentToDelegate": "Verzonden naar {e-mail}.",
-      "newResolution": "Nieuwe resolutie",
-      "maxDraftResolutions": "Deze commissie heeft al {count} ontwerpresoluties.",
-      "googleDocLink": "Google Doc-link",
-      "googleDocUrlPlaceholder": "URL van Google Documenten (docs.google.com/document/d/… - gebruikt voor insluiten en bewerken)",
-      "googleDocUrlHelp": "Nieuw Google-document wordt geopend op een ander tabblad; kopieer de URL uit de adresbalk en plak deze hier.",
-      "mainSubmittersPlaceholder": "Belangrijkste indieners (gebruikers-ID's, door komma's gescheiden)",
-      "coSubmittersPlaceholder": "Mede-indieners (gebruikers-ID's, door komma's gescheiden)",
-      "create": "Creëren",
-      "cancel": "Annuleren",
-      "openInNewTab": "Openen in nieuw tabblad",
-      "noGoogleDocLink": "Geen Google Doc-link",
-      "visibleToOtherBloc": "Zichtbaar voor ander blok",
-      "resolutionCounts": "Hoofdondertitels: {hoofd} | Co-subs: {co} | Ondertekenaars: {ondertekenaars}",
-      "blocButton": "Blok {naam} ({stand})",
-      "signVirtually": "Virtueel ondertekenen (belangrijkste subs op de hoogte gebracht)",
-      "shareByEmail": "Deel de oplossing per e-mail",
-      "delegateEmailPlaceholder": "delegatie@email.com",
-      "sendToDelegate": "Verzenden naar afgevaardigde",
-      "clauseEditor": "Clausule-editor",
-      "noClausesYet": "Nog geen clausules.",
-      "clauseNumber": "Artikel {nummer}",
-      "saveClause": "Bewaar clausule",
-      "delete": "Verwijderen",
-      "addClausePlaceholder": "Een nieuwe clausule toevoegen...",
-      "addClause": "Clausule toevoegen",
-      "clauseVoteHistory": "Stemgeschiedenis van clausules",
-      "noClauseOutcomesYet": "Er zijn nog geen geregistreerde stemmingsresultaten over de clausule.",
-      "clauseFallback": "Clausule",
-      "passed": "GESLAAGD",
-      "failed": "MISLUKT",
-      "motionId": "Beweging {id}"
-    },
-    "voting": {
-      "tabs": {
-        "ariaLabel": "Stemsecties",
-        "open": "Open",
-        "closed": "Gesloten"
-      },
-      "requiredMajority": "Vereiste meerderheid",
-      "helpRequiredMajorityTitle": "Vereiste meerderheid",
-      "helpRequiredMajorityBody": "Kies de stemdrempel die wordt gebruikt om te beslissen over wel/niet slagen. 'Eenvoudig' is meer dan de helft. Voor '2/3' is een supermeerderheid vereist.",
-      "majoritySimple": "Eenvoudig",
-      "majorityTwoThirds": "2/3",
-      "majorityLine": "{label} meerderheid",
-      "mustVote": "MOET stemmen",
-      "helpMustVoteTitle": "MOET stemmen",
-      "helpMustVoteBody": "Markeert deze motie als een onderwerp dat moet worden gestemd. Dit wordt gebruikt om de vereiste aan de deelnemers te communiceren (afhankelijk van de opzet van uw commissie).",
-      "saveSettings": "Instellingen opslaan",
-      "delegateBlurb": "Het podium registreert de stemmen tijdens de zitting (bijv. appèl). De motiestemmen volgen hier alleen op Ja/Nee (onthouding wordt niet gebruikt). Je kunt de telling volgen; afgevaardigden brengen geen stem uit in de app.",
-      "yes": "Ja",
-      "no": "Nee",
-      "ballots": "Stembiljetten",
-      "total": "Totaal",
-      "outcome": "Resultaat",
-      "passed": "Geslaagd",
-      "failed": "Mislukt",
-      "noRecordedVotes": "Geen geregistreerde stemmen",
-      "reopenMotion": "Heropen beweging",
-      "editRecordOpen": "Opname bewerken…",
-      "hideSettings": "Instellingen verbergen",
-      "preliminaryPassing": "Passeren (voorlopig)",
-      "preliminaryFailing": "Bij gebreke (voorlopig)",
-      "delegateRollCall": "Gedelegeerd appèl ({count})",
-      "noSeatedDelegates": "Er zijn geen zittende afgevaardigden beschikbaar voor deze motie.",
-      "rollPrefix": "Rollen:",
-      "recordedPrefix": "Opgenomen:",
-      "recordedYes": "Ja",
-      "recordedNo": "Nee",
-      "recordedAbstain": "Onthouden",
-      "recordedNone": "—",
-      "abstain": "Onthouden",
-      "clear": "Duidelijk",
-      "closeMotion": "Close-motion",
-      "mustVoteBadge": "MOET stemmen",
-      "canVoteBadge": "KAN stemmen",
-      "noMotions": "Nog geen moties.",
-      "currentOpenMotion": "Huidige open beweging",
-      "noOpenMotion": "Er is momenteel geen open motie.",
-      "recentClosedMotions": "Recente gesloten moties",
-      "noClosedMotions": "Nog geen gesloten moties.",
-      "untitled": "Zonder titel",
-      "voteTypes": {
-        "motion": "Beweging",
-        "amendment": "Wijziging",
-        "resolution": "Oplossing"
-      },
-      "roll": {
-        "absent": "Afwezig (rol)",
-        "present_abstain": "Aanwezig - kan zich onthouden (rollen)",
-        "present_voting": "Aanwezig en stemmen (rol)",
-        "unknown": "- (rol)"
-      }
-    },
-    "profile": {
-      "tabs": {
-        "ariaLabel": "Profielsecties",
-        "overview": "Overzicht",
-        "awards": "Onderscheidingen",
-        "private": "Privégegevens",
-        "settings": "Profielinstellingen"
-      },
-      "profilePicture": "Profielfoto",
-      "uploadFile": "Bestand uploaden",
-      "uploading": "Uploaden…",
-      "photoSaved": "Foto geüpload en opgeslagen.",
-      "orUrl": "Of ingesteld op URL",
-      "urlPlaceholder": "https://...",
-      "name": "Naam",
-      "username": "Gebruikersnaam",
-      "usernamePlaceholder": "bijv. alex_1999",
-      "pronouns": "Voornaamwoorden",
-      "customPronounNote": "Je profiel bevatte een aangepast voornaamwoord dat hier niet langer wordt geaccepteerd. Kies hierboven een optie (of laat niets open). Door te sparen wordt de oude waarde vervangen.",
-      "school": "School",
-      "schoolPlaceholder": "bijv. Lincoln middelbare school",
-      "grade": "Cijfer",
-      "selectGrade": "Selecteer cijfer",
-      "conferencesAttended": "Conferenties bezocht",
-      "awardsComma": "Onderscheidingen (door komma's gescheiden)",
-      "awardsPlaceholder": "Beste afgevaardigde, eervolle vermelding",
-      "allocation": "Toewijzing",
-      "selectAllocation": "Selecteer toewijzing",
-      "noAllocationsPlaceholder": "Er zijn geen commissietoewijzingen beschikbaar",
-      "saveProfile": "Profiel opslaan",
-      "saved": "Profiel opgeslagen.",
-      "saveFailed": "Kan profiel niet opslaan.",
-      "errUsernamePattern": "De gebruikersnaam moet 3-32 tekens bevatten (letters, cijfers, _, ., -)",
-      "errPronounsPreset": "Kies een voornaamwoord uit de lijst.",
-      "errImageType": "Kies een afbeeldingsbestand.",
-      "errImageSize": "Afbeelding is te groot (max. 5 MB).",
-      "errUploadFailed": "Uploaden mislukt.",
-      "errStorageSetup": "Er is geen profielfoto-opslag ingesteld. Voer in het Supabase-project migratie 00100_profile_pictures_storage_bucket.sql uit, of maak een openbare opslagbucket met de naam profile-pictures (zie README).",
-      "errPublicUrl": "Kan de openbare URL voor de geüploade afbeelding niet vinden.",
-      "fallbacks": {
-        "yourCountry": "jouw land",
-        "committeeSession": "Commissiesessie",
-        "delegate": "Delegeren",
-        "speechNote": "Toespraak notitie",
-        "untitledMotion": "Naamloze beweging",
-        "dash": "—"
-      },
-      "delegateWelcome": {
-        "title": "Welkom afgevaardigde van {flag} {country}",
-        "subtitle": "Waar zou jij graag mee willen beginnen?",
-        "links": {
-          "documents": "Documenten",
-          "notes": "Opmerkingen",
-          "committeeRoom": "Commissie kamer",
-          "runningNotes": "Notities uitvoeren",
-          "ideas": "Ideeën",
-          "guides": "Gidsen",
-          "sources": "Bronnen",
-          "resolutions": "Resoluties",
-          "speeches": "Toespraken",
-          "stances": "Standpunten",
-          "crisisSlides": "De crisis glijdt",
-          "report": "Rapport",
-          "motions": "Bewegingen",
-          "points": "Punten"
-        }
-      },
-      "awards": {
-        "tabsAriaLabel": "Prijzen op uw profiel",
-        "rank": "rang {rang}",
-        "pending": {
-          "tab": "Nominaties in behandeling",
-          "title": "In afwachting van voorzittersnominaties",
-          "descriptionSingle": "Opgeslagen door stoelen en ter beoordeling gedeeld met SMT. De definitieve prijzen verschijnen hieronder na bevestiging.",
-          "descriptionTabbed": "Opgeslagen door stoelen en ter beoordeling gedeeld met SMT. De definitieve onderscheidingen verschijnen na bevestiging."
-        },
-        "recorded": {
-          "tab": "Opgenomen onderscheidingen",
-          "title": "Opgenomen onderscheidingen",
-          "description": "Vermeld wanneer stoelen of SMT u toewijzen in de onderscheidingentracker. De definitieve erkenning volgt de regels van uw conferentie."
-        }
-      },
-      "privateSections": {
-        "sharedVisibility": "Alleen zichtbaar voor u, commissievoorzitters, en SMT voor de betreffende commissie.",
-        "points": {
-          "title": "Stoelpunten (privé)"
-        },
-        "speechNotes": {
-          "title": "Toespraak van de voorzitter (privé)"
-        },
-        "motions": {
-          "title": "Bewegingen die je bewoog",
-          "description": "Opgeslagen in uw profiel voor commissiebeoordeling en SMT-toezicht."
-        }
-      },
-      "discipline": {
-        "title": "Disciplinaire status (privé)",
-        "statusLine": "Waarschuwingen: {warnings} · Waarschuwingen: {strikes}{votingDisabled}{speakerSuspended}{removedFromCommittee}",
-        "votingDisabled": "stemmen uitgeschakeld",
-        "speakingSuspended": "spreken opgeschort",
-        "removedFromCommittee": "uit de commissie verwijderd",
-        "updated": "Bijgewerkt: {waarde}"
-      },
-      "preview": {
-        "ariaLabel": "Profielvoorbeeld",
-        "title": "Voorbeeld",
-        "yourName": "Jouw naam",
-        "usernameNotSet": "Gebruikersnaam niet ingesteld",
-        "gradeValue": "Graad {cijfer}",
-        "awards": "Onderscheidingen"
-      },
-      "dashboardCommittee": "Dashboard committee (Head Chair)",
-      "dashboardCommitteeSelect": "Select committee…",
-      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "dashboardCommitteeSwitching": "Switching…",
-      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
-    },
-    "guides": {
-      "default": {
-        "rop": {
-          "title": "Reglement van orde (RoP)",
-          "content": "# Reglement van orde \n\n## Punten en bewegingen \n- **Bestelpunt**: Correcte procedure \n- **Punt van informatie**: vraag aan de spreker \n- **Punt van persoonlijk privilege**: persoonlijk comfort \n- **Motie ter tafel**: debat uitstellen \n- **Motie tot schorsing**: sessie beëindigen \n\n## Stemmen \n- Gewone meerderheid voor procedurele kwesties \n- 2/3 meerderheid voor inhoudelijke zaken \n- Hoofdelijke stemming indien gevraagd"
-        },
-        "examples": {
-          "title": "Voorbeelden",
-          "content": "# Voorbeelden \n\n## Resolutieformaat \n``` \nDe Algemene Vergadering, \n... \n1. Roept de lidstaten op om... \n2. Dringt er bij de internationale gemeenschap op aan om... \n``` \n\n## Positie papierstructuur \n1. Achtergrond \n2. Landenbeleid \n3. Voorgestelde oplossingen"
-        },
-        "templates": {
-          "title": "Sjablonen",
-          "content": "# Sjablonen \n\n## Voorzitterrapportsjabloon \n- Commissieoverzicht \n- Belangrijkste discussiepunten \n- Resoluties aangenomen \n- Aanbevelingen"
-        },
-        "chairReport": {
-          "title": "Voorzitter Verslag",
-          "content": "# Voorzitter Verslag \n\nDocumenteer hier de werkzaamheden en resultaten van de commissie."
-        }
-      },
-      "edit": "Bewerking",
-      "guideDocument": "Gidsdocument",
-      "additionalNotes": "Aanvullende opmerkingen",
-      "noContentYet": "Nog geen inhoud.",
-      "titlePlaceholder": "Titel",
-      "googleDocsUrl": "URL van Google Documenten",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Een nieuw Google-document wordt op een ander tabblad geopend. Plak een deelbare link zodat deelnemers het document hier kunnen openen (bekijken/bewerken is afhankelijk van delen via Google).",
-      "markdownOptional": "Markdown-opmerkingen (optioneel als u een Google-document gebruikt)",
-      "save": "Redden",
-      "cancel": "Annuleren",
-      "createNewGuide": "Nieuwe gids maken",
-      "slugPlaceholder": "naaktslak (uniek)",
-      "titleLowerPlaceholder": "titel",
-      "googleDocsUrlOptional": "URL voor Google Documenten (optioneel)",
-      "markdownContentOptional": "Prijsverlagingsinhoud (optioneel)",
-      "create": "Creëren",
-      "glossary": {
-        "title": "MUN Agenda Woordenlijst",
-        "subtitle": "Unieke terminologie afgestemd op uw commissiecode en actuele agendaonderwerpen.",
-        "committeeCode": "Commissiecode: {code}",
-        "topicTag": "Onderwerp: {onderwerp}",
-        "sources": {
-          "core": "kern",
-          "committee": "commissie",
-          "topic": "onderwerp"
-        },
-        "terms": {
-          "delegation": {
-            "term": "Delegatie",
-            "definition": "Een landen- of waarnemersteam dat één staat of entiteit in de commissie vertegenwoordigt."
-          },
-          "placard": {
-            "term": "Aanplakbiljet",
-            "definition": "Landbord dat wordt gebruikt om het woord te vragen, te stemmen en procedurele moties aan te geven."
-          },
-          "dais": {
-            "term": "Dais",
-            "definition": "Voorzittersteam dat het debat modereert, de procedure toepast en de spreekvolgorde beheert."
-          },
-          "quorum": {
-            "term": "Quorum",
-            "definition": "Minimumaantal delegaties dat nodig is om formele zaken af ​​te handelen en te stemmen."
-          },
-          "motion": {
-            "term": "Beweging",
-            "definition": "Formeel voorstel om de stroom van het debat te veranderen, zoals het caucustype of de spreektijd."
-          },
-          "point_of_order": {
-            "term": "Punt van orde",
-            "definition": "Tussenkomst wanneer de procedure volgens het commissiereglement onjuist wordt toegepast."
-          },
-          "moderated_caucus": {
-            "term": "Gemodereerde caucus",
-            "definition": "Gestructureerd debatsegment met korte toespraken over een bepaald subonderwerp."
-          },
-          "unmoderated_caucus": {
-            "term": "Ongemodereerde caucus",
-            "definition": "Informele onderhandelingsperiode waarin afgevaardigden zich vrijelijk kunnen bewegen om ideeën op te stellen en samen te voegen."
-          },
-          "draft_resolution": {
-            "term": "Ontwerpresolutie",
-            "definition": "Werktekst van voorgestelde commissieactie vóór de definitieve stemming en goedkeuring."
-          },
-          "amendment": {
-            "term": "Wijziging",
-            "definition": "Wijziging voorgesteld om een ​​tekst op te stellen, hetzij vriendelijk, hetzij als onvriendelijk gestemd."
-          },
-          "operative_clause": {
-            "term": "Operatieclausule",
-            "definition": "Actiegerichte genummerde clausule die beschrijft wat de commissie voorstelt te doen."
-          },
-          "preambulatory_clause": {
-            "term": "Preambuleclausule",
-            "definition": "Contextbepalende clausule waarin achtergrondprincipes, zorgen en eerdere kaders worden aangehaald."
-          },
-          "right_of_reply": {
-            "term": "Recht van antwoord",
-            "definition": "Gelegenheid om te reageren op een directe verklaring die de waardigheid of positie van de delegatie aantast."
-          },
-          "veto_power": {
-            "term": "Vetomacht",
-            "definition": "Bevoegdheid van permanent lid van de VN-Veiligheidsraad om inhoudelijke ontwerpresoluties te blokkeren."
-          },
-          "chapter_vii": {
-            "term": "Hoofdstuk VII",
-            "definition": "Autoriteit van het VN-Handvest op het gebied van bedreigingen voor de vrede, sancties en het gebruik van geweld."
-          },
-          "sanctions_regime": {
-            "term": "Sanctieregime",
-            "definition": "Gecoördineerde beperkingen die worden gebruikt om gedrag te beïnvloeden zonder directe militaire actie."
-          },
-          "arms_control": {
-            "term": "Wapenbeheersing",
-            "definition": "Afspraken en verificatiesystemen die typen, hoeveelheden of inzet van wapens beperken."
-          },
-          "non_proliferation": {
-            "term": "Non-proliferatie",
-            "definition": "Beleid om de verspreiding van nucleaire, chemische, biologische of geavanceerde wapencapaciteiten te voorkomen."
-          },
-          "confidence_building_measures": {
-            "term": "Vertrouwenwekkende maatregelen",
-            "definition": "Transparantie- en communicatiemiddelen die misverstanden en conflictrisico's verminderen."
-          },
-          "universal_periodic_review": {
-            "term": "Universele periodieke beoordeling",
-            "definition": "Peer-review-proces waarbij elke VN-lidstaat rapporteert en rechtenaanbevelingen ontvangt."
-          },
-          "special_rapporteur": {
-            "term": "Speciale Rapporteur",
-            "definition": "Onafhankelijke deskundige benoemd om toezicht te houden op en te rapporteren over thematische kwesties of landenrechtenkwesties."
-          },
-          "treaty_body": {
-            "term": "Verdragsorgaan",
-            "definition": "Comité van deskundigen dat toezicht houdt op de implementatie van een specifiek mensenrechtenverdrag."
-          },
-          "public_health_emergency": {
-            "term": "Noodsituatie op het gebied van de volksgezondheid",
-            "definition": "Ernstige uitbraak die dringend een gecoördineerde nationale en internationale respons vereist."
-          },
-          "surveillance": {
-            "term": "Epidemiologische surveillance",
-            "definition": "Continue verzameling en analyse van gezondheidsgegevens om ziektetrends te detecteren en te volgen."
-          },
-          "health_systems": {
-            "term": "Versterking van gezondheidssystemen",
-            "definition": "Verbetering van het personeelsbestand, de financiering, de logistiek en het bestuur voor een betrouwbare levering van gezondheidszorg."
-          },
-          "transnational_crime": {
-            "term": "Transnationale georganiseerde misdaad",
-            "definition": "Criminele activiteiten worden over de grenzen heen gecoördineerd via netwerken en illegale markten."
-          },
-          "illicit_trafficking": {
-            "term": "Illegale handel",
-            "definition": "Illegaal verkeer van drugs, wapens, personen of goederen tussen rechtsgebieden."
-          },
-          "rule_of_law_capacity": {
-            "term": "Capaciteit voor de rechtsstaat",
-            "definition": "Institutioneel vermogen van rechtssystemen om rechten eerlijk te onderzoeken, vervolgen en beschermen."
-          },
-          "sustainable_development": {
-            "term": "Duurzame ontwikkeling",
-            "definition": "Groeimodel dat sociale vooruitgang, economische kansen en milieubescherming in evenwicht brengt."
-          },
-          "financing_for_development": {
-            "term": "Financiering voor ontwikkeling",
-            "definition": "Publieke en private financieringsmechanismen die ontwikkelingsprioriteiten op de lange termijn ondersteunen."
-          },
-          "policy_coordination": {
-            "term": "Beleidscoördinatie",
-            "definition": "Afstemming van acties van staat en instanties om dubbel werk te voorkomen en de collectieve impact te vergroten."
-          },
-          "child_protection": {
-            "term": "Kinderbescherming",
-            "definition": "Maatregelen ter voorkoming van uitbuiting, misbruik en geweld tegen kinderen in alle omstandigheden."
-          },
-          "education_access": {
-            "term": "Toegang tot onderwijs",
-            "definition": "Zorgen voor inclusieve, eerlijke en continue leermogelijkheden voor alle kinderen."
-          },
-          "humanitarian_response": {
-            "term": "Humanitaire reactie",
-            "definition": "Snelle hulpacties die tegemoetkomen aan dringende behoeften in crises en conflictsituaties."
-          },
-          "gender_mainstreaming": {
-            "term": "Gendermainstreaming",
-            "definition": "Integratie van genderanalyse in het ontwerp, de implementatie en de evaluatie van beleid."
-          },
-          "gender_based_violence": {
-            "term": "Gendergerelateerd geweld",
-            "definition": "Schade gericht tegen iemand op basis van genderidentiteit, rollen of ongelijke machtsverhoudingen."
-          },
-          "economic_empowerment": {
-            "term": "Economische empowerment",
-            "definition": "Het uitbreiden van de toegang tot fatsoenlijk werk, financiën, eigendom en beslissingsmacht."
-          },
-          "source_attribution": {
-            "term": "Bronvermelding",
-            "definition": "Het duidelijk citeren van de herkomst van informatie, zodat claims kunnen worden geverifieerd en gecontextualiseerd."
-          },
-          "verified_reporting": {
-            "term": "Geverifieerde rapportage",
-            "definition": "Journalistieke standaard die bevestiging vereist voordat betwiste feiten worden gepubliceerd."
-          },
-          "editorial_independence": {
-            "term": "Redactionele onafhankelijkheid",
-            "definition": "Scheiding van rapportagebeslissingen en politieke druk of invloed van belanghebbenden."
-          },
-          "climate_mitigation": {
-            "term": "Klimaatmitigatie",
-            "definition": "Acties die de uitstoot van broeikasgassen verminderen of de koolstofverwijdering op de lange termijn vergroten."
-          },
-          "climate_adaptation": {
-            "term": "Klimaataanpassing",
-            "definition": "Beleid en investeringen die de kwetsbaarheid voor klimaatgerelateerde gevolgen verminderen."
-          },
-          "cyber_norms": {
-            "term": "Cyber-normen",
-            "definition": "Gedeelde verwachtingen voor verantwoordelijk staatsgedrag in digitale en cyberdomeinen."
-          },
-          "critical_infrastructure": {
-            "term": "Kritieke infrastructuur",
-            "definition": "Essentiële systemen zoals stroom, water, gezondheidszorg en communicatie vereisen veerkracht."
-          },
-          "epidemiology": {
-            "term": "Epidemiologie",
-            "definition": "Studie van ziektepatronen, oorzaken en verspreiding in populaties."
-          },
-          "preparedness_response": {
-            "term": "Paraatheid en reactie",
-            "definition": "Planning, coördinatie en overspanningsacties om noodsituaties te beheersen en te beheersen."
-          },
-          "non_refoulement": {
-            "term": "Non-refoulement",
-            "definition": "Principe dat de terugkeer van mensen verbiedt naar plaatsen waar zij ernstige schade ondervinden."
-          },
-          "durable_solutions": {
-            "term": "Duurzame oplossingen",
-            "definition": "Langetermijnresultaten voor ontheemden: terugkeer, lokale integratie of hervestiging."
-          },
-          "nuclear_safeguards": {
-            "term": "Nucleaire waarborgen",
-            "definition": "Verificatiemaatregelen die ervoor zorgen dat nucleair materiaal niet wordt gebruikt voor wapengebruik."
-          },
-          "counter_terrorism": {
-            "term": "Terrorismebestrijding",
-            "definition": "Geïntegreerde juridische, preventieve en veiligheidsmaatregelen tegen terroristische activiteiten."
-          },
-          "due_process": {
-            "term": "Een eerlijk proces",
-            "definition": "Eerlijke juridische procedures ter bescherming van rechten tijdens onderzoek, vervolging en sancties."
-          },
-          "resource_security": {
-            "term": "Beveiliging van hulpbronnen",
-            "definition": "Betrouwbare toegang tot voedsel, water en energie onder economische en ecologische stress."
-          },
-          "resilience": {
-            "term": "Weerstand",
-            "definition": "Capaciteit van gemeenschappen en instellingen om schokken op te vangen en effectief te herstellen."
-          }
-        }
-      }
-    },
-    "ideas": {
-      "editIdea": "Idee bewerken",
-      "googleDocsUrl": "URL van Google Documenten",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "shortIdeaOptional": "Korte ideetekst (optioneel)",
-      "save": "Redden",
-      "cancel": "Annuleren",
-      "addIntro": "Voeg een Google-document toe om een ​​oplossingsidee op te stellen, of typ een korte notitie (of beide).",
-      "googleDocsCreateHelp": "Nieuw Google-document wordt geopend op een ander tabblad; plak de link hier nadat deze is gemaakt.",
-      "resolutionIdeaPlaceholder": "Oplossing idee...",
-      "add": "Toevoegen",
-      "noIdeasYet": "Nog geen ideeën.",
-      "ideaLabel": "Idee",
-      "ideaFallback": "Idee {nummer}",
-      "linkedDoc": "Gekoppeld document",
-      "addedOn": "{datum} toegevoegd",
-      "edit": "Bewerking",
-      "delete": "Verwijderen",
-      "ideaDocument": "Ideedocument",
-      "summary": "Samenvatting",
-      "emptyIdea": "Leeg idee."
-    },
-    "stances": {
-      "heatmapTitle": "Kort standoverzicht (Heatmap)",
-      "heatmapHelp": "In hoeverre ondersteunt uw toewijzing ___? (schaal 1-5)",
-      "topicPlaceholder": "bijv. klimaat actie",
-      "extentLabel": "Omvang (1-5):",
-      "extentHelpTitle": "Omvang (1-5)",
-      "extentHelpBody": "1 betekent dat uw toewijzing weinig steun voor het onderwerp heeft, en 5 betekent sterke steun. Kies een nummer dat overeenkomt met uw standpunt in de commissie.",
-      "add": "Toevoegen",
-      "viewOnlyHeatmap": "Alleen-lezen heatmap voor personeel.",
-      "notesPerAllocation": "Toelichting per toewijzing",
-      "noAllocationsYet": "Nog geen toewijzingen",
-      "notesPlaceholder": "Standpunten voor deze toewijzing...",
-      "noteLanguageWarning": "Waarschuwing van de lezer: deze notitie kan ongepast taalgebruik bevatten.",
-      "save": "Redden",
-      "saveHelpTitle": "Standpuntnotitie opslaan",
-      "saveHelpBody": "Slaat de standpuntnota voor deze toewijzing op. Het kan worden bekeken door medewerkers en (afhankelijk van de commissie-instellingen) door andere deelnemers."
-    },
-    "speeches": {
-      "newSpeech": "Nieuwe toespraak",
-      "speechTitlePlaceholder": "Titel van de toespraak",
-      "googleDocsUrl": "URL van Google Documenten",
-      "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
-      "googleDocsHelp": "Opent Google in een nieuw tabblad; plak hier de document-URL als u klaar bent.",
-      "plainTextOptional": "Platte tekstconcept (optioneel als u een Google-document gebruikt)",
-      "save": "Redden",
-      "cancel": "Annuleren",
-      "noSpeechesYet": "Nog geen toespraken. Koppel een Google-document of plak tekst.",
-      "speechLabel": "Toespraak",
-      "untitled": "Zonder titel",
-      "edit": "Bewerking",
-      "speechDocument": "Spraakdocument",
-      "draftText": "Concepttekst",
-      "noContentHint": "Koppel een Google-document met Bewerken of voeg platte tekst toe aan het formulier."
-    },
-    "committeeRoom": {
-      "committeeLabel": "Commissie",
-      "yourContext": "Jouw context",
-      "roleLabel": "Rol",
-      "seatLabel": "Zitplaats",
-      "clearSearchTitle": "Wis de zoekopdracht en toon alle delegaties",
-      "vacantLabel": "Vrij",
-      "assignedLabel": "Toegewezen",
-      "daisLabel": "Dais",
-      "phaseLabel": "Fase",
-      "phaseVoting": "Stemmen",
-      "phaseDebate": "Debat",
-      "focusSearchTitle": "Focus zoeken (podiumtitels en namen komen overeen met uw zoekopdracht)",
-      "tipLabel": "Tip",
-      "searchVacantTitle": "Zoek naar \"vrije\" zitplaatsen in de kamer",
-      "searchHint": "Typ een land, naam van de afgevaardigde, school, voornaamwoord of 'vacant' om overeenkomsten in de ruimte te markeren. Druk op Enter om naar de eerste wedstrijd te gaan; Esc wordt gewist. Klik op Vacant om naar lege stoelen te gaan.",
-      "findLabel": "Zoek een delegatie- of podiumlid",
-      "searchPlaceholder": "Land, naam, school...",
-      "matchesCount": "{matches} van {total} zitplaatsen komen overeen",
-      "enterScrolls": "Voer rollen in",
-      "typeToFilterHint": "Type om te filteren - Voer scrollt naar de eerste overeenkomst in",
-      "noMatches": "Geen overeenkomende delegaties of podiumstoelen.",
-      "digitalDisplay": "Digitaal display",
-      "floorLabel": "Vloer",
-      "staffSeatsHeading": "Personeel - zitplaatsen",
-      "searchAria": "Zoek delegaties",
-      "virtualRoomVacant": "Vrij",
-      "profileAria": "Bekijk profiel: {country}",
-      "vacantSeatAria": "Vrije stoel",
-      "placardAria": "Plakkaat {land}",
-      "gavelAria": "Hamer",
-      "viewProfileAria": "Bekijk profiel: {title}",
-      "noProfileLinkAria": "{title} (geen profiellink)",
-      "committeeFloor": "Comité verdieping",
-      "virtualRoomFigureAria": "Virtuele commissiekamer - {committeeName} ({conferenceName})",
-      "filteringLiveRegion": "Delegaties filteren. De eerste gemarkeerde stoel is de eerste wedstrijd in de ring.",
-      "helperText": "Op plakkaten worden het land (van toewijzingen), naam, school en voornaamwoorden uit het profiel van elke afgevaardigde vermeld. Bewerk de jouwe onder Profiel. Lege commissiezetels worden weergegeven als Vrij. Klik op een gevuld plakkaat of podiumplaats om de pagina van dat lid te openen (chat en rapporteer vanaf daar).",
-      "virtualRoomCaption": "Virtuele model VN-commissiekamer met borden van afgevaardigden met daarop het land, de naam, de school en de voornaamwoorden."
-    },
-    "session": {
-      "requestToSpeak": {
-        "title": "Verzoek om te spreken",
-        "delegateFallback": "Delegeren",
-        "needAllocation": "Voor een spreekverzoek heeft u een toewijzing nodig.",
-        "alreadyQueued": "U heeft al een actief spreekverzoek in de wachtrij.",
-        "requested": "Gevraagd om te spreken. Je verschijnt in de wachtrij.",
-        "requestFailed": "Kan geen spreekverzoek indienen.",
-        "helpBody": "Stuurt uw delegatie naar de stoelwachtrij. U kunt één actief wachtend/huidig ​​verzoek tegelijk hebben.",
-        "purposeLabel": "Optioneel doel (weergegeven in wachtrijlabel)",
-        "purposeHelpTitle": "Doel etiket",
-        "purposeHelpBody": "Deze tekst wordt toegevoegd aan uw landnaam, zodat de stoelen kunnen zien waarom u het woord aanvraagt.",
-        "purposePlaceholder": "bijv. ondersteuning + wijzigingsoverzicht",
-        "requesting": "Aanvragen...",
-        "rollPromptTitle": "Goedkeuring van de stoel vereist",
-        "rollPromptBodyPickStatus": "Sessie is begonnen. Kies uw appèlstatus om spreken en stemmen te ontgrendelen. Deze keuze kan niet worden gewijzigd.",
-        "rollPromptBodyWaitSessionStart": "Wachten tot de voorzitter de commissiesessie begint.",
-        "rollPromptBodyWaitRollPrompt": "Wachten op appèlverzoek.",
-        "rollPromptBodyMarkedAbsent": "Je bent momenteel gemarkeerd als afwezig. Vraag de voorzitter om u als Aanwezig te markeren als u wilt spreken en stemmen.",
-        "rollPromptBodyChecking": "Uw rolstatus controleren...",
-        "rollPromptSaving": "Besparing...",
-        "rollPromptPresent": "Cadeau",
-        "rollPromptPresentVoting": "Presenteren en stemmen"
-      },
-      "motionVoting": {
-        "votingProcedure": "Stemprocedure",
-        "currentMotion": "Huidige beweging",
-        "motioner": "Beweger",
-        "majority": "Meerderheid",
-        "majoritySimple": "Eenvoudig",
-        "tally": "Ja {ja} - Nee {nee} - Totaal {totaal}",
-        "help": "Het podium registreert de stemming van elke delegatie tijdens de zitting. Voor motiestemmen wordt alleen Ja of Nee gebruikt (geen onthouding). Totalen tellen alleen de plakkaten waar Ja of Nee op stond; afwezige delegaties worden overgeslagen."
-      },
-      "activeMotion": {
-        "currentMotion": "Huidige beweging",
-        "motionFallback": "Beweging",
-        "motioner": "Beweger",
-        "majority": "Meerderheid",
-        "majoritySimple": "Eenvoudig",
-        "type": "Type",
-        "timer": "Timer",
-        "currentSpeaker": "Huidige spreker",
-        "nextSpeaker": "Volgende spreker",
-        "speakerTimeLeftCap": "Sprekertijd (links / cap)",
-        "speakerTimeLeftTotal": "Sprekertijd (links / totaal)",
-        "perSpeaker": "(per spreker)",
-        "paused": "(gepauzeerd)",
-        "pauseReason": "Pauze: {reden}"
-      },
-      "floorStatus": {
-        "sessionTime": "Sessie tijd",
-        "sessionNotStarted": "Sessie niet gestart",
-        "limit": "Beperken",
-        "limitRemaining": "{waarde} over",
-        "limitOverBy": "voorbij met {waarde}",
-        "quickLinkSession": "Sessie",
-        "quickLinkRoll": "Rollen",
-        "quickLinkSpeakers": "Luidsprekers",
-        "quickLinkMotions": "Bewegingen",
-        "quickLinkTimer": "Timer",
-        "dais": "Dais",
-        "pinned": "Vastgezet",
-        "viewFullAnnouncement": "Bekijk de volledige aankondiging",
-        "timerPausesReadOnly": "Timer pauzeert (alleen-lezen)",
-        "speakerList": "Sprekerslijst",
-        "speakerFallback": "Spreker",
-        "rollCallYou": "Appèl (jij)",
-        "fullAnnouncement": "Volledige aankondiging",
-        "daisAnnouncement": "Dais-aankondiging",
-        "close": "Dichtbij"
-      },
-      "committeeControl": {
-        "sessionNameLabel": "Sessienaam",
-        "sessionNamePlaceholder": "bijv. Ochtend sessie",
-        "sessionNameSaving": "Besparing…",
-        "sessionNameSaved": "Opgeslagen",
-        "sessionNameHint": "Wordt automatisch opgeslagen en verschijnt in de sessiegeschiedenis.",
-        "title": "Commissiesessie",
-        "subtitle": "Start of stop de commissiesessie.",
-        "helpStartStop": "Start begint de timer/status van de live commissiesessie voor iedereen. Stop beëindigt de sessie en wist de huidige tijdslimiet.",
-        "migrationUnavailable": "Sessiecontroles zijn tijdelijk niet beschikbaar totdat de nieuwste databasemigraties zijn toegepast.",
-        "endTimeInFuture": "Kies een eindtijd in de toekomst, of schakel over naar geen limiet.",
-        "sessionStartUnavailable": "Het tijdstempel voor het starten van de sessie is pas beschikbaar nadat de nieuwste migraties zijn toegepast.",
-        "endTimeInFutureSetNoLimit": "Kies een eindtijd in de toekomst, of stel geen limiet in.",
-        "sessionLimitUpdated": "Sessielimiet bijgewerkt.",
-        "startedLabel": "Gestart:",
-        "timeInLabel": "Tijd in:",
-        "timeUntilEndLabel": "Tijd tot einde:",
-        "overByValue": "voorbij met {waarde}",
-        "modeLabel": "Modus:",
-        "modeStopwatchNoLimit": "Stopwatch (geen tijdslimiet)",
-        "sessionNotRunning": "Sessie loopt niet.",
-        "sessionLimit": "Sessielimiet",
-        "sessionLimitModesTitle": "Sessielimietmodi",
-        "sessionLimitModesHelp": "Geen: geen einde. Tijdsbudget: telt vanaf het begin. Eindigt op: vaste kloktijd in uw lokale tijdzone.",
-        "sessionLimitOptional": "Optioneel.",
-        "noneLabel": "Geen",
-        "noneDescription": "loopt totdat je stopt.",
-        "timeBudgetLabel": "Tijdsbudget",
-        "timeBudgetDescription": "telt vanaf het moment dat u begint.",
-        "endTimeLabel": "Eindtijd",
-        "endTimeDescription": "gebruikt een vaste kloktijd (overschrijft het budget als beide ooit zijn ingesteld).",
-        "noneIndefinite": "Geen (onbepaald)",
-        "noneScheduledEndHint": "Geen gepland einde; alleen de verstreken tijd wordt weergegeven.",
-        "timeBudgetFromStart": "Tijdsbudget vanaf het begin",
-        "hoursLabel": "Uur",
-        "minutesLabel": "Notulen",
-        "minimumOneMinute": "(minimaal 1 minuut)",
-        "endAtLocalTime": "Eindigt om (lokale tijd)",
-        "stopSession": "Sessie stoppen",
-        "saveLimit": "Bewaar limiet",
-        "saveLimitHelp": "Past bijgewerkte limietinstellingen toe terwijl de sessie al actief is, zonder de sessie te stoppen.",
-        "startSession": "Sessie starten",
-        "sidebarUsePrefix": "Gebruik de zijbalk voor",
-        "rollCall": "Naamafroeping",
-        "speakers": "Luidsprekers",
-        "formalMotions": "Formele moties",
-        "timer": "Timer",
-        "sidebarAnd": "En",
-        "announcements": "Aankondigingen",
-        "sidebarUseSuffix": "— één hulpmiddel per tabblad."
-      },
-      "history": {
-        "title": "Sessiegeschiedenis",
-        "savedCount": "{count} opgeslagen",
-        "permissionsHint": "Stoelen kunnen de namen van vermeldingen wijzigen. SMT/Admin kan vermeldingen hernoemen en verwijderen.",
-        "empty": "Nog geen sessiegeschiedenis.",
-        "rename": "Hernoemen",
-        "delete": "Verwijderen",
-        "deleteConfirm": "Deze sessie uit de geschiedenis verwijderen?",
-        "sessionNamePrompt": "Sessienaam",
-        "rangeClosed": "{bereik}",
-        "rangeOngoing": "{bereik} -> Lopend"
-      },
-      "timerPage": {
-        "title": "Timer",
-        "controlsTitle": "Timerbediening",
-        "controlsHelp": "Gebruik de algemene verdieping voor de algemene timing van het debat, of gebruik motiestemming om de zichtbaarheid te koppelen aan een specifiek open stemitem.",
-        "tabSetup": "1) Installatie",
-        "tabClock": "2) Klokbediening",
-        "tabNotes": "3) Toespraaknotities",
-        "tabLog": "4) Logboek pauzeren",
-        "setupHelp": "Kies of deze timer voor het algemene woord is (altijd zichtbaar voor afgevaardigden) of gekoppeld is aan de motie die openstaat voor stemming (afgevaardigden zien deze alleen zolang die stemming het actieve item is). Als de tijd per spreker is ingeschakeld, blijft de klok hoe dan ook zichtbaar tijdens een gematigde caucus. Pauzeer de klok / Start de klokbevriezing of hervat het aftellen. Stel de luidsprekertijd (resterend) en de totale tijd afzonderlijk in en vervolgens Timer opslaan. Voorinstellingen vullen beide tot dezelfde lengte; u kunt beide velden achteraf bewerken. Pauzes worden met een korte reden geregistreerd.",
-        "namedPreset": "Benoemde voorinstelling",
-        "applyPreset": "Voorinstelling toepassen...",
-        "floorLabelDelegates": "Vloerlabel (afgevaardigden)",
-        "floorLabelPlaceholder": "bijv. GSL jaren 60",
-        "timerPurpose": "Doel van de timer",
-        "purposeGeneralFloor": "Algemeen debat/vloer (niet aan stemming gebonden)",
-        "purposeMotionVote": "Open beweging - alleen timer zolang die stem actief is op de vloer",
-        "openMotionForVoting": "Open motie (moet openstaan ​​voor stemming)",
-        "selectMotion": "Beweging selecteren...",
-        "untitled": "Zonder titel",
-        "noOpenMotionWarning": "Er is geen motie waarover gestemd kan worden. Open eerst een stemming of schakel het doel over naar de algemene verdieping.",
-        "clock": "Klok",
-        "running": "Rennen",
-        "paused": "Gepauzeerd",
-        "saveToEnablePauseStart": "sla de timer op om pauzeren/starten in te schakelen.",
-        "pauseReasonLogged": "Reden van pauze (gelogd)",
-        "pauseReasonPlaceholder": "bijv. Punt van orde, technisch probleem, ongemodereerde caucus...",
-        "pauseClock": "Pauzeer de klok",
-        "startClock": "Klok starten",
-        "perSpeakerTitle": "Tijd per spreker (gemodereerde caucus)",
-        "perSpeakerHelp": "Stel de totale tijd in als de limiet per luidspreker en de luidsprekertijd als de resterende tijd; Advance gaat naar de volgende luidspreker en reset de resterende naar de limiet.",
-        "currentSpeaker": "Huidige spreker",
-        "nextSpeaker": "Volgende spreker",
-        "speechNotesCurrentSpeaker": "Toespraaknotities (huidige spreker)",
-        "speechNotesHelp": "Notities zijn gekoppeld aan de tekst van de Huidige sprekertimer en als de sprekerslijst iemand heeft gemarkeerd als Huidig, wordt hun delegatie ter referentie opgeslagen.",
-        "timerFloorLabel": "Timer (vloer):",
-        "speakerListCurrent": "Sprekerslijst (huidig):",
-        "noCurrentDelegation": "Geen enkele delegatie is gemarkeerd als Huidig ​​op de sprekerslijst.",
-        "note": "Opmerking",
-        "notePlaceholder": "Punten, POI's, toon, vervolgacties...",
-        "saveSpeechNote": "Spraaknotitie opslaan",
-        "recentNotes": "Uw recente aantekeningen (deze commissie)",
-        "delete": "Verwijderen",
-        "speakerTimeRemaining": "Sprekertijd (resterend)",
-        "remainingHelpPerSpeaker": "Aftellen voor de huidige spreker (wordt gereset wanneer u verder gaat).",
-        "remainingHelpNormal": "Aftellen voor de huidige spreker (kan minder zijn dan het totaal).",
-        "totalTime": "Totale tijd",
-        "totalHelpPerSpeaker": "Cap per luidspreker (noemer op de vloer; resterende voorvullingen hierop).",
-        "totalHelpNormal": "Volledige lengte van dit timersegment (weergegeven na de schuine streep op de vloer).",
-        "saveTimer": "Timer opslaan",
-        "advanceSpeakerReset": "Zet de luidspreker vooruit en reset de klok",
-        "recentPauseLog": "Recent pauzelogboek",
-        "noPauseEvents": "Er zijn nog geen pauze-evenementen geregistreerd voor deze commissie.",
-        "openPauseLogHint": "Open het Pauzelogboek om de vastgelegde pauzeredenen en tijdstempels te bekijken.",
-        "saved": "Timer opgeslagen.",
-        "savedCapped": "Timer opgeslagen. De sprekerstijd was langer dan totaal; gemaximeerd op totaal.",
-        "alreadyPaused": "Timer is al gepauzeerd.",
-        "pausedForCommittee": "Timer pauzeerde voor de commissie.",
-        "alreadyRunning": "De timer loopt al.",
-        "runningForCommittee": "Timer loopt voor de commissie.",
-        "euTimerBoardTitle": "Timerbord van het EU-Parlement (11 timers)",
-        "euTimerBoardHelp": "Eén timer per party, plus totale tijd, POI/POC-tijd en luidsprekertijd. Gebruik Toepassen om een ​​rij te kopiëren naar de livetimervelden op het tabblad Klok (sprekertijd / Timer opslaan).",
-        "euTimerName": "Naam",
-        "euTimerTag": "Label",
-        "euTotalTime": "Totale tijd",
-        "euPoiPocTime": "POI/POC-tijd",
-        "euSpeakerTime": "Spreker tijd"
-      }
     }
   },
   "dashboardSearch": {
@@ -1887,6 +1056,33 @@
     "disarmament": "Ontwapening",
     "nonProliferation": "Non-proliferatie",
     "armsDiversionMechanisms": "Het ontwikkelen van mechanismen om te voorkomen dat legaal verhandelde conventionele wapens naar illegale markten en niet-statelijke actoren worden verlegd",
+    "ecosocImplementingUbiPovertyStability": "Implementatie van universele basisinkomens (OBI’s) als strategie voor het uitroeien van armoede en het handhaven van economische stabiliteit",
+    "ecosocReallocatingMilitaryExpenditurePublicHealth": "Kaders opzetten voor de herschikking van mondiale militaire uitgaven aan de volksgezondheidsinfrastructuur",
+    "f1DurabilityLongevityCarComponents": "Implementatie van duurzaamheids- en levensduurnormen voor cruciale auto-onderdelen om de levenscycli van componenten te optimaliseren en materiaal- en energieverspilling te minimaliseren",
+    "f1GrandPrixBangkok2028Impacts": "Analyse van de sociaal-economische en infrastructurele gevolgen van het organiseren van een nieuwe Grand Prix, met een focus op het verminderen van stedelijke congestie en logistiek in dichtbevolkte steden, met een focus op de mogelijke F1 Grand Prix van 2028 in Bangkok",
+    "pressCorpsJournalisticEthicsPublicHealth": "Het bepalen van de journalistieke ethiek bij de berichtgeving over volksgezondheid en mondiale aangelegenheden",
+    "unicefMaternalNeonatalPostpartumHealthcare": "Versterking van de gezondheidszorgsystemen voor moeders, pasgeborenen en postpartums om de vermijdbare moeder- en kindersterfte en -morbiditeit aanzienlijk terug te dringen",
+    "unicefFlexibleWorkParentalLeaveEarlyChildhood": "Beleidskaders aanbevelen om door de werkgever ondersteunde flexibele werkregelingen en ouderschapsverlof aan te moedigen om de ontwikkeling van jonge kinderen te vergemakkelijken en de band tussen ouders en kinderen te versterken",
+    "euParliInflationCostOfLivingEurope": "Het aanpakken van de sociaal-economische gevolgen van de inflatie en de stijgende kosten van levensonderhoud voor kwetsbare bevolkingsgroepen in heel Europa",
+    "euParliCriminalSocietalPoliciesPovertyCrime": "Standaardisatie van strafrechtelijk en maatschappelijk beleid in heel Europa om door armoede veroorzaakte misdaadcycli te voorkomen",
+    "unescoInclusiveEducationNeurodivergent": "Het ontwikkelen en standaardiseren van inclusief onderwijsbeleid en noodzakelijke aanpassingen om volledige en eerlijke toegang tot leren voor neurodivergerende studenten te garanderen",
+    "unescoHistoricalFailuresEducationCurricula": "Het opstellen van richtlijnen voor de verplichte en alomvattende integratie van historische mislukkingen, wreedheden en mensenrechtenschendingen in nationale onderwijscurricula om verzoening te bevorderen en toekomstige herhaling te voorkomen",
+    "unhrcDeathPenaltyStandardization": "de standaardisering van de regelgeving en de toepassing van de doodstraf",
+    "unhrcJudicialCruelTreatmentFinancialDeficencies": "de verplichting om wrede, onmenselijke of onterende behandeling binnen rechtsstelsels als gevolg van financiële tekortkomingen te voorkomen",
+    "unodcAlternativesDrugPossessionPersonalUse": "Beleidsanalyse van alternatieven voor veroordeling en bestraffing voor drugsbezit voor persoonlijk gebruik",
+    "unodcIntergenerationalSubstanceAbuse": "Het aanpakken van de intergenerationele impact van middelenmisbruik en verslaving",
+    "unscPeacekeepingMedicalSupport": "Het standaardiseren van vredeshandhavingsoperaties voor effectieve mondiale implementatie en medische ondersteuning",
+    "unWomenReproductiveAutonomyAbortion": "Bevestiging en garantie van de reproductieve autonomie van vrouwen door het vaststellen van internationale wettelijke normen voor toegang tot veilige en legale abortus",
+    "unWomenUniversalChildcareBirthRates": "Onderzoek naar de erkenning van universele kinderopvang als een fundamenteel mensenrecht en de rol ervan bij het aanpakken van dalende geboortecijfers",
+    "disecCrossBorderLethalWeaponsLogistics": "Versterking van internationale protocollen en logistiek voor het beveiligen van het grensoverschrijdende transport van dodelijke wapens",
+    "fwcPsychicChildExperimentationGiftedMinors": "Het voorkomen van schade veroorzaakt door psychische/psychokinetische experimenten met kinderen en het waarborgen van de bescherming en rehabilitatie van hoogbegaafde minderjarigen",
+    "fwcPsychicTechnologiesNonProliferation": "Het aanpakken van de bewapening van de menselijke geest en het opstellen van internationale protocollen voor de insluiting en non-proliferatie van paranormale technologieën",
+    "hscSarsOutbreak2002": "SARS-uitbraak (2002-2004)",
+    "hscBlackDeath1346": "De Zwarte Dood (1346-1353)",
+    "interpolUndergroundMedicalMarkets": "Bestrijding van transnationale georganiseerde misdaad in ondergrondse medische markten en ongereguleerde chirurgische praktijken",
+    "interpolNarcoticsSchengenGoldenTriangle": "Versterking van de grensoverschrijdende veiligheidskaders om de samenhang van de handel in verdovende middelen te verzachten, met bijzondere aandacht voor het Schengengebied en de Gouden Driehoek",
+    "whoPsychedelicTraumaMentalHealth": "Onderzoek van het ethische en regelgevingslandschap voor het klinische gebruik van psychedelische medicijnen bij de behandeling van op trauma gebaseerde geestelijke gezondheidsproblemen",
+    "whoPandemicsSevereOutbreaks": "Maatregelen onderzoeken voor het bestrijden, aanpakken en herstellen van pandemieën of ernstige uitbraken",
     "refugeeProtection": "Bescherming van vluchtelingen",
     "globalHealth": "Mondiale gezondheid",
     "foodSecurity": "Voedselzekerheid",
@@ -2383,6 +1579,10 @@
       "committeeRoomFull": {
         "label": "Commissiekamer (vol)",
         "hint": "Virtuele indeling en deelnemersvloer"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Live topic & vote totals per agenda item"
       }
     }
   },
@@ -2812,5 +2012,863 @@
     "autosaveFailed": "Automatisch opslaan mislukt",
     "autosavedWithCountry": "Automatisch opgeslagen — {country}",
     "delegateFallback": "delegeren"
+  },
+  "sources": {
+    "addSource": "Bron toevoegen",
+    "sourceUrl": "Bron-URL",
+    "urlPlaceholder": "https://docs.google.com/document/d/… (aanbevolen)",
+    "urlHelp": "Voor een nieuw Google-document gebruikt u de knop en plakt u de documentlink hier.",
+    "titleOptional": "Titel (optioneel)",
+    "saveChanges": "Wijzigingen opslaan",
+    "editSource": "Bron bewerken",
+    "urlPlaceholderShort": "Google Document of andere URL",
+    "empty": "Nog geen bronnen. Voeg een Google Doc-link toe om deze hier te openen.",
+    "sourceLabel": "Bron",
+    "openLink": "Link openen",
+    "embedHeading": "Brondocument",
+    "notGoogleDoc": "Deze URL is geen Google-document. Gebruik een docs.google.com/document/d/… link om hier in te sluiten en te bewerken; Open anders de bovenstaande link."
+  },
+  "documents": {
+    "alertDelegatePositionPaper": "Afgevaardigden kunnen Position Papers niet rechtstreeks uploaden. Gebruik een ander documenttype.",
+    "alertOnlyChairsPositionPaper": "Alleen voorzitters/SMT/admin kunnen Position Papers uploaden.",
+    "alertOnlySmtChairReport": "Alleen SMT/admin kan voorzittersrapporten uploaden.",
+    "alertOnlySmtRop": "Alleen SMT/admin kan RoP-documenten uploaden.",
+    "alertOnlySmtAwardCriteria": "Alleen SMT/admin kan Award Criteria-documenten uploaden.",
+    "alertNeedContentOrUrl": "Voeg lokale tekstinhoud of een Google Documenten-URL toe.",
+    "confirmDelete": "Dit document verwijderen?",
+    "delegatePrepTitle": "Documentgedeelte voorbereiden",
+    "delegatePrepBody": "U kunt uw eigen <prep>Prep-documenten</prep> rechtstreeks vanaf deze pagina uploaden, bekijken en bewerken.",
+    "positionPaperGuideTitle": "Plaats de papiergeleider",
+    "positionPaperGuideBlurb": "Download de gids voor tijdelijke aanduidingen terwijl de definitieve PDF wordt voorbereid.",
+    "downloadPlaceholderGuide": "Gids voor tijdelijke aanduidingen downloaden",
+    "addDocument": "Document toevoegen",
+    "tabs": {
+      "ariaLabel": "Documentsecties",
+      "library": "Bibliotheek",
+      "compose": "Componeren",
+      "composeHint": "Start een nieuw document of bewerk een bestaand concept vanaf dit tabblad."
+    },
+    "newDocumentTitle": "Nieuw document",
+    "editDocumentTitle": "Document bewerken",
+    "typeLabel": "Type",
+    "types": {
+      "position_paper": "Positie papier",
+      "chair_report": "Voorzitter verslag",
+      "rop": "RoP",
+      "award_criteria": "Gunningscriteria",
+      "chair_notes": "Aantekeningen van de voorzitter",
+      "prep_doc": "Document voorbereiden"
+    },
+    "delegatePositionPaperNote": "Standpunten worden door de voorzitters geüpload met feedback.",
+    "delegateOwner": "Gedelegeerde eigenaar",
+    "chairRecipient": "Ontvanger van de stoel",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "Documenttitel",
+    "googleDocsUrl": "URL van Google Documenten",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/… (weergave/bewerken insluiten in app)",
+    "googleDocsHelp": "Gebruik Nieuw Google-document om Google op een nieuw tabblad te openen en plak vervolgens de documentlink hier. Platte tekst hieronder is optioneel. Elk document heeft lokale tekst, een Google Doc-link of beide nodig.",
+    "plainTextOptional": "Platte tekst (optioneel)",
+    "plainTextPlaceholder": "Notities of concepttekst…",
+    "chairFeedbackLabel": "Feedback van de voorzitter",
+    "chairFeedbackPlaceholder": "Feedback voor het standpunt van de afgevaardigde...",
+    "empty": "Nog geen documenten. Voeg er een toe of koppel een Google-document.",
+    "sidebarDocumentLabel": "Document",
+    "sections": {
+      "chairReports": "Voorzitter rapporteert",
+      "rop": "RoP",
+      "awardCriteria": "Gunningscriteria",
+      "prepDocuments": "Documenten voorbereiden",
+      "chairNotes": "Aantekeningen van de voorzitter",
+      "otherDocuments": "Andere documenten"
+    },
+    "untitled": "Zonder titel",
+    "linkedDocumentHeading": "Gekoppeld document",
+    "notesHeading": "Opmerkingen",
+    "noGoogleDocYet": "Nog geen Google-document gekoppeld. Gebruik Bewerken om een ​​docs.google.com/document/d/… URL toe te voegen.",
+    "chairFeedbackHeading": "Feedback van de voorzitter",
+    "noFeedbackYet": "Nog geen feedback toegevoegd."
+  },
+  "resolutions": {
+    "enterDelegateEmailFirst": "Voer eerst een e-mailadres van een gemachtigde in.",
+    "sentToDelegate": "Verzonden naar {e-mail}.",
+    "newResolution": "Nieuwe resolutie",
+    "maxDraftResolutions": "Deze commissie heeft al {count} ontwerpresoluties.",
+    "googleDocLink": "Google Doc-link",
+    "googleDocUrlPlaceholder": "URL van Google Documenten (docs.google.com/document/d/… - gebruikt voor insluiten en bewerken)",
+    "googleDocUrlHelp": "Nieuw Google-document wordt geopend op een ander tabblad; kopieer de URL uit de adresbalk en plak deze hier.",
+    "mainSubmittersPlaceholder": "Belangrijkste indieners (gebruikers-ID's, door komma's gescheiden)",
+    "coSubmittersPlaceholder": "Mede-indieners (gebruikers-ID's, door komma's gescheiden)",
+    "create": "Creëren",
+    "cancel": "Annuleren",
+    "openInNewTab": "Openen in nieuw tabblad",
+    "noGoogleDocLink": "Geen Google Doc-link",
+    "visibleToOtherBloc": "Zichtbaar voor ander blok",
+    "resolutionCounts": "Hoofdondertitels: {hoofd} | Co-subs: {co} | Ondertekenaars: {ondertekenaars}",
+    "blocButton": "Blok {naam} ({stand})",
+    "signVirtually": "Virtueel ondertekenen (belangrijkste subs op de hoogte gebracht)",
+    "shareByEmail": "Deel de oplossing per e-mail",
+    "delegateEmailPlaceholder": "delegatie@email.com",
+    "sendToDelegate": "Verzenden naar afgevaardigde",
+    "clauseEditor": "Clausule-editor",
+    "noClausesYet": "Nog geen clausules.",
+    "clauseNumber": "Artikel {nummer}",
+    "saveClause": "Bewaar clausule",
+    "delete": "Verwijderen",
+    "addClausePlaceholder": "Een nieuwe clausule toevoegen...",
+    "addClause": "Clausule toevoegen",
+    "clauseVoteHistory": "Stemgeschiedenis van clausules",
+    "noClauseOutcomesYet": "Er zijn nog geen geregistreerde stemmingsresultaten over de clausule.",
+    "clauseFallback": "Clausule",
+    "passed": "GESLAAGD",
+    "failed": "MISLUKT",
+    "motionId": "Beweging {id}"
+  },
+  "voting": {
+    "tabs": {
+      "ariaLabel": "Stemsecties",
+      "open": "Open",
+      "closed": "Gesloten"
+    },
+    "requiredMajority": "Vereiste meerderheid",
+    "helpRequiredMajorityTitle": "Vereiste meerderheid",
+    "helpRequiredMajorityBody": "Kies de stemdrempel die wordt gebruikt om te beslissen over wel/niet slagen. 'Eenvoudig' is meer dan de helft. Voor '2/3' is een supermeerderheid vereist.",
+    "majoritySimple": "Eenvoudig",
+    "majorityTwoThirds": "2/3",
+    "majorityLine": "{label} meerderheid",
+    "mustVote": "MOET stemmen",
+    "helpMustVoteTitle": "MOET stemmen",
+    "helpMustVoteBody": "Markeert deze motie als een onderwerp dat moet worden gestemd. Dit wordt gebruikt om de vereiste aan de deelnemers te communiceren (afhankelijk van de opzet van uw commissie).",
+    "saveSettings": "Instellingen opslaan",
+    "delegateBlurb": "Het podium registreert de stemmen tijdens de zitting (bijv. appèl). De motiestemmen volgen hier alleen op Ja/Nee (onthouding wordt niet gebruikt). Je kunt de telling volgen; afgevaardigden brengen geen stem uit in de app.",
+    "yes": "Ja",
+    "no": "Nee",
+    "ballots": "Stembiljetten",
+    "total": "Totaal",
+    "outcome": "Resultaat",
+    "passed": "Geslaagd",
+    "failed": "Mislukt",
+    "noRecordedVotes": "Geen geregistreerde stemmen",
+    "reopenMotion": "Heropen beweging",
+    "editRecordOpen": "Opname bewerken…",
+    "hideSettings": "Instellingen verbergen",
+    "preliminaryPassing": "Passeren (voorlopig)",
+    "preliminaryFailing": "Bij gebreke (voorlopig)",
+    "delegateRollCall": "Gedelegeerd appèl ({count})",
+    "noSeatedDelegates": "Er zijn geen zittende afgevaardigden beschikbaar voor deze motie.",
+    "rollPrefix": "Rollen:",
+    "recordedPrefix": "Opgenomen:",
+    "recordedYes": "Ja",
+    "recordedNo": "Nee",
+    "recordedAbstain": "Onthouden",
+    "recordedNone": "—",
+    "abstain": "Onthouden",
+    "clear": "Duidelijk",
+    "closeMotion": "Close-motion",
+    "mustVoteBadge": "MOET stemmen",
+    "canVoteBadge": "KAN stemmen",
+    "noMotions": "Nog geen moties.",
+    "currentOpenMotion": "Huidige open beweging",
+    "noOpenMotion": "Er is momenteel geen open motie.",
+    "recentClosedMotions": "Recente gesloten moties",
+    "noClosedMotions": "Nog geen gesloten moties.",
+    "untitled": "Zonder titel",
+    "voteTypes": {
+      "motion": "Beweging",
+      "amendment": "Wijziging",
+      "resolution": "Oplossing",
+      "agenda": "Agenda"
+    },
+    "roll": {
+      "absent": "Afwezig (rol)",
+      "present_abstain": "Aanwezig - kan zich onthouden (rollen)",
+      "present_voting": "Aanwezig en stemmen (rol)",
+      "unknown": "- (rol)"
+    },
+    "unseatedPlacard": "Seat open (no delegate assigned yet)",
+    "agendaVoteSection": "Agenda vote",
+    "agendaVoteSectionHelp": "Agenda-setting ballots default to a two-thirds majority. For each placard, record Yes, Abstain (when roll allows), or No. Abstain is disabled for delegates marked present and voting on roll. This flow is separate from formal motions below.",
+    "closeAgendaBallot": "Close agenda ballot",
+    "recordVoteChoice": "Record vote",
+    "chairRecordVotesHint": "For each seated delegation, tap Yes, Abstain (when available), No, or Clear. Abstain follows roll rules; it is disabled for present and voting.",
+    "abstainNotApplicableMotionType": "Abstain is not recorded for this motion type (Yes/No only).",
+    "abstainDisabledPresentVotingRoll": "Abstain is not available for delegates marked present and voting on roll."
+  },
+  "profile": {
+    "tabs": {
+      "ariaLabel": "Profielsecties",
+      "overview": "Overzicht",
+      "awards": "Onderscheidingen",
+      "private": "Privégegevens",
+      "settings": "Profielinstellingen"
+    },
+    "profilePicture": "Profielfoto",
+    "uploadFile": "Bestand uploaden",
+    "uploading": "Uploaden…",
+    "photoSaved": "Foto geüpload en opgeslagen.",
+    "orUrl": "Of ingesteld op URL",
+    "urlPlaceholder": "https://...",
+    "name": "Naam",
+    "username": "Gebruikersnaam",
+    "usernamePlaceholder": "bijv. alex_1999",
+    "pronouns": "Voornaamwoorden",
+    "customPronounNote": "Je profiel bevatte een aangepast voornaamwoord dat hier niet langer wordt geaccepteerd. Kies hierboven een optie (of laat niets open). Door te sparen wordt de oude waarde vervangen.",
+    "school": "School",
+    "schoolPlaceholder": "bijv. Lincoln middelbare school",
+    "grade": "Cijfer",
+    "selectGrade": "Selecteer cijfer",
+    "conferencesAttended": "Conferenties bezocht",
+    "awardsComma": "Onderscheidingen (door komma's gescheiden)",
+    "awardsPlaceholder": "Beste afgevaardigde, eervolle vermelding",
+    "allocation": "Toewijzing",
+    "selectAllocation": "Selecteer toewijzing",
+    "noAllocationsPlaceholder": "Er zijn geen commissietoewijzingen beschikbaar",
+    "saveProfile": "Profiel opslaan",
+    "saved": "Profiel opgeslagen.",
+    "saveFailed": "Kan profiel niet opslaan.",
+    "errUsernamePattern": "De gebruikersnaam moet 3-32 tekens bevatten (letters, cijfers, _, ., -)",
+    "errPronounsPreset": "Kies een voornaamwoord uit de lijst.",
+    "errImageType": "Kies een afbeeldingsbestand.",
+    "errImageSize": "Afbeelding is te groot (max. 5 MB).",
+    "errUploadFailed": "Uploaden mislukt.",
+    "errStorageSetup": "Er is geen profielfoto-opslag ingesteld. Voer in het Supabase-project migratie 00100_profile_pictures_storage_bucket.sql uit, of maak een openbare opslagbucket met de naam profile-pictures (zie README).",
+    "errPublicUrl": "Kan de openbare URL voor de geüploade afbeelding niet vinden.",
+    "fallbacks": {
+      "yourCountry": "jouw land",
+      "committeeSession": "Commissiesessie",
+      "delegate": "Delegeren",
+      "speechNote": "Toespraak notitie",
+      "untitledMotion": "Naamloze beweging",
+      "dash": "—"
+    },
+    "delegateWelcome": {
+      "title": "Welkom afgevaardigde van {flag} {country}",
+      "subtitle": "Waar zou jij graag mee willen beginnen?",
+      "links": {
+        "documents": "Documenten",
+        "notes": "Opmerkingen",
+        "committeeRoom": "Commissie kamer",
+        "runningNotes": "Notities uitvoeren",
+        "ideas": "Ideeën",
+        "guides": "Gidsen",
+        "sources": "Bronnen",
+        "resolutions": "Resoluties",
+        "speeches": "Toespraken",
+        "stances": "Standpunten",
+        "crisisSlides": "De crisis glijdt",
+        "report": "Rapport",
+        "motions": "Bewegingen",
+        "points": "Punten"
+      }
+    },
+    "awards": {
+      "tabsAriaLabel": "Prijzen op uw profiel",
+      "rank": "rang {rang}",
+      "pending": {
+        "tab": "Nominaties in behandeling",
+        "title": "In afwachting van voorzittersnominaties",
+        "descriptionSingle": "Opgeslagen door stoelen en ter beoordeling gedeeld met SMT. De definitieve prijzen verschijnen hieronder na bevestiging.",
+        "descriptionTabbed": "Opgeslagen door stoelen en ter beoordeling gedeeld met SMT. De definitieve onderscheidingen verschijnen na bevestiging."
+      },
+      "recorded": {
+        "tab": "Opgenomen onderscheidingen",
+        "title": "Opgenomen onderscheidingen",
+        "description": "Vermeld wanneer stoelen of SMT u toewijzen in de onderscheidingentracker. De definitieve erkenning volgt de regels van uw conferentie."
+      }
+    },
+    "privateSections": {
+      "sharedVisibility": "Alleen zichtbaar voor u, commissievoorzitters, en SMT voor de betreffende commissie.",
+      "points": {
+        "title": "Stoelpunten (privé)"
+      },
+      "speechNotes": {
+        "title": "Toespraak van de voorzitter (privé)"
+      },
+      "motions": {
+        "title": "Bewegingen die je bewoog",
+        "description": "Opgeslagen in uw profiel voor commissiebeoordeling en SMT-toezicht."
+      }
+    },
+    "discipline": {
+      "title": "Disciplinaire status (privé)",
+      "statusLine": "Waarschuwingen: {warnings} · Waarschuwingen: {strikes}{votingDisabled}{speakerSuspended}{removedFromCommittee}",
+      "votingDisabled": "stemmen uitgeschakeld",
+      "speakingSuspended": "spreken opgeschort",
+      "removedFromCommittee": "uit de commissie verwijderd",
+      "updated": "Bijgewerkt: {waarde}"
+    },
+    "preview": {
+      "ariaLabel": "Profielvoorbeeld",
+      "title": "Voorbeeld",
+      "yourName": "Jouw naam",
+      "usernameNotSet": "Gebruikersnaam niet ingesteld",
+      "gradeValue": "Graad {cijfer}",
+      "awards": "Onderscheidingen"
+    },
+    "dashboardCommittee": "Dashboard committee (Head Chair)",
+    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+    "dashboardCommitteeSwitching": "Switching…",
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+  },
+  "guides": {
+    "default": {
+      "rop": {
+        "title": "Reglement van orde (RoP)",
+        "content": "# Reglement van orde \n\n## Punten en bewegingen \n- **Bestelpunt**: Correcte procedure \n- **Punt van informatie**: vraag aan de spreker \n- **Punt van persoonlijk privilege**: persoonlijk comfort \n- **Motie ter tafel**: debat uitstellen \n- **Motie tot schorsing**: sessie beëindigen \n\n## Stemmen \n- Gewone meerderheid voor procedurele kwesties \n- 2/3 meerderheid voor inhoudelijke zaken \n- Hoofdelijke stemming indien gevraagd"
+      },
+      "examples": {
+        "title": "Voorbeelden",
+        "content": "# Voorbeelden \n\n## Resolutieformaat \n``` \nDe Algemene Vergadering, \n... \n1. Roept de lidstaten op om... \n2. Dringt er bij de internationale gemeenschap op aan om... \n``` \n\n## Positie papierstructuur \n1. Achtergrond \n2. Landenbeleid \n3. Voorgestelde oplossingen"
+      },
+      "templates": {
+        "title": "Sjablonen",
+        "content": "# Sjablonen \n\n## Voorzitterrapportsjabloon \n- Commissieoverzicht \n- Belangrijkste discussiepunten \n- Resoluties aangenomen \n- Aanbevelingen"
+      },
+      "chairReport": {
+        "title": "Voorzitter Verslag",
+        "content": "# Voorzitter Verslag \n\nDocumenteer hier de werkzaamheden en resultaten van de commissie."
+      }
+    },
+    "edit": "Bewerking",
+    "guideDocument": "Gidsdocument",
+    "additionalNotes": "Aanvullende opmerkingen",
+    "noContentYet": "Nog geen inhoud.",
+    "titlePlaceholder": "Titel",
+    "googleDocsUrl": "URL van Google Documenten",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Een nieuw Google-document wordt op een ander tabblad geopend. Plak een deelbare link zodat deelnemers het document hier kunnen openen (bekijken/bewerken is afhankelijk van delen via Google).",
+    "markdownOptional": "Markdown-opmerkingen (optioneel als u een Google-document gebruikt)",
+    "save": "Redden",
+    "cancel": "Annuleren",
+    "createNewGuide": "Nieuwe gids maken",
+    "slugPlaceholder": "naaktslak (uniek)",
+    "titleLowerPlaceholder": "titel",
+    "googleDocsUrlOptional": "URL voor Google Documenten (optioneel)",
+    "markdownContentOptional": "Prijsverlagingsinhoud (optioneel)",
+    "create": "Creëren",
+    "glossary": {
+      "title": "MUN Agenda Woordenlijst",
+      "subtitle": "Unieke terminologie afgestemd op uw commissiecode en actuele agendaonderwerpen.",
+      "committeeCode": "Commissiecode: {code}",
+      "sources": {
+        "core": "kern",
+        "committee": "commissie",
+        "topic": "onderwerp"
+      },
+      "terms": {
+        "delegation": {
+          "term": "Delegatie",
+          "definition": "Een landen- of waarnemersteam dat één staat of entiteit in de commissie vertegenwoordigt."
+        },
+        "placard": {
+          "term": "Aanplakbiljet",
+          "definition": "Landbord dat wordt gebruikt om het woord te vragen, te stemmen en procedurele moties aan te geven."
+        },
+        "dais": {
+          "term": "Dais",
+          "definition": "Voorzittersteam dat het debat modereert, de procedure toepast en de spreekvolgorde beheert."
+        },
+        "quorum": {
+          "term": "Quorum",
+          "definition": "Minimumaantal delegaties dat nodig is om formele zaken af ​​te handelen en te stemmen."
+        },
+        "motion": {
+          "term": "Beweging",
+          "definition": "Formeel voorstel om de stroom van het debat te veranderen, zoals het caucustype of de spreektijd."
+        },
+        "point_of_order": {
+          "term": "Punt van orde",
+          "definition": "Tussenkomst wanneer de procedure volgens het commissiereglement onjuist wordt toegepast."
+        },
+        "moderated_caucus": {
+          "term": "Gemodereerde caucus",
+          "definition": "Gestructureerd debatsegment met korte toespraken over een bepaald subonderwerp."
+        },
+        "unmoderated_caucus": {
+          "term": "Ongemodereerde caucus",
+          "definition": "Informele onderhandelingsperiode waarin afgevaardigden zich vrijelijk kunnen bewegen om ideeën op te stellen en samen te voegen."
+        },
+        "draft_resolution": {
+          "term": "Ontwerpresolutie",
+          "definition": "Werktekst van voorgestelde commissieactie vóór de definitieve stemming en goedkeuring."
+        },
+        "amendment": {
+          "term": "Wijziging",
+          "definition": "Wijziging voorgesteld om een ​​tekst op te stellen, hetzij vriendelijk, hetzij als onvriendelijk gestemd."
+        },
+        "operative_clause": {
+          "term": "Operatieclausule",
+          "definition": "Actiegerichte genummerde clausule die beschrijft wat de commissie voorstelt te doen."
+        },
+        "preambulatory_clause": {
+          "term": "Preambuleclausule",
+          "definition": "Contextbepalende clausule waarin achtergrondprincipes, zorgen en eerdere kaders worden aangehaald."
+        },
+        "right_of_reply": {
+          "term": "Recht van antwoord",
+          "definition": "Gelegenheid om te reageren op een directe verklaring die de waardigheid of positie van de delegatie aantast."
+        },
+        "veto_power": {
+          "term": "Vetomacht",
+          "definition": "Bevoegdheid van permanent lid van de VN-Veiligheidsraad om inhoudelijke ontwerpresoluties te blokkeren."
+        },
+        "chapter_vii": {
+          "term": "Hoofdstuk VII",
+          "definition": "Autoriteit van het VN-Handvest op het gebied van bedreigingen voor de vrede, sancties en het gebruik van geweld."
+        },
+        "sanctions_regime": {
+          "term": "Sanctieregime",
+          "definition": "Gecoördineerde beperkingen die worden gebruikt om gedrag te beïnvloeden zonder directe militaire actie."
+        },
+        "arms_control": {
+          "term": "Wapenbeheersing",
+          "definition": "Afspraken en verificatiesystemen die typen, hoeveelheden of inzet van wapens beperken."
+        },
+        "non_proliferation": {
+          "term": "Non-proliferatie",
+          "definition": "Beleid om de verspreiding van nucleaire, chemische, biologische of geavanceerde wapencapaciteiten te voorkomen."
+        },
+        "confidence_building_measures": {
+          "term": "Vertrouwenwekkende maatregelen",
+          "definition": "Transparantie- en communicatiemiddelen die misverstanden en conflictrisico's verminderen."
+        },
+        "universal_periodic_review": {
+          "term": "Universele periodieke beoordeling",
+          "definition": "Peer-review-proces waarbij elke VN-lidstaat rapporteert en rechtenaanbevelingen ontvangt."
+        },
+        "special_rapporteur": {
+          "term": "Speciale Rapporteur",
+          "definition": "Onafhankelijke deskundige benoemd om toezicht te houden op en te rapporteren over thematische kwesties of landenrechtenkwesties."
+        },
+        "treaty_body": {
+          "term": "Verdragsorgaan",
+          "definition": "Comité van deskundigen dat toezicht houdt op de implementatie van een specifiek mensenrechtenverdrag."
+        },
+        "public_health_emergency": {
+          "term": "Noodsituatie op het gebied van de volksgezondheid",
+          "definition": "Ernstige uitbraak die dringend een gecoördineerde nationale en internationale respons vereist."
+        },
+        "surveillance": {
+          "term": "Epidemiologische surveillance",
+          "definition": "Continue verzameling en analyse van gezondheidsgegevens om ziektetrends te detecteren en te volgen."
+        },
+        "health_systems": {
+          "term": "Versterking van gezondheidssystemen",
+          "definition": "Verbetering van het personeelsbestand, de financiering, de logistiek en het bestuur voor een betrouwbare levering van gezondheidszorg."
+        },
+        "transnational_crime": {
+          "term": "Transnationale georganiseerde misdaad",
+          "definition": "Criminele activiteiten worden over de grenzen heen gecoördineerd via netwerken en illegale markten."
+        },
+        "illicit_trafficking": {
+          "term": "Illegale handel",
+          "definition": "Illegaal verkeer van drugs, wapens, personen of goederen tussen rechtsgebieden."
+        },
+        "rule_of_law_capacity": {
+          "term": "Capaciteit voor de rechtsstaat",
+          "definition": "Institutioneel vermogen van rechtssystemen om rechten eerlijk te onderzoeken, vervolgen en beschermen."
+        },
+        "sustainable_development": {
+          "term": "Duurzame ontwikkeling",
+          "definition": "Groeimodel dat sociale vooruitgang, economische kansen en milieubescherming in evenwicht brengt."
+        },
+        "financing_for_development": {
+          "term": "Financiering voor ontwikkeling",
+          "definition": "Publieke en private financieringsmechanismen die ontwikkelingsprioriteiten op de lange termijn ondersteunen."
+        },
+        "policy_coordination": {
+          "term": "Beleidscoördinatie",
+          "definition": "Afstemming van acties van staat en instanties om dubbel werk te voorkomen en de collectieve impact te vergroten."
+        },
+        "child_protection": {
+          "term": "Kinderbescherming",
+          "definition": "Maatregelen ter voorkoming van uitbuiting, misbruik en geweld tegen kinderen in alle omstandigheden."
+        },
+        "education_access": {
+          "term": "Toegang tot onderwijs",
+          "definition": "Zorgen voor inclusieve, eerlijke en continue leermogelijkheden voor alle kinderen."
+        },
+        "humanitarian_response": {
+          "term": "Humanitaire reactie",
+          "definition": "Snelle hulpacties die tegemoetkomen aan dringende behoeften in crises en conflictsituaties."
+        },
+        "gender_mainstreaming": {
+          "term": "Gendermainstreaming",
+          "definition": "Integratie van genderanalyse in het ontwerp, de implementatie en de evaluatie van beleid."
+        },
+        "gender_based_violence": {
+          "term": "Gendergerelateerd geweld",
+          "definition": "Schade gericht tegen iemand op basis van genderidentiteit, rollen of ongelijke machtsverhoudingen."
+        },
+        "economic_empowerment": {
+          "term": "Economische empowerment",
+          "definition": "Het uitbreiden van de toegang tot fatsoenlijk werk, financiën, eigendom en beslissingsmacht."
+        },
+        "source_attribution": {
+          "term": "Bronvermelding",
+          "definition": "Het duidelijk citeren van de herkomst van informatie, zodat claims kunnen worden geverifieerd en gecontextualiseerd."
+        },
+        "verified_reporting": {
+          "term": "Geverifieerde rapportage",
+          "definition": "Journalistieke standaard die bevestiging vereist voordat betwiste feiten worden gepubliceerd."
+        },
+        "editorial_independence": {
+          "term": "Redactionele onafhankelijkheid",
+          "definition": "Scheiding van rapportagebeslissingen en politieke druk of invloed van belanghebbenden."
+        },
+        "climate_mitigation": {
+          "term": "Klimaatmitigatie",
+          "definition": "Acties die de uitstoot van broeikasgassen verminderen of de koolstofverwijdering op de lange termijn vergroten."
+        },
+        "climate_adaptation": {
+          "term": "Klimaataanpassing",
+          "definition": "Beleid en investeringen die de kwetsbaarheid voor klimaatgerelateerde gevolgen verminderen."
+        },
+        "cyber_norms": {
+          "term": "Cyber-normen",
+          "definition": "Gedeelde verwachtingen voor verantwoordelijk staatsgedrag in digitale en cyberdomeinen."
+        },
+        "critical_infrastructure": {
+          "term": "Kritieke infrastructuur",
+          "definition": "Essentiële systemen zoals stroom, water, gezondheidszorg en communicatie vereisen veerkracht."
+        },
+        "epidemiology": {
+          "term": "Epidemiologie",
+          "definition": "Studie van ziektepatronen, oorzaken en verspreiding in populaties."
+        },
+        "preparedness_response": {
+          "term": "Paraatheid en reactie",
+          "definition": "Planning, coördinatie en overspanningsacties om noodsituaties te beheersen en te beheersen."
+        },
+        "non_refoulement": {
+          "term": "Non-refoulement",
+          "definition": "Principe dat de terugkeer van mensen verbiedt naar plaatsen waar zij ernstige schade ondervinden."
+        },
+        "durable_solutions": {
+          "term": "Duurzame oplossingen",
+          "definition": "Langetermijnresultaten voor ontheemden: terugkeer, lokale integratie of hervestiging."
+        },
+        "nuclear_safeguards": {
+          "term": "Nucleaire waarborgen",
+          "definition": "Verificatiemaatregelen die ervoor zorgen dat nucleair materiaal niet wordt gebruikt voor wapengebruik."
+        },
+        "counter_terrorism": {
+          "term": "Terrorismebestrijding",
+          "definition": "Geïntegreerde juridische, preventieve en veiligheidsmaatregelen tegen terroristische activiteiten."
+        },
+        "due_process": {
+          "term": "Een eerlijk proces",
+          "definition": "Eerlijke juridische procedures ter bescherming van rechten tijdens onderzoek, vervolging en sancties."
+        },
+        "resource_security": {
+          "term": "Beveiliging van hulpbronnen",
+          "definition": "Betrouwbare toegang tot voedsel, water en energie onder economische en ecologische stress."
+        },
+        "resilience": {
+          "term": "Weerstand",
+          "definition": "Capaciteit van gemeenschappen en instellingen om schokken op te vangen en effectief te herstellen."
+        }
+      },
+      "topicLine": "Onderwerp: {onderwerp}"
+    }
+  },
+  "ideas": {
+    "editIdea": "Idee bewerken",
+    "googleDocsUrl": "URL van Google Documenten",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "shortIdeaOptional": "Korte ideetekst (optioneel)",
+    "save": "Redden",
+    "cancel": "Annuleren",
+    "addIntro": "Voeg een Google-document toe om een ​​oplossingsidee op te stellen, of typ een korte notitie (of beide).",
+    "googleDocsCreateHelp": "Nieuw Google-document wordt geopend op een ander tabblad; plak de link hier nadat deze is gemaakt.",
+    "resolutionIdeaPlaceholder": "Oplossing idee...",
+    "add": "Toevoegen",
+    "noIdeasYet": "Nog geen ideeën.",
+    "ideaLabel": "Idee",
+    "ideaFallback": "Idee {nummer}",
+    "linkedDoc": "Gekoppeld document",
+    "addedOn": "{datum} toegevoegd",
+    "edit": "Bewerking",
+    "delete": "Verwijderen",
+    "ideaDocument": "Ideedocument",
+    "summary": "Samenvatting",
+    "emptyIdea": "Leeg idee."
+  },
+  "stances": {
+    "heatmapTitle": "Kort standoverzicht (Heatmap)",
+    "heatmapHelp": "In hoeverre ondersteunt uw toewijzing ___? (schaal 1-5)",
+    "topicPlaceholder": "bijv. klimaat actie",
+    "extentLabel": "Omvang (1-5):",
+    "extentHelpTitle": "Omvang (1-5)",
+    "extentHelpBody": "1 betekent dat uw toewijzing weinig steun voor het onderwerp heeft, en 5 betekent sterke steun. Kies een nummer dat overeenkomt met uw standpunt in de commissie.",
+    "add": "Toevoegen",
+    "viewOnlyHeatmap": "Alleen-lezen heatmap voor personeel.",
+    "notesPerAllocation": "Toelichting per toewijzing",
+    "noAllocationsYet": "Nog geen toewijzingen",
+    "notesPlaceholder": "Standpunten voor deze toewijzing...",
+    "noteLanguageWarning": "Waarschuwing van de lezer: deze notitie kan ongepast taalgebruik bevatten.",
+    "save": "Redden",
+    "saveHelpTitle": "Standpuntnotitie opslaan",
+    "saveHelpBody": "Slaat de standpuntnota voor deze toewijzing op. Het kan worden bekeken door medewerkers en (afhankelijk van de commissie-instellingen) door andere deelnemers."
+  },
+  "speeches": {
+    "newSpeech": "Nieuwe toespraak",
+    "speechTitlePlaceholder": "Titel van de toespraak",
+    "googleDocsUrl": "URL van Google Documenten",
+    "googleDocsPlaceholder": "https://docs.google.com/document/d/...",
+    "googleDocsHelp": "Opent Google in een nieuw tabblad; plak hier de document-URL als u klaar bent.",
+    "plainTextOptional": "Platte tekstconcept (optioneel als u een Google-document gebruikt)",
+    "save": "Redden",
+    "cancel": "Annuleren",
+    "noSpeechesYet": "Nog geen toespraken. Koppel een Google-document of plak tekst.",
+    "speechLabel": "Toespraak",
+    "untitled": "Zonder titel",
+    "edit": "Bewerking",
+    "speechDocument": "Spraakdocument",
+    "draftText": "Concepttekst",
+    "noContentHint": "Koppel een Google-document met Bewerken of voeg platte tekst toe aan het formulier."
+  },
+  "committeeRoom": {
+    "committeeLabel": "Commissie",
+    "yourContext": "Jouw context",
+    "roleLabel": "Rol",
+    "seatLabel": "Zitplaats",
+    "clearSearchTitle": "Wis de zoekopdracht en toon alle delegaties",
+    "vacantLabel": "Vrij",
+    "assignedLabel": "Toegewezen",
+    "daisLabel": "Dais",
+    "phaseLabel": "Fase",
+    "phaseVoting": "Stemmen",
+    "phaseDebate": "Debat",
+    "focusSearchTitle": "Focus zoeken (podiumtitels en namen komen overeen met uw zoekopdracht)",
+    "tipLabel": "Tip",
+    "searchVacantTitle": "Zoek naar \"vrije\" zitplaatsen in de kamer",
+    "searchHint": "Typ een land, naam van de afgevaardigde, school, voornaamwoord of 'vacant' om overeenkomsten in de ruimte te markeren. Druk op Enter om naar de eerste wedstrijd te gaan; Esc wordt gewist. Klik op Vacant om naar lege stoelen te gaan.",
+    "findLabel": "Zoek een delegatie- of podiumlid",
+    "searchPlaceholder": "Land, naam, school...",
+    "matchesCount": "{matches} van {total} zitplaatsen komen overeen",
+    "enterScrolls": "Voer rollen in",
+    "typeToFilterHint": "Type om te filteren - Voer scrollt naar de eerste overeenkomst in",
+    "noMatches": "Geen overeenkomende delegaties of podiumstoelen.",
+    "digitalDisplay": "Digitaal display",
+    "floorLabel": "Vloer",
+    "staffSeatsHeading": "Personeel - zitplaatsen",
+    "searchAria": "Zoek delegaties",
+    "virtualRoomVacant": "Vrij",
+    "profileAria": "Bekijk profiel: {country}",
+    "vacantSeatAria": "Vrije stoel",
+    "placardAria": "Plakkaat {land}",
+    "gavelAria": "Hamer",
+    "viewProfileAria": "Bekijk profiel: {title}",
+    "noProfileLinkAria": "{title} (geen profiellink)",
+    "committeeFloor": "Comité verdieping",
+    "virtualRoomFigureAria": "Virtuele commissiekamer - {committeeName} ({conferenceName})",
+    "filteringLiveRegion": "Delegaties filteren. De eerste gemarkeerde stoel is de eerste wedstrijd in de ring.",
+    "helperText": "Op plakkaten worden het land (van toewijzingen), naam, school en voornaamwoorden uit het profiel van elke afgevaardigde vermeld. Bewerk de jouwe onder Profiel. Lege commissiezetels worden weergegeven als Vrij. Klik op een gevuld plakkaat of podiumplaats om de pagina van dat lid te openen (chat en rapporteer vanaf daar).",
+    "virtualRoomCaption": "Virtuele model VN-commissiekamer met borden van afgevaardigden met daarop het land, de naam, de school en de voornaamwoorden."
+  },
+  "session": {
+    "requestToSpeak": {
+      "title": "Verzoek om te spreken",
+      "delegateFallback": "Delegeren",
+      "needAllocation": "Voor een spreekverzoek heeft u een toewijzing nodig.",
+      "alreadyQueued": "U heeft al een actief spreekverzoek in de wachtrij.",
+      "requested": "Gevraagd om te spreken. Je verschijnt in de wachtrij.",
+      "requestFailed": "Kan geen spreekverzoek indienen.",
+      "helpBody": "Stuurt uw delegatie naar de stoelwachtrij. U kunt één actief wachtend/huidig ​​verzoek tegelijk hebben.",
+      "purposeLabel": "Optioneel doel (weergegeven in wachtrijlabel)",
+      "purposeHelpTitle": "Doel etiket",
+      "purposeHelpBody": "Deze tekst wordt toegevoegd aan uw landnaam, zodat de stoelen kunnen zien waarom u het woord aanvraagt.",
+      "purposePlaceholder": "bijv. ondersteuning + wijzigingsoverzicht",
+      "requesting": "Aanvragen...",
+      "rollPromptTitle": "Goedkeuring van de stoel vereist",
+      "rollPromptBodyPickStatus": "Sessie is begonnen. Kies uw appèlstatus om spreken en stemmen te ontgrendelen. Deze keuze kan niet worden gewijzigd.",
+      "rollPromptBodyWaitSessionStart": "Wachten tot de voorzitter de commissiesessie begint.",
+      "rollPromptBodyWaitRollPrompt": "Wachten op appèlverzoek.",
+      "rollPromptBodyMarkedAbsent": "Je bent momenteel gemarkeerd als afwezig. Vraag de voorzitter om u als Aanwezig te markeren als u wilt spreken en stemmen.",
+      "rollPromptBodyChecking": "Uw rolstatus controleren...",
+      "rollPromptSaving": "Besparing...",
+      "rollPromptPresent": "Cadeau",
+      "rollPromptPresentVoting": "Presenteren en stemmen"
+    },
+    "motionVoting": {
+      "votingProcedure": "Stemprocedure",
+      "currentMotion": "Huidige beweging",
+      "motioner": "Beweger",
+      "majority": "Meerderheid",
+      "majoritySimple": "Eenvoudig",
+      "tally": "Ja {ja} - Nee {nee} - Totaal {totaal}",
+      "help": "Het podium registreert de stemming van elke delegatie tijdens de zitting. Voor motiestemmen wordt alleen Ja of Nee gebruikt (geen onthouding). Totalen tellen alleen de plakkaten waar Ja of Nee op stond; afwezige delegaties worden overgeslagen."
+    },
+    "activeMotion": {
+      "currentMotion": "Huidige beweging",
+      "motionFallback": "Beweging",
+      "motioner": "Beweger",
+      "majority": "Meerderheid",
+      "majoritySimple": "Eenvoudig",
+      "type": "Type",
+      "timer": "Timer",
+      "currentSpeaker": "Huidige spreker",
+      "nextSpeaker": "Volgende spreker",
+      "speakerTimeLeftCap": "Sprekertijd (links / cap)",
+      "speakerTimeLeftTotal": "Sprekertijd (links / totaal)",
+      "perSpeaker": "(per spreker)",
+      "paused": "(gepauzeerd)",
+      "pauseReason": "Pauze: {reden}"
+    },
+    "floorStatus": {
+      "sessionTime": "Sessie tijd",
+      "sessionNotStarted": "Sessie niet gestart",
+      "limit": "Beperken",
+      "limitRemaining": "{waarde} over",
+      "limitOverBy": "voorbij met {waarde}",
+      "quickLinkSession": "Sessie",
+      "quickLinkRoll": "Rollen",
+      "quickLinkSpeakers": "Luidsprekers",
+      "quickLinkMotions": "Bewegingen",
+      "quickLinkTimer": "Timer",
+      "dais": "Dais",
+      "pinned": "Vastgezet",
+      "viewFullAnnouncement": "Bekijk de volledige aankondiging",
+      "timerPausesReadOnly": "Timer pauzeert (alleen-lezen)",
+      "speakerList": "Sprekerslijst",
+      "speakerFallback": "Spreker",
+      "rollCallYou": "Appèl (jij)",
+      "fullAnnouncement": "Volledige aankondiging",
+      "daisAnnouncement": "Dais-aankondiging",
+      "close": "Dichtbij",
+      "quickLinkAgenda": "Agenda"
+    },
+    "committeeControl": {
+      "sessionNameLabel": "Sessienaam",
+      "sessionNamePlaceholder": "bijv. Ochtend sessie",
+      "sessionNameSaving": "Besparing…",
+      "sessionNameSaved": "Opgeslagen",
+      "sessionNameHint": "Wordt automatisch opgeslagen en verschijnt in de sessiegeschiedenis.",
+      "title": "Commissiesessie",
+      "subtitle": "Start of stop de commissiesessie.",
+      "helpStartStop": "Start begint de timer/status van de live commissiesessie voor iedereen. Stop beëindigt de sessie en wist de huidige tijdslimiet.",
+      "migrationUnavailable": "Sessiecontroles zijn tijdelijk niet beschikbaar totdat de nieuwste databasemigraties zijn toegepast.",
+      "endTimeInFuture": "Kies een eindtijd in de toekomst, of schakel over naar geen limiet.",
+      "sessionStartUnavailable": "Het tijdstempel voor het starten van de sessie is pas beschikbaar nadat de nieuwste migraties zijn toegepast.",
+      "endTimeInFutureSetNoLimit": "Kies een eindtijd in de toekomst, of stel geen limiet in.",
+      "sessionLimitUpdated": "Sessielimiet bijgewerkt.",
+      "startedLabel": "Gestart:",
+      "timeInLabel": "Tijd in:",
+      "timeUntilEndLabel": "Tijd tot einde:",
+      "overByValue": "voorbij met {waarde}",
+      "modeLabel": "Modus:",
+      "modeStopwatchNoLimit": "Stopwatch (geen tijdslimiet)",
+      "sessionNotRunning": "Sessie loopt niet.",
+      "sessionLimit": "Sessielimiet",
+      "sessionLimitModesTitle": "Sessielimietmodi",
+      "sessionLimitModesHelp": "Geen: geen einde. Tijdsbudget: telt vanaf het begin. Eindigt op: vaste kloktijd in uw lokale tijdzone.",
+      "sessionLimitOptional": "Optioneel.",
+      "noneLabel": "Geen",
+      "noneDescription": "loopt totdat je stopt.",
+      "timeBudgetLabel": "Tijdsbudget",
+      "timeBudgetDescription": "telt vanaf het moment dat u begint.",
+      "endTimeLabel": "Eindtijd",
+      "endTimeDescription": "gebruikt een vaste kloktijd (overschrijft het budget als beide ooit zijn ingesteld).",
+      "noneIndefinite": "Geen (onbepaald)",
+      "noneScheduledEndHint": "Geen gepland einde; alleen de verstreken tijd wordt weergegeven.",
+      "timeBudgetFromStart": "Tijdsbudget vanaf het begin",
+      "hoursLabel": "Uur",
+      "minutesLabel": "Notulen",
+      "minimumOneMinute": "(minimaal 1 minuut)",
+      "endAtLocalTime": "Eindigt om (lokale tijd)",
+      "stopSession": "Sessie stoppen",
+      "saveLimit": "Bewaar limiet",
+      "saveLimitHelp": "Past bijgewerkte limietinstellingen toe terwijl de sessie al actief is, zonder de sessie te stoppen.",
+      "startSession": "Sessie starten",
+      "sidebarUsePrefix": "Gebruik de zijbalk voor",
+      "rollCall": "Naamafroeping",
+      "speakers": "Luidsprekers",
+      "formalMotions": "Formele moties",
+      "timer": "Timer",
+      "sidebarAnd": "En",
+      "announcements": "Aankondigingen",
+      "sidebarUseSuffix": "— één hulpmiddel per tabblad.",
+      "agenda": "Agenda"
+    },
+    "history": {
+      "title": "Sessiegeschiedenis",
+      "savedCount": "{count} opgeslagen",
+      "permissionsHint": "Stoelen kunnen de namen van vermeldingen wijzigen. SMT/Admin kan vermeldingen hernoemen en verwijderen.",
+      "empty": "Nog geen sessiegeschiedenis.",
+      "rename": "Hernoemen",
+      "delete": "Verwijderen",
+      "deleteConfirm": "Deze sessie uit de geschiedenis verwijderen?",
+      "sessionNamePrompt": "Sessienaam",
+      "rangeClosed": "{bereik}",
+      "rangeOngoing": "{bereik} -> Lopend"
+    },
+    "timerPage": {
+      "title": "Timer",
+      "controlsTitle": "Timerbediening",
+      "controlsHelp": "Gebruik de algemene verdieping voor de algemene timing van het debat, of gebruik motiestemming om de zichtbaarheid te koppelen aan een specifiek open stemitem.",
+      "tabSetup": "1) Installatie",
+      "tabClock": "2) Klokbediening",
+      "tabNotes": "3) Toespraaknotities",
+      "tabLog": "4) Logboek pauzeren",
+      "setupHelp": "Kies of deze timer voor het algemene woord is (altijd zichtbaar voor afgevaardigden) of gekoppeld is aan de motie die openstaat voor stemming (afgevaardigden zien deze alleen zolang die stemming het actieve item is). Als de tijd per spreker is ingeschakeld, blijft de klok hoe dan ook zichtbaar tijdens een gematigde caucus. Pauzeer de klok / Start de klokbevriezing of hervat het aftellen. Stel de luidsprekertijd (resterend) en de totale tijd afzonderlijk in en vervolgens Timer opslaan. Voorinstellingen vullen beide tot dezelfde lengte; u kunt beide velden achteraf bewerken. Pauzes worden met een korte reden geregistreerd.",
+      "namedPreset": "Benoemde voorinstelling",
+      "applyPreset": "Voorinstelling toepassen...",
+      "floorLabelDelegates": "Vloerlabel (afgevaardigden)",
+      "floorLabelPlaceholder": "bijv. GSL jaren 60",
+      "timerPurpose": "Doel van de timer",
+      "purposeGeneralFloor": "Algemeen debat/vloer (niet aan stemming gebonden)",
+      "purposeMotionVote": "Open beweging - alleen timer zolang die stem actief is op de vloer",
+      "openMotionForVoting": "Open motie (moet openstaan ​​voor stemming)",
+      "selectMotion": "Beweging selecteren...",
+      "untitled": "Zonder titel",
+      "noOpenMotionWarning": "Er is geen motie waarover gestemd kan worden. Open eerst een stemming of schakel het doel over naar de algemene verdieping.",
+      "clock": "Klok",
+      "running": "Rennen",
+      "paused": "Gepauzeerd",
+      "saveToEnablePauseStart": "sla de timer op om pauzeren/starten in te schakelen.",
+      "pauseReasonLogged": "Reden van pauze (gelogd)",
+      "pauseReasonPlaceholder": "bijv. Punt van orde, technisch probleem, ongemodereerde caucus...",
+      "pauseClock": "Pauzeer de klok",
+      "startClock": "Klok starten",
+      "perSpeakerTitle": "Tijd per spreker (gemodereerde caucus)",
+      "perSpeakerHelp": "Stel de totale tijd in als de limiet per luidspreker en de luidsprekertijd als de resterende tijd; Advance gaat naar de volgende luidspreker en reset de resterende naar de limiet.",
+      "currentSpeaker": "Huidige spreker",
+      "nextSpeaker": "Volgende spreker",
+      "speechNotesCurrentSpeaker": "Toespraaknotities (huidige spreker)",
+      "speechNotesHelp": "Notities zijn gekoppeld aan de tekst van de Huidige sprekertimer en als de sprekerslijst iemand heeft gemarkeerd als Huidig, wordt hun delegatie ter referentie opgeslagen.",
+      "timerFloorLabel": "Timer (vloer):",
+      "speakerListCurrent": "Sprekerslijst (huidig):",
+      "noCurrentDelegation": "Geen enkele delegatie is gemarkeerd als Huidig ​​op de sprekerslijst.",
+      "note": "Opmerking",
+      "notePlaceholder": "Punten, POI's, toon, vervolgacties...",
+      "saveSpeechNote": "Spraaknotitie opslaan",
+      "recentNotes": "Uw recente aantekeningen (deze commissie)",
+      "delete": "Verwijderen",
+      "speakerTimeRemaining": "Sprekertijd (resterend)",
+      "remainingHelpPerSpeaker": "Aftellen voor de huidige spreker (wordt gereset wanneer u verder gaat).",
+      "remainingHelpNormal": "Aftellen voor de huidige spreker (kan minder zijn dan het totaal).",
+      "totalTime": "Totale tijd",
+      "totalHelpPerSpeaker": "Cap per luidspreker (noemer op de vloer; resterende voorvullingen hierop).",
+      "totalHelpNormal": "Volledige lengte van dit timersegment (weergegeven na de schuine streep op de vloer).",
+      "saveTimer": "Timer opslaan",
+      "advanceSpeakerReset": "Zet de luidspreker vooruit en reset de klok",
+      "recentPauseLog": "Recent pauzelogboek",
+      "noPauseEvents": "Er zijn nog geen pauze-evenementen geregistreerd voor deze commissie.",
+      "openPauseLogHint": "Open het Pauzelogboek om de vastgelegde pauzeredenen en tijdstempels te bekijken.",
+      "saved": "Timer opgeslagen.",
+      "savedCapped": "Timer opgeslagen. De sprekerstijd was langer dan totaal; gemaximeerd op totaal.",
+      "alreadyPaused": "Timer is al gepauzeerd.",
+      "pausedForCommittee": "Timer pauzeerde voor de commissie.",
+      "alreadyRunning": "De timer loopt al.",
+      "runningForCommittee": "Timer loopt voor de commissie.",
+      "euTimerBoardTitle": "Timerbord van het EU-Parlement (11 timers)",
+      "euTimerBoardHelp": "Eén timer per party, plus totale tijd, POI/POC-tijd en luidsprekertijd. Gebruik Toepassen om een ​​rij te kopiëren naar de livetimervelden op het tabblad Klok (sprekertijd / Timer opslaan).",
+      "euTimerName": "Naam",
+      "euTimerTag": "Label",
+      "euTotalTime": "Totale tijd",
+      "euPoiPocTime": "POI/POC-tijd",
+      "euSpeakerTime": "Spreker tijd"
+    }
   }
 }
