@@ -15,10 +15,6 @@ import { getTranslations } from "next-intl/server";
 import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
-import {
-  canSwitchCommitteeViaProfile,
-  isHeadChairAllocationLabel,
-} from "@/lib/head-chair-committee-switch";
 
 export default async function ProfilePage({
   searchParams,
@@ -171,35 +167,31 @@ export default async function ProfilePage({
   const activeConference = await getConferenceForDashboard({ role: roleLower });
   const crisisReportingEnabled = isCrisisCommittee(activeConference?.committee ?? null);
 
-  let headChairCommitteeSwitch:
+  const seatConferenceIds = [
+    ...new Set((mySeats ?? []).map((s) => s.conference_id).filter(Boolean)),
+  ] as string[];
+
+  let dashboardCommitteeSwitch:
     | { conferences: { id: string; label: string }[]; activeConferenceId: string | null }
     | undefined;
-  if (roleLower === "chair" && canSwitchCommitteeViaProfile(user.email ?? "")) {
-    const { data: headChairAllocRows } = await supabase
-      .from("allocations")
-      .select("conference_id, country, conferences(id, name, committee)")
-      .eq("user_id", user.id);
-    type ConfEmbed = { id: string; name: string; committee: string | null };
-    const options = (headChairAllocRows ?? [])
-      .filter((r) => isHeadChairAllocationLabel(r.country))
-      .map((r) => {
-        const raw = r.conferences as ConfEmbed | ConfEmbed[] | null | undefined;
-        const c = Array.isArray(raw) ? raw[0] : raw;
-        if (!c?.id) return null;
-        const label = translateConferenceHeadline(
+  if (seatConferenceIds.length > 0) {
+    const { data: seatConfRows } = await supabase
+      .from("conferences")
+      .select("id, name, committee")
+      .in("id", seatConferenceIds);
+    const options = (seatConfRows ?? [])
+      .map((c) => ({
+        id: c.id,
+        label: translateConferenceHeadline(
           tTopics,
           tCommitteeLabels,
           [c.name, c.committee].filter(Boolean).join(" — ")
-        );
-        return { id: c.id, label };
-      })
-      .filter((x): x is { id: string; label: string } => Boolean(x));
-    const uniqueById = [...new Map(options.map((o) => [o.id, o])).values()].sort((a, b) =>
-      a.label.localeCompare(b.label)
-    );
-    if (uniqueById.length > 0) {
-      headChairCommitteeSwitch = {
-        conferences: uniqueById,
+        ),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+    if (options.length > 0) {
+      dashboardCommitteeSwitch = {
+        conferences: options,
         activeConferenceId: activeConference?.id ?? null,
       };
     }
@@ -271,11 +263,35 @@ export default async function ProfilePage({
       </div>
     </div>
   ) : null;
-  const { tab } = await searchParams;
-  const activeTab =
-    tab === "awards" || tab === "private" || tab === "settings"
-      ? tab
+  type ProfileTab = "overview" | "awards" | "private" | "settings";
+  const showOverviewTab = isDelegate;
+  const showAwardsTab = (myAwards?.length ?? 0) > 0 || (myPendingNominations?.length ?? 0) > 0;
+  const showPrivateTab =
+    isDelegate &&
+    ((myDelegatePoints?.length ?? 0) > 0 ||
+      (mySpeechNotes?.length ?? 0) > 0 ||
+      (myMotions?.length ?? 0) > 0 ||
+      (myDiscipline?.length ?? 0) > 0);
+  const tabVisibility: Record<ProfileTab, boolean> = {
+    overview: showOverviewTab,
+    awards: showAwardsTab,
+    private: showPrivateTab,
+    settings: true,
+  };
+  const tabOrder: ProfileTab[] = ["overview", "awards", "private", "settings"];
+  const visibleTabs = tabOrder.filter((id) => tabVisibility[id]);
+
+  const { tab: tabParam } = await searchParams;
+  const requestedTab: ProfileTab =
+    tabParam === "awards" || tabParam === "private" || tabParam === "settings"
+      ? tabParam
       : "overview";
+  if (!tabVisibility[requestedTab]) {
+    const fallback = visibleTabs[0] ?? "settings";
+    redirect(fallback === "overview" ? "/profile" : `/profile?tab=${fallback}`);
+  }
+  const activeTab = requestedTab;
+
   const showOverview = activeTab === "overview";
   const showAwards = activeTab === "awards";
   const showPrivate = activeTab === "private";
@@ -286,120 +302,99 @@ export default async function ProfilePage({
       <div className="mb-4 flex justify-end">
         <LanguageSwitcher />
       </div>
-      <div className="mb-6 flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={tp("tabs.ariaLabel")}>
-        {[
-          { id: "overview", label: tp("tabs.overview") },
-          { id: "awards", label: tp("tabs.awards") },
-          { id: "private", label: tp("tabs.private") },
-          { id: "settings", label: tp("tabs.settings") },
-        ].map((item) => (
-          <Link
-            key={item.id}
-            href={item.id === "overview" ? "/profile" : `/profile?tab=${item.id}`}
-            role="tab"
-            aria-selected={activeTab === item.id}
-            className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
-              activeTab === item.id
-                ? "border-brand-accent text-brand-navy bg-brand-paper"
-                : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
-            }`}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-      {showOverview ? delegateWelcome : null}
-      {showOverview && isDelegate ? <DelegateMaterialsExportCard /> : null}
-      {showAwards && (myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) === 0 ? (
-        <div className="mb-8 rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
-          <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-            {tp("awards.pending.title")}
-          </h3>
-          <p className="mb-3 text-xs text-brand-muted">
-            {tp("awards.pending.descriptionSingle")}
-          </p>
-          <ul className="space-y-2 text-sm">
-            {(myPendingNominations ?? []).map((n) => {
-              const category = awardCategoryMeta(n.nomination_type);
-              const where = n.committee_conference_id
-                ? committeeLabel[n.committee_conference_id] ?? tp("fallbacks.committeeSession")
-                : null;
-              return (
-                <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
-                  <span className="font-medium text-brand-navy">
-                    {category?.label ?? n.nomination_type}
-                  </span>
-                  <span className="text-brand-muted"> · {tp("awards.rank", { rank: n.rank })}</span>
-                  {where && <span className="text-brand-muted"> · {where}</span>}
-                  {n.evidence_note && (
-                    <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+      {visibleTabs.length > 1 ? (
+        <div className="mb-6 flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={tp("tabs.ariaLabel")}>
+          {visibleTabs.map((id) => (
+            <Link
+              key={id}
+              href={id === "overview" ? "/profile" : `/profile?tab=${id}`}
+              role="tab"
+              aria-selected={activeTab === id}
+              className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                activeTab === id
+                  ? "border-brand-accent text-brand-navy bg-brand-paper"
+                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+              }`}
+            >
+              {id === "overview"
+                ? tp("tabs.overview")
+                : id === "awards"
+                  ? tp("tabs.awards")
+                  : id === "private"
+                    ? tp("tabs.private")
+                    : tp("tabs.settings")}
+            </Link>
+          ))}
         </div>
       ) : null}
-      {showAwards && (myPendingNominations?.length ?? 0) > 0 && (myAwards?.length ?? 0) > 0 ? (
+      {showOverview ? delegateWelcome : null}
+      {showOverview && isDelegate ? <DelegateMaterialsExportCard /> : null}
+      {showAwards ? (
         <ProfileAwardsSummaryTabs
           pendingSlot={
-            <div className="rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
-              <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-                {tp("awards.pending.title")}
-              </h3>
-              <p className="mb-3 text-xs text-brand-muted">
-                {tp("awards.pending.descriptionTabbed")}
-              </p>
-              <ul className="space-y-2 text-sm">
-                {(myPendingNominations ?? []).map((n) => {
-                  const category = awardCategoryMeta(n.nomination_type);
-                  const where = n.committee_conference_id
-                    ? committeeLabel[n.committee_conference_id] ?? tp("fallbacks.committeeSession")
-                    : null;
-                  return (
-                    <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
-                      <span className="font-medium text-brand-navy">
-                        {category?.label ?? n.nomination_type}
-                      </span>
-                      <span className="text-brand-muted"> · {tp("awards.rank", { rank: n.rank })}</span>
-                      {where && <span className="text-brand-muted"> · {where}</span>}
-                      {n.evidence_note && (
-                        <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            (myPendingNominations?.length ?? 0) > 0 ? (
+              <div className="rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
+                <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
+                  {tp("awards.pending.title")}
+                </h3>
+                <p className="mb-3 text-xs text-brand-muted">
+                  {(myAwards?.length ?? 0) > 0
+                    ? tp("awards.pending.descriptionTabbed")
+                    : tp("awards.pending.descriptionSingle")}
+                </p>
+                <ul className="space-y-2 text-sm">
+                  {(myPendingNominations ?? []).map((n) => {
+                    const category = awardCategoryMeta(n.nomination_type);
+                    const where = n.committee_conference_id
+                      ? committeeLabel[n.committee_conference_id] ?? tp("fallbacks.committeeSession")
+                      : null;
+                    return (
+                      <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                        <span className="font-medium text-brand-navy">
+                          {category?.label ?? n.nomination_type}
+                        </span>
+                        <span className="text-brand-muted"> · {tp("awards.rank", { rank: n.rank })}</span>
+                        {where && <span className="text-brand-muted"> · {where}</span>}
+                        {n.evidence_note && (
+                          <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null
           }
           recordedSlot={
-            <div className="rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
-              <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
-                {tp("awards.recorded.title")}
-              </h3>
-              <p className="text-xs text-brand-muted mb-3">
-                {tp("awards.recorded.description")}
-              </p>
-              <ul className="space-y-2 text-sm">
-                {(myAwards ?? []).map((a) => {
-                  const m = awardCategoryMeta(a.category);
-                  const where = a.committee_conference_id
-                    ? committeeLabel[a.committee_conference_id] ?? tp("fallbacks.committeeSession")
-                    : null;
-                  return (
-                    <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
-                      <span className="font-medium text-brand-navy">{m?.label ?? a.category}</span>
-                      {where && (
-                        <span className="text-brand-muted"> · {where}</span>
-                      )}
-                      {a.notes && (
-                        <p className="text-xs text-brand-muted mt-0.5">{a.notes}</p>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            (myAwards?.length ?? 0) > 0 ? (
+              <div className="rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
+                <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
+                  {tp("awards.recorded.title")}
+                </h3>
+                <p className="text-xs text-brand-muted mb-3">
+                  {tp("awards.recorded.description")}
+                </p>
+                <ul className="space-y-2 text-sm">
+                  {(myAwards ?? []).map((a) => {
+                    const m = awardCategoryMeta(a.category);
+                    const where = a.committee_conference_id
+                      ? committeeLabel[a.committee_conference_id] ?? tp("fallbacks.committeeSession")
+                      : null;
+                    return (
+                      <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
+                        <span className="font-medium text-brand-navy">{m?.label ?? a.category}</span>
+                        {where && (
+                          <span className="text-brand-muted"> · {where}</span>
+                        )}
+                        {a.notes && (
+                          <p className="text-xs text-brand-muted mt-0.5">{a.notes}</p>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null
           }
         />
       ) : null}
@@ -527,42 +522,13 @@ export default async function ProfilePage({
           </ul>
         </div>
       )}
-      {showAwards && (myAwards?.length ?? 0) > 0 && (myPendingNominations?.length ?? 0) === 0 ? (
-        <div className="mb-8 rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">
-          <h3 className="font-display text-lg font-semibold text-brand-navy mb-2">
-            {tp("awards.recorded.title")}
-          </h3>
-          <p className="text-xs text-brand-muted mb-3">
-            {tp("awards.recorded.description")}
-          </p>
-          <ul className="space-y-2 text-sm">
-            {(myAwards ?? []).map((a) => {
-              const m = awardCategoryMeta(a.category);
-              const where = a.committee_conference_id
-                ? committeeLabel[a.committee_conference_id] ?? tp("fallbacks.committeeSession")
-                : null;
-              return (
-                <li key={a.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
-                  <span className="font-medium text-brand-navy">{m?.label ?? a.category}</span>
-                  {where && (
-                    <span className="text-brand-muted"> · {where}</span>
-                  )}
-                  {a.notes && (
-                    <p className="text-xs text-brand-muted mt-0.5">{a.notes}</p>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null}
       {showSettings ? (
         <ProfileForm
           profile={profile}
           userId={user.id}
           canViewPrivate={!!canViewPrivate}
           availableAllocations={availableAllocations}
-          headChairCommitteeSwitch={headChairCommitteeSwitch}
+          dashboardCommitteeSwitch={dashboardCommitteeSwitch}
         />
       ) : null}
     </MunPageShell>

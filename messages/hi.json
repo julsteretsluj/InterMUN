@@ -1114,11 +1114,11 @@
         "gradeValue": "ग्रेड {ग्रेड}",
         "awards": "पुरस्कार"
       },
-      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
-      "headChairSelectCommittee": "Select committee…",
-      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "headChairSwitchingCommittee": "Switching…",
-      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+      "dashboardCommittee": "Dashboard committee (Head Chair)",
+      "dashboardCommitteeSelect": "Select committee…",
+      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "dashboardCommitteeSwitching": "Switching…",
+      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {

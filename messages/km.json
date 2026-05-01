@@ -1186,11 +1186,11 @@
       "errUploadFailed": "ការបង្ហោះបានបរាជ័យ។",
       "errStorageSetup": "កន្លែងផ្ទុករូបភាពកម្រងព័ត៌មានមិនត្រូវបានតំឡើងទេ។ នៅក្នុងគម្រោង Supabase សូមដំណើរការ migration 00100_profile_pictures_storage_bucket.sql ឬបង្កើតធុងផ្ទុកសាធារណៈដែលមានឈ្មោះថា profile-pictures (សូមមើល README)។",
       "errPublicUrl": "មិនអាចដោះស្រាយ URL សាធារណៈសម្រាប់រូបភាពដែលបានបង្ហោះទេ។",
-      "headChairDashboardCommittee": "Dashboard committee (Head Chair)",
-      "headChairSelectCommittee": "Select committee…",
-      "headChairDashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-      "headChairSwitchingCommittee": "Switching…",
-      "headChairSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+      "dashboardCommittee": "Dashboard committee (Head Chair)",
+      "dashboardCommitteeSelect": "Select committee…",
+      "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
+      "dashboardCommitteeSwitching": "Switching…",
+      "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
     },
     "guides": {
       "default": {

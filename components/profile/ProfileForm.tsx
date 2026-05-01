@@ -14,7 +14,7 @@ import {
   PROFILE_PRONOUN_PRESET_SET,
   pronounsFormValueFromProfile,
 } from "@/lib/profile-pronouns";
-import { setHeadChairActiveCommittee } from "@/app/actions/setHeadChairActiveCommittee";
+import { setProfileDashboardCommittee } from "@/app/actions/setProfileDashboardCommittee";
 
 type FormData = {
   name?: string;
@@ -35,16 +35,16 @@ const GRADE_OPTIONS = [
   "12",
 ] as const;
 
-export type HeadChairCommitteeOption = { id: string; label: string };
+export type DashboardCommitteeOption = { id: string; label: string };
 
 interface ProfileFormProps {
   profile: Profile | null;
   userId: string;
   canViewPrivate: boolean;
   availableAllocations: string[];
-  /** Allowlisted Head Chair: switch active committee cookie from profile. */
-  headChairCommitteeSwitch?: {
-    conferences: HeadChairCommitteeOption[];
+  /** Committees where the user has a seat; sets dashboard cookies like the room gate. */
+  dashboardCommitteeSwitch?: {
+    conferences: DashboardCommitteeOption[];
     activeConferenceId: string | null;
   };
 }
@@ -54,7 +54,7 @@ export function ProfileForm({
   userId,
   canViewPrivate,
   availableAllocations,
-  headChairCommitteeSwitch,
+  dashboardCommitteeSwitch,
 }: ProfileFormProps) {
   const tp = useTranslations("views.profile");
   const router = useRouter();
@@ -409,31 +409,31 @@ export function ProfileForm({
         </div>
       )}
 
-      {headChairCommitteeSwitch && headChairCommitteeSwitch.conferences.length > 0 ? (
+      {dashboardCommitteeSwitch && dashboardCommitteeSwitch.conferences.length > 0 ? (
         <div className="rounded-xl border border-brand-accent/25 bg-brand-accent/5 p-4 space-y-2">
-          <label htmlFor="head-chair-dashboard-committee" className="block text-sm font-medium">
-            {tp("headChairDashboardCommittee")}
+          <label htmlFor="profile-dashboard-committee" className="block text-sm font-medium">
+            {tp("dashboardCommittee")}
           </label>
-          <p className="text-xs text-brand-muted">{tp("headChairDashboardCommitteeHelp")}</p>
+          <p className="text-xs text-brand-muted">{tp("dashboardCommitteeHelp")}</p>
           <select
-            id="head-chair-dashboard-committee"
+            id="profile-dashboard-committee"
             className={fieldClass}
             disabled={committeeSwitchBusy}
-            value={headChairCommitteeSwitch.activeConferenceId ?? ""}
+            value={dashboardCommitteeSwitch.activeConferenceId ?? ""}
             onChange={(e) => {
               const id = e.target.value;
               if (!id) return;
               setCommitteeSwitchError(null);
               setCommitteeSwitchBusy(true);
-              void setHeadChairActiveCommittee(id).then((result) => {
+              void setProfileDashboardCommittee(id).then((result) => {
                 setCommitteeSwitchBusy(false);
                 if (result.ok) router.refresh();
-                else setCommitteeSwitchError(tp("headChairSwitchError"));
+                else setCommitteeSwitchError(tp("dashboardCommitteeSwitchError"));
               });
             }}
           >
-            <option value="">{tp("headChairSelectCommittee")}</option>
-            {headChairCommitteeSwitch.conferences.map((c) => (
+            <option value="">{tp("dashboardCommitteeSelect")}</option>
+            {dashboardCommitteeSwitch.conferences.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.label}
               </option>
@@ -441,7 +441,7 @@ export function ProfileForm({
           </select>
           {committeeSwitchBusy ? (
             <p className="text-xs text-brand-muted" role="status">
-              {tp("headChairSwitchingCommittee")}
+              {tp("dashboardCommitteeSwitching")}
             </p>
           ) : null}
           {committeeSwitchError ? (
