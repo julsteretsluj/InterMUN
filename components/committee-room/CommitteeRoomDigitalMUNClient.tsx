@@ -106,9 +106,8 @@ export function CommitteeRoomDigitalMUNClient({
   /** Chair/SMT/admin use /chair/session for motion control; delegates (and other roles) keep floor widgets here. */
   const showDelegateFloorPanel =
     role !== "chair" && role !== "smt" && role !== "admin";
-  const layoutColumns = showDelegateFloorPanel
-    ? "xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,18.5rem)]"
-    : "xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]";
+  /** Same two-column shell as chairs (sidebar + digital display); floor widgets render below so the matrix matches chair width. */
+  const layoutColumns = "xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]";
 
   const supabase = useMemo(() => createClient(), []);
   const floorConferenceId = useLiveDebateConferenceId(
@@ -415,114 +414,113 @@ export function CommitteeRoomDigitalMUNClient({
             helperText={null}
             delegationSearchQuery={delegationSearch}
             scrollToDelegationMatchNonce={scrollMatchNonce}
-            compactPlacardDetails={isDelegate}
           />
         </section>
+      </div>
 
-        {/* Right rail — delegate floor (chairs/SMT/admin use Chair → Session) */}
-        {showDelegateFloorPanel ? (
-          <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#12121A]">
-            <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/5 dark:bg-black/15">
-              <div className="mb-3 flex items-center gap-2">
-                <CircleDot className="size-4 text-brand-accent-bright" />
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("floorLabel")}</p>
-              </div>
-              <div className="space-y-4">
-                <FloorStatusBar
-                  conferenceId={floorConferenceId}
-                  observeOnly={false}
-                  theme="dark"
-                  sessionMiniControls="none"
-                  activeMotionVoteItemId={
-                    procedureState === "voting_procedure" ? (currentVoteItemId ?? null) : null
-                  }
-                />
-                {isDelegate ? (
-                  <>
-                    {!delegateFloorUnlocked ? (
-                      <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/10 dark:bg-black/20">
-                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
-                          {trRequestToSpeak("rollPromptTitle", "Chair approval required")}
-                        </p>
-                        <p className="mt-1 text-sm text-brand-navy/90 dark:text-white/85">
-                          {shouldPromptDelegateRollChoice ? (
+      {/* Full-width floor — same overall shell as chairs (no squeezed center column). */}
+      {showDelegateFloorPanel ? (
+        <aside className="h-fit rounded-xl border border-brand-navy/10 bg-brand-paper p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#12121A]">
+          <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/5 dark:bg-black/15">
+            <div className="mb-3 flex items-center gap-2">
+              <CircleDot className="size-4 text-brand-accent-bright" />
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">{t("floorLabel")}</p>
+            </div>
+            <div className="space-y-4">
+              <FloorStatusBar
+                conferenceId={floorConferenceId}
+                observeOnly={false}
+                theme="dark"
+                sessionMiniControls="none"
+                activeMotionVoteItemId={
+                  procedureState === "voting_procedure" ? (currentVoteItemId ?? null) : null
+                }
+              />
+              {isDelegate ? (
+                <>
+                  {!delegateFloorUnlocked ? (
+                    <div className="rounded-lg border border-brand-navy/10 bg-brand-navy/5 p-2.5 dark:border-white/10 dark:bg-black/20">
+                      <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-muted">
+                        {trRequestToSpeak("rollPromptTitle", "Chair approval required")}
+                      </p>
+                      <p className="mt-1 text-sm text-brand-navy/90 dark:text-white/85">
+                        {shouldPromptDelegateRollChoice ? (
+                          trRequestToSpeak(
+                            "rollPromptBodyPickStatus",
+                            "Session has started. Choose your roll-call status to unlock speaking and voting. This choice cannot be changed."
+                          )
+                        ) : myRollApprovalLoaded ? (
+                          !sessionStartedAt ? (
                             trRequestToSpeak(
-                              "rollPromptBodyPickStatus",
-                              "Session has started. Choose your roll-call status to unlock speaking and voting. This choice cannot be changed."
+                              "rollPromptBodyWaitSessionStart",
+                              "Waiting for the chair to start the committee session."
                             )
-                          ) : myRollApprovalLoaded ? (
-                            !sessionStartedAt ? (
-                              trRequestToSpeak(
-                                "rollPromptBodyWaitSessionStart",
-                                "Waiting for the chair to start the committee session."
-                              )
-                            ) : myRollAttendance === null ? (
-                              trRequestToSpeak(
-                                "rollPromptBodyWaitRollPrompt",
-                                "Waiting for roll-call prompt."
-                              )
-                            ) : (
-                              trRequestToSpeak(
-                                "rollPromptBodyMarkedAbsent",
-                                "You’re currently marked absent. Ask the chair to mark you Present to speak and vote."
-                              )
+                          ) : myRollAttendance === null ? (
+                            trRequestToSpeak(
+                              "rollPromptBodyWaitRollPrompt",
+                              "Waiting for roll-call prompt."
                             )
                           ) : (
-                            trRequestToSpeak("rollPromptBodyChecking", "Checking your roll status...")
-                          )}
+                            trRequestToSpeak(
+                              "rollPromptBodyMarkedAbsent",
+                              "You’re currently marked absent. Ask the chair to mark you Present to speak and vote."
+                            )
+                          )
+                        ) : (
+                          trRequestToSpeak("rollPromptBodyChecking", "Checking your roll status...")
+                        )}
+                      </p>
+                      {shouldPromptDelegateRollChoice ? (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <button
+                            type="button"
+                            disabled={rollChoicePending}
+                            onClick={() => void submitDelegateRollChoice("present_abstain")}
+                            className="rounded-lg border border-brand-accent/35 bg-brand-accent/12 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/20 disabled:opacity-50 dark:text-white"
+                          >
+                            {rollChoicePending
+                              ? trRequestToSpeak("rollPromptSaving", "Saving...")
+                              : trRequestToSpeak("rollPromptPresent", "Present")}
+                          </button>
+                          <button
+                            type="button"
+                            disabled={rollChoicePending}
+                            onClick={() => void submitDelegateRollChoice("present_voting")}
+                            className="rounded-lg border border-brand-accent/35 bg-brand-accent/18 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/25 disabled:opacity-50 dark:text-white"
+                          >
+                            {rollChoicePending
+                              ? trRequestToSpeak("rollPromptSaving", "Saving...")
+                              : trRequestToSpeak("rollPromptPresentVoting", "Present and voting")}
+                          </button>
+                        </div>
+                      ) : null}
+                      {rollChoiceError ? (
+                        <p className="mt-2 text-xs text-red-600 dark:text-rose-300" role="alert">
+                          {rollChoiceError}
                         </p>
-                        {shouldPromptDelegateRollChoice ? (
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            <button
-                              type="button"
-                              disabled={rollChoicePending}
-                              onClick={() => void submitDelegateRollChoice("present_abstain")}
-                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/12 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/20 disabled:opacity-50 dark:text-white"
-                            >
-                              {rollChoicePending
-                                ? trRequestToSpeak("rollPromptSaving", "Saving...")
-                                : trRequestToSpeak("rollPromptPresent", "Present")}
-                            </button>
-                            <button
-                              type="button"
-                              disabled={rollChoicePending}
-                              onClick={() => void submitDelegateRollChoice("present_voting")}
-                              className="rounded-lg border border-brand-accent/35 bg-brand-accent/18 px-3 py-2 text-xs font-semibold text-brand-navy hover:bg-brand-accent/25 disabled:opacity-50 dark:text-white"
-                            >
-                              {rollChoicePending
-                                ? trRequestToSpeak("rollPromptSaving", "Saving...")
-                                : trRequestToSpeak("rollPromptPresentVoting", "Present and voting")}
-                            </button>
-                          </div>
-                        ) : null}
-                        {rollChoiceError ? (
-                          <p className="mt-2 text-xs text-red-600 dark:text-rose-300" role="alert">
-                            {rollChoiceError}
-                          </p>
-                        ) : null}
-                      </div>
-                    ) : null}
+                      ) : null}
+                    </div>
+                  ) : null}
 
-                    {delegateFloorUnlocked ? (
-                      <>
-                        {procedureState === "voting_procedure" ? (
-                          <MotionVotingClient voteItemId={currentVoteItemId ?? null} />
-                        ) : null}
-                        <RequestToSpeakClient
-                          conferenceId={floorConferenceId}
-                          allocationId={myAllocationId}
-                          allocationCountry={myAllocationCountry}
-                          disabled={procedureState === "voting_procedure"}
-                        />
-                      </>
-                    ) : null}
-                  </>
-                ) : null}
-              </div>
+                  {delegateFloorUnlocked ? (
+                    <>
+                      {procedureState === "voting_procedure" ? (
+                        <MotionVotingClient voteItemId={currentVoteItemId ?? null} />
+                      ) : null}
+                      <RequestToSpeakClient
+                        conferenceId={floorConferenceId}
+                        allocationId={myAllocationId}
+                        allocationCountry={myAllocationCountry}
+                        disabled={procedureState === "voting_procedure"}
+                      />
+                    </>
+                  ) : null}
+                </>
+              ) : null}
             </div>
-          </aside>
-        ) : null}
-      </div>
+          </div>
+        </aside>
+      ) : null}
 
       {canManageSeats ? (
         <div className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 shadow-sm md:p-5 dark:border-white/10 dark:bg-[#12121A]">
