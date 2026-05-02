@@ -7,6 +7,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const enPath = path.join(root, "messages", "en.json");
+const aliasesPath = path.join(root, "lib", "i18n", "agenda-topic-slug-aliases.json");
 const outPath = path.join(root, "lib", "i18n", "generated", "agenda-topic-slug-to-key.json");
 
 function slugifyLabel(value) {
@@ -42,6 +43,19 @@ for (const [key, value] of Object.entries(agenda)) {
 
 if (collisions.length) {
   console.warn("Slug collisions (later key wins):", collisions);
+}
+
+/** Alternate titles (shortened SMT strings, etc.) → same agendaTopics keys */
+if (fs.existsSync(aliasesPath)) {
+  const raw = JSON.parse(fs.readFileSync(aliasesPath, "utf8"));
+  for (const [slug, key] of Object.entries(raw)) {
+    if (slug.startsWith("_")) continue;
+    if (typeof key !== "string") continue;
+    if (map[slug] && map[slug] !== key) {
+      console.warn(`Alias slug collision: ${slug} was ${map[slug]}, alias wants ${key} — alias wins`);
+    }
+    map[slug] = key;
+  }
 }
 
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
