@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import {
   smtInviteChairAction,
   smtPromoteToChairByEmailAction,
@@ -15,8 +16,12 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
   const t = useTranslations("smtRoomCodesClient");
   const tSetup = useTranslations("conferenceSetupForm");
   const tCommon = useTranslations("common");
+  const tTopics = useTranslations("agendaTopics");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
+  const locale = useLocale();
   const [state, action, pending] = useActionState(smtSetCommitteeCodeOnlyAction, null);
-  const label = [c.name, c.committee].filter(Boolean).join(" — ");
+  const labelRaw = [c.name, c.committee].filter(Boolean).join(" — ");
+  const label = translateConferenceHeadline(tTopics, tCommitteeLabels, labelRaw, locale);
   const current = c.committee_code?.trim() || t("dash");
 
   return (

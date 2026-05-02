@@ -23,8 +23,30 @@ export async function findEventIdByEventCode(
   return data.id;
 }
 
+/** When several topic rows share one gate code, prefer a conference that already has allocations. */
+async function pickConferenceIdFromMatches(
+  supabase: SupabaseClient,
+  ids: string[]
+): Promise<string | null> {
+  const uniq = [...new Set(ids.filter(Boolean))];
+  if (uniq.length === 0) return null;
+  if (uniq.length === 1) return uniq[0]!;
+
+  const { data: allocRows } = await supabase
+    .from("allocations")
+    .select("conference_id")
+    .in("conference_id", uniq);
+  const withAlloc = new Set(
+    (allocRows ?? []).map((a) => a.conference_id).filter((id): id is string => Boolean(id))
+  );
+  const preferred = uniq.find((id) => withAlloc.has(id));
+  if (preferred) return preferred;
+  return [...uniq].sort()[0] ?? null;
+}
+
 /**
  * Second gate: match committee_code, then room_code, for the active event (case-insensitive).
+ * Multiple conferences may share the same code (one chamber, several topics); picks a stable id.
  */
 export async function findConferenceIdBySecondGateCode(
   supabase: SupabaseClient,
@@ -37,22 +59,27 @@ export async function findConferenceIdBySecondGateCode(
     .from("conferences")
     .select("id")
     .eq("event_id", eventId)
-    .ilike("committee_code", pattern)
-    .maybeSingle();
+    .ilike("committee_code", pattern);
 
-  if (!byCommittee.error && byCommittee.data?.id) {
-    return byCommittee.data.id;
+  if (!byCommittee.error && byCommittee.data?.length) {
+    const picked = await pickConferenceIdFromMatches(
+      supabase,
+      byCommittee.data.map((r) => r.id).filter((id): id is string => Boolean(id))
+    );
+    if (picked) return picked;
   }
 
   const byRoom = await supabase
     .from("conferences")
     .select("id")
     .eq("event_id", eventId)
-    .ilike("room_code", pattern)
-    .maybeSingle();
+    .ilike("room_code", pattern);
 
-  if (!byRoom.error && byRoom.data?.id) {
-    return byRoom.data.id;
+  if (!byRoom.error && byRoom.data?.length) {
+    return pickConferenceIdFromMatches(
+      supabase,
+      byRoom.data.map((r) => r.id).filter((id): id is string => Boolean(id))
+    );
   }
 
   return null;

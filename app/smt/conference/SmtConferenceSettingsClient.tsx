@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useMemo, useState } from "react";
 import {
   updateConferenceEventAction,
   updateCommitteeSessionAction,
@@ -9,6 +9,7 @@ import {
 import { generateSixCharCommitteeCode } from "@/lib/committee-join-code";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
+import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 
 type EventRow = { id: string; name: string; tagline: string | null; event_code: string };
 type CommitteeRow = {
@@ -35,6 +36,27 @@ export function SmtConferenceSettingsClient({
   committees: CommitteeRow[];
 }) {
   const t = useTranslations("smtConferenceSettings");
+  const committeeGroups = useMemo(() => {
+    const m = new Map<string, CommitteeRow[]>();
+    for (const c of committees) {
+      const k = committeeSessionGroupKey(c.committee) ?? `__id:${c.id}`;
+      const list = m.get(k) ?? [];
+      list.push(c);
+      m.set(k, list);
+    }
+    for (const list of m.values()) {
+      list.sort((a, b) =>
+        (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
+      );
+    }
+    return Array.from(m.entries()).sort(([ka], [kb]) => {
+      const aUng = ka.startsWith("__id:");
+      const bUng = kb.startsWith("__id:");
+      if (aUng !== bUng) return aUng ? 1 : -1;
+      return ka.localeCompare(kb);
+    });
+  }, [committees]);
+
   return (
     <div className="space-y-10">
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
@@ -59,7 +81,26 @@ export function SmtConferenceSettingsClient({
           {committees.length === 0 ? (
             <p className="text-sm text-brand-muted">{t("noCommitteeSessions")}</p>
           ) : (
-            committees.map((c) => <CommitteeForm key={c.id} row={c} t={t} />)
+            committeeGroups.map(([groupKey, rows]) => (
+              <div
+                key={groupKey}
+                className="space-y-4 rounded-xl border border-brand-navy/15 bg-brand-cream/25 p-4 dark:border-white/10 dark:bg-white/5"
+              >
+                {rows.length > 1 ? (
+                  <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100 border-b border-brand-navy/10 dark:border-white/10 pb-2">
+                    {t("committeeSessionsGroupHeading", {
+                      chamber: rows[0]?.committee?.trim() || groupKey,
+                      count: rows.length,
+                    })}
+                  </p>
+                ) : null}
+                <div className="space-y-8">
+                  {rows.map((c) => (
+                    <CommitteeForm key={c.id} row={c} t={t} />
+                  ))}
+                </div>
+              </div>
+            ))
           )}
         </div>
       </section>

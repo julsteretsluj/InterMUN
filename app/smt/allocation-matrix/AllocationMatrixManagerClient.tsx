@@ -12,7 +12,9 @@ import {
 import { generateMissingAllocationCodes } from "@/app/actions/allocationCodes";
 import type { AllocationCsvRow } from "@/lib/parse-allocation-csv";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
 export type MatrixRow = {
   id: string;
@@ -33,6 +35,9 @@ export function AllocationMatrixManagerClient({
   rows: MatrixRow[];
 }) {
   const t = useTranslations("allocationMatrixManager");
+  const tTopics = useTranslations("agendaTopics");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
+  const locale = useLocale();
   const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -201,13 +206,26 @@ export function AllocationMatrixManagerClient({
 
   const confLabel = conferences.find((c) => c.id === selectedConferenceId);
   const heading = confLabel
-    ? [confLabel.name, confLabel.committee].filter(Boolean).join(" — ")
+    ? translateConferenceHeadline(
+        tTopics,
+        tCommitteeLabels,
+        [confLabel.name, confLabel.committee].filter(Boolean).join(" — "),
+        locale
+      )
     : t("committeeFallback");
-  const sheetTabs = conferences.map((c) => ({
-    id: c.id,
-    label: c.committee?.trim() || c.name?.trim() || c.id.slice(0, 8),
-    title: [c.name, c.committee].filter(Boolean).join(" — ") || c.id.slice(0, 8),
-  }));
+  const sheetTabs = conferences.map((c) => {
+    const titleRaw = [c.name, c.committee].filter(Boolean).join(" — ");
+    const title = titleRaw
+      ? translateConferenceHeadline(tTopics, tCommitteeLabels, titleRaw, locale)
+      : c.id.slice(0, 8);
+    const comm = c.committee?.trim();
+    const label = comm
+      ? translateCommitteeLabel(tCommitteeLabels, comm)
+      : c.name?.trim()
+        ? translateAgendaTopicLabel(tTopics, c.name, locale)
+        : c.id.slice(0, 8);
+    return { id: c.id, label, title };
+  });
 
   return (
     <div className="space-y-8">

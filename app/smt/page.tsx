@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
+import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 import { formatCommitteeCardTitle, resolveCommitteeDisplayTags, resolveCommitteeFullName } from "@/lib/committee-card-display";
 import {
   ageRangeTagClass,
@@ -103,15 +104,8 @@ export default async function SmtOverviewPage({
   >();
 
   for (const r of rows) {
-    const localizedFull = localizeKnownCommitteeFullName(
-      resolveCommitteeFullName(r.committee_full_name, r.committee)
-    );
-    const committeeCode = r.committee?.trim() || "";
-    const groupLabel = (localizedFull && committeeCode
-      ? `${localizedFull} — ${committeeCode}`
-      : formatCommitteeCardTitle(r.committee_full_name, r.committee)).trim();
-    if (!groupLabel || groupLabel.toLowerCase() === "committee") continue;
-    const key = groupLabel.toLowerCase();
+    const key = committeeSessionGroupKey(r.committee);
+    if (!key) continue;
 
     const existing = groups.get(key);
     if (!existing) {
@@ -262,14 +256,16 @@ export default async function SmtOverviewPage({
               </p>
             ) : null}
             {g.topics.length > 0 ? (
-              <div className="mt-1.5 space-y-1">
-                {g.topics.slice(0, 2).map((topic) => (
-                  <p key={topic} className="text-[0.72rem] text-brand-navy/90 leading-snug">
+              <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
+                {[...g.topics]
+                  .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }))
+                  .map((topic, ti) => (
+                  <li key={`${ti}-${topic.slice(0, 48)}`} className="text-[0.72rem] text-brand-navy/90 leading-snug">
                     <span className="font-semibold text-brand-navy">{t("topicLabel")}</span>{" "}
                     {translateAgendaTopicLabel(tTopics, topic, locale)}
-                  </p>
+                  </li>
                 ))}
-              </div>
+              </ul>
             ) : null}
           </Link>
         ))}

@@ -1586,6 +1586,7 @@
     "selectConferenceFirst": "Select a conference with the event gate first, then return here.",
     "committeeSessionsTitle": "Committee sessions in this event",
     "committeeSessionsBody": "Committee session titles (agenda topics) stay here for records; the SMT home grid shows the official committee name, acronym, chairs, and a short display code. Committee / room codes (second gate) must stay unique within this event.",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
     "noCommitteeSessions": "No committee sessions for this event.",
     "eventName": "Event name",
     "tagline": "Tagline",

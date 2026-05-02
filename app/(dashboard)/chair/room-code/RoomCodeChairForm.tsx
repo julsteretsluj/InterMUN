@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState, useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { setRoomCodeAndEnterAction, switchCommitteeContextAction } from "@/app/actions/roomGate";
 import { HelpButton } from "@/components/HelpButton";
 
@@ -17,6 +18,9 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
   const t = useTranslations("roomCodeChairForm");
   const tCommon = useTranslations("common");
   const tSetup = useTranslations("conferenceSetupForm");
+  const tTopics = useTranslations("agendaTopics");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
+  const locale = useLocale();
   const [query, setQuery] = useState("");
   const [conferenceId, setConferenceId] = useState(conferences[0]?.id ?? "");
   const [state, formAction, pending] = useActionState(setRoomCodeAndEnterAction, null);
@@ -62,7 +66,12 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
               {tCommon("committee")}
             </p>
             <p className="text-sm text-brand-navy font-medium leading-snug">
-              {[conferences[0].name, conferences[0].committee].filter(Boolean).join(" — ")}
+              {translateConferenceHeadline(
+                tTopics,
+                tCommitteeLabels,
+                [conferences[0].name, conferences[0].committee].filter(Boolean).join(" — "),
+                locale
+              )}
             </p>
             <input type="hidden" name="conference_id" value={conferences[0].id} />
           </>
@@ -102,7 +111,12 @@ export function RoomCodeChairForm({ conferences }: { conferences: Conf[] }) {
               ) : (
                 filtered.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {[c.name, c.committee].filter(Boolean).join(" — ")}
+                    {translateConferenceHeadline(
+                      tTopics,
+                      tCommitteeLabels,
+                      [c.name, c.committee].filter(Boolean).join(" — "),
+                      locale
+                    )}
                   </option>
                 ))
               )}

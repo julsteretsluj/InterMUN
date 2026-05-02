@@ -3,11 +3,15 @@ import { redirect } from "next/navigation";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
 export default async function SmtProfilePage() {
   const t = await getTranslations("pageTitles");
   const tp = await getTranslations("profile");
+  const tTopics = await getTranslations("agendaTopics");
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const locale = await getLocale();
   const supabase = await createClient();
   const {
     data: { user },
@@ -35,7 +39,10 @@ export default async function SmtProfilePage() {
       : { data: [] as { id: string; name: string; committee: string | null }[] };
 
   const committeeLabel = Object.fromEntries(
-    (awardConfs ?? []).map((c) => [c.id, [c.name, c.committee].filter(Boolean).join(" — ")])
+    (awardConfs ?? []).map((c) => {
+      const raw = [c.name, c.committee].filter(Boolean).join(" — ");
+      return [c.id, raw ? translateConferenceHeadline(tTopics, tCommitteeLabels, raw, locale) : raw];
+    })
   );
 
   return (

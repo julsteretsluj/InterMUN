@@ -36,8 +36,8 @@ function normalizeCommitteeLabelForBucket(raw: string): string {
 
 /**
  * Committee bucketing key used by topic/awards canonicalization.
- * Prefer `committee` (chamber) over `committee_code`: topic rows often use unique gate codes (e.g. ECO032 vs ECO368)
- * while sharing the same ECOSOC chamber — those must stay one scope for agenda topics, awards, and roster merge.
+ * Prefer `committee` (chamber) over `committee_code`: topic rows share one gate code per chamber in the DB,
+ * but chamber text is the stable bucket if codes ever diverge during edits.
  */
 export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee" | "committee_code">): string {
   const comm = c.committee?.trim();
