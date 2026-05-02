@@ -159,7 +159,16 @@
     "readerWarning": "Cảnh báo người đọc: ghi chú này có thể chứa ngôn ngữ không phù hợp.",
     "plainTextOptional": "Văn bản thuần túy (tùy chọn)",
     "notesPlaceholder": "Ghi lại mọi thứ…",
-    "saveHelp": "Lưu tên ghi chú, thẻ, văn bản ghi chú đang chạy và URL Google Tài liệu (nếu được cung cấp) cho tài khoản của riêng bạn."
+    "saveHelp": "Lưu tên ghi chú, thẻ, văn bản ghi chú đang chạy và URL Google Tài liệu (nếu được cung cấp) cho tài khoản của riêng bạn.",
+    "tagPresets": {
+      "stances": "Lập trường",
+      "crisis": "Khủng hoảng",
+      "speechPoints": "Điểm phát biểu",
+      "poisAndPocs": "POI & POC",
+      "blocForming": "Hình thành khối",
+      "questions": "Câu hỏi",
+      "informalConversations": "Trò chuyện không chính thức"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Hiện tại",
@@ -937,6 +946,15 @@
     "chairsLabel": "Ghế:",
     "committeeLogoAlt": "biểu tượng {tên}",
     "eslFriendly": "Thân thiện với ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Mới bắt đầu",
+    "difficultyIntermediate": "Trung cấp",
+    "difficultyAdvanced": "Nâng cao",
+    "formatTraditional": "Truyền thống",
+    "formatCrisis": "Khủng hoảng",
+    "ageRangeGrade7Year8": "Lớp 7–12 (Mỹ) · Năm 8–13 (Anh)",
+    "ageRangeGrade9Year10": "Lớp 9–12 (Mỹ) · Năm 10–13 (Anh)"
   },
   "chairNav": {
     "ariaDashboard": "Bảng điều khiển ghế",

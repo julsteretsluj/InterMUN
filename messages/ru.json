@@ -159,7 +159,16 @@
     "readerWarning": "Предупреждение читателя: эта заметка может содержать ненормативную лексику.",
     "plainTextOptional": "Обычный текст (необязательно)",
     "notesPlaceholder": "Записывайте все…",
-    "saveHelp": "Сохраняет имя заметки, теги, текст текущей заметки и URL-адрес Документов Google (если указан) для вашей учетной записи."
+    "saveHelp": "Сохраняет имя заметки, теги, текст текущей заметки и URL-адрес Документов Google (если указан) для вашей учетной записи.",
+    "tagPresets": {
+      "stances": "Позиции",
+      "crisis": "Кризис",
+      "speechPoints": "Точки выступления",
+      "poisAndPocs": "ДП и ПП",
+      "blocForming": "Формирование блоков",
+      "questions": "Вопросы",
+      "informalConversations": "Неформальные беседы"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Подарок",
@@ -937,6 +946,15 @@
     "chairsLabel": "Стулья:",
     "committeeLogoAlt": "Логотип {имя}",
     "eslFriendly": "ESL-дружественный"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Начальный",
+    "difficultyIntermediate": "Средний",
+    "difficultyAdvanced": "Продвинутый",
+    "formatTraditional": "Традиционный",
+    "formatCrisis": "Кризис",
+    "ageRangeGrade7Year8": "Классы 7–12 (США) · Годы 8–13 (Великобритания)",
+    "ageRangeGrade9Year10": "Классы 9–12 (США) · Годы 10–13 (Великобритания)"
   },
   "chairNav": {
     "ariaDashboard": "Приборная панель кресла",

@@ -159,7 +159,16 @@
     "readerWarning": "Advertencia al lector: esta nota puede contener lenguaje inapropiado.",
     "plainTextOptional": "Texto sin formato (opcional)",
     "notesPlaceholder": "Tome notas de todo...",
-    "saveHelp": "Guarda el nombre de su nota, las etiquetas, el texto de la nota en ejecución y la URL de Google Docs (si se proporciona) para su propia cuenta."
+    "saveHelp": "Guarda el nombre de su nota, las etiquetas, el texto de la nota en ejecución y la URL de Google Docs (si se proporciona) para su propia cuenta.",
+    "tagPresets": {
+      "stances": "Posturas",
+      "crisis": "Crisis",
+      "speechPoints": "Puntos de oratoria",
+      "poisAndPocs": "PQD y POC",
+      "blocForming": "Formación de bloques",
+      "questions": "Preguntas",
+      "informalConversations": "Conversaciones informales"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Presente",
@@ -937,6 +946,15 @@
     "chairsLabel": "Sillas:",
     "committeeLogoAlt": "logotipo de {nombre}",
     "eslFriendly": "Compatible con ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Principiante",
+    "difficultyIntermediate": "Intermedio",
+    "difficultyAdvanced": "Avanzado",
+    "formatTraditional": "Tradicional",
+    "formatCrisis": "Crisis",
+    "ageRangeGrade7Year8": "Grados 7–12 (EE. UU.) · Años 8–13 (Reino Unido)",
+    "ageRangeGrade9Year10": "Grados 9–12 (EE. UU.) · Años 10–13 (Reino Unido)"
   },
   "chairNav": {
     "ariaDashboard": "Tablero de la silla",

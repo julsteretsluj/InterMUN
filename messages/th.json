@@ -159,7 +159,16 @@
     "readerWarning": "คำเตือนผู้อ่าน: บันทึกนี้อาจมีภาษาที่ไม่เหมาะสม",
     "plainTextOptional": "ข้อความธรรมดา (ไม่จำเป็น)",
     "notesPlaceholder": "จดบันทึกทุกสิ่ง...",
-    "saveHelp": "บันทึกชื่อบันทึก แท็ก ข้อความบันทึกที่ใช้งาน และ URL ของ Google เอกสาร (ถ้ามี) สำหรับบัญชีของคุณเอง"
+    "saveHelp": "บันทึกชื่อบันทึก แท็ก ข้อความบันทึกที่ใช้งาน และ URL ของ Google เอกสาร (ถ้ามี) สำหรับบัญชีของคุณเอง",
+    "tagPresets": {
+      "stances": "จุดยืน",
+      "crisis": "วิกฤต",
+      "speechPoints": "ประเด็นการปราศรัย",
+      "poisAndPocs": "POI และ POC",
+      "blocForming": "การจัดกลุ่มบล็อก",
+      "questions": "คำถาม",
+      "informalConversations": "การสนทนาแบบไม่เป็นทางการ"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "ปัจจุบัน",
@@ -865,6 +874,15 @@
     "chairsLabel": "เก้าอี้:",
     "committeeLogoAlt": "โลโก้ {ชื่อ}",
     "eslFriendly": "เป็นมิตรกับ ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "เริ่มต้น",
+    "difficultyIntermediate": "ปานกลาง",
+    "difficultyAdvanced": "ขั้นสูง",
+    "formatTraditional": "แบบดั้งเดิม",
+    "formatCrisis": "วิกฤต",
+    "ageRangeGrade7Year8": "เกรด 7–12 (สหรัฐ) · Year 8–13 (สหราชอาณาจักร)",
+    "ageRangeGrade9Year10": "เกรด 9–12 (สหรัฐ) · Year 10–13 (สหราชอาณาจักร)"
   },
   "chairNav": {
     "ariaDashboard": "แดชบอร์ดเก้าอี้",

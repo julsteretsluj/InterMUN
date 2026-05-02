@@ -159,7 +159,16 @@
     "readerWarning": "पाठक चेतावनी: इस नोट में अनुचित भाषा हो सकती है।",
     "plainTextOptional": "सादा पाठ (वैकल्पिक)",
     "notesPlaceholder": "हर चीज़ का नोट रखें...",
-    "saveHelp": "आपके अपने खाते के लिए आपके नोट का नाम, टैग, चालू नोट टेक्स्ट और Google डॉक्स URL (यदि प्रदान किया गया हो) सहेजता है।"
+    "saveHelp": "आपके अपने खाते के लिए आपके नोट का नाम, टैग, चालू नोट टेक्स्ट और Google डॉक्स URL (यदि प्रदान किया गया हो) सहेजता है।",
+    "tagPresets": {
+      "stances": "रुख",
+      "crisis": "संकट",
+      "speechPoints": "भाषण बिंदु",
+      "poisAndPocs": "POI और POC",
+      "blocForming": "ब्लॉक गठन",
+      "questions": "प्रश्न",
+      "informalConversations": "अनौपचारिक बातचीत"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "उपस्थित",
@@ -865,6 +874,15 @@
     "chairsLabel": "कुर्सियाँ:",
     "committeeLogoAlt": "{नाम} लोगो",
     "eslFriendly": "ईएसएल के अनुकूल"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "शुरुआती",
+    "difficultyIntermediate": "मध्यम",
+    "difficultyAdvanced": "उन्नत",
+    "formatTraditional": "पारंपरिक",
+    "formatCrisis": "संकट",
+    "ageRangeGrade7Year8": "ग्रेड 7–12 (अमेरिका) · वर्ष 8–13 (यूके)",
+    "ageRangeGrade9Year10": "ग्रेड 9–12 (अमेरिका) · वर्ष 10–13 (यूके)"
   },
   "chairNav": {
     "ariaDashboard": "चेयर डैशबोर्ड",

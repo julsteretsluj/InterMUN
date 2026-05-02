@@ -159,7 +159,16 @@
     "readerWarning": "אזהרת קורא: הערה זו עשויה להכיל שפה לא הולמת.",
     "plainTextOptional": "טקסט רגיל (אופציונלי)",
     "notesPlaceholder": "רשמו הערות של הכל…",
-    "saveHelp": "שומר את שם ההערה, התגים, טקסט ההערה הרצה וכתובת האתר של Google Docs (אם מסופק) עבור חשבונך."
+    "saveHelp": "שומר את שם ההערה, התגים, טקסט ההערה הרצה וכתובת האתר של Google Docs (אם מסופק) עבור חשבונך.",
+    "tagPresets": {
+      "stances": "עמדות",
+      "crisis": "משבר",
+      "speechPoints": "נקודות נאום",
+      "poisAndPocs": "POI ו-POC",
+      "blocForming": "הקמת בלוקים",
+      "questions": "שאלות",
+      "informalConversations": "שיחות לא פורמליות"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "לְהַצִיג",
@@ -865,6 +874,15 @@
     "chairsLabel": "כִּיסְאוֹת:",
     "committeeLogoAlt": "הלוגו של {name}",
     "eslFriendly": "ידידותי ל-ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "מתחילים",
+    "difficultyIntermediate": "בינוני",
+    "difficultyAdvanced": "מתקדמים",
+    "formatTraditional": "מסורתי",
+    "formatCrisis": "משבר",
+    "ageRangeGrade7Year8": "כיתות 7–12 (ארה״ב) · שנים 8–13 (בריטניה)",
+    "ageRangeGrade9Year10": "כיתות 9–12 (ארה״ב) · שנים 10–13 (בריטניה)"
   },
   "chairNav": {
     "ariaDashboard": "לוח מחוונים של כיסא",

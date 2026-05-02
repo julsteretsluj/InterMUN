@@ -159,7 +159,16 @@
     "readerWarning": "독자 경고: 이 메모에는 부적절한 언어가 포함되어 있을 수 있습니다.",
     "plainTextOptional": "일반 텍스트(선택사항)",
     "notesPlaceholder": "모든 것을 메모해 두세요…",
-    "saveHelp": "자신의 계정에 대해 노트 이름, 태그, 실행 중인 노트 텍스트 및 Google Docs URL(제공된 경우)을 저장합니다."
+    "saveHelp": "자신의 계정에 대해 노트 이름, 태그, 실행 중인 노트 텍스트 및 Google Docs URL(제공된 경우)을 저장합니다.",
+    "tagPresets": {
+      "stances": "입장",
+      "crisis": "위기",
+      "speechPoints": "발언 포인트",
+      "poisAndPocs": "POI 및 POC",
+      "blocForming": "블록 형성",
+      "questions": "질문",
+      "informalConversations": "비공식 대화"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "현재의",
@@ -937,6 +946,15 @@
     "chairsLabel": "의자:",
     "committeeLogoAlt": "{이름} 로고",
     "eslFriendly": "ESL 친화적"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "초급",
+    "difficultyIntermediate": "중급",
+    "difficultyAdvanced": "고급",
+    "formatTraditional": "전통",
+    "formatCrisis": "위기",
+    "ageRangeGrade7Year8": "미국 7–12학년 · 영국 Year 8–13",
+    "ageRangeGrade9Year10": "미국 9–12학년 · 영국 Year 10–13"
   },
   "chairNav": {
     "ariaDashboard": "의자 대시보드",

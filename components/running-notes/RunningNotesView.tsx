@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
@@ -10,7 +10,8 @@ import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import {
-  RUNNING_NOTE_TAG_PRESETS,
+  RUNNING_NOTE_TAG_PRESET_ENTRIES,
+  getRunningNoteTagPresetI18nKey,
   normalizeRunningNoteTags,
   runningNoteSidebarLabel,
 } from "@/lib/running-notes-tags";
@@ -49,6 +50,13 @@ export function RunningNotesView({
 }) {
   const t = useTranslations("runningNotesView");
   const tCommon = useTranslations("common");
+  const formatTag = useCallback(
+    (tag: string) => {
+      const k = getRunningNoteTagPresetI18nKey(tag);
+      return k ? t(`tagPresets.${k}` as never) : tag;
+    },
+    [t]
+  );
   const router = useRouter();
   const [items, setItems] = useState(notes);
   const [activeNote, setActiveNote] = useState<Note | null>(notes[0] || null);
@@ -239,7 +247,7 @@ export function RunningNotesView({
         >
           {items.map((n) => (
             <option key={n.id} value={n.id}>
-              {runningNoteSidebarLabel(n)}
+              {runningNoteSidebarLabel(n, formatTag)}
             </option>
           ))}
         </select>
@@ -258,9 +266,9 @@ export function RunningNotesView({
                   ? "bg-brand-accent text-white"
                   : "hover:bg-slate-100 dark:hover:bg-white/10"
               }`}
-              title={runningNoteSidebarLabel(n)}
+              title={runningNoteSidebarLabel(n, formatTag)}
             >
-              {runningNoteSidebarLabel(n)}
+              {runningNoteSidebarLabel(n, formatTag)}
             </button>
           ))}
         </div>
@@ -297,20 +305,20 @@ export function RunningNotesView({
             <div className="space-y-2">
               <label className="mun-label normal-case block">{t("tags")}</label>
               <div className="flex flex-wrap gap-2">
-                {RUNNING_NOTE_TAG_PRESETS.map((preset) => {
-                  const on = tags.some((t) => t.toLowerCase() === preset.toLowerCase());
+                {RUNNING_NOTE_TAG_PRESET_ENTRIES.map(([storage, i18nKey]) => {
+                  const on = tags.some((x) => x.toLowerCase() === storage.toLowerCase());
                   return (
                     <button
-                      key={preset}
+                      key={storage}
                       type="button"
-                      onClick={() => togglePresetTag(preset)}
+                      onClick={() => togglePresetTag(storage)}
                       className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
                         on
                           ? "border-brand-accent bg-brand-accent/15 text-brand-navy dark:bg-brand-accent/25 dark:text-zinc-100"
                           : "border-slate-200 text-brand-muted hover:border-brand-accent/40 dark:border-white/15 dark:hover:border-brand-accent/40"
                       }`}
                     >
-                      {preset}
+                      {t(`tagPresets.${i18nKey}` as never)}
                     </button>
                   );
                 })}
@@ -340,14 +348,14 @@ export function RunningNotesView({
               </div>
               {tags.length > 0 ? (
                 <p className="text-xs text-brand-muted">
-                  {t("selected")}: {normalizeRunningNoteTags(tags).join(", ")}
+                  {t("selected")}: {normalizeRunningNoteTags(tags).map(formatTag).join(", ")}
                 </p>
               ) : null}
             </div>
           ) : activeNote.tags && activeNote.tags.length > 0 ? (
             <p className="text-sm text-brand-muted">
               <span className="font-medium text-brand-navy dark:text-zinc-200">{t("tags")}: </span>
-              {normalizeRunningNoteTags(activeNote.tags).join(", ")}
+              {normalizeRunningNoteTags(activeNote.tags).map(formatTag).join(", ")}
             </p>
           ) : null}
           {canEdit ? (

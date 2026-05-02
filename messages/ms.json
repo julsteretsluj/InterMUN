@@ -159,7 +159,16 @@
     "readerWarning": "Amaran pembaca: nota ini mungkin mengandungi bahasa yang tidak sesuai.",
     "plainTextOptional": "Teks biasa (pilihan)",
     "notesPlaceholder": "Simpan nota segala-galanya…",
-    "saveHelp": "Menyimpan nama nota anda, teg, teks nota yang sedang berjalan dan URL Dokumen Google (jika disediakan) untuk akaun anda sendiri."
+    "saveHelp": "Menyimpan nama nota anda, teg, teks nota yang sedang berjalan dan URL Dokumen Google (jika disediakan) untuk akaun anda sendiri.",
+    "tagPresets": {
+      "stances": "Pendirian",
+      "crisis": "Krisis",
+      "speechPoints": "Mata ucapan",
+      "poisAndPocs": "POI & POC",
+      "blocForming": "Pembentukan blok",
+      "questions": "Soalan",
+      "informalConversations": "Perbualan tidak formal"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Hadir",
@@ -937,6 +946,15 @@
     "chairsLabel": "kerusi:",
     "committeeLogoAlt": "{name} logo",
     "eslFriendly": "mesra ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Permulaan",
+    "difficultyIntermediate": "Pertengahan",
+    "difficultyAdvanced": "Lanjutan",
+    "formatTraditional": "Tradisional",
+    "formatCrisis": "Krisis",
+    "ageRangeGrade7Year8": "Gred 7–12 (AS) · Tahun 8–13 (UK)",
+    "ageRangeGrade9Year10": "Gred 9–12 (AS) · Tahun 10–13 (UK)"
   },
   "chairNav": {
     "ariaDashboard": "Papan pemuka kerusi",

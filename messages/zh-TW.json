@@ -159,7 +159,16 @@
     "readerWarning": "讀者警告：本說明可能包含不當語言。",
     "plainTextOptional": "純文字（可選）",
     "notesPlaceholder": "記下一切…",
-    "saveHelp": "為您自己的帳戶儲存您的筆記名稱、標籤、運行筆記文字和 Google 文件 URL（如果提供）。"
+    "saveHelp": "為您自己的帳戶儲存您的筆記名稱、標籤、運行筆記文字和 Google 文件 URL（如果提供）。",
+    "tagPresets": {
+      "stances": "立場",
+      "crisis": "危機",
+      "speechPoints": "發言要點",
+      "poisAndPocs": "程序性提問與程序性問題",
+      "blocForming": "集團形成",
+      "questions": "問題",
+      "informalConversations": "非正式交談"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "展示",
@@ -937,6 +946,15 @@
     "chairsLabel": "椅子：",
     "committeeLogoAlt": "{名稱}標誌",
     "eslFriendly": "ESL 友善"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "初級",
+    "difficultyIntermediate": "中級",
+    "difficultyAdvanced": "高級",
+    "formatTraditional": "傳統",
+    "formatCrisis": "危機",
+    "ageRangeGrade7Year8": "美國 7–12 年級 · 英國 8–13 年級",
+    "ageRangeGrade9Year10": "美國 9–12 年級 · 英國 10–13 年級"
   },
   "chairNav": {
     "ariaDashboard": "椅子儀表板",

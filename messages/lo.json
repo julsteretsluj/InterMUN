@@ -159,7 +159,16 @@
     "readerWarning": "ຄຳເຕືອນຂອງຜູ້ອ່ານ: ບັນທຶກນີ້ອາດມີພາສາທີ່ບໍ່ເໝາະສົມ.",
     "plainTextOptional": "ຂໍ້ຄວາມທຳມະດາ (ເລືອກໄດ້)",
     "notesPlaceholder": "ບັນທຶກທຸກຢ່າງ...",
-    "saveHelp": "ບັນ​ທຶກ​ຊື່​ບັນ​ທຶກ​ຂອງ​ທ່ານ, tags, ຂໍ້​ຄວາມ​ບັນ​ທຶກ​ການ​ແລ່ນ, ແລະ URL ຂອງ Google Docs (ຖ້າ​ຫາກ​ວ່າ​ສະ​ຫນອງ​ໃຫ້) ສໍາ​ລັບ​ບັນ​ຊີ​ຂອງ​ທ່ານ​ເອງ."
+    "saveHelp": "ບັນ​ທຶກ​ຊື່​ບັນ​ທຶກ​ຂອງ​ທ່ານ, tags, ຂໍ້​ຄວາມ​ບັນ​ທຶກ​ການ​ແລ່ນ, ແລະ URL ຂອງ Google Docs (ຖ້າ​ຫາກ​ວ່າ​ສະ​ຫນອງ​ໃຫ້) ສໍາ​ລັບ​ບັນ​ຊີ​ຂອງ​ທ່ານ​ເອງ.",
+    "tagPresets": {
+      "stances": "ທ່າທີ",
+      "crisis": "ວິກິດ",
+      "speechPoints": "ຈຸດການປາກົດ",
+      "poisAndPocs": "POI ແລະ POC",
+      "blocForming": "ການສ້າງກຸ່ມ",
+      "questions": "ຄຳຖາມ",
+      "informalConversations": "ການສົນທະນາທີ່ບໍ່ເປັນທາງການ"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "ປະຈຸບັນ",
@@ -937,6 +946,15 @@
     "chairsLabel": "ເກົ້າອີ້:",
     "committeeLogoAlt": "{name} ໂລໂກ້",
     "eslFriendly": "ເປັນມິດກັບ ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "ເລີ່ມຕົ້ນ",
+    "difficultyIntermediate": "ປານກາງ",
+    "difficultyAdvanced": "ຂັ້ນສູງ",
+    "formatTraditional": "ດັ້ງເດີມ",
+    "formatCrisis": "ວິກິດ",
+    "ageRangeGrade7Year8": "ຊັ້ນ 7–12 (ອາເມລິກາ) · ປີ 8–13 (ອັງກິດ)",
+    "ageRangeGrade9Year10": "ຊັ້ນ 9–12 (ອາເມລິກາ) · ປີ 10–13 (ອັງກິດ)"
   },
   "chairNav": {
     "ariaDashboard": "ແຜງໜ້າປັດເກົ້າອີ້",

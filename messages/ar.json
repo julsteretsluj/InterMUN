@@ -159,7 +159,16 @@
     "readerWarning": "تحذير للقارئ: قد تحتوي هذه الملاحظة على لغة غير لائقة.",
     "plainTextOptional": "نص عادي (اختياري)",
     "notesPlaceholder": "احتفظ بملاحظات عن كل شيء...",
-    "saveHelp": "يحفظ اسم الملاحظة والعلامات ونص الملاحظة قيد التشغيل وعنوان URL لمحرر مستندات Google (إذا تم توفيره) لحسابك الخاص."
+    "saveHelp": "يحفظ اسم الملاحظة والعلامات ونص الملاحظة قيد التشغيل وعنوان URL لمحرر مستندات Google (إذا تم توفيره) لحسابك الخاص.",
+    "tagPresets": {
+      "stances": "المواقف",
+      "crisis": "الأزمة",
+      "speechPoints": "نقاط الخطاب",
+      "poisAndPocs": "أسئلة إضافية ونقاط نظام",
+      "blocForming": "تشكيل الكتل",
+      "questions": "أسئلة",
+      "informalConversations": "محادثات غير رسمية"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "حاضر",
@@ -937,6 +946,15 @@
     "chairsLabel": "الكراسي:",
     "committeeLogoAlt": "شعار {الاسم}.",
     "eslFriendly": "صديقة للغة الإنجليزية كلغة ثانية"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "مبتدئ",
+    "difficultyIntermediate": "متوسط",
+    "difficultyAdvanced": "متقدم",
+    "formatTraditional": "تقليدي",
+    "formatCrisis": "أزمة",
+    "ageRangeGrade7Year8": "الصفوف 7–12 (أمريكا) · السنوات الدراسية 8–13 (بريطانيا)",
+    "ageRangeGrade9Year10": "الصفوف 9–12 (أمريكا) · السنوات الدراسية 10–13 (بريطانيا)"
   },
   "chairNav": {
     "ariaDashboard": "لوحة الكرسي",

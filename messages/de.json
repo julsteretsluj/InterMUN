@@ -159,7 +159,16 @@
     "readerWarning": "Leserwarnung: Dieser Hinweis enthält möglicherweise unangemessene Sprache.",
     "plainTextOptional": "Klartext (optional)",
     "notesPlaceholder": "Machen Sie sich Notizen zu allem ...",
-    "saveHelp": "Speichert Ihren Notiznamen, Tags, laufenden Notiztext und die Google Docs-URL (falls angegeben) für Ihr eigenes Konto."
+    "saveHelp": "Speichert Ihren Notiznamen, Tags, laufenden Notiztext und die Google Docs-URL (falls angegeben) für Ihr eigenes Konto.",
+    "tagPresets": {
+      "stances": "Positionen",
+      "crisis": "Krise",
+      "speechPoints": "Redepunkte",
+      "poisAndPocs": "POIs & POCs",
+      "blocForming": "Blockbildung",
+      "questions": "Fragen",
+      "informalConversations": "Informelle Gespräche"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Gegenwärtig",
@@ -937,6 +946,15 @@
     "chairsLabel": "Stühle:",
     "committeeLogoAlt": "{Name}-Logo",
     "eslFriendly": "ESL-freundlich"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Einsteiger",
+    "difficultyIntermediate": "Mittel",
+    "difficultyAdvanced": "Fortgeschritten",
+    "formatTraditional": "Traditionell",
+    "formatCrisis": "Krise",
+    "ageRangeGrade7Year8": "Klassenstufen 7–12 (US) · Schuljahre 8–13 (UK)",
+    "ageRangeGrade9Year10": "Klassenstufen 9–12 (US) · Schuljahre 10–13 (UK)"
   },
   "chairNav": {
     "ariaDashboard": "Stuhl-Armaturenbrett",

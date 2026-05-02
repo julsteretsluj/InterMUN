@@ -159,7 +159,16 @@
     "readerWarning": "পাঠক সতর্কতা: এই নোটে অনুপযুক্ত ভাষা থাকতে পারে।",
     "plainTextOptional": "প্লেইন টেক্সট (ঐচ্ছিক)",
     "notesPlaceholder": "সব কিছু নোট করে রাখুন...",
-    "saveHelp": "আপনার নিজের অ্যাকাউন্টের জন্য আপনার নোটের নাম, ট্যাগ, চলমান নোট টেক্সট এবং Google ডক্স URL (যদি প্রদান করা হয়) সংরক্ষণ করে।"
+    "saveHelp": "আপনার নিজের অ্যাকাউন্টের জন্য আপনার নোটের নাম, ট্যাগ, চলমান নোট টেক্সট এবং Google ডক্স URL (যদি প্রদান করা হয়) সংরক্ষণ করে।",
+    "tagPresets": {
+      "stances": "অবস্থান",
+      "crisis": "সংকট",
+      "speechPoints": "বক্তৃতার পয়েন্ট",
+      "poisAndPocs": "POI ও POC",
+      "blocForming": "ব্লক গঠন",
+      "questions": "প্রশ্ন",
+      "informalConversations": "অনানুষ্ঠানিক কথোপকথন"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "বর্তমান",
@@ -865,6 +874,15 @@
     "chairsLabel": "চেয়ার:",
     "committeeLogoAlt": "{name} লোগো",
     "eslFriendly": "ESL-বান্ধব"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "সূচনা",
+    "difficultyIntermediate": "মধ্যম",
+    "difficultyAdvanced": "উন্নত",
+    "formatTraditional": "ঐতিহ্যবাহী",
+    "formatCrisis": "সংকট",
+    "ageRangeGrade7Year8": "গ্রেড ৭–১২ (মার্কিন) · ইয়ার ৮–১৩ (যুক্তরাজ্য)",
+    "ageRangeGrade9Year10": "গ্রেড ৯–১২ (মার্কিন) · ইয়ার ১০–১৩ (যুক্তরাজ্য)"
   },
   "chairNav": {
     "ariaDashboard": "চেয়ার ড্যাশবোর্ড",

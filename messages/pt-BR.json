@@ -159,7 +159,16 @@
     "readerWarning": "Aviso ao leitor: esta nota pode conter linguagem imprópria.",
     "plainTextOptional": "Texto simples (opcional)",
     "notesPlaceholder": "Anote tudo…",
-    "saveHelp": "Salva o nome da nota, as tags, o texto da nota em execução e o URL do Google Docs (se fornecido) para sua própria conta."
+    "saveHelp": "Salva o nome da nota, as tags, o texto da nota em execução e o URL do Google Docs (se fornecido) para sua própria conta.",
+    "tagPresets": {
+      "stances": "Posições",
+      "crisis": "Crise",
+      "speechPoints": "Pontos de fala",
+      "poisAndPocs": "PI e POC",
+      "blocForming": "Formação de blocos",
+      "questions": "Perguntas",
+      "informalConversations": "Conversas informais"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Presente",
@@ -937,6 +946,15 @@
     "chairsLabel": "Cadeiras:",
     "committeeLogoAlt": "logotipo de {nome}",
     "eslFriendly": "Compatível com ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Iniciante",
+    "difficultyIntermediate": "Intermediário",
+    "difficultyAdvanced": "Avançado",
+    "formatTraditional": "Tradicional",
+    "formatCrisis": "Crise",
+    "ageRangeGrade7Year8": "Séries 7–12 (EUA) · Anos 8–13 (Reino Unido)",
+    "ageRangeGrade9Year10": "Séries 9–12 (EUA) · Anos 10–13 (Reino Unido)"
   },
   "chairNav": {
     "ariaDashboard": "Painel da cadeira",

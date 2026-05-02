@@ -159,7 +159,16 @@
     "readerWarning": "Ostrzeżenie czytelnika: ta notatka może zawierać nieodpowiedni język.",
     "plainTextOptional": "Zwykły tekst (opcjonalnie)",
     "notesPlaceholder": "Zapisuj wszystko…",
-    "saveHelp": "Zapisuje nazwę notatki, tagi, bieżący tekst notatki i adres URL Dokumentów Google (jeśli został podany) dla Twojego własnego konta."
+    "saveHelp": "Zapisuje nazwę notatki, tagi, bieżący tekst notatki i adres URL Dokumentów Google (jeśli został podany) dla Twojego własnego konta.",
+    "tagPresets": {
+      "stances": "Stanowiska",
+      "crisis": "Kryzys",
+      "speechPoints": "Punkty wystąpienia",
+      "poisAndPocs": "POI i POC",
+      "blocForming": "Formowanie bloków",
+      "questions": "Pytania",
+      "informalConversations": "Nieformalne rozmowy"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Obecny",
@@ -937,6 +946,15 @@
     "chairsLabel": "Krzesła:",
     "committeeLogoAlt": "logo {nazwa}",
     "eslFriendly": "Przyjazny dla ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Początkujący",
+    "difficultyIntermediate": "Średni",
+    "difficultyAdvanced": "Zaawansowany",
+    "formatTraditional": "Tradycyjny",
+    "formatCrisis": "Kryzys",
+    "ageRangeGrade7Year8": "Klasy 7–12 (USA) · Lata 8–13 (UK)",
+    "ageRangeGrade9Year10": "Klasy 9–12 (USA) · Lata 10–13 (UK)"
   },
   "chairNav": {
     "ariaDashboard": "Deska rozdzielcza krzesła",

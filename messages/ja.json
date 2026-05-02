@@ -159,7 +159,16 @@
     "readerWarning": "読者への警告: このメモには不適切な表現が含まれている可能性があります。",
     "plainTextOptional": "プレーンテキスト (オプション)",
     "notesPlaceholder": "すべてのことをメモしておいてください…",
-    "saveHelp": "自分のアカウントのノート名、タグ、実行中のノートのテキスト、Google ドキュメントの URL (指定されている場合) を保存します。"
+    "saveHelp": "自分のアカウントのノート名、タグ、実行中のノートのテキスト、Google ドキュメントの URL (指定されている場合) を保存します。",
+    "tagPresets": {
+      "stances": "スタンス",
+      "crisis": "クライシス",
+      "speechPoints": "スピーチポイント",
+      "poisAndPocs": "POI・POC",
+      "blocForming": "ブロック形成",
+      "questions": "質問",
+      "informalConversations": "非公式な会話"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "現在",
@@ -937,6 +946,15 @@
     "chairsLabel": "椅子:",
     "committeeLogoAlt": "{名前}のロゴ",
     "eslFriendly": "ESLフレンドリー"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "初級",
+    "difficultyIntermediate": "中級",
+    "difficultyAdvanced": "上級",
+    "formatTraditional": "トラディショナル",
+    "formatCrisis": "クライシス",
+    "ageRangeGrade7Year8": "米グレード7–12 · 英Year 8–13",
+    "ageRangeGrade9Year10": "米グレード9–12 · 英Year 10–13"
   },
   "chairNav": {
     "ariaDashboard": "椅子のダッシュボード",

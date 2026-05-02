@@ -159,7 +159,16 @@
     "readerWarning": "Avertissement du lecteur : cette note peut contenir un langage inapproprié.",
     "plainTextOptional": "Texte brut (facultatif)",
     "notesPlaceholder": "Gardez des notes sur tout…",
-    "saveHelp": "Enregistre le nom de votre note, les balises, le texte de la note en cours et l'URL de Google Docs (si fournie) pour votre propre compte."
+    "saveHelp": "Enregistre le nom de votre note, les balises, le texte de la note en cours et l'URL de Google Docs (si fournie) pour votre propre compte.",
+    "tagPresets": {
+      "stances": "Positions",
+      "crisis": "Crise",
+      "speechPoints": "Points d’intervention",
+      "poisAndPocs": "QP & points d’ordre",
+      "blocForming": "Formation de blocs",
+      "questions": "Questions",
+      "informalConversations": "Conversations informelles"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Présente",
@@ -937,6 +946,15 @@
     "chairsLabel": "Chaises :",
     "committeeLogoAlt": "logo {nom}",
     "eslFriendly": "Compatible ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Débutant",
+    "difficultyIntermediate": "Intermédiaire",
+    "difficultyAdvanced": "Avancé",
+    "formatTraditional": "Traditionnel",
+    "formatCrisis": "Crise",
+    "ageRangeGrade7Year8": "Grades 7–12 (É.-U.) · Years 8–13 (R.-U.)",
+    "ageRangeGrade9Year10": "Grades 9–12 (É.-U.) · Years 10–13 (R.-U.)"
   },
   "chairNav": {
     "ariaDashboard": "Tableau de bord de la chaise",

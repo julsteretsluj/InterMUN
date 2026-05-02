@@ -159,7 +159,16 @@
     "readerWarning": "Reader warning: this note may contain inappropriate language.",
     "plainTextOptional": "Plain text (optional)",
     "notesPlaceholder": "Keep notes of everything…",
-    "saveHelp": "Saves your note name, tags, running note text, and Google Docs URL (if provided) for your own account."
+    "saveHelp": "Saves your note name, tags, running note text, and Google Docs URL (if provided) for your own account.",
+    "tagPresets": {
+      "stances": "Stances",
+      "crisis": "Crisis",
+      "speechPoints": "Speech points",
+      "poisAndPocs": "POIs & POCs",
+      "blocForming": "Bloc forming",
+      "questions": "Questions",
+      "informalConversations": "Informal conversations"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Present",
@@ -987,6 +996,15 @@
     "chairsLabel": "Chairs:",
     "committeeLogoAlt": "{name} logo",
     "eslFriendly": "ESL-friendly"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Beginner",
+    "difficultyIntermediate": "Intermediate",
+    "difficultyAdvanced": "Advanced",
+    "formatTraditional": "Traditional",
+    "formatCrisis": "Crisis",
+    "ageRangeGrade7Year8": "Grade 7-12 · Year 8-13",
+    "ageRangeGrade9Year10": "Grade 9-12 · Year 10-13"
   },
   "chairNav": {
     "ariaDashboard": "Chair dashboard",

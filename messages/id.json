@@ -159,7 +159,16 @@
     "readerWarning": "Peringatan pembaca: catatan ini mungkin berisi bahasa yang tidak pantas.",
     "plainTextOptional": "Teks biasa (opsional)",
     "notesPlaceholder": "Catat semuanya…",
-    "saveHelp": "Menyimpan nama catatan Anda, tag, teks catatan berjalan, dan URL Google Docs (jika tersedia) untuk akun Anda sendiri."
+    "saveHelp": "Menyimpan nama catatan Anda, tag, teks catatan berjalan, dan URL Google Docs (jika tersedia) untuk akun Anda sendiri.",
+    "tagPresets": {
+      "stances": "Sikap",
+      "crisis": "Krisis",
+      "speechPoints": "Poin pidato",
+      "poisAndPocs": "POI & POC",
+      "blocForming": "Pembentukan blok",
+      "questions": "Pertanyaan",
+      "informalConversations": "Percakapan informal"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Hadiah",
@@ -865,6 +874,15 @@
     "chairsLabel": "Kursi:",
     "committeeLogoAlt": "logo {nama}",
     "eslFriendly": "Ramah ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Pemula",
+    "difficultyIntermediate": "Menengah",
+    "difficultyAdvanced": "Lanjutan",
+    "formatTraditional": "Tradisional",
+    "formatCrisis": "Krisis",
+    "ageRangeGrade7Year8": "Kelas 7–12 (AS) · Tahun 8–13 (UK)",
+    "ageRangeGrade9Year10": "Kelas 9–12 (AS) · Tahun 10–13 (UK)"
   },
   "chairNav": {
     "ariaDashboard": "Dasbor kursi",

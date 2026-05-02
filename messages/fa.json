@@ -159,7 +159,16 @@
     "readerWarning": "هشدار خواننده: این یادداشت ممکن است حاوی زبان نامناسب باشد.",
     "plainTextOptional": "متن ساده (اختیاری)",
     "notesPlaceholder": "همه چیز را یادداشت کنید…",
-    "saveHelp": "نام یادداشت، برچسب‌ها، متن یادداشت در حال اجرا و URL سندنگار Google (در صورت ارائه) را برای حساب شخصی شما ذخیره می‌کند."
+    "saveHelp": "نام یادداشت، برچسب‌ها، متن یادداشت در حال اجرا و URL سندنگار Google (در صورت ارائه) را برای حساب شخصی شما ذخیره می‌کند.",
+    "tagPresets": {
+      "stances": "مواضع",
+      "crisis": "بحران",
+      "speechPoints": "نکات سخنرانی",
+      "poisAndPocs": "POI و POC",
+      "blocForming": "شکل‌گیری بلوک",
+      "questions": "پرسش‌ها",
+      "informalConversations": "گفتگوهای غیررسمی"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "حاضر شود",
@@ -865,6 +874,15 @@
     "chairsLabel": "صندلی ها:",
     "committeeLogoAlt": "لوگوی {name}",
     "eslFriendly": "سازگار با ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "مقدماتی",
+    "difficultyIntermediate": "متوسط",
+    "difficultyAdvanced": "پیشرفته",
+    "formatTraditional": "سنتی",
+    "formatCrisis": "بحران",
+    "ageRangeGrade7Year8": "پایه‌های ۷–۱۲ (آمریکا) · سال‌های ۸–۱۳ (بریتانیا)",
+    "ageRangeGrade9Year10": "پایه‌های ۹–۱۲ (آمریکا) · سال‌های ۱۰–۱۳ (بریتانیا)"
   },
   "chairNav": {
     "ariaDashboard": "داشبورد صندلی",

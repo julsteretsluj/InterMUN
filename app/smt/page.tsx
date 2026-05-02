@@ -15,6 +15,11 @@ import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
 } from "@/lib/i18n/committee-topic-labels";
+import {
+  translateCommitteeTagAgeRange,
+  translateCommitteeTagDifficulty,
+  translateCommitteeTagFormat,
+} from "@/lib/i18n/committee-display-tags";
 
 function difficultySortRank(level: "Beginner" | "Intermediate" | "Advanced" | null | undefined) {
   if (level === "Beginner") return 0;
@@ -30,6 +35,7 @@ export default async function SmtOverviewPage({
 }) {
   const { e: overviewErr } = await searchParams;
   const t = await getTranslations("smtOverview");
+  const tCommitteeTags = await getTranslations("committeeTags");
   const tNames = await getTranslations("committeeNames.full");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
@@ -224,9 +230,15 @@ export default async function SmtOverviewPage({
               if (!tags) return null;
               return (
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
-                  <span className={difficultyTagClass(tags.difficulty)}>{tags.difficulty}</span>
-                  <span className={formatTagClass(tags.format)}>{tags.format}</span>
-                  <span className={ageRangeTagClass()}>{tags.ageRange}</span>
+                  <span className={difficultyTagClass(tags.difficulty)}>
+                    {translateCommitteeTagDifficulty(tags.difficulty, tCommitteeTags)}
+                  </span>
+                  <span className={formatTagClass(tags.format)}>
+                    {translateCommitteeTagFormat(tags.format, tCommitteeTags)}
+                  </span>
+                  <span className={ageRangeTagClass()}>
+                    {translateCommitteeTagAgeRange(tags.ageRangeKey, tCommitteeTags)}
+                  </span>
                   {tags.eslFriendly ? (
                     <span className={eslFriendlyTagClass(true)}>{t("eslFriendly")}</span>
                   ) : null}

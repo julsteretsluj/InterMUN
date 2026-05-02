@@ -24,6 +24,11 @@ import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
 } from "@/lib/i18n/committee-topic-labels";
+import {
+  translateCommitteeTagAgeRange,
+  translateCommitteeTagDifficulty,
+  translateCommitteeTagFormat,
+} from "@/lib/i18n/committee-display-tags";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -42,6 +47,7 @@ export default async function SmtCommitteeLivePage({
   searchParams: Promise<{ tab?: string }>;
 }) {
   const t = await getTranslations("smtCards");
+  const tCommitteeTags = await getTranslations("committeeTags");
   const tNames = await getTranslations("committeeNames.full");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
   const tTopics = await getTranslations("agendaTopics");
@@ -193,21 +199,27 @@ export default async function SmtCommitteeLivePage({
           </MetaItem>
           <MetaItem label={t("difficulty")}>
             {displayTags?.difficulty ? (
-              <span className={difficultyTagClass(displayTags.difficulty)}>{displayTags.difficulty}</span>
+              <span className={difficultyTagClass(displayTags.difficulty)}>
+                {translateCommitteeTagDifficulty(displayTags.difficulty, tCommitteeTags)}
+              </span>
             ) : (
               "—"
             )}
           </MetaItem>
           <MetaItem label={t("format")}>
             {displayTags?.format ? (
-              <span className={formatTagClass(displayTags.format)}>{displayTags.format}</span>
+              <span className={formatTagClass(displayTags.format)}>
+                {translateCommitteeTagFormat(displayTags.format, tCommitteeTags)}
+              </span>
             ) : (
               "—"
             )}
           </MetaItem>
           <MetaItem label={t("ageRange")}>
-            {displayTags?.ageRange ? (
-              <span className={ageRangeTagClass()}>{displayTags.ageRange}</span>
+            {displayTags?.ageRangeKey ? (
+              <span className={ageRangeTagClass()}>
+                {translateCommitteeTagAgeRange(displayTags.ageRangeKey, tCommitteeTags)}
+              </span>
             ) : (
               "—"
             )}

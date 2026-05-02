@@ -159,7 +159,16 @@
     "readerWarning": "Okuyucu uyarısı: Bu not uygunsuz dil içerebilir.",
     "plainTextOptional": "Düz metin (isteğe bağlı)",
     "notesPlaceholder": "Her şeyi not edin…",
-    "saveHelp": "Not adınızı, etiketlerinizi, çalışan not metninizi ve Google Dokümanlar URL'nizi (varsa) kendi hesabınız için kaydeder."
+    "saveHelp": "Not adınızı, etiketlerinizi, çalışan not metninizi ve Google Dokümanlar URL'nizi (varsa) kendi hesabınız için kaydeder.",
+    "tagPresets": {
+      "stances": "Durışlar",
+      "crisis": "Kriz",
+      "speechPoints": "Konuşma noktaları",
+      "poisAndPocs": "POI ve POC",
+      "blocForming": "Blok oluşumu",
+      "questions": "Sorular",
+      "informalConversations": "Gayri resmi görüşmeler"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Sunmak",
@@ -937,6 +946,15 @@
     "chairsLabel": "Sandalyeler:",
     "committeeLogoAlt": "{isim} logosu",
     "eslFriendly": "ESL dostu"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Başlangıç",
+    "difficultyIntermediate": "Orta",
+    "difficultyAdvanced": "İleri",
+    "formatTraditional": "Geleneksel",
+    "formatCrisis": "Kriz",
+    "ageRangeGrade7Year8": "Sınıf 7–12 (ABD) · Yıl 8–13 (BK)",
+    "ageRangeGrade9Year10": "Sınıf 9–12 (ABD) · Yıl 10–13 (BK)"
   },
   "chairNav": {
     "ariaDashboard": "Sandalye gösterge paneli",

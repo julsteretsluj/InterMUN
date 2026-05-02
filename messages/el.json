@@ -159,7 +159,16 @@
     "readerWarning": "Προειδοποίηση αναγνώστη: αυτή η σημείωση μπορεί να περιέχει ακατάλληλη γλώσσα.",
     "plainTextOptional": "Απλό κείμενο (προαιρετικό)",
     "notesPlaceholder": "Κρατήστε σημειώσεις για όλα…",
-    "saveHelp": "Αποθηκεύει το όνομα της σημείωσης, τις ετικέτες, το τρέχον κείμενο της σημείωσης και τη διεύθυνση URL των Εγγράφων Google (αν παρέχεται) για τον δικό σας λογαριασμό."
+    "saveHelp": "Αποθηκεύει το όνομα της σημείωσης, τις ετικέτες, το τρέχον κείμενο της σημείωσης και τη διεύθυνση URL των Εγγράφων Google (αν παρέχεται) για τον δικό σας λογαριασμό.",
+    "tagPresets": {
+      "stances": "Στάσεις",
+      "crisis": "Κρίση",
+      "speechPoints": "Σημεία ομιλίας",
+      "poisAndPocs": "POI & POC",
+      "blocForming": "Σχηματισμός μπλοκ",
+      "questions": "Ερωτήσεις",
+      "informalConversations": "Άτυπες συνομιλίες"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Παρόν",
@@ -865,6 +874,15 @@
     "chairsLabel": "Καρέκλες:",
     "committeeLogoAlt": "λογότυπο {name}",
     "eslFriendly": "Φιλικό προς το ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Αρχάριοι",
+    "difficultyIntermediate": "Ενδιάμεσο",
+    "difficultyAdvanced": "Προχωρημένο",
+    "formatTraditional": "Παραδοσιακό",
+    "formatCrisis": "Κρίση",
+    "ageRangeGrade7Year8": "Βαθμίδες 7–12 (ΗΠΑ) · Έτη 8–13 (ΗΒ)",
+    "ageRangeGrade9Year10": "Βαθμίδες 9–12 (ΗΠΑ) · Έτη 10–13 (ΗΒ)"
   },
   "chairNav": {
     "ariaDashboard": "Ταμπλό καρέκλας",

@@ -13,9 +13,12 @@ const WELL_KNOWN_COMMITTEE_FULL_NAME: Record<string, string> = {
   PRESSCORPS: "Press Corps",
 };
 
+export type CommitteeAgeRangeKey = "grade7_12_year8_13" | "grade9_12_year10_13";
+
 export type CommitteeDisplayTags = {
   difficulty: "Beginner" | "Intermediate" | "Advanced";
-  ageRange: string;
+  /** Canonical key; localized label comes from `committeeTags` messages. */
+  ageRangeKey: CommitteeAgeRangeKey;
   format: "Traditional" | "Crisis";
   eslFriendly: boolean;
 };
@@ -23,103 +26,103 @@ export type CommitteeDisplayTags = {
 const WELL_KNOWN_COMMITTEE_TAGS: Record<string, CommitteeDisplayTags> = {
   ECOSOC: {
     difficulty: "Beginner",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   F1: {
     difficulty: "Beginner",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   "PRESS CORPS": {
     difficulty: "Beginner",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   UNICEF: {
     difficulty: "Beginner",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: true,
   },
   EU: {
     difficulty: "Intermediate",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   "EU PARLI": {
     difficulty: "Intermediate",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   UNESCO: {
     difficulty: "Intermediate",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   UNHRC: {
     difficulty: "Intermediate",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: true,
   },
   UNODC: {
     difficulty: "Intermediate",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: false,
   },
   UNSC: {
     difficulty: "Intermediate",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Crisis",
     eslFriendly: false,
   },
   "UN WOMEN": {
     difficulty: "Intermediate",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: false,
   },
   UNWOMEN: {
     difficulty: "Intermediate",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: false,
   },
   DISEC: {
     difficulty: "Advanced",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
   FWC: {
     difficulty: "Advanced",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Crisis",
     eslFriendly: false,
   },
   HSC: {
     difficulty: "Advanced",
-    ageRange: "Grade 7-12 · Year 8-13",
+    ageRangeKey: "grade7_12_year8_13",
     format: "Crisis",
     eslFriendly: false,
   },
   INTERPOL: {
     difficulty: "Advanced",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: false,
   },
   WHO: {
     difficulty: "Advanced",
-    ageRange: "Grade 9-12 · Year 10-13",
+    ageRangeKey: "grade9_12_year10_13",
     format: "Traditional",
     eslFriendly: false,
   },

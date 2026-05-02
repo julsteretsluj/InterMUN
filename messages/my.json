@@ -159,7 +159,16 @@
     "readerWarning": "စာဖတ်သူသတိပေးချက်- ဤမှတ်စုတွင် မသင့်လျော်သောဘာသာစကား ပါဝင်နိုင်သည်။",
     "plainTextOptional": "ရိုးရိုးစာသား (ချန်လှပ်ထားနိုင်သည်)",
     "notesPlaceholder": "အရာအားလုံးကို မှတ်သားထားပါ...",
-    "saveHelp": "သင်၏မှတ်စုအမည်၊ တဂ်များ၊ လုပ်ဆောင်နေသော မှတ်စုစာသားနှင့် သင့်ကိုယ်ပိုင်အကောင့်အတွက် Google Docs URL (ပေးထားပါက) သိမ်းဆည်းပါ။"
+    "saveHelp": "သင်၏မှတ်စုအမည်၊ တဂ်များ၊ လုပ်ဆောင်နေသော မှတ်စုစာသားနှင့် သင့်ကိုယ်ပိုင်အကောင့်အတွက် Google Docs URL (ပေးထားပါက) သိမ်းဆည်းပါ။",
+    "tagPresets": {
+      "stances": "ရပ်တည်ချက်များ",
+      "crisis": "ဖြစ်ရပ်ဆိုး",
+      "speechPoints": "မိန့်ခွန်းအချက်များ",
+      "poisAndPocs": "POI နှင့် POC",
+      "blocForming": "ဘလောက်ဖွဲ့စည်းမှု",
+      "questions": "မေးခွန်းများ",
+      "informalConversations": "အပြီးအစီရင်ခံစာမဟုတ်သော စကားပြောဆိုမှုများ"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "ပစ္စုပ္ပန်",
@@ -937,6 +946,15 @@
     "chairsLabel": "ကုလားထိုင်များ",
     "committeeLogoAlt": "{name} လိုဂို",
     "eslFriendly": "ESL နှင့် အဆင်ပြေသည်။"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "စတင်သူ",
+    "difficultyIntermediate": "အလယ်",
+    "difficultyAdvanced": "အဆင့်မြင့်",
+    "formatTraditional": "ရိုးရာ",
+    "formatCrisis": "ဖြစ်ရပ်ဆိုး",
+    "ageRangeGrade7Year8": "အတန်း ၇–၁၂ (အမေရိက) · နှစ် ၈–၁၃ (ဗြိတိန်)",
+    "ageRangeGrade9Year10": "အတန်း ၉–၁၂ (အမေရိက) · နှစ် ၁၀–၁၃ (ဗြိတိန်)"
   },
   "chairNav": {
     "ariaDashboard": "ထိုင်ခုံဒိုင်ခွက်",

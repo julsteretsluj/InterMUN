@@ -159,7 +159,16 @@
     "readerWarning": "Попередження читача: ця примітка може містити ненормативну лексику.",
     "plainTextOptional": "Звичайний текст (необов'язково)",
     "notesPlaceholder": "Записуйте все…",
-    "saveHelp": "Зберігає назву вашої нотатки, теги, поточний текст нотатки та URL-адресу документів Google (якщо надається) для вашого власного облікового запису."
+    "saveHelp": "Зберігає назву вашої нотатки, теги, поточний текст нотатки та URL-адресу документів Google (якщо надається) для вашого власного облікового запису.",
+    "tagPresets": {
+      "stances": "Позиції",
+      "crisis": "Криза",
+      "speechPoints": "Пункти промови",
+      "poisAndPocs": "ПЗ та ПП",
+      "blocForming": "Формування блоків",
+      "questions": "Питання",
+      "informalConversations": "Неформальні розмови"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "присутній",
@@ -937,6 +946,15 @@
     "chairsLabel": "Стільці:",
     "committeeLogoAlt": "логотип {name}",
     "eslFriendly": "ESL-дружній"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Початковий",
+    "difficultyIntermediate": "Середній",
+    "difficultyAdvanced": "Просунутий",
+    "formatTraditional": "Традиційний",
+    "formatCrisis": "Криза",
+    "ageRangeGrade7Year8": "Класи 7–12 (США) · Роки 8–13 (Велика Британія)",
+    "ageRangeGrade9Year10": "Класи 9–12 (США) · Роки 10–13 (Велика Британія)"
   },
   "chairNav": {
     "ariaDashboard": "Приладова панель крісла",

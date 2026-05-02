@@ -159,7 +159,16 @@
     "readerWarning": "Waarschuwing van de lezer: deze notitie kan ongepast taalgebruik bevatten.",
     "plainTextOptional": "Platte tekst (optioneel)",
     "notesPlaceholder": "Noteer alles...",
-    "saveHelp": "Slaat uw notitienaam, tags, lopende notitietekst en Google Documenten-URL (indien aanwezig) op voor uw eigen account."
+    "saveHelp": "Slaat uw notitienaam, tags, lopende notitietekst en Google Documenten-URL (indien aanwezig) op voor uw eigen account.",
+    "tagPresets": {
+      "stances": "Standpunten",
+      "crisis": "Crisis",
+      "speechPoints": "Sprekpunten",
+      "poisAndPocs": "POI’s en POC’s",
+      "blocForming": "Vorming van blokken",
+      "questions": "Vragen",
+      "informalConversations": "Informele gesprekken"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Cadeau",
@@ -937,6 +946,15 @@
     "chairsLabel": "Stoelen:",
     "committeeLogoAlt": "{naam}-logo",
     "eslFriendly": "ESL-vriendelijk"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Beginner",
+    "difficultyIntermediate": "Gemiddeld",
+    "difficultyAdvanced": "Gevorderd",
+    "formatTraditional": "Traditioneel",
+    "formatCrisis": "Crisis",
+    "ageRangeGrade7Year8": "Groep 7–12 (VS) · Jaar 8–13 (VK)",
+    "ageRangeGrade9Year10": "Groep 9–12 (VS) · Jaar 10–13 (VK)"
   },
   "chairNav": {
     "ariaDashboard": "Stoeldashboard",

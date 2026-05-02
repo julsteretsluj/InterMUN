@@ -159,7 +159,16 @@
     "readerWarning": "ការព្រមានរបស់អ្នកអាន៖ កំណត់សម្គាល់នេះអាចមានភាសាមិនសមរម្យ។",
     "plainTextOptional": "អត្ថបទធម្មតា (ជាជម្រើស)",
     "notesPlaceholder": "រក្សា​កំណត់​ត្រា​គ្រប់​យ៉ាង…",
-    "saveHelp": "រក្សាទុកឈ្មោះចំណាំ ស្លាក អត្ថបទចំណាំដែលកំពុងដំណើរការ និង Google Docs URL (ប្រសិនបើមាន) សម្រាប់គណនីផ្ទាល់ខ្លួនរបស់អ្នក។"
+    "saveHelp": "រក្សាទុកឈ្មោះចំណាំ ស្លាក អត្ថបទចំណាំដែលកំពុងដំណើរការ និង Google Docs URL (ប្រសិនបើមាន) សម្រាប់គណនីផ្ទាល់ខ្លួនរបស់អ្នក។",
+    "tagPresets": {
+      "stances": "ទស្សនៈ",
+      "crisis": "វិបត្តិ",
+      "speechPoints": "ចំណុចថ្លែង",
+      "poisAndPocs": "POI និង POC",
+      "blocForming": "ការបង្កើតក្រុម",
+      "questions": "សំណួរ",
+      "informalConversations": "ការសន្ទនាមិនផ្លូវការ"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "បច្ចុប្បន្ន",
@@ -937,6 +946,15 @@
     "chairsLabel": "កៅអី៖",
     "committeeLogoAlt": "និមិត្តសញ្ញា {name}",
     "eslFriendly": "ងាយស្រួលប្រើ ESL"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "ដំបូង",
+    "difficultyIntermediate": "មធ្យម",
+    "difficultyAdvanced": "កម្រិតខ្ពស់",
+    "formatTraditional": "ប្រពៃណី",
+    "formatCrisis": "វិបត្តិ",
+    "ageRangeGrade7Year8": "ថ្នាក់ 7–12 (សហរដ្ឋអាមេរិក) · ឆ្នាំ 8–13 (ចក្រភពអង់គ្លេស)",
+    "ageRangeGrade9Year10": "ថ្នាក់ 9–12 (សហរដ្ឋអាមេរិក) · ឆ្នាំ 10–13 (ចក្រភពអង់គ្លេស)"
   },
   "chairNav": {
     "ariaDashboard": "ផ្ទាំងគ្រប់គ្រងកៅអី",

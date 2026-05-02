@@ -159,7 +159,16 @@
     "readerWarning": "Whakatupato mo te kaipānui: kei roto pea i tenei tuhipoka te reo tika.",
     "plainTextOptional": "Kuputuhi noa (he kōwhiringa)",
     "notesPlaceholder": "Kia mau ki nga korero mo nga mea katoa…",
-    "saveHelp": "Tiaki i to ingoa tuhipoka, tohu, tuhinga tuhipoka rere, me te Google Docs URL (mehemea ka tukuna) mo to ake putea."
+    "saveHelp": "Tiaki i to ingoa tuhipoka, tohu, tuhinga tuhipoka rere, me te Google Docs URL (mehemea ka tukuna) mo to ake putea.",
+    "tagPresets": {
+      "stances": "Tūnga",
+      "crisis": "Raru",
+      "speechPoints": "Nga pātea kōrero",
+      "poisAndPocs": "POI me POC",
+      "blocForming": "Hanga rōpū",
+      "questions": "Ngā pātai",
+      "informalConversations": "Kōrerorero kāore e whaimana"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Ko tenei wa",
@@ -865,6 +874,15 @@
     "chairsLabel": "tūru:",
     "committeeLogoAlt": "{name} tohu",
     "eslFriendly": "ESL-hoa"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Tīmatanga",
+    "difficultyIntermediate": "Waenga",
+    "difficultyAdvanced": "Arā atu anō",
+    "formatTraditional": "Tuku iho",
+    "formatCrisis": "Raru",
+    "ageRangeGrade7Year8": "Tau 7–12 (USA) · Tau 8–13 (UK)",
+    "ageRangeGrade9Year10": "Tau 9–12 (USA) · Tau 10–13 (UK)"
   },
   "chairNav": {
     "ariaDashboard": "Papatohu nohoanga",

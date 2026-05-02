@@ -159,7 +159,16 @@
     "readerWarning": "Onyo la msomaji: dokezo hili linaweza kuwa na lugha isiyofaa.",
     "plainTextOptional": "Maandishi matupu (si lazima)",
     "notesPlaceholder": "Weka kumbukumbu za kila kitu...",
-    "saveHelp": "Huhifadhi jina la dokezo lako, lebo, maandishi ya dokezo, na URL ya Hati za Google (ikiwa imetolewa) kwa akaunti yako mwenyewe."
+    "saveHelp": "Huhifadhi jina la dokezo lako, lebo, maandishi ya dokezo, na URL ya Hati za Google (ikiwa imetolewa) kwa akaunti yako mwenyewe.",
+    "tagPresets": {
+      "stances": "Msimamo",
+      "crisis": "Mgogoro",
+      "speechPoints": "Pointi za hotuba",
+      "poisAndPocs": "POI na POC",
+      "blocForming": "Uundaji wa bloc",
+      "questions": "Maswali",
+      "informalConversations": "Mazungumzo yasiyo rasmi"
+    }
   },
   "sessionControlClient": {
     "rollPresent": "Wasilisha",
@@ -865,6 +874,15 @@
     "chairsLabel": "Viti:",
     "committeeLogoAlt": "nembo ya {name}",
     "eslFriendly": "ESL-kirafiki"
+  },
+  "committeeTags": {
+    "difficultyBeginner": "Mwanzo",
+    "difficultyIntermediate": "Kati",
+    "difficultyAdvanced": "Juu",
+    "formatTraditional": "Jadi",
+    "formatCrisis": "Mgogoro",
+    "ageRangeGrade7Year8": "Daraja 7–12 (Marekani) · Mwaka 8–13 (Uingereza)",
+    "ageRangeGrade9Year10": "Daraja 9–12 (Marekani) · Mwaka 10–13 (Uingereza)"
   },
   "chairNav": {
     "ariaDashboard": "Dashibodi ya mwenyekiti",
