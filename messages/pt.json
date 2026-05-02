@@ -841,7 +841,61 @@
         "label": "Crise / relatório",
         "hint": "Levante um problema"
       }
+    },
+    "countdownCard": {
+      "title": "Contagem regressiva da conferência e do position paper",
+      "description": "Partilhado para esta comissão — todos com lugar veem as mesmas datas (qualquer delegado pode atualizar).",
+      "loading": "A carregar…",
+      "conferenceStart": "Início da conferência",
+      "paperDeadline": "Prazo do position paper",
+      "untilConference": "Até à conferência",
+      "untilPaperDeadline": "Até ao prazo do trabalho",
+      "notSet": "não definido",
+      "past": "Passado",
+      "started": "Iniciado",
+      "remainingDhm": "{days}d {hours}h {minutes}m",
+      "remainingHm": "{hours}h {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Exportar os meus materiais",
+    "description": "Envie uma cópia dos seus documentos, notas, intervenções e votos guardados para o e-mail da sua conta. Útil no fim do dia (ou a qualquer momento).",
+    "whatToInclude": "O que incluir",
+    "preparing": "A preparar a exportação…",
+    "submit": "Enviar-me a exportação por e-mail"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Construtor de resoluções",
+    "emptyDescription": "Ainda não há projetos de resolução para este comité. Quando a mesa criar um, pode sugerir cláusulas preambulares e operativas aqui.",
+    "introDescription": "Escolha um projeto, estilo preambular ou operativo, use uma frase de abertura predefinida (opcional) e escreva a sua cláusula. As sugestões são visíveis para o comité; a mesa pode integrá-las na lista oficial ou no Google Doc.",
+    "draftResolution": "Projeto de resolução",
+    "draftResolutionNumber": "Projeto de resolução {number}",
+    "googleDocLinkedTag": " · Google Doc ligado",
+    "section": "Secção",
+    "sectionPreambulatory": "Preambular",
+    "sectionOperative": "Operativa",
+    "openingPresets": "Frases de abertura",
+    "openingPhraseLabel": "Frase de abertura (edite ou escreva a sua)",
+    "openingPlaceholderPreambulatory": "ex. deeply concerned",
+    "openingPlaceholderOperative": "ex. calls upon",
+    "clauseText": "Texto da cláusula",
+    "clausePlaceholder": "…resto da cláusula (factos, acções, pormenores). Vírgulas após a abertura são adicionadas ao guardar.",
+    "preview": "Pré-visualização",
+    "previewDash": "—",
+    "submitting": "A enviar…",
+    "submitClause": "Enviar sugestão de cláusula",
+    "suggestionsHeading": "Sugestões para esta resolução",
+    "refresh": "Atualizar",
+    "loading": "A carregar…",
+    "noSuggestionsYet": "Ainda não há sugestões.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operativa",
+    "badgeYours": "Sua",
+    "delete": "Eliminar",
+    "errSelectResolution": "Seleccione uma resolução e inicie sessão.",
+    "errEmptyBody": "Adicione texto da cláusula após a abertura (ou escreva a cláusula completa no corpo).",
+    "okSubmitted": "Sugestão enviada. A mesa pode rever e adicionar ao projecto."
   },
   "committeeGate": {
     "title": "Login do comitê",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Tempo total",
       "euPoiPocTime": "Hora do POI/POC",
       "euSpeakerTime": "Hora do palestrante"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Lista de verificação de configuração de administrador",
+      "subtitle": "Configuração ao nível do site e aprovisionamento de pessoal.",
+      "step1Label": "Criar evento + primeiro comité",
+      "step1Detail": "Gerar portões de conferência e comité.",
+      "step2Label": "Convidar ou promover contas SMT",
+      "step2Detail": "Conceder acesso de secretariado antes das operações do comité.",
+      "step3Label": "Verificar fluxo do portal de estado",
+      "step3Detail": "Monitorizar fluxo de delegados pendentes → confirmados.",
+      "step4Label": "Entregar ao painel SMT",
+      "step4Detail": "As operações ao vivo do comité continuam nas ferramentas SMT."
+    },
+    "smt": {
+      "title": "Lista de verificação de configuração SMT",
+      "subtitle": "Controlos a nível de conferência antes de entrarem presidentes e delegados.",
+      "step1Label": "Confirmar evento + sessões de comité",
+      "step1Detail": "Validar nomes, etiquetas, nomes dos presidentes e ligações de crise.",
+      "step2Label": "Definir códigos de sala + acesso de presidência",
+      "step2Detail": "Garantir que cada comité tem os códigos de portão corretos.",
+      "step3Label": "Preparar atribuições + documentos de início de sessão",
+      "step3Detail": "Importar lugares, depois definir palavras-passe/códigos.",
+      "step4Label": "Publicar documentos globais (RoP / critérios)",
+      "step4Detail": "Carregar referências comuns para todos os utilizadores."
+    },
+    "chair": {
+      "title": "Lista de verificação de configuração de presidência",
+      "subtitle": "Preparação da sala e controlos de sessão para o seu comité.",
+      "step1Label": "Verificar matriz de delegados + aprovações",
+      "step1Detail": "Confirmar atribuições e revisões de inscrição pendentes.",
+      "step2Label": "Executar aprovações de chamada nominal",
+      "step2Detail": "Marcar delegados presentes antes da participação no chão.",
+      "step3Label": "Definir temporizador + fluxo de oradores",
+      "step3Detail": "Guardar predefinições de sessão antes de abrir moções.",
+      "step4Label": "Abrir operações de sala digital",
+      "step4Detail": "Coordenar oradores, notas e visibilidade da sessão."
+    },
+    "delegate": {
+      "title": "Lista de verificação de configuração de delegado",
+      "subtitle": "Prepare-se rapidamente para participar no comité.",
+      "step1Label": "Concluir o básico do perfil",
+      "step1Detail": "Verifique o nome, atribuição e dados da conta.",
+      "step2Label": "Ler RoP + critérios de prémios",
+      "step2Detail": "Abrir documentos partilhados carregados pelo SMT.",
+      "step3Label": "Criar o seu documento de preparação",
+      "step3Detail": "Carregar/editar notas de preparação diretamente na app.",
+      "step4Label": "Entrar na sala do comité + chamada nominal",
+      "step4Detail": "Aguarde a aprovação de presença do presidente e depois fale."
     }
   }
 }

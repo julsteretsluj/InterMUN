@@ -841,7 +841,61 @@
         "label": "Krisis / laporan",
         "hint": "Bangkitkan satu isu"
       }
+    },
+    "countdownCard": {
+      "title": "Kira detik persidangan & kertas kedudukan",
+      "description": "Dikongsi untuk jawatankuasa ini — semua yang ada tempat duduk melihat tarikh yang sama (mana-mana delegasi boleh kemas kini).",
+      "loading": "Memuatkan…",
+      "conferenceStart": "Mula persidangan",
+      "paperDeadline": "Tarikh akhir kertas kedudukan",
+      "untilConference": "Sehingga persidangan",
+      "untilPaperDeadline": "Sehingga tarikh akhir kertas",
+      "notSet": "belum ditetapkan",
+      "past": "Lepas",
+      "started": "Bermula",
+      "remainingDhm": "{days}h {hours}j {minutes}m",
+      "remainingHm": "{hours}j {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Eksport bahan saya",
+    "description": "Hantar salinan dokumen, nota, ucapan dan undi tersimpan anda ke e-mel akaun. Berguna pada penghari hari (atau bila-bila masa).",
+    "whatToInclude": "Apa yang disertakan",
+    "preparing": "Menyediakan eksport…",
+    "submit": "E-melkan eksport kepada saya"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Pembina resolusi",
+    "emptyDescription": "Belum ada draf resolusi untuk jawatankuasa ini. Apabila meja mencipta satu, anda boleh mencadangkan klausa preambul dan operatif di sini.",
+    "introDescription": "Pilih draf, gaya preambul atau operatif, gunakan frasa pembuka pratetap (pilihan) dan tulis klausa anda. Cadangan kelihatan kepada jawatankuasa; meja boleh menggabungkannya ke senarai rasmi atau Google Doc.",
+    "draftResolution": "Draf resolusi",
+    "draftResolutionNumber": "Draf resolusi {number}",
+    "googleDocLinkedTag": " · Google Doc dipautkan",
+    "section": "Bahagian",
+    "sectionPreambulatory": "Preambul",
+    "sectionOperative": "Operatif",
+    "openingPresets": "Pratetap frasa pembuka",
+    "openingPhraseLabel": "Frasa pembuka (edit atau taip sendiri)",
+    "openingPlaceholderPreambulatory": "cth. deeply concerned",
+    "openingPlaceholderOperative": "cth. calls upon",
+    "clauseText": "Teks klausa",
+    "clausePlaceholder": "…baki klausa (fakta, tindakan, perincian). Koma selepas pembuka ditambah semasa simpan.",
+    "preview": "Pratonton",
+    "previewDash": "—",
+    "submitting": "Menghantar…",
+    "submitClause": "Hantar cadangan klausa",
+    "suggestionsHeading": "Cadangan untuk resolusi ini",
+    "refresh": "Muat semula",
+    "loading": "Memuatkan…",
+    "noSuggestionsYet": "Belum ada cadangan.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operatif",
+    "badgeYours": "Anda",
+    "delete": "Padam",
+    "errSelectResolution": "Pilih resolusi dan log masuk.",
+    "errEmptyBody": "Tambah teks klausa selepas pembuka (atau taip klausa penuh dalam medan badan).",
+    "okSubmitted": "Cadangan dihantar. Meja boleh menyemak dan menambah ke draf."
   },
   "committeeGate": {
     "title": "Daftar masuk jawatankuasa",
@@ -2936,6 +2990,56 @@
       "pausedForCommittee": "Pemasa berhenti seketika untuk jawatankuasa.",
       "alreadyRunning": "Pemasa sudah berjalan.",
       "runningForCommittee": "Pemasa berjalan untuk jawatankuasa."
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Senarai semak penyediaan pentadbir",
+      "subtitle": "Penyediaan peringkat laman web dan peruntukan kakitangan.",
+      "step1Label": "Cipta acara + jawatankuasa pertama",
+      "step1Detail": "Jana pintu persidangan dan jawatankuasa.",
+      "step2Label": "Jemput atau naik taraf akaun SMT",
+      "step2Detail": "Berikan akses sekretariat sebelum operasi jawatankuasa.",
+      "step3Label": "Sahkan saluran portal status",
+      "step3Detail": "Pantau aliran delegasi menunggu → disahkan.",
+      "step4Label": "Serahkan ke papan pemuka SMT",
+      "step4Detail": "Operasi jawatankuasa langsung diteruskan dalam alat SMT."
+    },
+    "smt": {
+      "title": "Senarai semak penyediaan SMT",
+      "subtitle": "Kawalan peringkat persidangan sebelum pengerusi dan delegasi masuk.",
+      "step1Label": "Sahkan acara + sesi jawatankuasa",
+      "step1Detail": "Sahkan nama, teg, nama pengerusi dan pautan krisis.",
+      "step2Label": "Tetapkan kod bilik + akses pengerusi",
+      "step2Detail": "Pastikan setiap jawatankuasa mempunyai kod pintu yang betul.",
+      "step3Label": "Sediakan peruntukan + dokumen log masuk",
+      "step3Detail": "Import tempat duduk, kemudian tetapkan kata laluan/kod.",
+      "step4Label": "Terbitkan dokumen global (RoP / kriteria)",
+      "step4Detail": "Muat naik rujukan bersama untuk semua pengguna."
+    },
+    "chair": {
+      "title": "Senarai semak penyediaan pengerusi",
+      "subtitle": "Kesiapan bilik dan kawalan sesi untuk jawatankuasa anda.",
+      "step1Label": "Semak matriks delegasi + kelulusan",
+      "step1Detail": "Sahkan penugasan dan semakan pendaftaran tertunda.",
+      "step2Label": "Jalankan kelulusan panggilan kehadiran",
+      "step2Detail": "Tandakan delegasi hadir sebelum penyertaan di lantai.",
+      "step3Label": "Tetapkan pemasa + aliran penceramah",
+      "step3Detail": "Simpan pratetap lantai sebelum membuka usul.",
+      "step4Label": "Buka operasi bilik digital",
+      "step4Detail": "Selaraskan penceramah, nota dan keterlihatan sesi."
+    },
+    "delegate": {
+      "title": "Senarai semak penyediaan delegasi",
+      "subtitle": "Bersedia dengan cepat untuk menyertai jawatankuasa.",
+      "step1Label": "Lengkapkan asas profil",
+      "step1Detail": "Sahkan nama, peruntukan dan butiran akaun.",
+      "step2Label": "Baca RoP + kriteria anugerah",
+      "step2Detail": "Buka dokumen bersama yang dimuat naik SMT.",
+      "step3Label": "Cipta dokumen persediaan anda",
+      "step3Detail": "Muat naik/sunting nota persediaan terus dalam aplikasi.",
+      "step4Label": "Sertai bilik jawatankuasa + panggilan kehadiran",
+      "step4Detail": "Tunggu kelulusan hadir daripada pengerusi, kemudian bercakap."
     }
   }
 }

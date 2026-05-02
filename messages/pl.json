@@ -841,7 +841,61 @@
         "label": "Kryzys / raport",
         "hint": "Podnieś problem"
       }
+    },
+    "countdownCard": {
+      "title": "Odliczanie do konferencji i position paper",
+      "description": "Wspólne dla tej komisji — wszyscy z miejscem widzą te same daty (każdy delegat może zaktualizować).",
+      "loading": "Ładowanie…",
+      "conferenceStart": "Początek konferencji",
+      "paperDeadline": "Termin position paper",
+      "untilConference": "Do konferencji",
+      "untilPaperDeadline": "Do terminu pracy",
+      "notSet": "nie ustawiono",
+      "past": "Minęło",
+      "started": "Rozpoczęto",
+      "remainingDhm": "{days}d {hours}g {minutes}m",
+      "remainingHm": "{hours}g {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Eksportuj moje materiały",
+    "description": "Wyślij kopię zapisanych dokumentów, notatek, wystąpień i głosów na e-mail konta. Przydatne pod koniec dnia (lub w dowolnym momencie).",
+    "whatToInclude": "Co uwzględnić",
+    "preparing": "Przygotowywanie eksportu…",
+    "submit": "Wyślij eksport na mój e-mail"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Kreator rezolucji",
+    "emptyDescription": "Nie ma jeszcze projektów rezolucji dla tej komisji. Gdy biuro utworzy projekt, możesz tu proponować klauzule preambułowe i operatywne.",
+    "introDescription": "Wybierz projekt, styl preambułowy lub operatywny, użyj gotowego rozpoczęcia (opcjonalnie) i napisz klauzulę. Propozycje są widoczne dla komisji; biuro może włączyć je do oficjalnej listy lub Google Doc.",
+    "draftResolution": "Projekt rezolucji",
+    "draftResolutionNumber": "Projekt rezolucji {number}",
+    "googleDocLinkedTag": " · Połączono Google Doc",
+    "section": "Sekcja",
+    "sectionPreambulatory": "Preambułowa",
+    "sectionOperative": "Operatywna",
+    "openingPresets": "Szablony rozpoczęć",
+    "openingPhraseLabel": "Fraza otwierająca (edytuj lub wpisz własną)",
+    "openingPlaceholderPreambulatory": "np. deeply concerned",
+    "openingPlaceholderOperative": "np. calls upon",
+    "clauseText": "Tekst klauzuli",
+    "clausePlaceholder": "…reszta klauzuli (fakty, działania, szczegóły). Przy zapisie dodawane są przecinki po otwarciu.",
+    "preview": "Podgląd",
+    "previewDash": "—",
+    "submitting": "Wysyłanie…",
+    "submitClause": "Wyślij propozycję klauzuli",
+    "suggestionsHeading": "Propozycje dla tej rezolucji",
+    "refresh": "Odśwież",
+    "loading": "Ładowanie…",
+    "noSuggestionsYet": "Brak propozycji.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operat.",
+    "badgeYours": "Twoje",
+    "delete": "Usuń",
+    "errSelectResolution": "Wybierz rezolucję i zaloguj się.",
+    "errEmptyBody": "Dodaj tekst klauzuli po otwarciu (lub wpisz całą klauzulę w polu treści).",
+    "okSubmitted": "Propozycja wysłana. Biuro może ją przejrzeć i dodać do projektu."
   },
   "committeeGate": {
     "title": "Rejestracja komisji",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Całkowity czas",
       "euPoiPocTime": "Czas POI/POC",
       "euSpeakerTime": "Czas na mówcę"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Lista kontrolna konfiguracji administratora",
+      "subtitle": "Konfiguracja poziomu witryny i obsługa personelu.",
+      "step1Label": "Utwórz wydarzenie + pierwszy komitet",
+      "step1Detail": "Wygeneruj bramy konferencji i komitetu.",
+      "step2Label": "Zaproś lub awansuj konta SMT",
+      "step2Detail": "Przyznaj dostęp sekretariatu przed operacjami komitetu.",
+      "step3Label": "Zweryfikuj potok portalu statusu",
+      "step3Detail": "Monitoruj przepływ delegatów oczekujących → potwierdzonych.",
+      "step4Label": "Przekaż panelowi SMT",
+      "step4Detail": "Operacje komitetu na żywo trwają w narzędziach SMT."
+    },
+    "smt": {
+      "title": "Lista kontrolna konfiguracji SMT",
+      "subtitle": "Kontrola na poziomie konferencji przed wejściem przewodniczących i delegatów.",
+      "step1Label": "Potwierdź wydarzenie + sesje komitetu",
+      "step1Detail": "Zweryfikuj nazwy, tagi, nazwiska przewodniczących i linki kryzysowe.",
+      "step2Label": "Ustaw kody sal + dostęp przewodniczącego",
+      "step2Detail": "Upewnij się, że każdy komitet ma poprawne kody bramki.",
+      "step3Label": "Przygotuj przydziały + dokumenty logowania",
+      "step3Detail": "Importuj miejsca, potem ustaw hasła/kody.",
+      "step4Label": "Opublikuj dokumenty globalne (RoP / kryteria)",
+      "step4Detail": "Prześlij wspólne materiały dla wszystkich użytkowników."
+    },
+    "chair": {
+      "title": "Lista kontrolna konfiguracji przewodniczącego",
+      "subtitle": "Gotowość sali i prowadzenie obrad dla Twojego komitetu.",
+      "step1Label": "Sprawdź macierz delegatów + zatwierdzenia",
+      "step1Detail": "Potwierdź przydziały i oczekujące przeglądy zapisów.",
+      "step2Label": "Przeprowadź zatwierdzenia listy obecności",
+      "step2Detail": "Oznacz delegatów jako obecnych przed udziałem w obradach.",
+      "step3Label": "Ustaw timer + kolejność mówców",
+      "step3Detail": "Zapisz ustawienia sali przed otwarciem wniosków.",
+      "step4Label": "Otwórz operacje sali cyfrowej",
+      "step4Detail": "Koordynuj mówców, notatki i widoczność sesji."
+    },
+    "delegate": {
+      "title": "Lista kontrolna konfiguracji delegata",
+      "subtitle": "Szybko przygotuj się do udziału w komitecie.",
+      "step1Label": "Uzupełnij podstawy profilu",
+      "step1Detail": "Zweryfikuj imię, przydział i dane konta.",
+      "step2Label": "Przeczytaj RoP + kryteria nagród",
+      "step2Detail": "Otwórz udostępnione dokumenty przesłane przez SMT.",
+      "step3Label": "Utwórz dokument przygotowawczy",
+      "step3Detail": "Prześlij/edytuj notatki przygotowawcze w aplikacji.",
+      "step4Label": "Dołącz do sali komitetu + listy obecności",
+      "step4Detail": "Poczekaj na zatwierdzenie obecności przez przewodniczącego, potem mów."
     }
   }
 }

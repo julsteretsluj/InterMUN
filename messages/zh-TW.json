@@ -841,7 +841,61 @@
         "label": "危機/報告",
         "hint": "提出問題"
       }
+    },
+    "countdownCard": {
+      "title": "會議與立場檔倒數",
+      "description": "本委員會共用 — 有席位者看到相同日期（任何代表皆可更新）。",
+      "loading": "載入中…",
+      "conferenceStart": "會議開始",
+      "paperDeadline": "立場檔截止",
+      "untilConference": "距會議",
+      "untilPaperDeadline": "距檔案截止",
+      "notSet": "未設定",
+      "past": "已過",
+      "started": "已開始",
+      "remainingDhm": "{days}天{hours}小時{minutes}分",
+      "remainingHm": "{hours}小時{minutes}分",
+      "remainingM": "{minutes}分"
     }
+  },
+  "materialsExportCard": {
+    "title": "匯出我的資料",
+    "description": "將您儲存的文件、筆記、發言與表決副本寄到帳戶電子郵件。適合在一天結束時（或隨時）使用。",
+    "whatToInclude": "包含內容",
+    "preparing": "正在準備匯出…",
+    "submit": "將匯出寄到我的電子郵件"
+  },
+  "delegateResolutionBuilder": {
+    "title": "決議草案建構",
+    "emptyDescription": "此委員會尚無決議草案。主席團建立草案後，您可在此建議序言性條款與執行性條款。",
+    "introDescription": "選擇草案、序言或執行風格，使用（選用）開頭套語，並撰寫條款。建議對委員會可見；主席團可併入正式條款清單或 Google 文件。",
+    "draftResolution": "決議草案",
+    "draftResolutionNumber": "決議草案 {number}",
+    "googleDocLinkedTag": " · 已連結 Google 文件",
+    "section": "區段",
+    "sectionPreambulatory": "序言",
+    "sectionOperative": "執行",
+    "openingPresets": "開頭套語",
+    "openingPhraseLabel": "開頭用語（可編輯或自行輸入）",
+    "openingPlaceholderPreambulatory": "例如 Deeply concerned",
+    "openingPlaceholderOperative": "例如 Calls upon",
+    "clauseText": "條款正文",
+    "clausePlaceholder": "…條款其餘部分（事實、行動、細節）。儲存時會在開頭後自動加入逗號。",
+    "preview": "預覽",
+    "previewDash": "—",
+    "submitting": "提交中…",
+    "submitClause": "提交條款建議",
+    "suggestionsHeading": "本決議的建議",
+    "refresh": "重新整理",
+    "loading": "載入中…",
+    "noSuggestionsYet": "尚無建議。",
+    "badgePreamb": "序言",
+    "badgeOperative": "執行",
+    "badgeYours": "您的",
+    "delete": "刪除",
+    "errSelectResolution": "請選擇決議並登入。",
+    "errEmptyBody": "請在開頭後加入條款正文（或在正文欄位輸入完整條款）。",
+    "okSubmitted": "建議已提交。主席團可審閱並加入草案。"
   },
   "committeeGate": {
     "title": "籌備委員會簽到",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "總時間",
       "euPoiPocTime": "POI/POC 時間",
       "euSpeakerTime": "發言時間"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "管理員設定檢查清單",
+      "subtitle": "網站層級設定與人員配置。",
+      "step1Label": "建立活動 + 首個委員會",
+      "step1Detail": "產生會議與委員會門禁。",
+      "step2Label": "邀請或晉升 SMT 帳戶",
+      "step2Detail": "在委員會運作前授予秘書處存取權。",
+      "step3Label": "驗證狀態入口網站流程",
+      "step3Detail": "監控代表流程：待處理 → 已確認。",
+      "step4Label": "移交 SMT 儀表板",
+      "step4Detail": "現場委員會運作在 SMT 工具中持續。"
+    },
+    "smt": {
+      "title": "SMT 設定檢查清單",
+      "subtitle": "主席與代表進入前的會議級管控。",
+      "step1Label": "確認活動 + 委員會場次",
+      "step1Detail": "驗證名稱、標籤、主席姓名與危機連結。",
+      "step2Label": "設定房間碼 + 主席存取",
+      "step2Detail": "確保每個委員會具備正確的門禁碼。",
+      "step3Label": "準備席次分配 + 登入文件",
+      "step3Detail": "匯入席次，然後設定密碼/代碼。",
+      "step4Label": "發布全域文件（RoP / 標準）",
+      "step4Detail": "上傳供所有使用者參考的共用資料。"
+    },
+    "chair": {
+      "title": "主席設定檢查清單",
+      "subtitle": "您委員會的會場與議程控制準備。",
+      "step1Label": "檢查代表矩陣 + 核准",
+      "step1Detail": "確認分配與待審核報名。",
+      "step2Label": "進行點名核准",
+      "step2Detail": "在會場參與前將代表標為出席。",
+      "step3Label": "設定計時器 + 發言流程",
+      "step3Detail": "在開啟動議前儲存會場預設。",
+      "step4Label": "開啟數位會場運作",
+      "step4Detail": "協調發言人、筆記與會場可見性。"
+    },
+    "delegate": {
+      "title": "代表設定檢查清單",
+      "subtitle": "快速準備參與委員會。",
+      "step1Label": "完成基本資料",
+      "step1Detail": "核對姓名、席次分配與帳戶資訊。",
+      "step2Label": "閱讀 RoP + 獎項標準",
+      "step2Detail": "開啟 SMT 上傳的共用文件。",
+      "step3Label": "建立準備文件",
+      "step3Detail": "在應用程式內直接上傳/編輯準備筆記。",
+      "step4Label": "進入委員會房間 + 點名",
+      "step4Detail": "等待主席核准出席狀態後再發言。"
     }
   }
 }

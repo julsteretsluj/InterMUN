@@ -1,83 +1,54 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type RoleKey = "admin" | "smt" | "chair" | "delegate";
 
-type Step = {
-  label: string;
-  href: string;
-  detail: string;
+const HREFS: Record<RoleKey, string[]> = {
+  admin: [
+    "/conference-setup?next=%2Fadmin",
+    "/admin",
+    "/admin",
+    "/smt",
+  ],
+  smt: ["/smt/conference", "/smt/room-codes", "/smt/allocation-matrix", "/documents"],
+  chair: [
+    "/chair/allocation-matrix",
+    "/chair/session/roll-call",
+    "/chair/session/timer",
+    "/chair/digital-room",
+  ],
+  delegate: ["/profile", "/documents", "/documents", "/committee-room"],
 };
 
-function stepsForRole(role: RoleKey): { title: string; subtitle: string; steps: Step[] } {
-  if (role === "admin") {
-    return {
-      title: "Admin setup checklist",
-      subtitle: "Website-level setup and staff provisioning.",
-      steps: [
-        { label: "Create event + first committee", href: "/conference-setup?next=%2Fadmin", detail: "Generate conference + committee gates." },
-        { label: "Invite or promote SMT accounts", href: "/admin", detail: "Grant secretariat access before committee operations." },
-        { label: "Verify status portal pipeline", href: "/admin", detail: "Monitor pending -> confirmed delegate flow." },
-        { label: "Hand off to SMT dashboard", href: "/smt", detail: "Live committee operations continue in SMT tools." },
-      ],
-    };
-  }
-  if (role === "smt") {
-    return {
-      title: "SMT setup checklist",
-      subtitle: "Conference-wide controls before chairs and delegates enter.",
-      steps: [
-        { label: "Confirm event + committee sessions", href: "/smt/conference", detail: "Validate names, tags, chair names, and crisis links." },
-        { label: "Set room codes + chair access", href: "/smt/room-codes", detail: "Ensure each committee has correct gate codes." },
-        { label: "Prepare allocations + sign-in docs", href: "/smt/allocation-matrix", detail: "Import seats, then set passwords/codes." },
-        { label: "Publish global docs (RoP / criteria)", href: "/documents", detail: "Upload common references for all users." },
-      ],
-    };
-  }
-  if (role === "chair") {
-    return {
-      title: "Chair setup checklist",
-      subtitle: "Room-readiness and floor controls for your committee.",
-      steps: [
-        { label: "Check delegate matrix + approvals", href: "/chair/allocation-matrix", detail: "Confirm assignments and pending sign-up reviews." },
-        { label: "Run roll call approvals", href: "/chair/session/roll-call", detail: "Mark delegates present before floor participation." },
-        { label: "Set timer + speaker flow", href: "/chair/session/timer", detail: "Save floor presets before opening motions." },
-        { label: "Open digital room operations", href: "/chair/digital-room", detail: "Coordinate speakers, notes, and session visibility." },
-      ],
-    };
-  }
-  return {
-    title: "Delegate setup checklist",
-    subtitle: "Get ready to participate in committee quickly.",
-    steps: [
-      { label: "Complete profile basics", href: "/profile", detail: "Verify your name, allocation, and account details." },
-      { label: "Read RoP + award criteria", href: "/documents", detail: "Open shared docs uploaded by SMT." },
-      { label: "Create your prep document", href: "/documents", detail: "Upload/edit prep notes directly in-app." },
-      { label: "Join committee room + roll call", href: "/committee-room", detail: "Wait for chair present-status approval, then speak." },
-    ],
-  };
-}
+const STEP_LABEL_KEYS = ["step1Label", "step2Label", "step3Label", "step4Label"] as const;
+const STEP_DETAIL_KEYS = ["step1Detail", "step2Detail", "step3Detail", "step4Detail"] as const;
 
 export function RoleSetupChecklist({ role }: { role: RoleKey }) {
-  const cfg = stepsForRole(role);
+  const t = useTranslations(`roleSetupChecklist.${role}`);
+  const hrefs = HREFS[role];
 
   return (
     <section className="rounded-xl border border-brand-navy/10 bg-brand-paper p-4 md:p-5">
-      <h2 className="font-display text-lg font-semibold text-brand-navy">{cfg.title}</h2>
-      <p className="mt-1 text-sm text-brand-muted">{cfg.subtitle}</p>
+      <h2 className="font-display text-lg font-semibold text-brand-navy">{t("title")}</h2>
+      <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
       <ol className="mt-4 space-y-2">
-        {cfg.steps.map((step, i) => (
-          <li key={`${step.href}-${step.label}`} className="rounded-lg border border-brand-navy/10 bg-black/10 px-3 py-2">
+        {hrefs.map((href, i) => (
+          <li
+            key={`${role}-${href}-${STEP_LABEL_KEYS[i]}`}
+            className="rounded-lg border border-brand-navy/10 bg-black/10 px-3 py-2"
+          >
             <p className="text-sm font-medium text-brand-navy">
               {i + 1}.{" "}
-              <Link href={step.href} className="text-brand-accent hover:underline">
-                {step.label}
+              <Link href={href} className="text-brand-accent hover:underline">
+                {t(STEP_LABEL_KEYS[i])}
               </Link>
             </p>
-            <p className="mt-0.5 text-xs text-brand-muted">{step.detail}</p>
+            <p className="mt-0.5 text-xs text-brand-muted">{t(STEP_DETAIL_KEYS[i])}</p>
           </li>
         ))}
       </ol>
     </section>
   );
 }
-

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import {
   PREAMBULATORY_OPENING_PRESETS,
@@ -27,6 +28,7 @@ type SuggestionRow = {
 };
 
 export function DelegateResolutionBuilder({ resolutions }: { resolutions: ResolutionPick[] }) {
+  const t = useTranslations("delegateResolutionBuilder");
   const router = useRouter();
   const supabase = createClient();
   const [userId, setUserId] = useState<string | null>(null);
@@ -89,11 +91,11 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
     setMsg(null);
     const b = body.trim();
     if (!selectedResolution || !userId) {
-      setMsg({ kind: "err", text: "Select a resolution and sign in." });
+      setMsg({ kind: "err", text: t("errSelectResolution") });
       return;
     }
     if (!b) {
-      setMsg({ kind: "err", text: "Add clause text after the opening (or type a full clause in the body field)." });
+      setMsg({ kind: "err", text: t("errEmptyBody") });
       return;
     }
     setSubmitting(true);
@@ -110,7 +112,7 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
       setMsg({ kind: "err", text: error.message });
       return;
     }
-    setMsg({ kind: "ok", text: "Suggestion submitted. The dais can review and add it to the draft." });
+    setMsg({ kind: "ok", text: t("okSubmitted") });
     setBody("");
     await loadSuggestions();
     router.refresh();
@@ -131,12 +133,9 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
     return (
       <section className="mun-card space-y-2 border-white/10">
         <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
-          Resolution builder
+          {t("title")}
         </h2>
-        <p className="text-sm text-brand-muted">
-          There are no draft resolutions for this committee yet. When the dais creates one, you can suggest
-          preambulatory and operative clauses here.
-        </p>
+        <p className="text-sm text-brand-muted">{t("emptyDescription")}</p>
       </section>
     );
   }
@@ -145,18 +144,14 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
     <section className="mun-card space-y-4 border-white/10">
       <div>
         <h2 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
-          Resolution builder
+          {t("title")}
         </h2>
-        <p className="mt-1 text-xs text-brand-muted leading-relaxed">
-          Choose a draft resolution, pick preambulatory or operative style, use an opening preset (optional),
-          and write your clause. Suggestions are visible to the committee; the dais may merge them into the
-          official clause list or Google Doc.
-        </p>
+        <p className="mt-1 text-xs text-brand-muted leading-relaxed">{t("introDescription")}</p>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block space-y-1">
-          <span className="mun-label normal-case">Draft resolution</span>
+          <span className="mun-label normal-case">{t("draftResolution")}</span>
           <select
             className="mun-field"
             value={selectedResolutionId}
@@ -164,27 +159,27 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
           >
             {resolutions.map((r, i) => (
               <option key={r.id} value={r.id}>
-                Draft resolution {i + 1}
-                {r.google_docs_url ? " · Google Doc linked" : ""}
+                {t("draftResolutionNumber", { number: i + 1 })}
+                {r.google_docs_url ? t("googleDocLinkedTag") : ""}
               </option>
             ))}
           </select>
         </label>
         <label className="block space-y-1">
-          <span className="mun-label normal-case">Section</span>
+          <span className="mun-label normal-case">{t("section")}</span>
           <select
             className="mun-field"
             value={section}
             onChange={(e) => setSection(e.target.value as ClauseSection)}
           >
-            <option value="preambulatory">Preambulatory</option>
-            <option value="operative">Operative</option>
+            <option value="preambulatory">{t("sectionPreambulatory")}</option>
+            <option value="operative">{t("sectionOperative")}</option>
           </select>
         </label>
       </div>
 
       <div className="space-y-2">
-        <span className="mun-label normal-case block">Opening presets</span>
+        <span className="mun-label normal-case block">{t("openingPresets")}</span>
         <div className="max-h-32 overflow-y-auto rounded-lg border border-white/10 bg-black/20 p-2 dark:bg-white/5">
           <div className="flex flex-wrap gap-1.5">
             {presets.map((p) => (
@@ -204,12 +199,16 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
           </div>
         </div>
         <label className="block space-y-1">
-          <span className="text-xs text-brand-muted">Opening phrase (edit or type your own)</span>
+          <span className="text-xs text-brand-muted">{t("openingPhraseLabel")}</span>
           <input
             className="mun-field"
             value={opening}
             onChange={(e) => setOpening(e.target.value)}
-            placeholder={section === "preambulatory" ? "e.g. Deeply concerned" : "e.g. Calls upon"}
+            placeholder={
+              section === "preambulatory"
+                ? t("openingPlaceholderPreambulatory")
+                : t("openingPlaceholderOperative")
+            }
           />
         </label>
       </div>
@@ -225,8 +224,8 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
       </label>
 
       <div className="rounded-lg border border-brand-navy/10 bg-brand-paper/50 px-3 py-2 dark:border-white/10 dark:bg-white/5">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">Preview</p>
-        <p className="mt-1 text-sm text-brand-navy dark:text-zinc-200">{preview || "—"}</p>
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">{t("preview")}</p>
+        <p className="mt-1 text-sm text-brand-navy dark:text-zinc-200">{preview || t("previewDash")}</p>
       </div>
 
       {msg ? (
@@ -248,13 +247,13 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
         onClick={() => void submitSuggestion()}
         className="mun-btn-primary disabled:opacity-50"
       >
-        {submitting ? "Submitting…" : "Submit clause suggestion"}
+        {submitting ? t("submitting") : t("submitClause")}
       </button>
 
       <div className="border-t border-white/10 pt-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="text-sm font-semibold text-brand-navy dark:text-zinc-100">
-            Suggestions for this resolution
+            {t("suggestionsHeading")}
           </h3>
           <button
             type="button"
@@ -262,13 +261,13 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
             className="text-xs text-brand-diplomatic hover:underline"
             disabled={loadingList}
           >
-            Refresh
+            {t("refresh")}
           </button>
         </div>
         {loadingList ? (
-          <p className="mt-2 text-xs text-brand-muted">Loading…</p>
+          <p className="mt-2 text-xs text-brand-muted">{t("loading")}</p>
         ) : suggestions.length === 0 ? (
-          <p className="mt-2 text-xs text-brand-muted">No suggestions yet.</p>
+          <p className="mt-2 text-xs text-brand-muted">{t("noSuggestionsYet")}</p>
         ) : (
           <ul className="mt-3 space-y-2">
             {suggestions.map((s) => {
@@ -287,12 +286,12 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
                           : "rounded bg-emerald-500/15 px-1.5 py-0.5 text-emerald-900 dark:text-emerald-200"
                       }
                     >
-                      {s.section === "preambulatory" ? "Preamb." : "Operative"}
+                      {s.section === "preambulatory" ? t("badgePreamb") : t("badgeOperative")}
                     </span>
                     <span>{new Date(s.created_at).toLocaleString()}</span>
                     {mine ? (
                       <span className="rounded bg-brand-accent/20 px-1.5 py-0.5 text-brand-navy dark:text-zinc-200">
-                        Yours
+                        {t("badgeYours")}
                       </span>
                     ) : null}
                   </div>
@@ -303,7 +302,7 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
                       onClick={() => void removeSuggestion(s.id)}
                       className="mt-2 text-xs text-red-700 hover:underline dark:text-red-300"
                     >
-                      Delete
+                      {t("delete")}
                     </button>
                   ) : null}
                 </li>

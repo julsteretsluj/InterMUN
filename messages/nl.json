@@ -841,7 +841,61 @@
         "label": "Crisis / rapport",
         "hint": "Breng een probleem aan de orde"
       }
+    },
+    "countdownCard": {
+      "title": "Aftellen conferentie & position paper",
+      "description": "Gedeeld voor dit comité — iedereen met een stoel ziet dezelfde data (elke gedelegeerde kan bijwerken).",
+      "loading": "Laden…",
+      "conferenceStart": "Start conferentie",
+      "paperDeadline": "Deadline position paper",
+      "untilConference": "Tot de conferentie",
+      "untilPaperDeadline": "Tot de paperdeadline",
+      "notSet": "niet ingesteld",
+      "past": "Voorbij",
+      "started": "Gestart",
+      "remainingDhm": "{days}d {hours}u {minutes}m",
+      "remainingHm": "{hours}u {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Mijn materialen exporteren",
+    "description": "Stuur een kopie van uw opgeslagen documenten, notities, toespraken en stemmen naar het e-mailadres van uw account. Handig aan het eind van de dag (of op elk moment).",
+    "whatToInclude": "Wat opnemen",
+    "preparing": "Export wordt voorbereid…",
+    "submit": "Export naar mijn e-mail sturen"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Resolutiebouwer",
+    "emptyDescription": "Er zijn nog geen conceptresoluties voor deze commissie. Wanneer het bureau er een aanmaakt, kunt u hier preambulaire en operatieve clausules voorstellen.",
+    "introDescription": "Kies een concept, preambulair of operatief, gebruik een openingspreset (optioneel) en schrijf uw clausule. Suggesties zijn zichtbaar voor de commissie; het bureau kan ze opnemen in de officiële lijst of Google Doc.",
+    "draftResolution": "Conceptresolutie",
+    "draftResolutionNumber": "Conceptresolutie {number}",
+    "googleDocLinkedTag": " · Google Doc gekoppeld",
+    "section": "Onderdeel",
+    "sectionPreambulatory": "Preambulair",
+    "sectionOperative": "Operatief",
+    "openingPresets": "Openingspresets",
+    "openingPhraseLabel": "Openingszin (bewerken of eigen tekst)",
+    "openingPlaceholderPreambulatory": "bijv. deeply concerned",
+    "openingPlaceholderOperative": "bijv. calls upon",
+    "clauseText": "Clausuletekst",
+    "clausePlaceholder": "…rest van de clausule (feiten, acties, details). Komma’s na de opening worden bij opslaan toegevoegd.",
+    "preview": "Voorbeeld",
+    "previewDash": "—",
+    "submitting": "Verzenden…",
+    "submitClause": "Clausulesuggestie verzenden",
+    "suggestionsHeading": "Suggesties voor deze resolutie",
+    "refresh": "Vernieuwen",
+    "loading": "Laden…",
+    "noSuggestionsYet": "Nog geen suggesties.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operatief",
+    "badgeYours": "Van u",
+    "delete": "Verwijderen",
+    "errSelectResolution": "Kies een resolutie en meld u aan.",
+    "errEmptyBody": "Voeg clausuletekst toe na de opening (of typ de volledige clausule in het veld).",
+    "okSubmitted": "Suggestie verzonden. Het bureau kan deze beoordelen en aan het concept toevoegen."
   },
   "committeeGate": {
     "title": "Aanmelden commissie",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Totale tijd",
       "euPoiPocTime": "POI/POC-tijd",
       "euSpeakerTime": "Spreker tijd"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Installatiechecklist beheerder",
+      "subtitle": "Website-setup en personeelsvoorziening.",
+      "step1Label": "Evenement + eerste comité aanmaken",
+      "step1Detail": "Conferentie- en comitétoegangen genereren.",
+      "step2Label": "SMT-accounts uitnodigen of promoveren",
+      "step2Detail": "Secretariaattoegang vóór comitéoperaties verlenen.",
+      "step3Label": "Statusportaal-pijplijn verifiëren",
+      "step3Detail": "Stroom in behandeling → bevestigde delegaties volgen.",
+      "step4Label": "Overdragen aan SMT-dashboard",
+      "step4Detail": "Live comité gaat verder in SMT-tools."
+    },
+    "smt": {
+      "title": "Installatiechecklist SMT",
+      "subtitle": "Conferentiebrede controles vóór binnenkomst van voorzitters en delegaties.",
+      "step1Label": "Evenement + comitésessies bevestigen",
+      "step1Detail": "Namen, tags, voorzittersnamen en crisislinks valideren.",
+      "step2Label": "Zalcodes + voorzitterstoegang instellen",
+      "step2Detail": "Zorg dat elk comité juiste toegangscodes heeft.",
+      "step3Label": "Toewijzingen + aanmelddocumenten voorbereiden",
+      "step3Detail": "Zetels importeren, daarna wachtwoorden/codes instellen.",
+      "step4Label": "Globale documenten publiceren (RoP / criteria)",
+      "step4Detail": "Gemeenschappelijke referenties voor alle gebruikers uploaden."
+    },
+    "chair": {
+      "title": "Installatiechecklist voorzitter",
+      "subtitle": "Zaalklaarheid en vergaderingsregie voor uw comité.",
+      "step1Label": "Delegatiematrix + goedkeuringen controleren",
+      "step1Detail": "Toewijzingen en openstaande aanmeldbeoordelingen bevestigen.",
+      "step2Label": "Goedkeuringen voor aanwezigheidsronde uitvoeren",
+      "step2Detail": "Delegaties aanwezig markeren vóór deelname in de zaal.",
+      "step3Label": "Timer + sprekersstroom instellen",
+      "step3Detail": "Zaalvoorinstellingen opslaan vóór het openen van moties.",
+      "step4Label": "Digitale zaaloperaties openen",
+      "step4Detail": "Sprekers, notities en zichtbaarheid van de sessie coördineren."
+    },
+    "delegate": {
+      "title": "Installatiechecklist delegatie",
+      "subtitle": "Snel klaar om deel te nemen aan het comité.",
+      "step1Label": "Profielbasis voltooien",
+      "step1Detail": "Controleer naam, toewijzing en accountgegevens.",
+      "step2Label": "RoP + prijscriteria lezen",
+      "step2Detail": "Open gedeelde documenten geüpload door SMT.",
+      "step3Label": "Maak uw voorbereidingsdocument",
+      "step3Detail": "Upload/bewerk voorbereidingsnotities direct in de app.",
+      "step4Label": "Ga naar comitézaal + aanwezigheidsronde",
+      "step4Detail": "Wacht op goedkeuring aanwezig door de voorzitter, spreek dan."
     }
   }
 }

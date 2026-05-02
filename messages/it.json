@@ -841,7 +841,61 @@
         "label": "Crisi/rapporto",
         "hint": "Sollevare una questione"
       }
+    },
+    "countdownCard": {
+      "title": "Conto alla rovescia conferenza & position paper",
+      "description": "Condiviso per questa commissione — tutti con un posto vedono le stesse date (ogni delegato può aggiornare).",
+      "loading": "Caricamento…",
+      "conferenceStart": "Inizio conferenza",
+      "paperDeadline": "Scadenza position paper",
+      "untilConference": "Fino alla conferenza",
+      "untilPaperDeadline": "Fino alla scadenza del documento",
+      "notSet": "non impostato",
+      "past": "Passato",
+      "started": "Iniziato",
+      "remainingDhm": "{days}g {hours}h {minutes}m",
+      "remainingHm": "{hours}h {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Esporta i miei materiali",
+    "description": "Invia una copia dei documenti, note, interventi e voti salvati all’e-mail del tuo account. Utile a fine giornata (o in qualsiasi momento).",
+    "whatToInclude": "Cosa includere",
+    "preparing": "Preparazione esportazione…",
+    "submit": "Inviami l’esportazione via e-mail"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Redazione risoluzione",
+    "emptyDescription": "Non ci sono ancora bozze di risoluzione per questa commissione. Quando il bureau ne crea una, puoi suggerire qui clausole preambolari e operative.",
+    "introDescription": "Scegli una bozza, stile preambolare o operativo, usa un incipit predefinito (facoltativo) e scrivi la clausola. I suggerimenti sono visibili alla commissione; il bureau può integrarli nell’elenco ufficiale o nel Google Doc.",
+    "draftResolution": "Bozza di risoluzione",
+    "draftResolutionNumber": "Bozza di risoluzione {number}",
+    "googleDocLinkedTag": " · Google Doc collegato",
+    "section": "Sezione",
+    "sectionPreambulatory": "Preambolare",
+    "sectionOperative": "Operativa",
+    "openingPresets": "Incipit predefiniti",
+    "openingPhraseLabel": "Frase iniziale (modifica o scrivi la tua)",
+    "openingPlaceholderPreambulatory": "es. deeply concerned",
+    "openingPlaceholderOperative": "es. calls upon",
+    "clauseText": "Testo della clausola",
+    "clausePlaceholder": "…resto della clausola (fatti, azioni, dettagli). Le virgole dopo l’incipit vengono aggiunte al salvataggio.",
+    "preview": "Anteprima",
+    "previewDash": "—",
+    "submitting": "Invio in corso…",
+    "submitClause": "Invia suggerimento di clausola",
+    "suggestionsHeading": "Suggerimenti per questa risoluzione",
+    "refresh": "Aggiorna",
+    "loading": "Caricamento…",
+    "noSuggestionsYet": "Ancora nessun suggerimento.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operativa",
+    "badgeYours": "Tuo",
+    "delete": "Elimina",
+    "errSelectResolution": "Seleziona una risoluzione e accedi.",
+    "errEmptyBody": "Aggiungi il testo dopo l’incipit (o digita l’intera clausola nel campo).",
+    "okSubmitted": "Suggerimento inviato. Il bureau può rivederlo e aggiungerlo alla bozza."
   },
   "committeeGate": {
     "title": "Iscrizione al comitato",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Tempo totale",
       "euPoiPocTime": "Orario POI/POC",
       "euSpeakerTime": "Orario dell'oratore"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Checklist configurazione amministratore",
+      "subtitle": "Configurazione a livello di sito e provisioning dello staff.",
+      "step1Label": "Crea evento + prima commissione",
+      "step1Detail": "Genera accessi conferenza e comitato.",
+      "step2Label": "Invita o promuovi account SMT",
+      "step2Detail": "Concedi accesso segreteria prima delle operazioni di comitato.",
+      "step3Label": "Verifica flusso portale stato",
+      "step3Detail": "Monitora delegati in sospeso → confermati.",
+      "step4Label": "Passa alla dashboard SMT",
+      "step4Detail": "Le operazioni live continuano negli strumenti SMT."
+    },
+    "smt": {
+      "title": "Checklist configurazione SMT",
+      "subtitle": "Controlli a livello di conferenza prima dell’ingresso di presidenti e delegati.",
+      "step1Label": "Conferma evento + sessioni di comitato",
+      "step1Detail": "Valida nomi, tag, nomi presidenti e link crisi.",
+      "step2Label": "Imposta codici sala + accesso presidenza",
+      "step2Detail": "Assicurati che ogni comitato abbia i codici corretti.",
+      "step3Label": "Prepara allocazioni + documenti di accesso",
+      "step3Detail": "Importa posti, poi imposta password/codici.",
+      "step4Label": "Pubblica documenti globali (RoP / criteri)",
+      "step4Detail": "Carica riferimenti comuni per tutti gli utenti."
+    },
+    "chair": {
+      "title": "Checklist configurazione presidenza",
+      "subtitle": "Preparazione sala e controlli di sessione per il tuo comitato.",
+      "step1Label": "Controlla matrice delegati + approvazioni",
+      "step1Detail": "Conferma assegnazioni e revisioni iscrizioni in sospeso.",
+      "step2Label": "Gestisci approvazioni appello nominale",
+      "step2Detail": "Segna delegati presenti prima della partecipazione in sala.",
+      "step3Label": "Imposta timer + flusso relatori",
+      "step3Detail": "Salva preset di sessione prima di aprire le mozioni.",
+      "step4Label": "Apri operazioni sala digitale",
+      "step4Detail": "Coordina relatori, note e visibilità della sessione."
+    },
+    "delegate": {
+      "title": "Checklist configurazione delegato",
+      "subtitle": "Preparati rapidamente a partecipare al comitato.",
+      "step1Label": "Completa le basi del profilo",
+      "step1Detail": "Verifica nome, allocazione e dati account.",
+      "step2Label": "Leggi RoP + criteri premi",
+      "step2Detail": "Apri i documenti condivisi caricati da SMT.",
+      "step3Label": "Crea il documento di preparazione",
+      "step3Detail": "Carica/modifica note di preparazione nell’app.",
+      "step4Label": "Unisciti alla sala comitato + appello",
+      "step4Detail": "Attendi l’approvazione «presente» del presidente, poi parla."
     }
   }
 }

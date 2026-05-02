@@ -841,7 +841,61 @@
         "label": "Krise / Bericht",
         "hint": "Sprechen Sie ein Problem an"
       }
+    },
+    "countdownCard": {
+      "title": "Countdown: Konferenz & Positionspapier",
+      "description": "Gemeinsam für dieses Gremium — alle mit Sitzplatz sehen dieselben Termine (jeder Delegierte kann aktualisieren).",
+      "loading": "Wird geladen…",
+      "conferenceStart": "Konferenzbeginn",
+      "paperDeadline": "Frist Positionspapier",
+      "untilConference": "Bis zur Konferenz",
+      "untilPaperDeadline": "Bis zur Papierfrist",
+      "notSet": "nicht gesetzt",
+      "past": "Vorbei",
+      "started": "Gestartet",
+      "remainingDhm": "{days}T {hours}Std {minutes}Min",
+      "remainingHm": "{hours}Std {minutes}Min",
+      "remainingM": "{minutes}Min"
     }
+  },
+  "materialsExportCard": {
+    "title": "Meine Materialien exportieren",
+    "description": "Senden Sie eine Kopie Ihrer gespeicherten Dokumente, Notizen, Reden und Abstimmungen an Ihre Konten-E-Mail. Praktisch am Ende des Tages (oder jederzeit).",
+    "whatToInclude": "Was einschließen",
+    "preparing": "Export wird vorbereitet…",
+    "submit": "Export per E-Mail an mich senden"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Resolutions-Editor",
+    "emptyDescription": "Für diesen Ausschuss gibt es noch keine Resolutionsentwürfe. Sobald das Plenum einen anlegt, können Sie hier präambulische und operative Klauseln vorschlagen.",
+    "introDescription": "Wählen Sie einen Entwurf, präambulischen oder operativen Stil, nutzen Sie optional eine Eröffnungsformulierung aus den Vorschlägen und schreiben Sie Ihre Klausel. Vorschläge sind für den Ausschuss sichtbar; das Plenum kann sie in die offizielle Klauselliste oder das Google-Dokument übernehmen.",
+    "draftResolution": "Resolutionsentwurf",
+    "draftResolutionNumber": "Resolutionsentwurf {number}",
+    "googleDocLinkedTag": " · Google-Dokument verknüpft",
+    "section": "Abschnitt",
+    "sectionPreambulatory": "Präambel",
+    "sectionOperative": "Operativ",
+    "openingPresets": "Eröffnungsformulierungen",
+    "openingPhraseLabel": "Eröffnungsphrase (bearbeiten oder eigene eingeben)",
+    "openingPlaceholderPreambulatory": "z. B. deeply concerned",
+    "openingPlaceholderOperative": "z. B. calls upon",
+    "clauseText": "Klauseltext",
+    "clausePlaceholder": "…Rest der Klausel (Fakten, Maßnahmen, Details). Nach der Eröffnung werden beim Speichern Kommas ergänzt.",
+    "preview": "Vorschau",
+    "previewDash": "—",
+    "submitting": "Wird gesendet…",
+    "submitClause": "Klauselvorschlag senden",
+    "suggestionsHeading": "Vorschläge zu dieser Resolution",
+    "refresh": "Aktualisieren",
+    "loading": "Laden…",
+    "noSuggestionsYet": "Noch keine Vorschläge.",
+    "badgePreamb": "Präamb.",
+    "badgeOperative": "Operativ",
+    "badgeYours": "Ihre",
+    "delete": "Löschen",
+    "errSelectResolution": "Resolution wählen und anmelden.",
+    "errEmptyBody": "Fügen Sie nach der Eröffnung Klauseltext hinzu (oder geben Sie die vollständige Klausel im Textfeld ein).",
+    "okSubmitted": "Vorschlag gesendet. Das Plenum kann ihn prüfen und in den Entwurf übernehmen."
   },
   "committeeGate": {
     "title": "Anmeldung im Ausschuss",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Gesamtzeit",
       "euPoiPocTime": "POI-/POC-Zeit",
       "euSpeakerTime": "Rednerzeit"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Admin-Setup-Checkliste",
+      "subtitle": "Website-Setup und Personalbereitstellung.",
+      "step1Label": "Veranstaltung + erste Kommission anlegen",
+      "step1Detail": "Konferenz- und Komitee-Gates erzeugen.",
+      "step2Label": "SMT-Konten einladen oder befördern",
+      "step2Detail": "Sekretariatszugriff vor Komiteeablauf gewähren.",
+      "step3Label": "Status-Portal-Pipeline prüfen",
+      "step3Detail": "Ablauf ausstehend → bestätigt überwachen.",
+      "step4Label": "Übergabe an SMT-Dashboard",
+      "step4Detail": "Live-Komitee weiter in SMT-Tools."
+    },
+    "smt": {
+      "title": "SMT-Setup-Checkliste",
+      "subtitle": "Konferenzweite Kontrollen vor Eintritt von Chairs und Delegierten.",
+      "step1Label": "Event + Komitee-Sitzungen bestätigen",
+      "step1Detail": "Namen, Tags, Chair-Namen und Crisis-Links prüfen.",
+      "step2Label": "Raumcodes + Chair-Zugang setzen",
+      "step2Detail": "Korrekte Gate-Codes pro Komitee sicherstellen.",
+      "step3Label": "Zuteilungen + Anmeldedokumente vorbereiten",
+      "step3Detail": "Sitze importieren, dann Passwörter/Codes setzen.",
+      "step4Label": "Globale Dokumente veröffentlichen (RoP / Kriterien)",
+      "step4Detail": "Gemeinsame Referenzen für alle Nutzer hochladen."
+    },
+    "chair": {
+      "title": "Chair-Setup-Checkliste",
+      "subtitle": "Raumbereitschaft und Sitzungsleitung für Ihr Komitee.",
+      "step1Label": "Delegierten-Matrix + Freigaben prüfen",
+      "step1Detail": "Zuweisungen und ausstehende Anmeldungen bestätigen.",
+      "step2Label": "Roll-call-Freigaben durchführen",
+      "step2Detail": "Delegierte vor Teilnahme als anwesend markieren.",
+      "step3Label": "Timer + Redefluss einstellen",
+      "step3Detail": "Sitzungs-Voreinstellungen vor Anträgen speichern.",
+      "step4Label": "Digitalen Saal öffnen",
+      "step4Detail": "Redner, Notizen und Sichtbarkeit koordinieren."
+    },
+    "delegate": {
+      "title": "Delegierten-Setup-Checkliste",
+      "subtitle": "Schnell für die Komiteeteilnahme bereitmachen.",
+      "step1Label": "Profil-Grundlagen vervollständigen",
+      "step1Detail": "Name, Zuteilung und Kontodaten prüfen.",
+      "step2Label": "RoP + Award-Kriterien lesen",
+      "step2Detail": "Von SMT hochgeladene geteilte Dokumente öffnen.",
+      "step3Label": "Vorbereitungsdokument anlegen",
+      "step3Detail": "Vorbereitungsnotizen direkt in der App hochladen/bearbeiten.",
+      "step4Label": "Komiteeraum + Rollenruf beitreten",
+      "step4Detail": "Auf Chair-Freigabe „anwesend“ warten, dann sprechen."
     }
   }
 }

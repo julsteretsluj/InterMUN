@@ -841,7 +841,61 @@
         "label": "危机/报告",
         "hint": "提出问题"
       }
+    },
+    "countdownCard": {
+      "title": "会议与立场文件倒计时",
+      "description": "本委员会共享 — 有席位的成员看到相同日期（任何代表均可更新）。",
+      "loading": "加载中…",
+      "conferenceStart": "会议开始",
+      "paperDeadline": "立场文件截止",
+      "untilConference": "距会议",
+      "untilPaperDeadline": "距文件截止",
+      "notSet": "未设置",
+      "past": "已过",
+      "started": "已开始",
+      "remainingDhm": "{days}天{hours}小时{minutes}分",
+      "remainingHm": "{hours}小时{minutes}分",
+      "remainingM": "{minutes}分"
     }
+  },
+  "materialsExportCard": {
+    "title": "导出我的资料",
+    "description": "将您保存的文档、笔记、发言和表决副本发送到账户邮箱。适合在一天结束时（或随时）使用。",
+    "whatToInclude": "包含内容",
+    "preparing": "正在准备导出…",
+    "submit": "将导出发送到我的邮箱"
+  },
+  "delegateResolutionBuilder": {
+    "title": "决议草案构建",
+    "emptyDescription": "该委员会尚无决议草案。主席团创建草案后，您可以在此建议序言性条款和执行性条款。",
+    "introDescription": "选择草案、序言或执行风格，使用（可选）开头套语，并撰写条款。建议对委员会可见；主席团可将其并入正式条款列表或 Google 文档。",
+    "draftResolution": "决议草案",
+    "draftResolutionNumber": "决议草案 {number}",
+    "googleDocLinkedTag": " · 已关联 Google 文档",
+    "section": "部分",
+    "sectionPreambulatory": "序言",
+    "sectionOperative": "执行",
+    "openingPresets": "开头套语",
+    "openingPhraseLabel": "开头用语（可编辑或自填）",
+    "openingPlaceholderPreambulatory": "例如 Deeply concerned",
+    "openingPlaceholderOperative": "例如 Calls upon",
+    "clauseText": "条款正文",
+    "clausePlaceholder": "…条款其余部分（事实、行动、细节）。保存时会在开头后自动添加逗号。",
+    "preview": "预览",
+    "previewDash": "—",
+    "submitting": "提交中…",
+    "submitClause": "提交条款建议",
+    "suggestionsHeading": "本决议的建议",
+    "refresh": "刷新",
+    "loading": "加载中…",
+    "noSuggestionsYet": "尚无建议。",
+    "badgePreamb": "序言",
+    "badgeOperative": "执行",
+    "badgeYours": "您的",
+    "delete": "删除",
+    "errSelectResolution": "请选择决议并登录。",
+    "errEmptyBody": "请在开头后添加条款正文（或在正文字段输入完整条款）。",
+    "okSubmitted": "建议已提交。主席团可审核并加入草案。"
   },
   "committeeGate": {
     "title": "组委会签到",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "总时间",
       "euPoiPocTime": "POI/POC 时间",
       "euSpeakerTime": "发言时间"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "管理员设置清单",
+      "subtitle": "网站级设置与人员配置。",
+      "step1Label": "创建活动 + 首个委员会",
+      "step1Detail": "生成会议与委员会门禁。",
+      "step2Label": "邀请或提升 SMT 账户",
+      "step2Detail": "在委员会运作前授予秘书处访问权限。",
+      "step3Label": "验证状态门户流程",
+      "step3Detail": "监控代表流：待处理 → 已确认。",
+      "step4Label": "移交 SMT 控制台",
+      "step4Detail": "现场委员会运作在 SMT 工具中继续。"
+    },
+    "smt": {
+      "title": "SMT 设置清单",
+      "subtitle": "主席与代表进入前的会议级管控。",
+      "step1Label": "确认活动 + 委员会场次",
+      "step1Detail": "校验名称、标签、主席姓名与危机链接。",
+      "step2Label": "设置房间码 + 主席访问",
+      "step2Detail": "确保每个委员会具备正确的门禁码。",
+      "step3Label": "准备席位分配 + 登录文档",
+      "step3Detail": "导入席位，然后设置密码/代码。",
+      "step4Label": "发布全局文档（RoP / 标准）",
+      "step4Detail": "上传供所有用户参考的共用资料。"
+    },
+    "chair": {
+      "title": "主席设置清单",
+      "subtitle": "您委员会的房间与会场控制准备。",
+      "step1Label": "检查代表矩阵 + 审批",
+      "step1Detail": "确认分配与待审核报名。",
+      "step2Label": "进行点名审批",
+      "step2Detail": "在会场参与前将代表标为出席。",
+      "step3Label": "设置计时器 + 发言流程",
+      "step3Detail": "在开启动议前保存会场预设。",
+      "step4Label": "开启数字会场运作",
+      "step4Detail": "协调发言人、笔记与会场可见性。"
+    },
+    "delegate": {
+      "title": "代表设置清单",
+      "subtitle": "快速准备参与委员会。",
+      "step1Label": "完善资料基础信息",
+      "step1Detail": "核对姓名、席位分配与账户信息。",
+      "step2Label": "阅读 RoP + 奖项标准",
+      "step2Detail": "打开 SMT 上传的共享文档。",
+      "step3Label": "创建准备文档",
+      "step3Detail": "在应用内直接上传/编辑准备笔记。",
+      "step4Label": "进入委员会房间 + 点名",
+      "step4Detail": "等待主席批准出席状态后再发言。"
     }
   }
 }

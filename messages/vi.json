@@ -841,7 +841,61 @@
         "label": "Khủng hoảng/báo cáo",
         "hint": "Đưa ra một vấn đề"
       }
+    },
+    "countdownCard": {
+      "title": "Đếm ngược hội nghị & position paper",
+      "description": "Chung cho ủy ban này — mọi người có ghế đều thấy cùng ngày (đại biểu nào cũng có thể cập nhật).",
+      "loading": "Đang tải…",
+      "conferenceStart": "Bắt đầu hội nghị",
+      "paperDeadline": "Hạn position paper",
+      "untilConference": "Đến hội nghị",
+      "untilPaperDeadline": "Đến hạn bài",
+      "notSet": "chưa đặt",
+      "past": "Đã qua",
+      "started": "Đã bắt đầu",
+      "remainingDhm": "{days}n {hours}g {minutes}p",
+      "remainingHm": "{hours}g {minutes}p",
+      "remainingM": "{minutes}p"
     }
+  },
+  "materialsExportCard": {
+    "title": "Xuất tài liệu của tôi",
+    "description": "Gửi bản sao tài liệu, ghi chú, bài phát biểu và phiếu bầu đã lưu đến email tài khoản của bạn. Hữu ích cuối ngày (hoặc bất cứ lúc nào).",
+    "whatToInclude": "Nội dung cần gồm",
+    "preparing": "Đang chuẩn bị xuất…",
+    "submit": "Gửi bản xuất đến email của tôi"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Trình dự thảo nghị quyết",
+    "emptyDescription": "Ủy ban này chưa có dự thảo nghị quyết. Khi ban thư ký tạo một bản, bạn có thể đề xuất điều khoản phần mở đầu và phần hành động tại đây.",
+    "introDescription": "Chọn bản dự thảo, kiểu mở đầu hoặc hành động, dùng cụm mở đầu có sẵn (tùy chọn) và viết điều khoản. Đề xuất hiển thị với ủy ban; ban thư ký có thể gộp vào danh sách chính thức hoặc Google Doc.",
+    "draftResolution": "Dự thảo nghị quyết",
+    "draftResolutionNumber": "Dự thảo nghị quyết {number}",
+    "googleDocLinkedTag": " · Đã liên kết Google Doc",
+    "section": "Phần",
+    "sectionPreambulatory": "Mở đầu",
+    "sectionOperative": "Hành động",
+    "openingPresets": "Cụm mở đầu có sẵn",
+    "openingPhraseLabel": "Cụm mở đầu (sửa hoặc tự nhập)",
+    "openingPlaceholderPreambulatory": "vd. deeply concerned",
+    "openingPlaceholderOperative": "vd. calls upon",
+    "clauseText": "Nội dung điều khoản",
+    "clausePlaceholder": "…phần còn lại của điều khoản (sự kiện, hành động, chi tiết). Dấu phẩy sau phần mở đầu được thêm khi lưu.",
+    "preview": "Xem trước",
+    "previewDash": "—",
+    "submitting": "Đang gửi…",
+    "submitClause": "Gửi đề xuất điều khoản",
+    "suggestionsHeading": "Đề xuất cho nghị quyết này",
+    "refresh": "Làm mới",
+    "loading": "Đang tải…",
+    "noSuggestionsYet": "Chưa có đề xuất.",
+    "badgePreamb": "Mở đầu",
+    "badgeOperative": "Hành động",
+    "badgeYours": "Của bạn",
+    "delete": "Xóa",
+    "errSelectResolution": "Chọn nghị quyết và đăng nhập.",
+    "errEmptyBody": "Thêm nội dung sau phần mở đầu (hoặc nhập toàn bộ điều khoản vào ô nội dung).",
+    "okSubmitted": "Đã gửi đề xuất. Ban thư ký có thể xem xét và thêm vào dự thảo."
   },
   "committeeGate": {
     "title": "Đăng nhập ủy ban",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Tổng thời gian",
       "euPoiPocTime": "Thời gian POI/POC",
       "euSpeakerTime": "Thời gian phát biểu"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Danh sách kiểm tra thiết lập quản trị",
+      "subtitle": "Thiết lập cấp trang web và cấp phát nhân sự.",
+      "step1Label": "Tạo sự kiện + ủy ban đầu tiên",
+      "step1Detail": "Tạo cổng hội nghị và ủy ban.",
+      "step2Label": "Mời hoặc thăng cấp tài khoản SMT",
+      "step2Detail": "Cấp quyền thư ký trước khi vận hành ủy ban.",
+      "step3Label": "Xác minh luồng cổng trạng thái",
+      "step3Detail": "Theo dõi luồng đại biểu chờ → đã xác nhận.",
+      "step4Label": "Bàn giao cho bảng điều khiển SMT",
+      "step4Detail": "Vận hành ủy ban trực tiếp tiếp tục trong công cụ SMT."
+    },
+    "smt": {
+      "title": "Danh sách kiểm tra thiết lập SMT",
+      "subtitle": "Kiểm soát toàn hội nghị trước khi chủ tịch và đại biểu vào.",
+      "step1Label": "Xác nhận sự kiện + phiên ủy ban",
+      "step1Detail": "Xác thực tên, thẻ, tên chủ tịch và liên kết khủng hoảng.",
+      "step2Label": "Đặt mã phòng + quyền chủ tịch",
+      "step2Detail": "Đảm bảo mỗi ủy ban có mã cổng đúng.",
+      "step3Label": "Chuẩn bị phân bổ + tài liệu đăng nhập",
+      "step3Detail": "Nhập ghế, sau đó đặt mật khẩu/mã.",
+      "step4Label": "Xuất bản tài liệu toàn cục (RoP / tiêu chí)",
+      "step4Detail": "Tải lên tài liệu tham chiếu chung cho mọi người dùng."
+    },
+    "chair": {
+      "title": "Danh sách kiểm tra thiết lập chủ tịch",
+      "subtitle": "Sẵn sàng phòng và điều khiển phiên cho ủy ban của bạn.",
+      "step1Label": "Kiểm tra ma trận đại biểu + phê duyệt",
+      "step1Detail": "Xác nhận phân công và đánh giá đăng ký đang chờ.",
+      "step2Label": "Chạy phê duyệt điểm danh",
+      "step2Detail": "Đánh dấu đại biểu có mặt trước khi tham gia phiên.",
+      "step3Label": "Đặt hẹn giờ + luồng diễn giả",
+      "step3Detail": "Lưu cài đặt sàn trước khi mở động nghị.",
+      "step4Label": "Mở vận hành phòng kỹ thuật số",
+      "step4Detail": "Phối hợp diễn giả, ghi chú và hiển thị phiên."
+    },
+    "delegate": {
+      "title": "Danh sách kiểm tra thiết lập đại biểu",
+      "subtitle": "Chuẩn bị nhanh để tham gia ủy ban.",
+      "step1Label": "Hoàn thành phần cơ bản hồ sơ",
+      "step1Detail": "Xác minh tên, phân bổ và chi tiết tài khoản.",
+      "step2Label": "Đọc RoP + tiêu chí giải thưởng",
+      "step2Detail": "Mở tài liệu chung do SMT tải lên.",
+      "step3Label": "Tạo tài liệu chuẩn bị",
+      "step3Detail": "Tải lên/chỉnh sửa ghi chú chuẩn bị trực tiếp trong ứng dụng.",
+      "step4Label": "Vào phòng ủy ban + điểm danh",
+      "step4Detail": "Chờ chủ tịch phê duyệt có mặt, sau đó phát biểu."
     }
   }
 }

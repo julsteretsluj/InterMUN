@@ -769,7 +769,61 @@
         "label": "Mgogoro / ripoti",
         "hint": "Onyesha suala"
       }
+    },
+    "countdownCard": {
+      "title": "Kuhesabu kinyume mkutano na karatasi ya msimamo",
+      "description": "Inashirikiwa kwa kamati hii — kila mwenye kiti anaona tarehe sawa (mwakilishi yeyote anaweza kusasisha).",
+      "loading": "Inapakia…",
+      "conferenceStart": "Mwanzo wa mkutano",
+      "paperDeadline": "Mwisho wa karatasi ya msimamo",
+      "untilConference": "Hadi mkutano",
+      "untilPaperDeadline": "Hadi mwisho wa karatasi",
+      "notSet": "haijawekwa",
+      "past": "Imepita",
+      "started": "Imeanza",
+      "remainingDhm": "{days}s {hours}h {minutes}d",
+      "remainingHm": "{hours}h {minutes}d",
+      "remainingM": "{minutes}d"
     }
+  },
+  "materialsExportCard": {
+    "title": "Hamisha nyenzo zangu",
+    "description": "Tuma nakala ya hati, maelezo, hotuba na kura ulizohifadhiwa kwenye barua pepe ya akaunti yako. Muhimu mwisho wa siku (au wakati wowote).",
+    "whatToInclude": "Nini cha kujumuisha",
+    "preparing": "Inaandaa uhamishaji…",
+    "submit": "Nitumie uhamishaji kwa barua pepe"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Jenga azimio",
+    "emptyDescription": "Bado hakuna rasimu za azimio kwa kamati hii. Meza inapounda moja, unaweza kupendekeza vifungu vya utangulizi na vitendaji hapa.",
+    "introDescription": "Chagua rasimu, mtindo wa utangulizi au wa vitendaji, tumia kifungu cha kuanzia kilichowekwa (hiari) na andika kifungu chako. Mapendekezo yanaonekana na kamati; meza inaweza kuyachanganya kwenye orodha rasmi au Google Doc.",
+    "draftResolution": "Rasimu ya azimio",
+    "draftResolutionNumber": "Rasimu ya azimio {number}",
+    "googleDocLinkedTag": " · Google Doc imeunganishwa",
+    "section": "Sehemu",
+    "sectionPreambulatory": "Utangulizi",
+    "sectionOperative": "Vitendaji",
+    "openingPresets": "Vifungu vya kuanzia",
+    "openingPhraseLabel": "Kifungu cha kuanzia (hariri au andika chako)",
+    "openingPlaceholderPreambulatory": "mf. deeply concerned",
+    "openingPlaceholderOperative": "mf. calls upon",
+    "clauseText": "Maandishi ya kifungu",
+    "clausePlaceholder": "…sehemu iliyobaki ya kifungu (ukweli, vitendo, maelezo). Nukta za juu baada ya kuanzia zinaongezwa unapohifadhi.",
+    "preview": "Hakiki",
+    "previewDash": "—",
+    "submitting": "Inatumwa…",
+    "submitClause": "Tuma pendekezo la kifungu",
+    "suggestionsHeading": "Mapendekezo kwa azimio hili",
+    "refresh": "Onyesha upya",
+    "loading": "Inapakia…",
+    "noSuggestionsYet": "Bado hakuna mapendekezo.",
+    "badgePreamb": "Utang.",
+    "badgeOperative": "Vitend.",
+    "badgeYours": "Yako",
+    "delete": "Futa",
+    "errSelectResolution": "Chagua azimio na ingia.",
+    "errEmptyBody": "Ongeza maandishi baada ya kuanzia (au andika kifungu kamili kwenye sehemu ya maandishi).",
+    "okSubmitted": "Pendekezo limetumwa. Meza inaweza kukagua na kuongeza kwenye rasimu."
   },
   "committeeGate": {
     "title": "Kuingia kwa Kamati",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Jumla ya muda",
       "euPoiPocTime": "Muda wa POI / POC",
       "euSpeakerTime": "Muda wa Spika"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Orodha ya kuweka mipangilio ya msimamizi",
+      "subtitle": "Mipangilio ya tovuti na utoaji wa wafanyakazi.",
+      "step1Label": "Unda tukio + kamati ya kwanza",
+      "step1Detail": "Tengeneza malango ya mkutano na kamati.",
+      "step2Label": "Alika au kuongeza akaunti za SMT",
+      "step2Detail": "Toa ufikiaji wa ofisi ya katibu kabla ya shughuli za kamati.",
+      "step3Label": "Thibitisha mtiririko wa lango la hali",
+      "step3Detail": "Fuatilia mtiririko wa wawakilishi wanasubiri → waliothibitishwa.",
+      "step4Label": "Kabidhi kwa dashibodi ya SMT",
+      "step4Detail": "Shughuli za moja kwa moja za kamati zinaendelea katika zana za SMT."
+    },
+    "smt": {
+      "title": "Orodha ya kuweka mipangilio ya SMT",
+      "subtitle": "Udhibiti wa mkutano mzima kabla ya mwenyekiti na wawakilishi kuingia.",
+      "step1Label": "Thibitisha tukio + vikao vya kamati",
+      "step1Detail": "Halalisha majina, lebo, majina ya mwenyekiti na viungo vya dharura.",
+      "step2Label": "Weka nambari za chumba + ufikiaji wa mwenyekiti",
+      "step2Detail": "Hakikisha kila kamati ina nambari sahihi za lango.",
+      "step3Label": "Tayarisha mgawo + nyaraka za kuingia",
+      "step3Detail": "Ingiza viti, kisha weka nenosiri/nambari.",
+      "step4Label": "Chapisha nyaraka za ulimwengu (RoP / vigezo)",
+      "step4Detail": "Pakia marejeleo ya pamoja kwa watumiaji wote."
+    },
+    "chair": {
+      "title": "Orodha ya kuweka mipangilio ya mwenyekiti",
+      "subtitle": "Utayari wa chumba na udhibiti wa kikao kwa kamati yako.",
+      "step1Label": "Angalia matriki ya wawakilishi + idhini",
+      "step1Detail": "Thibitisha uteuzi na mapitio ya usajili yanayosubiri.",
+      "step2Label": "Endesha idhini za roll call",
+      "step2Detail": "Weka alama wawakilishi kuwepo kabla ya kushiriki sakafuni.",
+      "step3Label": "Weka kipima muda + mtiririko wa wasemaji",
+      "step3Detail": "Hifadhi mipangilio ya sakafu kabla ya kufungua miswada.",
+      "step4Label": "Fungua shughuli za chumba dijitali",
+      "step4Detail": "Pangisha wasemaji, maelezo na kuonekana kwa kikao."
+    },
+    "delegate": {
+      "title": "Orodha ya kuweka mipangilio ya mwakilishi",
+      "subtitle": "Jiandae haraka kushiriki kamati.",
+      "step1Label": "Kamilisha msingi wa wasifu",
+      "step1Detail": "Thibitisha jina, mgawo na maelezo ya akaunti.",
+      "step2Label": "Soma RoP + vigezo vya tuzo",
+      "step2Detail": "Fungua nyaraka zilizoshirikiwa zilizopakiwa na SMT.",
+      "step3Label": "Unda waraka wako wa maandalizi",
+      "step3Detail": "Pakia/hariri maelezo ya maandalizi moja kwa moja kwenye programu.",
+      "step4Label": "Jiunge na chumba cha kamati + roll call",
+      "step4Detail": "Subiri idhini ya kuwepo kutoka kwa mwenyekiti, kisha ongea."
     }
   }
 }

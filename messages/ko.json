@@ -841,7 +841,61 @@
         "label": "위기/보고",
         "hint": "문제 제기"
       }
+    },
+    "countdownCard": {
+      "title": "회의 및 포지션 페이퍼 카운트다운",
+      "description": "이 위원회에서 공유됩니다 — 배석이 있는 모두가 같은 일정을 봅니다 (대표 누구나 수정 가능).",
+      "loading": "불러오는 중…",
+      "conferenceStart": "회의 시작",
+      "paperDeadline": "포지션 페이퍼 마감",
+      "untilConference": "회의까지",
+      "untilPaperDeadline": "페이퍼 마감까지",
+      "notSet": "설정 안 됨",
+      "past": "지남",
+      "started": "시작됨",
+      "remainingDhm": "{days}일 {hours}시간 {minutes}분",
+      "remainingHm": "{hours}시간 {minutes}분",
+      "remainingM": "{minutes}분"
     }
+  },
+  "materialsExportCard": {
+    "title": "내 자료 내보내기",
+    "description": "저장된 문서, 메모, 발언, 표결 내역 사본을 계정 이메일로 보냅니다. 하루가 끝날 때(또는 언제든) 유용합니다.",
+    "whatToInclude": "포함할 범위",
+    "preparing": "내보내기 준비 중…",
+    "submit": "내보내기를 내 이메일로 보내기"
+  },
+  "delegateResolutionBuilder": {
+    "title": "결의안 작성",
+    "emptyDescription": "이 위원회에 아직 결의안 초안이 없습니다. 의장단이 초안을 만들면 여기에서 전문 및 실천 조항을 제안할 수 있습니다.",
+    "introDescription": "초안을 선택하고 전문 또는 실천 스타일을 고르고, (선택) 시작 구문 프리셋을 쓰고 조항을 작성하세요. 제안은 위원회에 표시되며 의장단이 공식 조항 목록이나 Google 문서에 반영할 수 있습니다.",
+    "draftResolution": "결의안 초안",
+    "draftResolutionNumber": "결의안 초안 {number}",
+    "googleDocLinkedTag": " · Google 문서 연결됨",
+    "section": "구분",
+    "sectionPreambulatory": "전문",
+    "sectionOperative": "실천",
+    "openingPresets": "시작 구문 프리셋",
+    "openingPhraseLabel": "시작 구문(편집 또는 직접 입력)",
+    "openingPlaceholderPreambulatory": "예: Deeply concerned",
+    "openingPlaceholderOperative": "예: Calls upon",
+    "clauseText": "조항 텍스트",
+    "clausePlaceholder": "…조항의 나머지(사실, 조치, 세부사항). 저장 시 시작 구문 뒤에 쉼표가 추가됩니다.",
+    "preview": "미리보기",
+    "previewDash": "—",
+    "submitting": "제출 중…",
+    "submitClause": "조항 제안 제출",
+    "suggestionsHeading": "이 결의안에 대한 제안",
+    "refresh": "새로고침",
+    "loading": "불러오는 중…",
+    "noSuggestionsYet": "아직 제안이 없습니다.",
+    "badgePreamb": "전문",
+    "badgeOperative": "실천",
+    "badgeYours": "내 것",
+    "delete": "삭제",
+    "errSelectResolution": "결의안을 선택하고 로그인하세요.",
+    "errEmptyBody": "시작 구문 뒤에 조항 텍스트를 추가하거나 본문 필드에 전체 조항을 입력하세요.",
+    "okSubmitted": "제안이 제출되었습니다. 의장단이 검토해 초안에 반영할 수 있습니다."
   },
   "committeeGate": {
     "title": "위원회 로그인",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "총 시간",
       "euPoiPocTime": "POI/POC 시간",
       "euSpeakerTime": "스피커 시간"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "관리자 설정 체크리스트",
+      "subtitle": "웹사이트 수준 설정 및 스태프 프로비저닝.",
+      "step1Label": "행사 + 첫 위원회 만들기",
+      "step1Detail": "회의·위원회 게이트 생성.",
+      "step2Label": "SMT 계정 초대 또는 승격",
+      "step2Detail": "위원회 운영 전 사무국 접근 권한 부여.",
+      "step3Label": "상태 포털 파이프라인 확인",
+      "step3Detail": "대기 → 확정 대표 흐름 모니터링.",
+      "step4Label": "SMT 대시보드에 인계",
+      "step4Detail": "라이브 위원회 운영은 SMT 도구에서 계속."
+    },
+    "smt": {
+      "title": "SMT 설정 체크리스트",
+      "subtitle": "의장·대표 입장 전 회의 전반 통제.",
+      "step1Label": "행사 + 위원회 세션 확인",
+      "step1Detail": "이름, 태그, 의장 이름, 위기 링크 검증.",
+      "step2Label": "회의실 코드 + 의장 접근 설정",
+      "step2Detail": "각 위원회에 올바른 게이트 코드가 있는지 확인.",
+      "step3Label": "배정 + 로그인 문서 준비",
+      "step3Detail": "석 임포트 후 비밀번호/코드 설정.",
+      "step4Label": "전역 문서 게시 (RoP / 기준)",
+      "step4Detail": "모든 사용자용 공통 참고 자료 업로드."
+    },
+    "chair": {
+      "title": "의장 설정 체크리스트",
+      "subtitle": "위원회를 위한 회의실 준비 및 회의 진행 통제.",
+      "step1Label": "대표 매트릭스 + 승인 확인",
+      "step1Detail": "배정 및 대기 중인 가입 검토 확인.",
+      "step2Label": "출석 점호 승인 진행",
+      "step2Detail": "회의 참여 전 대표를 출석으로 표시.",
+      "step3Label": "타이머 + 발언 순서 설정",
+      "step3Detail": "모션 열기 전 회의 프리셋 저장.",
+      "step4Label": "디지털 회의실 운영 열기",
+      "step4Detail": "발언자, 메모, 세션 가시성 조율."
+    },
+    "delegate": {
+      "title": "대표 설정 체크리스트",
+      "subtitle": "위원회 참여를 빠르게 준비하세요.",
+      "step1Label": "프로필 기본 정보 완료",
+      "step1Detail": "이름, 배정, 계정 정보를 확인하세요.",
+      "step2Label": "RoP + 시상 기준 읽기",
+      "step2Detail": "SMT가 업로드한 공유 문서를 여세요.",
+      "step3Label": "준비 문서 만들기",
+      "step3Detail": "앱에서 준비 메모를 직접 업로드/편집.",
+      "step4Label": "위원회실 + 출석 점호 참여",
+      "step4Detail": "의장의 출석 승인을 기다린 뒤 발언하세요."
     }
   }
 }

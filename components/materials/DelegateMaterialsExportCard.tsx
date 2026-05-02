@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import { exportDelegateMaterialsAction } from "@/app/actions/exportMaterials";
 
 export type ExportMaterialsRange = "today" | "all";
@@ -8,6 +9,8 @@ export type ExportMaterialsRange = "today" | "all";
 type ExportMaterialsActionState = { error?: string; success?: string };
 
 export function DelegateMaterialsExportCard() {
+  const t = useTranslations("materialsExportCard");
+  const tExport = useTranslations("serverActions.exportMaterials");
   const [state, formAction, pending] = useActionState<
     ExportMaterialsActionState | null,
     FormData
@@ -20,12 +23,9 @@ export function DelegateMaterialsExportCard() {
     <div className="mb-6 rounded-2xl border border-brand-navy/10 bg-black/25 shadow-sm overflow-hidden">
       <div className="p-5 md:p-6">
         <h3 className="font-display text-xl font-semibold text-brand-navy">
-          Export my materials
+          {t("title")}
         </h3>
-        <p className="mt-2 text-sm text-brand-muted">
-          Send a copy of your saved documents/notes/speeches/votes to your account email. Useful
-          at the end of the day (or anytime).
-        </p>
+        <p className="mt-2 text-sm text-brand-muted">{t("description")}</p>
 
         <form action={formAction} className="mt-5 space-y-4">
           <div>
@@ -33,7 +33,7 @@ export function DelegateMaterialsExportCard() {
               htmlFor="range"
               className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1.5"
             >
-              What to include
+              {t("whatToInclude")}
             </label>
             <select
               id="range"
@@ -41,8 +41,8 @@ export function DelegateMaterialsExportCard() {
               defaultValue="today"
               className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-black/25 text-brand-navy font-medium"
             >
-              <option value="today">Today (UTC)</option>
-              <option value="all">All time</option>
+              <option value="today">{tExport("rangeTodayUtc")}</option>
+              <option value="all">{tExport("rangeAllTime")}</option>
             </select>
           </div>
 
@@ -51,7 +51,7 @@ export function DelegateMaterialsExportCard() {
             disabled={pending}
             className="w-full py-3 rounded-lg bg-brand-paper text-brand-navy font-medium hover:bg-brand-navy-soft transition-colors disabled:opacity-50"
           >
-            {pending ? "Preparing export…" : "Email me my export"}
+            {pending ? t("preparing") : t("submit")}
           </button>
 
           {state?.error && (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
 import { useCommitteeSyncedState } from "@/lib/hooks/useCommitteeSyncedState";
 
@@ -40,31 +41,40 @@ function countdownMeaningful(s: Stored): boolean {
   return Boolean(s.conferenceStart || s.paperDeadline);
 }
 
-function formatRemaining(ms: number): string {
-  if (ms <= 0) return "Started";
+function formatRemaining(
+  ms: number,
+  t: (key: "remainingDhm" | "remainingHm" | "remainingM", values: Record<string, number>) => string
+): string {
   const s = Math.floor(ms / 1000);
   const d = Math.floor(s / 86400);
   const h = Math.floor((s % 86400) / 3600);
   const m = Math.floor((s % 3600) / 60);
-  if (d > 0) return `${d}d ${h}h ${m}m`;
-  if (h > 0) return `${h}h ${m}m`;
-  return `${m}m`;
+  if (d > 0) return t("remainingDhm", { days: d, hours: h, minutes: m });
+  if (h > 0) return t("remainingHm", { hours: h, minutes: m });
+  return t("remainingM", { minutes: m });
 }
 
-function CountdownLine({ label, iso }: { label: string; iso: string | null }) {
+function CountdownLine({
+  label,
+  iso,
+}: {
+  label: string;
+  iso: string | null;
+}) {
+  const tc = useTranslations("delegateDashboard.countdownCard");
   const target = useMemo(() => (iso ? new Date(iso).getTime() : NaN), [iso]);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
     if (!iso || Number.isNaN(target)) return;
-    const t = window.setInterval(() => setNow(Date.now()), 1000);
-    return () => window.clearInterval(t);
+    const tick = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(tick);
   }, [iso, target]);
 
   if (!iso || Number.isNaN(target)) {
     return (
       <p className="text-sm text-slate-500 dark:text-zinc-400">
-        <span className="font-medium text-slate-700 dark:text-zinc-300">{label}:</span> not set
+        <span className="font-medium text-slate-700 dark:text-zinc-300">{label}:</span> {tc("notSet")}
       </p>
     );
   }
@@ -76,7 +86,7 @@ function CountdownLine({ label, iso }: { label: string; iso: string | null }) {
     <p className="text-sm text-slate-700 dark:text-zinc-200">
       <span className="font-medium">{label}:</span>{" "}
       <span className={past ? "text-brand-diplomatic dark:text-brand-accent-bright" : "tabular-nums"}>
-        {past ? "Past" : formatRemaining(remaining)}
+        {past ? tc("past") : formatRemaining(remaining, tc)}
       </span>
       <span className="ml-1 text-slate-500 dark:text-zinc-500">
         ({new Date(iso).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })})
@@ -86,6 +96,7 @@ function CountdownLine({ label, iso }: { label: string; iso: string | null }) {
 }
 
 export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }) {
+  const t = useTranslations("delegateDashboard.countdownCard");
   const loadLegacy = useCallback(
     () => (typeof window !== "undefined" ? loadLegacyCountdown(conferenceId) : null),
     [conferenceId]
@@ -118,16 +129,14 @@ export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }
       className="scroll-mt-24 rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
     >
       <h2 className="font-display text-lg font-semibold text-slate-900 dark:text-zinc-50">
-        ⏱️ Conference &amp; position paper countdown
+        ⏱️ {t("title")}
       </h2>
       <p className="mt-1 text-sm text-slate-600 dark:text-zinc-400">
-        {ready
-          ? "Shared for this committee — everyone with a seat sees the same dates (any delegate can update)."
-          : "Loading…"}
+        {ready ? t("description") : t("loading")}
       </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm">
-          <span className="font-medium text-slate-700 dark:text-zinc-300">Conference start</span>
+          <span className="font-medium text-slate-700 dark:text-zinc-300">{t("conferenceStart")}</span>
           <input
             type="datetime-local"
             value={conferenceStart ?? ""}
@@ -136,7 +145,7 @@ export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }
           />
         </label>
         <label className="block text-sm">
-          <span className="font-medium text-slate-700 dark:text-zinc-300">Position paper deadline</span>
+          <span className="font-medium text-slate-700 dark:text-zinc-300">{t("paperDeadline")}</span>
           <input
             type="datetime-local"
             value={paperDeadline ?? ""}
@@ -146,8 +155,8 @@ export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }
         </label>
       </div>
       <div className="mt-4 space-y-2 rounded-xl bg-slate-50 px-4 py-3 dark:bg-zinc-800/60">
-        <CountdownLine label="Until conference" iso={conferenceStart} />
-        <CountdownLine label="Until paper deadline" iso={paperDeadline} />
+        <CountdownLine label={t("untilConference")} iso={conferenceStart} />
+        <CountdownLine label={t("untilPaperDeadline")} iso={paperDeadline} />
       </div>
     </section>
   );

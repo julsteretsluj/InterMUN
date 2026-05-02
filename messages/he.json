@@ -769,7 +769,61 @@
         "label": "משבר / דיווח",
         "hint": "העלה בעיה"
       }
+    },
+    "countdownCard": {
+      "title": "ספירה לאחור לכנס ולמסמך עמדה",
+      "description": "משותף לוועדה זו — כל מי שיש לו מושב רואה את אותן תאריכים (כל נציג יכול לעדכן).",
+      "loading": "טוען…",
+      "conferenceStart": "תחילת הכנס",
+      "paperDeadline": "דדליין למסמך עמדה",
+      "untilConference": "עד הכנס",
+      "untilPaperDeadline": "עד דדליין המסמך",
+      "notSet": "לא הוגדר",
+      "past": "בעבר",
+      "started": "התחיל",
+      "remainingDhm": "{days}י {hours}ש {minutes}ד",
+      "remainingHm": "{hours}ש {minutes}ד",
+      "remainingM": "{minutes}ד"
     }
+  },
+  "materialsExportCard": {
+    "title": "ייצוא החומרים שלי",
+    "description": "שלחו עותק של המסמכים, ההערות, הנאומים וההצבעות השמורים שלכם לדוא\"ל של החשבון. שימושי בסוף היום (או בכל עת).",
+    "whatToInclude": "מה לכלול",
+    "preparing": "מכינים את הייצוא…",
+    "submit": "שלחו לי את הייצוא במייל"
+  },
+  "delegateResolutionBuilder": {
+    "title": "בונה החלטות",
+    "emptyDescription": "עדיין אין טיוטות החלטות לוועדה זו. כשהנשיאות תיצור אחת, תוכלו להציע כאן סעיפים פריאמבולריים ואופרטיביים.",
+    "introDescription": "בחרו טיוטה, סגנון פריאמבולרי או אופרטיבי, השתמשו בביטוי פתיחה מוכן (אופציונלי) וכתבו את הסעיף. ההצעות גלויות לוועדה; הנשיאות יכולה למזגן לרשימת הסעיפים הרשמית או למסמך Google.",
+    "draftResolution": "טיוטת החלטה",
+    "draftResolutionNumber": "טיוטת החלטה {number}",
+    "googleDocLinkedTag": " · מסמך Google מקושר",
+    "section": "חלק",
+    "sectionPreambulatory": "פריאמבולרי",
+    "sectionOperative": "אופרטיבי",
+    "openingPresets": "ביטויי פתיחה מוכנים",
+    "openingPhraseLabel": "ביטוי פתיחה (עריכה או הקלדה משלכם)",
+    "openingPlaceholderPreambulatory": "למשל deeply concerned",
+    "openingPlaceholderOperative": "למשל calls upon",
+    "clauseText": "טקסט הסעיף",
+    "clausePlaceholder": "…שאר הסעיף (עובדות, פעולות, פרטים). פסיקים אחרי הפתיחה מתווספים בשמירה.",
+    "preview": "תצוגה מקדימה",
+    "previewDash": "—",
+    "submitting": "שולח…",
+    "submitClause": "שליחת הצעת סעיף",
+    "suggestionsHeading": "הצעות להחלטה זו",
+    "refresh": "רענון",
+    "loading": "טוען…",
+    "noSuggestionsYet": "אין עדיין הצעות.",
+    "badgePreamb": "פריאמב.",
+    "badgeOperative": "אופרטיבי",
+    "badgeYours": "שלכם",
+    "delete": "מחיקה",
+    "errSelectResolution": "בחרו החלטה והתחברו.",
+    "errEmptyBody": "הוסיפו טקסט סעיף אחרי הפתיחה (או הקלידו סעיף מלא בשדה הגוף).",
+    "okSubmitted": "ההצעה נשלחה. הנשיאות יכולה לסקור ולהוסיף לטיוטה."
   },
   "committeeGate": {
     "title": "כניסה לוועדה",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "זמן כולל",
       "euPoiPocTime": "זמן POI / POC",
       "euSpeakerTime": "זמן רמקול"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "רשימת התקנה למנהל",
+      "subtitle": "הגדרת אתר ואספקת צוות.",
+      "step1Label": "יצירת אירוע + ועדה ראשונה",
+      "step1Detail": "יצירת שערי כנס וועדה.",
+      "step2Label": "הזמנה או קידום חשבונות SMT",
+      "step2Detail": "מתן גישת מזכירות לפני פעולות הוועדה.",
+      "step3Label": "אימות צינור פורטל סטטוס",
+      "step3Detail": "מעקב אחר זרימת נציגים ממתינים → מאושרים.",
+      "step4Label": "מסירה ללוח SMT",
+      "step4Detail": "פעולות ועדה חיות ממשיכות בכלי SMT."
+    },
+    "smt": {
+      "title": "רשימת התקנה ל-SMT",
+      "subtitle": "בקרות ברמת הכנס לפני כניסת יושבי ראש ונציגים.",
+      "step1Label": "אישור אירוע + ישיבות ועדה",
+      "step1Detail": "אימות שמות, תגים, שמות יושבי ראש וקישורי משבר.",
+      "step2Label": "הגדרת קודי חדר + גישת יושב ראש",
+      "step2Detail": "לוודא לכל ועדה קודי שער נכונים.",
+      "step3Label": "הכנת הקצאות + מסמכי כניסה",
+      "step3Detail": "ייבוא מושבים, לאחר מכן הגדרת סיסמאות/קודים.",
+      "step4Label": "פרסום מסמכים גלובליים (RoP / קריטריונים)",
+      "step4Detail": "העלאת הפניות משותפות לכל המשתמשים."
+    },
+    "chair": {
+      "title": "רשימת התקנה ליושב ראש",
+      "subtitle": "מוכנות חדר ובקרות רצפה לוועדה שלך.",
+      "step1Label": "בדיקת מטריצת נציגים + אישורים",
+      "step1Detail": "אישור שיבוצים ובדיקות הרשמה ממתינות.",
+      "step2Label": "הרצת אישורי קריאה",
+      "step2Detail": "סימון נציגים נוכחים לפני השתתפות ברצפה.",
+      "step3Label": "הגדרת טיימר + זרימת דוברים",
+      "step3Detail": "שמירת הגדרות רצפה לפני פתיחת הצעות.",
+      "step4Label": "פתיחת פעולות חדר דיגיטלי",
+      "step4Detail": "תיאום דוברים, הערות ונראות הישיבה."
+    },
+    "delegate": {
+      "title": "רשימת התקנה לנציג",
+      "subtitle": "התכוננו במהירות להשתתפות בוועדה.",
+      "step1Label": "השלמת בסיס הפרופיל",
+      "step1Detail": "אמתו שם, הקצאה ופרטי חשבון.",
+      "step2Label": "קריאת RoP + קריטריוני פרסים",
+      "step2Detail": "פתחו מסמכים משותפים שהועלו על ידי SMT.",
+      "step3Label": "יצירת מסמך הכנה",
+      "step3Detail": "העלאה/עריכת הערות הכנה ישירות באפליקציה.",
+      "step4Label": "הצטרפות לחדר הוועדה + קריאה",
+      "step4Detail": "המתינו לאישור נוכחות מיושב הראש, ואז דברו."
     }
   }
 }

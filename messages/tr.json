@@ -841,7 +841,61 @@
         "label": "Kriz / rapor",
         "hint": "Bir sorunu dile getirin"
       }
+    },
+    "countdownCard": {
+      "title": "Konferans ve position paper geri sayımı",
+      "description": "Bu komite için paylaşılır — oturumu olan herkes aynı tarihleri görür (her delege güncelleyebilir).",
+      "loading": "Yükleniyor…",
+      "conferenceStart": "Konferans başlangıcı",
+      "paperDeadline": "Position paper son tarihi",
+      "untilConference": "Konferansa kadar",
+      "untilPaperDeadline": "Ödev son tarihine kadar",
+      "notSet": "ayarlanmadı",
+      "past": "Geçti",
+      "started": "Başladı",
+      "remainingDhm": "{days}g {hours}s {minutes}dk",
+      "remainingHm": "{hours}s {minutes}dk",
+      "remainingM": "{minutes}dk"
     }
+  },
+  "materialsExportCard": {
+    "title": "Materyallerimi dışa aktar",
+    "description": "Kayıtlı belgelerinizin, notlarınızın, konuşmalarınızın ve oylarınızın bir kopyasını hesap e-postanıza gönderin. Gün sonunda (veya istediğiniz zaman) kullanışlıdır.",
+    "whatToInclude": "Neler dahil edilsin",
+    "preparing": "Dışa aktarma hazırlanıyor…",
+    "submit": "Dışa aktarmayı e-postama gönder"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Karar taslağı oluşturucu",
+    "emptyDescription": "Bu komite için henüz taslak karar yok. Büro bir taslak oluşturduğunda önsöz ve işlem maddelerini burada önerebilirsiniz.",
+    "introDescription": "Bir taslak seçin, önsöz veya işlem stilini belirleyin, isteğe bağlı hazır giriş kullanın ve maddenizi yazın. Öneriler komiteye görünür; büro bunları resmi listeye veya Google Doküman’a aktarabilir.",
+    "draftResolution": "Taslak karar",
+    "draftResolutionNumber": "Taslak karar {number}",
+    "googleDocLinkedTag": " · Google Doküman bağlı",
+    "section": "Bölüm",
+    "sectionPreambulatory": "Önsöz",
+    "sectionOperative": "İşlem",
+    "openingPresets": "Giriş ön ayarları",
+    "openingPhraseLabel": "Giriş ifadesi (düzenleyin veya kendiniz yazın)",
+    "openingPlaceholderPreambulatory": "örn. deeply concerned",
+    "openingPlaceholderOperative": "örn. calls upon",
+    "clauseText": "Madde metni",
+    "clausePlaceholder": "…Maddenin geri kalanı (gerçekler, eylemler, ayrıntılar). Kaydederken girişten sonra virgül eklenir.",
+    "preview": "Önizleme",
+    "previewDash": "—",
+    "submitting": "Gönderiliyor…",
+    "submitClause": "Madde önerisini gönder",
+    "suggestionsHeading": "Bu karar için öneriler",
+    "refresh": "Yenile",
+    "loading": "Yükleniyor…",
+    "noSuggestionsYet": "Henüz öneri yok.",
+    "badgePreamb": "Önsöz",
+    "badgeOperative": "İşlem",
+    "badgeYours": "Sizin",
+    "delete": "Sil",
+    "errSelectResolution": "Bir karar seçin ve oturum açın.",
+    "errEmptyBody": "Girişten sonra madde metni ekleyin (veya gövde alanına tam madde yazın).",
+    "okSubmitted": "Öneri gönderildi. Büro inceleyip taslağa ekleyebilir."
   },
   "committeeGate": {
     "title": "Komite girişi",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Toplam süre",
       "euPoiPocTime": "POI / POC zamanı",
       "euSpeakerTime": "Konuşmacı süresi"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Yönetici kurulum kontrol listesi",
+      "subtitle": "Site düzeyi kurulum ve personel sağlama.",
+      "step1Label": "Etkinlik + ilk komite oluştur",
+      "step1Detail": "Konferans ve komite geçitleri oluştur.",
+      "step2Label": "SMT hesaplarını davet et veya yükselt",
+      "step2Detail": "Komite operasyonlarından önce sekreterya erişimi ver.",
+      "step3Label": "Durum portalı akışını doğrula",
+      "step3Detail": "Bekleyen → onaylı delegasyon akışını izle.",
+      "step4Label": "SMT panosuna devret",
+      "step4Detail": "Canlı komite operasyonları SMT araçlarında sürer."
+    },
+    "smt": {
+      "title": "SMT kurulum kontrol listesi",
+      "subtitle": "Başkanlar ve delegeler girmeden önce konferans genelinde kontroller.",
+      "step1Label": "Etkinlik + komite oturumlarını onayla",
+      "step1Detail": "İsimleri, etiketleri, başkan adlarını ve kriz bağlantılarını doğrula.",
+      "step2Label": "Oda kodları + başkan erişimini ayarla",
+      "step2Detail": "Her komitenin doğru geçiş kodlarına sahip olduğundan emin ol.",
+      "step3Label": "Tahsisler + oturum açma belgelerini hazırla",
+      "step3Detail": "Koltukları içe aktar, ardından parola/kod ayarla.",
+      "step4Label": "Küresel belgeleri yayınla (RoP / ölçütler)",
+      "step4Detail": "Tüm kullanıcılar için ortak referansları yükle."
+    },
+    "chair": {
+      "title": "Başkan kurulum kontrol listesi",
+      "subtitle": "Komiteniz için salon hazırlığı ve oturum kontrolleri.",
+      "step1Label": "Delegasyon matrisi + onayları kontrol et",
+      "step1Detail": "Atamaları ve bekleyen kayıt incelemelerini onayla.",
+      "step2Label": "Yoklama onaylarını yürüt",
+      "step2Detail": "Salona katılımdan önce delegeleri hazır olarak işaretle.",
+      "step3Label": "Zamanlayıcı + konuşmacı akışını ayarla",
+      "step3Detail": "Önergeleri açmadan önce salon ön ayarlarını kaydet.",
+      "step4Label": "Dijital salon operasyonlarını aç",
+      "step4Detail": "Konuşmacıları, notları ve oturum görünürlüğünü koordine et."
+    },
+    "delegate": {
+      "title": "Delegasyon kurulum kontrol listesi",
+      "subtitle": "Komiteye katılmak için hızlıca hazırlanın.",
+      "step1Label": "Profil temellerini tamamla",
+      "step1Detail": "Adınızı, tahsisi ve hesap ayrıntılarını doğrulayın.",
+      "step2Label": "RoP + ödül ölçütlerini okuyun",
+      "step2Detail": "SMT tarafından yüklenen paylaşılan belgeleri açın.",
+      "step3Label": "Hazırlık belgenizi oluşturun",
+      "step3Detail": "Hazırlık notlarını doğrudan uygulamada yükleyin/düzenleyin.",
+      "step4Label": "Komite salonuna + yoklamaya katılın",
+      "step4Detail": "Başkanın hazır onayını bekleyin, sonra konuşun."
     }
   }
 }

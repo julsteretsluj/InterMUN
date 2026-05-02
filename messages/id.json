@@ -769,7 +769,61 @@
         "label": "Krisis / laporan",
         "hint": "Angkat sebuah isu"
       }
+    },
+    "countdownCard": {
+      "title": "Hitung mundur konferensi & position paper",
+      "description": "Bersama untuk komite ini — semua yang punya kursi melihat tanggal yang sama (delegasi mana pun dapat memperbarui).",
+      "loading": "Memuat…",
+      "conferenceStart": "Mulai konferensi",
+      "paperDeadline": "Batas waktu position paper",
+      "untilConference": "Hingga konferensi",
+      "untilPaperDeadline": "Hingga batas position paper",
+      "notSet": "belum diatur",
+      "past": "Lewat",
+      "started": "Dimulai",
+      "remainingDhm": "{days}h {hours}j {minutes}m",
+      "remainingHm": "{hours}j {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Ekspor materi saya",
+    "description": "Kirim salinan dokumen, catatan, pidato, dan suara tersimpan Anda ke email akun. Berguna di akhir hari (atau kapan saja).",
+    "whatToInclude": "Yang disertakan",
+    "preparing": "Menyiapkan ekspor…",
+    "submit": "Kirim ekspor ke email saya"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Penyusun resolusi",
+    "emptyDescription": "Belum ada draf resolusi untuk komite ini. Ketika meja penyusun membuatnya, Anda dapat mengusulkan klausul preambule dan operatif di sini.",
+    "introDescription": "Pilih draf, gaya preambule atau operatif, gunakan frasa pembuka preset (opsional), dan tulis klausul Anda. Saran terlihat oleh komite; meja penyusun dapat menggabungkannya ke daftar resmi atau Google Doc.",
+    "draftResolution": "Draf resolusi",
+    "draftResolutionNumber": "Draf resolusi {number}",
+    "googleDocLinkedTag": " · Google Doc tertaut",
+    "section": "Bagian",
+    "sectionPreambulatory": "Preambule",
+    "sectionOperative": "Operatif",
+    "openingPresets": "Preset frasa pembuka",
+    "openingPhraseLabel": "Frasa pembuka (edit atau ketik sendiri)",
+    "openingPlaceholderPreambulatory": "mis. deeply concerned",
+    "openingPlaceholderOperative": "mis. calls upon",
+    "clauseText": "Teks klausul",
+    "clausePlaceholder": "…sisanya dari klausul (fakta, tindakan, detail). Koma setelah pembuka ditambahkan saat menyimpan.",
+    "preview": "Pratinjau",
+    "previewDash": "—",
+    "submitting": "Mengirim…",
+    "submitClause": "Kirim saran klausul",
+    "suggestionsHeading": "Saran untuk resolusi ini",
+    "refresh": "Muat ulang",
+    "loading": "Memuat…",
+    "noSuggestionsYet": "Belum ada saran.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operatif",
+    "badgeYours": "Milik Anda",
+    "delete": "Hapus",
+    "errSelectResolution": "Pilih resolusi dan masuk.",
+    "errEmptyBody": "Tambahkan teks klausul setelah pembuka (atau ketik klausul lengkap di kolom isi).",
+    "okSubmitted": "Saran terkirim. Meja penyusun dapat meninjau dan menambahkannya ke draf."
   },
   "committeeGate": {
     "title": "Pendaftaran panitia",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Total waktu",
       "euPoiPocTime": "Waktu POI/POC",
       "euSpeakerTime": "Waktu pembicara"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Daftar periksa penyiapan admin",
+      "subtitle": "Penyiapan tingkat situs dan penyediaan staf.",
+      "step1Label": "Buat acara + komite pertama",
+      "step1Detail": "Hasilkan gerbang konferensi dan komite.",
+      "step2Label": "Undang atau promosikan akun SMT",
+      "step2Detail": "Berikan akses sekretariat sebelum operasi komite.",
+      "step3Label": "Verifikasi alur portal status",
+      "step3Detail": "Pantau alur delegasi tertunda → terkonfirmasi.",
+      "step4Label": "Serahkan ke dasbor SMT",
+      "step4Detail": "Operasi komite langsung berlanjut di alat SMT."
+    },
+    "smt": {
+      "title": "Daftar periksa penyiapan SMT",
+      "subtitle": "Kontrol tingkat konferensi sebelum ketua dan delegasi masuk.",
+      "step1Label": "Konfirmasi acara + sesi komite",
+      "step1Detail": "Validasi nama, tag, nama ketua, dan tautan krisis.",
+      "step2Label": "Atur kode ruang + akses ketua",
+      "step2Detail": "Pastikan setiap komite memiliki kode gerbang yang benar.",
+      "step3Label": "Siapkan alokasi + dokumen masuk",
+      "step3Detail": "Impor kursi, lalu atur kata sandi/kode.",
+      "step4Label": "Terbitkan dokumen global (RoP / kriteria)",
+      "step4Detail": "Unggah referensi bersama untuk semua pengguna."
+    },
+    "chair": {
+      "title": "Daftar periksa penyiapan ketua",
+      "subtitle": "Kesiapan ruang dan kontrol lantai untuk komite Anda.",
+      "step1Label": "Periksa matriks delegasi + persetujuan",
+      "step1Detail": "Konfirmasi penugasan dan tinjauan pendaftaran tertunda.",
+      "step2Label": "Jalankan persetujuan panggilan roll",
+      "step2Detail": "Tandai delegasi hadir sebelum berpartisipasi di lantai.",
+      "step3Label": "Atur timer + alur pembicara",
+      "step3Detail": "Simpan preset lantai sebelum membuka mosi.",
+      "step4Label": "Buka operasi ruang digital",
+      "step4Detail": "Koordinasikan pembicara, catatan, dan visibilitas sesi."
+    },
+    "delegate": {
+      "title": "Daftar periksa penyiapan delegasi",
+      "subtitle": "Bersiap cepat untuk berpartisipasi di komite.",
+      "step1Label": "Lengkapi dasar profil",
+      "step1Detail": "Verifikasi nama, alokasi, dan detail akun.",
+      "step2Label": "Baca RoP + kriteria penghargaan",
+      "step2Detail": "Buka dokumen bersama yang diunggah SMT.",
+      "step3Label": "Buat dokumen persiapan Anda",
+      "step3Detail": "Unggah/edit catatan persiapan langsung di aplikasi.",
+      "step4Label": "Gabung ruang komite + panggilan roll",
+      "step4Detail": "Tunggu persetujuan hadir dari ketua, lalu berbicara."
     }
   }
 }

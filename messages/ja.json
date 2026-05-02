@@ -841,7 +841,61 @@
         "label": "危機・報告",
         "hint": "問題を提起する"
       }
+    },
+    "countdownCard": {
+      "title": "会議・ポジションペーパーまでのカウントダウン",
+      "description": "この委員会で共有 — 座席のある全員が同じ日時を見られます（代表は誰でも更新可能）。",
+      "loading": "読み込み中…",
+      "conferenceStart": "会議開始",
+      "paperDeadline": "ポジションペーパー締切",
+      "untilConference": "会議まで",
+      "untilPaperDeadline": "ペーパー締切まで",
+      "notSet": "未設定",
+      "past": "終了",
+      "started": "開始済み",
+      "remainingDhm": "{days}日{hours}時間{minutes}分",
+      "remainingHm": "{hours}時間{minutes}分",
+      "remainingM": "{minutes}分"
     }
+  },
+  "materialsExportCard": {
+    "title": "資料をエクスポート",
+    "description": "保存した文書・メモ・演説・投票のコピーをアカウントのメールへ送ります。一日の終わり（またはいつでも）に便利です。",
+    "whatToInclude": "含める範囲",
+    "preparing": "エクスポートを準備中…",
+    "submit": "エクスポートをメールで送る"
+  },
+  "delegateResolutionBuilder": {
+    "title": "決議案ビルダー",
+    "emptyDescription": "この委員会にはまだ決議案のドラフトがありません。議長団が作成すると、ここで前文条項と実施条項を提案できます。",
+    "introDescription": "ドラフトを選び、前文または実施のスタイルを選び、（任意で）冒頭の定型句を使い、条項を書きます。提案は委員会に表示され、議長団が正式な条項リストや Google ドキュメントに取り込む場合があります。",
+    "draftResolution": "決議案ドラフト",
+    "draftResolutionNumber": "決議案ドラフト {number}",
+    "googleDocLinkedTag": " · Google ドキュメント連携",
+    "section": "区分",
+    "sectionPreambulatory": "前文",
+    "sectionOperative": "実施",
+    "openingPresets": "冒頭の定型句",
+    "openingPhraseLabel": "冒頭のフレーズ（編集または自由入力）",
+    "openingPlaceholderPreambulatory": "例: Deeply concerned",
+    "openingPlaceholderOperative": "例: Calls upon",
+    "clauseText": "条項テキスト",
+    "clausePlaceholder": "…条項の残り（事実、措置、具体的内容）。保存時に冒頭の後に読点が追加されます。",
+    "preview": "プレビュー",
+    "previewDash": "—",
+    "submitting": "送信中…",
+    "submitClause": "条項提案を送信",
+    "suggestionsHeading": "この決議案への提案",
+    "refresh": "更新",
+    "loading": "読み込み中…",
+    "noSuggestionsYet": "まだ提案はありません。",
+    "badgePreamb": "前文",
+    "badgeOperative": "実施",
+    "badgeYours": "自分",
+    "delete": "削除",
+    "errSelectResolution": "決議案を選び、サインインしてください。",
+    "errEmptyBody": "冒頭の後に条項テキストを追加するか、本文欄に全文を入力してください。",
+    "okSubmitted": "提案を送信しました。議長団が確認しドラフトに追加できます。"
   },
   "committeeGate": {
     "title": "委員会へのサインイン",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "合計時間",
       "euPoiPocTime": "POI/POC時間",
       "euSpeakerTime": "講演時間"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "管理者セットアップチェックリスト",
+      "subtitle": "サイト全体のセットアップとスタッフの準備。",
+      "step1Label": "イベント＋最初の委員会を作成",
+      "step1Detail": "会議・委員会のゲートを生成。",
+      "step2Label": "SMTアカウントを招待または昇格",
+      "step2Detail": "委員会運営前に事務局アクセスを付与。",
+      "step3Label": "ステータスポータルの流れを確認",
+      "step3Detail": "保留→確定の代表フローを監視。",
+      "step4Label": "SMTダッシュボードへ引き継ぎ",
+      "step4Detail": "ライブ委員会運営はSMTツールで継続。"
+    },
+    "smt": {
+      "title": "SMTセットアップチェックリスト",
+      "subtitle": "座長・代表が入る前の会議全体の管理。",
+      "step1Label": "イベント＋委員会セッションを確認",
+      "step1Detail": "名称、タグ、座長名、危機リンクを検証。",
+      "step2Label": "ルームコード＋座長アクセスを設定",
+      "step2Detail": "各委員会に正しいゲートコードがあることを確認。",
+      "step3Label": "割当＋サインインドキュメントを準備",
+      "step3Detail": "座席をインポートし、パスワード／コードを設定。",
+      "step4Label": "共通文書を公開（RoP／基準）",
+      "step4Detail": "全ユーザー向けの共通資料をアップロード。"
+    },
+    "chair": {
+      "title": "座長セットアップチェックリスト",
+      "subtitle": "委員会の会場準備と議場コントロール。",
+      "step1Label": "代表マトリクス＋承認を確認",
+      "step1Detail": "割当と保留中のサインアップ審査を確認。",
+      "step2Label": "点呼承認を実施",
+      "step2Detail": "議場参加前に代表を出席としてマーク。",
+      "step3Label": "タイマー＋発言順を設定",
+      "step3Detail": "動議を開く前に議場プリセットを保存。",
+      "step4Label": "デジタル会場運用を開く",
+      "step4Detail": "発言者・メモ・セッションの可視性を調整。"
+    },
+    "delegate": {
+      "title": "代表セットアップチェックリスト",
+      "subtitle": "委員会参加に向けて素早く準備。",
+      "step1Label": "プロフィール基本を完了",
+      "step1Detail": "氏名、割当、アカウント情報を確認。",
+      "step2Label": "RoP＋表彰基準を読む",
+      "step2Detail": "SMTがアップロードした共有資料を開く。",
+      "step3Label": "準備ドキュメントを作成",
+      "step3Detail": "アプリ内で準備メモを直接アップロード／編集。",
+      "step4Label": "委員会室＋点呼に参加",
+      "step4Detail": "座長の出席承認を待ってから発言。"
     }
   }
 }

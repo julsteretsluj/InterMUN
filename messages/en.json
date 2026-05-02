@@ -777,6 +777,56 @@
     "title": "Room codes & chairs",
     "subtitle": "Set the second-gate committee code for each session and invite or promote dais chairs without using the delegate dashboard."
   },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Admin setup checklist",
+      "subtitle": "Website-level setup and staff provisioning.",
+      "step1Label": "Create event + first committee",
+      "step1Detail": "Generate conference + committee gates.",
+      "step2Label": "Invite or promote SMT accounts",
+      "step2Detail": "Grant secretariat access before committee operations.",
+      "step3Label": "Verify status portal pipeline",
+      "step3Detail": "Monitor pending -> confirmed delegate flow.",
+      "step4Label": "Hand off to SMT dashboard",
+      "step4Detail": "Live committee operations continue in SMT tools."
+    },
+    "smt": {
+      "title": "SMT setup checklist",
+      "subtitle": "Conference-wide controls before chairs and delegates enter.",
+      "step1Label": "Confirm event + committee sessions",
+      "step1Detail": "Validate names, tags, chair names, and crisis links.",
+      "step2Label": "Set room codes + chair access",
+      "step2Detail": "Ensure each committee has correct gate codes.",
+      "step3Label": "Prepare allocations + sign-in docs",
+      "step3Detail": "Import seats, then set passwords/codes.",
+      "step4Label": "Publish global docs (RoP / criteria)",
+      "step4Detail": "Upload common references for all users."
+    },
+    "chair": {
+      "title": "Chair setup checklist",
+      "subtitle": "Room-readiness and floor controls for your committee.",
+      "step1Label": "Check delegate matrix + approvals",
+      "step1Detail": "Confirm assignments and pending sign-up reviews.",
+      "step2Label": "Run roll call approvals",
+      "step2Detail": "Mark delegates present before floor participation.",
+      "step3Label": "Set timer + speaker flow",
+      "step3Detail": "Save floor presets before opening motions.",
+      "step4Label": "Open digital room operations",
+      "step4Detail": "Coordinate speakers, notes, and session visibility."
+    },
+    "delegate": {
+      "title": "Delegate setup checklist",
+      "subtitle": "Get ready to participate in committee quickly.",
+      "step1Label": "Complete profile basics",
+      "step1Detail": "Verify your name, allocation, and account details.",
+      "step2Label": "Read RoP + award criteria",
+      "step2Detail": "Open shared docs uploaded by SMT.",
+      "step3Label": "Create your prep document",
+      "step3Detail": "Upload/edit prep notes directly in-app.",
+      "step4Label": "Join committee room + roll call",
+      "step4Detail": "Wait for chair present-status approval, then speak."
+    }
+  },
   "delegateDashboard": {
     "welcome": "Welcome, Delegate of {flag} {country}",
     "activeCommitteeIntro": "Active committee: {line}.",
@@ -841,7 +891,61 @@
         "label": "Crisis / report",
         "hint": "Raise an issue"
       }
+    },
+    "countdownCard": {
+      "title": "Conference & position paper countdown",
+      "description": "Shared for this committee — everyone with a seat sees the same dates (any delegate can update).",
+      "loading": "Loading…",
+      "conferenceStart": "Conference start",
+      "paperDeadline": "Position paper deadline",
+      "untilConference": "Until conference",
+      "untilPaperDeadline": "Until paper deadline",
+      "notSet": "not set",
+      "past": "Past",
+      "started": "Started",
+      "remainingDhm": "{days}d {hours}h {minutes}m",
+      "remainingHm": "{hours}h {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Export my materials",
+    "description": "Send a copy of your saved documents/notes/speeches/votes to your account email. Useful at the end of the day (or anytime).",
+    "whatToInclude": "What to include",
+    "preparing": "Preparing export…",
+    "submit": "Email me my export"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Resolution builder",
+    "emptyDescription": "There are no draft resolutions for this committee yet. When the dais creates one, you can suggest preambulatory and operative clauses here.",
+    "introDescription": "Choose a draft resolution, pick preambulatory or operative style, use an opening preset (optional), and write your clause. Suggestions are visible to the committee; the dais may merge them into the official clause list or Google Doc.",
+    "draftResolution": "Draft resolution",
+    "draftResolutionNumber": "Draft resolution {number}",
+    "googleDocLinkedTag": " · Google Doc linked",
+    "section": "Section",
+    "sectionPreambulatory": "Preambulatory",
+    "sectionOperative": "Operative",
+    "openingPresets": "Opening presets",
+    "openingPhraseLabel": "Opening phrase (edit or type your own)",
+    "openingPlaceholderPreambulatory": "e.g. Deeply concerned",
+    "openingPlaceholderOperative": "e.g. Calls upon",
+    "clauseText": "Clause text",
+    "clausePlaceholder": "…the rest of the clause (facts, actions, specifics). Commas after the opening are added when you save.",
+    "preview": "Preview",
+    "previewDash": "—",
+    "submitting": "Submitting…",
+    "submitClause": "Submit clause suggestion",
+    "suggestionsHeading": "Suggestions for this resolution",
+    "refresh": "Refresh",
+    "loading": "Loading…",
+    "noSuggestionsYet": "No suggestions yet.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operative",
+    "badgeYours": "Yours",
+    "delete": "Delete",
+    "errSelectResolution": "Select a resolution and sign in.",
+    "errEmptyBody": "Add clause text after the opening (or type a full clause in the body field).",
+    "okSubmitted": "Suggestion submitted. The dais can review and add it to the draft."
   },
   "committeeGate": {
     "title": "Committee sign-in",

@@ -769,7 +769,61 @@
         "label": "Te raru / purongo",
         "hint": "Whakaarahia he take"
       }
+    },
+    "countdownCard": {
+      "title": "Hekenga hoki hui & pepa tūnga",
+      "description": "Mō tēnei komiti — te hunga katoa e noho ana i te tūnga ka kite i ngā rā orite (ka taea e te mangai te whakahou).",
+      "loading": "Utaina ana…",
+      "conferenceStart": "Tīmatanga hui",
+      "paperDeadline": "Te mutunga pepa tūnga",
+      "untilConference": "Tae noa ki te hui",
+      "untilPaperDeadline": "Tae noa ki te mutunga pepa",
+      "notSet": "Kāore anō kia whakaritea",
+      "past": "Kua pahure",
+      "started": "Kua tīmata",
+      "remainingDhm": "{days}r {hours}h {minutes}m",
+      "remainingHm": "{hours}h {minutes}m",
+      "remainingM": "{minutes}m"
     }
+  },
+  "materialsExportCard": {
+    "title": "Tāpaetanga aku rauemi",
+    "description": "Tuku tārua o ō tuhinga, tuhipoka, kōrero whai take, pōti hoki kua penapena ki tō īmēra pūkete. He whai hua i te mutunga o te rā (ā, i ngā wā katoa).",
+    "whatToInclude": "He aha te mea ka whakauru",
+    "preparing": "E whakarite ana i te tāpaetanga…",
+    "submit": "Tuku mai te tāpaetanga ki tōku īmēra"
+  },
+  "delegateResolutionBuilder": {
+    "title": "Hanga whakatau",
+    "emptyDescription": "Kaore ano he tauira whakatau mo tenei komiti. Ina hangaia e te tepu kotahi, ka taea e koe te whakaatu i nga whakamarama preambulatory me operative i konei.",
+    "introDescription": "Tohua he tauira, tohua te ahua preambulatory whanui operative, whakamahia he kupu whakatuwhera taunga (hei whiringa) me tuhi i to whakamarama. Ka kitea nga whakaaturanga e te komiti; ka taea e te tepu te whakakotahi ki te rarangi whaimana, ki te Google Doc ranei.",
+    "draftResolution": "Tauira whakatau",
+    "draftResolutionNumber": "Tauira whakatau {number}",
+    "googleDocLinkedTag": " · Google Doc hono",
+    "section": "Wahanga",
+    "sectionPreambulatory": "Preambulatory",
+    "sectionOperative": "Operative",
+    "openingPresets": "Nga kupu whakatuwhera taunga",
+    "openingPhraseLabel": "Kupu whakatuwhera (whakatika, whaikorero ake ranei)",
+    "openingPlaceholderPreambulatory": "hei tauira deeply concerned",
+    "openingPlaceholderOperative": "hei tauira calls upon",
+    "clauseText": "Kuputuhi whakamarama",
+    "clausePlaceholder": "…te wahi toenga o te whakamarama (korero, mahi, taipitopito). Ka taapirihia nga koma whai muri i te whakatuwhera ina penapena.",
+    "preview": "Arokite",
+    "previewDash": "—",
+    "submitting": "Tuku ana…",
+    "submitClause": "Tuku whakaaturanga whakamarama",
+    "suggestionsHeading": "Nga whakaaturanga mo tenei whakatau",
+    "refresh": "Whakahou",
+    "loading": "Utaina ana…",
+    "noSuggestionsYet": "Kaore ano he whakaaturanga.",
+    "badgePreamb": "Preamb.",
+    "badgeOperative": "Operative",
+    "badgeYours": "Nau",
+    "delete": "Muku",
+    "errSelectResolution": "Tohua he whakatau ka whakauru.",
+    "errEmptyBody": "Taapirihia te kuputuhi whakamarama whai muri i te whakatuwhera (patopato he whakamarama katoa ki te apata).",
+    "okSubmitted": "Kua tukuna te whakaaturanga. Ka taea e te tepu te arotake me te taapiri ki te tauira."
   },
   "committeeGate": {
     "title": "Te hainatanga a te komiti",
@@ -2936,6 +2990,56 @@
       "euTotalTime": "Te wa katoa",
       "euPoiPocTime": "POI / POC wa",
       "euSpeakerTime": "Te wa korero"
+    }
+  },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Rārangi taki mō te whakatū kaiwhakahaere",
+      "subtitle": "Te whakatū i te taunga paetukutuku me te whakarato kaimahi.",
+      "step1Label": "Hanga hui + komiti tuatahi",
+      "step1Detail": "Hanga kūwaha hui me te komiti.",
+      "step2Label": "Pōwhiri whakapiki pūkete SMT",
+      "step2Detail": "Hoatu uru tuhinga i mua i ngā mahi komiti.",
+      "step3Label": "Manatoko te rerenga kūaha tūnga",
+      "step3Detail": "Aroturuki te rerenga mangai tārewa → kua whakaū.",
+      "step4Label": "Tuku ki te papapātuhi SMT",
+      "step4Detail": "Ka haere tonu ngā mahi komiti ora i ngā taputapu SMT."
+    },
+    "smt": {
+      "title": "Rārangi taki mō te whakatū SMT",
+      "subtitle": "Ngā whakahaere hui whānui i mua i te taenga o ngā tiamana me ngā mangai.",
+      "step1Label": "Whakaū te hui + ngā hui komiti",
+      "step1Detail": "Manatoko ingoa, tūtohu, ingoa tiamana, hononga whawhai.",
+      "step2Label": "Tautuhi waehere rūma + uru tiamana",
+      "step2Detail": "Me whai ia komiti i ngā waehere kūaha tika.",
+      "step3Label": "Whakarite tuari + tuhinga takiuru",
+      "step3Detail": "Kawemai ngā tūnga, ka muri mai tautuhi kupuhipa/waehere.",
+      "step4Label": "Whakaputa tuhinga ao (RoP / paearu)",
+      "step4Detail": "Tukuake ngā tohutoro mō te katoa o ngā kaiwhakamahi."
+    },
+    "chair": {
+      "title": "Rārangi taki mō te whakatū tiamana",
+      "subtitle": "Te whakarite rūma me ngā whakahaere whaarangi mō tō komiti.",
+      "step1Label": "Tirohia te mātāpono mangai + whakaaetanga",
+      "step1Detail": "Whakaū ngā tohu me ngā arotake rēhita tārewa.",
+      "step2Label": "Whakahaere whakaaetanga rārangi ingoa",
+      "step2Detail": "Tohua ngā mangai hei tū i mua i te whai wāhi.",
+      "step3Label": "Tautuhi taima + rerenga kai kōrero",
+      "step3Detail": "Penapena tautuhinga whaarangi i mua i te whakatuwhera kaupapa.",
+      "step4Label": "Whakatuwhera mahi rūma matihiko",
+      "step4Detail": "Whakakotahi kai kōrero, tuhinga, me te kite hui."
+    },
+    "delegate": {
+      "title": "Rārangi taki mō te whakatū mangai",
+      "subtitle": "Whakarite tere kia whai wāhi ki te komiti.",
+      "step1Label": "Whakaoti take taketake o te whakaahua",
+      "step1Detail": "Manatoko tō ingoa, tuari, me ngā kōrero pūkete.",
+      "step2Label": "Pānui RoP + paearu taonga",
+      "step2Detail": "Whakatuwhera ngā tuhinga i tukuna e te SMT.",
+      "step3Label": "Hanga tō tuhinga whakarite",
+      "step3Detail": "Tukuake/whakatika tuhinga whakarite i te taupānga.",
+      "step4Label": "Uru ki te rūma komiti + rārangi ingoa",
+      "step4Detail": "Tatari whakaaetanga tū a te tiamana, ka muri mai kōrero."
     }
   }
 }
