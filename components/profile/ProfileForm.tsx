@@ -46,6 +46,9 @@ interface ProfileFormProps {
   dashboardCommitteeSwitch?: {
     conferences: DashboardCommitteeOption[];
     activeConferenceId: string | null;
+    /** Allowlisted delegates: pick a session, review allocations, then apply. */
+    confirmBeforeSwitch?: boolean;
+    allocationsByConferenceId?: Record<string, { id: string; label: string }[]>;
   };
 }
 
@@ -60,6 +63,19 @@ export function ProfileForm({
   const router = useRouter();
   const [committeeSwitchBusy, setCommitteeSwitchBusy] = useState(false);
   const [committeeSwitchError, setCommitteeSwitchError] = useState<string | null>(null);
+  const committeeConfirmMode = Boolean(
+    dashboardCommitteeSwitch?.confirmBeforeSwitch &&
+      dashboardCommitteeSwitch.allocationsByConferenceId
+  );
+  const [pendingCommitteeId, setPendingCommitteeId] = useState(
+    () => dashboardCommitteeSwitch?.activeConferenceId ?? ""
+  );
+
+  const activeCommitteeFromServer = dashboardCommitteeSwitch?.activeConferenceId ?? null;
+  useEffect(() => {
+    if (!committeeConfirmMode) return;
+    setPendingCommitteeId(activeCommitteeFromServer ?? "");
+  }, [committeeConfirmMode, activeCommitteeFromServer]);
 
   const schema = useMemo(
     () =>
@@ -419,11 +435,19 @@ export function ProfileForm({
             id="profile-dashboard-committee"
             className={fieldClass}
             disabled={committeeSwitchBusy}
-            value={dashboardCommitteeSwitch.activeConferenceId ?? ""}
+            value={
+              committeeConfirmMode
+                ? pendingCommitteeId
+                : (dashboardCommitteeSwitch.activeConferenceId ?? "")
+            }
             onChange={(e) => {
               const id = e.target.value;
-              if (!id) return;
               setCommitteeSwitchError(null);
+              if (committeeConfirmMode) {
+                setPendingCommitteeId(id);
+                return;
+              }
+              if (!id) return;
               setCommitteeSwitchBusy(true);
               void setProfileDashboardCommittee(id).then((result) => {
                 setCommitteeSwitchBusy(false);
@@ -439,6 +463,49 @@ export function ProfileForm({
               </option>
             ))}
           </select>
+          {committeeConfirmMode && pendingCommitteeId ? (
+            <div className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 space-y-1.5">
+              <p className="text-xs font-medium text-brand-navy">
+                {tp("dashboardCommitteeAllocationsHeading")}
+              </p>
+              {(() => {
+                const rows =
+                  dashboardCommitteeSwitch.allocationsByConferenceId?.[pendingCommitteeId] ??
+                  [];
+                if (rows.length === 0) {
+                  return (
+                    <p className="text-xs text-brand-muted">
+                      {tp("dashboardCommitteeNoAllocationsListed")}
+                    </p>
+                  );
+                }
+                return (
+                  <ul className="text-xs text-brand-navy space-y-0.5 list-disc pl-4 max-h-40 overflow-y-auto">
+                    {rows.map((r) => (
+                      <li key={r.id}>{r.label}</li>
+                    ))}
+                  </ul>
+                );
+              })()}
+              <button
+                type="button"
+                disabled={committeeSwitchBusy || !pendingCommitteeId}
+                onClick={() => {
+                  if (!pendingCommitteeId) return;
+                  setCommitteeSwitchError(null);
+                  setCommitteeSwitchBusy(true);
+                  void setProfileDashboardCommittee(pendingCommitteeId).then((result) => {
+                    setCommitteeSwitchBusy(false);
+                    if (result.ok) router.refresh();
+                    else setCommitteeSwitchError(tp("dashboardCommitteeSwitchError"));
+                  });
+                }}
+                className="mt-2 px-3 py-1.5 text-sm rounded-md bg-brand-accent text-white hover:opacity-90 disabled:opacity-50"
+              >
+                {tp("dashboardCommitteeApplySwitch")}
+              </button>
+            </div>
+          ) : null}
           {committeeSwitchBusy ? (
             <p className="text-xs text-brand-muted" role="status">
               {tp("dashboardCommitteeSwitching")}

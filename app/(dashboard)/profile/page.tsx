@@ -15,6 +15,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
+import { getActiveEventId } from "@/lib/active-event-cookie";
+import { isDelegateDashboardCommitteeAllowlistedEmail } from "@/lib/delegate-dashboard-committee-allowlist";
 
 type DashboardPickerConferenceRow = {
   id: string;
@@ -112,12 +114,16 @@ export default async function ProfilePage({
     .select("*")
     .eq("recipient_profile_id", user.id)
     .order("created_at", { ascending: true });
-  const { data: myPendingNominations } = await supabase
-    .from("award_nominations")
-    .select("id, nomination_type, rank, evidence_note, committee_conference_id")
-    .eq("nominee_profile_id", user.id)
-    .eq("status", "pending")
-    .order("created_at", { ascending: true });
+  /** Delegates must not see pending nominations (chairs may, when readable via RLS). */
+  const { data: myPendingNominations } =
+    roleLower === "delegate"
+      ? { data: [] as { id: string; nomination_type: string; rank: number; evidence_note: string | null; committee_conference_id: string }[] }
+      : await supabase
+          .from("award_nominations")
+          .select("id, nomination_type, rank, evidence_note, committee_conference_id")
+          .eq("nominee_profile_id", user.id)
+          .eq("status", "pending")
+          .order("created_at", { ascending: true });
   const { data: mySeats } = await supabase
     .from("allocations")
     .select("id, conference_id, country")
@@ -225,8 +231,11 @@ export default async function ProfilePage({
   );
 
   const isDelegate = roleLower === "delegate";
+  const delegateCommitteeSwitchAllowlisted =
+    isDelegateDashboardCommitteeAllowlistedEmail(user.email ?? undefined);
   const canViewPrivate = !isDelegate;
   const activeConference = await getConferenceForDashboard({ role: roleLower });
+  const activeEventIdFromCookie = await getActiveEventId();
   const crisisReportingEnabled = isCrisisCommittee(activeConference?.committee ?? null);
 
   const seatConferenceIds = [
@@ -241,6 +250,24 @@ export default async function ProfilePage({
       .select("id, name, committee, committee_code")
       .in("id", seatConferenceIds);
     rawPickerRows = (seatConfRows ?? []) as DashboardPickerConferenceRow[];
+  }
+
+  const eventIdForAllowlistPicker =
+    activeConference?.event_id ?? activeEventIdFromCookie;
+  if (
+    isDelegate &&
+    delegateCommitteeSwitchAllowlisted &&
+    eventIdForAllowlistPicker
+  ) {
+    const { data: eventConfs } = await supabase
+      .from("conferences")
+      .select("id, name, committee, committee_code")
+      .eq("event_id", eventIdForAllowlistPicker);
+    const byId = new Map(rawPickerRows.map((r) => [r.id, r]));
+    for (const c of (eventConfs ?? []) as DashboardPickerConferenceRow[]) {
+      if (!byId.has(c.id)) byId.set(c.id, c);
+    }
+    rawPickerRows = [...byId.values()];
   }
 
   // Chairs often have dashboard access via the room gate but no linked allocation row; list the whole event.
@@ -264,7 +291,12 @@ export default async function ProfilePage({
   }
 
   let dashboardCommitteeSwitch:
-    | { conferences: { id: string; label: string }[]; activeConferenceId: string | null }
+    | {
+        conferences: { id: string; label: string }[];
+        activeConferenceId: string | null;
+        confirmBeforeSwitch?: boolean;
+        allocationsByConferenceId?: Record<string, { id: string; label: string }[]>;
+      }
     | undefined;
 
   if (rawPickerRows.length > 0) {
@@ -280,6 +312,33 @@ export default async function ProfilePage({
         activeConferenceId: activeConference?.id ?? null,
       };
     }
+  }
+
+  if (dashboardCommitteeSwitch && delegateCommitteeSwitchAllowlisted) {
+    const confIds = [...new Set(dashboardCommitteeSwitch.conferences.map((c) => c.id))];
+    const { data: allocRows } =
+      confIds.length > 0
+        ? await supabase
+            .from("allocations")
+            .select("id, conference_id, country")
+            .in("conference_id", confIds)
+            .order("country", { ascending: true })
+        : { data: [] as { id: string; conference_id: string; country: string | null }[] };
+
+    const allocationsByConferenceId: Record<string, { id: string; label: string }[]> = {};
+    for (const row of allocRows ?? []) {
+      const cid = row.conference_id;
+      if (!cid) continue;
+      const label = row.country?.trim() || row.id;
+      if (!allocationsByConferenceId[cid]) allocationsByConferenceId[cid] = [];
+      allocationsByConferenceId[cid].push({ id: row.id, label });
+    }
+
+    dashboardCommitteeSwitch = {
+      ...dashboardCommitteeSwitch,
+      confirmBeforeSwitch: true,
+      allocationsByConferenceId,
+    };
   }
 
   const { data: allocationRows } = activeConference?.id

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
+import { isDelegateDashboardCommitteeAllowlistedEmail } from "@/lib/delegate-dashboard-committee-allowlist";
 
 /**
  * Sets active event + committee cookies.
@@ -43,6 +44,23 @@ export async function setProfileDashboardCommittee(
   }
 
   if (role === "chair") {
+    const [{ data: targetConf }, activeEventId] = await Promise.all([
+      supabase.from("conferences").select("event_id").eq("id", trimmed).maybeSingle(),
+      getActiveEventId(),
+    ]);
+    if (
+      targetConf?.event_id &&
+      activeEventId &&
+      targetConf.event_id === activeEventId
+    ) {
+      await setActiveConferenceContext(supabase, trimmed);
+      revalidatePath("/profile");
+      revalidatePath("/", "layout");
+      return { ok: true };
+    }
+  }
+
+  if (role === "delegate" && isDelegateDashboardCommitteeAllowlistedEmail(user.email)) {
     const [{ data: targetConf }, activeEventId] = await Promise.all([
       supabase.from("conferences").select("event_id").eq("id", trimmed).maybeSingle(),
       getActiveEventId(),
