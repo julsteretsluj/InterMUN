@@ -1,0 +1,502 @@
+{
+  "it": {
+    "admin": {
+      "title": "Checklist configurazione amministratore",
+      "subtitle": "Configurazione a livello di sito e provisioning dello staff.",
+      "step1Label": "Crea evento + prima commissione",
+      "step1Detail": "Genera accessi conferenza e comitato.",
+      "step2Label": "Invita o promuovi account SMT",
+      "step2Detail": "Concedi accesso segreteria prima delle operazioni di comitato.",
+      "step3Label": "Verifica flusso portale stato",
+      "step3Detail": "Monitora delegati in sospeso → confermati.",
+      "step4Label": "Passa alla dashboard SMT",
+      "step4Detail": "Le operazioni live continuano negli strumenti SMT."
+    },
+    "smt": {
+      "title": "Checklist configurazione SMT",
+      "subtitle": "Controlli a livello di conferenza prima dell’ingresso di presidenti e delegati.",
+      "step1Label": "Conferma evento + sessioni di comitato",
+      "step1Detail": "Valida nomi, tag, nomi presidenti e link crisi.",
+      "step2Label": "Imposta codici sala + accesso presidenza",
+      "step2Detail": "Assicurati che ogni comitato abbia i codici corretti.",
+      "step3Label": "Prepara allocazioni + documenti di accesso",
+      "step3Detail": "Importa posti, poi imposta password/codici.",
+      "step4Label": "Pubblica documenti globali (RoP / criteri)",
+      "step4Detail": "Carica riferimenti comuni per tutti gli utenti."
+    },
+    "chair": {
+      "title": "Checklist configurazione presidenza",
+      "subtitle": "Preparazione sala e controlli di sessione per il tuo comitato.",
+      "step1Label": "Controlla matrice delegati + approvazioni",
+      "step1Detail": "Conferma assegnazioni e revisioni iscrizioni in sospeso.",
+      "step2Label": "Gestisci approvazioni appello nominale",
+      "step2Detail": "Segna delegati presenti prima della partecipazione in sala.",
+      "step3Label": "Imposta timer + flusso relatori",
+      "step3Detail": "Salva preset di sessione prima di aprire le mozioni.",
+      "step4Label": "Apri operazioni sala digitale",
+      "step4Detail": "Coordina relatori, note e visibilità della sessione."
+    },
+    "delegate": {
+      "title": "Checklist configurazione delegato",
+      "subtitle": "Preparati rapidamente a partecipare al comitato.",
+      "step1Label": "Completa le basi del profilo",
+      "step1Detail": "Verifica nome, allocazione e dati account.",
+      "step2Label": "Leggi RoP + criteri premi",
+      "step2Detail": "Apri i documenti condivisi caricati da SMT.",
+      "step3Label": "Crea il documento di preparazione",
+      "step3Detail": "Carica/modifica note di preparazione nell’app.",
+      "step4Label": "Unisciti alla sala comitato + appello",
+      "step4Detail": "Attendi l’approvazione «presente» del presidente, poi parla."
+    }
+  },
+  "ja": {
+    "admin": {
+      "title": "管理者セットアップチェックリスト",
+      "subtitle": "サイト全体のセットアップとスタッフの準備。",
+      "step1Label": "イベント＋最初の委員会を作成",
+      "step1Detail": "会議・委員会のゲートを生成。",
+      "step2Label": "SMTアカウントを招待または昇格",
+      "step2Detail": "委員会運営前に事務局アクセスを付与。",
+      "step3Label": "ステータスポータルの流れを確認",
+      "step3Detail": "保留→確定の代表フローを監視。",
+      "step4Label": "SMTダッシュボードへ引き継ぎ",
+      "step4Detail": "ライブ委員会運営はSMTツールで継続。"
+    },
+    "smt": {
+      "title": "SMTセットアップチェックリスト",
+      "subtitle": "座長・代表が入る前の会議全体の管理。",
+      "step1Label": "イベント＋委員会セッションを確認",
+      "step1Detail": "名称、タグ、座長名、危機リンクを検証。",
+      "step2Label": "ルームコード＋座長アクセスを設定",
+      "step2Detail": "各委員会に正しいゲートコードがあることを確認。",
+      "step3Label": "割当＋サインインドキュメントを準備",
+      "step3Detail": "座席をインポートし、パスワード／コードを設定。",
+      "step4Label": "共通文書を公開（RoP／基準）",
+      "step4Detail": "全ユーザー向けの共通資料をアップロード。"
+    },
+    "chair": {
+      "title": "座長セットアップチェックリスト",
+      "subtitle": "委員会の会場準備と議場コントロール。",
+      "step1Label": "代表マトリクス＋承認を確認",
+      "step1Detail": "割当と保留中のサインアップ審査を確認。",
+      "step2Label": "点呼承認を実施",
+      "step2Detail": "議場参加前に代表を出席としてマーク。",
+      "step3Label": "タイマー＋発言順を設定",
+      "step3Detail": "動議を開く前に議場プリセットを保存。",
+      "step4Label": "デジタル会場運用を開く",
+      "step4Detail": "発言者・メモ・セッションの可視性を調整。"
+    },
+    "delegate": {
+      "title": "代表セットアップチェックリスト",
+      "subtitle": "委員会参加に向けて素早く準備。",
+      "step1Label": "プロフィール基本を完了",
+      "step1Detail": "氏名、割当、アカウント情報を確認。",
+      "step2Label": "RoP＋表彰基準を読む",
+      "step2Detail": "SMTがアップロードした共有資料を開く。",
+      "step3Label": "準備ドキュメントを作成",
+      "step3Detail": "アプリ内で準備メモを直接アップロード／編集。",
+      "step4Label": "委員会室＋点呼に参加",
+      "step4Detail": "座長の出席承認を待ってから発言。"
+    }
+  },
+  "km": {
+    "admin": {
+      "title": "បញ្ជីពិនិត្យការដំឡើងអ្នកគ្រប់គ្រង",
+      "subtitle": "ការដំឡើងកម្រិតគេហទំព័រ និងការផ្គត់ផ្គង់បុគ្គលិក។",
+      "step1Label": "បង្កើតព្រឹត្តិការណ៍ + គណៈកម្មាធិការដំបូង",
+      "step1Detail": "បង្កើតច្រកសន្និបាត និងគណៈកម្មាធិការ។",
+      "step2Label": "អញ្ជើញ ឬ លើកកម្រិតគណនី SMT",
+      "step2Detail": "ផ្តល់ការចូលប្រើលេខាធិការមុនប្រតិបត្តិការគណៈកម្មាធិការ។",
+      "step3Label": "ផ្ទៀងផ្ទាត់លំដាប់វេទិកាស្ថានភាព",
+      "step3Detail": "តាមដានលំដាប់តំណាងរង់ចាំ → បានបញ្ជាក់។",
+      "step4Label": "ប្រគល់ទៅផ្ទាំង SMT",
+      "step4Detail": "ប្រតិបត្តិការគណៈកម្មាធិការផ្ទាល់បន្តនៅក្នុងឧបករណ៍ SMT។"
+    },
+    "smt": {
+      "title": "បញ្ជីពិនិត្យការដំឡើង SMT",
+      "subtitle": "ការគ្រប់គ្រងទូទាំងសន្និបាតមុនអ្នកដឹកនាំ និងតំណាងចូល។",
+      "step1Label": "បញ្ជាក់ព្រឹត្តិការណ៍ + សម័យគណៈកម្មាធិការ",
+      "step1Detail": "ផ្ទៀងផ្ទាត់ឈ្មោះ ស្លាក ឈ្មោះអ្នកដឹកនាំ និងតំណភ្ជាប់វិបត្តិការ។",
+      "step2Label": "កំណត់កូដបន្ទប់ + ការចូលអ្នកដឹកនាំ",
+      "step2Detail": "ធានាថាគណៈកម្មាធិការនីមួយៗមានកូដច្រត្រឹមត្រូវ។",
+      "step3Label": "រៀបចំការបែងចែក + ឯកសារចូល",
+      "step3Detail": "នាំចូលកៅអី រួចកំណត់ពាក្យសម្ងាត់/កូដ។",
+      "step4Label": "ផ្សព្វផ្សាយឯកសារសកល (RoP / លក្ខខណ្ឌ)",
+      "step4Detail": "ផ្ទុកឯកសារយោងរួមសម្រាប់អ្នកប្រើប្រាស់ទាំងអស់។"
+    },
+    "chair": {
+      "title": "បញ្ជីពិនិត្យការដំឡើងអ្នកដឹកនាំ",
+      "subtitle": "ការរួសរាន់បន្ទប់ និងការគ្រប់គ្រងវគ្គសម្រាប់គណៈកម្មាធិការរបស់អ្នក។",
+      "step1Label": "ពិនិត្យម៉ាទ្រីកស់តំណាង + ការអនុម័ត",
+      "step1Detail": "បញ្ជាក់ការចាត់តាំង និងការពិនិត្យចុះឈ្មោះរង់ចាំ។",
+      "step2Label": "ដំណើរការអនុម័តការហៅវត្តមាន",
+      "step2Detail": "សម្គាល់តំណាងវត្តមានមុនចូលរួមនៅវាល។",
+      "step3Label": "កំណត់ម៉ោងរាប់ចុះ + លំដាប់អ្នកនិយាយ",
+      "step3Detail": "រក្សាការកំណត់វាលមុនបើកសំណើ។",
+      "step4Label": "បើកប្រតិបត្តិការបន្ទប់ឌីជីថល",
+      "step4Detail": "សម្របសម្រួលអ្នកនិយាយ កំណត់ចំណាំ និងការមើលឃើញវគ្គ។"
+    },
+    "delegate": {
+      "title": "បញ្ជីពិនិត្យការដំឡើងតំណាង",
+      "subtitle": "រួសរាន់ចូលរួមគណៈកម្មាធិការយ៉ាងរហ័ស។",
+      "step1Label": "បំពេញមូលដ្ឋានប្រូហ្វាល់",
+      "step1Detail": "ផ្ទៀងផ្ទាត់ឈ្មោះ ការបែងចែក និងព័ត៌មានគណនី។",
+      "step2Label": "អាន RoP + លក្ខខណ្ឌរង្វាន់",
+      "step2Detail": "បើកឯកសាររួមដែល SMT បានផ្ទុក។",
+      "step3Label": "បង្កើតឯកសាររៀបចំ",
+      "step3Detail": "ផ្ទុក/កែសម្រួលកំណត់ចំណាំរៀបចំក្នុងកម្មវិធី។",
+      "step4Label": "ចូលបន្ទប់គណៈកម្មាធិការ + ហៅវត្តមាន",
+      "step4Detail": "រង់ចាំការអនុម័តវត្តមានពីអ្នកដឹកនាំ រួចនិយាយ។"
+    }
+  },
+  "ko": {
+    "admin": {
+      "title": "관리자 설정 체크리스트",
+      "subtitle": "웹사이트 수준 설정 및 스태프 프로비저닝.",
+      "step1Label": "행사 + 첫 위원회 만들기",
+      "step1Detail": "회의·위원회 게이트 생성.",
+      "step2Label": "SMT 계정 초대 또는 승격",
+      "step2Detail": "위원회 운영 전 사무국 접근 권한 부여.",
+      "step3Label": "상태 포털 파이프라인 확인",
+      "step3Detail": "대기 → 확정 대표 흐름 모니터링.",
+      "step4Label": "SMT 대시보드에 인계",
+      "step4Detail": "라이브 위원회 운영은 SMT 도구에서 계속."
+    },
+    "smt": {
+      "title": "SMT 설정 체크리스트",
+      "subtitle": "의장·대표 입장 전 회의 전반 통제.",
+      "step1Label": "행사 + 위원회 세션 확인",
+      "step1Detail": "이름, 태그, 의장 이름, 위기 링크 검증.",
+      "step2Label": "회의실 코드 + 의장 접근 설정",
+      "step2Detail": "각 위원회에 올바른 게이트 코드가 있는지 확인.",
+      "step3Label": "배정 + 로그인 문서 준비",
+      "step3Detail": "석 임포트 후 비밀번호/코드 설정.",
+      "step4Label": "전역 문서 게시 (RoP / 기준)",
+      "step4Detail": "모든 사용자용 공통 참고 자료 업로드."
+    },
+    "chair": {
+      "title": "의장 설정 체크리스트",
+      "subtitle": "위원회를 위한 회의실 준비 및 회의 진행 통제.",
+      "step1Label": "대표 매트릭스 + 승인 확인",
+      "step1Detail": "배정 및 대기 중인 가입 검토 확인.",
+      "step2Label": "출석 점호 승인 진행",
+      "step2Detail": "회의 참여 전 대표를 출석으로 표시.",
+      "step3Label": "타이머 + 발언 순서 설정",
+      "step3Detail": "모션 열기 전 회의 프리셋 저장.",
+      "step4Label": "디지털 회의실 운영 열기",
+      "step4Detail": "발언자, 메모, 세션 가시성 조율."
+    },
+    "delegate": {
+      "title": "대표 설정 체크리스트",
+      "subtitle": "위원회 참여를 빠르게 준비하세요.",
+      "step1Label": "프로필 기본 정보 완료",
+      "step1Detail": "이름, 배정, 계정 정보를 확인하세요.",
+      "step2Label": "RoP + 시상 기준 읽기",
+      "step2Detail": "SMT가 업로드한 공유 문서를 여세요.",
+      "step3Label": "준비 문서 만들기",
+      "step3Detail": "앱에서 준비 메모를 직접 업로드/편집.",
+      "step4Label": "위원회실 + 출석 점호 참여",
+      "step4Detail": "의장의 출석 승인을 기다린 뒤 발언하세요."
+    }
+  },
+  "lo": {
+    "admin": {
+      "title": "ລາຍການກວດກາການຕັ້ງຄ່າຜູ້ບໍລິຫານ",
+      "subtitle": "ການຕັ້ງຄ່າລະດັບເວັບໄຊ ແລະ ການຈັດຫາພະນັກງານ.",
+      "step1Label": "ສ້າງງານ + ຄະນະກຳມະການທຳອິດ",
+      "step1Detail": "ສ້າງປະຕູກອງປະຊຸມ ແລະ ຄະນະກຳມະການ.",
+      "step2Label": "ເຊີນຫຼືຍົກລະດັບບັນຊີ SMT",
+      "step2Detail": "ໃຫ້ສິດເຂົ້າເລຂາທິການກ່ອນດຳເນີນງານຄະນະກຳມະການ.",
+      "step3Label": "ກວດສອບລະບົບປະຕູສະຖານະ",
+      "step3Detail": "ຕິດຕາມກະແສຕົວແທນລໍຖ້າ → ຢືນຢັນ.",
+      "step4Label": "ສົ່ງມອບໃຫ້ແດຊບອດ SMT",
+      "step4Detail": "ງານຄະນະກຳມະການສົດສືບຕໍ່ໃນເຄື່ອງມື SMT."
+    },
+    "smt": {
+      "title": "ລາຍການກວດກາການຕັ້ງຄ່າ SMT",
+      "subtitle": "ການຄວບຄຸມທົ່ວກອງປະຊຸມກ່ອນປະທານ ແລະ ຕົວແທນເຂົ້າ.",
+      "step1Label": "ຢືນຢັນງານ + ກອງປະຊຸມຄະນະກຳມະການ",
+      "step1Detail": "ກວດສອບຊື່, ແທັກ, ຊື່ປະທານ ແລະ ລິ້ງວິກິດ.",
+      "step2Label": "ຕັ້ງລະຫັດຫ້ອງ + ສິດເຂົ້າປະທານ",
+      "step2Detail": "ໃຫ້ແນ່ໃຈວ່າທຸກຄະນະກຳມະການມີລະຫັດປະຕູທີ່ຖືກຕ້ອງ.",
+      "step3Label": "ກະກຽມການຈັດສັນ + ເອກະສານເຂົ້າ",
+      "step3Detail": "ນຳເຂົ້າບ່ອນນັ່ງ, ຫຼັງຈາກນັ້ນຕັ້ງລະຫັດຜ່ານ/ລະຫັດ.",
+      "step4Label": "ເຜີຍແຜ່ເອກະສານທົ່ວໂລກ (RoP / ເງື່ອນໄຂ)",
+      "step4Detail": "ອັບໂຫຼດເອກະສານອ້າງອີງຮ່ວມສຳລັບຜູ້ໃຊ້ທັງໝົດ."
+    },
+    "chair": {
+      "title": "ລາຍການກວດກາການຕັ້ງຄ່າປະທານ",
+      "subtitle": "ຄວາມພ້ອມຂອງຫ້ອງ ແລະ ການຄວບຄຸມກອງປະຊຸມສຳລັບຄະນະກຳມະການຂອງທ່ານ.",
+      "step1Label": "ກວດເບິ່ງຕາຕະລາງຕົວແທນ + ການອະນຸມັດ",
+      "step1Detail": "ຢືນຢັນການມອບໝາຍ ແລະ ການກວດລົງທະບຽນທີ່ຄ້າງ.",
+      "step2Label": "ດຳເນີນການອະນຸມັດເອີ້ນຊື່",
+      "step2Detail": "ໝາຍຕົວແທນວ່າມີໜ້າກ່ອນເຂົ້າຮ່ວມ.",
+      "step3Label": "ຕັ້ງໂມງນັບຖອຍຫຼັງ + ລຳດັບຜູ້ເວົ້າ",
+      "step3Detail": "ບັນທຶກການຕັ້ງຄ່າກອງປະຊຸມກ່ອນເປີດຍົກຍ້າຍ.",
+      "step4Label": "ເປີດການດຳເນີນງານຫ້ອງດິຈິຕອນ",
+      "step4Detail": "ປະສານຜູ້ເວົ້າ, ໝາຍເຫດ ແລະ ການເຫັນກອງປະຊຸມ."
+    },
+    "delegate": {
+      "title": "ລາຍການກວດກາການຕັ້ງຄ່າຕົວແທນ",
+      "subtitle": "ກະກຽມເຂົ້າຮ່ວມຄະນະກຳມະການໄວໆ.",
+      "step1Label": "ຕື່ມຂໍ້ມູນພື້ນຖານໂປຣໄຟລ໌",
+      "step1Detail": "ກວດສອບຊື່, ການຈັດສັນ ແລະ ລາຍລະອຽດບັນຊີ.",
+      "step2Label": "ອ່ານ RoP + ເງື່ອນໄຂລາງວັນ",
+      "step2Detail": "ເປີດເອກະສານຮ່ວມທີ່ SMT ອັບໂຫຼດ.",
+      "step3Label": "ສ້າງເອກະສານກະກຽມ",
+      "step3Detail": "ອັບໂຫຼດ/ແກ້ໄຂໝາຍເຫດກະກຽມໃນແອັບ.",
+      "step4Label": "ເຂົ້າຫ້ອງຄະນະກຳມະການ + ເອີ້ນຊື່",
+      "step4Detail": "ລໍຖ້າການອະນຸມັດວ່າມີໜ້າຈາກປະທານ, ຫຼັງຈາກນັ້ນເວົ້າ."
+    }
+  },
+  "mi": {
+    "admin": {
+      "title": "Rārangi taki mō te whakatū kaiwhakahaere",
+      "subtitle": "Te whakatū i te taunga paetukutuku me te whakarato kaimahi.",
+      "step1Label": "Hanga hui + komiti tuatahi",
+      "step1Detail": "Hanga kūwaha hui me te komiti.",
+      "step2Label": "Pōwhiri whakapiki pūkete SMT",
+      "step2Detail": "Hoatu uru tuhinga i mua i ngā mahi komiti.",
+      "step3Label": "Manatoko te rerenga kūaha tūnga",
+      "step3Detail": "Aroturuki te rerenga mangai tārewa → kua whakaū.",
+      "step4Label": "Tuku ki te papapātuhi SMT",
+      "step4Detail": "Ka haere tonu ngā mahi komiti ora i ngā taputapu SMT."
+    },
+    "smt": {
+      "title": "Rārangi taki mō te whakatū SMT",
+      "subtitle": "Ngā whakahaere hui whānui i mua i te taenga o ngā tiamana me ngā mangai.",
+      "step1Label": "Whakaū te hui + ngā hui komiti",
+      "step1Detail": "Manatoko ingoa, tūtohu, ingoa tiamana, hononga whawhai.",
+      "step2Label": "Tautuhi waehere rūma + uru tiamana",
+      "step2Detail": "Me whai ia komiti i ngā waehere kūaha tika.",
+      "step3Label": "Whakarite tuari + tuhinga takiuru",
+      "step3Detail": "Kawemai ngā tūnga, ka muri mai tautuhi kupuhipa/waehere.",
+      "step4Label": "Whakaputa tuhinga ao (RoP / paearu)",
+      "step4Detail": "Tukuake ngā tohutoro mō te katoa o ngā kaiwhakamahi."
+    },
+    "chair": {
+      "title": "Rārangi taki mō te whakatū tiamana",
+      "subtitle": "Te whakarite rūma me ngā whakahaere whaarangi mō tō komiti.",
+      "step1Label": "Tirohia te mātāpono mangai + whakaaetanga",
+      "step1Detail": "Whakaū ngā tohu me ngā arotake rēhita tārewa.",
+      "step2Label": "Whakahaere whakaaetanga rārangi ingoa",
+      "step2Detail": "Tohua ngā mangai hei tū i mua i te whai wāhi.",
+      "step3Label": "Tautuhi taima + rerenga kai kōrero",
+      "step3Detail": "Penapena tautuhinga whaarangi i mua i te whakatuwhera kaupapa.",
+      "step4Label": "Whakatuwhera mahi rūma matihiko",
+      "step4Detail": "Whakakotahi kai kōrero, tuhinga, me te kite hui."
+    },
+    "delegate": {
+      "title": "Rārangi taki mō te whakatū mangai",
+      "subtitle": "Whakarite tere kia whai wāhi ki te komiti.",
+      "step1Label": "Whakaoti take taketake o te whakaahua",
+      "step1Detail": "Manatoko tō ingoa, tuari, me ngā kōrero pūkete.",
+      "step2Label": "Pānui RoP + paearu taonga",
+      "step2Detail": "Whakatuwhera ngā tuhinga i tukuna e te SMT.",
+      "step3Label": "Hanga tō tuhinga whakarite",
+      "step3Detail": "Tukuake/whakatika tuhinga whakarite i te taupānga.",
+      "step4Label": "Uru ki te rūma komiti + rārangi ingoa",
+      "step4Detail": "Tatari whakaaetanga tū a te tiamana, ka muri mai kōrero."
+    }
+  },
+  "ms": {
+    "admin": {
+      "title": "Senarai semak penyediaan pentadbir",
+      "subtitle": "Penyediaan peringkat laman web dan peruntukan kakitangan.",
+      "step1Label": "Cipta acara + jawatankuasa pertama",
+      "step1Detail": "Jana pintu persidangan dan jawatankuasa.",
+      "step2Label": "Jemput atau naik taraf akaun SMT",
+      "step2Detail": "Berikan akses sekretariat sebelum operasi jawatankuasa.",
+      "step3Label": "Sahkan saluran portal status",
+      "step3Detail": "Pantau aliran delegasi menunggu → disahkan.",
+      "step4Label": "Serahkan ke papan pemuka SMT",
+      "step4Detail": "Operasi jawatankuasa langsung diteruskan dalam alat SMT."
+    },
+    "smt": {
+      "title": "Senarai semak penyediaan SMT",
+      "subtitle": "Kawalan peringkat persidangan sebelum pengerusi dan delegasi masuk.",
+      "step1Label": "Sahkan acara + sesi jawatankuasa",
+      "step1Detail": "Sahkan nama, teg, nama pengerusi dan pautan krisis.",
+      "step2Label": "Tetapkan kod bilik + akses pengerusi",
+      "step2Detail": "Pastikan setiap jawatankuasa mempunyai kod pintu yang betul.",
+      "step3Label": "Sediakan peruntukan + dokumen log masuk",
+      "step3Detail": "Import tempat duduk, kemudian tetapkan kata laluan/kod.",
+      "step4Label": "Terbitkan dokumen global (RoP / kriteria)",
+      "step4Detail": "Muat naik rujukan bersama untuk semua pengguna."
+    },
+    "chair": {
+      "title": "Senarai semak penyediaan pengerusi",
+      "subtitle": "Kesiapan bilik dan kawalan sesi untuk jawatankuasa anda.",
+      "step1Label": "Semak matriks delegasi + kelulusan",
+      "step1Detail": "Sahkan penugasan dan semakan pendaftaran tertunda.",
+      "step2Label": "Jalankan kelulusan panggilan kehadiran",
+      "step2Detail": "Tandakan delegasi hadir sebelum penyertaan di lantai.",
+      "step3Label": "Tetapkan pemasa + aliran penceramah",
+      "step3Detail": "Simpan pratetap lantai sebelum membuka usul.",
+      "step4Label": "Buka operasi bilik digital",
+      "step4Detail": "Selaraskan penceramah, nota dan keterlihatan sesi."
+    },
+    "delegate": {
+      "title": "Senarai semak penyediaan delegasi",
+      "subtitle": "Bersedia dengan cepat untuk menyertai jawatankuasa.",
+      "step1Label": "Lengkapkan asas profil",
+      "step1Detail": "Sahkan nama, peruntukan dan butiran akaun.",
+      "step2Label": "Baca RoP + kriteria anugerah",
+      "step2Detail": "Buka dokumen bersama yang dimuat naik SMT.",
+      "step3Label": "Cipta dokumen persediaan anda",
+      "step3Detail": "Muat naik/sunting nota persediaan terus dalam aplikasi.",
+      "step4Label": "Sertai bilik jawatankuasa + panggilan kehadiran",
+      "step4Detail": "Tunggu kelulusan hadir daripada pengerusi, kemudian bercakap."
+    }
+  },
+  "my": {
+    "admin": {
+      "title": "စီမံခန့်ခွဲသူ စတင်ခြင်း စစ်ဆေးစာရင်း",
+      "subtitle": "ဝဘ်ဆိုဒ်အဆင့် စတင်ခြင်းနှင့် ဝန်ထမ်းထောက်ပံ့ခြင်း။",
+      "step1Label": "ပွဲ + ပထမအဖွဲ့ ဖန်တီးပါ",
+      "step1Detail": "ကွန်ဖရင့် နှင့် အဖွဲ့ တံခါးများ ဖန်တီးပါ။",
+      "step2Label": "SMT အကောင့်များ ဖိတ်ကြား သို့ မြှင့်တင်ပါ",
+      "step2Detail": "အဖွဲ့လုပ်ငန်းမစမီ ရုံးအကူအညီဝင်ခွင့်ပေးပါ။",
+      "step3Label": "အခြေအနေပေါ်တယ် လမ်းကြောင်း အတည်ပြုပါ",
+      "step3Detail": "စောင့်ဆိုင်း → အတည်ပြုကိုယ်စားလှယ် စီးဆင်းမှုကို စောင့်ကြည့်ပါ။",
+      "step4Label": "SMT ဒက်ရှ်ဘုတ်သို့ လွှဲပြောင်းပါ",
+      "step4Detail": "တိုက်ရိုက်အဖွဲ့လုပ်ငန်းများ SMT ကိရိယာများတွင် ဆက်လက်ပါ။"
+    },
+    "smt": {
+      "title": "SMT စတင်ခြင်း စစ်ဆေးစာရင်း",
+      "subtitle": "ဥက္ကဋ္ဌများနှင့် ကိုယ်စားလှယ်များ မဝင်မီ ကွန်ဖရင့်အဆင့် ထိန်းချုပ်မှုများ။",
+      "step1Label": "ပွဲ + အဖွဲ့အစည်းအချိန်များ အတည်ပြုပါ",
+      "step1Detail": "အမည်များ၊ တဂ်များ၊ ဥက္ကဋ္ဌအမည်များနှင့် အရေးပေါ်လင့်ခ်များ အတည်ပြုပါ။",
+      "step2Label": "အခန်းကုဒ်များ + ဥက္ကဋ္ဌဝင်ခွင့် သတ်မှတ်ပါ",
+      "step2Detail": "အဖွဲ့တိုင်းတွင် မှန်ကန်သော တံခါးကုဒ်များ ရှိရန် သေချာပါစေ။",
+      "step3Label": "ခွဲဝေမှုများ + ဝင်ရောက်မှုစာတမ်းများ ပြင်ဆင်ပါ",
+      "step3Detail": "ထိုင်ခုံများ တင်သွင်းပြီး စကားဝှက်များ/ကုဒ်များ သတ်မှတ်ပါ။",
+      "step4Label": "ကမ္ဘာလုံးဆိုင်ရာ စာတမ်းများ ထုတ်ဝေပါ (RoP / စံနှုန်းများ)",
+      "step4Detail": "အသုံးပြုသူအားလုံးအတွက် မျှဝေအကိုးအကားများ အပ်လုဒ်လုပ်ပါ။"
+    },
+    "chair": {
+      "title": "ဥက္ကဋ္ဌ စတင်ခြင်း စစ်ဆေးစာရင်း",
+      "subtitle": "သင့်အဖွဲ့အတွက် အခန်းပြင်ဆင်မှု နှင့် အစည်းအဝေးထိန်းချုပ်မှုများ။",
+      "step1Label": "ကိုယ်စားလှယ်ဇယား + အတည်ပြုချက်များ စစ်ဆေးပါ",
+      "step1Detail": "ခန့်အပ်မှုများနှင့် စောင့်ဆိုင်းမှတ်ပုံတင်စစ်ဆေးမှုများ အတည်ပြုပါ။",
+      "step2Label": "အမည်ခေါ်အတည်ပြုချက်များ လုပ်ဆောင်ပါ",
+      "step2Detail": "ခုံတင်ပါဝင်မှု မပြုမီ ကိုယ်စားလှယ်များကို တက်ရောက်ကြောင်း မှတ်သားပါ။",
+      "step3Label": "အချိန်မှတ် + စကားပြောစီးဆင်းမှု သတ်မှတ်ပါ",
+      "step3Detail": "အဆိုဖွင့်မီ ခုံတင်အစီအစဉ်များ သိမ်းဆည်းပါ။",
+      "step4Label": "ဒစ်ဂျစ်တယ်အခန်း လုပ်ဆောင်ချက်များ ဖွင့်ပါ",
+      "step4Detail": "စကားပြောသူများ၊ မှတ်စုများနှင့် အစည်းအဝေးမြင်သာမှု ညှိနှိုင်းပါ။"
+    },
+    "delegate": {
+      "title": "ကိုယ်စားလှယ် စတင်ခြင်း စစ်ဆေးစာရင်း",
+      "subtitle": "အဖွဲ့တွင် မြန်မြန်ပါဝင်ရန် ပြင်ဆင်ပါ။",
+      "step1Label": "ပရိုဖိုင်အခြေခံများ ပြီးမြောက်ပါစေ",
+      "step1Detail": "အမည်၊ ခွဲဝေမှုနှင့် အကောင့်အသေးစိတ် အတည်ပြုပါ။",
+      "step2Label": "RoP + ဆုစံနှုန်းများ ဖတ်ပါ",
+      "step2Detail": "SMT တင်ထားသော မျှဝေစာတမ်းများ ဖွင့်ပါ။",
+      "step3Label": "သင့်ပြင်ဆင်မှုစာတမ်း ဖန်တီးပါ",
+      "step3Detail": "အက်ပ်တွင်တိုက်ရိုက် ပြင်ဆင်မှတ်စုများ အပ်လုဒ်/တည်းဖြတ်ပါ။",
+      "step4Label": "အဖွဲ့အခန်း + အမည်ခေါ်တွင် ပါဝင်ပါ",
+      "step4Detail": "ဥက္ကဋ္ဌ၏ တက်ရောက်မှုအတည်ပြုချက်ကို စောင့်ပြီး ပြောပါ။"
+    }
+  },
+  "nl": {
+    "admin": {
+      "title": "Installatiechecklist beheerder",
+      "subtitle": "Website-setup en personeelsvoorziening.",
+      "step1Label": "Evenement + eerste comité aanmaken",
+      "step1Detail": "Conferentie- en comitétoegangen genereren.",
+      "step2Label": "SMT-accounts uitnodigen of promoveren",
+      "step2Detail": "Secretariaattoegang vóór comitéoperaties verlenen.",
+      "step3Label": "Statusportaal-pijplijn verifiëren",
+      "step3Detail": "Stroom in behandeling → bevestigde delegaties volgen.",
+      "step4Label": "Overdragen aan SMT-dashboard",
+      "step4Detail": "Live comité gaat verder in SMT-tools."
+    },
+    "smt": {
+      "title": "Installatiechecklist SMT",
+      "subtitle": "Conferentiebrede controles vóór binnenkomst van voorzitters en delegaties.",
+      "step1Label": "Evenement + comitésessies bevestigen",
+      "step1Detail": "Namen, tags, voorzittersnamen en crisislinks valideren.",
+      "step2Label": "Zalcodes + voorzitterstoegang instellen",
+      "step2Detail": "Zorg dat elk comité juiste toegangscodes heeft.",
+      "step3Label": "Toewijzingen + aanmelddocumenten voorbereiden",
+      "step3Detail": "Zetels importeren, daarna wachtwoorden/codes instellen.",
+      "step4Label": "Globale documenten publiceren (RoP / criteria)",
+      "step4Detail": "Gemeenschappelijke referenties voor alle gebruikers uploaden."
+    },
+    "chair": {
+      "title": "Installatiechecklist voorzitter",
+      "subtitle": "Zaalklaarheid en vergaderingsregie voor uw comité.",
+      "step1Label": "Delegatiematrix + goedkeuringen controleren",
+      "step1Detail": "Toewijzingen en openstaande aanmeldbeoordelingen bevestigen.",
+      "step2Label": "Goedkeuringen voor aanwezigheidsronde uitvoeren",
+      "step2Detail": "Delegaties aanwezig markeren vóór deelname in de zaal.",
+      "step3Label": "Timer + sprekersstroom instellen",
+      "step3Detail": "Zaalvoorinstellingen opslaan vóór het openen van moties.",
+      "step4Label": "Digitale zaaloperaties openen",
+      "step4Detail": "Sprekers, notities en zichtbaarheid van de sessie coördineren."
+    },
+    "delegate": {
+      "title": "Installatiechecklist delegatie",
+      "subtitle": "Snel klaar om deel te nemen aan het comité.",
+      "step1Label": "Profielbasis voltooien",
+      "step1Detail": "Controleer naam, toewijzing en accountgegevens.",
+      "step2Label": "RoP + prijscriteria lezen",
+      "step2Detail": "Open gedeelde documenten geüpload door SMT.",
+      "step3Label": "Maak uw voorbereidingsdocument",
+      "step3Detail": "Upload/bewerk voorbereidingsnotities direct in de app.",
+      "step4Label": "Ga naar comitézaal + aanwezigheidsronde",
+      "step4Detail": "Wacht op goedkeuring aanwezig door de voorzitter, spreek dan."
+    }
+  },
+  "pl": {
+    "admin": {
+      "title": "Lista kontrolna konfiguracji administratora",
+      "subtitle": "Konfiguracja poziomu witryny i obsługa personelu.",
+      "step1Label": "Utwórz wydarzenie + pierwszy komitet",
+      "step1Detail": "Wygeneruj bramy konferencji i komitetu.",
+      "step2Label": "Zaproś lub awansuj konta SMT",
+      "step2Detail": "Przyznaj dostęp sekretariatu przed operacjami komitetu.",
+      "step3Label": "Zweryfikuj potok portalu statusu",
+      "step3Detail": "Monitoruj przepływ delegatów oczekujących → potwierdzonych.",
+      "step4Label": "Przekaż panelowi SMT",
+      "step4Detail": "Operacje komitetu na żywo trwają w narzędziach SMT."
+    },
+    "smt": {
+      "title": "Lista kontrolna konfiguracji SMT",
+      "subtitle": "Kontrola na poziomie konferencji przed wejściem przewodniczących i delegatów.",
+      "step1Label": "Potwierdź wydarzenie + sesje komitetu",
+      "step1Detail": "Zweryfikuj nazwy, tagi, nazwiska przewodniczących i linki kryzysowe.",
+      "step2Label": "Ustaw kody sal + dostęp przewodniczącego",
+      "step2Detail": "Upewnij się, że każdy komitet ma poprawne kody bramki.",
+      "step3Label": "Przygotuj przydziały + dokumenty logowania",
+      "step3Detail": "Importuj miejsca, potem ustaw hasła/kody.",
+      "step4Label": "Opublikuj dokumenty globalne (RoP / kryteria)",
+      "step4Detail": "Prześlij wspólne materiały dla wszystkich użytkowników."
+    },
+    "chair": {
+      "title": "Lista kontrolna konfiguracji przewodniczącego",
+      "subtitle": "Gotowość sali i prowadzenie obrad dla Twojego komitetu.",
+      "step1Label": "Sprawdź macierz delegatów + zatwierdzenia",
+      "step1Detail": "Potwierdź przydziały i oczekujące przeglądy zapisów.",
+      "step2Label": "Przeprowadź zatwierdzenia listy obecności",
+      "step2Detail": "Oznacz delegatów jako obecnych przed udziałem w obradach.",
+      "step3Label": "Ustaw timer + kolejność mówców",
+      "step3Detail": "Zapisz ustawienia sali przed otwarciem wniosków.",
+      "step4Label": "Otwórz operacje sali cyfrowej",
+      "step4Detail": "Koordynuj mówców, notatki i widoczność sesji."
+    },
+    "delegate": {
+      "title": "Lista kontrolna konfiguracji delegata",
+      "subtitle": "Szybko przygotuj się do udziału w komitecie.",
+      "step1Label": "Uzupełnij podstawy profilu",
+      "step1Detail": "Zweryfikuj imię, przydział i dane konta.",
+      "step2Label": "Przeczytaj RoP + kryteria nagród",
+      "step2Detail": "Otwórz udostępnione dokumenty przesłane przez SMT.",
+      "step3Label": "Utwórz dokument przygotowawczy",
+      "step3Detail": "Prześlij/edytuj notatki przygotowawcze w aplikacji.",
+      "step4Label": "Dołącz do sali komitetu + listy obecności",
+      "step4Detail": "Poczekaj na zatwierdzenie obecności przez przewodniczącego, potem mów."
+    }
+  }
+}
