@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Projet guidé chargé. Vérifiez et cliquez sur Créer et ouvrir le mouvement lorsque vous êtes prêt.",
     "guidedModeratedRequiresTopic": "Le caucus modéré nécessite un sujet.",
     "guidedSelectAgendaTopic": "Sélectionnez un sujet à l'ordre du jour.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "La motion visant à établir l'ordre du jour n'est pas disponible pour ce comité (il ne reste pas assez de sujets)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "La motion visant à établir l'ordre du jour n'est pas disponible pour ce comité (il ne reste pas assez de sujets).",
+    "motionFloorLabel": "Parole sur les motions :",
+    "motionFloorOpenForStatements": "ouverte aux déclarations",
+    "addMotionGuided": "Ajouter une motion (guidée)",
+    "openFloorForMotionStatements": "Ouvrir la parole pour les déclarations de motion",
+    "closeFloorStatementsEnded": "Fermer la parole (déclarations terminées)",
+    "recordStatedMotionButton": "Enregistrer la motion énoncée"
   },
   "chairChecklists": {
     "common": {

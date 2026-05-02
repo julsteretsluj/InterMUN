@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "تم تحميل المسودة الإرشادية. قم بمراجعة وانقر فوق إنشاء وفتح الحركة عندما تكون جاهزًا.",
     "guidedModeratedRequiresTopic": "يتطلب التجمع الحزبي الخاضع للإشراف موضوعًا.",
     "guidedSelectAgendaTopic": "حدد موضوع جدول الأعمال.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "اقتراح وضع جدول الأعمال غير متاح لهذه اللجنة (لم يتبق ما يكفي من المواضيع)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "اقتراح وضع جدول الأعمال غير متاح لهذه اللجنة (لم يتبق ما يكفي من المواضيع).",
+    "motionFloorLabel": "جلسة الطلبات:",
+    "motionFloorOpenForStatements": "مفتوحة للبيانات",
+    "addMotionGuided": "إضافة طلب (موجّه)",
+    "openFloorForMotionStatements": "فتح الجلسة لبيانات الطلبات",
+    "closeFloorStatementsEnded": "إغلاق الجلسة (انتهت البيانات)",
+    "recordStatedMotionButton": "تسجيل الطلب المعلن"
   },
   "chairChecklists": {
     "common": {

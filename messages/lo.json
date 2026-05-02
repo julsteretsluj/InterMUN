@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "ໂຫຼດສະບັບຮ່າງທີ່ແນະນຳແລ້ວ. ກວດເບິ່ງ ແລະຄລິກສ້າງ ແລະເປີດການເຄື່ອນໄຫວເມື່ອກຽມພ້ອມ.",
     "guidedModeratedRequiresTopic": "ການປະຊຸມຂັ້ນປານກາງຮຽກຮ້ອງໃຫ້ມີຫົວຂໍ້.",
     "guidedSelectAgendaTopic": "ເລືອກຫົວຂໍ້ວາລະ.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "ການເຄື່ອນໄຫວເພື່ອກໍານົດວາລະແມ່ນບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບຄະນະກໍາມະການນີ້ (ບໍ່ມີຫົວຂໍ້ພຽງພໍ)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "ການເຄື່ອນໄຫວເພື່ອກໍານົດວາລະແມ່ນບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບຄະນະກໍາມະການນີ້ (ບໍ່ມີຫົວຂໍ້ພຽງພໍ).",
+    "motionFloorLabel": "ເວລາຍົກຍະບາຍ:",
+    "motionFloorOpenForStatements": "ເປີດຮັບຄຳເຫັນ",
+    "addMotionGuided": "ເພີ່ມຍົກຍະບາຍ (ນຳພາ)",
+    "openFloorForMotionStatements": "ເປີດເວລາສຳລັບຄຳເຫັນຍົກຍະບາຍ",
+    "closeFloorStatementsEnded": "ປິດເວລາ (ຈົບຄຳເຫັນ)",
+    "recordStatedMotionButton": "ບັນທຶກຍົກຍະບາຍທີ່ຖືກກ່າວ"
   },
   "chairChecklists": {
     "common": {

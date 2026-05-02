@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Geführter Entwurf geladen. Überprüfen Sie den Antrag und klicken Sie auf „Erstellen und öffnen Sie den Antrag“, wenn Sie fertig sind.",
     "guidedModeratedRequiresTopic": "Ein moderierter Caucus erfordert ein Thema.",
     "guidedSelectAgendaTopic": "Wählen Sie ein Agendathema aus.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Der Antrag zur Festlegung der Tagesordnung ist für diesen Ausschuss nicht verfügbar (es sind nicht mehr genügend Themen übrig)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Der Antrag zur Festlegung der Tagesordnung ist für diesen Ausschuss nicht verfügbar (es sind nicht mehr genügend Themen übrig).",
+    "motionFloorLabel": "Antragsforum:",
+    "motionFloorOpenForStatements": "offen für Erklärungen",
+    "addMotionGuided": "Antrag hinzufügen (geführt)",
+    "openFloorForMotionStatements": "Forum für Antragserklärungen öffnen",
+    "closeFloorStatementsEnded": "Forum schließen (Erklärungen beendet)",
+    "recordStatedMotionButton": "Gestellten Antrag protokollieren"
   },
   "chairChecklists": {
     "common": {

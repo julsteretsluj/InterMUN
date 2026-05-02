@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "โหลดร่างคำแนะนำแล้ว ตรวจสอบและคลิกสร้างและเปิดการเคลื่อนไหวเมื่อพร้อม",
     "guidedModeratedRequiresTopic": "การประชุมกลุ่มที่ได้รับการตรวจสอบจำเป็นต้องมีหัวข้อ",
     "guidedSelectAgendaTopic": "เลือกหัวข้อวาระการประชุม",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "การเคลื่อนไหวเพื่อกำหนดวาระไม่พร้อมใช้งานสำหรับคณะกรรมการชุดนี้ (เหลือหัวข้อไม่เพียงพอ)"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "การเคลื่อนไหวเพื่อกำหนดวาระไม่พร้อมใช้งานสำหรับคณะกรรมการชุดนี้ (เหลือหัวข้อไม่เพียงพอ)",
+    "motionFloorLabel": "เวลาญัตติ:",
+    "motionFloorOpenForStatements": "เปิดรับคำแถลง",
+    "addMotionGuided": "เพิ่มญัตติ (มีคำแนะนำ)",
+    "openFloorForMotionStatements": "เปิดเวลาสำหรับคำแถลงญัตติ",
+    "closeFloorStatementsEnded": "ปิดเวลา (จบคำแถลง)",
+    "recordStatedMotionButton": "บันทึกญัตติที่แถลง"
   },
   "language": {
     "label": "ภาษา",

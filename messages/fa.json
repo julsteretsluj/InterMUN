@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "پیش نویس هدایت شده بارگیری شد. پس از آماده شدن، روی ایجاد و باز کردن حرکت کلیک کنید.",
     "guidedModeratedRequiresTopic": "انجمن انجمنی تعدیل شده نیاز به موضوع دارد.",
     "guidedSelectAgendaTopic": "موضوع دستور کار را انتخاب کنید.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "پیشنهاد تنظیم دستور کار برای این کمیته در دسترس نیست (موضوعات کافی باقی نمانده است)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "پیشنهاد تنظیم دستور کار برای این کمیته در دسترس نیست (موضوعات کافی باقی نمانده است).",
+    "motionFloorLabel": "زمان پیشنهادها:",
+    "motionFloorOpenForStatements": "باز برای اظهارات",
+    "addMotionGuided": "افزودن پیشنهاد (راهنما)",
+    "openFloorForMotionStatements": "باز کردن زمان برای اظهارات پیشنهاد",
+    "closeFloorStatementsEnded": "بستن زمان (پایان اظهارات)",
+    "recordStatedMotionButton": "ثبت پیشنهاد اعلام‌شده"
   },
   "language": {
     "label": "زبان",

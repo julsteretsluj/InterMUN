@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Draf terpandu dimuat. Tinjau dan klik Buat dan buka gerakan jika sudah siap.",
     "guidedModeratedRequiresTopic": "Kaukus yang dimoderasi memerlukan topik.",
     "guidedSelectAgendaTopic": "Pilih topik agenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Mosi untuk Menetapkan Agenda tidak tersedia untuk komite ini (topik yang tersisa tidak mencukupi)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Mosi untuk Menetapkan Agenda tidak tersedia untuk komite ini (topik yang tersisa tidak mencukupi).",
+    "motionFloorLabel": "Giliran mosi:",
+    "motionFloorOpenForStatements": "terbuka untuk pernyataan",
+    "addMotionGuided": "Tambah mosi (terpandu)",
+    "openFloorForMotionStatements": "Buka giliran untuk pernyataan mosi",
+    "closeFloorStatementsEnded": "Tutup giliran (pernyataan selesai)",
+    "recordStatedMotionButton": "Catat mosi yang disampaikan"
   },
   "language": {
     "label": "Bahasa",

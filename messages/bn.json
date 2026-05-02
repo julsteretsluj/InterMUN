@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "নির্দেশিত খসড়া লোড করা হয়েছে। পর্যালোচনা করুন এবং তৈরি হলে ক্লিক করুন এবং গতি খুলুন।",
     "guidedModeratedRequiresTopic": "মডারেটেড ককাস একটি বিষয় প্রয়োজন.",
     "guidedSelectAgendaTopic": "একটি এজেন্ডা বিষয় নির্বাচন করুন.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "এজেন্ডা সেট করার গতি এই কমিটির জন্য অনুপলব্ধ (পর্যাপ্ত বিষয় বাকি নেই)।"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "এজেন্ডা সেট করার গতি এই কমিটির জন্য অনুপলব্ধ (পর্যাপ্ত বিষয় বাকি নেই)।",
+    "motionFloorLabel": "মোশন ফ্লোর:",
+    "motionFloorOpenForStatements": "বিবৃতির জন্য খোলা",
+    "addMotionGuided": "মোশন যোগ করুন (পরিচালিত)",
+    "openFloorForMotionStatements": "মোশন বিবৃতির জন্য ফ্লোর খুলুন",
+    "closeFloorStatementsEnded": "ফ্লোর বন্ধ করুন (বিবৃতি শেষ)",
+    "recordStatedMotionButton": "উল্লেখিত মোশন নথিভুক্ত করুন"
   },
   "language": {
     "label": "ভাষা",

@@ -2855,9 +2855,11 @@ export function SessionControlClient({
             <>
           <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
             <p className="text-sm font-medium text-brand-navy">
-              Motion floor:{" "}
+              {tSessionControl("motionFloorLabel")}{" "}
               <span className={motionFloorOpen ? "text-amber-300" : "text-brand-muted"}>
-                {motionFloorOpen ? "open for statements" : "closed"}
+                {motionFloorOpen
+                  ? tSessionControl("motionFloorOpenForStatements")
+                  : tSessionControl("closed")}
               </span>
             </p>
             <div className="flex flex-wrap gap-2">
@@ -2867,7 +2869,7 @@ export function SessionControlClient({
                 onClick={startGuidedMotionFlow}
                 className="px-3 py-2 rounded-lg border border-brand-accent/50 bg-brand-accent/15 text-brand-navy text-sm font-medium hover:bg-brand-accent/25 disabled:opacity-50"
               >
-                Add motion (guided)
+                {tSessionControl("addMotionGuided")}
               </button>
               <button
                 type="button"
@@ -2875,7 +2877,7 @@ export function SessionControlClient({
                 onClick={openMotionFloorForStatements}
                 className="px-3 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium disabled:opacity-50"
               >
-                Open floor for motion statements
+                {tSessionControl("openFloorForMotionStatements")}
               </button>
               <button
                 type="button"
@@ -2883,7 +2885,7 @@ export function SessionControlClient({
                 onClick={closeMotionFloorForStatements}
                 className="px-3 py-2 rounded-lg border border-white/25 bg-black/25 text-brand-navy text-sm font-medium hover:bg-black/20 disabled:opacity-50"
               >
-                Close floor (statements ended)
+                {tSessionControl("closeFloorStatementsEnded")}
               </button>
               <button
                 type="button"
@@ -2896,7 +2898,7 @@ export function SessionControlClient({
                 onClick={() => recordStatedMotion()}
                 className="rounded-lg border border-amber-500/50 px-3 py-2 text-sm font-medium text-amber-200 hover:bg-amber-500/15 disabled:opacity-50"
               >
-                Record stated motion
+                {tSessionControl("recordStatedMotionButton")}
               </button>
               <button
                 type="button"

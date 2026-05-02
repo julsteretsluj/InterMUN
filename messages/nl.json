@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Begeleide diepgang geladen. Controleer en klik op Beweging maken en openen wanneer u klaar bent.",
     "guidedModeratedRequiresTopic": "Gemodereerde caucus vereist een onderwerp.",
     "guidedSelectAgendaTopic": "Selecteer een agendaonderwerp.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Motie om de agenda vast te stellen is niet beschikbaar voor deze commissie (er zijn niet genoeg onderwerpen over)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Motie om de agenda vast te stellen is niet beschikbaar voor deze commissie (er zijn niet genoeg onderwerpen over).",
+    "motionFloorLabel": "Behandeling van moties:",
+    "motionFloorOpenForStatements": "open voor verklaringen",
+    "addMotionGuided": "Motie toevoegen (begeleid)",
+    "openFloorForMotionStatements": "Open de behandeling voor motieverklaringen",
+    "closeFloorStatementsEnded": "Sluit de behandeling (verklaringen beëindigd)",
+    "recordStatedMotionButton": "Ingediende motie vastleggen"
   },
   "chairChecklists": {
     "common": {

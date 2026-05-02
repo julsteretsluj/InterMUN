@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Управляемый черновик загружен. Просмотрите и нажмите «Создать и открыть движение», когда будете готовы.",
     "guidedModeratedRequiresTopic": "Модерируемому собранию необходима тема.",
     "guidedSelectAgendaTopic": "Выберите тему повестки дня.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Предложение об определении повестки дня недоступно для этого комитета (осталось недостаточно тем)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Предложение об определении повестки дня недоступно для этого комитета (осталось недостаточно тем).",
+    "motionFloorLabel": "Время для предложений:",
+    "motionFloorOpenForStatements": "открыто для заявлений",
+    "addMotionGuided": "Добавить предложение (с подсказкой)",
+    "openFloorForMotionStatements": "Открыть время для заявлений по предложению",
+    "closeFloorStatementsEnded": "Закрыть время (заявления завершены)",
+    "recordStatedMotionButton": "Зафиксировать оглашенное предложение"
   },
   "chairChecklists": {
     "common": {

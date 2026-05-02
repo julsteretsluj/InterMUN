@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Kua utaina te tauira arahina. Arotakehia ka paatohia te Waihanga me te motini tuwhera ina reri.",
     "guidedModeratedRequiresTopic": "Me whai kaupapa te ruuma whakaōrite.",
     "guidedSelectAgendaTopic": "Tīpakohia he kaupapa kaupapa.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Ko te Motini ki te Whakatakoto i te Ahuatanga karekau i te waatea mo tenei komiti (kaore i te nui nga kaupapa e toe ana)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Ko te Motini ki te Whakatakoto i te Ahuatanga karekau i te waatea mo tenei komiti (kaore i te nui nga kaupapa e toe ana).",
+    "motionFloorLabel": "Wā kōrero motini:",
+    "motionFloorOpenForStatements": "tuwhera mō ngā kōrero",
+    "addMotionGuided": "Tāpiri motini (ārahi)",
+    "openFloorForMotionStatements": "Whakatuwhera i te wā mō ngā kōrero motini",
+    "closeFloorStatementsEnded": "Katia te wā (kua mutu ngā kōrero)",
+    "recordStatedMotionButton": "Tuhia te motini i kīia"
   },
   "language": {
     "label": "Reo",

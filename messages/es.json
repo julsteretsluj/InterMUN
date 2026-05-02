@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Tiro guiado cargado. Revise y haga clic en Crear y abrir movimiento cuando esté listo.",
     "guidedModeratedRequiresTopic": "La caucus moderada requiere un tema.",
     "guidedSelectAgendaTopic": "Seleccione un tema de agenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "La moción para establecer la agenda no está disponible para este comité (no quedan suficientes temas)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "La moción para establecer la agenda no está disponible para este comité (no quedan suficientes temas).",
+    "motionFloorLabel": "Turno de mociones:",
+    "motionFloorOpenForStatements": "abierto para declaraciones",
+    "addMotionGuided": "Añadir moción (guiada)",
+    "openFloorForMotionStatements": "Abrir el turno para declaraciones de moción",
+    "closeFloorStatementsEnded": "Cerrar el turno (declaraciones finalizadas)",
+    "recordStatedMotionButton": "Registrar la moción planteada"
   },
   "chairChecklists": {
     "common": {

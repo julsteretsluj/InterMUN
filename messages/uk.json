@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Керована чернетка завантажена. Перегляньте та натисніть Створити та відкрийте рух, коли будете готові.",
     "guidedModeratedRequiresTopic": "Для модерованого кокусу потрібна тема.",
     "guidedSelectAgendaTopic": "Виберіть тему порядку денного.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Пропозиція щодо визначення порядку денного недоступна для цього комітету (залишилося недостатньо тем)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Пропозиція щодо визначення порядку денного недоступна для цього комітету (залишилося недостатньо тем).",
+    "motionFloorLabel": "Час для пропозицій:",
+    "motionFloorOpenForStatements": "відкрито для заяв",
+    "addMotionGuided": "Додати пропозицію (з підказкою)",
+    "openFloorForMotionStatements": "Відкрити час для заяв щодо пропозиції",
+    "closeFloorStatementsEnded": "Закрити час (заяви завершено)",
+    "recordStatedMotionButton": "Зафіксувати заявлену пропозицію"
   },
   "chairChecklists": {
     "common": {

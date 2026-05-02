@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Rascunho guiado carregado. Revise e clique em Criar e abra o movimento quando estiver pronto.",
     "guidedModeratedRequiresTopic": "A convenção moderada requer um tópico.",
     "guidedSelectAgendaTopic": "Selecione um tópico da agenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "A moção para definir a agenda não está disponível para este comitê (não restam tópicos suficientes)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "A moção para definir a agenda não está disponível para este comitê (não restam tópicos suficientes).",
+    "motionFloorLabel": "Turno de moções:",
+    "motionFloorOpenForStatements": "aberto para declarações",
+    "addMotionGuided": "Adicionar moção (guiada)",
+    "openFloorForMotionStatements": "Abrir o turno para declarações de moção",
+    "closeFloorStatementsEnded": "Fechar o turno (declarações encerradas)",
+    "recordStatedMotionButton": "Registar a moção apresentada"
   },
   "chairChecklists": {
     "common": {

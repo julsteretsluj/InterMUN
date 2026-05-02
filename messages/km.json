@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "សេចក្តីព្រាងដែលបានណែនាំត្រូវបានផ្ទុក។ ពិនិត្យ ហើយចុចបង្កើត និងបើកចលនានៅពេលរួចរាល់។",
     "guidedModeratedRequiresTopic": "ការប្រជុំថ្នាក់មធ្យមទាមទារប្រធានបទ។",
     "guidedSelectAgendaTopic": "ជ្រើសរើសប្រធានបទរបៀបវារៈ។",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "ចលនាដើម្បីកំណត់របៀបវារៈគឺមិនមានសម្រាប់គណៈកម្មាធិការនេះទេ (មិនមានប្រធានបទគ្រប់គ្រាន់ទេ)។"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "ចលនាដើម្បីកំណត់របៀបវារៈគឺមិនមានសម្រាប់គណៈកម្មាធិការនេះទេ (មិនមានប្រធានបទគ្រប់គ្រាន់ទេ)។",
+    "motionFloorLabel": "ពេលវេលាសំណើ:",
+    "motionFloorOpenForStatements": "បើកសម្រាប់សុន្ទរកថា",
+    "addMotionGuided": "បន្ថែមសំណើ (មានការណែនាំ)",
+    "openFloorForMotionStatements": "បើកពេលសម្រាប់សុន្ទរកថាសំណើ",
+    "closeFloorStatementsEnded": "បិទពេល (បញ្ចប់សុន្ទរកថា)",
+    "recordStatedMotionButton": "កត់ត្រាសំណើដែលបានថ្លែង"
   },
   "chairChecklists": {
     "common": {

@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "निर्देशित ड्राफ्ट लोड किया गया। समीक्षा करें और क्रिएट पर क्लिक करें और तैयार होने पर मोशन खोलें।",
     "guidedModeratedRequiresTopic": "मॉडरेट कॉकस के लिए एक विषय की आवश्यकता होती है।",
     "guidedSelectAgendaTopic": "एक एजेंडा विषय चुनें.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "एजेंडा तय करने का प्रस्ताव इस समिति के लिए उपलब्ध नहीं है (पर्याप्त विषय शेष नहीं हैं)।"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "एजेंडा तय करने का प्रस्ताव इस समिति के लिए उपलब्ध नहीं है (पर्याप्त विषय शेष नहीं हैं)।",
+    "motionFloorLabel": "प्रस्ताव का समय:",
+    "motionFloorOpenForStatements": "वक्तव्यों के लिए खुला",
+    "addMotionGuided": "प्रस्ताव जोड़ें (निर्देशित)",
+    "openFloorForMotionStatements": "प्रस्ताव वक्तव्यों के लिए समय खोलें",
+    "closeFloorStatementsEnded": "समय बंद करें (वक्तव्य समाप्त)",
+    "recordStatedMotionButton": "कथित प्रस्ताव दर्ज करें"
   },
   "language": {
     "label": "भाषा",

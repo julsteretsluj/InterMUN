@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Draf berpandu dimuatkan. Semak dan klik Buat dan buka gerakan apabila bersedia.",
     "guidedModeratedRequiresTopic": "Kaukus sederhana memerlukan topik.",
     "guidedSelectAgendaTopic": "Pilih topik agenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Usul untuk Menetapkan Agenda tidak tersedia untuk jawatankuasa ini (tidak cukup topik yang tinggal)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Usul untuk Menetapkan Agenda tidak tersedia untuk jawatankuasa ini (tidak cukup topik yang tinggal).",
+    "motionFloorLabel": "Giliran usul:",
+    "motionFloorOpenForStatements": "dibuka untuk pernyataan",
+    "addMotionGuided": "Tambah usul (berpandu)",
+    "openFloorForMotionStatements": "Buka giliran untuk pernyataan usul",
+    "closeFloorStatementsEnded": "Tutup giliran (pernyataan tamat)",
+    "recordStatedMotionButton": "Rekod usul yang dibentangkan"
   },
   "chairChecklists": {
     "common": {

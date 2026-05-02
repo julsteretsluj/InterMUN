@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "လမ်းညွှန်မူကြမ်းကို တင်ပြီးပါပြီ။ အဆင်သင့်ဖြစ်သောအခါတွင် ပြန်လည်သုံးသပ်ပြီး ဖန်တီးရန်နှင့် ဖွင့်ရန် လှုပ်ရှားမှုကို နှိပ်ပါ။",
     "guidedModeratedRequiresTopic": "အကဲဖြတ် ဒိုင်လူကြီးသည် ခေါင်းစဉ်တစ်ခု လိုအပ်သည်။",
     "guidedSelectAgendaTopic": "အစီအစဉ်အကြောင်းအရာကို ရွေးချယ်ပါ။",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "လုပ်ငန်းစဉ် သတ်မှတ်ရန် အဆိုကို ဤကော်မတီအတွက် မရရှိနိုင်ပါ (အကြောင်းအရာများ မလုံလောက်ပါ)။"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "လုပ်ငန်းစဉ် သတ်မှတ်ရန် အဆိုကို ဤကော်မတီအတွက် မရရှိနိုင်ပါ (အကြောင်းအရာများ မလုံလောက်ပါ)။",
+    "motionFloorLabel": "အဆိုအချိန်:",
+    "motionFloorOpenForStatements": "ထုတ်ပြန်ချက်များအတွက် ဖွင့်ထား",
+    "addMotionGuided": "အဆိုထည့်ရန် (လမ်းညွှန်သည်)",
+    "openFloorForMotionStatements": "အဆိုထုတ်ပြန်ချက်များအတွက် အချိန်ဖွင့်မည်",
+    "closeFloorStatementsEnded": "အချိန်ပိတ်မည် (ထုတ်ပြန်ချက်များ ပြီးသတ်)",
+    "recordStatedMotionButton": "ပြောကြားခဲ့သော အဆိုကို မှတ်တမ်းတင်မည်"
   },
   "chairChecklists": {
     "common": {

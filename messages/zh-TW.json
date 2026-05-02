@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "引導草稿已載入。 準備好後，查看並點擊“創建並打開動作”。",
     "guidedModeratedRequiresTopic": "主持的核心會議需要一個主題。",
     "guidedSelectAgendaTopic": "選擇議程主題。",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "該委員會無法制定議程動議（剩餘主題不足）。"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "該委員會無法制定議程動議（剩餘主題不足）。",
+    "motionFloorLabel": "動議環節：",
+    "motionFloorOpenForStatements": "開放陳述",
+    "addMotionGuided": "新增動議（引導式）",
+    "openFloorForMotionStatements": "開放動議陳述環節",
+    "closeFloorStatementsEnded": "結束環節（陳述結束）",
+    "recordStatedMotionButton": "記錄已陳述的動議"
   },
   "chairChecklists": {
     "common": {

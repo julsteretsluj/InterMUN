@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Φορτώθηκε το καθοδηγούμενο σχέδιο. Ελέγξτε και κάντε κλικ στο Δημιουργία και ανοίξτε την κίνηση όταν είστε έτοιμοι.",
     "guidedModeratedRequiresTopic": "Η συντονισμένη κοινοβουλευτική ομάδα απαιτεί ένα θέμα.",
     "guidedSelectAgendaTopic": "Επιλέξτε ένα θέμα ατζέντας.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Η πρόταση για τον καθορισμό της ημερήσιας διάταξης δεν είναι διαθέσιμη για αυτήν την επιτροπή (δεν απομένουν αρκετά θέματα)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Η πρόταση για τον καθορισμό της ημερήσιας διάταξης δεν είναι διαθέσιμη για αυτήν την επιτροπή (δεν απομένουν αρκετά θέματα).",
+    "motionFloorLabel": "Ώρα κινήσεων:",
+    "motionFloorOpenForStatements": "ανοιχτή για δηλώσεις",
+    "addMotionGuided": "Προσθήκη κίνησης (καθοδηγούμενη)",
+    "openFloorForMotionStatements": "Άνοιγμα του χρόνου για δηλώσεις κίνησης",
+    "closeFloorStatementsEnded": "Κλείσιμο χρόνου (τελείωσαν οι δηλώσεις)",
+    "recordStatedMotionButton": "Καταγραφή δηλωμένης κίνησης"
   },
   "language": {
     "label": "Γλώσσα",

@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "ガイド付きドラフトがロードされました。 確認して [作成] をクリックし、準備ができたらモーションを開きます。",
     "guidedModeratedRequiresTopic": "穏健党員集会には議題が必要です。",
     "guidedSelectAgendaTopic": "議題のトピックを選択します。",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "この委員会では議題設定の動議を利用できません (議題が十分に残っていないため)。"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "この委員会では議題設定の動議を利用できません (議題が十分に残っていないため)。",
+    "motionFloorLabel": "動議の時間:",
+    "motionFloorOpenForStatements": "発言受付中",
+    "addMotionGuided": "動議を追加（ガイド付き）",
+    "openFloorForMotionStatements": "動議に関する発言の時間を開く",
+    "closeFloorStatementsEnded": "時間を閉じる（発言終了）",
+    "recordStatedMotionButton": "表明された動議を記録"
   },
   "chairChecklists": {
     "common": {

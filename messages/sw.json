@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Rasimu inayoongozwa imepakiwa. Kagua na ubofye Unda na ufungue mwendo ukiwa tayari.",
     "guidedModeratedRequiresTopic": "Baraza linalosimamiwa linahitaji mada.",
     "guidedSelectAgendaTopic": "Chagua mada ya ajenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Hoja ya Kuweka Ajenda haipatikani kwa kamati hii (hakuna mada za kutosha zilizosalia)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Hoja ya Kuweka Ajenda haipatikani kwa kamati hii (hakuna mada za kutosha zilizosalia).",
+    "motionFloorLabel": "Muda wa mapendekezo:",
+    "motionFloorOpenForStatements": "wazi kwa matamshi",
+    "addMotionGuided": "Ongeza pendekezo (linaloongozwa)",
+    "openFloorForMotionStatements": "Fungua muda wa matamshi ya mapendekezo",
+    "closeFloorStatementsEnded": "Funga muda (matamshi yameisha)",
+    "recordStatedMotionButton": "Rekodi pendekezo lililotajwa"
   },
   "language": {
     "label": "Lugha",

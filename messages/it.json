@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Bozza guidata caricata. Rivedi e fai clic su Crea e apri l'animazione quando sei pronto.",
     "guidedModeratedRequiresTopic": "Il caucus moderato richiede un argomento.",
     "guidedSelectAgendaTopic": "Seleziona un argomento dell'agenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "La mozione per fissare l'ordine del giorno non è disponibile per questa commissione (non sono rimasti abbastanza argomenti)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "La mozione per fissare l'ordine del giorno non è disponibile per questa commissione (non sono rimasti abbastanza argomenti).",
+    "motionFloorLabel": "Turno delle mozioni:",
+    "motionFloorOpenForStatements": "aperto per le dichiarazioni",
+    "addMotionGuided": "Aggiungi mozione (guidata)",
+    "openFloorForMotionStatements": "Apri il turno per le dichiarazioni sulla mozione",
+    "closeFloorStatementsEnded": "Chiudi il turno (dichiarazioni concluse)",
+    "recordStatedMotionButton": "Registra la mozione esposta"
   },
   "chairChecklists": {
     "common": {

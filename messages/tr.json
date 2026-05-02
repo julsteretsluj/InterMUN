@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Kılavuzlu taslak yüklendi. Hazır olduğunuzda Hareket oluştur ve aç'ı inceleyin ve tıklayın.",
     "guidedModeratedRequiresTopic": "Moderasyonlu toplantı bir konu gerektirir.",
     "guidedSelectAgendaTopic": "Bir gündem konusu seçin.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Gündemi Belirleme Önergesi bu komite için mevcut değil (yeterli konu kalmadı)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Gündemi Belirleme Önergesi bu komite için mevcut değil (yeterli konu kalmadı).",
+    "motionFloorLabel": "Önerge zamanı:",
+    "motionFloorOpenForStatements": "açıklamalar için açık",
+    "addMotionGuided": "Önerge ekle (yönlendirmeli)",
+    "openFloorForMotionStatements": "Önerge açıklamaları için zamanı aç",
+    "closeFloorStatementsEnded": "Zamanı kapat (açıklamalar bitti)",
+    "recordStatedMotionButton": "Bildirilen önergeyi kaydet"
   },
   "chairChecklists": {
     "common": {

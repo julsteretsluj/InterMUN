@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Załadowano wersję roboczą z przewodnikiem. Przejrzyj i kliknij opcję Utwórz i otwórz ruch, gdy będzie gotowy.",
     "guidedModeratedRequiresTopic": "Klub moderowany wymaga tematu.",
     "guidedSelectAgendaTopic": "Wybierz temat programu.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Wniosek o ustalenie porządku obrad jest niedostępny dla tej komisji (pozostało zbyt mało tematów)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Wniosek o ustalenie porządku obrad jest niedostępny dla tej komisji (pozostało zbyt mało tematów).",
+    "motionFloorLabel": "Czas na wnioski:",
+    "motionFloorOpenForStatements": "otwarty na oświadczenia",
+    "addMotionGuided": "Dodaj wniosek (prowadzony)",
+    "openFloorForMotionStatements": "Otwórz czas na oświadczenia do wniosków",
+    "closeFloorStatementsEnded": "Zamknij czas (oświadczenia zakończone)",
+    "recordStatedMotionButton": "Zapisz złożony wniosek"
   },
   "chairChecklists": {
     "common": {

@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "引导草稿已加载。 准备好后，查看并单击“创建并打开动作”。",
     "guidedModeratedRequiresTopic": "主持的核心会议需要一个主题。",
     "guidedSelectAgendaTopic": "选择议程主题。",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "该委员会无法制定议程动议（剩余主题不足）。"
+    "guidedSetAgendaUnavailableNotEnoughTopics": "该委员会无法制定议程动议（剩余主题不足）。",
+    "motionFloorLabel": "动议环节：",
+    "motionFloorOpenForStatements": "开放陈述",
+    "addMotionGuided": "添加动议（引导式）",
+    "openFloorForMotionStatements": "开放动议陈述环节",
+    "closeFloorStatementsEnded": "结束环节（陈述结束）",
+    "recordStatedMotionButton": "记录已陈述的动议"
   },
   "chairChecklists": {
     "common": {

@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "טיוטה מודרכת נטענה. סקור ולחץ על צור ופתח תנועה כשתהיה מוכן.",
     "guidedModeratedRequiresTopic": "אסיפות מנחה דורשת נושא.",
     "guidedSelectAgendaTopic": "בחר נושא לסדר היום.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "ההצעה לקביעת סדר היום אינה זמינה לוועדה זו (לא נותרו מספיק נושאים)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "ההצעה לקביעת סדר היום אינה זמינה לוועדה זו (לא נותרו מספיק נושאים).",
+    "motionFloorLabel": "זמן הצעות:",
+    "motionFloorOpenForStatements": "פתוח להצהרות",
+    "addMotionGuided": "הוסף הצעה (מודרכת)",
+    "openFloorForMotionStatements": "פתח את הזמן להצהרות על הצעות",
+    "closeFloorStatementsEnded": "סגור זמן (ההצהרות הסתיימו)",
+    "recordStatedMotionButton": "רשום הצעה שהוצגה"
   },
   "language": {
     "label": "שָׂפָה",

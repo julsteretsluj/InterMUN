@@ -389,7 +389,13 @@
     "guidedDraftLoadedReviewCreate": "Đã tải bản nháp có hướng dẫn. Xem lại và nhấp vào Tạo và mở chuyển động khi sẵn sàng.",
     "guidedModeratedRequiresTopic": "Cuộc họp kín được kiểm duyệt đòi hỏi một chủ đề.",
     "guidedSelectAgendaTopic": "Chọn một chủ đề chương trình nghị sự.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Ủy ban này không có đề nghị thiết lập chương trình nghị sự (không còn đủ chủ đề)."
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Ủy ban này không có đề nghị thiết lập chương trình nghị sự (không còn đủ chủ đề).",
+    "motionFloorLabel": "Phiên đề xuất:",
+    "motionFloorOpenForStatements": "mở để phát biểu",
+    "addMotionGuided": "Thêm đề xuất (có hướng dẫn)",
+    "openFloorForMotionStatements": "Mở phiên để phát biểu về đề xuất",
+    "closeFloorStatementsEnded": "Đóng phiên (kết thúc phát biểu)",
+    "recordStatedMotionButton": "Ghi nhận đề xuất đã trình bày"
   },
   "chairChecklists": {
     "common": {
