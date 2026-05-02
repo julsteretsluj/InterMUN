@@ -11,7 +11,8 @@ import { ChairDelegateApprovalByEmailForm } from "./ChairDelegateApprovalByEmail
 import { ChairAllocationAutoRefresh } from "./ChairAllocationAutoRefresh";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
-import { EU_PARTY_LABELS, type EuPartyKey } from "@/lib/eu-party-time";
+import type { EuPartyKey } from "@/lib/eu-party-time";
+import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages";
 import { getLocale, getTranslations } from "next-intl/server";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 
@@ -194,6 +195,7 @@ export default async function ChairAllocationMatrixPage() {
   const tMatrix = await getTranslations("chairAllocationMatrixPage");
   const tTopics = await getTranslations("agendaTopics");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const tSessionEu = await getTranslations("sessionControlClient");
   const locale = await getLocale();
   const supabase = await createClient();
   const {
@@ -334,7 +336,7 @@ export default async function ChairAllocationMatrixPage() {
         isChairSeat
           ? null
           : partyKey
-          ? EU_PARTY_LABELS[partyKey]
+          ? tSessionEu(euParliamentPartyMessageKey(partyKey) as never)
           : isEuParliament && gateCode && !/^[A-Z]{2,4}-\d{2,4}$/.test(gateCode)
             ? gateCode
             : null;

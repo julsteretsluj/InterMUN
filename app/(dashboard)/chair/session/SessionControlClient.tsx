@@ -49,11 +49,12 @@ import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
 import {
   calculateEuPartyTimeAllocation,
   EU_PARLIAMENT_PARTY_KEYS,
-  EU_PARTY_LABELS,
   formatSecondsAsMinSec,
+  type EuPartyKey,
 } from "@/lib/eu-party-time";
+import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages";
 import {
-  euSessionPhaseLabel,
+  euSessionPhaseMessageKey,
   isProcedureCodeRecommendedInEuPhase,
   nextEuSessionPhase,
   parseEuSessionPhase,
@@ -203,19 +204,20 @@ const EU_TIMER_TAG_OPTIONS: EuTimerTag[] = [
   "party timer",
   "speaker timer",
 ];
+/** Names left blank so the UI uses localized defaults via `euTimerSlotLabel`. */
 function defaultEuTimerMeta(): Record<EuTimerSlotKey, { name: string; tag: EuTimerTag }> {
   return {
-    s_and_d: { name: EU_PARTY_LABELS.s_and_d, tag: "party timer" },
-    epp: { name: EU_PARTY_LABELS.epp, tag: "party timer" },
-    renew: { name: EU_PARTY_LABELS.renew, tag: "party timer" },
-    left: { name: EU_PARTY_LABELS.left, tag: "party timer" },
-    green: { name: EU_PARTY_LABELS.green, tag: "party timer" },
-    c_and_r: { name: EU_PARTY_LABELS.c_and_r, tag: "party timer" },
-    patriots: { name: EU_PARTY_LABELS.patriots, tag: "party timer" },
-    independents: { name: EU_PARTY_LABELS.independents, tag: "party timer" },
-    total_time: { name: "Total time", tag: "consultation" },
-    poi_poc_time: { name: "POI / POC time", tag: "pois and pocs" },
-    speaker_time: { name: "Speaker time", tag: "speaker timer" },
+    s_and_d: { name: "", tag: "party timer" },
+    epp: { name: "", tag: "party timer" },
+    renew: { name: "", tag: "party timer" },
+    left: { name: "", tag: "party timer" },
+    green: { name: "", tag: "party timer" },
+    c_and_r: { name: "", tag: "party timer" },
+    patriots: { name: "", tag: "party timer" },
+    independents: { name: "", tag: "party timer" },
+    total_time: { name: "", tag: "consultation" },
+    poi_poc_time: { name: "", tag: "pois and pocs" },
+    speaker_time: { name: "", tag: "speaker timer" },
   };
 }
 function normalizeEuTimerMeta(
@@ -286,6 +288,10 @@ export function SessionControlClient({
   const tTopics = useTranslations("agendaTopics");
   const tTimer = useTranslations("session.timerPage");
   const tSessionControl = useTranslations("sessionControlClient");
+  const translateEuSessionPhase = useCallback(
+    (phase: EuSessionPhase) => tSessionControl(euSessionPhaseMessageKey(phase) as never),
+    [tSessionControl]
+  );
   const tDiscipline = useTranslations("chairMotionsPointsLog");
   const tVoting = useTranslations("voting");
   const tCommitteeLabels = useTranslations("committeeNames.labels");
@@ -627,14 +633,17 @@ export function SessionControlClient({
   }, [isEuParliamentProfile, timerWorkflowTab]);
   const [supportsEuTimerMeta, setSupportsEuTimerMeta] = useState(true);
   const euTimerSeedRef = useRef("");
-  const euTimerSlotLabel = useCallback((slot: EuTimerSlotKey) => {
-    if (slot in EU_PARTY_LABELS) {
-      return EU_PARTY_LABELS[slot as keyof typeof EU_PARTY_LABELS];
-    }
-    if (slot === "total_time") return tTimer("euTotalTime");
-    if (slot === "poi_poc_time") return tTimer("euPoiPocTime");
-    return tTimer("euSpeakerTime");
-  }, [tTimer]);
+  const euTimerSlotLabel = useCallback(
+    (slot: EuTimerSlotKey) => {
+      if (EU_PARLIAMENT_PARTY_KEYS.includes(slot as EuPartyKey)) {
+        return tSessionControl(euParliamentPartyMessageKey(slot as EuPartyKey) as never);
+      }
+      if (slot === "total_time") return tTimer("euTotalTime");
+      if (slot === "poi_poc_time") return tTimer("euPoiPocTime");
+      return tTimer("euSpeakerTime");
+    },
+    [tSessionControl, tTimer]
+  );
   useEffect(() => {
     if (procedureProfile !== "eu_parliament" || !euPartyAllocationPreview) return;
     const speakerSeconds =
@@ -877,9 +886,11 @@ export function SessionControlClient({
     if (isProcedureCodeRecommendedInEuPhase(euSessionPhase, procedureCode)) return true;
     return window.confirm(
       [
-        `This motion is unusual for the current EU phase: ${euSessionPhaseLabel(euSessionPhase)}.`,
+        tSessionControl("euPhaseOverrideIntro", {
+          phase: translateEuSessionPhase(euSessionPhase),
+        }),
         "",
-        "Proceed anyway? This override is logged only in the motion history.",
+        tSessionControl("euPhaseOverrideProceed"),
       ].join("\n")
     );
   }
@@ -2195,7 +2206,11 @@ export function SessionControlClient({
         euSessionPhase === "closing_statements" ||
         euSessionPhase === "adjourned")
     ) {
-      setMsg(`Motion floor is unavailable during ${euSessionPhaseLabel(euSessionPhase)}.`);
+      setMsg(
+        tSessionControl("motionFloorUnavailableEuPhase", {
+          phase: translateEuSessionPhase(euSessionPhase),
+        })
+      );
       return;
     }
     if (openMotion) {
@@ -2535,7 +2550,9 @@ export function SessionControlClient({
       euSessionPhase !== "voting_procedure"
     ) {
       const proceed = window.confirm(
-        `EU guided phase is ${euSessionPhaseLabel(euSessionPhase)}. Begin voting anyway?`
+        tSessionControl("euGuidedBeginVotingAnyway", {
+          phase: translateEuSessionPhase(euSessionPhase),
+        })
       );
       if (!proceed) return;
     }
@@ -3225,17 +3242,17 @@ export function SessionControlClient({
           {euPartyAllocationPreview ? (
             <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3">
               <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
-                EU party time guide
+                {tSessionControl("euPartyTimeGuideTitle")}
               </p>
               <p className="mt-1 text-xs text-brand-muted">
-                Speech pool:{" "}
+                {tSessionControl("euPartySpeechPoolLabel")}{" "}
                 <span className="font-medium text-brand-navy">
                   {formatSecondsAsMinSec(euPartyAllocationPreview.speechSeconds)}
                 </span>
                 {motionDraft.procedure_code === "moderated_caucus" ? (
                   <>
                     {" "}
-                    | POI/PoC pool:{" "}
+                    | {tSessionControl("euPartyPoiPocPoolLabel")}{" "}
                     <span className="font-medium text-brand-navy">
                       {formatSecondsAsMinSec(euPartyAllocationPreview.inquirySeconds)}
                     </span>
@@ -3248,7 +3265,9 @@ export function SessionControlClient({
                   if (!row) return null;
                   return (
                     <p key={partyKey} className="text-xs text-brand-navy">
-                      <span className="font-medium">{EU_PARTY_LABELS[partyKey]}:</span>{" "}
+                      <span className="font-medium">
+                        {tSessionControl(euParliamentPartyMessageKey(partyKey) as never)}:
+                      </span>{" "}
                       {formatSecondsAsMinSec(row.totalSeconds)}
                     </p>
                   );

@@ -29,29 +29,9 @@ export function parseEuSessionPhase(value: string | null | undefined): EuSession
   return "roll_call";
 }
 
-export function euSessionPhaseLabel(phase: EuSessionPhase): string {
-  switch (phase) {
-    case "roll_call":
-      return "Roll call";
-    case "agenda":
-      return "Agenda setting";
-    case "opening_speeches":
-      return "Opening speeches";
-    case "cabinet_meeting":
-      return "Cabinet meeting";
-    case "shadow_meeting":
-      return "Shadow meeting";
-    case "formal_debate":
-      return "Formal debate";
-    case "resolution_debate":
-      return "Resolution debate";
-    case "voting_procedure":
-      return "Voting procedure";
-    case "closing_statements":
-      return "Closing statements";
-    case "adjourned":
-      return "Adjourned";
-  }
+/** `sessionControlClient` message key: `euSessionPhase_${phase}` — use with next-intl `t()`. */
+export function euSessionPhaseMessageKey(phase: EuSessionPhase): string {
+  return `euSessionPhase_${phase}`;
 }
 
 export function nextEuSessionPhase(current: EuSessionPhase): EuSessionPhase {

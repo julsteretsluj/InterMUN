@@ -7,7 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
-import { EU_PARLIAMENT_PARTY_KEYS, EU_PARTY_LABELS, type EuPartyKey } from "@/lib/eu-party-time";
+import { EU_PARLIAMENT_PARTY_KEYS, type EuPartyKey } from "@/lib/eu-party-time";
+import { euParliamentPartyMessageKey } from "@/lib/eu-parliament-party-messages";
 import {
   activeAllocationIdsInQueue,
   addAllocationToSpeakerQueue,
@@ -135,6 +136,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
     ref
   ) {
     const t = useTranslations("chairSpeakerQueuePanel");
+    const tEuParty = useTranslations("sessionControlClient");
     const supabase = useMemo(() => createClient(), []);
     const [queue, setQueue] = useState<SpeakerQueueEntry[]>([]);
     const [pickAlloc, setPickAlloc] = useState("");
@@ -199,7 +201,9 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         const flag = flagEmojiForCountryName(countryName);
         const countryWithFlag = `${flag} ${countryName}`.trim();
         const partyShort = partyKey ? EU_PARTY_SHORT_LABELS[partyKey] : null;
-        const partyFull = partyKey ? EU_PARTY_LABELS[partyKey] : null;
+        const partyFull = partyKey
+          ? tEuParty(euParliamentPartyMessageKey(partyKey) as never)
+          : null;
         const displayLabel = partyShort ? `${countryWithFlag} - ${partyShort}` : countryWithFlag;
         const queueLabel = partyFull ? `${countryWithFlag} - ${partyFull}` : countryWithFlag;
         return {
@@ -218,7 +222,7 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
         if (aOrder !== bOrder) return aOrder - bOrder;
         return a.countryName.localeCompare(b.countryName);
       });
-    }, [allocations, isEuParliament, t]);
+    }, [allocations, isEuParliament, t, tEuParty]);
     const allocationById = useMemo(() => {
       const map = new Map<string, SpeakerAllocation>();
       for (const alloc of speakerAllocations) map.set(alloc.id, alloc);
