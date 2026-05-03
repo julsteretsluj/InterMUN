@@ -171,11 +171,15 @@ export default async function SmtAllocationMatrixPage({
           .order("country", { ascending: true })
       ).data ?? [];
 
-    // If a committee has zero allocations yet, pre-create head-chair/co-chair rows
-    // so the roster isn't empty on first load.
-    if (allocs.length === 0) {
+    const selectedConfRow = rawList.find((c) => c.id === selectedConferenceId);
+    // Empty committees: seed dais rows. SMT secretariat: always re-run — legacy installs may still
+    // have only Head Chair / Co-chair; ensure migrates labels and adds full roster rows (idempotent).
+    const shouldEnsureSeatRows =
+      allocs.length === 0 ||
+      (selectedConfRow ? isSmtSecretariatConferenceRow(selectedConfRow) : false);
+
+    if (shouldEnsureSeatRows) {
       try {
-        const selectedConfRow = rawList.find((c) => c.id === selectedConferenceId);
         await ensureDaisSeatAllocations(supabase, selectedConferenceId, selectedConfRow?.committee);
         allocs =
           (
