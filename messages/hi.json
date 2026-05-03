@@ -1037,7 +1037,17 @@
     "liveFloor": "सजीव मंजिल",
     "liveFloorDescription": "इस समिति के लिए लाइव स्पीकर कतार, रोल कॉल और टाइमर - वही डेटा कुर्सियाँ सत्र तल पर देखती हैं।",
     "conferenceFallback": "सम्मेलन",
-    "committeeFallback": "समिति"
+    "committeeFallback": "समिति",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

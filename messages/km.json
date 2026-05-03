@@ -1120,7 +1120,17 @@
     "liveFloor": "ជាន់ផ្ទាល់",
     "liveFloorDescription": "ជួរវាគ្មិនផ្ទាល់ ការហៅទូរសព្ទ និងកម្មវិធីកំណត់ម៉ោងសម្រាប់គណៈកម្មាធិការនេះ—កៅអីទិន្នន័យដូចគ្នាឃើញនៅជាន់វគ្គ។",
     "conferenceFallback": "សន្និសីទ",
-    "committeeFallback": "គណៈកម្មាធិការ"
+    "committeeFallback": "គណៈកម្មាធិការ",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

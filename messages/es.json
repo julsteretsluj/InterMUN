@@ -1109,7 +1109,17 @@
     "liveFloor": "piso vivo",
     "liveFloorDescription": "Cola de oradores en vivo, pase de lista y cronómetros para este comité: los mismos datos que ven los presidentes en la sesión.",
     "conferenceFallback": "Conferencia",
-    "committeeFallback": "Comité"
+    "committeeFallback": "Comité",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

@@ -1120,7 +1120,17 @@
     "liveFloor": "နေထိုင်သွားတော့တယ်။",
     "liveFloorDescription": "ဤကော်မတီအတွက် တိုက်ရိုက်စပီကာတန်းစီခြင်း၊ ခေါ်ဆိုမှုနှင့် အချိန်တိုင်းကိရိယာများ—စက်ရှင်အထပ်တွင် တွေ့ရသည့် အလားတူဒေတာထိုင်ခုံများ။",
     "conferenceFallback": "ညီလာခံ",
-    "committeeFallback": "ကော်မတီ"
+    "committeeFallback": "ကော်မတီ",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

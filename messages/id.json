@@ -1037,7 +1037,17 @@
     "liveFloor": "Lantai hidup",
     "liveFloorDescription": "Antrean pembicara langsung, absensi, dan pengatur waktu untuk komite ini—data yang sama dapat dilihat oleh ketua di lantai sesi.",
     "conferenceFallback": "Konferensi",
-    "committeeFallback": "Komite"
+    "committeeFallback": "Komite",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

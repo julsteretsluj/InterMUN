@@ -1109,7 +1109,17 @@
     "liveFloor": "Levende vloer",
     "liveFloorDescription": "Live sprekerswachtrij, appèl en timers voor deze commissie – dezelfde datavoorzitters als op de sessievloer.",
     "conferenceFallback": "Conferentie",
-    "committeeFallback": "Commissie"
+    "committeeFallback": "Commissie",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

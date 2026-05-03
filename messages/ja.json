@@ -1109,7 +1109,17 @@
     "liveFloor": "ライブフロア",
     "liveFloorDescription": "この委員会のライブ発言者キュー、点呼、タイマー - 議長がセッションフロアで確認するのと同じデータ。",
     "conferenceFallback": "会議",
-    "committeeFallback": "委員会"
+    "committeeFallback": "委員会",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

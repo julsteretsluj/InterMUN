@@ -1109,7 +1109,17 @@
     "liveFloor": "Piano vivo",
     "liveFloorDescription": "Coda degli oratori dal vivo, appello e timer per questo comitato: gli stessi presidenti dei dati che vedono in sala.",
     "conferenceFallback": "Conferenza",
-    "committeeFallback": "Comitato"
+    "committeeFallback": "Comitato",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

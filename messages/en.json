@@ -1170,7 +1170,17 @@
     "liveFloor": "Live floor",
     "liveFloorDescription": "Live speaker queue, roll call, and timers for this committee—same data chairs see on the session floor.",
     "conferenceFallback": "Conference",
-    "committeeFallback": "Committee"
+    "committeeFallback": "Committee",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

@@ -1037,7 +1037,17 @@
     "liveFloor": "লাইভ মেঝে",
     "liveFloorDescription": "এই কমিটির জন্য লাইভ স্পিকার সারি, রোল কল এবং টাইমার—সেশন ফ্লোরে একই ডেটা চেয়ারগুলি দেখা যায়।",
     "conferenceFallback": "সম্মেলন",
-    "committeeFallback": "কমিটি"
+    "committeeFallback": "কমিটি",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

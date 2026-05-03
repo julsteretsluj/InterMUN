@@ -1037,7 +1037,17 @@
     "liveFloor": "Sakafu ya moja kwa moja",
     "liveFloorDescription": "Foleni ya spika ya moja kwa moja, wito wa orodha, na vipima muda vya kamati hii—viti sawa vya data huona kwenye sakafu ya kikao.",
     "conferenceFallback": "Mkutano",
-    "committeeFallback": "Kamati"
+    "committeeFallback": "Kamati",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

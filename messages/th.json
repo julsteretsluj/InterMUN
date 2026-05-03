@@ -1037,7 +1037,17 @@
     "liveFloor": "ถ่ายทอดสดชั้น",
     "liveFloorDescription": "คิววิทยากรสด การโทรออก และผู้จับเวลาสำหรับคณะกรรมการชุดนี้ ซึ่งเป็นประธานข้อมูลชุดเดียวกันที่เห็นในชั้นเซสชั่น",
     "conferenceFallback": "การประชุม",
-    "committeeFallback": "คณะกรรมการ"
+    "committeeFallback": "คณะกรรมการ",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

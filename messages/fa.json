@@ -1037,7 +1037,17 @@
     "liveFloor": "طبقه زنده",
     "liveFloorDescription": "صف سخنران زنده، تماس تلفنی، و تایمر برای این کمیته - همان صندلی های داده در طبقه جلسه.",
     "conferenceFallback": "کنفرانس",
-    "committeeFallback": "کمیته"
+    "committeeFallback": "کمیته",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

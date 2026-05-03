@@ -8,6 +8,7 @@ import {
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
 
 type ConfRow = { id: string; name: string; committee: string | null; committee_code: string | null };
@@ -54,14 +55,12 @@ function dedupeConferencesForMatrixTabs(
     for (const r of groupRows) resolveToCanonical.set(r.id, primary.id);
   }
 
-  const list = [...canonicalByKey.values()].sort((a, b) => {
-    if (!a.committee && !b.committee) return a.name.localeCompare(b.name);
-    if (!a.committee) return 1;
-    if (!b.committee) return -1;
-    const byC = a.committee.localeCompare(b.committee);
-    if (byC !== 0) return byC;
-    return a.name.localeCompare(b.name);
-  });
+  const list = [...canonicalByKey.values()].sort((a, b) =>
+    compareCommitteeRowsByDifficultyThenLabel(
+      { committee: a.committee, name: a.name },
+      { committee: b.committee, name: b.name }
+    )
+  );
   return {
     list,
     resolveConferenceId: (id) => resolveToCanonical.get(id) ?? id,

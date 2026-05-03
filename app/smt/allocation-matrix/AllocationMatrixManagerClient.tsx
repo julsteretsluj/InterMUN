@@ -507,8 +507,8 @@ export function AllocationMatrixManagerClient({
                 onClick={() => onConferenceChange(tab.id)}
                 className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                   active
-                    ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy"
-                    : "border-brand-navy/15 bg-white text-brand-navy/80 hover:bg-brand-cream/70"
+                    ? "border-brand-accent/60 bg-brand-accent/20 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/30 dark:text-white"
+                    : "border-zinc-300 bg-zinc-100 text-zinc-900 hover:bg-zinc-200/90 dark:border-white/15 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700/90"
                 }`}
               >
                 {tab.label}

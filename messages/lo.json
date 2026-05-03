@@ -1120,7 +1120,17 @@
     "liveFloor": "ຊັ້ນດໍາລົງຊີວິດ",
     "liveFloorDescription": "ຄິວລຳໂພງສົດ, ໂທມ້ວນ, ແລະໂມງຈັບເວລາສຳລັບຄະນະກຳມາທິການນີ້—ປະທານຂໍ້ມູນອັນດຽວກັນທີ່ເຫັນຢູ່ຊັ້ນຂອງກອງປະຊຸມ.",
     "conferenceFallback": "ກອງປະຊຸມ",
-    "committeeFallback": "ຄະນະກໍາມະການ"
+    "committeeFallback": "ຄະນະກໍາມະການ",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

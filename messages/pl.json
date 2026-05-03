@@ -1109,7 +1109,17 @@
     "liveFloor": "Żywa podłoga",
     "liveFloorDescription": "Kolejka mówców na żywo, apele i liczniki czasu dla tej komisji – te same osoby, które obsługują przewodniczących danych, widzą na sali obrad.",
     "conferenceFallback": "Konferencja",
-    "committeeFallback": "Komisja"
+    "committeeFallback": "Komisja",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

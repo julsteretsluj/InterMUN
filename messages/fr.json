@@ -1109,7 +1109,17 @@
     "liveFloor": "Plancher vivant",
     "liveFloorDescription": "File d'attente des intervenants en direct, appel nominal et minuteries pour ce comité : mêmes données que celles que les présidents voient en séance.",
     "conferenceFallback": "Conférence",
-    "committeeFallback": "Comité"
+    "committeeFallback": "Comité",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

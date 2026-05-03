@@ -1037,7 +1037,17 @@
     "liveFloor": "קומה חיה",
     "liveFloorDescription": "תור דוברים חי, מפקד וטיימרים עבור הוועדה הזו - אותם יושבי ראש נתונים רואים ברצפת הישיבה.",
     "conferenceFallback": "וְעִידָה",
-    "committeeFallback": "וַעֲדָה"
+    "committeeFallback": "וַעֲדָה",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

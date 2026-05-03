@@ -1037,7 +1037,17 @@
     "liveFloor": "Ζωντανό πάτωμα",
     "liveFloorDescription": "Ζωντανή ουρά ομιλητών, ονομαστική κλήση και χρονόμετρα για αυτήν την επιτροπή—οι ίδιοι πρόεδροι δεδομένων βλέπουν στην αίθουσα συνεδρίας.",
     "conferenceFallback": "Διάσκεψη",
-    "committeeFallback": "Επιτροπή"
+    "committeeFallback": "Επιτροπή",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

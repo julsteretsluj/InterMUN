@@ -1109,7 +1109,17 @@
     "liveFloor": "Sàn trực tiếp",
     "liveFloorDescription": "Hàng đợi người phát biểu trực tiếp, cuộc gọi điểm danh và bộ hẹn giờ cho ủy ban này—những chiếc ghế dữ liệu giống nhau sẽ thấy trên sàn phiên họp.",
     "conferenceFallback": "Hội nghị",
-    "committeeFallback": "Ủy ban"
+    "committeeFallback": "Ủy ban",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

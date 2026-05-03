@@ -1109,7 +1109,17 @@
     "liveFloor": "Live-Boden",
     "liveFloorDescription": "Live-Sprecherwarteschlange, Appell und Timer für dieses Komitee – dieselben Daten, die Vorsitzende auf der Sitzungsfläche sehen.",
     "conferenceFallback": "Konferenz",
-    "committeeFallback": "Ausschuss"
+    "committeeFallback": "Ausschuss",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

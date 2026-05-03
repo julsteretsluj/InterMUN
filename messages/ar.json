@@ -1109,7 +1109,17 @@
     "liveFloor": "أرضية حية",
     "liveFloorDescription": "قائمة انتظار المتحدثين المباشرين، ونداء الأسماء، وأجهزة ضبط الوقت الخاصة بهذه اللجنة - نفس كراسي البيانات التي تراها في قاعة الجلسة.",
     "conferenceFallback": "مؤتمر",
-    "committeeFallback": "لجنة"
+    "committeeFallback": "لجنة",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

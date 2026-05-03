@@ -1109,7 +1109,17 @@
     "liveFloor": "Жива підлога",
     "liveFloorDescription": "Черга доповідачів у прямому ефірі, переклички та таймери для цього комітету — ті самі дані, які голови бачать у сесійній залі.",
     "conferenceFallback": "Конференція",
-    "committeeFallback": "Комітет"
+    "committeeFallback": "Комітет",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

@@ -1109,7 +1109,17 @@
     "liveFloor": "Живой пол",
     "liveFloorDescription": "Очередь выступающих в реальном времени, перекличка и таймеры для этого комитета — те же данные, которые председатели видят в зале заседаний.",
     "conferenceFallback": "Конференция",
-    "committeeFallback": "комитет"
+    "committeeFallback": "комитет",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

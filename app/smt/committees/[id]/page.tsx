@@ -29,6 +29,9 @@ import {
   translateCommitteeTagDifficulty,
   translateCommitteeTagFormat,
 } from "@/lib/i18n/committee-display-tags";
+import { isSmtSecretariatConferenceRow } from "@/lib/smt-conference-filters";
+import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
+import { Seamun2027SecretariatOverviewRoster } from "@/components/smt/Seamun2027SecretariatOverviewRoster";
 
 function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -83,6 +86,16 @@ export default async function SmtCommitteeLivePage({
     .maybeSingle();
 
   if (!conf) notFound();
+
+  const { data: committeeEvent } = await supabase
+    .from("conference_events")
+    .select("event_code")
+    .eq("id", conf.event_id)
+    .maybeSingle();
+
+  const showSeamunSecretariatRoster =
+    isSmtSecretariatConferenceRow(conf) &&
+    committeeEvent?.event_code === SEAMUN_I_2027_EVENT_CODE;
 
   if (eventId && conf.event_id !== eventId) {
     return (
@@ -185,6 +198,8 @@ export default async function SmtCommitteeLivePage({
           </div>
           <p className="mt-1.5 text-xs uppercase tracking-wide text-brand-muted">{t("committeeOverview")}</p>
         </div>
+
+        {showSeamunSecretariatRoster ? <Seamun2027SecretariatOverviewRoster /> : null}
 
         <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <MetaItem label={t("sessionTopicAgenda")}>

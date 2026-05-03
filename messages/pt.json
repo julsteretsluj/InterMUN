@@ -1109,7 +1109,17 @@
     "liveFloor": "Piso vivo",
     "liveFloorDescription": "Fila de palestrante ao vivo, chamada e cronômetros para este comitê - os mesmos dados que os presidentes veem no plenário da sessão.",
     "conferenceFallback": "Conferência",
-    "committeeFallback": "Comitê"
+    "committeeFallback": "Comitê",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

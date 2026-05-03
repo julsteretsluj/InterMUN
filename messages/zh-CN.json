@@ -1109,7 +1109,17 @@
     "liveFloor": "直播楼层",
     "liveFloorDescription": "该委员会的现场发言者队列、点名和计时器 - 主席在会议地板上看到的数据相同。",
     "conferenceFallback": "会议",
-    "committeeFallback": "委员会"
+    "committeeFallback": "委员会",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {

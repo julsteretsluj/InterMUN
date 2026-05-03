@@ -1109,7 +1109,17 @@
     "liveFloor": "Canlı zemin",
     "liveFloorDescription": "Bu komite için canlı konuşmacı kuyruğu, yoklama ve zamanlayıcılar; oturum katında görülen verilerin aynısı.",
     "conferenceFallback": "Konferans",
-    "committeeFallback": "Komite"
+    "committeeFallback": "Komite",
+    "secretariatOversightTitle": "Secretariat oversight roster",
+    "secretariatMatrixSectionSecretariat": "Secretariat",
+    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatMatrixSectionMedia": "Media",
+    "secretariatMatrixSmtEmail": "SMT email",
+    "secretariatMatrixFinanceEmail": "Finance email",
+    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatMatrixRole": "Role",
+    "secretariatMatrixName": "Name",
+    "secretariatMatrixEmail": "Email"
   },
   "committeeNames": {
     "full": {
