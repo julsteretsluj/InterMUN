@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 import { getTranslations } from "next-intl/server";
 
 const MAX_COUNTRY_LEN = 500;
@@ -97,10 +98,14 @@ export async function smtAddAllocationRow(formData: FormData) {
 
   const { data: confMeta } = await auth.supabase
     .from("conferences")
-    .select("committee")
+    .select("committee, committee_code")
     .eq("id", conferenceId)
     .maybeSingle();
-  await ensureDaisSeatAllocations(auth.supabase, conferenceId, confMeta?.committee);
+  await ensureDaisSeatAllocations(
+    auth.supabase,
+    conferenceId,
+    confMeta ? committeeHintForSmtDaisPlan(confMeta) : null
+  );
   revalidateAllocationPaths();
   return { success: true as const };
 }
@@ -294,10 +299,14 @@ export async function smtImportAllocationsCsv(formData: FormData) {
 
   const { data: confMeta } = await auth.supabase
     .from("conferences")
-    .select("committee")
+    .select("committee, committee_code")
     .eq("id", conferenceId)
     .maybeSingle();
-  await ensureDaisSeatAllocations(auth.supabase, conferenceId, confMeta?.committee);
+  await ensureDaisSeatAllocations(
+    auth.supabase,
+    conferenceId,
+    confMeta ? committeeHintForSmtDaisPlan(confMeta) : null
+  );
   revalidateAllocationPaths();
   return {
     success: true as const,

@@ -12,6 +12,19 @@ export function isSmtSecretariatConferenceRow(c: {
 }
 
 /**
+ * `getDaisSeatLabelsForCommittee` / SMT legacy cleanup use `committeeSessionGroupKey(committee)`.
+ * Secretariat rows often set `committee_code` (SMT227) but omit `committee`; pass this instead of raw `committee`.
+ */
+export function committeeHintForSmtDaisPlan(c: {
+  committee?: string | null;
+  committee_code?: string | null;
+}): string | null {
+  if (isSmtSecretariatConferenceRow(c)) return "SMT";
+  const t = c.committee?.trim();
+  return t ? t : null;
+}
+
+/**
  * Legacy row that mirrors the event name (e.g. "SEAMUN I 2027") without a real chamber.
  * Not a delegate committee — hide from room-code editing like the allocation matrix does.
  */

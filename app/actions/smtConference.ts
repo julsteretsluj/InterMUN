@@ -5,6 +5,7 @@ import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { revalidatePath } from "next/cache";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 
 export type SmtFormState = { error?: string; success?: boolean };
 
@@ -100,7 +101,11 @@ export async function updateCommitteeSessionAction(
   });
 
   if (error) return { error: error.message };
-  await ensureDaisSeatAllocations(supabase, id, committee);
+  await ensureDaisSeatAllocations(
+    supabase,
+    id,
+    committeeHintForSmtDaisPlan({ committee, committee_code: committeeCode })
+  );
   revalidatePath("/smt");
   revalidatePath("/smt/conference");
   revalidatePath(`/smt/committees/${id}`);

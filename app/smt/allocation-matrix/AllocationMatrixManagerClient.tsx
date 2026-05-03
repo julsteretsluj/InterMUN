@@ -16,7 +16,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { getDaisSeatLabelsForCommittee } from "@/lib/dais-seat-plan";
-import { committeeSessionGroupKey } from "@/lib/committee-session-group";
+import { isSmtSecretariatConferenceRow } from "@/lib/smt-conference-filters";
 import { SMT_TEMPORARY_SEAT_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
 
 export type MatrixRow = {
@@ -33,7 +33,7 @@ export function AllocationMatrixManagerClient({
   selectedConferenceId,
   rows,
 }: {
-  conferences: { id: string; name: string; committee: string | null }[];
+  conferences: { id: string; name: string; committee: string | null; committee_code?: string | null }[];
   selectedConferenceId: string | null;
   rows: MatrixRow[];
 }) {
@@ -95,14 +95,26 @@ export function AllocationMatrixManagerClient({
     [conferences, selectedConferenceId]
   );
   const isSmtSecretariatSheet = useMemo(
-    () => committeeSessionGroupKey(selectedConference?.committee ?? null) === "SMT",
-    [selectedConference?.committee]
+    () =>
+      selectedConference
+        ? isSmtSecretariatConferenceRow({
+            committee: selectedConference.committee,
+            committee_code: selectedConference.committee_code ?? null,
+          })
+        : false,
+    [selectedConference]
   );
 
   const daisQuickAddLabels = useMemo(
     () =>
-      selectedConference ? [...getDaisSeatLabelsForCommittee(selectedConference.committee)] : [],
-    [selectedConference]
+      selectedConference
+        ? [
+            ...getDaisSeatLabelsForCommittee(
+              isSmtSecretariatSheet ? "SMT" : selectedConference.committee
+            ),
+          ]
+        : [],
+    [selectedConference, isSmtSecretariatSheet]
   );
 
   function onQuickAddChairSeat(label: string) {

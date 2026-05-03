@@ -4,6 +4,7 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatrixManagerClient";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import {
+  committeeHintForSmtDaisPlan,
   isEventNameOverlayConferenceRow,
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
@@ -180,7 +181,11 @@ export default async function SmtAllocationMatrixPage({
 
     if (shouldEnsureSeatRows) {
       try {
-        await ensureDaisSeatAllocations(supabase, selectedConferenceId, selectedConfRow?.committee);
+        await ensureDaisSeatAllocations(
+          supabase,
+          selectedConferenceId,
+          selectedConfRow ? committeeHintForSmtDaisPlan(selectedConfRow) : null
+        );
         allocs =
           (
             await supabase

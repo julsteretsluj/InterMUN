@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { getDaisSeatLabelsForCommittee, isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
+import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 
 type ProfileEmbed = {
@@ -142,7 +143,7 @@ export async function loadCommitteeRoomPayload(
 ): Promise<CommitteeRoomPayload> {
   const { data: conference } = await supabase
     .from("conferences")
-    .select("id, name, committee")
+    .select("id, name, committee, committee_code")
     .eq("id", conferenceId)
     .maybeSingle();
 
@@ -167,6 +168,13 @@ export async function loadCommitteeRoomPayload(
     }[]
   );
 
+  const committeeForDais = conference
+    ? committeeHintForSmtDaisPlan({
+        committee: conference.committee,
+        committee_code: conference.committee_code,
+      })
+    : null;
+
   let dais = daisFromChairAllocations(
     rows as {
       country: string | null;
@@ -174,7 +182,7 @@ export async function loadCommitteeRoomPayload(
       display_name_override: string | null;
       profiles: ProfileEmbed | ProfileEmbed[] | null;
     }[],
-    conference?.committee
+    committeeForDais
   );
   if (!dais) {
     dais = daisFromChairNamesField(options.chairNamesHint);

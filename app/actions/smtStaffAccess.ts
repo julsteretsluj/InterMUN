@@ -9,6 +9,7 @@ import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getTranslations } from "next-intl/server";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 import {
   countryLabelAllowedForCommittee,
   findAllocationRowForCountryLabel,
@@ -135,7 +136,7 @@ export async function smtInviteChairAction(
   const { conferenceId, countryLabel } = parsedInvite;
   const { data: confRow, error: confErr } = await admin
     .from("conferences")
-    .select("id, committee, event_id")
+    .select("id, committee, committee_code, event_id")
     .eq("id", conferenceId)
     .maybeSingle();
 
@@ -147,7 +148,7 @@ export async function smtInviteChairAction(
     return { error: t("invalidChairRole") };
   }
 
-  await ensureDaisSeatAllocations(admin, conferenceId, confRow.committee);
+  await ensureDaisSeatAllocations(admin, conferenceId, committeeHintForSmtDaisPlan(confRow));
 
   const { data: allocRows, error: allocListErr } = await admin
     .from("allocations")
