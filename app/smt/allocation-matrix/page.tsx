@@ -3,7 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatrixManagerClient";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
-import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
+import {
+  isEventNameOverlayConferenceRow,
+  isSmtSecretariatConferenceRow,
+} from "@/lib/smt-conference-filters";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { getTranslations } from "next-intl/server";
 
@@ -65,19 +68,12 @@ function dedupeConferencesForMatrixTabs(
   };
 }
 
-function isSmtSecretariatTab(c: ConfRow): boolean {
-  const code = c.committee_code?.trim().toUpperCase() ?? "";
-  if (code === SMT_COMMITTEE_CODE) return true;
-  if (code === "SECRETARIAT2027") return true; // legacy six-char migration order
-  return c.committee?.trim().toLowerCase() === "smt";
-}
-
 /** Secretariat / SMT sheet always appears first in the tab strip. */
 function pinSmtCommitteeFirst(rows: ConfRow[]): ConfRow[] {
   const smt: ConfRow[] = [];
   const rest: ConfRow[] = [];
   for (const c of rows) {
-    if (isSmtSecretariatTab(c)) smt.push(c);
+    if (isSmtSecretariatConferenceRow(c)) smt.push(c);
     else rest.push(c);
   }
   return [...smt, ...rest];
@@ -115,7 +111,7 @@ export default async function SmtAllocationMatrixPage({
     .order("name", { ascending: true });
 
   let unfiltered = conferences ?? [];
-  if (!unfiltered.some((c) => isSmtSecretariatTab(c))) {
+  if (!unfiltered.some((c) => isSmtSecretariatConferenceRow(c))) {
     const { error: ensureErr } = await supabase.rpc("ensure_smt_secretariat_conference_for_event", {
       p_event_id: eventId,
     });
@@ -132,11 +128,7 @@ export default async function SmtAllocationMatrixPage({
 
   // Some datasets include the overall event name as a conference row; it should not
   // show up as a selectable sheet/tab in the allocation matrix.
-  const filtered = unfiltered.filter((c) => {
-    const name = c.name?.trim().toLowerCase();
-    const committee = c.committee?.trim().toLowerCase();
-    return name !== "seamun i 2027" && committee !== "seamun i 2027";
-  });
+  const filtered = unfiltered.filter((c) => !isEventNameOverlayConferenceRow(c));
   // Safety valve: never hide the entire matrix. If filtering removes every row,
   // fall back to the raw conference list.
   const rawList = filtered.length > 0 ? filtered : unfiltered;

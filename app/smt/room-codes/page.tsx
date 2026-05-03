@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
+import { filterConferencesForSmtRoomCodes } from "@/lib/smt-conference-filters";
 import { RoomCodesAndChairsClient } from "./RoomCodesAndChairsClient";
 
 export default async function SmtRoomCodesPage() {
@@ -24,19 +25,21 @@ export default async function SmtRoomCodesPage() {
     );
   }
 
-  const { data: conferences } = await supabase
+  const { data: conferencesRaw } = await supabase
     .from("conferences")
     .select("id, name, committee, committee_code")
     .eq("event_id", eventId)
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
 
+  const conferences = filterConferencesForSmtRoomCodes(conferencesRaw ?? []);
+
   return (
     <div>
       <h1 className="font-display text-2xl font-semibold text-brand-navy mb-2">{t("title")}</h1>
       <p className="text-sm text-brand-muted mb-6 max-w-2xl">{t("subtitle")}</p>
       <RoomCodesAndChairsClient
-        conferences={conferences ?? []}
+        conferences={conferences}
         adminInviteConfigured={adminInviteConfigured}
       />
     </div>
