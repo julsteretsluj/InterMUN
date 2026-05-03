@@ -39,6 +39,9 @@ export const SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS = [
   "Head of PR & Advertising",
 ] as const;
 
+/** Ad-hoc seats for the SMT sheet (manual / quick-add). */
+export const SMT_TEMPORARY_SEAT_LABELS = ["Temporary SMT", "Temporary advisor"] as const;
+
 export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
   { role: "Secretary General", name: "Jules K.A.", email: "juleskittoastrop@gmail.com" },
   { role: "Deputy Secretary General", name: "Emily H.", email: "emily.yhstudent@sisbschool.com" },

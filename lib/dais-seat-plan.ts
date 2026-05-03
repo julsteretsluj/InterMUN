@@ -1,5 +1,8 @@
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
-import { SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
+import {
+  SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS,
+  SMT_TEMPORARY_SEAT_LABELS,
+} from "@/lib/seamun-i-2027-secretariat-roster";
 
 /** Default when chamber is unknown: Head Chair + Co-chair (matches legacy behaviour). */
 const DEFAULT_PLAN = ["Head Chair", "Co-chair"] as const;
@@ -64,6 +67,9 @@ export const LEGACY_DAIS_RENAMES: Record<string, [fromLower: string, toExact: st
 const ALL_PLAN_LABELS_LOWER = new Set<string>();
 for (const plan of Object.values(PLAN_BY_SESSION_GROUP)) {
   for (const l of plan) ALL_PLAN_LABELS_LOWER.add(l.trim().toLowerCase());
+}
+for (const l of SMT_TEMPORARY_SEAT_LABELS) {
+  ALL_PLAN_LABELS_LOWER.add(l.trim().toLowerCase());
 }
 DEFAULT_PLAN.forEach((l) => ALL_PLAN_LABELS_LOWER.add(l.toLowerCase()));
 ["co chair", "backroom chair 2"].forEach((l) => ALL_PLAN_LABELS_LOWER.add(l));

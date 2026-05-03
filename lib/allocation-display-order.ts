@@ -1,7 +1,14 @@
-import { SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
+import {
+  SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS,
+  SMT_TEMPORARY_SEAT_LABELS,
+} from "@/lib/seamun-i-2027-secretariat-roster";
 
-const SMT_ALLOCATION_ORDER = new Map(
-  SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS.map((l, i) => [l.trim().toLowerCase(), i])
+const SMT_ALLOCATION_ORDER = new Map<string, number>();
+SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS.forEach((l, i) =>
+  SMT_ALLOCATION_ORDER.set(l.trim().toLowerCase(), i)
+);
+SMT_TEMPORARY_SEAT_LABELS.forEach((l, i) =>
+  SMT_ALLOCATION_ORDER.set(l.trim().toLowerCase(), 100 + i)
 );
 
 /** Canonical labels for dais seats (matches SMT quick-add and committee-room payload). */

@@ -16,6 +16,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { getDaisSeatLabelsForCommittee } from "@/lib/dais-seat-plan";
+import { committeeSessionGroupKey } from "@/lib/committee-session-group";
+import { SMT_TEMPORARY_SEAT_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
 
 export type MatrixRow = {
   id: string;
@@ -92,6 +94,11 @@ export function AllocationMatrixManagerClient({
     () => conferences.find((c) => c.id === selectedConferenceId) ?? null,
     [conferences, selectedConferenceId]
   );
+  const isSmtSecretariatSheet = useMemo(
+    () => committeeSessionGroupKey(selectedConference?.committee ?? null) === "SMT",
+    [selectedConference?.committee]
+  );
+
   const daisQuickAddLabels = useMemo(
     () =>
       selectedConference ? [...getDaisSeatLabelsForCommittee(selectedConference.committee)] : [],
@@ -372,25 +379,39 @@ export function AllocationMatrixManagerClient({
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-3">
         <h2 className="font-display text-lg font-semibold text-brand-navy">{t("addOneSeat")}</h2>
         <div className="flex flex-wrap gap-2">
-          {daisQuickAddLabels.map((label) => (
-            <button
-              key={label}
-              type="button"
-              onClick={() => onQuickAddChairSeat(label)}
-              disabled={pending}
-              className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
-            >
-              {label}
-            </button>
-          ))}
+          {isSmtSecretariatSheet
+            ? SMT_TEMPORARY_SEAT_LABELS.map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => onQuickAddChairSeat(label)}
+                  disabled={pending}
+                  className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+                >
+                  {label}
+                </button>
+              ))
+            : daisQuickAddLabels.map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => onQuickAddChairSeat(label)}
+                  disabled={pending}
+                  className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+                >
+                  {label}
+                </button>
+              ))}
         </div>
         <form onSubmit={onAdd} className="flex flex-wrap gap-2 items-end">
           <input type="hidden" name="conference_id" value={selectedConferenceId} />
           <div>
             <label className="block text-xs text-brand-muted mb-1">{t("countryPosition")}</label>
             <input
+              key={`${selectedConferenceId ?? "none"}-country`}
               name="country"
               required
+              defaultValue={isSmtSecretariatSheet ? "Temporary SMT" : undefined}
               placeholder={t("countryPlaceholder")}
               className="px-3 py-2 rounded-lg border border-brand-navy/15 text-sm w-56"
             />
