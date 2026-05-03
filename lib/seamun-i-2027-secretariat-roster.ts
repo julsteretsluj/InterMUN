@@ -22,7 +22,7 @@ export const SEAMUN_I_2027_SECRETARIAT_CONTACTS = {
 } as const;
 
 export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
-  { role: "Secretary General", name: "Jules K.A.", email: "jules kitto-astrop" },
+  { role: "Secretary General", name: "Jules K.A.", email: "juleskittoastrop@gmail.com" },
   { role: "Deputy Secretary General", name: "Emily H.", email: "emily.yhstudent@sisbschool.com" },
   {
     role: "Parliamentarian",
