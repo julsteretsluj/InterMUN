@@ -4,6 +4,7 @@ import {
   getDaisSeatLabelsForCommittee,
   LEGACY_DAIS_RENAMES,
 } from "@/lib/dais-seat-plan";
+import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 
 async function reconcileLegacyDaisSeatLabels(
   supabase: SupabaseClient,
@@ -42,13 +43,42 @@ async function reconcileLegacyDaisSeatLabels(
   }
 }
 
-/** Remove duplicate legacy Head Chair / Co-chair rows once SG/DSG exist (partial migrations). */
+/**
+ * Drop duplicate legacy committee-chair rows when canonical secretariat titles already exist.
+ * Runs without relying on `committee` hint (often null in DB); safe for real chambers because they
+ * never mix "Secretary General" with "Head Chair".
+ */
+async function removeDuplicateChairRowsWhenSecretariatTitlesExist(
+  supabase: SupabaseClient,
+  conferenceId: string
+): Promise<void> {
+  const { data: rows, error } = await supabase
+    .from("allocations")
+    .select("id, country")
+    .eq("conference_id", conferenceId);
+  if (error || !rows?.length) return;
+
+  const lower = (s: string | null | undefined) => String(s ?? "").trim().toLowerCase();
+  const countries = new Set(rows.map((r) => lower(r.country)));
+
+  for (const r of rows) {
+    const k = lower(r.country);
+    const dropHc = k === "head chair" && countries.has("secretary general");
+    const dropCc =
+      (k === "co-chair" || k === "co chair") && countries.has("deputy secretary general");
+    if (!dropHc && !dropCc) continue;
+    await supabase.from("allocations").delete().eq("id", r.id).eq("conference_id", conferenceId);
+  }
+}
+
+/** Remove leftover legacy chair rows on SMT sheet after migrate (hint known). */
 async function removeObsoleteSmtLegacyChairRows(
   supabase: SupabaseClient,
   conferenceId: string,
   committee: string | null | undefined
 ): Promise<void> {
-  if (committeeSessionGroupKey(committee) !== "SMT") return;
+  const isSmtHint = committeeSessionGroupKey(committee) === "SMT";
+  if (!isSmtHint) return;
 
   const { data: rows, error } = await supabase
     .from("allocations")
@@ -77,9 +107,21 @@ export async function ensureDaisSeatAllocations(
   conferenceId: string,
   committee?: string | null
 ): Promise<void> {
-  await reconcileLegacyDaisSeatLabels(supabase, conferenceId, committee);
+  let effectiveCommittee = committee ?? null;
+  if (committeeSessionGroupKey(effectiveCommittee) !== "SMT") {
+    const { data: conf } = await supabase
+      .from("conferences")
+      .select("committee, committee_code")
+      .eq("id", conferenceId)
+      .maybeSingle();
+    const hint = conf ? committeeHintForSmtDaisPlan(conf) : null;
+    if (hint === "SMT") effectiveCommittee = "SMT";
+  }
 
-  const labels = [...getDaisSeatLabelsForCommittee(committee)];
+  await reconcileLegacyDaisSeatLabels(supabase, conferenceId, effectiveCommittee);
+  await removeDuplicateChairRowsWhenSecretariatTitlesExist(supabase, conferenceId);
+
+  const labels = [...getDaisSeatLabelsForCommittee(effectiveCommittee)];
   const { data: existing } = await supabase
     .from("allocations")
     .select("country")
@@ -98,8 +140,14 @@ export async function ensureDaisSeatAllocations(
     }
   }
   if (inserts.length > 0) {
-    await supabase.from("allocations").insert(inserts);
+    const { error: batchErr } = await supabase.from("allocations").insert(inserts);
+    if (batchErr) {
+      for (const row of inserts) {
+        await supabase.from("allocations").insert(row);
+      }
+    }
   }
 
-  await removeObsoleteSmtLegacyChairRows(supabase, conferenceId, committee);
+  await removeObsoleteSmtLegacyChairRows(supabase, conferenceId, effectiveCommittee);
+  await removeDuplicateChairRowsWhenSecretariatTitlesExist(supabase, conferenceId);
 }
