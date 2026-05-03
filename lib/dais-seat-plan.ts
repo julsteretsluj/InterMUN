@@ -1,4 +1,5 @@
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
+import { SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
 
 /** Default when chamber is unknown: Head Chair + Co-chair (matches legacy behaviour). */
 const DEFAULT_PLAN = ["Head Chair", "Co-chair"] as const;
@@ -52,6 +53,11 @@ export const LEGACY_DAIS_RENAMES: Record<string, [fromLower: string, toExact: st
     ["head chair", "Frontroom Chair"],
     ["co-chair", "Backroom Chair"],
     ["co chair", "Backroom Chair"],
+  ],
+  SMT: [
+    ["head chair", "Secretary General"],
+    ["co-chair", "Deputy Secretary General"],
+    ["co chair", "Deputy Secretary General"],
   ],
 };
 

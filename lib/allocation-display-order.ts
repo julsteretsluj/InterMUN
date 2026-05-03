@@ -1,3 +1,9 @@
+import { SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS } from "@/lib/seamun-i-2027-secretariat-roster";
+
+const SMT_ALLOCATION_ORDER = new Map(
+  SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS.map((l, i) => [l.trim().toLowerCase(), i])
+);
+
 /** Canonical labels for dais seats (matches SMT quick-add and committee-room payload). */
 export const DAIS_SEAT_HEAD_CHAIR = "Head Chair";
 export const DAIS_SEAT_CO_CHAIR = "Co-chair";
@@ -15,6 +21,12 @@ export function daisSeatSortRank(country: string): number {
 }
 
 export function compareAllocationCountryDisplay(a: string, b: string): number {
+  const aKey = a.trim().toLowerCase();
+  const bKey = b.trim().toLowerCase();
+  const ia = SMT_ALLOCATION_ORDER.get(aKey);
+  const ib = SMT_ALLOCATION_ORDER.get(bKey);
+  if (ia !== undefined && ib !== undefined && ia !== ib) return ia - ib;
+
   const ra = daisSeatSortRank(a);
   const rb = daisSeatSortRank(b);
   if (ra !== rb) return ra - rb;

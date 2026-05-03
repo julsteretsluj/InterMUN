@@ -21,6 +21,24 @@ export const SEAMUN_I_2027_SECRETARIAT_CONTACTS = {
   financeEmail: "finance@seamun.com",
 } as const;
 
+/**
+ * SMT / secretariat sheet row labels (`allocations.country`) — matches OVERVIEW order:
+ * leadership, operations, media. Parliamentarian rows are disambiguated by tier.
+ */
+export const SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS = [
+  "Secretary General",
+  "Deputy Secretary General",
+  "Parliamentarian (Beginner)",
+  "Parliamentarian (Intermediate)",
+  "Parliamentarian (Advanced)",
+  "Head of Logistics",
+  "Head of Finance",
+  "Head of Community Outreach",
+  "Head of Delegate Affairs",
+  "Head of Media",
+  "Head of PR & Advertising",
+] as const;
+
 export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
   { role: "Secretary General", name: "Jules K.A.", email: "juleskittoastrop@gmail.com" },
   { role: "Deputy Secretary General", name: "Emily H.", email: "emily.yhstudent@sisbschool.com" },
