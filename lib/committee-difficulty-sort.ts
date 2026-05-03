@@ -23,14 +23,20 @@ function committeeLookupKeys(committee: string): string[] {
 }
 
 /**
- * Locale sort puts "UN Women" before "UNSC" (space < "S"). Force UNSC first when
- * both appear in the same difficulty bucket.
+ * Locale sort puts "UN Women" before "UNESCO"/"UNSC" (space/punctuation vs letters).
+ * Pin Intermediate UN-agency chambers to a stable order: UNESCO → UNODC → UNHRC → UNSC → UN Women.
  */
 const EXPLICIT_LABEL_ORDER_AFTER_DIFFICULTY: Record<string, number> = {
-  UNSC: 0,
-  "UNITED NATIONS SECURITY COUNCIL": 0,
-  "UN WOMEN": 1,
-  UNWOMEN: 1,
+  UNESCO: 10,
+  UNODC: 11,
+  UNHRC: 12,
+  UNSC: 13,
+  "UN WOMEN": 14,
+  UNWOMEN: 14,
+  // `committeeLookupKeys` uppercases; matches full names from committee labels / DB.
+  "UNITED NATIONS SECURITY COUNCIL": 13,
+  "UNITED NATIONS HUMAN RIGHTS COUNCIL": 12,
+  "UNITED NATIONS OFFICE ON DRUGS AND CRIME": 11,
 };
 
 function explicitLabelOrderRank(committee: string | null | undefined): number | undefined {
