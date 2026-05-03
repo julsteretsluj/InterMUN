@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Ruzuku jukumu la mwenyekiti (akaunti iliyopo)",
     "grantChairRoleHelp": "Ikiwa tayari wamejiandikisha kama mjumbe, wapandishe mada hapa ili wapate dashibodi ya mwenyekiti na zana za kamati (hakuna barua pepe iliyotumwa).",
     "grantChairRole": "Ruzuku jukumu la mwenyekiti",
-    "agendaTopicsCount": "{count, plural, one {# mada} other {# mada}}"
+    "chamberLabelFallback": "Kikao cha kamati"
   },
   "chairDelegateApprovalForm": {
     "title": "Kubali mjumbe kwa barua pepe + mgao",

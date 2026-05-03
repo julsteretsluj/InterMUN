@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "授予主席角色（現有帳戶）",
     "grantChairRoleHelp": "如果他們已經註冊成為代表，請在此處晉升他們，以便他們獲得主席儀表板和委員會工具（不發送電子郵件）。",
     "grantChairRole": "授予主席角色",
-    "agendaTopicsCount": "{count, plural, other {# 個議程主題}}"
+    "chamberLabelFallback": "委員會會議"
   },
   "chairDelegateApprovalForm": {
     "title": "透過電子郵件+分配接受代表",

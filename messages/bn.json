@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "অনুদান চেয়ার ভূমিকা (বিদ্যমান অ্যাকাউন্ট)",
     "grantChairRoleHelp": "যদি তারা ইতিমধ্যেই একজন প্রতিনিধি হিসাবে সাইন আপ করে থাকে, তাহলে তাদের এখানে প্রচার করুন যাতে তারা চেয়ার ড্যাশবোর্ড এবং কমিটির টুল পেতে পারে (কোন ইমেল পাঠানো হয়নি)।",
     "grantChairRole": "মঞ্জুর চেয়ার ভূমিকা",
-    "agendaTopicsCount": "{count, plural, other {# বিষয়}}"
+    "chamberLabelFallback": "কমিটি অধিবেশন"
   },
   "chairDelegateApprovalForm": {
     "title": "ইমেল + বরাদ্দ দ্বারা প্রতিনিধি গ্রহণ করুন",

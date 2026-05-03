@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Otorgar rol de presidente (cuenta existente)",
     "grantChairRoleHelp": "Si ya se inscribieron como delegados, promuévalos aquí para que obtengan el panel del presidente y las herramientas del comité (no se envía ningún correo electrónico).",
     "grantChairRole": "Rol de presidente de subvenciones",
-    "agendaTopicsCount": "{count, plural, one {# tema} other {# temas}}"
+    "chamberLabelFallback": "Sesión del comité"
   },
   "chairDelegateApprovalForm": {
     "title": "Aceptar delegada por correo electrónico + asignación",

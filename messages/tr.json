@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Başkan rolü ver (mevcut hesap)",
     "grantChairRoleHelp": "Zaten bir delege olarak kaydolmuşlarsa, onları burada tanıtın, böylece başkan kontrol panelini ve komite araçlarını alabilirler (e-posta gönderilmez).",
     "grantChairRole": "Başkanlık rolü ver",
-    "agendaTopicsCount": "{count, plural, one {# gündem konusu} other {# gündem konusu}}"
+    "chamberLabelFallback": "Komite oturumu"
   },
   "chairDelegateApprovalForm": {
     "title": "Temsilciyi e-posta + tahsis yoluyla kabul et",

@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Accorder le rôle de président (compte existant)",
     "grantChairRoleHelp": "S'ils se sont déjà inscrits en tant que délégué, faites-en la promotion ici afin qu'ils obtiennent le tableau de bord du président et les outils du comité (aucun e-mail envoyé).",
     "grantChairRole": "Rôle du président des subventions",
-    "agendaTopicsCount": "{count, plural, one {# sujet de l'ordre du jour} other {# sujets de l'ordre du jour}}"
+    "chamberLabelFallback": "Séance du comité"
   },
   "chairDelegateApprovalForm": {
     "title": "Accepter le délégué par email + allocation",

@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Conceder função de presidente (conta existente)",
     "grantChairRoleHelp": "Se eles já se inscreveram como delegados, promova-os aqui para que obtenham o painel do presidente e as ferramentas do comitê (nenhum e-mail será enviado).",
     "grantChairRole": "Conceder função de presidente",
-    "agendaTopicsCount": "{count, plural, one {# tópico} other {# tópicos}}"
+    "chamberLabelFallback": "Sessão do comité"
   },
   "chairDelegateApprovalForm": {
     "title": "Aceitar delegado por e-mail + alocação",

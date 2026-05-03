@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Przyznaj rolę przewodniczącego (istniejące konto)",
     "grantChairRoleHelp": "Jeśli zarejestrował się już jako delegat, wypromuj go tutaj, aby otrzymał pulpit nawigacyjny przewodniczącego i narzędzia komitetu (bez wysyłania wiadomości e-mail).",
     "grantChairRole": "Przyznaj rolę przewodniczącego",
-    "agendaTopicsCount": "{count, plural, one {# temat} other {# tematy}}"
+    "chamberLabelFallback": "Sesja komitetu"
   },
   "chairDelegateApprovalForm": {
     "title": "Zaakceptuj delegację przez e-mail + przydział",

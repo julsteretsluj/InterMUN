@@ -1,8 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
+import { useTranslations } from "next-intl";
 import {
   smtInviteChairAction,
   smtPromoteToChairByEmailAction,
@@ -10,10 +9,7 @@ import {
   type StaffAccessFormState,
 } from "@/app/actions/smtStaffAccess";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
-import {
-  translateAgendaTopicLabel,
-  translateCommitteeLabel,
-} from "@/lib/i18n/committee-topic-labels";
+import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 
 type Conf = { id: string; name: string; committee: string | null; committee_code: string | null };
 
@@ -41,24 +37,13 @@ function CommitteeCodeRowForm({ group }: { group: Conf[] }) {
   const t = useTranslations("smtRoomCodesClient");
   const tSetup = useTranslations("conferenceSetupForm");
   const tCommon = useTranslations("common");
-  const tTopics = useTranslations("agendaTopics");
   const tCommitteeLabels = useTranslations("committeeNames.labels");
-  const locale = useLocale();
   const [state, action, pending] = useActionState(smtSetCommitteeCodeOnlyAction, null);
 
-  const label = (() => {
-    if (group.length === 1) {
-      const labelRaw = [c.name, c.committee].filter(Boolean).join(" — ");
-      return translateConferenceHeadline(tTopics, tCommitteeLabels, labelRaw, locale);
-    }
-    const comm = c.committee?.trim();
-    if (comm) {
-      const chamber = translateCommitteeLabel(tCommitteeLabels, comm);
-      return `${chamber} — ${t("agendaTopicsCount", { count: group.length })}`;
-    }
-    const parts = group.map((row) => translateAgendaTopicLabel(tTopics, row.name, locale));
-    return parts.join(" · ");
-  })();
+  const comm = c.committee?.trim();
+  const label = comm
+    ? translateCommitteeLabel(tCommitteeLabels, comm)
+    : t("chamberLabelFallback");
 
   const current = c.committee_code?.trim() || t("dash");
 

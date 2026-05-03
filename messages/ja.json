@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "議長の役割の付与 (既存のアカウント)",
     "grantChairRoleHelp": "すでに代理人としてサインアップしている場合は、ここで宣伝して、議長ダッシュボードと委員会ツールを入手できるようにします (電子メールは送信されません)。",
     "grantChairRole": "補助金委員長の役割",
-    "agendaTopicsCount": "{count, plural, other {# 議題}}"
+    "chamberLabelFallback": "委員会セッション"
   },
   "chairDelegateApprovalForm": {
     "title": "メール + 割り当てによる代理人の受け入れ",

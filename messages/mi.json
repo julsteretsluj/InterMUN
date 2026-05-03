@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Whakawhiwhia te turanga heamana (pukete o naianei)",
     "grantChairRoleHelp": "Mēnā kua haina kē rātou hei māngai, whakatairangatia ki konei kia whiwhi ai i te papatohu heamana me nga taputapu komiti (kaore he imeera i tukuna).",
     "grantChairRole": "Tukuna he heamana",
-    "agendaTopicsCount": "{count, plural, other {# kaupapa}}"
+    "chamberLabelFallback": "Hui komiti"
   },
   "chairDelegateApprovalForm": {
     "title": "Whakaaetia te kaitono ma te imeera + tohatoha",

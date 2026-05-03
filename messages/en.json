@@ -58,7 +58,7 @@
     "committeeCodePlaceholder": "e.g. DIS795",
     "saving": "Saving…",
     "committeeRoomCodes": "Committee / room codes",
-    "committeeCodesHelp": "Same value is used for the <strong>second gate</strong> (committee code) and the chair room join flow—unique within this event. Delegates enter it after the conference code.",
+    "committeeCodesHelp": "One shared code per committee covers every agenda topic in that chamber. The same value is used for the <strong>second gate</strong> (committee code) and the chair room join flow—unique per committee within this event. Delegates pick the active topic inside the committee session; they enter this code after the conference code.",
     "noCommitteesYet": "No committees for this event yet.",
     "inviteDaisChairs": "Invite dais chairs",
     "inviteHelp": "Sends a Supabase magic link so they can set a password. Their profile is set to <strong>chair</strong> as soon as the invite is created. Configure the <code>SUPABASE_SERVICE_ROLE_KEY</code> server env variable and allow your sign-in URL (e.g. <code>…/login</code>) under Authentication -> URL configuration -> Redirect URLs.",
@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Grant chair role (existing account)",
     "grantChairRoleHelp": "If they already signed up as a delegate, promote them here so they get the chair dashboard and committee tools (no email sent).",
     "grantChairRole": "Grant chair role",
-    "agendaTopicsCount": "{count, plural, one {# topic} other {# topics}}"
+    "chamberLabelFallback": "Committee session"
   },
   "chairDelegateApprovalForm": {
     "title": "Accept delegate by email + allocation",

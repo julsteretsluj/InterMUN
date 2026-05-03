@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "תפקיד יו\"ר מענק (חשבון קיים)",
     "grantChairRoleHelp": "אם הם כבר נרשמו כנציג, קדם אותם כאן כדי שהם יקבלו את לוח המחוונים של יושב הראש וכלי הוועדה (לא נשלח אימייל).",
     "grantChairRole": "מענק תפקיד כיסא",
-    "agendaTopicsCount": "{count, plural, one {# נושא} other {# נושאים}}"
+    "chamberLabelFallback": "ישיבת ועדה"
   },
   "chairDelegateApprovalForm": {
     "title": "קבל נציג במייל + הקצאה",

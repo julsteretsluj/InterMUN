@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Εκχώρηση ρόλου προέδρου (υπάρχων λογαριασμός)",
     "grantChairRoleHelp": "Εάν έχουν ήδη εγγραφεί ως εκπρόσωπος, προωθήστε τους εδώ για να λάβουν τον πίνακα ελέγχου της προεδρίας και τα εργαλεία επιτροπής (δεν έχει σταλεί email).",
     "grantChairRole": "Χορηγήστε ρόλο καρέκλας",
-    "agendaTopicsCount": "{count, plural, one {# θέμα} other {# θέματα}}"
+    "chamberLabelFallback": "Συνεδρία επιτροπής"
   },
   "chairDelegateApprovalForm": {
     "title": "Αποδοχή αντιπροσώπου μέσω email + κατανομή",

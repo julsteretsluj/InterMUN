@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Concedere il ruolo di presidente (account esistente)",
     "grantChairRoleHelp": "Se si sono già registrati come delegati, promuovili qui in modo che ricevano il dashboard del presidente e gli strumenti del comitato (nessuna e-mail inviata).",
     "grantChairRole": "Concedere il ruolo di presidente",
-    "agendaTopicsCount": "{count, plural, one {# argomento} other {# argomenti}}"
+    "chamberLabelFallback": "Sessione del comitato"
   },
   "chairDelegateApprovalForm": {
     "title": "Accetta delega tramite e-mail + assegnazione",

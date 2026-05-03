@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Peran ketua hibah (akun yang ada)",
     "grantChairRoleHelp": "Jika mereka sudah mendaftar sebagai delegasi, promosikan mereka di sini agar mereka mendapatkan dashboard ketua dan alat panitia (tidak ada email yang dikirim).",
     "grantChairRole": "Berikan peran ketua",
-    "agendaTopicsCount": "{count, plural, other {# topik agenda}}"
+    "chamberLabelFallback": "Sidang komite"
   },
   "chairDelegateApprovalForm": {
     "title": "Terima delegasi melalui email + alokasi",

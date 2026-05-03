@@ -70,7 +70,7 @@
     "grantChairRoleTitle": "Lehrstuhlrolle gewähren (vorhandenes Konto)",
     "grantChairRoleHelp": "Wenn sie sich bereits als Delegierter angemeldet haben, befördern Sie sie hier, damit sie das Vorsitzenden-Dashboard und die Ausschusstools erhalten (keine E-Mail gesendet).",
     "grantChairRole": "Gewähren Sie die Rolle des Vorsitzenden",
-    "agendaTopicsCount": "{count, plural, one {# Thema} other {# Themen}}"
+    "chamberLabelFallback": "Ausschusssitzung"
   },
   "chairDelegateApprovalForm": {
     "title": "Akzeptieren Sie den Delegierten per E-Mail + Zuteilung",
