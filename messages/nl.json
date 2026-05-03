@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "Voorzitterrol toekennen (bestaand account)",
     "grantChairRoleHelp": "Als ze zich al hebben aangemeld als afgevaardigde, promoot ze dan hier zodat ze het voorzittersdashboard en de commissietools krijgen (geen e-mail verzonden).",
     "grantChairRole": "Voorzitterschap toekennen",
-    "chamberLabelFallback": "Committeesessie"
+    "chamberLabelFallback": "Committeesessie",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "Accepteer delegeren per e-mail + toewijzing",
@@ -1441,7 +1445,14 @@
       "inviteSentSuccess": "E-mail met uitnodiging verzonden naar {email}. Ze zullen voorzitter zijn nadat ze hun wachtwoord hebben ingesteld.",
       "onlySmtGrantChair": "Alleen het secretariaat kan voorzittersrollen toekennen.",
       "noAccountForEmail": "Nog geen account met dat e-mailadres. Stuur eerst een stoeluitnodiging.",
-      "promotedToChairSuccess": "Profiel voor {email} is nu een podiumstoel."
+      "promotedToChairSuccess": "Profiel voor {email} is nu een podiumstoel.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "U moet ingelogd zijn.",
@@ -1523,7 +1534,8 @@
     "exactlySixLettersDigits": "Precies 6 letters of cijfers",
     "committeeCodePlaceholder": "bijv. ECO741",
     "committeeCodeHelpPrefix": "Zes karakters: kamerinitialen + drie cijfers (deterministische suggestie:",
-    "saveCommittee": "Commissie opslaan"
+    "saveCommittee": "Commissie opslaan",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Open",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

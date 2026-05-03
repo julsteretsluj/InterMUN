@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "অনুদান চেয়ার ভূমিকা (বিদ্যমান অ্যাকাউন্ট)",
     "grantChairRoleHelp": "যদি তারা ইতিমধ্যেই একজন প্রতিনিধি হিসাবে সাইন আপ করে থাকে, তাহলে তাদের এখানে প্রচার করুন যাতে তারা চেয়ার ড্যাশবোর্ড এবং কমিটির টুল পেতে পারে (কোন ইমেল পাঠানো হয়নি)।",
     "grantChairRole": "মঞ্জুর চেয়ার ভূমিকা",
-    "chamberLabelFallback": "কমিটি অধিবেশন"
+    "chamberLabelFallback": "কমিটি অধিবেশন",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "ইমেল + বরাদ্দ দ্বারা প্রতিনিধি গ্রহণ করুন",
@@ -1369,7 +1373,14 @@
       "inviteSentSuccess": "আমন্ত্রণ ইমেল পাঠানো হয়েছে {email} এ। তারা তাদের পাসওয়ার্ড সেট করার পরে তারা একটি চেয়ার হবে.",
       "onlySmtGrantChair": "শুধুমাত্র সচিবালয় চেয়ার রোল মঞ্জুর করতে পারে।",
       "noAccountForEmail": "সেই ইমেলের সাথে এখনও কোনো অ্যাকাউন্ট নেই। প্রথমে একটি চেয়ার আমন্ত্রণ পাঠান।",
-      "promotedToChairSuccess": "{email}-এর প্রোফাইল এখন একটি মঞ্চের চেয়ার।"
+      "promotedToChairSuccess": "{email}-এর প্রোফাইল এখন একটি মঞ্চের চেয়ার।",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "আপনাকে অবশ্যই সাইন ইন করতে হবে।",
@@ -1451,7 +1462,8 @@
     "exactlySixLettersDigits": "ঠিক 6টি অক্ষর বা অঙ্ক",
     "committeeCodePlaceholder": "যেমন ECO741",
     "committeeCodeHelpPrefix": "ছয়টি অক্ষর: চেম্বারের আদ্যক্ষর + তিন অঙ্ক (নির্ধারক পরামর্শ:",
-    "saveCommittee": "কমিটি সংরক্ষণ করুন"
+    "saveCommittee": "কমিটি সংরক্ষণ করুন",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "খোলা",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

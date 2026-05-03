@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "Concedere il ruolo di presidente (account esistente)",
     "grantChairRoleHelp": "Se si sono già registrati come delegati, promuovili qui in modo che ricevano il dashboard del presidente e gli strumenti del comitato (nessuna e-mail inviata).",
     "grantChairRole": "Concedere il ruolo di presidente",
-    "chamberLabelFallback": "Sessione del comitato"
+    "chamberLabelFallback": "Sessione del comitato",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "Accetta delega tramite e-mail + assegnazione",
@@ -1441,7 +1445,14 @@
       "inviteSentSuccess": "Email di invito inviata a {email}. Saranno una sedia dopo aver impostato la password.",
       "onlySmtGrantChair": "Solo la segreteria può conferire incarichi di presidente.",
       "noAccountForEmail": "Nessun account ancora con quell'e-mail. Invia prima un invito alla presidenza.",
-      "promotedToChairSuccess": "Il profilo di {email} ora è una sedia a pedana."
+      "promotedToChairSuccess": "Il profilo di {email} ora è una sedia a pedana.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Devi essere registrato.",
@@ -1523,7 +1534,8 @@
     "exactlySixLettersDigits": "Esattamente 6 lettere o cifre",
     "committeeCodePlaceholder": "per esempio. ECO741",
     "committeeCodeHelpPrefix": "Sei caratteri: iniziali della camera + tre cifre (suggerimento deterministico:",
-    "saveCommittee": "Comitato salva"
+    "saveCommittee": "Comitato salva",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Aprire",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

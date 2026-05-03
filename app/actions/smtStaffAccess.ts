@@ -8,6 +8,12 @@ import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { isValidCommitteeJoinCode } from "@/lib/committee-join-code";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getTranslations } from "next-intl/server";
+import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
+import {
+  allocationCountryMatchesChairSlot,
+  expectedDaisCountryForSlot,
+  parseChairInviteSlot,
+} from "@/lib/chair-invite-slot";
 
 export type StaffAccessFormState = { error?: string; success?: string };
 
@@ -94,6 +100,11 @@ export async function smtInviteChairAction(
     return { error: t("invalidEmail") };
   }
 
+  const parsedSlot = parseChairInviteSlot(formData.get("chair_role"));
+  if (!parsedSlot) {
+    return { error: t("missingChairRole") };
+  }
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -109,11 +120,47 @@ export async function smtInviteChairAction(
     return { error: t("onlySmtInviteChair") };
   }
 
+  const eventId = await getActiveEventId();
+  if (!eventId) {
+    return { error: t("chooseEventFirst") };
+  }
+
   const admin = createAdminClient();
   if (!admin) {
     return {
       error: t("missingServiceRoleKey"),
     };
+  }
+
+  const { conferenceId, slot } = parsedSlot;
+  const { data: confRow, error: confErr } = await admin
+    .from("conferences")
+    .select("id, committee, event_id")
+    .eq("id", conferenceId)
+    .maybeSingle();
+
+  if (confErr || !confRow || confRow.event_id !== eventId) {
+    return { error: t("committeeNotInActiveEvent") };
+  }
+
+  await ensureDaisSeatAllocations(admin, conferenceId);
+
+  const { data: allocRows, error: allocListErr } = await admin
+    .from("allocations")
+    .select("id, user_id, country")
+    .eq("conference_id", conferenceId);
+
+  if (allocListErr) {
+    return { error: allocListErr.message };
+  }
+
+  const match = (allocRows ?? []).find((row) => allocationCountryMatchesChairSlot(row.country, slot));
+  if (!match?.id) {
+    return { error: t("daisSeatRowMissing", { seat: expectedDaisCountryForSlot(slot) }) };
+  }
+
+  if (match.user_id) {
+    return { error: t("daisSeatAlreadyFilled") };
   }
 
   const origin = getServerAppOrigin();
@@ -138,17 +185,45 @@ export async function smtInviteChairAction(
   }
 
   const newId = data?.user?.id;
+  const committeeLabel = String(confRow.committee ?? "").trim() || "—";
+  const seatLabel = slot === "head" ? t("seatHeadChair") : t("seatCoChair");
+
   if (newId) {
-    const { error: profileErr } = await admin.from("profiles").update({ role: "chair" }).eq("id", newId);
+    const countryStored =
+      (match.country ?? "").trim() || expectedDaisCountryForSlot(slot);
+    const { error: profileErr } = await admin
+      .from("profiles")
+      .update({ role: "chair", allocation: countryStored })
+      .eq("id", newId);
     if (profileErr) {
       return {
         error: t("inviteSentButRoleSetFailed", { error: profileErr.message }),
       };
     }
+
+    const { error: assignErr } = await admin
+      .from("allocations")
+      .update({ user_id: newId })
+      .eq("id", match.id)
+      .eq("conference_id", conferenceId);
+
+    if (assignErr) {
+      return {
+        error: t("inviteSentButAllocationFailed", {
+          error: assignErr.message,
+        }),
+      };
+    }
   }
 
   revalidatePath("/smt/room-codes");
-  return { success: t("inviteSentSuccess", { email }) };
+  return {
+    success: t("inviteSentSuccessAssigned", {
+      email,
+      committee: committeeLabel,
+      seat: seatLabel,
+    }),
+  };
 }
 
 export async function smtPromoteToChairByEmailAction(

@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "Peran ketua hibah (akun yang ada)",
     "grantChairRoleHelp": "Jika mereka sudah mendaftar sebagai delegasi, promosikan mereka di sini agar mereka mendapatkan dashboard ketua dan alat panitia (tidak ada email yang dikirim).",
     "grantChairRole": "Berikan peran ketua",
-    "chamberLabelFallback": "Sidang komite"
+    "chamberLabelFallback": "Sidang komite",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "Terima delegasi melalui email + alokasi",
@@ -1369,7 +1373,14 @@
       "inviteSentSuccess": "Email undangan dikirim ke {email}. Mereka akan menjadi kursi setelah mereka menetapkan kata sandinya.",
       "onlySmtGrantChair": "Hanya sekretariat yang dapat memberikan peran ketua.",
       "noAccountForEmail": "Belum ada akun dengan email itu. Kirim undangan kursi terlebih dahulu.",
-      "promotedToChairSuccess": "Profil untuk {email} sekarang menjadi kursi mimbar."
+      "promotedToChairSuccess": "Profil untuk {email} sekarang menjadi kursi mimbar.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Anda harus masuk.",
@@ -1451,7 +1462,8 @@
     "exactlySixLettersDigits": "Tepatnya 6 huruf atau angka",
     "committeeCodePlaceholder": "misalnya ECO741",
     "committeeCodeHelpPrefix": "Enam karakter: inisial kamar + tiga digit (saran deterministik:",
-    "saveCommittee": "Simpan panitia"
+    "saveCommittee": "Simpan panitia",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Membuka",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

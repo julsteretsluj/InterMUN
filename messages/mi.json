@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "Whakawhiwhia te turanga heamana (pukete o naianei)",
     "grantChairRoleHelp": "Mēnā kua haina kē rātou hei māngai, whakatairangatia ki konei kia whiwhi ai i te papatohu heamana me nga taputapu komiti (kaore he imeera i tukuna).",
     "grantChairRole": "Tukuna he heamana",
-    "chamberLabelFallback": "Hui komiti"
+    "chamberLabelFallback": "Hui komiti",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "Whakaaetia te kaitono ma te imeera + tohatoha",
@@ -1369,7 +1373,14 @@
       "inviteSentSuccess": "Powhiri i te imeera kua tukuna ki {email}. Ka noho hei heamana i muri i ta ratou whakatakoto kupu huna.",
       "onlySmtGrantChair": "Ka taea e te hekeretari anake te tuku tuunga heamana.",
       "noAccountForEmail": "Kaore ano he kaute me taua imeera. Tukuna he powhiri tuuru i te tuatahi.",
-      "promotedToChairSuccess": "Ko te Profile mo {email} he heamana papa inaianei."
+      "promotedToChairSuccess": "Ko te Profile mo {email} he heamana papa inaianei.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Me haina koe.",
@@ -1451,7 +1462,8 @@
     "exactlySixLettersDigits": "Kia 6 nga reta, mati ranei",
     "committeeCodePlaceholder": "e.g. ECO741",
     "committeeCodeHelpPrefix": "E ono nga tohu: ko nga tohu tuatahi o te ruma + e toru nga mati (tohu whakaaro:",
-    "saveCommittee": "Komiti whakaora"
+    "saveCommittee": "Komiti whakaora",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Tuwhera",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

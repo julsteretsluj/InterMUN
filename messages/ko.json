@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "의장 역할 부여(기존 계정)",
     "grantChairRoleHelp": "이미 대리인으로 등록한 경우 여기에서 홍보하여 ​​의장 대시보드와 위원회 도구를 받을 수 있도록 하세요(이메일은 전송되지 않음).",
     "grantChairRole": "보조금 의장 역할",
-    "chamberLabelFallback": "위원회 세션"
+    "chamberLabelFallback": "위원회 세션",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "이메일 + 할당으로 대리인 수락",
@@ -1441,7 +1445,14 @@
       "inviteSentSuccess": "{email}(으)로 초대 이메일이 전송되었습니다. 비밀번호를 설정한 후에는 의자가 됩니다.",
       "onlySmtGrantChair": "사무국만이 의장직을 부여할 수 있습니다.",
       "noAccountForEmail": "아직 해당 이메일을 사용하는 계정이 없습니다. 먼저 의장 초대를 보내십시오.",
-      "promotedToChairSuccess": "{email}의 프로필은 이제 연단 의자입니다."
+      "promotedToChairSuccess": "{email}의 프로필은 이제 연단 의자입니다.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "로그인되어 있어야 합니다.",
@@ -1523,7 +1534,8 @@
     "exactlySixLettersDigits": "정확히 6개의 문자 또는 숫자",
     "committeeCodePlaceholder": "예를 들어 에코741",
     "committeeCodeHelpPrefix": "6자: 챔버 이니셜 + 3자리 숫자(결정론적 제안:",
-    "saveCommittee": "위원회 저장"
+    "saveCommittee": "위원회 저장",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "열려 있는",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

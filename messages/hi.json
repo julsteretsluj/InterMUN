@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "अनुदान अध्यक्ष की भूमिका (मौजूदा खाता)",
     "grantChairRoleHelp": "यदि उन्होंने पहले ही एक प्रतिनिधि के रूप में साइन अप कर लिया है, तो उन्हें यहां प्रचारित करें ताकि उन्हें अध्यक्ष डैशबोर्ड और समिति उपकरण मिलें (कोई ईमेल नहीं भेजा गया)।",
     "grantChairRole": "अनुदान कुर्सी की भूमिका",
-    "chamberLabelFallback": "समिति सत्र"
+    "chamberLabelFallback": "समिति सत्र",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "ईमेल + आवंटन द्वारा प्रतिनिधि स्वीकार करें",
@@ -1369,7 +1373,14 @@
       "inviteSentSuccess": "आमंत्रण ईमेल {email} पर भेजा गया. अपना पासवर्ड सेट करने के बाद वे एक कुर्सी बन जाएंगे।",
       "onlySmtGrantChair": "केवल सचिवालय ही अध्यक्ष की भूमिकाएँ प्रदान कर सकता है।",
       "noAccountForEmail": "उस ईमेल पर अभी तक कोई खाता नहीं है. पहले कुर्सी का निमंत्रण भेजें.",
-      "promotedToChairSuccess": "{ईमेल} के लिए प्रोफ़ाइल अब एक मंच कुर्सी है।"
+      "promotedToChairSuccess": "{ईमेल} के लिए प्रोफ़ाइल अब एक मंच कुर्सी है।",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "आपको साइन इन करना होगा.",
@@ -1451,7 +1462,8 @@
     "exactlySixLettersDigits": "बिल्कुल 6 अक्षर या अंक",
     "committeeCodePlaceholder": "जैसे ईसीओ741",
     "committeeCodeHelpPrefix": "छह अक्षर: कक्ष प्रारंभिक + तीन अंक (नियतात्मक सुझाव:",
-    "saveCommittee": "समिति बचाओ"
+    "saveCommittee": "समिति बचाओ",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "खुला",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

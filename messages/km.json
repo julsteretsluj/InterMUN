@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "ផ្តល់តួនាទីជាប្រធាន (គណនីដែលមានស្រាប់)",
     "grantChairRoleHelp": "ប្រសិនបើពួកគេបានចុះឈ្មោះជាប្រតិភូរួចហើយ ផ្សព្វផ្សាយពួកគេនៅទីនេះ ដូច្នេះពួកគេទទួលបានកៅអីគ្រប់គ្រង និងឧបករណ៍គណៈកម្មាធិការ (មិនមានអ៊ីមែលផ្ញើទេ)។",
     "grantChairRole": "ផ្តល់តួនាទីជាប្រធាន",
-    "chamberLabelFallback": "សម័យកម្មវិធីគណៈកម្មការ"
+    "chamberLabelFallback": "សម័យកម្មវិធីគណៈកម្មការ",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "ទទួលយកប្រតិភូតាមអ៊ីមែល + ការបែងចែក",
@@ -1495,7 +1499,14 @@
       "inviteSentSuccess": "អ៊ីមែលអញ្ជើញបានផ្ញើទៅ {email} ។ ពួកគេនឹងក្លាយជាកៅអីបន្ទាប់ពីពួកគេបានកំណត់ពាក្យសម្ងាត់របស់ពួកគេ។",
       "onlySmtGrantChair": "មានតែលេខាធិការដ្ឋានទេដែលអាចផ្តល់តួនាទីជាប្រធាន។",
       "noAccountForEmail": "មិនមានគណនីជាមួយអ៊ីមែលនោះនៅឡើយទេ។ ផ្ញើការអញ្ជើញកៅអីជាមុនសិន។",
-      "promotedToChairSuccess": "ប្រវត្តិរូបសម្រាប់ {email} ឥឡូវនេះគឺជាកៅអី dais ។"
+      "promotedToChairSuccess": "ប្រវត្តិរូបសម្រាប់ {email} ឥឡូវនេះគឺជាកៅអី dais ។",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "អ្នកត្រូវតែចូល។",
@@ -1577,7 +1588,8 @@
     "exactlySixLettersDigits": "ពិតប្រាកដ 6 អក្សរឬខ្ទង់",
     "committeeCodePlaceholder": "ឧ. ECO741",
     "committeeCodeHelpPrefix": "តួអក្សរចំនួនប្រាំមួយ៖ បឋមអង្គជំនុំជម្រះ + បីខ្ទង់ (ការផ្តល់យោបល់កំណត់៖",
-    "saveCommittee": "គណៈកម្មាធិការរក្សាទុក"
+    "saveCommittee": "គណៈកម្មាធិការរក្សាទុក",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "បើក",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "သဘာပတိတာဝန်ကို ပေးအပ်ခြင်း (လက်ရှိအကောင့်)",
     "grantChairRoleHelp": "၎င်းတို့သည် ကိုယ်စားလှယ်တစ်ဦးအဖြစ် စာရင်းသွင်းထားပြီးဖြစ်ပါက ၎င်းတို့ကို ဤနေရာတွင် ကြော်ငြာပါ ဒိုင်ခွက်နှင့် ကော်မတီကိရိယာများကို ရရှိရန် (အီးမေးလ်မပို့ပါ)။",
     "grantChairRole": "သဘာပတိတာဝန်ကို ထမ်းဆောင်ပါ။",
-    "chamberLabelFallback": "ကော်မတီအစည်းအဝေး"
+    "chamberLabelFallback": "ကော်မတီအစည်းအဝေး",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "ကိုယ်စားလှယ်အား အီးမေးလ် + ခွဲဝေပေးခြင်းကို လက်ခံပါ။",
@@ -1495,7 +1499,14 @@
       "inviteSentSuccess": "ဖိတ်ကြားချက်အီးမေးလ်ကို {email} သို့ ပေးပို့ခဲ့သည်။ စကားဝှက် သတ်မှတ်ပြီးရင် သူတို့က ကုလားထိုင် ဖြစ်လာလိမ့်မယ်။",
       "onlySmtGrantChair": "အတွင်းရေးမှူးအဖွဲ့သာလျှင် ဥက္ကဋ္ဌတာဝန်ကို ထမ်းဆောင်နိုင်သည်။",
       "noAccountForEmail": "ထိုအီးမေးလ်ဖြင့် အကောင့်မရှိသေးပါ။ ထိုင်ခုံဖိတ်စာ အရင်ပို့ပါ။",
-      "promotedToChairSuccess": "{email} အတွက် ပရိုဖိုင်သည် ယခုအခါ ဒိုင်ကုလားထိုင်တစ်ခုဖြစ်သည်။"
+      "promotedToChairSuccess": "{email} အတွက် ပရိုဖိုင်သည် ယခုအခါ ဒိုင်ကုလားထိုင်တစ်ခုဖြစ်သည်။",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "သင်သည် လက်မှတ်ထိုးဝင်ရပါမည်။",
@@ -1577,7 +1588,8 @@
     "exactlySixLettersDigits": "အက္ခရာ သို့မဟုတ် ဂဏန်း ၆ လုံးတိတိ",
     "committeeCodePlaceholder": "ဥပမာ ECO741",
     "committeeCodeHelpPrefix": "စာလုံးခြောက်လုံး- အခန်းအတိုကောက် + ဂဏန်းသုံးလုံး (အဆုံးအဖြတ် အကြံပြုချက်-",
-    "saveCommittee": "သိမ်းဆည်းရေးကော်မတီ"
+    "saveCommittee": "သိမ်းဆည်းရေးကော်မတီ",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "ဖွင့်သည်။",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

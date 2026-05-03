@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "Ruzuku jukumu la mwenyekiti (akaunti iliyopo)",
     "grantChairRoleHelp": "Ikiwa tayari wamejiandikisha kama mjumbe, wapandishe mada hapa ili wapate dashibodi ya mwenyekiti na zana za kamati (hakuna barua pepe iliyotumwa).",
     "grantChairRole": "Ruzuku jukumu la mwenyekiti",
-    "chamberLabelFallback": "Kikao cha kamati"
+    "chamberLabelFallback": "Kikao cha kamati",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "Kubali mjumbe kwa barua pepe + mgao",
@@ -1369,7 +1373,14 @@
       "inviteSentSuccess": "Alika barua pepe iliyotumwa kwa {email}. Watakuwa mwenyekiti baada ya kuweka nywila zao.",
       "onlySmtGrantChair": "Sekretarieti pekee ndiyo inaweza kutoa majukumu ya mwenyekiti.",
       "noAccountForEmail": "Bado hakuna akaunti iliyo na barua pepe hiyo. Tuma mwaliko wa mwenyekiti kwanza.",
-      "promotedToChairSuccess": "Wasifu wa {email} sasa ni mwenyekiti wa jukwaa."
+      "promotedToChairSuccess": "Wasifu wa {email} sasa ni mwenyekiti wa jukwaa.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Lazima uwe umeingia.",
@@ -1451,7 +1462,8 @@
     "exactlySixLettersDigits": "Herufi 6 au tarakimu haswa",
     "committeeCodePlaceholder": "k.m. ECO741",
     "committeeCodeHelpPrefix": "Herufi sita: herufi za kwanza za chumba + tarakimu tatu (pendekezo la kuamua:",
-    "saveCommittee": "Kamati ya kuokoa"
+    "saveCommittee": "Kamati ya kuokoa",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Fungua",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

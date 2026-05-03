@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "授予主席角色（现有帐户）",
     "grantChairRoleHelp": "如果他们已经注册成为代表，请在此处晋升他们，以便他们获得主席仪表板和委员会工具（不发送电子邮件）。",
     "grantChairRole": "授予主席角色",
-    "chamberLabelFallback": "委员会会议"
+    "chamberLabelFallback": "委员会会议",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "通过电子邮件+分配接受代表",
@@ -1441,7 +1445,14 @@
       "inviteSentSuccess": "邀请电子邮件已发送至 {email}。 设置密码后，他们将成为一把椅子。",
       "onlySmtGrantChair": "只有秘书处可以授予主席职位。",
       "noAccountForEmail": "还没有该电子邮件的帐户。 首先发送主席邀请。",
-      "promotedToChairSuccess": "{email} 的个人资料现在是主席台。"
+      "promotedToChairSuccess": "{email} 的个人资料现在是主席台。",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "您必须登录。",
@@ -1523,7 +1534,8 @@
     "exactlySixLettersDigits": "正好 6 个字母或数字",
     "committeeCodePlaceholder": "例如 ECO741",
     "committeeCodeHelpPrefix": "六个字符：室缩写+三位数字（确定性建议：",
-    "saveCommittee": "保存委员会"
+    "saveCommittee": "保存委员会",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "打开",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

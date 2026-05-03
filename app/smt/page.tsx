@@ -21,7 +21,10 @@ import {
   translateCommitteeTagDifficulty,
   translateCommitteeTagFormat,
 } from "@/lib/i18n/committee-display-tags";
-import { difficultySortRank } from "@/lib/committee-difficulty-sort";
+import {
+  compareExplicitCommitteeLabelOrder,
+  difficultySortRank,
+} from "@/lib/committee-difficulty-sort";
 
 export default async function SmtOverviewPage({
   searchParams,
@@ -135,6 +138,12 @@ export default async function SmtOverviewPage({
     const bDifficulty = resolveCommitteeDisplayTags(b.latestRow.committee)?.difficulty;
     const difficultyDelta = difficultySortRank(aDifficulty) - difficultySortRank(bDifficulty);
     if (difficultyDelta !== 0) return difficultyDelta;
+
+    const explicitOrder = compareExplicitCommitteeLabelOrder(
+      { committee: a.latestRow.committee },
+      { committee: b.latestRow.committee }
+    );
+    if (explicitOrder !== null) return explicitOrder;
 
     const aTitle = (
       localizeKnownCommitteeFullName(resolveCommitteeFullName(a.latestRow.committee_full_name, a.latestRow.committee)) &&

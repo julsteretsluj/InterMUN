@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import {
   smtInviteChairAction,
@@ -110,6 +110,22 @@ export function RoomCodesAndChairsClient({
 }) {
   const t = useTranslations("smtRoomCodesClient");
   const tCommon = useTranslations("common");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
+  const chairRoleOptions = useMemo(
+    () =>
+      clusterByChamber(conferences).flatMap((group) => {
+        const c = group[0]!;
+        const comm = c.committee?.trim();
+        const label = comm
+          ? translateCommitteeLabel(tCommitteeLabels, comm)
+          : t("chamberLabelFallback");
+        return [
+          { value: `${c.id}|head`, label: t("chairRoleHeadOf", { committee: label }) },
+          { value: `${c.id}|co`, label: t("chairRoleCoOf", { committee: label }) },
+        ];
+      }),
+    [conferences, t, tCommitteeLabels]
+  );
   const [inviteState, inviteAction, invitePending] = useActionState(smtInviteChairAction, null);
   const [promoteState, promoteAction, promotePending] = useActionState(
     smtPromoteToChairByEmailAction,
@@ -154,8 +170,30 @@ export function RoomCodesAndChairsClient({
               code: (chunks) => <span className="font-mono">{chunks}</span>,
             })}
           </p>
+        ) : conferences.length === 0 ? (
+          <p className="text-sm text-brand-muted">{t("noCommitteesYet")}</p>
         ) : (
           <form action={inviteAction} className="max-w-md space-y-3">
+            <div>
+              <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
+                {t("chairRoleLabel")}
+              </label>
+              <select
+                name="chair_role"
+                required
+                defaultValue=""
+                className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 bg-white dark:bg-discord-elevated text-brand-navy text-sm"
+              >
+                <option value="" disabled>
+                  {t("chairRolePlaceholder")}
+                </option>
+                {chairRoleOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div>
               <label className="block text-xs font-medium uppercase tracking-wider text-brand-muted mb-1">
                 {t("email")}
@@ -172,7 +210,7 @@ export function RoomCodesAndChairsClient({
             <Flash state={inviteState} />
             <button
               type="submit"
-              disabled={invitePending}
+              disabled={invitePending || chairRoleOptions.length === 0}
               className="px-4 py-2 rounded-lg bg-brand-paper text-brand-navy text-sm font-medium disabled:opacity-50"
             >
               {invitePending ? t("sending") : t("sendChairInvite")}

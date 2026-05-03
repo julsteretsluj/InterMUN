@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "منح دور الرئيس (الحساب الحالي)",
     "grantChairRoleHelp": "إذا قاموا بالفعل بالتسجيل كمندوبين، فقم بترقيتهم هنا حتى يحصلوا على لوحة معلومات الرئيس وأدوات اللجنة (لم يتم إرسال بريد إلكتروني).",
     "grantChairRole": "منح دور الكرسي",
-    "chamberLabelFallback": "جلسة اللجنة"
+    "chamberLabelFallback": "جلسة اللجنة",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "قبول المندوب عن طريق البريد الإلكتروني + التخصيص",
@@ -1441,7 +1445,14 @@
       "inviteSentSuccess": "تم إرسال الدعوة بالبريد الإلكتروني إلى {email}. سيكونون كرسيًا بعد أن يضعوا كلمة المرور الخاصة بهم.",
       "onlySmtGrantChair": "يمكن للأمانة فقط منح أدوار الرئيس.",
       "noAccountForEmail": "لا يوجد حساب بهذا البريد الإلكتروني حتى الآن. أرسل دعوة كرسي أولا.",
-      "promotedToChairSuccess": "الملف الشخصي لـ {email} أصبح الآن كرسيًا على المنصة."
+      "promotedToChairSuccess": "الملف الشخصي لـ {email} أصبح الآن كرسيًا على المنصة.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "يجب عليك تسجيل الدخول.",
@@ -1523,7 +1534,8 @@
     "exactlySixLettersDigits": "بالضبط 6 أحرف أو أرقام",
     "committeeCodePlaceholder": "على سبيل المثال ECO741",
     "committeeCodeHelpPrefix": "ستة أحرف: الأحرف الأولى من اسم الغرفة + ثلاثة أرقام (اقتراح حتمي:",
-    "saveCommittee": "لجنة الحفظ"
+    "saveCommittee": "لجنة الحفظ",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "يفتح",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

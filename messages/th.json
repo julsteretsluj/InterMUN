@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "มอบบทบาทประธาน (บัญชีที่มีอยู่)",
     "grantChairRoleHelp": "หากพวกเขาลงทะเบียนในฐานะผู้รับมอบสิทธิ์แล้ว ให้เลื่อนตำแหน่งพวกเขาที่นี่เพื่อรับแดชบอร์ดของประธานและเครื่องมือของคณะกรรมการ (ไม่มีการส่งอีเมล)",
     "grantChairRole": "มอบบทบาทประธานให้",
-    "chamberLabelFallback": "การประชุมคณะกรรมการ"
+    "chamberLabelFallback": "การประชุมคณะกรรมการ",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "ยอมรับการมอบหมายทางอีเมล + การจัดสรร",
@@ -1369,7 +1373,14 @@
       "inviteSentSuccess": "ส่งอีเมลคำเชิญไปที่ {email} พวกเขาจะเป็นเก้าอี้หลังจากตั้งรหัสผ่านแล้ว",
       "onlySmtGrantChair": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถมอบบทบาทประธานได้",
       "noAccountForEmail": "ยังไม่มีบัญชีที่ใช้อีเมลนั้น ส่งคำเชิญเก้าอี้ก่อน",
-      "promotedToChairSuccess": "โปรไฟล์สำหรับ {email} ตอนนี้เป็นเก้าอี้เตี้ยแล้ว"
+      "promotedToChairSuccess": "โปรไฟล์สำหรับ {email} ตอนนี้เป็นเก้าอี้เตี้ยแล้ว",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "คุณต้องลงชื่อเข้าใช้",
@@ -1451,7 +1462,8 @@
     "exactlySixLettersDigits": "6 ตัวอักษรหรือตัวเลขพอดี",
     "committeeCodePlaceholder": "เช่น อีโค741",
     "committeeCodeHelpPrefix": "อักขระหกตัว: ชื่อย่อของห้อง + ตัวเลขสามหลัก (ข้อเสนอแนะเชิงกำหนด:",
-    "saveCommittee": "บันทึกคณะกรรมการ"
+    "saveCommittee": "บันทึกคณะกรรมการ",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "เปิด",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {

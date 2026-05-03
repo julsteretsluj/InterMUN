@@ -70,7 +70,11 @@
     "grantChairRoleTitle": "Предоставление роли председателя (существующая учетная запись)",
     "grantChairRoleHelp": "Если они уже зарегистрировались в качестве делегата, продвиньте их здесь, чтобы они получили панель управления председателя и инструменты комитета (электронное письмо не отправляется).",
     "grantChairRole": "Предоставить роль председателя",
-    "chamberLabelFallback": "Заседание комитета"
+    "chamberLabelFallback": "Заседание комитета",
+    "chairRoleLabel": "Dais seat",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairRoleHeadOf": "Head Chair of {committee}",
+    "chairRoleCoOf": "Co-chair of {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "Принять делегата по электронной почте + выделение",
@@ -1441,7 +1445,14 @@
       "inviteSentSuccess": "Письмо с приглашением отправлено на адрес {email}. Они станут председателем после того, как установят свой пароль.",
       "onlySmtGrantChair": "Только секретариат может предоставлять функции председателя.",
       "noAccountForEmail": "Аккаунта с таким адресом электронной почты пока нет. Сначала отправьте приглашение на кресло.",
-      "promotedToChairSuccess": "Профиль пользователя {email} теперь является креслом."
+      "promotedToChairSuccess": "Профиль пользователя {email} теперь является креслом.",
+      "missingChairRole": "Choose a dais seat and committee for this invite.",
+      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
+      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "seatHeadChair": "Head Chair",
+      "seatCoChair": "Co-chair",
+      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Вы должны войти в систему.",
@@ -1523,7 +1534,8 @@
     "exactlySixLettersDigits": "Ровно 6 букв или цифр",
     "committeeCodePlaceholder": "например ЭКО741",
     "committeeCodeHelpPrefix": "Шесть символов: инициалы палаты + три цифры (детерминированное предложение:",
-    "saveCommittee": "Комитет спасения"
+    "saveCommittee": "Комитет спасения",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}"
   },
   "allocationMatrixManager": {
     "linkedOpen": "Открыть",
@@ -2448,7 +2460,10 @@
     "dashboardCommitteeSelect": "Select committee…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
     "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate."
+    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
+    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
+    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
+    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee"
   },
   "guides": {
     "default": {
