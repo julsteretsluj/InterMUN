@@ -100,7 +100,7 @@ export async function updateCommitteeSessionAction(
   });
 
   if (error) return { error: error.message };
-  await ensureDaisSeatAllocations(supabase, id);
+  await ensureDaisSeatAllocations(supabase, id, committee);
   revalidatePath("/smt");
   revalidatePath("/smt/conference");
   revalidatePath(`/smt/committees/${id}`);

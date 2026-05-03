@@ -95,7 +95,12 @@ export async function smtAddAllocationRow(formData: FormData) {
     if (codeErr) return { error: codeErr.message };
   }
 
-  await ensureDaisSeatAllocations(auth.supabase, conferenceId);
+  const { data: confMeta } = await auth.supabase
+    .from("conferences")
+    .select("committee")
+    .eq("id", conferenceId)
+    .maybeSingle();
+  await ensureDaisSeatAllocations(auth.supabase, conferenceId, confMeta?.committee);
   revalidateAllocationPaths();
   return { success: true as const };
 }
@@ -287,7 +292,12 @@ export async function smtImportAllocationsCsv(formData: FormData) {
     }
   }
 
-  await ensureDaisSeatAllocations(auth.supabase, conferenceId);
+  const { data: confMeta } = await auth.supabase
+    .from("conferences")
+    .select("committee")
+    .eq("id", conferenceId)
+    .maybeSingle();
+  await ensureDaisSeatAllocations(auth.supabase, conferenceId, confMeta?.committee);
   revalidateAllocationPaths();
   return {
     success: true as const,

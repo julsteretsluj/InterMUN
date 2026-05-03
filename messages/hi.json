@@ -74,7 +74,8 @@
     "chairRoleLabel": "Dais seat",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
     "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}"
+    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
     "title": "ईमेल + आवंटन द्वारा प्रतिनिधि स्वीकार करें",
@@ -1380,7 +1381,8 @@
       "seatHeadChair": "Head Chair",
       "seatCoChair": "Co-chair",
       "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
-      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password."
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
+      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
     },
     "allocationSignup": {
       "mustBeSignedIn": "आपको साइन इन करना होगा.",

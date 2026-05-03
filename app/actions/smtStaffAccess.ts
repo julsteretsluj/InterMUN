@@ -10,9 +10,9 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getTranslations } from "next-intl/server";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import {
-  allocationCountryMatchesChairSlot,
-  expectedDaisCountryForSlot,
-  parseChairInviteSlot,
+  countryLabelAllowedForCommittee,
+  findAllocationRowForCountryLabel,
+  parseChairInviteSelection,
 } from "@/lib/chair-invite-slot";
 
 export type StaffAccessFormState = { error?: string; success?: string };
@@ -100,8 +100,8 @@ export async function smtInviteChairAction(
     return { error: t("invalidEmail") };
   }
 
-  const parsedSlot = parseChairInviteSlot(formData.get("chair_role"));
-  if (!parsedSlot) {
+  const parsedInvite = parseChairInviteSelection(formData.get("chair_role"));
+  if (!parsedInvite) {
     return { error: t("missingChairRole") };
   }
 
@@ -132,7 +132,7 @@ export async function smtInviteChairAction(
     };
   }
 
-  const { conferenceId, slot } = parsedSlot;
+  const { conferenceId, countryLabel } = parsedInvite;
   const { data: confRow, error: confErr } = await admin
     .from("conferences")
     .select("id, committee, event_id")
@@ -143,7 +143,11 @@ export async function smtInviteChairAction(
     return { error: t("committeeNotInActiveEvent") };
   }
 
-  await ensureDaisSeatAllocations(admin, conferenceId);
+  if (!countryLabelAllowedForCommittee(confRow.committee, countryLabel)) {
+    return { error: t("invalidChairRole") };
+  }
+
+  await ensureDaisSeatAllocations(admin, conferenceId, confRow.committee);
 
   const { data: allocRows, error: allocListErr } = await admin
     .from("allocations")
@@ -154,9 +158,9 @@ export async function smtInviteChairAction(
     return { error: allocListErr.message };
   }
 
-  const match = (allocRows ?? []).find((row) => allocationCountryMatchesChairSlot(row.country, slot));
+  const match = findAllocationRowForCountryLabel(allocRows ?? [], countryLabel);
   if (!match?.id) {
-    return { error: t("daisSeatRowMissing", { seat: expectedDaisCountryForSlot(slot) }) };
+    return { error: t("daisSeatRowMissing", { seat: countryLabel }) };
   }
 
   if (match.user_id) {
@@ -186,11 +190,10 @@ export async function smtInviteChairAction(
 
   const newId = data?.user?.id;
   const committeeLabel = String(confRow.committee ?? "").trim() || "—";
-  const seatLabel = slot === "head" ? t("seatHeadChair") : t("seatCoChair");
+  const seatLabel = (match.country ?? "").trim() || countryLabel;
 
   if (newId) {
-    const countryStored =
-      (match.country ?? "").trim() || expectedDaisCountryForSlot(slot);
+    const countryStored = seatLabel;
     const { error: profileErr } = await admin
       .from("profiles")
       .update({ role: "chair", allocation: countryStored })

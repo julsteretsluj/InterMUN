@@ -176,7 +176,8 @@ export default async function SmtAllocationMatrixPage({
     // so the roster isn't empty on first load.
     if (allocs.length === 0) {
       try {
-        await ensureDaisSeatAllocations(supabase, selectedConferenceId);
+        const selectedConfRow = rawList.find((c) => c.id === selectedConferenceId);
+        await ensureDaisSeatAllocations(supabase, selectedConferenceId, selectedConfRow?.committee);
         allocs =
           (
             await supabase

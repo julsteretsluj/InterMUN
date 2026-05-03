@@ -9,6 +9,7 @@ import {
   type StaffAccessFormState,
 } from "@/app/actions/smtStaffAccess";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
+import { getDaisSeatLabelsForCommittee } from "@/lib/dais-seat-plan";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 
@@ -116,13 +117,14 @@ export function RoomCodesAndChairsClient({
       clusterByChamber(conferences).flatMap((group) => {
         const c = group[0]!;
         const comm = c.committee?.trim();
-        const label = comm
+        const chamberTitle = comm
           ? translateCommitteeLabel(tCommitteeLabels, comm)
           : t("chamberLabelFallback");
-        return [
-          { value: `${c.id}|head`, label: t("chairRoleHeadOf", { committee: label }) },
-          { value: `${c.id}|co`, label: t("chairRoleCoOf", { committee: label }) },
-        ];
+        const seats = [...getDaisSeatLabelsForCommittee(c.committee)];
+        return seats.map((seat) => ({
+          value: `${c.id}::${encodeURIComponent(seat)}`,
+          label: t("chairInviteOption", { seat, committee: chamberTitle }),
+        }));
       }),
     [conferences, t, tCommitteeLabels]
   );

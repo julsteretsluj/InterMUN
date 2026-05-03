@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef, useState, useTransition } from "react";
+import { useMemo, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import {
   smtAddAllocationRow,
@@ -15,6 +15,7 @@ import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
 import { useLocale, useTranslations } from "next-intl";
 import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
+import { getDaisSeatLabelsForCommittee } from "@/lib/dais-seat-plan";
 
 export type MatrixRow = {
   id: string;
@@ -87,7 +88,17 @@ export function AllocationMatrixManagerClient({
     });
   }
 
-  function onQuickAddChairSeat(label: "Head Chair" | "Co-chair") {
+  const selectedConference = useMemo(
+    () => conferences.find((c) => c.id === selectedConferenceId) ?? null,
+    [conferences, selectedConferenceId]
+  );
+  const daisQuickAddLabels = useMemo(
+    () =>
+      selectedConference ? [...getDaisSeatLabelsForCommittee(selectedConference.committee)] : [],
+    [selectedConference]
+  );
+
+  function onQuickAddChairSeat(label: string) {
     if (!selectedConferenceId) return;
     setError(null);
     setMessage(null);
@@ -361,22 +372,17 @@ export function AllocationMatrixManagerClient({
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-5 md:p-6 space-y-3">
         <h2 className="font-display text-lg font-semibold text-brand-navy">{t("addOneSeat")}</h2>
         <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => onQuickAddChairSeat("Head Chair")}
-            disabled={pending}
-            className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
-          >
-            {t("addHeadChairAllocation")}
-          </button>
-          <button
-            type="button"
-            onClick={() => onQuickAddChairSeat("Co-chair")}
-            disabled={pending}
-            className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
-          >
-            {t("addCoChairAllocation")}
-          </button>
+          {daisQuickAddLabels.map((label) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => onQuickAddChairSeat(label)}
+              disabled={pending}
+              className="px-3 py-2 rounded-lg border border-brand-navy/20 text-brand-navy text-sm font-medium hover:bg-brand-cream disabled:opacity-50"
+            >
+              {label}
+            </button>
+          ))}
         </div>
         <form onSubmit={onAdd} className="flex flex-wrap gap-2 items-end">
           <input type="hidden" name="conference_id" value={selectedConferenceId} />

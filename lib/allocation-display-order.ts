@@ -2,12 +2,17 @@
 export const DAIS_SEAT_HEAD_CHAIR = "Head Chair";
 export const DAIS_SEAT_CO_CHAIR = "Co-chair";
 
-/** Sort rank for dropdowns/lists: Head Chair, Co-chair (any spelling), then everything else A–Z. */
+/**
+ * Sort rank for allocation matrix / staff views: primary dais roles first, then secondary,
+ * then delegates (large rank).
+ */
 export function daisSeatSortRank(country: string): number {
   const k = country.trim().toLowerCase();
-  if (k === "head chair") return 0;
-  if (k === "co-chair" || k === "co chair") return 1;
-  return 2;
+  if (k === "frontroom chair" || k === "head chair" || k === "head editor") return 0;
+  if (k === "backroom chair" || k === "co-chair" || k === "co chair" || k === "co-editor") return 1;
+  if (k === "co-chair 2" || k === "backroom chair 2") return 2;
+  if (k === "rapporteur") return 3;
+  return 100;
 }
 
 export function compareAllocationCountryDisplay(a: string, b: string): number {

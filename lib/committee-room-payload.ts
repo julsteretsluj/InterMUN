@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { getDaisSeatLabelsForCommittee, isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 
 type ProfileEmbed = {
@@ -49,7 +50,8 @@ function daisFromChairAllocations(
     user_id: string | null;
     display_name_override: string | null;
     profiles: ProfileEmbed | ProfileEmbed[] | null;
-  }[]
+  }[],
+  committee: string | null | undefined
 ): DaisSeat[] | null {
   function nameFromRow(
     row:
@@ -66,30 +68,33 @@ function daisFromChairAllocations(
     const override = String(row.display_name_override ?? "").trim();
     return override || p?.name?.trim() || null;
   }
-  const byLabel = new Map(
-    allocationRows.map((r) => [String(r.country ?? "").trim().toLowerCase(), r] as const)
-  );
-  const head = byLabel.get("head chair");
-  const co = byLabel.get("co-chair") ?? byLabel.get("co chair");
-  if (!head && !co) return null;
-
-  const headProfile = embedProfile(head?.profiles ?? null);
-  const coProfile = embedProfile(co?.profiles ?? null);
-
-  return [
+  const byLabel = new Map<
+    string,
     {
-      title: "Head Chair",
-      name: nameFromRow(head),
+      country: string | null;
+      user_id: string | null;
+      display_name_override: string | null;
+      profiles: ProfileEmbed | ProfileEmbed[] | null;
+    }
+  >();
+  for (const r of allocationRows) {
+    const k = String(r.country ?? "").trim().toLowerCase();
+    if (!byLabel.has(k)) byLabel.set(k, r);
+  }
+
+  const labels = [...getDaisSeatLabelsForCommittee(committee)];
+  const hasAny = labels.some((label) => byLabel.has(label.trim().toLowerCase()));
+  if (!hasAny) return null;
+
+  return labels.map((label) => {
+    const row = byLabel.get(label.trim().toLowerCase());
+    return {
+      title: label,
+      name: nameFromRow(row),
       showGavel: true,
-      profileId: head?.user_id ?? null,
-    },
-    {
-      title: "Co-chair",
-      name: nameFromRow(co),
-      showGavel: true,
-      profileId: co?.user_id ?? null,
-    },
-  ];
+      profileId: row?.user_id ?? null,
+    };
+  });
 }
 
 function placardsFromAllocationRows(
@@ -103,13 +108,8 @@ function placardsFromAllocationRows(
     profiles: ProfileEmbed | ProfileEmbed[] | null;
   }[]
 ): DelegatePlacard[] {
-  const isDaisSeatLabel = (raw: string | null | undefined) => {
-    const label = String(raw ?? "").trim().toLowerCase();
-    return label === "head chair" || label === "co-chair" || label === "co chair" || label === "rapporteur";
-  };
-
   return allocationRows
-    .filter((row) => !isDaisSeatLabel(row.country))
+    .filter((row) => !isDaisSeatAllocationCountry(row.country))
     .map((row) => {
     const p = embedProfile(row.profiles);
     const vacant = !row.user_id;
@@ -173,7 +173,8 @@ export async function loadCommitteeRoomPayload(
       user_id: string | null;
       display_name_override: string | null;
       profiles: ProfileEmbed | ProfileEmbed[] | null;
-    }[]
+    }[],
+    conference?.committee
   );
   if (!dais) {
     dais = daisFromChairNamesField(options.chairNamesHint);
