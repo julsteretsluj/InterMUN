@@ -9,10 +9,35 @@ import {
   smtSetCommitteeCodeOnlyAction,
   type StaffAccessFormState,
 } from "@/app/actions/smtStaffAccess";
+import { committeeSessionGroupKey } from "@/lib/committee-session-group";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 type Conf = { id: string; name: string; committee: string | null; committee_code: string | null };
 
-function CommitteeCodeRowForm({ c }: { c: Conf }) {
+/** One room-code card per chamber; `set_conference_room_code` syncs all topic rows in that chamber. */
+function clusterByChamber(conferences: Conf[]): Conf[][] {
+  const map = new Map<string, Conf[]>();
+  for (const c of conferences) {
+    const g = committeeSessionGroupKey(c.committee);
+    const key = g ?? `__single:${c.id}`;
+    const arr = map.get(key) ?? [];
+    arr.push(c);
+    map.set(key, arr);
+  }
+  return [...map.values()]
+    .map((group) => group.slice().sort((a, b) => (a.name ?? "").localeCompare(b.name ?? "")))
+    .sort((a, b) => {
+      const an = a[0]?.committee ?? a[0]?.name ?? "";
+      const bn = b[0]?.committee ?? b[0]?.name ?? "";
+      return an.localeCompare(bn);
+    });
+}
+
+function CommitteeCodeRowForm({ group }: { group: Conf[] }) {
+  const c = group[0]!;
   const t = useTranslations("smtRoomCodesClient");
   const tSetup = useTranslations("conferenceSetupForm");
   const tCommon = useTranslations("common");
@@ -20,8 +45,21 @@ function CommitteeCodeRowForm({ c }: { c: Conf }) {
   const tCommitteeLabels = useTranslations("committeeNames.labels");
   const locale = useLocale();
   const [state, action, pending] = useActionState(smtSetCommitteeCodeOnlyAction, null);
-  const labelRaw = [c.name, c.committee].filter(Boolean).join(" — ");
-  const label = translateConferenceHeadline(tTopics, tCommitteeLabels, labelRaw, locale);
+
+  const label = (() => {
+    if (group.length === 1) {
+      const labelRaw = [c.name, c.committee].filter(Boolean).join(" — ");
+      return translateConferenceHeadline(tTopics, tCommitteeLabels, labelRaw, locale);
+    }
+    const comm = c.committee?.trim();
+    if (comm) {
+      const chamber = translateCommitteeLabel(tCommitteeLabels, comm);
+      return `${chamber} — ${t("agendaTopicsCount", { count: group.length })}`;
+    }
+    const parts = group.map((row) => translateAgendaTopicLabel(tTopics, row.name, locale));
+    return parts.join(" · ");
+  })();
+
   const current = c.committee_code?.trim() || t("dash");
 
   return (
@@ -110,8 +148,8 @@ export function RoomCodesAndChairsClient({
           <p className="text-sm text-brand-muted">{t("noCommitteesYet")}</p>
         ) : (
           <div className="space-y-4">
-            {conferences.map((c) => (
-              <CommitteeCodeRowForm key={c.id} c={c} />
+            {clusterByChamber(conferences).map((group) => (
+              <CommitteeCodeRowForm key={group[0]!.id} group={group} />
             ))}
           </div>
         )}

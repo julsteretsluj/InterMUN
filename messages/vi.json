@@ -69,7 +69,8 @@
     "sendChairInvite": "Gửi giấy mời chủ trì",
     "grantChairRoleTitle": "Cấp vai trò chủ tịch (tài khoản hiện có)",
     "grantChairRoleHelp": "Nếu họ đã đăng ký làm đại biểu, hãy thăng chức cho họ tại đây để họ nhận được bảng điều khiển của chủ tịch và các công cụ của ủy ban (không gửi email).",
-    "grantChairRole": "Trao vai trò chủ trì"
+    "grantChairRole": "Trao vai trò chủ trì",
+    "agendaTopicsCount": "{count, plural, other {# chủ đề trong chương trình nghị sự}}"
   },
   "chairDelegateApprovalForm": {
     "title": "Chấp nhận đại biểu qua email + phân bổ",

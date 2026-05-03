@@ -69,7 +69,8 @@
     "sendChairInvite": "ส่งเก้าอี้เชิญ",
     "grantChairRoleTitle": "มอบบทบาทประธาน (บัญชีที่มีอยู่)",
     "grantChairRoleHelp": "หากพวกเขาลงทะเบียนในฐานะผู้รับมอบสิทธิ์แล้ว ให้เลื่อนตำแหน่งพวกเขาที่นี่เพื่อรับแดชบอร์ดของประธานและเครื่องมือของคณะกรรมการ (ไม่มีการส่งอีเมล)",
-    "grantChairRole": "มอบบทบาทประธานให้"
+    "grantChairRole": "มอบบทบาทประธานให้",
+    "agendaTopicsCount": "{count, plural, other {# หัวข้อวาระ}}"
   },
   "chairDelegateApprovalForm": {
     "title": "ยอมรับการมอบหมายทางอีเมล + การจัดสรร",

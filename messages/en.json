@@ -69,7 +69,8 @@
     "sendChairInvite": "Send chair invite",
     "grantChairRoleTitle": "Grant chair role (existing account)",
     "grantChairRoleHelp": "If they already signed up as a delegate, promote them here so they get the chair dashboard and committee tools (no email sent).",
-    "grantChairRole": "Grant chair role"
+    "grantChairRole": "Grant chair role",
+    "agendaTopicsCount": "{count, plural, one {# topic} other {# topics}}"
   },
   "chairDelegateApprovalForm": {
     "title": "Accept delegate by email + allocation",

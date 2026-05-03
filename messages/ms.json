@@ -69,7 +69,8 @@
     "sendChairInvite": "Hantar jemputan kerusi",
     "grantChairRoleTitle": "Berikan peranan pengerusi (akaun sedia ada)",
     "grantChairRoleHelp": "Jika mereka sudah mendaftar sebagai perwakilan, promosikan mereka di sini supaya mereka mendapat papan pemuka kerusi dan alatan jawatankuasa (tiada e-mel dihantar).",
-    "grantChairRole": "Berikan peranan kerusi"
+    "grantChairRole": "Berikan peranan kerusi",
+    "agendaTopicsCount": "{count, plural, other {# topik agenda}}"
   },
   "chairDelegateApprovalForm": {
     "title": "Terima perwakilan melalui e-mel + peruntukan",

@@ -69,7 +69,8 @@
     "sendChairInvite": "Stuur een stoeluitnodiging",
     "grantChairRoleTitle": "Voorzitterrol toekennen (bestaand account)",
     "grantChairRoleHelp": "Als ze zich al hebben aangemeld als afgevaardigde, promoot ze dan hier zodat ze het voorzittersdashboard en de commissietools krijgen (geen e-mail verzonden).",
-    "grantChairRole": "Voorzitterschap toekennen"
+    "grantChairRole": "Voorzitterschap toekennen",
+    "agendaTopicsCount": "{count, plural, one {# agendapunt} other {# agendapunten}}"
   },
   "chairDelegateApprovalForm": {
     "title": "Accepteer delegeren per e-mail + toewijzing",

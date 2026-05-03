@@ -69,7 +69,8 @@
     "sendChairInvite": "إرسال دعوة الكرسي",
     "grantChairRoleTitle": "منح دور الرئيس (الحساب الحالي)",
     "grantChairRoleHelp": "إذا قاموا بالفعل بالتسجيل كمندوبين، فقم بترقيتهم هنا حتى يحصلوا على لوحة معلومات الرئيس وأدوات اللجنة (لم يتم إرسال بريد إلكتروني).",
-    "grantChairRole": "منح دور الكرسي"
+    "grantChairRole": "منح دور الكرسي",
+    "agendaTopicsCount": "{count, plural, other {# جدول أعمال}}"
   },
   "chairDelegateApprovalForm": {
     "title": "قبول المندوب عن طريق البريد الإلكتروني + التخصيص",

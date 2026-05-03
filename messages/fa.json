@@ -69,7 +69,8 @@
     "sendChairInvite": "ارسال دعوت نامه برای صندلی",
     "grantChairRoleTitle": "نقش صندلی اعطا (حساب موجود)",
     "grantChairRoleHelp": "اگر قبلاً به‌عنوان نماینده ثبت‌نام کرده‌اند، آنها را در اینجا تبلیغ کنید تا داشبورد صندلی و ابزارهای کمیته را دریافت کنند (ایمیلی ارسال نمی‌شود).",
-    "grantChairRole": "نقش صندلی را اعطا کنید"
+    "grantChairRole": "نقش صندلی را اعطا کنید",
+    "agendaTopicsCount": "{count, plural, other {# موضوع دستور کار}}"
   },
   "chairDelegateApprovalForm": {
     "title": "پذیرش نماینده از طریق ایمیل + تخصیص",

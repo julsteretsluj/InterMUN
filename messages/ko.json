@@ -69,7 +69,8 @@
     "sendChairInvite": "의장 초대 보내기",
     "grantChairRoleTitle": "의장 역할 부여(기존 계정)",
     "grantChairRoleHelp": "이미 대리인으로 등록한 경우 여기에서 홍보하여 ​​의장 대시보드와 위원회 도구를 받을 수 있도록 하세요(이메일은 전송되지 않음).",
-    "grantChairRole": "보조금 의장 역할"
+    "grantChairRole": "보조금 의장 역할",
+    "agendaTopicsCount": "{count, plural, other {#개 안건}}"
   },
   "chairDelegateApprovalForm": {
     "title": "이메일 + 할당으로 대리인 수락",
