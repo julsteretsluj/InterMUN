@@ -11,6 +11,7 @@ import {
   normalizeDelegationSearchQuery,
 } from "@/lib/committee-room-delegation-search";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 
 export interface DaisSeat {
   title: string;
@@ -52,16 +53,10 @@ function dash(v: string | null | undefined) {
   return t ? t : "—";
 }
 
-function isDaisSeatLabel(raw: string | null | undefined) {
-  const label = String(raw ?? "").trim().toLowerCase();
-  return label === "head chair" || label === "co-chair" || label === "co chair" || label === "rapporteur";
-}
-
 function emojiForDaisTitle(title: string | null | undefined) {
   const label = String(title ?? "").trim().toLowerCase();
   if (label === "head chair") return "🧑‍⚖️";
   if (label === "co-chair" || label === "co chair") return "👥";
-  if (label === "rapporteur") return "📝";
   return "🎙️";
 }
 
@@ -307,7 +302,7 @@ export function VirtualCommitteeRoom({
       if (!isActive || error || !allocationRows) return;
 
       const next: DelegatePlacard[] = (allocationRows as AllocationRow[])
-        .filter((row) => !isDaisSeatLabel(row.country))
+        .filter((row) => !isDaisSeatAllocationCountry(row.country))
         .map((row) => {
         const p = Array.isArray(row.profiles) ? row.profiles[0] ?? null : row.profiles ?? null;
         const vacant = !row.user_id;

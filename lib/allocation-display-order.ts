@@ -8,10 +8,9 @@ export const DAIS_SEAT_CO_CHAIR = "Co-chair";
  */
 export function daisSeatSortRank(country: string): number {
   const k = country.trim().toLowerCase();
-  if (k === "frontroom chair" || k === "head chair" || k === "head editor") return 0;
+  if (k === "frontroom chair" || k === "frontroom chair 2" || k === "head chair" || k === "head editor") return 0;
   if (k === "backroom chair" || k === "co-chair" || k === "co chair" || k === "co-editor") return 1;
   if (k === "co-chair 2" || k === "backroom chair 2") return 2;
-  if (k === "rapporteur") return 3;
   return 100;
 }
 

@@ -21,10 +21,11 @@ const PLAN_BY_SESSION_GROUP: Record<string, readonly string[]> = {
   UNODC: ["Head Chair", "Co-chair"],
   "UN WOMEN": ["Head Chair", "Co-chair"],
   DISEC: ["Head Chair", "Co-chair"],
-  HSC: ["Frontroom Chair", "Backroom Chair", "Backroom Chair 2"],
-  WHO: ["Frontroom Chair", "Backroom Chair"],
+  /** Two frontroom + one backroom (matrix layout). */
+  HSC: ["Frontroom Chair", "Frontroom Chair 2", "Backroom Chair"],
+  WHO: ["Head Chair", "Co-chair"],
   FWC: ["Head Chair", "Co-chair"],
-  INTERPOL: ["Frontroom Chair", "Backroom Chair"],
+  INTERPOL: ["Head Chair", "Co-chair"],
 };
 
 /** When switching naming schemes, rename vacant legacy rows before inserting new labels. */
@@ -35,14 +36,12 @@ export const LEGACY_DAIS_RENAMES: Record<string, [fromLower: string, toExact: st
     ["co chair", "Backroom Chair"],
   ],
   WHO: [
-    ["head chair", "Frontroom Chair"],
-    ["co-chair", "Backroom Chair"],
-    ["co chair", "Backroom Chair"],
+    ["frontroom chair", "Head Chair"],
+    ["backroom chair", "Co-chair"],
   ],
   INTERPOL: [
-    ["head chair", "Frontroom Chair"],
-    ["co-chair", "Backroom Chair"],
-    ["co chair", "Backroom Chair"],
+    ["frontroom chair", "Head Chair"],
+    ["backroom chair", "Co-chair"],
   ],
   "PRESS CORPS": [
     ["head chair", "Head Editor"],
@@ -61,7 +60,7 @@ for (const plan of Object.values(PLAN_BY_SESSION_GROUP)) {
   for (const l of plan) ALL_PLAN_LABELS_LOWER.add(l.trim().toLowerCase());
 }
 DEFAULT_PLAN.forEach((l) => ALL_PLAN_LABELS_LOWER.add(l.toLowerCase()));
-["rapporteur", "co chair"].forEach((l) => ALL_PLAN_LABELS_LOWER.add(l));
+["co chair", "backroom chair 2"].forEach((l) => ALL_PLAN_LABELS_LOWER.add(l));
 
 /** Used to exclude dais rows from delegate placards when loading committee room. */
 export function isDaisSeatAllocationCountry(raw: string | null | undefined): boolean {
