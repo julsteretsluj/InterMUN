@@ -12,6 +12,8 @@ const DEFAULT_PLAN = ["Head Chair", "Co-chair"] as const;
  * (`committeeSessionGroupKey`). Derived from SEAMUN I 2027 Delegate Allocation Matrix.
  */
 const PLAN_BY_SESSION_GROUP: Record<string, readonly string[]> = {
+  /** Must stay in sync with SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS — full secretariat roster, no chair titles. */
+  SMT: [...SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS],
   ECOSOC: ["Head Chair", "Co-chair"],
   /** Full committee title normalizes to PRESS CORPS */
   "PRESS CORPS": ["Head Editor", "Co-Editor"],
@@ -84,5 +86,7 @@ export function isDaisSeatAllocationCountry(raw: string | null | undefined): boo
 export function getDaisSeatLabelsForCommittee(committee: string | null | undefined): readonly string[] {
   const g = committeeSessionGroupKey(committee);
   if (!g) return DEFAULT_PLAN;
+  /** Never fall back to DEFAULT_PLAN for SMT — that only seeds Head Chair / Co-chair. */
+  if (g === "SMT") return [...SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS];
   return PLAN_BY_SESSION_GROUP[g] ?? DEFAULT_PLAN;
 }
