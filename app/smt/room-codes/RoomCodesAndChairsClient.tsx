@@ -8,6 +8,7 @@ import {
   smtSetCommitteeCodeOnlyAction,
   type StaffAccessFormState,
 } from "@/app/actions/smtStaffAccess";
+import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 
@@ -24,12 +25,10 @@ function clusterByChamber(conferences: Conf[]): Conf[][] {
     map.set(key, arr);
   }
   return [...map.values()]
-    .map((group) => group.slice().sort((a, b) => (a.name ?? "").localeCompare(b.name ?? "")))
-    .sort((a, b) => {
-      const an = a[0]?.committee ?? a[0]?.name ?? "";
-      const bn = b[0]?.committee ?? b[0]?.name ?? "";
-      return an.localeCompare(bn);
-    });
+    .map((group) =>
+      group.slice().sort((a, b) => (a.name ?? "").localeCompare(b.name ?? "", undefined, { sensitivity: "base" }))
+    )
+    .sort((a, b) => compareCommitteeRowsByDifficultyThenLabel(a[0]!, b[0]!));
 }
 
 function CommitteeCodeRowForm({ group }: { group: Conf[] }) {

@@ -21,13 +21,7 @@ import {
   translateCommitteeTagDifficulty,
   translateCommitteeTagFormat,
 } from "@/lib/i18n/committee-display-tags";
-
-function difficultySortRank(level: "Beginner" | "Intermediate" | "Advanced" | null | undefined) {
-  if (level === "Beginner") return 0;
-  if (level === "Intermediate") return 1;
-  if (level === "Advanced") return 2;
-  return 99;
-}
+import { difficultySortRank } from "@/lib/committee-difficulty-sort";
 
 export default async function SmtOverviewPage({
   searchParams,
