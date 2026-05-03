@@ -47,7 +47,7 @@ export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
 export const SEAMUN_I_2027_OPERATIONS: { role: string; name: string; email: string | null }[] = [
   { role: "Head of Logistics", name: "Moonum C.", email: "reddragonetz@gmail.com" },
   { role: "Head of Finance", name: "Mannan P.", email: "mannanparikh27@gmail.com" },
-  { role: "Head of Community Outreach", name: "Myesha S.", email: null },
+  { role: "Head of Community Outreach", name: "Myesha S.", email: "sonimyesha@gmail.com" },
   { role: "Head of Delegate Affairs", name: "Dominic S.S.", email: "dominicstott09@gmail.com" },
 ];
 
@@ -56,7 +56,7 @@ export const SEAMUN_I_2027_MEDIA: { role: string; name: string; email: string | 
   { role: "Head of PR & Advertising", name: "Phil R.", email: "sarana79262@gmail.com" },
 ];
 
-/** SG cell in matrix may omit domain; treat as non-clickable label unless it looks like an email. */
+/** Matrix cells that are not valid addresses (no `@`, spaces) render as plain text, not mailto. */
 export function emailLooksClickable(raw: string | null | undefined): raw is string {
   const s = String(raw ?? "").trim();
   return s.length > 3 && s.includes("@") && !s.includes(" ");

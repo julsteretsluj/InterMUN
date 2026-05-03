@@ -93,9 +93,9 @@ export default async function SmtCommitteeLivePage({
     .eq("id", conf.event_id)
     .maybeSingle();
 
+  const eventCodeNorm = committeeEvent?.event_code?.trim().toUpperCase() ?? "";
   const showSeamunSecretariatRoster =
-    isSmtSecretariatConferenceRow(conf) &&
-    committeeEvent?.event_code === SEAMUN_I_2027_EVENT_CODE;
+    isSmtSecretariatConferenceRow(conf) && eventCodeNorm === SEAMUN_I_2027_EVENT_CODE;
 
   if (eventId && conf.event_id !== eventId) {
     return (

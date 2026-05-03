@@ -59,54 +59,47 @@ export async function Seamun2027SecretariatOverviewRoster() {
           {t("secretariatMatrixSectionSecretariat")}
         </h3>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-cream/15">
-          <div
-            className="grid min-w-[640px] grid-cols-[1.15fr_1fr_1.25fr_0.95fr] gap-px bg-brand-navy/10 text-sm"
-            role="table"
+          <table
+            className="w-full min-w-[640px] border-collapse text-left text-sm"
             aria-label={t("secretariatMatrixSectionSecretariat")}
           >
-            <div
-              className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted"
-              role="columnheader"
-            >
-              {t("secretariatMatrixRole")}
-            </div>
-            <div
-              className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted"
-              role="columnheader"
-            >
-              {t("secretariatMatrixName")}
-            </div>
-            <div
-              className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted"
-              role="columnheader"
-            >
-              {t("secretariatMatrixEmail")}
-            </div>
-            <div
-              className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted"
-              role="columnheader"
-            >
-              {t("secretariatMatrixCommitteeOverviews")}
-            </div>
-            {SEAMUN_I_2027_LEADERSHIP.map((row, i) => (
-              <div key={i} className="contents" role="row">
-                <div className="bg-brand-paper px-3 py-2.5 text-brand-navy/90">{row.role}</div>
-                <div className="bg-brand-paper px-3 py-2.5 font-medium text-brand-navy">{row.name}</div>
-                <div className="bg-brand-paper px-3 py-2.5">
-                  <EmailCell email={row.email} />
-                </div>
-                <div className="bg-brand-paper px-3 py-2.5 text-brand-navy/90">
-                  {row.role === "Parliamentarian" ? (
-                    <span className="inline-flex rounded-md border border-brand-navy/15 bg-brand-cream/40 px-2 py-0.5 text-xs font-medium text-brand-navy">
-                      {row.committeeOverviewTier}
-                    </span>
-                  ) : (
-                    <span className="text-brand-muted">—</span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+            <thead>
+              <tr className="border-b border-brand-navy/10 bg-brand-paper">
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixRole")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixName")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixEmail")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixCommitteeOverviews")}
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand-navy/10">
+              {SEAMUN_I_2027_LEADERSHIP.map((row, i) => (
+                <tr key={i} className="bg-brand-paper">
+                  <td className="px-3 py-2.5 text-brand-navy/90">{row.role}</td>
+                  <td className="px-3 py-2.5 font-medium text-brand-navy">{row.name}</td>
+                  <td className="px-3 py-2.5">
+                    <EmailCell email={row.email} />
+                  </td>
+                  <td className="px-3 py-2.5 text-brand-navy/90">
+                    {row.role === "Parliamentarian" ? (
+                      <span className="inline-flex rounded-md border border-brand-navy/15 bg-brand-cream/40 px-2 py-0.5 text-xs font-medium text-brand-navy">
+                        {row.committeeOverviewTier}
+                      </span>
+                    ) : (
+                      <span className="text-brand-muted">—</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -115,30 +108,35 @@ export async function Seamun2027SecretariatOverviewRoster() {
           {t("secretariatMatrixSectionOperations")}
         </h3>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-cream/15">
-          <div
-            className="grid min-w-[520px] grid-cols-[1.2fr_1fr_1.4fr] gap-px bg-brand-navy/10 text-sm"
-            role="table"
+          <table
+            className="w-full min-w-[520px] border-collapse text-left text-sm"
             aria-label={t("secretariatMatrixSectionOperations")}
           >
-            <div className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("secretariatMatrixRole")}
-            </div>
-            <div className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("secretariatMatrixName")}
-            </div>
-            <div className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("secretariatMatrixEmail")}
-            </div>
-            {SEAMUN_I_2027_OPERATIONS.map((row, i) => (
-              <div key={i} className="contents" role="row">
-                <div className="bg-brand-paper px-3 py-2.5 text-brand-navy/90">{row.role}</div>
-                <div className="bg-brand-paper px-3 py-2.5 font-medium text-brand-navy">{row.name}</div>
-                <div className="bg-brand-paper px-3 py-2.5">
-                  <EmailCell email={row.email} />
-                </div>
-              </div>
-            ))}
-          </div>
+            <thead>
+              <tr className="border-b border-brand-navy/10 bg-brand-paper">
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixRole")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixName")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixEmail")}
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand-navy/10">
+              {SEAMUN_I_2027_OPERATIONS.map((row, i) => (
+                <tr key={i} className="bg-brand-paper">
+                  <td className="px-3 py-2.5 text-brand-navy/90">{row.role}</td>
+                  <td className="px-3 py-2.5 font-medium text-brand-navy">{row.name}</td>
+                  <td className="px-3 py-2.5">
+                    <EmailCell email={row.email} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -147,30 +145,35 @@ export async function Seamun2027SecretariatOverviewRoster() {
           {t("secretariatMatrixSectionMedia")}
         </h3>
         <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-cream/15">
-          <div
-            className="grid min-w-[520px] grid-cols-[1.2fr_1fr_1.4fr] gap-px bg-brand-navy/10 text-sm"
-            role="table"
+          <table
+            className="w-full min-w-[520px] border-collapse text-left text-sm"
             aria-label={t("secretariatMatrixSectionMedia")}
           >
-            <div className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("secretariatMatrixRole")}
-            </div>
-            <div className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("secretariatMatrixName")}
-            </div>
-            <div className="bg-brand-paper px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("secretariatMatrixEmail")}
-            </div>
-            {SEAMUN_I_2027_MEDIA.map((row, i) => (
-              <div key={i} className="contents" role="row">
-                <div className="bg-brand-paper px-3 py-2.5 text-brand-navy/90">{row.role}</div>
-                <div className="bg-brand-paper px-3 py-2.5 font-medium text-brand-navy">{row.name}</div>
-                <div className="bg-brand-paper px-3 py-2.5">
-                  <EmailCell email={row.email} />
-                </div>
-              </div>
-            ))}
-          </div>
+            <thead>
+              <tr className="border-b border-brand-navy/10 bg-brand-paper">
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixRole")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixName")}
+                </th>
+                <th className="px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                  {t("secretariatMatrixEmail")}
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand-navy/10">
+              {SEAMUN_I_2027_MEDIA.map((row, i) => (
+                <tr key={i} className="bg-brand-paper">
+                  <td className="px-3 py-2.5 text-brand-navy/90">{row.role}</td>
+                  <td className="px-3 py-2.5 font-medium text-brand-navy">{row.name}</td>
+                  <td className="px-3 py-2.5">
+                    <EmailCell email={row.email} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
