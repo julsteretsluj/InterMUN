@@ -1,9 +1,11 @@
 "use client";
 
-import { useActionState, useMemo, useState } from "react";
+import { useActionState, useMemo, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import {
   updateConferenceEventAction,
-  updateCommitteeSessionAction,
+  updateChamberCommitteeProfileAction,
+  addChamberSecondTopicAction,
   type SmtFormState,
 } from "@/app/actions/smtConference";
 import { generateSixCharCommitteeCode } from "@/lib/committee-join-code";
@@ -23,6 +25,8 @@ type CommitteeRow = {
   chair_names: string | null;
   committee_logo_url: string | null;
   crisis_slides_url: string | null;
+  room_code: string | null;
+  rop_document_url: string | null;
   consultation_before_moderated_caucus?: boolean | null;
   procedure_profile?: "default" | "eu_parliament" | null;
   eu_guided_workflow_enabled?: boolean | null;
@@ -81,25 +85,8 @@ export function SmtConferenceSettingsClient({
           {committees.length === 0 ? (
             <p className="text-sm text-brand-muted">{t("noCommitteeSessions")}</p>
           ) : (
-            committeeGroups.map(([groupKey, rows]) => (
-              <div
-                key={groupKey}
-                className="space-y-4 rounded-xl border border-brand-navy/15 bg-brand-cream/25 p-4 dark:border-white/10 dark:bg-white/5"
-              >
-                {rows.length > 1 ? (
-                  <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100 border-b border-brand-navy/10 dark:border-white/10 pb-2">
-                    {t("committeeSessionsGroupHeading", {
-                      chamber: rows[0]?.committee?.trim() || groupKey,
-                      count: rows.length,
-                    })}
-                  </p>
-                ) : null}
-                <div className="space-y-8">
-                  {rows.map((c) => (
-                    <CommitteeForm key={c.id} row={c} t={t} />
-                  ))}
-                </div>
-              </div>
+            committeeGroups.map(([, rows]) => (
+              <ChamberCommitteeCard key={rows.map((r) => r.id).join("-")} rows={rows} t={t} />
             ))
           )}
         </div>
@@ -163,14 +150,28 @@ function EventForm({ eventRow, t }: { eventRow: EventRow; t: ReturnType<typeof u
   );
 }
 
-function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof useTranslations> }) {
-  const [state, action, pending] = useActionState(updateCommitteeSessionAction, null as SmtFormState | null);
-  const suggestedCode = generateSixCharCommitteeCode(row.committee ?? "", row.id);
+function ChamberCommitteeCard({
+  rows,
+  t,
+}: {
+  rows: CommitteeRow[];
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const anchor = rows[0]!;
+  const second = rows[1];
+  const router = useRouter();
+  const [state, action, pending] = useActionState(updateChamberCommitteeProfileAction, null as SmtFormState | null);
+  const [addPending, startAdd] = useTransition();
+  const suggestedCode = generateSixCharCommitteeCode(anchor.committee ?? "", anchor.id);
   const supabase = createClient();
 
   const [uploadPending, setUploadPending] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
-  const [logoUrl, setLogoUrl] = useState(row.committee_logo_url ?? "");
+  const [addTopicError, setAddTopicError] = useState<string | null>(null);
+  const [logoUrl, setLogoUrl] = useState(anchor.committee_logo_url ?? "");
+
+  const roomCodeDefault = (anchor.room_code ?? anchor.committee_code ?? "").trim();
+  const ropDefault = (anchor.rop_document_url ?? "").trim();
 
   async function uploadCommitteeLogo(file: File) {
     setUploadError(null);
@@ -183,7 +184,7 @@ function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof use
       setUploadError(t("errorImageTooLarge"));
       return;
     }
-    if (!row.committee_code) {
+    if (!anchor.committee_code) {
       setUploadError(t("errorCommitteeCodeMissing"));
       return;
     }
@@ -194,7 +195,7 @@ function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof use
       const ext = file.name.split(".").pop()?.toLowerCase() || "png";
       const safeExt = /^[a-z0-9]+$/.test(ext) ? ext : "png";
 
-      const objectPath = `committees/${row.event_id}/${row.committee_code}/${Date.now()}.${safeExt}`;
+      const objectPath = `committees/${anchor.event_id}/${anchor.committee_code}/${Date.now()}.${safeExt}`;
 
       const { error: uploadErr } = await supabase.storage
         .from(bucketName)
@@ -212,12 +213,11 @@ function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof use
         throw new Error(t("errorPublicUrl"));
       }
 
-      // Persist immediately; apply to all topic rows for this committee in this event.
       const { error: updateErr } = await supabase
         .from("conferences")
         .update({ committee_logo_url: publicUrlData.publicUrl })
-        .eq("event_id", row.event_id)
-        .eq("committee_code", row.committee_code);
+        .eq("event_id", anchor.event_id)
+        .eq("committee_code", anchor.committee_code);
 
       if (updateErr) {
         throw new Error(updateErr.message);
@@ -232,53 +232,39 @@ function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof use
     }
   }
 
+  function handleAddTopic() {
+    setAddTopicError(null);
+    startAdd(async () => {
+      const res = await addChamberSecondTopicAction(anchor.id);
+      if (res.error) {
+        setAddTopicError(res.error);
+        return;
+      }
+      router.refresh();
+    });
+  }
+
   return (
-    <form action={action} className="border border-brand-navy/10 rounded-xl p-4 space-y-3 bg-brand-cream/20">
-      <input type="hidden" name="conference_id" value={row.id} />
-      <p className="text-xs font-mono text-brand-muted">{row.id.slice(0, 8)}…</p>
+    <form action={action} className="border border-brand-navy/10 rounded-xl p-4 space-y-3 bg-brand-cream/20 dark:bg-white/5">
+      <input type="hidden" name="anchor_conference_id" value={anchor.id} />
+
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">{t("sessionTitle")}</label>
-        <input
-          name="name"
-          required
-          minLength={2}
-          defaultValue={row.name}
-          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
-        />
-      </div>
-      <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">{t("chamberLabel")}</label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("committeeLabelShort")}</label>
         <input
           name="committee"
-          defaultValue={row.committee ?? ""}
+          required
+          defaultValue={anchor.committee ?? ""}
+          placeholder={t("committeeLabelPlaceholder")}
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         />
       </div>
+
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">{t("tagline")}</label>
-        <input
-          name="tagline"
-          defaultValue={row.tagline ?? ""}
-          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
-        />
-      </div>
-      <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">
-          {t("officialCommitteeName")}
-        </label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("officialCommitteeNameGrid")}</label>
         <input
           name="committee_full_name"
-          defaultValue={row.committee_full_name ?? ""}
+          defaultValue={anchor.committee_full_name ?? ""}
           placeholder={t("officialCommitteeNamePlaceholder")}
-          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
-        />
-      </div>
-      <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">{t("chairNames")}</label>
-        <input
-          name="chair_names"
-          defaultValue={row.chair_names ?? ""}
-          placeholder={t("chairNamesPlaceholder")}
           className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         />
       </div>
@@ -320,88 +306,85 @@ function CommitteeForm({ row, t }: { row: CommitteeRow; t: ReturnType<typeof use
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">
-          {t("crisisSlidesUrl")}
-        </label>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("topic1Label")}</label>
         <input
-          name="crisis_slides_url"
-          type="url"
-          defaultValue={row.crisis_slides_url ?? ""}
-          placeholder={t("crisisSlidesPlaceholder")}
-          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm font-mono"
+          name="topic_1"
+          required
+          minLength={2}
+          defaultValue={anchor.name}
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm"
         />
-        <p className="text-xs text-brand-muted mt-1">
-          {t("crisisSlidesHelpPrefix")} <span className="font-medium">{t("crisisSlidesLabel")}</span>{" "}
-          {t("crisisSlidesHelpSuffix")}
-        </p>
       </div>
 
-      <label className="flex cursor-pointer items-start gap-2 rounded-lg border border-brand-navy/15 bg-white/60 px-3 py-2.5 text-sm text-brand-navy">
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("topic2Label")}</label>
         <input
-          type="checkbox"
-          name="consultation_before_moderated_caucus"
-          value="on"
-          defaultChecked={row.consultation_before_moderated_caucus !== false}
-          className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-accent focus:ring-brand-accent"
+          name="topic_2"
+          minLength={2}
+          defaultValue={second?.name ?? ""}
+          disabled={!second}
+          placeholder={second ? t("topic2Placeholder") : t("topic2DisabledHint")}
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm disabled:opacity-60"
         />
-        <span>
-          <span className="font-medium">{t("competingMotionsTitle")}</span>
-          <span className="block text-xs text-brand-muted mt-1">
-            {t("competingMotionsHelpPrefix")} <span className="font-medium">{t("moderatedCaucus")}</span>{" "}
-            {t("competingMotionsHelpMiddle")} <span className="font-medium">{t("consultation")}</span>{" "}
-            {t("competingMotionsHelpSuffix")}
-          </span>
-        </span>
-      </label>
+        {!second ? (
+          <div className="mt-2 space-y-1">
+            <button
+              type="button"
+              disabled={addPending}
+              onClick={() => handleAddTopic()}
+              className="text-sm px-3 py-1.5 rounded-lg border border-brand-navy/20 text-brand-navy hover:bg-brand-cream disabled:opacity-50"
+            >
+              {addPending ? t("addingTopic") : t("addSecondTopic")}
+            </button>
+            {addTopicError ? (
+              <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded px-2 py-1">{addTopicError}</p>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("ropDocumentLink")}</label>
+        <input
+          name="rop_document_url"
+          type="url"
+          defaultValue={ropDefault}
+          placeholder={t("ropDocumentPlaceholder")}
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 text-sm font-mono"
+        />
+      </div>
+
+      <div>
+        <label className="block text-xs font-medium text-brand-muted mb-1">{t("roomCodeLabel")}</label>
+        <input
+          name="room_code"
+          required
+          minLength={6}
+          maxLength={6}
+          pattern="[A-Za-z0-9]{6}"
+          title={t("exactlySixLettersDigits")}
+          defaultValue={roomCodeDefault}
+          placeholder={t("committeeCodePlaceholder")}
+          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm tracking-widest"
+        />
+        <p className="text-xs text-brand-muted mt-1">
+          {t("roomCodeHelpPrefix")} <span className="font-mono text-brand-navy">{suggestedCode}</span>
+          {t("roomCodeHelpSuffix")}
+        </p>
+      </div>
 
       <div>
         <label className="block text-xs font-medium text-brand-muted mb-1">{t("procedureProfile")}</label>
         <select
           name="procedure_profile"
-          defaultValue={row.procedure_profile ?? "default"}
-          className="w-full rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy"
+          defaultValue={anchor.procedure_profile ?? "default"}
+          className="w-full rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy dark:bg-zinc-950 dark:text-zinc-100"
         >
           <option value="default">{t("procedureDefault")}</option>
           <option value="eu_parliament">{t("procedureEuParliament")}</option>
         </select>
       </div>
 
-      <label className="flex cursor-pointer items-start gap-2 rounded-lg border border-brand-navy/15 bg-white/60 px-3 py-2.5 text-sm text-brand-navy">
-        <input
-          type="checkbox"
-          name="eu_guided_workflow_enabled"
-          value="on"
-          defaultChecked={row.eu_guided_workflow_enabled ?? false}
-          className="mt-0.5 size-4 rounded border-brand-navy/25 text-brand-accent focus:ring-brand-accent"
-        />
-        <span>
-          <span className="font-medium">{t("euGuidedWorkflowChecks")}</span>
-          <span className="block text-xs text-brand-muted mt-1">
-            {t("euGuidedWorkflowHelp")}
-          </span>
-        </span>
-      </label>
-
-      <div>
-        <label className="block text-xs font-medium text-brand-muted mb-1">
-          {t("committeeRoomCodeSecondGate")}
-        </label>
-        <input
-          name="committee_code"
-          required
-          minLength={6}
-          maxLength={6}
-          pattern="[A-Za-z0-9]{6}"
-          title={t("exactlySixLettersDigits")}
-          defaultValue={row.committee_code ?? ""}
-          placeholder={t("committeeCodePlaceholder")}
-          className="w-full px-3 py-2 rounded-lg border border-brand-navy/15 font-mono text-sm tracking-widest"
-        />
-        <p className="text-xs text-brand-muted mt-1">
-          {t("committeeCodeHelpPrefix")}{" "}
-          <span className="font-mono text-brand-navy">{suggestedCode}</span>).
-        </p>
-      </div>
       {state?.error && (
         <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded px-2 py-1">{state.error}</p>
       )}

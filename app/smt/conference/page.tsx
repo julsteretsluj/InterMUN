@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SmtConferenceSettingsClient } from "./SmtConferenceSettingsClient";
+import { filterConferencesForSmtRoomCodes } from "@/lib/smt-conference-filters";
 import Link from "next/link";
 
 export default async function SmtConferencePage() {
@@ -23,11 +24,11 @@ export default async function SmtConferencePage() {
     eventRow = data;
   }
 
-  const { data: committees } = eventId
+  const { data: committeesRaw } = eventId
     ? await supabase
         .from("conferences")
         .select(
-          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, consultation_before_moderated_caucus, procedure_profile, eu_guided_workflow_enabled"
+          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, room_code, rop_document_url, consultation_before_moderated_caucus, procedure_profile, eu_guided_workflow_enabled"
         )
         .eq("event_id", eventId)
         .order("name", { ascending: true })
@@ -43,11 +44,15 @@ export default async function SmtConferencePage() {
           chair_names: string | null;
           committee_logo_url: string | null;
           crisis_slides_url: string | null;
+          room_code: string | null;
+          rop_document_url: string | null;
           consultation_before_moderated_caucus: boolean | null;
           procedure_profile: "default" | "eu_parliament" | null;
           eu_guided_workflow_enabled: boolean | null;
         }[],
       };
+
+  const committees = filterConferencesForSmtRoomCodes(committeesRaw ?? []);
 
   return (
     <div>

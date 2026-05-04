@@ -37,6 +37,8 @@ export interface Conference {
   committee_password_hash?: string | null;
   /** Google Slides URL for crisis committees (in-app embed). */
   crisis_slides_url?: string | null;
+  /** Optional URL to rules of procedure document or site. */
+  rop_document_url?: string | null;
   /** Third gate: require per-seat placard code from allocation_gate_codes. */
   allocation_code_gate_enabled?: boolean;
   /** Competing-motion order: consultation ranks above moderated caucus unless false. */
