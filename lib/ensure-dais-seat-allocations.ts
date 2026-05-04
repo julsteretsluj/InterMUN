@@ -12,19 +12,18 @@ const LEGACY_PARLIAMENTARIAN_TIER_LABELS = [
   "Parliamentarian (Advanced)",
 ] as const;
 
-async function normalizeParliamentarianTierAllocationLabels(
+/** Drop obsolete tier-suffixed parliamentarian seats so Multiset insert can seed exactly three plain "Parliamentarian" rows. */
+async function deleteLegacyParliamentarianTierAllocationRows(
   supabase: SupabaseClient,
   conferenceId: string,
   effectiveCommittee: string | null | undefined
 ): Promise<void> {
   if (committeeSessionGroupKey(effectiveCommittee) !== "SMT") return;
-  for (const old of LEGACY_PARLIAMENTARIAN_TIER_LABELS) {
-    await supabase
-      .from("allocations")
-      .update({ country: "Parliamentarian" })
-      .eq("conference_id", conferenceId)
-      .eq("country", old);
-  }
+  await supabase
+    .from("allocations")
+    .delete()
+    .eq("conference_id", conferenceId)
+    .in("country", [...LEGACY_PARLIAMENTARIAN_TIER_LABELS]);
 }
 
 async function reconcileLegacyDaisSeatLabels(
@@ -140,7 +139,7 @@ export async function ensureDaisSeatAllocations(
   }
 
   await reconcileLegacyDaisSeatLabels(supabase, conferenceId, effectiveCommittee);
-  await normalizeParliamentarianTierAllocationLabels(supabase, conferenceId, effectiveCommittee);
+  await deleteLegacyParliamentarianTierAllocationRows(supabase, conferenceId, effectiveCommittee);
   await removeDuplicateChairRowsWhenSecretariatTitlesExist(supabase, conferenceId);
 
   const labels = [...getDaisSeatLabelsForCommittee(effectiveCommittee)];
