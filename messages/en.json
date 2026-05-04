@@ -1675,6 +1675,7 @@
     "rosterHeading": "Roster · {heading}",
     "seatsSummary": "{count} seat(s).",
     "linkedDelegatesCannotBeDeleted": "Linked delegates cannot be deleted here.",
+    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}",
     "countryPosition": "Country / position",
     "placardCode": "Placard code",
     "assignedAccount": "Assigned account",

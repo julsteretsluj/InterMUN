@@ -105,6 +105,21 @@ export function AllocationMatrixManagerClient({
     [selectedConference]
   );
 
+  /** Three parliamentarian seats share the same DB label; show A/B/C in the matrix only. */
+  const smtParliamentarianSeatLabelByRowId = useMemo(() => {
+    if (!isSmtSecretariatSheet) return new Map<string, string>();
+    const letters = ["A", "B", "C"];
+    let i = 0;
+    const out = new Map<string, string>();
+    for (const r of rows) {
+      if (r.country.trim().toLowerCase() !== "parliamentarian") continue;
+      const seat = letters[i] ?? String(i + 1);
+      i += 1;
+      out.set(r.id, t("secretariatParliamentarianSeat", { seat }));
+    }
+    return out;
+  }, [isSmtSecretariatSheet, rows, t]);
+
   const daisQuickAddLabels = useMemo(
     () =>
       selectedConference
@@ -333,12 +348,19 @@ export function AllocationMatrixManagerClient({
                       <td className="px-3 py-2">
                         <form id={formId} onSubmit={onUpdate} className="m-0">
                           <input type="hidden" name="allocation_id" value={r.id} />
-                          <input
-                            name="country"
-                            defaultValue={r.country}
-                            required
-                            className="w-full min-w-[120px] px-2 py-1 rounded border border-brand-navy/15 text-sm"
-                          />
+                          {smtParliamentarianSeatLabelByRowId.has(r.id) ? (
+                            <>
+                              <input type="hidden" name="country" defaultValue={r.country} />
+                              <span className="font-medium text-brand-navy">{positionLabel}</span>
+                            </>
+                          ) : (
+                            <input
+                              name="country"
+                              defaultValue={r.country}
+                              required
+                              className="w-full min-w-[120px] px-2 py-1 rounded border border-brand-navy/15 text-sm"
+                            />
+                          )}
                         </form>
                       </td>
                       <td className="px-3 py-2">
