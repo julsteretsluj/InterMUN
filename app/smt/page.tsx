@@ -97,7 +97,7 @@ export default async function SmtOverviewPage({
 
   const groups = new Map<
     string,
-    { latestId: string; latestRow: Row; topicCount: number; topics: string[] }
+    { latestId: string; latestRow: Row; topicCount: number; topics: string[]; logoUrl: string | null }
   >();
 
   for (const r of rows) {
@@ -111,6 +111,7 @@ export default async function SmtOverviewPage({
         latestRow: r,
         topicCount: 1,
         topics: r.name?.trim() ? [r.name.trim()] : [],
+        logoUrl: r.committee_logo_url?.trim() || null,
       });
       continue;
     }
@@ -130,6 +131,7 @@ export default async function SmtOverviewPage({
         r.name?.trim() && !existing.topics.includes(r.name.trim())
           ? [...existing.topics, r.name.trim()]
           : existing.topics,
+      logoUrl: existing.logoUrl || r.committee_logo_url?.trim() || latestRow.committee_logo_url?.trim() || null,
     });
   }
 
@@ -198,9 +200,9 @@ export default async function SmtOverviewPage({
             href={`/smt/committees/${g.latestId}`}
             className="rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
           >
-            {g.latestRow.committee_logo_url ? (
+            {g.logoUrl ? (
               <img
-                src={g.latestRow.committee_logo_url}
+                src={g.logoUrl}
                 alt={t("committeeLogoAlt", {
                   name: g.latestRow.committee
                     ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
