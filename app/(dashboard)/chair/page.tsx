@@ -144,7 +144,11 @@ export default async function ChairOverviewPage({
           ))}
         </div>
         {activeTab === "overview" ? (
-          <ChairTopicTabsCard topics={debateBundle.debateTopicOptions} activeTopicId={debateBundle.debateConferenceId} />
+          <ChairTopicTabsCard
+            topics={debateBundle.debateTopicOptions}
+            activeTopicId={debateBundle.debateConferenceId}
+            committeeLabelRaw={debateBundle.committeeLabelRaw}
+          />
         ) : null}
         {activeTab === "guidance" ? (
           <>

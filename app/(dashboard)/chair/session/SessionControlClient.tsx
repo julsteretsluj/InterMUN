@@ -271,6 +271,7 @@ export function SessionControlClient({
   canonicalConferenceId: canonicalConferenceIdProp,
   rosterConferenceIds,
   debateTopicOptions,
+  committeeLabelRaw,
   activeSection = "all",
 }: {
   conferenceId: string;
@@ -282,6 +283,8 @@ export function SessionControlClient({
   /** Sibling topic rows: merged roster + roll scope. */
   rosterConferenceIds?: string[];
   debateTopicOptions?: { id: string; label: string }[];
+  /** Raw `conferences.committee` for the active chamber (topics nest under this label). */
+  committeeLabelRaw?: string | null;
   /** Default `"all"` keeps a single scroll (e.g. committee room). */
   activeSection?: SessionFloorSection;
 }) {
@@ -2756,6 +2759,7 @@ export function SessionControlClient({
               topics={debateTopicOptions ?? []}
               liveTopicId={floorConferenceId}
               pending={pending}
+              committeeLabelRaw={committeeLabelRaw}
               onSetLiveTopic={(topicId) => {
                 startTransition(async () => {
                   const r = await setActiveDebateTopicAction(topicId);

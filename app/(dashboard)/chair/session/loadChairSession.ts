@@ -10,6 +10,7 @@ export type ChairSessionConference = {
   canonicalConferenceId: string;
   rosterConferenceIds: string[];
   debateTopicOptions: { id: string; label: string }[];
+  committeeLabelRaw: string | null;
 };
 
 /**
@@ -50,5 +51,6 @@ export async function loadChairSessionConference(): Promise<ChairSessionConferen
     canonicalConferenceId: bundle.canonicalConferenceId,
     rosterConferenceIds: bundle.siblingConferenceIds,
     debateTopicOptions: bundle.debateTopicOptions,
+    committeeLabelRaw: bundle.committeeLabelRaw,
   };
 }

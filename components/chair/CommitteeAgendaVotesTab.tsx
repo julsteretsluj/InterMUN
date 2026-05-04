@@ -3,7 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLocale, useTranslations } from "next-intl";
-import { translateAgendaTopicLabel } from "@/lib/i18n/committee-topic-labels";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 import type { VoteItem } from "@/types/database";
 import { VotingPanel } from "@/components/voting/VotingPanel";
 import { ensureAgendaFloorVoteItem } from "@/lib/ensure-agenda-floor-vote-item";
@@ -25,15 +28,19 @@ export function CommitteeAgendaVotesTab({
   liveTopicId,
   pending,
   onSetLiveTopic,
+  committeeLabelRaw,
 }: {
   topics: Topic[];
   liveTopicId: string;
   pending: boolean;
   onSetLiveTopic: (topicId: string) => void;
+  /** Chamber label: agenda topics are scoped under this committee. */
+  committeeLabelRaw?: string | null;
 }) {
   const locale = useLocale();
   const t = useTranslations("sessionControlClient");
   const tTopics = useTranslations("agendaTopics");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
   const supabase = createClient();
   const [selectedId, setSelectedId] = useState(() => liveTopicId);
   const [loading, setLoading] = useState(false);
@@ -203,57 +210,67 @@ export function CommitteeAgendaVotesTab({
   const votingPanelTopicLabel =
     topics.find((x) => x.id === votingPanelTopicId)?.label ?? "";
 
+  const committeeTrim = committeeLabelRaw?.trim() ?? "";
+
   return (
     <div className="space-y-4">
       <p className="text-xs text-brand-muted max-w-2xl">{t("agendaTabHelp")}</p>
 
-      <div className="flex flex-col gap-2">
-        {topics.map((topic) => {
-          const isLive = topic.id === liveTopicId;
-          const isSelected = topic.id === selectedId;
-          return (
-            <div
-              key={topic.id}
-              className={[
-                "w-full min-w-0 rounded-xl border px-3 py-2.5 transition-colors",
-                isSelected
-                  ? "border-brand-accent/60 bg-brand-accent/15 ring-1 ring-brand-accent/35"
-                  : "border-white/15 bg-black/20 hover:bg-black/25",
-              ].join(" ")}
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  setSelectedId(topic.id);
-                  setVotingPanelTopicId(topic.id);
-                }}
-                className="w-full min-w-0 text-left"
-                aria-haspopup="dialog"
-                aria-expanded={votingPanelTopicId === topic.id}
+      <div className="overflow-hidden rounded-xl border border-white/15 bg-black/10">
+        {committeeTrim ? (
+          <div className="border-b border-white/10 bg-black/20 px-3 py-2.5">
+            <p className="font-display text-base font-semibold leading-snug text-brand-navy">
+              {translateCommitteeLabel(tCommitteeLabels, committeeTrim)}
+            </p>
+            <p className="mt-1 text-xs text-brand-muted">{t("guidedSelectAgendaTopic")}</p>
+          </div>
+        ) : null}
+        <ul className="divide-y divide-white/10">
+          {topics.map((topic) => {
+            const isLive = topic.id === liveTopicId;
+            const isSelected = topic.id === selectedId;
+            return (
+              <li
+                key={topic.id}
+                className={[
+                  "min-w-0 px-3 py-2.5 transition-colors",
+                  isSelected ? "bg-brand-accent/12 ring-inset ring-1 ring-brand-accent/35" : "hover:bg-black/15",
+                ].join(" ")}
               >
-                <span className="text-sm font-medium text-brand-navy break-words">
-                  {translateAgendaTopicLabel(tTopics, topic.label, locale)}
-                </span>
-                <span className="mt-1 flex flex-wrap items-center gap-1.5">
-                  {isLive ? (
-                    <span className="inline-flex rounded-md border border-brand-accent/40 bg-brand-accent/20 px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-navy">
-                      {t("agendaLiveBadge")}
-                    </span>
-                  ) : null}
-                  <span className="text-[0.65rem] text-brand-muted">{t("agendaOpenVotingPanel")}</span>
-                </span>
-              </button>
-              <button
-                type="button"
-                disabled={pending || isLive}
-                onClick={() => onSetLiveTopic(topic.id)}
-                className="mt-2 w-full rounded-lg border border-white/20 bg-black/30 px-2 py-1.5 text-xs font-medium text-brand-navy hover:bg-black/40 disabled:opacity-50"
-              >
-                {t("agendaSetLive")}
-              </button>
-            </div>
-          );
-        })}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedId(topic.id);
+                    setVotingPanelTopicId(topic.id);
+                  }}
+                  className="w-full min-w-0 text-left"
+                  aria-haspopup="dialog"
+                  aria-expanded={votingPanelTopicId === topic.id}
+                >
+                  <span className="text-sm font-medium text-brand-navy break-words">
+                    {translateAgendaTopicLabel(tTopics, topic.label, locale)}
+                  </span>
+                  <span className="mt-1 flex flex-wrap items-center gap-1.5">
+                    {isLive ? (
+                      <span className="inline-flex rounded-md border border-brand-accent/40 bg-brand-accent/20 px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-navy">
+                        {t("agendaLiveBadge")}
+                      </span>
+                    ) : null}
+                    <span className="text-[0.65rem] text-brand-muted">{t("agendaOpenVotingPanel")}</span>
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  disabled={pending || isLive}
+                  onClick={() => onSetLiveTopic(topic.id)}
+                  className="mt-2 w-full rounded-lg border border-white/20 bg-black/30 px-2 py-1.5 text-xs font-medium text-brand-navy hover:bg-black/40 disabled:opacity-50"
+                >
+                  {t("agendaSetLive")}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
 
       <div className="rounded-xl border border-white/15 bg-black/20 p-3 space-y-3">
