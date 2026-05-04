@@ -47,6 +47,7 @@ function daisFromChairNamesField(raw: string | null | undefined): DaisSeat[] | n
 
 function daisFromChairAllocations(
   allocationRows: {
+    id: string;
     country: string | null;
     user_id: string | null;
     display_name_override: string | null;
@@ -69,6 +70,39 @@ function daisFromChairAllocations(
     const override = String(row.display_name_override ?? "").trim();
     return override || p?.name?.trim() || null;
   }
+  const lower = (s: string | null | undefined) => String(s ?? "").trim().toLowerCase();
+
+  const labels = [...getDaisSeatLabelsForCommittee(committee)];
+  const sortedRows = [...allocationRows].sort((a, b) => String(a.id).localeCompare(String(b.id)));
+
+  const planHasDuplicateLabel =
+    new Set(labels.map((l) => lower(l))).size < labels.length;
+
+  if (planHasDuplicateLabel) {
+    const used = new Set<string>();
+    const pickRow = (label: string) => {
+      const k = lower(label);
+      for (const r of sortedRows) {
+        if (lower(r.country) !== k) continue;
+        if (used.has(r.id)) continue;
+        used.add(r.id);
+        return r;
+      }
+      return undefined;
+    };
+    const hasAny = labels.some((label) => sortedRows.some((r) => lower(r.country) === lower(label)));
+    if (!hasAny) return null;
+    return labels.map((label) => {
+      const row = pickRow(label);
+      return {
+        title: label,
+        name: nameFromRow(row),
+        showGavel: true,
+        profileId: row?.user_id ?? null,
+      };
+    });
+  }
+
   const byLabel = new Map<
     string,
     {
@@ -79,16 +113,15 @@ function daisFromChairAllocations(
     }
   >();
   for (const r of allocationRows) {
-    const k = String(r.country ?? "").trim().toLowerCase();
+    const k = lower(r.country);
     if (!byLabel.has(k)) byLabel.set(k, r);
   }
 
-  const labels = [...getDaisSeatLabelsForCommittee(committee)];
-  const hasAny = labels.some((label) => byLabel.has(label.trim().toLowerCase()));
+  const hasAny = labels.some((label) => byLabel.has(lower(label)));
   if (!hasAny) return null;
 
   return labels.map((label) => {
-    const row = byLabel.get(label.trim().toLowerCase());
+    const row = byLabel.get(lower(label));
     return {
       title: label,
       name: nameFromRow(row),
@@ -177,6 +210,7 @@ export async function loadCommitteeRoomPayload(
 
   let dais = daisFromChairAllocations(
     rows as {
+      id: string;
       country: string | null;
       user_id: string | null;
       display_name_override: string | null;

@@ -6,6 +6,27 @@ import {
 } from "@/lib/dais-seat-plan";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 
+const LEGACY_PARLIAMENTARIAN_TIER_LABELS = [
+  "Parliamentarian (Beginner)",
+  "Parliamentarian (Intermediate)",
+  "Parliamentarian (Advanced)",
+] as const;
+
+async function normalizeParliamentarianTierAllocationLabels(
+  supabase: SupabaseClient,
+  conferenceId: string,
+  effectiveCommittee: string | null | undefined
+): Promise<void> {
+  if (committeeSessionGroupKey(effectiveCommittee) !== "SMT") return;
+  for (const old of LEGACY_PARLIAMENTARIAN_TIER_LABELS) {
+    await supabase
+      .from("allocations")
+      .update({ country: "Parliamentarian" })
+      .eq("conference_id", conferenceId)
+      .eq("country", old);
+  }
+}
+
 async function reconcileLegacyDaisSeatLabels(
   supabase: SupabaseClient,
   conferenceId: string,
@@ -119,6 +140,7 @@ export async function ensureDaisSeatAllocations(
   }
 
   await reconcileLegacyDaisSeatLabels(supabase, conferenceId, effectiveCommittee);
+  await normalizeParliamentarianTierAllocationLabels(supabase, conferenceId, effectiveCommittee);
   await removeDuplicateChairRowsWhenSecretariatTitlesExist(supabase, conferenceId);
 
   const labels = [...getDaisSeatLabelsForCommittee(effectiveCommittee)];
@@ -127,16 +149,27 @@ export async function ensureDaisSeatAllocations(
     .select("country")
     .eq("conference_id", conferenceId);
 
-  const existingNorm = new Set(
-    (existing ?? []).map((r) => String(r.country ?? "").trim().toLowerCase())
-  );
+  const lower = (s: string | null | undefined) => String(s ?? "").trim().toLowerCase();
+  const canonicalFor = (n: string) => labels.find((l) => lower(l) === n) ?? n;
+
+  const desiredCounts = new Map<string, number>();
+  for (const label of labels) {
+    const n = lower(label);
+    desiredCounts.set(n, (desiredCounts.get(n) ?? 0) + 1);
+  }
+  const existingCounts = new Map<string, number>();
+  for (const r of existing ?? []) {
+    const n = lower(r.country);
+    existingCounts.set(n, (existingCounts.get(n) ?? 0) + 1);
+  }
 
   const inserts: { conference_id: string; country: string; user_id: null }[] = [];
-  for (const label of labels) {
-    const n = label.trim().toLowerCase();
-    if (!existingNorm.has(n)) {
-      inserts.push({ conference_id: conferenceId, country: label, user_id: null });
-      existingNorm.add(n);
+  for (const [n, want] of desiredCounts) {
+    const have = existingCounts.get(n) ?? 0;
+    const need = Math.max(0, want - have);
+    const country = canonicalFor(n);
+    for (let i = 0; i < need; i++) {
+      inserts.push({ conference_id: conferenceId, country, user_id: null });
     }
   }
   if (inserts.length > 0) {

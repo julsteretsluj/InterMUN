@@ -6,8 +6,6 @@ export type SeamunParliamentarianRow = {
   role: "Parliamentarian";
   name: string;
   email: string | null;
-  /** Right column on matrix: which difficulty tier this parliamentarian covers */
-  committeeOverviewTier: "Beginner" | "Intermediate" | "Advanced";
 };
 
 export type SeamunLeadershipRow =
@@ -23,14 +21,14 @@ export const SEAMUN_I_2027_SECRETARIAT_CONTACTS = {
 
 /**
  * SMT / secretariat sheet row labels (`allocations.country`) — matches OVERVIEW order:
- * leadership, operations, media. Parliamentarian rows are disambiguated by tier.
+ * leadership, operations, media. Three parliamentarian seats use the same role label.
  */
 export const SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS = [
   "Secretary General",
   "Deputy Secretary General",
-  "Parliamentarian (Beginner)",
-  "Parliamentarian (Intermediate)",
-  "Parliamentarian (Advanced)",
+  "Parliamentarian",
+  "Parliamentarian",
+  "Parliamentarian",
   "Head of Logistics",
   "Head of Finance",
   "Head of Community Outreach",
@@ -49,19 +47,16 @@ export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
     role: "Parliamentarian",
     name: "Sam S.",
     email: "samridh061009@gmail.com",
-    committeeOverviewTier: "Beginner",
   },
   {
     role: "Parliamentarian",
     name: "Sparkle W.",
     email: "sparshikaw05@gmail.com",
-    committeeOverviewTier: "Intermediate",
   },
   {
     role: "Parliamentarian",
     name: "Venice K.",
     email: "venicekawisara25@gmail.com",
-    committeeOverviewTier: "Advanced",
   },
 ];
 

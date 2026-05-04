@@ -88,13 +88,7 @@ export async function Seamun2027SecretariatOverviewRoster() {
                     <EmailCell email={row.email} />
                   </td>
                   <td className="px-3 py-2.5 text-brand-navy/90">
-                    {row.role === "Parliamentarian" ? (
-                      <span className="inline-flex rounded-md border border-brand-navy/15 bg-brand-cream/40 px-2 py-0.5 text-xs font-medium text-brand-navy">
-                        {row.committeeOverviewTier}
-                      </span>
-                    ) : (
-                      <span className="text-brand-muted">—</span>
-                    )}
+                    <span className="text-brand-muted">—</span>
                   </td>
                 </tr>
               ))}
