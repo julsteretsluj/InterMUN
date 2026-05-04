@@ -4,6 +4,10 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import {
+  getCommitteeAwardScope,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
 import { getActiveEventId, setActiveEventId } from "@/lib/active-event-cookie";
 import { setAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
@@ -43,7 +47,17 @@ export async function verifyAllocationCodeGate(
   }
 
   const ctx = await getConferenceForDashboard({ role: profile?.role });
-  if (!ctx || ctx.id !== conferenceId) {
+  if (!ctx) {
+    return {
+      error:
+        "Your committee context does not match. Re-enter your conference and committee codes if needed.",
+    };
+  }
+  const [ctxCanon, formCanon] = await Promise.all([
+    resolveCanonicalCommitteeConferenceId(supabase, ctx.id),
+    resolveCanonicalCommitteeConferenceId(supabase, conferenceId),
+  ]);
+  if (ctxCanon !== formCanon) {
     return {
       error:
         "Your committee context does not match. Re-enter your conference and committee codes if needed.",
@@ -69,7 +83,7 @@ export async function verifyAllocationCodeGate(
   }
 
   const { error } = await supabase.rpc("claim_allocation_code_gate", {
-    p_conference_id: conferenceId,
+    p_conference_id: formCanon,
     p_code: code,
   });
 
@@ -77,8 +91,8 @@ export async function verifyAllocationCodeGate(
     return { error: error.message || "Verification failed." };
   }
 
-  await setActiveConferenceContext(supabase, conferenceId);
-  await setAllocationCodeVerifiedConferenceId(conferenceId);
+  await setActiveConferenceContext(supabase, formCanon);
+  await setAllocationCodeVerifiedConferenceId(formCanon);
   redirect(nextPath);
 }
 
@@ -112,11 +126,13 @@ export async function setAllocationCodeGateEnabledAction(
     return { error: "Only chairs, SMT, and admins can change this." };
   }
 
+  const scope = await getCommitteeAwardScope(supabase, conferenceId);
+
   if (r === "chair" && !canChairSwitchAnyCommitteeForTesting(user.email)) {
     const { data: seat } = await supabase
       .from("allocations")
       .select("id")
-      .eq("conference_id", conferenceId)
+      .in("conference_id", scope.siblingConferenceIds)
       .eq("user_id", user.id)
       .maybeSingle();
     if (!seat) {
@@ -125,11 +141,19 @@ export async function setAllocationCodeGateEnabledAction(
   }
 
   const { error } = await supabase.rpc("set_allocation_code_gate_enabled", {
-    p_conference_id: conferenceId,
+    p_conference_id: scope.canonicalConferenceId,
     p_enabled: enabled,
   });
 
   if (error) return { error: error.message };
+
+  const siblingOthers = scope.siblingConferenceIds.filter((id) => id !== scope.canonicalConferenceId);
+  if (siblingOthers.length > 0) {
+    await supabase
+      .from("conferences")
+      .update({ allocation_code_gate_enabled: enabled })
+      .in("id", siblingOthers);
+  }
   revalidatePath("/chair/allocation-passwords");
   revalidatePath("/smt/allocation-passwords");
   revalidatePath("/delegate");

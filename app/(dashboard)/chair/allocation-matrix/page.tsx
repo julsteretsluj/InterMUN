@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { MunPageShell } from "@/components/MunPageShell";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import {
   approveAllocationSignupRequestAction,
   rejectAllocationSignupRequestAction,
@@ -218,10 +219,12 @@ export default async function ChairAllocationMatrixPage() {
     redirect("/room-gate?next=%2Fchair%2Fallocation-matrix");
   }
 
+  const allocationsConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, activeConf.id);
+
   const { data: allocData } = await supabase
     .from("allocations")
     .select("id, conference_id, country, user_id")
-    .eq("conference_id", activeConf.id)
+    .eq("conference_id", allocationsConferenceId)
     .order("country", { ascending: true });
 
   const rawRows = (allocData ?? []) as Omit<
@@ -358,7 +361,7 @@ export default async function ChairAllocationMatrixPage() {
   const { data: rawRequests } = await supabase
     .from("allocation_signup_requests")
     .select("id, requested_by, status, allocations(country), profiles(name, username)")
-    .eq("conference_id", activeConf.id)
+    .eq("conference_id", allocationsConferenceId)
     .eq("status", "pending")
     .order("created_at", { ascending: true });
   const pendingRequests = (rawRequests ?? []) as SignupRequestRow[];
@@ -417,7 +420,7 @@ export default async function ChairAllocationMatrixPage() {
       </div>
 
       <ChairDelegateApprovalByEmailForm
-        conferenceId={activeConf.id}
+        conferenceId={allocationsConferenceId}
         allocationOptions={rows.map((r) => ({ id: r.id, country: r.country, user_id: r.user_id }))}
       />
 

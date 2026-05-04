@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import { randomBytes } from "crypto";
 
 function randomCode(): string {
@@ -35,7 +36,15 @@ async function assertChairOwnsConference(
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   if (role !== "chair") return { ok: true };
   const active = await getConferenceForDashboard({ role });
-  if (!active || active.id !== conferenceId) {
+  if (!active) {
+    return { ok: false, error: "You can only manage codes for your committee." };
+  }
+  const supabase = await createClient();
+  const [activeCanon, topicCanon] = await Promise.all([
+    resolveCanonicalCommitteeConferenceId(supabase, active.id),
+    resolveCanonicalCommitteeConferenceId(supabase, conferenceId),
+  ]);
+  if (activeCanon !== topicCanon) {
     return { ok: false, error: "You can only manage codes for your committee." };
   }
   return { ok: true };
@@ -94,10 +103,12 @@ export async function generateMissingAllocationCodes(conferenceId: string) {
 
   const supabase = auth.supabase;
 
+  const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
+
   const { data: allocs, error: aErr } = await supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", conferenceId);
+    .eq("conference_id", canonicalId);
 
   if (aErr || !allocs?.length) {
     return { error: aErr?.message ?? "No allocations for this conference." };

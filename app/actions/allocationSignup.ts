@@ -5,6 +5,10 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import nodemailer from "nodemailer";
 import { getTranslations } from "next-intl/server";
+import {
+  getCommitteeAwardScope,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
 
 type ActionState = { error?: string; success?: boolean };
 
@@ -134,14 +138,17 @@ export async function createAllocationSignupRequestAction(
     return { error: t("onlyDelegateOrChair") };
   }
 
+  const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
+
   const { data: target } = await supabase
     .from("allocations")
     .select("id, conference_id, country, user_id")
     .eq("id", allocationId)
-    .eq("conference_id", conferenceId)
     .maybeSingle();
 
   if (!target) return { error: t("allocationNotFound") };
+  const targetCanon = await resolveCanonicalCommitteeConferenceId(supabase, target.conference_id);
+  if (targetCanon !== canonicalId) return { error: t("allocationNotFound") };
   if (target.user_id && target.user_id !== user.id) {
     return { error: t("allocationAlreadyAssigned") };
   }
@@ -150,7 +157,7 @@ export async function createAllocationSignupRequestAction(
   const { data: existingPending } = await supabase
     .from("allocation_signup_requests")
     .select("id")
-    .eq("conference_id", conferenceId)
+    .eq("conference_id", canonicalId)
     .eq("requested_by", user.id)
     .eq("status", "pending")
     .maybeSingle();
@@ -169,7 +176,7 @@ export async function createAllocationSignupRequestAction(
     if (updErr) return { error: updErr.message };
   } else {
     const { error: insErr } = await supabase.from("allocation_signup_requests").insert({
-      conference_id: conferenceId,
+      conference_id: canonicalId,
       allocation_id: allocationId,
       requested_by: user.id,
       status: "pending",
@@ -183,9 +190,9 @@ export async function createAllocationSignupRequestAction(
       const { data: conf } = await admin
         .from("conferences")
         .select("name, committee")
-        .eq("id", conferenceId)
+        .eq("id", canonicalId)
         .maybeSingle();
-      const conferenceLabel = [conf?.name?.trim(), conf?.committee?.trim()].filter(Boolean).join(" — ") || conferenceId;
+      const conferenceLabel = [conf?.name?.trim(), conf?.committee?.trim()].filter(Boolean).join(" — ") || canonicalId;
 
       const { data: requesterProfile } = await admin
         .from("profiles")
@@ -203,7 +210,7 @@ export async function createAllocationSignupRequestAction(
       const { data: seatRows } = await admin
         .from("allocations")
         .select("user_id")
-        .eq("conference_id", conferenceId)
+        .eq("conference_id", canonicalId)
         .not("user_id", "is", null);
       const seatUserIds = [
         ...new Set((seatRows ?? []).map((row) => row.user_id).filter((id): id is string => Boolean(id))),
@@ -269,10 +276,12 @@ export async function approveAllocationSignupRequestAction(
   if (!req) return;
   if (req.status !== "pending") return;
 
+  const scope = await getCommitteeAwardScope(supabase, req.conference_id);
+
   const { data: membership } = await supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", req.conference_id)
+    .in("conference_id", scope.siblingConferenceIds)
     .eq("user_id", user.id)
     .limit(1)
     .maybeSingle();
@@ -282,17 +291,18 @@ export async function approveAllocationSignupRequestAction(
 
   const { data: target } = await supabase
     .from("allocations")
-    .select("id, country, user_id")
+    .select("id, country, user_id, conference_id")
     .eq("id", req.allocation_id)
-    .eq("conference_id", req.conference_id)
     .maybeSingle();
   if (!target) return;
+  const allocCanon = await resolveCanonicalCommitteeConferenceId(supabase, target.conference_id);
+  if (allocCanon !== scope.canonicalConferenceId) return;
   if (target.user_id && target.user_id !== req.requested_by) return;
 
   const { error: clearErr } = await supabase
     .from("allocations")
     .update({ user_id: null })
-    .eq("conference_id", req.conference_id)
+    .eq("conference_id", scope.canonicalConferenceId)
     .eq("user_id", req.requested_by)
     .neq("id", req.allocation_id);
   if (clearErr) return;
@@ -302,7 +312,7 @@ export async function approveAllocationSignupRequestAction(
       .from("allocations")
       .update({ user_id: req.requested_by })
       .eq("id", req.allocation_id)
-      .eq("conference_id", req.conference_id)
+      .eq("conference_id", scope.canonicalConferenceId)
       .is("user_id", null);
     if (setErr) return;
   }
@@ -334,7 +344,7 @@ export async function approveAllocationSignupRequestAction(
       updated_at: now,
       note: "Superseded by approved allocation request.",
     })
-    .eq("conference_id", req.conference_id)
+    .eq("conference_id", scope.canonicalConferenceId)
     .eq("requested_by", req.requested_by)
     .eq("status", "pending")
     .neq("id", req.id);
@@ -396,10 +406,12 @@ export async function rejectAllocationSignupRequestAction(
   if (!req) return;
   if (req.status !== "pending") return;
 
+  const scope = await getCommitteeAwardScope(supabase, req.conference_id);
+
   const { data: membership } = await supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", req.conference_id)
+    .in("conference_id", scope.siblingConferenceIds)
     .eq("user_id", user.id)
     .limit(1)
     .maybeSingle();
@@ -439,8 +451,10 @@ export async function chairAssignDelegateByEmailAction(
   const { supabase, user } = await getAuthedProfile();
   if (!user) return { error: t("mustBeSignedIn") };
 
+  const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
+
   const { error } = await supabase.rpc("chair_assign_delegate_by_email", {
-    p_conference_id: conferenceId,
+    p_conference_id: canonicalId,
     p_allocation_id: allocationId,
     p_email: email,
   });

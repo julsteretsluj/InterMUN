@@ -6,6 +6,7 @@ import { setActiveConferenceContext } from "@/lib/set-active-conference-context"
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { createAllocationSignupRequestAction } from "@/app/actions/allocationSignup";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 
 type Params = {
   conference?: string;
@@ -44,6 +45,7 @@ export default async function AllocationSignupPage({
   }
 
   const supabase = await createClient();
+  const canonicalConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -57,13 +59,13 @@ export default async function AllocationSignupPage({
     const { data: rows } = await supabase
       .from("allocations")
       .select("id, country, user_id")
-      .eq("conference_id", conferenceId)
+      .eq("conference_id", canonicalConferenceId)
       .order("country", { ascending: true });
 
     const allocations = rows ?? [];
     const assignedToSelf = allocations.find((row) => row.user_id === user.id) ?? null;
     if (assignedToSelf) {
-      await setActiveConferenceContext(supabase, conferenceId);
+      await setActiveConferenceContext(supabase, canonicalConferenceId);
       await clearVerifiedConference();
       await clearAllocationCodeVerification();
       redirect(
@@ -133,7 +135,7 @@ export default async function AllocationSignupPage({
     .from("allocations")
     .select("id, conference_id, country, user_id")
     .eq("id", allocationId)
-    .eq("conference_id", conferenceId)
+    .eq("conference_id", canonicalConferenceId)
     .maybeSingle();
 
   if (!targetAllocation) {
@@ -167,7 +169,7 @@ export default async function AllocationSignupPage({
   }
 
   if (targetAllocation.user_id === user.id) {
-    await setActiveConferenceContext(supabase, conferenceId);
+    await setActiveConferenceContext(supabase, canonicalConferenceId);
     await clearVerifiedConference();
     await clearAllocationCodeVerification();
     redirect(

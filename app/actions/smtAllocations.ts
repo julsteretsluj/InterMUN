@@ -6,6 +6,7 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import { parseAllocationCsv } from "@/lib/parse-allocation-csv";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import { getTranslations } from "next-intl/server";
 
 const MAX_COUNTRY_LEN = 500;
@@ -74,9 +75,11 @@ export async function smtAddAllocationRow(formData: FormData) {
   const auth = await requireSmt(conferenceId);
   if (!auth.ok) return { error: auth.error };
 
+  const canonicalId = await resolveCanonicalCommitteeConferenceId(auth.supabase, conferenceId);
+
   const { data: insertRow, error: insErr } = await auth.supabase
     .from("allocations")
-    .insert({ conference_id: conferenceId, country, user_id: null })
+    .insert({ conference_id: canonicalId, country, user_id: null })
     .select("id")
     .single();
 
@@ -99,11 +102,11 @@ export async function smtAddAllocationRow(formData: FormData) {
   const { data: confMeta } = await auth.supabase
     .from("conferences")
     .select("committee, committee_code")
-    .eq("id", conferenceId)
+    .eq("id", canonicalId)
     .maybeSingle();
   await ensureDaisSeatAllocations(
     auth.supabase,
-    conferenceId,
+    canonicalId,
     confMeta ? committeeHintForSmtDaisPlan(confMeta) : null
   );
   revalidateAllocationPaths();
@@ -204,6 +207,8 @@ export async function smtImportAllocationsCsv(formData: FormData) {
   const auth = await requireSmt(conferenceId);
   if (!auth.ok) return { error: auth.error };
 
+  const canonicalId = await resolveCanonicalCommitteeConferenceId(auth.supabase, conferenceId);
+
   let rows: ReturnType<typeof parseAllocationCsv>;
   try {
     rows = parseAllocationCsv(csvText);
@@ -230,7 +235,7 @@ export async function smtImportAllocationsCsv(formData: FormData) {
     const { data: toRemove, error: listErr } = await auth.supabase
       .from("allocations")
       .select("id")
-      .eq("conference_id", conferenceId)
+      .eq("conference_id", canonicalId)
       .is("user_id", null);
 
     if (listErr) return { error: listErr.message };
@@ -248,7 +253,7 @@ export async function smtImportAllocationsCsv(formData: FormData) {
   const { data: existingAfter } = await auth.supabase
     .from("allocations")
     .select("country")
-    .eq("conference_id", conferenceId);
+    .eq("conference_id", canonicalId);
 
   const existingLower = new Set(
     (existingAfter ?? []).map((e) => e.country.trim().toLowerCase())
@@ -273,7 +278,7 @@ export async function smtImportAllocationsCsv(formData: FormData) {
 
     const { data: ins, error: insErr } = await auth.supabase
       .from("allocations")
-      .insert({ conference_id: conferenceId, country: r.country.trim(), user_id: null })
+      .insert({ conference_id: canonicalId, country: r.country.trim(), user_id: null })
       .select("id")
       .single();
 
@@ -300,11 +305,11 @@ export async function smtImportAllocationsCsv(formData: FormData) {
   const { data: confMeta } = await auth.supabase
     .from("conferences")
     .select("committee, committee_code")
-    .eq("id", conferenceId)
+    .eq("id", canonicalId)
     .maybeSingle();
   await ensureDaisSeatAllocations(
     auth.supabase,
-    conferenceId,
+    canonicalId,
     confMeta ? committeeHintForSmtDaisPlan(confMeta) : null
   );
   revalidateAllocationPaths();

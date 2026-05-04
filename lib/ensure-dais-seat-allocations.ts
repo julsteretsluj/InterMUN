@@ -5,6 +5,7 @@ import {
   LEGACY_DAIS_RENAMES,
 } from "@/lib/dais-seat-plan";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 
 const LEGACY_PARLIAMENTARIAN_TIER_LABELS = [
   "Parliamentarian (Beginner)",
@@ -127,6 +128,7 @@ export async function ensureDaisSeatAllocations(
   conferenceId: string,
   committee?: string | null
 ): Promise<void> {
+  conferenceId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
   let effectiveCommittee = committee ?? null;
   if (committeeSessionGroupKey(effectiveCommittee) !== "SMT") {
     const { data: conf } = await supabase

@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveConferenceId, clearActiveConference } from "@/lib/active-conference-cookie";
 import { getActiveEventId, clearActiveEvent } from "@/lib/active-event-cookie";
 import { allowImplicitLatestConference } from "@/lib/roles";
+import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 
 export type ActiveConferenceRow = {
   id: string;
@@ -99,14 +100,21 @@ export async function getConferenceForDashboard(options: {
       const distinctIds = [
         ...new Set((allocRows ?? []).map((r) => r.conference_id).filter(Boolean)),
       ] as string[];
-      if (distinctIds.length === 1) {
+      const canonicalIds = [
+        ...new Set(
+          await Promise.all(
+            distinctIds.map((id) => resolveCanonicalCommitteeConferenceId(supabase, id))
+          )
+        ),
+      ];
+      if (canonicalIds.length === 1) {
         const { data: conf } = await supabase
           .from("conferences")
           .select(
             "id, event_id, name, committee, tagline, committee_password_hash, room_code, committee_code, crisis_slides_url, allocation_code_gate_enabled, consultation_before_moderated_caucus"
             + ", procedure_profile, eu_guided_workflow_enabled"
           )
-          .eq("id", distinctIds[0])
+          .eq("id", canonicalIds[0])
           .maybeSingle();
         const confRow = asActiveConferenceRow(conf);
         if (confRow) return confRow;

@@ -7,6 +7,11 @@ import { DelegateCountdownCard } from "@/components/delegate/DelegateCountdownCa
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import {
+  SEAMUN_I_2027_DELEGATE_CHAIR_CONTACTS,
+  seamunChairContactMatchesCommittee,
+} from "@/lib/seamun-delegate-chair-contacts";
+import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
 import { getTranslations } from "next-intl/server";
 
 export default async function DelegateDashboardPage({
@@ -37,9 +42,15 @@ export default async function DelegateDashboardPage({
     .maybeSingle();
   const { data: conf } = await supabase
     .from("conferences")
-    .select("committee, tagline, name")
+    .select("committee, tagline, name, event_id")
     .eq("id", conferenceId)
     .maybeSingle();
+
+  const { data: eventRow } = conf?.event_id
+    ? await supabase.from("conference_events").select("event_code").eq("id", conf.event_id).maybeSingle()
+    : { data: null as { event_code: string } | null };
+  const showChairEmailsTab =
+    (eventRow?.event_code ?? "").trim().toUpperCase() === SEAMUN_I_2027_EVENT_CODE;
   const line = [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || tc("committee");
   const countryLabel = myAllocation?.country?.trim() || profile?.country?.trim() || tc("yourCountry");
   const countryFlag = flagEmojiForCountryName(countryLabel);
@@ -54,6 +65,7 @@ export default async function DelegateDashboardPage({
     { href: "/guides", key: "guides" },
     { href: "/running-notes", key: "running" },
     { href: "/official-links", key: "officialLinks" },
+    ...(showChairEmailsTab ? ([{ href: "/delegate?tab=chairs", key: "chairEmails" }] as const) : []),
     { href: "/delegate/chair-feedback", key: "chairFeedback" },
     { href: "/voting", key: "voting" },
     { href: "/documents", key: "archive" },
@@ -75,8 +87,10 @@ export default async function DelegateDashboardPage({
     { id: "overview", label: td("tabs.overview") },
     { id: "checklist", label: td("tabs.checklist") },
     { id: "jump", label: td("tabs.jump") },
-  ] as const;
-  const activeTab = tab === "checklist" || tab === "jump" ? tab : "overview";
+    ...(showChairEmailsTab ? ([{ id: "chairs", label: td("tabs.chairEmails") }] as const) : []),
+  ];
+  const validTabs = new Set(["overview", "checklist", "jump", ...(showChairEmailsTab ? ["chairs"] : [])]);
+  const activeTab = tab && validTabs.has(tab) ? tab : "overview";
 
   return (
     <MunPageShell title={tp("delegateDashboard")}>
@@ -94,7 +108,7 @@ export default async function DelegateDashboardPage({
         <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={td("tabs.ariaLabel")}>
           {dashboardTabs.map((tabItem) => (
             <Link
-              href={tabItem.id === "overview" ? "/delegate" : `/delegate?tab=${tabItem.id}`}
+              href={tabItem.id === "overview" ? "/delegate" : `/delegate?tab=${encodeURIComponent(tabItem.id)}`}
               key={tabItem.id}
               role="tab"
               aria-selected={activeTab === tabItem.id}
@@ -127,6 +141,61 @@ export default async function DelegateDashboardPage({
             ))}
           </ul>
         </div>
+        ) : null}
+        {activeTab === "chairs" && showChairEmailsTab ? (
+          <div className="space-y-3">
+            <p className="text-sm text-brand-muted max-w-2xl">{td("chairContacts.intro")}</p>
+            <div className="overflow-x-auto rounded-xl border border-brand-navy/10 bg-brand-paper dark:border-zinc-700 dark:bg-zinc-900/40">
+              <table className="w-full min-w-[20rem] text-left text-sm">
+                <thead>
+                  <tr className="border-b border-brand-navy/10 bg-brand-cream/60 dark:border-zinc-700 dark:bg-zinc-800/80">
+                    <th className="px-3 py-2 font-semibold text-brand-navy dark:text-zinc-100">
+                      {td("chairContacts.committeeColumn")}
+                    </th>
+                    <th className="px-3 py-2 font-semibold text-brand-navy dark:text-zinc-100">
+                      {td("chairContacts.emailColumn")}
+                    </th>
+                    <th className="px-3 py-2 w-28 font-semibold text-brand-navy dark:text-zinc-100" />
+                  </tr>
+                </thead>
+                <tbody>
+                  {SEAMUN_I_2027_DELEGATE_CHAIR_CONTACTS.map((row) => {
+                    const isYours = seamunChairContactMatchesCommittee(row, conf?.committee ?? null);
+                    return (
+                      <tr
+                        key={row.email}
+                        className={`border-b border-brand-navy/5 last:border-0 dark:border-zinc-700/80 ${
+                          isYours
+                            ? "bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] dark:bg-brand-accent/15"
+                            : ""
+                        }`}
+                      >
+                        <td className="px-3 py-2.5 align-middle">
+                          <span className="font-medium text-brand-navy dark:text-zinc-100">{row.committeeLabel}</span>
+                          {isYours ? (
+                            <span className="ml-2 inline-block rounded-md border border-brand-accent/40 bg-brand-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-navy dark:text-zinc-100">
+                              {td("chairContacts.yourCommittee")}
+                            </span>
+                          ) : null}
+                        </td>
+                        <td className="px-3 py-2.5 align-middle">
+                          <code className="font-mono text-xs text-brand-navy/90 dark:text-zinc-200">{row.email}</code>
+                        </td>
+                        <td className="px-3 py-2.5 align-middle">
+                          <a
+                            href={`mailto:${row.email}`}
+                            className="text-xs font-medium text-brand-accent hover:underline"
+                          >
+                            {td("chairContacts.openMail")}
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         ) : null}
       </div>
     </MunPageShell>

@@ -4,10 +4,19 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { AllocationCodeGateToggle } from "@/components/allocation/AllocationCodeGateToggle";
 import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient";
+import { compareAllocationCountryDisplay } from "@/lib/allocation-display-order";
+import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import { isSmtRole } from "@/lib/roles";
 import { getTranslations } from "next-intl/server";
+import { getActiveEventId } from "@/lib/active-event-cookie";
+import {
+  committeeTabKey,
+  pickCanonicalConferenceRowByAllocationScore,
+} from "@/lib/conference-committee-canonical";
 
 type ProfileEmbed = { name: string | null } | null;
+
+type ConfRow = { id: string; name: string | null; committee: string | null; committee_code: string | null };
 
 type AllocRow = {
   id: string;
@@ -46,24 +55,93 @@ export default async function SmtAllocationPasswordsPage({
     redirect("/profile");
   }
 
+  const eventId = await getActiveEventId();
+  if (!eventId) {
+    return (
+      <MunPageShell title={t("allocationPasswords")}>
+        <p className="text-sm text-brand-muted">
+          Select an event first, then open this page from the SMT dashboard.
+        </p>
+        <Link
+          href="/event-gate?next=%2Fsmt%2Fallocation-passwords"
+          className="mt-4 inline-block text-sm text-brand-accent hover:underline"
+        >
+          Enter event code
+        </Link>
+      </MunPageShell>
+    );
+  }
+
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee")
-    .order("created_at", { ascending: false });
+    .select("id, name, committee, committee_code")
+    .eq("event_id", eventId)
+    .order("committee", { ascending: true, nullsFirst: false })
+    .order("name", { ascending: true });
 
-  const list = conferences ?? [];
-  const conferenceId =
-    conferenceParam && list.some((c) => c.id === conferenceParam)
-      ? conferenceParam
-      : list[0]?.id;
-
-  if (!conferenceId) {
+  const rawList = (conferences ?? []) as ConfRow[];
+  if (rawList.length === 0) {
     return (
       <MunPageShell title={t("allocationPasswords")}>
         <p className="text-sm text-brand-muted">Create a conference first.</p>
       </MunPageShell>
     );
   }
+
+  const rawListIds = rawList.map((c) => c.id);
+  const { data: allocSummaries } = rawListIds.length
+    ? await supabase
+        .from("allocations")
+        .select("conference_id, user_id")
+        .in("conference_id", rawListIds)
+    : { data: [] as { conference_id: string; user_id: string | null }[] };
+
+  const allocationRowCountByConferenceId = new Map<string, number>();
+  const linkedUserCountByConferenceId = new Map<string, number>();
+  for (const a of allocSummaries ?? []) {
+    if (!a.conference_id) continue;
+    allocationRowCountByConferenceId.set(
+      a.conference_id,
+      (allocationRowCountByConferenceId.get(a.conference_id) ?? 0) + 1
+    );
+    if (a.user_id) {
+      linkedUserCountByConferenceId.set(
+        a.conference_id,
+        (linkedUserCountByConferenceId.get(a.conference_id) ?? 0) + 1
+      );
+    }
+  }
+
+  const groupsByKey = new Map<string, ConfRow[]>();
+  for (const c of rawList) {
+    const k = committeeTabKey(c);
+    const arr = groupsByKey.get(k) ?? [];
+    arr.push(c);
+    groupsByKey.set(k, arr);
+  }
+
+  const resolveToCanonical = new Map<string, string>();
+  const tabRows: ConfRow[] = [];
+  for (const groupRows of groupsByKey.values()) {
+    const primary = pickCanonicalConferenceRowByAllocationScore(
+      groupRows,
+      allocationRowCountByConferenceId,
+      linkedUserCountByConferenceId
+    );
+    tabRows.push(primary);
+    for (const r of groupRows) resolveToCanonical.set(r.id, primary.id);
+  }
+
+  tabRows.sort((a, b) => {
+    const la = [a.committee, a.name].filter(Boolean).join(" — ") || a.id;
+    const lb = [b.committee, b.name].filter(Boolean).join(" — ") || b.id;
+    return la.localeCompare(lb);
+  });
+
+  const conferenceId =
+    conferenceParam && rawList.some((c) => c.id === conferenceParam)
+      ? (resolveToCanonical.get(conferenceParam) ?? conferenceParam)
+      : tabRows[0]!.id;
 
   const { data: allocData } = await supabase
     .from("allocations")
@@ -90,7 +168,17 @@ export default async function SmtAllocationPasswordsPage({
     code: codeMap.get(r.id) ?? "",
   }));
 
-  const activeConf = list.find((c) => c.id === conferenceId);
+  /** Dais / chair (and SMT officer) rows first, then delegates — same intent as allocation matrix ordering. */
+  merged.sort((a, b) => {
+    const da = isDaisSeatAllocationCountry(a.country);
+    const db = isDaisSeatAllocationCountry(b.country);
+    if (da !== db) return da ? -1 : 1;
+    const byCountry = compareAllocationCountryDisplay(a.country, b.country);
+    if (byCountry !== 0) return byCountry;
+    return a.allocationId.localeCompare(b.allocationId);
+  });
+
+  const activeConf = tabRows.find((c) => c.id === conferenceId);
 
   const { data: gateConf } = await supabase
     .from("conferences")
@@ -114,9 +202,9 @@ export default async function SmtAllocationPasswordsPage({
         />
       </div>
 
-      {list.length > 1 && (
+      {tabRows.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6">
-          {list.map((c) => (
+          {tabRows.map((c) => (
             <Link
               key={c.id}
               href={`/smt/allocation-passwords?conference=${c.id}`}

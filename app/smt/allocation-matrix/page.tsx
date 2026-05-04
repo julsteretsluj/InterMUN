@@ -8,9 +8,10 @@ import {
   isEventNameOverlayConferenceRow,
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
-
-/** One tab for all secretariat rows — legacy data often has two conferences (seed vs ensure_smt RPC). */
-const SMT_MATRIX_TAB_KEY = "__smt_secretariat_sheet__";
+import {
+  committeeTabKey,
+  pickCanonicalConferenceRowByAllocationScore,
+} from "@/lib/conference-committee-canonical";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
@@ -26,19 +27,11 @@ function dedupeConferencesForMatrixTabs(
   list: ConfRow[];
   resolveConferenceId: (id: string) => string;
 } {
-  const tabKey = (c: ConfRow) => {
-    if (isSmtSecretariatConferenceRow(c)) return SMT_MATRIX_TAB_KEY;
-    const comm = c.committee?.trim().toLowerCase();
-    if (comm) return `c:${comm}`;
-    const n = c.name?.trim().toLowerCase();
-    if (n) return `n:${n}`;
-    return `id:${c.id}`;
-  };
   const resolveToCanonical = new Map<string, string>();
 
   const groupsByKey = new Map<string, ConfRow[]>();
   for (const c of rows) {
-    const k = tabKey(c);
+    const k = committeeTabKey(c);
     const existing = groupsByKey.get(k);
     if (existing) existing.push(c);
     else groupsByKey.set(k, [c]);
@@ -47,18 +40,11 @@ function dedupeConferencesForMatrixTabs(
   // Prefer the canonical row that has allocation rows; tie-break by linked users then row count.
   const canonicalByKey = new Map<string, ConfRow>();
   for (const [k, groupRows] of groupsByKey.entries()) {
-    let primary = groupRows[0];
-    let bestScore = -1;
-
-    for (const r of groupRows) {
-      const rowsN = allocationRowCountByConferenceId.get(r.id) ?? 0;
-      const linkedN = linkedUserCountByConferenceId.get(r.id) ?? 0;
-      const score = rowsN > 0 ? linkedN * 10000 + rowsN : -1;
-      if (score > bestScore) {
-        bestScore = score;
-        primary = r;
-      }
-    }
+    const primary = pickCanonicalConferenceRowByAllocationScore(
+      groupRows,
+      allocationRowCountByConferenceId,
+      linkedUserCountByConferenceId
+    );
 
     canonicalByKey.set(k, primary);
     for (const r of groupRows) resolveToCanonical.set(r.id, primary.id);

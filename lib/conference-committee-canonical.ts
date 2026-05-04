@@ -1,4 +1,9 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { committeeSessionGroupKey } from "@/lib/committee-session-group";
+import {
+  committeeHintForSmtDaisPlan,
+  isSmtSecretariatConferenceRow,
+} from "@/lib/smt-conference-filters";
 
 type ConfRow = {
   id: string;
@@ -6,6 +11,9 @@ type ConfRow = {
   committee: string | null;
   committee_code?: string | null;
 };
+
+/** One tab / bucket for all secretariat conference rows (same as allocation matrix). */
+export const SMT_COMMITTEE_TAB_KEY = "__smt_secretariat_sheet__";
 
 /** Normalize chamber label for stable sibling matching (same committee, different topic rows). */
 function normalizeCommitteeLabelForBucket(raw: string): string {
@@ -35,11 +43,14 @@ function normalizeCommitteeLabelForBucket(raw: string): string {
 }
 
 /**
- * Committee bucketing key used by topic/awards canonicalization.
- * Prefer `committee` (chamber) over `committee_code`: topic rows share one gate code per chamber in the DB,
- * but chamber text is the stable bucket if codes ever diverge during edits.
+ * Committee bucketing key: same *chamber* across topic rows (e.g. "ECOSOC — Topic A" vs "ECOSOC — Topic B"),
+ * awards, allocation matrix, and DB `committee_tab_key` / peer RLS must stay aligned.
  */
 export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee" | "committee_code">): string {
+  if (isSmtSecretariatConferenceRow(c)) return SMT_COMMITTEE_TAB_KEY;
+  const hinted = committeeHintForSmtDaisPlan(c);
+  const g = committeeSessionGroupKey(hinted ?? c.committee);
+  if (g) return `chamber:${g}`;
   const comm = c.committee?.trim();
   if (comm) return `c:${normalizeCommitteeLabelForBucket(comm)}`;
   const code = c.committee_code?.trim().toLowerCase();
@@ -47,6 +58,26 @@ export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee" | "
   const n = c.name?.trim().toLowerCase();
   if (n) return `n:${n}`;
   return `id:${c.id}`;
+}
+
+/** Prefer the row that already holds the roster; tie-break by linked delegates then row count. */
+export function pickCanonicalConferenceRowByAllocationScore<T extends { id: string }>(
+  groupRows: T[],
+  allocationRowCountByConferenceId: Map<string, number>,
+  linkedUserCountByConferenceId: Map<string, number>
+): T {
+  let primary = groupRows[0]!;
+  let bestScore = -1;
+  for (const r of groupRows) {
+    const rowsN = allocationRowCountByConferenceId.get(r.id) ?? 0;
+    const linkedN = linkedUserCountByConferenceId.get(r.id) ?? 0;
+    const score = rowsN > 0 ? linkedN * 10000 + rowsN : -1;
+    if (score > bestScore) {
+      bestScore = score;
+      primary = r;
+    }
+  }
+  return primary;
 }
 
 export type CommitteeAwardScope = {
@@ -130,18 +161,32 @@ export async function getCommitteeAwardScope(
   }
 
   const ids = group.map((c) => c.id);
-  const { data: allocRows } = await supabase.from("allocations").select("conference_id").in("conference_id", ids);
-  const hasAlloc = new Set((allocRows ?? []).map((a) => a.conference_id).filter(Boolean) as string[]);
+  const { data: allocSummaries } = await supabase
+    .from("allocations")
+    .select("conference_id, user_id")
+    .in("conference_id", ids);
 
-  let primary = group[0]!;
-  let primaryHas = hasAlloc.has(primary.id);
-  for (const r of group) {
-    const rHas = hasAlloc.has(r.id);
-    if (rHas && !primaryHas) {
-      primary = r;
-      primaryHas = true;
+  const allocationRowCountByConferenceId = new Map<string, number>();
+  const linkedUserCountByConferenceId = new Map<string, number>();
+  for (const a of allocSummaries ?? []) {
+    if (!a.conference_id) continue;
+    allocationRowCountByConferenceId.set(
+      a.conference_id,
+      (allocationRowCountByConferenceId.get(a.conference_id) ?? 0) + 1
+    );
+    if (a.user_id) {
+      linkedUserCountByConferenceId.set(
+        a.conference_id,
+        (linkedUserCountByConferenceId.get(a.conference_id) ?? 0) + 1
+      );
     }
   }
+
+  const primary = pickCanonicalConferenceRowByAllocationScore(
+    group,
+    allocationRowCountByConferenceId,
+    linkedUserCountByConferenceId
+  );
 
   return {
     canonicalConferenceId: primary.id,

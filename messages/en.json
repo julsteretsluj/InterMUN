@@ -850,7 +850,15 @@
       "ariaLabel": "Dashboard sections",
       "overview": "Overview",
       "checklist": "Checklist",
-      "jump": "Jump to"
+      "jump": "Jump to",
+      "chairEmails": "Chair emails"
+    },
+    "chairContacts": {
+      "intro": "Shared dais inboxes for this conference (SEAMUN I). Use your committee row to contact chairs.",
+      "committeeColumn": "Committee",
+      "emailColumn": "Chair inbox (username)",
+      "yourCommittee": "Your committee",
+      "openMail": "Open mail"
     },
     "jumpTo": "Jump to",
     "tiles": {
@@ -885,6 +893,10 @@
       "officialLinks": {
         "label": "Official UN links",
         "hint": "Documents, bodies, programmes"
+      },
+      "chairEmails": {
+        "label": "Chair emails",
+        "hint": "Dais inboxes by committee"
       },
       "chairFeedback": {
         "label": "Chair feedback",
