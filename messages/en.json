@@ -854,11 +854,11 @@
       "chairEmails": "Chair emails"
     },
     "chairContacts": {
-      "intro": "Shared dais inboxes for this conference (SEAMUN I). Use your committee row to contact chairs.",
+      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
       "committeeColumn": "Committee",
       "emailColumn": "Chair inbox (username)",
-      "yourCommittee": "Your committee",
-      "openMail": "Open mail"
+      "openMail": "Open mail",
+      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     },
     "jumpTo": "Jump to",
     "tiles": {

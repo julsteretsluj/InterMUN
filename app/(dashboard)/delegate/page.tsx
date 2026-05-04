@@ -56,6 +56,12 @@ export default async function DelegateDashboardPage({
   const countryFlag = flagEmojiForCountryName(countryLabel);
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
+  const chairContactsForDelegate = showChairEmailsTab
+    ? SEAMUN_I_2027_DELEGATE_CHAIR_CONTACTS.filter((row) =>
+        seamunChairContactMatchesCommittee(row, conf?.committee ?? null)
+      )
+    : [];
+
   const tileDefs: { href: string; key: string }[] = [
     { href: "/stances", key: "stances" },
     { href: "/delegate#countdown", key: "countdown" },
@@ -145,38 +151,32 @@ export default async function DelegateDashboardPage({
         {activeTab === "chairs" && showChairEmailsTab ? (
           <div className="space-y-3">
             <p className="text-sm text-brand-muted max-w-2xl">{td("chairContacts.intro")}</p>
-            <div className="overflow-x-auto rounded-xl border border-brand-navy/10 bg-brand-paper dark:border-zinc-700 dark:bg-zinc-900/40">
-              <table className="w-full min-w-[20rem] text-left text-sm">
-                <thead>
-                  <tr className="border-b border-brand-navy/10 bg-brand-cream/60 dark:border-zinc-700 dark:bg-zinc-800/80">
-                    <th className="px-3 py-2 font-semibold text-brand-navy dark:text-zinc-100">
-                      {td("chairContacts.committeeColumn")}
-                    </th>
-                    <th className="px-3 py-2 font-semibold text-brand-navy dark:text-zinc-100">
-                      {td("chairContacts.emailColumn")}
-                    </th>
-                    <th className="px-3 py-2 w-28 font-semibold text-brand-navy dark:text-zinc-100" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {SEAMUN_I_2027_DELEGATE_CHAIR_CONTACTS.map((row) => {
-                    const isYours = seamunChairContactMatchesCommittee(row, conf?.committee ?? null);
-                    return (
+            {chairContactsForDelegate.length === 0 ? (
+              <p className="text-sm text-brand-muted max-w-2xl rounded-lg border border-brand-navy/10 bg-brand-paper px-3 py-3 dark:border-zinc-700 dark:bg-zinc-900/40">
+                {td("chairContacts.noMatch")}
+              </p>
+            ) : (
+              <div className="overflow-x-auto rounded-xl border border-brand-navy/10 bg-brand-paper dark:border-zinc-700 dark:bg-zinc-900/40">
+                <table className="w-full min-w-[20rem] text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-brand-navy/10 bg-brand-cream/60 dark:border-zinc-700 dark:bg-zinc-800/80">
+                      <th className="px-3 py-2 font-semibold text-brand-navy dark:text-zinc-100">
+                        {td("chairContacts.committeeColumn")}
+                      </th>
+                      <th className="px-3 py-2 font-semibold text-brand-navy dark:text-zinc-100">
+                        {td("chairContacts.emailColumn")}
+                      </th>
+                      <th className="px-3 py-2 w-28 font-semibold text-brand-navy dark:text-zinc-100" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {chairContactsForDelegate.map((row) => (
                       <tr
                         key={row.email}
-                        className={`border-b border-brand-navy/5 last:border-0 dark:border-zinc-700/80 ${
-                          isYours
-                            ? "bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] dark:bg-brand-accent/15"
-                            : ""
-                        }`}
+                        className="border-b border-brand-navy/5 last:border-0 bg-[color:color-mix(in_srgb,var(--accent)_10%,transparent)] dark:border-zinc-700/80 dark:bg-brand-accent/15"
                       >
                         <td className="px-3 py-2.5 align-middle">
                           <span className="font-medium text-brand-navy dark:text-zinc-100">{row.committeeLabel}</span>
-                          {isYours ? (
-                            <span className="ml-2 inline-block rounded-md border border-brand-accent/40 bg-brand-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-navy dark:text-zinc-100">
-                              {td("chairContacts.yourCommittee")}
-                            </span>
-                          ) : null}
                         </td>
                         <td className="px-3 py-2.5 align-middle">
                           <code className="font-mono text-xs text-brand-navy/90 dark:text-zinc-200">{row.email}</code>
@@ -190,11 +190,11 @@ export default async function DelegateDashboardPage({
                           </a>
                         </td>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         ) : null}
       </div>
