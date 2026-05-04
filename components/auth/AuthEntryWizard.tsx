@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Armchair, Building2, ChevronLeft, ChevronRight, Users } from "lucide-react";
@@ -28,11 +28,22 @@ const ROLES: {
   { id: "secretariat", Icon: Building2, accentHex: ROLE_RING_HEX[2]! },
 ];
 
-function roleRingConicGradient(): string {
-  const n = ROLES.length;
-  const seg = 360 / n;
-  const parts = ROLE_RING_HEX.map((c, i) => `${c} ${i * seg}deg ${(i + 1) * seg}deg`).join(", ");
-  return `conic-gradient(from -90deg, ${parts})`;
+const RING_VIEW = { cx: 0, cy: 0, rOuter: 47, rInner: 30 } as const;
+
+/** Polar from top, clockwise (matches angleFromPointer / angleToRoleIndex). */
+function ringPoint(cx: number, cy: number, r: number, deg: number) {
+  const rad = (Math.PI / 180) * deg;
+  return { x: cx + r * Math.sin(rad), y: cy - r * Math.cos(rad) };
+}
+
+function donutSectorPath(cx: number, cy: number, rIn: number, rOut: number, startDeg: number, sweepDeg: number) {
+  const endDeg = startDeg + sweepDeg;
+  const p0 = ringPoint(cx, cy, rOut, startDeg);
+  const p1 = ringPoint(cx, cy, rOut, endDeg);
+  const p2 = ringPoint(cx, cy, rIn, endDeg);
+  const p3 = ringPoint(cx, cy, rIn, startDeg);
+  const large = sweepDeg > 180 ? 1 : 0;
+  return `M ${p0.x} ${p0.y} A ${rOut} ${rOut} 0 ${large} 1 ${p1.x} ${p1.y} L ${p2.x} ${p2.y} A ${rIn} ${rIn} 0 ${large} 0 ${p3.x} ${p3.y} Z`;
 }
 
 function angleFromPointer(cx: number, cy: number, px: number, py: number): number {
@@ -73,7 +84,6 @@ export function AuthEntryWizard({
 
   const selectedRole = ROLES[roleIndex] ?? ROLES[0]!;
   const RoleIcon = selectedRole.Icon;
-  const ringGradient = useMemo(() => roleRingConicGradient(), []);
   const selectedRoleLabel =
     selectedRole.id === "chair"
       ? t("chair")
@@ -106,24 +116,38 @@ export function AuthEntryWizard({
     [snapToIndex]
   );
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    draggingRef.current = true;
-    updateAngleToPointer(e.clientX, e.clientY);
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!draggingRef.current) return;
-    updateAngleToPointer(e.clientX, e.clientY);
-  };
-
-  const endPointer = (e: React.PointerEvent) => {
+  const endPointer = useCallback((e: React.PointerEvent) => {
     draggingRef.current = false;
     try {
       e.currentTarget.releasePointerCapture(e.pointerId);
     } catch {
       /* ignore */
     }
+  }, []);
+
+  const onRingPointerDown = (e: React.PointerEvent<SVGElement>) => {
+    const target = e.target as Element | null;
+    const sector = target?.closest?.("[data-sector]");
+    const idxAttr = sector?.getAttribute("data-sector");
+    if (idxAttr != null) {
+      const parsed = parseInt(idxAttr, 10);
+      if (!Number.isNaN(parsed)) snapToIndex(parsed);
+      else updateAngleToPointer(e.clientX, e.clientY);
+    } else {
+      updateAngleToPointer(e.clientX, e.clientY);
+    }
+    e.currentTarget.setPointerCapture(e.pointerId);
+    draggingRef.current = true;
+  };
+
+  const onRingPointerMove = (e: React.PointerEvent<SVGElement>) => {
+    if (!draggingRef.current) return;
+    updateAngleToPointer(e.clientX, e.clientY);
+  };
+
+  const onRingPointerEnd = (e: React.PointerEvent<SVGElement>) => {
+    draggingRef.current = false;
+    endPointer(e);
   };
 
   const cycle = (delta: number) => {
@@ -373,18 +397,46 @@ export function AuthEntryWizard({
                       cycle(-1);
                     }
                   }}
-                  onPointerDown={onPointerDown}
-                  onPointerMove={onPointerMove}
-                  onPointerUp={endPointer}
-                  onPointerCancel={endPointer}
-                  className="relative size-[min(18rem,85vw)] shrink-0 cursor-grab touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 active:cursor-grabbing drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
+                  className="relative size-[min(18rem,85vw)] shrink-0 touch-none rounded-full outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 drop-shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)]"
                 >
-                  {/* Color-wheel ring */}
-                  <div
-                    className="pointer-events-none absolute inset-0 rounded-full shadow-[inset_0_2px_14px_rgba(0,0,0,0.18)]"
-                    style={{ background: ringGradient }}
+                  <svg
+                    viewBox="-50 -50 100 100"
+                    className="absolute inset-0 cursor-grab rounded-full active:cursor-grabbing shadow-[inset_0_2px_14px_rgba(0,0,0,0.16)] dark:shadow-[inset_0_2px_16px_rgba(0,0,0,0.35)]"
                     aria-hidden
-                  />
+                    onPointerDown={onRingPointerDown}
+                    onPointerMove={onRingPointerMove}
+                    onPointerUp={onRingPointerEnd}
+                    onPointerCancel={onRingPointerEnd}
+                  >
+                    {ROLES.map((_, i) => {
+                      const sweep = 360 / ROLES.length;
+                      const d = donutSectorPath(
+                        RING_VIEW.cx,
+                        RING_VIEW.cy,
+                        RING_VIEW.rInner,
+                        RING_VIEW.rOuter,
+                        i * sweep,
+                        sweep
+                      );
+                      const selected = roleIndex === i;
+                      return (
+                        <path
+                          key={i}
+                          data-sector={i}
+                          d={d}
+                          fill={ROLE_RING_HEX[i]}
+                          stroke={selected ? "rgba(255,255,255,0.95)" : undefined}
+                          strokeWidth={selected ? 3.25 : 0.9}
+                          className={
+                            selected
+                              ? "drop-shadow-[0_0_14px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_0_16px_rgba(255,255,255,0.25)]"
+                              : "stroke-[rgba(15,23,42,0.18)] dark:stroke-[rgba(255,255,255,0.22)]"
+                          }
+                          style={{ transition: "stroke-width 0.15s ease, stroke 0.15s ease" }}
+                        />
+                      );
+                    })}
+                  </svg>
                   {/* Inner disc (donut hole) */}
                   <div className="pointer-events-none absolute inset-[14px] rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner" />
 
