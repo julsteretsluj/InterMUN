@@ -192,6 +192,7 @@ export default async function SmtAllocationMatrixPage({
           .select("id, country, user_id")
           .eq("conference_id", selectedConferenceId)
           .order("country", { ascending: true })
+          .order("id", { ascending: true })
       ).data ?? [];
 
     const selectedConfRow = rawList.find((c) => c.id === selectedConferenceId);
@@ -215,6 +216,7 @@ export default async function SmtAllocationMatrixPage({
               .select("id, country, user_id")
               .eq("conference_id", selectedConferenceId)
               .order("country", { ascending: true })
+              .order("id", { ascending: true })
           ).data ?? [];
       } catch {
         // If insert fails (permissions, missing conference, etc.), fall back to empty roster.

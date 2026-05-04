@@ -105,7 +105,7 @@ export function AllocationMatrixManagerClient({
     [selectedConference]
   );
 
-  /** Three parliamentarian seats share the same DB label; show A/B/C in the matrix only. */
+  /** Three parliamentarian seats share the same DB label; A/B/C follow roster order (Sam → Sparkle → Venice). */
   const smtParliamentarianSeatLabelByRowId = useMemo(() => {
     if (!isSmtSecretariatSheet) return new Map<string, string>();
     const letters = ["A", "B", "C"];
@@ -113,7 +113,8 @@ export function AllocationMatrixManagerClient({
     const out = new Map<string, string>();
     for (const r of rows) {
       if (r.country.trim().toLowerCase() !== "parliamentarian") continue;
-      const seat = letters[i] ?? String(i + 1);
+      if (i >= 3) break;
+      const seat = letters[i];
       i += 1;
       out.set(r.id, t("secretariatParliamentarianSeat", { seat }));
     }

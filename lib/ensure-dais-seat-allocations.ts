@@ -182,4 +182,30 @@ export async function ensureDaisSeatAllocations(
 
   await removeObsoleteSmtLegacyChairRows(supabase, conferenceId, effectiveCommittee);
   await removeDuplicateChairRowsWhenSecretariatTitlesExist(supabase, conferenceId);
+  if (committeeSessionGroupKey(effectiveCommittee) === "SMT") {
+    await deleteExcessUnassignedSmtParliamentarianRows(supabase, conferenceId);
+  }
+}
+
+/** Matrix allows only three "Parliamentarian" rows; drop unassigned extras (highest id first). */
+async function deleteExcessUnassignedSmtParliamentarianRows(
+  supabase: SupabaseClient,
+  conferenceId: string
+): Promise<void> {
+  const { data: rows, error } = await supabase
+    .from("allocations")
+    .select("id, user_id, country")
+    .eq("conference_id", conferenceId)
+    .order("id", { ascending: true });
+  if (error || !rows?.length) return;
+
+  const par = rows.filter(
+    (r) => String(r.country ?? "").trim().toLowerCase() === "parliamentarian"
+  );
+  if (par.length <= 3) return;
+
+  for (const row of par.slice(3)) {
+    if (row.user_id) continue;
+    await supabase.from("allocations").delete().eq("id", row.id);
+  }
 }

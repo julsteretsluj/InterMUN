@@ -48,8 +48,16 @@ export function sortCountryLabelsForDisplay(labels: string[]): string[] {
   return [...labels].sort(compareAllocationCountryDisplay);
 }
 
-export function sortRowsByAllocationCountry<T extends { country?: string | null }>(items: T[]): T[] {
-  return [...items].sort((x, y) =>
-    compareAllocationCountryDisplay(String(x.country ?? ""), String(y.country ?? ""))
-  );
+/**
+ * Matrix row order. When labels tie (e.g. three SMT "Parliamentarian" seats), sort by
+ * allocation id ascending so it matches migration row_number / roster (Sam → Sparkle → Venice).
+ */
+export function sortRowsByAllocationCountry<T extends { country?: string | null; id?: string }>(
+  items: T[]
+): T[] {
+  return [...items].sort((x, y) => {
+    const cmp = compareAllocationCountryDisplay(String(x.country ?? ""), String(y.country ?? ""));
+    if (cmp !== 0) return cmp;
+    return String(x.id ?? "").localeCompare(String(y.id ?? ""));
+  });
 }
