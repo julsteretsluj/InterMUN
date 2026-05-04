@@ -88,10 +88,11 @@ async function getConferenceForSmtCommitteeSurface(options: {
       .maybeSingle();
     const cid = (prof as { smt_chair_conference_id?: string | null } | null)?.smt_chair_conference_id?.trim();
     if (!cid) return null;
+    const canonicalCid = await resolveCanonicalCommitteeConferenceId(supabase, cid);
     const { data: conf } = await supabase
       .from("conferences")
       .select(ACTIVE_CONFERENCE_SELECT)
-      .eq("id", cid)
+      .eq("id", canonicalCid)
       .maybeSingle();
     const row = asActiveConferenceRow(conf);
     if (!row || row.event_id !== eventId) return null;
@@ -111,10 +112,11 @@ async function getConferenceForSmtCommitteeSurface(options: {
     .eq("id", aid)
     .maybeSingle();
   if (!alloc?.conference_id || alloc.user_id !== options.userId) return null;
+  const delegateCanon = await resolveCanonicalCommitteeConferenceId(supabase, alloc.conference_id);
   const { data: conf } = await supabase
     .from("conferences")
     .select(ACTIVE_CONFERENCE_SELECT)
-    .eq("id", alloc.conference_id)
+    .eq("id", delegateCanon)
     .maybeSingle();
   const row = asActiveConferenceRow(conf);
   if (!row || row.event_id !== eventId) return null;

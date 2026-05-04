@@ -7,12 +7,19 @@ import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-pa
 import { compareAllocationCountryDisplay } from "@/lib/allocation-display-order";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import { isSmtRole } from "@/lib/roles";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import {
   committeeTabKey,
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
   pickCanonicalConferenceRowByAllocationScore,
 } from "@/lib/conference-committee-canonical";
+import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
+import {
+  translateAgendaTopicLabel,
+  translateCommitteeLabel,
+} from "@/lib/i18n/committee-topic-labels";
 
 type ProfileEmbed = { name: string | null } | null;
 
@@ -20,8 +27,9 @@ type ConfRow = { id: string; name: string | null; committee: string | null; comm
 
 type AllocRow = {
   id: string;
-  country: string;
-  user_id: string;
+  country: string | null;
+  user_id: string | null;
+  conference_id: string;
   profiles: ProfileEmbed | ProfileEmbed[];
 };
 
@@ -143,13 +151,21 @@ export default async function SmtAllocationPasswordsPage({
       ? (resolveToCanonical.get(conferenceParam) ?? conferenceParam)
       : tabRows[0]!.id;
 
+  const { canonicalConferenceId, siblingConferenceIds } = await getCommitteeAwardScope(
+    supabase,
+    conferenceId
+  );
+
   const { data: allocData } = await supabase
     .from("allocations")
-    .select("id, country, user_id, profiles(name)")
-    .eq("conference_id", conferenceId)
+    .select("id, country, user_id, conference_id, profiles(name)")
+    .in("conference_id", siblingConferenceIds)
     .order("country");
 
-  const rows = (allocData ?? []) as AllocRow[];
+  const rows = mergeAllocationsAcrossSiblingConferences(
+    (allocData ?? []) as AllocRow[],
+    canonicalConferenceId
+  );
   const ids = rows.map((r) => r.id);
 
   const { data: codeRows } = ids.length
@@ -180,10 +196,14 @@ export default async function SmtAllocationPasswordsPage({
 
   const activeConf = tabRows.find((c) => c.id === conferenceId);
 
+  const locale = await getLocale();
+  const tCommitteeLabels = await getTranslations("committeeLabels");
+  const tTopics = await getTranslations("committeeTopicLabels");
+
   const { data: gateConf } = await supabase
     .from("conferences")
     .select("allocation_code_gate_enabled")
-    .eq("id", conferenceId)
+    .eq("id", canonicalConferenceId)
     .maybeSingle();
 
   return (
@@ -197,14 +217,21 @@ export default async function SmtAllocationPasswordsPage({
 
       <div className="mb-6 max-w-2xl">
         <AllocationCodeGateToggle
-          conferenceId={conferenceId}
+          conferenceId={canonicalConferenceId}
           enabled={gateConf?.allocation_code_gate_enabled === true}
         />
       </div>
 
       {tabRows.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6">
-          {tabRows.map((c) => (
+          {tabRows.map((c) => {
+            const comm = c.committee?.trim();
+            const tabShort = comm
+              ? translateCommitteeLabel(tCommitteeLabels, comm)
+              : c.name?.trim()
+                ? translateAgendaTopicLabel(tTopics, c.name, locale)
+                : c.id.slice(0, 8);
+            return (
             <Link
               key={c.id}
               href={`/smt/allocation-passwords?conference=${c.id}`}
@@ -214,17 +241,22 @@ export default async function SmtAllocationPasswordsPage({
                   : "border-brand-navy/20 text-brand-navy hover:bg-brand-cream"
               }`}
             >
-              {c.name}
-              {c.committee ? ` — ${c.committee}` : ""}
+              {tabShort}
             </Link>
-          ))}
+            );
+          })}
         </div>
       )}
 
       <AllocationPasswordsClient
         conferenceId={conferenceId}
         conferenceLabel={
-          [activeConf?.name, activeConf?.committee].filter(Boolean).join(" — ") || "Conference"
+          translateConferenceHeadline(
+            tTopics,
+            tCommitteeLabels,
+            [activeConf?.name, activeConf?.committee].filter(Boolean).join(" — "),
+            locale
+          ).trim() || "Conference"
         }
         rows={merged}
       />

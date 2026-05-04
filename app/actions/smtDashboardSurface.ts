@@ -10,6 +10,13 @@ import {
   filterConferencesForSmtRoomCodes,
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
+import {
+  committeeTabKey,
+  pickCanonicalConferenceRowByAllocationScore,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
+import { getTranslations } from "next-intl/server";
+import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 
 function isUuid(v: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
@@ -48,7 +55,7 @@ export async function updateSmtCommitteeBindingsAction(
       .maybeSingle();
     if (!c || c.event_id !== eventId) return { error: "Chair committee must belong to the active event." };
     if (isSmtSecretariatConferenceRow(c)) return { error: "Pick a delegate committee, not the secretariat sheet." };
-    smt_chair_conference_id = chairRaw;
+    smt_chair_conference_id = await resolveCanonicalCommitteeConferenceId(supabase, chairRaw);
   }
 
   let smt_delegate_allocation_id: string | null = null;
@@ -123,17 +130,19 @@ export async function switchSmtToChairExperienceAction(conferenceId: string) {
     redirect("/smt/profile?smtBind=1");
   }
 
+  const canonicalCid = await resolveCanonicalCommitteeConferenceId(supabase, cid);
+
   const { error } = await supabase
     .from("profiles")
     .update({
-      smt_chair_conference_id: cid,
+      smt_chair_conference_id: canonicalCid,
       updated_at: new Date().toISOString(),
     })
     .eq("id", user.id);
   if (error) redirect("/smt/profile?smtBind=1");
 
   await setSmtDashboardSurface("chair");
-  await setActiveConferenceId(cid);
+  await setActiveConferenceId(canonicalCid);
   redirect("/chair");
 }
 
@@ -204,10 +213,14 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
 
   const eventId = await getActiveEventId();
   if (!eventId) {
+    const rawChair = (profile as { smt_chair_conference_id?: string | null }).smt_chair_conference_id ?? null;
+    const currentChairId = rawChair
+      ? await resolveCanonicalCommitteeConferenceId(supabase, rawChair)
+      : null;
     return {
       conferences: [],
       delegateSeats: [],
-      currentChairId: (profile as { smt_chair_conference_id?: string | null }).smt_chair_conference_id ?? null,
+      currentChairId,
       currentDelegateAllocationId:
         (profile as { smt_delegate_allocation_id?: string | null }).smt_delegate_allocation_id ?? null,
     };
@@ -220,10 +233,56 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     .order("committee", { ascending: true })
     .order("name", { ascending: true });
 
-  const committees = filterConferencesForSmtRoomCodes(rows ?? []).map((c) => {
-    const label = [c.committee?.trim(), c.name?.trim()].filter(Boolean).join(" — ") || c.id.slice(0, 8);
-    return { id: c.id, label };
-  });
+  const filtered = filterConferencesForSmtRoomCodes(rows ?? []);
+  const filteredIds = filtered.map((c) => c.id);
+  const { data: allocSummaries } = filteredIds.length
+    ? await supabase
+        .from("allocations")
+        .select("conference_id, user_id")
+        .in("conference_id", filteredIds)
+    : { data: [] as { conference_id: string | null; user_id: string | null }[] };
+
+  const allocationRowCountByConferenceId = new Map<string, number>();
+  const linkedUserCountByConferenceId = new Map<string, number>();
+  for (const a of allocSummaries ?? []) {
+    if (!a.conference_id) continue;
+    allocationRowCountByConferenceId.set(
+      a.conference_id,
+      (allocationRowCountByConferenceId.get(a.conference_id) ?? 0) + 1
+    );
+    if (a.user_id) {
+      linkedUserCountByConferenceId.set(
+        a.conference_id,
+        (linkedUserCountByConferenceId.get(a.conference_id) ?? 0) + 1
+      );
+    }
+  }
+
+  const groupsByTab = new Map<string, typeof filtered>();
+  for (const c of filtered) {
+    const k = committeeTabKey(c);
+    const arr = groupsByTab.get(k) ?? [];
+    arr.push(c);
+    groupsByTab.set(k, arr);
+  }
+
+  const tCommitteeLabels = await getTranslations("committeeNames.labels");
+  const committees: { id: string; label: string }[] = [];
+  for (const groupRows of groupsByTab.values()) {
+    const primary = pickCanonicalConferenceRowByAllocationScore(
+      groupRows,
+      allocationRowCountByConferenceId,
+      linkedUserCountByConferenceId
+    );
+    const comm = primary.committee?.trim();
+    const label =
+      (comm ? translateCommitteeLabel(tCommitteeLabels, comm).trim() : "") ||
+      primary.committee_code?.trim() ||
+      primary.name?.trim() ||
+      primary.id.slice(0, 8);
+    committees.push({ id: primary.id, label });
+  }
+  committees.sort((a, b) => a.label.localeCompare(b.label));
 
   const { data: allocRows } = await supabase
     .from("allocations")
@@ -245,17 +304,28 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     const c = confById.get(row.conference_id);
     if (!c || c.event_id !== eventId) continue;
     if (isSmtSecretariatConferenceRow(c)) continue;
+    const comm = c.committee?.trim();
+    const chamber =
+      (comm ? translateCommitteeLabel(tCommitteeLabels, comm).trim() : "") ||
+      c.committee_code?.trim() ||
+      c.name?.trim() ||
+      "";
     delegateSeats.push({
       id: row.id,
-      label: `${row.country} — ${[c.committee?.trim(), c.name?.trim()].filter(Boolean).join(" · ") || c.name}`,
+      label: chamber ? `${row.country?.trim() || "—"} — ${chamber}` : (row.country?.trim() || "—"),
     });
   }
   delegateSeats.sort((a, b) => a.label.localeCompare(b.label));
 
+  const rawChairId = (profile as { smt_chair_conference_id?: string | null }).smt_chair_conference_id ?? null;
+  const currentChairId = rawChairId
+    ? await resolveCanonicalCommitteeConferenceId(supabase, rawChairId)
+    : null;
+
   return {
     conferences: committees,
     delegateSeats,
-    currentChairId: (profile as { smt_chair_conference_id?: string | null }).smt_chair_conference_id ?? null,
+    currentChairId,
     currentDelegateAllocationId:
       (profile as { smt_delegate_allocation_id?: string | null }).smt_delegate_allocation_id ?? null,
   };

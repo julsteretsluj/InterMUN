@@ -3,7 +3,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
-import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import {
+  getCommitteeAwardScope,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
 import { randomBytes } from "crypto";
 
 function randomCode(): string {
@@ -109,11 +112,12 @@ export async function generateMissingAllocationCodes(conferenceId: string) {
   const supabase = auth.supabase;
 
   const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
+  const { siblingConferenceIds } = await getCommitteeAwardScope(supabase, conferenceId);
 
   const { data: allocs, error: aErr } = await supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", canonicalId);
+    .in("conference_id", siblingConferenceIds);
 
   if (aErr || !allocs?.length) {
     return { error: aErr?.message ?? "No allocations for this conference." };

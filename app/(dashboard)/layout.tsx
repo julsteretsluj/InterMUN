@@ -177,7 +177,7 @@ export default async function DashboardLayout({
           </span>
         </Link>
         <div className="flex min-h-0 flex-1 flex-col">
-          {isChairRole(normalizedRole) ? (
+          {isChairRole(effectiveRole) ? (
             <ChairDashboardSidebar
               conferenceLine={conferenceLine || ""}
               crisisReportingEnabled={crisisReportingEnabled}

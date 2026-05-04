@@ -10,6 +10,8 @@ import {
 } from "@/lib/smt-conference-filters";
 import {
   committeeTabKey,
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
   pickCanonicalConferenceRowByAllocationScore,
 } from "@/lib/conference-committee-canonical";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
@@ -171,15 +173,22 @@ export default async function SmtAllocationMatrixPage({
   let rows: MatrixRow[] = [];
 
   if (selectedConferenceId) {
+    const { canonicalConferenceId, siblingConferenceIds } = await getCommitteeAwardScope(
+      supabase,
+      selectedConferenceId
+    );
+
     let allocs =
       (
         await supabase
           .from("allocations")
-          .select("id, country, user_id")
-          .eq("conference_id", selectedConferenceId)
+          .select("id, country, user_id, conference_id")
+          .in("conference_id", siblingConferenceIds)
           .order("country", { ascending: true })
           .order("id", { ascending: true })
       ).data ?? [];
+
+    allocs = mergeAllocationsAcrossSiblingConferences(allocs, canonicalConferenceId);
 
     const selectedConfRow = rawList.find((c) => c.id === selectedConferenceId);
     // Empty committees: seed dais rows. SMT secretariat: always re-run — legacy installs may still
@@ -192,18 +201,19 @@ export default async function SmtAllocationMatrixPage({
       try {
         await ensureDaisSeatAllocations(
           supabase,
-          selectedConferenceId,
+          canonicalConferenceId,
           selectedConfRow ? committeeHintForSmtDaisPlan(selectedConfRow) : null
         );
         allocs =
           (
             await supabase
               .from("allocations")
-              .select("id, country, user_id")
-              .eq("conference_id", selectedConferenceId)
+              .select("id, country, user_id, conference_id")
+              .in("conference_id", siblingConferenceIds)
               .order("country", { ascending: true })
               .order("id", { ascending: true })
           ).data ?? [];
+        allocs = mergeAllocationsAcrossSiblingConferences(allocs, canonicalConferenceId);
       } catch {
         // If insert fails (permissions, missing conference, etc.), fall back to empty roster.
       }

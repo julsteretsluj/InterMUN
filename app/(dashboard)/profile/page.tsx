@@ -18,6 +18,7 @@ import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isDelegateDashboardCommitteeAllowlistedEmail } from "@/lib/delegate-dashboard-committee-allowlist";
+import { committeeTabKey, getCommitteeAwardScope } from "@/lib/conference-committee-canonical";
 
 type DashboardPickerConferenceRow = {
   id: string;
@@ -31,7 +32,7 @@ type CommitteeLabelTranslator = {
   has?: (key: string) => boolean;
 };
 
-/** One picker entry per chamber: merge multiple conference rows (topics) that share the same committee. */
+/** One picker entry per chamber: merge topic rows using the same tab key as the allocation matrix / awards. */
 function mergeConferenceRowsToCommitteePickerOptions(
   rows: DashboardPickerConferenceRow[],
   opts: {
@@ -41,17 +42,9 @@ function mergeConferenceRowsToCommitteePickerOptions(
     fallbackLabel: string;
   }
 ): { id: string; label: string }[] {
-  const mergeKey = (r: DashboardPickerConferenceRow): string => {
-    const committee = (r.committee ?? "").trim();
-    if (committee) return `c:${committee.toLowerCase().replace(/\s+/g, " ")}`;
-    const code = (r.committee_code ?? "").trim().toLowerCase();
-    if (code) return `k:${code}`;
-    return `i:${r.id}`;
-  };
-
   const buckets = new Map<string, DashboardPickerConferenceRow[]>();
   for (const r of rows) {
-    const k = mergeKey(r);
+    const k = committeeTabKey(r);
     const arr = buckets.get(k) ?? [];
     arr.push(r);
     buckets.set(k, arr);
@@ -59,22 +52,18 @@ function mergeConferenceRowsToCommitteePickerOptions(
 
   const out: { id: string; label: string }[] = [];
   for (const group of buckets.values()) {
-    const canon = group[0];
-    const label =
-      translateCommitteeLabel(opts.tCommitteeLabels, canon.committee).trim() || opts.fallbackLabel;
-
-    let id = canon.id;
-    if (opts.activeConferenceId && group.some((r) => r.id === opts.activeConferenceId)) {
-      id = opts.activeConferenceId;
+    const sortedGroup = [...group].sort((a, b) => a.name.localeCompare(b.name));
+    let chosen = sortedGroup[0]!;
+    if (opts.activeConferenceId) {
+      const hit = group.find((r) => r.id === opts.activeConferenceId);
+      if (hit) chosen = hit;
     } else {
       const seated = group.find((r) => opts.seatConferenceIdSet.has(r.id));
-      if (seated) id = seated.id;
-      else {
-        const sorted = [...group].sort((a, b) => a.name.localeCompare(b.name));
-        id = sorted[0].id;
-      }
+      if (seated) chosen = seated;
     }
-    out.push({ id, label });
+    const label =
+      translateCommitteeLabel(opts.tCommitteeLabels, chosen.committee).trim() || opts.fallbackLabel;
+    out.push({ id: chosen.id, label });
   }
   return out.sort((a, b) => a.label.localeCompare(b.label));
 }
@@ -320,23 +309,28 @@ export default async function ProfilePage({
   }
 
   if (dashboardCommitteeSwitch && delegateCommitteeSwitchAllowlisted) {
-    const confIds = [...new Set(dashboardCommitteeSwitch.conferences.map((c) => c.id))];
+    const pickerIds = [...new Set(dashboardCommitteeSwitch.conferences.map((c) => c.id))];
+    const scopes = await Promise.all(pickerIds.map((id) => getCommitteeAwardScope(supabase, id)));
+    const siblingUnion = [...new Set(scopes.flatMap((s) => s.siblingConferenceIds))];
+
     const { data: allocRows } =
-      confIds.length > 0
+      siblingUnion.length > 0
         ? await supabase
             .from("allocations")
             .select("id, conference_id, country")
-            .in("conference_id", confIds)
+            .in("conference_id", siblingUnion)
             .order("country", { ascending: true })
         : { data: [] as { id: string; conference_id: string; country: string | null }[] };
 
     const allocationsByConferenceId: Record<string, { id: string; label: string }[]> = {};
-    for (const row of allocRows ?? []) {
-      const cid = row.conference_id;
-      if (!cid) continue;
-      const label = row.country?.trim() || row.id;
-      if (!allocationsByConferenceId[cid]) allocationsByConferenceId[cid] = [];
-      allocationsByConferenceId[cid].push({ id: row.id, label });
+    for (let i = 0; i < pickerIds.length; i++) {
+      const pickerId = pickerIds[i]!;
+      const sib = new Set(scopes[i]!.siblingConferenceIds);
+      const rows = (allocRows ?? []).filter((r) => r.conference_id && sib.has(r.conference_id));
+      allocationsByConferenceId[pickerId] = rows.map((row) => ({
+        id: row.id,
+        label: row.country?.trim() || row.id,
+      }));
     }
 
     dashboardCommitteeSwitch = {

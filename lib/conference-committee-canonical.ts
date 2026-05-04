@@ -250,3 +250,42 @@ export function dedupeAllocationsByUserId<T extends { user_id: string | null }>(
   }
   return out;
 }
+
+/**
+ * Duplicate `conferences` rows for one chamber can each carry part of the roster and placard codes.
+ * Merge sibling allocation rows into one view: one row per linked user, one per unlinked seat label.
+ * When duplicates exist, prefer the row on `canonicalConferenceId`.
+ */
+export function mergeAllocationsAcrossSiblingConferences<
+  T extends {
+    id: string;
+    country: string | null;
+    user_id: string | null;
+    conference_id: string;
+  },
+>(rows: T[], canonicalConferenceId: string): T[] {
+  const prefer = (prev: T, next: T): T => {
+    if (prev.conference_id === canonicalConferenceId) return prev;
+    if (next.conference_id === canonicalConferenceId) return next;
+    return prev;
+  };
+
+  const byUser = new Map<string, T>();
+  const byCountryOnly = new Map<string, T>();
+
+  for (const r of rows) {
+    const uid = r.user_id?.trim();
+    if (uid) {
+      const prev = byUser.get(uid);
+      if (!prev) byUser.set(uid, r);
+      else byUser.set(uid, prefer(prev, r));
+      continue;
+    }
+    const ck = (r.country ?? "").trim().toLowerCase() || `__id:${r.id}`;
+    const prev = byCountryOnly.get(ck);
+    if (!prev) byCountryOnly.set(ck, r);
+    else byCountryOnly.set(ck, prefer(prev, r));
+  }
+
+  return [...byUser.values(), ...byCountryOnly.values()];
+}
