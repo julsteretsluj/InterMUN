@@ -196,6 +196,11 @@ BEGIN
 END;
 $$;
 
+-- Multiple topic rows under the same chamber share one join code; UNIQUE(event_id, committee_code)
+-- would forbid that. Cross-chamber uniqueness is enforced in set_conference_room_code /
+-- update_committee_session_smt instead.
+DROP INDEX IF EXISTS public.idx_conferences_event_committee_code;
+
 -- Backfill: within each (event_id, chamber group), use one deterministic code (MIN) for all topic rows.
 WITH canon AS (
   SELECT

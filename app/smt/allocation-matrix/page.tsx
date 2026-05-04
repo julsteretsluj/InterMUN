@@ -8,6 +8,9 @@ import {
   isEventNameOverlayConferenceRow,
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
+
+/** One tab for all secretariat rows — legacy data often has two conferences (seed vs ensure_smt RPC). */
+const SMT_MATRIX_TAB_KEY = "__smt_secretariat_sheet__";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 import { getTranslations } from "next-intl/server";
@@ -17,12 +20,14 @@ type ConfRow = { id: string; name: string; committee: string | null; committee_c
 /** Duplicate conference rows (same committee / same tab label) become one tab; extras map to the canonical id. */
 function dedupeConferencesForMatrixTabs(
   rows: ConfRow[],
-  hasAllocationsById: Map<string, boolean>
+  allocationRowCountByConferenceId: Map<string, number>,
+  linkedUserCountByConferenceId: Map<string, number>
 ): {
   list: ConfRow[];
   resolveConferenceId: (id: string) => string;
 } {
   const tabKey = (c: ConfRow) => {
+    if (isSmtSecretariatConferenceRow(c)) return SMT_MATRIX_TAB_KEY;
     const comm = c.committee?.trim().toLowerCase();
     if (comm) return `c:${comm}`;
     const n = c.name?.trim().toLowerCase();
@@ -39,15 +44,18 @@ function dedupeConferencesForMatrixTabs(
     else groupsByKey.set(k, [c]);
   }
 
-  // Prefer the canonical conference row that actually has allocation rows.
+  // Prefer the canonical row that has allocation rows; tie-break by linked users then row count.
   const canonicalByKey = new Map<string, ConfRow>();
   for (const [k, groupRows] of groupsByKey.entries()) {
     let primary = groupRows[0];
-    const primaryHas = hasAllocationsById.get(primary.id) ?? false;
+    let bestScore = -1;
 
     for (const r of groupRows) {
-      const rHas = hasAllocationsById.get(r.id) ?? false;
-      if (rHas && !primaryHas) {
+      const rowsN = allocationRowCountByConferenceId.get(r.id) ?? 0;
+      const linkedN = linkedUserCountByConferenceId.get(r.id) ?? 0;
+      const score = rowsN > 0 ? linkedN * 10000 + rowsN : -1;
+      if (score > bestScore) {
+        bestScore = score;
         primary = r;
       }
     }
@@ -136,20 +144,34 @@ export default async function SmtAllocationMatrixPage({
   // If multiple conference rows map to the same tab label (duplicate committee),
   // choose the canonical row that has allocations so the roster isn't empty.
   const rawListIds = rawList.map((c) => c.id);
-  const { data: allocPresence } = rawListIds.length
+  const { data: allocSummaries } = rawListIds.length
     ? await supabase
         .from("allocations")
-        .select("conference_id")
+        .select("conference_id, user_id")
         .in("conference_id", rawListIds)
-    : { data: [] as { conference_id: string }[] };
+    : { data: [] as { conference_id: string; user_id: string | null }[] };
 
-  const hasAllocationsById = new Map<string, boolean>();
-  for (const a of allocPresence ?? []) {
+  const allocationRowCountByConferenceId = new Map<string, number>();
+  const linkedUserCountByConferenceId = new Map<string, number>();
+  for (const a of allocSummaries ?? []) {
     if (!a.conference_id) continue;
-    hasAllocationsById.set(a.conference_id, true);
+    allocationRowCountByConferenceId.set(
+      a.conference_id,
+      (allocationRowCountByConferenceId.get(a.conference_id) ?? 0) + 1
+    );
+    if (a.user_id) {
+      linkedUserCountByConferenceId.set(
+        a.conference_id,
+        (linkedUserCountByConferenceId.get(a.conference_id) ?? 0) + 1
+      );
+    }
   }
 
-  const deduped = dedupeConferencesForMatrixTabs(rawList, hasAllocationsById);
+  const deduped = dedupeConferencesForMatrixTabs(
+    rawList,
+    allocationRowCountByConferenceId,
+    linkedUserCountByConferenceId
+  );
   const list = pinSmtCommitteeFirst(deduped.list);
   const { resolveConferenceId } = deduped;
   // First tab after pinning is the SMT / secretariat sheet when present; otherwise first committee.
