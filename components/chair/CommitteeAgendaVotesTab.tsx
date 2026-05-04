@@ -207,7 +207,7 @@ export function CommitteeAgendaVotesTab({
     <div className="space-y-4">
       <p className="text-xs text-brand-muted max-w-2xl">{t("agendaTabHelp")}</p>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-2">
         {topics.map((topic) => {
           const isLive = topic.id === liveTopicId;
           const isSelected = topic.id === selectedId;
@@ -215,7 +215,7 @@ export function CommitteeAgendaVotesTab({
             <div
               key={topic.id}
               className={[
-                "rounded-xl border px-3 py-2.5 min-w-[10rem] max-w-[20rem] transition-colors",
+                "w-full min-w-0 rounded-xl border px-3 py-2.5 transition-colors",
                 isSelected
                   ? "border-brand-accent/60 bg-brand-accent/15 ring-1 ring-brand-accent/35"
                   : "border-white/15 bg-black/20 hover:bg-black/25",
@@ -227,11 +227,11 @@ export function CommitteeAgendaVotesTab({
                   setSelectedId(topic.id);
                   setVotingPanelTopicId(topic.id);
                 }}
-                className="w-full text-left"
+                className="w-full min-w-0 text-left"
                 aria-haspopup="dialog"
                 aria-expanded={votingPanelTopicId === topic.id}
               >
-                <span className="text-sm font-medium text-brand-navy line-clamp-2">
+                <span className="text-sm font-medium text-brand-navy break-words">
                   {translateAgendaTopicLabel(tTopics, topic.label, locale)}
                 </span>
                 <span className="mt-1 flex flex-wrap items-center gap-1.5">
