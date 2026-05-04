@@ -30,7 +30,7 @@ BEGIN
         'sparshikaw05@gmail.com',
         'venicekawisara25@gmail.com',
         'reddragonetz@gmail.com',
-        'dominicstott09@gmail.com',
+        'dominicstott16@gmail.com',
         'mannanparikh27@gmail.com',
         'sarana79262@gmail.com',
         'joannaherbert747@gmail.com',
@@ -136,7 +136,7 @@ BEGIN
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of delegate affairs'
-    AND lower(btrim(u.email)) = 'dominicstott09@gmail.com';
+    AND lower(btrim(u.email)) = 'dominicstott16@gmail.com';
 
   UPDATE public.allocations a
   SET user_id = u.id
@@ -166,7 +166,7 @@ BEGIN
       ('reddragonetz@gmail.com', 'Head of Logistics'),
       ('mannanparikh27@gmail.com', 'Head of Finance'),
       ('sonimyesha@gmail.com', 'Head of Community Outreach'),
-      ('dominicstott09@gmail.com', 'Head of Delegate Affairs'),
+      ('dominicstott16@gmail.com', 'Head of Delegate Affairs'),
       ('joannaherbert747@gmail.com', 'Head of Media'),
       ('sarana79262@gmail.com', 'Head of PR & Advertising')
   ) AS v(email, label)

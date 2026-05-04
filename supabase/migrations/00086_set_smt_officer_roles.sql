@@ -18,7 +18,7 @@ JOIN (
     ('samridh061009@gmail.com', 'Parliamentarian B - Sam'),
     ('venicekawisara25@gmail.com', 'Parliamentarian C - Venice'),
     ('reddragonetz@gmail.com', 'Head of Logistics - Moonum'),
-    ('dominicstott09@gmail.com', 'Head of Delegate Affairs - Dominic S. S.'),
+    ('dominicstott16@gmail.com', 'Head of Delegate Affairs - Dominic S. S.'),
     ('mannanparikh27@gmail.com', 'Head of Finance - Mannan'),
     ('sarana79262@gmail.com', 'Head of Public Relations & Advertising - Phil'),
     ('joannaherbert747@gmail.com', 'Head of Media - Joanna')

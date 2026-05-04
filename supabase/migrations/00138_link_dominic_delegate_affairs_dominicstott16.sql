@@ -1,5 +1,4 @@
--- Ensure Dominic's roster email is linked to Head of Delegate Affairs (see 00138 for dominicstott16@gmail.com).
--- Safe if 00130 already ran (user signed up later; duplicate conference rows; or merge cleared links).
+-- Roster / migration used dominicstott09@gmail.com; Dominic's actual login is dominicstott16@gmail.com.
 
 DO $$
 DECLARE
@@ -11,7 +10,7 @@ BEGIN
   LIMIT 1;
 
   IF v_uid IS NULL THEN
-    RAISE NOTICE '00135: no auth.users row for dominicstott16@gmail.com; skipping';
+    RAISE NOTICE '00138: no auth.users row for dominicstott16@gmail.com; skipping';
     RETURN;
   END IF;
 

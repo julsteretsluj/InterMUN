@@ -1,5 +1,5 @@
--- Ensure Dominic's roster email is linked to Head of Delegate Affairs (see 00138 for dominicstott16@gmail.com).
--- Safe if 00130 already ran (user signed up later; duplicate conference rows; or merge cleared links).
+-- Re-apply Head of Delegate Affairs link (see 00138; email corrected to dominicstott16@gmail.com).
+-- 00135 may have run before the auth user existed; this migration is idempotent for already-linked users.
 
 DO $$
 DECLARE
@@ -11,7 +11,7 @@ BEGIN
   LIMIT 1;
 
   IF v_uid IS NULL THEN
-    RAISE NOTICE '00135: no auth.users row for dominicstott16@gmail.com; skipping';
+    RAISE NOTICE '00137: no auth.users row for dominicstott16@gmail.com; check exact login email in Supabase Auth';
     RETURN;
   END IF;
 
