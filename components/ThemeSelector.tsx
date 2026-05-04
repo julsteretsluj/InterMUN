@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ALargeSmall, Check, Moon, Palette, Sun, Type } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -49,6 +50,7 @@ export function ThemeSelector({ className }: { className?: string }) {
   const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
   const [textSizeStep, setTextSizeStep] = useState<TextSizeStep>(() => readTextSizeFromStorage());
   const [mounted, setMounted] = useState(false);
+  const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -73,6 +75,29 @@ export function ThemeSelector({ className }: { className?: string }) {
     return () => {
       document.removeEventListener("mousedown", onDoc);
       document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setPopoverBox(null);
+      return;
+    }
+    function sync() {
+      const el = btnRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setPopoverBox({
+        top: rect.bottom + 8,
+        right: Math.max(12, window.innerWidth - rect.right),
+      });
+    }
+    sync();
+    window.addEventListener("resize", sync);
+    window.addEventListener("scroll", sync, true);
+    return () => {
+      window.removeEventListener("resize", sync);
+      window.removeEventListener("scroll", sync, true);
     };
   }, [open]);
 
@@ -137,13 +162,20 @@ export function ThemeSelector({ className }: { className?: string }) {
         <Palette className="size-4" strokeWidth={2} aria-hidden />
       </button>
 
-      {open ? (
-        <div
-          ref={panelRef}
-          role="dialog"
-          aria-label={t("dialogAria")}
-          className="mun-popover absolute right-0 z-[100] mt-2 w-[min(100vw-1.5rem,18.5rem)] p-3"
-        >
+      {open && popoverBox && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              ref={panelRef}
+              role="dialog"
+              aria-label={t("dialogAria")}
+              style={{
+                position: "fixed",
+                top: popoverBox.top,
+                right: popoverBox.right,
+                zIndex: 300,
+              }}
+              className="mun-popover w-[min(100vw-1.5rem,18.5rem)] p-3"
+            >
           <p className="tag tag-neutral mb-0.5">{t("appearance")}</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button
@@ -278,8 +310,10 @@ export function ThemeSelector({ className }: { className?: string }) {
             </span>
             <span className="text-xs font-semibold">{dyslexicFont ? t("on") : t("off")}</span>
           </button>
-        </div>
-      ) : null}
+            </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
