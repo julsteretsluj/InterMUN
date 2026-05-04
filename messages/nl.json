@@ -542,7 +542,8 @@
     "subtabs": "Subtabbladen",
     "home": "Thuis",
     "library": "Bibliotheek",
-    "mainNavigationAria": "Hoofdnavigatie"
+    "mainNavigationAria": "Hoofdnavigatie",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Helpcentrum",
@@ -765,7 +766,8 @@
     "formalMotions": "Formele moties",
     "timer": "Timer",
     "smtProfile": "Profiel",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase is niet geconfigureerd",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Officiële koppelingen",
       "roomCode": "Kamercode",
       "settings": "Instellingen",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

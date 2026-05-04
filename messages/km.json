@@ -542,7 +542,8 @@
     "subtabs": "ផ្ទាំងរង",
     "home": "ផ្ទះ",
     "library": "បណ្ណាល័យ",
-    "mainNavigationAria": "ការរុករកចម្បង"
+    "mainNavigationAria": "ការរុករកចម្បង",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "មជ្ឈមណ្ឌលជំនួយ",
@@ -765,7 +766,8 @@
     "formalMotions": "ចលនាផ្លូវការ",
     "timer": "កម្មវិធីកំណត់ម៉ោង",
     "smtProfile": "ប្រវត្តិរូប",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -1009,7 +1011,8 @@
       "officialLinks": "តំណភ្ជាប់ផ្លូវការ",
       "roomCode": "លេខកូដបន្ទប់",
       "settings": "ការកំណត់",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

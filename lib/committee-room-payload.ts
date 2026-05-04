@@ -2,6 +2,10 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { getDaisSeatLabelsForCommittee, isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
+import {
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
+} from "@/lib/conference-committee-canonical";
 import type { DaisSeat, DelegatePlacard } from "@/components/committee-room/VirtualCommitteeRoom";
 
 type ProfileEmbed = {
@@ -174,21 +178,35 @@ export async function loadCommitteeRoomPayload(
     chairNamesHint?: string | null;
   }
 ): Promise<CommitteeRoomPayload> {
+  const scope = await getCommitteeAwardScope(supabase, conferenceId);
   const { data: conference } = await supabase
     .from("conferences")
     .select("id, name, committee, committee_code")
-    .eq("id", conferenceId)
+    .eq("id", scope.canonicalConferenceId)
     .maybeSingle();
 
   const { data: allocationRows } = await supabase
     .from("allocations")
     .select(
-      "id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
+      "id, conference_id, country, user_id, display_name_override, display_pronouns_override, display_school_override, profiles(name, pronouns, school)"
     )
-    .eq("conference_id", conferenceId)
+    .in("conference_id", scope.siblingConferenceIds)
     .order("country");
 
-  const rows = allocationRows ?? [];
+  const rows = mergeAllocationsAcrossSiblingConferences(
+    (allocationRows ??
+      []) as {
+      id: string;
+      conference_id: string;
+      country: string | null;
+      user_id: string | null;
+      display_name_override: string | null;
+      display_pronouns_override: string | null;
+      display_school_override: string | null;
+      profiles: ProfileEmbed | ProfileEmbed[] | null;
+    }[],
+    scope.canonicalConferenceId
+  );
   const placards = placardsFromAllocationRows(
     rows as {
       id: string;

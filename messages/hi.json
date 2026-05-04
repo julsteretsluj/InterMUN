@@ -470,7 +470,8 @@
     "subtabs": "उपटैब",
     "home": "घर",
     "library": "पुस्तकालय",
-    "mainNavigationAria": "मुख्य नेविगेशन"
+    "mainNavigationAria": "मुख्य नेविगेशन",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "सहायता केंद्र",
@@ -693,7 +694,8 @@
     "formalMotions": "औपचारिक प्रस्ताव",
     "timer": "घड़ी",
     "smtProfile": "प्रोफ़ाइल",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "सुपाबेस कॉन्फ़िगर नहीं है",
@@ -937,7 +939,8 @@
       "officialLinks": "आधिकारिक लिंक",
       "roomCode": "कक्ष कोड",
       "settings": "सेटिंग्स",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

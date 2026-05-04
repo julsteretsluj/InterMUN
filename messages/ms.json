@@ -542,7 +542,8 @@
     "subtabs": "Subtab",
     "home": "Rumah",
     "library": "Perpustakaan",
-    "mainNavigationAria": "Navigasi utama"
+    "mainNavigationAria": "Navigasi utama",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Pusat bantuan",
@@ -765,7 +766,8 @@
     "formalMotions": "usul rasmi",
     "timer": "Pemasa",
     "smtProfile": "Profil",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasikan",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Pautan rasmi",
       "roomCode": "Kod bilik",
       "settings": "tetapan",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

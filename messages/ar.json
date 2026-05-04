@@ -542,7 +542,8 @@
     "subtabs": "علامات التبويب الفرعية",
     "home": "بيت",
     "library": "مكتبة",
-    "mainNavigationAria": "الملاحة الرئيسية"
+    "mainNavigationAria": "الملاحة الرئيسية",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "مركز المساعدة",
@@ -765,7 +766,8 @@
     "formalMotions": "الاقتراحات الرسمية",
     "timer": "الموقت",
     "smtProfile": "حساب تعريفي",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "لم يتم تكوين Supabase",
@@ -1009,7 +1011,8 @@
       "officialLinks": "الروابط الرسمية",
       "roomCode": "رمز الغرفة",
       "settings": "إعدادات",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

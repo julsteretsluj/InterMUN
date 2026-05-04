@@ -542,7 +542,8 @@
     "subtabs": "Alt sekmeler",
     "home": "Ev",
     "library": "Kütüphane",
-    "mainNavigationAria": "Ana gezinme"
+    "mainNavigationAria": "Ana gezinme",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Yardım merkezi",
@@ -765,7 +766,8 @@
     "formalMotions": "Resmi hareketler",
     "timer": "Zamanlayıcı",
     "smtProfile": "Profil",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Resmi bağlantılar",
       "roomCode": "Oda kodu",
       "settings": "Ayarlar",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

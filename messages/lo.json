@@ -542,7 +542,8 @@
     "subtabs": "ແຖບຍ່ອຍ",
     "home": "ບ້ານ",
     "library": "ຫໍສະໝຸດ",
-    "mainNavigationAria": "ການນໍາທາງຕົ້ນຕໍ"
+    "mainNavigationAria": "ການນໍາທາງຕົ້ນຕໍ",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "ສູນຊ່ວຍເຫຼືອ",
@@ -765,7 +766,8 @@
     "formalMotions": "ການເຄື່ອນໄຫວຢ່າງເປັນທາງການ",
     "timer": "ໂມງຈັບເວລາ",
     "smtProfile": "ໂປຣໄຟລ໌",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase ບໍ່ໄດ້ຕັ້ງຄ່າ",
@@ -1009,7 +1011,8 @@
       "officialLinks": "ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ",
       "roomCode": "ລະຫັດຫ້ອງ",
       "settings": "ການຕັ້ງຄ່າ",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

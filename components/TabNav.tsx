@@ -12,6 +12,7 @@ const BASE_TABS = [
   { href: "/profile", labelKey: "profile", emoji: "👤" },
   { href: "/chats-notes", labelKey: "notes", emoji: "📝" },
   { href: "/committee-room", labelKey: "committee", emoji: "🏛️" },
+  { href: "/history", labelKey: "history", emoji: "🕘" },
   { href: "/voting", labelKey: "voting", emoji: "🗳️" },
   { href: "/guides", labelKey: "guides", emoji: "📚" },
   { href: "/documents", labelKey: "documents", emoji: "📄" },
@@ -73,6 +74,7 @@ function tabMainGroup(href: string): MainTabKey {
   if (
     href === "/chats-notes" ||
     href === "/committee-room" ||
+    href === "/history" ||
     href === "/voting" ||
     href === "/resolutions" ||
     href === "/running-notes" ||

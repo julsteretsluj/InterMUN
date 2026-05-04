@@ -542,7 +542,8 @@
     "subtabs": "Подвкладки",
     "home": "Дом",
     "library": "Библиотека",
-    "mainNavigationAria": "Основная навигация"
+    "mainNavigationAria": "Основная навигация",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Справочный центр",
@@ -765,7 +766,8 @@
     "formalMotions": "Официальные ходатайства",
     "timer": "Таймер",
     "smtProfile": "Профиль",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Супабаза не настроена",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Официальные ссылки",
       "roomCode": "Код номера",
       "settings": "Настройки",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

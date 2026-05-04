@@ -542,7 +542,8 @@
     "subtabs": "하위 탭",
     "home": "집",
     "library": "도서관",
-    "mainNavigationAria": "메인 네비게이션"
+    "mainNavigationAria": "메인 네비게이션",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "도움말 센터",
@@ -765,7 +766,8 @@
     "formalMotions": "공식적인 동의",
     "timer": "시간제 노동자",
     "smtProfile": "윤곽",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase가 구성되지 않았습니다.",
@@ -1009,7 +1011,8 @@
       "officialLinks": "공식 링크",
       "roomCode": "객실 코드",
       "settings": "설정",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

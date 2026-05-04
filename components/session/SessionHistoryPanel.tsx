@@ -3,9 +3,11 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
+import { RoleVisibility } from "@/lib/role-visibility";
 
 type SessionHistoryRow = {
   id: string;
+  conference_id: string;
   title: string;
   started_at: string;
   ended_at: string | null;
@@ -19,7 +21,13 @@ function formatRange(startIso: string, endIso: string | null): string {
   return endText ? `${startText} -> ${endText}` : startText;
 }
 
-export function SessionHistoryPanel({ conferenceId }: { conferenceId: string }) {
+export function SessionHistoryPanel({
+  conferenceId,
+  conferenceIds,
+}: {
+  conferenceId: string;
+  conferenceIds?: string[];
+}) {
   const t = useTranslations("session.history");
   const supabase = useMemo(() => createClient(), []);
   const [rows, setRows] = useState<SessionHistoryRow[]>([]);
@@ -27,8 +35,16 @@ export function SessionHistoryPanel({ conferenceId }: { conferenceId: string }) 
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
-  const canRename = role === "chair" || role === "smt" || role === "admin";
-  const canDelete = role === "smt" || role === "admin";
+  const canRename = RoleVisibility.canRenameSessionHistory(role);
+  const canDelete = RoleVisibility.canDeleteSessionHistory(role);
+  const scopedConferenceIds = useMemo(() => {
+    const ids = new Set<string>();
+    if (conferenceId) ids.add(conferenceId);
+    for (const id of conferenceIds ?? []) {
+      if (id) ids.add(id);
+    }
+    return [...ids];
+  }, [conferenceId, conferenceIds]);
 
   const load = useCallback(async () => {
     const {
@@ -41,11 +57,15 @@ export function SessionHistoryPanel({ conferenceId }: { conferenceId: string }) 
       setRole(null);
     }
 
-    const { data, error: historyError } = await supabase
+    let q = supabase
       .from("committee_session_history")
-      .select("id, title, started_at, ended_at")
-      .eq("conference_id", conferenceId)
+      .select("id, conference_id, title, started_at, ended_at")
       .order("started_at", { ascending: false });
+    q =
+      scopedConferenceIds.length > 1
+        ? q.in("conference_id", scopedConferenceIds)
+        : q.eq("conference_id", scopedConferenceIds[0] ?? conferenceId);
+    const { data, error: historyError } = await q;
     if (historyError) {
       setRows([]);
       setError(historyError.message);
@@ -53,22 +73,26 @@ export function SessionHistoryPanel({ conferenceId }: { conferenceId: string }) 
     }
     setRows((data as SessionHistoryRow[]) ?? []);
     setError(null);
-  }, [conferenceId, supabase]);
+  }, [conferenceId, scopedConferenceIds, supabase]);
 
   useEffect(() => {
     void load();
-    const ch = supabase
-      .channel(`session-history-${conferenceId}`)
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "committee_session_history", filter: `conference_id=eq.${conferenceId}` },
-        () => void load()
-      )
-      .subscribe();
+    const subs = scopedConferenceIds.map((id) =>
+      supabase
+        .channel(`session-history-${id}`)
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "committee_session_history", filter: `conference_id=eq.${id}` },
+          () => void load()
+        )
+        .subscribe()
+    );
     return () => {
-      void supabase.removeChannel(ch);
+      for (const ch of subs) {
+        void supabase.removeChannel(ch);
+      }
     };
-  }, [conferenceId, load, supabase]);
+  }, [load, scopedConferenceIds, supabase]);
 
   function renameSession(id: string, currentTitle: string) {
     if (!canRename) return;

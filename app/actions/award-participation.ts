@@ -41,7 +41,7 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
   let committeeConferenceId = String(formData.get("committee_conference_id") ?? "").trim();
   if (!committeeConferenceId) return { error: "Missing committee." };
 
-  if (scope === "chair_report_by_smt") {
+  if (scope === "chair_report_by_smt" || scope === "chair_by_delegate" || scope === "delegate_by_chair") {
     committeeConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, committeeConferenceId);
   }
 

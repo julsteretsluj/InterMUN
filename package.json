@@ -16,7 +16,8 @@
     "i18n:translate-agenda-topics": "node scripts/translate-agenda-topics.mjs",
     "i18n:translate-agenda-voting-panel": "node scripts/translate-agenda-voting-panel.mjs",
     "i18n:translate-session-guided-flow": "node scripts/translate-session-guided-flow.mjs",
-    "i18n:generate-agenda-slugs": "node scripts/generate-agenda-topic-slug-map.mjs"
+    "i18n:generate-agenda-slugs": "node scripts/generate-agenda-topic-slug-map.mjs",
+    "realtime:metrics-report": "node scripts/realtime-metrics-report.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.2.8",

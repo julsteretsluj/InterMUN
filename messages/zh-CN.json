@@ -542,7 +542,8 @@
     "subtabs": "子选项卡",
     "home": "家",
     "library": "图书馆",
-    "mainNavigationAria": "主导航"
+    "mainNavigationAria": "主导航",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "帮助中心",
@@ -765,7 +766,8 @@
     "formalMotions": "正式动议",
     "timer": "定时器",
     "smtProfile": "轮廓",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -1009,7 +1011,8 @@
       "officialLinks": "官方链接",
       "roomCode": "房间代码",
       "settings": "设置",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

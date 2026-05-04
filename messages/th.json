@@ -470,7 +470,8 @@
     "subtabs": "แท็บย่อย",
     "home": "บ้าน",
     "library": "ห้องสมุด",
-    "mainNavigationAria": "การนำทางหลัก"
+    "mainNavigationAria": "การนำทางหลัก",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "ศูนย์ช่วยเหลือ",
@@ -693,7 +694,8 @@
     "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
     "timer": "ตัวจับเวลา",
     "smtProfile": "ประวัติโดยย่อ",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "ไม่ได้กำหนดค่า Supabase",
@@ -937,7 +939,8 @@
       "officialLinks": "ลิงค์อย่างเป็นทางการ",
       "roomCode": "รหัสห้อง",
       "settings": "การตั้งค่า",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

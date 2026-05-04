@@ -470,7 +470,8 @@
     "subtabs": "সাবট্যাব",
     "home": "বাড়ি",
     "library": "লাইব্রেরি",
-    "mainNavigationAria": "প্রধান নেভিগেশন"
+    "mainNavigationAria": "প্রধান নেভিগেশন",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "সাহায্য কেন্দ্র",
@@ -693,7 +694,8 @@
     "formalMotions": "আনুষ্ঠানিক গতিবিধি",
     "timer": "টাইমার",
     "smtProfile": "প্রোফাইল",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "সুপাবেস কনফিগার করা নেই",
@@ -937,7 +939,8 @@
       "officialLinks": "অফিসিয়াল লিঙ্ক",
       "roomCode": "রুম কোড",
       "settings": "সেটিংস",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

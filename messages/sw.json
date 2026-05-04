@@ -470,7 +470,8 @@
     "subtabs": "Vichupo vidogo",
     "home": "Nyumbani",
     "library": "Maktaba",
-    "mainNavigationAria": "Urambazaji mkuu"
+    "mainNavigationAria": "Urambazaji mkuu",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Kituo cha usaidizi",
@@ -693,7 +694,8 @@
     "formalMotions": "Mwendo rasmi",
     "timer": "Kipima muda",
     "smtProfile": "Wasifu",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase haijasanidiwa",
@@ -937,7 +939,8 @@
       "roomCode": "Msimbo wa chumba",
       "settings": "Mipangilio",
       "discipline": "Nidhamu",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

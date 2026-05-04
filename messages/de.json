@@ -542,7 +542,8 @@
     "subtabs": "Unterregisterkarten",
     "home": "Heim",
     "library": "Bibliothek",
-    "mainNavigationAria": "Hauptnavigation"
+    "mainNavigationAria": "Hauptnavigation",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Hilfecenter",
@@ -765,7 +766,8 @@
     "formalMotions": "Formelle Anträge",
     "timer": "Timer",
     "smtProfile": "Profil",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase ist nicht konfiguriert",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Offizielle Links",
       "roomCode": "Zimmercode",
       "settings": "Einstellungen",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

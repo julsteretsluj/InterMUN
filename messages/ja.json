@@ -542,7 +542,8 @@
     "subtabs": "サブタブ",
     "home": "家",
     "library": "図書館",
-    "mainNavigationAria": "メインナビゲーション"
+    "mainNavigationAria": "メインナビゲーション",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "ヘルプセンター",
@@ -765,7 +766,8 @@
     "formalMotions": "正式な動作",
     "timer": "タイマー",
     "smtProfile": "プロフィール",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -1009,7 +1011,8 @@
       "officialLinks": "公式リンク",
       "roomCode": "ルームコード",
       "settings": "設定",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

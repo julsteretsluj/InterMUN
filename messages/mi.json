@@ -470,7 +470,8 @@
     "subtabs": "Riparoto",
     "home": "Kainga",
     "library": "Whare Pukapuka",
-    "mainNavigationAria": "Te whakatere matua"
+    "mainNavigationAria": "Te whakatere matua",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Pokapū awhina",
@@ -693,7 +694,8 @@
     "formalMotions": "Motini okawa",
     "timer": "Matawā",
     "smtProfile": "Kōtaha",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Ko te Supabase kaore i te whirihora",
@@ -937,7 +939,8 @@
       "roomCode": "Waehere ruma",
       "settings": "Tautuhinga",
       "discipline": "Te whiu",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

@@ -542,7 +542,8 @@
     "subtabs": "Subpestañas",
     "home": "Hogar",
     "library": "Biblioteca",
-    "mainNavigationAria": "Navegación principal"
+    "mainNavigationAria": "Navegación principal",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Centro de ayuda",
@@ -765,7 +766,8 @@
     "formalMotions": "Mociones formales",
     "timer": "Minutero",
     "smtProfile": "Perfil",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase no está configurada",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Enlaces oficiales",
       "roomCode": "código de habitación",
       "settings": "Ajustes",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

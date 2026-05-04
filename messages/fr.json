@@ -542,7 +542,8 @@
     "subtabs": "Sous-onglets",
     "home": "Maison",
     "library": "Bibliothèque",
-    "mainNavigationAria": "Navigation principale"
+    "mainNavigationAria": "Navigation principale",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Centre d'aide",
@@ -765,7 +766,8 @@
     "formalMotions": "Motions formelles",
     "timer": "Minuteur",
     "smtProfile": "Profil",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "La Supabase n'est pas configurée",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Liens officiels",
       "roomCode": "Code de la chambre",
       "settings": "Paramètres",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

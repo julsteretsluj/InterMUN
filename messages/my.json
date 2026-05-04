@@ -542,7 +542,8 @@
     "subtabs": "စာတန်းများ",
     "home": "အိမ်",
     "library": "စာကြည့်တိုက်",
-    "mainNavigationAria": "ပင်မလမ်းကြောင်း"
+    "mainNavigationAria": "ပင်မလမ်းကြောင်း",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "အကူအညီစင်တာ",
@@ -765,7 +766,8 @@
     "formalMotions": "တရားဝင်လှုပ်ရှားမှုများ",
     "timer": "အချိန်တိုင်း",
     "smtProfile": "ကိုယ်ရေးအကျဉ်း",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase ကို စီစဉ်မထားပါ။",
@@ -1009,7 +1011,8 @@
       "officialLinks": "တရားဝင်လင့်များ",
       "roomCode": "အခန်းကုဒ်",
       "settings": "ဆက်တင်များ",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

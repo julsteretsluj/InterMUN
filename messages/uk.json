@@ -542,7 +542,8 @@
     "subtabs": "Підвкладки",
     "home": "додому",
     "library": "Бібліотека",
-    "mainNavigationAria": "Основна навігація"
+    "mainNavigationAria": "Основна навігація",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Довідковий центр",
@@ -765,7 +766,8 @@
     "formalMotions": "Офіційні клопотання",
     "timer": "Таймер",
     "smtProfile": "Профіль",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase не налаштовано",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Офіційні посилання",
       "roomCode": "Код кімнати",
       "settings": "Налаштування",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

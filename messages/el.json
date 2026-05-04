@@ -470,7 +470,8 @@
     "subtabs": "Υποκαρτέλες",
     "home": "Σπίτι",
     "library": "Βιβλιοθήκη",
-    "mainNavigationAria": "Κύρια πλοήγηση"
+    "mainNavigationAria": "Κύρια πλοήγηση",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Κέντρο βοήθειας",
@@ -693,7 +694,8 @@
     "formalMotions": "Επίσημες κινήσεις",
     "timer": "Μετρών την ώραν",
     "smtProfile": "Προφίλ",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Το Supabase δεν έχει ρυθμιστεί",
@@ -937,7 +939,8 @@
       "officialLinks": "Επίσημοι σύνδεσμοι",
       "roomCode": "Κωδικός δωματίου",
       "settings": "Ρυθμίσεις",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

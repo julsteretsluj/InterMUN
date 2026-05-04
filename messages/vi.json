@@ -542,7 +542,8 @@
     "subtabs": "Tab phụ",
     "home": "Trang chủ",
     "library": "Thư viện",
-    "mainNavigationAria": "Điều hướng chính"
+    "mainNavigationAria": "Điều hướng chính",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "Trung tâm trợ giúp",
@@ -765,7 +766,8 @@
     "formalMotions": "Kiến nghị chính thức",
     "timer": "hẹn giờ",
     "smtProfile": "Hồ sơ",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase chưa được cấu hình",
@@ -1009,7 +1011,8 @@
       "officialLinks": "Liên kết chính thức",
       "roomCode": "Mã phòng",
       "settings": "Cài đặt",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

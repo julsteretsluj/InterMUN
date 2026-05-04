@@ -470,7 +470,8 @@
     "subtabs": "زیربرگه ها",
     "home": "صفحه اصلی",
     "library": "کتابخانه",
-    "mainNavigationAria": "ناوبری اصلی"
+    "mainNavigationAria": "ناوبری اصلی",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "مرکز راهنمایی",
@@ -693,7 +694,8 @@
     "formalMotions": "حرکات رسمی",
     "timer": "تایمر",
     "smtProfile": "نمایه",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase پیکربندی نشده است",
@@ -937,7 +939,8 @@
       "roomCode": "کد اتاق",
       "settings": "تنظیمات",
       "discipline": "انضباطی",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {

@@ -6,6 +6,8 @@ import { ChairDigitalRoomClient } from "@/components/chair/ChairDigitalRoomClien
 import { type RollAttendance, parseRollAttendance } from "@/lib/roll-attendance";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { getTranslations } from "next-intl/server";
+import { getChamberScope } from "@/lib/chamber-scope";
+import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
 
 export default async function ChairDigitalRoomPage() {
   const t = await getTranslations("pageTitles");
@@ -27,18 +29,36 @@ export default async function ChairDigitalRoomPage() {
   }
 
   const conferenceId = await requireActiveConferenceId();
+  const scope = await getChamberScope(supabase, conferenceId);
 
   const [{ data: conf }, { data: allocationRows }, { data: rollRows }] = await Promise.all([
-    supabase.from("conferences").select("committee, tagline, name").eq("id", conferenceId).maybeSingle(),
-    supabase.from("allocations").select("id, country, user_id").eq("conference_id", conferenceId),
-    supabase.from("roll_call_entries").select("allocation_id, present, attendance").eq("conference_id", conferenceId),
+    supabase
+      .from("conferences")
+      .select("committee, tagline, name")
+      .eq("id", scope.canonicalConferenceId)
+      .maybeSingle(),
+    supabase
+      .from("allocations")
+      .select("id, conference_id, country, user_id")
+      .in("conference_id", scope.siblingConferenceIds),
+    supabase
+      .from("roll_call_entries")
+      .select("allocation_id, conference_id, present, attendance")
+      .in("conference_id", scope.siblingConferenceIds),
   ]);
 
   const committeeLine =
     [conf?.committee, conf?.tagline].filter(Boolean).join(" · ") || conf?.name || tRoom("committeeFallback");
 
+  const mergedAllocationRows = mergeAllocationsAcrossSiblingConferences(
+    (allocationRows ?? []).map((r) => ({
+      ...r,
+      conference_id: r.conference_id,
+    })),
+    scope.canonicalConferenceId
+  );
   const allocationUserIds = [
-    ...new Set((allocationRows ?? []).map((r) => r.user_id).filter((id): id is string => Boolean(id))),
+    ...new Set(mergedAllocationRows.map((r) => r.user_id).filter((id): id is string => Boolean(id))),
   ];
   const { data: allocationProfiles } =
     allocationUserIds.length > 0
@@ -46,7 +66,7 @@ export default async function ChairDigitalRoomPage() {
       : { data: [] as { id: string; role: string | null }[] };
   const roleByProfileId = new Map((allocationProfiles ?? []).map((p) => [p.id, p.role ?? null]));
 
-  const allocations = (allocationRows ?? []).map((r) => ({
+  const allocations = mergedAllocationRows.map((r) => ({
     id: r.id,
     country: r.country?.trim() || "—",
     user_id: r.user_id,
@@ -66,7 +86,7 @@ export default async function ChairDigitalRoomPage() {
   return (
     <MunPageShell title={t("digitalRoom")}>
       <ChairDigitalRoomClient
-        conferenceId={conferenceId}
+        conferenceId={scope.canonicalConferenceId}
         committeeLine={committeeLine}
         allocations={allocations}
         rollAttendanceByAllocationId={rollAttendanceByAllocationId}

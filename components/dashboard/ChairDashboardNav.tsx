@@ -13,6 +13,7 @@ export type ChairNavItemKey =
   | "flowChecklist"
   | "delegates"
   | "digitalRoom"
+  | "history"
   | "rollCall"
   | "session"
   | "agenda"
@@ -70,6 +71,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     exactHref: true,
   },
   { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },
+  { href: "/history", itemKey: "history", emoji: "🕘" },
   {
     href: "/chair/session/speakers",
     itemKey: "speakers",

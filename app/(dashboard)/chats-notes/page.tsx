@@ -6,6 +6,7 @@ import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
 import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
 import { getTranslations } from "next-intl/server";
+import { getChamberScope } from "@/lib/chamber-scope";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -80,6 +81,7 @@ export default async function ChatsNotesPage({
   }
 
   const conferenceId = await requireActiveConferenceId();
+  const scope = await getChamberScope(supabase, conferenceId);
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -92,11 +94,11 @@ export default async function ChatsNotesPage({
 
   const verifiedConferenceId = await getVerifiedConferenceId();
   const isSmtLike = myRole === "smt";
-  const smtVerified = isSmtLike && verifiedConferenceId === conferenceId;
+  const smtVerified = isSmtLike && scope.siblingConferenceIds.includes(verifiedConferenceId ?? "");
   const { data: procedureState } = await supabase
     .from("procedure_states")
     .select("committee_session_started_at, state, current_vote_item_id")
-    .eq("conference_id", conferenceId)
+    .eq("conference_id", scope.canonicalConferenceId)
     .maybeSingle();
   const sessionActive = Boolean(
     (procedureState as { committee_session_started_at?: string | null } | null)
@@ -130,7 +132,7 @@ export default async function ChatsNotesPage({
   let notesQuery = supabase
     .from("delegation_notes")
     .select("*")
-    .eq("conference_id", conferenceId)
+    .in("conference_id", scope.siblingConferenceIds)
     .order("created_at", { ascending: false })
     .limit(200);
 
@@ -146,7 +148,7 @@ export default async function ChatsNotesPage({
   const { data: allocations } = await supabase
     .from("allocations")
     .select("id, country, user_id")
-    .eq("conference_id", conferenceId);
+    .in("conference_id", scope.siblingConferenceIds);
 
   const allocationRows = (allocations ?? []) as AllocationRow[];
   const assignedAllocations = allocationRows.filter((a) => Boolean(a.user_id));
@@ -158,7 +160,7 @@ export default async function ChatsNotesPage({
   const { data: myAllocations } = await supabase
     .from("allocations")
     .select("id")
-    .eq("conference_id", conferenceId)
+    .in("conference_id", scope.siblingConferenceIds)
     .eq("user_id", user.id);
 
   const myAllocationId = (myAllocations?.[0]?.id as string | undefined) ?? null;
@@ -182,7 +184,7 @@ export default async function ChatsNotesPage({
     const { data: targetAlloc } = await supabase
       .from("allocations")
       .select("id, country")
-      .eq("conference_id", conferenceId)
+      .in("conference_id", scope.siblingConferenceIds)
       .eq("user_id", forProfile)
       .maybeSingle();
 
@@ -308,7 +310,7 @@ export default async function ChatsNotesPage({
   return (
     <MunPageShell title={t("notes")}>
       <DelegationNotesView
-        conferenceId={conferenceId}
+        conferenceId={scope.canonicalConferenceId}
         initialNotes={initialNotes}
         myUserId={user.id}
         myRole={myRole}

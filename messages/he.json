@@ -470,7 +470,8 @@
     "subtabs": "כרטיסיות משנה",
     "home": "בַּיִת",
     "library": "סִפְרִיָה",
-    "mainNavigationAria": "ניווט ראשי"
+    "mainNavigationAria": "ניווט ראשי",
+    "history": "History"
   },
   "dashboardLayout": {
     "helpCenter": "מרכז עזרה",
@@ -693,7 +694,8 @@
     "formalMotions": "הצעות פורמליות",
     "timer": "שָׁעוֹן עֶצֶר",
     "smtProfile": "פּרוֹפִיל",
-    "committeeAgenda": "📑 Agenda"
+    "committeeAgenda": "📑 Agenda",
+    "history": "History"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -937,7 +939,8 @@
       "roomCode": "קוד חדר",
       "settings": "הגדרות",
       "discipline": "מִשְׁמַעתִי",
-      "agenda": "Agenda"
+      "agenda": "Agenda",
+      "history": "History"
     }
   },
   "smtNav": {
