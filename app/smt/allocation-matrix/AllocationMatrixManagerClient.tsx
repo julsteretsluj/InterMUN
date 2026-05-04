@@ -323,10 +323,12 @@ export function AllocationMatrixManagerClient({
               ) : (
                 rows.map((r) => {
                   const formId = `alloc-row-${r.id}`;
+                  const positionLabel =
+                    smtParliamentarianSeatLabelByRowId.get(r.id) ?? r.country;
                   if (r.user_id) {
                     return (
                       <tr key={r.id} className="border-t border-brand-navy/5">
-                        <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
+                        <td className="px-3 py-2 font-medium text-brand-navy">{positionLabel}</td>
                         <td className="px-3 py-2 font-mono text-xs text-brand-navy/90">
                           {r.code?.trim() ? r.code : "—"}
                         </td>
