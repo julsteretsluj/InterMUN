@@ -24,35 +24,52 @@ export default async function SmtConferencePage() {
     eventRow = data;
   }
 
-  const { data: committeesRaw } = eventId
-    ? await supabase
-        .from("conferences")
-        .select(
-          "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, room_code, rop_document_url, consultation_before_moderated_caucus, procedure_profile, eu_guided_workflow_enabled"
-        )
-        .eq("event_id", eventId)
-        .order("name", { ascending: true })
-    : {
-        data: [] as {
-          id: string;
-          event_id: string;
-          name: string;
-          committee: string | null;
-          tagline: string | null;
-          committee_code: string | null;
-          committee_full_name: string | null;
-          chair_names: string | null;
-          committee_logo_url: string | null;
-          crisis_slides_url: string | null;
-          room_code: string | null;
-          rop_document_url: string | null;
-          consultation_before_moderated_caucus: boolean | null;
-          procedure_profile: "default" | "eu_parliament" | null;
-          eu_guided_workflow_enabled: boolean | null;
-        }[],
-      };
+  type CommitteeFetchRow = {
+    id: string;
+    event_id: string;
+    name: string;
+    committee: string | null;
+    tagline: string | null;
+    committee_code: string | null;
+    committee_full_name: string | null;
+    chair_names: string | null;
+    committee_logo_url: string | null;
+    crisis_slides_url: string | null;
+    room_code: string | null;
+    rop_document_url: string | null;
+    consultation_before_moderated_caucus: boolean | null;
+    procedure_profile: "default" | "eu_parliament" | null;
+    eu_guided_workflow_enabled: boolean | null;
+  };
 
-  const committees = filterConferencesForSmtRoomCodes(committeesRaw ?? []);
+  const baseSelect =
+    "id, event_id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, crisis_slides_url, room_code, consultation_before_moderated_caucus, procedure_profile, eu_guided_workflow_enabled";
+
+  let committeesRaw: CommitteeFetchRow[] = [];
+
+  if (eventId) {
+    const { data: confs } = await supabase
+      .from("conferences")
+      .select(baseSelect)
+      .eq("event_id", eventId)
+      .order("name", { ascending: true });
+
+    committeesRaw = ((confs ?? []) as Omit<CommitteeFetchRow, "rop_document_url">[]).map((c) => ({
+      ...c,
+      rop_document_url: null,
+    }));
+
+    const ropPick = await supabase.from("conferences").select("id, rop_document_url").eq("event_id", eventId);
+    if (!ropPick.error && ropPick.data?.length) {
+      const byId = new Map(ropPick.data.map((r) => [r.id, r.rop_document_url ?? null]));
+      committeesRaw = committeesRaw.map((c) => ({
+        ...c,
+        rop_document_url: (byId.get(c.id) as string | null | undefined) ?? null,
+      }));
+    }
+  }
+
+  const committees = filterConferencesForSmtRoomCodes(committeesRaw);
 
   return (
     <div>
