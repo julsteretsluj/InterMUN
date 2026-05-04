@@ -60,6 +60,18 @@ const WELL_KNOWN_COMMITTEE_TAGS: Record<string, CommitteeDisplayTags> = {
     format: "Traditional",
     eslFriendly: false,
   },
+  "EU PARLIAMENT": {
+    difficulty: "Intermediate",
+    ageRangeKey: "grade7_12_year8_13",
+    format: "Traditional",
+    eslFriendly: false,
+  },
+  "EUROPEAN UNION PARLIAMENT": {
+    difficulty: "Intermediate",
+    ageRangeKey: "grade7_12_year8_13",
+    format: "Traditional",
+    eslFriendly: false,
+  },
   UNESCO: {
     difficulty: "Intermediate",
     ageRangeKey: "grade7_12_year8_13",
