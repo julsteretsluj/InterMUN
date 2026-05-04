@@ -1,7 +1,8 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import { randomBytes } from "crypto";
 
@@ -29,13 +30,17 @@ async function requireChairOrSmt() {
   return { supabase, user, role, ok: true as const };
 }
 
-/** Chairs are limited to their active committee (room / dashboard context). SMT and admin are not. */
+/** Chairs (and SMT in chair surface) are limited to their active committee. Other SMT/admin are not. */
 async function assertChairOwnsConference(
   role: string | null | undefined,
+  userId: string,
   conferenceId: string
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  if (role !== "chair") return { ok: true };
-  const active = await getConferenceForDashboard({ role });
+  const r = role?.toString().toLowerCase();
+  const smtSurface = r === "smt" ? await getSmtDashboardSurface() : null;
+  const needsScope = r === "chair" || (r === "smt" && smtSurface === "chair");
+  if (!needsScope) return { ok: true };
+  const active = await resolveDashboardConferenceForUser(role, userId);
   if (!active) {
     return { ok: false, error: "You can only manage codes for your committee." };
   }
@@ -67,7 +72,7 @@ export async function saveAllocationCode(allocationId: string, code: string) {
   if (!alloc?.conference_id) {
     return { error: "Allocation not found." };
   }
-  const scope = await assertChairOwnsConference(auth.role, alloc.conference_id);
+  const scope = await assertChairOwnsConference(auth.role, auth.user.id, alloc.conference_id);
   if (!scope.ok) return { error: scope.error };
 
   if (!trimmed) {
@@ -98,7 +103,7 @@ export async function generateMissingAllocationCodes(conferenceId: string) {
     return { error: "Only chairs, SMT, and website admins can generate codes." };
   }
 
-  const scope = await assertChairOwnsConference(auth.role, conferenceId);
+  const scope = await assertChairOwnsConference(auth.role, auth.user.id, conferenceId);
   if (!scope.ok) return { error: scope.error };
 
   const supabase = auth.supabase;

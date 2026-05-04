@@ -5,7 +5,8 @@ import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
 import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
@@ -102,12 +103,17 @@ export default async function ProfilePage({
     .single();
 
   const roleLower = profile?.role?.toString().trim().toLowerCase();
+  let smtCommitteeSurface: Awaited<ReturnType<typeof getSmtDashboardSurface>> | null = null;
   if (roleLower === "smt") {
-    redirect("/smt");
+    smtCommitteeSurface = await getSmtDashboardSurface();
+    if (smtCommitteeSurface === "secretariat") redirect("/smt");
   }
   if (roleLower === "admin") {
     redirect("/admin");
   }
+
+  const isDelegate =
+    roleLower === "delegate" || (roleLower === "smt" && smtCommitteeSurface === "delegate");
 
   const { data: myAwards } = await supabase
     .from("award_assignments")
@@ -116,7 +122,7 @@ export default async function ProfilePage({
     .order("created_at", { ascending: true });
   /** Delegates must not see pending nominations (chairs may, when readable via RLS). */
   const { data: myPendingNominations } =
-    roleLower === "delegate"
+    isDelegate
       ? { data: [] as { id: string; nomination_type: string; rank: number; evidence_note: string | null; committee_conference_id: string }[] }
       : await supabase
           .from("award_nominations")
@@ -230,11 +236,10 @@ export default async function ProfilePage({
     ])
   );
 
-  const isDelegate = roleLower === "delegate";
   const delegateCommitteeSwitchAllowlisted =
     isDelegateDashboardCommitteeAllowlistedEmail(user.email ?? undefined);
   const canViewPrivate = !isDelegate;
-  const activeConference = await getConferenceForDashboard({ role: roleLower });
+  const activeConference = await resolveDashboardConferenceForUser(roleLower, user.id);
   const activeEventIdFromCookie = await getActiveEventId();
   const crisisReportingEnabled = isCrisisCommittee(activeConference?.committee ?? null);
 

@@ -1,7 +1,10 @@
+import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
+import { loadSmtCommitteeBindingOptions } from "@/app/actions/smtDashboardSurface";
+import { SmtCommitteeViewSettingsCard } from "@/components/smt/SmtCommitteeViewSettingsCard";
 import { awardCategoryMeta } from "@/lib/awards";
 import { getLocale, getTranslations } from "next-intl/server";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
@@ -45,6 +48,8 @@ export default async function SmtProfilePage() {
     })
   );
 
+  const committeeBindings = await loadSmtCommitteeBindingOptions();
+
   return (
     <MunPageShell title={t("smtProfile")}>
       {(myAwards?.length ?? 0) > 0 && (
@@ -70,6 +75,16 @@ export default async function SmtProfilePage() {
           </ul>
         </div>
       )}
+      {committeeBindings ? (
+        <Suspense fallback={null}>
+          <SmtCommitteeViewSettingsCard
+            conferences={committeeBindings.conferences}
+            delegateSeats={committeeBindings.delegateSeats}
+            currentChairId={committeeBindings.currentChairId}
+            currentDelegateAllocationId={committeeBindings.currentDelegateAllocationId}
+          />
+        </Suspense>
+      ) : null}
       <ProfileForm profile={profile} userId={user.id} canViewPrivate availableAllocations={[]} />
     </MunPageShell>
   );

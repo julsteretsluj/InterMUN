@@ -728,7 +728,8 @@
       "ariaLabel": "Sehemu za dashibodi",
       "overview": "Muhtasari",
       "checklist": "Orodha ya ukaguzi",
-      "jump": "Rukia kwa"
+      "jump": "Rukia kwa",
+      "chairEmails": "Chair emails"
     },
     "jumpTo": "Rukia kwa",
     "tiles": {
@@ -783,6 +784,10 @@
       "crisisReport": {
         "label": "Mgogoro / ripoti",
         "hint": "Onyesha suala"
+      },
+      "chairEmails": {
+        "label": "Chair emails",
+        "hint": "Dais inboxes by committee"
       }
     },
     "countdownCard": {
@@ -799,6 +804,13 @@
       "remainingDhm": "{days}s {hours}h {minutes}d",
       "remainingHm": "{hours}h {minutes}d",
       "remainingM": "{minutes}d"
+    },
+    "chairContacts": {
+      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
+      "committeeColumn": "Committee",
+      "emailColumn": "Chair inbox (username)",
+      "openMail": "Open mail",
+      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     }
   },
   "materialsExportCard": {
@@ -1528,7 +1540,8 @@
     "csvPlaceholder": "Ufaransa,DIS-001\\nUjerumani,DIS-002\\nJapani",
     "parsedRowsSample": "Imechanganua safu mlalo {count}. Sampuli:",
     "runImport": "Endesha uingizaji",
-    "generateMissingRandomCodes": "Tengeneza misimbo isiyo na mpangilio"
+    "generateMissingRandomCodes": "Tengeneza misimbo isiyo na mpangilio",
+    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Kamati",
@@ -3087,5 +3100,24 @@
       "step4Label": "Jiunge na chumba cha kamati + roll call",
       "step4Detail": "Subiri idhini ya kuwepo kutoka kwa mwenyekiti, kisha ongea."
     }
+  },
+  "smtCommitteeView": {
+    "title": "Secretariat: chair & delegate views",
+    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
+    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
+    "chairCommitteeLabel": "Chair floor committee",
+    "chairCommitteePlaceholder": "Select committee…",
+    "delegateSeatLabel": "Delegate seat (your allocation)",
+    "delegateSeatPlaceholder": "Select seat…",
+    "saveBindings": "Save assignments",
+    "bindingsSaved": "Saved.",
+    "switchViewHeading": "Switch dashboard",
+    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
+    "goSecretariat": "Secretariat",
+    "goChair": "Chair view",
+    "goDelegate": "Delegate view",
+    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
+    "pickChairFirst": "Select a chair committee first (or save assignments).",
+    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
   }
 }

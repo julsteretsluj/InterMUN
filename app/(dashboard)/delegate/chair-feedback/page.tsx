@@ -8,6 +8,7 @@ import { DelegateChairFeedbackPanel } from "@/components/delegate/DelegateChairF
 import { uniqueSuggestionStrings } from "@/lib/delegate-chair-feedback-suggestions";
 import { getCommitteeAwardScope } from "@/lib/conference-committee-canonical";
 import { getTranslations } from "next-intl/server";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,8 @@ export default async function DelegateChairFeedbackPage() {
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   const role = profile?.role?.toString().trim().toLowerCase();
-  if (role !== "delegate") redirect("/profile");
+  const smtSurface = role === "smt" ? await getSmtDashboardSurface() : null;
+  if (role !== "delegate" && !(role === "smt" && smtSurface === "delegate")) redirect("/profile");
 
   const conferenceId = await requireActiveConferenceId();
 

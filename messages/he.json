@@ -728,7 +728,8 @@
       "ariaLabel": "קטעי לוח מחוונים",
       "overview": "סקירה כללית",
       "checklist": "רשימת תיוג",
-      "jump": "קפוץ אל"
+      "jump": "קפוץ אל",
+      "chairEmails": "Chair emails"
     },
     "jumpTo": "קפוץ אל",
     "tiles": {
@@ -783,6 +784,10 @@
       "crisisReport": {
         "label": "משבר / דיווח",
         "hint": "העלה בעיה"
+      },
+      "chairEmails": {
+        "label": "Chair emails",
+        "hint": "Dais inboxes by committee"
       }
     },
     "countdownCard": {
@@ -799,6 +804,13 @@
       "remainingDhm": "{days}י {hours}ש {minutes}ד",
       "remainingHm": "{hours}ש {minutes}ד",
       "remainingM": "{minutes}ד"
+    },
+    "chairContacts": {
+      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
+      "committeeColumn": "Committee",
+      "emailColumn": "Chair inbox (username)",
+      "openMail": "Open mail",
+      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     }
   },
   "materialsExportCard": {
@@ -1528,7 +1540,8 @@
     "csvPlaceholder": "צרפת,DIS-001\\nגרמניה,DIS-002\\nיפן",
     "parsedRowsSample": "מנותח {count} שורות. לִטעוֹם:",
     "runImport": "הפעל ייבוא",
-    "generateMissingRandomCodes": "צור קודים אקראיים חסרים"
+    "generateMissingRandomCodes": "צור קודים אקראיים חסרים",
+    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "וַעֲדָה",
@@ -3087,5 +3100,24 @@
       "step4Label": "הצטרפות לחדר הוועדה + קריאה",
       "step4Detail": "המתינו לאישור נוכחות מיושב הראש, ואז דברו."
     }
+  },
+  "smtCommitteeView": {
+    "title": "Secretariat: chair & delegate views",
+    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
+    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
+    "chairCommitteeLabel": "Chair floor committee",
+    "chairCommitteePlaceholder": "Select committee…",
+    "delegateSeatLabel": "Delegate seat (your allocation)",
+    "delegateSeatPlaceholder": "Select seat…",
+    "saveBindings": "Save assignments",
+    "bindingsSaved": "Saved.",
+    "switchViewHeading": "Switch dashboard",
+    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
+    "goSecretariat": "Secretariat",
+    "goChair": "Chair view",
+    "goDelegate": "Delegate view",
+    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
+    "pickChairFirst": "Select a chair committee first (or save assignments).",
+    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
   }
 }

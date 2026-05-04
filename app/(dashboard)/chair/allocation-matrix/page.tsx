@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { MunPageShell } from "@/components/MunPageShell";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
 import {
   approveAllocationSignupRequestAction,
@@ -214,7 +214,7 @@ export default async function ChairAllocationMatrixPage() {
     redirect("/profile");
   }
 
-  const activeConf = await getConferenceForDashboard({ role: profile?.role });
+  const activeConf = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!activeConf) {
     redirect("/room-gate?next=%2Fchair%2Fallocation-matrix");
   }

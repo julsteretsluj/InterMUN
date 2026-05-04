@@ -728,7 +728,8 @@
       "ariaLabel": "Nga waahanga papatohu",
       "overview": "Tirohanga",
       "checklist": "Rārangi arowhai",
-      "jump": "Peke atu ki"
+      "jump": "Peke atu ki",
+      "chairEmails": "Chair emails"
     },
     "jumpTo": "Peke atu ki",
     "tiles": {
@@ -783,6 +784,10 @@
       "crisisReport": {
         "label": "Te raru / purongo",
         "hint": "Whakaarahia he take"
+      },
+      "chairEmails": {
+        "label": "Chair emails",
+        "hint": "Dais inboxes by committee"
       }
     },
     "countdownCard": {
@@ -799,6 +804,13 @@
       "remainingDhm": "{days}r {hours}h {minutes}m",
       "remainingHm": "{hours}h {minutes}m",
       "remainingM": "{minutes}m"
+    },
+    "chairContacts": {
+      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
+      "committeeColumn": "Committee",
+      "emailColumn": "Chair inbox (username)",
+      "openMail": "Open mail",
+      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     }
   },
   "materialsExportCard": {
@@ -1528,7 +1540,8 @@
     "csvPlaceholder": "Parani,DIS-001\\nTimana,DIS-002\\nJapan",
     "parsedRowsSample": "Kua poroa {count} haupae. Tauira:",
     "runImport": "Whakahaere kawemai",
-    "generateMissingRandomCodes": "Hanga he waehere matapōkere e ngaro ana"
+    "generateMissingRandomCodes": "Hanga he waehere matapōkere e ngaro ana",
+    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Komiti",
@@ -3087,5 +3100,24 @@
       "step4Label": "Uru ki te rūma komiti + rārangi ingoa",
       "step4Detail": "Tatari whakaaetanga tū a te tiamana, ka muri mai kōrero."
     }
+  },
+  "smtCommitteeView": {
+    "title": "Secretariat: chair & delegate views",
+    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
+    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
+    "chairCommitteeLabel": "Chair floor committee",
+    "chairCommitteePlaceholder": "Select committee…",
+    "delegateSeatLabel": "Delegate seat (your allocation)",
+    "delegateSeatPlaceholder": "Select seat…",
+    "saveBindings": "Save assignments",
+    "bindingsSaved": "Saved.",
+    "switchViewHeading": "Switch dashboard",
+    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
+    "goSecretariat": "Secretariat",
+    "goChair": "Chair view",
+    "goDelegate": "Delegate view",
+    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
+    "pickChairFirst": "Select a chair committee first (or save assignments).",
+    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
   }
 }

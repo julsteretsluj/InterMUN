@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import {
   criteriaForNominationType,
@@ -90,7 +90,7 @@ export default async function ChairAwardsPage() {
     redirect("/profile");
   }
 
-  const activeConf = await getConferenceForDashboard({ role: profile?.role });
+  const activeConf = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!activeConf) {
     redirect("/room-gate?next=%2Fchair%2Fawards");
   }

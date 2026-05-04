@@ -4,7 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getLocale, getTranslations } from "next-intl/server";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { BrandWordmark } from "@/components/BrandWordmark";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { getAllocationCodeVerifiedConferenceId } from "@/lib/allocation-code-gate-cookie";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { AllocationCodeGateForm } from "./AllocationCodeGateForm";
@@ -38,11 +39,12 @@ export default async function AllocationCodeGatePage({
     .maybeSingle();
 
   const role = profile?.role?.toString().toLowerCase();
-  if (role !== "delegate" && role !== "chair") {
+  const smtSurface = role === "smt" ? await getSmtDashboardSurface() : null;
+  if (role !== "delegate" && role !== "chair" && !(role === "smt" && smtSurface === "delegate")) {
     redirect(nextPath);
   }
 
-  const activeCtx = await getConferenceForDashboard({ role: profile?.role });
+  const activeCtx = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!activeCtx?.id) {
     redirect(`/room-gate?next=${encodeURIComponent(nextPath)}`);
   }

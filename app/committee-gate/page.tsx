@@ -7,7 +7,7 @@ import { BrandWordmark } from "@/components/BrandWordmark";
 import { CommitteeGateForm } from "./CommitteeGateForm";
 import { StaffNotDelegateBypassForm } from "./StaffNotDelegateBypassForm";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 
 export default async function CommitteeGatePage({
@@ -41,7 +41,7 @@ export default async function CommitteeGatePage({
     .eq("id", user.id)
     .maybeSingle();
 
-  const activeCtx = await getConferenceForDashboard({ role: profile?.role });
+  const activeCtx = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!activeCtx?.id) {
     redirect(`/room-gate?next=${encodeURIComponent(nextPath)}`);
   }

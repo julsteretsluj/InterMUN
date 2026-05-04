@@ -800,7 +800,8 @@
       "ariaLabel": "Bahagian papan pemuka",
       "overview": "Gambaran keseluruhan",
       "checklist": "Senarai semak",
-      "jump": "Lompat ke"
+      "jump": "Lompat ke",
+      "chairEmails": "Chair emails"
     },
     "jumpTo": "Lompat ke",
     "tiles": {
@@ -855,6 +856,10 @@
       "crisisReport": {
         "label": "Krisis / laporan",
         "hint": "Bangkitkan satu isu"
+      },
+      "chairEmails": {
+        "label": "Chair emails",
+        "hint": "Dais inboxes by committee"
       }
     },
     "countdownCard": {
@@ -871,6 +876,13 @@
       "remainingDhm": "{days}h {hours}j {minutes}m",
       "remainingHm": "{hours}j {minutes}m",
       "remainingM": "{minutes}m"
+    },
+    "chairContacts": {
+      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
+      "committeeColumn": "Committee",
+      "emailColumn": "Chair inbox (username)",
+      "openMail": "Open mail",
+      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     }
   },
   "materialsExportCard": {
@@ -1654,7 +1666,8 @@
     "csvPlaceholder": "Perancis,DIS-001\\nJerman,DIS-002\\nJepun",
     "parsedRowsSample": "Dihuraikan {count} baris. Sampel:",
     "runImport": "Jalankan import",
-    "generateMissingRandomCodes": "Hasilkan kod rawak yang hilang"
+    "generateMissingRandomCodes": "Hasilkan kod rawak yang hilang",
+    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
   },
   "chairAllocationMatrixPage": {
     "intro": "Matriks peruntukan jawatankuasa untuk sesi semasa anda. Ini adalah baca sahaja untuk kerusi dan menggambarkan tugasan tempat duduk aktif dan kod pelekat.",
@@ -3087,5 +3100,24 @@
       "step4Label": "Sertai bilik jawatankuasa + panggilan kehadiran",
       "step4Detail": "Tunggu kelulusan hadir daripada pengerusi, kemudian bercakap."
     }
+  },
+  "smtCommitteeView": {
+    "title": "Secretariat: chair & delegate views",
+    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
+    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
+    "chairCommitteeLabel": "Chair floor committee",
+    "chairCommitteePlaceholder": "Select committee…",
+    "delegateSeatLabel": "Delegate seat (your allocation)",
+    "delegateSeatPlaceholder": "Select seat…",
+    "saveBindings": "Save assignments",
+    "bindingsSaved": "Saved.",
+    "switchViewHeading": "Switch dashboard",
+    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
+    "goSecretariat": "Secretariat",
+    "goChair": "Chair view",
+    "goDelegate": "Delegate view",
+    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
+    "pickChairFirst": "Select a chair committee first (or save assignments).",
+    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
   }
 }

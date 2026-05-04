@@ -3,7 +3,8 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import {
   getCommitteeAwardScope,
   resolveCanonicalCommitteeConferenceId,
@@ -42,11 +43,12 @@ export async function verifyAllocationCodeGate(
     .maybeSingle();
 
   const role = profile?.role?.toString().toLowerCase();
-  if (role !== "delegate" && role !== "chair") {
+  const smtSurface = role === "smt" ? await getSmtDashboardSurface() : null;
+  if (role !== "delegate" && role !== "chair" && !(role === "smt" && smtSurface === "delegate")) {
     return { error: "Only delegates and chairs use this step." };
   }
 
-  const ctx = await getConferenceForDashboard({ role: profile?.role });
+  const ctx = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!ctx) {
     return {
       error:

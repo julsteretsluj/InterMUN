@@ -31,6 +31,8 @@ import {
   translateAgendaTopicLabel,
   translateCommitteeLabel,
 } from "@/lib/i18n/committee-topic-labels";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
+import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 
 export default async function DashboardLayout({
   children,
@@ -62,20 +64,30 @@ export default async function DashboardLayout({
   const role = profile?.role as UserRole | undefined;
   const normalizedRole = role ? (role.toString().trim().toLowerCase() as UserRole) : undefined;
   const showStaffNav = isStaffRole(role);
+  const smtSurface = isSmtRole(normalizedRole) ? await getSmtDashboardSurface() : null;
+  const effectiveRole = (effectiveDashboardRole(normalizedRole, smtSurface) ||
+    normalizedRole) as UserRole | undefined;
 
   if (isAdminRole(normalizedRole)) {
     const search = hdrs.get("x-search") ?? "";
     redirect(`${ADMIN_APP_HOME}${search}`);
   }
 
-  if (isSmtRole(normalizedRole)) {
+  if (isSmtRole(normalizedRole) && smtSurface === "secretariat") {
     const search = hdrs.get("x-search") ?? "";
     redirect(`${SMT_APP_HOME}${search}`);
   }
 
-  const activeConf = await getConferenceForDashboard({ role: normalizedRole });
+  const activeConf = await getConferenceForDashboard({
+    role: normalizedRole,
+    userId: user.id,
+    smtDashboardSurface: isSmtRole(normalizedRole) ? smtSurface : null,
+  });
 
   if (!activeConf) {
+    if (isSmtRole(normalizedRole) && smtSurface !== "secretariat") {
+      redirect(`/smt/profile?smtBind=1`);
+    }
     redirect(`/room-gate?next=${encodeURIComponent(pathname)}`);
   }
 
@@ -87,7 +99,7 @@ export default async function DashboardLayout({
   }
 
   const allocationGateOn = activeConf.allocation_code_gate_enabled === true;
-  const needsAllocationCodeGate = allocationGateOn && normalizedRole === "delegate";
+  const needsAllocationCodeGate = allocationGateOn && effectiveRole === "delegate";
   if (needsAllocationCodeGate) {
     const allocVerified = await getAllocationCodeVerifiedConferenceId();
     if (allocVerified !== activeConf.id) {
@@ -149,14 +161,14 @@ export default async function DashboardLayout({
       <div className="flex min-h-screen w-full min-w-0 flex-col bg-[var(--color-bg-page)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--window-shadow)] lg:flex-row">
       <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden bg-[var(--sidebar-material)] shadow-[inset_-1px_0_0_0_var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
         <Link
-          href={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
+          href={isChairRole(effectiveRole) ? "/chair" : "/delegate"}
           aria-label={t("appHomeAria", { appName })}
           className="flex shrink-0 items-center justify-center gap-0 border-b border-[var(--hairline)] px-2 py-5 transition [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] group-hover:justify-start group-hover:gap-3 group-hover:px-5 hover:bg-[color:var(--discord-hover-bg)]"
         >
           <DashboardBrandLogos showConferenceLogo={showSeamunLogo} variant="sidebar" />
           <span
             className={
-              isChairRole(normalizedRole)
+              isChairRole(effectiveRole)
                 ? "hidden truncate text-lg font-bold tracking-tight text-brand-navy group-hover:block dark:text-zinc-100"
                 : "hidden truncate text-lg font-bold tracking-tight text-brand-accent group-hover:block dark:text-brand-accent-bright"
             }
@@ -178,7 +190,7 @@ export default async function DashboardLayout({
             />
           )}
         </div>
-        {!isChairRole(normalizedRole) ? (
+        {!isChairRole(effectiveRole) ? (
           <div className="mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] px-3 py-4">
             <Link
               href="/guides"
@@ -206,7 +218,7 @@ export default async function DashboardLayout({
           conferenceLine={conferenceLine || null}
           showSeamunLogo={showSeamunLogo}
           appName={appName}
-          brandHomeHref={isChairRole(normalizedRole) ? "/chair" : "/delegate"}
+          brandHomeHref={isChairRole(effectiveRole) ? "/chair" : "/delegate"}
           showDelegateHubLink={false}
           notifications={
             <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
@@ -214,7 +226,7 @@ export default async function DashboardLayout({
         />
         <DashboardAnnouncementPopup />
         <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
-          {activeConf?.id && showsDaisTools(role) ? (
+          {activeConf?.id && showsDaisTools(effectiveRole) ? (
             <div className="mb-4 border-y border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-3 backdrop-blur-xl sm:px-6">
               <div className="w-full">
                 <ChairLiveFloorThemed
@@ -231,7 +243,7 @@ export default async function DashboardLayout({
       </div>
 
       <div className="pointer-events-none fixed bottom-0 left-0 right-0 z-40 lg:hidden">
-        {isChairRole(normalizedRole) ? (
+        {isChairRole(effectiveRole) ? (
           <ChairMobileDock
             conferenceLine={conferenceLine || ""}
             crisisReportingEnabled={crisisReportingEnabled}

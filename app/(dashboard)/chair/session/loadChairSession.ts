@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getConferenceForDashboard } from "@/lib/active-conference";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 
 export type ChairSessionConference = {
   conferenceId: string;
@@ -31,15 +32,23 @@ export async function loadChairSessionConference(): Promise<ChairSessionConferen
 
   if (profile?.role !== "chair") {
     if (profile?.role === "smt") {
-      redirect("/smt?e=smt-no-session-floor");
-    }
-    if (profile?.role === "admin") {
+      const surface = await getSmtDashboardSurface();
+      if (surface !== "chair") {
+        redirect("/smt?e=smt-no-session-floor");
+      }
+    } else if (profile?.role === "admin") {
       redirect("/admin?e=no-session-floor");
+    } else {
+      redirect("/profile");
     }
-    redirect("/profile");
   }
 
-  const active = await getConferenceForDashboard({ role: "chair" });
+  const smtSurface = profile?.role === "smt" ? await getSmtDashboardSurface() : null;
+  const active = await getConferenceForDashboard({
+    role: profile?.role === "smt" ? "smt" : "chair",
+    userId: user.id,
+    smtDashboardSurface: smtSurface,
+  });
   if (!active) return null;
 
   const bundle = await getResolvedDebateConferenceBundle(supabase, active.id);

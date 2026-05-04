@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { verifyCommitteePassword, hashCommitteePassword } from "@/lib/committee-password";
 import { setVerifiedConferenceId, clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { verifyStaffCommitteeBypassPassword } from "@/lib/staff-committee-bypass";
 import { getActiveEventId, setActiveEventId } from "@/lib/active-event-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
@@ -44,7 +44,7 @@ export async function verifyCommitteeSecondaryLogin(
     .eq("id", user.id)
     .maybeSingle();
 
-  const ctx = await getConferenceForDashboard({ role: profile?.role });
+  const ctx = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!ctx || ctx.id !== conferenceId) {
     return {
       error:
@@ -149,7 +149,7 @@ export async function verifyStaffNotDelegateBypass(
     return { error: t("onlySmtOrAdminBypass") };
   }
 
-  const ctx = await getConferenceForDashboard({ role: profile?.role });
+  const ctx = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!ctx || ctx.id !== conferenceId) {
     return {
       error:

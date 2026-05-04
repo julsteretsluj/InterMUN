@@ -2,7 +2,9 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { redirect } from "next/navigation";
-import { getConferenceForDashboard } from "@/lib/active-conference";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
+import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
+import { effectiveDashboardRole } from "@/lib/smt-dashboard-effective-role";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { GoogleSlidesEmbed } from "@/components/crisis/GoogleSlidesEmbed";
 import { getTranslations } from "next-intl/server";
@@ -23,9 +25,13 @@ export default async function CrisisSlidesPage() {
   if (!profile?.role) redirect("/login");
 
   const myRole = profile.role.toString().toLowerCase();
-  const activeConf = await getConferenceForDashboard({ role: myRole });
+  const smtSurface = myRole === "smt" ? await getSmtDashboardSurface() : null;
+  const effectiveRole = String(
+    effectiveDashboardRole(myRole, smtSurface) ?? myRole
+  ).toLowerCase();
+  const activeConf = await resolveDashboardConferenceForUser(profile.role, user.id);
   if (!activeConf || !isCrisisCommittee(activeConf.committee)) {
-    if (myRole === "chair") redirect("/chair");
+    if (effectiveRole === "chair") redirect("/chair");
     if (myRole === "smt" || myRole === "admin") redirect("/smt");
     redirect("/delegate");
   }
