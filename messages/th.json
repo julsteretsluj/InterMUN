@@ -1559,7 +1559,13 @@
         "legendRelax": "Chill",
         "legendSupport": "Support room",
         "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep"
+        "legendSweep": "Sweep",
+        "handbookLink": "Open conference handbook (PDF)",
+        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
+        "committeeMatrixTitle": "Committee chambers by schedule track",
+        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
+        "colScheduleTrack": "Schedule track",
+        "colChambers": "Chambers (labels in this event)"
       }
     }
   },

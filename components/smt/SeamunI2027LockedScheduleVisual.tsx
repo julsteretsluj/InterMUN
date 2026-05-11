@@ -12,6 +12,10 @@ import {
   type SeamunLockedBlockCategory,
   timeToMinutes,
 } from "@/lib/seamun-i-2027-locked-schedule";
+import {
+  SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS,
+  seamunI2027HandbookPdfPath,
+} from "@/lib/seamun-i-2027-committee-groups";
 
 const AXIS_RANGE = SEAMUN_I_2027_AXIS_END_MIN - SEAMUN_I_2027_AXIS_START_MIN;
 
@@ -84,6 +88,17 @@ export function SeamunI2027LockedScheduleVisual() {
         <div>
           <h2 className="font-display text-xl font-semibold text-brand-navy">{t("title")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("body")}</p>
+          <p className="mt-3 text-sm text-brand-navy/90 dark:text-zinc-200">
+            <a
+              href={seamunI2027HandbookPdfPath()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-brand-accent underline decoration-brand-accent/40 underline-offset-2 hover:decoration-brand-accent"
+            >
+              {t("handbookLink")}
+            </a>
+            <span className="text-brand-muted"> — {t("handbookHint")}</span>
+          </p>
         </div>
         <div className="flex shrink-0 gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
           {([1, 2] as const).map((d) => (
@@ -179,6 +194,37 @@ export function SeamunI2027LockedScheduleVisual() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="mt-8 border-t border-brand-navy/10 pt-6">
+        <h3 className="font-display text-base font-semibold text-brand-navy">{t("committeeMatrixTitle")}</h3>
+        <p className="mt-1 text-xs text-brand-muted">{t("committeeMatrixHint")}</p>
+        <div className="mt-3 overflow-x-auto rounded-xl border border-brand-navy/10">
+          <table className="w-full min-w-[28rem] text-left text-sm">
+            <thead>
+              <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-xs uppercase tracking-wide text-brand-muted">
+                <th className="px-3 py-2">{t("colScheduleTrack")}</th>
+                <th className="px-3 py-2">{t("colChambers")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.map((row) => (
+                <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
+                  <td className="px-3 py-2 align-top font-semibold text-brand-navy dark:text-zinc-100">
+                    {row.scheduleHeader}
+                  </td>
+                  <td className="px-3 py-2 align-top text-brand-navy/90 dark:text-zinc-200">
+                    <ul className="list-inside list-disc space-y-0.5 text-[0.8rem]">
+                      {row.chambers.map((c) => (
+                        <li key={c}>{c}</li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

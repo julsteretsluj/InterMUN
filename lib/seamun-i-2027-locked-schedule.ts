@@ -1,4 +1,8 @@
-/** Canonical SEAMUN I 2027 visual schedules (Day 1 & Day 2). Not editable via app or SMT. */
+/**
+ * Canonical SEAMUN I 2027 visual schedules (Day 1 & Day 2). Not editable via app or SMT.
+ * Cross-check with the conference handbook PDF: `/conference/seamun-i-the-conference-handbook.pdf`
+ * (same content as “SEAMUN _ The Conference (6).pdf”).
+ */
 
 export const SEAMUN_I_2027_EVENT_ID = "11111111-1111-1111-1111-111111111101";
 
