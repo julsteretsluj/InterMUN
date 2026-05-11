@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
@@ -26,6 +29,14 @@ function formatHeaderDate(d: Date, locale: string): string {
     weekday: "long",
     day: "numeric",
     month: "long",
+  }).format(d);
+}
+
+function formatHeaderTime(d: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
   }).format(d);
 }
 
@@ -58,6 +69,12 @@ export function DashboardTopBar({
   const t = useTranslations("dashboardTopBar");
   const locale = useLocale();
   const initials = initialsFromName(userName, userEmail);
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 shadow-[var(--titlebar-shadow)] [transition:backdrop-filter_200ms_var(--ease-apple)]">
@@ -92,10 +109,15 @@ export function DashboardTopBar({
             </p>
           ) : null}
           <time
-            className="hidden text-sm text-brand-muted md:block"
-            dateTime={new Date().toISOString()}
+            dateTime={now.toISOString()}
+            className="hidden items-center gap-2 text-sm sm:inline-flex"
+            aria-label={`${formatHeaderDate(now, locale)} ${formatHeaderTime(now, locale)}`}
+            suppressHydrationWarning
           >
-            {formatHeaderDate(new Date(), locale)}
+            <span className="text-brand-muted">{formatHeaderDate(now, locale)}</span>
+            <span className="rounded-[var(--radius-md)] border border-[color:color-mix(in_srgb,var(--accent)_42%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] px-2 py-0.5 font-mono text-xs font-semibold tabular-nums tracking-tight text-brand-navy shadow-[0_1px_0_rgba(0,0,0,0.06)] dark:text-zinc-100 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]">
+              {formatHeaderTime(now, locale)}
+            </span>
           </time>
           <div className="inline-flex min-h-9 min-w-0 max-w-full items-stretch overflow-hidden rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5 [box-shadow:0_1px_0_rgba(0,0,0,0.04)_inset] dark:[box-shadow:0_1px_0_rgba(255,255,255,0.06)_inset] sm:shrink-0 sm:min-h-0">
             {notifications != null ? (
