@@ -1,10 +1,16 @@
 export type EventScheduleDayKey = "1" | "2";
 
+export type EventScheduleBlockKind = "session" | "break" | "ceremony";
+
+export const EVENT_SCHEDULE_BLOCK_KINDS: readonly EventScheduleBlockKind[] = ["session", "break", "ceremony"];
+
 export type EventScheduleSlot = {
   id: string;
   start: string;
   end: string;
   label: string;
+  /** Session debate, break / lunch block, or opening/closing ceremony. */
+  kind: EventScheduleBlockKind;
   /** Marks block as lunch for overlap analysis (independent of label text). */
   isLunch: boolean;
 };
@@ -48,9 +54,29 @@ function newSlot(partial?: Partial<EventScheduleSlot>): EventScheduleSlot {
     start: "09:00",
     end: "10:30",
     label: "",
+    kind: "session",
     isLunch: false,
     ...partial,
   };
+}
+
+/** Row striping for schedule table (light + dark). */
+export function scheduleSlotRowClass(kind: EventScheduleBlockKind): string {
+  switch (kind) {
+    case "session":
+      return "border-l-[3px] border-l-emerald-500 bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12]";
+    case "break":
+      return "border-l-[3px] border-l-amber-500 bg-amber-500/[0.10] dark:bg-amber-400/[0.14]";
+    case "ceremony":
+      return "border-l-[3px] border-l-[#C2A878] bg-[#C2A878]/15 dark:bg-[#C2A878]/20";
+    default:
+      return "";
+  }
+}
+
+export function parseBlockKind(raw: unknown): EventScheduleBlockKind {
+  if (raw === "break" || raw === "ceremony" || raw === "session") return raw;
+  return "session";
 }
 
 export function parseTimeToMinutes(hhmm: string): number | null {
@@ -185,8 +211,9 @@ export function normalizeScheduleConfig(raw: unknown): EventScheduleConfig {
         const start = String(ro.start ?? "09:00").trim().slice(0, 5);
         const end = String(ro.end ?? "10:00").trim().slice(0, 5);
         const label = String(ro.label ?? "").trim().slice(0, 200);
+        const kind = parseBlockKind(ro.kind);
         const isLunch = ro.isLunch === true;
-        list.push({ id, start, end, label, isLunch });
+        list.push({ id, start, end, label, kind, isLunch });
       }
       slots[day][g.id] = list;
     }
@@ -213,6 +240,9 @@ export function validateScheduleConfig(cfg: EventScheduleConfig): ScheduleValida
         return { ok: false, error: "Too many blocks on one day for a group." };
       }
       for (const s of rows) {
+        if (!EVENT_SCHEDULE_BLOCK_KINDS.includes(s.kind)) {
+          return { ok: false, error: `Invalid block type in ${g.name}.` };
+        }
         const a = parseTimeToMinutes(s.start);
         const b = parseTimeToMinutes(s.end);
         if (a === null || b === null) {

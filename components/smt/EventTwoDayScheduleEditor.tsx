@@ -7,9 +7,12 @@ import {
   addGroupToConfig,
   computeLunchOverlaps,
   defaultEventScheduleConfig,
+  EVENT_SCHEDULE_BLOCK_KINDS,
   newSlot,
   normalizeScheduleConfig,
   removeGroupFromConfig,
+  scheduleSlotRowClass,
+  type EventScheduleBlockKind,
   type EventScheduleConfig,
   type EventScheduleDayKey,
   type EventScheduleSlot,
@@ -212,12 +215,29 @@ export function EventTwoDayScheduleEditor({
             </div>
           ) : null}
 
+          <div className="mb-3 flex flex-wrap gap-3 text-[0.7rem] text-brand-navy/90 dark:text-zinc-200">
+            <span className="font-semibold uppercase tracking-wide text-brand-muted">{t("legendTitle")}</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="inline-block h-2.5 w-2.5 rounded-sm bg-emerald-500" aria-hidden />
+              {t("legendSession")}
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="inline-block h-2.5 w-2.5 rounded-sm bg-amber-500" aria-hidden />
+              {t("legendBreak")}
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="inline-block h-2.5 w-2.5 rounded-sm bg-[#C2A878]" aria-hidden />
+              {t("legendCeremony")}
+            </span>
+          </div>
+
           <div className="overflow-x-auto rounded-xl border border-brand-navy/10">
-            <table className="w-full min-w-[520px] text-sm">
+            <table className="w-full min-w-[600px] text-sm">
               <thead>
                 <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-left text-xs uppercase tracking-wide text-brand-muted">
                   <th className="px-2 py-2 w-[1%] whitespace-nowrap">{t("colStart")}</th>
                   <th className="px-2 py-2 w-[1%] whitespace-nowrap">{t("colEnd")}</th>
+                  <th className="px-2 py-2 w-[1%] whitespace-nowrap">{t("colKind")}</th>
                   <th className="px-2 py-2">{t("colLabel")}</th>
                   <th className="px-2 py-2 w-[1%] text-center whitespace-nowrap">{t("colLunch")}</th>
                   <th className="px-2 py-2 w-[1%]" />
@@ -226,13 +246,19 @@ export function EventTwoDayScheduleEditor({
               <tbody>
                 {rows.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-3 py-6 text-center text-brand-muted">
+                    <td colSpan={6} className="px-3 py-6 text-center text-brand-muted">
                       {t("emptyDay")}
                     </td>
                   </tr>
                 ) : (
                   rows.map((row) => (
-                    <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
+                    <tr
+                      key={row.id}
+                      className={cn(
+                        "border-b border-brand-navy/8 last:border-0 pl-0",
+                        scheduleSlotRowClass(row.kind)
+                      )}
+                    >
                       <td className="px-2 py-1.5 align-middle">
                         <input
                           type="time"
@@ -248,6 +274,25 @@ export function EventTwoDayScheduleEditor({
                           onChange={(e) => dayKey && updateSlot(dayKey, activeGroup!.id, row.id, { end: e.target.value })}
                           className="mun-field w-[7.25rem] py-1 text-xs"
                         />
+                      </td>
+                      <td className="px-2 py-1.5 align-middle">
+                        <select
+                          value={row.kind}
+                          onChange={(e) =>
+                            dayKey &&
+                            updateSlot(dayKey, activeGroup!.id, row.id, {
+                              kind: e.target.value as EventScheduleBlockKind,
+                            })
+                          }
+                          className="mun-field max-w-[9.5rem] py-1 text-xs"
+                          aria-label={t("colKind")}
+                        >
+                          {EVENT_SCHEDULE_BLOCK_KINDS.map((k) => (
+                            <option key={k} value={k}>
+                              {k === "session" ? t("kindSession") : k === "break" ? t("kindBreak") : t("kindCeremony")}
+                            </option>
+                          ))}
+                        </select>
                       </td>
                       <td className="px-2 py-1.5 align-middle">
                         <input
