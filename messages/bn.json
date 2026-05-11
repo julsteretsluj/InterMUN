@@ -1545,7 +1545,22 @@
       "saving": "Saving…",
       "saved": "Schedule saved.",
       "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?"
+      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "seamunLocked": {
+        "title": "SEAMUN I 2027 — official visual schedule",
+        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
+        "legendTitle": "Colours",
+        "legendArrival": "Arrival / registration",
+        "legendDismissal": "Dismissal",
+        "legendCeremony": "Ceremony",
+        "legendBreak": "General break",
+        "legendSession": "Academic session",
+        "legendLunch": "Eat (lunch)",
+        "legendRelax": "Chill",
+        "legendSupport": "Support room",
+        "legendStrategy": "Strategy rooms",
+        "legendSweep": "Sweep"
+      }
     }
   },
   "allocationMatrixManager": {

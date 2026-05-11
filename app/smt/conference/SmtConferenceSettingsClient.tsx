@@ -13,6 +13,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 import { EventTwoDayScheduleEditor } from "@/components/smt/EventTwoDayScheduleEditor";
+import { SeamunI2027LockedScheduleVisual } from "@/components/smt/SeamunI2027LockedScheduleVisual";
+import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
 
 type EventRow = {
   id: string;
@@ -82,7 +84,11 @@ export function SmtConferenceSettingsClient({
       </section>
 
       {eventRow ? (
-        <EventTwoDayScheduleEditor eventId={eventRow.id} initialConfig={eventRow.schedule_config ?? {}} />
+        isSeamunI2027LockedScheduleEvent(eventRow.id, eventRow.event_code) ? (
+          <SeamunI2027LockedScheduleVisual />
+        ) : (
+          <EventTwoDayScheduleEditor eventId={eventRow.id} initialConfig={eventRow.schedule_config ?? {}} />
+        )
       ) : null}
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">

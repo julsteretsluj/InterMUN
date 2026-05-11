@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
 import { normalizeScheduleConfig, validateScheduleConfig } from "@/lib/event-schedule";
+import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
 
 export type SmtFormState = { error?: string; success?: boolean };
 
@@ -242,6 +243,18 @@ export async function saveEventScheduleConfigAction(
   const role = profile?.role?.toString().trim().toLowerCase();
   if (role !== "smt" && role !== "admin") {
     return { error: "Only secretariat can edit the conference schedule." };
+  }
+
+  const { data: evRow } = await supabase
+    .from("conference_events")
+    .select("event_code")
+    .eq("id", id)
+    .maybeSingle();
+  if (isSeamunI2027LockedScheduleEvent(id, evRow?.event_code)) {
+    return {
+      error:
+        "SEAMUN I 2027 uses the fixed official two-day schedule published by the conference. It cannot be edited.",
+    };
   }
 
   const normalized = normalizeScheduleConfig(raw);
