@@ -6,6 +6,7 @@ import { normalizeCommitteeCode } from "@/lib/join-codes";
 import { revalidatePath } from "next/cache";
 import { ensureDaisSeatAllocations } from "@/lib/ensure-dais-seat-allocations";
 import { committeeHintForSmtDaisPlan } from "@/lib/smt-conference-filters";
+import { normalizeScheduleConfig, validateScheduleConfig } from "@/lib/event-schedule";
 
 export type SmtFormState = { error?: string; success?: boolean };
 
@@ -218,4 +219,43 @@ export async function addChamberSecondTopicAction(anchorId: string): Promise<{ e
   revalidatePath("/smt/conference");
   revalidatePath("/chair");
   return { newId };
+}
+
+export async function saveEventScheduleConfigAction(
+  eventId: string,
+  raw: unknown
+): Promise<SmtFormState> {
+  const id = eventId.trim();
+  if (!id) return { error: "Missing event." };
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "Not signed in." };
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+  const role = profile?.role?.toString().trim().toLowerCase();
+  if (role !== "smt" && role !== "admin") {
+    return { error: "Only secretariat can edit the conference schedule." };
+  }
+
+  const normalized = normalizeScheduleConfig(raw);
+  const checked = validateScheduleConfig(normalized);
+  if (!checked.ok) return { error: checked.error };
+
+  const { error } = await supabase.rpc("update_event_schedule_config_smt", {
+    p_event_id: id,
+    p_schedule: checked.config,
+  });
+
+  if (error) return { error: error.message };
+
+  revalidatePath("/smt");
+  revalidatePath("/smt/conference");
+  return { success: true };
 }

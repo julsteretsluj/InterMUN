@@ -12,8 +12,15 @@ import { generateSixCharCommitteeCode } from "@/lib/committee-join-code";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
+import { EventTwoDayScheduleEditor } from "@/components/smt/EventTwoDayScheduleEditor";
 
-type EventRow = { id: string; name: string; tagline: string | null; event_code: string };
+type EventRow = {
+  id: string;
+  name: string;
+  tagline: string | null;
+  event_code: string;
+  schedule_config?: unknown;
+};
 type CommitteeRow = {
   id: string;
   event_id: string;
@@ -73,6 +80,10 @@ export function SmtConferenceSettingsClient({
           <EventForm eventRow={eventRow} t={t} />
         )}
       </section>
+
+      {eventRow ? (
+        <EventTwoDayScheduleEditor eventId={eventRow.id} initialConfig={eventRow.schedule_config ?? {}} />
+      ) : null}
 
       <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
         <h2 className="font-display text-xl font-semibold text-brand-navy mb-2">

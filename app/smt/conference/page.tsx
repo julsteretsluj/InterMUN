@@ -13,15 +13,32 @@ export default async function SmtConferencePage() {
     name: string;
     tagline: string | null;
     event_code: string;
+    schedule_config?: unknown;
   } | null = null;
 
   if (eventId) {
-    const { data } = await supabase
+    const full = await supabase
       .from("conference_events")
-      .select("id, name, tagline, event_code")
+      .select("id, name, tagline, event_code, schedule_config")
       .eq("id", eventId)
       .maybeSingle();
-    eventRow = data;
+    if (!full.error && full.data) {
+      const d = full.data;
+      eventRow = {
+        id: d.id,
+        name: d.name,
+        tagline: d.tagline,
+        event_code: d.event_code,
+        schedule_config: "schedule_config" in d ? (d as { schedule_config?: unknown }).schedule_config ?? {} : {},
+      };
+    } else {
+      const base = await supabase
+        .from("conference_events")
+        .select("id, name, tagline, event_code")
+        .eq("id", eventId)
+        .maybeSingle();
+      eventRow = base.data ? { ...base.data, schedule_config: {} } : null;
+    }
   }
 
   type CommitteeFetchRow = {
