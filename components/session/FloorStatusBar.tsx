@@ -15,6 +15,7 @@ import {
   committeeSessionEndTimestampMs,
   formatCountdownOrElapsed,
 } from "@/lib/committee-session-end";
+import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 
 type Announcement = {
   id: string;
@@ -85,7 +86,7 @@ export function FloorStatusBar({
   const [sessionEndsAt, setSessionEndsAt] = useState<string | null>(null);
   const [activeTopicLabel, setActiveTopicLabel] = useState<string | null>(null);
   /** Bumps once per second while a session is running (or a limit is set) so timers update. */
-  const [, setSessionTick] = useState(0);
+  const [sessionTick, setSessionTick] = useState(0);
 
   const loadProcedureSession = useCallback(() => {
     return supabase
@@ -248,6 +249,12 @@ export function FloorStatusBar({
     sessionStartedAt != null
       ? committeeSessionEndTimestampMs(sessionStartedAt, sessionDurationSeconds, sessionEndsAt)
       : null;
+
+  useTimerExpiryAlarmWhenEndMsCrosses({
+    endMs: sessionEndMs,
+    watch: Boolean(sessionStartedAt && sessionEndMs != null),
+    clockTick: sessionTick,
+  });
 
   useEffect(() => {
     if (!sessionStartedAt) return;

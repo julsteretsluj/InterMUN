@@ -1,7 +1,30 @@
 /**
- * Short alarm when a live floor speech timer reaches zero (Web Audio API).
+ * Short alarm when an in-app countdown reaches zero (Web Audio API).
+ * Opt-in via `readTimerExpiryAlarmEnabled()` (stored in localStorage); off by default.
  * Dedupes rapid repeat calls so multiple UI subscribers only trigger one sound.
  */
+
+export const TIMER_EXPIRY_ALARM_STORAGE_KEY = "intermun-timer-expiry-alarm-enabled";
+
+export function readTimerExpiryAlarmEnabled(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const v = localStorage.getItem(TIMER_EXPIRY_ALARM_STORAGE_KEY);
+    return v === "1" || v === "true";
+  } catch {
+    return false;
+  }
+}
+
+export function setTimerExpiryAlarmEnabled(enabled: boolean): void {
+  if (typeof window === "undefined") return;
+  try {
+    if (enabled) localStorage.setItem(TIMER_EXPIRY_ALARM_STORAGE_KEY, "1");
+    else localStorage.removeItem(TIMER_EXPIRY_ALARM_STORAGE_KEY);
+  } catch {
+    /* quota / private mode */
+  }
+}
 
 let sharedAudioContext: AudioContext | null = null;
 let lastAlarmAtMs = 0;
@@ -41,8 +64,9 @@ function scheduleBeep(
   osc.stop(startTime + durationSec + 0.02);
 }
 
-/** Three-tone chime; safe to call from effects (uses dedupe). */
+/** Three-tone chime; safe to call from effects (uses dedupe). No-op unless the user enabled the preference. */
 export function playTimerExpiryAlarm(): void {
+  if (!readTimerExpiryAlarmEnabled()) return;
   const now = Date.now();
   if (now - lastAlarmAtMs < DEDUPE_MS) return;
   lastAlarmAtMs = now;

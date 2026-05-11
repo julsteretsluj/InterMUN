@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { COMMITTEE_SYNCED_STATE_KEYS } from "@/lib/committee-synced-state-keys";
 import { useCommitteeSyncedState } from "@/lib/hooks/useCommitteeSyncedState";
+import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 
 type Stored = {
   conferenceStart: string | null;
@@ -70,6 +71,12 @@ function CountdownLine({
     const tick = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(tick);
   }, [iso, target]);
+
+  useTimerExpiryAlarmWhenEndMsCrosses({
+    endMs: !iso || Number.isNaN(target) ? null : target,
+    watch: Boolean(iso && !Number.isNaN(target)),
+    clockTick: now,
+  });
 
   if (!iso || Number.isNaN(target)) {
     return (

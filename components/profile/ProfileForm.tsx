@@ -15,6 +15,11 @@ import {
   pronounsFormValueFromProfile,
 } from "@/lib/profile-pronouns";
 import { setProfileDashboardCommittee } from "@/app/actions/setProfileDashboardCommittee";
+import {
+  readTimerExpiryAlarmEnabled,
+  setTimerExpiryAlarmEnabled,
+  TIMER_EXPIRY_ALARM_STORAGE_KEY,
+} from "@/lib/timer-expiry-alarm";
 
 type FormData = {
   name?: string;
@@ -63,6 +68,7 @@ export function ProfileForm({
   const router = useRouter();
   const [committeeSwitchBusy, setCommitteeSwitchBusy] = useState(false);
   const [committeeSwitchError, setCommitteeSwitchError] = useState<string | null>(null);
+  const [timerExpiryAlarm, setTimerExpiryAlarm] = useState(false);
   const committeeConfirmMode = Boolean(
     dashboardCommitteeSwitch?.confirmBeforeSwitch &&
       dashboardCommitteeSwitch.allocationsByConferenceId
@@ -76,6 +82,17 @@ export function ProfileForm({
     if (!committeeConfirmMode) return;
     setPendingCommitteeId(activeCommitteeFromServer ?? "");
   }, [committeeConfirmMode, activeCommitteeFromServer]);
+
+  useEffect(() => {
+    setTimerExpiryAlarm(readTimerExpiryAlarmEnabled());
+    function onStorage(ev: StorageEvent) {
+      if (ev.key === TIMER_EXPIRY_ALARM_STORAGE_KEY || ev.key === null) {
+        setTimerExpiryAlarm(readTimerExpiryAlarmEnabled());
+      }
+    }
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const schema = useMemo(
     () =>
@@ -328,6 +345,26 @@ export function ProfileForm({
             />
           </div>
         </div>
+      </div>
+
+      <div className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 space-y-2">
+        <p className="text-sm font-medium text-brand-navy">{tp("timerExpiryAlarmTitle")}</p>
+        <label className="flex cursor-pointer items-start gap-2 text-sm text-brand-navy">
+          <input
+            type="checkbox"
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/20"
+            checked={timerExpiryAlarm}
+            onChange={(e) => {
+              const next = e.target.checked;
+              setTimerExpiryAlarm(next);
+              setTimerExpiryAlarmEnabled(next);
+            }}
+          />
+          <span>
+            <span className="font-medium">{tp("timerExpiryAlarmLabel")}</span>{" "}
+            <span className="text-xs text-brand-muted">{tp("timerExpiryAlarmHint")}</span>
+          </span>
+        </label>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

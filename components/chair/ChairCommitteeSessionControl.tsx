@@ -7,6 +7,7 @@ import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import { HelpButton } from "@/components/HelpButton";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
 import { committeeSessionEndTimestampMs, formatCountdownOrElapsed } from "@/lib/committee-session-end";
+import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 
 type EndMode = "none" | "duration" | "until";
 const SESSION_STATE_UPDATED_EVENT = "intermun:committee-session-updated";
@@ -84,7 +85,7 @@ export function ChairCommitteeSessionControl({
   const [endsAtLocal, setEndsAtLocal] = useState(() => isoToDatetimeLocalValue(initialEndsAt));
   const [supportsSessionStartColumn, setSupportsSessionStartColumn] = useState(true);
   const [supportsSessionEndOptions, setSupportsSessionEndOptions] = useState(true);
-  const [, setTick] = useState(0);
+  const [sessionUiTick, setTick] = useState(0);
 
   function isSessionColumnCacheError(message: string | null | undefined): boolean {
     const m = String(message ?? "");
@@ -480,6 +481,12 @@ export function ChairCommitteeSessionControl({
     : null;
   const elapsedText = live && startedAt ? formatSessionElapsed(startedAt, nowMs) : null;
   const countdown = endMs != null ? formatCountdownOrElapsed(endMs, nowMs) : null;
+
+  useTimerExpiryAlarmWhenEndMsCrosses({
+    endMs,
+    watch: Boolean(live && endMs != null),
+    clockTick: sessionUiTick,
+  });
 
   const fieldWrap =
     "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus-within:border-brand-accent/40";
