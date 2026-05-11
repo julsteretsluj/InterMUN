@@ -24,7 +24,10 @@ export function OverallAwardsProgress({ serverCompletedKeys, allRequiredKeys }: 
 
   useEffect(() => {
     const server = new Set(serverCompletedKeys);
-    setOptimisticKeys((prev) => prev.filter((k) => !server.has(k)));
+    const id = window.setTimeout(() => {
+      setOptimisticKeys((prev) => prev.filter((k) => !server.has(k)));
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [serverCompletedKeys]);
 
   useEffect(() => {
@@ -78,12 +81,15 @@ export function SectionAwardsProgress({
 
   useEffect(() => {
     const server = new Set(serverCompletedKeys.filter((k) => k.startsWith(prefix)));
-    setOptimisticKeys((prev) =>
-      prev.filter((k) => {
-        if (!k.startsWith(prefix)) return true;
-        return !server.has(k);
-      })
-    );
+    const id = window.setTimeout(() => {
+      setOptimisticKeys((prev) =>
+        prev.filter((k) => {
+          if (!k.startsWith(prefix)) return true;
+          return !server.has(k);
+        })
+      );
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [serverCompletedKeys, prefix]);
 
   useEffect(() => {

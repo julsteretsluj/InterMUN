@@ -17,7 +17,6 @@ export function ChairDelegateApprovalByEmailForm({
   allocationOptions: AllocationOption[];
 }) {
   const t = useTranslations("chairDelegateApprovalForm");
-  const tCommon = useTranslations("common");
   const tMatrix = useTranslations("allocationMatrixManager");
   const [state, formAction, pending] = useActionState(chairAssignDelegateByEmailAction, INITIAL_STATE);
 
