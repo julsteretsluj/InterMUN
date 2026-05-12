@@ -38,15 +38,10 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
         .maybeSingle()
     : { data: null };
 
-  const email = user.email?.toLowerCase().trim();
-  const isJules = email === "juleskittoastrop@gmail.com";
-  const rawSecGenName = profile?.name?.trim() || "Jules";
-  const secGenDisplayName = stripRedundantLeadingRole(rawSecGenName, "Secretary General");
-  const topBarUserName = isJules
-    ? isRoleOnlyDisplayName(rawSecGenName, "Secretary General")
-      ? "Secretary General"
-      : secGenDisplayName
-    : profile?.name?.trim() || "SMT";
+  const rawName = profile?.name?.trim() || "";
+  const topBarUserName = isRoleOnlyDisplayName(rawName, "Secretary General")
+    ? "Secretary General"
+    : stripRedundantLeadingRole(rawName, "Secretary General") || rawName || "SMT";
 
   const showSeamunLogo = activeEvent?.event_code === "SEAMUNI2027";
   const appName = getAppName();

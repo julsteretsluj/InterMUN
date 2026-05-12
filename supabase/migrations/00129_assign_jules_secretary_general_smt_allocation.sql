@@ -1,4 +1,4 @@
--- Link Secretary General seat on the SMT / secretariat sheet to juleskittoastrop@gmail.com.
+-- Link Secretary General seat on the SMT / secretariat sheet to placeholder auth email (replace in a private fork).
 -- Respects allocations (conference_id, user_id) uniqueness by clearing other SMT seats for this user first.
 
 DO $$
@@ -7,11 +7,11 @@ DECLARE
 BEGIN
   SELECT id INTO v_uid
   FROM auth.users
-  WHERE lower(trim(email)) = lower(trim('juleskittoastrop@gmail.com'))
+  WHERE lower(trim(email)) = lower(trim('smt-migration-placeholder-sg@invalid.example'))
   LIMIT 1;
 
   IF v_uid IS NULL THEN
-    RAISE NOTICE '00129: no auth.users row for juleskittoastrop@gmail.com; skipping';
+    RAISE NOTICE '00129: no auth.users row for smt-migration-placeholder-sg@invalid.example; skipping';
     RETURN;
   END IF;
 

@@ -1,6 +1,7 @@
 /**
- * Secretariat leadership & staff roster from the OVERVIEW sheet of
- * “Delegate Allocation Matrix — SEAMUN I 2027” (authoritative for this event).
+ * Secretariat roster shape for SEAMUN I 2027 UI (allocation matrix / oversight).
+ * Replace emails and names with your conference’s public contacts in a private fork or
+ * load from your own data source — do not commit real delegate or organiser inboxes here.
  */
 export type SeamunParliamentarianRow = {
   role: "Parliamentarian";
@@ -15,12 +16,12 @@ export type SeamunLeadershipRow =
 export const SEAMUN_I_2027_EVENT_CODE = "SEAMUNI2027";
 
 export const SEAMUN_I_2027_SECRETARIAT_CONTACTS = {
-  smtEmail: "information@seamun.com",
-  financeEmail: "finance@seamun.com",
+  smtEmail: "information@example.org",
+  financeEmail: "finance@example.org",
 } as const;
 
 /**
- * SMT / secretariat sheet row labels (`allocations.country`) — matches OVERVIEW order:
+ * SMT / secretariat sheet row labels (`allocations.country`) — matches typical OVERVIEW order:
  * leadership, operations, media. Three parliamentarian seats use the same role label.
  */
 export const SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS = [
@@ -41,35 +42,23 @@ export const SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS = [
 export const SMT_TEMPORARY_SEAT_LABELS = ["Temporary SMT", "Temporary advisor"] as const;
 
 export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
-  { role: "Secretary General", name: "Jules K.A.", email: "juleskittoastrop@gmail.com" },
-  { role: "Deputy Secretary General", name: "Emily H.", email: "emily.yhstudent@sisbschool.com" },
-  {
-    role: "Parliamentarian",
-    name: "Sam S.",
-    email: "samridh061009@gmail.com",
-  },
-  {
-    role: "Parliamentarian",
-    name: "Sparkle W.",
-    email: "sparshikaw05@gmail.com",
-  },
-  {
-    role: "Parliamentarian",
-    name: "Venice K.",
-    email: "venicekawisara25@gmail.com",
-  },
+  { role: "Secretary General", name: "—", email: "secretary-general@example.org" },
+  { role: "Deputy Secretary General", name: "—", email: "deputy-secretary-general@example.org" },
+  { role: "Parliamentarian", name: "—", email: "parliamentarian-a@example.org" },
+  { role: "Parliamentarian", name: "—", email: "parliamentarian-b@example.org" },
+  { role: "Parliamentarian", name: "—", email: "parliamentarian-c@example.org" },
 ];
 
 export const SEAMUN_I_2027_OPERATIONS: { role: string; name: string; email: string | null }[] = [
-  { role: "Head of Logistics", name: "Moonum C.", email: "reddragonetz@gmail.com" },
-  { role: "Head of Finance", name: "Mannan P.", email: "mannanparikh27@gmail.com" },
-  { role: "Head of Community Outreach", name: "Myesha S.", email: "sonimyesha@gmail.com" },
-  { role: "Head of Delegate Affairs", name: "Dominic S.S.", email: "dominicstott16@gmail.com" },
+  { role: "Head of Logistics", name: "—", email: "logistics@example.org" },
+  { role: "Head of Finance", name: "—", email: "finance-ops@example.org" },
+  { role: "Head of Community Outreach", name: "—", email: "outreach@example.org" },
+  { role: "Head of Delegate Affairs", name: "—", email: "delegate-affairs@example.org" },
 ];
 
 export const SEAMUN_I_2027_MEDIA: { role: string; name: string; email: string | null }[] = [
-  { role: "Head of Media", name: "Joanna H.", email: "joannaherbert747@gmail.com" },
-  { role: "Head of PR & Advertising", name: "Phil R.", email: "sarana79262@gmail.com" },
+  { role: "Head of Media", name: "—", email: "media@example.org" },
+  { role: "Head of PR & Advertising", name: "—", email: "pr@example.org" },
 ];
 
 /** Matrix cells that are not valid addresses (no `@`, spaces) render as plain text, not mailto. */

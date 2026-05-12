@@ -1,7 +1,7 @@
 -- Link remaining SEAMUN secretariat roster emails to SMT allocation rows (see 00086,
 -- lib/seamun-i-2027-secretariat-roster.ts). Clears each user's prior secretariat seats first
 -- so UNIQUE(conference_id, user_id) stays satisfied. Parliamentarian seats share the label
--- "Parliamentarian"; order follows roster top-to-bottom (Sam → Sparkle → Venice).
+-- "Parliamentarian"; order follows roster top-to-bottom (slots 1–3).
 
 DO $$
 DECLARE
@@ -25,16 +25,16 @@ BEGIN
       SELECT u.id
       FROM auth.users u
       WHERE lower(btrim(u.email)) IN (
-        'emily.yhstudent@sisbschool.com',
-        'samridh061009@gmail.com',
-        'sparshikaw05@gmail.com',
-        'venicekawisara25@gmail.com',
-        'reddragonetz@gmail.com',
-        'dominicstott16@gmail.com',
-        'mannanparikh27@gmail.com',
-        'sarana79262@gmail.com',
-        'joannaherbert747@gmail.com',
-        'sonimyesha@gmail.com'
+        'smt-migration-placeholder-01@invalid.example',
+        'smt-migration-placeholder-02@invalid.example',
+        'smt-migration-placeholder-03@invalid.example',
+        'smt-migration-placeholder-04@invalid.example',
+        'smt-migration-placeholder-05@invalid.example',
+        'smt-migration-placeholder-06@invalid.example',
+        'smt-migration-placeholder-07@invalid.example',
+        'smt-migration-placeholder-08@invalid.example',
+        'smt-migration-placeholder-09@invalid.example',
+        'smt-migration-placeholder-10@invalid.example'
       )
     );
 
@@ -44,7 +44,7 @@ BEGIN
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'deputy secretary general'
-    AND lower(btrim(u.email)) = 'emily.yhstudent@sisbschool.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-01@invalid.example';
 
   -- Three Parliamentarian rows: stable order by allocation id
   UPDATE public.allocations a
@@ -66,7 +66,7 @@ BEGIN
       WHERE z.rn = 1
     ) pick
   WHERE a.id = pick.id
-    AND lower(btrim(u.email)) = 'samridh061009@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-02@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
@@ -87,7 +87,7 @@ BEGIN
       WHERE z.rn = 2
     ) pick
   WHERE a.id = pick.id
-    AND lower(btrim(u.email)) = 'sparshikaw05@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-03@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
@@ -108,49 +108,49 @@ BEGIN
       WHERE z.rn = 3
     ) pick
   WHERE a.id = pick.id
-    AND lower(btrim(u.email)) = 'venicekawisara25@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-04@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of logistics'
-    AND lower(btrim(u.email)) = 'reddragonetz@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-05@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of finance'
-    AND lower(btrim(u.email)) = 'mannanparikh27@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-07@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of community outreach'
-    AND lower(btrim(u.email)) = 'sonimyesha@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-10@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of delegate affairs'
-    AND lower(btrim(u.email)) = 'dominicstott16@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-06@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of media'
-    AND lower(btrim(u.email)) = 'joannaherbert747@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-09@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
   FROM auth.users u
   WHERE a.conference_id = ANY (v_smt_ids)
     AND lower(btrim(a.country)) = 'head of pr & advertising'
-    AND lower(btrim(u.email)) = 'sarana79262@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-08@invalid.example';
 
   UPDATE public.profiles p
   SET
@@ -159,16 +159,16 @@ BEGIN
     updated_at = NOW()
   FROM (
     VALUES
-      ('emily.yhstudent@sisbschool.com', 'Deputy Secretary General'),
-      ('samridh061009@gmail.com', 'Parliamentarian'),
-      ('sparshikaw05@gmail.com', 'Parliamentarian'),
-      ('venicekawisara25@gmail.com', 'Parliamentarian'),
-      ('reddragonetz@gmail.com', 'Head of Logistics'),
-      ('mannanparikh27@gmail.com', 'Head of Finance'),
-      ('sonimyesha@gmail.com', 'Head of Community Outreach'),
-      ('dominicstott16@gmail.com', 'Head of Delegate Affairs'),
-      ('joannaherbert747@gmail.com', 'Head of Media'),
-      ('sarana79262@gmail.com', 'Head of PR & Advertising')
+      ('smt-migration-placeholder-01@invalid.example', 'Deputy Secretary General'),
+      ('smt-migration-placeholder-02@invalid.example', 'Parliamentarian'),
+      ('smt-migration-placeholder-03@invalid.example', 'Parliamentarian'),
+      ('smt-migration-placeholder-04@invalid.example', 'Parliamentarian'),
+      ('smt-migration-placeholder-05@invalid.example', 'Head of Logistics'),
+      ('smt-migration-placeholder-07@invalid.example', 'Head of Finance'),
+      ('smt-migration-placeholder-10@invalid.example', 'Head of Community Outreach'),
+      ('smt-migration-placeholder-06@invalid.example', 'Head of Delegate Affairs'),
+      ('smt-migration-placeholder-09@invalid.example', 'Head of Media'),
+      ('smt-migration-placeholder-08@invalid.example', 'Head of PR & Advertising')
   ) AS v(email, label)
   INNER JOIN auth.users u ON lower(btrim(u.email)) = lower(btrim(v.email))
   WHERE p.id = u.id;

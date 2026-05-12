@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Conference ops (may contain delegate emails, budgets, or roster PII — keep local only)
+/data/allocation-matrix.xlsx
+/public/conference/seamun-i-the-conference-handbook.pdf
+
 # vercel
 .vercel
 

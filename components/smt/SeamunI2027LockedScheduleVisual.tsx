@@ -81,6 +81,7 @@ export function SeamunI2027LockedScheduleVisual() {
   const tSched = useTranslations("smtConferenceSettings.schedule");
   const [day, setDay] = useState<1 | 2>(1);
   const columns = day === 1 ? SEAMUN_I_2027_DAY1_COLUMNS : SEAMUN_I_2027_DAY2_COLUMNS;
+  const handbookHref = seamunI2027HandbookPdfPath();
 
   return (
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
@@ -88,17 +89,19 @@ export function SeamunI2027LockedScheduleVisual() {
         <div>
           <h2 className="font-display text-xl font-semibold text-brand-navy">{t("title")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("body")}</p>
-          <p className="mt-3 text-sm text-brand-navy/90 dark:text-zinc-200">
-            <a
-              href={seamunI2027HandbookPdfPath()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-brand-accent underline decoration-brand-accent/40 underline-offset-2 hover:decoration-brand-accent"
-            >
-              {t("handbookLink")}
-            </a>
-            <span className="text-brand-muted"> — {t("handbookHint")}</span>
-          </p>
+          {handbookHref ? (
+            <p className="mt-3 text-sm text-brand-navy/90 dark:text-zinc-200">
+              <a
+                href={handbookHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-brand-accent underline decoration-brand-accent/40 underline-offset-2 hover:decoration-brand-accent"
+              >
+                {t("handbookLink")}
+              </a>
+              <span className="text-brand-muted"> — {t("handbookHint")}</span>
+            </p>
+          ) : null}
         </div>
         <div className="flex shrink-0 gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
           {([1, 2] as const).map((d) => (

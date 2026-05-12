@@ -1,8 +1,7 @@
 /**
  * SEAMUN I 2027 — which debate chambers follow which master-schedule track.
  * Source of truth for timings/colours: `lib/seamun-i-2027-locked-schedule.ts` (visual day 1 & 2).
- * Committee bucketing is aligned with the conference handbook PDF served at
- * `/conference/seamun-i-the-conference-handbook.pdf` (same document as “SEAMUN _ The Conference (6).pdf”).
+ * Committee bucketing should match the organisers’ published handbook (not stored in this repo).
  *
  * Chamber labels must match `conferences.committee` values for this event (see `seed_allocation_matrix.sql`).
  */
@@ -60,6 +59,7 @@ export function seamunI2027ScheduleGroupForChamber(committee: string | null | un
   return CHAMBER_TO_GROUP_ID.get(key) ?? null;
 }
 
-export function seamunI2027HandbookPdfPath(): string {
-  return "/conference/seamun-i-the-conference-handbook.pdf";
+export function seamunI2027HandbookPdfPath(): string | null {
+  const v = process.env.NEXT_PUBLIC_SEAMUN_HANDBOOK_PDF_URL?.trim();
+  return v && v.length > 0 ? v : null;
 }

@@ -6,7 +6,7 @@ DECLARE
 BEGIN
   SELECT id INTO v_uid
   FROM auth.users
-  WHERE lower(btrim(email)) = lower(trim('liqinglin086@gmail.com'))
+  WHERE lower(btrim(email)) = lower(trim('smt-migration-placeholder-11@invalid.example'))
   LIMIT 1;
 
   IF v_uid IS NULL THEN

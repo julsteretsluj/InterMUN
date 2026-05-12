@@ -1,7 +1,7 @@
 -- Remove extra "Parliamentarian" allocation rows (manual duplicates beyond the matrix).
 -- Keep the three lowest-allocation-id rows per secretariat conference; move linked users
--- into free slots among those three; assign Sam (samridh061009@gmail.com) to seat A (rn 1);
--- delete surplus rows. Then re-apply Sparkle/Venice links by roster order.
+-- into free slots among those three; assign first parliamentarian slot to placeholder user;
+-- delete surplus rows. Then re-apply remaining parliamentarian links by roster order.
 
 BEGIN;
 
@@ -16,7 +16,7 @@ DECLARE
 BEGIN
   SELECT id INTO v_sam
   FROM auth.users
-  WHERE lower(btrim(email)) = lower(btrim('samridh061009@gmail.com'))
+  WHERE lower(btrim(email)) = lower(btrim('smt-migration-placeholder-02@invalid.example'))
   LIMIT 1;
 
   FOR v_conf IN
@@ -149,7 +149,7 @@ BEGIN
       WHERE z.rn = 2
     ) pick
   WHERE a.id = pick.id
-    AND lower(btrim(u.email)) = 'sparshikaw05@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-03@invalid.example';
 
   UPDATE public.allocations a
   SET user_id = u.id
@@ -170,7 +170,7 @@ BEGIN
       WHERE z.rn = 3
     ) pick
   WHERE a.id = pick.id
-    AND lower(btrim(u.email)) = 'venicekawisara25@gmail.com';
+    AND lower(btrim(u.email)) = 'smt-migration-placeholder-04@invalid.example';
 END $$;
 
 UPDATE public.profiles p

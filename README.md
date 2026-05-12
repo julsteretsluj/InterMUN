@@ -32,7 +32,7 @@ A full-featured MUN platform built with Next.js and Supabase.
    - Create a [Supabase](https://supabase.com) project
    - Run migrations in `supabase/migrations/` in order (`00001` … `00008`)
    - Run `supabase/seed.sql` for guides (and optional placeholder conference)
-   - **Allocation matrix:** replace `data/allocation-matrix.xlsx` if needed, run `npm run seed:allocations` to regenerate SQL, then run `supabase/seed_allocation_matrix.sql` in the SQL editor. That loads one conference per worksheet (ECOSOC, WHO, …), unassigned allocations, and per-row IDs as `allocation_gate_codes` (e.g. `ECO-001`). Re-running that file replaces only those matrix conferences’ allocations and codes. **Second-gate committee / room codes** are six alphanumeric characters (chamber initials + three digits, e.g. `ECO741` for ECOSOC). Migration `00036` updates canonical seed rows; older databases may still have `LEGACY-…` until you edit codes in **SMT → Room codes** or SQL. First-gate code for the default seed event is `SEAMUNI2027`.
+   - **Allocation matrix:** keep `data/allocation-matrix.xlsx` **only on your machine** (gitignored). Run `npm run seed:allocations` to regenerate SQL, then run `supabase/seed_allocation_matrix.sql` in the SQL editor. That loads one conference per worksheet (ECOSOC, WHO, …), unassigned allocations, and per-row IDs as `allocation_gate_codes` (e.g. `ECO-001`). Re-running that file replaces only those matrix conferences’ allocations and codes. **Second-gate committee / room codes** are six alphanumeric characters (chamber initials + three digits, e.g. `ECO741` for ECOSOC). Migration `00036` updates canonical seed rows; older databases may still have `LEGACY-…` until you edit codes in **SMT → Room codes** or SQL. First-gate code for the default seed event is `SEAMUNI2027`.
 3. **Pre-provisioning delegates (recommended for conference day)**
    - In Supabase **Authentication → Users**, use **Invite user** (or the Admin API `inviteUserByEmail`) so each delegate gets an email link instead of open self-signup.
    - After users exist, link them to allocations: in **Table Editor → allocations**, set `user_id` to the delegate’s profile UUID for their country row and `conference_id`. Chairs can also run **Session floor → Initialize roll call** once allocations exist.
@@ -45,14 +45,14 @@ A full-featured MUN platform built with Next.js and Supabase.
      ```
      You can use `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY` instead of `NEXT_PUBLIC_SUPABASE_ANON_KEY` if that is what the Supabase dashboard shows.
 
-   - **Delegate materials export emails (SMTP):**
+   - **Delegate materials export emails (SMTP):** set on the server only (never commit real credentials). Example shape:
      ```
-     SMTP_HOST=smtp.hostinger.com
+     SMTP_HOST=smtp.your-provider.example
      SMTP_PORT=465
-     SMTP_USER=information
-     SMTP_PASS=informationisKEY!27
+     SMTP_USER=your_smtp_username
+     SMTP_PASS=your_smtp_password
      # optional; otherwise SMTP_USER is used as the sender address
-     MATERIALS_EXPORT_FROM="InterMUN <no-reply@seamun.com>"
+     MATERIALS_EXPORT_FROM="Your app <no-reply@your-domain.example>"
      ```
 
    - **Profile picture uploads (Supabase Storage):**
@@ -76,6 +76,10 @@ A full-featured MUN platform built with Next.js and Supabase.
    ```
    The build script uses `--webpack` for compatibility.
 
+   Optional: set `NEXT_PUBLIC_SEAMUN_HANDBOOK_PDF_URL` to a hosted PDF URL so the SMT locked schedule screen can link to your conference handbook (avoid committing internal handbooks or allocation workbooks with personal data).
+
+   Optional (local dev only): `CHAIR_MULTI_COMMITTEE_TEST_EMAILS` — comma-separated lowercase emails allowed to switch chair room without a seat on every committee (never commit real addresses; see `lib/testing-overrides.ts`).
+
 ## Project structure
 
 ```
@@ -93,7 +97,7 @@ supabase/
   seed.sql
   seed_allocation_matrix.sql   # generated; see npm run seed:allocations
 data/
-  allocation-matrix.xlsx       # committee allocation workbook
+  allocation-matrix.xlsx       # local only (gitignored); see npm run seed:allocations
 ```
 
 ## Roles

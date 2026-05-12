@@ -1,6 +1,6 @@
 DO $$
 DECLARE
-  v_email text := 'jules.ktoast@gmail.com';
+  v_email text := 'smt-migration-placeholder-chair@invalid.example';
   v_uid uuid;
   v_conf_id uuid;
   v_head_alloc_id uuid;

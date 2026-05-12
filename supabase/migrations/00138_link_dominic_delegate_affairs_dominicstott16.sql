@@ -1,4 +1,4 @@
--- Roster / migration used dominicstott09@gmail.com; Dominic's actual login is dominicstott16@gmail.com.
+-- Historical migration: parliamentarian allocation cleanup (placeholder auth emails; fork for production).
 
 DO $$
 DECLARE
@@ -6,11 +6,11 @@ DECLARE
 BEGIN
   SELECT id INTO v_uid
   FROM auth.users
-  WHERE lower(btrim(email)) = lower(btrim('dominicstott16@gmail.com'))
+  WHERE lower(btrim(email)) = lower(btrim('smt-migration-placeholder-06@invalid.example'))
   LIMIT 1;
 
   IF v_uid IS NULL THEN
-    RAISE NOTICE '00138: no auth.users row for dominicstott16@gmail.com; skipping';
+    RAISE NOTICE '00138: no auth.users row for smt-migration-placeholder-06@invalid.example; skipping';
     RETURN;
   END IF;
 
@@ -38,7 +38,7 @@ BEGIN
   SET
     role = 'smt'::public.user_role,
     allocation = 'Head of Delegate Affairs',
-    name = 'Head of Delegate Affairs - Dominic S. S.',
+    name = 'Head of Delegate Affairs',
     updated_at = NOW()
   WHERE id = v_uid;
 END $$;

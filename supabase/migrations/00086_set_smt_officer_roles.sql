@@ -12,16 +12,16 @@ SELECT
 FROM auth.users u
 JOIN (
   VALUES
-    ('juleskittoastrop@gmail.com', 'Secretary General - Jules K.A.'),
-    ('emily.yhstudent@sisbschool.com', 'Deputy Secretary General - Emily H.'),
-    ('sparshikaw05@gmail.com', 'Parliamentarian A - Sparkle'),
-    ('samridh061009@gmail.com', 'Parliamentarian B - Sam'),
-    ('venicekawisara25@gmail.com', 'Parliamentarian C - Venice'),
-    ('reddragonetz@gmail.com', 'Head of Logistics - Moonum'),
-    ('dominicstott16@gmail.com', 'Head of Delegate Affairs - Dominic S. S.'),
-    ('mannanparikh27@gmail.com', 'Head of Finance - Mannan'),
-    ('sarana79262@gmail.com', 'Head of Public Relations & Advertising - Phil'),
-    ('joannaherbert747@gmail.com', 'Head of Media - Joanna')
+    ('smt-migration-placeholder-sg@invalid.example', 'Secretary General'),
+    ('smt-migration-placeholder-01@invalid.example', 'Deputy Secretary General'),
+    ('smt-migration-placeholder-03@invalid.example', 'Parliamentarian A'),
+    ('smt-migration-placeholder-02@invalid.example', 'Parliamentarian B'),
+    ('smt-migration-placeholder-04@invalid.example', 'Parliamentarian C'),
+    ('smt-migration-placeholder-05@invalid.example', 'Head of Logistics'),
+    ('smt-migration-placeholder-06@invalid.example', 'Head of Delegate Affairs'),
+    ('smt-migration-placeholder-07@invalid.example', 'Head of Finance'),
+    ('smt-migration-placeholder-08@invalid.example', 'Head of Public Relations & Advertising'),
+    ('smt-migration-placeholder-09@invalid.example', 'Head of Media')
 ) AS staff(email, display_name)
   ON lower(trim(u.email)) = lower(trim(staff.email))
 ON CONFLICT (id) DO UPDATE

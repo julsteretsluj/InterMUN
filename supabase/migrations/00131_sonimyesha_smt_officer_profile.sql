@@ -4,8 +4,8 @@
 UPDATE public.profiles p
 SET
   role = 'smt'::public.user_role,
-  name = 'Head of Community Outreach - Myesha S.',
+  name = 'Head of Community Outreach',
   updated_at = NOW()
 FROM auth.users u
 WHERE p.id = u.id
-  AND lower(btrim(u.email)) = lower(trim('sonimyesha@gmail.com'));
+  AND lower(btrim(u.email)) = lower(trim('smt-migration-placeholder-10@invalid.example'));
