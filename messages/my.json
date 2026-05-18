@@ -1750,7 +1750,14 @@
           "g3": "ဂမ်မာ",
           "g4": "မြစ်ဝကျွန်းပေါ်",
           "support": "Epsilon"
-        }
+        },
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:"
       },
       "lunchOverlap": {
         "title": "နေ့လည်စာကို အခြားကော်မတီများနှင့် ထပ်နေပါသည်။",

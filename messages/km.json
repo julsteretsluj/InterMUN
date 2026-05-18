@@ -1750,7 +1750,14 @@
           "g3": "ហ្គាម៉ា",
           "g4": "ដីសណ្ត",
           "support": "Epsilon"
-        }
+        },
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:"
       },
       "lunchOverlap": {
         "title": "អាហារថ្ងៃត្រង់ត្រួតលើគ្នាជាមួយគណៈកម្មការផ្សេងទៀត។",

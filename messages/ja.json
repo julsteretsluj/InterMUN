@@ -1696,7 +1696,14 @@
           "g3": "ガンマ",
           "g4": "デルタ",
           "support": "イプシロン"
-        }
+        },
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:"
       },
       "lunchOverlap": {
         "title": "昼食は他の委員会と重複します",

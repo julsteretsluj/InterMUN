@@ -912,7 +912,7 @@
     },
     "jumpTo": "Jump to",
     "schedule": {
-      "intro": "Pick your team track, then either advisor A–D or your committee (delegate/chair). Only one personal timetable is shown at a time."
+      "intro": "Your committee’s official timetable for the conference. Use lunch overlap below to compare meal times with other committees."
     },
     "tiles": {
       "stances": {
@@ -1850,17 +1850,16 @@
         "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
         "colScheduleTrack": "Schedule track",
         "colChambers": "Chambers (labels in this event)",
-        "advisorHint": "Tap a team, then view either an advisor timetable (A–D) or a delegate/chair timetable for one committee — not both at once.",
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:",
         "advisorOnlyHint": "Pick your schedule track, then advisor A–D to view that advisor’s day.",
         "committeeOnlyHint": "Your committee’s official timetable. Below, compare lunch times with other committees.",
-        "pickTrack": "Schedule track:",
-        "viewAllTeams": "All teams",
-        "orPickTeam": "or team:",
-        "viewAs": "View as",
-        "modeAdvisor": "Advisor",
-        "modeCommittee": "Committee (delegate / chair)",
         "pickAdvisor": "Advisor",
-        "pickCommittee": "Committee",
         "selectAdvisorPrompt": "Select advisor A, B, C, or D to view that timetable.",
         "selectCommitteePrompt": "Select your committee to view the delegate/chair timetable.",
         "teamShort": {

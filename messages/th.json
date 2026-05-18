@@ -1624,7 +1624,14 @@
           "g3": "แกมมา",
           "g4": "เดลต้า",
           "support": "เอปซิลอน"
-        }
+        },
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:"
       },
       "lunchOverlap": {
         "title": "อาหารกลางวันทับซ้อนกับคณะกรรมการอื่นๆ",

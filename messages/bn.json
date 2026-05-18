@@ -1624,7 +1624,14 @@
           "g3": "গামা",
           "g4": "ডেল্টা",
           "support": "এপসিলন"
-        }
+        },
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:"
       },
       "lunchOverlap": {
         "title": "লাঞ্চ অন্যান্য কমিটির সাথে ওভারল্যাপ",

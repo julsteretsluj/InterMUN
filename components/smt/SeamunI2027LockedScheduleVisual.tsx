@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils";
 import {
   SEAMUN_I_2027_AXIS_END_MIN,
   SEAMUN_I_2027_AXIS_START_MIN,
-  SEAMUN_I_2027_DAY1_COLUMNS,
-  SEAMUN_I_2027_DAY2_COLUMNS,
   type SeamunLockedBlock,
   type SeamunLockedBlockCategory,
   type SeamunLockedColumn,
@@ -24,6 +22,7 @@ import {
   SEAMUN_ADVISOR_IDS,
   buildSeamunAdvisorDayBlocks,
   buildSeamunCommitteeDayBlocks,
+  seamunAllScheduleCommittees,
   seamunDebateColumnsForDay,
   seamunScheduleGroupById,
   seamunScheduleGroupForColumnHeader,
@@ -33,7 +32,8 @@ import { SeamunLunchOverlapCompare } from "@/components/schedule/SeamunLunchOver
 
 const AXIS_RANGE = SEAMUN_I_2027_AXIS_END_MIN - SEAMUN_I_2027_AXIS_START_MIN;
 
-type DetailMode = "advisor" | "committee";
+type BrowseMode = "teams" | "committee" | "advisor";
+type TeamsScope = "all" | SeamunScheduleGroupId;
 
 function blockStyle(b: SeamunLockedBlock): { top: string; height: string } {
   const t0 = timeToMinutes(b.start);
@@ -127,13 +127,7 @@ function ScheduleColumnBody({ col }: { col: SeamunLockedColumn }) {
   );
 }
 
-function ScheduleGrid({
-  columns,
-  onColumnHeaderClick,
-}: {
-  columns: SeamunLockedColumn[];
-  onColumnHeaderClick?: (groupId: SeamunScheduleGroupId) => void;
-}) {
+function ScheduleGrid({ columns }: { columns: SeamunLockedColumn[] }) {
   return (
     <div className="overflow-x-auto pb-1">
       <div className="inline-flex min-w-full gap-0">
@@ -155,34 +149,20 @@ function ScheduleGrid({
           </div>
         </div>
 
-        {columns.map((col) => {
-          const groupIdFromHeader = seamunScheduleGroupForColumnHeader(col.header);
-          const clickable = Boolean(onColumnHeaderClick && groupIdFromHeader);
-          return (
-            <div
-              key={col.header}
-              className={cn(
-                "border-r border-brand-navy/10 last:border-r-0",
-                columns.length === 1 ? "min-w-[12rem] flex-1 max-w-md" : "min-w-[9.5rem] flex-1 sm:min-w-[10.5rem]"
-              )}
-            >
-              {clickable ? (
-                <button
-                  type="button"
-                  onClick={() => onColumnHeaderClick!(groupIdFromHeader!)}
-                  className="flex h-10 w-full items-end justify-center border-b border-brand-navy/10 px-1 pb-1 text-center text-[0.65rem] font-semibold leading-tight text-brand-accent underline decoration-brand-accent/30 underline-offset-2 transition hover:bg-brand-accent/8"
-                >
-                  {col.header}
-                </button>
-              ) : (
-                <div className="flex h-10 items-end justify-center border-b border-brand-navy/10 px-1 pb-1 text-center text-[0.65rem] font-semibold leading-tight text-brand-navy dark:text-zinc-100">
-                  {col.header}
-                </div>
-              )}
-              <ScheduleColumnBody col={col} />
+        {columns.map((col) => (
+          <div
+            key={col.header}
+            className={cn(
+              "border-r border-brand-navy/10 last:border-r-0",
+              columns.length === 1 ? "min-w-[12rem] flex-1 max-w-md" : "min-w-[9.5rem] flex-1 sm:min-w-[10.5rem]"
+            )}
+          >
+            <div className="flex h-10 items-end justify-center border-b border-brand-navy/10 px-1 pb-1 text-center text-[0.65rem] font-semibold leading-tight text-brand-navy dark:text-zinc-100">
+              {col.header}
             </div>
-          );
-        })}
+            <ScheduleColumnBody col={col} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -194,9 +174,26 @@ export type SeamunI2027LockedScheduleVisualProps = {
   initialGroupId?: SeamunScheduleGroupId | null;
   initialCommittee?: string | null;
   defaultView?: "teams" | "detail";
-  /** Role-specific UI: SMT full view; advisor timetables only; delegate/chair committee + lunch compare. */
   variant?: SeamunScheduleVariant;
 };
+
+function tabClass(active: boolean) {
+  return cn(
+    "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
+    active
+      ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
+      : "text-brand-muted hover:bg-brand-navy/5"
+  );
+}
+
+function pillClass(active: boolean) {
+  return cn(
+    "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
+    active
+      ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
+      : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
+  );
+}
 
 export function SeamunI2027LockedScheduleVisual({
   initialGroupId = null,
@@ -216,88 +213,104 @@ export function SeamunI2027LockedScheduleVisual({
     ? seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(initialCommitteeTrimmed))
     : null;
 
-  const resolvedDefaultView: "teams" | "detail" =
-    isSmt ? defaultView : "detail";
-  const initialView: "teams" | "detail" =
-    resolvedDefaultView === "detail" || initialCommitteeTrimmed || isAdvisor || isCommittee
-      ? "detail"
-      : resolvedDefaultView;
+  const initialBrowseMode: BrowseMode = isAdvisor
+    ? "advisor"
+    : isCommittee
+      ? "committee"
+      : defaultView === "teams"
+        ? "teams"
+        : "committee";
 
   const [day, setDay] = useState<1 | 2>(1);
-  const [view, setView] = useState<"teams" | "detail">(initialView);
-  const [groupId, setGroupId] = useState<SeamunScheduleGroupId | null>(
-    seamunI2027DebateScheduleGroupId(initialGroupId) ?? initialGroupFromCommittee
+  const [browseMode, setBrowseMode] = useState<BrowseMode>(initialBrowseMode);
+  const [teamsScope, setTeamsScope] = useState<TeamsScope>(
+    seamunI2027DebateScheduleGroupId(initialGroupId) ?? initialGroupFromCommittee ?? "all"
   );
-  const [detailMode, setDetailMode] = useState<DetailMode>(
-    isAdvisor ? "advisor" : isCommittee || initialCommitteeTrimmed ? "committee" : "advisor"
-  );
+  const defaultGroupId =
+    seamunI2027DebateScheduleGroupId(initialGroupId) ??
+    initialGroupFromCommittee ??
+    SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS[0]?.id ??
+    null;
+
+  const [groupId, setGroupId] = useState<SeamunScheduleGroupId | null>(defaultGroupId);
   const [advisorId, setAdvisorId] = useState<SeamunAdvisorId | null>(null);
   const [committee, setCommittee] = useState<string | null>(initialCommitteeTrimmed);
 
   const teamColumns = useMemo(() => seamunDebateColumnsForDay(day), [day]);
+  const allCommittees = useMemo(() => seamunAllScheduleCommittees(), []);
   const handbookHref = seamunI2027HandbookPdfPath();
 
-  const committeesForGroup = useMemo(() => {
-    if (!groupId) return [];
-    return [...seamunScheduleGroupById(groupId).chambers];
-  }, [groupId]);
-
-  const detailColumn = useMemo((): SeamunLockedColumn | null => {
-    if (!groupId) return null;
-    const def = seamunScheduleGroupById(groupId);
-
-    if (detailMode === "advisor" && advisorId) {
-      return {
-        header: `${def.scheduleHeader} — Advisor ${advisorId}`,
-        blocks: buildSeamunAdvisorDayBlocks(day, groupId, advisorId),
-      };
+  const displayColumns = useMemo((): SeamunLockedColumn[] => {
+    if (browseMode === "teams") {
+      if (teamsScope === "all") return teamColumns;
+      const col = teamColumns.find((c) => seamunScheduleGroupForColumnHeader(c.header) === teamsScope);
+      return col ? [col] : [];
     }
 
-    if (detailMode === "committee" && committee) {
+    if (browseMode === "committee" && committee) {
       const blocks = buildSeamunCommitteeDayBlocks(day, committee);
-      if (blocks.length === 0) return null;
-      return {
-        header: `${def.scheduleHeader} — ${committee}`,
-        blocks,
-      };
+      if (blocks.length === 0) return [];
+      return [{ header: committee, blocks }];
     }
 
-    return null;
-  }, [day, groupId, detailMode, advisorId, committee]);
+    if (browseMode === "advisor" && groupId && advisorId) {
+      const def = seamunScheduleGroupById(groupId);
+      return [
+        {
+          header: `${def.scheduleHeader} — Advisor ${advisorId}`,
+          blocks: buildSeamunAdvisorDayBlocks(day, groupId, advisorId),
+        },
+      ];
+    }
 
-  function openDetailView(id: SeamunScheduleGroupId) {
-    setGroupId(id);
-    if (!isCommittee) {
+    return [];
+  }, [browseMode, teamsScope, teamColumns, committee, groupId, advisorId, day]);
+
+  function switchBrowseMode(mode: BrowseMode) {
+    setBrowseMode(mode);
+    if (mode === "teams") {
       setAdvisorId(null);
       setCommittee(null);
+    } else if (mode === "committee") {
+      setAdvisorId(null);
+      setTeamsScope("all");
+    } else {
+      setCommittee(null);
+      setTeamsScope("all");
+      if (!groupId && SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS[0]) {
+        setGroupId(SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS[0].id);
+      }
     }
-    setView("detail");
   }
 
-  function switchDetailMode(mode: DetailMode) {
-    setDetailMode(mode);
+  function selectTeamsScope(scope: TeamsScope) {
+    setBrowseMode("teams");
+    setTeamsScope(scope);
     setAdvisorId(null);
     setCommittee(null);
+  }
+
+  function selectGroupForAdvisor(id: SeamunScheduleGroupId) {
+    setGroupId(id);
+    setAdvisorId(null);
   }
 
   function selectAdvisor(id: SeamunAdvisorId) {
-    setDetailMode("advisor");
     setAdvisorId(id);
-    setCommittee(null);
   }
 
   function selectCommittee(ch: string) {
-    setDetailMode("committee");
     setCommittee(ch);
-    setAdvisorId(null);
     const g = seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(ch));
     if (g) setGroupId(g);
   }
 
   const awaitingSelection =
-    view === "detail" &&
-    groupId &&
-    ((detailMode === "advisor" && !advisorId) || (detailMode === "committee" && !committee));
+    (browseMode === "committee" && !committee) ||
+    (browseMode === "advisor" && (!groupId || !advisorId));
+
+  const showCommitteePicker = browseMode === "committee" && isSmt;
+  const showLockedCommitteeLabel = browseMode === "committee" && isCommittee && committee;
 
   return (
     <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 md:p-8 shadow-sm">
@@ -305,7 +318,7 @@ export function SeamunI2027LockedScheduleVisual({
         <div>
           <h2 className="font-display text-xl font-semibold text-brand-navy">{t("title")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("body")}</p>
-          {isSmt ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorHint")}</p> : null}
+          {isSmt ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("smtBrowseHint")}</p> : null}
           {isAdvisor ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorOnlyHint")}</p> : null}
           {isCommittee ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("committeeOnlyHint")}</p> : null}
           {handbookHref ? (
@@ -324,17 +337,7 @@ export function SeamunI2027LockedScheduleVisual({
         </div>
         <div className="flex shrink-0 gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
           {([1, 2] as const).map((d) => (
-            <button
-              key={d}
-              type="button"
-              onClick={() => setDay(d)}
-              className={cn(
-                "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
-                day === d
-                  ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
-                  : "text-brand-muted hover:bg-brand-navy/5"
-              )}
-            >
+            <button key={d} type="button" onClick={() => setDay(d)} className={tabClass(day === d)}>
               {d === 1 ? tSched("day1Tab") : tSched("day2Tab")}
             </button>
           ))}
@@ -342,148 +345,103 @@ export function SeamunI2027LockedScheduleVisual({
       </div>
 
       {isSmt ? (
+        <div className="mb-4 flex flex-wrap gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
+          {(
+            [
+              ["teams", "browseTeams"],
+              ["committee", "browseCommittee"],
+              ["advisor", "browseAdvisor"],
+            ] as const
+          ).map(([mode, labelKey]) => (
+            <button
+              key={mode}
+              type="button"
+              onClick={() => switchBrowseMode(mode)}
+              className={tabClass(browseMode === mode)}
+            >
+              {t(labelKey)}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
+      {browseMode === "teams" && isSmt ? (
         <div className="mb-4 flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              setView("teams");
-              setAdvisorId(null);
-              setCommittee(null);
-            }}
-            className={cn(
-              "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
-              view === "teams"
-                ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
-                : "text-brand-muted hover:bg-brand-navy/5"
-            )}
-          >
-            {t("viewAllTeams")}
+          <button type="button" onClick={() => selectTeamsScope("all")} className={tabClass(teamsScope === "all")}>
+            {t("teamsScopeAll")}
           </button>
-          <span className="text-xs text-brand-muted">{t("orPickTeam")}</span>
+          <span className="text-xs text-brand-muted">{t("pickGroup")}</span>
           {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
             <button
               key={g.id}
               type="button"
-              onClick={() => openDetailView(g.id)}
-              className={cn(
-                "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
-                view === "detail" && groupId === g.id
-                  ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
-                  : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
-              )}
+              onClick={() => selectTeamsScope(g.id)}
+              className={pillClass(teamsScope === g.id)}
             >
               {t(`teamShort.${g.id}`)}
             </button>
           ))}
         </div>
-      ) : (
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-brand-muted">{t("pickTrack")}</span>
-          {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
-            <button
-              key={g.id}
-              type="button"
-              onClick={() => openDetailView(g.id)}
-              className={cn(
-                "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
-                groupId === g.id
-                  ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
-                  : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
-              )}
-            >
-              {t(`teamShort.${g.id}`)}
-            </button>
-          ))}
-        </div>
-      )}
+      ) : null}
 
-      {view === "detail" && groupId ? (
+      {browseMode === "committee" && showCommitteePicker ? (
+        <div className="mb-4 space-y-2">
+          <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickCommitteeAll")}</p>
+          <div className="flex flex-wrap gap-2">
+            {allCommittees.map((ch) => (
+              <button
+                key={ch}
+                type="button"
+                onClick={() => selectCommittee(ch)}
+                className={pillClass(committee === ch)}
+                aria-pressed={committee === ch}
+              >
+                {ch}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {showLockedCommitteeLabel ? (
+        <p className="mb-4 text-sm font-semibold text-brand-navy dark:text-zinc-100">{committee}</p>
+      ) : null}
+
+      {browseMode === "advisor" && (isSmt || isAdvisor) ? (
         <div className="mb-4 space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
-            {seamunScheduleGroupById(groupId).scheduleHeader}
-          </p>
-
-          {isCommittee && committee ? (
-            <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{committee}</p>
-          ) : null}
-
-          {isSmt ? (
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-semibold text-brand-muted">{t("viewAs")}</span>
-              <div className="inline-flex rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
-                {(["advisor", "committee"] as const).map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    onClick={() => switchDetailMode(mode)}
-                    className={cn(
-                      "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
-                      detailMode === mode
-                        ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
-                        : "text-brand-muted hover:bg-brand-navy/5"
-                    )}
-                  >
-                    {mode === "advisor" ? t("modeAdvisor") : t("modeCommittee")}
-                  </button>
-                ))}
-              </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-semibold text-brand-muted">{t("pickGroup")}</span>
+            {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => selectGroupForAdvisor(g.id)}
+                className={pillClass(groupId === g.id)}
+              >
+                {t(`teamShort.${g.id}`)}
+              </button>
+            ))}
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickAdvisor")}</p>
+            <div className="flex flex-wrap gap-2">
+              {SEAMUN_ADVISOR_IDS.map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => selectAdvisor(id)}
+                  className={cn(
+                    "min-w-[2.75rem] rounded-[var(--radius-md)] border px-3 py-2 text-sm font-bold transition-apple",
+                    advisorId === id
+                      ? "border-brand-accent bg-brand-accent/15 text-brand-navy ring-1 ring-brand-accent/40"
+                      : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35"
+                  )}
+                  aria-pressed={advisorId === id}
+                >
+                  {id}
+                </button>
+              ))}
             </div>
-          ) : null}
-
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6">
-            {(isSmt || isAdvisor) && (
-            <div className={cn("space-y-2", isSmt && detailMode !== "advisor" && "opacity-50")}>
-              <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickAdvisor")}</p>
-              <div className="flex flex-wrap gap-2">
-                {SEAMUN_ADVISOR_IDS.map((id) => (
-                  <button
-                    key={id}
-                    type="button"
-                    disabled={isSmt && detailMode !== "advisor"}
-                    onClick={() => selectAdvisor(id)}
-                    className={cn(
-                      "min-w-[2.75rem] rounded-[var(--radius-md)] border px-3 py-2 text-sm font-bold transition-apple",
-                      detailMode === "advisor" && advisorId === id
-                        ? "border-brand-accent bg-brand-accent/15 text-brand-navy ring-1 ring-brand-accent/40"
-                        : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 disabled:cursor-not-allowed disabled:hover:border-brand-navy/10"
-                    )}
-                    aria-pressed={detailMode === "advisor" && advisorId === id}
-                  >
-                    {id}
-                  </button>
-                ))}
-              </div>
-            </div>
-            )}
-
-            {isSmt ? (
-            <>
-            <div className="hidden h-auto w-px shrink-0 bg-brand-navy/10 sm:block" aria-hidden />
-
-            <div className={cn("min-w-0 flex-1 space-y-2", detailMode !== "committee" && "opacity-50")}>
-              <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickCommittee")}</p>
-              <div className="flex flex-wrap gap-2">
-                {committeesForGroup.map((ch) => (
-                  <button
-                    key={ch}
-                    type="button"
-                    disabled={detailMode !== "committee"}
-                    onClick={() => selectCommittee(ch)}
-                    className={cn(
-                      "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-left text-xs font-semibold transition-apple",
-                      detailMode === "committee" && committee === ch
-                        ? "border-brand-accent bg-brand-accent/15 text-brand-navy ring-1 ring-brand-accent/40"
-                        : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 disabled:cursor-not-allowed disabled:hover:border-brand-navy/10"
-                    )}
-                    aria-pressed={detailMode === "committee" && committee === ch}
-                  >
-                    {ch}
-                  </button>
-                ))}
-              </div>
-            </div>
-            </>
-            ) : null}
           </div>
         </div>
       ) : null}
@@ -500,68 +458,15 @@ export function SeamunI2027LockedScheduleVisual({
 
       {awaitingSelection ? (
         <p className="mb-4 rounded-lg border border-dashed border-brand-navy/15 bg-brand-cream/30 px-4 py-6 text-center text-sm text-brand-muted">
-          {detailMode === "advisor" ? t("selectAdvisorPrompt") : t("selectCommitteePrompt")}
+          {browseMode === "advisor" ? t("selectAdvisorPrompt") : t("selectCommitteePrompt")}
         </p>
       ) : null}
-      {view === "detail" && detailColumn ? (
-        <ScheduleGrid columns={[detailColumn]} />
-      ) : view === "teams" && isSmt ? (
-        <ScheduleGrid columns={teamColumns} onColumnHeaderClick={openDetailView} />
+
+      {displayColumns.length > 0 && !awaitingSelection ? (
+        <ScheduleGrid columns={displayColumns} />
       ) : null}
 
-      {isCommittee && committee ? (
-        <SeamunLunchOverlapCompare primaryCommittee={committee} scheduleDay={day} />
-      ) : null}
-
-      {isSmt ? (
-      <div className="mt-8 border-t border-brand-navy/10 pt-6">
-        <h3 className="font-display text-base font-semibold text-brand-navy">{t("committeeMatrixTitle")}</h3>
-        <p className="mt-1 text-xs text-brand-muted">{t("committeeMatrixHint")}</p>
-        <div className="mt-3 overflow-x-auto rounded-xl border border-brand-navy/10">
-          <table className="w-full min-w-[28rem] text-left text-sm">
-            <thead>
-              <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-xs uppercase tracking-wide text-brand-muted">
-                <th className="px-3 py-2">{t("colScheduleTrack")}</th>
-                <th className="px-3 py-2">{t("colChambers")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((row) => (
-                <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
-                  <td className="px-3 py-2 align-top font-semibold text-brand-navy dark:text-zinc-100">
-                    <button
-                      type="button"
-                      onClick={() => openDetailView(row.id)}
-                      className="text-left text-brand-accent underline decoration-brand-accent/30 underline-offset-2 hover:decoration-brand-accent"
-                    >
-                      {row.scheduleHeader}
-                    </button>
-                  </td>
-                  <td className="px-3 py-2 align-top text-brand-navy/90 dark:text-zinc-200">
-                    <ul className="space-y-1 text-[0.8rem]">
-                      {row.chambers.map((c) => (
-                        <li key={c}>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              openDetailView(row.id);
-                              selectCommittee(c);
-                            }}
-                            className="text-left text-brand-accent underline decoration-brand-accent/25 underline-offset-2 hover:decoration-brand-accent"
-                          >
-                            {c}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      ) : null}
+      {isCommittee && committee ? <SeamunLunchOverlapCompare primaryCommittee={committee} scheduleDay={day} /> : null}
     </div>
   );
 }

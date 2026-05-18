@@ -1624,7 +1624,14 @@
           "g3": "Γάμμα",
           "g4": "Δέλτα",
           "support": "Εψιλο"
-        }
+        },
+        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "browseTeams": "All teams",
+        "browseCommittee": "By committee",
+        "browseAdvisor": "By advisor",
+        "teamsScopeAll": "Overview (all groups)",
+        "pickGroup": "Group:",
+        "pickCommitteeAll": "Committee:"
       },
       "lunchOverlap": {
         "title": "Το μεσημεριανό γεύμα επικαλύπτεται με άλλες επιτροπές",
