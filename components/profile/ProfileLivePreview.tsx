@@ -50,10 +50,12 @@ export function ProfileLivePreview({
   pronouns,
   school,
   grade,
+  jobRole,
   allocation,
   conferencesAttended,
   awardsRaw,
   canViewPrivate,
+  isAdvisorProfile = false,
   className,
 }: {
   imageUrl: string;
@@ -62,10 +64,12 @@ export function ProfileLivePreview({
   pronouns: string;
   school: string;
   grade: string;
+  jobRole: string;
   allocation: string;
   conferencesAttended: number | undefined;
   awardsRaw: string;
   canViewPrivate: boolean;
+  isAdvisorProfile?: boolean;
   className?: string;
 }) {
   const t = useTranslations("profile");
@@ -91,11 +95,13 @@ export function ProfileLivePreview({
           {name.trim() || t("preview.yourName")}
         </h2>
 
-        {usernameLine ? (
-          <p className="mt-1 font-mono text-sm text-brand-muted">@{usernameLine}</p>
-        ) : (
-          <p className="mt-1 text-sm text-brand-muted">{t("preview.usernameNotSet")}</p>
-        )}
+        {!isAdvisorProfile ? (
+          usernameLine ? (
+            <p className="mt-1 font-mono text-sm text-brand-muted">@{usernameLine}</p>
+          ) : (
+            <p className="mt-1 text-sm text-brand-muted">{t("preview.usernameNotSet")}</p>
+          )
+        ) : null}
 
         <dl className="mun-group-list mt-5 w-full text-sm">
           {pronouns.trim() ? (
@@ -116,7 +122,7 @@ export function ProfileLivePreview({
             </div>
           ) : null}
 
-          {gradeLabel ? (
+          {!isAdvisorProfile && gradeLabel ? (
             <div>
               <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
                 {t("grade")}
@@ -125,14 +131,25 @@ export function ProfileLivePreview({
             </div>
           ) : null}
 
-          <div>
-            <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
-              {t("allocation")}
-            </dt>
-            <dd className="mt-0.5 font-medium text-brand-navy dark:text-zinc-100">
-              {allocation.trim() || t("fallbacks.dash")}
-            </dd>
-          </div>
+          {isAdvisorProfile && jobRole.trim() ? (
+            <div>
+              <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                {t("jobRole")}
+              </dt>
+              <dd className="mt-0.5 text-brand-navy dark:text-zinc-200">{jobRole.trim()}</dd>
+            </div>
+          ) : null}
+
+          {!isAdvisorProfile ? (
+            <div>
+              <dt className="text-[0.65rem] font-semibold uppercase tracking-wider text-brand-muted">
+                {t("allocation")}
+              </dt>
+              <dd className="mt-0.5 font-medium text-brand-navy dark:text-zinc-100">
+                {allocation.trim() || t("fallbacks.dash")}
+              </dd>
+            </div>
+          ) : null}
 
           {canViewPrivate ? (
             <>

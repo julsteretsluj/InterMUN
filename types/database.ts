@@ -11,6 +11,7 @@ export interface Profile {
   pronouns: string | null;
   school: string | null;
   grade: string | null;
+  job_role: string | null;
   notes: string | null;
   profile_picture_url: string | null;
   conferences_attended: number;

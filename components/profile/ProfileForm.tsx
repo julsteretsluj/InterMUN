@@ -27,6 +27,7 @@ type FormData = {
   pronouns?: string;
   school?: string;
   grade?: string;
+  job_role?: string;
   allocation?: string;
   conferences_attended?: number;
   awards?: string;
@@ -46,6 +47,8 @@ interface ProfileFormProps {
   profile: Profile | null;
   userId: string;
   canViewPrivate: boolean;
+  /** School staff: name, school, pronouns, optional job role — no grade or delegate fields. */
+  isAdvisorProfile?: boolean;
   availableAllocations: string[];
   /** Committees where the user has a seat; sets dashboard cookies like the room gate. */
   dashboardCommitteeSwitch?: {
@@ -61,6 +64,7 @@ export function ProfileForm({
   profile,
   userId,
   canViewPrivate,
+  isAdvisorProfile = false,
   availableAllocations,
   dashboardCommitteeSwitch,
 }: ProfileFormProps) {
@@ -113,6 +117,7 @@ export function ProfileForm({
           }),
         school: z.string().optional(),
         grade: z.string().optional(),
+        job_role: z.string().optional(),
         allocation: z.string().optional(),
         conferences_attended: z.number().min(0).optional(),
         awards: z.string().optional(),
@@ -139,6 +144,7 @@ export function ProfileForm({
       pronouns: pronounsFormValueFromProfile(profile?.pronouns),
       school: profile?.school ?? "",
       grade: profile?.grade ?? "",
+      job_role: profile?.job_role ?? "",
       allocation: profile?.allocation ?? "",
       conferences_attended: profile?.conferences_attended ?? 0,
       awards: profile?.awards?.join(", ") ?? "",
@@ -255,25 +261,37 @@ export function ProfileForm({
     const pt = data.pronouns?.trim();
     const pronounsNorm =
       pt && PROFILE_PRONOUN_PRESET_SET.has(pt) ? pt : null;
-    const { error } = await supabase
-      .from("profiles")
-      .upsert({
-        id: userId,
-        name: data.name,
-        username: normalizedUsername ? normalizedUsername : null,
-        pronouns: pronounsNorm,
-        school: data.school || null,
-        grade: data.grade || null,
-        allocation: data.allocation,
-        ...(canViewPrivate && {
-          conferences_attended: data.conferences_attended ?? 0,
-          awards: data.awards
-            ? data.awards.split(",").map((s) => s.trim()).filter(Boolean)
-            : [],
-        }),
-        profile_picture_url: profilePictureUrl || null,
-        updated_at: new Date().toISOString(),
-      });
+    const { error } = await supabase.from("profiles").upsert(
+      isAdvisorProfile
+        ? {
+            id: userId,
+            name: data.name?.trim() || null,
+            pronouns: pronounsNorm,
+            school: data.school?.trim() || null,
+            job_role: data.job_role?.trim() || null,
+            grade: null,
+            profile_picture_url: profilePictureUrl || null,
+            updated_at: new Date().toISOString(),
+          }
+        : {
+            id: userId,
+            name: data.name,
+            username: normalizedUsername ? normalizedUsername : null,
+            pronouns: pronounsNorm,
+            school: data.school || null,
+            grade: data.grade || null,
+            job_role: null,
+            allocation: data.allocation,
+            ...(canViewPrivate && {
+              conferences_attended: data.conferences_attended ?? 0,
+              awards: data.awards
+                ? data.awards.split(",").map((s) => s.trim()).filter(Boolean)
+                : [],
+            }),
+            profile_picture_url: profilePictureUrl || null,
+            updated_at: new Date().toISOString(),
+          }
+    );
 
     if (error) {
       setSubmitFeedback({
@@ -367,25 +385,31 @@ export function ProfileForm({
         </label>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {isAdvisorProfile ? (
+        <p className="text-sm text-brand-muted">{tp("advisorSettingsHint")}</p>
+      ) : null}
+
+      <div className={isAdvisorProfile ? "space-y-4" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
         <div className="min-w-0">
           <label className="block text-sm font-medium mb-1">{tp("name")}</label>
           <input {...register("name")} className={fieldClass} />
         </div>
-        <div className="min-w-0">
-          <label className="block text-sm font-medium mb-1">{tp("username")}</label>
-          <input
-            {...register("username")}
-            className={fieldClass}
-            placeholder={tp("usernamePlaceholder")}
-          />
-          {errors.username && (
-            <p className="text-sm text-red-600 mt-1">{errors.username.message}</p>
-          )}
-        </div>
+        {!isAdvisorProfile ? (
+          <div className="min-w-0">
+            <label className="block text-sm font-medium mb-1">{tp("username")}</label>
+            <input
+              {...register("username")}
+              className={fieldClass}
+              placeholder={tp("usernamePlaceholder")}
+            />
+            {errors.username && (
+              <p className="text-sm text-red-600 mt-1">{errors.username.message}</p>
+            )}
+          </div>
+        ) : null}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className={isAdvisorProfile ? "space-y-4" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
         <div className="min-w-0">
           <label htmlFor="profile-pronouns-select" className="block text-sm font-medium mb-1">
             {tp("pronouns")}
@@ -422,17 +446,28 @@ export function ProfileForm({
         </div>
       </div>
 
-      <div className="min-w-0 sm:max-w-xs">
-        <label className="block text-sm font-medium mb-1">{tp("grade")}</label>
-        <select {...register("grade")} className={fieldClass}>
-          <option value="">{tp("selectGrade")}</option>
-          {GRADE_OPTIONS.map((grade) => (
-            <option key={grade} value={grade}>
-              {grade}
-            </option>
-          ))}
-        </select>
-      </div>
+      {isAdvisorProfile ? (
+        <div className="min-w-0 sm:max-w-md">
+          <label className="block text-sm font-medium mb-1">{tp("jobRole")}</label>
+          <input
+            {...register("job_role")}
+            className={fieldClass}
+            placeholder={tp("jobRolePlaceholder")}
+          />
+        </div>
+      ) : (
+        <div className="min-w-0 sm:max-w-xs">
+          <label className="block text-sm font-medium mb-1">{tp("grade")}</label>
+          <select {...register("grade")} className={fieldClass}>
+            <option value="">{tp("selectGrade")}</option>
+            {GRADE_OPTIONS.map((grade) => (
+              <option key={grade} value={grade}>
+                {grade}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       {canViewPrivate && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -556,28 +591,27 @@ export function ProfileForm({
         </div>
       ) : null}
 
-      <div>
-        <label className="block text-sm font-medium mb-1">{tp("allocation")}</label>
-        {availableAllocations.length > 0 ? (
-          <select
-            {...register("allocation")}
-            className={fieldClass}
-          >
-            <option value="">{tp("selectAllocation")}</option>
-            {availableAllocations.map((allocation) => (
-              <option key={allocation} value={allocation}>
-                {allocation}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <input
-            {...register("allocation")}
-            className={fieldClass}
-            placeholder={tp("noAllocationsPlaceholder")}
-          />
-        )}
-      </div>
+      {!isAdvisorProfile ? (
+        <div>
+          <label className="block text-sm font-medium mb-1">{tp("allocation")}</label>
+          {availableAllocations.length > 0 ? (
+            <select {...register("allocation")} className={fieldClass}>
+              <option value="">{tp("selectAllocation")}</option>
+              {availableAllocations.map((allocation) => (
+                <option key={allocation} value={allocation}>
+                  {allocation}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              {...register("allocation")}
+              className={fieldClass}
+              placeholder={tp("noAllocationsPlaceholder")}
+            />
+          )}
+        </div>
+      ) : null}
       {errors.conferences_attended && (
         <p className="text-sm text-red-600">{errors.conferences_attended.message}</p>
       )}
@@ -609,10 +643,12 @@ export function ProfileForm({
           pronouns={live.pronouns ?? ""}
           school={live.school ?? ""}
           grade={live.grade ?? ""}
+          jobRole={live.job_role ?? ""}
           allocation={live.allocation ?? ""}
           conferencesAttended={live.conferences_attended}
           awardsRaw={live.awards ?? ""}
           canViewPrivate={canViewPrivate}
+          isAdvisorProfile={isAdvisorProfile}
         />
       </div>
     </div>

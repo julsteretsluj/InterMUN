@@ -227,7 +227,8 @@ export default async function ProfilePage({
 
   const delegateCommitteeSwitchAllowlisted =
     isDelegateDashboardCommitteeAllowlistedEmail(user.email ?? undefined);
-  const canViewPrivate = !isDelegate;
+  const isAdvisor = roleLower === "advisor";
+  const canViewPrivate = !isDelegate && !isAdvisor;
   const activeConference = await resolveDashboardConferenceForUser(roleLower, user.id);
   const activeEventIdFromCookie = await getActiveEventId();
   const crisisReportingEnabled = isCrisisCommittee(activeConference?.committee ?? null);
@@ -670,6 +671,7 @@ export default async function ProfilePage({
           profile={profile}
           userId={user.id}
           canViewPrivate={!!canViewPrivate}
+          isAdvisorProfile={isAdvisor}
           availableAllocations={availableAllocations}
           dashboardCommitteeSwitch={dashboardCommitteeSwitch}
         />
