@@ -28,11 +28,24 @@ const BASE_TABS = [
 
 const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
 
+const ADVISOR_BLOCKED_HREFS = new Set<string>(["/chats-notes", "/running-notes", "/stances"]);
+
 function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabled: boolean) {
   const role = staffRole ?? null;
   const baseTabs = crisisReportingEnabled
     ? [...BASE_TABS]
     : BASE_TABS.filter((t) => !CRISIS_ONLY_HREFS.has(t.href));
+
+  if (role === "advisor") {
+    return [
+      { href: "/advisor", labelKey: "advisorHub", emoji: "🎓" },
+      { href: "/advisor/notes", labelKey: "advisorNotes", emoji: "📨" },
+      ...baseTabs
+        .filter((t) => t.href !== "/delegate" && !ADVISOR_BLOCKED_HREFS.has(t.href))
+        .map((t) => (t.href === "/profile" ? t : t)),
+    ];
+  }
+
   return role === "chair" || role === "smt" || role === "admin"
     ? [
         ...baseTabs.slice(0, 3),

@@ -89,7 +89,7 @@ export async function adminInviteSmtAction(
   return { success: `Invite sent to ${email}. They will be secretariat (SMT) after they set their password.` };
 }
 
-const ASSIGNABLE_ROLES = ["delegate", "chair", "smt"] as const;
+const ASSIGNABLE_ROLES = ["delegate", "chair", "smt", "advisor"] as const;
 
 export async function adminSetProfileRoleAction(
   _prev: AdminUserFormState | null,
@@ -102,7 +102,7 @@ export async function adminSetProfileRoleAction(
     return { error: "Enter a valid email address." };
   }
   if (!ASSIGNABLE_ROLES.includes(roleRaw as (typeof ASSIGNABLE_ROLES)[number])) {
-    return { error: "Choose delegate, chair, or SMT." };
+    return { error: "Choose delegate, chair, SMT, or advisor." };
   }
 
   const auth = await requireWebsiteAdmin();

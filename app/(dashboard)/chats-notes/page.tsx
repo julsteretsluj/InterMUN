@@ -22,6 +22,8 @@ type DelegationNoteRow = {
   created_at: string;
   forwarded_to_smt: boolean;
   forwarded_at: string | null;
+  forwarded_to_advisor_profile_id: string | null;
+  forwarded_to_advisor_at: string | null;
   sender_allocation_id: string | null;
   sender_profile_id: string | null;
 };
@@ -53,6 +55,8 @@ type InitialDelegationNote = {
   created_at: string;
   forwarded_to_smt: boolean;
   forwarded_at: string | null;
+  forwarded_to_advisor_profile_id: string | null;
+  forwarded_to_advisor_at: string | null;
   sender: NoteSender;
   recipients: NoteRecipient[];
   starred_by_me: boolean;
@@ -90,6 +94,9 @@ export default async function ChatsNotesPage({
     .maybeSingle();
 
   const myRole = (profile?.role ?? "delegate").toString().toLowerCase();
+  if (myRole === "advisor") {
+    redirect("/advisor");
+  }
   const myProfileName = profile?.name ?? tDn("chairFallback");
 
   const verifiedConferenceId = await getVerifiedConferenceId();
@@ -255,6 +262,21 @@ export default async function ChatsNotesPage({
     allocationMap.set(a.id, a.country);
   }
 
+  const { data: advisorAssignRows } = await supabase
+    .from("advisor_delegate_assignments")
+    .select("delegate_allocation_id, advisor_profile_id, profiles:advisor_profile_id ( name )")
+    .in("conference_id", scope.siblingConferenceIds);
+
+  const advisorByAllocationId: Record<string, { advisorProfileId: string; name: string }> = {};
+  for (const row of advisorAssignRows ?? []) {
+    const profRaw = row.profiles as { name: string | null } | { name: string | null }[] | null;
+    const prof = Array.isArray(profRaw) ? profRaw[0] : profRaw;
+    advisorByAllocationId[row.delegate_allocation_id] = {
+      advisorProfileId: row.advisor_profile_id,
+      name: prof?.name?.trim() || tDn("advisorFallback"),
+    };
+  }
+
   const initialNotes = safeNotes.map<InitialDelegationNote>((n) => {
     const senderAllocationId = n.sender_allocation_id;
     const senderProfileId = n.sender_profile_id;
@@ -301,6 +323,8 @@ export default async function ChatsNotesPage({
       created_at: n.created_at,
       forwarded_to_smt: n.forwarded_to_smt,
       forwarded_at: n.forwarded_at,
+      forwarded_to_advisor_profile_id: n.forwarded_to_advisor_profile_id ?? null,
+      forwarded_to_advisor_at: n.forwarded_to_advisor_at ?? null,
       sender,
       recipients,
       starred_by_me: starredByMe.has(n.id),
@@ -323,6 +347,7 @@ export default async function ChatsNotesPage({
         unmoderatedLocked={unmoderatedLocked}
         initialSelectedAllocationRecipientIds={initialSelectedAllocationRecipientIds}
         initialSelectedChairRecipientIds={initialSelectedChairRecipientIds}
+        advisorByAllocationId={advisorByAllocationId}
       />
     </MunPageShell>
   );

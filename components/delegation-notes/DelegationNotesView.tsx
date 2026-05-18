@@ -8,6 +8,7 @@ import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import { useTranslations } from "next-intl";
+import { forwardDelegationNoteToAdvisorAction } from "@/app/actions/advisorStaff";
 
 type NoteTopic =
   | "bloc forming"
@@ -61,6 +62,8 @@ type DelegationNote = {
   created_at: string;
   forwarded_to_smt: boolean;
   forwarded_at: string | null;
+  forwarded_to_advisor_profile_id: string | null;
+  forwarded_to_advisor_at: string | null;
   sender: NoteSender;
   recipients: NoteRecipient[];
   starred_by_me: boolean;
@@ -87,6 +90,7 @@ export function DelegationNotesView({
   initialSelectedAllocationRecipientIds,
   initialSelectedChairRecipientIds,
   initialAnyChairRecipient,
+  advisorByAllocationId = {},
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -107,6 +111,7 @@ export function DelegationNotesView({
   initialSelectedAllocationRecipientIds?: string[];
   initialSelectedChairRecipientIds?: string[];
   initialAnyChairRecipient?: boolean;
+  advisorByAllocationId?: Record<string, { advisorProfileId: string; name: string }>;
 }) {
   const t = useTranslations("delegationNotes");
   const supabase = useMemo(() => createClient(), []);
@@ -198,6 +203,8 @@ export function DelegationNotesView({
         created_at: string;
         forwarded_to_smt: boolean;
         forwarded_at: string | null;
+        forwarded_to_advisor_profile_id: string | null;
+        forwarded_to_advisor_at: string | null;
         sender_allocation_id: string | null;
         sender_profile_id: string | null;
       }>;
@@ -298,6 +305,8 @@ export function DelegationNotesView({
           created_at: n.created_at,
           forwarded_to_smt: n.forwarded_to_smt,
           forwarded_at: n.forwarded_at,
+          forwarded_to_advisor_profile_id: n.forwarded_to_advisor_profile_id,
+          forwarded_to_advisor_at: n.forwarded_to_advisor_at,
           sender,
           recipients,
           starred_by_me: starredByMe.has(n.id),
@@ -477,6 +486,8 @@ export function DelegationNotesView({
         created_at: inserted.created_at,
         forwarded_to_smt: inserted.forwarded_to_smt,
         forwarded_at: inserted.forwarded_at,
+        forwarded_to_advisor_profile_id: inserted.forwarded_to_advisor_profile_id ?? null,
+        forwarded_to_advisor_at: inserted.forwarded_to_advisor_at ?? null,
         sender,
         recipients,
         starred_by_me: false,
@@ -548,7 +559,7 @@ export function DelegationNotesView({
   }
 
   async function forwardToSmt(noteId: string) {
-    if (!isChairLike) return;
+    if (!isStaffLike) return;
     const nowIso = new Date().toISOString();
     const { error: updErr } = await supabase
       .from("delegation_notes")
@@ -559,6 +570,41 @@ export function DelegationNotesView({
     setNotes((prev) =>
       prev.map((n) =>
         n.id === noteId ? { ...n, forwarded_to_smt: true, forwarded_at: nowIso } : n
+      )
+    );
+  }
+
+  function advisorForNote(n: DelegationNote): { advisorProfileId: string; name: string } | null {
+    if (n.sender.kind === "allocation") {
+      const hit = advisorByAllocationId[n.sender.allocationId];
+      if (hit) return hit;
+    }
+    for (const r of n.recipients) {
+      if (r.kind === "allocation") {
+        const hit = advisorByAllocationId[r.allocationId];
+        if (hit) return hit;
+      }
+    }
+    return null;
+  }
+
+  async function forwardToAdvisor(noteId: string, advisorProfileId: string) {
+    if (!isStaffLike) return;
+    const res = await forwardDelegationNoteToAdvisorAction(noteId, advisorProfileId);
+    if (res.error) {
+      setError(res.error);
+      return;
+    }
+    const nowIso = new Date().toISOString();
+    setNotes((prev) =>
+      prev.map((n) =>
+        n.id === noteId
+          ? {
+              ...n,
+              forwarded_to_advisor_profile_id: advisorProfileId,
+              forwarded_to_advisor_at: nowIso,
+            }
+          : n
       )
     );
   }
@@ -799,6 +845,9 @@ export function DelegationNotesView({
                       {n.forwarded_to_smt ? (
                         <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedBadge")}</span>
                       ) : null}
+                      {n.forwarded_to_advisor_profile_id ? (
+                        <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedToAdvisorBadge")}</span>
+                      ) : null}
                     </div>
                     <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">
                       {n.content.length > 280 ? `${n.content.slice(0, 280)}…` : n.content}
@@ -825,32 +874,58 @@ export function DelegationNotesView({
                     </div>
                   </div>
 
-                  {isChairLike ? (
+                  {isChairLike || isStaffLike ? (
                     <div className="flex flex-col gap-2 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => void toggleStar(n.id, !n.starred_by_me)}
-                        className="mun-btn px-2.5 py-1 text-xs"
-                      >
-                        {n.starred_by_me ? t("starred") : t("star")}
-                      </button>
+                      {isChairLike ? (
+                        <button
+                          type="button"
+                          onClick={() => void toggleStar(n.id, !n.starred_by_me)}
+                          className="mun-btn px-2.5 py-1 text-xs"
+                        >
+                          {n.starred_by_me ? t("starred") : t("star")}
+                        </button>
+                      ) : null}
 
-                      <button
-                        type="button"
-                        onClick={() => void forwardToSmt(n.id)}
-                        disabled={n.forwarded_to_smt}
-                        className="mun-btn px-2.5 py-1 text-xs disabled:opacity-50"
-                      >
-                        {n.forwarded_to_smt ? t("forwarded") : t("forwardToSmt")}
-                      </button>
+                      {isStaffLike ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => void forwardToSmt(n.id)}
+                            disabled={n.forwarded_to_smt}
+                            className="mun-btn px-2.5 py-1 text-xs disabled:opacity-50"
+                          >
+                            {n.forwarded_to_smt ? t("forwarded") : t("forwardToSmt")}
+                          </button>
 
-                      <button
-                        type="button"
-                        onClick={() => void reportNote(n.id)}
-                        className="mun-btn-danger px-2.5 py-1 text-xs"
-                      >
-                        {t("report")}
-                      </button>
+                          {(() => {
+                            const adv = advisorForNote(n);
+                            if (!adv) return null;
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => void forwardToAdvisor(n.id, adv.advisorProfileId)}
+                                disabled={Boolean(n.forwarded_to_advisor_profile_id)}
+                                className="mun-btn px-2.5 py-1 text-xs disabled:opacity-50"
+                                title={adv.name}
+                              >
+                                {n.forwarded_to_advisor_profile_id
+                                  ? t("forwardedToAdvisor")
+                                  : t("forwardToAdvisor", { name: adv.name })}
+                              </button>
+                            );
+                          })()}
+                        </>
+                      ) : null}
+
+                      {isChairLike ? (
+                        <button
+                          type="button"
+                          onClick={() => void reportNote(n.id)}
+                          className="mun-btn-danger px-2.5 py-1 text-xs"
+                        >
+                          {t("report")}
+                        </button>
+                      ) : null}
                     </div>
                   ) : null}
                 </div>

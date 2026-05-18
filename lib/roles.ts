@@ -26,6 +26,16 @@ export function isAdminRole(role: string | null | undefined): role is "admin" {
   return r === "admin";
 }
 
+export function isAdvisorRole(role: string | null | undefined): role is "advisor" {
+  const r = normalizeRole(role);
+  return r === "advisor";
+}
+
+/** Uses delegate-style committee gates (not dais tools, not allocation placard gate). */
+export function isAdvisorLikeDelegate(role: string | null | undefined): boolean {
+  return isAdvisorRole(role);
+}
+
 /** Can use the /smt secretariat dashboard (conference SMT or website admin). */
 export function hasSmtDashboardAccess(role: string | null | undefined): boolean {
   const r = normalizeRole(role);
