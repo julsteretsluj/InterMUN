@@ -1,6 +1,7 @@
 BEGIN;
 
-CREATE OR REPLACE FUNCTION public.is_staff_user(p_user_id uuid)
+-- Keep parameter name p_uid: CREATE OR REPLACE cannot rename parameters (42P13).
+CREATE OR REPLACE FUNCTION public.is_staff_user(p_uid uuid)
 RETURNS boolean
 LANGUAGE sql
 STABLE
@@ -9,7 +10,7 @@ AS $$
   SELECT EXISTS (
     SELECT 1
     FROM public.profiles p
-    WHERE p.id = p_user_id
+    WHERE p.id = p_uid
       AND p.role::text IN ('chair', 'smt', 'admin')
   );
 $$;
