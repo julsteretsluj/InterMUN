@@ -12,6 +12,7 @@ export function SmtNotesPageClient({
   subtitle,
   initialNotes,
   committees,
+  conferenceIdToCanonical,
   myUserId,
   myProfileName,
   myAllocationIds,
@@ -22,6 +23,7 @@ export function SmtNotesPageClient({
   subtitle: string;
   initialNotes: DelegationNoteBundleItem[];
   committees: CommitteeOpt[];
+  conferenceIdToCanonical: Record<string, string>;
   myUserId: string;
   myProfileName: string;
   myAllocationIds: string[];
@@ -47,6 +49,7 @@ export function SmtNotesPageClient({
       <SmtNotesTabs
         initialNotes={initialNotes}
         committees={committees}
+        conferenceIdToCanonical={conferenceIdToCanonical}
         myUserId={myUserId}
         myAllocationIds={myAllocationIds}
         advisorByAllocationId={advisorByAllocationId}

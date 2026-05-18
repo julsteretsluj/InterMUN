@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { dedupeDelegationRecipientRows } from "@/lib/delegation-notes-options";
 
 export type NoteTopic =
   | "bloc forming"
@@ -199,7 +200,7 @@ export async function loadDelegationNotesBundle(
             role: profileMap.get(senderProfileId ?? "")?.role,
           } as const);
 
-    const recipientRows = recipientsByNoteId.get(n.id) ?? [];
+    const recipientRows = dedupeDelegationRecipientRows(recipientsByNoteId.get(n.id) ?? []);
     const recipients = recipientRows.map<NoteRecipient>((r) => {
       if (r.recipient_kind === "allocation") {
         return {

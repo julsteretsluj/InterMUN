@@ -4,7 +4,11 @@ import { redirect } from "next/navigation";
 import { requireActiveConferenceId } from "@/lib/active-conference";
 import { getVerifiedConferenceId } from "@/lib/committee-gate-cookie";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
-import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import {
+  buildAllocationRecipientOptions,
+  buildChairRecipientOptions,
+  dedupeDelegationRecipientRows,
+} from "@/lib/delegation-notes-options";
 import { getTranslations } from "next-intl/server";
 import { getChamberScope } from "@/lib/chamber-scope";
 
@@ -154,14 +158,13 @@ export default async function ChatsNotesPage({
   // Allocations for recipient targeting + mapping country names.
   const { data: allocations } = await supabase
     .from("allocations")
-    .select("id, country, user_id")
+    .select("id, country, user_id, conference_id")
     .in("conference_id", scope.siblingConferenceIds);
 
-  const allocationRows = (allocations ?? []) as AllocationRow[];
-  const assignedAllocations = allocationRows.filter((a) => Boolean(a.user_id));
-
-  const allocationOptions = sortAllocationsByDisplayCountry(
-    assignedAllocations.map((a) => ({ id: a.id, country: a.country }))
+  const allocationRows = (allocations ?? []) as (AllocationRow & { conference_id: string })[];
+  const allocationOptions = buildAllocationRecipientOptions(
+    allocationRows,
+    scope.canonicalConferenceId
   );
 
   const { data: myAllocations } = await supabase
@@ -177,12 +180,7 @@ export default async function ChatsNotesPage({
     .select("id, name")
     .eq("role", "chair");
 
-  const chairOptions = (chairProfiles ?? [])
-    .map((c: { id: string; name: string | null }) => ({
-      id: c.id,
-      name: c.name ?? tDn("chairFallback"),
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const chairOptions = buildChairRecipientOptions(chairProfiles ?? [], tDn("chairFallback"));
 
   let initialSelectedAllocationRecipientIds: string[] | undefined;
   let initialSelectedChairRecipientIds: string[] | undefined;
@@ -258,8 +256,11 @@ export default async function ChatsNotesPage({
 
   // Allocation mapping for notes (sender + allocation recipients).
   const allocationMap = new Map<string, string>();
-  for (const a of assignedAllocations) {
-    allocationMap.set(a.id, a.country);
+  for (const a of allocationRows) {
+    if (a.country) allocationMap.set(a.id, a.country);
+  }
+  for (const opt of allocationOptions) {
+    allocationMap.set(opt.id, opt.country);
   }
 
   const { data: advisorAssignRows } = await supabase
@@ -294,7 +295,9 @@ export default async function ChatsNotesPage({
             name: profileMap.get(senderProfileId ?? "") ?? myProfileName,
           } as const);
 
-    const recipientRows = (recipientsByNoteId.get(n.id) ?? []) as DelegationRecipientRow[];
+    const recipientRows = dedupeDelegationRecipientRows(
+      (recipientsByNoteId.get(n.id) ?? []) as DelegationRecipientRow[]
+    );
     const recipients = recipientRows.map<NoteRecipient>((r) => {
       if (r.recipient_kind === "allocation") {
         const country = allocationMap.get(r.recipient_allocation_id ?? "") ?? tDn("unknownCountry");

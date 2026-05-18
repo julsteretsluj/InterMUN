@@ -9,6 +9,7 @@ import { HelpButton } from "@/components/HelpButton";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import { useTranslations } from "next-intl";
 import { forwardDelegationNoteToAdvisorAction } from "@/app/actions/advisorStaff";
+import { dedupeDelegationRecipientRows, uniqueIds } from "@/lib/delegation-notes-options";
 
 type NoteTopic =
   | "bloc forming"
@@ -283,12 +284,14 @@ export function DelegationNotesView({
                     : chairIdToName.get(senderProfileId ?? "") ?? t("chairFallback"),
               };
 
-        const recipientRowsForNote = (recipientsByNoteId.get(n.id) ?? []) as Array<{
-          note_id: string;
-          recipient_kind: "allocation" | "chair" | "chair_all";
-          recipient_allocation_id: string | null;
-          recipient_profile_id: string | null;
-        }>;
+        const recipientRowsForNote = dedupeDelegationRecipientRows(
+          (recipientsByNoteId.get(n.id) ?? []) as Array<{
+            note_id: string;
+            recipient_kind: "allocation" | "chair" | "chair_all";
+            recipient_allocation_id: string | null;
+            recipient_profile_id: string | null;
+          }>
+        );
 
         const recipients: NoteRecipient[] = recipientRowsForNote.map((r) => {
           if (r.recipient_kind === "allocation") {
@@ -399,9 +402,10 @@ export function DelegationNotesView({
       return;
     }
 
-    const allocationRecipientIds =
-      overrides?.allocationRecipientIds ?? selectedAllocationRecipientIds;
-    const chairRecipientIds = overrides?.chairRecipientIds ?? selectedChairRecipientIds;
+    const allocationRecipientIds = uniqueIds(
+      overrides?.allocationRecipientIds ?? selectedAllocationRecipientIds
+    );
+    const chairRecipientIds = uniqueIds(overrides?.chairRecipientIds ?? selectedChairRecipientIds);
     const useAnyChair = overrides?.anyChairRecipient ?? anyChairRecipient;
 
     const trimmed = (overrides?.contentText ?? content).trim();
@@ -698,6 +702,29 @@ export function DelegationNotesView({
     return t("anyChair");
   };
 
+  const formatRecipientSummary = (recipients: NoteRecipient[]) => {
+    if (recipients.length === 0) return t("toEmpty");
+    const seenAlloc = new Set<string>();
+    const seenChair = new Set<string>();
+    let chairAll = false;
+    const labels: string[] = [];
+    for (const r of recipients) {
+      if (r.kind === "allocation") {
+        if (seenAlloc.has(r.allocationId)) continue;
+        seenAlloc.add(r.allocationId);
+        labels.push(r.country);
+      } else if (r.kind === "chair") {
+        if (seenChair.has(r.profileId)) continue;
+        seenChair.add(r.profileId);
+        labels.push(r.name);
+      } else if (!chairAll) {
+        chairAll = true;
+        labels.push(t("anyChair"));
+      }
+    }
+    return labels.length === 0 ? t("toEmpty") : labels.join(", ");
+  };
+
   const card = "mun-card";
   const labelStrong = "mun-label";
   const body = "text-sm text-brand-navy";
@@ -825,7 +852,9 @@ export function DelegationNotesView({
                     disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
                         onChange={(e) => {
                           setSelectedAllocationRecipientIdsState((prev) => {
-                            if (e.target.checked) return [...prev, a.id];
+                            if (e.target.checked) {
+                              return prev.includes(a.id) ? prev : [...prev, a.id];
+                            }
                             return prev.filter((x) => x !== a.id);
                           });
                         }}
@@ -884,7 +913,9 @@ export function DelegationNotesView({
                         onChange={(e) => {
                           if (anyChairRecipient) return;
                           setSelectedChairRecipientIdsState((prev) => {
-                            if (e.target.checked) return [...prev, c.id];
+                            if (e.target.checked) {
+                              return prev.includes(c.id) ? prev : [...prev, c.id];
+                            }
                             return prev.filter((x) => x !== c.id);
                           });
                         }}
@@ -962,9 +993,7 @@ export function DelegationNotesView({
                     ) : null}
                     <div className={`mt-2 text-xs ${muted}`}>
                       {t("toLabel")}{" "}
-                      {n.recipients.length === 0
-                        ? t("toEmpty")
-                        : n.recipients.map(recipientSummary).join(", ")}
+                      {formatRecipientSummary(n.recipients)}
                     </div>
                   </div>
 

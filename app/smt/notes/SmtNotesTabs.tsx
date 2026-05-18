@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
@@ -29,6 +29,7 @@ type CommitteeOpt = { id: string; label: string };
 type Props = {
   initialNotes: DelegationNoteBundleItem[];
   committees: CommitteeOpt[];
+  conferenceIdToCanonical: Record<string, string>;
   myUserId: string;
   myAllocationIds: string[];
   advisorByAllocationId: Record<string, { advisorProfileId: string; name: string }>;
@@ -68,6 +69,7 @@ function advisorForNote(
 export function SmtNotesTabs({
   initialNotes,
   committees,
+  conferenceIdToCanonical,
   myUserId,
   myAllocationIds,
   advisorByAllocationId,
@@ -94,6 +96,11 @@ export function SmtNotesTabs({
 
   const topicLabel = (topic: NoteTopic) => tDn(`topics.${TOPIC_MSG_KEY[topic]}`);
 
+  const canonicalConferenceId = useCallback(
+    (conferenceId: string) => conferenceIdToCanonical[conferenceId] ?? conferenceId,
+    [conferenceIdToCanonical]
+  );
+
   const recipientSummary = (note: DelegationNoteBundleItem) => {
     if (note.recipients.length === 0) return tDn("toEmpty");
     return note.recipients
@@ -117,11 +124,11 @@ export function SmtNotesTabs({
     } else if (tab === "byAdvisor") {
       list = list.filter((n) => Boolean(n.forwarded_to_advisor_profile_id));
     } else if (tab === "allByCommittee" && committeeId !== "all") {
-      list = list.filter((n) => n.conference_id === committeeId);
+      list = list.filter((n) => canonicalConferenceId(n.conference_id) === committeeId);
     }
 
     return list;
-  }, [notes, tab, myUserId, myAllocSet, committeeId]);
+  }, [notes, tab, myUserId, myAllocSet, committeeId, canonicalConferenceId]);
 
   const committeeLabelById = useMemo(
     () => new Map(committees.map((c) => [c.id, c.label] as const)),
@@ -235,7 +242,8 @@ export function SmtNotesTabs({
           <ul className="space-y-3">
             {filteredNotes.map((n) => {
               const expanded = expandedId === n.id;
-              const committeeLabel = committeeLabelById.get(n.conference_id) ?? t("unknownCommittee");
+              const committeeLabel =
+                committeeLabelById.get(canonicalConferenceId(n.conference_id)) ?? t("unknownCommittee");
               const adv = advisorForNote(n, advisorByAllocationId);
               const advisorName = n.forwarded_to_advisor_profile_id
                 ? advisorNameByProfileId[n.forwarded_to_advisor_profile_id] ?? tDn("advisorFallback")

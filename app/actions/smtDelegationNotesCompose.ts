@@ -2,7 +2,10 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { getChamberScope } from "@/lib/chamber-scope";
-import { sortAllocationsByDisplayCountry } from "@/lib/allocation-display-order";
+import {
+  buildAllocationRecipientOptions,
+  buildChairRecipientOptions,
+} from "@/lib/delegation-notes-options";
 
 export type SmtDelegationNotesComposeContext = {
   conferenceId: string;
@@ -34,18 +37,13 @@ export async function getSmtDelegationNotesComposeContext(
 
   const { data: allocations } = await supabase
     .from("allocations")
-    .select("id, country, user_id")
-    .eq("conference_id", conferenceId)
-    .not("user_id", "is", null);
+    .select("id, country, user_id, conference_id")
+    .in("conference_id", scope.siblingConferenceIds);
 
-  const allocationOptions = sortAllocationsByDisplayCountry(
-    (allocations ?? []).map((a) => ({ id: a.id, country: a.country }))
-  );
+  const allocationOptions = buildAllocationRecipientOptions(allocations ?? [], scope.canonicalConferenceId);
 
   const { data: chairProfiles } = await supabase.from("profiles").select("id, name").eq("role", "chair");
-  const chairOptions = (chairProfiles ?? [])
-    .map((c) => ({ id: c.id, name: c.name?.trim() || "Chair" }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const chairOptions = buildChairRecipientOptions(chairProfiles ?? [], "Chair");
 
   const { data: advisorAssignRows } = await supabase
     .from("advisor_delegate_assignments")

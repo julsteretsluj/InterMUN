@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isConferenceEventPlaceholderRow } from "@/lib/awards";
+import { canonicalCommitteesForEventConferenceRows } from "@/lib/conference-committee-canonical";
 import { loadDelegationNotesBundle } from "@/lib/delegation-notes-bundle";
 import { SmtNotesPageClient } from "./SmtNotesPageClient";
 
@@ -42,6 +43,19 @@ export default async function SmtNotesPage() {
   const delegateCommittees = (conferences ?? []).filter((c) => !isConferenceEventPlaceholderRow(c));
   const conferenceIds = delegateCommittees.map((c) => c.id);
 
+  const conferenceIdsWithAllocations = new Set<string>();
+  if (conferenceIds.length > 0) {
+    const { data: allocRows } = await supabase
+      .from("allocations")
+      .select("conference_id")
+      .in("conference_id", conferenceIds);
+    for (const a of allocRows ?? []) {
+      if (a.conference_id) conferenceIdsWithAllocations.add(a.conference_id);
+    }
+  }
+  const { committees: canonicalCommittees, conferenceIdToCanonical } =
+    canonicalCommitteesForEventConferenceRows(delegateCommittees, conferenceIdsWithAllocations);
+
   const { data: profile } = await supabase
     .from("profiles")
     .select("role, name")
@@ -59,17 +73,15 @@ export default async function SmtNotesPage() {
     limit: 800,
   });
 
-  const committees = delegateCommittees.map((c) => ({
-    id: c.id,
-    label: (c.committee ?? c.name ?? t("unknownCommittee")).trim(),
-  }));
+  const conferenceIdToCanonicalRecord = Object.fromEntries(conferenceIdToCanonical.entries());
 
   return (
     <SmtNotesPageClient
       title={t("title")}
       subtitle={t("subtitle")}
       initialNotes={bundle.notes}
-      committees={committees}
+      committees={canonicalCommittees}
+      conferenceIdToCanonical={conferenceIdToCanonicalRecord}
       myUserId={user.id}
       myProfileName={profile?.name ?? tDn("chairFallback")}
       myAllocationIds={bundle.myAllocationIds}
