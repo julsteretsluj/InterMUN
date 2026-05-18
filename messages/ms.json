@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Jika mereka sudah mendaftar sebagai perwakilan, promosikan mereka di sini supaya mereka mendapat papan pemuka kerusi dan alatan jawatankuasa (tiada e-mel dihantar).",
     "grantChairRole": "Berikan peranan kerusi",
     "chamberLabelFallback": "Sesi jawatankuasa",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Tempat duduk Dais",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Ketua Pengerusi {committee}",
+    "chairRoleCoOf": "Pengerusi bersama {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Persidungan ditangguhkan",
     "euPartySAndD": "Perikatan Progresif Sosialis dan Demokrat (S&D)",
     "euPartyEpp": "Parti Rakyat Eropah (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Perbaharui Eropah (Perbaharui)",
     "euPartyLeft": "Kiri di Parlimen Eropah (The Left)",
     "euPartyGreen": "Hijau/EFA (Greens/EFA)",
     "euPartyCAndR": "Konservatif dan Pembaharuan Eropah (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Patriot untuk Eropah (PfE)",
     "euPartyIndependents": "Bebas / NI",
     "euPartyTimeGuideTitle": "Panduan masa kumpulan EU",
     "euPartySpeechPoolLabel": "Masa ucapan:",
@@ -543,7 +543,10 @@
     "home": "Rumah",
     "library": "Perpustakaan",
     "mainNavigationAria": "Navigasi utama",
-    "history": "History"
+    "history": "Sejarah",
+    "advisorHub": "Hab penasihat",
+    "advisorNotes": "Nota dimajukan",
+    "conferenceSchedule": "Jadual"
   },
   "dashboardLayout": {
     "helpCenter": "Pusat bantuan",
@@ -767,7 +770,12 @@
     "timer": "Pemasa",
     "smtProfile": "Profil",
     "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "history": "Sejarah",
+    "advisorDashboard": "Papan pemuka penasihat",
+    "advisorNotes": "Nota dimajukan",
+    "delegateSchedule": "Jadual persidangan",
+    "chairSchedule": "Jadual persidangan",
+    "advisorSchedule": "Jadual persidangan"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasikan",
@@ -803,7 +811,7 @@
       "overview": "Gambaran keseluruhan",
       "checklist": "Senarai semak",
       "jump": "Lompat ke",
-      "chairEmails": "Chair emails"
+      "chairEmails": "E-mel kerusi"
     },
     "jumpTo": "Lompat ke",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Bangkitkan satu isu"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "E-mel kerusi",
+        "hint": "Peti masuk Dais oleh jawatankuasa"
+      },
+      "conferenceSchedule": {
+        "label": "Jadual persidangan",
+        "hint": "Jadual waktu trek pasukan dan penasihat (A–D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}m"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Peti masuk pelamin kongsi untuk jawatankuasa anda (SEAMUN I). Hubungi kerusi anda dari e-mel di bawah.",
+      "committeeColumn": "Jawatankuasa",
+      "emailColumn": "Peti masuk kerusi (nama pengguna)",
+      "openMail": "Buka mel",
+      "noMatch": "Tiada peti masuk kerusi yang diterbitkan disenaraikan untuk jawatankuasa ini. Tanya SMT atau semak ringkasan jawatankuasa anda."
+    },
+    "schedule": {
+      "intro": "Pilih trek pasukan anda, kemudian sama ada penasihat A–D atau jawatankuasa anda (wakil/pengerusi). Hanya satu jadual waktu peribadi ditunjukkan pada satu masa."
     }
   },
   "materialsExportCard": {
@@ -918,7 +933,7 @@
     "refresh": "Muat semula",
     "loading": "Memuatkan…",
     "noSuggestionsYet": "Belum ada cadangan.",
-    "badgePreamb": "Preamb.",
+    "badgePreamb": "Mukadimah.",
     "badgeOperative": "Operatif",
     "badgeYours": "Anda",
     "delete": "Padam",
@@ -1012,7 +1027,8 @@
       "roomCode": "Kod bilik",
       "settings": "tetapan",
       "agenda": "Agenda",
-      "history": "History"
+      "history": "Sejarah",
+      "conferenceSchedule": "Jadual"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Kata laluan peruntukan",
     "profile": "Profil",
     "follow": "Ikut",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Penasihat"
   },
   "officialLinks": {
     "intro": "Dokumen, perjanjian, badan utama, program, misi dan maklumat ahli. Dibuka dalam tab baharu.",
@@ -1136,16 +1153,16 @@
     "liveFloorDescription": "Baris gilir pembesar suara langsung, panggilan gulung dan pemasa untuk jawatankuasa ini—kerusi data yang sama dilihat di tingkat sesi.",
     "conferenceFallback": "Persidangan",
     "committeeFallback": "Jawatankuasa",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatOversightTitle": "Jadual pengawasan urusetia",
+    "secretariatMatrixSectionSecretariat": "Urusetia",
+    "secretariatMatrixSectionOperations": "operasi",
     "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatMatrixSmtEmail": "e-mel SMT",
+    "secretariatMatrixFinanceEmail": "E-mel kewangan",
+    "secretariatMatrixCommitteeOverviews": "Gambaran keseluruhan panitia",
+    "secretariatMatrixRole": "Peranan",
+    "secretariatMatrixName": "Nama",
+    "secretariatMatrixEmail": "E-mel"
   },
   "committeeNames": {
     "full": {
@@ -1382,7 +1399,11 @@
       "noRecipients": "Pilih sekurang-kurangnya seorang penerima (delegasi atau kerusi).",
       "needAllocation": "Anda memerlukan peruntukan untuk menghantar nota (atau menjadi kerusi).",
       "sendFailed": "Gagal menghantar nota."
-    }
+    },
+    "forwardToAdvisor": "Majukan ke {name}",
+    "forwardedToAdvisor": "Dimajukan kepada penasihat",
+    "forwardedToAdvisorBadge": "(kepada penasihat)",
+    "advisorFallback": "Penasihat"
   },
   "adminPage": {
     "title": "Pentadbiran laman web",
@@ -1526,14 +1547,14 @@
       "onlySmtGrantChair": "Hanya urusetia boleh memberikan peranan pengerusi.",
       "noAccountForEmail": "Tiada akaun dengan e-mel itu lagi. Hantar jemputan kerusi dulu.",
       "promotedToChairSuccess": "Profil untuk {email} kini menjadi kerusi pelamin.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Pilih kerusi pelamin dan jawatankuasa untuk jemputan ini.",
+      "daisSeatRowMissing": "Tidak dapat mencari baris {seat} untuk jawatankuasa itu. Cuba simpan matriks peruntukan untuk acara tersebut, kemudian cuba lagi.",
+      "daisSeatAlreadyFilled": "Kerusi pelamin tu dah ada kerusi. Nyahtugaskan orang semasa dalam matriks peruntukan (atau alat lain) dahulu.",
+      "seatHeadChair": "Ketua Kerusi",
+      "seatCoChair": "Pengerusi bersama",
+      "inviteSentButAllocationFailed": "Jemputan dihantar dan set peranan kerusi, tetapi tempat duduk pelamin tidak dapat dipautkan: {error}. Betulkan matriks peruntukan atau hubungi sokongan.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Kerusi pelamin itu tidak sepadan dengan rancangan pengerusi jawatankuasa ini."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Anda mesti log masuk.",
@@ -1551,6 +1572,24 @@
       "emailSubject": "Eksport bahan InterMUN ({range})",
       "emailSendConfigHint": "Tetapkan SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS dan secara pilihan MATERIALS_EXPORT_FROM pada pelayan.",
       "exportEmailedTo": "Eksport dihantar melalui e-mel ke {email}. Jika anda tidak melihatnya, semak spam/sampah."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Tidak dilog masuk.",
+      "onlySmt": "Hanya urusetia atau pentadbir laman web boleh menguruskan penasihat.",
+      "unauthorized": "tanpa kebenaran.",
+      "invalidEmail": "Masukkan alamat e-mel yang sah.",
+      "missingServiceRole": "Pelayan tiada SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Tetapkan NEXT_PUBLIC_APP_URL untuk pautan ubah hala jemputan.",
+      "emailAlreadyRegistered": "E-mel itu sudah mempunyai akaun. Tetapkan peranan mereka kepada penasihat dalam pentadbir, kemudian tetapkan perwakilan.",
+      "inviteRoleFailed": "Jemputan dihantar tetapi tidak dapat menetapkan peranan penasihat: {message}",
+      "inviteSent": "Jemputan dihantar ke {email}. Mereka akan menjadi penasihat selepas menetapkan kata laluan mereka.",
+      "invalidAdvisorEmail": "Masukkan e-mel penasihat.",
+      "missingDelegate": "Pilih tempat duduk perwakilan.",
+      "advisorNotFound": "Tiada akaun ditemui untuk e-mel penasihat itu.",
+      "notAdvisorRole": "Pengguna itu bukan penasihat. Jemput mereka atau tetapkan peranan kepada penasihat terlebih dahulu.",
+      "delegateNotFound": "Tempat duduk perwakilan tidak ditemui.",
+      "delegateUnlinked": "Kerusi itu belum mempunyai akaun perwakilan terpaut lagi.",
+      "assigned": "Ditugaskan penasihat kepada {country}."
     }
   },
   "emails": {
@@ -1574,7 +1613,7 @@
     "eventDetails": "Butiran acara",
     "selectConferenceFirst": "Pilih persidangan dengan pintu acara dahulu, kemudian kembali ke sini.",
     "committeeSessionsTitle": "Sesi AJK dalam acara ini",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Setiap kad ialah satu ruang: label pendek, nama rasmi, logo, sehingga dua topik agenda, pautan RoP, kod bilik enam aksara yang dikongsi (pintu kedua) dan profil prosedur. Kod bilik mesti kekal unik di seluruh bilik dalam acara ini.",
     "noCommitteeSessions": "Tiada sesi jawatankuasa untuk acara ini.",
     "eventName": "Nama acara",
     "tagline": "Tagline",
@@ -1617,81 +1656,111 @@
     "committeeCodeHelpPrefix": "Enam aksara: parap ruang + tiga digit (cadangan deterministik:",
     "saveCommittee": "AJK Simpan",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Label jawatankuasa",
+    "committeeLabelPlaceholder": "cth. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Nama jawatankuasa rasmi",
+    "topic1Label": "Topik 1",
+    "topic2Label": "Topik 2 (pilihan)",
+    "topic2Placeholder": "Soalan agenda kedua",
+    "topic2DisabledHint": "Tambahkan baris topik kedua untuk mengedit medan ini.",
+    "addSecondTopic": "Tambah topik kedua",
+    "addingTopic": "Menambah…",
+    "ropDocumentLink": "Peraturan prosedur (pautan dokumen)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Kod bilik (pintu kedua)",
+    "roomCodeHelpPrefix": "Enam huruf atau digit, dikongsi untuk ruang ini (cadangan:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Jadual persidangan dua hari",
+      "subtitle": "Rancang blok setiap kumpulan perwakilan (kumpulan yang sama yang anda gunakan untuk jawatankuasa kelompok). Warna mengikut jenis blok: sesi, rehat atau majlis. Tandakan makan tengah hari untuk pemeriksaan bertindih. Disimpan dengan acara aktif.",
+      "day1Tab": "Hari 1",
+      "day2Tab": "Hari ke-2",
+      "lunchOverlapTab": "Makan tengah hari bertindih",
+      "lunchOverlapHelp": "Pertindihan muncul apabila dua kumpulan kedua-duanya mempunyai baris yang ditandakan sebagai makan tengah hari pada hari yang sama dan julat masa bersilang.",
+      "noLunchOverlaps": "Tiada pertindihan makan tengah hari dikesan. Tandai sekurang-kurangnya satu baris sebagai makan tengah hari dalam dua kumpulan berbeza pada hari yang sama dengan masa yang bertindih.",
+      "dayLabel": "Hari {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "lwn",
+      "groupsLabel": "Kumpulan",
+      "renameGroup": "Nama kumpulan aktif",
+      "colStart": "Mulakan",
+      "colEnd": "tamat",
+      "colLabel": "Sekat / sesi",
+      "colKind": "taip",
+      "kindSession": "Sesi",
+      "kindBreak": "Rehat",
+      "kindCeremony": "Majlis",
+      "legendTitle": "Warna blok",
+      "legendSession": "Sesi AJK",
+      "legendBreak": "Rehat / makan tengah hari / kaukus",
+      "legendCeremony": "Pembukaan / penutup / majlis",
+      "colLunch": "Makan tengah hari",
+      "emptyDay": "Tiada blok lagi. Tambahkan blok atau gunakan tab kumpulan lain.",
+      "blockPlaceholder": "cth. Majlis perasmian · Sesi AJK 1",
+      "lunchCheckboxAria": "Kira baris ini sebagai makan tengah hari untuk pemeriksaan bertindih",
+      "remove": "Alih keluar",
+      "addBlock": "Tambah blok masa",
+      "newGroupName": "Nama kumpulan baharu",
+      "newGroupPlaceholder": "cth. Pasukan akhbar",
+      "defaultNewGroupName": "Kumpulan baru",
+      "addGroup": "Tambah kumpulan",
+      "removeGroup": "Alih keluar kumpulan",
+      "confirmRemoveGroup": "Alih keluar kumpulan jadual \"{name}\" dan semua bloknya untuk kedua-dua hari?",
+      "saveSchedule": "Simpan jadual",
+      "saving": "Menyimpan…",
+      "saved": "Jadual disimpan.",
+      "resetTemplate": "Tetapkan semula kepada templat",
+      "confirmReset": "Tetapkan semula jadual kepada tiga kumpulan lalai dan kosongkan semua blok?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — jadual visual rasmi",
+        "body": "Pelan dua hari ini ditetapkan untuk SEAMUN I 2027. Ia sepadan dengan jadual induk yang diterbitkan dan tidak boleh diubah dalam apl (termasuk oleh sekretariat).",
+        "legendTitle": "warna",
+        "legendArrival": "Ketibaan / pendaftaran",
+        "legendDismissal": "Pemecatan",
+        "legendCeremony": "Majlis",
+        "legendBreak": "Rehat umum",
+        "legendSession": "Sesi akademik",
+        "legendLunch": "Makan (makan tengahari)",
+        "legendRelax": "Sejuk",
+        "legendSupport": "Bilik sokongan",
+        "legendStrategy": "Bilik strategi",
+        "legendSweep": "sapu",
+        "handbookLink": "Buku panduan persidangan terbuka (PDF)",
+        "handbookHint": "dokumen induk rasmi; jadual waktu terkunci dan kumpulan ruang di bawah mengikuti penerbitan ini.",
+        "committeeMatrixTitle": "Bilik jawatankuasa mengikut jadual jadual",
+        "committeeMatrixHint": "Setiap ruang mengikuti jam Hari 1 / Hari 2 treknya (lajur dengan nama kumpulan yang sama dalam carta di atas).",
+        "colScheduleTrack": "Jadualkan trek",
+        "colChambers": "Chambers (label dalam acara ini)",
+        "advisorHint": "Ketik pasukan, kemudian lihat sama ada jadual waktu penasihat (A–D) atau jadual waktu perwakilan/kerusi untuk satu jawatankuasa — bukan kedua-duanya sekali.",
+        "advisorOnlyHint": "Pilih runut jadual anda, kemudian penasihat A–D untuk melihat hari penasihat itu.",
+        "committeeOnlyHint": "Jadual waktu rasmi jawatankuasa anda. Di bawah, bandingkan waktu makan tengah hari dengan jawatankuasa lain.",
+        "pickTrack": "Jadual trek:",
+        "viewAllTeams": "Semua pasukan",
+        "orPickTeam": "atau pasukan:",
+        "viewAs": "Lihat sebagai",
+        "modeAdvisor": "Penasihat",
+        "modeCommittee": "Jawatankuasa (perwakilan / pengerusi)",
+        "pickAdvisor": "Penasihat",
+        "pickCommittee": "Jawatankuasa",
+        "selectAdvisorPrompt": "Pilih penasihat A, B, C atau D untuk melihat jadual waktu itu.",
+        "selectCommitteePrompt": "Pilih jawatankuasa anda untuk melihat jadual waktu perwakilan/kerusi.",
+        "teamShort": {
+          "g1": "Alfa",
+          "g2": "Beta",
+          "g3": "Gamma",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Makan tengah hari bertindih dengan jawatankuasa lain",
+        "body": "Bandingkan tetingkap makan tengah hari jawatankuasa anda dengan sehingga {max} jawatankuasa lain. Pilih hari, kemudian pilih jawatankuasa di bawah.",
+        "pickCommittees": "Bandingkan dengan",
+        "noneSelected": "Pilih satu atau lebih jawatankuasa untuk melihat minit makan tengah hari yang dikongsi.",
+        "yourLunch": "Makan tengah hari awak",
+        "theirLunch": "Makan tengah hari mereka",
+        "overlap": "Makan tengah hari dikongsi: {start}–{end} ({minutes} min)",
+        "noOverlap": "Tiada waktu makan tengah hari yang dikongsi pada hari ini."
       }
     }
   },
@@ -1747,7 +1816,7 @@
     "parsedRowsSample": "Dihuraikan {count} baris. Sampel:",
     "runImport": "Jalankan import",
     "generateMissingRandomCodes": "Hasilkan kod rawak yang hilang",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Ahli Parlimen · Kerusi {seat}"
   },
   "chairAllocationMatrixPage": {
     "intro": "Matriks peruntukan jawatankuasa untuk sesi semasa anda. Ini adalah baca sahaja untuk kerusi dan menggambarkan tugasan tempat duduk aktif dan kod pelekat.",
@@ -1934,7 +2003,7 @@
       },
       "agenda": {
         "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "hint": "Topik langsung & jumlah undian setiap item agenda"
       }
     }
   },
@@ -2562,16 +2631,19 @@
     "errStorageSetup": "Storan gambar profil tidak disediakan. Dalam projek Supabase, jalankan migrasi 00100_profile_pictures_storage_bucket.sql atau buat baldi storan awam bernama gambar profil (lihat README).",
     "errPublicUrl": "Tidak dapat menyelesaikan URL awam untuk imej yang dimuat naik.",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Pilih jawatankuasa…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Menukar…",
+    "dashboardCommitteeSwitchError": "Tidak dapat bertukar jawatankuasa. Cuba lagi atau log masuk melalui pintu pagar bilik.",
+    "dashboardCommitteeAllocationsHeading": "Peruntukan dalam sesi panitia ini",
+    "dashboardCommitteeNoAllocationsListed": "Tiada baris peruntukan disenaraikan untuk sesi ini.",
+    "dashboardCommitteeApplySwitch": "Tukar papan pemuka kepada jawatankuasa ini",
+    "timerExpiryAlarmTitle": "Bunyi pemasa",
+    "timerExpiryAlarmLabel": "Mainkan loceng pendek apabila mana-mana kira detik dalam apl mencecah sifar (pemasa pertuturan, had masa sesi, tarikh akhir hab).",
+    "timerExpiryAlarmHint": "Mati secara lalai. Disimpan dalam pelayar ini sahaja.",
+    "jobRole": "Peranan kerja",
+    "jobRolePlaceholder": "cth. Pengarah MUN, guru (pilihan)",
+    "advisorSettingsHint": "Profil kakitangan sekolah — tiada peruntukan gred atau perwakilan."
   },
   "guides": {
     "default": {
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Urusetia: pandangan kerusi & perwakilan",
+    "intro": "Pilih jawatankuasa untuk alatan kerusi dan kerusi perwakilan yang dipautkan ke akaun anda, kemudian tukar permukaan. Log masuk masih membuka hab urusetia secara lalai.",
+    "bindRequiredHint": "Pilih jawatankuasa pengerusi dan/atau wakilkan kerusi di bawah, kemudian cuba lagi.",
+    "chairCommitteeLabel": "Pengerusi jawatankuasa lantai",
+    "chairCommitteePlaceholder": "Pilih jawatankuasa…",
+    "delegateSeatLabel": "Mewakilkan kerusi (peruntukan anda)",
+    "delegateSeatPlaceholder": "Pilih tempat duduk…",
+    "saveBindings": "Simpan tugasan",
+    "bindingsSaved": "Disimpan.",
+    "switchViewHeading": "Tukar papan pemuka",
+    "switchViewHelp": "Urusetia mengembalikan anda ke SMT. Kerusi dan wakilkan buka cengkerang dalam apl yang sama yang digunakan oleh kerusi sebenar dan perwakilan untuk acara aktif.",
+    "goSecretariat": "Urusetia",
+    "goChair": "Pandangan kerusi",
+    "goDelegate": "Pandangan perwakilan",
+    "surfaceSwitchError": "Tidak dapat menukar paparan. Semak pintu dan pilihan acara.",
+    "pickChairFirst": "Pilih jawatankuasa pengerusi dahulu (atau simpan tugasan).",
+    "pickDelegateFirst": "Pilih tempat duduk perwakilan dahulu (atau simpan tugasan)."
+  },
+  "advisorDashboard": {
+    "intro": "Anda boleh memantau aktiviti jawatankuasa perwakilan yang ditugaskan kepada anda. Anda tidak mempunyai akses kepada nota melainkan kerusi atau SMT memajukan nota kepada anda.",
+    "noAssignments": "Tiada perwakilan dipautkan ke akaun anda lagi. Urusetia akan menugaskan anda daripada SMT → Penasihat.",
+    "delegateLinked": "Wakilkan akaun dipautkan",
+    "delegateNotLinked": "Tempat duduk belum dipautkan ke akaun perwakilan lagi",
+    "viewProfile": "Profil",
+    "viewDocuments": "Dokumen",
+    "viewVoting": "Mengundi",
+    "forwardedNotes": "Nota dimajukan",
+    "schedule": {
+      "intro": "Pilih runut jadual anda, kemudian penasihat A–D untuk melihat jadual waktu penasihat itu untuk hari itu."
+    },
+    "notes": {
+      "intro": "Nota kerusi atau SMT memilih untuk berkongsi dengan anda. Anda tidak boleh menyemak imbas suapan nota penuh.",
+      "empty": "Tiada nota telah dimajukan kepada anda lagi.",
+      "forwarded": "Dimajukan"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Penasihat",
+    "subtitle": "Jemput akaun penasihat melalui e-mel dan pautkan setiap penasihat ke satu kerusi perwakilan.",
+    "selectEventFirst": "Pilih acara persidangan yang aktif dahulu.",
+    "enterConferenceCode": "Masukkan kod persidangan",
+    "inviteTitle": "Jemput penasihat",
+    "inviteBody": "Menghantar pautan log masuk (aliran yang sama seperti jemputan kerusi). Peranan akaun ditetapkan kepada penasihat.",
+    "inviteDisabled": "Jemputan memerlukan SUPABASE_SERVICE_ROLE_KEY pada penempatan ini.",
+    "emailLabel": "E-mel",
+    "emailPlaceholder": "penasihat@school.edu",
+    "sending": "Menghantar…",
+    "inviteButton": "Hantar jemputan",
+    "assignTitle": "Tugaskan perwakilan",
+    "assignBody": "Pilih tempat duduk perwakilan yang dipautkan. Seorang penasihat bagi setiap perwakilan; penugasan semula menggantikan pautan sebelumnya.",
+    "advisorEmailLabel": "E-mel penasihat",
+    "delegateLabel": "Kerusi perwakilan",
+    "delegatePlaceholder": "Pilih perwakilan…",
+    "assignedTo": "penasihat: {name}",
+    "saving": "Menyimpan…",
+    "assignButton": "Simpan tugasan",
+    "advisorFallback": "Penasihat"
   }
 }

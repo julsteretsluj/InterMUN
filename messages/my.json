@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "၎င်းတို့သည် ကိုယ်စားလှယ်တစ်ဦးအဖြစ် စာရင်းသွင်းထားပြီးဖြစ်ပါက ၎င်းတို့ကို ဤနေရာတွင် ကြော်ငြာပါ ဒိုင်ခွက်နှင့် ကော်မတီကိရိယာများကို ရရှိရန် (အီးမေးလ်မပို့ပါ)။",
     "grantChairRole": "သဘာပတိတာဝန်ကို ထမ်းဆောင်ပါ။",
     "chamberLabelFallback": "ကော်မတီအစည်းအဝေး",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Dais ထိုင်ခုံ",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "{committee} ၏ ဥက္ကဌ",
+    "chairRoleCoOf": "{committee} ပူးတွဲဥက္ကဌ",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "မဲပေးရန် အဆိုကို ဖွင့်ထားပြီးဖြစ်သည်။ နောက်ထပ်ထုတ်ပြန်ချက်များကို မမှတ်တမ်းတင်မီ ၎င်းကိုပိတ်ပါ။",
     "statedMotionRecorded": "ဖော်ပြထားသည့် အဆိုကို မှတ်တမ်းတင်ထားသည် (မဲပေးခြင်းအတွက် မဖွင့်ရသေးပါ)။",
     "statedMotionRemoved": "အဆိုကို ဖယ်ရှားခဲ့သည်။",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "အစီအစဉ်",
     "agendaTabHelp": "ကြမ်းပြင်အတွက် တိုက်ရိုက်အကြောင်းအရာကို သတ်မှတ်ပါ၊ ထို့နောက် အဆိုပါအကြောင်းအရာအတွက် ကိုယ်စားလှယ်စာရင်းအပြည့်အစုံဖြင့် မဲပေးခြင်းအကန့်ကိုဖွင့်ရန် အစီအစဉ်အကြောင်းအရာတစ်ခုကို နှိပ်ပါ။ အောက်တွင်၊ ကော်မတီ၏မဲစုစုပေါင်းကိုကြည့်ရန် ခေါင်းစဉ်တစ်ခုကို ရွေးပါ။",
     "agendaLiveBadge": "နေထိုင်ပါ။",
     "agendaSetLive": "တိုက်ရိုက်အကြောင်းအရာ သတ်မှတ်ပါ။",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "အစည်းအဝေး ပိတ်သတ်",
     "euPartySAndD": "ဆိုရှယ်လစ်နှင့် ဒီမိုကရက်များ ပရိုဂရက်ဆိုက်ဗ် မဟာမိတ် (S&D)",
     "euPartyEpp": "ယူရိုပီယံ ပြည်သူ့ပါတီ (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "ဥရောပကိုသက်တမ်းတိုး (သက်တမ်းတိုး)",
     "euPartyLeft": "ယူရိုပါလီမန်တွင် ဘယ်သဘော (The Left)",
     "euPartyGreen": "အစိမ်းပါတီ/EFA (Greens/EFA)",
     "euPartyCAndR": "ယူရို ရှေးရိုးနှင့် ပြင်ဆင်သူများ (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "ဥရောပအတွက် မျိုးချစ်များ (PfE)",
     "euPartyIndependents": "ပါတီမဲ့ / NI",
     "euPartyTimeGuideTitle": "EU ပါတီအလိုက် အချိန်လမ်းညွှန်",
     "euPartySpeechPoolLabel": "မိန့်ခွန်း အချိန်:",
@@ -543,7 +543,10 @@
     "home": "အိမ်",
     "library": "စာကြည့်တိုက်",
     "mainNavigationAria": "ပင်မလမ်းကြောင်း",
-    "history": "History"
+    "history": "သမိုင်း",
+    "advisorHub": "အကြံပေးဗဟို",
+    "advisorNotes": "ထပ်ဆင့်မှတ်စုများ",
+    "conferenceSchedule": "အချိန်ဇယား"
   },
   "dashboardLayout": {
     "helpCenter": "အကူအညီစင်တာ",
@@ -766,8 +769,13 @@
     "formalMotions": "တရားဝင်လှုပ်ရှားမှုများ",
     "timer": "အချိန်တိုင်း",
     "smtProfile": "ကိုယ်ရေးအကျဉ်း",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 အစီအစဉ်",
+    "history": "သမိုင်း",
+    "advisorDashboard": "အကြံပေးဒိုင်ခွက်",
+    "advisorNotes": "ထပ်ဆင့်မှတ်စုများ",
+    "delegateSchedule": "ညီလာခံအချိန်ဇယား",
+    "chairSchedule": "ညီလာခံအချိန်ဇယား",
+    "advisorSchedule": "ညီလာခံအချိန်ဇယား"
   },
   "setupPage": {
     "title": "Supabase ကို စီစဉ်မထားပါ။",
@@ -803,7 +811,7 @@
       "overview": "ခြုံငုံသုံးသပ်ချက်",
       "checklist": "စစ်ဆေးရန်စာရင်း",
       "jump": "သွားရန်",
-      "chairEmails": "Chair emails"
+      "chairEmails": "သဘာပတိအီးမေးလ်များ"
     },
     "jumpTo": "သွားရန်",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "ပြဿနာတစ်ခုကို မြှင့်တင်ပါ။"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "သဘာပတိအီးမေးလ်များ",
+        "hint": "ကော်မတီမှ ဒိုင်များ ဝင်စာများ"
+      },
+      "conferenceSchedule": {
+        "label": "ညီလာခံအချိန်ဇယား",
+        "hint": "အဖွဲ့လမ်းကြောင်းနှင့် အကြံပေးအချိန်ဇယား (A–D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}မိနစ်"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "သင့်ကော်မတီ (SEAMUN I) အတွက် မျှဝေထားသော Dais ဝင်စာ။ အောက်ပါအီးမေးလ်မှ သင့်ထိုင်ခုံများကို ဆက်သွယ်ပါ။",
+      "committeeColumn": "ကော်မတီ",
+      "emailColumn": "သဘာပတိ ဝင်စာပုံး (အသုံးပြုသူအမည်)",
+      "openMail": "မေးလ်ကိုဖွင့်ပါ။",
+      "noMatch": "ဤကော်မတီအတွက် ထုတ်ပြန်ထားသော ဥက္ကဋ္ဌ ဝင်စာပုံးကို မဖော်ပြထားသေးပါ။ SMT ကိုမေးပါ သို့မဟုတ် သင့်ကော်မတီအကျဉ်းချုပ်ကို စစ်ဆေးပါ။"
+    },
+    "schedule": {
+      "intro": "သင့်အဖွဲ့လမ်းကြောင်းကို ရွေးပါ၊ ထို့နောက် အကြံပေး A–D သို့မဟုတ် သင့်ကော်မတီ (ကိုယ်စားလှယ်/ ဥက္ကဋ္ဌ)။ တစ်ကြိမ်လျှင် ကိုယ်ရေးကိုယ်တာ အချိန်ဇယားတစ်ခုသာ ပြသထားသည်။"
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "တရားဝင်လင့်များ",
       "roomCode": "အခန်းကုဒ်",
       "settings": "ဆက်တင်များ",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "အစီအစဉ်",
+      "history": "သမိုင်း",
+      "conferenceSchedule": "အချိန်ဇယား"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "စကားဝှက်များခွဲဝေခြင်း။",
     "profile": "ကိုယ်ရေးအကျဉ်း",
     "follow": "လိုက်နာပါ။",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "အကြံပေးများ"
   },
   "officialLinks": {
     "intro": "စာရွက်စာတမ်းများ၊ စာချုပ်များ၊ အဓိကအဖွဲ့များ၊ အစီအစဉ်များ၊ မစ်ရှင်များနှင့် အဖွဲ့ဝင်အချက်အလက်။ တက်ဘ်အသစ်တစ်ခုတွင် ဖွင့်သည်။",
@@ -1136,16 +1153,16 @@
     "liveFloorDescription": "ဤကော်မတီအတွက် တိုက်ရိုက်စပီကာတန်းစီခြင်း၊ ခေါ်ဆိုမှုနှင့် အချိန်တိုင်းကိရိယာများ—စက်ရှင်အထပ်တွင် တွေ့ရသည့် အလားတူဒေတာထိုင်ခုံများ။",
     "conferenceFallback": "ညီလာခံ",
     "committeeFallback": "ကော်မတီ",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "အတွင်းရေးမှူးအဖွဲ့ ကြီးကြပ်စာရင်းဇယား",
+    "secretariatMatrixSectionSecretariat": "အတွင်းဝန်ရုံး",
+    "secretariatMatrixSectionOperations": "စစ်ဆင်ရေး",
+    "secretariatMatrixSectionMedia": "မီဒီယာ",
+    "secretariatMatrixSmtEmail": "SMT အီးမေးလ်",
+    "secretariatMatrixFinanceEmail": "ဘဏ္ဍာရေးအီးမေးလ်",
+    "secretariatMatrixCommitteeOverviews": "ကော်မတီ၏သုံးသပ်ချက်",
+    "secretariatMatrixRole": "အခန်းကဏ္ဍ",
+    "secretariatMatrixName": "နာမည်",
+    "secretariatMatrixEmail": "အီးမေးလ်"
   },
   "committeeNames": {
     "full": {
@@ -1382,7 +1399,11 @@
       "noRecipients": "အနည်းဆုံး လက်ခံသူ (ကိုယ်စားလှယ်အဖွဲ့ သို့မဟုတ် ဥက္ကဋ္ဌ) ကို ရွေးပါ။",
       "needAllocation": "မှတ်စုများပေးပို့ရန် (သို့မဟုတ် ကုလားထိုင်ဖြစ်ရန်) ခွဲဝေပေးရန်လိုအပ်သည်။",
       "sendFailed": "မှတ်စု ပို့၍မရပါ။"
-    }
+    },
+    "forwardToAdvisor": "{name} သို့ရှေ့ဆက်ရန်",
+    "forwardedToAdvisor": "အကြံပေးအရာရှိထံ ပေးပို့ခဲ့သည်။",
+    "forwardedToAdvisorBadge": "(အကြံပေးရန်)",
+    "advisorFallback": "အကြံပေး"
   },
   "adminPage": {
     "title": "ဝဘ်ဆိုဒ်အုပ်ချုပ်ရေး",
@@ -1526,14 +1547,14 @@
       "onlySmtGrantChair": "အတွင်းရေးမှူးအဖွဲ့သာလျှင် ဥက္ကဋ္ဌတာဝန်ကို ထမ်းဆောင်နိုင်သည်။",
       "noAccountForEmail": "ထိုအီးမေးလ်ဖြင့် အကောင့်မရှိသေးပါ။ ထိုင်ခုံဖိတ်စာ အရင်ပို့ပါ။",
       "promotedToChairSuccess": "{email} အတွက် ပရိုဖိုင်သည် ယခုအခါ ဒိုင်ကုလားထိုင်တစ်ခုဖြစ်သည်။",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
+      "missingChairRole": "ဤဖိတ်ကြားချက်အတွက် ဒိုင်ထိုင်ခုံနှင့် ကော်မတီကို ရွေးချယ်ပါ။",
+      "daisSeatRowMissing": "ထိုကော်မတီအတွက် {seat} အတန်းကို ရှာမတွေ့ပါ။ အစီအစဉ်အတွက် ခွဲဝေသတ်မှတ်မှုမက်ထရစ်ကို သိမ်းဆည်းကြည့်ပါ၊ ထို့နောက် ထပ်လုပ်ကြည့်ပါ။",
+      "daisSeatAlreadyFilled": "ဒီထိုင်ခုံမှာ ကုလားထိုင်တစ်လုံး ရှိနှင့်ပြီးသား။ ခွဲဝေသတ်မှတ်မက်ထရစ် (သို့မဟုတ် အခြားကိရိယာ) တွင် လက်ရှိလူကို တာဝန်ပေးခြင်းကို ဖြုတ်ပါ။",
       "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "seatCoChair": "ပူးတွဲဥက္ကဌ",
+      "inviteSentButAllocationFailed": "ဖိတ်ကြားချက် ပေးပို့ပြီး ထိုင်ခုံနေရာ အစုံပါသော်လည်း ဒိုင်ထိုင်ခုံကို ချိတ်ဆက်၍မရပါ- {error}။ ခွဲဝေသတ်မှတ်မှုမက်ထရစ်ကို ပြင်ဆင်ပါ သို့မဟုတ် ပံ့ပိုးကူညီမှုထံ ဆက်သွယ်ပါ။",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "ထိုထိုင်ခုံသည် ဤကော်မတီ၏ ဥက္ကဋ္ဌအစီအစဉ်နှင့် မကိုက်ညီပါ။"
     },
     "allocationSignup": {
       "mustBeSignedIn": "သင်သည် လက်မှတ်ထိုးဝင်ရပါမည်။",
@@ -1551,6 +1572,24 @@
       "emailSubject": "InterMUN ပစ္စည်းများ တင်ပို့ခြင်း ({range})",
       "emailSendConfigHint": "SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS ကို ဆာဗာပေါ်တွင် ရွေးချယ်နိုင်ပြီး MATERIALS_EXPORT_FROM သတ်မှတ်ပါ။",
       "exportEmailedTo": "{email} သို့ အီးမေးလ်ပို့ပြီး ထုတ်ယူသည်။ မတွေ့ပါက၊ spam/junk ကိုစစ်ဆေးပါ။"
+    },
+    "advisorStaff": {
+      "notSignedIn": "ဝင်ရောက်မထားပါ။",
+      "onlySmt": "အတွင်းရေးမှူးအဖွဲ့ သို့မဟုတ် ဝဘ်ဆိုဒ်စီမံခန့်ခွဲသူကသာ အကြံပေးများကို စီမံခန့်ခွဲနိုင်သည်။",
+      "unauthorized": "ခွင့်မပြု။",
+      "invalidEmail": "တရားဝင်အီးမေးလ်လိပ်စာကို ထည့်ပါ။",
+      "missingServiceRole": "ဆာဗာသည် SUPABASE_SERVICE_ROLE_KEY ပျောက်ဆုံးနေပါသည်။",
+      "missingAppUrl": "ဖိတ်ကြားချက်ပြန်ညွှန်းလင့်ခ်များအတွက် NEXT_PUBLIC_APP_URL သတ်မှတ်ပါ။",
+      "emailAlreadyRegistered": "အဲဒီအီးမေးလ်မှာ အကောင့်တစ်ခုရှိပြီးသားပါ။ စီမံခန့်ခွဲသူတွင် ၎င်းတို့၏ အခန်းကဏ္ဍကို အကြံပေးအဖြစ် သတ်မှတ်ပြီးနောက် ကိုယ်စားလှယ်တစ်ဦးကို ခန့်အပ်ပါ။",
+      "inviteRoleFailed": "ဖိတ်ကြားချက်ကို ပေးပို့ခဲ့သော်လည်း အကြံပေးတာဝန်ကို မသတ်မှတ်နိုင်ခဲ့ပါ- {message}",
+      "inviteSent": "{email} သို့ ပေးပို့ဖိတ်ခေါ်ပါသည်။ စကားဝှက်သတ်မှတ်ပြီးနောက် ၎င်းတို့သည် အကြံပေးတစ်ဦးဖြစ်လိမ့်မည်။",
+      "invalidAdvisorEmail": "အကြံပေး၏ အီးမေးလ်ကို ထည့်ပါ။",
+      "missingDelegate": "ကိုယ်စားလှယ်ထိုင်ခုံကို ရွေးပါ။",
+      "advisorNotFound": "ထိုအကြံပေးအီးမေးလ်အတွက် အကောင့်မတွေ့ပါ။",
+      "notAdvisorRole": "ထိုအသုံးပြုသူသည် အကြံပေးတစ်ဦးမဟုတ်ပါ။ သူတို့ကို ဖိတ်ခေါ်ပါ သို့မဟုတ် အကြံပေးတာဝန်ကို ဦးစွာသတ်မှတ်ပါ။",
+      "delegateNotFound": "ကိုယ်စားလှယ်ထိုင်ခုံမတွေ့ပါ။",
+      "delegateUnlinked": "ထိုထိုင်ခုံတွင် လင့်ခ်ချိတ်ထားသော ကိုယ်စားလှယ်အကောင့်မရှိသေးပါ။",
+      "assigned": "{country} တွင် အကြံပေးတာဝန်ပေးအပ်သည်။"
     }
   },
   "emails": {
@@ -1574,7 +1613,7 @@
     "eventDetails": "ပွဲအသေးစိတ်",
     "selectConferenceFirst": "ပွဲတံခါးရှိ ညီလာခံကို ဦးစွာရွေးချယ်ပါ၊ ထို့နောက် ဤနေရာတွင် ပြန်လာပါ။",
     "committeeSessionsTitle": "ဒီပွဲအတွက် ကော်မတီအစည်းအဝေးတွေ လုပ်တယ်။",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "ကတ်တစ်ခုစီသည် အခန်းတစ်ခုဖြစ်သည်- အတိုကောက်၊ တရားဝင်အမည်၊ လိုဂို၊ အစီအစဉ်အကြောင်းအရာ နှစ်ခုအထိ၊ RoP လင့်ခ်၊ မျှဝေထားသော စာလုံးခြောက်လုံးပါ အခန်းကုဒ် (ဒုတိယဂိတ်) နှင့် လုပ်ထုံးလုပ်နည်းပရိုဖိုင်။ အခန်းကုဒ်များသည် ဤအစီအစဉ်ရှိ အခန်းများအတွင်း တစ်မူထူးခြားနေရပါမည်။",
     "noCommitteeSessions": "ဤပွဲအတွက် ကော်မတီအစည်းအဝေးများ မရှိပါ။",
     "eventName": "ပွဲနာမည်",
     "tagline": "စာတန်း",
@@ -1617,81 +1656,111 @@
     "committeeCodeHelpPrefix": "စာလုံးခြောက်လုံး- အခန်းအတိုကောက် + ဂဏန်းသုံးလုံး (အဆုံးအဖြတ် အကြံပြုချက်-",
     "saveCommittee": "သိမ်းဆည်းရေးကော်မတီ",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "ကော်မတီတံဆိပ်",
+    "committeeLabelPlaceholder": "ဥပမာ ECOSOC၊ DISEC၊ INTERPOL",
+    "officialCommitteeNameGrid": "တရားဝင်ကော်မတီအမည်",
+    "topic1Label": "ခေါင်းစဉ် ၁",
+    "topic2Label": "ခေါင်းစဉ် 2 (ချန်လှပ်ထားနိုင်သည်)",
+    "topic2Placeholder": "ဒုတိယအစီအစဉ်မေးခွန်း",
+    "topic2DisabledHint": "ဤအကွက်ကို တည်းဖြတ်ရန် ဒုတိယခေါင်းစဉ်အတန်းကို ထည့်ပါ။",
+    "addSecondTopic": "ဒုတိယအကြောင်းအရာကို ထည့်ပါ။",
+    "addingTopic": "ထည့်နေသည်...",
+    "ropDocumentLink": "နည်းဥပဒေများ (စာရွက်စာတမ်းလင့်ခ်)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
-    "roomCodeHelpSuffix": ").",
+    "roomCodeLabel": "အခန်းကုဒ် (ဒုတိယတံခါး)",
+    "roomCodeHelpPrefix": "ဤအခန်းအတွက် မျှဝေထားသော အက္ခရာ သို့မဟုတ် ဂဏန်းခြောက်လုံး (အကြံပြုချက်-",
+    "roomCodeHelpSuffix": ")",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "နှစ်ရက်တာ ညီလာခံအချိန်ဇယား",
+      "subtitle": "ကိုယ်စားလှယ်အဖွဲ့တစ်ခုစီအလိုက် ပိတ်ဆို့မှုများကို စီစဉ်ပါ (အစုအဖွဲ့ကော်မတီများကို သင်အသုံးပြုသည့်အဖွဲ့များ)။ ဘလောက်အမျိုးအစားအလိုက် အရောင်- စက်ရှင်၊ အနားယူခြင်း သို့မဟုတ် အခမ်းအနား။ ထပ်နေသောစစ်ဆေးမှုများအတွက် နေ့လယ်စာအမှတ်အသား။ အသက်ဝင်သော အစီအစဉ်ဖြင့် သိမ်းဆည်းထားသည်။",
+      "day1Tab": "နေ့ ၁",
+      "day2Tab": "နေ့ ၂",
+      "lunchOverlapTab": "နေ့လည်စာ ထပ်နေပါသည်။",
+      "lunchOverlapHelp": "အုပ်စုနှစ်စုစလုံးသည် တစ်နေ့တည်းတွင် နေ့လည်စာအဖြစ် အမှတ်အသားပြုထားသော အတန်းတစ်ခုရှိပြီး အချိန်အပိုင်းအခြားကို ဖြတ်သည့်အခါ ထပ်နေပါသည်။",
+      "noLunchOverlaps": "နေ့လယ်စာ ထပ်နေသည် မတွေ့ရှိရပါ။ တစ်နေ့တည်းတွင် မတူညီသောအုပ်စုနှစ်ခုတွင် နေ့လည်စာအဖြစ် အနည်းဆုံးအတန်းတစ်တန်းကို ထပ်နေသောအချိန်များဖြင့် အမှတ်အသားပြုပါ။",
+      "dayLabel": "နေ့ {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
       "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "groupsLabel": "အဖွဲ့များ",
+      "renameGroup": "တက်ကြွသောအဖွဲ့အမည်",
+      "colStart": "စတင်ပါ။",
+      "colEnd": "အဆုံး",
+      "colLabel": "ပိတ်ဆို့/ဆက်ရှင်",
+      "colKind": "ရိုက်ပါ။",
+      "kindSession": "အပိုင်း",
+      "kindBreak": "ချိုး",
+      "kindCeremony": "အခမ်းအနား",
+      "legendTitle": "အရောင်များကိုပိတ်ဆို့",
+      "legendSession": "ကော်မတီအစည်းအဝေး",
+      "legendBreak": "ချိုး/နေ့လည်စာ/ caucus",
+      "legendCeremony": "ဖွင့်ပွဲ/ပိတ်ပွဲ/အခမ်းအနား",
+      "colLunch": "နေ့လည်စာ",
+      "emptyDay": "လုပ်ကွက်များ မရှိသေးပါ။ ပိတ်ဆို့ခြင်းကို ထည့်ပါ သို့မဟုတ် အခြားအဖွဲ့တဘ်ကို အသုံးပြုပါ။",
+      "blockPlaceholder": "ဥပမာ ဖွင့်ပွဲအခမ်းအနား · ကော်မတီအစည်းအဝေး ၁",
+      "lunchCheckboxAria": "ထပ်နေသောစစ်ဆေးမှုများအတွက် ဤအတန်းကို နေ့လယ်စာအဖြစ် ရေတွက်ပါ။",
+      "remove": "ဖယ်ရှားပါ။",
+      "addBlock": "အချိန်ပိတ်ဆို့ထည့်ပါ။",
+      "newGroupName": "အဖွဲ့အမည်အသစ်",
+      "newGroupPlaceholder": "ဥပမာ စာနယ်ဇင်းတပ်ဖွဲ့",
+      "defaultNewGroupName": "အဖွဲ့သစ်",
+      "addGroup": "အုပ်စုထည့်ပါ။",
+      "removeGroup": "အဖွဲ့ကို ဖယ်ရှားပါ။",
+      "confirmRemoveGroup": "အချိန်ဇယားအဖွဲ့ \"{name}\" နှင့် နှစ်ရက်စလုံးအတွက် ၎င်း၏လုပ်ကွက်အားလုံးကို ဖယ်ရှားမလား။",
+      "saveSchedule": "အချိန်ဇယားကို သိမ်းဆည်းပါ။",
+      "saving": "သိမ်းဆည်းနေသည်...",
+      "saved": "အချိန်ဇယားကို သိမ်းဆည်းပြီးပါပြီ။",
+      "resetTemplate": "နမူနာပုံစံသို့ ပြန်လည်သတ်မှတ်ပါ။",
+      "confirmReset": "အချိန်ဇယားကို မူရင်းအုပ်စုသုံးစုအဖြစ် ပြန်လည်သတ်မှတ်ပြီး ပိတ်ဆို့ခြင်းအားလုံးကို ရှင်းလင်းမလား။",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — တရားဝင် အမြင်အာရုံ အချိန်ဇယား",
+        "body": "ဤနှစ်ရက်တာအစီအစဉ်သည် SEAMUN I 2027 အတွက် ပြင်ဆင်ထားသည်။ ၎င်းသည် ထုတ်ပြန်ထားသော မာစတာအချိန်ဇယားနှင့် ကိုက်ညီပြီး (အတွင်းရေးမှူးရုံးအပါအဝင်) အက်ပ်တွင် ပြောင်းလဲ၍မရပါ။",
+        "legendTitle": "အရောင်များ",
+        "legendArrival": "ဆိုက်ရောက်/မှတ်ပုံတင်",
+        "legendDismissal": "ထုတ်ပယ်ခြင်း။",
+        "legendCeremony": "အခမ်းအနား",
+        "legendBreak": "အထွေထွေချိုး",
+        "legendSession": "စာသင်ချိန်",
+        "legendLunch": "ထမင်းစား (နေ့လည်စာ)",
+        "legendRelax": "အေးဆေး",
+        "legendSupport": "အထောက်အကူပြုအခန်း",
+        "legendStrategy": "ဗျူဟာခန်း",
+        "legendSweep": "လှည်း",
+        "handbookLink": "ကွန်ဖရင့်လက်စွဲစာအုပ် (PDF)",
+        "handbookHint": "တရားဝင်မာစတာစာရွက်စာတမ်း; သော့ခတ်ထားသော အချိန်ဇယားနှင့် အောက်ဖော်ပြပါ အခန်းဖွဲ့ခြင်းတို့သည် ဤထုတ်ဝေမှုကို လိုက်နာပါ။",
+        "committeeMatrixTitle": "ကော်မတီအခန်းများကို အချိန်ဇယားအလိုက်",
+        "committeeMatrixHint": "အခန်းတစ်ခုစီသည် ၎င်း၏တေးသွား၏ Day 1 / Day 2 နာရီကို လိုက်နာသည် (အထက်ဇယားရှိ အုပ်စုအမည်တူကော်လံ)။",
+        "colScheduleTrack": "အချိန်ဇယား တစ်ပုဒ်",
+        "colChambers": "Chambers (ဤဖြစ်ရပ်ရှိ အညွှန်းများ)",
+        "advisorHint": "အဖွဲ့ကိုနှိပ်ပါ၊ ထို့နောက် အကြံပေးအချိန်ဇယား (A–D) သို့မဟုတ် ကော်မတီတစ်ခုအတွက် ကိုယ်စားလှယ်/သဘာပတိအချိန်ဇယားကိုကြည့်ပါ — နှစ်ခုစလုံးကို တစ်ကြိမ်တည်းမဟုတ်ဘဲ တစ်ကြိမ်တည်းကြည့်ပါ။",
+        "advisorOnlyHint": "သင်၏အချိန်ဇယားလမ်းကြောင်းကို ရွေးပါ၊ ထို့နောက် အကြံပေးပုဂ္ဂိုလ်၏နေ့ကိုကြည့်ရန် အကြံပေး A–D။",
+        "committeeOnlyHint": "သင့်ကော်မတီ၏တရားဝင်အချိန်ဇယား။ အောက်တွင်၊ နေ့လည်စာစားချိန်ကို အခြားကော်မတီများနှင့် နှိုင်းယှဉ်ပါ။",
+        "pickTrack": "အချိန်ဇယားသီချင်း-",
+        "viewAllTeams": "အသင်းအားလုံး",
+        "orPickTeam": "သို့မဟုတ် အဖွဲ့-",
+        "viewAs": "အဖြစ်ကြည့်ရှုပါ။",
+        "modeAdvisor": "အကြံပေး",
+        "modeCommittee": "ကော်မတီ (ကိုယ်စားလှယ်/သဘာပတိ)၊",
+        "pickAdvisor": "အကြံပေး",
+        "pickCommittee": "ကော်မတီ",
+        "selectAdvisorPrompt": "ထိုအချိန်ဇယားကိုကြည့်ရှုရန် အကြံပေး A၊ B၊ C၊ သို့မဟုတ် D ကိုရွေးချယ်ပါ။",
+        "selectCommitteePrompt": "ကိုယ်စားလှယ်/သဘာပတိအချိန်ဇယားကိုကြည့်ရှုရန် သင့်ကော်မတီကိုရွေးချယ်ပါ။",
+        "teamShort": {
+          "g1": "အယ်လ်ဖာ",
+          "g2": "ဘီတာ",
+          "g3": "ဂမ်မာ",
+          "g4": "မြစ်ဝကျွန်းပေါ်",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "နေ့လည်စာကို အခြားကော်မတီများနှင့် ထပ်နေပါသည်။",
+        "body": "သင့်ကော်မတီ၏ နေ့လယ်စာပြတင်းပေါက်ကို {max} အခြားသော ကော်မတီများအထိ နှိုင်းယှဉ်ပါ။ တစ်ရက်ကို ရွေးပါ၊ ထို့နောက် အောက်ပါ ကော်မတီများကို ရွေးချယ်ပါ။",
+        "pickCommittees": "နှိုင်းယှဥ်ပါ။",
+        "noneSelected": "မျှဝေထားသော နေ့လည်စာ မိနစ်များကို ကြည့်ရှုရန် တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုသော ကော်မတီများကို ရွေးပါ။",
+        "yourLunch": "မင်းရဲ့နေ့လည်စာ",
+        "theirLunch": "သူတို့နေ့လည်စာ",
+        "overlap": "မျှဝေထားသော နေ့လည်စာ- {start}–{end} ({minutes} မိနစ်)",
+        "noOverlap": "ယနေ့ နေ့လယ်စာ ခွဲဝေချိန် မရှိပါ။"
       }
     }
   },
@@ -1747,7 +1816,7 @@
     "parsedRowsSample": "ပိုင်းခြားထားသော {count} အတန်း(များ)။ နမူနာ-",
     "runImport": "တင်သွင်းမှုကို လုပ်ဆောင်ပါ။",
     "generateMissingRandomCodes": "ပျောက်ဆုံးနေသော ကျပန်းကုဒ်များကို ဖန်တီးပါ။",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "လွှတ်တော် ကိုယ်စားလှယ် · ထိုင်ခုံ {seat}"
   },
   "chairAllocationMatrixPage": {
     "intro": "သင်၏လက်ရှိအစည်းအဝေးအတွက် ကော်မတီခွဲဝေသတ်မှတ်မှုမက်ထရစ်။ ၎င်းသည် ထိုင်ခုံများအတွက်သာ ဖတ်ရန်ဖြစ်ပြီး တက်ကြွသောထိုင်ခုံတာဝန်များနှင့် စာတန်းကုဒ်များကို ထင်ဟပ်စေသည်။",
@@ -1933,8 +2002,8 @@
         "hint": "အသွင်အပြင်နှင့် ကိုယ်စားလှယ်ထပ်"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "အစီအစဉ်",
+        "hint": "အစီအစဉ်တစ်ခုလျှင် တိုက်ရိုက်အကြောင်းအရာနှင့် မဲစုစုပေါင်း"
       }
     }
   },
@@ -2562,16 +2631,19 @@
     "errStorageSetup": "ပရိုဖိုင်ပုံ သိုလှောင်မှုကို ထည့်သွင်းမထားပါ။ Supabase ပရောဂျက်တွင်၊ ရွှေ့ပြောင်းခြင်း 00100_profile_pictures_storage_bucket.sql ကိုဖွင့်ပါ၊ သို့မဟုတ် ပရိုဖိုင်ပုံများဟု အမည်ပေးထားသော အများသူငှာ သိုလှောင်မှုပုံးကို ဖန်တီးပါ (README ကိုကြည့်ပါ)။",
     "errPublicUrl": "အပ်လုဒ်လုပ်ထားသောပုံအတွက် အများသူငှာ URL ကို မဖြေရှင်းနိုင်ပါ။",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "ကော်မီတီရွေးချယ်ပါ...",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "ပြောင်းနေသည်…",
+    "dashboardCommitteeSwitchError": "ကော်မတီမပြောင်းနိုင်ပါ။ ထပ်စမ်းကြည့်ပါ သို့မဟုတ် အခန်းတံခါးမှတစ်ဆင့် လက်မှတ်ထိုးဝင်ပါ။",
+    "dashboardCommitteeAllocationsHeading": "ဤကော်မတီအစည်းအဝေးတွင် ခွဲဝေပေးခြင်း",
+    "dashboardCommitteeNoAllocationsListed": "ဤစက်ရှင်အတွက် ခွဲဝေပေးသည့်အတန်းများကို မဖော်ပြထားပါ။",
+    "dashboardCommitteeApplySwitch": "ဒက်ရှ်ဘုတ်ကို ဤကော်မတီသို့ ပြောင်းပါ။",
+    "timerExpiryAlarmTitle": "အချိန်တိုင်းသံ",
+    "timerExpiryAlarmLabel": "အက်ပ်အတွင်း နှစ်သစ်ကို သုညသို့ရောက်သောအခါ (စကားပြောချိန်စက်၊ စက်ရှင်အချိန်ကန့်သတ်ချက်၊ ဗဟိုသတ်မှတ်ရက်များ) သို့ရောက်သည့်အခါ ခေတ္တခဏဖွင့်ပါ။",
+    "timerExpiryAlarmHint": "မူရင်းအတိုင်း ပိတ်ပါ။ ဤဘရောက်ဆာတွင်သာ သိမ်းဆည်းထားသည်။",
+    "jobRole": "အလုပ်တာဝန်",
+    "jobRolePlaceholder": "ဥပမာ MUN ဒါရိုက်တာ၊ ဆရာမ (ရွေးချယ်ခွင့်)၊",
+    "advisorSettingsHint": "ကျောင်းဝန်ထမ်းပရိုဖိုင် — အဆင့် သို့မဟုတ် ကိုယ်စားလှယ်ခွဲဝေခြင်းမရှိပါ။"
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "ကြေငြာချက်အပြည့်အစုံ",
       "daisAnnouncement": "Dais ကြေငြာချက်",
       "close": "ပိတ်လိုက်",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "အစီအစဉ်"
     },
     "committeeControl": {
       "sessionNameLabel": "ကဏ္ဍအမည်",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "နှင့်",
       "announcements": "ကြေငြာချက်များ",
       "sidebarUseSuffix": "- တက်ဘ်တစ်ခုလျှင် ကိရိယာတစ်ခု။",
-      "agenda": "Agenda"
+      "agenda": "အစီအစဉ်"
     },
     "history": {
       "title": "ဆက်ရှင်မှတ်တမ်း",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "အတွင်းဝန်ရုံး- သဘာပတိနှင့် ကိုယ်စားလှယ်အမြင်များ",
+    "intro": "ထိုင်ခုံကိရိယာများနှင့် သင့်အကောင့်နှင့်ချိတ်ဆက်ထားသော ကိုယ်စားလှယ်ထိုင်ခုံအတွက် ကော်မတီတစ်ခုကို ရွေးပါ၊ ထို့နောက် မျက်နှာပြင်များကို ပြောင်းပါ။ လက်မှတ်ထိုးဝင်ခြင်းသည် ပုံမှန်အားဖြင့် အတွင်းဝန်ရုံးဗဟိုကို ဖွင့်ထားဆဲဖြစ်သည်။",
+    "bindRequiredHint": "အောက်ဖော်ပြပါ ဥက္ကဋ္ဌ ကော်မတီနှင့်/သို့မဟုတ် ကိုယ်စားလှယ်ထိုင်ခုံကို ရွေးပါ၊ ထို့နောက် ထပ်စမ်းကြည့်ပါ။",
+    "chairCommitteeLabel": "သဘာပတိ ကြမ်းခင်းကော်မတီ",
+    "chairCommitteePlaceholder": "ကော်မီတီရွေးချယ်ပါ...",
+    "delegateSeatLabel": "ကိုယ်စားလှယ်ထိုင်ခုံ (သင့်ခွဲဝေပေးမှု)",
+    "delegateSeatPlaceholder": "ထိုင်ခုံရွေး...",
+    "saveBindings": "တာဝန်များကို သိမ်းဆည်းပါ။",
+    "bindingsSaved": "သိမ်းဆည်းထားသည်။",
+    "switchViewHeading": "ဒက်ရှ်ဘုတ်ကို ပြောင်းပါ။",
+    "switchViewHelp": "အတွင်းဝန်ရုံးမှ သင့်အား SMT သို့ ပြန်ပေးသည်။ သဘာပတိနှင့် ကိုယ်စားလှယ်သည် တက်ကြွသောပွဲအတွက် အသုံးပြုသည့် အက်ပ်အတွင်းမှ ထိုင်ခုံအစစ်နှင့် ကိုယ်စားလှယ်များအား တူညီသော အက်ပ်အတွင်းခွံများကို ဖွင့်သည်။",
+    "goSecretariat": "အတွင်းဝန်ရုံး",
+    "goChair": "သဘာပတိအမြင်",
+    "goDelegate": "ကိုယ်စားလှယ်အမြင်",
+    "surfaceSwitchError": "မြင်ကွင်းကို ပြောင်း၍မရပါ။ ပွဲဂိတ်နှင့် ရွေးချယ်မှုများကို စစ်ဆေးပါ။",
+    "pickChairFirst": "ဥက္ကဋ္ဌ ကော်မတီကို ဦးစွာရွေးချယ်ပါ (သို့မဟုတ် တာဝန်များကို သိမ်းဆည်းပါ)။",
+    "pickDelegateFirst": "ကိုယ်စားလှယ်ထိုင်ခုံကို ဦးစွာရွေးချယ်ပါ (သို့မဟုတ် တာဝန်များကို သိမ်းဆည်းပါ)။"
+  },
+  "advisorDashboard": {
+    "intro": "သင့်တာဝန်ပေးထားသော ကိုယ်စားလှယ်၏ ကော်မတီလုပ်ဆောင်ချက်ကို သင် စောင့်ကြည့်နိုင်ပါသည်။ ကုလားထိုင် သို့မဟုတ် SMT မှ သင့်ထံသို့ တစ်စုံတစ်ခုကို ပေးပို့ခြင်းမှလွဲ၍ သင့်တွင် မှတ်စုများကို အသုံးပြုခွင့်မရှိပါ။",
+    "noAssignments": "သင့်အကောင့်သို့ ကိုယ်စားလှယ်တစ်ဦးမျှ ချိတ်ဆက်ထားခြင်းမရှိသေးပါ။ အတွင်းဝန်ရုံးသည် သင့်အား SMT → အကြံပေးအရာရှိများမှ တာဝန်ပေးမည်ဖြစ်သည်။",
+    "delegateLinked": "ကိုယ်စားလှယ်အကောင့်ကို လင့်ခ်ချိတ်ထားသည်။",
+    "delegateNotLinked": "ကိုယ်စားလှယ်အကောင့်နှင့် ထိုင်ခုံမချိတ်ရသေးပါ။",
+    "viewProfile": "ကိုယ်ရေးအကျဉ်း",
+    "viewDocuments": "စာရွက်စာတမ်းများ",
+    "viewVoting": "မဲပေးခြင်း။",
+    "forwardedNotes": "ထပ်ဆင့်မှတ်စုများ",
+    "schedule": {
+      "intro": "သင်၏အချိန်ဇယားလမ်းကြောင်းကို ရွေးပါ၊ ထို့နောက် အကြံပေးပုဂ္ဂိုလ်၏ တစ်နေ့တာအချိန်ဇယားကို ကြည့်ရန် အကြံပေး A–D။"
+    },
+    "notes": {
+      "intro": "မှတ်စုထိုင်ခုံများ သို့မဟုတ် SMT သည် သင်နှင့်မျှဝေရန် ရွေးချယ်ခဲ့သည်။ မှတ်စုအဖိဒ် အပြည့်အစုံကို သင်ရှာဖွေ၍မရပါ။",
+      "empty": "မှတ်စုများ သင့်ထံ ထပ်ဆင့်မပို့သေးပါ။",
+      "forwarded": "ထပ်ဆင့်ပို့သည်။"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "အကြံပေးများ",
+    "subtitle": "အကြံပေးအကောင့်များကို အီးမေးလ်ဖြင့် ဖိတ်ကြားပြီး အကြံပေးတစ်ဦးစီကို ကိုယ်စားလှယ်နေရာတစ်ခုသို့ ချိတ်ဆက်ပါ။",
+    "selectEventFirst": "အသက်ဝင်သော ကွန်ဖရင့်ပွဲကို ဦးစွာရွေးချယ်ပါ။",
+    "enterConferenceCode": "ညီလာခံကုဒ်ကို ထည့်ပါ။",
+    "inviteTitle": "အကြံပေးဖိတ်ခေါ်ပါတယ်။",
+    "inviteBody": "လက်မှတ်ထိုးဝင်ရန် လင့်ခ်တစ်ခု ပို့သည် (ထိုင်ခုံ ဖိတ်စာကဲ့သို့ တူညီသော စီးဆင်းမှု)။ အကောင့်အခန်းကဏ္ဍကို အကြံပေးပုဂ္ဂိုလ်အဖြစ် သတ်မှတ်ထားသည်။",
+    "inviteDisabled": "ဖိတ်ကြားချက်များသည် ဤအသုံးချမှုတွင် SUPABASE_SERVICE_ROLE_KEY လိုအပ်ပါသည်။",
+    "emailLabel": "အီးမေးလ်",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "ပို့နေသည်...",
+    "inviteButton": "ဖိတ်ကြားချက်ပေးပို့ပါ။",
+    "assignTitle": "ကိုယ်စားလှယ်လွှဲအပ်ပါ။",
+    "assignBody": "ချိတ်ဆက်ထားသော ကိုယ်စားလှယ်ထိုင်ခုံကို ရွေးပါ။ ကိုယ်စားလှယ်တစ်ဦးလျှင် အကြံပေးတစ်ဦး၊ ပြန်လည်သတ်မှတ်ခြင်းသည် ယခင်လင့်ခ်ကို အစားထိုးသည်။",
+    "advisorEmailLabel": "အကြံပေးအီးမေးလ်",
+    "delegateLabel": "ကိုယ်စားလှယ်ထိုင်ခုံ",
+    "delegatePlaceholder": "ကိုယ်စားလှယ်ရွေးပါ...",
+    "assignedTo": "အကြံပေး- {name}",
+    "saving": "သိမ်းဆည်းနေသည်...",
+    "assignButton": "တာဝန်ကို သိမ်းဆည်းပါ။",
+    "advisorFallback": "အကြံပေး"
   }
 }

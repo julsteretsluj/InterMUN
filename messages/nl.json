@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Als ze zich al hebben aangemeld als afgevaardigde, promoot ze dan hier zodat ze het voorzittersdashboard en de commissietools krijgen (geen e-mail verzonden).",
     "grantChairRole": "Voorzitterschap toekennen",
     "chamberLabelFallback": "Committeesessie",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Dais-stoel",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Hoofdvoorzitter van {committee}",
+    "chairRoleCoOf": "Medevoorzitter van {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Zitting gesloten",
     "euPartySAndD": "Progressieve Alliantie van Socialisten en Democraten (S&D)",
     "euPartyEpp": "Europese Volkspartij (EVP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Vernieuw Europa (Vernieuwen)",
     "euPartyLeft": "De Linkse fractie in het Europees Parlement (De Linkse)",
     "euPartyGreen": "Groenen/EVA",
     "euPartyCAndR": "Europese Conservatieven en Hervormers (ECH)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Patriotten voor Europa (PfE)",
     "euPartyIndependents": "Partijlozen / NI",
     "euPartyTimeGuideTitle": "EU-fracties: tijdgids",
     "euPartySpeechPoolLabel": "Sprekestijd:",
@@ -543,7 +543,10 @@
     "home": "Thuis",
     "library": "Bibliotheek",
     "mainNavigationAria": "Hoofdnavigatie",
-    "history": "History"
+    "history": "Geschiedenis",
+    "advisorHub": "Adviseur hub",
+    "advisorNotes": "Doorgestuurde notities",
+    "conferenceSchedule": "Schema"
   },
   "dashboardLayout": {
     "helpCenter": "Helpcentrum",
@@ -767,7 +770,12 @@
     "timer": "Timer",
     "smtProfile": "Profiel",
     "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "history": "Geschiedenis",
+    "advisorDashboard": "Adviseursdashboard",
+    "advisorNotes": "Doorgestuurde notities",
+    "delegateSchedule": "Conferentieschema",
+    "chairSchedule": "Conferentieschema",
+    "advisorSchedule": "Conferentieschema"
   },
   "setupPage": {
     "title": "Supabase is niet geconfigureerd",
@@ -803,7 +811,7 @@
       "overview": "Overzicht",
       "checklist": "Controlelijst",
       "jump": "Spring naar",
-      "chairEmails": "Chair emails"
+      "chairEmails": "E-mails van de voorzitter"
     },
     "jumpTo": "Spring naar",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Breng een probleem aan de orde"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "E-mails van de voorzitter",
+        "hint": "Dais-inboxen per commissie"
+      },
+      "conferenceSchedule": {
+        "label": "Conferentieschema",
+        "hint": "Teamtraject en adviseurrooster (A – D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}m"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Gedeelde podiuminbox voor uw commissie (SEAMUN I). Neem via onderstaande e-mail contact op met uw stoelen.",
+      "committeeColumn": "Commissie",
+      "emailColumn": "Stoelinbox (gebruikersnaam)",
+      "openMail": "E-mail openen",
+      "noMatch": "Voor deze commissie is nog geen gepubliceerde voorzittersinbox vermeld. Vraag het aan SMT of bekijk uw commissiebriefing."
+    },
+    "schedule": {
+      "intro": "Kies uw teamtraject en vervolgens adviseur A – D of uw commissie (afgevaardigde/voorzitter). Er wordt slechts één persoonlijk rooster tegelijk getoond."
     }
   },
   "materialsExportCard": {
@@ -918,7 +933,7 @@
     "refresh": "Vernieuwen",
     "loading": "Laden…",
     "noSuggestionsYet": "Nog geen suggesties.",
-    "badgePreamb": "Preamb.",
+    "badgePreamb": "Preambule.",
     "badgeOperative": "Operatief",
     "badgeYours": "Van u",
     "delete": "Verwijderen",
@@ -1012,7 +1027,8 @@
       "roomCode": "Kamercode",
       "settings": "Instellingen",
       "agenda": "Agenda",
-      "history": "History"
+      "history": "Geschiedenis",
+      "conferenceSchedule": "Schema"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Wachtwoorden toewijzen",
     "profile": "Profiel",
     "follow": "Volgen",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Adviseurs"
   },
   "officialLinks": {
     "intro": "Documenten, verdragen, belangrijkste organen, programma's, missies en ledeninformatie. Opent in een nieuw tabblad.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "Live sprekerswachtrij, appèl en timers voor deze commissie – dezelfde datavoorzitters als op de sessievloer.",
     "conferenceFallback": "Conferentie",
     "committeeFallback": "Commissie",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatOversightTitle": "Toezichtrooster van het secretariaat",
+    "secretariatMatrixSectionSecretariat": "Secretariaat",
+    "secretariatMatrixSectionOperations": "Operaties",
     "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatMatrixSmtEmail": "SMT-e-mail",
+    "secretariatMatrixFinanceEmail": "Financiële e-mail",
+    "secretariatMatrixCommitteeOverviews": "Commissieoverzichten",
+    "secretariatMatrixRole": "Rol",
+    "secretariatMatrixName": "Naam",
+    "secretariatMatrixEmail": "E-mail"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "Selecteer ten minste één ontvanger (delegatie of voorzitter).",
       "needAllocation": "Je hebt een toewijzing nodig om notities te kunnen versturen (of voorzitter te kunnen zijn).",
       "sendFailed": "Kan notitie niet verzenden."
-    }
+    },
+    "forwardToAdvisor": "Doorsturen naar {name}",
+    "forwardedToAdvisor": "Doorgestuurd naar adviseur",
+    "forwardedToAdvisorBadge": "(aan adviseur)",
+    "advisorFallback": "Adviseur"
   },
   "adminPage": {
     "title": "Websitebeheer",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "Alleen het secretariaat kan voorzittersrollen toekennen.",
       "noAccountForEmail": "Nog geen account met dat e-mailadres. Stuur eerst een stoeluitnodiging.",
       "promotedToChairSuccess": "Profiel voor {email} is nu een podiumstoel.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Kies een podiumplaats en commissie voor deze uitnodiging.",
+      "daisSeatRowMissing": "Kan geen rij {seat} vinden voor die commissie. Probeer de toewijzingsmatrix voor het evenement op te slaan en probeer het vervolgens opnieuw.",
+      "daisSeatAlreadyFilled": "Die podiumstoel heeft al een stoel. Maak eerst de huidige persoon los in de toewijzingsmatrix (of een andere tool).",
+      "seatHeadChair": "Hoofd stoel",
+      "seatCoChair": "Co-voorzitter",
+      "inviteSentButAllocationFailed": "Uitnodiging verzonden en stoelrol ingesteld, maar de podiumstoel kon niet worden gekoppeld: {error}. Corrigeer de toewijzingsmatrix of neem contact op met de ondersteuning.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Die podiumplaats past niet in het stoelenplan van deze commissie."
     },
     "allocationSignup": {
       "mustBeSignedIn": "U moet ingelogd zijn.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "InterMUN-materiaalexport ({range})",
       "emailSendConfigHint": "Stel SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS en optioneel MATERIALS_EXPORT_FROM in op de server.",
       "exportEmailedTo": "Exporteer een e-mail naar {email}. Als je het niet ziet, controleer dan de spam/ongewenste berichten."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Niet ingelogd.",
+      "onlySmt": "Alleen het secretariaat of de websitebeheerder kan adviseurs beheren.",
+      "unauthorized": "Ongeautoriseerd.",
+      "invalidEmail": "Voer een geldig e-mailadres in.",
+      "missingServiceRole": "Er ontbreekt SUPABASE_SERVICE_ROLE_KEY op de server.",
+      "missingAppUrl": "Stel NEXT_PUBLIC_APP_URL in voor omleidingslinks voor uitnodigingen.",
+      "emailAlreadyRegistered": "Die e-mail heeft al een account. Stel hun rol in op adviseur in admin en wijs vervolgens een afgevaardigde toe.",
+      "inviteRoleFailed": "Uitnodiging verzonden maar adviseurrol kan niet worden ingesteld: {message}",
+      "inviteSent": "Uitnodiging verzonden naar {email}. Ze zullen een adviseur zijn nadat ze hun wachtwoord hebben ingesteld.",
+      "invalidAdvisorEmail": "Voer het e-mailadres van de adviseur in.",
+      "missingDelegate": "Selecteer een afgevaardigdestoel.",
+      "advisorNotFound": "Er is geen account gevonden voor dat adviseur-e-mailadres.",
+      "notAdvisorRole": "Die gebruiker is geen adviseur. Nodig ze uit of geef eerst de rol aan adviseur.",
+      "delegateNotFound": "Deelnemersstoel niet gevonden.",
+      "delegateUnlinked": "Die stoel heeft nog geen gekoppeld deelnemersaccount.",
+      "assigned": "Adviseur toegewezen aan {country}."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "Evenementdetails",
     "selectConferenceFirst": "Selecteer eerst een conferentie met de evenementenpoort en kom dan hier terug.",
     "committeeSessionsTitle": "Commissiesessies tijdens dit evenement",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Elke kaart is één kamer: kort label, officiële naam, logo, maximaal twee agendaonderwerpen, RoP-link, gedeelde kamercode van zes tekens (tweede poort) en procedureprofiel. In dit geval moeten kamercodes uniek blijven voor alle kamers.",
     "noCommitteeSessions": "Geen commissiesessies voor dit evenement.",
     "eventName": "Naam evenement",
     "tagline": "Slogan",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "Zes karakters: kamerinitialen + drie cijfers (deterministische suggestie:",
     "saveCommittee": "Commissie opslaan",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Comité etiket",
+    "committeeLabelPlaceholder": "bijv. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Officiële commissienaam",
+    "topic1Label": "Onderwerp 1",
+    "topic2Label": "Onderwerp 2 (optioneel)",
+    "topic2Placeholder": "Tweede agendavraag",
+    "topic2DisabledHint": "Voeg een tweede onderwerprij toe om dit veld te bewerken.",
+    "addSecondTopic": "Voeg een tweede onderwerp toe",
+    "addingTopic": "Toevoegen…",
+    "ropDocumentLink": "Reglement van orde (documentlink)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Kamercode (tweede poort)",
+    "roomCodeHelpPrefix": "Zes letters of cijfers, gedeeld voor deze kamer (suggestie:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Tweedaags conferentieprogramma",
+      "subtitle": "Plan blokken per deelnemersgroep (dezelfde groepen die je gebruikt om commissies te clusteren). Kleur per bloktype: sessie, pauze of ceremonie. Markeer de lunch voor overlapcontroles. Opgeslagen bij de actieve gebeurtenis.",
+      "day1Tab": "Dag 1",
+      "day2Tab": "Dag 2",
+      "lunchOverlapTab": "Lunch overlapt",
+      "lunchOverlapHelp": "Overlappingen ontstaan ​​wanneer twee groepen allebei een rij hebben die op dezelfde dag als lunch is gemarkeerd en de tijdsintervallen elkaar kruisen.",
+      "noLunchOverlaps": "Er zijn geen lunchoverlappingen gedetecteerd. Markeer minimaal één rij als lunch in twee verschillende groepen op dezelfde dag met overlappende tijden.",
+      "dayLabel": "Dag {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
+      "vs": "versus",
+      "groupsLabel": "Groepen",
+      "renameGroup": "Actieve groepsnaam",
+      "colStart": "Begin",
+      "colEnd": "Einde",
+      "colLabel": "Blokkeren/sessie",
       "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
+      "kindSession": "Sessie",
+      "kindBreak": "Pauze",
+      "kindCeremony": "Ceremonie",
+      "legendTitle": "Blokkleuren",
+      "legendSession": "Commissiesessie",
+      "legendBreak": "Pauze / lunch / caucus",
+      "legendCeremony": "Opening/sluiting/ceremonie",
       "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "emptyDay": "Nog geen blokken. Voeg een blok toe of gebruik een ander groepstabblad.",
+      "blockPlaceholder": "bijv. Openingsceremonie · Commissiesessie 1",
+      "lunchCheckboxAria": "Tel deze rij als lunch voor overlapcontroles",
+      "remove": "Verwijderen",
+      "addBlock": "Tijdsblok toevoegen",
+      "newGroupName": "Nieuwe groepsnaam",
+      "newGroupPlaceholder": "bijv. Perskorps",
+      "defaultNewGroupName": "Nieuwe groep",
+      "addGroup": "Groep toevoegen",
+      "removeGroup": "Groep verwijderen",
+      "confirmRemoveGroup": "De planningsgroep \"{name}\" en alle bijbehorende blokken voor beide dagen verwijderen?",
+      "saveSchedule": "Schema opslaan",
+      "saving": "Besparing…",
+      "saved": "Schema opgeslagen.",
+      "resetTemplate": "Terugzetten naar sjabloon",
+      "confirmReset": "Het schema resetten naar de standaard drie groepen en alle blokken wissen?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
+        "title": "SEAMUN I 2027 — officieel visueel schema",
+        "body": "Dit tweedaagse plan staat vast voor SEAMUN I 2027. Het komt overeen met het gepubliceerde hoofdrooster en kan niet worden gewijzigd in de app (ook niet door het secretariaat).",
+        "legendTitle": "Kleuren",
+        "legendArrival": "Aankomst / registratie",
+        "legendDismissal": "Ontslag",
+        "legendCeremony": "Ceremonie",
+        "legendBreak": "Algemene pauze",
+        "legendSession": "Academische sessie",
+        "legendLunch": "Eten (lunchen)",
         "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "legendSupport": "Ondersteuning kamer",
+        "legendStrategy": "Strategie kamers",
+        "legendSweep": "Vegen",
+        "handbookLink": "Open conferentiehandboek (PDF)",
+        "handbookHint": "officieel hoofddocument; het vergrendelde tijdschema en de kamergroepering hieronder volgen deze publicatie.",
+        "committeeMatrixTitle": "Comitékamers volgens schema",
+        "committeeMatrixHint": "Elke kamer volgt de Dag 1/Dag 2-klok van zijn track (de kolom met dezelfde groepsnaam in het diagram hierboven).",
+        "colScheduleTrack": "Schema traject",
+        "colChambers": "Chambers (labels in dit geval)",
+        "advisorHint": "Tik op een team en bekijk vervolgens een tijdschema voor adviseurs (A-D) of een tijdschema voor afgevaardigden/voorzitters voor één commissie, niet voor beide tegelijk.",
+        "advisorOnlyHint": "Kies uw planningstraject en vervolgens adviseur A-D om de dag van die adviseur te bekijken.",
+        "committeeOnlyHint": "Het officiële tijdschema van uw commissie. Vergelijk hieronder de lunchtijden met andere commissies.",
+        "pickTrack": "Schema traject:",
+        "viewAllTeams": "Alle ploegen",
+        "orPickTeam": "of team:",
+        "viewAs": "Bekijk als",
+        "modeAdvisor": "Adviseur",
+        "modeCommittee": "Commissie (afgevaardigde / voorzitter)",
+        "pickAdvisor": "Adviseur",
+        "pickCommittee": "Commissie",
+        "selectAdvisorPrompt": "Selecteer adviseur A, B, C of D om dat rooster te bekijken.",
+        "selectCommitteePrompt": "Selecteer uw commissie om het tijdschema van de afgevaardigde/voorzitter te bekijken.",
+        "teamShort": {
+          "g1": "Alfa",
+          "g2": "Bèta",
+          "g3": "Gamma",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Lunch overlapt met andere commissies",
+        "body": "Vergelijk het lunchvenster van uw commissie met maximaal {max} andere commissies. Kies een dag en selecteer vervolgens hieronder commissies.",
+        "pickCommittees": "Vergelijk met",
+        "noneSelected": "Selecteer een of meerdere commissies om gedeelde lunchnotulen te zien.",
+        "yourLunch": "Jouw lunch",
+        "theirLunch": "Hun lunch",
+        "overlap": "Gedeelde lunch: {start}–{end} ({minutes} min)",
+        "noOverlap": "Geen gezamenlijke lunch op deze dag."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "{count} rij(en) geparseerd. Steekproef:",
     "runImport": "Importeer uitvoeren",
     "generateMissingRandomCodes": "Genereer ontbrekende willekeurige codes",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Parlementariër · Zetel {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Commissie",
@@ -1839,7 +1908,7 @@
       },
       "agenda": {
         "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "hint": "Live onderwerp en stemtotalen per agendapunt"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Onderscheidingen"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Selecteer commissie…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Overstappen…",
+    "dashboardCommitteeSwitchError": "Kan niet van commissie wisselen. Probeer het opnieuw of log in via het kamerpoortje.",
+    "dashboardCommitteeAllocationsHeading": "Toewijzingen in deze commissiesessie",
+    "dashboardCommitteeNoAllocationsListed": "Er zijn geen toewijzingsrijen vermeld voor deze sessie.",
+    "dashboardCommitteeApplySwitch": "Schakel dashboard naar deze commissie",
+    "timerExpiryAlarmTitle": "Timergeluid",
+    "timerExpiryAlarmLabel": "Speel een korte bel wanneer een in-app-aftelling nul bereikt (spraaktimer, sessietijdslimiet, hub-deadlines).",
+    "timerExpiryAlarmHint": "Standaard uitgeschakeld. Alleen in deze browser opgeslagen.",
+    "jobRole": "Functie",
+    "jobRolePlaceholder": "bijv. MUN-directeur, docent (optioneel)",
+    "advisorSettingsHint": "Profiel schoolpersoneel: geen toewijzing van cijfers of afgevaardigden."
   },
   "guides": {
     "default": {
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Penvoerder: voorzitter en afgevaardigde standpunten",
+    "intro": "Kies een commissie voor stoeltools en een deelnemersstoel die aan uw account is gekoppeld, en wissel vervolgens van oppervlak. Als u zich aanmeldt, wordt standaard nog steeds de secretariaathub geopend.",
+    "bindRequiredHint": "Kies hieronder een voorzitterscommissie en/of afgevaardigdezetel en probeer het vervolgens opnieuw.",
+    "chairCommitteeLabel": "Voorzitter vloercommissie",
+    "chairCommitteePlaceholder": "Selecteer commissie…",
+    "delegateSeatLabel": "Afgevaardigdenzetel (uw toewijzing)",
+    "delegateSeatPlaceholder": "Selecteer stoel…",
+    "saveBindings": "Bewaar opdrachten",
+    "bindingsSaved": "Opgeslagen.",
+    "switchViewHeading": "Schakel dashboard",
+    "switchViewHelp": "Het secretariaat stuurt u terug naar SMT. Voorzitter en afgevaardigde openen dezelfde in-app-shells die echte stoelen en afgevaardigden gebruiken voor het actieve evenement.",
+    "goSecretariat": "Secretariaat",
+    "goChair": "Uitzicht op stoel",
+    "goDelegate": "Gedelegeerde weergave",
+    "surfaceSwitchError": "Kan de weergave niet wijzigen. Controleer evenementenpoort en selecties.",
+    "pickChairFirst": "Selecteer eerst een voorzitterscommissie (of sla opdrachten op).",
+    "pickDelegateFirst": "Selecteer eerst een deelnemersplaats (of sla opdrachten op)."
+  },
+  "advisorDashboard": {
+    "intro": "U kunt de commissieactiviteiten van uw toegewezen afgevaardigde volgen. U heeft geen toegang tot notities, tenzij een voorzitter of SMT er een naar u doorstuurt.",
+    "noAssignments": "Er is nog geen gemachtigde aan uw account gekoppeld. Het secretariaat zal u toewijzen aan SMT → Adviseurs.",
+    "delegateLinked": "Gemachtigdeaccount gekoppeld",
+    "delegateNotLinked": "Stoel is nog niet gekoppeld aan een deelnemersaccount",
+    "viewProfile": "Profiel",
+    "viewDocuments": "Documenten",
+    "viewVoting": "Stemmen",
+    "forwardedNotes": "Doorgestuurde notities",
+    "schedule": {
+      "intro": "Kies uw planningstraject en vervolgens adviseur A-D om het tijdschema van die adviseur voor die dag te bekijken."
+    },
+    "notes": {
+      "intro": "Notes-stoelen of SMT hebben ervoor gekozen om met u te delen. U kunt niet door de volledige notitiefeed bladeren.",
+      "empty": "Er zijn nog geen notities naar u doorgestuurd.",
+      "forwarded": "Doorgestuurd"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Adviseurs",
+    "subtitle": "Nodig adviseursaccounts uit per e-mail en koppel elke adviseur aan één afgevaardigdezetel.",
+    "selectEventFirst": "Kies eerst een actief conferentie-evenement.",
+    "enterConferenceCode": "Voer de conferentiecode in",
+    "inviteTitle": "Adviseur uitnodigen",
+    "inviteBody": "Stuurt een aanmeldingslink (dezelfde stroom als uitnodigingen voor de stoel). De accountrol is ingesteld op adviseur.",
+    "inviteDisabled": "Voor uitnodigingen is SUPABASE_SERVICE_ROLE_KEY vereist voor deze implementatie.",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "adviseur@school.edu",
+    "sending": "Verzenden…",
+    "inviteButton": "Uitnodiging verzenden",
+    "assignTitle": "Wijs een afgevaardigde aan",
+    "assignBody": "Kies een gekoppelde deelnemersstoel. Eén adviseur per afgevaardigde; opnieuw toewijzen vervangt de vorige link.",
+    "advisorEmailLabel": "E-mailadres van adviseur",
+    "delegateLabel": "Afgevaardigde zetel",
+    "delegatePlaceholder": "Selecteer afgevaardigde…",
+    "assignedTo": "adviseur: {name}",
+    "saving": "Besparing…",
+    "assignButton": "Opdracht opslaan",
+    "advisorFallback": "Adviseur"
   }
 }

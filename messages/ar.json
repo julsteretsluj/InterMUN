@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "إذا قاموا بالفعل بالتسجيل كمندوبين، فقم بترقيتهم هنا حتى يحصلوا على لوحة معلومات الرئيس وأدوات اللجنة (لم يتم إرسال بريد إلكتروني).",
     "grantChairRole": "منح دور الكرسي",
     "chamberLabelFallback": "جلسة اللجنة",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "مقعد دايس",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "رئيس كرسي {committee}",
+    "chairRoleCoOf": "الرئيس المشارك لـ {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "الاقتراح مفتوح بالفعل للتصويت. قم بإغلاقه قبل تسجيل المزيد من البيانات.",
     "statedMotionRecorded": "تم تسجيل الاقتراح المذكور (ليس مفتوحًا للتصويت بعد).",
     "statedMotionRemoved": "تمت إزالة الحركة المعلنة.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "جدول الأعمال",
     "agendaTabHelp": "قم بتعيين الموضوع المباشر للحاضرين، ثم اضغط على موضوع جدول الأعمال لفتح لوحة التصويت بقائمة المندوبين الكاملة لهذا الموضوع. أدناه، اختر موضوعًا للاطلاع على إجمالي تصويتات اللجنة.",
     "agendaLiveBadge": "يعيش",
     "agendaSetLive": "تعيين الموضوع المباشر",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "رفع الجلسة",
     "euPartySAndD": "التحالف التقدمي للاشتراكيين والديمقراطيين (S&D)",
     "euPartyEpp": "حزب الشعب الأوروبي (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "تجديد أوروبا (تجديد)",
     "euPartyLeft": "اليسار في البرلمان الأوروبي (The Left)",
     "euPartyGreen": "الخضر/التحالف الحر (Greens/EFA)",
     "euPartyCAndR": "المحافظون والإصلاحيون الأوروبيون (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "الوطنيون من أجل أوروبا (PfE)",
     "euPartyIndependents": "غير المنتسبين / NI",
     "euPartyTimeGuideTitle": "دليل زمن المجموعات (الاتحاد الأوروبي)",
     "euPartySpeechPoolLabel": "وقت الكلمات:",
@@ -543,7 +543,10 @@
     "home": "بيت",
     "library": "مكتبة",
     "mainNavigationAria": "الملاحة الرئيسية",
-    "history": "History"
+    "history": "تاريخ",
+    "advisorHub": "محور المستشار",
+    "advisorNotes": "الملاحظات المعاد توجيهها",
+    "conferenceSchedule": "جدول"
   },
   "dashboardLayout": {
     "helpCenter": "مركز المساعدة",
@@ -766,8 +769,13 @@
     "formalMotions": "الاقتراحات الرسمية",
     "timer": "الموقت",
     "smtProfile": "حساب تعريفي",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 جدول الأعمال",
+    "history": "تاريخ",
+    "advisorDashboard": "لوحة المستشار",
+    "advisorNotes": "الملاحظات المعاد توجيهها",
+    "delegateSchedule": "الجدول الزمني للمؤتمر",
+    "chairSchedule": "الجدول الزمني للمؤتمر",
+    "advisorSchedule": "الجدول الزمني للمؤتمر"
   },
   "setupPage": {
     "title": "لم يتم تكوين Supabase",
@@ -803,7 +811,7 @@
       "overview": "ملخص",
       "checklist": "قائمة التحقق",
       "jump": "اذهب الى",
-      "chairEmails": "Chair emails"
+      "chairEmails": "رسائل البريد الإلكتروني للكرسي"
     },
     "jumpTo": "اذهب الى",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "ارفع قضية"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "رسائل البريد الإلكتروني للكرسي",
+        "hint": "رسائل البريد الوارد من قبل اللجنة"
+      },
+      "conferenceSchedule": {
+        "label": "الجدول الزمني للمؤتمر",
+        "hint": "مسار الفريق والجدول الزمني للمستشار (أ – د)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}د"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "البريد الوارد للمنصة المشتركة للجنتك (SEAMUN I). تواصل مع كراسيك من البريد الإلكتروني أدناه.",
+      "committeeColumn": "لجنة",
+      "emailColumn": "البريد الوارد للكرسي (اسم المستخدم)",
+      "openMail": "فتح البريد",
+      "noMatch": "لم يتم إدراج أي بريد وارد للكرسي المنشور لهذه اللجنة حتى الآن. اسأل SMT أو تحقق من ملخص لجنتك."
+    },
+    "schedule": {
+      "intro": "اختر مسار فريقك، ثم المستشار أ-د أو اللجنة (المندوب/الرئيس). يتم عرض جدول زمني شخصي واحد فقط في المرة الواحدة."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "الروابط الرسمية",
       "roomCode": "رمز الغرفة",
       "settings": "إعدادات",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "جدول الأعمال",
+      "history": "تاريخ",
+      "conferenceSchedule": "جدول"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "تخصيص كلمات المرور",
     "profile": "حساب تعريفي",
     "follow": "يتبع",
-    "hubAbbrev": "سمت"
+    "hubAbbrev": "سمت",
+    "advisors": "المستشارين"
   },
   "officialLinks": {
     "intro": "الوثائق والمعاهدات والهيئات الرئيسية والبرامج والمهام ومعلومات الأعضاء. يفتح في علامة تبويب جديدة.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "قائمة انتظار المتحدثين المباشرين، ونداء الأسماء، وأجهزة ضبط الوقت الخاصة بهذه اللجنة - نفس كراسي البيانات التي تراها في قاعة الجلسة.",
     "conferenceFallback": "مؤتمر",
     "committeeFallback": "لجنة",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "قائمة مراقبة الأمانة",
+    "secretariatMatrixSectionSecretariat": "الأمانة العامة",
+    "secretariatMatrixSectionOperations": "العمليات",
+    "secretariatMatrixSectionMedia": "وسائط",
+    "secretariatMatrixSmtEmail": "البريد الإلكتروني SMT",
+    "secretariatMatrixFinanceEmail": "البريد الإلكتروني المالي",
+    "secretariatMatrixCommitteeOverviews": "لمحات عامة عن اللجنة",
+    "secretariatMatrixRole": "دور",
+    "secretariatMatrixName": "اسم",
+    "secretariatMatrixEmail": "بريد إلكتروني"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "حدد مستلمًا واحدًا على الأقل (الوفد أو الرئيس).",
       "needAllocation": "أنت بحاجة إلى تخصيص لإرسال الملاحظات (أو أن تكون رئيسًا).",
       "sendFailed": "فشل في إرسال الملاحظة."
-    }
+    },
+    "forwardToAdvisor": "إلى الأمام إلى {name}",
+    "forwardedToAdvisor": "إحالته إلى المستشار",
+    "forwardedToAdvisorBadge": "(للمستشار)",
+    "advisorFallback": "مستشار"
   },
   "adminPage": {
     "title": "إدارة الموقع",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "يمكن للأمانة فقط منح أدوار الرئيس.",
       "noAccountForEmail": "لا يوجد حساب بهذا البريد الإلكتروني حتى الآن. أرسل دعوة كرسي أولا.",
       "promotedToChairSuccess": "الملف الشخصي لـ {email} أصبح الآن كرسيًا على المنصة.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "اختر مقعدًا ولجنة لهذه الدعوة.",
+      "daisSeatRowMissing": "تعذر العثور على صف {seat} لتلك اللجنة. حاول حفظ مصفوفة التخصيص للحدث، ثم حاول مرة أخرى.",
+      "daisSeatAlreadyFilled": "مقعد المنصة هذا به كرسي بالفعل. قم بإلغاء تعيين الشخص الحالي في مصفوفة التخصيص (أو أداة أخرى) أولاً.",
+      "seatHeadChair": "كرسي رئيس",
+      "seatCoChair": "الرئيس المشارك",
+      "inviteSentButAllocationFailed": "تم إرسال الدعوة ومجموعة أدوار الكرسي، ولكن لا يمكن ربط مقعد المنصة: {error}. قم بإصلاح مصفوفة التخصيص أو اتصل بالدعم.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "ولا يتوافق مقعد المنصة هذا مع خطة رئاسة هذه اللجنة."
     },
     "allocationSignup": {
       "mustBeSignedIn": "يجب عليك تسجيل الدخول.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "تصدير مواد InterMUN ({range})",
       "emailSendConfigHint": "قم بتعيين SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS واختياريًا MATERIALS_EXPORT_FROM على الخادم.",
       "exportEmailedTo": "تصدير بالبريد الإلكتروني إلى {email}. إذا كنت لا ترى ذلك، تحقق من الرسائل غير المرغوب فيها/غير المرغوب فيها."
+    },
+    "advisorStaff": {
+      "notSignedIn": "لم يتم تسجيل الدخول.",
+      "onlySmt": "يمكن للأمانة أو مسؤول الموقع فقط إدارة المستشارين.",
+      "unauthorized": "غير مصرح به.",
+      "invalidEmail": "أدخل عنوان بريد إلكتروني صالحًا.",
+      "missingServiceRole": "الخادم يفتقد SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "قم بتعيين NEXT_PUBLIC_APP_URL لروابط إعادة التوجيه للدعوة.",
+      "emailAlreadyRegistered": "يحتوي هذا البريد الإلكتروني على حساب بالفعل. قم بتعيين دورهم كمستشار في المشرف، ثم قم بتعيين مفوض.",
+      "inviteRoleFailed": "تم إرسال الدعوة ولكن تعذر تعيين دور المستشار: {message}",
+      "inviteSent": "تم إرسال الدعوة إلى {email}. سيكونون مستشارين بعد تعيين كلمة المرور الخاصة بهم.",
+      "invalidAdvisorEmail": "أدخل البريد الإلكتروني للمستشار.",
+      "missingDelegate": "اختيار مقعد المندوب.",
+      "advisorNotFound": "لم يتم العثور على حساب لهذا البريد الإلكتروني للمستشار.",
+      "notAdvisorRole": "هذا المستخدم ليس مستشارا. قم بدعوتهم أو قم بتعيين دور المستشار أولاً.",
+      "delegateNotFound": "لم يتم العثور على مقعد المندوب.",
+      "delegateUnlinked": "هذا المقعد ليس له حساب مندوب مرتبط حتى الآن.",
+      "assigned": "المستشار المعين لـ {country}."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "تفاصيل الحدث",
     "selectConferenceFirst": "حدد مؤتمرًا به بوابة الحدث أولاً، ثم ارجع إلى هنا.",
     "committeeSessionsTitle": "جلسات اللجنة في هذا الحدث",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "كل بطاقة عبارة عن غرفة واحدة: ملصق قصير، واسم رسمي، وشعار، وما يصل إلى موضوعين في جدول الأعمال، ورابط RoP، ورمز الغرفة المشترك المكون من ستة أحرف (البوابة الثانية)، وملف تعريف الإجراء. يجب أن تظل رموز الغرف فريدة عبر الغرف في هذا الحدث.",
     "noCommitteeSessions": "لا توجد جلسات لجنة لهذا الحدث.",
     "eventName": "اسم الحدث",
     "tagline": "سطر الوصف",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "ستة أحرف: الأحرف الأولى من اسم الغرفة + ثلاثة أرقام (اقتراح حتمي:",
     "saveCommittee": "لجنة الحفظ",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "تسمية اللجنة",
+    "committeeLabelPlaceholder": "على سبيل المثال المجلس الاقتصادي والاجتماعي، DISC، الإنتربول",
+    "officialCommitteeNameGrid": "الاسم الرسمي للجنة",
+    "topic1Label": "الموضوع 1",
+    "topic2Label": "الموضوع 2 (اختياري)",
+    "topic2Placeholder": "سؤال جدول الأعمال الثاني",
+    "topic2DisabledHint": "أضف صف موضوع ثاني لتحرير هذا الحقل.",
+    "addSecondTopic": "أضف الموضوع الثاني",
+    "addingTopic": "جارٍ الإضافة…",
+    "ropDocumentLink": "النظام الداخلي (رابط الوثيقة)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "رمز الغرفة (البوابة الثانية)",
+    "roomCodeHelpPrefix": "ستة أحرف أو أرقام مشتركة لهذه الغرفة (اقتراح:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "جدول المؤتمر لمدة يومين",
+      "subtitle": "خطط الكتل لكل مجموعة مندوبة (نفس المجموعات التي تستخدمها في اللجان العنقودية). اللون حسب نوع الكتلة: جلسة أو استراحة أو حفل. ضع علامة على الغداء للتحقق من التداخل. تم الحفظ مع الحدث النشط.",
+      "day1Tab": "اليوم الأول",
+      "day2Tab": "اليوم الثاني",
+      "lunchOverlapTab": "تداخل الغداء",
+      "lunchOverlapHelp": "تظهر التداخلات عندما يكون لدى مجموعتين صف تم وضع علامة عليه كغداء في نفس اليوم وتتقاطع النطاقات الزمنية.",
+      "noLunchOverlaps": "لم يتم اكتشاف أي تداخلات في الغداء. قم بتمييز صف واحد على الأقل كوجبة غداء في مجموعتين مختلفتين في نفس اليوم بأوقات متداخلة.",
+      "dayLabel": "يوم {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "مقابل",
+      "groupsLabel": "المجموعات",
+      "renameGroup": "اسم المجموعة النشطة",
+      "colStart": "يبدأ",
+      "colEnd": "نهاية",
+      "colLabel": "كتلة / جلسة",
+      "colKind": "يكتب",
+      "kindSession": "حصة",
+      "kindBreak": "استراحة",
+      "kindCeremony": "احتفال",
+      "legendTitle": "كتلة الألوان",
+      "legendSession": "جلسة اللجنة",
+      "legendBreak": "استراحة / غداء / تجمع",
+      "legendCeremony": "الافتتاح/الاختتام/الحفل",
+      "colLunch": "غداء",
+      "emptyDay": "لا توجد كتل حتى الآن. أضف كتلة أو استخدم علامة تبويب مجموعة أخرى.",
+      "blockPlaceholder": "على سبيل المثال حفل الافتتاح · جلسة اللجنة 1",
+      "lunchCheckboxAria": "قم بحساب هذا الصف كغداء لعمليات التحقق من التداخل",
+      "remove": "يزيل",
+      "addBlock": "إضافة كتلة زمنية",
+      "newGroupName": "اسم المجموعة الجديد",
+      "newGroupPlaceholder": "على سبيل المثال هيئة الصحافة",
+      "defaultNewGroupName": "مجموعة جديدة",
+      "addGroup": "أضف مجموعة",
+      "removeGroup": "إزالة المجموعة",
+      "confirmRemoveGroup": "هل تريد إزالة مجموعة الجدولة \"{name}\" وجميع كتلها لكلا اليومين؟",
+      "saveSchedule": "حفظ الجدول الزمني",
+      "saving": "توفير…",
+      "saved": "تم حفظ الجدول الزمني.",
+      "resetTemplate": "إعادة التعيين إلى القالب",
+      "confirmReset": "هل تريد إعادة ضبط الجدول على المجموعات الثلاث الافتراضية ومسح كافة الكتل؟",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — الجدول المرئي الرسمي",
+        "body": "تم إصلاح هذه الخطة لمدة يومين لـ SEAMUN I 2027. وهي تتوافق مع الجدول الرئيسي المنشور ولا يمكن تغييرها في التطبيق (بما في ذلك عن طريق الأمانة).",
+        "legendTitle": "الألوان",
+        "legendArrival": "الوصول / التسجيل",
+        "legendDismissal": "الفصل",
+        "legendCeremony": "احتفال",
+        "legendBreak": "استراحة عامة",
+        "legendSession": "الجلسة الأكاديمية",
+        "legendLunch": "تناول (الغداء)",
+        "legendRelax": "برد",
+        "legendSupport": "غرفة الدعم",
+        "legendStrategy": "غرف الإستراتيجية",
+        "legendSweep": "اكتساح",
+        "handbookLink": "دليل المؤتمر المفتوح (PDF)",
+        "handbookHint": "الوثيقة الرئيسية الرسمية؛ يتبع الجدول الزمني المغلق ومجموعة الغرف أدناه هذا المنشور.",
+        "committeeMatrixTitle": "غرف اللجنة حسب المسار الزمني",
+        "committeeMatrixHint": "تتبع كل غرفة ساعة اليوم 1 / اليوم 2 من مسارها (العمود الذي يحمل نفس اسم المجموعة في الرسم البياني أعلاه).",
+        "colScheduleTrack": "جدولة المسار",
+        "colChambers": "الغرف (التسميات في هذا الحدث)",
+        "advisorHint": "اضغط على فريق، ثم اعرض إما الجدول الزمني للمستشار (أ–د) أو الجدول الزمني للمندوب/الرئيس للجنة واحدة - وليس كلاهما في وقت واحد.",
+        "advisorOnlyHint": "اختر مسار الجدول الزمني الخاص بك، ثم المستشار A–D لعرض يوم المستشار.",
+        "committeeOnlyHint": "الجدول الزمني الرسمي للجنتك. أدناه، قارن أوقات الغداء مع اللجان الأخرى.",
+        "pickTrack": "مسار الجدول الزمني:",
+        "viewAllTeams": "جميع الفرق",
+        "orPickTeam": "أو الفريق:",
+        "viewAs": "عرض ك",
+        "modeAdvisor": "مستشار",
+        "modeCommittee": "اللجنة (مندوب / رئيس)",
+        "pickAdvisor": "مستشار",
+        "pickCommittee": "لجنة",
+        "selectAdvisorPrompt": "حدد المستشار A أو B أو C أو D لعرض هذا الجدول الزمني.",
+        "selectCommitteePrompt": "اختر لجنتك لعرض الجدول الزمني للمندوب/الرئيس.",
+        "teamShort": {
+          "g1": "ألفا",
+          "g2": "بيتا",
+          "g3": "جاما",
+          "g4": "دلتا",
+          "support": "إبسيلون"
+        }
+      },
+      "lunchOverlap": {
+        "title": "تداخل الغداء مع اللجان الأخرى",
+        "body": "قارن فترة الغداء الخاصة بلجنتك بما يصل إلى {max} لجان أخرى. اختر يومًا، ثم اختر اللجان أدناه.",
+        "pickCommittees": "قارن مع",
+        "noneSelected": "اختر لجنة واحدة أو أكثر لرؤية محاضر الغداء المشتركة.",
+        "yourLunch": "غداءك",
+        "theirLunch": "غداءهم",
+        "overlap": "غداء مشترك: {start}–{end} ({minutes} دقيقة)",
+        "noOverlap": "لا يوجد وقت غداء مشترك في هذا اليوم."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "تم تحليل {count} صف (صفوف). عينة:",
     "runImport": "تشغيل الاستيراد",
     "generateMissingRandomCodes": "توليد رموز عشوائية في عداد المفقودين",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "برلماني · المقعد {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "لجنة",
@@ -1838,8 +1907,8 @@
         "hint": "التخطيط الافتراضي وطابق المندوبين"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "جدول الأعمال",
+        "hint": "الموضوع المباشر وإجمالي التصويت لكل بند من بنود جدول الأعمال"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "الجوائز"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "اختر اللجنة...",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "التبديل…",
+    "dashboardCommitteeSwitchError": "لا يمكن تبديل اللجنة. حاول مرة أخرى أو قم بتسجيل الدخول عبر بوابة الغرفة.",
+    "dashboardCommitteeAllocationsHeading": "المخصصات في جلسة اللجنة هذه",
+    "dashboardCommitteeNoAllocationsListed": "لم يتم سرد أية صفوف تخصيص لهذه الجلسة.",
+    "dashboardCommitteeApplySwitch": "تبديل لوحة القيادة إلى هذه اللجنة",
+    "timerExpiryAlarmTitle": "صوت الموقت",
+    "timerExpiryAlarmLabel": "قم بتشغيل رنين قصير عندما يصل أي عد تنازلي داخل التطبيق إلى الصفر (مؤقت الكلام، الحد الزمني للجلسة، المواعيد النهائية للمركز).",
+    "timerExpiryAlarmHint": "إيقاف بشكل افتراضي. مخزنة في هذا المتصفح فقط.",
+    "jobRole": "الدور الوظيفي",
+    "jobRolePlaceholder": "على سبيل المثال مدير نموذج الأمم المتحدة، مدرس (اختياري)",
+    "advisorSettingsHint": "ملف تعريف طاقم المدرسة - لا توجد درجة أو تخصيص للمندوبين."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "اعلان كامل",
       "daisAnnouncement": "اعلان ديس",
       "close": "يغلق",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "جدول الأعمال"
     },
     "committeeControl": {
       "sessionNameLabel": "اسم الجلسة",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "و",
       "announcements": "إعلانات",
       "sidebarUseSuffix": "- أداة واحدة لكل علامة تبويب.",
-      "agenda": "Agenda"
+      "agenda": "جدول الأعمال"
     },
     "history": {
       "title": "تاريخ الجلسة",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "السكرتارية: آراء الرئيس والوفد",
+    "intro": "اختر لجنة لأدوات الكرسي ومقعد مندوب مرتبط بحسابك، ثم قم بتبديل الأسطح. لا يزال تسجيل الدخول يفتح مركز الأمانة بشكل افتراضي.",
+    "bindRequiredHint": "اختر رئيس اللجنة و/أو مقعد المندوب أدناه، ثم حاول مرة أخرى.",
+    "chairCommitteeLabel": "رئيس لجنة الكلمة",
+    "chairCommitteePlaceholder": "اختر اللجنة...",
+    "delegateSeatLabel": "مقعد المندوب (تخصيصك)",
+    "delegateSeatPlaceholder": "اختر مقعد…",
+    "saveBindings": "حفظ الواجبات",
+    "bindingsSaved": "أنقذ.",
+    "switchViewHeading": "تبديل لوحة القيادة",
+    "switchViewHelp": "تقوم الأمانة بإعادتك إلى SMT. يفتح الرئيس والمندوب نفس الأغلفة داخل التطبيق التي يستخدمها الكراسي والمندوبون الحقيقيون للحدث النشط.",
+    "goSecretariat": "الأمانة العامة",
+    "goChair": "عرض الكرسي",
+    "goDelegate": "عرض مندوب",
+    "surfaceSwitchError": "لا يمكن تبديل العرض. تحقق من بوابة الحدث والاختيارات.",
+    "pickChairFirst": "حدد لجنة الرئاسة أولاً (أو احفظ المهام).",
+    "pickDelegateFirst": "حدد مقعد المندوب أولاً (أو احفظ الواجبات)."
+  },
+  "advisorDashboard": {
+    "intro": "يمكنك مراقبة نشاط لجنة مندوبك المعين. لا يمكنك الوصول إلى الملاحظات إلا إذا قام الرئيس أو SMT بإعادة توجيه واحدة إليك.",
+    "noAssignments": "لم يتم ربط أي مندوب بحسابك حتى الآن. ستقوم السكرتارية بتعيينك من SMT → المستشارين.",
+    "delegateLinked": "تم ربط حساب المفوض",
+    "delegateNotLinked": "المقعد غير مرتبط بحساب المفوض بعد",
+    "viewProfile": "حساب تعريفي",
+    "viewDocuments": "وثائق",
+    "viewVoting": "التصويت",
+    "forwardedNotes": "الملاحظات المعاد توجيهها",
+    "schedule": {
+      "intro": "اختر مسار الجدول الزمني الخاص بك، ثم المستشار \"أ\" إلى \"د\" لمعرفة الجدول الزمني لهذا المستشار لهذا اليوم."
+    },
+    "notes": {
+      "intro": "اختارت كراسي الملاحظات أو SMT مشاركتها معك. لا يمكنك تصفح خلاصة الملاحظات الكاملة.",
+      "empty": "لم يتم إرسال أي ملاحظات إليك بعد.",
+      "forwarded": "إعادة توجيه"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "المستشارين",
+    "subtitle": "دعوة حسابات المستشارين عبر البريد الإلكتروني وربط كل مستشار بمقعد مندوب واحد.",
+    "selectEventFirst": "اختر حدث مؤتمر نشط أولاً.",
+    "enterConferenceCode": "أدخل رمز المؤتمر",
+    "inviteTitle": "دعوة المستشار",
+    "inviteBody": "يرسل رابط تسجيل الدخول (نفس سير دعوة الكرسي). تم تعيين دور الحساب للمستشار.",
+    "inviteDisabled": "تتطلب الدعوات SUPABASE_SERVICE_ROLE_KEY في عملية النشر هذه.",
+    "emailLabel": "بريد إلكتروني",
+    "emailPlaceholder": "مستشار@school.edu",
+    "sending": "إرسال…",
+    "inviteButton": "أرسل دعوة",
+    "assignTitle": "تعيين مندوب",
+    "assignBody": "اختر مقعد المندوب المرتبط. مستشار واحد لكل مندوب؛ إعادة التعيين تحل محل الرابط السابق.",
+    "advisorEmailLabel": "البريد الإلكتروني للمستشار",
+    "delegateLabel": "مقعد المندوب",
+    "delegatePlaceholder": "تحديد مندوب…",
+    "assignedTo": "المستشار: {name}",
+    "saving": "توفير…",
+    "assignButton": "حفظ المهمة",
+    "advisorFallback": "مستشار"
   }
 }

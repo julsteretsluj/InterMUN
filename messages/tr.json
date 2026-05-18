@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Zaten bir delege olarak kaydolmuşlarsa, onları burada tanıtın, böylece başkan kontrol panelini ve komite araçlarını alabilirler (e-posta gönderilmez).",
     "grantChairRole": "Başkanlık rolü ver",
     "chamberLabelFallback": "Komite oturumu",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Dais koltuğu",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "{committee} Başkanı",
+    "chairRoleCoOf": "{committee} Eşbaşkanı",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Bir önerge zaten oylamaya açık. Daha fazla ifadeyi kaydetmeden önce kapatın.",
     "statedMotionRecorded": "Belirtilen önerge kaydedildi (henüz oylamaya açık değil).",
     "statedMotionRemoved": "Belirtilen önerge kaldırıldı.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Gündem",
     "agendaTabHelp": "Oturum için canlı konuyu ayarlayın, ardından bir gündem konusuna dokunarak o konunun tam delege listesini içeren oylama panelini açın. Komite oy toplamlarını görmek için aşağıdan bir konu seçin.",
     "agendaLiveBadge": "Canlı",
     "agendaSetLive": "Canlı konuyu ayarla",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Oturum kapandı",
     "euPartySAndD": "İlerici Sosyalistler ve Demokratlar İttifakı (S&D)",
     "euPartyEpp": "Avrupa Halk Partisi (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Avrupa'yı Yenile (Yenile)",
     "euPartyLeft": "Avrupa Parlamentosu’ndaki Sol (The Left)",
     "euPartyGreen": "Yeşiller/Özgür İttifak (Greens/EFA)",
     "euPartyCAndR": "Avrupa Muhafazakârlar ve Reformcular (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Avrupa Vatanseverleri (PfE)",
     "euPartyIndependents": "Bağımsız / NI",
     "euPartyTimeGuideTitle": "AB grup süre rehberi",
     "euPartySpeechPoolLabel": "Konuşma süresi:",
@@ -543,7 +543,10 @@
     "home": "Ev",
     "library": "Kütüphane",
     "mainNavigationAria": "Ana gezinme",
-    "history": "History"
+    "history": "Tarih",
+    "advisorHub": "Danışman merkezi",
+    "advisorNotes": "İletilen notlar",
+    "conferenceSchedule": "Takvim"
   },
   "dashboardLayout": {
     "helpCenter": "Yardım merkezi",
@@ -766,8 +769,13 @@
     "formalMotions": "Resmi hareketler",
     "timer": "Zamanlayıcı",
     "smtProfile": "Profil",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Gündem",
+    "history": "Tarih",
+    "advisorDashboard": "Danışman kontrol paneli",
+    "advisorNotes": "İletilen notlar",
+    "delegateSchedule": "Konferans programı",
+    "chairSchedule": "Konferans programı",
+    "advisorSchedule": "Konferans programı"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -803,7 +811,7 @@
       "overview": "Genel Bakış",
       "checklist": "Kontrol listesi",
       "jump": "Şuraya git:",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Sandalye e-postaları"
     },
     "jumpTo": "Şuraya git:",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Bir sorunu dile getirin"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Sandalye e-postaları",
+        "hint": "Komiteye göre Dais gelen kutuları"
+      },
+      "conferenceSchedule": {
+        "label": "Konferans programı",
+        "hint": "Takım takibi ve danışman takvimi (A–D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}dk"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Komiteniz için paylaşılan dais gelen kutusu (SEAMUN I). Aşağıdaki e-postadan sandalyelerinizle iletişime geçin.",
+      "committeeColumn": "Komite",
+      "emailColumn": "Sandalye gelen kutusu (kullanıcı adı)",
+      "openMail": "Postayı aç",
+      "noMatch": "Bu komite için henüz yayınlanmış bir başkan gelen kutusu listelenmedi. SMT'ye sorun veya komite özetinizi kontrol edin."
+    },
+    "schedule": {
+      "intro": "Takım parçanızı seçin, ardından danışman A-D'yi veya komitenizi (delege/başkan) seçin. Aynı anda yalnızca bir kişisel zaman çizelgesi gösterilir."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "Resmi bağlantılar",
       "roomCode": "Oda kodu",
       "settings": "Ayarlar",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Gündem",
+      "history": "Tarih",
+      "conferenceSchedule": "Takvim"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Tahsis şifreleri",
     "profile": "Profil",
     "follow": "Takip etmek",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Danışmanlar"
   },
   "officialLinks": {
     "intro": "Belgeler, anlaşmalar, ana organlar, programlar, misyonlar ve üye bilgileri. Yeni bir sekmede açılır.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "Bu komite için canlı konuşmacı kuyruğu, yoklama ve zamanlayıcılar; oturum katında görülen verilerin aynısı.",
     "conferenceFallback": "Konferans",
     "committeeFallback": "Komite",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "Sekreterlik gözetim kadrosu",
+    "secretariatMatrixSectionSecretariat": "Sekreterlik",
+    "secretariatMatrixSectionOperations": "Operasyonlar",
+    "secretariatMatrixSectionMedia": "Medya",
+    "secretariatMatrixSmtEmail": "SMT e-postası",
+    "secretariatMatrixFinanceEmail": "Finans e-postası",
+    "secretariatMatrixCommitteeOverviews": "Komiteye genel bakış",
+    "secretariatMatrixRole": "Rol",
+    "secretariatMatrixName": "İsim",
+    "secretariatMatrixEmail": "E-posta"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "En az bir alıcı seçin (delegasyon veya başkan).",
       "needAllocation": "Not göndermek (veya başkan olmak) için bir tahsise ihtiyacınız var.",
       "sendFailed": "Not gönderilemedi."
-    }
+    },
+    "forwardToAdvisor": "{name}'a ilet",
+    "forwardedToAdvisor": "Danışmana iletildi",
+    "forwardedToAdvisorBadge": "(danışmana)",
+    "advisorFallback": "Danışman"
   },
   "adminPage": {
     "title": "Web sitesi yönetimi",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "Başkanlık rollerini yalnızca sekreterlik verebilir.",
       "noAccountForEmail": "Henüz bu e-postaya sahip bir hesap yok. Önce sandalye daveti gönderin.",
       "promotedToChairSuccess": "{email} profili artık bir kürsü koltuğuna dönüştü.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Bu davet için bir kürsü koltuğu ve komite seçin.",
+      "daisSeatRowMissing": "Bu komite için {seat} satırı bulunamadı. Etkinliğe ilişkin tahsis matrisini kaydetmeyi deneyin ve ardından tekrar deneyin.",
+      "daisSeatAlreadyFilled": "O kürsü koltuğunda zaten bir sandalye var. Önce tahsis matrisindeki (veya başka bir araçtaki) mevcut kişinin atamasını kaldırın.",
+      "seatHeadChair": "Baş Sandalye",
+      "seatCoChair": "Eşbaşkan",
+      "inviteSentButAllocationFailed": "Davet gönderildi ve sandalye rolü ayarlandı ancak kürsü koltuğu bağlanamadı: {error}. Tahsis matrisini düzeltin veya destek ekibiyle iletişime geçin.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "O kürsü koltuğu bu komitenin başkanlık planıyla eşleşmiyor."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Oturum açmalısınız.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "InterMUN malzemeleri ihracatı ({range})",
       "emailSendConfigHint": "Sunucuda SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS ve isteğe bağlı olarak MATERIALS_EXPORT_FROM'u ayarlayın.",
       "exportEmailedTo": "E-postayı {email} adresine aktarın. Göremiyorsanız spam/istenmeyenleri kontrol edin."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Oturum açılmadı.",
+      "onlySmt": "Danışmanları yalnızca sekreterlik veya web sitesi yöneticisi yönetebilir.",
+      "unauthorized": "Yetkisiz.",
+      "invalidEmail": "Geçerli bir e-posta adresi girin.",
+      "missingServiceRole": "Sunucuda SUPABASE_SERVICE_ROLE_KEY eksik.",
+      "missingAppUrl": "Davet yönlendirme bağlantıları için NEXT_PUBLIC_APP_URL'yi ayarlayın.",
+      "emailAlreadyRegistered": "Bu e-postanın zaten bir hesabı var. Yöneticideki rollerini danışman olarak ayarlayın, ardından bir temsilci atayın.",
+      "inviteRoleFailed": "Davet gönderildi ancak danışman rolü ayarlanamadı: {message}",
+      "inviteSent": "Davet {email} adresine gönderildi. Şifrelerini belirledikten sonra danışman olacaklar.",
+      "invalidAdvisorEmail": "Danışmanın e-postasını girin.",
+      "missingDelegate": "Bir delege koltuğu seçin.",
+      "advisorNotFound": "Bu danışman e-postası için hesap bulunamadı.",
+      "notAdvisorRole": "Bu kullanıcı danışman değildir. Onları davet edin veya önce danışman rolünü belirleyin.",
+      "delegateNotFound": "Delege koltuğu bulunamadı.",
+      "delegateUnlinked": "Bu koltuğun henüz bağlı bir delege hesabı yok.",
+      "assigned": "{country}'ye danışman atandı."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "Etkinlik ayrıntıları",
     "selectConferenceFirst": "Önce etkinlik kapısıyla bir konferans seçin, ardından buraya dönün.",
     "committeeSessionsTitle": "Bu etkinlikteki komite oturumları",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Her kart bir bölmeden oluşur: kısa etiket, resmi ad, logo, en fazla iki gündem konusu, RoP bağlantısı, altı karakterlik paylaşılan oda kodu (ikinci kapı) ve prosedür profili. Bu etkinlikte oda kodları her odada benzersiz kalmalıdır.",
     "noCommitteeSessions": "Bu etkinlik için komite toplantısı yoktur.",
     "eventName": "Etkinlik adı",
     "tagline": "Slogan",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "Altı karakter: oda baş harfleri + üç rakam (deterministik öneri:",
     "saveCommittee": "Komiteyi kaydet",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Komite etiketi",
+    "committeeLabelPlaceholder": "örneğin ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Resmi komite adı",
+    "topic1Label": "Konu 1",
+    "topic2Label": "Konu 2 (isteğe bağlı)",
+    "topic2Placeholder": "İkinci gündem sorusu",
+    "topic2DisabledHint": "Bu alanı düzenlemek için ikinci bir konu satırı ekleyin.",
+    "addSecondTopic": "İkinci konuyu ekle",
+    "addingTopic": "Ekleniyor…",
+    "ropDocumentLink": "Prosedür kuralları (belge bağlantısı)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Oda kodu (ikinci kapı)",
+    "roomCodeHelpPrefix": "Bu oda için paylaşılan altı harf veya rakam (öneri:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "İki günlük konferans programı",
+      "subtitle": "Delege grubu başına bloklar planlayın (komiteleri kümelemek için kullandığınız grupların aynısı). Blok türüne göre renk: oturum, ara veya tören. Öğle yemeğini örtüşme kontrolleri için işaretleyin. Etkin olayla birlikte kaydedildi.",
+      "day1Tab": "1. Gün",
+      "day2Tab": "2. Gün",
+      "lunchOverlapTab": "Öğle yemeği örtüşmesi",
+      "lunchOverlapHelp": "İki grupta da aynı gün öğle yemeği olarak işaretlenmiş bir satır olduğunda ve zaman aralıkları kesiştiğinde çakışmalar ortaya çıkar.",
+      "noLunchOverlaps": "Öğle yemeği çakışması algılanmadı. Aynı gün içinde, çakışan zamanlarla iki farklı grupta en az bir satırı öğle yemeği olarak işaretleyin.",
+      "dayLabel": "Gün {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
       "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "groupsLabel": "Gruplar",
+      "renameGroup": "Aktif grup adı",
+      "colStart": "Başlangıç",
+      "colEnd": "Son",
+      "colLabel": "Blok / oturum",
+      "colKind": "Tip",
+      "kindSession": "Oturum",
+      "kindBreak": "Kırmak",
+      "kindCeremony": "Tören",
+      "legendTitle": "Renkleri engelle",
+      "legendSession": "Komite oturumu",
+      "legendBreak": "Mola / öğle yemeği / toplantı",
+      "legendCeremony": "Açılış / kapanış / tören",
+      "colLunch": "Öğle yemeği",
+      "emptyDay": "Henüz blok yok. Bir blok ekleyin veya başka bir grup sekmesi kullanın.",
+      "blockPlaceholder": "örneğin Açılış töreni · Komite oturumu 1",
+      "lunchCheckboxAria": "Örtüşme kontrolleri için bu satırı öğle yemeği olarak sayın",
+      "remove": "Kaldırmak",
+      "addBlock": "Zaman bloğu ekle",
+      "newGroupName": "Yeni grup adı",
+      "newGroupPlaceholder": "örneğin Basın birliği",
+      "defaultNewGroupName": "Yeni grup",
+      "addGroup": "Grup ekle",
+      "removeGroup": "Grubu kaldır",
+      "confirmRemoveGroup": "\"{name}\" zamanlama grubu ve her iki gün için de tüm blokları kaldırılsın mı?",
+      "saveSchedule": "Programı kaydet",
+      "saving": "Kaydediliyor…",
+      "saved": "Program kaydedildi.",
+      "resetTemplate": "Şablona sıfırla",
+      "confirmReset": "Program varsayılan üç gruba sıfırlansın ve tüm bloklar temizlensin mi?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — resmi görsel program",
+        "body": "Bu iki günlük plan SEAMUN I 2027 için sabitlenmiştir. Yayınlanan ana programla eşleşir ve uygulamada değiştirilemez (sekretarya tarafından da dahil).",
+        "legendTitle": "Renkler",
+        "legendArrival": "Varış / kayıt",
+        "legendDismissal": "İşten çıkarılma",
+        "legendCeremony": "Tören",
+        "legendBreak": "Genel mola",
+        "legendSession": "Akademik oturum",
+        "legendLunch": "Yemek (öğle yemeği)",
+        "legendRelax": "Sakin olmak",
+        "legendSupport": "Destek odası",
+        "legendStrategy": "Strateji odaları",
+        "legendSweep": "Süpürme",
+        "handbookLink": "Açık konferans el kitabı (PDF)",
+        "handbookHint": "resmi ana belge; Aşağıdaki kilitli zaman çizelgesi ve oda gruplaması bu yayını takip etmektedir.",
+        "committeeMatrixTitle": "Program takibine göre komite odaları",
+        "committeeMatrixHint": "Her oda kendi kanalının 1. Gün / 2. Gün saatini takip eder (yukarıdaki grafikte aynı grup adına sahip sütun).",
+        "colScheduleTrack": "Parçayı planla",
+        "colChambers": "Chambers (bu etkinlikteki etiketler)",
+        "advisorHint": "Bir ekibe dokunun, ardından danışman zaman çizelgesini (A–D) veya bir komite için delege/başkan zaman çizelgesini görüntüleyin; ikisini aynı anda değil.",
+        "advisorOnlyHint": "Program parçanızı seçin, ardından danışmanın gününü görüntülemek için danışman A-D'yi seçin.",
+        "committeeOnlyHint": "Komitenizin resmi takvimi. Aşağıda öğle yemeği saatlerini diğer komitelerle karşılaştırın.",
+        "pickTrack": "Parçayı programla:",
+        "viewAllTeams": "Tüm takımlar",
+        "orPickTeam": "veya takım:",
+        "viewAs": "Farklı görüntüle",
+        "modeAdvisor": "Danışman",
+        "modeCommittee": "Komite (delege / başkan)",
+        "pickAdvisor": "Danışman",
+        "pickCommittee": "Komite",
+        "selectAdvisorPrompt": "Bu zaman çizelgesini görüntülemek için danışman A, B, C veya D'yi seçin.",
+        "selectCommitteePrompt": "Delege/başkan zaman çizelgesini görüntülemek için komitenizi seçin.",
+        "teamShort": {
+          "g1": "Alfa",
+          "g2": "Beta",
+          "g3": "Gama",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Öğle yemeği diğer komitelerle çakışıyor",
+        "body": "Komitenizin öğle yemeği aralığını en fazla {max} diğer komitelerle karşılaştırın. Bir gün seçin ve ardından aşağıdan komiteleri seçin.",
+        "pickCommittees": "Şununla karşılaştır:",
+        "noneSelected": "Paylaşılan öğle yemeği tutanaklarını görmek için bir veya daha fazla komite seçin.",
+        "yourLunch": "Öğle yemeğin",
+        "theirLunch": "Öğle yemeği",
+        "overlap": "Paylaşılan öğle yemeği: {start}–{end} ({minutes} dk.)",
+        "noOverlap": "Bu gün ortak öğle yemeği vakti yok."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "{count} satır ayrıştırıldı. Örnek:",
     "runImport": "İçe aktarmayı çalıştır",
     "generateMissingRandomCodes": "Eksik rastgele kodlar oluşturun",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Milletvekili · Koltuk {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Komite",
@@ -1838,8 +1907,8 @@
         "hint": "Sanal düzen ve delege katı"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Gündem",
+        "hint": "Gündem maddesi başına canlı konu ve oy toplamları"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Ödüller"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Komiteyi seçin…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Değiştiriliyor…",
+    "dashboardCommitteeSwitchError": "Komite değiştirilemedi. Tekrar deneyin veya oda kapısından giriş yapın.",
+    "dashboardCommitteeAllocationsHeading": "Bu komite oturumundaki tahsisler",
+    "dashboardCommitteeNoAllocationsListed": "Bu oturum için hiçbir ayırma satırı listelenmiyor.",
+    "dashboardCommitteeApplySwitch": "Kontrol panelini bu komiteye değiştir",
+    "timerExpiryAlarmTitle": "Zamanlayıcı sesi",
+    "timerExpiryAlarmLabel": "Herhangi bir uygulama içi geri sayım sıfıra ulaştığında kısa bir zil sesi çalın (konuşma zamanlayıcısı, oturum süresi sınırı, hub son tarihleri).",
+    "timerExpiryAlarmHint": "Varsayılan olarak kapalıdır. Yalnızca bu tarayıcıda depolanır.",
+    "jobRole": "İş rolü",
+    "jobRolePlaceholder": "örneğin MUN direktörü, öğretmen (isteğe bağlı)",
+    "advisorSettingsHint": "Okul personeli profili — not veya delege tahsisi yok."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Tam duyuru",
       "daisAnnouncement": "Dais duyurusu",
       "close": "Kapalı",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Gündem"
     },
     "committeeControl": {
       "sessionNameLabel": "Oturum adı",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "Ve",
       "announcements": "Duyurular",
       "sidebarUseSuffix": "— sekme başına bir araç.",
-      "agenda": "Agenda"
+      "agenda": "Gündem"
     },
     "history": {
       "title": "Oturum geçmişi",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Sekreterlik: başkan ve delege görüşleri",
+    "intro": "Başkanlık araçları için bir komite ve hesabınıza bağlı bir delege koltuğu seçin, ardından yüzeyleri değiştirin. Oturum açma işlemi varsayılan olarak sekreterya merkezini açmaya devam eder.",
+    "bindRequiredHint": "Aşağıdan bir komite başkanı ve/veya delege koltuğu seçin ve tekrar deneyin.",
+    "chairCommitteeLabel": "Sandalye kat komitesi",
+    "chairCommitteePlaceholder": "Komiteyi seçin…",
+    "delegateSeatLabel": "Delege koltuğu (tahsisiniz)",
+    "delegateSeatPlaceholder": "Koltuk seç…",
+    "saveBindings": "Ödevleri kaydet",
+    "bindingsSaved": "Kaydedildi.",
+    "switchViewHeading": "Kontrol panelini değiştir",
+    "switchViewHelp": "Sekreterlik sizi SMT'ye geri gönderir. Başkan ve delege, gerçek başkanların ve delegelerin etkin etkinlik için kullandığı uygulama içi kabukların aynısını açar.",
+    "goSecretariat": "Sekreterlik",
+    "goChair": "Sandalye görünümü",
+    "goDelegate": "Temsilci görünümü",
+    "surfaceSwitchError": "Görünüm değiştirilemedi. Etkinlik kapısını ve seçimlerini kontrol edin.",
+    "pickChairFirst": "Önce bir komite başkanı seçin (veya ödevleri kaydedin).",
+    "pickDelegateFirst": "Önce bir delege koltuğu seçin (veya atamaları kaydedin)."
+  },
+  "advisorDashboard": {
+    "intro": "Atanan delegenizin komite faaliyetlerini izleyebilirsiniz. Bir başkan veya SMT size bir not iletmedikçe notlara erişiminiz yoktur.",
+    "noAssignments": "Henüz hesabınıza bağlı bir temsilci yok. Sekreterlik sizi SMT → Danışmanlar arasından görevlendirecektir.",
+    "delegateLinked": "Temsilci hesabı bağlandı",
+    "delegateNotLinked": "Koltuk henüz bir temsilci hesabına bağlanmadı",
+    "viewProfile": "Profil",
+    "viewDocuments": "Belgeler",
+    "viewVoting": "Oylama",
+    "forwardedNotes": "İletilen notlar",
+    "schedule": {
+      "intro": "Program parçanızı seçin, ardından danışmanın o günkü zaman çizelgesini görmek için danışman A-D'yi seçin."
+    },
+    "notes": {
+      "intro": "Notes sandalyeleri veya SMT sizinle paylaşmayı seçti. Not akışının tamamına göz atamazsınız.",
+      "empty": "Henüz tarafınıza herhangi bir not iletilmedi.",
+      "forwarded": "İletilen"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Danışmanlar",
+    "subtitle": "Danışman hesaplarını e-postayla davet edin ve her danışmanı bir delege koltuğuna bağlayın.",
+    "selectEventFirst": "Önce aktif bir konferans etkinliği seçin.",
+    "enterConferenceCode": "Konferans kodunu girin",
+    "inviteTitle": "Danışmanı davet et",
+    "inviteBody": "Bir oturum açma bağlantısı gönderir (başkan davetleriyle aynı akış). Hesap rolü danışman olarak ayarlandı.",
+    "inviteDisabled": "Bu dağıtımda davetler için SUPABASE_SERVICE_ROLE_KEY gerekiyor.",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "danışman@okul.edu",
+    "sending": "Gönderiliyor…",
+    "inviteButton": "Davet gönder",
+    "assignTitle": "Temsilci ata",
+    "assignBody": "Bağlantılı bir delege koltuğu seçin. Delege başına bir danışman; yeniden atama önceki bağlantının yerini alır.",
+    "advisorEmailLabel": "Danışman e-postası",
+    "delegateLabel": "Delege koltuğu",
+    "delegatePlaceholder": "Temsilciyi seçin…",
+    "assignedTo": "danışman: {name}",
+    "saving": "Kaydediliyor…",
+    "assignButton": "Ödevi kaydet",
+    "advisorFallback": "Danışman"
   }
 }

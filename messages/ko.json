@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "이미 대리인으로 등록한 경우 여기에서 홍보하여 ​​의장 대시보드와 위원회 도구를 받을 수 있도록 하세요(이메일은 전송되지 않음).",
     "grantChairRole": "보조금 의장 역할",
     "chamberLabelFallback": "위원회 세션",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "다이스 좌석",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "{committee} 의장",
+    "chairRoleCoOf": "{committee} 공동의장",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "이미 투표를 위한 동의가 진행 중입니다. 추가 진술을 기록하기 전에 닫으십시오.",
     "statedMotionRecorded": "명시된 발의안이 기록되었습니다(아직 투표가 진행되지 않음).",
     "statedMotionRemoved": "명시된 모션이 삭제되었습니다.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "의제",
     "agendaTabHelp": "발언권에 대한 실시간 주제를 설정한 다음 안건 주제를 탭하면 해당 주제에 대한 전체 대표 목록이 포함된 투표 패널이 열립니다. 아래에서 주제를 선택하여 위원회 투표 총액을 확인하세요.",
     "agendaLiveBadge": "살다",
     "agendaSetLive": "실시간 주제 설정",
@@ -543,7 +543,10 @@
     "home": "집",
     "library": "도서관",
     "mainNavigationAria": "메인 네비게이션",
-    "history": "History"
+    "history": "역사",
+    "advisorHub": "어드바이저 허브",
+    "advisorNotes": "전달된 메모",
+    "conferenceSchedule": "일정"
   },
   "dashboardLayout": {
     "helpCenter": "도움말 센터",
@@ -766,8 +769,13 @@
     "formalMotions": "공식적인 동의",
     "timer": "시간제 노동자",
     "smtProfile": "윤곽",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 의제",
+    "history": "역사",
+    "advisorDashboard": "Advisor 대시보드",
+    "advisorNotes": "전달된 메모",
+    "delegateSchedule": "컨퍼런스 일정",
+    "chairSchedule": "컨퍼런스 일정",
+    "advisorSchedule": "컨퍼런스 일정"
   },
   "setupPage": {
     "title": "Supabase가 구성되지 않았습니다.",
@@ -803,7 +811,7 @@
       "overview": "개요",
       "checklist": "체크리스트",
       "jump": "다음으로 이동",
-      "chairEmails": "Chair emails"
+      "chairEmails": "의장 이메일"
     },
     "jumpTo": "다음으로 이동",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "문제 제기"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "의장 이메일",
+        "hint": "위원회별 Dais 받은 편지함"
+      },
+      "conferenceSchedule": {
+        "label": "컨퍼런스 일정",
+        "hint": "팀 트랙 및 어드바이저 시간표(A~D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}분"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "귀하의 위원회(SEAMUN I)를 위한 공유 데이지 받은 편지함입니다. 아래 이메일로 의자에 문의하세요.",
+      "committeeColumn": "위원회",
+      "emailColumn": "의자받은 편지함 (사용자 이름)",
+      "openMail": "메일 열기",
+      "noMatch": "아직 이 위원회에 대해 게시된 의장 편지함은 나열되어 있지 않습니다. SMT에 문의하거나 위원회 개요를 확인하세요."
+    },
+    "schedule": {
+      "intro": "팀 트랙을 선택한 다음 고문 A~D 또는 위원회(대표/위원장)를 선택하세요. 개인 시간표는 한 번에 하나만 표시됩니다."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "공식 링크",
       "roomCode": "객실 코드",
       "settings": "설정",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "의제",
+      "history": "역사",
+      "conferenceSchedule": "일정"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "할당 비밀번호",
     "profile": "윤곽",
     "follow": "따르다",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "고문"
   },
   "officialLinks": {
     "intro": "문서, 조약, 주요 기관, 프로그램, 임무 및 회원 정보. 새 탭에서 열립니다.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "이 위원회를 위한 실시간 발언자 대기열, 출석 통화 및 타이머—동일한 데이터 의장이 세션 플로어에서 볼 수 있습니다.",
     "conferenceFallback": "회의",
     "committeeFallback": "위원회",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "사무국 감독 명단",
+    "secretariatMatrixSectionSecretariat": "사무국",
+    "secretariatMatrixSectionOperations": "운영",
+    "secretariatMatrixSectionMedia": "메디아",
+    "secretariatMatrixSmtEmail": "SMT 이메일",
+    "secretariatMatrixFinanceEmail": "금융 이메일",
+    "secretariatMatrixCommitteeOverviews": "위원회 개요",
+    "secretariatMatrixRole": "역할",
+    "secretariatMatrixName": "이름",
+    "secretariatMatrixEmail": "이메일"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "최소한 한 명의 수신자(대표단 또는 의장)를 선택하십시오.",
       "needAllocation": "메모를 보내거나 의장이 되려면 할당이 필요합니다.",
       "sendFailed": "메모를 보내지 못했습니다."
-    }
+    },
+    "forwardToAdvisor": "{name}로 전달",
+    "forwardedToAdvisor": "자문위원에게 전달됨",
+    "forwardedToAdvisorBadge": "(고문에게)",
+    "advisorFallback": "고문"
   },
   "adminPage": {
     "title": "웹사이트 관리",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "사무국만이 의장직을 부여할 수 있습니다.",
       "noAccountForEmail": "아직 해당 이메일을 사용하는 계정이 없습니다. 먼저 의장 초대를 보내십시오.",
       "promotedToChairSuccess": "{email}의 프로필은 이제 연단 의자입니다.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "이 초대를 위한 연단 좌석과 위원회를 선택하세요.",
+      "daisSeatRowMissing": "해당 위원회에 대한 {seat} 행을 찾을 수 없습니다. 이벤트에 대한 할당 매트릭스를 저장한 후 다시 시도하십시오.",
+      "daisSeatAlreadyFilled": "그 연단 좌석에는 이미 의자가 있어요. 먼저 할당 매트릭스(또는 다른 도구)에서 현재 사람의 할당을 취소합니다.",
+      "seatHeadChair": "의장",
+      "seatCoChair": "공동의장",
+      "inviteSentButAllocationFailed": "초대가 전송되고 의장 역할이 설정되었지만 데이지 좌석을 연결할 수 없습니다: {error}. 할당 매트릭스를 수정하거나 지원팀에 문의하세요.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "그 연단 좌석은 이 위원회의 의장 계획과 일치하지 않습니다."
     },
     "allocationSignup": {
       "mustBeSignedIn": "로그인되어 있어야 합니다.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "InterMUN 재료 내보내기 ({range})",
       "emailSendConfigHint": "서버에서 SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS를 설정하고 선택적으로 MATERIALS_EXPORT_FROM을 설정합니다.",
       "exportEmailedTo": "{email}(으)로 이메일로 내보냈습니다. 혹시 안보이시면 스팸/정크함을 확인해보세요."
+    },
+    "advisorStaff": {
+      "notSignedIn": "로그인되지 않았습니다.",
+      "onlySmt": "사무국이나 홈페이지 관리자만이 자문위원을 관리할 수 있습니다.",
+      "unauthorized": "승인되지 않았습니다.",
+      "invalidEmail": "유효한 이메일 주소를 입력하세요.",
+      "missingServiceRole": "서버에 SUPABASE_SERVICE_ROLE_KEY가 없습니다.",
+      "missingAppUrl": "초대 리디렉션 링크에 대해 NEXT_PUBLIC_APP_URL을 설정합니다.",
+      "emailAlreadyRegistered": "해당 이메일에는 이미 계정이 있습니다. 관리자에서 역할을 고문으로 설정한 다음 대리인을 할당합니다.",
+      "inviteRoleFailed": "초대가 전송되었지만 고문 역할을 설정할 수 없습니다: {message}",
+      "inviteSent": "{email}에게 초대장이 전송되었습니다. 비밀번호를 설정한 후 조언자가 됩니다.",
+      "invalidAdvisorEmail": "상담사 이메일을 입력하세요.",
+      "missingDelegate": "대표석을 선택하세요.",
+      "advisorNotFound": "해당 고문 이메일에 대한 계정을 찾을 수 없습니다.",
+      "notAdvisorRole": "해당 사용자는 조언자가 아닙니다. 먼저 초대하거나 자문 역할을 설정하세요.",
+      "delegateNotFound": "대표 좌석을 찾을 수 없습니다.",
+      "delegateUnlinked": "해당 좌석에는 아직 연결된 대리인 계정이 없습니다.",
+      "assigned": "{country}에 고문을 배정했습니다."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "이벤트 세부정보",
     "selectConferenceFirst": "먼저 이벤트 게이트가 있는 회의를 선택한 후 여기로 돌아옵니다.",
     "committeeSessionsTitle": "이번 행사의 위원회 세션",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "각 카드는 짧은 레이블, 공식 이름, 로고, 최대 2개의 의제 주제, RoP 링크, 공유된 6자리 방 코드(두 번째 게이트) 및 절차 프로필로 구성된 하나의 방입니다. 이 이벤트에서는 방 코드가 방 전체에서 고유해야 합니다.",
     "noCommitteeSessions": "이 행사에는 위원회 세션이 없습니다.",
     "eventName": "이벤트 이름",
     "tagline": "태그라인",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "6자: 챔버 이니셜 + 3자리 숫자(결정론적 제안:",
     "saveCommittee": "위원회 저장",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "위원회 라벨",
+    "committeeLabelPlaceholder": "예를 들어 ECOSOC, DISEC, 인터폴",
+    "officialCommitteeNameGrid": "공식위원회 이름",
+    "topic1Label": "주제 1",
+    "topic2Label": "주제 2(선택사항)",
+    "topic2Placeholder": "두 번째 의제 질문",
+    "topic2DisabledHint": "이 필드를 편집하려면 두 번째 주제 행을 추가하세요.",
+    "addSecondTopic": "두 번째 주제 추가",
+    "addingTopic": "첨가…",
+    "ropDocumentLink": "절차 규칙(문서 링크)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "객실 코드(두 번째 게이트)",
+    "roomCodeHelpPrefix": "이 방에서 공유되는 6개의 문자 또는 숫자(제안:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "이틀간의 컨퍼런스 일정",
+      "subtitle": "대표자 그룹(위원회를 클러스터링하는 데 사용하는 것과 동일한 그룹)별로 블록을 계획합니다. 블록 유형별 색상: 세션, 휴식 또는 행사. 중복 확인을 위해 점심 시간을 표시하세요. 활성 이벤트와 함께 저장되었습니다.",
+      "day1Tab": "1일차",
+      "day2Tab": "2일차",
+      "lunchOverlapTab": "점심 중복",
+      "lunchOverlapHelp": "두 그룹 모두 같은 날 점심으로 표시된 행이 있고 시간 범위가 교차하는 경우 중복이 나타납니다.",
+      "noLunchOverlaps": "점심 중복이 감지되지 않았습니다. 같은 날, 시간이 겹치는 두 그룹의 점심으로 최소한 한 행을 표시합니다.",
+      "dayLabel": "일 {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "대",
+      "groupsLabel": "여러 떼",
+      "renameGroup": "활성 그룹 이름",
+      "colStart": "시작",
+      "colEnd": "끝",
+      "colLabel": "블록/세션",
+      "colKind": "유형",
+      "kindSession": "세션",
+      "kindBreak": "부서지다",
+      "kindCeremony": "의식",
+      "legendTitle": "블록 색상",
+      "legendSession": "위원회 세션",
+      "legendBreak": "휴식/점심/간담회",
+      "legendCeremony": "개막식/폐막식/행사",
+      "colLunch": "점심",
+      "emptyDay": "아직 블록이 없습니다. 블록을 추가하거나 다른 그룹 탭을 사용하세요.",
+      "blockPlaceholder": "예를 들어 개막식 · 위원회 세션 1",
+      "lunchCheckboxAria": "중복 확인을 위해 이 행을 점심으로 계산합니다.",
+      "remove": "제거하다",
+      "addBlock": "시간 블록 추가",
+      "newGroupName": "새 그룹 이름",
+      "newGroupPlaceholder": "예를 들어 기자단",
+      "defaultNewGroupName": "새 그룹",
+      "addGroup": "그룹 추가",
+      "removeGroup": "그룹 삭제",
+      "confirmRemoveGroup": "이틀 동안 일정 그룹 '{name}'과 해당 블록을 모두 삭제하시겠습니까?",
+      "saveSchedule": "일정 저장",
+      "saving": "절약…",
+      "saved": "일정이 저장되었습니다.",
+      "resetTemplate": "템플릿으로 재설정",
+      "confirmReset": "일정을 기본 3개 그룹으로 재설정하고 모든 차단을 해제하시겠습니까?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — 공식 영상 일정",
+        "body": "이 2일 계획은 SEAMUN I 2027에 맞춰 고정되었습니다. 게시된 마스터 일정과 일치하며 앱에서 변경할 수 없습니다(사무국 포함).",
+        "legendTitle": "그림 물감",
+        "legendArrival": "도착/등록",
+        "legendDismissal": "해임",
+        "legendCeremony": "의식",
+        "legendBreak": "일반 휴식",
+        "legendSession": "학술세션",
+        "legendLunch": "먹다(점심)",
+        "legendRelax": "냉기",
+        "legendSupport": "지원실",
+        "legendStrategy": "전략실",
+        "legendSweep": "스위프",
+        "handbookLink": "공개회의 핸드북(PDF)",
+        "handbookHint": "공식 마스터 문서; 아래의 잠긴 시간표와 챔버 그룹은 이 간행물을 따릅니다.",
+        "committeeMatrixTitle": "일정 트랙별 위원회 챔버",
+        "committeeMatrixHint": "각 챔버는 해당 트랙의 1일/2일 시계를 따릅니다(위 차트에서 그룹 이름이 동일한 열).",
+        "colScheduleTrack": "일정 트랙",
+        "colChambers": "챔버스(이 이벤트의 라벨)",
+        "advisorHint": "팀을 탭한 다음 고문 시간표(A~D) 또는 한 위원회의 대의원/위원장 시간표를 확인하세요. 두 가지를 동시에 볼 수는 없습니다.",
+        "advisorOnlyHint": "일정 트랙을 선택한 다음 조언자 A~D를 선택하여 해당 조언자의 날짜를 확인하세요.",
+        "committeeOnlyHint": "위원회의 공식 시간표. 아래에서 점심시간을 다른 위원회와 비교해 보세요.",
+        "pickTrack": "일정 트랙:",
+        "viewAllTeams": "모든 팀",
+        "orPickTeam": "또는 팀:",
+        "viewAs": "다음으로 보기",
+        "modeAdvisor": "고문",
+        "modeCommittee": "위원회(대표/위원장)",
+        "pickAdvisor": "고문",
+        "pickCommittee": "위원회",
+        "selectAdvisorPrompt": "어드바이저 A, B, C, D를 선택하시면 해당 시간표를 보실 수 있습니다.",
+        "selectCommitteePrompt": "대표자/의장 시간표를 보려면 위원회를 선택하세요.",
+        "teamShort": {
+          "g1": "알파",
+          "g2": "베타",
+          "g3": "감마",
+          "g4": "델타",
+          "support": "엡실론"
+        }
+      },
+      "lunchOverlap": {
+        "title": "다른 위원회와 점심시간이 겹치는 경우",
+        "body": "소속 위원회의 점심 시간을 최대 {max}개의 다른 위원회와 비교해 보세요. 날짜를 선택한 후 아래에서 위원회를 선택하세요.",
+        "pickCommittees": "비교",
+        "noneSelected": "공유된 점심 시간을 보려면 하나 이상의 위원회를 선택하세요.",
+        "yourLunch": "점심",
+        "theirLunch": "그들의 점심",
+        "overlap": "점심 공유: {start}–{end} ({minutes}분)",
+        "noOverlap": "이날 점심시간은 공유되지 않습니다."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "{count}개의 행을 구문 분석했습니다. 견본:",
     "runImport": "가져오기 실행",
     "generateMissingRandomCodes": "누락된 무작위 코드 생성",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "국회의원 · 의석 {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "위원회",
@@ -1838,8 +1907,8 @@
         "hint": "가상 레이아웃 및 참석자 층"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "의제",
+        "hint": "실시간 주제 및 의제 항목별 총 투표 수"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "수상 내역"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "위원회를 선택하세요…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "전환 중…",
+    "dashboardCommitteeSwitchError": "위원회를 전환할 수 없습니다. 다시 시도하거나 룸 게이트를 통해 로그인하세요.",
+    "dashboardCommitteeAllocationsHeading": "이번 위원회 세션의 할당",
+    "dashboardCommitteeNoAllocationsListed": "이 세션에는 할당 행이 나열되지 않습니다.",
+    "dashboardCommitteeApplySwitch": "대시보드를 이 위원회로 전환",
+    "timerExpiryAlarmTitle": "타이머 소리",
+    "timerExpiryAlarmLabel": "인앱 카운트다운이 0에 도달하면 짧은 차임벨을 재생합니다(음성 타이머, 세션 시간 제한, 허브 마감 시간).",
+    "timerExpiryAlarmHint": "기본적으로 꺼져 있습니다. 이 브라우저에만 저장됩니다.",
+    "jobRole": "직무",
+    "jobRolePlaceholder": "예를 들어 MUN 디렉터, 교사 (선택)",
+    "advisorSettingsHint": "교직원 프로필 - 학년이나 대리인 할당이 없습니다."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "전체 발표",
       "daisAnnouncement": "다이스 발표",
       "close": "닫다",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "의제"
     },
     "committeeControl": {
       "sessionNameLabel": "세션 이름",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "그리고",
       "announcements": "공지사항",
       "sidebarUseSuffix": "— 탭당 하나의 도구.",
-      "agenda": "Agenda"
+      "agenda": "의제"
     },
     "history": {
       "title": "세션 기록",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "사무국: 의장 및 대표단의 견해",
+    "intro": "귀하의 계정에 연결된 의장 도구 및 대의원 좌석을 위한 위원회를 선택한 다음 표면을 전환하세요. 로그인하면 여전히 기본적으로 사무국 허브가 열립니다.",
+    "bindRequiredHint": "아래에서 위원회 의장 및/또는 대의원 자리를 선택한 후 다시 시도해 보세요.",
+    "chairCommitteeLabel": "원내위원회 위원장",
+    "chairCommitteePlaceholder": "위원회를 선택하세요…",
+    "delegateSeatLabel": "대표석(귀하의 할당)",
+    "delegateSeatPlaceholder": "좌석 선택…",
+    "saveBindings": "과제 저장",
+    "bindingsSaved": "저장되었습니다.",
+    "switchViewHeading": "대시보드 전환",
+    "switchViewHelp": "사무국이 귀하를 SMT로 돌려보냅니다. 의장과 대리인은 활성 이벤트에 실제 의장과 대리인이 사용하는 것과 동일한 인앱 셸을 엽니다.",
+    "goSecretariat": "사무국",
+    "goChair": "의자보기",
+    "goDelegate": "대리인 보기",
+    "surfaceSwitchError": "보기를 전환할 수 없습니다. 이벤트 게이트와 선택 항목을 확인하세요.",
+    "pickChairFirst": "먼저 위원장 위원회를 선택하세요(또는 할당을 저장하세요).",
+    "pickDelegateFirst": "먼저 대의원 좌석을 선택하세요(또는 할당을 저장하세요)."
+  },
+  "advisorDashboard": {
+    "intro": "지정된 대의원의 위원회 활동을 모니터링할 수 있습니다. 의장이나 SMT가 귀하에게 노트를 전달하지 않는 한 귀하는 노트에 접근할 수 없습니다.",
+    "noAssignments": "아직 귀하의 계정에 연결된 대리인이 없습니다. 사무국에서 SMT → Advisors로 배정해 드립니다.",
+    "delegateLinked": "연결된 대리인 계정",
+    "delegateNotLinked": "좌석이 아직 대리인 계정에 연결되지 않았습니다.",
+    "viewProfile": "윤곽",
+    "viewDocuments": "서류",
+    "viewVoting": "투표",
+    "forwardedNotes": "전달된 메모",
+    "schedule": {
+      "intro": "일정 트랙을 선택한 다음 고문 A~D를 선택하여 해당 고문의 당일 시간표를 확인하세요."
+    },
+    "notes": {
+      "intro": "노트 의자나 SMT가 여러분과 공유하기로 결정했습니다. 전체 노트 피드를 탐색할 수 없습니다.",
+      "empty": "아직 전달된 메모가 없습니다.",
+      "forwarded": "전달됨"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "고문",
+    "subtitle": "이메일로 고문 계정을 초대하고 각 고문을 하나의 대표석에 연결합니다.",
+    "selectEventFirst": "활성 컨퍼런스 이벤트를 먼저 선택하세요.",
+    "enterConferenceCode": "회의 코드를 입력하세요",
+    "inviteTitle": "고문 초대",
+    "inviteBody": "로그인 링크를 보냅니다(의사 초대와 동일한 흐름). 계정 역할은 Advisor로 설정됩니다.",
+    "inviteDisabled": "초대에는 이 배포에 SUPABASE_SERVICE_ROLE_KEY가 필요합니다.",
+    "emailLabel": "이메일",
+    "emailPlaceholder": "Advisor@school.edu",
+    "sending": "배상…",
+    "inviteButton": "초대장 보내기",
+    "assignTitle": "대리인 할당",
+    "assignBody": "연결된 대표석을 선택하세요. 대표자당 고문 1명; 재할당하면 이전 링크가 대체됩니다.",
+    "advisorEmailLabel": "고문 이메일",
+    "delegateLabel": "대표석",
+    "delegatePlaceholder": "대리인 선택…",
+    "assignedTo": "고문: {name}",
+    "saving": "절약…",
+    "assignButton": "과제 저장",
+    "advisorFallback": "고문"
   }
 }

@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "ប្រសិនបើពួកគេបានចុះឈ្មោះជាប្រតិភូរួចហើយ ផ្សព្វផ្សាយពួកគេនៅទីនេះ ដូច្នេះពួកគេទទួលបានកៅអីគ្រប់គ្រង និងឧបករណ៍គណៈកម្មាធិការ (មិនមានអ៊ីមែលផ្ញើទេ)។",
     "grantChairRole": "ផ្តល់តួនាទីជាប្រធាន",
     "chamberLabelFallback": "សម័យកម្មវិធីគណៈកម្មការ",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "កៅអី Dais",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "ប្រធាន {committee}",
+    "chairRoleCoOf": "សហប្រធាន {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "ចលនាមួយត្រូវបានបើកសម្រាប់ការបោះឆ្នោតរួចហើយ។ បិទវាមុនពេលកត់ត្រាសេចក្តីថ្លែងការបន្ថែម។",
     "statedMotionRecorded": "ចលនាដែលបានកត់ត្រាទុក (មិនទាន់បើកសម្រាប់ការបោះឆ្នោត)",
     "statedMotionRemoved": "ចលនាដែលបានបញ្ជាក់ត្រូវបានដកចេញ។",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "របៀបវារៈ",
     "agendaTabHelp": "កំណត់ប្រធានបទបន្តផ្ទាល់សម្រាប់ជាន់នេះ បន្ទាប់មកចុចលើប្រធានបទរបៀបវារៈ ដើម្បីបើកផ្ទាំងបោះឆ្នោតដែលមានបញ្ជីប្រតិភូពេញលេញសម្រាប់ប្រធានបទនោះ។ ខាងក្រោម ជ្រើសរើសប្រធានបទ ដើម្បីមើលចំនួនសរុបនៃការបោះឆ្នោតរបស់គណៈកម្មាធិការ។",
     "agendaLiveBadge": "រស់នៅ",
     "agendaSetLive": "កំណត់ប្រធានបទបន្តផ្ទាល់",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "បិទសម័យ",
     "euPartySAndD": "សម្ពន្ធមេត្រីនិយម និងប្រជាធិបតេយ្យវិជ្ជមាន (S&D)",
     "euPartyEpp": "គណបក្សប្រជាជនអឺរ៉ុប (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "បន្តអឺរ៉ុប (បន្ត)",
     "euPartyLeft": "ឆ្វេងនៅក្នុងសភាអឺរ៉ុប (The Left)",
     "euPartyGreen": "បក្សបៃតង/EFA (Greens/EFA)",
     "euPartyCAndR": "អឺរ៉ុប អភិរក្ស និងកែទម្រង់ (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "អ្នកស្នេហាជាតិសម្រាប់អឺរ៉ុប (PfE)",
     "euPartyIndependents": "គ្មានក្រុម / NI",
     "euPartyTimeGuideTitle": "ការណែនាំពេលវេលាតាមក្រុម (EU)",
     "euPartySpeechPoolLabel": "ពេលវេលាសុន្ទរកថា៖",
@@ -543,7 +543,10 @@
     "home": "ផ្ទះ",
     "library": "បណ្ណាល័យ",
     "mainNavigationAria": "ការរុករកចម្បង",
-    "history": "History"
+    "history": "ប្រវត្តិសាស្ត្រ",
+    "advisorHub": "មជ្ឈមណ្ឌលទីប្រឹក្សា",
+    "advisorNotes": "កំណត់ចំណាំដែលបានបញ្ជូនបន្ត",
+    "conferenceSchedule": "កាលវិភាគ"
   },
   "dashboardLayout": {
     "helpCenter": "មជ្ឈមណ្ឌលជំនួយ",
@@ -766,8 +769,13 @@
     "formalMotions": "ចលនាផ្លូវការ",
     "timer": "កម្មវិធីកំណត់ម៉ោង",
     "smtProfile": "ប្រវត្តិរូប",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 របៀបវារៈ",
+    "history": "ប្រវត្តិសាស្ត្រ",
+    "advisorDashboard": "ផ្ទាំងគ្រប់គ្រងទីប្រឹក្សា",
+    "advisorNotes": "កំណត់ចំណាំដែលបានបញ្ជូនបន្ត",
+    "delegateSchedule": "កាលវិភាគសន្និសីទ",
+    "chairSchedule": "កាលវិភាគសន្និសីទ",
+    "advisorSchedule": "កាលវិភាគសន្និសីទ"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -803,7 +811,7 @@
       "overview": "ទិដ្ឋភាពទូទៅ",
       "checklist": "បញ្ជីត្រួតពិនិត្យ",
       "jump": "លោតទៅ",
-      "chairEmails": "Chair emails"
+      "chairEmails": "អ៊ីមែលប្រធាន"
     },
     "jumpTo": "លោតទៅ",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "លើកបញ្ហា"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "អ៊ីមែលប្រធាន",
+        "hint": "Dais ប្រអប់សំបុត្រដោយគណៈកម្មាធិការ"
+      },
+      "conferenceSchedule": {
+        "label": "កាលវិភាគសន្និសីទ",
+        "hint": "តារាងតាមដានក្រុម និងទីប្រឹក្សា (A-D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}ន"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Shared dais inbox សម្រាប់គណៈកម្មាធិការរបស់អ្នក (SEAMUN I)។ ទាក់ទងកៅអីរបស់អ្នកតាមអ៊ីមែលខាងក្រោម។",
+      "committeeColumn": "គណៈកម្មាធិការ",
+      "emailColumn": "ប្រអប់ទទួលកៅអី (ឈ្មោះអ្នកប្រើប្រាស់)",
+      "openMail": "បើកសំបុត្រ",
+      "noMatch": "មិន​ទាន់​មាន​ប្រអប់​ទទួល​ប្រធាន​ដែល​បាន​ចុះ​បញ្ជី​សម្រាប់​គណៈកម្មាធិការ​នេះ​នៅ​ឡើយ​ទេ។ សួរ SMT ឬពិនិត្យមើលការសង្ខេបរបស់គណៈកម្មាធិការរបស់អ្នក។"
+    },
+    "schedule": {
+      "intro": "ជ្រើសរើសក្រុមរបស់អ្នក បន្ទាប់មកទីប្រឹក្សា A-D ឬគណៈកម្មាធិការរបស់អ្នក (ប្រតិភូ/ប្រធាន)។ មានតែតារាងពេលវេលាផ្ទាល់ខ្លួនមួយប៉ុណ្ណោះដែលត្រូវបានបង្ហាញក្នុងពេលតែមួយ។"
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "តំណភ្ជាប់ផ្លូវការ",
       "roomCode": "លេខកូដបន្ទប់",
       "settings": "ការកំណត់",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "របៀបវារៈ",
+      "history": "ប្រវត្តិសាស្ត្រ",
+      "conferenceSchedule": "កាលវិភាគ"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "ការបែងចែកពាក្យសម្ងាត់",
     "profile": "ប្រវត្តិរូប",
     "follow": "ធ្វើតាម",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "ទីប្រឹក្សា"
   },
   "officialLinks": {
     "intro": "ឯកសារ សន្ធិសញ្ញា ស្ថាប័នសំខាន់ៗ កម្មវិធី បេសកកម្ម និងព័ត៌មានសមាជិក។ បើកនៅក្នុងផ្ទាំងថ្មី។",
@@ -1136,16 +1153,16 @@
     "liveFloorDescription": "ជួរវាគ្មិនផ្ទាល់ ការហៅទូរសព្ទ និងកម្មវិធីកំណត់ម៉ោងសម្រាប់គណៈកម្មាធិការនេះ—កៅអីទិន្នន័យដូចគ្នាឃើញនៅជាន់វគ្គ។",
     "conferenceFallback": "សន្និសីទ",
     "committeeFallback": "គណៈកម្មាធិការ",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "បញ្ជីរាយនាមត្រួតពិនិត្យលេខាធិការដ្ឋាន",
+    "secretariatMatrixSectionSecretariat": "លេខាធិការដ្ឋាន",
+    "secretariatMatrixSectionOperations": "ប្រតិបត្តិការ",
+    "secretariatMatrixSectionMedia": "ប្រព័ន្ធផ្សព្វផ្សាយ",
+    "secretariatMatrixSmtEmail": "អ៊ីមែល SMT",
+    "secretariatMatrixFinanceEmail": "អ៊ីមែលហិរញ្ញវត្ថុ",
+    "secretariatMatrixCommitteeOverviews": "ទិដ្ឋភាពទូទៅនៃគណៈកម្មាធិការ",
+    "secretariatMatrixRole": "តួនាទី",
+    "secretariatMatrixName": "ឈ្មោះ",
+    "secretariatMatrixEmail": "អ៊ីមែល"
   },
   "committeeNames": {
     "full": {
@@ -1382,7 +1399,11 @@
       "noRecipients": "ជ្រើសរើសអ្នកទទួលយ៉ាងហោចណាស់ម្នាក់ (គណៈប្រតិភូ ឬកៅអី)។",
       "needAllocation": "អ្នកត្រូវការការបែងចែកដើម្បីផ្ញើកំណត់ចំណាំ (ឬធ្វើជាកៅអី)។",
       "sendFailed": "បរាជ័យក្នុងការផ្ញើចំណាំ។"
-    }
+    },
+    "forwardToAdvisor": "បញ្ជូនបន្តទៅ {name}",
+    "forwardedToAdvisor": "បញ្ជូនទៅទីប្រឹក្សា",
+    "forwardedToAdvisorBadge": "(ទីប្រឹក្សា)",
+    "advisorFallback": "ទីប្រឹក្សា"
   },
   "adminPage": {
     "title": "ការគ្រប់គ្រងគេហទំព័រ",
@@ -1526,14 +1547,14 @@
       "onlySmtGrantChair": "មានតែលេខាធិការដ្ឋានទេដែលអាចផ្តល់តួនាទីជាប្រធាន។",
       "noAccountForEmail": "មិនមានគណនីជាមួយអ៊ីមែលនោះនៅឡើយទេ។ ផ្ញើការអញ្ជើញកៅអីជាមុនសិន។",
       "promotedToChairSuccess": "ប្រវត្តិរូបសម្រាប់ {email} ឥឡូវនេះគឺជាកៅអី dais ។",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "ជ្រើសរើសកៅអី Dais និងគណៈកម្មាធិការសម្រាប់ការអញ្ជើញនេះ។",
+      "daisSeatRowMissing": "មិនអាចស្វែងរកជួរ {seat} សម្រាប់គណៈកម្មាធិការនោះ។ ព្យាយាមរក្សាទុកម៉ាទ្រីសបែងចែកសម្រាប់ព្រឹត្តិការណ៍ បន្ទាប់មកព្យាយាមម្តងទៀត។",
+      "daisSeatAlreadyFilled": "កៅអីនោះមានកៅអីរួចហើយ។ ដកការចាត់តាំងមនុស្សបច្ចុប្បន្ននៅក្នុងម៉ាទ្រីសបែងចែក (ឬឧបករណ៍ផ្សេងទៀត) ជាមុនសិន។",
+      "seatHeadChair": "ក្បាលកៅអី",
+      "seatCoChair": "សហប្រធាន",
+      "inviteSentButAllocationFailed": "ការអញ្ជើញដែលបានផ្ញើ និងតួនាទីជាកៅអី ប៉ុន្តែមិនអាចភ្ជាប់កៅអី dais បានទេ៖ {error}។ ជួសជុលម៉ាទ្រីសបែងចែក ឬទាក់ទងផ្នែកជំនួយ។",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "កៅអី Dais នោះមិនត្រូវគ្នានឹងផែនការប្រធានគណៈកម្មាធិការនេះទេ។"
     },
     "allocationSignup": {
       "mustBeSignedIn": "អ្នកត្រូវតែចូល។",
@@ -1551,6 +1572,24 @@
       "emailSubject": "ការនាំចេញសម្ភារ InterMUN ({range})",
       "emailSendConfigHint": "កំណត់ SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS និងជាជម្រើស MATERIALS_EXPORT_FROM នៅលើម៉ាស៊ីនមេ។",
       "exportEmailedTo": "នាំចេញអ៊ីមែលទៅ {email} ។ ប្រសិនបើអ្នកមិនឃើញវាទេ សូមពិនិត្យមើលសារឥតបានការ/ឥតប្រយោជន៍។"
+    },
+    "advisorStaff": {
+      "notSignedIn": "មិន​បាន​ចូល។",
+      "onlySmt": "មានតែលេខាធិការដ្ឋាន ឬអ្នកគ្រប់គ្រងគេហទំព័រប៉ុណ្ណោះដែលអាចគ្រប់គ្រងទីប្រឹក្សាបាន។",
+      "unauthorized": "គ្មានការអនុញ្ញាត។",
+      "invalidEmail": "បញ្ចូលអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ។",
+      "missingServiceRole": "ម៉ាស៊ីនមេបាត់ SUPABASE_SERVICE_ROLE_KEY ។",
+      "missingAppUrl": "កំណត់ NEXT_PUBLIC_APP_URL សម្រាប់តំណបញ្ជូនបន្តការអញ្ជើញ។",
+      "emailAlreadyRegistered": "អ៊ីមែលនោះមានគណនីរួចហើយ។ កំណត់តួនាទីរបស់ពួកគេទៅជាទីប្រឹក្សានៅក្នុងអ្នកគ្រប់គ្រង បន្ទាប់មកចាត់តាំងតំណាង។",
+      "inviteRoleFailed": "បានផ្ញើការអញ្ជើញ ប៉ុន្តែមិនអាចកំណត់តួនាទីទីប្រឹក្សាបានទេ៖ {message}",
+      "inviteSent": "ការអញ្ជើញត្រូវបានផ្ញើទៅ {email}។ ពួកគេនឹងក្លាយជាទីប្រឹក្សាបន្ទាប់ពីកំណត់ពាក្យសម្ងាត់របស់ពួកគេ។",
+      "invalidAdvisorEmail": "បញ្ចូលអ៊ីមែលរបស់អ្នកប្រឹក្សា។",
+      "missingDelegate": "ជ្រើសរើសកៅអីតំណាង។",
+      "advisorNotFound": "រកមិនឃើញគណនីសម្រាប់អ៊ីមែលទីប្រឹក្សានោះទេ។",
+      "notAdvisorRole": "អ្នកប្រើប្រាស់នោះមិនមែនជាទីប្រឹក្សាទេ។ អញ្ជើញពួកគេ ឬកំណត់តួនាទីជាទីប្រឹក្សាជាមុនសិន។",
+      "delegateNotFound": "រកមិនឃើញកៅអីតំណាង។",
+      "delegateUnlinked": "កៅអីនោះមិនទាន់មានគណនីប្រតិភូដែលបានភ្ជាប់នៅឡើយទេ។",
+      "assigned": "ត្រូវបានចាត់តាំងជាទីប្រឹក្សា {country}។"
     }
   },
   "emails": {
@@ -1574,7 +1613,7 @@
     "eventDetails": "ព័ត៌មានលម្អិតអំពីព្រឹត្តិការណ៍",
     "selectConferenceFirst": "ជ្រើសរើសសន្និសីទដែលមានច្រកព្រឹត្តិការណ៍ជាមុនសិន បន្ទាប់មកត្រឡប់មកទីនេះ។",
     "committeeSessionsTitle": "កិច្ចប្រជុំគណៈកម្មាធិការក្នុងព្រឹត្តិការណ៍នេះ។",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "កាតនីមួយៗមានបន្ទប់តែមួយ៖ ស្លាកខ្លី ឈ្មោះផ្លូវការ និមិត្តសញ្ញា រហូតដល់ប្រធានបទរបៀបវារៈពីរ តំណ RoP លេខកូដបន្ទប់ប្រាំមួយតួអក្សរ (ច្រកទីពីរ) និងទម្រង់បែបបទ។ លេខកូដបន្ទប់ត្រូវតែមានតែមួយនៅទូទាំងបន្ទប់នៅក្នុងព្រឹត្តិការណ៍នេះ។",
     "noCommitteeSessions": "មិនមានវគ្គគណៈកម្មាធិការសម្រាប់ព្រឹត្តិការណ៍នេះទេ។",
     "eventName": "ឈ្មោះព្រឹត្តិការណ៍",
     "tagline": "ស្លាកសញ្ញា",
@@ -1617,81 +1656,111 @@
     "committeeCodeHelpPrefix": "តួអក្សរចំនួនប្រាំមួយ៖ បឋមអង្គជំនុំជម្រះ + បីខ្ទង់ (ការផ្តល់យោបល់កំណត់៖",
     "saveCommittee": "គណៈកម្មាធិការរក្សាទុក",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "ស្លាកគណៈកម្មាធិការ",
+    "committeeLabelPlaceholder": "ឧ. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "ឈ្មោះគណៈកម្មាធិការផ្លូវការ",
+    "topic1Label": "ប្រធានបទ ១",
+    "topic2Label": "ប្រធានបទទី 2 (ជាជម្រើស)",
+    "topic2Placeholder": "សំណួររបៀបវារៈទីពីរ",
+    "topic2DisabledHint": "បន្ថែមជួរប្រធានបទទីពីរដើម្បីកែសម្រួលវាលនេះ។",
+    "addSecondTopic": "បន្ថែមប្រធានបទទីពីរ",
+    "addingTopic": "កំពុង​បន្ថែម...",
+    "ropDocumentLink": "វិធាននៃនីតិវិធី (តំណភ្ជាប់ឯកសារ)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
-    "roomCodeHelpSuffix": ").",
+    "roomCodeLabel": "លេខកូដបន្ទប់ (ច្រកទីពីរ)",
+    "roomCodeHelpPrefix": "អក្សរ ឬខ្ទង់ប្រាំមួយ ដែលចែករំលែកសម្រាប់អង្គជំនុំជម្រះនេះ (ការណែនាំ៖",
+    "roomCodeHelpSuffix": ")",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "កាលវិភាគសន្និសីទរយៈពេលពីរថ្ងៃ",
+      "subtitle": "ធ្វើផែនការប្លុកក្នុងមួយក្រុមប្រតិភូ (ក្រុមដូចគ្នាដែលអ្នកប្រើសម្រាប់គណៈកម្មាការចង្កោម)។ ពណ៌តាមប្រភេទប្លុក៖ សម័យ សម្រាក ឬពិធី។ សម្គាល់អាហារថ្ងៃត្រង់សម្រាប់ការត្រួតពិនិត្យត្រួតស៊ីគ្នា។ បានរក្សាទុកជាមួយនឹងព្រឹត្តិការណ៍សកម្ម។",
+      "day1Tab": "ថ្ងៃទី 1",
+      "day2Tab": "ថ្ងៃទី 2",
+      "lunchOverlapTab": "អាហារថ្ងៃត្រង់ត្រួតលើគ្នា។",
+      "lunchOverlapHelp": "ការត្រួតស៊ីគ្នាលេចឡើងនៅពេលដែលក្រុមទាំងពីរមានជួរដេកមួយដែលត្រូវបានសម្គាល់ថាជាអាហារថ្ងៃត្រង់នៅថ្ងៃតែមួយ ហើយចន្លោះម៉ោងប្រសព្វគ្នា។",
+      "noLunchOverlaps": "មិនបានរកឃើញការត្រួតលើគ្នានៃអាហារថ្ងៃត្រង់ទេ។ សម្គាល់យ៉ាងហោចណាស់មួយជួរជាអាហារថ្ងៃត្រង់នៅក្នុងក្រុមពីរផ្សេងគ្នានៅថ្ងៃតែមួយជាមួយនឹងពេលវេលាត្រួតគ្នា។",
+      "dayLabel": "ថ្ងៃ {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "ទល់នឹង",
+      "groupsLabel": "ក្រុម",
+      "renameGroup": "ឈ្មោះក្រុមសកម្ម",
+      "colStart": "ចាប់ផ្តើម",
+      "colEnd": "ចប់",
+      "colLabel": "ប្លុក / សម័យ",
+      "colKind": "ប្រភេទ",
+      "kindSession": "សម័យ",
+      "kindBreak": "សម្រាក",
+      "kindCeremony": "ពិធី",
+      "legendTitle": "រារាំងពណ៌",
+      "legendSession": "សម័យប្រជុំគណៈកម្មាធិការ",
+      "legendBreak": "សម្រាក / អាហារថ្ងៃត្រង់ / ប្រជុំ",
+      "legendCeremony": "ការបើក / បិទ / ពិធី",
+      "colLunch": "អាហារថ្ងៃត្រង់",
+      "emptyDay": "មិនទាន់មានប្លុកនៅឡើយទេ។ បន្ថែមប្លុក ឬប្រើផ្ទាំងក្រុមផ្សេងទៀត។",
+      "blockPlaceholder": "ឧ. ពិធីបើក · សម័យប្រជុំគណៈកម្មាធិការ ១",
+      "lunchCheckboxAria": "រាប់ជួរនេះជាអាហារថ្ងៃត្រង់សម្រាប់ការត្រួតពិនិត្យត្រួតគ្នា។",
+      "remove": "ដកចេញ",
+      "addBlock": "បន្ថែមប្លុកពេលវេលា",
+      "newGroupName": "ឈ្មោះក្រុមថ្មី។",
+      "newGroupPlaceholder": "ឧ. អង្គភាពសារព័ត៌មាន",
+      "defaultNewGroupName": "ក្រុមថ្មី។",
+      "addGroup": "បន្ថែមក្រុម",
+      "removeGroup": "ដកក្រុមចេញ",
+      "confirmRemoveGroup": "ដកក្រុមកាលវិភាគ \"{name}\" និងប្លុកទាំងអស់របស់វាសម្រាប់ទាំងពីរថ្ងៃ?",
+      "saveSchedule": "រក្សាទុកកាលវិភាគ",
+      "saving": "កំពុងរក្សាទុក...",
+      "saved": "បានរក្សាទុកកាលវិភាគ។",
+      "resetTemplate": "កំណត់ឡើងវិញទៅគំរូ",
+      "confirmReset": "កំណត់កាលវិភាគឡើងវិញទៅជាក្រុមបីលំនាំដើម ហើយសម្អាតប្លុកទាំងអស់?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 - កាលវិភាគមើលឃើញជាផ្លូវការ",
+        "body": "ផែនការរយៈពេលពីរថ្ងៃនេះត្រូវបានជួសជុលសម្រាប់ SEAMUN I 2027។ វាត្រូវគ្នានឹងកាលវិភាគមេដែលបានបោះពុម្ពផ្សាយ ហើយមិនអាចផ្លាស់ប្តូរនៅក្នុងកម្មវិធីបានទេ (រួមទាំងដោយលេខាធិការដ្ឋាន)។",
+        "legendTitle": "ពណ៌",
+        "legendArrival": "ការមកដល់ / ការចុះឈ្មោះ",
+        "legendDismissal": "ការបណ្តេញចេញ",
+        "legendCeremony": "ពិធី",
+        "legendBreak": "ការសម្រាកទូទៅ",
+        "legendSession": "វគ្គសិក្សា",
+        "legendLunch": "ញ៉ាំ (អាហារថ្ងៃត្រង់)",
+        "legendRelax": "ញាក់",
+        "legendSupport": "បន្ទប់ជំនួយ",
+        "legendStrategy": "បន្ទប់យុទ្ធសាស្ត្រ",
+        "legendSweep": "បោស",
+        "handbookLink": "បើកសៀវភៅណែនាំសន្និសីទ (PDF)",
+        "handbookHint": "ឯកសារមេផ្លូវការ; តារាងពេលវេលាចាក់សោ និងការដាក់ជាក្រុមនៅខាងក្រោម ធ្វើតាមការបោះពុម្ពផ្សាយនេះ។",
+        "committeeMatrixTitle": "អង្គជំនុំជម្រះតាមកាលវិភាគ",
+        "committeeMatrixHint": "អង្គជំនុំជម្រះនីមួយៗធ្វើតាមនាឡិកាថ្ងៃទី 1 / ថ្ងៃទី 2 នៃបទរបស់វា (ជួរឈរដែលមានឈ្មោះក្រុមដូចគ្នានៅក្នុងតារាងខាងលើ) ។",
+        "colScheduleTrack": "កាលវិភាគបទ",
+        "colChambers": "Chambers (ស្លាកនៅក្នុងព្រឹត្តិការណ៍នេះ)",
+        "advisorHint": "ប៉ះក្រុមមួយ បន្ទាប់មកមើលតារាងពេលវេលាទីប្រឹក្សា (A–D) ឬតារាងពេលវេលាប្រតិភូ/កៅអីសម្រាប់គណៈកម្មាធិការមួយ — មិនមែនទាំងពីរក្នុងពេលតែមួយទេ។",
+        "advisorOnlyHint": "ជ្រើសរើសកាលវិភាគរបស់អ្នក បន្ទាប់មកទីប្រឹក្សា A-D ដើម្បីមើលថ្ងៃរបស់ទីប្រឹក្សានោះ។",
+        "committeeOnlyHint": "តារាងពេលវេលាផ្លូវការរបស់គណៈកម្មាធិការរបស់អ្នក។ ខាងក្រោមនេះ ប្រៀបធៀបម៉ោងអាហារថ្ងៃត្រង់ជាមួយគណៈកម្មការផ្សេងទៀត។",
+        "pickTrack": "បទកាលវិភាគ៖",
+        "viewAllTeams": "ក្រុមទាំងអស់។",
+        "orPickTeam": "ឬក្រុម៖",
+        "viewAs": "មើលជា",
+        "modeAdvisor": "ទីប្រឹក្សា",
+        "modeCommittee": "គណៈកម្មាធិការ (ប្រតិភូ / ប្រធាន)",
+        "pickAdvisor": "ទីប្រឹក្សា",
+        "pickCommittee": "គណៈកម្មាធិការ",
+        "selectAdvisorPrompt": "ជ្រើសរើសទីប្រឹក្សា A, B, C, ឬ D ដើម្បីមើលតារាងពេលវេលានោះ។",
+        "selectCommitteePrompt": "ជ្រើសរើសគណៈកម្មាធិការរបស់អ្នកដើម្បីមើលតារាងពេលវេលាប្រតិភូ/កៅអី។",
+        "teamShort": {
+          "g1": "អាល់ហ្វា",
+          "g2": "បេតា",
+          "g3": "ហ្គាម៉ា",
+          "g4": "ដីសណ្ត",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "អាហារថ្ងៃត្រង់ត្រួតលើគ្នាជាមួយគណៈកម្មការផ្សេងទៀត។",
+        "body": "ប្រៀបធៀបតារាងអាហារថ្ងៃត្រង់របស់គណៈកម្មាធិការរបស់អ្នកជាមួយនឹងគណៈកម្មាធិការរហូតដល់ {max} ផ្សេងទៀត។ ជ្រើសរើសមួយថ្ងៃ បន្ទាប់មកជ្រើសរើសគណៈកម្មការខាងក្រោម។",
+        "pickCommittees": "ប្រៀបធៀបជាមួយ",
+        "noneSelected": "ជ្រើសរើសគណៈកម្មការមួយ ឬច្រើន ដើម្បីមើលនាទីអាហារថ្ងៃត្រង់ដែលបានចែករំលែក។",
+        "yourLunch": "អាហារថ្ងៃត្រង់របស់អ្នក។",
+        "theirLunch": "អាហារថ្ងៃត្រង់របស់ពួកគេ។",
+        "overlap": "អាហារថ្ងៃត្រង់រួមគ្នា៖ {start}–{end} ({minutes} នាទី)",
+        "noOverlap": "គ្មាន​ពេល​អាហារ​ថ្ងៃ​ត្រង់​រួម​នៅ​ថ្ងៃ​នេះ​ទេ។"
       }
     }
   },
@@ -1747,7 +1816,7 @@
     "parsedRowsSample": "ញែកជួរ {count} ។ គំរូ៖",
     "runImport": "ដំណើរការការនាំចូល",
     "generateMissingRandomCodes": "បង្កើតលេខកូដចៃដន្យដែលបាត់",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "សមាជិកសភា · កៅអី {seat}"
   },
   "chairAllocationMatrixPage": {
     "intro": "ម៉ាទ្រីសបែងចែកគណៈកម្មាធិការសម្រាប់វគ្គបច្ចុប្បន្នរបស់អ្នក។ នេះគឺបានតែអានសម្រាប់កៅអី និងឆ្លុះបញ្ចាំងពីការចាត់តាំងកៅអីសកម្ម និងលេខកូដផ្លាកសញ្ញា។",
@@ -1933,8 +2002,8 @@
         "hint": "ប្លង់និម្មិត & ជាន់តំណាង"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "របៀបវារៈ",
+        "hint": "ប្រធានបទបន្តផ្ទាល់ និងសរុបការបោះឆ្នោតក្នុងមួយរបៀបវារៈ"
       }
     }
   },
@@ -2562,16 +2631,19 @@
     "errStorageSetup": "កន្លែងផ្ទុករូបភាពកម្រងព័ត៌មានមិនត្រូវបានតំឡើងទេ។ នៅក្នុងគម្រោង Supabase សូមដំណើរការ migration 00100_profile_pictures_storage_bucket.sql ឬបង្កើតធុងផ្ទុកសាធារណៈដែលមានឈ្មោះថា profile-pictures (សូមមើល README)។",
     "errPublicUrl": "មិនអាចដោះស្រាយ URL សាធារណៈសម្រាប់រូបភាពដែលបានបង្ហោះទេ។",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "ជ្រើសរើស​គណៈកម្មការ…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "កំពុងប្តូរ...",
+    "dashboardCommitteeSwitchError": "មិន​អាច​ប្តូរ​គណៈកម្មាធិកា​រ។ ព្យាយាមម្តងទៀត ឬចូលតាមរយៈទ្វារបន្ទប់។",
+    "dashboardCommitteeAllocationsHeading": "ការបែងចែកនៅក្នុងសម័យប្រជុំរបស់គណៈកម្មាធិការនេះ។",
+    "dashboardCommitteeNoAllocationsListed": "គ្មានជួរបែងចែកត្រូវបានរាយបញ្ជីសម្រាប់វគ្គនេះទេ។",
+    "dashboardCommitteeApplySwitch": "ប្តូរផ្ទាំងគ្រប់គ្រងទៅគណៈកម្មាធិការនេះ។",
+    "timerExpiryAlarmTitle": "សំឡេងកម្មវិធីកំណត់ម៉ោង",
+    "timerExpiryAlarmLabel": "លេងសំឡេងរោទ៍ខ្លីៗ នៅពេលដែលការរាប់ថយក្រោយក្នុងកម្មវិធីណាមួយឈានដល់សូន្យ (កម្មវិធីកំណត់ម៉ោងនិយាយ ដែនកំណត់ពេលវេលានៃវគ្គ ពេលវេលាកំណត់នៃមជ្ឈមណ្ឌល)។",
+    "timerExpiryAlarmHint": "បិទតាមលំនាំដើម។ រក្សាទុកនៅក្នុងកម្មវិធីរុករកនេះតែប៉ុណ្ណោះ។",
+    "jobRole": "តួនាទីការងារ",
+    "jobRolePlaceholder": "ឧ. នាយក MUN គ្រូបង្រៀន (ជាជម្រើស)",
+    "advisorSettingsHint": "កម្រងព័ត៌មានបុគ្គលិកសាលា — មិនមានការបែងចែកថ្នាក់ ឬប្រតិភូទេ។"
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "សេចក្តីប្រកាសពេញលេញ",
       "daisAnnouncement": "សេចក្តីប្រកាសរបស់ Dais",
       "close": "បិទ",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "របៀបវារៈ"
     },
     "committeeControl": {
       "sessionNameLabel": "ឈ្មោះវគ្គ",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "និង",
       "announcements": "សេចក្តីប្រកាស",
       "sidebarUseSuffix": "- ឧបករណ៍មួយក្នុងមួយផ្ទាំង។",
-      "agenda": "Agenda"
+      "agenda": "របៀបវារៈ"
     },
     "history": {
       "title": "ប្រវត្តិសម័យ",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "លេខាធិការដ្ឋាន៖ ទស្សនៈប្រធាន និងប្រតិភូ",
+    "intro": "ជ្រើសរើសគណៈកម្មាធិការសម្រាប់ឧបករណ៍កៅអី និងកៅអីប្រតិភូដែលភ្ជាប់ទៅគណនីរបស់អ្នក បន្ទាប់មកប្តូរផ្ទៃ។ ការចូលនៅតែបើកមជ្ឈមណ្ឌលលេខាធិការដ្ឋានតាមលំនាំដើម។",
+    "bindRequiredHint": "ជ្រើសរើសគណៈកម្មាធិការជាប្រធាន និង/ឬអាសនៈតំណាងខាងក្រោម បន្ទាប់មកព្យាយាមម្តងទៀត។",
+    "chairCommitteeLabel": "គណៈកម្មាធិការជាន់ក្រោម",
+    "chairCommitteePlaceholder": "ជ្រើសរើស​គណៈកម្មការ…",
+    "delegateSeatLabel": "អាសនៈប្រតិភូ (ការបែងចែករបស់អ្នក)",
+    "delegateSeatPlaceholder": "ជ្រើសរើសកៅអី…",
+    "saveBindings": "រក្សាទុកកិច្ចការ",
+    "bindingsSaved": "បានរក្សាទុក។",
+    "switchViewHeading": "ប្តូរផ្ទាំងគ្រប់គ្រង",
+    "switchViewHelp": "លេខាធិការដ្ឋានបញ្ជូនអ្នកទៅ SMT វិញ។ ប្រធាន និង​ប្រតិភូ​បើក​សំបក​ក្នុង​កម្មវិធី​ដូចគ្នា​ដែល​កៅអី និង​ប្រតិភូ​ប្រើ​សម្រាប់​ព្រឹត្តិការណ៍​សកម្ម។",
+    "goSecretariat": "លេខាធិការដ្ឋាន",
+    "goChair": "ទិដ្ឋភាពកៅអី",
+    "goDelegate": "ទិដ្ឋភាពប្រតិភូ",
+    "surfaceSwitchError": "មិនអាចប្តូរទិដ្ឋភាពបានទេ។ ពិនិត្យមើលច្រកព្រឹត្តិការណ៍ និងការជ្រើសរើស។",
+    "pickChairFirst": "ជ្រើសរើសប្រធានគណៈកម្មការជាមុន (ឬរក្សាទុកកិច្ចការ)។",
+    "pickDelegateFirst": "ជ្រើសរើសកៅអីតំណាងជាមុន (ឬរក្សាទុកកិច្ចការ)។"
+  },
+  "advisorDashboard": {
+    "intro": "អ្នកអាចតាមដានសកម្មភាពរបស់គណៈប្រតិភូដែលបានចាត់តាំងរបស់អ្នក។ អ្នក​មិន​មាន​សិទ្ធិ​ចូល​ប្រើ​កំណត់​ត្រា​ទេ លុះ​ត្រា​តែ​កៅអី ឬ SMT បញ្ជូន​បន្ត​មួយ​ទៅ​អ្នក។",
+    "noAssignments": "មិន​មាន​តំណាង​ត្រូវ​បាន​ភ្ជាប់​ទៅ​គណនី​របស់​អ្នក​នៅ​ឡើយ​ទេ។ លេខាធិការដ្ឋាននឹងចាត់តាំងអ្នកពី SMT → ទីប្រឹក្សា។",
+    "delegateLinked": "បានភ្ជាប់គណនីប្រតិភូ",
+    "delegateNotLinked": "កៅអី​មិន​ទាន់​ភ្ជាប់​ទៅ​គណនី​តំណាង​នៅ​ឡើយ​ទេ។",
+    "viewProfile": "ប្រវត្តិរូប",
+    "viewDocuments": "ឯកសារ",
+    "viewVoting": "ការបោះឆ្នោត",
+    "forwardedNotes": "កំណត់ចំណាំដែលបានបញ្ជូនបន្ត",
+    "schedule": {
+      "intro": "ជ្រើសរើសកាលវិភាគរបស់អ្នក បន្ទាប់មកទីប្រឹក្សា A–D ដើម្បីមើលតារាងពេលវេលារបស់អ្នកប្រឹក្សានោះសម្រាប់ថ្ងៃ។"
+    },
+    "notes": {
+      "intro": "កៅអី Notes ឬ SMT បានជ្រើសរើសចែករំលែកជាមួយអ្នក។ អ្នកមិនអាចរកមើលព័ត៌មានកំណត់ចំណាំពេញលេញបានទេ។",
+      "empty": "មិន​ទាន់​មាន​កំណត់​សម្គាល់​ត្រូវ​បាន​បញ្ជូន​បន្ត​ទៅ​អ្នក​នៅ​ឡើយ​ទេ។",
+      "forwarded": "បញ្ជូនបន្ត"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "ទីប្រឹក្សា",
+    "subtitle": "អញ្ជើញគណនីទីប្រឹក្សាតាមអ៊ីមែល ហើយភ្ជាប់ទីប្រឹក្សានីមួយៗទៅកាន់កៅអីប្រតិភូមួយ។",
+    "selectEventFirst": "ជ្រើសរើសព្រឹត្តិការណ៍សន្និសីទសកម្មជាមុនសិន។",
+    "enterConferenceCode": "បញ្ចូលលេខកូដសន្និសីទ",
+    "inviteTitle": "អញ្ជើញទីប្រឹក្សា",
+    "inviteBody": "ផ្ញើតំណចូលគណនី (លំហូរដូចគ្នានឹងការអញ្ជើញប្រធាន)។ តួនាទីគណនីត្រូវបានកំណត់ទៅជាទីប្រឹក្សា។",
+    "inviteDisabled": "ការអញ្ជើញទាមទារ SUPABASE_SERVICE_ROLE_KEY លើការដាក់ពង្រាយនេះ។",
+    "emailLabel": "អ៊ីមែល",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "កំពុងផ្ញើ...",
+    "inviteButton": "ផ្ញើការអញ្ជើញ",
+    "assignTitle": "ចាត់តាំងប្រតិភូ",
+    "assignBody": "ជ្រើសរើសកៅអីតំណាងដែលភ្ជាប់។ ទីប្រឹក្សាម្នាក់ក្នុងមួយប្រតិភូ; ការកំណត់ឡើងវិញជំនួសតំណពីមុន។",
+    "advisorEmailLabel": "អ៊ីមែលទីប្រឹក្សា",
+    "delegateLabel": "កៅអីប្រតិភូ",
+    "delegatePlaceholder": "ជ្រើសរើសតំណាង…",
+    "assignedTo": "ទីប្រឹក្សា៖ {name}",
+    "saving": "កំពុងរក្សាទុក...",
+    "assignButton": "រក្សាទុកកិច្ចការ",
+    "advisorFallback": "ទីប្រឹក្សា"
   }
 }

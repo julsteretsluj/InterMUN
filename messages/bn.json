@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "যদি তারা ইতিমধ্যেই একজন প্রতিনিধি হিসাবে সাইন আপ করে থাকে, তাহলে তাদের এখানে প্রচার করুন যাতে তারা চেয়ার ড্যাশবোর্ড এবং কমিটির টুল পেতে পারে (কোন ইমেল পাঠানো হয়নি)।",
     "grantChairRole": "মঞ্জুর চেয়ার ভূমিকা",
     "chamberLabelFallback": "কমিটি অধিবেশন",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "ডাইস সিট",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "{committee} এর প্রধান চেয়ার",
+    "chairRoleCoOf": "{committee} এর কো-চেয়ার",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "একটি প্রস্তাব ইতিমধ্যেই ভোটের জন্য উন্মুক্ত। আরও বিবৃতি রেকর্ড করার আগে এটি বন্ধ করুন।",
     "statedMotionRecorded": "বিবৃত গতি রেকর্ড করা হয়েছে (এখনও ভোট দেওয়ার জন্য খোলা হয়নি)।",
     "statedMotionRemoved": "বিবৃত গতি সরানো হয়েছে.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "এজেন্ডা",
     "agendaTabHelp": "ফ্লোরের জন্য লাইভ বিষয় সেট করুন, তারপর সেই বিষয়ের জন্য সম্পূর্ণ প্রতিনিধি তালিকা সহ ভোটিং প্যানেল খুলতে একটি এজেন্ডা বিষয় আলতো চাপুন। নীচে, কমিটির ভোটের মোট সংখ্যা দেখতে একটি বিষয় বেছে নিন।",
     "agendaLiveBadge": "লাইভ",
     "agendaSetLive": "লাইভ বিষয় সেট করুন",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "সভা মুলতবি",
     "euPartySAndD": "প্রগতিশীল সমাজতন্ত্রী ও গণতন্ত্রী জোট (S&D)",
     "euPartyEpp": "ইউরোপীয় জনগণের দল (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "ইউরোপ পুনর্নবীকরণ (নবায়ন করুন)",
     "euPartyLeft": "ইউরোপীয় সংসদে বাম (The Left)",
     "euPartyGreen": "সবুজ/EFA (Greens/EFA)",
     "euPartyCAndR": "ইউরোপীয় রক্ষণশীল ও সংস্কারক (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "ইউরোপের জন্য দেশপ্রেমিক (PfE)",
     "euPartyIndependents": "দলমতহীন / NI",
     "euPartyTimeGuideTitle": "ইইউ দল অনুযায়ী সময় গাইড",
     "euPartySpeechPoolLabel": "বক্তৃতার সময়:",
@@ -471,7 +471,10 @@
     "home": "বাড়ি",
     "library": "লাইব্রেরি",
     "mainNavigationAria": "প্রধান নেভিগেশন",
-    "history": "History"
+    "history": "ইতিহাস",
+    "advisorHub": "উপদেষ্টা হাব",
+    "advisorNotes": "ফরোয়ার্ড করা নোট",
+    "conferenceSchedule": "সময়সূচী"
   },
   "dashboardLayout": {
     "helpCenter": "সাহায্য কেন্দ্র",
@@ -694,8 +697,13 @@
     "formalMotions": "আনুষ্ঠানিক গতিবিধি",
     "timer": "টাইমার",
     "smtProfile": "প্রোফাইল",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 এজেন্ডা",
+    "history": "ইতিহাস",
+    "advisorDashboard": "উপদেষ্টা ড্যাশবোর্ড",
+    "advisorNotes": "ফরোয়ার্ড করা নোট",
+    "delegateSchedule": "সম্মেলনের সময়সূচী",
+    "chairSchedule": "সম্মেলনের সময়সূচী",
+    "advisorSchedule": "সম্মেলনের সময়সূচী"
   },
   "setupPage": {
     "title": "সুপাবেস কনফিগার করা নেই",
@@ -731,7 +739,7 @@
       "overview": "ওভারভিউ",
       "checklist": "চেকলিস্ট",
       "jump": "ঝাঁপ দাও",
-      "chairEmails": "Chair emails"
+      "chairEmails": "চেয়ার ইমেল"
     },
     "jumpTo": "ঝাঁপ দাও",
     "tiles": {
@@ -788,8 +796,12 @@
         "hint": "একটি সমস্যা উত্থাপন"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "চেয়ার ইমেল",
+        "hint": "কমিটি দ্বারা ডাইস ইনবক্স"
+      },
+      "conferenceSchedule": {
+        "label": "সম্মেলনের সময়সূচী",
+        "hint": "টিম ট্র্যাক এবং উপদেষ্টা সময়সূচী (A-D)"
       }
     },
     "countdownCard": {
@@ -808,11 +820,14 @@
       "remainingM": "{minutes}মি"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "আপনার কমিটির (SEAMUN I) জন্য শেয়ার করা ডাইস ইনবক্স। নিচের ইমেল থেকে আপনার চেয়ারের সাথে যোগাযোগ করুন।",
+      "committeeColumn": "কমিটি",
+      "emailColumn": "চেয়ার ইনবক্স (ব্যবহারকারীর নাম)",
+      "openMail": "মেইল খুলুন",
+      "noMatch": "এই কমিটির জন্য এখনও কোনো প্রকাশিত চেয়ার ইনবক্স তালিকাভুক্ত করা হয়নি। SMT কে জিজ্ঞাসা করুন বা আপনার কমিটির সংক্ষিপ্ত বিবরণ দেখুন।"
+    },
+    "schedule": {
+      "intro": "আপনার টিম ট্র্যাক বাছুন, তারপর হয় উপদেষ্টা A-D বা আপনার কমিটি (প্রতিনিধি/চেয়ার)। একটি সময়ে শুধুমাত্র একটি ব্যক্তিগত সময়সূচী দেখানো হয়."
     }
   },
   "materialsExportCard": {
@@ -839,7 +854,7 @@
     "clauseText": "ধারার পাঠ্য",
     "clausePlaceholder": "…ধারার বাকি অংশ (তথ্য, পদক্ষেপ, বিবরণ)। সংরক্ষণের সময় উন্মোচনের পরে কমা যোগ হয়।",
     "preview": "প্রিভিউ",
-    "previewDash": "—",
+    "previewDash": "-",
     "submitting": "জমা দেওয়া হচ্ছে…",
     "submitClause": "ধারার সুপারিশ জমা দিন",
     "suggestionsHeading": "এই রেজোলিউশনের জন্য সুপারিশ",
@@ -939,8 +954,9 @@
       "officialLinks": "অফিসিয়াল লিঙ্ক",
       "roomCode": "রুম কোড",
       "settings": "সেটিংস",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "এজেন্ডা",
+      "history": "ইতিহাস",
+      "conferenceSchedule": "সময়সূচী"
     }
   },
   "smtNav": {
@@ -953,7 +969,8 @@
     "allocationPasswords": "বরাদ্দ পাসওয়ার্ড",
     "profile": "প্রোফাইল",
     "follow": "অনুসরণ করুন",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "উপদেষ্টারা"
   },
   "officialLinks": {
     "intro": "নথি, চুক্তি, প্রধান সংস্থা, প্রোগ্রাম, মিশন, এবং সদস্য তথ্য। একটি নতুন ট্যাবে খোলে৷",
@@ -1053,16 +1070,16 @@
     "liveFloorDescription": "এই কমিটির জন্য লাইভ স্পিকার সারি, রোল কল এবং টাইমার—সেশন ফ্লোরে একই ডেটা চেয়ারগুলি দেখা যায়।",
     "conferenceFallback": "সম্মেলন",
     "committeeFallback": "কমিটি",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "সচিবালয় তদারকি রোস্টার",
+    "secretariatMatrixSectionSecretariat": "সচিবালয়",
+    "secretariatMatrixSectionOperations": "অপারেশন",
+    "secretariatMatrixSectionMedia": "মিডিয়া",
+    "secretariatMatrixSmtEmail": "SMT ইমেইল",
+    "secretariatMatrixFinanceEmail": "অর্থ ইমেল",
+    "secretariatMatrixCommitteeOverviews": "কমিটির ওভারভিউ",
+    "secretariatMatrixRole": "ভূমিকা",
+    "secretariatMatrixName": "নাম",
+    "secretariatMatrixEmail": "ইমেইল"
   },
   "committeeNames": {
     "full": {
@@ -1256,7 +1273,11 @@
       "noRecipients": "কমপক্ষে একজন প্রাপক (প্রতিনিধি বা চেয়ার) নির্বাচন করুন।",
       "needAllocation": "নোট পাঠাতে আপনার একটি বরাদ্দ প্রয়োজন (বা চেয়ার হতে হবে)।",
       "sendFailed": "নোট পাঠাতে ব্যর্থ হয়েছে."
-    }
+    },
+    "forwardToAdvisor": "{name} এ ফরোয়ার্ড করুন",
+    "forwardedToAdvisor": "উপদেষ্টার কাছে পাঠানো হয়েছে",
+    "forwardedToAdvisorBadge": "(উপদেষ্টার কাছে)",
+    "advisorFallback": "উপদেষ্টা"
   },
   "adminPage": {
     "title": "ওয়েবসাইট প্রশাসন",
@@ -1400,14 +1421,14 @@
       "onlySmtGrantChair": "শুধুমাত্র সচিবালয় চেয়ার রোল মঞ্জুর করতে পারে।",
       "noAccountForEmail": "সেই ইমেলের সাথে এখনও কোনো অ্যাকাউন্ট নেই। প্রথমে একটি চেয়ার আমন্ত্রণ পাঠান।",
       "promotedToChairSuccess": "{email}-এর প্রোফাইল এখন একটি মঞ্চের চেয়ার।",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "এই আমন্ত্রণের জন্য একটি মঞ্চের আসন এবং কমিটি বেছে নিন।",
+      "daisSeatRowMissing": "সেই কমিটির জন্য একটি {seat} সারি খুঁজে পাওয়া যায়নি৷ ইভেন্টের জন্য বরাদ্দ ম্যাট্রিক্স সংরক্ষণ করার চেষ্টা করুন, তারপর আবার চেষ্টা করুন।",
+      "daisSeatAlreadyFilled": "সেই মঞ্চের আসনে ইতিমধ্যে একটি চেয়ার রয়েছে। বরাদ্দ ম্যাট্রিক্সে (বা অন্য টুল) বর্তমান ব্যক্তিকে প্রথমে আনঅ্যাসাইন করুন।",
+      "seatHeadChair": "হেড চেয়ার",
+      "seatCoChair": "সহ-সভাপতি",
+      "inviteSentButAllocationFailed": "আমন্ত্রণ পাঠানো হয়েছে এবং চেয়ারের ভূমিকা সেট করা হয়েছে, কিন্তু মঞ্চের আসনটি লিঙ্ক করা যায়নি: {error}। বরাদ্দ ম্যাট্রিক্স বা যোগাযোগ সমর্থন ঠিক করুন.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "সেই মঞ্চের আসনটি এই কমিটির সভাপতির পরিকল্পনার সাথে মেলে না।"
     },
     "allocationSignup": {
       "mustBeSignedIn": "আপনাকে অবশ্যই সাইন ইন করতে হবে।",
@@ -1425,6 +1446,24 @@
       "emailSubject": "InterMUN উপকরণ রপ্তানি ({range})",
       "emailSendConfigHint": "সার্ভারে SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS এবং ঐচ্ছিকভাবে MATERIALS_EXPORT_FROM সেট করুন৷",
       "exportEmailedTo": "{email} এ ইমেল রপ্তানি করুন। যদি আপনি এটি দেখতে না পান, স্প্যাম/জাঙ্ক চেক করুন."
+    },
+    "advisorStaff": {
+      "notSignedIn": "সাইন ইন করা হয়নি",
+      "onlySmt": "শুধুমাত্র সচিবালয় বা ওয়েবসাইট অ্যাডমিন উপদেষ্টাদের পরিচালনা করতে পারেন।",
+      "unauthorized": "অননুমোদিত।",
+      "invalidEmail": "একটি বৈধ ইমেল ঠিকানা লিখুন.",
+      "missingServiceRole": "সার্ভারে SUPABASE_SERVICE_ROLE_KEY অনুপস্থিত৷",
+      "missingAppUrl": "আমন্ত্রণ পুনঃনির্দেশ লিঙ্কগুলির জন্য NEXT_PUBLIC_APP_URL সেট করুন৷",
+      "emailAlreadyRegistered": "সেই ইমেলটির ইতিমধ্যেই একটি অ্যাকাউন্ট রয়েছে৷ অ্যাডমিনে উপদেষ্টার জন্য তাদের ভূমিকা সেট করুন, তারপর একজন প্রতিনিধি নিয়োগ করুন।",
+      "inviteRoleFailed": "আমন্ত্রণ পাঠানো হয়েছে কিন্তু উপদেষ্টার ভূমিকা সেট করা যায়নি: {message}",
+      "inviteSent": "{email} এ আমন্ত্রণ পাঠানো হয়েছে। তারা তাদের পাসওয়ার্ড সেট করার পরে একজন উপদেষ্টা হবে।",
+      "invalidAdvisorEmail": "উপদেষ্টার ইমেল লিখুন।",
+      "missingDelegate": "একটি প্রতিনিধি আসন নির্বাচন করুন।",
+      "advisorNotFound": "যে উপদেষ্টা ইমেল জন্য কোনো অ্যাকাউন্ট পাওয়া যায়নি.",
+      "notAdvisorRole": "সেই ব্যবহারকারী একজন উপদেষ্টা নয়। তাদের আমন্ত্রণ জানান বা প্রথমে উপদেষ্টার ভূমিকা নির্ধারণ করুন।",
+      "delegateNotFound": "প্রতিনিধি আসন পাওয়া যায়নি।",
+      "delegateUnlinked": "সেই আসনটিতে এখনও কোনও লিঙ্ক করা প্রতিনিধি অ্যাকাউন্ট নেই৷",
+      "assigned": "{country} এ উপদেষ্টা নিয়োগ করা হয়েছে।"
     }
   },
   "emails": {
@@ -1448,7 +1487,7 @@
     "eventDetails": "ইভেন্ট বিবরণ",
     "selectConferenceFirst": "প্রথমে ইভেন্ট গেট সহ একটি সম্মেলন নির্বাচন করুন, তারপরে এখানে ফিরে আসুন।",
     "committeeSessionsTitle": "এই অনুষ্ঠানে কমিটির অধিবেশন",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "প্রতিটি কার্ড একটি চেম্বার: সংক্ষিপ্ত লেবেল, অফিসিয়াল নাম, লোগো, দুটি এজেন্ডা বিষয় পর্যন্ত, RoP লিঙ্ক, শেয়ার করা ছয়-অক্ষরের রুম কোড (দ্বিতীয় গেট), এবং পদ্ধতি প্রোফাইল। এই ইভেন্টে রুম কোডগুলি চেম্বার জুড়ে অনন্য থাকতে হবে।",
     "noCommitteeSessions": "এই ইভেন্টের জন্য কোন কমিটির অধিবেশন নেই.",
     "eventName": "ইভেন্টের নাম",
     "tagline": "ট্যাগলাইন",
@@ -1491,81 +1530,111 @@
     "committeeCodeHelpPrefix": "ছয়টি অক্ষর: চেম্বারের আদ্যক্ষর + তিন অঙ্ক (নির্ধারক পরামর্শ:",
     "saveCommittee": "কমিটি সংরক্ষণ করুন",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "কমিটির লেবেল",
+    "committeeLabelPlaceholder": "যেমন ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "অফিসিয়াল কমিটির নাম",
+    "topic1Label": "বিষয় 1",
+    "topic2Label": "বিষয় 2 (ঐচ্ছিক)",
+    "topic2Placeholder": "দ্বিতীয় এজেন্ডা প্রশ্ন",
+    "topic2DisabledHint": "এই ক্ষেত্রটি সম্পাদনা করতে একটি দ্বিতীয় বিষয় সারি যোগ করুন।",
+    "addSecondTopic": "দ্বিতীয় বিষয় যোগ করুন",
+    "addingTopic": "যোগ করা হচ্ছে...",
+    "ropDocumentLink": "পদ্ধতির নিয়ম (নথির লিঙ্ক)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
-    "roomCodeHelpSuffix": ").",
+    "roomCodeLabel": "রুম কোড (দ্বিতীয় গেট)",
+    "roomCodeHelpPrefix": "ছয়টি অক্ষর বা অঙ্ক, এই চেম্বারের জন্য ভাগ করা হয়েছে (পরামর্শ:",
+    "roomCodeHelpSuffix": ")",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "দুই দিনের সম্মেলনের সময়সূচী",
+      "subtitle": "প্রতি প্রতিনিধি গোষ্ঠীর পরিকল্পনা ব্লক (একই গ্রুপ যা আপনি ক্লাস্টার কমিটিতে ব্যবহার করেন)। ব্লকের ধরন অনুসারে রঙ: অধিবেশন, বিরতি বা অনুষ্ঠান। ওভারল্যাপ চেক জন্য লাঞ্চ চিহ্নিত করুন. সক্রিয় ইভেন্ট সঙ্গে সংরক্ষিত.",
+      "day1Tab": "দিন 1",
+      "day2Tab": "দিন 2",
+      "lunchOverlapTab": "লাঞ্চ ওভারল্যাপ",
+      "lunchOverlapHelp": "ওভারল্যাপ দেখা যায় যখন দুটি গ্রুপ উভয়ের একটি সারি একই দিনে দুপুরের খাবার হিসাবে চিহ্নিত থাকে এবং সময়সীমাগুলিকে ছেদ করে।",
+      "noLunchOverlaps": "কোনো লাঞ্চ ওভারল্যাপ শনাক্ত করা যায়নি। ওভারল্যাপিং সময়ের সাথে একই দিনে দুটি ভিন্ন গ্রুপে লাঞ্চ হিসাবে অন্তত একটি সারি চিহ্নিত করুন।",
+      "dayLabel": "দিন {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "বনাম",
+      "groupsLabel": "গোষ্ঠী",
+      "renameGroup": "সক্রিয় গ্রুপের নাম",
+      "colStart": "শুরু করুন",
+      "colEnd": "শেষ",
+      "colLabel": "ব্লক / অধিবেশন",
+      "colKind": "টাইপ",
+      "kindSession": "অধিবেশন",
+      "kindBreak": "বিরতি",
+      "kindCeremony": "অনুষ্ঠান",
+      "legendTitle": "ব্লক রং",
+      "legendSession": "কমিটির অধিবেশন",
+      "legendBreak": "বিরতি / দুপুরের খাবার / ককাস",
+      "legendCeremony": "উদ্বোধন / সমাপনী / অনুষ্ঠান",
+      "colLunch": "দুপুরের খাবার",
+      "emptyDay": "এখনো কোনো ব্লক নেই। একটি ব্লক যোগ করুন বা অন্য গ্রুপ ট্যাব ব্যবহার করুন।",
+      "blockPlaceholder": "যেমন উদ্বোধনী অনুষ্ঠান · কমিটির অধিবেশন ১",
+      "lunchCheckboxAria": "ওভারল্যাপ চেকের জন্য লাঞ্চ হিসাবে এই সারি গণনা",
+      "remove": "সরান",
+      "addBlock": "সময় ব্লক যোগ করুন",
+      "newGroupName": "নতুন গ্রুপের নাম",
+      "newGroupPlaceholder": "যেমন প্রেস কর্পস",
+      "defaultNewGroupName": "নতুন গ্রুপ",
+      "addGroup": "গ্রুপ যোগ করুন",
+      "removeGroup": "গ্রুপ সরান",
+      "confirmRemoveGroup": "উভয় দিনের জন্য শিডিউল গ্রুপ \"{name}\" এবং এর সমস্ত ব্লক সরাবেন?",
+      "saveSchedule": "সময়সূচী সংরক্ষণ করুন",
+      "saving": "সংরক্ষণ করা হচ্ছে...",
+      "saved": "সময়সূচী সংরক্ষিত।",
+      "resetTemplate": "টেমপ্লেটে রিসেট করুন",
+      "confirmReset": "ডিফল্ট তিনটি গ্রুপে সময়সূচী পুনরায় সেট করুন এবং সমস্ত ব্লক সাফ করবেন?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 - অফিসিয়াল ভিজ্যুয়াল সময়সূচী",
+        "body": "এই দুই দিনের পরিকল্পনা SEAMUN I 2027-এর জন্য নির্দিষ্ট করা হয়েছে। এটি প্রকাশিত মাস্টার শিডিউলের সাথে মেলে এবং অ্যাপে (সচিব বিভাগ সহ) পরিবর্তন করা যাবে না।",
+        "legendTitle": "রং",
+        "legendArrival": "আগমন/রেজিস্ট্রেশন",
+        "legendDismissal": "বরখাস্ত",
+        "legendCeremony": "অনুষ্ঠান",
+        "legendBreak": "সাধারণ বিরতি",
+        "legendSession": "একাডেমিক সেশন",
+        "legendLunch": "খাও (দুপুরের খাবার)",
+        "legendRelax": "চিল",
+        "legendSupport": "সাপোর্ট রুম",
+        "legendStrategy": "কৌশল কক্ষ",
+        "legendSweep": "ঝাড়ু",
+        "handbookLink": "ওপেন কনফারেন্স হ্যান্ডবুক (পিডিএফ)",
+        "handbookHint": "অফিসিয়াল মাস্টার নথি; নীচের লক করা সময়সূচী এবং চেম্বার গ্রুপিং এই প্রকাশনা অনুসরণ করে।",
+        "committeeMatrixTitle": "সিডিউল ট্র্যাক দ্বারা কমিটির চেম্বার",
+        "committeeMatrixHint": "প্রতিটি চেম্বার তার ট্র্যাকের দিন 1 / দিন 2 ঘড়ি অনুসরণ করে (উপরের চার্টে একই গ্রুপের নাম সহ কলাম)।",
+        "colScheduleTrack": "সময়সূচী ট্র্যাক",
+        "colChambers": "চেম্বার (এই ইভেন্টে লেবেল)",
+        "advisorHint": "একটি দলে আলতো চাপুন, তারপর একটি উপদেষ্টা সময়সূচি (A–D) বা একটি কমিটির জন্য একটি প্রতিনিধি/চেয়ার সময়সূচী দেখুন - উভয়ই একবারে নয়।",
+        "advisorOnlyHint": "আপনার সময়সূচী ট্র্যাক বাছুন, তারপর উপদেষ্টার দিন দেখতে A-D উপদেষ্টা।",
+        "committeeOnlyHint": "আপনার কমিটির অফিসিয়াল সময়সূচী। নীচে, অন্যান্য কমিটির সাথে দুপুরের খাবারের সময় তুলনা করুন।",
+        "pickTrack": "সময়সূচী ট্র্যাক:",
+        "viewAllTeams": "সব দল",
+        "orPickTeam": "বা দল:",
+        "viewAs": "হিসাবে দেখুন",
+        "modeAdvisor": "উপদেষ্টা",
+        "modeCommittee": "কমিটি (প্রতিনিধি / সভাপতি)",
+        "pickAdvisor": "উপদেষ্টা",
+        "pickCommittee": "কমিটি",
+        "selectAdvisorPrompt": "সেই সময়সূচী দেখতে উপদেষ্টা A, B, C, বা D নির্বাচন করুন।",
+        "selectCommitteePrompt": "প্রতিনিধি/চেয়ার সময়সূচী দেখতে আপনার কমিটি নির্বাচন করুন।",
+        "teamShort": {
+          "g1": "আলফা",
+          "g2": "বেটা",
+          "g3": "গামা",
+          "g4": "ডেল্টা",
+          "support": "এপসিলন"
+        }
+      },
+      "lunchOverlap": {
+        "title": "লাঞ্চ অন্যান্য কমিটির সাথে ওভারল্যাপ",
+        "body": "{max} পর্যন্ত অন্যান্য কমিটির সাথে আপনার কমিটির লাঞ্চ উইন্ডোর তুলনা করুন। একটি দিন বেছে নিন, তারপর নিচের কমিটিগুলি নির্বাচন করুন।",
+        "pickCommittees": "সাথে তুলনা করুন",
+        "noneSelected": "ভাগ করা লাঞ্চ মিনিট দেখতে এক বা একাধিক কমিটি নির্বাচন করুন।",
+        "yourLunch": "আপনার লাঞ্চ",
+        "theirLunch": "তাদের দুপুরের খাবার",
+        "overlap": "ভাগ করা লাঞ্চ: {start}–{end} ({minutes} মিনিট)",
+        "noOverlap": "এই দিনে কোন ভাগ করা লাঞ্চ সময় নেই।"
       }
     }
   },
@@ -1621,7 +1690,7 @@
     "parsedRowsSample": "পার্স করা {count} সারি(গুলি)। নমুনা:",
     "runImport": "আমদানি চালান",
     "generateMissingRandomCodes": "অনুপস্থিত র্যান্ডম কোড তৈরি করুন",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "সংসদ সদস্য · আসন {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "কমিটি",
@@ -1766,8 +1835,8 @@
         "hint": "ভার্চুয়াল লেআউট এবং প্রতিনিধি ফ্লোর"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "এজেন্ডা",
+        "hint": "এজেন্ডা আইটেম প্রতি লাইভ বিষয় এবং ভোটের মোট সংখ্যা"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "পুরস্কার"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "নির্বাচন কমিটি…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "পাল্টানো হচ্ছে...",
+    "dashboardCommitteeSwitchError": "কমিটি পরিবর্তন করা যায়নি। আবার চেষ্টা করুন বা রুমের গেট দিয়ে সাইন ইন করুন।",
+    "dashboardCommitteeAllocationsHeading": "এই কমিটির অধিবেশনে বরাদ্দ",
+    "dashboardCommitteeNoAllocationsListed": "এই অধিবেশনের জন্য কোনো বরাদ্দ সারি তালিকাভুক্ত করা হয় না।",
+    "dashboardCommitteeApplySwitch": "এই কমিটিতে ড্যাশবোর্ড পরিবর্তন করুন",
+    "timerExpiryAlarmTitle": "টাইমার শব্দ",
+    "timerExpiryAlarmLabel": "যেকোনো ইন-অ্যাপ কাউন্টডাউন শূন্যে পৌঁছালে একটি ছোট চাঁই বাজান (স্পিচ টাইমার, সেশনের সময়সীমা, হাবের সময়সীমা)।",
+    "timerExpiryAlarmHint": "ডিফল্টরূপে বন্ধ। শুধুমাত্র এই ব্রাউজারে সংরক্ষিত।",
+    "jobRole": "কাজের ভূমিকা",
+    "jobRolePlaceholder": "যেমন MUN পরিচালক, শিক্ষক (ঐচ্ছিক)",
+    "advisorSettingsHint": "স্কুল স্টাফ প্রোফাইল — কোন গ্রেড বা প্রতিনিধি বরাদ্দ নেই।"
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "সম্পূর্ণ ঘোষণা",
       "daisAnnouncement": "ডাইস ঘোষণা",
       "close": "বন্ধ",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "এজেন্ডা"
     },
     "committeeControl": {
       "sessionNameLabel": "সেশনের নাম",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "এবং",
       "announcements": "ঘোষণা",
       "sidebarUseSuffix": "- প্রতি ট্যাবে একটি টুল।",
-      "agenda": "Agenda"
+      "agenda": "এজেন্ডা"
     },
     "history": {
       "title": "সেশনের ইতিহাস",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "সচিবালয়: চেয়ার এবং প্রতিনিধি মতামত",
+    "intro": "চেয়ার টুলের জন্য একটি কমিটি এবং আপনার অ্যাকাউন্টের সাথে সংযুক্ত একটি প্রতিনিধি আসন বেছে নিন, তারপর সারফেস পরিবর্তন করুন। সাইন-ইন এখনও ডিফল্টরূপে সচিবালয় হাব খোলে।",
+    "bindRequiredHint": "নীচে একটি চেয়ার কমিটি এবং/অথবা প্রতিনিধি আসন বেছে নিন, তারপর আবার চেষ্টা করুন।",
+    "chairCommitteeLabel": "চেয়ার ফ্লোর কমিটি",
+    "chairCommitteePlaceholder": "নির্বাচন কমিটি…",
+    "delegateSeatLabel": "প্রতিনিধি আসন (আপনার বরাদ্দ)",
+    "delegateSeatPlaceholder": "আসন নির্বাচন করুন...",
+    "saveBindings": "অ্যাসাইনমেন্ট সংরক্ষণ করুন",
+    "bindingsSaved": "সংরক্ষিত",
+    "switchViewHeading": "ড্যাশবোর্ড পরিবর্তন করুন",
+    "switchViewHelp": "সচিবালয় আপনাকে এসএমটি-তে ফেরত দেয়। চেয়ার এবং ডেলিগেট একই ইন-অ্যাপ শেল খুলুন বাস্তব চেয়ার এবং প্রতিনিধি সক্রিয় ইভেন্টের জন্য ব্যবহার করে।",
+    "goSecretariat": "সচিবালয়",
+    "goChair": "চেয়ার ভিউ",
+    "goDelegate": "প্রতিনিধি ভিউ",
+    "surfaceSwitchError": "দৃশ্য পরিবর্তন করা যায়নি. ইভেন্ট গেট এবং নির্বাচন চেক করুন.",
+    "pickChairFirst": "প্রথমে একটি চেয়ার কমিটি নির্বাচন করুন (বা অ্যাসাইনমেন্টগুলি সংরক্ষণ করুন)।",
+    "pickDelegateFirst": "প্রথমে একটি প্রতিনিধি আসন নির্বাচন করুন (বা অ্যাসাইনমেন্টগুলি সংরক্ষণ করুন)।"
+  },
+  "advisorDashboard": {
+    "intro": "আপনি আপনার নির্ধারিত প্রতিনিধি কমিটির কার্যকলাপ নিরীক্ষণ করতে পারেন। একটি চেয়ার বা SMT আপনার কাছে একটি ফরোয়ার্ড না করা পর্যন্ত আপনার নোটগুলিতে অ্যাক্সেস নেই৷",
+    "noAssignments": "আপনার অ্যাকাউন্টের সাথে এখনো কোনো প্রতিনিধি লিঙ্ক করা হয়নি। সেক্রেটারিয়েট আপনাকে এসএমটি → অ্যাডভাইজার থেকে বরাদ্দ করবে।",
+    "delegateLinked": "প্রতিনিধি অ্যাকাউন্ট লিঙ্ক করা হয়েছে",
+    "delegateNotLinked": "সিট এখনো কোনো প্রতিনিধি অ্যাকাউন্টের সাথে লিঙ্ক করা হয়নি",
+    "viewProfile": "প্রোফাইল",
+    "viewDocuments": "নথিপত্র",
+    "viewVoting": "ভোট",
+    "forwardedNotes": "ফরোয়ার্ড করা নোট",
+    "schedule": {
+      "intro": "আপনার সময়সূচী ট্র্যাক বাছুন, তারপর উপদেষ্টা A-D দিনের জন্য সেই উপদেষ্টার সময়সূচী দেখতে।"
+    },
+    "notes": {
+      "intro": "নোট চেয়ার বা এসএমটি আপনার সাথে শেয়ার করতে বেছে নিয়েছে। আপনি সম্পূর্ণ নোট ফিড ব্রাউজ করতে পারবেন না.",
+      "empty": "আপনার কাছে এখনও কোনো নোট পাঠানো হয়নি।",
+      "forwarded": "ফরোয়ার্ড করা হয়েছে"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "উপদেষ্টারা",
+    "subtitle": "ইমেলের মাধ্যমে উপদেষ্টার অ্যাকাউন্টগুলিকে আমন্ত্রণ জানান এবং প্রতিটি উপদেষ্টাকে একটি প্রতিনিধি আসনে লিঙ্ক করুন৷",
+    "selectEventFirst": "প্রথমে একটি সক্রিয় সম্মেলন ইভেন্ট চয়ন করুন।",
+    "enterConferenceCode": "কনফারেন্স কোড লিখুন",
+    "inviteTitle": "উপদেষ্টাকে আমন্ত্রণ জানান",
+    "inviteBody": "একটি সাইন-ইন লিঙ্ক পাঠায় (চেয়ার আমন্ত্রণের মতো একই প্রবাহ)। অ্যাকাউন্ট ভূমিকা উপদেষ্টা সেট করা হয়.",
+    "inviteDisabled": "এই স্থাপনার জন্য আমন্ত্রণগুলির SUPABASE_SERVICE_ROLE_KEY প্রয়োজন৷",
+    "emailLabel": "ইমেইল",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "পাঠানো হচ্ছে...",
+    "inviteButton": "আমন্ত্রণ পাঠান",
+    "assignTitle": "প্রতিনিধি বরাদ্দ করুন",
+    "assignBody": "একটি লিঙ্কযুক্ত প্রতিনিধি আসন চয়ন করুন। প্রতি প্রতিনিধি একজন উপদেষ্টা; পুনরায় বরাদ্দ পূর্ববর্তী লিঙ্ক প্রতিস্থাপন.",
+    "advisorEmailLabel": "উপদেষ্টা ইমেল",
+    "delegateLabel": "প্রতিনিধি আসন",
+    "delegatePlaceholder": "প্রতিনিধি নির্বাচন করুন...",
+    "assignedTo": "উপদেষ্টা: {name}",
+    "saving": "সংরক্ষণ করা হচ্ছে...",
+    "assignButton": "অ্যাসাইনমেন্ট সংরক্ষণ করুন",
+    "advisorFallback": "উপদেষ্টা"
   }
 }

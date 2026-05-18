@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "ຖ້າພວກເຂົາລົງທະບຽນເປັນຜູ້ແທນແລ້ວ, ສົ່ງເສີມພວກເຂົາຢູ່ທີ່ນີ້ເພື່ອໃຫ້ພວກເຂົາໄດ້ຮັບປະທານ dashboard ແລະເຄື່ອງມືຂອງຄະນະກໍາມະການ (ບໍ່ມີອີເມວສົ່ງ).",
     "grantChairRole": "ມອບບົດບາດປະທານ",
     "chamberLabelFallback": "ກອງປະຊຸມຄະນະກຳມະການ",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "ບ່ອນນັ່ງ Dais",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "ປະທານ {committee}",
+    "chairRoleCoOf": "ປະທານຮ່ວມຂອງ {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -326,7 +326,7 @@
     "noDelegatesSeatedYet": "ຍັງ​ບໍ່​ທັນ​ມີ​ຜູ້​ແທນ​ທີ່​ນັ່ງ​ຢູ່​ໃນ​ຄະນະ​ກຳມະການ​ນີ້​ເທື່ອ.",
     "abstain": "ງົດ",
     "unitMinutesShort": "ມ",
-    "unitSecondsShort": "s",
+    "unitSecondsShort": "ດ",
     "apply": "ສະໝັກ",
     "motionControl": "ການຄວບຄຸມການເຄື່ອນໄຫວ",
     "advancedSpeakerResetClock": "ລຳໂພງຂັ້ນສູງ ແລະຣີເຊັດໂມງຕໍ່ລຳໂພງ.",
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "ການເຄື່ອນໄຫວໄດ້ຖືກເປີດໃຫ້ລົງຄະແນນສຽງແລ້ວ. ປິດມັນກ່ອນທີ່ຈະບັນທຶກຂໍ້ຄວາມເພີ່ມເຕີມ.",
     "statedMotionRecorded": "ການ​ເຄື່ອນ​ໄຫວ​ທີ່​ໄດ້​ບັນ​ທຶກ​ໄວ້ (ຍັງ​ບໍ່​ທັນ​ໄດ້​ເປີດ​ສໍາ​ລັບ​ການ​ລົງ​ຄະ​ແນນ​ສຽງ​)​.",
     "statedMotionRemoved": "ລຶບການເຄື່ອນໄຫວທີ່ລະບຸໄວ້ແລ້ວ.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "ວາລະ",
     "agendaTabHelp": "ກໍານົດຫົວຂໍ້ສົດສໍາລັບພື້ນເຮືອນ, ຫຼັງຈາກນັ້ນແຕະຫົວຂໍ້ກອງປະຊຸມເພື່ອເປີດກະດານລົງຄະແນນສຽງທີ່ມີລາຍຊື່ຜູ້ແທນເຕັມຮູບແບບສໍາລັບຫົວຂໍ້ນັ້ນ. ຂ້າງລຸ່ມນີ້, ເລືອກຫົວຂໍ້ໃດຫນຶ່ງເພື່ອເບິ່ງຈໍານວນການລົງຄະແນນຂອງຄະນະກໍາມະການ.",
     "agendaLiveBadge": "ດໍາລົງຊີວິດ",
     "agendaSetLive": "ກໍານົດຫົວຂໍ້ສົດ",
@@ -423,7 +423,7 @@
     "euSessionPhase_adjourned": "ປິດກອງປະຊຸມ",
     "euPartySAndD": "ພັນທະມິດຜູ້ຊອກຫາຄວາມຄືບໜ້າ ສັງຄົມນິຍົມ ແລະ ປະຊາທິປະໄຕ (S&D)",
     "euPartyEpp": "ພັກປະຊາຊົນຢູໂຣບ (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "ຕໍ່ອາຍຸເອີຣົບ (ຕໍ່ອາຍຸ)",
     "euPartyLeft": "ຊ້າຍໃນສະພາຢູໂຣບ (The Left)",
     "euPartyGreen": "ຂຽວ/EFA (Greens/EFA)",
     "euPartyCAndR": "ຜູ້ອະນຸລັກ ແລະ ປະຕິຮູບຢູໂຣບ (ECR)",
@@ -543,7 +543,10 @@
     "home": "ບ້ານ",
     "library": "ຫໍສະໝຸດ",
     "mainNavigationAria": "ການນໍາທາງຕົ້ນຕໍ",
-    "history": "History"
+    "history": "ປະຫວັດສາດ",
+    "advisorHub": "ສູນທີ່ປຶກສາ",
+    "advisorNotes": "ບັນທຶກທີ່ສົ່ງຕໍ່",
+    "conferenceSchedule": "ຕາຕະລາງ"
   },
   "dashboardLayout": {
     "helpCenter": "ສູນຊ່ວຍເຫຼືອ",
@@ -766,8 +769,13 @@
     "formalMotions": "ການເຄື່ອນໄຫວຢ່າງເປັນທາງການ",
     "timer": "ໂມງຈັບເວລາ",
     "smtProfile": "ໂປຣໄຟລ໌",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 ວາລະ",
+    "history": "ປະຫວັດສາດ",
+    "advisorDashboard": "ກະດານທີ່ປຶກສາ",
+    "advisorNotes": "ບັນທຶກທີ່ສົ່ງຕໍ່",
+    "delegateSchedule": "ຕາຕະລາງການປະຊຸມ",
+    "chairSchedule": "ຕາຕະລາງການປະຊຸມ",
+    "advisorSchedule": "ຕາຕະລາງການປະຊຸມ"
   },
   "setupPage": {
     "title": "Supabase ບໍ່ໄດ້ຕັ້ງຄ່າ",
@@ -803,7 +811,7 @@
       "overview": "ພາບລວມ",
       "checklist": "ລາຍການກວດ",
       "jump": "ໄປຫາ",
-      "chairEmails": "Chair emails"
+      "chairEmails": "ອີເມວປະທານ"
     },
     "jumpTo": "ໄປຫາ",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "ຍົກບັນຫາ"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "ອີເມວປະທານ",
+        "hint": "Dais inboxes ໂດຍຄະນະກໍາມະການ"
+      },
+      "conferenceSchedule": {
+        "label": "ຕາຕະລາງການປະຊຸມ",
+        "hint": "ຕາຕະລາງຕິດຕາມທີມ ແລະທີ່ປຶກສາ (A–D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}ນ"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "ແບ່ງປັນກ່ອງຈົດໝາຍສຳລັບຄະນະກໍາມະການຂອງທ່ານ (SEAMUN I). ຕິດຕໍ່ເກົ້າອີ້ຂອງເຈົ້າຈາກອີເມວຂ້າງລຸ່ມນີ້.",
+      "committeeColumn": "ຄະນະກໍາມະການ",
+      "emailColumn": "ກ່ອງຈົດໝາຍເກົ້າອີ້ (ຊື່ຜູ້ໃຊ້)",
+      "openMail": "ເປີດຈົດໝາຍ",
+      "noMatch": "ຍັງບໍ່ທັນມີກ່ອງຈົດໝາຍຂອງປະທານທີ່ເຜີຍແຜ່ຢູ່ໃນລາຍການສໍາລັບຄະນະກໍາມະການນີ້ເທື່ອ. ຖາມ SMT ຫຼືກວດເບິ່ງໂດຍຫຍໍ້ຂອງຄະນະກໍາມະການຂອງທ່ານ."
+    },
+    "schedule": {
+      "intro": "ເລືອກການຕິດຕາມທີມງານຂອງທ່ານ, ຈາກນັ້ນທີ່ປຶກສາ A–D ຫຼືຄະນະກໍາມະການຂອງທ່ານ (ຜູ້ແທນ / ປະທານ). ມີພຽງຕາຕະລາງເວລາສ່ວນຕົວອັນດຽວເທົ່ານັ້ນທີ່ສະແດງຕໍ່ຄັ້ງ."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ",
       "roomCode": "ລະຫັດຫ້ອງ",
       "settings": "ການຕັ້ງຄ່າ",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "ວາລະ",
+      "history": "ປະຫວັດສາດ",
+      "conferenceSchedule": "ຕາຕະລາງ"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "ລະຫັດຜ່ານການຈັດສັນ",
     "profile": "ໂປຣໄຟລ໌",
     "follow": "ປະຕິບັດຕາມ",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "ທີ່ປຶກສາ"
   },
   "officialLinks": {
     "intro": "ເອກະສານ, ສົນທິສັນຍາ, ອົງການຈັດຕັ້ງຕົ້ນຕໍ, ໂຄງການ, ພາລະກິດ, ແລະຂໍ້ມູນສະມາຊິກ. ເປີດໃນແຖບໃໝ່.",
@@ -1136,16 +1153,16 @@
     "liveFloorDescription": "ຄິວລຳໂພງສົດ, ໂທມ້ວນ, ແລະໂມງຈັບເວລາສຳລັບຄະນະກຳມາທິການນີ້—ປະທານຂໍ້ມູນອັນດຽວກັນທີ່ເຫັນຢູ່ຊັ້ນຂອງກອງປະຊຸມ.",
     "conferenceFallback": "ກອງປະຊຸມ",
     "committeeFallback": "ຄະນະກໍາມະການ",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "ບັນຊີລາຍການກວດກາຂອງກອງເລຂາ",
+    "secretariatMatrixSectionSecretariat": "ເລຂານຸການ",
+    "secretariatMatrixSectionOperations": "ການດໍາເນີນງານ",
+    "secretariatMatrixSectionMedia": "ສື່ມວນຊົນ",
+    "secretariatMatrixSmtEmail": "ອີເມວ SMT",
+    "secretariatMatrixFinanceEmail": "ອີເມວການເງິນ",
+    "secretariatMatrixCommitteeOverviews": "ພາບລວມຂອງຄະນະກໍາມະການ",
+    "secretariatMatrixRole": "ບົດບາດ",
+    "secretariatMatrixName": "ຊື່",
+    "secretariatMatrixEmail": "ອີເມວ"
   },
   "committeeNames": {
     "full": {
@@ -1382,7 +1399,11 @@
       "noRecipients": "ເລືອກຜູ້ຮັບຢ່າງໜ້ອຍໜຶ່ງຄົນ (ຄະນະຜູ້ແທນ ຫຼືປະທານ).",
       "needAllocation": "ທ່ານຕ້ອງການການຈັດສັນເພື່ອສົ່ງບັນທຶກ (ຫຼືເປັນເກົ້າອີ້).",
       "sendFailed": "ສົ່ງບັນທຶກບໍ່ສຳເລັດ."
-    }
+    },
+    "forwardToAdvisor": "ສົ່ງຕໍ່ໃຫ້ {name}",
+    "forwardedToAdvisor": "ສົ່ງຕໍ່ທີ່ປຶກສາ",
+    "forwardedToAdvisorBadge": "(ທີ່​ປຶກ​ສາ​)",
+    "advisorFallback": "ທີ່ປຶກສາ"
   },
   "adminPage": {
     "title": "ການບໍລິຫານເວັບໄຊທ໌",
@@ -1526,14 +1547,14 @@
       "onlySmtGrantChair": "ມີພຽງແຕ່ເລຂານຸການເທົ່ານັ້ນທີ່ສາມາດໃຫ້ບົດບາດເປັນປະທານ.",
       "noAccountForEmail": "ບໍ່ມີບັນຊີກັບອີເມວນັ້ນເທື່ອ. ສົ່ງຄຳເຊີນປະທານກ່ອນ.",
       "promotedToChairSuccess": "ໂປຣໄຟລ໌ສຳລັບ {email} ດຽວນີ້ເປັນເກົ້າອີ້ dais.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "ເລືອກບ່ອນນັ່ງ dais ແລະຄະນະກໍາມະການສໍາລັບການເຊື້ອເຊີນນີ້.",
+      "daisSeatRowMissing": "ບໍ່ສາມາດຊອກຫາແຖວ {seat} ສໍາລັບຄະນະກໍາມະການນັ້ນ. ລອງບັນທຶກເມທຣິກການຈັດສັນສຳລັບນັດໝາຍ, ຈາກນັ້ນລອງອີກຄັ້ງ.",
+      "daisSeatAlreadyFilled": "ບ່ອນນັ່ງ dais ມີເກົ້າອີ້ແລ້ວ. ຍົກເລີກການມອບໝາຍຄົນປັດຈຸບັນໃນເມທຣິກການຈັດສັນ (ຫຼືເຄື່ອງມືອື່ນ) ກ່ອນ.",
+      "seatHeadChair": "ຫົວຫນ້າ",
+      "seatCoChair": "ປະທານຮ່ວມ",
+      "inviteSentButAllocationFailed": "ການເຊີນທີ່ສົ່ງແລະວາງບົດບາດປະທານ, ແຕ່ບ່ອນນັ່ງ dais ບໍ່ສາມາດເຊື່ອມຕໍ່ໄດ້: {error}. ແກ້ໄຂຕາຕະລາງການຈັດສັນຫຼືຕິດຕໍ່ສະຫນັບສະຫນູນ.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "ບ່ອນນັ່ງຂອງ dais ນັ້ນບໍ່ກົງກັບແຜນການປະທານຂອງຄະນະກໍາມະການນີ້."
     },
     "allocationSignup": {
       "mustBeSignedIn": "ທ່ານຕ້ອງໄດ້ເຂົ້າສູ່ລະບົບ.",
@@ -1551,6 +1572,24 @@
       "emailSubject": "ການສົ່ງອອກວັດສະດຸ InterMUN ({range})",
       "emailSendConfigHint": "ຕັ້ງ SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS ແລະເປັນທາງເລືອກ MATERIALS_EXPORT_FROM ໃນເຊີບເວີ.",
       "exportEmailedTo": "ສົ່ງອີເມລ໌ໄປ {email}. ຖ້າທ່ານບໍ່ເຫັນມັນ, ໃຫ້ກວດເບິ່ງ spam / junk."
+    },
+    "advisorStaff": {
+      "notSignedIn": "ບໍ່ໄດ້ເຂົ້າສູ່ລະບົບ.",
+      "onlySmt": "ມີພຽງແຕ່ເລຂານຸການ ຫຼືຜູ້ເບິ່ງແຍງເວັບໄຊທ໌ສາມາດຈັດການທີ່ປຶກສາໄດ້.",
+      "unauthorized": "ບໍ່ໄດ້ຮັບອະນຸຍາດ.",
+      "invalidEmail": "ໃສ່ທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ.",
+      "missingServiceRole": "ເຊີບເວີຂາດ SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "ຕັ້ງ NEXT_PUBLIC_APP_URL ສໍາລັບການເຊື່ອມຕໍ່ການປ່ຽນເສັ້ນທາງເຊີນ.",
+      "emailAlreadyRegistered": "ອີເມວນັ້ນມີບັນຊີຢູ່ແລ້ວ. ກໍານົດພາລະບົດບາດຂອງເຂົາເຈົ້າເປັນທີ່ປຶກສາໃນ admin, ຫຼັງຈາກນັ້ນແຕ່ງຕັ້ງຜູ້ແທນ.",
+      "inviteRoleFailed": "ສົ່ງຄຳເຊີນແລ້ວແຕ່ບໍ່ສາມາດຕັ້ງບົດບາດທີ່ປຶກສາໄດ້: {message}",
+      "inviteSent": "ສົ່ງຄຳເຊີນຫາ {email}. ພວກເຂົາເຈົ້າຈະເປັນທີ່ປຶກສາຫຼັງຈາກການຕັ້ງລະຫັດຜ່ານຂອງເຂົາເຈົ້າ.",
+      "invalidAdvisorEmail": "ໃສ່ອີເມວຂອງທີ່ປຶກສາ.",
+      "missingDelegate": "ເລືອກບ່ອນນັ່ງຜູ້ແທນ.",
+      "advisorNotFound": "ບໍ່ພົບບັນຊີສໍາລັບອີເມວທີ່ປຶກສານັ້ນ.",
+      "notAdvisorRole": "ຜູ້ໃຊ້ນັ້ນບໍ່ແມ່ນທີ່ປຶກສາ. ເຊີນເຂົາເຈົ້າ ຫຼືຕັ້ງບົດບາດເປັນທີ່ປຶກສາກ່ອນ.",
+      "delegateNotFound": "ບໍ່ພົບບ່ອນນັ່ງຜູ້ແທນ.",
+      "delegateUnlinked": "ບ່ອນນັ່ງນັ້ນບໍ່ມີບັນຊີຕົວແທນທີ່ເຊື່ອມໂຍງເທື່ອ.",
+      "assigned": "ມອບໝາຍໃຫ້ທີ່ປຶກສາ{country}."
     }
   },
   "emails": {
@@ -1574,7 +1613,7 @@
     "eventDetails": "ລາຍລະອຽດເຫດການ",
     "selectConferenceFirst": "ເລືອກກອງປະຊຸມທີ່ມີປະຕູນັດໝາຍກ່ອນ, ຈາກນັ້ນກັບຄືນບ່ອນນີ້.",
     "committeeSessionsTitle": "ກອງ​ປະ​ຊຸມ​ຄະ​ນະ​ກໍາ​ມະ​ໃນ​ເຫດ​ການ​ນີ້​",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "ແຕ່ລະບັດແມ່ນຫນຶ່ງຫ້ອງ: ປ້າຍຊື່ສັ້ນ, ຊື່ທາງການ, ໂລໂກ້, ເຖິງສອງຫົວຂໍ້ວາລະ, ການເຊື່ອມຕໍ່ RoP, ລະຫັດຫ້ອງຫົກຕົວອັກສອນທີ່ໃຊ້ຮ່ວມກັນ (ປະຕູທີສອງ), ແລະໂປຣໄຟລ໌ຂັ້ນຕອນ. ລະຫັດຫ້ອງຈະຕ້ອງບໍ່ຊໍ້າກັນທົ່ວຫ້ອງໃນເຫດການນີ້.",
     "noCommitteeSessions": "ບໍ່ມີກອງປະຊຸມຄະນະກໍາມະການສໍາລັບເຫດການນີ້.",
     "eventName": "ຊື່ເຫດການ",
     "tagline": "ປ້າຍກຳກັບ",
@@ -1588,7 +1627,7 @@
     "errorPublicUrl": "ບໍ່ສາມາດແກ້ໄຂ URL ສາທາລະນະສໍາລັບຮູບພາບທີ່ອັບໂຫລດໄດ້.",
     "errorUploadFailed": "ອັບໂຫຼດບໍ່ສຳເລັດ.",
     "sessionTitle": "ຊື່ເຊດຊັນ",
-    "chamberLabel": "Chamber / label",
+    "chamberLabel": "Chamber / ປ້າຍ",
     "officialCommitteeName": "ຊື່ຄະນະກໍາມະການຢ່າງເປັນທາງການ (SMT grid)",
     "officialCommitteeNamePlaceholder": "ຕົວຢ່າງ: ອົງການອະນາໄມໂລກ",
     "chairNames": "ຊື່ປະທານ",
@@ -1617,81 +1656,111 @@
     "committeeCodeHelpPrefix": "ຫົກ​ຕົວ​ອັກ​ສອນ​: ຕົ້ນ​ສະ​ບັບ chamber + ສາມ​ຕົວ​ເລກ (ຄໍາ​ແນະ​ນໍາ​ການ​ກໍາ​ນົດ​:",
     "saveCommittee": "ບັນ​ທຶກ​ຄະ​ນະ​ກໍາ​ມະ​",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "ປ້າຍກຳກັບ",
+    "committeeLabelPlaceholder": "ຕົວຢ່າງ: ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "ຊື່ຄະນະກໍາມະການຢ່າງເປັນທາງການ",
+    "topic1Label": "ຫົວຂໍ້ 1",
+    "topic2Label": "ຫົວຂໍ້ 2 (ທາງເລືອກ)",
+    "topic2Placeholder": "ຄໍາຖາມວາລະທີສອງ",
+    "topic2DisabledHint": "ເພີ່ມແຖວຫົວຂໍ້ທີສອງເພື່ອແກ້ໄຂຊ່ອງຂໍ້ມູນນີ້.",
+    "addSecondTopic": "ເພີ່ມຫົວຂໍ້ທີສອງ",
+    "addingTopic": "ກຳລັງເພີ່ມ...",
+    "ropDocumentLink": "ກົດ​ລະ​ບຽບ (ການ​ເຊື່ອມ​ຕໍ່​ເອ​ກະ​ສານ​)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "ລະຫັດຫ້ອງ (ປະຕູທີສອງ)",
+    "roomCodeHelpPrefix": "ຕົວອັກສອນຫຼືຕົວເລກຫົກຕົວ, ແບ່ງປັນສໍາລັບຫ້ອງນີ້ (ຄໍາແນະນໍາ:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "ຕາຕະລາງການປະຊຸມສອງມື້",
+      "subtitle": "ວາງແຜນບລັອກຕໍ່ກຸ່ມຜູ້ແທນ (ກຸ່ມດຽວກັນທີ່ເຈົ້າໃຊ້ໃນກຸ່ມຄະນະກໍາມະ). ສີຕາມປະເພດຕັນ: ກອງປະຊຸມ, ພັກຜ່ອນ, ຫຼືພິທີ. ໝາຍອາຫານທ່ຽງສຳລັບການກວດສອບທັບຊ້ອນ. ບັນ​ທຶກ​ໄວ້​ກັບ​ກິດ​ຈະ​ກໍາ​ການ​ເຄື່ອນ​ໄຫວ​.",
+      "day1Tab": "ວັນທີ 1",
+      "day2Tab": "ວັນທີ 2",
+      "lunchOverlapTab": "ການຊ້ອນກັນອາຫານທ່ຽງ",
+      "lunchOverlapHelp": "ການທັບຊ້ອນກັນປະກົດຂຶ້ນເມື່ອສອງກຸ່ມທັງສອງມີແຖວທີ່ຖືກໝາຍວ່າເປັນອາຫານທ່ຽງໃນມື້ດຽວກັນ ແລະຊ່ວງເວລາຕັດກັນ.",
+      "noLunchOverlaps": "ບໍ່ພົບການທັບຊ້ອນອາຫານທ່ຽງ. ໝາຍຢ່າງໜ້ອຍໜຶ່ງແຖວເປັນອາຫານທ່ຽງໃນສອງກຸ່ມທີ່ແຕກຕ່າງກັນໃນມື້ດຽວກັນກັບເວລາທັບຊ້ອນກັນ.",
+      "dayLabel": "ມື້ {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "ທຽບກັບ",
+      "groupsLabel": "ກຸ່ມ",
+      "renameGroup": "ຊື່ກຸ່ມທີ່ເຄື່ອນໄຫວ",
+      "colStart": "ເລີ່ມ",
+      "colEnd": "ຈົບ",
+      "colLabel": "ບລັອກ / ເຊດຊັນ",
+      "colKind": "ປະເພດ",
+      "kindSession": "ເຊດຊັນ",
+      "kindBreak": "ພັກຜ່ອນ",
+      "kindCeremony": "ພິທີ",
+      "legendTitle": "ບລັອກສີ",
+      "legendSession": "ກອງ​ປະ​ຊຸມ​ຄະ​ນະ​ກໍາ​ມະ​",
+      "legendBreak": "ພັກ​ຜ່ອນ / ອາ​ຫານ​ທ່ຽງ / caucus​",
+      "legendCeremony": "ເປີດ/ປິດ/ພິທີ",
+      "colLunch": "ອາຫານທ່ຽງ",
+      "emptyDay": "ຍັງບໍ່ມີບລັອກເທື່ອ. ເພີ່ມບລັອກ ຫຼືໃຊ້ແຖບກຸ່ມອື່ນ.",
+      "blockPlaceholder": "ຕົວຢ່າງ: ພິທີເປີດ · ກອງປະຊຸມຄະນະກໍາມະການ 1",
+      "lunchCheckboxAria": "ນັບແຖວນີ້ເປັນອາຫານທ່ຽງສໍາລັບການກວດສອບທັບຊ້ອນ",
+      "remove": "ເອົາອອກ",
+      "addBlock": "ເພີ່ມເວລາຕັນ",
+      "newGroupName": "ຊື່ກຸ່ມໃໝ່",
+      "newGroupPlaceholder": "ຕົວຢ່າງ: ອົງການຂ່າວ",
+      "defaultNewGroupName": "ກຸ່ມໃໝ່",
+      "addGroup": "ເພີ່ມກຸ່ມ",
+      "removeGroup": "ລຶບກຸ່ມອອກ",
+      "confirmRemoveGroup": "ເອົາກຸ່ມຕາຕະລາງ \"{name}\" ແລະທຸກບລັອກຂອງມັນສໍາລັບທັງສອງມື້ບໍ?",
+      "saveSchedule": "ບັນທຶກຕາຕະລາງ",
+      "saving": "ກຳລັງບັນທຶກ...",
+      "saved": "ບັນທຶກຕາຕະລາງແລ້ວ.",
+      "resetTemplate": "ຣີເຊັດເປັນແມ່ແບບ",
+      "confirmReset": "ຣີເຊັດກຳນົດການເປັນສາມກຸ່ມເລີ່ມຕົ້ນ ແລະລຶບລ້າງທຸກບລັອກບໍ?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — ຕາຕະລາງສາຍຕາຢ່າງເປັນທາງການ",
+        "body": "ແຜນການສອງມື້ນີ້ແມ່ນມີການແກ້ໄຂສໍາລັບ SEAMUN I 2027. ມັນກົງກັບຕາຕະລາງຕົ້ນສະບັບທີ່ເຜີຍແຜ່ແລ້ວ ແລະບໍ່ສາມາດປ່ຽນແປງໄດ້ໃນແອັບຯ (ລວມທັງກອງເລຂາ).",
+        "legendTitle": "ສີ",
+        "legendArrival": "ມາຮອດ / ການລົງທະບຽນ",
+        "legendDismissal": "ການຍົກຟ້ອງ",
+        "legendCeremony": "ພິທີ",
+        "legendBreak": "ພັກຜ່ອນທົ່ວໄປ",
+        "legendSession": "ກອງປະຊຸມວິຊາການ",
+        "legendLunch": "ກິນເຂົ້າ (ອາຫານທ່ຽງ)",
+        "legendRelax": "ໜາວ",
+        "legendSupport": "ຫ້ອງສະຫນັບສະຫນູນ",
+        "legendStrategy": "ຫ້ອງຍຸດທະສາດ",
+        "legendSweep": "ກວາດ",
+        "handbookLink": "ປື້ມຄູ່ມືເປີດກອງປະຊຸມ (PDF)",
+        "handbookHint": "ເອກະສານຕົ້ນສະບັບທີ່ເປັນທາງການ; ຕາຕະລາງເວລາທີ່ຖືກລັອກແລະການຈັດກຸ່ມຫ້ອງຂ້າງລຸ່ມນີ້ປະຕິບັດຕາມສິ່ງພິມນີ້.",
+        "committeeMatrixTitle": "ຄະ​ນະ​ກໍາ​ມະ​ການ​ໂດຍ​ການ​ຕິດ​ຕາມ​ກໍາ​ນົດ​ເວ​ລາ​",
+        "committeeMatrixHint": "ແຕ່ລະສະພາປະຕິບັດຕາມວັນທີ 1 / ມື້ 2 ໂມງຂອງການຕິດຕາມຂອງມັນ (ຄໍລໍາທີ່ມີຊື່ກຸ່ມດຽວກັນໃນຕາຕະລາງຂ້າງເທິງ).",
+        "colScheduleTrack": "ຕິດຕາມຕາຕະລາງ",
+        "colChambers": "Chambers (ປ້າຍຊື່ໃນເຫດການນີ້)",
+        "advisorHint": "ແຕະໃສ່ທີມໃດໜຶ່ງ, ຈາກນັ້ນເບິ່ງຕາຕະລາງທີ່ປຶກສາ (A–D) ຫຼືຕາຕະລາງຜູ້ແທນ/ປະທານຂອງຄະນະກຳມະການໃດໜຶ່ງ — ບໍ່ແມ່ນທັງສອງໃນເວລາດຽວກັນ.",
+        "advisorOnlyHint": "ເລືອກຕາຕະລາງເວລາຂອງທ່ານ, ຈາກນັ້ນທີ່ປຶກສາ A–D ເພື່ອເບິ່ງມື້ຂອງທີ່ປຶກສານັ້ນ.",
+        "committeeOnlyHint": "ຕາ​ຕະ​ລາງ​ທີ່​ເປັນ​ທາງ​ການ​ຂອງ​ຄະ​ນະ​ກໍາ​ມະ​ການ​ຂອງ​ທ່ານ​. ຂ້າງລຸ່ມນີ້, ປຽບທຽບເວລາອາຫານທ່ຽງກັບຄະນະກໍາມະການອື່ນໆ.",
+        "pickTrack": "ຕາຕະລາງຕິດຕາມ:",
+        "viewAllTeams": "ທີມງານທັງຫມົດ",
+        "orPickTeam": "ຫຼືທີມງານ:",
+        "viewAs": "ເບິ່ງເປັນ",
+        "modeAdvisor": "ທີ່ປຶກສາ",
+        "modeCommittee": "ຄະ​ນະ​ກໍາ​ມະ (ຜູ້​ແທນ / ປະ​ທານ​)",
+        "pickAdvisor": "ທີ່ປຶກສາ",
+        "pickCommittee": "ຄະນະກໍາມະການ",
+        "selectAdvisorPrompt": "ເລືອກທີ່ປຶກສາ A, B, C, ຫຼື D ເພື່ອເບິ່ງຕາຕະລາງເວລານັ້ນ.",
+        "selectCommitteePrompt": "ເລືອກຄະນະກໍາມະການຂອງທ່ານເພື່ອເບິ່ງຕາຕະລາງຜູ້ແທນ / ປະທານ.",
+        "teamShort": {
+          "g1": "ອັນຟາ",
+          "g2": "ເບຕ້າ",
+          "g3": "ແກມມາ",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "ອາຫານທ່ຽງຊ້ອນກັນກັບຄະນະກໍາມະການອື່ນໆ",
+        "body": "ປຽບທຽບໜ້າຕ່າງອາຫານທ່ຽງຂອງຄະນະກຳມາທິການຂອງທ່ານກັບຄະນະກຳມາທິການອື່ນເຖິງ {max}. ເລືອກມື້ຫນຶ່ງ, ຈາກນັ້ນເລືອກຄະນະກໍາມະການຂ້າງລຸ່ມນີ້.",
+        "pickCommittees": "ປຽບທຽບກັບ",
+        "noneSelected": "ເລືອກຫນຶ່ງຫຼືຫຼາຍຄະນະກໍາມະການເພື່ອເບິ່ງນາທີອາຫານທ່ຽງຮ່ວມກັນ.",
+        "yourLunch": "ອາຫານທ່ຽງຂອງເຈົ້າ",
+        "theirLunch": "ອາຫານທ່ຽງຂອງພວກເຂົາ",
+        "overlap": "ອາຫານທ່ຽງຮ່ວມກັນ: {start}–{end} ({minutes} ນທ)",
+        "noOverlap": "ບໍ່ມີເວລາກິນເຂົ້າທ່ຽງຮ່ວມກັນໃນມື້ນີ້."
       }
     }
   },
@@ -1747,7 +1816,7 @@
     "parsedRowsSample": "ວິເຄາະ {count} ແຖວ. ຕົວຢ່າງ:",
     "runImport": "ດໍາເນີນການນໍາເຂົ້າ",
     "generateMissingRandomCodes": "ສ້າງລະຫັດສຸ່ມທີ່ຂາດຫາຍໄປ",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "ສະມາຊິກລັດຖະສະພາ · ບ່ອນນັ່ງ {seat}"
   },
   "chairAllocationMatrixPage": {
     "intro": "ຕາຕະລາງການຈັດສັນຄະນະກໍາມະການສໍາລັບກອງປະຊຸມປັດຈຸບັນຂອງທ່ານ. ນີ້ແມ່ນການອ່ານເທົ່ານັ້ນສໍາລັບເກົ້າອີ້ແລະສະທ້ອນໃຫ້ເຫັນເຖິງການມອບຫມາຍບ່ອນນັ່ງທີ່ຫ້າວຫັນແລະລະຫັດປ້າຍ.",
@@ -1933,8 +2002,8 @@
         "hint": "ຮູບແບບສະເໝືອນ ແລະຊັ້ນຜູ້ແທນ"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "ວາລະ",
+        "hint": "ຫົວຂໍ້ສົດ & ຄະແນນສຽງທັງໝົດຕໍ່ລາຍການວາລະ"
       }
     }
   },
@@ -2562,16 +2631,19 @@
     "errStorageSetup": "ການເກັບຮັກສາຮູບໂປຣໄຟລ໌ບໍ່ໄດ້ຕັ້ງ. ໃນໂຄງການ Supabase, ດໍາເນີນການ migration 00100_profile_pictures_storage_bucket.sql, ຫຼືສ້າງຖັງເກັບຂໍ້ມູນສາທາລະນະທີ່ມີຊື່ວ່າ profile-pictures (ເບິ່ງ README).",
     "errPublicUrl": "ບໍ່ສາມາດແກ້ໄຂ URL ສາທາລະນະສໍາລັບຮູບພາບທີ່ອັບໂຫລດໄດ້.",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "ເລືອກ​ຄະ​ນະ​ກໍາ​ມະ​ການ…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "ກຳລັງປ່ຽນ...",
+    "dashboardCommitteeSwitchError": "ບໍ່ສາມາດປ່ຽນຄະນະກໍາມະໄດ້. ລອງອີກຄັ້ງ ຫຼືເຂົ້າສູ່ລະບົບຜ່ານປະຕູຫ້ອງ.",
+    "dashboardCommitteeAllocationsHeading": "ການຈັດສັນໃນກອງປະຊຸມຄະນະກໍາມະການນີ້",
+    "dashboardCommitteeNoAllocationsListed": "ບໍ່ມີແຖວການຈັດສັນຢູ່ໃນລາຍການສໍາລັບເຊດຊັນນີ້.",
+    "dashboardCommitteeApplySwitch": "ປ່ຽນ dashboard ໄປຫາຄະນະກໍາມະການນີ້",
+    "timerExpiryAlarmTitle": "ສຽງຈັບເວລາ",
+    "timerExpiryAlarmLabel": "ຫຼິ້ນກະດິ່ງສັ້ນເມື່ອການນັບຖອຍຫຼັງໃນແອັບຮອດສູນ (ໂມງຈັບເວລາສຽງເວົ້າ, ກຳນົດເວລາຂອງເຊດຊັນ, ເສັ້ນຕາຍສູນ).",
+    "timerExpiryAlarmHint": "ປິດຕາມຄ່າເລີ່ມຕົ້ນ. ເກັບຮັກສາໄວ້ໃນຕົວທ່ອງເວັບນີ້ເທົ່ານັ້ນ.",
+    "jobRole": "ບົດບາດໜ້າທີ່",
+    "jobRolePlaceholder": "ຕົວຢ່າງ: ຜູ້ອໍານວຍການ MUN, ຄູສອນ (ທາງເລືອກ)",
+    "advisorSettingsHint": "ໂປຣໄຟລ໌ພະນັກງານໂຮງຮຽນ — ບໍ່ມີການຈັດສັນຊັ້ນຮຽນ ຫຼືການມອບໝາຍ."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "ປະກາດເຕັມ",
       "daisAnnouncement": "ປະກາດ Dais",
       "close": "ປິດ",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "ວາລະ"
     },
     "committeeControl": {
       "sessionNameLabel": "ຊື່ເຊດຊັນ",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "ແລະ",
       "announcements": "ປະກາດ",
       "sidebarUseSuffix": "— ຫນຶ່ງ​ເຄື່ອງ​ມື​ຕໍ່​ແຖບ​.",
-      "agenda": "Agenda"
+      "agenda": "ວາລະ"
     },
     "history": {
       "title": "ປະຫວັດເຊດຊັນ",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "ເລຂານຸການ: ປະທານ & ຜູ້ແທນທັດສະນະ",
+    "intro": "ເລືອກຄະນະກໍາມະການສໍາລັບເຄື່ອງມືເກົ້າອີ້ແລະບ່ອນນັ່ງຜູ້ແທນທີ່ເຊື່ອມຕໍ່ກັບບັນຊີຂອງທ່ານ, ຈາກນັ້ນປ່ຽນພື້ນຜິວ. ການເຂົ້າສູ່ລະບົບຍັງເປີດສູນເລຂານຸການຕາມຄ່າເລີ່ມຕົ້ນ.",
+    "bindRequiredHint": "ເລືອກຄະນະປະທານ ແລະ/ຫຼື ບ່ອນນັ່ງຂອງຜູ້ແທນຢູ່ລຸ່ມນີ້, ຈາກນັ້ນລອງອີກຄັ້ງ.",
+    "chairCommitteeLabel": "ຄະ​ນະ​ກໍາ​ມະ​ຊັ້ນ​ປະ​ທານ​",
+    "chairCommitteePlaceholder": "ເລືອກ​ຄະ​ນະ​ກໍາ​ມະ​ການ…",
+    "delegateSeatLabel": "ບ່ອນນັ່ງຜູ້ແທນ (ການຈັດສັນຂອງເຈົ້າ)",
+    "delegateSeatPlaceholder": "ເລືອກບ່ອນນັ່ງ...",
+    "saveBindings": "ບັນທຶກວຽກ",
+    "bindingsSaved": "ບັນທຶກແລ້ວ.",
+    "switchViewHeading": "ສະຫຼັບ dashboard",
+    "switchViewHelp": "ເລຂານຸການສົ່ງຄືນໃຫ້ທ່ານ SMT. ປະທານແລະຜູ້ແທນເປີດໃນ app shells ດຽວກັນປະທານທີ່ແທ້ຈິງແລະຜູ້ແທນໃຊ້ສໍາລັບກິດຈະກໍາການເຄື່ອນໄຫວ.",
+    "goSecretariat": "ເລຂານຸການ",
+    "goChair": "ທັດສະນະຂອງເກົ້າອີ້",
+    "goDelegate": "ທັດສະນະຂອງຜູ້ແທນ",
+    "surfaceSwitchError": "ບໍ່ສາມາດປ່ຽນມຸມມອງໄດ້. ກວດເບິ່ງປະຕູເຫດການແລະການເລືອກ.",
+    "pickChairFirst": "ເລືອກຄະນະປະທານກ່ອນ (ຫຼືບັນທຶກວຽກ).",
+    "pickDelegateFirst": "ເລືອກບ່ອນນັ່ງຜູ້ແທນກ່ອນ (ຫຼືບັນທຶກວຽກ)."
+  },
+  "advisorDashboard": {
+    "intro": "ທ່ານສາມາດຕິດຕາມການເຄື່ອນໄຫວຂອງຄະນະກໍາມະທີ່ໄດ້ຮັບມອບຫມາຍຂອງທ່ານ. ທ່ານບໍ່ສາມາດເຂົ້າເຖິງບັນທຶກໄດ້ເວັ້ນເສຍແຕ່ວ່າເກົ້າອີ້ຫຼື SMT ສົ່ງຕໍ່ໄປຫາທ່ານ.",
+    "noAssignments": "ຍັງບໍ່ມີຜູ້ແທນທີ່ເຊື່ອມຕໍ່ກັບບັນຊີຂອງທ່ານເທື່ອ. ກອງເລຂາຈະມອບໝາຍໃຫ້ທ່ານຈາກ SMT → ທີ່ປຶກສາ.",
+    "delegateLinked": "ເຊື່ອມຕໍ່ບັນຊີຕົວແທນແລ້ວ",
+    "delegateNotLinked": "ບ່ອນນັ່ງຍັງບໍ່ໄດ້ເຊື່ອມຕໍ່ກັບບັນຊີຕົວແທນເທື່ອ",
+    "viewProfile": "ໂປຣໄຟລ໌",
+    "viewDocuments": "ເອກະສານ",
+    "viewVoting": "ການລົງຄະແນນສຽງ",
+    "forwardedNotes": "ບັນທຶກທີ່ສົ່ງຕໍ່",
+    "schedule": {
+      "intro": "ເລືອກຕາຕະລາງເວລາຂອງທ່ານ, ຈາກນັ້ນທີ່ປຶກສາ A–D ເພື່ອເບິ່ງຕາຕະລາງເວລາຂອງທີ່ປຶກສານັ້ນສໍາລັບມື້."
+    },
+    "notes": {
+      "intro": "ເກົ້າອີ້ບັນທຶກຫຼື SMT ເລືອກທີ່ຈະແບ່ງປັນກັບທ່ານ. ທ່ານບໍ່ສາມາດເບິ່ງຟີດບັນທຶກເຕັມໄດ້.",
+      "empty": "ບໍ່ມີບັນທຶກໃດຖືກສົ່ງຕໍ່ໃຫ້ທ່ານເທື່ອ.",
+      "forwarded": "ສົ່ງຕໍ່"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "ທີ່ປຶກສາ",
+    "subtitle": "ເຊີນບັນຊີທີ່ປຶກສາທາງອີເມລ໌ ແລະເຊື່ອມຕໍ່ທີ່ປຶກສາແຕ່ລະຄົນໃສ່ບ່ອນນັ່ງຜູ້ແທນ.",
+    "selectEventFirst": "ເລືອກເຫດການກອງປະຊຸມທີ່ມີການເຄື່ອນໄຫວກ່ອນ.",
+    "enterConferenceCode": "ໃສ່ລະຫັດກອງປະຊຸມ",
+    "inviteTitle": "ເຊີນທີ່ປຶກສາ",
+    "inviteBody": "ສົ່ງລິ້ງລົງຊື່ເຂົ້າໃຊ້ (ຂັ້ນຕອນດຽວກັນກັບການເຊີນປະທານ). ພາລະບົດບາດບັນຊີແມ່ນຖືກກໍານົດເປັນທີ່ປຶກສາ.",
+    "inviteDisabled": "ການເຊີນຕ້ອງໃຊ້ SUPABASE_SERVICE_ROLE_KEY ໃນການນຳໃຊ້ນີ້.",
+    "emailLabel": "ອີເມວ",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "ກຳລັງສົ່ງ...",
+    "inviteButton": "ສົ່ງຄຳເຊີນ",
+    "assignTitle": "ແຕ່ງຕັ້ງຜູ້ແທນ",
+    "assignBody": "ເລືອກບ່ອນນັ່ງຜູ້ແທນທີ່ເຊື່ອມຕໍ່. ທີ່ປຶກສາໜຶ່ງຄົນຕໍ່ຜູ້ແທນ; ການມອບໝາຍຄືນໃໝ່ແທນທີ່ລິ້ງກ່ອນໜ້າ.",
+    "advisorEmailLabel": "ອີເມວທີ່ປຶກສາ",
+    "delegateLabel": "ບ່ອນນັ່ງຜູ້ແທນ",
+    "delegatePlaceholder": "ເລືອກຜູ້ແທນ...",
+    "assignedTo": "ທີ່ປຶກສາ: {name}",
+    "saving": "ກຳລັງບັນທຶກ...",
+    "assignButton": "ບັນທຶກການມອບໝາຍ",
+    "advisorFallback": "ທີ່ປຶກສາ"
   }
 }

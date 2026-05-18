@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "אם הם כבר נרשמו כנציג, קדם אותם כאן כדי שהם יקבלו את לוח המחוונים של יושב הראש וכלי הוועדה (לא נשלח אימייל).",
     "grantChairRole": "מענק תפקיד כיסא",
     "chamberLabelFallback": "ישיבת ועדה",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "מושב דייס",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "יושב ראש של {committee}",
+    "chairRoleCoOf": "יו\"ר משותף של {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "הצעה כבר פתוחה להצבעה. סגור אותו לפני הקלטת הצהרות נוספות.",
     "statedMotionRecorded": "הצעה מוצהרת נרשמה (עדיין לא פתוחה להצבעה).",
     "statedMotionRemoved": "התנועה המוצהרת הוסרה.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "סֵדֶר הַיוֹם",
     "agendaTabHelp": "הגדר את הנושא החי עבור הרצפה, ולאחר מכן הקש על נושא סדר היום כדי לפתוח את לוח ההצבעות עם רשימת הנציגים המלאה עבור אותו נושא. להלן, בחר נושא כדי לראות את סך ההצבעות בוועדה.",
     "agendaLiveBadge": "לִחיוֹת",
     "agendaSetLive": "הגדר נושא חי",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "הישיבה נסגרה",
     "euPartySAndD": "הברית הפרוגרסיבית של סוציאליסטים ודמוקרטים (S&D)",
     "euPartyEpp": "מפלגת העם האירופי (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "חידוש אירופה (חידוש)",
     "euPartyLeft": "השמאל בפרלמנט האירופי (The Left)",
     "euPartyGreen": "הירוקים/ברית חופשית (Greens/EFA)",
     "euPartyCAndR": "השמרנים והרפורמים האירופאים (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "פטריוטס לאירופה (PfE)",
     "euPartyIndependents": "בלתי משויכים / NI",
     "euPartyTimeGuideTitle": "מדריך זמן לפי סיעות (האיחוד האירופי)",
     "euPartySpeechPoolLabel": "זמן נאומים:",
@@ -471,7 +471,10 @@
     "home": "בַּיִת",
     "library": "סִפְרִיָה",
     "mainNavigationAria": "ניווט ראשי",
-    "history": "History"
+    "history": "הִיסטוֹרִיָה",
+    "advisorHub": "מרכז יועצים",
+    "advisorNotes": "הערות שהועברו",
+    "conferenceSchedule": "לוּחַ זְמַנִים"
   },
   "dashboardLayout": {
     "helpCenter": "מרכז עזרה",
@@ -694,8 +697,13 @@
     "formalMotions": "הצעות פורמליות",
     "timer": "שָׁעוֹן עֶצֶר",
     "smtProfile": "פּרוֹפִיל",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 סדר יום",
+    "history": "הִיסטוֹרִיָה",
+    "advisorDashboard": "לוח מחוונים של יועץ",
+    "advisorNotes": "הערות שהועברו",
+    "delegateSchedule": "לוח זמנים לכנס",
+    "chairSchedule": "לוח זמנים לכנס",
+    "advisorSchedule": "לוח זמנים לכנס"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -731,7 +739,7 @@
       "overview": "סקירה כללית",
       "checklist": "רשימת תיוג",
       "jump": "קפוץ אל",
-      "chairEmails": "Chair emails"
+      "chairEmails": "מיילים של הכיסא"
     },
     "jumpTo": "קפוץ אל",
     "tiles": {
@@ -788,8 +796,12 @@
         "hint": "העלה בעיה"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "מיילים של הכיסא",
+        "hint": "תיבות דואר נכנס לפי ועדה"
+      },
+      "conferenceSchedule": {
+        "label": "לוח זמנים לכנס",
+        "hint": "מסלול צוות ולוח זמנים של יועצים (א-ד)"
       }
     },
     "countdownCard": {
@@ -808,11 +820,14 @@
       "remainingM": "{minutes}ד"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "תיבת דואר נכנס משותפת של הוועדה שלך (SEAMUN I). צור קשר עם הכיסאות שלך מהמייל למטה.",
+      "committeeColumn": "וַעֲדָה",
+      "emailColumn": "תיבת דואר נכנס של כיסא (שם משתמש)",
+      "openMail": "פתח דואר",
+      "noMatch": "עדיין לא מופיעה תיבת דואר נכנס של יו\"ר ועדה זו. שאל את SMT או בדוק את תקציר הוועדה שלך."
+    },
+    "schedule": {
+      "intro": "בחר את מסלול הצוות שלך, ואז את היועץ A–D או את הוועדה שלך (נציג/יו\"ר). רק לוח זמנים אישי אחד מוצג בכל פעם."
     }
   },
   "materialsExportCard": {
@@ -939,8 +954,9 @@
       "roomCode": "קוד חדר",
       "settings": "הגדרות",
       "discipline": "מִשְׁמַעתִי",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "סֵדֶר הַיוֹם",
+      "history": "הִיסטוֹרִיָה",
+      "conferenceSchedule": "לוּחַ זְמַנִים"
     }
   },
   "smtNav": {
@@ -953,7 +969,8 @@
     "allocationPasswords": "הקצאת סיסמאות",
     "profile": "פּרוֹפִיל",
     "follow": "לַעֲקוֹב",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "יועצים"
   },
   "officialLinks": {
     "intro": "מסמכים, אמנות, גופים עיקריים, תוכניות, משימות ופרטי חברים. נפתח בכרטיסייה חדשה.",
@@ -1053,16 +1070,16 @@
     "liveFloorDescription": "תור דוברים חי, מפקד וטיימרים עבור הוועדה הזו - אותם יושבי ראש נתונים רואים ברצפת הישיבה.",
     "conferenceFallback": "וְעִידָה",
     "committeeFallback": "וַעֲדָה",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "סגל הפיקוח על המזכירות",
+    "secretariatMatrixSectionSecretariat": "מַזכִּירוּת",
+    "secretariatMatrixSectionOperations": "פעולות",
+    "secretariatMatrixSectionMedia": "כְּלֵי תִקְשׁוֹרֶת",
+    "secretariatMatrixSmtEmail": "דוא\"ל SMT",
+    "secretariatMatrixFinanceEmail": "דוא\"ל פיננסי",
+    "secretariatMatrixCommitteeOverviews": "סקירות ועדות",
+    "secretariatMatrixRole": "תַפְקִיד",
+    "secretariatMatrixName": "שֵׁם",
+    "secretariatMatrixEmail": "אֶלֶקטרוֹנִי"
   },
   "committeeNames": {
     "full": {
@@ -1256,7 +1273,11 @@
       "noRecipients": "בחר נמען אחד לפחות (משלחת או יו\"ר).",
       "needAllocation": "אתה צריך הקצאה כדי לשלוח הערות (או להיות כיסא).",
       "sendFailed": "שליחת ההערה נכשלה."
-    }
+    },
+    "forwardToAdvisor": "העבר אל {name}",
+    "forwardedToAdvisor": "הועבר ליועץ",
+    "forwardedToAdvisorBadge": "(ליועץ)",
+    "advisorFallback": "יועץ"
   },
   "adminPage": {
     "title": "ניהול אתר אינטרנט",
@@ -1400,14 +1421,14 @@
       "onlySmtGrantChair": "רק המזכירות יכולה להעניק תפקידי יו\"ר.",
       "noAccountForEmail": "עדיין אין חשבון עם האימייל הזה. תחילה שלח הזמנה לכיסא.",
       "promotedToChairSuccess": "הפרופיל של {email} הוא כעת כיסא בימת.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "בחר מושב במה וועדה להזמנה זו.",
+      "daisSeatRowMissing": "לא ניתן היה למצוא שורה של {seat} עבור אותה ועדה. נסה לשמור את מטריצת ההקצאה לאירוע ולאחר מכן נסה שוב.",
+      "daisSeatAlreadyFilled": "למושב הבמה הזה כבר יש כיסא. בטל תחילה את הקצאת האדם הנוכחי במטריצת ההקצאה (או כלי אחר).",
+      "seatHeadChair": "כיסא ראש",
+      "seatCoChair": "יו\"ר משותף",
+      "inviteSentButAllocationFailed": "ההזמנה נשלחה ותפקידי הכיסא, אך לא ניתן היה לקשר את מושב הבימה: {error}. תקן את מטריצת ההקצאה או פנה לתמיכה.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "מושב הבמה הזה לא תואם את תוכנית יו\"ר הוועדה הזו."
     },
     "allocationSignup": {
       "mustBeSignedIn": "אתה חייב להיות מחובר.",
@@ -1425,6 +1446,24 @@
       "emailSubject": "ייצוא חומרים InterMUN ({range})",
       "emailSendConfigHint": "הגדר SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS ובאופן אופציונלי MATERIALS_EXPORT_FROM בשרת.",
       "exportEmailedTo": "ייצוא נשלח בדוא\"ל אל {email}. אם אתה לא רואה את זה, בדוק ספאם/זבל."
+    },
+    "advisorStaff": {
+      "notSignedIn": "לא מחובר.",
+      "onlySmt": "רק מזכירות או מנהל אתר יכולים לנהל יועצים.",
+      "unauthorized": "לא מורשה.",
+      "invalidEmail": "הזן כתובת אימייל חוקית.",
+      "missingServiceRole": "לשרת חסר SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "הגדר את NEXT_PUBLIC_APP_URL עבור קישורי הזמנה להפניה מחדש.",
+      "emailAlreadyRegistered": "למייל הזה כבר יש חשבון. הגדר את התפקיד שלהם ליועץ ב-admin, ולאחר מכן הקצה נציג.",
+      "inviteRoleFailed": "ההזמנה נשלחה אך לא ניתן להגדיר תפקיד יועץ: {message}",
+      "inviteSent": "ההזמנה נשלחה אל {email}. הם יהיו יועצים לאחר הגדרת הסיסמה שלהם.",
+      "invalidAdvisorEmail": "הזן את המייל של היועץ.",
+      "missingDelegate": "בחר מושב נציג.",
+      "advisorNotFound": "לא נמצא חשבון לאימייל של יועץ זה.",
+      "notAdvisorRole": "המשתמש הזה אינו יועץ. הזמן אותם או תחילה הגדר תפקיד ליועץ.",
+      "delegateNotFound": "מושב הנציג לא נמצא.",
+      "delegateUnlinked": "למושב הזה אין עדיין חשבון נציג מקושר.",
+      "assigned": "הוקצה יועץ ל-{country}."
     }
   },
   "emails": {
@@ -1448,7 +1487,7 @@
     "eventDetails": "פרטי האירוע",
     "selectConferenceFirst": "בחר תחילה ועידה עם שער האירוע ולאחר מכן חזור לכאן.",
     "committeeSessionsTitle": "ישיבות הוועדה באירוע זה",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "כל כרטיס הוא חדר אחד: תווית קצרה, שם רשמי, לוגו, עד שני נושאים בסדר היום, קישור RoP, קוד חדר משותף בן שש תווים (שער שני) ופרופיל נוהל. קודי החדרים חייבים להישאר ייחודיים בכל החדרים באירוע זה.",
     "noCommitteeSessions": "אין ישיבות ועדות לאירוע זה.",
     "eventName": "שם האירוע",
     "tagline": "קו תג",
@@ -1491,81 +1530,111 @@
     "committeeCodeHelpPrefix": "שישה תווים: ראשי תיבות של חדר + שלוש ספרות (הצעה דטרמיניסטית:",
     "saveCommittee": "שמור את הוועדה",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "תווית ועדה",
+    "committeeLabelPlaceholder": "לְמָשָׁל ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "שם הוועדה הרשמי",
+    "topic1Label": "נושא 1",
+    "topic2Label": "נושא 2 (אופציונלי)",
+    "topic2Placeholder": "שאלה שנייה בסדר היום",
+    "topic2DisabledHint": "הוסף שורת נושא שנייה כדי לערוך שדה זה.",
+    "addSecondTopic": "הוסף נושא שני",
+    "addingTopic": "מוֹסִיף…",
+    "ropDocumentLink": "תקנון (קישור למסמך)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "קוד חדר (שער שני)",
+    "roomCodeHelpPrefix": "שש אותיות או ספרות, משותפות עבור חדר זה (הצעה:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "לוח זמנים לכנס של יומיים",
+      "subtitle": "תכנן בלוקים לכל קבוצת צירים (אותן קבוצות שבהן אתה משתמש כדי לאסוף ועדות). צבע לפי סוג בלוק: הפעלה, הפסקה או טקס. סמן ארוחת צהריים לבדיקות חפיפה. נשמר עם האירוע הפעיל.",
+      "day1Tab": "יום 1",
+      "day2Tab": "יום 2",
+      "lunchOverlapTab": "ארוחת צהריים חופפת",
+      "lunchOverlapHelp": "חפיפות מופיעות כאשר לשתי קבוצות יש שורה מסומנת כארוחת צהריים באותו יום וטווחי הזמן מצטלבים.",
+      "noLunchOverlaps": "לא זוהו חפיפות לארוחת צהריים. סמן לפחות שורה אחת כארוחת צהריים בשתי קבוצות שונות באותו יום עם זמנים חופפים.",
+      "dayLabel": "יום {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "לעומת",
+      "groupsLabel": "קבוצות",
+      "renameGroup": "שם קבוצה פעילה",
+      "colStart": "הַתחָלָה",
+      "colEnd": "סוֹף",
+      "colLabel": "חסימה / הפעלה",
+      "colKind": "סוּג",
+      "kindSession": "מוֹשָׁב",
+      "kindBreak": "לִשְׁבּוֹר",
+      "kindCeremony": "טֶקֶס",
+      "legendTitle": "צבעי בלוק",
+      "legendSession": "מושב הוועדה",
+      "legendBreak": "הפסקה / ארוחת צהריים / כנס",
+      "legendCeremony": "פתיחה / סיום / טקס",
+      "colLunch": "אֲרוּחַת צָהֳרִים",
+      "emptyDay": "עדיין אין בלוקים. הוסף בלוק או השתמש בכרטיסיית קבוצה אחרת.",
+      "blockPlaceholder": "לְמָשָׁל טקס פתיחה · מושב הוועדה 1",
+      "lunchCheckboxAria": "ספור שורה זו כארוחת צהריים עבור בדיקות חפיפה",
+      "remove": "לְהַסִיר",
+      "addBlock": "הוסף בלוק זמן",
+      "newGroupName": "שם קבוצה חדש",
+      "newGroupPlaceholder": "לְמָשָׁל חיל העיתונות",
+      "defaultNewGroupName": "קבוצה חדשה",
+      "addGroup": "הוסף קבוצה",
+      "removeGroup": "הסר את הקבוצה",
+      "confirmRemoveGroup": "להסיר את קבוצת לוח הזמנים \"{name}\" ואת כל החסימות שלה לשני הימים?",
+      "saveSchedule": "שמור לוח זמנים",
+      "saving": "חִסָכוֹן…",
+      "saved": "לוח הזמנים נשמר.",
+      "resetTemplate": "אפס לתבנית",
+      "confirmReset": "לאפס את לוח הזמנים לשלוש קבוצות ברירת המחדל ולנקות את כל החסימות?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 - לוח זמנים ויזואלי רשמי",
+        "body": "תוכנית יומיים זו קבועה עבור SEAMUN I 2027. היא תואמת את לוח הזמנים הראשי שפורסם ולא ניתנת לשינוי באפליקציה (כולל על ידי המזכירות).",
+        "legendTitle": "צבעים",
+        "legendArrival": "הגעה/הרשמה",
+        "legendDismissal": "הֲדָחָה",
+        "legendCeremony": "טֶקֶס",
+        "legendBreak": "הפסקה כללית",
+        "legendSession": "מפגש אקדמי",
+        "legendLunch": "לאכול (ארוחת צהריים)",
+        "legendRelax": "לְצַנֵן",
+        "legendSupport": "חדר תמיכה",
+        "legendStrategy": "חדרי אסטרטגיה",
+        "legendSweep": "לְטַאטֵא",
+        "handbookLink": "מדריך לכנס פתוח (PDF)",
+        "handbookHint": "מסמך אב רשמי; לוח הזמנים הנעול וקבוצת החדר להלן עוקבים אחר פרסום זה.",
+        "committeeMatrixTitle": "חדרי הוועדה לפי מסלול לוח זמנים",
+        "committeeMatrixHint": "כל חדר עוקב אחר שעון יום 1 / יום 2 של המסלול שלו (העמודה עם אותו שם קבוצה בתרשים למעלה).",
+        "colScheduleTrack": "תזמון מסלול",
+        "colChambers": "Chambers (תוויות באירוע זה)",
+        "advisorHint": "הקש על צוות ולאחר מכן צפה בלוח זמנים של יועץ (א'-ד') או לוח זמנים של נציג/יושב ראש של ועדה אחת - לא את שניהם בבת אחת.",
+        "advisorOnlyHint": "בחר את מסלול לוח הזמנים שלך, ולאחר מכן את היועץ A-D כדי לראות את היום של היועץ הזה.",
+        "committeeOnlyHint": "לוח הזמנים הרשמי של הוועדה שלך. להלן, השוו את זמני ארוחת הצהריים עם ועדות אחרות.",
+        "pickTrack": "לוח זמנים למסלול:",
+        "viewAllTeams": "כל הקבוצות",
+        "orPickTeam": "או צוות:",
+        "viewAs": "הצג כ",
+        "modeAdvisor": "יועץ",
+        "modeCommittee": "ועדה (נציג / יו\"ר)",
+        "pickAdvisor": "יועץ",
+        "pickCommittee": "וַעֲדָה",
+        "selectAdvisorPrompt": "בחר יועץ A, B, C או D כדי להציג את לוח הזמנים הזה.",
+        "selectCommitteePrompt": "בחר את הוועדה שלך כדי להציג את לוח הזמנים של הנציג/יושב ראש.",
+        "teamShort": {
+          "g1": "אלפא",
+          "g2": "בטא",
+          "g3": "גמא",
+          "g4": "דֶלתָא",
+          "support": "אפסילון"
+        }
+      },
+      "lunchOverlap": {
+        "title": "ארוחת הצהריים חופפת לוועדות אחרות",
+        "body": "השווה את חלון ארוחת הצהריים של הוועדה שלך עם עד {max} ועדות אחרות. בחר יום ולאחר מכן בחר ועדות למטה.",
+        "pickCommittees": "השווה עם",
+        "noneSelected": "בחר ועדה אחת או יותר כדי לראות דקות צהריים משותפות.",
+        "yourLunch": "ארוחת הצהריים שלך",
+        "theirLunch": "ארוחת הצהריים שלהם",
+        "overlap": "ארוחת צהריים משותפת: {start}–{end} ({minutes} דקות)",
+        "noOverlap": "אין שעת ארוחת צהריים משותפת ביום זה."
       }
     }
   },
@@ -1621,7 +1690,7 @@
     "parsedRowsSample": "מנותח {count} שורות. לִטעוֹם:",
     "runImport": "הפעל ייבוא",
     "generateMissingRandomCodes": "צור קודים אקראיים חסרים",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "חבר פרלמנט · מושב {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "וַעֲדָה",
@@ -1766,8 +1835,8 @@
         "hint": "פריסה וירטואלית וקומת נציגים"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "סֵדֶר הַיוֹם",
+        "hint": "סה\"כ נושאים חיים והצבעות לכל סעיף בסדר היום"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "פרסים"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "ועדה נבחרת…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "מחליף...",
+    "dashboardCommitteeSwitchError": "לא ניתן היה להחליף ועדה. נסה שוב או היכנס דרך שער החדר.",
+    "dashboardCommitteeAllocationsHeading": "הקצאות במושב הוועדה",
+    "dashboardCommitteeNoAllocationsListed": "לא מופיעות שורות הקצאה עבור הפעלה זו.",
+    "dashboardCommitteeApplySwitch": "החלף את לוח המחוונים לוועדה זו",
+    "timerExpiryAlarmTitle": "צליל טיימר",
+    "timerExpiryAlarmLabel": "הפעל צלצול קצר כאשר כל ספירה לאחור בתוך האפליקציה מגיעה לאפס (טיימר דיבור, מגבלת זמן הפעלה, מועדי מוקד).",
+    "timerExpiryAlarmHint": "כבוי כברירת מחדל. מאוחסן בדפדפן זה בלבד.",
+    "jobRole": "תפקיד עבודה",
+    "jobRolePlaceholder": "לְמָשָׁל מנהל MUN, מורה (אופציונלי)",
+    "advisorSettingsHint": "פרופיל צוות בית הספר - אין הקצאת ציונים או נציגים."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "הודעה מלאה",
       "daisAnnouncement": "הכרזת דיי",
       "close": "לִסְגוֹר",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "סֵדֶר הַיוֹם"
     },
     "committeeControl": {
       "sessionNameLabel": "שם הפגישה",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "ו",
       "announcements": "הכרזות",
       "sidebarUseSuffix": "- כלי אחד לכל כרטיסייה.",
-      "agenda": "Agenda"
+      "agenda": "סֵדֶר הַיוֹם"
     },
     "history": {
       "title": "היסטוריית הפעלות",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "מזכירות: עמדות יו\"ר ונציג",
+    "intro": "בחר ועדה לכלי יו\"ר ומושב נציג המקושר לחשבון שלך, ולאחר מכן החלף שטחים. הכניסה עדיין פותחת את רכזת המזכירות כברירת מחדל.",
+    "bindRequiredHint": "בחר וועדת יו\"ר ו/או מושב נציג למטה, ולאחר מכן נסה שוב.",
+    "chairCommitteeLabel": "ועדת קומה יו\"ר",
+    "chairCommitteePlaceholder": "ועדה נבחרת…",
+    "delegateSeatLabel": "מושב נציג (ההקצאה שלך)",
+    "delegateSeatPlaceholder": "בחר מושב…",
+    "saveBindings": "שמור מטלות",
+    "bindingsSaved": "נשמר.",
+    "switchViewHeading": "החלף לוח מחוונים",
+    "switchViewHelp": "המזכירות מחזירה אותך ל-SMT. יושב ראש ונציג פותחים את אותן מעטפות בתוך האפליקציה כיסאות אמיתיים ונציגים משתמשים בהם לאירוע הפעיל.",
+    "goSecretariat": "מַזכִּירוּת",
+    "goChair": "נוף לכסא",
+    "goDelegate": "תצוגת נציג",
+    "surfaceSwitchError": "לא ניתן היה להחליף תצוגה. בדוק את שער האירוע ואת הבחירות.",
+    "pickChairFirst": "בחר תחילה ועדת יו\"ר (או שמור מטלות).",
+    "pickDelegateFirst": "תחילה בחר מושב נציג (או שמור מטלות)."
+  },
+  "advisorDashboard": {
+    "intro": "אתה יכול לעקוב אחר פעילות הוועדה של הנציג שלך. אין לך גישה לפתקים אלא אם כיסא או SMT מעבירים לך אחד.",
+    "noAssignments": "אף נציג עדיין לא מקושר לחשבון שלך. המזכירות תקצה אותך מ-SMT → יועצים.",
+    "delegateLinked": "חשבון האצל מקושר",
+    "delegateNotLinked": "מושב עדיין לא מקושר לחשבון נציג",
+    "viewProfile": "פּרוֹפִיל",
+    "viewDocuments": "מסמכים",
+    "viewVoting": "הַצבָּעָה",
+    "forwardedNotes": "הערות שהועברו",
+    "schedule": {
+      "intro": "בחר את מסלול לוח הזמנים שלך, ולאחר מכן את היועץ A-D כדי לראות את לוח הזמנים של היועץ הזה לאותו יום."
+    },
+    "notes": {
+      "intro": "כיסאות Notes או SMT בחרו לשתף אתכם. אינך יכול לעיין בעדכון ההערות המלא.",
+      "empty": "עדיין לא הועברו אליך הערות.",
+      "forwarded": "הועבר"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "יועצים",
+    "subtitle": "הזמן חשבונות יועץ בדוא\"ל וקשר כל יועץ למושב נציג אחד.",
+    "selectEventFirst": "בחר תחילה אירוע ועידה פעיל.",
+    "enterConferenceCode": "הזן קוד ועידה",
+    "inviteTitle": "הזמינו יועץ",
+    "inviteBody": "שולח קישור כניסה (זהה זרימה כמו הזמנה של כיסא). תפקיד החשבון מוגדר ליועץ.",
+    "inviteDisabled": "הזמנות דורשות SUPABASE_SERVICE_ROLE_KEY בפריסה זו.",
+    "emailLabel": "אֶלֶקטרוֹנִי",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "שְׁלִיחָה…",
+    "inviteButton": "שלח הזמנה",
+    "assignTitle": "הקצה נציג",
+    "assignBody": "בחר מושב נציג מקושר. יועץ אחד לכל נציג; הקצאה מחדש מחליפה את הקישור הקודם.",
+    "advisorEmailLabel": "מייל של יועץ",
+    "delegateLabel": "מושב נציג",
+    "delegatePlaceholder": "בחר נציג...",
+    "assignedTo": "יועץ: {name}",
+    "saving": "חִסָכוֹן…",
+    "assignButton": "שמור מטלה",
+    "advisorFallback": "יועץ"
   }
 }

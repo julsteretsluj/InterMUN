@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Nếu họ đã đăng ký làm đại biểu, hãy thăng chức cho họ tại đây để họ nhận được bảng điều khiển của chủ tịch và các công cụ của ủy ban (không gửi email).",
     "grantChairRole": "Trao vai trò chủ trì",
     "chamberLabelFallback": "Phiên ủy ban",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Ghế ngồi",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Chủ tịch của {committee}",
+    "chairRoleCoOf": "Đồng chủ tịch của {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Một kiến ​​nghị đã được mở để bỏ phiếu. Đóng nó lại trước khi ghi lại các báo cáo tiếp theo.",
     "statedMotionRecorded": "Kiến nghị đã nêu được ghi lại (chưa mở để bỏ phiếu).",
     "statedMotionRemoved": "Chuyển động đã nêu bị loại bỏ.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Chương trình nghị sự",
     "agendaTabHelp": "Đặt chủ đề trực tiếp cho phiên họp, sau đó chạm vào một chủ đề trong chương trình nghị sự để mở bảng biểu quyết với danh sách đại biểu đầy đủ cho chủ đề đó. Dưới đây, chọn một chủ đề để xem tổng số phiếu bầu của ủy ban.",
     "agendaLiveBadge": "Sống",
     "agendaSetLive": "Đặt chủ đề trực tiếp",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Bế mạc phiên",
     "euPartySAndD": "Liên minh Tiến bộ của Xã hội chủ nghĩa và Dân chủ (S&D)",
     "euPartyEpp": "Đảng Nhân dân Châu Âu (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Đổi mới Châu Âu (Renew)",
     "euPartyLeft": "Phe Trái tại Nghị viện Châu Âu (The Left)",
     "euPartyGreen": "Xanh/EFA (Greens/EFA)",
     "euPartyCAndR": "Bảo thủ và Cải cách Châu Âu (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Những người yêu nước vì Châu Âu (PfE)",
     "euPartyIndependents": "Không đảng phái / NI",
     "euPartyTimeGuideTitle": "Hướng dẫn thời gian theo nhóm (EU)",
     "euPartySpeechPoolLabel": "Thời gian phát biểu:",
@@ -543,7 +543,10 @@
     "home": "Trang chủ",
     "library": "Thư viện",
     "mainNavigationAria": "Điều hướng chính",
-    "history": "History"
+    "history": "Lịch sử",
+    "advisorHub": "Trung tâm tư vấn",
+    "advisorNotes": "Ghi chú được chuyển tiếp",
+    "conferenceSchedule": "Lịch trình"
   },
   "dashboardLayout": {
     "helpCenter": "Trung tâm trợ giúp",
@@ -766,8 +769,13 @@
     "formalMotions": "Kiến nghị chính thức",
     "timer": "hẹn giờ",
     "smtProfile": "Hồ sơ",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Chương trình nghị sự",
+    "history": "Lịch sử",
+    "advisorDashboard": "Bảng điều khiển cố vấn",
+    "advisorNotes": "Ghi chú được chuyển tiếp",
+    "delegateSchedule": "Lịch hội nghị",
+    "chairSchedule": "Lịch hội nghị",
+    "advisorSchedule": "Lịch hội nghị"
   },
   "setupPage": {
     "title": "Supabase chưa được cấu hình",
@@ -803,7 +811,7 @@
       "overview": "Tổng quan",
       "checklist": "Danh sách kiểm tra",
       "jump": "Chuyển tới",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Email chủ tịch"
     },
     "jumpTo": "Chuyển tới",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Đưa ra một vấn đề"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Email chủ tịch",
+        "hint": "Hộp thư đến Dais theo ủy ban"
+      },
+      "conferenceSchedule": {
+        "label": "Lịch hội nghị",
+        "hint": "Theo dõi nhóm và thời gian biểu cố vấn (A–D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}p"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Hộp thư đến được chia sẻ cho ủy ban của bạn (SEAMUN I). Liên hệ với ghế của bạn từ email dưới đây.",
+      "committeeColumn": "Ủy ban",
+      "emailColumn": "Hộp thư đến của ghế (tên người dùng)",
+      "openMail": "Mở thư",
+      "noMatch": "Chưa có hộp thư đến chủ tịch nào được công bố cho ủy ban này. Hãy hỏi SMT hoặc kiểm tra bản tóm tắt ủy ban của bạn."
+    },
+    "schedule": {
+      "intro": "Chọn nhóm của bạn, sau đó chọn cố vấn A–D hoặc ủy ban của bạn (đại biểu/chủ tịch). Chỉ có một thời gian biểu cá nhân được hiển thị tại một thời điểm."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "Liên kết chính thức",
       "roomCode": "Mã phòng",
       "settings": "Cài đặt",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Chương trình nghị sự",
+      "history": "Lịch sử",
+      "conferenceSchedule": "Lịch trình"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Mật khẩu phân bổ",
     "profile": "Hồ sơ",
     "follow": "Theo",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "cố vấn"
   },
   "officialLinks": {
     "intro": "Văn bản, hiệp ước, cơ quan chính, chương trình, nhiệm vụ và thông tin thành viên. Mở trong một tab mới.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "Hàng đợi người phát biểu trực tiếp, cuộc gọi điểm danh và bộ hẹn giờ cho ủy ban này—những chiếc ghế dữ liệu giống nhau sẽ thấy trên sàn phiên họp.",
     "conferenceFallback": "Hội nghị",
     "committeeFallback": "Ủy ban",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "Danh sách giám sát của Ban thư ký",
+    "secretariatMatrixSectionSecretariat": "Ban thư ký",
+    "secretariatMatrixSectionOperations": "Hoạt động",
+    "secretariatMatrixSectionMedia": "Phương tiện truyền thông",
+    "secretariatMatrixSmtEmail": "email SMT",
+    "secretariatMatrixFinanceEmail": "Email tài chính",
+    "secretariatMatrixCommitteeOverviews": "Tổng quan về ủy ban",
+    "secretariatMatrixRole": "Vai trò",
+    "secretariatMatrixName": "Tên",
+    "secretariatMatrixEmail": "E-mail"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "Chọn ít nhất một người nhận (đại biểu hoặc chủ tọa).",
       "needAllocation": "Bạn cần phân bổ để gửi ghi chú (hoặc làm ghế).",
       "sendFailed": "Không gửi được ghi chú."
-    }
+    },
+    "forwardToAdvisor": "Chuyển tiếp tới {name}",
+    "forwardedToAdvisor": "Đã chuyển tới cố vấn",
+    "forwardedToAdvisorBadge": "(tới cố vấn)",
+    "advisorFallback": "cố vấn"
   },
   "adminPage": {
     "title": "Quản trị trang web",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "Chỉ có ban thư ký mới có thể đảm nhận vai trò chủ trì.",
       "noAccountForEmail": "Chưa có tài khoản nào có email đó. Gửi lời mời ngồi ghế trước.",
       "promotedToChairSuccess": "Hồ sơ của {email} hiện là một chiếc ghế bệ.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Chọn một chỗ ngồi trên bục và ủy ban cho lời mời này.",
+      "daisSeatRowMissing": "Không thể tìm thấy hàng {seat} cho ủy ban đó. Hãy thử lưu ma trận phân bổ cho sự kiện rồi thử lại.",
+      "daisSeatAlreadyFilled": "Chỗ ngồi đó đã có ghế rồi. Trước tiên, hãy bỏ chỉ định người hiện tại trong ma trận phân bổ (hoặc công cụ khác).",
+      "seatHeadChair": "Ghế Trưởng Phòng",
+      "seatCoChair": "Đồng chủ trì",
+      "inviteSentButAllocationFailed": "Đã gửi lời mời và đặt vai trò chủ tọa nhưng không thể liên kết ghế trên bục: {error}. Sửa ma trận phân bổ hoặc liên hệ với bộ phận hỗ trợ.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Chiếc ghế trên bục đó không phù hợp với sơ đồ chủ tịch của ủy ban này."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Bạn phải đăng nhập.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "Xuất tài liệu InterMUN ({range})",
       "emailSendConfigHint": "Đặt SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS và tùy chọn MATERIALS_EXPORT_FROM trên máy chủ.",
       "exportEmailedTo": "Xuất được gửi qua email tới {email}. Nếu bạn không thấy nó, hãy kiểm tra thư rác/thư rác."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Chưa đăng nhập.",
+      "onlySmt": "Chỉ ban thư ký hoặc quản trị viên trang web mới có thể quản lý cố vấn.",
+      "unauthorized": "Không được phép.",
+      "invalidEmail": "Nhập địa chỉ email hợp lệ.",
+      "missingServiceRole": "Máy chủ thiếu SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Đặt NEXT_PUBLIC_APP_URL cho các liên kết chuyển hướng lời mời.",
+      "emailAlreadyRegistered": "Email đó đã có tài khoản. Đặt vai trò của họ thành cố vấn trong quản trị viên, sau đó chỉ định một đại biểu.",
+      "inviteRoleFailed": "Đã gửi lời mời nhưng không thể đặt vai trò cố vấn: {message}",
+      "inviteSent": "Lời mời đã được gửi tới {email}. Họ sẽ là cố vấn sau khi đặt mật khẩu.",
+      "invalidAdvisorEmail": "Nhập email của cố vấn.",
+      "missingDelegate": "Chọn ghế đại biểu.",
+      "advisorNotFound": "Không tìm thấy tài khoản cho email cố vấn đó.",
+      "notAdvisorRole": "Người dùng đó không phải là cố vấn. Mời họ hoặc đặt vai trò cố vấn trước.",
+      "delegateNotFound": "Không tìm thấy ghế đại biểu.",
+      "delegateUnlinked": "Ghế đó chưa có tài khoản đại biểu được liên kết.",
+      "assigned": "Đã chỉ định cố vấn cho {country}."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "Chi tiết sự kiện",
     "selectConferenceFirst": "Chọn hội nghị có cổng sự kiện trước, sau đó quay lại đây.",
     "committeeSessionsTitle": "Các phiên họp của ủy ban trong sự kiện này",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Mỗi thẻ là một ngăn: nhãn ngắn, tên chính thức, logo, tối đa hai chủ đề chương trình nghị sự, liên kết RoP, mã phòng sáu ký tự dùng chung (cổng thứ hai) và hồ sơ thủ tục. Mã phòng phải duy nhất giữa các phòng trong sự kiện này.",
     "noCommitteeSessions": "Không có phiên họp ủy ban cho sự kiện này.",
     "eventName": "Tên sự kiện",
     "tagline": "Dòng giới thiệu",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "Sáu ký tự: tên viết tắt của buồng + ba chữ số (gợi ý xác định:",
     "saveCommittee": "Ủy ban lưu",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "nhãn ủy ban",
+    "committeeLabelPlaceholder": "ví dụ. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Tên ủy ban chính thức",
+    "topic1Label": "Chủ đề 1",
+    "topic2Label": "Chủ đề 2 (tùy chọn)",
+    "topic2Placeholder": "Câu hỏi chương trình nghị sự thứ hai",
+    "topic2DisabledHint": "Thêm hàng chủ đề thứ hai để chỉnh sửa trường này.",
+    "addSecondTopic": "Thêm chủ đề thứ hai",
+    "addingTopic": "Đang thêm…",
+    "ropDocumentLink": "Quy định về thủ tục (liên kết tài liệu)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Mã phòng (cổng 2)",
+    "roomCodeHelpPrefix": "Sáu chữ cái hoặc chữ số, dùng chung cho phòng này (gợi ý:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Lịch trình hội nghị hai ngày",
+      "subtitle": "Lập kế hoạch cho mỗi nhóm đại biểu (cùng nhóm mà bạn sử dụng cho các ủy ban cụm). Màu sắc theo loại khối: phiên, giờ nghỉ hoặc buổi lễ. Đánh dấu bữa trưa để kiểm tra chồng chéo. Đã lưu với sự kiện đang hoạt động.",
+      "day1Tab": "Ngày 1",
+      "day2Tab": "Ngày 2",
+      "lunchOverlapTab": "Ăn trưa trùng nhau",
+      "lunchOverlapHelp": "Sự chồng chéo xuất hiện khi cả hai nhóm đều có một hàng được đánh dấu là bữa trưa trong cùng một ngày và khoảng thời gian giao nhau.",
+      "noLunchOverlaps": "Không phát hiện thấy sự trùng lặp về bữa trưa. Đánh dấu ít nhất một hàng là bữa trưa cho hai nhóm khác nhau trong cùng một ngày với thời gian trùng nhau.",
+      "dayLabel": "Ngày {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
       "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "groupsLabel": "Nhóm",
+      "renameGroup": "Tên nhóm hoạt động",
+      "colStart": "Bắt đầu",
+      "colEnd": "Kết thúc",
+      "colLabel": "Chặn/phiên",
+      "colKind": "Kiểu",
+      "kindSession": "Phiên họp",
+      "kindBreak": "Phá vỡ",
+      "kindCeremony": "Lễ",
+      "legendTitle": "Khối màu",
+      "legendSession": "Phiên họp ủy ban",
+      "legendBreak": "Nghỉ giải lao/ăn trưa/ họp kín",
+      "legendCeremony": "Lễ khai mạc/bế mạc/lễ",
+      "colLunch": "Bữa trưa",
+      "emptyDay": "Chưa có khối nào. Thêm một khối hoặc sử dụng tab nhóm khác.",
+      "blockPlaceholder": "ví dụ. Lễ khai mạc · Phiên họp Ủy ban lần 1",
+      "lunchCheckboxAria": "Tính hàng này là bữa trưa để kiểm tra chồng chéo",
+      "remove": "Di dời",
+      "addBlock": "Thêm khối thời gian",
+      "newGroupName": "Tên nhóm mới",
+      "newGroupPlaceholder": "ví dụ. đoàn báo chí",
+      "defaultNewGroupName": "Nhóm mới",
+      "addGroup": "Thêm nhóm",
+      "removeGroup": "Xóa nhóm",
+      "confirmRemoveGroup": "Xóa nhóm lịch trình \"{name}\" và tất cả các khối của nó trong cả hai ngày?",
+      "saveSchedule": "Lưu lịch trình",
+      "saving": "Đang lưu…",
+      "saved": "Đã lưu lịch trình.",
+      "resetTemplate": "Đặt lại về mẫu",
+      "confirmReset": "Đặt lại lịch trình về ba nhóm mặc định và xóa tất cả các khối?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — lịch trình trực quan chính thức",
+        "body": "Kế hoạch hai ngày này được ấn định cho SEAMUN I 2027. Nó phù hợp với lịch trình tổng thể đã công bố và không thể thay đổi trong ứng dụng (kể cả bởi ban thư ký).",
+        "legendTitle": "Màu sắc",
+        "legendArrival": "Đến/đăng ký",
+        "legendDismissal": "Sa thải",
+        "legendCeremony": "Lễ",
+        "legendBreak": "Nghỉ chung",
+        "legendSession": "Buổi học",
+        "legendLunch": "Ăn (bữa trưa)",
+        "legendRelax": "Sự ớn lạnh",
+        "legendSupport": "Phòng hỗ trợ",
+        "legendStrategy": "Phòng chiến lược",
+        "legendSweep": "Quét",
+        "handbookLink": "Sổ tay hội nghị mở (PDF)",
+        "handbookHint": "tài liệu chính thức; thời gian biểu và nhóm phòng đã khóa bên dưới tuân theo ấn phẩm này.",
+        "committeeMatrixTitle": "Phòng ủy ban theo lịch trình",
+        "committeeMatrixHint": "Mỗi buồng tuân theo đồng hồ Ngày 1 / Ngày 2 của đường đua của nó (cột có cùng tên nhóm trong biểu đồ trên).",
+        "colScheduleTrack": "Lên lịch theo dõi",
+        "colChambers": "Phòng (nhãn trong sự kiện này)",
+        "advisorHint": "Nhấn vào một nhóm, sau đó xem thời gian biểu của cố vấn (A–D) hoặc thời gian biểu của đại biểu/chủ tịch cho một ủy ban — không phải cả hai cùng một lúc.",
+        "advisorOnlyHint": "Chọn lịch trình của bạn, sau đó cố vấn A–D để xem ngày của cố vấn đó.",
+        "committeeOnlyHint": "Thời gian biểu chính thức của ủy ban của bạn. Dưới đây, hãy so sánh thời gian ăn trưa với các ủy ban khác.",
+        "pickTrack": "Lên lịch theo dõi:",
+        "viewAllTeams": "Tất cả các đội",
+        "orPickTeam": "hoặc đội:",
+        "viewAs": "Xem dưới dạng",
+        "modeAdvisor": "cố vấn",
+        "modeCommittee": "Ủy ban (đại biểu/chủ tịch)",
+        "pickAdvisor": "cố vấn",
+        "pickCommittee": "Ủy ban",
+        "selectAdvisorPrompt": "Chọn cố vấn A, B, C hoặc D để xem thời gian biểu đó.",
+        "selectCommitteePrompt": "Chọn ủy ban của bạn để xem thời gian biểu của đại biểu/chủ tọa.",
+        "teamShort": {
+          "g1": "Alpha",
+          "g2": "bản thử nghiệm",
+          "g3": "Gamma",
+          "g4": "Đồng bằng",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Ăn trưa chồng chéo với các ủy ban khác",
+        "body": "So sánh thời gian ăn trưa của ủy ban của bạn với tối đa {max} các ủy ban khác. Chọn một ngày, sau đó chọn các ủy ban bên dưới.",
+        "pickCommittees": "So sánh với",
+        "noneSelected": "Chọn một hoặc nhiều ủy ban để xem phút ăn trưa chung.",
+        "yourLunch": "Bữa trưa của bạn",
+        "theirLunch": "Bữa trưa của họ",
+        "overlap": "Bữa trưa chung: {start}–{end} ({minutes} phút)",
+        "noOverlap": "Không có giờ ăn trưa chung vào ngày này."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "Đã phân tích cú pháp {count} hàng. Vật mẫu:",
     "runImport": "Chạy nhập",
     "generateMissingRandomCodes": "Tạo mã ngẫu nhiên bị thiếu",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Nghị sĩ · Ghế {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Ủy ban",
@@ -1838,8 +1907,8 @@
         "hint": "Bố trí ảo & sàn đại biểu"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Chương trình nghị sự",
+        "hint": "Chủ đề trực tiếp và tổng số phiếu bầu cho mỗi mục chương trình nghị sự"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Giải thưởng"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Ủy ban tuyển chọn…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Đang chuyển đổi…",
+    "dashboardCommitteeSwitchError": "Không thể chuyển đổi ủy ban. Hãy thử lại hoặc đăng nhập qua cổng phòng.",
+    "dashboardCommitteeAllocationsHeading": "Phân bổ trong phiên họp ủy ban này",
+    "dashboardCommitteeNoAllocationsListed": "Không có hàng phân bổ nào được liệt kê cho phiên này.",
+    "dashboardCommitteeApplySwitch": "Chuyển bảng điều khiển sang ủy ban này",
+    "timerExpiryAlarmTitle": "Âm thanh hẹn giờ",
+    "timerExpiryAlarmLabel": "Phát một tiếng chuông ngắn khi bất kỳ bộ đếm ngược nào trong ứng dụng về 0 (đồng hồ đếm giờ phát biểu, giới hạn thời gian phiên, thời hạn trung tâm).",
+    "timerExpiryAlarmHint": "Tắt theo mặc định. Chỉ được lưu trữ trong trình duyệt này.",
+    "jobRole": "Vai trò công việc",
+    "jobRolePlaceholder": "ví dụ. Giám đốc MUN, giáo viên (không bắt buộc)",
+    "advisorSettingsHint": "Hồ sơ nhân viên nhà trường - không phân bổ điểm hoặc đại biểu."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Thông báo đầy đủ",
       "daisAnnouncement": "thông báo dais",
       "close": "Đóng",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Chương trình nghị sự"
     },
     "committeeControl": {
       "sessionNameLabel": "Tên phiên",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "Và",
       "announcements": "Thông báo",
       "sidebarUseSuffix": "- một công cụ trên mỗi tab.",
-      "agenda": "Agenda"
+      "agenda": "Chương trình nghị sự"
     },
     "history": {
       "title": "Lịch sử phiên",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Ban thư ký: chủ trì và quan điểm của đại biểu",
+    "intro": "Chọn một ủy ban về dụng cụ chủ trì và một ghế đại biểu được liên kết với tài khoản của bạn, sau đó chuyển đổi các bề mặt. Đăng nhập vẫn mở trung tâm thư ký theo mặc định.",
+    "bindRequiredHint": "Chọn một ủy ban chủ tịch và/hoặc ghế đại biểu bên dưới, sau đó thử lại.",
+    "chairCommitteeLabel": "Ủy ban sàn chủ tịch",
+    "chairCommitteePlaceholder": "Ủy ban tuyển chọn…",
+    "delegateSeatLabel": "Ghế đại biểu (sự phân bổ của bạn)",
+    "delegateSeatPlaceholder": "Chọn chỗ ngồi…",
+    "saveBindings": "Lưu bài tập",
+    "bindingsSaved": "Đã lưu.",
+    "switchViewHeading": "Chuyển đổi bảng điều khiển",
+    "switchViewHelp": "Ban thư ký trả bạn về SMT. Chủ tịch và đại biểu mở cùng một vỏ trong ứng dụng mà những chiếc ghế thật và đại biểu sử dụng cho sự kiện đang diễn ra.",
+    "goSecretariat": "Ban thư ký",
+    "goChair": "Xem ghế",
+    "goDelegate": "Chế độ xem đại biểu",
+    "surfaceSwitchError": "Không thể chuyển đổi chế độ xem. Kiểm tra cổng sự kiện và các lựa chọn.",
+    "pickChairFirst": "Chọn một ủy ban chủ trì trước (hoặc lưu bài tập).",
+    "pickDelegateFirst": "Chọn ghế đại biểu trước (hoặc lưu bài tập)."
+  },
+  "advisorDashboard": {
+    "intro": "Bạn có thể theo dõi hoạt động ủy ban của đại biểu được giao. Bạn không có quyền truy cập vào các ghi chú trừ khi một chiếc ghế hoặc SMT chuyển tiếp một ghi chú cho bạn.",
+    "noAssignments": "Chưa có đại biểu nào được liên kết với tài khoản của bạn. Ban thư ký sẽ phân công bạn từ SMT → Cố vấn.",
+    "delegateLinked": "Đã liên kết tài khoản đại biểu",
+    "delegateNotLinked": "Chỗ ngồi chưa được liên kết với tài khoản đại biểu",
+    "viewProfile": "Hồ sơ",
+    "viewDocuments": "Tài liệu",
+    "viewVoting": "Bỏ phiếu",
+    "forwardedNotes": "Ghi chú được chuyển tiếp",
+    "schedule": {
+      "intro": "Chọn lịch trình của bạn, sau đó cố vấn A–D để xem thời gian biểu trong ngày của cố vấn đó."
+    },
+    "notes": {
+      "intro": "Ghi chú ghế hoặc SMT đã chọn để chia sẻ với bạn. Bạn không thể duyệt nguồn cấp dữ liệu ghi chú đầy đủ.",
+      "empty": "Chưa có ghi chú nào được chuyển tiếp tới bạn.",
+      "forwarded": "Đã chuyển tiếp"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "cố vấn",
+    "subtitle": "Mời các tài khoản cố vấn qua email và liên kết mỗi cố vấn với một ghế đại biểu.",
+    "selectEventFirst": "Trước tiên, hãy chọn một sự kiện hội nghị đang hoạt động.",
+    "enterConferenceCode": "Nhập mã hội nghị",
+    "inviteTitle": "Mời cố vấn",
+    "inviteBody": "Gửi liên kết đăng nhập (giống như quy trình với lời mời chủ trì). Vai trò tài khoản được đặt thành cố vấn.",
+    "inviteDisabled": "Lời mời yêu cầu SUPABASE_SERVICE_ROLE_KEY trong quá trình triển khai này.",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "cố vấn@school.edu",
+    "sending": "Đang gửi…",
+    "inviteButton": "Gửi lời mời",
+    "assignTitle": "Phân công đại biểu",
+    "assignBody": "Chọn một ghế đại biểu được liên kết. Một cố vấn cho mỗi đại biểu; việc gán lại sẽ thay thế liên kết trước đó.",
+    "advisorEmailLabel": "Email tư vấn",
+    "delegateLabel": "Ghế đại biểu",
+    "delegatePlaceholder": "Chọn đại biểu…",
+    "assignedTo": "cố vấn: {name}",
+    "saving": "Đang lưu…",
+    "assignButton": "Lưu bài tập",
+    "advisorFallback": "cố vấn"
   }
 }

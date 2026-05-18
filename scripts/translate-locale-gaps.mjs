@@ -168,6 +168,10 @@ async function main() {
     for (const { path: p, value: enVal } of enFlat) {
       if (typeof enVal !== "string") continue;
       const locVal = getDeep(locJson, p);
+      if (locVal === undefined) {
+        gaps.push({ path: p, value: enVal });
+        continue;
+      }
       if (typeof locVal !== "string") continue;
       if (locVal !== enVal) continue;
       if (shouldSkipValue(enVal)) continue;

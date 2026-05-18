@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Якщо вони вже зареєструвалися як делегати, рекламуйте їх тут, щоб вони отримали інформаційну панель голови та інструменти комітету (електронний лист не надсилається).",
     "grantChairRole": "Надайте роль голови",
     "chamberLabelFallback": "Засідання комітету",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Сидіння на помості",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Керівник {committee}",
+    "chairRoleCoOf": "Співголова {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Пропозиція вже відкрита для голосування. Закрийте його перед записом подальших висловлювань.",
     "statedMotionRecorded": "Заявлену пропозицію зареєстровано (ще не відкрито для голосування).",
     "statedMotionRemoved": "Заявлену пропозицію вилучено.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Порядок денний",
     "agendaTabHelp": "Встановіть тему прямого ефіру для виступу, а потім торкніться теми порядку денного, щоб відкрити панель голосування з повним списком делегатів для цієї теми. Нижче виберіть тему, щоб переглянути загальні результати голосування комітету.",
     "agendaLiveBadge": "Жити",
     "agendaSetLive": "Встановити живу тему",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Закриття засідання",
     "euPartySAndD": "Прогресивний альянс соціалістів і демократів (S&D)",
     "euPartyEpp": "Європейська народна партія (ЄНП)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Відновити Європу (Відновити)",
     "euPartyLeft": "Ліві в Європейському парламенті (Ліві)",
     "euPartyGreen": "Зелені/ВАЛ",
     "euPartyCAndR": "Європейські консерватори та реформісти (ЄКР)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Патріоти за Європу (PfE)",
     "euPartyIndependents": "Незалежні депутати / NI",
     "euPartyTimeGuideTitle": "Розподіл часу за фракціями (ЄС)",
     "euPartySpeechPoolLabel": "Час промов:",
@@ -543,7 +543,10 @@
     "home": "додому",
     "library": "Бібліотека",
     "mainNavigationAria": "Основна навігація",
-    "history": "History"
+    "history": "історія",
+    "advisorHub": "Advisor hub",
+    "advisorNotes": "Переслані нотатки",
+    "conferenceSchedule": "розклад"
   },
   "dashboardLayout": {
     "helpCenter": "Довідковий центр",
@@ -766,8 +769,13 @@
     "formalMotions": "Офіційні клопотання",
     "timer": "Таймер",
     "smtProfile": "Профіль",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Порядок денний",
+    "history": "історія",
+    "advisorDashboard": "Інформаційна панель радника",
+    "advisorNotes": "Переслані нотатки",
+    "delegateSchedule": "Розклад конференції",
+    "chairSchedule": "Розклад конференції",
+    "advisorSchedule": "Розклад конференції"
   },
   "setupPage": {
     "title": "Supabase не налаштовано",
@@ -803,7 +811,7 @@
       "overview": "Огляд",
       "checklist": "Контрольний список",
       "jump": "Перейти до",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Електронні листи голови"
     },
     "jumpTo": "Перейти до",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Порушити проблему"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Електронні листи голови",
+        "hint": "Dais вхідні по комісії"
+      },
+      "conferenceSchedule": {
+        "label": "Розклад конференції",
+        "hint": "Відстеження команди та розклад радника (A–D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}хв"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Спільна поштова скринька для вашого комітету (SEAMUN I). Зв’яжіться зі своїми кріслами за адресою електронної пошти нижче.",
+      "committeeColumn": "Комітет",
+      "emailColumn": "Вхідна скринька крісла (ім'я користувача)",
+      "openMail": "Відкрити пошту",
+      "noMatch": "Для цього комітету ще не вказано жодної опублікованої поштової скриньки голови. Запитайте SMT або перевірте бриф вашого комітету."
+    },
+    "schedule": {
+      "intro": "Виберіть свій командний шлях, а потім радника A–D або свій комітет (делегат/голова). Одночасно відображається лише один персональний розклад."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "Офіційні посилання",
       "roomCode": "Код кімнати",
       "settings": "Налаштування",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Порядок денний",
+      "history": "історія",
+      "conferenceSchedule": "розклад"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Паролі розподілу",
     "profile": "Профіль",
     "follow": "Слідуйте",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Радники"
   },
   "officialLinks": {
     "intro": "Документи, договори, основні органи, програми, місії та інформація про членів. Відкривається в новій вкладці.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "Черга доповідачів у прямому ефірі, переклички та таймери для цього комітету — ті самі дані, які голови бачать у сесійній залі.",
     "conferenceFallback": "Конференція",
     "committeeFallback": "Комітет",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "Реєстр секретаріату з нагляду",
+    "secretariatMatrixSectionSecretariat": "Секретаріат",
+    "secretariatMatrixSectionOperations": "Операції",
+    "secretariatMatrixSectionMedia": "ЗМІ",
+    "secretariatMatrixSmtEmail": "Електронна пошта SMT",
+    "secretariatMatrixFinanceEmail": "Фінансова електронна пошта",
+    "secretariatMatrixCommitteeOverviews": "Огляди комітетів",
+    "secretariatMatrixRole": "роль",
+    "secretariatMatrixName": "Ім'я",
+    "secretariatMatrixEmail": "Електронна пошта"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "Виберіть принаймні одного одержувача (делегацію чи голову).",
       "needAllocation": "Вам потрібен розподіл, щоб надсилати нотатки (або бути головою).",
       "sendFailed": "Не вдалося надіслати нотатку."
-    }
+    },
+    "forwardToAdvisor": "Переслати на {name}",
+    "forwardedToAdvisor": "Передано раднику",
+    "forwardedToAdvisorBadge": "(консультанту)",
+    "advisorFallback": "Радник"
   },
   "adminPage": {
     "title": "Адміністрація сайту",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "Лише секретаріат може надавати посади голови.",
       "noAccountForEmail": "Ще немає облікового запису з такою електронною адресою. Спочатку надішліть запрошення на крісло.",
       "promotedToChairSuccess": "Профіль для {email} тепер є кріслом.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Виберіть місце на трибуні та комітет для цього запрошення.",
+      "daisSeatRowMissing": "Не вдалося знайти рядок {seat} для цього комітету. Спробуйте зберегти матрицю розподілу для події, а потім повторіть спробу.",
+      "daisSeatAlreadyFilled": "На тому помості вже є стілець. Спочатку скасуйте призначення поточної особи в матриці розподілу (або іншому інструменті).",
+      "seatHeadChair": "Головний стілець",
+      "seatCoChair": "Співголова",
+      "inviteSentButAllocationFailed": "Запрошення надіслано та встановлено роль стільця, але місце на помості не вдалося зв’язати: {error}. Виправте матрицю розподілу або зверніться до служби підтримки.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Це місце на помості не відповідає плану головування цього комітету."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Ви повинні увійти в систему.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "Експорт матеріалів InterMUN ({range})",
       "emailSendConfigHint": "Встановіть SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS і додатково MATERIALS_EXPORT_FROM на сервері.",
       "exportEmailedTo": "Експорт надіслано на адресу {email}. Якщо ви його не бачите, перевірте спам/сміття."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Не ввійшли.",
+      "onlySmt": "Лише секретаріат або адміністратор сайту може керувати порадниками.",
+      "unauthorized": "Несанкціонований.",
+      "invalidEmail": "Введіть дійсну адресу електронної пошти.",
+      "missingServiceRole": "На сервері відсутній SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Установіть NEXT_PUBLIC_APP_URL для посилань переспрямування запрошень.",
+      "emailAlreadyRegistered": "Ця електронна адреса вже має обліковий запис. Установіть для них роль радника в адміністраторі, а потім призначте представника.",
+      "inviteRoleFailed": "Запрошення надіслано, але не вдалося встановити роль радника: {message}",
+      "inviteSent": "Запрошення надіслано на {email}. Вони будуть порадниками після встановлення свого пароля.",
+      "invalidAdvisorEmail": "Введіть електронну адресу консультанта.",
+      "missingDelegate": "Виберіть місце делегата.",
+      "advisorNotFound": "Для цієї електронної адреси консультанта не знайдено жодного облікового запису.",
+      "notAdvisorRole": "Цей користувач не є радником. Запросіть їх або спочатку призначте роль радника.",
+      "delegateNotFound": "Місце делегата не знайдено.",
+      "delegateUnlinked": "Це місце ще не має пов’язаного облікового запису делегата.",
+      "assigned": "Призначений радником {country}."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "Деталі події",
     "selectConferenceFirst": "Спершу виберіть конференцію з пропуском події, а потім поверніться сюди.",
     "committeeSessionsTitle": "Засідання комітетів у цьому заході",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Кожна картка складається з однієї камери: коротка мітка, офіційна назва, логотип, до двох тем порядку денного, посилання на RoP, спільний шестизначний код кімнати (другі ворота) та профіль процедури. У цій події коди кімнат мають бути унікальними для всіх камер.",
     "noCommitteeSessions": "Немає засідань комітетів для цієї події.",
     "eventName": "Назва події",
     "tagline": "Слоган",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "Шість символів: ініціали камери + три цифри (детермінована пропозиція:",
     "saveCommittee": "Зберегти комітет",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Етикетка комітету",
+    "committeeLabelPlaceholder": "напр. ECOSOC, DISEC, ІНТЕРПОЛ",
+    "officialCommitteeNameGrid": "Офіційна назва комітету",
+    "topic1Label": "Тема 1",
+    "topic2Label": "Тема 2 (на вибір)",
+    "topic2Placeholder": "Друге питання порядку денного",
+    "topic2DisabledHint": "Додайте другий рядок теми, щоб редагувати це поле.",
+    "addSecondTopic": "Додайте другу тему",
+    "addingTopic": "Додавання…",
+    "ropDocumentLink": "Регламент (посилання на документ)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Код кімнати (другі ворота)",
+    "roomCodeHelpPrefix": "Шість літер або цифр, спільних для цієї камери (пропозиція:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Розклад конференції на два дні",
+      "subtitle": "Плануйте блоки для групи делегатів (ті самі групи, які ви використовуєте для кластеризації комітетів). Колір за типом блоку: сесія, перерва чи церемонія. Позначте обід для перевірки перекриття. Збережено з активною подією.",
+      "day1Tab": "День 1",
+      "day2Tab": "день 2",
+      "lunchOverlapTab": "Обід перекриття",
+      "lunchOverlapHelp": "Збіги з’являються, коли обидві групи мають рядок, позначений як обід в той самий день, і часові діапазони перетинаються.",
+      "noLunchOverlaps": "Перекриття обіду не виявлено. Позначте принаймні один ряд як обід у двох різних групах в той самий день із збігаючим часом.",
+      "dayLabel": "День {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "проти",
+      "groupsLabel": "Групи",
+      "renameGroup": "Назва активної групи",
+      "colStart": "старт",
+      "colEnd": "Кінець",
+      "colLabel": "Блок / сесія",
+      "colKind": "Тип",
+      "kindSession": "Сесія",
+      "kindBreak": "Перерва",
+      "kindCeremony": "Церемонія",
+      "legendTitle": "Кольори блоку",
+      "legendSession": "Засідання комітету",
+      "legendBreak": "Перерва / обід / кокус",
+      "legendCeremony": "Відкриття/закриття/церемонія",
+      "colLunch": "обід",
+      "emptyDay": "Ще немає блоків. Додайте блок або скористайтеся іншою вкладкою групи.",
+      "blockPlaceholder": "напр. Урочисте відкриття · Засідання комітету 1",
+      "lunchCheckboxAria": "Вважайте цей рядок обіднім для перевірки перекриття",
+      "remove": "видалити",
+      "addBlock": "Додайте часовий блок",
+      "newGroupName": "Нова назва групи",
+      "newGroupPlaceholder": "напр. Пресовий корпус",
+      "defaultNewGroupName": "Нова група",
+      "addGroup": "Додати групу",
+      "removeGroup": "Видалити групу",
+      "confirmRemoveGroup": "Видалити групу розкладу \"{name}\" та всі її блоки на обидва дні?",
+      "saveSchedule": "Зберегти розклад",
+      "saving": "Збереження…",
+      "saved": "Розклад збережено.",
+      "resetTemplate": "Відновити до шаблону",
+      "confirmReset": "Скинути розклад до трьох груп за замовчуванням і очистити всі блоки?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — офіційний візуальний розклад",
+        "body": "Цей дводенний план фіксований для SEAMUN I 2027. Він відповідає опублікованому головному розкладу та не може бути змінений у додатку (зокрема секретаріатом).",
+        "legendTitle": "Кольори",
+        "legendArrival": "Заїзд / реєстрація",
+        "legendDismissal": "Звільнення",
+        "legendCeremony": "Церемонія",
+        "legendBreak": "Загальна перерва",
+        "legendSession": "Академічна сесія",
+        "legendLunch": "Їсти (обідати)",
+        "legendRelax": "Охолодити",
+        "legendSupport": "Кімната підтримки",
+        "legendStrategy": "Кімнати стратегії",
+        "legendSweep": "підмітати",
+        "handbookLink": "Посібник з відкритої конференції (PDF)",
+        "handbookHint": "офіційний основний документ; за цією публікацією слідує заблокований розклад і групування камер.",
+        "committeeMatrixTitle": "Зали комітетів за розкладом",
+        "committeeMatrixHint": "Кожна камера дотримується годинника дня 1 / дня 2 свого треку (стовпець із такою самою назвою групи в таблиці вище).",
+        "colScheduleTrack": "Розклад треку",
+        "colChambers": "Палати (мітки в цій події)",
+        "advisorHint": "Торкніться команди, а потім перегляньте розклад радника (A–D) або розклад делегата/голови для одного комітету — не обидва одночасно.",
+        "advisorOnlyHint": "Виберіть доріжку свого розкладу, а потім порадник A–D, щоб переглянути день цього порадника.",
+        "committeeOnlyHint": "Офіційний розклад вашого комітету. Нижче порівняйте час обіду з іншими комітетами.",
+        "pickTrack": "Розклад треку:",
+        "viewAllTeams": "Всі команди",
+        "orPickTeam": "або команда:",
+        "viewAs": "Переглянути як",
+        "modeAdvisor": "Радник",
+        "modeCommittee": "Комітет (делегат/голова)",
+        "pickAdvisor": "Радник",
+        "pickCommittee": "Комітет",
+        "selectAdvisorPrompt": "Виберіть консультанта A, B, C або D, щоб переглянути цей розклад.",
+        "selectCommitteePrompt": "Виберіть свій комітет, щоб переглянути розклад делегатів/голови.",
+        "teamShort": {
+          "g1": "Альфа",
+          "g2": "Бета",
+          "g3": "Гамма",
+          "g4": "Дельта",
+          "support": "Епсилон"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Обід збігається з іншими комітетами",
+        "body": "Порівняйте період обіду свого комітету з максимум {max} іншими комітетами. Виберіть день, а потім виберіть комітети нижче.",
+        "pickCommittees": "Порівняйте з",
+        "noneSelected": "Виберіть один або кілька комітетів, щоб переглянути протокол спільного обіду.",
+        "yourLunch": "Ваш обід",
+        "theirLunch": "Їхній обід",
+        "overlap": "Спільний обід: {start}–{end} ({minutes} хв)",
+        "noOverlap": "У цей день немає спільного обіду."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "Проаналізовано {count} рядків. Зразок:",
     "runImport": "Запустіть імпорт",
     "generateMissingRandomCodes": "Генеруйте відсутні випадкові коди",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Парламентарій · Місце {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Комітет",
@@ -1838,8 +1907,8 @@
         "hint": "Віртуальний макет і поверх делегатів"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Порядок денний",
+        "hint": "Актуальна тема та загальна кількість голосів за пункт порядку денного"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Нагороди"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Вибрати комітет…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Перемикання…",
+    "dashboardCommitteeSwitchError": "Не вдалося змінити комітет. Спробуйте ще раз або увійдіть через ворота кімнати.",
+    "dashboardCommitteeAllocationsHeading": "Розподіл коштів на цьому засіданні комітету",
+    "dashboardCommitteeNoAllocationsListed": "Для цього сеансу не вказано жодного рядка розподілу.",
+    "dashboardCommitteeApplySwitch": "Переключити інформаційну панель на цей комітет",
+    "timerExpiryAlarmTitle": "Звук таймера",
+    "timerExpiryAlarmLabel": "Увімкніть короткий дзвінок, коли будь-який зворотний відлік у додатку досягне нуля (таймер мовлення, ліміт часу сеансу, кінцеві терміни концентратора).",
+    "timerExpiryAlarmHint": "За замовчуванням вимкнено. Зберігається лише в цьому браузері.",
+    "jobRole": "Посадова роль",
+    "jobRolePlaceholder": "напр. Директор MUN, викладач (за бажанням)",
+    "advisorSettingsHint": "Профіль шкільного персоналу — без оцінки чи розподілу делегатів."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Повне оголошення",
       "daisAnnouncement": "Оголошення Dais",
       "close": "Закрити",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Порядок денний"
     },
     "committeeControl": {
       "sessionNameLabel": "Назва сеансу",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "і",
       "announcements": "Оголошення",
       "sidebarUseSuffix": "— один інструмент на вкладку.",
-      "agenda": "Agenda"
+      "agenda": "Порядок денний"
     },
     "history": {
       "title": "Історія сесії",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Секретаріат: думки голови та делегатів",
+    "intro": "Виберіть комітет для інструментів стільця та місце делегата, пов’язаного з вашим обліковим записом, а потім змініть поверхню. Під час входу досі за замовчуванням відкривається центр секретаріату.",
+    "bindRequiredHint": "Виберіть голову комітету та/або місце делегата нижче, а потім повторіть спробу.",
+    "chairCommitteeLabel": "Голова комітету",
+    "chairCommitteePlaceholder": "Вибрати комітет…",
+    "delegateSeatLabel": "Місце делегата (ваш розподіл)",
+    "delegateSeatPlaceholder": "Виберіть місце…",
+    "saveBindings": "Зберегти завдання",
+    "bindingsSaved": "Збережено.",
+    "switchViewHeading": "Перемикач приладової панелі",
+    "switchViewHelp": "Секретаріат повертає вас до ЗПТ. Голова та делегат відкривають ті самі оболонки програми, які реальні стільці та делегати використовують для активної події.",
+    "goSecretariat": "Секретаріат",
+    "goChair": "Вигляд крісла",
+    "goDelegate": "Вид делегата",
+    "surfaceSwitchError": "Не вдалося перемкнути перегляд. Перевірте вихід на подію та вибір.",
+    "pickChairFirst": "Спочатку виберіть голову комітету (або збережіть завдання).",
+    "pickDelegateFirst": "Спочатку виберіть місце делегата (або збережіть призначення)."
+  },
+  "advisorDashboard": {
+    "intro": "Ви можете контролювати діяльність комітету призначеного делегата. Ви не маєте доступу до нотаток, якщо голова або SMT не перешле вам їх.",
+    "noAssignments": "До вашого облікового запису ще не прив’язано жодного представника. Секретаріат призначить вас із SMT → Advisors.",
+    "delegateLinked": "Делегувати обліковий запис пов’язано",
+    "delegateNotLinked": "Місце ще не пов’язано з обліковим записом представника",
+    "viewProfile": "Профіль",
+    "viewDocuments": "Документи",
+    "viewVoting": "Голосування",
+    "forwardedNotes": "Переслані нотатки",
+    "schedule": {
+      "intro": "Виберіть доріжку свого розкладу, а потім порадника A–D, щоб переглянути розклад цього порадника на день."
+    },
+    "notes": {
+      "intro": "Стільці Notes або SMT вирішили поділитися з вами. Ви не можете переглянути повний канал нотаток.",
+      "empty": "Вам ще не надіслано жодних нотаток.",
+      "forwarded": "Переслано"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Радники",
+    "subtitle": "Запросіть облікові записи радників електронною поштою та зв’яжіть кожного радника з одним місцем делегата.",
+    "selectEventFirst": "Спочатку виберіть активну подію конференції.",
+    "enterConferenceCode": "Введіть код конференції",
+    "inviteTitle": "Запросити радника",
+    "inviteBody": "Надсилає посилання для входу (така сама процедура, що й запрошення на стілець). Роль облікового запису встановлено на консультанта.",
+    "inviteDisabled": "Запрошення потребують SUPABASE_SERVICE_ROLE_KEY у цьому розгортанні.",
+    "emailLabel": "Електронна пошта",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "Надсилання…",
+    "inviteButton": "Надіслати запрошення",
+    "assignTitle": "Призначити делегата",
+    "assignBody": "Виберіть пов’язане місце делегата. Один радник на делегата; повторне призначення замінює попереднє посилання.",
+    "advisorEmailLabel": "Електронна пошта радника",
+    "delegateLabel": "Місце делегата",
+    "delegatePlaceholder": "Виберіть делегата…",
+    "assignedTo": "радник: {name}",
+    "saving": "Збереження…",
+    "assignButton": "Зберегти завдання",
+    "advisorFallback": "Радник"
   }
 }

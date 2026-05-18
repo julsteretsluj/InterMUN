@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Ikiwa tayari wamejiandikisha kama mjumbe, wapandishe mada hapa ili wapate dashibodi ya mwenyekiti na zana za kamati (hakuna barua pepe iliyotumwa).",
     "grantChairRole": "Ruzuku jukumu la mwenyekiti",
     "chamberLabelFallback": "Kikao cha kamati",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Kiti cha Dais",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Mwenyekiti Mkuu {committee}",
+    "chairRoleCoOf": "Mwenyekiti mwenza wa {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Hoja tayari imefunguliwa kwa ajili ya kupiga kura. Ifunge kabla ya kurekodi taarifa zaidi.",
     "statedMotionRecorded": "Hoja iliyotangazwa imerekodiwa (bado haijafunguliwa kwa ajili ya kupiga kura).",
     "statedMotionRemoved": "Hoja iliyotamkwa imeondolewa.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Ajenda",
     "agendaTabHelp": "Weka mada ya moja kwa moja kwa sakafu, kisha uguse mada ya ajenda ili kufungua jopo la kupiga kura na orodha kamili ya wajumbe wa mada hiyo. Hapa chini, chagua mada ili kuona jumla ya kura za kamati.",
     "agendaLiveBadge": "Ishi",
     "agendaSetLive": "Weka mada ya moja kwa moja",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Kikao kimewezwa",
     "euPartySAndD": "Umoja wa Maendeleo wa Kisoshalisti na Kiddemokrasi (S&D)",
     "euPartyEpp": "Chama cha Watu wa Ulaya (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Fanya Upya Ulaya (Upya)",
     "euPartyLeft": "Kushoto katika Bunge la Ulaya (The Left)",
     "euPartyGreen": "Wa Kijani/EFA (Greens/EFA)",
     "euPartyCAndR": "Wabadilishaji na Wakosoaji wa Ulaya (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Wazalendo wa Ulaya (PfE)",
     "euPartyIndependents": "Wasio na chama / NI",
     "euPartyTimeGuideTitle": "Mwongozo wa muda wa vikundi vya EU",
     "euPartySpeechPoolLabel": "Muda wa hotuba:",
@@ -471,7 +471,10 @@
     "home": "Nyumbani",
     "library": "Maktaba",
     "mainNavigationAria": "Urambazaji mkuu",
-    "history": "History"
+    "history": "Historia",
+    "advisorHub": "Kitovu cha mshauri",
+    "advisorNotes": "Vidokezo vilivyotumwa",
+    "conferenceSchedule": "Ratiba"
   },
   "dashboardLayout": {
     "helpCenter": "Kituo cha usaidizi",
@@ -694,8 +697,13 @@
     "formalMotions": "Mwendo rasmi",
     "timer": "Kipima muda",
     "smtProfile": "Wasifu",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Ajenda",
+    "history": "Historia",
+    "advisorDashboard": "Dashibodi ya mshauri",
+    "advisorNotes": "Vidokezo vinavyosambazwa",
+    "delegateSchedule": "Ratiba ya mkutano",
+    "chairSchedule": "Ratiba ya mkutano",
+    "advisorSchedule": "Ratiba ya mkutano"
   },
   "setupPage": {
     "title": "Supabase haijasanidiwa",
@@ -731,7 +739,7 @@
       "overview": "Muhtasari",
       "checklist": "Orodha ya ukaguzi",
       "jump": "Rukia kwa",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Barua pepe za mwenyekiti"
     },
     "jumpTo": "Rukia kwa",
     "tiles": {
@@ -788,8 +796,12 @@
         "hint": "Onyesha suala"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Barua pepe za mwenyekiti",
+        "hint": "Dais inbox kwa kamati"
+      },
+      "conferenceSchedule": {
+        "label": "Ratiba ya mkutano",
+        "hint": "Wimbo wa timu na ratiba ya mshauri (A-D)"
       }
     },
     "countdownCard": {
@@ -808,11 +820,14 @@
       "remainingM": "{minutes}d"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Kasha pokezi la dais lililoshirikiwa kwa kamati yako (SEAMUN I). Wasiliana na wenyeviti wako kutoka kwa barua pepe iliyo hapa chini.",
+      "committeeColumn": "Kamati",
+      "emailColumn": "Kikasha cha mwenyekiti (jina la mtumiaji)",
+      "openMail": "Fungua barua",
+      "noMatch": "Bado hakuna kikasha pokezi cha mwenyekiti kilichoorodheshwa kwa kamati hii. Uliza SMT au angalia muhtasari wa kamati yako."
+    },
+    "schedule": {
+      "intro": "Chagua wimbo wako wa timu, kisha mshauri A-D au kamati yako (mjumbe/mwenyekiti). Ratiba moja tu ya kibinafsi ndiyo inayoonyeshwa kwa wakati mmoja."
     }
   },
   "materialsExportCard": {
@@ -839,7 +854,7 @@
     "clauseText": "Maandishi ya kifungu",
     "clausePlaceholder": "…sehemu iliyobaki ya kifungu (ukweli, vitendo, maelezo). Nukta za juu baada ya kuanzia zinaongezwa unapohifadhi.",
     "preview": "Hakiki",
-    "previewDash": "—",
+    "previewDash": "-",
     "submitting": "Inatumwa…",
     "submitClause": "Tuma pendekezo la kifungu",
     "suggestionsHeading": "Mapendekezo kwa azimio hili",
@@ -939,8 +954,9 @@
       "roomCode": "Msimbo wa chumba",
       "settings": "Mipangilio",
       "discipline": "Nidhamu",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Ajenda",
+      "history": "Historia",
+      "conferenceSchedule": "Ratiba"
     }
   },
   "smtNav": {
@@ -953,7 +969,8 @@
     "allocationPasswords": "Nywila za ugawaji",
     "profile": "Wasifu",
     "follow": "Fuata",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Washauri"
   },
   "officialLinks": {
     "intro": "Hati, mikataba, mashirika kuu, programu, misheni na maelezo ya wanachama. Hufungua katika kichupo kipya.",
@@ -1053,16 +1070,16 @@
     "liveFloorDescription": "Foleni ya spika ya moja kwa moja, wito wa orodha, na vipima muda vya kamati hii—viti sawa vya data huona kwenye sakafu ya kikao.",
     "conferenceFallback": "Mkutano",
     "committeeFallback": "Kamati",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "Orodha ya orodha ya usimamizi wa Sekretarieti",
+    "secretariatMatrixSectionSecretariat": "Sekretarieti",
+    "secretariatMatrixSectionOperations": "Uendeshaji",
+    "secretariatMatrixSectionMedia": "Vyombo vya habari",
+    "secretariatMatrixSmtEmail": "Barua pepe ya SMT",
+    "secretariatMatrixFinanceEmail": "Barua pepe ya fedha",
+    "secretariatMatrixCommitteeOverviews": "Muhtasari wa kamati",
+    "secretariatMatrixRole": "Jukumu",
+    "secretariatMatrixName": "Jina",
+    "secretariatMatrixEmail": "Barua pepe"
   },
   "committeeNames": {
     "full": {
@@ -1256,7 +1273,11 @@
       "noRecipients": "Chagua angalau mpokeaji mmoja (uwakilishi au mwenyekiti).",
       "needAllocation": "Unahitaji mgao kutuma maelezo (au kuwa mwenyekiti).",
       "sendFailed": "Imeshindwa kutuma dokezo."
-    }
+    },
+    "forwardToAdvisor": "Sambaza kwa {name}",
+    "forwardedToAdvisor": "Imetumwa kwa mshauri",
+    "forwardedToAdvisorBadge": "(kwa mshauri)",
+    "advisorFallback": "Mshauri"
   },
   "adminPage": {
     "title": "Utawala wa tovuti",
@@ -1400,14 +1421,14 @@
       "onlySmtGrantChair": "Sekretarieti pekee ndiyo inaweza kutoa majukumu ya mwenyekiti.",
       "noAccountForEmail": "Bado hakuna akaunti iliyo na barua pepe hiyo. Tuma mwaliko wa mwenyekiti kwanza.",
       "promotedToChairSuccess": "Wasifu wa {email} sasa ni mwenyekiti wa jukwaa.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Chagua kiti cha jukwaa na kamati kwa mwaliko huu.",
+      "daisSeatRowMissing": "Haikuweza kupata safu mlalo {seat} kwa kamati hiyo. Jaribu kuhifadhi matrix ya ugawaji kwa tukio, kisha ujaribu tena.",
+      "daisSeatAlreadyFilled": "Kiti hicho cha dais tayari kina kiti. Ondoa mtu wa sasa katika matrix ya mgao (au zana nyingine) kwanza.",
+      "seatHeadChair": "Mwenyekiti Mkuu",
+      "seatCoChair": "Mwenyekiti mwenza",
+      "inviteSentButAllocationFailed": "Alika aliyetumwa na seti ya jukumu la mwenyekiti, lakini kiti cha jukwaa hakikuweza kuunganishwa: {error}. Rekebisha matrix ya ugawaji au wasiliana na usaidizi.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Kiti hicho cha jukwaa hakilingani na mpango wa mwenyekiti wa kamati hii."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Lazima uwe umeingia.",
@@ -1425,6 +1446,24 @@
       "emailSubject": "Usafirishaji wa nyenzo za InterMUN ({range})",
       "emailSendConfigHint": "Weka SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS na kwa hiari MATERIALS_EXPORT_FROM kwenye seva.",
       "exportEmailedTo": "Hamisha kwa barua pepe kwa {email}. Ikiwa huioni, angalia barua taka/takataka."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Hujaingia.",
+      "onlySmt": "Sekretarieti au msimamizi wa tovuti pekee ndiye anayeweza kudhibiti washauri.",
+      "unauthorized": "Haijaidhinishwa.",
+      "invalidEmail": "Weka barua pepe halali.",
+      "missingServiceRole": "Seva haina SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Weka NEXT_PUBLIC_APP_URL kwa viungo vya kuelekeza kwingine.",
+      "emailAlreadyRegistered": "Barua pepe hiyo tayari ina akaunti. Weka jukumu lao kuwa mshauri katika msimamizi, kisha ukabidhi mjumbe.",
+      "inviteRoleFailed": "Mwaliko umetumwa lakini haikuweza kuweka jukumu la mshauri: {message}",
+      "inviteSent": "Mwaliko umetumwa kwa {email}. Watakuwa mshauri baada ya kuweka nenosiri lao.",
+      "invalidAdvisorEmail": "Ingiza barua pepe ya mshauri.",
+      "missingDelegate": "Chagua kiti cha mjumbe.",
+      "advisorNotFound": "Hakuna akaunti iliyopatikana ya barua pepe ya mshauri huyo.",
+      "notAdvisorRole": "Mtumiaji huyo si mshauri. Waalike au weka jukumu la mshauri kwanza.",
+      "delegateNotFound": "Kiti cha mjumbe hakijapatikana.",
+      "delegateUnlinked": "Kiti hicho bado hakina akaunti ya mwakilishi iliyounganishwa.",
+      "assigned": "Amekabidhiwa mshauri {country}."
     }
   },
   "emails": {
@@ -1448,7 +1487,7 @@
     "eventDetails": "Maelezo ya tukio",
     "selectConferenceFirst": "Chagua kongamano na lango la tukio kwanza, kisha urudi hapa.",
     "committeeSessionsTitle": "Vikao vya kamati katika hafla hii",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Kila kadi ni chumba kimoja: lebo fupi, jina rasmi, nembo, hadi mada mbili za ajenda, kiungo cha RoP, msimbo wa chumba wenye herufi sita ulioshirikiwa (lango la pili), na wasifu wa utaratibu. Misimbo ya vyumba lazima ibaki ya kipekee katika vyumba vyote katika tukio hili.",
     "noCommitteeSessions": "Hakuna vikao vya kamati vya tukio hili.",
     "eventName": "Jina la tukio",
     "tagline": "Mstari wa tagi",
@@ -1491,81 +1530,111 @@
     "committeeCodeHelpPrefix": "Herufi sita: herufi za kwanza za chumba + tarakimu tatu (pendekezo la kuamua:",
     "saveCommittee": "Kamati ya kuokoa",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Lebo ya kamati",
+    "committeeLabelPlaceholder": "k.m. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Jina la kamati rasmi",
+    "topic1Label": "Mada ya 1",
+    "topic2Label": "Mada ya 2 (si lazima)",
+    "topic2Placeholder": "Swali la ajenda ya pili",
+    "topic2DisabledHint": "Ongeza safu mlalo ya pili ili kuhariri sehemu hii.",
+    "addSecondTopic": "Ongeza mada ya pili",
+    "addingTopic": "Inaongeza...",
+    "ropDocumentLink": "Kanuni za utaratibu (kiungo cha hati)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
-    "roomCodeHelpSuffix": ").",
+    "roomCodeLabel": "Msimbo wa chumba (lango la pili)",
+    "roomCodeHelpPrefix": "Herufi sita au tarakimu, zilizoshirikiwa kwa chumba hiki (pendekezo:",
+    "roomCodeHelpSuffix": ")",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Ratiba ya mkutano wa siku mbili",
+      "subtitle": "Panga vitalu kwa kila kikundi cha mjumbe (makundi sawa unayotumia kuunda kamati za nguzo). Rangi kwa aina ya kizuizi: kikao, mapumziko, au sherehe. Weka alama kwenye chakula cha mchana kwa ukaguzi wa mwingiliano. Imehifadhiwa na tukio linaloendelea.",
+      "day1Tab": "Siku ya 1",
+      "day2Tab": "Siku ya 2",
+      "lunchOverlapTab": "Chakula cha mchana hupishana",
+      "lunchOverlapHelp": "Mwingiliano huonekana wakati vikundi viwili vyote vina safu mlalo iliyotiwa alama ya chakula cha mchana kwa siku moja na safu za saa zinapopishana.",
+      "noLunchOverlaps": "Hakuna mwingiliano wa chakula cha mchana uliogunduliwa. Weka alama kwenye angalau safu mlalo moja kama chakula cha mchana katika vikundi viwili tofauti kwa siku moja na nyakati zinazopishana.",
+      "dayLabel": "Siku {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "dhidi ya",
+      "groupsLabel": "Vikundi",
+      "renameGroup": "Jina la kikundi linalotumika",
+      "colStart": "Anza",
+      "colEnd": "Mwisho",
+      "colLabel": "Zuia / kipindi",
+      "colKind": "Aina",
+      "kindSession": "Kikao",
+      "kindBreak": "Kuvunja",
+      "kindCeremony": "Sherehe",
+      "legendTitle": "Zuia rangi",
+      "legendSession": "Kikao cha kamati",
+      "legendBreak": "Mapumziko / chakula cha mchana / caucus",
+      "legendCeremony": "Kufungua / kufunga / sherehe",
+      "colLunch": "Chakula cha mchana",
+      "emptyDay": "Bado hakuna vizuizi. Ongeza kizuizi au tumia kichupo kingine cha kikundi.",
+      "blockPlaceholder": "k.m. Sherehe ya ufunguzi · Kikao cha Kamati 1",
+      "lunchCheckboxAria": "Hesabu safu mlalo hii kama chakula cha mchana kwa ukaguzi wa mwingiliano",
+      "remove": "Ondoa",
+      "addBlock": "Ongeza kizuizi cha wakati",
+      "newGroupName": "Jina jipya la kikundi",
+      "newGroupPlaceholder": "k.m. Vyombo vya habari",
+      "defaultNewGroupName": "Kikundi kipya",
+      "addGroup": "Ongeza kikundi",
+      "removeGroup": "Ondoa kikundi",
+      "confirmRemoveGroup": "Ungependa kuondoa kikundi cha ratiba \"{name}\" na vizuizi vyake vyote kwa siku zote mbili?",
+      "saveSchedule": "Hifadhi ratiba",
+      "saving": "Inahifadhi...",
+      "saved": "Ratiba imehifadhiwa.",
+      "resetTemplate": "Weka upya kwa kiolezo",
+      "confirmReset": "Ungependa kuweka upya ratiba kwa vikundi vitatu chaguomsingi na ufute vizuizi vyote?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 - ratiba rasmi ya kuona",
+        "body": "Mpango huu wa siku mbili umewekwa kwa ajili ya SEAMUN I 2027. Unalingana na ratiba kuu iliyochapishwa na hauwezi kubadilishwa katika programu (pamoja na sekretarieti).",
+        "legendTitle": "Rangi",
+        "legendArrival": "Kuwasili / usajili",
+        "legendDismissal": "Kufukuzwa kazi",
+        "legendCeremony": "Sherehe",
+        "legendBreak": "Mapumziko ya jumla",
+        "legendSession": "Kipindi cha kitaaluma",
+        "legendLunch": "Kula (chakula cha mchana)",
+        "legendRelax": "Tulia",
+        "legendSupport": "Chumba cha usaidizi",
+        "legendStrategy": "Vyumba vya mkakati",
+        "legendSweep": "Zoa",
+        "handbookLink": "Fungua kijitabu cha mkutano (PDF)",
+        "handbookHint": "hati rasmi; ratiba iliyofungwa na kambi ya vyumba hapa chini fuata chapisho hili.",
+        "committeeMatrixTitle": "Vyumba vya kamati kwa kufuata ratiba",
+        "committeeMatrixHint": "Kila chumba hufuata saa ya Siku ya 1 / Siku ya 2 ya wimbo wake (safu iliyo na jina la kikundi sawa kwenye chati iliyo hapo juu).",
+        "colScheduleTrack": "Panga wimbo",
+        "colChambers": "Chambers (lebo katika tukio hili)",
+        "advisorHint": "Gusa timu, kisha uangalie ratiba ya mshauri (A-D) au ratiba ya mjumbe/mwenyekiti wa kamati moja - sio zote mbili kwa wakati mmoja.",
+        "advisorOnlyHint": "Chagua wimbo wako wa ratiba, kisha mshauri A-D ili kuona siku ya mshauri huyo.",
+        "committeeOnlyHint": "Ratiba rasmi ya kamati yako. Hapo chini, linganisha nyakati za chakula cha mchana na kamati zingine.",
+        "pickTrack": "Panga wimbo:",
+        "viewAllTeams": "Timu zote",
+        "orPickTeam": "au timu:",
+        "viewAs": "Tazama kama",
+        "modeAdvisor": "Mshauri",
+        "modeCommittee": "Kamati (mjumbe / mwenyekiti)",
+        "pickAdvisor": "Mshauri",
+        "pickCommittee": "Kamati",
+        "selectAdvisorPrompt": "Chagua mshauri A, B, C, au D ili kuona ratiba hiyo.",
+        "selectCommitteePrompt": "Chagua kamati yako ili kuona ratiba ya mjumbe/mwenyekiti.",
+        "teamShort": {
+          "g1": "Alfa",
+          "g2": "Beta",
+          "g3": "Gamma",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Chakula cha mchana hupishana na kamati zingine",
+        "body": "Linganisha dirisha la chakula cha mchana la kamati yako na hadi {max} kamati zingine. Chagua siku, kisha chagua kamati hapa chini.",
+        "pickCommittees": "Linganisha na",
+        "noneSelected": "Chagua kamati moja au zaidi ili kuona dakika za pamoja za chakula cha mchana.",
+        "yourLunch": "Chakula chako cha mchana",
+        "theirLunch": "Chakula chao cha mchana",
+        "overlap": "Chakula cha mchana kilichoshirikiwa: {start}–{end} ({minutes} dakika)",
+        "noOverlap": "Hakuna wakati wa chakula cha mchana ulioshirikiwa siku hii."
       }
     }
   },
@@ -1621,7 +1690,7 @@
     "parsedRowsSample": "Imechanganua safu mlalo {count}. Sampuli:",
     "runImport": "Endesha uingizaji",
     "generateMissingRandomCodes": "Tengeneza misimbo isiyo na mpangilio",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Mbunge · Kiti {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Kamati",
@@ -1766,8 +1835,8 @@
         "hint": "Mpangilio pepe na sakafu ya kukabidhi"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Ajenda",
+        "hint": "Mada ya moja kwa moja na jumla ya kura kwa kila kipengee cha ajenda"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Tuzo"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Kamati teule…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Inabadilisha...",
+    "dashboardCommitteeSwitchError": "Haikuweza kubadilisha kamati. Jaribu tena au ingia kupitia lango la chumba.",
+    "dashboardCommitteeAllocationsHeading": "Mgao katika kikao hiki cha kamati",
+    "dashboardCommitteeNoAllocationsListed": "Hakuna safu mlalo za ugawaji zilizoorodheshwa kwa kipindi hiki.",
+    "dashboardCommitteeApplySwitch": "Badili dashibodi hadi kwenye kamati hii",
+    "timerExpiryAlarmTitle": "Sauti ya kipima muda",
+    "timerExpiryAlarmLabel": "Cheza sauti ya kengele fupi wakati hesabu yoyote ya ndani ya programu inapofikia sifuri (kipima muda cha hotuba, kikomo cha muda wa kikao, makataa ya kituo).",
+    "timerExpiryAlarmHint": "Imezimwa kwa chaguo-msingi. Imehifadhiwa katika kivinjari hiki pekee.",
+    "jobRole": "Jukumu la kazi",
+    "jobRolePlaceholder": "k.m. Mkurugenzi wa MUN, mwalimu (hiari)",
+    "advisorSettingsHint": "Wasifu wa wafanyikazi wa shule - hakuna daraja au mgao wa mjumbe."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Tangazo kamili",
       "daisAnnouncement": "Tangazo la Dais",
       "close": "Funga",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Ajenda"
     },
     "committeeControl": {
       "sessionNameLabel": "Jina la kikao",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "na",
       "announcements": "Matangazo",
       "sidebarUseSuffix": "- chombo kimoja kwa kila kichupo.",
-      "agenda": "Agenda"
+      "agenda": "Ajenda"
     },
     "history": {
       "title": "Historia ya kikao",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Sekretarieti: mwenyekiti & maoni ya wajumbe",
+    "intro": "Chagua kamati ya zana za mwenyekiti na kiti cha mjumbe kilichounganishwa na akaunti yako, kisha ubadilishe nyuso. Kuingia bado kunafungua kitovu cha sekretarieti kwa chaguomsingi.",
+    "bindRequiredHint": "Chagua kamati ya mwenyekiti na/au mjumbe hapa chini, kisha ujaribu tena.",
+    "chairCommitteeLabel": "Kamati ya sakafu ya mwenyekiti",
+    "chairCommitteePlaceholder": "Kamati teule…",
+    "delegateSeatLabel": "Kiti cha mjumbe (mgao wako)",
+    "delegateSeatPlaceholder": "Chagua kiti...",
+    "saveBindings": "Hifadhi kazi",
+    "bindingsSaved": "Imehifadhiwa.",
+    "switchViewHeading": "Badili dashibodi",
+    "switchViewHelp": "Sekretarieti inakurudisha kwa SMT. Mwenyekiti na mjumbe hufungua makombora yale yale ya ndani ya programu ambayo viti halisi na wajumbe hutumia kwa tukio linaloendelea.",
+    "goSecretariat": "Sekretarieti",
+    "goChair": "Mtazamo wa mwenyekiti",
+    "goDelegate": "Mtazamo wa mjumbe",
+    "surfaceSwitchError": "Haikuweza kubadilisha mwonekano. Angalia lango la tukio na chaguo.",
+    "pickChairFirst": "Chagua kamati ya mwenyekiti kwanza (au hifadhi kazi).",
+    "pickDelegateFirst": "Chagua kiti cha mjumbe kwanza (au hifadhi kazi)."
+  },
+  "advisorDashboard": {
+    "intro": "Unaweza kufuatilia shughuli za kamati ya mjumbe wako aliyekabidhiwa. Huna ufikiaji wa madokezo isipokuwa mwenyekiti au SMT ikupelekee moja.",
+    "noAssignments": "Bado hakuna mjumbe aliyeunganishwa kwenye akaunti yako. Sekretarieti itakukabidhi kutoka SMT → Washauri.",
+    "delegateLinked": "Dhibiti akaunti iliyounganishwa",
+    "delegateNotLinked": "Kiti bado hakijaunganishwa na akaunti ya mjumbe",
+    "viewProfile": "Wasifu",
+    "viewDocuments": "Nyaraka",
+    "viewVoting": "Kupiga kura",
+    "forwardedNotes": "Vidokezo vinavyosambazwa",
+    "schedule": {
+      "intro": "Chagua wimbo wako wa ratiba, kisha mshauri A-D ili kuona ratiba ya siku hiyo ya mshauri."
+    },
+    "notes": {
+      "intro": "Viti vya madokezo au SMT walichagua kushiriki nawe. Huwezi kuvinjari mipasho kamili ya madokezo.",
+      "empty": "Bado hakuna madokezo ambayo yametumwa kwako.",
+      "forwarded": "Imesambazwa"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Washauri",
+    "subtitle": "Alika akaunti za mshauri kwa barua pepe na uunganishe kila mshauri kwa kiti kimoja cha mjumbe.",
+    "selectEventFirst": "Chagua tukio linaloendelea la mkutano kwanza.",
+    "enterConferenceCode": "Weka msimbo wa mkutano",
+    "inviteTitle": "Alika mshauri",
+    "inviteBody": "Hutuma kiungo cha kuingia (mtiririko sawa na mialiko ya mwenyekiti). Jukumu la akaunti limewekwa kuwa mshauri.",
+    "inviteDisabled": "Mialiko inahitaji SUPABASE_SERVICE_ROLE_KEY kwenye utumaji huu.",
+    "emailLabel": "Barua pepe",
+    "emailPlaceholder": "mshauri@school.edu",
+    "sending": "Inatuma...",
+    "inviteButton": "Tuma mwaliko",
+    "assignTitle": "Mkabidhi mjumbe",
+    "assignBody": "Chagua kiti cha mjumbe kilichounganishwa. Mshauri mmoja kwa kila mjumbe; kukabidhi upya kunachukua nafasi ya kiungo kilichotangulia.",
+    "advisorEmailLabel": "Barua pepe ya mshauri",
+    "delegateLabel": "Kiti cha mjumbe",
+    "delegatePlaceholder": "Chagua mjumbe...",
+    "assignedTo": "mshauri: {name}",
+    "saving": "Inahifadhi...",
+    "assignButton": "Hifadhi kazi",
+    "advisorFallback": "Mshauri"
   }
 }

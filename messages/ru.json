@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Если они уже зарегистрировались в качестве делегата, продвиньте их здесь, чтобы они получили панель управления председателя и инструменты комитета (электронное письмо не отправляется).",
     "grantChairRole": "Предоставить роль председателя",
     "chamberLabelFallback": "Заседание комитета",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Сиденье на возвышении",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Главный председатель {committee}",
+    "chairRoleCoOf": "Сопредседатель {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Предложение уже открыто для голосования. Закройте его, прежде чем записывать дальнейшие заявления.",
     "statedMotionRecorded": "Заявленное предложение зарегистрировано (пока не открыто для голосования).",
     "statedMotionRemoved": "Заявленное ходатайство снято.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Повестка дня",
     "agendaTabHelp": "Установите живую тему выступления, затем коснитесь темы повестки дня, чтобы открыть панель голосования с полным списком делегатов по этой теме. Ниже выберите тему, чтобы просмотреть итоги голосования комитета.",
     "agendaLiveBadge": "Жить",
     "agendaSetLive": "Установить живую тему",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Закрытие заседания",
     "euPartySAndD": "Прогрессивный альянс социалистов и демократов (S&D)",
     "euPartyEpp": "Европейская народная партия (ЕНП)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Обновить Европу (Обновить)",
     "euPartyLeft": "Левые в Европейском парламенте (Левые)",
     "euPartyGreen": "Зелёные/ЕСА",
     "euPartyCAndR": "Европейские консерваторы и реформисты (ЕКР)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Патриоты Европы (PfE)",
     "euPartyIndependents": "Независимые депутаты / NI",
     "euPartyTimeGuideTitle": "Распределение времени по фракциям (ЕС)",
     "euPartySpeechPoolLabel": "Время выступлений:",
@@ -543,7 +543,10 @@
     "home": "Дом",
     "library": "Библиотека",
     "mainNavigationAria": "Основная навигация",
-    "history": "History"
+    "history": "История",
+    "advisorHub": "Центр советников",
+    "advisorNotes": "Пересланные заметки",
+    "conferenceSchedule": "Расписание"
   },
   "dashboardLayout": {
     "helpCenter": "Справочный центр",
@@ -766,8 +769,13 @@
     "formalMotions": "Официальные ходатайства",
     "timer": "Таймер",
     "smtProfile": "Профиль",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Повестка дня",
+    "history": "История",
+    "advisorDashboard": "Панель советника",
+    "advisorNotes": "Пересланные заметки",
+    "delegateSchedule": "Расписание конференции",
+    "chairSchedule": "Расписание конференции",
+    "advisorSchedule": "Расписание конференции"
   },
   "setupPage": {
     "title": "Супабаза не настроена",
@@ -803,7 +811,7 @@
       "overview": "Обзор",
       "checklist": "Контрольный список",
       "jump": "Перейти к",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Электронная почта председателя"
     },
     "jumpTo": "Перейти к",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Поднять проблему"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Электронная почта председателя",
+        "hint": "Почтовые ящики на возвышении по комитету"
+      },
+      "conferenceSchedule": {
+        "label": "Расписание конференции",
+        "hint": "Командный трек и расписание консультантов (A – D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}м"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Общий почтовый ящик для вашего комитета (SEAMUN I). Свяжитесь со своими стульями по электронной почте ниже.",
+      "committeeColumn": "комитет",
+      "emailColumn": "Почтовый ящик кресла (имя пользователя)",
+      "openMail": "Открыть письмо",
+      "noMatch": "Для этого комитета пока не указан опубликованный почтовый ящик председателя. Спросите SMT или проверьте задание вашего комитета."
+    },
+    "schedule": {
+      "intro": "Выберите направление своей команды, затем либо советника A–D, либо свой комитет (делегат/председатель). Одновременно отображается только одно личное расписание."
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "Официальные ссылки",
       "roomCode": "Код номера",
       "settings": "Настройки",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Повестка дня",
+      "history": "История",
+      "conferenceSchedule": "Расписание"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Пароли распределения",
     "profile": "Профиль",
     "follow": "Следовать",
-    "hubAbbrev": "СМТ"
+    "hubAbbrev": "СМТ",
+    "advisors": "Советники"
   },
   "officialLinks": {
     "intro": "Документы, договоры, основные органы, программы, миссии и информация о членах. Открывается в новой вкладке.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "Очередь выступающих в реальном времени, перекличка и таймеры для этого комитета — те же данные, которые председатели видят в зале заседаний.",
     "conferenceFallback": "Конференция",
     "committeeFallback": "комитет",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "Реестр надзорных органов Секретариата",
+    "secretariatMatrixSectionSecretariat": "Секретариат",
+    "secretariatMatrixSectionOperations": "Операции",
+    "secretariatMatrixSectionMedia": "СМИ",
+    "secretariatMatrixSmtEmail": "электронная почта SMT",
+    "secretariatMatrixFinanceEmail": "Финансовая электронная почта",
+    "secretariatMatrixCommitteeOverviews": "Обзоры комитетов",
+    "secretariatMatrixRole": "Роль",
+    "secretariatMatrixName": "Имя",
+    "secretariatMatrixEmail": "Электронная почта"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "Выберите хотя бы одного получателя (делегацию или председателя).",
       "needAllocation": "Вам нужно распределение, чтобы отправлять заметки (или быть председателем).",
       "sendFailed": "Не удалось отправить заметку."
-    }
+    },
+    "forwardToAdvisor": "Вперед на {name}",
+    "forwardedToAdvisor": "Отправлено консультанту",
+    "forwardedToAdvisorBadge": "(советнику)",
+    "advisorFallback": "Советник"
   },
   "adminPage": {
     "title": "Администрирование сайта",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "Только секретариат может предоставлять функции председателя.",
       "noAccountForEmail": "Аккаунта с таким адресом электронной почты пока нет. Сначала отправьте приглашение на кресло.",
       "promotedToChairSuccess": "Профиль пользователя {email} теперь является креслом.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Выберите место и состав комитета для этого приглашения.",
+      "daisSeatRowMissing": "Не удалось найти строку {seat} для этого комитета. Попробуйте сохранить матрицу распределения для события, а затем повторите попытку.",
+      "daisSeatAlreadyFilled": "На этом возвышении уже есть стул. Сначала отмените назначение текущего человека в матрице распределения (или другом инструменте).",
+      "seatHeadChair": "Главный стул",
+      "seatCoChair": "Сопредседатель",
+      "inviteSentButAllocationFailed": "Приглашение отправлено, роль председателя задана, но подключить возвышение не удалось: {error}. Исправьте матрицу распределения или обратитесь в службу поддержки.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Это кресло не соответствует плану председателя этого комитета."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Вы должны войти в систему.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "Экспорт материалов InterMUN ({диапазон})",
       "emailSendConfigHint": "Установите SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS и, при необходимости, MATERIALS_EXPORT_FROM на сервере.",
       "exportEmailedTo": "Экспорт отправлен по электронной почте на адрес {email}. Если вы его не видите, проверьте спам/нежелательную почту."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Не авторизован.",
+      "onlySmt": "Управлять консультантами может только администратор секретариата или веб-сайта.",
+      "unauthorized": "Несанкционированный.",
+      "invalidEmail": "Введите действительный адрес электронной почты.",
+      "missingServiceRole": "На сервере отсутствует SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Установите NEXT_PUBLIC_APP_URL для ссылок перенаправления приглашений.",
+      "emailAlreadyRegistered": "Для этого адреса электронной почты уже есть учетная запись. Установите для них роль советника в администраторе, а затем назначьте делегата.",
+      "inviteRoleFailed": "Приглашение отправлено, но не удалось установить роль советника: {message}",
+      "inviteSent": "Приглашение отправлено на {email}. Они станут советниками после установки пароля.",
+      "invalidAdvisorEmail": "Введите адрес электронной почты консультанта.",
+      "missingDelegate": "Выберите место делегата.",
+      "advisorNotFound": "Учетная запись для этого электронного письма консультанта не найдена.",
+      "notAdvisorRole": "Этот пользователь не является советником. Пригласите их или сначала установите роль советника.",
+      "delegateNotFound": "Место делегата не найдено.",
+      "delegateUnlinked": "К этому месту еще нет связанной учетной записи делегата.",
+      "assigned": "Назначен советником {country}."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "Подробности мероприятия",
     "selectConferenceFirst": "Сначала выберите конференцию с шлюзом событий, а затем вернитесь сюда.",
     "committeeSessionsTitle": "Заседания комитетов на этом мероприятии",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Каждая карточка состоит из одной камеры: короткая метка, официальное название, логотип, до двух тем повестки дня, ссылка на RoP, общий шестизначный код комнаты (вторые ворота) и профиль процедуры. В этом случае коды помещений должны оставаться уникальными для всех помещений.",
     "noCommitteeSessions": "Никаких заседаний комитета по этому мероприятию.",
     "eventName": "Название события",
     "tagline": "Слоган",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "Шесть символов: инициалы палаты + три цифры (детерминированное предложение:",
     "saveCommittee": "Комитет спасения",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Этикетка комитета",
+    "committeeLabelPlaceholder": "например ЭКОСОС, ДИСЕК, ИНТЕРПОЛ",
+    "officialCommitteeNameGrid": "Официальное название комитета",
+    "topic1Label": "Тема 1",
+    "topic2Label": "Тема 2 (по желанию)",
+    "topic2Placeholder": "Второй вопрос повестки дня",
+    "topic2DisabledHint": "Добавьте вторую строку темы, чтобы редактировать это поле.",
+    "addSecondTopic": "Добавить вторую тему",
+    "addingTopic": "Добавление…",
+    "ropDocumentLink": "Правила процедуры (ссылка на документ)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Код номера (вторые ворота)",
+    "roomCodeHelpPrefix": "Шесть букв или цифр, общих для этой камеры (предложение:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Программа двухдневной конференции",
+      "subtitle": "Планируйте блоки для каждой группы делегатов (те же группы, которые вы используете для кластеризации комитетов). Цвет по типу блока: сеанс, перерыв или церемония. Отметьте обед для проверки совпадений. Сохранено с активным событием.",
+      "day1Tab": "День 1",
+      "day2Tab": "День 2",
+      "lunchOverlapTab": "Обед перекрывается",
+      "lunchOverlapHelp": "Перекрытия появляются, когда в двух группах строка помечена как обед в один и тот же день, а временные диапазоны пересекаются.",
+      "noLunchOverlaps": "Наложений на обед не обнаружено. Отметьте хотя бы одну строку как обед в двух разных группах в один и тот же день с перекрывающимся временем.",
+      "dayLabel": "День {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "против",
+      "groupsLabel": "Группы",
+      "renameGroup": "Имя активной группы",
+      "colStart": "Начинать",
+      "colEnd": "Конец",
+      "colLabel": "Блок/сессия",
+      "colKind": "Тип",
+      "kindSession": "Сессия",
+      "kindBreak": "Перерыв",
+      "kindCeremony": "Церемония",
+      "legendTitle": "Цвета блоков",
+      "legendSession": "Заседание комитета",
+      "legendBreak": "Перерыв / обед / собрание",
+      "legendCeremony": "Открытие/закрытие/церемония",
+      "colLunch": "Обед",
+      "emptyDay": "Блоков пока нет. Добавьте блок или используйте другую вкладку группы.",
+      "blockPlaceholder": "например Церемония открытия · Заседание комитета 1",
+      "lunchCheckboxAria": "Считайте эту строку обедом для проверок на перекрытие.",
+      "remove": "Удалять",
+      "addBlock": "Добавить временной блок",
+      "newGroupName": "Новое название группы",
+      "newGroupPlaceholder": "например Пресс-корпус",
+      "defaultNewGroupName": "Новая группа",
+      "addGroup": "Добавить группу",
+      "removeGroup": "Удалить группу",
+      "confirmRemoveGroup": "Удалить группу расписаний «{name}» и все ее блоки для обоих дней?",
+      "saveSchedule": "Сохранить расписание",
+      "saving": "Сохранение…",
+      "saved": "Расписание сохранено.",
+      "resetTemplate": "Сбросить настройки до шаблона",
+      "confirmReset": "Сбросить расписание к трем группам по умолчанию и очистить все блоки?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — официальное визуальное расписание",
+        "body": "Этот двухдневный план зафиксирован для SEAMUN I 2027. Он соответствует опубликованному генеральному расписанию и не может быть изменен в приложении (в том числе секретариатом).",
+        "legendTitle": "Цвета",
+        "legendArrival": "Прибытие/регистрация",
+        "legendDismissal": "Увольнение",
+        "legendCeremony": "Церемония",
+        "legendBreak": "Общий перерыв",
+        "legendSession": "Академическая сессия",
+        "legendLunch": "Ешьте (обед)",
+        "legendRelax": "Холод",
+        "legendSupport": "Комната поддержки",
+        "legendStrategy": "Стратегические комнаты",
+        "legendSweep": "Мести",
+        "handbookLink": "Справочник открытой конференции (PDF)",
+        "handbookHint": "официальный мастер-документ; заблокированное расписание и группировка камер, приведенные ниже, следуют за этой публикацией.",
+        "committeeMatrixTitle": "Залы комитетов по графику",
+        "committeeMatrixHint": "Каждая камера следует за часами Дня 1/Дня 2 своего трека (столбец с тем же названием группы на диаграмме выше).",
+        "colScheduleTrack": "Расписание трека",
+        "colChambers": "Чемберс (ярлыки в этом мероприятии)",
+        "advisorHint": "Коснитесь команды, затем просмотрите расписание советников (A–D) или расписание делегатов/председателей одного комитета, а не оба сразу.",
+        "advisorOnlyHint": "Выберите свой график расписания, затем советник A–D, чтобы просмотреть день этого консультанта.",
+        "committeeOnlyHint": "Официальное расписание вашего комитета. Ниже сравните время обеда с другими комитетами.",
+        "pickTrack": "Расписание трека:",
+        "viewAllTeams": "Все команды",
+        "orPickTeam": "или команда:",
+        "viewAs": "Посмотреть как",
+        "modeAdvisor": "Советник",
+        "modeCommittee": "Комитет (делегат/председатель)",
+        "pickAdvisor": "Советник",
+        "pickCommittee": "комитет",
+        "selectAdvisorPrompt": "Выберите консультанта A, B, C или D, чтобы просмотреть это расписание.",
+        "selectCommitteePrompt": "Выберите свой комитет, чтобы просмотреть расписание делегатов/председателей.",
+        "teamShort": {
+          "g1": "Альфа",
+          "g2": "Бета",
+          "g3": "Гамма",
+          "g4": "Дельта",
+          "support": "Эпсилон"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Обед совпадает с другими комитетами",
+        "body": "Сравните обеденное окно вашего комитета с {max} другими комитетами. Выберите день, а затем выберите комитеты ниже.",
+        "pickCommittees": "Сравните с",
+        "noneSelected": "Выберите один или несколько комитетов, чтобы просмотреть протоколы общего обеда.",
+        "yourLunch": "Ваш обед",
+        "theirLunch": "Их обед",
+        "overlap": "Совместный обед: {start}–{end} ({minutes} мин)",
+        "noOverlap": "В этот день совместного обеда не будет."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "Проанализировано {count} строк. Образец:",
     "runImport": "Запустить импорт",
     "generateMissingRandomCodes": "Генерировать недостающие случайные коды",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Парламентарий · Место {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "комитет",
@@ -1838,8 +1907,8 @@
         "hint": "Виртуальная планировка и этаж для делегатов"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Повестка дня",
+        "hint": "Живая тема и общее количество голосов по каждому пункту повестки дня"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Награды"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Выберите комитет…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Переключение…",
+    "dashboardCommitteeSwitchError": "Не удалось сменить комитет. Попробуйте еще раз или войдите в систему через ворота комнаты.",
+    "dashboardCommitteeAllocationsHeading": "Распределение средств на этом заседании комитета",
+    "dashboardCommitteeNoAllocationsListed": "Для этого сеанса не указаны строки распределения.",
+    "dashboardCommitteeApplySwitch": "Переключить панель управления на этот комитет",
+    "timerExpiryAlarmTitle": "Звук таймера",
+    "timerExpiryAlarmLabel": "Подайте короткий звуковой сигнал, когда любой обратный отсчет в приложении достигнет нуля (таймер речи, ограничение времени сеанса, крайние сроки хаба).",
+    "timerExpiryAlarmHint": "По умолчанию выключено. Хранится только в этом браузере.",
+    "jobRole": "Должность",
+    "jobRolePlaceholder": "например Директор МУН, преподаватель (по желанию)",
+    "advisorSettingsHint": "Профиль школьного персонала — без оценок и делегатов."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Полное объявление",
       "daisAnnouncement": "Объявление на возвышении",
       "close": "Закрывать",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Повестка дня"
     },
     "committeeControl": {
       "sessionNameLabel": "Имя сеанса",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "и",
       "announcements": "Объявления",
       "sidebarUseSuffix": "— по одному инструменту на вкладке.",
-      "agenda": "Agenda"
+      "agenda": "Повестка дня"
     },
     "history": {
       "title": "История сеансов",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Секретариат: мнения председателя и делегатов",
+    "intro": "Выберите комитет для инструментов председателя и место делегата, связанное с вашей учетной записью, а затем поменяйте поверхность. При входе в систему по-прежнему открывается центр секретариата по умолчанию.",
+    "bindRequiredHint": "Выберите ниже председателя комитета и/или место делегата, а затем повторите попытку.",
+    "chairCommitteeLabel": "Председатель комитета",
+    "chairCommitteePlaceholder": "Выберите комитет…",
+    "delegateSeatLabel": "Место делегата (ваше распределение)",
+    "delegateSeatPlaceholder": "Выбрать место…",
+    "saveBindings": "Сохраняйте задания",
+    "bindingsSaved": "Сохранено.",
+    "switchViewHeading": "Переключить панель управления",
+    "switchViewHelp": "Секретариат возвращает вас в SMT. Председатель и делегат открывают те же оболочки внутри приложения, которые настоящие председатели и делегаты используют для активного мероприятия.",
+    "goSecretariat": "Секретариат",
+    "goChair": "Вид на кресло",
+    "goDelegate": "Представление делегата",
+    "surfaceSwitchError": "Не удалось переключить вид. Проверьте ворота мероприятия и выбор.",
+    "pickChairFirst": "Сначала выберите председателя комитета (или сохраните задания).",
+    "pickDelegateFirst": "Сначала выберите место делегата (или сохраните назначения)."
+  },
+  "advisorDashboard": {
+    "intro": "Вы можете отслеживать деятельность комитета назначенного вам делегата. У вас нет доступа к заметкам, если председатель или SMT не перешлет их вам.",
+    "noAssignments": "Ни один делегат пока не связан с вашей учетной записью. Секретариат назначит вас из SMT → Советники.",
+    "delegateLinked": "Аккаунт делегата связан",
+    "delegateNotLinked": "Место еще не связано с учетной записью делегата",
+    "viewProfile": "Профиль",
+    "viewDocuments": "Документы",
+    "viewVoting": "Голосование",
+    "forwardedNotes": "Пересланные заметки",
+    "schedule": {
+      "intro": "Выберите свой график расписания, затем советник A–D, чтобы просмотреть расписание этого советника на день."
+    },
+    "notes": {
+      "intro": "Председатели заметок или SMT решили поделиться с вами. Вы не можете просмотреть полную ленту заметок.",
+      "empty": "Вам пока не отправлено ни одной заметки.",
+      "forwarded": "Переадресовано"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Советники",
+    "subtitle": "Пригласите учетные записи консультантов по электронной почте и привяжите каждого консультанта к одному месту делегата.",
+    "selectEventFirst": "Сначала выберите активное мероприятие конференции.",
+    "enterConferenceCode": "Введите код конференции",
+    "inviteTitle": "Пригласить консультанта",
+    "inviteBody": "Отправляет ссылку для входа (тот же процесс, что и приглашения председателя). Роль учетной записи установлена ​​на советник.",
+    "inviteDisabled": "В этом развертывании для приглашений требуется SUPABASE_SERVICE_ROLE_KEY.",
+    "emailLabel": "Электронная почта",
+    "emailPlaceholder": "Advisor@school.edu",
+    "sending": "Отправка…",
+    "inviteButton": "Отправить приглашение",
+    "assignTitle": "Назначить делегата",
+    "assignBody": "Выберите связанное место делегата. Один советник на каждого делегата; повторное назначение заменяет предыдущую ссылку.",
+    "advisorEmailLabel": "Электронная почта консультанта",
+    "delegateLabel": "Место делегата",
+    "delegatePlaceholder": "Выбрать делегата…",
+    "assignedTo": "советник: {name}",
+    "saving": "Сохранение…",
+    "assignButton": "Сохранить задание",
+    "advisorFallback": "Советник"
   }
 }

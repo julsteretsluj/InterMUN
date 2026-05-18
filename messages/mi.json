@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Mēnā kua haina kē rātou hei māngai, whakatairangatia ki konei kia whiwhi ai i te papatohu heamana me nga taputapu komiti (kaore he imeera i tukuna).",
     "grantChairRole": "Tukuna he heamana",
     "chamberLabelFallback": "Hui komiti",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Te nohoanga Dais",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Tumuaki o {committee}",
+    "chairRoleCoOf": "Heamana takirua o {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Kua puare kee he motini mo te pooti. Katia i mua i te tuhi i etahi atu korero.",
     "statedMotionRecorded": "Kua tuhia te motini (kaore ano kia tuwhera mo te pooti).",
     "statedMotionRemoved": "Kua tangohia te motini kua kiia.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Kaupapa",
     "agendaTabHelp": "Whakatakotoria te kaupapa ora mo te papa, ka paopao ki tetahi kaupapa kaupapa hei whakatuwhera i te roopu pooti me te rarangi kaikawe katoa mo taua kaupapa. Kei raro iho, tohua he kaupapa hei kite i te tapeke pooti a te komiti.",
     "agendaLiveBadge": "Ora",
     "agendaSetLive": "Whakaritea te kaupapa ora",
@@ -423,7 +423,7 @@
     "euSessionPhase_adjourned": "Kua katia te hui",
     "euPartySAndD": "Te Whakakotahitanga Whakamua o ngā Kaiauaha me ngā Kaiauaha-ture (S&D)",
     "euPartyEpp": "Te Roopu Tangata whenua o Ūropi (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Whakahoutia a Uropi (Whakahou)",
     "euPartyLeft": "Te Mauī i te Pāremata o Ūropi (The Left)",
     "euPartyGreen": "Ngā Kākāriki/EFA (Greens/EFA)",
     "euPartyCAndR": "Ngā Kaiauaha me ngā Kaiauaha hou o Ūropi (ECR)",
@@ -471,7 +471,10 @@
     "home": "Kainga",
     "library": "Whare Pukapuka",
     "mainNavigationAria": "Te whakatere matua",
-    "history": "History"
+    "history": "Hītori",
+    "advisorHub": "Te tari kaitohutohu",
+    "advisorNotes": "Nga tuhipoka whakamua",
+    "conferenceSchedule": "Hōtaka"
   },
   "dashboardLayout": {
     "helpCenter": "Pokapū awhina",
@@ -694,8 +697,13 @@
     "formalMotions": "Motini okawa",
     "timer": "Matawā",
     "smtProfile": "Kōtaha",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Kaupapa",
+    "history": "Hītori",
+    "advisorDashboard": "Papatohu Kaitohutohu",
+    "advisorNotes": "Nga tuhipoka whakamua",
+    "delegateSchedule": "Te tabula amuiraa",
+    "chairSchedule": "Te tabula amuiraa",
+    "advisorSchedule": "Te tabula amuiraa"
   },
   "setupPage": {
     "title": "Ko te Supabase kaore i te whirihora",
@@ -731,7 +739,7 @@
       "overview": "Tirohanga",
       "checklist": "Rārangi arowhai",
       "jump": "Peke atu ki",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Heamana imeera"
     },
     "jumpTo": "Peke atu ki",
     "tiles": {
@@ -788,8 +796,12 @@
         "hint": "Whakaarahia he take"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Heamana imeera",
+        "hint": "Pouakauru Dais na te komiti"
+      },
+      "conferenceSchedule": {
+        "label": "Te tabula amuiraa",
+        "hint": "Wātaka a te roopu me te kaitohutohu (A–D)"
       }
     },
     "countdownCard": {
@@ -808,11 +820,14 @@
       "remainingM": "{minutes}m"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "He pouaka pouaka tiritiri mo to komiti (SEAMUN I). Whakapa atu ki o tuuru mai i te imeera i raro nei.",
+      "committeeColumn": "Komiti",
+      "emailColumn": "Pouakauru turu (ingoa kaiwhakamahi)",
+      "openMail": "Tuwhera mēra",
+      "noMatch": "Karekau ano he pouakaroto heamana kua panuitia mo tenei komiti. Patai atu ki a SMT, tirohia ranei to komiti poto."
+    },
+    "schedule": {
+      "intro": "Whiriwhiria to ara tira, katahi ko te kaitohutohu A–D, ko to komiti ranei (te kaikawe/heamana). Kotahi anake te wataka whaiaro ka whakaatuhia i te wa kotahi."
     }
   },
   "materialsExportCard": {
@@ -830,8 +845,8 @@
     "draftResolutionNumber": "Tauira whakatau {number}",
     "googleDocLinkedTag": " · Google Doc hono",
     "section": "Wahanga",
-    "sectionPreambulatory": "Preambulatory",
-    "sectionOperative": "Operative",
+    "sectionPreambulatory": "Tuhinga o mua",
+    "sectionOperative": "Whakahaere",
     "openingPresets": "Nga kupu whakatuwhera taunga",
     "openingPhraseLabel": "Kupu whakatuwhera (whakatika, whaikorero ake ranei)",
     "openingPlaceholderPreambulatory": "hei tauira deeply concerned",
@@ -846,8 +861,8 @@
     "refresh": "Whakahou",
     "loading": "Utaina ana…",
     "noSuggestionsYet": "Kaore ano he whakaaturanga.",
-    "badgePreamb": "Preamb.",
-    "badgeOperative": "Operative",
+    "badgePreamb": "Whakanuia.",
+    "badgeOperative": "Whakahaere",
     "badgeYours": "Nau",
     "delete": "Muku",
     "errSelectResolution": "Tohua he whakatau ka whakauru.",
@@ -939,8 +954,9 @@
       "roomCode": "Waehere ruma",
       "settings": "Tautuhinga",
       "discipline": "Te whiu",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Kaupapa",
+      "history": "Hītori",
+      "conferenceSchedule": "Hōtaka"
     }
   },
   "smtNav": {
@@ -953,7 +969,8 @@
     "allocationPasswords": "Kupuhipa tohatoha",
     "profile": "Kōtaha",
     "follow": "Whaia",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Kaitohutohu"
   },
   "officialLinks": {
     "intro": "Nga tuhinga, nga tiriti, nga roopu matua, nga kaupapa, nga misioni, me nga korero mema. Ka tuwhera ki te ripa hou.",
@@ -1053,16 +1070,16 @@
     "liveFloorDescription": "Ko te rarangi kaikorero ora, te karanga pukapuka, me nga taima mo tenei komiti—ko nga tuuru raraunga e kitea ana i te papa o te huihuinga.",
     "conferenceFallback": "Huihuinga",
     "committeeFallback": "Komiti",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
+    "secretariatOversightTitle": "Te rarangi tirotiro a te Hekeretari",
+    "secretariatMatrixSectionSecretariat": "Hekeretari",
+    "secretariatMatrixSectionOperations": "Nga Mahi",
     "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatMatrixSmtEmail": "SMT īmēra",
+    "secretariatMatrixFinanceEmail": "He īmēra pūtea",
+    "secretariatMatrixCommitteeOverviews": "Nga tirohanga a te komiti",
+    "secretariatMatrixRole": "Tūnga",
+    "secretariatMatrixName": "Ingoa",
+    "secretariatMatrixEmail": "Īmēra"
   },
   "committeeNames": {
     "full": {
@@ -1256,7 +1273,11 @@
       "noRecipients": "Tīpakohia kia kotahi te kaiwhiwhi (te tuku, te heamana ranei).",
       "needAllocation": "Me toha koe ki te tuku tuhipoka (he tuuru ranei).",
       "sendFailed": "I rahua te tuku tuhipoka."
-    }
+    },
+    "forwardToAdvisor": "Whakamua ki {name}",
+    "forwardedToAdvisor": "Ka tukuna ki te kaitohutohu",
+    "forwardedToAdvisorBadge": "(ki te kaitohutohu)",
+    "advisorFallback": "Kaitohutohu"
   },
   "adminPage": {
     "title": "Whakahaere paetukutuku",
@@ -1400,14 +1421,14 @@
       "onlySmtGrantChair": "Ka taea e te hekeretari anake te tuku tuunga heamana.",
       "noAccountForEmail": "Kaore ano he kaute me taua imeera. Tukuna he powhiri tuuru i te tuatahi.",
       "promotedToChairSuccess": "Ko te Profile mo {email} he heamana papa inaianei.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Whiriwhiria he nohoanga papa me te komiti mo tenei powhiri.",
+      "daisSeatRowMissing": "Kaore i kitea he rarangi {seat} mo taua komiti. Whakamātauria te tiaki i te matrix tohatoha mo te takahanga, ka ngana ano.",
+      "daisSeatAlreadyFilled": "He tūru kē tērā tūru rangi. Wetewetehia te tangata onāianei i roto i te matrix tohatoha (tetahi atu taputapu ranei) i te tuatahi.",
+      "seatHeadChair": "Heamana Matua",
+      "seatCoChair": "Heamana tahi",
+      "inviteSentButAllocationFailed": "Ko te powhiri ka tukuna me te tuuru tuuru tuuru, engari kaore i taea te hono te nohoanga papa: {error}. Whakatikaina te matrix toha, tautoko whakapā ranei.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Ko taua tuuru ra e kore e rite ki te mahere heamana a tenei komiti."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Me haina koe.",
@@ -1425,6 +1446,24 @@
       "emailSubject": "Kaweake rauemi InterMUN ({range})",
       "emailSendConfigHint": "Tautuhia SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS me te kowhiringa MATERIALS_EXPORT_FROM ki te tūmau.",
       "exportEmailedTo": "Kaweake īmēra ki {email}. Ki te kore koe e kite, tirohia te spam/junk."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Kaore i hainatia.",
+      "onlySmt": "Ka taea anake e te Hekeretari, te kaiwhakahaere paetukutuku ranei te whakahaere i nga kaitohutohu.",
+      "unauthorized": "Kare i mana.",
+      "invalidEmail": "Whakauruhia he wahitau imeera whaimana.",
+      "missingServiceRole": "Kei te ngaro te tūmau SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Tautuhia NEXT_PUBLIC_APP_URL mo nga hononga tono tono.",
+      "emailAlreadyRegistered": "He pūkete kē taua īmēra. Tautuhia to raatau mahi ki te kaitohutohu i roto i te kaiwhakahaere, katahi ka tohua he kaitono.",
+      "inviteRoleFailed": "I tukuna te powhiri engari kaore i taea te whakarite te mahi a te kaitohutohu: {message}",
+      "inviteSent": "Ka tukuna te pōhiri ki {email}. Ka noho hei kaitohutohu i muri i te whakatakoto i o raatau kupuhipa.",
+      "invalidAdvisorEmail": "Whakauruhia te imeera a te kaitohutohu.",
+      "missingDelegate": "Tīpakohia he nohoanga rangatira.",
+      "advisorNotFound": "Karekau he kaute i kitea mo taua imeera a te kaitohutohu.",
+      "notAdvisorRole": "Ehara taua kaiwhakamahi i te kaitohutohu. Powhiritia ratou, whakaritea ranei he mahi ki te kaitohutohu i te tuatahi.",
+      "delegateNotFound": "Kāore i kitea te tūru kaitakawaenga.",
+      "delegateUnlinked": "Karekau he kaute kaikawe hono i taua tuuru.",
+      "assigned": "Kua tohua he kaitohutohu ki {country}."
     }
   },
   "emails": {
@@ -1448,7 +1487,7 @@
     "eventDetails": "Nga korero mo te huihuinga",
     "selectConferenceFirst": "Tīpakohia he huihuinga me te kuaha huihuinga i te tuatahi, ka hoki mai ki konei.",
     "committeeSessionsTitle": "Ko nga huihuinga o te komiti i tenei huihuinga",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Ko ia kaari he ruma kotahi: he tapanga poto, ingoa whaimana, moko, tae atu ki te rua nga kaupapa kaupapa, hononga RoP, tohu tohu rūma ono-puāhua (keeti tuarua), me te kōtaha tukanga. Me noho ahurei nga waehere ruma puta noa i nga ruma i tenei huihuinga.",
     "noCommitteeSessions": "Kaore he huihuinga komiti mo tenei huihuinga.",
     "eventName": "Ingoa hui",
     "tagline": "Tohutohu",
@@ -1491,81 +1530,111 @@
     "committeeCodeHelpPrefix": "E ono nga tohu: ko nga tohu tuatahi o te ruma + e toru nga mati (tohu whakaaro:",
     "saveCommittee": "Komiti whakaora",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
+    "committeeLabelShort": "Tapanga komiti",
     "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "officialCommitteeNameGrid": "Ingoa komiti mana",
+    "topic1Label": "Kaupapa 1",
+    "topic2Label": "Kaupapa 2 (kōwhiringa)",
+    "topic2Placeholder": "Te patai kaupapa tuarua",
+    "topic2DisabledHint": "Tāpirihia he rarangi kaupapa tuarua hei whakatika i tenei mara.",
+    "addSecondTopic": "Tāpirihia te kaupapa tuarua",
+    "addingTopic": "Tāpiri…",
+    "ropDocumentLink": "Nga ture whakahaere (hono tuhinga)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Waehere ruma (keeti tuarua)",
+    "roomCodeHelpPrefix": "E ono nga reta, mati ranei, kua tohatohahia mo tenei ruma (tohutohu:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Te tabula amuiraa e piti mahana",
+      "subtitle": "Whakamaherehia nga poraka mo ia roopu kaikawe (ko nga roopu ka whakamahia e koe ki nga komiti roopu). Tae ma te momo paraka: he huihuinga, he wehenga, he hui ranei. Tohua te tina mo nga arowhai inaki. I tiakina me te takahanga hohe.",
+      "day1Tab": "Ra 1",
+      "day2Tab": "Ra 2",
+      "lunchOverlapTab": "Inaki tina",
+      "lunchOverlapHelp": "Ka puta nga inaki ina he rarangi e rua nga roopu e tohuhia ana hei tina i te ra kotahi, ka whiti nga awhe wa.",
+      "noLunchOverlaps": "Karekau he inaki tina i kitea. Tohu kia kotahi te rarangi hei tina i roto i nga roopu rereke e rua i te ra kotahi me nga waa inaki.",
+      "dayLabel": "Rā {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
       "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "groupsLabel": "Rōpū",
+      "renameGroup": "Ingoa rōpū kaha",
+      "colStart": "Tīmata",
+      "colEnd": "Whakamutunga",
+      "colLabel": "Poraka / hui",
+      "colKind": "Momo",
+      "kindSession": "Wātū",
+      "kindBreak": "Whatiwhati",
+      "kindCeremony": "Huihuinga",
+      "legendTitle": "Poraka tae",
+      "legendSession": "Huihuinga komiti",
+      "legendBreak": "Whati / tina / ruuma",
+      "legendCeremony": "Whakatuwhera / kati / hui",
+      "colLunch": "Tina",
+      "emptyDay": "Kaore ano he poraka. Taapirihia he paraka ka whakamahi ranei i tetahi atu ripa roopu.",
+      "blockPlaceholder": "e.g. Huihuinga whakatuwheratanga · Huinga komiti 1",
+      "lunchCheckboxAria": "Tatauhia tenei rarangi hei tina mo nga arowhai inaki",
+      "remove": "Tango",
+      "addBlock": "Tāpiri poraka wā",
+      "newGroupName": "Ingoa roopu hou",
+      "newGroupPlaceholder": "e.g. Te roopu perehi",
+      "defaultNewGroupName": "Rōpū hou",
+      "addGroup": "Tāpirihia te roopu",
+      "removeGroup": "Tangohia te roopu",
+      "confirmRemoveGroup": "Tangohia te roopu raupapa \"{name}\" me ona poraka katoa mo nga ra e rua?",
+      "saveSchedule": "Tiakina te raarangi",
+      "saving": "Tiaki…",
+      "saved": "Kua tiakina te raarangi.",
+      "resetTemplate": "Tautuhi ano ki te tauira",
+      "confirmReset": "Tautuhi ano i te raarangi ki nga roopu taunoa e toru ka whakakorea nga poraka katoa?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
+        "title": "SEAMUN I 2027 — mahere tirohanga mana",
+        "body": "Kua whakaritea tenei mahere e rua-ra mo SEAMUN I 2027. Ka rite ki te raarangi matua kua whakaputaina, kaore e taea te whakarereke i roto i te taupānga (tae atu ki te hekeretari).",
+        "legendTitle": "Nga Tae",
+        "legendArrival": "Te taenga mai / rehitatanga",
+        "legendDismissal": "Te whakakore",
+        "legendCeremony": "Huihuinga",
+        "legendBreak": "Te wehenga whanui",
+        "legendSession": "Wātū mātauranga",
+        "legendLunch": "Kai (tina)",
         "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "legendSupport": "Rūma tautoko",
+        "legendStrategy": "Nga ruma rautaki",
+        "legendSweep": "Horoi",
+        "handbookLink": "Tuwhera te pukamahi hui (PDF)",
+        "handbookHint": "tuhinga matua whai mana; Ko te wataka kua kati me te whakarōpū ruma kei raro ka whai i tenei whakaputanga.",
+        "committeeMatrixTitle": "Ko nga ruma o te komiti i runga i te ara rarangi",
+        "committeeMatrixHint": "Ka whai ia ruma i te karaka Ra 1 / Ra 2 o tona ara (te pou me te ingoa roopu rite i te tūtohi o runga).",
+        "colScheduleTrack": "Apiti ara",
+        "colChambers": "Chambers (nga tapanga i tenei huihuinga)",
+        "advisorHint": "Patohia tetahi roopu, katahi ka tirohia he waahi wataka a te kaitohutohu (A–D) ranei he kaitaita/hea waahi mo te komiti kotahi — kaua e rua i te wa kotahi.",
+        "advisorOnlyHint": "Tīpakohia tō ara wātaka, kātahi te kaitohutohu A–D ki te tiro i te rā o te kaitohutohu.",
+        "committeeOnlyHint": "Te wataka whaimana a to komiti. I raro iho nei, whakaritea nga wa tina ki etahi atu komiti.",
+        "pickTrack": "Whakahōtaka riu:",
+        "viewAllTeams": "Nga kapa katoa",
+        "orPickTeam": "kapa ranei:",
+        "viewAs": "Tirohia hei",
+        "modeAdvisor": "Kaitohutohu",
+        "modeCommittee": "Komiti (kaituku / heamana)",
+        "pickAdvisor": "Kaitohutohu",
+        "pickCommittee": "Komiti",
+        "selectAdvisorPrompt": "Tīpakohia te kaitohutohu A, B, C, D ranei hei tiro i taua waahi.",
+        "selectCommitteePrompt": "Tīpakohia tō komiti hei tiro i te wātaka kaikawe/heamana.",
+        "teamShort": {
+          "g1": "Arepa",
+          "g2": "Beta",
+          "g3": "Gamma",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Inaki te tina ki etahi atu komiti",
+        "body": "Whakatauritehia te matapihi tina o to komiti ki te {max} etahi atu komiti. Whiriwhiria he ra, katahi ka tohua nga komiti kei raro iho nei.",
+        "pickCommittees": "Whakatauritea ki",
+        "noneSelected": "Tīpakohia kia kotahi, neke atu ranei nga komiti hei kite i nga meneti mo te tina.",
+        "yourLunch": "To tina",
+        "theirLunch": "Ta ratou tina",
+        "overlap": "Tina tahi: {start}–{end} ({minutes} min)",
+        "noOverlap": "Karekau he wa kai tahi i tenei ra."
       }
     }
   },
@@ -1621,7 +1690,7 @@
     "parsedRowsSample": "Kua poroa {count} haupae. Tauira:",
     "runImport": "Whakahaere kawemai",
     "generateMissingRandomCodes": "Hanga he waehere matapōkere e ngaro ana",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Paremata · Noho {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Komiti",
@@ -1766,8 +1835,8 @@
         "hint": "Tahora mariko me te papa tuku"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Kaupapa",
+        "hint": "Kaupapa ora me te tapeke pooti mo ia kaupapa kaupapa"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Tohu"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Komiti whiriwhiri…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Whakawhiti…",
+    "dashboardCommitteeSwitchError": "Kaore i taea te huri komiti. Ngana ano, takiuru mai ranei ma te keeti rūma.",
+    "dashboardCommitteeAllocationsHeading": "Nga tohatoha i tenei huihuinga komiti",
+    "dashboardCommitteeNoAllocationsListed": "Karekau he rarangi toha i te raarangi mo tenei wahanga.",
+    "dashboardCommitteeApplySwitch": "Hurihia te papatohu ki tenei komiti",
+    "timerExpiryAlarmTitle": "Oro taima",
+    "timerExpiryAlarmLabel": "Whakatangihia he tangihanga poto ina tae ki te kore te kaute-a-taupānga (te taima whaikorero, te rohe wa o te huihuinga, nga wa kati).",
+    "timerExpiryAlarmHint": "Weto ma te taunoa. Kua rongoa ki tenei kaitirotiro anake.",
+    "jobRole": "Te tūranga mahi",
+    "jobRolePlaceholder": "e.g. Kaiwhakahaere MUN, kaiako (mehemea)",
+    "advisorSettingsHint": "Kōtaha kaimahi o te kura — karekau he tohu, karekau he tohatoha toha."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Panuitanga katoa",
       "daisAnnouncement": "Dais panui",
       "close": "Katia",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Kaupapa"
     },
     "committeeControl": {
       "sessionNameLabel": "Ingoa wātū",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "a",
       "announcements": "Panuitanga",
       "sidebarUseSuffix": "— kotahi taputapu mo ia ripa.",
-      "agenda": "Agenda"
+      "agenda": "Kaupapa"
     },
     "history": {
       "title": "Hītori wātū",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Hekeretari: he heamana me nga tirohanga a te kaitakawaenga",
+    "intro": "Whiriwhiria he komiti mo nga taputapu heamana me tetahi nohoanga rangatira e hono ana ki to putea, ka huri i nga papa. Ka tuwhera tonu te Waitohu-mai i te tari hekeretari ma te taunoa.",
+    "bindRequiredHint": "Whiriwhiria he komiti heamana me te tuuru tuku ranei i raro, ka ngana ano.",
+    "chairCommitteeLabel": "Heamana komiti papa",
+    "chairCommitteePlaceholder": "Komiti whiriwhiri…",
+    "delegateSeatLabel": "Tuku nohoanga (to tohatoha)",
+    "delegateSeatPlaceholder": "Tīpako tūru…",
+    "saveBindings": "Tiakina nga taumahi",
+    "bindingsSaved": "Whakaorangia.",
+    "switchViewHeading": "Hurihia te papatohu",
+    "switchViewHelp": "Ka whakahokia koe e te Hekeretari ki SMT. Ka whakatuwherahia e te heamana me te kaitakawaenga nga anga-a-taupānga e whakamahia ana e nga tuuru me nga kaitakawaenga mo te huihuinga hohe.",
+    "goSecretariat": "Hekeretari",
+    "goChair": "Tirohanga nohoanga",
+    "goDelegate": "Tirohanga Kaituku",
+    "surfaceSwitchError": "Kaore i taea te huri tirohanga. Tirohia te keeti huihuinga me nga whiringa.",
+    "pickChairFirst": "Tīpakohia he komiti heamana i te tuatahi (whakaorangia ranei nga taumahi).",
+    "pickDelegateFirst": "Tīpakohia te tūru kaitakawaenga i te tuatahi (tiakina taumahi ranei)."
+  },
+  "advisorDashboard": {
+    "intro": "Ka taea e koe te aro turuki i nga mahi a te komiti a te kaikawe kua tohua. Karekau koe e whai waahi ki te tuhi tuhi mena ka tukuna atu e tetahi heamana, SMT ranei tetahi ki a koe.",
+    "noAssignments": "Karekau he kaitono i honoa ki to putea. Ka tohua koe e te Hekeretari mai i te SMT → Kaitohutohu.",
+    "delegateLinked": "Kua honoa te putea kaute",
+    "delegateNotLinked": "Ko te nohoanga kaore ano kia honoa ki tetahi kaute kaikawe",
+    "viewProfile": "Kōtaha",
+    "viewDocuments": "Tuhinga",
+    "viewVoting": "Pooti",
+    "forwardedNotes": "Nga tuhipoka whakamua",
+    "schedule": {
+      "intro": "Tīpakohia tō ara wātaka, kātahi te kaitohutohu A–D kia kite i te wātaka a te kaitohutohu mo te rā."
+    },
+    "notes": {
+      "intro": "Ko nga tuuru tuhipoka, SMT ranei i whiriwhiri ki te tiri ki a koe. Kaore e taea e koe te tirotiro i te whangai tuhipoka katoa.",
+      "empty": "Kaore ano kia tukuna atu he tuhipoka ki a koe.",
+      "forwarded": "Whakamua"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Kaitohutohu",
+    "subtitle": "Tonoa nga kaute kaitohutohu ma te imeera me te hono i ia kaitohutohu ki tetahi nohoanga rangatira.",
+    "selectEventFirst": "Kōwhirihia he huihuinga hui kaha i te tuatahi.",
+    "enterConferenceCode": "Whakauruhia te waehere hui",
+    "inviteTitle": "Powhiri i te kaitohutohu",
+    "inviteBody": "Ka tukuna he hononga hainatanga (he rite tonu te rere ki nga tono a te heamana). Kua whakaritea te mahi kaute ki te kaitohutohu.",
+    "inviteDisabled": "Ko nga powhiri e hiahia ana kia SUPABASE_SERVICE_ROLE_KEY mo tenei tukunga.",
+    "emailLabel": "Īmēra",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "Tukuna ana…",
+    "inviteButton": "Tukua te powhiri",
+    "assignTitle": "Whakaritea te kaitono",
+    "assignBody": "Kōwhiria he tūru kaitakawaenga hono. Kotahi te kaitohutohu mo ia kaitono; ko te tautapa ano ka whakakapi i te hono o mua.",
+    "advisorEmailLabel": "Īmēra Kaitohutohu",
+    "delegateLabel": "Te nohoanga rangatira",
+    "delegatePlaceholder": "Tīpako māngai…",
+    "assignedTo": "kaitohutohu: {name}",
+    "saving": "Tiaki…",
+    "assignButton": "Tiakina taumahi",
+    "advisorFallback": "Kaitohutohu"
   }
 }

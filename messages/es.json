@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Si ya se inscribieron como delegados, promuévalos aquí para que obtengan el panel del presidente y las herramientas del comité (no se envía ningún correo electrónico).",
     "grantChairRole": "Rol de presidente de subvenciones",
     "chamberLabelFallback": "Sesión del comité",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "asiento de tarima",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Presidente de {committee}",
+    "chairRoleCoOf": "Copresidente de {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Ya hay una moción abierta para votación. Ciérrelo antes de grabar más declaraciones.",
     "statedMotionRecorded": "Moción declarada registrada (aún no abierta a votación).",
     "statedMotionRemoved": "Se eliminó la moción indicada.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Orden del día",
     "agendaTabHelp": "Establezca el tema en vivo para la sala, luego toque un tema de la agenda para abrir el panel de votación con la lista completa de delegados para ese tema. A continuación, elija un tema para ver los totales de votos del comité.",
     "agendaLiveBadge": "Vivir",
     "agendaSetLive": "Establecer tema en vivo",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "Levantamiento de la sesión",
     "euPartySAndD": "Alianza Progresista de Socialistas y Demócratas (S&D)",
     "euPartyEpp": "Partido Popular Europeo (PPE)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Renovar Europa (Renovar)",
     "euPartyLeft": "La Izquierda en el Parlamento Europeo (La Izquierda)",
     "euPartyGreen": "Verdes/ALE",
     "euPartyCAndR": "Conservadores y Reformistas Europeos (CRE)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "Patriotas por Europa (PfE)",
     "euPartyIndependents": "No inscritos / NI",
     "euPartyTimeGuideTitle": "Guía de tiempo por grupo (UE)",
     "euPartySpeechPoolLabel": "Tiempo de intervención:",
@@ -543,7 +543,10 @@
     "home": "Hogar",
     "library": "Biblioteca",
     "mainNavigationAria": "Navegación principal",
-    "history": "History"
+    "history": "Historia",
+    "advisorHub": "Centro de asesores",
+    "advisorNotes": "notas reenviadas",
+    "conferenceSchedule": "Cronograma"
   },
   "dashboardLayout": {
     "helpCenter": "Centro de ayuda",
@@ -767,7 +770,12 @@
     "timer": "Minutero",
     "smtProfile": "Perfil",
     "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "history": "Historia",
+    "advisorDashboard": "Panel de asesor",
+    "advisorNotes": "notas reenviadas",
+    "delegateSchedule": "Calendario de conferencias",
+    "chairSchedule": "Calendario de conferencias",
+    "advisorSchedule": "Calendario de conferencias"
   },
   "setupPage": {
     "title": "Supabase no está configurada",
@@ -803,7 +811,7 @@
       "overview": "Descripción general",
       "checklist": "Lista de verificación",
       "jump": "Saltar a",
-      "chairEmails": "Chair emails"
+      "chairEmails": "Correos electrónicos del presidente"
     },
     "jumpTo": "Saltar a",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "Plantear un problema"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "Correos electrónicos del presidente",
+        "hint": "Bandejas de entrada de Dais por comité"
+      },
+      "conferenceSchedule": {
+        "label": "Calendario de conferencias",
+        "hint": "Seguimiento del equipo y calendario de asesores (A – D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}m"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Bandeja de entrada de tarima compartida para su comité (SEAMUN I). Póngase en contacto con sus sillas desde el correo electrónico a continuación.",
+      "committeeColumn": "Comité",
+      "emailColumn": "Bandeja de entrada del presidente (nombre de usuario)",
+      "openMail": "abrir correo",
+      "noMatch": "Aún no aparece ninguna bandeja de entrada del presidente publicada para este comité. Pregúntele a SMT o consulte el informe de su comité."
+    },
+    "schedule": {
+      "intro": "Elija la ruta de su equipo, luego el asesor A–D o su comité (delegado/presidente). Sólo se muestra un horario personal a la vez."
     }
   },
   "materialsExportCard": {
@@ -918,7 +933,7 @@
     "refresh": "Actualizar",
     "loading": "Cargando…",
     "noSuggestionsYet": "Aún no hay sugerencias.",
-    "badgePreamb": "Preamb.",
+    "badgePreamb": "Preámbulo.",
     "badgeOperative": "Operativa",
     "badgeYours": "Suya",
     "delete": "Eliminar",
@@ -1011,8 +1026,9 @@
       "officialLinks": "Enlaces oficiales",
       "roomCode": "código de habitación",
       "settings": "Ajustes",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Orden del día",
+      "history": "Historia",
+      "conferenceSchedule": "Cronograma"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "Contraseñas de asignación",
     "profile": "Perfil",
     "follow": "Seguir",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Asesores"
   },
   "officialLinks": {
     "intro": "Documentos, tratados, órganos principales, programas, misiones e información de los miembros. Se abre en una nueva pestaña.",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "Cola de oradores en vivo, pase de lista y cronómetros para este comité: los mismos datos que ven los presidentes en la sesión.",
     "conferenceFallback": "Conferencia",
     "committeeFallback": "Comité",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
+    "secretariatOversightTitle": "Lista de supervisión de la secretaría",
+    "secretariatMatrixSectionSecretariat": "Secretaría",
+    "secretariatMatrixSectionOperations": "Operaciones",
+    "secretariatMatrixSectionMedia": "Medios de comunicación",
+    "secretariatMatrixSmtEmail": "correo electrónico SMT",
+    "secretariatMatrixFinanceEmail": "Correo electrónico de finanzas",
+    "secretariatMatrixCommitteeOverviews": "Resúmenes del comité",
     "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatMatrixName": "Nombre",
+    "secretariatMatrixEmail": "Correo electrónico"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "Seleccione al menos una destinataria (delegación o presidente).",
       "needAllocation": "Necesita una asignación para enviar notas (o ser presidente).",
       "sendFailed": "No se pudo enviar la nota."
-    }
+    },
+    "forwardToAdvisor": "Reenviar a {name}",
+    "forwardedToAdvisor": "Reenviado al asesor",
+    "forwardedToAdvisorBadge": "(A la asesora)",
+    "advisorFallback": "Tutora"
   },
   "adminPage": {
     "title": "Administración del sitio web",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "Sólo la secretaría puede otorgar funciones de presidente.",
       "noAccountForEmail": "Aún no hay cuenta con ese correo electrónico. Primero envíe una invitación a una silla.",
       "promotedToChairSuccess": "El perfil de {email} ahora es una silla de tarima.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Elija un asiento en el estrado y un comité para esta invitación.",
+      "daisSeatRowMissing": "No se pudo encontrar una fila {seat} para ese comité. Intente guardar la matriz de asignación para el evento y vuelva a intentarlo.",
+      "daisSeatAlreadyFilled": "Ese estrado ya tiene una silla. Primero desasigne a la persona actual en la matriz de asignación (u otra herramienta).",
+      "seatHeadChair": "Presidente",
+      "seatCoChair": "Copresidenta",
+      "inviteSentButAllocationFailed": "Invitación enviada y rol de presidente establecido, pero el asiento del estrado no se pudo vincular: {error}. Corrija la matriz de asignación o comuníquese con el soporte.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Ese asiento en el estrado no coincide con el plan de presidencia de este comité."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Debes estar registrado.",
@@ -1497,6 +1518,24 @@
       "emailSubject": "Exportación de materiales InterMUN ({rango})",
       "emailSendConfigHint": "Configure SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS y, opcionalmente, MATERIALS_EXPORT_FROM en el servidor.",
       "exportEmailedTo": "Exportación enviada por correo electrónico a {email}. Si no lo ves, revisa spam/basura."
+    },
+    "advisorStaff": {
+      "notSignedIn": "No iniciado sesión.",
+      "onlySmt": "Solo el administrador de la secretaría o del sitio web puede gestionar asesores.",
+      "unauthorized": "No autorizado.",
+      "invalidEmail": "Ingrese una dirección de correo electrónico válida.",
+      "missingServiceRole": "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor.",
+      "missingAppUrl": "Configure NEXT_PUBLIC_APP_URL para enlaces de redireccionamiento de invitación.",
+      "emailAlreadyRegistered": "Ese correo electrónico ya tiene una cuenta. Establezca su función como asesor en administración y luego asigne un delegado.",
+      "inviteRoleFailed": "Invitación enviada pero no pudo establecer el rol de asesora: {message}",
+      "inviteSent": "Invitación enviada a {email}. Será un asesor después de establecer su contraseña.",
+      "invalidAdvisorEmail": "Ingrese el correo electrónico del asesor.",
+      "missingDelegate": "Seleccione un asiento de delegado.",
+      "advisorNotFound": "No se encontró ninguna cuenta para ese correo electrónico de asesor.",
+      "notAdvisorRole": "Ese usuario no es un asesor. Invítelos o establezca el rol de asesor primero.",
+      "delegateNotFound": "No se encontró el asiento del delegado.",
+      "delegateUnlinked": "Ese asiento aún no tiene una cuenta de delegado vinculada.",
+      "assigned": "Asesor asignado a {country}."
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "Detalles del evento",
     "selectConferenceFirst": "Primero seleccione una conferencia con la puerta del evento y luego regrese aquí.",
     "committeeSessionsTitle": "Sesiones del comité en este evento.",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Cada tarjeta es una cámara: etiqueta corta, nombre oficial, logotipo, hasta dos temas de agenda, enlace RoP, código de sala compartido de seis caracteres (segunda puerta) y perfil de procedimiento. Los códigos de habitación deben ser únicos en todas las cámaras en este evento.",
     "noCommitteeSessions": "No hay sesiones de comité para este evento.",
     "eventName": "Nombre del evento",
     "tagline": "Lema",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "Seis caracteres: iniciales de la cámara + tres dígitos (sugerencia determinista:",
     "saveCommittee": "comité de salvación",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "etiqueta del comité",
+    "committeeLabelPlaceholder": "p.ej. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Nombre oficial del comité",
+    "topic1Label": "Tema 1",
+    "topic2Label": "Tema 2 (opcional)",
+    "topic2Placeholder": "Segunda pregunta del orden del día",
+    "topic2DisabledHint": "Agregue una segunda fila de tema para editar este campo.",
+    "addSecondTopic": "Agregar segundo tema",
+    "addingTopic": "Añadiendo…",
+    "ropDocumentLink": "Reglamento interno (enlace al documento)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Código de habitación (segunda puerta)",
+    "roomCodeHelpPrefix": "Seis letras o dígitos, compartidos para esta cámara (sugerencia:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Calendario de conferencias de dos días",
+      "subtitle": "Planifique bloques por grupo de delegados (los mismos grupos que utiliza para los comités agrupados). Color por tipo de bloque: sesión, descanso o ceremonia. Marque el almuerzo para verificaciones de superposición. Guardado con el evento activo.",
+      "day1Tab": "Día 1",
+      "day2Tab": "Día 2",
+      "lunchOverlapTab": "Superposición del almuerzo",
+      "lunchOverlapHelp": "Las superposiciones aparecen cuando dos grupos tienen una fila marcada como almuerzo el mismo día y los rangos de tiempo se cruzan.",
+      "noLunchOverlaps": "No se detectaron superposiciones de almuerzos. Marque al menos una fila como almuerzo en dos grupos diferentes el mismo día con horarios superpuestos.",
+      "dayLabel": "Día {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
       "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "groupsLabel": "Grupos",
+      "renameGroup": "Nombre del grupo activo",
+      "colStart": "Comenzar",
+      "colEnd": "Fin",
+      "colLabel": "Bloque/sesión",
+      "colKind": "Tipo",
+      "kindSession": "Sesión",
+      "kindBreak": "Romper",
+      "kindCeremony": "Ceremonia",
+      "legendTitle": "Colores de bloque",
+      "legendSession": "Sesión del comité",
+      "legendBreak": "Descanso/almuerzo/caucus",
+      "legendCeremony": "Inauguración / clausura / ceremonia",
+      "colLunch": "Almuerza",
+      "emptyDay": "Aún no hay bloques. Agregue un bloque o use otra pestaña de grupo.",
+      "blockPlaceholder": "p.ej. Acto de apertura · Sesión del Comité 1",
+      "lunchCheckboxAria": "Cuente esta fila como almuerzo para verificaciones de superposición",
+      "remove": "Eliminar",
+      "addBlock": "Agregar bloque de tiempo",
+      "newGroupName": "Nuevo nombre de grupo",
+      "newGroupPlaceholder": "p.ej. Cuerpo de prensa",
+      "defaultNewGroupName": "Nuevo grupo",
+      "addGroup": "Agregar grupo",
+      "removeGroup": "Quitar grupo",
+      "confirmRemoveGroup": "¿Eliminar el grupo de programación \"{name}\" y todos sus bloques para ambos días?",
+      "saveSchedule": "Guardar horario",
+      "saving": "Ahorro…",
+      "saved": "Horario guardado.",
+      "resetTemplate": "Restablecer a la plantilla",
+      "confirmReset": "¿Restablecer el cronograma a los tres grupos predeterminados y borrar todos los bloques?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — calendario visual oficial",
+        "body": "Este plan de dos días está fijado para SEAMUN I 2027. Coincide con el calendario maestro publicado y no se puede cambiar en la aplicación (ni siquiera por secretaría).",
+        "legendTitle": "Bandera",
+        "legendArrival": "Llegada / registro",
+        "legendDismissal": "Despido",
+        "legendCeremony": "Ceremonia",
+        "legendBreak": "descanso general",
+        "legendSession": "Sesión académica",
+        "legendLunch": "Comer (almuerzo)",
+        "legendRelax": "Enfriar",
+        "legendSupport": "Sala de apoyo",
+        "legendStrategy": "Salas de estrategia",
+        "legendSweep": "Barrer",
+        "handbookLink": "Manual abierto de la conferencia (PDF)",
+        "handbookHint": "documento maestro oficial; el calendario bloqueado y la agrupación de cámaras a continuación siguen esta publicación.",
+        "committeeMatrixTitle": "Cámaras del comité por seguimiento del cronograma",
+        "committeeMatrixHint": "Cada cámara sigue el reloj del Día 1/Día 2 de su pista (la columna con el mismo nombre de grupo en el cuadro anterior).",
+        "colScheduleTrack": "Programar seguimiento",
+        "colChambers": "Cámaras (etiquetas en este evento)",
+        "advisorHint": "Toque un equipo, luego vea el cronograma de un asesor (A-D) o un cronograma del delegado/presidente de un comité, no ambos a la vez.",
+        "advisorOnlyHint": "Elija su horario y luego el asesor A – D para ver el día de ese asesor.",
+        "committeeOnlyHint": "El calendario oficial de su comité. A continuación, compare los horarios del almuerzo con los de otros comités.",
+        "pickTrack": "Horario de seguimiento:",
+        "viewAllTeams": "Todos los equipos",
+        "orPickTeam": "o equipo:",
+        "viewAs": "Ver como",
+        "modeAdvisor": "Tutora",
+        "modeCommittee": "Comité (delegado/presidente)",
+        "pickAdvisor": "Tutora",
+        "pickCommittee": "Comité",
+        "selectAdvisorPrompt": "Seleccione el asesor A, B, C o D para ver ese horario.",
+        "selectCommitteePrompt": "Seleccione su comité para ver el calendario de delegados/presidentes.",
+        "teamShort": {
+          "g1": "Alfa",
+          "g2": "Beta",
+          "g3": "Gama",
+          "g4": "Delta",
+          "support": "Épsilon"
+        }
+      },
+      "lunchOverlap": {
+        "title": "El almuerzo se superpone con otros comités",
+        "body": "Compare el período de almuerzo de su comité con hasta {max} otros comités. Elija un día y luego seleccione los comités a continuación.",
+        "pickCommittees": "Comparar con",
+        "noneSelected": "Seleccione uno o más comités para ver las actas del almuerzo compartido.",
+        "yourLunch": "tu almuerzo",
+        "theirLunch": "su almuerzo",
+        "overlap": "Almuerzo compartido: {start}–{end} ({minutes} min)",
+        "noOverlap": "No habrá horario de almuerzo compartido en este día."
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "{count} filas analizadas. Muestra:",
     "runImport": "Ejecutar importación",
     "generateMissingRandomCodes": "Generar códigos aleatorios faltantes",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Parlamentario · Escaño {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Comité",
@@ -1838,8 +1907,8 @@
         "hint": "Diseño virtual y piso de delegados"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Orden del día",
+        "hint": "Temas en vivo y totales de votos por tema de la agenda"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Premios"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Comité selecto...",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Traspuesta…",
+    "dashboardCommitteeSwitchError": "No se pudo cambiar de comité. Inténtalo de nuevo o inicia sesión a través de la puerta de la habitación.",
+    "dashboardCommitteeAllocationsHeading": "Asignaciones en esta sesión del comité",
+    "dashboardCommitteeNoAllocationsListed": "No se enumeran filas de asignación para esta sesión.",
+    "dashboardCommitteeApplySwitch": "Cambiar el panel a este comité",
+    "timerExpiryAlarmTitle": "Sonido del temporizador",
+    "timerExpiryAlarmLabel": "Reproduzca un breve timbre cuando cualquier cuenta regresiva en la aplicación llegue a cero (temporizador de voz, límite de tiempo de sesión, fechas límite del centro).",
+    "timerExpiryAlarmHint": "Desactivado de forma predeterminada. Almacenado únicamente en este navegador.",
+    "jobRole": "rol laboral",
+    "jobRolePlaceholder": "p.ej. Director MUN, docente (opcional)",
+    "advisorSettingsHint": "Perfil del personal escolar: sin calificación ni asignación de delegados."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Anuncio completo",
       "daisAnnouncement": "Anuncio de tarima",
       "close": "Cerca",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Orden del día"
     },
     "committeeControl": {
       "sessionNameLabel": "Nombre de la sesión",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "y",
       "announcements": "Anuncios",
       "sidebarUseSuffix": "— una herramienta por pestaña.",
-      "agenda": "Agenda"
+      "agenda": "Orden del día"
     },
     "history": {
       "title": "Historial de sesiones",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Secretaría: opiniones de presidente y delegada",
+    "intro": "Elija un comité para las herramientas de la silla y un asiento delegado vinculado a su cuenta, luego cambie de superficie. El inicio de sesión aún abre el centro de secretaría de forma predeterminada.",
+    "bindRequiredHint": "Elija un comité presidente y/o un puesto de delegado a continuación y vuelva a intentarlo.",
+    "chairCommitteeLabel": "Presidente del comité de piso",
+    "chairCommitteePlaceholder": "Comité selecto...",
+    "delegateSeatLabel": "Asiento de delegado (su asignación)",
+    "delegateSeatPlaceholder": "Seleccione asiento…",
+    "saveBindings": "Guardar tareas",
+    "bindingsSaved": "Guardado.",
+    "switchViewHeading": "Cambiar panel",
+    "switchViewHelp": "La Secretaría lo devuelve a SMT. El presidente y el delegado abren los mismos shells en la aplicación que los presidentes y delegados reales utilizan para el evento activo.",
+    "goSecretariat": "Secretaría",
+    "goChair": "Vista de silla",
+    "goDelegate": "Vista de delegado",
+    "surfaceSwitchError": "No se pudo cambiar de vista. Verifique la puerta del evento y las selecciones.",
+    "pickChairFirst": "Primero seleccione un comité presidente (o guarde las tareas).",
+    "pickDelegateFirst": "Seleccione primero un puesto de delegado (o guarde las asignaciones)."
+  },
+  "advisorDashboard": {
+    "intro": "Puede monitorear la actividad del comité de su delegado asignado. No tiene acceso a las notas a menos que un presidente o SMT le envíe una.",
+    "noAssignments": "Ningún delegado está vinculado a su cuenta todavía. La Secretaría lo asignará desde SMT → Asesores.",
+    "delegateLinked": "Cuenta de delegado vinculada",
+    "delegateNotLinked": "Asiento aún no vinculado a una cuenta de delegado",
+    "viewProfile": "Perfil",
+    "viewDocuments": "Documentos",
+    "viewVoting": "Votación",
+    "forwardedNotes": "notas reenviadas",
+    "schedule": {
+      "intro": "Elija su horario, luego el asesor A – D para ver el horario de ese asesor para el día."
+    },
+    "notes": {
+      "intro": "Las sillas Notes o SMT eligieron compartir con usted. No puede explorar el feed de notas completo.",
+      "empty": "Aún no se le han enviado notas.",
+      "forwarded": "Reenviada"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Asesores",
+    "subtitle": "Invite cuentas de asesores por correo electrónico y vincule cada asesor a un puesto de delegado.",
+    "selectEventFirst": "Elija primero un evento de conferencia activo.",
+    "enterConferenceCode": "Ingrese el código de la conferencia",
+    "inviteTitle": "invitar asesor",
+    "inviteBody": "Envía un enlace de inicio de sesión (el mismo flujo que las invitaciones a los presidentes). El rol de la cuenta está configurado como asesor.",
+    "inviteDisabled": "Las invitaciones requieren SUPABASE_SERVICE_ROLE_KEY en esta implementación.",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "asesor@escuela.edu",
+    "sending": "Envío…",
+    "inviteButton": "enviar invitación",
+    "assignTitle": "Asignar delegada",
+    "assignBody": "Elija un asiento de delegado vinculado. Un asesor por delegado; la reasignación reemplaza el enlace anterior.",
+    "advisorEmailLabel": "Correo electrónico del asesor",
+    "delegateLabel": "Asiento delegado",
+    "delegatePlaceholder": "Seleccionar delegada ...",
+    "assignedTo": "Asesora: {name}",
+    "saving": "Ahorro…",
+    "assignButton": "Guardar tarea",
+    "advisorFallback": "Tutora"
   }
 }

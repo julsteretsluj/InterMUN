@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "اگر قبلاً به‌عنوان نماینده ثبت‌نام کرده‌اند، آنها را در اینجا تبلیغ کنید تا داشبورد صندلی و ابزارهای کمیته را دریافت کنند (ایمیلی ارسال نمی‌شود).",
     "grantChairRole": "نقش صندلی را اعطا کنید",
     "chamberLabelFallback": "جلسه کمیته",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "صندلی دایس",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "رئیس صندلی {committee}",
+    "chairRoleCoOf": "رئیس مشترک {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "یک طرح از قبل برای رای گیری باز است. قبل از ضبط عبارات بعدی آن را ببندید.",
     "statedMotionRecorded": "حرکت اعلام شده ثبت شد (هنوز برای رای گیری باز نشده است).",
     "statedMotionRemoved": "حرکت بیان شده حذف شد.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "دستور کار",
     "agendaTabHelp": "موضوع زنده را برای جلسه تنظیم کنید، سپس روی یک موضوع دستور کار ضربه بزنید تا پانل رای گیری با لیست کامل نمایندگان برای آن موضوع باز شود. در زیر، موضوعی را برای مشاهده مجموع آرای کمیته انتخاب کنید.",
     "agendaLiveBadge": "زندگی کنید",
     "agendaSetLive": "تنظیم موضوع زنده",
@@ -423,11 +423,11 @@
     "euSessionPhase_adjourned": "پایان جلسه",
     "euPartySAndD": "ائتلاف ترقی‌خواه سوسیالیست‌ها و دموکرات‌ها (S&D)",
     "euPartyEpp": "حزب مردم اروپا (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "تجدید اروپا (تجدید)",
     "euPartyLeft": "چپ در پارلمان اروپا (The Left)",
     "euPartyGreen": "سبزها/EFA (Greens/EFA)",
     "euPartyCAndR": "محافظه‌کاران و اصلاح‌طلبان اروپایی (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyPatriots": "میهن پرستان برای اروپا (PfE)",
     "euPartyIndependents": "مستقل / NI",
     "euPartyTimeGuideTitle": "راهنمای زمان بر اساس گروه (EU)",
     "euPartySpeechPoolLabel": "زمان سخنرانی:",
@@ -471,7 +471,10 @@
     "home": "صفحه اصلی",
     "library": "کتابخانه",
     "mainNavigationAria": "ناوبری اصلی",
-    "history": "History"
+    "history": "تاریخچه",
+    "advisorHub": "مرکز مشاور",
+    "advisorNotes": "یادداشت های ارسال شده",
+    "conferenceSchedule": "برنامه ریزی کنید"
   },
   "dashboardLayout": {
     "helpCenter": "مرکز راهنمایی",
@@ -694,8 +697,13 @@
     "formalMotions": "حرکات رسمی",
     "timer": "تایمر",
     "smtProfile": "نمایه",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 دستور کار",
+    "history": "تاریخچه",
+    "advisorDashboard": "داشبورد مشاور",
+    "advisorNotes": "یادداشت های ارسال شده",
+    "delegateSchedule": "برنامه کنفرانس",
+    "chairSchedule": "برنامه کنفرانس",
+    "advisorSchedule": "برنامه کنفرانس"
   },
   "setupPage": {
     "title": "Supabase پیکربندی نشده است",
@@ -731,7 +739,7 @@
       "overview": "نمای کلی",
       "checklist": "چک لیست",
       "jump": "پرش به",
-      "chairEmails": "Chair emails"
+      "chairEmails": "ایمیل های صندلی"
     },
     "jumpTo": "پرش به",
     "tiles": {
@@ -788,8 +796,12 @@
         "hint": "موضوعی را مطرح کنید"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "ایمیل های صندلی",
+        "hint": "صندوق ورودی Dais توسط کمیته"
+      },
+      "conferenceSchedule": {
+        "label": "برنامه کنفرانس",
+        "hint": "جدول زمانی مسیر تیمی و مشاور (A–D)"
       }
     },
     "countdownCard": {
@@ -808,11 +820,14 @@
       "remainingM": "{minutes}د"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "صندوق ورودی دایس مشترک برای کمیته شما (SEAMUN I). با صندلی های خود از ایمیل زیر تماس بگیرید.",
+      "committeeColumn": "کمیته",
+      "emailColumn": "صندوق ورودی صندلی (نام کاربری)",
+      "openMail": "نامه را باز کنید",
+      "noMatch": "هنوز هیچ صندوق پستی منتشر شده ای برای این کمیته فهرست نشده است. از SMT بپرسید یا خلاصه کمیته خود را بررسی کنید."
+    },
+    "schedule": {
+      "intro": "مسیر تیم خود را انتخاب کنید، سپس مشاور A-D یا کمیته خود (نماینده/رئیس) را انتخاب کنید. فقط یک جدول زمانی شخصی در یک زمان نشان داده می شود."
     }
   },
   "materialsExportCard": {
@@ -839,7 +854,7 @@
     "clauseText": "متن بند",
     "clausePlaceholder": "…ادامه بند (حقایق، اقدامات، جزئیات). هنگام ذخیره، ویرگول پس از عبارت آغازین اضافه می‌شود.",
     "preview": "پیش‌نمایش",
-    "previewDash": "—",
+    "previewDash": "-",
     "submitting": "در حال ارسال…",
     "submitClause": "ارسال پیشنهاد بند",
     "suggestionsHeading": "پیشنهادها برای این قطعنامه",
@@ -939,8 +954,9 @@
       "roomCode": "کد اتاق",
       "settings": "تنظیمات",
       "discipline": "انضباطی",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "دستور کار",
+      "history": "تاریخچه",
+      "conferenceSchedule": "برنامه ریزی کنید"
     }
   },
   "smtNav": {
@@ -953,7 +969,8 @@
     "allocationPasswords": "پسوردهای تخصیص",
     "profile": "نمایه",
     "follow": "دنبال کنید",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "مشاوران"
   },
   "officialLinks": {
     "intro": "اسناد، معاهدات، نهادهای اصلی، برنامه‌ها، مأموریت‌ها و اطلاعات اعضا. در یک برگه جدید باز می شود.",
@@ -1053,16 +1070,16 @@
     "liveFloorDescription": "صف سخنران زنده، تماس تلفنی، و تایمر برای این کمیته - همان صندلی های داده در طبقه جلسه.",
     "conferenceFallback": "کنفرانس",
     "committeeFallback": "کمیته",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "فهرست نظارت دبیرخانه",
+    "secretariatMatrixSectionSecretariat": "دبیرخانه",
+    "secretariatMatrixSectionOperations": "عملیات",
+    "secretariatMatrixSectionMedia": "رسانه ها",
+    "secretariatMatrixSmtEmail": "ایمیل SMT",
+    "secretariatMatrixFinanceEmail": "ایمیل مالی",
+    "secretariatMatrixCommitteeOverviews": "بررسی اجمالی کمیته",
+    "secretariatMatrixRole": "نقش",
+    "secretariatMatrixName": "نام",
+    "secretariatMatrixEmail": "ایمیل"
   },
   "committeeNames": {
     "full": {
@@ -1256,7 +1273,11 @@
       "noRecipients": "حداقل یک گیرنده (هیئت یا صندلی) را انتخاب کنید.",
       "needAllocation": "برای ارسال یادداشت ها (یا یک صندلی باشید) به یک تخصیص نیاز دارید.",
       "sendFailed": "یادداشت ارسال نشد."
-    }
+    },
+    "forwardToAdvisor": "فوروارد به {name}",
+    "forwardedToAdvisor": "به مشاور ارسال شد",
+    "forwardedToAdvisorBadge": "(به مشاور)",
+    "advisorFallback": "مشاور"
   },
   "adminPage": {
     "title": "مدیریت وب سایت",
@@ -1400,14 +1421,14 @@
       "onlySmtGrantChair": "فقط دبیرخانه می تواند نقش های کرسی را اعطا کند.",
       "noAccountForEmail": "هنوز حسابی با آن ایمیل وجود ندارد. ابتدا یک دعوت نامه برای صندلی ارسال کنید.",
       "promotedToChairSuccess": "نمایه برای {email} اکنون به صورت یک صندلی دایس است.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "برای این دعوت، صندلی و کمیته ای را انتخاب کنید.",
+      "daisSeatRowMissing": "ردیف {seat} برای آن کمیته یافت نشد. سعی کنید ماتریس تخصیص را برای رویداد ذخیره کنید، سپس دوباره امتحان کنید.",
+      "daisSeatAlreadyFilled": "آن صندلی دایس قبلاً یک صندلی دارد. ابتدا شخص فعلی را در ماتریس تخصیص (یا ابزار دیگر) لغو اختصاص دهید.",
+      "seatHeadChair": "صندلی سر",
+      "seatCoChair": "رئیس مشترک",
+      "inviteSentButAllocationFailed": "دعوت نامه ارسال شد و مجموعه نقش صندلی، اما صندلی دایس پیوند داده نشد: {error}. ماتریس تخصیص را برطرف کنید یا با پشتیبانی تماس بگیرید.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "این صندلی با طرح ریاست این کمیته مطابقت ندارد."
     },
     "allocationSignup": {
       "mustBeSignedIn": "شما باید وارد سیستم شوید",
@@ -1425,6 +1446,24 @@
       "emailSubject": "صادرات مواد InterMUN ({range})",
       "emailSendConfigHint": "SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS و به صورت اختیاری MATERIALS_EXPORT_FROM را روی سرور تنظیم کنید.",
       "exportEmailedTo": "صادرات به {email} ارسال شد. اگر آن را نمی بینید، هرزنامه/ناخواسته را بررسی کنید."
+    },
+    "advisorStaff": {
+      "notSignedIn": "وارد نشده است.",
+      "onlySmt": "فقط دبیرخانه یا مدیر وب سایت می تواند مشاوران را مدیریت کند.",
+      "unauthorized": "غیر مجاز",
+      "invalidEmail": "یک آدرس ایمیل معتبر وارد کنید.",
+      "missingServiceRole": "سرور SUPABASE_SERVICE_ROLE_KEY وجود ندارد.",
+      "missingAppUrl": "NEXT_PUBLIC_APP_URL را برای پیوندهای تغییر مسیر دعوت تنظیم کنید.",
+      "emailAlreadyRegistered": "آن ایمیل قبلاً یک حساب کاربری دارد. نقش آنها را به عنوان مشاور در مدیریت تنظیم کنید، سپس یک نماینده تعیین کنید.",
+      "inviteRoleFailed": "دعوت ارسال شد اما نقش مشاور تعیین نشد: {message}",
+      "inviteSent": "دعوت به {email} ارسال شد. آنها پس از تنظیم رمز عبور خود یک مشاور خواهند بود.",
+      "invalidAdvisorEmail": "ایمیل مشاور را وارد کنید",
+      "missingDelegate": "یک صندلی نماینده را انتخاب کنید.",
+      "advisorNotFound": "هیچ حساب کاربری برای آن ایمیل مشاور یافت نشد.",
+      "notAdvisorRole": "آن کاربر مشاور نیست. آنها را دعوت کنید یا ابتدا نقش مشاور را تعیین کنید.",
+      "delegateNotFound": "صندلی نماینده پیدا نشد.",
+      "delegateUnlinked": "آن صندلی هنوز هیچ حساب نماینده مرتبطی ندارد.",
+      "assigned": "مشاور منصوب به {country}."
     }
   },
   "emails": {
@@ -1448,7 +1487,7 @@
     "eventDetails": "جزئیات رویداد",
     "selectConferenceFirst": "ابتدا یک کنفرانس با گیت رویداد انتخاب کنید، سپس به اینجا بازگردید.",
     "committeeSessionsTitle": "جلسات کمیته در این رویداد",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "هر کارت یک اتاق است: برچسب کوتاه، نام رسمی، آرم، حداکثر دو موضوع دستور کار، پیوند RoP، کد اتاق شش کاراکتری مشترک (دروازه دوم) و نمایه روش. در این رویداد، کدهای اتاق باید در تمام اتاق ها منحصر به فرد باقی بماند.",
     "noCommitteeSessions": "هیچ جلسه کمیته ای برای این رویداد وجود ندارد.",
     "eventName": "نام رویداد",
     "tagline": "شعار",
@@ -1491,81 +1530,111 @@
     "committeeCodeHelpPrefix": "شش کاراکتر: حروف اول محفظه + سه رقم (پیشنهاد قطعی:",
     "saveCommittee": "کمیته ذخیره",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "برچسب کمیته",
+    "committeeLabelPlaceholder": "به عنوان مثال ECOSOC، DISEC، INTERPOL",
+    "officialCommitteeNameGrid": "نام کمیته رسمی",
+    "topic1Label": "مبحث 1",
+    "topic2Label": "مبحث 2 (اختیاری)",
+    "topic2Placeholder": "سوال دستور کار دوم",
+    "topic2DisabledHint": "یک ردیف موضوع دوم برای ویرایش این فیلد اضافه کنید.",
+    "addSecondTopic": "موضوع دوم را اضافه کنید",
+    "addingTopic": "در حال افزودن…",
+    "ropDocumentLink": "آیین نامه داخلی (لینک سند)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "کد اتاق (درب دوم)",
+    "roomCodeHelpPrefix": "شش حرف یا رقم، به اشتراک گذاشته شده برای این اتاق (پیشنهاد:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "برنامه کنفرانس دو روزه",
+      "subtitle": "بلوک‌ها را برای هر گروه نماینده برنامه‌ریزی کنید (همان گروه‌هایی که برای خوشه‌بندی کمیته‌ها استفاده می‌کنید). رنگ بر اساس نوع بلوک: جلسه، استراحت یا مراسم. ناهار را برای چک های همپوشانی علامت گذاری کنید. با رویداد فعال ذخیره شد.",
+      "day1Tab": "روز 1",
+      "day2Tab": "روز 2",
+      "lunchOverlapTab": "همپوشانی ناهار",
+      "lunchOverlapHelp": "همپوشانی‌ها زمانی ظاهر می‌شوند که دو گروه هر دو ردیفی به‌عنوان ناهار در یک روز داشته باشند و محدوده‌های زمانی همدیگر را قطع کنند.",
+      "noLunchOverlaps": "هیچ همپوشانی ناهار شناسایی نشد. حداقل یک ردیف را به‌عنوان ناهار در دو گروه مختلف در یک روز با زمان‌های همپوشانی علامت‌گذاری کنید.",
+      "dayLabel": "روز {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "در مقابل",
+      "groupsLabel": "گروه ها",
+      "renameGroup": "نام گروه فعال",
+      "colStart": "شروع کنید",
+      "colEnd": "پایان",
+      "colLabel": "مسدود کردن / جلسه",
+      "colKind": "تایپ کنید",
+      "kindSession": "جلسه",
+      "kindBreak": "شکستن",
+      "kindCeremony": "مراسم",
+      "legendTitle": "رنگ های بلوک",
+      "legendSession": "جلسه کمیته",
+      "legendBreak": "استراحت / ناهار / گروه",
+      "legendCeremony": "افتتاحیه / اختتامیه / مراسم",
+      "colLunch": "ناهار",
+      "emptyDay": "هنوز بلوکی وجود ندارد. یک بلوک اضافه کنید یا از برگه گروه دیگری استفاده کنید.",
+      "blockPlaceholder": "به عنوان مثال مراسم افتتاحیه · جلسه کمیته 1",
+      "lunchCheckboxAria": "این ردیف را به عنوان ناهار برای چک های همپوشانی حساب کنید",
+      "remove": "حذف کنید",
+      "addBlock": "بلوک زمانی را اضافه کنید",
+      "newGroupName": "نام گروه جدید",
+      "newGroupPlaceholder": "به عنوان مثال سپاه مطبوعات",
+      "defaultNewGroupName": "گروه جدید",
+      "addGroup": "اضافه کردن گروه",
+      "removeGroup": "حذف گروه",
+      "confirmRemoveGroup": "گروه زمانبندی \"{name}\" و همه بلوک های آن برای هر دو روز حذف شود؟",
+      "saveSchedule": "ذخیره برنامه",
+      "saving": "در حال ذخیره…",
+      "saved": "برنامه ذخیره شد.",
+      "resetTemplate": "بازنشانی به الگو",
+      "confirmReset": "برنامه را به سه گروه پیش فرض بازنشانی کنید و همه بلوک ها را پاک کنید؟",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 - برنامه دیداری رسمی",
+        "body": "این طرح دو روزه برای SEAMUN I 2027 ثابت شده است. این برنامه با برنامه اصلی منتشر شده مطابقت دارد و نمی توان آن را در برنامه (از جمله توسط دبیرخانه) تغییر داد.",
+        "legendTitle": "رنگ ها",
+        "legendArrival": "ورود / ثبت نام",
+        "legendDismissal": "اخراج",
+        "legendCeremony": "مراسم",
+        "legendBreak": "استراحت عمومی",
+        "legendSession": "جلسه دانشگاهی",
+        "legendLunch": "خوردن (ناهار)",
+        "legendRelax": "خنک",
+        "legendSupport": "اتاق پشتیبانی",
+        "legendStrategy": "اتاق های استراتژی",
+        "legendSweep": "جارو زدن",
+        "handbookLink": "کتاب راهنمای کنفرانس باز (PDF)",
+        "handbookHint": "سند اصلی رسمی؛ جدول زمانی قفل شده و گروه بندی اتاق زیر این نشریه را دنبال کنید.",
+        "committeeMatrixTitle": "اتاق های کمیته بر اساس برنامه زمانبندی",
+        "committeeMatrixHint": "هر اتاق ساعت روز 1 / روز 2 مسیر خود را دنبال می کند (ستون با نام گروه مشابه در نمودار بالا).",
+        "colScheduleTrack": "آهنگ برنامه ریزی کنید",
+        "colChambers": "اتاق ها (برچسب ها در این رویداد)",
+        "advisorHint": "روی یک تیم ضربه بزنید، سپس یک جدول زمانی مشاور (A–D) یا یک جدول زمانی نماینده/رئیس یک کمیته را مشاهده کنید - نه هر دو را همزمان.",
+        "advisorOnlyHint": "مسیر برنامه خود را انتخاب کنید، سپس مشاور A-D را برای مشاهده روز آن مشاور انتخاب کنید.",
+        "committeeOnlyHint": "جدول زمانی رسمی کمیته شما در زیر، زمان ناهار را با سایر کمیته ها مقایسه کنید.",
+        "pickTrack": "برنامه زمانبندی:",
+        "viewAllTeams": "همه تیم ها",
+        "orPickTeam": "یا تیم:",
+        "viewAs": "مشاهده به عنوان",
+        "modeAdvisor": "مشاور",
+        "modeCommittee": "کمیته (نماینده / رئیس)",
+        "pickAdvisor": "مشاور",
+        "pickCommittee": "کمیته",
+        "selectAdvisorPrompt": "برای مشاهده جدول زمانی، مشاور A، B، C یا D را انتخاب کنید.",
+        "selectCommitteePrompt": "کمیته خود را برای مشاهده جدول زمانی نمایندگان/رئیس انتخاب کنید.",
+        "teamShort": {
+          "g1": "آلفا",
+          "g2": "بتا",
+          "g3": "گاما",
+          "g4": "دلتا",
+          "support": "اپسیلون"
+        }
+      },
+      "lunchOverlap": {
+        "title": "ناهار با کمیته های دیگر همپوشانی دارد",
+        "body": "پنجره ناهار کمیته خود را با حداکثر {max} کمیته دیگر مقایسه کنید. یک روز را انتخاب کنید، سپس کمیته‌های زیر را انتخاب کنید.",
+        "pickCommittees": "مقایسه کنید با",
+        "noneSelected": "برای مشاهده دقایق ناهار مشترک، یک یا چند کمیته را انتخاب کنید.",
+        "yourLunch": "ناهار شما",
+        "theirLunch": "ناهارشون",
+        "overlap": "ناهار مشترک: {start}–{end} ({minutes} دقیقه)",
+        "noOverlap": "در این روز وقت ناهار مشترک وجود ندارد."
       }
     }
   },
@@ -1621,7 +1690,7 @@
     "parsedRowsSample": "{count} ردیف(ها) تجزیه شد. نمونه:",
     "runImport": "واردات را اجرا کنید",
     "generateMissingRandomCodes": "کدهای تصادفی گم شده را ایجاد کنید",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "نماینده مجلس · کرسی {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "کمیته",
@@ -1766,8 +1835,8 @@
         "hint": "چیدمان مجازی و طبقه نمایندگی"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "دستور کار",
+        "hint": "موضوع زنده و مجموع رأی‌ها در هر مورد دستور کار"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "جوایز"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "انتخاب کمیته…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "در حال تعویض…",
+    "dashboardCommitteeSwitchError": "تغییر کمیته ممکن نیست. دوباره امتحان کنید یا از طریق گیت اتاق وارد شوید.",
+    "dashboardCommitteeAllocationsHeading": "تخصیص در این جلسه کمیته",
+    "dashboardCommitteeNoAllocationsListed": "هیچ ردیف تخصیصی برای این جلسه فهرست نشده است.",
+    "dashboardCommitteeApplySwitch": "داشبورد را به این کمیته تغییر دهید",
+    "timerExpiryAlarmTitle": "صدای تایمر",
+    "timerExpiryAlarmLabel": "وقتی شمارش معکوس درون‌برنامه‌ای به صفر می‌رسد (تایمر گفتار، محدودیت زمانی جلسه، مهلت‌های هاب) صدای زنگ کوتاهی پخش کنید.",
+    "timerExpiryAlarmHint": "به طور پیش فرض خاموش است. فقط در این مرورگر ذخیره می شود.",
+    "jobRole": "نقش شغلی",
+    "jobRolePlaceholder": "به عنوان مثال مدیر MUN، معلم (اختیاری)",
+    "advisorSettingsHint": "مشخصات کارکنان مدرسه - بدون تخصیص نمره یا نماینده."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "اطلاعیه کامل",
       "daisAnnouncement": "اطلاعیه دایس",
       "close": "بستن",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "دستور کار"
     },
     "committeeControl": {
       "sessionNameLabel": "نام جلسه",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "و",
       "announcements": "اطلاعیه ها",
       "sidebarUseSuffix": "- یک ابزار در هر برگه",
-      "agenda": "Agenda"
+      "agenda": "دستور کار"
     },
     "history": {
       "title": "تاریخچه جلسه",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "دبیرخانه: نظرات رئیس و نمایندگان",
+    "intro": "یک کمیته برای ابزارهای صندلی و یک صندلی نماینده مرتبط با حساب کاربری خود انتخاب کنید، سپس سطوح را تغییر دهید. ورود به سیستم همچنان مرکز دبیرخانه را به طور پیش فرض باز می کند.",
+    "bindRequiredHint": "کمیته رئیس و/یا صندلی نمایندگی را در زیر انتخاب کنید، سپس دوباره امتحان کنید.",
+    "chairCommitteeLabel": "رئیس کمیته طبقه",
+    "chairCommitteePlaceholder": "انتخاب کمیته…",
+    "delegateSeatLabel": "صندلی نماینده (تخصیص شما)",
+    "delegateSeatPlaceholder": "انتخاب صندلی…",
+    "saveBindings": "ذخیره تکالیف",
+    "bindingsSaved": "ذخیره شد.",
+    "switchViewHeading": "تغییر داشبورد",
+    "switchViewHelp": "دبیرخانه شما را به SMT برمی گرداند. صندلی و نماینده همان پوسته‌های درون برنامه‌ای را که صندلی‌های واقعی و نمایندگان برای رویداد فعال استفاده می‌کنند باز می‌کنند.",
+    "goSecretariat": "دبیرخانه",
+    "goChair": "نمای صندلی",
+    "goDelegate": "نمای نماینده",
+    "surfaceSwitchError": "تغییر نمای انجام نشد. دروازه رویداد و انتخاب ها را بررسی کنید.",
+    "pickChairFirst": "ابتدا یک کمیته رئیس را انتخاب کنید (یا تکالیف را ذخیره کنید).",
+    "pickDelegateFirst": "ابتدا یک صندلی نماینده را انتخاب کنید (یا تکالیف را ذخیره کنید)."
+  },
+  "advisorDashboard": {
+    "intro": "می توانید فعالیت کمیته نماینده تعیین شده خود را نظارت کنید. شما به یادداشت ها دسترسی ندارید مگر اینکه یک صندلی یا SMT آن را برای شما ارسال کند.",
+    "noAssignments": "هنوز هیچ نماینده ای به حساب شما پیوند داده نشده است. دبیرخانه شما را از SMT → Advisors تعیین می کند.",
+    "delegateLinked": "حساب نماینده پیوند داده شد",
+    "delegateNotLinked": "صندلی هنوز به حساب نماینده مرتبط نشده است",
+    "viewProfile": "نمایه",
+    "viewDocuments": "اسناد",
+    "viewVoting": "رای دادن",
+    "forwardedNotes": "یادداشت های ارسال شده",
+    "schedule": {
+      "intro": "مسیر برنامه خود را انتخاب کنید، سپس مشاور A-D را انتخاب کنید تا جدول زمانی آن مشاور را برای آن روز ببینید."
+    },
+    "notes": {
+      "intro": "صندلی‌های Notes یا SMT انتخاب کردند تا با شما به اشتراک بگذارند. شما نمی توانید فید یادداشت های کامل را مرور کنید.",
+      "empty": "هنوز هیچ یادداشتی برای شما ارسال نشده است.",
+      "forwarded": "فوروارد کرد"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "مشاوران",
+    "subtitle": "حساب‌های مشاور را از طریق ایمیل دعوت کنید و هر مشاور را به یک صندلی نماینده پیوند دهید.",
+    "selectEventFirst": "ابتدا یک رویداد کنفرانس فعال را انتخاب کنید.",
+    "enterConferenceCode": "کد کنفرانس را وارد کنید",
+    "inviteTitle": "دعوت از مشاور",
+    "inviteBody": "پیوند ورود به سیستم را ارسال می کند (همان جریانی که صندلی دعوت می کند). نقش حساب به مشاور تنظیم شده است.",
+    "inviteDisabled": "دعوت‌ها در این استقرار به SUPABASE_SERVICE_ROLE_KEY نیاز دارند.",
+    "emailLabel": "ایمیل",
+    "emailPlaceholder": "consultor@school.edu",
+    "sending": "در حال ارسال…",
+    "inviteButton": "ارسال دعوتنامه",
+    "assignTitle": "تعیین نماینده",
+    "assignBody": "یک صندلی نماینده مرتبط را انتخاب کنید. یک مشاور برای هر نماینده؛ تخصیص مجدد جایگزین پیوند قبلی می شود.",
+    "advisorEmailLabel": "ایمیل مشاور",
+    "delegateLabel": "صندلی نماینده",
+    "delegatePlaceholder": "انتخاب نماینده…",
+    "assignedTo": "مشاور: {name}",
+    "saving": "در حال ذخیره…",
+    "assignButton": "ذخیره تکلیف",
+    "advisorFallback": "مشاور"
   }
 }

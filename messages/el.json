@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "Εάν έχουν ήδη εγγραφεί ως εκπρόσωπος, προωθήστε τους εδώ για να λάβουν τον πίνακα ελέγχου της προεδρίας και τα εργαλεία επιτροπής (δεν έχει σταλεί email).",
     "grantChairRole": "Χορηγήστε ρόλο καρέκλας",
     "chamberLabelFallback": "Συνεδρία επιτροπής",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "Κάθισμα Dais",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "Προεδρία του {committee}",
+    "chairRoleCoOf": "Συμπρόεδρος του {committee}",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "Η πρόταση είναι ήδη ανοιχτή για ψηφοφορία. Κλείστε το πριν καταγράψετε περαιτέρω δηλώσεις.",
     "statedMotionRecorded": "Η δηλωθείσα πρόταση καταγράφηκε (δεν είναι ακόμη ανοιχτή για ψηφοφορία).",
     "statedMotionRemoved": "Η δηλωμένη κίνηση καταργήθηκε.",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "Ημερήσια διάταξη",
     "agendaTabHelp": "Ορίστε το ζωντανό θέμα για την ομιλία και, στη συνέχεια, πατήστε ένα θέμα ατζέντας για να ανοίξετε τον πίνακα ψηφοφορίας με την πλήρη λίστα εκπροσώπων για αυτό το θέμα. Παρακάτω, επιλέξτε ένα θέμα για να δείτε τα σύνολα ψήφων της επιτροπής.",
     "agendaLiveBadge": "Ζω",
     "agendaSetLive": "Ορίστε ζωντανό θέμα",
@@ -423,7 +423,7 @@
     "euSessionPhase_adjourned": "Λήξη συνεδρίας",
     "euPartySAndD": "Προοδευτική Συμμαχία Σοσιαλιστών και Δημοκρατών (S&D)",
     "euPartyEpp": "Ευρωπαϊκό Λαϊκό Κόμμα (EPP)",
-    "euPartyRenew": "Renew Europe (Renew)",
+    "euPartyRenew": "Ανανεώστε την Ευρώπη (Ανανέωση)",
     "euPartyLeft": "Η Αριστερά στο Ευρωκοινοβούλιο (The Left)",
     "euPartyGreen": "Πράσινοι/ΕΛΑ (Greens/EFA)",
     "euPartyCAndR": "Ευρωπαίοι Συντηρητικοί και Μεταρρυθμιστές (ECR)",
@@ -471,7 +471,10 @@
     "home": "Σπίτι",
     "library": "Βιβλιοθήκη",
     "mainNavigationAria": "Κύρια πλοήγηση",
-    "history": "History"
+    "history": "Ιστορία",
+    "advisorHub": "Κόμβος συμβούλων",
+    "advisorNotes": "Διαβιβασμένες σημειώσεις",
+    "conferenceSchedule": "Πρόγραμμα"
   },
   "dashboardLayout": {
     "helpCenter": "Κέντρο βοήθειας",
@@ -694,8 +697,13 @@
     "formalMotions": "Επίσημες κινήσεις",
     "timer": "Μετρών την ώραν",
     "smtProfile": "Προφίλ",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 Ατζέντα",
+    "history": "Ιστορία",
+    "advisorDashboard": "Πίνακας εργαλείων συμβούλων",
+    "advisorNotes": "Διαβιβασμένες σημειώσεις",
+    "delegateSchedule": "Πρόγραμμα συνεδρίων",
+    "chairSchedule": "Πρόγραμμα συνεδρίων",
+    "advisorSchedule": "Πρόγραμμα συνεδρίων"
   },
   "setupPage": {
     "title": "Το Supabase δεν έχει ρυθμιστεί",
@@ -731,7 +739,7 @@
       "overview": "Επισκόπηση",
       "checklist": "Λίστα ελέγχου",
       "jump": "Μετάβαση σε",
-      "chairEmails": "Chair emails"
+      "chairEmails": "E-mail προέδρων"
     },
     "jumpTo": "Μετάβαση σε",
     "tiles": {
@@ -788,8 +796,12 @@
         "hint": "Θέστε ένα θέμα"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "E-mail προέδρων",
+        "hint": "Dais εισερχόμενα από επιτροπή"
+      },
+      "conferenceSchedule": {
+        "label": "Πρόγραμμα συνεδρίων",
+        "hint": "Ομαδικό χρονοδιάγραμμα διαδρομής και συμβούλων (A–D)"
       }
     },
     "countdownCard": {
@@ -808,11 +820,14 @@
       "remainingM": "{minutes}λ"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "Κοινόχρηστα εισερχόμενα για την επιτροπή σας (SEAMUN I). Επικοινωνήστε με τις καρέκλες σας από το παρακάτω email.",
+      "committeeColumn": "Επιτροπή",
+      "emailColumn": "Εισερχόμενα καρέκλας (όνομα χρήστη)",
+      "openMail": "Ανοίξτε την αλληλογραφία",
+      "noMatch": "Δεν υπάρχουν ακόμη δημοσιευμένα εισερχόμενα προεδρίας για αυτήν την επιτροπή. Ρωτήστε το SMT ή ελέγξτε την επιτροπεία σας."
+    },
+    "schedule": {
+      "intro": "Επιλέξτε το κομμάτι της ομάδας σας και μετά είτε τον σύμβουλο A–D είτε την επιτροπή σας (εκπρόσωπος/πρόεδρος). Εμφανίζεται μόνο ένα προσωπικό χρονοδιάγραμμα κάθε φορά."
     }
   },
   "materialsExportCard": {
@@ -939,8 +954,9 @@
       "officialLinks": "Επίσημοι σύνδεσμοι",
       "roomCode": "Κωδικός δωματίου",
       "settings": "Ρυθμίσεις",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "Ημερήσια διάταξη",
+      "history": "Ιστορία",
+      "conferenceSchedule": "Πρόγραμμα"
     }
   },
   "smtNav": {
@@ -953,7 +969,8 @@
     "allocationPasswords": "Κωδικοί πρόσβασης εκχώρησης",
     "profile": "Προφίλ",
     "follow": "Ακολουθώ",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "Σύμβουλοι"
   },
   "officialLinks": {
     "intro": "Έγγραφα, συνθήκες, κύριοι φορείς, προγράμματα, αποστολές και πληροφορίες μελών. Ανοίγει σε νέα καρτέλα.",
@@ -1053,16 +1070,16 @@
     "liveFloorDescription": "Ζωντανή ουρά ομιλητών, ονομαστική κλήση και χρονόμετρα για αυτήν την επιτροπή—οι ίδιοι πρόεδροι δεδομένων βλέπουν στην αίθουσα συνεδρίας.",
     "conferenceFallback": "Διάσκεψη",
     "committeeFallback": "Επιτροπή",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "Κατάλογος εποπτείας της γραμματείας",
+    "secretariatMatrixSectionSecretariat": "Γραμματεία",
+    "secretariatMatrixSectionOperations": "Λειτουργίες",
+    "secretariatMatrixSectionMedia": "Μέσα ενημέρωσης",
+    "secretariatMatrixSmtEmail": "Email SMT",
+    "secretariatMatrixFinanceEmail": "Οικονομικό email",
+    "secretariatMatrixCommitteeOverviews": "Επισκοπήσεις της επιτροπής",
+    "secretariatMatrixRole": "Ρόλος",
+    "secretariatMatrixName": "Ονομα",
+    "secretariatMatrixEmail": "E-mail"
   },
   "committeeNames": {
     "full": {
@@ -1256,7 +1273,11 @@
       "noRecipients": "Επιλέξτε τουλάχιστον έναν παραλήπτη (αντιπροσωπεία ή πρόεδρο).",
       "needAllocation": "Χρειάζεστε μια κατανομή για να στείλετε σημειώσεις (ή να είστε πρόεδρος).",
       "sendFailed": "Αποτυχία αποστολής σημείωσης."
-    }
+    },
+    "forwardToAdvisor": "Προώθηση στο {name}",
+    "forwardedToAdvisor": "Διαβιβάστηκε σε σύμβουλο",
+    "forwardedToAdvisorBadge": "(προς σύμβουλο)",
+    "advisorFallback": "Σύμβουλος"
   },
   "adminPage": {
     "title": "Διαχείριση ιστοσελίδας",
@@ -1400,14 +1421,14 @@
       "onlySmtGrantChair": "Μόνο η γραμματεία μπορεί να χορηγήσει ρόλους προέδρων.",
       "noAccountForEmail": "Δεν υπάρχει λογαριασμός με αυτό το email ακόμα. Στείλτε πρώτα μια πρόσκληση προέδρου.",
       "promotedToChairSuccess": "Το προφίλ για το {email} είναι πλέον καρέκλα.",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "Επιλέξτε μια έδρα και μια επιτροπή για αυτήν την πρόσκληση.",
+      "daisSeatRowMissing": "Δεν ήταν δυνατή η εύρεση μιας σειράς {seat} για αυτήν την επιτροπή. Δοκιμάστε να αποθηκεύσετε τη μήτρα κατανομής για το συμβάν και, στη συνέχεια, δοκιμάστε ξανά.",
+      "daisSeatAlreadyFilled": "Αυτό το κάθισμα έχει ήδη μια καρέκλα. Καταργήστε την εκχώρηση του τρέχοντος ατόμου στον πίνακα εκχώρησης (ή σε άλλο εργαλείο) πρώτα.",
+      "seatHeadChair": "Επικεφαλής καρέκλας",
+      "seatCoChair": "Συμπρόεδρος",
+      "inviteSentButAllocationFailed": "Η πρόσκληση στάλθηκε και σετ ρόλων καρέκλας, αλλά δεν ήταν δυνατή η σύνδεση του καθίσματος: {error}. Διορθώστε τη μήτρα κατανομής ή επικοινωνήστε με την υποστήριξη.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "Αυτή η έδρα δεν ταιριάζει με το σχέδιο προεδρίας αυτής της επιτροπής."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Πρέπει να είστε συνδεδεμένοι.",
@@ -1425,6 +1446,24 @@
       "emailSubject": "Εξαγωγή υλικών InterMUN ({range})",
       "emailSendConfigHint": "Ορίστε SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS και προαιρετικά MATERIALS_EXPORT_FROM στον διακομιστή.",
       "exportEmailedTo": "Η εξαγωγή εστάλη μέσω ηλεκτρονικού ταχυδρομείου στη διεύθυνση {email}. Εάν δεν το βλέπετε, ελέγξτε ανεπιθύμητα/ανεπιθύμητα."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Δεν έχετε συνδεθεί.",
+      "onlySmt": "Μόνο ο διαχειριστής της γραμματείας ή του ιστότοπου μπορεί να διαχειρίζεται συμβούλους.",
+      "unauthorized": "Ανεξουσιοδότητος.",
+      "invalidEmail": "Εισαγάγετε μια έγκυρη διεύθυνση email.",
+      "missingServiceRole": "Ο διακομιστής λείπει SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Ορίστε το NEXT_PUBLIC_APP_URL για συνδέσμους ανακατεύθυνσης προσκλήσεων.",
+      "emailAlreadyRegistered": "Αυτό το email έχει ήδη λογαριασμό. Ορίστε τον ρόλο τους ως σύμβουλο στον διαχειριστή και, στη συνέχεια, ορίστε έναν εκπρόσωπο.",
+      "inviteRoleFailed": "Η πρόσκληση στάλθηκε αλλά δεν ήταν δυνατός ο ορισμός του ρόλου συμβούλου: {message}",
+      "inviteSent": "Η πρόσκληση στάλθηκε στο {email}. Θα είναι σύμβουλος αφού ορίσουν τον κωδικό πρόσβασής τους.",
+      "invalidAdvisorEmail": "Εισαγάγετε το email του συμβούλου.",
+      "missingDelegate": "Επιλέξτε μια θέση αντιπροσώπου.",
+      "advisorNotFound": "Δεν βρέθηκε λογαριασμός για αυτό το email συμβούλου.",
+      "notAdvisorRole": "Αυτός ο χρήστης δεν είναι σύμβουλος. Προσκαλέστε τους ή ορίστε πρώτα τον ρόλο του συμβούλου.",
+      "delegateNotFound": "Η θέση του αντιπροσώπου δεν βρέθηκε.",
+      "delegateUnlinked": "Αυτή η θέση δεν έχει ακόμη συνδεδεμένο λογαριασμό εκπροσώπου.",
+      "assigned": "Διορίστηκε σύμβουλος στο {country}."
     }
   },
   "emails": {
@@ -1448,7 +1487,7 @@
     "eventDetails": "Λεπτομέρειες εκδήλωσης",
     "selectConferenceFirst": "Επιλέξτε πρώτα μια διάσκεψη με την πύλη εκδήλωσης και μετά επιστρέψτε εδώ.",
     "committeeSessionsTitle": "συνεδριάσεις της επιτροπής σε αυτή την εκδήλωση",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "Κάθε κάρτα είναι ένα θάλαμο: σύντομη ετικέτα, επίσημο όνομα, λογότυπο, έως δύο θέματα ατζέντας, σύνδεσμος RoP, κοινόχρηστος κωδικός δωματίου έξι χαρακτήρων (δεύτερη πύλη) και προφίλ διαδικασίας. Οι κωδικοί δωματίων πρέπει να παραμένουν μοναδικοί σε όλους τους θαλάμους σε αυτήν την εκδήλωση.",
     "noCommitteeSessions": "Δεν υπάρχουν συνεδριάσεις επιτροπής για αυτήν την εκδήλωση.",
     "eventName": "Όνομα εκδήλωσης",
     "tagline": "Περιγραφή",
@@ -1491,81 +1530,111 @@
     "committeeCodeHelpPrefix": "Έξι χαρακτήρες: αρχικά θαλάμου + τρία ψηφία (ντετερμινιστική πρόταση:",
     "saveCommittee": "Αποθήκευση επιτροπής",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "Ετικέτα επιτροπής",
+    "committeeLabelPlaceholder": "π.χ. ECOSOC, DISEC, INTERPOL",
+    "officialCommitteeNameGrid": "Επίσημο όνομα επιτροπής",
+    "topic1Label": "Θέμα 1",
+    "topic2Label": "Θέμα 2 (προαιρετικό)",
+    "topic2Placeholder": "Δεύτερη ερώτηση ατζέντας",
+    "topic2DisabledHint": "Προσθέστε μια δεύτερη σειρά θέματος για να επεξεργαστείτε αυτό το πεδίο.",
+    "addSecondTopic": "Προσθήκη δεύτερου θέματος",
+    "addingTopic": "Αθροιση…",
+    "ropDocumentLink": "Κανονισμός διαδικασίας (σύνδεσμος εγγράφου)",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
+    "roomCodeLabel": "Κωδικός δωματίου (δεύτερη πύλη)",
+    "roomCodeHelpPrefix": "Έξι γράμματα ή ψηφία, κοινόχρηστα για αυτήν την αίθουσα (πρόταση:",
     "roomCodeHelpSuffix": ").",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "Πρόγραμμα διήμερου συνεδρίου",
+      "subtitle": "Σχεδιάστε μπλοκ ανά ομάδα αντιπροσώπων (τις ίδιες ομάδες που χρησιμοποιείτε για την ομαδοποίηση επιτροπών). Χρώμα ανά τύπο μπλοκ: συνεδρία, διάλειμμα ή τελετή. Σημειώστε το μεσημεριανό γεύμα για ελέγχους επικάλυψης. Αποθηκεύτηκε με το ενεργό συμβάν.",
+      "day1Tab": "Ημέρα 1",
+      "day2Tab": "Ημέρα 2",
+      "lunchOverlapTab": "Επικάλυψη μεσημεριανού γεύματος",
+      "lunchOverlapHelp": "Οι επικαλύψεις εμφανίζονται όταν δύο ομάδες έχουν και οι δύο μια σειρά που έχει επισημανθεί ως μεσημεριανό την ίδια μέρα και τα χρονικά εύρη τέμνονται.",
+      "noLunchOverlaps": "Δεν εντοπίστηκαν επικαλύψεις για μεσημεριανό γεύμα. Σημειώστε τουλάχιστον μία σειρά ως μεσημεριανό σε δύο διαφορετικές ομάδες την ίδια μέρα με επικαλυπτόμενους χρόνους.",
+      "dayLabel": "Ημέρα {day}",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
       "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "groupsLabel": "Ομάδες",
+      "renameGroup": "Ενεργό όνομα ομάδας",
+      "colStart": "Αρχή",
+      "colEnd": "Τέλος",
+      "colLabel": "Αποκλεισμός / περίοδος λειτουργίας",
+      "colKind": "Τύπος",
+      "kindSession": "Συνεδρίαση",
+      "kindBreak": "Διακοπή",
+      "kindCeremony": "Τελετή",
+      "legendTitle": "Χρώματα μπλοκ",
+      "legendSession": "συνεδρίαση της επιτροπής",
+      "legendBreak": "Διάλειμμα / μεσημεριανό γεύμα / συζήτηση",
+      "legendCeremony": "Έναρξη / Λήξη / Τελετή",
+      "colLunch": "Μεσημεριανό",
+      "emptyDay": "Δεν υπάρχουν ακόμη μπλοκ. Προσθέστε ένα μπλοκ ή χρησιμοποιήστε μια άλλη καρτέλα ομάδας.",
+      "blockPlaceholder": "π.χ. Τελετή έναρξης · Σύνοδος επιτροπής 1",
+      "lunchCheckboxAria": "Μετρήστε αυτή τη σειρά ως γεύμα για επικαλύψεις",
+      "remove": "Αφαιρώ",
+      "addBlock": "Προσθήκη χρονικού μπλοκ",
+      "newGroupName": "Νέο όνομα ομάδας",
+      "newGroupPlaceholder": "π.χ. Σώμα Τύπου",
+      "defaultNewGroupName": "Νέα ομάδα",
+      "addGroup": "Προσθήκη ομάδας",
+      "removeGroup": "Κατάργηση ομάδας",
+      "confirmRemoveGroup": "Να καταργηθεί η ομάδα χρονοδιαγράμματος \"{name}\" και όλα τα μπλοκ της και για τις δύο ημέρες;",
+      "saveSchedule": "Αποθήκευση προγράμματος",
+      "saving": "Οικονομία…",
+      "saved": "Το χρονοδιάγραμμα αποθηκεύτηκε.",
+      "resetTemplate": "Επαναφορά στο πρότυπο",
+      "confirmReset": "Επαναφορά του χρονοδιαγράμματος στις προεπιλεγμένες τρεις ομάδες και διαγραφή όλων των μπλοκ;",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — επίσημο οπτικό πρόγραμμα",
+        "body": "Αυτό το διήμερο πρόγραμμα έχει καθοριστεί για το SEAMUN I 2027. Αντιστοιχεί στο δημοσιευμένο κύριο πρόγραμμα και δεν μπορεί να αλλάξει στην εφαρμογή (συμπεριλαμβανομένης της γραμματείας).",
+        "legendTitle": "Χρωματιστά",
+        "legendArrival": "Άφιξη / εγγραφή",
+        "legendDismissal": "Απόλυση",
+        "legendCeremony": "Τελετή",
+        "legendBreak": "Γενικό διάλειμμα",
+        "legendSession": "Ακαδημαϊκή συνεδρία",
+        "legendLunch": "Φάτε (μεσημεριανό)",
+        "legendRelax": "Ψύχρα",
+        "legendSupport": "Αίθουσα υποστήριξης",
+        "legendStrategy": "Αίθουσες στρατηγικής",
+        "legendSweep": "Σκούπισμα",
+        "handbookLink": "Εγχειρίδιο ανοιχτής διάσκεψης (PDF)",
+        "handbookHint": "επίσημο κύριο έγγραφο· το κλειδωμένο χρονοδιάγραμμα και η ομαδοποίηση του θαλάμου παρακάτω ακολουθούν αυτή τη δημοσίευση.",
+        "committeeMatrixTitle": "Αίθουσες επιτροπών ανά διαδρομή χρονοδιαγράμματος",
+        "committeeMatrixHint": "Κάθε αίθουσα ακολουθεί το ρολόι της Ημέρας 1 / Ημέρας 2 του κομματιού του (η στήλη με το ίδιο όνομα ομάδας στο παραπάνω διάγραμμα).",
+        "colScheduleTrack": "Προγραμματισμός διαδρομής",
+        "colChambers": "Επιμελητήρια (ετικέτες σε αυτήν την εκδήλωση)",
+        "advisorHint": "Αγγίξτε μια ομάδα και, στη συνέχεια, προβάλετε είτε ένα χρονοδιάγραμμα συμβούλων (A–D) είτε ένα χρονοδιάγραμμα εκπροσώπων/προέδρου για μία επιτροπή — όχι και τα δύο ταυτόχρονα.",
+        "advisorOnlyHint": "Επιλέξτε το ίχνος του χρονοδιαγράμματός σας και μετά τον σύμβουλο A–D για να δείτε την ημέρα του συγκεκριμένου συμβούλου.",
+        "committeeOnlyHint": "Το επίσημο χρονοδιάγραμμα της επιτροπής σας. Παρακάτω, συγκρίνετε τις ώρες του γεύματος με άλλες επιτροπές.",
+        "pickTrack": "Προγραμματισμός κομματιού:",
+        "viewAllTeams": "Όλες οι ομάδες",
+        "orPickTeam": "ή ομάδα:",
+        "viewAs": "Προβολή ως",
+        "modeAdvisor": "Σύμβουλος",
+        "modeCommittee": "Επιτροπή (αντιπρόσωπος/πρόεδρος)",
+        "pickAdvisor": "Σύμβουλος",
+        "pickCommittee": "Επιτροπή",
+        "selectAdvisorPrompt": "Επιλέξτε τον σύμβουλο A, B, C ή D για να δείτε αυτό το χρονοδιάγραμμα.",
+        "selectCommitteePrompt": "Επιλέξτε την επιτροπή σας για να δείτε το χρονοδιάγραμμα των εκπροσώπων/προέδρων.",
+        "teamShort": {
+          "g1": "Αλφα",
+          "g2": "Βήτα",
+          "g3": "Γάμμα",
+          "g4": "Δέλτα",
+          "support": "Εψιλο"
+        }
+      },
+      "lunchOverlap": {
+        "title": "Το μεσημεριανό γεύμα επικαλύπτεται με άλλες επιτροπές",
+        "body": "Συγκρίνετε το μεσημεριανό παράθυρο της επιτροπής σας με έως και {max} άλλες επιτροπές. Επιλέξτε μια ημέρα και, στη συνέχεια, επιλέξτε τις επιτροπές παρακάτω.",
+        "pickCommittees": "Συγκρίνετε με",
+        "noneSelected": "Επιλέξτε μία ή περισσότερες επιτροπές για να δείτε τα κοινά λεπτά γεύματος.",
+        "yourLunch": "Το μεσημεριανό σας",
+        "theirLunch": "Το μεσημεριανό τους",
+        "overlap": "Κοινό γεύμα: {start}–{end} ({minutes} λεπτά)",
+        "noOverlap": "Δεν υπάρχει κοινόχρηστη ώρα για μεσημεριανό γεύμα αυτήν την ημέρα."
       }
     }
   },
@@ -1621,7 +1690,7 @@
     "parsedRowsSample": "Αναλύθηκαν {count} σειρές. Δείγμα:",
     "runImport": "Εκτέλεση εισαγωγής",
     "generateMissingRandomCodes": "Δημιουργήστε τυχαίους κωδικούς που λείπουν",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "Βουλευτής · Έδρα {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "Επιτροπή",
@@ -1766,8 +1835,8 @@
         "hint": "Εικονική διάταξη & όροφος αντιπροσώπων"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "Ημερήσια διάταξη",
+        "hint": "Ζωντανά σύνολα θεμάτων και ψηφοφοριών ανά θέμα ατζέντας"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "Βραβεία"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "Εξεταστική επιτροπή…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "Εναλλαγή…",
+    "dashboardCommitteeSwitchError": "Δεν ήταν δυνατή η αλλαγή επιτροπής. Δοκιμάστε ξανά ή συνδεθείτε από την πύλη του δωματίου.",
+    "dashboardCommitteeAllocationsHeading": "Κατανομές σε αυτή τη συνεδρίαση της επιτροπής",
+    "dashboardCommitteeNoAllocationsListed": "Δεν παρατίθενται σειρές κατανομής για αυτήν την περίοδο λειτουργίας.",
+    "dashboardCommitteeApplySwitch": "Αλλάξτε τον πίνακα ελέγχου σε αυτήν την επιτροπή",
+    "timerExpiryAlarmTitle": "Ήχος χρονοδιακόπτη",
+    "timerExpiryAlarmLabel": "Παίξτε ένα σύντομο κουδούνισμα όταν οποιαδήποτε αντίστροφη μέτρηση εντός της εφαρμογής φτάσει στο μηδέν (χρονομετρητής ομιλίας, χρονικό όριο περιόδου σύνδεσης, προθεσμίες κέντρου).",
+    "timerExpiryAlarmHint": "Απενεργοποίηση από προεπιλογή. Αποθηκεύεται μόνο σε αυτό το πρόγραμμα περιήγησης.",
+    "jobRole": "Εργασιακός ρόλος",
+    "jobRolePlaceholder": "π.χ. Διευθυντής MUN, δάσκαλος (προαιρετικό)",
+    "advisorSettingsHint": "Προφίλ σχολικού προσωπικού — δεν υπάρχει κατανομή βαθμού ή εκπροσώπων."
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "Ολόκληρη η ανακοίνωση",
       "daisAnnouncement": "Ανακοίνωση Dais",
       "close": "Κοντά",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "Ημερήσια διάταξη"
     },
     "committeeControl": {
       "sessionNameLabel": "Όνομα συνεδρίας",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "και",
       "announcements": "Ανακοινώσεις",
       "sidebarUseSuffix": "— ένα εργαλείο ανά καρτέλα.",
-      "agenda": "Agenda"
+      "agenda": "Ημερήσια διάταξη"
     },
     "history": {
       "title": "Ιστορικό συνεδρίας",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "Γραμματεία: απόψεις προέδρου και εκπροσώπων",
+    "intro": "Επιλέξτε μια επιτροπή για εργαλεία προεδρίας και μια θέση εκπροσώπου συνδεδεμένη με τον λογαριασμό σας και, στη συνέχεια, αλλάξτε επιφάνεια. Η είσοδος εξακολουθεί να ανοίγει το κέντρο γραμματείας από προεπιλογή.",
+    "bindRequiredHint": "Επιλέξτε μια επιτροπή προέδρου και/ή μια θέση αντιπροσώπου παρακάτω και, στη συνέχεια, δοκιμάστε ξανά.",
+    "chairCommitteeLabel": "Πρόεδρος επιτροπής ορόφου",
+    "chairCommitteePlaceholder": "Εξεταστική επιτροπή…",
+    "delegateSeatLabel": "Θέση αντιπροσώπου (η κατανομή σας)",
+    "delegateSeatPlaceholder": "Επιλέξτε θέση…",
+    "saveBindings": "Αποθήκευση εργασιών",
+    "bindingsSaved": "Αποθηκεύτηκε.",
+    "switchViewHeading": "Εναλλαγή ταμπλό",
+    "switchViewHelp": "Η Γραμματεία σας επιστρέφει στο SMT. Ο πρόεδρος και ο εκπρόσωπος ανοίγουν τα ίδια κελύφη εντός εφαρμογής που χρησιμοποιούν οι πραγματικές καρέκλες και οι εκπρόσωποι για το ενεργό συμβάν.",
+    "goSecretariat": "Γραμματεία",
+    "goChair": "Θέα καρέκλας",
+    "goDelegate": "Προβολή αντιπροσώπου",
+    "surfaceSwitchError": "Δεν ήταν δυνατή η αλλαγή προβολής. Ελέγξτε την πύλη και τις επιλογές εκδηλώσεων.",
+    "pickChairFirst": "Επιλέξτε πρώτα μια επιτροπή προέδρου (ή αποθηκεύστε τις εργασίες).",
+    "pickDelegateFirst": "Επιλέξτε πρώτα μια θέση αντιπροσώπου (ή αποθηκεύστε τις εργασίες)."
+  },
+  "advisorDashboard": {
+    "intro": "Μπορείτε να παρακολουθείτε τη δραστηριότητα της επιτροπής του εκπροσώπου που έχετε ορίσει. Δεν έχετε πρόσβαση σε σημειώσεις εκτός εάν μια καρέκλα ή SMT σας προωθήσει μια.",
+    "noAssignments": "Κανένας εκπρόσωπος δεν έχει συνδεθεί ακόμη με τον λογαριασμό σας. Η Γραμματεία θα σας αναθέσει από το SMT → Advisors.",
+    "delegateLinked": "Συνδέθηκε ο λογαριασμός εκπροσώπου",
+    "delegateNotLinked": "Η θέση δεν έχει συνδεθεί ακόμη με λογαριασμό αντιπροσώπου",
+    "viewProfile": "Προφίλ",
+    "viewDocuments": "Εγγραφα",
+    "viewVoting": "Ψηφοφορία",
+    "forwardedNotes": "Διαβιβασμένες σημειώσεις",
+    "schedule": {
+      "intro": "Επιλέξτε το χρονοδιάγραμμά σας και, στη συνέχεια, σύμβουλος A–D για να δείτε το χρονοδιάγραμμα αυτού του συμβούλου για την ημέρα."
+    },
+    "notes": {
+      "intro": "Οι καρέκλες σημειώσεων ή η SMT επέλεξαν να μοιραστούν μαζί σας. Δεν μπορείτε να περιηγηθείτε στην πλήρη ροή σημειώσεων.",
+      "empty": "Δεν σας έχουν προωθηθεί ακόμη σημειώσεις.",
+      "forwarded": "Προωθήθηκε"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Σύμβουλοι",
+    "subtitle": "Προσκαλέστε λογαριασμούς συμβούλων μέσω email και συνδέστε κάθε σύμβουλο σε μία θέση αντιπροσώπου.",
+    "selectEventFirst": "Επιλέξτε πρώτα μια ενεργή εκδήλωση συνεδρίου.",
+    "enterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης",
+    "inviteTitle": "Πρόσκληση συμβούλου",
+    "inviteBody": "Στέλνει έναν σύνδεσμο σύνδεσης (η ίδια ροή με την πρόσκληση της καρέκλας). Ο ρόλος του λογαριασμού έχει οριστεί ως σύμβουλος.",
+    "inviteDisabled": "Οι προσκλήσεις απαιτούν SUPABASE_SERVICE_ROLE_KEY σε αυτήν την ανάπτυξη.",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "Αποστολή…",
+    "inviteButton": "Αποστολή πρόσκλησης",
+    "assignTitle": "Εκχώρηση αντιπροσώπου",
+    "assignBody": "Επιλέξτε μια συνδεδεμένη θέση αντιπροσώπου. Ένας σύμβουλος ανά εκπρόσωπο. η εκ νέου ανάθεση αντικαθιστά τον προηγούμενο σύνδεσμο.",
+    "advisorEmailLabel": "Email συμβούλου",
+    "delegateLabel": "Θέση αντιπροσώπου",
+    "delegatePlaceholder": "Επιλογή αντιπροσώπου…",
+    "assignedTo": "σύμβουλος: {name}",
+    "saving": "Οικονομία…",
+    "assignButton": "Αποθήκευση εργασίας",
+    "advisorFallback": "Σύμβουλος"
   }
 }

@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "如果他们已经注册成为代表，请在此处晋升他们，以便他们获得主席仪表板和委员会工具（不发送电子邮件）。",
     "grantChairRole": "授予主席角色",
     "chamberLabelFallback": "委员会会议",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "讲台座位",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "{committee} 主席",
+    "chairRoleCoOf": "{committee} 联合主席",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "一项动议已开始投票。 在记录进一步的陈述之前关闭它。",
     "statedMotionRecorded": "所陈述的动议已记录（尚未开放投票）。",
     "statedMotionRemoved": "已删除所述动议。",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "议程",
     "agendaTabHelp": "设置与会者的实时主题，然后点击议程主题以打开投票面板，其中包含该主题的完整代表列表。 在下面，选择一个主题来查看委员会的投票总数。",
     "agendaLiveBadge": "居住",
     "agendaSetLive": "设置直播主题",
@@ -543,7 +543,10 @@
     "home": "家",
     "library": "图书馆",
     "mainNavigationAria": "主导航",
-    "history": "History"
+    "history": "历史",
+    "advisorHub": "顾问中心",
+    "advisorNotes": "转发笔记",
+    "conferenceSchedule": "日程"
   },
   "dashboardLayout": {
     "helpCenter": "帮助中心",
@@ -766,8 +769,13 @@
     "formalMotions": "正式动议",
     "timer": "定时器",
     "smtProfile": "轮廓",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 议程",
+    "history": "历史",
+    "advisorDashboard": "顾问仪表板",
+    "advisorNotes": "转发笔记",
+    "delegateSchedule": "会议日程",
+    "chairSchedule": "会议日程",
+    "advisorSchedule": "会议日程"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -803,7 +811,7 @@
       "overview": "概述",
       "checklist": "清单",
       "jump": "跳转至",
-      "chairEmails": "Chair emails"
+      "chairEmails": "主席电子邮件"
     },
     "jumpTo": "跳转至",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "提出问题"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "主席电子邮件",
+        "hint": "按委员会的讲台收件箱"
+      },
+      "conferenceSchedule": {
+        "label": "会议日程",
+        "hint": "团队轨迹和顾问时间表（A-D）"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}分"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "为您的委员会共享讲台收件箱（SEAMUN I）。 通过下面的电子邮件联系您的主席。",
+      "committeeColumn": "委员会",
+      "emailColumn": "主席收件箱（用户名）",
+      "openMail": "打开邮件",
+      "noMatch": "该委员会尚未列出已发布的主席收件箱。 询问 SMT 或查看您的委员会简介。"
+    },
+    "schedule": {
+      "intro": "选择您的团队路线，然后选择顾问 A-D 或您的委员会（代表/主席）。 一次仅显示一个个人时间表。"
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "官方链接",
       "roomCode": "房间代码",
       "settings": "设置",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "议程",
+      "history": "历史",
+      "conferenceSchedule": "日程"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "分配密码",
     "profile": "轮廓",
     "follow": "跟随",
-    "hubAbbrev": "表面贴装技术"
+    "hubAbbrev": "表面贴装技术",
+    "advisors": "顾问"
   },
   "officialLinks": {
     "intro": "文件、条约、主要机构、计划、任务和成员信息。 在新选项卡中打开。",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "该委员会的现场发言者队列、点名和计时器 - 主席在会议地板上看到的数据相同。",
     "conferenceFallback": "会议",
     "committeeFallback": "委员会",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "秘书处监督名册",
+    "secretariatMatrixSectionSecretariat": "秘书处",
+    "secretariatMatrixSectionOperations": "运营",
+    "secretariatMatrixSectionMedia": "媒体",
+    "secretariatMatrixSmtEmail": "SMT电子邮件",
+    "secretariatMatrixFinanceEmail": "财务邮箱",
+    "secretariatMatrixCommitteeOverviews": "委员会概览",
+    "secretariatMatrixRole": "角色",
+    "secretariatMatrixName": "姓名",
+    "secretariatMatrixEmail": "电子邮件"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "至少选择一名接受者（代表团或主席）。",
       "needAllocation": "您需要分配来发送笔记（或担任主席）。",
       "sendFailed": "发送便条失败。"
-    }
+    },
+    "forwardToAdvisor": "转发至{name}",
+    "forwardedToAdvisor": "转发给顾问",
+    "forwardedToAdvisorBadge": "（对顾问）",
+    "advisorFallback": "顾问"
   },
   "adminPage": {
     "title": "网站管理",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "只有秘书处可以授予主席职位。",
       "noAccountForEmail": "还没有该电子邮件的帐户。 首先发送主席邀请。",
       "promotedToChairSuccess": "{email} 的个人资料现在是主席台。",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "为此次邀请选择讲台座位和委员会。",
+      "daisSeatRowMissing": "找不到该委员会的 {seat} 行。 尝试保存事件的分配矩阵，然后重试。",
+      "daisSeatAlreadyFilled": "那个讲台座位已经有一把椅子了。 首先取消分配分配矩阵（或其他工具）中的当前人员。",
+      "seatHeadChair": "主席椅",
+      "seatCoChair": "联合主席",
+      "inviteSentButAllocationFailed": "已发送邀请并设置主席角色，但讲台座位无法链接：{error}。 Fix the allocation matrix or contact support.",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "该讲台座位与该委员会的主席计划不符。"
     },
     "allocationSignup": {
       "mustBeSignedIn": "您必须登录。",
@@ -1497,6 +1518,24 @@
       "emailSubject": "InterMUN 材料出口 ({range})",
       "emailSendConfigHint": "在服务器上设置 SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS 和可选的 MATERIALS_EXPORT_FROM。",
       "exportEmailedTo": "导出通过电子邮件发送至 {email}。 如果您没有看到它，请检查垃圾邮件/垃圾邮件。"
+    },
+    "advisorStaff": {
+      "notSignedIn": "未登录。",
+      "onlySmt": "只有秘书处或网站管理员可以管理顾问。",
+      "unauthorized": "未经授权。",
+      "invalidEmail": "输入有效的电子邮件地址。",
+      "missingServiceRole": "服务器缺少 SUPABASE_SERVICE_ROLE_KEY。",
+      "missingAppUrl": "为邀请重定向链接设置 NEXT_PUBLIC_APP_URL。",
+      "emailAlreadyRegistered": "该电子邮件已经有一个帐户。 在管理中将他们的角色设置为顾问，然后分配一名代表。",
+      "inviteRoleFailed": "已发送邀请但无法设置顾问角色：{message}",
+      "inviteSent": "邀请已发送至{email}。 设置密码后，他们将成为顾问。",
+      "invalidAdvisorEmail": "输入顾问的电子邮件。",
+      "missingDelegate": "选择代表席位。",
+      "advisorNotFound": "找不到该顾问电子邮件的帐户。",
+      "notAdvisorRole": "该用户不是顾问。 首先邀请他们或将角色设置为顾问。",
+      "delegateNotFound": "未找到代表席位。",
+      "delegateUnlinked": "该席位尚未关联代表帐户。",
+      "assigned": "为{country}指派顾问。"
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "活动详情",
     "selectConferenceFirst": "首先通过事件门选择一个会议，然后返回此处。",
     "committeeSessionsTitle": "本次活动的委员会会议",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "每张卡都是一个房间：短标签、官方名称、徽标、最多两个议程主题、RoP 链接、共享的六字符房间代码（第二个门）和程序简介。 在此事件中，房间代码在各个房间中必须保持唯一。",
     "noCommitteeSessions": "本次活动没有委员会会议。",
     "eventName": "活动名称",
     "tagline": "标语",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "六个字符：室缩写+三位数字（确定性建议：",
     "saveCommittee": "保存委员会",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "委员会标签",
+    "committeeLabelPlaceholder": "例如 经社理事会、DISEC、国际刑警组织",
+    "officialCommitteeNameGrid": "官方委员会名称",
+    "topic1Label": "主题1",
+    "topic2Label": "主题 2（可选）",
+    "topic2Placeholder": "第二议程问题",
+    "topic2DisabledHint": "添加第二个主题行以编辑此字段。",
+    "addSecondTopic": "添加第二个主题",
+    "addingTopic": "添加...",
+    "ropDocumentLink": "议事规则（文件链接）",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
-    "roomCodeHelpSuffix": ").",
+    "roomCodeLabel": "房间代码（第二门）",
+    "roomCodeHelpPrefix": "六个字母或数字，为本室共享（建议：",
+    "roomCodeHelpSuffix": "）。",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "两天会议日程",
+      "subtitle": "每个代表组的计划块（与您用于集群委员会的组相同）。 按块类型着色：会议、休息或仪式。 标记午餐以进行重叠检查。 与活动事件一起保存。",
+      "day1Tab": "第一天",
+      "day2Tab": "第二天",
+      "lunchOverlapTab": "午餐重叠",
+      "lunchOverlapHelp": "当两个组在同一天都有一行标记为午餐并且时间范围相交时，就会出现重叠。",
+      "noLunchOverlaps": "未检测到午餐重叠。 在同一天将至少一行标记为两个不同组的午餐，且时间重叠。",
+      "dayLabel": "第{day}天",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "与",
+      "groupsLabel": "团体",
+      "renameGroup": "活动群组名称",
+      "colStart": "开始",
+      "colEnd": "结尾",
+      "colLabel": "块/会话",
+      "colKind": "类型",
+      "kindSession": "会议",
+      "kindBreak": "休息",
+      "kindCeremony": "仪式",
+      "legendTitle": "块色",
+      "legendSession": "委员会会议",
+      "legendBreak": "休息/午餐/党团会议",
+      "legendCeremony": "开幕/闭幕/仪式",
+      "colLunch": "午餐",
+      "emptyDay": "还没有块。 添加块或使用另一个组选项卡。",
+      "blockPlaceholder": "例如 开幕式·委员会会议1",
+      "lunchCheckboxAria": "将此行计为午餐以进行重叠检查",
+      "remove": "消除",
+      "addBlock": "添加时间块",
+      "newGroupName": "新组名",
+      "newGroupPlaceholder": "例如 记者团",
+      "defaultNewGroupName": "新组",
+      "addGroup": "添加群组",
+      "removeGroup": "删除组",
+      "confirmRemoveGroup": "删除计划组“{name}”及其这两天的所有块？",
+      "saveSchedule": "保存日程",
+      "saving": "保存…",
+      "saved": "时间表已保存。",
+      "resetTemplate": "重置为模板",
+      "confirmReset": "将时间表重置为默认的三组并清除所有块？",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — 官方视觉时间表",
+        "body": "这个为期两天的计划是为 SEAMUN I 2027 确定的。它与发布的主时间表相匹配，并且不能在应用程序中更改（包括由秘书处更改）。",
+        "legendTitle": "颜色",
+        "legendArrival": "到达/登记",
+        "legendDismissal": "解雇",
+        "legendCeremony": "仪式",
+        "legendBreak": "一般休息",
+        "legendSession": "学术会议",
+        "legendLunch": "吃（午餐）",
+        "legendRelax": "寒意",
+        "legendSupport": "支援室",
+        "legendStrategy": "策略室",
+        "legendSweep": "扫",
+        "handbookLink": "开放式会议手册（PDF）",
+        "handbookHint": "官方主文件； 以下锁定的时间表和会议厅分组遵循本出版物。",
+        "committeeMatrixTitle": "按日程安排的委员会会议厅",
+        "committeeMatrixHint": "每个室遵循其轨道的第 1 天/第 2 天时钟（上图中具有相同组名称的列）。",
+        "colScheduleTrack": "时间表轨道",
+        "colChambers": "钱伯斯（本次活动中的标签）",
+        "advisorHint": "点击一个团队，然后查看一个委员会的顾问时间表 (A–D) 或代表/主席时间表，而不是同时查看这两个时间表。",
+        "advisorOnlyHint": "选择您的日程安排轨迹，然后选择顾问 A–D 以查看该顾问的一天。",
+        "committeeOnlyHint": "您的委员会的官方时间表。 下面，将午餐时间与其他委员会进行比较。",
+        "pickTrack": "时间表曲目：",
+        "viewAllTeams": "所有球队",
+        "orPickTeam": "或团队：",
+        "viewAs": "查看为",
+        "modeAdvisor": "顾问",
+        "modeCommittee": "委员会（代表/主席）",
+        "pickAdvisor": "顾问",
+        "pickCommittee": "委员会",
+        "selectAdvisorPrompt": "选择顾问 A、B、C 或 D 以查看该时间表。",
+        "selectCommitteePrompt": "选择您的委员会以查看代表/主席时间表。",
+        "teamShort": {
+          "g1": "阿尔法",
+          "g2": "贝塔",
+          "g3": "伽玛",
+          "g4": "三角洲",
+          "support": "厄普西隆"
+        }
+      },
+      "lunchOverlap": {
+        "title": "与其他委员会共进午餐",
+        "body": "将您的委员会的午餐窗口与最多 {max} 个其他委员会进行比较。 选择一天，然后选择下面的委员会。",
+        "pickCommittees": "与比较",
+        "noneSelected": "选择一个或多个委员会以查看共享午餐会议记录。",
+        "yourLunch": "你的午餐",
+        "theirLunch": "他们的午餐",
+        "overlap": "共享午餐：{start}–{end}（{minutes}分钟）",
+        "noOverlap": "当天没有共享午餐时间。"
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "已解析 {count} 行。 样本：",
     "runImport": "运行导入",
     "generateMissingRandomCodes": "生成缺失的随机代码",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "议员 · 席位 {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "委员会",
@@ -1838,8 +1907,8 @@
         "hint": "虚拟布局和代表楼层"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "议程",
+        "hint": "每个议程项目的实时主题和投票总数"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "奖项"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "选择委员会...",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "交换…",
+    "dashboardCommitteeSwitchError": "无法切换委员会。 请重试或通过房门登录。",
+    "dashboardCommitteeAllocationsHeading": "本次委员会会议的分配",
+    "dashboardCommitteeNoAllocationsListed": "此会话没有列出分配行。",
+    "dashboardCommitteeApplySwitch": "将仪表板切换到该委员会",
+    "timerExpiryAlarmTitle": "定时器声音",
+    "timerExpiryAlarmLabel": "当任何应用内倒计时达到零时（语音计时器、会话时间限制、中心截止日期），播放短提示音。",
+    "timerExpiryAlarmHint": "默认关闭。 仅存储在此浏览器中。",
+    "jobRole": "工作角色",
+    "jobRolePlaceholder": "例如 模拟联合国主任、教师（可选）",
+    "advisorSettingsHint": "学校员工简介——无年级或代表分配。"
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "完整公告",
       "daisAnnouncement": "讲台公告",
       "close": "关闭",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "议程"
     },
     "committeeControl": {
       "sessionNameLabel": "会话名称",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "和",
       "announcements": "公告",
       "sidebarUseSuffix": "— 每个选项卡一个工具。",
-      "agenda": "Agenda"
+      "agenda": "议程"
     },
     "history": {
       "title": "会话历史记录",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "秘书处：主席和代表的意见",
+    "intro": "选择一个委员会的主席工具和与您的帐户关联的代表席位，然后切换界面。 默认情况下，登录后仍会打开秘书处中心。",
+    "bindRequiredHint": "在下面选择主席委员会和/或代表席位，然后重试。",
+    "chairCommitteeLabel": "主席楼层委员会",
+    "chairCommitteePlaceholder": "选择委员会...",
+    "delegateSeatLabel": "代表席位（您的分配）",
+    "delegateSeatPlaceholder": "选择座位...",
+    "saveBindings": "保存作业",
+    "bindingsSaved": "已保存。",
+    "switchViewHeading": "开关仪表板",
+    "switchViewHelp": "秘书处将您带回 SMT。 主席和代表打开与真正的主席和代表在活动活动中使用的相同的应用程序内 shell。",
+    "goSecretariat": "秘书处",
+    "goChair": "椅子视图",
+    "goDelegate": "代表视图",
+    "surfaceSwitchError": "无法切换视图。 检查事件门和选择。",
+    "pickChairFirst": "首先选择一个委员会主席（或保存分配）。",
+    "pickDelegateFirst": "首先选择代表席位（或保存分配）。"
+  },
+  "advisorDashboard": {
+    "intro": "您可以监控指定代表的委员会活动。 除非主席或 SMT 将笔记转发给您，否则您无权访问笔记。",
+    "noAssignments": "尚未有代理人链接到您的帐户。 秘书处将从SMT → 顾问中指派您。",
+    "delegateLinked": "关联的委托帐户",
+    "delegateNotLinked": "席位尚未链接到代表帐户",
+    "viewProfile": "轮廓",
+    "viewDocuments": "文件",
+    "viewVoting": "表决",
+    "forwardedNotes": "转发笔记",
+    "schedule": {
+      "intro": "选择您的日程安排，然后选择顾问 A-D 以查看该顾问当天的时间表。"
+    },
+    "notes": {
+      "intro": "椅子还是SMT的笔记精选与大家分享。 您无法浏览完整的笔记提要。",
+      "empty": "尚未向您转发任何注释。",
+      "forwarded": "转发"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "顾问",
+    "subtitle": "通过电子邮件邀请顾问帐户，并将每位顾问链接到一个代表席位。",
+    "selectEventFirst": "首先选择一个正在进行的会议活动。",
+    "enterConferenceCode": "输入会议代码",
+    "inviteTitle": "邀请顾问",
+    "inviteBody": "发送登录链接（与主席邀请的流程相同）。 帐户角色设置为顾问。",
+    "inviteDisabled": "在此部署上邀请需要 SUPABASE_SERVICE_ROLE_KEY。",
+    "emailLabel": "电子邮件",
+    "emailPlaceholder": "顾问@school.edu",
+    "sending": "正在发送...",
+    "inviteButton": "发送邀请",
+    "assignTitle": "分配代表",
+    "assignBody": "选择一个链接的代表席位。 每位代表一名顾问； 重新分配会替换之前的链接。",
+    "advisorEmailLabel": "顾问电子邮件",
+    "delegateLabel": "代表席",
+    "delegatePlaceholder": "选择代表...",
+    "assignedTo": "顾问：{name}",
+    "saving": "保存…",
+    "assignButton": "保存作业",
+    "advisorFallback": "顾问"
   }
 }

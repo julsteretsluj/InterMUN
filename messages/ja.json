@@ -71,10 +71,10 @@
     "grantChairRoleHelp": "すでに代理人としてサインアップしている場合は、ここで宣伝して、議長ダッシュボードと委員会ツールを入手できるようにします (電子メールは送信されません)。",
     "grantChairRole": "補助金委員長の役割",
     "chamberLabelFallback": "委員会セッション",
-    "chairRoleLabel": "Dais seat",
+    "chairRoleLabel": "台座",
     "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Head Chair of {committee}",
-    "chairRoleCoOf": "Co-chair of {committee}",
+    "chairRoleHeadOf": "{committee} の議長",
+    "chairRoleCoOf": "{committee} 共同議長",
     "chairInviteOption": "{seat} — {committee}"
   },
   "chairDelegateApprovalForm": {
@@ -354,7 +354,7 @@
     "openMotionBlocksRecording": "動議はすでに投票に向けて開始されている。 さらにステートメントを記録する前に、それを閉じてください。",
     "statedMotionRecorded": "記載された動議が記録されました (まだ投票は受け付けられていません)。",
     "statedMotionRemoved": "記載された動議は削除されました。",
-    "tabAgenda": "Agenda",
+    "tabAgenda": "議題",
     "agendaTabHelp": "フロアのライブトピックを設定し、議題トピックをタップして、そのトピックの完全な参加者リストを含む投票パネルを開きます。 以下でトピックを選択すると、委員会の投票総数が表示されます。",
     "agendaLiveBadge": "ライブ",
     "agendaSetLive": "ライブトピックを設定する",
@@ -543,7 +543,10 @@
     "home": "家",
     "library": "図書館",
     "mainNavigationAria": "メインナビゲーション",
-    "history": "History"
+    "history": "歴史",
+    "advisorHub": "アドバイザーハブ",
+    "advisorNotes": "転送されたメモ",
+    "conferenceSchedule": "スケジュール"
   },
   "dashboardLayout": {
     "helpCenter": "ヘルプセンター",
@@ -766,8 +769,13 @@
     "formalMotions": "正式な動作",
     "timer": "タイマー",
     "smtProfile": "プロフィール",
-    "committeeAgenda": "📑 Agenda",
-    "history": "History"
+    "committeeAgenda": "📑 議題",
+    "history": "歴史",
+    "advisorDashboard": "アドバイザダッシュボード",
+    "advisorNotes": "転送されたメモ",
+    "delegateSchedule": "カンファレンススケジュール",
+    "chairSchedule": "カンファレンススケジュール",
+    "advisorSchedule": "カンファレンススケジュール"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -803,7 +811,7 @@
       "overview": "概要",
       "checklist": "チェックリスト",
       "jump": "にジャンプ",
-      "chairEmails": "Chair emails"
+      "chairEmails": "議長の電子メール"
     },
     "jumpTo": "にジャンプ",
     "tiles": {
@@ -860,8 +868,12 @@
         "hint": "問題を提起する"
       },
       "chairEmails": {
-        "label": "Chair emails",
-        "hint": "Dais inboxes by committee"
+        "label": "議長の電子メール",
+        "hint": "委員会別の Dais 受信箱"
+      },
+      "conferenceSchedule": {
+        "label": "カンファレンススケジュール",
+        "hint": "チームトラックとアドバイザーのタイムテーブル (A ～ D)"
       }
     },
     "countdownCard": {
@@ -880,11 +892,14 @@
       "remainingM": "{minutes}分"
     },
     "chairContacts": {
-      "intro": "Shared dais inbox for your committee (SEAMUN I). Contact your chairs from the email below.",
-      "committeeColumn": "Committee",
-      "emailColumn": "Chair inbox (username)",
-      "openMail": "Open mail",
-      "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
+      "intro": "委員会 (SEAMUN I) の共有台受信箱。 下記のメールから各チェアへお問い合わせください。",
+      "committeeColumn": "委員会",
+      "emailColumn": "議長の受信箱 (ユーザー名)",
+      "openMail": "メールを開く",
+      "noMatch": "この委員会には公開された議長の受信箱がまだリストされていません。 SMT に問い合わせるか、委員会の概要を確認してください。"
+    },
+    "schedule": {
+      "intro": "チーム トラックを選択し、アドバイザー A ～ D または委員会 (代表者/委員長) のいずれかを選択します。 一度に表示される個人スケジュールは 1 つだけです。"
     }
   },
   "materialsExportCard": {
@@ -1011,8 +1026,9 @@
       "officialLinks": "公式リンク",
       "roomCode": "ルームコード",
       "settings": "設定",
-      "agenda": "Agenda",
-      "history": "History"
+      "agenda": "議題",
+      "history": "歴史",
+      "conferenceSchedule": "スケジュール"
     }
   },
   "smtNav": {
@@ -1025,7 +1041,8 @@
     "allocationPasswords": "パスワードの割り当て",
     "profile": "プロフィール",
     "follow": "フォローする",
-    "hubAbbrev": "SMT"
+    "hubAbbrev": "SMT",
+    "advisors": "アドバイザー"
   },
   "officialLinks": {
     "intro": "文書、条約、本体、プログラム、任務、およびメンバー情報。 新しいタブで開きます。",
@@ -1125,16 +1142,16 @@
     "liveFloorDescription": "この委員会のライブ発言者キュー、点呼、タイマー - 議長がセッションフロアで確認するのと同じデータ。",
     "conferenceFallback": "会議",
     "committeeFallback": "委員会",
-    "secretariatOversightTitle": "Secretariat oversight roster",
-    "secretariatMatrixSectionSecretariat": "Secretariat",
-    "secretariatMatrixSectionOperations": "Operations",
-    "secretariatMatrixSectionMedia": "Media",
-    "secretariatMatrixSmtEmail": "SMT email",
-    "secretariatMatrixFinanceEmail": "Finance email",
-    "secretariatMatrixCommitteeOverviews": "Committee overviews",
-    "secretariatMatrixRole": "Role",
-    "secretariatMatrixName": "Name",
-    "secretariatMatrixEmail": "Email"
+    "secretariatOversightTitle": "事務局監督名簿",
+    "secretariatMatrixSectionSecretariat": "事務局",
+    "secretariatMatrixSectionOperations": "運営",
+    "secretariatMatrixSectionMedia": "メディア",
+    "secretariatMatrixSmtEmail": "SMTメール",
+    "secretariatMatrixFinanceEmail": "財務メール",
+    "secretariatMatrixCommitteeOverviews": "委員会の概要",
+    "secretariatMatrixRole": "役割",
+    "secretariatMatrixName": "名前",
+    "secretariatMatrixEmail": "電子メール"
   },
   "committeeNames": {
     "full": {
@@ -1328,7 +1345,11 @@
       "noRecipients": "少なくとも 1 人の受信者 (代表団または議長) を選択します。",
       "needAllocation": "メモを送る（または議長になる）には割り当てが必要です。",
       "sendFailed": "メモの送信に失敗しました。"
-    }
+    },
+    "forwardToAdvisor": "{name} に転送",
+    "forwardedToAdvisor": "アドバイザーに転送されました",
+    "forwardedToAdvisorBadge": "（アドバイザーへ）",
+    "advisorFallback": "アドバイザー"
   },
   "adminPage": {
     "title": "ウェブサイト管理",
@@ -1472,14 +1493,14 @@
       "onlySmtGrantChair": "事務局のみが議長の役割を与えることができます。",
       "noAccountForEmail": "そのメールアドレスにはまだアカウントがありません。 まず、議長への招待状を送信します。",
       "promotedToChairSuccess": "{email} のプロフィールは現在、壇上の椅子です。",
-      "missingChairRole": "Choose a dais seat and committee for this invite.",
-      "daisSeatRowMissing": "Could not find a {seat} row for that committee. Try saving the allocation matrix for the event, then try again.",
-      "daisSeatAlreadyFilled": "That dais seat already has a chair. Unassign the current person in the allocation matrix (or another tool) first.",
-      "seatHeadChair": "Head Chair",
-      "seatCoChair": "Co-chair",
-      "inviteSentButAllocationFailed": "Invite sent and chair role set, but the dais seat could not be linked: {error}. Fix the allocation matrix or contact support.",
+      "missingChairRole": "この招待状の演壇席と委員会を選択してください。",
+      "daisSeatRowMissing": "その委員会の {seat} 行が見つかりませんでした。 イベントの割り当てマトリックスを保存してから、再試行してください。",
+      "daisSeatAlreadyFilled": "その高台席にはすでに椅子が設置されています。 まず、割り当てマトリックス (または別のツール) で現在の個人の割り当てを解除します。",
+      "seatHeadChair": "ヘッドチェア",
+      "seatCoChair": "共同議長",
+      "inviteSentButAllocationFailed": "招待状を送信し、議長役を設定しましたが、高座席をリンクできませんでした: {error}。 割り当てマトリックスを修正するか、サポートにお問い合わせください。",
       "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "That dais seat does not match this committee’s chair plan."
+      "invalidChairRole": "その議席はこの委員会の委員長計画と一致しません。"
     },
     "allocationSignup": {
       "mustBeSignedIn": "サインインする必要があります。",
@@ -1497,6 +1518,24 @@
       "emailSubject": "InterMUN マテリアルのエクスポート ({range})",
       "emailSendConfigHint": "サーバー上で SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS を設定し、オプションで MATERIALS_EXPORT_FROM を設定します。",
       "exportEmailedTo": "エクスポートを {email} にメールで送信しました。 表示されない場合は、スパム/迷惑メールを確認してください。"
+    },
+    "advisorStaff": {
+      "notSignedIn": "サインインしていません。",
+      "onlySmt": "アドバイザーを管理できるのは事務局またはウェブサイト管理者のみです。",
+      "unauthorized": "無許可。",
+      "invalidEmail": "有効な電子メール アドレスを入力してください。",
+      "missingServiceRole": "サーバーに SUPABASE_SERVICE_ROLE_KEY がありません。",
+      "missingAppUrl": "招待リダイレクト リンクに NEXT_PUBLIC_APP_URL を設定します。",
+      "emailAlreadyRegistered": "そのメールにはすでにアカウントがあります。 管理者の役割をアドバイザーに設定し、代理人を割り当てます。",
+      "inviteRoleFailed": "招待は送信されましたが、アドバイザーの役割を設定できませんでした: {message}",
+      "inviteSent": "招待は{email}に送信されました。 パスワードを設定するとアドバイザーになります。",
+      "invalidAdvisorEmail": "アドバイザーのメールアドレスを入力します。",
+      "missingDelegate": "代表者席を選択します。",
+      "advisorNotFound": "そのアドバイザーのメールアドレスにアカウントが見つかりませんでした。",
+      "notAdvisorRole": "そのユーザーはアドバイザーではありません。 招待するか、最初にアドバイザーに役割を設定します。",
+      "delegateNotFound": "代表席が見つかりません。",
+      "delegateUnlinked": "そのシートにはまだリンクされた代理アカウントがありません。",
+      "assigned": "{country}にアドバイザーを任命。"
     }
   },
   "emails": {
@@ -1520,7 +1559,7 @@
     "eventDetails": "イベント詳細",
     "selectConferenceFirst": "最初にイベントゲートのある会議を選択してから、ここに戻ります。",
     "committeeSessionsTitle": "このイベントの委員会セッション",
-    "committeeSessionsBody": "Each card is one chamber: short label, official name, logo, up to two agenda topics, RoP link, shared six-character room code (second gate), and procedure profile. Room codes must stay unique across chambers in this event.",
+    "committeeSessionsBody": "各カードは 1 つのチャンバーです: 短いラベル、正式名、ロゴ、最大 2 つの議題トピック、RoP リンク、共有の 6 文字のルーム コード (第 2 ゲート)、手順プロファイル。 このイベントでは、部屋コードは部屋全体で一意である必要があります。",
     "noCommitteeSessions": "このイベントには委員会セッションはありません。",
     "eventName": "イベント名",
     "tagline": "キャッチフレーズ",
@@ -1563,81 +1602,111 @@
     "committeeCodeHelpPrefix": "6 文字: チャンバーのイニシャル + 3 桁の数字 (決定的な提案:",
     "saveCommittee": "保存委員会",
     "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Committee label",
-    "committeeLabelPlaceholder": "e.g. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Official committee name",
-    "topic1Label": "Topic 1",
-    "topic2Label": "Topic 2 (optional)",
-    "topic2Placeholder": "Second agenda question",
-    "topic2DisabledHint": "Add a second topic row to edit this field.",
-    "addSecondTopic": "Add second topic",
-    "addingTopic": "Adding…",
-    "ropDocumentLink": "Rules of procedure (document link)",
+    "committeeLabelShort": "委員会ラベル",
+    "committeeLabelPlaceholder": "例えば ECOSOC、DISEC、インターポール",
+    "officialCommitteeNameGrid": "正式な委員会名",
+    "topic1Label": "トピック 1",
+    "topic2Label": "トピック 2 (オプション)",
+    "topic2Placeholder": "2番目の議題の質問",
+    "topic2DisabledHint": "このフィールドを編集するには、2 番目のトピック行を追加します。",
+    "addSecondTopic": "2 番目のトピックを追加",
+    "addingTopic": "追加中…",
+    "ropDocumentLink": "手続き規則（文書リンク）",
     "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Room code (second gate)",
-    "roomCodeHelpPrefix": "Six letters or digits, shared for this chamber (suggestion:",
-    "roomCodeHelpSuffix": ").",
+    "roomCodeLabel": "ルームコード（第2ゲート）",
+    "roomCodeHelpPrefix": "この会議室で共有される 6 つの文字または数字 (提案:",
+    "roomCodeHelpSuffix": "）。",
     "schedule": {
-      "title": "Two-day conference schedule",
-      "subtitle": "Plan blocks per delegate group (same groups you use to cluster committees). Color by block type: session, break, or ceremony. Mark lunch for overlap checks. Saved with the active event.",
-      "day1Tab": "Day 1",
-      "day2Tab": "Day 2",
-      "lunchOverlapTab": "Lunch overlap",
-      "lunchOverlapHelp": "Overlaps appear when two groups both have a row marked as lunch on the same day and the time ranges intersect.",
-      "noLunchOverlaps": "No lunch overlaps detected. Mark at least one row as lunch in two different groups on the same day with overlapping times.",
-      "dayLabel": "Day {day}",
+      "title": "2日間のカンファレンススケジュール",
+      "subtitle": "参加者グループごとにブロックを計画します (委員会をクラスター化するために使用するのと同じグループ)。 ブロックのタイプごとに色分けします: セッション、休憩、セレモニー。 昼食に重複チェックのマークを付けます。 アクティブなイベントとともに保存されます。",
+      "day1Tab": "1日目",
+      "day2Tab": "2日目",
+      "lunchOverlapTab": "昼食の重複",
+      "lunchOverlapHelp": "2 つのグループの両方に同じ日の昼食としてマークされた行があり、時間範囲が交差する場合、重複が発生します。",
+      "noLunchOverlaps": "ランチの重複は検出されませんでした。 少なくとも 1 行を、同じ日に重複する時刻を持つ 2 つの異なるグループの昼食としてマークします。",
+      "dayLabel": "{day}日目",
       "overlapMinutes": "{count, plural, one {# minute} other {# minutes}}",
-      "vs": "vs",
-      "groupsLabel": "Groups",
-      "renameGroup": "Active group name",
-      "colStart": "Start",
-      "colEnd": "End",
-      "colLabel": "Block / session",
-      "colKind": "Type",
-      "kindSession": "Session",
-      "kindBreak": "Break",
-      "kindCeremony": "Ceremony",
-      "legendTitle": "Block colors",
-      "legendSession": "Committee session",
-      "legendBreak": "Break / lunch / caucus",
-      "legendCeremony": "Opening / closing / ceremony",
-      "colLunch": "Lunch",
-      "emptyDay": "No blocks yet. Add a block or use another group tab.",
-      "blockPlaceholder": "e.g. Opening ceremony · Committee session 1",
-      "lunchCheckboxAria": "Count this row as lunch for overlap checks",
-      "remove": "Remove",
-      "addBlock": "Add time block",
-      "newGroupName": "New group name",
-      "newGroupPlaceholder": "e.g. Press corps",
-      "defaultNewGroupName": "New group",
-      "addGroup": "Add group",
-      "removeGroup": "Remove group",
-      "confirmRemoveGroup": "Remove the schedule group \"{name}\" and all of its blocks for both days?",
-      "saveSchedule": "Save schedule",
-      "saving": "Saving…",
-      "saved": "Schedule saved.",
-      "resetTemplate": "Reset to template",
-      "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "vs": "対",
+      "groupsLabel": "グループ",
+      "renameGroup": "アクティブなグループ名",
+      "colStart": "始める",
+      "colEnd": "終わり",
+      "colLabel": "ブロック/セッション",
+      "colKind": "タイプ",
+      "kindSession": "セッション",
+      "kindBreak": "壊す",
+      "kindCeremony": "式",
+      "legendTitle": "ブロックカラー",
+      "legendSession": "委員会セッション",
+      "legendBreak": "休憩/昼食/党員集会",
+      "legendCeremony": "開会・閉会・式典",
+      "colLunch": "ランチ",
+      "emptyDay": "まだブロックはありません。 ブロックを追加するか、別のグループ タブを使用します。",
+      "blockPlaceholder": "例えば 開会式・委員会１",
+      "lunchCheckboxAria": "この行を重複チェックのランチとしてカウントします",
+      "remove": "取り除く",
+      "addBlock": "タイムブロックを追加する",
+      "newGroupName": "新しいグループ名",
+      "newGroupPlaceholder": "例えば 記者団",
+      "defaultNewGroupName": "新しいグループ",
+      "addGroup": "グループを追加",
+      "removeGroup": "グループの削除",
+      "confirmRemoveGroup": "両日のスケジュール グループ「{name}」とそのすべてのブロックを削除しますか?",
+      "saveSchedule": "スケジュールの保存",
+      "saving": "保存中…",
+      "saved": "スケジュールが保存されました。",
+      "resetTemplate": "テンプレートにリセット",
+      "confirmReset": "スケジュールをデフォルトの 3 つのグループにリセットし、すべてのブロックをクリアしますか?",
       "seamunLocked": {
-        "title": "SEAMUN I 2027 — official visual schedule",
-        "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
-        "legendTitle": "Colours",
-        "legendArrival": "Arrival / registration",
-        "legendDismissal": "Dismissal",
-        "legendCeremony": "Ceremony",
-        "legendBreak": "General break",
-        "legendSession": "Academic session",
-        "legendLunch": "Eat (lunch)",
-        "legendRelax": "Chill",
-        "legendSupport": "Support room",
-        "legendStrategy": "Strategy rooms",
-        "legendSweep": "Sweep",
-        "handbookLink": "Open conference handbook (PDF)",
-        "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
-        "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
-        "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "title": "SEAMUN I 2027 — 公式ビジュアルスケジュール",
+        "body": "この2日間のプランはSEAMUN I 2027に固定されており、公開されているマスタースケジュールと一致しており、アプリ内（事務局を含む）で変更することはできません。",
+        "legendTitle": "色",
+        "legendArrival": "到着・登録",
+        "legendDismissal": "解任",
+        "legendCeremony": "式",
+        "legendBreak": "一般休憩",
+        "legendSession": "学術セッション",
+        "legendLunch": "食べる（昼食）",
+        "legendRelax": "チル",
+        "legendSupport": "サポートルーム",
+        "legendStrategy": "戦略室",
+        "legendSweep": "スイープ",
+        "handbookLink": "オープンカンファレンスハンドブック（PDF）",
+        "handbookHint": "公式マスタードキュメント。 以下のロックされたタイムテーブルと議場グループは、この出版物に従っています。",
+        "committeeMatrixTitle": "スケジュールトラックごとの委員会室",
+        "committeeMatrixHint": "各チャンバーは、そのトラックの 1 日目 / 2 日目のクロックに従います (上のグラフの同じグループ名の列)。",
+        "colScheduleTrack": "スケジュールトラック",
+        "colChambers": "Chambers (このイベントのラベル)",
+        "advisorHint": "チームをタップすると、1 つの委員会のアドバイザーの時間割 (A ～ D) または代表者/委員長の時間割のいずれかが表示されます (両方を同時に表示することはできません)。",
+        "advisorOnlyHint": "スケジュール トラックを選択し、アドバイザー A ～ D を選択して、そのアドバイザーの日を表示します。",
+        "committeeOnlyHint": "委員会の公式スケジュール。 以下、昼食時間を他の委員会と比較してみます。",
+        "pickTrack": "トラックをスケジュール:",
+        "viewAllTeams": "全チーム",
+        "orPickTeam": "またはチーム:",
+        "viewAs": "として表示",
+        "modeAdvisor": "アドバイザー",
+        "modeCommittee": "委員会（代表者・委員長）",
+        "pickAdvisor": "アドバイザー",
+        "pickCommittee": "委員会",
+        "selectAdvisorPrompt": "アドバイザー A、B、C、または D を選択して、そのタイムテーブルを表示します。",
+        "selectCommitteePrompt": "委員会を選択して、代表者/議長のタイムテーブルを表示します。",
+        "teamShort": {
+          "g1": "アルファ",
+          "g2": "ベータ",
+          "g3": "ガンマ",
+          "g4": "デルタ",
+          "support": "イプシロン"
+        }
+      },
+      "lunchOverlap": {
+        "title": "昼食は他の委員会と重複します",
+        "body": "あなたの委員会のランチウィンドウを最大 {max} の他の委員会と比較します。 日を選択してから、以下の委員会を選択してください。",
+        "pickCommittees": "と比較してください",
+        "noneSelected": "共有されたランチ議事録を表示するには、1 つ以上の委員会を選択します。",
+        "yourLunch": "あなたの昼食",
+        "theirLunch": "彼らの昼食",
+        "overlap": "共有ランチ: {start}–{end} ({minutes} 分)",
+        "noOverlap": "この日はランチタイムの共有はありません。"
       }
     }
   },
@@ -1693,7 +1762,7 @@
     "parsedRowsSample": "{count} 行を解析しました。 サンプル：",
     "runImport": "インポートを実行する",
     "generateMissingRandomCodes": "欠落しているランダムコードを生成する",
-    "secretariatParliamentarianSeat": "Parliamentarian · Seat {seat}"
+    "secretariatParliamentarianSeat": "国会議員 · 席 {seat}"
   },
   "chairAwardsPage": {
     "committeeLabel": "委員会",
@@ -1838,8 +1907,8 @@
         "hint": "仮想レイアウトと参加者フロア"
       },
       "agenda": {
-        "label": "Agenda",
-        "hint": "Live topic & vote totals per agenda item"
+        "label": "議題",
+        "hint": "ライブトピックと議題項目ごとの投票合計"
       }
     }
   },
@@ -2562,16 +2631,19 @@
       "awards": "受賞歴"
     },
     "dashboardCommittee": "Dashboard committee (Head Chair)",
-    "dashboardCommitteeSelect": "Select committee…",
+    "dashboardCommitteeSelect": "委員会を選択してください…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
-    "dashboardCommitteeSwitching": "Switching…",
-    "dashboardCommitteeSwitchError": "Could not switch committee. Try again or sign in via the room gate.",
-    "dashboardCommitteeAllocationsHeading": "Allocations in this committee session",
-    "dashboardCommitteeNoAllocationsListed": "No allocation rows are listed for this session.",
-    "dashboardCommitteeApplySwitch": "Switch dashboard to this committee",
-    "timerExpiryAlarmTitle": "Timer sound",
-    "timerExpiryAlarmLabel": "Play a short chime when any in-app countdown reaches zero (speech timer, session time limit, hub deadlines).",
-    "timerExpiryAlarmHint": "Off by default. Stored in this browser only."
+    "dashboardCommitteeSwitching": "切り替え中…",
+    "dashboardCommitteeSwitchError": "委員会を切り替えることができませんでした。 もう一度試すか、ルームゲートからサインインしてください。",
+    "dashboardCommitteeAllocationsHeading": "この委員会セッションでの割り当て",
+    "dashboardCommitteeNoAllocationsListed": "このセッションには割り当て行がリストされていません。",
+    "dashboardCommitteeApplySwitch": "ダッシュボードをこの委員会に切り替える",
+    "timerExpiryAlarmTitle": "タイマー音",
+    "timerExpiryAlarmLabel": "アプリ内のカウントダウンがゼロになったときに短いチャイムを鳴らします (スピーチ タイマー、セッション時間制限、ハブの期限)。",
+    "timerExpiryAlarmHint": "デフォルトではオフです。 このブラウザにのみ保存されます。",
+    "jobRole": "職務内容",
+    "jobRolePlaceholder": "例えば MUN ディレクター、教師 (オプション)",
+    "advisorSettingsHint": "学校スタッフのプロフィール — 学年や代議員の割り当てはありません。"
   },
   "guides": {
     "default": {
@@ -3000,7 +3072,7 @@
       "fullAnnouncement": "完全な発表",
       "daisAnnouncement": "ダイスの発表",
       "close": "近い",
-      "quickLinkAgenda": "Agenda"
+      "quickLinkAgenda": "議題"
     },
     "committeeControl": {
       "sessionNameLabel": "セッション名",
@@ -3052,7 +3124,7 @@
       "sidebarAnd": "そして",
       "announcements": "お知らせ",
       "sidebarUseSuffix": "— タブごとに 1 つのツール。",
-      "agenda": "Agenda"
+      "agenda": "議題"
     },
     "history": {
       "title": "セッション履歴",
@@ -3185,22 +3257,62 @@
     }
   },
   "smtCommitteeView": {
-    "title": "Secretariat: chair & delegate views",
-    "intro": "Pick a committee for chair tools and a delegate seat linked to your account, then switch surfaces. Sign-in still opens the secretariat hub by default.",
-    "bindRequiredHint": "Choose a chair committee and/or delegate seat below, then try again.",
-    "chairCommitteeLabel": "Chair floor committee",
-    "chairCommitteePlaceholder": "Select committee…",
-    "delegateSeatLabel": "Delegate seat (your allocation)",
-    "delegateSeatPlaceholder": "Select seat…",
-    "saveBindings": "Save assignments",
-    "bindingsSaved": "Saved.",
-    "switchViewHeading": "Switch dashboard",
-    "switchViewHelp": "Secretariat returns you to SMT. Chair and delegate open the same in-app shells real chairs and delegates use for the active event.",
-    "goSecretariat": "Secretariat",
-    "goChair": "Chair view",
-    "goDelegate": "Delegate view",
-    "surfaceSwitchError": "Could not switch view. Check event gate and selections.",
-    "pickChairFirst": "Select a chair committee first (or save assignments).",
-    "pickDelegateFirst": "Select a delegate seat first (or save assignments)."
+    "title": "事務局: 議長および代表者の見解",
+    "intro": "アカウントにリンクされた委員会の議長ツールと代表者席を選択し、画面を切り替えます。 サインインすると、デフォルトで事務局ハブが開きます。",
+    "bindRequiredHint": "以下の委員会委員長および/または代表者の席を選択して、もう一度お試しください。",
+    "chairCommitteeLabel": "フロア委員会の議長",
+    "chairCommitteePlaceholder": "委員会を選択してください…",
+    "delegateSeatLabel": "代表者席 (あなたの割り当て)",
+    "delegateSeatPlaceholder": "座席を選択してください…",
+    "saveBindings": "割り当ての保存",
+    "bindingsSaved": "保存されました。",
+    "switchViewHeading": "スイッチダッシュボード",
+    "switchViewHelp": "事務局から SMT に戻ります。 議長と参加者は、実際の議長と参加者がアクティブなイベントで使用するものと同じアプリ内シェルを開きます。",
+    "goSecretariat": "事務局",
+    "goChair": "椅子から見た図",
+    "goDelegate": "デリゲートビュー",
+    "surfaceSwitchError": "ビューを切り替えることができませんでした。 イベントゲートと選択内容を確認してください。",
+    "pickChairFirst": "最初に委員会の委員長を選択します (または割り当てを保存します)。",
+    "pickDelegateFirst": "最初に代表者席を選択します (または割り当てを保存します)。"
+  },
+  "advisorDashboard": {
+    "intro": "割り当てられた代表者の委員会活動を監視できます。 議長または SMT からメモが転送されない限り、メモにアクセスすることはできません。",
+    "noAssignments": "あなたのアカウントにはまだ代理人がリンクされていません。 SMT→アドバイザーの順で事務局がアサインします。",
+    "delegateLinked": "代理アカウントがリンクされました",
+    "delegateNotLinked": "座席はまだ代理人アカウントにリンクされていません",
+    "viewProfile": "プロフィール",
+    "viewDocuments": "書類",
+    "viewVoting": "投票",
+    "forwardedNotes": "転送されたメモ",
+    "schedule": {
+      "intro": "スケジュール トラックを選択し、アドバイザー A ～ D を選択すると、そのアドバイザーのその日のタイムテーブルが表示されます。"
+    },
+    "notes": {
+      "intro": "Notes チェアまたは SMT があなたと共有することを選択しました。 メモ フィード全体を参照することはできません。",
+      "empty": "まだメモは転送されていません。",
+      "forwarded": "転送されました"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "アドバイザー",
+    "subtitle": "電子メールでアドバイザー アカウントを招待し、各アドバイザーを 1 つの代理席にリンクします。",
+    "selectEventFirst": "最初にアクティブな会議イベントを選択します。",
+    "enterConferenceCode": "会議コードを入力してください",
+    "inviteTitle": "アドバイザーを招待する",
+    "inviteBody": "サインイン リンクを送信します (議長の招待と同じフロー)。 アカウントの役割はアドバイザーに設定されています。",
+    "inviteDisabled": "このデプロイメントでは、招待には SUPABASE_SERVICE_ROLE_KEY が必要です。",
+    "emailLabel": "電子メール",
+    "emailPlaceholder": "アドバイザー@school.edu",
+    "sending": "送信中…",
+    "inviteButton": "招待状を送信する",
+    "assignTitle": "代理人の割り当て",
+    "assignBody": "リンクされた代表席を選択します。 代表者ごとにアドバイザー 1 名。 再割り当てにより、以前のリンクが置き換えられます。",
+    "advisorEmailLabel": "アドバイザーのメールアドレス",
+    "delegateLabel": "代表席",
+    "delegatePlaceholder": "代理人を選択してください…",
+    "assignedTo": "アドバイザー: {name}",
+    "saving": "保存中…",
+    "assignButton": "割り当ての保存",
+    "advisorFallback": "アドバイザー"
   }
 }
