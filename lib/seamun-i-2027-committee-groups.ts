@@ -45,6 +45,18 @@ export const SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS: readonly SeamunScheduleGr
   },
 ] as const;
 
+/** Four debate tracks only (excludes Support / Sensory — not shown in role schedule UIs). */
+export const SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS = SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.filter(
+  (g) => g.id !== "support"
+);
+
+export function seamunI2027DebateScheduleGroupId(
+  groupId: SeamunScheduleGroupId | null | undefined
+): SeamunScheduleGroupId | null {
+  if (!groupId || groupId === "support") return null;
+  return groupId;
+}
+
 const CHAMBER_TO_GROUP_ID = new Map<string, SeamunScheduleGroupId>();
 for (const def of SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS) {
   for (const ch of def.chambers) {

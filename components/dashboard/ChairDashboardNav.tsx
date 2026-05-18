@@ -12,6 +12,7 @@ export type ChairNavItemKey =
   | "prepChecklist"
   | "flowChecklist"
   | "delegates"
+  | "conferenceSchedule"
   | "digitalRoom"
   | "history"
   | "rollCall"
@@ -58,6 +59,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "📑",
   },
   { href: "/chair/allocation-matrix", itemKey: "delegates", emoji: "👥" },
+  { href: "/chair/schedule", itemKey: "conferenceSchedule", emoji: "📅" },
   { href: "/chair/flow-checklist", itemKey: "flowChecklist", emoji: "📋" },
   {
     href: "/chair/session/roll-call",
@@ -159,9 +161,11 @@ function filterChairNavItems(items: ChairNavItem[], crisisReportingEnabled: bool
 export function ChairDashboardSidebar({
   conferenceLine,
   crisisReportingEnabled,
+  seamunScheduleEnabled = false,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
+  seamunScheduleEnabled?: boolean;
 }) {
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
@@ -190,10 +194,11 @@ export function ChairDashboardSidebar({
 
   const headerText = conferenceLine.trim() || t("committeeTopicFallback");
   const hubActive = pathname === "/chair";
-  const navItems = useMemo(
-    () => filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled),
-    [crisisReportingEnabled]
-  );
+  const navItems = useMemo(() => {
+    const items = filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled);
+    if (seamunScheduleEnabled) return items;
+    return items.filter((item) => item.itemKey !== "conferenceSchedule");
+  }, [crisisReportingEnabled, seamunScheduleEnabled]);
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -314,9 +319,11 @@ function DockItem({
 export function ChairMobileDock({
   conferenceLine,
   crisisReportingEnabled,
+  seamunScheduleEnabled = false,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
+  seamunScheduleEnabled?: boolean;
 }) {
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
@@ -344,10 +351,11 @@ export function ChairMobileDock({
   }, []);
 
   const hubActive = pathname === "/chair";
-  const navItems = useMemo(
-    () => filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled),
-    [crisisReportingEnabled]
-  );
+  const navItems = useMemo(() => {
+    const items = filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled);
+    if (seamunScheduleEnabled) return items;
+    return items.filter((item) => item.itemKey !== "conferenceSchedule");
+  }, [crisisReportingEnabled, seamunScheduleEnabled]);
 
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">

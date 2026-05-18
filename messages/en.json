@@ -520,6 +520,7 @@
     "delegateHub": "Delegate hub",
     "advisorHub": "Advisor hub",
     "advisorNotes": "Forwarded notes",
+    "conferenceSchedule": "Schedule",
     "profile": "Profile",
     "follow": "Follow",
     "notes": "Notes",
@@ -745,6 +746,8 @@
     "advisorDashboard": "Advisor dashboard",
     "advisorNotes": "Forwarded notes",
     "delegateSchedule": "Conference schedule",
+    "chairSchedule": "Conference schedule",
+    "advisorSchedule": "Conference schedule",
     "voting": "Voting",
     "digitalRoom": "Digital Room",
     "committeeSession": "Committee session",
@@ -858,6 +861,9 @@
     "viewDocuments": "Documents",
     "viewVoting": "Voting",
     "forwardedNotes": "Forwarded notes",
+    "schedule": {
+      "intro": "Pick your schedule track, then advisor A–D to see that advisor’s timetable for the day."
+    },
     "notes": {
       "intro": "Notes chairs or SMT chose to share with you. You cannot browse the full notes feed.",
       "empty": "No notes have been forwarded to you yet.",
@@ -1112,6 +1118,7 @@
       "prepChecklist": "Prep checklist",
       "flowChecklist": "Flow checklist",
       "delegates": "Delegates",
+      "conferenceSchedule": "Schedule",
       "digitalRoom": "Digital Room",
       "history": "History",
       "rollCall": "Roll Call",
@@ -1813,6 +1820,16 @@
       "saved": "Schedule saved.",
       "resetTemplate": "Reset to template",
       "confirmReset": "Reset the schedule to the default three groups and clear all blocks?",
+      "lunchOverlap": {
+        "title": "Lunch overlap with other committees",
+        "body": "Compare your committee’s lunch window with up to {max} other committees. Pick a day, then select committees below.",
+        "pickCommittees": "Compare with",
+        "noneSelected": "Select one or more committees to see shared lunch minutes.",
+        "yourLunch": "Your lunch",
+        "theirLunch": "Their lunch",
+        "overlap": "Shared lunch: {start}–{end} ({minutes} min)",
+        "noOverlap": "No shared lunch time on this day."
+      },
       "seamunLocked": {
         "title": "SEAMUN I 2027 — official visual schedule",
         "body": "This two-day plan is fixed for SEAMUN I 2027. It matches the published master schedule and cannot be changed in the app (including by secretariat).",
@@ -1834,6 +1851,9 @@
         "colScheduleTrack": "Schedule track",
         "colChambers": "Chambers (labels in this event)",
         "advisorHint": "Tap a team, then view either an advisor timetable (A–D) or a delegate/chair timetable for one committee — not both at once.",
+        "advisorOnlyHint": "Pick your schedule track, then advisor A–D to view that advisor’s day.",
+        "committeeOnlyHint": "Your committee’s official timetable. Below, compare lunch times with other committees.",
+        "pickTrack": "Schedule track:",
         "viewAllTeams": "All teams",
         "orPickTeam": "or team:",
         "viewAs": "View as",

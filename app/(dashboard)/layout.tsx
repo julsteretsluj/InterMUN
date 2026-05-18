@@ -192,12 +192,14 @@ export default async function DashboardLayout({
             <ChairDashboardSidebar
               conferenceLine={conferenceLine || ""}
               crisisReportingEnabled={crisisReportingEnabled}
+              seamunScheduleEnabled={showSeamunLogo}
             />
           ) : (
             <TabNav
               staffRole={navRole}
               variant="aspire-sidebar"
               crisisReportingEnabled={crisisReportingEnabled}
+              seamunScheduleEnabled={showSeamunLogo}
             />
           )}
         </div>
@@ -258,9 +260,15 @@ export default async function DashboardLayout({
           <ChairMobileDock
             conferenceLine={conferenceLine || ""}
             crisisReportingEnabled={crisisReportingEnabled}
+            seamunScheduleEnabled={showSeamunLogo}
           />
         ) : (
-          <TabNav staffRole={navRole} variant="dock" crisisReportingEnabled={crisisReportingEnabled} />
+          <TabNav
+            staffRole={navRole}
+            variant="dock"
+            crisisReportingEnabled={crisisReportingEnabled}
+            seamunScheduleEnabled={showSeamunLogo}
+          />
         )}
       </div>
 

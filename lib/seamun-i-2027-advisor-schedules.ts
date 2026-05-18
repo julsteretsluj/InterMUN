@@ -1,6 +1,6 @@
 /**
  * Per-advisor timetables derived from the locked team schedule.
- * Four advisors (A–D) per track; session blocks assign chambers or rotate break-room duty.
+ * Four advisors (A–D) per track; chamber and break-room duty rotate each session block.
  */
 
 import {
@@ -11,9 +11,11 @@ import {
   type SeamunLockedColumn,
 } from "@/lib/seamun-i-2027-locked-schedule";
 import {
+  SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS,
   SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS,
   type SeamunScheduleGroupDefinition,
   type SeamunScheduleGroupId,
+  seamunI2027DebateScheduleGroupId,
   seamunI2027ScheduleGroupForChamber,
 } from "@/lib/seamun-i-2027-committee-groups";
 
@@ -72,6 +74,10 @@ function advisorSessionBlock(
   });
 }
 
+/**
+ * Assign session/support blocks so each advisor rotates chambers and break-room duty.
+ * `sessionBlockIndex` advances per session/support block on the team column.
+ */
 function resolveSessionAssignment(
   base: SeamunLockedBlock,
   chambers: readonly string[],
@@ -79,36 +85,55 @@ function resolveSessionAssignment(
   sessionBlockIndex: number
 ): SeamunLockedBlock {
   const sessionLabel = base.title;
+  const c = chambers.length;
+  const s = sessionBlockIndex;
+  const a = advisorIndex;
 
-  if (chambers.length >= 4) {
-    const chamber = chambers[advisorIndex] ?? chambers[chambers.length - 1];
-    return advisorSessionBlock(base, chamber, sessionLabel);
-  }
-
-  if (chambers.length === 3) {
-    const floater = sessionBlockIndex % 4;
-    if (advisorIndex === floater) return breakRoomBlock(base);
-    const chamberIdx = advisorIndex < floater ? advisorIndex : advisorIndex - 1;
+  if (c >= 4) {
+    const chamberIdx = (a + s) % c;
     return advisorSessionBlock(base, chambers[chamberIdx]!, sessionLabel);
   }
 
-  if (chambers.length === 2) {
-    const roles: ("chamber" | "break" | "assist")[] = ["chamber", "chamber", "break", "assist"];
-    const role = roles[(advisorIndex + sessionBlockIndex) % 4]!;
-    if (role === "break") return breakRoomBlock(base);
-    if (role === "assist") {
-      return advisorSessionBlock(base, chambers[0]!, `${sessionLabel} (assist)`);
+  if (c === 3) {
+    const breakAdvisor = s % 4;
+    if (a === breakAdvisor) return breakRoomBlock(base);
+    const active = [0, 1, 2, 3].filter((i) => i !== breakAdvisor);
+    const pos = active.indexOf(a);
+    const chamberIdx = (pos + s) % 3;
+    return advisorSessionBlock(base, chambers[chamberIdx]!, sessionLabel);
+  }
+
+  if (c === 2) {
+    const breakAdvisor = s % 4;
+    const assistAdvisor = (s + 1) % 4;
+    if (a === breakAdvisor) return breakRoomBlock(base);
+    if (a === assistAdvisor) {
+      return advisorSessionBlock(base, chambers[s % 2]!, `${sessionLabel} (assist)`);
     }
-    const chamberIdx = (advisorIndex + sessionBlockIndex) % 2;
+    const active = [0, 1, 2, 3].filter((i) => i !== breakAdvisor && i !== assistAdvisor);
+    const pos = active.indexOf(a);
+    const chamberIdx = (pos + s) % 2;
     return advisorSessionBlock(base, chambers[chamberIdx]!, sessionLabel);
   }
 
-  // Support track (0–1 chamber labels): rotate lead / break / assist.
-  const lead = sessionBlockIndex % 4;
-  if (advisorIndex === lead) {
+  if (c === 1) {
+    const lead = s % 4;
+    if (a === lead) {
+      return withoutLocation({
+        ...base,
+        title: `${chambers[0]} — support`,
+        category: "support",
+      });
+    }
+    if (a === (lead + 1) % 4) return breakRoomBlock(base);
+    return withoutLocation({ ...base, title: "Support — assist", category: "support" });
+  }
+
+  const lead = s % 4;
+  if (a === lead) {
     return withoutLocation({ ...base, title: "Support room", category: "support" });
   }
-  if (advisorIndex === (lead + 1) % 4) return breakRoomBlock(base);
+  if (a === (lead + 1) % 4) return breakRoomBlock(base);
   return withoutLocation({ ...base, title: "Support — assist", category: "support" });
 }
 
@@ -117,7 +142,7 @@ function resolveBreakOrChill(
   advisorIndex: number,
   dutyBlockIndex: number
 ): SeamunLockedBlock {
-  const onBreakRoom = (advisorIndex + dutyBlockIndex) % 4 === 0;
+  const onBreakRoom = dutyBlockIndex % 4 === advisorIndex;
   if (onBreakRoom) return breakRoomBlock(base);
   return base;
 }
@@ -157,12 +182,12 @@ export function buildSeamunAdvisorDayBlocks(
 }
 
 export function seamunDefaultGroupForCommittee(committee: string | null | undefined): SeamunScheduleGroupId | null {
-  return seamunI2027ScheduleGroupForChamber(committee);
+  return seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(committee));
 }
 
-/** All chamber labels on the locked SEAMUN I 2027 schedule (delegate/chair picker). */
+/** Debate chamber labels (four tracks; excludes sensory/support). */
 export function seamunAllScheduleCommittees(): string[] {
-  return SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.flatMap((g) => [...g.chambers]);
+  return SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.flatMap((g) => [...g.chambers]);
 }
 
 /**

@@ -14,7 +14,8 @@ import {
   timeToMinutes,
 } from "@/lib/seamun-i-2027-locked-schedule";
 import {
-  SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS,
+  SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS,
+  seamunI2027DebateScheduleGroupId,
   seamunI2027HandbookPdfPath,
   seamunI2027ScheduleGroupForChamber,
   type SeamunScheduleGroupId,
@@ -26,6 +27,7 @@ import {
   seamunScheduleGroupById,
   type SeamunAdvisorId,
 } from "@/lib/seamun-i-2027-advisor-schedules";
+import { SeamunLunchOverlapCompare } from "@/components/schedule/SeamunLunchOverlapCompare";
 
 const AXIS_RANGE = SEAMUN_I_2027_AXIS_END_MIN - SEAMUN_I_2027_AXIS_START_MIN;
 
@@ -152,7 +154,7 @@ function ScheduleGrid({
         </div>
 
         {columns.map((col) => {
-          const groupDef = SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.find((g) => g.scheduleHeader === col.header);
+          const groupDef = SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.find((g) => g.scheduleHeader === col.header);
           const clickable = Boolean(onColumnHeaderClick && groupDef);
           return (
             <div
@@ -184,33 +186,60 @@ function ScheduleGrid({
   );
 }
 
+export type SeamunScheduleVariant = "smt" | "advisor" | "committee";
+
 export type SeamunI2027LockedScheduleVisualProps = {
   initialGroupId?: SeamunScheduleGroupId | null;
   initialCommittee?: string | null;
   defaultView?: "teams" | "detail";
+  /** Role-specific UI: SMT full view; advisor timetables only; delegate/chair committee + lunch compare. */
+  variant?: SeamunScheduleVariant;
 };
 
 export function SeamunI2027LockedScheduleVisual({
   initialGroupId = null,
   initialCommittee = null,
   defaultView = "teams",
+  variant = "smt",
 }: SeamunI2027LockedScheduleVisualProps = {}) {
   const t = useTranslations("smtConferenceSettings.schedule.seamunLocked");
   const tSched = useTranslations("smtConferenceSettings.schedule");
 
+  const isSmt = variant === "smt";
+  const isAdvisor = variant === "advisor";
+  const isCommittee = variant === "committee";
+
   const initialCommitteeTrimmed = initialCommittee?.trim() || null;
   const initialGroupFromCommittee = initialCommitteeTrimmed
-    ? seamunI2027ScheduleGroupForChamber(initialCommitteeTrimmed)
+    ? seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(initialCommitteeTrimmed))
     : null;
 
+  const resolvedDefaultView: "teams" | "detail" =
+    isSmt ? defaultView : "detail";
+  const initialView: "teams" | "detail" =
+    resolvedDefaultView === "detail" || initialCommitteeTrimmed || isAdvisor || isCommittee
+      ? "detail"
+      : resolvedDefaultView;
+
   const [day, setDay] = useState<1 | 2>(1);
-  const [view, setView] = useState<"teams" | "detail">(defaultView === "detail" || initialCommitteeTrimmed ? "detail" : defaultView);
-  const [groupId, setGroupId] = useState<SeamunScheduleGroupId | null>(initialGroupId ?? initialGroupFromCommittee);
-  const [detailMode, setDetailMode] = useState<DetailMode>(initialCommitteeTrimmed ? "committee" : "advisor");
+  const [view, setView] = useState<"teams" | "detail">(initialView);
+  const [groupId, setGroupId] = useState<SeamunScheduleGroupId | null>(
+    seamunI2027DebateScheduleGroupId(initialGroupId) ?? initialGroupFromCommittee
+  );
+  const [detailMode, setDetailMode] = useState<DetailMode>(
+    isAdvisor ? "advisor" : isCommittee || initialCommitteeTrimmed ? "committee" : "advisor"
+  );
   const [advisorId, setAdvisorId] = useState<SeamunAdvisorId | null>(null);
   const [committee, setCommittee] = useState<string | null>(initialCommitteeTrimmed);
 
-  const teamColumns = day === 1 ? SEAMUN_I_2027_DAY1_COLUMNS : SEAMUN_I_2027_DAY2_COLUMNS;
+  const debateHeaders = useMemo(
+    () => new Set(SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => g.scheduleHeader)),
+    []
+  );
+  const teamColumns = useMemo(() => {
+    const cols = day === 1 ? SEAMUN_I_2027_DAY1_COLUMNS : SEAMUN_I_2027_DAY2_COLUMNS;
+    return cols.filter((c) => debateHeaders.has(c.header));
+  }, [day, debateHeaders]);
   const handbookHref = seamunI2027HandbookPdfPath();
 
   const committeesForGroup = useMemo(() => {
@@ -243,8 +272,10 @@ export function SeamunI2027LockedScheduleVisual({
 
   function openDetailView(id: SeamunScheduleGroupId) {
     setGroupId(id);
-    setAdvisorId(null);
-    setCommittee(null);
+    if (!isCommittee) {
+      setAdvisorId(null);
+      setCommittee(null);
+    }
     setView("detail");
   }
 
@@ -264,7 +295,7 @@ export function SeamunI2027LockedScheduleVisual({
     setDetailMode("committee");
     setCommittee(ch);
     setAdvisorId(null);
-    const g = seamunI2027ScheduleGroupForChamber(ch);
+    const g = seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(ch));
     if (g) setGroupId(g);
   }
 
@@ -279,7 +310,9 @@ export function SeamunI2027LockedScheduleVisual({
         <div>
           <h2 className="font-display text-xl font-semibold text-brand-navy">{t("title")}</h2>
           <p className="mt-1 text-sm text-brand-muted">{t("body")}</p>
-          <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorHint")}</p>
+          {isSmt ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorHint")}</p> : null}
+          {isAdvisor ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("advisorOnlyHint")}</p> : null}
+          {isCommittee ? <p className="mt-2 text-sm text-brand-navy/90 dark:text-zinc-200">{t("committeeOnlyHint")}</p> : null}
           {handbookHref ? (
             <p className="mt-3 text-sm text-brand-navy/90 dark:text-zinc-200">
               <a
@@ -313,40 +346,61 @@ export function SeamunI2027LockedScheduleVisual({
         </div>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={() => {
-            setView("teams");
-            setAdvisorId(null);
-            setCommittee(null);
-          }}
-          className={cn(
-            "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
-            view === "teams"
-              ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
-              : "text-brand-muted hover:bg-brand-navy/5"
-          )}
-        >
-          {t("viewAllTeams")}
-        </button>
-        <span className="text-xs text-brand-muted">{t("orPickTeam")}</span>
-        {SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.map((g) => (
+      {isSmt ? (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
           <button
-            key={g.id}
             type="button"
-            onClick={() => openDetailView(g.id)}
+            onClick={() => {
+              setView("teams");
+              setAdvisorId(null);
+              setCommittee(null);
+            }}
             className={cn(
-              "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
-              view === "detail" && groupId === g.id
-                ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
-                : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
+              "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
+              view === "teams"
+                ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
+                : "text-brand-muted hover:bg-brand-navy/5"
             )}
           >
-            {t(`teamShort.${g.id}`)}
+            {t("viewAllTeams")}
           </button>
-        ))}
-      </div>
+          <span className="text-xs text-brand-muted">{t("orPickTeam")}</span>
+          {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
+            <button
+              key={g.id}
+              type="button"
+              onClick={() => openDetailView(g.id)}
+              className={cn(
+                "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
+                view === "detail" && groupId === g.id
+                  ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
+                  : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
+              )}
+            >
+              {t(`teamShort.${g.id}`)}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold text-brand-muted">{t("pickTrack")}</span>
+          {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
+            <button
+              key={g.id}
+              type="button"
+              onClick={() => openDetailView(g.id)}
+              className={cn(
+                "rounded-[var(--radius-md)] border px-2.5 py-1.5 text-xs font-semibold transition-apple",
+                groupId === g.id
+                  ? "border-brand-accent/50 bg-brand-accent/12 text-brand-navy"
+                  : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35 hover:text-brand-navy"
+              )}
+            >
+              {t(`teamShort.${g.id}`)}
+            </button>
+          ))}
+        </div>
+      )}
 
       {view === "detail" && groupId ? (
         <div className="mb-4 space-y-3">
@@ -354,36 +408,43 @@ export function SeamunI2027LockedScheduleVisual({
             {seamunScheduleGroupById(groupId).scheduleHeader}
           </p>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-brand-muted">{t("viewAs")}</span>
-            <div className="inline-flex rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
-              {(["advisor", "committee"] as const).map((mode) => (
-                <button
-                  key={mode}
-                  type="button"
-                  onClick={() => switchDetailMode(mode)}
-                  className={cn(
-                    "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
-                    detailMode === mode
-                      ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
-                      : "text-brand-muted hover:bg-brand-navy/5"
-                  )}
-                >
-                  {mode === "advisor" ? t("modeAdvisor") : t("modeCommittee")}
-                </button>
-              ))}
+          {isCommittee && committee ? (
+            <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{committee}</p>
+          ) : null}
+
+          {isSmt ? (
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-semibold text-brand-muted">{t("viewAs")}</span>
+              <div className="inline-flex rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
+                {(["advisor", "committee"] as const).map((mode) => (
+                  <button
+                    key={mode}
+                    type="button"
+                    onClick={() => switchDetailMode(mode)}
+                    className={cn(
+                      "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-semibold transition-apple",
+                      detailMode === mode
+                        ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
+                        : "text-brand-muted hover:bg-brand-navy/5"
+                    )}
+                  >
+                    {mode === "advisor" ? t("modeAdvisor") : t("modeCommittee")}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6">
-            <div className={cn("space-y-2", detailMode !== "advisor" && "opacity-50")}>
+            {(isSmt || isAdvisor) && (
+            <div className={cn("space-y-2", isSmt && detailMode !== "advisor" && "opacity-50")}>
               <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickAdvisor")}</p>
               <div className="flex flex-wrap gap-2">
                 {SEAMUN_ADVISOR_IDS.map((id) => (
                   <button
                     key={id}
                     type="button"
-                    disabled={detailMode !== "advisor"}
+                    disabled={isSmt && detailMode !== "advisor"}
                     onClick={() => selectAdvisor(id)}
                     className={cn(
                       "min-w-[2.75rem] rounded-[var(--radius-md)] border px-3 py-2 text-sm font-bold transition-apple",
@@ -398,7 +459,10 @@ export function SeamunI2027LockedScheduleVisual({
                 ))}
               </div>
             </div>
+            )}
 
+            {isSmt ? (
+            <>
             <div className="hidden h-auto w-px shrink-0 bg-brand-navy/10 sm:block" aria-hidden />
 
             <div className={cn("min-w-0 flex-1 space-y-2", detailMode !== "committee" && "opacity-50")}>
@@ -423,6 +487,8 @@ export function SeamunI2027LockedScheduleVisual({
                 ))}
               </div>
             </div>
+            </>
+            ) : null}
           </div>
         </div>
       ) : null}
@@ -444,10 +510,15 @@ export function SeamunI2027LockedScheduleVisual({
       ) : null}
       {view === "detail" && detailColumn ? (
         <ScheduleGrid columns={[detailColumn]} />
-      ) : view === "teams" ? (
+      ) : view === "teams" && isSmt ? (
         <ScheduleGrid columns={teamColumns} onColumnHeaderClick={openDetailView} />
       ) : null}
 
+      {isCommittee && committee ? (
+        <SeamunLunchOverlapCompare primaryCommittee={committee} scheduleDay={day} />
+      ) : null}
+
+      {isSmt ? (
       <div className="mt-8 border-t border-brand-navy/10 pt-6">
         <h3 className="font-display text-base font-semibold text-brand-navy">{t("committeeMatrixTitle")}</h3>
         <p className="mt-1 text-xs text-brand-muted">{t("committeeMatrixHint")}</p>
@@ -460,7 +531,7 @@ export function SeamunI2027LockedScheduleVisual({
               </tr>
             </thead>
             <tbody>
-              {SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.map((row) => (
+              {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((row) => (
                 <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
                   <td className="px-3 py-2 align-top font-semibold text-brand-navy dark:text-zinc-100">
                     <button
@@ -495,6 +566,7 @@ export function SeamunI2027LockedScheduleVisual({
           </table>
         </div>
       </div>
+      ) : null}
     </div>
   );
 }

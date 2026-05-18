@@ -30,16 +30,33 @@ const CRISIS_ONLY_HREFS = new Set<string>(["/report", "/crisis-slides"]);
 
 const ADVISOR_BLOCKED_HREFS = new Set<string>(["/chats-notes", "/running-notes", "/stances"]);
 
-function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabled: boolean) {
+const SCHEDULE_TAB = { labelKey: "conferenceSchedule" as const, emoji: "📅" };
+
+function scheduleHrefForRole(role: UserRole | null): string | null {
+  if (role === "advisor") return "/advisor/schedule";
+  return "/delegate/schedule";
+}
+
+function useNavTabs(
+  staffRole: UserRole | null | undefined,
+  crisisReportingEnabled: boolean,
+  seamunScheduleEnabled: boolean
+) {
   const role = staffRole ?? null;
   const baseTabs = crisisReportingEnabled
     ? [...BASE_TABS]
     : BASE_TABS.filter((t) => !CRISIS_ONLY_HREFS.has(t.href));
 
+  const scheduleTab =
+    seamunScheduleEnabled && role !== "chair" && role !== "smt" && role !== "admin"
+      ? [{ href: scheduleHrefForRole(role)!, ...SCHEDULE_TAB }]
+      : [];
+
   if (role === "advisor") {
     return [
       { href: "/advisor", labelKey: "advisorHub", emoji: "🎓" },
       { href: "/advisor/notes", labelKey: "advisorNotes", emoji: "📨" },
+      ...scheduleTab,
       ...baseTabs
         .filter((t) => t.href !== "/delegate" && !ADVISOR_BLOCKED_HREFS.has(t.href))
         .map((t) => (t.href === "/profile" ? t : t)),
@@ -60,7 +77,11 @@ function useNavTabs(staffRole: UserRole | null | undefined, crisisReportingEnabl
         { href: "/chair/awards", labelKey: "awards", emoji: "🏆" },
         ...baseTabs.slice(3),
       ]
-    : [...baseTabs];
+    : [
+        baseTabs[0]!,
+        ...scheduleTab,
+        ...baseTabs.slice(1),
+      ];
 }
 
 type MainTabKey = "home" | "session" | "library";
@@ -83,7 +104,7 @@ function tabInPath(pathname: string, href: string) {
 }
 
 function tabMainGroup(href: string): MainTabKey {
-  if (href === "/delegate" || href === "/profile") return "home";
+  if (href === "/delegate" || href === "/profile" || href.endsWith("/schedule")) return "home";
   if (
     href === "/chats-notes" ||
     href === "/committee-room" ||
@@ -163,15 +184,18 @@ export function TabNav({
   staffRole = null,
   variant,
   crisisReportingEnabled = true,
+  seamunScheduleEnabled = false,
 }: {
   staffRole?: UserRole | null;
   variant: "aspire-sidebar" | "dock";
   /** When false, hide `/report` and `/crisis-slides` (crisis committees: FWC, UNSC, HSC). */
   crisisReportingEnabled?: boolean;
+  /** SEAMUN I 2027 locked timetable link in sidebar/dock. */
+  seamunScheduleEnabled?: boolean;
 }) {
   const t = useTranslations("tabNav");
   const pathname = usePathname();
-  const tabs = useNavTabs(staffRole, crisisReportingEnabled);
+  const tabs = useNavTabs(staffRole, crisisReportingEnabled, seamunScheduleEnabled);
   const groupedTabs = useMemo(() => {
     const groups: Record<MainTabKey, { href: string; labelKey: string; emoji: string }[]> = {
       home: [],
