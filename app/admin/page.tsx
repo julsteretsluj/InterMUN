@@ -2,6 +2,9 @@ import { AdminDashboardClient } from "./AdminDashboardClient";
 import StatusPortalBoard from "./StatusPortalBoard";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getTranslations } from "next-intl/server";
+import { isAdminInviteConfigured } from "@/lib/admin-invite-configured";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminPage({
   searchParams,
@@ -9,7 +12,7 @@ export default async function AdminPage({
   searchParams: Promise<{ e?: string; tab?: string }>;
 }) {
   const { e, tab } = await searchParams;
-  const adminInviteConfigured = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const adminInviteConfigured = isAdminInviteConfigured();
   const t = await getTranslations("adminPage");
   const activeTab =
     tab === "portal" || tab === "checklist" || tab === "setup"

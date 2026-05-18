@@ -43,7 +43,16 @@ export function SmtAdvisorsClient({
         <h2 className="font-display text-lg font-semibold text-brand-navy">{t("inviteTitle")}</h2>
         <p className="mt-1 text-sm text-brand-muted">{t("inviteBody")}</p>
         {!adminInviteConfigured ? (
-          <p className="mt-3 text-sm text-amber-800 dark:text-amber-200">{t("inviteDisabled")}</p>
+          <div className="mt-3 rounded-lg border border-amber-300/50 bg-amber-50/80 px-4 py-3 text-sm text-amber-950 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-100">
+            <p className="font-semibold">{t("inviteSetupTitle")}</p>
+            <p className="mt-2">{t("inviteDisabled")}</p>
+            <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-[0.85rem]">
+              <li>{t("inviteSetupStep1")}</li>
+              <li>{t("inviteSetupStep2")}</li>
+              <li>{t("inviteSetupStep3")}</li>
+              <li>{t("inviteSetupStep4")}</li>
+            </ol>
+          </div>
         ) : (
           <form action={inviteAction} className="mt-4 flex max-w-md flex-col gap-3 sm:flex-row sm:items-end">
             <label className="flex-1 text-sm">

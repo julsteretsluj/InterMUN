@@ -3,13 +3,16 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { filterConferencesForSmtRoomCodes } from "@/lib/smt-conference-filters";
+import { isAdminInviteConfigured } from "@/lib/admin-invite-configured";
 import { RoomCodesAndChairsClient } from "./RoomCodesAndChairsClient";
+
+export const dynamic = "force-dynamic";
 
 export default async function SmtRoomCodesPage() {
   const t = await getTranslations("smtRoomCodesPage");
   const supabase = await createClient();
   const eventId = await getActiveEventId();
-  const adminInviteConfigured = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const adminInviteConfigured = isAdminInviteConfigured();
 
   if (!eventId) {
     return (
