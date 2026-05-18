@@ -129,7 +129,57 @@ export function canonicalCommitteesForEventConferenceRows<
   }
 
   committees.sort((a, b) => a.label.localeCompare(b.label));
-  return { committees, conferenceIdToCanonical };
+
+  return dedupeCanonicalCommitteesByDisplayLabel(committees, conferenceIdToCanonical);
+}
+
+/**
+ * When `committeeTabKey` splits the same chamber (e.g. chamber:disec vs c:disec), merge to one dropdown row per label.
+ */
+export function dedupeCanonicalCommitteesByDisplayLabel(
+  committees: CanonicalCommitteeRow[],
+  conferenceIdToCanonical: Map<string, string>
+): { committees: CanonicalCommitteeRow[]; conferenceIdToCanonical: Map<string, string> } {
+  const labelByCanonicalId = new Map(committees.map((c) => [c.id, c.label] as const));
+  const idsByNormLabel = new Map<string, string[]>();
+
+  for (const c of committees) {
+    const norm = normalizeCommitteeLabelForBucket(c.label);
+    const arr = idsByNormLabel.get(norm) ?? [];
+    arr.push(c.id);
+    idsByNormLabel.set(norm, arr);
+  }
+
+  const winnerByNorm = new Map<string, string>();
+  const committeesOut: CanonicalCommitteeRow[] = [];
+
+  for (const [norm, ids] of idsByNormLabel) {
+    let winner = ids[0]!;
+    let bestScore = -1;
+    for (const id of ids) {
+      let score = 0;
+      for (const mapped of conferenceIdToCanonical.values()) {
+        if (mapped === id) score += 1;
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        winner = id;
+      }
+    }
+    winnerByNorm.set(norm, winner);
+    committeesOut.push({ id: winner, label: labelByCanonicalId.get(winner) ?? winner });
+  }
+
+  committeesOut.sort((a, b) => a.label.localeCompare(b.label));
+
+  const mapOut = new Map<string, string>();
+  for (const [confId, canonicalId] of conferenceIdToCanonical) {
+    const label = labelByCanonicalId.get(canonicalId) ?? "";
+    const norm = normalizeCommitteeLabelForBucket(label);
+    mapOut.set(confId, winnerByNorm.get(norm) ?? canonicalId);
+  }
+
+  return { committees: committeesOut, conferenceIdToCanonical: mapOut };
 }
 
 /**

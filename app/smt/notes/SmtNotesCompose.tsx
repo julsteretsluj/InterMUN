@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { DelegationNotesView } from "@/components/delegation-notes/DelegationNotesView";
@@ -8,6 +8,7 @@ import {
   getSmtDelegationNotesComposeContext,
   type SmtDelegationNotesComposeContext,
 } from "@/app/actions/smtDelegationNotesCompose";
+import { dedupeCommitteeOptionsByLabel } from "@/lib/delegation-notes-options";
 
 type CommitteeOpt = { id: string; label: string };
 
@@ -24,6 +25,7 @@ export function SmtNotesCompose({
 }) {
   const t = useTranslations("smtNotesPage");
   const router = useRouter();
+  const committeeOptions = useMemo(() => dedupeCommitteeOptionsByLabel(committees), [committees]);
   const [conferenceId, setConferenceId] = useState(committees[0]?.id ?? "");
   const [ctx, setCtx] = useState<SmtDelegationNotesComposeContext | null>(null);
   const [loading, setLoading] = useState(false);
@@ -50,7 +52,14 @@ export function SmtNotesCompose({
     void loadContext(conferenceId);
   }, [conferenceId, loadContext]);
 
-  if (committees.length === 0) {
+  useEffect(() => {
+    if (committeeOptions.length === 0) return;
+    if (!committeeOptions.some((c) => c.id === conferenceId)) {
+      setConferenceId(committeeOptions[0]!.id);
+    }
+  }, [committeeOptions, conferenceId]);
+
+  if (committeeOptions.length === 0) {
     return (
       <p className="rounded-lg border border-dashed border-brand-navy/15 px-4 py-3 text-sm text-brand-muted">
         {t("composeNoCommittees")}
@@ -75,7 +84,7 @@ export function SmtNotesCompose({
             value={conferenceId}
             onChange={(e) => setConferenceId(e.target.value)}
           >
-            {committees.map((c) => (
+            {committeeOptions.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.label}
               </option>
@@ -93,8 +102,8 @@ export function SmtNotesCompose({
 
       {ctx && !loading ? (
         <DelegationNotesView
-          key={ctx.conferenceId}
-          conferenceId={ctx.conferenceId}
+          key={ctx.canonicalConferenceId}
+          conferenceId={ctx.canonicalConferenceId}
           initialNotes={[]}
           myUserId={myUserId}
           myRole="smt"

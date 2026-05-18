@@ -6,6 +6,7 @@ import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { forwardDelegationNoteToAdvisorAction } from "@/app/actions/advisorStaff";
 import type { DelegationNoteBundleItem, NoteTopic } from "@/lib/delegation-notes-bundle";
+import { dedupeCommitteeOptionsByLabel } from "@/lib/delegation-notes-options";
 
 const TOPIC_MSG_KEY: Record<
   NoteTopic,
@@ -130,9 +131,11 @@ export function SmtNotesTabs({
     return list;
   }, [notes, tab, myUserId, myAllocSet, committeeId, canonicalConferenceId]);
 
+  const committeeOptions = useMemo(() => dedupeCommitteeOptionsByLabel(committees), [committees]);
+
   const committeeLabelById = useMemo(
-    () => new Map(committees.map((c) => [c.id, c.label] as const)),
-    [committees]
+    () => new Map(committeeOptions.map((c) => [c.id, c.label] as const)),
+    [committeeOptions]
   );
 
   async function forwardToAdvisor(noteId: string, advisorProfileId: string) {
@@ -207,7 +210,7 @@ export function SmtNotesTabs({
           >
             {t("allCommittees")}
           </button>
-          {committees.map((c) => (
+          {committeeOptions.map((c) => (
             <button
               key={c.id}
               type="button"

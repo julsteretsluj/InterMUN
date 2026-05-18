@@ -20,7 +20,27 @@ export function buildAllocationRecipientOptions<
       byId.set(a.id, { id: a.id, country: (a.country ?? "").trim() || "—" });
     }
   }
-  return sortAllocationsByDisplayCountry([...byId.values()]);
+  const sorted = sortAllocationsByDisplayCountry([...byId.values()]);
+  const byCountryLabel = new Map<string, AllocationRecipientOption>();
+  for (const opt of sorted) {
+    const key = opt.country.trim().toLowerCase();
+    if (!key || byCountryLabel.has(key)) continue;
+    byCountryLabel.set(key, opt);
+  }
+  return sortAllocationsByDisplayCountry([...byCountryLabel.values()]);
+}
+
+/** One committee row per display label (safety for dropdowns). */
+export function dedupeCommitteeOptionsByLabel<T extends { id: string; label: string }>(
+  committees: T[]
+): T[] {
+  const byLabel = new Map<string, T>();
+  for (const c of committees) {
+    const key = c.label.trim().toLowerCase();
+    if (!key || byLabel.has(key)) continue;
+    byLabel.set(key, c);
+  }
+  return [...byLabel.values()].sort((a, b) => a.label.localeCompare(b.label));
 }
 
 export function buildChairRecipientOptions(
