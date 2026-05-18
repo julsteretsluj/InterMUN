@@ -24,7 +24,9 @@ import {
   SEAMUN_ADVISOR_IDS,
   buildSeamunAdvisorDayBlocks,
   buildSeamunCommitteeDayBlocks,
+  seamunDebateColumnsForDay,
   seamunScheduleGroupById,
+  seamunScheduleGroupForColumnHeader,
   type SeamunAdvisorId,
 } from "@/lib/seamun-i-2027-advisor-schedules";
 import { SeamunLunchOverlapCompare } from "@/components/schedule/SeamunLunchOverlapCompare";
@@ -154,8 +156,8 @@ function ScheduleGrid({
         </div>
 
         {columns.map((col) => {
-          const groupDef = SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.find((g) => g.scheduleHeader === col.header);
-          const clickable = Boolean(onColumnHeaderClick && groupDef);
+          const groupIdFromHeader = seamunScheduleGroupForColumnHeader(col.header);
+          const clickable = Boolean(onColumnHeaderClick && groupIdFromHeader);
           return (
             <div
               key={col.header}
@@ -167,7 +169,7 @@ function ScheduleGrid({
               {clickable ? (
                 <button
                   type="button"
-                  onClick={() => onColumnHeaderClick!(groupDef!.id)}
+                  onClick={() => onColumnHeaderClick!(groupIdFromHeader!)}
                   className="flex h-10 w-full items-end justify-center border-b border-brand-navy/10 px-1 pb-1 text-center text-[0.65rem] font-semibold leading-tight text-brand-accent underline decoration-brand-accent/30 underline-offset-2 transition hover:bg-brand-accent/8"
                 >
                   {col.header}
@@ -232,14 +234,7 @@ export function SeamunI2027LockedScheduleVisual({
   const [advisorId, setAdvisorId] = useState<SeamunAdvisorId | null>(null);
   const [committee, setCommittee] = useState<string | null>(initialCommitteeTrimmed);
 
-  const debateHeaders = useMemo(
-    () => new Set(SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => g.scheduleHeader)),
-    []
-  );
-  const teamColumns = useMemo(() => {
-    const cols = day === 1 ? SEAMUN_I_2027_DAY1_COLUMNS : SEAMUN_I_2027_DAY2_COLUMNS;
-    return cols.filter((c) => debateHeaders.has(c.header));
-  }, [day, debateHeaders]);
+  const teamColumns = useMemo(() => seamunDebateColumnsForDay(day), [day]);
   const handbookHref = seamunI2027HandbookPdfPath();
 
   const committeesForGroup = useMemo(() => {
