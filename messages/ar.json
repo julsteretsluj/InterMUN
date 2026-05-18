@@ -3369,6 +3369,12 @@
       "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
       "byDelegate": "Notes authored by delegations (all committees).",
       "byAdvisor": "Notes chair or SMT forwarded to an advisor."
-    }
+    },
+    "composeTitle": "Send a note",
+    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
+    "composeCommitteeLabel": "Committee",
+    "composeLoading": "Loading committee…",
+    "composeNoCommittees": "No delegate committees in this event yet.",
+    "composeFormTitle": "New secretariat note"
   }
 }

@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isConferenceEventPlaceholderRow } from "@/lib/awards";
 import { loadDelegationNotesBundle } from "@/lib/delegation-notes-bundle";
-import { SmtNotesTabs } from "./SmtNotesTabs";
+import { SmtNotesPageClient } from "./SmtNotesPageClient";
 
 export const dynamic = "force-dynamic";
 
@@ -65,20 +65,16 @@ export default async function SmtNotesPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6">
-      <header>
-        <h1 className="font-display text-2xl font-semibold text-brand-navy md:text-3xl">{t("title")}</h1>
-        <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
-      </header>
-
-      <SmtNotesTabs
-        initialNotes={bundle.notes}
-        committees={committees}
-        myUserId={user.id}
-        myAllocationIds={bundle.myAllocationIds}
-        advisorByAllocationId={bundle.advisorByAllocationId}
-        advisorNameByProfileId={bundle.advisorNameByProfileId}
-      />
-    </div>
+    <SmtNotesPageClient
+      title={t("title")}
+      subtitle={t("subtitle")}
+      initialNotes={bundle.notes}
+      committees={committees}
+      myUserId={user.id}
+      myProfileName={profile?.name ?? tDn("chairFallback")}
+      myAllocationIds={bundle.myAllocationIds}
+      advisorByAllocationId={bundle.advisorByAllocationId}
+      advisorNameByProfileId={bundle.advisorNameByProfileId}
+    />
   );
 }

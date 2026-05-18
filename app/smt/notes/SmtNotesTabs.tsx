@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
@@ -80,6 +80,10 @@ export function SmtNotesTabs({
   const [notes, setNotes] = useState(initialNotes);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setNotes(initialNotes);
+  }, [initialNotes]);
 
   const myAllocSet = useMemo(() => new Set(myAllocationIds), [myAllocationIds]);
   const moderationById = useMemo(() => {

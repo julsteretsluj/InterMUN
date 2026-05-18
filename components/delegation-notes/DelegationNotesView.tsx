@@ -91,6 +91,10 @@ export function DelegationNotesView({
   initialSelectedChairRecipientIds,
   initialAnyChairRecipient,
   advisorByAllocationId = {},
+  composeOnly = false,
+  smtSecretariatCompose = false,
+  composeTitle,
+  onNoteCreated,
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -112,6 +116,12 @@ export function DelegationNotesView({
   initialSelectedChairRecipientIds?: string[];
   initialAnyChairRecipient?: boolean;
   advisorByAllocationId?: Record<string, { advisorProfileId: string; name: string }>;
+  /** Hide the notes list (compose + recipients only). */
+  composeOnly?: boolean;
+  /** SMT dashboard compose: no committee-gate; may send outside active session. */
+  smtSecretariatCompose?: boolean;
+  composeTitle?: string;
+  onNoteCreated?: (note: DelegationNote) => void;
 }) {
   const t = useTranslations("delegationNotes");
   const supabase = useMemo(() => createClient(), []);
@@ -158,12 +168,15 @@ export function DelegationNotesView({
     return m;
   }, [notes]);
 
+  const smtComposeOk = smtSecretariatCompose || smtVerified;
+  const sessionOk = sessionActive || smtSecretariatCompose;
+
   const canCompose =
     (isStaffLike || isDelegate) &&
-    (!isSmt || smtVerified) &&
+    (!isSmt || smtComposeOk) &&
     (myAllocationId !== null || isStaffLike) &&
     (allocationOptions.length > 0 || isStaffLike) &&
-    sessionActive &&
+    sessionOk &&
     !unmoderatedLocked &&
     !votingProcedureLocked;
 
@@ -373,7 +386,7 @@ export function DelegationNotesView({
       setError(t("errors.votingProcedure"));
       return;
     }
-    if (!sessionActive) {
+    if (!sessionOk) {
       setError(t("errors.sessionInactive"));
       return;
     }
@@ -381,7 +394,7 @@ export function DelegationNotesView({
       setError(t("errors.unmoderated"));
       return;
     }
-    if (isSmt && !smtVerified) {
+    if (isSmt && !smtComposeOk) {
       setError(t("errors.smtVerify"));
       return;
     }
@@ -504,6 +517,7 @@ export function DelegationNotesView({
       };
 
       setNotes((prev) => [newNote, ...prev]);
+      onNoteCreated?.(newNote);
       setContent("");
       setConcernFlag(false);
       setSelectedAllocationRecipientIdsState([]);
@@ -693,7 +707,7 @@ export function DelegationNotesView({
   return (
     <div className="space-y-6">
       <div className={card}>
-        <h3 className="mb-3 font-semibold text-brand-navy">{t("title")}</h3>
+        <h3 className="mb-3 font-semibold text-brand-navy">{composeTitle ?? t("title")}</h3>
 
         <div className="grid grid-cols-1 2xl:grid-cols-3 gap-4">
           <div className="2xl:col-span-2 space-y-3">
@@ -729,7 +743,7 @@ export function DelegationNotesView({
               onChange={(e) => setContent(e.target.value)}
               placeholder={canCompose ? t("placeholderCompose") : t("placeholderDisabled")}
               className={`w-full h-28 px-3 py-2 ${field}`}
-              disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
+              disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
             />
             {canCompose ? <EmojiQuickInsert onPick={appendEmoji} /> : null}
             {error ? (
@@ -737,7 +751,7 @@ export function DelegationNotesView({
                 {error}
               </p>
             ) : null}
-            {!sessionActive ? (
+            {!sessionOk ? (
               <p className={`text-xs ${muted}`}>{t("sessionOnlyHint")}</p>
             ) : null}
             {unmoderatedLocked ? (
@@ -773,7 +787,7 @@ export function DelegationNotesView({
                 {t("selectSelfRecipient")}
               </button>
               <HelpButton title={t("sendHelpTitle")}>{t("sendHelpBody")}</HelpButton>
-              {isSmt ? (
+              {isSmt && !smtSecretariatCompose ? (
                 <p className={`text-xs ${muted}`}>
                   {smtVerified ? (
                     t("smtFullNotes")
@@ -808,7 +822,7 @@ export function DelegationNotesView({
                         type="checkbox"
                         checked={checked}
                         className="size-4 rounded border-white/25 accent-brand-accent"
-                    disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
+                    disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
                         onChange={(e) => {
                           setSelectedAllocationRecipientIdsState((prev) => {
                             if (e.target.checked) return [...prev, a.id];
@@ -839,7 +853,7 @@ export function DelegationNotesView({
                   type="checkbox"
                   checked={anyChairRecipient}
                   className="size-4 rounded border-white/25 accent-brand-accent"
-                  disabled={votingProcedureLocked || !sessionActive || unmoderatedLocked}
+                  disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
                     setAnyChairRecipientState(next);
@@ -865,7 +879,7 @@ export function DelegationNotesView({
                         checked={checked}
                         className="size-4 rounded border-white/25 accent-brand-accent"
                         disabled={
-                          anyChairRecipient || votingProcedureLocked || !sessionActive || unmoderatedLocked
+                          anyChairRecipient || votingProcedureLocked || !sessionOk || unmoderatedLocked
                         }
                         onChange={(e) => {
                           if (anyChairRecipient) return;
@@ -887,6 +901,8 @@ export function DelegationNotesView({
           </div>
         </div>
       </div>
+
+      {!composeOnly ? (
 
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
@@ -1012,6 +1028,7 @@ export function DelegationNotesView({
           </div>
         )}
       </div>
+      ) : null}
       {expandedNote ? (
         <div
           className="fixed inset-0 z-[85] flex items-center justify-center bg-black/55 px-4"
