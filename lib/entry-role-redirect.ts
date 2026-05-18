@@ -21,5 +21,6 @@ export async function resolveDashboardPathAfterAuth(
   else if (role === "smt") next = "/smt";
   else if (role === "chair" && entry === "chair") next = "/chair";
   else if (role === "delegate" && entry === "delegate") next = "/delegate";
+  else if (role === "advisor" && entry === "advisor") next = "/advisor";
   return next;
 }

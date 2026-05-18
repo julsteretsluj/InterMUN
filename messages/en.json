@@ -584,6 +584,8 @@
     "delegateHint": "(your committee)",
     "secretariat": "Secretariat",
     "secretariatHint": "(event staff)",
+    "advisor": "Advisor",
+    "advisorHint": "(school delegation)",
     "nextModeSignup": "create an account",
     "nextModeLogin": "sign in",
     "conferenceCodePlaceholder": "e.g. SEAMUNI2027",
@@ -1159,6 +1161,7 @@
     "eventSessions": "Event & sessions",
     "roomCodes": "Room codes & chairs",
     "advisors": "Advisors",
+    "notes": "Notes",
     "awards": "Awards",
     "allocationMatrix": "Allocation matrix",
     "allocationPasswords": "Allocation passwords",
@@ -1464,6 +1467,31 @@
     "qFoodSecurity": "What strategies can improve food security in climate-vulnerable regions?",
     "qNonProliferation": "How should the international community prevent nuclear proliferation?"
   },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    }
+  },
   "delegationNotes": {
     "title": "Delegation notes",
     "topicLabel": "Topic",
@@ -1481,6 +1509,10 @@
     "sessionOnlyHint": "Notes are available only during active committee sessions.",
     "unmoderatedHint": "Notes are disabled during unmoderated caucus.",
     "sendNote": "Send note",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself",
     "sending": "Sending…",
     "sendHelpTitle": "Send note",
     "sendHelpBody": "Sends this note to the recipients selected above. It doesn’t prevent sending; it only affects how the reader is warned/flagged.",
@@ -1524,6 +1556,7 @@
       "emptyContent": "Write the note content first.",
       "noRecipients": "Select at least one recipient (delegation or chair).",
       "needAllocation": "You need an allocation to send notes (or be a chair).",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
       "sendFailed": "Failed to send note."
     }
   },

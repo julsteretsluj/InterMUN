@@ -8,6 +8,7 @@ import { isRoleOnlyDisplayName, stripRedundantLeadingRole } from "@/lib/utils";
 import { getAppName } from "@/lib/branding";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import { DashboardTopBar } from "@/components/dashboard/DashboardTopBar";
+import { DashboardAnnouncementPopup } from "@/components/dashboard/DashboardAnnouncementPopup";
 import { SmtDashboardSidebar, SmtMobileDock } from "@/components/dashboard/SmtDashboardNav";
 import { getTranslations } from "next-intl/server";
 
@@ -80,6 +81,7 @@ export default async function SmtLayout({ children }: { children: React.ReactNod
           brandHomeHref="/smt"
           profileHref="/smt/profile"
         />
+        <DashboardAnnouncementPopup />
         {activeEvent ? (
           <div className="border-b border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-2 text-xs text-brand-muted backdrop-blur-xl sm:px-6">
             <div className="w-full">

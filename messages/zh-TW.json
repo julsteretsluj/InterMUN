@@ -590,7 +590,9 @@
     "previousRoleAria": "以前的角色",
     "selectRoleAria": "選擇角色",
     "nextRoleAria": "下一個角色",
-    "authConnectError": "無法連線到身份驗證（檢查 Supabase 環境變數）。"
+    "authConnectError": "無法連線到身份驗證（檢查 Supabase 環境變數）。",
+    "advisor": "顧問",
+    "advisorHint": "（學校代表團）"
   },
   "googleDocs": {
     "openNewDocHelp": "在新分頁中開啟 Google 文件。 如果出現提示，請登入，然後從網址列複製文件 URL。",
@@ -1042,7 +1044,8 @@
     "profile": "輪廓",
     "follow": "跟隨",
     "hubAbbrev": "表面貼裝技術",
-    "advisors": "顧問"
+    "advisors": "顧問",
+    "notes": "Notes"
   },
   "officialLinks": {
     "intro": "文件、條約、主要機構、計劃、任務和成員資訊。 在新選項卡中開啟。",
@@ -1344,12 +1347,17 @@
       "emptyContent": "先寫註釋內容。",
       "noRecipients": "至少選擇一名接受者（代表團或主席）。",
       "needAllocation": "您需要分配來發送筆記（或擔任主席）。",
-      "sendFailed": "發送便條失敗。"
+      "sendFailed": "發送便條失敗。",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
     },
     "forwardToAdvisor": "轉寄至{name}",
     "forwardedToAdvisor": "轉寄給顧問",
     "forwardedToAdvisorBadge": "（對顧問）",
-    "advisorFallback": "顧問"
+    "advisorFallback": "顧問",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself"
   },
   "adminPage": {
     "title": "網站管理",
@@ -1536,7 +1544,7 @@
       "delegateNotFound": "未找到代表席位。",
       "delegateUnlinked": "該席位尚未關聯代表帳戶。",
       "assigned": "為{country}指派顧問。",
-      "invalidAllocationId": "Enter a valid allocation UUID."
+      "invalidAllocationId": "輸入有效的分配 UUID。"
     }
   },
   "emails": {
@@ -1698,13 +1706,13 @@
           "g4": "三角洲",
           "support": "厄普西隆"
         },
-        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
-        "browseTeams": "All teams",
-        "browseCommittee": "By committee",
-        "browseAdvisor": "By advisor",
-        "teamsScopeAll": "Overview (all groups)",
-        "pickGroup": "Group:",
-        "pickCommitteeAll": "Committee:"
+        "smtBrowseHint": "選擇所有團隊（選擇一個小組）、一個委員會的時間表或顧問時間表 - 每個視圖都是單獨的。",
+        "browseTeams": "所有球隊",
+        "browseCommittee": "由委員會",
+        "browseAdvisor": "由顧問提供",
+        "teamsScopeAll": "概述（所有組）",
+        "pickGroup": "團體：",
+        "pickCommitteeAll": "委員會："
       },
       "lunchOverlap": {
         "title": "與其他委員會共進午餐",
@@ -3322,20 +3330,45 @@
     "saving": "保存…",
     "assignButton": "儲存作業",
     "advisorFallback": "顧問",
-    "delegateAllocationIdLabel": "Delegate allocation ID",
-    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "Current assignments",
-    "currentAssignmentsHint": "All advisor–delegate links for this event.",
-    "allocationIdsTitle": "Linked delegate allocation IDs",
-    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
-    "colAdvisor": "Advisor",
-    "colAllocationId": "Allocation ID",
-    "colCountry": "Country / seat",
-    "colCommittee": "Committee",
-    "inviteSetupTitle": "Enable email invites",
-    "inviteSetupStep1": "In Supabase → Project Settings → API, copy the service_role secret key.",
-    "inviteSetupStep2": "Add SUPABASE_SERVICE_ROLE_KEY to your host env (Render/Vercel) — not NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Add NEXT_PUBLIC_APP_URL to your live site URL (e.g. https://your-app.onrender.com).",
-    "inviteSetupStep4": "Redeploy (production) or add both to .env.local and restart npm run dev (local)."
+    "delegateAllocationIdLabel": "委託分配 ID",
+    "delegateAllocationIdPlaceholder": "例如11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "目前的任務",
+    "currentAssignmentsHint": "本次活動的所有顧問-代表連結。",
+    "allocationIdsTitle": "連結的委託分配 ID",
+    "allocationIdsHint": "分配時從該表複製分配 UUID。",
+    "colAdvisor": "顧問",
+    "colAllocationId": "分配ID",
+    "colCountry": "國家 / 座位",
+    "colCommittee": "委員會",
+    "inviteSetupTitle": "啟用電子郵件邀請",
+    "inviteSetupStep1": "在 Supabase → 專案設定 → API 中，複製 service_role 金鑰。",
+    "inviteSetupStep2": "將 SUPABASE_SERVICE_ROLE_KEY 新增至您的主機環境 (Render/Vercel) — 而非 NEXT_PUBLIC_。",
+    "inviteSetupStep3": "將 NEXT_PUBLIC_APP_URL 新增至您的即時網站 URL（例如 https://your-app.onrender.com）。",
+    "inviteSetupStep4": "重新部署（生產）或將兩者新增至 .env.local 並重新啟動 npm run dev（本地）。"
+  },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    }
   }
 }

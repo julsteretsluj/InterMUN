@@ -13,7 +13,12 @@ type PopupNotification = {
   read_at: string | null;
 };
 
-const SUPPORTED_TYPES = new Set(["committee_broadcast", "smt_broadcast", "dais_announcement"]);
+const SUPPORTED_TYPES = new Set([
+  "committee_broadcast",
+  "smt_broadcast",
+  "dais_announcement",
+  "delegation_note",
+]);
 
 export function DashboardAnnouncementPopup() {
   const supabase = createClient();
@@ -50,8 +55,12 @@ export function DashboardAnnouncementPopup() {
 
   const markRead = useCallback(
     async (id: string) => {
-      await supabase.from("user_notifications").update({ read_at: new Date().toISOString() }).eq("id", id);
-      await loadLatestUnread();
+      if (!id.startsWith("local-")) {
+        await supabase.from("user_notifications").update({ read_at: new Date().toISOString() }).eq("id", id);
+        await loadLatestUnread();
+      } else {
+        setNotification(null);
+      }
     },
     [supabase, loadLatestUnread]
   );
@@ -59,6 +68,24 @@ export function DashboardAnnouncementPopup() {
   useEffect(() => {
     void loadLatestUnread();
   }, [loadLatestUnread]);
+
+  useEffect(() => {
+    const onLocalPopup = (event: Event) => {
+      const detail = (event as CustomEvent<{ title: string; body?: string; href?: string }>).detail;
+      if (!detail?.title) return;
+      setNotification({
+        id: `local-${Date.now()}`,
+        type: "delegation_note",
+        title: detail.title,
+        body: detail.body ?? null,
+        href: detail.href ?? "/chats-notes",
+        created_at: new Date().toISOString(),
+        read_at: null,
+      });
+    };
+    window.addEventListener("intermun:delegation-note-popup", onLocalPopup);
+    return () => window.removeEventListener("intermun:delegation-note-popup", onLocalPopup);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;

@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Armchair, Building2, ChevronLeft, ChevronRight, Users } from "lucide-react";
+import { Armchair, Building2, ChevronLeft, ChevronRight, GraduationCap, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { getAppName } from "@/lib/branding";
@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 type Step = "welcome" | "conference" | "role" | "account";
 
 /** Ring segment colors (color-wheel order: top → clockwise matches pointer angle). */
-const ROLE_RING_HEX = ["#1DB954", "#3366FF", "#FF00E5"] as const;
+const ROLE_RING_HEX = ["#1DB954", "#3366FF", "#FF00E5", "#C2A878"] as const;
 
 const ROLES: {
   id: InterMunEntryRole;
@@ -26,6 +26,7 @@ const ROLES: {
   { id: "chair", Icon: Armchair, accentHex: ROLE_RING_HEX[0]! },
   { id: "delegate", Icon: Users, accentHex: ROLE_RING_HEX[1]! },
   { id: "secretariat", Icon: Building2, accentHex: ROLE_RING_HEX[2]! },
+  { id: "advisor", Icon: GraduationCap, accentHex: ROLE_RING_HEX[3]! },
 ];
 
 const RING_VIEW = { cx: 0, cy: 0, rOuter: 47, rInner: 30 } as const;
@@ -89,13 +90,17 @@ export function AuthEntryWizard({
       ? t("chair")
       : selectedRole.id === "delegate"
         ? t("delegate")
-        : t("secretariat");
+        : selectedRole.id === "secretariat"
+          ? t("secretariat")
+          : t("advisor");
   const selectedRoleHint =
     selectedRole.id === "chair"
       ? t("chairHint")
       : selectedRole.id === "delegate"
         ? t("delegateHint")
-        : t("secretariatHint");
+        : selectedRole.id === "secretariat"
+          ? t("secretariatHint")
+          : t("advisorHint");
 
   const snapToIndex = useCallback((idx: number) => {
     const n = ROLES.length;

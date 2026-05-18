@@ -590,7 +590,9 @@
     "previousRoleAria": "Vorige rol",
     "selectRoleAria": "Selecteer rol",
     "nextRoleAria": "Volgende rol",
-    "authConnectError": "Kan geen verbinding maken met authenticatie (controleer Supabase env vars)."
+    "authConnectError": "Kan geen verbinding maken met authenticatie (controleer Supabase env vars).",
+    "advisor": "Adviseur",
+    "advisorHint": "(schooldelegatie)"
   },
   "googleDocs": {
     "openNewDocHelp": "Opent Google Documenten in een nieuw tabblad. Meld u aan als daarom wordt gevraagd en kopieer vervolgens de document-URL uit de adresbalk.",
@@ -1042,7 +1044,8 @@
     "profile": "Profiel",
     "follow": "Volgen",
     "hubAbbrev": "SMT",
-    "advisors": "Adviseurs"
+    "advisors": "Adviseurs",
+    "notes": "Notes"
   },
   "officialLinks": {
     "intro": "Documenten, verdragen, belangrijkste organen, programma's, missies en ledeninformatie. Opent in een nieuw tabblad.",
@@ -1344,12 +1347,17 @@
       "emptyContent": "Schrijf eerst de inhoud van de notitie.",
       "noRecipients": "Selecteer ten minste één ontvanger (delegatie of voorzitter).",
       "needAllocation": "Je hebt een toewijzing nodig om notities te kunnen versturen (of voorzitter te kunnen zijn).",
-      "sendFailed": "Kan notitie niet verzenden."
+      "sendFailed": "Kan notitie niet verzenden.",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
     },
     "forwardToAdvisor": "Doorsturen naar {name}",
     "forwardedToAdvisor": "Doorgestuurd naar adviseur",
     "forwardedToAdvisorBadge": "(aan adviseur)",
-    "advisorFallback": "Adviseur"
+    "advisorFallback": "Adviseur",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself"
   },
   "adminPage": {
     "title": "Websitebeheer",
@@ -1536,7 +1544,7 @@
       "delegateNotFound": "Deelnemersstoel niet gevonden.",
       "delegateUnlinked": "Die stoel heeft nog geen gekoppeld deelnemersaccount.",
       "assigned": "Adviseur toegewezen aan {country}.",
-      "invalidAllocationId": "Enter a valid allocation UUID."
+      "invalidAllocationId": "Voer een geldige toewijzings-UUID in."
     }
   },
   "emails": {
@@ -1698,13 +1706,13 @@
           "g4": "Delta",
           "support": "Epsilon"
         },
-        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
-        "browseTeams": "All teams",
-        "browseCommittee": "By committee",
-        "browseAdvisor": "By advisor",
-        "teamsScopeAll": "Overview (all groups)",
-        "pickGroup": "Group:",
-        "pickCommitteeAll": "Committee:"
+        "smtBrowseHint": "Kies alle teams (kies een groep), het tijdschema van één commissie of het tijdschema van een adviseur: elke weergave is afzonderlijk.",
+        "browseTeams": "Alle ploegen",
+        "browseCommittee": "Per commissie",
+        "browseAdvisor": "Door adviseur",
+        "teamsScopeAll": "Overzicht (alle groepen)",
+        "pickGroup": "Groep:",
+        "pickCommitteeAll": "Commissie:"
       },
       "lunchOverlap": {
         "title": "Lunch overlapt met andere commissies",
@@ -3322,20 +3330,45 @@
     "saving": "Besparing…",
     "assignButton": "Opdracht opslaan",
     "advisorFallback": "Adviseur",
-    "delegateAllocationIdLabel": "Delegate allocation ID",
-    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "Current assignments",
-    "currentAssignmentsHint": "All advisor–delegate links for this event.",
-    "allocationIdsTitle": "Linked delegate allocation IDs",
-    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
-    "colAdvisor": "Advisor",
-    "colAllocationId": "Allocation ID",
-    "colCountry": "Country / seat",
-    "colCommittee": "Committee",
-    "inviteSetupTitle": "Enable email invites",
-    "inviteSetupStep1": "In Supabase → Project Settings → API, copy the service_role secret key.",
-    "inviteSetupStep2": "Add SUPABASE_SERVICE_ROLE_KEY to your host env (Render/Vercel) — not NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Add NEXT_PUBLIC_APP_URL to your live site URL (e.g. https://your-app.onrender.com).",
-    "inviteSetupStep4": "Redeploy (production) or add both to .env.local and restart npm run dev (local)."
+    "delegateAllocationIdLabel": "Toewijzings-ID van gedelegeerde",
+    "delegateAllocationIdPlaceholder": "bijv. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Huidige opdrachten",
+    "currentAssignmentsHint": "Alle links naar adviseurs en afgevaardigden voor dit evenement.",
+    "allocationIdsTitle": "Gekoppelde toewijzings-ID's van gedelegeerden",
+    "allocationIdsHint": "Kopieer bij het toewijzen een toewijzings-UUID uit deze tabel.",
+    "colAdvisor": "Adviseur",
+    "colAllocationId": "Toewijzings-ID",
+    "colCountry": "Land / zetel",
+    "colCommittee": "Commissie",
+    "inviteSetupTitle": "Schakel e-mailuitnodigingen in",
+    "inviteSetupStep1": "Kopieer in Supabase → Projectinstellingen → API de geheime sleutel service_role.",
+    "inviteSetupStep2": "Voeg SUPABASE_SERVICE_ROLE_KEY toe aan uw hostomgeving (Render/Vercel) — niet NEXT_PUBLIC_.",
+    "inviteSetupStep3": "Voeg NEXT_PUBLIC_APP_URL toe aan de URL van uw live site (bijvoorbeeld https://uw-app.onrender.com).",
+    "inviteSetupStep4": "Implementeer opnieuw (productie) of voeg beide toe aan .env.local en start npm run dev (lokaal) opnieuw."
+  },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    }
   }
 }

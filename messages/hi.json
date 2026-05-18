@@ -518,7 +518,9 @@
     "previousRoleAria": "पिछली भूमिका",
     "selectRoleAria": "भूमिका चुनें",
     "nextRoleAria": "अगली भूमिका",
-    "authConnectError": "प्रमाणीकरण से कनेक्ट नहीं हो सका (सुपाबेस एनवी संस्करण जांचें)।"
+    "authConnectError": "प्रमाणीकरण से कनेक्ट नहीं हो सका (सुपाबेस एनवी संस्करण जांचें)।",
+    "advisor": "सलाहकार",
+    "advisorHint": "(स्कूल प्रतिनिधिमंडल)"
   },
   "googleDocs": {
     "openNewDocHelp": "Google डॉक्स को एक नए टैब में खोलता है। संकेत मिलने पर साइन इन करें, फिर एड्रेस बार से दस्तावेज़ यूआरएल कॉपी करें।",
@@ -970,7 +972,8 @@
     "profile": "प्रोफ़ाइल",
     "follow": "अनुसरण करना",
     "hubAbbrev": "श्रीमती",
-    "advisors": "सलाहकार"
+    "advisors": "सलाहकार",
+    "notes": "Notes"
   },
   "officialLinks": {
     "intro": "दस्तावेज़, संधियाँ, मुख्य निकाय, कार्यक्रम, मिशन और सदस्य जानकारी। एक नए टैब में खुलता है.",
@@ -1272,12 +1275,17 @@
       "emptyContent": "पहले नोट की सामग्री लिखें.",
       "noRecipients": "कम से कम एक प्राप्तकर्ता (प्रतिनिधिमंडल या अध्यक्ष) का चयन करें।",
       "needAllocation": "आपको नोट्स भेजने (या कुर्सी बनने) के लिए आवंटन की आवश्यकता है।",
-      "sendFailed": "नोट भेजने में विफल."
+      "sendFailed": "नोट भेजने में विफल.",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
     },
     "forwardToAdvisor": "{name} पर अग्रेषित करें",
     "forwardedToAdvisor": "सलाहकार को अग्रेषित किया गया",
     "forwardedToAdvisorBadge": "(सलाहकार को)",
-    "advisorFallback": "सलाहकार"
+    "advisorFallback": "सलाहकार",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself"
   },
   "adminPage": {
     "title": "वेबसाइट प्रशासन",
@@ -1464,7 +1472,7 @@
       "delegateNotFound": "प्रतिनिधि सीट नहीं मिली.",
       "delegateUnlinked": "उस सीट पर अभी तक कोई प्रतिनिधि खाता जुड़ा नहीं है।",
       "assigned": "{country} को सलाहकार नियुक्त किया गया।",
-      "invalidAllocationId": "Enter a valid allocation UUID."
+      "invalidAllocationId": "वैध आवंटन यूयूआईडी दर्ज करें।"
     }
   },
   "emails": {
@@ -1626,13 +1634,13 @@
           "g4": "डेल्टा",
           "support": "एप्सिलॉन"
         },
-        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
-        "browseTeams": "All teams",
-        "browseCommittee": "By committee",
-        "browseAdvisor": "By advisor",
-        "teamsScopeAll": "Overview (all groups)",
-        "pickGroup": "Group:",
-        "pickCommitteeAll": "Committee:"
+        "smtBrowseHint": "सभी टीमें चुनें (एक समूह चुनें), एक समिति की समय सारिणी, या एक सलाहकार समय सारिणी - प्रत्येक दृश्य अलग है।",
+        "browseTeams": "सभी टीमें",
+        "browseCommittee": "समिति द्वारा",
+        "browseAdvisor": "सलाहकार द्वारा",
+        "teamsScopeAll": "अवलोकन (सभी समूह)",
+        "pickGroup": "समूह:",
+        "pickCommitteeAll": "समिति:"
       },
       "lunchOverlap": {
         "title": "दोपहर का भोजन अन्य समितियों के साथ ओवरलैप हुआ",
@@ -3322,20 +3330,45 @@
     "saving": "सहेजा जा रहा है...",
     "assignButton": "असाइनमेंट सहेजें",
     "advisorFallback": "सलाहकार",
-    "delegateAllocationIdLabel": "Delegate allocation ID",
-    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "Current assignments",
-    "currentAssignmentsHint": "All advisor–delegate links for this event.",
-    "allocationIdsTitle": "Linked delegate allocation IDs",
-    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
-    "colAdvisor": "Advisor",
-    "colAllocationId": "Allocation ID",
-    "colCountry": "Country / seat",
-    "colCommittee": "Committee",
-    "inviteSetupTitle": "Enable email invites",
-    "inviteSetupStep1": "In Supabase → Project Settings → API, copy the service_role secret key.",
-    "inviteSetupStep2": "Add SUPABASE_SERVICE_ROLE_KEY to your host env (Render/Vercel) — not NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Add NEXT_PUBLIC_APP_URL to your live site URL (e.g. https://your-app.onrender.com).",
-    "inviteSetupStep4": "Redeploy (production) or add both to .env.local and restart npm run dev (local)."
+    "delegateAllocationIdLabel": "प्रतिनिधि आवंटन आईडी",
+    "delegateAllocationIdPlaceholder": "जैसे 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "वर्तमान कार्य",
+    "currentAssignmentsHint": "इस आयोजन के लिए सभी सलाहकार-प्रतिनिधि लिंक।",
+    "allocationIdsTitle": "लिंक किए गए प्रतिनिधि आवंटन आईडी",
+    "allocationIdsHint": "असाइन करते समय इस तालिका से आवंटन यूयूआईडी की प्रतिलिपि बनाएँ।",
+    "colAdvisor": "सलाहकार",
+    "colAllocationId": "आवंटन आईडी",
+    "colCountry": "देश / सीट",
+    "colCommittee": "समिति",
+    "inviteSetupTitle": "ईमेल आमंत्रण सक्षम करें",
+    "inviteSetupStep1": "सुपाबेस → प्रोजेक्ट सेटिंग्स → एपीआई में, service_role गुप्त कुंजी की प्रतिलिपि बनाएँ।",
+    "inviteSetupStep2": "अपने होस्ट env (रेंडर/वर्सेल) में SUPABASE_SERVICE_ROLE_KEY जोड़ें - NEXT_PUBLIC_ नहीं।",
+    "inviteSetupStep3": "अपने लाइव साइट URL में NEXT_PUBLIC_APP_URL जोड़ें (उदा. https://your-app.onrender.com)।",
+    "inviteSetupStep4": "पुनः तैनात करें (उत्पादन करें) या दोनों को .env.local में जोड़ें और npm run dev (स्थानीय) को पुनरारंभ करें।"
+  },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    }
   }
 }

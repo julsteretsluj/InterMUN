@@ -361,7 +361,12 @@ export function DelegationNotesView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conferenceId, smtVerified, myRole, isChairLike, isSmt]);
 
-  async function createNote() {
+  async function createNote(overrides?: {
+    allocationRecipientIds?: string[];
+    chairRecipientIds?: string[];
+    anyChairRecipient?: boolean;
+    contentText?: string;
+  }) {
     if (sending) return;
     setError(null);
     if (votingProcedureLocked) {
@@ -381,11 +386,16 @@ export function DelegationNotesView({
       return;
     }
 
-    const trimmed = content.trim();
+    const allocationRecipientIds =
+      overrides?.allocationRecipientIds ?? selectedAllocationRecipientIds;
+    const chairRecipientIds = overrides?.chairRecipientIds ?? selectedChairRecipientIds;
+    const useAnyChair = overrides?.anyChairRecipient ?? anyChairRecipient;
+
+    const trimmed = (overrides?.contentText ?? content).trim();
     if (!trimmed) return setError(t("errors.emptyContent"));
 
-    if (selectedAllocationRecipientIds.length === 0 && selectedChairRecipientIds.length === 0) {
-      if (!anyChairRecipient) return setError(t("errors.noRecipients"));
+    if (allocationRecipientIds.length === 0 && chairRecipientIds.length === 0) {
+      if (!useAnyChair) return setError(t("errors.noRecipients"));
     }
 
     const senderAllo = myAllocationId;
@@ -412,7 +422,7 @@ export function DelegationNotesView({
       if (insertErr) throw insertErr;
       insertedNoteId = inserted.id;
 
-      for (const allocationId of selectedAllocationRecipientIds) {
+      for (const allocationId of allocationRecipientIds) {
         const { error: recipErr } = await supabase
           .from("delegation_note_recipients")
           .insert({
@@ -424,7 +434,7 @@ export function DelegationNotesView({
         if (recipErr) throw recipErr;
       }
 
-      for (const chairId of selectedChairRecipientIds) {
+      for (const chairId of chairRecipientIds) {
         const { error: recipErr } = await supabase
           .from("delegation_note_recipients")
           .insert({
@@ -436,7 +446,7 @@ export function DelegationNotesView({
         if (recipErr) throw recipErr;
       }
 
-      if (anyChairRecipient) {
+      if (useAnyChair) {
         const { error: recipErr } = await supabase
           .from("delegation_note_recipients")
           .insert({
@@ -461,21 +471,21 @@ export function DelegationNotesView({
           };
 
       const recipients: NoteRecipient[] = [];
-      for (const allocationId of selectedAllocationRecipientIds) {
+      for (const allocationId of allocationRecipientIds) {
         recipients.push({
           kind: "allocation",
           allocationId,
           country: allocationIdToCountry.get(allocationId) ?? t("unknownCountry"),
         });
       }
-      for (const chairId of selectedChairRecipientIds) {
+      for (const chairId of chairRecipientIds) {
         recipients.push({
           kind: "chair",
           profileId: chairId,
           name: chairIdToName.get(chairId) ?? t("chairFallback"),
         });
       }
-      if (anyChairRecipient) recipients.push({ kind: "chair_all" });
+      if (useAnyChair) recipients.push({ kind: "chair_all" });
 
       const newNote: DelegationNote = {
         id: inserted.id,
@@ -499,6 +509,21 @@ export function DelegationNotesView({
       setSelectedAllocationRecipientIdsState([]);
       setSelectedChairRecipientIdsState([]);
       setAnyChairRecipientState(false);
+
+      const sentToSelf =
+        (myAllocationId !== null && allocationRecipientIds.includes(myAllocationId)) ||
+        chairRecipientIds.includes(myUserId);
+      if (sentToSelf && typeof window !== "undefined") {
+        window.dispatchEvent(
+          new CustomEvent("intermun:delegation-note-popup", {
+            detail: {
+              title: "New delegation note",
+              body: trimmed.slice(0, 240),
+              href: "/chats-notes",
+            },
+          })
+        );
+      }
     } catch (e: unknown) {
       const rawMessage =
         e instanceof Error
@@ -534,6 +559,40 @@ export function DelegationNotesView({
     } finally {
       setSending(false);
     }
+  }
+
+  function selectSelfRecipient() {
+    if (myAllocationId) {
+      setSelectedAllocationRecipientIdsState([myAllocationId]);
+      setSelectedChairRecipientIdsState([]);
+      setAnyChairRecipientState(false);
+      return true;
+    }
+    if (isStaffLike) {
+      setSelectedAllocationRecipientIdsState([]);
+      setSelectedChairRecipientIdsState([myUserId]);
+      setAnyChairRecipientState(false);
+      return true;
+    }
+    return false;
+  }
+
+  async function sendTestNoteToSelf() {
+    const testContent = content.trim() || t("selfTestDefaultContent");
+    const allocationRecipientIds = myAllocationId ? [myAllocationId] : [];
+    const chairRecipientIds = !myAllocationId && isStaffLike ? [myUserId] : [];
+    if (allocationRecipientIds.length === 0 && chairRecipientIds.length === 0) {
+      setError(t("errors.selfRecipientUnavailable"));
+      return;
+    }
+    if (!content.trim()) setContent(testContent);
+    selectSelfRecipient();
+    await createNote({
+      allocationRecipientIds,
+      chairRecipientIds,
+      anyChairRecipient: false,
+      contentText: testContent,
+    });
   }
 
   async function toggleStar(noteId: string, nextStarred: boolean) {
@@ -693,6 +752,25 @@ export function DelegationNotesView({
                 className="mun-btn-primary disabled:opacity-50"
               >
                 {sending ? t("sending") : t("sendNote")}
+              </button>
+              <button
+                type="button"
+                onClick={() => void sendTestNoteToSelf()}
+                disabled={!canCompose || sending}
+                className="mun-btn disabled:opacity-50"
+                title={t("sendToSelfHelp")}
+              >
+                {t("sendToSelf")}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!selectSelfRecipient()) setError(t("errors.selfRecipientUnavailable"));
+                }}
+                disabled={!canCompose || sending}
+                className="mun-btn px-2.5 py-1.5 text-xs disabled:opacity-50"
+              >
+                {t("selectSelfRecipient")}
               </button>
               <HelpButton title={t("sendHelpTitle")}>{t("sendHelpBody")}</HelpButton>
               {isSmt ? (

@@ -590,7 +590,9 @@
     "previousRoleAria": "Попередня роль",
     "selectRoleAria": "Виберіть роль",
     "nextRoleAria": "Наступна роль",
-    "authConnectError": "Не вдалося підключитися до автентифікації (перевірте Supabase env vars)."
+    "authConnectError": "Не вдалося підключитися до автентифікації (перевірте Supabase env vars).",
+    "advisor": "Радник",
+    "advisorHint": "(шкільна делегація)"
   },
   "googleDocs": {
     "openNewDocHelp": "Відкриває Документи Google у новій вкладці. Увійдіть, якщо буде запропоновано, а потім скопіюйте URL-адресу документа з адресного рядка.",
@@ -1042,7 +1044,8 @@
     "profile": "Профіль",
     "follow": "Слідуйте",
     "hubAbbrev": "SMT",
-    "advisors": "Радники"
+    "advisors": "Радники",
+    "notes": "Notes"
   },
   "officialLinks": {
     "intro": "Документи, договори, основні органи, програми, місії та інформація про членів. Відкривається в новій вкладці.",
@@ -1344,12 +1347,17 @@
       "emptyContent": "Спочатку напишіть зміст нотатки.",
       "noRecipients": "Виберіть принаймні одного одержувача (делегацію чи голову).",
       "needAllocation": "Вам потрібен розподіл, щоб надсилати нотатки (або бути головою).",
-      "sendFailed": "Не вдалося надіслати нотатку."
+      "sendFailed": "Не вдалося надіслати нотатку.",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
     },
     "forwardToAdvisor": "Переслати на {name}",
     "forwardedToAdvisor": "Передано раднику",
     "forwardedToAdvisorBadge": "(консультанту)",
-    "advisorFallback": "Радник"
+    "advisorFallback": "Радник",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself"
   },
   "adminPage": {
     "title": "Адміністрація сайту",
@@ -1536,7 +1544,7 @@
       "delegateNotFound": "Місце делегата не знайдено.",
       "delegateUnlinked": "Це місце ще не має пов’язаного облікового запису делегата.",
       "assigned": "Призначений радником {country}.",
-      "invalidAllocationId": "Enter a valid allocation UUID."
+      "invalidAllocationId": "Введіть дійсний UUID розподілу."
     }
   },
   "emails": {
@@ -1698,13 +1706,13 @@
           "g4": "Дельта",
           "support": "Епсилон"
         },
-        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
-        "browseTeams": "All teams",
-        "browseCommittee": "By committee",
-        "browseAdvisor": "By advisor",
-        "teamsScopeAll": "Overview (all groups)",
-        "pickGroup": "Group:",
-        "pickCommitteeAll": "Committee:"
+        "smtBrowseHint": "Виберіть усі команди (виберіть групу), розклад одного комітету або розклад радника — кожне подання є окремим.",
+        "browseTeams": "Всі команди",
+        "browseCommittee": "Комітетом",
+        "browseAdvisor": "Від радника",
+        "teamsScopeAll": "Огляд (всі групи)",
+        "pickGroup": "Група:",
+        "pickCommitteeAll": "комітет:"
       },
       "lunchOverlap": {
         "title": "Обід збігається з іншими комітетами",
@@ -3322,20 +3330,45 @@
     "saving": "Збереження…",
     "assignButton": "Зберегти завдання",
     "advisorFallback": "Радник",
-    "delegateAllocationIdLabel": "Delegate allocation ID",
-    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "Current assignments",
-    "currentAssignmentsHint": "All advisor–delegate links for this event.",
-    "allocationIdsTitle": "Linked delegate allocation IDs",
-    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
-    "colAdvisor": "Advisor",
-    "colAllocationId": "Allocation ID",
-    "colCountry": "Country / seat",
-    "colCommittee": "Committee",
-    "inviteSetupTitle": "Enable email invites",
-    "inviteSetupStep1": "In Supabase → Project Settings → API, copy the service_role secret key.",
-    "inviteSetupStep2": "Add SUPABASE_SERVICE_ROLE_KEY to your host env (Render/Vercel) — not NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Add NEXT_PUBLIC_APP_URL to your live site URL (e.g. https://your-app.onrender.com).",
-    "inviteSetupStep4": "Redeploy (production) or add both to .env.local and restart npm run dev (local)."
+    "delegateAllocationIdLabel": "Ідентифікатор виділення делегата",
+    "delegateAllocationIdPlaceholder": "напр. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Поточні завдання",
+    "currentAssignmentsHint": "Усі посилання радників і делегатів для цієї події.",
+    "allocationIdsTitle": "Ідентифікатори розподілу пов’язаних делегатів",
+    "allocationIdsHint": "Скопіюйте UUID розподілу з цієї таблиці під час призначення.",
+    "colAdvisor": "Радник",
+    "colAllocationId": "Ідентифікатор розподілу",
+    "colCountry": "Країна / місцезнаходження",
+    "colCommittee": "Комітет",
+    "inviteSetupTitle": "Увімкнути запрошення електронною поштою",
+    "inviteSetupStep1": "У Supabase → Параметри проекту → API скопіюйте секретний ключ service_role.",
+    "inviteSetupStep2": "Додайте SUPABASE_SERVICE_ROLE_KEY до свого хост-окруження (Render/Vercel), а не NEXT_PUBLIC_.",
+    "inviteSetupStep3": "Додайте NEXT_PUBLIC_APP_URL до URL-адреси свого активного сайту (наприклад, https://your-app.onrender.com).",
+    "inviteSetupStep4": "Повторно розгорніть (виробничий) або додайте обидва до .env.local і перезапустіть npm run dev (локальний)."
+  },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    }
   }
 }
