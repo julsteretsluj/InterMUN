@@ -740,6 +740,7 @@
     "runningNotes": "Running Notes",
     "awardsSmt": "Awards",
     "delegateDashboard": "Delegate dashboard",
+    "delegateSchedule": "Conference schedule",
     "voting": "Voting",
     "digitalRoom": "Digital Room",
     "committeeSession": "Committee session",
@@ -863,6 +864,9 @@
       "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     },
     "jumpTo": "Jump to",
+    "schedule": {
+      "intro": "Pick your team track, then either advisor A–D or your committee (delegate/chair). Only one personal timetable is shown at a time."
+    },
     "tiles": {
       "stances": {
         "label": "Country & stance",
@@ -887,6 +891,10 @@
       "guides": {
         "label": "Guides & resources",
         "hint": "How-to and chair-facing references"
+      },
+      "conferenceSchedule": {
+        "label": "Conference schedule",
+        "hint": "Team track and advisor timetable (A–D)"
       },
       "running": {
         "label": "Checklist & running notes",
@@ -1760,7 +1768,24 @@
         "committeeMatrixTitle": "Committee chambers by schedule track",
         "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
         "colScheduleTrack": "Schedule track",
-        "colChambers": "Chambers (labels in this event)"
+        "colChambers": "Chambers (labels in this event)",
+        "advisorHint": "Tap a team, then view either an advisor timetable (A–D) or a delegate/chair timetable for one committee — not both at once.",
+        "viewAllTeams": "All teams",
+        "orPickTeam": "or team:",
+        "viewAs": "View as",
+        "modeAdvisor": "Advisor",
+        "modeCommittee": "Committee (delegate / chair)",
+        "pickAdvisor": "Advisor",
+        "pickCommittee": "Committee",
+        "selectAdvisorPrompt": "Select advisor A, B, C, or D to view that timetable.",
+        "selectCommitteePrompt": "Select your committee to view the delegate/chair timetable.",
+        "teamShort": {
+          "g1": "Alpha",
+          "g2": "Beta",
+          "g3": "Gamma",
+          "g4": "Delta",
+          "support": "Epsilon"
+        }
       }
     }
   },

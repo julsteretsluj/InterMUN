@@ -52,6 +52,14 @@ for (const def of SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS) {
   }
 }
 
+export function seamunI2027ScheduleGroupDefinitionForChamber(
+  committee: string | null | undefined
+): SeamunScheduleGroupDefinition | null {
+  const id = seamunI2027ScheduleGroupForChamber(committee);
+  if (!id) return null;
+  return SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.find((g) => g.id === id) ?? null;
+}
+
 /** Resolve schedule group for a chamber label, or null if unknown / secretariat row. */
 export function seamunI2027ScheduleGroupForChamber(committee: string | null | undefined): SeamunScheduleGroupId | null {
   const key = committee?.trim();

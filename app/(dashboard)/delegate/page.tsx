@@ -69,6 +69,7 @@ export default async function DelegateDashboardPage({
     { href: "/speeches", key: "speeches" },
     { href: "/sources", key: "sources" },
     { href: "/guides", key: "guides" },
+    ...(showChairEmailsTab ? ([{ href: "/delegate/schedule", key: "conferenceSchedule" }] as const) : []),
     { href: "/running-notes", key: "running" },
     { href: "/official-links", key: "officialLinks" },
     ...(showChairEmailsTab ? ([{ href: "/delegate?tab=chairs", key: "chairEmails" }] as const) : []),
