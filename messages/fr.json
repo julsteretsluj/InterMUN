@@ -1535,7 +1535,8 @@
       "notAdvisorRole": "Cet utilisateur n'est pas un conseiller. Invitez-les ou définissez d’abord le rôle de conseiller.",
       "delegateNotFound": "Siège de délégué introuvable.",
       "delegateUnlinked": "Ce siège n'a pas encore de compte de délégué associé.",
-      "assigned": "Conseiller assigné au {country}."
+      "assigned": "Conseiller assigné au {country}.",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "conseiller : {name}",
     "saving": "Économie…",
     "assignButton": "Enregistrer le devoir",
-    "advisorFallback": "Conseillère"
+    "advisorFallback": "Conseillère",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

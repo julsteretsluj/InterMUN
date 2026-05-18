@@ -1589,7 +1589,8 @@
       "notAdvisorRole": "ထိုအသုံးပြုသူသည် အကြံပေးတစ်ဦးမဟုတ်ပါ။ သူတို့ကို ဖိတ်ခေါ်ပါ သို့မဟုတ် အကြံပေးတာဝန်ကို ဦးစွာသတ်မှတ်ပါ။",
       "delegateNotFound": "ကိုယ်စားလှယ်ထိုင်ခုံမတွေ့ပါ။",
       "delegateUnlinked": "ထိုထိုင်ခုံတွင် လင့်ခ်ချိတ်ထားသော ကိုယ်စားလှယ်အကောင့်မရှိသေးပါ။",
-      "assigned": "{country} တွင် အကြံပေးတာဝန်ပေးအပ်သည်။"
+      "assigned": "{country} တွင် အကြံပေးတာဝန်ပေးအပ်သည်။",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "အကြံပေး- {name}",
     "saving": "သိမ်းဆည်းနေသည်...",
     "assignButton": "တာဝန်ကို သိမ်းဆည်းပါ။",
-    "advisorFallback": "အကြံပေး"
+    "advisorFallback": "အကြံပေး",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

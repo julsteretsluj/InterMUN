@@ -1535,7 +1535,8 @@
       "notAdvisorRole": "该用户不是顾问。 首先邀请他们或将角色设置为顾问。",
       "delegateNotFound": "未找到代表席位。",
       "delegateUnlinked": "该席位尚未关联代表帐户。",
-      "assigned": "为{country}指派顾问。"
+      "assigned": "为{country}指派顾问。",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "顾问：{name}",
     "saving": "保存…",
     "assignButton": "保存作业",
-    "advisorFallback": "顾问"
+    "advisorFallback": "顾问",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

@@ -1535,7 +1535,8 @@
       "notAdvisorRole": "Ten użytkownik nie jest doradcą. Zaproś ich lub najpierw ustaw rolę doradcy.",
       "delegateNotFound": "Nie znaleziono stanowiska delegata.",
       "delegateUnlinked": "To stanowisko nie ma jeszcze połączonego konta delegata.",
-      "assigned": "Przydzielony doradca do {country}."
+      "assigned": "Przydzielony doradca do {country}.",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "doradca: {name}",
     "saving": "Oszczędność…",
     "assignButton": "Zapisz zadanie",
-    "advisorFallback": "Doradca"
+    "advisorFallback": "Doradca",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

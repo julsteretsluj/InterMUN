@@ -30,12 +30,16 @@ export default async function SmtAdvisorsPage() {
     .eq("event_id", eventId)
     .order("committee");
 
+  const committeeByConferenceId = new Map((conferences ?? []).map((c) => [c.id, c.committee ?? c.name]));
+
   const { data: allocations } = await supabase
     .from("allocations")
     .select("id, country, conference_id, user_id")
     .in("conference_id", (conferences ?? []).map((c) => c.id))
     .not("user_id", "is", null)
     .order("country");
+
+  const countryByAllocationId = new Map((allocations ?? []).map((a) => [a.id, a.country]));
 
   const { data: assignments } = await supabase
     .from("advisor_delegate_assignments")
@@ -55,16 +59,18 @@ export default async function SmtAdvisorsPage() {
       <p className="mb-6 max-w-2xl text-sm text-brand-muted">{t("subtitle")}</p>
       <SmtAdvisorsClient
         adminInviteConfigured={adminInviteConfigured}
-        allocations={(allocations ?? []).map((a) => ({
+        allocationRefs={(allocations ?? []).map((a) => ({
           id: a.id,
           country: a.country,
-          conference_id: a.conference_id,
+          committee: committeeByConferenceId.get(a.conference_id) ?? "—",
         }))}
         assignments={(assignments ?? []).map((row) => {
           const profRaw = row.profiles as { name: string | null } | { name: string | null }[] | null;
           const prof = Array.isArray(profRaw) ? profRaw[0] : profRaw;
           return {
+            id: row.id,
             allocationId: row.delegate_allocation_id,
+            country: countryByAllocationId.get(row.delegate_allocation_id) ?? "—",
             advisorName: prof?.name ?? t("advisorFallback"),
           };
         })}

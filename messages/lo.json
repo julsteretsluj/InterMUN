@@ -1589,7 +1589,8 @@
       "notAdvisorRole": "ຜູ້ໃຊ້ນັ້ນບໍ່ແມ່ນທີ່ປຶກສາ. ເຊີນເຂົາເຈົ້າ ຫຼືຕັ້ງບົດບາດເປັນທີ່ປຶກສາກ່ອນ.",
       "delegateNotFound": "ບໍ່ພົບບ່ອນນັ່ງຜູ້ແທນ.",
       "delegateUnlinked": "ບ່ອນນັ່ງນັ້ນບໍ່ມີບັນຊີຕົວແທນທີ່ເຊື່ອມໂຍງເທື່ອ.",
-      "assigned": "ມອບໝາຍໃຫ້ທີ່ປຶກສາ{country}."
+      "assigned": "ມອບໝາຍໃຫ້ທີ່ປຶກສາ{country}.",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "ທີ່ປຶກສາ: {name}",
     "saving": "ກຳລັງບັນທຶກ...",
     "assignButton": "ບັນທຶກການມອບໝາຍ",
-    "advisorFallback": "ທີ່ປຶກສາ"
+    "advisorFallback": "ທີ່ປຶກສາ",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

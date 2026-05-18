@@ -8,14 +8,27 @@ import {
   type AdvisorStaffFormState,
 } from "@/app/actions/advisorStaff";
 
+export type SmtAdvisorAssignmentRow = {
+  id: string;
+  allocationId: string;
+  country: string;
+  advisorName: string;
+};
+
+export type SmtDelegateAllocationRef = {
+  id: string;
+  country: string;
+  committee: string;
+};
+
 export function SmtAdvisorsClient({
   adminInviteConfigured,
-  allocations,
+  allocationRefs,
   assignments,
 }: {
   adminInviteConfigured: boolean;
-  allocations: { id: string; country: string; conference_id: string }[];
-  assignments: { allocationId: string; advisorName: string }[];
+  allocationRefs: SmtDelegateAllocationRef[];
+  assignments: SmtAdvisorAssignmentRow[];
 }) {
   const t = useTranslations("smtAdvisorsPage");
   const [inviteState, inviteAction, invitePending] = useActionState(smtInviteAdvisorAction, null as AdvisorStaffFormState | null);
@@ -23,8 +36,6 @@ export function SmtAdvisorsClient({
     smtAssignAdvisorDelegateAction,
     null as AdvisorStaffFormState | null
   );
-
-  const assignmentByAlloc = new Map(assignments.map((a) => [a.allocationId, a.advisorName]));
 
   return (
     <div className="space-y-8">
@@ -63,16 +74,16 @@ export function SmtAdvisorsClient({
             <input type="email" name="advisor_email" required className="mun-field mt-1 w-full" />
           </label>
           <label className="text-sm">
-            <span className="font-medium text-brand-navy">{t("delegateLabel")}</span>
-            <select name="delegate_allocation_id" required className="mun-field mt-1 w-full">
-              <option value="">{t("delegatePlaceholder")}</option>
-              {allocations.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.country}
-                  {assignmentByAlloc.has(a.id) ? ` (${t("assignedTo", { name: assignmentByAlloc.get(a.id)! })})` : ""}
-                </option>
-              ))}
-            </select>
+            <span className="font-medium text-brand-navy">{t("delegateAllocationIdLabel")}</span>
+            <input
+              type="text"
+              name="delegate_allocation_id"
+              required
+              spellCheck={false}
+              autoComplete="off"
+              className="mun-field mt-1 w-full font-mono text-xs"
+              placeholder={t("delegateAllocationIdPlaceholder")}
+            />
           </label>
           <button type="submit" disabled={assignPending} className="mun-btn-primary w-fit px-4 py-2 text-sm">
             {assignPending ? t("saving") : t("assignButton")}
@@ -81,6 +92,60 @@ export function SmtAdvisorsClient({
         {assignState?.error ? <p className="mt-2 text-sm text-red-600">{assignState.error}</p> : null}
         {assignState?.success ? <p className="mt-2 text-sm text-brand-accent">{assignState.success}</p> : null}
       </section>
+
+      {assignments.length > 0 ? (
+        <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 shadow-sm">
+          <h2 className="font-display text-lg font-semibold text-brand-navy">{t("currentAssignmentsTitle")}</h2>
+          <p className="mt-1 text-sm text-brand-muted">{t("currentAssignmentsHint")}</p>
+          <div className="mt-4 overflow-x-auto rounded-xl border border-brand-navy/10">
+            <table className="w-full min-w-[32rem] text-left text-sm">
+              <thead>
+                <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-xs uppercase tracking-wide text-brand-muted">
+                  <th className="px-3 py-2">{t("colAdvisor")}</th>
+                  <th className="px-3 py-2">{t("colAllocationId")}</th>
+                  <th className="px-3 py-2">{t("colCountry")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assignments.map((row) => (
+                  <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
+                    <td className="px-3 py-2 font-medium text-brand-navy dark:text-zinc-100">{row.advisorName}</td>
+                    <td className="px-3 py-2 font-mono text-[0.7rem] text-brand-muted">{row.allocationId}</td>
+                    <td className="px-3 py-2 text-brand-navy/90 dark:text-zinc-200">{row.country}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      {allocationRefs.length > 0 ? (
+        <section className="rounded-2xl border border-brand-navy/10 bg-brand-paper p-6 shadow-sm">
+          <h2 className="font-display text-lg font-semibold text-brand-navy">{t("allocationIdsTitle")}</h2>
+          <p className="mt-1 text-sm text-brand-muted">{t("allocationIdsHint")}</p>
+          <div className="mt-4 overflow-x-auto rounded-xl border border-brand-navy/10">
+            <table className="w-full min-w-[36rem] text-left text-sm">
+              <thead>
+                <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-xs uppercase tracking-wide text-brand-muted">
+                  <th className="px-3 py-2">{t("colAllocationId")}</th>
+                  <th className="px-3 py-2">{t("colCountry")}</th>
+                  <th className="px-3 py-2">{t("colCommittee")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {allocationRefs.map((row) => (
+                  <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
+                    <td className="px-3 py-2 font-mono text-[0.7rem] text-brand-navy dark:text-zinc-100">{row.id}</td>
+                    <td className="px-3 py-2 text-brand-navy/90 dark:text-zinc-200">{row.country}</td>
+                    <td className="px-3 py-2 text-brand-muted">{row.committee}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }

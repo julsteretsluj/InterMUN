@@ -8,9 +8,16 @@ import { getTranslations } from "next-intl/server";
 
 export type AdvisorStaffFormState = { error?: string; success?: string };
 
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 function isValidEmail(raw: string): boolean {
   const e = raw.trim();
   return e.length >= 5 && e.includes("@") && !e.includes(" ");
+}
+
+function isValidAllocationId(raw: string): boolean {
+  return UUID_RE.test(raw.trim());
 }
 
 async function findAuthUserIdByEmail(
@@ -98,6 +105,7 @@ export async function smtAssignAdvisorDelegateAction(
 
   if (!isValidEmail(advisorEmail)) return { error: t("invalidAdvisorEmail") };
   if (!allocationId) return { error: t("missingDelegate") };
+  if (!isValidAllocationId(allocationId)) return { error: t("invalidAllocationId") };
 
   const auth = await requireSmt();
   if (auth.error || !auth.supabase) return { error: auth.error ?? t("unauthorized") };

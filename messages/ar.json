@@ -1535,7 +1535,8 @@
       "notAdvisorRole": "هذا المستخدم ليس مستشارا. قم بدعوتهم أو قم بتعيين دور المستشار أولاً.",
       "delegateNotFound": "لم يتم العثور على مقعد المندوب.",
       "delegateUnlinked": "هذا المقعد ليس له حساب مندوب مرتبط حتى الآن.",
-      "assigned": "المستشار المعين لـ {country}."
+      "assigned": "المستشار المعين لـ {country}.",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "المستشار: {name}",
     "saving": "توفير…",
     "assignButton": "حفظ المهمة",
-    "advisorFallback": "مستشار"
+    "advisorFallback": "مستشار",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

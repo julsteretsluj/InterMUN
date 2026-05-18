@@ -1463,7 +1463,8 @@
       "notAdvisorRole": "ผู้ใช้รายนั้นไม่ใช่ที่ปรึกษา เชิญพวกเขาหรือกำหนดบทบาทเป็นที่ปรึกษาก่อน",
       "delegateNotFound": "ไม่พบที่นั่งผู้รับมอบสิทธิ์",
       "delegateUnlinked": "ที่นั่งนั้นยังไม่มีบัญชีผู้รับมอบสิทธิ์ที่เชื่อมโยง",
-      "assigned": "มอบหมายที่ปรึกษาให้กับ {country}"
+      "assigned": "มอบหมายที่ปรึกษาให้กับ {country}",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "ที่ปรึกษา: {name}",
     "saving": "ประหยัด…",
     "assignButton": "บันทึกงาน",
-    "advisorFallback": "ที่ปรึกษา"
+    "advisorFallback": "ที่ปรึกษา",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

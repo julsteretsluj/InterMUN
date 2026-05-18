@@ -1589,7 +1589,8 @@
       "notAdvisorRole": "អ្នកប្រើប្រាស់នោះមិនមែនជាទីប្រឹក្សាទេ។ អញ្ជើញពួកគេ ឬកំណត់តួនាទីជាទីប្រឹក្សាជាមុនសិន។",
       "delegateNotFound": "រកមិនឃើញកៅអីតំណាង។",
       "delegateUnlinked": "កៅអីនោះមិនទាន់មានគណនីប្រតិភូដែលបានភ្ជាប់នៅឡើយទេ។",
-      "assigned": "ត្រូវបានចាត់តាំងជាទីប្រឹក្សា {country}។"
+      "assigned": "ត្រូវបានចាត់តាំងជាទីប្រឹក្សា {country}។",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "ទីប្រឹក្សា៖ {name}",
     "saving": "កំពុងរក្សាទុក...",
     "assignButton": "រក្សាទុកកិច្ចការ",
-    "advisorFallback": "ទីប្រឹក្សា"
+    "advisorFallback": "ទីប្រឹក្សា",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

@@ -1463,7 +1463,8 @@
       "notAdvisorRole": "সেই ব্যবহারকারী একজন উপদেষ্টা নয়। তাদের আমন্ত্রণ জানান বা প্রথমে উপদেষ্টার ভূমিকা নির্ধারণ করুন।",
       "delegateNotFound": "প্রতিনিধি আসন পাওয়া যায়নি।",
       "delegateUnlinked": "সেই আসনটিতে এখনও কোনও লিঙ্ক করা প্রতিনিধি অ্যাকাউন্ট নেই৷",
-      "assigned": "{country} এ উপদেষ্টা নিয়োগ করা হয়েছে।"
+      "assigned": "{country} এ উপদেষ্টা নিয়োগ করা হয়েছে।",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "উপদেষ্টা: {name}",
     "saving": "সংরক্ষণ করা হচ্ছে...",
     "assignButton": "অ্যাসাইনমেন্ট সংরক্ষণ করুন",
-    "advisorFallback": "উপদেষ্টা"
+    "advisorFallback": "উপদেষ্টা",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

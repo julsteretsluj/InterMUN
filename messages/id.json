@@ -1463,7 +1463,8 @@
       "notAdvisorRole": "Pengguna itu bukan penasihat. Undang mereka atau tetapkan peran sebagai penasihat terlebih dahulu.",
       "delegateNotFound": "Kursi delegasi tidak ditemukan.",
       "delegateUnlinked": "Kursi tersebut belum memiliki akun delegasi yang tertaut.",
-      "assigned": "Penasihat yang ditugaskan untuk {country}."
+      "assigned": "Penasihat yang ditugaskan untuk {country}.",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "penasihat: {name}",
     "saving": "Penghematan…",
     "assignButton": "Simpan tugas",
-    "advisorFallback": "Penasihat"
+    "advisorFallback": "Penasihat",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }

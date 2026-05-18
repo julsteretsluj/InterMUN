@@ -1535,7 +1535,8 @@
       "notAdvisorRole": "そのユーザーはアドバイザーではありません。 招待するか、最初にアドバイザーに役割を設定します。",
       "delegateNotFound": "代表席が見つかりません。",
       "delegateUnlinked": "そのシートにはまだリンクされた代理アカウントがありません。",
-      "assigned": "{country}にアドバイザーを任命。"
+      "assigned": "{country}にアドバイザーを任命。",
+      "invalidAllocationId": "Enter a valid allocation UUID."
     }
   },
   "emails": {
@@ -3320,6 +3321,16 @@
     "assignedTo": "アドバイザー: {name}",
     "saving": "保存中…",
     "assignButton": "割り当ての保存",
-    "advisorFallback": "アドバイザー"
+    "advisorFallback": "アドバイザー",
+    "delegateAllocationIdLabel": "Delegate allocation ID",
+    "delegateAllocationIdPlaceholder": "e.g. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Current assignments",
+    "currentAssignmentsHint": "All advisor–delegate links for this event.",
+    "allocationIdsTitle": "Linked delegate allocation IDs",
+    "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
+    "colAdvisor": "Advisor",
+    "colAllocationId": "Allocation ID",
+    "colCountry": "Country / seat",
+    "colCommittee": "Committee"
   }
 }
