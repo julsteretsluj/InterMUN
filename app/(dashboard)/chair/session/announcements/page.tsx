@@ -1,5 +1,5 @@
 import { MunPageShell } from "@/components/MunPageShell";
-import { SessionControlClient } from "../SessionControlClient";
+import { ChairSessionControlLoader } from "@/components/chair/ChairSessionControlLoader";
 import { loadChairSessionConference } from "../loadChairSession";
 import { SessionFloorNoCommittee } from "../SessionFloorNoCommittee";
 import { getTranslations } from "next-intl/server";
@@ -16,7 +16,7 @@ export default async function ChairSessionAnnouncementsPage() {
   }
   return (
     <MunPageShell title={t("announcements")}>
-      <SessionControlClient {...data} activeSection="announcements" />
+      <ChairSessionControlLoader {...data} activeSection="announcements" />
     </MunPageShell>
   );
 }
