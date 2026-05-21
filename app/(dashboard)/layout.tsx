@@ -49,12 +49,12 @@ export default async function DashboardLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/login");
-  }
-
   const hdrs = await headers();
   const pathname = hdrs.get("x-pathname") || "/profile";
+
+  if (!user) {
+    redirect(`/login?next=${encodeURIComponent(pathname)}`);
+  }
 
   const { data: profile } = await supabase
     .from("profiles")

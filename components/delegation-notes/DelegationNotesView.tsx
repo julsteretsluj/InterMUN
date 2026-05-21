@@ -10,6 +10,13 @@ import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import { useTranslations } from "next-intl";
 import { forwardDelegationNoteToAdvisorAction } from "@/app/actions/advisorStaff";
 import { dedupeDelegationRecipientRows, uniqueIds } from "@/lib/delegation-notes-options";
+import {
+  groupNotesByThread,
+  threadListTitle,
+  type DelegationNoteThreadMeta,
+} from "@/lib/delegation-note-threads";
+import { DelegationNoteThreadDialog } from "@/components/delegation-notes/DelegationNoteThreadDialog";
+import { DelegationNoteModerationToolbar } from "@/components/delegation-notes/DelegationNoteModerationToolbar";
 
 type NoteTopic =
   | "bloc forming"
@@ -57,6 +64,8 @@ type NoteRecipient =
 type DelegationNote = {
   id: string;
   conference_id: string;
+  thread_id: string | null;
+  reply_to_note_id: string | null;
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
@@ -96,6 +105,7 @@ export function DelegationNotesView({
   smtSecretariatCompose = false,
   composeTitle,
   onNoteCreated,
+  initialOpenThreadId = null,
 }: {
   conferenceId: string;
   initialNotes: DelegationNote[];
@@ -123,6 +133,8 @@ export function DelegationNotesView({
   smtSecretariatCompose?: boolean;
   composeTitle?: string;
   onNoteCreated?: (note: DelegationNote) => void;
+  /** Open a thread from deep link (/chats-notes?thread=…). */
+  initialOpenThreadId?: string | null;
 }) {
   const t = useTranslations("delegationNotes");
   const supabase = useMemo(() => createClient(), []);
@@ -147,6 +159,10 @@ export function DelegationNotesView({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [expandedNote, setExpandedNote] = useState<DelegationNote | null>(null);
+  const [openThreadId, setOpenThreadId] = useState<string | null>(initialOpenThreadId);
+  const [threadMetaById, setThreadMetaById] = useState<Map<string, DelegationNoteThreadMeta>>(
+    () => new Map()
+  );
 
   const isChairLike = myRole === "chair" || myRole === "admin";
   const isDelegate = myRole === "delegate";
@@ -168,6 +184,42 @@ export function DelegationNotesView({
     for (const n of notes) m.set(n.id, detectInappropriateTerms(n.content));
     return m;
   }, [notes]);
+
+  const threadGroups = useMemo(
+    () => groupNotesByThread(notes, threadMetaById),
+    [notes, threadMetaById]
+  );
+
+  const openThreadGroup = useMemo(
+    () => threadGroups.find((g) => g.threadId === openThreadId) ?? null,
+    [threadGroups, openThreadId]
+  );
+
+  const moderationLabels = useMemo(
+    () => ({
+      toolbarLabel: t("moderationToolbarLabel"),
+      star: t("star"),
+      starred: t("starred"),
+      forwardToSmt: t("forwardToSmt"),
+      forwarded: t("forwarded"),
+      forwardedToAdvisor: t("forwardedToAdvisor"),
+      report: t("report"),
+    }),
+    [t]
+  );
+
+  function moderationAdvisorForNote(n: DelegationNote) {
+    const adv = advisorForNote(n);
+    if (!adv) return null;
+    return {
+      advisorProfileId: adv.advisorProfileId,
+      forwardLabel: t("forwardToAdvisor", { name: adv.name }),
+    };
+  }
+
+  useEffect(() => {
+    if (initialOpenThreadId) setOpenThreadId(initialOpenThreadId);
+  }, [initialOpenThreadId]);
 
   const smtComposeOk = smtSecretariatCompose || smtVerified;
   const sessionOk = sessionActive || smtSecretariatCompose;
@@ -211,6 +263,8 @@ export function DelegationNotesView({
       const typedNotes = (notesData ?? []) as Array<{
         id: string;
         conference_id: string;
+        thread_id: string | null;
+        reply_to_note_id: string | null;
         topic: NoteTopic;
         content: string;
         concern_flag: boolean;
@@ -222,6 +276,23 @@ export function DelegationNotesView({
         sender_allocation_id: string | null;
         sender_profile_id: string | null;
       }>;
+
+      const threadIds = [
+        ...new Set(typedNotes.map((n) => n.thread_id).filter((id): id is string => Boolean(id))),
+      ];
+      if (threadIds.length > 0) {
+        const { data: threadRows } = await supabase
+          .from("delegation_note_threads")
+          .select("id, display_name, message_count, root_note_id")
+          .in("id", threadIds);
+        const metaMap = new Map<string, DelegationNoteThreadMeta>();
+        for (const row of (threadRows ?? []) as DelegationNoteThreadMeta[]) {
+          metaMap.set(row.id, row);
+        }
+        setThreadMetaById(metaMap);
+      } else {
+        setThreadMetaById(new Map());
+      }
 
       const noteIds = typedNotes.map((n) => n.id);
       if (noteIds.length === 0) {
@@ -315,6 +386,8 @@ export function DelegationNotesView({
         return {
           id: n.id,
           conference_id: n.conference_id,
+          thread_id: n.thread_id,
+          reply_to_note_id: n.reply_to_note_id,
           topic: n.topic,
           content: n.content,
           concern_flag: n.concern_flag,
@@ -507,6 +580,8 @@ export function DelegationNotesView({
       const newNote: DelegationNote = {
         id: inserted.id,
         conference_id: inserted.conference_id,
+        thread_id: (inserted as { thread_id?: string | null }).thread_id ?? null,
+        reply_to_note_id: null,
         topic: inserted.topic,
         content: inserted.content,
         concern_flag: inserted.concern_flag,
@@ -520,7 +595,7 @@ export function DelegationNotesView({
         starred_by_me: false,
       };
 
-      setNotes((prev) => [newNote, ...prev]);
+      await refreshNotes();
       onNoteCreated?.(newNote);
       setContent("");
       setConcernFlag(false);
@@ -593,6 +668,80 @@ export function DelegationNotesView({
       return true;
     }
     return false;
+  }
+
+  async function replyInThread(replyToNoteId: string, replyContent: string) {
+    if (sending) return;
+    setError(null);
+    if (votingProcedureLocked) {
+      setError(t("errors.votingProcedure"));
+      return;
+    }
+    if (!sessionOk) {
+      setError(t("errors.sessionInactive"));
+      return;
+    }
+    if (unmoderatedLocked) {
+      setError(t("errors.unmoderated"));
+      return;
+    }
+    if (isSmt && !smtComposeOk) {
+      setError(t("errors.smtVerify"));
+      return;
+    }
+
+    const parent = notes.find((n) => n.id === replyToNoteId);
+    const threadId = parent?.thread_id;
+    if (!parent || !threadId) {
+      setError(t("errors.sendFailed"));
+      return;
+    }
+
+    const trimmed = replyContent.trim();
+    if (!trimmed) return setError(t("errors.emptyContent"));
+
+    const senderAllo = myAllocationId;
+    const senderProfile = senderAllo ? null : isStaffLike ? myUserId : null;
+    if (!senderAllo && !senderProfile) {
+      return setError(t("errors.needAllocation"));
+    }
+
+    setSending(true);
+    try {
+      const { error: insertErr } = await supabase.from("delegation_notes").insert({
+        conference_id: conferenceId,
+        thread_id: threadId,
+        reply_to_note_id: replyToNoteId,
+        topic: parent.topic,
+        content: trimmed,
+        concern_flag: false,
+        sender_allocation_id: senderAllo,
+        sender_profile_id: senderProfile,
+      });
+      if (insertErr) throw insertErr;
+      await refreshNotes();
+    } catch (e: unknown) {
+      const message =
+        e instanceof Error
+          ? e.message
+          : typeof e === "object" && e !== null && "message" in e
+            ? ((e as SupabaseErrorLike).message ?? t("errors.sendFailed"))
+            : t("errors.sendFailed");
+      setError(message);
+    } finally {
+      setSending(false);
+    }
+  }
+
+  function handleThreadRenamed(threadId: string, displayName: string) {
+    setThreadMetaById((prev) => {
+      const next = new Map(prev);
+      const existing = next.get(threadId);
+      if (existing) {
+        next.set(threadId, { ...existing, display_name: displayName });
+      }
+      return next;
+    });
   }
 
   async function sendTestNoteToSelf() {
@@ -938,23 +1087,32 @@ export function DelegationNotesView({
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-semibold text-brand-navy">{t("notesListTitle")}</h3>
-          <p className={`text-xs ${muted}`}>{t("noteCount", { count: notes.length })}</p>
+          <p className={`text-xs ${muted}`}>{t("threadCount", { count: threadGroups.length })}</p>
         </div>
 
-        {notes.length === 0 ? (
+        {threadGroups.length === 0 ? (
           <p className={`text-sm ${muted} mt-3`}>{t("emptyList")}</p>
         ) : (
           <div className="mt-3 space-y-3">
-            {notes.map((n) => (
+            {threadGroups.map((group) => {
+              const n = group.latest;
+              const root = group.root;
+              const threadTitle = threadListTitle(group, topicLabel, t("unnamedChat"));
+              const msgCount = group.meta?.message_count ?? group.messages.length;
+              return (
               <div
-                key={n.id}
+                key={group.threadId}
                 className="mun-card-dense border-white/10"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="space-y-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider text-brand-muted">
+                      <span className="font-semibold normal-case text-brand-navy">{threadTitle}</span>
+                      <span className="rounded-full border border-brand-navy/15 px-2 py-0.5 text-[10px] font-medium">
+                        {t("messagesInThread", { count: msgCount })}
+                      </span>
+                      <span className="text-brand-muted/60">•</span>
                       <span className="font-medium normal-case text-brand-navy">
-                        {n.concern_flag ? "🚩" : "⚑"}{" "}
                         {n.sender.kind === "allocation" ? (
                           <>
                             {flagEmojiForCountryName(n.sender.country)} {n.sender.country}
@@ -966,11 +1124,11 @@ export function DelegationNotesView({
                         )}
                       </span>
                       <span className="text-brand-muted/60">•</span>
-                      <span className="text-brand-navy">{topicLabel(n.topic)}</span>
-                      {n.forwarded_to_smt ? (
+                      <span className="text-brand-navy">{topicLabel(root.topic)}</span>
+                      {root.forwarded_to_smt ? (
                         <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedBadge")}</span>
                       ) : null}
-                      {n.forwarded_to_advisor_profile_id ? (
+                      {root.forwarded_to_advisor_profile_id ? (
                         <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedToAdvisorBadge")}</span>
                       ) : null}
                     </div>
@@ -982,81 +1140,91 @@ export function DelegationNotesView({
                         {t("readerWarning")}
                       </p>
                     ) : null}
-                    {n.content.length > 280 ? (
-                      <button
-                        type="button"
-                        onClick={() => setExpandedNote(n)}
-                        className="mt-1 text-xs font-medium text-brand-accent hover:underline"
-                      >
-                        {t("viewFullNote")}
-                      </button>
-                    ) : null}
                     <div className={`mt-2 text-xs ${muted}`}>
                       {t("toLabel")}{" "}
-                      {formatRecipientSummary(n.recipients)}
+                      {formatRecipientSummary(root.recipients)}
                     </div>
                   </div>
 
-                  {isChairLike || isStaffLike ? (
-                    <div className="flex flex-col gap-2 shrink-0">
-                      {isChairLike ? (
-                        <button
-                          type="button"
-                          onClick={() => void toggleStar(n.id, !n.starred_by_me)}
-                          className="mun-btn px-2.5 py-1 text-xs"
-                        >
-                          {n.starred_by_me ? t("starred") : t("star")}
-                        </button>
-                      ) : null}
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setOpenThreadId(group.threadId)}
+                      className="mun-btn px-3 py-1.5 text-xs"
+                    >
+                      {msgCount > 1 ? t("openThread") : t("viewFullNote")}
+                    </button>
+                    {canCompose ? (
+                      <button
+                        type="button"
+                        onClick={() => setOpenThreadId(group.threadId)}
+                        className="mun-btn-primary px-3 py-1.5 text-xs"
+                      >
+                        {t("reply")}
+                      </button>
+                    ) : null}
+                  </div>
 
-                      {isStaffLike ? (
-                        <>
-                          <button
-                            type="button"
-                            onClick={() => void forwardToSmt(n.id)}
-                            disabled={n.forwarded_to_smt}
-                            className="mun-btn px-2.5 py-1 text-xs disabled:opacity-50"
-                          >
-                            {n.forwarded_to_smt ? t("forwarded") : t("forwardToSmt")}
-                          </button>
-
-                          {(() => {
-                            const adv = advisorForNote(n);
-                            if (!adv) return null;
-                            return (
-                              <button
-                                type="button"
-                                onClick={() => void forwardToAdvisor(n.id, adv.advisorProfileId)}
-                                disabled={Boolean(n.forwarded_to_advisor_profile_id)}
-                                className="mun-btn px-2.5 py-1 text-xs disabled:opacity-50"
-                                title={adv.name}
-                              >
-                                {n.forwarded_to_advisor_profile_id
-                                  ? t("forwardedToAdvisor")
-                                  : t("forwardToAdvisor", { name: adv.name })}
-                              </button>
-                            );
-                          })()}
-                        </>
-                      ) : null}
-
-                      {isChairLike ? (
-                        <button
-                          type="button"
-                          onClick={() => void reportNote(n.id)}
-                          className="mun-btn-danger px-2.5 py-1 text-xs"
-                        >
-                          {t("report")}
-                        </button>
-                      ) : null}
-                    </div>
-                  ) : null}
+                  <DelegationNoteModerationToolbar
+                    note={root}
+                    isChairLike={isChairLike}
+                    isStaffLike={isStaffLike}
+                    advisor={moderationAdvisorForNote(root)}
+                    onStar={(id, starred) => void toggleStar(id, starred)}
+                    onForwardSmt={(id) => void forwardToSmt(id)}
+                    onForwardAdvisor={(id, advisorId) => void forwardToAdvisor(id, advisorId)}
+                    onReport={(id) => void reportNote(id)}
+                    labels={moderationLabels}
+                  />
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
+      ) : null}
+      {openThreadGroup ? (
+        <DelegationNoteThreadDialog
+          group={openThreadGroup}
+          topicLabel={topicLabel}
+          formatRecipientSummary={formatRecipientSummary}
+          canReply={canCompose}
+          sending={sending}
+          onClose={() => setOpenThreadId(null)}
+          onReply={replyInThread}
+          onThreadRenamed={handleThreadRenamed}
+          moderation={
+            isChairLike || isStaffLike
+              ? {
+                  rootNote: openThreadGroup.root,
+                  isChairLike,
+                  isStaffLike,
+                  advisor: moderationAdvisorForNote(openThreadGroup.root),
+                  onStar: (id, starred) => void toggleStar(id, starred),
+                  onForwardSmt: (id) => void forwardToSmt(id),
+                  onForwardAdvisor: (id, advisorId) => void forwardToAdvisor(id, advisorId),
+                  onReport: (id) => void reportNote(id),
+                  labels: moderationLabels,
+                }
+              : undefined
+          }
+          labels={{
+            close: t("close"),
+            reply: t("reply"),
+            replyPlaceholder: t("replyPlaceholder"),
+            sendReply: t("sendReply"),
+            sending: t("sending"),
+            readerWarning: t("readerWarning"),
+            nameChat: t("nameChat"),
+            nameChatHint: t("nameChatHint"),
+            nameChatPlaceholder: t("nameChatPlaceholder"),
+            saveChatName: t("saveChatName"),
+            messageCount: t("messageCount"),
+            unnamedChat: t("unnamedChat"),
+            errors: { emptyReply: t("errors.emptyContent") },
+          }}
+        />
       ) : null}
       {expandedNote ? (
         <div

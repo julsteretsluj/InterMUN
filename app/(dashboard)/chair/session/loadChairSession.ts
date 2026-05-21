@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getConferenceForDashboard } from "@/lib/active-conference";
@@ -19,10 +20,11 @@ export type ChairSessionConference = {
  */
 export async function loadChairSessionConference(): Promise<ChairSessionConference | null> {
   const supabase = await createClient();
+  const pathname = (await headers()).get("x-pathname") || "/chair/session";
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  if (!user) redirect(`/login?next=${encodeURIComponent(pathname)}`);
 
   const { data: profile } = await supabase
     .from("profiles")

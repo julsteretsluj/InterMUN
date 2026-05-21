@@ -53,6 +53,8 @@ type NoteRecipient =
 type InitialDelegationNote = {
   id: string;
   conference_id: string;
+  thread_id: string | null;
+  reply_to_note_id: string | null;
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
@@ -74,11 +76,11 @@ function isDaisAllocationCountry(country: string): boolean {
 export default async function ChatsNotesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ forProfile?: string }>;
+  searchParams: Promise<{ forProfile?: string; thread?: string }>;
 }) {
   const t = await getTranslations("pageTitles");
   const tDn = await getTranslations("delegationNotes");
-  const { forProfile } = await searchParams;
+  const { forProfile, thread: initialThreadId } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
@@ -320,6 +322,8 @@ export default async function ChatsNotesPage({
     return {
       id: n.id,
       conference_id: n.conference_id,
+      thread_id: (n as { thread_id?: string | null }).thread_id ?? null,
+      reply_to_note_id: (n as { reply_to_note_id?: string | null }).reply_to_note_id ?? null,
       topic: n.topic,
       content: n.content,
       concern_flag: n.concern_flag,
@@ -351,6 +355,7 @@ export default async function ChatsNotesPage({
         initialSelectedAllocationRecipientIds={initialSelectedAllocationRecipientIds}
         initialSelectedChairRecipientIds={initialSelectedChairRecipientIds}
         advisorByAllocationId={advisorByAllocationId}
+        initialOpenThreadId={initialThreadId ?? null}
       />
     </MunPageShell>
   );

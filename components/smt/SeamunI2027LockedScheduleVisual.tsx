@@ -28,6 +28,7 @@ import {
   seamunScheduleGroupForColumnHeader,
   type SeamunAdvisorId,
 } from "@/lib/seamun-i-2027-advisor-schedules";
+import { CanteenLeaveNotice } from "@/components/schedule/CanteenLeaveNotice";
 import { SeamunLunchOverlapCompare } from "@/components/schedule/SeamunLunchOverlapCompare";
 
 const AXIS_RANGE = SEAMUN_I_2027_AXIS_END_MIN - SEAMUN_I_2027_AXIS_START_MIN;
@@ -455,6 +456,8 @@ export function SeamunI2027LockedScheduleVisual({
           </span>
         ))}
       </div>
+
+      <CanteenLeaveNotice className="mb-5" />
 
       {awaitingSelection ? (
         <p className="mb-4 rounded-lg border border-dashed border-brand-navy/15 bg-brand-cream/30 px-4 py-6 text-center text-sm text-brand-muted">

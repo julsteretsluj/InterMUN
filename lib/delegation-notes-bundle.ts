@@ -10,6 +10,8 @@ export type NoteTopic =
 type DelegationNoteRow = {
   id: string;
   conference_id: string;
+  thread_id: string | null;
+  reply_to_note_id: string | null;
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
@@ -41,6 +43,8 @@ export type NoteRecipient =
 export type DelegationNoteBundleItem = {
   id: string;
   conference_id: string;
+  thread_id: string | null;
+  reply_to_note_id: string | null;
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
@@ -222,6 +226,8 @@ export async function loadDelegationNotesBundle(
     return {
       id: n.id,
       conference_id: n.conference_id,
+      thread_id: n.thread_id ?? null,
+      reply_to_note_id: n.reply_to_note_id ?? null,
       topic: n.topic,
       content: n.content,
       concern_flag: n.concern_flag,

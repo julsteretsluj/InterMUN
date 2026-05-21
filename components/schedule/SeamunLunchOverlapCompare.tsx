@@ -8,6 +8,7 @@ import {
   SEAMUN_MAX_LUNCH_COMPARE_COMMITTEES,
 } from "@/lib/seamun-i-2027-lunch-overlap";
 import { seamunAllScheduleCommittees } from "@/lib/seamun-i-2027-advisor-schedules";
+import { CanteenLeaveNotice } from "@/components/schedule/CanteenLeaveNotice";
 
 export function SeamunLunchOverlapCompare({
   primaryCommittee,
@@ -38,6 +39,19 @@ export function SeamunLunchOverlapCompare({
     [overlapDay, primaryKey, selected]
   );
 
+  function formatPeriod(
+    start: string,
+    end: string,
+    eat: { start: string; end: string } | null,
+    chill: { start: string; end: string } | null
+  ) {
+    const parts: string[] = [];
+    if (eat) parts.push(t("eatingWindow", { start: eat.start, end: eat.end }));
+    if (chill) parts.push(t("chillingWindow", { start: chill.start, end: chill.end }));
+    const detail = parts.length > 0 ? parts.join(" · ") : null;
+    return { combined: t("combinedWindow", { start, end }), detail };
+  }
+
   function toggleCommittee(ch: string) {
     setSelected((prev) => {
       const norm = ch.trim().toLowerCase();
@@ -53,7 +67,8 @@ export function SeamunLunchOverlapCompare({
     <div className="mt-8 border-t border-brand-navy/10 pt-6">
       <h3 className="font-display text-base font-semibold text-brand-navy dark:text-zinc-100">{t("title")}</h3>
       <p className="mt-1 text-xs text-brand-muted">{t("body", { max: SEAMUN_MAX_LUNCH_COMPARE_COMMITTEES })}</p>
-      <p className="mt-2 text-sm font-semibold text-brand-navy dark:text-zinc-100">{primaryKey}</p>
+      <CanteenLeaveNotice className="mt-4" />
+      <p className="mt-4 text-sm font-semibold text-brand-navy dark:text-zinc-100">{primaryKey}</p>
 
       <div className="mt-4 flex flex-wrap gap-1 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/60 p-0.5 dark:bg-black/25">
         {([1, 2] as const).map((d) => (
@@ -110,10 +125,34 @@ export function SeamunLunchOverlapCompare({
               className="rounded-xl border border-brand-navy/10 bg-brand-cream/20 px-4 py-3 text-sm dark:bg-black/20"
             >
               <p className="font-semibold text-brand-navy dark:text-zinc-100">{row.compareCommittee}</p>
-              <p className="mt-1 text-xs text-brand-muted">
-                {t("yourLunch")}: {row.primaryStart}–{row.primaryEnd} · {t("theirLunch")}: {row.compareStart}–
-                {row.compareEnd}
-              </p>
+              {(() => {
+                const yours = formatPeriod(
+                  row.primaryStart,
+                  row.primaryEnd,
+                  row.primaryEat,
+                  row.primaryChill
+                );
+                const theirs = formatPeriod(
+                  row.compareStart,
+                  row.compareEnd,
+                  row.compareEat,
+                  row.compareChill
+                );
+                return (
+                  <div className="mt-1 space-y-1 text-xs text-brand-muted">
+                    <p>
+                      <span className="font-medium text-brand-navy dark:text-zinc-200">{t("yourLunch")}:</span>{" "}
+                      {yours.combined}
+                    </p>
+                    {yours.detail ? <p className="pl-0.5">{yours.detail}</p> : null}
+                    <p>
+                      <span className="font-medium text-brand-navy dark:text-zinc-200">{t("theirLunch")}:</span>{" "}
+                      {theirs.combined}
+                    </p>
+                    {theirs.detail ? <p className="pl-0.5">{theirs.detail}</p> : null}
+                  </div>
+                );
+              })()}
               {row.overlapMinutes > 0 && row.overlapStart && row.overlapEnd ? (
                 <p className="mt-1.5 text-sm font-medium text-emerald-800 dark:text-emerald-200">
                   {t("overlap", {
