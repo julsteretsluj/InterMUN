@@ -133,9 +133,9 @@ export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }
   return (
     <section
       id="countdown"
-      className="scroll-mt-24 rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
+      className="dashboard-panel scroll-mt-24 h-full dark:border-zinc-700 dark:bg-zinc-900/80"
     >
-      <h2 className="font-display text-lg font-semibold text-slate-900 dark:text-zinc-50">
+      <h2 className="dashboard-panel-title">
         ⏱️ {t("title")}
       </h2>
       <p className="mt-1 text-sm text-slate-600 dark:text-zinc-400">

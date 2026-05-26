@@ -134,16 +134,16 @@ function ChairNavRow({
         "discord-interactive-hover flex w-full min-w-0 items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
         isActive
-          ? "font-semibold text-brand-navy"
-          : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
+          ? "dashboard-nav-active text-[var(--accent)]"
+          : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
       <span
         className={cn(
           "flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent",
           isActive
-            ? "border-[color:color-mix(in_srgb,var(--accent)_55%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_18%,transparent)_inset]"
-            : "bg-transparent"
+            ? "border-transparent bg-[color:color-mix(in_srgb,var(--accent)_18%,#ffffff)]"
+            : "bg-[color:color-mix(in_srgb,var(--color-text)_4%,#ffffff)]"
         )}
         aria-hidden
       >

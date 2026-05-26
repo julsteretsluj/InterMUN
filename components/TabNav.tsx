@@ -135,8 +135,8 @@ function AspireSidebarLink({
       className={cn(
         "flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
         isActive
-          ? "bg-[var(--accent)] font-semibold text-white"
-          : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
+          ? "dashboard-nav-active font-semibold"
+          : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
       <span className="text-base leading-none" aria-hidden>{tab.emoji}</span>

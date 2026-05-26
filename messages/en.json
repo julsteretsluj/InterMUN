@@ -1551,6 +1551,7 @@
     "forwardedBadge": "(forwarded)",
     "readerWarning": "Reader warning: this note may contain inappropriate language.",
     "viewFullNote": "View full note",
+    "fromLabel": "From:",
     "toLabel": "To:",
     "toEmpty": "—",
     "star": "Star",

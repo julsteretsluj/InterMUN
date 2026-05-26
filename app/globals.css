@@ -31,8 +31,14 @@ html {
   --dur-base: 220ms;
   --dur-slow: 320ms;
 
+  /* —— Soft dashboard (light) —— */
+  --dashboard-cream: #f9f7f2;
+  --dashboard-card: #ffffff;
+  --dashboard-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.08);
+  --dashboard-shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.05), 0 12px 28px -10px rgba(15, 23, 42, 0.1);
+
   /* —— Apple system colors (light / sRGB) —— */
-  --system-blue: #007aff;
+  --system-blue: #2563eb;
   --system-green: #34c759;
   --system-red: #ff3b30;
   --system-orange: #ff9500;
@@ -43,24 +49,24 @@ html {
   --system-indigo: #5856d6;
 
   /* —— Materials (vibrancy — used with backdrop-blur + saturate) —— */
-  --material-chrome: rgba(246, 246, 248, 0.72);
-  --material-thin: rgba(255, 255, 255, 0.55);
-  --material-regular: rgba(255, 255, 255, 0.72);
-  --material-thick: rgba(255, 255, 255, 0.86);
-  --material-popover: rgba(252, 252, 254, 0.78);
+  --material-chrome: var(--dashboard-card);
+  --material-thin: var(--dashboard-card);
+  --material-regular: var(--dashboard-card);
+  --material-thick: var(--dashboard-card);
+  --material-popover: var(--dashboard-card);
 
-  /* —— iOS hairline separators (opaque) —— */
-  --hairline: rgba(60, 60, 67, 0.18);
-  --hairline-strong: rgba(60, 60, 67, 0.29);
+  /* —— Hairline separators —— */
+  --hairline: rgba(15, 23, 42, 0.08);
+  --hairline-strong: rgba(15, 23, 42, 0.14);
 
-  /* —— macOS Sequoia / Finder window chrome —— */
-  --sidebar-material: rgba(232, 232, 237, 0.78);
-  --content-material: rgba(255, 255, 255, 0.74);
-  --toolbar-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.18) 100%);
+  /* —— Dashboard chrome —— */
+  --sidebar-material: var(--dashboard-card);
+  --content-material: var(--dashboard-cream);
+  --toolbar-gradient: none;
   --titlebar-shadow: 0 1px 0 var(--hairline);
-  --window-radius: 18px;
-  --window-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  --desktop-bg: radial-gradient(1200px 600px at 70% -10%, color-mix(in srgb, var(--accent) 8%, var(--color-bg-page)) 0%, var(--color-bg-page) 60%);
+  --window-radius: 0px;
+  --window-shadow: none;
+  --desktop-bg: var(--dashboard-cream);
 
   /* —— Logo spectrum (decorative only; avoid mixing into body text) —— */
   --logo-cyan: #00ccff;
@@ -72,10 +78,10 @@ html {
 
   /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
   --accent: var(--system-blue);
-  --accent-bright: #5ac8fa;
+  --accent-bright: #3b82f6;
 
-  /* —— PAGE (iOS systemGroupedBackground) —— */
-  --color-bg-page: #f2f2f7;
+  /* —— PAGE —— */
+  --color-bg-page: var(--dashboard-cream);
   --background: var(--color-bg-page);
   --foreground: #1c1c1e;
 
@@ -128,7 +134,7 @@ html {
   --discord-blurple-hover: color-mix(in srgb, var(--accent) 88%, #ffffff);
   --discord-muted: var(--color-text-muted);
   --discord-hover-bg: color-mix(in srgb, var(--color-text) 6%, transparent);
-  --discord-active-bg: color-mix(in srgb, var(--accent) 16%, var(--color-bg-page));
+  --discord-active-bg: color-mix(in srgb, var(--accent) 12%, #ffffff);
   --discord-input: var(--material-thin);
 
   color-scheme: light;
@@ -508,6 +514,9 @@ html.theme-neutral.dark body {
   background-color: var(--material-chrome);
   background-image: var(--toolbar-gradient);
 }
+html:not(.dark) .mun-toolbar-titlebar {
+  @apply border-b border-[var(--hairline)] bg-white shadow-sm;
+}
 
 /* Apple-style focus (blue halo) */
 :focus-visible {
@@ -557,40 +566,72 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--accent) 20%, var(--material-thick));
   }
 
+  .dashboard-panel {
+    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
+  }
+  html.dark .dashboard-panel {
+    @apply border-[var(--hairline)] bg-[var(--material-thick)] shadow-[0_8px_28px_-14px_rgba(0,0,0,0.55)];
+  }
+
+  .dashboard-panel-title {
+    @apply font-display text-lg font-semibold tracking-tight text-brand-navy md:text-xl;
+  }
+
+  .dashboard-nav-active {
+    @apply bg-[var(--discord-active-bg)] font-semibold text-[var(--accent)];
+  }
+
+  .dashboard-status-badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .dashboard-status-badge--info {
+    @apply border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] text-[var(--accent)];
+  }
+  .dashboard-status-badge--success {
+    @apply border-emerald-200 bg-emerald-50 text-emerald-800;
+  }
+  .dashboard-status-badge--warning {
+    @apply border-amber-200 bg-amber-50 text-amber-900;
+  }
+
+  .note-avatar {
+    @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold;
+  }
+
   .mun-shell {
-    @apply relative overflow-hidden p-5 text-brand-navy transition-[box-shadow,background-color,border-color,transform] md:p-7;
+    @apply relative overflow-hidden p-0 text-brand-navy;
     @apply [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)];
-    border-radius: var(--radius-2xl);
-    border: 1px solid var(--hairline);
-    background: var(--material-thick);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 8px 24px -16px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 
   html.dark .mun-shell {
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 10px 32px -14px rgba(0, 0, 0, 0.65);
+    @apply rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] p-5 shadow-[0_10px_32px_-14px_rgba(0,0,0,0.65)] md:p-7;
   }
 
   .mun-shell-title {
-    @apply mb-5 font-display text-[1.75rem] font-semibold text-brand-navy;
-    @apply tracking-[-0.02em] md:text-[2rem];
+    @apply mb-4 font-display text-xl font-semibold text-brand-navy;
+    @apply tracking-tight md:text-2xl;
+  }
+  html.dark .mun-shell-title {
+    @apply mb-5 text-[1.75rem] md:text-[2rem] tracking-[-0.02em];
   }
 
   .mun-card {
-    @apply relative overflow-hidden p-4 text-brand-navy transition-[box-shadow,background-color,border-color,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--hairline);
-    background: var(--material-thick);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 6px 20px -14px rgba(0, 0, 0, 0.18);
+    @apply relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-5 text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)] md:p-6;
   }
   html.dark .mun-card {
+    @apply border-[var(--hairline)] bg-[var(--material-thick)];
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 8px 28px -14px rgba(0, 0, 0, 0.55);
   }
 
   .mun-card-dense {
-    @apply p-3 text-sm text-brand-navy transition-[box-shadow,background-color,border-color,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
-    border-radius: var(--radius-md);
-    border: 1px solid var(--hairline);
-    background: var(--material-thin);
+    @apply rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-card)] p-4 text-sm text-brand-navy shadow-[var(--dashboard-shadow)] transition-[box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-apple)];
+  }
+  html.dark .mun-card-dense {
+    @apply rounded-[var(--radius-md)] bg-[var(--material-thin)] shadow-none;
   }
 
   .mun-inset {

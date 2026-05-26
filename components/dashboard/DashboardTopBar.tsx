@@ -79,7 +79,7 @@ export function DashboardTopBar({
   return (
     <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 shadow-[var(--titlebar-shadow)] [transition:backdrop-filter_200ms_var(--ease-apple)]">
       <div className="flex w-full flex-wrap items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-6 sm:py-1.5">
-        <div className="hidden h-5 items-center gap-1.5 pl-1 pr-2 lg:inline-flex" aria-hidden>
+        <div className="hidden h-5 items-center gap-1.5 pl-1 pr-2 lg:dark:inline-flex" aria-hidden>
           <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
           <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
           <span className="h-3 w-3 rounded-full bg-[#28C840]" />

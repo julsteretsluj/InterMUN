@@ -101,35 +101,62 @@ export default async function DelegateDashboardPage({
 
   return (
     <MunPageShell title={tp("delegateDashboard")}>
-      <div className="space-y-5">
-        <header className="space-y-2">
-          <h1 className="font-display text-[1.85rem] font-semibold text-brand-navy">
+      <div className="space-y-6">
+        <header className="dashboard-panel !p-5 md:!p-6">
+          <p className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{line}</p>
+          <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-brand-navy md:text-[1.65rem]">
             {td("welcome", { flag: countryFlag, country: countryLabel })}
           </h1>
-          <p className="text-sm text-brand-muted">
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-brand-muted">
             {td("activeCommitteeIntro", { line })}{" "}
             {td("activeCommitteeBody")}
           </p>
+          <div className="mt-3">
+            <span className="dashboard-status-badge dashboard-status-badge--info">{tc("committee")}</span>
+          </div>
         </header>
 
-        <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={td("tabs.ariaLabel")}>
+        <div className="flex flex-wrap gap-1 border-b border-[var(--hairline)]" role="tablist" aria-label={td("tabs.ariaLabel")}>
           {dashboardTabs.map((tabItem) => (
             <Link
               href={tabItem.id === "overview" ? "/delegate" : `/delegate?tab=${encodeURIComponent(tabItem.id)}`}
               key={tabItem.id}
               role="tab"
               aria-selected={activeTab === tabItem.id}
-              className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              className={`rounded-t-xl px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
                 activeTab === tabItem.id
-                  ? "border-brand-accent text-brand-navy bg-brand-paper"
-                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+                  ? "border-[var(--accent)] text-[var(--accent)] bg-white"
+                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-white/60"
               }`}
             >
               {tabItem.label}
             </Link>
           ))}
         </div>
-        {activeTab === "overview" ? <DelegateCountdownCard conferenceId={conferenceId} /> : null}
+        {activeTab === "overview" ? (
+          <div className="grid gap-4 lg:grid-cols-2">
+            <DelegateCountdownCard conferenceId={conferenceId} />
+            <section className="dashboard-panel flex flex-col justify-between gap-4">
+              <div>
+                <h2 className="dashboard-panel-title">{td("jumpTo")}</h2>
+                <p className="mt-1 text-sm text-brand-muted">{td("activeCommitteeBody")}</p>
+              </div>
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {tiles.slice(0, 4).map((tile) => (
+                  <li key={tile.href + tile.label}>
+                    <Link
+                      href={tile.href}
+                      className="flex h-full flex-col rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-cream)] px-3.5 py-3 transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:shadow-[var(--dashboard-shadow-hover)]"
+                    >
+                      <span className="font-semibold text-brand-navy">{tile.label}</span>
+                      <span className="mt-0.5 text-xs text-brand-muted">{tile.hint}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        ) : null}
         {activeTab === "checklist" ? <RoleSetupChecklist role="delegate" /> : null}
         {activeTab === "jump" ? (
         <div>
@@ -139,7 +166,7 @@ export default async function DelegateDashboardPage({
               <li key={tile.href + tile.label}>
                 <Link
                   href={tile.href}
-                  className="block rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 shadow-sm transition hover:border-brand-accent/45 hover:bg-brand-accent/8 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
+                  className="block rounded-xl border border-[var(--hairline)] bg-white px-3.5 py-3 shadow-[var(--dashboard-shadow)] transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:shadow-[var(--dashboard-shadow-hover)] dark:border-zinc-700 dark:bg-zinc-900/80"
                 >
                   <span className="font-semibold text-brand-navy dark:text-zinc-50">{tile.label}</span>
                   <span className="mt-0.5 block text-xs text-brand-muted dark:text-zinc-400">{tile.hint}</span>

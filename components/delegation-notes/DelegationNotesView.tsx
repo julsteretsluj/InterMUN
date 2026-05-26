@@ -17,6 +17,7 @@ import {
 } from "@/lib/delegation-note-threads";
 import { DelegationNoteThreadDialog } from "@/components/delegation-notes/DelegationNoteThreadDialog";
 import { DelegationNoteModerationToolbar } from "@/components/delegation-notes/DelegationNoteModerationToolbar";
+import { avatarToneClass, displayInitials } from "@/lib/ui/avatar-chip";
 
 type NoteTopic =
   | "bloc forming"
@@ -881,11 +882,11 @@ export function DelegationNotesView({
   const field = "mun-field";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
       <div className={card}>
-        <h3 className="mb-3 font-semibold text-brand-navy">{composeTitle ?? t("title")}</h3>
+        <h3 className="dashboard-panel-title mb-4">{composeTitle ?? t("title")}</h3>
 
-        <div className="grid grid-cols-1 2xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 2xl:grid-cols-1">
           <div className="2xl:col-span-2 space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <label className={labelStrong}>{t("topicLabel")}</label>
@@ -1084,9 +1085,9 @@ export function DelegationNotesView({
 
       {!composeOnly ? (
 
-      <div className={card}>
+      <div className={`${card} lg:col-span-2`}>
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-semibold text-brand-navy">{t("notesListTitle")}</h3>
+          <h3 className="dashboard-panel-title">{t("notesListTitle")}</h3>
           <p className={`text-xs ${muted}`}>{t("threadCount", { count: threadGroups.length })}</p>
         </div>
 
@@ -1100,39 +1101,49 @@ export function DelegationNotesView({
               const threadTitle = threadListTitle(group, topicLabel, t("unnamedChat"));
               const msgCount = group.meta?.message_count ?? group.messages.length;
               return (
-              <div
-                key={group.threadId}
-                className="mun-card-dense border-white/10"
-              >
-                <div className="space-y-3">
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider text-brand-muted">
-                      <span className="font-semibold normal-case text-brand-navy">{threadTitle}</span>
-                      <span className="rounded-full border border-brand-navy/15 px-2 py-0.5 text-[10px] font-medium">
-                        {t("messagesInThread", { count: msgCount })}
-                      </span>
-                      <span className="text-brand-muted/60">•</span>
-                      <span className="font-medium normal-case text-brand-navy">
-                        {n.sender.kind === "allocation" ? (
-                          <>
-                            {flagEmojiForCountryName(n.sender.country)} {n.sender.country}
-                          </>
-                        ) : (
-                          <>
-                            🏳️ {n.sender.name}
-                          </>
-                        )}
-                      </span>
-                      <span className="text-brand-muted/60">•</span>
-                      <span className="text-brand-navy">{topicLabel(root.topic)}</span>
-                      {root.forwarded_to_smt ? (
-                        <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedBadge")}</span>
-                      ) : null}
-                      {root.forwarded_to_advisor_profile_id ? (
-                        <span className="ml-2 font-semibold text-brand-accent-bright">{t("forwardedToAdvisorBadge")}</span>
-                      ) : null}
+              <div key={group.threadId} className="mun-card-dense">
+                <div className="flex gap-3">
+                  <div
+                    className={`note-avatar ${avatarToneClass(
+                      n.sender.kind === "allocation" ? n.sender.country : n.sender.name
+                    )}`}
+                    aria-hidden
+                  >
+                    {n.sender.kind === "allocation"
+                      ? displayInitials(n.sender.country)
+                      : displayInitials(n.sender.name)}
+                  </div>
+                  <div className="min-w-0 flex-1 space-y-2">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div>
+                        <p className="text-sm font-semibold text-brand-navy">{threadTitle}</p>
+                        <p className="mt-0.5 text-xs text-brand-muted">
+                          <span className="font-medium text-brand-navy/90">
+                            {t("fromLabel")}{" "}
+                            {n.sender.kind === "allocation" ? (
+                              <>
+                                {flagEmojiForCountryName(n.sender.country)} {n.sender.country}
+                              </>
+                            ) : (
+                              n.sender.name
+                            )}
+                          </span>
+                          <span className="mx-1.5 text-brand-muted/50">·</span>
+                          <span>
+                            {t("toLabel")} {formatRecipientSummary(root.recipients)}
+                          </span>
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap items-center justify-end gap-1.5">
+                        <span className="dashboard-status-badge dashboard-status-badge--info text-[10px]">
+                          {topicLabel(root.topic)}
+                        </span>
+                        <span className="text-[11px] text-brand-muted">
+                          {t("messageCount", { count: msgCount })}
+                        </span>
+                      </div>
                     </div>
-                    <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">
+                    <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-brand-navy">
                       {n.content.length > 280 ? `${n.content.slice(0, 280)}…` : n.content}
                     </div>
                     {noteModerationById.get(n.id)?.length ? (
@@ -1140,42 +1151,36 @@ export function DelegationNotesView({
                         {t("readerWarning")}
                       </p>
                     ) : null}
-                    <div className={`mt-2 text-xs ${muted}`}>
-                      {t("toLabel")}{" "}
-                      {formatRecipientSummary(root.recipients)}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setOpenThreadId(group.threadId)}
-                      className="mun-btn px-3 py-1.5 text-xs"
-                    >
-                      {msgCount > 1 ? t("openThread") : t("viewFullNote")}
-                    </button>
-                    {canCompose ? (
+                    <div className="flex flex-wrap gap-2 pt-1">
                       <button
                         type="button"
                         onClick={() => setOpenThreadId(group.threadId)}
-                        className="mun-btn-primary px-3 py-1.5 text-xs"
+                        className="mun-btn px-3 py-1.5 text-xs"
                       >
-                        {t("reply")}
+                        {msgCount > 1 ? t("openThread") : t("viewFullNote")}
                       </button>
-                    ) : null}
+                      {canCompose ? (
+                        <button
+                          type="button"
+                          onClick={() => setOpenThreadId(group.threadId)}
+                          className="mun-btn-primary px-3 py-1.5 text-xs"
+                        >
+                          {t("reply")}
+                        </button>
+                      ) : null}
+                    </div>
+                    <DelegationNoteModerationToolbar
+                      note={root}
+                      isChairLike={isChairLike}
+                      isStaffLike={isStaffLike}
+                      advisor={moderationAdvisorForNote(root)}
+                      onStar={(id, starred) => void toggleStar(id, starred)}
+                      onForwardSmt={(id) => void forwardToSmt(id)}
+                      onForwardAdvisor={(id, advisorId) => void forwardToAdvisor(id, advisorId)}
+                      onReport={(id) => void reportNote(id)}
+                      labels={moderationLabels}
+                    />
                   </div>
-
-                  <DelegationNoteModerationToolbar
-                    note={root}
-                    isChairLike={isChairLike}
-                    isStaffLike={isStaffLike}
-                    advisor={moderationAdvisorForNote(root)}
-                    onStar={(id, starred) => void toggleStar(id, starred)}
-                    onForwardSmt={(id) => void forwardToSmt(id)}
-                    onForwardAdvisor={(id, advisorId) => void forwardToAdvisor(id, advisorId)}
-                    onReport={(id) => void reportNote(id)}
-                    labels={moderationLabels}
-                  />
                 </div>
               </div>
               );

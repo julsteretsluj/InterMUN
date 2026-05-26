@@ -166,9 +166,9 @@ export default async function DashboardLayout({
 
 
   return (
-    <div className="min-h-screen bg-[var(--desktop-bg)] lg:p-3">
-      <div className="flex min-h-screen w-full min-w-0 flex-col bg-[var(--color-bg-page)] lg:min-h-[calc(100vh-1.5rem)] lg:max-h-screen lg:overflow-hidden lg:rounded-[var(--window-radius)] lg:border lg:border-[var(--hairline)] lg:shadow-[var(--window-shadow)] lg:flex-row">
-      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden bg-[var(--sidebar-material)] shadow-[inset_-1px_0_0_0_var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex">
+    <div className="min-h-screen bg-[var(--desktop-bg)]">
+      <div className="dashboard-app-frame flex min-h-screen w-full min-w-0 flex-col bg-[var(--color-bg-page)] lg:min-h-screen lg:flex-row">
+      <aside className="group relative sticky top-0 z-30 hidden h-screen w-[92px] hover:w-[236px] shrink-0 flex-col overflow-hidden border-r border-[var(--hairline)] bg-[var(--sidebar-material)] transition-[width] [transition-duration:var(--dur-base)] [transition-timing-function:var(--ease-apple)] lg:flex dark:shadow-[inset_-1px_0_0_0_var(--hairline)] dark:backdrop-blur-2xl dark:backdrop-saturate-150">
         <Link
           href={
             isChairRole(effectiveRole) ? "/chair" : isAdvisorRole(effectiveRole) ? "/advisor" : "/delegate"
@@ -223,7 +223,7 @@ export default async function DashboardLayout({
         ) : null}
       </aside>
 
-      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] backdrop-blur-xl backdrop-saturate-150 lg:min-h-0">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col bg-[var(--content-material)] lg:min-h-0 dark:backdrop-blur-xl dark:backdrop-saturate-150">
         <DashboardTopBar
           userName={displayName}
           userEmail={userEmail}
@@ -240,7 +240,7 @@ export default async function DashboardLayout({
         <DashboardAnnouncementPopup />
         <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
           {activeConf?.id && showsDaisTools(effectiveRole) ? (
-            <div className="mb-4 border-y border-[var(--hairline)] bg-[var(--material-thick)] px-4 py-3 backdrop-blur-xl sm:px-6">
+            <div className="mb-4 border-y border-[var(--hairline)] bg-white px-4 py-3 shadow-sm sm:px-6 dark:bg-[var(--material-thick)] dark:backdrop-blur-xl">
               <div className="w-full">
                 <ChairLiveFloorThemed
                   conferenceId={liveFloorConferenceId ?? activeConf.id}
