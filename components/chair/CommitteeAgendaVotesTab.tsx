@@ -212,6 +212,12 @@ export function CommitteeAgendaVotesTab({
 
   const committeeTrim = committeeLabelRaw?.trim() ?? "";
 
+  function handleAgendaTopicPassed(topicConferenceId: string) {
+    if (!topicConferenceId) return;
+    onSetLiveTopic(topicConferenceId);
+    setSelectedId(topicConferenceId);
+  }
+
   return (
     <div className="space-y-4">
       <p className="text-xs text-brand-muted max-w-2xl">{t("agendaTabHelp")}</p>
@@ -390,6 +396,7 @@ export function CommitteeAgendaVotesTab({
                 voteItems={modalVoteItems}
                 myRole={myRole}
                 forceManageVotes
+                onAgendaTopicPassed={handleAgendaTopicPassed}
               />
             </div>
           </div>

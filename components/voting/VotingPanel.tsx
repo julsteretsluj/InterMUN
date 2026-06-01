@@ -36,6 +36,7 @@ export function VotingPanel({
   myRole,
   includeUnseatedDelegatePlacards = true,
   forceManageVotes = false,
+  onAgendaTopicPassed,
 }: {
   voteItems: VoteItem[];
   myRole: string;
@@ -43,6 +44,8 @@ export function VotingPanel({
   includeUnseatedDelegatePlacards?: boolean;
   /** Force-enable chair controls in contexts that are already chair-only (e.g. chair session agenda modal). */
   forceManageVotes?: boolean;
+  /** Optional callback fired when an agenda-setting ballot is closed and passes. */
+  onAgendaTopicPassed?: (topicConferenceId: string) => void;
 }) {
   const locale = useLocale();
   const t = useTranslations("voting");
@@ -198,11 +201,18 @@ export function VotingPanel({
   }
 
   async function setClosed(itemId: string, closed: boolean) {
+    const item = voteItems.find((v) => v.id === itemId);
     const { error } = await supabase
       .from("vote_items")
       .update({ closed_at: closed ? new Date().toISOString() : null })
       .eq("id", itemId);
     if (error) return;
+    if (closed && item && isAgendaFloorVoteItem(item)) {
+      const result = getResult(item);
+      if (result.total > 0 && result.passes) {
+        onAgendaTopicPassed?.(item.conference_id);
+      }
+    }
     location.reload();
   }
 
@@ -515,7 +525,9 @@ export function VotingPanel({
                                       ? t("recordedNo")
                                       : recorded === "abstain"
                                         ? t("recordedAbstain")
-                                        : t("recordedNone")}
+                                        : isAgendaFloor
+                                          ? "--"
+                                          : t("recordedNone")}
                                 </span>
                               </p>
                             </div>
@@ -560,13 +572,23 @@ export function VotingPanel({
                                 >
                                   {t("no")}
                                 </button>
-                                <button
-                                  type="button"
-                                  onClick={() => void clearVoteForMotion(item.id, row)}
-                                  className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
-                                >
-                                  {t("clear")}
-                                </button>
+                                {isAgendaFloor ? (
+                                  <button
+                                    type="button"
+                                    onClick={() => void clearVoteForMotion(item.id, row)}
+                                    className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
+                                  >
+                                    --
+                                  </button>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => void clearVoteForMotion(item.id, row)}
+                                    className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
+                                  >
+                                    {t("clear")}
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>
