@@ -158,8 +158,8 @@ function looksLikeFullQuestion(text: string): boolean {
 }
 
 /**
- * Strip trailing " — COMMITTEE" (MUN agenda lines: DISEC, UNSC, UN WOMEN, …).
- * Strip for slug lookup, then re-append the captured suffix verbatim after translation.
+ * Strip trailing " — COMMITTEE/KEY TERM" segment from display labels.
+ * We keep only the core topic text in UI to avoid duplicate/echoed headings.
  */
 /** EM/en hyphen, non-breaking hyphen, minus sign, ASCII hyphen (committee lines vary by source). */
 const TOPIC_COMMITTEE_DASH = /\s*[\u2014\u2013\u2010\u2011\u2212-]\s*/;
@@ -185,7 +185,7 @@ export function translateAgendaTopicLabel(
 ): string {
   const raw = rawLabel?.trim();
   if (!raw) return "";
-  const { body, suffix } = stripTrailingCommitteeSuffix(raw);
+  const { body } = stripTrailingCommitteeSuffix(raw);
   const normalizedBody = normalizeTopicLabelForLookup(body);
   const initialSlug = slugifyLabel(normalizedBody);
   const verbalInner = extractMunTopicInnerFromBody(normalizedBody);
@@ -197,8 +197,6 @@ export function translateAgendaTopicLabel(
 
   const sourceHadVerbalPrefix = verbalInner !== null;
 
-  const withSuffix = (line: string) =>
-    suffix ? `${line} \u2014 ${suffix}` : line;
   const caseTopic = (line: string) => applyTopicTitleCaseIfLocale(line, locale);
 
   if (key) {
@@ -214,18 +212,18 @@ export function translateAgendaTopicLabel(
       if (typeof tAgendaTopics.has === "function" && !tAgendaTopics.has("topicQuestionOf")) return inner;
       return tAgendaTopics("topicQuestionOf", { topic: inner });
     })();
-    return withSuffix(caseTopic(line));
+    return caseTopic(line);
   }
 
   if (verbalInner) {
     if (looksLikeFullQuestion(verbalInner)) {
-      return withSuffix(caseTopic(verbalInner));
+      return caseTopic(verbalInner);
     }
     if (typeof tAgendaTopics.has !== "function" || tAgendaTopics.has("topicQuestionOf")) {
       const line = tAgendaTopics("topicQuestionOf", { topic: verbalInner });
-      return withSuffix(caseTopic(line));
+      return caseTopic(line);
     }
   }
 
-  return caseTopic(raw);
+  return caseTopic(normalizedBody);
 }

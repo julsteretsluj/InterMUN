@@ -56,11 +56,11 @@ function categoryClass(cat: SeamunLockedBlockCategory): string {
     case "break_general":
       return "border-pink-300/60 bg-pink-200/55 text-pink-950 dark:bg-pink-500/20 dark:text-pink-50";
     case "session":
-      return "border-sky-400/50 bg-sky-200/60 text-sky-950 dark:bg-sky-500/25 dark:text-sky-50";
+      return "schedule-swatch-session border-sky-400/50 bg-sky-200/60 text-sky-950 dark:bg-sky-500/25 dark:text-sky-50";
     case "lunch":
-      return "border-emerald-400/50 bg-emerald-200/55 text-emerald-950 dark:bg-emerald-500/22 dark:text-emerald-50";
+      return "schedule-swatch-eat border-emerald-400/50 bg-emerald-200/55 text-emerald-950 dark:bg-emerald-500/22 dark:text-emerald-50";
     case "relax":
-      return "border-violet-400/50 bg-violet-200/50 text-violet-950 dark:bg-violet-500/22 dark:text-violet-50";
+      return "schedule-swatch-chill border-violet-400/50 bg-violet-200/50 text-violet-950 dark:bg-violet-500/22 dark:text-violet-50";
     case "support":
       return "border-rose-400/60 bg-rose-300/50 text-rose-950 dark:bg-rose-500/28 dark:text-rose-50";
     case "strategy":

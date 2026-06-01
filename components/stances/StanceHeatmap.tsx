@@ -15,13 +15,13 @@ export function StanceHeatmap({
   }
 
   const max = 5;
-  const getColor = (v: number) => {
+  const getFillClass = (v: number) => {
     const ratio = v / max;
-    if (ratio <= 0.2) return "bg-rose-200 dark:bg-rose-900/90";
-    if (ratio <= 0.4) return "bg-logo-orange/45 dark:bg-logo-orange/35";
-    if (ratio <= 0.6) return "bg-logo-yellow/50 dark:bg-logo-yellow/30";
-    if (ratio <= 0.8) return "bg-logo-cyan/50 dark:bg-logo-cyan/35";
-    return "bg-logo-magenta/45 dark:bg-logo-magenta/35";
+    if (ratio <= 0.2) return "stance-heatmap-fill stance-heatmap-fill--1";
+    if (ratio <= 0.4) return "stance-heatmap-fill stance-heatmap-fill--2";
+    if (ratio <= 0.6) return "stance-heatmap-fill stance-heatmap-fill--3";
+    if (ratio <= 0.8) return "stance-heatmap-fill stance-heatmap-fill--4";
+    return "stance-heatmap-fill stance-heatmap-fill--5";
   };
 
   return (
@@ -34,7 +34,7 @@ export function StanceHeatmap({
           <span className="text-sm font-medium text-brand-navy">{topic}</span>
           <div className="h-8 rounded overflow-hidden bg-brand-navy/10 dark:bg-white/10">
             <div
-              className={`h-full ${getColor(value)} transition-all`}
+              className={`h-full ${getFillClass(value)} transition-all`}
               style={{ width: `${(value / max) * 100}%` }}
             />
           </div>

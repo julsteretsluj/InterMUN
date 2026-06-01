@@ -12,6 +12,7 @@ import {
   seamunChairContactMatchesCommittee,
 } from "@/lib/seamun-delegate-chair-contacts";
 import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
+import { DelegateHubTileLink } from "@/components/delegate/DelegateHubTileLink";
 import { getTranslations } from "next-intl/server";
 
 export default async function DelegateDashboardPage({
@@ -84,10 +85,11 @@ export default async function DelegateDashboardPage({
       : []),
   ];
 
-  const tiles = tileDefs.map((def) => ({
+  const tiles = tileDefs.map((def, index) => ({
     href: def.href,
     label: td(`tiles.${def.key}.label`),
     hint: td(`tiles.${def.key}.hint`),
+    priority: index + 1,
   }));
   const { tab } = await searchParams;
   const dashboardTabs = [
@@ -144,13 +146,13 @@ export default async function DelegateDashboardPage({
               <ul className="grid gap-2 sm:grid-cols-2">
                 {tiles.slice(0, 4).map((tile) => (
                   <li key={tile.href + tile.label}>
-                    <Link
+                    <DelegateHubTileLink
                       href={tile.href}
-                      className="flex h-full flex-col rounded-xl border border-[var(--hairline)] bg-[var(--dashboard-cream)] px-3.5 py-3 transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:shadow-[var(--dashboard-shadow-hover)]"
-                    >
-                      <span className="font-semibold text-brand-navy">{tile.label}</span>
-                      <span className="mt-0.5 text-xs text-brand-muted">{tile.hint}</span>
-                    </Link>
+                      label={tile.label}
+                      hint={tile.hint}
+                      priority={tile.priority}
+                      variant="overview"
+                    />
                   </li>
                 ))}
               </ul>
@@ -161,16 +163,17 @@ export default async function DelegateDashboardPage({
         {activeTab === "jump" ? (
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("jumpTo")}</h2>
+          <p className="mt-1 text-xs text-brand-muted">{td("jumpToOrderHint")}</p>
           <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {tiles.map((tile) => (
               <li key={tile.href + tile.label}>
-                <Link
+                <DelegateHubTileLink
                   href={tile.href}
-                  className="block rounded-xl border border-[var(--hairline)] bg-white px-3.5 py-3 shadow-[var(--dashboard-shadow)] transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:shadow-[var(--dashboard-shadow-hover)] dark:border-zinc-700 dark:bg-zinc-900/80"
-                >
-                  <span className="font-semibold text-brand-navy dark:text-zinc-50">{tile.label}</span>
-                  <span className="mt-0.5 block text-xs text-brand-muted dark:text-zinc-400">{tile.hint}</span>
-                </Link>
+                  label={tile.label}
+                  hint={tile.hint}
+                  priority={tile.priority}
+                  variant="jump"
+                />
               </li>
             ))}
           </ul>

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ALargeSmall, Check, Moon, Palette, Sun, Type } from "lucide-react";
+import { ALargeSmall, Check, Glasses, Moon, Palette, Sun, Type } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   TEXT_SIZE_STEP_MAX,
@@ -15,9 +15,11 @@ import {
 } from "@/lib/theme-storage";
 import {
   clampTextSizeStep,
+  persistAndApplyColorblindMode,
   persistAndApplyDyslexicFont,
   persistAndApplyTextSize,
   persistAndApplyTheme,
+  readColorblindModeFromStorage,
   readDyslexicFontFromStorage,
   readTextSizeFromStorage,
   readThemeFromStorage,
@@ -48,6 +50,7 @@ export function ThemeSelector({ className }: { className?: string }) {
   const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
   const [hue, setHue] = useState<ThemeHue>(() => readThemeFromStorage().hue);
   const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
+  const [colorblindMode, setColorblindMode] = useState(() => readColorblindModeFromStorage());
   const [textSizeStep, setTextSizeStep] = useState<TextSizeStep>(() => readTextSizeFromStorage());
   const [mounted, setMounted] = useState(false);
   const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
@@ -121,6 +124,14 @@ export function ThemeSelector({ className }: { className?: string }) {
     setDyslexicFont((prev) => {
       const next = !prev;
       persistAndApplyDyslexicFont(next);
+      return next;
+    });
+  }, []);
+
+  const toggleColorblindMode = useCallback(() => {
+    setColorblindMode((prev) => {
+      const next = !prev;
+      persistAndApplyColorblindMode(next);
       return next;
     });
   }, []);
@@ -259,6 +270,27 @@ export function ThemeSelector({ className }: { className?: string }) {
               );
             })}
           </div>
+
+          <p className="tag tag-neutral mt-4 mb-1.5">{t("accessibility")}</p>
+          <button
+            type="button"
+            title={t("colorblindTitle")}
+            onClick={toggleColorblindMode}
+            className={cn(
+              "flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
+              colorblindMode
+                ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
+                : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
+            )}
+            aria-pressed={colorblindMode}
+          >
+            <span className="inline-flex items-center gap-2">
+              <Glasses className="size-4" strokeWidth={1.75} aria-hidden />
+              {t("colorblindMode")}
+            </span>
+            <span className="text-xs font-semibold">{colorblindMode ? t("on") : t("off")}</span>
+          </button>
+          <p className="mt-2 text-[0.7rem] leading-snug text-brand-muted">{t("colorblindHint")}</p>
 
           <p className="tag tag-neutral mt-4 mb-1.5">{t("typography")}</p>
           <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-muted">

@@ -598,6 +598,14 @@
     "openNewDocHelp": "Opens Google Docs in a new tab. Sign in if prompted, then copy the document URL from the address bar.",
     "newGoogleDoc": "New Google Doc"
   },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
   "themeSelector": {
     "buttonTitle": "Theme: color & appearance",
     "openSettingsAria": "Open theme settings",
@@ -606,6 +614,10 @@
     "light": "Light",
     "dark": "Dark",
     "accentColour": "Accent colour",
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
     "typography": "Typography",
     "textSize": "Text size",
     "scale": "Scale",
@@ -926,6 +938,7 @@
       "noMatch": "No published chair inbox is listed for this committee yet. Ask SMT or check your committee brief."
     },
     "jumpTo": "Jump to",
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here).",
     "schedule": {
       "intro": "Your committee’s official timetable for the conference. Use lunch overlap below to compare meal times with other committees."
     },

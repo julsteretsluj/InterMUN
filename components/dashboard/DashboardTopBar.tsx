@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
+import { ColorblindModeToggle } from "@/components/ColorblindModeToggle";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
@@ -128,7 +129,8 @@ export function DashboardTopBar({
             <div className="flex min-w-0 flex-1 items-center border-r border-[var(--hairline)] px-1.5 pr-0.5 sm:flex-initial">
               <LanguageSwitcher className="flex w-full min-w-0" />
             </div>
-            <div className="flex shrink-0 items-stretch pl-0.5 pr-0.5">
+            <div className="flex shrink-0 items-stretch gap-0.5 pl-0.5 pr-0.5">
+              <ColorblindModeToggle className="shrink-0" />
               <ThemeSelector className="shrink-0" />
             </div>
           </div>

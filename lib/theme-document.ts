@@ -1,6 +1,7 @@
 import {
   DEFAULT_TEXT_SIZE_STEP,
   DYSLEXIC_FONT_STORAGE_KEY,
+  COLORBLIND_MODE_STORAGE_KEY,
   DEFAULT_THEME_HUE,
   LEGACY_THEME_HUE_CLEANUP,
   TEXT_SIZE_STEP_MAX,
@@ -31,6 +32,23 @@ export function readThemeFromStorage(): { mode: ThemePreference; hue: ThemeHue }
 export function readDyslexicFontFromStorage(): boolean {
   if (typeof window === "undefined") return false;
   return localStorage.getItem(DYSLEXIC_FONT_STORAGE_KEY) === "1";
+}
+
+export function readColorblindModeFromStorage(): boolean {
+  if (typeof window === "undefined") return false;
+  return localStorage.getItem(COLORBLIND_MODE_STORAGE_KEY) === "1";
+}
+
+export function applyColorblindModeToDocument(enabled: boolean) {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  if (enabled) root.classList.add("colorblind-mode");
+  else root.classList.remove("colorblind-mode");
+}
+
+export function persistAndApplyColorblindMode(enabled: boolean) {
+  localStorage.setItem(COLORBLIND_MODE_STORAGE_KEY, enabled ? "1" : "0");
+  applyColorblindModeToDocument(enabled);
 }
 
 export function clampTextSizeStep(n: number): TextSizeStep {

@@ -590,6 +590,10 @@ html.dark ::selection {
   .dashboard-status-badge--success {
     @apply border-emerald-200 bg-emerald-50 text-emerald-800;
   }
+  .delegate-hub-tile-priority {
+    @apply absolute left-2 top-2 flex h-[1.125rem] w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] text-[0.625rem] font-bold leading-none text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
+  }
+
   .dashboard-status-badge--warning {
     @apply border-amber-200 bg-amber-50 text-amber-900;
   }
@@ -826,4 +830,193 @@ html.dark ::selection {
     transform: rotate(45deg);
     border-top-left-radius: 2px;
   }
+
+  /* Stance heatmap bar fills (default palette; colorblind overrides below) */
+  .stance-heatmap-fill--1 {
+    background-color: color-mix(in srgb, #e11d48 35%, transparent);
+  }
+  .stance-heatmap-fill--2 {
+    background-color: color-mix(in srgb, var(--logo-orange) 45%, transparent);
+  }
+  .stance-heatmap-fill--3 {
+    background-color: color-mix(in srgb, var(--logo-yellow) 50%, transparent);
+  }
+  .stance-heatmap-fill--4 {
+    background-color: color-mix(in srgb, var(--logo-cyan) 50%, transparent);
+  }
+  .stance-heatmap-fill--5 {
+    background-color: color-mix(in srgb, var(--logo-magenta) 45%, transparent);
+  }
+  html.dark .stance-heatmap-fill--1 {
+    background-color: color-mix(in srgb, #e11d48 55%, transparent);
+  }
+  html.dark .stance-heatmap-fill--2 {
+    background-color: color-mix(in srgb, var(--logo-orange) 40%, transparent);
+  }
+  html.dark .stance-heatmap-fill--3 {
+    background-color: color-mix(in srgb, var(--logo-yellow) 35%, transparent);
+  }
+  html.dark .stance-heatmap-fill--4 {
+    background-color: color-mix(in srgb, var(--logo-cyan) 40%, transparent);
+  }
+  html.dark .stance-heatmap-fill--5 {
+    background-color: color-mix(in srgb, var(--logo-magenta) 40%, transparent);
+  }
+}
+
+/* —— Colorblind-friendly mode (Wong-style: blue / orange / vermillion, not red–green) —— */
+html.colorblind-mode {
+  --accent: #0072b2;
+  --accent-bright: #56b4e9;
+  --system-blue: #0072b2;
+  --system-green: #0072b2;
+  --system-red: #d55e00;
+  --semantic-success: #0072b2;
+  --semantic-success-bg: color-mix(in srgb, #0072b2 14%, var(--color-bg-page));
+  --semantic-warning: #e69f00;
+  --semantic-warning-bg: color-mix(in srgb, #e69f00 16%, var(--color-bg-page));
+  --semantic-danger: #d55e00;
+  --semantic-danger-bg: color-mix(in srgb, #d55e00 14%, var(--color-bg-page));
+  --semantic-info: #56b4e9;
+  --semantic-info-bg: color-mix(in srgb, #56b4e9 14%, var(--color-bg-page));
+  --hairline: rgba(15, 23, 42, 0.14);
+  --hairline-strong: rgba(15, 23, 42, 0.22);
+}
+
+html.colorblind-mode.dark {
+  --accent: #56b4e9;
+  --accent-bright: #8ec8f0;
+  --semantic-success: #56b4e9;
+  --semantic-danger: #f0a202;
+  --semantic-warning: #e69f00;
+}
+
+html.colorblind-mode .dashboard-nav-active {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-left: 3px solid var(--accent);
+  padding-left: calc(0.625rem - 3px);
+}
+
+html.colorblind-mode .dashboard-status-badge--success::before {
+  content: "✓ ";
+  font-weight: 700;
+}
+html.colorblind-mode .dashboard-status-badge--warning::before {
+  content: "! ";
+  font-weight: 700;
+}
+html.colorblind-mode .dashboard-status-badge--info {
+  border-style: dashed;
+}
+
+html.colorblind-mode .note-avatar {
+  background: #f4f4f5 !important;
+  color: #18181b !important;
+  box-shadow: inset 0 0 0 2px #18181b;
+}
+
+html.colorblind-mode .mun-btn-primary {
+  background-color: var(--accent);
+}
+
+html.colorblind-mode .mun-btn-danger {
+  color: var(--semantic-danger);
+  background: var(--semantic-danger-bg);
+  border: 1px solid color-mix(in srgb, var(--semantic-danger) 45%, var(--hairline));
+}
+
+/* Error / alert surfaces: vermillion border + label, not red-only */
+html.colorblind-mode [class*="border-red-"],
+html.colorblind-mode [class*="bg-red-50"],
+html.colorblind-mode [class*="text-red-"] {
+  border-color: color-mix(in srgb, var(--semantic-danger) 55%, var(--hairline)) !important;
+}
+html.colorblind-mode [class*="bg-red-50"],
+html.colorblind-mode [class*="bg-red-950"] {
+  background-color: var(--semantic-danger-bg) !important;
+}
+html.colorblind-mode [class*="text-red-"] {
+  color: var(--semantic-danger) !important;
+}
+
+html.colorblind-mode [class*="border-emerald-"],
+html.colorblind-mode [class*="bg-emerald-"],
+html.colorblind-mode [class*="text-emerald-"] {
+  border-color: color-mix(in srgb, var(--semantic-success) 50%, var(--hairline)) !important;
+}
+html.colorblind-mode [class*="bg-emerald-"] {
+  background-color: var(--semantic-success-bg) !important;
+}
+html.colorblind-mode [class*="text-emerald-"] {
+  color: var(--semantic-success) !important;
+}
+
+html.colorblind-mode [class*="border-amber-"],
+html.colorblind-mode [class*="bg-amber-"] {
+  border-color: color-mix(in srgb, var(--semantic-warning) 50%, var(--hairline)) !important;
+}
+html.colorblind-mode [class*="bg-amber-50"],
+html.colorblind-mode [class*="bg-amber-950"] {
+  background-color: var(--semantic-warning-bg) !important;
+}
+html.colorblind-mode [class*="text-amber-"] {
+  color: color-mix(in srgb, var(--semantic-warning) 85%, #1c1c1e) !important;
+}
+
+/* Stance heatmap: distinct patterns per level */
+html.colorblind-mode .stance-heatmap-fill--1 {
+  background: repeating-linear-gradient(
+    -45deg,
+    #0072b2,
+    #0072b2 4px,
+    #f4f4f5 4px,
+    #f4f4f5 8px
+  ) !important;
+}
+html.colorblind-mode .stance-heatmap-fill--2 {
+  background: #56b4e9 !important;
+}
+html.colorblind-mode .stance-heatmap-fill--3 {
+  background: repeating-linear-gradient(
+    90deg,
+    #e69f00,
+    #e69f00 3px,
+    #f4f4f5 3px,
+    #f4f4f5 6px
+  ) !important;
+}
+html.colorblind-mode .stance-heatmap-fill--4 {
+  background: #e69f00 !important;
+}
+html.colorblind-mode .stance-heatmap-fill--5 {
+  background: #d55e00 !important;
+}
+
+html.colorblind-mode .tag-success::before {
+  content: "✓ ";
+}
+html.colorblind-mode .tag-danger::before {
+  content: "× ";
+}
+html.colorblind-mode .tag-warning::before {
+  content: "! ";
+}
+
+/* Schedule category swatches (eat / chill / session) */
+html.colorblind-mode .schedule-swatch-eat {
+  background: #0072b2 !important;
+  border: 2px solid #18181b;
+}
+html.colorblind-mode .schedule-swatch-chill {
+  background: repeating-linear-gradient(
+    135deg,
+    #e69f00 0 4px,
+    #f4f4f5 4px 8px
+  ) !important;
+  border: 2px solid #18181b;
+}
+html.colorblind-mode .schedule-swatch-session {
+  background: #d55e00 !important;
+  border: 2px dashed #18181b;
 }

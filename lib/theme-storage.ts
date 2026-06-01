@@ -1,6 +1,7 @@
 export const THEME_STORAGE_KEY = "intermun-theme";
 export const THEME_HUE_STORAGE_KEY = "intermun-theme-hue";
 export const DYSLEXIC_FONT_STORAGE_KEY = "intermun-dyslexic-font";
+export const COLORBLIND_MODE_STORAGE_KEY = "intermun-colorblind-mode";
 export const TEXT_SIZE_STORAGE_KEY = "intermun-text-size";
 
 /**
