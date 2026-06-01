@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ALargeSmall, Check, Glasses, Moon, Palette, Sun, Type } from "lucide-react";
+import { ALargeSmall, Check, Moon, Palette, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   TEXT_SIZE_STEP_MAX,
   TEXT_SIZE_STEP_MIN,
-  TEXT_SIZE_STEP_ROOT_PCT,
+  textSizeStepToRootPct,
   THEME_HUES,
   type TextSizeStep,
   type ThemeHue,
@@ -15,12 +15,8 @@ import {
 } from "@/lib/theme-storage";
 import {
   clampTextSizeStep,
-  persistAndApplyColorblindMode,
-  persistAndApplyDyslexicFont,
   persistAndApplyTextSize,
   persistAndApplyTheme,
-  readColorblindModeFromStorage,
-  readDyslexicFontFromStorage,
   readTextSizeFromStorage,
   readThemeFromStorage,
 } from "@/lib/theme-document";
@@ -49,8 +45,6 @@ export function ThemeSelector({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
   const [hue, setHue] = useState<ThemeHue>(() => readThemeFromStorage().hue);
-  const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
-  const [colorblindMode, setColorblindMode] = useState(() => readColorblindModeFromStorage());
   const [textSizeStep, setTextSizeStep] = useState<TextSizeStep>(() => readTextSizeFromStorage());
   const [mounted, setMounted] = useState(false);
   const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
@@ -119,22 +113,6 @@ export function ThemeSelector({ className }: { className?: string }) {
     },
     [mode]
   );
-
-  const toggleDyslexicFont = useCallback(() => {
-    setDyslexicFont((prev) => {
-      const next = !prev;
-      persistAndApplyDyslexicFont(next);
-      return next;
-    });
-  }, []);
-
-  const toggleColorblindMode = useCallback(() => {
-    setColorblindMode((prev) => {
-      const next = !prev;
-      persistAndApplyColorblindMode(next);
-      return next;
-    });
-  }, []);
 
   const onTextSizeSliderChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const v = clampTextSizeStep(Number(e.target.value));
@@ -271,27 +249,6 @@ export function ThemeSelector({ className }: { className?: string }) {
             })}
           </div>
 
-          <p className="tag tag-neutral mt-4 mb-1.5">{t("accessibility")}</p>
-          <button
-            type="button"
-            title={t("colorblindTitle")}
-            onClick={toggleColorblindMode}
-            className={cn(
-              "flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
-              colorblindMode
-                ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
-                : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-            )}
-            aria-pressed={colorblindMode}
-          >
-            <span className="inline-flex items-center gap-2">
-              <Glasses className="size-4" strokeWidth={1.75} aria-hidden />
-              {t("colorblindMode")}
-            </span>
-            <span className="text-xs font-semibold">{colorblindMode ? t("on") : t("off")}</span>
-          </button>
-          <p className="mt-2 text-[0.7rem] leading-snug text-brand-muted">{t("colorblindHint")}</p>
-
           <p className="tag tag-neutral mt-4 mb-1.5">{t("typography")}</p>
           <p id="text-size-heading" className="mb-2 mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-muted">
             <ALargeSmall className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
@@ -301,7 +258,7 @@ export function ThemeSelector({ className }: { className?: string }) {
             <div className="flex items-baseline justify-between gap-2">
               <span className="text-[0.65rem] font-medium uppercase tracking-wide text-brand-muted">{t("scale")}</span>
               <span className="tabular-nums text-sm font-semibold text-brand-navy dark:text-zinc-100">
-                {TEXT_SIZE_STEP_ROOT_PCT[textSizeStep]}%
+                {textSizeStepToRootPct(textSizeStep)}%
               </span>
             </div>
             <input
@@ -315,7 +272,7 @@ export function ThemeSelector({ className }: { className?: string }) {
               aria-valuemin={TEXT_SIZE_STEP_MIN}
               aria-valuemax={TEXT_SIZE_STEP_MAX}
               aria-valuenow={textSizeStep}
-              aria-valuetext={`${TEXT_SIZE_STEP_ROOT_PCT[textSizeStep]} percent base size`}
+              aria-valuetext={`${textSizeStepToRootPct(textSizeStep)} percent base size`}
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_8%,var(--color-bg-page))] accent-[color:var(--accent)]"
             />
             <div className="flex justify-between px-0.5 text-[0.65rem] font-medium text-brand-muted">
@@ -324,24 +281,6 @@ export function ThemeSelector({ className }: { className?: string }) {
               <span>{t("large")}</span>
             </div>
           </div>
-          <button
-            type="button"
-            title={t("dyslexicTitle")}
-            onClick={toggleDyslexicFont}
-            className={cn(
-              "mt-3 flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium transition-apple",
-              dyslexicFont
-                ? "border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] text-brand-navy"
-                : "border-[var(--hairline)] text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
-            )}
-            aria-pressed={dyslexicFont}
-          >
-            <span className="inline-flex items-center gap-2">
-              <Type className="size-4" strokeWidth={1.75} aria-hidden />
-              {t("dyslexicFriendlyFont")}
-            </span>
-            <span className="text-xs font-semibold">{dyslexicFont ? t("on") : t("off")}</span>
-          </button>
             </div>,
             document.body
           )

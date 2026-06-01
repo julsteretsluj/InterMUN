@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
-import { ColorblindModeToggle } from "@/components/ColorblindModeToggle";
+import { AccessibilitySelector } from "@/components/AccessibilitySelector";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
@@ -130,7 +130,7 @@ export function DashboardTopBar({
               <LanguageSwitcher className="flex w-full min-w-0" />
             </div>
             <div className="flex shrink-0 items-stretch gap-0.5 pl-0.5 pr-0.5">
-              <ColorblindModeToggle className="shrink-0" />
+              <AccessibilitySelector className="shrink-0" />
               <ThemeSelector className="shrink-0" />
             </div>
           </div>

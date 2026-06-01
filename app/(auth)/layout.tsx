@@ -1,5 +1,5 @@
 import { BrandWordmark } from "@/components/BrandWordmark";
-import { ColorblindModeToggle } from "@/components/ColorblindModeToggle";
+import { AccessibilitySelector } from "@/components/AccessibilitySelector";
 import { ThemeSelector } from "@/components/ThemeSelector";
 
 export default function AuthLayout({
@@ -12,7 +12,7 @@ export default function AuthLayout({
       <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
       <div className="relative w-full max-w-5xl space-y-6">
         <div className="flex justify-end gap-1">
-          <ColorblindModeToggle />
+          <AccessibilitySelector />
           <ThemeSelector />
         </div>
         <BrandWordmark size="hero" />

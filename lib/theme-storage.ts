@@ -5,25 +5,19 @@ export const COLORBLIND_MODE_STORAGE_KEY = "intermun-colorblind-mode";
 export const TEXT_SIZE_STORAGE_KEY = "intermun-text-size";
 
 /**
- * Root `html` font-size steps (rem-based UI follows).
- * 0 = former “small”, 3 = “medium”, 6 = “large”; two interpolated steps between each pair.
+ * Root `html` font-size step in percentage points from default.
+ * -50 => 50% of base, 0 => default (100%), +50 => 150% of base.
  */
-export const TEXT_SIZE_STEP_MIN = 0;
-export const TEXT_SIZE_STEP_MAX = 6;
-export const DEFAULT_TEXT_SIZE_STEP = 3;
+export const TEXT_SIZE_STEP_MIN = -50;
+export const TEXT_SIZE_STEP_MAX = 50;
+export const DEFAULT_TEXT_SIZE_STEP = 0;
 
-export type TextSizeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type TextSizeStep = number;
 
-/** Approximate root font-size % for UI feedback (matches `globals.css` per-step rules). */
-export const TEXT_SIZE_STEP_ROOT_PCT: Record<TextSizeStep, number> = {
-  0: 93.75,
-  1: 95.833,
-  2: 97.917,
-  3: 100,
-  4: 104.167,
-  5: 108.333,
-  6: 112.5,
-};
+/** Root font-size % for current step. */
+export function textSizeStepToRootPct(step: number): number {
+  return 100 + step;
+}
 
 export type ThemePreference = "light" | "dark";
 

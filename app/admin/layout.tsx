@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
-import { ColorblindModeToggle } from "@/components/ColorblindModeToggle";
+import { AccessibilitySelector } from "@/components/AccessibilitySelector";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { isAdminRole } from "@/lib/roles";
 import { PaperSavedWidget } from "@/components/PaperSavedWidget";
@@ -67,7 +67,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </Link>
           </nav>
           <div className="flex items-center gap-2">
-            <ColorblindModeToggle />
+            <AccessibilitySelector />
             <ThemeSelector />
             <SignOutButton className="text-brand-muted hover:text-brand-diplomatic dark:hover:text-brand-accent-bright" />
           </div>

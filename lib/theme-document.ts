@@ -59,9 +59,17 @@ export function clampTextSizeStep(n: number): TextSizeStep {
 
 /** Migrate legacy `"small"` | `"medium"` | `"large"` and numeric `"0"`–`"6"`. */
 export function parseTextSizeFromStorage(raw: string | null): TextSizeStep {
-  if (raw === "small") return 0;
-  if (raw === "medium") return 3;
-  if (raw === "large") return 6;
+  if (raw === "small") return -6;
+  if (raw === "medium") return 0;
+  if (raw === "large") return 13;
+  // Legacy numeric presets 0..6 from previous slider model.
+  if (raw === "0") return -6;
+  if (raw === "1") return -4;
+  if (raw === "2") return -2;
+  if (raw === "3") return 0;
+  if (raw === "4") return 4;
+  if (raw === "5") return 8;
+  if (raw === "6") return 13;
   const n = parseInt(raw ?? "", 10);
   if (!Number.isNaN(n)) return clampTextSizeStep(n);
   return DEFAULT_TEXT_SIZE_STEP;
@@ -73,14 +81,6 @@ export function readTextSizeFromStorage(): TextSizeStep {
 }
 
 const LEGACY_TEXT_SIZE_CLASSES = ["text-size-small", "text-size-large"] as const;
-
-function textScaleClasses(): string[] {
-  const out: string[] = [];
-  for (let i = TEXT_SIZE_STEP_MIN; i <= TEXT_SIZE_STEP_MAX; i++) {
-    out.push(`text-scale-${i}`);
-  }
-  return out;
-}
 
 export function applyThemeToDocument(mode: ThemePreference, hue: ThemeHue) {
   if (typeof document === "undefined") return;
@@ -106,13 +106,10 @@ export function applyDyslexicFontToDocument(enabled: boolean) {
 export function applyTextSizeToDocument(step: TextSizeStep) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
-  for (const c of textScaleClasses()) {
-    root.classList.remove(c);
-  }
   for (const c of LEGACY_TEXT_SIZE_CLASSES) {
     root.classList.remove(c);
   }
-  root.classList.add(`text-scale-${step}`);
+  root.style.setProperty("--text-scale-step", String(clampTextSizeStep(step)));
 }
 
 export function persistAndApplyTheme(mode: ThemePreference, hue: ThemeHue) {
