@@ -5,27 +5,31 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import {
   switchSmtToSecretariatAction,
-  switchSmtToChairExperienceAction,
+  switchSmtToChairExperienceByAllocationAction,
   switchSmtToDelegateExperienceAction,
   updateSmtCommitteeBindingsAction,
 } from "@/app/actions/smtDashboardSurface";
 
 export function SmtCommitteeViewSettingsCard({
   conferences,
-  delegateSeats,
+  delegateSeatsByConferenceId,
+  chairSeatsByConferenceId,
   currentChairId,
   currentDelegateAllocationId,
 }: {
   conferences: { id: string; label: string }[];
-  delegateSeats: { id: string; label: string }[];
+  delegateSeatsByConferenceId: Record<string, { id: string; label: string }[]>;
+  chairSeatsByConferenceId: Record<string, { id: string; label: string }[]>;
   currentChairId: string | null;
   currentDelegateAllocationId: string | null;
 }) {
   const t = useTranslations("smtCommitteeView");
   const searchParams = useSearchParams();
   const bindHint = searchParams.get("smtBind") === "1";
+  const [previewMode, setPreviewMode] = useState<"chair" | "delegate" | null>(null);
   const [chairId, setChairId] = useState(currentChairId ?? "");
   const [delegateAllocId, setDelegateAllocId] = useState(currentDelegateAllocationId ?? "");
+  const [chairAllocId, setChairAllocId] = useState("");
   const [bindMsg, setBindMsg] = useState<string | null>(null);
   const [surfaceMsg, setSurfaceMsg] = useState<string | null>(null);
   const [pendingBindings, startBindings] = useTransition();
@@ -59,9 +63,13 @@ export function SmtCommitteeViewSettingsCard({
       setSurfaceMsg(t("pickChairFirst"));
       return;
     }
+    if (!chairAllocId.trim()) {
+      setSurfaceMsg(t("pickChairFirst"));
+      return;
+    }
     startSurface(async () => {
       try {
-        await switchSmtToChairExperienceAction(chairId.trim());
+        await switchSmtToChairExperienceByAllocationAction(chairAllocId.trim());
       } catch {
         setSurfaceMsg(t("surfaceSwitchError"));
       }
@@ -81,6 +89,18 @@ export function SmtCommitteeViewSettingsCard({
         setSurfaceMsg(t("surfaceSwitchError"));
       }
     });
+  }
+
+  function startPreview() {
+    if (previewMode === "chair") {
+      goChair();
+      return;
+    }
+    if (previewMode === "delegate") {
+      goDelegate();
+      return;
+    }
+    setSurfaceMsg(t("surfaceSwitchError"));
   }
 
   return (
@@ -124,7 +144,7 @@ export function SmtCommitteeViewSettingsCard({
             className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
           >
             <option value="">{t("delegateSeatPlaceholder")}</option>
-            {delegateSeats.map((s) => (
+            {(delegateSeatsByConferenceId[chairId] ?? []).map((s) => (
               <option key={s.id} value={s.id}>
                 {s.label}
               </option>
@@ -155,7 +175,11 @@ export function SmtCommitteeViewSettingsCard({
           <button
             type="button"
             disabled={pendingSurface}
-            onClick={() => void goSecretariat()}
+            onClick={() => {
+              setPreviewMode(null);
+              setSurfaceMsg(null);
+              void goSecretariat();
+            }}
             className="rounded-lg border border-brand-navy/20 bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream/60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
           >
             {t("goSecretariat")}
@@ -163,20 +187,111 @@ export function SmtCommitteeViewSettingsCard({
           <button
             type="button"
             disabled={pendingSurface}
-            onClick={() => void goChair()}
-            className="rounded-lg border border-brand-navy/20 bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream/60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+            onClick={() => {
+              setPreviewMode("chair");
+              setSurfaceMsg(null);
+              setChairAllocId("");
+            }}
+            className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+              previewMode === "chair"
+                ? "border-brand-accent/40 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/20 dark:text-zinc-100"
+                : "border-brand-navy/20 bg-white text-brand-navy hover:bg-brand-cream/60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+            }`}
           >
             {t("goChair")}
           </button>
           <button
             type="button"
             disabled={pendingSurface}
-            onClick={() => void goDelegate()}
-            className="rounded-lg border border-brand-navy/20 bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream/60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+            onClick={() => {
+              setPreviewMode("delegate");
+              setSurfaceMsg(null);
+            }}
+            className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+              previewMode === "delegate"
+                ? "border-brand-accent/40 bg-brand-accent/10 text-brand-navy dark:border-brand-accent/50 dark:bg-brand-accent/20 dark:text-zinc-100"
+                : "border-brand-navy/20 bg-white text-brand-navy hover:bg-brand-cream/60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+            }`}
           >
             {t("goDelegate")}
           </button>
         </div>
+        {previewMode ? (
+          <div className="mt-3 space-y-3 rounded-lg border border-brand-navy/15 bg-brand-paper/60 p-3 dark:border-zinc-700 dark:bg-zinc-900/40">
+            <div>
+              <label className="block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
+                {t("chairCommitteeLabel")}
+              </label>
+              <select
+                value={chairId}
+                onChange={(e) => {
+                  setChairId(e.target.value);
+                  setDelegateAllocId("");
+                  setChairAllocId("");
+                }}
+                className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+              >
+                <option value="">{t("chairCommitteePlaceholder")}</option>
+                {conferences.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {previewMode === "delegate" ? (
+              <div>
+                <label className="block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
+                  {t("delegateSeatLabel")}
+                </label>
+                <select
+                  value={delegateAllocId}
+                  onChange={(e) => setDelegateAllocId(e.target.value)}
+                  disabled={!chairId}
+                  className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+                >
+                  <option value="">{t("delegateSeatPlaceholder")}</option>
+                  {(delegateSeatsByConferenceId[chairId] ?? []).map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div>
+                <label className="block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
+                  {t("chairCommitteeLabel")}
+                </label>
+                <select
+                  value={chairAllocId}
+                  onChange={(e) => setChairAllocId(e.target.value)}
+                  disabled={!chairId}
+                  className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+                >
+                  <option value="">{t("chairCommitteePlaceholder")}</option>
+                  {(chairSeatsByConferenceId[chairId] ?? []).map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+            <button
+              type="button"
+              disabled={
+                pendingSurface ||
+                !chairId ||
+                (previewMode === "delegate" ? !delegateAllocId : !chairAllocId)
+              }
+              onClick={() => void startPreview()}
+              className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
+            >
+              Start
+            </button>
+          </div>
+        ) : null}
         {surfaceMsg ? <p className="mt-2 text-sm text-rose-700 dark:text-rose-300">{surfaceMsg}</p> : null}
       </div>
     </section>

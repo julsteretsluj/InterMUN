@@ -233,6 +233,7 @@ export default async function DashboardLayout({
           appName={appName}
           brandHomeHref={isChairRole(effectiveRole) ? "/chair" : "/delegate"}
           showDelegateHubLink={false}
+          showExitSmtPreview={isSmtRole(normalizedRole) && smtSurface !== "secretariat"}
           notifications={
             <DashboardNotifications initialUnreadCount={notificationUnreadCount ?? 0} />
           }

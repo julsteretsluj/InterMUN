@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
@@ -11,6 +11,7 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import { useLocale, useTranslations } from "next-intl";
+import { switchSmtToSecretariatAction } from "@/app/actions/smtDashboardSurface";
 
 function initialsFromName(name: string, email: string): string {
   const n = name.trim();
@@ -50,6 +51,7 @@ export function DashboardTopBar({
   appName,
   notifications,
   showDelegateHubLink,
+  showExitSmtPreview,
   brandHomeHref,
   profileHref = "/profile",
 }: {
@@ -62,20 +64,30 @@ export function DashboardTopBar({
   notifications?: ReactNode;
   /** Chairs see a quick jump to the SEAMUNs-style delegate hub. */
   showDelegateHubLink?: boolean;
+  /** SMT in chair/delegate preview: quick return to SMT secretariat hub. */
+  showExitSmtPreview?: boolean;
   /** Mobile header logo target (sidebar brand uses the same hub). */
   brandHomeHref?: string;
   /** Account menu target (e.g. SMT uses `/smt/profile`). */
   profileHref?: string;
 }) {
   const t = useTranslations("dashboardTopBar");
+  const tSmtView = useTranslations("smtCommitteeView");
   const locale = useLocale();
   const initials = initialsFromName(userName, userEmail);
   const [now, setNow] = useState(() => new Date());
+  const [pendingExitSurface, startExitSurface] = useTransition();
 
   useEffect(() => {
     const id = window.setInterval(() => setNow(new Date()), 1000);
     return () => window.clearInterval(id);
   }, []);
+
+  function exitSmtPreview() {
+    startExitSurface(async () => {
+      await switchSmtToSecretariatAction();
+    });
+  }
 
   return (
     <header className="mun-toolbar-titlebar sticky top-0 z-20 flex shrink-0 flex-col border-b border-[var(--hairline)] backdrop-blur-2xl backdrop-saturate-150 shadow-[var(--titlebar-shadow)] [transition:backdrop-filter_200ms_var(--ease-apple)]">
@@ -103,6 +115,17 @@ export function DashboardTopBar({
             >
               📄 {t("delegateHub")}
             </Link>
+          ) : null}
+          {showExitSmtPreview ? (
+            <button
+              type="button"
+              disabled={pendingExitSurface}
+              onClick={exitSmtPreview}
+              className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-2.5 py-1.5 text-xs font-semibold text-brand-navy transition-apple hover:border-[color:color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:bg-[color:color-mix(in_srgb,var(--accent)_12%,transparent)] disabled:opacity-60"
+              title={tSmtView("goSecretariat")}
+            >
+              ↩ {tSmtView("goSecretariat")}
+            </button>
           ) : null}
           {conferenceLine ? (
             <p className="hidden max-w-[200px] truncate text-xs font-semibold text-brand-diplomatic lg:block">

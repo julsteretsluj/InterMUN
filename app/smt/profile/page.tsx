@@ -79,7 +79,8 @@ export default async function SmtProfilePage() {
         <Suspense fallback={null}>
           <SmtCommitteeViewSettingsCard
             conferences={committeeBindings.conferences}
-            delegateSeats={committeeBindings.delegateSeats}
+            delegateSeatsByConferenceId={committeeBindings.delegateSeatsByConferenceId}
+            chairSeatsByConferenceId={committeeBindings.chairSeatsByConferenceId}
             currentChairId={committeeBindings.currentChairId}
             currentDelegateAllocationId={committeeBindings.currentDelegateAllocationId}
           />

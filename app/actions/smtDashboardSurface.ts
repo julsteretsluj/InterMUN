@@ -146,6 +146,53 @@ export async function switchSmtToChairExperienceAction(conferenceId: string) {
   redirect("/chair");
 }
 
+export async function switchSmtToChairExperienceByAllocationAction(allocationId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+  const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+  if (profile?.role !== "smt") redirect("/profile");
+
+  const aid = allocationId.trim();
+  if (!isUuid(aid)) redirect("/smt/profile?smtBind=1");
+
+  const eventId = await getActiveEventId();
+  if (!eventId) redirect("/smt/profile?smtBind=1");
+
+  const { data: allocation } = await supabase
+    .from("allocations")
+    .select("id, conference_id, user_id")
+    .eq("id", aid)
+    .maybeSingle();
+  if (!allocation?.conference_id) redirect("/smt/profile?smtBind=1");
+
+  const { data: c } = await supabase
+    .from("conferences")
+    .select("id, event_id, committee, committee_code, name")
+    .eq("id", allocation.conference_id)
+    .maybeSingle();
+  if (!c || c.event_id !== eventId || isSmtSecretariatConferenceRow(c)) {
+    redirect("/smt/profile?smtBind=1");
+  }
+
+  const canonicalCid = await resolveCanonicalCommitteeConferenceId(supabase, c.id);
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      smt_chair_conference_id: canonicalCid,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", user.id);
+  if (error) redirect("/smt/profile?smtBind=1");
+
+  await setSmtDashboardSurface("chair");
+  await setActiveConferenceId(canonicalCid);
+  redirect("/chair");
+}
+
 export async function switchSmtToDelegateExperienceAction(allocationId: string) {
   const supabase = await createClient();
   const {
@@ -166,7 +213,7 @@ export async function switchSmtToDelegateExperienceAction(allocationId: string) 
     .select("id, user_id, conference_id")
     .eq("id", aid)
     .maybeSingle();
-  if (!a || a.user_id !== user.id) redirect("/smt/profile?smtBind=1");
+  if (!a || !a.conference_id) redirect("/smt/profile?smtBind=1");
 
   const { data: c } = await supabase
     .from("conferences")
@@ -194,7 +241,8 @@ export async function switchSmtToDelegateExperienceAction(allocationId: string) 
 /** Server-only helper for smt/profile loader: committees in active event (no secretariat sheet). */
 export async function loadSmtCommitteeBindingOptions(): Promise<{
   conferences: { id: string; label: string }[];
-  delegateSeats: { id: string; label: string }[];
+  delegateSeatsByConferenceId: Record<string, { id: string; label: string }[]>;
+  chairSeatsByConferenceId: Record<string, { id: string; label: string }[]>;
   currentChairId: string | null;
   currentDelegateAllocationId: string | null;
 } | null> {
@@ -219,7 +267,8 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
       : null;
     return {
       conferences: [],
-      delegateSeats: [],
+      delegateSeatsByConferenceId: {},
+      chairSeatsByConferenceId: {},
       currentChairId,
       currentDelegateAllocationId:
         (profile as { smt_delegate_allocation_id?: string | null }).smt_delegate_allocation_id ?? null,
@@ -284,38 +333,59 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
   }
   committees.sort((a, b) => a.label.localeCompare(b.label));
 
-  const { data: allocRows } = await supabase
-    .from("allocations")
-    .select("id, country, conference_id")
-    .eq("user_id", user.id);
-
-  const allocConfIds = [...new Set((allocRows ?? []).map((r) => r.conference_id).filter(Boolean))] as string[];
-  const { data: allocConfs } =
-    allocConfIds.length > 0
+  const conferenceIds = filtered.map((c) => c.id);
+  const { data: allocRows } =
+    conferenceIds.length > 0
       ? await supabase
-          .from("conferences")
-          .select("id, name, committee, committee_code, event_id")
-          .in("id", allocConfIds)
-      : { data: [] as { id: string; name: string; committee: string | null; committee_code: string | null; event_id: string }[] };
-  const confById = new Map((allocConfs ?? []).map((c) => [c.id, c]));
+          .from("allocations")
+          .select("id, country, conference_id, user_id, profiles(name, role)")
+          .in("conference_id", conferenceIds)
+      : { data: [] as unknown[] };
 
-  const delegateSeats: { id: string; label: string }[] = [];
-  for (const row of allocRows ?? []) {
-    const c = confById.get(row.conference_id);
-    if (!c || c.event_id !== eventId) continue;
-    if (isSmtSecretariatConferenceRow(c)) continue;
-    const comm = c.committee?.trim();
-    const chamber =
-      (comm ? translateCommitteeLabel(tCommitteeLabels, comm).trim() : "") ||
-      c.committee_code?.trim() ||
-      c.name?.trim() ||
-      "";
-    delegateSeats.push({
-      id: row.id,
-      label: chamber ? `${row.country?.trim() || "—"} — ${chamber}` : (row.country?.trim() || "—"),
-    });
+  const canonicalByConferenceId = new Map<string, string>();
+  for (const groupRows of groupsByTab.values()) {
+    const primary = pickCanonicalConferenceRowByAllocationScore(
+      groupRows,
+      allocationRowCountByConferenceId,
+      linkedUserCountByConferenceId
+    );
+    for (const row of groupRows) canonicalByConferenceId.set(row.id, primary.id);
   }
-  delegateSeats.sort((a, b) => a.label.localeCompare(b.label));
+
+  const delegateSeatsByConferenceId: Record<string, { id: string; label: string }[]> = {};
+  const chairSeatsByConferenceId: Record<string, { id: string; label: string }[]> = {};
+  for (const c of committees) {
+    delegateSeatsByConferenceId[c.id] = [];
+    chairSeatsByConferenceId[c.id] = [];
+  }
+
+  type AllocRow = {
+    id: string;
+    country: string | null;
+    conference_id: string;
+    user_id: string | null;
+    profiles: { name?: string | null; role?: string | null } | { name?: string | null; role?: string | null }[] | null;
+  };
+  for (const row of (allocRows ?? []) as AllocRow[]) {
+    const canonicalId = canonicalByConferenceId.get(row.conference_id);
+    if (!canonicalId) continue;
+    const profileRef = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles;
+    const role = profileRef?.role?.toString().trim().toLowerCase();
+    const displayCountry = row.country?.trim() || "—";
+    const displayName = profileRef?.name?.trim() || null;
+    const seatLabel = displayName ? `${displayCountry} — ${displayName}` : displayCountry;
+
+    if (role === "chair") {
+      chairSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
+      continue;
+    }
+    delegateSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
+  }
+
+  for (const c of committees) {
+    delegateSeatsByConferenceId[c.id]?.sort((a, b) => a.label.localeCompare(b.label));
+    chairSeatsByConferenceId[c.id]?.sort((a, b) => a.label.localeCompare(b.label));
+  }
 
   const rawChairId = (profile as { smt_chair_conference_id?: string | null }).smt_chair_conference_id ?? null;
   const currentChairId = rawChairId
@@ -324,7 +394,8 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
 
   return {
     conferences: committees,
-    delegateSeats,
+    delegateSeatsByConferenceId,
+    chairSeatsByConferenceId,
     currentChairId,
     currentDelegateAllocationId:
       (profile as { smt_delegate_allocation_id?: string | null }).smt_delegate_allocation_id ?? null,

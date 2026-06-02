@@ -108,10 +108,10 @@ async function getConferenceForSmtCommitteeSurface(options: {
   if (!aid) return null;
   const { data: alloc } = await supabase
     .from("allocations")
-    .select("conference_id, user_id")
+    .select("conference_id")
     .eq("id", aid)
     .maybeSingle();
-  if (!alloc?.conference_id || alloc.user_id !== options.userId) return null;
+  if (!alloc?.conference_id) return null;
   const delegateCanon = await resolveCanonicalCommitteeConferenceId(supabase, alloc.conference_id);
   const { data: conf } = await supabase
     .from("conferences")
