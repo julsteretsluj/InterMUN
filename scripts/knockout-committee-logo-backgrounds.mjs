@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Re-process committee logos in Supabase storage: make dark/near-black pixels transparent.
+ * Re-process committee logos in Supabase storage: edge flood-fill removes dark badge backgrounds.
  * Run from repo root: node scripts/knockout-committee-logo-backgrounds.mjs
  *
  * Requires: .env.local with NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY
@@ -38,18 +38,54 @@ function loadEnvLocal() {
 }
 
 const PYTHON = `import sys
+from collections import deque
 from PIL import Image
 
-THRESHOLD = 52
+THRESHOLD = 72
+
+def is_bg(r, g, b, a):
+    if a < 12:
+        return True
+    mx = max(r, g, b)
+    mn = min(r, g, b)
+    if mx <= THRESHOLD:
+        return True
+    if mx <= 92 and mx - mn <= 20:
+        return True
+    return False
+
+def flood_knockout(img):
+    w, h = img.size
+    pixels = img.load()
+    visited = set()
+    q = deque()
+    for x in range(w):
+        q.append((x, 0))
+        q.append((x, h - 1))
+    for y in range(h):
+        q.append((0, y))
+        q.append((w - 1, y))
+    while q:
+        x, y = q.popleft()
+        if (x, y) in visited:
+            continue
+        visited.add((x, y))
+        r, g, b, a = pixels[x, y]
+        if not is_bg(r, g, b, a):
+            continue
+        pixels[x, y] = (r, g, b, 0)
+        if x > 0:
+            q.append((x - 1, y))
+        if x < w - 1:
+            q.append((x + 1, y))
+        if y > 0:
+            q.append((x, y - 1))
+        if y < h - 1:
+            q.append((x, y + 1))
+
 path_in, path_out = sys.argv[1], sys.argv[2]
 img = Image.open(path_in).convert("RGBA")
-pixels = img.load()
-w, h = img.size
-for y in range(h):
-    for x in range(w):
-        r, g, b, a = pixels[x, y]
-        if max(r, g, b) <= THRESHOLD:
-            pixels[x, y] = (r, g, b, 0)
+flood_knockout(img)
 img.save(path_out, "PNG")
 `;
 
@@ -138,6 +174,7 @@ async function main() {
       const { error: uploadErr } = await supabase.storage.from(bucket).upload(objectPath, body, {
         contentType: "image/png",
         upsert: true,
+        cacheControl: "3600",
       });
       if (uploadErr) {
         console.warn(`Skip ${label}: upload failed — ${uploadErr.message}`);
@@ -157,7 +194,7 @@ async function main() {
     }
   }
 
-  console.log("Done. Hard-refresh the SMT overview if logos are cached in the browser.");
+  console.log("Done. Hard-refresh the SMT overview (Cmd+Shift+R) to bypass cached images.");
 }
 
 main().catch((e) => {

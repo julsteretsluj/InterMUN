@@ -241,7 +241,7 @@ function ChamberCommitteeCard({
         throw new Error(updateErr.message);
       }
 
-      setLogoUrl(publicUrlData.publicUrl);
+      setLogoUrl(`${publicUrlData.publicUrl}?v=${Date.now()}`);
     } catch (e) {
       const msg = e instanceof Error ? e.message : t("errorUploadFailed");
       setUploadError(msg);
