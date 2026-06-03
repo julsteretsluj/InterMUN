@@ -10,7 +10,7 @@ import {
 } from "@/app/actions/smtConference";
 import { generateSixCharCommitteeCode } from "@/lib/committee-join-code";
 import { CommitteeLogo } from "@/components/CommitteeLogo";
-import { stripCommitteeLogoBackground } from "@/lib/committee-logo-image";
+import { prepareCommitteeLogoUpload } from "@/lib/committee-logo-image";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
@@ -211,7 +211,7 @@ function ChamberCommitteeCard({
     setUploadPending(true);
     try {
       const bucketName = "committee-logos";
-      const processed = await stripCommitteeLogoBackground(file);
+      const processed = await prepareCommitteeLogoUpload(file);
 
       const objectPath = `committees/${anchor.event_id}/${anchor.committee_code}/${Date.now()}.png`;
 
@@ -241,7 +241,7 @@ function ChamberCommitteeCard({
         throw new Error(updateErr.message);
       }
 
-      setLogoUrl(`${publicUrlData.publicUrl}?v=${Date.now()}`);
+      setLogoUrl(publicUrlData.publicUrl);
     } catch (e) {
       const msg = e instanceof Error ? e.message : t("errorUploadFailed");
       setUploadError(msg);
