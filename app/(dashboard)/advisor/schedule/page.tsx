@@ -24,7 +24,11 @@ export default async function AdvisorSchedulePage() {
   return (
     <MunPageShell title={t("advisorSchedule")}>
       <p className="mb-4 max-w-2xl text-sm text-brand-muted">{ta("intro")}</p>
-      <SeamunI2027LockedScheduleVisual variant="advisor" defaultView="detail" />
+      <SeamunI2027LockedScheduleVisual
+        variant="advisor"
+        defaultView="detail"
+        initialCommittee={ctx.initialCommittee}
+      />
     </MunPageShell>
   );
 }

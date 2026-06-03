@@ -3,7 +3,22 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isAdminInviteConfigured } from "@/lib/admin-invite-configured";
+import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { SmtAdvisorsClient } from "./SmtAdvisorsClient";
+
+function isDelegateProfileRole(role: string | null | undefined): boolean {
+  return role?.toString().trim().toLowerCase() === "delegate";
+}
+
+type LinkedProfile = { name: string | null; role: string | null };
+
+function unwrapProfile(
+  raw: LinkedProfile | LinkedProfile[] | null | undefined
+): LinkedProfile | null {
+  if (!raw) return null;
+  return Array.isArray(raw) ? (raw[0] ?? null) : raw;
+}
 
 export const dynamic = "force-dynamic";
 
@@ -29,20 +44,31 @@ export default async function SmtAdvisorsPage() {
 
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee")
+    .select("id, name, committee, committee_code, room_code, procedure_profile")
     .eq("event_id", eventId)
     .order("committee");
 
-  const committeeByConferenceId = new Map((conferences ?? []).map((c) => [c.id, c.committee ?? c.name]));
+  const activeConferences = (conferences ?? []).filter((c) => !isRetiredSeamunCommitteeRow(c));
+
+  const activeConferenceIds = activeConferences.map((c) => c.id);
+  const committeeByConferenceId = new Map(activeConferences.map((c) => [c.id, c.committee ?? c.name]));
 
   const { data: allocations } = await supabase
     .from("allocations")
-    .select("id, country, conference_id, user_id")
-    .in("conference_id", (conferences ?? []).map((c) => c.id))
+    .select("id, country, conference_id, user_id, profiles:user_id ( name, role )")
+    .in("conference_id", activeConferenceIds)
     .not("user_id", "is", null)
     .order("country");
 
-  const countryByAllocationId = new Map((allocations ?? []).map((a) => [a.id, a.country]));
+  const delegateAllocations = (allocations ?? []).filter((a) => {
+    if (isDaisSeatAllocationCountry(a.country)) return false;
+    const profile = unwrapProfile(
+      a.profiles as LinkedProfile | LinkedProfile[] | null | undefined
+    );
+    return isDelegateProfileRole(profile?.role);
+  });
+
+  const countryByAllocationId = new Map(delegateAllocations.map((a) => [a.id, a.country]));
 
   const { data: assignments } = await supabase
     .from("advisor_delegate_assignments")
@@ -51,10 +77,47 @@ export default async function SmtAdvisorsPage() {
       id,
       delegate_allocation_id,
       advisor_profile_id,
-      profiles:advisor_profile_id ( name )
+      advisor:advisor_profile_id ( name, role ),
+      delegate:delegate_allocation_id (
+        country,
+        conference_id,
+        profiles:user_id ( name, role )
+      )
     `
     )
-    .in("conference_id", (conferences ?? []).map((c) => c.id));
+    .in("conference_id", activeConferenceIds);
+
+  const assignmentRows = (assignments ?? [])
+    .map((row) => {
+      const advisor = unwrapProfile(
+        row.advisor as LinkedProfile | LinkedProfile[] | null | undefined
+      );
+      const delegateRaw = row.delegate as
+        | {
+            country: string | null;
+            conference_id: string;
+            profiles: LinkedProfile | LinkedProfile[] | null;
+          }
+        | {
+            country: string | null;
+            conference_id: string;
+            profiles: LinkedProfile | LinkedProfile[] | null;
+          }[]
+        | null;
+      const delegate = Array.isArray(delegateRaw) ? delegateRaw[0] : delegateRaw;
+      const delegateProfile = unwrapProfile(delegate?.profiles);
+      if (!delegate || !isDelegateProfileRole(delegateProfile?.role)) return null;
+
+      return {
+        id: row.id,
+        allocationId: row.delegate_allocation_id,
+        country: delegate.country ?? countryByAllocationId.get(row.delegate_allocation_id) ?? "—",
+        committee: committeeByConferenceId.get(delegate.conference_id) ?? "—",
+        advisorName: advisor?.name ?? t("advisorFallback"),
+        delegateName: delegateProfile?.name ?? t("delegateFallback"),
+      };
+    })
+    .filter((row): row is NonNullable<typeof row> => row !== null);
 
   return (
     <div>
@@ -62,21 +125,18 @@ export default async function SmtAdvisorsPage() {
       <p className="mb-6 max-w-2xl text-sm text-brand-muted">{t("subtitle")}</p>
       <SmtAdvisorsClient
         adminInviteConfigured={adminInviteConfigured}
-        allocationRefs={(allocations ?? []).map((a) => ({
-          id: a.id,
-          country: a.country,
-          committee: committeeByConferenceId.get(a.conference_id) ?? "—",
-        }))}
-        assignments={(assignments ?? []).map((row) => {
-          const profRaw = row.profiles as { name: string | null } | { name: string | null }[] | null;
-          const prof = Array.isArray(profRaw) ? profRaw[0] : profRaw;
+        allocationRefs={delegateAllocations.map((a) => {
+          const profile = unwrapProfile(
+            a.profiles as LinkedProfile | LinkedProfile[] | null | undefined
+          );
           return {
-            id: row.id,
-            allocationId: row.delegate_allocation_id,
-            country: countryByAllocationId.get(row.delegate_allocation_id) ?? "—",
-            advisorName: prof?.name ?? t("advisorFallback"),
+            id: a.id,
+            country: a.country,
+            committee: committeeByConferenceId.get(a.conference_id) ?? "—",
+            delegateName: profile?.name ?? t("delegateFallback"),
           };
         })}
+        assignments={assignmentRows}
       />
     </div>
   );

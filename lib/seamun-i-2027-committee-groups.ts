@@ -1,7 +1,7 @@
 /**
  * SEAMUN I 2027 — which debate chambers follow which master-schedule track.
  * Source of truth for timings/colours: `lib/seamun-i-2027-locked-schedule.ts` (visual day 1 & 2).
- * Committee bucketing should match the organisers’ published handbook (not stored in this repo).
+ * Mixed lunch cohorts (3 groups, 10 committees): `lib/seamun-i-2027-lunch-groups.ts`.
  *
  * Chamber labels must match `conferences.committee` values for this event (see `seed_allocation_matrix.sql`).
  */

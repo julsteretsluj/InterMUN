@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Secretary General",
     "returnToProfile": "Return to profile",
-    "useDifferentAccount": "Use a different account"
+    "useDifferentAccount": "Use a different account",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "e.g. SEAMUNI2027",
@@ -876,7 +877,7 @@
     "viewVoting": "Voting",
     "forwardedNotes": "Forwarded notes",
     "schedule": {
-      "intro": "Pick your schedule track, then advisor A–D to see that advisor’s timetable for the day."
+      "intro": "Pick your committee to see your advisor timetable for the day (one advisor per chamber)."
     },
     "notes": {
       "intro": "Notes chairs or SMT chose to share with you. You cannot browse the full notes feed.",
@@ -911,9 +912,11 @@
     "allocationIdsTitle": "Linked delegate allocation IDs",
     "allocationIdsHint": "Copy an allocation UUID from this table when assigning.",
     "colAdvisor": "Advisor",
+    "colDelegate": "Delegate",
     "colAllocationId": "Allocation ID",
     "colCountry": "Country / seat",
     "colCommittee": "Committee",
+    "delegateFallback": "Delegate",
     "assignedTo": "advisor: {name}",
     "saving": "Saving…",
     "assignButton": "Save assignment",
@@ -969,7 +972,7 @@
       },
       "conferenceSchedule": {
         "label": "Conference schedule",
-        "hint": "Team track and advisor timetable (A–D)"
+        "hint": "Team track, lunch groups, and per-committee advisor timetables"
       },
       "running": {
         "label": "Checklist & running notes",
@@ -1117,7 +1120,8 @@
     "topicLabel": "Topic:",
     "chairsLabel": "Chairs:",
     "committeeLogoAlt": "{name} logo",
-    "eslFriendly": "ESL-friendly"
+    "eslFriendly": "ESL-friendly",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "Beginner",
@@ -1745,6 +1749,7 @@
       "notAdvisorRole": "That user is not an advisor. Invite them or set role to advisor first.",
       "delegateNotFound": "Delegate seat not found.",
       "delegateUnlinked": "That seat has no linked delegate account yet.",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned).",
       "assigned": "Assigned advisor to {country}."
     },
     "allocationSignup": {
@@ -1915,21 +1920,36 @@
         "handbookLink": "Open conference handbook (PDF)",
         "handbookHint": "official master document; the locked timetable and chamber grouping below follow this publication.",
         "committeeMatrixTitle": "Committee chambers by schedule track",
-        "committeeMatrixHint": "Each chamber follows the Day 1 / Day 2 clock of its track (the column with the same group name in the chart above).",
+        "committeeMatrixHint": "Sessions follow each chamber’s debate track; eat and chill follow the mixed lunch group below.",
         "colScheduleTrack": "Schedule track",
         "colChambers": "Chambers (labels in this event)",
-        "smtBrowseHint": "Choose all teams (pick a group), one committee’s timetable, or an advisor timetable — each view is separate.",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "smtBrowseHint": "Choose all teams, a debate track, a lunch group, one committee’s timetable, or an advisor timetable — each view is separate.",
         "browseTeams": "All teams",
         "browseCommittee": "By committee",
         "browseAdvisor": "By advisor",
-        "teamsScopeAll": "Overview (all groups)",
-        "pickGroup": "Group:",
+        "teamsScopeAll": "Overview (all tracks)",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
         "pickCommitteeAll": "Committee:",
-        "advisorOnlyHint": "Pick your schedule track, then advisor A–D to view that advisor’s day.",
+        "advisorOnlyHint": "Pick your committee to view your advisor day (one advisor per chamber).",
+        "advisorRosterHint": "Ten advisors — one per committee. Lunch groups mix tracks so delegates interact across chambers.",
         "committeeOnlyHint": "Your committee’s official timetable. Below, compare lunch times with other committees.",
-        "pickAdvisor": "Advisor",
-        "selectAdvisorPrompt": "Select advisor A, B, C, or D to view that timetable.",
+        "advisorColumnSuffix": "Advisor",
+        "selectAdvisorPrompt": "Select your committee to view that advisor’s timetable.",
         "selectCommitteePrompt": "Select your committee to view the delegate/chair timetable.",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        },
         "teamShort": {
           "g1": "Alpha",
           "g2": "Beta",

@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import {
+  ADMIN_NAV_HREF_ORDER,
+  sortNavByHrefPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { createClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/SignOutButton";
 import { AccessibilitySelector } from "@/components/AccessibilitySelector";
@@ -34,6 +40,18 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         .maybeSingle()
     : { data: null };
 
+  const adminNav = withSequentialPriority(
+    sortNavByHrefPriority(
+      [
+        { href: "/admin", label: "Overview" },
+        { href: "/smt", label: "SMT dashboard" },
+        { href: "/conference-setup?next=%2Fadmin", label: "New conference" },
+        { href: "/smt/profile", label: "Profile" },
+      ],
+      ADMIN_NAV_HREF_ORDER
+    )
+  );
+
   return (
     <div className="min-h-screen bg-brand-cream text-brand-navy">
       <header className="flex flex-col border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95">
@@ -41,30 +59,17 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3">
           <span className="font-display text-lg font-semibold tracking-tight text-brand-navy">Welcome Admin</span>
           <nav className="flex flex-wrap items-center gap-1 text-sm sm:gap-3">
-            <Link
-              href="/admin"
-              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
-            >
-              Overview
-            </Link>
-            <Link
-              href="/conference-setup?next=%2Fadmin"
-              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
-            >
-              New conference
-            </Link>
-            <Link
-              href="/smt"
-              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
-            >
-              SMT dashboard
-            </Link>
-            <Link
-              href="/smt/profile"
-              className="rounded-md px-2 py-1 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
-            >
-              Profile
-            </Link>
+            {adminNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-label={`${item.priority}. ${item.label}`}
+                className="nav-priority-link relative rounded-md px-2 py-1 pl-7 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
+              >
+                <NavPriorityBadge priority={item.priority} />
+                {item.label}
+              </Link>
+            ))}
           </nav>
           <div className="flex items-center gap-2">
             <AccessibilitySelector />

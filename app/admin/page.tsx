@@ -1,6 +1,12 @@
 import { AdminDashboardClient } from "./AdminDashboardClient";
 import StatusPortalBoard from "./StatusPortalBoard";
+import { PriorityTabLink } from "@/components/PriorityTabLink";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
+import {
+  ADMIN_DASHBOARD_TAB_ORDER,
+  sortByKeyPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { getTranslations } from "next-intl/server";
 import { isAdminInviteConfigured } from "@/lib/admin-invite-configured";
 
@@ -36,24 +42,26 @@ export default async function AdminPage({
       )}
 
       <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={t("tabs.ariaLabel")}>
-        {[
-          { id: "setup", label: t("tabs.setup") },
-          { id: "checklist", label: t("tabs.checklist") },
-          { id: "portal", label: t("tabs.portal") },
-        ].map((item) => (
-          <a
+        {withSequentialPriority(
+          sortByKeyPriority(
+            [
+              { id: "setup", label: t("tabs.setup") },
+              { id: "checklist", label: t("tabs.checklist") },
+              { id: "portal", label: t("tabs.portal") },
+            ],
+            "id",
+            ADMIN_DASHBOARD_TAB_ORDER
+          )
+        ).map((item) => (
+          <PriorityTabLink
             key={item.id}
             href={item.id === "setup" ? "/admin" : `/admin?tab=${item.id}`}
-            role="tab"
-            aria-selected={activeTab === item.id}
-            className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
-              activeTab === item.id
-                ? "border-brand-accent text-brand-navy bg-brand-paper"
-                : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
-            }`}
-          >
-            {item.label}
-          </a>
+            label={item.label}
+            priority={item.priority}
+            active={activeTab === item.id}
+            activeClassName="border-brand-accent text-brand-navy bg-brand-paper"
+            inactiveClassName="border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+          />
         ))}
       </div>
       <div className="mt-6" role="tabpanel">

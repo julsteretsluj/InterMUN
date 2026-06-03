@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import {
+  SMT_NAV_KEY_ORDER,
+  sortByKeyPriority,
+} from "@/lib/nav-priority-order";
 import { cn } from "@/lib/utils";
 
 export type SmtNavKey =
@@ -47,34 +52,50 @@ function SmtSidebarLink({
   item,
   label,
   isActive,
+  priority,
 }: {
   item: SmtNavItem;
   label: string;
   isActive: boolean;
+  priority: number;
 }) {
   return (
     <Link
       href={item.href}
+      aria-label={`${priority}. ${label}`}
       className={cn(
-        "discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
+        "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-7",
         isActive
           ? "smt-nav-row-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"
       )}
     >
+      <NavPriorityBadge priority={priority} />
       <span className="text-base leading-none" aria-hidden>{item.emoji}</span>
       <span className="hidden truncate group-hover:inline">{label}</span>
     </Link>
   );
 }
 
-function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: string; isActive: boolean }) {
+function SmtDockLink({
+  item,
+  label,
+  isActive,
+  priority,
+}: {
+  item: SmtNavItem;
+  label: string;
+  isActive: boolean;
+  priority: number;
+}) {
   return (
     <Link
       href={item.href}
-      title={label}
-      className="group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
+      title={`${priority}. ${label}`}
+      aria-label={`${priority}. ${label}`}
+      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
     >
+      <NavPriorityBadge priority={priority} />
       <span
         className={cn(
           "flex h-8 w-8 items-center justify-center text-brand-muted",
@@ -94,6 +115,8 @@ function SmtDockLink({ item, label, isActive }: { item: SmtNavItem; label: strin
     </Link>
   );
 }
+
+const SMT_NAV_ITEMS_ORDERED = sortByKeyPriority(SMT_NAV_ITEMS, "navKey", SMT_NAV_KEY_ORDER);
 
 export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
   const tNav = useTranslations("smtNav");
@@ -125,12 +148,13 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
         aria-label={tNav("ariaDashboard")}
         className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-1.5 py-1 [scrollbar-width:thin] group-hover:px-3"
       >
-        {SMT_NAV_ITEMS.map((item) => (
+        {SMT_NAV_ITEMS_ORDERED.map((item, index) => (
           <SmtSidebarLink
             key={item.href}
             item={item}
             label={tNav(item.navKey)}
             isActive={smtNavItemIsActive(pathname, item)}
+            priority={index + 1}
           />
         ))}
       </nav>
@@ -156,12 +180,13 @@ export function SmtMobileDock() {
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
         <div className="flex items-center gap-0.5 overflow-x-auto">
-          {SMT_NAV_ITEMS.map((item) => (
+          {SMT_NAV_ITEMS_ORDERED.map((item, index) => (
             <SmtDockLink
               key={item.href}
               item={item}
               label={tNav(item.navKey)}
               isActive={smtNavItemIsActive(pathname, item)}
+              priority={index + 1}
             />
           ))}
         </div>

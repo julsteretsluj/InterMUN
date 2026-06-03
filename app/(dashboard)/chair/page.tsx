@@ -7,7 +7,16 @@ import { ChairHowToAccordion } from "@/components/chair/ChairHowToAccordion";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
+import { HubTileLink } from "@/components/HubTileLink";
 import { ChairTopicTabsCard } from "@/components/chair/ChairTopicTabsCard";
+import { PriorityTabLink } from "@/components/PriorityTabLink";
+import {
+  CHAIR_DASHBOARD_TAB_ORDER,
+  CHAIR_HUB_TILE_HREF_ORDER,
+  hrefPriorityRank,
+  sortByKeyPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { getLocale, getTranslations } from "next-intl/server";
 import {
   translateAgendaTopicLabel,
@@ -20,6 +29,7 @@ export default async function ChairOverviewPage({
   searchParams: Promise<{ tab?: string }>;
 }) {
   const t = await getTranslations("pageTitles");
+  const tc = await getTranslations("common");
   const tPage = await getTranslations("chairOverviewPage");
   const td = await getTranslations("chairNav");
   const tCommitteeLabels = await getTranslations("committeeNames.labels");
@@ -65,7 +75,7 @@ export default async function ChairOverviewPage({
     tPage("fallbackCommittee");
   const crisisReportingEnabled = isCrisisCommittee(conf?.committee ?? null);
 
-  const tiles: { href: string; label: string; hint: string }[] = [
+  const tilesRaw: { href: string; label: string; hint: string }[] = [
     { href: "/chair/prep-checklist", label: tPage("tiles.prepChecklist.label"), hint: tPage("tiles.prepChecklist.hint") },
     { href: "/chair/session/agenda", label: tPage("tiles.agenda.label"), hint: tPage("tiles.agenda.hint") },
     { href: "/chair/flow-checklist", label: tPage("tiles.flowChecklist.label"), hint: tPage("tiles.flowChecklist.hint") },
@@ -91,12 +101,23 @@ export default async function ChairOverviewPage({
     { href: "/chair/room-code", label: tPage("tiles.roomCode.label"), hint: tPage("tiles.roomCode.hint") },
     { href: "/committee-room", label: tPage("tiles.committeeRoomFull.label"), hint: tPage("tiles.committeeRoomFull.hint") },
   ];
+  const tiles = [...tilesRaw]
+    .sort(
+      (a, b) => hrefPriorityRank(a.href, CHAIR_HUB_TILE_HREF_ORDER) - hrefPriorityRank(b.href, CHAIR_HUB_TILE_HREF_ORDER)
+    )
+    .map((tile, index) => ({ ...tile, priority: index + 1 }));
   const { tab } = await searchParams;
-  const tabs = [
-    { id: "overview", label: td("dashboardTabs.overview") },
-    { id: "guidance", label: td("dashboardTabs.guidance") },
-    { id: "jump", label: td("dashboardTabs.jump") },
-  ] as const;
+  const tabs = withSequentialPriority(
+    sortByKeyPriority(
+      [
+        { id: "overview", label: td("dashboardTabs.overview") },
+        { id: "guidance", label: td("dashboardTabs.guidance") },
+        { id: "jump", label: td("dashboardTabs.jump") },
+      ],
+      "id",
+      CHAIR_DASHBOARD_TAB_ORDER
+    )
+  );
   const activeTab = tab === "guidance" || tab === "jump" ? tab : "overview";
 
   return (
@@ -128,19 +149,15 @@ export default async function ChairOverviewPage({
 
         <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={td("dashboardTabs.ariaLabel")}>
           {tabs.map((tabItem) => (
-            <Link
-              href={tabItem.id === "overview" ? "/chair" : `/chair?tab=${tabItem.id}`}
+            <PriorityTabLink
               key={tabItem.id}
-              role="tab"
-              aria-selected={activeTab === tabItem.id}
-              className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
-                activeTab === tabItem.id
-                  ? "border-brand-accent text-brand-navy bg-brand-paper"
-                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
-              }`}
-            >
-              {tabItem.label}
-            </Link>
+              href={tabItem.id === "overview" ? "/chair" : `/chair?tab=${tabItem.id}`}
+              label={tabItem.label}
+              priority={tabItem.priority}
+              active={activeTab === tabItem.id}
+              activeClassName="border-brand-accent text-brand-navy bg-brand-paper"
+              inactiveClassName="border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+            />
           ))}
         </div>
         {activeTab === "overview" ? (
@@ -159,16 +176,16 @@ export default async function ChairOverviewPage({
         {activeTab === "jump" ? (
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("dashboardTabs.jump")}</h3>
+          <p className="mt-1 text-xs text-brand-muted dark:text-zinc-400">{tc("navPriorityOrderHint")}</p>
           <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
-            {tiles.map((t) => (
-              <li key={t.href}>
-                <Link
-                  href={t.href}
-                  className="block rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 shadow-sm transition hover:border-brand-accent/45 hover:bg-brand-accent/8 dark:border-zinc-700 dark:bg-zinc-900/80 dark:hover:border-brand-accent/40 dark:hover:bg-brand-accent/12"
-                >
-                  <span className="font-semibold text-brand-navy dark:text-zinc-50">{t.label}</span>
-                  <span className="mt-0.5 block text-xs text-brand-muted dark:text-zinc-400">{t.hint}</span>
-                </Link>
+            {tiles.map((tile) => (
+              <li key={tile.href}>
+                <HubTileLink
+                  href={tile.href}
+                  label={tile.label}
+                  hint={tile.hint}
+                  priority={tile.priority}
+                />
               </li>
             ))}
           </ul>

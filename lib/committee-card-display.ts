@@ -36,12 +36,6 @@ const WELL_KNOWN_COMMITTEE_TAGS: Record<string, CommitteeDisplayTags> = {
     format: "Traditional",
     eslFriendly: false,
   },
-  EU: {
-    difficulty: "Intermediate",
-    ageRangeKey: "grade7_12_year8_13",
-    format: "Traditional",
-    eslFriendly: false,
-  },
   UNHRC: {
     difficulty: "Intermediate",
     ageRangeKey: "grade9_12_year10_13",

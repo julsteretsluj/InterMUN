@@ -6,6 +6,7 @@ import {
   buildAllocationRecipientOptions,
   buildChairRecipientOptions,
 } from "@/lib/delegation-notes-options";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 
 export type SmtDelegationNotesComposeContext = {
   conferenceId: string;
@@ -31,6 +32,18 @@ export async function getSmtDelegationNotesComposeContext(
   const role = (profile?.role ?? "").toString().toLowerCase();
   if (role !== "smt" && role !== "admin") {
     return { error: "Only secretariat can compose from this panel." };
+  }
+
+  const { data: confRow } = await supabase
+    .from("conferences")
+    .select(
+      "id, name, committee, committee_code, committee_full_name, room_code, procedure_profile"
+    )
+    .eq("id", conferenceId)
+    .maybeSingle();
+  if (!confRow) return { error: "Committee not found." };
+  if (isRetiredSeamunCommitteeRow(confRow)) {
+    return { error: "That committee is no longer part of this conference." };
   }
 
   const scope = await getChamberScope(supabase, conferenceId);

@@ -9,6 +9,8 @@ import {
   type SmtFormState,
 } from "@/app/actions/smtConference";
 import { generateSixCharCommitteeCode } from "@/lib/committee-join-code";
+import { CommitteeLogo } from "@/components/CommitteeLogo";
+import { stripCommitteeLogoBackground } from "@/lib/committee-logo-image";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
@@ -209,15 +211,14 @@ function ChamberCommitteeCard({
     setUploadPending(true);
     try {
       const bucketName = "committee-logos";
-      const ext = file.name.split(".").pop()?.toLowerCase() || "png";
-      const safeExt = /^[a-z0-9]+$/.test(ext) ? ext : "png";
+      const processed = await stripCommitteeLogoBackground(file);
 
-      const objectPath = `committees/${anchor.event_id}/${anchor.committee_code}/${Date.now()}.${safeExt}`;
+      const objectPath = `committees/${anchor.event_id}/${anchor.committee_code}/${Date.now()}.png`;
 
       const { error: uploadErr } = await supabase.storage
         .from(bucketName)
-        .upload(objectPath, file, {
-          contentType: file.type,
+        .upload(objectPath, processed, {
+          contentType: "image/png",
           upsert: true,
         });
 
@@ -290,13 +291,9 @@ function ChamberCommitteeCard({
         <label className="block text-xs font-medium text-brand-muted mb-1">{t("committeeLogo")}</label>
 
         {logoUrl ? (
-          <img
-            src={logoUrl}
-            alt={t("committeeLogo")}
-            className="h-16 w-16 rounded-md object-contain bg-white/70 border border-brand-navy/10 mb-2"
-          />
+          <CommitteeLogo src={logoUrl} alt={t("committeeLogo")} size="lg" className="mb-2" />
         ) : (
-          <div className="h-16 w-16 rounded-md object-contain bg-white/30 border border-brand-navy/10 mb-2 text-center text-[0.65rem] leading-[4rem] text-brand-muted">
+          <div className="mb-2 flex h-16 w-16 items-center justify-center text-[0.65rem] text-brand-muted">
             —
           </div>
         )}

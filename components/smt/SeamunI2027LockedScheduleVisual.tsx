@@ -19,22 +19,25 @@ import {
   type SeamunScheduleGroupId,
 } from "@/lib/seamun-i-2027-committee-groups";
 import {
-  SEAMUN_ADVISOR_IDS,
+  SEAMUN_I_2027_ADVISOR_COMMITTEES,
   buildSeamunAdvisorDayBlocks,
   buildSeamunCommitteeDayBlocks,
   seamunAllScheduleCommittees,
   seamunDebateColumnsForDay,
-  seamunScheduleGroupById,
   seamunScheduleGroupForColumnHeader,
-  type SeamunAdvisorId,
 } from "@/lib/seamun-i-2027-advisor-schedules";
+import {
+  SEAMUN_I_2027_LUNCH_GROUPS,
+  seamunI2027LunchGroupDefinition,
+  type SeamunLunchGroupId,
+} from "@/lib/seamun-i-2027-lunch-groups";
 import { CanteenLeaveNotice } from "@/components/schedule/CanteenLeaveNotice";
 import { SeamunLunchOverlapCompare } from "@/components/schedule/SeamunLunchOverlapCompare";
 
 const AXIS_RANGE = SEAMUN_I_2027_AXIS_END_MIN - SEAMUN_I_2027_AXIS_START_MIN;
 
 type BrowseMode = "teams" | "committee" | "advisor";
-type TeamsScope = "all" | SeamunScheduleGroupId;
+type TeamsScope = "all" | SeamunScheduleGroupId | SeamunLunchGroupId;
 
 function blockStyle(b: SeamunLockedBlock): { top: string; height: string } {
   const t0 = timeToMinutes(b.start);
@@ -227,14 +230,12 @@ export function SeamunI2027LockedScheduleVisual({
   const [teamsScope, setTeamsScope] = useState<TeamsScope>(
     seamunI2027DebateScheduleGroupId(initialGroupId) ?? initialGroupFromCommittee ?? "all"
   );
-  const defaultGroupId =
-    seamunI2027DebateScheduleGroupId(initialGroupId) ??
-    initialGroupFromCommittee ??
-    SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS[0]?.id ??
-    null;
-
-  const [groupId, setGroupId] = useState<SeamunScheduleGroupId | null>(defaultGroupId);
-  const [advisorId, setAdvisorId] = useState<SeamunAdvisorId | null>(null);
+  const [advisorCommittee, setAdvisorCommittee] = useState<string | null>(
+    initialCommitteeTrimmed &&
+      (SEAMUN_I_2027_ADVISOR_COMMITTEES as readonly string[]).includes(initialCommitteeTrimmed)
+      ? initialCommitteeTrimmed
+      : null
+  );
   const [committee, setCommittee] = useState<string | null>(initialCommitteeTrimmed);
 
   const teamColumns = useMemo(() => seamunDebateColumnsForDay(day), [day]);
@@ -244,6 +245,13 @@ export function SeamunI2027LockedScheduleVisual({
   const displayColumns = useMemo((): SeamunLockedColumn[] => {
     if (browseMode === "teams") {
       if (teamsScope === "all") return teamColumns;
+      if (teamsScope === "l1" || teamsScope === "l2" || teamsScope === "l3") {
+        const lg = seamunI2027LunchGroupDefinition(teamsScope);
+        return lg.chambers.map((ch) => ({
+          header: ch,
+          blocks: buildSeamunCommitteeDayBlocks(day, ch),
+        }));
+      }
       const col = teamColumns.find((c) => seamunScheduleGroupForColumnHeader(c.header) === teamsScope);
       return col ? [col] : [];
     }
@@ -254,32 +262,31 @@ export function SeamunI2027LockedScheduleVisual({
       return [{ header: committee, blocks }];
     }
 
-    if (browseMode === "advisor" && groupId && advisorId) {
-      const def = seamunScheduleGroupById(groupId);
+    if (browseMode === "advisor" && advisorCommittee) {
       return [
         {
-          header: `${def.scheduleHeader} — Advisor ${advisorId}`,
-          blocks: buildSeamunAdvisorDayBlocks(day, groupId, advisorId),
+          header: `${advisorCommittee} — ${t("advisorColumnSuffix")}`,
+          blocks: buildSeamunAdvisorDayBlocks(day, advisorCommittee),
         },
       ];
     }
 
     return [];
-  }, [browseMode, teamsScope, teamColumns, committee, groupId, advisorId, day]);
+  }, [browseMode, teamsScope, teamColumns, committee, advisorCommittee, day, t]);
 
   function switchBrowseMode(mode: BrowseMode) {
     setBrowseMode(mode);
     if (mode === "teams") {
-      setAdvisorId(null);
+      setAdvisorCommittee(null);
       setCommittee(null);
     } else if (mode === "committee") {
-      setAdvisorId(null);
+      setAdvisorCommittee(null);
       setTeamsScope("all");
     } else {
       setCommittee(null);
       setTeamsScope("all");
-      if (!groupId && SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS[0]) {
-        setGroupId(SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS[0].id);
+      if (!advisorCommittee && SEAMUN_I_2027_ADVISOR_COMMITTEES[0]) {
+        setAdvisorCommittee(SEAMUN_I_2027_ADVISOR_COMMITTEES[0]);
       }
     }
   }
@@ -287,28 +294,20 @@ export function SeamunI2027LockedScheduleVisual({
   function selectTeamsScope(scope: TeamsScope) {
     setBrowseMode("teams");
     setTeamsScope(scope);
-    setAdvisorId(null);
+    setAdvisorCommittee(null);
     setCommittee(null);
   }
 
-  function selectGroupForAdvisor(id: SeamunScheduleGroupId) {
-    setGroupId(id);
-    setAdvisorId(null);
-  }
-
-  function selectAdvisor(id: SeamunAdvisorId) {
-    setAdvisorId(id);
+  function selectAdvisorCommittee(ch: string) {
+    setAdvisorCommittee(ch);
   }
 
   function selectCommittee(ch: string) {
     setCommittee(ch);
-    const g = seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(ch));
-    if (g) setGroupId(g);
   }
 
   const awaitingSelection =
-    (browseMode === "committee" && !committee) ||
-    (browseMode === "advisor" && (!groupId || !advisorId));
+    (browseMode === "committee" && !committee) || (browseMode === "advisor" && !advisorCommittee);
 
   const showCommitteePicker = browseMode === "committee" && isSmt;
   const showLockedCommitteeLabel = browseMode === "committee" && isCommittee && committee;
@@ -367,21 +366,36 @@ export function SeamunI2027LockedScheduleVisual({
       ) : null}
 
       {browseMode === "teams" && isSmt ? (
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <button type="button" onClick={() => selectTeamsScope("all")} className={tabClass(teamsScope === "all")}>
-            {t("teamsScopeAll")}
-          </button>
-          <span className="text-xs text-brand-muted">{t("pickGroup")}</span>
-          {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
-            <button
-              key={g.id}
-              type="button"
-              onClick={() => selectTeamsScope(g.id)}
-              className={pillClass(teamsScope === g.id)}
-            >
-              {t(`teamShort.${g.id}`)}
+        <div className="mb-4 space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <button type="button" onClick={() => selectTeamsScope("all")} className={tabClass(teamsScope === "all")}>
+              {t("teamsScopeAll")}
             </button>
-          ))}
+            <span className="text-xs text-brand-muted">{t("pickDebateTrack")}</span>
+            {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => selectTeamsScope(g.id)}
+                className={pillClass(teamsScope === g.id)}
+              >
+                {t(`teamShort.${g.id}`)}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs text-brand-muted">{t("pickLunchGroup")}</span>
+            {SEAMUN_I_2027_LUNCH_GROUPS.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => selectTeamsScope(g.id)}
+                className={pillClass(teamsScope === g.id)}
+              >
+                {t(`lunchGroupShort.${g.id}`)}
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
 
@@ -409,41 +423,55 @@ export function SeamunI2027LockedScheduleVisual({
       ) : null}
 
       {browseMode === "advisor" && (isSmt || isAdvisor) ? (
-        <div className="mb-4 space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-brand-muted">{t("pickGroup")}</span>
-            {SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => (
-              <button
-                key={g.id}
-                type="button"
-                onClick={() => selectGroupForAdvisor(g.id)}
-                className={pillClass(groupId === g.id)}
-              >
-                {t(`teamShort.${g.id}`)}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{t("pickAdvisor")}</p>
-            <div className="flex flex-wrap gap-2">
-              {SEAMUN_ADVISOR_IDS.map((id) => (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => selectAdvisor(id)}
-                  className={cn(
-                    "min-w-[2.75rem] rounded-[var(--radius-md)] border px-3 py-2 text-sm font-bold transition-apple",
-                    advisorId === id
-                      ? "border-brand-accent bg-brand-accent/15 text-brand-navy ring-1 ring-brand-accent/40"
-                      : "border-brand-navy/10 text-brand-muted hover:border-brand-accent/35"
-                  )}
-                  aria-pressed={advisorId === id}
-                >
-                  {id}
-                </button>
-              ))}
+        <div className="mb-4 space-y-4">
+          <p className="text-sm text-brand-muted">{t("advisorRosterHint")}</p>
+          {SEAMUN_I_2027_LUNCH_GROUPS.map((lg) => (
+            <div key={lg.id} className="space-y-2">
+              <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">
+                {t(`lunchGroupTitle.${lg.id}`)}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {lg.chambers.map((ch) => (
+                  <button
+                    key={ch}
+                    type="button"
+                    onClick={() => selectAdvisorCommittee(ch)}
+                    className={pillClass(advisorCommittee === ch)}
+                    aria-pressed={advisorCommittee === ch}
+                  >
+                    {ch}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+      ) : null}
+
+      {isSmt && browseMode === "teams" ? (
+        <div className="mb-5 overflow-x-auto rounded-xl border border-brand-navy/10 bg-white/50 p-4 dark:bg-black/20">
+          <h3 className="mb-1 text-sm font-semibold text-brand-navy dark:text-zinc-100">
+            {t("lunchGroupsMatrixTitle")}
+          </h3>
+          <p className="mb-3 text-xs text-brand-muted">{t("lunchGroupsMatrixHint")}</p>
+          <table className="w-full min-w-[20rem] text-left text-xs">
+            <thead>
+              <tr className="border-b border-brand-navy/10 text-brand-muted">
+                <th className="py-2 pr-4 font-semibold">{t("colLunchGroup")}</th>
+                <th className="py-2 font-semibold">{t("colChambers")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SEAMUN_I_2027_LUNCH_GROUPS.map((lg) => (
+                <tr key={lg.id} className="border-b border-brand-navy/5 last:border-0">
+                  <td className="py-2 pr-4 align-top font-semibold text-brand-navy dark:text-zinc-100">
+                    {t(`lunchGroupTitle.${lg.id}`)}
+                  </td>
+                  <td className="py-2 text-brand-navy/90 dark:text-zinc-200">{lg.chambers.join(" · ")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       ) : null}
 

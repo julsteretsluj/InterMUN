@@ -12,13 +12,16 @@ export type SmtAdvisorAssignmentRow = {
   id: string;
   allocationId: string;
   country: string;
+  committee: string;
   advisorName: string;
+  delegateName: string;
 };
 
 export type SmtDelegateAllocationRef = {
   id: string;
   country: string;
   committee: string;
+  delegateName: string;
 };
 
 export function SmtAdvisorsClient({
@@ -111,6 +114,8 @@ export function SmtAdvisorsClient({
               <thead>
                 <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-xs uppercase tracking-wide text-brand-muted">
                   <th className="px-3 py-2">{t("colAdvisor")}</th>
+                  <th className="px-3 py-2">{t("colDelegate")}</th>
+                  <th className="px-3 py-2">{t("colCommittee")}</th>
                   <th className="px-3 py-2">{t("colAllocationId")}</th>
                   <th className="px-3 py-2">{t("colCountry")}</th>
                 </tr>
@@ -119,6 +124,8 @@ export function SmtAdvisorsClient({
                 {assignments.map((row) => (
                   <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
                     <td className="px-3 py-2 font-medium text-brand-navy dark:text-zinc-100">{row.advisorName}</td>
+                    <td className="px-3 py-2 text-brand-navy/90 dark:text-zinc-200">{row.delegateName}</td>
+                    <td className="px-3 py-2 text-brand-muted">{row.committee}</td>
                     <td className="px-3 py-2 font-mono text-[0.7rem] text-brand-muted">{row.allocationId}</td>
                     <td className="px-3 py-2 text-brand-navy/90 dark:text-zinc-200">{row.country}</td>
                   </tr>
@@ -137,17 +144,19 @@ export function SmtAdvisorsClient({
             <table className="w-full min-w-[36rem] text-left text-sm">
               <thead>
                 <tr className="border-b border-brand-navy/10 bg-brand-navy/[0.04] text-xs uppercase tracking-wide text-brand-muted">
+                  <th className="px-3 py-2">{t("colDelegate")}</th>
+                  <th className="px-3 py-2">{t("colCommittee")}</th>
                   <th className="px-3 py-2">{t("colAllocationId")}</th>
                   <th className="px-3 py-2">{t("colCountry")}</th>
-                  <th className="px-3 py-2">{t("colCommittee")}</th>
                 </tr>
               </thead>
               <tbody>
                 {allocationRefs.map((row) => (
                   <tr key={row.id} className="border-b border-brand-navy/8 last:border-0">
+                    <td className="px-3 py-2 font-medium text-brand-navy dark:text-zinc-100">{row.delegateName}</td>
+                    <td className="px-3 py-2 text-brand-muted">{row.committee}</td>
                     <td className="px-3 py-2 font-mono text-[0.7rem] text-brand-navy dark:text-zinc-100">{row.id}</td>
                     <td className="px-3 py-2 text-brand-navy/90 dark:text-zinc-200">{row.country}</td>
-                    <td className="px-3 py-2 text-brand-muted">{row.committee}</td>
                   </tr>
                 ))}
               </tbody>

@@ -1,3 +1,4 @@
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { SMT_COMMITTEE_CODE } from "@/lib/committee-join-code";
 
 /** SMT / secretariat sheet: second-gate SMT227 (or legacy code / committee = smt). */
@@ -46,6 +47,9 @@ export function filterConferencesForSmtRoomCodes<
   },
 >(rows: T[]): T[] {
   return rows.filter(
-    (c) => !isEventNameOverlayConferenceRow(c) && !isSmtSecretariatConferenceRow(c)
+    (c) =>
+      !isEventNameOverlayConferenceRow(c) &&
+      !isSmtSecretariatConferenceRow(c) &&
+      !isRetiredSeamunCommitteeRow(c)
   );
 }

@@ -1,6 +1,6 @@
 /**
- * Per-advisor timetables derived from the locked team schedule.
- * Four advisors (A–D) per track; chamber and break-room duty rotate each session block.
+ * SEAMUN I 2027 — one advisor per committee (10); timetables follow debate/support tracks
+ * with eat/chill on mixed lunch-group slots (see `seamun-i-2027-lunch-groups.ts`).
  */
 
 import {
@@ -18,13 +18,17 @@ import {
   seamunI2027DebateScheduleGroupId,
   seamunI2027ScheduleGroupForChamber,
 } from "@/lib/seamun-i-2027-committee-groups";
+import {
+  seamunI2027LunchGroupForChamber,
+  seamunI2027LunchTimingTrack,
+} from "@/lib/seamun-i-2027-lunch-groups";
 
-export const SEAMUN_ADVISOR_IDS = ["A", "B", "C", "D"] as const;
-export type SeamunAdvisorId = (typeof SEAMUN_ADVISOR_IDS)[number];
+/** One school advisor per active chamber (10 committees). */
+export const SEAMUN_I_2027_ADVISOR_COMMITTEES = SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.flatMap(
+  (g) => [...g.chambers]
+) as readonly string[];
 
-export function seamunAdvisorIndex(id: SeamunAdvisorId): number {
-  return SEAMUN_ADVISOR_IDS.indexOf(id);
-}
+export type SeamunAdvisorCommittee = (typeof SEAMUN_I_2027_ADVISOR_COMMITTEES)[number];
 
 export function seamunScheduleGroupById(id: SeamunScheduleGroupId): SeamunScheduleGroupDefinition {
   const def = SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.find((g) => g.id === id);
@@ -47,6 +51,7 @@ export function seamunScheduleGroupForColumnHeader(header: string): SeamunSchedu
     if (h === def.scheduleHeader) return def.id;
     if (h.startsWith(GROUP_COLUMN_PREFIX[def.id])) return def.id;
   }
+  if (h.startsWith(GROUP_COLUMN_PREFIX.support)) return "support";
   return null;
 }
 
@@ -63,157 +68,60 @@ export function seamunDebateColumnsForDay(day: 1 | 2): SeamunLockedColumn[] {
 }
 
 export function seamunTeamColumnForGroup(day: 1 | 2, groupId: SeamunScheduleGroupId): SeamunLockedColumn {
-  const col = seamunDebateColumnsForDay(day).find(
-    (c) => seamunScheduleGroupForColumnHeader(c.header) === groupId
-  );
+  const columns = day === 1 ? SEAMUN_I_2027_DAY1_COLUMNS : SEAMUN_I_2027_DAY2_COLUMNS;
+  const col = columns.find((c) => seamunScheduleGroupForColumnHeader(c.header) === groupId);
   if (!col) throw new Error(`No column for ${groupId} on day ${day}`);
   return col;
 }
 
-const SHARED_CATEGORIES = new Set<SeamunLockedBlockCategory>([
-  "arrival_reg",
-  "ceremony",
-  "lunch",
-  "dismissal",
-  "strategy",
-  "sweep",
-]);
+const MEAL_CATEGORIES = new Set<SeamunLockedBlockCategory>(["lunch", "relax"]);
 
 function withoutLocation(block: SeamunLockedBlock): SeamunLockedBlock {
   const { location: _loc, ...rest } = block;
   return rest;
 }
 
-function breakRoomBlock(base: SeamunLockedBlock): SeamunLockedBlock {
-  return withoutLocation({
-    ...base,
-    title: "Break room",
-    category: "break_general",
-  });
+function mealBlocksFromTrack(
+  day: 1 | 2,
+  trackId: SeamunScheduleGroupId
+): { lunch: SeamunLockedBlock; relax: SeamunLockedBlock } | null {
+  const col = seamunTeamColumnForGroup(day, trackId);
+  const lunch = col.blocks.find((b) => b.category === "lunch");
+  const relax = col.blocks.find((b) => b.category === "relax");
+  if (!lunch || !relax) return null;
+  return { lunch, relax };
 }
 
-function advisorSessionBlock(
-  base: SeamunLockedBlock,
-  chamber: string,
-  sessionLabel: string
-): SeamunLockedBlock {
-  return withoutLocation({
-    ...base,
-    title: `${sessionLabel} — ${chamber}`,
-    category: "session",
-  });
-}
+function applyLunchGroupMeals(
+  blocks: SeamunLockedBlock[],
+  day: 1 | 2,
+  committee: string
+): SeamunLockedBlock[] {
+  const lunchGroupId = seamunI2027LunchGroupForChamber(committee);
+  if (!lunchGroupId) return blocks;
 
-/**
- * Assign session/support blocks so each advisor rotates chambers and break-room duty.
- * `breakAdvisor` comes from a shared duty index across sessions, breaks, and chill slots.
- */
-function resolveSessionAssignment(
-  base: SeamunLockedBlock,
-  chambers: readonly string[],
-  advisorIndex: number,
-  sessionBlockIndex: number,
-  breakAdvisor: number
-): SeamunLockedBlock {
-  const sessionLabel = base.title;
-  const c = chambers.length;
-  const s = sessionBlockIndex;
-  const a = advisorIndex;
+  const timingTrack = seamunI2027LunchTimingTrack(day, lunchGroupId);
+  const meals = mealBlocksFromTrack(day, timingTrack);
+  if (!meals) return blocks;
 
-  if (c >= 4) {
-    if (a === breakAdvisor) return breakRoomBlock(base);
-    const active = [0, 1, 2, 3].filter((i) => i !== breakAdvisor);
-    const pos = active.indexOf(a);
-    const skipChamber = (s + breakAdvisor) % c;
-    const chamberPool = chambers.filter((_, i) => i !== skipChamber);
-    const chamberIdx = (pos + s) % chamberPool.length;
-    return advisorSessionBlock(base, chamberPool[chamberIdx]!, sessionLabel);
-  }
-
-  if (c === 3) {
-    if (a === breakAdvisor) return breakRoomBlock(base);
-    const active = [0, 1, 2, 3].filter((i) => i !== breakAdvisor);
-    const pos = active.indexOf(a);
-    const chamberIdx = (pos + s) % 3;
-    return advisorSessionBlock(base, chambers[chamberIdx]!, sessionLabel);
-  }
-
-  if (c === 2) {
-    const assistAdvisor = (breakAdvisor + 1) % 4;
-    if (a === breakAdvisor) return breakRoomBlock(base);
-    if (a === assistAdvisor) {
-      return advisorSessionBlock(base, chambers[s % 2]!, `${sessionLabel} (assist)`);
-    }
-    const active = [0, 1, 2, 3].filter((i) => i !== breakAdvisor && i !== assistAdvisor);
-    const pos = active.indexOf(a);
-    const chamberIdx = (pos + s) % 2;
-    return advisorSessionBlock(base, chambers[chamberIdx]!, sessionLabel);
-  }
-
-  if (c === 1) {
-    const lead = (breakAdvisor + 3) % 4;
-    if (a === lead) {
+  return blocks.map((block) => {
+    if (block.category === "lunch") {
       return withoutLocation({
-        ...base,
-        title: `${chambers[0]} — support`,
-        category: "support",
+        ...block,
+        start: meals.lunch.start,
+        end: meals.lunch.end,
+        title: meals.lunch.title,
       });
     }
-    if (a === breakAdvisor) return breakRoomBlock(base);
-    return withoutLocation({ ...base, title: "Support — assist", category: "support" });
-  }
-
-  const lead = (breakAdvisor + 3) % 4;
-  if (a === lead) {
-    return withoutLocation({ ...base, title: "Support room", category: "support" });
-  }
-  if (a === breakAdvisor) return breakRoomBlock(base);
-  return withoutLocation({ ...base, title: "Support — assist", category: "support" });
-}
-
-/**
- * Build one advisor's blocks for a team track on a given day.
- */
-export function buildSeamunAdvisorDayBlocks(
-  day: 1 | 2,
-  groupId: SeamunScheduleGroupId,
-  advisorId: SeamunAdvisorId
-): SeamunLockedBlock[] {
-  const teamCol = seamunTeamColumnForGroup(day, groupId);
-  const chambers = seamunScheduleGroupById(groupId).chambers;
-  const advisorIndex = seamunAdvisorIndex(advisorId);
-
-  let sessionBlockIndex = 0;
-  let rotatableDutyIndex = 0;
-
-  return teamCol.blocks.map((block) => {
-    if (SHARED_CATEGORIES.has(block.category)) return withoutLocation(block);
-
-    const isRotatableDuty =
-      block.category === "session" ||
-      block.category === "support" ||
-      block.category === "break_general" ||
-      block.category === "relax";
-
-    if (!isRotatableDuty) return withoutLocation(block);
-
-    const breakAdvisor = rotatableDutyIndex % 4;
-    rotatableDutyIndex += 1;
-
-    if (block.category === "session" || block.category === "support") {
-      const out = resolveSessionAssignment(
-        block,
-        chambers,
-        advisorIndex,
-        sessionBlockIndex,
-        breakAdvisor
-      );
-      sessionBlockIndex += 1;
-      return out;
+    if (block.category === "relax") {
+      return withoutLocation({
+        ...block,
+        start: meals.relax.start,
+        end: meals.relax.end,
+        title: meals.relax.title,
+      });
     }
-
-    if (advisorIndex === breakAdvisor) return withoutLocation(breakRoomBlock(block));
-    return withoutLocation(block);
+    return block;
   });
 }
 
@@ -221,24 +129,14 @@ export function seamunDefaultGroupForCommittee(committee: string | null | undefi
   return seamunI2027DebateScheduleGroupId(seamunI2027ScheduleGroupForChamber(committee));
 }
 
-/** Debate chamber labels (four tracks; excludes sensory/support). */
+/** All chamber labels on the locked timetable (10 committees). */
 export function seamunAllScheduleCommittees(): string[] {
-  return SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.flatMap((g) => [...g.chambers]);
+  return [...SEAMUN_I_2027_ADVISOR_COMMITTEES];
 }
 
 /**
- * Delegate/chair timetable: team track timings for this chamber (column header shows committee).
+ * Delegate/chair timetable: team track timings for this chamber, with lunch-group eat/chill.
  */
-/** Count “Break room” duty blocks (session/support rotation + break/chill rotation). */
-export function seamunAdvisorBreakRoomCount(
-  day: 1 | 2,
-  groupId: SeamunScheduleGroupId,
-  advisorId: SeamunAdvisorId
-): number {
-  return buildSeamunAdvisorDayBlocks(day, groupId, advisorId).filter((b) => b.title === "Break room")
-    .length;
-}
-
 export function buildSeamunCommitteeDayBlocks(day: 1 | 2, committee: string): SeamunLockedBlock[] {
   const key = committee.trim();
   const groupId = seamunI2027ScheduleGroupForChamber(key);
@@ -246,10 +144,17 @@ export function buildSeamunCommitteeDayBlocks(day: 1 | 2, committee: string): Se
 
   const teamCol = seamunTeamColumnForGroup(day, groupId);
 
-  return teamCol.blocks.map((block) => {
+  const mapped = teamCol.blocks.map((block) => {
     if (block.category === "support" && groupId === "support") {
       return withoutLocation({ ...block, title: key, category: "support" as const });
     }
     return withoutLocation(block);
   });
+
+  return applyLunchGroupMeals(mapped, day, key);
+}
+
+/** One advisor per committee — same clock as the chamber they support. */
+export function buildSeamunAdvisorDayBlocks(day: 1 | 2, committee: string): SeamunLockedBlock[] {
+  return buildSeamunCommitteeDayBlocks(day, committee);
 }

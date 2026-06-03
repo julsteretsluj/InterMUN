@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import type { AwardAssignment, AwardParticipationScore } from "@/types/database";
 import { isConferenceEventPlaceholderRow } from "@/lib/awards";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import {
   evaluateSmtParticipationReadiness,
@@ -117,7 +118,12 @@ export default async function SmtAwardsPage() {
   let bestDelegateComparisonRows: BestDelegateComparisonRow[] = [];
 
   if (eventId) {
-    const rawConfs = (conferences ?? []).filter((c) => c.event_id === eventId && !isConferenceEventPlaceholderRow(c));
+    const rawConfs = (conferences ?? []).filter(
+      (c) =>
+        c.event_id === eventId &&
+        !isConferenceEventPlaceholderRow(c) &&
+        !isRetiredSeamunCommitteeRow(c)
+    );
     const allConfIds = rawConfs.map((c) => c.id);
     const { data: allocForMap } = await supabase.from("allocations").select("conference_id").in("conference_id", allConfIds);
     const conferenceIdsWithAllocations = new Set(

@@ -13,6 +13,13 @@ import {
 } from "@/lib/seamun-delegate-chair-contacts";
 import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
 import { DelegateHubTileLink } from "@/components/delegate/DelegateHubTileLink";
+import { PriorityTabLink } from "@/components/PriorityTabLink";
+import {
+  DELEGATE_DASHBOARD_TAB_ORDER,
+  DELEGATE_HUB_TILE_KEY_ORDER,
+  sortByKeyPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { getTranslations } from "next-intl/server";
 
 export default async function DelegateDashboardPage({
@@ -63,7 +70,7 @@ export default async function DelegateDashboardPage({
       )
     : [];
 
-  const tileDefs: { href: string; key: string }[] = [
+  const tileDefsRaw: { href: string; key: string }[] = [
     { href: "/stances", key: "stances" },
     { href: "/delegate#countdown", key: "countdown" },
     { href: "/committee-room", key: "matrix" },
@@ -85,19 +92,25 @@ export default async function DelegateDashboardPage({
       : []),
   ];
 
-  const tiles = tileDefs.map((def, index) => ({
+  const tiles = withSequentialPriority(
+    sortByKeyPriority(tileDefsRaw, "key", DELEGATE_HUB_TILE_KEY_ORDER)
+  ).map((def) => ({
     href: def.href,
     label: td(`tiles.${def.key}.label`),
     hint: td(`tiles.${def.key}.hint`),
-    priority: index + 1,
+    priority: def.priority,
   }));
+
   const { tab } = await searchParams;
-  const dashboardTabs = [
+  const dashboardTabsRaw = [
     { id: "overview", label: td("tabs.overview") },
     { id: "checklist", label: td("tabs.checklist") },
     { id: "jump", label: td("tabs.jump") },
     ...(showChairEmailsTab ? ([{ id: "chairs", label: td("tabs.chairEmails") }] as const) : []),
   ];
+  const dashboardTabs = withSequentialPriority(
+    sortByKeyPriority(dashboardTabsRaw, "id", DELEGATE_DASHBOARD_TAB_ORDER)
+  );
   const validTabs = new Set(["overview", "checklist", "jump", ...(showChairEmailsTab ? ["chairs"] : [])]);
   const activeTab = tab && validTabs.has(tab) ? tab : "overview";
 
@@ -120,19 +133,15 @@ export default async function DelegateDashboardPage({
 
         <div className="flex flex-wrap gap-1 border-b border-[var(--hairline)]" role="tablist" aria-label={td("tabs.ariaLabel")}>
           {dashboardTabs.map((tabItem) => (
-            <Link
-              href={tabItem.id === "overview" ? "/delegate" : `/delegate?tab=${encodeURIComponent(tabItem.id)}`}
+            <PriorityTabLink
               key={tabItem.id}
-              role="tab"
-              aria-selected={activeTab === tabItem.id}
-              className={`rounded-t-xl px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
-                activeTab === tabItem.id
-                  ? "border-[var(--accent)] text-[var(--accent)] bg-white"
-                  : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-white/60"
-              }`}
-            >
-              {tabItem.label}
-            </Link>
+              href={tabItem.id === "overview" ? "/delegate" : `/delegate?tab=${encodeURIComponent(tabItem.id)}`}
+              label={tabItem.label}
+              priority={tabItem.priority}
+              active={activeTab === tabItem.id}
+              activeClassName="border-[var(--accent)] text-[var(--accent)] bg-white"
+              inactiveClassName="border-transparent text-brand-muted hover:text-brand-navy hover:bg-white/60"
+            />
           ))}
         </div>
         {activeTab === "overview" ? (
@@ -163,7 +172,7 @@ export default async function DelegateDashboardPage({
         {activeTab === "jump" ? (
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("jumpTo")}</h2>
-          <p className="mt-1 text-xs text-brand-muted">{td("jumpToOrderHint")}</p>
+          <p className="mt-1 text-xs text-brand-muted">{tc("navPriorityOrderHint")}</p>
           <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {tiles.map((tile) => (
               <li key={tile.href + tile.label}>

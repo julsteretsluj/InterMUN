@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
 import { committeeSessionGroupKey } from "@/lib/committee-session-group";
 import { formatCommitteeCardTitle, resolveCommitteeDisplayTags, resolveCommitteeFullName } from "@/lib/committee-card-display";
@@ -10,6 +11,8 @@ import {
   eslFriendlyTagClass,
   formatTagClass,
 } from "@/lib/committee-tag-styles";
+import { CommitteeLogo } from "@/components/CommitteeLogo";
+import { NavPriorityBadge } from "@/components/NavPriorityBadge";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getLocale, getTranslations } from "next-intl/server";
 import {
@@ -76,7 +79,7 @@ export default async function SmtOverviewPage({
   const { data: committees } = await supabase
     .from("conferences")
     .select(
-      "id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, created_at"
+      "id, name, committee, tagline, committee_code, committee_full_name, chair_names, committee_logo_url, created_at, room_code, procedure_profile"
     )
     .eq("event_id", eventId)
     .order("committee", { ascending: true, nullsFirst: false })
@@ -90,7 +93,7 @@ export default async function SmtOverviewPage({
       committeeLabel.length > 0 &&
       committeeLabel.toLowerCase() !== "committee" &&
       fullName.toLowerCase() !== "committee";
-    return code !== SMT_COMMITTEE_CODE && hasRealCommitteeLabel;
+    return code !== SMT_COMMITTEE_CODE && hasRealCommitteeLabel && !isRetiredSeamunCommitteeRow(c);
   });
 
   type Row = (typeof rows)[number];
@@ -135,6 +138,16 @@ export default async function SmtOverviewPage({
     });
   }
 
+  type CommitteeGroup = {
+    latestId: string;
+    latestRow: Row;
+    topicCount: number;
+    topics: string[];
+    logoUrl: string | null;
+  };
+  const DIFFICULTY_SECTION_ORDER = ["Beginner", "Intermediate", "Advanced"] as const;
+  type DifficultySection = (typeof DIFFICULTY_SECTION_ORDER)[number];
+
   const list = Array.from(groups.values()).sort((a, b) => {
     const aDifficulty = resolveCommitteeDisplayTags(a.latestRow.committee)?.difficulty;
     const bDifficulty = resolveCommitteeDisplayTags(b.latestRow.committee)?.difficulty;
@@ -161,6 +174,16 @@ export default async function SmtOverviewPage({
     ).toLowerCase();
     return aTitle.localeCompare(bTitle);
   });
+
+  const difficultySections: { difficulty: DifficultySection | null; items: CommitteeGroup[] }[] = [];
+  for (const level of DIFFICULTY_SECTION_ORDER) {
+    const items = list.filter(
+      (g) => resolveCommitteeDisplayTags(g.latestRow.committee)?.difficulty === level
+    );
+    if (items.length > 0) difficultySections.push({ difficulty: level, items });
+  }
+  const untagged = list.filter((g) => !resolveCommitteeDisplayTags(g.latestRow.committee)?.difficulty);
+  if (untagged.length > 0) difficultySections.push({ difficulty: null, items: untagged });
 
   if (list.length === 0) {
     return (
@@ -193,87 +216,130 @@ export default async function SmtOverviewPage({
       <div className="mb-5">
         <RoleSetupChecklist role="smt" />
       </div>
-      <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((g) => (
-          <Link
-            key={g.latestId}
-            href={`/smt/committees/${g.latestId}`}
-            className="rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
-          >
-            {g.logoUrl ? (
-              <img
-                src={g.logoUrl}
-                alt={t("committeeLogoAlt", {
-                  name: g.latestRow.committee
-                    ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
-                    : "Committee",
+      <div className="space-y-8">
+        {(() => {
+          let priority = 0;
+          return difficultySections.map((section, sectionIndex) => (
+            <section
+              key={section.difficulty ?? "other"}
+              className={sectionIndex > 0 ? "border-t border-brand-navy/10 pt-8 dark:border-white/10" : undefined}
+              aria-labelledby={`smt-difficulty-${section.difficulty ?? "other"}`}
+            >
+              <div className="mb-4 flex items-center gap-3">
+                {section.difficulty ? (
+                  <h2
+                    id={`smt-difficulty-${section.difficulty}`}
+                    className={difficultyTagClass(section.difficulty)}
+                  >
+                    {translateCommitteeTagDifficulty(section.difficulty, tCommitteeTags)}
+                  </h2>
+                ) : (
+                  <h2
+                    id="smt-difficulty-other"
+                    className="inline-flex rounded-full border border-brand-navy/15 bg-brand-navy/[0.04] px-2 py-0.5 text-[0.68rem] font-semibold text-brand-navy/80 dark:border-white/15 dark:bg-white/[0.06] dark:text-brand-muted"
+                  >
+                    {t("difficultyOther")}
+                  </h2>
+                )}
+                <div
+                  className="h-px min-w-0 flex-1 bg-brand-navy/12 dark:bg-white/12"
+                  role="presentation"
+                  aria-hidden
+                />
+              </div>
+              <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+                {section.items.map((g) => {
+                  priority += 1;
+                  const cardPriority = priority;
+                  return (
+                    <Link
+                      key={g.latestId}
+                      href={`/smt/committees/${g.latestId}`}
+                      aria-label={`${cardPriority}. ${g.latestRow.committee ?? "Committee"}`}
+                      className="relative rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 pl-9 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
+                    >
+                      <NavPriorityBadge priority={cardPriority} variant="tile" />
+                      {g.logoUrl ? (
+                        <CommitteeLogo
+                          src={g.logoUrl}
+                          alt={t("committeeLogoAlt", {
+                            name: g.latestRow.committee
+                              ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
+                              : "Committee",
+                          })}
+                          className="mb-1.5"
+                        />
+                      ) : null}
+                      <p className="text-sm font-semibold leading-snug">
+                        {(() => {
+                          const localizedFull = localizeKnownCommitteeFullName(
+                            resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)
+                          );
+                          const code = g.latestRow.committee?.trim() || "";
+                          if (localizedFull && code) {
+                            return `${localizedFull} — ${translateCommitteeLabel(tCommitteeLabels, code)}`;
+                          }
+                          return translateCommitteeLabel(
+                            tCommitteeLabels,
+                            formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee)
+                          );
+                        })()}
+                      </p>
+                      {(() => {
+                        const tags = resolveCommitteeDisplayTags(g.latestRow.committee);
+                        if (!tags) return null;
+                        return (
+                          <div className="mt-1.5 flex flex-wrap gap-1.5">
+                            <span className={formatTagClass(tags.format)}>
+                              {translateCommitteeTagFormat(tags.format, tCommitteeTags)}
+                            </span>
+                            <span className={ageRangeTagClass()}>
+                              {translateCommitteeTagAgeRange(tags.ageRangeKey, tCommitteeTags)}
+                            </span>
+                            {tags.eslFriendly ? (
+                              <span className={eslFriendlyTagClass(true)}>{t("eslFriendly")}</span>
+                            ) : null}
+                          </div>
+                        );
+                      })()}
+                      {g.latestRow.chair_names?.trim() ? (
+                        <p className="mt-1.5 text-xs text-brand-muted">
+                          <span className="font-medium text-brand-navy/80">{t("chairsLabel")} </span>
+                          {g.latestRow.chair_names.trim()}
+                        </p>
+                      ) : null}
+                      {g.latestRow.committee_code?.trim() ? (
+                        <p className="mt-1.5 text-xs font-mono tracking-widest text-brand-navy/70">
+                          {g.latestRow.committee_code.trim().toUpperCase()}
+                        </p>
+                      ) : null}
+                      {g.topicCount > 1 ? (
+                        <p className="mt-1 text-[0.72rem] font-medium text-brand-navy/85">
+                          {t("sessionsCount", { count: g.topicCount })}
+                        </p>
+                      ) : null}
+                      {g.topics.length > 0 ? (
+                        <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
+                          {[...g.topics]
+                            .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }))
+                            .map((topic, ti) => (
+                              <li
+                                key={`${ti}-${topic.slice(0, 48)}`}
+                                className="text-[0.72rem] text-brand-navy/90 leading-snug"
+                              >
+                                <span className="font-semibold text-brand-navy">{t("topicLabel")} </span>
+                                {translateAgendaTopicLabel(tTopics, topic, locale)}
+                              </li>
+                            ))}
+                        </ul>
+                      ) : null}
+                    </Link>
+                  );
                 })}
-                className="mb-1.5 h-9 w-9 rounded-md border border-brand-navy/10 bg-white/60 object-contain"
-              />
-            ) : null}
-            <p className="text-sm font-semibold leading-snug">
-              {(() => {
-                const localizedFull = localizeKnownCommitteeFullName(
-                  resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)
-                );
-                const code = g.latestRow.committee?.trim() || "";
-                if (localizedFull && code) return `${localizedFull} — ${translateCommitteeLabel(tCommitteeLabels, code)}`;
-                return translateCommitteeLabel(
-                  tCommitteeLabels,
-                  formatCommitteeCardTitle(g.latestRow.committee_full_name, g.latestRow.committee)
-                );
-              })()}
-            </p>
-            {(() => {
-              const tags = resolveCommitteeDisplayTags(g.latestRow.committee);
-              if (!tags) return null;
-              return (
-                <div className="mt-1.5 flex flex-wrap gap-1.5">
-                  <span className={difficultyTagClass(tags.difficulty)}>
-                    {translateCommitteeTagDifficulty(tags.difficulty, tCommitteeTags)}
-                  </span>
-                  <span className={formatTagClass(tags.format)}>
-                    {translateCommitteeTagFormat(tags.format, tCommitteeTags)}
-                  </span>
-                  <span className={ageRangeTagClass()}>
-                    {translateCommitteeTagAgeRange(tags.ageRangeKey, tCommitteeTags)}
-                  </span>
-                  {tags.eslFriendly ? (
-                    <span className={eslFriendlyTagClass(true)}>{t("eslFriendly")}</span>
-                  ) : null}
-                </div>
-              );
-            })()}
-            {g.latestRow.chair_names?.trim() ? (
-              <p className="mt-1.5 text-xs text-brand-muted">
-                <span className="font-medium text-brand-navy/80">{t("chairsLabel")} </span>
-                {g.latestRow.chair_names.trim()}
-              </p>
-            ) : null}
-            {g.latestRow.committee_code?.trim() ? (
-              <p className="mt-1.5 text-xs font-mono tracking-widest text-brand-navy/70">
-                {g.latestRow.committee_code.trim().toUpperCase()}
-              </p>
-            ) : null}
-            {g.topicCount > 1 ? (
-              <p className="mt-1 text-[0.72rem] font-medium text-brand-navy/85">
-                {t("sessionsCount", { count: g.topicCount })}
-              </p>
-            ) : null}
-            {g.topics.length > 0 ? (
-              <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
-                {[...g.topics]
-                  .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }))
-                  .map((topic, ti) => (
-                  <li key={`${ti}-${topic.slice(0, 48)}`} className="text-[0.72rem] text-brand-navy/90 leading-snug">
-                    <span className="font-semibold text-brand-navy">{t("topicLabel")}</span>{" "}
-                    {translateAgendaTopicLabel(tTopics, topic, locale)}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </Link>
-        ))}
+              </div>
+            </section>
+          ));
+        })()}
       </div>
     </div>
   );

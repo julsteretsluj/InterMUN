@@ -1,8 +1,15 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { PriorityTabLink } from "@/components/PriorityTabLink";
+import {
+  SMT_COMMITTEE_DETAIL_TAB_ORDER,
+  sortByKeyPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
+import { CommitteeLogo } from "@/components/CommitteeLogo";
 import { ChairLiveFloor } from "@/components/session/ChairLiveFloor";
 import { VirtualCommitteeRoom } from "@/components/committee-room/VirtualCommitteeRoom";
 import { CommitteeRoomStaffControls } from "@/components/committee-room/CommitteeRoomStaffControls";
@@ -172,25 +179,27 @@ export default async function SmtCommitteeLivePage({
       </Link>
 
       <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={t("tabs.ariaLabel")}>
-        {[
-          { id: "overview", label: t("tabs.overview") },
-          { id: "room", label: t("tabs.room") },
-          { id: "floor", label: t("tabs.floor") },
-          { id: "history", label: t("tabs.history") },
-        ].map((item) => (
-          <a
+        {withSequentialPriority(
+          sortByKeyPriority(
+            [
+              { id: "overview", label: t("tabs.overview") },
+              { id: "room", label: t("tabs.room") },
+              { id: "floor", label: t("tabs.floor") },
+              { id: "history", label: t("tabs.history") },
+            ],
+            "id",
+            SMT_COMMITTEE_DETAIL_TAB_ORDER
+          )
+        ).map((item) => (
+          <PriorityTabLink
             key={item.id}
             href={item.id === "overview" ? `/smt/committees/${id}` : `/smt/committees/${id}?tab=${item.id}`}
-            role="tab"
-            aria-selected={activeTab === item.id}
-            className={`rounded-t-lg px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
-              activeTab === item.id
-                ? "border-brand-accent text-brand-navy bg-brand-paper"
-                : "border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
-            }`}
-          >
-            {item.label}
-          </a>
+            label={item.label}
+            priority={item.priority}
+            active={activeTab === item.id}
+            activeClassName="border-brand-accent text-brand-navy bg-brand-paper"
+            inactiveClassName="border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+          />
         ))}
       </div>
 
@@ -199,12 +208,13 @@ export default async function SmtCommitteeLivePage({
         <div>
           <div className="flex items-start gap-3.5">
             {confMeta.committee_logo_url ? (
-              <img
+              <CommitteeLogo
                 src={confMeta.committee_logo_url}
                 alt={`${confMeta.committee?.trim()
                   ? translateCommitteeLabel(tCommitteeLabels, confMeta.committee)
                   : t("committeeFallback")} logo`}
-                className="mt-1 h-12 w-12 rounded-md border border-brand-navy/10 bg-white/70 object-contain"
+                size="md"
+                className="mt-1"
               />
             ) : null}
             <h1 className="font-display text-[1.6rem] font-semibold text-brand-navy">{displayTitle}</h1>

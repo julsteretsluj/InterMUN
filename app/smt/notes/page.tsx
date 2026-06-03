@@ -4,6 +4,10 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isConferenceEventPlaceholderRow } from "@/lib/awards";
+import {
+  filterActiveSeamunCommitteeRows,
+  filterCanonicalCommitteeOptions,
+} from "@/lib/retired-seamun-committees";
 import { canonicalCommitteesForEventConferenceRows } from "@/lib/conference-committee-canonical";
 import { loadDelegationNotesBundle } from "@/lib/delegation-notes-bundle";
 import { SmtNotesPageClient } from "./SmtNotesPageClient";
@@ -36,11 +40,15 @@ export default async function SmtNotesPage() {
 
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee, committee_code")
+    .select(
+      "id, name, committee, committee_code, committee_full_name, room_code, procedure_profile"
+    )
     .eq("event_id", eventId)
     .order("committee");
 
-  const delegateCommittees = (conferences ?? []).filter((c) => !isConferenceEventPlaceholderRow(c));
+  const delegateCommittees = filterActiveSeamunCommitteeRows(
+    (conferences ?? []).filter((c) => !isConferenceEventPlaceholderRow(c))
+  );
   const conferenceIds = delegateCommittees.map((c) => c.id);
 
   const conferenceIdsWithAllocations = new Set<string>();
@@ -53,8 +61,12 @@ export default async function SmtNotesPage() {
       if (a.conference_id) conferenceIdsWithAllocations.add(a.conference_id);
     }
   }
-  const { committees: canonicalCommittees, conferenceIdToCanonical } =
+  const { committees: canonicalCommitteesRaw, conferenceIdToCanonical } =
     canonicalCommitteesForEventConferenceRows(delegateCommittees, conferenceIdsWithAllocations);
+  const canonicalCommittees = filterCanonicalCommitteeOptions(
+    canonicalCommitteesRaw,
+    delegateCommittees
+  );
 
   const { data: profile } = await supabase
     .from("profiles")

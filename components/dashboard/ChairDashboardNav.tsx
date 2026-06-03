@@ -4,6 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import {
+  CHAIR_NAV_ITEM_KEY_ORDER,
+  sortByKeyPriority,
+} from "@/lib/nav-priority-order";
 import { cn } from "@/lib/utils";
 
 const LABELS_STORAGE_KEY = "intermun-chair-nav-hide-labels";
@@ -120,24 +125,28 @@ function ChairNavRow({
   label,
   isActive,
   labelsHidden,
+  priority,
 }: {
   item: ChairNavItem;
   label: string;
   isActive: boolean;
   labelsHidden: boolean;
+  priority: number;
 }) {
   return (
     <Link
       href={item.href}
-      title={labelsHidden ? label : undefined}
+      title={labelsHidden ? `${priority}. ${label}` : undefined}
+      aria-label={`${priority}. ${label}`}
       className={cn(
-        "discord-interactive-hover flex w-full min-w-0 items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2 text-sm transition-apple",
-        labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0",
+        "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2 text-sm transition-apple",
+        labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0 pl-2",
         isActive
           ? "dashboard-nav-active text-[var(--accent)]"
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
+      {!labelsHidden ? <NavPriorityBadge priority={priority} /> : null}
       <span
         className={cn(
           "flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent",
@@ -227,13 +236,14 @@ export function ChairDashboardSidebar({
           labelsHidden ? "px-1.5" : "px-3"
         )}
       >
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <ChairNavRow
             key={item.href + item.itemKey}
             item={item}
             label={item.labelOverride ?? tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
+            priority={index + 1}
           />
         ))}
       </nav>
@@ -279,18 +289,22 @@ function DockItem({
   label,
   isActive,
   labelsHidden,
+  priority,
 }: {
   item: ChairNavItem;
   label: string;
   isActive: boolean;
   labelsHidden: boolean;
+  priority: number;
 }) {
   return (
     <Link
       href={item.href}
-      title={label}
-      className="group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
+      title={`${priority}. ${label}`}
+      aria-label={`${priority}. ${label}`}
+      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
     >
+      <NavPriorityBadge priority={priority} />
       <span
         className={cn(
           "flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted",
@@ -353,8 +367,10 @@ export function ChairMobileDock({
   const hubActive = pathname === "/chair";
   const navItems = useMemo(() => {
     const items = filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled);
-    if (seamunScheduleEnabled) return items;
-    return items.filter((item) => item.itemKey !== "conferenceSchedule");
+    const filtered = seamunScheduleEnabled
+      ? items
+      : items.filter((item) => item.itemKey !== "conferenceSchedule");
+    return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
   }, [crisisReportingEnabled, seamunScheduleEnabled]);
 
   return (
@@ -380,13 +396,14 @@ export function ChairMobileDock({
             </span>
           ) : null}
         </Link>
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <DockItem
             key={item.href + item.itemKey}
             item={item}
             label={item.labelOverride ?? tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
+            priority={index + 1}
           />
         ))}
         <button

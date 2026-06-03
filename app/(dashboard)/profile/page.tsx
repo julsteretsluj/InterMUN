@@ -11,7 +11,13 @@ import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
+import { NavPriorityBadge } from "@/components/NavPriorityBadge";
 import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
+import {
+  PROFILE_DELEGATE_QUICK_LINK_HREF_ORDER,
+  sortNavByHrefPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { getLocale, getTranslations } from "next-intl/server";
 import { translateAgendaTopicLabel, translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
@@ -375,31 +381,38 @@ export default async function ProfilePage({
         </h2>
         <p className="mt-3 text-brand-muted">{tp("delegateWelcome.subtitle")}</p>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {[
-            { href: "/documents", label: tp("delegateWelcome.links.documents") },
-            { href: "/chats-notes", label: tp("delegateWelcome.links.notes") },
-            { href: "/committee-room", label: tp("delegateWelcome.links.committeeRoom") },
-            { href: "/running-notes", label: tp("delegateWelcome.links.runningNotes") },
-            { href: "/ideas", label: tp("delegateWelcome.links.ideas") },
-            { href: "/guides", label: tp("delegateWelcome.links.guides") },
-            { href: "/sources", label: tp("delegateWelcome.links.sources") },
-            { href: "/resolutions", label: tp("delegateWelcome.links.resolutions") },
-            { href: "/speeches", label: tp("delegateWelcome.links.speeches") },
-            { href: "/stances", label: tp("delegateWelcome.links.stances") },
-            ...(crisisReportingEnabled
-              ? ([
-                  { href: "/crisis-slides", label: tp("delegateWelcome.links.crisisSlides") },
-                  { href: "/report", label: tp("delegateWelcome.links.report") },
-                ] as const)
-              : []),
-            { href: "/voting", label: tp("delegateWelcome.links.motions") },
-            { href: "/voting", label: tp("delegateWelcome.links.points") },
-          ].map((item) => (
+          {withSequentialPriority(
+            sortNavByHrefPriority(
+              [
+                { href: "/documents", label: tp("delegateWelcome.links.documents") },
+                { href: "/chats-notes", label: tp("delegateWelcome.links.notes") },
+                { href: "/committee-room", label: tp("delegateWelcome.links.committeeRoom") },
+                { href: "/running-notes", label: tp("delegateWelcome.links.runningNotes") },
+                { href: "/ideas", label: tp("delegateWelcome.links.ideas") },
+                { href: "/guides", label: tp("delegateWelcome.links.guides") },
+                { href: "/sources", label: tp("delegateWelcome.links.sources") },
+                { href: "/resolutions", label: tp("delegateWelcome.links.resolutions") },
+                { href: "/speeches", label: tp("delegateWelcome.links.speeches") },
+                { href: "/stances", label: tp("delegateWelcome.links.stances") },
+                ...(crisisReportingEnabled
+                  ? ([
+                      { href: "/crisis-slides", label: tp("delegateWelcome.links.crisisSlides") },
+                      { href: "/report", label: tp("delegateWelcome.links.report") },
+                    ] as const)
+                  : []),
+                { href: "/voting", label: tp("delegateWelcome.links.motions") },
+                { href: "/voting", label: tp("delegateWelcome.links.points") },
+              ],
+              PROFILE_DELEGATE_QUICK_LINK_HREF_ORDER
+            )
+          ).map((item) => (
             <Link
               key={`${item.label}-${item.href}`}
               href={item.href}
-              className="rounded-lg border border-brand-navy/20 px-3 py-2 text-sm font-medium text-brand-navy bg-black/25 hover:bg-brand-cream transition-colors"
+              aria-label={`${item.priority}. ${item.label}`}
+              className="nav-priority-link relative rounded-lg border border-brand-navy/20 bg-black/25 px-3 py-2 pl-8 text-sm font-medium text-brand-navy transition-colors hover:bg-brand-cream"
             >
+              <NavPriorityBadge priority={item.priority} />
               {item.label}
             </Link>
           ))}

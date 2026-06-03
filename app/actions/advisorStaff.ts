@@ -127,11 +127,17 @@ export async function smtAssignAdvisorDelegateAction(
 
   const { data: alloc } = await auth.supabase
     .from("allocations")
-    .select("id, conference_id, user_id, country")
+    .select("id, conference_id, user_id, country, profiles:user_id ( role )")
     .eq("id", allocationId)
     .maybeSingle();
   if (!alloc?.conference_id) return { error: t("delegateNotFound") };
   if (!alloc.user_id) return { error: t("delegateUnlinked") };
+
+  const linkedRoleRaw = alloc.profiles as { role: string | null } | { role: string | null }[] | null;
+  const linkedRole = Array.isArray(linkedRoleRaw) ? linkedRoleRaw[0]?.role : linkedRoleRaw?.role;
+  if (linkedRole?.toString().trim().toLowerCase() !== "delegate") {
+    return { error: t("notDelegateSeat") };
+  }
 
   const { error: upsertErr } = await admin.from("advisor_delegate_assignments").upsert(
     {

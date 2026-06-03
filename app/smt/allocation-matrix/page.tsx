@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { AllocationMatrixManagerClient, type MatrixRow } from "./AllocationMatrixManagerClient";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import {
   committeeHintForSmtDaisPlan,
   isEventNameOverlayConferenceRow,
@@ -124,7 +125,9 @@ export default async function SmtAllocationMatrixPage({
 
   // Some datasets include the overall event name as a conference row; it should not
   // show up as a selectable sheet/tab in the allocation matrix.
-  const filtered = unfiltered.filter((c) => !isEventNameOverlayConferenceRow(c));
+  const filtered = unfiltered.filter(
+    (c) => !isEventNameOverlayConferenceRow(c) && !isRetiredSeamunCommitteeRow(c)
+  );
   // Safety valve: never hide the entire matrix. If filtering removes every row,
   // fall back to the raw conference list.
   const rawList = filtered.length > 0 ? filtered : unfiltered;

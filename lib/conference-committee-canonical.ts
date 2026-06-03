@@ -4,6 +4,7 @@ import {
   committeeHintForSmtDaisPlan,
   isSmtSecretariatConferenceRow,
 } from "@/lib/smt-conference-filters";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 
 type ConfRow = {
   id: string;
@@ -94,13 +95,22 @@ export type CanonicalCommitteeRow = { id: string; label: string };
  * canonical `conferences.id` per committee — same bucketing as the allocation matrix and committee awards.
  */
 export function canonicalCommitteesForEventConferenceRows<
-  T extends { id: string; name: string | null; committee: string | null; committee_code?: string | null },
+  T extends {
+    id: string;
+    name: string | null;
+    committee: string | null;
+    committee_code?: string | null;
+    committee_full_name?: string | null;
+    room_code?: string | null;
+    procedure_profile?: string | null;
+  },
 >(rows: T[], conferenceIdsWithAllocations: Set<string>): {
   committees: CanonicalCommitteeRow[];
   conferenceIdToCanonical: Map<string, string>;
 } {
   const byKey = new Map<string, T[]>();
   for (const c of rows) {
+    if (isRetiredSeamunCommitteeRow(c)) continue;
     const k = committeeTabKey(c);
     const arr = byKey.get(k) ?? [];
     arr.push(c);
@@ -122,6 +132,7 @@ export function canonicalCommitteesForEventConferenceRows<
     }
     const canonicalId = primary.id;
     const label = primary.committee?.trim() || primary.name?.trim() || primary.id.slice(0, 8);
+    if (isRetiredSeamunCommitteeRow({ ...primary, committee: label })) continue;
     committees.push({ id: canonicalId, label });
     for (const m of group) {
       conferenceIdToCanonical.set(m.id, canonicalId);

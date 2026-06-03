@@ -4,6 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import {
+  ADVISOR_TAB_NAV_HREF_ORDER,
+  CHAIR_STAFF_TAB_NAV_HREF_ORDER,
+  DELEGATE_TAB_NAV_HREF_ORDER,
+  MAIN_TAB_GROUP_ORDER,
+  sortNavByHrefPriority,
+  withSequentialPriority,
+} from "@/lib/nav-priority-order";
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/database";
 
@@ -87,11 +96,11 @@ function useNavTabs(
 type MainTabKey = "home" | "session" | "library";
 type MainTab = { key: MainTabKey; labelKey: "home" | "session" | "library"; emoji: string };
 
-const MAIN_TABS: MainTab[] = [
-  { key: "home", labelKey: "home", emoji: "🏠" },
-  { key: "session", labelKey: "session", emoji: "🧠" },
-  { key: "library", labelKey: "library", emoji: "📚" },
-];
+const MAIN_TABS: MainTab[] = MAIN_TAB_GROUP_ORDER.map((key) => ({
+  key,
+  labelKey: key,
+  emoji: key === "home" ? "🏠" : key === "session" ? "🧠" : "📚",
+}));
 
 const MAIN_TAB_TILE_CLASS: Record<MainTabKey, string> = {
   home: "bg-[#007AFF]",
@@ -124,21 +133,25 @@ function AspireSidebarLink({
   tab,
   label,
   isActive,
+  priority,
 }: {
   tab: { href: string; labelKey: string; emoji: string };
   label: string;
   isActive: boolean;
+  priority: number;
 }) {
   return (
     <Link
       href={tab.href}
+      aria-label={`${priority}. ${label}`}
       className={cn(
-        "flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5",
+        "nav-priority-link flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-7",
         isActive
           ? "dashboard-nav-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
+      <NavPriorityBadge priority={priority} />
       <span className="text-base leading-none" aria-hidden>{tab.emoji}</span>
       <span className="hidden truncate group-hover:block">{label}</span>
     </Link>
@@ -149,17 +162,21 @@ function DockLink({
   tab,
   label,
   isActive,
+  priority,
 }: {
   tab: { href: string; labelKey: string; emoji: string };
   label: string;
   isActive: boolean;
+  priority: number;
 }) {
   return (
     <Link
       href={tab.href}
-      title={label}
-      className="group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
+      title={`${priority}. ${label}`}
+      aria-label={`${priority}. ${label}`}
+      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1.5 py-1.5 transition-apple active:scale-[0.97]"
     >
+      <NavPriorityBadge priority={priority} />
       <span
         className={cn(
           "flex h-8 w-8 items-center justify-center text-brand-muted transition-apple",
@@ -195,14 +212,27 @@ export function TabNav({
 }) {
   const t = useTranslations("tabNav");
   const pathname = usePathname();
-  const tabs = useNavTabs(staffRole, crisisReportingEnabled, seamunScheduleEnabled);
+  const rawTabs = useNavTabs(staffRole, crisisReportingEnabled, seamunScheduleEnabled);
+  const hrefOrder =
+    staffRole === "advisor"
+      ? ADVISOR_TAB_NAV_HREF_ORDER
+      : staffRole === "chair" || staffRole === "smt" || staffRole === "admin"
+        ? CHAIR_STAFF_TAB_NAV_HREF_ORDER
+        : DELEGATE_TAB_NAV_HREF_ORDER;
+  const tabs = useMemo(
+    () => withSequentialPriority(sortNavByHrefPriority(rawTabs, hrefOrder)),
+    [rawTabs, hrefOrder]
+  );
   const groupedTabs = useMemo(() => {
-    const groups: Record<MainTabKey, { href: string; labelKey: string; emoji: string }[]> = {
+    const groups: Record<MainTabKey, { href: string; labelKey: string; emoji: string; priority: number }[]> = {
       home: [],
       session: [],
       library: [],
     };
-    for (const t of tabs) groups[tabMainGroup(t.href)].push(t);
+    for (const tab of tabs) groups[tabMainGroup(tab.href)].push(tab);
+    for (const key of MAIN_TAB_GROUP_ORDER) {
+      groups[key].sort((a, b) => a.priority - b.priority);
+    }
     return groups;
   }, [tabs]);
   const activeMain = useMemo<MainTabKey>(() => {
@@ -229,20 +259,23 @@ export function TabNav({
             {t("mainTabs")}
           </p>
           <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
-            {MAIN_TABS.map((mt) => {
+            {MAIN_TABS.map((mt, index) => {
               const selected = selectedMain === mt.key;
+              const mainPriority = index + 1;
               return (
                 <button
                   key={mt.key}
                   type="button"
                   onClick={() => setSelectedMain(mt.key)}
+                  aria-label={`${mainPriority}. ${t(mt.labelKey)}`}
                   className={cn(
-                    "inline-flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-sm)] py-1.5 pl-1.5 pr-1 text-[0.7rem] font-medium transition-apple group-hover:gap-1.5",
+                    "relative inline-flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-sm)] py-1.5 pl-5 pr-1 text-[0.7rem] font-medium transition-apple group-hover:gap-1.5",
                     selected
                       ? "text-[var(--color-text)]"
                       : "text-brand-muted opacity-90 hover:opacity-100"
                   )}
                 >
+                  <NavPriorityBadge priority={mainPriority} className="left-0.5 top-1/2 -translate-y-1/2" />
                   <span
                     className={cn(
                       "inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[6px] text-white shadow-sm",
@@ -269,6 +302,7 @@ export function TabNav({
                 tab={tab}
                 label={t(tab.labelKey)}
                 isActive={tabInPath(pathname, tab.href)}
+                priority={tab.priority}
               />
             ))}
           </div>
@@ -289,20 +323,23 @@ export function TabNav({
             role="tablist"
             aria-label={t("mainTabs")}
           >
-            {MAIN_TABS.map((mt) => {
+            {MAIN_TABS.map((mt, index) => {
               const selected = selectedMain === mt.key;
+              const mainPriority = index + 1;
               return (
                 <button
                   key={mt.key}
                   type="button"
                   onClick={() => setSelectedMain(mt.key)}
+                  aria-label={`${mainPriority}. ${t(mt.labelKey)}`}
                   className={cn(
-                    "inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-[calc(var(--radius-md)-2px)] px-2.5 py-1.5 text-[0.7rem] font-medium transition-apple sm:flex-initial",
+                    "relative inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-[calc(var(--radius-md)-2px)] px-2.5 py-1.5 pl-6 text-[0.7rem] font-medium transition-apple sm:flex-initial",
                     selected
                       ? "bg-[var(--material-thick)] font-semibold text-brand-navy shadow-sm"
                       : "text-brand-muted"
                   )}
                 >
+                  <NavPriorityBadge priority={mainPriority} className="left-1 top-1/2 -translate-y-1/2" />
                   <span className="text-xs leading-none" aria-hidden>{mt.emoji}</span>
                   {t(mt.labelKey)}
                 </button>
@@ -311,7 +348,13 @@ export function TabNav({
           </div>
           <div className="flex flex-row items-stretch gap-0.5 overflow-x-auto px-0.5 pb-0.5">
             {visibleTabs.map((tab) => (
-              <DockLink key={tab.href} tab={tab} label={t(tab.labelKey)} isActive={tabInPath(pathname, tab.href)} />
+              <DockLink
+                key={tab.href}
+                tab={tab}
+                label={t(tab.labelKey)}
+                isActive={tabInPath(pathname, tab.href)}
+                priority={tab.priority}
+              />
             ))}
           </div>
         </div>

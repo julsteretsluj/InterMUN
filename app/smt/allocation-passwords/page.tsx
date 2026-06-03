@@ -5,6 +5,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { AllocationCodeGateToggle } from "@/components/allocation/AllocationCodeGateToggle";
 import { AllocationPasswordsClient } from "@/app/(dashboard)/chair/allocation-passwords/AllocationPasswordsClient";
 import { compareAllocationCountryDisplay } from "@/lib/allocation-display-order";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 import { isSmtRole } from "@/lib/roles";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -82,12 +83,12 @@ export default async function SmtAllocationPasswordsPage({
 
   const { data: conferences } = await supabase
     .from("conferences")
-    .select("id, name, committee, committee_code")
+    .select("id, name, committee, committee_code, room_code, procedure_profile")
     .eq("event_id", eventId)
     .order("committee", { ascending: true, nullsFirst: false })
     .order("name", { ascending: true });
 
-  const rawList = (conferences ?? []) as ConfRow[];
+  const rawList = ((conferences ?? []) as ConfRow[]).filter((c) => !isRetiredSeamunCommitteeRow(c));
   if (rawList.length === 0) {
     return (
       <MunPageShell title={t("allocationPasswords")}>
