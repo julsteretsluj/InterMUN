@@ -13,7 +13,18 @@ type CommitteeLogoProps = {
   className?: string;
 };
 
-/** Committee emblem — transparent PNG as uploaded; no background box or blend modes. */
+/** Bust CDN/browser cache after storage re-uploads. */
+function committeeLogoDisplaySrc(url: string): string {
+  const t = url.trim();
+  if (!t) return t;
+  if (/[?&]v=/.test(t)) return t;
+  const tsMatch = t.match(/\/(\d{10,})\.png(?:\?|$)/i);
+  const v = tsMatch?.[1] ?? "edge-knockout-1";
+  const sep = t.includes("?") ? "&" : "?";
+  return `${t}${sep}v=${v}`;
+}
+
+/** Committee emblem — transparent PNG; no background box. */
 export function CommitteeLogo({ src, alt, size = "sm", className }: CommitteeLogoProps) {
   return (
     <span
@@ -23,7 +34,12 @@ export function CommitteeLogo({ src, alt, size = "sm", className }: CommitteeLog
         className
       )}
     >
-      <img src={src} alt={alt} className="max-h-full max-w-full object-contain" decoding="async" />
+      <img
+        src={committeeLogoDisplaySrc(src)}
+        alt={alt}
+        className="max-h-full max-w-full object-contain"
+        decoding="async"
+      />
     </span>
   );
 }
