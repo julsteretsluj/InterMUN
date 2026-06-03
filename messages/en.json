@@ -877,7 +877,7 @@
     "viewVoting": "Voting",
     "forwardedNotes": "Forwarded notes",
     "schedule": {
-      "intro": "Pick your committee to see your advisor timetable for the day (one advisor per chamber)."
+      "intro": "Pick your lunch group and roster number (Advisor 1–8 or 1–6). Your timetable is not tied to a committee — you rotate through your cohort’s chambers with partner swaps in the advisor / sensory room."
     },
     "notes": {
       "intro": "Notes chairs or SMT chose to share with you. You cannot browse the full notes feed.",
@@ -1934,11 +1934,13 @@
         "pickDebateTrack": "Debate track:",
         "pickLunchGroup": "Lunch group:",
         "pickCommitteeAll": "Committee:",
-        "advisorOnlyHint": "Pick your committee to view your advisor day (one advisor per chamber).",
-        "advisorRosterHint": "Ten advisors — one per committee. Lunch groups mix tracks so delegates interact across chambers.",
+        "advisorOnlyHint": "Pick your lunch group, then your roster number. Advisors are not assigned to a committee — chamber names on your timetable show where you are on duty that block.",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "selectAdvisorPrompt": "Pick your lunch group and roster number to view your timetable.",
         "committeeOnlyHint": "Your committee’s official timetable. Below, compare lunch times with other committees.",
         "advisorColumnSuffix": "Advisor",
-        "selectAdvisorPrompt": "Select your committee to view that advisor’s timetable.",
         "selectCommitteePrompt": "Select your committee to view the delegate/chair timetable.",
         "lunchGroupTitle": {
           "l1": "Lunch group 1",

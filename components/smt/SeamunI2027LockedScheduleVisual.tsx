@@ -19,9 +19,12 @@ import {
   type SeamunScheduleGroupId,
 } from "@/lib/seamun-i-2027-committee-groups";
 import {
-  SEAMUN_I_2027_ADVISOR_COMMITTEES,
+  SEAMUN_I_2027_ADVISOR_ROSTER,
   buildSeamunAdvisorDayBlocks,
   buildSeamunCommitteeDayBlocks,
+  formatSeamunAdvisorRosterKey,
+  parseSeamunAdvisorRosterKey,
+  seamunAdvisorsInLunchGroup,
   seamunAllScheduleCommittees,
   seamunDebateColumnsForDay,
   seamunScheduleGroupForColumnHeader,
@@ -177,6 +180,8 @@ export type SeamunScheduleVariant = "smt" | "advisor" | "committee";
 export type SeamunI2027LockedScheduleVisualProps = {
   initialGroupId?: SeamunScheduleGroupId | null;
   initialCommittee?: string | null;
+  /** Roster key (`l1:3`) — not tied to a committee. */
+  initialAdvisorKey?: string | null;
   defaultView?: "teams" | "detail";
   variant?: SeamunScheduleVariant;
 };
@@ -202,6 +207,7 @@ function pillClass(active: boolean) {
 export function SeamunI2027LockedScheduleVisual({
   initialGroupId = null,
   initialCommittee = null,
+  initialAdvisorKey = null,
   defaultView = "teams",
   variant = "smt",
 }: SeamunI2027LockedScheduleVisualProps = {}) {
@@ -230,12 +236,11 @@ export function SeamunI2027LockedScheduleVisual({
   const [teamsScope, setTeamsScope] = useState<TeamsScope>(
     seamunI2027DebateScheduleGroupId(initialGroupId) ?? initialGroupFromCommittee ?? "all"
   );
-  const [advisorCommittee, setAdvisorCommittee] = useState<string | null>(
-    initialCommitteeTrimmed &&
-      (SEAMUN_I_2027_ADVISOR_COMMITTEES as readonly string[]).includes(initialCommitteeTrimmed)
-      ? initialCommitteeTrimmed
-      : null
-  );
+  const [advisorRosterKey, setAdvisorRosterKey] = useState<string | null>(() => {
+    const key = initialAdvisorKey?.trim();
+    if (key && parseSeamunAdvisorRosterKey(key)) return key;
+    return null;
+  });
   const [committee, setCommittee] = useState<string | null>(initialCommitteeTrimmed);
 
   const teamColumns = useMemo(() => seamunDebateColumnsForDay(day), [day]);
@@ -262,31 +267,33 @@ export function SeamunI2027LockedScheduleVisual({
       return [{ header: committee, blocks }];
     }
 
-    if (browseMode === "advisor" && advisorCommittee) {
+    if (browseMode === "advisor" && advisorRosterKey) {
+      const rosterId = parseSeamunAdvisorRosterKey(advisorRosterKey);
+      if (!rosterId) return [];
       return [
         {
-          header: `${advisorCommittee} — ${t("advisorColumnSuffix")}`,
-          blocks: buildSeamunAdvisorDayBlocks(day, advisorCommittee),
+          header: t("advisorRosterColumn", { n: rosterId.indexInGroup }),
+          blocks: buildSeamunAdvisorDayBlocks(day, rosterId),
         },
       ];
     }
 
     return [];
-  }, [browseMode, teamsScope, teamColumns, committee, advisorCommittee, day, t]);
+  }, [browseMode, teamsScope, teamColumns, committee, advisorRosterKey, day, t]);
 
   function switchBrowseMode(mode: BrowseMode) {
     setBrowseMode(mode);
     if (mode === "teams") {
-      setAdvisorCommittee(null);
+      setAdvisorRosterKey(null);
       setCommittee(null);
     } else if (mode === "committee") {
-      setAdvisorCommittee(null);
+      setAdvisorRosterKey(null);
       setTeamsScope("all");
     } else {
       setCommittee(null);
       setTeamsScope("all");
-      if (!advisorCommittee && SEAMUN_I_2027_ADVISOR_COMMITTEES[0]) {
-        setAdvisorCommittee(SEAMUN_I_2027_ADVISOR_COMMITTEES[0]);
+      if (!advisorRosterKey && SEAMUN_I_2027_ADVISOR_ROSTER[0]) {
+        setAdvisorRosterKey(formatSeamunAdvisorRosterKey(SEAMUN_I_2027_ADVISOR_ROSTER[0]));
       }
     }
   }
@@ -294,12 +301,12 @@ export function SeamunI2027LockedScheduleVisual({
   function selectTeamsScope(scope: TeamsScope) {
     setBrowseMode("teams");
     setTeamsScope(scope);
-    setAdvisorCommittee(null);
+    setAdvisorRosterKey(null);
     setCommittee(null);
   }
 
-  function selectAdvisorCommittee(ch: string) {
-    setAdvisorCommittee(ch);
+  function selectAdvisorRoster(id: (typeof SEAMUN_I_2027_ADVISOR_ROSTER)[number]) {
+    setAdvisorRosterKey(formatSeamunAdvisorRosterKey(id));
   }
 
   function selectCommittee(ch: string) {
@@ -307,7 +314,7 @@ export function SeamunI2027LockedScheduleVisual({
   }
 
   const awaitingSelection =
-    (browseMode === "committee" && !committee) || (browseMode === "advisor" && !advisorCommittee);
+    (browseMode === "committee" && !committee) || (browseMode === "advisor" && !advisorRosterKey);
 
   const showCommitteePicker = browseMode === "committee" && isSmt;
   const showLockedCommitteeLabel = browseMode === "committee" && isCommittee && committee;
@@ -431,17 +438,20 @@ export function SeamunI2027LockedScheduleVisual({
                 {t(`lunchGroupTitle.${lg.id}`)}
               </p>
               <div className="flex flex-wrap gap-2">
-                {lg.chambers.map((ch) => (
-                  <button
-                    key={ch}
-                    type="button"
-                    onClick={() => selectAdvisorCommittee(ch)}
-                    className={pillClass(advisorCommittee === ch)}
-                    aria-pressed={advisorCommittee === ch}
-                  >
-                    {ch}
-                  </button>
-                ))}
+                {seamunAdvisorsInLunchGroup(lg.id).map((entry) => {
+                  const key = formatSeamunAdvisorRosterKey(entry);
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => selectAdvisorRoster(entry)}
+                      className={pillClass(advisorRosterKey === key)}
+                      aria-pressed={advisorRosterKey === key}
+                    >
+                      {t("advisorRosterMember", { n: entry.indexInGroup })}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           ))}
