@@ -34,7 +34,6 @@ const COMMITTEE_CODE_TERMS: Record<string, string[]> = {
   WHO: ["public_health_emergency", "surveillance", "health_systems"],
   UNODC: ["transnational_crime", "illicit_trafficking", "rule_of_law_capacity"],
   ECOSOC: ["sustainable_development", "financing_for_development", "policy_coordination"],
-  UNICEF: ["child_protection", "education_access", "humanitarian_response"],
   "UN WOMEN": ["gender_mainstreaming", "gender_based_violence", "economic_empowerment"],
   UNWOMEN: ["gender_mainstreaming", "gender_based_violence", "economic_empowerment"],
   PRESSCORPS: ["source_attribution", "verified_reporting", "editorial_independence"],

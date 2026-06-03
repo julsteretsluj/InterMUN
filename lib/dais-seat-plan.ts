@@ -17,18 +17,11 @@ const PLAN_BY_SESSION_GROUP: Record<string, readonly string[]> = {
   ECOSOC: ["Head Chair", "Co-chair"],
   /** Full committee title normalizes to PRESS CORPS */
   "PRESS CORPS": ["Head Editor", "Co-Editor"],
-  F1: ["Head Chair", "Co-chair"],
-  UNICEF: ["Head Chair", "Co-chair"],
-  /** Matrix: three chairs — second Co-chair uses a distinct allocation label */
-  "EU PARLI": ["Head Chair", "Co-chair", "Co-chair 2"],
   UNHRC: ["Head Chair", "Co-chair"],
   UNSC: ["Frontroom Chair", "Backroom Chair"],
-  UNESCO: ["Head Chair", "Co-chair"],
   UNODC: ["Head Chair", "Co-chair"],
   "UN WOMEN": ["Head Chair", "Co-chair"],
   DISEC: ["Head Chair", "Co-chair"],
-  /** Two frontroom + one backroom (matrix layout). */
-  HSC: ["Frontroom Chair", "Frontroom Chair 2", "Backroom Chair"],
   WHO: ["Head Chair", "Co-chair"],
   FWC: ["Head Chair", "Co-chair"],
   INTERPOL: ["Head Chair", "Co-chair"],
@@ -53,11 +46,6 @@ export const LEGACY_DAIS_RENAMES: Record<string, [fromLower: string, toExact: st
     ["head chair", "Head Editor"],
     ["co-chair", "Co-Editor"],
     ["co chair", "Co-Editor"],
-  ],
-  HSC: [
-    ["head chair", "Frontroom Chair"],
-    ["co-chair", "Backroom Chair"],
-    ["co chair", "Backroom Chair"],
   ],
   SMT: [
     ["head chair", "Secretary General"],

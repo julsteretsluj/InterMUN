@@ -41,7 +41,7 @@ type ChairNavItem = {
   activeMatch?: string;
   /** When true, active only on exact `href` (no `/child` match). */
   exactHref?: boolean;
-  /** Shown only for FWC / UNSC / HSC committees. */
+  /** Shown only for FWC / UNSC committees. */
   crisisOnly?: boolean;
 };
 

@@ -11,7 +11,7 @@ const EU_PARTY_MESSAGE_KEYS: Record<EuPartyKey, string> = {
   independents: "euPartyIndependents",
 };
 
-/** `sessionControlClient` message key for the EU Parliament political group label. */
+/** `sessionControlClient` message key for political-group labels in the guided profile. */
 export function euParliamentPartyMessageKey(key: EuPartyKey): string {
   return EU_PARTY_MESSAGE_KEYS[key];
 }

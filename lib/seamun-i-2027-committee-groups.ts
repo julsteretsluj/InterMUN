@@ -21,12 +21,12 @@ export const SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS: readonly SeamunScheduleGr
   {
     id: "g1",
     scheduleHeader: "Group 1 (1st UL) — Team Alpha",
-    chambers: ["ECOSOC", "UNICEF", "UNESCO", "UN Women"],
+    chambers: ["ECOSOC", "UN Women"],
   },
   {
     id: "g2",
     scheduleHeader: "Group 2 (Mixed) — Team Beta",
-    chambers: ["EU Parli", "UNHRC", "Press Corps", "F1"],
+    chambers: ["UNHRC", "Press Corps"],
   },
   {
     id: "g3",
@@ -36,7 +36,7 @@ export const SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS: readonly SeamunScheduleGr
   {
     id: "g4",
     scheduleHeader: "Group 4 (2nd ML) — Team Delta",
-    chambers: ["UNSC", "FWC - Stranger Things", "HSC"],
+    chambers: ["UNSC", "FWC - Stranger Things"],
   },
   {
     id: "support",

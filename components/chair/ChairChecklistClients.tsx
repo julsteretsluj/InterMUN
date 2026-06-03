@@ -36,7 +36,7 @@ export function ChairPrepChecklistClient({
   crisisPrepEnabled,
 }: {
   conferenceId: string;
-  /** FWC / UNSC / HSC only — hides the “Crisis (if applicable)” prep block. */
+  /** FWC / UNSC only — hides the “Crisis (if applicable)” prep block. */
   crisisPrepEnabled: boolean;
 }) {
   const t = useTranslations("chairChecklists");

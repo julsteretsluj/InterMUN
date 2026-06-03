@@ -3701,7 +3701,7 @@ export function SessionControlClient({
           {(
             isEuParliamentProfile
               ? ([
-                  ["clock", "EU Parli timers"],
+                  ["clock", "Guided timers"],
                   ["notes", "Speech notes"],
                   ["log", "History"],
                 ] as const)

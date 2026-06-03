@@ -30,49 +30,13 @@ const WELL_KNOWN_COMMITTEE_TAGS: Record<string, CommitteeDisplayTags> = {
     format: "Traditional",
     eslFriendly: false,
   },
-  F1: {
-    difficulty: "Beginner",
-    ageRangeKey: "grade7_12_year8_13",
-    format: "Traditional",
-    eslFriendly: false,
-  },
   "PRESS CORPS": {
     difficulty: "Beginner",
     ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
     eslFriendly: false,
   },
-  UNICEF: {
-    difficulty: "Beginner",
-    ageRangeKey: "grade9_12_year10_13",
-    format: "Traditional",
-    eslFriendly: true,
-  },
   EU: {
-    difficulty: "Intermediate",
-    ageRangeKey: "grade7_12_year8_13",
-    format: "Traditional",
-    eslFriendly: false,
-  },
-  "EU PARLI": {
-    difficulty: "Intermediate",
-    ageRangeKey: "grade7_12_year8_13",
-    format: "Traditional",
-    eslFriendly: false,
-  },
-  "EU PARLIAMENT": {
-    difficulty: "Intermediate",
-    ageRangeKey: "grade7_12_year8_13",
-    format: "Traditional",
-    eslFriendly: false,
-  },
-  "EUROPEAN UNION PARLIAMENT": {
-    difficulty: "Intermediate",
-    ageRangeKey: "grade7_12_year8_13",
-    format: "Traditional",
-    eslFriendly: false,
-  },
-  UNESCO: {
     difficulty: "Intermediate",
     ageRangeKey: "grade7_12_year8_13",
     format: "Traditional",
@@ -117,12 +81,6 @@ const WELL_KNOWN_COMMITTEE_TAGS: Record<string, CommitteeDisplayTags> = {
   FWC: {
     difficulty: "Advanced",
     ageRangeKey: "grade9_12_year10_13",
-    format: "Crisis",
-    eslFriendly: false,
-  },
-  HSC: {
-    difficulty: "Advanced",
-    ageRangeKey: "grade7_12_year8_13",
     format: "Crisis",
     eslFriendly: false,
   },

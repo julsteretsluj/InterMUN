@@ -188,7 +188,7 @@ export function TabNav({
 }: {
   staffRole?: UserRole | null;
   variant: "aspire-sidebar" | "dock";
-  /** When false, hide `/report` and `/crisis-slides` (crisis committees: FWC, UNSC, HSC). */
+  /** When false, hide `/report` and `/crisis-slides` (crisis committees: FWC, UNSC). */
   crisisReportingEnabled?: boolean;
   /** SEAMUN I 2027 locked timetable link in sidebar/dock. */
   seamunScheduleEnabled?: boolean;
