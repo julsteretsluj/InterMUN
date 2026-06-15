@@ -107,7 +107,10 @@ export default async function DashboardLayout({
   }
 
   const allocationGateOn = activeConf.allocation_code_gate_enabled === true;
-  const needsAllocationCodeGate = allocationGateOn && effectiveRole === "delegate";
+  const smtDelegatePreview =
+    isSmtRole(normalizedRole) && smtSurface === "delegate";
+  const needsAllocationCodeGate =
+    allocationGateOn && effectiveRole === "delegate" && !smtDelegatePreview;
   // Advisors use delegate-style committee access but never the placard second gate.
   if (needsAllocationCodeGate) {
     const allocVerified = await getAllocationCodeVerifiedConferenceId();

@@ -43,7 +43,7 @@ import {
 } from "@/lib/roll-attendance";
 import { HelpButton } from "@/components/HelpButton";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
-import { dedupeAllocationsByUserId } from "@/lib/conference-committee-canonical";
+import { mergeAllocationsAcrossSiblingConferences } from "@/lib/conference-committee-canonical";
 import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
 import { setActiveDebateTopicAction } from "@/app/actions/activeDebateTopic";
 import {
@@ -1022,11 +1022,13 @@ export function SessionControlClient({
       ...a,
       userRole: a.user_id ? roleByProfileId.get(a.user_id) ?? null : null,
     }));
-    const dedupedAllocs = dedupeAllocationsByUserId(sortAllocationsByDisplayCountry(allocationsWithRoles));
-    const allowedAllocIds = new Set(
-      dedupedAllocs.filter(isDelegateRollCallAllocation).map((a) => a.id)
+    const mergedAllocs = sortAllocationsByDisplayCountry(
+      mergeAllocationsAcrossSiblingConferences(allocationsWithRoles, canonicalConferenceId)
     );
-    setAllocations(dedupedAllocs);
+    const allowedAllocIds = new Set(
+      mergedAllocs.filter(isDelegateRollCallAllocation).map((a) => a.id)
+    );
+    setAllocations(mergedAllocs);
     const rollMapped = (
       (r as (Omit<RollRow, "attendance"> & { attendance?: string | null; conference_id?: string })[]) ?? []
     ).map(

@@ -37,17 +37,33 @@ export default async function DelegateDashboardPage({
   if (!user) redirect("/login");
   const { data: profile } = await supabase
     .from("profiles")
-    .select("country")
+    .select("country, role, smt_delegate_allocation_id")
     .eq("id", user.id)
     .maybeSingle();
 
   const conferenceId = await requireActiveConferenceId();
-  const { data: myAllocation } = await supabase
-    .from("allocations")
-    .select("country")
-    .eq("conference_id", conferenceId)
-    .eq("user_id", user.id)
-    .maybeSingle();
+
+  const role = profile?.role?.toString().trim().toLowerCase();
+  let myAllocation: { country: string | null } | null = null;
+  const previewAllocId = (profile as { smt_delegate_allocation_id?: string | null } | null)
+    ?.smt_delegate_allocation_id;
+  if (role === "smt" && previewAllocId) {
+    const { data: previewAlloc } = await supabase
+      .from("allocations")
+      .select("country")
+      .eq("id", previewAllocId)
+      .maybeSingle();
+    myAllocation = previewAlloc;
+  }
+  if (!myAllocation) {
+    const { data: linkedAlloc } = await supabase
+      .from("allocations")
+      .select("country")
+      .eq("conference_id", conferenceId)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    myAllocation = linkedAlloc;
+  }
   const { data: conf } = await supabase
     .from("conferences")
     .select("committee, tagline, name, event_id")

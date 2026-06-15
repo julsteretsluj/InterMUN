@@ -17,6 +17,7 @@ import {
 } from "@/lib/conference-committee-canonical";
 import { getTranslations } from "next-intl/server";
 import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
+import { isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";
 
 function isUuid(v: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
@@ -63,10 +64,13 @@ export async function updateSmtCommitteeBindingsAction(
     if (!isUuid(delegateRaw)) return { error: "Invalid delegate seat selection." };
     const { data: a } = await supabase
       .from("allocations")
-      .select("id, user_id, conference_id")
+      .select("id, user_id, conference_id, country")
       .eq("id", delegateRaw)
       .maybeSingle();
-    if (!a || a.user_id !== user.id) return { error: "That delegate seat is not linked to your account." };
+    if (!a?.conference_id) return { error: "Invalid delegate seat selection." };
+    if (isDaisSeatAllocationCountry(a.country)) {
+      return { error: "Pick a delegate placard, not a dais seat." };
+    }
     const { data: c } = await supabase
       .from("conferences")
       .select("id, event_id, committee, committee_code, name")
@@ -210,10 +214,11 @@ export async function switchSmtToDelegateExperienceAction(allocationId: string) 
 
   const { data: a } = await supabase
     .from("allocations")
-    .select("id, user_id, conference_id")
+    .select("id, user_id, conference_id, country")
     .eq("id", aid)
     .maybeSingle();
   if (!a || !a.conference_id) redirect("/smt/profile?smtBind=1");
+  if (isDaisSeatAllocationCountry(a.country)) redirect("/smt/profile?smtBind=1");
 
   const { data: c } = await supabase
     .from("conferences")
@@ -223,6 +228,8 @@ export async function switchSmtToDelegateExperienceAction(allocationId: string) 
   if (!c || c.event_id !== eventId || isSmtSecretariatConferenceRow(c)) {
     redirect("/smt/profile?smtBind=1");
   }
+
+  const canonicalCid = await resolveCanonicalCommitteeConferenceId(supabase, a.conference_id);
 
   const { error } = await supabase
     .from("profiles")
@@ -234,7 +241,7 @@ export async function switchSmtToDelegateExperienceAction(allocationId: string) 
   if (error) redirect("/smt/profile?smtBind=1");
 
   await setSmtDashboardSurface("delegate");
-  await setActiveConferenceId(a.conference_id);
+  await setActiveConferenceId(canonicalCid);
   redirect("/delegate");
 }
 
@@ -374,8 +381,9 @@ export async function loadSmtCommitteeBindingOptions(): Promise<{
     const displayCountry = row.country?.trim() || "—";
     const displayName = profileRef?.name?.trim() || null;
     const seatLabel = displayName ? `${displayCountry} — ${displayName}` : displayCountry;
+    const isDais = isDaisSeatAllocationCountry(row.country);
 
-    if (role === "chair") {
+    if (role === "chair" || isDais) {
       chairSeatsByConferenceId[canonicalId]!.push({ id: row.id, label: seatLabel });
       continue;
     }

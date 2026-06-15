@@ -19,7 +19,8 @@
     "i18n:translate-session-guided-flow": "node scripts/translate-session-guided-flow.mjs",
     "i18n:generate-agenda-slugs": "node scripts/generate-agenda-topic-slug-map.mjs",
     "realtime:metrics-report": "node scripts/realtime-metrics-report.mjs",
-    "logos:knockout": "node scripts/knockout-committee-logo-backgrounds.mjs"
+    "logos:knockout": "node scripts/knockout-committee-logo-backgrounds.mjs",
+    "invite:smt": "node scripts/invite-smt-user.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.2.8",

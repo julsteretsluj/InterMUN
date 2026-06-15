@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import {
   switchSmtToSecretariatAction,
+  switchSmtToChairExperienceAction,
   switchSmtToChairExperienceByAllocationAction,
   switchSmtToDelegateExperienceAction,
   updateSmtCommitteeBindingsAction,
@@ -63,13 +64,13 @@ export function SmtCommitteeViewSettingsCard({
       setSurfaceMsg(t("pickChairFirst"));
       return;
     }
-    if (!chairAllocId.trim()) {
-      setSurfaceMsg(t("pickChairFirst"));
-      return;
-    }
     startSurface(async () => {
       try {
-        await switchSmtToChairExperienceByAllocationAction(chairAllocId.trim());
+        if (chairAllocId.trim()) {
+          await switchSmtToChairExperienceByAllocationAction(chairAllocId.trim());
+        } else {
+          await switchSmtToChairExperienceAction(chairId.trim());
+        }
       } catch {
         setSurfaceMsg(t("surfaceSwitchError"));
       }
@@ -261,7 +262,7 @@ export function SmtCommitteeViewSettingsCard({
             ) : (
               <div>
                 <label className="block text-xs font-medium uppercase tracking-wide text-brand-muted dark:text-zinc-400">
-                  {t("chairCommitteeLabel")}
+                  {t("chairSeatLabel")}
                 </label>
                 <select
                   value={chairAllocId}
@@ -269,7 +270,7 @@ export function SmtCommitteeViewSettingsCard({
                   disabled={!chairId}
                   className="mt-1 w-full max-w-xl rounded-lg border border-brand-navy/15 bg-white px-3 py-2 text-sm text-brand-navy disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
                 >
-                  <option value="">{t("chairCommitteePlaceholder")}</option>
+                  <option value="">{t("chairSeatOptionalPlaceholder")}</option>
                   {(chairSeatsByConferenceId[chairId] ?? []).map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.label}
@@ -283,7 +284,7 @@ export function SmtCommitteeViewSettingsCard({
               disabled={
                 pendingSurface ||
                 !chairId ||
-                (previewMode === "delegate" ? !delegateAllocId : !chairAllocId)
+                (previewMode === "delegate" ? !delegateAllocId : false)
               }
               onClick={() => void startPreview()}
               className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-95 disabled:opacity-50"
