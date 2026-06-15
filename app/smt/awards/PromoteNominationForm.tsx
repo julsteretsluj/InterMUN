@@ -9,9 +9,18 @@ type Props = {
   category: string;
   label: string;
   buttonClassName: string;
+  hasValidEvidence?: boolean;
+  evidenceHint?: string;
 };
 
-export function PromoteNominationForm({ nominationId, category, label, buttonClassName }: Props) {
+export function PromoteNominationForm({
+  nominationId,
+  category,
+  label,
+  buttonClassName,
+  hasValidEvidence = true,
+  evidenceHint = "Chair evidence statement required before approval.",
+}: Props) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
@@ -20,6 +29,10 @@ export function PromoteNominationForm({ nominationId, category, label, buttonCla
       className="flex flex-col gap-1"
       action={async (formData) => {
         setError(null);
+        if (!hasValidEvidence) {
+          setError(evidenceHint);
+          return;
+        }
         const res = await promoteNominationToAwardAction(formData);
         if (!res.success) {
           setError(res.error ?? "Could not save award.");
@@ -30,7 +43,7 @@ export function PromoteNominationForm({ nominationId, category, label, buttonCla
     >
       <input type="hidden" name="nomination_id" value={nominationId} />
       <input type="hidden" name="category" value={category} />
-      <button type="submit" className={buttonClassName}>
+      <button type="submit" className={buttonClassName} disabled={!hasValidEvidence}>
         {label}
       </button>
       {error ? <span className="text-[10px] text-red-700 max-w-[12rem]">{error}</span> : null}

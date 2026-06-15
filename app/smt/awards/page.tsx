@@ -93,7 +93,14 @@ export default async function SmtAwardsPage() {
     (selectedSingleWinners ?? []).map((r) => nominationGroupKey(r.committee_conference_id, r.nomination_type))
   );
 
-  const nominationRowsForQueue = filterNominationsForSmtQueue(nominationRows, selectedSingleWinnerGroupKeys);
+  const nominationRowsForQueue = filterNominationsForSmtQueue(
+    nominationRows.filter((n) => n.nomination_type !== "conference_best_delegate"),
+    selectedSingleWinnerGroupKeys
+  );
+
+  const overallBestDelegateLadderRows = nominationRows.filter(
+    (n) => n.nomination_type === "conference_best_delegate"
+  );
 
   /** Awards are scoped to the MUN committee (DISEC, UNSC, …), not the topic/agenda title. */
   const committeeLabelByConferenceId: Record<string, string> = Object.fromEntries(
@@ -295,6 +302,7 @@ export default async function SmtAwardsPage() {
         hasActiveEvent={Boolean(eventId)}
         conferenceIdToCanonical={conferenceIdToCanonicalPayload}
         bestDelegateComparisonRows={bestDelegateComparisonRows}
+        overallBestDelegateLadderRows={overallBestDelegateLadderRows}
       />
     </MunPageShell>
   );

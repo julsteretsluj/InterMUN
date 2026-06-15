@@ -7,6 +7,8 @@ import { AwardsRubricReference } from "@/components/awards/AwardsRubricReference
 import { ChairNominationsPanel, type ChairNominationRow } from "./ChairNominationsPanel";
 import { SmtParticipationPanel } from "./SmtParticipationPanel";
 import { SmtBestDelegateComparison, type BestDelegateComparisonRow } from "./SmtBestDelegateComparison";
+import { SmtBestDelegateLadder } from "./SmtBestDelegateLadder";
+import type { OverallBestDelegateLadderRow } from "@/lib/award-best-delegate-ladder";
 import type { ChairSeat, DelegateChairFeedbackAggregate } from "@/lib/award-participation-scoring";
 
 type Conf = { id: string; name: string; committee: string | null };
@@ -40,6 +42,7 @@ type Props = {
   /** Maps raw `conferences.id` → canonical committee conference id for the active event. */
   conferenceIdToCanonical: Record<string, string>;
   bestDelegateComparisonRows: BestDelegateComparisonRow[];
+  overallBestDelegateLadderRows: OverallBestDelegateLadderRow[];
 };
 
 export function SmtAwardsTabs({
@@ -53,8 +56,9 @@ export function SmtAwardsTabs({
   hasActiveEvent,
   conferenceIdToCanonical,
   bestDelegateComparisonRows,
+  overallBestDelegateLadderRows,
 }: Props) {
-  const [tab, setTab] = useState<TabId>("final");
+  const [tab, setTab] = useState<TabId>("pending");
 
   const tabBtn = (id: TabId, label: string, domId: string) => (
     <button
@@ -102,10 +106,15 @@ export function SmtAwardsTabs({
         <div role="tabpanel" aria-labelledby="tab-smt-pending" className="space-y-4">
           <div className="rounded-xl border border-brand-navy/10 bg-brand-cream/50 p-4 text-sm text-brand-muted">
             <p>
-              Chair submissions awaiting review: approve or reject nominations. Approved rows feed the Final awards tab
-              when promoted to assignments.
+              Chair submissions awaiting review: read each evidence statement, then approve or reject. Committee awards
+              use the table below; overall Best Delegate uses the ladder until one champion remains.
             </p>
           </div>
+          <SmtBestDelegateLadder
+            rows={overallBestDelegateLadderRows}
+            committeeLabelByConferenceId={committeeLabelByConferenceId}
+            nomineeNameByProfileId={nomineeNameByProfileId}
+          />
           <ChairNominationsPanel
             nominations={nominations}
             committeeLabelByConferenceId={committeeLabelByConferenceId}

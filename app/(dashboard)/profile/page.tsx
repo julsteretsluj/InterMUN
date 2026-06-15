@@ -115,16 +115,6 @@ export default async function ProfilePage({
     .select("*")
     .eq("recipient_profile_id", user.id)
     .order("created_at", { ascending: true });
-  /** Delegates must not see pending nominations (chairs may, when readable via RLS). */
-  const { data: myPendingNominations } =
-    isDelegate
-      ? { data: [] as { id: string; nomination_type: string; rank: number; evidence_note: string | null; committee_conference_id: string }[] }
-      : await supabase
-          .from("award_nominations")
-          .select("id, nomination_type, rank, evidence_note, committee_conference_id")
-          .eq("nominee_profile_id", user.id)
-          .eq("status", "pending")
-          .order("created_at", { ascending: true });
   const { data: mySeats } = await supabase
     .from("allocations")
     .select("id, conference_id, country")
@@ -203,7 +193,6 @@ export default async function ProfilePage({
     ...new Set(
       [
         ...(myAwards ?? []).map((a) => a.committee_conference_id),
-        ...(myPendingNominations ?? []).map((a) => a.committee_conference_id),
         ...(myDelegatePoints ?? []).map((a) => a.conference_id),
         ...(mySpeechNotes ?? []).map((a) => a.conference_id),
         ...(myMotions ?? []).map((a) => a.conference_id),
@@ -422,7 +411,7 @@ export default async function ProfilePage({
   ) : null;
   type ProfileTab = "overview" | "awards" | "private" | "settings";
   const showOverviewTab = isDelegate;
-  const showAwardsTab = (myAwards?.length ?? 0) > 0 || (myPendingNominations?.length ?? 0) > 0;
+  const showAwardsTab = (myAwards?.length ?? 0) > 0;
   const showPrivateTab =
     isDelegate &&
     ((myDelegatePoints?.length ?? 0) > 0 ||
@@ -488,40 +477,7 @@ export default async function ProfilePage({
       {showOverview && isDelegate ? <DelegateMaterialsExportCard /> : null}
       {showAwards ? (
         <ProfileAwardsSummaryTabs
-          pendingSlot={
-            (myPendingNominations?.length ?? 0) > 0 ? (
-              <div className="rounded-xl border border-amber-300/40 bg-amber-50/40 p-4 md:p-5">
-                <h3 className="mb-2 font-display text-lg font-semibold text-brand-navy">
-                  {tp("awards.pending.title")}
-                </h3>
-                <p className="mb-3 text-xs text-brand-muted">
-                  {(myAwards?.length ?? 0) > 0
-                    ? tp("awards.pending.descriptionTabbed")
-                    : tp("awards.pending.descriptionSingle")}
-                </p>
-                <ul className="space-y-2 text-sm">
-                  {(myPendingNominations ?? []).map((n) => {
-                    const category = awardCategoryMeta(n.nomination_type);
-                    const where = n.committee_conference_id
-                      ? committeeLabel[n.committee_conference_id] ?? tp("fallbacks.committeeSession")
-                      : null;
-                    return (
-                      <li key={n.id} className="border-b border-brand-navy/5 pb-2 last:border-0">
-                        <span className="font-medium text-brand-navy">
-                          {category?.label ?? n.nomination_type}
-                        </span>
-                        <span className="text-brand-muted"> · {tp("awards.rank", { rank: n.rank })}</span>
-                        {where && <span className="text-brand-muted"> · {where}</span>}
-                        {n.evidence_note && (
-                          <p className="mt-0.5 text-xs text-brand-muted">{n.evidence_note}</p>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ) : null
-          }
+          pendingSlot={null}
           recordedSlot={
             (myAwards?.length ?? 0) > 0 ? (
               <div className="rounded-xl border border-brand-accent/30 bg-brand-cream/50 p-4 md:p-5">

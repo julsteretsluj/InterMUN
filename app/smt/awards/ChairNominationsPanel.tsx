@@ -7,6 +7,7 @@ import {
   rubricNumericTotal,
   type NominationRubricType,
 } from "@/lib/seamuns-award-scoring";
+import { hasValidAwardEvidence } from "@/lib/award-evidence";
 import { PromoteNominationForm } from "./PromoteNominationForm";
 import { RejectNominationForm } from "./RejectNominationForm";
 import { useTranslations } from "next-intl";
@@ -90,6 +91,7 @@ export function ChairNominationsPanel({
       <p className="text-xs text-brand-muted mb-3">
         {t("description")}
       </p>
+      <p className="text-xs text-brand-navy/80 dark:text-zinc-300 mb-3">{t("evidenceRequiredHint")}</p>
       {committeeTabs.length > 0 && nominations.length > 0 ? (
         <div
           className="mb-3 flex flex-wrap gap-1 overflow-x-auto border-b border-brand-navy/10 pb-px"
@@ -159,7 +161,12 @@ export function ChairNominationsPanel({
                         {rubricBandInitials(n.rubric_scores, n.nomination_type)}
                       </span>
                     </td>
-                    <td className="px-3 py-2 text-brand-muted max-w-md">{n.evidence_note?.trim() || t("dash")}</td>
+                    <td className="px-3 py-2 text-brand-muted max-w-md">
+                      {n.evidence_note?.trim() || t("dash")}
+                      {!hasValidAwardEvidence(n.evidence_note) ? (
+                        <p className="mt-1 text-[10px] text-amber-800 dark:text-amber-200">{t("evidenceTooShort")}</p>
+                      ) : null}
+                    </td>
                     <td className="px-3 py-2">
                       <div className="flex flex-col gap-2">
                         {n.nomination_type === "committee_best_delegate" ? (
@@ -167,7 +174,8 @@ export function ChairNominationsPanel({
                             nominationId={n.id}
                             category="committee_best_delegate"
                             label={t("approveBestDelegate")}
-                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
+                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium disabled:opacity-50"
+                            hasValidEvidence={hasValidAwardEvidence(n.evidence_note)}
                           />
                         ) : null}
                         {n.nomination_type === "committee_honourable_mention" ? (
@@ -175,7 +183,8 @@ export function ChairNominationsPanel({
                             nominationId={n.id}
                             category="committee_honourable_mention"
                             label={t("approveHonourableMention")}
-                            buttonClassName="text-xs px-2 py-1 rounded border border-brand-navy/20 text-brand-navy"
+                            buttonClassName="text-xs px-2 py-1 rounded border border-brand-navy/20 text-brand-navy disabled:opacity-50"
+                            hasValidEvidence={hasValidAwardEvidence(n.evidence_note)}
                           />
                         ) : null}
                         {n.nomination_type === "committee_best_position_paper" ? (
@@ -183,15 +192,8 @@ export function ChairNominationsPanel({
                             nominationId={n.id}
                             category="committee_best_position_paper"
                             label={t("approveBestPositionPaper")}
-                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
-                          />
-                        ) : null}
-                        {n.nomination_type === "conference_best_delegate" ? (
-                          <PromoteNominationForm
-                            nominationId={n.id}
-                            category="conference_best_delegate"
-                            label={t("approveBestDelegateOverall")}
-                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium"
+                            buttonClassName="text-xs px-2 py-1 rounded bg-brand-accent text-white font-medium disabled:opacity-50"
+                            hasValidEvidence={hasValidAwardEvidence(n.evidence_note)}
                           />
                         ) : null}
                         <RejectNominationForm nominationId={n.id} />

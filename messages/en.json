@@ -691,7 +691,9 @@
   },
   "chairNominationsPanel": {
     "title": "Award submissions by chairs",
-    "description": "Committees submit scored nominations (SEAMUNs-style bands). Rubric totals and band initials (B/D/P/E) summarize each row. For each committee and award type, SMT reviews the chair's current preference first (Top 1). Approve to record the award, or reject to move to the next backup rank (Top 2, then Top 3 for Honourable Mention where applicable).",
+    "description": "Committees submit scored nominations (SEAMUNs-style bands). For each committee and award type, SMT reviews the chair's current preference first (Top 1). Read the evidence statement, then approve or reject. Rejecting moves to the next backup rank (Top 2, then Top 3 for Honourable Mention where applicable). Overall Best Delegate is decided in the ladder above — not in this table.",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short",
     "filterByCommitteeAria": "Filter by committee",
     "allCommittees": "All committees",
     "committee": "Committee",

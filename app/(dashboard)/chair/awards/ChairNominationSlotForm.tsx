@@ -1,6 +1,7 @@
 "use client";
 
 import { submitChairTopNominationAction } from "@/app/actions/awards";
+import { MIN_AWARD_EVIDENCE_CHARS } from "@/lib/award-evidence";
 import { dispatchChairAwardsSlotSaved } from "./AwardProgressBars";
 import { RubricCriterionPicker } from "./RubricCriterionPicker";
 import {
@@ -323,9 +324,11 @@ export function ChairNominationSlotForm({
             name="evidence_note"
             defaultValue={evidenceNote ?? ""}
             rows={3}
+            minLength={MIN_AWARD_EVIDENCE_CHARS}
+            required={!locked}
             readOnly={locked}
             className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy placeholder:text-brand-muted/70 read-only:opacity-70"
-            placeholder="Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions)."
+            placeholder={`Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions). At least ${MIN_AWARD_EVIDENCE_CHARS} characters — required before SMT can approve.`}
           />
         </label>
         <div className="flex flex-wrap items-center gap-3">

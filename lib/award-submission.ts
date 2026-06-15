@@ -2,6 +2,7 @@
  * Chair award nominations: draft → pending (SMT queue) via button or deadline.
  * Default deadline: end of conference day 17 Jan 2027 UTC (override with AWARD_SUBMISSION_DEADLINE_ISO).
  */
+import { hasValidAwardEvidence } from "@/lib/award-evidence";
 import type { NominationRubricType } from "@/lib/seamuns-award-scoring";
 import { criteriaForNominationType } from "@/lib/seamuns-award-scoring";
 
@@ -19,6 +20,7 @@ type NomRow = {
   rank: number;
   nominee_profile_id: string | null;
   rubric_scores: Record<string, number> | null;
+  evidence_note?: string | null;
   status: string;
 };
 
@@ -29,6 +31,7 @@ function isSlotComplete(
   criteriaKeys: string[]
 ): boolean {
   if (!row?.nominee_profile_id) return false;
+  if (!hasValidAwardEvidence(row.evidence_note)) return false;
   const scores = row.rubric_scores ?? {};
   return criteriaKeys.every((c) => Number(scores[c] ?? 0) >= 1);
 }

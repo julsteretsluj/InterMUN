@@ -15,6 +15,7 @@ import {
   type NominationRubricType,
 } from "@/lib/seamuns-award-scoring";
 import { revalidatePath } from "next/cache";
+import { awardEvidenceValidationMessage, hasValidAwardEvidence } from "@/lib/award-evidence";
 import { isSingleWinnerNominationType } from "@/lib/award-nomination-review";
 import { isPastAwardSubmissionDeadline } from "@/lib/award-submission";
 import { promoteCommitteeDraftsToPending } from "@/lib/award-committee-submit";
@@ -356,6 +357,10 @@ export async function submitChairTopNominationAction(
     return { ok: false, error: "Invalid rank for Honourable Mention." };
   }
 
+  if (nomineeId && !hasValidAwardEvidence(evidence)) {
+    return { ok: false, error: awardEvidenceValidationMessage() };
+  }
+
   if (!nomineeId) {
     if (nominationType === "committee_honourable_mention") {
       const { error } = await auth.supabase
@@ -554,6 +559,63 @@ export async function rejectNominationAction(
   return { success: true };
 }
 
+/** Ladder round: reject the losing overall Best Delegate nominee; winner stays pending for the next round. */
+export async function advanceOverallBestDelegateLadderAction(
+  formData: FormData
+): Promise<{ success: boolean; error?: string }> {
+  const auth = await requireSmtOrAdmin();
+  if (!auth.ok || !auth.user) {
+    return { success: false, error: "Only SMT and website admins can run the ladder." };
+  }
+
+  const winnerId = String(formData.get("winner_nomination_id") ?? "").trim();
+  const loserId = String(formData.get("loser_nomination_id") ?? "").trim();
+  if (!winnerId || !loserId || winnerId === loserId) {
+    return { success: false, error: "Invalid ladder matchup." };
+  }
+
+  const { data: rows } = await auth.supabase
+    .from("award_nominations")
+    .select("id, status, nomination_type, evidence_note")
+    .in("id", [winnerId, loserId]);
+
+  const winner = rows?.find((r) => r.id === winnerId);
+  const loser = rows?.find((r) => r.id === loserId);
+  if (!winner || !loser) {
+    return { success: false, error: "Nomination not found." };
+  }
+  if (winner.nomination_type !== "conference_best_delegate" || loser.nomination_type !== "conference_best_delegate") {
+    return { success: false, error: "Ladder matchups are only for overall Best Delegate nominations." };
+  }
+  if (winner.status !== "pending" || loser.status !== "pending") {
+    return { success: false, error: "Both nominees must still be pending." };
+  }
+  if (!hasValidAwardEvidence(winner.evidence_note) || !hasValidAwardEvidence(loser.evidence_note)) {
+    return { success: false, error: "Both nominees need a valid chair evidence statement before SMT can advance the ladder." };
+  }
+
+  const now = new Date().toISOString();
+  const { error } = await auth.supabase
+    .from("award_nominations")
+    .update({
+      status: "rejected",
+      reviewed_by: auth.user.id,
+      reviewed_at: now,
+      updated_at: now,
+    })
+    .eq("id", loserId)
+    .eq("status", "pending");
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  revalidatePath("/smt/awards");
+  revalidatePath("/smt");
+  revalidatePath("/chair/awards");
+  return { success: true };
+}
+
 export async function promoteNominationToAwardAction(
   formData: FormData
 ): Promise<{ success: boolean; error?: string }> {
@@ -589,6 +651,28 @@ export async function promoteNominationToAwardAction(
   }
   if (nomination.status !== "pending") {
     return { success: false, error: "This nomination is no longer pending." };
+  }
+
+  if (!hasValidAwardEvidence(nomination.evidence_note)) {
+    return { success: false, error: awardEvidenceValidationMessage() };
+  }
+
+  if (nomination.nomination_type === "conference_best_delegate") {
+    const { count, error: countErr } = await auth.supabase
+      .from("award_nominations")
+      .select("id", { count: "exact", head: true })
+      .eq("nomination_type", "conference_best_delegate")
+      .eq("status", "pending");
+    if (countErr) {
+      return { success: false, error: countErr.message };
+    }
+    if ((count ?? 0) > 1) {
+      return {
+        success: false,
+        error:
+          "Finish the Best Delegate (overall) ladder first — only one pending nominee should remain before final approval.",
+      };
+    }
   }
 
   if (nomination.nomination_type === "conference_best_delegate" && category !== "conference_best_delegate") {
@@ -704,7 +788,20 @@ export async function promoteNominationToAwardAction(
     return { success: false, error: nomErr.message };
   }
 
-  if (isSingleWinnerNominationType(nomination.nomination_type as NominationRubricType)) {
+  if (nomination.nomination_type === "conference_best_delegate") {
+    const { error: supErr } = await auth.supabase
+      .from("award_nominations")
+      .update({
+        status: "not_selected",
+        updated_at: now,
+      })
+      .eq("nomination_type", "conference_best_delegate")
+      .eq("status", "pending")
+      .neq("id", nomination.id);
+    if (supErr) {
+      return { success: false, error: supErr.message };
+    }
+  } else if (isSingleWinnerNominationType(nomination.nomination_type as NominationRubricType)) {
     const { error: supErr } = await auth.supabase
       .from("award_nominations")
       .update({

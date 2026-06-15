@@ -9,6 +9,7 @@ type OpenNomRow = {
   rank: number;
   nominee_profile_id: string | null;
   rubric_scores: Record<string, number> | null;
+  evidence_note?: string | null;
   status: string;
 };
 
@@ -111,7 +112,7 @@ export async function promoteCommitteeDraftsToPending(
 
   const { data: rows, error: fetchErr } = await supabase
     .from("award_nominations")
-    .select("nomination_type, rank, nominee_profile_id, rubric_scores, status")
+    .select("nomination_type, rank, nominee_profile_id, rubric_scores, evidence_note, status")
     .in("committee_conference_id", scope.siblingConferenceIds)
     .in("status", ["draft", "pending"]);
 
@@ -128,7 +129,7 @@ export async function promoteCommitteeDraftsToPending(
 
   const { data: rowsAfter, error: fetch2Err } = await supabase
     .from("award_nominations")
-    .select("nomination_type, rank, nominee_profile_id, rubric_scores, status")
+    .select("nomination_type, rank, nominee_profile_id, rubric_scores, evidence_note, status")
     .eq("committee_conference_id", canonicalId)
     .eq("status", "draft");
 
