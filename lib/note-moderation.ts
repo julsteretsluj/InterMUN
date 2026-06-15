@@ -23,3 +23,17 @@ export function detectInappropriateTerms(text: string | null | undefined): strin
   return Array.from(matches);
 }
 
+export type DelegationNoteModerationState = "approved" | "held" | "rejected";
+
+export type DelegationNoteHoldReason = "profanity" | "concern_flag" | "reported";
+
+export function shouldAutoHoldNote({
+  content,
+  concernFlag,
+}: {
+  content: string | null | undefined;
+  concernFlag: boolean;
+}): boolean {
+  return concernFlag || detectInappropriateTerms(content).length > 0;
+}
+

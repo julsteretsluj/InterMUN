@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "អគ្គលេខាធិការ",
     "returnToProfile": "ត្រឡប់ទៅប្រវត្តិរូប",
-    "useDifferentAccount": "ប្រើគណនីផ្សេង"
+    "useDifferentAccount": "ប្រើគណនីផ្សេង",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "ឧ. ស៊ីម៉ានី ២០២៧",
@@ -624,7 +625,11 @@
       "purple": "ពណ៌ស្វាយ",
       "pink": "ផ្កាឈូក",
       "neutral": "អព្យាក្រឹត"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "បានធ្វើបច្ចុប្បន្នភាព។",
@@ -702,7 +707,9 @@
     "approveBestDelegate": "យល់ព្រម - តំណាងល្អបំផុត",
     "approveHonourableMention": "យល់ព្រម - ការលើកសរសើរ",
     "approveBestPositionPaper": "យល់ព្រម - ក្រដាសទីតាំងល្អបំផុត",
-    "approveBestDelegateOverall": "យល់ព្រម - តំណាងល្អបំផុត (សរុប)"
+    "approveBestDelegateOverall": "យល់ព្រម - តំណាងល្អបំផុត (សរុប)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "រួចហើយនៅក្នុងគណៈកម្មាធិការ",
@@ -777,7 +784,8 @@
     "advisorNotes": "កំណត់ចំណាំដែលបានបញ្ជូនបន្ត",
     "delegateSchedule": "កាលវិភាគសន្និសីទ",
     "chairSchedule": "កាលវិភាគសន្និសីទ",
-    "advisorSchedule": "កាលវិភាគសន្និសីទ"
+    "advisorSchedule": "កាលវិភាគសន្និសីទ",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "Supabase មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធទេ។",
@@ -902,7 +910,8 @@
     },
     "schedule": {
       "intro": "ជ្រើសរើសក្រុមរបស់អ្នក បន្ទាប់មកទីប្រឹក្សា A-D ឬគណៈកម្មាធិការរបស់អ្នក (ប្រតិភូ/ប្រធាន)។ មានតែតារាងពេលវេលាផ្ទាល់ខ្លួនមួយប៉ុណ្ណោះដែលត្រូវបានបង្ហាញក្នុងពេលតែមួយ។"
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "នាំចេញសម្ភារៈរបស់ខ្ញុំ",
@@ -982,7 +991,8 @@
     "topicLabel": "ប្រធានបទ៖",
     "chairsLabel": "កៅអី៖",
     "committeeLogoAlt": "និមិត្តសញ្ញា {name}",
-    "eslFriendly": "ងាយស្រួលប្រើ ESL"
+    "eslFriendly": "ងាយស្រួលប្រើ ESL",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "ដំបូង",
@@ -1030,7 +1040,8 @@
       "settings": "ការកំណត់",
       "agenda": "របៀបវារៈ",
       "history": "ប្រវត្តិសាស្ត្រ",
-      "conferenceSchedule": "កាលវិភាគ"
+      "conferenceSchedule": "កាលវិភាគ",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1411,7 +1422,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "ការគ្រប់គ្រងគេហទំព័រ",
@@ -1598,7 +1647,8 @@
       "delegateNotFound": "រកមិនឃើញកៅអីតំណាង។",
       "delegateUnlinked": "កៅអីនោះមិនទាន់មានគណនីប្រតិភូដែលបានភ្ជាប់នៅឡើយទេ។",
       "assigned": "ត្រូវបានចាត់តាំងជាទីប្រឹក្សា {country}។",
-      "invalidAllocationId": "បញ្ចូល UUID ការបែងចែកត្រឹមត្រូវ។"
+      "invalidAllocationId": "បញ្ចូល UUID ការបែងចែកត្រឹមត្រូវ។",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1766,7 +1816,26 @@
         "browseAdvisor": "ដោយទីប្រឹក្សា",
         "teamsScopeAll": "ទិដ្ឋភាពទូទៅ (ក្រុមទាំងអស់)",
         "pickGroup": "ក្រុម៖",
-        "pickCommitteeAll": "គណៈកម្មាធិការ៖"
+        "pickCommitteeAll": "គណៈកម្មាធិការ៖",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "អាហារថ្ងៃត្រង់ត្រួតលើគ្នាជាមួយគណៈកម្មការផ្សេងទៀត។",
@@ -1776,8 +1845,12 @@
         "yourLunch": "អាហារថ្ងៃត្រង់របស់អ្នក។",
         "theirLunch": "អាហារថ្ងៃត្រង់របស់ពួកគេ។",
         "overlap": "អាហារថ្ងៃត្រង់រួមគ្នា៖ {start}–{end} ({minutes} នាទី)",
-        "noOverlap": "គ្មាន​ពេល​អាហារ​ថ្ងៃ​ត្រង់​រួម​នៅ​ថ្ងៃ​នេះ​ទេ។"
-      }
+        "noOverlap": "គ្មាន​ពេល​អាហារ​ថ្ងៃ​ត្រង់​រួម​នៅ​ថ្ងៃ​នេះ​ទេ។",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "ទិដ្ឋភាពប្រតិភូ",
     "surfaceSwitchError": "មិនអាចប្តូរទិដ្ឋភាពបានទេ។ ពិនិត្យមើលច្រកព្រឹត្តិការណ៍ និងការជ្រើសរើស។",
     "pickChairFirst": "ជ្រើសរើសប្រធានគណៈកម្មការជាមុន (ឬរក្សាទុកកិច្ចការ)។",
-    "pickDelegateFirst": "ជ្រើសរើសកៅអីតំណាងជាមុន (ឬរក្សាទុកកិច្ចការ)។"
+    "pickDelegateFirst": "ជ្រើសរើសកៅអីតំណាងជាមុន (ឬរក្សាទុកកិច្ចការ)។",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "អ្នកអាចតាមដានសកម្មភាពរបស់គណៈប្រតិភូដែលបានចាត់តាំងរបស់អ្នក។ អ្នក​មិន​មាន​សិទ្ធិ​ចូល​ប្រើ​កំណត់​ត្រា​ទេ លុះ​ត្រា​តែ​កៅអី ឬ SMT បញ្ជូន​បន្ត​មួយ​ទៅ​អ្នក។",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "នៅក្នុង Supabase → Project Settings → API សូមចម្លងសោសម្ងាត់ service_role ។",
     "inviteSetupStep2": "បន្ថែម SUPABASE_SERVICE_ROLE_KEY ទៅក្នុងម៉ាស៊ីនមេរបស់អ្នក (Render/Vercel) — មិនមែន NEXT_PUBLIC_ ទេ។",
     "inviteSetupStep3": "បន្ថែម NEXT_PUBLIC_APP_URL ទៅ URL គេហទំព័រផ្ទាល់របស់អ្នក (ឧ. https://your-app.onrender.com)។",
-    "inviteSetupStep4": "ដាក់ឡើងវិញ (ការផលិត) ឬបន្ថែមទាំងពីរទៅ .env.local ហើយចាប់ផ្តើម npm ដំណើរការ dev (local) ឡើងវិញ។"
+    "inviteSetupStep4": "ដាក់ឡើងវិញ (ការផលិត) ឬបន្ថែមទាំងពីរទៅ .env.local ហើយចាប់ផ្តើម npm ដំណើរការ dev (local) ឡើងវិញ។",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }

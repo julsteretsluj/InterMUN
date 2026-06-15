@@ -23,6 +23,9 @@ type DelegationNoteRow = {
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
+  moderation_state?: "approved" | "held" | "rejected";
+  hold_reason?: string | null;
+  moderation_note?: string | null;
   created_at: string;
   forwarded_to_smt: boolean;
   forwarded_at: string | null;
@@ -58,6 +61,9 @@ type InitialDelegationNote = {
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
+  moderation_state: "approved" | "held" | "rejected";
+  hold_reason: "profanity" | "concern_flag" | "reported" | null;
+  moderation_note: string | null;
   created_at: string;
   forwarded_to_smt: boolean;
   forwarded_at: string | null;
@@ -327,6 +333,17 @@ export default async function ChatsNotesPage({
       topic: n.topic,
       content: n.content,
       concern_flag: n.concern_flag,
+      moderation_state:
+        n.moderation_state === "held" || n.moderation_state === "rejected"
+          ? n.moderation_state
+          : "approved",
+      hold_reason:
+        n.hold_reason === "profanity" ||
+        n.hold_reason === "concern_flag" ||
+        n.hold_reason === "reported"
+          ? n.hold_reason
+          : null,
+      moderation_note: n.moderation_note ?? null,
       created_at: n.created_at,
       forwarded_to_smt: n.forwarded_to_smt,
       forwarded_at: n.forwarded_at,

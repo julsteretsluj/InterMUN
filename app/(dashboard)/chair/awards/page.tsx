@@ -27,6 +27,7 @@ import { DelegateMatrixPanel } from "./DelegateMatrixPanel";
 import { ChairAwardsShell } from "@/components/chair/awards/ChairAwardsShell";
 import { AwardsRubricReference } from "@/components/awards/AwardsRubricReference";
 import { getTranslations } from "next-intl/server";
+import { loadDelegateFloorActivityByProfileId } from "@/lib/delegate-floor-activity";
 
 export const dynamic = "force-dynamic";
 
@@ -139,6 +140,22 @@ export default async function ChairAwardsPage() {
     dedupeAllocationsByUserId((delegates ?? []) as DelegateRow[])
   );
   const delegateRows = delegateRowsAll.filter((d) => !isChairAllocation(d));
+
+  const allocationIdsByUserId: Record<string, string[]> = {};
+  for (const d of (delegates ?? []) as DelegateRow[]) {
+    if (!d.user_id) continue;
+    const existing = allocationIdsByUserId[d.user_id] ?? [];
+    existing.push(d.id);
+    allocationIdsByUserId[d.user_id] = existing;
+  }
+  const floorActivityByProfileId = await loadDelegateFloorActivityByProfileId(
+    supabase,
+    awardScope.siblingConferenceIds,
+    Object.entries(allocationIdsByUserId).map(([userId, allocationIds]) => ({
+      userId,
+      allocationIds,
+    }))
+  );
 
   const delegateByUserId: Record<string, { country: string; displayName: string }> = {};
   for (const d of delegateRowsAll) {
@@ -327,6 +344,7 @@ export default async function ChairAwardsPage() {
             committeeConferenceId={awardConferenceId}
             delegates={delegateMatrixPayload}
             scoresByProfileId={scoresByProfileId}
+            floorActivityByProfileId={floorActivityByProfileId}
           />
         ) : null}
         <ChairSubmitToSmtPanel
@@ -410,6 +428,7 @@ export default async function ChairAwardsPage() {
                     nominationRowId={existing?.id ?? null}
                     criteria={type.criteria}
                     locked={existing?.status === "pending"}
+                    floorActivityByProfileId={floorActivityByProfileId}
                   />
                 );
               })}

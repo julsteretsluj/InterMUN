@@ -98,6 +98,7 @@ export const CHAIR_NAV_ITEM_KEY_ORDER = [
   "crisis",
   "crisisSlides",
   "archive",
+  "notesModeration",
   "officialLinks",
   "roomCode",
   "settings",

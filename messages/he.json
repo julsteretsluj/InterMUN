@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "מזכ\"ל",
     "returnToProfile": "חזור לפרופיל",
-    "useDifferentAccount": "השתמש בחשבון אחר"
+    "useDifferentAccount": "השתמש בחשבון אחר",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "לְמָשָׁל SEAMUNI2027",
@@ -552,7 +553,11 @@
       "purple": "סָגוֹל",
       "pink": "וָרוֹד",
       "neutral": "נֵטרָלִי"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "מְעוּדכָּן.",
@@ -630,7 +635,9 @@
     "approveBestDelegate": "אישור - הנציג הטוב ביותר",
     "approveHonourableMention": "אישור - ציון כבוד",
     "approveBestPositionPaper": "אישור - נייר העמדה הטוב ביותר",
-    "approveBestDelegateOverall": "אישור - הנציג הטוב ביותר (בסך הכל)"
+    "approveBestDelegateOverall": "אישור - הנציג הטוב ביותר (בסך הכל)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "כבר בוועדה",
@@ -705,7 +712,8 @@
     "advisorNotes": "הערות שהועברו",
     "delegateSchedule": "לוח זמנים לכנס",
     "chairSchedule": "לוח זמנים לכנס",
-    "advisorSchedule": "לוח זמנים לכנס"
+    "advisorSchedule": "לוח זמנים לכנס",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "Supabase אינו מוגדר",
@@ -830,7 +838,8 @@
     },
     "schedule": {
       "intro": "בחר את מסלול הצוות שלך, ואז את היועץ A–D או את הוועדה שלך (נציג/יו\"ר). רק לוח זמנים אישי אחד מוצג בכל פעם."
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "ייצוא החומרים שלי",
@@ -910,7 +919,8 @@
     "topicLabel": "נוֹשֵׂא:",
     "chairsLabel": "כִּיסְאוֹת:",
     "committeeLogoAlt": "הלוגו של {name}",
-    "eslFriendly": "ידידותי ל-ESL"
+    "eslFriendly": "ידידותי ל-ESL",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "מתחילים",
@@ -958,7 +968,8 @@
       "discipline": "מִשְׁמַעתִי",
       "agenda": "סֵדֶר הַיוֹם",
       "history": "הִיסטוֹרִיָה",
-      "conferenceSchedule": "לוּחַ זְמַנִים"
+      "conferenceSchedule": "לוּחַ זְמַנִים",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1285,7 +1296,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "ניהול אתר אינטרנט",
@@ -1472,7 +1521,8 @@
       "delegateNotFound": "מושב הנציג לא נמצא.",
       "delegateUnlinked": "למושב הזה אין עדיין חשבון נציג מקושר.",
       "assigned": "הוקצה יועץ ל-{country}.",
-      "invalidAllocationId": "הזן UUID תקף להקצאה."
+      "invalidAllocationId": "הזן UUID תקף להקצאה.",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1640,7 +1690,26 @@
         "browseAdvisor": "על ידי יועץ",
         "teamsScopeAll": "סקירה כללית (כל הקבוצות)",
         "pickGroup": "קְבוּצָה:",
-        "pickCommitteeAll": "וַעֲדָה:"
+        "pickCommitteeAll": "וַעֲדָה:",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "ארוחת הצהריים חופפת לוועדות אחרות",
@@ -1650,8 +1719,12 @@
         "yourLunch": "ארוחת הצהריים שלך",
         "theirLunch": "ארוחת הצהריים שלהם",
         "overlap": "ארוחת צהריים משותפת: {start}–{end} ({minutes} דקות)",
-        "noOverlap": "אין שעת ארוחת צהריים משותפת ביום זה."
-      }
+        "noOverlap": "אין שעת ארוחת צהריים משותפת ביום זה.",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "תצוגת נציג",
     "surfaceSwitchError": "לא ניתן היה להחליף תצוגה. בדוק את שער האירוע ואת הבחירות.",
     "pickChairFirst": "בחר תחילה ועדת יו\"ר (או שמור מטלות).",
-    "pickDelegateFirst": "תחילה בחר מושב נציג (או שמור מטלות)."
+    "pickDelegateFirst": "תחילה בחר מושב נציג (או שמור מטלות).",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "אתה יכול לעקוב אחר פעילות הוועדה של הנציג שלך. אין לך גישה לפתקים אלא אם כיסא או SMT מעבירים לך אחד.",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "ב-Supabase → Project Settings → API, העתק את המפתח הסודי service_role.",
     "inviteSetupStep2": "הוסף את SUPABASE_SERVICE_ROLE_KEY ל-Env המארח שלך (Render/Vercel) - לא NEXT_PUBLIC_.",
     "inviteSetupStep3": "הוסף את NEXT_PUBLIC_APP_URL לכתובת האתר החיה שלך (למשל https://your-app.onrender.com).",
-    "inviteSetupStep4": "פריס מחדש (ייצור) או הוסף את שניהם ל-.env.local והפעל מחדש את npm run dev (local)."
+    "inviteSetupStep4": "פריס מחדש (ייצור) או הוסף את שניהם ל-.env.local והפעל מחדש את npm run dev (local).",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }

@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "事務局長",
     "returnToProfile": "プロフィールに戻る",
-    "useDifferentAccount": "別のアカウントを使用する"
+    "useDifferentAccount": "別のアカウントを使用する",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "例えば シームニ2027",
@@ -624,7 +625,11 @@
       "purple": "紫",
       "pink": "ピンク",
       "neutral": "中性"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "更新されました。",
@@ -702,7 +707,9 @@
     "approveBestDelegate": "承認 — 最良の代理人",
     "approveHonourableMention": "承認 — 佳作",
     "approveBestPositionPaper": "承認 — ベストポジションペーパー",
-    "approveBestDelegateOverall": "承認 — 最良の代表者 (全体)"
+    "approveBestDelegateOverall": "承認 — 最良の代表者 (全体)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "すでに委員会に参加している",
@@ -777,7 +784,8 @@
     "advisorNotes": "転送されたメモ",
     "delegateSchedule": "カンファレンススケジュール",
     "chairSchedule": "カンファレンススケジュール",
-    "advisorSchedule": "カンファレンススケジュール"
+    "advisorSchedule": "カンファレンススケジュール",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "スーパーベースが構成されていません",
@@ -902,7 +910,8 @@
     },
     "schedule": {
       "intro": "チーム トラックを選択し、アドバイザー A ～ D または委員会 (代表者/委員長) のいずれかを選択します。 一度に表示される個人スケジュールは 1 つだけです。"
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "資料をエクスポート",
@@ -982,7 +991,8 @@
     "topicLabel": "トピック：",
     "chairsLabel": "椅子:",
     "committeeLogoAlt": "{名前}のロゴ",
-    "eslFriendly": "ESLフレンドリー"
+    "eslFriendly": "ESLフレンドリー",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "初級",
@@ -1030,7 +1040,8 @@
       "settings": "設定",
       "agenda": "議題",
       "history": "歴史",
-      "conferenceSchedule": "スケジュール"
+      "conferenceSchedule": "スケジュール",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1357,7 +1368,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "ウェブサイト管理",
@@ -1544,7 +1593,8 @@
       "delegateNotFound": "代表席が見つかりません。",
       "delegateUnlinked": "そのシートにはまだリンクされた代理アカウントがありません。",
       "assigned": "{country}にアドバイザーを任命。",
-      "invalidAllocationId": "有効な割り当て UUID を入力してください。"
+      "invalidAllocationId": "有効な割り当て UUID を入力してください。",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1712,7 +1762,26 @@
         "browseAdvisor": "アドバイザーによる",
         "teamsScopeAll": "概要（全グループ）",
         "pickGroup": "グループ：",
-        "pickCommitteeAll": "委員会："
+        "pickCommitteeAll": "委員会：",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "昼食は他の委員会と重複します",
@@ -1722,8 +1791,12 @@
         "yourLunch": "あなたの昼食",
         "theirLunch": "彼らの昼食",
         "overlap": "共有ランチ: {start}–{end} ({minutes} 分)",
-        "noOverlap": "この日はランチタイムの共有はありません。"
-      }
+        "noOverlap": "この日はランチタイムの共有はありません。",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "デリゲートビュー",
     "surfaceSwitchError": "ビューを切り替えることができませんでした。 イベントゲートと選択内容を確認してください。",
     "pickChairFirst": "最初に委員会の委員長を選択します (または割り当てを保存します)。",
-    "pickDelegateFirst": "最初に代表者席を選択します (または割り当てを保存します)。"
+    "pickDelegateFirst": "最初に代表者席を選択します (または割り当てを保存します)。",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "割り当てられた代表者の委員会活動を監視できます。 議長または SMT からメモが転送されない限り、メモにアクセスすることはできません。",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "Supabase → プロジェクト設定 → API で、service_role 秘密キーをコピーします。",
     "inviteSetupStep2": "NEXT_PUBLIC_ ではなく、SUPABASE_SERVICE_ROLE_KEY をホスト環境 (Render/Vercel) に追加します。",
     "inviteSetupStep3": "NEXT_PUBLIC_APP_URL をライブサイト URL に追加します (例: https://your-app.onrender.com)。",
-    "inviteSetupStep4": "再デプロイ (実稼働) するか、両方を .env.local に追加して、npm run dev (ローカル) を再起動します。"
+    "inviteSetupStep4": "再デプロイ (実稼働) するか、両方を .env.local に追加して、npm run dev (ローカル) を再起動します。",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }

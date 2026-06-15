@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Genel Sekreter",
     "returnToProfile": "Profile dön",
-    "useDifferentAccount": "Farklı bir hesap kullanın"
+    "useDifferentAccount": "Farklı bir hesap kullanın",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "örneğin SEAMUNI2027",
@@ -624,7 +625,11 @@
       "purple": "Mor",
       "pink": "Pembe",
       "neutral": "Doğal"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "Güncellendi.",
@@ -702,7 +707,9 @@
     "approveBestDelegate": "Onayla — En İyi Delege",
     "approveHonourableMention": "Onayla — Mansiyon Ödülü",
     "approveBestPositionPaper": "Onayla — En İyi Pozisyon Bildirisi",
-    "approveBestDelegateOverall": "Onayla — En İyi Delege (genel olarak)"
+    "approveBestDelegateOverall": "Onayla — En İyi Delege (genel olarak)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "Zaten bir komitede",
@@ -777,7 +784,8 @@
     "advisorNotes": "İletilen notlar",
     "delegateSchedule": "Konferans programı",
     "chairSchedule": "Konferans programı",
-    "advisorSchedule": "Konferans programı"
+    "advisorSchedule": "Konferans programı",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "Supabase yapılandırılmadı",
@@ -902,7 +910,8 @@
     },
     "schedule": {
       "intro": "Takım parçanızı seçin, ardından danışman A-D'yi veya komitenizi (delege/başkan) seçin. Aynı anda yalnızca bir kişisel zaman çizelgesi gösterilir."
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "Materyallerimi dışa aktar",
@@ -982,7 +991,8 @@
     "topicLabel": "Başlık:",
     "chairsLabel": "Sandalyeler:",
     "committeeLogoAlt": "{isim} logosu",
-    "eslFriendly": "ESL dostu"
+    "eslFriendly": "ESL dostu",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "Başlangıç",
@@ -1030,7 +1040,8 @@
       "settings": "Ayarlar",
       "agenda": "Gündem",
       "history": "Tarih",
-      "conferenceSchedule": "Takvim"
+      "conferenceSchedule": "Takvim",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1357,7 +1368,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "Web sitesi yönetimi",
@@ -1544,7 +1593,8 @@
       "delegateNotFound": "Delege koltuğu bulunamadı.",
       "delegateUnlinked": "Bu koltuğun henüz bağlı bir delege hesabı yok.",
       "assigned": "{country}'ye danışman atandı.",
-      "invalidAllocationId": "Geçerli bir tahsis UUID'si girin."
+      "invalidAllocationId": "Geçerli bir tahsis UUID'si girin.",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1712,7 +1762,26 @@
         "browseAdvisor": "Danışman tarafından",
         "teamsScopeAll": "Genel Bakış (tüm gruplar)",
         "pickGroup": "Grup:",
-        "pickCommitteeAll": "Komite:"
+        "pickCommitteeAll": "Komite:",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "Öğle yemeği diğer komitelerle çakışıyor",
@@ -1722,8 +1791,12 @@
         "yourLunch": "Öğle yemeğin",
         "theirLunch": "Öğle yemeği",
         "overlap": "Paylaşılan öğle yemeği: {start}–{end} ({minutes} dk.)",
-        "noOverlap": "Bu gün ortak öğle yemeği vakti yok."
-      }
+        "noOverlap": "Bu gün ortak öğle yemeği vakti yok.",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "Temsilci görünümü",
     "surfaceSwitchError": "Görünüm değiştirilemedi. Etkinlik kapısını ve seçimlerini kontrol edin.",
     "pickChairFirst": "Önce bir komite başkanı seçin (veya ödevleri kaydedin).",
-    "pickDelegateFirst": "Önce bir delege koltuğu seçin (veya atamaları kaydedin)."
+    "pickDelegateFirst": "Önce bir delege koltuğu seçin (veya atamaları kaydedin).",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "Atanan delegenizin komite faaliyetlerini izleyebilirsiniz. Bir başkan veya SMT size bir not iletmedikçe notlara erişiminiz yoktur.",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "Supabase → Proje Ayarları → API'de service_role gizli anahtarını kopyalayın.",
     "inviteSetupStep2": "Ana makine ortamınıza (Render/Vercel) SUPABASE_SERVICE_ROLE_KEY ekleyin - NEXT_PUBLIC_ değil.",
     "inviteSetupStep3": "Yayındaki sitenizin URL'sine NEXT_PUBLIC_APP_URL ekleyin (ör. https://your-app.onrender.com).",
-    "inviteSetupStep4": ".env.local dosyasını yeniden konuşlandırın (üretim) veya her ikisini de ekleyin ve npm run dev'i (local) yeniden başlatın."
+    "inviteSetupStep4": ".env.local dosyasını yeniden konuşlandırın (üretim) veya her ikisini de ekleyin ve npm run dev'i (local) yeniden başlatın.",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }

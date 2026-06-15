@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "Secretário Geral",
     "returnToProfile": "Voltar ao perfil",
-    "useDifferentAccount": "Use uma conta diferente"
+    "useDifferentAccount": "Use uma conta diferente",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "por exemplo SEAMUNI2027",
@@ -624,7 +625,11 @@
       "purple": "Roxa",
       "pink": "Rosa",
       "neutral": "Neutra"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "Atualizada.",
@@ -702,7 +707,9 @@
     "approveBestDelegate": "Aprovar – Melhor Delegado",
     "approveHonourableMention": "Aprovar – Menção Honrosa",
     "approveBestPositionPaper": "Aprovar – Melhor Documento de Posição",
-    "approveBestDelegateOverall": "Aprovar — Melhor Delegado (geral)"
+    "approveBestDelegateOverall": "Aprovar — Melhor Delegado (geral)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "Já em uma comissão",
@@ -777,7 +784,8 @@
     "advisorNotes": "Notas encaminhadas",
     "delegateSchedule": "Cronograma da conferência",
     "chairSchedule": "Cronograma da conferência",
-    "advisorSchedule": "Cronograma da conferência"
+    "advisorSchedule": "Cronograma da conferência",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "Supabase não está configurado",
@@ -902,7 +910,8 @@
     },
     "schedule": {
       "intro": "Escolha o caminho da sua equipe e, em seguida, o conselheiro A – D ou o seu comitê (delegado/presidente). Apenas um horário pessoal é mostrado por vez."
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "Exportar os meus materiais",
@@ -982,7 +991,8 @@
     "topicLabel": "Tópica:",
     "chairsLabel": "Cadeiras:",
     "committeeLogoAlt": "logotipo de {nome}",
-    "eslFriendly": "Compatível com ESL"
+    "eslFriendly": "Compatível com ESL",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "Iniciante",
@@ -1030,7 +1040,8 @@
       "settings": "Configurações",
       "agenda": "Agenda",
       "history": "História",
-      "conferenceSchedule": "Agendar"
+      "conferenceSchedule": "Agendar",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1357,7 +1368,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "Administração do site",
@@ -1544,7 +1593,8 @@
       "delegateNotFound": "Assento de delegado não encontrado.",
       "delegateUnlinked": "Esse assento ainda não tem conta de delegado vinculada.",
       "assigned": "Conselheiro designado para {country}.",
-      "invalidAllocationId": "Insira um UUID de alocação válido."
+      "invalidAllocationId": "Insira um UUID de alocação válido.",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1712,7 +1762,26 @@
         "browseAdvisor": "Por consultor",
         "teamsScopeAll": "Visão geral (todos os grupos)",
         "pickGroup": "Grupo:",
-        "pickCommitteeAll": "Comitê:"
+        "pickCommitteeAll": "Comitê:",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "Sobreposição do almoço com outros comitês",
@@ -1722,8 +1791,12 @@
         "yourLunch": "Seu almoço",
         "theirLunch": "O almoço deles",
         "overlap": "Almoço compartilhado: {start}–{end} ({minutes} min)",
-        "noOverlap": "Não há horário de almoço compartilhado neste dia."
-      }
+        "noOverlap": "Não há horário de almoço compartilhado neste dia.",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "Visualização delegada",
     "surfaceSwitchError": "Não foi possível mudar a visualização. Verifique o portão do evento e as seleções.",
     "pickChairFirst": "Selecione primeiro um comitê presidente (ou salve as atribuições).",
-    "pickDelegateFirst": "Selecione primeiro um assento de delegado (ou salve as atribuições)."
+    "pickDelegateFirst": "Selecione primeiro um assento de delegado (ou salve as atribuições).",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "Você pode monitorar a atividade do comitê do delegado designado. Você não tem acesso às notas, a menos que um presidente ou SMT as encaminhe para você.",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "Em Supabase → Configurações do projeto → API, copie a chave secreta service_role.",
     "inviteSetupStep2": "Adicione SUPABASE_SERVICE_ROLE_KEY ao seu ambiente de host (Render/Vercel) - não NEXT_PUBLIC_.",
     "inviteSetupStep3": "Adicione NEXT_PUBLIC_APP_URL ao URL do seu site ativo (por exemplo, https://your-app.onrender.com).",
-    "inviteSetupStep4": "Reimplante (produção) ou adicione ambos a .env.local e reinicie npm run dev (local)."
+    "inviteSetupStep4": "Reimplante (produção) ou adicione ambos a .env.local e reinicie npm run dev (local).",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }

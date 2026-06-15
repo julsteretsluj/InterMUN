@@ -14,6 +14,8 @@ import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { DelegateFloorActivity } from "@/lib/delegate-floor-activity";
+import { DelegateFloorActivitySection } from "./DelegateFloorActivitySection";
 
 const AUTOSAVE_MS = 60_000;
 
@@ -38,6 +40,7 @@ type Props = {
   criteria: RubricCriterion[];
   /** Submitted batch to SMT — no edits or autosave. */
   locked?: boolean;
+  floorActivityByProfileId?: Record<string, DelegateFloorActivity>;
 };
 
 function shouldAttemptAutosave(
@@ -100,6 +103,7 @@ export function ChairNominationSlotForm({
   nominationRowId,
   criteria,
   locked = false,
+  floorActivityByProfileId = {},
 }: Props) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -294,6 +298,9 @@ export function ChairNominationSlotForm({
             ))}
           </select>
         </label>
+        {nomineeId ? (
+          <DelegateFloorActivitySection activity={floorActivityByProfileId[nomineeId]} />
+        ) : null}
         <div className="rounded-lg border border-white/12 bg-black/25 p-3 text-brand-navy space-y-2.5">
           <p className="text-brand-muted text-xs uppercase font-semibold tracking-wide">
             Criteria (pick a band, then Low or High within that band)

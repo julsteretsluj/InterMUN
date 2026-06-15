@@ -34,6 +34,7 @@ export type ChairNavItemKey =
   | "crisisSlides"
   | "archive"
   | "officialLinks"
+  | "notesModeration"
   | "roomCode"
   | "settings";
 
@@ -102,6 +103,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     emoji: "⚖️",
   },
   { href: "/documents", itemKey: "archive", emoji: "📁" },
+  { href: "/chair/notes-moderation", itemKey: "notesModeration", emoji: "📝" },
   { href: "/official-links", itemKey: "officialLinks", emoji: "🔗" },
   { href: "/report", itemKey: "crisis", emoji: "⚠️", crisisOnly: true },
   { href: "/crisis-slides", itemKey: "crisisSlides", emoji: "🖼️", crisisOnly: true },

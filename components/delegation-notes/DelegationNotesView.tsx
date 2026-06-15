@@ -4,7 +4,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
-import { detectInappropriateTerms } from "@/lib/note-moderation";
+import {
+  detectInappropriateTerms,
+  shouldAutoHoldNote,
+  type DelegationNoteHoldReason,
+  type DelegationNoteModerationState,
+} from "@/lib/note-moderation";
+import { moderateDelegationNoteAction } from "@/app/actions/delegationNoteModeration";
 import { HelpButton } from "@/components/HelpButton";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
 import { useTranslations } from "next-intl";
@@ -70,6 +76,9 @@ type DelegationNote = {
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
+  moderation_state: DelegationNoteModerationState;
+  hold_reason: DelegationNoteHoldReason | null;
+  moderation_note: string | null;
   created_at: string;
   forwarded_to_smt: boolean;
   forwarded_at: string | null;
@@ -146,6 +155,7 @@ export function DelegationNotesView({
   const [topic, setTopic] = useState<NoteTopic>("bloc forming");
   const [content, setContent] = useState("");
   const [concernFlag, setConcernFlag] = useState(false);
+  const [composeSuccess, setComposeSuccess] = useState<string | null>(null);
 
   const [selectedAllocationRecipientIdsState, setSelectedAllocationRecipientIdsState] = useState<
     string[]
@@ -205,9 +215,33 @@ export function DelegationNotesView({
       forwarded: t("forwarded"),
       forwardedToAdvisor: t("forwardedToAdvisor"),
       report: t("report"),
+      approve: t("moderation.approve"),
+      reject: t("moderation.reject"),
+      rejectReasonPlaceholder: t("moderation.rejectReasonPlaceholder"),
+      pendingReview: t("moderation.pendingBadge"),
+      rejected: t("moderation.rejectedBadge"),
+      holdReason: t("moderation.holdReason"),
+      holdReasons: {
+        profanity: t("moderation.holdReasons.profanity"),
+        concernFlag: t("moderation.holdReasons.concernFlag"),
+        reported: t("moderation.holdReasons.reported"),
+        unknown: t("moderation.holdReasons.unknown"),
+      },
     }),
     [t]
   );
+
+  const composeWillHold = useMemo(
+    () => shouldAutoHoldNote({ content, concernFlag }),
+    [content, concernFlag]
+  );
+
+  function isNoteSender(note: DelegationNote): boolean {
+    if (note.sender.kind === "allocation") {
+      return note.sender.allocationId === myAllocationId;
+    }
+    return note.sender.profileId === myUserId;
+  }
 
   function moderationAdvisorForNote(n: DelegationNote) {
     const adv = advisorForNote(n);
@@ -269,6 +303,9 @@ export function DelegationNotesView({
         topic: NoteTopic;
         content: string;
         concern_flag: boolean;
+        moderation_state: DelegationNoteModerationState;
+        hold_reason: DelegationNoteHoldReason | null;
+        moderation_note: string | null;
         created_at: string;
         forwarded_to_smt: boolean;
         forwarded_at: string | null;
@@ -392,6 +429,9 @@ export function DelegationNotesView({
           topic: n.topic,
           content: n.content,
           concern_flag: n.concern_flag,
+          moderation_state: n.moderation_state ?? "approved",
+          hold_reason: n.hold_reason ?? null,
+          moderation_note: n.moderation_note ?? null,
           created_at: n.created_at,
           forwarded_to_smt: n.forwarded_to_smt,
           forwarded_at: n.forwarded_at,
@@ -586,6 +626,13 @@ export function DelegationNotesView({
         topic: inserted.topic,
         content: inserted.content,
         concern_flag: inserted.concern_flag,
+        moderation_state:
+          (inserted as { moderation_state?: DelegationNoteModerationState }).moderation_state ??
+          "approved",
+        hold_reason:
+          (inserted as { hold_reason?: DelegationNoteHoldReason | null }).hold_reason ?? null,
+        moderation_note:
+          (inserted as { moderation_note?: string | null }).moderation_note ?? null,
         created_at: inserted.created_at,
         forwarded_to_smt: inserted.forwarded_to_smt,
         forwarded_at: inserted.forwarded_at,
@@ -603,10 +650,16 @@ export function DelegationNotesView({
       setSelectedAllocationRecipientIdsState([]);
       setSelectedChairRecipientIdsState([]);
       setAnyChairRecipientState(false);
+      if (newNote.moderation_state === "held") {
+        setComposeSuccess(t("moderation.pendingAfterSend"));
+      } else {
+        setComposeSuccess(null);
+      }
 
       const sentToSelf =
-        (myAllocationId !== null && allocationRecipientIds.includes(myAllocationId)) ||
-        chairRecipientIds.includes(myUserId);
+        newNote.moderation_state === "approved" &&
+        ((myAllocationId !== null && allocationRecipientIds.includes(myAllocationId)) ||
+          chairRecipientIds.includes(myUserId));
       if (sentToSelf && typeof window !== "undefined") {
         window.dispatchEvent(
           new CustomEvent("intermun:delegation-note-popup", {
@@ -721,6 +774,9 @@ export function DelegationNotesView({
       });
       if (insertErr) throw insertErr;
       await refreshNotes();
+      if (shouldAutoHoldNote({ content: trimmed, concernFlag: false })) {
+        setComposeSuccess(t("moderation.pendingAfterSend"));
+      }
     } catch (e: unknown) {
       const message =
         e instanceof Error
@@ -843,7 +899,17 @@ export function DelegationNotesView({
       chair_profile_id: myUserId,
     });
     if (insErr) return;
-    // No visible state for now; future UI can show "reported" markers.
+    await refreshNotes();
+  }
+
+  async function moderateNote(noteId: string, action: "approve" | "reject", note?: string) {
+    if (!isChairLike) return;
+    const res = await moderateDelegationNoteAction({ noteId, action, note });
+    if (res.error) {
+      setError(res.error);
+      return;
+    }
+    await refreshNotes();
   }
 
   const recipientSummary = (r: NoteRecipient) => {
@@ -915,6 +981,11 @@ export function DelegationNotesView({
               <HelpButton title={t("concernHelpTitle")}>{t("concernHelpBody")}</HelpButton>
             </div>
 
+            {composeWillHold ? (
+              <p className="rounded-lg border border-amber-300/45 bg-amber-50/70 px-3 py-2 text-xs text-amber-950 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-100">
+                {t("moderation.composeHoldWarning")}
+              </p>
+            ) : null}
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -923,6 +994,11 @@ export function DelegationNotesView({
               disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
             />
             {canCompose ? <EmojiQuickInsert onPick={appendEmoji} /> : null}
+            {composeSuccess ? (
+              <p className="rounded-lg border border-brand-accent/25 bg-brand-accent/10 px-3 py-2 text-xs text-brand-navy">
+                {composeSuccess}
+              </p>
+            ) : null}
             {error ? (
               <p className="rounded-lg border border-red-400/40 bg-red-500/15 px-3 py-2 text-sm text-red-200">
                 {error}
@@ -1135,6 +1211,16 @@ export function DelegationNotesView({
                         </p>
                       </div>
                       <div className="flex flex-wrap items-center justify-end gap-1.5">
+                        {isNoteSender(root) && root.moderation_state === "held" ? (
+                          <span className="dashboard-status-badge bg-amber-500/15 text-[10px] text-amber-900 dark:text-amber-100">
+                            {t("moderation.pendingBadge")}
+                          </span>
+                        ) : null}
+                        {isNoteSender(root) && root.moderation_state === "rejected" ? (
+                          <span className="dashboard-status-badge bg-red-500/15 text-[10px] text-red-900 dark:text-red-100">
+                            {t("moderation.rejectedBadge")}
+                          </span>
+                        ) : null}
                         <span className="dashboard-status-badge dashboard-status-badge--info text-[10px]">
                           {topicLabel(root.topic)}
                         </span>
@@ -1178,6 +1264,8 @@ export function DelegationNotesView({
                       onForwardSmt={(id) => void forwardToSmt(id)}
                       onForwardAdvisor={(id, advisorId) => void forwardToAdvisor(id, advisorId)}
                       onReport={(id) => void reportNote(id)}
+                      onApprove={(id) => void moderateNote(id, "approve")}
+                      onReject={(id, reason) => void moderateNote(id, "reject", reason)}
                       labels={moderationLabels}
                     />
                   </div>
@@ -1210,6 +1298,8 @@ export function DelegationNotesView({
                   onForwardSmt: (id) => void forwardToSmt(id),
                   onForwardAdvisor: (id, advisorId) => void forwardToAdvisor(id, advisorId),
                   onReport: (id) => void reportNote(id),
+                  onApprove: (id) => void moderateNote(id, "approve"),
+                  onReject: (id, reason) => void moderateNote(id, "reject", reason),
                   labels: moderationLabels,
                 }
               : undefined
@@ -1221,6 +1311,9 @@ export function DelegationNotesView({
             sendReply: t("sendReply"),
             sending: t("sending"),
             readerWarning: t("readerWarning"),
+            composeHoldWarning: t("moderation.composeHoldWarning"),
+            pendingBadge: t("moderation.pendingBadge"),
+            rejectedBadge: t("moderation.rejectedBadge"),
             nameChat: t("nameChat"),
             nameChatHint: t("nameChatHint"),
             nameChatPlaceholder: t("nameChatPlaceholder"),

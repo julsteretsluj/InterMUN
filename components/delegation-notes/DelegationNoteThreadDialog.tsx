@@ -31,6 +31,9 @@ export type ThreadDialogNote = {
   topic: NoteTopic;
   content: string;
   concern_flag: boolean;
+  moderation_state?: "approved" | "held" | "rejected";
+  hold_reason?: string | null;
+  moderation_note?: string | null;
   created_at: string;
   sender: NoteSender;
   recipients: NoteRecipient[];
@@ -58,6 +61,8 @@ type Props = {
     onForwardSmt: (noteId: string) => void;
     onForwardAdvisor: (noteId: string, advisorProfileId: string) => void;
     onReport: (noteId: string) => void;
+    onApprove?: (noteId: string) => void;
+    onReject?: (noteId: string, reason?: string) => void;
     labels: {
       toolbarLabel: string;
       star: string;
@@ -75,6 +80,9 @@ type Props = {
     sendReply: string;
     sending: string;
     readerWarning: string;
+    composeHoldWarning?: string;
+    pendingBadge?: string;
+    rejectedBadge?: string;
     nameChat: string;
     nameChatHint: string;
     nameChatPlaceholder: string;
@@ -172,6 +180,8 @@ export function DelegationNoteThreadDialog({
             onForwardSmt={moderation.onForwardSmt}
             onForwardAdvisor={moderation.onForwardAdvisor}
             onReport={moderation.onReport}
+            onApprove={moderation.onApprove}
+            onReject={moderation.onReject}
             labels={moderation.labels}
           />
         ) : null}
@@ -231,6 +241,16 @@ export function DelegationNoteThreadDialog({
               {detectInappropriateTerms(n.content).length ? (
                 <p className="mt-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
                   {labels.readerWarning}
+                </p>
+              ) : null}
+              {n.moderation_state === "held" ? (
+                <p className="mt-2 rounded-md border border-amber-300/50 bg-amber-50/70 px-2.5 py-1.5 text-xs text-amber-900 dark:border-amber-400/35 dark:bg-amber-500/10 dark:text-amber-200">
+                  {labels.pendingBadge ?? "Pending review"}
+                </p>
+              ) : null}
+              {n.moderation_state === "rejected" ? (
+                <p className="mt-2 rounded-md border border-red-300/50 bg-red-50/70 px-2.5 py-1.5 text-xs text-red-900 dark:border-red-400/35 dark:bg-red-500/10 dark:text-red-200">
+                  {n.moderation_note?.trim() || labels.rejectedBadge || "Rejected"}
                 </p>
               ) : null}
               <div className="mt-2 whitespace-pre-wrap break-words text-sm text-brand-navy">

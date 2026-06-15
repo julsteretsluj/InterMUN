@@ -16,7 +16,8 @@
     "smtFallbackName": "SMT",
     "secretaryGeneral": "মহাসচিব মো",
     "returnToProfile": "প্রোফাইলে ফিরে যান",
-    "useDifferentAccount": "একটি ভিন্ন অ্যাকাউন্ট ব্যবহার করুন"
+    "useDifferentAccount": "একটি ভিন্ন অ্যাকাউন্ট ব্যবহার করুন",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "যেমন SEAMUNI2027",
@@ -552,7 +553,11 @@
       "purple": "বেগুনি",
       "pink": "গোলাপী",
       "neutral": "নিরপেক্ষ"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "আপডেট করা হয়েছে।",
@@ -630,7 +635,9 @@
     "approveBestDelegate": "অনুমোদন — সেরা প্রতিনিধি",
     "approveHonourableMention": "অনুমোদন — সম্মানজনক উল্লেখ",
     "approveBestPositionPaper": "অনুমোদন — সেরা অবস্থানের কাগজ",
-    "approveBestDelegateOverall": "অনুমোদন — সেরা প্রতিনিধি (সামগ্রিক)"
+    "approveBestDelegateOverall": "অনুমোদন — সেরা প্রতিনিধি (সামগ্রিক)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "ইতিমধ্যে একটি কমিটিতে",
@@ -705,7 +712,8 @@
     "advisorNotes": "ফরোয়ার্ড করা নোট",
     "delegateSchedule": "সম্মেলনের সময়সূচী",
     "chairSchedule": "সম্মেলনের সময়সূচী",
-    "advisorSchedule": "সম্মেলনের সময়সূচী"
+    "advisorSchedule": "সম্মেলনের সময়সূচী",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "সুপাবেস কনফিগার করা নেই",
@@ -830,7 +838,8 @@
     },
     "schedule": {
       "intro": "আপনার টিম ট্র্যাক বাছুন, তারপর হয় উপদেষ্টা A-D বা আপনার কমিটি (প্রতিনিধি/চেয়ার)। একটি সময়ে শুধুমাত্র একটি ব্যক্তিগত সময়সূচী দেখানো হয়."
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "আমার উপকরণ রপ্তানি করুন",
@@ -910,7 +919,8 @@
     "topicLabel": "বিষয়:",
     "chairsLabel": "চেয়ার:",
     "committeeLogoAlt": "{name} লোগো",
-    "eslFriendly": "ESL-বান্ধব"
+    "eslFriendly": "ESL-বান্ধব",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "সূচনা",
@@ -958,7 +968,8 @@
       "settings": "সেটিংস",
       "agenda": "এজেন্ডা",
       "history": "ইতিহাস",
-      "conferenceSchedule": "সময়সূচী"
+      "conferenceSchedule": "সময়সূচী",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1285,7 +1296,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "ওয়েবসাইট প্রশাসন",
@@ -1472,7 +1521,8 @@
       "delegateNotFound": "প্রতিনিধি আসন পাওয়া যায়নি।",
       "delegateUnlinked": "সেই আসনটিতে এখনও কোনও লিঙ্ক করা প্রতিনিধি অ্যাকাউন্ট নেই৷",
       "assigned": "{country} এ উপদেষ্টা নিয়োগ করা হয়েছে।",
-      "invalidAllocationId": "একটি বৈধ বরাদ্দ UUID লিখুন।"
+      "invalidAllocationId": "একটি বৈধ বরাদ্দ UUID লিখুন।",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1640,7 +1690,26 @@
         "browseAdvisor": "উপদেষ্টা দ্বারা",
         "teamsScopeAll": "ওভারভিউ (সমস্ত গ্রুপ)",
         "pickGroup": "গ্রুপ:",
-        "pickCommitteeAll": "কমিটি:"
+        "pickCommitteeAll": "কমিটি:",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "লাঞ্চ অন্যান্য কমিটির সাথে ওভারল্যাপ",
@@ -1650,8 +1719,12 @@
         "yourLunch": "আপনার লাঞ্চ",
         "theirLunch": "তাদের দুপুরের খাবার",
         "overlap": "ভাগ করা লাঞ্চ: {start}–{end} ({minutes} মিনিট)",
-        "noOverlap": "এই দিনে কোন ভাগ করা লাঞ্চ সময় নেই।"
-      }
+        "noOverlap": "এই দিনে কোন ভাগ করা লাঞ্চ সময় নেই।",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "প্রতিনিধি ভিউ",
     "surfaceSwitchError": "দৃশ্য পরিবর্তন করা যায়নি. ইভেন্ট গেট এবং নির্বাচন চেক করুন.",
     "pickChairFirst": "প্রথমে একটি চেয়ার কমিটি নির্বাচন করুন (বা অ্যাসাইনমেন্টগুলি সংরক্ষণ করুন)।",
-    "pickDelegateFirst": "প্রথমে একটি প্রতিনিধি আসন নির্বাচন করুন (বা অ্যাসাইনমেন্টগুলি সংরক্ষণ করুন)।"
+    "pickDelegateFirst": "প্রথমে একটি প্রতিনিধি আসন নির্বাচন করুন (বা অ্যাসাইনমেন্টগুলি সংরক্ষণ করুন)।",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "আপনি আপনার নির্ধারিত প্রতিনিধি কমিটির কার্যকলাপ নিরীক্ষণ করতে পারেন। একটি চেয়ার বা SMT আপনার কাছে একটি ফরোয়ার্ড না করা পর্যন্ত আপনার নোটগুলিতে অ্যাক্সেস নেই৷",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "সুপাবেস → প্রজেক্ট সেটিংস → API-এ, service_role গোপন কীটি অনুলিপি করুন।",
     "inviteSetupStep2": "আপনার হোস্ট env (রেন্ডার/ভার্সেল) এ SUPABASE_SERVICE_ROLE_KEY যোগ করুন - NEXT_PUBLIC_ নয়।",
     "inviteSetupStep3": "আপনার লাইভ সাইটের URL-এ NEXT_PUBLIC_APP_URL যোগ করুন (যেমন https://your-app.onrender.com)।",
-    "inviteSetupStep4": "পুনঃনিয়োগ (উৎপাদন) অথবা উভয়ই .env.local-এ যোগ করুন এবং npm run dev (স্থানীয়) পুনরায় চালু করুন।"
+    "inviteSetupStep4": "পুনঃনিয়োগ (উৎপাদন) অথবা উভয়ই .env.local-এ যোগ করুন এবং npm run dev (স্থানীয়) পুনরায় চালু করুন।",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }

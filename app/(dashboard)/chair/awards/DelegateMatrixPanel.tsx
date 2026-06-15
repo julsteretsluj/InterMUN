@@ -13,6 +13,8 @@ import {
 import { DELEGATE_CRITERIA } from "@/lib/seamuns-award-scoring";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import type { DelegateFloorActivity } from "@/lib/delegate-floor-activity";
+import { DelegateFloorActivitySection } from "./DelegateFloorActivitySection";
 
 type DelegateRow = {
   userId: string;
@@ -24,9 +26,15 @@ type Props = {
   committeeConferenceId: string;
   delegates: DelegateRow[];
   scoresByProfileId: Record<string, Record<string, number>>;
+  floorActivityByProfileId?: Record<string, DelegateFloorActivity>;
 };
 
-export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresByProfileId }: Props) {
+export function DelegateMatrixPanel({
+  committeeConferenceId,
+  delegates,
+  scoresByProfileId,
+  floorActivityByProfileId = {},
+}: Props) {
   const t = useTranslations("chairAwardsDelegateMatrix");
   const router = useRouter();
   const keys = useMemo(() => rubricKeysForParticipationScope("delegate_by_chair"), []);
@@ -168,6 +176,7 @@ export function DelegateMatrixPanel({ committeeConferenceId, delegates, scoresBy
                 </span>
               </summary>
               <div className="border-t border-brand-navy/10 px-4 pb-4 pt-3 space-y-3 dark:border-white/10">
+                <DelegateFloorActivitySection activity={floorActivityByProfileId[d.userId]} />
                 <form
                   className="space-y-3"
                   onSubmit={(e) => {

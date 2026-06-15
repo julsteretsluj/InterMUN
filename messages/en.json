@@ -756,6 +756,7 @@
     "allocationPasswords": "Allocation passwords",
     "sources": "Sources",
     "notes": "Notes",
+    "notesModeration": "Note review",
     "rollCallTracker": "✅ Roll Call Tracker",
     "runningNotes": "Running Notes",
     "awardsSmt": "Awards",
@@ -1171,6 +1172,7 @@
       "crisis": "Crisis",
       "crisisSlides": "Crisis slides",
       "archive": "Archive",
+      "notesModeration": "Note review",
       "officialLinks": "Official links",
       "roomCode": "Room code",
       "settings": "Settings"
@@ -1514,7 +1516,7 @@
     },
     "concernLabel": "Concern (auto placeholder)",
     "concernHelpTitle": "Concern flag",
-    "concernHelpBody": "Use this when your note includes a moderation-sensitive concern. The reader may see a warning, but your note will still send.",
+    "concernHelpBody": "Use this when your note includes a moderation-sensitive concern. Flagged notes are held for chair review before recipients can read them.",
     "placeholderCompose": "Write your note...",
     "placeholderDisabled": "Only delegates/chairs/SMT can send notes.",
     "sessionOnlyHint": "Notes are available only during active committee sessions.",
@@ -1568,6 +1570,30 @@
     "advisorFallback": "Advisor",
     "forwarded": "Forwarded",
     "report": "Report",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    },
     "fullNoteTitle": "Full note",
     "fullNoteAria": "Full note",
     "close": "Close",
@@ -2115,6 +2141,29 @@
     "autosaveFailed": "Autosave failed",
     "autosavedWithCountry": "Autosaved — {country}",
     "delegateFallback": "delegate"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "your committee",

@@ -16,7 +16,8 @@
     "smtFallbackName": "表面贴装技术",
     "secretaryGeneral": "秘书长",
     "returnToProfile": "返回个人资料",
-    "useDifferentAccount": "使用不同的帐户"
+    "useDifferentAccount": "使用不同的帐户",
+    "navPriorityOrderHint": "Numbered by recommended use (1 = start here). Change order in lib/nav-priority-order.ts."
   },
   "eventGateForm": {
     "conferenceCodePlaceholder": "例如 SEAMUNI2027",
@@ -624,7 +625,11 @@
       "purple": "紫色的",
       "pink": "粉色的",
       "neutral": "中性的"
-    }
+    },
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
   },
   "awardsManager": {
     "updated": "已更新。",
@@ -702,7 +707,9 @@
     "approveBestDelegate": "批准 — 最佳代表",
     "approveHonourableMention": "批准——荣誉奖",
     "approveBestPositionPaper": "批准 — 最佳立场文件",
-    "approveBestDelegateOverall": "批准 — 最佳代表（总体）"
+    "approveBestDelegateOverall": "批准 — 最佳代表（总体）",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short"
   },
   "roomGate": {
     "alreadyInCommittee": "已经在委员会中",
@@ -777,7 +784,8 @@
     "advisorNotes": "转发笔记",
     "delegateSchedule": "会议日程",
     "chairSchedule": "会议日程",
-    "advisorSchedule": "会议日程"
+    "advisorSchedule": "会议日程",
+    "notesModeration": "Note review"
   },
   "setupPage": {
     "title": "未配置 Supabase",
@@ -902,7 +910,8 @@
     },
     "schedule": {
       "intro": "选择您的团队路线，然后选择顾问 A-D 或您的委员会（代表/主席）。 一次仅显示一个个人时间表。"
-    }
+    },
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
   },
   "materialsExportCard": {
     "title": "导出我的资料",
@@ -982,7 +991,8 @@
     "topicLabel": "话题：",
     "chairsLabel": "椅子：",
     "committeeLogoAlt": "{名称}标志",
-    "eslFriendly": "ESL 友好"
+    "eslFriendly": "ESL 友好",
+    "difficultyOther": "Other committees"
   },
   "committeeTags": {
     "difficultyBeginner": "初级",
@@ -1030,7 +1040,8 @@
       "settings": "设置",
       "agenda": "议程",
       "history": "历史",
-      "conferenceSchedule": "日程"
+      "conferenceSchedule": "日程",
+      "notesModeration": "Note review"
     }
   },
   "smtNav": {
@@ -1357,7 +1368,45 @@
     "sendToSelf": "Send test to myself",
     "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
     "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself"
+    "selfTestDefaultContent": "Test note to myself",
+    "threadCount": "{count, plural, one {# chat} other {# chats}}",
+    "messagesInThread": "{count, plural, one {# message} other {# messages}}",
+    "messageCount": "{count} messages",
+    "openThread": "Open chat",
+    "reply": "Reply",
+    "replyPlaceholder": "Write a reply…",
+    "sendReply": "Send reply",
+    "nameChat": "Name this chat",
+    "nameChatHint": "Available after at least three messages in this thread.",
+    "nameChatPlaceholder": "e.g. France · Germany · Bloc forming",
+    "saveChatName": "Save name",
+    "unnamedChat": "Note chat",
+    "moderationToolbarLabel": "Chair & secretariat actions",
+    "fromLabel": "From:",
+    "moderation": {
+      "queueTitle": "Note review queue",
+      "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
+      "emptyQueue": "No notes waiting for review.",
+      "pendingBadge": "Pending review",
+      "rejectedBadge": "Rejected",
+      "composeHoldWarning": "This note will be held for chair review before recipients can read it.",
+      "pendingAfterSend": "Note sent — pending chair approval before recipients can read it.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReasonPlaceholder": "Optional reject reason",
+      "approvedSuccess": "Note approved and delivered.",
+      "rejectedSuccess": "Note rejected.",
+      "working": "Working…",
+      "holdReason": "Held because: {reason}",
+      "fromLabel": "From:",
+      "toLabel": "To:",
+      "holdReasons": {
+        "profanity": "inappropriate language",
+        "concernFlag": "concern flag",
+        "reported": "chair report",
+        "unknown": "moderation policy"
+      }
+    }
   },
   "adminPage": {
     "title": "网站管理",
@@ -1544,7 +1593,8 @@
       "delegateNotFound": "未找到代表席位。",
       "delegateUnlinked": "该席位尚未关联代表帐户。",
       "assigned": "为{country}指派顾问。",
-      "invalidAllocationId": "输入有效的分配 UUID。"
+      "invalidAllocationId": "输入有效的分配 UUID。",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1712,7 +1762,26 @@
         "browseAdvisor": "由顾问提供",
         "teamsScopeAll": "概述（所有组）",
         "pickGroup": "团体：",
-        "pickCommitteeAll": "委员会："
+        "pickCommitteeAll": "委员会：",
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
+        "pickDebateTrack": "Debate track:",
+        "pickLunchGroup": "Lunch group:",
+        "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
+        "advisorRosterMember": "Advisor {n}",
+        "advisorRosterColumn": "Advisor {n}",
+        "advisorColumnSuffix": "Advisor",
+        "lunchGroupTitle": {
+          "l1": "Lunch group 1",
+          "l2": "Lunch group 2",
+          "l3": "Lunch group 3"
+        },
+        "lunchGroupShort": {
+          "l1": "Lunch 1",
+          "l2": "Lunch 2",
+          "l3": "Lunch 3"
+        }
       },
       "lunchOverlap": {
         "title": "与其他委员会共进午餐",
@@ -1722,8 +1791,12 @@
         "yourLunch": "你的午餐",
         "theirLunch": "他们的午餐",
         "overlap": "共享午餐：{start}–{end}（{minutes}分钟）",
-        "noOverlap": "当天没有共享午餐时间。"
-      }
+        "noOverlap": "当天没有共享午餐时间。",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}"
+      },
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
     }
   },
   "allocationMatrixManager": {
@@ -3289,7 +3362,9 @@
     "goDelegate": "代表视图",
     "surfaceSwitchError": "无法切换视图。 检查事件门和选择。",
     "pickChairFirst": "首先选择一个委员会主席（或保存分配）。",
-    "pickDelegateFirst": "首先选择代表席位（或保存分配）。"
+    "pickDelegateFirst": "首先选择代表席位（或保存分配）。",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
   },
   "advisorDashboard": {
     "intro": "您可以监控指定代表的委员会活动。 除非主席或 SMT 将笔记转发给您，否则您无权访问笔记。",
@@ -3344,7 +3419,9 @@
     "inviteSetupStep1": "在 Supabase → 项目设置 → API 中，复制 service_role 密钥。",
     "inviteSetupStep2": "将 SUPABASE_SERVICE_ROLE_KEY 添加到您的主机环境 (Render/Vercel) — 而不是 NEXT_PUBLIC_。",
     "inviteSetupStep3": "将 NEXT_PUBLIC_APP_URL 添加到您的实时站点 URL（例如 https://your-app.onrender.com）。",
-    "inviteSetupStep4": "重新部署（生产）或将两者添加到 .env.local 并重新启动 npm run dev（本地）。"
+    "inviteSetupStep4": "重新部署（生产）或将两者添加到 .env.local 并重新启动 npm run dev（本地）。",
+    "colDelegate": "Delegate",
+    "delegateFallback": "Delegate"
   },
   "smtNotesPage": {
     "title": "Notes & chats",
@@ -3376,5 +3453,36 @@
     "composeLoading": "Loading committee…",
     "composeNoCommittees": "No delegate committees in this event yet.",
     "composeFormTitle": "New secretariat note"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
   }
 }
