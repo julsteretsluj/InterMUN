@@ -2706,14 +2706,14 @@ export function SessionControlClient({
   }
 
   const surfaceCard =
-    "rounded-xl border border-white/15 bg-black/25 p-3 text-brand-navy shadow-sm backdrop-blur-sm";
+    "rounded-xl border border-white/15 bg-black/25 p-4 text-brand-navy shadow-sm backdrop-blur-sm";
   const surfaceLabel = "text-xs font-medium uppercase tracking-wide text-brand-muted";
   const surfaceInputCore =
     "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy shadow-inner placeholder:text-brand-muted/60 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
   const surfaceField = `mt-1 ${surfaceInputCore}`;
   const surfaceFieldSm =
     "rounded-lg border border-white/15 bg-black/30 px-2 py-2 text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40";
-  const surfaceSubpanel = "space-y-3 rounded-lg border border-white/15 bg-black/20 p-3 text-brand-navy";
+  const surfaceSubpanel = "space-y-4 rounded-lg border border-white/15 bg-black/20 p-4 text-brand-navy";
   const surfaceInset =
     "max-h-36 space-y-1 overflow-y-auto rounded border border-white/15 bg-black/30 p-2 text-xs text-brand-navy";
 
@@ -2734,7 +2734,7 @@ export function SessionControlClient({
   }, [activeSection]);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       <p className="text-sm text-brand-muted">{displayConferenceTitle}</p>
       {msg && (
         <div className="flex items-start justify-between gap-3 rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-sm text-brand-navy shadow-sm">
@@ -2751,7 +2751,7 @@ export function SessionControlClient({
       )}
 
       {show("agenda") ? (
-        <section className="space-y-3">
+        <section className="space-y-4">
           <div className="flex items-center justify-between gap-3">
             <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("tabAgenda")}</h3>
             <HelpButton title={tSessionControl("tabAgenda")}>{tSessionControl("agendaTabHelp")}</HelpButton>
@@ -2777,7 +2777,7 @@ export function SessionControlClient({
       ) : null}
 
       {show("motions") || show("discipline") ? (
-      <section className="space-y-3">
+      <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-display text-lg font-semibold text-brand-navy">
             {activeSection === "discipline" ? tDiscipline("disciplinarySystem") : tSessionControl("motionControl")}
@@ -2873,7 +2873,7 @@ export function SessionControlClient({
             </div>
           </div>
         ) : null}
-        <div className={`${surfaceCard} space-y-3`}>
+        <div className={`${surfaceCard} space-y-4`}>
           {motionWorkflowTab === "floor" ? (
             <>
           <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 space-y-2">
@@ -3692,7 +3692,7 @@ export function SessionControlClient({
       ) : null}
 
       {show("timer") ? (
-      <section className="space-y-3">
+      <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-display text-lg font-semibold text-brand-navy">{tTimer("title")}</h3>
           <HelpButton title={tTimer("controlsTitle")}>
@@ -3733,7 +3733,7 @@ export function SessionControlClient({
             );
           })}
         </div>
-        <div className={`${surfaceCard} space-y-3`}>
+        <div className={`${surfaceCard} space-y-4`}>
           {isEuParliamentProfile && timerWorkflowTab === "clock" ? (
           <div className="rounded-lg border border-brand-accent/30 bg-brand-accent/10 p-3 space-y-3">
             <p className="text-xs font-medium uppercase tracking-wide text-brand-navy">
@@ -4163,9 +4163,9 @@ export function SessionControlClient({
       ) : null}
 
       {show("announcements") ? (
-      <section className="space-y-3">
+      <section className="space-y-4">
         <h3 className="font-display text-lg font-semibold text-brand-navy">{tSessionControl("daisAnnouncements")}</h3>
-        <div className={`${surfaceCard} space-y-3`}>
+        <div className={`${surfaceCard} space-y-4`}>
           <p className="text-sm text-brand-muted">{tSessionControl("daisAnnouncementsHelp")}</p>
           <label className="block text-sm text-brand-navy">
             <span className={surfaceLabel}>{tSessionControl("message")}</span>
@@ -4347,7 +4347,7 @@ export function SessionControlClient({
       ) : null}
 
       {show("roll-call") ? (
-      <section className="space-y-3">
+      <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-display text-lg font-semibold text-brand-navy">
             ✅ {tSessionControl("rollCallTracker")}

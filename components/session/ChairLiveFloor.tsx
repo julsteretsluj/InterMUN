@@ -80,7 +80,7 @@ export function ChairLiveFloor({
   }, [supabase, floorConferenceId]);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <FloorStatusBar
         conferenceId={floorConferenceId}
         theme={theme}

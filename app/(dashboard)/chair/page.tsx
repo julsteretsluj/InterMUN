@@ -122,8 +122,8 @@ export default async function ChairOverviewPage({
 
   return (
     <MunPageShell title={t("chairRoom")}>
-      <div className="space-y-5">
-        <header className="space-y-2">
+      <div className="space-y-8">
+        <header className="space-y-3">
           <h1 className="font-display text-[1.85rem] font-semibold text-brand-navy">
             {tPage("welcome", { committee: committeeLabel })}
           </h1>
@@ -147,7 +147,7 @@ export default async function ChairOverviewPage({
           </p>
         </header>
 
-        <div className="flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={td("dashboardTabs.ariaLabel")}>
+        <div className="flex flex-wrap gap-2 border-b border-brand-navy/10 pb-1" role="tablist" aria-label={td("dashboardTabs.ariaLabel")}>
           {tabs.map((tabItem) => (
             <PriorityTabLink
               key={tabItem.id}
@@ -168,16 +168,16 @@ export default async function ChairOverviewPage({
           />
         ) : null}
         {activeTab === "guidance" ? (
-          <>
+          <div className="space-y-6">
             <ChairHowToAccordion />
             <RoleSetupChecklist role="chair" />
-          </>
+          </div>
         ) : null}
         {activeTab === "jump" ? (
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-muted dark:text-zinc-400">{td("dashboardTabs.jump")}</h3>
           <p className="mt-1 text-xs text-brand-muted dark:text-zinc-400">{tc("navPriorityOrderHint")}</p>
-          <ul className="mt-2.5 grid gap-2 sm:grid-cols-2">
+          <ul className="mt-3 grid gap-3 sm:grid-cols-2">
             {tiles.map((tile) => (
               <li key={tile.href}>
                 <HubTileLink

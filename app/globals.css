@@ -571,13 +571,13 @@ html.dark ::selection {
     @apply absolute left-1 top-1 z-[1] flex h-[1.125rem] min-w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] px-0.5 text-[0.625rem] font-bold leading-none text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
   }
   .nav-priority-badge--tile {
-    @apply left-2 top-2 h-[1.125rem] w-[1.125rem] px-0;
+    @apply left-2.5 top-2.5 h-[1.125rem] w-[1.125rem] px-0;
   }
   .nav-priority-link {
-    @apply relative pl-7;
+    @apply relative pl-8;
   }
   .nav-priority-link--dock {
-    @apply relative pt-3.5;
+    @apply relative pt-4;
   }
   .nav-priority-link--dock .nav-priority-badge {
     @apply left-1/2 top-0 -translate-x-1/2;

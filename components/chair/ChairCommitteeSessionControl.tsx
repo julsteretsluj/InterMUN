@@ -493,7 +493,7 @@ export function ChairCommitteeSessionControl({
   const radioLabel = "flex cursor-pointer items-start gap-2 text-sm text-brand-navy";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="rounded-2xl border border-white/15 bg-black/25 p-6 shadow-sm backdrop-blur-sm md:p-8">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>

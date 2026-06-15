@@ -26,7 +26,7 @@ export default async function SessionFloorOverview({
   const displayTitle = translateConferenceHeadline(tTopics, tCommitteeLabels, conferenceTitle, locale);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <p className="text-sm text-brand-muted">{displayTitle}</p>
       <ChairCommitteeSessionControl
         conferenceId={canonicalConferenceId}

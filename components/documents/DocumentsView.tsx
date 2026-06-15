@@ -232,7 +232,7 @@ export function DocumentsView({
   }
 
   return (
-    <div className="space-y-4 font-serif">
+    <div className="space-y-4">
       {isDelegate ? (
         <div className="rounded-lg border border-brand-accent/28 bg-brand-accent/11 px-4 py-3 text-sm text-brand-navy dark:border-brand-accent/35 dark:bg-brand-accent/12 dark:text-brand-accent-bright">
           <p className="font-medium">{t("delegatePrepTitle")}</p>
@@ -284,7 +284,7 @@ export function DocumentsView({
               </button>
               {(showForm || editing) && (
                 <div className="mun-card space-y-3 border-slate-200 dark:border-white/10">
-                  <h3 className="font-semibold text-brand-navy dark:text-zinc-100">
+                  <h3 className="font-display font-semibold text-brand-navy dark:text-zinc-100">
                     {editing ? t("editDocumentTitle") : t("newDocumentTitle")}
                   </h3>
                   <div className="space-y-3">
@@ -579,7 +579,7 @@ export function DocumentsView({
                 <div className="min-w-0 flex-1 space-y-4 rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[0_6px_20px_-12px_rgba(0,0,0,0.12)] backdrop-blur-xl sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h3 className="text-lg font-semibold text-brand-navy dark:text-zinc-100">
+                  <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
                     {selected.title || t("untitled")}
                   </h3>
                   <p className="text-sm capitalize text-brand-muted">{labelForDocType(selected.doc_type)}</p>

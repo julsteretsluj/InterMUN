@@ -23,7 +23,7 @@ export function HubTileLink({
       href={href}
       aria-label={`${priority}. ${label}`}
       className={cn(
-        "hub-tile-link relative flex h-full flex-col rounded-xl border border-[var(--hairline)] px-3.5 py-3 pl-9 transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:shadow-[var(--dashboard-shadow-hover)]",
+        "hub-tile-link relative flex h-full flex-col rounded-xl border border-[var(--hairline)] px-4 py-4 pl-10 transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:shadow-[var(--dashboard-shadow-hover)]",
         variant === "overview"
           ? "bg-[var(--dashboard-cream)]"
           : "bg-white shadow-[var(--dashboard-shadow)] dark:border-zinc-700 dark:bg-zinc-900/80"
@@ -31,7 +31,7 @@ export function HubTileLink({
     >
       <NavPriorityBadge priority={priority} variant="tile" />
       <span className="font-semibold text-brand-navy dark:text-zinc-50">{label}</span>
-      <span className="mt-0.5 text-xs text-brand-muted dark:text-zinc-400">{hint}</span>
+      <span className="mt-1 text-xs text-brand-muted dark:text-zinc-400">{hint}</span>
     </Link>
   );
 }

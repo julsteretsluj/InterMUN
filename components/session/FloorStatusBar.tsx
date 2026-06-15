@@ -461,7 +461,7 @@ export function FloorStatusBar({
   );
 
   return (
-    <div className="space-y-1.5">
+    <div className="space-y-2.5">
       {sessionElapsedRow}
       {activeMotions.length > 0 ? (
         <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">

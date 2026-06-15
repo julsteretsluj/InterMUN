@@ -138,8 +138,8 @@ function ChairNavRow({
       href={item.href}
       title={labelsHidden ? `${priority}. ${label}` : undefined}
       aria-label={`${priority}. ${label}`}
-      className={cn(
-        "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2 text-sm transition-apple",
+        className={cn(
+          "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0 pl-2",
         isActive
           ? "dashboard-nav-active text-[var(--accent)]"
@@ -232,7 +232,7 @@ export function ChairDashboardSidebar({
       <nav
         aria-label={t("ariaDashboard")}
         className={cn(
-          "flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden py-1 [scrollbar-width:thin]",
+          "flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto overflow-x-hidden py-2 [scrollbar-width:thin]",
           labelsHidden ? "px-1.5" : "px-3"
         )}
       >
@@ -302,7 +302,7 @@ function DockItem({
       href={item.href}
       title={`${priority}. ${label}`}
       aria-label={`${priority}. ${label}`}
-      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
+      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2 transition-apple active:scale-[0.97]"
     >
       <NavPriorityBadge priority={priority} />
       <span
@@ -376,7 +376,7 @@ export function ChairMobileDock({
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
-        <div className="flex items-center gap-0.5 overflow-x-auto">
+        <div className="flex items-center gap-1 overflow-x-auto px-1 py-1">
         <Link
           href="/chair"
           className="flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
