@@ -6,7 +6,8 @@ Supports SEAMUN 2027 layout:
 - Row 1: Committee label in column B (column A is \"Committee:\").
 - Topic rows: column A is \"Topic 1\" / \"Topic 1:\" / \"Topic 2\" / \"Topic 2:\" — title in column B.
 - Delegation header row: column A is Country, Delegation, Person, or Agency.
-- Column C may omit gate codes; codes are generated as {STEM}-001 (STEM = first 3 letters from chamber).
+- Column C may be gate codes (legacy) or School (SEAMUN 2027 roster) — codes are
+  generated as {STEM}-001 when column C is not a gate-code column.
 
 Skips worksheets: OVERVIEW, BEG, INT, ADV (multi-committee reference sheets).
 
@@ -159,6 +160,40 @@ DELEGATION_HEADER_MARKERS = frozenset(
     {"Country", "Delegation", "Person", "Agency"}
 )
 
+GATE_CODE_COLUMN_HEADERS = frozenset(
+    {"code", "id", "gate code", "allocation code", "alloc code", "allocation id"}
+)
+
+NON_GATE_CODE_COLUMN_HEADERS = frozenset(
+    {"school", "name", "email", "delegation", "person", "status"}
+)
+
+
+def use_column_c_as_gate_code(
+    rows: dict[int, dict[str, str | None]], header_row: int
+) -> bool:
+    hdr = rows.get(header_row, {})
+    c_hdr = (hdr.get("C") or "").strip().lower()
+    if not c_hdr:
+        return False
+    if c_hdr in NON_GATE_CODE_COLUMN_HEADERS:
+        return False
+    if c_hdr in GATE_CODE_COLUMN_HEADERS:
+        return True
+    for ri in sorted(rows):
+        if ri <= header_row:
+            continue
+        a = (rows[ri].get("A") or "").strip()
+        if not a:
+            continue
+        if a.lower().startswith("total"):
+            break
+        raw = (rows[ri].get("C") or "").strip()
+        if raw and re.match(r"^[A-Z]{2,6}-\d{3}$", raw, re.I):
+            return True
+        break
+    return False
+
 
 def find_header_row(rows: dict[int, dict[str, str | None]]) -> int | None:
     for ri in sorted(rows):
@@ -179,6 +214,7 @@ def extract_delegations(
 ) -> list[tuple[str, str]]:
     """Rows as (placard / country / agency name, gate code). Codes are always set."""
     stem = committee_join_code_prefix(committee_label)
+    read_gate_from_c = use_column_c_as_gate_code(rows, header_row)
     out: list[tuple[str, str]] = []
     seq = 0
     for ri in sorted(rows):
@@ -190,10 +226,13 @@ def extract_delegations(
             continue
         if a.lower().startswith("total"):
             break
-        raw_code = r.get("C")
-        code = str(raw_code).strip() if raw_code is not None else ""
         seq += 1
-        if not code:
+        if read_gate_from_c:
+            raw_code = r.get("C")
+            code = str(raw_code).strip() if raw_code is not None else ""
+            if not code:
+                code = f"{stem}-{seq:03d}"
+        else:
             code = f"{stem}-{seq:03d}"
         out.append((a, code))
     return out
