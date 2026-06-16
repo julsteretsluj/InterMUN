@@ -25,6 +25,7 @@ export function DocumentsView({
   canViewAll,
   canEditAll,
   myRole,
+  readOnlyViewer = false,
   delegateOptions,
   chairOptions,
 }: {
@@ -33,6 +34,8 @@ export function DocumentsView({
   canViewAll: boolean;
   canEditAll: boolean;
   myRole: string;
+  /** Advisor read-only: library tab only, no compose/edit/delete. */
+  readOnlyViewer?: boolean;
   delegateOptions: { id: string; label: string }[];
   chairOptions: { id: string; label: string }[];
 }) {
@@ -65,10 +68,12 @@ export function DocumentsView({
     chair_feedback: "",
   });
   const supabase = createClient();
-  const documentTabs = [
-    { id: "library", label: t("tabs.library") },
-    { id: "compose", label: t("tabs.compose") },
-  ];
+  const documentTabs = readOnlyViewer
+    ? [{ id: "library", label: t("tabs.library") }]
+    : [
+        { id: "library", label: t("tabs.library") },
+        { id: "compose", label: t("tabs.compose") },
+      ];
 
   function labelForDocType(dt: string): string {
     switch (dt) {
@@ -585,11 +590,12 @@ export function DocumentsView({
                   <p className="text-sm capitalize text-brand-muted">{labelForDocType(selected.doc_type)}</p>
                 </div>
                 {(canEditAll ||
-                  selected.user_id === currentUserId ||
-                  (canManagePositionPapers && selected.doc_type === "position_paper") ||
-                  (canManageChairReports && selected.doc_type === "chair_report") ||
-                  (canManageRop && selected.doc_type === "rop") ||
-                  (canManageAwardCriteria && selected.doc_type === "award_criteria")) && (
+                  (!readOnlyViewer &&
+                    (selected.user_id === currentUserId ||
+                      (canManagePositionPapers && selected.doc_type === "position_paper") ||
+                      (canManageChairReports && selected.doc_type === "chair_report") ||
+                      (canManageRop && selected.doc_type === "rop") ||
+                      (canManageAwardCriteria && selected.doc_type === "award_criteria")))) && (
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"

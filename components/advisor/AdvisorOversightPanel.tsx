@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { AdvisorAssignmentRow } from "@/lib/advisor-access";
+import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
 
 const committeeTagClass =
@@ -14,17 +15,24 @@ export function AdvisorOversightPanel({ assignments }: { assignments: AdvisorAss
 
   return (
     <ul className="grid gap-3 sm:grid-cols-2">
-      {assignments.map((a) => (
-        <li
-          key={a.id}
-          className="rounded-xl border border-brand-navy/10 bg-white px-4 py-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
-        >
+      {assignments.map((a) => {
+        const flag = flagEmojiForCountryName(a.delegate_country);
+        return (
+          <li
+            key={a.id}
+            className="rounded-xl border border-brand-navy/10 bg-white px-4 py-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
+          >
           <div className="flex flex-wrap items-start justify-between gap-2">
-            <div className="min-w-0">
-              <h2 className="font-semibold text-brand-navy dark:text-zinc-100">{a.delegate_country}</h2>
-              {a.delegate_name ? (
-                <p className="mt-0.5 text-sm text-brand-navy/90 dark:text-zinc-200">{a.delegate_name}</p>
-              ) : null}
+            <div className="flex min-w-0 items-start gap-3">
+              <span className="text-2xl leading-none" aria-hidden>
+                {flag}
+              </span>
+              <div className="min-w-0">
+                <h2 className="font-semibold text-brand-navy dark:text-zinc-100">{a.delegate_country}</h2>
+                {a.delegate_name ? (
+                  <p className="mt-0.5 text-sm text-brand-navy/90 dark:text-zinc-200">{a.delegate_name}</p>
+                ) : null}
+              </div>
             </div>
             {a.committee ? (
               <span className={committeeTagClass}>
@@ -39,19 +47,19 @@ export function AdvisorOversightPanel({ assignments }: { assignments: AdvisorAss
             {a.delegate_user_id ? (
               <>
                 <Link
-                  href={`/profile?for=${encodeURIComponent(a.delegate_user_id)}`}
+                  href={`/advisor/delegates/${encodeURIComponent(a.delegate_user_id)}`}
                   className="text-xs font-medium text-brand-accent hover:underline"
                 >
                   {t("viewProfile")}
                 </Link>
                 <Link
-                  href="/documents"
+                  href={`/advisor/delegates/${encodeURIComponent(a.delegate_user_id)}/documents`}
                   className="text-xs font-medium text-brand-accent hover:underline"
                 >
                   {t("viewDocuments")}
                 </Link>
                 <Link
-                  href="/voting"
+                  href={`/advisor/delegates/${encodeURIComponent(a.delegate_user_id)}/voting`}
                   className="text-xs font-medium text-brand-accent hover:underline"
                 >
                   {t("viewVoting")}
@@ -65,8 +73,9 @@ export function AdvisorOversightPanel({ assignments }: { assignments: AdvisorAss
               {t("forwardedNotes")}
             </Link>
           </div>
-        </li>
-      ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }

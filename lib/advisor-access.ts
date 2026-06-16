@@ -1,5 +1,8 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+const DELEGATE_USER_ID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 export type AdvisorAssignmentRow = {
   id: string;
   advisor_profile_id: string;
@@ -76,6 +79,20 @@ export async function fetchAdvisorAssignmentsForAdvisor(
       },
     ];
   });
+}
+
+export function isDelegateUserIdParam(value: string): boolean {
+  return DELEGATE_USER_ID_RE.test(value.trim());
+}
+
+export async function fetchAdvisorAssignmentForDelegateUser(
+  supabase: SupabaseClient,
+  advisorProfileId: string,
+  delegateUserId: string
+): Promise<AdvisorAssignmentRow | null> {
+  if (!isDelegateUserIdParam(delegateUserId)) return null;
+  const assignments = await fetchAdvisorAssignmentsForAdvisor(supabase, advisorProfileId);
+  return assignments.find((a) => a.delegate_user_id === delegateUserId) ?? null;
 }
 
 export async function fetchAdvisorForAllocation(

@@ -65,7 +65,7 @@ export default async function AdvisorLayout({ children }: { children: React.Reac
           </div>
           <div className="mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] px-3 py-4">
             <Link
-              href="/guides"
+              href="/advisor/guides"
               className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 text-sm font-medium text-brand-muted transition-apple group-hover:justify-start group-hover:px-3 hover:bg-[color:var(--discord-hover-bg)]"
             >
               <span className="text-base leading-none" aria-hidden>

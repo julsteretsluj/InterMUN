@@ -766,6 +766,9 @@
     "delegateSchedule": "Conference schedule",
     "chairSchedule": "Conference schedule",
     "advisorSchedule": "Conference schedule",
+    "advisorDelegateProfile": "Delegate profile",
+    "advisorDelegateDocuments": "Delegate documents",
+    "advisorDelegateVoting": "Delegate voting",
     "voting": "Voting",
     "digitalRoom": "Digital Room",
     "committeeSession": "Committee session",
@@ -881,6 +884,32 @@
     "forwardedNotes": "Forwarded notes",
     "schedule": {
       "intro": "Pick your lunch group and roster number (Advisor 1–8 or 1–6). Your timetable is not tied to a committee — you rotate through your cohort’s chambers with partner swaps in the advisor / sensory room."
+    },
+    "delegateNav": {
+      "ariaLabel": "Delegate oversight",
+      "backToDashboard": "← Back to dashboard",
+      "profile": "Profile",
+      "documents": "Documents",
+      "voting": "Voting",
+      "notes": "Forwarded notes"
+    },
+    "delegateProfile": {
+      "notLinked": "This seat is not linked to a delegate account yet.",
+      "empty": "No profile details are available yet.",
+      "fields": {
+        "name": "Name",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "country": "Country",
+        "committee": "Committee"
+      }
+    },
+    "delegateVoting": {
+      "intro": "Recorded ballots for {country} on motions in this committee.",
+      "empty": "No motions have been recorded for this committee yet.",
+      "delegateBallot": "Delegate ballot",
+      "noBallot": "Not recorded"
     },
     "notes": {
       "intro": "Notes chairs or SMT chose to share with you. You cannot browse the full notes feed.",
