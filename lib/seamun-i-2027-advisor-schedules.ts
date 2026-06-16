@@ -1,6 +1,6 @@
 /**
  * SEAMUN I 2027 — twenty advisors in three lunch cohorts (not tied to a committee).
- * Pairs alternate chamber rotation vs advisor/sensory room each rotatable block.
+ * Chamber duty is balanced across each lunch group; advisors rotate committees each session.
  */
 
 import {
@@ -9,6 +9,7 @@ import {
   type SeamunLockedBlock,
   type SeamunLockedBlockCategory,
   type SeamunLockedColumn,
+  timeToMinutes,
 } from "@/lib/seamun-i-2027-locked-schedule";
 import {
   SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS,
@@ -77,6 +78,30 @@ export function seamunAdvisorsInLunchGroup(lunchGroupId: SeamunLunchGroupId): Se
   return SEAMUN_I_2027_ADVISOR_ROSTER.filter((a) => a.lunchGroupId === lunchGroupId);
 }
 
+/** Global roster label 1–20 (lunch group 1 → 1–6, l2 → 7–12, l3 → 13–20). */
+export function seamunAdvisorGlobalNumber(advisor: SeamunAdvisorRosterId): number {
+  let offset = 0;
+  for (const lg of SEAMUN_I_2027_LUNCH_GROUPS) {
+    const count = seamunAdvisorsInLunchGroup(lg.id).length;
+    if (lg.id === advisor.lunchGroupId) return offset + advisor.indexInGroup;
+    offset += count;
+  }
+  return advisor.indexInGroup;
+}
+
+export function seamunAdvisorFromGlobalNumber(globalNumber: number): SeamunAdvisorRosterId | null {
+  if (!Number.isInteger(globalNumber) || globalNumber < 1) return null;
+  let offset = 0;
+  for (const lg of SEAMUN_I_2027_LUNCH_GROUPS) {
+    const count = seamunAdvisorsInLunchGroup(lg.id).length;
+    if (globalNumber <= offset + count) {
+      return { lunchGroupId: lg.id, indexInGroup: globalNumber - offset };
+    }
+    offset += count;
+  }
+  return null;
+}
+
 const ADVISOR_SENSORY_BREAK_TITLE = "Advisor / sensory room";
 
 export function seamunScheduleGroupById(id: SeamunScheduleGroupId): SeamunScheduleGroupDefinition {
@@ -125,6 +150,13 @@ const SHARED_CATEGORIES = new Set<SeamunLockedBlockCategory>([
   "lunch",
   "dismissal",
   "sweep",
+]);
+
+/** Advisors share these blocks; only committee sessions rotate chamber vs sensory room. */
+const ADVISOR_SHARED_CATEGORIES = new Set<SeamunLockedBlockCategory>([
+  ...SHARED_CATEGORIES,
+  "relax",
+  "break_general",
 ]);
 
 function withoutLocation(block: SeamunLockedBlock): SeamunLockedBlock {
@@ -221,22 +253,94 @@ function advisorSessionBlock(
   });
 }
 
-function advisorChamberDutyBlock(
-  base: SeamunLockedBlock,
-  chamber: string,
-  label: string
-): SeamunLockedBlock {
-  const cat = base.category === "support" ? ("support" as const) : base.category;
-  return withoutLocation({
-    ...base,
-    title: `${label} — ${chamber}`,
-    category: cat,
+function blockDurationMinutes(block: SeamunLockedBlock): number {
+  return timeToMinutes(block.end) - timeToMinutes(block.start);
+}
+
+type AdvisorDayPlan = Map<string, SeamunLockedBlock[]>;
+
+const advisorDayPlanCache = new Map<string, AdvisorDayPlan>();
+
+function advisorDayPlanCacheKey(day: 1 | 2, lunchGroupId: SeamunLunchGroupId): string {
+  return `${day}:${lunchGroupId}`;
+}
+
+function sortAdvisorsByDutyMinutes(
+  advisors: SeamunAdvisorRosterId[],
+  dutyMinutes: Map<string, number>
+): SeamunAdvisorRosterId[] {
+  return [...advisors].sort((a, b) => {
+    const ka = formatSeamunAdvisorRosterKey(a);
+    const kb = formatSeamunAdvisorRosterKey(b);
+    const diff = dutyMinutes.get(ka)! - dutyMinutes.get(kb)!;
+    if (diff !== 0) return diff;
+    return a.indexInGroup - b.indexInGroup;
   });
 }
 
 /**
- * Build one roster advisor's day: cohort lunch clock; partner alternates chamber vs sensory;
- * chamber duty rotates through all committees in the lunch group.
+ * Balance chamber duty across the lunch cohort: each session block assigns the
+ * advisors with the fewest duty minutes so far; chamber labels rotate per block.
+ */
+function computeBalancedAdvisorDayPlan(day: 1 | 2, lunchGroupId: SeamunLunchGroupId): AdvisorDayPlan {
+  const def = seamunI2027LunchGroupDefinition(lunchGroupId);
+  const advisors = seamunAdvisorsInLunchGroup(lunchGroupId);
+  const chambers = def.chambers;
+  const nChambers = chambers.length;
+  const timingTrack = seamunI2027LunchTimingTrack(day, lunchGroupId);
+  const teamCol = seamunTeamColumnForGroup(day, timingTrack);
+
+  const rosterKeys = advisors.map((a) => formatSeamunAdvisorRosterKey(a));
+  const blocksByKey = new Map(rosterKeys.map((k) => [k, [] as SeamunLockedBlock[]]));
+  const dutyMinutes = new Map(rosterKeys.map((k) => [k, 0]));
+  let sessionBlockIndex = 0;
+
+  for (const block of teamCol.blocks) {
+    const base = withoutLocation(block);
+
+    if (ADVISOR_SHARED_CATEGORIES.has(block.category) || block.category !== "session") {
+      for (const key of rosterKeys) {
+        blocksByKey.get(key)!.push(base);
+      }
+      continue;
+    }
+
+    const duration = blockDurationMinutes(block);
+    const sorted = sortAdvisorsByDutyMinutes(advisors, dutyMinutes);
+    const onDuty = sorted.slice(0, nChambers);
+    const onDutyKeys = new Set(onDuty.map((a) => formatSeamunAdvisorRosterKey(a)));
+
+    for (const adv of advisors) {
+      const key = formatSeamunAdvisorRosterKey(adv);
+      if (onDutyKeys.has(key)) {
+        const dutyIndex = onDuty.findIndex((a) => formatSeamunAdvisorRosterKey(a) === key);
+        const chamberIdx = (sessionBlockIndex + dutyIndex) % nChambers;
+        blocksByKey.get(key)!.push(advisorSessionBlock(block, chambers[chamberIdx]!, block.title));
+        dutyMinutes.set(key, dutyMinutes.get(key)! + duration);
+      } else {
+        blocksByKey.get(key)!.push(advisorSensoryBreakBlock(block));
+      }
+    }
+
+    sessionBlockIndex += 1;
+  }
+
+  return blocksByKey;
+}
+
+function balancedAdvisorDayPlan(day: 1 | 2, lunchGroupId: SeamunLunchGroupId): AdvisorDayPlan {
+  const cacheKey = advisorDayPlanCacheKey(day, lunchGroupId);
+  let plan = advisorDayPlanCache.get(cacheKey);
+  if (!plan) {
+    plan = computeBalancedAdvisorDayPlan(day, lunchGroupId);
+    advisorDayPlanCache.set(cacheKey, plan);
+  }
+  return plan;
+}
+
+/**
+ * Build one roster advisor's day: cohort lunch clock; chamber duty is balanced
+ * across the lunch group; committee labels rotate each session block.
  */
 export function buildSeamunAdvisorDayBlocks(
   day: 1 | 2,
@@ -248,49 +352,18 @@ export function buildSeamunAdvisorDayBlocks(
   const placement = seamunAdvisorRosterPlacement(parsed);
   if (!placement) return [];
 
-  const timingTrack = seamunI2027LunchTimingTrack(day, placement.lunchGroupId);
-  const teamCol = seamunTeamColumnForGroup(day, timingTrack);
-  const { chambers, rotationPhase, partnerSlot, lunchGroupId } = placement;
+  const key = formatSeamunAdvisorRosterKey(parsed);
+  const blocks = balancedAdvisorDayPlan(day, placement.lunchGroupId).get(key) ?? [];
+  return applyLunchGroupMeals(blocks, day, placement.lunchGroupId);
+}
 
-  let sessionBlockIndex = 0;
-  let rotatableDutyIndex = 0;
-
-  const blocks = teamCol.blocks.map((block) => {
-    if (SHARED_CATEGORIES.has(block.category)) return withoutLocation(block);
-
-    const isRotatableDuty =
-      block.category === "session" ||
-      block.category === "support" ||
-      block.category === "break_general" ||
-      block.category === "relax";
-
-    if (!isRotatableDuty) return withoutLocation(block);
-
-    const onChamberDuty = (partnerSlot + rotatableDutyIndex) % ADVISORS_PER_PAIR === 0;
-    rotatableDutyIndex += 1;
-
-    if (!onChamberDuty) {
-      return advisorSensoryBreakBlock(block);
-    }
-
-    const chamberIdx =
-      block.category === "session" || block.category === "support"
-        ? (rotationPhase + sessionBlockIndex) % chambers.length
-        : (rotationPhase + rotatableDutyIndex) % chambers.length;
-
-    if (block.category === "session") {
-      sessionBlockIndex += 1;
-      return advisorSessionBlock(block, chambers[chamberIdx]!, block.title);
-    }
-
-    if (block.category === "support") {
-      return advisorChamberDutyBlock(block, chambers[chamberIdx]!, block.title);
-    }
-
-    return advisorChamberDutyBlock(block, chambers[chamberIdx]!, block.title);
-  });
-
-  return applyLunchGroupMeals(blocks, day, lunchGroupId);
+export function seamunAdvisorSessionDutyMinutes(
+  day: 1 | 2,
+  advisor: SeamunAdvisorRosterId | string
+): number {
+  return buildSeamunAdvisorDayBlocks(day, advisor)
+    .filter((b) => b.category === "session")
+    .reduce((sum, b) => sum + blockDurationMinutes(b), 0);
 }
 
 export function seamunAdvisorSensoryBreakCount(

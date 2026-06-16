@@ -7,6 +7,8 @@ export type AdvisorAssignmentRow = {
   conference_id: string;
   delegate_user_id: string | null;
   delegate_country: string;
+  delegate_name: string | null;
+  committee: string | null;
   advisor_name: string | null;
 };
 
@@ -24,7 +26,13 @@ export async function fetchAdvisorAssignmentsForAdvisor(
       conference_id,
       allocations!inner (
         country,
-        user_id
+        user_id,
+        conferences:conference_id (
+          committee
+        ),
+        profiles:user_id (
+          name
+        )
       )
     `
     )
@@ -34,10 +42,26 @@ export async function fetchAdvisorAssignmentsForAdvisor(
 
   return data.flatMap((row) => {
     const allocRaw = row.allocations as
-      | { country: string; user_id: string | null }
-      | { country: string; user_id: string | null }[];
+      | {
+          country: string;
+          user_id: string | null;
+          conferences: { committee: string | null } | { committee: string | null }[] | null;
+          profiles: { name: string | null } | { name: string | null }[] | null;
+        }
+      | {
+          country: string;
+          user_id: string | null;
+          conferences: { committee: string | null } | { committee: string | null }[] | null;
+          profiles: { name: string | null } | { name: string | null }[] | null;
+        }[];
     const alloc = Array.isArray(allocRaw) ? allocRaw[0] : allocRaw;
     if (!alloc) return [];
+
+    const confRaw = alloc.conferences;
+    const conf = Array.isArray(confRaw) ? confRaw[0] : confRaw;
+    const profRaw = alloc.profiles;
+    const prof = Array.isArray(profRaw) ? profRaw[0] : profRaw;
+
     return [
       {
         id: row.id,
@@ -46,6 +70,8 @@ export async function fetchAdvisorAssignmentsForAdvisor(
         conference_id: row.conference_id,
         delegate_user_id: alloc.user_id,
         delegate_country: alloc.country,
+        delegate_name: prof?.name?.trim() || null,
+        committee: conf?.committee?.trim() || null,
         advisor_name: null,
       },
     ];

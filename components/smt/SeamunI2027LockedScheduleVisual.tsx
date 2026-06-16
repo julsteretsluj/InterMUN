@@ -24,7 +24,7 @@ import {
   buildSeamunCommitteeDayBlocks,
   formatSeamunAdvisorRosterKey,
   parseSeamunAdvisorRosterKey,
-  seamunAdvisorsInLunchGroup,
+  seamunAdvisorGlobalNumber,
   seamunAllScheduleCommittees,
   seamunDebateColumnsForDay,
   seamunScheduleGroupForColumnHeader,
@@ -272,7 +272,7 @@ export function SeamunI2027LockedScheduleVisual({
       if (!rosterId) return [];
       return [
         {
-          header: t("advisorRosterColumn", { n: rosterId.indexInGroup }),
+          header: t("advisorRosterColumn", { n: seamunAdvisorGlobalNumber(rosterId) }),
           blocks: buildSeamunAdvisorDayBlocks(day, rosterId),
         },
       ];
@@ -430,31 +430,25 @@ export function SeamunI2027LockedScheduleVisual({
       ) : null}
 
       {browseMode === "advisor" && (isSmt || isAdvisor) ? (
-        <div className="mb-4 space-y-4">
+        <div className="mb-4 space-y-2">
           <p className="text-sm text-brand-muted">{t("advisorRosterHint")}</p>
-          {SEAMUN_I_2027_LUNCH_GROUPS.map((lg) => (
-            <div key={lg.id} className="space-y-2">
-              <p className="text-sm font-semibold text-brand-navy dark:text-zinc-100">
-                {t(`lunchGroupTitle.${lg.id}`)}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {seamunAdvisorsInLunchGroup(lg.id).map((entry) => {
-                  const key = formatSeamunAdvisorRosterKey(entry);
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => selectAdvisorRoster(entry)}
-                      className={pillClass(advisorRosterKey === key)}
-                      aria-pressed={advisorRosterKey === key}
-                    >
-                      {t("advisorRosterMember", { n: entry.indexInGroup })}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {SEAMUN_I_2027_ADVISOR_ROSTER.map((entry) => {
+              const key = formatSeamunAdvisorRosterKey(entry);
+              const globalN = seamunAdvisorGlobalNumber(entry);
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => selectAdvisorRoster(entry)}
+                  className={pillClass(advisorRosterKey === key)}
+                  aria-pressed={advisorRosterKey === key}
+                >
+                  {t("advisorRosterMember", { n: globalN })}
+                </button>
+              );
+            })}
+          </div>
         </div>
       ) : null}
 
