@@ -769,6 +769,7 @@
     "advisorDelegateProfile": "Delegate profile",
     "advisorDelegateDocuments": "Delegate documents",
     "advisorDelegateVoting": "Delegate voting",
+    "advisorDelegateNotes": "Delegate notes",
     "voting": "Voting",
     "digitalRoom": "Digital Room",
     "committeeSession": "Committee session",
@@ -874,13 +875,14 @@
     }
   },
   "advisorDashboard": {
-    "intro": "You can monitor your assigned delegate’s committee activity. You do not have access to notes unless a chair or SMT forwards one to you.",
+    "intro": "You can monitor your assigned delegates and send them notes. Chairs and SMT may also forward notes to you.",
     "noAssignments": "No delegate is linked to your account yet. Secretariat will assign you from SMT → Advisors.",
     "delegateLinked": "Delegate account linked",
     "delegateNotLinked": "Seat not linked to a delegate account yet",
     "viewProfile": "Profile",
     "viewDocuments": "Documents",
     "viewVoting": "Voting",
+    "sendNote": "Send note",
     "forwardedNotes": "Forwarded notes",
     "schedule": {
       "intro": "Pick your lunch group and roster number (Advisor 1–8 or 1–6). Your timetable is not tied to a committee — you rotate through your cohort’s chambers with partner swaps in the advisor / sensory room."
@@ -891,7 +893,7 @@
       "profile": "Profile",
       "documents": "Documents",
       "voting": "Voting",
-      "notes": "Forwarded notes"
+      "notes": "Notes"
     },
     "delegateProfile": {
       "notLinked": "This seat is not linked to a delegate account yet.",
@@ -912,9 +914,46 @@
       "noBallot": "Not recorded"
     },
     "notes": {
-      "intro": "Notes chairs or SMT chose to share with you. You cannot browse the full notes feed.",
+      "intro": "Notes chairs or SMT forwarded to you, plus notes you sent to your delegates.",
+      "forwardedTitle": "Forwarded to you",
+      "sentTitle": "Sent to delegates",
+      "sentEmpty": "You have not sent any notes to your delegates yet. Open a delegate card and choose Send note.",
+      "toDelegate": "To {delegate}",
+      "openConversation": "Open conversation",
+      "unknownDelegate": "Delegate",
+      "held": "Pending chair review",
       "empty": "No notes have been forwarded to you yet.",
       "forwarded": "Forwarded"
+    },
+    "sendNote": {
+      "title": "Message {delegate}",
+      "hint": "Your delegate will see this in their notes feed. Replies appear in the conversation below.",
+      "topicLabel": "Topic",
+      "messageLabel": "Message",
+      "placeholder": "Write guidance for your delegate…",
+      "send": "Send note",
+      "sending": "Sending…",
+      "sentSuccess": "Note sent to your delegate.",
+      "heldSuccess": "Note sent — pending chair approval before your delegate can read it.",
+      "notSignedIn": "Sign in to send notes.",
+      "notAdvisor": "Only advisors can send delegate notes.",
+      "missingDelegate": "Choose a delegate to message.",
+      "invalidTopic": "Choose a valid topic.",
+      "emptyContent": "Write a message before sending.",
+      "notAssigned": "That delegate is not assigned to your account.",
+      "delegateNotLinked": "This seat is not linked to a delegate account yet.",
+      "sendFailed": "Could not send the note. Try again.",
+      "conversationTitle": "Conversation",
+      "emptyConversation": "No messages with {delegate} yet.",
+      "fromYou": "You",
+      "fromDelegate": "{delegate}",
+      "heldBadge": "Pending chair review",
+      "topics": {
+        "questions": "Questions",
+        "blocForming": "Bloc forming",
+        "speechPoisOrPocs": "Speech POIs or POCs",
+        "informalConversations": "Informal conversations"
+      }
     }
   },
   "smtAdvisorsPage": {

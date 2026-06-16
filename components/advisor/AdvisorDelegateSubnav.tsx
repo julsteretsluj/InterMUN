@@ -63,7 +63,7 @@ export function AdvisorDelegateSubnav({
         <Link href={`${base}/voting`} className={linkClass(pathname === `${base}/voting`)}>
           {t("voting")}
         </Link>
-        <Link href="/advisor/notes" className={linkClass(pathname.startsWith("/advisor/notes"))}>
+        <Link href={`${base}/notes`} className={linkClass(pathname === `${base}/notes`)}>
           {t("notes")}
         </Link>
       </nav>

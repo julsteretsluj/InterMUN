@@ -64,6 +64,12 @@ export function AdvisorOversightPanel({ assignments }: { assignments: AdvisorAss
                 >
                   {t("viewVoting")}
                 </Link>
+                <Link
+                  href={`/advisor/delegates/${encodeURIComponent(a.delegate_user_id)}/notes`}
+                  className="text-xs font-medium text-brand-accent hover:underline"
+                >
+                  {t("sendNote")}
+                </Link>
               </>
             ) : null}
             <Link
