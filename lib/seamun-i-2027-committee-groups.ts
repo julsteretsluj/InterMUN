@@ -1,12 +1,12 @@
 /**
  * SEAMUN I 2027 — which debate chambers follow which master-schedule track.
  * Source of truth for timings/colours: `lib/seamun-i-2027-locked-schedule.ts` (visual day 1 & 2).
- * Mixed lunch cohorts (3 groups, 10 committees): `lib/seamun-i-2027-lunch-groups.ts`.
+ * Lunch cohorts for advisors: `lib/seamun-i-2027-lunch-groups.ts`.
  *
  * Chamber labels must match `conferences.committee` values for this event (see `seed_allocation_matrix.sql`).
  */
 
-export type SeamunScheduleGroupId = "g1" | "g2" | "g3" | "g4" | "support";
+export type SeamunScheduleGroupId = "g1" | "g2" | "g3";
 
 export type SeamunScheduleGroupDefinition = {
   id: SeamunScheduleGroupId;
@@ -20,41 +20,27 @@ export type SeamunScheduleGroupDefinition = {
 export const SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS: readonly SeamunScheduleGroupDefinition[] = [
   {
     id: "g1",
-    scheduleHeader: "Group 1 (1st UL) — Team Alpha",
-    chambers: ["ECOSOC", "UN Women"],
+    scheduleHeader: "Group 1 — UNHRC, DISEC, Press Corps",
+    chambers: ["UNHRC", "DISEC", "Press Corps"],
   },
   {
     id: "g2",
-    scheduleHeader: "Group 2 (Mixed) — Team Beta",
-    chambers: ["UNHRC", "Press Corps"],
+    scheduleHeader: "Group 2 — WHO, UN Women, UNSC",
+    chambers: ["WHO", "UN Women", "UNSC"],
   },
   {
     id: "g3",
-    scheduleHeader: "Group 3 (1st ML) — Team Gamma",
-    chambers: ["DISEC", "UNODC", "WHO"],
-  },
-  {
-    id: "g4",
-    scheduleHeader: "Group 4 (2nd ML) — Team Delta",
-    chambers: ["UNSC", "FWC - Stranger Things"],
-  },
-  {
-    id: "support",
-    scheduleHeader: "Support / Sensory — Team Epsilon",
-    chambers: ["Interpol"],
+    scheduleHeader: "Group 3 — ECOSOC, UNODC, INTERPOL, FWC",
+    chambers: ["ECOSOC", "UNODC", "Interpol", "FWC - Stranger Things"],
   },
 ] as const;
 
-/** Four debate tracks only (excludes Support / Sensory — not shown in role schedule UIs). */
-export const SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS = SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS.filter(
-  (g) => g.id !== "support"
-);
+export const SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS = SEAMUN_I_2027_SCHEDULE_GROUP_DEFINITIONS;
 
 export function seamunI2027DebateScheduleGroupId(
   groupId: SeamunScheduleGroupId | null | undefined
 ): SeamunScheduleGroupId | null {
-  if (!groupId || groupId === "support") return null;
-  return groupId;
+  return groupId ?? null;
 }
 
 const CHAMBER_TO_GROUP_ID = new Map<string, SeamunScheduleGroupId>();

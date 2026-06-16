@@ -103,6 +103,9 @@ export default async function ProfilePage({
     smtCommitteeSurface = await getSmtDashboardSurface();
     if (smtCommitteeSurface === "secretariat") redirect("/smt");
   }
+  if (roleLower === "advisor") {
+    redirect("/advisor/profile");
+  }
   if (roleLower === "admin") {
     redirect("/admin");
   }

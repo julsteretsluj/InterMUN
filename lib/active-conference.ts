@@ -153,26 +153,6 @@ export async function getConferenceForDashboard(options: {
 
   const supabase = await createClient();
 
-  if (roleLower === "advisor" && options.userId) {
-    const { data: assignRows } = await supabase
-      .from("advisor_delegate_assignments")
-      .select("conference_id")
-      .eq("advisor_profile_id", options.userId);
-    const distinctIds = [
-      ...new Set((assignRows ?? []).map((r) => r.conference_id).filter(Boolean)),
-    ] as string[];
-    if (distinctIds.length === 1) {
-      const canonicalId = await resolveCanonicalCommitteeConferenceId(supabase, distinctIds[0]!);
-      const { data: conf } = await supabase
-        .from("conferences")
-        .select(ACTIVE_CONFERENCE_SELECT)
-        .eq("id", canonicalId)
-        .maybeSingle();
-      const confRow = asActiveConferenceRow(conf);
-      if (confRow) return confRow;
-    }
-  }
-
   const { count, error: countErr } = await supabase
     .from("conferences")
     .select("*", { count: "exact", head: true });

@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { INTERMUN_ENTRY_ROLE_KEY, isInterMunEntryRole } from "@/lib/entry-role";
+import { ADVISOR_APP_HOME, SMT_APP_HOME } from "@/lib/roles";
 
 /**
  * Client-only: reads and clears `intermun.entryRole` from sessionStorage, then picks a dashboard
@@ -18,9 +19,9 @@ export async function resolveDashboardPathAfterAuth(
   const { data: prof } = await supabase.from("profiles").select("role").eq("id", userId).maybeSingle();
   const role = prof?.role?.toString().trim().toLowerCase();
   if (role === "admin") next = "/admin";
-  else if (role === "smt") next = "/smt";
+  else if (role === "smt") next = SMT_APP_HOME;
   else if (role === "chair" && entry === "chair") next = "/chair";
   else if (role === "delegate" && entry === "delegate") next = "/delegate";
-  else if (role === "advisor" && entry === "advisor") next = "/advisor";
+  else if (role === "advisor" && entry === "advisor") next = ADVISOR_APP_HOME;
   return next;
 }

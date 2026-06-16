@@ -15,6 +15,7 @@ import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { getAppName } from "@/lib/branding";
 import { DashboardBrandLogos } from "@/components/dashboard/DashboardBrandLogos";
 import {
+  ADVISOR_APP_HOME,
   isAdminRole,
   isAdvisorRole,
   isChairRole,
@@ -80,10 +81,8 @@ export default async function DashboardLayout({
   }
 
   if (isAdvisorRole(normalizedRole)) {
-    const blockedNotePaths = ["/chats-notes", "/running-notes", "/stances"];
-    if (blockedNotePaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
-      redirect("/advisor");
-    }
+    const search = hdrs.get("x-search") ?? "";
+    redirect(`${ADVISOR_APP_HOME}${search}`);
   }
 
   const activeConf = await getConferenceForDashboard({
@@ -111,7 +110,6 @@ export default async function DashboardLayout({
     isSmtRole(normalizedRole) && smtSurface === "delegate";
   const needsAllocationCodeGate =
     allocationGateOn && effectiveRole === "delegate" && !smtDelegatePreview;
-  // Advisors use delegate-style committee access but never the placard second gate.
   if (needsAllocationCodeGate) {
     const allocVerified = await getAllocationCodeVerifiedConferenceId();
     if (allocVerified !== activeConf.id) {

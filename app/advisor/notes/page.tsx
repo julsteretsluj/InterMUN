@@ -1,9 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
-import { requireActiveConferenceId } from "@/lib/active-conference";
 import { isAdvisorRole } from "@/lib/roles";
-import { getChamberScope } from "@/lib/chamber-scope";
 import { getTranslations } from "next-intl/server";
 
 export default async function AdvisorForwardedNotesPage() {
@@ -16,16 +14,12 @@ export default async function AdvisorForwardedNotesPage() {
   if (!user) redirect("/login");
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
-  if (!isAdvisorRole(profile?.role)) redirect("/profile");
-
-  const conferenceId = await requireActiveConferenceId();
-  const scope = await getChamberScope(supabase, conferenceId);
+  if (!isAdvisorRole(profile?.role)) redirect("/advisor");
 
   const { data: notes } = await supabase
     .from("delegation_notes")
     .select("id, topic, content, concern_flag, created_at, forwarded_to_advisor_at")
     .eq("forwarded_to_advisor_profile_id", user.id)
-    .in("conference_id", scope.siblingConferenceIds)
     .order("created_at", { ascending: false });
 
   return (

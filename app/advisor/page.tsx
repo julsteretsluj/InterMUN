@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveEventId } from "@/lib/active-event-cookie";
 import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
 import { MunPageShell } from "@/components/MunPageShell";
-import { requireActiveConferenceId } from "@/lib/active-conference";
 import { isAdvisorRole } from "@/lib/roles";
 import { fetchAdvisorAssignmentsForAdvisor } from "@/lib/advisor-access";
 import { AdvisorOversightPanel } from "@/components/advisor/AdvisorOversightPanel";
@@ -21,14 +21,9 @@ export default async function AdvisorDashboardPage() {
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   if (!isAdvisorRole(profile?.role)) redirect("/profile");
 
-  const conferenceId = await requireActiveConferenceId();
-  const { data: conf } = await supabase
-    .from("conferences")
-    .select("event_id")
-    .eq("id", conferenceId)
-    .maybeSingle();
-  const { data: eventRow } = conf?.event_id
-    ? await supabase.from("conference_events").select("event_code").eq("id", conf.event_id).maybeSingle()
+  const eventId = await getActiveEventId();
+  const { data: eventRow } = eventId
+    ? await supabase.from("conference_events").select("event_code").eq("id", eventId).maybeSingle()
     : { data: null as { event_code: string } | null };
   const showSchedule =
     (eventRow?.event_code ?? "").trim().toUpperCase() === SEAMUN_I_2027_EVENT_CODE;

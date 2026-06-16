@@ -1,9 +1,10 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { requireActiveConferenceId } from "@/lib/active-conference";
+import { getActiveEventId } from "@/lib/active-event-cookie";
 import { seamunDefaultGroupForCommittee } from "@/lib/seamun-i-2027-advisor-schedules";
 import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
 import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
 import type { SeamunScheduleGroupId } from "@/lib/seamun-i-2027-committee-groups";
+import { requireActiveConferenceId } from "@/lib/active-conference";
 
 export type SeamunSchedulePageContext = {
   initialCommittee: string | null;
@@ -34,4 +35,26 @@ export async function loadSeamunSchedulePageContext(
   const initialGroupId = seamunDefaultGroupForCommittee(initialCommittee);
 
   return { initialCommittee, initialGroupId };
+}
+
+/** Advisors: event-level schedule — no active committee cookie. */
+export async function loadAdvisorSeamunSchedulePageContext(
+  supabase: SupabaseClient
+): Promise<SeamunSchedulePageContext | null> {
+  const eventId = await getActiveEventId();
+  if (!eventId) return null;
+
+  const { data: eventRow } = await supabase
+    .from("conference_events")
+    .select("id, event_code")
+    .eq("id", eventId)
+    .maybeSingle();
+
+  const isSeamun =
+    isSeamunI2027LockedScheduleEvent(eventRow?.id ?? "", eventRow?.event_code) ||
+    (eventRow?.event_code ?? "").trim().toUpperCase() === SEAMUN_I_2027_EVENT_CODE;
+
+  if (!isSeamun) return null;
+
+  return { initialCommittee: null, initialGroupId: null };
 }

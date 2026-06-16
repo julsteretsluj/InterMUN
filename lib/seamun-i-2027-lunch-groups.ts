@@ -1,6 +1,6 @@
 /**
- * SEAMUN I 2027 — three mixed lunch cohorts (10 committees → 3 groups).
- * Session clocks stay on each chamber’s debate/support track; eat + chill use the lunch group slot.
+ * SEAMUN I 2027 — three schedule groups (10 committees). Each group shares one timetable
+ * including lunch slots (see schedules.pdf). Advisor lunch cohorts mirror these groups.
  */
 
 import type { SeamunScheduleGroupId } from "@/lib/seamun-i-2027-committee-groups";
@@ -13,27 +13,26 @@ export type SeamunLunchGroupDefinition = {
   chambers: readonly string[];
 };
 
-/** Mixed cohorts: spread debate tracks so delegates meet across committees. */
 export const SEAMUN_I_2027_LUNCH_GROUPS: readonly SeamunLunchGroupDefinition[] = [
   {
     id: "l1",
-    chambers: ["ECOSOC", "UNHRC", "DISEC", "Interpol"],
+    chambers: ["UNHRC", "DISEC", "Press Corps"],
   },
   {
     id: "l2",
-    chambers: ["UN Women", "Press Corps", "UNSC"],
+    chambers: ["WHO", "UN Women", "UNSC"],
   },
   {
     id: "l3",
-    chambers: ["UNODC", "WHO", "FWC - Stranger Things"],
+    chambers: ["ECOSOC", "UNODC", "Interpol", "FWC - Stranger Things"],
   },
 ] as const;
 
-/** Wall-clock eat/chill source track per lunch group (Day 1 / Day 2 columns differ but times align). */
+/** Each lunch cohort uses its schedule group's wall-clock eat/chill slots. */
 const LUNCH_TIMING_TRACK_BY_DAY: Record<SeamunLunchGroupId, Record<1 | 2, SeamunScheduleGroupId>> = {
-  l1: { 1: "g1", 2: "g4" },
-  l2: { 1: "g2", 2: "g3" },
-  l3: { 1: "g3", 2: "g2" },
+  l1: { 1: "g1", 2: "g1" },
+  l2: { 1: "g2", 2: "g2" },
+  l3: { 1: "g3", 2: "g3" },
 };
 
 const CHAMBER_TO_LUNCH_GROUP = new Map<string, SeamunLunchGroupId>();

@@ -85,13 +85,11 @@ export function seamunScheduleGroupById(id: SeamunScheduleGroupId): SeamunSchedu
   return def;
 }
 
-/** Day 2 column headers use rotated team names; match by group prefix. */
+/** Day 2 column headers use the same group labels as day 1. */
 const GROUP_COLUMN_PREFIX: Record<SeamunScheduleGroupId, string> = {
   g1: "Group 1",
   g2: "Group 2",
   g3: "Group 3",
-  g4: "Group 4",
-  support: "Support",
 };
 
 export function seamunScheduleGroupForColumnHeader(header: string): SeamunScheduleGroupId | null {
@@ -100,17 +98,15 @@ export function seamunScheduleGroupForColumnHeader(header: string): SeamunSchedu
     if (h === def.scheduleHeader) return def.id;
     if (h.startsWith(GROUP_COLUMN_PREFIX[def.id])) return def.id;
   }
-  if (h.startsWith(GROUP_COLUMN_PREFIX.support)) return "support";
   return null;
 }
 
 export function seamunDebateColumnsForDay(day: 1 | 2): SeamunLockedColumn[] {
   const columns = day === 1 ? SEAMUN_I_2027_DAY1_COLUMNS : SEAMUN_I_2027_DAY2_COLUMNS;
   return SEAMUN_I_2027_DEBATE_SCHEDULE_GROUPS.map((g) => {
-    const col =
-      day === 1
-        ? columns.find((c) => c.header === g.scheduleHeader)
-        : columns.find((c) => c.header.startsWith(GROUP_COLUMN_PREFIX[g.id]));
+    const col = columns.find(
+      (c) => c.header === g.scheduleHeader || c.header.startsWith(GROUP_COLUMN_PREFIX[g.id])
+    );
     if (!col) throw new Error(`No column for ${g.id} on day ${day}`);
     return col;
   });
@@ -128,7 +124,6 @@ const SHARED_CATEGORIES = new Set<SeamunLockedBlockCategory>([
   "ceremony",
   "lunch",
   "dismissal",
-  "strategy",
   "sweep",
 ]);
 
@@ -325,15 +320,5 @@ export function buildSeamunCommitteeDayBlocks(day: 1 | 2, committee: string): Se
   if (!groupId) return [];
 
   const teamCol = seamunTeamColumnForGroup(day, groupId);
-
-  const mapped = teamCol.blocks.map((block) => {
-    if (block.category === "support" && groupId === "support") {
-      return withoutLocation({ ...block, title: key, category: "support" as const });
-    }
-    return withoutLocation(block);
-  });
-
-  const lunchGroupId = seamunI2027LunchGroupForChamber(key);
-  if (!lunchGroupId) return mapped;
-  return applyLunchGroupMeals(mapped, day, lunchGroupId);
+  return teamCol.blocks.map((block) => withoutLocation(block));
 }

@@ -1091,6 +1091,21 @@
     "loadCommitteesPrompt": "to load committees for an event.",
     "hubEnterConferenceCode": "Enter conference code"
   },
+  "advisorLayout": {
+    "activeEvent": "Active event:",
+    "code": "code",
+    "enterConferenceCodeLink": "Enter conference code",
+    "loadEventPrompt": "to load the conference event.",
+    "helpCenter": "Help center",
+    "defaultDisplayName": "Advisor"
+  },
+  "advisorNav": {
+    "ariaDashboard": "Advisor dashboard",
+    "hub": "Advisor hub",
+    "notes": "Forwarded notes",
+    "schedule": "Conference schedule",
+    "profile": "Profile"
+  },
   "smtCommitteeView": {
     "title": "Secretariat: chair & delegate views",
     "intro": "Pick a committee for chair tools and a delegate placard to preview, then switch surfaces. Sign-in still opens the secretariat hub by default.",
@@ -1983,11 +1998,9 @@
           "l3": "Lunch 3"
         },
         "teamShort": {
-          "g1": "Alpha",
-          "g2": "Beta",
-          "g3": "Gamma",
-          "g4": "Delta",
-          "support": "Epsilon"
+          "g1": "Group 1",
+          "g2": "Group 2",
+          "g3": "Group 3"
         }
       }
     }

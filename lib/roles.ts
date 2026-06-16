@@ -10,6 +10,9 @@ export const ADMIN_APP_HOME = "/admin";
 /** Post-login and post-gate home for secretariat accounts. */
 export const SMT_APP_HOME = "/smt";
 
+/** Post-login home for school advisor accounts (event-level, no committee). */
+export const ADVISOR_APP_HOME = "/advisor";
+
 export function isChairRole(role: string | null | undefined): role is "chair" {
   const r = normalizeRole(role);
   return r === "chair";
@@ -29,11 +32,6 @@ export function isAdminRole(role: string | null | undefined): role is "admin" {
 export function isAdvisorRole(role: string | null | undefined): role is "advisor" {
   const r = normalizeRole(role);
   return r === "advisor";
-}
-
-/** Uses delegate-style committee gates (not dais tools, not allocation placard gate). */
-export function isAdvisorLikeDelegate(role: string | null | undefined): boolean {
-  return isAdvisorRole(role);
 }
 
 /** Can use the /smt secretariat dashboard (conference SMT or website admin). */

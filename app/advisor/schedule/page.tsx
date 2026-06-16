@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { SeamunI2027LockedScheduleVisual } from "@/components/smt/SeamunI2027LockedScheduleVisual";
-import { loadSeamunSchedulePageContext } from "@/lib/seamun-schedule-page";
+import { loadAdvisorSeamunSchedulePageContext } from "@/lib/seamun-schedule-page";
 import { isAdvisorRole } from "@/lib/roles";
 import { getTranslations } from "next-intl/server";
 
@@ -18,7 +18,7 @@ export default async function AdvisorSchedulePage() {
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   if (!isAdvisorRole(profile?.role)) redirect("/advisor");
 
-  const ctx = await loadSeamunSchedulePageContext(supabase);
+  const ctx = await loadAdvisorSeamunSchedulePageContext(supabase);
   if (!ctx) redirect("/advisor");
 
   return (

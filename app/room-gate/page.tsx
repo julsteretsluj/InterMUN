@@ -12,6 +12,7 @@ import { staffContinueWithLatestConference } from "@/app/actions/roomGate";
 import {
   canCreateConferenceEvent,
   canUseLatestCommitteeShortcut,
+  isAdvisorRole,
   isStaffRole,
 } from "@/lib/roles";
 import { SMT_COMMITTEE_CODE } from "@/lib/join-codes";
@@ -48,6 +49,14 @@ export default async function RoomGatePage({
     .maybeSingle();
 
   const role = profile?.role;
+  const nextAdvisor =
+    nextPath.startsWith("/advisor") ? nextPath : "/advisor";
+  if (isAdvisorRole(role)) {
+    if (await getActiveEventId()) {
+      redirect(nextAdvisor);
+    }
+    redirect(`/event-gate?next=${encodeURIComponent(nextAdvisor)}`);
+  }
   const showStaffTools = isStaffRole(role);
   const showLatestShortcut = canUseLatestCommitteeShortcut(role);
   const showConferenceSetup = canCreateConferenceEvent(role);
