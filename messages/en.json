@@ -520,7 +520,7 @@
   "tabNav": {
     "delegateHub": "Delegate hub",
     "advisorHub": "Advisor hub",
-    "advisorNotes": "Forwarded notes",
+    "advisorNotes": "Notes",
     "conferenceSchedule": "Schedule",
     "profile": "Profile",
     "follow": "Follow",
@@ -762,7 +762,7 @@
     "awardsSmt": "Awards",
     "delegateDashboard": "Delegate dashboard",
     "advisorDashboard": "Advisor dashboard",
-    "advisorNotes": "Forwarded notes",
+    "advisorNotes": "Notes",
     "delegateSchedule": "Conference schedule",
     "chairSchedule": "Conference schedule",
     "advisorSchedule": "Conference schedule",
@@ -926,10 +926,17 @@
       "noBallot": "Not recorded"
     },
     "notes": {
-      "intro": "Notes chairs or SMT forwarded to you, plus notes you sent to your delegates.",
+      "intro": "Forwarded notes from chairs and SMT, or send guidance to your linked delegates.",
+      "tabsAriaLabel": "Advisor notes",
+      "tabForwarded": "Forwarded to you",
+      "tabSend": "Send to delegates",
+      "sendIntro": "Choose a delegate, write your message, and they will see it in their notes feed.",
+      "pickDelegate": "Delegate",
+      "noLinkedDelegates": "No linked delegate accounts yet. Secretariat must assign delegates to your advisor account first.",
+      "loading": "Loading notes…",
       "forwardedTitle": "Forwarded to you",
       "sentTitle": "Sent to delegates",
-      "sentEmpty": "You have not sent any notes to your delegates yet. Open a delegate card and choose Send note.",
+      "sentEmpty": "You have not sent any notes to your delegates yet.",
       "toDelegate": "To {delegate}",
       "openConversation": "Open conversation",
       "unknownDelegate": "Delegate",
@@ -1182,7 +1189,7 @@
   "advisorNav": {
     "ariaDashboard": "Advisor dashboard",
     "hub": "Advisor hub",
-    "notes": "Forwarded notes",
+    "notes": "Notes",
     "schedule": "Conference schedule",
     "profile": "Profile"
   },

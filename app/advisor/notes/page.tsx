@@ -1,9 +1,15 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { MunPageShell } from "@/components/MunPageShell";
 import { isAdvisorRole } from "@/lib/roles";
 import { fetchAdvisorAssignmentsForAdvisor } from "@/lib/advisor-access";
+import {
+  AdvisorNotesTabs,
+  type AdvisorForwardedNote,
+  type AdvisorLinkedDelegate,
+  type AdvisorSentNote,
+} from "@/components/advisor/AdvisorNotesTabs";
 import { getTranslations } from "next-intl/server";
 
 export default async function AdvisorNotesPage() {
@@ -50,88 +56,59 @@ export default async function AdvisorNotesPage() {
       .map((a) => [a.delegate_allocation_id, a.delegate_user_id as string])
   );
 
-  const forwarded = forwardedRes.data ?? [];
-  const sent = (sentRes.data ?? []).filter((n) => {
-    const recipients = n.delegation_note_recipients ?? [];
-    return recipients.some((r) => allocationLabel.has(r.recipient_allocation_id ?? ""));
-  });
+  const linkedDelegates: AdvisorLinkedDelegate[] = assignments
+    .filter((a): a is typeof a & { delegate_user_id: string } => Boolean(a.delegate_user_id))
+    .map((a) => ({
+      userId: a.delegate_user_id,
+      label: a.delegate_name?.trim() || a.delegate_country,
+      country: a.delegate_country,
+    }));
+
+  const forwardedNotes: AdvisorForwardedNote[] = (forwardedRes.data ?? []).map((n) => ({
+    id: n.id,
+    topic: n.topic,
+    content: n.content,
+    createdAt: n.created_at,
+    forwardedAt: n.forwarded_to_advisor_at,
+  }));
+
+  const sentNotes: AdvisorSentNote[] = (sentRes.data ?? [])
+    .filter((n) => {
+      const recipients = n.delegation_note_recipients ?? [];
+      return recipients.some((r) => allocationLabel.has(r.recipient_allocation_id ?? ""));
+    })
+    .map((n) => {
+      const recip = (n.delegation_note_recipients ?? []).find((r) =>
+        allocationLabel.has(r.recipient_allocation_id ?? "")
+      );
+      const allocationId = recip?.recipient_allocation_id ?? "";
+      return {
+        id: n.id,
+        topic: n.topic,
+        content: n.content,
+        createdAt: n.created_at,
+        moderationState: n.moderation_state,
+        delegateLabel: allocationLabel.get(allocationId) ?? tn("unknownDelegate"),
+        delegateUserId: allocationUserId.get(allocationId) ?? null,
+      };
+    });
 
   return (
     <MunPageShell title={t("advisorNotes")}>
       <p className="mb-6 max-w-2xl text-sm text-brand-muted">{tn("intro")}</p>
-
-      <section className="mb-8 space-y-3">
-        <h2 className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{tn("forwardedTitle")}</h2>
-        {forwarded.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-brand-navy/15 px-4 py-6 text-center text-sm text-brand-muted">
-            {tn("empty")}
+      <Suspense
+        fallback={
+          <p className="text-sm text-brand-muted" aria-live="polite">
+            {tn("loading")}
           </p>
-        ) : (
-          <ul className="space-y-3">
-            {forwarded.map((n) => (
-              <li
-                key={n.id}
-                className="rounded-xl border border-brand-navy/10 bg-brand-paper px-4 py-3 dark:border-zinc-700"
-              >
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{n.topic}</p>
-                <p className="mt-2 whitespace-pre-wrap text-sm text-brand-navy dark:text-zinc-100">{n.content}</p>
-                <p className="mt-2 font-mono text-[0.65rem] text-brand-muted">
-                  {new Date(n.created_at).toLocaleString()}
-                  {n.forwarded_to_advisor_at
-                    ? ` · ${tn("forwarded")} ${new Date(n.forwarded_to_advisor_at).toLocaleString()}`
-                    : null}
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-brand-navy dark:text-zinc-100">{tn("sentTitle")}</h2>
-        {sent.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-brand-navy/15 px-4 py-6 text-center text-sm text-brand-muted">
-            {tn("sentEmpty")}
-          </p>
-        ) : (
-          <ul className="space-y-3">
-            {sent.map((n) => {
-              const recip = (n.delegation_note_recipients ?? []).find((r) =>
-                allocationLabel.has(r.recipient_allocation_id ?? "")
-              );
-              const allocationId = recip?.recipient_allocation_id ?? "";
-              const label = allocationLabel.get(allocationId) ?? tn("unknownDelegate");
-              const delegateUserId = allocationUserId.get(allocationId);
-              return (
-                <li
-                  key={n.id}
-                  className="rounded-xl border border-brand-navy/10 bg-brand-paper px-4 py-3 dark:border-zinc-700"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
-                      {tn("toDelegate", { delegate: label })}
-                    </p>
-                    {delegateUserId ? (
-                      <Link
-                        href={`/advisor/delegates/${encodeURIComponent(delegateUserId)}/notes`}
-                        className="text-xs font-medium text-brand-accent hover:underline"
-                      >
-                        {tn("openConversation")}
-                      </Link>
-                    ) : null}
-                  </div>
-                  <p className="mt-1 text-xs text-brand-muted">{n.topic}</p>
-                  <p className="mt-2 whitespace-pre-wrap text-sm text-brand-navy dark:text-zinc-100">{n.content}</p>
-                  <p className="mt-2 font-mono text-[0.65rem] text-brand-muted">
-                    {new Date(n.created_at).toLocaleString()}
-                    {n.moderation_state === "held" ? ` · ${tn("held")}` : null}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </section>
+        }
+      >
+        <AdvisorNotesTabs
+          forwardedNotes={forwardedNotes}
+          sentNotes={sentNotes}
+          linkedDelegates={linkedDelegates}
+        />
+      </Suspense>
     </MunPageShell>
   );
 }
