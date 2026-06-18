@@ -7,6 +7,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { isAdvisorRole } from "@/lib/roles";
 import { fetchAdvisorAssignmentsForAdvisor } from "@/lib/advisor-access";
 import { AdvisorOversightPanel } from "@/components/advisor/AdvisorOversightPanel";
+import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getTranslations } from "next-intl/server";
 
 export default async function AdvisorDashboardPage() {
@@ -34,15 +35,25 @@ export default async function AdvisorDashboardPage() {
     <MunPageShell title={t("advisorDashboard")}>
       <div className="space-y-4">
         <p className="max-w-2xl text-sm text-brand-muted">{ta("intro")}</p>
-        {showSchedule ? (
+        <div className="flex flex-wrap gap-2">
+          {showSchedule ? (
+            <Link
+              href="/advisor/schedule"
+              className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-brand-accent/35 bg-brand-accent/10 px-4 py-2.5 text-sm font-semibold text-brand-navy transition-apple hover:bg-brand-accent/15"
+            >
+              <span aria-hidden>📅</span>
+              {t("advisorSchedule")}
+            </Link>
+          ) : null}
           <Link
-            href="/advisor/schedule"
-            className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-brand-accent/35 bg-brand-accent/10 px-4 py-2.5 text-sm font-semibold text-brand-navy transition-apple hover:bg-brand-accent/15"
+            href="/advisor/guides"
+            className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-brand-navy/10 bg-white/50 px-4 py-2.5 text-sm font-semibold text-brand-navy transition-apple hover:border-brand-accent/35 hover:bg-brand-accent/10 dark:bg-black/20"
           >
-            <span aria-hidden>📅</span>
-            {t("advisorSchedule")}
+            <span aria-hidden>❓</span>
+            {t("guides")}
           </Link>
-        ) : null}
+        </div>
+        <RoleSetupChecklist role="advisor" />
         {assignments.length === 0 ? (
           <p className="rounded-lg border border-dashed border-brand-navy/15 bg-brand-cream/30 px-4 py-6 text-sm text-brand-muted">
             {ta("noAssignments")}

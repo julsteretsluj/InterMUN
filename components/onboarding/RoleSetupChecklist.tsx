@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-type RoleKey = "admin" | "smt" | "chair" | "delegate";
+type RoleKey = "admin" | "smt" | "chair" | "delegate" | "advisor";
 
 const HREFS: Record<RoleKey, string[]> = {
   admin: [
@@ -20,6 +20,7 @@ const HREFS: Record<RoleKey, string[]> = {
     "/chair/digital-room",
   ],
   delegate: ["/profile", "/documents", "/documents", "/committee-room"],
+  advisor: ["/advisor", "/advisor/schedule", "/advisor/notes", "/advisor/guides"],
 };
 
 const STEP_LABEL_KEYS = ["step1Label", "step2Label", "step3Label", "step4Label"] as const;

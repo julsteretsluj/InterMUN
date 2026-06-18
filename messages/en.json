@@ -872,6 +872,18 @@
       "step3Detail": "Upload/edit prep notes directly in-app.",
       "step4Label": "Join committee room + roll call",
       "step4Detail": "Wait for chair present-status approval, then speak."
+    },
+    "advisor": {
+      "title": "Advisor guide",
+      "subtitle": "How to support your delegates from the advisor hub.",
+      "step1Label": "Review your delegate cards",
+      "step1Detail": "Each card shows country, committee, documents, voting, and notes.",
+      "step2Label": "Open your conference schedule",
+      "step2Detail": "Pick your roster number (Advisor 1–20) for chamber rotation times.",
+      "step3Label": "Send notes to delegates",
+      "step3Detail": "Message guidance in-app; delegates reply in the same thread.",
+      "step4Label": "Browse help guides",
+      "step4Detail": "MUN terms, procedures, and conference references in one place."
     }
   },
   "advisorDashboard": {
