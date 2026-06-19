@@ -357,12 +357,9 @@ async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
   const delayMs = Number(args.find((a) => a.startsWith("--delay-ms="))?.split("=")[1] ?? "1200");
-  const xlsxPath = args.find((a) => !a.startsWith("--"));
-
-  if (!xlsxPath) {
-    console.error("Usage: node scripts/provision-delegates-from-matrix.mjs <matrix.xlsx> [--dry-run]");
-    process.exit(1);
-  }
+  const delegateIdx = args.indexOf("--delegate");
+  const delegateJson = delegateIdx >= 0 ? args[delegateIdx + 1] : null;
+  const xlsxPath = args.find((a) => !a.startsWith("--") && a !== delegateJson);
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -376,9 +373,27 @@ async function main() {
     process.exit(1);
   }
 
-  const delegates = parseDelegates(xlsxPath);
+  let delegates;
+  if (delegateJson) {
+    try {
+      delegates = [JSON.parse(delegateJson)];
+    } catch {
+      console.error("Invalid --delegate JSON");
+      process.exit(1);
+    }
+  } else {
+    if (!xlsxPath) {
+      console.error(
+        "Usage: node scripts/provision-delegates-from-matrix.mjs <matrix.xlsx> [--dry-run]\n" +
+          '   or: node scripts/provision-delegates-from-matrix.mjs --delegate \'{"sheet":"ECOSOC",...}\' [--dry-run]'
+      );
+      process.exit(1);
+    }
+    delegates = parseDelegates(xlsxPath);
+  }
+
   if (!delegates.length) {
-    console.error("No delegates with email found in spreadsheet.");
+    console.error("No delegates to provision.");
     process.exit(1);
   }
 

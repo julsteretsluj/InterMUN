@@ -76,7 +76,7 @@ export function AdvisorOversightPanel({ assignments }: { assignments: AdvisorAss
     () =>
       groupAdvisorDelegatesByDifficultyAndCommittee(assignments, {
         getCommittee: (a) => a.committee,
-        getSortLabel: (a) => a.delegate_name?.trim() || a.delegate_country,
+        getAllocationLabel: (a) => a.delegate_country,
       }),
     [assignments]
   );

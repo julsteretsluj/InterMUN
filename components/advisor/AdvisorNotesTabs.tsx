@@ -82,7 +82,7 @@ function SendNotesPanel({
     () =>
       groupAdvisorDelegatesByDifficultyAndCommittee(delegates, {
         getCommittee: (d) => d.committee,
-        getSortLabel: (d) => d.label,
+        getAllocationLabel: (d) => d.country,
       }),
     [delegates]
   );

@@ -1,4 +1,5 @@
 import { resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
+import { compareAllocationCountryDisplay } from "@/lib/allocation-display-order";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";
 
 export const ADVISOR_DIFFICULTY_SECTION_ORDER = ["Beginner", "Intermediate", "Advanced"] as const;
@@ -22,7 +23,7 @@ function difficultyBucketKey(committee: string | null | undefined): AdvisorDiffi
 function groupByCommittee<T>(
   items: T[],
   getCommittee: (item: T) => string | null | undefined,
-  getSortLabel: (item: T) => string
+  getAllocationLabel: (item: T) => string
 ): AdvisorCommitteeGroup<T>[] {
   const map = new Map<string, T[]>();
   for (const item of items) {
@@ -36,7 +37,7 @@ function groupByCommittee<T>(
     .map(([committee, committeeItems]) => ({
       committee,
       items: [...committeeItems].sort((a, b) =>
-        getSortLabel(a).localeCompare(getSortLabel(b), undefined, { sensitivity: "base" })
+        compareAllocationCountryDisplay(getAllocationLabel(a), getAllocationLabel(b))
       ),
     }))
     .sort((a, b) =>
@@ -44,15 +45,16 @@ function groupByCommittee<T>(
     );
 }
 
-/** Beginner → Intermediate → Advanced; within each, committees then delegate labels. */
+/** Beginner → Intermediate → Advanced; within each, committees then allocations A–Z. */
 export function groupAdvisorDelegatesByDifficultyAndCommittee<T>(
   items: T[],
   opts: {
     getCommittee: (item: T) => string | null | undefined;
-    getSortLabel?: (item: T) => string;
+    /** Country / delegation label used for alphabetical order within a committee. */
+    getAllocationLabel: (item: T) => string;
   }
 ): AdvisorDifficultyGroup<T>[] {
-  const getSortLabel = opts.getSortLabel ?? (() => "");
+  const getAllocationLabel = opts.getAllocationLabel;
   const byDifficulty = new Map<AdvisorDifficultyLevel | "other", T[]>();
 
   for (const item of items) {
@@ -69,7 +71,7 @@ export function groupAdvisorDelegatesByDifficultyAndCommittee<T>(
     if (!levelItems?.length) continue;
     sections.push({
       difficulty: level,
-      committees: groupByCommittee(levelItems, opts.getCommittee, getSortLabel),
+      committees: groupByCommittee(levelItems, opts.getCommittee, getAllocationLabel),
     });
   }
 
@@ -77,7 +79,7 @@ export function groupAdvisorDelegatesByDifficultyAndCommittee<T>(
   if (otherItems?.length) {
     sections.push({
       difficulty: null,
-      committees: groupByCommittee(otherItems, opts.getCommittee, getSortLabel),
+      committees: groupByCommittee(otherItems, opts.getCommittee, getAllocationLabel),
     });
   }
 
