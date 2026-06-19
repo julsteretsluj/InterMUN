@@ -6,6 +6,9 @@ import { useTranslations } from "next-intl";
 import { QueryTabs } from "@/components/ui/Tabs";
 import { AdvisorSendDelegateNoteForm } from "@/components/advisor/AdvisorSendDelegateNoteForm";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
+import { groupAdvisorDelegatesByDifficultyAndCommittee } from "@/lib/advisor-delegate-grouping";
+import { translateCommitteeLabel } from "@/lib/i18n/committee-topic-labels";
+import { translateCommitteeTagDifficulty } from "@/lib/i18n/committee-display-tags";
 
 export type AdvisorForwardedNote = {
   id: string;
@@ -29,6 +32,7 @@ export type AdvisorLinkedDelegate = {
   userId: string;
   label: string;
   country: string;
+  committee: string | null;
 };
 
 function ForwardedNotesList({ notes }: { notes: AdvisorForwardedNote[] }) {
@@ -70,11 +74,27 @@ function SendNotesPanel({
 }) {
   const t = useTranslations("advisorDashboard.notes");
   const ts = useTranslations("advisorDashboard.sendNote");
+  const tCommitteeLabels = useTranslations("committeeNames.labels");
+  const tCommitteeTags = useTranslations("committeeTags");
   const [selectedUserId, setSelectedUserId] = useState(() => delegates[0]?.userId ?? "");
 
+  const delegateSections = useMemo(
+    () =>
+      groupAdvisorDelegatesByDifficultyAndCommittee(delegates, {
+        getCommittee: (d) => d.committee,
+        getSortLabel: (d) => d.label,
+      }),
+    [delegates]
+  );
+
+  const sortedDelegates = useMemo(
+    () => delegateSections.flatMap((section) => section.committees.flatMap((group) => group.items)),
+    [delegateSections]
+  );
+
   const selectedDelegate = useMemo(
-    () => delegates.find((d) => d.userId === selectedUserId) ?? delegates[0] ?? null,
-    [delegates, selectedUserId]
+    () => sortedDelegates.find((d) => d.userId === selectedUserId) ?? sortedDelegates[0] ?? null,
+    [sortedDelegates, selectedUserId]
   );
 
   if (delegates.length === 0) {
@@ -103,11 +123,26 @@ function SendNotesPanel({
             onChange={(e) => setSelectedUserId(e.target.value)}
             className="mun-field w-full max-w-md"
           >
-            {delegates.map((d) => (
-              <option key={d.userId} value={d.userId}>
-                {flagEmojiForCountryName(d.country)} {d.label}
-              </option>
-            ))}
+            {delegateSections.map((section) =>
+              section.committees.map((group) => {
+                const committeeLabel = translateCommitteeLabel(tCommitteeLabels, group.committee);
+                const difficultyLabel = section.difficulty
+                  ? translateCommitteeTagDifficulty(section.difficulty, tCommitteeTags)
+                  : null;
+                return (
+                  <optgroup
+                    key={`${section.difficulty ?? "other"}-${group.committee}`}
+                    label={difficultyLabel ? `${committeeLabel} (${difficultyLabel})` : committeeLabel}
+                  >
+                    {group.items.map((d) => (
+                      <option key={d.userId} value={d.userId}>
+                        {flagEmojiForCountryName(d.country)} {d.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                );
+              })
+            )}
           </select>
         </div>
       ) : null}

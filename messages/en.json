@@ -896,6 +896,9 @@
     "viewVoting": "Voting",
     "sendNote": "Send note",
     "forwardedNotes": "Forwarded notes",
+    "oversight": {
+      "difficultyOther": "Other committees"
+    },
     "schedule": {
       "intro": "Pick your lunch group and roster number (Advisor 1–8 or 1–6). Your timetable is not tied to a committee — you rotate through your cohort’s chambers with partner swaps in the advisor / sensory room."
     },

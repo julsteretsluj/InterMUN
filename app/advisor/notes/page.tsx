@@ -62,6 +62,7 @@ export default async function AdvisorNotesPage() {
       userId: a.delegate_user_id,
       label: a.delegate_name?.trim() || a.delegate_country,
       country: a.delegate_country,
+      committee: a.committee,
     }));
 
   const forwardedNotes: AdvisorForwardedNote[] = (forwardedRes.data ?? []).map((n) => ({
