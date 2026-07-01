@@ -165,6 +165,17 @@ export default async function DashboardLayout({
   const liveFloorCanonicalId = debateBundle?.canonicalConferenceId ?? activeConf?.id ?? null;
   const liveFloorSiblings = debateBundle?.siblingConferenceIds ?? (activeConf?.id ? [activeConf.id] : []);
 
+  const heldNotesCount =
+    isChairRole(effectiveRole) && liveFloorSiblings.length > 0
+      ? (
+          await supabase
+            .from("delegation_notes")
+            .select("*", { count: "exact", head: true })
+            .in("conference_id", liveFloorSiblings)
+            .eq("moderation_state", "held")
+        ).count ?? 0
+      : 0;
+
 
   return (
     <div className="min-h-screen bg-[var(--desktop-bg)]">
@@ -194,6 +205,7 @@ export default async function DashboardLayout({
               conferenceLine={conferenceLine || ""}
               crisisReportingEnabled={crisisReportingEnabled}
               seamunScheduleEnabled={showSeamunLogo}
+              heldNotesCount={heldNotesCount}
             />
           ) : (
             <TabNav
@@ -263,6 +275,7 @@ export default async function DashboardLayout({
             conferenceLine={conferenceLine || ""}
             crisisReportingEnabled={crisisReportingEnabled}
             seamunScheduleEnabled={showSeamunLogo}
+            heldNotesCount={heldNotesCount}
           />
         ) : (
           <TabNav

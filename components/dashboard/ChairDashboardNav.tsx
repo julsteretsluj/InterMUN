@@ -128,12 +128,14 @@ function ChairNavRow({
   isActive,
   labelsHidden,
   priority,
+  badgeCount,
 }: {
   item: ChairNavItem;
   label: string;
   isActive: boolean;
   labelsHidden: boolean;
   priority: number;
+  badgeCount?: number;
 }) {
   return (
     <Link
@@ -141,7 +143,7 @@ function ChairNavRow({
       title={labelsHidden ? `${priority}. ${label}` : undefined}
       aria-label={`${priority}. ${label}`}
         className={cn(
-          "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-sm transition-apple",
+          "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0 pl-2",
         isActive
           ? "dashboard-nav-active text-[var(--accent)]"
@@ -160,7 +162,20 @@ function ChairNavRow({
       >
         <span className="text-base leading-none">{item.emoji}</span>
       </span>
-      {!labelsHidden ? <span className="min-w-0 truncate">{label}</span> : null}
+      {!labelsHidden ? (
+        <span className="flex min-w-0 flex-1 items-center gap-2">
+          <span className="min-w-0 truncate">{label}</span>
+          {badgeCount && badgeCount > 0 ? (
+            <span className="ml-auto inline-flex min-w-[1.25rem] shrink-0 items-center justify-center rounded-full bg-amber-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">
+              {badgeCount > 99 ? "99+" : badgeCount}
+            </span>
+          ) : null}
+        </span>
+      ) : badgeCount && badgeCount > 0 ? (
+        <span className="absolute right-1 top-1 inline-flex min-w-[1rem] items-center justify-center rounded-full bg-amber-500 px-1 py-0.5 text-[9px] font-bold leading-none text-white">
+          {badgeCount > 9 ? "9+" : badgeCount}
+        </span>
+      ) : null}
     </Link>
   );
 }
@@ -173,10 +188,12 @@ export function ChairDashboardSidebar({
   conferenceLine,
   crisisReportingEnabled,
   seamunScheduleEnabled = false,
+  heldNotesCount = 0,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
   seamunScheduleEnabled?: boolean;
+  heldNotesCount?: number;
 }) {
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
@@ -246,6 +263,7 @@ export function ChairDashboardSidebar({
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
             priority={index + 1}
+            badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
           />
         ))}
       </nav>
@@ -292,24 +310,26 @@ function DockItem({
   isActive,
   labelsHidden,
   priority,
+  badgeCount,
 }: {
   item: ChairNavItem;
   label: string;
   isActive: boolean;
   labelsHidden: boolean;
   priority: number;
+  badgeCount?: number;
 }) {
   return (
     <Link
       href={item.href}
       title={`${priority}. ${label}`}
       aria-label={`${priority}. ${label}`}
-      className="nav-priority-link nav-priority-link--dock group flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2 transition-apple active:scale-[0.97]"
+      className="nav-priority-link nav-priority-link--dock group relative flex shrink-0 snap-start flex-col items-center gap-1 px-1.5 py-2 transition-apple active:scale-[0.97]"
     >
       <NavPriorityBadge priority={priority} />
       <span
         className={cn(
-          "flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted",
+          "relative flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted",
           isActive &&
             "border-[color:color-mix(in_srgb,var(--accent)_55%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)] text-[var(--accent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_18%,transparent)_inset]"
         )}
@@ -317,6 +337,11 @@ function DockItem({
         <span className="text-sm leading-none" aria-hidden>
           {item.emoji}
         </span>
+        {badgeCount && badgeCount > 0 ? (
+          <span className="absolute -right-1 -top-1 inline-flex min-w-[1rem] items-center justify-center rounded-full bg-amber-500 px-1 py-0.5 text-[9px] font-bold leading-none text-white">
+            {badgeCount > 9 ? "9+" : badgeCount}
+          </span>
+        ) : null}
       </span>
       {!labelsHidden ? (
         <span
@@ -336,10 +361,12 @@ export function ChairMobileDock({
   conferenceLine,
   crisisReportingEnabled,
   seamunScheduleEnabled = false,
+  heldNotesCount = 0,
 }: {
   conferenceLine: string;
   crisisReportingEnabled: boolean;
   seamunScheduleEnabled?: boolean;
+  heldNotesCount?: number;
 }) {
   const t = useTranslations("chairNav");
   const tItems = useTranslations("chairNav.items");
@@ -406,6 +433,7 @@ export function ChairMobileDock({
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
             priority={index + 1}
+            badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
           />
         ))}
         <button

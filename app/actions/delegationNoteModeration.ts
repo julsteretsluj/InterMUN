@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export async function moderateDelegationNoteAction({
@@ -27,5 +28,8 @@ export async function moderateDelegationNoteAction({
   });
 
   if (error) return { error: error.message };
+
+  revalidatePath("/chats-notes");
+  revalidatePath("/chair/notes-moderation");
   return { ok: true };
 }
