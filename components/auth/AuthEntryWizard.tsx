@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Armchair, Building2, ChevronLeft, ChevronRight, GraduationCap, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { getAppName } from "@/lib/branding";
+import { BrandWordmark } from "@/components/BrandWordmark";
 import { INTERMUN_ENTRY_ROLE_KEY, type InterMunEntryRole } from "@/lib/entry-role";
 import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
 import { applyConferenceCodeForAuthWizard } from "@/app/actions/eventGate";
@@ -69,7 +69,6 @@ export function AuthEntryWizard({
   const t = useTranslations("authWizard");
   const tc = useTranslations("common");
   const router = useRouter();
-  const appName = getAppName();
   const [step, setStep] = useState<Step>("welcome");
   const [roleIndex, setRoleIndex] = useState(0);
   const dialRef = useRef<HTMLDivElement>(null);
@@ -259,12 +258,13 @@ export function AuthEntryWizard({
     <div className="w-full">
       {step === "welcome" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
+          <BrandWordmark size="hero" />
           <div
             className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
           />
           <h1 className="font-display text-3xl md:text-4xl font-semibold text-brand-navy tracking-tight">
-            {t("enterApp", { appName })}
+            {t("enterApp")}
           </h1>
           <p className="text-sm text-brand-muted max-w-sm mx-auto">
             {mode === "signup"
@@ -274,9 +274,14 @@ export function AuthEntryWizard({
           <button
             type="button"
             onClick={() => setStep("conference")}
-            className="mun-btn-primary w-full max-w-xs mx-auto rounded-xl py-3.5 text-base font-semibold"
+            className="mun-btn-primary group/continue mx-auto flex w-full max-w-xs items-center justify-center gap-2 rounded-xl py-3.5 text-base font-semibold"
           >
             {tc("continue")}
+            <ChevronRight
+              className="size-5 transition-transform duration-[var(--dur-base)] ease-[var(--ease-apple)] group-hover/continue:translate-x-0.5"
+              strokeWidth={2.25}
+              aria-hidden
+            />
           </button>
         </div>
       ) : null}

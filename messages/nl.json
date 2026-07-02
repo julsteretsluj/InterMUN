@@ -556,7 +556,7 @@
     "defaultDisplayName": "Delegeren"
   },
   "authWizard": {
-    "enterApp": "Voer {appName} in",
+    "enterApp": "Begin je conferentiereis",
     "welcomeSignup": "Voer eerst uw conferentiecode in, kies hoe u deelneemt en maak vervolgens uw account aan.",
     "welcomeLogin": "Voer eerst uw conferentiecode in, kies hoe u deelneemt en meld u vervolgens aan.",
     "conferenceTitle": "Neem deel aan uw conferentie",

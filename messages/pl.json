@@ -556,7 +556,7 @@
     "defaultDisplayName": "Delegat"
   },
   "authWizard": {
-    "enterApp": "Wpisz {nazwa aplikacji}",
+    "enterApp": "Rozpocznij swoją konferencyjną podróż",
     "welcomeSignup": "Najpierw wpisz swój kod konferencji, wybierz sposób uczestnictwa, a następnie utwórz konto.",
     "welcomeLogin": "Najpierw wprowadź kod konferencji, wybierz sposób uczestnictwa, a następnie zaloguj się.",
     "conferenceTitle": "Dołącz do swojej konferencji",

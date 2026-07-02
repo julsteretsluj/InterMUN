@@ -556,7 +556,7 @@
     "defaultDisplayName": "Delegieren"
   },
   "authWizard": {
-    "enterApp": "Geben Sie {appName} ein",
+    "enterApp": "Starte deine Konferenzreise",
     "welcomeSignup": "Geben Sie zunächst Ihren Konferenzcode ein, wählen Sie die Art Ihrer Teilnahme aus und erstellen Sie dann Ihr Konto.",
     "welcomeLogin": "Geben Sie zunächst Ihren Konferenzcode ein, wählen Sie die Art Ihrer Teilnahme aus und melden Sie sich dann an.",
     "conferenceTitle": "Nehmen Sie an Ihrer Konferenz teil",

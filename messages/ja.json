@@ -556,7 +556,7 @@
     "defaultDisplayName": "代表者"
   },
   "authWizard": {
-    "enterApp": "{アプリ名}を入力してください",
+    "enterApp": "会議の旅を始めましょう",
     "welcomeSignup": "最初にカンファレンス コードを入力し、参加方法を選択して、アカウントを作成します。",
     "welcomeLogin": "最初に会議コードを入力し、参加方法を選択して、サインインします。",
     "conferenceTitle": "カンファレンスに参加してください",

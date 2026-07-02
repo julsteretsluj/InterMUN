@@ -556,7 +556,7 @@
     "defaultDisplayName": "Delegate"
   },
   "authWizard": {
-    "enterApp": "Enter {appName}",
+    "enterApp": "Start your conference journey",
     "welcomeSignup": "Enter your conference code first, choose how you participate, then create your account.",
     "welcomeLogin": "Enter your conference code first, choose how you participate, then sign in.",
     "conferenceTitle": "Join your conference",

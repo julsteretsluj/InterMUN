@@ -556,7 +556,7 @@
     "defaultDisplayName": "대리자"
   },
   "authWizard": {
-    "enterApp": "{앱 이름}을(를) 입력하세요",
+    "enterApp": "회의 여정을 시작하세요",
     "welcomeSignup": "먼저 컨퍼런스 코드를 입력하고 참여 방법을 선택한 다음 계정을 만드세요.",
     "welcomeLogin": "먼저 컨퍼런스 코드를 입력하고 참여 방법을 선택한 다음 로그인하세요.",
     "conferenceTitle": "회의에 참여하세요",

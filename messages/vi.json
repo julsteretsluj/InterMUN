@@ -556,7 +556,7 @@
     "defaultDisplayName": "Đại biểu"
   },
   "authWizard": {
-    "enterApp": "Nhập {appName}",
+    "enterApp": "Bắt đầu hành trình hội nghị của bạn",
     "welcomeSignup": "Nhập mã hội nghị của bạn trước, chọn cách bạn tham gia, sau đó tạo tài khoản của bạn.",
     "welcomeLogin": "Nhập mã hội nghị của bạn trước, chọn cách bạn tham gia, sau đó đăng nhập.",
     "conferenceTitle": "Tham gia hội nghị của bạn",

@@ -556,7 +556,7 @@
     "defaultDisplayName": "Temsilci"
   },
   "authWizard": {
-    "enterApp": "{appName} girin",
+    "enterApp": "Konferans yolculuğunuza başlayın",
     "welcomeSignup": "Önce konferans kodunuzu girin, nasıl katılacağınızı seçin, ardından hesabınızı oluşturun.",
     "welcomeLogin": "Önce konferans kodunuzu girin, nasıl katılacağınızı seçin ve ardından oturum açın.",
     "conferenceTitle": "Konferansınıza katılın",

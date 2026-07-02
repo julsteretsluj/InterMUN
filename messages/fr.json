@@ -556,7 +556,7 @@
     "defaultDisplayName": "Déléguer"
   },
   "authWizard": {
-    "enterApp": "Saisissez {appName}",
+    "enterApp": "Commencez votre parcours de conférence",
     "welcomeSignup": "Entrez d'abord votre code de conférence, choisissez comment vous participez, puis créez votre compte.",
     "welcomeLogin": "Entrez d'abord votre code de conférence, choisissez comment vous participez, puis connectez-vous.",
     "conferenceTitle": "Rejoignez votre conférence",

@@ -556,7 +556,7 @@
     "defaultDisplayName": "Delegar"
   },
   "authWizard": {
-    "enterApp": "Digite {appName}",
+    "enterApp": "Comece a sua jornada na conferência",
     "welcomeSignup": "Insira primeiro o código da conferência, escolha como você participa e, em seguida, crie sua conta.",
     "welcomeLogin": "Insira primeiro o código da conferência, escolha como você participará e depois faça login.",
     "conferenceTitle": "Participe da sua conferência",

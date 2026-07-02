@@ -556,7 +556,7 @@
     "defaultDisplayName": "Perwakilan"
   },
   "authWizard": {
-    "enterApp": "Masukkan {appName}",
+    "enterApp": "Mulakan perjalanan persidangan anda",
     "welcomeSignup": "Masukkan kod persidangan anda dahulu, pilih cara anda mengambil bahagian, kemudian buat akaun anda.",
     "welcomeLogin": "Masukkan kod persidangan anda dahulu, pilih cara anda mengambil bahagian, kemudian log masuk.",
     "conferenceTitle": "Sertai persidangan anda",

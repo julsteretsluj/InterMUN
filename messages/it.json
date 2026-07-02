@@ -556,7 +556,7 @@
     "defaultDisplayName": "Delegare"
   },
   "authWizard": {
-    "enterApp": "Inserisci {appName}",
+    "enterApp": "Inizia il tuo percorso in conferenza",
     "welcomeSignup": "Inserisci prima il codice della conferenza, scegli come partecipare, quindi crea il tuo account.",
     "welcomeLogin": "Inserisci prima il codice della conferenza, scegli come partecipare, quindi accedi.",
     "conferenceTitle": "Partecipa alla tua conferenza",
