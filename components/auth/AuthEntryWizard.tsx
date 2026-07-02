@@ -303,6 +303,7 @@ export function AuthEntryWizard({
             <ChevronLeft className="size-4" strokeWidth={2} />
             {t("back")}
           </button>
+          <BrandWordmark className="mb-4" />
           <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-2">{t("conferenceTitle")}</h2>
           <p className="text-sm text-brand-muted text-center mb-6">
             {t("conferenceDescription", {
