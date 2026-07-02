@@ -74,6 +74,41 @@ export const LOCALE_LABELS: Record<AppLocale, string> = {
   ms: "Bahasa Melayu (Malay)",
 };
 
+/** Representative flag emoji per locale (best-effort; language ≠ country). */
+export const LOCALE_FLAGS: Record<AppLocale, string> = {
+  en: "🇬🇧",
+  es: "🇪🇸",
+  fr: "🇫🇷",
+  de: "🇩🇪",
+  pt: "🇵🇹",
+  "pt-BR": "🇧🇷",
+  it: "🇮🇹",
+  nl: "🇳🇱",
+  ru: "🇷🇺",
+  pl: "🇵🇱",
+  uk: "🇺🇦",
+  el: "🇬🇷",
+  tr: "🇹🇷",
+  "zh-CN": "🇨🇳",
+  "zh-TW": "🇹🇼",
+  ja: "🇯🇵",
+  ko: "🇰🇷",
+  vi: "🇻🇳",
+  th: "🇹🇭",
+  id: "🇮🇩",
+  hi: "🇮🇳",
+  bn: "🇧🇩",
+  ar: "🇸🇦",
+  fa: "🇮🇷",
+  he: "🇮🇱",
+  sw: "🇰🇪",
+  mi: "🇳🇿",
+  km: "🇰🇭",
+  lo: "🇱🇦",
+  my: "🇲🇲",
+  ms: "🇲🇾",
+};
+
 export function isSupportedLocale(value: string | null | undefined): value is AppLocale {
   return SUPPORTED_LOCALES.includes((value ?? "") as AppLocale);
 }

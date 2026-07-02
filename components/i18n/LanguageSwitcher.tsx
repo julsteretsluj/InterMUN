@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
   LOCALE_COOKIE_NAME,
+  LOCALE_FLAGS,
   LOCALE_LABELS,
   SUPPORTED_LOCALES,
   type AppLocale,
@@ -41,7 +42,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       >
         {SUPPORTED_LOCALES.map((code) => (
           <option key={code} value={code}>
-            {LOCALE_LABELS[code]}
+            {LOCALE_FLAGS[code]} {LOCALE_LABELS[code]}
           </option>
         ))}
       </select>
