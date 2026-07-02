@@ -630,6 +630,7 @@
     "on": "On",
     "off": "Off",
     "hues": {
+      "green": "Green",
       "blue": "Blue",
       "red": "Red",
       "orange": "Orange",

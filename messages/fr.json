@@ -618,6 +618,7 @@
     "on": "Sur",
     "off": "Désactivé",
     "hues": {
+      "green": "Vert",
       "blue": "Bleue",
       "red": "Rouge",
       "orange": "Orange",

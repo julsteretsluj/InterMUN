@@ -618,6 +618,7 @@
     "on": "Açık",
     "off": "Kapalı",
     "hues": {
+      "green": "Yeşil",
       "blue": "Mavi",
       "red": "Kırmızı",
       "orange": "Turuncu",

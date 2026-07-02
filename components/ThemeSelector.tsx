@@ -27,7 +27,8 @@ const HUE_META: Record<
   ThemeHue,
   { name: string; swatch: string; swatchDark?: string }
 > = {
-  blue: { name: "Blue", swatch: "bg-brand-accent" },
+  blue: { name: "Blue", swatch: "bg-[#00509d]" },
+  green: { name: "Green", swatch: "bg-emerald-600" },
   red: { name: "Red", swatch: "bg-red-600" },
   orange: { name: "Orange", swatch: "bg-orange-500" },
   yellow: { name: "Yellow", swatch: "bg-yellow-500" },

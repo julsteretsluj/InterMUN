@@ -618,6 +618,7 @@
     "on": "An",
     "off": "Aus",
     "hues": {
+      "green": "Grün",
       "blue": "Blau",
       "red": "Rot",
       "orange": "Orange",

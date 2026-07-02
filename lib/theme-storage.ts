@@ -23,6 +23,7 @@ export type ThemePreference = "light" | "dark";
 
 export const THEME_HUES = [
   "blue",
+  "green",
   "red",
   "orange",
   "yellow",
@@ -33,8 +34,8 @@ export const THEME_HUES = [
 
 export type ThemeHue = (typeof THEME_HUES)[number];
 
-/** Default accent (explicit `theme-blue` rules). */
+/** Brand default accent (diplomatic navy — `theme-blue` rules). */
 export const DEFAULT_THEME_HUE: ThemeHue = "blue";
 
-/** Removed from picker; strip `theme-green` from `<html>` on apply (legacy stored key). */
-export const LEGACY_THEME_HUE_CLEANUP = ["green"] as const;
+/** Hue keys removed from the picker but still stripped from `<html>` on apply. */
+export const LEGACY_THEME_HUE_CLEANUP = [] as const;

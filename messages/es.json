@@ -618,6 +618,7 @@
     "on": "En",
     "off": "Apagada",
     "hues": {
+      "green": "Verde",
       "blue": "Azul",
       "red": "Roja",
       "orange": "Naranja",

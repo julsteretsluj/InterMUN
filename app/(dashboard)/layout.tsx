@@ -254,7 +254,8 @@ export default async function DashboardLayout({
         <DashboardAnnouncementPopup />
         <main className="w-full flex-1 overflow-y-auto px-4 py-6 pb-[calc(7.5rem+env(safe-area-inset-bottom))] sm:px-6 md:py-8 lg:pb-8">
           {activeConf?.id && showsDaisTools(effectiveRole) ? (
-            <div className="mb-6 border-y border-[var(--hairline)] bg-white px-4 py-4 shadow-sm sm:px-6 dark:bg-[var(--material-thick)] dark:backdrop-blur-xl">
+            <div className="mun-rise mb-6 overflow-hidden rounded-2xl border border-[var(--hairline)] border-l-[3px] border-l-[color:var(--gold)] bg-[var(--dashboard-card)] px-4 py-4 shadow-[var(--dashboard-shadow)] sm:px-6 dark:bg-[var(--material-thick)] dark:backdrop-blur-xl">
+
               <div className="w-full">
                 <ChairLiveFloorThemed
                   conferenceId={liveFloorConferenceId ?? activeConf.id}

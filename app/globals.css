@@ -31,11 +31,21 @@ html {
   --dur-base: 220ms;
   --dur-slow: 320ms;
 
-  /* —— Soft dashboard (light) —— */
-  --dashboard-cream: #f9f7f2;
-  --dashboard-card: #ffffff;
-  --dashboard-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.08);
-  --dashboard-shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.05), 0 12px 28px -10px rgba(15, 23, 42, 0.1);
+  /* —— Soft dashboard (light) — warm parchment canvas (Gavelling-inspired) —— */
+  --dashboard-cream: #f4f0e6;
+  --dashboard-card: #fffdf8;
+  --dashboard-shadow: 0 1px 2px rgba(45, 35, 18, 0.05), 0 10px 28px -14px rgba(45, 35, 18, 0.12);
+  --dashboard-shadow-hover: 0 2px 5px rgba(45, 35, 18, 0.07), 0 16px 34px -12px rgba(45, 35, 18, 0.16);
+
+  /* —— Brand: diplomatic navy + gold (source of truth for --accent/gold) —— */
+  --navy-deep: #00296b;
+  --navy: #003f88;
+  --navy-bright: #00509d;
+  --navy-glass: rgba(0, 41, 107, 0.72);
+  --gold: #fdc500;
+  --gold-bright: #ffd500;
+  --gold-soft: #ffe273;
+  --parchment: var(--dashboard-cream);
 
   /* —— Apple system colors (light / sRGB) —— */
   --system-blue: #2563eb;
@@ -77,8 +87,8 @@ html {
   --logo-green: #34c759;
 
   /* —— ACCENT (theme hue overrides target --accent / --accent-bright) —— */
-  --accent: var(--system-blue);
-  --accent-bright: #3b82f6;
+  --accent: var(--navy-bright);
+  --accent-bright: color-mix(in srgb, var(--navy-bright) 76%, #ffffff);
 
   /* —— PAGE —— */
   --color-bg-page: var(--dashboard-cream);
@@ -109,7 +119,7 @@ html {
   --brand-accent: var(--accent);
   --brand-accent-bright: var(--accent-bright);
   --brand-diplomatic: color-mix(in srgb, var(--accent) 58%, var(--color-text));
-  --brand-gold: #c2a878;
+  --brand-gold: var(--gold);
 
   --brand-navy-soft: rgba(60, 60, 67, 0.08);
   --brand-silver: #8e8e93;
@@ -160,8 +170,17 @@ html.dark {
   --system-teal: #64d2ff;
   --system-indigo: #5e5ce6;
 
-  --accent: var(--system-blue);
-  --accent-bright: #64b5ff;
+  /* —— Brand: navy + gold tuned for glass-over-black —— */
+  --navy-deep: #041a3d;
+  --navy: #0a3a6e;
+  --navy-bright: #2f7fd0;
+  --navy-glass: rgba(6, 26, 55, 0.62);
+  --gold: #fdc500;
+  --gold-bright: #ffd500;
+  --gold-soft: #cbb25e;
+
+  --accent: #2f7fd0;
+  --accent-bright: #5aa0e6;
 
   /* —— True black page (glass over black) —— */
   --color-bg-page: #000000;
@@ -205,7 +224,7 @@ html.dark {
   --brand-accent: var(--accent);
   --brand-accent-bright: var(--accent-bright);
   --brand-diplomatic: var(--accent-bright);
-  --brand-gold: #d4c4a8;
+  --brand-gold: var(--gold);
 
   --brand-navy-soft: rgba(255, 255, 255, 0.1);
   --brand-silver: #aeaeb2;
@@ -275,6 +294,12 @@ html.dark {
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-gold: var(--brand-gold);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy: var(--navy);
+  --color-navy-bright: var(--navy-bright);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-soft: var(--gold-soft);
   --color-logo-cyan: var(--logo-cyan);
   --color-logo-blue: var(--logo-blue);
   --color-logo-magenta: var(--logo-magenta);
@@ -319,6 +344,129 @@ html.dyslexic-font body {
   .spring-tap:active {
     transform: scale(0.97);
   }
+
+  /* Entrance — content rises and settles (Gavelling/Apple feel) */
+  .mun-rise {
+    animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
+  }
+  .mun-rise-2 {
+    animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
+    animation-delay: 60ms;
+  }
+  .mun-rise-3 {
+    animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
+    animation-delay: 120ms;
+  }
+
+  /* Pill / badge pop-in */
+  .mun-pop {
+    animation: mun-pop var(--dur-base) var(--ease-apple-out) both;
+  }
+
+  /* Gold gavel-tap emphasis (e.g. on a motion passing) */
+  .mun-gavel:active {
+    animation: mun-gavel 320ms var(--ease-apple);
+  }
+
+  /* Live shimmer sweep for "in session" chrome */
+  .mun-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .mun-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      color-mix(in srgb, var(--gold-bright) 30%, transparent) 50%,
+      transparent 80%
+    );
+    transform: translateX(-100%);
+    animation: mun-shimmer 2.8s var(--ease-apple) infinite;
+    pointer-events: none;
+  }
+
+  /* Soft pulse for live status dots */
+  .mun-live-dot {
+    animation: mun-live-pulse 2s var(--ease-apple) infinite;
+  }
+}
+
+@keyframes mun-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mun-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  60% {
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mun-gavel {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(-9deg) scale(1.03);
+  }
+  55% {
+    transform: rotate(4deg) scale(1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes mun-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes mun-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+}
+
+/* Honor reduced-motion: disable entrance/ambient animations */
+@media (prefers-reduced-motion: reduce) {
+  .mun-rise,
+  .mun-rise-2,
+  .mun-rise-3,
+  .mun-pop,
+  .mun-shell,
+  .mun-shimmer::after,
+  .mun-live-dot {
+    animation: none !important;
+  }
 }
 
 /* —— PAGE —— */
@@ -328,8 +476,19 @@ body {
   color: var(--foreground);
 }
 
+/* Warm parchment grain — barely-there tint so cards float above the canvas */
+html:not(.dark) body {
+  background-image:
+    radial-gradient(1200px 800px at 12% -8%, color-mix(in srgb, var(--gold) 8%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 92% 4%, color-mix(in srgb, var(--navy-bright) 6%, transparent), transparent 55%);
+  background-attachment: fixed;
+}
+
 html.dark body {
   background-color: var(--background);
+  background-image:
+    radial-gradient(1100px 760px at 88% -6%, color-mix(in srgb, var(--navy-bright) 12%, transparent), transparent 58%);
+  background-attachment: fixed;
 }
 
 /* —— Scrollbars: Finder-style translucent thumb (light + dark) —— */
@@ -376,6 +535,22 @@ html.dark .theme-page-glow {
 }
 
 /* Hue presets: Apple system tints on accent; page stay grouped / black in dark */
+/* Standalone green option */
+html.theme-green:not(.dark) {
+  --accent: #2f855a;
+  --accent-bright: #3d9e6c;
+}
+html.theme-green:not(.dark) body {
+  background-color: color-mix(in srgb, var(--accent) 3%, var(--background));
+}
+html.theme-green.dark {
+  --accent: #3fa06a;
+  --accent-bright: #5cc088;
+}
+html.theme-green.dark body {
+  background-color: var(--background);
+}
+
 html.theme-red:not(.dark) {
   --accent: var(--system-red);
   --accent-bright: #ff6961;
@@ -421,16 +596,17 @@ html.theme-yellow.dark body {
   background-color: var(--background);
 }
 
+/* Brand default — diplomatic navy */
 html.theme-blue:not(.dark) {
-  --accent: var(--system-blue);
-  --accent-bright: #5ac8fa;
+  --accent: var(--navy-bright);
+  --accent-bright: color-mix(in srgb, var(--navy-bright) 76%, #ffffff);
 }
 html.theme-blue:not(.dark) body {
   background-color: color-mix(in srgb, var(--accent) 3%, var(--background));
 }
 html.theme-blue.dark {
-  --accent: var(--system-blue);
-  --accent-bright: #64b5ff;
+  --accent: #2f7fd0;
+  --accent-bright: #5aa0e6;
 }
 html.theme-blue.dark body {
   background-color: var(--background);
@@ -492,7 +668,8 @@ html.theme-neutral.dark body {
   background-image: var(--toolbar-gradient);
 }
 html:not(.dark) .mun-toolbar-titlebar {
-  @apply border-b border-[var(--hairline)] bg-white shadow-sm;
+  @apply border-b border-[var(--hairline)] shadow-sm;
+  background-color: color-mix(in srgb, var(--dashboard-card) 82%, transparent);
 }
 
 /* Apple-style focus (blue halo) */
@@ -589,6 +766,15 @@ html.dark ::selection {
   .dashboard-status-badge--warning {
     @apply border-amber-200 bg-amber-50 text-amber-900;
   }
+  .dashboard-status-badge--gold {
+    border-color: color-mix(in srgb, var(--gold) 45%, var(--hairline));
+    background-color: color-mix(in srgb, var(--gold) 16%, var(--color-bg-page));
+    color: color-mix(in srgb, var(--gold) 72%, #4a3410);
+  }
+  html.dark .dashboard-status-badge--gold {
+    color: var(--gold-bright);
+    background-color: color-mix(in srgb, var(--gold) 18%, transparent);
+  }
 
   .note-avatar {
     @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold;
@@ -601,6 +787,7 @@ html.dark ::selection {
     border: none;
     background: transparent;
     box-shadow: none;
+    animation: mun-rise var(--dur-slow) var(--ease-apple-out) both;
   }
 
   html.dark .mun-shell {
@@ -608,8 +795,19 @@ html.dark ::selection {
   }
 
   .mun-shell-title {
-    @apply mb-4 font-display text-xl font-semibold text-brand-navy;
+    @apply mb-4 font-display text-xl font-extrabold text-brand-navy;
     @apply tracking-tight md:text-2xl;
+    letter-spacing: -0.02em;
+  }
+  /* Gavelling-style gold accent bar under page titles */
+  .mun-shell-title::after {
+    content: "";
+    display: block;
+    width: 2.25rem;
+    height: 3px;
+    margin-top: 0.5rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
   }
   html.dark .mun-shell-title {
     @apply mb-5 text-[1.75rem] md:text-[2rem] tracking-[-0.02em];
@@ -701,6 +899,57 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--accent) 88%, #ffffff);
   }
 
+  /* Warm gold call-to-action — deep navy ink on gold (diplomatic hero button) */
+  .mun-btn-gold {
+    @apply border border-transparent px-4 py-2 text-sm font-bold disabled:opacity-45;
+    @apply [border-radius:var(--radius-pill)];
+    transition: transform var(--dur-fast) var(--ease-apple), background-color var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple);
+    color: var(--navy-deep);
+    background-color: var(--gold);
+    background-image: linear-gradient(180deg, color-mix(in srgb, #ffffff 26%, transparent) 0%, transparent 60%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 0 0 0.5px rgba(0, 0, 0, 0.14) inset,
+      0 2px 6px -1px color-mix(in srgb, var(--gold) 45%, transparent);
+  }
+  .mun-btn-gold:hover:not(:disabled) {
+    background-color: var(--gold-bright);
+  }
+  .mun-btn-gold:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+  html.dark .mun-btn-gold {
+    color: #001233;
+  }
+
+  /* Gentle hover lift for interactive cards / tiles */
+  .mun-lift {
+    transition: transform var(--dur-base) var(--ease-apple), box-shadow var(--dur-base) var(--ease-apple), border-color var(--dur-base) var(--ease-apple);
+  }
+  .mun-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--dashboard-shadow-hover);
+    border-color: color-mix(in srgb, var(--accent) 26%, var(--hairline));
+  }
+  html.dark .mun-lift:hover {
+    border-color: color-mix(in srgb, var(--accent) 32%, var(--hairline));
+    box-shadow: 0 14px 36px -14px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Two-tone editorial display heading: heavy sans + serif-italic gold emphasis */
+  .mun-display {
+    @apply font-display font-extrabold tracking-tight;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+  .mun-emph {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: -0.01em;
+  }
+
   .mun-btn-danger {
     @apply border border-transparent px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
     @apply [border-radius:var(--radius-pill)];
@@ -762,6 +1011,10 @@ html.dark ::selection {
     color: var(--semantic-info);
     background-color: color-mix(in srgb, var(--semantic-info) 16%, var(--color-bg-page));
   }
+  .tag-gold {
+    color: color-mix(in srgb, var(--gold) 72%, #4a3410);
+    background-color: color-mix(in srgb, var(--gold) 22%, var(--color-bg-page));
+  }
   html.dark .tag-neutral {
     background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
   }
@@ -779,6 +1032,10 @@ html.dark ::selection {
   }
   html.dark .tag-info {
     background-color: color-mix(in srgb, var(--semantic-info) 20%, transparent);
+  }
+  html.dark .tag-gold {
+    color: var(--gold-bright);
+    background-color: color-mix(in srgb, var(--gold) 22%, transparent);
   }
 
   /* Inset grouped list (macOS System Settings) */

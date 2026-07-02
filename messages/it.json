@@ -618,6 +618,7 @@
     "on": "SU",
     "off": "Spento",
     "hues": {
+      "green": "Verde",
       "blue": "Blu",
       "red": "Rossa",
       "orange": "Arancia",
