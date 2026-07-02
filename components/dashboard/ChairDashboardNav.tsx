@@ -146,16 +146,16 @@ function ChairNavRow({
           "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0 pl-2",
         isActive
-          ? "dashboard-nav-active text-[var(--accent)]"
+          ? "dashboard-nav-active"
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
       )}
     >
       {!labelsHidden ? <NavPriorityBadge priority={priority} /> : null}
       <span
         className={cn(
-          "flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent",
+          "flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-transparent transition-apple",
           isActive
-            ? "border-transparent bg-[color:color-mix(in_srgb,var(--accent)_18%,#ffffff)]"
+            ? "border-white/25 bg-white/20 shadow-[0_1px_0_rgba(255,255,255,0.25)_inset]"
             : "bg-[color:color-mix(in_srgb,var(--color-text)_4%,#ffffff)]"
         )}
         aria-hidden
@@ -329,9 +329,9 @@ function DockItem({
       <NavPriorityBadge priority={priority} />
       <span
         className={cn(
-          "relative flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted",
+          "relative flex h-8 min-w-8 items-center justify-center rounded-[var(--radius-md)] border border-transparent text-brand-muted transition-apple",
           isActive &&
-            "border-[color:color-mix(in_srgb,var(--accent)_55%,var(--hairline))] bg-[color:color-mix(in_srgb,var(--accent)_14%,transparent)] text-[var(--accent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_18%,transparent)_inset]"
+            "bg-[var(--accent)] text-white shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_6px_16px_-8px_color-mix(in_srgb,var(--accent)_65%,transparent)]"
         )}
       >
         <span className="text-sm leading-none" aria-hidden>

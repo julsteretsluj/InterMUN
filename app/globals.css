@@ -731,8 +731,18 @@ html.dark ::selection {
     @apply font-display text-lg font-semibold tracking-tight text-brand-navy md:text-xl;
   }
 
+  /* Active nav — filled diplomatic pill w/ gold indicator (Gavelling signature) */
   .dashboard-nav-active {
-    @apply bg-[var(--discord-active-bg)] font-semibold text-[var(--accent)];
+    position: relative;
+    background-color: var(--accent);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.22) inset,
+      0 6px 16px -8px color-mix(in srgb, var(--accent) 65%, transparent);
+  }
+  .dashboard-nav-active :is(svg, .lucide) {
+    color: #ffffff;
   }
 
   .dashboard-status-badge {
@@ -747,8 +757,15 @@ html.dark ::selection {
   .nav-priority-badge {
     @apply absolute left-1 top-1 z-[1] flex h-[1.125rem] min-w-[1.125rem] items-center justify-center rounded-full bg-[var(--accent)] px-0.5 text-[0.625rem] font-bold leading-none text-white shadow-[0_1px_2px_rgba(15,23,42,0.12)];
   }
+  /* Gold numbered chip on active nav pill + hub tiles (Gavelling) */
+  .dashboard-nav-active .nav-priority-badge {
+    background-color: var(--gold);
+    color: var(--navy-deep);
+  }
   .nav-priority-badge--tile {
-    @apply left-2.5 top-2.5 h-[1.125rem] w-[1.125rem] px-0;
+    @apply left-2.5 top-2.5 h-[1.375rem] w-[1.375rem] px-0 text-[0.6875rem];
+    background-color: var(--gold);
+    color: var(--navy-deep);
   }
   .nav-priority-link {
     @apply relative pl-8;

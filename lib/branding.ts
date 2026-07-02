@@ -6,6 +6,9 @@
 /** App emblem — RGBA PNG (`public/intermun-emblem.png`). Used for UI; square tab icons are `app/icon.png` / `app/apple-icon.png`. */
 export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png";
 
+/** Light-mode variant — rainbow chain wordmark (`public/intermun-emblem-light.png`). */
+export const INTERMUN_EMBLEM_LIGHT_PATH = "/intermun-emblem-light.png";
+
 export function getAppName(): string {
   return process.env.NEXT_PUBLIC_APP_NAME?.trim() || "InterMUN";
 }

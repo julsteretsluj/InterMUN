@@ -124,7 +124,11 @@ export default async function ChairOverviewPage({
     <MunPageShell title={t("chairRoom")}>
       <div className="space-y-8">
         <header className="space-y-3">
-          <h1 className="font-display text-[1.85rem] font-semibold text-brand-navy">
+          <span
+            aria-hidden
+            className="block h-[3px] w-10 rounded-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-bright)]"
+          />
+          <h1 className="mun-display text-[1.95rem] text-brand-navy">
             {tPage("welcome", { committee: committeeLabel })}
           </h1>
           <p className="text-base font-medium text-brand-navy dark:text-zinc-100">

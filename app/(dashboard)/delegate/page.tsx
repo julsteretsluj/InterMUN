@@ -133,9 +133,15 @@ export default async function DelegateDashboardPage({
   return (
     <MunPageShell title={tp("delegateDashboard")}>
       <div className="space-y-6">
-        <header className="dashboard-panel !p-5 md:!p-6">
-          <p className="text-xs font-semibold uppercase tracking-wider text-brand-muted">{line}</p>
-          <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-brand-navy md:text-[1.65rem]">
+        <header className="dashboard-panel relative overflow-hidden !p-5 md:!p-6">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[var(--gold)] via-[var(--gold-bright)] to-transparent"
+          />
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[color:color-mix(in_srgb,var(--gold)_72%,var(--color-text))] dark:text-[var(--gold-bright)]">
+            {line}
+          </p>
+          <h1 className="mun-display mt-1.5 text-2xl text-brand-navy md:text-[1.75rem]">
             {td("welcome", { flag: countryFlag, country: countryLabel })}
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-brand-muted">
@@ -143,7 +149,7 @@ export default async function DelegateDashboardPage({
             {td("activeCommitteeBody")}
           </p>
           <div className="mt-3">
-            <span className="dashboard-status-badge dashboard-status-badge--info">{tc("committee")}</span>
+            <span className="dashboard-status-badge dashboard-status-badge--gold">{tc("committee")}</span>
           </div>
         </header>
 

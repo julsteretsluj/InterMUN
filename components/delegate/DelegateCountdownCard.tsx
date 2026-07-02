@@ -131,37 +131,32 @@ export function DelegateCountdownCard({ conferenceId }: { conferenceId: string }
   };
 
   return (
-    <section
-      id="countdown"
-      className="dashboard-panel scroll-mt-24 h-full dark:border-zinc-700 dark:bg-zinc-900/80"
-    >
-      <h2 className="dashboard-panel-title">
-        ⏱️ {t("title")}
-      </h2>
-      <p className="mt-1 text-sm text-slate-600 dark:text-zinc-400">
+    <section id="countdown" className="dashboard-panel scroll-mt-24 h-full">
+      <h2 className="dashboard-panel-title">⏱️ {t("title")}</h2>
+      <p className="mt-1 text-sm text-brand-muted">
         {ready ? t("description") : t("loading")}
       </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm">
-          <span className="font-medium text-slate-700 dark:text-zinc-300">{t("conferenceStart")}</span>
+          <span className="mun-label normal-case tracking-normal">{t("conferenceStart")}</span>
           <input
             type="datetime-local"
             value={conferenceStart ?? ""}
             onChange={(e) => onChangeStart(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="mun-field mt-1"
           />
         </label>
         <label className="block text-sm">
-          <span className="font-medium text-slate-700 dark:text-zinc-300">{t("paperDeadline")}</span>
+          <span className="mun-label normal-case tracking-normal">{t("paperDeadline")}</span>
           <input
             type="datetime-local"
             value={paperDeadline ?? ""}
             onChange={(e) => onChangePaper(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100"
+            className="mun-field mt-1"
           />
         </label>
       </div>
-      <div className="mt-4 space-y-2 rounded-xl bg-slate-50 px-4 py-3 dark:bg-zinc-800/60">
+      <div className="mun-inset mt-4 space-y-2 border-l-[3px] border-l-[color:var(--gold)] !p-4">
         <CountdownLine label={t("untilConference")} iso={conferenceStart} />
         <CountdownLine label={t("untilPaperDeadline")} iso={paperDeadline} />
       </div>

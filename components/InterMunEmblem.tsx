@@ -1,7 +1,11 @@
-import { INTERMUN_EMBLEM_PATH } from "@/lib/branding";
+import { INTERMUN_EMBLEM_LIGHT_PATH, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-/** InterMUN emblem (`public/intermun-emblem.png`). */
+/**
+ * InterMUN emblem. Light mode uses the rainbow chain wordmark
+ * (`public/intermun-emblem-light.png`); dark mode keeps the original
+ * emblem (`public/intermun-emblem.png`).
+ */
 export function InterMunEmblem({
   className,
   alt = "InterMUN",
@@ -11,14 +15,25 @@ export function InterMunEmblem({
   alt?: string;
 }) {
   return (
-    <img
-      src={INTERMUN_EMBLEM_PATH}
-      alt={alt}
-      className={cn(
-        "shrink-0 object-contain drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)] dark:drop-shadow-[0_4px_22px_rgba(0,0,0,0.45)]",
-        className
-      )}
-      decoding="async"
-    />
+    <>
+      <img
+        src={INTERMUN_EMBLEM_LIGHT_PATH}
+        alt={alt}
+        className={cn(
+          "shrink-0 object-contain drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)] dark:hidden",
+          className
+        )}
+        decoding="async"
+      />
+      <img
+        src={INTERMUN_EMBLEM_PATH}
+        alt={alt}
+        className={cn(
+          "hidden shrink-0 object-contain drop-shadow-[0_4px_22px_rgba(0,0,0,0.45)] dark:block",
+          className
+        )}
+        decoding="async"
+      />
+    </>
   );
 }
