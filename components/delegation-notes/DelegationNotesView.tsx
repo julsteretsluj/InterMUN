@@ -948,12 +948,24 @@ export function DelegationNotesView({
   const field = "mun-field";
 
   return (
-    <div className="space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
+    <div
+      className={
+        composeOnly
+          ? "w-full"
+          : "space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0"
+      }
+    >
       <div className={card}>
         <h3 className="dashboard-panel-title mb-4">{composeTitle ?? t("title")}</h3>
 
-        <div className="grid grid-cols-1 gap-4 2xl:grid-cols-1">
-          <div className="2xl:col-span-2 space-y-3">
+        <div
+          className={
+            composeOnly
+              ? "grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start"
+              : "grid grid-cols-1 gap-4"
+          }
+        >
+          <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <label className={labelStrong}>{t("topicLabel")}</label>
               <select
@@ -1063,7 +1075,13 @@ export function DelegationNotesView({
 
             <div className="space-y-2">
               <p className={labelStrong}>{t("delegationsLabel")}</p>
-              <div className="mun-inset max-h-40 overflow-y-auto">
+              <div
+                className={
+                  composeOnly
+                    ? "mun-inset max-h-64 overflow-y-auto sm:grid sm:grid-cols-2 sm:gap-x-3 xl:grid-cols-3"
+                    : "mun-inset max-h-40 overflow-y-auto"
+                }
+              >
                 {allocationOptions.map((a) => {
                   const checked = selectedAllocationRecipientIds.includes(a.id);
                   return (

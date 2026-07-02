@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Megaphone, MessageSquare, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 type PopupNotification = {
@@ -20,15 +21,66 @@ const SUPPORTED_TYPES = new Set([
   "delegation_note",
 ]);
 
+const AUTO_DISMISS_MS = 6500;
+const LEAVE_MS = 340;
+
+function iconForType(type: string) {
+  if (type === "delegation_note") return MessageSquare;
+  return Megaphone;
+}
+
 export function DashboardAnnouncementPopup() {
   const supabase = createClient();
-  const [notification, setNotification] = useState<PopupNotification | null>(null);
+  const [current, setCurrent] = useState<PopupNotification | null>(null);
+  const [visible, setVisible] = useState(false);
   const loadingRef = useRef(false);
+  const autoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const enterRaf = useRef<number | null>(null);
 
-  const shouldShow = useMemo(
-    () => Boolean(notification && SUPPORTED_TYPES.has(notification.type)),
-    [notification]
+  const clearTimers = useCallback(() => {
+    if (autoTimer.current) clearTimeout(autoTimer.current);
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    if (enterRaf.current) cancelAnimationFrame(enterRaf.current);
+    autoTimer.current = null;
+    leaveTimer.current = null;
+    enterRaf.current = null;
+  }, []);
+
+  const scheduleAutoDismiss = useCallback(() => {
+    if (autoTimer.current) clearTimeout(autoTimer.current);
+    autoTimer.current = setTimeout(() => {
+      setVisible(false);
+      if (leaveTimer.current) clearTimeout(leaveTimer.current);
+      leaveTimer.current = setTimeout(() => setCurrent(null), LEAVE_MS);
+    }, AUTO_DISMISS_MS);
+  }, []);
+
+  const present = useCallback(
+    (n: PopupNotification | null) => {
+      clearTimers();
+      if (!n || !SUPPORTED_TYPES.has(n.type)) {
+        setVisible(false);
+        leaveTimer.current = setTimeout(() => setCurrent(null), LEAVE_MS);
+        return;
+      }
+      setCurrent(n);
+      setVisible(false);
+      // Two frames so the entrance transition runs from the hidden state.
+      enterRaf.current = requestAnimationFrame(() => {
+        enterRaf.current = requestAnimationFrame(() => setVisible(true));
+      });
+      scheduleAutoDismiss();
+    },
+    [clearTimers, scheduleAutoDismiss]
   );
+
+  const dismiss = useCallback(() => {
+    if (autoTimer.current) clearTimeout(autoTimer.current);
+    setVisible(false);
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    leaveTimer.current = setTimeout(() => setCurrent(null), LEAVE_MS);
+  }, []);
 
   const loadLatestUnread = useCallback(async () => {
     if (loadingRef.current) return;
@@ -47,33 +99,33 @@ export function DashboardAnnouncementPopup() {
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
-      setNotification((data as PopupNotification | null) ?? null);
+      present((data as PopupNotification | null) ?? null);
     } finally {
       loadingRef.current = false;
     }
-  }, [supabase]);
+  }, [supabase, present]);
 
   const markRead = useCallback(
     async (id: string) => {
+      dismiss();
       if (!id.startsWith("local-")) {
         await supabase.from("user_notifications").update({ read_at: new Date().toISOString() }).eq("id", id);
-        await loadLatestUnread();
-      } else {
-        setNotification(null);
       }
     },
-    [supabase, loadLatestUnread]
+    [supabase, dismiss]
   );
 
   useEffect(() => {
     void loadLatestUnread();
   }, [loadLatestUnread]);
 
+  useEffect(() => () => clearTimers(), [clearTimers]);
+
   useEffect(() => {
     const onLocalPopup = (event: Event) => {
       const detail = (event as CustomEvent<{ title: string; body?: string; href?: string }>).detail;
       if (!detail?.title) return;
-      setNotification({
+      present({
         id: `local-${Date.now()}`,
         type: "delegation_note",
         title: detail.title,
@@ -85,7 +137,7 @@ export function DashboardAnnouncementPopup() {
     };
     window.addEventListener("intermun:delegation-note-popup", onLocalPopup);
     return () => window.removeEventListener("intermun:delegation-note-popup", onLocalPopup);
-  }, []);
+  }, [present]);
 
   useEffect(() => {
     let cancelled = false;
@@ -108,7 +160,7 @@ export function DashboardAnnouncementPopup() {
           (payload) => {
             const row = payload.new as PopupNotification;
             if (!SUPPORTED_TYPES.has(row.type)) return;
-            setNotification(row);
+            present(row);
           }
         )
         .subscribe();
@@ -117,33 +169,60 @@ export function DashboardAnnouncementPopup() {
       cancelled = true;
       if (channel) void supabase.removeChannel(channel);
     };
-  }, [supabase]);
+  }, [supabase, present]);
 
-  if (!shouldShow || !notification) return null;
+  if (!current) return null;
+
+  const Icon = iconForType(current.type);
+  const href = current.href.startsWith("/") ? current.href : `/${current.href}`;
 
   return (
-    <div className="border-b border-brand-accent/30 bg-brand-accent/12 px-4 py-2 sm:px-6">
-      <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-start justify-between gap-3 text-sm text-brand-navy">
-        <div className="min-w-0">
-          <p className="font-semibold">{notification.title}</p>
-          {notification.body ? <p className="line-clamp-2 text-brand-navy/85">{notification.body}</p> : null}
-        </div>
-        <div className="flex items-center gap-3 text-xs font-medium">
-          <a
-            href={notification.href.startsWith("/") ? notification.href : `/${notification.href}`}
-            className="text-brand-accent underline hover:no-underline"
-            onClick={() => void markRead(notification.id)}
-          >
-            Open
-          </a>
+    <div className="pointer-events-none fixed inset-x-0 top-[max(0.75rem,env(safe-area-inset-top))] z-[60] flex justify-center px-3 sm:inset-x-auto sm:right-4 sm:justify-end sm:px-0">
+      <div
+        role="alert"
+        onMouseEnter={() => {
+          if (autoTimer.current) clearTimeout(autoTimer.current);
+        }}
+        onMouseLeave={scheduleAutoDismiss}
+        className={[
+          "pointer-events-auto w-[min(26rem,calc(100vw-1.5rem))] origin-top will-change-transform",
+          "rounded-[var(--radius-xl)] border border-[var(--hairline)] bg-[var(--material-popover)]",
+          "shadow-[0_20px_56px_-18px_rgba(0,0,0,0.5)] backdrop-blur-2xl",
+          "transition-[transform,opacity] duration-[var(--dur-slow,320ms)] ease-[var(--ease-apple-out)]",
+          visible
+            ? "translate-y-0 scale-100 opacity-100"
+            : "-translate-y-[135%] scale-[0.96] opacity-0",
+        ].join(" ")}
+      >
+        <a
+          href={href}
+          onClick={() => void markRead(current.id)}
+          className="flex items-start gap-3 rounded-[var(--radius-xl)] p-3.5 pr-2.5 text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)]"
+        >
+          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-accent dark:text-brand-accent-bright">
+            <Icon className="h-[1.15rem] w-[1.15rem]" strokeWidth={2} />
+          </span>
+          <div className="min-w-0 flex-1 pt-0.5">
+            <p className="truncate text-sm font-semibold leading-tight">{current.title}</p>
+            {current.body ? (
+              <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-brand-navy/75 dark:text-zinc-300/80">
+                {current.body}
+              </p>
+            ) : null}
+          </div>
           <button
             type="button"
-            className="text-brand-navy/80 underline hover:no-underline"
-            onClick={() => void markRead(notification.id)}
+            aria-label="Dismiss notification"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              void markRead(current.id);
+            }}
+            className="-mr-0.5 mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-brand-navy/50 transition-apple hover:bg-[color:var(--discord-hover-bg)] hover:text-brand-navy"
           >
-            Dismiss
+            <X className="h-4 w-4" strokeWidth={2.25} />
           </button>
-        </div>
+        </a>
       </div>
     </div>
   );
