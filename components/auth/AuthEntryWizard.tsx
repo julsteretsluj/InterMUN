@@ -352,6 +352,7 @@ export function AuthEntryWizard({
 
       {step === "role" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-lg md:p-10 dark:border-white/10 dark:bg-brand-paper/95 w-full max-w-4xl mx-auto">
+          <BrandWordmark className="mb-6" />
           <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
             <div className="space-y-4">
               <button
@@ -493,6 +494,7 @@ export function AuthEntryWizard({
             <ChevronLeft className="size-4" strokeWidth={2} />
             {t("backToRole")}
           </button>
+          <BrandWordmark className="mb-4" />
           <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-6">
             {mode === "login" ? t("signIn") : t("createAccount")}
           </h2>

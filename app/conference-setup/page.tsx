@@ -39,8 +39,8 @@ export default async function ConferenceSetupPage({
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-brand-cream">
       <div className="relative w-full max-w-lg space-y-8">
-        <BrandWordmark />
         <div className="rounded-2xl border border-brand-navy/10 bg-brand-paper/95 shadow-[0_20px_50px_-12px_rgba(10,22,40,0.18)] p-8 md:p-10">
+          <BrandWordmark className="mb-6" />
           <div className="h-1 w-16 rounded-full bg-brand-accent mx-auto mb-6" aria-hidden />
           <h1 className="font-display text-xl font-semibold text-brand-navy text-center mb-2">
             {t("title")}
