@@ -315,20 +315,32 @@ html.dark {
   --color-discord-divider: var(--discord-divider);
 }
 
-/* Self-hosted Atkinson Hyperlegible (see layout.tsx @fontsource); OFL; straighter, more compact than OpenDyslexic */
+/* Self-hosted OpenDyslexic (see layout.tsx @fontsource); OFL; weighted baselines + distinct letterforms.
+   Atkinson Hyperlegible is kept as a legible fallback while OpenDyslexic loads. */
 html.dyslexic-font {
-  --font-ui: "Atkinson Hyperlegible", "Verdana", "Segoe UI", sans-serif;
-  --font-document: "Atkinson Hyperlegible", "Verdana", "Georgia", serif;
+  --font-ui: "OpenDyslexic", "Atkinson Hyperlegible", "Comic Sans MS", "Verdana", sans-serif;
+  --font-document: "OpenDyslexic", "Atkinson Hyperlegible", "Verdana", "Georgia", serif;
+  --font-dyslexic: "OpenDyslexic", "Atkinson Hyperlegible", "Comic Sans MS", "Verdana", sans-serif;
 }
 
+/* Tailwind `@theme inline` bakes the literal `--font-sans`/`--font-display` stacks
+   (system SF fonts first) into the utility classes, so overriding the CSS variables
+   isn't enough to surface OpenDyslexic. Force the family on the root, body, and the
+   font utilities so the dyslexic face actually wins everywhere. */
+html.dyslexic-font,
+html.dyslexic-font body,
+html.dyslexic-font .font-sans,
+html.dyslexic-font .font-display,
 html.dyslexic-font .font-serif,
 html.dyslexic-font .font-mono {
-  font-family: var(--font-ui), sans-serif !important;
+  font-family: var(--font-dyslexic) !important;
 }
 
+/* OpenDyslexic runs wide + tall — open up spacing and line height so it stays readable. */
 html.dyslexic-font body {
-  letter-spacing: 0.01em;
-  word-spacing: 0.04em;
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+  line-height: 1.65;
 }
 
 /* —— Apple-style motion + tap feedback —— */

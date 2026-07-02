@@ -18,6 +18,8 @@ import {
 } from "@/lib/theme-storage";
 import { localeDirection } from "@/lib/i18n/locales";
 import { IntlProvider } from "@/components/i18n/IntlProvider";
+import "@fontsource/opendyslexic/latin-400.css";
+import "@fontsource/opendyslexic/latin-700.css";
 import "@fontsource/atkinson-hyperlegible/latin-400.css";
 import "@fontsource/atkinson-hyperlegible/latin-700.css";
 import "./globals.css";
