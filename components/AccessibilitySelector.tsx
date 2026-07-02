@@ -6,10 +6,13 @@ import { Accessibility, Glasses, Type } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   persistAndApplyColorblindMode,
+  persistAndApplyColorblindType,
   persistAndApplyDyslexicFont,
   readColorblindModeFromStorage,
+  readColorblindTypeFromStorage,
   readDyslexicFontFromStorage,
 } from "@/lib/theme-document";
+import { COLORBLIND_TYPES, type ColorblindType } from "@/lib/theme-storage";
 import { useTranslations } from "next-intl";
 
 export function AccessibilitySelector({ className }: { className?: string }) {
@@ -18,6 +21,9 @@ export function AccessibilitySelector({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [colorblindMode, setColorblindMode] = useState(() => readColorblindModeFromStorage());
+  const [colorblindType, setColorblindType] = useState<ColorblindType>(() =>
+    readColorblindTypeFromStorage()
+  );
   const [dyslexicFont, setDyslexicFont] = useState(() => readDyslexicFontFromStorage());
   const [popoverBox, setPopoverBox] = useState<{ top: number; right: number } | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -73,9 +79,14 @@ export function AccessibilitySelector({ className }: { className?: string }) {
   const toggleColorblindMode = useCallback(() => {
     setColorblindMode((prev) => {
       const next = !prev;
-      persistAndApplyColorblindMode(next);
+      persistAndApplyColorblindMode(next, colorblindType);
       return next;
     });
+  }, [colorblindType]);
+
+  const selectColorblindType = useCallback((type: ColorblindType) => {
+    setColorblindType(type);
+    persistAndApplyColorblindType(type);
   }, []);
 
   const toggleDyslexicFont = useCallback(() => {
@@ -151,6 +162,45 @@ export function AccessibilitySelector({ className }: { className?: string }) {
                 </span>
                 <span className="text-xs font-semibold">{colorblindMode ? tTheme("on") : tTheme("off")}</span>
               </button>
+              {colorblindMode ? (
+                <div className="mt-2 rounded-[var(--radius-md)] border border-[var(--hairline)] p-2">
+                  <p className="mb-1.5 px-1 text-[0.7rem] font-semibold uppercase tracking-wide text-brand-muted">
+                    {tTheme("colorblindType")}
+                  </p>
+                  <div className="grid gap-1">
+                    {COLORBLIND_TYPES.map((type) => {
+                      const active = colorblindType === type;
+                      const label =
+                        type === "deuteranopia"
+                          ? tTheme("colorblindDeuteranopia")
+                          : type === "protanopia"
+                            ? tTheme("colorblindProtanopia")
+                            : tTheme("colorblindTritanopia");
+                      return (
+                        <button
+                          key={type}
+                          type="button"
+                          onClick={() => selectColorblindType(type)}
+                          aria-pressed={active}
+                          className={cn(
+                            "flex items-center justify-between rounded-[var(--radius-sm)] px-2.5 py-1.5 text-xs font-medium transition-apple",
+                            active
+                              ? "bg-[color:color-mix(in_srgb,var(--accent)_16%,transparent)] text-brand-navy"
+                              : "text-brand-muted hover:bg-[color:var(--discord-hover-bg)]"
+                          )}
+                        >
+                          <span>{label}</span>
+                          {active ? (
+                            <span aria-hidden className="text-brand-accent dark:text-brand-accent-bright">
+                              ✓
+                            </span>
+                          ) : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
               <p className="mt-2 text-[0.7rem] leading-snug text-brand-muted">{tTheme("colorblindHint")}</p>
               <button
                 type="button"

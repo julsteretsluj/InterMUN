@@ -2,6 +2,9 @@ import {
   DEFAULT_TEXT_SIZE_STEP,
   DYSLEXIC_FONT_STORAGE_KEY,
   COLORBLIND_MODE_STORAGE_KEY,
+  COLORBLIND_TYPE_STORAGE_KEY,
+  COLORBLIND_TYPES,
+  DEFAULT_COLORBLIND_TYPE,
   DEFAULT_THEME_HUE,
   LEGACY_THEME_HUE_CLEANUP,
   TEXT_SIZE_STEP_MAX,
@@ -10,6 +13,7 @@ import {
   THEME_HUES,
   THEME_HUE_STORAGE_KEY,
   THEME_STORAGE_KEY,
+  type ColorblindType,
   type TextSizeStep,
   type ThemeHue,
   type ThemePreference,
@@ -39,16 +43,44 @@ export function readColorblindModeFromStorage(): boolean {
   return localStorage.getItem(COLORBLIND_MODE_STORAGE_KEY) === "1";
 }
 
-export function applyColorblindModeToDocument(enabled: boolean) {
-  if (typeof document === "undefined") return;
-  const root = document.documentElement;
-  if (enabled) root.classList.add("colorblind-mode");
-  else root.classList.remove("colorblind-mode");
+export function parseColorblindType(raw: string | null): ColorblindType {
+  if (raw && (COLORBLIND_TYPES as readonly string[]).includes(raw)) {
+    return raw as ColorblindType;
+  }
+  return DEFAULT_COLORBLIND_TYPE;
 }
 
-export function persistAndApplyColorblindMode(enabled: boolean) {
+export function readColorblindTypeFromStorage(): ColorblindType {
+  if (typeof window === "undefined") return DEFAULT_COLORBLIND_TYPE;
+  return parseColorblindType(localStorage.getItem(COLORBLIND_TYPE_STORAGE_KEY));
+}
+
+export function applyColorblindModeToDocument(enabled: boolean, type?: ColorblindType) {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  const cbType = type ?? readColorblindTypeFromStorage();
+  if (enabled) {
+    root.classList.add("colorblind-mode");
+    root.setAttribute("data-cb-filter", cbType);
+    root.style.filter = `url(#cb-filter-${cbType})`;
+  } else {
+    root.classList.remove("colorblind-mode");
+    root.removeAttribute("data-cb-filter");
+    root.style.filter = "";
+  }
+}
+
+export function persistAndApplyColorblindMode(enabled: boolean, type?: ColorblindType) {
   localStorage.setItem(COLORBLIND_MODE_STORAGE_KEY, enabled ? "1" : "0");
-  applyColorblindModeToDocument(enabled);
+  if (type) localStorage.setItem(COLORBLIND_TYPE_STORAGE_KEY, type);
+  applyColorblindModeToDocument(enabled, type);
+}
+
+export function persistAndApplyColorblindType(type: ColorblindType) {
+  localStorage.setItem(COLORBLIND_TYPE_STORAGE_KEY, type);
+  // Only re-applies the filter if the mode is currently on.
+  const enabled = readColorblindModeFromStorage();
+  applyColorblindModeToDocument(enabled, type);
 }
 
 export function clampTextSizeStep(n: number): TextSizeStep {

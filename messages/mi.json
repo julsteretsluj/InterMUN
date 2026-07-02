@@ -558,7 +558,11 @@
     "accessibility": "Accessibility",
     "colorblindMode": "Colorblind-friendly colours",
     "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
-    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone."
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
+    "colorblindType": "Colour-vision type",
+    "colorblindDeuteranopia": "Deuteranopia (red–green)",
+    "colorblindProtanopia": "Protanopia (red–green)",
+    "colorblindTritanopia": "Tritanopia (blue–yellow)"
   },
   "awardsManager": {
     "updated": "Kua whakahoutia.",

@@ -2,7 +2,13 @@ export const THEME_STORAGE_KEY = "intermun-theme";
 export const THEME_HUE_STORAGE_KEY = "intermun-theme-hue";
 export const DYSLEXIC_FONT_STORAGE_KEY = "intermun-dyslexic-font";
 export const COLORBLIND_MODE_STORAGE_KEY = "intermun-colorblind-mode";
+export const COLORBLIND_TYPE_STORAGE_KEY = "intermun-colorblind-type";
 export const TEXT_SIZE_STORAGE_KEY = "intermun-text-size";
+
+/** Colour-vision deficiency corrected by the global daltonization filter. */
+export const COLORBLIND_TYPES = ["deuteranopia", "protanopia", "tritanopia"] as const;
+export type ColorblindType = (typeof COLORBLIND_TYPES)[number];
+export const DEFAULT_COLORBLIND_TYPE: ColorblindType = "deuteranopia";
 
 /**
  * Root `html` font-size step in percentage points from default.

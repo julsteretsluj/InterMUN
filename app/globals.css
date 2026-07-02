@@ -1169,6 +1169,10 @@ html.colorblind-mode.dark {
   --semantic-warning: #e69f00;
 }
 
+/* Global colour-vision correction (daltonization) filter is applied to
+   document.body via JS (see applyColorblindModeToDocument) because the CSS
+   minifier strips `filter: url(#fragment)` rules. */
+
 html.colorblind-mode .dashboard-nav-active {
   text-decoration: underline;
   text-decoration-thickness: 2px;
