@@ -14,22 +14,36 @@ import { useTranslations } from "next-intl";
 
 type Step = "welcome" | "conference" | "role" | "account";
 
-/** Ring segment colors (color-wheel order: top → clockwise matches pointer angle). */
-const ROLE_RING_HEX = ["#1DB954", "#3366FF", "#FF00E5", "#C2A878"] as const;
-
 const ROLES: {
   id: InterMunEntryRole;
   Icon: LucideIcon;
-  /** Center icon tint */
-  accentHex: string;
 }[] = [
-  { id: "chair", Icon: Armchair, accentHex: ROLE_RING_HEX[0]! },
-  { id: "delegate", Icon: Users, accentHex: ROLE_RING_HEX[1]! },
-  { id: "secretariat", Icon: Building2, accentHex: ROLE_RING_HEX[2]! },
-  { id: "advisor", Icon: GraduationCap, accentHex: ROLE_RING_HEX[3]! },
+  { id: "chair", Icon: Armchair },
+  { id: "delegate", Icon: Users },
+  { id: "secretariat", Icon: Building2 },
+  { id: "advisor", Icon: GraduationCap },
 ];
 
 const RING_VIEW = { cx: 0, cy: 0, rOuter: 47, rInner: 30 } as const;
+
+/**
+ * The ring is a full-spectrum rainbow (hue = angle, 0–360° clockwise from top).
+ * Each role owns an equal hue range (a quadrant); the range's center hue is the
+ * role's designated color, used to tint its icon.
+ */
+const RING_SAT = 82;
+const RING_LIGHT = 56;
+const RING_WEDGES = 144;
+
+function roleSegDeg() {
+  return 360 / ROLES.length;
+}
+
+/** Center hue of a role's designated hue range → its accent color. */
+function roleAccent(index: number, light = RING_LIGHT - 8): string {
+  const hue = index * roleSegDeg() + roleSegDeg() / 2;
+  return `hsl(${hue}, ${RING_SAT}%, ${light}%)`;
+}
 
 /** Polar from top, clockwise (matches angleFromPointer / angleToRoleIndex). */
 function ringPoint(cx: number, cy: number, r: number, deg: number) {
@@ -420,34 +434,72 @@ export function AuthEntryWizard({
                     onPointerUp={onRingPointerEnd}
                     onPointerCancel={onRingPointerEnd}
                   >
-                    {ROLES.map((_, i) => {
-                      const sweep = 360 / ROLES.length;
+                    {/* Full-spectrum rainbow ring: hue follows the angle. */}
+                    {Array.from({ length: RING_WEDGES }).map((_, k) => {
+                      const step = 360 / RING_WEDGES;
+                      const start = k * step;
+                      const hue = start + step / 2;
                       const d = donutSectorPath(
                         RING_VIEW.cx,
                         RING_VIEW.cy,
                         RING_VIEW.rInner,
                         RING_VIEW.rOuter,
-                        i * sweep,
-                        sweep
+                        start,
+                        // Slight overlap hides anti-alias seams between wedges.
+                        step + 0.5
                       );
-                      const selected = roleIndex === i;
                       return (
                         <path
-                          key={i}
-                          data-sector={i}
+                          key={`hue-${k}`}
                           d={d}
-                          fill={ROLE_RING_HEX[i]}
-                          stroke={selected ? "rgba(255,255,255,0.95)" : undefined}
-                          strokeWidth={selected ? 3.25 : 0.9}
-                          className={
-                            selected
-                              ? "drop-shadow-[0_0_14px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_0_16px_rgba(255,255,255,0.25)]"
-                              : "stroke-[rgba(15,23,42,0.18)] dark:stroke-[rgba(255,255,255,0.22)]"
-                          }
-                          style={{ transition: "stroke-width 0.15s ease, stroke 0.15s ease" }}
+                          fill={`hsl(${hue}, ${RING_SAT}%, ${RING_LIGHT}%)`}
+                          shapeRendering="geometricPrecision"
                         />
                       );
                     })}
+
+                    {/* Faint dividers delineating each role's designated hue range. */}
+                    {ROLES.map((_, i) => {
+                      const a = i * roleSegDeg();
+                      const p0 = ringPoint(RING_VIEW.cx, RING_VIEW.cy, RING_VIEW.rInner, a);
+                      const p1 = ringPoint(RING_VIEW.cx, RING_VIEW.cy, RING_VIEW.rOuter, a);
+                      return (
+                        <line
+                          key={`divider-${i}`}
+                          x1={p0.x}
+                          y1={p0.y}
+                          x2={p1.x}
+                          y2={p1.y}
+                          stroke="rgba(255,255,255,0.7)"
+                          strokeWidth={0.8}
+                          className="dark:[stroke:rgba(255,255,255,0.5)]"
+                        />
+                      );
+                    })}
+
+                    {/* Highlight the selected role's hue range. */}
+                    {(() => {
+                      const sweep = roleSegDeg();
+                      const d = donutSectorPath(
+                        RING_VIEW.cx,
+                        RING_VIEW.cy,
+                        RING_VIEW.rInner,
+                        RING_VIEW.rOuter,
+                        roleIndex * sweep,
+                        sweep
+                      );
+                      return (
+                        <path
+                          data-sector={roleIndex}
+                          d={d}
+                          fill="none"
+                          stroke="rgba(255,255,255,0.95)"
+                          strokeWidth={3.25}
+                          className="drop-shadow-[0_0_14px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_0_16px_rgba(255,255,255,0.35)]"
+                          style={{ transition: "d 0.2s ease" }}
+                        />
+                      );
+                    })()}
                   </svg>
                   {/* Inner disc (donut hole) */}
                   <div className="pointer-events-none absolute inset-[14px] rounded-full bg-white shadow-[inset_0_2px_12px_rgba(0,0,0,0.06)] dark:bg-discord-app dark:shadow-inner" />
@@ -456,7 +508,7 @@ export function AuthEntryWizard({
                     <RoleIcon
                       className="size-12 md:size-14 mb-2"
                       strokeWidth={1.25}
-                      style={{ color: selectedRole.accentHex }}
+                      style={{ color: roleAccent(roleIndex) }}
                     />
                     <p className="font-display text-2xl md:text-3xl font-bold text-brand-navy">{selectedRoleLabel}</p>
                     <p className="text-sm italic text-brand-navy/85">{selectedRoleHint}</p>
