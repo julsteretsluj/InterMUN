@@ -6,8 +6,10 @@
  * DB `committee` label. Each image is edge-flood knocked out (black matte → alpha)
  * with Pillow before upload, matching the in-app upload pipeline.
  *
- * Dry run (default): node scripts/replace-committee-logos.mjs
- * Apply:             node scripts/replace-committee-logos.mjs --apply
+ * Dry run (default):    node scripts/replace-committee-logos.mjs
+ * Apply (all):          node scripts/replace-committee-logos.mjs --apply
+ * Apply (one/some):     node scripts/replace-committee-logos.mjs --apply DISEC
+ *   (any non-flag args are treated as committee labels to limit the run to)
  *
  * Requires: .env.local with NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY
  * Requires: python3 + Pillow (pip install pillow)
@@ -25,6 +27,8 @@ const ROOT = path.resolve(__dirname, "..");
 const SOURCE_DIR = path.join(__dirname, "committee-logo-source");
 const BUCKET = "committee-logos";
 const APPLY = process.argv.includes("--apply");
+/** Any non-flag args limit the run to those committee labels. */
+const FILTER_LABELS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
 /** DB `committee` label → local source PNG. Labels must match exactly. */
 const COMMITTEE_SOURCE = {
@@ -138,8 +142,17 @@ async function main() {
     process.exit(1);
   }
 
-  for (const file of Object.values(COMMITTEE_SOURCE)) {
-    const p = path.join(SOURCE_DIR, file);
+  const allLabels = Object.keys(COMMITTEE_SOURCE);
+  for (const l of FILTER_LABELS) {
+    if (!COMMITTEE_SOURCE[l]) {
+      console.error(`Unknown committee label "${l}". Known: ${allLabels.join(", ")}`);
+      process.exit(1);
+    }
+  }
+  const labels = FILTER_LABELS.length ? FILTER_LABELS : allLabels;
+
+  for (const label of labels) {
+    const p = path.join(SOURCE_DIR, COMMITTEE_SOURCE[label]);
     if (!fs.existsSync(p)) {
       console.error(`Missing source image: ${p}`);
       process.exit(1);
@@ -147,8 +160,6 @@ async function main() {
   }
 
   const supabase = createClient(url, key, { auth: { persistSession: false } });
-
-  const labels = Object.keys(COMMITTEE_SOURCE);
   const { data: rows, error } = await supabase
     .from("conferences")
     .select("id, event_id, committee, committee_code, committee_logo_url")

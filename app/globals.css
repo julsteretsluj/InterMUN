@@ -1171,21 +1171,47 @@ html.colorblind-mode.dark {
 
 html.colorblind-mode .dashboard-nav-active {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
   text-underline-offset: 3px;
-  border-left: 3px solid var(--accent);
-  padding-left: calc(0.625rem - 3px);
+  border-left: 4px solid var(--accent);
+  padding-left: calc(0.625rem - 4px);
 }
 
+/* Status badges: prominent symbol + a distinct border pattern per semantic,
+   so state is readable by shape as well as color. */
+html.colorblind-mode .dashboard-status-badge {
+  border-width: 2px;
+  font-weight: 700;
+}
+html.colorblind-mode .dashboard-status-badge--success {
+  border-style: solid;
+}
 html.colorblind-mode .dashboard-status-badge--success::before {
   content: "✓ ";
-  font-weight: 700;
+  font-weight: 800;
+}
+html.colorblind-mode .dashboard-status-badge--warning {
+  border-style: dotted;
 }
 html.colorblind-mode .dashboard-status-badge--warning::before {
-  content: "! ";
-  font-weight: 700;
+  content: "▲ ";
+  font-weight: 800;
 }
+html.colorblind-mode .dashboard-status-badge--danger::before {
+  content: "✕ ";
+  font-weight: 800;
+}
+html.colorblind-mode .dashboard-status-badge--danger,
 html.colorblind-mode .dashboard-status-badge--info {
   border-style: dashed;
+}
+html.colorblind-mode .dashboard-status-badge--info::before {
+  content: "ⓘ ";
+  font-weight: 800;
+}
+html.colorblind-mode .dashboard-status-badge--gold::before {
+  content: "★ ";
+  font-weight: 800;
 }
 
 html.colorblind-mode .note-avatar {
@@ -1210,6 +1236,13 @@ html.colorblind-mode [class*="bg-red-50"],
 html.colorblind-mode [class*="text-red-"] {
   border-color: color-mix(in srgb, var(--semantic-danger) 55%, var(--hairline)) !important;
 }
+/* Danger surfaces → dashed pattern cue */
+html.colorblind-mode [class*="border-red-"],
+html.colorblind-mode [class*="bg-red-50"],
+html.colorblind-mode [class*="bg-red-950"] {
+  border-style: dashed !important;
+  border-width: 2px !important;
+}
 html.colorblind-mode [class*="bg-red-50"],
 html.colorblind-mode [class*="bg-red-950"] {
   background-color: var(--semantic-danger-bg) !important;
@@ -1223,6 +1256,12 @@ html.colorblind-mode [class*="bg-emerald-"],
 html.colorblind-mode [class*="text-emerald-"] {
   border-color: color-mix(in srgb, var(--semantic-success) 50%, var(--hairline)) !important;
 }
+/* Success surfaces → solid pattern cue */
+html.colorblind-mode [class*="border-emerald-"],
+html.colorblind-mode [class*="bg-emerald-"] {
+  border-style: solid !important;
+  border-width: 2px !important;
+}
 html.colorblind-mode [class*="bg-emerald-"] {
   background-color: var(--semantic-success-bg) !important;
 }
@@ -1233,6 +1272,13 @@ html.colorblind-mode [class*="text-emerald-"] {
 html.colorblind-mode [class*="border-amber-"],
 html.colorblind-mode [class*="bg-amber-"] {
   border-color: color-mix(in srgb, var(--semantic-warning) 50%, var(--hairline)) !important;
+}
+/* Warning surfaces → dotted pattern cue */
+html.colorblind-mode [class*="border-amber-"],
+html.colorblind-mode [class*="bg-amber-50"],
+html.colorblind-mode [class*="bg-amber-950"] {
+  border-style: dotted !important;
+  border-width: 2px !important;
 }
 html.colorblind-mode [class*="bg-amber-50"],
 html.colorblind-mode [class*="bg-amber-950"] {
@@ -1271,14 +1317,27 @@ html.colorblind-mode .stance-heatmap-fill--5 {
   background: #d55e00 !important;
 }
 
+html.colorblind-mode .tag-success,
+html.colorblind-mode .tag-danger,
+html.colorblind-mode .tag-warning,
+html.colorblind-mode .tag-info {
+  font-weight: 700;
+}
 html.colorblind-mode .tag-success::before {
   content: "✓ ";
+  font-weight: 800;
 }
 html.colorblind-mode .tag-danger::before {
-  content: "× ";
+  content: "✕ ";
+  font-weight: 800;
 }
 html.colorblind-mode .tag-warning::before {
-  content: "! ";
+  content: "▲ ";
+  font-weight: 800;
+}
+html.colorblind-mode .tag-info::before {
+  content: "ⓘ ";
+  font-weight: 800;
 }
 
 /* Schedule category swatches (eat / chill / session) */
