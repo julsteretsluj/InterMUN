@@ -262,15 +262,16 @@ export default async function SmtOverviewPage({
                       {g.logoUrl ? (
                         <CommitteeLogo
                           src={g.logoUrl}
+                          size="lg"
                           alt={t("committeeLogoAlt", {
                             name: g.latestRow.committee
                               ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
                               : "Committee",
                           })}
-                          className="mb-1.5"
+                          className="absolute right-2.5 top-2.5"
                         />
                       ) : null}
-                      <p className="text-sm font-semibold leading-snug">
+                      <p className={`text-sm font-semibold leading-snug${g.logoUrl ? " pr-16" : ""}`}>
                         {(() => {
                           const localizedFull = localizeKnownCommitteeFullName(
                             resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)
