@@ -1211,22 +1211,31 @@ export function DelegationNotesView({
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div>
                         <p className="text-sm font-semibold text-brand-navy">{threadTitle}</p>
-                        <p className="mt-0.5 text-xs text-brand-muted">
-                          <span className="font-medium text-brand-navy/90">
-                            {t("fromLabel")}{" "}
-                            {n.sender.kind === "allocation" ? (
-                              <>
-                                {flagEmojiForCountryName(n.sender.country)} {n.sender.country}
-                              </>
-                            ) : (
-                              n.sender.name
-                            )}
+                        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-brand-navy/5 px-2 py-0.5 dark:bg-white/10">
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+                              {t("fromLabel").replace(/[:：]\s*$/, "")}
+                            </span>
+                            <span className="font-semibold text-brand-navy">
+                              {n.sender.kind === "allocation" ? (
+                                <>
+                                  {flagEmojiForCountryName(n.sender.country)} {n.sender.country}
+                                </>
+                              ) : (
+                                n.sender.name
+                              )}
+                            </span>
                           </span>
-                          <span className="mx-1.5 text-brand-muted/50">·</span>
-                          <span>
-                            {t("toLabel")} {formatRecipientSummary(root.recipients)}
+                          <span aria-hidden className="text-brand-muted/70">→</span>
+                          <span className="inline-flex items-center gap-1 rounded-full bg-brand-navy/5 px-2 py-0.5 dark:bg-white/10">
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+                              {t("toLabel").replace(/[:：]\s*$/, "")}
+                            </span>
+                            <span className="font-semibold text-brand-navy">
+                              {formatRecipientSummary(root.recipients)}
+                            </span>
                           </span>
-                        </p>
+                        </div>
                       </div>
                       <div className="flex flex-wrap items-center justify-end gap-1.5">
                         {isNoteSender(root) && root.moderation_state === "held" ? (
@@ -1338,6 +1347,7 @@ export function DelegationNotesView({
             saveChatName: t("saveChatName"),
             messageCount: t("messageCount"),
             unnamedChat: t("unnamedChat"),
+            to: t("toLabel"),
             errors: { emptyReply: t("errors.emptyContent") },
           }}
         />

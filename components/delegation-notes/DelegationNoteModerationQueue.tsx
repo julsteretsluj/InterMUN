@@ -95,20 +95,29 @@ export function DelegationNoteModerationQueue({ notes }: { notes: HeldDelegation
                 {new Date(note.created_at).toLocaleString()}
               </time>
             </div>
-            <p className="mt-3 text-sm text-brand-navy">
-              <span className="font-medium">{t("fromLabel")} </span>
-              {note.senderIsAllocation ? (
-                <>
-                  {flagEmojiForCountryName(note.senderLabel)} {note.senderLabel}
-                </>
-              ) : (
-                note.senderLabel
-              )}
-            </p>
-            <p className="mt-1 text-sm text-brand-muted">
-              <span className="font-medium text-brand-navy/90">{t("toLabel")} </span>
-              {note.recipientSummary}
-            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-1.5 text-sm">
+              <span className="inline-flex items-center gap-1 rounded-full bg-brand-navy/5 px-2 py-0.5 dark:bg-white/10">
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+                  {t("fromLabel").replace(/[:：]\s*$/, "")}
+                </span>
+                <span className="font-semibold text-brand-navy">
+                  {note.senderIsAllocation ? (
+                    <>
+                      {flagEmojiForCountryName(note.senderLabel)} {note.senderLabel}
+                    </>
+                  ) : (
+                    note.senderLabel
+                  )}
+                </span>
+              </span>
+              <span aria-hidden className="text-brand-muted/70">→</span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-brand-navy/5 px-2 py-0.5 dark:bg-white/10">
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+                  {t("toLabel").replace(/[:：]\s*$/, "")}
+                </span>
+                <span className="font-semibold text-brand-navy">{note.recipientSummary}</span>
+              </span>
+            </div>
             <p className="mt-1 text-xs text-brand-muted">{note.topic}</p>
             <div className="mt-3 whitespace-pre-wrap break-words rounded-lg border border-brand-navy/10 bg-white/70 px-3 py-2 text-sm text-brand-navy dark:bg-zinc-900/50">
               {note.content}

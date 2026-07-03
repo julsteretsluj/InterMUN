@@ -89,6 +89,7 @@ type Props = {
     saveChatName: string;
     messageCount: string;
     unnamedChat: string;
+    to?: string;
     errors: { emptyReply: string };
   };
 };
@@ -167,7 +168,16 @@ export function DelegationNoteThreadDialog({
 
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-brand-muted">
           <span>{labels.messageCount.replace("{count}", String(messageCount))}</span>
-          <span>{formatRecipientSummary(group.root.recipients)}</span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-brand-navy/5 px-2 py-0.5 dark:bg-white/10">
+            {labels.to ? (
+              <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+                {labels.to.replace(/[:：]\s*$/, "")}
+              </span>
+            ) : null}
+            <span className="font-semibold text-brand-navy">
+              {formatRecipientSummary(group.root.recipients)}
+            </span>
+          </span>
         </div>
 
         {moderation ? (
