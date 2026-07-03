@@ -68,15 +68,15 @@
     "chairEmailPlaceholder": "chair@school.edu",
     "sending": "กำลังส่ง...",
     "sendChairInvite": "ส่งเก้าอี้เชิญ",
+    "chairRoleLabel": "ที่นั่งไดส์",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairInviteOption": "{seat} — {committee}",
+    "chairRoleHeadOf": "หัวหน้าเก้าอี้ของ {committee}",
+    "chairRoleCoOf": "ประธานร่วมของ {committee}",
     "grantChairRoleTitle": "มอบบทบาทประธาน (บัญชีที่มีอยู่)",
     "grantChairRoleHelp": "หากพวกเขาลงทะเบียนในฐานะผู้รับมอบสิทธิ์แล้ว ให้เลื่อนตำแหน่งพวกเขาที่นี่เพื่อรับแดชบอร์ดของประธานและเครื่องมือของคณะกรรมการ (ไม่มีการส่งอีเมล)",
     "grantChairRole": "มอบบทบาทประธานให้",
-    "chamberLabelFallback": "การประชุมคณะกรรมการ",
-    "chairRoleLabel": "ที่นั่งไดส์",
-    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "หัวหน้าเก้าอี้ของ {committee}",
-    "chairRoleCoOf": "ประธานร่วมของ {committee}",
-    "chairInviteOption": "{seat} — {committee}"
+    "chamberLabelFallback": "การประชุมคณะกรรมการ"
   },
   "chairDelegateApprovalForm": {
     "title": "ยอมรับการมอบหมายทางอีเมล + การจัดสรร",
@@ -219,8 +219,59 @@
     "presetAmendmentTitle": "การแก้ไข",
     "guidedStepChooseProcedure": "ขั้นตอนที่ 1/5: เลือกขั้นตอน (กรอกหมายเลข)",
     "invalidProcedureSelection": "การเลือกขั้นตอนไม่ถูกต้อง",
+    "guidedNoAgendaTopics": "ไม่มีหัวข้อวาระการประชุมสำหรับคณะกรรมการชุดนี้",
+    "guidedStepChooseAgendaTopic": "ขั้นตอนที่ 2/5: เลือกหัวข้อวาระการประชุม (กรอกหมายเลข)",
+    "guidedInvalidAgendaTopicSelection": "การเลือกหัวข้อวาระการประชุมไม่ถูกต้อง",
+    "guidedStepTopicPurpose": "ขั้นตอนที่ 2/5: หัวข้อ/วัตถุประสงค์",
+    "guidedStepTopic": "ขั้นตอนที่ 2/5: หัวข้อ",
+    "guidedStepTopicOptional": "ขั้นตอนที่ 2/5: หัวข้อ (ไม่บังคับ)",
+    "guidedStepMotionTitleOptional": "ขั้นตอนที่ 2/5: ชื่อภาพเคลื่อนไหว (ไม่บังคับ)",
+    "guidedConsultationRequiresTopicOrPurpose": "การให้คำปรึกษาต้องมีหัวข้อหรือวัตถุประสงค์",
+    "guidedTopicIsRequired": "ต้องระบุหัวข้อ",
+    "guidedStepMotioner": "ขั้นตอนที่ 3/5: Motioner (ไม่บังคับ ป้อนตัวเลขหรือเว้นว่างไว้)",
+    "guidedMotionerNotSpecified": "ไม่ระบุ",
+    "guidedStepDescriptionNotesOptional": "ขั้นตอนที่ 4/5: คำอธิบาย / หมายเหตุ (ไม่บังคับ)",
+    "guidedRequired": "ที่จำเป็น",
+    "guidedTimingTotalMinutesRequired": "ระยะเวลา: นาทีทั้งหมด{required}",
+    "guidedModeratedRequiresTopic": "การประชุมกลุ่มที่ได้รับการตรวจสอบจำเป็นต้องมีหัวข้อ",
+    "guidedModeratedRequiresTotalMinutes": "การประชุมกลุ่มย่อยที่มีการตรวจสอบต้องใช้เวลาทั้งหมด (นาที)",
+    "guidedUnmoderatedRequiresTotalMinutes": "การประชุมกลุ่มย่อยที่ไม่ได้รับการตรวจสอบต้องใช้เวลาทั้งหมด (นาที)",
+    "guidedConsultationRequiresTotalMinutes": "การให้คำปรึกษาต้องใช้เวลาทั้งหมด (นาที)",
+    "guidedTimingTotalMinutesLine": "ระยะเวลา: รวม {minutes} นาที",
+    "guidedTimingSpeakerSecondsRequired": "ระยะเวลา: วินาทีของลำโพง (จำเป็น)",
+    "guidedModeratedRequiresSpeakerSeconds": "การประชุมกลุ่มย่อยที่ต้องมีการกลั่นกรองต้องใช้เวลาของผู้พูด (วินาที)",
+    "guidedTimingSpeakerSecondsLine": ", ลำโพง {seconds}",
+    "guidedNoResolutionsForMotion": "ไม่มีความละเอียดสำหรับการเคลื่อนไหวนี้",
+    "guidedStepSelectTargetResolution": "ขั้นตอนที่ 5/5: เลือกความละเอียดเป้าหมาย (หมายเลข)",
+    "guidedResolutionSelectionRequired": "จำเป็นต้องเลือกความละเอียด",
+    "guidedNoClausesForResolution": "ไม่มีข้อกำหนดสำหรับมติที่เลือก",
+    "guidedStepChooseClauseNumbers": "เลือกหมายเลขประโยค (ดัชนีคั่นด้วยเครื่องหมายจุลภาค)",
+    "guidedClausePreview": "ข้อ {number}: {preview}",
+    "guidedAtLeastOneClauseRequired": "ต้องมีอย่างน้อยหนึ่งข้อ",
+    "guidedSelectAgendaTopic": "เลือกหัวข้อวาระการประชุม",
+    "guidedSetAgendaUnavailableNotEnoughTopics": "การเคลื่อนไหวเพื่อกำหนดวาระไม่พร้อมใช้งานสำหรับคณะกรรมการชุดนี้ (เหลือหัวข้อไม่เพียงพอ)",
+    "guidedConfirmRecordStatedMotionNow": "บันทึกสิ่งนี้เป็นการเคลื่อนไหวที่ระบุไว้ตอนนี้หรือไม่?",
+    "guidedDraftLoadedFloorOpen": "โหลดร่างคำแนะนำแล้ว พื้นการเคลื่อนไหวเปิดอยู่ — คลิกบันทึกการเคลื่อนไหวที่ระบุเมื่อพร้อม",
+    "guidedConfirmCreateOpenMotionNow": "สร้างและเปิดการเคลื่อนไหวนี้เพื่อลงคะแนนตอนนี้หรือไม่?",
+    "guidedDraftLoadedReviewCreate": "โหลดร่างคำแนะนำแล้ว ตรวจสอบและคลิกสร้างและเปิดการเคลื่อนไหวเมื่อพร้อม",
     "liveDebateTopic": "หัวข้อการอภิปรายสด",
     "motionControlHelp": "ขั้นตอนการทำงานของประธาน: จับการเคลื่อนไหว เปิดการโหวตครั้งละหนึ่งรายการ บันทึกการลงคะแนนตามการจัดสรร จากนั้นปิดการเคลื่อนไหวเพื่อสรุปว่าผ่าน/ไม่ผ่าน",
+    "tabAgenda": "กำหนดการ",
+    "agendaTabHelp": "กำหนดหัวข้อสดสำหรับการประชุม จากนั้นแตะหัวข้อวาระการประชุมเพื่อเปิดแผงลงคะแนนพร้อมรายชื่อผู้ร่วมประชุมทั้งหมดสำหรับหัวข้อนั้น ด้านล่าง เลือกหัวข้อเพื่อดูผลรวมการโหวตของคณะกรรมการ",
+    "agendaOpenVotingPanel": "การลงคะแนนเสียง",
+    "agendaCloseVotingPanel": "ปิด",
+    "agendaLiveBadge": "สด",
+    "agendaSetLive": "ตั้งกระทู้สด",
+    "agendaViewingVotes": "คะแนนรวมของคณะกรรมการ",
+    "agendaRefresh": "รีเฟรช",
+    "agendaLoadingCounts": "กำลังโหลดจำนวนคะแนนโหวต...",
+    "agendaBallotsRecorded": "{count} บันทึกบัตรลงคะแนนแล้ว",
+    "agendaMotionsWithBallots": "{count} เคลื่อนไหวพร้อมบัตรลงคะแนน",
+    "agendaYesNoAbstainLine": "ใช่ {yes} · ไม่ใช่ {no} · งด {abstain}",
+    "agendaOtherVotes": "อื่นๆ {count}",
+    "agendaNoBallotsForTopic": "ยังไม่มีการบันทึกบัตรลงคะแนนสำหรับหัวข้อนี้",
+    "agendaNoMotionsYet": "ยังไม่มีการเคลื่อนไหวสำหรับหัวข้อนี้",
+    "agendaByMotion": "โดยการเคลื่อนไหว",
     "tabSetup": "1) การตั้งค่า",
     "tabFloorQueue": "2) คิวชั้น",
     "tabDraftMotion": "3) การเคลื่อนไหวแบบร่าง",
@@ -229,6 +280,31 @@
     "chairOnlyVotingHelp": "ประธานเท่านั้น: ครั้งละหนึ่งเสียงเปิด ผู้รับมอบสิทธิ์ไม่ลงคะแนนในแอป ใช้บันทึกการโหวตเพื่อเรียกแต่ละป้ายและบันทึกว่าใช่หรือไม่ใช่เท่านั้น การเคลื่อนไหวตามขั้นตอนไม่ใช้การงดเว้น ผ่าน/ไม่ผ่านจะใช้สมาชิกส่วนใหญ่ตามที่กำหนด",
     "euGuidedPhase": "ระยะแนะนำของสหภาพยุโรป",
     "euGuidedPhaseHint": "ตัวบล็อกหลักยังคงได้รับคำแนะนำ: เมื่อการเคลื่อนไหวไม่ตรงกับระยะนี้ เก้าอี้ยังคงสามารถดำเนินการต่อโดยใช้การยืนยันการแทนที่อย่างชัดเจน",
+    "euSessionPhase_roll_call": "การเช็กชื่อ",
+    "euSessionPhase_agenda": "การกำหนดวาระการประชุม",
+    "euSessionPhase_opening_speeches": "คำปราศรัยเปิดการประชุม",
+    "euSessionPhase_cabinet_meeting": "การประชุมคณะรัฐมนตรี",
+    "euSessionPhase_shadow_meeting": "การประชุมเงา",
+    "euSessionPhase_formal_debate": "การอภิปรายอย่างเป็นทางการ",
+    "euSessionPhase_resolution_debate": "การอภิปรายญัตติ",
+    "euSessionPhase_voting_procedure": "ขั้นตอนการลงคะแนน",
+    "euSessionPhase_closing_statements": "คำแถลงปิดการประชุม",
+    "euSessionPhase_adjourned": "ปิดประชุม",
+    "euPartySAndD": "พันธมิตรก้าวหน้าของสังคมนิยมและประชาธิปไตย (S&D)",
+    "euPartyEpp": "พรรคประชาชนยุโรป (EPP)",
+    "euPartyRenew": "ต่ออายุยุโรป (ต่ออายุ)",
+    "euPartyLeft": "กลุ่มซ้ายในสภายุโรป (The Left)",
+    "euPartyGreen": "กลุ่มเขียว/EFA (Greens/EFA)",
+    "euPartyCAndR": "อนุรักษ์นิยมและปฏิรูปยุโรป (ECR)",
+    "euPartyPatriots": "ผู้รักชาติยุโรป (PfE)",
+    "euPartyIndependents": "ไม่สังกัดพรรค / NI",
+    "euPartyTimeGuideTitle": "คู่มือเวลาตามกลุ่มการเมือง (EU)",
+    "euPartySpeechPoolLabel": "เวลาการปราศรัย:",
+    "euPartyPoiPocPoolLabel": "เวลา POI/PoC:",
+    "euPhaseOverrideIntro": "ญัตตินี้ไม่ตรงกับระยะ EU ปัจจุบันโดยทั่วไป: {phase}",
+    "euPhaseOverrideProceed": "ดำเนินการต่อหรือไม่? การแทนที่นี้บันทึกเฉพาะในประวัติญัตติ",
+    "motionFloorUnavailableEuPhase": "ไม่สามารถใช้พื้นที่ญัตติได้ระหว่าง: {phase}",
+    "euGuidedBeginVotingAnyway": "ระยะ EU แบบมีคำแนะนำ: {phase} เริ่มลงคะแนนต่อหรือไม่?",
     "pointsWorkflow": "ขั้นตอนการทำงานของคะแนน",
     "pointOfInformation": "จุดข้อมูล",
     "pointOfClarification": "จุดชี้แจง",
@@ -243,6 +319,12 @@
     "accept": "ยอมรับ",
     "deny": "ปฏิเสธ",
     "beginVotingMostDisruptive": "เริ่มการลงคะแนน (ก่อกวนมากที่สุดก่อน)",
+    "motionFloorLabel": "เวลาญัตติ:",
+    "motionFloorOpenForStatements": "เปิดรับคำแถลง",
+    "addMotionGuided": "เพิ่มญัตติ (มีคำแนะนำ)",
+    "openFloorForMotionStatements": "เปิดเวลาสำหรับคำแถลงญัตติ",
+    "closeFloorStatementsEnded": "ปิดเวลา (จบคำแถลง)",
+    "recordStatedMotionButton": "บันทึกญัตติที่แถลง",
     "pendingVoteOrderMostDisruptive": "รอดำเนินการ — ลำดับการลงคะแนนเสียง (ก่อกวนมากที่สุดก่อน)",
     "untitled": "ไม่มีชื่อ",
     "withdraw": "ถอน",
@@ -354,89 +436,79 @@
     "openMotionFloorFirst": "เปิดชั้นการเคลื่อนไหวสำหรับแถลงการณ์ก่อน",
     "openMotionBlocksRecording": "ญัตติได้เปิดให้ลงคะแนนเสียงแล้ว ปิดก่อนบันทึกข้อความเพิ่มเติม",
     "statedMotionRecorded": "บันทึกการเคลื่อนไหวที่ระบุ (ยังไม่เปิดให้ลงคะแนน)",
-    "statedMotionRemoved": "การเคลื่อนไหวดังกล่าวถูกลบออก",
-    "tabAgenda": "กำหนดการ",
-    "agendaTabHelp": "กำหนดหัวข้อสดสำหรับการประชุม จากนั้นแตะหัวข้อวาระการประชุมเพื่อเปิดแผงลงคะแนนพร้อมรายชื่อผู้ร่วมประชุมทั้งหมดสำหรับหัวข้อนั้น ด้านล่าง เลือกหัวข้อเพื่อดูผลรวมการโหวตของคณะกรรมการ",
-    "agendaLiveBadge": "สด",
-    "agendaSetLive": "ตั้งกระทู้สด",
-    "agendaViewingVotes": "คะแนนรวมของคณะกรรมการ",
-    "agendaRefresh": "รีเฟรช",
-    "agendaLoadingCounts": "กำลังโหลดจำนวนคะแนนโหวต...",
-    "agendaBallotsRecorded": "{count} บันทึกบัตรลงคะแนนแล้ว",
-    "agendaMotionsWithBallots": "{count} เคลื่อนไหวพร้อมบัตรลงคะแนน",
-    "agendaYesNoAbstainLine": "ใช่ {yes} · ไม่ใช่ {no} · งด {abstain}",
-    "agendaOtherVotes": "อื่นๆ {count}",
-    "agendaNoBallotsForTopic": "ยังไม่มีการบันทึกบัตรลงคะแนนสำหรับหัวข้อนี้",
-    "agendaNoMotionsYet": "ยังไม่มีการเคลื่อนไหวสำหรับหัวข้อนี้",
-    "agendaByMotion": "โดยการเคลื่อนไหว",
-    "agendaOpenVotingPanel": "การลงคะแนนเสียง",
-    "agendaCloseVotingPanel": "ปิด",
-    "guidedNoAgendaTopics": "ไม่มีหัวข้อวาระการประชุมสำหรับคณะกรรมการชุดนี้",
-    "guidedStepChooseAgendaTopic": "ขั้นตอนที่ 2/5: เลือกหัวข้อวาระการประชุม (กรอกหมายเลข)",
-    "guidedInvalidAgendaTopicSelection": "การเลือกหัวข้อวาระการประชุมไม่ถูกต้อง",
-    "guidedStepTopicPurpose": "ขั้นตอนที่ 2/5: หัวข้อ/วัตถุประสงค์",
-    "guidedStepTopic": "ขั้นตอนที่ 2/5: หัวข้อ",
-    "guidedStepTopicOptional": "ขั้นตอนที่ 2/5: หัวข้อ (ไม่บังคับ)",
-    "guidedStepMotionTitleOptional": "ขั้นตอนที่ 2/5: ชื่อภาพเคลื่อนไหว (ไม่บังคับ)",
-    "guidedConsultationRequiresTopicOrPurpose": "การให้คำปรึกษาต้องมีหัวข้อหรือวัตถุประสงค์",
-    "guidedTopicIsRequired": "ต้องระบุหัวข้อ",
-    "guidedStepMotioner": "ขั้นตอนที่ 3/5: Motioner (ไม่บังคับ ป้อนตัวเลขหรือเว้นว่างไว้)",
-    "guidedMotionerNotSpecified": "ไม่ระบุ",
-    "guidedStepDescriptionNotesOptional": "ขั้นตอนที่ 4/5: คำอธิบาย / หมายเหตุ (ไม่บังคับ)",
-    "guidedRequired": "ที่จำเป็น",
-    "guidedTimingTotalMinutesRequired": "ระยะเวลา: นาทีทั้งหมด{required}",
-    "guidedModeratedRequiresTotalMinutes": "การประชุมกลุ่มย่อยที่มีการตรวจสอบต้องใช้เวลาทั้งหมด (นาที)",
-    "guidedUnmoderatedRequiresTotalMinutes": "การประชุมกลุ่มย่อยที่ไม่ได้รับการตรวจสอบต้องใช้เวลาทั้งหมด (นาที)",
-    "guidedConsultationRequiresTotalMinutes": "การให้คำปรึกษาต้องใช้เวลาทั้งหมด (นาที)",
-    "guidedTimingTotalMinutesLine": "ระยะเวลา: รวม {minutes} นาที",
-    "guidedTimingSpeakerSecondsRequired": "ระยะเวลา: วินาทีของลำโพง (จำเป็น)",
-    "guidedModeratedRequiresSpeakerSeconds": "การประชุมกลุ่มย่อยที่ต้องมีการกลั่นกรองต้องใช้เวลาของผู้พูด (วินาที)",
-    "guidedTimingSpeakerSecondsLine": ", ลำโพง {seconds}",
-    "guidedNoResolutionsForMotion": "ไม่มีความละเอียดสำหรับการเคลื่อนไหวนี้",
-    "guidedStepSelectTargetResolution": "ขั้นตอนที่ 5/5: เลือกความละเอียดเป้าหมาย (หมายเลข)",
-    "guidedResolutionSelectionRequired": "จำเป็นต้องเลือกความละเอียด",
-    "guidedNoClausesForResolution": "ไม่มีข้อกำหนดสำหรับมติที่เลือก",
-    "guidedStepChooseClauseNumbers": "เลือกหมายเลขประโยค (ดัชนีคั่นด้วยเครื่องหมายจุลภาค)",
-    "guidedClausePreview": "ข้อ {number}: {preview}",
-    "guidedAtLeastOneClauseRequired": "ต้องมีอย่างน้อยหนึ่งข้อ",
-    "guidedConfirmRecordStatedMotionNow": "บันทึกสิ่งนี้เป็นการเคลื่อนไหวที่ระบุไว้ตอนนี้หรือไม่?",
-    "guidedDraftLoadedFloorOpen": "โหลดร่างคำแนะนำแล้ว พื้นการเคลื่อนไหวเปิดอยู่ — คลิกบันทึกการเคลื่อนไหวที่ระบุเมื่อพร้อม",
-    "guidedConfirmCreateOpenMotionNow": "สร้างและเปิดการเคลื่อนไหวนี้เพื่อลงคะแนนตอนนี้หรือไม่?",
-    "guidedDraftLoadedReviewCreate": "โหลดร่างคำแนะนำแล้ว ตรวจสอบและคลิกสร้างและเปิดการเคลื่อนไหวเมื่อพร้อม",
-    "guidedModeratedRequiresTopic": "การประชุมกลุ่มที่ได้รับการตรวจสอบจำเป็นต้องมีหัวข้อ",
-    "guidedSelectAgendaTopic": "เลือกหัวข้อวาระการประชุม",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "การเคลื่อนไหวเพื่อกำหนดวาระไม่พร้อมใช้งานสำหรับคณะกรรมการชุดนี้ (เหลือหัวข้อไม่เพียงพอ)",
-    "motionFloorLabel": "เวลาญัตติ:",
-    "motionFloorOpenForStatements": "เปิดรับคำแถลง",
-    "addMotionGuided": "เพิ่มญัตติ (มีคำแนะนำ)",
-    "openFloorForMotionStatements": "เปิดเวลาสำหรับคำแถลงญัตติ",
-    "closeFloorStatementsEnded": "ปิดเวลา (จบคำแถลง)",
-    "recordStatedMotionButton": "บันทึกญัตติที่แถลง",
-    "euSessionPhase_roll_call": "การเช็กชื่อ",
-    "euSessionPhase_agenda": "การกำหนดวาระการประชุม",
-    "euSessionPhase_opening_speeches": "คำปราศรัยเปิดการประชุม",
-    "euSessionPhase_cabinet_meeting": "การประชุมคณะรัฐมนตรี",
-    "euSessionPhase_shadow_meeting": "การประชุมเงา",
-    "euSessionPhase_formal_debate": "การอภิปรายอย่างเป็นทางการ",
-    "euSessionPhase_resolution_debate": "การอภิปรายญัตติ",
-    "euSessionPhase_voting_procedure": "ขั้นตอนการลงคะแนน",
-    "euSessionPhase_closing_statements": "คำแถลงปิดการประชุม",
-    "euSessionPhase_adjourned": "ปิดประชุม",
-    "euPartySAndD": "พันธมิตรก้าวหน้าของสังคมนิยมและประชาธิปไตย (S&D)",
-    "euPartyEpp": "พรรคประชาชนยุโรป (EPP)",
-    "euPartyRenew": "ต่ออายุยุโรป (ต่ออายุ)",
-    "euPartyLeft": "กลุ่มซ้ายในสภายุโรป (The Left)",
-    "euPartyGreen": "กลุ่มเขียว/EFA (Greens/EFA)",
-    "euPartyCAndR": "อนุรักษ์นิยมและปฏิรูปยุโรป (ECR)",
-    "euPartyPatriots": "ผู้รักชาติยุโรป (PfE)",
-    "euPartyIndependents": "ไม่สังกัดพรรค / NI",
-    "euPartyTimeGuideTitle": "คู่มือเวลาตามกลุ่มการเมือง (EU)",
-    "euPartySpeechPoolLabel": "เวลาการปราศรัย:",
-    "euPartyPoiPocPoolLabel": "เวลา POI/PoC:",
-    "euPhaseOverrideIntro": "ญัตตินี้ไม่ตรงกับระยะ EU ปัจจุบันโดยทั่วไป: {phase}",
-    "euPhaseOverrideProceed": "ดำเนินการต่อหรือไม่? การแทนที่นี้บันทึกเฉพาะในประวัติญัตติ",
-    "motionFloorUnavailableEuPhase": "ไม่สามารถใช้พื้นที่ญัตติได้ระหว่าง: {phase}",
-    "euGuidedBeginVotingAnyway": "ระยะ EU แบบมีคำแนะนำ: {phase} เริ่มลงคะแนนต่อหรือไม่?"
+    "statedMotionRemoved": "การเคลื่อนไหวดังกล่าวถูกลบออก"
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} เสร็จสมบูรณ์ - ซิงค์กับคณะกรรมการนี้แล้ว",
+      "loading": "กำลังโหลด...",
+      "resetChecklist": "รีเซ็ตรายการตรวจสอบ"
+    },
+    "prepPage": {
+      "description": "ก่อนการประชุม: กฎ หัวข้อ ห้อง วัสดุ และทีมงาน ซิงค์กับเก้าอี้ทั้งหมดในคณะกรรมการชุดนี้ รีเซ็ตจะล้างมันสำหรับทุกคน",
+      "crisisHidden": "รายการเตรียมการเฉพาะสำหรับภาวะวิกฤตจะถูกซ่อนไว้สำหรับคณะกรรมการประเภทนี้"
+    },
+    "flowPage": {
+      "description": "การไหลของคณะกรรมการปกติ - ทำเครื่องหมายตามขั้นตอนที่คุณดำเนินการ แบ่งปันระหว่างบัญชีเก้าอี้และอุปกรณ์ รีเซ็ตจะเคลียร์สำหรับทุกคน"
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "กฎและขั้นตอน"
+        },
+        "topic": {
+          "title": "คณะกรรมการและหัวข้อ"
+        },
+        "room": {
+          "title": "ห้องและเทคโนโลยี"
+        },
+        "materials": {
+          "title": "วัสดุและโลจิสติกส์"
+        },
+        "crisis": {
+          "title": "วิกฤตการณ์ (ถ้ามี)"
+        },
+        "team": {
+          "title": "ทีมงานและการสื่อสาร"
+        }
+      },
+      "items": {
+        "rop": "อ่านและทำความเข้าใจกฎขั้นตอนการปฏิบัติงานของคณะกรรมการ",
+        "parliamentary": "ทบทวนกระบวนการรัฐสภา (ญัตติ ประเด็น การลงคะแนนเสียง)",
+        "speaking-times": "ยืนยันเวลาพูดและการจำกัดเวลา",
+        "quorum": "รู้ข้อกำหนดองค์ประชุมและการลงคะแนนเสียง",
+        "research": "หัวข้อและความเป็นมาของคณะกรรมการวิจัย",
+        "study-guide": "อ่านคู่มือการศึกษาและเอกสารสำคัญ",
+        "dashboard-topic": "ตั้งชื่อคณะกรรมการและหัวข้อในแดชบอร์ด",
+        "agenda": "เตรียมวาระและขั้นตอนการประชุม",
+        "digital-room": "จัดทำห้องดิจิทัล (รายชื่อผู้ร่วมประชุม, ป้ายประกาศ)",
+        "tech-check": "การตรวจสอบเทคโนโลยี: แพลตฟอร์ม เสียง การแชร์หน้าจอ",
+        "backup": "มีแผนสำรองหากเทคโนโลยีล้มเหลว",
+        "roll-plan": "จัดทำรายชื่อผู้โทรเข้าและการเข้างาน",
+        "speakers-plan": "วางแผนการจัดการรายชื่อวิทยากร",
+        "templates": "เตรียมการเคลื่อนไหว/จุดร่วม (หากใช้เทมเพลต)",
+        "timing": "ยืนยันเวลาเริ่มต้นและการพักเซสชัน",
+        "crisis-slides": "ตรวจสอบองค์ประกอบวิกฤตและอัปเดตสไลด์",
+        "crisis-cues": "ลำดับวิทยากรวางแผน/ตัวชี้นำในภาวะวิกฤติ",
+        "crisis-paths": "เตรียมแนวทางและข้อเท็จจริงในภาวะวิกฤต",
+        "co-chairs": "ประสานงานกับประธานร่วมในบทบาทต่างๆ",
+        "staff": "ยืนยันการสนับสนุนของพนักงาน / เวทีและสัญญาณ",
+        "delegate-brief": "เตรียมบรีฟสำหรับผู้ร่วมประชุม (กฎ, เวลา)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "ม้วนสาย",
+        "open-floor": "เปิดพื้น (จุดและการเคลื่อนไหว)",
+        "recognize": "รับรู้การเคลื่อนไหว",
+        "vote-1": "ลงคะแนนเสียงในญัตติ",
+        "engage": "มีส่วนร่วมในการเคลื่อนไหวที่เลือกหรือย้ายไปที่ GSL",
+        "open-again": "เปิดพื้นอีกครั้ง",
+        "recognize-repeat": "รับรู้การเคลื่อนไหว (ทำซ้ำตามต้องการ)",
+        "vote-2": "ลงคะแนนเสียงในญัตติ",
+        "cycle": "ดำเนินวงจรต่อ (มีส่วนร่วม / GSL -> พื้นเปิด)"
+      }
+    }
   },
   "language": {
     "label": "ภาษา",
@@ -447,10 +519,14 @@
   },
   "tabNav": {
     "delegateHub": "ศูนย์กลางการมอบหมาย",
+    "advisorHub": "ศูนย์กลางที่ปรึกษา",
+    "advisorNotes": "บันทึกที่ส่งต่อ",
+    "conferenceSchedule": "กำหนดการ",
     "profile": "ประวัติโดยย่อ",
     "follow": "ติดตาม",
     "notes": "หมายเหตุ",
     "committee": "คณะกรรมการ",
+    "history": "ประวัติศาสตร์",
     "voting": "การลงคะแนนเสียง",
     "guides": "ไกด์",
     "documents": "เอกสาร",
@@ -472,10 +548,8 @@
     "home": "บ้าน",
     "library": "ห้องสมุด",
     "mainNavigationAria": "การนำทางหลัก",
-    "history": "ประวัติศาสตร์",
-    "advisorHub": "ศูนย์กลางที่ปรึกษา",
-    "advisorNotes": "บันทึกที่ส่งต่อ",
-    "conferenceSchedule": "กำหนดการ"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "dashboardLayout": {
     "helpCenter": "ศูนย์ช่วยเหลือ",
@@ -513,19 +587,27 @@
     "delegateHint": "(คณะกรรมการของคุณ)",
     "secretariat": "สำนักเลขาธิการ",
     "secretariatHint": "(เจ้าหน้าที่จัดงาน)",
+    "advisor": "ที่ปรึกษา",
+    "advisorHint": "(คณะผู้แทนโรงเรียน)",
     "nextModeSignup": "สร้างบัญชี",
     "nextModeLogin": "ลงชื่อเข้าใช้",
     "conferenceCodePlaceholder": "เช่น ซีมูนี2027",
     "previousRoleAria": "บทบาทก่อนหน้า",
     "selectRoleAria": "เลือกบทบาท",
     "nextRoleAria": "บทบาทต่อไป",
-    "authConnectError": "ไม่สามารถเชื่อมต่อกับการตรวจสอบสิทธิ์ได้ (ตรวจสอบ Supabase env vars)",
-    "advisor": "ที่ปรึกษา",
-    "advisorHint": "(คณะผู้แทนโรงเรียน)"
+    "authConnectError": "ไม่สามารถเชื่อมต่อกับการตรวจสอบสิทธิ์ได้ (ตรวจสอบ Supabase env vars)"
   },
   "googleDocs": {
     "openNewDocHelp": "เปิด Google เอกสารในแท็บใหม่ ลงชื่อเข้าใช้หากได้รับแจ้ง จากนั้นคัดลอก URL เอกสารจากแถบที่อยู่",
     "newGoogleDoc": "Google เอกสารใหม่"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
   },
   "themeSelector": {
     "buttonTitle": "ธีม: สีและรูปลักษณ์",
@@ -535,6 +617,14 @@
     "light": "แสงสว่าง",
     "dark": "มืด",
     "accentColour": "สีเน้น",
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
+    "colorblindType": "Colour-vision type",
+    "colorblindDeuteranopia": "Deuteranopia (red–green)",
+    "colorblindProtanopia": "Protanopia (red–green)",
+    "colorblindTritanopia": "Tritanopia (blue–yellow)",
     "typography": "วิชาการพิมพ์",
     "textSize": "ขนาดข้อความ",
     "scale": "มาตราส่วน",
@@ -554,15 +644,7 @@
       "purple": "สีม่วง",
       "pink": "สีชมพู",
       "neutral": "เป็นกลาง"
-    },
-    "accessibility": "Accessibility",
-    "colorblindMode": "Colorblind-friendly colours",
-    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
-    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
-    "colorblindType": "Colour-vision type",
-    "colorblindDeuteranopia": "Deuteranopia (red–green)",
-    "colorblindProtanopia": "Protanopia (red–green)",
-    "colorblindTritanopia": "Tritanopia (blue–yellow)"
+    }
   },
   "awardsManager": {
     "updated": "อัปเดตแล้ว",
@@ -592,6 +674,8 @@
     "bandInitials": "ชื่อย่อวงดนตรี",
     "committeeScopedAwardsHelp": "รางวัลที่กำหนดขอบเขตโดยคณะกรรมการ: บันทึกผู้รับที่นี่เพื่อเปิดเผยรายชื่อสาธารณะเท่านั้น คะแนนตามรูบริกโดยละเอียดมาจากการเสนอชื่อเป็นประธานที่ได้รับอนุมัติ (แท็บการส่งรางวัล) โดยไม่มีการให้คะแนนซ้ำกันในแถวนี้",
     "recipientDelegateChair": "ผู้รับ (ผู้รับมอบสิทธิ์ / เก้าอี้)",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope.",
     "notSet": "— ไม่ได้กำหนด —",
     "noName": "ไม่มีชื่อ",
     "winningCommittee": "คณะกรรมการที่ชนะ",
@@ -612,13 +696,13 @@
     "noAwardRowsYet": "ยังไม่มีแถวรางวัล",
     "includeInCertificatePrint": "รวมไว้ในการพิมพ์ใบรับรอง: {label}",
     "edit": "แก้ไข",
-    "remove": "ลบ",
-    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
-    "noEligibleRecipients": "No eligible recipients in this scope."
+    "remove": "ลบ"
   },
   "chairNominationsPanel": {
     "title": "มอบรางวัลโดยเก้าอี้",
     "description": "คณะกรรมการส่งการเสนอชื่อเข้าชิงคะแนน (วงดนตรีสไตล์เซมุน) ผลรวมของรูบริกและชื่อย่อวงดนตรี (B/D/P/E) สรุปแต่ละแถว สำหรับคณะกรรมการและประเภทรางวัลแต่ละประเภท SMT จะพิจารณาความชอบในปัจจุบันของประธานก่อน (1 อันดับแรก) อนุมัติให้บันทึกรางวัล หรือปฏิเสธที่จะย้ายไปยังอันดับสำรองถัดไป (2 อันดับแรก จากนั้น 3 อันดับแรกสำหรับการยกย่องชมเชย หากมี)",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short",
     "filterByCommitteeAria": "กรองตามคณะกรรมการ",
     "allCommittees": "คณะกรรมการทุกท่าน",
     "committee": "คณะกรรมการ",
@@ -642,9 +726,7 @@
     "approveBestDelegate": "อนุมัติ — ตัวแทนที่ดีที่สุด",
     "approveHonourableMention": "อนุมัติ - รางวัลชมเชย",
     "approveBestPositionPaper": "อนุมัติ — กระดาษตำแหน่งที่ดีที่สุด",
-    "approveBestDelegateOverall": "อนุมัติ — ตัวแทนที่ดีที่สุด (โดยรวม)",
-    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
-    "evidenceTooShort": "Evidence too short"
+    "approveBestDelegateOverall": "อนุมัติ — ตัวแทนที่ดีที่สุด (โดยรวม)"
   },
   "roomGate": {
     "alreadyInCommittee": "อยู่ในคณะแล้ว",
@@ -683,13 +765,24 @@
     "allocationPasswords": "รหัสผ่านการจัดสรร",
     "sources": "แหล่งที่มา",
     "notes": "หมายเหตุ",
+    "notesModeration": "Note review",
     "rollCallTracker": "✅ ติดตามการโทรแบบม้วน",
     "runningNotes": "หมายเหตุการวิ่ง",
     "awardsSmt": "รางวัล",
     "delegateDashboard": "แดชบอร์ดการมอบหมาย",
+    "advisorDashboard": "แดชบอร์ดที่ปรึกษา",
+    "advisorNotes": "บันทึกที่ส่งต่อ",
+    "delegateSchedule": "ตารางการประชุม",
+    "chairSchedule": "ตารางการประชุม",
+    "advisorSchedule": "ตารางการประชุม",
+    "advisorDelegateProfile": "Delegate profile",
+    "advisorDelegateDocuments": "Delegate documents",
+    "advisorDelegateVoting": "Delegate voting",
+    "advisorDelegateNotes": "Delegate notes",
     "voting": "การลงคะแนนเสียง",
     "digitalRoom": "ห้องดิจิตอล",
     "committeeSession": "สมัยประชุมคณะกรรมการ",
+    "committeeAgenda": "📑 วาระการประชุม",
     "announcements": "ประกาศ",
     "follow": "ติดตาม",
     "guides": "ไกด์",
@@ -697,6 +790,7 @@
     "committeeFlowChecklist": "📋 รายการตรวจสอบการไหลของคณะกรรมการ",
     "officialUnLinks": "ลิงก์ทางการของสหประชาชาติ",
     "committeeRoom": "ห้องกรรมการ",
+    "history": "ประวัติศาสตร์",
     "speeches": "สุนทรพจน์",
     "chairRoom": "ห้องเก้าอี้",
     "ideas": "ไอเดีย",
@@ -713,14 +807,8 @@
     "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
     "timer": "ตัวจับเวลา",
     "smtProfile": "ประวัติโดยย่อ",
-    "committeeAgenda": "📑 วาระการประชุม",
-    "history": "ประวัติศาสตร์",
-    "advisorDashboard": "แดชบอร์ดที่ปรึกษา",
-    "advisorNotes": "บันทึกที่ส่งต่อ",
-    "delegateSchedule": "ตารางการประชุม",
-    "chairSchedule": "ตารางการประชุม",
-    "advisorSchedule": "ตารางการประชุม",
-    "notesModeration": "Note review"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "setupPage": {
     "title": "ไม่ได้กำหนดค่า Supabase",
@@ -747,6 +835,196 @@
     "title": "รหัสห้องและเก้าอี้",
     "subtitle": "ตั้งรหัสคณะกรรมการประตูที่สองสำหรับแต่ละเซสชัน และเชิญหรือเลื่อนตำแหน่งเก้าอี้เวทีโดยไม่ต้องใช้แดชบอร์ดของผู้ร่วมประชุม"
   },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "รายการตรวจสอบการตั้งค่าผู้ดูแล",
+      "subtitle": "การตั้งค่าระดับเว็บไซต์และจัดหาพนักงาน",
+      "step1Label": "สร้างงาน + คณะกรรมการแรก",
+      "step1Detail": "สร้างประตูการประชุมและคณะกรรมการ",
+      "step2Label": "เชิญหรือเลื่อนขั้นบัญชี SMT",
+      "step2Detail": "ให้สิทธิ์เลขานุการก่อนการดำเนินงานคณะกรรมการ",
+      "step3Label": "ตรวจสอบขั้นตอนพอร์ทัลสถานะ",
+      "step3Detail": "ติดตามกระแสผู้แทนรอ → ยืนยันแล้ว",
+      "step4Label": "ส่งมอบให้แดชบอร์ด SMT",
+      "step4Detail": "การดำเนินงานคณะกรรมการสดดำเนินต่อในเครื่องมือ SMT"
+    },
+    "smt": {
+      "title": "รายการตรวจสอบการตั้งค่า SMT",
+      "subtitle": "การควบคุมระดับการประชุมก่อนประธานและผู้แทนเข้า",
+      "step1Label": "ยืนยันงาน + การประชุมคณะกรรมการ",
+      "step1Detail": "ตรวจสอบชื่อ แท็ก ชื่อประธาน และลิงก์วิกฤต",
+      "step2Label": "ตั้งรหัสห้อง + การเข้าถึงประธาน",
+      "step2Detail": "ให้แน่ใจว่าแต่ละคณะกรรมการมีรหัสประตูที่ถูกต้อง",
+      "step3Label": "เตรียมการจัดสรร + เอกสารลงชื่อเข้า",
+      "step3Detail": "นำเข้าที่นั่ง แล้วตั้งรหัสผ่าน/รหัส",
+      "step4Label": "เผยแพร่เอกสารทั่วโลก (RoP / เกณฑ์)",
+      "step4Detail": "อัปโหลดเอกสารอ้างอิงร่วมสำหรับผู้ใช้ทั้งหมด"
+    },
+    "chair": {
+      "title": "รายการตรวจสอบการตั้งค่าประธาน",
+      "subtitle": "ความพร้อมของห้องและการควบคุมการประชุมสำหรับคณะกรรมการของคุณ",
+      "step1Label": "ตรวจสอบเมทริกซ์ผู้แทน + การอนุมัติ",
+      "step1Detail": "ยืนยันการมอบหมายและการตรวจสอบการลงทะเบียนที่ค้าง",
+      "step2Label": "ดำเนินการอนุมัติการเรียกชื่อ",
+      "step2Detail": "ทำเครื่องหมายผู้แทนว่ามาประชุมก่อนมีส่วนร่วมในที่ประชุม",
+      "step3Label": "ตั้งตัวจับเวลา + ลำดับผู้พูด",
+      "step3Detail": "บันทึกค่าที่ตั้งห้องประชุมก่อนเปิดญัตติ",
+      "step4Label": "เปิดการดำเนินงานห้องดิจิทัล",
+      "step4Detail": "ประสานผู้พูด บันทึก และการมองเห็นการประชุม"
+    },
+    "delegate": {
+      "title": "รายการตรวจสอบการตั้งค่าผู้แทน",
+      "subtitle": "เตรียมพร้อมเข้าร่วมคณะกรรมการอย่างรวดเร็ว",
+      "step1Label": "กรอกข้อมูลพื้นฐานโปรไฟล์",
+      "step1Detail": "ตรวจสอบชื่อ การจัดสรร และรายละเอียดบัญชี",
+      "step2Label": "อ่าน RoP + เกณฑ์รางวัล",
+      "step2Detail": "เปิดเอกสารที่แชร์ที่ SMT อัปโหลด",
+      "step3Label": "สร้างเอกสารเตรียมการของคุณ",
+      "step3Detail": "อัปโหลด/แก้ไขบันทึกเตรียมการในแอปโดยตรง",
+      "step4Label": "เข้าร่วมห้องคณะกรรมการ + การเรียกชื่อ",
+      "step4Detail": "รอการอนุมัติการมาประชุมจากประธาน แล้วจึงพูด"
+    },
+    "advisor": {
+      "title": "Advisor guide",
+      "subtitle": "How to support your delegates from the advisor hub.",
+      "step1Label": "Review your delegate cards",
+      "step1Detail": "Each card shows country, committee, documents, voting, and notes.",
+      "step2Label": "Open your conference schedule",
+      "step2Detail": "Pick your roster number (Advisor 1–20) for chamber rotation times.",
+      "step3Label": "Send notes to delegates",
+      "step3Detail": "Message guidance in-app; delegates reply in the same thread.",
+      "step4Label": "Browse help guides",
+      "step4Detail": "MUN terms, procedures, and conference references in one place."
+    }
+  },
+  "advisorDashboard": {
+    "intro": "คุณสามารถตรวจสอบกิจกรรมของคณะกรรมการของผู้รับมอบสิทธิ์ที่ได้รับมอบหมายได้ คุณไม่สามารถเข้าถึงบันทึกได้ เว้นแต่ประธานหรือ SMT จะส่งต่อบันทึกย่อถึงคุณ",
+    "noAssignments": "ยังไม่มีการมอบสิทธิ์เชื่อมโยงกับบัญชีของคุณ สำนักเลขาธิการจะมอบหมายให้คุณจาก SMT → ที่ปรึกษา",
+    "delegateLinked": "เชื่อมโยงบัญชีผู้รับมอบสิทธิ์แล้ว",
+    "delegateNotLinked": "ที่นั่งยังไม่เชื่อมโยงกับบัญชีผู้รับมอบสิทธิ์",
+    "viewProfile": "ประวัติโดยย่อ",
+    "viewDocuments": "เอกสาร",
+    "viewVoting": "การลงคะแนนเสียง",
+    "sendNote": {
+      "title": "Message {delegate}",
+      "hint": "Your delegate will see this in their notes feed. Replies appear in the conversation below.",
+      "topicLabel": "Topic",
+      "messageLabel": "Message",
+      "placeholder": "Write guidance for your delegate…",
+      "send": "Send note",
+      "sending": "Sending…",
+      "sentSuccess": "Note sent to your delegate.",
+      "heldSuccess": "Note sent — pending chair approval before your delegate can read it.",
+      "notSignedIn": "Sign in to send notes.",
+      "notAdvisor": "Only advisors can send delegate notes.",
+      "missingDelegate": "Choose a delegate to message.",
+      "invalidTopic": "Choose a valid topic.",
+      "emptyContent": "Write a message before sending.",
+      "notAssigned": "That delegate is not assigned to your account.",
+      "delegateNotLinked": "This seat is not linked to a delegate account yet.",
+      "sendFailed": "Could not send the note. Try again.",
+      "conversationTitle": "Conversation",
+      "emptyConversation": "No messages with {delegate} yet.",
+      "fromYou": "You",
+      "fromDelegate": "{delegate}",
+      "heldBadge": "Pending chair review",
+      "topics": {
+        "questions": "Questions",
+        "blocForming": "Bloc forming",
+        "speechPoisOrPocs": "Speech POIs or POCs",
+        "informalConversations": "Informal conversations"
+      }
+    },
+    "forwardedNotes": "บันทึกที่ส่งต่อ",
+    "oversight": {
+      "difficultyOther": "Other committees"
+    },
+    "schedule": {
+      "intro": "เลือกเส้นทางกำหนดการของคุณ จากนั้นที่ปรึกษา A–D เพื่อดูตารางเวลาของที่ปรึกษานั้นในวันนั้น"
+    },
+    "delegateNav": {
+      "ariaLabel": "Delegate oversight",
+      "backToDashboard": "← Back to dashboard",
+      "profile": "Profile",
+      "documents": "Documents",
+      "voting": "Voting",
+      "notes": "Notes"
+    },
+    "delegateProfile": {
+      "notLinked": "This seat is not linked to a delegate account yet.",
+      "empty": "No profile details are available yet.",
+      "fields": {
+        "name": "Name",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "country": "Country",
+        "committee": "Committee"
+      }
+    },
+    "delegateVoting": {
+      "intro": "Recorded ballots for {country} on motions in this committee.",
+      "empty": "No motions have been recorded for this committee yet.",
+      "delegateBallot": "Delegate ballot",
+      "noBallot": "Not recorded"
+    },
+    "notes": {
+      "intro": "เก้าอี้ Notes หรือ SMT เลือกที่จะแบ่งปันกับคุณ คุณไม่สามารถเรียกดูฟีดบันทึกย่อแบบเต็มได้",
+      "tabsAriaLabel": "Advisor notes",
+      "tabForwarded": "Forwarded to you",
+      "tabSend": "Send to delegates",
+      "sendIntro": "Choose a delegate, write your message, and they will see it in their notes feed.",
+      "pickDelegate": "Delegate",
+      "noLinkedDelegates": "No linked delegate accounts yet. Secretariat must assign delegates to your advisor account first.",
+      "loading": "Loading notes…",
+      "forwardedTitle": "Forwarded to you",
+      "sentTitle": "Sent to delegates",
+      "sentEmpty": "You have not sent any notes to your delegates yet.",
+      "toDelegate": "To {delegate}",
+      "openConversation": "Open conversation",
+      "unknownDelegate": "Delegate",
+      "held": "Pending chair review",
+      "empty": "ยังไม่มีการส่งต่อบันทึกถึงคุณ",
+      "forwarded": "ส่งต่อแล้ว"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "ที่ปรึกษา",
+    "subtitle": "เชิญบัญชีที่ปรึกษาทางอีเมล และเชื่อมโยงที่ปรึกษาแต่ละคนเข้ากับที่นั่งผู้รับมอบสิทธิ์หนึ่งคน",
+    "selectEventFirst": "เลือกกิจกรรมการประชุมที่ดำเนินอยู่ก่อน",
+    "enterConferenceCode": "กรอกรหัสการประชุม",
+    "inviteTitle": "เชิญที่ปรึกษา",
+    "inviteBody": "ส่งลิงก์ลงชื่อเข้าใช้ (ขั้นตอนเดียวกับการเชิญประธาน) บทบาทของบัญชีถูกกำหนดให้เป็นที่ปรึกษา",
+    "inviteDisabled": "การเชิญต้องใช้ SUPABASE_SERVICE_ROLE_KEY ในการปรับใช้นี้",
+    "inviteSetupTitle": "เปิดใช้งานคำเชิญทางอีเมล",
+    "inviteSetupStep1": "ใน Supabase → การตั้งค่าโครงการ → API ให้คัดลอกรหัสลับ service_role",
+    "inviteSetupStep2": "เพิ่ม SUPABASE_SERVICE_ROLE_KEY ไปยังโฮสต์ env ของคุณ (Render/Vercel) — ไม่ใช่ NEXT_PUBLIC_",
+    "inviteSetupStep3": "เพิ่ม NEXT_PUBLIC_APP_URL ไปยัง URL ไซต์ที่ใช้งานอยู่ของคุณ (เช่น https://your-app.onrender.com)",
+    "inviteSetupStep4": "ปรับใช้ใหม่ (การผลิต) หรือเพิ่มทั้งสองอย่างใน .env.local และรีสตาร์ท npm run dev (ในเครื่อง)",
+    "emailLabel": "อีเมล",
+    "emailPlaceholder": "ที่ปรึกษา@school.edu",
+    "sending": "กำลังส่ง...",
+    "inviteButton": "ส่งคำเชิญ",
+    "assignTitle": "มอบหมายผู้รับมอบสิทธิ์",
+    "assignBody": "เลือกที่นั่งของผู้ร่วมประชุมที่เชื่อมโยงกัน ที่ปรึกษาหนึ่งคนต่อผู้รับมอบสิทธิ์ การมอบหมายใหม่จะแทนที่ลิงก์ก่อนหน้า",
+    "advisorEmailLabel": "อีเมล์ที่ปรึกษา",
+    "delegateAllocationIdLabel": "รหัสการจัดสรรผู้รับมอบสิทธิ์",
+    "delegateAllocationIdPlaceholder": "เช่น 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "งานปัจจุบัน",
+    "currentAssignmentsHint": "ลิงก์ที่ปรึกษา-ผู้แทนทั้งหมดสำหรับกิจกรรมนี้",
+    "allocationIdsTitle": "รหัสการจัดสรรผู้รับมอบสิทธิ์ที่เชื่อมโยง",
+    "allocationIdsHint": "คัดลอก UUID การจัดสรรจากตารางนี้เมื่อกำหนด",
+    "colAdvisor": "ที่ปรึกษา",
+    "colDelegate": "Delegate",
+    "colAllocationId": "รหัสการจัดสรร",
+    "colCountry": "ประเทศ/ที่นั่ง",
+    "colCommittee": "คณะกรรมการ",
+    "delegateFallback": "Delegate",
+    "assignedTo": "ที่ปรึกษา: {name}",
+    "saving": "ประหยัด…",
+    "assignButton": "บันทึกงาน",
+    "advisorFallback": "ที่ปรึกษา"
+  },
   "delegateDashboard": {
     "welcome": "ยินดีต้อนรับ ผู้แทนจาก {flag} {country}",
     "activeCommitteeIntro": "คณะกรรมการที่ทำงานอยู่: {line}",
@@ -758,7 +1036,18 @@
       "jump": "ข้ามไปที่",
       "chairEmails": "อีเมลของประธาน"
     },
+    "chairContacts": {
+      "intro": "กล่องจดหมายที่ใช้ร่วมกันสำหรับคณะกรรมการของคุณ (SEAMUN I) ติดต่อเก้าอี้ของคุณจากอีเมลด้านล่าง",
+      "committeeColumn": "คณะกรรมการ",
+      "emailColumn": "กล่องข้อความเก้าอี้ (ชื่อผู้ใช้)",
+      "openMail": "เปิดจดหมาย",
+      "noMatch": "ยังไม่มีกล่องจดหมายของประธานที่เผยแพร่สำหรับคณะกรรมการชุดนี้ สอบถาม SMT หรือตรวจสอบบทสรุปของคณะกรรมการของคุณ"
+    },
     "jumpTo": "ข้ามไปที่",
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here).",
+    "schedule": {
+      "intro": "เลือกเส้นทางของทีมของคุณ จากนั้นเลือกที่ปรึกษา A–D หรือคณะกรรมการของคุณ (ผู้แทน/ประธาน) ตารางเวลาส่วนตัวจะแสดงเพียงครั้งละหนึ่งตารางเวลาเท่านั้น"
+    },
     "tiles": {
       "stances": {
         "label": "ประเทศและจุดยืน",
@@ -784,6 +1073,10 @@
         "label": "คำแนะนำและแหล่งข้อมูล",
         "hint": "การอ้างอิงวิธีการและการหันหน้าเข้าหาเก้าอี้"
       },
+      "conferenceSchedule": {
+        "label": "ตารางการประชุม",
+        "hint": "ตารางการติดตามทีมและที่ปรึกษา (A–D)"
+      },
       "running": {
         "label": "รายการตรวจสอบและบันทึกการดำเนินการ",
         "hint": "แผ่นรอยขีดข่วนเซสชั่น"
@@ -791,6 +1084,10 @@
       "officialLinks": {
         "label": "ลิงก์ทางการของสหประชาชาติ",
         "hint": "เอกสาร เนื้อหา โปรแกรม"
+      },
+      "chairEmails": {
+        "label": "อีเมลของประธาน",
+        "hint": "กล่องจดหมาย Dais โดยคณะกรรมการ"
       },
       "chairFeedback": {
         "label": "ความคิดเห็นของเก้าอี้",
@@ -811,14 +1108,6 @@
       "crisisReport": {
         "label": "วิกฤติการณ์/รายงาน",
         "hint": "ยกประเด็น"
-      },
-      "chairEmails": {
-        "label": "อีเมลของประธาน",
-        "hint": "กล่องจดหมาย Dais โดยคณะกรรมการ"
-      },
-      "conferenceSchedule": {
-        "label": "ตารางการประชุม",
-        "hint": "ตารางการติดตามทีมและที่ปรึกษา (A–D)"
       }
     },
     "countdownCard": {
@@ -835,18 +1124,7 @@
       "remainingDhm": "{days}ว {hours}ชม {minutes}น",
       "remainingHm": "{hours}ชม {minutes}น",
       "remainingM": "{minutes}น"
-    },
-    "chairContacts": {
-      "intro": "กล่องจดหมายที่ใช้ร่วมกันสำหรับคณะกรรมการของคุณ (SEAMUN I) ติดต่อเก้าอี้ของคุณจากอีเมลด้านล่าง",
-      "committeeColumn": "คณะกรรมการ",
-      "emailColumn": "กล่องข้อความเก้าอี้ (ชื่อผู้ใช้)",
-      "openMail": "เปิดจดหมาย",
-      "noMatch": "ยังไม่มีกล่องจดหมายของประธานที่เผยแพร่สำหรับคณะกรรมการชุดนี้ สอบถาม SMT หรือตรวจสอบบทสรุปของคณะกรรมการของคุณ"
-    },
-    "schedule": {
-      "intro": "เลือกเส้นทางของทีมของคุณ จากนั้นเลือกที่ปรึกษา A–D หรือคณะกรรมการของคุณ (ผู้แทน/ประธาน) ตารางเวลาส่วนตัวจะแสดงเพียงครั้งละหนึ่งตารางเวลาเท่านั้น"
-    },
-    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
+    }
   },
   "materialsExportCard": {
     "title": "ส่งออกวัสดุของฉัน",
@@ -913,6 +1191,44 @@
     "loadCommitteesPrompt": "เพื่อโหลดคณะกรรมการสำหรับกิจกรรม",
     "hubEnterConferenceCode": "กรอกรหัสการประชุม"
   },
+  "advisorLayout": {
+    "activeEvent": "Active event:",
+    "code": "code",
+    "enterConferenceCodeLink": "Enter conference code",
+    "loadEventPrompt": "to load the conference event.",
+    "helpCenter": "Help center",
+    "defaultDisplayName": "Advisor"
+  },
+  "advisorNav": {
+    "ariaDashboard": "Advisor dashboard",
+    "hub": "Advisor hub",
+    "notes": "Notes",
+    "schedule": "Conference schedule",
+    "profile": "Profile",
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
+  },
+  "smtCommitteeView": {
+    "title": "สำนักเลขาธิการ: มุมมองประธานและผู้เข้าร่วมประชุม",
+    "intro": "เลือกคณะกรรมการสำหรับเครื่องมือเก้าอี้และที่นั่งของผู้รับมอบสิทธิ์ที่เชื่อมโยงกับบัญชีของคุณ จากนั้นสลับพื้นผิว การลงชื่อเข้าใช้ยังคงเปิดศูนย์กลางสำนักเลขาธิการตามค่าเริ่มต้น",
+    "bindRequiredHint": "เลือกประธานคณะกรรมการและ/หรือที่นั่งของผู้รับมอบสิทธิ์ด้านล่าง จากนั้นลองอีกครั้ง",
+    "chairCommitteeLabel": "คณะกรรมการชั้นเก้าอี้",
+    "chairCommitteePlaceholder": "เลือกคณะกรรมการ...",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank",
+    "delegateSeatLabel": "ที่นั่งผู้รับมอบสิทธิ์ (การจัดสรรของคุณ)",
+    "delegateSeatPlaceholder": "เลือกที่นั่ง...",
+    "saveBindings": "บันทึกการมอบหมายงาน",
+    "bindingsSaved": "บันทึกแล้ว",
+    "switchViewHeading": "สลับแดชบอร์ด",
+    "switchViewHelp": "สำนักเลขาธิการส่งคุณกลับคืนสู่ SMT ประธานและผู้รับมอบสิทธิ์เปิดเก้าอี้จริงและผู้รับมอบสิทธิ์เชลล์ในแอปเดียวกันที่ใช้สำหรับกิจกรรมที่กำลังดำเนินอยู่",
+    "goSecretariat": "สำนักเลขาธิการ",
+    "goChair": "วิวเก้าอี้",
+    "goDelegate": "มุมมองการมอบหมาย",
+    "surfaceSwitchError": "ไม่สามารถสลับมุมมองได้ ตรวจสอบประตูเหตุการณ์และการเลือก",
+    "pickChairFirst": "เลือกประธานคณะกรรมการก่อน (หรือบันทึกงานที่ได้รับมอบหมาย)",
+    "pickDelegateFirst": "เลือกที่นั่งของผู้รับมอบสิทธิ์ก่อน (หรือบันทึกการมอบหมาย)"
+  },
   "smtOverview": {
     "noEventSelected": "ไม่มีการเลือกการประชุม กรอกรหัสกิจกรรมของคุณก่อน",
     "enterConferenceCode": "กรอกรหัสการประชุม",
@@ -956,9 +1272,12 @@
       "prepChecklist": "รายการตรวจสอบการเตรียมการ",
       "flowChecklist": "รายการตรวจสอบการไหล",
       "delegates": "ผู้ได้รับมอบหมาย",
+      "conferenceSchedule": "กำหนดการ",
       "digitalRoom": "ห้องดิจิตอล",
+      "history": "ประวัติศาสตร์",
       "rollCall": "ม้วนสาย",
       "session": "การประชุม",
+      "agenda": "กำหนดการ",
       "speakers": "ลำโพง",
       "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
       "discipline": "วินัย",
@@ -970,13 +1289,12 @@
       "crisis": "วิกฤติ",
       "crisisSlides": "สไลด์วิกฤติ",
       "archive": "คลังเก็บเอกสารสำคัญ",
+      "notesModeration": "Note review",
       "officialLinks": "ลิงค์อย่างเป็นทางการ",
       "roomCode": "รหัสห้อง",
       "settings": "การตั้งค่า",
-      "agenda": "กำหนดการ",
-      "history": "ประวัติศาสตร์",
-      "conferenceSchedule": "กำหนดการ",
-      "notesModeration": "Note review"
+      "newsroom": "Newsroom",
+      "milestones": "Milestones"
     }
   },
   "smtNav": {
@@ -984,14 +1302,16 @@
     "liveCommittees": "คณะกรรมการถ่ายทอดสด",
     "eventSessions": "กิจกรรมและเซสชัน",
     "roomCodes": "รหัสห้องและเก้าอี้",
+    "advisors": "ที่ปรึกษา",
+    "notes": "Notes",
     "awards": "รางวัล",
     "allocationMatrix": "เมทริกซ์การจัดสรร",
     "allocationPasswords": "รหัสผ่านการจัดสรร",
     "profile": "ประวัติโดยย่อ",
     "follow": "ติดตาม",
     "hubAbbrev": "SMT",
-    "advisors": "ที่ปรึกษา",
-    "notes": "Notes"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "officialLinks": {
     "intro": "เอกสาร สนธิสัญญา เนื้อหาหลัก แผนงาน ภารกิจ และข้อมูลสมาชิก เปิดในแท็บใหม่",
@@ -1021,7 +1341,6 @@
       "secretariat": "สำนักเลขาธิการสหประชาชาติ",
       "trusteeship": "สภาทรัสตีแห่งสหประชาชาติ",
       "undp": "UNDP",
-      "unicef": "ยูนิเซฟ",
       "unhcr": "ยูเอ็นเอชซีอาร์",
       "wfp": "WFP (โครงการอาหารโลก)",
       "unfpa": "UNFPA",
@@ -1029,7 +1348,6 @@
       "unwomen": "สตรีแห่งสหประชาชาติ",
       "unhabitat": "UN-ที่อยู่อาศัย",
       "who": "WHO",
-      "unesco": "ยูเนสโก",
       "iom": "IOM (องค์การระหว่างประเทศเพื่อการโยกย้ายถิ่นฐาน)",
       "unodc": "สำนักงานว่าด้วยยาเสพติดและอาชญากรรมแห่งสหประชาชาติ (UNODC)",
       "unoda": "สำนักงานกิจการลดอาวุธแห่งสหประชาชาติ (UNODA)",
@@ -1045,6 +1363,17 @@
       "unSystem": "UN System (ผู้ก่อตั้งและสมาชิก)",
       "history": "ประวัติศาสตร์สหประชาชาติ"
     }
+  },
+  "timersWidget": {
+    "timer": "ตัวจับเวลา",
+    "currentSpeaker": "วิทยากรคนปัจจุบัน",
+    "nextSpeaker": "ผู้บรรยายคนต่อไป",
+    "speakerTimePerSpeaker": "เวลาผู้พูด (ซ้าย / ฝาครอบ)",
+    "speakerTimeTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
+    "perSpeaker": "(ต่อผู้พูด)",
+    "paused": "(หยุดชั่วคราว)",
+    "pauseReason": "หยุดชั่วคราว: {เหตุผล}",
+    "dash": "—"
   },
   "dashboardSearch": {
     "aria": "ค้นหา",
@@ -1123,10 +1452,8 @@
       "ECOFIN": "อีโคฟิน",
       "ECOSOC": "อีโคโซค",
       "EU": "สหภาพยุโรป",
-      "F1": "F1",
       "FIFA": "ฟีฟ่า",
       "FANTASY_WORLD_COMMITTEE": "คณะกรรมการแฟนตาซีเวิลด์",
-      "HSC": "วช",
       "HRC": "เหล็กแผ่นรีดร้อน",
       "HCR": "เอชซีอาร์",
       "IAEA": "ไอเออีเอ",
@@ -1143,8 +1470,6 @@
       "CSA": "ซีเอสเอ",
       "UNDP": "UNDP",
       "UNEP": "UNEP",
-      "UNESCO": "ยูเนสโก",
-      "UNICEF": "ยูนิเซฟ",
       "UNODC": "UNODC",
       "UNSC": "คสช",
       "WHO": "WHO",
@@ -1157,6 +1482,8 @@
     "openFullCommitteeRoom": "เปิดห้องกรรมการเต็ม",
     "delegatesMatrix": "เมทริกซ์ผู้ได้รับมอบหมาย",
     "clearAllChairNotes": "ล้างบันทึกย่อของเก้าอี้ทั้งหมด",
+    "clearAllConfirm": "คำชมเชย ข้อกังวล และบันทึกเตือนความจำที่ชัดเจนสำหรับทุกป้าย? นี่เป็นการอัพเดตสำเนาของคณะกรรมการที่ใช้ร่วมกัน",
+    "addedToSpeakerList": "เพิ่ม {country} ลงในรายชื่อวิทยากรแล้ว",
     "searchCountry": "ค้นหาประเทศ...",
     "roomStats": "{placards} ป้าย · {ธง} พร้อมบันทึกของเก้าอี้ · บันทึกม้วนสำหรับ {count}",
     "loading": "กำลังโหลด...",
@@ -1173,10 +1500,51 @@
     "addToSpeakerList": "เพิ่มในรายการวิทยากร",
     "reminder": "คำเตือน",
     "privateReminderLabel": "การแจ้งเตือนส่วนตัว (เฉพาะเก้าอี้เท่านั้น ซิงค์แล้ว)",
-    "clearAllConfirm": "คำชมเชย ข้อกังวล และบันทึกเตือนความจำที่ชัดเจนสำหรับทุกป้าย? นี่เป็นการอัพเดตสำเนาของคณะกรรมการที่ใช้ร่วมกัน",
-    "addedToSpeakerList": "เพิ่ม {country} ลงในรายชื่อวิทยากรแล้ว",
     "committeeFallback": "คณะกรรมการ",
     "dash": "—"
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "รายชื่อวิทยากร",
+    "addedToSpeakerList": "เพิ่มในรายการวิทยากรแล้ว",
+    "chooseDelegationsNotAlreadyQueued": "เลือกการมอบหมายที่ยังไม่ได้รอหรืออยู่ในรายการปัจจุบัน",
+    "addedSpeakersInOrder": "เพิ่มวิทยากรแล้ว {count} คนในลำดับรายชื่อคณะกรรมการ",
+    "introPrefix": "เพิ่มคณะผู้แทนตามลำดับการพูด ผู้รับมอบสิทธิ์ยังคงสามารถใช้งานได้",
+    "requestToSpeak": "ขอพูด",
+    "introMiddle": "ในห้องคณะกรรมการ ใช้",
+    "sessionTimerLink": "เซสชั่น → ตัวจับเวลา",
+    "introSuffixPrefix": "สำหรับเวลาต่อผู้พูดและ",
+    "advanceSpeaker": "วิทยากรล่วงหน้า",
+    "addDelegation": "เพิ่มการมอบหมาย",
+    "select": "เลือก…",
+    "add": "เพิ่ม",
+    "addSelectedToList": "เพิ่มรายการที่เลือกไว้",
+    "dismissReminder": "ปิดการแจ้งเตือน",
+    "moveUp": "เลื่อนขึ้น",
+    "moveDown": "เลื่อนลง",
+    "status": {
+      "current": "ปัจจุบัน",
+      "waiting": "ซึ่งรอคอย"
+    },
+    "current": "ปัจจุบัน",
+    "remove": "ลบ",
+    "prompt": {
+      "gslTitle": "รายชื่อวิทยากรทั่วไป (GSL)",
+      "moderatedTimerTitle": "การประชุมกลุ่มที่มีการกลั่นกรอง (ตัวจับเวลาต่อผู้พูด)",
+      "moderatedPassedTitle": "ผ่านการพิจารณาของพรรคการเมืองแล้ว",
+      "bodyPrefix": "ใช้รายชื่อวิทยากรด้านล่างเพื่อ",
+      "add": "เพิ่ม",
+      "bodyAddMiddle": "ผู้ได้รับมอบหมาย (ดร็อปดาวน์ +",
+      "bodyAddMiddle2": "หรือทำเครื่องหมายการมอบหมายและ",
+      "bodyRemovePrefix": ") และ",
+      "remove": "ลบ",
+      "bodyRemoveMiddle": "พวกเขาด้วย",
+      "bodyRowSuffix": "ในแต่ละแถว เรียงลำดับใหม่ด้วยลูกศรหรือชุด",
+      "bodyEnd": "เมื่อมีคนอยู่ที่ไมโครโฟน",
+      "noAllocations": "ยังไม่มีการจัดสรรสำหรับคณะกรรมการชุดนี้ ปิดเมื่อพร้อม คุณสามารถเพิ่มผู้พูดได้ภายหลังจากส่วนควบคุมรายการ",
+      "quickAdd": "เพิ่มด่วน (ยังไม่รอหรือปัจจุบัน)",
+      "alreadyQueued": "ทุกการจัดสรรมีช่องรอหรือช่องปัจจุบันอยู่แล้ว ลบรายการออกหากคุณต้องการเรียงลำดับใหม่ หรือยกเลิกเมื่อคุณดำเนินการเสร็จแล้ว"
+    }
   },
   "chairTopicTabs": {
     "selectLiveTopic": "เลือกหัวข้อสด",
@@ -1194,15 +1562,7 @@
     "ecosocImplementingUbiPovertyStability": "การใช้รายได้ขั้นพื้นฐานสากล (UBIs) เพื่อเป็นกลยุทธ์ในการขจัดความยากจนและการรักษาเสถียรภาพทางเศรษฐกิจ",
     "ecosocGloballyCoordinatedUbiPublicHealthStrategy": "การใช้รายได้พื้นฐานสากลที่ประสานงานทั่วโลก (UBI) เป็นกลยุทธ์ด้านสาธารณสุข",
     "ecosocReallocatingMilitaryExpenditurePublicHealth": "การสร้างกรอบการทำงานสำหรับการจัดสรรค่าใช้จ่ายทางการทหารทั่วโลกให้กับโครงสร้างพื้นฐานด้านสาธารณสุข",
-    "f1DurabilityLongevityCarComponents": "การใช้มาตรฐานความทนทานและอายุการใช้งานที่ยาวนานสำหรับส่วนประกอบสำคัญของรถยนต์เพื่อเพิ่มประสิทธิภาพวงจรชีวิตของส่วนประกอบและลดการสูญเสียวัสดุและพลังงานให้เหลือน้อยที่สุด",
-    "f1GrandPrixBangkok2028Impacts": "การวิเคราะห์ผลกระทบทางเศรษฐกิจและสังคมและโครงสร้างพื้นฐานของการเป็นเจ้าภาพจัดการแข่งขันกรังด์ปรีซ์ครั้งใหม่ โดยมุ่งเน้นไปที่การบรรเทาความแออัดในเมืองและการขนส่งในเมืองที่มีประชากรสูง โดยมุ่งเน้นไปที่ F1 Grand Prix ที่เป็นไปได้ในปี 2571 ในกรุงเทพฯ",
     "pressCorpsJournalisticEthicsPublicHealth": "การกำหนดจริยธรรมนักข่าวในการรายงานด้านสาธารณสุขและกิจการระดับโลก",
-    "unicefMaternalNeonatalPostpartumHealthcare": "การเสริมสร้างระบบการดูแลสุขภาพของมารดา ทารกแรกเกิด และหลังคลอด เพื่อลดอัตราการเสียชีวิตและการเจ็บป่วยของมารดาและทารกที่สามารถป้องกันได้อย่างมีนัยสำคัญ",
-    "unicefFlexibleWorkParentalLeaveEarlyChildhood": "การแนะนำกรอบนโยบายเพื่อส่งเสริมการจัดการการทำงานที่ยืดหยุ่นโดยนายจ้างสนับสนุนและการลาเพื่อเลี้ยงดูบุตรเพื่ออำนวยความสะดวกในการพัฒนาเด็กปฐมวัยและเสริมสร้างความผูกพันระหว่างพ่อแม่และลูก",
-    "euParliInflationCostOfLivingEurope": "จัดการกับผลกระทบทางเศรษฐกิจและสังคมของอัตราเงินเฟ้อและค่าครองชีพที่เพิ่มขึ้นของประชากรกลุ่มเปราะบางทั่วยุโรป",
-    "euParliCriminalSocietalPoliciesPovertyCrime": "การกำหนดมาตรฐานนโยบายทางอาญาและสังคมทั่วยุโรปเพื่อป้องกันวงจรอาชญากรรมที่ขับเคลื่อนด้วยความยากจน",
-    "unescoInclusiveEducationNeurodivergent": "การพัฒนาและกำหนดมาตรฐานนโยบายการศึกษาแบบเรียนรวมและที่พักที่จำเป็นเพื่อให้แน่ใจว่านักเรียนที่มีความหลากหลายทางระบบประสาทอย่างเต็มที่และเท่าเทียมกัน",
-    "unescoHistoricalFailuresEducationCurricula": "จัดทำแนวปฏิบัติสำหรับการบูรณาการภาคบังคับและครอบคลุมของความล้มเหลวในอดีต ความโหดร้าย และการละเมิดสิทธิมนุษยชนในหลักสูตรการศึกษาแห่งชาติเพื่อส่งเสริมการปรองดองและป้องกันการเกิดขึ้นอีกในอนาคต",
     "unhrcDeathPenaltyStandardization": "การกำหนดมาตรฐานการควบคุมและการใช้โทษประหารชีวิต",
     "unhrcJudicialCruelTreatmentFinancialDeficencies": "ภาระผูกพันในการป้องกันการปฏิบัติที่โหดร้าย ไร้มนุษยธรรม หรือย่ำยีศักดิ์ศรีภายในระบบตุลาการอันเป็นผลมาจากความบกพร่องทางการเงิน",
     "unodcAlternativesDrugPossessionPersonalUse": "การวิเคราะห์นโยบายทางเลือกแทนการพิพากษาลงโทษและการลงโทษผู้ครอบครองยาเสพติดเพื่อใช้ส่วนตัว",
@@ -1213,8 +1573,6 @@
     "disecCrossBorderLethalWeaponsLogistics": "การเสริมสร้างพิธีการระหว่างประเทศและโลจิสติกส์เพื่อการรักษาความปลอดภัยการขนส่งอาวุธร้ายแรงข้ามพรมแดน",
     "fwcPsychicChildExperimentationGiftedMinors": "การป้องกันอันตรายที่เกิดจากการทดลองทางจิต/จิตเด็ก และประกันการคุ้มครองและการฟื้นฟูผู้เยาว์ที่มีพรสวรรค์",
     "fwcPsychicTechnologiesNonProliferation": "การจัดการกับอาวุธยุทโธปกรณ์ของจิตใจมนุษย์และการสร้างพิธีสารระหว่างประเทศสำหรับการกักกันและการไม่แพร่ขยายเทคโนโลยีทางจิต",
-    "hscSarsOutbreak2002": "การระบาดของโรคซาร์ส (พ.ศ. 2545-2547)",
-    "hscBlackDeath1346": "กาฬโรค (1346-1353)",
     "interpolUndergroundMedicalMarkets": "การต่อสู้กับกลุ่มอาชญากรข้ามชาติในตลาดการแพทย์ใต้ดินและการปฏิบัติด้านการผ่าตัดที่ไม่ได้รับการควบคุม",
     "interpolNarcoticsSchengenGoldenTriangle": "การเสริมสร้างกรอบการทำงานด้านความปลอดภัยข้ามพรมแดนเพื่อบรรเทาปัญหาการค้ายาเสพติด โดยเน้นไปที่พื้นที่เชงเก้นและสามเหลี่ยมทองคำ",
     "whoPsychedelicTraumaMentalHealth": "การตรวจสอบภูมิทัศน์ด้านจริยธรรมและกฎระเบียบสำหรับการใช้ยาหลอนประสาททางคลินิกในการรักษาภาวะสุขภาพจิตจากการบาดเจ็บ",
@@ -1237,6 +1595,37 @@
     "qFoodSecurity": "กลยุทธ์ใดที่สามารถปรับปรุงความมั่นคงทางอาหารในภูมิภาคที่เปราะบางต่อสภาพภูมิอากาศได้",
     "qNonProliferation": "ประชาคมระหว่างประเทศควรป้องกันการแพร่กระจายของนิวเคลียร์อย่างไร?"
   },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    },
+    "composeTitle": "Send a note",
+    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
+    "composeCommitteeLabel": "Committee",
+    "composeLoading": "Loading committee…",
+    "composeNoCommittees": "No delegate committees in this event yet.",
+    "composeFormTitle": "New secretariat note"
+  },
   "delegationNotes": {
     "title": "บันทึกการมอบหมาย",
     "topicLabel": "หัวข้อ",
@@ -1254,6 +1643,10 @@
     "sessionOnlyHint": "หมายเหตุจะมีให้เฉพาะในช่วงการประชุมของคณะกรรมการที่ยังดำเนินอยู่เท่านั้น",
     "unmoderatedHint": "บันทึกจะถูกปิดใช้งานในระหว่างการประชุมกลุ่มที่ไม่มีการกลั่นกรอง",
     "sendNote": "ส่งบันทึก",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself",
     "sending": "กำลังส่ง...",
     "sendHelpTitle": "ส่งบันทึก",
     "sendHelpBody": "ส่งบันทึกนี้ไปยังผู้รับที่เลือกไว้ด้านบน มันไม่ได้ป้องกันการส่ง แต่จะส่งผลต่อวิธีการเตือน/ติดธงผู้อ่านเท่านั้น",
@@ -1269,41 +1662,6 @@
     "noChairs": "ไม่พบโปรไฟล์เก้าอี้",
     "notesListTitle": "รายการบันทึก",
     "noteCount": "{count, plural, other {# บันทึก}}",
-    "emptyList": "ยังไม่มีบันทึก",
-    "forwardedBadge": "(ส่งต่อ)",
-    "readerWarning": "คำเตือนผู้อ่าน: บันทึกนี้อาจมีภาษาที่ไม่เหมาะสม",
-    "viewFullNote": "ดูบันทึกฉบับเต็ม",
-    "toLabel": "ถึง:",
-    "toEmpty": "—",
-    "star": "ดาว",
-    "starred": "ติดดาว",
-    "forwardToSmt": "ส่งต่อไปยัง SMT",
-    "forwarded": "ส่งต่อแล้ว",
-    "report": "รายงาน",
-    "fullNoteTitle": "บันทึกเต็ม",
-    "fullNoteAria": "บันทึกเต็ม",
-    "close": "ปิด",
-    "unknownCountry": "ไม่ทราบ",
-    "chairFallback": "เก้าอี้",
-    "errors": {
-      "votingProcedure": "ขั้นตอนการลงคะแนนเสียงทำงานอยู่: การเขียนบันทึกถูกปิดใช้งาน",
-      "sessionInactive": "หมายเหตุจะถูกปิดใช้งานในขณะที่เซสชั่นของคณะกรรมการไม่ได้ใช้งาน",
-      "unmoderated": "บันทึกจะถูกปิดใช้งานในระหว่างการประชุมกลุ่มที่ไม่มีการกลั่นกรอง",
-      "smtVerify": "ตรวจสอบด้วยรหัสผ่านรองของเจ้าหน้าที่เพื่อส่งบันทึกไปยังคณะกรรมการชุดนี้",
-      "emptyContent": "เขียนเนื้อหาบันทึกก่อน",
-      "noRecipients": "เลือกผู้รับอย่างน้อยหนึ่งคน (การมอบหมายหรือประธาน)",
-      "needAllocation": "คุณต้องมีการจัดสรรเพื่อส่งบันทึก (หรือเป็นประธาน)",
-      "sendFailed": "ไม่สามารถส่งข้อความได้",
-      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
-    },
-    "forwardToAdvisor": "ส่งต่อไปที่ {name}",
-    "forwardedToAdvisor": "ส่งต่อให้ที่ปรึกษาแล้ว",
-    "forwardedToAdvisorBadge": "(ถึงที่ปรึกษา)",
-    "advisorFallback": "ที่ปรึกษา",
-    "sendToSelf": "Send test to myself",
-    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
-    "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself",
     "threadCount": "{count, plural, one {# chat} other {# chats}}",
     "messagesInThread": "{count, plural, one {# message} other {# messages}}",
     "messageCount": "{count} messages",
@@ -1317,7 +1675,22 @@
     "saveChatName": "Save name",
     "unnamedChat": "Note chat",
     "moderationToolbarLabel": "Chair & secretariat actions",
+    "emptyList": "ยังไม่มีบันทึก",
+    "forwardedBadge": "(ส่งต่อ)",
+    "readerWarning": "คำเตือนผู้อ่าน: บันทึกนี้อาจมีภาษาที่ไม่เหมาะสม",
+    "viewFullNote": "ดูบันทึกฉบับเต็ม",
     "fromLabel": "From:",
+    "toLabel": "ถึง:",
+    "toEmpty": "—",
+    "star": "ดาว",
+    "starred": "ติดดาว",
+    "forwardToSmt": "ส่งต่อไปยัง SMT",
+    "forwardToAdvisor": "ส่งต่อไปที่ {name}",
+    "forwardedToAdvisor": "ส่งต่อให้ที่ปรึกษาแล้ว",
+    "forwardedToAdvisorBadge": "(ถึงที่ปรึกษา)",
+    "advisorFallback": "ที่ปรึกษา",
+    "forwarded": "ส่งต่อแล้ว",
+    "report": "รายงาน",
     "moderation": {
       "queueTitle": "Note review queue",
       "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
@@ -1341,6 +1714,22 @@
         "reported": "chair report",
         "unknown": "moderation policy"
       }
+    },
+    "fullNoteTitle": "บันทึกเต็ม",
+    "fullNoteAria": "บันทึกเต็ม",
+    "close": "ปิด",
+    "unknownCountry": "ไม่ทราบ",
+    "chairFallback": "เก้าอี้",
+    "errors": {
+      "votingProcedure": "ขั้นตอนการลงคะแนนเสียงทำงานอยู่: การเขียนบันทึกถูกปิดใช้งาน",
+      "sessionInactive": "หมายเหตุจะถูกปิดใช้งานในขณะที่เซสชั่นของคณะกรรมการไม่ได้ใช้งาน",
+      "unmoderated": "บันทึกจะถูกปิดใช้งานในระหว่างการประชุมกลุ่มที่ไม่มีการกลั่นกรอง",
+      "smtVerify": "ตรวจสอบด้วยรหัสผ่านรองของเจ้าหน้าที่เพื่อส่งบันทึกไปยังคณะกรรมการชุดนี้",
+      "emptyContent": "เขียนเนื้อหาบันทึกก่อน",
+      "noRecipients": "เลือกผู้รับอย่างน้อยหนึ่งคน (การมอบหมายหรือประธาน)",
+      "needAllocation": "คุณต้องมีการจัดสรรเพื่อส่งบันทึก (หรือเป็นประธาน)",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
+      "sendFailed": "ไม่สามารถส่งข้อความได้"
     }
   },
   "adminPage": {
@@ -1476,23 +1865,43 @@
       "unauthorized": "ไม่ได้รับอนุญาต",
       "codeSaved": "บันทึกรหัสแล้ว ผู้ร่วมประชุมใช้เป็นประตูที่สองหลังรหัสการประชุม",
       "invalidEmail": "ป้อนที่อยู่อีเมลที่ถูกต้อง",
+      "missingChairRole": "เลือกที่นั่งและคณะกรรมการสำหรับคำเชิญนี้",
+      "invalidChairRole": "ที่นั่งตรงไม่ตรงกับแผนประธานของคณะกรรมการชุดนี้",
+      "daisSeatRowMissing": "ไม่พบแถว {seat} สำหรับคณะกรรมการนั้น ลองบันทึกเมทริกซ์การจัดสรรสำหรับเหตุการณ์ แล้วลองอีกครั้ง",
+      "daisSeatAlreadyFilled": "เบาะนั่งนั้นมีเก้าอี้อยู่แล้ว ยกเลิกการมอบหมายบุคคลปัจจุบันในเมทริกซ์การจัดสรร (หรือเครื่องมืออื่น) ก่อน",
+      "seatHeadChair": "หัวหน้าเก้าอี้",
+      "seatCoChair": "ประธานร่วม",
       "onlySmtInviteChair": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถส่งคำเชิญเป็นประธานได้",
       "missingServiceRoleKey": "เซิร์ฟเวอร์ไม่มี SUPABASE_SERVICE_ROLE_KEY เพิ่มลงใน Deployment env (อย่าเปิดเผยต่อเบราว์เซอร์)",
       "missingPublicAppUrl": "ตั้งค่า NEXT_PUBLIC_APP_URL เป็น URL ไซต์สาธารณะของคุณ (เช่น https://your-app.vercel.app) เพื่อให้ลิงก์เชิญเปลี่ยนเส้นทางได้อย่างถูกต้อง",
       "emailAlreadyHasAccount": "อีเมลนั้นมีบัญชีอยู่แล้ว ใช้ \"บทบาทประธานมอบทุน\" ด้านล่างแทนการส่งคำเชิญอีกครั้ง",
       "inviteSentButRoleSetFailed": "ส่งคำเชิญแล้ว แต่ไม่สามารถกำหนดบทบาทประธานในโปรไฟล์ได้: {error} ใช้ \"บทบาทเก้าอี้ให้สิทธิ์\" หลังจากที่พวกเขายอมรับ",
+      "inviteSentButAllocationFailed": "ส่งคำเชิญและชุดบทบาทเก้าอี้แล้ว แต่ไม่สามารถเชื่อมโยงที่นั่งไดส์ได้: {error} แก้ไขเมทริกซ์การจัดสรรหรือติดต่อฝ่ายสนับสนุน",
       "inviteSentSuccess": "ส่งอีเมลคำเชิญไปที่ {email} พวกเขาจะเป็นเก้าอี้หลังจากตั้งรหัสผ่านแล้ว",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
       "onlySmtGrantChair": "มีเพียงสำนักเลขาธิการเท่านั้นที่สามารถมอบบทบาทประธานได้",
       "noAccountForEmail": "ยังไม่มีบัญชีที่ใช้อีเมลนั้น ส่งคำเชิญเก้าอี้ก่อน",
-      "promotedToChairSuccess": "โปรไฟล์สำหรับ {email} ตอนนี้เป็นเก้าอี้เตี้ยแล้ว",
-      "missingChairRole": "เลือกที่นั่งและคณะกรรมการสำหรับคำเชิญนี้",
-      "daisSeatRowMissing": "ไม่พบแถว {seat} สำหรับคณะกรรมการนั้น ลองบันทึกเมทริกซ์การจัดสรรสำหรับเหตุการณ์ แล้วลองอีกครั้ง",
-      "daisSeatAlreadyFilled": "เบาะนั่งนั้นมีเก้าอี้อยู่แล้ว ยกเลิกการมอบหมายบุคคลปัจจุบันในเมทริกซ์การจัดสรร (หรือเครื่องมืออื่น) ก่อน",
-      "seatHeadChair": "หัวหน้าเก้าอี้",
-      "seatCoChair": "ประธานร่วม",
-      "inviteSentButAllocationFailed": "ส่งคำเชิญและชุดบทบาทเก้าอี้แล้ว แต่ไม่สามารถเชื่อมโยงที่นั่งไดส์ได้: {error} แก้ไขเมทริกซ์การจัดสรรหรือติดต่อฝ่ายสนับสนุน",
-      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "ที่นั่งตรงไม่ตรงกับแผนประธานของคณะกรรมการชุดนี้"
+      "promotedToChairSuccess": "โปรไฟล์สำหรับ {email} ตอนนี้เป็นเก้าอี้เตี้ยแล้ว"
+    },
+    "advisorStaff": {
+      "notSignedIn": "ไม่ได้ลงชื่อเข้าใช้",
+      "onlySmt": "มีเพียงสำนักเลขาธิการหรือผู้ดูแลเว็บไซต์เท่านั้นที่สามารถจัดการที่ปรึกษาได้",
+      "unauthorized": "ไม่ได้รับอนุญาต",
+      "invalidEmail": "ป้อนที่อยู่อีเมลที่ถูกต้อง",
+      "missingServiceRole": "เซิร์ฟเวอร์ไม่มี SUPABASE_SERVICE_ROLE_KEY",
+      "missingAppUrl": "ตั้งค่า NEXT_PUBLIC_APP_URL สำหรับลิงก์เปลี่ยนเส้นทางคำเชิญ",
+      "emailAlreadyRegistered": "อีเมลนั้นมีบัญชีอยู่แล้ว กำหนดบทบาทเป็นที่ปรึกษาในผู้ดูแลระบบ จากนั้นมอบหมายผู้รับมอบสิทธิ์",
+      "inviteRoleFailed": "ส่งคำเชิญแล้ว แต่ไม่สามารถกำหนดบทบาทที่ปรึกษาได้: {message}",
+      "inviteSent": "ส่งคำเชิญไปที่ {email} พวกเขาจะเป็นที่ปรึกษาหลังจากตั้งรหัสผ่านแล้ว",
+      "invalidAdvisorEmail": "กรอกอีเมลของที่ปรึกษา",
+      "missingDelegate": "เลือกที่นั่งผู้รับมอบสิทธิ์",
+      "invalidAllocationId": "ป้อน UUID การจัดสรรที่ถูกต้อง",
+      "advisorNotFound": "ไม่พบบัญชีสำหรับอีเมลที่ปรึกษานั้น",
+      "notAdvisorRole": "ผู้ใช้รายนั้นไม่ใช่ที่ปรึกษา เชิญพวกเขาหรือกำหนดบทบาทเป็นที่ปรึกษาก่อน",
+      "delegateNotFound": "ไม่พบที่นั่งผู้รับมอบสิทธิ์",
+      "delegateUnlinked": "ที่นั่งนั้นยังไม่มีบัญชีผู้รับมอบสิทธิ์ที่เชื่อมโยง",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned).",
+      "assigned": "มอบหมายที่ปรึกษาให้กับ {country}"
     },
     "allocationSignup": {
       "mustBeSignedIn": "คุณต้องลงชื่อเข้าใช้",
@@ -1510,26 +1919,6 @@
       "emailSubject": "การส่งออกวัสดุ InterMUN ({range})",
       "emailSendConfigHint": "ตั้งค่า SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS และสามารถเลือก MATERIALS_EXPORT_FROM บนเซิร์ฟเวอร์",
       "exportEmailedTo": "ส่งออกอีเมลไปที่ {email} หากคุณไม่เห็น ให้ตรวจสอบสแปม/ขยะ"
-    },
-    "advisorStaff": {
-      "notSignedIn": "ไม่ได้ลงชื่อเข้าใช้",
-      "onlySmt": "มีเพียงสำนักเลขาธิการหรือผู้ดูแลเว็บไซต์เท่านั้นที่สามารถจัดการที่ปรึกษาได้",
-      "unauthorized": "ไม่ได้รับอนุญาต",
-      "invalidEmail": "ป้อนที่อยู่อีเมลที่ถูกต้อง",
-      "missingServiceRole": "เซิร์ฟเวอร์ไม่มี SUPABASE_SERVICE_ROLE_KEY",
-      "missingAppUrl": "ตั้งค่า NEXT_PUBLIC_APP_URL สำหรับลิงก์เปลี่ยนเส้นทางคำเชิญ",
-      "emailAlreadyRegistered": "อีเมลนั้นมีบัญชีอยู่แล้ว กำหนดบทบาทเป็นที่ปรึกษาในผู้ดูแลระบบ จากนั้นมอบหมายผู้รับมอบสิทธิ์",
-      "inviteRoleFailed": "ส่งคำเชิญแล้ว แต่ไม่สามารถกำหนดบทบาทที่ปรึกษาได้: {message}",
-      "inviteSent": "ส่งคำเชิญไปที่ {email} พวกเขาจะเป็นที่ปรึกษาหลังจากตั้งรหัสผ่านแล้ว",
-      "invalidAdvisorEmail": "กรอกอีเมลของที่ปรึกษา",
-      "missingDelegate": "เลือกที่นั่งผู้รับมอบสิทธิ์",
-      "advisorNotFound": "ไม่พบบัญชีสำหรับอีเมลที่ปรึกษานั้น",
-      "notAdvisorRole": "ผู้ใช้รายนั้นไม่ใช่ที่ปรึกษา เชิญพวกเขาหรือกำหนดบทบาทเป็นที่ปรึกษาก่อน",
-      "delegateNotFound": "ไม่พบที่นั่งผู้รับมอบสิทธิ์",
-      "delegateUnlinked": "ที่นั่งนั้นยังไม่มีบัญชีผู้รับมอบสิทธิ์ที่เชื่อมโยง",
-      "assigned": "มอบหมายที่ปรึกษาให้กับ {country}",
-      "invalidAllocationId": "ป้อน UUID การจัดสรรที่ถูกต้อง",
-      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1554,6 +1943,7 @@
     "selectConferenceFirst": "เลือกการประชุมที่มีประตูเหตุการณ์ก่อน จากนั้นจึงกลับมาที่นี่",
     "committeeSessionsTitle": "การประชุมคณะกรรมการในครั้งนี้",
     "committeeSessionsBody": "การ์ดแต่ละใบมีหนึ่งห้อง: ป้ายแบบสั้น ชื่ออย่างเป็นทางการ โลโก้ หัวข้อวาระการประชุมสูงสุดสองหัวข้อ ลิงก์ RoP รหัสห้องหกอักขระที่ใช้ร่วมกัน (ประตูที่สอง) และโปรไฟล์ขั้นตอน รหัสห้องพักจะต้องไม่ซ้ำกันในแต่ละห้องในงานนี้",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
     "noCommitteeSessions": "ไม่มีการประชุมคณะกรรมการสำหรับงานนี้",
     "eventName": "ชื่อกิจกรรม",
     "tagline": "สโลแกน",
@@ -1568,8 +1958,22 @@
     "errorUploadFailed": "การอัปโหลดล้มเหลว",
     "sessionTitle": "ชื่อเซสชัน",
     "chamberLabel": "ห้อง/ฉลาก",
+    "committeeLabelShort": "ป้ายคณะกรรมการ",
+    "committeeLabelPlaceholder": "เช่น ECOSOC, DISEC, ตำรวจสากล",
     "officialCommitteeName": "ชื่อคณะกรรมการอย่างเป็นทางการ (ตาราง SMT)",
+    "officialCommitteeNameGrid": "ชื่อคณะกรรมการอย่างเป็นทางการ",
     "officialCommitteeNamePlaceholder": "เช่น องค์การอนามัยโลก",
+    "topic1Label": "หัวข้อที่ 1",
+    "topic2Label": "หัวข้อ 2 (ไม่บังคับ)",
+    "topic2Placeholder": "คำถามวาระที่สอง",
+    "topic2DisabledHint": "เพิ่มแถวหัวข้อที่สองเพื่อแก้ไขฟิลด์นี้",
+    "addSecondTopic": "เพิ่มหัวข้อที่สอง",
+    "addingTopic": "กำลังเพิ่ม...",
+    "ropDocumentLink": "หลักเกณฑ์การดำเนินการ (ลิงค์เอกสาร)",
+    "ropDocumentPlaceholder": "https://…",
+    "roomCodeLabel": "รหัสห้อง (ประตูที่สอง)",
+    "roomCodeHelpPrefix": "ตัวอักษรหรือตัวเลขหกตัวที่ใช้ร่วมกันสำหรับห้องนี้ (ข้อเสนอแนะ:",
+    "roomCodeHelpSuffix": ").",
     "chairNames": "ชื่อเก้าอี้",
     "chairNamesPlaceholder": "คั่นด้วยเครื่องหมายจุลภาค เช่น อเล็กซ์ คิม, จอร์แดน ลี",
     "committeeLogo": "โลโก้ของคณะกรรมการ",
@@ -1595,26 +1999,12 @@
     "committeeCodePlaceholder": "เช่น อีโค741",
     "committeeCodeHelpPrefix": "อักขระหกตัว: ชื่อย่อของห้อง + ตัวเลขสามหลัก (ข้อเสนอแนะเชิงกำหนด:",
     "saveCommittee": "บันทึกคณะกรรมการ",
-    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "ป้ายคณะกรรมการ",
-    "committeeLabelPlaceholder": "เช่น ECOSOC, DISEC, ตำรวจสากล",
-    "officialCommitteeNameGrid": "ชื่อคณะกรรมการอย่างเป็นทางการ",
-    "topic1Label": "หัวข้อที่ 1",
-    "topic2Label": "หัวข้อ 2 (ไม่บังคับ)",
-    "topic2Placeholder": "คำถามวาระที่สอง",
-    "topic2DisabledHint": "เพิ่มแถวหัวข้อที่สองเพื่อแก้ไขฟิลด์นี้",
-    "addSecondTopic": "เพิ่มหัวข้อที่สอง",
-    "addingTopic": "กำลังเพิ่ม...",
-    "ropDocumentLink": "หลักเกณฑ์การดำเนินการ (ลิงค์เอกสาร)",
-    "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "รหัสห้อง (ประตูที่สอง)",
-    "roomCodeHelpPrefix": "ตัวอักษรหรือตัวเลขหกตัวที่ใช้ร่วมกันสำหรับห้องนี้ (ข้อเสนอแนะ:",
-    "roomCodeHelpSuffix": ").",
     "schedule": {
       "title": "ตารางการประชุมสองวัน",
       "subtitle": "วางแผนบล็อกต่อกลุ่มผู้รับมอบสิทธิ์ (กลุ่มเดียวกับที่คุณใช้กับคณะกรรมการคลัสเตอร์) สีตามประเภทบล็อก: เซสชั่น พัก หรือพิธี ทำเครื่องหมายอาหารกลางวันเพื่อตรวจสอบการทับซ้อนกัน บันทึกด้วยกิจกรรมที่กำลังดำเนินอยู่",
       "day1Tab": "วันที่ 1",
       "day2Tab": "วันที่ 2",
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating.",
       "lunchOverlapTab": "อาหารกลางวันทับซ้อนกัน",
       "lunchOverlapHelp": "การทับซ้อนจะปรากฏขึ้นเมื่อทั้งสองกลุ่มมีแถวที่ทำเครื่องหมายว่าเป็นมื้อเที่ยงในวันเดียวกันและมีช่วงเวลาตัดกัน",
       "noLunchOverlaps": "ไม่พบการทับซ้อนกันของอาหารกลางวัน ทำเครื่องหมายอย่างน้อยหนึ่งแถวเป็นอาหารกลางวันโดยแบ่งเป็นสองกลุ่มในวันเดียวกันโดยมีเวลาคาบเกี่ยวกัน",
@@ -1651,6 +2041,19 @@
       "saved": "บันทึกกำหนดการแล้ว",
       "resetTemplate": "รีเซ็ตเป็นเทมเพลต",
       "confirmReset": "รีเซ็ตกำหนดการเป็นค่าเริ่มต้นสามกลุ่มและล้างบล็อคทั้งหมดหรือไม่",
+      "lunchOverlap": {
+        "title": "อาหารกลางวันทับซ้อนกับคณะกรรมการอื่นๆ",
+        "body": "เปรียบเทียบช่วงพักกลางวันของคณะกรรมการของคุณกับคณะกรรมการอื่นๆ มากถึง {max} เลือกวัน จากนั้นเลือกคณะกรรมการด้านล่าง",
+        "pickCommittees": "เปรียบเทียบกับ",
+        "noneSelected": "เลือกคณะกรรมการหนึ่งชุดขึ้นไปเพื่อดูรายงานการประชุมรับประทานอาหารกลางวันร่วมกัน",
+        "yourLunch": "อาหารกลางวันของคุณ",
+        "theirLunch": "อาหารกลางวันของพวกเขา",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}",
+        "overlap": "อาหารกลางวันร่วมกัน: {start}–{end} ({minutes} นาที)",
+        "noOverlap": "ไม่มีเวลารับประทานอาหารกลางวันร่วมกันในวันนี้"
+      },
       "seamunLocked": {
         "title": "SEAMUN I 2027 — ตารางภาพอย่างเป็นทางการ",
         "body": "แผนสองวันนี้ได้รับการแก้ไขแล้วสำหรับ SEAMUN I 2027 ซึ่งตรงกับกำหนดการหลักที่เผยแพร่ และไม่สามารถเปลี่ยนแปลงได้ในแอป (รวมถึงโดยสำนักเลขาธิการด้วย)",
@@ -1671,42 +2074,25 @@
         "committeeMatrixHint": "แต่ละห้องจะเดินตามนาฬิกาวันที่ 1 / วันที่ 2 ของเส้นทาง (คอลัมน์ที่มีชื่อกลุ่มเดียวกันในแผนภูมิด้านบน)",
         "colScheduleTrack": "ติดตามกำหนดการ",
         "colChambers": "Chambers (ป้ายกำกับในงานนี้)",
-        "advisorHint": "แตะที่ทีม จากนั้นดูตารางเวลาที่ปรึกษา (A–D) หรือตารางเวลาของผู้ร่วมประชุม/ประธานสำหรับคณะกรรมการชุดเดียว ไม่ใช่ทั้งสองอย่างพร้อมกัน",
-        "advisorOnlyHint": "เลือกเส้นทางกำหนดการของคุณ จากนั้นที่ปรึกษา A–D เพื่อดูวันของที่ปรึกษานั้น",
-        "committeeOnlyHint": "ตารางเวลาอย่างเป็นทางการของคณะกรรมการของคุณ ด้านล่างนี้เป็นการเปรียบเทียบเวลาอาหารกลางวันกับคณะกรรมการอื่นๆ",
-        "pickTrack": "ติดตามกำหนดการ:",
-        "viewAllTeams": "ทุกทีม",
-        "orPickTeam": "หรือทีม:",
-        "viewAs": "ดูเป็น",
-        "modeAdvisor": "ที่ปรึกษา",
-        "modeCommittee": "คณะกรรมการ (ผู้แทน / ประธาน)",
-        "pickAdvisor": "ที่ปรึกษา",
-        "pickCommittee": "คณะกรรมการ",
-        "selectAdvisorPrompt": "เลือกที่ปรึกษา A, B, C หรือ D เพื่อดูตารางเวลานั้น",
-        "selectCommitteePrompt": "เลือกคณะกรรมการของคุณเพื่อดูตารางเวลาของผู้ร่วมประชุม/ประธาน",
-        "teamShort": {
-          "g1": "อัลฟ่า",
-          "g2": "เบต้า",
-          "g3": "แกมมา",
-          "g4": "เดลต้า",
-          "support": "เอปซิลอน"
-        },
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
         "smtBrowseHint": "เลือกทีมทั้งหมด (เลือกกลุ่ม) ตารางเวลาของคณะกรรมการหนึ่งคณะ หรือตารางเวลาที่ปรึกษา - แต่ละมุมมองจะแยกจากกัน",
         "browseTeams": "ทุกทีม",
         "browseCommittee": "โดยคณะกรรมการ",
         "browseAdvisor": "โดยที่ปรึกษา",
         "teamsScopeAll": "ภาพรวม (ทุกกลุ่ม)",
-        "pickGroup": "กลุ่ม:",
-        "pickCommitteeAll": "คณะกรรมการ:",
-        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
-        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
-        "colLunchGroup": "Lunch group",
         "pickDebateTrack": "Debate track:",
         "pickLunchGroup": "Lunch group:",
+        "pickCommitteeAll": "คณะกรรมการ:",
+        "advisorOnlyHint": "เลือกเส้นทางกำหนดการของคุณ จากนั้นที่ปรึกษา A–D เพื่อดูวันของที่ปรึกษานั้น",
         "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
         "advisorRosterMember": "Advisor {n}",
         "advisorRosterColumn": "Advisor {n}",
+        "selectAdvisorPrompt": "เลือกที่ปรึกษา A, B, C หรือ D เพื่อดูตารางเวลานั้น",
+        "committeeOnlyHint": "ตารางเวลาอย่างเป็นทางการของคณะกรรมการของคุณ ด้านล่างนี้เป็นการเปรียบเทียบเวลาอาหารกลางวันกับคณะกรรมการอื่นๆ",
         "advisorColumnSuffix": "Advisor",
+        "selectCommitteePrompt": "เลือกคณะกรรมการของคุณเพื่อดูตารางเวลาของผู้ร่วมประชุม/ประธาน",
         "lunchGroupTitle": {
           "l1": "Lunch group 1",
           "l2": "Lunch group 2",
@@ -1716,22 +2102,13 @@
           "l1": "Lunch 1",
           "l2": "Lunch 2",
           "l3": "Lunch 3"
+        },
+        "teamShort": {
+          "g1": "อัลฟ่า",
+          "g2": "เบต้า",
+          "g3": "แกมมา"
         }
-      },
-      "lunchOverlap": {
-        "title": "อาหารกลางวันทับซ้อนกับคณะกรรมการอื่นๆ",
-        "body": "เปรียบเทียบช่วงพักกลางวันของคณะกรรมการของคุณกับคณะกรรมการอื่นๆ มากถึง {max} เลือกวัน จากนั้นเลือกคณะกรรมการด้านล่าง",
-        "pickCommittees": "เปรียบเทียบกับ",
-        "noneSelected": "เลือกคณะกรรมการหนึ่งชุดขึ้นไปเพื่อดูรายงานการประชุมรับประทานอาหารกลางวันร่วมกัน",
-        "yourLunch": "อาหารกลางวันของคุณ",
-        "theirLunch": "อาหารกลางวันของพวกเขา",
-        "overlap": "อาหารกลางวันร่วมกัน: {start}–{end} ({minutes} นาที)",
-        "noOverlap": "ไม่มีเวลารับประทานอาหารกลางวันร่วมกันในวันนี้",
-        "combinedWindow": "{start}–{end} (eat + chill)",
-        "eatingWindow": "Eat {start}–{end}",
-        "chillingWindow": "Chill {start}–{end}"
-      },
-      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
+      }
     }
   },
   "allocationMatrixManager": {
@@ -1756,6 +2133,7 @@
     "rosterHeading": "บัญชีรายชื่อ · {หัวเรื่อง}",
     "seatsSummary": "{count} ที่นั่ง",
     "linkedDelegatesCannotBeDeleted": "ไม่สามารถลบผู้รับมอบสิทธิ์ที่เชื่อมโยงได้ที่นี่",
+    "secretariatParliamentarianSeat": "สมาชิกรัฐสภา · ที่นั่ง {seat}",
     "countryPosition": "ประเทศ/ตำแหน่ง",
     "placardCode": "รหัสป้ายประกาศ",
     "assignedAccount": "บัญชีที่ได้รับมอบหมาย",
@@ -1785,8 +2163,36 @@
     "csvPlaceholder": "ฝรั่งเศส,DIS-001\\nเยอรมนี,DIS-002\\nญี่ปุ่น",
     "parsedRowsSample": "แยกวิเคราะห์แล้ว {count} แถว ตัวอย่าง:",
     "runImport": "เรียกใช้การนำเข้า",
-    "generateMissingRandomCodes": "สร้างรหัสสุ่มที่หายไป",
-    "secretariatParliamentarianSeat": "สมาชิกรัฐสภา · ที่นั่ง {seat}"
+    "generateMissingRandomCodes": "สร้างรหัสสุ่มที่หายไป"
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "ตารางการจัดสรรคณะกรรมการสำหรับเซสชันปัจจุบันของคุณ นี่เป็นแบบอ่านอย่างเดียวสำหรับเก้าอี้ และแสดงถึงการกำหนดที่นั่งและรหัสป้ายประกาศ",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "การจัดสรร",
+      "flag": "ธง",
+      "email": "อีเมล",
+      "name": "ชื่อ",
+      "grade": "ระดับ",
+      "notes": "หมายเหตุ",
+      "requestedAllocation": "ขอจัดสรร",
+      "account": "บัญชี",
+      "actions": "การดำเนินการ"
+    },
+    "noRows": "ไม่พบแถวการจัดสรรสำหรับคณะกรรมการชุดนี้",
+    "pendingApprovalsTitle": "อยู่ระหว่างการอนุมัติการลงทะเบียน",
+    "pendingApprovalsIntro": "ประธานอนุมัติหรือปฏิเสธการลงทะเบียนลิงก์การจัดสรรเพื่อให้แน่ใจว่าผู้รับมอบสิทธิ์ใช้บัญชีที่ถูกต้อง",
+    "noPendingRequests": "ไม่มีคำขอที่ค้างอยู่",
+    "unknownAllocation": "การจัดสรรที่ไม่รู้จัก",
+    "approve": "อนุมัติ",
+    "reject": "ปฏิเสธ"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "เมทริกซ์การจัดสรร",
+    "selectConferenceEventFirst": "เลือกกิจกรรมการประชุมก่อน",
+    "enterConferenceCode": "กรอกรหัสการประชุม",
+    "intro": "สร้างหรือนำเข้ารายชื่อที่นั่งสำหรับคณะกรรมการแต่ละชุดในกิจกรรมที่กำลังดำเนินอยู่ ผู้รับมอบสิทธิ์เลือกแถวที่ประตูคณะกรรมการหลังจากลงชื่อเข้าใช้ รหัสป้ายประกาศสามารถตรงกับรหัสสเปรดชีตของคุณได้"
   },
   "chairAwardsPage": {
     "committeeLabel": "คณะกรรมการ",
@@ -1843,6 +2249,54 @@
       }
     }
   },
+  "chairAwardsDelegateMatrix": {
+    "title": "ผู้รับมอบสิทธิ์ทุกคน — รูบริกเซสชัน (จำเป็น)",
+    "intro": "หกมิติเดียวกับการเสนอชื่อผู้ได้รับมอบหมายที่ดีที่สุดของคณะกรรมการ คุณต้องให้คะแนน <strong>ผู้ร่วมประชุมทุกคน</strong> ก่อนที่จะส่งการเสนอชื่อไปยัง SMT (เสร็จสมบูรณ์ {completeCount}/{total})",
+    "complete": "สมบูรณ์",
+    "incomplete": "ไม่สมบูรณ์",
+    "saving": "ประหยัด...",
+    "saveThisDelegate": "บันทึกผู้รับมอบสิทธิ์นี้",
+    "autosaved": "บันทึกอัตโนมัติ",
+    "autosaveFailed": "บันทึกอัตโนมัติล้มเหลว",
+    "autosavedWithCountry": "บันทึกอัตโนมัติ — {ประเทศ}",
+    "delegateFallback": "ผู้รับมอบสิทธิ์",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
+  },
   "chairOverviewPage": {
     "fallbackYourCommittee": "คณะกรรมการของคุณ",
     "fallbackCommittee": "คณะกรรมการ",
@@ -1873,6 +2327,10 @@
       "session": {
         "label": "การประชุม",
         "hint": "เริ่ม/หยุดเซสชันของคณะกรรมการ (ประทับเวลา)"
+      },
+      "agenda": {
+        "label": "กำหนดการ",
+        "hint": "หัวข้อสด & ยอดคะแนนโหวตต่อวาระ"
       },
       "speakers": {
         "label": "ลำโพง",
@@ -1929,14 +2387,39 @@
       "committeeRoomFull": {
         "label": "ห้องกรรมการ (เต็ม)",
         "hint": "เค้าโครงเสมือนจริงและพื้นของผู้ร่วมประชุม"
-      },
-      "agenda": {
-        "label": "กำหนดการ",
-        "hint": "หัวข้อสด & ยอดคะแนนโหวตต่อวาระ"
       }
     }
   },
   "awardsRubric": {
+    "maxPoints": "สูงสุด {points} คะแนน",
+    "reference": {
+      "title": "SEAMUN I มอบรูบริกอย่างเป็นทางการ",
+      "description": "สำเนาอ้างอิง: ประเภทรางวัล กระบวนการประเมิน และเมทริกซ์ 1-8 แบนด์เต็ม (จากรูบริกการประชุม) การให้คะแนนใน InterMUN จะใช้เกณฑ์เกณฑ์เดียวกับการส่งการเสนอชื่อ"
+    },
+    "sections": {
+      "catalogue": "แคตตาล็อกรางวัล",
+      "processOversight": "กระบวนการรับรางวัลและการกำกับดูแล",
+      "calibrationTraining": "การสอบเทียบเก้าอี้และการฝึกอบรม (มาตราส่วน 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "ทั้งการประชุม (โดยรวม)",
+      "collectiveChair": "ส่วนรวมและเก้าอี้",
+      "committeeLevel": "ระดับคณะกรรมการ"
+    },
+    "matrices": {
+      "positionPaper": "กระดาษตำแหน่ง (กระดาษตำแหน่งที่ดีที่สุด)",
+      "delegateLiveSessions": "ผู้รับมอบสิทธิ์ (เซสชันสด)",
+      "chairPerformance": "ประสิทธิภาพของเก้าอี้",
+      "chairReportOverall": "รายงานของประธาน - ภาพรวม",
+      "chairReportSectionSpecific": "รายงานของประธาน - เฉพาะส่วน",
+      "bestCommittee": "คณะกรรมการที่ดีที่สุด"
+    },
+    "evidenceNote": "เป็นประธานของหลักฐานที่สมบูรณ์และการยืนยันเป็นลายลักษณ์อักษรสำหรับบันทึก SMT: หลักฐานหลักเกี่ยวกับความเป็นเลิศและเหตุผลเทียบกับรองชนะเลิศ (ตามแบบฟอร์มที่เผยแพร่)",
+    "footnotes": {
+      "delegateLiveSessions": "ความคิดสร้างสรรค์ การทูต การทำงานร่วมกัน ความเป็นผู้นำ ความรู้และการวิจัย การมีส่วนร่วม - คะแนนละ 8 คะแนน",
+      "chairPerformance": "แปดมิติคะแนนที่ 8 คะแนนในแต่ละด้านสำหรับการจัดตำแหน่งการประเมินเก้าอี้ / เก้าอี้ที่ดีที่สุด",
+      "chairReportSectionSpecific": "เมื่อรวมกับส่วนโดยรวมข้างต้นแล้ว คะแนนรายงานของประธานทั้งหมดสูงถึง 72 คะแนนในระดับขยายในเอกสารอย่างเป็นทางการ"
+    },
     "criteriaHeader": "เกณฑ์",
     "bandHeaders": {
       "0": "จุดเริ่มต้น",
@@ -2237,216 +2720,7 @@
           "3": "การทำงานร่วมกันอย่างราบรื่น เวทีเป็นแรงบันดาลใจให้กับสภาพแวดล้อมที่เป็นมืออาชีพและมีเดิมพันสูง"
         }
       }
-    },
-    "maxPoints": "สูงสุด {points} คะแนน",
-    "reference": {
-      "title": "SEAMUN I มอบรูบริกอย่างเป็นทางการ",
-      "description": "สำเนาอ้างอิง: ประเภทรางวัล กระบวนการประเมิน และเมทริกซ์ 1-8 แบนด์เต็ม (จากรูบริกการประชุม) การให้คะแนนใน InterMUN จะใช้เกณฑ์เกณฑ์เดียวกับการส่งการเสนอชื่อ"
-    },
-    "sections": {
-      "catalogue": "แคตตาล็อกรางวัล",
-      "processOversight": "กระบวนการรับรางวัลและการกำกับดูแล",
-      "calibrationTraining": "การสอบเทียบเก้าอี้และการฝึกอบรม (มาตราส่วน 1-8)"
-    },
-    "headings": {
-      "conferenceWideOverall": "ทั้งการประชุม (โดยรวม)",
-      "collectiveChair": "ส่วนรวมและเก้าอี้",
-      "committeeLevel": "ระดับคณะกรรมการ"
-    },
-    "matrices": {
-      "positionPaper": "กระดาษตำแหน่ง (กระดาษตำแหน่งที่ดีที่สุด)",
-      "delegateLiveSessions": "ผู้รับมอบสิทธิ์ (เซสชันสด)",
-      "chairPerformance": "ประสิทธิภาพของเก้าอี้",
-      "chairReportOverall": "รายงานของประธาน - ภาพรวม",
-      "chairReportSectionSpecific": "รายงานของประธาน - เฉพาะส่วน",
-      "bestCommittee": "คณะกรรมการที่ดีที่สุด"
-    },
-    "evidenceNote": "เป็นประธานของหลักฐานที่สมบูรณ์และการยืนยันเป็นลายลักษณ์อักษรสำหรับบันทึก SMT: หลักฐานหลักเกี่ยวกับความเป็นเลิศและเหตุผลเทียบกับรองชนะเลิศ (ตามแบบฟอร์มที่เผยแพร่)",
-    "footnotes": {
-      "delegateLiveSessions": "ความคิดสร้างสรรค์ การทูต การทำงานร่วมกัน ความเป็นผู้นำ ความรู้และการวิจัย การมีส่วนร่วม - คะแนนละ 8 คะแนน",
-      "chairPerformance": "แปดมิติคะแนนที่ 8 คะแนนในแต่ละด้านสำหรับการจัดตำแหน่งการประเมินเก้าอี้ / เก้าอี้ที่ดีที่สุด",
-      "chairReportSectionSpecific": "เมื่อรวมกับส่วนโดยรวมข้างต้นแล้ว คะแนนรายงานของประธานทั้งหมดสูงถึง 72 คะแนนในระดับขยายในเอกสารอย่างเป็นทางการ"
     }
-  },
-  "chairChecklists": {
-    "common": {
-      "progressSynced": "{done} / {total} เสร็จสมบูรณ์ - ซิงค์กับคณะกรรมการนี้แล้ว",
-      "loading": "กำลังโหลด...",
-      "resetChecklist": "รีเซ็ตรายการตรวจสอบ"
-    },
-    "prepPage": {
-      "description": "ก่อนการประชุม: กฎ หัวข้อ ห้อง วัสดุ และทีมงาน ซิงค์กับเก้าอี้ทั้งหมดในคณะกรรมการชุดนี้ รีเซ็ตจะล้างมันสำหรับทุกคน",
-      "crisisHidden": "รายการเตรียมการเฉพาะสำหรับภาวะวิกฤตจะถูกซ่อนไว้สำหรับคณะกรรมการประเภทนี้"
-    },
-    "flowPage": {
-      "description": "การไหลของคณะกรรมการปกติ - ทำเครื่องหมายตามขั้นตอนที่คุณดำเนินการ แบ่งปันระหว่างบัญชีเก้าอี้และอุปกรณ์ รีเซ็ตจะเคลียร์สำหรับทุกคน"
-    },
-    "prep": {
-      "sections": {
-        "rules": {
-          "title": "กฎและขั้นตอน"
-        },
-        "topic": {
-          "title": "คณะกรรมการและหัวข้อ"
-        },
-        "room": {
-          "title": "ห้องและเทคโนโลยี"
-        },
-        "materials": {
-          "title": "วัสดุและโลจิสติกส์"
-        },
-        "crisis": {
-          "title": "วิกฤตการณ์ (ถ้ามี)"
-        },
-        "team": {
-          "title": "ทีมงานและการสื่อสาร"
-        }
-      },
-      "items": {
-        "rop": "อ่านและทำความเข้าใจกฎขั้นตอนการปฏิบัติงานของคณะกรรมการ",
-        "parliamentary": "ทบทวนกระบวนการรัฐสภา (ญัตติ ประเด็น การลงคะแนนเสียง)",
-        "speaking-times": "ยืนยันเวลาพูดและการจำกัดเวลา",
-        "quorum": "รู้ข้อกำหนดองค์ประชุมและการลงคะแนนเสียง",
-        "research": "หัวข้อและความเป็นมาของคณะกรรมการวิจัย",
-        "study-guide": "อ่านคู่มือการศึกษาและเอกสารสำคัญ",
-        "dashboard-topic": "ตั้งชื่อคณะกรรมการและหัวข้อในแดชบอร์ด",
-        "agenda": "เตรียมวาระและขั้นตอนการประชุม",
-        "digital-room": "จัดทำห้องดิจิทัล (รายชื่อผู้ร่วมประชุม, ป้ายประกาศ)",
-        "tech-check": "การตรวจสอบเทคโนโลยี: แพลตฟอร์ม เสียง การแชร์หน้าจอ",
-        "backup": "มีแผนสำรองหากเทคโนโลยีล้มเหลว",
-        "roll-plan": "จัดทำรายชื่อผู้โทรเข้าและการเข้างาน",
-        "speakers-plan": "วางแผนการจัดการรายชื่อวิทยากร",
-        "templates": "เตรียมการเคลื่อนไหว/จุดร่วม (หากใช้เทมเพลต)",
-        "timing": "ยืนยันเวลาเริ่มต้นและการพักเซสชัน",
-        "crisis-slides": "ตรวจสอบองค์ประกอบวิกฤตและอัปเดตสไลด์",
-        "crisis-cues": "ลำดับวิทยากรวางแผน/ตัวชี้นำในภาวะวิกฤติ",
-        "crisis-paths": "เตรียมแนวทางและข้อเท็จจริงในภาวะวิกฤต",
-        "co-chairs": "ประสานงานกับประธานร่วมในบทบาทต่างๆ",
-        "staff": "ยืนยันการสนับสนุนของพนักงาน / เวทีและสัญญาณ",
-        "delegate-brief": "เตรียมบรีฟสำหรับผู้ร่วมประชุม (กฎ, เวลา)"
-      }
-    },
-    "flow": {
-      "items": {
-        "roll-call": "ม้วนสาย",
-        "open-floor": "เปิดพื้น (จุดและการเคลื่อนไหว)",
-        "recognize": "รับรู้การเคลื่อนไหว",
-        "vote-1": "ลงคะแนนเสียงในญัตติ",
-        "engage": "มีส่วนร่วมในการเคลื่อนไหวที่เลือกหรือย้ายไปที่ GSL",
-        "open-again": "เปิดพื้นอีกครั้ง",
-        "recognize-repeat": "รับรู้การเคลื่อนไหว (ทำซ้ำตามต้องการ)",
-        "vote-2": "ลงคะแนนเสียงในญัตติ",
-        "cycle": "ดำเนินวงจรต่อ (มีส่วนร่วม / GSL -> พื้นเปิด)"
-      }
-    }
-  },
-  "chairAllocationMatrixPage": {
-    "intro": "ตารางการจัดสรรคณะกรรมการสำหรับเซสชันปัจจุบันของคุณ นี่เป็นแบบอ่านอย่างเดียวสำหรับเก้าอี้ และแสดงถึงการกำหนดที่นั่งและรหัสป้ายประกาศ",
-    "separator": "—",
-    "dash": "—",
-    "columns": {
-      "allocation": "การจัดสรร",
-      "flag": "ธง",
-      "email": "อีเมล",
-      "name": "ชื่อ",
-      "grade": "ระดับ",
-      "notes": "หมายเหตุ",
-      "requestedAllocation": "ขอจัดสรร",
-      "account": "บัญชี",
-      "actions": "การดำเนินการ"
-    },
-    "noRows": "ไม่พบแถวการจัดสรรสำหรับคณะกรรมการชุดนี้",
-    "pendingApprovalsTitle": "อยู่ระหว่างการอนุมัติการลงทะเบียน",
-    "pendingApprovalsIntro": "ประธานอนุมัติหรือปฏิเสธการลงทะเบียนลิงก์การจัดสรรเพื่อให้แน่ใจว่าผู้รับมอบสิทธิ์ใช้บัญชีที่ถูกต้อง",
-    "noPendingRequests": "ไม่มีคำขอที่ค้างอยู่",
-    "unknownAllocation": "การจัดสรรที่ไม่รู้จัก",
-    "approve": "อนุมัติ",
-    "reject": "ปฏิเสธ"
-  },
-  "smtAllocationMatrixPage": {
-    "title": "เมทริกซ์การจัดสรร",
-    "selectConferenceEventFirst": "เลือกกิจกรรมการประชุมก่อน",
-    "enterConferenceCode": "กรอกรหัสการประชุม",
-    "intro": "สร้างหรือนำเข้ารายชื่อที่นั่งสำหรับคณะกรรมการแต่ละชุดในกิจกรรมที่กำลังดำเนินอยู่ ผู้รับมอบสิทธิ์เลือกแถวที่ประตูคณะกรรมการหลังจากลงชื่อเข้าใช้ รหัสป้ายประกาศสามารถตรงกับรหัสสเปรดชีตของคุณได้"
-  },
-  "chairSpeakerQueuePanel": {
-    "dash": "—",
-    "speakerList": "รายชื่อวิทยากร",
-    "addedToSpeakerList": "เพิ่มในรายการวิทยากรแล้ว",
-    "chooseDelegationsNotAlreadyQueued": "เลือกการมอบหมายที่ยังไม่ได้รอหรืออยู่ในรายการปัจจุบัน",
-    "addedSpeakersInOrder": "เพิ่มวิทยากรแล้ว {count} คนในลำดับรายชื่อคณะกรรมการ",
-    "introPrefix": "เพิ่มคณะผู้แทนตามลำดับการพูด ผู้รับมอบสิทธิ์ยังคงสามารถใช้งานได้",
-    "requestToSpeak": "ขอพูด",
-    "introMiddle": "ในห้องคณะกรรมการ ใช้",
-    "sessionTimerLink": "เซสชั่น → ตัวจับเวลา",
-    "introSuffixPrefix": "สำหรับเวลาต่อผู้พูดและ",
-    "advanceSpeaker": "วิทยากรล่วงหน้า",
-    "addDelegation": "เพิ่มการมอบหมาย",
-    "select": "เลือก…",
-    "add": "เพิ่ม",
-    "addSelectedToList": "เพิ่มรายการที่เลือกไว้",
-    "dismissReminder": "ปิดการแจ้งเตือน",
-    "moveUp": "เลื่อนขึ้น",
-    "moveDown": "เลื่อนลง",
-    "current": "ปัจจุบัน",
-    "remove": "ลบ",
-    "prompt": {
-      "gslTitle": "รายชื่อวิทยากรทั่วไป (GSL)",
-      "moderatedTimerTitle": "การประชุมกลุ่มที่มีการกลั่นกรอง (ตัวจับเวลาต่อผู้พูด)",
-      "moderatedPassedTitle": "ผ่านการพิจารณาของพรรคการเมืองแล้ว",
-      "bodyPrefix": "ใช้รายชื่อวิทยากรด้านล่างเพื่อ",
-      "add": "เพิ่ม",
-      "bodyAddMiddle": "ผู้ได้รับมอบหมาย (ดร็อปดาวน์ +",
-      "bodyAddMiddle2": "หรือทำเครื่องหมายการมอบหมายและ",
-      "bodyRemovePrefix": ") และ",
-      "remove": "ลบ",
-      "bodyRemoveMiddle": "พวกเขาด้วย",
-      "bodyRowSuffix": "ในแต่ละแถว เรียงลำดับใหม่ด้วยลูกศรหรือชุด",
-      "bodyEnd": "เมื่อมีคนอยู่ที่ไมโครโฟน",
-      "noAllocations": "ยังไม่มีการจัดสรรสำหรับคณะกรรมการชุดนี้ ปิดเมื่อพร้อม คุณสามารถเพิ่มผู้พูดได้ภายหลังจากส่วนควบคุมรายการ",
-      "quickAdd": "เพิ่มด่วน (ยังไม่รอหรือปัจจุบัน)",
-      "alreadyQueued": "ทุกการจัดสรรมีช่องรอหรือช่องปัจจุบันอยู่แล้ว ลบรายการออกหากคุณต้องการเรียงลำดับใหม่ หรือยกเลิกเมื่อคุณดำเนินการเสร็จแล้ว"
-    },
-    "status": {
-      "current": "ปัจจุบัน",
-      "waiting": "ซึ่งรอคอย"
-    }
-  },
-  "timersWidget": {
-    "timer": "ตัวจับเวลา",
-    "currentSpeaker": "วิทยากรคนปัจจุบัน",
-    "nextSpeaker": "ผู้บรรยายคนต่อไป",
-    "speakerTimePerSpeaker": "เวลาผู้พูด (ซ้าย / ฝาครอบ)",
-    "speakerTimeTotal": "เวลาผู้พูด (ซ้าย / ทั้งหมด)",
-    "perSpeaker": "(ต่อผู้พูด)",
-    "paused": "(หยุดชั่วคราว)",
-    "pauseReason": "หยุดชั่วคราว: {เหตุผล}",
-    "dash": "—"
-  },
-  "chairAwardsDelegateMatrix": {
-    "title": "ผู้รับมอบสิทธิ์ทุกคน — รูบริกเซสชัน (จำเป็น)",
-    "intro": "หกมิติเดียวกับการเสนอชื่อผู้ได้รับมอบหมายที่ดีที่สุดของคณะกรรมการ คุณต้องให้คะแนน <strong>ผู้ร่วมประชุมทุกคน</strong> ก่อนที่จะส่งการเสนอชื่อไปยัง SMT (เสร็จสมบูรณ์ {completeCount}/{total})",
-    "complete": "สมบูรณ์",
-    "incomplete": "ไม่สมบูรณ์",
-    "saving": "ประหยัด...",
-    "saveThisDelegate": "บันทึกผู้รับมอบสิทธิ์นี้",
-    "autosaved": "บันทึกอัตโนมัติ",
-    "autosaveFailed": "บันทึกอัตโนมัติล้มเหลว",
-    "autosavedWithCountry": "บันทึกอัตโนมัติ — {ประเทศ}",
-    "delegateFallback": "ผู้รับมอบสิทธิ์",
-    "modeSwitchLabel": "Scoring layout",
-    "modeList": "List",
-    "modeGuided": "Guided",
-    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
-    "guidedProgress": "Delegate {current} of {total}",
-    "guidedComplete": "{completeCount}/{total} scored",
-    "previous": "Back",
-    "saveAndNext": "Save & next",
-    "nextUnscored": "Next unscored",
-    "finish": "Finish",
-    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
-    "allScoredTitle": "All delegates scored",
-    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "เพิ่มแหล่งที่มา",
@@ -2589,6 +2863,7 @@
     "preliminaryPassing": "ผ่าน (เบื้องต้น)",
     "preliminaryFailing": "ล้มเหลว (เบื้องต้น)",
     "delegateRollCall": "มอบหมายการโทร ({count})",
+    "unseatedPlacard": "ที่นั่งเปิดอยู่ (ยังไม่มีการกำหนดผู้รับมอบสิทธิ์)",
     "noSeatedDelegates": "ไม่มีผู้ร่วมประชุมที่นั่งว่างสำหรับการเคลื่อนไหวนี้",
     "rollPrefix": "ม้วน:",
     "recordedPrefix": "บันทึก:",
@@ -2607,6 +2882,13 @@
     "recentClosedMotions": "การเคลื่อนไหวปิดล่าสุด",
     "noClosedMotions": "ยังไม่มีการเคลื่อนไหวปิด",
     "untitled": "ไม่มีชื่อ",
+    "agendaVoteSection": "วาระการลงคะแนนเสียง",
+    "agendaVoteSectionHelp": "บัตรลงคะแนนกำหนดวาระจะใช้เสียงข้างมากสองในสาม สำหรับแต่ละป้าย ให้บันทึกว่า ใช่ งดออกเสียง (เมื่ออนุญาตให้หมุนได้) หรือ ไม่ งดออกเสียงสำหรับผู้ร่วมประชุมที่ทำเครื่องหมายว่าอยู่และลงคะแนนเสียงในรายชื่อ กระแสนี้แยกจากการเคลื่อนไหวอย่างเป็นทางการด้านล่าง",
+    "recordVoteChoice": "บันทึกการลงคะแนน",
+    "chairRecordVotesHint": "สำหรับการมอบหมายที่นั่งแต่ละครั้ง ให้แตะใช่ งด (ถ้ามี) ไม่ใช่ หรือล้าง งดเว้นตามกฎการทอย; มันถูกปิดการใช้งานสำหรับการปัจจุบันและการลงคะแนนเสียง",
+    "abstainNotApplicableMotionType": "การงดเว้นจะไม่ถูกบันทึกสำหรับการเคลื่อนไหวประเภทนี้ (ใช่/ไม่ใช่เท่านั้น)",
+    "abstainDisabledPresentVotingRoll": "งดออกเสียงสำหรับผู้ร่วมประชุมที่ทำเครื่องหมายว่าอยู่และลงคะแนนเสียง",
+    "closeAgendaBallot": "ปิดวาระการลงคะแนนเสียง",
     "voteTypes": {
       "motion": "การเคลื่อนไหว",
       "amendment": "การแก้ไข",
@@ -2618,55 +2900,9 @@
       "present_abstain": "ปัจจุบัน — อาจงด (ม้วน)",
       "present_voting": "นำเสนอและลงคะแนนเสียง (ม้วน)",
       "unknown": "- (ม้วน)"
-    },
-    "unseatedPlacard": "ที่นั่งเปิดอยู่ (ยังไม่มีการกำหนดผู้รับมอบสิทธิ์)",
-    "agendaVoteSection": "วาระการลงคะแนนเสียง",
-    "agendaVoteSectionHelp": "บัตรลงคะแนนกำหนดวาระจะใช้เสียงข้างมากสองในสาม สำหรับแต่ละป้าย ให้บันทึกว่า ใช่ งดออกเสียง (เมื่ออนุญาตให้หมุนได้) หรือ ไม่ งดออกเสียงสำหรับผู้ร่วมประชุมที่ทำเครื่องหมายว่าอยู่และลงคะแนนเสียงในรายชื่อ กระแสนี้แยกจากการเคลื่อนไหวอย่างเป็นทางการด้านล่าง",
-    "closeAgendaBallot": "ปิดวาระการลงคะแนนเสียง",
-    "recordVoteChoice": "บันทึกการลงคะแนน",
-    "chairRecordVotesHint": "สำหรับการมอบหมายที่นั่งแต่ละครั้ง ให้แตะใช่ งด (ถ้ามี) ไม่ใช่ หรือล้าง งดเว้นตามกฎการทอย; มันถูกปิดการใช้งานสำหรับการปัจจุบันและการลงคะแนนเสียง",
-    "abstainNotApplicableMotionType": "การงดเว้นจะไม่ถูกบันทึกสำหรับการเคลื่อนไหวประเภทนี้ (ใช่/ไม่ใช่เท่านั้น)",
-    "abstainDisabledPresentVotingRoll": "งดออกเสียงสำหรับผู้ร่วมประชุมที่ทำเครื่องหมายว่าอยู่และลงคะแนนเสียง"
+    }
   },
   "profile": {
-    "tabs": {
-      "ariaLabel": "ส่วนโปรไฟล์",
-      "overview": "ภาพรวม",
-      "awards": "รางวัล",
-      "private": "บันทึกส่วนตัว",
-      "settings": "การตั้งค่าโปรไฟล์"
-    },
-    "profilePicture": "รูปโปรไฟล์",
-    "uploadFile": "อัพโหลดไฟล์",
-    "uploading": "กำลังอัปโหลด...",
-    "photoSaved": "อัปโหลดและบันทึกรูปภาพแล้ว",
-    "orUrl": "หรือกำหนดโดย URL",
-    "urlPlaceholder": "https://...",
-    "name": "ชื่อ",
-    "username": "ชื่อผู้ใช้",
-    "usernamePlaceholder": "เช่น alex_1999",
-    "pronouns": "คำสรรพนาม",
-    "customPronounNote": "โปรไฟล์ของคุณมีชุดสรรพนามที่กำหนดเองซึ่งไม่ได้รับการยอมรับที่นี่อีกต่อไป เลือกตัวเลือกด้านบน (หรือเว้นว่างไว้) การบันทึกจะแทนที่ค่าเก่า",
-    "school": "โรงเรียน",
-    "schoolPlaceholder": "เช่น โรงเรียนมัธยมลินคอล์น",
-    "grade": "ระดับ",
-    "selectGrade": "เลือกเกรด",
-    "conferencesAttended": "การประชุมเข้าร่วม",
-    "awardsComma": "รางวัล (คั่นด้วยลูกน้ำ)",
-    "awardsPlaceholder": "ผู้แทนที่ดีที่สุด, รางวัลชมเชย",
-    "allocation": "การจัดสรร",
-    "selectAllocation": "เลือกการจัดสรร",
-    "noAllocationsPlaceholder": "ไม่มีการจัดสรรคณะกรรมการ",
-    "saveProfile": "บันทึกโปรไฟล์",
-    "saved": "บันทึกโปรไฟล์แล้ว",
-    "saveFailed": "ไม่สามารถบันทึกโปรไฟล์ได้",
-    "errUsernamePattern": "Username ต้องมีความยาว 3-32 ตัวอักษร (ตัวอักษร, ตัวเลข, _, ., -)",
-    "errPronounsPreset": "เลือกสรรพนามจากรายการ",
-    "errImageType": "กรุณาเลือกไฟล์ภาพ",
-    "errImageSize": "รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 5 MB)",
-    "errUploadFailed": "การอัปโหลดล้มเหลว",
-    "errStorageSetup": "ไม่ได้ตั้งค่าการจัดเก็บรูปโปรไฟล์ ในโปรเจ็กต์ Supabase ให้เรียกใช้การโยกย้าย 00100_profile_pictures_storage_bucket.sql หรือสร้างที่เก็บข้อมูลสาธารณะชื่อโปรไฟล์-รูปภาพ (ดู README)",
-    "errPublicUrl": "ไม่สามารถแก้ไข URL สาธารณะสำหรับรูปภาพที่อัปโหลด",
     "fallbacks": {
       "yourCountry": "ประเทศของคุณ",
       "committeeSession": "สมัยประชุมคณะกรรมการ",
@@ -2674,6 +2910,13 @@
       "speechNote": "บันทึกคำพูด",
       "untitledMotion": "ความเคลื่อนไหวที่ไม่มีชื่อ",
       "dash": "—"
+    },
+    "tabs": {
+      "ariaLabel": "ส่วนโปรไฟล์",
+      "overview": "ภาพรวม",
+      "awards": "รางวัล",
+      "private": "บันทึกส่วนตัว",
+      "settings": "การตั้งค่าโปรไฟล์"
     },
     "delegateWelcome": {
       "title": "ยินดีต้อนรับผู้แทนจาก {flag} {country}",
@@ -2739,6 +2982,40 @@
       "gradeValue": "เกรด {เกรด}",
       "awards": "รางวัล"
     },
+    "profilePicture": "รูปโปรไฟล์",
+    "uploadFile": "อัพโหลดไฟล์",
+    "uploading": "กำลังอัปโหลด...",
+    "photoSaved": "อัปโหลดและบันทึกรูปภาพแล้ว",
+    "orUrl": "หรือกำหนดโดย URL",
+    "urlPlaceholder": "https://...",
+    "name": "ชื่อ",
+    "username": "ชื่อผู้ใช้",
+    "usernamePlaceholder": "เช่น alex_1999",
+    "pronouns": "คำสรรพนาม",
+    "customPronounNote": "โปรไฟล์ของคุณมีชุดสรรพนามที่กำหนดเองซึ่งไม่ได้รับการยอมรับที่นี่อีกต่อไป เลือกตัวเลือกด้านบน (หรือเว้นว่างไว้) การบันทึกจะแทนที่ค่าเก่า",
+    "school": "โรงเรียน",
+    "schoolPlaceholder": "เช่น โรงเรียนมัธยมลินคอล์น",
+    "grade": "ระดับ",
+    "selectGrade": "เลือกเกรด",
+    "jobRole": "บทบาทหน้าที่",
+    "jobRolePlaceholder": "เช่น ผู้อำนวยการ MUN ครู (ไม่บังคับ)",
+    "advisorSettingsHint": "โปรไฟล์เจ้าหน้าที่ของโรงเรียน — ไม่มีการจัดสรรเกรดหรือผู้รับมอบสิทธิ์",
+    "conferencesAttended": "การประชุมเข้าร่วม",
+    "awardsComma": "รางวัล (คั่นด้วยลูกน้ำ)",
+    "awardsPlaceholder": "ผู้แทนที่ดีที่สุด, รางวัลชมเชย",
+    "allocation": "การจัดสรร",
+    "selectAllocation": "เลือกการจัดสรร",
+    "noAllocationsPlaceholder": "ไม่มีการจัดสรรคณะกรรมการ",
+    "saveProfile": "บันทึกโปรไฟล์",
+    "saved": "บันทึกโปรไฟล์แล้ว",
+    "saveFailed": "ไม่สามารถบันทึกโปรไฟล์ได้",
+    "errUsernamePattern": "Username ต้องมีความยาว 3-32 ตัวอักษร (ตัวอักษร, ตัวเลข, _, ., -)",
+    "errPronounsPreset": "เลือกสรรพนามจากรายการ",
+    "errImageType": "กรุณาเลือกไฟล์ภาพ",
+    "errImageSize": "รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 5 MB)",
+    "errUploadFailed": "การอัปโหลดล้มเหลว",
+    "errStorageSetup": "ไม่ได้ตั้งค่าการจัดเก็บรูปโปรไฟล์ ในโปรเจ็กต์ Supabase ให้เรียกใช้การโยกย้าย 00100_profile_pictures_storage_bucket.sql หรือสร้างที่เก็บข้อมูลสาธารณะชื่อโปรไฟล์-รูปภาพ (ดู README)",
+    "errPublicUrl": "ไม่สามารถแก้ไข URL สาธารณะสำหรับรูปภาพที่อัปโหลด",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
     "dashboardCommitteeSelect": "เลือกคณะกรรมการ...",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
@@ -2749,10 +3026,7 @@
     "dashboardCommitteeApplySwitch": "สลับแดชบอร์ดไปที่คณะกรรมการนี้",
     "timerExpiryAlarmTitle": "เสียงจับเวลา",
     "timerExpiryAlarmLabel": "เล่นเสียงระฆังสั้น ๆ เมื่อการนับถอยหลังในแอปถึงศูนย์ (ตัวจับเวลาคำพูด การจำกัดเวลาเซสชัน กำหนดเวลาของฮับ)",
-    "timerExpiryAlarmHint": "ปิดโดยค่าเริ่มต้น เก็บไว้ในเบราว์เซอร์นี้เท่านั้น",
-    "jobRole": "บทบาทหน้าที่",
-    "jobRolePlaceholder": "เช่น ผู้อำนวยการ MUN ครู (ไม่บังคับ)",
-    "advisorSettingsHint": "โปรไฟล์เจ้าหน้าที่ของโรงเรียน — ไม่มีการจัดสรรเกรดหรือผู้รับมอบสิทธิ์"
+    "timerExpiryAlarmHint": "ปิดโดยค่าเริ่มต้น เก็บไว้ในเบราว์เซอร์นี้เท่านั้น"
   },
   "guides": {
     "default": {
@@ -3168,6 +3442,7 @@
       "limitOverBy": "เกินด้วย {value}",
       "quickLinkSession": "การประชุม",
       "quickLinkRoll": "ม้วน",
+      "quickLinkAgenda": "กำหนดการ",
       "quickLinkSpeakers": "ลำโพง",
       "quickLinkMotions": "การเคลื่อนไหว",
       "quickLinkTimer": "ตัวจับเวลา",
@@ -3180,8 +3455,7 @@
       "rollCallYou": "ม้วนสาย (คุณ)",
       "fullAnnouncement": "ประกาศฉบับเต็ม",
       "daisAnnouncement": "ประกาศไดส์",
-      "close": "ปิด",
-      "quickLinkAgenda": "กำหนดการ"
+      "close": "ปิด"
     },
     "committeeControl": {
       "sessionNameLabel": "ชื่อเซสชัน",
@@ -3227,13 +3501,45 @@
       "startSession": "เริ่มเซสชัน",
       "sidebarUsePrefix": "ใช้แถบด้านข้างสำหรับ",
       "rollCall": "ม้วนสาย",
+      "agenda": "กำหนดการ",
       "speakers": "ลำโพง",
       "formalMotions": "การเคลื่อนไหวอย่างเป็นทางการ",
       "timer": "ตัวจับเวลา",
       "sidebarAnd": "และ",
       "announcements": "ประกาศ",
-      "sidebarUseSuffix": "— หนึ่งเครื่องมือต่อแท็บ",
-      "agenda": "กำหนดการ"
+      "sidebarUseSuffix": "— หนึ่งเครื่องมือต่อแท็บ"
+    },
+    "scheduledSessions": {
+      "title": "Scheduled sessions",
+      "subtitle": "One-click start for each committee session on the timetable. Names and time limits are pre-filled from the schedule.",
+      "help": "These presets come from the SEAMUN I 2027 timetable. Pick the day you're on, then press Start to begin that session with its name and length already set. While this page is open you'll be reminded 5 minutes and 1 minute before each session's scheduled start.",
+      "dayLabel": "Day",
+      "day1": "Day 1",
+      "day2": "Day 2",
+      "noSessions": "No scheduled sessions for this day.",
+      "durationLabel": "{minutes} min",
+      "start": "Start",
+      "starting": "Starting…",
+      "startAria": "Start {title} at {start}",
+      "statusLive": "Live now",
+      "statusUpcoming": "Upcoming",
+      "statusStartsIn": "Starts in {minutes} min",
+      "statusStartingNow": "Starting now",
+      "statusPast": "Ended",
+      "startFailed": "Could not start the session. Please try again.",
+      "reminderTitle": "Session starting soon",
+      "reminderTitleResolutions": "Resolutions due soon",
+      "reminderTitleClosing": "Closing ceremony soon",
+      "reminder5Min": "{title} is scheduled to start in 5 minutes ({start}).",
+      "reminder1Min": "{title} is scheduled to start in 1 minute ({start}).",
+      "reminderStartNow": "{title} is scheduled to start now ({start}).",
+      "reminderResolutionsDue": "Resolutions are due in {minutes} minutes (deadline {start}).",
+      "reminderClosing": "Closing ceremony starts in {minutes} minutes ({start}).",
+      "dismissReminder": "Dismiss",
+      "startNow": "Start now",
+      "remindersHint": "Reminders show here while this page is open.",
+      "soundOn": "Reminder sound on",
+      "soundOff": "Reminder sound off"
     },
     "history": {
       "title": "ประวัติเซสชัน",
@@ -3275,6 +3581,13 @@
       "pauseReasonPlaceholder": "เช่น ประเด็นสำคัญ ปัญหาทางเทคโนโลยี การประชุมคอคัสที่ไม่มีการกลั่นกรอง...",
       "pauseClock": "นาฬิกาหยุดชั่วคราว",
       "startClock": "เริ่มนาฬิกา",
+      "euTimerBoardTitle": "คณะกรรมการจับเวลารัฐสภาสหภาพยุโรป (11 ตัวจับเวลา)",
+      "euTimerBoardHelp": "ตัวจับเวลาหนึ่งครั้งต่อปาร์ตี้ บวกเวลาทั้งหมด เวลา POI/POC และเวลาของวิทยากร ใช้นำไปใช้เพื่อคัดลอกแถวลงในช่องตัวจับเวลาถ่ายทอดสดบนแท็บนาฬิกา (เวลาของผู้พูด / ตัวจับเวลาบันทึก)",
+      "euTimerName": "ชื่อ",
+      "euTimerTag": "แท็ก",
+      "euTotalTime": "เวลาทั้งหมด",
+      "euPoiPocTime": "เวลาที่น่าสนใจ/POC",
+      "euSpeakerTime": "เวลาผู้พูด",
       "perSpeakerTitle": "เวลาต่อผู้พูด (การประชุมกลุ่มย่อยแบบมีผู้ดูแล)",
       "perSpeakerHelp": "ตั้งค่าเวลาทั้งหมดเป็นขีดจำกัดต่อลำโพง และเวลาของลำโพงเป็นเวลาที่เหลือ การเลื่อนขั้นสูงไปยังลำโพงตัวถัดไปและรีเซ็ตที่เหลืออยู่ที่ฝาปิด",
       "currentSpeaker": "วิทยากรคนปัจจุบัน",
@@ -3305,204 +3618,47 @@
       "alreadyPaused": "ตัวจับเวลาหยุดชั่วคราวแล้ว",
       "pausedForCommittee": "ตัวจับเวลาหยุดชั่วคราวสำหรับคณะกรรมการ",
       "alreadyRunning": "ตัวจับเวลากำลังทำงานอยู่แล้ว",
-      "runningForCommittee": "จับเวลาวิ่งให้กับคณะกรรมการ",
-      "euTimerBoardTitle": "คณะกรรมการจับเวลารัฐสภาสหภาพยุโรป (11 ตัวจับเวลา)",
-      "euTimerBoardHelp": "ตัวจับเวลาหนึ่งครั้งต่อปาร์ตี้ บวกเวลาทั้งหมด เวลา POI/POC และเวลาของวิทยากร ใช้นำไปใช้เพื่อคัดลอกแถวลงในช่องตัวจับเวลาถ่ายทอดสดบนแท็บนาฬิกา (เวลาของผู้พูด / ตัวจับเวลาบันทึก)",
-      "euTimerName": "ชื่อ",
-      "euTimerTag": "แท็ก",
-      "euTotalTime": "เวลาทั้งหมด",
-      "euPoiPocTime": "เวลาที่น่าสนใจ/POC",
-      "euSpeakerTime": "เวลาผู้พูด"
+      "runningForCommittee": "จับเวลาวิ่งให้กับคณะกรรมการ"
     }
   },
-  "roleSetupChecklist": {
-    "admin": {
-      "title": "รายการตรวจสอบการตั้งค่าผู้ดูแล",
-      "subtitle": "การตั้งค่าระดับเว็บไซต์และจัดหาพนักงาน",
-      "step1Label": "สร้างงาน + คณะกรรมการแรก",
-      "step1Detail": "สร้างประตูการประชุมและคณะกรรมการ",
-      "step2Label": "เชิญหรือเลื่อนขั้นบัญชี SMT",
-      "step2Detail": "ให้สิทธิ์เลขานุการก่อนการดำเนินงานคณะกรรมการ",
-      "step3Label": "ตรวจสอบขั้นตอนพอร์ทัลสถานะ",
-      "step3Detail": "ติดตามกระแสผู้แทนรอ → ยืนยันแล้ว",
-      "step4Label": "ส่งมอบให้แดชบอร์ด SMT",
-      "step4Detail": "การดำเนินงานคณะกรรมการสดดำเนินต่อในเครื่องมือ SMT"
-    },
-    "smt": {
-      "title": "รายการตรวจสอบการตั้งค่า SMT",
-      "subtitle": "การควบคุมระดับการประชุมก่อนประธานและผู้แทนเข้า",
-      "step1Label": "ยืนยันงาน + การประชุมคณะกรรมการ",
-      "step1Detail": "ตรวจสอบชื่อ แท็ก ชื่อประธาน และลิงก์วิกฤต",
-      "step2Label": "ตั้งรหัสห้อง + การเข้าถึงประธาน",
-      "step2Detail": "ให้แน่ใจว่าแต่ละคณะกรรมการมีรหัสประตูที่ถูกต้อง",
-      "step3Label": "เตรียมการจัดสรร + เอกสารลงชื่อเข้า",
-      "step3Detail": "นำเข้าที่นั่ง แล้วตั้งรหัสผ่าน/รหัส",
-      "step4Label": "เผยแพร่เอกสารทั่วโลก (RoP / เกณฑ์)",
-      "step4Detail": "อัปโหลดเอกสารอ้างอิงร่วมสำหรับผู้ใช้ทั้งหมด"
-    },
-    "chair": {
-      "title": "รายการตรวจสอบการตั้งค่าประธาน",
-      "subtitle": "ความพร้อมของห้องและการควบคุมการประชุมสำหรับคณะกรรมการของคุณ",
-      "step1Label": "ตรวจสอบเมทริกซ์ผู้แทน + การอนุมัติ",
-      "step1Detail": "ยืนยันการมอบหมายและการตรวจสอบการลงทะเบียนที่ค้าง",
-      "step2Label": "ดำเนินการอนุมัติการเรียกชื่อ",
-      "step2Detail": "ทำเครื่องหมายผู้แทนว่ามาประชุมก่อนมีส่วนร่วมในที่ประชุม",
-      "step3Label": "ตั้งตัวจับเวลา + ลำดับผู้พูด",
-      "step3Detail": "บันทึกค่าที่ตั้งห้องประชุมก่อนเปิดญัตติ",
-      "step4Label": "เปิดการดำเนินงานห้องดิจิทัล",
-      "step4Detail": "ประสานผู้พูด บันทึก และการมองเห็นการประชุม"
-    },
-    "delegate": {
-      "title": "รายการตรวจสอบการตั้งค่าผู้แทน",
-      "subtitle": "เตรียมพร้อมเข้าร่วมคณะกรรมการอย่างรวดเร็ว",
-      "step1Label": "กรอกข้อมูลพื้นฐานโปรไฟล์",
-      "step1Detail": "ตรวจสอบชื่อ การจัดสรร และรายละเอียดบัญชี",
-      "step2Label": "อ่าน RoP + เกณฑ์รางวัล",
-      "step2Detail": "เปิดเอกสารที่แชร์ที่ SMT อัปโหลด",
-      "step3Label": "สร้างเอกสารเตรียมการของคุณ",
-      "step3Detail": "อัปโหลด/แก้ไขบันทึกเตรียมการในแอปโดยตรง",
-      "step4Label": "เข้าร่วมห้องคณะกรรมการ + การเรียกชื่อ",
-      "step4Detail": "รอการอนุมัติการมาประชุมจากประธาน แล้วจึงพูด"
-    }
+  "newsroom": {
+    "liveBadge": "Live",
+    "sourceLine": "Current affairs · {source}",
+    "headlinesTitle": "Latest headlines",
+    "loading": "Loading the latest headlines…",
+    "error": "Couldn't reach the news feed. Retrying…",
+    "empty": "No headlines available right now.",
+    "reconnecting": "Reconnecting…",
+    "updatedAgo": "Updated {count}s ago",
+    "justNow": "just now",
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago",
+    "attribution": "Headlines from {source} (news.un.org), refreshed automatically."
   },
-  "smtCommitteeView": {
-    "title": "สำนักเลขาธิการ: มุมมองประธานและผู้เข้าร่วมประชุม",
-    "intro": "เลือกคณะกรรมการสำหรับเครื่องมือเก้าอี้และที่นั่งของผู้รับมอบสิทธิ์ที่เชื่อมโยงกับบัญชีของคุณ จากนั้นสลับพื้นผิว การลงชื่อเข้าใช้ยังคงเปิดศูนย์กลางสำนักเลขาธิการตามค่าเริ่มต้น",
-    "bindRequiredHint": "เลือกประธานคณะกรรมการและ/หรือที่นั่งของผู้รับมอบสิทธิ์ด้านล่าง จากนั้นลองอีกครั้ง",
-    "chairCommitteeLabel": "คณะกรรมการชั้นเก้าอี้",
-    "chairCommitteePlaceholder": "เลือกคณะกรรมการ...",
-    "delegateSeatLabel": "ที่นั่งผู้รับมอบสิทธิ์ (การจัดสรรของคุณ)",
-    "delegateSeatPlaceholder": "เลือกที่นั่ง...",
-    "saveBindings": "บันทึกการมอบหมายงาน",
-    "bindingsSaved": "บันทึกแล้ว",
-    "switchViewHeading": "สลับแดชบอร์ด",
-    "switchViewHelp": "สำนักเลขาธิการส่งคุณกลับคืนสู่ SMT ประธานและผู้รับมอบสิทธิ์เปิดเก้าอี้จริงและผู้รับมอบสิทธิ์เชลล์ในแอปเดียวกันที่ใช้สำหรับกิจกรรมที่กำลังดำเนินอยู่",
-    "goSecretariat": "สำนักเลขาธิการ",
-    "goChair": "วิวเก้าอี้",
-    "goDelegate": "มุมมองการมอบหมาย",
-    "surfaceSwitchError": "ไม่สามารถสลับมุมมองได้ ตรวจสอบประตูเหตุการณ์และการเลือก",
-    "pickChairFirst": "เลือกประธานคณะกรรมการก่อน (หรือบันทึกงานที่ได้รับมอบหมาย)",
-    "pickDelegateFirst": "เลือกที่นั่งของผู้รับมอบสิทธิ์ก่อน (หรือบันทึกการมอบหมาย)",
-    "chairSeatLabel": "Dais seat (optional)",
-    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
-  },
-  "advisorDashboard": {
-    "intro": "คุณสามารถตรวจสอบกิจกรรมของคณะกรรมการของผู้รับมอบสิทธิ์ที่ได้รับมอบหมายได้ คุณไม่สามารถเข้าถึงบันทึกได้ เว้นแต่ประธานหรือ SMT จะส่งต่อบันทึกย่อถึงคุณ",
-    "noAssignments": "ยังไม่มีการมอบสิทธิ์เชื่อมโยงกับบัญชีของคุณ สำนักเลขาธิการจะมอบหมายให้คุณจาก SMT → ที่ปรึกษา",
-    "delegateLinked": "เชื่อมโยงบัญชีผู้รับมอบสิทธิ์แล้ว",
-    "delegateNotLinked": "ที่นั่งยังไม่เชื่อมโยงกับบัญชีผู้รับมอบสิทธิ์",
-    "viewProfile": "ประวัติโดยย่อ",
-    "viewDocuments": "เอกสาร",
-    "viewVoting": "การลงคะแนนเสียง",
-    "forwardedNotes": "บันทึกที่ส่งต่อ",
-    "schedule": {
-      "intro": "เลือกเส้นทางกำหนดการของคุณ จากนั้นที่ปรึกษา A–D เพื่อดูตารางเวลาของที่ปรึกษานั้นในวันนั้น"
-    },
-    "notes": {
-      "intro": "เก้าอี้ Notes หรือ SMT เลือกที่จะแบ่งปันกับคุณ คุณไม่สามารถเรียกดูฟีดบันทึกย่อแบบเต็มได้",
-      "empty": "ยังไม่มีการส่งต่อบันทึกถึงคุณ",
-      "forwarded": "ส่งต่อแล้ว"
-    }
-  },
-  "smtAdvisorsPage": {
-    "title": "ที่ปรึกษา",
-    "subtitle": "เชิญบัญชีที่ปรึกษาทางอีเมล และเชื่อมโยงที่ปรึกษาแต่ละคนเข้ากับที่นั่งผู้รับมอบสิทธิ์หนึ่งคน",
-    "selectEventFirst": "เลือกกิจกรรมการประชุมที่ดำเนินอยู่ก่อน",
-    "enterConferenceCode": "กรอกรหัสการประชุม",
-    "inviteTitle": "เชิญที่ปรึกษา",
-    "inviteBody": "ส่งลิงก์ลงชื่อเข้าใช้ (ขั้นตอนเดียวกับการเชิญประธาน) บทบาทของบัญชีถูกกำหนดให้เป็นที่ปรึกษา",
-    "inviteDisabled": "การเชิญต้องใช้ SUPABASE_SERVICE_ROLE_KEY ในการปรับใช้นี้",
-    "emailLabel": "อีเมล",
-    "emailPlaceholder": "ที่ปรึกษา@school.edu",
-    "sending": "กำลังส่ง...",
-    "inviteButton": "ส่งคำเชิญ",
-    "assignTitle": "มอบหมายผู้รับมอบสิทธิ์",
-    "assignBody": "เลือกที่นั่งของผู้ร่วมประชุมที่เชื่อมโยงกัน ที่ปรึกษาหนึ่งคนต่อผู้รับมอบสิทธิ์ การมอบหมายใหม่จะแทนที่ลิงก์ก่อนหน้า",
-    "advisorEmailLabel": "อีเมล์ที่ปรึกษา",
-    "delegateLabel": "ที่นั่งผู้แทน",
-    "delegatePlaceholder": "เลือกผู้รับมอบสิทธิ์...",
-    "assignedTo": "ที่ปรึกษา: {name}",
-    "saving": "ประหยัด…",
-    "assignButton": "บันทึกงาน",
-    "advisorFallback": "ที่ปรึกษา",
-    "delegateAllocationIdLabel": "รหัสการจัดสรรผู้รับมอบสิทธิ์",
-    "delegateAllocationIdPlaceholder": "เช่น 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "งานปัจจุบัน",
-    "currentAssignmentsHint": "ลิงก์ที่ปรึกษา-ผู้แทนทั้งหมดสำหรับกิจกรรมนี้",
-    "allocationIdsTitle": "รหัสการจัดสรรผู้รับมอบสิทธิ์ที่เชื่อมโยง",
-    "allocationIdsHint": "คัดลอก UUID การจัดสรรจากตารางนี้เมื่อกำหนด",
-    "colAdvisor": "ที่ปรึกษา",
-    "colAllocationId": "รหัสการจัดสรร",
-    "colCountry": "ประเทศ/ที่นั่ง",
-    "colCommittee": "คณะกรรมการ",
-    "inviteSetupTitle": "เปิดใช้งานคำเชิญทางอีเมล",
-    "inviteSetupStep1": "ใน Supabase → การตั้งค่าโครงการ → API ให้คัดลอกรหัสลับ service_role",
-    "inviteSetupStep2": "เพิ่ม SUPABASE_SERVICE_ROLE_KEY ไปยังโฮสต์ env ของคุณ (Render/Vercel) — ไม่ใช่ NEXT_PUBLIC_",
-    "inviteSetupStep3": "เพิ่ม NEXT_PUBLIC_APP_URL ไปยัง URL ไซต์ที่ใช้งานอยู่ของคุณ (เช่น https://your-app.onrender.com)",
-    "inviteSetupStep4": "ปรับใช้ใหม่ (การผลิต) หรือเพิ่มทั้งสองอย่างใน .env.local และรีสตาร์ท npm run dev (ในเครื่อง)",
-    "colDelegate": "Delegate",
-    "delegateFallback": "Delegate"
-  },
-  "smtNotesPage": {
-    "title": "Notes & chats",
-    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
-    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
-    "tabsAria": "SMT notes views",
-    "listTitle": "Notes",
-    "empty": "No notes in this view yet.",
-    "unknownCommittee": "Committee",
-    "allCommittees": "All committees",
-    "selectEventFirst": "Select an active conference event to view notes.",
-    "enterConferenceCode": "Enter conference code",
-    "tabs": {
-      "addressed": "To my account",
-      "fromChairs": "From chairs",
-      "byDelegate": "By delegate",
-      "byAdvisor": "To advisors",
-      "allByCommittee": "All chats"
-    },
-    "tabHints": {
-      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
-      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
-      "byDelegate": "Notes authored by delegations (all committees).",
-      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
-    },
-    "composeTitle": "Send a note",
-    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
-    "composeCommitteeLabel": "Committee",
-    "composeLoading": "Loading committee…",
-    "composeNoCommittees": "No delegate committees in this event yet.",
-    "composeFormTitle": "New secretariat note"
-  },
-  "colorblindMode": {
-    "enableTitle": "Turn on colorblind-friendly colours",
-    "disableTitle": "Turn off colorblind-friendly colours",
-    "enableAria": "Enable colorblind-friendly mode",
-    "disableAria": "Disable colorblind-friendly mode",
-    "on": "Colorblind mode on",
-    "off": "Colorblind mode off"
-  },
-  "chairAwardsFloorActivity": {
-    "title": "Floor activity",
-    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
-    "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
-    },
-    "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
+  "milestones": {
+    "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
+    "yourMilestones": "Your milestones",
+    "committeeTitle": "{committee} — committee milestones",
+    "delegateLeaderboard": "Delegate milestones",
+    "emptyDelegates": "No delegate activity recorded yet.",
+    "empty": "No milestone data yet. Checkpoints appear once your committee is in session.",
+    "earnedOfTotal": "{earned}/{total} earned",
+    "cardTitle": "Milestones",
+    "cardEmpty": "No checkpoints reached yet.",
+    "cardCta": "View all milestones →",
+    "achieved": "Earned",
+    "locked": "Not yet reached",
+    "tierPlus": "{n}+",
+    "allEarned": "All checkpoints earned",
+    "progressToNext": "{count} / {next} to next checkpoint",
+    "metric": {
+      "moderated_caucuses": "Moderated caucuses",
+      "unmoderated_caucuses": "Unmoderated caucuses",
+      "consultations": "Consultations",
+      "resolutions_passed": "Resolutions passed",
+      "speeches": "Speeches delivered",
+      "points_raised": "Points (POI / POC)"
     }
   }
 }

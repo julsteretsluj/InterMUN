@@ -22,6 +22,8 @@ const BASE_TABS = [
   { href: "/chats-notes", labelKey: "notes", emoji: "📝" },
   { href: "/committee-room", labelKey: "committee", emoji: "🏛️" },
   { href: "/history", labelKey: "history", emoji: "🕘" },
+  { href: "/newsroom", labelKey: "newsroom", emoji: "📰" },
+  { href: "/milestones", labelKey: "milestones", emoji: "🏅" },
   { href: "/voting", labelKey: "voting", emoji: "🗳️" },
   { href: "/guides", labelKey: "guides", emoji: "📚" },
   { href: "/documents", labelKey: "documents", emoji: "📄" },

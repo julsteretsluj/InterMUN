@@ -9,6 +9,7 @@ import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getResolvedDebateConferenceBundle } from "@/lib/active-debate-topic";
 import { HubTileLink } from "@/components/HubTileLink";
 import { ChairTopicTabsCard } from "@/components/chair/ChairTopicTabsCard";
+import { MilestonesSummaryCard } from "@/components/milestones/MilestonesSummaryCard";
 import { PriorityTabLink } from "@/components/PriorityTabLink";
 import {
   CHAIR_DASHBOARD_TAB_ORDER,
@@ -165,11 +166,14 @@ export default async function ChairOverviewPage({
           ))}
         </div>
         {activeTab === "overview" ? (
-          <ChairTopicTabsCard
-            topics={debateBundle.debateTopicOptions}
-            activeTopicId={debateBundle.debateConferenceId}
-            committeeLabelRaw={debateBundle.committeeLabelRaw}
-          />
+          <div className="space-y-6">
+            <ChairTopicTabsCard
+              topics={debateBundle.debateTopicOptions}
+              activeTopicId={debateBundle.debateConferenceId}
+              committeeLabelRaw={debateBundle.committeeLabelRaw}
+            />
+            <MilestonesSummaryCard href="/milestones" />
+          </div>
         ) : null}
         {activeTab === "guidance" ? (
           <div className="space-y-6">

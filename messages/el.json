@@ -68,15 +68,15 @@
     "chairEmailPlaceholder": "chair@school.edu",
     "sending": "Αποστολή…",
     "sendChairInvite": "Αποστολή πρόσκλησης προέδρου",
+    "chairRoleLabel": "Κάθισμα Dais",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairInviteOption": "{seat} — {committee}",
+    "chairRoleHeadOf": "Προεδρία του {committee}",
+    "chairRoleCoOf": "Συμπρόεδρος του {committee}",
     "grantChairRoleTitle": "Εκχώρηση ρόλου προέδρου (υπάρχων λογαριασμός)",
     "grantChairRoleHelp": "Εάν έχουν ήδη εγγραφεί ως εκπρόσωπος, προωθήστε τους εδώ για να λάβουν τον πίνακα ελέγχου της προεδρίας και τα εργαλεία επιτροπής (δεν έχει σταλεί email).",
     "grantChairRole": "Χορηγήστε ρόλο καρέκλας",
-    "chamberLabelFallback": "Συνεδρία επιτροπής",
-    "chairRoleLabel": "Κάθισμα Dais",
-    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Προεδρία του {committee}",
-    "chairRoleCoOf": "Συμπρόεδρος του {committee}",
-    "chairInviteOption": "{seat} — {committee}"
+    "chamberLabelFallback": "Συνεδρία επιτροπής"
   },
   "chairDelegateApprovalForm": {
     "title": "Αποδοχή αντιπροσώπου μέσω email + κατανομή",
@@ -219,8 +219,59 @@
     "presetAmendmentTitle": "Τροπολογία",
     "guidedStepChooseProcedure": "Βήμα 1/5: Επιλέξτε διαδικασία (εισαγωγή αριθμού).",
     "invalidProcedureSelection": "Μη έγκυρη επιλογή διαδικασίας.",
+    "guidedNoAgendaTopics": "Δεν υπάρχουν διαθέσιμα θέματα ημερήσιας διάταξης για αυτήν την επιτροπή.",
+    "guidedStepChooseAgendaTopic": "Βήμα 2/5: Επιλέξτε θέμα ημερήσιας διάταξης (εισαγάγετε αριθμό).",
+    "guidedInvalidAgendaTopicSelection": "Μη έγκυρη επιλογή θέματος ατζέντας.",
+    "guidedStepTopicPurpose": "Βήμα 2/5: Θέμα / σκοπός",
+    "guidedStepTopic": "Βήμα 2/5: Θέμα",
+    "guidedStepTopicOptional": "Βήμα 2/5: Θέμα (προαιρετικό)",
+    "guidedStepMotionTitleOptional": "Βήμα 2/5: Τίτλος κίνησης (προαιρετικό)",
+    "guidedConsultationRequiresTopicOrPurpose": "Η διαβούλευση απαιτεί θέμα ή σκοπό.",
+    "guidedTopicIsRequired": "Το θέμα είναι υποχρεωτικό.",
+    "guidedStepMotioner": "Βήμα 3/5: Κίνηση (προαιρετικό, πληκτρολογήστε τον αριθμό ή αφήστε το κενό).",
+    "guidedMotionerNotSpecified": "Δεν διευκρινίζεται",
+    "guidedStepDescriptionNotesOptional": "Βήμα 4/5: Περιγραφή / σημειώσεις (προαιρετικά)",
+    "guidedRequired": "υποχρεούμαι",
+    "guidedTimingTotalMinutesRequired": "Χρόνος: συνολικά λεπτά{required}",
+    "guidedModeratedRequiresTopic": "Η συντονισμένη κοινοβουλευτική ομάδα απαιτεί ένα θέμα.",
+    "guidedModeratedRequiresTotalMinutes": "Η μετριοπαθής συζήτηση απαιτεί συνολικό χρόνο (λεπτά).",
+    "guidedUnmoderatedRequiresTotalMinutes": "Η μη μετριοπαθής συζήτηση απαιτεί συνολικό χρόνο (λεπτά).",
+    "guidedConsultationRequiresTotalMinutes": "Η διαβούλευση απαιτεί συνολικό χρόνο (λεπτά).",
+    "guidedTimingTotalMinutesLine": "Χρόνος: σύνολο {minutes} λεπτά",
+    "guidedTimingSpeakerSecondsRequired": "Χρόνος: δευτερόλεπτα ηχείου (απαιτείται)",
+    "guidedModeratedRequiresSpeakerSeconds": "Η μετριοπαθής συζήτηση απαιτεί χρόνο ομιλητή (δευτερόλεπτα).",
+    "guidedTimingSpeakerSecondsLine": ", ηχείο {seconds}s",
+    "guidedNoResolutionsForMotion": "Δεν υπάρχουν διαθέσιμες αναλύσεις για αυτήν την κίνηση.",
+    "guidedStepSelectTargetResolution": "Βήμα 5/5: Επιλέξτε ανάλυση στόχου (αριθμός).",
+    "guidedResolutionSelectionRequired": "Απαιτείται επιλογή ανάλυσης.",
+    "guidedNoClausesForResolution": "Δεν υπάρχουν διαθέσιμες ρήτρες για επιλεγμένη ανάλυση.",
+    "guidedStepChooseClauseNumbers": "Επιλέξτε αριθμούς προτάσεων (ευρετήρια διαχωρισμένα με κόμματα).",
+    "guidedClausePreview": "Ρήτρα {number}: {preview}",
+    "guidedAtLeastOneClauseRequired": "Απαιτείται τουλάχιστον μία ρήτρα.",
+    "guidedSelectAgendaTopic": "Επιλέξτε ένα θέμα ατζέντας.",
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Η πρόταση για τον καθορισμό της ημερήσιας διάταξης δεν είναι διαθέσιμη για αυτήν την επιτροπή (δεν απομένουν αρκετά θέματα).",
+    "guidedConfirmRecordStatedMotionNow": "Να καταγραφεί ως δηλωμένη κίνηση τώρα;",
+    "guidedDraftLoadedFloorOpen": "Φορτώθηκε το καθοδηγούμενο σχέδιο. Το πάτωμα κίνησης είναι ανοιχτό — κάντε κλικ στην επιλογή Εγγραφή δηλωμένης κίνησης όταν είναι έτοιμο.",
+    "guidedConfirmCreateOpenMotionNow": "Δημιουργία και άνοιγμα αυτής της πρότασης για ψηφοφορία τώρα;",
+    "guidedDraftLoadedReviewCreate": "Φορτώθηκε το καθοδηγούμενο σχέδιο. Ελέγξτε και κάντε κλικ στο Δημιουργία και ανοίξτε την κίνηση όταν είστε έτοιμοι.",
     "liveDebateTopic": "Ζωντανό θέμα συζήτησης",
     "motionControlHelp": "Ροή εργασιών προεδρίας: καταγράψτε κινήσεις, ανοίξτε μία ψήφο τη φορά, καταγράψτε ψήφους ανά κατανομή και, στη συνέχεια, κλείστε την κίνηση για να οριστικοποιήσετε το πέρασμα/αποτυχία.",
+    "tabAgenda": "Ημερήσια διάταξη",
+    "agendaTabHelp": "Ορίστε το ζωντανό θέμα για την ομιλία και, στη συνέχεια, πατήστε ένα θέμα ατζέντας για να ανοίξετε τον πίνακα ψηφοφορίας με την πλήρη λίστα εκπροσώπων για αυτό το θέμα. Παρακάτω, επιλέξτε ένα θέμα για να δείτε τα σύνολα ψήφων της επιτροπής.",
+    "agendaOpenVotingPanel": "Ψηφοφορία",
+    "agendaCloseVotingPanel": "Κοντά",
+    "agendaLiveBadge": "Ζω",
+    "agendaSetLive": "Ορίστε ζωντανό θέμα",
+    "agendaViewingVotes": "Σύνολο ψήφων της επιτροπής",
+    "agendaRefresh": "Φρεσκάρω",
+    "agendaLoadingCounts": "Φόρτωση μετρήσεων ψήφων…",
+    "agendaBallotsRecorded": "Καταγράφηκαν {count} ψηφοδέλτια",
+    "agendaMotionsWithBallots": "{count} προτάσεις με ψηφοδέλτια",
+    "agendaYesNoAbstainLine": "Ναι {yes} · Όχι {no} · Αποχή {abstain}",
+    "agendaOtherVotes": "Άλλα {count}",
+    "agendaNoBallotsForTopic": "Δεν έχουν καταγραφεί ακόμη ψηφοδέλτια για αυτό το θέμα.",
+    "agendaNoMotionsYet": "Δεν υπάρχουν ακόμη προτάσεις για αυτό το θέμα.",
+    "agendaByMotion": "Με κίνηση",
     "tabSetup": "1) Ρύθμιση",
     "tabFloorQueue": "2) Ουρά ορόφου",
     "tabDraftMotion": "3) Σχέδιο κίνησης",
@@ -229,6 +280,31 @@
     "chairOnlyVotingHelp": "Πρόεδρος μόνο: μία ψήφος ανοιχτή κάθε φορά. Οι εκπρόσωποι δεν ψηφίζουν στην εφαρμογή. Χρησιμοποιήστε την εγγραφή ψήφων για να καλέσετε κάθε πλακάτ και να εγγράψετε μόνο Ναι ή Όχι. Οι διαδικαστικές προτάσεις δεν χρησιμοποιούν αποχή. Το Pass/Fail χρησιμοποιεί την απαιτούμενη πλειοψηφία των μελών που είναι παρόντα στο roll.",
     "euGuidedPhase": "ΕΕ καθοδηγούμενη φάση",
     "euGuidedPhaseHint": "Οι αναστολείς πυρήνα παραμένουν καθοδηγούμενοι: όταν μια κίνηση δεν ταιριάζει με αυτή τη φάση, οι καρέκλες μπορούν να συνεχίσουν να χρησιμοποιούν μια ρητή επιβεβαίωση παράκαμψης.",
+    "euSessionPhase_roll_call": "Παρουσίες",
+    "euSessionPhase_agenda": "Καθορισμός ημερήσιας διάταξης",
+    "euSessionPhase_opening_speeches": "Αρχικές ομιλίες",
+    "euSessionPhase_cabinet_meeting": "Συνεδρίαση υπουργικού συμβουλίου",
+    "euSessionPhase_shadow_meeting": "Σκιώδης συνεδρίαση",
+    "euSessionPhase_formal_debate": "Επίσημη συζήτηση",
+    "euSessionPhase_resolution_debate": "Συζήτηση επί ψηφίσματος",
+    "euSessionPhase_voting_procedure": "Διαδικασία ψηφοφορίας",
+    "euSessionPhase_closing_statements": "Καταληκτικές δηλώσεις",
+    "euSessionPhase_adjourned": "Λήξη συνεδρίας",
+    "euPartySAndD": "Προοδευτική Συμμαχία Σοσιαλιστών και Δημοκρατών (S&D)",
+    "euPartyEpp": "Ευρωπαϊκό Λαϊκό Κόμμα (EPP)",
+    "euPartyRenew": "Ανανεώστε την Ευρώπη (Ανανέωση)",
+    "euPartyLeft": "Η Αριστερά στο Ευρωκοινοβούλιο (The Left)",
+    "euPartyGreen": "Πράσινοι/ΕΛΑ (Greens/EFA)",
+    "euPartyCAndR": "Ευρωπαίοι Συντηρητικοί και Μεταρρυθμιστές (ECR)",
+    "euPartyPatriots": "Patriots for Europe (PfE)",
+    "euPartyIndependents": "Ανεξάρτητοι / NI",
+    "euPartyTimeGuideTitle": "Οδηγός χρόνου ανά ομάδα (ΕΕ)",
+    "euPartySpeechPoolLabel": "Χρόνος ομιλιών:",
+    "euPartyPoiPocPoolLabel": "Χρόνος POI/PoC:",
+    "euPhaseOverrideIntro": "Αυτή η κίνηση είναι ασυνήθιστη για την τρέχουσα φάση ΕΕ: {phase}.",
+    "euPhaseOverrideProceed": "Συνέχεια ούτως ή άλλως; Η εξαίρεση καταγράφεται μόνο στο ιστορικό κινήσεων.",
+    "motionFloorUnavailableEuPhase": "Το φόρουμ κινήσεων δεν είναι διαθέσιμο κατά τη διάρκεια: {phase}.",
+    "euGuidedBeginVotingAnyway": "Καθοδηγούμενη φάση ΕΕ: {phase}. Έναρξη ψηφοφορίας ούτως ή άλλως;",
     "pointsWorkflow": "Σημεία ροής εργασίας",
     "pointOfInformation": "Σημείο Πληροφόρησης",
     "pointOfClarification": "Σημείο Διευκρίνισης",
@@ -243,6 +319,12 @@
     "accept": "Αποδέχομαι",
     "deny": "Αρνούμαι",
     "beginVotingMostDisruptive": "Ξεκινήστε την ψηφοφορία (πρώτα το πιο ενοχλητικό)",
+    "motionFloorLabel": "Ώρα κινήσεων:",
+    "motionFloorOpenForStatements": "ανοιχτή για δηλώσεις",
+    "addMotionGuided": "Προσθήκη κίνησης (καθοδηγούμενη)",
+    "openFloorForMotionStatements": "Άνοιγμα του χρόνου για δηλώσεις κίνησης",
+    "closeFloorStatementsEnded": "Κλείσιμο χρόνου (τελείωσαν οι δηλώσεις)",
+    "recordStatedMotionButton": "Καταγραφή δηλωμένης κίνησης",
     "pendingVoteOrderMostDisruptive": "Σε εκκρεμότητα — σειρά ψήφου (πρώτα η πιο ενοχλητική)",
     "untitled": "Χωρίς τίτλο",
     "withdraw": "Αποσύρω",
@@ -354,89 +436,79 @@
     "openMotionFloorFirst": "Ανοίξτε πρώτα το πάτωμα κίνησης για δηλώσεις.",
     "openMotionBlocksRecording": "Η πρόταση είναι ήδη ανοιχτή για ψηφοφορία. Κλείστε το πριν καταγράψετε περαιτέρω δηλώσεις.",
     "statedMotionRecorded": "Η δηλωθείσα πρόταση καταγράφηκε (δεν είναι ακόμη ανοιχτή για ψηφοφορία).",
-    "statedMotionRemoved": "Η δηλωμένη κίνηση καταργήθηκε.",
-    "tabAgenda": "Ημερήσια διάταξη",
-    "agendaTabHelp": "Ορίστε το ζωντανό θέμα για την ομιλία και, στη συνέχεια, πατήστε ένα θέμα ατζέντας για να ανοίξετε τον πίνακα ψηφοφορίας με την πλήρη λίστα εκπροσώπων για αυτό το θέμα. Παρακάτω, επιλέξτε ένα θέμα για να δείτε τα σύνολα ψήφων της επιτροπής.",
-    "agendaLiveBadge": "Ζω",
-    "agendaSetLive": "Ορίστε ζωντανό θέμα",
-    "agendaViewingVotes": "Σύνολο ψήφων της επιτροπής",
-    "agendaRefresh": "Φρεσκάρω",
-    "agendaLoadingCounts": "Φόρτωση μετρήσεων ψήφων…",
-    "agendaBallotsRecorded": "Καταγράφηκαν {count} ψηφοδέλτια",
-    "agendaMotionsWithBallots": "{count} προτάσεις με ψηφοδέλτια",
-    "agendaYesNoAbstainLine": "Ναι {yes} · Όχι {no} · Αποχή {abstain}",
-    "agendaOtherVotes": "Άλλα {count}",
-    "agendaNoBallotsForTopic": "Δεν έχουν καταγραφεί ακόμη ψηφοδέλτια για αυτό το θέμα.",
-    "agendaNoMotionsYet": "Δεν υπάρχουν ακόμη προτάσεις για αυτό το θέμα.",
-    "agendaByMotion": "Με κίνηση",
-    "agendaOpenVotingPanel": "Ψηφοφορία",
-    "agendaCloseVotingPanel": "Κοντά",
-    "guidedNoAgendaTopics": "Δεν υπάρχουν διαθέσιμα θέματα ημερήσιας διάταξης για αυτήν την επιτροπή.",
-    "guidedStepChooseAgendaTopic": "Βήμα 2/5: Επιλέξτε θέμα ημερήσιας διάταξης (εισαγάγετε αριθμό).",
-    "guidedInvalidAgendaTopicSelection": "Μη έγκυρη επιλογή θέματος ατζέντας.",
-    "guidedStepTopicPurpose": "Βήμα 2/5: Θέμα / σκοπός",
-    "guidedStepTopic": "Βήμα 2/5: Θέμα",
-    "guidedStepTopicOptional": "Βήμα 2/5: Θέμα (προαιρετικό)",
-    "guidedStepMotionTitleOptional": "Βήμα 2/5: Τίτλος κίνησης (προαιρετικό)",
-    "guidedConsultationRequiresTopicOrPurpose": "Η διαβούλευση απαιτεί θέμα ή σκοπό.",
-    "guidedTopicIsRequired": "Το θέμα είναι υποχρεωτικό.",
-    "guidedStepMotioner": "Βήμα 3/5: Κίνηση (προαιρετικό, πληκτρολογήστε τον αριθμό ή αφήστε το κενό).",
-    "guidedMotionerNotSpecified": "Δεν διευκρινίζεται",
-    "guidedStepDescriptionNotesOptional": "Βήμα 4/5: Περιγραφή / σημειώσεις (προαιρετικά)",
-    "guidedRequired": "υποχρεούμαι",
-    "guidedTimingTotalMinutesRequired": "Χρόνος: συνολικά λεπτά{required}",
-    "guidedModeratedRequiresTotalMinutes": "Η μετριοπαθής συζήτηση απαιτεί συνολικό χρόνο (λεπτά).",
-    "guidedUnmoderatedRequiresTotalMinutes": "Η μη μετριοπαθής συζήτηση απαιτεί συνολικό χρόνο (λεπτά).",
-    "guidedConsultationRequiresTotalMinutes": "Η διαβούλευση απαιτεί συνολικό χρόνο (λεπτά).",
-    "guidedTimingTotalMinutesLine": "Χρόνος: σύνολο {minutes} λεπτά",
-    "guidedTimingSpeakerSecondsRequired": "Χρόνος: δευτερόλεπτα ηχείου (απαιτείται)",
-    "guidedModeratedRequiresSpeakerSeconds": "Η μετριοπαθής συζήτηση απαιτεί χρόνο ομιλητή (δευτερόλεπτα).",
-    "guidedTimingSpeakerSecondsLine": ", ηχείο {seconds}s",
-    "guidedNoResolutionsForMotion": "Δεν υπάρχουν διαθέσιμες αναλύσεις για αυτήν την κίνηση.",
-    "guidedStepSelectTargetResolution": "Βήμα 5/5: Επιλέξτε ανάλυση στόχου (αριθμός).",
-    "guidedResolutionSelectionRequired": "Απαιτείται επιλογή ανάλυσης.",
-    "guidedNoClausesForResolution": "Δεν υπάρχουν διαθέσιμες ρήτρες για επιλεγμένη ανάλυση.",
-    "guidedStepChooseClauseNumbers": "Επιλέξτε αριθμούς προτάσεων (ευρετήρια διαχωρισμένα με κόμματα).",
-    "guidedClausePreview": "Ρήτρα {number}: {preview}",
-    "guidedAtLeastOneClauseRequired": "Απαιτείται τουλάχιστον μία ρήτρα.",
-    "guidedConfirmRecordStatedMotionNow": "Να καταγραφεί ως δηλωμένη κίνηση τώρα;",
-    "guidedDraftLoadedFloorOpen": "Φορτώθηκε το καθοδηγούμενο σχέδιο. Το πάτωμα κίνησης είναι ανοιχτό — κάντε κλικ στην επιλογή Εγγραφή δηλωμένης κίνησης όταν είναι έτοιμο.",
-    "guidedConfirmCreateOpenMotionNow": "Δημιουργία και άνοιγμα αυτής της πρότασης για ψηφοφορία τώρα;",
-    "guidedDraftLoadedReviewCreate": "Φορτώθηκε το καθοδηγούμενο σχέδιο. Ελέγξτε και κάντε κλικ στο Δημιουργία και ανοίξτε την κίνηση όταν είστε έτοιμοι.",
-    "guidedModeratedRequiresTopic": "Η συντονισμένη κοινοβουλευτική ομάδα απαιτεί ένα θέμα.",
-    "guidedSelectAgendaTopic": "Επιλέξτε ένα θέμα ατζέντας.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Η πρόταση για τον καθορισμό της ημερήσιας διάταξης δεν είναι διαθέσιμη για αυτήν την επιτροπή (δεν απομένουν αρκετά θέματα).",
-    "motionFloorLabel": "Ώρα κινήσεων:",
-    "motionFloorOpenForStatements": "ανοιχτή για δηλώσεις",
-    "addMotionGuided": "Προσθήκη κίνησης (καθοδηγούμενη)",
-    "openFloorForMotionStatements": "Άνοιγμα του χρόνου για δηλώσεις κίνησης",
-    "closeFloorStatementsEnded": "Κλείσιμο χρόνου (τελείωσαν οι δηλώσεις)",
-    "recordStatedMotionButton": "Καταγραφή δηλωμένης κίνησης",
-    "euSessionPhase_roll_call": "Παρουσίες",
-    "euSessionPhase_agenda": "Καθορισμός ημερήσιας διάταξης",
-    "euSessionPhase_opening_speeches": "Αρχικές ομιλίες",
-    "euSessionPhase_cabinet_meeting": "Συνεδρίαση υπουργικού συμβουλίου",
-    "euSessionPhase_shadow_meeting": "Σκιώδης συνεδρίαση",
-    "euSessionPhase_formal_debate": "Επίσημη συζήτηση",
-    "euSessionPhase_resolution_debate": "Συζήτηση επί ψηφίσματος",
-    "euSessionPhase_voting_procedure": "Διαδικασία ψηφοφορίας",
-    "euSessionPhase_closing_statements": "Καταληκτικές δηλώσεις",
-    "euSessionPhase_adjourned": "Λήξη συνεδρίας",
-    "euPartySAndD": "Προοδευτική Συμμαχία Σοσιαλιστών και Δημοκρατών (S&D)",
-    "euPartyEpp": "Ευρωπαϊκό Λαϊκό Κόμμα (EPP)",
-    "euPartyRenew": "Ανανεώστε την Ευρώπη (Ανανέωση)",
-    "euPartyLeft": "Η Αριστερά στο Ευρωκοινοβούλιο (The Left)",
-    "euPartyGreen": "Πράσινοι/ΕΛΑ (Greens/EFA)",
-    "euPartyCAndR": "Ευρωπαίοι Συντηρητικοί και Μεταρρυθμιστές (ECR)",
-    "euPartyPatriots": "Patriots for Europe (PfE)",
-    "euPartyIndependents": "Ανεξάρτητοι / NI",
-    "euPartyTimeGuideTitle": "Οδηγός χρόνου ανά ομάδα (ΕΕ)",
-    "euPartySpeechPoolLabel": "Χρόνος ομιλιών:",
-    "euPartyPoiPocPoolLabel": "Χρόνος POI/PoC:",
-    "euPhaseOverrideIntro": "Αυτή η κίνηση είναι ασυνήθιστη για την τρέχουσα φάση ΕΕ: {phase}.",
-    "euPhaseOverrideProceed": "Συνέχεια ούτως ή άλλως; Η εξαίρεση καταγράφεται μόνο στο ιστορικό κινήσεων.",
-    "motionFloorUnavailableEuPhase": "Το φόρουμ κινήσεων δεν είναι διαθέσιμο κατά τη διάρκεια: {phase}.",
-    "euGuidedBeginVotingAnyway": "Καθοδηγούμενη φάση ΕΕ: {phase}. Έναρξη ψηφοφορίας ούτως ή άλλως;"
+    "statedMotionRemoved": "Η δηλωμένη κίνηση καταργήθηκε."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} ολοκληρώθηκε - συγχρονίστηκε για αυτήν την επιτροπή",
+      "loading": "Φόρτωση...",
+      "resetChecklist": "Επαναφορά λίστας ελέγχου"
+    },
+    "prepPage": {
+      "description": "Πριν από το συνέδριο: κανόνες, θέμα, αίθουσα, υλικά και ομάδα. Συγχρονίστηκε για όλους τους προέδρους αυτής της επιτροπής. Η επαναφορά το διαγράφει για όλους.",
+      "crisisHidden": "Τα στοιχεία προετοιμασίας για συγκεκριμένη κρίση είναι κρυμμένα για αυτόν τον τύπο επιτροπής."
+    },
+    "flowPage": {
+      "description": "Κανονική ροή επιτροπής - σημειώστε τα βήματα καθώς προχωράτε. Κοινή χρήση σε λογαριασμούς καρέκλας και συσκευές. η επαναφορά διαγράφεται για όλους."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "Κανόνες & διαδικασία"
+        },
+        "topic": {
+          "title": "Επιτροπή & θέμα"
+        },
+        "room": {
+          "title": "Δωμάτιο & τεχν"
+        },
+        "materials": {
+          "title": "Υλικά & logistics"
+        },
+        "crisis": {
+          "title": "Κρίση (αν υπάρχει)"
+        },
+        "team": {
+          "title": "Ομάδα & επικοινωνία"
+        }
+      },
+      "items": {
+        "rop": "Διαβάστε και κατανοήστε τον εσωτερικό κανονισμό της επιτροπής",
+        "parliamentary": "Ανασκόπηση της κοινοβουλευτικής διαδικασίας (προτάσεις, σημεία, ψηφοφορία)",
+        "speaking-times": "Επιβεβαιώστε τους χρόνους και τα χρονικά όρια ομιλίας",
+        "quorum": "Να γνωρίζετε τις απαιτήσεις απαρτίας και ψηφοφορίας",
+        "research": "Θέμα και ιστορικό της ερευνητικής επιτροπής",
+        "study-guide": "Διαβάστε τον οδηγό μελέτης και τα βασικά έγγραφα",
+        "dashboard-topic": "Ορίστε το όνομα και το θέμα της επιτροπής στον πίνακα ελέγχου",
+        "agenda": "Προετοιμάστε την ατζέντα και τη ροή της συνεδρίας",
+        "digital-room": "Ρύθμιση ψηφιακής αίθουσας (λίστα εκπροσώπων, πλακάτ)",
+        "tech-check": "Τεχνικός έλεγχος: πλατφόρμα, ήχος, κοινή χρήση οθόνης",
+        "backup": "Έχετε εφεδρικό σχέδιο εάν η τεχνολογία αποτύχει",
+        "roll-plan": "Προετοιμάστε τη λίστα ονομαστικών κλήσεων και τη συμμετοχή",
+        "speakers-plan": "Σχεδιάστε τη διαχείριση λίστας ηχείων",
+        "templates": "Προετοιμάστε κοινές κινήσεις / σημεία (εάν χρησιμοποιείτε πρότυπα)",
+        "timing": "Επιβεβαιώστε την ώρα έναρξης της συνεδρίας και τα διαλείμματα",
+        "crisis-slides": "Ελέγξτε τα στοιχεία κρίσης και ενημερώστε τις διαφάνειες",
+        "crisis-cues": "Σχεδιάστε σειρά / συνθήματα ηχείων κρίσης",
+        "crisis-paths": "Προετοιμάστε μονοπάτια και γεγονότα για την κρίση",
+        "co-chairs": "Συντονιστείτε με τους συμπροέδρους για τους ρόλους",
+        "staff": "Επιβεβαιώστε την υποστήριξη και τις υποδείξεις του προσωπικού / μαργαριτών",
+        "delegate-brief": "Προετοιμάστε σύνοψη για τους αντιπροσώπους (κανόνες, χρονοδιάγραμμα)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Προσκλητήριο",
+        "open-floor": "Ανοίξτε το πάτωμα (σημεία και κινήσεις)",
+        "recognize": "Αναγνώριση κινήσεων",
+        "vote-1": "Ψηφοφορία επί της πρότασης(ών)",
+        "engage": "Ασχοληθείτε με την επιλεγμένη κίνηση ή μετακινηθείτε στο GSL",
+        "open-again": "Ανοίξτε ξανά το πάτωμα",
+        "recognize-repeat": "Αναγνώριση κινήσεων (επαναλάβετε όπως απαιτείται)",
+        "vote-2": "Ψηφοφορία επί της πρότασης(ών)",
+        "cycle": "Συνέχιση του κύκλου (εμπλοκή κίνησης / GSL -> ανοιχτό πάτωμα)"
+      }
+    }
   },
   "language": {
     "label": "Γλώσσα",
@@ -447,10 +519,14 @@
   },
   "tabNav": {
     "delegateHub": "Κόμβος αντιπροσώπων",
+    "advisorHub": "Κόμβος συμβούλων",
+    "advisorNotes": "Διαβιβασμένες σημειώσεις",
+    "conferenceSchedule": "Πρόγραμμα",
     "profile": "Προφίλ",
     "follow": "Ακολουθώ",
     "notes": "Σημειώσεις",
     "committee": "Επιτροπή",
+    "history": "Ιστορία",
     "voting": "Ψηφοφορία",
     "guides": "Οδηγοί",
     "documents": "Εγγραφα",
@@ -472,10 +548,8 @@
     "home": "Σπίτι",
     "library": "Βιβλιοθήκη",
     "mainNavigationAria": "Κύρια πλοήγηση",
-    "history": "Ιστορία",
-    "advisorHub": "Κόμβος συμβούλων",
-    "advisorNotes": "Διαβιβασμένες σημειώσεις",
-    "conferenceSchedule": "Πρόγραμμα"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "dashboardLayout": {
     "helpCenter": "Κέντρο βοήθειας",
@@ -513,19 +587,27 @@
     "delegateHint": "(η επιτροπή σας)",
     "secretariat": "Γραμματεία",
     "secretariatHint": "(προσωπικό εκδήλωσης)",
+    "advisor": "Σύμβουλος",
+    "advisorHint": "(σχολική αντιπροσωπεία)",
     "nextModeSignup": "δημιουργήστε έναν λογαριασμό",
     "nextModeLogin": "συνδεθείτε",
     "conferenceCodePlaceholder": "π.χ. SEAMUNI2027",
     "previousRoleAria": "Προηγούμενος ρόλος",
     "selectRoleAria": "Επιλέξτε ρόλο",
     "nextRoleAria": "Επόμενος ρόλος",
-    "authConnectError": "Δεν ήταν δυνατή η σύνδεση στον έλεγχο ταυτότητας (ελέγξτε το Supabase env vars).",
-    "advisor": "Σύμβουλος",
-    "advisorHint": "(σχολική αντιπροσωπεία)"
+    "authConnectError": "Δεν ήταν δυνατή η σύνδεση στον έλεγχο ταυτότητας (ελέγξτε το Supabase env vars)."
   },
   "googleDocs": {
     "openNewDocHelp": "Ανοίγει τα Έγγραφα Google σε νέα καρτέλα. Συνδεθείτε εάν σας ζητηθεί και, στη συνέχεια, αντιγράψτε τη διεύθυνση URL του εγγράφου από τη γραμμή διευθύνσεων.",
     "newGoogleDoc": "Νέο Έγγραφο Google"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
   },
   "themeSelector": {
     "buttonTitle": "Θέμα: χρώμα & εμφάνιση",
@@ -535,6 +617,14 @@
     "light": "Φως",
     "dark": "Σκοτάδι",
     "accentColour": "Χρώμα έμφασης",
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
+    "colorblindType": "Colour-vision type",
+    "colorblindDeuteranopia": "Deuteranopia (red–green)",
+    "colorblindProtanopia": "Protanopia (red–green)",
+    "colorblindTritanopia": "Tritanopia (blue–yellow)",
     "typography": "Τυπογραφία",
     "textSize": "Μέγεθος κειμένου",
     "scale": "Κλίμακα",
@@ -554,15 +644,7 @@
       "purple": "Μωβ",
       "pink": "Ροζ",
       "neutral": "Ουδέτερος"
-    },
-    "accessibility": "Accessibility",
-    "colorblindMode": "Colorblind-friendly colours",
-    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
-    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
-    "colorblindType": "Colour-vision type",
-    "colorblindDeuteranopia": "Deuteranopia (red–green)",
-    "colorblindProtanopia": "Protanopia (red–green)",
-    "colorblindTritanopia": "Tritanopia (blue–yellow)"
+    }
   },
   "awardsManager": {
     "updated": "Ενημερώθηκε.",
@@ -592,6 +674,8 @@
     "bandInitials": "Τα αρχικά της μπάντας",
     "committeeScopedAwardsHelp": "Βραβεία εμβέλειας επιτροπής: καταγράψτε τον παραλήπτη εδώ μόνο για τη δημόσια λίστα. Οι αναλυτικές βαθμολογίες της ρουμπρίκας προέρχονται από εγκεκριμένες υποψηφιότητες προέδρων (καρτέλα Υποβολές βραβείων)—δεν υπάρχει διπλή βαθμολογία σε αυτήν τη σειρά.",
     "recipientDelegateChair": "Παραλήπτης (αντιπρόσωπος / πρόεδρος)",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope.",
     "notSet": "— Δεν έχει οριστεί —",
     "noName": "Κανένα όνομα",
     "winningCommittee": "Επιτροπή νικήτριας",
@@ -612,13 +696,13 @@
     "noAwardRowsYet": "Δεν υπάρχουν ακόμη σειρές βραβείων.",
     "includeInCertificatePrint": "Συμπεριλάβετε στην εκτύπωση πιστοποιητικού: {label}",
     "edit": "Εκδίδω",
-    "remove": "Αφαιρώ",
-    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
-    "noEligibleRecipients": "No eligible recipients in this scope."
+    "remove": "Αφαιρώ"
   },
   "chairNominationsPanel": {
     "title": "Υποβολές βραβείων ανά έδρες",
     "description": "Οι επιτροπές υποβάλλουν βαθμολογημένες υποψηφιότητες (συγκρότημα τύπου SEAMUNs). Τα σύνολα ρουμπρίκων και τα αρχικά της ζώνης (B/D/P/E) συνοψίζουν κάθε σειρά. Για κάθε επιτροπή και τύπο βραβείου, η SMT εξετάζει πρώτα την τρέχουσα προτίμηση του προέδρου (Top 1). Εγκρίνετε για να καταγράψετε το βραβείο ή απορρίψτε τη μετάβαση στην επόμενη εφεδρική κατάταξη (Top 2, στη συνέχεια Top 3 για Honorable Mention όπου ισχύει).",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short",
     "filterByCommitteeAria": "Φιλτράρισμα κατά επιτροπή",
     "allCommittees": "Όλες οι επιτροπές",
     "committee": "Επιτροπή",
@@ -642,9 +726,7 @@
     "approveBestDelegate": "Έγκριση — Καλύτερος εκπρόσωπος",
     "approveHonourableMention": "Έγκριση — Αξιότιμη Μνεία",
     "approveBestPositionPaper": "Έγκριση — Best Position Paper",
-    "approveBestDelegateOverall": "Έγκριση — Καλύτερος εκπρόσωπος (συνολικά)",
-    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
-    "evidenceTooShort": "Evidence too short"
+    "approveBestDelegateOverall": "Έγκριση — Καλύτερος εκπρόσωπος (συνολικά)"
   },
   "roomGate": {
     "alreadyInCommittee": "Ήδη σε επιτροπή",
@@ -683,13 +765,24 @@
     "allocationPasswords": "Κωδικοί πρόσβασης εκχώρησης",
     "sources": "Πηγές",
     "notes": "Σημειώσεις",
+    "notesModeration": "Note review",
     "rollCallTracker": "✅ Παρακολούθηση κυλιόμενων κλήσεων",
     "runningNotes": "Σημειώσεις εκτέλεσης",
     "awardsSmt": "Βραβεία",
     "delegateDashboard": "Πίνακας ελέγχου εκπροσώπων",
+    "advisorDashboard": "Πίνακας εργαλείων συμβούλων",
+    "advisorNotes": "Διαβιβασμένες σημειώσεις",
+    "delegateSchedule": "Πρόγραμμα συνεδρίων",
+    "chairSchedule": "Πρόγραμμα συνεδρίων",
+    "advisorSchedule": "Πρόγραμμα συνεδρίων",
+    "advisorDelegateProfile": "Delegate profile",
+    "advisorDelegateDocuments": "Delegate documents",
+    "advisorDelegateVoting": "Delegate voting",
+    "advisorDelegateNotes": "Delegate notes",
     "voting": "Ψηφοφορία",
     "digitalRoom": "Ψηφιακό δωμάτιο",
     "committeeSession": "συνεδρίαση της επιτροπής",
+    "committeeAgenda": "📑 Ατζέντα",
     "announcements": "Ανακοινώσεις",
     "follow": "Ακολουθώ",
     "guides": "Οδηγοί",
@@ -697,6 +790,7 @@
     "committeeFlowChecklist": "📋 Λίστα ελέγχου ροής επιτροπής",
     "officialUnLinks": "Επίσημοι σύνδεσμοι του ΟΗΕ",
     "committeeRoom": "Αίθουσα επιτροπής",
+    "history": "Ιστορία",
     "speeches": "Ομιλίες",
     "chairRoom": "Αίθουσα καρέκλας",
     "ideas": "Ιδέες",
@@ -713,14 +807,8 @@
     "formalMotions": "Επίσημες κινήσεις",
     "timer": "Μετρών την ώραν",
     "smtProfile": "Προφίλ",
-    "committeeAgenda": "📑 Ατζέντα",
-    "history": "Ιστορία",
-    "advisorDashboard": "Πίνακας εργαλείων συμβούλων",
-    "advisorNotes": "Διαβιβασμένες σημειώσεις",
-    "delegateSchedule": "Πρόγραμμα συνεδρίων",
-    "chairSchedule": "Πρόγραμμα συνεδρίων",
-    "advisorSchedule": "Πρόγραμμα συνεδρίων",
-    "notesModeration": "Note review"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "setupPage": {
     "title": "Το Supabase δεν έχει ρυθμιστεί",
@@ -747,6 +835,196 @@
     "title": "Κωδικοί δωματίων & καρέκλες",
     "subtitle": "Ρυθμίστε τον κωδικό της επιτροπής δεύτερης πύλης για κάθε συνεδρία και προσκαλέστε ή προωθήστε προέδρους γραφείων χωρίς να χρησιμοποιήσετε τον πίνακα ελέγχου των συνέδρων."
   },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Λίστα ρύθμισης διαχειριστή",
+      "subtitle": "Ρύθμιση επιπέδου ιστότοπου και παροχή προσωπικού.",
+      "step1Label": "Δημιουργία εκδήλωσης + πρώτης επιτροπής",
+      "step1Detail": "Δημιουργία πυλών συνεδρίου και επιτροπής.",
+      "step2Label": "Πρόσκληση ή προαγωγή λογαριασμών SMT",
+      "step2Detail": "Χορήγηση πρόσβασης γραμματείας πριν τις λειτουργίες επιτροπής.",
+      "step3Label": "Επαλήθευση ροής πύλης κατάστασης",
+      "step3Detail": "Παρακολούθηση ροής εκπροσώπων σε εκκρεμότητα → επιβεβαιωμένων.",
+      "step4Label": "Παράδοση στον πίνακα SMT",
+      "step4Detail": "Οι ζωντανές λειτουργίες επιτροπής συνεχίζονται στα εργαλεία SMT."
+    },
+    "smt": {
+      "title": "Λίστα ρύθμισης SMT",
+      "subtitle": "Έλεγχοι σε επίπεδο συνεδρίου πριν εισέλθουν οι προεδρίες και οι αντιπρόσωποι.",
+      "step1Label": "Επιβεβαίωση εκδήλωσης + συνεδριών επιτροπής",
+      "step1Detail": "Επικύρωση ονομάτων, ετικετών, ονομάτων προεδρίας και συνδέσμων κρίσης.",
+      "step2Label": "Ορισμός κωδικών αιθουσών + πρόσβασης προεδρίας",
+      "step2Detail": "Βεβαιωθείτε ότι κάθε επιτροπή έχει σωστούς κωδικούς πύλης.",
+      "step3Label": "Προετοιμασία κατανομών + εγγράφων σύνδεσης",
+      "step3Detail": "Εισαγωγή θέσεων, μετά ορισμός κωδικών/κωδικών πρόσβασης.",
+      "step4Label": "Δημοσίευση καθολικών εγγράφων (RoP / κριτήρια)",
+      "step4Detail": "Ανέβασμα κοινών αναφορών για όλους τους χρήστες."
+    },
+    "chair": {
+      "title": "Λίστα ρύθμισης προεδρίας",
+      "subtitle": "Ετοιμότητα αιθούσας και έλεγχοι αιθουσών για την επιτροπή σας.",
+      "step1Label": "Έλεγχος πίνακα αντιπροσώπων + εγκρίσεων",
+      "step1Detail": "Επιβεβαίωση αναθέσεων και εκκρεμών εγγραφών.",
+      "step2Label": "Διεξαγωγή εγκρίσεων roll call",
+      "step2Detail": "Σήμανση αντιπροσώπων παρόντων πριν τη συμμετοχή στο πάτωμα.",
+      "step3Label": "Ορισμός χρονομέτρου + ροής ομιλητών",
+      "step3Detail": "Αποθήκευση προεπιλογών πριν ανοίξουν οι κινήσεις.",
+      "step4Label": "Άνοιγμα ψηφιακής αίθουσας",
+      "step4Detail": "Συντονισμός ομιλητών, σημειώσεων και ορατότητας συνεδρίας."
+    },
+    "delegate": {
+      "title": "Λίστα ρύθμισης αντιπροσώπου",
+      "subtitle": "Ετοιμαστείτε γρήγορα για συμμετοχή στην επιτροπή.",
+      "step1Label": "Συμπληρώστε τα βασικά προφίλ",
+      "step1Detail": "Επαληθεύστε όνομα, κατανομή και στοιχεία λογαριασμού.",
+      "step2Label": "Διαβάστε RoP + κριτήρια βραβείων",
+      "step2Detail": "Ανοίξτε κοινά έγγραφα που ανέβασε το SMT.",
+      "step3Label": "Δημιουργήστε το έγγραφο προετοιμασίας",
+      "step3Detail": "Ανεβάστε/επεξεργαστείτε σημειώσεις προετοιμασίας στην εφαρμογή.",
+      "step4Label": "Εγγραφή στην αίθουσα επιτροπής + roll call",
+      "step4Detail": "Περιμένετε έγκριση παρουσίας από την προεδρία, μετά μιλήστε."
+    },
+    "advisor": {
+      "title": "Advisor guide",
+      "subtitle": "How to support your delegates from the advisor hub.",
+      "step1Label": "Review your delegate cards",
+      "step1Detail": "Each card shows country, committee, documents, voting, and notes.",
+      "step2Label": "Open your conference schedule",
+      "step2Detail": "Pick your roster number (Advisor 1–20) for chamber rotation times.",
+      "step3Label": "Send notes to delegates",
+      "step3Detail": "Message guidance in-app; delegates reply in the same thread.",
+      "step4Label": "Browse help guides",
+      "step4Detail": "MUN terms, procedures, and conference references in one place."
+    }
+  },
+  "advisorDashboard": {
+    "intro": "Μπορείτε να παρακολουθείτε τη δραστηριότητα της επιτροπής του εκπροσώπου που έχετε ορίσει. Δεν έχετε πρόσβαση σε σημειώσεις εκτός εάν μια καρέκλα ή SMT σας προωθήσει μια.",
+    "noAssignments": "Κανένας εκπρόσωπος δεν έχει συνδεθεί ακόμη με τον λογαριασμό σας. Η Γραμματεία θα σας αναθέσει από το SMT → Advisors.",
+    "delegateLinked": "Συνδέθηκε ο λογαριασμός εκπροσώπου",
+    "delegateNotLinked": "Η θέση δεν έχει συνδεθεί ακόμη με λογαριασμό αντιπροσώπου",
+    "viewProfile": "Προφίλ",
+    "viewDocuments": "Εγγραφα",
+    "viewVoting": "Ψηφοφορία",
+    "sendNote": {
+      "title": "Message {delegate}",
+      "hint": "Your delegate will see this in their notes feed. Replies appear in the conversation below.",
+      "topicLabel": "Topic",
+      "messageLabel": "Message",
+      "placeholder": "Write guidance for your delegate…",
+      "send": "Send note",
+      "sending": "Sending…",
+      "sentSuccess": "Note sent to your delegate.",
+      "heldSuccess": "Note sent — pending chair approval before your delegate can read it.",
+      "notSignedIn": "Sign in to send notes.",
+      "notAdvisor": "Only advisors can send delegate notes.",
+      "missingDelegate": "Choose a delegate to message.",
+      "invalidTopic": "Choose a valid topic.",
+      "emptyContent": "Write a message before sending.",
+      "notAssigned": "That delegate is not assigned to your account.",
+      "delegateNotLinked": "This seat is not linked to a delegate account yet.",
+      "sendFailed": "Could not send the note. Try again.",
+      "conversationTitle": "Conversation",
+      "emptyConversation": "No messages with {delegate} yet.",
+      "fromYou": "You",
+      "fromDelegate": "{delegate}",
+      "heldBadge": "Pending chair review",
+      "topics": {
+        "questions": "Questions",
+        "blocForming": "Bloc forming",
+        "speechPoisOrPocs": "Speech POIs or POCs",
+        "informalConversations": "Informal conversations"
+      }
+    },
+    "forwardedNotes": "Διαβιβασμένες σημειώσεις",
+    "oversight": {
+      "difficultyOther": "Other committees"
+    },
+    "schedule": {
+      "intro": "Επιλέξτε το χρονοδιάγραμμά σας και, στη συνέχεια, σύμβουλος A–D για να δείτε το χρονοδιάγραμμα αυτού του συμβούλου για την ημέρα."
+    },
+    "delegateNav": {
+      "ariaLabel": "Delegate oversight",
+      "backToDashboard": "← Back to dashboard",
+      "profile": "Profile",
+      "documents": "Documents",
+      "voting": "Voting",
+      "notes": "Notes"
+    },
+    "delegateProfile": {
+      "notLinked": "This seat is not linked to a delegate account yet.",
+      "empty": "No profile details are available yet.",
+      "fields": {
+        "name": "Name",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "country": "Country",
+        "committee": "Committee"
+      }
+    },
+    "delegateVoting": {
+      "intro": "Recorded ballots for {country} on motions in this committee.",
+      "empty": "No motions have been recorded for this committee yet.",
+      "delegateBallot": "Delegate ballot",
+      "noBallot": "Not recorded"
+    },
+    "notes": {
+      "intro": "Οι καρέκλες σημειώσεων ή η SMT επέλεξαν να μοιραστούν μαζί σας. Δεν μπορείτε να περιηγηθείτε στην πλήρη ροή σημειώσεων.",
+      "tabsAriaLabel": "Advisor notes",
+      "tabForwarded": "Forwarded to you",
+      "tabSend": "Send to delegates",
+      "sendIntro": "Choose a delegate, write your message, and they will see it in their notes feed.",
+      "pickDelegate": "Delegate",
+      "noLinkedDelegates": "No linked delegate accounts yet. Secretariat must assign delegates to your advisor account first.",
+      "loading": "Loading notes…",
+      "forwardedTitle": "Forwarded to you",
+      "sentTitle": "Sent to delegates",
+      "sentEmpty": "You have not sent any notes to your delegates yet.",
+      "toDelegate": "To {delegate}",
+      "openConversation": "Open conversation",
+      "unknownDelegate": "Delegate",
+      "held": "Pending chair review",
+      "empty": "Δεν σας έχουν προωθηθεί ακόμη σημειώσεις.",
+      "forwarded": "Προωθήθηκε"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Σύμβουλοι",
+    "subtitle": "Προσκαλέστε λογαριασμούς συμβούλων μέσω email και συνδέστε κάθε σύμβουλο σε μία θέση αντιπροσώπου.",
+    "selectEventFirst": "Επιλέξτε πρώτα μια ενεργή εκδήλωση συνεδρίου.",
+    "enterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης",
+    "inviteTitle": "Πρόσκληση συμβούλου",
+    "inviteBody": "Στέλνει έναν σύνδεσμο σύνδεσης (η ίδια ροή με την πρόσκληση της καρέκλας). Ο ρόλος του λογαριασμού έχει οριστεί ως σύμβουλος.",
+    "inviteDisabled": "Οι προσκλήσεις απαιτούν SUPABASE_SERVICE_ROLE_KEY σε αυτήν την ανάπτυξη.",
+    "inviteSetupTitle": "Ενεργοποίηση προσκλήσεων μέσω email",
+    "inviteSetupStep1": "Στο Supabase → Ρυθμίσεις έργου → API, αντιγράψτε το μυστικό κλειδί service_role.",
+    "inviteSetupStep2": "Προσθέστε το SUPABASE_SERVICE_ROLE_KEY στον κεντρικό υπολογιστή σας env (Render/Vercel) — όχι NEXT_PUBLIC_.",
+    "inviteSetupStep3": "Προσθέστε το NEXT_PUBLIC_APP_URL στη ζωντανή διεύθυνση URL του ιστότοπού σας (π.χ. https://your-app.onrender.com).",
+    "inviteSetupStep4": "Αναδιάταξη (παραγωγή) ή προσθήκη και των δύο στο .env.local και επανεκκίνηση του npm run dev (τοπικό).",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "advisor@school.edu",
+    "sending": "Αποστολή…",
+    "inviteButton": "Αποστολή πρόσκλησης",
+    "assignTitle": "Εκχώρηση αντιπροσώπου",
+    "assignBody": "Επιλέξτε μια συνδεδεμένη θέση αντιπροσώπου. Ένας σύμβουλος ανά εκπρόσωπο. η εκ νέου ανάθεση αντικαθιστά τον προηγούμενο σύνδεσμο.",
+    "advisorEmailLabel": "Email συμβούλου",
+    "delegateAllocationIdLabel": "Αναγνωριστικό κατανομής εκπροσώπων",
+    "delegateAllocationIdPlaceholder": "π.χ. 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Τρέχουσες εργασίες",
+    "currentAssignmentsHint": "Όλοι οι σύνδεσμοι συμβούλων-εκπροσώπων για αυτήν την εκδήλωση.",
+    "allocationIdsTitle": "Συνδεδεμένα αναγνωριστικά κατανομής εκπροσώπων",
+    "allocationIdsHint": "Αντιγράψτε ένα UUID εκχώρησης από αυτόν τον πίνακα κατά την εκχώρηση.",
+    "colAdvisor": "Σύμβουλος",
+    "colDelegate": "Delegate",
+    "colAllocationId": "Αναγνωριστικό κατανομής",
+    "colCountry": "Χώρα / θέση",
+    "colCommittee": "Επιτροπή",
+    "delegateFallback": "Delegate",
+    "assignedTo": "σύμβουλος: {name}",
+    "saving": "Οικονομία…",
+    "assignButton": "Αποθήκευση εργασίας",
+    "advisorFallback": "Σύμβουλος"
+  },
   "delegateDashboard": {
     "welcome": "Καλώς ορίσατε, εκπρόσωπος του {flag} {country}",
     "activeCommitteeIntro": "Ενεργή επιτροπή: {line}.",
@@ -758,7 +1036,18 @@
       "jump": "Μετάβαση σε",
       "chairEmails": "E-mail προέδρων"
     },
+    "chairContacts": {
+      "intro": "Κοινόχρηστα εισερχόμενα για την επιτροπή σας (SEAMUN I). Επικοινωνήστε με τις καρέκλες σας από το παρακάτω email.",
+      "committeeColumn": "Επιτροπή",
+      "emailColumn": "Εισερχόμενα καρέκλας (όνομα χρήστη)",
+      "openMail": "Ανοίξτε την αλληλογραφία",
+      "noMatch": "Δεν υπάρχουν ακόμη δημοσιευμένα εισερχόμενα προεδρίας για αυτήν την επιτροπή. Ρωτήστε το SMT ή ελέγξτε την επιτροπεία σας."
+    },
     "jumpTo": "Μετάβαση σε",
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here).",
+    "schedule": {
+      "intro": "Επιλέξτε το κομμάτι της ομάδας σας και μετά είτε τον σύμβουλο A–D είτε την επιτροπή σας (εκπρόσωπος/πρόεδρος). Εμφανίζεται μόνο ένα προσωπικό χρονοδιάγραμμα κάθε φορά."
+    },
     "tiles": {
       "stances": {
         "label": "Χώρα & στάση",
@@ -784,6 +1073,10 @@
         "label": "Οδηγοί & πόροι",
         "hint": "Παραπομπές σχετικά με το πώς να κάνετε και την καρέκλα"
       },
+      "conferenceSchedule": {
+        "label": "Πρόγραμμα συνεδρίων",
+        "hint": "Ομαδικό χρονοδιάγραμμα διαδρομής και συμβούλων (A–D)"
+      },
       "running": {
         "label": "Λίστα ελέγχου και σημειώσεις λειτουργίας",
         "hint": "Μαξιλάρι γρατσουνιάς συνεδρίας"
@@ -791,6 +1084,10 @@
       "officialLinks": {
         "label": "Επίσημοι σύνδεσμοι του ΟΗΕ",
         "hint": "Έγγραφα, φορείς, προγράμματα"
+      },
+      "chairEmails": {
+        "label": "E-mail προέδρων",
+        "hint": "Dais εισερχόμενα από επιτροπή"
       },
       "chairFeedback": {
         "label": "Ανατροφοδότηση της καρέκλας",
@@ -811,14 +1108,6 @@
       "crisisReport": {
         "label": "Κρίση / έκθεση",
         "hint": "Θέστε ένα θέμα"
-      },
-      "chairEmails": {
-        "label": "E-mail προέδρων",
-        "hint": "Dais εισερχόμενα από επιτροπή"
-      },
-      "conferenceSchedule": {
-        "label": "Πρόγραμμα συνεδρίων",
-        "hint": "Ομαδικό χρονοδιάγραμμα διαδρομής και συμβούλων (A–D)"
       }
     },
     "countdownCard": {
@@ -835,18 +1124,7 @@
       "remainingDhm": "{days}η {hours}ω {minutes}λ",
       "remainingHm": "{hours}ω {minutes}λ",
       "remainingM": "{minutes}λ"
-    },
-    "chairContacts": {
-      "intro": "Κοινόχρηστα εισερχόμενα για την επιτροπή σας (SEAMUN I). Επικοινωνήστε με τις καρέκλες σας από το παρακάτω email.",
-      "committeeColumn": "Επιτροπή",
-      "emailColumn": "Εισερχόμενα καρέκλας (όνομα χρήστη)",
-      "openMail": "Ανοίξτε την αλληλογραφία",
-      "noMatch": "Δεν υπάρχουν ακόμη δημοσιευμένα εισερχόμενα προεδρίας για αυτήν την επιτροπή. Ρωτήστε το SMT ή ελέγξτε την επιτροπεία σας."
-    },
-    "schedule": {
-      "intro": "Επιλέξτε το κομμάτι της ομάδας σας και μετά είτε τον σύμβουλο A–D είτε την επιτροπή σας (εκπρόσωπος/πρόεδρος). Εμφανίζεται μόνο ένα προσωπικό χρονοδιάγραμμα κάθε φορά."
-    },
-    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
+    }
   },
   "materialsExportCard": {
     "title": "Εξαγωγή των υλικών μου",
@@ -913,6 +1191,44 @@
     "loadCommitteesPrompt": "για τη φόρτωση επιτροπών για μια εκδήλωση.",
     "hubEnterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης"
   },
+  "advisorLayout": {
+    "activeEvent": "Active event:",
+    "code": "code",
+    "enterConferenceCodeLink": "Enter conference code",
+    "loadEventPrompt": "to load the conference event.",
+    "helpCenter": "Help center",
+    "defaultDisplayName": "Advisor"
+  },
+  "advisorNav": {
+    "ariaDashboard": "Advisor dashboard",
+    "hub": "Advisor hub",
+    "notes": "Notes",
+    "schedule": "Conference schedule",
+    "profile": "Profile",
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
+  },
+  "smtCommitteeView": {
+    "title": "Γραμματεία: απόψεις προέδρου και εκπροσώπων",
+    "intro": "Επιλέξτε μια επιτροπή για εργαλεία προεδρίας και μια θέση εκπροσώπου συνδεδεμένη με τον λογαριασμό σας και, στη συνέχεια, αλλάξτε επιφάνεια. Η είσοδος εξακολουθεί να ανοίγει το κέντρο γραμματείας από προεπιλογή.",
+    "bindRequiredHint": "Επιλέξτε μια επιτροπή προέδρου και/ή μια θέση αντιπροσώπου παρακάτω και, στη συνέχεια, δοκιμάστε ξανά.",
+    "chairCommitteeLabel": "Πρόεδρος επιτροπής ορόφου",
+    "chairCommitteePlaceholder": "Εξεταστική επιτροπή…",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank",
+    "delegateSeatLabel": "Θέση αντιπροσώπου (η κατανομή σας)",
+    "delegateSeatPlaceholder": "Επιλέξτε θέση…",
+    "saveBindings": "Αποθήκευση εργασιών",
+    "bindingsSaved": "Αποθηκεύτηκε.",
+    "switchViewHeading": "Εναλλαγή ταμπλό",
+    "switchViewHelp": "Η Γραμματεία σας επιστρέφει στο SMT. Ο πρόεδρος και ο εκπρόσωπος ανοίγουν τα ίδια κελύφη εντός εφαρμογής που χρησιμοποιούν οι πραγματικές καρέκλες και οι εκπρόσωποι για το ενεργό συμβάν.",
+    "goSecretariat": "Γραμματεία",
+    "goChair": "Θέα καρέκλας",
+    "goDelegate": "Προβολή αντιπροσώπου",
+    "surfaceSwitchError": "Δεν ήταν δυνατή η αλλαγή προβολής. Ελέγξτε την πύλη και τις επιλογές εκδηλώσεων.",
+    "pickChairFirst": "Επιλέξτε πρώτα μια επιτροπή προέδρου (ή αποθηκεύστε τις εργασίες).",
+    "pickDelegateFirst": "Επιλέξτε πρώτα μια θέση αντιπροσώπου (ή αποθηκεύστε τις εργασίες)."
+  },
   "smtOverview": {
     "noEventSelected": "Δεν έχει επιλεγεί συνέδριο. Εισαγάγετε πρώτα τον κωδικό εκδήλωσης.",
     "enterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης",
@@ -956,9 +1272,12 @@
       "prepChecklist": "Λίστα ελέγχου προετοιμασίας",
       "flowChecklist": "Λίστα ελέγχου ροής",
       "delegates": "Αντιπρόσωποι",
+      "conferenceSchedule": "Πρόγραμμα",
       "digitalRoom": "Ψηφιακό δωμάτιο",
+      "history": "Ιστορία",
       "rollCall": "Προσκλητήριο",
       "session": "Συνεδρίαση",
+      "agenda": "Ημερήσια διάταξη",
       "speakers": "Ηχεία",
       "formalMotions": "Επίσημες κινήσεις",
       "discipline": "Πειθαρχικός",
@@ -970,13 +1289,12 @@
       "crisis": "Κρίση",
       "crisisSlides": "Η κρίση διολισθαίνει",
       "archive": "Αρχείο",
+      "notesModeration": "Note review",
       "officialLinks": "Επίσημοι σύνδεσμοι",
       "roomCode": "Κωδικός δωματίου",
       "settings": "Ρυθμίσεις",
-      "agenda": "Ημερήσια διάταξη",
-      "history": "Ιστορία",
-      "conferenceSchedule": "Πρόγραμμα",
-      "notesModeration": "Note review"
+      "newsroom": "Newsroom",
+      "milestones": "Milestones"
     }
   },
   "smtNav": {
@@ -984,14 +1302,16 @@
     "liveCommittees": "Ζωντανές επιτροπές",
     "eventSessions": "Εκδήλωση & συνεδρίες",
     "roomCodes": "Κωδικοί δωματίων & καρέκλες",
+    "advisors": "Σύμβουλοι",
+    "notes": "Notes",
     "awards": "Βραβεία",
     "allocationMatrix": "Πίνακας κατανομής",
     "allocationPasswords": "Κωδικοί πρόσβασης εκχώρησης",
     "profile": "Προφίλ",
     "follow": "Ακολουθώ",
     "hubAbbrev": "SMT",
-    "advisors": "Σύμβουλοι",
-    "notes": "Notes"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "officialLinks": {
     "intro": "Έγγραφα, συνθήκες, κύριοι φορείς, προγράμματα, αποστολές και πληροφορίες μελών. Ανοίγει σε νέα καρτέλα.",
@@ -1021,7 +1341,6 @@
       "secretariat": "Γραμματεία του ΟΗΕ",
       "trusteeship": "Συμβούλιο Κηδεμονίας του ΟΗΕ",
       "undp": "UNDP",
-      "unicef": "UNICEF",
       "unhcr": "UNHCR",
       "wfp": "WFP (Παγκόσμιο Επισιτιστικό Πρόγραμμα)",
       "unfpa": "UNFPA",
@@ -1029,7 +1348,6 @@
       "unwomen": "UN Women",
       "unhabitat": "UN-Habitat",
       "who": "ΠΟΥ",
-      "unesco": "UNESCO",
       "iom": "IOM (Διεθνής Οργανισμός Μετανάστευσης)",
       "unodc": "Γραφείο του ΟΗΕ για τα Ναρκωτικά και το Έγκλημα (UNODC)",
       "unoda": "Γραφείο του ΟΗΕ για Υποθέσεις Αφοπλισμού (UNODA)",
@@ -1045,6 +1363,17 @@
       "unSystem": "Σύστημα του ΟΗΕ (ιδρυτές και μέλη)",
       "history": "Ιστορία του ΟΗΕ"
     }
+  },
+  "timersWidget": {
+    "timer": "Μετρών την ώραν",
+    "currentSpeaker": "Τρέχον ηχείο",
+    "nextSpeaker": "Επόμενος ομιλητής",
+    "speakerTimePerSpeaker": "Χρόνος ηχείου (αριστερά / καπάκι)",
+    "speakerTimeTotal": "Χρόνος ηχείου (αριστερά / σύνολο)",
+    "perSpeaker": "(ανά ομιλητή)",
+    "paused": "(σε παύση)",
+    "pauseReason": "Παύση: {reason}",
+    "dash": "—"
   },
   "dashboardSearch": {
     "aria": "Ερευνα",
@@ -1123,10 +1452,8 @@
       "ECOFIN": "ECOFIN",
       "ECOSOC": "ECOSOC",
       "EU": "ΕΕ",
-      "F1": "F1",
       "FIFA": "FIFA",
       "FANTASY_WORLD_COMMITTEE": "Επιτροπή Κόσμου Φαντασίας",
-      "HSC": "HSC",
       "HRC": "HRC",
       "HCR": "HCR",
       "IAEA": "ΔΟΑΕ",
@@ -1143,8 +1470,6 @@
       "CSA": "CSA",
       "UNDP": "UNDP",
       "UNEP": "UNEP",
-      "UNESCO": "UNESCO",
-      "UNICEF": "UNICEF",
       "UNODC": "UNODC",
       "UNSC": "ΣΑΗΕ",
       "WHO": "ΠΟΥ",
@@ -1157,6 +1482,8 @@
     "openFullCommitteeRoom": "Ανοιχτή πλήρης αίθουσα επιτροπής",
     "delegatesMatrix": "Πίνακας αντιπροσώπων",
     "clearAllChairNotes": "Διαγράψτε όλες τις σημειώσεις της καρέκλας",
+    "clearAllConfirm": "Σαφής κομπλιμέντο, ανησυχία και σημειώσεις υπενθύμισης για κάθε πλακάτ; Αυτό ενημερώνει το κοινόχρηστο αντίγραφο της επιτροπής.",
+    "addedToSpeakerList": "Το {country} προστέθηκε στη λίστα ομιλητών.",
     "searchCountry": "Αναζήτηση χώρας...",
     "roomStats": "{πλακάτ} πλακάτ · {σημαία} με σημειώσεις καρέκλας · Ηχογραφήθηκε ρολό για {count}",
     "loading": "Φόρτωση...",
@@ -1173,10 +1500,51 @@
     "addToSpeakerList": "Προσθήκη στη λίστα ηχείων",
     "reminder": "Υπενθύμιση",
     "privateReminderLabel": "Ιδιωτική υπενθύμιση (μόνο καρέκλες, συγχρονισμένη)",
-    "clearAllConfirm": "Σαφής κομπλιμέντο, ανησυχία και σημειώσεις υπενθύμισης για κάθε πλακάτ; Αυτό ενημερώνει το κοινόχρηστο αντίγραφο της επιτροπής.",
-    "addedToSpeakerList": "Το {country} προστέθηκε στη λίστα ομιλητών.",
     "committeeFallback": "Επιτροπή",
     "dash": "—"
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "Λίστα ομιλητών",
+    "addedToSpeakerList": "Προστέθηκε στη λίστα ηχείων.",
+    "chooseDelegationsNotAlreadyQueued": "Επιλέξτε αντιπροσωπείες που δεν βρίσκονται ήδη σε αναμονή ή τρέχουσες στη λίστα.",
+    "addedSpeakersInOrder": "Προστέθηκαν {count} ομιλητές με σειρά επιτροπών.",
+    "introPrefix": "Προσθήκη αντιπροσωπειών με σειρά ομιλίας. Οι εκπρόσωποι μπορούν ακόμα να χρησιμοποιήσουν",
+    "requestToSpeak": "Ζητήστε να μιλήσετε",
+    "introMiddle": "στην αίθουσα της επιτροπής. Χρήση",
+    "sessionTimerLink": "Συνεδρία → Χρονόμετρο",
+    "introSuffixPrefix": "για χρόνο ανά ομιλητή και",
+    "advanceSpeaker": "Προηγμένο ηχείο",
+    "addDelegation": "Προσθήκη αντιπροσωπείας",
+    "select": "Επιλέγω…",
+    "add": "Προσθέτω",
+    "addSelectedToList": "Προσθήκη επιλεγμένων στη λίστα",
+    "dismissReminder": "Παράβλεψη υπενθύμισης",
+    "moveUp": "Μετακινηθείτε προς τα πάνω",
+    "moveDown": "Μετακίνηση προς τα κάτω",
+    "status": {
+      "current": "ρεύμα",
+      "waiting": "αναμονή"
+    },
+    "current": "Ρεύμα",
+    "remove": "Αφαιρώ",
+    "prompt": {
+      "gslTitle": "Λίστα γενικών ομιλητών (GSL)",
+      "moderatedTimerTitle": "Εποπτεία συνεδριάσεων (χρονόμετρο ανά ηχείο)",
+      "moderatedPassedTitle": "Η μετριοπαθής κοινοβουλευτική ομάδα πέρασε",
+      "bodyPrefix": "Χρησιμοποιήστε την παρακάτω λίστα ηχείων για να",
+      "add": "προσθέτω",
+      "bodyAddMiddle": "εκπρόσωποι (αναπτυσσόμενο μενού +",
+      "bodyAddMiddle2": ", ή σημειώστε αντιπροσωπείες και",
+      "bodyRemovePrefix": ") και",
+      "remove": "αφαιρώ",
+      "bodyRemoveMiddle": "τους με",
+      "bodyRowSuffix": "σε κάθε σειρά. Αναδιάταξη με τα βέλη ή ορίστε",
+      "bodyEnd": "όταν κάποιος βρίσκεται στο μικρόφωνο.",
+      "noAllocations": "Δεν έχουν φορτωθεί ακόμη χορηγήσεις για αυτήν την επιτροπή. Παράβλεψη όταν είναι έτοιμο—μπορείτε να προσθέσετε ηχεία αργότερα από τα στοιχεία ελέγχου λίστας.",
+      "quickAdd": "Γρήγορη προσθήκη (δεν βρίσκεται ακόμη σε αναμονή ή τρέχουσα)",
+      "alreadyQueued": "Κάθε κατανομή έχει ήδη μια θέση αναμονής ή τρέχουσα θέση. Καταργήστε τις καταχωρίσεις εάν χρειάζεται να κάνετε εκ νέου παραγγελία ή απορρίψτε όταν τελειώσετε."
+    }
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Επιλέξτε ζωντανό θέμα",
@@ -1194,15 +1562,7 @@
     "ecosocImplementingUbiPovertyStability": "Εφαρμογή καθολικού βασικού εισοδήματος (UBIs) ως στρατηγική για την εξάλειψη της φτώχειας και τη διατήρηση της οικονομικής σταθερότητας",
     "ecosocGloballyCoordinatedUbiPublicHealthStrategy": "Εφαρμογή Παγκόσμιου Συντονισμένου Καθολικού Βασικού Εισοδήματος (UBI) ως Στρατηγική Δημόσιας Υγείας",
     "ecosocReallocatingMilitaryExpenditurePublicHealth": "Θέσπιση πλαισίων για την ανακατανομή των παγκόσμιων στρατιωτικών δαπανών στις υποδομές δημόσιας υγείας",
-    "f1DurabilityLongevityCarComponents": "Εφαρμογή προτύπων ανθεκτικότητας και μακροζωίας για κρίσιμα εξαρτήματα αυτοκινήτου για τη βελτιστοποίηση του κύκλου ζωής των εξαρτημάτων και την ελαχιστοποίηση της σπατάλης υλικών και ενέργειας",
-    "f1GrandPrixBangkok2028Impacts": "Ανάλυση των κοινωνικοοικονομικών επιπτώσεων και των επιπτώσεων στην υποδομή της φιλοξενίας ενός νέου Grand Prix, με εστίαση στον μετριασμό της αστικής συμφόρησης και της εφοδιαστικής σε πολυπληθυσμένες πόλεις με εστίαση στο πιθανό Grand Prix F1 του 2028 στη Μπανγκόκ",
     "pressCorpsJournalisticEthicsPublicHealth": "Καθορισμός Δημοσιογραφικής Δεοντολογίας στην Έκθεση για τη Δημόσια Υγεία και τις Παγκόσμιες Υποθέσεις",
-    "unicefMaternalNeonatalPostpartumHealthcare": "Ενίσχυση των συστημάτων υγειονομικής περίθαλψης της μητέρας, του νεογνού και μετά τον τοκετό για τη σημαντική μείωση της μητρικής και βρεφικής θνησιμότητας και νοσηρότητας που μπορεί να προληφθεί",
-    "unicefFlexibleWorkParentalLeaveEarlyChildhood": "Σύσταση πλαισίων πολιτικής για την ενθάρρυνση των ευέλικτων εργασιακών ρυθμίσεων και της γονικής άδειας με την υποστήριξη του εργοδότη για τη διευκόλυνση της πρώιμης παιδικής ηλικίας και την ενίσχυση του δεσμού γονέα-παιδιού",
-    "euParliInflationCostOfLivingEurope": "Αντιμετώπιση του κοινωνικοοικονομικού αντίκτυπου του πληθωρισμού και του αυξανόμενου κόστους ζωής στους ευάλωτους πληθυσμούς σε όλη την Ευρώπη",
-    "euParliCriminalSocietalPoliciesPovertyCrime": "Τυποποίηση των εγκληματικών και κοινωνικών πολιτικών σε όλη την Ευρώπη για την πρόληψη των κύκλων εγκληματικότητας που προκαλούνται από τη φτώχεια",
-    "unescoInclusiveEducationNeurodivergent": "Ανάπτυξη και τυποποίηση πολιτικών για τη συνεκπαίδευση και τις απαραίτητες εγκαταστάσεις για τη διασφάλιση πλήρους και ισότιμης πρόσβασης στη μάθηση για νευροαποκλίνοντες μαθητές",
-    "unescoHistoricalFailuresEducationCurricula": "Θέσπιση κατευθυντήριων γραμμών για την υποχρεωτική και ολοκληρωμένη ενσωμάτωση ιστορικών αποτυχιών, φρικαλεοτήτων και παραβιάσεων των ανθρωπίνων δικαιωμάτων στα εθνικά εκπαιδευτικά προγράμματα για την προώθηση της συμφιλίωσης και την πρόληψη μελλοντικής επανάληψης",
     "unhrcDeathPenaltyStandardization": "την Τυποποίηση του Κανονισμού και Εφαρμογής της Θανατικής Ποινής",
     "unhrcJudicialCruelTreatmentFinancialDeficencies": "την υποχρέωση αποτροπής της σκληρής, απάνθρωπης ή ταπεινωτικής μεταχείρισης εντός των δικαστικών συστημάτων ως αποτέλεσμα οικονομικών ελλείψεων",
     "unodcAlternativesDrugPossessionPersonalUse": "Ανάλυση πολιτικής των εναλλακτικών λύσεων για την καταδίκη και την τιμωρία για κατοχή ναρκωτικών για προσωπική χρήση",
@@ -1213,8 +1573,6 @@
     "disecCrossBorderLethalWeaponsLogistics": "Ενίσχυση των διεθνών πρωτοκόλλων και της επιμελητείας για την εξασφάλιση της διασυνοριακής μεταφοράς φονικών όπλων",
     "fwcPsychicChildExperimentationGiftedMinors": "Πρόληψη βλάβης που προκαλείται από πειραματισμό ψυχικών/ψυχοκινητικών παιδιών και διασφάλιση της προστασίας και αποκατάστασης χαρισματικών ανηλίκων",
     "fwcPsychicTechnologiesNonProliferation": "Αντιμετώπιση του οπλισμού του ανθρώπινου μυαλού και καθιέρωση διεθνών πρωτοκόλλων για τον περιορισμό και τη μη διάδοση των ψυχικών τεχνολογιών",
-    "hscSarsOutbreak2002": "Επιδημία SARS (2002-2004)",
-    "hscBlackDeath1346": "Ο Μαύρος Θάνατος (1346-1353)",
     "interpolUndergroundMedicalMarkets": "Καταπολέμηση του διακρατικού οργανωμένου εγκλήματος σε υπόγειες ιατρικές αγορές και μη ρυθμιζόμενες χειρουργικές πρακτικές",
     "interpolNarcoticsSchengenGoldenTriangle": "Ενίσχυση των διασυνοριακών πλαισίων ασφαλείας για τον μετριασμό του δεσμού της διακίνησης ναρκωτικών με εστίαση στον χώρο Σένγκεν και στο Χρυσό Τρίγωνο",
     "whoPsychedelicTraumaMentalHealth": "Εξέταση του ηθικού και ρυθμιστικού τοπίου για την κλινική χρήση ψυχαδελικών φαρμάκων στη θεραπεία καταστάσεων ψυχικής υγείας που βασίζονται στο τραύμα",
@@ -1237,6 +1595,37 @@
     "qFoodSecurity": "Ποιες στρατηγικές μπορούν να βελτιώσουν την επισιτιστική ασφάλεια σε ευάλωτες στο κλίμα περιοχές;",
     "qNonProliferation": "Πώς πρέπει η διεθνής κοινότητα να αποτρέψει τη διάδοση των πυρηνικών όπλων;"
   },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    },
+    "composeTitle": "Send a note",
+    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
+    "composeCommitteeLabel": "Committee",
+    "composeLoading": "Loading committee…",
+    "composeNoCommittees": "No delegate committees in this event yet.",
+    "composeFormTitle": "New secretariat note"
+  },
   "delegationNotes": {
     "title": "Σημειώσεις αντιπροσωπείας",
     "topicLabel": "Θέμα",
@@ -1254,6 +1643,10 @@
     "sessionOnlyHint": "Οι σημειώσεις είναι διαθέσιμες μόνο κατά τις ενεργές συνεδριάσεις της επιτροπής.",
     "unmoderatedHint": "Οι σημειώσεις απενεργοποιούνται κατά τη διάρκεια της μη ελεγχόμενης συζήτησης.",
     "sendNote": "Αποστολή σημείωσης",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself",
     "sending": "Αποστολή…",
     "sendHelpTitle": "Αποστολή σημείωσης",
     "sendHelpBody": "Στέλνει αυτή τη σημείωση στους παραλήπτες που έχουν επιλεγεί παραπάνω. Δεν εμποδίζει την αποστολή. επηρεάζει μόνο τον τρόπο με τον οποίο ο αναγνώστης προειδοποιείται/επισημάνεται.",
@@ -1269,41 +1662,6 @@
     "noChairs": "Δεν βρέθηκαν προφίλ καρέκλας.",
     "notesListTitle": "Λίστα σημειώσεων",
     "noteCount": "{count, plural, one {# σημείωση} other {# σημειώσεις}}",
-    "emptyList": "Δεν υπάρχουν σημειώσεις ακόμα.",
-    "forwardedBadge": "(διαβιβάστηκε)",
-    "readerWarning": "Προειδοποίηση αναγνώστη: αυτή η σημείωση μπορεί να περιέχει ακατάλληλη γλώσσα.",
-    "viewFullNote": "Δείτε την πλήρη σημείωση",
-    "toLabel": "Να:",
-    "toEmpty": "—",
-    "star": "Αστέρι",
-    "starred": "Αστεροειδής",
-    "forwardToSmt": "Προώθηση στο SMT",
-    "forwarded": "Προωθήθηκε",
-    "report": "Εκθεση",
-    "fullNoteTitle": "Πλήρης σημείωση",
-    "fullNoteAria": "Πλήρης σημείωση",
-    "close": "Κοντά",
-    "unknownCountry": "Αγνωστος",
-    "chairFallback": "Καρέκλα",
-    "errors": {
-      "votingProcedure": "Η διαδικασία ψηφοφορίας είναι ενεργή: η σύνταξη σημείωσης είναι απενεργοποιημένη.",
-      "sessionInactive": "Οι σημειώσεις είναι απενεργοποιημένες ενώ η συνεδρίαση της επιτροπής δεν είναι ενεργή.",
-      "unmoderated": "Οι σημειώσεις απενεργοποιούνται κατά τη διάρκεια της μη ελεγχόμενης συζήτησης.",
-      "smtVerify": "Επαληθεύστε με τον δευτερεύοντα κωδικό πρόσβασης προσωπικού για να στείλετε σημειώσεις σε αυτήν την επιτροπή.",
-      "emptyContent": "Γράψτε πρώτα το περιεχόμενο της σημείωσης.",
-      "noRecipients": "Επιλέξτε τουλάχιστον έναν παραλήπτη (αντιπροσωπεία ή πρόεδρο).",
-      "needAllocation": "Χρειάζεστε μια κατανομή για να στείλετε σημειώσεις (ή να είστε πρόεδρος).",
-      "sendFailed": "Αποτυχία αποστολής σημείωσης.",
-      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
-    },
-    "forwardToAdvisor": "Προώθηση στο {name}",
-    "forwardedToAdvisor": "Διαβιβάστηκε σε σύμβουλο",
-    "forwardedToAdvisorBadge": "(προς σύμβουλο)",
-    "advisorFallback": "Σύμβουλος",
-    "sendToSelf": "Send test to myself",
-    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
-    "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself",
     "threadCount": "{count, plural, one {# chat} other {# chats}}",
     "messagesInThread": "{count, plural, one {# message} other {# messages}}",
     "messageCount": "{count} messages",
@@ -1317,7 +1675,22 @@
     "saveChatName": "Save name",
     "unnamedChat": "Note chat",
     "moderationToolbarLabel": "Chair & secretariat actions",
+    "emptyList": "Δεν υπάρχουν σημειώσεις ακόμα.",
+    "forwardedBadge": "(διαβιβάστηκε)",
+    "readerWarning": "Προειδοποίηση αναγνώστη: αυτή η σημείωση μπορεί να περιέχει ακατάλληλη γλώσσα.",
+    "viewFullNote": "Δείτε την πλήρη σημείωση",
     "fromLabel": "From:",
+    "toLabel": "Να:",
+    "toEmpty": "—",
+    "star": "Αστέρι",
+    "starred": "Αστεροειδής",
+    "forwardToSmt": "Προώθηση στο SMT",
+    "forwardToAdvisor": "Προώθηση στο {name}",
+    "forwardedToAdvisor": "Διαβιβάστηκε σε σύμβουλο",
+    "forwardedToAdvisorBadge": "(προς σύμβουλο)",
+    "advisorFallback": "Σύμβουλος",
+    "forwarded": "Προωθήθηκε",
+    "report": "Εκθεση",
     "moderation": {
       "queueTitle": "Note review queue",
       "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
@@ -1341,6 +1714,22 @@
         "reported": "chair report",
         "unknown": "moderation policy"
       }
+    },
+    "fullNoteTitle": "Πλήρης σημείωση",
+    "fullNoteAria": "Πλήρης σημείωση",
+    "close": "Κοντά",
+    "unknownCountry": "Αγνωστος",
+    "chairFallback": "Καρέκλα",
+    "errors": {
+      "votingProcedure": "Η διαδικασία ψηφοφορίας είναι ενεργή: η σύνταξη σημείωσης είναι απενεργοποιημένη.",
+      "sessionInactive": "Οι σημειώσεις είναι απενεργοποιημένες ενώ η συνεδρίαση της επιτροπής δεν είναι ενεργή.",
+      "unmoderated": "Οι σημειώσεις απενεργοποιούνται κατά τη διάρκεια της μη ελεγχόμενης συζήτησης.",
+      "smtVerify": "Επαληθεύστε με τον δευτερεύοντα κωδικό πρόσβασης προσωπικού για να στείλετε σημειώσεις σε αυτήν την επιτροπή.",
+      "emptyContent": "Γράψτε πρώτα το περιεχόμενο της σημείωσης.",
+      "noRecipients": "Επιλέξτε τουλάχιστον έναν παραλήπτη (αντιπροσωπεία ή πρόεδρο).",
+      "needAllocation": "Χρειάζεστε μια κατανομή για να στείλετε σημειώσεις (ή να είστε πρόεδρος).",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
+      "sendFailed": "Αποτυχία αποστολής σημείωσης."
     }
   },
   "adminPage": {
@@ -1476,23 +1865,43 @@
       "unauthorized": "Ανεξουσιοδότητος.",
       "codeSaved": "Ο κωδικός αποθηκεύτηκε. Οι εκπρόσωποι το χρησιμοποιούν ως δεύτερη πύλη μετά τον κωδικό της διάσκεψης.",
       "invalidEmail": "Εισαγάγετε μια έγκυρη διεύθυνση email.",
+      "missingChairRole": "Επιλέξτε μια έδρα και μια επιτροπή για αυτήν την πρόσκληση.",
+      "invalidChairRole": "Αυτή η έδρα δεν ταιριάζει με το σχέδιο προεδρίας αυτής της επιτροπής.",
+      "daisSeatRowMissing": "Δεν ήταν δυνατή η εύρεση μιας σειράς {seat} για αυτήν την επιτροπή. Δοκιμάστε να αποθηκεύσετε τη μήτρα κατανομής για το συμβάν και, στη συνέχεια, δοκιμάστε ξανά.",
+      "daisSeatAlreadyFilled": "Αυτό το κάθισμα έχει ήδη μια καρέκλα. Καταργήστε την εκχώρηση του τρέχοντος ατόμου στον πίνακα εκχώρησης (ή σε άλλο εργαλείο) πρώτα.",
+      "seatHeadChair": "Επικεφαλής καρέκλας",
+      "seatCoChair": "Συμπρόεδρος",
       "onlySmtInviteChair": "Μόνο η γραμματεία μπορεί να στείλει προσκλήσεις προέδρων.",
       "missingServiceRoleKey": "Ο διακομιστής λείπει SUPABASE_SERVICE_ROLE_KEY. Προσθέστε το στο deployment env (μην εκθέτετε ποτέ στο πρόγραμμα περιήγησης).",
       "missingPublicAppUrl": "Ορίστε το NEXT_PUBLIC_APP_URL στη δημόσια διεύθυνση URL του ιστότοπού σας (π.χ. https://your-app.vercel.app), επομένως προσκαλέστε συνδέσμους να ανακατευθύνουν σωστά.",
       "emailAlreadyHasAccount": "Αυτό το email έχει ήδη λογαριασμό. Χρησιμοποιήστε το \"Χορήγηση ρόλου προέδρου\" παρακάτω αντί να στείλετε άλλη πρόσκληση.",
       "inviteSentButRoleSetFailed": "Η πρόσκληση στάλθηκε, αλλά δεν ήταν δυνατός ο ορισμός του ρόλου προέδρου στο προφίλ: {error}. Χρησιμοποιήστε το \"Grant chair role\" αφού αποδεχτούν.",
+      "inviteSentButAllocationFailed": "Η πρόσκληση στάλθηκε και σετ ρόλων καρέκλας, αλλά δεν ήταν δυνατή η σύνδεση του καθίσματος: {error}. Διορθώστε τη μήτρα κατανομής ή επικοινωνήστε με την υποστήριξη.",
       "inviteSentSuccess": "Το email πρόσκλησης στάλθηκε στη διεύθυνση {email}. Θα είναι μια καρέκλα αφού ορίσουν τον κωδικό πρόσβασής τους.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
       "onlySmtGrantChair": "Μόνο η γραμματεία μπορεί να χορηγήσει ρόλους προέδρων.",
       "noAccountForEmail": "Δεν υπάρχει λογαριασμός με αυτό το email ακόμα. Στείλτε πρώτα μια πρόσκληση προέδρου.",
-      "promotedToChairSuccess": "Το προφίλ για το {email} είναι πλέον καρέκλα.",
-      "missingChairRole": "Επιλέξτε μια έδρα και μια επιτροπή για αυτήν την πρόσκληση.",
-      "daisSeatRowMissing": "Δεν ήταν δυνατή η εύρεση μιας σειράς {seat} για αυτήν την επιτροπή. Δοκιμάστε να αποθηκεύσετε τη μήτρα κατανομής για το συμβάν και, στη συνέχεια, δοκιμάστε ξανά.",
-      "daisSeatAlreadyFilled": "Αυτό το κάθισμα έχει ήδη μια καρέκλα. Καταργήστε την εκχώρηση του τρέχοντος ατόμου στον πίνακα εκχώρησης (ή σε άλλο εργαλείο) πρώτα.",
-      "seatHeadChair": "Επικεφαλής καρέκλας",
-      "seatCoChair": "Συμπρόεδρος",
-      "inviteSentButAllocationFailed": "Η πρόσκληση στάλθηκε και σετ ρόλων καρέκλας, αλλά δεν ήταν δυνατή η σύνδεση του καθίσματος: {error}. Διορθώστε τη μήτρα κατανομής ή επικοινωνήστε με την υποστήριξη.",
-      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "Αυτή η έδρα δεν ταιριάζει με το σχέδιο προεδρίας αυτής της επιτροπής."
+      "promotedToChairSuccess": "Το προφίλ για το {email} είναι πλέον καρέκλα."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Δεν έχετε συνδεθεί.",
+      "onlySmt": "Μόνο ο διαχειριστής της γραμματείας ή του ιστότοπου μπορεί να διαχειρίζεται συμβούλους.",
+      "unauthorized": "Ανεξουσιοδότητος.",
+      "invalidEmail": "Εισαγάγετε μια έγκυρη διεύθυνση email.",
+      "missingServiceRole": "Ο διακομιστής λείπει SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Ορίστε το NEXT_PUBLIC_APP_URL για συνδέσμους ανακατεύθυνσης προσκλήσεων.",
+      "emailAlreadyRegistered": "Αυτό το email έχει ήδη λογαριασμό. Ορίστε τον ρόλο τους ως σύμβουλο στον διαχειριστή και, στη συνέχεια, ορίστε έναν εκπρόσωπο.",
+      "inviteRoleFailed": "Η πρόσκληση στάλθηκε αλλά δεν ήταν δυνατός ο ορισμός του ρόλου συμβούλου: {message}",
+      "inviteSent": "Η πρόσκληση στάλθηκε στο {email}. Θα είναι σύμβουλος αφού ορίσουν τον κωδικό πρόσβασής τους.",
+      "invalidAdvisorEmail": "Εισαγάγετε το email του συμβούλου.",
+      "missingDelegate": "Επιλέξτε μια θέση αντιπροσώπου.",
+      "invalidAllocationId": "Εισαγάγετε ένα έγκυρο UUID κατανομής.",
+      "advisorNotFound": "Δεν βρέθηκε λογαριασμός για αυτό το email συμβούλου.",
+      "notAdvisorRole": "Αυτός ο χρήστης δεν είναι σύμβουλος. Προσκαλέστε τους ή ορίστε πρώτα τον ρόλο του συμβούλου.",
+      "delegateNotFound": "Η θέση του αντιπροσώπου δεν βρέθηκε.",
+      "delegateUnlinked": "Αυτή η θέση δεν έχει ακόμη συνδεδεμένο λογαριασμό εκπροσώπου.",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned).",
+      "assigned": "Διορίστηκε σύμβουλος στο {country}."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Πρέπει να είστε συνδεδεμένοι.",
@@ -1510,26 +1919,6 @@
       "emailSubject": "Εξαγωγή υλικών InterMUN ({range})",
       "emailSendConfigHint": "Ορίστε SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS και προαιρετικά MATERIALS_EXPORT_FROM στον διακομιστή.",
       "exportEmailedTo": "Η εξαγωγή εστάλη μέσω ηλεκτρονικού ταχυδρομείου στη διεύθυνση {email}. Εάν δεν το βλέπετε, ελέγξτε ανεπιθύμητα/ανεπιθύμητα."
-    },
-    "advisorStaff": {
-      "notSignedIn": "Δεν έχετε συνδεθεί.",
-      "onlySmt": "Μόνο ο διαχειριστής της γραμματείας ή του ιστότοπου μπορεί να διαχειρίζεται συμβούλους.",
-      "unauthorized": "Ανεξουσιοδότητος.",
-      "invalidEmail": "Εισαγάγετε μια έγκυρη διεύθυνση email.",
-      "missingServiceRole": "Ο διακομιστής λείπει SUPABASE_SERVICE_ROLE_KEY.",
-      "missingAppUrl": "Ορίστε το NEXT_PUBLIC_APP_URL για συνδέσμους ανακατεύθυνσης προσκλήσεων.",
-      "emailAlreadyRegistered": "Αυτό το email έχει ήδη λογαριασμό. Ορίστε τον ρόλο τους ως σύμβουλο στον διαχειριστή και, στη συνέχεια, ορίστε έναν εκπρόσωπο.",
-      "inviteRoleFailed": "Η πρόσκληση στάλθηκε αλλά δεν ήταν δυνατός ο ορισμός του ρόλου συμβούλου: {message}",
-      "inviteSent": "Η πρόσκληση στάλθηκε στο {email}. Θα είναι σύμβουλος αφού ορίσουν τον κωδικό πρόσβασής τους.",
-      "invalidAdvisorEmail": "Εισαγάγετε το email του συμβούλου.",
-      "missingDelegate": "Επιλέξτε μια θέση αντιπροσώπου.",
-      "advisorNotFound": "Δεν βρέθηκε λογαριασμός για αυτό το email συμβούλου.",
-      "notAdvisorRole": "Αυτός ο χρήστης δεν είναι σύμβουλος. Προσκαλέστε τους ή ορίστε πρώτα τον ρόλο του συμβούλου.",
-      "delegateNotFound": "Η θέση του αντιπροσώπου δεν βρέθηκε.",
-      "delegateUnlinked": "Αυτή η θέση δεν έχει ακόμη συνδεδεμένο λογαριασμό εκπροσώπου.",
-      "assigned": "Διορίστηκε σύμβουλος στο {country}.",
-      "invalidAllocationId": "Εισαγάγετε ένα έγκυρο UUID κατανομής.",
-      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1554,6 +1943,7 @@
     "selectConferenceFirst": "Επιλέξτε πρώτα μια διάσκεψη με την πύλη εκδήλωσης και μετά επιστρέψτε εδώ.",
     "committeeSessionsTitle": "συνεδριάσεις της επιτροπής σε αυτή την εκδήλωση",
     "committeeSessionsBody": "Κάθε κάρτα είναι ένα θάλαμο: σύντομη ετικέτα, επίσημο όνομα, λογότυπο, έως δύο θέματα ατζέντας, σύνδεσμος RoP, κοινόχρηστος κωδικός δωματίου έξι χαρακτήρων (δεύτερη πύλη) και προφίλ διαδικασίας. Οι κωδικοί δωματίων πρέπει να παραμένουν μοναδικοί σε όλους τους θαλάμους σε αυτήν την εκδήλωση.",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
     "noCommitteeSessions": "Δεν υπάρχουν συνεδριάσεις επιτροπής για αυτήν την εκδήλωση.",
     "eventName": "Όνομα εκδήλωσης",
     "tagline": "Περιγραφή",
@@ -1568,8 +1958,22 @@
     "errorUploadFailed": "Η μεταφόρτωση απέτυχε.",
     "sessionTitle": "Τίτλος συνεδρίας",
     "chamberLabel": "Θάλαμος / ετικέτα",
+    "committeeLabelShort": "Ετικέτα επιτροπής",
+    "committeeLabelPlaceholder": "π.χ. ECOSOC, DISEC, INTERPOL",
     "officialCommitteeName": "Επίσημη ονομασία επιτροπής (πλέγμα SMT)",
+    "officialCommitteeNameGrid": "Επίσημο όνομα επιτροπής",
     "officialCommitteeNamePlaceholder": "π.χ. Παγκόσμιος Οργανισμός Υγείας",
+    "topic1Label": "Θέμα 1",
+    "topic2Label": "Θέμα 2 (προαιρετικό)",
+    "topic2Placeholder": "Δεύτερη ερώτηση ατζέντας",
+    "topic2DisabledHint": "Προσθέστε μια δεύτερη σειρά θέματος για να επεξεργαστείτε αυτό το πεδίο.",
+    "addSecondTopic": "Προσθήκη δεύτερου θέματος",
+    "addingTopic": "Αθροιση…",
+    "ropDocumentLink": "Κανονισμός διαδικασίας (σύνδεσμος εγγράφου)",
+    "ropDocumentPlaceholder": "https://…",
+    "roomCodeLabel": "Κωδικός δωματίου (δεύτερη πύλη)",
+    "roomCodeHelpPrefix": "Έξι γράμματα ή ψηφία, κοινόχρηστα για αυτήν την αίθουσα (πρόταση:",
+    "roomCodeHelpSuffix": ").",
     "chairNames": "Ονόματα καρεκλών",
     "chairNamesPlaceholder": "Διαχωρίζονται με κόμμα, π.χ. Alex Kim, Jordan Lee",
     "committeeLogo": "Λογότυπο επιτροπής",
@@ -1595,26 +1999,12 @@
     "committeeCodePlaceholder": "π.χ. ECO741",
     "committeeCodeHelpPrefix": "Έξι χαρακτήρες: αρχικά θαλάμου + τρία ψηφία (ντετερμινιστική πρόταση:",
     "saveCommittee": "Αποθήκευση επιτροπής",
-    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Ετικέτα επιτροπής",
-    "committeeLabelPlaceholder": "π.χ. ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Επίσημο όνομα επιτροπής",
-    "topic1Label": "Θέμα 1",
-    "topic2Label": "Θέμα 2 (προαιρετικό)",
-    "topic2Placeholder": "Δεύτερη ερώτηση ατζέντας",
-    "topic2DisabledHint": "Προσθέστε μια δεύτερη σειρά θέματος για να επεξεργαστείτε αυτό το πεδίο.",
-    "addSecondTopic": "Προσθήκη δεύτερου θέματος",
-    "addingTopic": "Αθροιση…",
-    "ropDocumentLink": "Κανονισμός διαδικασίας (σύνδεσμος εγγράφου)",
-    "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Κωδικός δωματίου (δεύτερη πύλη)",
-    "roomCodeHelpPrefix": "Έξι γράμματα ή ψηφία, κοινόχρηστα για αυτήν την αίθουσα (πρόταση:",
-    "roomCodeHelpSuffix": ").",
     "schedule": {
       "title": "Πρόγραμμα διήμερου συνεδρίου",
       "subtitle": "Σχεδιάστε μπλοκ ανά ομάδα αντιπροσώπων (τις ίδιες ομάδες που χρησιμοποιείτε για την ομαδοποίηση επιτροπών). Χρώμα ανά τύπο μπλοκ: συνεδρία, διάλειμμα ή τελετή. Σημειώστε το μεσημεριανό γεύμα για ελέγχους επικάλυψης. Αποθηκεύτηκε με το ενεργό συμβάν.",
       "day1Tab": "Ημέρα 1",
       "day2Tab": "Ημέρα 2",
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating.",
       "lunchOverlapTab": "Επικάλυψη μεσημεριανού γεύματος",
       "lunchOverlapHelp": "Οι επικαλύψεις εμφανίζονται όταν δύο ομάδες έχουν και οι δύο μια σειρά που έχει επισημανθεί ως μεσημεριανό την ίδια μέρα και τα χρονικά εύρη τέμνονται.",
       "noLunchOverlaps": "Δεν εντοπίστηκαν επικαλύψεις για μεσημεριανό γεύμα. Σημειώστε τουλάχιστον μία σειρά ως μεσημεριανό σε δύο διαφορετικές ομάδες την ίδια μέρα με επικαλυπτόμενους χρόνους.",
@@ -1651,6 +2041,19 @@
       "saved": "Το χρονοδιάγραμμα αποθηκεύτηκε.",
       "resetTemplate": "Επαναφορά στο πρότυπο",
       "confirmReset": "Επαναφορά του χρονοδιαγράμματος στις προεπιλεγμένες τρεις ομάδες και διαγραφή όλων των μπλοκ;",
+      "lunchOverlap": {
+        "title": "Το μεσημεριανό γεύμα επικαλύπτεται με άλλες επιτροπές",
+        "body": "Συγκρίνετε το μεσημεριανό παράθυρο της επιτροπής σας με έως και {max} άλλες επιτροπές. Επιλέξτε μια ημέρα και, στη συνέχεια, επιλέξτε τις επιτροπές παρακάτω.",
+        "pickCommittees": "Συγκρίνετε με",
+        "noneSelected": "Επιλέξτε μία ή περισσότερες επιτροπές για να δείτε τα κοινά λεπτά γεύματος.",
+        "yourLunch": "Το μεσημεριανό σας",
+        "theirLunch": "Το μεσημεριανό τους",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}",
+        "overlap": "Κοινό γεύμα: {start}–{end} ({minutes} λεπτά)",
+        "noOverlap": "Δεν υπάρχει κοινόχρηστη ώρα για μεσημεριανό γεύμα αυτήν την ημέρα."
+      },
       "seamunLocked": {
         "title": "SEAMUN I 2027 — επίσημο οπτικό πρόγραμμα",
         "body": "Αυτό το διήμερο πρόγραμμα έχει καθοριστεί για το SEAMUN I 2027. Αντιστοιχεί στο δημοσιευμένο κύριο πρόγραμμα και δεν μπορεί να αλλάξει στην εφαρμογή (συμπεριλαμβανομένης της γραμματείας).",
@@ -1671,42 +2074,25 @@
         "committeeMatrixHint": "Κάθε αίθουσα ακολουθεί το ρολόι της Ημέρας 1 / Ημέρας 2 του κομματιού του (η στήλη με το ίδιο όνομα ομάδας στο παραπάνω διάγραμμα).",
         "colScheduleTrack": "Προγραμματισμός διαδρομής",
         "colChambers": "Επιμελητήρια (ετικέτες σε αυτήν την εκδήλωση)",
-        "advisorHint": "Αγγίξτε μια ομάδα και, στη συνέχεια, προβάλετε είτε ένα χρονοδιάγραμμα συμβούλων (A–D) είτε ένα χρονοδιάγραμμα εκπροσώπων/προέδρου για μία επιτροπή — όχι και τα δύο ταυτόχρονα.",
-        "advisorOnlyHint": "Επιλέξτε το ίχνος του χρονοδιαγράμματός σας και μετά τον σύμβουλο A–D για να δείτε την ημέρα του συγκεκριμένου συμβούλου.",
-        "committeeOnlyHint": "Το επίσημο χρονοδιάγραμμα της επιτροπής σας. Παρακάτω, συγκρίνετε τις ώρες του γεύματος με άλλες επιτροπές.",
-        "pickTrack": "Προγραμματισμός κομματιού:",
-        "viewAllTeams": "Όλες οι ομάδες",
-        "orPickTeam": "ή ομάδα:",
-        "viewAs": "Προβολή ως",
-        "modeAdvisor": "Σύμβουλος",
-        "modeCommittee": "Επιτροπή (αντιπρόσωπος/πρόεδρος)",
-        "pickAdvisor": "Σύμβουλος",
-        "pickCommittee": "Επιτροπή",
-        "selectAdvisorPrompt": "Επιλέξτε τον σύμβουλο A, B, C ή D για να δείτε αυτό το χρονοδιάγραμμα.",
-        "selectCommitteePrompt": "Επιλέξτε την επιτροπή σας για να δείτε το χρονοδιάγραμμα των εκπροσώπων/προέδρων.",
-        "teamShort": {
-          "g1": "Αλφα",
-          "g2": "Βήτα",
-          "g3": "Γάμμα",
-          "g4": "Δέλτα",
-          "support": "Εψιλο"
-        },
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
         "smtBrowseHint": "Επιλέξτε όλες τις ομάδες (διαλέξτε μια ομάδα), το χρονοδιάγραμμα μιας επιτροπής ή ένα χρονοδιάγραμμα συμβούλων — κάθε προβολή είναι ξεχωριστή.",
         "browseTeams": "Όλες οι ομάδες",
         "browseCommittee": "Από επιτροπή",
         "browseAdvisor": "Από σύμβουλο",
         "teamsScopeAll": "Επισκόπηση (όλες οι ομάδες)",
-        "pickGroup": "Ομάδα:",
-        "pickCommitteeAll": "Επιτροπή:",
-        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
-        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
-        "colLunchGroup": "Lunch group",
         "pickDebateTrack": "Debate track:",
         "pickLunchGroup": "Lunch group:",
+        "pickCommitteeAll": "Επιτροπή:",
+        "advisorOnlyHint": "Επιλέξτε το ίχνος του χρονοδιαγράμματός σας και μετά τον σύμβουλο A–D για να δείτε την ημέρα του συγκεκριμένου συμβούλου.",
         "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
         "advisorRosterMember": "Advisor {n}",
         "advisorRosterColumn": "Advisor {n}",
+        "selectAdvisorPrompt": "Επιλέξτε τον σύμβουλο A, B, C ή D για να δείτε αυτό το χρονοδιάγραμμα.",
+        "committeeOnlyHint": "Το επίσημο χρονοδιάγραμμα της επιτροπής σας. Παρακάτω, συγκρίνετε τις ώρες του γεύματος με άλλες επιτροπές.",
         "advisorColumnSuffix": "Advisor",
+        "selectCommitteePrompt": "Επιλέξτε την επιτροπή σας για να δείτε το χρονοδιάγραμμα των εκπροσώπων/προέδρων.",
         "lunchGroupTitle": {
           "l1": "Lunch group 1",
           "l2": "Lunch group 2",
@@ -1716,22 +2102,13 @@
           "l1": "Lunch 1",
           "l2": "Lunch 2",
           "l3": "Lunch 3"
+        },
+        "teamShort": {
+          "g1": "Αλφα",
+          "g2": "Βήτα",
+          "g3": "Γάμμα"
         }
-      },
-      "lunchOverlap": {
-        "title": "Το μεσημεριανό γεύμα επικαλύπτεται με άλλες επιτροπές",
-        "body": "Συγκρίνετε το μεσημεριανό παράθυρο της επιτροπής σας με έως και {max} άλλες επιτροπές. Επιλέξτε μια ημέρα και, στη συνέχεια, επιλέξτε τις επιτροπές παρακάτω.",
-        "pickCommittees": "Συγκρίνετε με",
-        "noneSelected": "Επιλέξτε μία ή περισσότερες επιτροπές για να δείτε τα κοινά λεπτά γεύματος.",
-        "yourLunch": "Το μεσημεριανό σας",
-        "theirLunch": "Το μεσημεριανό τους",
-        "overlap": "Κοινό γεύμα: {start}–{end} ({minutes} λεπτά)",
-        "noOverlap": "Δεν υπάρχει κοινόχρηστη ώρα για μεσημεριανό γεύμα αυτήν την ημέρα.",
-        "combinedWindow": "{start}–{end} (eat + chill)",
-        "eatingWindow": "Eat {start}–{end}",
-        "chillingWindow": "Chill {start}–{end}"
-      },
-      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
+      }
     }
   },
   "allocationMatrixManager": {
@@ -1756,6 +2133,7 @@
     "rosterHeading": "ρόστερ · {επικεφαλίδα}",
     "seatsSummary": "{count} θέσεις.",
     "linkedDelegatesCannotBeDeleted": "Οι συνδεδεμένοι εκπρόσωποι δεν μπορούν να διαγραφούν εδώ.",
+    "secretariatParliamentarianSeat": "Βουλευτής · Έδρα {seat}",
     "countryPosition": "Χώρα / θέση",
     "placardCode": "Κωδικός πλακάτ",
     "assignedAccount": "Εκχωρημένος λογαριασμός",
@@ -1785,8 +2163,36 @@
     "csvPlaceholder": "Γαλλία,DIS-001\\nΓερμανία,DIS-002\\nΙαπωνία",
     "parsedRowsSample": "Αναλύθηκαν {count} σειρές. Δείγμα:",
     "runImport": "Εκτέλεση εισαγωγής",
-    "generateMissingRandomCodes": "Δημιουργήστε τυχαίους κωδικούς που λείπουν",
-    "secretariatParliamentarianSeat": "Βουλευτής · Έδρα {seat}"
+    "generateMissingRandomCodes": "Δημιουργήστε τυχαίους κωδικούς που λείπουν"
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "Πίνακας κατανομής επιτροπής για την τρέχουσα συνεδρία σας. Αυτό είναι μόνο για ανάγνωση για καρέκλες και αντικατοπτρίζει ενεργές αναθέσεις καθισμάτων και κωδικούς πλακάτ.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "Κατανομή",
+      "flag": "Σημαία",
+      "email": "E-mail",
+      "name": "Ονομα",
+      "grade": "Βαθμός",
+      "notes": "Σημειώσεις",
+      "requestedAllocation": "Ζητήθηκε κατανομή",
+      "account": "Λογαριασμός",
+      "actions": "Δράσεις"
+    },
+    "noRows": "Δεν βρέθηκαν σειρές κατανομής για αυτήν την επιτροπή.",
+    "pendingApprovalsTitle": "Εκκρεμείς εγκρίσεις εγγραφής",
+    "pendingApprovalsIntro": "Οι πρόεδροι εγκρίνουν ή απορρίπτουν τις εγγραφές συνδέσμων κατανομής για να διασφαλίσουν ότι οι εκπρόσωποι χρησιμοποιούν τον σωστό λογαριασμό.",
+    "noPendingRequests": "Δεν υπάρχουν εκκρεμή αιτήματα.",
+    "unknownAllocation": "Άγνωστη κατανομή",
+    "approve": "Εγκρίνω",
+    "reject": "Απορρίπτω"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Πίνακας κατανομής",
+    "selectConferenceEventFirst": "Επιλέξτε πρώτα μια εκδήλωση συνεδρίου.",
+    "enterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης",
+    "intro": "Δημιουργήστε ή εισαγάγετε τη λίστα θέσεων για κάθε επιτροπή στο ενεργό συμβάν. Οι εκπρόσωποι επιλέγουν τη σειρά τους στην πύλη της επιτροπής μετά την είσοδο. Οι κωδικοί πλακάτ μπορούν να ταιριάζουν με τα αναγνωριστικά υπολογιστικών φύλλων σας."
   },
   "chairAwardsPage": {
     "committeeLabel": "Επιτροπή",
@@ -1843,6 +2249,54 @@
       }
     }
   },
+  "chairAwardsDelegateMatrix": {
+    "title": "Κάθε εκπρόσωπος — ρουμπρίκα συνεδρίας (απαιτείται)",
+    "intro": "Ίδιες έξι διαστάσεις με τις υποψηφιότητες της επιτροπής για τους καλύτερους εκπροσώπους. Πρέπει να βαθμολογήσετε <strong>κάθε εκπρόσωπος που κάθεται</strong> πριν υποβάλετε υποψηφιότητες στο SMT ({completeCount}/{total} ολοκληρώθηκε).",
+    "complete": "Πλήρης",
+    "incomplete": "Ατελής",
+    "saving": "Οικονομία...",
+    "saveThisDelegate": "Αποθηκεύστε αυτόν τον εκπρόσωπο",
+    "autosaved": "Αυτόματη αποθήκευση",
+    "autosaveFailed": "Η αυτόματη αποθήκευση απέτυχε",
+    "autosavedWithCountry": "Αυτόματη αποθήκευση — {country}",
+    "delegateFallback": "αντιπρόσωπος",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
+  },
   "chairOverviewPage": {
     "fallbackYourCommittee": "η επιτροπή σας",
     "fallbackCommittee": "Επιτροπή",
@@ -1873,6 +2327,10 @@
       "session": {
         "label": "Συνεδρίαση",
         "hint": "Έναρξη/διακοπή συνεδρίας επιτροπής (χρονοσήμανση)"
+      },
+      "agenda": {
+        "label": "Ημερήσια διάταξη",
+        "hint": "Ζωντανά σύνολα θεμάτων και ψηφοφοριών ανά θέμα ατζέντας"
       },
       "speakers": {
         "label": "Ηχεία",
@@ -1929,14 +2387,39 @@
       "committeeRoomFull": {
         "label": "Αίθουσα επιτροπής (γεμάτη)",
         "hint": "Εικονική διάταξη & όροφος αντιπροσώπων"
-      },
-      "agenda": {
-        "label": "Ημερήσια διάταξη",
-        "hint": "Ζωντανά σύνολα θεμάτων και ψηφοφοριών ανά θέμα ατζέντας"
       }
     }
   },
   "awardsRubric": {
+    "maxPoints": "Μέγιστος {πόντους} πόντοι",
+    "reference": {
+      "title": "Ρουμπρίκες επίσημων βραβείων SEAMUN I",
+      "description": "Αντίγραφο αναφοράς: τύποι βραβείων, διαδικασία αξιολόγησης και πλήρεις πίνακες ζωνών 1-8 (από τη ρουμπρίκα του συνεδρίου). Η βαθμολογία στο InterMUN χρησιμοποιεί τα ίδια κλειδιά κριτηρίων όπου υποβάλλονται υποψηφιότητες."
+    },
+    "sections": {
+      "catalogue": "Κατάλογος βραβείων",
+      "processOversight": "Διαδικασία απονομής και επίβλεψη",
+      "calibrationTraining": "Βαθμονόμηση και εκπαίδευση καρέκλας (κλίμακα 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Σε όλη τη διάσκεψη (συνολικά)",
+      "collectiveChair": "Συλλογικό και καρέκλα",
+      "committeeLevel": "σε επίπεδο επιτροπής"
+    },
+    "matrices": {
+      "positionPaper": "Χαρτί θέσης (Καλύτερο χαρτί θέσης)",
+      "delegateLiveSessions": "Εκπρόσωπος (ζωντανές συνεδρίες)",
+      "chairPerformance": "Απόδοση καρέκλας",
+      "chairReportOverall": "Έκθεση προέδρου - συνολικά",
+      "chairReportSectionSpecific": "Έκθεση προέδρου - συγκεκριμένη ενότητα",
+      "bestCommittee": "Η καλύτερη επιτροπή"
+    },
+    "evidenceNote": "Οι πρόεδροι συμπληρώνουν αποδεικτικά στοιχεία και γραπτή επιβεβαίωση για τα αρχεία SMT: κύρια απόδειξη αριστείας και αιτιολόγησης έναντι επιλαχόντων (ανά δημοσιευμένη φόρμα).",
+    "footnotes": {
+      "delegateLiveSessions": "Δημιουργικότητα, διπλωματία, συνεργασία, ηγεσία, γνώση και έρευνα, συμμετοχή - 8 βαθμοί έκαστος.",
+      "chairPerformance": "Οκτώ διαστάσεις βαθμολογούνται με 8 πόντους η καθεμία για την καλύτερη ευθυγράμμιση αξιολόγησης καρέκλας/καθίσματος.",
+      "chairReportSectionSpecific": "Σε συνδυασμό με τη συνολική ενότητα παραπάνω για μια συνολική βαθμολογία αναφοράς της έδρας έως 72 στην εκτεταμένη κλίμακα στο επίσημο έγγραφο."
+    },
     "criteriaHeader": "Κριτήρια",
     "bandHeaders": {
       "0": "Αρχή",
@@ -2237,216 +2720,7 @@
           "3": "Απρόσκοπτη συνέργεια. η μαργαρίτα εμπνέει ένα επαγγελματικό και υψηλού επιπέδου περιβάλλον."
         }
       }
-    },
-    "maxPoints": "Μέγιστος {πόντους} πόντοι",
-    "reference": {
-      "title": "Ρουμπρίκες επίσημων βραβείων SEAMUN I",
-      "description": "Αντίγραφο αναφοράς: τύποι βραβείων, διαδικασία αξιολόγησης και πλήρεις πίνακες ζωνών 1-8 (από τη ρουμπρίκα του συνεδρίου). Η βαθμολογία στο InterMUN χρησιμοποιεί τα ίδια κλειδιά κριτηρίων όπου υποβάλλονται υποψηφιότητες."
-    },
-    "sections": {
-      "catalogue": "Κατάλογος βραβείων",
-      "processOversight": "Διαδικασία απονομής και επίβλεψη",
-      "calibrationTraining": "Βαθμονόμηση και εκπαίδευση καρέκλας (κλίμακα 1-8)"
-    },
-    "headings": {
-      "conferenceWideOverall": "Σε όλη τη διάσκεψη (συνολικά)",
-      "collectiveChair": "Συλλογικό και καρέκλα",
-      "committeeLevel": "σε επίπεδο επιτροπής"
-    },
-    "matrices": {
-      "positionPaper": "Χαρτί θέσης (Καλύτερο χαρτί θέσης)",
-      "delegateLiveSessions": "Εκπρόσωπος (ζωντανές συνεδρίες)",
-      "chairPerformance": "Απόδοση καρέκλας",
-      "chairReportOverall": "Έκθεση προέδρου - συνολικά",
-      "chairReportSectionSpecific": "Έκθεση προέδρου - συγκεκριμένη ενότητα",
-      "bestCommittee": "Η καλύτερη επιτροπή"
-    },
-    "evidenceNote": "Οι πρόεδροι συμπληρώνουν αποδεικτικά στοιχεία και γραπτή επιβεβαίωση για τα αρχεία SMT: κύρια απόδειξη αριστείας και αιτιολόγησης έναντι επιλαχόντων (ανά δημοσιευμένη φόρμα).",
-    "footnotes": {
-      "delegateLiveSessions": "Δημιουργικότητα, διπλωματία, συνεργασία, ηγεσία, γνώση και έρευνα, συμμετοχή - 8 βαθμοί έκαστος.",
-      "chairPerformance": "Οκτώ διαστάσεις βαθμολογούνται με 8 πόντους η καθεμία για την καλύτερη ευθυγράμμιση αξιολόγησης καρέκλας/καθίσματος.",
-      "chairReportSectionSpecific": "Σε συνδυασμό με τη συνολική ενότητα παραπάνω για μια συνολική βαθμολογία αναφοράς της έδρας έως 72 στην εκτεταμένη κλίμακα στο επίσημο έγγραφο."
     }
-  },
-  "chairChecklists": {
-    "common": {
-      "progressSynced": "{done} / {total} ολοκληρώθηκε - συγχρονίστηκε για αυτήν την επιτροπή",
-      "loading": "Φόρτωση...",
-      "resetChecklist": "Επαναφορά λίστας ελέγχου"
-    },
-    "prepPage": {
-      "description": "Πριν από το συνέδριο: κανόνες, θέμα, αίθουσα, υλικά και ομάδα. Συγχρονίστηκε για όλους τους προέδρους αυτής της επιτροπής. Η επαναφορά το διαγράφει για όλους.",
-      "crisisHidden": "Τα στοιχεία προετοιμασίας για συγκεκριμένη κρίση είναι κρυμμένα για αυτόν τον τύπο επιτροπής."
-    },
-    "flowPage": {
-      "description": "Κανονική ροή επιτροπής - σημειώστε τα βήματα καθώς προχωράτε. Κοινή χρήση σε λογαριασμούς καρέκλας και συσκευές. η επαναφορά διαγράφεται για όλους."
-    },
-    "prep": {
-      "sections": {
-        "rules": {
-          "title": "Κανόνες & διαδικασία"
-        },
-        "topic": {
-          "title": "Επιτροπή & θέμα"
-        },
-        "room": {
-          "title": "Δωμάτιο & τεχν"
-        },
-        "materials": {
-          "title": "Υλικά & logistics"
-        },
-        "crisis": {
-          "title": "Κρίση (αν υπάρχει)"
-        },
-        "team": {
-          "title": "Ομάδα & επικοινωνία"
-        }
-      },
-      "items": {
-        "rop": "Διαβάστε και κατανοήστε τον εσωτερικό κανονισμό της επιτροπής",
-        "parliamentary": "Ανασκόπηση της κοινοβουλευτικής διαδικασίας (προτάσεις, σημεία, ψηφοφορία)",
-        "speaking-times": "Επιβεβαιώστε τους χρόνους και τα χρονικά όρια ομιλίας",
-        "quorum": "Να γνωρίζετε τις απαιτήσεις απαρτίας και ψηφοφορίας",
-        "research": "Θέμα και ιστορικό της ερευνητικής επιτροπής",
-        "study-guide": "Διαβάστε τον οδηγό μελέτης και τα βασικά έγγραφα",
-        "dashboard-topic": "Ορίστε το όνομα και το θέμα της επιτροπής στον πίνακα ελέγχου",
-        "agenda": "Προετοιμάστε την ατζέντα και τη ροή της συνεδρίας",
-        "digital-room": "Ρύθμιση ψηφιακής αίθουσας (λίστα εκπροσώπων, πλακάτ)",
-        "tech-check": "Τεχνικός έλεγχος: πλατφόρμα, ήχος, κοινή χρήση οθόνης",
-        "backup": "Έχετε εφεδρικό σχέδιο εάν η τεχνολογία αποτύχει",
-        "roll-plan": "Προετοιμάστε τη λίστα ονομαστικών κλήσεων και τη συμμετοχή",
-        "speakers-plan": "Σχεδιάστε τη διαχείριση λίστας ηχείων",
-        "templates": "Προετοιμάστε κοινές κινήσεις / σημεία (εάν χρησιμοποιείτε πρότυπα)",
-        "timing": "Επιβεβαιώστε την ώρα έναρξης της συνεδρίας και τα διαλείμματα",
-        "crisis-slides": "Ελέγξτε τα στοιχεία κρίσης και ενημερώστε τις διαφάνειες",
-        "crisis-cues": "Σχεδιάστε σειρά / συνθήματα ηχείων κρίσης",
-        "crisis-paths": "Προετοιμάστε μονοπάτια και γεγονότα για την κρίση",
-        "co-chairs": "Συντονιστείτε με τους συμπροέδρους για τους ρόλους",
-        "staff": "Επιβεβαιώστε την υποστήριξη και τις υποδείξεις του προσωπικού / μαργαριτών",
-        "delegate-brief": "Προετοιμάστε σύνοψη για τους αντιπροσώπους (κανόνες, χρονοδιάγραμμα)"
-      }
-    },
-    "flow": {
-      "items": {
-        "roll-call": "Προσκλητήριο",
-        "open-floor": "Ανοίξτε το πάτωμα (σημεία και κινήσεις)",
-        "recognize": "Αναγνώριση κινήσεων",
-        "vote-1": "Ψηφοφορία επί της πρότασης(ών)",
-        "engage": "Ασχοληθείτε με την επιλεγμένη κίνηση ή μετακινηθείτε στο GSL",
-        "open-again": "Ανοίξτε ξανά το πάτωμα",
-        "recognize-repeat": "Αναγνώριση κινήσεων (επαναλάβετε όπως απαιτείται)",
-        "vote-2": "Ψηφοφορία επί της πρότασης(ών)",
-        "cycle": "Συνέχιση του κύκλου (εμπλοκή κίνησης / GSL -> ανοιχτό πάτωμα)"
-      }
-    }
-  },
-  "chairAllocationMatrixPage": {
-    "intro": "Πίνακας κατανομής επιτροπής για την τρέχουσα συνεδρία σας. Αυτό είναι μόνο για ανάγνωση για καρέκλες και αντικατοπτρίζει ενεργές αναθέσεις καθισμάτων και κωδικούς πλακάτ.",
-    "separator": "—",
-    "dash": "—",
-    "columns": {
-      "allocation": "Κατανομή",
-      "flag": "Σημαία",
-      "email": "E-mail",
-      "name": "Ονομα",
-      "grade": "Βαθμός",
-      "notes": "Σημειώσεις",
-      "requestedAllocation": "Ζητήθηκε κατανομή",
-      "account": "Λογαριασμός",
-      "actions": "Δράσεις"
-    },
-    "noRows": "Δεν βρέθηκαν σειρές κατανομής για αυτήν την επιτροπή.",
-    "pendingApprovalsTitle": "Εκκρεμείς εγκρίσεις εγγραφής",
-    "pendingApprovalsIntro": "Οι πρόεδροι εγκρίνουν ή απορρίπτουν τις εγγραφές συνδέσμων κατανομής για να διασφαλίσουν ότι οι εκπρόσωποι χρησιμοποιούν τον σωστό λογαριασμό.",
-    "noPendingRequests": "Δεν υπάρχουν εκκρεμή αιτήματα.",
-    "unknownAllocation": "Άγνωστη κατανομή",
-    "approve": "Εγκρίνω",
-    "reject": "Απορρίπτω"
-  },
-  "smtAllocationMatrixPage": {
-    "title": "Πίνακας κατανομής",
-    "selectConferenceEventFirst": "Επιλέξτε πρώτα μια εκδήλωση συνεδρίου.",
-    "enterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης",
-    "intro": "Δημιουργήστε ή εισαγάγετε τη λίστα θέσεων για κάθε επιτροπή στο ενεργό συμβάν. Οι εκπρόσωποι επιλέγουν τη σειρά τους στην πύλη της επιτροπής μετά την είσοδο. Οι κωδικοί πλακάτ μπορούν να ταιριάζουν με τα αναγνωριστικά υπολογιστικών φύλλων σας."
-  },
-  "chairSpeakerQueuePanel": {
-    "dash": "—",
-    "speakerList": "Λίστα ομιλητών",
-    "addedToSpeakerList": "Προστέθηκε στη λίστα ηχείων.",
-    "chooseDelegationsNotAlreadyQueued": "Επιλέξτε αντιπροσωπείες που δεν βρίσκονται ήδη σε αναμονή ή τρέχουσες στη λίστα.",
-    "addedSpeakersInOrder": "Προστέθηκαν {count} ομιλητές με σειρά επιτροπών.",
-    "introPrefix": "Προσθήκη αντιπροσωπειών με σειρά ομιλίας. Οι εκπρόσωποι μπορούν ακόμα να χρησιμοποιήσουν",
-    "requestToSpeak": "Ζητήστε να μιλήσετε",
-    "introMiddle": "στην αίθουσα της επιτροπής. Χρήση",
-    "sessionTimerLink": "Συνεδρία → Χρονόμετρο",
-    "introSuffixPrefix": "για χρόνο ανά ομιλητή και",
-    "advanceSpeaker": "Προηγμένο ηχείο",
-    "addDelegation": "Προσθήκη αντιπροσωπείας",
-    "select": "Επιλέγω…",
-    "add": "Προσθέτω",
-    "addSelectedToList": "Προσθήκη επιλεγμένων στη λίστα",
-    "dismissReminder": "Παράβλεψη υπενθύμισης",
-    "moveUp": "Μετακινηθείτε προς τα πάνω",
-    "moveDown": "Μετακίνηση προς τα κάτω",
-    "current": "Ρεύμα",
-    "remove": "Αφαιρώ",
-    "prompt": {
-      "gslTitle": "Λίστα γενικών ομιλητών (GSL)",
-      "moderatedTimerTitle": "Εποπτεία συνεδριάσεων (χρονόμετρο ανά ηχείο)",
-      "moderatedPassedTitle": "Η μετριοπαθής κοινοβουλευτική ομάδα πέρασε",
-      "bodyPrefix": "Χρησιμοποιήστε την παρακάτω λίστα ηχείων για να",
-      "add": "προσθέτω",
-      "bodyAddMiddle": "εκπρόσωποι (αναπτυσσόμενο μενού +",
-      "bodyAddMiddle2": ", ή σημειώστε αντιπροσωπείες και",
-      "bodyRemovePrefix": ") και",
-      "remove": "αφαιρώ",
-      "bodyRemoveMiddle": "τους με",
-      "bodyRowSuffix": "σε κάθε σειρά. Αναδιάταξη με τα βέλη ή ορίστε",
-      "bodyEnd": "όταν κάποιος βρίσκεται στο μικρόφωνο.",
-      "noAllocations": "Δεν έχουν φορτωθεί ακόμη χορηγήσεις για αυτήν την επιτροπή. Παράβλεψη όταν είναι έτοιμο—μπορείτε να προσθέσετε ηχεία αργότερα από τα στοιχεία ελέγχου λίστας.",
-      "quickAdd": "Γρήγορη προσθήκη (δεν βρίσκεται ακόμη σε αναμονή ή τρέχουσα)",
-      "alreadyQueued": "Κάθε κατανομή έχει ήδη μια θέση αναμονής ή τρέχουσα θέση. Καταργήστε τις καταχωρίσεις εάν χρειάζεται να κάνετε εκ νέου παραγγελία ή απορρίψτε όταν τελειώσετε."
-    },
-    "status": {
-      "current": "ρεύμα",
-      "waiting": "αναμονή"
-    }
-  },
-  "timersWidget": {
-    "timer": "Μετρών την ώραν",
-    "currentSpeaker": "Τρέχον ηχείο",
-    "nextSpeaker": "Επόμενος ομιλητής",
-    "speakerTimePerSpeaker": "Χρόνος ηχείου (αριστερά / καπάκι)",
-    "speakerTimeTotal": "Χρόνος ηχείου (αριστερά / σύνολο)",
-    "perSpeaker": "(ανά ομιλητή)",
-    "paused": "(σε παύση)",
-    "pauseReason": "Παύση: {reason}",
-    "dash": "—"
-  },
-  "chairAwardsDelegateMatrix": {
-    "title": "Κάθε εκπρόσωπος — ρουμπρίκα συνεδρίας (απαιτείται)",
-    "intro": "Ίδιες έξι διαστάσεις με τις υποψηφιότητες της επιτροπής για τους καλύτερους εκπροσώπους. Πρέπει να βαθμολογήσετε <strong>κάθε εκπρόσωπος που κάθεται</strong> πριν υποβάλετε υποψηφιότητες στο SMT ({completeCount}/{total} ολοκληρώθηκε).",
-    "complete": "Πλήρης",
-    "incomplete": "Ατελής",
-    "saving": "Οικονομία...",
-    "saveThisDelegate": "Αποθηκεύστε αυτόν τον εκπρόσωπο",
-    "autosaved": "Αυτόματη αποθήκευση",
-    "autosaveFailed": "Η αυτόματη αποθήκευση απέτυχε",
-    "autosavedWithCountry": "Αυτόματη αποθήκευση — {country}",
-    "delegateFallback": "αντιπρόσωπος",
-    "modeSwitchLabel": "Scoring layout",
-    "modeList": "List",
-    "modeGuided": "Guided",
-    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
-    "guidedProgress": "Delegate {current} of {total}",
-    "guidedComplete": "{completeCount}/{total} scored",
-    "previous": "Back",
-    "saveAndNext": "Save & next",
-    "nextUnscored": "Next unscored",
-    "finish": "Finish",
-    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
-    "allScoredTitle": "All delegates scored",
-    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "Προσθήκη πηγής",
@@ -2589,6 +2863,7 @@
     "preliminaryPassing": "Περαστικά (προκαταρκτικά)",
     "preliminaryFailing": "Αποτυχία (προκαταρκτική)",
     "delegateRollCall": "Αναθέστε την ονομαστική κλήση ({count})",
+    "unseatedPlacard": "Η θέση είναι ανοιχτή (δεν έχει οριστεί ακόμη εκπρόσωπος)",
     "noSeatedDelegates": "Δεν υπάρχουν καθιστοί εκπρόσωποι διαθέσιμοι για αυτήν την πρόταση.",
     "rollPrefix": "Ρολό:",
     "recordedPrefix": "Εγγεγραμμένος:",
@@ -2607,6 +2882,13 @@
     "recentClosedMotions": "Πρόσφατες κλειστές κινήσεις",
     "noClosedMotions": "Δεν υπάρχουν ακόμη κλειστές κινήσεις.",
     "untitled": "Χωρίς τίτλο",
+    "agendaVoteSection": "Ψηφοφορία ημερήσιας διάταξης",
+    "agendaVoteSectionHelp": "Τα ψηφοδέλτια για τον καθορισμό της ημερήσιας διάταξης έχουν προεπιλογή πλειοψηφία δύο τρίτων. Για κάθε πλακάτ, ηχογραφήστε Ναι, Αποχή (όταν το επιτρέπει η λίστα) ή Όχι. Η Αποχή είναι απενεργοποιημένη για τους αντιπροσώπους που έχουν επισημανθεί ως παρόντες και ψηφίζουν κατά σειρά. Αυτή η ροή είναι ξεχωριστή από τις επίσημες κινήσεις παρακάτω.",
+    "recordVoteChoice": "Ρεκόρ ψήφου",
+    "chairRecordVotesHint": "Για κάθε αντιπροσωπεία που κάθεται, πατήστε Ναι, Αποχή (όταν είναι διαθέσιμη), Όχι ή Διαγραφή. Η αποχή ακολουθεί τους κανόνες του roll. είναι απενεργοποιημένο για παρουσία και ψηφοφορία.",
+    "abstainNotApplicableMotionType": "Η αποχή δεν καταγράφεται για αυτόν τον τύπο κίνησης (μόνο Ναι/Όχι).",
+    "abstainDisabledPresentVotingRoll": "Η αποχή δεν είναι διαθέσιμη για τους αντιπροσώπους που επισημάνθηκαν παρόντες και ψηφίζουν ονομαστικά.",
+    "closeAgendaBallot": "Κλείσιμο ψηφοδελτίο ατζέντας",
     "voteTypes": {
       "motion": "Κίνηση",
       "amendment": "Τροπολογία",
@@ -2618,55 +2900,9 @@
       "present_abstain": "Παρών — μπορεί να απέχει (ρολό)",
       "present_voting": "Παρουσία και ψηφοφορία (roll)",
       "unknown": "— (ρολό)"
-    },
-    "unseatedPlacard": "Η θέση είναι ανοιχτή (δεν έχει οριστεί ακόμη εκπρόσωπος)",
-    "agendaVoteSection": "Ψηφοφορία ημερήσιας διάταξης",
-    "agendaVoteSectionHelp": "Τα ψηφοδέλτια για τον καθορισμό της ημερήσιας διάταξης έχουν προεπιλογή πλειοψηφία δύο τρίτων. Για κάθε πλακάτ, ηχογραφήστε Ναι, Αποχή (όταν το επιτρέπει η λίστα) ή Όχι. Η Αποχή είναι απενεργοποιημένη για τους αντιπροσώπους που έχουν επισημανθεί ως παρόντες και ψηφίζουν κατά σειρά. Αυτή η ροή είναι ξεχωριστή από τις επίσημες κινήσεις παρακάτω.",
-    "closeAgendaBallot": "Κλείσιμο ψηφοδελτίο ατζέντας",
-    "recordVoteChoice": "Ρεκόρ ψήφου",
-    "chairRecordVotesHint": "Για κάθε αντιπροσωπεία που κάθεται, πατήστε Ναι, Αποχή (όταν είναι διαθέσιμη), Όχι ή Διαγραφή. Η αποχή ακολουθεί τους κανόνες του roll. είναι απενεργοποιημένο για παρουσία και ψηφοφορία.",
-    "abstainNotApplicableMotionType": "Η αποχή δεν καταγράφεται για αυτόν τον τύπο κίνησης (μόνο Ναι/Όχι).",
-    "abstainDisabledPresentVotingRoll": "Η αποχή δεν είναι διαθέσιμη για τους αντιπροσώπους που επισημάνθηκαν παρόντες και ψηφίζουν ονομαστικά."
+    }
   },
   "profile": {
-    "tabs": {
-      "ariaLabel": "Ενότητες προφίλ",
-      "overview": "Επισκόπηση",
-      "awards": "Βραβεία",
-      "private": "Ιδιωτικά αρχεία",
-      "settings": "Ρυθμίσεις προφίλ"
-    },
-    "profilePicture": "Φωτογραφία προφίλ",
-    "uploadFile": "Μεταφόρτωση αρχείου",
-    "uploading": "Μεταφόρτωση…",
-    "photoSaved": "Η φωτογραφία μεταφορτώθηκε και αποθηκεύτηκε.",
-    "orUrl": "Ή ορίζεται από τη διεύθυνση URL",
-    "urlPlaceholder": "https://...",
-    "name": "Ονομα",
-    "username": "Όνομα χρήστη",
-    "usernamePlaceholder": "π.χ. Alex_1999",
-    "pronouns": "Αντωνυμίες",
-    "customPronounNote": "Το προφίλ σας είχε ένα προσαρμοσμένο σύνολο αντωνυμιών που δεν είναι πλέον αποδεκτό εδώ. Διαλέξτε μια επιλογή παραπάνω (ή αφήστε την κενή). Η αποθήκευση αντικαθιστά την παλιά τιμή.",
-    "school": "Σχολείο",
-    "schoolPlaceholder": "π.χ. Γυμνάσιο Λίνκολν",
-    "grade": "Βαθμός",
-    "selectGrade": "Επιλέξτε βαθμό",
-    "conferencesAttended": "συμμετείχαν συνέδρια",
-    "awardsComma": "Βραβεία (χωρισμένα με κόμματα)",
-    "awardsPlaceholder": "Καλύτερος εκπρόσωπος, Επίτιμη Μνεία",
-    "allocation": "Κατανομή",
-    "selectAllocation": "Επιλέξτε κατανομή",
-    "noAllocationsPlaceholder": "Δεν υπάρχουν διαθέσιμες επιτροπές",
-    "saveProfile": "Αποθήκευση προφίλ",
-    "saved": "Το προφίλ αποθηκεύτηκε.",
-    "saveFailed": "Δεν ήταν δυνατή η αποθήκευση του προφίλ.",
-    "errUsernamePattern": "Το όνομα χρήστη πρέπει να αποτελείται από 3-32 χαρακτήρες (γράμματα, αριθμοί, _, ., -)",
-    "errPronounsPreset": "Επιλέξτε μια αντωνυμία από τη λίστα.",
-    "errImageType": "Επιλέξτε ένα αρχείο εικόνας.",
-    "errImageSize": "Η εικόνα είναι πολύ μεγάλη (μέγιστο 5 MB).",
-    "errUploadFailed": "Η μεταφόρτωση απέτυχε.",
-    "errStorageSetup": "Η αποθήκευση εικόνων προφίλ δεν έχει ρυθμιστεί. Στο έργο Supabase, εκτελέστε το migration 00100_profile_pictures_storage_bucket.sql ή δημιουργήστε έναν δημόσιο χώρο αποθήκευσης με το όνομα profile-pictures (δείτε README).",
-    "errPublicUrl": "Δεν ήταν δυνατή η επίλυση της δημόσιας διεύθυνσης URL για τη μεταφορτωμένη εικόνα.",
     "fallbacks": {
       "yourCountry": "χώρα σας",
       "committeeSession": "συνεδρίαση της επιτροπής",
@@ -2674,6 +2910,13 @@
       "speechNote": "Σημείωμα ομιλίας",
       "untitledMotion": "Κίνηση χωρίς τίτλο",
       "dash": "—"
+    },
+    "tabs": {
+      "ariaLabel": "Ενότητες προφίλ",
+      "overview": "Επισκόπηση",
+      "awards": "Βραβεία",
+      "private": "Ιδιωτικά αρχεία",
+      "settings": "Ρυθμίσεις προφίλ"
     },
     "delegateWelcome": {
       "title": "Καλώς ο εκπρόσωπος της {flag} {country}",
@@ -2739,6 +2982,40 @@
       "gradeValue": "Βαθμός {grade}",
       "awards": "Βραβεία"
     },
+    "profilePicture": "Φωτογραφία προφίλ",
+    "uploadFile": "Μεταφόρτωση αρχείου",
+    "uploading": "Μεταφόρτωση…",
+    "photoSaved": "Η φωτογραφία μεταφορτώθηκε και αποθηκεύτηκε.",
+    "orUrl": "Ή ορίζεται από τη διεύθυνση URL",
+    "urlPlaceholder": "https://...",
+    "name": "Ονομα",
+    "username": "Όνομα χρήστη",
+    "usernamePlaceholder": "π.χ. Alex_1999",
+    "pronouns": "Αντωνυμίες",
+    "customPronounNote": "Το προφίλ σας είχε ένα προσαρμοσμένο σύνολο αντωνυμιών που δεν είναι πλέον αποδεκτό εδώ. Διαλέξτε μια επιλογή παραπάνω (ή αφήστε την κενή). Η αποθήκευση αντικαθιστά την παλιά τιμή.",
+    "school": "Σχολείο",
+    "schoolPlaceholder": "π.χ. Γυμνάσιο Λίνκολν",
+    "grade": "Βαθμός",
+    "selectGrade": "Επιλέξτε βαθμό",
+    "jobRole": "Εργασιακός ρόλος",
+    "jobRolePlaceholder": "π.χ. Διευθυντής MUN, δάσκαλος (προαιρετικό)",
+    "advisorSettingsHint": "Προφίλ σχολικού προσωπικού — δεν υπάρχει κατανομή βαθμού ή εκπροσώπων.",
+    "conferencesAttended": "συμμετείχαν συνέδρια",
+    "awardsComma": "Βραβεία (χωρισμένα με κόμματα)",
+    "awardsPlaceholder": "Καλύτερος εκπρόσωπος, Επίτιμη Μνεία",
+    "allocation": "Κατανομή",
+    "selectAllocation": "Επιλέξτε κατανομή",
+    "noAllocationsPlaceholder": "Δεν υπάρχουν διαθέσιμες επιτροπές",
+    "saveProfile": "Αποθήκευση προφίλ",
+    "saved": "Το προφίλ αποθηκεύτηκε.",
+    "saveFailed": "Δεν ήταν δυνατή η αποθήκευση του προφίλ.",
+    "errUsernamePattern": "Το όνομα χρήστη πρέπει να αποτελείται από 3-32 χαρακτήρες (γράμματα, αριθμοί, _, ., -)",
+    "errPronounsPreset": "Επιλέξτε μια αντωνυμία από τη λίστα.",
+    "errImageType": "Επιλέξτε ένα αρχείο εικόνας.",
+    "errImageSize": "Η εικόνα είναι πολύ μεγάλη (μέγιστο 5 MB).",
+    "errUploadFailed": "Η μεταφόρτωση απέτυχε.",
+    "errStorageSetup": "Η αποθήκευση εικόνων προφίλ δεν έχει ρυθμιστεί. Στο έργο Supabase, εκτελέστε το migration 00100_profile_pictures_storage_bucket.sql ή δημιουργήστε έναν δημόσιο χώρο αποθήκευσης με το όνομα profile-pictures (δείτε README).",
+    "errPublicUrl": "Δεν ήταν δυνατή η επίλυση της δημόσιας διεύθυνσης URL για τη μεταφορτωμένη εικόνα.",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
     "dashboardCommitteeSelect": "Εξεταστική επιτροπή…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
@@ -2749,10 +3026,7 @@
     "dashboardCommitteeApplySwitch": "Αλλάξτε τον πίνακα ελέγχου σε αυτήν την επιτροπή",
     "timerExpiryAlarmTitle": "Ήχος χρονοδιακόπτη",
     "timerExpiryAlarmLabel": "Παίξτε ένα σύντομο κουδούνισμα όταν οποιαδήποτε αντίστροφη μέτρηση εντός της εφαρμογής φτάσει στο μηδέν (χρονομετρητής ομιλίας, χρονικό όριο περιόδου σύνδεσης, προθεσμίες κέντρου).",
-    "timerExpiryAlarmHint": "Απενεργοποίηση από προεπιλογή. Αποθηκεύεται μόνο σε αυτό το πρόγραμμα περιήγησης.",
-    "jobRole": "Εργασιακός ρόλος",
-    "jobRolePlaceholder": "π.χ. Διευθυντής MUN, δάσκαλος (προαιρετικό)",
-    "advisorSettingsHint": "Προφίλ σχολικού προσωπικού — δεν υπάρχει κατανομή βαθμού ή εκπροσώπων."
+    "timerExpiryAlarmHint": "Απενεργοποίηση από προεπιλογή. Αποθηκεύεται μόνο σε αυτό το πρόγραμμα περιήγησης."
   },
   "guides": {
     "default": {
@@ -3168,6 +3442,7 @@
       "limitOverBy": "πάνω από {value}",
       "quickLinkSession": "Συνεδρίαση",
       "quickLinkRoll": "Ρολό",
+      "quickLinkAgenda": "Ημερήσια διάταξη",
       "quickLinkSpeakers": "Ηχεία",
       "quickLinkMotions": "Κινήσεις",
       "quickLinkTimer": "Μετρών την ώραν",
@@ -3180,8 +3455,7 @@
       "rollCallYou": "ονομαστική κλήση (εσείς)",
       "fullAnnouncement": "Ολόκληρη η ανακοίνωση",
       "daisAnnouncement": "Ανακοίνωση Dais",
-      "close": "Κοντά",
-      "quickLinkAgenda": "Ημερήσια διάταξη"
+      "close": "Κοντά"
     },
     "committeeControl": {
       "sessionNameLabel": "Όνομα συνεδρίας",
@@ -3227,13 +3501,45 @@
       "startSession": "Έναρξη συνεδρίας",
       "sidebarUsePrefix": "Χρησιμοποιήστε την πλαϊνή γραμμή για",
       "rollCall": "Προσκλητήριο",
+      "agenda": "Ημερήσια διάταξη",
       "speakers": "Ηχεία",
       "formalMotions": "Επίσημες κινήσεις",
       "timer": "Μετρών την ώραν",
       "sidebarAnd": "και",
       "announcements": "Ανακοινώσεις",
-      "sidebarUseSuffix": "— ένα εργαλείο ανά καρτέλα.",
-      "agenda": "Ημερήσια διάταξη"
+      "sidebarUseSuffix": "— ένα εργαλείο ανά καρτέλα."
+    },
+    "scheduledSessions": {
+      "title": "Scheduled sessions",
+      "subtitle": "One-click start for each committee session on the timetable. Names and time limits are pre-filled from the schedule.",
+      "help": "These presets come from the SEAMUN I 2027 timetable. Pick the day you're on, then press Start to begin that session with its name and length already set. While this page is open you'll be reminded 5 minutes and 1 minute before each session's scheduled start.",
+      "dayLabel": "Day",
+      "day1": "Day 1",
+      "day2": "Day 2",
+      "noSessions": "No scheduled sessions for this day.",
+      "durationLabel": "{minutes} min",
+      "start": "Start",
+      "starting": "Starting…",
+      "startAria": "Start {title} at {start}",
+      "statusLive": "Live now",
+      "statusUpcoming": "Upcoming",
+      "statusStartsIn": "Starts in {minutes} min",
+      "statusStartingNow": "Starting now",
+      "statusPast": "Ended",
+      "startFailed": "Could not start the session. Please try again.",
+      "reminderTitle": "Session starting soon",
+      "reminderTitleResolutions": "Resolutions due soon",
+      "reminderTitleClosing": "Closing ceremony soon",
+      "reminder5Min": "{title} is scheduled to start in 5 minutes ({start}).",
+      "reminder1Min": "{title} is scheduled to start in 1 minute ({start}).",
+      "reminderStartNow": "{title} is scheduled to start now ({start}).",
+      "reminderResolutionsDue": "Resolutions are due in {minutes} minutes (deadline {start}).",
+      "reminderClosing": "Closing ceremony starts in {minutes} minutes ({start}).",
+      "dismissReminder": "Dismiss",
+      "startNow": "Start now",
+      "remindersHint": "Reminders show here while this page is open.",
+      "soundOn": "Reminder sound on",
+      "soundOff": "Reminder sound off"
     },
     "history": {
       "title": "Ιστορικό συνεδρίας",
@@ -3275,6 +3581,13 @@
       "pauseReasonPlaceholder": "π.χ. Επί της διαδικασίας, τεχνολογικό ζήτημα, μη ελεγχόμενη κοινοβουλευτική ομάδα...",
       "pauseClock": "Παύση του ρολογιού",
       "startClock": "Έναρξη ρολογιού",
+      "euTimerBoardTitle": "Πίνακας χρονομέτρου του Ευρωπαϊκού Κοινοβουλίου (11 χρονόμετρα)",
+      "euTimerBoardHelp": "Ένα χρονόμετρο ανά πάρτι, συν Συνολικός χρόνος, χρόνος POI/POC και χρόνος ηχείου. Χρησιμοποιήστε το Apply για να αντιγράψετε μια σειρά στα πεδία του ζωντανού χρονοδιακόπτη στην καρτέλα Ρολόι (ώρα ηχείου / Αποθήκευση χρονοδιακόπτη).",
+      "euTimerName": "Ονομα",
+      "euTimerTag": "Ετικέτα",
+      "euTotalTime": "Συνολικός χρόνος",
+      "euPoiPocTime": "Ώρα POI / POC",
+      "euSpeakerTime": "Ώρα ομιλητή",
       "perSpeakerTitle": "Χρόνος ανά ομιλητή (συντονισμένη κοινοβουλευτική ομάδα)",
       "perSpeakerHelp": "Ορίστε το συνολικό χρόνο ως όριο ανά ηχείο και το χρόνο ηχείου ως χρόνο που απομένει. Το Advance μετακινείται στο επόμενο ηχείο και επαναφέρει το υπόλοιπο στο καπάκι.",
       "currentSpeaker": "Τρέχον ηχείο",
@@ -3305,204 +3618,47 @@
       "alreadyPaused": "Το χρονόμετρο είναι ήδη σε παύση.",
       "pausedForCommittee": "Το χρονόμετρο σταμάτησε για την επιτροπή.",
       "alreadyRunning": "Το χρονόμετρο λειτουργεί ήδη.",
-      "runningForCommittee": "Το χρονόμετρο τρέχει για την επιτροπή.",
-      "euTimerBoardTitle": "Πίνακας χρονομέτρου του Ευρωπαϊκού Κοινοβουλίου (11 χρονόμετρα)",
-      "euTimerBoardHelp": "Ένα χρονόμετρο ανά πάρτι, συν Συνολικός χρόνος, χρόνος POI/POC και χρόνος ηχείου. Χρησιμοποιήστε το Apply για να αντιγράψετε μια σειρά στα πεδία του ζωντανού χρονοδιακόπτη στην καρτέλα Ρολόι (ώρα ηχείου / Αποθήκευση χρονοδιακόπτη).",
-      "euTimerName": "Ονομα",
-      "euTimerTag": "Ετικέτα",
-      "euTotalTime": "Συνολικός χρόνος",
-      "euPoiPocTime": "Ώρα POI / POC",
-      "euSpeakerTime": "Ώρα ομιλητή"
+      "runningForCommittee": "Το χρονόμετρο τρέχει για την επιτροπή."
     }
   },
-  "roleSetupChecklist": {
-    "admin": {
-      "title": "Λίστα ρύθμισης διαχειριστή",
-      "subtitle": "Ρύθμιση επιπέδου ιστότοπου και παροχή προσωπικού.",
-      "step1Label": "Δημιουργία εκδήλωσης + πρώτης επιτροπής",
-      "step1Detail": "Δημιουργία πυλών συνεδρίου και επιτροπής.",
-      "step2Label": "Πρόσκληση ή προαγωγή λογαριασμών SMT",
-      "step2Detail": "Χορήγηση πρόσβασης γραμματείας πριν τις λειτουργίες επιτροπής.",
-      "step3Label": "Επαλήθευση ροής πύλης κατάστασης",
-      "step3Detail": "Παρακολούθηση ροής εκπροσώπων σε εκκρεμότητα → επιβεβαιωμένων.",
-      "step4Label": "Παράδοση στον πίνακα SMT",
-      "step4Detail": "Οι ζωντανές λειτουργίες επιτροπής συνεχίζονται στα εργαλεία SMT."
-    },
-    "smt": {
-      "title": "Λίστα ρύθμισης SMT",
-      "subtitle": "Έλεγχοι σε επίπεδο συνεδρίου πριν εισέλθουν οι προεδρίες και οι αντιπρόσωποι.",
-      "step1Label": "Επιβεβαίωση εκδήλωσης + συνεδριών επιτροπής",
-      "step1Detail": "Επικύρωση ονομάτων, ετικετών, ονομάτων προεδρίας και συνδέσμων κρίσης.",
-      "step2Label": "Ορισμός κωδικών αιθουσών + πρόσβασης προεδρίας",
-      "step2Detail": "Βεβαιωθείτε ότι κάθε επιτροπή έχει σωστούς κωδικούς πύλης.",
-      "step3Label": "Προετοιμασία κατανομών + εγγράφων σύνδεσης",
-      "step3Detail": "Εισαγωγή θέσεων, μετά ορισμός κωδικών/κωδικών πρόσβασης.",
-      "step4Label": "Δημοσίευση καθολικών εγγράφων (RoP / κριτήρια)",
-      "step4Detail": "Ανέβασμα κοινών αναφορών για όλους τους χρήστες."
-    },
-    "chair": {
-      "title": "Λίστα ρύθμισης προεδρίας",
-      "subtitle": "Ετοιμότητα αιθούσας και έλεγχοι αιθουσών για την επιτροπή σας.",
-      "step1Label": "Έλεγχος πίνακα αντιπροσώπων + εγκρίσεων",
-      "step1Detail": "Επιβεβαίωση αναθέσεων και εκκρεμών εγγραφών.",
-      "step2Label": "Διεξαγωγή εγκρίσεων roll call",
-      "step2Detail": "Σήμανση αντιπροσώπων παρόντων πριν τη συμμετοχή στο πάτωμα.",
-      "step3Label": "Ορισμός χρονομέτρου + ροής ομιλητών",
-      "step3Detail": "Αποθήκευση προεπιλογών πριν ανοίξουν οι κινήσεις.",
-      "step4Label": "Άνοιγμα ψηφιακής αίθουσας",
-      "step4Detail": "Συντονισμός ομιλητών, σημειώσεων και ορατότητας συνεδρίας."
-    },
-    "delegate": {
-      "title": "Λίστα ρύθμισης αντιπροσώπου",
-      "subtitle": "Ετοιμαστείτε γρήγορα για συμμετοχή στην επιτροπή.",
-      "step1Label": "Συμπληρώστε τα βασικά προφίλ",
-      "step1Detail": "Επαληθεύστε όνομα, κατανομή και στοιχεία λογαριασμού.",
-      "step2Label": "Διαβάστε RoP + κριτήρια βραβείων",
-      "step2Detail": "Ανοίξτε κοινά έγγραφα που ανέβασε το SMT.",
-      "step3Label": "Δημιουργήστε το έγγραφο προετοιμασίας",
-      "step3Detail": "Ανεβάστε/επεξεργαστείτε σημειώσεις προετοιμασίας στην εφαρμογή.",
-      "step4Label": "Εγγραφή στην αίθουσα επιτροπής + roll call",
-      "step4Detail": "Περιμένετε έγκριση παρουσίας από την προεδρία, μετά μιλήστε."
-    }
+  "newsroom": {
+    "liveBadge": "Live",
+    "sourceLine": "Current affairs · {source}",
+    "headlinesTitle": "Latest headlines",
+    "loading": "Loading the latest headlines…",
+    "error": "Couldn't reach the news feed. Retrying…",
+    "empty": "No headlines available right now.",
+    "reconnecting": "Reconnecting…",
+    "updatedAgo": "Updated {count}s ago",
+    "justNow": "just now",
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago",
+    "attribution": "Headlines from {source} (news.un.org), refreshed automatically."
   },
-  "smtCommitteeView": {
-    "title": "Γραμματεία: απόψεις προέδρου και εκπροσώπων",
-    "intro": "Επιλέξτε μια επιτροπή για εργαλεία προεδρίας και μια θέση εκπροσώπου συνδεδεμένη με τον λογαριασμό σας και, στη συνέχεια, αλλάξτε επιφάνεια. Η είσοδος εξακολουθεί να ανοίγει το κέντρο γραμματείας από προεπιλογή.",
-    "bindRequiredHint": "Επιλέξτε μια επιτροπή προέδρου και/ή μια θέση αντιπροσώπου παρακάτω και, στη συνέχεια, δοκιμάστε ξανά.",
-    "chairCommitteeLabel": "Πρόεδρος επιτροπής ορόφου",
-    "chairCommitteePlaceholder": "Εξεταστική επιτροπή…",
-    "delegateSeatLabel": "Θέση αντιπροσώπου (η κατανομή σας)",
-    "delegateSeatPlaceholder": "Επιλέξτε θέση…",
-    "saveBindings": "Αποθήκευση εργασιών",
-    "bindingsSaved": "Αποθηκεύτηκε.",
-    "switchViewHeading": "Εναλλαγή ταμπλό",
-    "switchViewHelp": "Η Γραμματεία σας επιστρέφει στο SMT. Ο πρόεδρος και ο εκπρόσωπος ανοίγουν τα ίδια κελύφη εντός εφαρμογής που χρησιμοποιούν οι πραγματικές καρέκλες και οι εκπρόσωποι για το ενεργό συμβάν.",
-    "goSecretariat": "Γραμματεία",
-    "goChair": "Θέα καρέκλας",
-    "goDelegate": "Προβολή αντιπροσώπου",
-    "surfaceSwitchError": "Δεν ήταν δυνατή η αλλαγή προβολής. Ελέγξτε την πύλη και τις επιλογές εκδηλώσεων.",
-    "pickChairFirst": "Επιλέξτε πρώτα μια επιτροπή προέδρου (ή αποθηκεύστε τις εργασίες).",
-    "pickDelegateFirst": "Επιλέξτε πρώτα μια θέση αντιπροσώπου (ή αποθηκεύστε τις εργασίες).",
-    "chairSeatLabel": "Dais seat (optional)",
-    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
-  },
-  "advisorDashboard": {
-    "intro": "Μπορείτε να παρακολουθείτε τη δραστηριότητα της επιτροπής του εκπροσώπου που έχετε ορίσει. Δεν έχετε πρόσβαση σε σημειώσεις εκτός εάν μια καρέκλα ή SMT σας προωθήσει μια.",
-    "noAssignments": "Κανένας εκπρόσωπος δεν έχει συνδεθεί ακόμη με τον λογαριασμό σας. Η Γραμματεία θα σας αναθέσει από το SMT → Advisors.",
-    "delegateLinked": "Συνδέθηκε ο λογαριασμός εκπροσώπου",
-    "delegateNotLinked": "Η θέση δεν έχει συνδεθεί ακόμη με λογαριασμό αντιπροσώπου",
-    "viewProfile": "Προφίλ",
-    "viewDocuments": "Εγγραφα",
-    "viewVoting": "Ψηφοφορία",
-    "forwardedNotes": "Διαβιβασμένες σημειώσεις",
-    "schedule": {
-      "intro": "Επιλέξτε το χρονοδιάγραμμά σας και, στη συνέχεια, σύμβουλος A–D για να δείτε το χρονοδιάγραμμα αυτού του συμβούλου για την ημέρα."
-    },
-    "notes": {
-      "intro": "Οι καρέκλες σημειώσεων ή η SMT επέλεξαν να μοιραστούν μαζί σας. Δεν μπορείτε να περιηγηθείτε στην πλήρη ροή σημειώσεων.",
-      "empty": "Δεν σας έχουν προωθηθεί ακόμη σημειώσεις.",
-      "forwarded": "Προωθήθηκε"
-    }
-  },
-  "smtAdvisorsPage": {
-    "title": "Σύμβουλοι",
-    "subtitle": "Προσκαλέστε λογαριασμούς συμβούλων μέσω email και συνδέστε κάθε σύμβουλο σε μία θέση αντιπροσώπου.",
-    "selectEventFirst": "Επιλέξτε πρώτα μια ενεργή εκδήλωση συνεδρίου.",
-    "enterConferenceCode": "Εισαγάγετε τον κωδικό της διάσκεψης",
-    "inviteTitle": "Πρόσκληση συμβούλου",
-    "inviteBody": "Στέλνει έναν σύνδεσμο σύνδεσης (η ίδια ροή με την πρόσκληση της καρέκλας). Ο ρόλος του λογαριασμού έχει οριστεί ως σύμβουλος.",
-    "inviteDisabled": "Οι προσκλήσεις απαιτούν SUPABASE_SERVICE_ROLE_KEY σε αυτήν την ανάπτυξη.",
-    "emailLabel": "E-mail",
-    "emailPlaceholder": "advisor@school.edu",
-    "sending": "Αποστολή…",
-    "inviteButton": "Αποστολή πρόσκλησης",
-    "assignTitle": "Εκχώρηση αντιπροσώπου",
-    "assignBody": "Επιλέξτε μια συνδεδεμένη θέση αντιπροσώπου. Ένας σύμβουλος ανά εκπρόσωπο. η εκ νέου ανάθεση αντικαθιστά τον προηγούμενο σύνδεσμο.",
-    "advisorEmailLabel": "Email συμβούλου",
-    "delegateLabel": "Θέση αντιπροσώπου",
-    "delegatePlaceholder": "Επιλογή αντιπροσώπου…",
-    "assignedTo": "σύμβουλος: {name}",
-    "saving": "Οικονομία…",
-    "assignButton": "Αποθήκευση εργασίας",
-    "advisorFallback": "Σύμβουλος",
-    "delegateAllocationIdLabel": "Αναγνωριστικό κατανομής εκπροσώπων",
-    "delegateAllocationIdPlaceholder": "π.χ. 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "Τρέχουσες εργασίες",
-    "currentAssignmentsHint": "Όλοι οι σύνδεσμοι συμβούλων-εκπροσώπων για αυτήν την εκδήλωση.",
-    "allocationIdsTitle": "Συνδεδεμένα αναγνωριστικά κατανομής εκπροσώπων",
-    "allocationIdsHint": "Αντιγράψτε ένα UUID εκχώρησης από αυτόν τον πίνακα κατά την εκχώρηση.",
-    "colAdvisor": "Σύμβουλος",
-    "colAllocationId": "Αναγνωριστικό κατανομής",
-    "colCountry": "Χώρα / θέση",
-    "colCommittee": "Επιτροπή",
-    "inviteSetupTitle": "Ενεργοποίηση προσκλήσεων μέσω email",
-    "inviteSetupStep1": "Στο Supabase → Ρυθμίσεις έργου → API, αντιγράψτε το μυστικό κλειδί service_role.",
-    "inviteSetupStep2": "Προσθέστε το SUPABASE_SERVICE_ROLE_KEY στον κεντρικό υπολογιστή σας env (Render/Vercel) — όχι NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Προσθέστε το NEXT_PUBLIC_APP_URL στη ζωντανή διεύθυνση URL του ιστότοπού σας (π.χ. https://your-app.onrender.com).",
-    "inviteSetupStep4": "Αναδιάταξη (παραγωγή) ή προσθήκη και των δύο στο .env.local και επανεκκίνηση του npm run dev (τοπικό).",
-    "colDelegate": "Delegate",
-    "delegateFallback": "Delegate"
-  },
-  "smtNotesPage": {
-    "title": "Notes & chats",
-    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
-    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
-    "tabsAria": "SMT notes views",
-    "listTitle": "Notes",
-    "empty": "No notes in this view yet.",
-    "unknownCommittee": "Committee",
-    "allCommittees": "All committees",
-    "selectEventFirst": "Select an active conference event to view notes.",
-    "enterConferenceCode": "Enter conference code",
-    "tabs": {
-      "addressed": "To my account",
-      "fromChairs": "From chairs",
-      "byDelegate": "By delegate",
-      "byAdvisor": "To advisors",
-      "allByCommittee": "All chats"
-    },
-    "tabHints": {
-      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
-      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
-      "byDelegate": "Notes authored by delegations (all committees).",
-      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
-    },
-    "composeTitle": "Send a note",
-    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
-    "composeCommitteeLabel": "Committee",
-    "composeLoading": "Loading committee…",
-    "composeNoCommittees": "No delegate committees in this event yet.",
-    "composeFormTitle": "New secretariat note"
-  },
-  "colorblindMode": {
-    "enableTitle": "Turn on colorblind-friendly colours",
-    "disableTitle": "Turn off colorblind-friendly colours",
-    "enableAria": "Enable colorblind-friendly mode",
-    "disableAria": "Disable colorblind-friendly mode",
-    "on": "Colorblind mode on",
-    "off": "Colorblind mode off"
-  },
-  "chairAwardsFloorActivity": {
-    "title": "Floor activity",
-    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
-    "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
-    },
-    "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
+  "milestones": {
+    "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
+    "yourMilestones": "Your milestones",
+    "committeeTitle": "{committee} — committee milestones",
+    "delegateLeaderboard": "Delegate milestones",
+    "emptyDelegates": "No delegate activity recorded yet.",
+    "empty": "No milestone data yet. Checkpoints appear once your committee is in session.",
+    "earnedOfTotal": "{earned}/{total} earned",
+    "cardTitle": "Milestones",
+    "cardEmpty": "No checkpoints reached yet.",
+    "cardCta": "View all milestones →",
+    "achieved": "Earned",
+    "locked": "Not yet reached",
+    "tierPlus": "{n}+",
+    "allEarned": "All checkpoints earned",
+    "progressToNext": "{count} / {next} to next checkpoint",
+    "metric": {
+      "moderated_caucuses": "Moderated caucuses",
+      "unmoderated_caucuses": "Unmoderated caucuses",
+      "consultations": "Consultations",
+      "resolutions_passed": "Resolutions passed",
+      "speeches": "Speeches delivered",
+      "points_raised": "Points (POI / POC)"
     }
   }
 }

@@ -7,6 +7,7 @@ import { MunPageShell } from "@/components/MunPageShell";
 import { isAdvisorRole } from "@/lib/roles";
 import { fetchAdvisorAssignmentsForAdvisor } from "@/lib/advisor-access";
 import { AdvisorOversightPanel } from "@/components/advisor/AdvisorOversightPanel";
+import { MilestonesSummaryCard } from "@/components/milestones/MilestonesSummaryCard";
 import { RoleSetupChecklist } from "@/components/onboarding/RoleSetupChecklist";
 import { getTranslations } from "next-intl/server";
 
@@ -54,6 +55,7 @@ export default async function AdvisorDashboardPage() {
           </Link>
         </div>
         <RoleSetupChecklist role="advisor" />
+        <MilestonesSummaryCard href="/advisor/milestones" />
         {assignments.length === 0 ? (
           <p className="rounded-lg border border-dashed border-brand-navy/15 bg-brand-cream/30 px-4 py-6 text-sm text-brand-muted">
             {ta("noAssignments")}

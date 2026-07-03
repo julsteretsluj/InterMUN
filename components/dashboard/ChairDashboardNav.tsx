@@ -20,6 +20,8 @@ export type ChairNavItemKey =
   | "conferenceSchedule"
   | "digitalRoom"
   | "history"
+  | "newsroom"
+  | "milestones"
   | "rollCall"
   | "session"
   | "agenda"
@@ -80,6 +82,8 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   },
   { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },
   { href: "/history", itemKey: "history", emoji: "🕘" },
+  { href: "/newsroom", itemKey: "newsroom", emoji: "📰" },
+  { href: "/milestones", itemKey: "milestones", emoji: "🏅" },
   {
     href: "/chair/session/speakers",
     itemKey: "speakers",

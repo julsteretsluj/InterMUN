@@ -23,6 +23,7 @@ import type { CaucusDisruptivenessPrecedence } from "@/lib/motion-disruptiveness
 import { motionDisruptivenessScore, sortMotionsMostDisruptiveFirst } from "@/lib/motion-disruptiveness";
 import { useConferenceTimer } from "@/lib/use-conference-timer";
 import { fetchSpeakerQueue } from "@/lib/speaker-queue";
+import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 import {
   ChairSpeakerQueuePanel,
   type SpeakerListChairPromptKind,
@@ -1693,6 +1694,11 @@ export function SessionControlClient({
         await supabase.from("speaker_queue_entries").update({ status: "done" }).eq("id", currentRow.id);
       }
       await supabase.from("speaker_queue_entries").update({ status: "current" }).eq("id", nextCurrent.id);
+      void logCommitteeSpeech(supabase, {
+        conferenceId: floorConferenceId,
+        allocationId: nextCurrent.allocation_id,
+        speakerLabel: nextCurrent.label,
+      });
 
       const nextIdx = sorted.indexOf(nextCurrent);
       const afterNext = sorted.slice(nextIdx + 1).find((r) => r.status === "waiting");
@@ -2085,6 +2091,12 @@ export function SessionControlClient({
                 membersPresent
               )
             : didMotionPass(openMotion.required_majority, motionTally.yes, motionTally.total);
+
+        // Persist the outcome so "caucuses passed" / "resolutions passed" milestones are countable.
+        await supabase
+          .from("vote_items")
+          .update({ outcome: passes ? "passed" : "failed", outcome_recorded_at: new Date().toISOString() })
+          .eq("id", openMotion.id);
 
         const hasClauseTargets =
           !!openMotion.procedure_resolution_id &&

@@ -15,6 +15,7 @@ import {
   fetchSpeakerQueue,
   type SpeakerQueueEntry,
 } from "@/lib/speaker-queue";
+import { logCommitteeSpeech } from "@/lib/committee-speech-log";
 
 type Alloc = { id: string; country: string; userRole?: string | null };
 
@@ -323,6 +324,14 @@ export const ChairSpeakerQueuePanel = forwardRef<HTMLElement, ChairSpeakerQueueP
           await supabase.from("speaker_queue_entries").update({ status: "waiting" }).eq("id", existingCurrent.id);
         }
         await supabase.from("speaker_queue_entries").update({ status: "current" }).eq("id", id);
+        const target = rows.find((r) => r.id === id);
+        if (target && target.status !== "current") {
+          void logCommitteeSpeech(supabase, {
+            conferenceId,
+            allocationId: target.allocation_id,
+            speakerLabel: target.label,
+          });
+        }
         void loadQueue();
       });
     }

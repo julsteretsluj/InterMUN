@@ -13,6 +13,7 @@ import {
 } from "@/lib/seamun-delegate-chair-contacts";
 import { SEAMUN_I_2027_EVENT_CODE } from "@/lib/seamun-i-2027-secretariat-roster";
 import { DelegateHubTileLink } from "@/components/delegate/DelegateHubTileLink";
+import { MilestonesSummaryCard } from "@/components/milestones/MilestonesSummaryCard";
 import { PriorityTabLink } from "@/components/PriorityTabLink";
 import {
   DELEGATE_DASHBOARD_TAB_ORDER,
@@ -167,27 +168,30 @@ export default async function DelegateDashboardPage({
           ))}
         </div>
         {activeTab === "overview" ? (
-          <div className="grid gap-4 lg:grid-cols-2">
-            <DelegateCountdownCard conferenceId={conferenceId} />
-            <section className="dashboard-panel flex flex-col justify-between gap-4">
-              <div>
-                <h2 className="dashboard-panel-title">{td("jumpTo")}</h2>
-                <p className="mt-1 text-sm text-brand-muted">{td("activeCommitteeBody")}</p>
-              </div>
-              <ul className="grid gap-2 sm:grid-cols-2">
-                {tiles.slice(0, 4).map((tile) => (
-                  <li key={tile.href + tile.label}>
-                    <DelegateHubTileLink
-                      href={tile.href}
-                      label={tile.label}
-                      hint={tile.hint}
-                      priority={tile.priority}
-                      variant="overview"
-                    />
-                  </li>
-                ))}
-              </ul>
-            </section>
+          <div className="space-y-4">
+            <div className="grid gap-4 lg:grid-cols-2">
+              <DelegateCountdownCard conferenceId={conferenceId} />
+              <section className="dashboard-panel flex flex-col justify-between gap-4">
+                <div>
+                  <h2 className="dashboard-panel-title">{td("jumpTo")}</h2>
+                  <p className="mt-1 text-sm text-brand-muted">{td("activeCommitteeBody")}</p>
+                </div>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {tiles.slice(0, 4).map((tile) => (
+                    <li key={tile.href + tile.label}>
+                      <DelegateHubTileLink
+                        href={tile.href}
+                        label={tile.label}
+                        hint={tile.hint}
+                        priority={tile.priority}
+                        variant="overview"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+            <MilestonesSummaryCard href="/milestones" />
           </div>
         ) : null}
         {activeTab === "checklist" ? <RoleSetupChecklist role="delegate" /> : null}

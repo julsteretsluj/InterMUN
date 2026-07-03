@@ -19,6 +19,8 @@ export type SmtNavKey =
   | "awards"
   | "allocationMatrix"
   | "allocationPasswords"
+  | "newsroom"
+  | "milestones"
   | "profile";
 
 type SmtNavItem = {
@@ -34,6 +36,8 @@ const SMT_NAV_ITEMS: SmtNavItem[] = [
   { href: "/smt/conference", navKey: "eventSessions", emoji: "📅" },
   { href: "/smt/room-codes", navKey: "roomCodes", emoji: "🚪" },
   { href: "/smt/advisors", navKey: "advisors", emoji: "🎓" },
+  { href: "/smt/newsroom", navKey: "newsroom", emoji: "📰" },
+  { href: "/smt/milestones", navKey: "milestones", emoji: "🏅" },
   { href: "/smt/notes", navKey: "notes", emoji: "💬" },
   { href: "/smt/awards", navKey: "awards", emoji: "🏆" },
   { href: "/smt/allocation-matrix", navKey: "allocationMatrix", emoji: "👥" },

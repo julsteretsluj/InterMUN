@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 type AdvisorNavItem = {
   href: string;
-  labelKey: "hub" | "notes" | "schedule" | "profile";
+  labelKey: "hub" | "notes" | "schedule" | "newsroom" | "milestones" | "profile";
   emoji: string;
 };
 
@@ -16,6 +16,8 @@ const ADVISOR_NAV_ITEMS: AdvisorNavItem[] = [
   { href: "/advisor", labelKey: "hub", emoji: "🎓" },
   { href: "/advisor/notes", labelKey: "notes", emoji: "📨" },
   { href: "/advisor/schedule", labelKey: "schedule", emoji: "📅" },
+  { href: "/advisor/newsroom", labelKey: "newsroom", emoji: "📰" },
+  { href: "/advisor/milestones", labelKey: "milestones", emoji: "🏅" },
   { href: "/advisor/profile", labelKey: "profile", emoji: "⚙️" },
 ];
 

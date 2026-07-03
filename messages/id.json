@@ -68,15 +68,15 @@
     "chairEmailPlaceholder": "kursi@sekolah.edu",
     "sending": "Mengirim…",
     "sendChairInvite": "Kirim undangan kursi",
+    "chairRoleLabel": "Kursi Dai",
+    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
+    "chairInviteOption": "{seat} — {committee}",
+    "chairRoleHeadOf": "Ketua Ketua {committee}",
+    "chairRoleCoOf": "Ketua bersama {committee}",
     "grantChairRoleTitle": "Peran ketua hibah (akun yang ada)",
     "grantChairRoleHelp": "Jika mereka sudah mendaftar sebagai delegasi, promosikan mereka di sini agar mereka mendapatkan dashboard ketua dan alat panitia (tidak ada email yang dikirim).",
     "grantChairRole": "Berikan peran ketua",
-    "chamberLabelFallback": "Sidang komite",
-    "chairRoleLabel": "Kursi Dai",
-    "chairRolePlaceholder": "Select Head Chair or Co-chair for a committee",
-    "chairRoleHeadOf": "Ketua Ketua {committee}",
-    "chairRoleCoOf": "Ketua bersama {committee}",
-    "chairInviteOption": "{seat} — {committee}"
+    "chamberLabelFallback": "Sidang komite"
   },
   "chairDelegateApprovalForm": {
     "title": "Terima delegasi melalui email + alokasi",
@@ -219,8 +219,59 @@
     "presetAmendmentTitle": "Amandemen",
     "guidedStepChooseProcedure": "Langkah 1/5: Pilih prosedur (masukkan nomor).",
     "invalidProcedureSelection": "Pemilihan prosedur tidak valid.",
+    "guidedNoAgendaTopics": "Tidak ada topik agenda yang tersedia untuk komite ini.",
+    "guidedStepChooseAgendaTopic": "Langkah 2/5: Pilih topik agenda (masukkan nomor).",
+    "guidedInvalidAgendaTopicSelection": "Pemilihan topik agenda tidak valid.",
+    "guidedStepTopicPurpose": "Langkah 2/5: Topik/tujuan",
+    "guidedStepTopic": "Langkah 2/5: Topik",
+    "guidedStepTopicOptional": "Langkah 2/5: Topik (opsional)",
+    "guidedStepMotionTitleOptional": "Langkah 2/5: Judul gerakan (opsional)",
+    "guidedConsultationRequiresTopicOrPurpose": "Konsultasi memerlukan topik atau tujuan.",
+    "guidedTopicIsRequired": "Topik wajib diisi.",
+    "guidedStepMotioner": "Langkah 3/5: Motioner (opsional, masukkan nomor atau biarkan kosong).",
+    "guidedMotionerNotSpecified": "Tidak ditentukan",
+    "guidedStepDescriptionNotesOptional": "Langkah 4/5: Deskripsi / catatan (opsional)",
+    "guidedRequired": "diperlukan",
+    "guidedTimingTotalMinutesRequired": "Waktu: total menit{required}",
+    "guidedModeratedRequiresTopic": "Kaukus yang dimoderasi memerlukan topik.",
+    "guidedModeratedRequiresTotalMinutes": "Kaukus yang dimoderasi memerlukan waktu total (menit).",
+    "guidedUnmoderatedRequiresTotalMinutes": "Kaukus yang tidak dimoderasi memerlukan waktu total (menit).",
+    "guidedConsultationRequiresTotalMinutes": "Konsultasi memerlukan total waktu (menit).",
+    "guidedTimingTotalMinutesLine": "Waktu: total {minutes} mnt",
+    "guidedTimingSpeakerSecondsRequired": "Waktu: detik speaker (wajib)",
+    "guidedModeratedRequiresSpeakerSeconds": "Kaukus yang dimoderasi memerlukan waktu pembicara (detik).",
+    "guidedTimingSpeakerSecondsLine": ", pembicara {seconds}s",
+    "guidedNoResolutionsForMotion": "Tidak ada resolusi yang tersedia untuk mosi ini.",
+    "guidedStepSelectTargetResolution": "Langkah 5/5: Pilih resolusi target (angka).",
+    "guidedResolutionSelectionRequired": "Pemilihan resolusi diperlukan.",
+    "guidedNoClausesForResolution": "Tidak ada klausul yang tersedia untuk resolusi yang dipilih.",
+    "guidedStepChooseClauseNumbers": "Pilih nomor klausa (indeks yang dipisahkan koma).",
+    "guidedClausePreview": "Klausul {number}: {preview}",
+    "guidedAtLeastOneClauseRequired": "Setidaknya satu klausa diperlukan.",
+    "guidedSelectAgendaTopic": "Pilih topik agenda.",
+    "guidedSetAgendaUnavailableNotEnoughTopics": "Mosi untuk Menetapkan Agenda tidak tersedia untuk komite ini (topik yang tersisa tidak mencukupi).",
+    "guidedConfirmRecordStatedMotionNow": "Catat ini sebagai mosi yang dinyatakan sekarang?",
+    "guidedDraftLoadedFloorOpen": "Draf terpandu dimuat. Lantai gerak terbuka — klik Rekam gerakan yang dinyatakan jika sudah siap.",
+    "guidedConfirmCreateOpenMotionNow": "Buat dan buka mosi untuk memberikan suara ini sekarang?",
+    "guidedDraftLoadedReviewCreate": "Draf terpandu dimuat. Tinjau dan klik Buat dan buka gerakan jika sudah siap.",
     "liveDebateTopic": "Topik debat langsung",
     "motionControlHelp": "Alur kerja ketua: menangkap mosi, membuka satu suara dalam satu waktu, mencatat suara berdasarkan alokasi, lalu menutup mosi untuk menyelesaikan lulus/gagal.",
+    "tabAgenda": "Agenda",
+    "agendaTabHelp": "Tetapkan topik langsung untuk diskusi tersebut, lalu ketuk topik agenda untuk membuka panel pemungutan suara dengan daftar delegasi lengkap untuk topik tersebut. Di bawah, pilih topik untuk melihat total suara panitia.",
+    "agendaOpenVotingPanel": "Pemungutan suara",
+    "agendaCloseVotingPanel": "Menutup",
+    "agendaLiveBadge": "Hidup",
+    "agendaSetLive": "Tetapkan topik langsung",
+    "agendaViewingVotes": "Total suara komite",
+    "agendaRefresh": "Menyegarkan",
+    "agendaLoadingCounts": "Memuat penghitungan suara…",
+    "agendaBallotsRecorded": "{count} surat suara dicatat",
+    "agendaMotionsWithBallots": "{count} gerakan dengan surat suara",
+    "agendaYesNoAbstainLine": "Ya {yes} · Tidak {no} · Abstain {abstain}",
+    "agendaOtherVotes": "Lainnya {count}",
+    "agendaNoBallotsForTopic": "Belum ada surat suara yang direkam untuk topik ini.",
+    "agendaNoMotionsYet": "Belum ada mosi yang tercatat untuk topik ini.",
+    "agendaByMotion": "Dengan gerakan",
     "tabSetup": "1) Pengaturan",
     "tabFloorQueue": "2) Antrian lantai",
     "tabDraftMotion": "3) Draf gerakan",
@@ -229,6 +280,31 @@
     "chairOnlyVotingHelp": "Khusus ketua: satu suara terbuka pada satu waktu. Delegasi tidak memberikan suara di aplikasi. Gunakan Rekam suara untuk memanggil setiap plakat dan catat Ya atau Tidak saja. Gerakan prosedural tidak menggunakan abstain. Lulus/gagal menggunakan mayoritas anggota yang hadir dalam daftar.",
     "euGuidedPhase": "Fase terpandu UE",
     "euGuidedPhaseHint": "Pemblokir inti tetap dipandu: ketika suatu mosi tidak sesuai dengan fase ini, ketua masih dapat melanjutkan menggunakan konfirmasi pengesampingan yang eksplisit.",
+    "euSessionPhase_roll_call": "Panggilan nama",
+    "euSessionPhase_agenda": "Penetapan agenda",
+    "euSessionPhase_opening_speeches": "Pidato pembuka",
+    "euSessionPhase_cabinet_meeting": "Rapat kabinet",
+    "euSessionPhase_shadow_meeting": "Rapat bayangan",
+    "euSessionPhase_formal_debate": "Debat formal",
+    "euSessionPhase_resolution_debate": "Debat resolusi",
+    "euSessionPhase_voting_procedure": "Prosedur pemungutan suara",
+    "euSessionPhase_closing_statements": "Pernyataan penutup",
+    "euSessionPhase_adjourned": "Penutupan sidang",
+    "euPartySAndD": "Aliansi Progresif Sosialis dan Demokrat (S&D)",
+    "euPartyEpp": "Partai Rakyat Eropa (EPP)",
+    "euPartyRenew": "Perbarui Eropa (Perbarui)",
+    "euPartyLeft": "Kiri di Parlemen Eropa (The Left)",
+    "euPartyGreen": "Hijau/ALE (Greens/EFA)",
+    "euPartyCAndR": "Konservatif dan Reformis Eropa (ECR)",
+    "euPartyPatriots": "Patriot untuk Eropa (PfE)",
+    "euPartyIndependents": "Independen / NI",
+    "euPartyTimeGuideTitle": "Panduan waktu per fraksi (UE)",
+    "euPartySpeechPoolLabel": "Waktu pidato:",
+    "euPartyPoiPocPoolLabel": "Waktu POI/PoC:",
+    "euPhaseOverrideIntro": "Mosi ini tidak lazim untuk fase UE saat ini: {phase}.",
+    "euPhaseOverrideProceed": "Lanjutkan? Pengecualian ini hanya tercatat dalam riwayat mosi.",
+    "motionFloorUnavailableEuPhase": "Forum mosi tidak tersedia selama: {phase}.",
+    "euGuidedBeginVotingAnyway": "Fase UE terpandu: {phase}. Tetap mulai pemungutan suara?",
     "pointsWorkflow": "Alur kerja poin",
     "pointOfInformation": "Poin Informasi",
     "pointOfClarification": "Poin Klarifikasi",
@@ -243,6 +319,12 @@
     "accept": "Menerima",
     "deny": "Membantah",
     "beginVotingMostDisruptive": "Mulai memberikan suara (yang paling mengganggu dulu)",
+    "motionFloorLabel": "Giliran mosi:",
+    "motionFloorOpenForStatements": "terbuka untuk pernyataan",
+    "addMotionGuided": "Tambah mosi (terpandu)",
+    "openFloorForMotionStatements": "Buka giliran untuk pernyataan mosi",
+    "closeFloorStatementsEnded": "Tutup giliran (pernyataan selesai)",
+    "recordStatedMotionButton": "Catat mosi yang disampaikan",
     "pendingVoteOrderMostDisruptive": "Tertunda - urutan pemungutan suara (yang paling mengganggu terlebih dahulu)",
     "untitled": "Tanpa judul",
     "withdraw": "Menarik",
@@ -354,89 +436,79 @@
     "openMotionFloorFirst": "Buka mosi untuk pernyataan terlebih dahulu.",
     "openMotionBlocksRecording": "Sebuah mosi sudah terbuka untuk pemungutan suara. Tutup sebelum mencatat pernyataan selanjutnya.",
     "statedMotionRecorded": "Mosi yang dinyatakan direkam (belum terbuka untuk pemungutan suara).",
-    "statedMotionRemoved": "Gerakan yang dinyatakan dihapus.",
-    "tabAgenda": "Agenda",
-    "agendaTabHelp": "Tetapkan topik langsung untuk diskusi tersebut, lalu ketuk topik agenda untuk membuka panel pemungutan suara dengan daftar delegasi lengkap untuk topik tersebut. Di bawah, pilih topik untuk melihat total suara panitia.",
-    "agendaLiveBadge": "Hidup",
-    "agendaSetLive": "Tetapkan topik langsung",
-    "agendaViewingVotes": "Total suara komite",
-    "agendaRefresh": "Menyegarkan",
-    "agendaLoadingCounts": "Memuat penghitungan suara…",
-    "agendaBallotsRecorded": "{count} surat suara dicatat",
-    "agendaMotionsWithBallots": "{count} gerakan dengan surat suara",
-    "agendaYesNoAbstainLine": "Ya {yes} · Tidak {no} · Abstain {abstain}",
-    "agendaOtherVotes": "Lainnya {count}",
-    "agendaNoBallotsForTopic": "Belum ada surat suara yang direkam untuk topik ini.",
-    "agendaNoMotionsYet": "Belum ada mosi yang tercatat untuk topik ini.",
-    "agendaByMotion": "Dengan gerakan",
-    "agendaOpenVotingPanel": "Pemungutan suara",
-    "agendaCloseVotingPanel": "Menutup",
-    "guidedNoAgendaTopics": "Tidak ada topik agenda yang tersedia untuk komite ini.",
-    "guidedStepChooseAgendaTopic": "Langkah 2/5: Pilih topik agenda (masukkan nomor).",
-    "guidedInvalidAgendaTopicSelection": "Pemilihan topik agenda tidak valid.",
-    "guidedStepTopicPurpose": "Langkah 2/5: Topik/tujuan",
-    "guidedStepTopic": "Langkah 2/5: Topik",
-    "guidedStepTopicOptional": "Langkah 2/5: Topik (opsional)",
-    "guidedStepMotionTitleOptional": "Langkah 2/5: Judul gerakan (opsional)",
-    "guidedConsultationRequiresTopicOrPurpose": "Konsultasi memerlukan topik atau tujuan.",
-    "guidedTopicIsRequired": "Topik wajib diisi.",
-    "guidedStepMotioner": "Langkah 3/5: Motioner (opsional, masukkan nomor atau biarkan kosong).",
-    "guidedMotionerNotSpecified": "Tidak ditentukan",
-    "guidedStepDescriptionNotesOptional": "Langkah 4/5: Deskripsi / catatan (opsional)",
-    "guidedRequired": "diperlukan",
-    "guidedTimingTotalMinutesRequired": "Waktu: total menit{required}",
-    "guidedModeratedRequiresTotalMinutes": "Kaukus yang dimoderasi memerlukan waktu total (menit).",
-    "guidedUnmoderatedRequiresTotalMinutes": "Kaukus yang tidak dimoderasi memerlukan waktu total (menit).",
-    "guidedConsultationRequiresTotalMinutes": "Konsultasi memerlukan total waktu (menit).",
-    "guidedTimingTotalMinutesLine": "Waktu: total {minutes} mnt",
-    "guidedTimingSpeakerSecondsRequired": "Waktu: detik speaker (wajib)",
-    "guidedModeratedRequiresSpeakerSeconds": "Kaukus yang dimoderasi memerlukan waktu pembicara (detik).",
-    "guidedTimingSpeakerSecondsLine": ", pembicara {seconds}s",
-    "guidedNoResolutionsForMotion": "Tidak ada resolusi yang tersedia untuk mosi ini.",
-    "guidedStepSelectTargetResolution": "Langkah 5/5: Pilih resolusi target (angka).",
-    "guidedResolutionSelectionRequired": "Pemilihan resolusi diperlukan.",
-    "guidedNoClausesForResolution": "Tidak ada klausul yang tersedia untuk resolusi yang dipilih.",
-    "guidedStepChooseClauseNumbers": "Pilih nomor klausa (indeks yang dipisahkan koma).",
-    "guidedClausePreview": "Klausul {number}: {preview}",
-    "guidedAtLeastOneClauseRequired": "Setidaknya satu klausa diperlukan.",
-    "guidedConfirmRecordStatedMotionNow": "Catat ini sebagai mosi yang dinyatakan sekarang?",
-    "guidedDraftLoadedFloorOpen": "Draf terpandu dimuat. Lantai gerak terbuka — klik Rekam gerakan yang dinyatakan jika sudah siap.",
-    "guidedConfirmCreateOpenMotionNow": "Buat dan buka mosi untuk memberikan suara ini sekarang?",
-    "guidedDraftLoadedReviewCreate": "Draf terpandu dimuat. Tinjau dan klik Buat dan buka gerakan jika sudah siap.",
-    "guidedModeratedRequiresTopic": "Kaukus yang dimoderasi memerlukan topik.",
-    "guidedSelectAgendaTopic": "Pilih topik agenda.",
-    "guidedSetAgendaUnavailableNotEnoughTopics": "Mosi untuk Menetapkan Agenda tidak tersedia untuk komite ini (topik yang tersisa tidak mencukupi).",
-    "motionFloorLabel": "Giliran mosi:",
-    "motionFloorOpenForStatements": "terbuka untuk pernyataan",
-    "addMotionGuided": "Tambah mosi (terpandu)",
-    "openFloorForMotionStatements": "Buka giliran untuk pernyataan mosi",
-    "closeFloorStatementsEnded": "Tutup giliran (pernyataan selesai)",
-    "recordStatedMotionButton": "Catat mosi yang disampaikan",
-    "euSessionPhase_roll_call": "Panggilan nama",
-    "euSessionPhase_agenda": "Penetapan agenda",
-    "euSessionPhase_opening_speeches": "Pidato pembuka",
-    "euSessionPhase_cabinet_meeting": "Rapat kabinet",
-    "euSessionPhase_shadow_meeting": "Rapat bayangan",
-    "euSessionPhase_formal_debate": "Debat formal",
-    "euSessionPhase_resolution_debate": "Debat resolusi",
-    "euSessionPhase_voting_procedure": "Prosedur pemungutan suara",
-    "euSessionPhase_closing_statements": "Pernyataan penutup",
-    "euSessionPhase_adjourned": "Penutupan sidang",
-    "euPartySAndD": "Aliansi Progresif Sosialis dan Demokrat (S&D)",
-    "euPartyEpp": "Partai Rakyat Eropa (EPP)",
-    "euPartyRenew": "Perbarui Eropa (Perbarui)",
-    "euPartyLeft": "Kiri di Parlemen Eropa (The Left)",
-    "euPartyGreen": "Hijau/ALE (Greens/EFA)",
-    "euPartyCAndR": "Konservatif dan Reformis Eropa (ECR)",
-    "euPartyPatriots": "Patriot untuk Eropa (PfE)",
-    "euPartyIndependents": "Independen / NI",
-    "euPartyTimeGuideTitle": "Panduan waktu per fraksi (UE)",
-    "euPartySpeechPoolLabel": "Waktu pidato:",
-    "euPartyPoiPocPoolLabel": "Waktu POI/PoC:",
-    "euPhaseOverrideIntro": "Mosi ini tidak lazim untuk fase UE saat ini: {phase}.",
-    "euPhaseOverrideProceed": "Lanjutkan? Pengecualian ini hanya tercatat dalam riwayat mosi.",
-    "motionFloorUnavailableEuPhase": "Forum mosi tidak tersedia selama: {phase}.",
-    "euGuidedBeginVotingAnyway": "Fase UE terpandu: {phase}. Tetap mulai pemungutan suara?"
+    "statedMotionRemoved": "Gerakan yang dinyatakan dihapus."
+  },
+  "chairChecklists": {
+    "common": {
+      "progressSynced": "{done} / {total} selesai - disinkronkan untuk komite ini",
+      "loading": "Memuat...",
+      "resetChecklist": "Setel ulang daftar periksa"
+    },
+    "prepPage": {
+      "description": "Sebelum konferensi: peraturan, topik, ruangan, materi, dan tim. Disinkronkan untuk seluruh ketua komite ini; reset menghapusnya untuk semua orang.",
+      "crisisHidden": "Item persiapan khusus krisis disembunyikan untuk tipe komite ini."
+    },
+    "flowPage": {
+      "description": "Alur komite yang normal - centang langkah-langkahnya seiring berjalannya waktu. Dibagikan ke seluruh akun kursi dan perangkat; reset dihapus untuk semua orang."
+    },
+    "prep": {
+      "sections": {
+        "rules": {
+          "title": "Aturan & prosedur"
+        },
+        "topic": {
+          "title": "Panitia & topik"
+        },
+        "room": {
+          "title": "Ruangan & teknologi"
+        },
+        "materials": {
+          "title": "Bahan & logistik"
+        },
+        "crisis": {
+          "title": "Krisis (jika ada)"
+        },
+        "team": {
+          "title": "Tim & komunikasi"
+        }
+      },
+      "items": {
+        "rop": "Membaca dan memahami tata tertib panitia",
+        "parliamentary": "Meninjau prosedur parlemen (mosi, poin, pemungutan suara)",
+        "speaking-times": "Konfirmasikan waktu bicara dan batas waktu",
+        "quorum": "Ketahui persyaratan kuorum dan pemungutan suara",
+        "research": "Topik dan latar belakang komite penelitian",
+        "study-guide": "Baca panduan belajar dan dokumen penting",
+        "dashboard-topic": "Tetapkan nama panitia dan topik di dashboard",
+        "agenda": "Mempersiapkan agenda dan alur sesi",
+        "digital-room": "Menyiapkan ruang digital (daftar delegasi, plakat)",
+        "tech-check": "Pemeriksaan teknis: platform, audio, berbagi layar",
+        "backup": "Miliki rencana cadangan jika teknologi gagal",
+        "roll-plan": "Menyiapkan daftar absensi dan kehadiran",
+        "speakers-plan": "Rencanakan manajemen daftar pembicara",
+        "templates": "Siapkan gerakan/poin umum (jika menggunakan template)",
+        "timing": "Konfirmasikan waktu mulai dan istirahat sesi",
+        "crisis-slides": "Tinjau elemen krisis dan perbarui slide",
+        "crisis-cues": "Rencanakan perintah/isyarat pembicara krisis",
+        "crisis-paths": "Mempersiapkan jalur krisis dan fakta",
+        "co-chairs": "Berkoordinasi dengan co-chair mengenai peran",
+        "staff": "Konfirmasikan dukungan dan isyarat staf / mimbar",
+        "delegate-brief": "Mempersiapkan ringkasan untuk delegasi (aturan, waktu)"
+      }
+    },
+    "flow": {
+      "items": {
+        "roll-call": "Panggilan absensi",
+        "open-floor": "Buka lantai (titik & gerakan)",
+        "recognize": "Kenali gerakan",
+        "vote-1": "Beri suara pada mosi",
+        "engage": "Terlibat dalam gerakan yang dipilih atau pindah ke GSL",
+        "open-again": "Buka lantai lagi",
+        "recognize-repeat": "Kenali gerakan (ulangi sesuai kebutuhan)",
+        "vote-2": "Beri suara pada mosi",
+        "cycle": "Lanjutkan siklus (aktifkan gerakan / GSL -> lantai terbuka)"
+      }
+    }
   },
   "language": {
     "label": "Bahasa",
@@ -447,10 +519,14 @@
   },
   "tabNav": {
     "delegateHub": "Pusat delegasi",
+    "advisorHub": "Pusat penasihat",
+    "advisorNotes": "Catatan yang diteruskan",
+    "conferenceSchedule": "Jadwal",
     "profile": "Profil",
     "follow": "Mengikuti",
     "notes": "Catatan",
     "committee": "Komite",
+    "history": "Sejarah",
     "voting": "Pemungutan suara",
     "guides": "Panduan",
     "documents": "Dokumen",
@@ -472,10 +548,8 @@
     "home": "Rumah",
     "library": "Perpustakaan",
     "mainNavigationAria": "Navigasi utama",
-    "history": "Sejarah",
-    "advisorHub": "Pusat penasihat",
-    "advisorNotes": "Catatan yang diteruskan",
-    "conferenceSchedule": "Jadwal"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "dashboardLayout": {
     "helpCenter": "Pusat bantuan",
@@ -513,19 +587,27 @@
     "delegateHint": "(panitia Anda)",
     "secretariat": "Sekretariat",
     "secretariatHint": "(staf acara)",
+    "advisor": "Penasihat",
+    "advisorHint": "(delegasi sekolah)",
     "nextModeSignup": "membuat akun",
     "nextModeLogin": "masuk",
     "conferenceCodePlaceholder": "misalnya SEAMUNI2027",
     "previousRoleAria": "Peran sebelumnya",
     "selectRoleAria": "Pilih peran",
     "nextRoleAria": "Peran selanjutnya",
-    "authConnectError": "Tidak dapat terhubung ke otentikasi (periksa Supabase env vars).",
-    "advisor": "Penasihat",
-    "advisorHint": "(delegasi sekolah)"
+    "authConnectError": "Tidak dapat terhubung ke otentikasi (periksa Supabase env vars)."
   },
   "googleDocs": {
     "openNewDocHelp": "Membuka Google Dokumen di tab baru. Masuk jika diminta, lalu salin URL dokumen dari bilah alamat.",
     "newGoogleDoc": "Google Dokumen baru"
+  },
+  "colorblindMode": {
+    "enableTitle": "Turn on colorblind-friendly colours",
+    "disableTitle": "Turn off colorblind-friendly colours",
+    "enableAria": "Enable colorblind-friendly mode",
+    "disableAria": "Disable colorblind-friendly mode",
+    "on": "Colorblind mode on",
+    "off": "Colorblind mode off"
   },
   "themeSelector": {
     "buttonTitle": "Tema: warna & penampilan",
@@ -535,6 +617,14 @@
     "light": "Lampu",
     "dark": "Gelap",
     "accentColour": "Warna aksen",
+    "accessibility": "Accessibility",
+    "colorblindMode": "Colorblind-friendly colours",
+    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
+    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
+    "colorblindType": "Colour-vision type",
+    "colorblindDeuteranopia": "Deuteranopia (red–green)",
+    "colorblindProtanopia": "Protanopia (red–green)",
+    "colorblindTritanopia": "Tritanopia (blue–yellow)",
     "typography": "Tipografi",
     "textSize": "Ukuran teks",
     "scale": "Skala",
@@ -554,15 +644,7 @@
       "purple": "Ungu",
       "pink": "Berwarna merah muda",
       "neutral": "Netral"
-    },
-    "accessibility": "Accessibility",
-    "colorblindMode": "Colorblind-friendly colours",
-    "colorblindTitle": "Uses blue, orange, and patterns instead of red–green pairs. Helpful for deuteranopia and protanopia.",
-    "colorblindHint": "Status labels show symbols (✓ ! ×) so meaning does not rely on colour alone.",
-    "colorblindType": "Colour-vision type",
-    "colorblindDeuteranopia": "Deuteranopia (red–green)",
-    "colorblindProtanopia": "Protanopia (red–green)",
-    "colorblindTritanopia": "Tritanopia (blue–yellow)"
+    }
   },
   "awardsManager": {
     "updated": "Diperbarui.",
@@ -592,6 +674,8 @@
     "bandInitials": "Inisial bandnya",
     "committeeScopedAwardsHelp": "Penghargaan dalam lingkup komite: catat penerimanya di sini untuk daftar publik saja. Skor rubrik terperinci berasal dari nominasi ketua yang disetujui (tab Pengiriman penghargaan)—tidak ada skor duplikat pada baris ini.",
     "recipientDelegateChair": "Penerima (delegasi/ketua)",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope.",
     "notSet": "— Tidak disetel —",
     "noName": "Tidak ada nama",
     "winningCommittee": "Panitia pemenang",
@@ -612,13 +696,13 @@
     "noAwardRowsYet": "Belum ada baris penghargaan.",
     "includeInCertificatePrint": "Sertakan dalam cetakan sertifikat: {label}",
     "edit": "Sunting",
-    "remove": "Menghapus",
-    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
-    "noEligibleRecipients": "No eligible recipients in this scope."
+    "remove": "Menghapus"
   },
   "chairNominationsPanel": {
     "title": "Penyerahan penghargaan oleh ketua",
     "description": "Panitia menyerahkan nominasi yang dinilai (band bergaya SEAMUN). Total rubrik dan inisial pita (B/D/P/E) merangkum setiap baris. Untuk setiap komite dan jenis penghargaan, SMT meninjau preferensi ketua saat ini terlebih dahulu (Top 1). Menyetujui untuk mencatat penghargaan, atau menolak untuk pindah ke peringkat cadangan berikutnya (Top 2, lalu Top 3 untuk Honorable Mention jika berlaku).",
+    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
+    "evidenceTooShort": "Evidence too short",
     "filterByCommitteeAria": "Saring berdasarkan panitia",
     "allCommittees": "Semua panitia",
     "committee": "Komite",
@@ -642,9 +726,7 @@
     "approveBestDelegate": "Setuju — Delegasi Terbaik",
     "approveHonourableMention": "Setuju - Sebutan Yang Terhormat",
     "approveBestPositionPaper": "Setuju — Makalah Posisi Terbaik",
-    "approveBestDelegateOverall": "Setujui — Delegasi Terbaik (secara keseluruhan)",
-    "evidenceRequiredHint": "Approval is blocked until the chair's evidence statement is at least 40 characters. Reject if the evidence does not support the nomination.",
-    "evidenceTooShort": "Evidence too short"
+    "approveBestDelegateOverall": "Setujui — Delegasi Terbaik (secara keseluruhan)"
   },
   "roomGate": {
     "alreadyInCommittee": "Sudah menjadi panitia",
@@ -683,13 +765,24 @@
     "allocationPasswords": "Kata sandi alokasi",
     "sources": "Sumber",
     "notes": "Catatan",
+    "notesModeration": "Note review",
     "rollCallTracker": "✅ Pelacak Panggilan Gulung",
     "runningNotes": "Catatan Berjalan",
     "awardsSmt": "Penghargaan",
     "delegateDashboard": "Delegasikan dasbor",
+    "advisorDashboard": "Dasbor penasihat",
+    "advisorNotes": "Catatan yang diteruskan",
+    "delegateSchedule": "Jadwal konferensi",
+    "chairSchedule": "Jadwal konferensi",
+    "advisorSchedule": "Jadwal konferensi",
+    "advisorDelegateProfile": "Delegate profile",
+    "advisorDelegateDocuments": "Delegate documents",
+    "advisorDelegateVoting": "Delegate voting",
+    "advisorDelegateNotes": "Delegate notes",
     "voting": "Pemungutan suara",
     "digitalRoom": "Ruang Digital",
     "committeeSession": "Sesi Komite",
+    "committeeAgenda": "📑 Agenda",
     "announcements": "Pengumuman",
     "follow": "Mengikuti",
     "guides": "Panduan",
@@ -697,6 +790,7 @@
     "committeeFlowChecklist": "📋 Daftar periksa alur komite",
     "officialUnLinks": "Tautan resmi PBB",
     "committeeRoom": "Ruang panitia",
+    "history": "Sejarah",
     "speeches": "Pidato",
     "chairRoom": "Ruang kursi",
     "ideas": "Ide",
@@ -713,14 +807,8 @@
     "formalMotions": "Gerakan formal",
     "timer": "pengatur waktu",
     "smtProfile": "Profil",
-    "committeeAgenda": "📑 Agenda",
-    "history": "Sejarah",
-    "advisorDashboard": "Dasbor penasihat",
-    "advisorNotes": "Catatan yang diteruskan",
-    "delegateSchedule": "Jadwal konferensi",
-    "chairSchedule": "Jadwal konferensi",
-    "advisorSchedule": "Jadwal konferensi",
-    "notesModeration": "Note review"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "setupPage": {
     "title": "Supabase tidak dikonfigurasi",
@@ -747,6 +835,196 @@
     "title": "Kode kamar & kursi",
     "subtitle": "Tetapkan kode komite gerbang kedua untuk setiap sesi dan undang atau promosikan kursi mimbar tanpa menggunakan dasbor delegasi."
   },
+  "roleSetupChecklist": {
+    "admin": {
+      "title": "Daftar periksa penyiapan admin",
+      "subtitle": "Penyiapan tingkat situs dan penyediaan staf.",
+      "step1Label": "Buat acara + komite pertama",
+      "step1Detail": "Hasilkan gerbang konferensi dan komite.",
+      "step2Label": "Undang atau promosikan akun SMT",
+      "step2Detail": "Berikan akses sekretariat sebelum operasi komite.",
+      "step3Label": "Verifikasi alur portal status",
+      "step3Detail": "Pantau alur delegasi tertunda → terkonfirmasi.",
+      "step4Label": "Serahkan ke dasbor SMT",
+      "step4Detail": "Operasi komite langsung berlanjut di alat SMT."
+    },
+    "smt": {
+      "title": "Daftar periksa penyiapan SMT",
+      "subtitle": "Kontrol tingkat konferensi sebelum ketua dan delegasi masuk.",
+      "step1Label": "Konfirmasi acara + sesi komite",
+      "step1Detail": "Validasi nama, tag, nama ketua, dan tautan krisis.",
+      "step2Label": "Atur kode ruang + akses ketua",
+      "step2Detail": "Pastikan setiap komite memiliki kode gerbang yang benar.",
+      "step3Label": "Siapkan alokasi + dokumen masuk",
+      "step3Detail": "Impor kursi, lalu atur kata sandi/kode.",
+      "step4Label": "Terbitkan dokumen global (RoP / kriteria)",
+      "step4Detail": "Unggah referensi bersama untuk semua pengguna."
+    },
+    "chair": {
+      "title": "Daftar periksa penyiapan ketua",
+      "subtitle": "Kesiapan ruang dan kontrol lantai untuk komite Anda.",
+      "step1Label": "Periksa matriks delegasi + persetujuan",
+      "step1Detail": "Konfirmasi penugasan dan tinjauan pendaftaran tertunda.",
+      "step2Label": "Jalankan persetujuan panggilan roll",
+      "step2Detail": "Tandai delegasi hadir sebelum berpartisipasi di lantai.",
+      "step3Label": "Atur timer + alur pembicara",
+      "step3Detail": "Simpan preset lantai sebelum membuka mosi.",
+      "step4Label": "Buka operasi ruang digital",
+      "step4Detail": "Koordinasikan pembicara, catatan, dan visibilitas sesi."
+    },
+    "delegate": {
+      "title": "Daftar periksa penyiapan delegasi",
+      "subtitle": "Bersiap cepat untuk berpartisipasi di komite.",
+      "step1Label": "Lengkapi dasar profil",
+      "step1Detail": "Verifikasi nama, alokasi, dan detail akun.",
+      "step2Label": "Baca RoP + kriteria penghargaan",
+      "step2Detail": "Buka dokumen bersama yang diunggah SMT.",
+      "step3Label": "Buat dokumen persiapan Anda",
+      "step3Detail": "Unggah/edit catatan persiapan langsung di aplikasi.",
+      "step4Label": "Gabung ruang komite + panggilan roll",
+      "step4Detail": "Tunggu persetujuan hadir dari ketua, lalu berbicara."
+    },
+    "advisor": {
+      "title": "Advisor guide",
+      "subtitle": "How to support your delegates from the advisor hub.",
+      "step1Label": "Review your delegate cards",
+      "step1Detail": "Each card shows country, committee, documents, voting, and notes.",
+      "step2Label": "Open your conference schedule",
+      "step2Detail": "Pick your roster number (Advisor 1–20) for chamber rotation times.",
+      "step3Label": "Send notes to delegates",
+      "step3Detail": "Message guidance in-app; delegates reply in the same thread.",
+      "step4Label": "Browse help guides",
+      "step4Detail": "MUN terms, procedures, and conference references in one place."
+    }
+  },
+  "advisorDashboard": {
+    "intro": "Anda dapat memantau aktivitas komite delegasi yang ditugaskan kepada Anda. Anda tidak memiliki akses ke catatan kecuali kursi atau SMT meneruskannya kepada Anda.",
+    "noAssignments": "Belum ada delegasi yang ditautkan ke akun Anda. Sekretariat akan menugaskan Anda dari SMT → Penasihat.",
+    "delegateLinked": "Delegasi akun tertaut",
+    "delegateNotLinked": "Kursi belum ditautkan ke akun delegasi",
+    "viewProfile": "Profil",
+    "viewDocuments": "Dokumen",
+    "viewVoting": "Pemungutan suara",
+    "sendNote": {
+      "title": "Message {delegate}",
+      "hint": "Your delegate will see this in their notes feed. Replies appear in the conversation below.",
+      "topicLabel": "Topic",
+      "messageLabel": "Message",
+      "placeholder": "Write guidance for your delegate…",
+      "send": "Send note",
+      "sending": "Sending…",
+      "sentSuccess": "Note sent to your delegate.",
+      "heldSuccess": "Note sent — pending chair approval before your delegate can read it.",
+      "notSignedIn": "Sign in to send notes.",
+      "notAdvisor": "Only advisors can send delegate notes.",
+      "missingDelegate": "Choose a delegate to message.",
+      "invalidTopic": "Choose a valid topic.",
+      "emptyContent": "Write a message before sending.",
+      "notAssigned": "That delegate is not assigned to your account.",
+      "delegateNotLinked": "This seat is not linked to a delegate account yet.",
+      "sendFailed": "Could not send the note. Try again.",
+      "conversationTitle": "Conversation",
+      "emptyConversation": "No messages with {delegate} yet.",
+      "fromYou": "You",
+      "fromDelegate": "{delegate}",
+      "heldBadge": "Pending chair review",
+      "topics": {
+        "questions": "Questions",
+        "blocForming": "Bloc forming",
+        "speechPoisOrPocs": "Speech POIs or POCs",
+        "informalConversations": "Informal conversations"
+      }
+    },
+    "forwardedNotes": "Catatan yang diteruskan",
+    "oversight": {
+      "difficultyOther": "Other committees"
+    },
+    "schedule": {
+      "intro": "Pilih jalur jadwal Anda, lalu penasihat A–D untuk melihat jadwal penasihat tersebut pada hari itu."
+    },
+    "delegateNav": {
+      "ariaLabel": "Delegate oversight",
+      "backToDashboard": "← Back to dashboard",
+      "profile": "Profile",
+      "documents": "Documents",
+      "voting": "Voting",
+      "notes": "Notes"
+    },
+    "delegateProfile": {
+      "notLinked": "This seat is not linked to a delegate account yet.",
+      "empty": "No profile details are available yet.",
+      "fields": {
+        "name": "Name",
+        "pronouns": "Pronouns",
+        "school": "School",
+        "grade": "Grade",
+        "country": "Country",
+        "committee": "Committee"
+      }
+    },
+    "delegateVoting": {
+      "intro": "Recorded ballots for {country} on motions in this committee.",
+      "empty": "No motions have been recorded for this committee yet.",
+      "delegateBallot": "Delegate ballot",
+      "noBallot": "Not recorded"
+    },
+    "notes": {
+      "intro": "Kursi Catatan atau SMT memilih untuk berbagi dengan Anda. Anda tidak dapat menelusuri feed catatan lengkap.",
+      "tabsAriaLabel": "Advisor notes",
+      "tabForwarded": "Forwarded to you",
+      "tabSend": "Send to delegates",
+      "sendIntro": "Choose a delegate, write your message, and they will see it in their notes feed.",
+      "pickDelegate": "Delegate",
+      "noLinkedDelegates": "No linked delegate accounts yet. Secretariat must assign delegates to your advisor account first.",
+      "loading": "Loading notes…",
+      "forwardedTitle": "Forwarded to you",
+      "sentTitle": "Sent to delegates",
+      "sentEmpty": "You have not sent any notes to your delegates yet.",
+      "toDelegate": "To {delegate}",
+      "openConversation": "Open conversation",
+      "unknownDelegate": "Delegate",
+      "held": "Pending chair review",
+      "empty": "Belum ada catatan yang diteruskan kepada Anda.",
+      "forwarded": "Diteruskan"
+    }
+  },
+  "smtAdvisorsPage": {
+    "title": "Penasihat",
+    "subtitle": "Undang akun penasihat melalui email dan tautkan setiap penasihat ke satu kursi delegasi.",
+    "selectEventFirst": "Pilih acara konferensi yang aktif terlebih dahulu.",
+    "enterConferenceCode": "Masukkan kode konferensi",
+    "inviteTitle": "Undang penasihat",
+    "inviteBody": "Mengirimkan tautan masuk (alur yang sama seperti undangan ketua). Peran akun diatur ke penasihat.",
+    "inviteDisabled": "Undangan memerlukan SUPABASE_SERVICE_ROLE_KEY pada penerapan ini.",
+    "inviteSetupTitle": "Aktifkan undangan email",
+    "inviteSetupStep1": "Di Supabase → Pengaturan Proyek → API, salin kunci rahasia service_role.",
+    "inviteSetupStep2": "Tambahkan SUPABASE_SERVICE_ROLE_KEY ke env host Anda (Render/Vercel) — bukan NEXT_PUBLIC_.",
+    "inviteSetupStep3": "Tambahkan NEXT_PUBLIC_APP_URL ke URL situs aktif Anda (misalnya https://your-app.onrender.com).",
+    "inviteSetupStep4": "Terapkan ulang (produksi) atau tambahkan keduanya ke .env.local dan mulai ulang npm run dev (lokal).",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "penasihat@sekolah.edu",
+    "sending": "Mengirim…",
+    "inviteButton": "Kirim undangan",
+    "assignTitle": "Tetapkan delegasi",
+    "assignBody": "Pilih kursi delegasi yang terhubung. Satu penasihat per delegasi; penugasan ulang menggantikan tautan sebelumnya.",
+    "advisorEmailLabel": "Email penasihat",
+    "delegateAllocationIdLabel": "Delegasikan ID alokasi",
+    "delegateAllocationIdPlaceholder": "misalnya 11111111-1111-1111-1111-111111111101",
+    "currentAssignmentsTitle": "Tugas saat ini",
+    "currentAssignmentsHint": "Semua tautan penasihat-delegasi untuk acara ini.",
+    "allocationIdsTitle": "ID alokasi delegasi tertaut",
+    "allocationIdsHint": "Salin UUID alokasi dari tabel ini saat menugaskan.",
+    "colAdvisor": "Penasihat",
+    "colDelegate": "Delegate",
+    "colAllocationId": "ID Alokasi",
+    "colCountry": "Negara / kursi",
+    "colCommittee": "Komite",
+    "delegateFallback": "Delegate",
+    "assignedTo": "penasihat: {name}",
+    "saving": "Penghematan…",
+    "assignButton": "Simpan tugas",
+    "advisorFallback": "Penasihat"
+  },
   "delegateDashboard": {
     "welcome": "Selamat datang, Delegasi {flag} {negara}",
     "activeCommitteeIntro": "Panitia aktif: {line}.",
@@ -758,7 +1036,18 @@
       "jump": "Lompat ke",
       "chairEmails": "Email kursi"
     },
+    "chairContacts": {
+      "intro": "Bagikan kotak masuk dais untuk panitia Anda (SEAMUN I). Hubungi kursi Anda dari email di bawah ini.",
+      "committeeColumn": "Komite",
+      "emailColumn": "Kotak masuk kursi (nama pengguna)",
+      "openMail": "Buka surat",
+      "noMatch": "Belum ada kotak masuk kursi yang diterbitkan untuk komite ini. Tanyakan SMT atau periksa ringkasan komite Anda."
+    },
     "jumpTo": "Lompat ke",
+    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here).",
+    "schedule": {
+      "intro": "Pilih jalur tim Anda, lalu penasihat A–D atau komite Anda (delegasi/ketua). Hanya satu jadwal pribadi yang ditampilkan dalam satu waktu."
+    },
     "tiles": {
       "stances": {
         "label": "Negara & pendirian",
@@ -784,6 +1073,10 @@
         "label": "Panduan & sumber daya",
         "hint": "Referensi cara kerja dan menghadap kursi"
       },
+      "conferenceSchedule": {
+        "label": "Jadwal konferensi",
+        "hint": "Jalur tim dan jadwal penasihat (A–D)"
+      },
       "running": {
         "label": "Daftar periksa & catatan berjalan",
         "hint": "Bantalan awal sesi"
@@ -791,6 +1084,10 @@
       "officialLinks": {
         "label": "Tautan resmi PBB",
         "hint": "Dokumen, badan, program"
+      },
+      "chairEmails": {
+        "label": "Email kursi",
+        "hint": "Dais inbox oleh panitia"
       },
       "chairFeedback": {
         "label": "Umpan balik dari kursi",
@@ -811,14 +1108,6 @@
       "crisisReport": {
         "label": "Krisis / laporan",
         "hint": "Angkat sebuah isu"
-      },
-      "chairEmails": {
-        "label": "Email kursi",
-        "hint": "Dais inbox oleh panitia"
-      },
-      "conferenceSchedule": {
-        "label": "Jadwal konferensi",
-        "hint": "Jalur tim dan jadwal penasihat (A–D)"
       }
     },
     "countdownCard": {
@@ -835,18 +1124,7 @@
       "remainingDhm": "{days}h {hours}j {minutes}m",
       "remainingHm": "{hours}j {minutes}m",
       "remainingM": "{minutes}m"
-    },
-    "chairContacts": {
-      "intro": "Bagikan kotak masuk dais untuk panitia Anda (SEAMUN I). Hubungi kursi Anda dari email di bawah ini.",
-      "committeeColumn": "Komite",
-      "emailColumn": "Kotak masuk kursi (nama pengguna)",
-      "openMail": "Buka surat",
-      "noMatch": "Belum ada kotak masuk kursi yang diterbitkan untuk komite ini. Tanyakan SMT atau periksa ringkasan komite Anda."
-    },
-    "schedule": {
-      "intro": "Pilih jalur tim Anda, lalu penasihat A–D atau komite Anda (delegasi/ketua). Hanya satu jadwal pribadi yang ditampilkan dalam satu waktu."
-    },
-    "jumpToOrderHint": "Numbered in recommended prep order (1 = start here)."
+    }
   },
   "materialsExportCard": {
     "title": "Ekspor materi saya",
@@ -913,6 +1191,44 @@
     "loadCommitteesPrompt": "untuk memuat panitia untuk suatu acara.",
     "hubEnterConferenceCode": "Masukkan kode konferensi"
   },
+  "advisorLayout": {
+    "activeEvent": "Active event:",
+    "code": "code",
+    "enterConferenceCodeLink": "Enter conference code",
+    "loadEventPrompt": "to load the conference event.",
+    "helpCenter": "Help center",
+    "defaultDisplayName": "Advisor"
+  },
+  "advisorNav": {
+    "ariaDashboard": "Advisor dashboard",
+    "hub": "Advisor hub",
+    "notes": "Notes",
+    "schedule": "Conference schedule",
+    "profile": "Profile",
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
+  },
+  "smtCommitteeView": {
+    "title": "Sekretariat: pandangan ketua & delegasi",
+    "intro": "Pilih komite untuk alat ketua dan kursi delegasi yang ditautkan ke akun Anda, lalu ganti permukaan. Masuk masih membuka hub sekretariat secara default.",
+    "bindRequiredHint": "Pilih ketua komite dan/atau kursi delegasi di bawah, lalu coba lagi.",
+    "chairCommitteeLabel": "Ketua komite lantai",
+    "chairCommitteePlaceholder": "Pilih panitia…",
+    "chairSeatLabel": "Dais seat (optional)",
+    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank",
+    "delegateSeatLabel": "Kursi delegasi (alokasi Anda)",
+    "delegateSeatPlaceholder": "Pilih kursi…",
+    "saveBindings": "Simpan tugas",
+    "bindingsSaved": "Disimpan.",
+    "switchViewHeading": "Ganti dasbor",
+    "switchViewHelp": "Sekretariat mengembalikan Anda ke SMT. Ketua dan delegasi membuka cangkang dalam aplikasi yang sama yang digunakan oleh kursi dan delegasi sebenarnya untuk acara aktif.",
+    "goSecretariat": "Sekretariat",
+    "goChair": "Pemandangan kursi",
+    "goDelegate": "Tampilan delegasi",
+    "surfaceSwitchError": "Tidak dapat mengalihkan tampilan. Periksa gerbang acara dan pilihan.",
+    "pickChairFirst": "Pilih ketua komite terlebih dahulu (atau simpan tugas).",
+    "pickDelegateFirst": "Pilih kursi delegasi terlebih dahulu (atau simpan tugas)."
+  },
   "smtOverview": {
     "noEventSelected": "Tidak ada konferensi yang dipilih. Masukkan kode acara Anda terlebih dahulu.",
     "enterConferenceCode": "Masukkan kode konferensi",
@@ -956,9 +1272,12 @@
       "prepChecklist": "Daftar periksa persiapan",
       "flowChecklist": "Daftar periksa aliran",
       "delegates": "Delegasi",
+      "conferenceSchedule": "Jadwal",
       "digitalRoom": "Ruang Digital",
+      "history": "Sejarah",
       "rollCall": "Panggilan Masuk",
       "session": "Sidang",
+      "agenda": "Agenda",
       "speakers": "Pembicara",
       "formalMotions": "Gerakan formal",
       "discipline": "Disipliner",
@@ -970,13 +1289,12 @@
       "crisis": "Krisis",
       "crisisSlides": "Krisis meluncur",
       "archive": "Arsip",
+      "notesModeration": "Note review",
       "officialLinks": "Tautan resmi",
       "roomCode": "Kode kamar",
       "settings": "Pengaturan",
-      "agenda": "Agenda",
-      "history": "Sejarah",
-      "conferenceSchedule": "Jadwal",
-      "notesModeration": "Note review"
+      "newsroom": "Newsroom",
+      "milestones": "Milestones"
     }
   },
   "smtNav": {
@@ -984,14 +1302,16 @@
     "liveCommittees": "Komite langsung",
     "eventSessions": "Acara & sesi",
     "roomCodes": "Kode kamar & kursi",
+    "advisors": "Penasihat",
+    "notes": "Notes",
     "awards": "Penghargaan",
     "allocationMatrix": "Matriks alokasi",
     "allocationPasswords": "Kata sandi alokasi",
     "profile": "Profil",
     "follow": "Mengikuti",
     "hubAbbrev": "SMT",
-    "advisors": "Penasihat",
-    "notes": "Notes"
+    "newsroom": "Newsroom",
+    "milestones": "Milestones"
   },
   "officialLinks": {
     "intro": "Dokumen, perjanjian, badan utama, program, misi, dan informasi anggota. Terbuka di tab baru.",
@@ -1021,7 +1341,6 @@
       "secretariat": "Sekretariat PBB",
       "trusteeship": "Dewan Perwalian PBB",
       "undp": "UNDP",
-      "unicef": "UNICEF",
       "unhcr": "UNHCR",
       "wfp": "WFP (Program Pangan Dunia)",
       "unfpa": "UNFPA",
@@ -1029,7 +1348,6 @@
       "unwomen": "Wanita PBB",
       "unhabitat": "PBB-Habitat",
       "who": "SIAPA",
-      "unesco": "UNESCO",
       "iom": "IOM (Organisasi Internasional untuk Migrasi)",
       "unodc": "Kantor PBB untuk Narkoba dan Kejahatan (UNODC)",
       "unoda": "Kantor PBB untuk Urusan Perlucutan Senjata (UNODA)",
@@ -1045,6 +1363,17 @@
       "unSystem": "Sistem PBB (pendiri & anggota)",
       "history": "Sejarah PBB"
     }
+  },
+  "timersWidget": {
+    "timer": "pengatur waktu",
+    "currentSpeaker": "Pembicara saat ini",
+    "nextSpeaker": "Pembicara berikutnya",
+    "speakerTimePerSpeaker": "Waktu pembicara (kiri / tutup)",
+    "speakerTimeTotal": "Waktu pembicara (kiri / total)",
+    "perSpeaker": "(per pembicara)",
+    "paused": "(dijeda)",
+    "pauseReason": "Jeda: {alasan}",
+    "dash": "—"
   },
   "dashboardSearch": {
     "aria": "Mencari",
@@ -1123,10 +1452,8 @@
       "ECOFIN": "ECOFIN",
       "ECOSOC": "ECOSOC",
       "EU": "UE",
-      "F1": "F1",
       "FIFA": "FIFA",
       "FANTASY_WORLD_COMMITTEE": "Komite Dunia Fantasi",
-      "HSC": "HSC",
       "HRC": "HRC",
       "HCR": "HCR",
       "IAEA": "IAEA",
@@ -1143,8 +1470,6 @@
       "CSA": "CSA",
       "UNDP": "UNDP",
       "UNEP": "UNEP",
-      "UNESCO": "UNESCO",
-      "UNICEF": "UNICEF",
       "UNODC": "UNODC",
       "UNSC": "DK PBB",
       "WHO": "SIAPA",
@@ -1157,6 +1482,8 @@
     "openFullCommitteeRoom": "Buka ruang panitia penuh",
     "delegatesMatrix": "Matriks delegasi",
     "clearAllChairNotes": "Hapus semua catatan kursi",
+    "clearAllConfirm": "Catatan pujian, perhatian, dan pengingat yang jelas untuk setiap plakat? Ini memperbarui salinan komite bersama.",
+    "addedToSpeakerList": "{country} ditambahkan ke daftar pembicara.",
     "searchCountry": "Telusuri negara...",
     "roomStats": "{plakat} plakat · {ditandai} dengan catatan kursi · Gulungan direkam untuk {count}",
     "loading": "Memuat...",
@@ -1173,10 +1500,51 @@
     "addToSpeakerList": "Tambahkan ke daftar pembicara",
     "reminder": "Pengingat",
     "privateReminderLabel": "Pengingat pribadi (khusus kursi, disinkronkan)",
-    "clearAllConfirm": "Catatan pujian, perhatian, dan pengingat yang jelas untuk setiap plakat? Ini memperbarui salinan komite bersama.",
-    "addedToSpeakerList": "{country} ditambahkan ke daftar pembicara.",
     "committeeFallback": "Komite",
     "dash": "—"
+  },
+  "chairSpeakerQueuePanel": {
+    "dash": "—",
+    "speakerList": "Daftar pembicara",
+    "addedToSpeakerList": "Ditambahkan ke daftar pembicara.",
+    "chooseDelegationsNotAlreadyQueued": "Pilih delegasi yang belum menunggu atau sedang dalam daftar.",
+    "addedSpeakersInOrder": "Menambahkan {count} pembicara dalam urutan daftar komite.",
+    "introPrefix": "Tambahkan delegasi dalam urutan bicara. Delegasi masih dapat menggunakan",
+    "requestToSpeak": "Permintaan untuk berbicara",
+    "introMiddle": "di ruang panitia. Menggunakan",
+    "sessionTimerLink": "Sesi → Pengatur Waktu",
+    "introSuffixPrefix": "untuk waktu per pembicara dan",
+    "advanceSpeaker": "Pembicara tingkat lanjut",
+    "addDelegation": "Tambahkan delegasi",
+    "select": "Memilih…",
+    "add": "Menambahkan",
+    "addSelectedToList": "Tambahkan yang dipilih ke daftar",
+    "dismissReminder": "Tutup pengingat",
+    "moveUp": "Naik",
+    "moveDown": "Pindah ke bawah",
+    "status": {
+      "current": "saat ini",
+      "waiting": "menunggu"
+    },
+    "current": "Saat ini",
+    "remove": "Menghapus",
+    "prompt": {
+      "gslTitle": "Daftar Pembicara Umum (GSL)",
+      "moderatedTimerTitle": "Kaukus yang dimoderasi (pengatur waktu per pembicara)",
+      "moderatedPassedTitle": "Kaukus yang dimoderasi telah berlalu",
+      "bodyPrefix": "Gunakan daftar pembicara di bawah ini untuk",
+      "add": "menambahkan",
+      "bodyAddMiddle": "delegasi (tarik-turun +",
+      "bodyAddMiddle2": ", atau centang delegasi dan",
+      "bodyRemovePrefix": ") Dan",
+      "remove": "menghapus",
+      "bodyRemoveMiddle": "mereka dengan",
+      "bodyRowSuffix": "pada setiap baris. Susun ulang dengan panah atau set",
+      "bodyEnd": "ketika seseorang berada di depan mikrofon.",
+      "noAllocations": "Belum ada alokasi yang dimuat untuk komite ini. Tutup jika sudah siap—Anda dapat menambahkan speaker nanti dari kontrol daftar.",
+      "quickAdd": "Tambah cepat (belum menunggu atau terkini)",
+      "alreadyQueued": "Setiap alokasi sudah memiliki slot tunggu atau slot saat ini. Hapus entri jika Anda perlu menyusun ulang, atau tutup setelah selesai."
+    }
   },
   "chairTopicTabs": {
     "selectLiveTopic": "Pilih topik langsung",
@@ -1194,15 +1562,7 @@
     "ecosocImplementingUbiPovertyStability": "Penerapan Universal Basic Income (UBI) sebagai Strategi Pengentasan Kemiskinan dan Menjaga Stabilitas Ekonomi",
     "ecosocGloballyCoordinatedUbiPublicHealthStrategy": "Menerapkan Pendapatan Dasar Universal yang Terkoordinasi Secara Global (UBI) sebagai Strategi Kesehatan Masyarakat",
     "ecosocReallocatingMilitaryExpenditurePublicHealth": "Menetapkan Kerangka Kerja untuk Realokasi Pengeluaran Militer Global ke Infrastruktur Kesehatan Masyarakat",
-    "f1DurabilityLongevityCarComponents": "Menerapkan Standar Daya Tahan dan Umur Panjang pada Komponen Penting Mobil untuk Mengoptimalkan Siklus Hidup Komponen dan Meminimalkan Pemborosan Material dan Energi",
-    "f1GrandPrixBangkok2028Impacts": "Menganalisis Dampak Sosial-Ekonomi dan Infrastruktur dari Penyelenggaraan Grand Prix Baru, dengan Fokus pada Mitigasi Kemacetan Perkotaan dan Logistik di Kota-Kota Berpopulasi Tinggi Dengan Fokus pada Kemungkinan Grand Prix F1 2028 di Bangkok",
     "pressCorpsJournalisticEthicsPublicHealth": "Penetapan Etika Jurnalistik dalam Pemberitaan Kesehatan Masyarakat dan Urusan Global",
-    "unicefMaternalNeonatalPostpartumHealthcare": "Memperkuat Sistem Pelayanan Kesehatan Ibu, Neo-Natal, dan Pasca Persalinan untuk Mengurangi Angka Kematian dan Morbiditas Ibu dan Bayi yang Dapat Dicegah Secara Signifikan",
-    "unicefFlexibleWorkParentalLeaveEarlyChildhood": "Merekomendasikan Kerangka Kebijakan untuk Mendorong Pengaturan Kerja Fleksibel dan Cuti Orang Tua yang Didukung oleh Pengusaha untuk Memfasilitasi Perkembangan Anak Usia Dini dan Memperkuat Ikatan Orang Tua-Anak",
-    "euParliInflationCostOfLivingEurope": "Mengatasi Dampak Sosial-Ekonomi Inflasi dan Meningkatnya Biaya Hidup pada Populasi Rentan di seluruh Eropa",
-    "euParliCriminalSocietalPoliciesPovertyCrime": "Standardisasi Kebijakan Kriminal dan Kemasyarakatan di Seluruh Eropa untuk Mencegah Siklus Kejahatan yang Didorong oleh Kemiskinan",
-    "unescoInclusiveEducationNeurodivergent": "Mengembangkan dan Menstandardisasi Kebijakan Pendidikan Inklusif dan Akomodasi yang Diperlukan untuk Menjamin Akses Pembelajaran yang Penuh dan Setara bagi Siswa Neurodivergent",
-    "unescoHistoricalFailuresEducationCurricula": "Menetapkan Pedoman untuk Integrasi yang Wajib dan Komprehensif atas Kegagalan Sejarah, Kekejaman, dan Pelanggaran Hak Asasi Manusia ke dalam Kurikulum Pendidikan Nasional untuk Mendorong Rekonsiliasi dan Mencegah Hal Terulang Kembali di Masa Depan",
     "unhrcDeathPenaltyStandardization": "Standardisasi Peraturan dan Penerapan Hukuman Mati",
     "unhrcJudicialCruelTreatmentFinancialDeficencies": "Kewajiban untuk Mencegah Perlakuan Kejam, Tidak Manusiawi, atau Merendahkan Martabat dalam Sistem Peradilan akibat Kekurangan Keuangan",
     "unodcAlternativesDrugPossessionPersonalUse": "Analisis Kebijakan Alternatif Hukuman dan Hukuman bagi Kepemilikan Narkoba untuk Penggunaan Pribadi",
@@ -1213,8 +1573,6 @@
     "disecCrossBorderLethalWeaponsLogistics": "Memperkuat Protokol dan Logistik Internasional untuk Mengamankan Pengangkutan Senjata Mematikan Lintas Batas",
     "fwcPsychicChildExperimentationGiftedMinors": "Mencegah Kerugian yang Disebabkan oleh Eksperimen Psikis/Psikokinetik Anak dan Memastikan Perlindungan dan Rehabilitasi Anak Di Bawah Umur Berbakat",
     "fwcPsychicTechnologiesNonProliferation": "Mengatasi Persenjataan Pikiran Manusia dan Menetapkan Protokol Internasional untuk Pengendalian dan Non-Proliferasi Teknologi Psikis",
-    "hscSarsOutbreak2002": "Wabah SARS (2002-2004)",
-    "hscBlackDeath1346": "Kematian Hitam (1346-1353)",
     "interpolUndergroundMedicalMarkets": "Memerangi Kejahatan Terorganisir Transnasional di Pasar Medis Bawah Tanah dan Praktik Bedah yang Tidak Diatur",
     "interpolNarcoticsSchengenGoldenTriangle": "Memperkuat Kerangka Keamanan Lintas Batas untuk Memitigasi Hubungan Perdagangan Narkotika dengan Fokus pada Wilayah Schengen dan Segitiga Emas",
     "whoPsychedelicTraumaMentalHealth": "Menelaah Lanskap Etis dan Peraturan untuk Penggunaan Klinis Obat Psikadelik dalam Pengobatan Kondisi Kesehatan Mental Berbasis Trauma",
@@ -1237,6 +1595,37 @@
     "qFoodSecurity": "Strategi apa yang dapat meningkatkan ketahanan pangan di wilayah yang rentan terhadap perubahan iklim?",
     "qNonProliferation": "Bagaimana seharusnya komunitas internasional mencegah proliferasi nuklir?"
   },
+  "smtNotesPage": {
+    "title": "Notes & chats",
+    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
+    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
+    "tabsAria": "SMT notes views",
+    "listTitle": "Notes",
+    "empty": "No notes in this view yet.",
+    "unknownCommittee": "Committee",
+    "allCommittees": "All committees",
+    "selectEventFirst": "Select an active conference event to view notes.",
+    "enterConferenceCode": "Enter conference code",
+    "tabs": {
+      "addressed": "To my account",
+      "fromChairs": "From chairs",
+      "byDelegate": "By delegate",
+      "byAdvisor": "To advisors",
+      "allByCommittee": "All chats"
+    },
+    "tabHints": {
+      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
+      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
+      "byDelegate": "Notes authored by delegations (all committees).",
+      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
+    },
+    "composeTitle": "Send a note",
+    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
+    "composeCommitteeLabel": "Committee",
+    "composeLoading": "Loading committee…",
+    "composeNoCommittees": "No delegate committees in this event yet.",
+    "composeFormTitle": "New secretariat note"
+  },
   "delegationNotes": {
     "title": "Catatan delegasi",
     "topicLabel": "Topik",
@@ -1254,6 +1643,10 @@
     "sessionOnlyHint": "Catatan hanya tersedia selama sesi komite aktif.",
     "unmoderatedHint": "Catatan dinonaktifkan selama kaukus tidak dimoderasi.",
     "sendNote": "Kirim catatan",
+    "sendToSelf": "Send test to myself",
+    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
+    "selectSelfRecipient": "Select myself",
+    "selfTestDefaultContent": "Test note to myself",
     "sending": "Mengirim…",
     "sendHelpTitle": "Kirim catatan",
     "sendHelpBody": "Mengirimkan catatan ini ke penerima yang dipilih di atas. Itu tidak mencegah pengiriman; ini hanya memengaruhi cara pembaca diperingatkan/ditandai.",
@@ -1269,41 +1662,6 @@
     "noChairs": "Profil kursi tidak ditemukan.",
     "notesListTitle": "Daftar catatan",
     "noteCount": "{count, plural, other {# catatan}}",
-    "emptyList": "Belum ada catatan.",
-    "forwardedBadge": "(diteruskan)",
-    "readerWarning": "Peringatan pembaca: catatan ini mungkin berisi bahasa yang tidak pantas.",
-    "viewFullNote": "Lihat catatan lengkap",
-    "toLabel": "Ke:",
-    "toEmpty": "—",
-    "star": "Bintang",
-    "starred": "Berbintang",
-    "forwardToSmt": "Teruskan ke SMT",
-    "forwarded": "Diteruskan",
-    "report": "Laporan",
-    "fullNoteTitle": "Catatan lengkap",
-    "fullNoteAria": "Catatan lengkap",
-    "close": "Menutup",
-    "unknownCountry": "Tidak dikenal",
-    "chairFallback": "Kursi",
-    "errors": {
-      "votingProcedure": "Prosedur pemungutan suara aktif: penulisan catatan dinonaktifkan.",
-      "sessionInactive": "Catatan dinonaktifkan selama sesi komite tidak aktif.",
-      "unmoderated": "Catatan dinonaktifkan selama kaukus tidak dimoderasi.",
-      "smtVerify": "Verifikasi dengan kata sandi sekunder staf untuk mengirim catatan ke komite ini.",
-      "emptyContent": "Tulis isi catatannya terlebih dahulu.",
-      "noRecipients": "Pilih setidaknya satu penerima (delegasi atau ketua).",
-      "needAllocation": "Anda memerlukan alokasi untuk mengirim catatan (atau menjadi kursi).",
-      "sendFailed": "Gagal mengirim catatan.",
-      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile."
-    },
-    "forwardToAdvisor": "Teruskan ke {name}",
-    "forwardedToAdvisor": "Diteruskan ke penasihat",
-    "forwardedToAdvisorBadge": "(kepada penasihat)",
-    "advisorFallback": "Penasihat",
-    "sendToSelf": "Send test to myself",
-    "sendToSelfHelp": "Sends a note to your own account and triggers a notification banner (for testing).",
-    "selectSelfRecipient": "Select myself",
-    "selfTestDefaultContent": "Test note to myself",
     "threadCount": "{count, plural, one {# chat} other {# chats}}",
     "messagesInThread": "{count, plural, one {# message} other {# messages}}",
     "messageCount": "{count} messages",
@@ -1317,7 +1675,22 @@
     "saveChatName": "Save name",
     "unnamedChat": "Note chat",
     "moderationToolbarLabel": "Chair & secretariat actions",
+    "emptyList": "Belum ada catatan.",
+    "forwardedBadge": "(diteruskan)",
+    "readerWarning": "Peringatan pembaca: catatan ini mungkin berisi bahasa yang tidak pantas.",
+    "viewFullNote": "Lihat catatan lengkap",
     "fromLabel": "From:",
+    "toLabel": "Ke:",
+    "toEmpty": "—",
+    "star": "Bintang",
+    "starred": "Berbintang",
+    "forwardToSmt": "Teruskan ke SMT",
+    "forwardToAdvisor": "Teruskan ke {name}",
+    "forwardedToAdvisor": "Diteruskan ke penasihat",
+    "forwardedToAdvisorBadge": "(kepada penasihat)",
+    "advisorFallback": "Penasihat",
+    "forwarded": "Diteruskan",
+    "report": "Laporan",
     "moderation": {
       "queueTitle": "Note review queue",
       "queueDescription": "Held notes are hidden from recipients until you approve them. Rejected notes stay visible to the sender and chairs only.",
@@ -1341,6 +1714,22 @@
         "reported": "chair report",
         "unknown": "moderation policy"
       }
+    },
+    "fullNoteTitle": "Catatan lengkap",
+    "fullNoteAria": "Catatan lengkap",
+    "close": "Menutup",
+    "unknownCountry": "Tidak dikenal",
+    "chairFallback": "Kursi",
+    "errors": {
+      "votingProcedure": "Prosedur pemungutan suara aktif: penulisan catatan dinonaktifkan.",
+      "sessionInactive": "Catatan dinonaktifkan selama sesi komite tidak aktif.",
+      "unmoderated": "Catatan dinonaktifkan selama kaukus tidak dimoderasi.",
+      "smtVerify": "Verifikasi dengan kata sandi sekunder staf untuk mengirim catatan ke komite ini.",
+      "emptyContent": "Tulis isi catatannya terlebih dahulu.",
+      "noRecipients": "Pilih setidaknya satu penerima (delegasi atau ketua).",
+      "needAllocation": "Anda memerlukan alokasi untuk mengirim catatan (atau menjadi kursi).",
+      "selfRecipientUnavailable": "Could not target your account — link an allocation or use a staff profile.",
+      "sendFailed": "Gagal mengirim catatan."
     }
   },
   "adminPage": {
@@ -1476,23 +1865,43 @@
       "unauthorized": "Tidak sah.",
       "codeSaved": "Kode disimpan. Delegasi menggunakannya sebagai gerbang kedua setelah kode konferensi.",
       "invalidEmail": "Masukkan alamat email yang valid.",
+      "missingChairRole": "Pilih kursi mimbar dan panitia untuk undangan ini.",
+      "invalidChairRole": "Kursi mimbar tersebut tidak sesuai dengan rencana ketua panitia ini.",
+      "daisSeatRowMissing": "Tidak dapat menemukan baris {seat} untuk komite tersebut. Coba simpan matriks alokasi untuk acara tersebut, lalu coba lagi.",
+      "daisSeatAlreadyFilled": "Kursi mimbar itu sudah ada kursinya. Batalkan penetapan orang saat ini dalam matriks alokasi (atau alat lain) terlebih dahulu.",
+      "seatHeadChair": "Ketua Ketua",
+      "seatCoChair": "Ketua bersama",
       "onlySmtInviteChair": "Hanya sekretariat yang dapat mengirimkan undangan ketua.",
       "missingServiceRoleKey": "Server tidak memiliki SUPABASE_SERVICE_ROLE_KEY. Tambahkan ke env penerapan (jangan pernah diekspos ke browser).",
       "missingPublicAppUrl": "Tetapkan NEXT_PUBLIC_APP_URL ke URL situs publik Anda (misalnya https://your-app.vercel.app) sehingga tautan undangan dialihkan dengan benar.",
       "emailAlreadyHasAccount": "Email itu sudah memiliki akun. Gunakan \"Berikan peran ketua\" di bawah daripada mengirim undangan lain.",
       "inviteSentButRoleSetFailed": "Undangan terkirim, namun tidak dapat menetapkan peran ketua di profil: {error}. Gunakan \"Berikan peran ketua\" setelah mereka menerimanya.",
+      "inviteSentButAllocationFailed": "Undangan terkirim dan set peran ketua, tetapi kursi mimbar tidak dapat dihubungkan: {error}. Perbaiki matriks alokasi atau hubungi dukungan.",
       "inviteSentSuccess": "Email undangan dikirim ke {email}. Mereka akan menjadi kursi setelah mereka menetapkan kata sandinya.",
+      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
       "onlySmtGrantChair": "Hanya sekretariat yang dapat memberikan peran ketua.",
       "noAccountForEmail": "Belum ada akun dengan email itu. Kirim undangan kursi terlebih dahulu.",
-      "promotedToChairSuccess": "Profil untuk {email} sekarang menjadi kursi mimbar.",
-      "missingChairRole": "Pilih kursi mimbar dan panitia untuk undangan ini.",
-      "daisSeatRowMissing": "Tidak dapat menemukan baris {seat} untuk komite tersebut. Coba simpan matriks alokasi untuk acara tersebut, lalu coba lagi.",
-      "daisSeatAlreadyFilled": "Kursi mimbar itu sudah ada kursinya. Batalkan penetapan orang saat ini dalam matriks alokasi (atau alat lain) terlebih dahulu.",
-      "seatHeadChair": "Ketua Ketua",
-      "seatCoChair": "Ketua bersama",
-      "inviteSentButAllocationFailed": "Undangan terkirim dan set peran ketua, tetapi kursi mimbar tidak dapat dihubungkan: {error}. Perbaiki matriks alokasi atau hubungi dukungan.",
-      "inviteSentSuccessAssigned": "Invite sent to {email}. They are {seat} for {committee} and can open chair tools after they set their password.",
-      "invalidChairRole": "Kursi mimbar tersebut tidak sesuai dengan rencana ketua panitia ini."
+      "promotedToChairSuccess": "Profil untuk {email} sekarang menjadi kursi mimbar."
+    },
+    "advisorStaff": {
+      "notSignedIn": "Tidak masuk.",
+      "onlySmt": "Hanya sekretariat atau admin situs web yang dapat mengelola penasihat.",
+      "unauthorized": "Tidak sah.",
+      "invalidEmail": "Masukkan alamat email yang valid.",
+      "missingServiceRole": "Server tidak memiliki SUPABASE_SERVICE_ROLE_KEY.",
+      "missingAppUrl": "Setel NEXT_PUBLIC_APP_URL untuk tautan pengalihan undangan.",
+      "emailAlreadyRegistered": "Email itu sudah memiliki akun. Tetapkan peran mereka menjadi penasihat di admin, lalu tetapkan delegasi.",
+      "inviteRoleFailed": "Undangan terkirim tetapi tidak dapat menetapkan peran penasihat: {message}",
+      "inviteSent": "Undangan dikirim ke {email}. Mereka akan menjadi penasihat setelah mengatur kata sandi mereka.",
+      "invalidAdvisorEmail": "Masukkan email penasihat.",
+      "missingDelegate": "Pilih kursi delegasi.",
+      "invalidAllocationId": "Masukkan UUID alokasi yang valid.",
+      "advisorNotFound": "Tidak ditemukan akun untuk email penasihat tersebut.",
+      "notAdvisorRole": "Pengguna itu bukan penasihat. Undang mereka atau tetapkan peran sebagai penasihat terlebih dahulu.",
+      "delegateNotFound": "Kursi delegasi tidak ditemukan.",
+      "delegateUnlinked": "Kursi tersebut belum memiliki akun delegasi yang tertaut.",
+      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned).",
+      "assigned": "Penasihat yang ditugaskan untuk {country}."
     },
     "allocationSignup": {
       "mustBeSignedIn": "Anda harus masuk.",
@@ -1510,26 +1919,6 @@
       "emailSubject": "Ekspor material InterMUN ({range})",
       "emailSendConfigHint": "Setel SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS dan opsional MATERIALS_EXPORT_FROM di server.",
       "exportEmailedTo": "Ekspor dikirim melalui email ke {email}. Jika Anda tidak melihatnya, periksa spam/sampah."
-    },
-    "advisorStaff": {
-      "notSignedIn": "Tidak masuk.",
-      "onlySmt": "Hanya sekretariat atau admin situs web yang dapat mengelola penasihat.",
-      "unauthorized": "Tidak sah.",
-      "invalidEmail": "Masukkan alamat email yang valid.",
-      "missingServiceRole": "Server tidak memiliki SUPABASE_SERVICE_ROLE_KEY.",
-      "missingAppUrl": "Setel NEXT_PUBLIC_APP_URL untuk tautan pengalihan undangan.",
-      "emailAlreadyRegistered": "Email itu sudah memiliki akun. Tetapkan peran mereka menjadi penasihat di admin, lalu tetapkan delegasi.",
-      "inviteRoleFailed": "Undangan terkirim tetapi tidak dapat menetapkan peran penasihat: {message}",
-      "inviteSent": "Undangan dikirim ke {email}. Mereka akan menjadi penasihat setelah mengatur kata sandi mereka.",
-      "invalidAdvisorEmail": "Masukkan email penasihat.",
-      "missingDelegate": "Pilih kursi delegasi.",
-      "advisorNotFound": "Tidak ditemukan akun untuk email penasihat tersebut.",
-      "notAdvisorRole": "Pengguna itu bukan penasihat. Undang mereka atau tetapkan peran sebagai penasihat terlebih dahulu.",
-      "delegateNotFound": "Kursi delegasi tidak ditemukan.",
-      "delegateUnlinked": "Kursi tersebut belum memiliki akun delegasi yang tertaut.",
-      "assigned": "Penasihat yang ditugaskan untuk {country}.",
-      "invalidAllocationId": "Masukkan UUID alokasi yang valid.",
-      "notDelegateSeat": "That allocation is not linked to a delegate account (chair, SMT, or other roles cannot be assigned)."
     }
   },
   "emails": {
@@ -1554,6 +1943,7 @@
     "selectConferenceFirst": "Pilih konferensi dengan gerbang acara terlebih dahulu, lalu kembali ke sini.",
     "committeeSessionsTitle": "Sesi panitia dalam acara ini",
     "committeeSessionsBody": "Setiap kartu memiliki satu ruang: label pendek, nama resmi, logo, hingga dua topik agenda, tautan RoP, kode ruang enam karakter bersama (gerbang kedua), dan profil prosedur. Kode ruangan harus tetap unik di seluruh ruangan dalam acara ini.",
+    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
     "noCommitteeSessions": "Tidak ada sesi panitia untuk acara ini.",
     "eventName": "Nama acara",
     "tagline": "Slogan",
@@ -1568,8 +1958,22 @@
     "errorUploadFailed": "Gagal mengunggah.",
     "sessionTitle": "Judul sesi",
     "chamberLabel": "Ruang / label",
+    "committeeLabelShort": "Label panitia",
+    "committeeLabelPlaceholder": "misalnya ECOSOC, DISEC, INTERPOL",
     "officialCommitteeName": "Nama resmi panitia (jaringan SMT)",
+    "officialCommitteeNameGrid": "Nama resmi panitia",
     "officialCommitteeNamePlaceholder": "misalnya Organisasi Kesehatan Dunia",
+    "topic1Label": "Topik 1",
+    "topic2Label": "Topik 2 (opsional)",
+    "topic2Placeholder": "Pertanyaan agenda kedua",
+    "topic2DisabledHint": "Tambahkan baris topik kedua untuk mengedit bidang ini.",
+    "addSecondTopic": "Tambahkan topik kedua",
+    "addingTopic": "Menambahkan…",
+    "ropDocumentLink": "Aturan prosedur (tautan dokumen)",
+    "ropDocumentPlaceholder": "https://…",
+    "roomCodeLabel": "Kode kamar (gerbang kedua)",
+    "roomCodeHelpPrefix": "Enam huruf atau angka, dibagikan untuk ruangan ini (saran:",
+    "roomCodeHelpSuffix": ").",
     "chairNames": "Nama kursi",
     "chairNamesPlaceholder": "Dipisahkan koma, mis. Alex Kim, Jordan Lee",
     "committeeLogo": "Logo panitia",
@@ -1595,26 +1999,12 @@
     "committeeCodePlaceholder": "misalnya ECO741",
     "committeeCodeHelpPrefix": "Enam karakter: inisial kamar + tiga digit (saran deterministik:",
     "saveCommittee": "Simpan panitia",
-    "committeeSessionsGroupHeading": "{chamber} — {count, plural, one {# topic} other {# topics}}",
-    "committeeLabelShort": "Label panitia",
-    "committeeLabelPlaceholder": "misalnya ECOSOC, DISEC, INTERPOL",
-    "officialCommitteeNameGrid": "Nama resmi panitia",
-    "topic1Label": "Topik 1",
-    "topic2Label": "Topik 2 (opsional)",
-    "topic2Placeholder": "Pertanyaan agenda kedua",
-    "topic2DisabledHint": "Tambahkan baris topik kedua untuk mengedit bidang ini.",
-    "addSecondTopic": "Tambahkan topik kedua",
-    "addingTopic": "Menambahkan…",
-    "ropDocumentLink": "Aturan prosedur (tautan dokumen)",
-    "ropDocumentPlaceholder": "https://…",
-    "roomCodeLabel": "Kode kamar (gerbang kedua)",
-    "roomCodeHelpPrefix": "Enam huruf atau angka, dibagikan untuk ruangan ini (saran:",
-    "roomCodeHelpSuffix": ").",
     "schedule": {
       "title": "Jadwal konferensi dua hari",
       "subtitle": "Rencanakan blok per grup delegasi (grup yang sama yang Anda gunakan untuk mengelompokkan komite). Warnai berdasarkan jenis blok: sesi, istirahat, atau upacara. Tandai makan siang untuk pemeriksaan yang tumpang tindih. Disimpan dengan acara aktif.",
       "day1Tab": "hari 1",
       "day2Tab": "hari ke-2",
+      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating.",
       "lunchOverlapTab": "Makan siang tumpang tindih",
       "lunchOverlapHelp": "Tumpang tindih muncul ketika dua kelompok sama-sama mempunyai baris yang ditandai sebagai makan siang pada hari yang sama dan rentang waktunya berpotongan.",
       "noLunchOverlaps": "Tidak ada makan siang yang tumpang tindih yang terdeteksi. Tandai setidaknya satu baris sebagai makan siang dalam dua kelompok berbeda pada hari yang sama dengan waktu yang tumpang tindih.",
@@ -1651,6 +2041,19 @@
       "saved": "Jadwal disimpan.",
       "resetTemplate": "Setel ulang ke templat",
       "confirmReset": "Setel ulang jadwal ke tiga grup default dan hapus semua blok?",
+      "lunchOverlap": {
+        "title": "Makan siangnya tumpang tindih dengan panitia lain",
+        "body": "Bandingkan waktu makan siang komite Anda dengan maksimal {max} komite lainnya. Pilih hari, lalu pilih panitia di bawah.",
+        "pickCommittees": "Bandingkan dengan",
+        "noneSelected": "Pilih satu atau lebih komite untuk melihat notulensi makan siang bersama.",
+        "yourLunch": "Makan siangmu",
+        "theirLunch": "Makan siang mereka",
+        "combinedWindow": "{start}–{end} (eat + chill)",
+        "eatingWindow": "Eat {start}–{end}",
+        "chillingWindow": "Chill {start}–{end}",
+        "overlap": "Makan siang bersama: {start}–{end} ({minutes} mnt)",
+        "noOverlap": "Tidak ada waktu makan siang bersama pada hari ini."
+      },
       "seamunLocked": {
         "title": "SEAMUN I 2027 — jadwal visual resmi",
         "body": "Rencana dua hari ini bersifat tetap untuk SEAMUN I 2027. Sesuai dengan jadwal induk yang dipublikasikan dan tidak dapat diubah di aplikasi (termasuk oleh sekretariat).",
@@ -1671,42 +2074,25 @@
         "committeeMatrixHint": "Setiap ruang mengikuti jam Hari 1 / Hari 2 dari jalurnya (kolom dengan nama grup yang sama pada bagan di atas).",
         "colScheduleTrack": "Jadwalkan trek",
         "colChambers": "Chambers (label dalam acara ini)",
-        "advisorHint": "Ketuk tim, lalu lihat jadwal penasihat (A–D) atau jadwal delegasi/ketua untuk satu komite — jangan keduanya sekaligus.",
-        "advisorOnlyHint": "Pilih jalur jadwal Anda, lalu penasihat A–D untuk melihat hari penasihat itu.",
-        "committeeOnlyHint": "Jadwal resmi komite Anda. Di bawah ini, bandingkan waktu makan siang dengan panitia lainnya.",
-        "pickTrack": "Jadwalkan trek:",
-        "viewAllTeams": "Semua tim",
-        "orPickTeam": "atau tim:",
-        "viewAs": "Lihat sebagai",
-        "modeAdvisor": "Penasihat",
-        "modeCommittee": "Panitia (delegasi/ketua)",
-        "pickAdvisor": "Penasihat",
-        "pickCommittee": "Komite",
-        "selectAdvisorPrompt": "Pilih penasihat A, B, C, atau D untuk melihat jadwal tersebut.",
-        "selectCommitteePrompt": "Pilih komite Anda untuk melihat jadwal delegasi/ketua.",
-        "teamShort": {
-          "g1": "Alfa",
-          "g2": "Beta",
-          "g3": "Gamma",
-          "g4": "Delta",
-          "support": "epsilon"
-        },
+        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
+        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
+        "colLunchGroup": "Lunch group",
         "smtBrowseHint": "Pilih semua tim (pilih grup), satu jadwal komite, atau jadwal penasihat — setiap tampilan terpisah.",
         "browseTeams": "Semua tim",
         "browseCommittee": "Oleh panitia",
         "browseAdvisor": "Oleh penasihat",
         "teamsScopeAll": "Ikhtisar (semua grup)",
-        "pickGroup": "Kelompok:",
-        "pickCommitteeAll": "Komite:",
-        "lunchGroupsMatrixTitle": "Lunch groups (mixed committees)",
-        "lunchGroupsMatrixHint": "Three cohorts share the same eat and chill window so delegates from different chambers can meet. Session blocks stay on each chamber’s debate track.",
-        "colLunchGroup": "Lunch group",
         "pickDebateTrack": "Debate track:",
         "pickLunchGroup": "Lunch group:",
+        "pickCommitteeAll": "Komite:",
+        "advisorOnlyHint": "Pilih jalur jadwal Anda, lalu penasihat A–D untuk melihat hari penasihat itu.",
         "advisorRosterHint": "Twenty advisors in three lunch cohorts (not linked to committees). Pick a roster number; partners alternate chamber rotation vs the advisor / sensory room each block.",
         "advisorRosterMember": "Advisor {n}",
         "advisorRosterColumn": "Advisor {n}",
+        "selectAdvisorPrompt": "Pilih penasihat A, B, C, atau D untuk melihat jadwal tersebut.",
+        "committeeOnlyHint": "Jadwal resmi komite Anda. Di bawah ini, bandingkan waktu makan siang dengan panitia lainnya.",
         "advisorColumnSuffix": "Advisor",
+        "selectCommitteePrompt": "Pilih komite Anda untuk melihat jadwal delegasi/ketua.",
         "lunchGroupTitle": {
           "l1": "Lunch group 1",
           "l2": "Lunch group 2",
@@ -1716,22 +2102,13 @@
           "l1": "Lunch 1",
           "l2": "Lunch 2",
           "l3": "Lunch 3"
+        },
+        "teamShort": {
+          "g1": "Alfa",
+          "g2": "Beta",
+          "g3": "Gamma"
         }
-      },
-      "lunchOverlap": {
-        "title": "Makan siangnya tumpang tindih dengan panitia lain",
-        "body": "Bandingkan waktu makan siang komite Anda dengan maksimal {max} komite lainnya. Pilih hari, lalu pilih panitia di bawah.",
-        "pickCommittees": "Bandingkan dengan",
-        "noneSelected": "Pilih satu atau lebih komite untuk melihat notulensi makan siang bersama.",
-        "yourLunch": "Makan siangmu",
-        "theirLunch": "Makan siang mereka",
-        "overlap": "Makan siang bersama: {start}–{end} ({minutes} mnt)",
-        "noOverlap": "Tidak ada waktu makan siang bersama pada hari ini.",
-        "combinedWindow": "{start}–{end} (eat + chill)",
-        "eatingWindow": "Eat {start}–{end}",
-        "chillingWindow": "Chill {start}–{end}"
-      },
-      "canteenLeaveNotice": "You must leave the canteen as soon as you have finished eating."
+      }
     }
   },
   "allocationMatrixManager": {
@@ -1756,6 +2133,7 @@
     "rosterHeading": "Daftar pemain · {heading}",
     "seatsSummary": "{count} kursi.",
     "linkedDelegatesCannotBeDeleted": "Delegasi yang tertaut tidak dapat dihapus di sini.",
+    "secretariatParliamentarianSeat": "Anggota Parlemen · Kursi {seat}",
     "countryPosition": "Negara / posisi",
     "placardCode": "Kode plakat",
     "assignedAccount": "Akun yang ditugaskan",
@@ -1785,8 +2163,36 @@
     "csvPlaceholder": "Prancis,DIS-001\\nJerman,DIS-002\\nJepang",
     "parsedRowsSample": "Mengurai {count} baris. Mencicipi:",
     "runImport": "Jalankan impor",
-    "generateMissingRandomCodes": "Hasilkan kode acak yang hilang",
-    "secretariatParliamentarianSeat": "Anggota Parlemen · Kursi {seat}"
+    "generateMissingRandomCodes": "Hasilkan kode acak yang hilang"
+  },
+  "chairAllocationMatrixPage": {
+    "intro": "Matriks alokasi komite untuk sesi Anda saat ini. Ini hanya dapat dibaca untuk kursi dan mencerminkan penetapan kursi aktif serta kode plakat.",
+    "separator": "—",
+    "dash": "—",
+    "columns": {
+      "allocation": "Alokasi",
+      "flag": "Bendera",
+      "email": "E-mail",
+      "name": "Nama",
+      "grade": "Nilai",
+      "notes": "Catatan",
+      "requestedAllocation": "Alokasi yang diminta",
+      "account": "Akun",
+      "actions": "Tindakan"
+    },
+    "noRows": "Tidak ditemukan baris alokasi untuk komite ini.",
+    "pendingApprovalsTitle": "Menunggu persetujuan pendaftaran",
+    "pendingApprovalsIntro": "Ketua menyetujui atau menolak pendaftaran tautan alokasi untuk memastikan delegasi menggunakan akun yang benar.",
+    "noPendingRequests": "Tidak ada permintaan yang tertunda.",
+    "unknownAllocation": "Alokasi tidak diketahui",
+    "approve": "Menyetujui",
+    "reject": "Menolak"
+  },
+  "smtAllocationMatrixPage": {
+    "title": "Matriks alokasi",
+    "selectConferenceEventFirst": "Pilih acara konferensi terlebih dahulu.",
+    "enterConferenceCode": "Masukkan kode konferensi",
+    "intro": "Buat atau impor daftar kursi untuk setiap komite dalam acara aktif. Delegasi memilih barisan mereka di gerbang panitia setelah masuk; kode plakat bisa cocok dengan ID spreadsheet Anda."
   },
   "chairAwardsPage": {
     "committeeLabel": "Komite",
@@ -1843,6 +2249,54 @@
       }
     }
   },
+  "chairAwardsDelegateMatrix": {
+    "title": "Setiap delegasi — rubrik sesi (wajib)",
+    "intro": "Enam dimensi yang sama dengan nominasi Delegasi Terbaik panitia. Anda harus menilai <strong>setiap delegasi yang duduk</strong> sebelum mengirimkan nominasi ke SMT ({completeCount}/{total} selesai).",
+    "complete": "Menyelesaikan",
+    "incomplete": "Tidak lengkap",
+    "saving": "Penghematan...",
+    "saveThisDelegate": "Simpan delegasi ini",
+    "autosaved": "Disimpan otomatis",
+    "autosaveFailed": "Penyimpanan otomatis gagal",
+    "autosavedWithCountry": "Tersimpan otomatis — {negara}",
+    "delegateFallback": "melimpahkan",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
+  },
+  "chairAwardsFloorActivity": {
+    "title": "Floor activity",
+    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
+    "motionsTitle": "Motions",
+    "pointsTitle": "Points",
+    "resolutionsTitle": "Resolutions",
+    "noMotions": "No motions recorded for this delegate.",
+    "noPoints": "No points recorded for this delegate.",
+    "noResolutions": "No resolution involvement recorded for this delegate.",
+    "untitledMotion": "Untitled motion",
+    "chairLoggedPoint": "Chair-logged point",
+    "resolutionLink": "Open Google Doc",
+    "resolutionNoLink": "No document link",
+    "pointKinds": {
+      "session": "Procedural",
+      "delegate": "Chair log"
+    },
+    "resolutionRoles": {
+      "main": "Main submitter",
+      "co": "Co-submitter",
+      "signatory": "Signatory"
+    }
+  },
   "chairOverviewPage": {
     "fallbackYourCommittee": "komite Anda",
     "fallbackCommittee": "Komite",
@@ -1873,6 +2327,10 @@
       "session": {
         "label": "Sidang",
         "hint": "Mulai/hentikan sesi komite (stempel waktu)"
+      },
+      "agenda": {
+        "label": "Agenda",
+        "hint": "Topik langsung & total suara per item agenda"
       },
       "speakers": {
         "label": "Pembicara",
@@ -1929,14 +2387,39 @@
       "committeeRoomFull": {
         "label": "Ruang panitia (penuh)",
         "hint": "Tata letak virtual & lantai delegasi"
-      },
-      "agenda": {
-        "label": "Agenda",
-        "hint": "Topik langsung & total suara per item agenda"
       }
     }
   },
   "awardsRubric": {
+    "maxPoints": "Maksimum {poin} poin",
+    "reference": {
+      "title": "Rubrik penghargaan resmi SEAMUN I",
+      "description": "Salinan referensi: jenis penghargaan, proses evaluasi, dan matriks pita 1-8 lengkap (dari rubrik konferensi). Penilaian di InterMUN menggunakan kunci kriteria yang sama dengan pengajuan nominasi."
+    },
+    "sections": {
+      "catalogue": "Katalog penghargaan",
+      "processOversight": "Proses penghargaan dan pengawasan",
+      "calibrationTraining": "Kalibrasi dan pelatihan kursi (skala 1-8)"
+    },
+    "headings": {
+      "conferenceWideOverall": "Seluruh konferensi (secara keseluruhan)",
+      "collectiveChair": "Kolektif dan kursi",
+      "committeeLevel": "Tingkat komite"
+    },
+    "matrices": {
+      "positionPaper": "Kertas Posisi (Kertas Posisi Terbaik)",
+      "delegateLiveSessions": "Delegasi (sesi langsung)",
+      "chairPerformance": "Kinerja kursi",
+      "chairReportOverall": "Laporan ketua - secara keseluruhan",
+      "chairReportSectionSpecific": "Laporan ketua - khusus bagian",
+      "bestCommittee": "Panitia terbaik"
+    },
+    "evidenceNote": "Memberikan bukti lengkap dan konfirmasi tertulis untuk catatan SMT: bukti utama keunggulan dan pembenaran vs runner-up (per formulir yang diterbitkan).",
+    "footnotes": {
+      "delegateLiveSessions": "Kreativitas, diplomasi, kolaborasi, kepemimpinan, pengetahuan dan penelitian, partisipasi - masing-masing 8 poin.",
+      "chairPerformance": "Delapan dimensi diberi skor masing-masing 8 poin untuk penyelarasan evaluasi Kursi/kursi Terbaik.",
+      "chairReportSectionSpecific": "Dikombinasikan dengan bagian keseluruhan di atas untuk total skor laporan ketua hingga 72 pada skala yang diperluas dalam dokumen resmi."
+    },
     "criteriaHeader": "Kriteria",
     "bandHeaders": {
       "0": "Awal",
@@ -2237,216 +2720,7 @@
           "3": "Sinergi yang mulus; mimbar menginspirasi lingkungan profesional dan berisiko tinggi."
         }
       }
-    },
-    "maxPoints": "Maksimum {poin} poin",
-    "reference": {
-      "title": "Rubrik penghargaan resmi SEAMUN I",
-      "description": "Salinan referensi: jenis penghargaan, proses evaluasi, dan matriks pita 1-8 lengkap (dari rubrik konferensi). Penilaian di InterMUN menggunakan kunci kriteria yang sama dengan pengajuan nominasi."
-    },
-    "sections": {
-      "catalogue": "Katalog penghargaan",
-      "processOversight": "Proses penghargaan dan pengawasan",
-      "calibrationTraining": "Kalibrasi dan pelatihan kursi (skala 1-8)"
-    },
-    "headings": {
-      "conferenceWideOverall": "Seluruh konferensi (secara keseluruhan)",
-      "collectiveChair": "Kolektif dan kursi",
-      "committeeLevel": "Tingkat komite"
-    },
-    "matrices": {
-      "positionPaper": "Kertas Posisi (Kertas Posisi Terbaik)",
-      "delegateLiveSessions": "Delegasi (sesi langsung)",
-      "chairPerformance": "Kinerja kursi",
-      "chairReportOverall": "Laporan ketua - secara keseluruhan",
-      "chairReportSectionSpecific": "Laporan ketua - khusus bagian",
-      "bestCommittee": "Panitia terbaik"
-    },
-    "evidenceNote": "Memberikan bukti lengkap dan konfirmasi tertulis untuk catatan SMT: bukti utama keunggulan dan pembenaran vs runner-up (per formulir yang diterbitkan).",
-    "footnotes": {
-      "delegateLiveSessions": "Kreativitas, diplomasi, kolaborasi, kepemimpinan, pengetahuan dan penelitian, partisipasi - masing-masing 8 poin.",
-      "chairPerformance": "Delapan dimensi diberi skor masing-masing 8 poin untuk penyelarasan evaluasi Kursi/kursi Terbaik.",
-      "chairReportSectionSpecific": "Dikombinasikan dengan bagian keseluruhan di atas untuk total skor laporan ketua hingga 72 pada skala yang diperluas dalam dokumen resmi."
     }
-  },
-  "chairChecklists": {
-    "common": {
-      "progressSynced": "{done} / {total} selesai - disinkronkan untuk komite ini",
-      "loading": "Memuat...",
-      "resetChecklist": "Setel ulang daftar periksa"
-    },
-    "prepPage": {
-      "description": "Sebelum konferensi: peraturan, topik, ruangan, materi, dan tim. Disinkronkan untuk seluruh ketua komite ini; reset menghapusnya untuk semua orang.",
-      "crisisHidden": "Item persiapan khusus krisis disembunyikan untuk tipe komite ini."
-    },
-    "flowPage": {
-      "description": "Alur komite yang normal - centang langkah-langkahnya seiring berjalannya waktu. Dibagikan ke seluruh akun kursi dan perangkat; reset dihapus untuk semua orang."
-    },
-    "prep": {
-      "sections": {
-        "rules": {
-          "title": "Aturan & prosedur"
-        },
-        "topic": {
-          "title": "Panitia & topik"
-        },
-        "room": {
-          "title": "Ruangan & teknologi"
-        },
-        "materials": {
-          "title": "Bahan & logistik"
-        },
-        "crisis": {
-          "title": "Krisis (jika ada)"
-        },
-        "team": {
-          "title": "Tim & komunikasi"
-        }
-      },
-      "items": {
-        "rop": "Membaca dan memahami tata tertib panitia",
-        "parliamentary": "Meninjau prosedur parlemen (mosi, poin, pemungutan suara)",
-        "speaking-times": "Konfirmasikan waktu bicara dan batas waktu",
-        "quorum": "Ketahui persyaratan kuorum dan pemungutan suara",
-        "research": "Topik dan latar belakang komite penelitian",
-        "study-guide": "Baca panduan belajar dan dokumen penting",
-        "dashboard-topic": "Tetapkan nama panitia dan topik di dashboard",
-        "agenda": "Mempersiapkan agenda dan alur sesi",
-        "digital-room": "Menyiapkan ruang digital (daftar delegasi, plakat)",
-        "tech-check": "Pemeriksaan teknis: platform, audio, berbagi layar",
-        "backup": "Miliki rencana cadangan jika teknologi gagal",
-        "roll-plan": "Menyiapkan daftar absensi dan kehadiran",
-        "speakers-plan": "Rencanakan manajemen daftar pembicara",
-        "templates": "Siapkan gerakan/poin umum (jika menggunakan template)",
-        "timing": "Konfirmasikan waktu mulai dan istirahat sesi",
-        "crisis-slides": "Tinjau elemen krisis dan perbarui slide",
-        "crisis-cues": "Rencanakan perintah/isyarat pembicara krisis",
-        "crisis-paths": "Mempersiapkan jalur krisis dan fakta",
-        "co-chairs": "Berkoordinasi dengan co-chair mengenai peran",
-        "staff": "Konfirmasikan dukungan dan isyarat staf / mimbar",
-        "delegate-brief": "Mempersiapkan ringkasan untuk delegasi (aturan, waktu)"
-      }
-    },
-    "flow": {
-      "items": {
-        "roll-call": "Panggilan absensi",
-        "open-floor": "Buka lantai (titik & gerakan)",
-        "recognize": "Kenali gerakan",
-        "vote-1": "Beri suara pada mosi",
-        "engage": "Terlibat dalam gerakan yang dipilih atau pindah ke GSL",
-        "open-again": "Buka lantai lagi",
-        "recognize-repeat": "Kenali gerakan (ulangi sesuai kebutuhan)",
-        "vote-2": "Beri suara pada mosi",
-        "cycle": "Lanjutkan siklus (aktifkan gerakan / GSL -> lantai terbuka)"
-      }
-    }
-  },
-  "chairAllocationMatrixPage": {
-    "intro": "Matriks alokasi komite untuk sesi Anda saat ini. Ini hanya dapat dibaca untuk kursi dan mencerminkan penetapan kursi aktif serta kode plakat.",
-    "separator": "—",
-    "dash": "—",
-    "columns": {
-      "allocation": "Alokasi",
-      "flag": "Bendera",
-      "email": "E-mail",
-      "name": "Nama",
-      "grade": "Nilai",
-      "notes": "Catatan",
-      "requestedAllocation": "Alokasi yang diminta",
-      "account": "Akun",
-      "actions": "Tindakan"
-    },
-    "noRows": "Tidak ditemukan baris alokasi untuk komite ini.",
-    "pendingApprovalsTitle": "Menunggu persetujuan pendaftaran",
-    "pendingApprovalsIntro": "Ketua menyetujui atau menolak pendaftaran tautan alokasi untuk memastikan delegasi menggunakan akun yang benar.",
-    "noPendingRequests": "Tidak ada permintaan yang tertunda.",
-    "unknownAllocation": "Alokasi tidak diketahui",
-    "approve": "Menyetujui",
-    "reject": "Menolak"
-  },
-  "smtAllocationMatrixPage": {
-    "title": "Matriks alokasi",
-    "selectConferenceEventFirst": "Pilih acara konferensi terlebih dahulu.",
-    "enterConferenceCode": "Masukkan kode konferensi",
-    "intro": "Buat atau impor daftar kursi untuk setiap komite dalam acara aktif. Delegasi memilih barisan mereka di gerbang panitia setelah masuk; kode plakat bisa cocok dengan ID spreadsheet Anda."
-  },
-  "chairSpeakerQueuePanel": {
-    "dash": "—",
-    "speakerList": "Daftar pembicara",
-    "addedToSpeakerList": "Ditambahkan ke daftar pembicara.",
-    "chooseDelegationsNotAlreadyQueued": "Pilih delegasi yang belum menunggu atau sedang dalam daftar.",
-    "addedSpeakersInOrder": "Menambahkan {count} pembicara dalam urutan daftar komite.",
-    "introPrefix": "Tambahkan delegasi dalam urutan bicara. Delegasi masih dapat menggunakan",
-    "requestToSpeak": "Permintaan untuk berbicara",
-    "introMiddle": "di ruang panitia. Menggunakan",
-    "sessionTimerLink": "Sesi → Pengatur Waktu",
-    "introSuffixPrefix": "untuk waktu per pembicara dan",
-    "advanceSpeaker": "Pembicara tingkat lanjut",
-    "addDelegation": "Tambahkan delegasi",
-    "select": "Memilih…",
-    "add": "Menambahkan",
-    "addSelectedToList": "Tambahkan yang dipilih ke daftar",
-    "dismissReminder": "Tutup pengingat",
-    "moveUp": "Naik",
-    "moveDown": "Pindah ke bawah",
-    "current": "Saat ini",
-    "remove": "Menghapus",
-    "prompt": {
-      "gslTitle": "Daftar Pembicara Umum (GSL)",
-      "moderatedTimerTitle": "Kaukus yang dimoderasi (pengatur waktu per pembicara)",
-      "moderatedPassedTitle": "Kaukus yang dimoderasi telah berlalu",
-      "bodyPrefix": "Gunakan daftar pembicara di bawah ini untuk",
-      "add": "menambahkan",
-      "bodyAddMiddle": "delegasi (tarik-turun +",
-      "bodyAddMiddle2": ", atau centang delegasi dan",
-      "bodyRemovePrefix": ") Dan",
-      "remove": "menghapus",
-      "bodyRemoveMiddle": "mereka dengan",
-      "bodyRowSuffix": "pada setiap baris. Susun ulang dengan panah atau set",
-      "bodyEnd": "ketika seseorang berada di depan mikrofon.",
-      "noAllocations": "Belum ada alokasi yang dimuat untuk komite ini. Tutup jika sudah siap—Anda dapat menambahkan speaker nanti dari kontrol daftar.",
-      "quickAdd": "Tambah cepat (belum menunggu atau terkini)",
-      "alreadyQueued": "Setiap alokasi sudah memiliki slot tunggu atau slot saat ini. Hapus entri jika Anda perlu menyusun ulang, atau tutup setelah selesai."
-    },
-    "status": {
-      "current": "saat ini",
-      "waiting": "menunggu"
-    }
-  },
-  "timersWidget": {
-    "timer": "pengatur waktu",
-    "currentSpeaker": "Pembicara saat ini",
-    "nextSpeaker": "Pembicara berikutnya",
-    "speakerTimePerSpeaker": "Waktu pembicara (kiri / tutup)",
-    "speakerTimeTotal": "Waktu pembicara (kiri / total)",
-    "perSpeaker": "(per pembicara)",
-    "paused": "(dijeda)",
-    "pauseReason": "Jeda: {alasan}",
-    "dash": "—"
-  },
-  "chairAwardsDelegateMatrix": {
-    "title": "Setiap delegasi — rubrik sesi (wajib)",
-    "intro": "Enam dimensi yang sama dengan nominasi Delegasi Terbaik panitia. Anda harus menilai <strong>setiap delegasi yang duduk</strong> sebelum mengirimkan nominasi ke SMT ({completeCount}/{total} selesai).",
-    "complete": "Menyelesaikan",
-    "incomplete": "Tidak lengkap",
-    "saving": "Penghematan...",
-    "saveThisDelegate": "Simpan delegasi ini",
-    "autosaved": "Disimpan otomatis",
-    "autosaveFailed": "Penyimpanan otomatis gagal",
-    "autosavedWithCountry": "Tersimpan otomatis — {negara}",
-    "delegateFallback": "melimpahkan",
-    "modeSwitchLabel": "Scoring layout",
-    "modeList": "List",
-    "modeGuided": "Guided",
-    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
-    "guidedProgress": "Delegate {current} of {total}",
-    "guidedComplete": "{completeCount}/{total} scored",
-    "previous": "Back",
-    "saveAndNext": "Save & next",
-    "nextUnscored": "Next unscored",
-    "finish": "Finish",
-    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
-    "allScoredTitle": "All delegates scored",
-    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "Tambahkan sumber",
@@ -2589,6 +2863,7 @@
     "preliminaryPassing": "Lolos (pendahuluan)",
     "preliminaryFailing": "Gagal (pendahuluan)",
     "delegateRollCall": "Delegasi absensi ({count})",
+    "unseatedPlacard": "Kursi terbuka (belum ada delegasi yang ditugaskan)",
     "noSeatedDelegates": "Tidak ada delegasi duduk yang tersedia untuk mosi ini.",
     "rollPrefix": "Gulungan:",
     "recordedPrefix": "Tercatat:",
@@ -2607,6 +2882,13 @@
     "recentClosedMotions": "Gerakan tertutup baru-baru ini",
     "noClosedMotions": "Belum ada gerakan tertutup.",
     "untitled": "Tanpa judul",
+    "agendaVoteSection": "Pemungutan suara agenda",
+    "agendaVoteSectionHelp": "Surat suara yang menentukan agenda ditetapkan berdasarkan dua pertiga mayoritas. Untuk setiap plakat, catat Ya, Abstain (jika roll memungkinkan), atau Tidak. Abstain dinonaktifkan untuk delegasi yang ditandai hadir dan memberikan suara pada roll. Aliran ini terpisah dari gerakan formal di bawah ini.",
+    "recordVoteChoice": "Rekam suara",
+    "chairRecordVotesHint": "Untuk setiap delegasi yang duduk, ketuk Ya, Abstain (bila tersedia), Tidak, atau Hapus. Abstain mengikuti aturan roll; itu dinonaktifkan untuk presentasi dan pemungutan suara.",
+    "abstainNotApplicableMotionType": "Abstain tidak dicatat untuk jenis mosi ini (hanya Ya/Tidak).",
+    "abstainDisabledPresentVotingRoll": "Abstain tidak berlaku bagi delegasi yang ditandai hadir dan memberikan suara dalam daftar.",
+    "closeAgendaBallot": "Tutup agenda pemungutan suara",
     "voteTypes": {
       "motion": "Gerakan",
       "amendment": "Amandemen",
@@ -2618,55 +2900,9 @@
       "present_abstain": "Hadir — mungkin abstain (berguling)",
       "present_voting": "Presentasi dan pemungutan suara (roll)",
       "unknown": "— (berguling)"
-    },
-    "unseatedPlacard": "Kursi terbuka (belum ada delegasi yang ditugaskan)",
-    "agendaVoteSection": "Pemungutan suara agenda",
-    "agendaVoteSectionHelp": "Surat suara yang menentukan agenda ditetapkan berdasarkan dua pertiga mayoritas. Untuk setiap plakat, catat Ya, Abstain (jika roll memungkinkan), atau Tidak. Abstain dinonaktifkan untuk delegasi yang ditandai hadir dan memberikan suara pada roll. Aliran ini terpisah dari gerakan formal di bawah ini.",
-    "closeAgendaBallot": "Tutup agenda pemungutan suara",
-    "recordVoteChoice": "Rekam suara",
-    "chairRecordVotesHint": "Untuk setiap delegasi yang duduk, ketuk Ya, Abstain (bila tersedia), Tidak, atau Hapus. Abstain mengikuti aturan roll; itu dinonaktifkan untuk presentasi dan pemungutan suara.",
-    "abstainNotApplicableMotionType": "Abstain tidak dicatat untuk jenis mosi ini (hanya Ya/Tidak).",
-    "abstainDisabledPresentVotingRoll": "Abstain tidak berlaku bagi delegasi yang ditandai hadir dan memberikan suara dalam daftar."
+    }
   },
   "profile": {
-    "tabs": {
-      "ariaLabel": "Bagian profil",
-      "overview": "Ringkasan",
-      "awards": "Penghargaan",
-      "private": "Catatan pribadi",
-      "settings": "Pengaturan profil"
-    },
-    "profilePicture": "Foto profil",
-    "uploadFile": "Unggah berkas",
-    "uploading": "Mengunggah…",
-    "photoSaved": "Foto diunggah dan disimpan.",
-    "orUrl": "Atau diatur berdasarkan URL",
-    "urlPlaceholder": "https://...",
-    "name": "Nama",
-    "username": "Nama belakang",
-    "usernamePlaceholder": "misalnya alex_1999",
-    "pronouns": "Kata ganti",
-    "customPronounNote": "Profil Anda memiliki kumpulan kata ganti khusus yang tidak lagi diterima di sini. Pilih opsi di atas (atau biarkan kosong). Menabung menggantikan nilai lama.",
-    "school": "Sekolah",
-    "schoolPlaceholder": "misalnya Sekolah Menengah Lincoln",
-    "grade": "Nilai",
-    "selectGrade": "Pilih kelas",
-    "conferencesAttended": "Konferensi dihadiri",
-    "awardsComma": "Penghargaan (dipisahkan koma)",
-    "awardsPlaceholder": "Delegasi Terbaik, Sebutan Terhormat",
-    "allocation": "Alokasi",
-    "selectAllocation": "Pilih alokasi",
-    "noAllocationsPlaceholder": "Tidak ada alokasi komite yang tersedia",
-    "saveProfile": "Simpan profil",
-    "saved": "Profil disimpan.",
-    "saveFailed": "Tidak dapat menyimpan profil.",
-    "errUsernamePattern": "Nama pengguna harus terdiri dari 3-32 karakter (huruf, angka, _, ., -)",
-    "errPronounsPreset": "Pilih kata ganti dari daftar.",
-    "errImageType": "Silakan pilih file gambar.",
-    "errImageSize": "Gambar terlalu besar (maks 5 MB).",
-    "errUploadFailed": "Gagal mengunggah.",
-    "errStorageSetup": "Penyimpanan gambar profil belum diatur. Di proyek Supabase, jalankan migrasi 00100_profile_pictures_storage_bucket.sql, atau buat bucket penyimpanan publik bernama profile-pictures (lihat README).",
-    "errPublicUrl": "Tidak dapat menyelesaikan URL publik untuk gambar yang diunggah.",
     "fallbacks": {
       "yourCountry": "negaramu",
       "committeeSession": "Sesi Komite",
@@ -2674,6 +2910,13 @@
       "speechNote": "Catatan pidato",
       "untitledMotion": "Gerakan tanpa judul",
       "dash": "—"
+    },
+    "tabs": {
+      "ariaLabel": "Bagian profil",
+      "overview": "Ringkasan",
+      "awards": "Penghargaan",
+      "private": "Catatan pribadi",
+      "settings": "Pengaturan profil"
     },
     "delegateWelcome": {
       "title": "Selamat datang delegasi {flag} {negara}",
@@ -2739,6 +2982,40 @@
       "gradeValue": "Kelas {kelas}",
       "awards": "Penghargaan"
     },
+    "profilePicture": "Foto profil",
+    "uploadFile": "Unggah berkas",
+    "uploading": "Mengunggah…",
+    "photoSaved": "Foto diunggah dan disimpan.",
+    "orUrl": "Atau diatur berdasarkan URL",
+    "urlPlaceholder": "https://...",
+    "name": "Nama",
+    "username": "Nama belakang",
+    "usernamePlaceholder": "misalnya alex_1999",
+    "pronouns": "Kata ganti",
+    "customPronounNote": "Profil Anda memiliki kumpulan kata ganti khusus yang tidak lagi diterima di sini. Pilih opsi di atas (atau biarkan kosong). Menabung menggantikan nilai lama.",
+    "school": "Sekolah",
+    "schoolPlaceholder": "misalnya Sekolah Menengah Lincoln",
+    "grade": "Nilai",
+    "selectGrade": "Pilih kelas",
+    "jobRole": "Peran pekerjaan",
+    "jobRolePlaceholder": "misalnya Direktur MUN, guru (opsional)",
+    "advisorSettingsHint": "Profil staf sekolah — tidak ada alokasi nilai atau delegasi.",
+    "conferencesAttended": "Konferensi dihadiri",
+    "awardsComma": "Penghargaan (dipisahkan koma)",
+    "awardsPlaceholder": "Delegasi Terbaik, Sebutan Terhormat",
+    "allocation": "Alokasi",
+    "selectAllocation": "Pilih alokasi",
+    "noAllocationsPlaceholder": "Tidak ada alokasi komite yang tersedia",
+    "saveProfile": "Simpan profil",
+    "saved": "Profil disimpan.",
+    "saveFailed": "Tidak dapat menyimpan profil.",
+    "errUsernamePattern": "Nama pengguna harus terdiri dari 3-32 karakter (huruf, angka, _, ., -)",
+    "errPronounsPreset": "Pilih kata ganti dari daftar.",
+    "errImageType": "Silakan pilih file gambar.",
+    "errImageSize": "Gambar terlalu besar (maks 5 MB).",
+    "errUploadFailed": "Gagal mengunggah.",
+    "errStorageSetup": "Penyimpanan gambar profil belum diatur. Di proyek Supabase, jalankan migrasi 00100_profile_pictures_storage_bucket.sql, atau buat bucket penyimpanan publik bernama profile-pictures (lihat README).",
+    "errPublicUrl": "Tidak dapat menyelesaikan URL publik untuk gambar yang diunggah.",
     "dashboardCommittee": "Dashboard committee (Head Chair)",
     "dashboardCommitteeSelect": "Pilih panitia…",
     "dashboardCommitteeHelp": "Choose which committee session your chair dashboard and allocation list use. This saves on this browser (like the room gate).",
@@ -2749,10 +3026,7 @@
     "dashboardCommitteeApplySwitch": "Ganti dasbor ke komite ini",
     "timerExpiryAlarmTitle": "Suara pengatur waktu",
     "timerExpiryAlarmLabel": "Mainkan lonceng singkat ketika hitungan mundur dalam aplikasi mencapai nol (pengatur waktu bicara, batas waktu sesi, tenggat waktu hub).",
-    "timerExpiryAlarmHint": "Mati secara default. Disimpan di browser ini saja.",
-    "jobRole": "Peran pekerjaan",
-    "jobRolePlaceholder": "misalnya Direktur MUN, guru (opsional)",
-    "advisorSettingsHint": "Profil staf sekolah — tidak ada alokasi nilai atau delegasi."
+    "timerExpiryAlarmHint": "Mati secara default. Disimpan di browser ini saja."
   },
   "guides": {
     "default": {
@@ -3168,6 +3442,7 @@
       "limitOverBy": "berakhir sebesar {value}",
       "quickLinkSession": "Sidang",
       "quickLinkRoll": "Gulungan",
+      "quickLinkAgenda": "Agenda",
       "quickLinkSpeakers": "Pembicara",
       "quickLinkMotions": "Gerakan",
       "quickLinkTimer": "pengatur waktu",
@@ -3180,8 +3455,7 @@
       "rollCallYou": "Panggilan absensi (Anda)",
       "fullAnnouncement": "Pengumuman lengkap",
       "daisAnnouncement": "Pengumuman Dai",
-      "close": "Menutup",
-      "quickLinkAgenda": "Agenda"
+      "close": "Menutup"
     },
     "committeeControl": {
       "sessionNameLabel": "Nama sesi",
@@ -3227,13 +3501,45 @@
       "startSession": "Mulai sesi",
       "sidebarUsePrefix": "Gunakan bilah sisi untuk",
       "rollCall": "Panggilan absensi",
+      "agenda": "Agenda",
       "speakers": "Pembicara",
       "formalMotions": "Gerakan formal",
       "timer": "pengatur waktu",
       "sidebarAnd": "Dan",
       "announcements": "Pengumuman",
-      "sidebarUseSuffix": "— satu alat per tab.",
-      "agenda": "Agenda"
+      "sidebarUseSuffix": "— satu alat per tab."
+    },
+    "scheduledSessions": {
+      "title": "Scheduled sessions",
+      "subtitle": "One-click start for each committee session on the timetable. Names and time limits are pre-filled from the schedule.",
+      "help": "These presets come from the SEAMUN I 2027 timetable. Pick the day you're on, then press Start to begin that session with its name and length already set. While this page is open you'll be reminded 5 minutes and 1 minute before each session's scheduled start.",
+      "dayLabel": "Day",
+      "day1": "Day 1",
+      "day2": "Day 2",
+      "noSessions": "No scheduled sessions for this day.",
+      "durationLabel": "{minutes} min",
+      "start": "Start",
+      "starting": "Starting…",
+      "startAria": "Start {title} at {start}",
+      "statusLive": "Live now",
+      "statusUpcoming": "Upcoming",
+      "statusStartsIn": "Starts in {minutes} min",
+      "statusStartingNow": "Starting now",
+      "statusPast": "Ended",
+      "startFailed": "Could not start the session. Please try again.",
+      "reminderTitle": "Session starting soon",
+      "reminderTitleResolutions": "Resolutions due soon",
+      "reminderTitleClosing": "Closing ceremony soon",
+      "reminder5Min": "{title} is scheduled to start in 5 minutes ({start}).",
+      "reminder1Min": "{title} is scheduled to start in 1 minute ({start}).",
+      "reminderStartNow": "{title} is scheduled to start now ({start}).",
+      "reminderResolutionsDue": "Resolutions are due in {minutes} minutes (deadline {start}).",
+      "reminderClosing": "Closing ceremony starts in {minutes} minutes ({start}).",
+      "dismissReminder": "Dismiss",
+      "startNow": "Start now",
+      "remindersHint": "Reminders show here while this page is open.",
+      "soundOn": "Reminder sound on",
+      "soundOff": "Reminder sound off"
     },
     "history": {
       "title": "Sejarah sesi",
@@ -3275,6 +3581,13 @@
       "pauseReasonPlaceholder": "misalnya Urutan, masalah teknologi, kaukus yang tidak dimoderasi...",
       "pauseClock": "Jeda jam",
       "startClock": "Mulai jam",
+      "euTimerBoardTitle": "Papan pengatur waktu Parlemen UE (11 pengatur waktu)",
+      "euTimerBoardHelp": "Satu pengatur waktu per pesta, ditambah Total waktu, waktu POI/POC, dan waktu Pembicara. Gunakan Terapkan untuk menyalin baris ke bidang pengatur waktu langsung pada tab Jam (waktu speaker / Hemat pengatur waktu).",
+      "euTimerName": "Nama",
+      "euTimerTag": "Menandai",
+      "euTotalTime": "Total waktu",
+      "euPoiPocTime": "Waktu POI/POC",
+      "euSpeakerTime": "Waktu pembicara",
       "perSpeakerTitle": "Waktu per pembicara (kaukus yang dimoderasi)",
       "perSpeakerHelp": "Tetapkan Total waktu sebagai batas per pembicara dan Waktu pembicara sebagai waktu yang tersisa; Maju berpindah ke speaker berikutnya dan menyetel ulang sisanya ke penutup.",
       "currentSpeaker": "Pembicara saat ini",
@@ -3305,204 +3618,47 @@
       "alreadyPaused": "Timer sudah dijeda.",
       "pausedForCommittee": "Timer dijeda untuk panitia.",
       "alreadyRunning": "Pengatur waktu sudah berjalan.",
-      "runningForCommittee": "Timer berjalan untuk panitia.",
-      "euTimerBoardTitle": "Papan pengatur waktu Parlemen UE (11 pengatur waktu)",
-      "euTimerBoardHelp": "Satu pengatur waktu per pesta, ditambah Total waktu, waktu POI/POC, dan waktu Pembicara. Gunakan Terapkan untuk menyalin baris ke bidang pengatur waktu langsung pada tab Jam (waktu speaker / Hemat pengatur waktu).",
-      "euTimerName": "Nama",
-      "euTimerTag": "Menandai",
-      "euTotalTime": "Total waktu",
-      "euPoiPocTime": "Waktu POI/POC",
-      "euSpeakerTime": "Waktu pembicara"
+      "runningForCommittee": "Timer berjalan untuk panitia."
     }
   },
-  "roleSetupChecklist": {
-    "admin": {
-      "title": "Daftar periksa penyiapan admin",
-      "subtitle": "Penyiapan tingkat situs dan penyediaan staf.",
-      "step1Label": "Buat acara + komite pertama",
-      "step1Detail": "Hasilkan gerbang konferensi dan komite.",
-      "step2Label": "Undang atau promosikan akun SMT",
-      "step2Detail": "Berikan akses sekretariat sebelum operasi komite.",
-      "step3Label": "Verifikasi alur portal status",
-      "step3Detail": "Pantau alur delegasi tertunda → terkonfirmasi.",
-      "step4Label": "Serahkan ke dasbor SMT",
-      "step4Detail": "Operasi komite langsung berlanjut di alat SMT."
-    },
-    "smt": {
-      "title": "Daftar periksa penyiapan SMT",
-      "subtitle": "Kontrol tingkat konferensi sebelum ketua dan delegasi masuk.",
-      "step1Label": "Konfirmasi acara + sesi komite",
-      "step1Detail": "Validasi nama, tag, nama ketua, dan tautan krisis.",
-      "step2Label": "Atur kode ruang + akses ketua",
-      "step2Detail": "Pastikan setiap komite memiliki kode gerbang yang benar.",
-      "step3Label": "Siapkan alokasi + dokumen masuk",
-      "step3Detail": "Impor kursi, lalu atur kata sandi/kode.",
-      "step4Label": "Terbitkan dokumen global (RoP / kriteria)",
-      "step4Detail": "Unggah referensi bersama untuk semua pengguna."
-    },
-    "chair": {
-      "title": "Daftar periksa penyiapan ketua",
-      "subtitle": "Kesiapan ruang dan kontrol lantai untuk komite Anda.",
-      "step1Label": "Periksa matriks delegasi + persetujuan",
-      "step1Detail": "Konfirmasi penugasan dan tinjauan pendaftaran tertunda.",
-      "step2Label": "Jalankan persetujuan panggilan roll",
-      "step2Detail": "Tandai delegasi hadir sebelum berpartisipasi di lantai.",
-      "step3Label": "Atur timer + alur pembicara",
-      "step3Detail": "Simpan preset lantai sebelum membuka mosi.",
-      "step4Label": "Buka operasi ruang digital",
-      "step4Detail": "Koordinasikan pembicara, catatan, dan visibilitas sesi."
-    },
-    "delegate": {
-      "title": "Daftar periksa penyiapan delegasi",
-      "subtitle": "Bersiap cepat untuk berpartisipasi di komite.",
-      "step1Label": "Lengkapi dasar profil",
-      "step1Detail": "Verifikasi nama, alokasi, dan detail akun.",
-      "step2Label": "Baca RoP + kriteria penghargaan",
-      "step2Detail": "Buka dokumen bersama yang diunggah SMT.",
-      "step3Label": "Buat dokumen persiapan Anda",
-      "step3Detail": "Unggah/edit catatan persiapan langsung di aplikasi.",
-      "step4Label": "Gabung ruang komite + panggilan roll",
-      "step4Detail": "Tunggu persetujuan hadir dari ketua, lalu berbicara."
-    }
+  "newsroom": {
+    "liveBadge": "Live",
+    "sourceLine": "Current affairs · {source}",
+    "headlinesTitle": "Latest headlines",
+    "loading": "Loading the latest headlines…",
+    "error": "Couldn't reach the news feed. Retrying…",
+    "empty": "No headlines available right now.",
+    "reconnecting": "Reconnecting…",
+    "updatedAgo": "Updated {count}s ago",
+    "justNow": "just now",
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago",
+    "attribution": "Headlines from {source} (news.un.org), refreshed automatically."
   },
-  "smtCommitteeView": {
-    "title": "Sekretariat: pandangan ketua & delegasi",
-    "intro": "Pilih komite untuk alat ketua dan kursi delegasi yang ditautkan ke akun Anda, lalu ganti permukaan. Masuk masih membuka hub sekretariat secara default.",
-    "bindRequiredHint": "Pilih ketua komite dan/atau kursi delegasi di bawah, lalu coba lagi.",
-    "chairCommitteeLabel": "Ketua komite lantai",
-    "chairCommitteePlaceholder": "Pilih panitia…",
-    "delegateSeatLabel": "Kursi delegasi (alokasi Anda)",
-    "delegateSeatPlaceholder": "Pilih kursi…",
-    "saveBindings": "Simpan tugas",
-    "bindingsSaved": "Disimpan.",
-    "switchViewHeading": "Ganti dasbor",
-    "switchViewHelp": "Sekretariat mengembalikan Anda ke SMT. Ketua dan delegasi membuka cangkang dalam aplikasi yang sama yang digunakan oleh kursi dan delegasi sebenarnya untuk acara aktif.",
-    "goSecretariat": "Sekretariat",
-    "goChair": "Pemandangan kursi",
-    "goDelegate": "Tampilan delegasi",
-    "surfaceSwitchError": "Tidak dapat mengalihkan tampilan. Periksa gerbang acara dan pilihan.",
-    "pickChairFirst": "Pilih ketua komite terlebih dahulu (atau simpan tugas).",
-    "pickDelegateFirst": "Pilih kursi delegasi terlebih dahulu (atau simpan tugas).",
-    "chairSeatLabel": "Dais seat (optional)",
-    "chairSeatOptionalPlaceholder": "Any dais seat — or leave blank"
-  },
-  "advisorDashboard": {
-    "intro": "Anda dapat memantau aktivitas komite delegasi yang ditugaskan kepada Anda. Anda tidak memiliki akses ke catatan kecuali kursi atau SMT meneruskannya kepada Anda.",
-    "noAssignments": "Belum ada delegasi yang ditautkan ke akun Anda. Sekretariat akan menugaskan Anda dari SMT → Penasihat.",
-    "delegateLinked": "Delegasi akun tertaut",
-    "delegateNotLinked": "Kursi belum ditautkan ke akun delegasi",
-    "viewProfile": "Profil",
-    "viewDocuments": "Dokumen",
-    "viewVoting": "Pemungutan suara",
-    "forwardedNotes": "Catatan yang diteruskan",
-    "schedule": {
-      "intro": "Pilih jalur jadwal Anda, lalu penasihat A–D untuk melihat jadwal penasihat tersebut pada hari itu."
-    },
-    "notes": {
-      "intro": "Kursi Catatan atau SMT memilih untuk berbagi dengan Anda. Anda tidak dapat menelusuri feed catatan lengkap.",
-      "empty": "Belum ada catatan yang diteruskan kepada Anda.",
-      "forwarded": "Diteruskan"
-    }
-  },
-  "smtAdvisorsPage": {
-    "title": "Penasihat",
-    "subtitle": "Undang akun penasihat melalui email dan tautkan setiap penasihat ke satu kursi delegasi.",
-    "selectEventFirst": "Pilih acara konferensi yang aktif terlebih dahulu.",
-    "enterConferenceCode": "Masukkan kode konferensi",
-    "inviteTitle": "Undang penasihat",
-    "inviteBody": "Mengirimkan tautan masuk (alur yang sama seperti undangan ketua). Peran akun diatur ke penasihat.",
-    "inviteDisabled": "Undangan memerlukan SUPABASE_SERVICE_ROLE_KEY pada penerapan ini.",
-    "emailLabel": "E-mail",
-    "emailPlaceholder": "penasihat@sekolah.edu",
-    "sending": "Mengirim…",
-    "inviteButton": "Kirim undangan",
-    "assignTitle": "Tetapkan delegasi",
-    "assignBody": "Pilih kursi delegasi yang terhubung. Satu penasihat per delegasi; penugasan ulang menggantikan tautan sebelumnya.",
-    "advisorEmailLabel": "Email penasihat",
-    "delegateLabel": "Kursi delegasi",
-    "delegatePlaceholder": "Pilih delegasi…",
-    "assignedTo": "penasihat: {name}",
-    "saving": "Penghematan…",
-    "assignButton": "Simpan tugas",
-    "advisorFallback": "Penasihat",
-    "delegateAllocationIdLabel": "Delegasikan ID alokasi",
-    "delegateAllocationIdPlaceholder": "misalnya 11111111-1111-1111-1111-111111111101",
-    "currentAssignmentsTitle": "Tugas saat ini",
-    "currentAssignmentsHint": "Semua tautan penasihat-delegasi untuk acara ini.",
-    "allocationIdsTitle": "ID alokasi delegasi tertaut",
-    "allocationIdsHint": "Salin UUID alokasi dari tabel ini saat menugaskan.",
-    "colAdvisor": "Penasihat",
-    "colAllocationId": "ID Alokasi",
-    "colCountry": "Negara / kursi",
-    "colCommittee": "Komite",
-    "inviteSetupTitle": "Aktifkan undangan email",
-    "inviteSetupStep1": "Di Supabase → Pengaturan Proyek → API, salin kunci rahasia service_role.",
-    "inviteSetupStep2": "Tambahkan SUPABASE_SERVICE_ROLE_KEY ke env host Anda (Render/Vercel) — bukan NEXT_PUBLIC_.",
-    "inviteSetupStep3": "Tambahkan NEXT_PUBLIC_APP_URL ke URL situs aktif Anda (misalnya https://your-app.onrender.com).",
-    "inviteSetupStep4": "Terapkan ulang (produksi) atau tambahkan keduanya ke .env.local dan mulai ulang npm run dev (lokal).",
-    "colDelegate": "Delegate",
-    "delegateFallback": "Delegate"
-  },
-  "smtNotesPage": {
-    "title": "Notes & chats",
-    "subtitle": "Delegation notes across the event — filter by how they reached secretariat.",
-    "intro": "Browse notes addressed to you, escalated from the dais, sent by delegations, or forwarded to advisors. Use All chats to see every committee.",
-    "tabsAria": "SMT notes views",
-    "listTitle": "Notes",
-    "empty": "No notes in this view yet.",
-    "unknownCommittee": "Committee",
-    "allCommittees": "All committees",
-    "selectEventFirst": "Select an active conference event to view notes.",
-    "enterConferenceCode": "Enter conference code",
-    "tabs": {
-      "addressed": "To my account",
-      "fromChairs": "From chairs",
-      "byDelegate": "By delegate",
-      "byAdvisor": "To advisors",
-      "allByCommittee": "All chats"
-    },
-    "tabHints": {
-      "addressed": "Notes sent to you directly, your secretariat seat, or any chair.",
-      "fromChairs": "Notes the dais forwarded to the secretariat inbox.",
-      "byDelegate": "Notes authored by delegations (all committees).",
-      "byAdvisor": "Notes chair or SMT forwarded to an advisor."
-    },
-    "composeTitle": "Send a note",
-    "composeHint": "Choose a committee, pick recipients, and send — same as delegates and chairs. No committee password required here.",
-    "composeCommitteeLabel": "Committee",
-    "composeLoading": "Loading committee…",
-    "composeNoCommittees": "No delegate committees in this event yet.",
-    "composeFormTitle": "New secretariat note"
-  },
-  "colorblindMode": {
-    "enableTitle": "Turn on colorblind-friendly colours",
-    "disableTitle": "Turn off colorblind-friendly colours",
-    "enableAria": "Enable colorblind-friendly mode",
-    "disableAria": "Disable colorblind-friendly mode",
-    "on": "Colorblind mode on",
-    "off": "Colorblind mode off"
-  },
-  "chairAwardsFloorActivity": {
-    "title": "Floor activity",
-    "description": "Motions raised, points logged, and resolution roles for this delegate in committee session.",
-    "motionsTitle": "Motions",
-    "pointsTitle": "Points",
-    "resolutionsTitle": "Resolutions",
-    "noMotions": "No motions recorded for this delegate.",
-    "noPoints": "No points recorded for this delegate.",
-    "noResolutions": "No resolution involvement recorded for this delegate.",
-    "untitledMotion": "Untitled motion",
-    "chairLoggedPoint": "Chair-logged point",
-    "resolutionLink": "Open Google Doc",
-    "resolutionNoLink": "No document link",
-    "pointKinds": {
-      "session": "Procedural",
-      "delegate": "Chair log"
-    },
-    "resolutionRoles": {
-      "main": "Main submitter",
-      "co": "Co-submitter",
-      "signatory": "Signatory"
+  "milestones": {
+    "intro": "Checkpoints unlock as your committee and delegates rack up moderated caucuses, unmods, consultations, speeches, points, and passed resolutions. Progress updates as chairs run session.",
+    "yourMilestones": "Your milestones",
+    "committeeTitle": "{committee} — committee milestones",
+    "delegateLeaderboard": "Delegate milestones",
+    "emptyDelegates": "No delegate activity recorded yet.",
+    "empty": "No milestone data yet. Checkpoints appear once your committee is in session.",
+    "earnedOfTotal": "{earned}/{total} earned",
+    "cardTitle": "Milestones",
+    "cardEmpty": "No checkpoints reached yet.",
+    "cardCta": "View all milestones →",
+    "achieved": "Earned",
+    "locked": "Not yet reached",
+    "tierPlus": "{n}+",
+    "allEarned": "All checkpoints earned",
+    "progressToNext": "{count} / {next} to next checkpoint",
+    "metric": {
+      "moderated_caucuses": "Moderated caucuses",
+      "unmoderated_caucuses": "Unmoderated caucuses",
+      "consultations": "Consultations",
+      "resolutions_passed": "Resolutions passed",
+      "speeches": "Speeches delivered",
+      "points_raised": "Points (POI / POC)"
     }
   }
 }

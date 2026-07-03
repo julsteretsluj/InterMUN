@@ -5,6 +5,7 @@ import { ProfileForm } from "@/components/profile/ProfileForm";
 import { MunPageShell } from "@/components/MunPageShell";
 import { awardCategoryMeta } from "@/lib/awards";
 import { DelegateMaterialsExportCard } from "@/components/materials/DelegateMaterialsExportCard";
+import { MilestonesSummaryCard } from "@/components/milestones/MilestonesSummaryCard";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
@@ -477,6 +478,11 @@ export default async function ProfilePage({
         </div>
       ) : null}
       {showOverview ? delegateWelcome : null}
+      {showOverview && isDelegate ? (
+        <div className="mb-6">
+          <MilestonesSummaryCard href="/milestones" />
+        </div>
+      ) : null}
       {showOverview && isDelegate ? <DelegateMaterialsExportCard /> : null}
       {showAwards ? (
         <ProfileAwardsSummaryTabs

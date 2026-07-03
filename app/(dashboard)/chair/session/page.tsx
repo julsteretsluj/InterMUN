@@ -4,6 +4,13 @@ import { loadChairSessionConference } from "./loadChairSession";
 import { SessionFloorNoCommittee } from "./SessionFloorNoCommittee";
 import SessionFloorOverview from "./SessionFloorOverview";
 import { getTranslations } from "next-intl/server";
+import { isSeamunI2027LockedScheduleEvent } from "@/lib/seamun-i-2027-locked-schedule";
+import {
+  buildSeamunPresetSessionsForCommittee,
+  buildSeamunScheduleMilestonesForCommittee,
+  type SeamunPresetSession,
+  type SeamunScheduleMilestone,
+} from "@/lib/seamun-preset-sessions";
 
 export default async function ChairSessionPage() {
   const t = await getTranslations("pageTitles");
@@ -50,6 +57,25 @@ export default async function ChairSessionPage() {
   const initialEndsAt = row?.committee_session_ends_at ?? null;
   const initialSessionTitle = row?.committee_session_title ?? null;
 
+  let presetSessions: SeamunPresetSession[] = [];
+  let scheduleMilestones: SeamunScheduleMilestone[] = [];
+  const { data: conf } = await supabase
+    .from("conferences")
+    .select("committee, event_id")
+    .eq("id", data.conferenceId)
+    .maybeSingle();
+  if (conf?.event_id && conf.committee) {
+    const { data: eventRow } = await supabase
+      .from("conference_events")
+      .select("id, event_code")
+      .eq("id", conf.event_id)
+      .maybeSingle();
+    if (eventRow && isSeamunI2027LockedScheduleEvent(eventRow.id, eventRow.event_code)) {
+      presetSessions = buildSeamunPresetSessionsForCommittee(conf.committee);
+      scheduleMilestones = buildSeamunScheduleMilestonesForCommittee(conf.committee);
+    }
+  }
+
   return (
     <MunPageShell title={t("committeeSession")}>
       <SessionFloorOverview
@@ -60,6 +86,8 @@ export default async function ChairSessionPage() {
         initialCommitteeSessionDurationSeconds={initialDurationSeconds}
         initialCommitteeSessionEndsAt={initialEndsAt}
         initialCommitteeSessionTitle={initialSessionTitle}
+        presetSessions={presetSessions}
+        scheduleMilestones={scheduleMilestones}
       />
     </MunPageShell>
   );
