@@ -19,7 +19,7 @@ type Clause = {
   clause_text: string;
 };
 
-type ResolutionPick = { id: string; googleDocsUrl: string | null };
+type ResolutionPick = { id: string; googleDocsUrl: string | null; status?: string | null };
 
 type Amendment = {
   id: string;
@@ -39,8 +39,8 @@ type Amendment = {
 };
 
 const inputCls =
-  "w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/25";
-const labelCls = "block text-xs font-medium uppercase tracking-wide text-white/60";
+  "w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm text-brand-navy placeholder:text-brand-muted focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/25";
+const labelCls = "block text-xs font-medium uppercase tracking-wide text-brand-muted";
 
 export function AmendmentsView({
   conferenceId,
@@ -69,7 +69,12 @@ export function AmendmentsView({
     [mainSubmitterResolutionIds]
   );
 
-  const [resolutionId, setResolutionId] = useState(resolutions[0]?.id ?? "");
+  const submittableResolutions = useMemo(
+    () => resolutions.filter((r) => (r.status ?? "draft") === "finalized"),
+    [resolutions]
+  );
+
+  const [resolutionId, setResolutionId] = useState(submittableResolutions[0]?.id ?? "");
   const [amendmentType, setAmendmentType] = useState<AmendmentType>("replace");
   const [clauseNumber, setClauseNumber] = useState<string>("");
   const [originalClause, setOriginalClause] = useState("");
@@ -154,7 +159,7 @@ export function AmendmentsView({
   const canDelete = (a: Amendment) =>
     isStaff || (a.submitted_by === userId && a.status === "pending");
 
-  const hasResolutions = resolutions.length > 0;
+  const hasResolutions = submittableResolutions.length > 0;
 
   return (
     <div className="space-y-6">
@@ -162,8 +167,8 @@ export function AmendmentsView({
         <div
           className={`rounded-lg border px-3 py-2 text-sm ${
             msg.kind === "ok"
-              ? "border-brand-accent/40 bg-brand-accent/10 text-white"
-              : "border-red-400/40 bg-red-500/10 text-red-200"
+              ? "border-brand-accent/40 bg-brand-accent/10 text-brand-navy"
+              : "border-red-400/50 bg-red-500/10 text-red-700 dark:text-red-300"
           }`}
         >
           {msg.text}
@@ -174,12 +179,12 @@ export function AmendmentsView({
       <section className="dashboard-panel space-y-4 p-4 sm:p-5">
         <div className="flex items-center gap-2">
           <FilePlus2 className="h-5 w-5 text-brand-accent" />
-          <h2 className="text-base font-semibold text-white">{t("submitTitle")}</h2>
+          <h2 className="text-base font-semibold text-brand-navy">{t("submitTitle")}</h2>
         </div>
-        <p className="text-sm text-white/60">{t("submitHelp")}</p>
+        <p className="text-sm text-brand-muted">{t("submitHelp")}</p>
 
         {!hasResolutions ? (
-          <p className="text-sm text-white/60">{t("noResolutions")}</p>
+          <p className="text-sm text-brand-muted">{t("noFinalizedResolutions")}</p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="space-y-1">
@@ -193,7 +198,7 @@ export function AmendmentsView({
                   setOriginalClause("");
                 }}
               >
-                {resolutions.map((r) => (
+                {submittableResolutions.map((r) => (
                   <option key={r.id} value={r.id}>
                     {resolutionLabel(r.id)}
                   </option>
@@ -223,11 +228,17 @@ export function AmendmentsView({
                   onChange={(e) => onPickClause(e.target.value)}
                 >
                   <option value="">{t("selectClause")}</option>
-                  {clausesForResolution.map((c) => (
-                    <option key={c.id} value={c.clause_number}>
-                      {t("clauseN", { n: c.clause_number })}
-                    </option>
-                  ))}
+                  {clausesForResolution.map((c) => {
+                    const preview =
+                      c.clause_text.length > 60
+                        ? `${c.clause_text.slice(0, 60).trim()}…`
+                        : c.clause_text;
+                    return (
+                      <option key={c.id} value={c.clause_number}>
+                        {`${t("clauseN", { n: c.clause_number })} — ${preview}`}
+                      </option>
+                    );
+                  })}
                 </select>
               ) : (
                 <input
@@ -294,11 +305,11 @@ export function AmendmentsView({
       <section className="space-y-3">
         <div className="flex items-center gap-2">
           <Gavel className="h-5 w-5 text-brand-accent" />
-          <h2 className="text-base font-semibold text-white">{t("listTitle")}</h2>
+          <h2 className="text-base font-semibold text-brand-navy">{t("listTitle")}</h2>
         </div>
 
         {initialAmendments.length === 0 ? (
-          <p className="rounded-lg border border-white/10 bg-black/15 px-3 py-6 text-center text-sm text-white/50">
+          <p className="rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-6 text-center text-sm text-brand-muted">
             {t("empty")}
           </p>
         ) : (
@@ -306,7 +317,7 @@ export function AmendmentsView({
             {initialAmendments.map((a, i) => (
               <li key={a.id} className="dashboard-panel space-y-3 p-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-semibold text-white">
+                  <span className="text-sm font-semibold text-brand-navy">
                     {t("amendmentN", { n: initialAmendments.length - i })}
                   </span>
                   <TypeBadge type={a.amendment_type} label={t(`typeBadge_${a.amendment_type}`)} />
@@ -317,7 +328,7 @@ export function AmendmentsView({
                       label={t(a.classification)}
                     />
                   ) : null}
-                  <span className="ml-auto text-xs text-white/50">
+                  <span className="ml-auto text-xs text-brand-muted">
                     {resolutionLabel(a.resolution_id)}
                     {a.target_clause_number != null
                       ? ` · ${t("clauseN", { n: a.target_clause_number })}`
@@ -325,9 +336,9 @@ export function AmendmentsView({
                   </span>
                 </div>
 
-                <div className="text-xs text-white/60">
+                <div className="text-xs text-brand-muted">
                   {a.delegate_country ? (
-                    <span className="font-medium text-white/80">{a.delegate_country}</span>
+                    <span className="font-medium text-brand-navy">{a.delegate_country}</span>
                   ) : (
                     t("unknownDelegate")
                   )}
@@ -335,9 +346,9 @@ export function AmendmentsView({
                 </div>
 
                 {a.original_clause ? (
-                  <div className="rounded-md border border-white/10 bg-black/20 p-2">
+                  <div className="rounded-md border border-[var(--hairline)] bg-[var(--material-thin)] p-2">
                     <p className={labelCls}>{t("originalClause")}</p>
-                    <p className="mt-1 whitespace-pre-wrap text-sm text-white/70 line-through decoration-red-400/50">
+                    <p className="mt-1 whitespace-pre-wrap text-sm text-brand-muted line-through decoration-red-400/60">
                       {a.original_clause}
                     </p>
                   </div>
@@ -345,21 +356,21 @@ export function AmendmentsView({
                 {a.proposed_clause ? (
                   <div className="rounded-md border border-brand-accent/25 bg-brand-accent/5 p-2">
                     <p className={labelCls}>{t("proposedClause")}</p>
-                    <p className="mt-1 whitespace-pre-wrap text-sm text-white/90">
+                    <p className="mt-1 whitespace-pre-wrap text-sm text-brand-navy">
                       {a.proposed_clause}
                     </p>
                   </div>
                 ) : null}
 
                 {canReview(a) || canDelete(a) ? (
-                  <div className="flex flex-wrap items-center gap-2 border-t border-white/10 pt-3">
+                  <div className="flex flex-wrap items-center gap-2 border-t border-[var(--hairline)] pt-3">
                     {canReview(a) ? (
                       <>
                         <button
                           type="button"
                           disabled={pending}
                           onClick={() => review(a.id, "approved", "friendly")}
-                          className="rounded-md border border-emerald-400/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-500/20 disabled:opacity-50"
+                          className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-500/20 disabled:opacity-50 dark:text-emerald-300"
                         >
                           {t("markFriendly")}
                         </button>
@@ -367,7 +378,7 @@ export function AmendmentsView({
                           type="button"
                           disabled={pending}
                           onClick={() => review(a.id, "approved", "unfriendly")}
-                          className="rounded-md border border-amber-400/40 bg-amber-500/10 px-3 py-1.5 text-xs font-medium text-amber-200 hover:bg-amber-500/20 disabled:opacity-50"
+                          className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-xs font-medium text-amber-700 hover:bg-amber-500/20 disabled:opacity-50 dark:text-amber-300"
                         >
                           {t("markUnfriendly")}
                         </button>
@@ -375,7 +386,7 @@ export function AmendmentsView({
                           type="button"
                           disabled={pending}
                           onClick={() => review(a.id, "rejected", a.classification)}
-                          className="rounded-md border border-red-400/40 bg-red-500/10 px-3 py-1.5 text-xs font-medium text-red-200 hover:bg-red-500/20 disabled:opacity-50"
+                          className="rounded-md border border-red-400/50 bg-red-500/10 px-3 py-1.5 text-xs font-medium text-red-700 hover:bg-red-500/20 disabled:opacity-50 dark:text-red-300"
                         >
                           {t("reject")}
                         </button>
@@ -386,7 +397,7 @@ export function AmendmentsView({
                         type="button"
                         disabled={pending}
                         onClick={() => remove(a.id)}
-                        className="ml-auto inline-flex items-center gap-1 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white/60 hover:bg-white/10 disabled:opacity-50"
+                        className="ml-auto inline-flex items-center gap-1 rounded-md border border-[var(--hairline)] px-3 py-1.5 text-xs font-medium text-brand-muted hover:bg-black/5 disabled:opacity-50 dark:hover:bg-white/10"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                         {isStaff ? t("delete") : t("withdraw")}
@@ -406,10 +417,10 @@ export function AmendmentsView({
 function TypeBadge({ type, label }: { type: AmendmentType; label: string }) {
   const cls =
     type === "add"
-      ? "border-emerald-400/40 text-emerald-200"
+      ? "border-emerald-500/40 text-emerald-700 dark:text-emerald-300"
       : type === "delete"
-        ? "border-red-400/40 text-red-200"
-        : "border-sky-400/40 text-sky-200";
+        ? "border-red-400/50 text-red-700 dark:text-red-300"
+        : "border-sky-500/40 text-sky-700 dark:text-sky-300";
   return (
     <span className={`rounded-full border px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide ${cls}`}>
       {label}
@@ -420,10 +431,10 @@ function TypeBadge({ type, label }: { type: AmendmentType; label: string }) {
 function StatusBadge({ status, label }: { status: string; label: string }) {
   const cls =
     status === "approved"
-      ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-200"
+      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
       : status === "rejected"
-        ? "border-red-400/40 bg-red-500/10 text-red-200"
-        : "border-white/20 bg-white/5 text-white/60";
+        ? "border-red-400/50 bg-red-500/10 text-red-700 dark:text-red-300"
+        : "border-[var(--hairline)] bg-black/5 text-brand-muted dark:bg-white/5";
   return (
     <span className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${cls}`}>{label}</span>
   );
@@ -438,8 +449,8 @@ function ClassificationBadge({
 }) {
   const cls =
     classification === "friendly"
-      ? "border-emerald-400/40 text-emerald-200"
-      : "border-amber-400/40 text-amber-200";
+      ? "border-emerald-500/40 text-emerald-700 dark:text-emerald-300"
+      : "border-amber-500/40 text-amber-700 dark:text-amber-300";
   return (
     <span className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${cls}`}>{label}</span>
   );

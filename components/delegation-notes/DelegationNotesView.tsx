@@ -257,7 +257,14 @@ export function DelegationNotesView({
   }, [initialOpenThreadId]);
 
   const smtComposeOk = smtSecretariatCompose || smtVerified;
-  const sessionOk = sessionActive || smtSecretariatCompose;
+  // Chairs/admin moderate the room, so the session/procedure gates that restrict
+  // delegate note-passing (inactive session, unmoderated caucus, voting) do not
+  // apply to them — they can always send notes.
+  const bypassNoteGates = isChairLike;
+  const sessionOk = sessionActive || smtSecretariatCompose || bypassNoteGates;
+  const composeUnmoderatedLocked = unmoderatedLocked && !bypassNoteGates;
+  const composeVotingLocked = Boolean(votingProcedureLocked) && !bypassNoteGates;
+  const composeLocked = composeVotingLocked || !sessionOk || composeUnmoderatedLocked;
 
   const canCompose =
     (isStaffLike || isDelegate) &&
@@ -265,8 +272,8 @@ export function DelegationNotesView({
     (myAllocationId !== null || isStaffLike) &&
     (allocationOptions.length > 0 || isStaffLike) &&
     sessionOk &&
-    !unmoderatedLocked &&
-    !votingProcedureLocked;
+    !composeUnmoderatedLocked &&
+    !composeVotingLocked;
 
   function appendEmoji(emoji: string) {
     setContent((prev) => `${prev}${prev.endsWith(" ") || prev.length === 0 ? "" : " "}${emoji} `);
@@ -499,7 +506,7 @@ export function DelegationNotesView({
   }) {
     if (sending) return;
     setError(null);
-    if (votingProcedureLocked) {
+    if (composeVotingLocked) {
       setError(t("errors.votingProcedure"));
       return;
     }
@@ -507,7 +514,7 @@ export function DelegationNotesView({
       setError(t("errors.sessionInactive"));
       return;
     }
-    if (unmoderatedLocked) {
+    if (composeUnmoderatedLocked) {
       setError(t("errors.unmoderated"));
       return;
     }
@@ -727,7 +734,7 @@ export function DelegationNotesView({
   async function replyInThread(replyToNoteId: string, replyContent: string) {
     if (sending) return;
     setError(null);
-    if (votingProcedureLocked) {
+    if (composeVotingLocked) {
       setError(t("errors.votingProcedure"));
       return;
     }
@@ -735,7 +742,7 @@ export function DelegationNotesView({
       setError(t("errors.sessionInactive"));
       return;
     }
-    if (unmoderatedLocked) {
+    if (composeUnmoderatedLocked) {
       setError(t("errors.unmoderated"));
       return;
     }
@@ -1003,7 +1010,7 @@ export function DelegationNotesView({
               onChange={(e) => setContent(e.target.value)}
               placeholder={canCompose ? t("placeholderCompose") : t("placeholderDisabled")}
               className={`w-full h-28 px-3 py-2 ${field}`}
-              disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
+              disabled={composeLocked}
             />
             {canCompose ? <EmojiQuickInsert onPick={appendEmoji} /> : null}
             {composeSuccess ? (
@@ -1019,7 +1026,7 @@ export function DelegationNotesView({
             {!sessionOk ? (
               <p className={`text-xs ${muted}`}>{t("sessionOnlyHint")}</p>
             ) : null}
-            {unmoderatedLocked ? (
+            {composeUnmoderatedLocked ? (
               <p className={`text-xs ${muted}`}>{t("unmoderatedHint")}</p>
             ) : null}
 
@@ -1093,7 +1100,7 @@ export function DelegationNotesView({
                         type="checkbox"
                         checked={checked}
                         className="size-4 rounded border-white/25 accent-brand-accent"
-                    disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
+                    disabled={composeLocked}
                         onChange={(e) => {
                           setSelectedAllocationRecipientIdsState((prev) => {
                             if (e.target.checked) {
@@ -1126,7 +1133,7 @@ export function DelegationNotesView({
                   type="checkbox"
                   checked={anyChairRecipient}
                   className="size-4 rounded border-white/25 accent-brand-accent"
-                  disabled={votingProcedureLocked || !sessionOk || unmoderatedLocked}
+                  disabled={composeLocked}
                   onChange={(e) => {
                     const next = e.target.checked;
                     setAnyChairRecipientState(next);
@@ -1151,9 +1158,7 @@ export function DelegationNotesView({
                         type="checkbox"
                         checked={checked}
                         className="size-4 rounded border-white/25 accent-brand-accent"
-                        disabled={
-                          anyChairRecipient || votingProcedureLocked || !sessionOk || unmoderatedLocked
-                        }
+                        disabled={anyChairRecipient || composeLocked}
                         onChange={(e) => {
                           if (anyChairRecipient) return;
                           setSelectedChairRecipientIdsState((prev) => {

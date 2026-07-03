@@ -24,7 +24,7 @@ export default async function AmendmentsPage() {
 
   const { data: resolutions } = await supabase
     .from("resolutions")
-    .select("id, conference_id, google_docs_url, main_submitters")
+    .select("id, conference_id, google_docs_url, main_submitters, status")
     .eq("conference_id", conferenceId)
     .order("created_at", { ascending: true });
 
@@ -60,6 +60,7 @@ export default async function AmendmentsPage() {
         resolutions={(resolutions ?? []).map((r) => ({
           id: r.id,
           googleDocsUrl: r.google_docs_url,
+          status: (r as { status?: string | null }).status ?? "draft",
         }))}
         clauses={(clauses ?? []) as {
           id: string;

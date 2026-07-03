@@ -5,11 +5,18 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import {
+  TAB_NAV_FOLDER_ORDER,
+  folderHasActiveChild,
+  groupNavByFolder,
+  tabHrefFolder,
+  type NavFolderId,
+} from "@/lib/nav-folder-groups";
 import {
   ADVISOR_TAB_NAV_HREF_ORDER,
   CHAIR_STAFF_TAB_NAV_HREF_ORDER,
   DELEGATE_TAB_NAV_HREF_ORDER,
-  MAIN_TAB_GROUP_ORDER,
   sortNavByHrefPriority,
   withSequentialPriority,
 } from "@/lib/nav-priority-order";
@@ -23,6 +30,7 @@ const BASE_TABS = [
   { href: "/committee-room", labelKey: "committee", emoji: "🏛️" },
   { href: "/history", labelKey: "history", emoji: "🕘" },
   { href: "/newsroom", labelKey: "newsroom", emoji: "📰" },
+  { href: "/press-corps", labelKey: "pressCorps", emoji: "📸" },
   { href: "/milestones", labelKey: "milestones", emoji: "🏅" },
   { href: "/voting", labelKey: "voting", emoji: "🗳️" },
   { href: "/guides", labelKey: "guides", emoji: "📚" },
@@ -96,41 +104,8 @@ function useNavTabs(
       ];
 }
 
-type MainTabKey = "home" | "session" | "library";
-type MainTab = { key: MainTabKey; labelKey: "home" | "session" | "library"; emoji: string };
-
-const MAIN_TABS: MainTab[] = MAIN_TAB_GROUP_ORDER.map((key) => ({
-  key,
-  labelKey: key,
-  emoji: key === "home" ? "🏠" : key === "session" ? "🧠" : "📚",
-}));
-
-const MAIN_TAB_TILE_CLASS: Record<MainTabKey, string> = {
-  home: "bg-[#007AFF]",
-  session: "bg-[#5856D6]",
-  library: "bg-[#FF9500]",
-};
-
 function tabInPath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
-}
-
-function tabMainGroup(href: string): MainTabKey {
-  if (href === "/delegate" || href === "/profile" || href.endsWith("/schedule")) return "home";
-  if (
-    href === "/chats-notes" ||
-    href === "/committee-room" ||
-    href === "/history" ||
-    href === "/voting" ||
-    href === "/resolutions" ||
-    href === "/amendments" ||
-    href === "/running-notes" ||
-    href === "/report" ||
-    href === "/crisis-slides"
-  ) {
-    return "session";
-  }
-  return "library";
 }
 
 function AspireSidebarLink({
@@ -227,30 +202,32 @@ export function TabNav({
     () => withSequentialPriority(sortNavByHrefPriority(rawTabs, hrefOrder)),
     [rawTabs, hrefOrder]
   );
-  const groupedTabs = useMemo(() => {
-    const groups: Record<MainTabKey, { href: string; labelKey: string; emoji: string; priority: number }[]> = {
-      home: [],
-      session: [],
-      library: [],
-    };
-    for (const tab of tabs) groups[tabMainGroup(tab.href)].push(tab);
-    for (const key of MAIN_TAB_GROUP_ORDER) {
-      groups[key].sort((a, b) => a.priority - b.priority);
+
+  const folderGroups = useMemo(
+    () => groupNavByFolder(tabs, TAB_NAV_FOLDER_ORDER, (tab) => tabHrefFolder(tab.href)),
+    [tabs]
+  );
+
+  const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);
+
+  const activeFolderFromPath = useMemo(() => {
+    for (const group of folderGroups) {
+      if (folderHasActiveChild(group.items, (tab) => tabInPath(pathname, tab.href))) {
+        return group.folderId;
+      }
     }
-    return groups;
-  }, [tabs]);
-  const activeMain = useMemo<MainTabKey>(() => {
-    for (const mt of MAIN_TABS) {
-      const sub = groupedTabs[mt.key];
-      if (sub.some((t) => tabInPath(pathname, t.href))) return mt.key;
-    }
-    return "home";
-  }, [groupedTabs, pathname]);
-  const [selectedMain, setSelectedMain] = useState<MainTabKey>(activeMain);
+    return folderIds[0] ?? "home";
+  }, [folderGroups, folderIds, pathname]);
+
+  const [dockFolder, setDockFolder] = useState<NavFolderId>(activeFolderFromPath);
   useEffect(() => {
-    setSelectedMain(activeMain);
-  }, [activeMain]);
-  const visibleTabs = groupedTabs[selectedMain];
+    setDockFolder(activeFolderFromPath);
+  }, [activeFolderFromPath]);
+
+  const dockItems = useMemo(
+    () => folderGroups.find((g) => g.folderId === dockFolder)?.items ?? [],
+    [folderGroups, dockFolder]
+  );
 
   if (variant === "aspire-sidebar") {
     return (
@@ -258,49 +235,14 @@ export function TabNav({
         aria-label={t("mainNavigationAria")}
         className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
       >
-        <div className="px-1 pb-2 pt-1 group-hover:px-2">
-          <p className="hidden px-1 pb-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.08em] text-brand-muted group-hover:block">
-            {t("mainTabs")}
-          </p>
-          <div className="grid grid-cols-1 gap-1 group-hover:grid-cols-3">
-            {MAIN_TABS.map((mt, index) => {
-              const selected = selectedMain === mt.key;
-              const mainPriority = index + 1;
-              return (
-                <button
-                  key={mt.key}
-                  type="button"
-                  onClick={() => setSelectedMain(mt.key)}
-                  aria-label={`${mainPriority}. ${t(mt.labelKey)}`}
-                  className={cn(
-                    "relative inline-flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-sm)] py-1.5 pl-5 pr-1 text-[0.7rem] font-medium transition-apple group-hover:gap-1.5",
-                    selected
-                      ? "text-[var(--color-text)]"
-                      : "text-brand-muted opacity-90 hover:opacity-100"
-                  )}
-                >
-                  <NavPriorityBadge priority={mainPriority} className="left-0.5 top-1/2 -translate-y-1/2" />
-                  <span
-                    className={cn(
-                      "inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[6px] text-white shadow-sm",
-                      MAIN_TAB_TILE_CLASS[mt.key],
-                      !selected && "opacity-50"
-                    )}
-                  >
-                    <span className="text-xs leading-none" aria-hidden>{mt.emoji}</span>
-                  </span>
-                  <span className="hidden min-w-0 truncate group-hover:inline">{t(mt.labelKey)}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <p className="hidden px-3 pb-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.08em] text-brand-muted group-hover:block">
-            {t("subtabs")}
-          </p>
-          <div className="flex flex-col gap-0.5">
-            {visibleTabs.map((tab) => (
+        {folderGroups.map(({ folderId, items }) => (
+          <NavFolder
+            key={folderId}
+            folderId={folderId}
+            compact
+            hasActiveChild={folderHasActiveChild(items, (tab) => tabInPath(pathname, tab.href))}
+          >
+            {items.map((tab) => (
               <AspireSidebarLink
                 key={tab.href}
                 tab={tab}
@@ -309,8 +251,8 @@ export function TabNav({
                 priority={tab.priority}
               />
             ))}
-          </div>
-        </div>
+          </NavFolder>
+        ))}
       </nav>
     );
   }
@@ -322,36 +264,11 @@ export function TabNav({
         className="mx-auto max-w-2xl overflow-x-auto overflow-y-hidden overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]"
       >
         <div className="flex min-w-full flex-col gap-1.5">
-          <div
-            className="inline-flex w-full shrink-0 gap-0.5 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] p-0.5"
-            role="tablist"
-            aria-label={t("mainTabs")}
-          >
-            {MAIN_TABS.map((mt, index) => {
-              const selected = selectedMain === mt.key;
-              const mainPriority = index + 1;
-              return (
-                <button
-                  key={mt.key}
-                  type="button"
-                  onClick={() => setSelectedMain(mt.key)}
-                  aria-label={`${mainPriority}. ${t(mt.labelKey)}`}
-                  className={cn(
-                    "relative inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-[calc(var(--radius-md)-2px)] px-2.5 py-1.5 pl-6 text-[0.7rem] font-medium transition-apple sm:flex-initial",
-                    selected
-                      ? "bg-[var(--material-thick)] font-semibold text-brand-navy shadow-sm"
-                      : "text-brand-muted"
-                  )}
-                >
-                  <NavPriorityBadge priority={mainPriority} className="left-1 top-1/2 -translate-y-1/2" />
-                  <span className="text-xs leading-none" aria-hidden>{mt.emoji}</span>
-                  {t(mt.labelKey)}
-                </button>
-              );
-            })}
-          </div>
+          {folderIds.length > 1 ? (
+            <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />
+          ) : null}
           <div className="flex flex-row items-stretch gap-0.5 overflow-x-auto px-0.5 pb-0.5">
-            {visibleTabs.map((tab) => (
+            {dockItems.map((tab) => (
               <DockLink
                 key={tab.href}
                 tab={tab}

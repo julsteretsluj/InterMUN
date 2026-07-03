@@ -1,8 +1,17 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { nextClauseNumber } from "@/lib/resolution-functions";
+import { isGoogleDocsDocumentUrl } from "@/lib/google-docs-embed";
+import {
+  extractOperativeClauses,
+  fetchGoogleDocText,
+  GoogleDocNotPublicError,
+} from "@/lib/resolution-doc-clauses";
 import nodemailer from "nodemailer";
+
+type BlocStance = "for" | "against" | "neutral";
 
 type ActionResult<T> = { ok: true; data: T } | { ok: false; error: string };
 type Role = "delegate" | "chair" | "smt" | "admin";
@@ -182,21 +191,38 @@ export async function joinBlocAction(input: {
     return { ok: false, error: "Invalid IDs." };
   }
 
-  const { data: resolutionBlocs, error: blocReadErr } = await auth.supabase
-    .from("blocs")
-    .select("id")
-    .eq("resolution_id", input.resolutionId);
-  if (blocReadErr) return { ok: false, error: blocReadErr.message };
-  const allowedBlocIds = new Set((resolutionBlocs ?? []).map((b) => b.id));
-  if (!allowedBlocIds.has(input.blocId)) {
-    return { ok: false, error: "Bloc does not belong to resolution." };
+  // Resolve the committee (conference) this bloc belongs to.
+  const { data: targetRes, error: resErr } = await auth.supabase
+    .from("resolutions")
+    .select("id, conference_id")
+    .eq("id", input.resolutionId)
+    .maybeSingle();
+  if (resErr) return { ok: false, error: resErr.message };
+  if (!targetRes?.conference_id) return { ok: false, error: "Resolution not found." };
+
+  // Every bloc across every resolution in this committee.
+  const { data: committeeResolutions, error: listErr } = await auth.supabase
+    .from("resolutions")
+    .select("id, blocs(id)")
+    .eq("conference_id", targetRes.conference_id);
+  if (listErr) return { ok: false, error: listErr.message };
+
+  const committeeBlocIds = new Set<string>();
+  for (const r of committeeResolutions ?? []) {
+    for (const b of (r as { blocs?: { id: string }[] }).blocs ?? []) {
+      committeeBlocIds.add(b.id);
+    }
+  }
+  if (!committeeBlocIds.has(input.blocId)) {
+    return { ok: false, error: "Bloc does not belong to this committee." };
   }
 
-  for (const b of resolutionBlocs ?? []) {
+  // A delegate can be in exactly one bloc per committee.
+  if (committeeBlocIds.size > 0) {
     const { error: delErr } = await auth.supabase
       .from("bloc_memberships")
       .delete()
-      .eq("bloc_id", b.id)
+      .in("bloc_id", Array.from(committeeBlocIds))
       .eq("user_id", auth.user.id);
     if (delErr) return { ok: false, error: delErr.message };
   }
@@ -207,7 +233,168 @@ export async function joinBlocAction(input: {
   });
   if (error) return { ok: false, error: error.message };
 
+  revalidatePath("/resolutions");
   return { ok: true, data: { resolutionId: input.resolutionId, blocId: input.blocId } };
+}
+
+/**
+ * Chairs/staff configure the committee's blocs. Each bloc is its own
+ * resolution draft (1 bloc row per resolution row). Blocs with an id are
+ * updated in place; those without are created; existing blocs omitted from
+ * the list are deleted (cascading their resolution + clauses).
+ */
+export async function setCommitteeBlocsAction(input: {
+  conferenceId: string;
+  blocs: Array<{ id?: string; name: string; stance: BlocStance }>;
+}): Promise<ActionResult<{ count: number }>> {
+  const auth = await getAuthContext();
+  if (!auth.user || !isStaff(auth.role)) {
+    return { ok: false, error: "Only chairs can configure blocs." };
+  }
+  if (!isUuid(input.conferenceId)) return { ok: false, error: "Invalid conference id." };
+
+  const validStances: BlocStance[] = ["for", "against", "neutral"];
+  const desired = input.blocs
+    .map((b) => ({ id: b.id?.trim() || undefined, name: b.name.trim(), stance: b.stance }))
+    .filter((b) => b.name.length > 0 && validStances.includes(b.stance));
+
+  // Existing blocs in this committee (bloc -> resolution).
+  const { data: existingResolutions, error: exErr } = await auth.supabase
+    .from("resolutions")
+    .select("id, blocs(id)")
+    .eq("conference_id", input.conferenceId);
+  if (exErr) return { ok: false, error: exErr.message };
+
+  const blocToResolution = new Map<string, string>();
+  for (const r of existingResolutions ?? []) {
+    for (const b of (r as { id: string; blocs?: { id: string }[] }).blocs ?? []) {
+      blocToResolution.set(b.id, (r as { id: string }).id);
+    }
+  }
+
+  const keepBlocIds = new Set<string>();
+
+  for (const bloc of desired) {
+    if (bloc.id && blocToResolution.has(bloc.id)) {
+      keepBlocIds.add(bloc.id);
+      const { error: updErr } = await auth.supabase
+        .from("blocs")
+        .update({ name: bloc.name, stance: bloc.stance })
+        .eq("id", bloc.id);
+      if (updErr) return { ok: false, error: updErr.message };
+    } else {
+      const { data: createdRes, error: resInsErr } = await auth.supabase
+        .from("resolutions")
+        .insert({
+          conference_id: input.conferenceId,
+          main_submitters: [],
+          co_submitters: [],
+          signatories: [],
+        })
+        .select("id")
+        .single();
+      if (resInsErr || !createdRes?.id) {
+        return { ok: false, error: resInsErr?.message ?? "Failed to create bloc." };
+      }
+      const { error: blocInsErr } = await auth.supabase
+        .from("blocs")
+        .insert({ resolution_id: createdRes.id, name: bloc.name, stance: bloc.stance });
+      if (blocInsErr) return { ok: false, error: blocInsErr.message };
+    }
+  }
+
+  // Delete resolutions whose bloc was removed from the desired list.
+  const removeResolutionIds = new Set<string>();
+  for (const [blocId, resolutionId] of blocToResolution.entries()) {
+    if (!keepBlocIds.has(blocId)) removeResolutionIds.add(resolutionId);
+  }
+  if (removeResolutionIds.size > 0) {
+    const { error: delErr } = await auth.supabase
+      .from("resolutions")
+      .delete()
+      .in("id", Array.from(removeResolutionIds));
+    if (delErr) return { ok: false, error: delErr.message };
+  }
+
+  revalidatePath("/resolutions");
+  return { ok: true, data: { count: desired.length } };
+}
+
+/** Bloc member (or staff) sets the single Google Doc link for their bloc's resolution. */
+export async function setResolutionDocLinkAction(input: {
+  resolutionId: string;
+  url: string;
+}): Promise<ActionResult<{ resolutionId: string }>> {
+  const auth = await getAuthContext();
+  if (!auth.user) return { ok: false, error: "Not authenticated." };
+  if (!isUuid(input.resolutionId)) return { ok: false, error: "Invalid resolution id." };
+
+  const url = input.url.trim();
+  if (!url) return { ok: false, error: "A Google Docs link is required." };
+  if (!isGoogleDocsDocumentUrl(url)) {
+    return { ok: false, error: "Enter a valid Google Docs link." };
+  }
+
+  const { error } = await auth.supabase
+    .from("resolutions")
+    .update({ google_docs_url: url, updated_at: new Date().toISOString() })
+    .eq("id", input.resolutionId);
+  if (error) return { ok: false, error: error.message };
+
+  revalidatePath("/resolutions");
+  return { ok: true, data: { resolutionId: input.resolutionId } };
+}
+
+/**
+ * Finalize a bloc's resolution: fetch the public Google Doc, extract operative
+ * clauses, persist them, flip status to finalized, and notify chairs (via RPC).
+ */
+export async function finalizeResolutionAction(input: {
+  resolutionId: string;
+}): Promise<ActionResult<{ resolutionId: string; clauseCount: number }>> {
+  const auth = await getAuthContext();
+  if (!auth.user) return { ok: false, error: "Not authenticated." };
+  if (!isUuid(input.resolutionId)) return { ok: false, error: "Invalid resolution id." };
+
+  const { data: resolution, error: readErr } = await auth.supabase
+    .from("resolutions")
+    .select("id, google_docs_url, status")
+    .eq("id", input.resolutionId)
+    .maybeSingle();
+  if (readErr) return { ok: false, error: readErr.message };
+  if (!resolution) return { ok: false, error: "Resolution not found." };
+  if ((resolution as { status?: string }).status === "finalized") {
+    return { ok: false, error: "This resolution is already finalized." };
+  }
+  if (!resolution.google_docs_url?.trim()) {
+    return { ok: false, error: "Add a Google Docs link before finalizing." };
+  }
+
+  let clauses: string[];
+  try {
+    const text = await fetchGoogleDocText(resolution.google_docs_url);
+    clauses = extractOperativeClauses(text);
+  } catch (e) {
+    if (e instanceof GoogleDocNotPublicError) return { ok: false, error: e.message };
+    return { ok: false, error: e instanceof Error ? e.message : "Could not read the Google Doc." };
+  }
+
+  if (clauses.length === 0) {
+    return {
+      ok: false,
+      error: "No numbered operative clauses were found in the doc. Number your clauses (1., 2., ...) and try again.",
+    };
+  }
+
+  const { error: rpcErr } = await auth.supabase.rpc("finalize_resolution_with_clauses", {
+    p_resolution_id: input.resolutionId,
+    p_clauses: clauses,
+  });
+  if (rpcErr) return { ok: false, error: rpcErr.message };
+
+  revalidatePath("/resolutions");
+  revalidatePath("/amendments");
+  return { ok: true, data: { resolutionId: input.resolutionId, clauseCount: clauses.length } };
 }
 
 export async function recordClauseVoteOutcomesAction(input: {

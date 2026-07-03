@@ -44,8 +44,8 @@ function daisFromChairNamesField(raw: string | null | undefined): DaisSeat[] | n
       .filter(Boolean) ?? [];
   if (parts.length === 0) return null;
   return [
-    { title: "Chair", name: parts[0] ?? null, showGavel: true, profileId: null },
-    { title: "Vice-Chair", name: parts[1] ?? null, showGavel: true, profileId: null },
+    { title: "Head Chair", name: parts[0] ?? null, showGavel: true, profileId: null },
+    { title: "Co-Chair", name: parts[1] ?? null, showGavel: true, profileId: null },
   ];
 }
 
@@ -248,13 +248,13 @@ export async function loadCommitteeRoomPayload(
     const smt = (staff ?? []).filter((p) => p.role === "smt" || p.role === "admin");
     dais = [
       {
-        title: "Chair",
+        title: "Head Chair",
         name: chairs[0]?.name ?? null,
         showGavel: true,
         profileId: chairs[0]?.id ?? null,
       },
       {
-        title: "Vice-Chair",
+        title: "Co-Chair",
         name: chairs[1]?.name ?? smt[0]?.name ?? null,
         showGavel: true,
         profileId: chairs[1]?.id ?? smt[0]?.id ?? null,

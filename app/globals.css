@@ -796,6 +796,13 @@ html.dark ::selection {
     @apply relative pl-6;
   }
 
+  .nav-folder + .nav-folder {
+    margin-top: 0.125rem;
+  }
+  .nav-folder-trigger:focus-visible {
+    @apply outline-none ring-2 ring-brand-accent/40 ring-offset-1 ring-offset-[var(--color-bg-page)];
+  }
+
   .dashboard-status-badge--warning {
     @apply border-amber-200 bg-amber-50 text-amber-900;
   }

@@ -22,17 +22,68 @@ export type MilestoneMetricDef = {
   icon: string;
   /** Ascending thresholds. When `openEnded`, the final tier renders as "N+". */
   tiers: number[];
+  /**
+   * One completely unique emoji per tier (aligned index-for-index with `tiers`).
+   * Every emoji across every metric is distinct so each individual checkpoint
+   * has its own badge icon.
+   */
+  tierIcons: string[];
   openEnded: boolean;
 };
 
-/** Tier thresholds mirror the requested checkpoints (1 / 5 / 10 / 20+ etc.). */
+/**
+ * Tier thresholds mirror the requested checkpoints (1 / 5 / 10 / 20+ etc.).
+ * `tierIcons` gives each checkpoint a globally-unique emoji.
+ */
 export const MILESTONE_METRICS: readonly MilestoneMetricDef[] = [
-  { id: "moderated_caucuses", scope: "committee", icon: "🗣️", tiers: [1, 5, 10, 20], openEnded: true },
-  { id: "unmoderated_caucuses", scope: "committee", icon: "🤝", tiers: [1, 5, 10], openEnded: true },
-  { id: "consultations", scope: "committee", icon: "💬", tiers: [1, 5, 10], openEnded: true },
-  { id: "resolutions_passed", scope: "committee", icon: "📜", tiers: [1, 2, 3, 5], openEnded: true },
-  { id: "speeches", scope: "delegate", icon: "🎤", tiers: [1, 5, 10, 20], openEnded: true },
-  { id: "points_raised", scope: "delegate", icon: "✋", tiers: [1, 5, 20, 50], openEnded: true },
+  {
+    id: "moderated_caucuses",
+    scope: "committee",
+    icon: "🗣️",
+    tiers: [1, 5, 10, 20],
+    tierIcons: ["📢", "📣", "🎙️", "🔥"],
+    openEnded: true,
+  },
+  {
+    id: "unmoderated_caucuses",
+    scope: "committee",
+    icon: "🤝",
+    tiers: [1, 5, 10],
+    tierIcons: ["👥", "🧑‍🤝‍🧑", "🌐"],
+    openEnded: true,
+  },
+  {
+    id: "consultations",
+    scope: "committee",
+    icon: "💬",
+    tiers: [1, 5, 10],
+    tierIcons: ["🗨️", "🗯️", "💡"],
+    openEnded: true,
+  },
+  {
+    id: "resolutions_passed",
+    scope: "committee",
+    icon: "📜",
+    tiers: [1, 2, 3, 5],
+    tierIcons: ["📃", "📋", "📚", "🏛️"],
+    openEnded: true,
+  },
+  {
+    id: "speeches",
+    scope: "delegate",
+    icon: "🎤",
+    tiers: [1, 5, 10, 20],
+    tierIcons: ["🎧", "🔊", "📻", "🎯"],
+    openEnded: true,
+  },
+  {
+    id: "points_raised",
+    scope: "delegate",
+    icon: "✋",
+    tiers: [1, 5, 20, 50],
+    tierIcons: ["🙋", "☝️", "🤚", "🎖️"],
+    openEnded: true,
+  },
 ] as const;
 
 export const MILESTONE_METRIC_BY_ID: Record<MilestoneMetricId, MilestoneMetricDef> = Object.fromEntries(
@@ -41,6 +92,8 @@ export const MILESTONE_METRIC_BY_ID: Record<MilestoneMetricId, MilestoneMetricDe
 
 export type MilestoneTierProgress = {
   threshold: number;
+  /** Unique emoji for this specific checkpoint. */
+  icon: string;
   /** True when this is the open-ended "N+" cap tier. */
   plus: boolean;
   achieved: boolean;
@@ -72,6 +125,7 @@ export function computeMilestoneProgress(
 
   const tiers: MilestoneTierProgress[] = def.tiers.map((threshold, index) => ({
     threshold,
+    icon: def.tierIcons[index] ?? def.icon,
     plus: def.openEnded && index === lastIndex,
     achieved: safeCount >= threshold,
   }));

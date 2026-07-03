@@ -2,13 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import {
+  ADVISOR_ITEM_FOLDER,
+  ADVISOR_NAV_FOLDER_ORDER,
+  folderHasActiveChild,
+  groupNavByFolder,
+  type NavFolderId,
+} from "@/lib/nav-folder-groups";
 import { cn } from "@/lib/utils";
 
 type AdvisorNavItem = {
   href: string;
-  labelKey: "hub" | "notes" | "schedule" | "newsroom" | "milestones" | "profile";
+  labelKey: "hub" | "notes" | "schedule" | "newsroom" | "pressCorps" | "milestones" | "profile";
   emoji: string;
 };
 
@@ -17,6 +26,7 @@ const ADVISOR_NAV_ITEMS: AdvisorNavItem[] = [
   { href: "/advisor/notes", labelKey: "notes", emoji: "📨" },
   { href: "/advisor/schedule", labelKey: "schedule", emoji: "📅" },
   { href: "/advisor/newsroom", labelKey: "newsroom", emoji: "📰" },
+  { href: "/advisor/press-corps", labelKey: "pressCorps", emoji: "📸" },
   { href: "/advisor/milestones", labelKey: "milestones", emoji: "🏅" },
   { href: "/advisor/profile", labelKey: "profile", emoji: "⚙️" },
 ];
@@ -102,19 +112,34 @@ export function AdvisorDashboardSidebar() {
   const t = useTranslations("advisorNav");
   const pathname = usePathname();
 
+  const folderGroups = useMemo(
+    () =>
+      groupNavByFolder(ADVISOR_NAV_ITEMS, ADVISOR_NAV_FOLDER_ORDER, (item) => ADVISOR_ITEM_FOLDER[item.labelKey] ?? "home"),
+    []
+  );
+
   return (
     <nav
       aria-label={t("ariaDashboard")}
       className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-1.5 py-2 group-hover:px-3 [scrollbar-width:thin]"
     >
-      {ADVISOR_NAV_ITEMS.map((item, index) => (
-        <AdvisorSidebarLink
-          key={item.href}
-          item={item}
-          label={t(item.labelKey)}
-          isActive={navItemIsActive(pathname, item.href)}
-          priority={index + 1}
-        />
+      {folderGroups.map(({ folderId, items }) => (
+        <NavFolder
+          key={folderId}
+          folderId={folderId}
+          compact
+          hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item.href))}
+        >
+          {items.map((item, index) => (
+            <AdvisorSidebarLink
+              key={item.href}
+              item={item}
+              label={t(item.labelKey)}
+              isActive={navItemIsActive(pathname, item.href)}
+              priority={index + 1}
+            />
+          ))}
+        </NavFolder>
       ))}
     </nav>
   );
@@ -124,14 +149,45 @@ export function AdvisorMobileDock() {
   const t = useTranslations("advisorNav");
   const pathname = usePathname();
 
+  const folderGroups = useMemo(
+    () =>
+      groupNavByFolder(ADVISOR_NAV_ITEMS, ADVISOR_NAV_FOLDER_ORDER, (item) => ADVISOR_ITEM_FOLDER[item.labelKey] ?? "home"),
+    []
+  );
+
+  const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);
+
+  const activeFolderFromPath = useMemo(() => {
+    for (const group of folderGroups) {
+      if (folderHasActiveChild(group.items, (item) => navItemIsActive(pathname, item.href))) {
+        return group.folderId;
+      }
+    }
+    return folderIds[0] ?? "home";
+  }, [folderGroups, folderIds, pathname]);
+
+  const [dockFolder, setDockFolder] = useState<NavFolderId>(activeFolderFromPath);
+  useEffect(() => {
+    setDockFolder(activeFolderFromPath);
+  }, [activeFolderFromPath]);
+
+  const dockItems = useMemo(
+    () => folderGroups.find((g) => g.folderId === dockFolder)?.items ?? [],
+    [folderGroups, dockFolder]
+  );
+
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <nav
         aria-label={t("ariaDashboard")}
         className="mx-auto max-w-md overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2.5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150"
       >
-        <div className="flex flex-row items-stretch gap-0.5 overflow-x-auto px-0.5 pb-0.5">
-          {ADVISOR_NAV_ITEMS.map((item, index) => (
+        <div className="flex min-w-full flex-col gap-1.5">
+          {folderIds.length > 1 ? (
+            <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />
+          ) : null}
+          <div className="flex flex-row items-stretch gap-0.5 overflow-x-auto px-0.5 pb-0.5">
+          {dockItems.map((item, index) => (
             <AdvisorDockLink
               key={item.href}
               item={item}
@@ -140,6 +196,7 @@ export function AdvisorMobileDock() {
               priority={index + 1}
             />
           ))}
+          </div>
         </div>
       </nav>
     </div>

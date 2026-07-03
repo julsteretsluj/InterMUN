@@ -40,6 +40,12 @@ function MilestoneTile({ progress }: { progress: MilestoneProgress }) {
             )}
             title={tier.achieved ? t("achieved") : t("locked")}
           >
+            <span
+              className={cn("mr-1 leading-none", !tier.achieved && "opacity-50 grayscale")}
+              aria-hidden
+            >
+              {tier.icon}
+            </span>
             {tier.plus ? t("tierPlus", { n: tier.threshold }) : tier.threshold}
           </span>
         ))}
@@ -128,15 +134,21 @@ function DelegateLeaderboard({ delegates }: { delegates: DelegateMilestoneRow[] 
 
 function CommitteeSection({ group }: { group: CommitteeMilestoneGroup }) {
   const t = useTranslations("milestones");
+  const hasCommittee = group.committee.length > 0;
   return (
     <section className="dashboard-panel space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="dashboard-panel-title">{t("committeeTitle", { committee: group.label })}</h3>
-        <EarnedBadge items={group.committee} />
+        {hasCommittee ? <EarnedBadge items={group.committee} /> : null}
       </div>
-      <MilestoneGrid items={group.committee} />
+      {hasCommittee ? <MilestoneGrid items={group.committee} /> : null}
       {group.delegates.length > 0 ? (
-        <div className="space-y-2 border-t border-[var(--hairline)] pt-4">
+        <div
+          className={cn(
+            "space-y-2",
+            hasCommittee && "border-t border-[var(--hairline)] pt-4"
+          )}
+        >
           <h4 className="text-sm font-semibold text-brand-navy">{t("delegateLeaderboard")}</h4>
           <DelegateLeaderboard delegates={group.delegates} />
         </div>

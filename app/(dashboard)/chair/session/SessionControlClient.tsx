@@ -321,22 +321,37 @@ export function SessionControlClient({
     value: RollAttendance;
     label: string;
     title: string;
+    /** Distinct colour per status so options are easy to tell apart. */
+    activeClass: string;
+    inactiveClass: string;
   }[] = useMemo(
     () => [
       {
         value: "present_abstain",
         label: tSessionControl("rollPresent"),
         title: tSessionControl("rollPresentTitle"),
+        activeClass:
+          "border-amber-500/70 bg-amber-400/30 text-amber-950 shadow-sm dark:bg-amber-400/25 dark:text-amber-100",
+        inactiveClass:
+          "border-amber-500/25 bg-amber-400/5 text-amber-800/90 hover:bg-amber-400/15 dark:text-amber-200/80",
       },
       {
         value: "present_voting",
         label: tSessionControl("rollPresentVoting"),
         title: tSessionControl("rollPresentVotingTitle"),
+        activeClass:
+          "border-emerald-500/70 bg-emerald-400/30 text-emerald-950 shadow-sm dark:bg-emerald-400/25 dark:text-emerald-100",
+        inactiveClass:
+          "border-emerald-500/25 bg-emerald-400/5 text-emerald-800/90 hover:bg-emerald-400/15 dark:text-emerald-200/80",
       },
       {
         value: "absent",
         label: tSessionControl("rollAbsent"),
         title: tSessionControl("rollAbsent"),
+        activeClass:
+          "border-rose-500/70 bg-rose-400/30 text-rose-950 shadow-sm dark:bg-rose-400/25 dark:text-rose-100",
+        inactiveClass:
+          "border-rose-500/25 bg-rose-400/5 text-rose-800/90 hover:bg-rose-400/15 dark:text-rose-200/80",
       },
     ],
     [tSessionControl]
@@ -4509,9 +4524,7 @@ export function SessionControlClient({
                               disabled={pending}
                               onClick={() => setRollAttendanceForRow(r.allocation_id, opt.value)}
                               className={`rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition disabled:opacity-50 sm:text-sm ${
-                                active
-                                  ? "border-brand-accent/70 bg-brand-accent/25 text-brand-navy shadow-sm"
-                                  : "border-white/20 bg-white/5 text-brand-navy/90 hover:bg-white/15"
+                                active ? opt.activeClass : opt.inactiveClass
                               }`}
                             >
                               {opt.label}

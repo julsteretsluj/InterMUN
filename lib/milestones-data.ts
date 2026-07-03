@@ -2,7 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
-import { isAdvisorRole, isAdminRole, isSmtRole, isChairRole } from "@/lib/roles";
+import { isAdvisorRole, isAdminRole, isSmtRole } from "@/lib/roles";
 import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
 import {
   computeMilestonesForScope,
@@ -104,25 +104,6 @@ async function delegateCountsByAllocation(
   return out;
 }
 
-/** Single-delegate counts (RLS-scoped; delegate reads their own rows). */
-async function singleDelegateCounts(
-  supabase: SupabaseClient,
-  allocationId: string
-): Promise<MilestoneCounts> {
-  const [{ count: speeches }, { count: points }] = await Promise.all([
-    supabase
-      .from("committee_speech_events")
-      .select("id", { count: "exact", head: true })
-      .eq("allocation_id", allocationId),
-    supabase
-      .from("chair_session_points")
-      .select("id", { count: "exact", head: true })
-      .eq("raised_by_allocation_id", allocationId)
-      .in("point_code", ["poi", "poc"]),
-  ]);
-  return { speeches: speeches ?? 0, points_raised: points ?? 0 };
-}
-
 function delegateRow(allocationId: string, label: string, counts: MilestoneCounts): DelegateMilestoneRow {
   const milestones = computeMilestonesForScope("delegate", counts);
   return { allocationId, label, milestones, earned: totalEarnedCheckpoints(milestones).earned };
@@ -132,31 +113,38 @@ async function committeeGroup(
   supabase: SupabaseClient,
   conferenceId: string,
   label: string,
-  restrictAllocationIds: Set<string> | null
+  restrictAllocationIds: Set<string> | null,
+  opts: { includeCommittee?: boolean; includeDelegates?: boolean } = {}
 ): Promise<CommitteeMilestoneGroup> {
-  const committee = computeMilestonesForScope("committee", await committeeCounts(supabase, conferenceId));
+  const { includeCommittee = true, includeDelegates = true } = opts;
 
-  const { data: allocs } = await supabase
-    .from("allocations")
-    .select("id, country, user_id")
-    .eq("conference_id", conferenceId);
-  const countsMap = await delegateCountsByAllocation(supabase, conferenceId);
+  const committee = includeCommittee
+    ? computeMilestonesForScope("committee", await committeeCounts(supabase, conferenceId))
+    : [];
 
-  const delegates: DelegateMilestoneRow[] = ((allocs ?? []) as AllocRow[])
-    .filter((a) => !isDaisSeat(a.country))
-    .filter((a) => (restrictAllocationIds ? restrictAllocationIds.has(a.id) : true))
-    .map((a) => delegateRow(a.id, (a.country ?? "").trim() || "—", countsMap.get(a.id) ?? {}))
-    .sort((x, y) => y.earned - x.earned || x.label.localeCompare(y.label));
+  let delegates: DelegateMilestoneRow[] = [];
+  if (includeDelegates) {
+    const { data: allocs } = await supabase
+      .from("allocations")
+      .select("id, country, user_id")
+      .eq("conference_id", conferenceId);
+    const countsMap = await delegateCountsByAllocation(supabase, conferenceId);
+
+    delegates = ((allocs ?? []) as AllocRow[])
+      .filter((a) => !isDaisSeat(a.country))
+      .filter((a) => (restrictAllocationIds ? restrictAllocationIds.has(a.id) : true))
+      .map((a) => delegateRow(a.id, (a.country ?? "").trim() || "—", countsMap.get(a.id) ?? {}))
+      .sort((x, y) => y.earned - x.earned || x.label.localeCompare(y.label));
+  }
 
   return { conferenceId, label, committee, delegates };
 }
 
 /**
  * Assemble the milestones view for the signed-in user, tailored to their role:
- *  - delegate: their committee's progress + their own per-delegate milestones
- *  - chair: their committee's progress + a per-delegate leaderboard
- *  - advisor: committees of their assigned delegates + those delegates' milestones
- *  - smt/admin: every committee in the active event
+ *  - delegate/chair: committee-scope milestones only (no per-delegate stats)
+ *  - advisor: only their assigned delegates' per-delegate milestones (no committee scope)
+ *  - smt/admin: everything — committee scope + all delegates, for every committee
  */
 export async function loadMilestonesForViewer(): Promise<MilestonesData> {
   const supabase = await createClient();
@@ -182,8 +170,14 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
     }
     const confIds = [...byConf.keys()];
     const labels = await conferenceLabels(supabase, confIds);
+    // Advisors only see their assigned delegates' per-delegate milestones.
     const committees = await Promise.all(
-      confIds.map((id) => committeeGroup(supabase, id, labels.get(id) ?? "Committee", byConf.get(id) ?? null))
+      confIds.map((id) =>
+        committeeGroup(supabase, id, labels.get(id) ?? "Committee", byConf.get(id) ?? null, {
+          includeCommittee: false,
+          includeDelegates: true,
+        })
+      )
     );
     return { role, self: null, committees };
   }
@@ -205,37 +199,17 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
     return { role, self: null, committees };
   }
 
-  // Delegate / chair: their dashboard committee.
+  // Delegate / chair: their dashboard committee — committee-scope milestones only.
   const conf = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!conf) return { role, self: null, committees: [] };
   const label = (conf.committee ?? conf.name ?? "").trim() || "Committee";
 
-  let self: DelegateMilestoneRow | null = null;
-  const { data: myAlloc } = await supabase
-    .from("allocations")
-    .select("id, country")
-    .eq("conference_id", conf.id)
-    .eq("user_id", user.id)
-    .maybeSingle();
-  if (myAlloc?.id) {
-    self = delegateRow(
-      myAlloc.id,
-      (myAlloc.country ?? "").trim() || "—",
-      await singleDelegateCounts(supabase, myAlloc.id)
-    );
-  }
+  const group = await committeeGroup(supabase, conf.id, label, null, {
+    includeCommittee: true,
+    includeDelegates: false,
+  });
 
-  // Chairs see the full leaderboard; delegates only see the committee aggregate + self.
-  const group = isChairRole(role)
-    ? await committeeGroup(supabase, conf.id, label, null)
-    : {
-        conferenceId: conf.id,
-        label,
-        committee: computeMilestonesForScope("committee", await committeeCounts(supabase, conf.id)),
-        delegates: [] as DelegateMilestoneRow[],
-      };
-
-  return { role, self, committees: [group] };
+  return { role, self: null, committees: [group] };
 }
 
 async function conferenceLabels(

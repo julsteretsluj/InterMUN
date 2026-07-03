@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import {
+  SMT_ITEM_FOLDER,
+  SMT_NAV_FOLDER_ORDER,
+  folderHasActiveChild,
+  groupNavByFolder,
+  type NavFolderId,
+} from "@/lib/nav-folder-groups";
 import {
   SMT_NAV_KEY_ORDER,
   sortByKeyPriority,
@@ -20,6 +29,7 @@ export type SmtNavKey =
   | "allocationMatrix"
   | "allocationPasswords"
   | "newsroom"
+  | "pressCorps"
   | "milestones"
   | "profile";
 
@@ -37,6 +47,7 @@ const SMT_NAV_ITEMS: SmtNavItem[] = [
   { href: "/smt/room-codes", navKey: "roomCodes", emoji: "🚪" },
   { href: "/smt/advisors", navKey: "advisors", emoji: "🎓" },
   { href: "/smt/newsroom", navKey: "newsroom", emoji: "📰" },
+  { href: "/smt/press-corps", navKey: "pressCorps", emoji: "📸" },
   { href: "/smt/milestones", navKey: "milestones", emoji: "🏅" },
   { href: "/smt/notes", navKey: "notes", emoji: "💬" },
   { href: "/smt/awards", navKey: "awards", emoji: "🏆" },
@@ -128,6 +139,17 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
   const pathname = usePathname();
   const hubActive = pathname === "/smt" || pathname.startsWith("/smt/committees/");
 
+  const priorityByKey = useMemo(
+    () => new Map(SMT_NAV_ITEMS_ORDERED.map((item, index) => [item.navKey, index + 1])),
+    []
+  );
+
+  const folderGroups = useMemo(
+    () =>
+      groupNavByFolder(SMT_NAV_ITEMS_ORDERED, SMT_NAV_FOLDER_ORDER, (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations"),
+    []
+  );
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="shrink-0 px-1.5 pb-2 pt-3 group-hover:px-3">
@@ -152,14 +174,23 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
         aria-label={tNav("ariaDashboard")}
         className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overflow-x-hidden px-1.5 py-1 [scrollbar-width:thin] group-hover:px-3"
       >
-        {SMT_NAV_ITEMS_ORDERED.map((item, index) => (
-          <SmtSidebarLink
-            key={item.href}
-            item={item}
-            label={tNav(item.navKey)}
-            isActive={smtNavItemIsActive(pathname, item)}
-            priority={index + 1}
-          />
+        {folderGroups.map(({ folderId, items }) => (
+          <NavFolder
+            key={folderId}
+            folderId={folderId}
+            compact
+            hasActiveChild={folderHasActiveChild(items, (item) => smtNavItemIsActive(pathname, item))}
+          >
+            {items.map((item) => (
+              <SmtSidebarLink
+                key={item.href}
+                item={item}
+                label={tNav(item.navKey)}
+                isActive={smtNavItemIsActive(pathname, item)}
+                priority={priorityByKey.get(item.navKey) ?? 0}
+              />
+            ))}
+          </NavFolder>
         ))}
       </nav>
 
@@ -180,19 +211,56 @@ export function SmtMobileDock() {
   const tNav = useTranslations("smtNav");
   const pathname = usePathname();
 
+  const priorityByKey = useMemo(
+    () => new Map(SMT_NAV_ITEMS_ORDERED.map((item, index) => [item.navKey, index + 1])),
+    []
+  );
+
+  const folderGroups = useMemo(
+    () =>
+      groupNavByFolder(SMT_NAV_ITEMS_ORDERED, SMT_NAV_FOLDER_ORDER, (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations"),
+    []
+  );
+
+  const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);
+
+  const activeFolderFromPath = useMemo(() => {
+    for (const group of folderGroups) {
+      if (folderHasActiveChild(group.items, (item) => smtNavItemIsActive(pathname, item))) {
+        return group.folderId;
+      }
+    }
+    return folderIds[0] ?? "operations";
+  }, [folderGroups, folderIds, pathname]);
+
+  const [dockFolder, setDockFolder] = useState<NavFolderId>(activeFolderFromPath);
+  useEffect(() => {
+    setDockFolder(activeFolderFromPath);
+  }, [activeFolderFromPath]);
+
+  const dockItems = useMemo(
+    () => folderGroups.find((g) => g.folderId === dockFolder)?.items ?? [],
+    [folderGroups, dockFolder]
+  );
+
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
-        <div className="flex items-center gap-0.5 overflow-x-auto">
-          {SMT_NAV_ITEMS_ORDERED.map((item, index) => (
+        <div className="flex min-w-full flex-col gap-1.5">
+          {folderIds.length > 1 ? (
+            <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />
+          ) : null}
+          <div className="flex items-center gap-0.5 overflow-x-auto">
+          {dockItems.map((item) => (
             <SmtDockLink
               key={item.href}
               item={item}
               label={tNav(item.navKey)}
               isActive={smtNavItemIsActive(pathname, item)}
-              priority={index + 1}
+              priority={priorityByKey.get(item.navKey) ?? 0}
             />
           ))}
+          </div>
         </div>
       </div>
     </div>

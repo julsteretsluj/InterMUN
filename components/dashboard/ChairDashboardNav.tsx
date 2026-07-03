@@ -5,6 +5,14 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
+import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import {
+  CHAIR_ITEM_FOLDER,
+  CHAIR_NAV_FOLDER_ORDER,
+  folderHasActiveChild,
+  groupNavByFolder,
+  type NavFolderId,
+} from "@/lib/nav-folder-groups";
 import {
   CHAIR_NAV_ITEM_KEY_ORDER,
   sortByKeyPriority,
@@ -21,6 +29,7 @@ export type ChairNavItemKey =
   | "digitalRoom"
   | "history"
   | "newsroom"
+  | "pressCorps"
   | "milestones"
   | "rollCall"
   | "session"
@@ -84,6 +93,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
   { href: "/chair/digital-room", itemKey: "digitalRoom", emoji: "🖥️" },
   { href: "/history", itemKey: "history", emoji: "🕘" },
   { href: "/newsroom", itemKey: "newsroom", emoji: "📰" },
+  { href: "/press-corps", itemKey: "pressCorps", emoji: "📸" },
   { href: "/milestones", itemKey: "milestones", emoji: "🏅" },
   {
     href: "/chair/session/speakers",
@@ -234,6 +244,17 @@ export function ChairDashboardSidebar({
     return items.filter((item) => item.itemKey !== "conferenceSchedule");
   }, [crisisReportingEnabled, seamunScheduleEnabled]);
 
+  const priorityByKey = useMemo(() => {
+    const sorted = sortByKeyPriority(navItems, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
+    return new Map(sorted.map((item, index) => [item.itemKey, index + 1]));
+  }, [navItems]);
+
+  const folderGroups = useMemo(
+    () =>
+      groupNavByFolder(navItems, CHAIR_NAV_FOLDER_ORDER, (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session"),
+    [navItems]
+  );
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className={cn("shrink-0 px-3 pt-3 pb-2", labelsHidden && "px-2")}>
@@ -261,16 +282,25 @@ export function ChairDashboardSidebar({
           labelsHidden ? "px-1.5" : "px-3"
         )}
       >
-        {navItems.map((item, index) => (
-          <ChairNavRow
-            key={item.href + item.itemKey}
-            item={item}
-            label={item.labelOverride ?? tItems(item.itemKey)}
-            isActive={navItemIsActive(pathname, item)}
+        {folderGroups.map(({ folderId, items }) => (
+          <NavFolder
+            key={folderId}
+            folderId={folderId}
             labelsHidden={labelsHidden}
-            priority={index + 1}
-            badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
-          />
+            hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item))}
+          >
+            {items.map((item) => (
+              <ChairNavRow
+                key={item.href + item.itemKey}
+                item={item}
+                label={item.labelOverride ?? tItems(item.itemKey)}
+                isActive={navItemIsActive(pathname, item)}
+                labelsHidden={labelsHidden}
+                priority={priorityByKey.get(item.itemKey) ?? 0}
+                badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
+              />
+            ))}
+          </NavFolder>
         ))}
       </nav>
 
@@ -408,10 +438,46 @@ export function ChairMobileDock({
     return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
   }, [crisisReportingEnabled, seamunScheduleEnabled]);
 
+  const priorityByKey = useMemo(
+    () => new Map(navItems.map((item, index) => [item.itemKey, index + 1])),
+    [navItems]
+  );
+
+  const folderGroups = useMemo(
+    () =>
+      groupNavByFolder(navItems, CHAIR_NAV_FOLDER_ORDER, (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session"),
+    [navItems]
+  );
+
+  const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);
+
+  const activeFolderFromPath = useMemo(() => {
+    for (const group of folderGroups) {
+      if (folderHasActiveChild(group.items, (item) => navItemIsActive(pathname, item))) {
+        return group.folderId;
+      }
+    }
+    return folderIds[0] ?? "session";
+  }, [folderGroups, folderIds, pathname]);
+
+  const [dockFolder, setDockFolder] = useState<NavFolderId>(activeFolderFromPath);
+  useEffect(() => {
+    setDockFolder(activeFolderFromPath);
+  }, [activeFolderFromPath]);
+
+  const dockItems = useMemo(
+    () => folderGroups.find((g) => g.folderId === dockFolder)?.items ?? [],
+    [folderGroups, dockFolder]
+  );
+
   return (
     <div className="pointer-events-auto px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2">
       <div className="mx-auto max-w-2xl overflow-x-auto overscroll-x-contain rounded-[var(--radius-2xl)] border border-[var(--hairline)] bg-[var(--material-chrome)] px-2 py-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[0_12px_32px_-10px_rgba(0,0,0,0.55)]">
-        <div className="flex items-center gap-1 overflow-x-auto px-1 py-1">
+        <div className="flex min-w-full flex-col gap-1.5">
+          {folderIds.length > 1 ? (
+            <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />
+          ) : null}
+          <div className="flex items-center gap-1 overflow-x-auto px-1 py-1">
         <Link
           href="/chair"
           className="flex shrink-0 snap-start flex-col items-center gap-0.5 px-1 py-1.5 transition-apple active:scale-[0.97]"
@@ -431,14 +497,14 @@ export function ChairMobileDock({
             </span>
           ) : null}
         </Link>
-        {navItems.map((item, index) => (
+        {dockItems.map((item) => (
           <DockItem
             key={item.href + item.itemKey}
             item={item}
             label={item.labelOverride ?? tItems(item.itemKey)}
             isActive={navItemIsActive(pathname, item)}
             labelsHidden={labelsHidden}
-            priority={index + 1}
+            priority={priorityByKey.get(item.itemKey) ?? 0}
             badgeCount={item.itemKey === "notesModeration" ? heldNotesCount : undefined}
           />
         ))}
@@ -457,6 +523,7 @@ export function ChairMobileDock({
             <span className="max-w-[4rem] text-center text-[0.625rem] font-medium leading-tight">{t("labelsDock")}</span>
           ) : null}
         </button>
+        </div>
         </div>
       </div>
     </div>
