@@ -26,11 +26,11 @@ export function PriorityTabLink({
       aria-selected={active}
       aria-label={`${priority}. ${label}`}
       className={cn(
-        "nav-priority-tab relative rounded-t-xl px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px",
+        "nav-priority-tab relative rounded-t-xl py-2.5 pl-8 pr-4 text-sm font-medium transition-colors border-b-2 -mb-px",
         active ? activeClassName : inactiveClassName
       )}
     >
-      <NavPriorityBadge priority={priority} className="left-1.5 top-1.5" />
+      <NavPriorityBadge priority={priority} className="left-1.5 top-1/2 -translate-y-1/2" />
       {label}
     </Link>
   );

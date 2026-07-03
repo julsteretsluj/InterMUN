@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { setActiveConferenceContext } from "@/lib/set-active-conference-context";
 import { isDelegateDashboardCommitteeAllowlistedEmail } from "@/lib/delegate-dashboard-committee-allowlist";
+import { getCommitteeAwardScope } from "@/lib/conference-committee-canonical";
 
 /**
  * Sets active event + committee cookies.
@@ -29,15 +30,19 @@ export async function setProfileDashboardCommittee(
     return { ok: false, error: "forbidden" };
   }
 
+  const scope = await getCommitteeAwardScope(supabase, trimmed);
+  const canonicalId = scope.canonicalConferenceId;
+
   const { data: alloc } = await supabase
     .from("allocations")
     .select("id")
+    .in("conference_id", scope.siblingConferenceIds)
     .eq("user_id", user.id)
-    .eq("conference_id", trimmed)
+    .limit(1)
     .maybeSingle();
 
   if (alloc?.id) {
-    await setActiveConferenceContext(supabase, trimmed);
+    await setActiveConferenceContext(supabase, canonicalId);
     revalidatePath("/profile");
     revalidatePath("/", "layout");
     return { ok: true };
@@ -45,7 +50,7 @@ export async function setProfileDashboardCommittee(
 
   if (role === "chair") {
     const [{ data: targetConf }, activeEventId] = await Promise.all([
-      supabase.from("conferences").select("event_id").eq("id", trimmed).maybeSingle(),
+      supabase.from("conferences").select("event_id").eq("id", canonicalId).maybeSingle(),
       getActiveEventId(),
     ]);
     if (
@@ -53,7 +58,7 @@ export async function setProfileDashboardCommittee(
       activeEventId &&
       targetConf.event_id === activeEventId
     ) {
-      await setActiveConferenceContext(supabase, trimmed);
+      await setActiveConferenceContext(supabase, canonicalId);
       revalidatePath("/profile");
       revalidatePath("/", "layout");
       return { ok: true };
@@ -62,7 +67,7 @@ export async function setProfileDashboardCommittee(
 
   if (role === "delegate" && isDelegateDashboardCommitteeAllowlistedEmail(user.email)) {
     const [{ data: targetConf }, activeEventId] = await Promise.all([
-      supabase.from("conferences").select("event_id").eq("id", trimmed).maybeSingle(),
+      supabase.from("conferences").select("event_id").eq("id", canonicalId).maybeSingle(),
       getActiveEventId(),
     ]);
     if (
@@ -70,7 +75,7 @@ export async function setProfileDashboardCommittee(
       activeEventId &&
       targetConf.event_id === activeEventId
     ) {
-      await setActiveConferenceContext(supabase, trimmed);
+      await setActiveConferenceContext(supabase, canonicalId);
       revalidatePath("/profile");
       revalidatePath("/", "layout");
       return { ok: true };

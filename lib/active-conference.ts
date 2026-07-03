@@ -159,19 +159,34 @@ export async function getConferenceForDashboard(options: {
   const total = countErr ? 0 : count ?? 0;
 
   /**
-   * Chairs without a room-code cookie used to get `null` whenever more than one committee row
-   * existed globally, even if they were only allocated to a single committee — saves looked
-   * successful but refresh loaded an empty page (wrong/missing context).
+   * Chairs and delegates without a room-code cookie used to get `null` whenever more than one
+   * committee row existed globally, even when they were only allocated to a single committee —
+   * saves looked successful but refresh loaded an empty page (wrong/missing context).
    */
-  if (roleLower === "chair" && total > 1) {
+  if ((roleLower === "chair" || roleLower === "delegate") && total > 1) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     if (user?.id) {
-      const { data: allocRows } = await supabase.from("allocations").select("conference_id").eq("user_id", user.id);
-      const distinctIds = [
+      const eventId = await getActiveEventId();
+      const { data: allocRows } = await supabase
+        .from("allocations")
+        .select("conference_id")
+        .eq("user_id", user.id);
+
+      let distinctIds = [
         ...new Set((allocRows ?? []).map((r) => r.conference_id).filter(Boolean)),
       ] as string[];
+
+      if (eventId && distinctIds.length > 0) {
+        const { data: eventScoped } = await supabase
+          .from("conferences")
+          .select("id")
+          .in("id", distinctIds)
+          .eq("event_id", eventId);
+        distinctIds = (eventScoped ?? []).map((c) => c.id).filter(Boolean);
+      }
+
       const canonicalIds = [
         ...new Set(
           await Promise.all(

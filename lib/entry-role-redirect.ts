@@ -3,14 +3,14 @@ import { INTERMUN_ENTRY_ROLE_KEY, isInterMunEntryRole } from "@/lib/entry-role";
 import { ADVISOR_APP_HOME, SMT_APP_HOME } from "@/lib/roles";
 
 /**
- * Client-only: reads and clears `intermun.entryRole` from sessionStorage, then picks a dashboard
- * path consistent with the profile role when it matches the user’s onboarding choice.
+ * Client-only: reads and clears `intermun.entryRole` from sessionStorage, then routes to the
+ * dashboard that matches the user's provisioned profile role (approved accounts). The entry
+ * wheel is only a fallback for accounts that are not yet assigned a staff/advisor role or seat.
  */
 export async function resolveDashboardPathAfterAuth(
   supabase: SupabaseClient,
   userId: string
 ): Promise<string> {
-  let next = "/profile";
   const stored =
     typeof window !== "undefined" ? sessionStorage.getItem(INTERMUN_ENTRY_ROLE_KEY) : null;
   const entry = isInterMunEntryRole(stored) ? stored : null;
@@ -18,10 +18,25 @@ export async function resolveDashboardPathAfterAuth(
 
   const { data: prof } = await supabase.from("profiles").select("role").eq("id", userId).maybeSingle();
   const role = prof?.role?.toString().trim().toLowerCase();
-  if (role === "admin") next = "/admin";
-  else if (role === "smt") next = SMT_APP_HOME;
-  else if (role === "chair" && entry === "chair") next = "/chair";
-  else if (role === "delegate" && entry === "delegate") next = "/delegate";
-  else if (role === "advisor" && entry === "advisor") next = ADVISOR_APP_HOME;
-  return next;
+
+  if (role === "admin") return "/admin";
+  if (role === "smt") return SMT_APP_HOME;
+  if (role === "advisor") return ADVISOR_APP_HOME;
+  if (role === "chair") return "/chair";
+
+  if (role === "delegate") {
+    const { count } = await supabase
+      .from("allocations")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", userId);
+    const hasApprovedSeat = (count ?? 0) > 0;
+    if (hasApprovedSeat || entry === "delegate") return "/delegate";
+    return "/profile";
+  }
+
+  if (entry === "secretariat") return SMT_APP_HOME;
+  if (entry === "chair") return "/chair";
+  if (entry === "delegate") return "/delegate";
+  if (entry === "advisor") return ADVISOR_APP_HOME;
+  return "/profile";
 }
