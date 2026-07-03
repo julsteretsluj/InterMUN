@@ -612,7 +612,9 @@
     "noAwardRowsYet": "এখনও কোন পুরস্কার সারি.",
     "includeInCertificatePrint": "শংসাপত্র প্রিন্টে অন্তর্ভুক্ত করুন: {label}",
     "edit": "সম্পাদনা করুন",
-    "remove": "সরান"
+    "remove": "সরান",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "চেয়ার দ্বারা পুরস্কার জমা",
@@ -2431,7 +2433,20 @@
     "autosaved": "স্বয়ংক্রিয় সংরক্ষিত",
     "autosaveFailed": "স্বতঃসংরক্ষণ ব্যর্থ হয়েছে৷",
     "autosavedWithCountry": "স্বতঃসংরক্ষিত — {country}",
-    "delegateFallback": "প্রতিনিধি"
+    "delegateFallback": "প্রতিনিধি",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "উৎস যোগ করুন",

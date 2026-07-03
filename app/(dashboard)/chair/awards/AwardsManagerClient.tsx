@@ -18,6 +18,15 @@ import { useTranslations } from "next-intl";
 type Conf = { id: string; name: string; committee: string | null };
 type Prof = { id: string; name: string | null };
 
+type EligibleRecipients = {
+  /** Canonical committee conference id → delegates seated in that committee. */
+  delegatesByCommittee: Record<string, Prof[]>;
+  /** All delegates seated anywhere in the active event. */
+  conferenceDelegates: Prof[];
+  /** All chairs seated anywhere in the active event. */
+  conferenceChairs: Prof[];
+};
+
 /** Committee chamber only (DISEC, ECOSOC, …) — not the agenda/topic title. */
 function committeeOptionLabel(c: Conf) {
   return c.committee?.trim() || c.id.slice(0, 8);
@@ -35,11 +44,17 @@ export function AwardsManagerClient({
   conferences,
   assignments: initialAssignments,
   profiles,
+  eligibleRecipients,
+  conferenceIdToCanonical = {},
   enableCertificatePrint = false,
 }: {
   conferences: Conf[];
   assignments: AwardAssignment[];
   profiles: Prof[];
+  /** Award-recipient options constrained to who is actually seated in scope. */
+  eligibleRecipients?: EligibleRecipients;
+  /** Maps raw `conferences.id` → canonical committee conference id. */
+  conferenceIdToCanonical?: Record<string, string>;
   /** When true (SMT final awards tab): add certificate checkboxes and print selected. */
   enableCertificatePrint?: boolean;
 }) {
@@ -130,6 +145,48 @@ export function AwardsManagerClient({
   ]);
 
   const meta = awardCategoryMeta(form.category);
+
+  /**
+   * Recipient options are constrained to the award's scope: committee awards only list
+   * delegates seated in the selected committee; conference-wide awards list every event
+   * delegate; chair awards list chairs. The currently-selected recipient is always kept so
+   * editing an existing row never drops its value.
+   */
+  const scopedRecipientOptions = useMemo(() => {
+    if (!eligibleRecipients) return profileOptions;
+    const scope = awardCategoryMeta(form.category)?.scope;
+    let base: Prof[] = [];
+    if (scope === "committee") {
+      const canonId =
+        conferenceIdToCanonical[form.committee_conference_id] ?? form.committee_conference_id;
+      base = canonId ? eligibleRecipients.delegatesByCommittee[canonId] ?? [] : [];
+    } else if (scope === "conference_wide") {
+      base = eligibleRecipients.conferenceDelegates;
+    } else if (scope === "collective_person") {
+      base = eligibleRecipients.conferenceChairs;
+    }
+    const selId = form.recipient_profile_id;
+    if (selId && !base.some((p) => p.id === selId)) {
+      const known = profileById[selId];
+      base = [...base, { id: selId, name: known && known !== "—" ? known : null }];
+    }
+    return base;
+  }, [
+    eligibleRecipients,
+    form.category,
+    form.committee_conference_id,
+    form.recipient_profile_id,
+    conferenceIdToCanonical,
+    profileOptions,
+    profileById,
+  ]);
+
+  const recipientScopeHint =
+    meta?.scope === "committee" && !form.committee_conference_id
+      ? t("selectCommitteeForRecipients")
+      : scopedRecipientOptions.length === 0
+        ? t("noEligibleRecipients")
+        : null;
 
   function resetForm() {
     setForm({
@@ -378,12 +435,15 @@ th{background:#f4f4f5}
                 }
               >
                 <option value="">{t("notSet")}</option>
-                {profileOptions.map((p) => (
+                {scopedRecipientOptions.map((p) => (
                   <option key={p.id} value={p.id}>
                     {(p.name || t("noName")).trim()} ({p.id.slice(0, 8)}…)
                   </option>
                 ))}
               </select>
+              {recipientScopeHint ? (
+                <span className="mt-1 block text-xs text-brand-muted">{recipientScopeHint}</span>
+              ) : null}
             </label>
           )}
 

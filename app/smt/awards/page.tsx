@@ -114,6 +114,11 @@ export default async function SmtAwardsPage() {
   const nomineeNameByProfileId: Record<string, string> = Object.fromEntries(profileById);
 
   type CommitteeOpt = { id: string; label: string };
+  type RecipientOpt = { id: string; name: string | null };
+  /** Award-recipient options scoped to who is actually seated. */
+  let recipientDelegatesByCommittee: Record<string, RecipientOpt[]> = {};
+  let recipientConferenceDelegates: RecipientOpt[] = [];
+  let recipientConferenceChairs: RecipientOpt[] = [];
   let conferenceIdToCanonicalPayload: Record<string, string> = {};
   let smtCommittees: CommitteeOpt[] = [];
   let smtChairSeats: ChairSeat[] = [];
@@ -164,10 +169,24 @@ export default async function SmtAwardsPage() {
         .not("user_id", "is", null);
 
       const seats: ChairSeat[] = [];
+      const delegatesByCanonId: Record<string, Map<string, RecipientOpt>> = {};
+      const eventDelegateMap = new Map<string, RecipientOpt>();
+      const eventChairMap = new Map<string, RecipientOpt>();
       for (const a of allocData ?? []) {
         const uid = a.user_id as string;
         const prof = Array.isArray(a.profiles) ? a.profiles[0] : a.profiles;
         const role = prof?.role?.toString().trim().toLowerCase();
+        const displayName = prof?.name?.trim() || null;
+        const canonId = conferenceIdToCanonical.get(a.conference_id as string) ?? (a.conference_id as string);
+
+        if (role === "delegate") {
+          const perCommittee = delegatesByCanonId[canonId] ?? (delegatesByCanonId[canonId] = new Map());
+          if (!perCommittee.has(uid)) perCommittee.set(uid, { id: uid, name: displayName });
+          if (!eventDelegateMap.has(uid)) eventDelegateMap.set(uid, { id: uid, name: displayName });
+        } else if (role === "chair") {
+          if (!eventChairMap.has(uid)) eventChairMap.set(uid, { id: uid, name: displayName });
+        }
+
         if (role !== "chair") continue;
         const name = prof?.name?.trim() || uid.slice(0, 8);
         seats.push({
@@ -178,6 +197,14 @@ export default async function SmtAwardsPage() {
         });
       }
       smtChairSeats = seats;
+
+      const byName = (a: RecipientOpt, b: RecipientOpt) =>
+        (a.name?.trim() || "").localeCompare(b.name?.trim() || "") || a.id.localeCompare(b.id);
+      recipientDelegatesByCommittee = Object.fromEntries(
+        Object.entries(delegatesByCanonId).map(([id, m]) => [id, [...m.values()].sort(byName)])
+      );
+      recipientConferenceDelegates = [...eventDelegateMap.values()].sort(byName);
+      recipientConferenceChairs = [...eventChairMap.values()].sort(byName);
 
       const { data: smtScores } = await supabase
         .from("award_participation_scores")
@@ -301,6 +328,11 @@ export default async function SmtAwardsPage() {
         }}
         hasActiveEvent={Boolean(eventId)}
         conferenceIdToCanonical={conferenceIdToCanonicalPayload}
+        eligibleRecipients={{
+          delegatesByCommittee: recipientDelegatesByCommittee,
+          conferenceDelegates: recipientConferenceDelegates,
+          conferenceChairs: recipientConferenceChairs,
+        }}
         bestDelegateComparisonRows={bestDelegateComparisonRows}
         overallBestDelegateLadderRows={overallBestDelegateLadderRows}
       />

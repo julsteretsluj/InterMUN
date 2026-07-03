@@ -684,7 +684,9 @@
     "noAwardRowsYet": "아직 수상 행이 없습니다.",
     "includeInCertificatePrint": "인증서 인쇄에 포함: {label}",
     "edit": "편집하다",
-    "remove": "제거하다"
+    "remove": "제거하다",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "위원장의 수상 제출",
@@ -2431,7 +2433,20 @@
     "autosaved": "자동 저장됨",
     "autosaveFailed": "자동 저장 실패",
     "autosavedWithCountry": "자동 저장 — {국가}",
-    "delegateFallback": "대리자"
+    "delegateFallback": "대리자",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "소스 추가",

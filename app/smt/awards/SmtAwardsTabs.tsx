@@ -16,6 +16,15 @@ type Prof = { id: string; name: string | null };
 
 type CommitteeOpt = { id: string; label: string };
 
+type EligibleRecipients = {
+  /** Canonical committee conference id → delegates seated in that committee. */
+  delegatesByCommittee: Record<string, Prof[]>;
+  /** All delegates seated anywhere in the active event. */
+  conferenceDelegates: Prof[];
+  /** All chairs seated anywhere in the active event. */
+  conferenceChairs: Prof[];
+};
+
 type TabId = "final" | "pending" | "scoring" | "rubric";
 
 type ParticipationBundle = {
@@ -41,6 +50,8 @@ type Props = {
   hasActiveEvent: boolean;
   /** Maps raw `conferences.id` → canonical committee conference id for the active event. */
   conferenceIdToCanonical: Record<string, string>;
+  /** Award-recipient options constrained to who is actually seated in scope. */
+  eligibleRecipients: EligibleRecipients;
   bestDelegateComparisonRows: BestDelegateComparisonRow[];
   overallBestDelegateLadderRows: OverallBestDelegateLadderRow[];
 };
@@ -55,6 +66,7 @@ export function SmtAwardsTabs({
   participation,
   hasActiveEvent,
   conferenceIdToCanonical,
+  eligibleRecipients,
   bestDelegateComparisonRows,
   overallBestDelegateLadderRows,
 }: Props) {
@@ -99,6 +111,8 @@ export function SmtAwardsTabs({
             conferences={conferences}
             assignments={assignments}
             profiles={profiles}
+            eligibleRecipients={eligibleRecipients}
+            conferenceIdToCanonical={conferenceIdToCanonical}
             enableCertificatePrint
           />
         </div>

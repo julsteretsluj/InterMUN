@@ -20,6 +20,8 @@ import { isSingleWinnerNominationType } from "@/lib/award-nomination-review";
 import { isPastAwardSubmissionDeadline } from "@/lib/award-submission";
 import { promoteCommitteeDraftsToPending } from "@/lib/award-committee-submit";
 import { getCommitteeAwardScope, resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import { getActiveEventId } from "@/lib/active-event-cookie";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 type NominationType = NominationRubricType;
 
@@ -103,6 +105,77 @@ function scopeForCategory(category: string): AwardScope | undefined {
   return AWARD_CATEGORIES.find((c) => c.id === category)?.scope;
 }
 
+/**
+ * Ensures an award recipient is actually within the award's scope:
+ * - committee awards: recipient must be a delegate seated in that committee,
+ * - conference-wide awards: recipient must be a delegate seated in the active event,
+ * - chair (collective_person) awards: recipient must be a chair.
+ */
+async function recipientProfileInScope(
+  supabase: SupabaseClient,
+  params: { scope: AwardScope; recipientProfileId: string; committeeConferenceIdCanonical: string | null }
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { scope, recipientProfileId, committeeConferenceIdCanonical } = params;
+  if (!recipientProfileId) return { ok: true };
+
+  const { data: rp } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", recipientProfileId)
+    .maybeSingle();
+  const role = rp?.role?.toString().trim().toLowerCase();
+
+  if (scope === "collective_person") {
+    if (role !== "chair") {
+      return { ok: false, error: "This award can only be given to a committee chair." };
+    }
+    return { ok: true };
+  }
+
+  if (role && role !== "delegate") {
+    return { ok: false, error: "Award recipients must be delegates seated in scope, not staff." };
+  }
+
+  if (scope === "committee") {
+    if (!committeeConferenceIdCanonical) {
+      return { ok: false, error: "Select a committee for this award." };
+    }
+    const seatScope = await getCommitteeAwardScope(supabase, committeeConferenceIdCanonical);
+    const { data } = await supabase
+      .from("allocations")
+      .select("id")
+      .in("conference_id", seatScope.siblingConferenceIds)
+      .eq("user_id", recipientProfileId)
+      .limit(1)
+      .maybeSingle();
+    if (!data?.id) {
+      return { ok: false, error: "That delegate is not seated in the selected committee." };
+    }
+    return { ok: true };
+  }
+
+  if (scope === "conference_wide") {
+    const eventId = await getActiveEventId();
+    if (!eventId) return { ok: true };
+    const { data: confs } = await supabase.from("conferences").select("id").eq("event_id", eventId);
+    const ids = (confs ?? []).map((c) => c.id);
+    if (ids.length === 0) return { ok: true };
+    const { data } = await supabase
+      .from("allocations")
+      .select("id")
+      .in("conference_id", ids)
+      .eq("user_id", recipientProfileId)
+      .limit(1)
+      .maybeSingle();
+    if (!data?.id) {
+      return { ok: false, error: "That delegate is not seated in this conference." };
+    }
+    return { ok: true };
+  }
+
+  return { ok: true };
+}
+
 /** Aligns with saveAwardAssignment: committee-scoped awards store a committee id; conference-wide use null. */
 function committeeConferenceIdForAwardAssignment(category: string, nominationCommitteeId: string): string | null {
   const scope = scopeForCategory(category);
@@ -143,6 +216,17 @@ export async function saveAwardAssignment(formData: FormData): Promise<{ error?:
     scope === "collective_committee" ? recipientCommitteeId || null : null;
   const recipient_profile_id =
     scope === "collective_committee" ? null : recipientProfileId || null;
+
+  if (recipient_profile_id) {
+    const scopeCheck = await recipientProfileInScope(auth.supabase, {
+      scope,
+      recipientProfileId: recipient_profile_id,
+      committeeConferenceIdCanonical: committee_conference_id,
+    });
+    if (!scopeCheck.ok) {
+      return { error: scopeCheck.error };
+    }
+  }
 
   const rubricKeys = rubricKeysForAwardAssignmentCategory(category);
   const collectRubric = smtShouldCollectRubric(scope, category) && rubricKeys.length > 0;

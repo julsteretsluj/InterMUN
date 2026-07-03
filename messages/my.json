@@ -684,7 +684,9 @@
     "noAwardRowsYet": "ဆုတန်းမရသေးပါ။",
     "includeInCertificatePrint": "လက်မှတ်ပုံနှိပ်ခြင်းတွင် ပါဝင်သည်- {label}",
     "edit": "တည်းဖြတ်ပါ။",
-    "remove": "ဖယ်ရှားပါ။"
+    "remove": "ဖယ်ရှားပါ။",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "ထိုင်ခုံများဖြင့် ဆုချီးမြှင့်သည်။",
@@ -2006,7 +2008,20 @@
     "autosaved": "အလိုအလျောက် သိမ်းဆည်းထားသည်။",
     "autosaveFailed": "အလိုအလျောက်သိမ်းဆည်းခြင်း မအောင်မြင်ပါ။",
     "autosavedWithCountry": "အလိုအလျောက် သိမ်းဆည်းထားသည် — {country}",
-    "delegateFallback": "ကိုယ်စားလှယ်"
+    "delegateFallback": "ကိုယ်စားလှယ်",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "မင်းရဲ့ကော်မတီ",

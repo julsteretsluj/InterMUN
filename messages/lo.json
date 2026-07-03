@@ -684,7 +684,9 @@
     "noAwardRowsYet": "ບໍ່ມີແຖວທີ່ໄດ້ຮັບລາງວັນເທື່ອ.",
     "includeInCertificatePrint": "ຮວມຢູ່ໃນການພິມໃບຢັ້ງຢືນ: {label}",
     "edit": "ແກ້ໄຂ",
-    "remove": "ເອົາອອກ"
+    "remove": "ເອົາອອກ",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "ການຍື່ນສະເຫນີລາງວັນໂດຍເກົ້າອີ້",
@@ -2006,7 +2008,20 @@
     "autosaved": "ບັນທຶກອັດຕະໂນມັດ",
     "autosaveFailed": "ບັນທຶກອັດຕະໂນມັດລົ້ມເຫລວ",
     "autosavedWithCountry": "ບັນທຶກອັດຕະໂນມັດ — {country}",
-    "delegateFallback": "ຜູ້ແທນ"
+    "delegateFallback": "ຜູ້ແທນ",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "ຄະ​ນະ​ກໍາ​ມະ​ຂອງ​ທ່ານ​",

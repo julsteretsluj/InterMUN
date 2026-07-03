@@ -612,7 +612,9 @@
     "noAwardRowsYet": "Δεν υπάρχουν ακόμη σειρές βραβείων.",
     "includeInCertificatePrint": "Συμπεριλάβετε στην εκτύπωση πιστοποιητικού: {label}",
     "edit": "Εκδίδω",
-    "remove": "Αφαιρώ"
+    "remove": "Αφαιρώ",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "Υποβολές βραβείων ανά έδρες",
@@ -2431,7 +2433,20 @@
     "autosaved": "Αυτόματη αποθήκευση",
     "autosaveFailed": "Η αυτόματη αποθήκευση απέτυχε",
     "autosavedWithCountry": "Αυτόματη αποθήκευση — {country}",
-    "delegateFallback": "αντιπρόσωπος"
+    "delegateFallback": "αντιπρόσωπος",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "Προσθήκη πηγής",

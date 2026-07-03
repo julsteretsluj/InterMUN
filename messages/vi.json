@@ -684,7 +684,9 @@
     "noAwardRowsYet": "Chưa có hàng giải thưởng nào.",
     "includeInCertificatePrint": "Bao gồm trong bản in chứng chỉ: {label}",
     "edit": "Biên tập",
-    "remove": "Di dời"
+    "remove": "Di dời",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "Trao giải theo chủ tọa",
@@ -2431,7 +2433,20 @@
     "autosaved": "Tự động lưu",
     "autosaveFailed": "Tự động lưu không thành công",
     "autosavedWithCountry": "Được lưu tự động — {country}",
-    "delegateFallback": "đại biểu"
+    "delegateFallback": "đại biểu",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "Thêm nguồn",

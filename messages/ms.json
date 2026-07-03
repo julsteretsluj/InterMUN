@@ -684,7 +684,9 @@
     "noAwardRowsYet": "Tiada baris anugerah lagi.",
     "includeInCertificatePrint": "Sertakan dalam cetakan sijil: {label}",
     "edit": "Sunting",
-    "remove": "Alih keluar"
+    "remove": "Alih keluar",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "Penyerahan anugerah mengikut kerusi",
@@ -2006,7 +2008,20 @@
     "autosaved": "Autosimpan",
     "autosaveFailed": "Autosimpan gagal",
     "autosavedWithCountry": "Autosimpan — {country}",
-    "delegateFallback": "mewakilkan"
+    "delegateFallback": "mewakilkan",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "chairOverviewPage": {
     "fallbackYourCommittee": "jawatankuasa anda",

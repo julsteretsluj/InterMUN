@@ -684,7 +684,9 @@
     "noAwardRowsYet": "还没有奖项行。",
     "includeInCertificatePrint": "包含在证书打印中：{label}",
     "edit": "编辑",
-    "remove": "消除"
+    "remove": "消除",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "主席提交的奖项",
@@ -2431,7 +2433,20 @@
     "autosaved": "自动保存",
     "autosaveFailed": "自动保存失败",
     "autosavedWithCountry": "自动保存 - {国家/地区}",
-    "delegateFallback": "代表"
+    "delegateFallback": "代表",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "添加来源",

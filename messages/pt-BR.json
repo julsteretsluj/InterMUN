@@ -684,7 +684,9 @@
     "noAwardRowsYet": "Nenhuma linha de prêmios ainda.",
     "includeInCertificatePrint": "Incluir na impressão do certificado: {label}",
     "edit": "Editar",
-    "remove": "Remover"
+    "remove": "Remover",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "Envios de prêmios por presidentes",
@@ -2431,7 +2433,20 @@
     "autosaved": "Salva automaticamente",
     "autosaveFailed": "Falha no salvamento automático",
     "autosavedWithCountry": "Salva automaticamente — {país}",
-    "delegateFallback": "delegar"
+    "delegateFallback": "delegar",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "Adicionar fonte",

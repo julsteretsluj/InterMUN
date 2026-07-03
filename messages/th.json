@@ -612,7 +612,9 @@
     "noAwardRowsYet": "ยังไม่มีแถวรางวัล",
     "includeInCertificatePrint": "รวมไว้ในการพิมพ์ใบรับรอง: {label}",
     "edit": "แก้ไข",
-    "remove": "ลบ"
+    "remove": "ลบ",
+    "selectCommitteeForRecipients": "Select a committee to see its eligible delegates.",
+    "noEligibleRecipients": "No eligible recipients in this scope."
   },
   "chairNominationsPanel": {
     "title": "มอบรางวัลโดยเก้าอี้",
@@ -2431,7 +2433,20 @@
     "autosaved": "บันทึกอัตโนมัติ",
     "autosaveFailed": "บันทึกอัตโนมัติล้มเหลว",
     "autosavedWithCountry": "บันทึกอัตโนมัติ — {ประเทศ}",
-    "delegateFallback": "ผู้รับมอบสิทธิ์"
+    "delegateFallback": "ผู้รับมอบสิทธิ์",
+    "modeSwitchLabel": "Scoring layout",
+    "modeList": "List",
+    "modeGuided": "Guided",
+    "guidedHint": "Score one delegate at a time. Your work autosaves as you pick each band.",
+    "guidedProgress": "Delegate {current} of {total}",
+    "guidedComplete": "{completeCount}/{total} scored",
+    "previous": "Back",
+    "saveAndNext": "Save & next",
+    "nextUnscored": "Next unscored",
+    "finish": "Finish",
+    "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
+    "allScoredTitle": "All delegates scored",
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
   },
   "sources": {
     "addSource": "เพิ่มแหล่งที่มา",
