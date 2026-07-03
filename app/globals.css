@@ -788,6 +788,10 @@ html.dark ::selection {
   .nav-priority-link--dock .nav-priority-badge {
     @apply left-1/2 top-0 -translate-x-1/2;
   }
+  /* Sidebar rows: vertically centre the number badge within the row. */
+  .nav-priority-link:not(.nav-priority-link--dock) .nav-priority-badge {
+    @apply top-1/2 -translate-y-1/2;
+  }
   .nav-priority-tab {
     @apply relative pl-6;
   }
