@@ -324,19 +324,27 @@ export default async function SmtOverviewPage({
                         </p>
                       ) : null}
                       {g.topics.length > 0 ? (
-                        <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
-                          {[...g.topics]
-                            .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }))
-                            .map((topic, ti) => (
-                              <li
-                                key={`${ti}-${topic.slice(0, 48)}`}
-                                className="text-[0.72rem] text-brand-navy/90 leading-snug"
-                              >
-                                <span className="font-semibold text-brand-navy">{t("topicLabel")} </span>
-                                {translateAgendaTopicLabel(tTopics, topic, locale)}
-                              </li>
-                            ))}
-                        </ul>
+                        (() => {
+                          const sortedTopics = [...g.topics].sort((a, b) =>
+                            a.localeCompare(b, undefined, { sensitivity: "base" })
+                          );
+                          return (
+                            <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
+                              {sortedTopics.map((topic, ti) => {
+                                const isLast = ti === sortedTopics.length - 1;
+                                return (
+                                  <li
+                                    key={`${ti}-${topic.slice(0, 48)}`}
+                                    className={`text-[0.72rem] text-brand-navy/90 leading-snug${isLast ? " pr-12" : ""}`}
+                                  >
+                                    <span className="font-semibold text-brand-navy">{t("topicLabel")} </span>
+                                    {translateAgendaTopicLabel(tTopics, topic, locale)}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          );
+                        })()
                       ) : null}
                     </Link>
                   );
