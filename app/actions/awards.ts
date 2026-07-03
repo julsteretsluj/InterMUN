@@ -426,8 +426,12 @@ export async function submitChairTopNominationAction(
     .select("role")
     .eq("id", nomineeId)
     .maybeSingle();
-  if (nomineeProfile?.role === "chair") {
+  const nomineeRole = nomineeProfile?.role?.toString().trim().toLowerCase();
+  if (nomineeRole === "chair") {
     return { ok: false, error: "Nominees must be delegates or country seats, not the committee chair." };
+  }
+  if (nomineeRole === "smt" || nomineeRole === "admin" || nomineeRole === "advisor") {
+    return { ok: false, error: "SMT, admins, and advisors cannot receive award nominations." };
   }
 
   if (nominationType === "committee_honourable_mention") {

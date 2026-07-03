@@ -51,6 +51,12 @@ function isChairAllocation(row: DelegateRow): boolean {
   return profileEmbed(row)?.role === "chair";
 }
 
+/** Only delegates (country seats) are eligible for awards — never chairs, SMT, admins, or advisors. */
+function isNonDelegateAllocation(row: DelegateRow): boolean {
+  const role = profileEmbed(row)?.role?.toString().trim().toLowerCase();
+  return role === "chair" || role === "smt" || role === "admin" || role === "advisor";
+}
+
 function optionFromDelegateRow(d: DelegateRow): { userId: string; label: string } {
   const embed = profileEmbed(d);
   const name = embed?.name?.trim() || d.user_id!.slice(0, 8);
@@ -139,7 +145,7 @@ export default async function ChairAwardsPage() {
   const delegateRowsAll = sortRowsByAllocationCountry(
     dedupeAllocationsByUserId((delegates ?? []) as DelegateRow[])
   );
-  const delegateRows = delegateRowsAll.filter((d) => !isChairAllocation(d));
+  const delegateRows = delegateRowsAll.filter((d) => !isNonDelegateAllocation(d));
 
   const allocationIdsByUserId: Record<string, string[]> = {};
   for (const d of (delegates ?? []) as DelegateRow[]) {
