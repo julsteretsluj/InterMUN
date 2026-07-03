@@ -256,13 +256,17 @@ export default async function SmtOverviewPage({
                       key={g.latestId}
                       href={`/smt/committees/${g.latestId}`}
                       aria-label={`${cardPriority}. ${g.latestRow.committee ?? "Committee"}`}
-                      className="relative rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 pl-9 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
+                      className="relative rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
                     >
-                      <NavPriorityBadge priority={cardPriority} variant="tile" />
+                      <NavPriorityBadge
+                        priority={cardPriority}
+                        variant="tile"
+                        className="left-auto top-auto right-2.5 bottom-2.5 h-8 w-8 text-sm"
+                      />
                       {g.logoUrl ? (
                         <CommitteeLogo
                           src={g.logoUrl}
-                          size="lg"
+                          size="xl"
                           alt={t("committeeLogoAlt", {
                             name: g.latestRow.committee
                               ? translateCommitteeLabel(tCommitteeLabels, g.latestRow.committee)
@@ -271,7 +275,7 @@ export default async function SmtOverviewPage({
                           className="absolute right-2.5 top-2.5"
                         />
                       ) : null}
-                      <p className={`text-sm font-semibold leading-snug${g.logoUrl ? " pr-16" : ""}`}>
+                      <p className={`text-sm font-semibold leading-snug${g.logoUrl ? " pr-24" : ""}`}>
                         {(() => {
                           const localizedFull = localizeKnownCommitteeFullName(
                             resolveCommitteeFullName(g.latestRow.committee_full_name, g.latestRow.committee)

@@ -4,6 +4,7 @@ const SIZE_CLASS = {
   sm: "h-9 w-9",
   md: "h-12 w-12",
   lg: "h-16 w-16",
+  xl: "h-20 w-20",
 } as const;
 
 type CommitteeLogoProps = {
