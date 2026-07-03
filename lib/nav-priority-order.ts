@@ -94,6 +94,7 @@ export const CHAIR_NAV_ITEM_KEY_ORDER = [
   "session",
   "speakers",
   "formalMotions",
+  "resolutions",
   "amendments",
   "agenda",
   "voting",

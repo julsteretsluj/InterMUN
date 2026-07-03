@@ -36,6 +36,7 @@ export type ChairNavItemKey =
   | "agenda"
   | "speakers"
   | "formalMotions"
+  | "resolutions"
   | "amendments"
   | "discipline"
   | "timer"
@@ -105,6 +106,7 @@ const CHAIR_NAV_ITEMS: ChairNavItem[] = [
     itemKey: "formalMotions",
     emoji: "📜",
   },
+  { href: "/resolutions", itemKey: "resolutions", emoji: "✅" },
   { href: "/amendments", itemKey: "amendments", emoji: "✏️" },
   {
     href: "/chair/session/timer",

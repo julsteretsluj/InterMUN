@@ -54,6 +54,7 @@ export const CHAIR_ITEM_FOLDER: Record<string, NavFolderId> = {
   announcements: "session",
   voting: "session",
   discipline: "session",
+  resolutions: "session",
   amendments: "session",
   prepChecklist: "prep",
   flowChecklist: "prep",
