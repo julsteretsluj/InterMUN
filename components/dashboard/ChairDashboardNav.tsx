@@ -143,7 +143,7 @@ function ChairNavRow({
       title={labelsHidden ? `${priority}. ${label}` : undefined}
       aria-label={`${priority}. ${label}`}
         className={cn(
-          "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] py-2.5 pl-9 pr-3 text-sm transition-apple",
+          "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] py-2.5 pl-9 pr-2.5 text-sm transition-apple",
         labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0 pl-2",
         isActive
           ? "dashboard-nav-active"
