@@ -142,6 +142,17 @@ type ClauseRow = {
   clause_number: number;
   clause_text: string;
 };
+type ApprovedAmendmentRow = {
+  id: string;
+  resolution_id: string;
+  amendment_type: "add" | "replace" | "delete";
+  target_clause_number: number | null;
+  original_clause: string | null;
+  proposed_clause: string | null;
+  classification: "friendly" | "unfriendly" | null;
+  delegate_country: string | null;
+  submitter_allocation_id: string | null;
+};
 type CurrentSpeakerQueueRow = {
   id: string;
   allocation_id: string | null;
@@ -297,6 +308,7 @@ export function SessionControlClient({
     [tSessionControl]
   );
   const tDiscipline = useTranslations("chairMotionsPointsLog");
+  const tAmend = useTranslations("amendments");
   const tVoting = useTranslations("voting");
   const tCommitteeLabels = useTranslations("committeeNames.labels");
   const locale = useLocale();
@@ -342,6 +354,23 @@ export function SessionControlClient({
     canonicalConferenceId,
     rosterConferenceIdList
   );
+  useEffect(() => {
+    let cancelled = false;
+    void supabase
+      .from("amendments")
+      .select(
+        "id, resolution_id, amendment_type, target_clause_number, original_clause, proposed_clause, classification, delegate_country, submitter_allocation_id"
+      )
+      .eq("conference_id", floorConferenceId)
+      .eq("status", "approved")
+      .order("created_at", { ascending: true })
+      .then(({ data }) => {
+        if (!cancelled) setApprovedAmendments((data ?? []) as ApprovedAmendmentRow[]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [supabase, floorConferenceId]);
   const displayConferenceTitle = useMemo(() => {
     const liveTopicRaw =
       debateTopicOptions?.find((topic) => topic.id === floorConferenceId)?.label?.trim() ?? "";
@@ -412,6 +441,7 @@ export function SessionControlClient({
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
+  const [approvedAmendments, setApprovedAmendments] = useState<ApprovedAmendmentRow[]>([]);
   const [sessionPoints, setSessionPoints] = useState<SessionPointRow[]>([]);
   const [pointDraftCode, setPointDraftCode] = useState<SessionPointCode>("parliamentary_inquiry");
   const [pointDraftDetail, setPointDraftDetail] = useState("");
@@ -2717,6 +2747,43 @@ export function SessionControlClient({
     });
   }
 
+  function amendmentTypeLabel(type: "add" | "replace" | "delete") {
+    return type === "add"
+      ? tAmend("typeBadge_add")
+      : type === "delete"
+        ? tAmend("typeBadge_delete")
+        : tAmend("typeBadge_replace");
+  }
+
+  function applyApprovedAmendment(amendmentId: string) {
+    const a = approvedAmendments.find((x) => x.id === amendmentId);
+    if (!a) return;
+    const clauseId =
+      a.target_clause_number != null
+        ? resolutionClauses.find(
+            (c) => c.resolution_id === a.resolution_id && c.clause_number === a.target_clause_number
+          )?.id ?? null
+        : null;
+    const clausePart =
+      a.target_clause_number != null
+        ? ` — ${tAmend("clauseN", { n: a.target_clause_number })}`
+        : "";
+    const descLines = [`${amendmentTypeLabel(a.amendment_type)}${clausePart}`];
+    if (a.original_clause) descLines.push(`${tAmend("originalClause")}: ${a.original_clause}`);
+    if (a.proposed_clause) descLines.push(`${tAmend("proposedClause")}: ${a.proposed_clause}`);
+    setMotionDraft((d) => ({
+      ...d,
+      procedure_resolution_id: a.resolution_id,
+      procedure_clause_ids: clauseId ? [clauseId] : [],
+      amendment_kind: a.classification ?? d.amendment_kind,
+      motioner_allocation_id: a.submitter_allocation_id ?? d.motioner_allocation_id,
+      title: `${amendmentTypeLabel(a.amendment_type)}${
+        a.delegate_country ? ` · ${a.delegate_country}` : ""
+      }${clausePart}`,
+      description: descLines.join("\n"),
+    }));
+  }
+
   const surfaceCard =
     "rounded-xl border border-white/15 bg-black/25 p-4 text-brand-navy shadow-sm backdrop-blur-sm";
   const surfaceLabel = "text-xs font-medium uppercase tracking-wide text-brand-muted";
@@ -3222,6 +3289,30 @@ export function SessionControlClient({
               />
             </label>
           ) : motionDraft.procedure_code === "amendment" ? (
+            <div className="space-y-3">
+            {approvedAmendments.length > 0 ? (
+              <label className="text-sm block text-brand-navy">
+                <span className={surfaceLabel}>{tSessionControl("loadApprovedAmendment")}</span>
+                <select
+                  className={surfaceField}
+                  value=""
+                  onChange={(e) => {
+                    if (e.target.value) applyApprovedAmendment(e.target.value);
+                  }}
+                >
+                  <option value="">{tSessionControl("selectApprovedAmendment")}</option>
+                  {approvedAmendments.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {`${a.delegate_country ?? "—"} · ${amendmentTypeLabel(a.amendment_type)}${
+                        a.target_clause_number != null
+                          ? ` · ${tAmend("clauseN", { n: a.target_clause_number })}`
+                          : ""
+                      }`}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
             <div className="grid sm:grid-cols-2 gap-3">
               <label className="text-sm block text-brand-navy">
                 <span className={surfaceLabel}>{tSessionControl("amendmentType")}</span>
@@ -3255,6 +3346,7 @@ export function SessionControlClient({
                   />
                 </label>
               ) : null}
+            </div>
             </div>
           ) : null}
           {euPartyAllocationPreview ? (

@@ -31,6 +31,7 @@ const BASE_TABS = [
   { href: "/ideas", labelKey: "ideas", emoji: "💡" },
   { href: "/sources", labelKey: "sources", emoji: "🔗" },
   { href: "/resolutions", labelKey: "resolutions", emoji: "✅" },
+  { href: "/amendments", labelKey: "amendments", emoji: "✏️" },
   { href: "/speeches", labelKey: "speeches", emoji: "🎤" },
   { href: "/running-notes", labelKey: "running", emoji: "📋" },
   { href: "/report", labelKey: "report", emoji: "🚩" },
@@ -122,6 +123,7 @@ function tabMainGroup(href: string): MainTabKey {
     href === "/history" ||
     href === "/voting" ||
     href === "/resolutions" ||
+    href === "/amendments" ||
     href === "/running-notes" ||
     href === "/report" ||
     href === "/crisis-slides"

@@ -489,28 +489,30 @@ export function ChairCommitteeSessionControl({
   });
 
   const fieldWrap =
-    "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus-within:border-brand-accent/40";
-  const radioLabel = "flex cursor-pointer items-start gap-2 text-sm text-brand-navy";
+    "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-white focus-within:border-brand-accent/40";
+  const radioLabel = "flex cursor-pointer items-start gap-2 text-sm text-white";
+  const glassInput =
+    "rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-white/45 focus:border-brand-accent/40 focus:outline-none focus:ring-2 focus:ring-brand-accent/25 [color-scheme:dark]";
 
   return (
     <div className="space-y-8">
-      <div className="rounded-2xl border border-white/15 bg-black/25 p-6 shadow-sm backdrop-blur-sm md:p-8">
+      <div className="rounded-2xl border border-white/15 bg-black/25 p-6 text-white shadow-sm backdrop-blur-sm md:p-8">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-brand-navy md:text-xl">{t("title")}</h3>
+          <h3 className="font-display text-lg font-semibold md:text-xl">{t("title")}</h3>
           <HelpButton title={t("title")}>
             {t("helpStartStop")}
           </HelpButton>
         </div>
-        <p className="mt-1 text-sm text-brand-muted">{t("subtitle")}</p>
+        <p className="mt-1 text-sm text-white/65">{t("subtitle")}</p>
 
         <div className="mt-4 space-y-1.5">
-          <label className="block text-xs font-semibold uppercase tracking-wide text-brand-muted" htmlFor="committee-session-title">
+          <label className="block text-xs font-semibold uppercase tracking-wide text-white/60" htmlFor="committee-session-title">
             {t("sessionNameLabel")}
           </label>
           <input
             id="committee-session-title"
             type="text"
-            className="w-full max-w-md rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy focus:border-brand-accent/40 focus:outline-none focus:ring-2 focus:ring-brand-accent/25"
+            className={`w-full max-w-md ${glassInput}`}
             value={sessionTitle}
             onChange={(e) => onSessionTitleChange(e.target.value)}
             placeholder={t("sessionNamePlaceholder")}
@@ -518,29 +520,29 @@ export function ChairCommitteeSessionControl({
             maxLength={200}
             autoComplete="off"
           />
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-brand-muted">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/60">
             <span>{t("sessionNameHint")}</span>
             {titleSaveStatus === "saving" ? (
-              <span className="text-brand-navy/90">{t("sessionNameSaving")}</span>
+              <span className="text-white/85">{t("sessionNameSaving")}</span>
             ) : null}
             {titleSaveStatus === "saved" ? (
-              <span className="text-brand-diplomatic dark:text-brand-accent-bright">{t("sessionNameSaved")}</span>
+              <span className="text-[var(--accent)]">{t("sessionNameSaved")}</span>
             ) : null}
           </div>
         </div>
 
         {live && startedAt ? (
           <div className="mt-4 space-y-1.5">
-            <p className="text-sm font-medium text-brand-navy">
+            <p className="text-sm font-medium text-white/90">
               {t("startedLabel")}{" "}
               <time dateTime={startedAt}>{new Date(startedAt).toLocaleString()}</time>
             </p>
-            <p className="text-sm text-brand-navy">
+            <p className="text-sm text-white/90">
               <span className="font-semibold">{t("timeInLabel")}</span>{" "}
               <span className="font-mono tabular-nums">{elapsedText ?? "--"}</span>
               {countdown ? (
                 <>
-                  <span className="mx-2 text-brand-muted/60">•</span>
+                  <span className="mx-2 text-white/40">•</span>
                   <span className="font-semibold">{t("timeUntilEndLabel")}</span>{" "}
                   <span className="font-mono tabular-nums">
                     {countdown.label === "remaining"
@@ -550,27 +552,27 @@ export function ChairCommitteeSessionControl({
                 </>
               ) : (
                 <>
-                  <span className="mx-2 text-brand-muted/60">•</span>
+                  <span className="mx-2 text-white/40">•</span>
                   <span className="font-semibold">{t("modeLabel")}</span> {t("modeStopwatchNoLimit")}
                 </>
               )}
             </p>
           </div>
         ) : (
-          <p className="mt-4 text-sm text-brand-muted">{t("sessionNotRunning")}</p>
+          <p className="mt-4 text-sm text-white/60">{t("sessionNotRunning")}</p>
         )}
 
         <div className="mt-6 space-y-4 rounded-xl border border-white/10 bg-black/20 p-4">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{t("sessionLimit")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-white/60">{t("sessionLimit")}</p>
             <HelpButton title={t("sessionLimitModesTitle")}>
               {t("sessionLimitModesHelp")}
             </HelpButton>
           </div>
-          <p className="text-xs text-brand-muted">
-            {t("sessionLimitOptional")} <strong className="font-medium text-brand-navy/90">{t("noneLabel")}</strong>{" "}
-            {t("noneDescription")} <strong className="font-medium text-brand-navy/90">{t("timeBudgetLabel")}</strong>{" "}
-            {t("timeBudgetDescription")} <strong className="font-medium text-brand-navy/90">{t("endTimeLabel")}</strong>{" "}
+          <p className="text-xs text-white/60">
+            {t("sessionLimitOptional")} <strong className="font-medium text-white/90">{t("noneLabel")}</strong>{" "}
+            {t("noneDescription")} <strong className="font-medium text-white/90">{t("timeBudgetLabel")}</strong>{" "}
+            {t("timeBudgetDescription")} <strong className="font-medium text-white/90">{t("endTimeLabel")}</strong>{" "}
             {t("endTimeDescription")}
           </p>
 
@@ -584,7 +586,7 @@ export function ChairCommitteeSessionControl({
             />
             <span>
               <span className="font-medium">{t("noneIndefinite")}</span>
-              <span className="block text-xs text-brand-muted">{t("noneScheduledEndHint")}</span>
+              <span className="block text-xs text-white/55">{t("noneScheduledEndHint")}</span>
             </span>
           </label>
 
@@ -601,28 +603,28 @@ export function ChairCommitteeSessionControl({
               {endMode === "duration" ? (
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <span className={fieldWrap}>
-                    <label className="text-xs text-brand-muted">{t("hoursLabel")}</label>
+                    <label className="text-xs text-white/55">{t("hoursLabel")}</label>
                     <input
                       type="number"
                       min={0}
                       max={24}
-                      className="mt-0.5 w-20 bg-transparent text-brand-navy focus:outline-none"
+                      className="mt-0.5 w-20 bg-transparent text-white focus:outline-none"
                       value={durHours}
                       onChange={(e) => setDurHours(Number(e.target.value) || 0)}
                     />
                   </span>
                   <span className={fieldWrap}>
-                    <label className="text-xs text-brand-muted">{t("minutesLabel")}</label>
+                    <label className="text-xs text-white/55">{t("minutesLabel")}</label>
                     <input
                       type="number"
                       min={0}
                       max={59}
-                      className="mt-0.5 w-20 bg-transparent text-brand-navy focus:outline-none"
+                      className="mt-0.5 w-20 bg-transparent text-white focus:outline-none"
                       value={durMinutes}
                       onChange={(e) => setDurMinutes(Number(e.target.value) || 0)}
                     />
                   </span>
-                  <span className="text-xs text-brand-muted">{t("minimumOneMinute")}</span>
+                  <span className="text-xs text-white/55">{t("minimumOneMinute")}</span>
                 </div>
               ) : null}
             </span>
@@ -641,7 +643,7 @@ export function ChairCommitteeSessionControl({
               {endMode === "until" ? (
                 <input
                   type="datetime-local"
-                  className="mt-2 w-full max-w-xs rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-brand-navy focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+                  className={`mt-2 w-full max-w-xs ${glassInput}`}
                   value={endsAtLocal}
                   onChange={(e) => setEndsAtLocal(e.target.value)}
                 />
@@ -666,7 +668,7 @@ export function ChairCommitteeSessionControl({
                 type="button"
                 disabled={pending}
                 onClick={saveScheduleWhileLive}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-brand-navy hover:bg-white/15 disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white hover:bg-white/15 disabled:opacity-50"
               >
                 {t("saveLimit")}
               </button>

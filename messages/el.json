@@ -436,7 +436,9 @@
     "openMotionFloorFirst": "Ανοίξτε πρώτα το πάτωμα κίνησης για δηλώσεις.",
     "openMotionBlocksRecording": "Η πρόταση είναι ήδη ανοιχτή για ψηφοφορία. Κλείστε το πριν καταγράψετε περαιτέρω δηλώσεις.",
     "statedMotionRecorded": "Η δηλωθείσα πρόταση καταγράφηκε (δεν είναι ακόμη ανοιχτή για ψηφοφορία).",
-    "statedMotionRemoved": "Η δηλωμένη κίνηση καταργήθηκε."
+    "statedMotionRemoved": "Η δηλωμένη κίνηση καταργήθηκε.",
+    "loadApprovedAmendment": "Load an approved amendment",
+    "selectApprovedAmendment": "Select an approved amendment…"
   },
   "chairChecklists": {
     "common": {
@@ -549,7 +551,8 @@
     "library": "Βιβλιοθήκη",
     "mainNavigationAria": "Κύρια πλοήγηση",
     "newsroom": "Newsroom",
-    "milestones": "Milestones"
+    "milestones": "Milestones",
+    "amendments": "Amendments"
   },
   "dashboardLayout": {
     "helpCenter": "Κέντρο βοήθειας",
@@ -808,7 +811,8 @@
     "timer": "Μετρών την ώραν",
     "smtProfile": "Προφίλ",
     "newsroom": "Newsroom",
-    "milestones": "Milestones"
+    "milestones": "Milestones",
+    "amendments": "Amendments"
   },
   "setupPage": {
     "title": "Το Supabase δεν έχει ρυθμιστεί",
@@ -1294,7 +1298,8 @@
       "roomCode": "Κωδικός δωματίου",
       "settings": "Ρυθμίσεις",
       "newsroom": "Newsroom",
-      "milestones": "Milestones"
+      "milestones": "Milestones",
+      "amendments": "Amendments"
     }
   },
   "smtNav": {
@@ -3660,5 +3665,46 @@
       "speeches": "Speeches delivered",
       "points_raised": "Points (POI / POC)"
     }
+  },
+  "amendments": {
+    "submitTitle": "Submit an amendment",
+    "submitHelp": "Propose an Add, Replace, or Delete change to a clause. The resolution's main submitters review it and mark it friendly or unfriendly.",
+    "listTitle": "Amendments",
+    "empty": "No amendments have been submitted yet.",
+    "noResolutions": "There are no resolutions in this committee to amend yet.",
+    "resolution": "Resolution",
+    "resolutionN": "Resolution {n}",
+    "type": "Change type",
+    "typeAdd": "Add a clause",
+    "typeReplace": "Replace a clause",
+    "typeDelete": "Delete a clause",
+    "typeBadge_add": "Add",
+    "typeBadge_replace": "Replace",
+    "typeBadge_delete": "Delete",
+    "clauseNumber": "Clause number",
+    "clauseNumberPlaceholder": "e.g. 4",
+    "selectClause": "Select a clause…",
+    "clauseN": "Clause {n}",
+    "delegateEmail": "Delegate email",
+    "delegateEmailPlaceholder": "you@example.com",
+    "originalClause": "Original clause",
+    "originalClausePlaceholder": "Paste the current clause text…",
+    "proposedClause": "Proposed clause",
+    "proposedClausePlaceholder": "Write the new or amended clause text…",
+    "submit": "Submit amendment",
+    "okSubmitted": "Amendment submitted for review.",
+    "errSelectResolution": "Choose a resolution to amend.",
+    "amendmentN": "Amendment #{n}",
+    "unknownDelegate": "Unknown delegate",
+    "status_pending": "Pending review",
+    "status_approved": "Approved",
+    "status_rejected": "Rejected",
+    "friendly": "Friendly",
+    "unfriendly": "Unfriendly",
+    "markFriendly": "Approve — Friendly",
+    "markUnfriendly": "Approve — Unfriendly",
+    "reject": "Reject",
+    "delete": "Delete",
+    "withdraw": "Withdraw"
   }
 }
