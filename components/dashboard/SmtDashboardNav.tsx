@@ -64,7 +64,7 @@ function SmtSidebarLink({
       href={item.href}
       aria-label={`${priority}. ${label}`}
       className={cn(
-        "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-7",
+        "nav-priority-link discord-interactive-hover flex w-full min-w-0 items-center justify-center gap-0 rounded-[var(--radius-md)] px-2 py-2 text-sm transition-apple group-hover:justify-start group-hover:gap-3 group-hover:px-2.5 group-hover:pl-8",
         isActive
           ? "smt-nav-row-active font-semibold"
           : "font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_6%,transparent)]"

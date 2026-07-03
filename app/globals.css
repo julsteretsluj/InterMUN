@@ -788,9 +788,9 @@ html.dark ::selection {
   .nav-priority-link--dock .nav-priority-badge {
     @apply left-1/2 top-0 -translate-x-1/2;
   }
-  /* Sidebar rows: vertically centre the number badge within the row. */
+  /* Sidebar rows: vertically centre the number badge and give it left breathing room. */
   .nav-priority-link:not(.nav-priority-link--dock) .nav-priority-badge {
-    @apply top-1/2 -translate-y-1/2;
+    @apply left-2.5 top-1/2 -translate-y-1/2;
   }
   .nav-priority-tab {
     @apply relative pl-6;

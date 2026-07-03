@@ -64,7 +64,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                 key={item.href}
                 href={item.href}
                 aria-label={`${item.priority}. ${item.label}`}
-                className="nav-priority-link relative rounded-md px-2 py-1 pl-7 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
+                className="nav-priority-link relative rounded-md px-2 py-1 pl-8 transition-colors hover:bg-slate-100 dark:hover:bg-white/10"
               >
                 <NavPriorityBadge priority={item.priority} />
                 {item.label}
