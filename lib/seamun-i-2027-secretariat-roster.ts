@@ -22,17 +22,18 @@ export const SEAMUN_I_2027_SECRETARIAT_CONTACTS = {
 
 /**
  * SMT / secretariat sheet row labels (`allocations.country`) — matches typical OVERVIEW order:
- * leadership, operations, media. Three parliamentarian seats use the same role label.
+ * leadership, operations, media. Two deputy secretary general and three parliamentarian seats
+ * share the same role label respectively.
  */
 export const SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS = [
   "Secretary General",
+  "Deputy Secretary General",
   "Deputy Secretary General",
   "Parliamentarian",
   "Parliamentarian",
   "Parliamentarian",
   "Head of Logistics",
   "Head of Finance",
-  "Head of Community Outreach",
   "Head of Delegate Affairs",
   "Head of Media",
   "Head of PR & Advertising",
@@ -43,7 +44,8 @@ export const SMT_TEMPORARY_SEAT_LABELS = ["Temporary SMT", "Temporary advisor"] 
 
 export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
   { role: "Secretary General", name: "—", email: "secretary-general@example.org" },
-  { role: "Deputy Secretary General", name: "—", email: "deputy-secretary-general@example.org" },
+  { role: "Deputy Secretary General", name: "—", email: "deputy-secretary-general-a@example.org" },
+  { role: "Deputy Secretary General", name: "—", email: "deputy-secretary-general-b@example.org" },
   { role: "Parliamentarian", name: "—", email: "parliamentarian-a@example.org" },
   { role: "Parliamentarian", name: "—", email: "parliamentarian-b@example.org" },
   { role: "Parliamentarian", name: "—", email: "parliamentarian-c@example.org" },
@@ -52,7 +54,6 @@ export const SEAMUN_I_2027_LEADERSHIP: SeamunLeadershipRow[] = [
 export const SEAMUN_I_2027_OPERATIONS: { role: string; name: string; email: string | null }[] = [
   { role: "Head of Logistics", name: "—", email: "logistics@example.org" },
   { role: "Head of Finance", name: "—", email: "finance-ops@example.org" },
-  { role: "Head of Community Outreach", name: "—", email: "outreach@example.org" },
   { role: "Head of Delegate Affairs", name: "—", email: "delegate-affairs@example.org" },
 ];
 
