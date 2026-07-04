@@ -1,8 +1,11 @@
 import { INTERMUN_EMBLEM_LIGHT_PATH, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-/** Map square icon heights to slightly taller max-heights so the wordmark text stays legible. */
+/** Prefer explicit max-height utilities; otherwise map square icon heights for the wordmark. */
 function lightWordmarkMaxHeight(className?: string): string {
+  const maxHTokens = className?.match(/\b(?:sm:|md:|lg:|xl:)?max-h-[\w\[\]./%-]+/g);
+  if (maxHTokens?.length) return maxHTokens.join(" ");
+
   const hClass = className?.match(/\bh-[\w\[\]./%-]+/)?.[0];
   if (!hClass) return "max-h-10";
   switch (hClass) {
@@ -28,6 +31,9 @@ function lightWordmarkMaxHeight(className?: string): string {
 }
 
 function lightWordmarkMaxWidth(className?: string): string | undefined {
+  const widthTokens = className?.match(/\b(?:sm:|md:|lg:|xl:)?(?:max-w-|w-auto|w-full)[\w\[\]./%-]*/g);
+  if (widthTokens?.length) return widthTokens.join(" ");
+
   const wClass = className?.match(/\bw-[\w\[\]./%-]+/)?.[0];
   if (!wClass) return undefined;
   switch (wClass) {
