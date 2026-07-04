@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { startScheduledCommitteeSessionAction } from "@/app/actions/committee-session";
+import { dispatchCommitteeSessionUpdated } from "@/lib/committee-session-sync";
 import { HelpButton } from "@/components/HelpButton";
 import {
   playTimerExpiryAlarm,
@@ -15,7 +16,6 @@ import type {
   SeamunScheduleMilestone,
 } from "@/lib/seamun-preset-sessions";
 
-const SESSION_STATE_UPDATED_EVENT = "intermun:committee-session-updated";
 const DAY_STORAGE_KEY = "intermun-scheduled-sessions-day";
 /** setTimeout ceiling we schedule reminders within (24h). */
 const MAX_REMINDER_HORIZON_MS = 24 * 60 * 60 * 1000;
@@ -191,9 +191,7 @@ export function ChairScheduledSessionsPanel({
         setReminders((prev) =>
           prev.filter((r) => !(r.preset && `${r.preset.day}-${r.preset.start}` === key))
         );
-        window.dispatchEvent(
-          new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } })
-        );
+        dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
         router.refresh();
       });
     },

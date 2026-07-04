@@ -1,8 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
+import {
+  startCommitteeSessionAction,
+  stopCommitteeSessionAction,
+  updateCommitteeSessionLimitAction,
+} from "@/app/actions/committee-session";
+import { dispatchCommitteeSessionUpdated } from "@/lib/committee-session-sync";
 import { isoToDatetimeLocalValue } from "@/lib/datetime-local";
 import { HelpButton } from "@/components/HelpButton";
 import { SessionHistoryPanel } from "@/components/session/SessionHistoryPanel";
@@ -10,18 +17,6 @@ import { committeeSessionEndTimestampMs, formatCountdownOrElapsed } from "@/lib/
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
 
 type EndMode = "none" | "duration" | "until";
-const SESSION_STATE_UPDATED_EVENT = "intermun:committee-session-updated";
-
-type ProcedureRow = {
-  state: string;
-  current_vote_item_id: string | null;
-  debate_closed: boolean;
-  motion_floor_open: boolean;
-  committee_session_started_at: string | null;
-  committee_session_duration_seconds: number | null;
-  committee_session_ends_at: string | null;
-  committee_session_title: string | null;
-};
 
 function normalizeCommitteeSessionTitle(raw: string): string | null {
   const t = raw.trim();
@@ -68,6 +63,7 @@ export function ChairCommitteeSessionControl({
   initialSessionTitle: string | null;
 }) {
   const t = useTranslations("session.committeeControl");
+  const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [startedAt, setStartedAt] = useState<string | null>(initialStartedAt);
   const [pending, startTransition] = useTransition();
@@ -283,66 +279,6 @@ export function ChairCommitteeSessionControl({
     return { committee_session_duration_seconds: null, committee_session_ends_at: iso };
   }
 
-  async function loadFullRow(): Promise<ProcedureRow | null> {
-    const withEndColumns = async () =>
-      supabase
-        .from("procedure_states")
-        .select(
-          "state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at, committee_session_title"
-        )
-        .eq("conference_id", conferenceId)
-        .maybeSingle();
-    const withoutEndColumns = async () =>
-      supabase
-        .from("procedure_states")
-        .select(
-          "state, current_vote_item_id, debate_closed, motion_floor_open, committee_session_started_at, committee_session_title"
-        )
-        .eq("conference_id", conferenceId)
-        .maybeSingle();
-    const withoutSessionColumns = async () =>
-      supabase
-        .from("procedure_states")
-        .select("state, current_vote_item_id, debate_closed, motion_floor_open")
-        .eq("conference_id", conferenceId)
-        .maybeSingle();
-
-    const { data, error } = supportsSessionStartColumn
-      ? supportsSessionEndOptions
-        ? await withEndColumns()
-        : await withoutEndColumns()
-      : await withoutSessionColumns();
-    if (isSessionColumnCacheError(error?.message)) {
-      const message = String(error?.message ?? "");
-      setSupportsSessionStartColumn(!/committee_session_started_at/i.test(message));
-      setSupportsSessionEndOptions(!isSessionEndColumnCacheError(message));
-    }
-    if (isSessionEndColumnCacheError(error?.message)) {
-      setSupportsSessionEndOptions(false);
-      const fallback = await withoutEndColumns();
-      if (fallback.error || !fallback.data) return null;
-      const base = fallback.data as Omit<ProcedureRow, "committee_session_duration_seconds" | "committee_session_ends_at">;
-      return { ...base, committee_session_duration_seconds: null, committee_session_ends_at: null };
-    }
-    if (isSessionColumnCacheError(error?.message) && /committee_session_started_at/i.test(String(error?.message ?? ""))) {
-      const fallback = await withoutSessionColumns();
-      if (fallback.error || !fallback.data) return null;
-      const base = fallback.data as Omit<
-        ProcedureRow,
-        "committee_session_started_at" | "committee_session_duration_seconds" | "committee_session_ends_at"
-      >;
-      return {
-        ...base,
-        committee_session_started_at: null,
-        committee_session_duration_seconds: null,
-        committee_session_ends_at: null,
-        committee_session_title: null,
-      };
-    }
-    if (error || !data) return null;
-    return data as ProcedureRow;
-  }
-
   function startSession() {
     setMsg(null);
     startTransition(async () => {
@@ -358,45 +294,18 @@ export function ChairCommitteeSessionControl({
         setMsg(t("sessionStartUnavailable"));
         return;
       }
-      const row = await loadFullRow();
-      const now = new Date().toISOString();
-      const titlePayload = normalizeCommitteeSessionTitle(sessionTitle);
-      const timingUpdate = supportsSessionEndOptions
-        ? {
-            committee_session_duration_seconds: timing.committee_session_duration_seconds,
-            committee_session_ends_at: timing.committee_session_ends_at,
-          }
-        : {};
-      if (row) {
-        const { error } = await supabase
-          .from("procedure_states")
-          .update({
-            committee_session_started_at: now,
-            committee_session_title: titlePayload,
-            ...timingUpdate,
-            updated_at: now,
-          })
-          .eq("conference_id", conferenceId);
-        setMsg(error ? friendlySessionColumnError(error.message) ?? error.message : null);
-        if (!error) {
-          window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
-        }
-      } else {
-        const { error } = await supabase.from("procedure_states").insert({
-          conference_id: conferenceId,
-          state: "debate_open",
-          debate_closed: false,
-          motion_floor_open: false,
-          committee_session_started_at: now,
-          committee_session_title: titlePayload,
-          ...timingUpdate,
-          updated_at: now,
-        });
-        setMsg(error ? friendlySessionColumnError(error.message) ?? error.message : null);
-        if (!error) {
-          window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
-        }
+      const res = await startCommitteeSessionAction({
+        conferenceId,
+        title: sessionTitle,
+        durationSeconds: supportsSessionEndOptions ? timing.committee_session_duration_seconds : null,
+        endsAt: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
+      });
+      if (res.error) {
+        setMsg(res.error);
+        return;
       }
+      dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
+      router.refresh();
       void refresh();
     });
   }
@@ -413,27 +322,13 @@ export function ChairCommitteeSessionControl({
         titleDebounceRef.current = null;
       }
       sessionTitleDirtyRef.current = false;
-      const now = new Date().toISOString();
-      const { error } = await supabase
-        .from("procedure_states")
-        .update({
-          committee_session_started_at: null,
-          committee_session_title: null,
-          ...(supportsSessionEndOptions
-            ? {
-                committee_session_duration_seconds: null,
-                committee_session_ends_at: null,
-              }
-            : {}),
-          updated_at: now,
-        })
-        .eq("conference_id", conferenceId);
-      setMsg(
-        error ? friendlySessionColumnError(error.message) ?? error.message : null
-      );
-      if (!error) {
-        window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
+      const res = await stopCommitteeSessionAction({ conferenceId });
+      if (res.error) {
+        setMsg(res.error);
+        return;
       }
+      dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
+      router.refresh();
       void refresh();
     });
   }
@@ -450,24 +345,18 @@ export function ChairCommitteeSessionControl({
           return;
         }
       }
-      const { error } = await supabase
-        .from("procedure_states")
-        .update({
-          ...(supportsSessionEndOptions
-            ? {
-                committee_session_duration_seconds: timing.committee_session_duration_seconds,
-                committee_session_ends_at: timing.committee_session_ends_at,
-              }
-            : {}),
-          updated_at: new Date().toISOString(),
-        })
-        .eq("conference_id", conferenceId);
-      if (error) {
-        setMsg(friendlySessionColumnError(error.message) ?? error.message);
-      } else {
-        setMsg(`ok:${t("sessionLimitUpdated")}`);
-        window.dispatchEvent(new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } }));
+      const res = await updateCommitteeSessionLimitAction({
+        conferenceId,
+        durationSeconds: supportsSessionEndOptions ? timing.committee_session_duration_seconds : null,
+        endsAt: supportsSessionEndOptions ? timing.committee_session_ends_at : null,
+      });
+      if (res.error) {
+        setMsg(res.error);
+        return;
       }
+      setMsg(`ok:${t("sessionLimitUpdated")}`);
+      dispatchCommitteeSessionUpdated(res.canonicalConferenceId ?? conferenceId);
+      router.refresh();
       void refresh();
     });
   }

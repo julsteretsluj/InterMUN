@@ -19,6 +19,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { parseRollAttendance } from "@/lib/roll-attendance";
 import { useLiveDebateConferenceId } from "@/lib/hooks/useLiveDebateConferenceId";
+import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
 
 function StatMiniCard({
   label,
@@ -137,14 +138,13 @@ export function CommitteeRoomDigitalMUNClient({
     async function load() {
       const { data: ps } = await supabase
         .from("procedure_states")
-        .select("state, current_vote_item_id, committee_session_started_at")
+        .select("state, current_vote_item_id")
         .eq("conference_id", floorConferenceId)
         .maybeSingle();
 
       if (!isActive) return;
       setProcedureState(ps?.state ?? "debate_open");
       setCurrentVoteItemId(ps?.current_vote_item_id ?? null);
-      setSessionStartedAt(ps?.committee_session_started_at ?? null);
     }
 
     void load();
@@ -163,11 +163,9 @@ export function CommitteeRoomDigitalMUNClient({
           const row = payload.new as {
             state: "debate_open" | "voting_procedure";
             current_vote_item_id: string | null;
-            committee_session_started_at: string | null;
           };
           setProcedureState(row?.state ?? "debate_open");
           setCurrentVoteItemId(row?.current_vote_item_id ?? null);
-          setSessionStartedAt(row?.committee_session_started_at ?? null);
         }
       )
       .subscribe();
@@ -177,6 +175,52 @@ export function CommitteeRoomDigitalMUNClient({
       void supabase.removeChannel(ch);
     };
   }, [supabase, floorConferenceId]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function loadSession() {
+      const { data } = await supabase
+        .from("procedure_states")
+        .select("committee_session_started_at")
+        .eq("conference_id", canonicalConferenceId)
+        .maybeSingle();
+      if (!isActive) return;
+      setSessionStartedAt(
+        (data as { committee_session_started_at?: string | null } | null)?.committee_session_started_at ??
+          null
+      );
+    }
+
+    void loadSession();
+
+    const ch = supabase
+      .channel(`committee-session-${canonicalConferenceId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "procedure_states",
+          filter: `conference_id=eq.${canonicalConferenceId}`,
+        },
+        () => void loadSession()
+      )
+      .subscribe();
+
+    function onSessionUpdated(event: Event) {
+      const detail = (event as CustomEvent<{ conferenceId?: string }>).detail;
+      if (detail?.conferenceId && detail.conferenceId !== canonicalConferenceId) return;
+      void loadSession();
+    }
+    window.addEventListener(COMMITTEE_SESSION_UPDATED_EVENT, onSessionUpdated as EventListener);
+
+    return () => {
+      isActive = false;
+      void supabase.removeChannel(ch);
+      window.removeEventListener(COMMITTEE_SESSION_UPDATED_EVENT, onSessionUpdated as EventListener);
+    };
+  }, [supabase, canonicalConferenceId]);
 
   useEffect(() => {
     if (!isDelegate) return;
@@ -429,6 +473,7 @@ export function CommitteeRoomDigitalMUNClient({
             <div className="space-y-4">
               <FloorStatusBar
                 conferenceId={floorConferenceId}
+                sessionConferenceId={canonicalConferenceId}
                 observeOnly={false}
                 theme="dark"
                 sessionMiniControls="none"

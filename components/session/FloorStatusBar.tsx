@@ -16,6 +16,7 @@ import {
   formatCountdownOrElapsed,
 } from "@/lib/committee-session-end";
 import { useTimerExpiryAlarmWhenEndMsCrosses } from "@/lib/use-timer-expiry-alarm-when-end-ms-crosses";
+import { COMMITTEE_SESSION_UPDATED_EVENT } from "@/lib/committee-session-sync";
 
 type Announcement = {
   id: string;
@@ -36,7 +37,6 @@ type ActiveMotionRow = {
 };
 
 type FloorTheme = "dark" | "light";
-const SESSION_STATE_UPDATED_EVENT = "intermun:committee-session-updated";
 
 function formatSessionElapsed(startIso: string, nowMs: number): string {
   const t0 = new Date(startIso).getTime();
@@ -55,12 +55,15 @@ function formatSessionElapsed(startIso: string, nowMs: number): string {
 
 export function FloorStatusBar({
   conferenceId,
+  sessionConferenceId,
   observeOnly = false,
   theme = "dark",
   activeMotionVoteItemId = null,
   sessionMiniControls = "full",
 }: {
   conferenceId: string;
+  /** Canonical chamber row for committee session timer (defaults to `conferenceId`). */
+  sessionConferenceId?: string;
   observeOnly?: boolean;
   theme?: FloorTheme;
   /** When set, show current motion + floor timer above dais / speakers (e.g. delegate committee room). */
@@ -68,6 +71,7 @@ export function FloorStatusBar({
   /** Session quick links: full for chairs/staff, minimal for compact chair panels, none for read-only delegate UI. */
   sessionMiniControls?: "full" | "minimal" | "none";
 }) {
+  const sessionScopeId = sessionConferenceId ?? conferenceId;
   const locale = useLocale();
   const t = useTranslations("session.floorStatus");
   const tActiveMotion = useTranslations("session.activeMotion");
@@ -92,7 +96,7 @@ export function FloorStatusBar({
     return supabase
       .from("procedure_states")
       .select("committee_session_started_at, committee_session_duration_seconds, committee_session_ends_at")
-      .eq("conference_id", conferenceId)
+      .eq("conference_id", sessionScopeId)
       .maybeSingle()
       .then(async ({ data, error }) => {
         const errorMessage = String(error?.message ?? "");
@@ -116,7 +120,7 @@ export function FloorStatusBar({
         setSessionDurationSeconds(row?.committee_session_duration_seconds ?? null);
         setSessionEndsAt(row?.committee_session_ends_at ?? null);
       });
-  }, [supabase, conferenceId]);
+  }, [supabase, sessionScopeId]);
 
   const loadDais = useCallback(() => {
     return supabase
@@ -216,14 +220,14 @@ export function FloorStatusBar({
   useEffect(() => {
     void loadProcedureSession();
     const ch = supabase
-      .channel(`floor-procedure-session-${conferenceId}`)
+      .channel(`floor-procedure-session-${sessionScopeId}`)
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
           table: "procedure_states",
-          filter: `conference_id=eq.${conferenceId}`,
+          filter: `conference_id=eq.${sessionScopeId}`,
         },
         () => void loadProcedureSession()
       )
@@ -231,19 +235,20 @@ export function FloorStatusBar({
     return () => {
       void supabase.removeChannel(ch);
     };
-  }, [supabase, conferenceId, loadProcedureSession]);
+  }, [supabase, sessionScopeId, loadProcedureSession]);
 
   useEffect(() => {
     function handleSessionUpdate(event: Event) {
       const detail = (event as CustomEvent<{ conferenceId?: string }>).detail;
-      if (detail?.conferenceId && detail.conferenceId !== conferenceId) return;
+      const watchedIds = new Set([conferenceId, sessionScopeId]);
+      if (detail?.conferenceId && !watchedIds.has(detail.conferenceId)) return;
       void loadProcedureSession();
     }
-    window.addEventListener(SESSION_STATE_UPDATED_EVENT, handleSessionUpdate as EventListener);
+    window.addEventListener(COMMITTEE_SESSION_UPDATED_EVENT, handleSessionUpdate as EventListener);
     return () => {
-      window.removeEventListener(SESSION_STATE_UPDATED_EVENT, handleSessionUpdate as EventListener);
+      window.removeEventListener(COMMITTEE_SESSION_UPDATED_EVENT, handleSessionUpdate as EventListener);
     };
-  }, [conferenceId, loadProcedureSession]);
+  }, [conferenceId, sessionScopeId, loadProcedureSession]);
 
   const sessionEndMs =
     sessionStartedAt != null

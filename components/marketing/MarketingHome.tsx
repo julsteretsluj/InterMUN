@@ -105,19 +105,31 @@ function RoleSection({
   );
 }
 
-function RollCallPreview() {
+function RollCallPreview({
+  label,
+  quorum,
+  statusPresentVoting,
+  statusPresent,
+  statusAbsent,
+}: {
+  label: string;
+  quorum: string;
+  statusPresentVoting: string;
+  statusPresent: string;
+  statusAbsent: string;
+}) {
   const rows = [
-    { country: "China", status: "P+V" },
-    { country: "France", status: "P+V" },
-    { country: "Brazil", status: "P" },
-    { country: "Japan", status: "Absent" },
+    { country: "Kenya", status: statusPresentVoting },
+    { country: "Mexico", status: statusPresent },
+    { country: "Norway", status: statusPresentVoting },
+    { country: "Philippines", status: statusAbsent },
   ];
   return (
     <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]">
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Roll call</span>
+        <span className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{label}</span>
         <span className="rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] px-2 py-0.5 text-xs font-medium text-[var(--accent)]">
-          Quorum 6 / 8
+          {quorum}
         </span>
       </div>
       <ul className="space-y-2">
@@ -130,7 +142,7 @@ function RollCallPreview() {
             <span
               className={cn(
                 "font-mono text-xs",
-                row.status === "Absent" ? "text-brand-muted" : "text-[var(--accent)]"
+                row.status === statusAbsent ? "text-brand-muted" : "text-[var(--accent)]"
               )}
             >
               {row.status}
@@ -142,26 +154,34 @@ function RollCallPreview() {
   );
 }
 
-function SpeakersPreview() {
+function SpeakersPreview({
+  label,
+  nowSpeaking,
+  moreSpeakers,
+}: {
+  label: string;
+  nowSpeaking: string;
+  moreSpeakers: string;
+}) {
   return (
     <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]">
-      <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-muted">Speakers list</div>
+      <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-muted">{label}</div>
       <div className="mb-3 rounded-xl border border-[color-mix(in_srgb,var(--accent)_25%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] px-3 py-2">
-        <p className="text-xs text-brand-muted">Now speaking</p>
-        <p className="font-display font-semibold">Denmark</p>
-        <p className="font-mono text-sm text-[var(--accent)]">1:23</p>
+        <p className="text-xs text-brand-muted">{nowSpeaking}</p>
+        <p className="font-display font-semibold">Norway</p>
+        <p className="font-mono text-sm text-[var(--accent)]">0:47</p>
       </div>
       <ul className="space-y-1.5 text-sm text-brand-muted">
-        <li>France</li>
-        <li>Germany</li>
-        <li>Japan</li>
-        <li className="text-xs">+5 more</li>
+        <li>Spain</li>
+        <li>Italy</li>
+        <li>Portugal</li>
+        <li className="text-xs">{moreSpeakers}</li>
       </ul>
     </div>
   );
 }
 
-function DelegatePrepPreview() {
+function DelegatePrepPreview({ readyLabel }: { readyLabel: string }) {
   const tiles = ["Documents", "Resolutions", "Speeches", "Stances"];
   return (
     <div className="grid grid-cols-2 gap-3">
@@ -171,19 +191,19 @@ function DelegatePrepPreview() {
           className="rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]"
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{tile}</p>
-          <p className="mt-2 font-display text-sm font-semibold text-brand-navy">Ready for session</p>
+          <p className="mt-2 font-display text-sm font-semibold text-brand-navy">{readyLabel}</p>
         </div>
       ))}
     </div>
   );
 }
 
-function SmtPreview() {
+function SmtPreview({ label }: { label: string }) {
   return (
     <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]">
-      <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Live committees</p>
+      <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">{label}</p>
       <ul className="mt-3 space-y-2">
-        {["UNSC", "DISEC", "WHO", "Press Corps"].map((committee, i) => (
+        {["ECOSOC", "Legal", "WHO", "Press Corps"].map((committee, i) => (
           <li
             key={committee}
             className="flex items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm"
@@ -204,6 +224,31 @@ function SmtPreview() {
 
 export async function MarketingHome() {
   const t = await getTranslations("marketing");
+  const p = await getTranslations("marketing.preview");
+
+  const previewProps = {
+    rollCall: {
+      label: p("rollCallLabel"),
+      quorum: p("quorum"),
+      statusPresentVoting: p("statusPresentVoting"),
+      statusPresent: p("statusPresent"),
+      statusAbsent: p("statusAbsent"),
+    },
+    speakers: {
+      label: p("speakersLabel"),
+      nowSpeaking: p("nowSpeaking"),
+      moreSpeakers: p("moreSpeakers"),
+    },
+    vote: {
+      label: p("voteLabel"),
+      title: p("voteTitle"),
+      meta: p("voteMeta"),
+      accept: p("voteAccept"),
+      reject: p("voteReject"),
+    },
+    prepReady: p("prepReady"),
+    smtLabel: p("smtLabel"),
+  };
 
   const chairFeatures: FeatureItem[] = [
     {
@@ -338,8 +383,8 @@ export async function MarketingHome() {
           <div className="relative">
             <div className="absolute -inset-4 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,color-mix(in_srgb,var(--accent)_16%,transparent),transparent_70%)]" />
             <div className="relative space-y-4 rounded-[2rem] border border-[var(--hairline)] bg-[var(--material-thick)] p-5 shadow-[var(--dashboard-shadow)]">
-              <RollCallPreview />
-              <SpeakersPreview />
+              <RollCallPreview {...previewProps.rollCall} />
+              <SpeakersPreview {...previewProps.speakers} />
             </div>
           </div>
         </div>
@@ -371,17 +416,19 @@ export async function MarketingHome() {
           items={chairFeatures}
           preview={
             <div className="space-y-4">
-              <RollCallPreview />
+              <RollCallPreview {...previewProps.rollCall} />
               <div className="rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Vote on motions</p>
-                <p className="mt-2 font-display font-semibold">Moderated caucus</p>
-                <p className="text-sm text-brand-muted">Simple majority · 8 of 15</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
+                  {previewProps.vote.label}
+                </p>
+                <p className="mt-2 font-display font-semibold">{previewProps.vote.title}</p>
+                <p className="text-sm text-brand-muted">{previewProps.vote.meta}</p>
                 <div className="mt-3 flex gap-2">
                   <span className="rounded-full bg-[color-mix(in_srgb,var(--accent)_15%,transparent)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-                    Accept
+                    {previewProps.vote.accept}
                   </span>
                   <span className="rounded-full border border-[var(--hairline)] px-3 py-1 text-xs font-semibold text-brand-muted">
-                    Reject
+                    {previewProps.vote.reject}
                   </span>
                 </div>
               </div>
@@ -396,7 +443,7 @@ export async function MarketingHome() {
           description={t("delegates.description")}
           items={delegateFeatures}
           reversed
-          preview={<DelegatePrepPreview />}
+          preview={<DelegatePrepPreview readyLabel={previewProps.prepReady} />}
         />
 
         <RoleSection
@@ -405,7 +452,7 @@ export async function MarketingHome() {
           title={t("smt.title")}
           description={t("smt.description")}
           items={smtFeatures}
-          preview={<SmtPreview />}
+          preview={<SmtPreview label={previewProps.smtLabel} />}
         />
 
         <section className="border-t border-[var(--hairline)] py-16 md:py-20">

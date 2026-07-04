@@ -83,6 +83,7 @@ export function ChairLiveFloor({
     <div className="space-y-3">
       <FloorStatusBar
         conferenceId={floorConferenceId}
+        sessionConferenceId={canonicalConferenceId}
         theme={theme}
         observeOnly={observeFloorOnly}
         activeMotionVoteItemId={activeVoteItemId}
