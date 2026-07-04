@@ -2358,7 +2358,15 @@
     "finish": "Finish",
     "currentIncomplete": "Pick a band for every criterion to complete this delegate.",
     "allScoredTitle": "All delegates scored",
-    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust."
+    "allScoredBody": "Every seated delegate has a complete rubric. You can revisit anyone to adjust.",
+    "unscoredBannerTitle": "Score every seated delegate before submitting",
+    "unscoredBannerBody": "Use guided scoring to work through delegates one at a time. Each delegate needs all six rubric criteria (autosaves when complete).",
+    "unscoredListLabel": "Still to score:",
+    "startGuidedCta": "Start guided scoring",
+    "criterionProgress": "Criterion {current} of {total}",
+    "prevCriterion": "Previous criterion",
+    "nextCriterion": "Next criterion",
+    "guidedAutoAdvanceNote": "Advances to the next criterion and delegate when saved."
   },
   "chairAwardsFloorActivity": {
     "title": "Floor activity",

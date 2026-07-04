@@ -351,6 +351,7 @@ export default async function ChairAwardsPage() {
             delegates={delegateMatrixPayload}
             scoresByProfileId={scoresByProfileId}
             floorActivityByProfileId={floorActivityByProfileId}
+            defaultGuided={!delegateMatrixComplete}
           />
         ) : null}
         <ChairSubmitToSmtPanel
