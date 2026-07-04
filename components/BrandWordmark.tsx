@@ -20,7 +20,9 @@ export function BrandWordmark({
         <InterMunEmblem
           alt={alt}
           className={cn(
-            hero ? "h-28 w-28 md:h-36 md:w-36 lg:h-40 lg:w-40" : "h-20 w-20 md:h-24 md:w-24"
+            hero
+              ? "max-h-28 w-auto max-w-[min(92vw,22rem)] md:max-h-36 lg:max-h-40 dark:h-28 dark:w-28 md:dark:h-36 md:dark:w-36 lg:dark:h-40 lg:dark:w-40"
+              : "max-h-20 w-auto max-w-[min(88vw,18rem)] md:max-h-24 dark:h-20 dark:w-20 md:dark:h-24"
           )}
         />
       </div>

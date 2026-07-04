@@ -1,19 +1,21 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp, Pause, Play, SkipForward } from "lucide-react";
+import { HelpButton } from "@/components/HelpButton";
+import type { RollAttendance } from "@/lib/roll-attendance";
 import {
-  nextRollAttendance,
-  type RollAttendance,
-} from "@/lib/roll-attendance";
+  ROLL_ATTENDANCE_BUTTONS,
+  SESSION_SURFACE_CARD,
+} from "@/lib/roll-call-attendance-buttons";
 import { cn } from "@/lib/utils";
 
 const PREVIEW_CARD =
   "rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]";
+const PREVIEW_LABEL = "text-xs font-semibold uppercase tracking-wide text-brand-muted";
 const PREVIEW_ROW =
   "flex w-full items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-left text-sm transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
-const PREVIEW_LABEL = "text-xs font-semibold uppercase tracking-wide text-brand-muted";
 
 type RollRow = { id: string; country: string; status: RollAttendance };
 
@@ -39,72 +41,71 @@ function formatTimer(totalSeconds: number): string {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-function rollStatusCompact(status: RollAttendance, t: ReturnType<typeof useTranslations<"marketing.preview">>) {
-  switch (status) {
-    case "present_voting":
-      return t("statusPresentVoting");
-    case "present_abstain":
-      return t("statusPresent");
-    case "absent":
-      return t("statusAbsent");
-  }
-}
-
-function rollStatusTone(status: RollAttendance) {
-  switch (status) {
-    case "present_voting":
-      return "text-[var(--accent)] font-semibold";
-    case "present_abstain":
-      return "text-brand-navy/85 font-medium";
-    case "absent":
-      return "text-brand-muted";
-  }
-}
-
-function countQuorum(rows: RollRow[]) {
-  const present = rows.filter((r) => r.status !== "absent").length;
-  return { present, total: rows.length };
-}
-
 function MarketingRollCallCard({
   rows,
-  onCycle,
+  onSetAttendance,
 }: {
   rows: RollRow[];
-  onCycle: (id: string) => void;
+  onSetAttendance: (id: string, status: RollAttendance) => void;
 }) {
-  const t = useTranslations("marketing.preview");
-  const quorum = countQuorum(rows);
+  const t = useTranslations("sessionControlClient");
 
   return (
-    <div className={PREVIEW_CARD}>
-      <div className="mb-1 flex items-center justify-between gap-2">
-        <span className={PREVIEW_LABEL}>{t("rollCallLabel")}</span>
-        <span className="rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] px-2 py-0.5 text-xs font-medium text-[var(--accent)]">
-          {t("quorumLive", { present: quorum.present, total: quorum.total })}
-        </span>
+    <section className="space-y-4 text-brand-navy">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="font-display text-lg font-semibold text-brand-navy">
+          ✅ {t("rollCallTracker")}
+        </h3>
+        <HelpButton title={t("rollCallTracker")}>{t("rollCallHelp")}</HelpButton>
       </div>
-      <p className="mb-3 text-[0.7rem] text-brand-muted">{t("rollCallHint")}</p>
-      <ul className="space-y-2">
-        {rows.map((row) => (
-          <li key={row.id}>
-            <button
-              type="button"
-              className={PREVIEW_ROW}
-              onClick={() => onCycle(row.id)}
-              aria-label={t("rollCallCycleAria", { country: row.country })}
+      <p className="text-sm text-brand-muted">{t("rollCallIntro")}</p>
+      <div className={`${SESSION_SURFACE_CARD} space-y-4`}>
+        <button
+          type="button"
+          className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-brand-navy hover:bg-white/20"
+        >
+          {t("initializeRowsAllAllocations")}
+        </button>
+        <div>
+          <h4 className="font-display text-base font-semibold text-brand-navy">
+            👥 {t("delegates")}
+          </h4>
+          <p className="mt-1 text-sm text-brand-muted">{t("delegateRollStatusHint")}</p>
+        </div>
+        <ul className="space-y-3 text-sm text-brand-navy">
+          {rows.map((row) => (
+            <li
+              key={row.id}
+              className="flex flex-col gap-2 rounded-lg border border-white/12 bg-black/15 px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
             >
-              <span className={cn("font-medium", row.status === "absent" && "text-brand-muted")}>
-                {row.country}
-              </span>
-              <span className={cn("font-mono text-xs", rollStatusTone(row.status))}>
-                {rollStatusCompact(row.status, t)}
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <span className="shrink-0 font-medium">{row.country}</span>
+              <div
+                className="flex flex-wrap gap-1.5"
+                role="group"
+                aria-label={t("rollCallForCountry", { country: row.country })}
+              >
+                {ROLL_ATTENDANCE_BUTTONS.map((opt) => {
+                  const active = row.status === opt.value;
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      title={t(opt.titleKey)}
+                      onClick={() => onSetAttendance(row.id, opt.value)}
+                      className={`rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition sm:text-sm ${
+                        active ? opt.activeClass : opt.inactiveClass
+                      }`}
+                    >
+                      {t(opt.labelKey)}
+                    </button>
+                  );
+                })}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
 
@@ -205,12 +206,8 @@ export function MarketingHeroSessionPreview({ className }: { className?: string 
   const [running, setRunning] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  const cycleRoll = useCallback((id: string) => {
-    setRoll((prev) =>
-      prev.map((row) =>
-        row.id === id ? { ...row, status: nextRollAttendance(row.status) } : row
-      )
-    );
+  const setRollAttendance = useCallback((id: string, status: RollAttendance) => {
+    setRoll((prev) => prev.map((row) => (row.id === id ? { ...row, status } : row)));
   }, []);
 
   const toggleTimer = useCallback(() => setRunning((v) => !v), []);
@@ -241,7 +238,7 @@ export function MarketingHeroSessionPreview({ className }: { className?: string 
 
   return (
     <div className={cn("space-y-4", className)}>
-      <MarketingRollCallCard rows={roll} onCycle={cycleRoll} />
+      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} />
       <MarketingSpeakersCard
         queue={queue}
         secondsLeft={secondsLeft}
@@ -264,12 +261,8 @@ export function MarketingChairMotionPreview({ className }: { className?: string 
   const [yesCount, setYesCount] = useState(11);
   const [noCount, setNoCount] = useState(4);
 
-  const cycleRoll = useCallback((id: string) => {
-    setRoll((prev) =>
-      prev.map((row) =>
-        row.id === id ? { ...row, status: nextRollAttendance(row.status) } : row
-      )
-    );
+  const setRollAttendance = useCallback((id: string, status: RollAttendance) => {
+    setRoll((prev) => prev.map((row) => (row.id === id ? { ...row, status } : row)));
   }, []);
 
   const recordVote = useCallback(
@@ -290,7 +283,7 @@ export function MarketingChairMotionPreview({ className }: { className?: string 
 
   return (
     <div className={cn("space-y-4", className)}>
-      <MarketingRollCallCard rows={roll} onCycle={cycleRoll} />
+      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} />
       <div className={PREVIEW_CARD}>
         <p className={PREVIEW_LABEL}>{t("voteLabel")}</p>
         <p className="mt-2 font-display text-base font-semibold text-brand-navy">{t("voteTitle")}</p>

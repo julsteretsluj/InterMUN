@@ -21,6 +21,7 @@ import {
   Vote,
 } from "lucide-react";
 import { BrandWordmark } from "@/components/BrandWordmark";
+import { INQUIRY_EMAIL } from "@/lib/branding";
 import {
   MarketingChairMotionPreview,
   MarketingDelegatePrepPreview,
@@ -246,7 +247,7 @@ export async function MarketingHome() {
           </div>
           <div className="relative">
             <div className="absolute -inset-4 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,color-mix(in_srgb,var(--accent)_16%,transparent),transparent_70%)]" />
-            <div className="relative rounded-[2rem] border border-[var(--hairline)] bg-[var(--material-thick)] p-5 shadow-[var(--dashboard-shadow)]">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#12121A] p-5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)]">
               <MarketingHeroSessionPreview />
             </div>
           </div>
@@ -277,7 +278,11 @@ export async function MarketingHome() {
           title={t("chairs.title")}
           description={t("chairs.description")}
           items={chairFeatures}
-          preview={<MarketingChairMotionPreview />}
+          preview={
+            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#12121A] p-5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)]">
+              <MarketingChairMotionPreview />
+            </div>
+          }
         />
 
         <RoleSection
@@ -334,6 +339,23 @@ export async function MarketingHome() {
         </div>
       </section>
 
+      <section id="contact" className="scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+            {t("contact.eyebrow")}
+          </p>
+          <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("contact.title")}</h2>
+          <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{t("contact.description")}</p>
+          <a
+            href={`mailto:${INQUIRY_EMAIL}`}
+            className="mt-6 inline-flex items-center justify-center rounded-full border border-[var(--hairline)] bg-[var(--material-thick)] px-6 py-3 text-base font-semibold text-brand-navy shadow-[var(--dashboard-shadow)] transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] hover:text-[var(--accent)]"
+            aria-label={t("contact.emailAria")}
+          >
+            {INQUIRY_EMAIL}
+          </a>
+        </div>
+      </section>
+
       <section className="border-t border-[var(--hairline)] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
           <h2 className="mun-display text-3xl text-brand-navy md:text-4xl">{t("footer.ctaTitle")}</h2>
@@ -353,6 +375,12 @@ export async function MarketingHome() {
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={`mailto:${INQUIRY_EMAIL}`}
+              className="hover:text-brand-navy"
+            >
+              {t("footer.contact")}
+            </a>
             <Link href="/login" className="hover:text-brand-navy">
               {t("nav.signIn")}
             </Link>

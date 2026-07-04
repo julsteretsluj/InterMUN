@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Armchair, Building2, ChevronLeft, ChevronRight, GraduationCap, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { BrandWordmark } from "@/components/BrandWordmark";
+import { AuthBrandWordmark } from "@/components/auth/AuthBrandWordmark";
 import { INTERMUN_ENTRY_ROLE_KEY, type InterMunEntryRole } from "@/lib/entry-role";
 import { resolveDashboardPathAfterAuth } from "@/lib/entry-role-redirect";
 import { applyConferenceCodeForAuthWizard } from "@/app/actions/eventGate";
@@ -272,7 +272,7 @@ export function AuthEntryWizard({
     <div className="w-full">
       {step === "welcome" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-8 shadow-lg shadow-slate-200/50 backdrop-blur-sm dark:border-white/10 dark:bg-brand-paper/95 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] md:p-10 text-center space-y-8">
-          <BrandWordmark size="hero" />
+          <AuthBrandWordmark size="hero" />
           <div
             className="mx-auto h-1.5 w-20 max-w-[90%] rounded-full bg-brand-accent"
             aria-hidden
@@ -317,7 +317,7 @@ export function AuthEntryWizard({
             <ChevronLeft className="size-4" strokeWidth={2} />
             {t("back")}
           </button>
-          <BrandWordmark className="mb-4" />
+          <AuthBrandWordmark className="mb-4" />
           <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-2">{t("conferenceTitle")}</h2>
           <p className="text-sm text-brand-muted text-center mb-6">
             {t("conferenceDescription", {
@@ -366,7 +366,7 @@ export function AuthEntryWizard({
 
       {step === "role" ? (
         <div className="rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-lg md:p-10 dark:border-white/10 dark:bg-brand-paper/95 w-full max-w-4xl mx-auto">
-          <BrandWordmark className="mb-6" />
+          <AuthBrandWordmark className="mb-6" />
           <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
             <div className="space-y-4">
               <button
@@ -546,7 +546,7 @@ export function AuthEntryWizard({
             <ChevronLeft className="size-4" strokeWidth={2} />
             {t("backToRole")}
           </button>
-          <BrandWordmark className="mb-4" />
+          <AuthBrandWordmark className="mb-4" />
           <h2 className="font-display text-xl font-semibold text-center text-brand-navy mb-6">
             {mode === "login" ? t("signIn") : t("createAccount")}
           </h2>

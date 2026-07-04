@@ -3,68 +3,82 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { OrbAnimationOverlay } from "@/components/marketing/OrbAnimationOverlay";
-import { ORB_ANIMATION_FADE_MS, ORB_ANIMATION_HOLD_MS } from "@/lib/opening-orb";
+import {
+  markOpeningOrbSeen,
+  ORB_ANIMATION_FADE_MS,
+  ORB_ANIMATION_HOLD_MS,
+  hasSeenOpeningOrb,
+  preloadOpeningOrb,
+} from "@/lib/opening-orb";
 
-const INTRO_SESSION_KEY = "intermun-marketing-intro-seen";
+type IntroPhase = "checking" | "intro" | "fade" | "open";
 
-type IntroPhase = "pending" | "intro" | "fade" | "open";
-
+/**
+ * Full-screen opening orb on first visit per session (marketing + auth).
+ * Session flag is written only after the animation completes so React Strict
+ * Mode’s double effect invocation cannot skip playback.
+ */
 export function MarketingOpening({ children }: { children: React.ReactNode }) {
-  const [phase, setPhase] = useState<IntroPhase>("pending");
+  const [phase, setPhase] = useState<IntroPhase>("checking");
   const [playKey, setPlayKey] = useState(0);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const seen = sessionStorage.getItem(INTRO_SESSION_KEY) === "1";
+    let cancelled = false;
+    let fadeTimer = 0;
+    let openTimer = 0;
 
-    if (reducedMotion || seen) {
+    const finish = () => {
+      if (cancelled) return;
+      markOpeningOrbSeen();
       setPhase("open");
-      return;
-    }
+      document.body.style.overflow = "";
+    };
 
-    sessionStorage.setItem(INTRO_SESSION_KEY, "1");
-    setPlayKey(1);
-    setPhase("intro");
+    const run = async () => {
+      if (hasSeenOpeningOrb()) {
+        setPhase("open");
+        return;
+      }
 
-    const fadeTimer = window.setTimeout(() => setPhase("fade"), ORB_ANIMATION_HOLD_MS);
-    const openTimer = window.setTimeout(
-      () => setPhase("open"),
-      ORB_ANIMATION_HOLD_MS + ORB_ANIMATION_FADE_MS
-    );
+      await preloadOpeningOrb();
+      if (cancelled) return;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+      setPlayKey((key) => key + 1);
+      setPhase("intro");
+      document.body.style.overflow = "hidden";
+
+      fadeTimer = window.setTimeout(() => {
+        if (!cancelled) setPhase("fade");
+      }, ORB_ANIMATION_HOLD_MS);
+
+      openTimer = window.setTimeout(finish, ORB_ANIMATION_HOLD_MS + ORB_ANIMATION_FADE_MS);
+    };
+
+    void run();
 
     return () => {
+      cancelled = true;
       window.clearTimeout(fadeTimer);
       window.clearTimeout(openTimer);
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = "";
     };
   }, []);
 
-  useEffect(() => {
-    if (phase === "open") {
-      document.body.style.overflow = "";
-    }
-  }, [phase]);
+  if (phase === "checking") {
+    return <div className="fixed inset-0 z-[9999] bg-black" aria-hidden />;
+  }
 
-  const overlayVisible = phase === "pending" || phase === "intro" || phase === "fade";
+  const overlayVisible = phase === "intro" || phase === "fade";
 
   return (
     <>
       {overlayVisible ? (
-        <>
-          {phase === "pending" ? (
-            <div className="fixed inset-0 z-[200] bg-black" aria-hidden />
-          ) : (
-            <OrbAnimationOverlay
-              open
-              playKey={playKey}
-              onComplete={() => {}}
-              phase={phase === "fade" ? "fade" : "intro"}
-            />
-          )}
-        </>
+        <OrbAnimationOverlay
+          open
+          playKey={playKey}
+          onComplete={() => {}}
+          phase={phase === "fade" ? "fade" : "intro"}
+        />
       ) : null}
       <div
         className={cn(

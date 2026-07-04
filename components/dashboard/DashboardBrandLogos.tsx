@@ -18,11 +18,11 @@ export function DashboardBrandLogos({
   const intermunClass =
     variant === "sidebar"
       ? showConferenceLogo
-        ? "h-8 w-8"
-        : "h-10 w-10"
+        ? "max-h-7 max-w-[4rem] w-auto dark:h-8 dark:w-8"
+        : "max-h-8 max-w-[4.5rem] w-auto dark:h-10 dark:w-10"
       : showConferenceLogo
-        ? "h-8 w-8"
-        : "h-9 w-9";
+        ? "max-h-7 max-w-[4rem] w-auto dark:h-8 dark:w-8"
+        : "max-h-9 max-w-[5rem] w-auto dark:h-9 dark:w-9";
 
   if (!showConferenceLogo) {
     return <InterMunEmblem alt="" className={intermunClass} />;

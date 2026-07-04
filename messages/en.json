@@ -3791,6 +3791,7 @@
       "howItWorks": "How it works",
       "features": "Features",
       "about": "About",
+      "contact": "Contact",
       "signIn": "Sign in",
       "getStarted": "Get started"
     },
@@ -3876,12 +3877,19 @@
       "paragraph2": "Chairs gain procedural control that mirrors how sessions actually unfold. Delegates get structured prep beside the floor. Secretariat keeps event-wide visibility without hovering over every motion.",
       "paragraph3": "Whether you run one room or a full weekend conference, InterMUN keeps chairs, delegates, and staff aligned from the opening roll call through closing ceremony."
     },
+    "contact": {
+      "eyebrow": "Get in touch",
+      "title": "Inquiries & conference customization",
+      "description": "Questions about InterMUN, help setting up your event, or requests to add committees, branding, or bespoke conference features — reach out and we'll follow up.",
+      "emailAria": "Email InterMUN for inquiries and conference customization"
+    },
     "footer": {
       "ctaTitle": "Bring your next committee online",
       "ctaSubtitle": "Create an account, enter your organiser's codes, and step into session when your dais is ready.",
       "ctaStart": "Create account",
       "ctaJoin": "Sign in",
-      "copyright": "© {year} InterMUN"
+      "copyright": "© {year} InterMUN",
+      "contact": "Contact"
     },
     "preview": {
       "rollCallLabel": "Roll call",

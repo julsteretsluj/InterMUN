@@ -1,7 +1,8 @@
 import { PublicPageControls } from "@/components/PublicPageControls";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { InterMunEmblem } from "@/components/InterMunEmblem";
+import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
+import { OPENING_ORB_PATH } from "@/lib/opening-orb";
 import { getAppName } from "@/lib/branding";
 
 export default async function MarketingLayout({
@@ -14,15 +15,16 @@ export default async function MarketingLayout({
 
   return (
     <div className="relative min-h-screen bg-brand-cream text-brand-navy dark:bg-[var(--color-bg-page)]">
+      <link rel="preload" href={OPENING_ORB_PATH} as="image" />
       <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
       <header className="relative z-10 border-b border-[var(--hairline)] bg-[var(--material-thin)]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-          <Link href="/" className="flex min-w-0 items-center gap-2.5">
-            <InterMunEmblem alt="" className="max-h-10 w-auto md:max-h-11" />
-            <span className="truncate font-display text-sm font-semibold tracking-tight md:text-base">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <MarketingOrbTrigger />
+            <Link href="/" className="min-w-0 truncate font-display text-sm font-semibold tracking-tight md:text-base">
               {appName}
-            </span>
-          </Link>
+            </Link>
+          </div>
           <nav className="hidden items-center gap-6 text-sm font-medium text-brand-muted md:flex">
             <a href="#how-it-works" className="transition-colors hover:text-brand-navy">
               {t("nav.howItWorks")}
@@ -32,6 +34,9 @@ export default async function MarketingLayout({
             </a>
             <a href="#about" className="transition-colors hover:text-brand-navy">
               {t("nav.about")}
+            </a>
+            <a href="#contact" className="transition-colors hover:text-brand-navy">
+              {t("nav.contact")}
             </a>
           </nav>
           <div className="flex shrink-0 items-center gap-2">

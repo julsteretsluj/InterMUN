@@ -7,7 +7,7 @@
 export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png";
 
 /** Light-mode rainbow chain wordmark (`public/intermun-emblem-light.png`). */
-export const INTERMUN_EMBLEM_LIGHT_PATH = "/intermun-emblem-light.png";
+export const INTERMUN_EMBLEM_LIGHT_PATH = "/intermun-emblem-light.png?v=2";
 
 export function getAppName(): string {
   return process.env.NEXT_PUBLIC_APP_NAME?.trim() || "InterMUN";
@@ -16,6 +16,9 @@ export function getAppName(): string {
 export function getAppTagline(): string {
   return process.env.NEXT_PUBLIC_APP_TAGLINE?.trim() || "Model United Nations platform";
 }
+
+/** General inquiries and conference customization requests. */
+export const INQUIRY_EMAIL = "juleskittoastrop@gmail.com";
 
 export function getAppMetaDescription(): string {
   const custom = process.env.NEXT_PUBLIC_APP_DESCRIPTION?.trim();

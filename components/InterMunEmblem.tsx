@@ -1,61 +1,53 @@
 import { INTERMUN_EMBLEM_LIGHT_PATH, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-/** Prefer explicit max-height utilities; otherwise map square icon heights for the wordmark. */
-function lightWordmarkMaxHeight(className?: string): string {
-  const maxHTokens = className?.match(/\b(?:sm:|md:|lg:|xl:)?max-h-[\w\[\]./%-]+/g);
-  if (maxHTokens?.length) return maxHTokens.join(" ");
+/** Light wordmark is wide — only height (or explicit max-w) should constrain it. */
+function lightWordmarkClasses(className?: string): string {
+  const tokens = (className ?? "")
+    .split(/\s+/)
+    .filter((token) => token && !token.startsWith("dark:"));
 
-  const hClass = className?.match(/\bh-[\w\[\]./%-]+/)?.[0];
-  if (!hClass) return "max-h-10";
-  switch (hClass) {
-    case "h-8":
-      return "max-h-10";
-    case "h-9":
-      return "max-h-11";
-    case "h-10":
-      return "max-h-12";
-    case "h-20":
-      return "max-h-24";
-    case "h-24":
-      return "max-h-28";
-    case "h-28":
-      return "max-h-32";
-    case "h-36":
-      return "max-h-40";
-    case "h-40":
-      return "max-h-44";
-    default:
-      return hClass.replace(/^h-/, "max-h-");
-  }
+  const maxHTokens = tokens.filter((token) => /\bmax-h-/.test(token));
+  const hTokens = tokens.filter((token) => /\bh-/.test(token) && !/\bmax-h-/.test(token));
+  const maxWTokens = tokens.filter((token) => /\bmax-w-/.test(token));
+  const hasAutoWidth = tokens.includes("w-auto");
+
+  const heightClass =
+    maxHTokens.join(" ") ||
+    (hTokens.length
+      ? hTokens
+          .map((token) => token.replace(/^h-/, "max-h-").replace(/^sm:max-h-/, "sm:max-h-"))
+          .join(" ")
+      : "max-h-10");
+
+  return cn(
+    "block h-auto w-auto shrink-0 object-contain object-center",
+    heightClass,
+    hasAutoWidth || maxWTokens.length ? maxWTokens : null,
+    !hasAutoWidth && !maxWTokens.length ? "max-w-full" : null,
+    hasAutoWidth ? "w-auto" : null
+  );
 }
 
-function lightWordmarkMaxWidth(className?: string): string | undefined {
-  const widthTokens = className?.match(/\b(?:sm:|md:|lg:|xl:)?(?:max-w-|w-auto|w-full)[\w\[\]./%-]*/g);
-  if (widthTokens?.length) return widthTokens.join(" ");
-
-  const wClass = className?.match(/\bw-[\w\[\]./%-]+/)?.[0];
-  if (!wClass) return undefined;
-  switch (wClass) {
-    case "w-8":
-      return "max-w-[4.75rem]";
-    case "w-9":
-      return "max-w-[5.25rem]";
-    case "w-10":
-      return "max-w-[5.75rem]";
-    case "w-20":
-      return "max-w-[14rem]";
-    case "w-24":
-      return "max-w-[16rem]";
-    case "w-28":
-      return "max-w-[18rem]";
-    case "w-36":
-      return "max-w-[22rem]";
-    case "w-40":
-      return "max-w-[24rem]";
-    default:
-      return wClass.replace(/^w-/, "max-w-");
+/** Dark circular emblem stays square; derive from max height when only wordmark sizing is passed. */
+function darkEmblemClasses(className?: string): string {
+  const tokens = (className ?? "").split(/\s+/).filter(Boolean);
+  const darkTokens = tokens.filter((token) => token.includes("dark:"));
+  if (darkTokens.length) {
+    return darkTokens.map((token) => token.replace(/dark:/g, "")).join(" ");
   }
+
+  const lightTokens = tokens.filter((token) => !token.startsWith("dark:"));
+  const maxH = lightTokens.find((token) => /^max-h-/.test(token));
+  if (maxH) {
+    const size = maxH.replace("max-h-", "");
+    return `h-${size} w-${size}`;
+  }
+
+  const h = lightTokens.find((token) => /^h-/.test(token) && !/^max-h-/.test(token));
+  if (h) return `${h} ${h.replace(/^h-/, "w-")}`;
+
+  return "h-10 w-10";
 }
 
 /**
@@ -71,19 +63,14 @@ export function InterMunEmblem({
   /** Use `alt=""` when a visible “InterMUN” label sits next to the image. */
   alt?: string;
 }) {
-  const lightMaxH = lightWordmarkMaxHeight(className);
-  const lightMaxW = lightWordmarkMaxWidth(className);
-
   return (
     <>
-      <span className="inline-flex shrink-0 items-center justify-center overflow-visible leading-none dark:hidden">
+      <span className="inline-flex max-w-full shrink-0 items-center justify-center overflow-visible leading-none dark:hidden">
         <img
           src={INTERMUN_EMBLEM_LIGHT_PATH}
           alt={alt}
           className={cn(
-            "block h-auto w-auto shrink-0 object-contain object-center",
-            lightMaxH,
-            lightMaxW,
+            lightWordmarkClasses(className),
             "drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)]"
           )}
           decoding="async"
@@ -94,7 +81,7 @@ export function InterMunEmblem({
         alt={alt}
         className={cn(
           "hidden shrink-0 object-contain drop-shadow-[0_4px_22px_rgba(0,0,0,0.45)] dark:block",
-          className
+          darkEmblemClasses(className)
         )}
         decoding="async"
       />
