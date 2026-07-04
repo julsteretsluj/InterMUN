@@ -13,6 +13,10 @@ import {
   groupNavByFolder,
   type NavFolderId,
 } from "@/lib/nav-folder-groups";
+import {
+  ADVISOR_TAB_NAV_HREF_ORDER,
+  sortNavByHrefPriority,
+} from "@/lib/nav-priority-order";
 import { cn } from "@/lib/utils";
 
 type AdvisorNavItem = {
@@ -112,10 +116,25 @@ export function AdvisorDashboardSidebar() {
   const t = useTranslations("advisorNav");
   const pathname = usePathname();
 
+  const navItems = useMemo(
+    () => sortNavByHrefPriority(ADVISOR_NAV_ITEMS, ADVISOR_TAB_NAV_HREF_ORDER),
+    []
+  );
+
+  const priorityByHref = useMemo(
+    () => new Map(navItems.map((item, index) => [item.href, index + 1])),
+    [navItems]
+  );
+
   const folderGroups = useMemo(
     () =>
-      groupNavByFolder(ADVISOR_NAV_ITEMS, ADVISOR_NAV_FOLDER_ORDER, (item) => ADVISOR_ITEM_FOLDER[item.labelKey] ?? "home"),
-    []
+      groupNavByFolder(
+        navItems,
+        ADVISOR_NAV_FOLDER_ORDER,
+        (item) => ADVISOR_ITEM_FOLDER[item.labelKey] ?? "home",
+        (a, b) => (priorityByHref.get(a.href) ?? 9999) - (priorityByHref.get(b.href) ?? 9999)
+      ),
+    [navItems, priorityByHref]
   );
 
   const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
@@ -137,13 +156,13 @@ export function AdvisorDashboardSidebar() {
           hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item.href))}
           onToggle={() => onFolderToggle(folderId)}
         >
-          {items.map((item, index) => (
+          {items.map((item) => (
             <AdvisorSidebarLink
               key={item.href}
               item={item}
               label={t(item.labelKey)}
               isActive={navItemIsActive(pathname, item.href)}
-              priority={index + 1}
+              priority={priorityByHref.get(item.href) ?? 0}
             />
           ))}
         </NavFolder>
@@ -156,10 +175,25 @@ export function AdvisorMobileDock() {
   const t = useTranslations("advisorNav");
   const pathname = usePathname();
 
+  const navItems = useMemo(
+    () => sortNavByHrefPriority(ADVISOR_NAV_ITEMS, ADVISOR_TAB_NAV_HREF_ORDER),
+    []
+  );
+
+  const priorityByHref = useMemo(
+    () => new Map(navItems.map((item, index) => [item.href, index + 1])),
+    [navItems]
+  );
+
   const folderGroups = useMemo(
     () =>
-      groupNavByFolder(ADVISOR_NAV_ITEMS, ADVISOR_NAV_FOLDER_ORDER, (item) => ADVISOR_ITEM_FOLDER[item.labelKey] ?? "home"),
-    []
+      groupNavByFolder(
+        navItems,
+        ADVISOR_NAV_FOLDER_ORDER,
+        (item) => ADVISOR_ITEM_FOLDER[item.labelKey] ?? "home",
+        (a, b) => (priorityByHref.get(a.href) ?? 9999) - (priorityByHref.get(b.href) ?? 9999)
+      ),
+    [navItems, priorityByHref]
   );
 
   const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);
@@ -194,13 +228,13 @@ export function AdvisorMobileDock() {
             <NavFolderDockTabs folders={folderIds} activeFolderId={dockFolder} onSelect={setDockFolder} />
           ) : null}
           <div className="flex flex-row items-stretch gap-0.5 overflow-x-auto px-0.5 pb-0.5">
-          {dockItems.map((item, index) => (
+          {dockItems.map((item) => (
             <AdvisorDockLink
               key={item.href}
               item={item}
               label={t(item.labelKey)}
               isActive={navItemIsActive(pathname, item.href)}
-              priority={index + 1}
+              priority={priorityByHref.get(item.href) ?? 0}
             />
           ))}
           </div>

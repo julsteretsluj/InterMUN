@@ -155,7 +155,8 @@ export type NavFolderGroup<T> = {
 export function groupNavByFolder<T>(
   items: readonly T[],
   folderOrder: readonly NavFolderId[],
-  getFolderId: (item: T) => NavFolderId
+  getFolderId: (item: T) => NavFolderId,
+  compareItems?: (a: T, b: T) => number
 ): NavFolderGroup<T>[] {
   const buckets = new Map<NavFolderId, T[]>();
   for (const item of items) {
@@ -166,7 +167,11 @@ export function groupNavByFolder<T>(
   }
   return folderOrder
     .filter((fid) => (buckets.get(fid)?.length ?? 0) > 0)
-    .map((folderId) => ({ folderId, items: buckets.get(folderId)! }));
+    .map((folderId) => {
+      const bucket = buckets.get(folderId)!;
+      const sortedItems = compareItems ? [...bucket].sort(compareItems) : bucket;
+      return { folderId, items: sortedItems };
+    });
 }
 
 /** True when any item in the folder matches the active-route predicate. */

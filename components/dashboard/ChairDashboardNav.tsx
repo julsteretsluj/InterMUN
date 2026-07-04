@@ -244,19 +244,35 @@ export function ChairDashboardSidebar({
   const hubActive = pathname === "/chair";
   const navItems = useMemo(() => {
     const items = filterChairNavItems(CHAIR_NAV_ITEMS, crisisReportingEnabled);
-    if (seamunScheduleEnabled) return items;
-    return items.filter((item) => item.itemKey !== "conferenceSchedule");
+    const filtered = seamunScheduleEnabled
+      ? items
+      : items.filter((item) => item.itemKey !== "conferenceSchedule");
+    return sortByKeyPriority(filtered, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
   }, [crisisReportingEnabled, seamunScheduleEnabled]);
 
-  const priorityByKey = useMemo(() => {
-    const sorted = sortByKeyPriority(navItems, "itemKey", CHAIR_NAV_ITEM_KEY_ORDER);
-    return new Map(sorted.map((item, index) => [item.itemKey, index + 1]));
-  }, [navItems]);
+  const priorityByKey = useMemo(
+    () => new Map(navItems.map((item, index) => [item.itemKey, index + 1])),
+    [navItems]
+  );
+
+  const compareNavItems = useCallback(
+    (a: ChairNavItem, b: ChairNavItem) => {
+      const pa = priorityByKey.get(a.itemKey) ?? 9999;
+      const pb = priorityByKey.get(b.itemKey) ?? 9999;
+      return pa - pb;
+    },
+    [priorityByKey]
+  );
 
   const folderGroups = useMemo(
     () =>
-      groupNavByFolder(navItems, CHAIR_NAV_FOLDER_ORDER, (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session"),
-    [navItems]
+      groupNavByFolder(
+        navItems,
+        CHAIR_NAV_FOLDER_ORDER,
+        (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session",
+        compareNavItems
+      ),
+    [navItems, compareNavItems]
   );
 
   const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
@@ -467,8 +483,13 @@ export function ChairMobileDock({
 
   const folderGroups = useMemo(
     () =>
-      groupNavByFolder(navItems, CHAIR_NAV_FOLDER_ORDER, (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session"),
-    [navItems]
+      groupNavByFolder(
+        navItems,
+        CHAIR_NAV_FOLDER_ORDER,
+        (item) => CHAIR_ITEM_FOLDER[item.itemKey] ?? "session",
+        (a, b) => (priorityByKey.get(a.itemKey) ?? 9999) - (priorityByKey.get(b.itemKey) ?? 9999)
+      ),
+    [navItems, priorityByKey]
   );
 
   const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);

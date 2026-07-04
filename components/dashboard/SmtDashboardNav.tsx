@@ -146,8 +146,13 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
 
   const folderGroups = useMemo(
     () =>
-      groupNavByFolder(SMT_NAV_ITEMS_ORDERED, SMT_NAV_FOLDER_ORDER, (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations"),
-    []
+      groupNavByFolder(
+        SMT_NAV_ITEMS_ORDERED,
+        SMT_NAV_FOLDER_ORDER,
+        (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations",
+        (a, b) => (priorityByKey.get(a.navKey) ?? 9999) - (priorityByKey.get(b.navKey) ?? 9999)
+      ),
+    [priorityByKey]
   );
 
   const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
@@ -225,8 +230,13 @@ export function SmtMobileDock() {
 
   const folderGroups = useMemo(
     () =>
-      groupNavByFolder(SMT_NAV_ITEMS_ORDERED, SMT_NAV_FOLDER_ORDER, (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations"),
-    []
+      groupNavByFolder(
+        SMT_NAV_ITEMS_ORDERED,
+        SMT_NAV_FOLDER_ORDER,
+        (item) => SMT_ITEM_FOLDER[item.navKey] ?? "operations",
+        (a, b) => (priorityByKey.get(a.navKey) ?? 9999) - (priorityByKey.get(b.navKey) ?? 9999)
+      ),
+    [priorityByKey]
   );
 
   const folderIds = useMemo(() => folderGroups.map((g) => g.folderId), [folderGroups]);

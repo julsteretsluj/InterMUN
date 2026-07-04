@@ -204,7 +204,13 @@ export function TabNav({
   );
 
   const folderGroups = useMemo(
-    () => groupNavByFolder(tabs, TAB_NAV_FOLDER_ORDER, (tab) => tabHrefFolder(tab.href)),
+    () =>
+      groupNavByFolder(
+        tabs,
+        TAB_NAV_FOLDER_ORDER,
+        (tab) => tabHrefFolder(tab.href),
+        (a, b) => a.priority - b.priority
+      ),
     [tabs]
   );
 
