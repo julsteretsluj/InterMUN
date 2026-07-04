@@ -612,7 +612,8 @@
     "previousRoleAria": "Previous role",
     "selectRoleAria": "Select role",
     "nextRoleAria": "Next role",
-    "authConnectError": "Could not connect to authentication (check Supabase env vars)."
+    "authConnectError": "Could not connect to authentication (check Supabase env vars).",
+    "backToHome": "Back to home"
   },
   "googleDocs": {
     "openNewDocHelp": "Opens Google Docs in a new tab. Sign in if prompted, then copy the document URL from the address bar.",

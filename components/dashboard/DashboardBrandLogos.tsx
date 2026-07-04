@@ -14,24 +14,30 @@ export function DashboardBrandLogos({
   showConferenceLogo: boolean;
   variant: "sidebar" | "topbar";
 }) {
-  const singleClass =
-    variant === "sidebar" ? "h-10 w-10 rounded-2xl" : "h-9 w-9 rounded-xl";
-  const dualClass = "h-8 w-8 rounded-xl";
+  const eventIconClass = "h-8 w-8 shrink-0 object-contain";
+  const intermunClass =
+    variant === "sidebar"
+      ? showConferenceLogo
+        ? "h-8 w-8"
+        : "h-10 w-10"
+      : showConferenceLogo
+        ? "h-8 w-8"
+        : "h-9 w-9";
 
   if (!showConferenceLogo) {
-    return <InterMunEmblem alt="" className={singleClass} />;
+    return <InterMunEmblem alt="" className={intermunClass} />;
   }
 
   return (
     <span
       className={cn(
-        "group/logo-stack flex shrink-0 items-center justify-center transition-all duration-200",
+        "group/logo-stack flex shrink-0 items-center justify-center overflow-visible transition-all duration-200",
         variant === "sidebar"
-          ? "flex-col gap-1 group-hover:flex-row group-hover:gap-1.5 hover:flex-row hover:gap-1.5"
+          ? "flex-col gap-1 group-hover:flex-row group-hover:gap-1.5"
           : "flex-row gap-2"
       )}
     >
-      <img src={SEAMUN_LOGO_SRC} alt="" className={cn("object-contain", dualClass)} decoding="async" />
+      <img src={SEAMUN_LOGO_SRC} alt="" className={eventIconClass} decoding="async" />
       <span
         className={cn(
           "shrink-0 select-none font-semibold leading-none text-brand-muted dark:text-zinc-500",
@@ -41,7 +47,7 @@ export function DashboardBrandLogos({
       >
         ×
       </span>
-      <InterMunEmblem alt="" className={dualClass} />
+      <InterMunEmblem alt="" className={intermunClass} />
     </span>
   );
 }

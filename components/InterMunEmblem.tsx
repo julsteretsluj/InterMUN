@@ -1,19 +1,55 @@
 import { INTERMUN_EMBLEM_LIGHT_PATH, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
-/** Light wordmark is wide; drop square sizing and corner radius meant for the circular dark emblem. */
-function emblemClassForLightWordmark(className?: string) {
-  return className
-    ?.replace(/\bw-[\w\[\]./%-]+/g, "")
-    .replace(/\bh-[\w\[\]./%-]+/g, "")
-    .replace(/\brounded-[\w\[\]./%-]+/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+/** Map square icon heights to slightly taller max-heights so the wordmark text stays legible. */
+function lightWordmarkMaxHeight(className?: string): string {
+  const hClass = className?.match(/\bh-[\w\[\]./%-]+/)?.[0];
+  if (!hClass) return "max-h-10";
+  switch (hClass) {
+    case "h-8":
+      return "max-h-10";
+    case "h-9":
+      return "max-h-11";
+    case "h-10":
+      return "max-h-12";
+    case "h-20":
+      return "max-h-24";
+    case "h-24":
+      return "max-h-28";
+    case "h-28":
+      return "max-h-32";
+    case "h-36":
+      return "max-h-40";
+    case "h-40":
+      return "max-h-44";
+    default:
+      return hClass.replace(/^h-/, "max-h-");
+  }
 }
 
-function emblemHeightClass(className?: string) {
-  const match = className?.match(/\bh-[\w\[\]./%-]+/);
-  return match?.[0] ?? "h-10";
+function lightWordmarkMaxWidth(className?: string): string | undefined {
+  const wClass = className?.match(/\bw-[\w\[\]./%-]+/)?.[0];
+  if (!wClass) return undefined;
+  switch (wClass) {
+    case "w-8":
+      return "max-w-[4.75rem]";
+    case "w-9":
+      return "max-w-[5.25rem]";
+    case "w-10":
+      return "max-w-[5.75rem]";
+    case "w-20":
+      return "max-w-[14rem]";
+    case "w-24":
+      return "max-w-[16rem]";
+    case "w-28":
+      return "max-w-[18rem]";
+    case "w-36":
+      return "max-w-[22rem]";
+    case "w-40":
+      return "max-w-[24rem]";
+    default:
+      return wClass.replace(/^w-/, "max-w-");
+  }
 }
 
 /**
@@ -29,19 +65,24 @@ export function InterMunEmblem({
   /** Use `alt=""` when a visible “InterMUN” label sits next to the image. */
   alt?: string;
 }) {
-  const lightHeight = emblemHeightClass(className);
+  const lightMaxH = lightWordmarkMaxHeight(className);
+  const lightMaxW = lightWordmarkMaxWidth(className);
+
   return (
     <>
-      <img
-        src={INTERMUN_EMBLEM_LIGHT_PATH}
-        alt={alt}
-        className={cn(
-          "w-auto max-w-full shrink-0 object-contain object-left drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)] dark:hidden",
-          lightHeight,
-          emblemClassForLightWordmark(className)
-        )}
-        decoding="async"
-      />
+      <span className="inline-flex shrink-0 items-center justify-center overflow-visible leading-none dark:hidden">
+        <img
+          src={INTERMUN_EMBLEM_LIGHT_PATH}
+          alt={alt}
+          className={cn(
+            "block h-auto w-auto shrink-0 object-contain object-center",
+            lightMaxH,
+            lightMaxW,
+            "drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)]"
+          )}
+          decoding="async"
+        />
+      </span>
       <img
         src={INTERMUN_EMBLEM_PATH}
         alt={alt}

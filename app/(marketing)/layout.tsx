@@ -18,7 +18,7 @@ export default async function MarketingLayout({
       <header className="relative z-10 border-b border-[var(--hairline)] bg-[var(--material-thin)]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-2.5">
-            <InterMunEmblem alt="" className="h-9 w-9 rounded-xl md:h-10 md:w-10" />
+            <InterMunEmblem alt="" className="max-h-10 w-auto md:max-h-11" />
             <span className="truncate font-display text-sm font-semibold tracking-tight md:text-base">
               {appName}
             </span>
