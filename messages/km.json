@@ -2249,7 +2249,8 @@
       "notes": "កំណត់ចំណាំ",
       "requestedAllocation": "បានស្នើសុំការបែងចែក",
       "account": "គណនី",
-      "actions": "សកម្មភាព"
+      "actions": "សកម្មភាព",
+      "score": "Score"
     },
     "noRows": "រកមិនឃើញជួរបែងចែកសម្រាប់គណៈកម្មាធិការនេះទេ។",
     "pendingApprovalsTitle": "រង់ចាំការយល់ព្រមលើការចុះឈ្មោះ",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "គ្មានសំណើដែលមិនទាន់សម្រេច។",
     "unknownAllocation": "ការបែងចែកមិនស្គាល់",
     "approve": "យល់ព្រម",
-    "reject": "បដិសេធ"
+    "reject": "បដិសេធ",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "ម៉ាទ្រីសបែងចែក",

@@ -2249,7 +2249,8 @@
       "notes": "Ghi chú",
       "requestedAllocation": "Phân bổ được yêu cầu",
       "account": "Tài khoản",
-      "actions": "hành động"
+      "actions": "hành động",
+      "score": "Score"
     },
     "noRows": "Không tìm thấy hàng phân bổ nào cho ủy ban này.",
     "pendingApprovalsTitle": "Đang chờ phê duyệt đăng ký",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "Không có yêu cầu đang chờ xử lý.",
     "unknownAllocation": "Phân bổ không xác định",
     "approve": "Chấp thuận",
-    "reject": "Từ chối"
+    "reject": "Từ chối",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "Ma trận phân bổ",

@@ -2249,7 +2249,8 @@
       "notes": "메모",
       "requestedAllocation": "요청된 할당",
       "account": "계정",
-      "actions": "행위"
+      "actions": "행위",
+      "score": "Score"
     },
     "noRows": "이 위원회에 대한 할당 행을 찾을 수 없습니다.",
     "pendingApprovalsTitle": "가입 승인 대기 중",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "대기 중인 요청이 없습니다.",
     "unknownAllocation": "알 수 없는 할당",
     "approve": "승인하다",
-    "reject": "거부하다"
+    "reject": "거부하다",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "할당 매트릭스",

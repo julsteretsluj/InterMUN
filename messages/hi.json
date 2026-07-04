@@ -2249,7 +2249,8 @@
       "notes": "टिप्पणियाँ",
       "requestedAllocation": "आवंटन का अनुरोध किया",
       "account": "खाता",
-      "actions": "कार्रवाई"
+      "actions": "कार्रवाई",
+      "score": "Score"
     },
     "noRows": "इस समिति के लिए कोई आवंटन पंक्तियाँ नहीं मिलीं.",
     "pendingApprovalsTitle": "लंबित साइन-अप अनुमोदन",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "कोई लंबित अनुरोध नहीं.",
     "unknownAllocation": "अज्ञात आवंटन",
     "approve": "मंज़ूरी देना",
-    "reject": "अस्वीकार करना"
+    "reject": "अस्वीकार करना",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "आवंटन मैट्रिक्स",

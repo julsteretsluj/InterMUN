@@ -137,6 +137,7 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
   }
 
   revalidatePath("/chair/awards");
+  revalidatePath("/chair/allocation-matrix");
   revalidatePath("/smt/awards");
   revalidatePath("/delegate/chair-feedback");
   return { success: true };

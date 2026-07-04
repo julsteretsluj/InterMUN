@@ -32,6 +32,28 @@ export function isNonScorableAllocationRole(role: string | null | undefined): bo
   return normalized != null && NON_SCORABLE_ALLOCATION_ROLES.has(normalized);
 }
 
+/** Dais / chair placard labels — not delegate country seats. */
+export function isChairAllocationSeatLabel(country: string | null | undefined): boolean {
+  const normalized = country?.trim().toLowerCase() ?? "";
+  if (!normalized) return false;
+  return (
+    normalized === "head chair" ||
+    normalized === "co-chair" ||
+    normalized === "co chair" ||
+    normalized.includes("chair")
+  );
+}
+
+export function isScorableAllocationSeat(
+  country: string | null | undefined,
+  role: string | null | undefined,
+  userId: string | null | undefined
+): boolean {
+  if (!userId) return false;
+  if (isChairAllocationSeatLabel(country)) return false;
+  return !isNonScorableAllocationRole(role);
+}
+
 /** Every linked country seat that chairs must score (nomination status irrelevant). */
 export function filterAllocationsToScorableDelegates(rows: AllocationRow[]): AllocationRow[] {
   return rows.filter((row) => {

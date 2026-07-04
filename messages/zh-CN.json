@@ -2249,7 +2249,8 @@
       "notes": "笔记",
       "requestedAllocation": "请求的分配",
       "account": "帐户",
-      "actions": "行动"
+      "actions": "行动",
+      "score": "Score"
     },
     "noRows": "没有找到该委员会的分配行。",
     "pendingApprovalsTitle": "等待注册批准",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "没有待处理的请求。",
     "unknownAllocation": "未知分配",
     "approve": "批准",
-    "reject": "拒绝"
+    "reject": "拒绝",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "分配矩阵",

@@ -2249,7 +2249,8 @@
       "notes": "注意事項",
       "requestedAllocation": "要求された割り当て",
       "account": "アカウント",
-      "actions": "アクション"
+      "actions": "アクション",
+      "score": "Score"
     },
     "noRows": "この委員会の割り当て行が見つかりません。",
     "pendingApprovalsTitle": "保留中のサインアップ承認",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "保留中のリクエストはありません。",
     "unknownAllocation": "不明な割り当て",
     "approve": "承認する",
-    "reject": "拒否する"
+    "reject": "拒否する",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "割り当てマトリックス",

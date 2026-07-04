@@ -2249,7 +2249,8 @@
       "notes": "ملحوظات",
       "requestedAllocation": "التخصيص المطلوب",
       "account": "حساب",
-      "actions": "الإجراءات"
+      "actions": "الإجراءات",
+      "score": "Score"
     },
     "noRows": "لم يتم العثور على صفوف تخصيص لهذه اللجنة.",
     "pendingApprovalsTitle": "في انتظار موافقات التسجيل",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "لا توجد طلبات معلقة.",
     "unknownAllocation": "تخصيص غير معروف",
     "approve": "يعتمد",
-    "reject": "يرفض"
+    "reject": "يرفض",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "مصفوفة التخصيص",

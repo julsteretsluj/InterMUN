@@ -2249,7 +2249,8 @@
       "notes": "Notizen",
       "requestedAllocation": "Gewünschte Zuteilung",
       "account": "Konto",
-      "actions": "Aktionen"
+      "actions": "Aktionen",
+      "score": "Score"
     },
     "noRows": "Für diesen Ausschuss wurden keine Zuteilungszeilen gefunden.",
     "pendingApprovalsTitle": "Anmeldegenehmigungen stehen noch aus",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "Keine ausstehenden Anfragen.",
     "unknownAllocation": "Unbekannte Zuordnung",
     "approve": "Genehmigen",
-    "reject": "Ablehnen"
+    "reject": "Ablehnen",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "Zuordnungsmatrix",

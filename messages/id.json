@@ -2249,7 +2249,8 @@
       "notes": "Catatan",
       "requestedAllocation": "Alokasi yang diminta",
       "account": "Akun",
-      "actions": "Tindakan"
+      "actions": "Tindakan",
+      "score": "Score"
     },
     "noRows": "Tidak ditemukan baris alokasi untuk komite ini.",
     "pendingApprovalsTitle": "Menunggu persetujuan pendaftaran",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "Tidak ada permintaan yang tertunda.",
     "unknownAllocation": "Alokasi tidak diketahui",
     "approve": "Menyetujui",
-    "reject": "Menolak"
+    "reject": "Menolak",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "Matriks alokasi",

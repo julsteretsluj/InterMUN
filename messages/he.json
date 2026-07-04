@@ -2249,7 +2249,8 @@
       "notes": "הערות",
       "requestedAllocation": "הקצאה מבוקשת",
       "account": "חֶשְׁבּוֹן",
-      "actions": "פעולות"
+      "actions": "פעולות",
+      "score": "Score"
     },
     "noRows": "לא נמצאו שורות הקצאה לוועדה זו.",
     "pendingApprovalsTitle": "ממתינים לאישורי הרשמה",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "אין בקשות ממתינות.",
     "unknownAllocation": "הקצאה לא ידועה",
     "approve": "לְאַשֵׁר",
-    "reject": "לִדחוֹת"
+    "reject": "לִדחוֹת",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "מטריצת הקצאה",

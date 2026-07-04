@@ -3,7 +3,14 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { MunPageShell } from "@/components/MunPageShell";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
-import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import { getCommitteeAwardScope, resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import { isScorableAllocationSeat } from "@/lib/seated-delegates-for-awards";
+import { loadDelegateFloorActivityByProfileId } from "@/lib/delegate-floor-activity";
+import {
+  ChairAllocationScoringRoot,
+  ChairAllocationScoreButton,
+  type AllocationScorableDelegate,
+} from "./ChairAllocationMatrixScoring";
 import {
   approveAllocationSignupRequestAction,
   rejectAllocationSignupRequestAction,
@@ -220,12 +227,24 @@ export default async function ChairAllocationMatrixPage() {
   }
 
   const allocationsConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, activeConf.id);
+  const awardScope = await getCommitteeAwardScope(supabase, activeConf.id);
+  const awardConferenceId = awardScope.canonicalConferenceId;
+  const isChairViewer = profile?.role === "chair";
 
-  const { data: allocData } = await supabase
-    .from("allocations")
-    .select("id, conference_id, country, user_id")
-    .eq("conference_id", allocationsConferenceId)
-    .order("country", { ascending: true });
+  const [{ data: allocData }, { data: participationDelegate }] = await Promise.all([
+    supabase
+      .from("allocations")
+      .select("id, conference_id, country, user_id")
+      .eq("conference_id", allocationsConferenceId)
+      .order("country", { ascending: true }),
+    isChairViewer
+      ? supabase
+          .from("award_participation_scores")
+          .select("subject_profile_id, rubric_scores")
+          .eq("committee_conference_id", awardConferenceId)
+          .eq("scope", "delegate_by_chair")
+      : Promise.resolve({ data: [] as { subject_profile_id: string | null; rubric_scores: Record<string, number> | null }[] }),
+  ]);
 
   const rawRows = (allocData ?? []) as Omit<
     AllocationRow,
@@ -366,10 +385,43 @@ export default async function ChairAllocationMatrixPage() {
     .order("created_at", { ascending: true });
   const pendingRequests = (rawRequests ?? []) as SignupRequestRow[];
 
+  const scoresByProfileId: Record<string, Record<string, number>> = {};
+  for (const row of participationDelegate ?? []) {
+    if (row.subject_profile_id && row.rubric_scores && typeof row.rubric_scores === "object") {
+      scoresByProfileId[row.subject_profile_id] = row.rubric_scores as Record<string, number>;
+    }
+  }
+
+  const scorableDelegates: AllocationScorableDelegate[] = rows
+    .filter((r) => isScorableAllocationSeat(r.country, r.linked_role, r.user_id))
+    .map((r) => ({
+      userId: r.user_id!,
+      country: r.country,
+      displayName: r.name?.trim() || r.linked_name?.trim() || r.user_id!.slice(0, 8),
+    }));
+
+  const allocationIdsByUserId: Record<string, string[]> = {};
+  for (const r of rows) {
+    if (!r.user_id) continue;
+    const existing = allocationIdsByUserId[r.user_id] ?? [];
+    existing.push(r.id);
+    allocationIdsByUserId[r.user_id] = existing;
+  }
+  const floorActivityByProfileId = isChairViewer
+    ? await loadDelegateFloorActivityByProfileId(
+        supabase,
+        awardScope.siblingConferenceIds,
+        Object.entries(allocationIdsByUserId).map(([userId, allocationIds]) => ({
+          userId,
+          allocationIds,
+        }))
+      )
+    : {};
+
   return (
     <MunPageShell title={t("allocationMatrix")}>
       <p className="text-sm text-brand-muted mb-4 max-w-2xl">
-        {tMatrix("intro")}
+        {isChairViewer ? tMatrix("introWithScoring") : tMatrix("intro")}
       </p>
       <p className="text-xs text-brand-muted mb-5">
         {translateConferenceHeadline(
@@ -380,44 +432,65 @@ export default async function ChairAllocationMatrixPage() {
         )}
       </p>
 
-      <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-paper">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
-              <th className="px-3 py-2">{tMatrix("columns.allocation")}</th>
-              <th className="px-3 py-2">{tMatrix("columns.flag")}</th>
-              <th className="px-3 py-2">Party</th>
-              <th className="px-3 py-2">{tMatrix("columns.email")}</th>
-              <th className="px-3 py-2">{tMatrix("columns.name")}</th>
-              <th className="px-3 py-2">{tMatrix("columns.grade")}</th>
-              <th className="px-3 py-2">{tMatrix("columns.notes")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 ? (
-              <tr>
-                <td colSpan={7} className="px-3 py-6 text-center text-brand-muted">
-                  {tMatrix("noRows")}
-                </td>
+      <ChairAllocationScoringRoot
+        committeeConferenceId={awardConferenceId}
+        delegates={scorableDelegates}
+        scoresByProfileId={scoresByProfileId}
+        floorActivityByProfileId={floorActivityByProfileId}
+        scoringEnabled={isChairViewer}
+      >
+        <div className="overflow-x-auto rounded-lg border border-brand-navy/10 bg-brand-paper">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-brand-cream/50 text-left text-xs uppercase tracking-wider text-brand-muted">
+                <th className="px-3 py-2">{tMatrix("columns.allocation")}</th>
+                <th className="px-3 py-2">{tMatrix("columns.flag")}</th>
+                <th className="px-3 py-2">Party</th>
+                <th className="px-3 py-2">{tMatrix("columns.email")}</th>
+                <th className="px-3 py-2">{tMatrix("columns.name")}</th>
+                <th className="px-3 py-2">{tMatrix("columns.grade")}</th>
+                <th className="px-3 py-2">{tMatrix("columns.notes")}</th>
+                {isChairViewer ? <th className="px-3 py-2">{tMatrix("columns.score")}</th> : null}
               </tr>
-            ) : (
-              rows.map((r) => (
-                <tr key={r.id} className="border-t border-brand-navy/5">
-                  <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
-                  <td className="px-3 py-2 text-base">{r.flag}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.party_label || tMatrix("dash")}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.email || tMatrix("dash")}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.name || tMatrix("dash")}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || tMatrix("dash")}</td>
-                  <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
-                    {r.notes?.trim() || tMatrix("dash")}
+            </thead>
+            <tbody>
+              {rows.length === 0 ? (
+                <tr>
+                  <td colSpan={isChairViewer ? 8 : 7} className="px-3 py-6 text-center text-brand-muted">
+                    {tMatrix("noRows")}
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+              ) : (
+                rows.map((r) => {
+                  const scorable = isScorableAllocationSeat(r.country, r.linked_role, r.user_id);
+                  return (
+                    <tr key={r.id} className="border-t border-brand-navy/5">
+                      <td className="px-3 py-2 font-medium text-brand-navy">{r.country}</td>
+                      <td className="px-3 py-2 text-base">{r.flag}</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted">{r.party_label || tMatrix("dash")}</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted">{r.email || tMatrix("dash")}</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted">{r.name || tMatrix("dash")}</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted">{r.grade || tMatrix("dash")}</td>
+                      <td className="px-3 py-2 text-xs text-brand-muted max-w-[280px]">
+                        {r.notes?.trim() || tMatrix("dash")}
+                      </td>
+                      {isChairViewer ? (
+                        <td className="px-3 py-2">
+                          {scorable && r.user_id ? (
+                            <ChairAllocationScoreButton userId={r.user_id} />
+                          ) : (
+                            <span className="text-xs text-brand-muted">{tMatrix("dash")}</span>
+                          )}
+                        </td>
+                      ) : null}
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </ChairAllocationScoringRoot>
 
       <ChairDelegateApprovalByEmailForm
         conferenceId={allocationsConferenceId}

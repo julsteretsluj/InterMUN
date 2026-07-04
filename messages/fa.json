@@ -2249,7 +2249,8 @@
       "notes": "یادداشت ها",
       "requestedAllocation": "تخصیص درخواست کرد",
       "account": "حساب",
-      "actions": "اقدامات"
+      "actions": "اقدامات",
+      "score": "Score"
     },
     "noRows": "هیچ ردیف تخصیصی برای این کمیته یافت نشد.",
     "pendingApprovalsTitle": "تاییدیه های ثبت نام در انتظار",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "بدون درخواست معلق",
     "unknownAllocation": "تخصیص ناشناخته",
     "approve": "تایید کنید",
-    "reject": "رد کردن"
+    "reject": "رد کردن",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "ماتریس تخصیص",

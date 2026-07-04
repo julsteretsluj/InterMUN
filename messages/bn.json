@@ -2249,7 +2249,8 @@
       "notes": "নোট",
       "requestedAllocation": "বরাদ্দের অনুরোধ করেছেন",
       "account": "হিসাব",
-      "actions": "কর্ম"
+      "actions": "কর্ম",
+      "score": "Score"
     },
     "noRows": "এই কমিটির জন্য কোনো বরাদ্দের সারি পাওয়া যায়নি।",
     "pendingApprovalsTitle": "মুলতুবি সাইন আপ অনুমোদন",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "কোন মুলতুবি অনুরোধ.",
     "unknownAllocation": "অজানা বরাদ্দ",
     "approve": "অনুমোদন করুন",
-    "reject": "প্রত্যাখ্যান করুন"
+    "reject": "প্রত্যাখ্যান করুন",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "বরাদ্দ ম্যাট্রিক্স",

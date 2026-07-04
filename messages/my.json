@@ -2249,7 +2249,8 @@
       "notes": "မှတ်စုများ",
       "requestedAllocation": "ခွဲဝေပေးရန် တောင်းဆိုခဲ့သည်။",
       "account": "အကောင့်",
-      "actions": "လုပ်ဆောင်ချက်များ"
+      "actions": "လုပ်ဆောင်ချက်များ",
+      "score": "Score"
     },
     "noRows": "ဤကော်မတီအတွက် ခွဲဝေပေးသည့်အတန်းများ မတွေ့ပါ။",
     "pendingApprovalsTitle": "ဆိုင်းငံ့ထားသော စာရင်းသွင်းအတည်ပြုချက်များ",
@@ -2257,7 +2258,20 @@
     "noPendingRequests": "ဆိုင်းငံ့ထားသော တောင်းဆိုချက်များ မရှိပါ။",
     "unknownAllocation": "အမည်မသိ ခွဲဝေမှု",
     "approve": "လက်မခံပါ။",
-    "reject": "ငြင်းပယ်ပါ။"
+    "reject": "ငြင်းပယ်ပါ။",
+    "introWithScoring": "Committee seat list for your session. Use Score on each linked delegate to record the session rubric — drafts until closing ceremony; revise anytime before then.",
+    "scoreButton": "Score",
+    "editScoreButton": "Edit",
+    "saveScore": "Save score",
+    "scoringPanelTitle": "Delegate session rubric",
+    "scoringPanelProgress": "Delegate {current} of {total}",
+    "scoringDraftTitle": "Draft scores — not final yet",
+    "scoringDraftNotice": "Session rubric scores stay editable until closing ceremony. Award nominations and SMT review happen later on the Score page.",
+    "previousDelegate": "Previous delegate",
+    "nextDelegate": "Next delegate",
+    "closeScoring": "Close",
+    "scoreStatusComplete": "Complete",
+    "scoreStatusIncomplete": "Incomplete"
   },
   "smtAllocationMatrixPage": {
     "title": "ခွဲဝေ matrix",
