@@ -210,6 +210,12 @@ html.dark {
   --brand-paper: var(--color-surface);
   --brand-cream: var(--color-surface-subtle);
 
+  --dashboard-cream: var(--content-material);
+  --dashboard-card: var(--material-thick);
+  --dashboard-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 8px 28px -14px rgba(0, 0, 0, 0.55);
+  --dashboard-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 12px 32px -12px rgba(0, 0, 0, 0.62);
+  --parchment: var(--content-material);
+
   --color-text: #f2f2f7;
   --color-text-secondary: #d1d1d6;
   --color-text-muted: #8e8e93;
@@ -974,6 +980,14 @@ html.dark ::selection {
   html.dark .mun-lift:hover {
     border-color: color-mix(in srgb, var(--accent) 32%, var(--hairline));
     box-shadow: 0 14px 36px -14px rgba(0, 0, 0, 0.7);
+  }
+
+  html.dark .hub-tile-link {
+    @apply border-[var(--hairline)] bg-[var(--material-thick)] text-brand-navy;
+    box-shadow: var(--dashboard-shadow);
+  }
+  html.dark .hub-tile-link:hover {
+    background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
   /* Two-tone editorial display heading: heavy sans + serif-italic gold emphasis */

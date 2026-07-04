@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
-import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
 import {
   SMT_ITEM_FOLDER,
   SMT_NAV_FOLDER_ORDER,
@@ -150,6 +150,13 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
     []
   );
 
+  const {
+    expandedFolderId,
+    onFolderPointerEnter,
+    onFolderPointerLeave,
+    onFolderToggle,
+  } = useNavFolderExpansion(folderGroups, (item) => smtNavItemIsActive(pathname, item));
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="shrink-0 px-1.5 pb-2 pt-3 group-hover:px-3">
@@ -179,7 +186,11 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
             key={folderId}
             folderId={folderId}
             compact
+            expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (item) => smtNavItemIsActive(pathname, item))}
+            onPointerEnter={() => onFolderPointerEnter(folderId)}
+            onPointerLeave={onFolderPointerLeave}
+            onToggle={() => onFolderToggle(folderId)}
           >
             {items.map((item) => (
               <SmtSidebarLink

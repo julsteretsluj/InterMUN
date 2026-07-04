@@ -129,7 +129,7 @@ export default async function ChairOverviewPage({
             aria-hidden
             className="block h-[3px] w-10 rounded-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-bright)]"
           />
-          <h1 className="mun-display text-[1.95rem] text-brand-navy">
+          <h1 className="mun-display text-[1.95rem] text-brand-navy dark:text-zinc-100">
             {tPage("welcome", { committee: committeeLabel })}
           </h1>
           <p className="text-base font-medium text-brand-navy dark:text-zinc-100">
@@ -152,7 +152,7 @@ export default async function ChairOverviewPage({
           </p>
         </header>
 
-        <div className="flex flex-wrap gap-2 border-b border-brand-navy/10 pb-1" role="tablist" aria-label={td("dashboardTabs.ariaLabel")}>
+        <div className="flex flex-wrap gap-2 border-b border-brand-navy/10 pb-1 dark:border-white/10" role="tablist" aria-label={td("dashboardTabs.ariaLabel")}>
           {tabs.map((tabItem) => (
             <PriorityTabLink
               key={tabItem.id}
@@ -160,8 +160,8 @@ export default async function ChairOverviewPage({
               label={tabItem.label}
               priority={tabItem.priority}
               active={activeTab === tabItem.id}
-              activeClassName="border-brand-accent text-brand-navy bg-brand-paper"
-              inactiveClassName="border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40"
+              activeClassName="border-brand-accent text-brand-navy bg-brand-paper dark:bg-[var(--material-thick)] dark:text-zinc-100"
+              inactiveClassName="border-transparent text-brand-muted hover:text-brand-navy hover:bg-brand-cream/40 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-zinc-100"
             />
           ))}
         </div>

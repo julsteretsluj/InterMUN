@@ -77,6 +77,18 @@ function minorWordsForLocale(locale: string | undefined): Set<string> {
   );
 }
 
+function canonicalAcronymCore(core: string): string | null {
+  const strict = core.match(/^([A-Z]{2,})(s)?$/);
+  if (strict) return strict[1] + (strict[2] ?? "");
+
+  const relaxed = core.match(/^([A-Za-z]{2,})(s)?$/);
+  if (!relaxed) return null;
+  const base = relaxed[1];
+  const plural = relaxed[2] ?? "";
+  if (base.toLowerCase() === "ubi") return `UBI${plural}`;
+  return null;
+}
+
 function formatWordToken(
   token: string,
   isFirst: boolean,
@@ -93,6 +105,9 @@ function formatWordToken(
   const pre = token.slice(0, lo);
   const post = token.slice(hi);
   const core = token.slice(lo, hi);
+
+  const acronym = canonicalAcronymCore(core);
+  if (acronym) return pre + acronym + post;
 
   const letters = core.replace(/[^\p{L}]/gu, "");
   if (letters.length >= 2 && letters === letters.toUpperCase()) {
@@ -127,5 +142,6 @@ export function formatTopicTitleCase(input: string, locale: string | undefined):
 
 export function applyTopicTitleCaseIfLocale(text: string, locale: string | undefined): string {
   if (!text?.trim()) return text;
-  return formatTopicTitleCase(text, locale);
+  const cased = formatTopicTitleCase(text, locale);
+  return cased.replace(/\bUbi(s)?\b/g, (_, plural) => (plural ? "UBIs" : "UBI"));
 }

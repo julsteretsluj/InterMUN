@@ -36,15 +36,15 @@ export function HubTileLink({
       />
       <NavPriorityBadge priority={priority} variant="tile" />
       <span className="flex items-center justify-between gap-2">
-        <span className="font-semibold text-brand-navy">{label}</span>
+        <span className="font-semibold text-brand-navy dark:text-zinc-100">{label}</span>
         <span
           aria-hidden
-          className="translate-x-0 text-brand-muted opacity-0 transition-all duration-[var(--dur-base)] ease-[var(--ease-apple)] group-hover:translate-x-0.5 group-hover:text-[var(--accent)] group-hover:opacity-100"
+          className="translate-x-0 text-brand-muted opacity-0 transition-all duration-[var(--dur-base)] ease-[var(--ease-apple)] group-hover:translate-x-0.5 group-hover:text-[var(--accent)] group-hover:opacity-100 dark:text-zinc-500 dark:group-hover:text-[var(--accent-bright)]"
         >
           →
         </span>
       </span>
-      <span className="mt-1 text-xs leading-relaxed text-brand-muted">{hint}</span>
+      <span className="mt-1 text-xs leading-relaxed text-brand-muted dark:text-zinc-400">{hint}</span>
     </Link>
   );
 }

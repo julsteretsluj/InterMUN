@@ -10,6 +10,9 @@ const REFRESH_INTERVAL_MS = 600_000;
 /** How often (ms) the "updated Xs ago" counter ticks. */
 const TICK_INTERVAL_MS = 1_000;
 
+/** Cached @seamunth_press profile picture (always available even when feed is empty). */
+const AVATAR_SRC = "/api/press-corps/avatar";
+
 function proxied(url: string | null): string | undefined {
   if (!url) return undefined;
   return `/api/press-corps/image?u=${encodeURIComponent(url)}`;
@@ -48,6 +51,7 @@ export function PressCorpsView() {
   const [data, setData] = useState<PressCorpsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  const [avatarSrc, setAvatarSrc] = useState(AVATAR_SRC);
   const [nowMs, setNowMs] = useState(() => Date.now());
   const lastUpdatedRef = useRef<number>(Date.now());
 
@@ -83,19 +87,28 @@ export function PressCorpsView() {
   const secondsSinceUpdate = Math.max(0, Math.floor((nowMs - lastUpdatedRef.current) / 1000));
   const followers = formatCount(data?.followers ?? null);
   const posts = formatCount(data?.postCount ?? null);
+  const showAvatarImage = avatarSrc.length > 0;
 
   return (
     <div className="w-full min-w-0 space-y-4 md:space-y-6">
       {/* Profile header */}
       <div className="w-full min-w-0 overflow-hidden rounded-2xl border border-white/15 bg-black/25 shadow-sm backdrop-blur-sm">
         <div className="flex flex-wrap items-center gap-3 p-4 sm:p-5">
-          <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] text-white">
-            {data?.avatarUrl ? (
+          <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] text-white ring-2 ring-white/20">
+            {showAvatarImage ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={proxied(data.avatarUrl)}
-                alt={handle}
+                src={avatarSrc}
+                alt={`@${handle} profile`}
                 className="h-full w-full object-cover"
+                onError={() => {
+                  const fallback = proxied(data?.avatarUrl ?? null);
+                  if (fallback && avatarSrc !== fallback) {
+                    setAvatarSrc(fallback);
+                    return;
+                  }
+                  setAvatarSrc("");
+                }}
               />
             ) : (
               <Camera className="h-6 w-6" aria-hidden />

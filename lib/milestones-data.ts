@@ -4,6 +4,13 @@ import { getActiveEventId } from "@/lib/active-event-cookie";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { isAdvisorRole, isAdminRole, isSmtRole } from "@/lib/roles";
 import { DAIS_SEAT_CO_CHAIR, DAIS_SEAT_HEAD_CHAIR } from "@/lib/allocation-display-order";
+import { isConferenceEventPlaceholderRow } from "@/lib/awards";
+import {
+  canonicalCommitteesForEventConferenceRows,
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
+} from "@/lib/conference-committee-canonical";
+import { isRetiredSeamunCommitteeRow } from "@/lib/retired-seamun-committees";
 import {
   computeMilestonesForScope,
   type MilestoneCounts,
@@ -31,7 +38,9 @@ export type MilestonesData = {
   committees: CommitteeMilestoneGroup[];
 };
 
-type AllocRow = { id: string; country: string | null; user_id: string | null };
+type AllocRow = { id: string; country: string | null; user_id: string | null; conference_id: string };
+
+type ConfRow = { id: string; name: string | null; committee: string | null };
 
 function isDaisSeat(country: string | null): boolean {
   const key = (country ?? "").trim().toLowerCase();
@@ -42,12 +51,39 @@ function isDaisSeat(country: string | null): boolean {
   );
 }
 
-/** Committee-scope counts from vote_items (single query). */
-async function committeeCounts(supabase: SupabaseClient, conferenceId: string): Promise<MilestoneCounts> {
+function mergeMilestoneCounts(...counts: MilestoneCounts[]): MilestoneCounts {
+  const out: MilestoneCounts = {};
+  for (const c of counts) {
+    for (const key of Object.keys(c) as (keyof MilestoneCounts)[]) {
+      const v = c[key];
+      if (v == null) continue;
+      out[key] = (out[key] ?? 0) + v;
+    }
+  }
+  return out;
+}
+
+function siblingConferenceIdsForCanonical(
+  canonicalId: string,
+  conferenceIdToCanonical: Map<string, string>
+): string[] {
+  const ids: string[] = [];
+  for (const [confId, canonId] of conferenceIdToCanonical) {
+    if (canonId === canonicalId) ids.push(confId);
+  }
+  return ids.length > 0 ? ids : [canonicalId];
+}
+
+/** Committee-scope counts aggregated across sibling topic rows. */
+async function committeeCountsForConferences(
+  supabase: SupabaseClient,
+  conferenceIds: string[]
+): Promise<MilestoneCounts> {
+  if (conferenceIds.length === 0) return {};
   const { data } = await supabase
     .from("vote_items")
     .select("procedure_code, vote_type, outcome, closed_at")
-    .eq("conference_id", conferenceId);
+    .in("conference_id", conferenceIds);
   let mod = 0;
   let unmod = 0;
   let cons = 0;
@@ -72,11 +108,13 @@ async function committeeCounts(supabase: SupabaseClient, conferenceId: string): 
   };
 }
 
-/** Per-delegate counts for a whole committee (two queries, aggregated in JS). */
-async function delegateCountsByAllocation(
+/** Per-allocation delegate counts across sibling topic rows. */
+async function rawDelegateCountsByAllocation(
   supabase: SupabaseClient,
-  conferenceId: string
+  conferenceIds: string[]
 ): Promise<Map<string, MilestoneCounts>> {
+  if (conferenceIds.length === 0) return new Map();
+
   const raw = new Map<string, { speeches: number; points: number }>();
   const bump = (id: string | null, key: "speeches" | "points") => {
     if (!id) return;
@@ -86,11 +124,11 @@ async function delegateCountsByAllocation(
   };
 
   const [{ data: speeches }, { data: points }] = await Promise.all([
-    supabase.from("committee_speech_events").select("allocation_id").eq("conference_id", conferenceId),
+    supabase.from("committee_speech_events").select("allocation_id").in("conference_id", conferenceIds),
     supabase
       .from("chair_session_points")
       .select("raised_by_allocation_id, point_code")
-      .eq("conference_id", conferenceId)
+      .in("conference_id", conferenceIds)
       .in("point_code", ["poi", "poc"]),
   ]);
 
@@ -104,40 +142,133 @@ async function delegateCountsByAllocation(
   return out;
 }
 
+async function delegateCountsForMergedAllocations(
+  supabase: SupabaseClient,
+  conferenceIds: string[],
+  mergedAllocs: Pick<AllocRow, "id" | "user_id">[]
+): Promise<Map<string, MilestoneCounts>> {
+  const rawCounts = await rawDelegateCountsByAllocation(supabase, conferenceIds);
+  if (mergedAllocs.length === 0) return new Map();
+
+  const { data: allAllocs } = await supabase
+    .from("allocations")
+    .select("id, user_id")
+    .in("conference_id", conferenceIds);
+
+  const allocationIdsByUser = new Map<string, string[]>();
+  for (const a of (allAllocs ?? []) as { id: string; user_id: string | null }[]) {
+    if (!a.user_id) continue;
+    const arr = allocationIdsByUser.get(a.user_id) ?? [];
+    arr.push(a.id);
+    allocationIdsByUser.set(a.user_id, arr);
+  }
+
+  const out = new Map<string, MilestoneCounts>();
+  for (const a of mergedAllocs) {
+    if (a.user_id) {
+      const ids = allocationIdsByUser.get(a.user_id) ?? [a.id];
+      out.set(a.id, mergeMilestoneCounts(...ids.map((id) => rawCounts.get(id) ?? {})));
+    } else {
+      out.set(a.id, rawCounts.get(a.id) ?? {});
+    }
+  }
+  return out;
+}
+
 function delegateRow(allocationId: string, label: string, counts: MilestoneCounts): DelegateMilestoneRow {
   const milestones = computeMilestonesForScope("delegate", counts);
   return { allocationId, label, milestones, earned: totalEarnedCheckpoints(milestones).earned };
 }
 
+async function allowedDelegateFilter(
+  supabase: SupabaseClient,
+  restrictAllocationIds: Set<string> | null
+): Promise<(a: Pick<AllocRow, "id" | "user_id">) => boolean> {
+  if (!restrictAllocationIds || restrictAllocationIds.size === 0) return () => true;
+
+  const { data: restrictAllocs } = await supabase
+    .from("allocations")
+    .select("id, user_id")
+    .in("id", [...restrictAllocationIds]);
+
+  const allowedUserIds = new Set<string>();
+  for (const a of (restrictAllocs ?? []) as { id: string; user_id: string | null }[]) {
+    if (a.user_id) allowedUserIds.add(a.user_id);
+  }
+
+  return (a) =>
+    restrictAllocationIds.has(a.id) || (a.user_id != null && allowedUserIds.has(a.user_id));
+}
+
 async function committeeGroup(
   supabase: SupabaseClient,
-  conferenceId: string,
+  canonicalConferenceId: string,
+  siblingConferenceIds: string[],
   label: string,
   restrictAllocationIds: Set<string> | null,
   opts: { includeCommittee?: boolean; includeDelegates?: boolean } = {}
 ): Promise<CommitteeMilestoneGroup> {
   const { includeCommittee = true, includeDelegates = true } = opts;
+  const scopeIds = siblingConferenceIds.length > 0 ? siblingConferenceIds : [canonicalConferenceId];
 
   const committee = includeCommittee
-    ? computeMilestonesForScope("committee", await committeeCounts(supabase, conferenceId))
+    ? computeMilestonesForScope("committee", await committeeCountsForConferences(supabase, scopeIds))
     : [];
 
   let delegates: DelegateMilestoneRow[] = [];
   if (includeDelegates) {
     const { data: allocs } = await supabase
       .from("allocations")
-      .select("id, country, user_id")
-      .eq("conference_id", conferenceId);
-    const countsMap = await delegateCountsByAllocation(supabase, conferenceId);
+      .select("id, country, user_id, conference_id")
+      .in("conference_id", scopeIds);
 
-    delegates = ((allocs ?? []) as AllocRow[])
+    const merged = mergeAllocationsAcrossSiblingConferences(
+      (allocs ?? []) as AllocRow[],
+      canonicalConferenceId
+    );
+    const allowDelegate = await allowedDelegateFilter(supabase, restrictAllocationIds);
+    const countsMap = await delegateCountsForMergedAllocations(supabase, scopeIds, merged);
+
+    delegates = merged
       .filter((a) => !isDaisSeat(a.country))
-      .filter((a) => (restrictAllocationIds ? restrictAllocationIds.has(a.id) : true))
+      .filter(allowDelegate)
       .map((a) => delegateRow(a.id, (a.country ?? "").trim() || "—", countsMap.get(a.id) ?? {}))
       .sort((x, y) => y.earned - x.earned || x.label.localeCompare(y.label));
   }
 
-  return { conferenceId, label, committee, delegates };
+  return { conferenceId: canonicalConferenceId, label, committee, delegates };
+}
+
+async function loadEventCanonicalCommittees(
+  supabase: SupabaseClient,
+  eventId: string
+): Promise<{
+  committees: { id: string; label: string }[];
+  conferenceIdToCanonical: Map<string, string>;
+}> {
+  const { data: confs } = await supabase
+    .from("conferences")
+    .select("id, name, committee, committee_code")
+    .eq("event_id", eventId);
+
+  const rawConfs = ((confs ?? []) as ConfRow[]).filter(
+    (c) => !isConferenceEventPlaceholderRow(c) && !isRetiredSeamunCommitteeRow(c)
+  );
+  const confIds = rawConfs.map((c) => c.id);
+  if (confIds.length === 0) {
+    return { committees: [], conferenceIdToCanonical: new Map() };
+  }
+
+  const { data: allocRows } = await supabase
+    .from("allocations")
+    .select("conference_id")
+    .in("conference_id", confIds);
+
+  const conferenceIdsWithAllocations = new Set(
+    (allocRows ?? []).map((a) => a.conference_id).filter(Boolean) as string[]
+  );
+
+  return canonicalCommitteesForEventConferenceRows(rawConfs, conferenceIdsWithAllocations);
 }
 
 /**
@@ -156,74 +287,94 @@ export async function loadMilestonesForViewer(): Promise<MilestonesData> {
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   const role = (profile?.role ?? "delegate").toString().toLowerCase();
 
-  // Advisor: group by their assigned delegates' conferences.
+  // Advisor: group assigned delegates by canonical committee (not duplicate topic rows).
   if (isAdvisorRole(role)) {
     const { data: assignments } = await supabase
       .from("advisor_delegate_assignments")
       .select("delegate_allocation_id, conference_id")
       .eq("advisor_profile_id", user.id);
-    const byConf = new Map<string, Set<string>>();
-    for (const a of (assignments ?? []) as { delegate_allocation_id: string; conference_id: string }[]) {
-      const set = byConf.get(a.conference_id) ?? new Set<string>();
-      set.add(a.delegate_allocation_id);
-      byConf.set(a.conference_id, set);
+
+    if (!assignments?.length) return { role, self: null, committees: [] };
+
+    type AssignmentRow = { delegate_allocation_id: string; conference_id: string };
+    const byCanonical = new Map<string, { label: string; siblingIds: Set<string>; allocationIds: Set<string> }>();
+
+    for (const a of assignments as AssignmentRow[]) {
+      const scope = await getCommitteeAwardScope(supabase, a.conference_id);
+      const canon = scope.canonicalConferenceId;
+      let bucket = byCanonical.get(canon);
+      if (!bucket) {
+        const { data: row } = await supabase
+          .from("conferences")
+          .select("committee, name")
+          .eq("id", canon)
+          .maybeSingle();
+        bucket = {
+          label: (row?.committee ?? row?.name ?? "").trim() || "Committee",
+          siblingIds: new Set(scope.siblingConferenceIds),
+          allocationIds: new Set<string>(),
+        };
+        byCanonical.set(canon, bucket);
+      }
+      for (const sid of scope.siblingConferenceIds) bucket.siblingIds.add(sid);
+      bucket.allocationIds.add(a.delegate_allocation_id);
     }
-    const confIds = [...byConf.keys()];
-    const labels = await conferenceLabels(supabase, confIds);
-    // Advisors only see their assigned delegates' per-delegate milestones.
+
     const committees = await Promise.all(
-      confIds.map((id) =>
-        committeeGroup(supabase, id, labels.get(id) ?? "Committee", byConf.get(id) ?? null, {
-          includeCommittee: false,
-          includeDelegates: true,
-        })
+      [...byCanonical.entries()].map(([canonicalId, bucket]) =>
+        committeeGroup(
+          supabase,
+          canonicalId,
+          [...bucket.siblingIds],
+          bucket.label,
+          bucket.allocationIds,
+          { includeCommittee: false, includeDelegates: true }
+        )
       )
     );
+
+    committees.sort((a, b) => a.label.localeCompare(b.label));
     return { role, self: null, committees };
   }
 
-  // SMT / admin: every committee in the active event.
+  // SMT / admin: one section per canonical committee in the active event.
   if (isSmtRole(role) || isAdminRole(role)) {
     const eventId = await getActiveEventId();
     if (!eventId) return { role, self: null, committees: [] };
-    const { data: confs } = await supabase
-      .from("conferences")
-      .select("id, name, committee")
-      .eq("event_id", eventId)
-      .order("committee", { ascending: true, nullsFirst: false });
+
+    const { committees: canonicalCommittees, conferenceIdToCanonical } =
+      await loadEventCanonicalCommittees(supabase, eventId);
+
     const committees = await Promise.all(
-      ((confs ?? []) as { id: string; name: string; committee: string | null }[]).map((c) =>
-        committeeGroup(supabase, c.id, (c.committee ?? c.name ?? "").trim() || "Committee", null)
+      canonicalCommittees.map((c) =>
+        committeeGroup(
+          supabase,
+          c.id,
+          siblingConferenceIdsForCanonical(c.id, conferenceIdToCanonical),
+          c.label,
+          null
+        )
       )
     );
+
     return { role, self: null, committees };
   }
 
   // Delegate / chair: their dashboard committee — committee-scope milestones only.
   const conf = await resolveDashboardConferenceForUser(profile?.role, user.id);
   if (!conf) return { role, self: null, committees: [] };
+
+  const scope = await getCommitteeAwardScope(supabase, conf.id);
   const label = (conf.committee ?? conf.name ?? "").trim() || "Committee";
 
-  const group = await committeeGroup(supabase, conf.id, label, null, {
-    includeCommittee: true,
-    includeDelegates: false,
-  });
+  const group = await committeeGroup(
+    supabase,
+    scope.canonicalConferenceId,
+    scope.siblingConferenceIds,
+    label,
+    null,
+    { includeCommittee: true, includeDelegates: false }
+  );
 
   return { role, self: null, committees: [group] };
-}
-
-async function conferenceLabels(
-  supabase: SupabaseClient,
-  conferenceIds: string[]
-): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  if (conferenceIds.length === 0) return map;
-  const { data } = await supabase
-    .from("conferences")
-    .select("id, name, committee")
-    .in("id", conferenceIds);
-  for (const c of (data ?? []) as { id: string; name: string; committee: string | null }[]) {
-    map.set(c.id, (c.committee ?? c.name ?? "").trim() || "Committee");
-  }
-  return map;
 }

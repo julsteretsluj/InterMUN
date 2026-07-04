@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { unstable_rethrow } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import {
@@ -52,7 +53,8 @@ export function SmtCommitteeViewSettingsCard({
     startSurface(async () => {
       try {
         await switchSmtToSecretariatAction();
-      } catch {
+      } catch (error) {
+        unstable_rethrow(error);
         setSurfaceMsg(t("surfaceSwitchError"));
       }
     });
@@ -71,7 +73,8 @@ export function SmtCommitteeViewSettingsCard({
         } else {
           await switchSmtToChairExperienceAction(chairId.trim());
         }
-      } catch {
+      } catch (error) {
+        unstable_rethrow(error);
         setSurfaceMsg(t("surfaceSwitchError"));
       }
     });
@@ -86,7 +89,8 @@ export function SmtCommitteeViewSettingsCard({
     startSurface(async () => {
       try {
         await switchSmtToDelegateExperienceAction(delegateAllocId.trim());
-      } catch {
+      } catch (error) {
+        unstable_rethrow(error);
         setSurfaceMsg(t("surfaceSwitchError"));
       }
     });

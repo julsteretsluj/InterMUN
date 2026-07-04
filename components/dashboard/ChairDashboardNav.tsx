@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
-import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
 import {
   CHAIR_ITEM_FOLDER,
   CHAIR_NAV_FOLDER_ORDER,
@@ -257,6 +257,13 @@ export function ChairDashboardSidebar({
     [navItems]
   );
 
+  const {
+    expandedFolderId,
+    onFolderPointerEnter,
+    onFolderPointerLeave,
+    onFolderToggle,
+  } = useNavFolderExpansion(folderGroups, (item) => navItemIsActive(pathname, item));
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className={cn("shrink-0 px-3 pt-3 pb-2", labelsHidden && "px-2")}>
@@ -289,7 +296,11 @@ export function ChairDashboardSidebar({
             key={folderId}
             folderId={folderId}
             labelsHidden={labelsHidden}
+            expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item))}
+            onPointerEnter={() => onFolderPointerEnter(folderId)}
+            onPointerLeave={onFolderPointerLeave}
+            onToggle={() => onFolderToggle(folderId)}
           >
             {items.map((item) => (
               <ChairNavRow

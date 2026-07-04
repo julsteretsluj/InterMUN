@@ -1,51 +1,108 @@
 "use client";
 
-import { useCallback, useId, useState, type ReactNode } from "react";
+import { useCallback, useId, useMemo, useState, type ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { NAV_FOLDER_META, type NavFolderId } from "@/lib/nav-folder-groups";
+import {
+  NAV_FOLDER_META,
+  folderHasActiveChild,
+  type NavFolderGroup,
+  type NavFolderId,
+} from "@/lib/nav-folder-groups";
 import { cn } from "@/lib/utils";
+
+/** Accordion state: only one folder open — active route, or hover/click preview. */
+export function useNavFolderExpansion<T>(
+  folderGroups: readonly NavFolderGroup<T>[],
+  isItemActive: (item: T) => boolean
+) {
+  const activeFolderId = useMemo(() => {
+    for (const group of folderGroups) {
+      if (folderHasActiveChild(group.items, isItemActive)) {
+        return group.folderId;
+      }
+    }
+    return folderGroups[0]?.folderId ?? null;
+  }, [folderGroups, isItemActive]);
+
+  const [hoveredFolderId, setHoveredFolderId] = useState<NavFolderId | null>(null);
+  const [pinState, setPinState] = useState<{
+    folderId: NavFolderId;
+    activeAtPin: NavFolderId | null;
+  } | null>(null);
+
+  const pinnedFolderId =
+    pinState && pinState.activeAtPin === activeFolderId ? pinState.folderId : null;
+
+  const expandedFolderId = hoveredFolderId ?? pinnedFolderId ?? activeFolderId;
+
+  const onFolderPointerEnter = useCallback((folderId: NavFolderId) => {
+    setHoveredFolderId(folderId);
+  }, []);
+
+  const onFolderPointerLeave = useCallback(() => {
+    setHoveredFolderId(null);
+  }, []);
+
+  const onFolderToggle = useCallback(
+    (folderId: NavFolderId) => {
+      setPinState((prev) =>
+        prev?.folderId === folderId
+          ? null
+          : { folderId, activeAtPin: activeFolderId }
+      );
+    },
+    [activeFolderId]
+  );
+
+  return {
+    expandedFolderId,
+    onFolderPointerEnter,
+    onFolderPointerLeave,
+    onFolderToggle,
+  };
+}
 
 export function NavFolder({
   folderId,
+  expanded = false,
   hasActiveChild = false,
   labelsHidden = false,
   compact = false,
+  onPointerEnter,
+  onPointerLeave,
+  onToggle,
   children,
 }: {
   folderId: NavFolderId;
+  expanded?: boolean;
   hasActiveChild?: boolean;
   /** Chair sidebar icon-only mode */
   labelsHidden?: boolean;
   /** Aspire sidebar: labels show on parent `group-hover` */
   compact?: boolean;
+  onPointerEnter?: () => void;
+  onPointerLeave?: () => void;
+  onToggle?: () => void;
   children: ReactNode;
 }) {
   const t = useTranslations("navFolders");
   const meta = NAV_FOLDER_META[folderId];
   const panelId = useId();
-  const [pinnedOpen, setPinnedOpen] = useState(hasActiveChild);
-  const [hoverOpen, setHoverOpen] = useState(false);
-
-  const expanded = pinnedOpen || hoverOpen || hasActiveChild;
   const label = t(meta.labelKey);
-
-  const togglePinned = useCallback(() => {
-    setPinnedOpen((prev) => !prev);
-  }, []);
 
   return (
     <div
       className="nav-folder"
-      onMouseEnter={() => setHoverOpen(true)}
-      onMouseLeave={() => setHoverOpen(false)}
+      onMouseEnter={onPointerEnter}
+      onMouseLeave={onPointerLeave}
     >
       <button
         type="button"
         id={`${panelId}-trigger`}
         aria-expanded={expanded}
         aria-controls={panelId}
-        onClick={togglePinned}
+        onClick={onToggle}
         title={label}
         className={cn(
           "nav-folder-trigger flex w-full min-w-0 items-center gap-2 rounded-[var(--radius-md)] py-1.5 text-left text-sm font-semibold text-brand-muted transition-apple hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]",

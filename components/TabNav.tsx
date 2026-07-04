@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
-import { NavFolder, NavFolderDockTabs } from "@/components/nav/NavFolder";
+import { NavFolder, NavFolderDockTabs, useNavFolderExpansion } from "@/components/nav/NavFolder";
 import {
   TAB_NAV_FOLDER_ORDER,
   folderHasActiveChild,
@@ -229,6 +229,13 @@ export function TabNav({
     [folderGroups, dockFolder]
   );
 
+  const {
+    expandedFolderId,
+    onFolderPointerEnter,
+    onFolderPointerLeave,
+    onFolderToggle,
+  } = useNavFolderExpansion(folderGroups, (tab) => tabInPath(pathname, tab.href));
+
   if (variant === "aspire-sidebar") {
     return (
       <nav
@@ -240,7 +247,11 @@ export function TabNav({
             key={folderId}
             folderId={folderId}
             compact
+            expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (tab) => tabInPath(pathname, tab.href))}
+            onPointerEnter={() => onFolderPointerEnter(folderId)}
+            onPointerLeave={onFolderPointerLeave}
+            onToggle={() => onFolderToggle(folderId)}
           >
             {items.map((tab) => (
               <AspireSidebarLink

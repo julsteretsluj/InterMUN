@@ -115,8 +115,8 @@ export function ThemeSelector({ className }: { className?: string }) {
     [mode]
   );
 
-  const onTextSizeSliderChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = clampTextSizeStep(Number(e.target.value));
+  const onTextSizeSliderChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
+    const v = clampTextSizeStep(Number(e.currentTarget.value));
     setTextSizeStep(v);
     persistAndApplyTextSize(v);
   }, []);
@@ -269,6 +269,7 @@ export function ThemeSelector({ className }: { className?: string }) {
               max={TEXT_SIZE_STEP_MAX}
               step={1}
               value={textSizeStep}
+              onInput={onTextSizeSliderChange}
               onChange={onTextSizeSliderChange}
               aria-valuemin={TEXT_SIZE_STEP_MIN}
               aria-valuemax={TEXT_SIZE_STEP_MAX}

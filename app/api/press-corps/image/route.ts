@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isPressCorpsImageHost, PRESS_CORPS_REVALIDATE_SECONDS } from "@/lib/press-corps-instagram";
 
 /**
  * Thumbnail proxy for Press Corps Instagram media.
@@ -10,14 +11,8 @@ import { NextResponse } from "next/server";
  * GET /api/press-corps/image?u=<encoded cdn url>
  */
 
-const REVALIDATE_SECONDS = 600;
-const ALLOWED_HOST_SUFFIXES = ["cdninstagram.com", "fbcdn.net", "instagram.com"];
-
 function isAllowed(url: URL): boolean {
-  if (url.protocol !== "https:") return false;
-  return ALLOWED_HOST_SUFFIXES.some(
-    (suffix) => url.hostname === suffix || url.hostname.endsWith(`.${suffix}`)
-  );
+  return isPressCorpsImageHost(url);
 }
 
 export async function GET(request: Request) {
@@ -39,7 +34,7 @@ export async function GET(request: Request) {
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
         Accept: "image/avif,image/webp,image/*,*/*;q=0.8",
       },
-      next: { revalidate: REVALIDATE_SECONDS },
+      next: { revalidate: PRESS_CORPS_REVALIDATE_SECONDS },
     });
     if (!upstream.ok || !upstream.body) {
       return new NextResponse("Upstream error", { status: 502 });
@@ -49,7 +44,7 @@ export async function GET(request: Request) {
       status: 200,
       headers: {
         "Content-Type": contentType,
-        "Cache-Control": `public, s-maxage=${REVALIDATE_SECONDS}, stale-while-revalidate=${REVALIDATE_SECONDS * 2}`,
+        "Cache-Control": `public, s-maxage=${PRESS_CORPS_REVALIDATE_SECONDS}, stale-while-revalidate=${PRESS_CORPS_REVALIDATE_SECONDS * 2}`,
       },
     });
   } catch {
