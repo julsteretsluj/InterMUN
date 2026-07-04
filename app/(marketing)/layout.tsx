@@ -1,5 +1,5 @@
-import { PublicPageControls } from "@/components/PublicPageControls";
 import Link from "next/link";
+import { PublicPageControls } from "@/components/PublicPageControls";
 import { getTranslations } from "next-intl/server";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
 import { OPENING_ORB_PATH } from "@/lib/opening-orb";
@@ -26,11 +26,11 @@ export default async function MarketingLayout({
             </Link>
           </div>
           <nav className="marketing-nav hidden items-center gap-5 md:flex">
-            <a href="#how-it-works">{t("nav.howItWorks")}</a>
-            <a href="#chairs">{t("nav.chairs")}</a>
-            <a href="#delegates">{t("nav.delegates")}</a>
-            <a href="#smt">{t("nav.secretariat")}</a>
-            <a href="#contact">{t("nav.contact")}</a>
+            <Link href="/#how-it-works">{t("nav.howItWorks")}</Link>
+            <Link href="/features/chairs">{t("nav.chairs")}</Link>
+            <Link href="/features/delegates">{t("nav.delegates")}</Link>
+            <Link href="/features/secretariat">{t("nav.secretariat")}</Link>
+            <Link href="/#contact">{t("nav.contact")}</Link>
           </nav>
           <div className="flex shrink-0 items-center gap-2">
             <div className="hidden sm:block">

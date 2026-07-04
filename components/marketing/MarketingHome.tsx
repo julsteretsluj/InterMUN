@@ -106,6 +106,8 @@ function RoleSection({
   preview,
   dark,
   bandClassName,
+  exploreHref,
+  exploreLabel,
 }: {
   id: string;
   eyebrow: string;
@@ -116,6 +118,8 @@ function RoleSection({
   preview: ReactNode;
   dark?: boolean;
   bandClassName?: string;
+  exploreHref?: string;
+  exploreLabel?: string;
 }) {
   return (
     <section
@@ -140,6 +144,17 @@ function RoleSection({
             {description}
           </p>
           <RoleFeatureGrid items={items} className="mt-8" dark={dark} />
+          {exploreHref && exploreLabel ? (
+            <Link
+              href={exploreHref}
+              className={cn(
+                "mt-6 inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider transition",
+                dark ? "text-[var(--accent)] hover:text-white" : "text-[var(--accent)] hover:text-brand-navy"
+              )}
+            >
+              {exploreLabel} →
+            </Link>
+          ) : null}
         </div>
         <div className="relative">{preview}</div>
       </div>
@@ -334,6 +349,8 @@ export async function MarketingHome() {
           title={t("chairs.title")}
           description={t("chairs.description")}
           items={chairFeatures}
+          exploreHref="/features/chairs"
+          exploreLabel={t("exploreChairs")}
           preview={
             <MarketingChamberFrame label={t("chairs.previewLabel")}>
               <MarketingChairMotionPreview />
@@ -350,6 +367,8 @@ export async function MarketingHome() {
           title={t("delegates.title")}
           description={t("delegates.description")}
           items={delegateFeatures}
+          exploreHref="/features/delegates"
+          exploreLabel={t("exploreDelegates")}
           preview={
             <MarketingChamberFrame label={t("delegates.previewLabel")} variant="light">
               <MarketingDelegatePrepPreview />
@@ -364,6 +383,8 @@ export async function MarketingHome() {
           title={t("smt.title")}
           description={t("smt.description")}
           items={smtFeatures}
+          exploreHref="/features/secretariat"
+          exploreLabel={t("exploreSecretariat")}
           preview={
             <MarketingChamberFrame label={t("smt.previewLabel")}>
               <MarketingSmtOversightPreview />

@@ -7,16 +7,17 @@ import { HelpButton } from "@/components/HelpButton";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import {
   ROLL_ATTENDANCE_BUTTONS,
-  SESSION_SURFACE_CARD,
 } from "@/lib/roll-call-attendance-buttons";
 import { cn } from "@/lib/utils";
 
-const PREVIEW_CARD =
-  "rounded-2xl border border-[var(--hairline)] bg-[var(--material-thick)] p-4 shadow-[var(--dashboard-shadow)]";
-const PREVIEW_LABEL = "text-xs font-semibold uppercase tracking-wide text-brand-muted";
-const PREVIEW_ROW =
-  "flex w-full items-center justify-between rounded-xl border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-left text-sm transition hover:border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
-
+import {
+  MARKETING_DARK_GLASS_CARD,
+  PREVIEW_CARD,
+  PREVIEW_HEADING,
+  PREVIEW_LABEL,
+  PREVIEW_MUTED,
+  PREVIEW_ROW,
+} from "@/components/marketing/marketing-preview-styles";
 type RollRow = { id: string; country: string; status: RollAttendance };
 
 const HERO_ROLL_ALL: RollRow[] = [
@@ -44,35 +45,49 @@ function formatTimer(totalSeconds: number): string {
 function MarketingRollCallCard({
   rows,
   onSetAttendance,
+  onDarkSurface = false,
 }: {
   rows: RollRow[];
   onSetAttendance: (id: string, status: RollAttendance) => void;
+  onDarkSurface?: boolean;
 }) {
   const t = useTranslations("sessionControlClient");
+  const heading = onDarkSurface ? "text-white" : "text-brand-navy";
+  const muted = onDarkSurface ? "text-white/70" : "text-brand-muted";
+  const body = onDarkSurface ? "text-white" : "text-brand-navy";
+  const initBtn = onDarkSurface
+    ? "rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20"
+    : "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
 
   return (
-    <section className="space-y-4 text-brand-navy">
+    <section className={cn("space-y-4", body)}>
       <div className="flex items-center justify-between gap-3">
-        <h3 className="font-display text-lg font-semibold text-brand-navy">
+        <h3 className={cn("font-display text-lg font-semibold", heading)}>
           ✅ {t("rollCallTracker")}
         </h3>
-        <HelpButton title={t("rollCallTracker")}>{t("rollCallHelp")}</HelpButton>
-      </div>
-      <p className="text-sm text-brand-muted">{t("rollCallIntro")}</p>
-      <div className={`${SESSION_SURFACE_CARD} space-y-4`}>
-        <button
-          type="button"
-          className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-brand-navy hover:bg-white/20"
+        <HelpButton
+          title={t("rollCallTracker")}
+          className={
+            onDarkSurface
+              ? "border-white/20 bg-white/10 text-white/85 hover:bg-white/20 dark:border-white/20 dark:bg-white/10 dark:text-white/85"
+              : undefined
+          }
         >
+          {t("rollCallHelp")}
+        </HelpButton>
+      </div>
+      <p className={cn("text-sm", muted)}>{t("rollCallIntro")}</p>
+      <div className={cn(MARKETING_DARK_GLASS_CARD, "space-y-4", onDarkSurface && "text-white")}>
+        <button type="button" className={initBtn}>
           {t("initializeRowsAllAllocations")}
         </button>
         <div>
-          <h4 className="font-display text-base font-semibold text-brand-navy">
+          <h4 className={cn("font-display text-base font-semibold", onDarkSurface ? "text-white" : heading)}>
             👥 {t("delegates")}
           </h4>
-          <p className="mt-1 text-sm text-brand-muted">{t("delegateRollStatusHint")}</p>
+          <p className={cn("mt-1 text-sm", muted)}>{t("delegateRollStatusHint")}</p>
         </div>
-        <ul className="space-y-3 text-sm text-brand-navy">
+        <ul className={cn("space-y-3 text-sm", body)}>
           {rows.map((row) => (
             <li
               key={row.id}
@@ -138,10 +153,10 @@ function MarketingSpeakersCard({
         <span className={PREVIEW_LABEL}>{t("speakersLabel")}</span>
         <span className="text-[0.65rem] text-brand-muted">{t("speakersHint")}</span>
       </div>
-      <div className="mb-3 rounded-xl border border-[color-mix(in_srgb,var(--accent)_25%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] px-3 py-2.5">
-        <p className="text-xs text-brand-muted">{t("nowSpeaking")}</p>
+      <div className="mb-3 rounded-xl border border-[color-mix(in_srgb,var(--accent)_25%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] px-3 py-2.5">
+        <p className={cn("text-xs", PREVIEW_MUTED)}>{t("nowSpeaking")}</p>
         <div className="mt-0.5 flex items-end justify-between gap-3">
-          <p className="font-display text-base font-semibold text-brand-navy">{current}</p>
+          <p className={cn("font-display text-base", PREVIEW_HEADING)}>{current}</p>
           <p className="font-mono text-sm font-semibold tabular-nums text-[var(--accent)]" suppressHydrationWarning>
             {formatTimer(secondsLeft)}
           </p>
@@ -150,7 +165,7 @@ function MarketingSpeakersCard({
           <button
             type="button"
             onClick={onToggleTimer}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--hairline)] bg-white/80 px-2.5 py-1.5 text-xs font-semibold text-brand-navy hover:bg-white"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-zinc-900 hover:bg-zinc-50"
           >
             {running ? <Pause className="h-3.5 w-3.5" aria-hidden /> : <Play className="h-3.5 w-3.5" aria-hidden />}
             {running ? t("speakersPause") : t("speakersStart")}
@@ -159,16 +174,16 @@ function MarketingSpeakersCard({
             type="button"
             onClick={onNext}
             disabled={queue.length < 2}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[color-mix(in_srgb,var(--accent)_30%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] px-2.5 py-1.5 text-xs font-semibold text-brand-navy hover:bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] disabled:opacity-45"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[color-mix(in_srgb,var(--accent)_30%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_12%,#ffffff)] px-2.5 py-1.5 text-xs font-semibold text-zinc-900 hover:bg-[color-mix(in_srgb,var(--accent)_18%,#ffffff)] disabled:opacity-45"
           >
             <SkipForward className="h-3.5 w-3.5" aria-hidden />
             {t("speakersNext")}
           </button>
         </div>
       </div>
-      <ul className="space-y-1.5 text-sm text-brand-muted">
+      <ul className={cn("space-y-1.5 text-sm", PREVIEW_MUTED)}>
         {visible.map((country) => (
-          <li key={country} className="rounded-lg px-1 py-0.5">
+          <li key={country} className="rounded-lg px-1 py-0.5 text-zinc-600">
             {country}
           </li>
         ))}
@@ -177,7 +192,7 @@ function MarketingSpeakersCard({
             <button
               type="button"
               onClick={onToggleExpand}
-              className="inline-flex items-center gap-1 text-xs font-medium text-brand-muted hover:text-brand-navy"
+              className="inline-flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-zinc-900"
             >
               {expanded ? (
                 <>
@@ -238,7 +253,7 @@ export function MarketingHeroSessionPreview({ className }: { className?: string 
 
   return (
     <div className={cn("space-y-4", className)}>
-      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} />
+      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} onDarkSurface />
       <MarketingSpeakersCard
         queue={queue}
         secondsLeft={secondsLeft}
@@ -283,14 +298,14 @@ export function MarketingChairMotionPreview({ className }: { className?: string 
 
   return (
     <div className={cn("space-y-4", className)}>
-      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} />
+      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} onDarkSurface />
       <div className={PREVIEW_CARD}>
         <p className={PREVIEW_LABEL}>{t("voteLabel")}</p>
-        <p className="mt-2 font-display text-base font-semibold text-brand-navy">{t("voteTitle")}</p>
-        <p className="mt-1 text-sm text-brand-muted">
+        <p className="mt-2 font-display text-base font-semibold text-zinc-900">{t("voteTitle")}</p>
+        <p className={cn("mt-1", PREVIEW_MUTED)}>
           {t("voteMetaInteractive", { yes: yesCount, no: noCount, needed: threshold, total: totalNeeded })}
         </p>
-        <p className="mt-2 text-[0.7rem] text-brand-muted">{t("voteHint")}</p>
+        <p className="mt-2 text-[0.7rem] text-zinc-500">{t("voteHint")}</p>
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             type="button"
@@ -311,7 +326,7 @@ export function MarketingChairMotionPreview({ className }: { className?: string 
               "rounded-full border px-3 py-1 text-xs font-semibold transition",
               choice === "against"
                 ? "border-rose-400/60 bg-rose-500/10 text-rose-800 ring-2 ring-rose-400/35"
-                : "border-[var(--hairline)] text-brand-muted hover:border-rose-300/50 hover:text-rose-800"
+                : "border-zinc-200 text-zinc-600 hover:border-rose-300 hover:text-rose-800"
             )}
           >
             {t("voteReject")}
@@ -338,16 +353,16 @@ export function MarketingDelegatePrepPreview({ className }: { className?: string
             type="button"
             onClick={() => setActive(key)}
             className={cn(
-              "rounded-2xl border p-4 text-left shadow-[var(--dashboard-shadow)] transition",
+              "rounded-2xl border p-4 text-left shadow-[0_8px_24px_-12px_rgba(0,0,0,0.2)] transition [color-scheme:light]",
               selected
-                ? "border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)]"
-                : "border-[var(--hairline)] bg-[var(--material-thick)] hover:border-[color-mix(in_srgb,var(--accent)_20%,var(--hairline))]"
+                ? "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)]"
+                : "border-zinc-200 bg-white hover:border-[color-mix(in_srgb,var(--accent)_25%,#d4d4d8)]"
             )}
           >
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
+            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
               {t(`prepTile.${key}`)}
             </p>
-            <p className="mt-2 font-display text-sm font-semibold text-brand-navy">
+            <p className="mt-2 font-display text-sm font-semibold text-zinc-900">
               {selected ? t("prepActive") : t("prepReady")}
             </p>
           </button>
@@ -366,7 +381,7 @@ export function MarketingSmtOversightPreview({ className }: { className?: string
   return (
     <div className={cn(PREVIEW_CARD, className)}>
       <p className={PREVIEW_LABEL}>{t("smtLabel")}</p>
-      <p className="mt-1 mb-3 text-[0.7rem] text-brand-muted">{t("smtHint")}</p>
+      <p className="mt-1 mb-3 text-[0.7rem] text-zinc-500">{t("smtHint")}</p>
       <ul className="space-y-2">
         {SMT_CHAMBERS.map((committee) => {
           const live = liveId === committee;
@@ -377,11 +392,11 @@ export function MarketingSmtOversightPreview({ className }: { className?: string
                 onClick={() => setLiveId(committee)}
                 className={cn(
                   PREVIEW_ROW,
-                  live && "border-[color-mix(in_srgb,var(--accent)_35%,var(--hairline))] bg-[color-mix(in_srgb,var(--accent)_6%,transparent)]"
+                  live && "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_8%,#ffffff)]"
                 )}
               >
-                <span className="font-medium">{committee}</span>
-                <span className="inline-flex items-center gap-1.5 text-xs text-brand-muted">
+                <span className="font-medium text-zinc-900">{committee}</span>
+                <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500">
                   <span
                     className={cn(
                       "h-2 w-2 rounded-full",

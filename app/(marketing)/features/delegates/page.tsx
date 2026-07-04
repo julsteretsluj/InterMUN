@@ -1,24 +1,22 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getAppName } from "@/lib/branding";
-import { redirectMarketingGuestsToApp } from "@/lib/marketing-guest-redirect";
-import { MarketingHome } from "@/components/marketing/MarketingHome";
+import { MarketingFeaturesPage } from "@/components/marketing/MarketingFeaturesPage";
 import { MarketingOpening } from "@/components/marketing/MarketingOpening";
+import { redirectMarketingGuestsToApp } from "@/lib/marketing-guest-redirect";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("marketing");
+  const t = await getTranslations("marketing.featuresPages.delegates");
   return {
-    title: t("metaTitle", { app: getAppName() }),
+    title: t("metaTitle"),
     description: t("metaDescription"),
   };
 }
 
-export default async function MarketingPage() {
+export default async function DelegatesFeaturesPage() {
   await redirectMarketingGuestsToApp();
-
   return (
     <MarketingOpening>
-      <MarketingHome />
+      <MarketingFeaturesPage role="delegates" />
     </MarketingOpening>
   );
 }
