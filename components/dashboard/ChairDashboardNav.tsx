@@ -160,9 +160,11 @@ function ChairNavRow({
       href={item.href}
       title={labelsHidden ? `${priority}. ${label}` : undefined}
       aria-label={`${priority}. ${label}`}
-        className={cn(
-          "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center gap-3 rounded-[var(--radius-md)] py-2.5 pl-9 pr-2.5 text-sm transition-apple",
-        labelsHidden && "h-11 w-full justify-center gap-1.5 px-2 py-0 pl-2",
+      className={cn(
+          "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center rounded-[var(--radius-md)] py-2.5 text-sm transition-apple",
+        labelsHidden
+          ? "h-11 justify-center gap-0 px-2 pl-2 pr-3.5"
+          : "justify-center gap-0 px-2 pl-2 pr-3.5 group-hover:justify-start group-hover:gap-3 group-hover:pl-9 group-hover:pr-3",
         isActive
           ? "dashboard-nav-active"
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
@@ -181,7 +183,7 @@ function ChairNavRow({
         <span className="text-base leading-none">{item.emoji}</span>
       </span>
       {!labelsHidden ? (
-        <span className="flex min-w-0 flex-1 items-center gap-2">
+        <span className="hidden min-w-0 flex-1 items-center gap-2 group-hover:flex">
           <span className="min-w-0 truncate">{label}</span>
           {badgeCount && badgeCount > 0 ? (
             <span className="ml-auto inline-flex min-w-[1.25rem] shrink-0 items-center justify-center rounded-full bg-amber-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">
@@ -264,20 +266,22 @@ export function ChairDashboardSidebar({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className={cn("shrink-0 px-3 pt-3 pb-2", labelsHidden && "px-2")}>
+      <div className={cn("shrink-0 px-2 pt-3 pb-2 group-hover:px-3", labelsHidden && "px-1.5")}>
         <Link
           href="/chair"
           title={headerText}
           className={cn(
-            "flex w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-[var(--accent)] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95",
-            labelsHidden && "mx-auto h-11 w-full rounded-[var(--radius-lg)] px-2 py-0",
+            "flex w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-[var(--accent)] px-2 py-2.5 pr-3.5 text-center text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.2)_inset] transition-apple hover:opacity-95 group-hover:justify-start group-hover:px-4 group-hover:pr-4",
+            labelsHidden && "mx-auto h-11 w-full rounded-[var(--radius-lg)] px-2 py-0 pr-3.5",
             hubActive && "ring-2 ring-[color:color-mix(in_srgb,var(--accent)_50%,transparent)] ring-offset-2 ring-offset-[var(--color-bg-page)]"
           )}
         >
           <span className="text-base leading-none" aria-hidden>
             📌
           </span>
-          {!labelsHidden ? <span className="min-w-0 truncate">{headerText}</span> : null}
+          {!labelsHidden ? (
+            <span className="hidden min-w-0 truncate group-hover:inline">{headerText}</span>
+          ) : null}
           {labelsHidden ? <span className="sr-only">{headerText}</span> : null}
         </Link>
       </div>
@@ -286,13 +290,14 @@ export function ChairDashboardSidebar({
         aria-label={t("ariaDashboard")}
         className={cn(
           "flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto overflow-x-hidden py-2 [scrollbar-width:thin]",
-          labelsHidden ? "px-1.5" : "px-3"
+          labelsHidden ? "px-1.5" : "px-2 group-hover:px-3"
         )}
       >
         {folderGroups.map(({ folderId, items }) => (
           <NavFolder
             key={folderId}
             folderId={folderId}
+            compact={!labelsHidden}
             labelsHidden={labelsHidden}
             expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item))}
@@ -316,33 +321,41 @@ export function ChairDashboardSidebar({
       <div
         className={cn(
           "mt-auto shrink-0 space-y-0.5 border-t border-[var(--hairline)] py-3",
-          labelsHidden ? "px-1.5" : "px-3"
+          labelsHidden ? "px-1.5" : "px-2 group-hover:px-3"
         )}
       >
         <button
           type="button"
           onClick={toggleLabels}
           className={cn(
-            "flex w-full items-center gap-2.5 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium text-brand-muted transition-apple hover:bg-[color:var(--discord-hover-bg)]",
+            "flex w-full items-center justify-center gap-2.5 rounded-[var(--radius-md)] px-2 py-2.5 pr-3.5 text-left text-sm font-medium text-brand-muted transition-apple hover:bg-[color:var(--discord-hover-bg)] group-hover:justify-start group-hover:px-3",
             labelsHidden && "justify-center px-2"
           )}
         >
           <span className="text-base leading-none" aria-hidden>
             ↔️
           </span>
-          {!labelsHidden ? <span>{t("hideLabels")}</span> : <span className="sr-only">{t("showLabels")}</span>}
+          {!labelsHidden ? (
+            <span className="hidden group-hover:inline">{t("hideLabels")}</span>
+          ) : (
+            <span className="sr-only">{t("showLabels")}</span>
+          )}
         </button>
         <Link
           href="/guides"
           className={cn(
-            "flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-sm font-medium text-brand-muted transition-apple hover:bg-[color:var(--discord-hover-bg)]",
+            "flex w-full items-center justify-center gap-3 rounded-[var(--radius-md)] px-2 py-2.5 pr-3.5 text-sm font-medium text-brand-muted transition-apple hover:bg-[color:var(--discord-hover-bg)] group-hover:justify-start group-hover:px-3",
             labelsHidden && "justify-center px-2"
           )}
         >
           <span className="text-base leading-none" aria-hidden>
             ❓
           </span>
-          {!labelsHidden ? t("helpCenter") : <span className="sr-only">{t("helpCenter")}</span>}
+          {!labelsHidden ? (
+            <span className="hidden group-hover:inline">{t("helpCenter")}</span>
+          ) : (
+            <span className="sr-only">{t("helpCenter")}</span>
+          )}
         </Link>
       </div>
     </div>
