@@ -75,7 +75,7 @@ export function OrbAnimationOverlay({
         key={playKey}
         src={OPENING_ORB_PATH}
         alt=""
-        className="marketing-orb-breathe h-auto w-[min(92vw,28rem)] sm:w-[min(88vw,34rem)] md:w-[min(84vw,40rem)] lg:w-[min(78vw,48rem)]"
+        className="h-auto w-[min(92vw,28rem)] sm:w-[min(88vw,34rem)] md:w-[min(84vw,40rem)] lg:w-[min(78vw,48rem)]"
         decoding="async"
       />
     </div>
