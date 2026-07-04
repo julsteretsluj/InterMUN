@@ -118,12 +118,10 @@ export function AdvisorDashboardSidebar() {
     []
   );
 
-  const {
-    expandedFolderId,
-    onFolderPointerEnter,
-    onFolderPointerLeave,
-    onFolderToggle,
-  } = useNavFolderExpansion(folderGroups, (item) => navItemIsActive(pathname, item.href));
+  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
+    folderGroups,
+    (item) => navItemIsActive(pathname, item.href)
+  );
 
   return (
     <nav
@@ -137,8 +135,6 @@ export function AdvisorDashboardSidebar() {
           compact
           expanded={expandedFolderId === folderId}
           hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item.href))}
-          onPointerEnter={() => onFolderPointerEnter(folderId)}
-          onPointerLeave={onFolderPointerLeave}
           onToggle={() => onFolderToggle(folderId)}
         >
           {items.map((item, index) => (

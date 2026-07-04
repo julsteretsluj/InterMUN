@@ -257,12 +257,10 @@ export function ChairDashboardSidebar({
     [navItems]
   );
 
-  const {
-    expandedFolderId,
-    onFolderPointerEnter,
-    onFolderPointerLeave,
-    onFolderToggle,
-  } = useNavFolderExpansion(folderGroups, (item) => navItemIsActive(pathname, item));
+  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
+    folderGroups,
+    (item) => navItemIsActive(pathname, item)
+  );
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -298,8 +296,6 @@ export function ChairDashboardSidebar({
             labelsHidden={labelsHidden}
             expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (item) => navItemIsActive(pathname, item))}
-            onPointerEnter={() => onFolderPointerEnter(folderId)}
-            onPointerLeave={onFolderPointerLeave}
             onToggle={() => onFolderToggle(folderId)}
           >
             {items.map((item) => (

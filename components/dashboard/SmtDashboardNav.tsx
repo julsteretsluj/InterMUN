@@ -150,12 +150,10 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
     []
   );
 
-  const {
-    expandedFolderId,
-    onFolderPointerEnter,
-    onFolderPointerLeave,
-    onFolderToggle,
-  } = useNavFolderExpansion(folderGroups, (item) => smtNavItemIsActive(pathname, item));
+  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
+    folderGroups,
+    (item) => smtNavItemIsActive(pathname, item)
+  );
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -188,8 +186,6 @@ export function SmtDashboardSidebar({ hubLabel }: { hubLabel: string }) {
             compact
             expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (item) => smtNavItemIsActive(pathname, item))}
-            onPointerEnter={() => onFolderPointerEnter(folderId)}
-            onPointerLeave={onFolderPointerLeave}
             onToggle={() => onFolderToggle(folderId)}
           >
             {items.map((item) => (

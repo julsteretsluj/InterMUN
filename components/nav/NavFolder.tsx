@@ -11,7 +11,7 @@ import {
 } from "@/lib/nav-folder-groups";
 import { cn } from "@/lib/utils";
 
-/** Accordion state: only one folder open — active route, or hover/click preview. */
+/** Accordion state: one folder open at a time; expand/collapse only via click. */
 export function useNavFolderExpansion<T>(
   folderGroups: readonly NavFolderGroup<T>[],
   isItemActive: (item: T) => boolean
@@ -25,40 +25,32 @@ export function useNavFolderExpansion<T>(
     return folderGroups[0]?.folderId ?? null;
   }, [folderGroups, isItemActive]);
 
-  const [hoveredFolderId, setHoveredFolderId] = useState<NavFolderId | null>(null);
   const [pinState, setPinState] = useState<{
-    folderId: NavFolderId;
+    expandedFolderId: NavFolderId | null;
     activeAtPin: NavFolderId | null;
   } | null>(null);
 
-  const pinnedFolderId =
-    pinState && pinState.activeAtPin === activeFolderId ? pinState.folderId : null;
-
-  const expandedFolderId = hoveredFolderId ?? pinnedFolderId ?? activeFolderId;
-
-  const onFolderPointerEnter = useCallback((folderId: NavFolderId) => {
-    setHoveredFolderId(folderId);
-  }, []);
-
-  const onFolderPointerLeave = useCallback(() => {
-    setHoveredFolderId(null);
-  }, []);
+  const expandedFolderId =
+    pinState && pinState.activeAtPin === activeFolderId
+      ? pinState.expandedFolderId
+      : activeFolderId;
 
   const onFolderToggle = useCallback(
     (folderId: NavFolderId) => {
-      setPinState((prev) =>
-        prev?.folderId === folderId
-          ? null
-          : { folderId, activeAtPin: activeFolderId }
-      );
+      setPinState((prev) => {
+        const currentExpanded =
+          prev && prev.activeAtPin === activeFolderId
+            ? prev.expandedFolderId
+            : activeFolderId;
+        const nextExpanded = currentExpanded === folderId ? null : folderId;
+        return { expandedFolderId: nextExpanded, activeAtPin: activeFolderId };
+      });
     },
     [activeFolderId]
   );
 
   return {
     expandedFolderId,
-    onFolderPointerEnter,
-    onFolderPointerLeave,
     onFolderToggle,
   };
 }
@@ -69,8 +61,6 @@ export function NavFolder({
   hasActiveChild = false,
   labelsHidden = false,
   compact = false,
-  onPointerEnter,
-  onPointerLeave,
   onToggle,
   children,
 }: {
@@ -81,8 +71,6 @@ export function NavFolder({
   labelsHidden?: boolean;
   /** Aspire sidebar: labels show on parent `group-hover` */
   compact?: boolean;
-  onPointerEnter?: () => void;
-  onPointerLeave?: () => void;
   onToggle?: () => void;
   children: ReactNode;
 }) {
@@ -92,11 +80,7 @@ export function NavFolder({
   const label = t(meta.labelKey);
 
   return (
-    <div
-      className="nav-folder"
-      onMouseEnter={onPointerEnter}
-      onMouseLeave={onPointerLeave}
-    >
+    <div className="nav-folder">
       <button
         type="button"
         id={`${panelId}-trigger`}

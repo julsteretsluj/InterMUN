@@ -229,12 +229,10 @@ export function TabNav({
     [folderGroups, dockFolder]
   );
 
-  const {
-    expandedFolderId,
-    onFolderPointerEnter,
-    onFolderPointerLeave,
-    onFolderToggle,
-  } = useNavFolderExpansion(folderGroups, (tab) => tabInPath(pathname, tab.href));
+  const { expandedFolderId, onFolderToggle } = useNavFolderExpansion(
+    folderGroups,
+    (tab) => tabInPath(pathname, tab.href)
+  );
 
   if (variant === "aspire-sidebar") {
     return (
@@ -249,8 +247,6 @@ export function TabNav({
             compact
             expanded={expandedFolderId === folderId}
             hasActiveChild={folderHasActiveChild(items, (tab) => tabInPath(pathname, tab.href))}
-            onPointerEnter={() => onFolderPointerEnter(folderId)}
-            onPointerLeave={onFolderPointerLeave}
             onToggle={() => onFolderToggle(folderId)}
           >
             {items.map((tab) => (
