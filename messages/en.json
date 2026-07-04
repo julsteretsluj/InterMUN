@@ -3782,5 +3782,104 @@
       "alreadyRunning": "Timer is already running.",
       "runningForCommittee": "Timer running for the committee."
     }
+  },
+  "marketing": {
+    "metaTitle": "{app} — Model United Nations platform",
+    "metaDescription": "Run your MUN committee in the browser. Roll call, speakers list, motions, voting, documents, and delegate prep — one platform for chairs, delegates, secretariat, and advisors.",
+    "nav": {
+      "howItWorks": "How it works",
+      "features": "Features",
+      "about": "About",
+      "signIn": "Sign in",
+      "getStarted": "Get started"
+    },
+    "hero": {
+      "eyebrow": "Model United Nations platform",
+      "title": "MUN committees,",
+      "titleEmphasis": "done right.",
+      "subtitle": "The most complete way to chair, delegate, and run a conference — roll call to final gavel, in one browser-based workspace.",
+      "ctaStart": "Start your conference",
+      "ctaJoin": "Join a session",
+      "bullet1": "No downloads required",
+      "bullet2": "Built for chairs, delegates, and secretariat",
+      "bullet3": "Works on any device"
+    },
+    "steps": {
+      "eyebrow": "How it works",
+      "title": "Up and running in minutes",
+      "subtitle": "No installs, no IT setup. Open your browser, enter your conference code, and go.",
+      "step1Title": "Create or join a conference",
+      "step1Description": "Secretariat sets up the event and committees. Delegates and chairs enter the conference code, choose a role, and create an account.",
+      "step2Title": "Enter your committee",
+      "step2Description": "Pass the event, room, and committee gates with codes from organisers. Pick your country or press seat from the allocation matrix.",
+      "step3Title": "Run the session",
+      "step3Description": "Chairs manage roll call, speakers, motions, and voting. Delegates prep documents, draft resolutions, and participate in real time."
+    },
+    "chairs": {
+      "eyebrow": "For chairs",
+      "title": "Everything the dais needs to run committee",
+      "description": "One chair dashboard with every procedural tool — from opening session to awards scoring.",
+      "feature1Title": "Roll call & quorum",
+      "feature1Description": "Mark delegates present, present-and-voting, or absent. Quorum updates live for the whole committee.",
+      "feature2Title": "Speakers list & motions",
+      "feature2Description": "Manage the GSL queue, formal motions, points of order, and the motion floor with drag-to-reorder voting.",
+      "feature3Title": "Timers & digital room",
+      "feature3Description": "Per-speaker and total speaking time, reading time, and a dais-facing digital room with live placards.",
+      "feature4Title": "Awards & scoring",
+      "feature4Description": "Score every delegate on the rubric, record nominations, and submit evidence before final awards."
+    },
+    "delegates": {
+      "eyebrow": "For delegates",
+      "title": "Prep, debate, and collaborate in one place",
+      "description": "From position papers to operative clauses — every delegate workflow lives beside the live committee room.",
+      "feature1Title": "Documents & position papers",
+      "feature1Description": "Upload prep materials, access official committee documents, and follow the position paper guide.",
+      "feature2Title": "Resolutions & amendments",
+      "feature2Description": "Draft preambulatory and operative clauses, suggest amendments, and track the resolution workflow.",
+      "feature3Title": "Delegation notes & chats",
+      "feature3Description": "Coordinate with your bloc, send POIs and POCs, and message your committee with chair moderation.",
+      "feature4Title": "Speeches & stances",
+      "feature4Description": "Write speech drafts, map country stances on a heatmap, and collect trusted research sources."
+    },
+    "smt": {
+      "eyebrow": "For secretariat",
+      "title": "Oversee the whole conference",
+      "description": "Secretariat tools to configure committees, manage allocations, and monitor every chamber in real time.",
+      "feature1Title": "Live committee oversight",
+      "feature1Description": "Watch roll call, speakers, and session status across every committee from one secretariat dashboard.",
+      "feature2Title": "Allocations & room codes",
+      "feature2Description": "Build the allocation matrix, set committee gate codes, invite dais chairs, and manage placard passwords.",
+      "feature3Title": "Awards review",
+      "feature3Description": "Review chair nominations, approve Best Delegate selections, and keep awards consistent across chambers.",
+      "feature4Title": "Event configuration",
+      "feature4Description": "Create sessions and topics, configure newsroom and press corps feeds, and track delegate milestones."
+    },
+    "platform": {
+      "eyebrow": "Platform-wide",
+      "title": "More than committee floor control",
+      "description": "InterMUN connects procedural tools with prep, media, and archives — so nothing falls through the cracks.",
+      "feature1Title": "31 languages",
+      "feature1Description": "Delegates and chairs can switch interface language anytime — built for international conferences.",
+      "feature2Title": "Newsroom & press corps",
+      "feature2Description": "Live UN headlines and press corps surfaces keep media delegates and observers in the loop.",
+      "feature3Title": "Session history",
+      "feature3Description": "Read-only archives of past sessions so delegates and chairs can review what happened on the floor.",
+      "feature4Title": "Advisor oversight",
+      "feature4Description": "School advisors monitor linked delegates, forward guidance, and track documents and voting activity."
+    },
+    "about": {
+      "eyebrow": "About InterMUN",
+      "title": "Built for modern Model UN",
+      "paragraph1": "InterMUN is a browser-based Model United Nations platform designed to replace scattered spreadsheets, chat threads, and paper placards with one coordinated workspace.",
+      "paragraph2": "Chairs get procedural control that mirrors real committee flow. Delegates get structured prep and collaboration tools. Secretariat gets event-wide visibility without micromanaging every motion.",
+      "paragraph3": "Whether you are running a single committee or a multi-day conference, InterMUN keeps everyone on the same page — from the first roll call to the final gavel."
+    },
+    "footer": {
+      "ctaTitle": "Ready to run your committee?",
+      "ctaSubtitle": "Enter your conference code, choose your role, and step into session in minutes.",
+      "ctaStart": "Get started",
+      "ctaJoin": "Sign in",
+      "copyright": "© {year} InterMUN"
+    }
   }
 }

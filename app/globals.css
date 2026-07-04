@@ -1012,6 +1012,27 @@ html.dark ::selection {
     letter-spacing: -0.01em;
   }
 
+  @keyframes marketing-orb-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.07);
+    }
+  }
+
+  .marketing-orb-breathe {
+    animation: marketing-orb-breathe 2.4s var(--ease-apple) infinite;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marketing-orb-breathe {
+      animation: none;
+    }
+  }
+
   .mun-btn-danger {
     @apply border border-transparent px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 disabled:opacity-45;
     @apply [border-radius:var(--radius-pill)];
