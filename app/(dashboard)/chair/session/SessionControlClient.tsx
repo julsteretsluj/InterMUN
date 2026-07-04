@@ -369,23 +369,7 @@ export function SessionControlClient({
     canonicalConferenceId,
     rosterConferenceIdList
   );
-  useEffect(() => {
-    let cancelled = false;
-    void supabase
-      .from("amendments")
-      .select(
-        "id, resolution_id, amendment_type, target_clause_number, original_clause, proposed_clause, classification, delegate_country, submitter_allocation_id"
-      )
-      .eq("conference_id", floorConferenceId)
-      .eq("status", "approved")
-      .order("created_at", { ascending: true })
-      .then(({ data }) => {
-        if (!cancelled) setApprovedAmendments((data ?? []) as ApprovedAmendmentRow[]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [supabase, floorConferenceId]);
+  const [approvedAmendments, setApprovedAmendments] = useState<ApprovedAmendmentRow[]>([]);
   const displayConferenceTitle = useMemo(() => {
     const liveTopicRaw =
       debateTopicOptions?.find((topic) => topic.id === floorConferenceId)?.label?.trim() ?? "";
@@ -456,7 +440,6 @@ export function SessionControlClient({
   });
   const [resolutions, setResolutions] = useState<ResolutionRow[]>([]);
   const [resolutionClauses, setResolutionClauses] = useState<ClauseRow[]>([]);
-  const [approvedAmendments, setApprovedAmendments] = useState<ApprovedAmendmentRow[]>([]);
   const [sessionPoints, setSessionPoints] = useState<SessionPointRow[]>([]);
   const [pointDraftCode, setPointDraftCode] = useState<SessionPointCode>("parliamentary_inquiry");
   const [pointDraftDetail, setPointDraftDetail] = useState("");
@@ -480,6 +463,24 @@ export function SessionControlClient({
   const [euSessionPhase, setEuSessionPhase] = useState<EuSessionPhase>("roll_call");
   const [agendaTopicsRemaining, setAgendaTopicsRemaining] = useState<AgendaTopic[]>([]);
   const [agendaTopicsUsedNames, setAgendaTopicsUsedNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void supabase
+      .from("amendments")
+      .select(
+        "id, resolution_id, amendment_type, target_clause_number, original_clause, proposed_clause, classification, delegate_country, submitter_allocation_id"
+      )
+      .eq("conference_id", floorConferenceId)
+      .eq("status", "approved")
+      .order("created_at", { ascending: true })
+      .then(({ data }) => {
+        if (!cancelled) setApprovedAmendments((data ?? []) as ApprovedAmendmentRow[]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [supabase, floorConferenceId]);
 
   const { timer: liveTimerRow, remaining: liveRemaining } = useConferenceTimer(
     floorConferenceId,
@@ -954,7 +955,7 @@ export function SessionControlClient({
       { data: allocs },
       { data: r },
       { data: ann },
-      { data: t },
+      { data: timerRow },
       { data: unclosedRows },
       { data: setAgendaClosedRows },
       { data: recentClosedRows },
@@ -1248,20 +1249,20 @@ export function SessionControlClient({
       setMotionAudit([]);
     }
 
-    if (t) {
-      const tl = t.time_left_seconds ?? 0;
-      const tt = t.total_time_seconds ?? 0;
-      const tr = t as {
+    if (timerRow) {
+      const tl = timerRow.time_left_seconds ?? 0;
+      const tt = timerRow.total_time_seconds ?? 0;
+      const tr = timerRow as {
         per_speaker_mode?: boolean | null;
         is_running?: boolean | null;
         vote_item_id?: string | null;
         eu_timer_meta?: unknown;
       };
       const vid = tr.vote_item_id ?? null;
-      const floorLabel = (t as { floor_label?: string | null }).floor_label ?? "";
+      const floorLabel = (timerRow as { floor_label?: string | null }).floor_label ?? "";
       setTimer({
-        current: t.current_speaker ?? "",
-        next: t.next_speaker ?? "",
+        current: timerRow.current_speaker ?? "",
+        next: timerRow.next_speaker ?? "",
         leftM: String(Math.floor(tl / 60)),
         leftS: String(tl % 60),
         totalM: String(Math.floor(tt / 60)),

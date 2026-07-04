@@ -197,7 +197,7 @@ export function ChairScheduledSessionsPanel({
         router.refresh();
       });
     },
-    [conferenceId, router]
+    [conferenceId, router, startTransition]
   );
 
   if (presets.length === 0 && milestones.length === 0) return null;
