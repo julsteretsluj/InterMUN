@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { NominationRubricType } from "@/lib/seamuns-award-scoring";
 import { evaluateChairAwardSubmissionReadiness } from "@/lib/award-submission";
-import { evaluateDelegateMatrixReadiness } from "@/lib/award-participation-scoring";
+import { fetchScorableDelegateProfileIds, getCommitteeDelegateMatrixStatus } from "@/lib/seated-delegates-for-awards";
 import { getCommitteeAwardScope, type CommitteeAwardScope } from "@/lib/conference-committee-canonical";
 
 type OpenNomRow = {
@@ -17,7 +17,7 @@ async function seatedDelegatesCountForSiblingCommittees(
   supabase: SupabaseClient,
   siblingConferenceIds: string[]
 ): Promise<number> {
-  const ids = await seatedDelegateProfileIdsForSiblingCommittees(supabase, siblingConferenceIds);
+  const ids = await fetchScorableDelegateProfileIds(supabase, siblingConferenceIds);
   return ids.length;
 }
 
@@ -25,16 +25,7 @@ async function seatedDelegateProfileIdsForSiblingCommittees(
   supabase: SupabaseClient,
   siblingConferenceIds: string[]
 ): Promise<string[]> {
-  if (siblingConferenceIds.length === 0) return [];
-  const { data: allocRows } = await supabase
-    .from("allocations")
-    .select("user_id")
-    .in("conference_id", siblingConferenceIds)
-    .not("user_id", "is", null);
-  const uids = [...new Set((allocRows ?? []).map((r) => r.user_id).filter(Boolean))] as string[];
-  if (uids.length === 0) return [];
-  const { data: seatProfiles } = await supabase.from("profiles").select("id, role").in("id", uids);
-  return (seatProfiles ?? []).filter((p) => p.role !== "chair").map((p) => p.id);
+  return fetchScorableDelegateProfileIds(supabase, siblingConferenceIds);
 }
 
 /** Collapse duplicate draft rows across topic-level conference ids onto the canonical committee row. */
@@ -156,17 +147,16 @@ export async function promoteCommitteeDraftsToPending(
 
   const delegateIds = await seatedDelegateProfileIdsForSiblingCommittees(supabase, scope.siblingConferenceIds);
   if (delegateIds.length > 0) {
-    const { data: mxRows } = await supabase
-      .from("award_participation_scores")
-      .select("subject_profile_id, rubric_scores")
-      .eq("committee_conference_id", canonicalId)
-      .eq("scope", "delegate_by_chair");
-    const mxOk = evaluateDelegateMatrixReadiness(delegateIds, mxRows ?? []);
-    if (!mxOk.ok) {
+    const mxStatus = await getCommitteeDelegateMatrixStatus(
+      supabase,
+      canonicalId,
+      scope.siblingConferenceIds
+    );
+    if (!mxStatus.ok) {
       if (options.requireCompleteForIncomplete) {
         return {
           ok: false,
-          error: `Score every seated delegate in the matrix first (${mxOk.missing.length} still incomplete).`,
+          error: `Score every seated delegate in the matrix first (${mxStatus.missing.length} of ${mxStatus.total} still incomplete). Nomination status does not count.`,
         };
       }
       return { ok: true, didPromote: false, reason: "incomplete" };

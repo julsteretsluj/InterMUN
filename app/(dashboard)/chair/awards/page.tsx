@@ -23,6 +23,10 @@ import {
   rubricKeysForParticipationScope,
   rubricNumericTotalForKeys,
 } from "@/lib/award-participation-scoring";
+import {
+  isNonScorableAllocationRole,
+  scorableDelegatesFromAllocations,
+} from "@/lib/seated-delegates-for-awards";
 import { DelegateMatrixPanel } from "./DelegateMatrixPanel";
 import { ChairAwardsShell } from "@/components/chair/awards/ChairAwardsShell";
 import { AwardsRubricReference } from "@/components/awards/AwardsRubricReference";
@@ -53,8 +57,7 @@ function isChairAllocation(row: DelegateRow): boolean {
 
 /** Only delegates (country seats) are eligible for awards — never chairs, SMT, admins, or advisors. */
 function isNonDelegateAllocation(row: DelegateRow): boolean {
-  const role = profileEmbed(row)?.role?.toString().trim().toLowerCase();
-  return role === "chair" || role === "smt" || role === "admin" || role === "advisor";
+  return isNonScorableAllocationRole(profileEmbed(row)?.role);
 }
 
 function optionFromDelegateRow(d: DelegateRow): { userId: string; label: string } {
@@ -146,6 +149,7 @@ export default async function ChairAwardsPage() {
     dedupeAllocationsByUserId((delegates ?? []) as DelegateRow[])
   );
   const delegateRows = delegateRowsAll.filter((d) => !isNonDelegateAllocation(d));
+  const scorableDelegates = scorableDelegatesFromAllocations(delegateRowsAll as DelegateRow[]);
 
   const allocationIdsByUserId: Record<string, string[]> = {};
   for (const d of (delegates ?? []) as DelegateRow[]) {
@@ -174,9 +178,7 @@ export default async function ChairAwardsPage() {
   const baseNomineeOptions = delegateRows.filter((d) => !!d.user_id).map(optionFromDelegateRow);
   const seatedDelegatesCount = baseNomineeOptions.length;
 
-  const delegateProfileIdsForMatrix = delegateRows
-    .filter((d) => d.user_id)
-    .map((d) => d.user_id!) as string[];
+  const delegateProfileIdsForMatrix = scorableDelegates.map((d) => d.userId);
   const matrixEval = evaluateDelegateMatrixReadiness(
     delegateProfileIdsForMatrix,
     (participationDelegate ?? []) as { subject_profile_id: string | null; rubric_scores: Record<string, number> | null }[]
@@ -190,11 +192,7 @@ export default async function ChairAwardsPage() {
       scoresByProfileId[row.subject_profile_id] = row.rubric_scores as Record<string, number>;
     }
   }
-  const delegateMatrixPayload = delegateProfileIdsForMatrix.map((uid) => ({
-    userId: uid,
-    country: delegateByUserId[uid]?.country ?? "?",
-    displayName: delegateByUserId[uid]?.displayName ?? uid.slice(0, 8),
-  }));
+  const delegateMatrixPayload = scorableDelegates;
   const rankingDesc = [...delegateProfileIdsForMatrix]
     .map((uid) => ({
       uid,
@@ -354,6 +352,12 @@ export default async function ChairAwardsPage() {
             defaultGuided={!delegateMatrixComplete}
           />
         ) : null}
+        {!delegateMatrixComplete && delegateMatrixPayload.length > 0 ? (
+          <div className="rounded-xl border border-amber-400/35 bg-amber-50/60 px-4 py-3 text-sm text-amber-950 dark:bg-amber-950/20 dark:text-amber-100">
+            <p className="font-semibold">{tPage("matrixGate.title")}</p>
+            <p className="mt-1 text-xs leading-relaxed">{tPage("matrixGate.body")}</p>
+          </div>
+        ) : null}
         <ChairSubmitToSmtPanel
           committeeConferenceId={awardConferenceId}
           canSubmit={canSubmitToSmt}
@@ -435,6 +439,7 @@ export default async function ChairAwardsPage() {
                     nominationRowId={existing?.id ?? null}
                     criteria={type.criteria}
                     locked={existing?.status === "pending"}
+                    nominationsLocked={!delegateMatrixComplete}
                     floorActivityByProfileId={floorActivityByProfileId}
                   />
                 );

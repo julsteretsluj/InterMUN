@@ -2318,6 +2318,10 @@
           "nominee": "Calon Perwakilan Terbaik Keseluruhan"
         }
       }
+    },
+    "matrixGate": {
+      "title": "Finish the delegate matrix before nominations",
+      "body": "Every linked country seat must have a complete session rubric in the matrix above — whether or not you plan to nominate that delegate for an award."
     }
   },
   "chairAwardsDelegateMatrix": {

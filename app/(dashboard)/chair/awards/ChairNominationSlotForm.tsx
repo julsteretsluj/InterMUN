@@ -40,6 +40,8 @@ type Props = {
   criteria: RubricCriterion[];
   /** Submitted batch to SMT — no edits or autosave. */
   locked?: boolean;
+  /** Block nomination edits until every seated delegate has a matrix score. */
+  nominationsLocked?: boolean;
   floorActivityByProfileId?: Record<string, DelegateFloorActivity>;
 };
 
@@ -103,8 +105,10 @@ export function ChairNominationSlotForm({
   nominationRowId,
   criteria,
   locked = false,
+  nominationsLocked = false,
   floorActivityByProfileId = {},
 }: Props) {
+  const formDisabled = locked || nominationsLocked;
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
@@ -156,7 +160,7 @@ export function ChairNominationSlotForm({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (locked) return;
+    if (formDisabled) return;
     const form = e.currentTarget;
     setSubmitMessage(null);
     setAutosaveMessage(null);
@@ -191,7 +195,7 @@ export function ChairNominationSlotForm({
   }
 
   useEffect(() => {
-    if (locked) return;
+    if (formDisabled) return;
     const id = window.setInterval(async () => {
       const form = formRef.current;
       if (!form) return;
@@ -211,7 +215,7 @@ export function ChairNominationSlotForm({
       }
     }, AUTOSAVE_MS);
     return () => window.clearInterval(id);
-  }, [keys, locked, nominationType, rank, router, slotRequired]);
+  }, [keys, formDisabled, nominationType, rank, router, slotRequired]);
 
   const formKey =
     nominationRowId ?? `draft-${committeeConferenceId}-${nominationType}-${rank}`;
@@ -257,9 +261,13 @@ export function ChairNominationSlotForm({
                 <p className="text-[0.65rem] text-emerald-800 dark:text-emerald-200/85 mt-1">
                   Submitted to SMT — editing locked.
                 </p>
+              ) : nominationsLocked ? (
+                <p className="text-[0.65rem] text-amber-900 dark:text-amber-200/90 mt-1">
+                  Complete the every-delegate scoring matrix above before editing nominations.
+                </p>
               ) : null}
             </div>
-            {!locked ? (
+            {!formDisabled ? (
             <button
               type="button"
               onClick={() => setMinimized(true)}
@@ -275,7 +283,7 @@ export function ChairNominationSlotForm({
         )}
       </div>
 
-      <div className={minimized && !locked ? "hidden" : "p-3 pt-3"}>
+      <div className={minimized && !formDisabled ? "hidden" : "p-3 pt-3"}>
       <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
         <input type="hidden" name="committee_conference_id" value={committeeConferenceId} />
         <input type="hidden" name="nomination_type" value={nominationType} />
@@ -287,7 +295,7 @@ export function ChairNominationSlotForm({
             value={nomineeId}
             onChange={(e) => setNomineeId(e.target.value)}
             required={slotRequired}
-            disabled={locked}
+            disabled={formDisabled}
             className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <option value="">{slotRequired ? "Select delegate" : "Leave blank for no submission"}</option>
@@ -311,7 +319,7 @@ export function ChairNominationSlotForm({
               criterion={criterion}
               initialScore={Number(scoreMap[criterion.key] ?? 0)}
               onScoreChange={onCriterionScore}
-              disabled={locked}
+              disabled={formDisabled}
             />
           ))}
           <p className="text-xs text-brand-muted pt-1">
@@ -332,8 +340,8 @@ export function ChairNominationSlotForm({
             defaultValue={evidenceNote ?? ""}
             rows={3}
             minLength={MIN_AWARD_EVIDENCE_CHARS}
-            required={!locked}
-            readOnly={locked}
+            required={!formDisabled}
+            readOnly={formDisabled}
             className="mt-1 w-full px-3 py-2 rounded-lg border border-white/15 bg-black/25 text-brand-navy placeholder:text-brand-muted/70 read-only:opacity-70"
             placeholder={`Cite concrete floor evidence (clauses drafted, compromises brokered, key interventions). At least ${MIN_AWARD_EVIDENCE_CHARS} characters — required before SMT can approve.`}
           />
@@ -341,11 +349,13 @@ export function ChairNominationSlotForm({
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="submit"
-            disabled={isSaving || locked}
+            disabled={isSaving || formDisabled}
             className="px-4 py-2 rounded-lg bg-brand-accent text-white font-semibold disabled:opacity-60"
           >
             {locked
               ? "Locked"
+              : nominationsLocked
+                ? "Matrix required first"
               : isSaving
                 ? "Saving…"
                 : slotRequired

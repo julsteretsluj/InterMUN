@@ -2287,12 +2287,16 @@
       "submissionRulePrefix": "Submission to SMT is manual (button below) or automatic after",
       "submissionRuleSuffix": "UTC when you next open this page (if all required slots are complete).",
       "steps": {
-        "step1": "Select a nominee for each required Top slot.",
-        "step2": "Pick exactly one band for every criterion row.",
-        "step3": "Add concise evidence from debate, drafting, and diplomacy.",
-        "step4": "Save required slots and add optional slots where applicable.",
+        "step1": "Score every seated delegate in the matrix (required for all, not only nominees).",
+        "step2": "Select a nominee for each required Top slot.",
+        "step3": "Pick exactly one band for every criterion row.",
+        "step4": "Add concise evidence from debate, drafting, and diplomacy.",
         "step5": "When ready, submit the full batch to SMT."
       }
+    },
+    "matrixGate": {
+      "title": "Finish the delegate matrix before nominations",
+      "body": "Every linked country seat must have a complete session rubric in the matrix above — whether or not you plan to nominate that delegate for an award."
     },
     "ranking": {
       "title": "Committee ranking (matrix totals)",
@@ -2337,7 +2341,7 @@
   },
   "chairAwardsDelegateMatrix": {
     "title": "Every delegate — session rubric (required)",
-    "intro": "Same six dimensions as committee Best Delegate nominations. You must score <strong>every seated delegate</strong> before submitting nominations to SMT ({completeCount}/{total} complete).",
+    "intro": "Same six dimensions as committee Best Delegate nominations. You must score <strong>every seated delegate</strong> in this matrix before nominations or SMT submit — including delegates you are not nominating ({completeCount}/{total} complete).",
     "complete": "Complete",
     "incomplete": "Incomplete",
     "saving": "Saving...",

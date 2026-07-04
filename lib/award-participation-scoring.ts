@@ -45,7 +45,7 @@ export function rubricNumericTotalForKeys(
   return keys.reduce((s, k) => s + Number(scores[k] ?? 0), 0);
 }
 
-/** Chairs must score every seated delegate (non-chair) before submitting nominations to SMT. */
+/** Chairs must score every seated delegate (nomination status does not matter) before submitting nominations to SMT. */
 export function evaluateDelegateMatrixReadiness(
   delegateProfileIds: string[],
   rows: { subject_profile_id: string | null; rubric_scores: Record<string, number> | null }[]

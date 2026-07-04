@@ -20,6 +20,7 @@ import { isSingleWinnerNominationType } from "@/lib/award-nomination-review";
 import { isPastAwardSubmissionDeadline } from "@/lib/award-submission";
 import { promoteCommitteeDraftsToPending } from "@/lib/award-committee-submit";
 import { getCommitteeAwardScope, resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import { getCommitteeDelegateMatrixStatus, fetchScorableDelegateProfileIds } from "@/lib/seated-delegates-for-awards";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
@@ -518,18 +519,20 @@ export async function submitChairTopNominationAction(
     return { ok: false, error: "SMT, admins, and advisors cannot receive award nominations." };
   }
 
+  const matrixStatus = await getCommitteeDelegateMatrixStatus(
+    auth.supabase,
+    committeeId,
+    siblingConferenceIds
+  );
+  if (!matrixStatus.ok) {
+    return {
+      ok: false,
+      error: `Score every seated delegate in the matrix first (${matrixStatus.missing.length} of ${matrixStatus.total} still incomplete). Award nominations do not replace the full-delegate matrix.`,
+    };
+  }
+
   if (nominationType === "committee_honourable_mention") {
-    const { data: allocRows } = await auth.supabase
-      .from("allocations")
-      .select("user_id")
-      .in("conference_id", siblingConferenceIds)
-      .not("user_id", "is", null);
-    const uids = [...new Set((allocRows ?? []).map((r) => r.user_id).filter(Boolean))] as string[];
-    let seatedCount = 0;
-    if (uids.length > 0) {
-      const { data: seatProfiles } = await auth.supabase.from("profiles").select("id, role").in("id", uids);
-      seatedCount = (seatProfiles ?? []).filter((p) => p.role !== "chair").length;
-    }
+    const seatedCount = (await fetchScorableDelegateProfileIds(auth.supabase, siblingConferenceIds)).length;
     const maxHmRank = seatedCount > 22 ? 3 : 2;
     if (rank > maxHmRank) {
       return { ok: false, error: "This Honourable Mention slot is not used for your committee size." };
