@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
+import { startScheduledCommitteeSessionAction } from "@/app/actions/committee-session";
 import { HelpButton } from "@/components/HelpButton";
 import {
   playTimerExpiryAlarm,
@@ -51,14 +52,14 @@ export function ChairScheduledSessionsPanel({
   milestones?: SeamunScheduleMilestone[];
 }) {
   const t = useTranslations("session.scheduledSessions");
-  const supabase = useMemo(() => createClient(), []);
+  const router = useRouter();
 
   const [selectedDay, setSelectedDay] = useState<1 | 2>(1);
   const [nowMs, setNowMs] = useState(() => Date.now());
   const [reminders, setReminders] = useState<ActiveReminder[]>([]);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [startingKey, setStartingKey] = useState<string | null>(null);
-  const [errorKey, setErrorKey] = useState<string | null>(null);
+  const [errorByKey, setErrorByKey] = useState<Record<string, string>>({});
   const [pending, startTransition] = useTransition();
   const timeoutsRef = useRef<number[]>([]);
 
@@ -170,36 +171,21 @@ export function ChairScheduledSessionsPanel({
   const startPreset = useCallback(
     (preset: SeamunPresetSession) => {
       const key = `${preset.day}-${preset.start}`;
-      setErrorKey(null);
+      setErrorByKey((prev) => {
+        const next = { ...prev };
+        delete next[key];
+        return next;
+      });
       setStartingKey(key);
       startTransition(async () => {
-        const nowIso = new Date().toISOString();
-        const payload = {
-          committee_session_started_at: nowIso,
-          committee_session_title: preset.title,
-          committee_session_duration_seconds: preset.durationSeconds,
-          committee_session_ends_at: null,
-          updated_at: nowIso,
-        };
-        const { data: existing } = await supabase
-          .from("procedure_states")
-          .select("id")
-          .eq("conference_id", conferenceId)
-          .maybeSingle();
-
-        const { error } = existing
-          ? await supabase.from("procedure_states").update(payload).eq("conference_id", conferenceId)
-          : await supabase.from("procedure_states").insert({
-              conference_id: conferenceId,
-              state: "debate_open",
-              debate_closed: false,
-              motion_floor_open: false,
-              ...payload,
-            });
-
+        const res = await startScheduledCommitteeSessionAction({
+          conferenceId,
+          title: preset.title,
+          durationSeconds: preset.durationSeconds,
+        });
         setStartingKey(null);
-        if (error) {
-          setErrorKey(key);
+        if (res.error) {
+          setErrorByKey((prev) => ({ ...prev, [key]: res.error! }));
           return;
         }
         setReminders((prev) =>
@@ -208,9 +194,10 @@ export function ChairScheduledSessionsPanel({
         window.dispatchEvent(
           new CustomEvent(SESSION_STATE_UPDATED_EVENT, { detail: { conferenceId } })
         );
+        router.refresh();
       });
     },
-    [supabase, conferenceId]
+    [conferenceId, router]
   );
 
   if (presets.length === 0 && milestones.length === 0) return null;
@@ -256,15 +243,22 @@ export function ChairScheduledSessionsPanel({
                 <p className="text-sm text-brand-navy/90">{reminderBody(reminder)}</p>
               </div>
               {reminder.category === "session" && reminder.preset ? (
-                <button
-                  type="button"
-                  onClick={() => startPreset(reminder.preset!)}
-                  disabled={pending}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95 disabled:opacity-50"
-                >
-                  <span aria-hidden>▶️</span>
-                  {t("startNow")}
-                </button>
+                <div className="flex w-full flex-col gap-1 sm:w-auto sm:min-w-[8rem]">
+                  <button
+                    type="button"
+                    onClick={() => startPreset(reminder.preset!)}
+                    disabled={pending}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand-accent px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95 disabled:opacity-50"
+                  >
+                    <span aria-hidden>▶️</span>
+                    {t("startNow")}
+                  </button>
+                  {errorByKey[`${reminder.preset.day}-${reminder.preset.start}`] ? (
+                    <span className="text-xs text-rose-500" role="alert">
+                      {errorByKey[`${reminder.preset.day}-${reminder.preset.start}`]}
+                    </span>
+                  ) : null}
+                </div>
               ) : null}
               <button
                 type="button"
@@ -364,8 +358,10 @@ export function ChairScheduledSessionsPanel({
                   <span aria-hidden>▶️</span>
                   {startingKey === key ? t("starting") : t("start")}
                 </button>
-                {errorKey === key ? (
-                  <span className="w-full text-xs text-rose-500">{t("startFailed")}</span>
+                {errorByKey[key] ? (
+                  <span className="w-full text-xs text-rose-500" role="alert">
+                    {errorByKey[key]}
+                  </span>
                 ) : null}
               </li>
             );
