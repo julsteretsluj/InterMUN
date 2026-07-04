@@ -1,19 +1,30 @@
-export const OPENING_ORB_PATH = "/marketing/opening-orb.gif?v=1";
-/** One full GIF loop (~27 frames @ ~2.8s). */
-export const ORB_ANIMATION_HOLD_MS = 3000;
+export const OPENING_ORB_BASE = "/marketing/opening-orb.gif";
+/** One full GIF loop — tuned to opening-orb.gif (~3.1s). */
+export const ORB_ANIMATION_HOLD_MS = 3200;
 export const ORB_ANIMATION_FADE_MS = 800;
-/** Shared across marketing home + auth — set only after a full play-through. */
-export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v4";
+/** Bump when playback logic changes so users get a fresh auto-intro. */
+export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v5";
 
+/** Cache-busted URL so each play remounts a fresh GIF decode. */
+export function openingOrbUrl(playKey: number): string {
+  return `${OPENING_ORB_BASE}?v=2&play=${playKey}`;
+}
+
+/** Warm the HTTP cache without decoding/playing the GIF in an Image node. */
 export function preloadOpeningOrb(): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
 
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve();
-    img.src = OPENING_ORB_PATH;
-  });
+  return fetch(openingOrbUrl(0), { cache: "force-cache" })
+    .then(() => undefined)
+    .catch(() => undefined);
+}
+
+/** Load an isolated object URL so the visible <img> always animates from frame 0. */
+export async function loadOpeningOrbObjectUrl(playKey: number): Promise<string> {
+  const response = await fetch(openingOrbUrl(playKey), { cache: "no-store" });
+  if (!response.ok) throw new Error("opening-orb fetch failed");
+  const blob = await response.blob();
+  return URL.createObjectURL(blob);
 }
 
 export function hasSeenOpeningOrb(): boolean {
@@ -32,3 +43,6 @@ export function markOpeningOrbSeen(): void {
     /* private browsing */
   }
 }
+
+/** @deprecated Use openingOrbUrl(playKey) */
+export const OPENING_ORB_PATH = openingOrbUrl(0);

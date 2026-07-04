@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PublicPageControls } from "@/components/PublicPageControls";
 import { getTranslations } from "next-intl/server";
 import { MarketingOrbTrigger } from "@/components/marketing/MarketingOrbTrigger";
-import { OPENING_ORB_PATH } from "@/lib/opening-orb";
+import { openingOrbUrl } from "@/lib/opening-orb";
 import { getAppName } from "@/lib/branding";
 
 export default async function MarketingLayout({
@@ -15,7 +15,7 @@ export default async function MarketingLayout({
 
   return (
     <div className="marketing-shell relative min-h-screen bg-brand-cream text-brand-navy dark:bg-[var(--color-bg-page)]">
-      <link rel="preload" href={OPENING_ORB_PATH} as="image" />
+      <link rel="preload" href={openingOrbUrl(0)} as="image" />
       <header className="marketing-header relative z-10 border-b backdrop-blur-md">
         <div className="mun-marketing-rainbow-bar" aria-hidden />
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">

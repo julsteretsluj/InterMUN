@@ -20,6 +20,7 @@ import {
   Vote,
 } from "lucide-react";
 import { BrandWordmark } from "@/components/BrandWordmark";
+import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
 import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
 import { INQUIRY_EMAIL } from "@/lib/branding";
 import {
@@ -427,17 +428,25 @@ export async function MarketingHome() {
 
       <section id="contact" className="scroll-mt-24 border-t border-[var(--hairline)] bg-[var(--material-thin)] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-4 md:px-6">
-          <div className="mun-marketing-contact-card text-center">
-            <p className="mun-marketing-eyebrow">{t("contact.eyebrow")}</p>
-            <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("contact.title")}</h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{t("contact.description")}</p>
-            <a
-              href={`mailto:${INQUIRY_EMAIL}`}
-              className="mt-6 inline-flex items-center justify-center rounded-full border border-[var(--hairline)] bg-[var(--material-thin)] px-6 py-3 font-mono text-sm font-semibold tracking-wide text-brand-navy transition hover:border-[color-mix(in_srgb,var(--accent)_40%,var(--hairline))] hover:text-[var(--accent)]"
-              aria-label={t("contact.emailAria")}
-            >
-              {INQUIRY_EMAIL}
-            </a>
+          <div className="mun-marketing-contact-card">
+            <div className="text-center">
+              <p className="mun-marketing-eyebrow">{t("contact.eyebrow")}</p>
+              <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("contact.title")}</h2>
+              <p className="mt-4 text-base leading-relaxed text-brand-muted md:text-lg">{t("contact.description")}</p>
+            </div>
+            <div className="mt-8 border-t border-[var(--hairline)] pt-8">
+              <ConferenceInquiryForm />
+            </div>
+            <p className="mt-6 text-center text-sm text-brand-muted">
+              {t("contact.directEmail")}{" "}
+              <a
+                href={`mailto:${INQUIRY_EMAIL}`}
+                className="font-mono font-semibold text-[var(--accent)] hover:underline"
+                aria-label={t("contact.emailAria")}
+              >
+                {INQUIRY_EMAIL}
+              </a>
+            </p>
           </div>
         </div>
       </section>

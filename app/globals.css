@@ -1638,3 +1638,8 @@ html.colorblind-mode .schedule-swatch-session {
     color-mix(in srgb, var(--marketing-chamber) 88%, #000000) 100%
   );
 }
+
+/* Full-viewport opening orb (marketing + auth intro) */
+.marketing-opening-orb {
+  display: block;
+}

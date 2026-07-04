@@ -69,10 +69,7 @@ export function InterMunEmblem({
         <img
           src={INTERMUN_EMBLEM_LIGHT_PATH}
           alt={alt}
-          className={cn(
-            lightWordmarkClasses(className),
-            "drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)]"
-          )}
+          className={cn(lightWordmarkClasses(className), "aspect-square")}
           decoding="async"
         />
       </span>

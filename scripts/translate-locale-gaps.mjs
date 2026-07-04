@@ -146,6 +146,17 @@ async function main() {
   const dryRun = args.includes("--dry-run");
   const localeArg = args.find((a) => a.startsWith("--locale="));
   const onlyLocale = localeArg ? localeArg.split("=")[1]?.trim() : null;
+  const prefixArg = args.find((a) => a.startsWith("--prefix="));
+  const pathPrefixes = prefixArg
+    ? prefixArg
+        .split("=")[1]
+        ?.split(",")
+        .map((p) => p.trim())
+        .filter(Boolean)
+    : null;
+
+  const matchesPrefix = (p) =>
+    !pathPrefixes || pathPrefixes.some((prefix) => p === prefix || p.startsWith(`${prefix}.`));
 
   const enPath = path.join(messagesDir, "en.json");
   const en = JSON.parse(await fs.readFile(enPath, "utf8"));
@@ -167,6 +178,7 @@ async function main() {
     const gaps = [];
     for (const { path: p, value: enVal } of enFlat) {
       if (typeof enVal !== "string") continue;
+      if (!matchesPrefix(p)) continue;
       const locVal = getDeep(locJson, p);
       if (locVal === undefined) {
         gaps.push({ path: p, value: enVal });
