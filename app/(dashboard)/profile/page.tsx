@@ -13,7 +13,6 @@ import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
-import { LanguageSwitcher } from "@/components/i18n/LanguageSwitcher";
 import {
   PROFILE_DELEGATE_QUICK_LINK_HREF_ORDER,
   sortNavByHrefPriority,
@@ -449,9 +448,6 @@ export default async function ProfilePage({
 
   return (
     <MunPageShell title={t("profile")}>
-      <div className="mb-4 flex justify-end">
-        <LanguageSwitcher />
-      </div>
       {visibleTabs.length > 1 ? (
         <div className="mb-6 flex flex-wrap gap-1 border-b border-brand-navy/10" role="tablist" aria-label={tp("tabs.ariaLabel")}>
           {visibleTabs.map((id) => (
