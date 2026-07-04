@@ -114,7 +114,7 @@ INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('cf1
 INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('14ea60ec-a91f-5fae-bcc0-2cc03b7e1973', 'f304963e-97b0-5c16-8f5d-cf7127f9ea1c', NULL, 'United States');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('14ea60ec-a91f-5fae-bcc0-2cc03b7e1973', 'ECO-020', NOW());
 
--- Press Corps topic 1: 15 allocations
+-- Press Corps topic 1: 16 allocations
 INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('2259057c-e150-5229-9e99-469fdd19d93f', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Al Jazeera');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('2259057c-e150-5229-9e99-469fdd19d93f', 'PRE-001', NOW());
 INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('6e68df45-f03e-5721-81eb-53eec612d359', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'BBC News');
@@ -123,28 +123,30 @@ INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('7a59bf79-
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('7a59bf79-895e-5c62-8f0a-a9668504dd1e', 'PRE-003', NOW());
 INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('6514daf9-106c-5544-8675-6022a4a81915', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Fox News');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('6514daf9-106c-5544-8675-6022a4a81915', 'PRE-004', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('447786d7-9847-52e3-8bdb-de89c104a8a0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Reuters');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('447786d7-9847-52e3-8bdb-de89c104a8a0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'NPR');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('447786d7-9847-52e3-8bdb-de89c104a8a0', 'PRE-005', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('5d6bb885-8eff-565d-81bf-4c8a7f85deb9', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Russia Today');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('5d6bb885-8eff-565d-81bf-4c8a7f85deb9', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Reuters');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('5d6bb885-8eff-565d-81bf-4c8a7f85deb9', 'PRE-006', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('d0837958-0844-55b1-b996-02c2f95e4612', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Associated Press (AP)');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('d0837958-0844-55b1-b996-02c2f95e4612', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Russia Today');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('d0837958-0844-55b1-b996-02c2f95e4612', 'PRE-007', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('9f15f0e6-df2f-52f3-9d56-34f2b39368f0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Guardian');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('9f15f0e6-df2f-52f3-9d56-34f2b39368f0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Associated Press (AP)');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('9f15f0e6-df2f-52f3-9d56-34f2b39368f0', 'PRE-008', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('36a6c619-c80e-5026-bcc7-a0fa5cd711c0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Lancet');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('36a6c619-c80e-5026-bcc7-a0fa5cd711c0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Guardian');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('36a6c619-c80e-5026-bcc7-a0fa5cd711c0', 'PRE-009', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('fe9a14a1-1b7d-5c55-bc10-a4c765fdd5c5', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The New York Times');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('fe9a14a1-1b7d-5c55-bc10-a4c765fdd5c5', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Lancet');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('fe9a14a1-1b7d-5c55-bc10-a4c765fdd5c5', 'PRE-010', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('c4f64242-b7b5-5f97-8e31-bf829e982130', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Onion');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('c4f64242-b7b5-5f97-8e31-bf829e982130', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The New York Times');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('c4f64242-b7b5-5f97-8e31-bf829e982130', 'PRE-011', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('6f2e9588-0ead-57bd-bb51-1ea612bf4d14', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Straits Times');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('6f2e9588-0ead-57bd-bb51-1ea612bf4d14', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Onion');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('6f2e9588-0ead-57bd-bb51-1ea612bf4d14', 'PRE-012', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('de3734a6-2641-5ac6-912c-3c380a90c3d0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Wall Street Journal');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('de3734a6-2641-5ac6-912c-3c380a90c3d0', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'The Straits Times');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('de3734a6-2641-5ac6-912c-3c380a90c3d0', 'PRE-013', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('c544fe9b-4edd-5ff5-9a82-db99ef17ba94', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Wikileak');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('c544fe9b-4edd-5ff5-9a82-db99ef17ba94', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Wall Street Journal');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('c544fe9b-4edd-5ff5-9a82-db99ef17ba94', 'PRE-014', NOW());
-INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('bc914649-a27b-5018-baad-69189751b536', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Xinhua News Agency');
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('bc914649-a27b-5018-baad-69189751b536', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Wikileak');
 INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('bc914649-a27b-5018-baad-69189751b536', 'PRE-015', NOW());
+INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('6c7c9b33-9446-53b9-98f5-d125182e203d', '8a544b29-0a9f-5162-9db9-f2eab400ea0d', NULL, 'Xinhua News Agency');
+INSERT INTO allocation_gate_codes (allocation_id, code, updated_at) VALUES ('6c7c9b33-9446-53b9-98f5-d125182e203d', 'PRE-016', NOW());
 
 -- UNHRC topic 1: 30 allocations
 INSERT INTO allocations (id, conference_id, user_id, country) VALUES ('7275c934-8bc1-501f-8f60-12f354efc9a1', '997909f3-6e59-5c48-9490-e2a5e698d060', NULL, 'Argentina');

@@ -28,6 +28,58 @@ function friendlyProcedureStateError(message: string): string {
   return m;
 }
 
+function sessionStartedAtMatches(a: string, b: string): boolean {
+  const aMs = new Date(a).getTime();
+  const bMs = new Date(b).getTime();
+  return !Number.isNaN(aMs) && !Number.isNaN(bMs) && Math.abs(aMs - bMs) < 2000;
+}
+
+/** Backfill when the DB trigger did not open a row (e.g. stale open history). Idempotent. */
+async function ensureCommitteeSessionHistoryOpen(
+  db: SupabaseClient,
+  conferenceId: string,
+  title: string,
+  startedAt: string,
+  createdBy: string
+): Promise<{ error?: string }> {
+  const { data: openRow, error: readErr } = await db
+    .from("committee_session_history")
+    .select("id, started_at, title")
+    .eq("conference_id", conferenceId)
+    .is("ended_at", null)
+    .order("started_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (readErr) return { error: readErr.message };
+
+  if (
+    openRow &&
+    sessionStartedAtMatches(openRow.started_at, startedAt) &&
+    openRow.title.trim() === title.trim()
+  ) {
+    return {};
+  }
+
+  if (openRow) {
+    const closedAt = new Date().toISOString();
+    const { error: closeErr } = await db
+      .from("committee_session_history")
+      .update({ ended_at: closedAt, updated_at: closedAt })
+      .eq("id", openRow.id);
+    if (closeErr) return { error: closeErr.message };
+  }
+
+  const { error: insertErr } = await db.from("committee_session_history").insert({
+    conference_id: conferenceId,
+    title,
+    started_at: startedAt,
+    created_by: createdBy,
+  });
+  if (insertErr) return { error: insertErr.message };
+  return {};
+}
+
 async function chairCanManageCommittee(
   supabase: SupabaseClient,
   userId: string,
@@ -123,6 +175,17 @@ export async function startScheduledCommitteeSessionAction(input: {
 
   if (writeResult.error) {
     return { error: friendlyProcedureStateError(writeResult.error.message) };
+  }
+
+  const historyResult = await ensureCommitteeSessionHistoryOpen(
+    db,
+    canonicalId,
+    title,
+    now,
+    user.id
+  );
+  if (historyResult.error) {
+    return { error: friendlyProcedureStateError(historyResult.error) };
   }
 
   revalidatePath("/chair/session");

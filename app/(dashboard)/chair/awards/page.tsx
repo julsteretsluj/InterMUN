@@ -16,6 +16,7 @@ import { AWARD_SUBMISSION_DEADLINE_ISO } from "@/lib/award-submission";
 import {
   dedupeAllocationsByUserId,
   getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
   mergeNominationRowsForCommitteeDisplay,
 } from "@/lib/conference-committee-canonical";
 import {
@@ -37,6 +38,7 @@ export const dynamic = "force-dynamic";
 
 type DelegateRow = {
   id: string;
+  conference_id: string;
   user_id: string | null;
   country: string;
   profiles:
@@ -111,7 +113,7 @@ export default async function ChairAwardsPage() {
   const [{ data: delegates }, { data: nominations }, { data: participationDelegate }] = await Promise.all([
     supabase
       .from("allocations")
-      .select("id, user_id, country, profiles(name, role)")
+      .select("id, conference_id, user_id, country, profiles(name, role)")
       .in("conference_id", awardScope.siblingConferenceIds)
       .not("user_id", "is", null)
       .order("country", { ascending: true }),
@@ -132,7 +134,12 @@ export default async function ChairAwardsPage() {
   ]);
 
   const delegateRowsAll = sortRowsByAllocationCountry(
-    dedupeAllocationsByUserId((delegates ?? []) as DelegateRow[])
+    dedupeAllocationsByUserId(
+      mergeAllocationsAcrossSiblingConferences(
+        (delegates ?? []) as DelegateRow[],
+        awardConferenceId
+      )
+    ) as DelegateRow[]
   );
   const delegateRows = delegateRowsAll.filter((d) => !isNonDelegateAllocation(d));
   const scorableDelegates = scorableDelegatesFromAllocations(delegateRowsAll as DelegateRow[]);

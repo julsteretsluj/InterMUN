@@ -43,6 +43,15 @@ function normalizeCommitteeLabelForBucket(raw: string): string {
   return alias[s] ?? s;
 }
 
+/** Map session group tokens (DISEC, full committee titles, FWC, …) to one chamber tab key. */
+function chamberTabKeyFromGroupKey(groupKey: string): string {
+  const bucket = normalizeCommitteeLabelForBucket(groupKey);
+  if (bucket && bucket.length <= 32 && !bucket.includes(" - ")) {
+    return `chamber:${bucket.toUpperCase()}`;
+  }
+  return `chamber:${groupKey}`;
+}
+
 /**
  * Committee bucketing key: same *chamber* across topic rows (e.g. "ECOSOC — Topic A" vs "ECOSOC — Topic B"),
  * awards, allocation matrix, and DB `committee_tab_key` / peer RLS must stay aligned.
@@ -51,7 +60,7 @@ export function committeeTabKey(c: Pick<ConfRow, "id" | "name" | "committee" | "
   if (isSmtSecretariatConferenceRow(c)) return SMT_COMMITTEE_TAB_KEY;
   const hinted = committeeHintForSmtDaisPlan(c);
   const g = committeeSessionGroupKey(hinted ?? c.committee);
-  if (g) return `chamber:${g}`;
+  if (g) return chamberTabKeyFromGroupKey(g);
   const comm = c.committee?.trim();
   if (comm) return `c:${normalizeCommitteeLabelForBucket(comm)}`;
   const code = c.committee_code?.trim().toLowerCase();
@@ -348,5 +357,13 @@ export function mergeAllocationsAcrossSiblingConferences<
     else byCountryOnly.set(ck, prefer(prev, r));
   }
 
-  return [...byUser.values(), ...byCountryOnly.values()];
+  const combined = [...byUser.values(), ...byCountryOnly.values()];
+  const byCountryLabel = new Map<string, T>();
+  for (const r of combined) {
+    const ck = (r.country ?? "").trim().toLowerCase() || `__id:${r.id}`;
+    const prev = byCountryLabel.get(ck);
+    if (!prev) byCountryLabel.set(ck, r);
+    else byCountryLabel.set(ck, prefer(prev, r));
+  }
+  return [...byCountryLabel.values()];
 }

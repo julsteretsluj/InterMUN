@@ -6,7 +6,12 @@ import { setActiveConferenceContext } from "@/lib/set-active-conference-context"
 import { clearVerifiedConference } from "@/lib/committee-gate-cookie";
 import { clearAllocationCodeVerification } from "@/lib/allocation-code-gate-cookie";
 import { createAllocationSignupRequestAction } from "@/app/actions/allocationSignup";
-import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import {
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
+import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 
 type Params = {
   conference?: string;
@@ -46,6 +51,7 @@ export default async function AllocationSignupPage({
 
   const supabase = await createClient();
   const canonicalConferenceId = await resolveCanonicalCommitteeConferenceId(supabase, conferenceId);
+  const awardScope = await getCommitteeAwardScope(supabase, conferenceId);
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -58,11 +64,13 @@ export default async function AllocationSignupPage({
   if (!allocationId) {
     const { data: rows } = await supabase
       .from("allocations")
-      .select("id, country, user_id")
-      .eq("conference_id", canonicalConferenceId)
+      .select("id, country, user_id, conference_id")
+      .in("conference_id", awardScope.siblingConferenceIds)
       .order("country", { ascending: true });
 
-    const allocations = rows ?? [];
+    const allocations = sortRowsByAllocationCountry(
+      mergeAllocationsAcrossSiblingConferences(rows ?? [], canonicalConferenceId)
+    );
     const assignedToSelf = allocations.find((row) => row.user_id === user.id) ?? null;
     if (assignedToSelf) {
       await setActiveConferenceContext(supabase, canonicalConferenceId);

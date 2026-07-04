@@ -11,8 +11,7 @@ export type ChairRecipientOption = { id: string; name: string };
 export function buildAllocationRecipientOptions<
   T extends { id: string; country: string | null; user_id: string | null; conference_id: string },
 >(rows: T[], canonicalConferenceId: string): AllocationRecipientOption[] {
-  const assigned = rows.filter((a) => Boolean(a.user_id));
-  const merged = mergeAllocationsAcrossSiblingConferences(assigned, canonicalConferenceId);
+  const merged = mergeAllocationsAcrossSiblingConferences(rows, canonicalConferenceId);
   const deduped = dedupeAllocationsByUserId(merged);
   const byId = new Map<string, AllocationRecipientOption>();
   for (const a of deduped) {

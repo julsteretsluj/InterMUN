@@ -10,6 +10,11 @@ import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { getSmtDashboardSurface } from "@/lib/smt-dashboard-surface-cookie";
 import { isCrisisCommittee } from "@/lib/crisis-committee";
 import { sortCountryLabelsForDisplay } from "@/lib/allocation-display-order";
+import {
+  committeeTabKey,
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
+} from "@/lib/conference-committee-canonical";
 import { flagEmojiForCountryName } from "@/lib/country-flag-emoji";
 import { ProfileAwardsSummaryTabs } from "@/components/profile/ProfileAwardsSummaryTabs";
 import { NavPriorityBadge } from "@/components/NavPriorityBadge";
@@ -24,7 +29,6 @@ import { formatVoteTypeLabel } from "@/lib/i18n/vote-type-label";
 import { translateConferenceHeadline } from "@/lib/i18n/conference-headline";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { isDelegateDashboardCommitteeAllowlistedEmail } from "@/lib/delegate-dashboard-committee-allowlist";
-import { committeeTabKey, getCommitteeAwardScope } from "@/lib/conference-committee-canonical";
 
 type DashboardPickerConferenceRow = {
   id: string;
@@ -316,16 +320,20 @@ export default async function ProfilePage({
       siblingUnion.length > 0
         ? await supabase
             .from("allocations")
-            .select("id, conference_id, country")
+            .select("id, conference_id, country, user_id")
             .in("conference_id", siblingUnion)
             .order("country", { ascending: true })
-        : { data: [] as { id: string; conference_id: string; country: string | null }[] };
+        : { data: [] as { id: string; conference_id: string; country: string | null; user_id: string | null }[] };
 
     const allocationsByConferenceId: Record<string, { id: string; label: string }[]> = {};
     for (let i = 0; i < pickerIds.length; i++) {
       const pickerId = pickerIds[i]!;
-      const sib = new Set(scopes[i]!.siblingConferenceIds);
-      const rows = (allocRows ?? []).filter((r) => r.conference_id && sib.has(r.conference_id));
+      const scope = scopes[i]!;
+      const sib = new Set(scope.siblingConferenceIds);
+      const rows = mergeAllocationsAcrossSiblingConferences(
+        (allocRows ?? []).filter((r) => r.conference_id && sib.has(r.conference_id)),
+        scope.canonicalConferenceId
+      );
       allocationsByConferenceId[pickerId] = rows.map((row) => ({
         id: row.id,
         label: row.country?.trim() || row.id,
@@ -340,11 +348,20 @@ export default async function ProfilePage({
   }
 
   const { data: allocationRows } = activeConference?.id
-    ? await supabase
-        .from("allocations")
-        .select("country")
-        .eq("conference_id", activeConference.id)
-        .order("country", { ascending: true })
+    ? await (async () => {
+        const scope = await getCommitteeAwardScope(supabase, activeConference.id);
+        const { data } = await supabase
+          .from("allocations")
+          .select("id, country, conference_id, user_id")
+          .in("conference_id", scope.siblingConferenceIds)
+          .order("country", { ascending: true });
+        return {
+          data: mergeAllocationsAcrossSiblingConferences(
+            (data ?? []) as { id: string; country: string | null; user_id: string | null; conference_id: string }[],
+            scope.canonicalConferenceId
+          ),
+        };
+      })()
     : { data: [] as { country: string }[] };
   const { data: myAllocation } = activeConference?.id
     ? await supabase
