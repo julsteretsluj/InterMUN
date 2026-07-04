@@ -11,7 +11,9 @@ import {
 import { cn } from "@/lib/utils";
 
 import {
+  MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
+  marketingRollAttendanceButtonClass,
   PREVIEW_CARD,
   PREVIEW_HEADING,
   PREVIEW_LABEL,
@@ -56,11 +58,11 @@ function MarketingRollCallCard({
   const muted = onDarkSurface ? "text-white/70" : "text-brand-muted";
   const body = onDarkSurface ? "text-white" : "text-brand-navy";
   const initBtn = onDarkSurface
-    ? "rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20"
+    ? "marketing-chamber-init-btn rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20"
     : "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
 
   return (
-    <section className={cn("space-y-4", body)}>
+    <section className={cn("space-y-4", onDarkSurface && MARKETING_CHAMBER_PREVIEW, body)}>
       <div className="flex items-center justify-between gap-3">
         <h3 className={cn("font-display text-lg font-semibold", heading)}>
           ✅ {t("rollCallTracker")}
@@ -107,9 +109,13 @@ function MarketingRollCallCard({
                       type="button"
                       title={t(opt.titleKey)}
                       onClick={() => onSetAttendance(row.id, opt.value)}
-                      className={`rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition sm:text-sm ${
-                        active ? opt.activeClass : opt.inactiveClass
-                      }`}
+                      className={
+                        onDarkSurface
+                          ? marketingRollAttendanceButtonClass(opt.value, active)
+                          : `rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition sm:text-sm ${
+                              active ? opt.activeClass : opt.inactiveClass
+                            }`
+                      }
                     >
                       {t(opt.labelKey)}
                     </button>

@@ -178,7 +178,7 @@
     }
   },
   "sessionControlClient": {
-    "rollPresent": "Cadeau",
+    "rollPresent": "Aanwezig",
     "rollPresentTitle": "Aanwezig: kan zich van stemming onthouden",
     "rollPresentVoting": "Presenteren en stemmen",
     "rollPresentVotingTitle": "Aanwezig en stemmen – moet stemmen, kan zich niet onthouden",
@@ -3554,7 +3554,7 @@
       "rollPromptBodyMarkedAbsent": "Je bent momenteel gemarkeerd als afwezig. Vraag de voorzitter om u als Aanwezig te markeren als u wilt spreken en stemmen.",
       "rollPromptBodyChecking": "Uw rolstatus controleren...",
       "rollPromptSaving": "Besparing...",
-      "rollPromptPresent": "Cadeau",
+      "rollPromptPresent": "Aanwezig",
       "rollPromptPresentVoting": "Presenteren en stemmen"
     },
     "motionVoting": {

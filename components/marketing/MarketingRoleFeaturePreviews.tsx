@@ -19,7 +19,9 @@ import {
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
 import {
+  MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
+  marketingRollAttendanceButtonClass,
   PREVIEW_CARD,
   PREVIEW_HEADING,
   PREVIEW_LABEL,
@@ -59,7 +61,7 @@ export function ChairRollCallQuorumDemo() {
   const quorumMet = present >= Math.ceil(total / 2);
 
   return (
-    <div className="space-y-4 text-white">
+    <div className={cn("space-y-4 text-white", MARKETING_CHAMBER_PREVIEW)}>
       <div className="flex items-center justify-between gap-2">
         <h3 className="font-display text-lg font-semibold text-white">✅ {tc("rollCallTracker")}</h3>
         <span
@@ -91,9 +93,9 @@ export function ChairRollCallQuorumDemo() {
                         prev.map((r) => (r.id === row.id ? { ...r, status: opt.value } : r))
                       )
                     }
-                    className={cn(
-                      "rounded-lg border px-2 py-1 text-xs font-semibold",
-                      row.status === opt.value ? opt.activeClass : opt.inactiveClass
+                    className={marketingRollAttendanceButtonClass(
+                      opt.value,
+                      row.status === opt.value
                     )}
                   >
                     {tc(opt.labelKey)}

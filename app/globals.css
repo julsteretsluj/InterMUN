@@ -1494,6 +1494,23 @@ html.colorblind-mode .schedule-swatch-session {
   padding: 1.25rem;
 }
 
+/* Dark chamber previews sit inside light marketing shell — force readable copy. */
+.marketing-shell .mun-chamber-frame-dark {
+  color: #f4f4f5;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview :where(h3, h4, span, li) {
+  color: #ffffff;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview p {
+  color: color-mix(in srgb, #ffffff 68%, transparent);
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-chamber-preview .marketing-chamber-init-btn {
+  color: #ffffff;
+}
+
 .marketing-shell .mun-gate-flow {
   position: relative;
   list-style: none;

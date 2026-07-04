@@ -1,3 +1,31 @@
+import type { RollAttendance } from "@/lib/roll-attendance";
+
+/** Root class for roll-call / chair demos inside `mun-chamber-frame-dark`. */
+export const MARKETING_CHAMBER_PREVIEW = "marketing-chamber-preview";
+
+/** Roll-call buttons on dark chamber glass — always light label text. */
+const ROLL_BTN_ON_DARK: Record<RollAttendance, { active: string; inactive: string }> = {
+  present_abstain: {
+    active: "border-amber-400/70 bg-amber-500/45 text-amber-50 shadow-sm",
+    inactive: "border-amber-400/40 bg-amber-500/12 text-amber-100 hover:bg-amber-500/22",
+  },
+  present_voting: {
+    active: "border-emerald-400/70 bg-emerald-500/45 text-emerald-50 shadow-sm",
+    inactive: "border-emerald-400/40 bg-emerald-500/12 text-emerald-100 hover:bg-emerald-500/22",
+  },
+  absent: {
+    active: "border-rose-400/70 bg-rose-500/45 text-rose-50 shadow-sm",
+    inactive: "border-rose-400/40 bg-rose-500/12 text-rose-100 hover:bg-rose-500/22",
+  },
+};
+
+export function marketingRollAttendanceButtonClass(value: RollAttendance, active: boolean): string {
+  const pair = ROLL_BTN_ON_DARK[value];
+  return `marketing-roll-btn rounded-lg border px-2.5 py-1.5 text-xs font-semibold transition sm:text-sm ${
+    active ? pair.active : pair.inactive
+  }`;
+}
+
 /** Locked light-surface tokens for marketing demos (immune to dark mode). */
 export const PREVIEW_CARD =
   "rounded-2xl border border-zinc-200/90 bg-white p-4 text-zinc-900 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)] [color-scheme:light]";
