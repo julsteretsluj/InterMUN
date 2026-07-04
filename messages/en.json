@@ -2298,6 +2298,10 @@
       "title": "Finish the delegate matrix before nominations",
       "body": "Every linked country seat must have a complete session rubric in the matrix above — whether or not you plan to nominate that delegate for an award."
     },
+    "matrixChairOnly": {
+      "title": "Every-delegate matrix is chair-only",
+      "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
+    },
     "ranking": {
       "title": "Committee ranking (matrix totals)",
       "description": "Highest to lowest rubric sum (six session criteria x 8). Tie-break informally via evidence in nomination slots."
@@ -2341,6 +2345,8 @@
   },
   "chairAwardsDelegateMatrix": {
     "title": "Every delegate — session rubric (required)",
+    "emptyBody": "No linked delegate seats yet. Assign delegates to country seats in the allocation matrix first — then use List or Guided here to score everyone (not only award nominees).",
+    "emptyCta": "Open allocation matrix",
     "intro": "Same six dimensions as committee Best Delegate nominations. You must score <strong>every seated delegate</strong> in this matrix before nominations or SMT submit — including delegates you are not nominating ({completeCount}/{total} complete).",
     "complete": "Complete",
     "incomplete": "Incomplete",

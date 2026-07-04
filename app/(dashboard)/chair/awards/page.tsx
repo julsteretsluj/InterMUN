@@ -51,10 +51,6 @@ function profileEmbed(row: DelegateRow) {
   return Array.isArray(p) ? p[0] : p;
 }
 
-function isChairAllocation(row: DelegateRow): boolean {
-  return profileEmbed(row)?.role === "chair";
-}
-
 /** Only delegates (country seats) are eligible for awards — never chairs, SMT, admins, or advisors. */
 function isNonDelegateAllocation(row: DelegateRow): boolean {
   return isNonScorableAllocationRole(profileEmbed(row)?.role);
@@ -109,16 +105,6 @@ export default async function ChairAwardsPage() {
   const awardConferenceId = awardScope.canonicalConferenceId;
 
   if (profile?.role === "chair") {
-    const { data: chairSeat } = await supabase
-      .from("allocations")
-      .select("id")
-      .in("conference_id", awardScope.siblingConferenceIds)
-      .eq("user_id", user.id)
-      .limit(1)
-      .maybeSingle();
-    if (!chairSeat?.id) {
-      redirect("/chair/allocation-matrix");
-    }
     await runChairAwardAutoSubmitIfDue(awardConferenceId);
   }
 
@@ -343,16 +329,21 @@ export default async function ChairAwardsPage() {
             <li>{tPage("intro.steps.step5")}</li>
           </ol>
         </div>
-        {profile?.role === "chair" && delegateMatrixPayload.length > 0 ? (
+        {profile?.role === "chair" ? (
           <DelegateMatrixPanel
             committeeConferenceId={awardConferenceId}
             delegates={delegateMatrixPayload}
             scoresByProfileId={scoresByProfileId}
             floorActivityByProfileId={floorActivityByProfileId}
-            defaultGuided={!delegateMatrixComplete}
+            defaultGuided={!delegateMatrixComplete && delegateMatrixPayload.length > 0}
           />
-        ) : null}
-        {!delegateMatrixComplete && delegateMatrixPayload.length > 0 ? (
+        ) : (
+          <div className="rounded-xl border border-brand-navy/10 bg-brand-paper px-4 py-3 text-sm text-brand-muted">
+            <p className="font-semibold text-brand-navy">{tPage("matrixChairOnly.title")}</p>
+            <p className="mt-1 text-xs leading-relaxed">{tPage("matrixChairOnly.body")}</p>
+          </div>
+        )}
+        {profile?.role === "chair" && !delegateMatrixComplete && delegateMatrixPayload.length > 0 ? (
           <div className="rounded-xl border border-amber-400/35 bg-amber-50/60 px-4 py-3 text-sm text-amber-950 dark:bg-amber-950/20 dark:text-amber-100">
             <p className="font-semibold">{tPage("matrixGate.title")}</p>
             <p className="mt-1 text-xs leading-relaxed">{tPage("matrixGate.body")}</p>

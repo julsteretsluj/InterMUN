@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { saveAwardParticipationScore } from "@/app/actions/award-participation";
@@ -260,19 +261,76 @@ export function DelegateMatrixPanel({
   const hasUnscored = unscoredDelegates.length > 0;
   const activeCriterion = DELEGATE_CRITERIA[criterionIndex];
 
+  if (delegates.length === 0) {
+    return (
+      <section
+        id="delegate-matrix"
+        className="rounded-xl border border-brand-navy/12 bg-brand-paper p-4 md:p-5 space-y-3"
+      >
+        <div>
+          <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+            {t("title")}
+          </h3>
+          <p className="mt-1 text-xs text-brand-muted leading-relaxed">{t("emptyBody")}</p>
+        </div>
+        <Link
+          href="/chair/allocation-matrix"
+          className="inline-flex rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white"
+        >
+          {t("emptyCta")}
+        </Link>
+      </section>
+    );
+  }
+
   return (
-    <section className="rounded-xl border border-brand-navy/12 bg-brand-paper p-4 md:p-5 space-y-4">
-      <div>
-        <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
-          {t("title")}
-        </h3>
-        <p className="mt-1 text-xs text-brand-muted leading-relaxed">
-          {t.rich("intro", {
-            strong: (chunks) => <strong>{chunks}</strong>,
-            completeCount,
-            total: sortedDelegates.length,
-          })}
-        </p>
+    <section
+      id="delegate-matrix"
+      className="rounded-xl border border-brand-navy/12 bg-brand-paper p-4 md:p-5 space-y-4"
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="font-display text-lg font-semibold text-brand-navy dark:text-zinc-100">
+            {t("title")}
+          </h3>
+          <p className="mt-1 text-xs text-brand-muted leading-relaxed">
+            {t.rich("intro", {
+              strong: (chunks) => <strong>{chunks}</strong>,
+              completeCount,
+              total: sortedDelegates.length,
+            })}
+          </p>
+        </div>
+        <div
+          className="inline-flex shrink-0 rounded-lg border border-brand-navy/15 bg-brand-navy/5 p-1 text-sm font-semibold"
+          role="tablist"
+          aria-label={t("modeSwitchLabel")}
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "list"}
+            onClick={() => setMode("list")}
+            className={cn(
+              "rounded-md px-4 py-2 transition-colors",
+              mode === "list" ? "bg-brand-paper text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"
+            )}
+          >
+            {t("modeList")}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "guided"}
+            onClick={enterGuided}
+            className={cn(
+              "rounded-md px-4 py-2 transition-colors",
+              mode === "guided" ? "bg-brand-paper text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"
+            )}
+          >
+            {t("modeGuided")}
+          </button>
+        </div>
       </div>
 
       {hasUnscored ? (
@@ -307,37 +365,6 @@ export function DelegateMatrixPanel({
           ) : null}
         </div>
       ) : null}
-
-      <div
-        className="inline-flex rounded-lg border border-brand-navy/15 bg-brand-navy/5 p-0.5 text-xs font-medium"
-        role="tablist"
-        aria-label={t("modeSwitchLabel")}
-      >
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === "list"}
-          onClick={() => setMode("list")}
-          className={cn(
-            "rounded-md px-3 py-1.5 transition-colors",
-            mode === "list" ? "bg-brand-paper text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"
-          )}
-        >
-          {t("modeList")}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === "guided"}
-          onClick={enterGuided}
-          className={cn(
-            "rounded-md px-3 py-1.5 transition-colors",
-            mode === "guided" ? "bg-brand-paper text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"
-          )}
-        >
-          {t("modeGuided")}
-        </button>
-      </div>
 
       {msg ? (
         <p className="text-xs text-brand-navy dark:text-zinc-200 bg-brand-accent/10 border border-brand-accent/25 rounded-lg px-3 py-2">

@@ -2322,6 +2322,10 @@
     "matrixGate": {
       "title": "Finish the delegate matrix before nominations",
       "body": "Every linked country seat must have a complete session rubric in the matrix above — whether or not you plan to nominate that delegate for an award."
+    },
+    "matrixChairOnly": {
+      "title": "Every-delegate matrix is chair-only",
+      "body": "Only the committee chair scores the full delegate session rubric. Nomination slots below are visible here for review; scoring happens on the chair account at /chair/awards → Score & nominations."
     }
   },
   "chairAwardsDelegateMatrix": {
@@ -2355,7 +2359,9 @@
     "criterionProgress": "Criterion {current} of {total}",
     "prevCriterion": "Previous criterion",
     "nextCriterion": "Next criterion",
-    "guidedAutoAdvanceNote": "Advances to the next criterion and delegate when saved."
+    "guidedAutoAdvanceNote": "Advances to the next criterion and delegate when saved.",
+    "emptyBody": "No linked delegate seats yet. Assign delegates to country seats in the allocation matrix first — then use List or Guided here to score everyone (not only award nominees).",
+    "emptyCta": "Open allocation matrix"
   },
   "chairAwardsFloorActivity": {
     "title": "Floor activity",
