@@ -14,10 +14,10 @@ export default async function MarketingLayout({
   const appName = getAppName();
 
   return (
-    <div className="relative min-h-screen bg-brand-cream text-brand-navy dark:bg-[var(--color-bg-page)]">
+    <div className="marketing-shell relative min-h-screen bg-brand-cream text-brand-navy dark:bg-[var(--color-bg-page)]">
       <link rel="preload" href={OPENING_ORB_PATH} as="image" />
-      <div className="theme-page-glow pointer-events-none absolute inset-0" aria-hidden />
-      <header className="relative z-10 border-b border-[var(--hairline)] bg-[var(--material-thin)]/80 backdrop-blur-md">
+      <header className="marketing-header relative z-10 border-b backdrop-blur-md">
+        <div className="mun-marketing-rainbow-bar" aria-hidden />
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
           <div className="flex min-w-0 items-center gap-2.5">
             <MarketingOrbTrigger />
@@ -25,19 +25,12 @@ export default async function MarketingLayout({
               {appName}
             </Link>
           </div>
-          <nav className="hidden items-center gap-6 text-sm font-medium text-brand-muted md:flex">
-            <a href="#how-it-works" className="transition-colors hover:text-brand-navy">
-              {t("nav.howItWorks")}
-            </a>
-            <a href="#features" className="transition-colors hover:text-brand-navy">
-              {t("nav.features")}
-            </a>
-            <a href="#about" className="transition-colors hover:text-brand-navy">
-              {t("nav.about")}
-            </a>
-            <a href="#contact" className="transition-colors hover:text-brand-navy">
-              {t("nav.contact")}
-            </a>
+          <nav className="marketing-nav hidden items-center gap-5 md:flex">
+            <a href="#how-it-works">{t("nav.howItWorks")}</a>
+            <a href="#chairs">{t("nav.chairs")}</a>
+            <a href="#delegates">{t("nav.delegates")}</a>
+            <a href="#smt">{t("nav.secretariat")}</a>
+            <a href="#contact">{t("nav.contact")}</a>
           </nav>
           <div className="flex shrink-0 items-center gap-2">
             <div className="hidden sm:block">

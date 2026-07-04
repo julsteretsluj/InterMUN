@@ -1394,3 +1394,247 @@ html.colorblind-mode .schedule-swatch-session {
   background: #d55e00 !important;
   border: 2px dashed #18181b;
 }
+
+/* —— Marketing shell: chamber-floor identity (distinct from generic SaaS landings) —— */
+.marketing-shell {
+  --marketing-chamber: #0b0b0f;
+  --marketing-chamber-elevated: #12121a;
+  --marketing-rainbow: linear-gradient(
+    90deg,
+    #e11d48 0%,
+    #f59e0b 18%,
+    #84cc16 36%,
+    #06b6d4 54%,
+    #6366f1 72%,
+    #a855f7 100%
+  );
+}
+
+.marketing-shell .mun-marketing-rainbow-bar {
+  height: 3px;
+  background: var(--marketing-rainbow);
+}
+
+.marketing-shell .mun-marketing-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.marketing-shell .mun-marketing-hero {
+  background: var(--marketing-chamber);
+  color: #f4f4f5;
+}
+
+.marketing-shell .mun-marketing-hero .mun-display {
+  color: #ffffff;
+}
+
+.marketing-shell .mun-marketing-hero p {
+  color: color-mix(in srgb, #ffffff 68%, transparent);
+}
+
+.marketing-shell .mun-procedure-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, #0b0b0f);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #ffffff 88%, var(--accent));
+}
+
+.marketing-shell .mun-chamber-frame {
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, #ffffff 14%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #ffffff 6%, transparent) inset,
+    0 28px 64px -28px rgba(0, 0, 0, 0.72);
+}
+
+.marketing-shell .mun-chamber-frame-light {
+  border-color: var(--hairline);
+  box-shadow: var(--dashboard-shadow);
+}
+
+.marketing-shell .mun-chamber-frame-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
+  background: color-mix(in srgb, #000000 35%, transparent);
+  padding: 0.55rem 0.85rem;
+}
+
+.marketing-shell .mun-chamber-frame-light .mun-chamber-frame-bar {
+  border-bottom-color: var(--hairline);
+  background: var(--material-thick);
+}
+
+.marketing-shell .mun-chamber-frame-bar > :last-child {
+  justify-self: end;
+}
+
+.marketing-shell .mun-chamber-dot {
+  height: 0.55rem;
+  width: 0.55rem;
+  border-radius: 9999px;
+}
+
+.marketing-shell .mun-chamber-frame-body {
+  padding: 1.25rem;
+}
+
+.marketing-shell .mun-gate-flow {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .marketing-shell .mun-gate-flow::before {
+    content: "";
+    position: absolute;
+    top: 2.1rem;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent) 8%, transparent),
+      color-mix(in srgb, var(--accent) 55%, transparent) 50%,
+      color-mix(in srgb, var(--accent) 8%, transparent)
+    );
+    pointer-events: none;
+  }
+}
+
+.marketing-shell .mun-gate-card {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid var(--hairline);
+  background: var(--material-thick);
+  padding: 1.35rem 1.35rem 1.5rem;
+  box-shadow: var(--dashboard-shadow);
+}
+
+.marketing-shell .mun-gate-code {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--hairline));
+  background: color-mix(in srgb, var(--gold) 14%, var(--material-thick));
+  padding: 0.2rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--gold) 85%, #1a1a1a);
+}
+
+.marketing-shell .mun-role-feature {
+  border-radius: 1rem;
+  border: 1px solid var(--hairline);
+  border-left-width: 3px;
+  border-left-color: color-mix(in srgb, var(--accent) 55%, var(--hairline));
+  background: var(--material-thick);
+  padding: 1.15rem 1.15rem 1.2rem 1rem;
+  box-shadow: var(--dashboard-shadow);
+}
+
+.marketing-shell .mun-role-feature-index {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.marketing-shell .mun-marketing-section-dark {
+  color: #f4f4f5;
+}
+
+.marketing-shell .mun-marketing-section-dark .mun-display,
+.marketing-shell .mun-marketing-section-dark h2,
+.marketing-shell .mun-marketing-section-dark h3 {
+  color: #ffffff;
+}
+
+.marketing-shell .mun-marketing-section-dark p,
+.marketing-shell .mun-marketing-section-dark .text-brand-muted {
+  color: color-mix(in srgb, #ffffff 62%, transparent);
+}
+
+.marketing-shell .mun-marketing-section-dark .mun-role-feature {
+  border-color: color-mix(in srgb, #ffffff 12%, transparent);
+  border-left-color: var(--accent);
+  background: color-mix(in srgb, #000000 22%, transparent);
+}
+
+.marketing-shell .mun-marketing-section-dark .mun-role-feature h3 {
+  color: #ffffff;
+}
+
+.marketing-shell .mun-marketing-contact-card {
+  border-radius: 1.25rem;
+  border: 1px solid var(--hairline);
+  background: var(--material-thick);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--dashboard-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.marketing-shell .mun-marketing-contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--marketing-rainbow);
+}
+
+.marketing-shell .marketing-header {
+  border-bottom-color: color-mix(in srgb, var(--accent) 18%, var(--hairline));
+  background: color-mix(in srgb, var(--material-thin) 92%, transparent);
+}
+
+.marketing-shell .marketing-nav a {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted, var(--brand-muted, #6b6b6b));
+}
+
+.marketing-shell .marketing-nav a:hover {
+  color: var(--accent);
+}
+
+.marketing-shell .mun-marketing-role-band {
+  border-top: 1px solid color-mix(in srgb, #ffffff 8%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--marketing-chamber) 94%, var(--accent)) 0%,
+    var(--marketing-chamber-elevated) 100%
+  );
+}
+
+.marketing-shell .mun-marketing-role-band-alt {
+  background: linear-gradient(
+    180deg,
+    var(--marketing-chamber-elevated) 0%,
+    color-mix(in srgb, var(--marketing-chamber) 88%, #000000) 100%
+  );
+}
