@@ -11,7 +11,6 @@ import {
   useTransition,
   type ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { saveAwardParticipationScore } from "@/app/actions/award-participation";
 import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
@@ -47,6 +46,12 @@ function useScoringContext() {
   return ctx;
 }
 
+/** Pause allocation-matrix auto-refresh while a delegate scoring panel is open. */
+export function useAllocationScoringPause(): boolean {
+  const ctx = useContext(ScoringContext);
+  return ctx?.activeUserId != null;
+}
+
 type RootProps = {
   committeeConferenceId: string;
   delegates: AllocationScorableDelegate[];
@@ -69,9 +74,18 @@ export function ChairAllocationScoringRoot({
   const [liveByProfile, setLiveByProfile] = useState<Record<string, Record<string, number>>>(() => ({
     ...scoresByProfileId,
   }));
+  const dirtyProfilesRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
-    setLiveByProfile({ ...scoresByProfileId });
+    setLiveByProfile((prev) => {
+      const next = { ...prev };
+      for (const [profileId, scores] of Object.entries(scoresByProfileId)) {
+        if (!dirtyProfilesRef.current.has(profileId)) {
+          next[profileId] = scores;
+        }
+      }
+      return next;
+    });
   }, [scoresByProfileId]);
 
   const isCompleteFor = useCallback(
@@ -99,6 +113,7 @@ export function ChairAllocationScoringRoot({
           onActiveUserIdChange={setActiveUserId}
           liveByProfile={liveByProfile}
           setLiveByProfile={setLiveByProfile}
+          dirtyProfilesRef={dirtyProfilesRef}
           floorActivityByProfileId={floorActivityByProfileId}
           keys={keys}
         />
@@ -149,6 +164,7 @@ type PanelProps = {
   onActiveUserIdChange: (userId: string | null) => void;
   liveByProfile: Record<string, Record<string, number>>;
   setLiveByProfile: React.Dispatch<React.SetStateAction<Record<string, Record<string, number>>>>;
+  dirtyProfilesRef: React.MutableRefObject<Set<string>>;
   floorActivityByProfileId: Record<string, DelegateFloorActivity>;
   keys: string[];
 };
@@ -160,19 +176,19 @@ function ChairAllocationScoringPanel({
   onActiveUserIdChange,
   liveByProfile,
   setLiveByProfile,
+  dirtyProfilesRef,
   floorActivityByProfileId,
   keys,
 }: PanelProps) {
   const t = useTranslations("chairAllocationMatrixPage");
   const tMatrix = useTranslations("chairAwardsDelegateMatrix");
-  const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
   const [saveState, setSaveState] = useState<"saving" | "saved" | "error" | null>(null);
-  const dirtyRef = useRef(false);
   const saveTimerRef = useRef<number | null>(null);
+  const saveInFlightRef = useRef(false);
   const panelRef = useRef<HTMLElement>(null);
+  const prevActiveUserIdRef = useRef<string | null>(null);
 
   const maxPts = maxPointsForParticipationScope("delegate_by_chair");
   const orderedDelegates = useMemo(
@@ -186,6 +202,8 @@ function ChairAllocationScoringPanel({
   const rowTotal = rubricNumericTotalForKeys(scoreMap, keys);
 
   useEffect(() => {
+    if (prevActiveUserIdRef.current === activeUserId) return;
+    prevActiveUserIdRef.current = activeUserId;
     panelRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [activeUserId]);
 
@@ -198,7 +216,8 @@ function ChairAllocationScoringPanel({
   const saveScores = useCallback(
     (profileId: string, scores: Record<string, number>) => {
       if (!isRubricScoresComplete(scores, keys)) return;
-      setSaving(true);
+      if (saveInFlightRef.current) return;
+      saveInFlightRef.current = true;
       setSaveState("saving");
       setMsg(null);
       startTransition(async () => {
@@ -210,48 +229,52 @@ function ChairAllocationScoringPanel({
           fd.set(`score_${key}`, String(scores[key]));
         }
         const res = await saveAwardParticipationScore(fd);
-        setSaving(false);
+        saveInFlightRef.current = false;
         if (res.error) {
           setMsg(res.error);
           setSaveState("error");
           return;
         }
-        dirtyRef.current = false;
+        dirtyProfilesRef.current.delete(profileId);
         setSaveState("saved");
         window.setTimeout(() => setSaveState(null), 2200);
-        router.refresh();
       });
     },
-    [committeeConferenceId, keys, router, startTransition]
+    [committeeConferenceId, dirtyProfilesRef, keys, startTransition]
   );
 
   const handleScore = useCallback(
     (profileId: string, key: string, score: number | null) => {
       setLiveByProfile((prev) => {
         const row = { ...(prev[profileId] ?? {}) };
-        if (score == null || score < 1) delete row[key];
-        else row[key] = score;
+        const prevVal = row[key];
+        const nextVal = score != null && score >= 1 ? score : undefined;
+        if (prevVal === nextVal) return prev;
+
+        if (nextVal === undefined) delete row[key];
+        else row[key] = nextVal;
         const next = { ...prev, [profileId]: row };
-        dirtyRef.current = true;
+        dirtyProfilesRef.current.add(profileId);
 
         if (saveTimerRef.current) window.clearTimeout(saveTimerRef.current);
         saveTimerRef.current = window.setTimeout(() => {
-          if (!dirtyRef.current) return;
-          if (!isRubricScoresComplete(next[profileId] ?? {}, keys)) return;
-          saveScores(profileId, next[profileId] ?? {});
+          if (!dirtyProfilesRef.current.has(profileId)) return;
+          const latest = next[profileId] ?? {};
+          if (!isRubricScoresComplete(latest, keys)) return;
+          saveScores(profileId, latest);
         }, 900);
 
         return next;
       });
     },
-    [keys, saveScores, setLiveByProfile]
+    [dirtyProfilesRef, keys, saveScores, setLiveByProfile]
   );
 
   const goToIndex = useCallback(
     (index: number) => {
       const target = orderedDelegates[index];
       if (!target) return;
-      if (activeDelegate && dirtyRef.current) {
+      if (activeDelegate && dirtyProfilesRef.current.has(activeDelegate.userId)) {
         const currentScores = liveByProfile[activeDelegate.userId] ?? {};
         if (isRubricScoresComplete(currentScores, keys)) {
           saveScores(activeDelegate.userId, currentScores);
@@ -259,7 +282,7 @@ function ChairAllocationScoringPanel({
       }
       onActiveUserIdChange(target.userId);
     },
-    [activeDelegate, keys, liveByProfile, onActiveUserIdChange, orderedDelegates, saveScores]
+    [activeDelegate, dirtyProfilesRef, keys, liveByProfile, onActiveUserIdChange, orderedDelegates, saveScores]
   );
 
   if (!activeDelegate) return null;
@@ -322,7 +345,7 @@ function ChairAllocationScoringPanel({
               criterion={criterion}
               initialScore={Number(scoreMap[criterion.key] ?? 0)}
               onScoreChange={(key, score) => handleScore(activeDelegate.userId, key, score)}
-              disabled={pending || saving}
+              disabled={false}
             />
           ))}
         </div>
@@ -354,10 +377,10 @@ function ChairAllocationScoringPanel({
           onClick={() => {
             if (rowComplete) saveScores(activeDelegate.userId, scoreMap);
           }}
-          disabled={!rowComplete || saving || pending}
+          disabled={!rowComplete || saveState === "saving" || pending}
           className="rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
         >
-          {saving ? tMatrix("saving") : t("saveScore")}
+          {saveState === "saving" ? tMatrix("saving") : t("saveScore")}
         </button>
         <button
           type="button"

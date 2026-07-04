@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   PROFICIENCY_BAND_ORDER,
@@ -24,15 +24,18 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
   const init = scoreToBandAndTier(initialScore);
   const [band, setBand] = useState<ProficiencyBandId | null>(init?.band ?? null);
   const [tier, setTier] = useState<BandTier | null>(init?.tier ?? null);
+  const lastReportedRef = useRef<number | null>(init?.band && init?.tier ? bandAndTierToScore(init.band, init.tier) : null);
 
   useEffect(() => {
     const next = scoreToBandAndTier(initialScore);
     if (next) {
       setBand(next.band);
       setTier(next.tier);
+      lastReportedRef.current = bandAndTierToScore(next.band, next.tier);
     } else {
       setBand(null);
       setTier(null);
+      lastReportedRef.current = null;
     }
   }, [initialScore]);
 
@@ -40,6 +43,8 @@ export function RubricCriterionPicker({ criterion, initialScore, onScoreChange, 
 
   useEffect(() => {
     if (disabled) return;
+    if (score === lastReportedRef.current) return;
+    lastReportedRef.current = score;
     onScoreChange(criterion.key, score);
   }, [score, criterion.key, onScoreChange, disabled]);
 

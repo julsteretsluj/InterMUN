@@ -490,7 +490,6 @@ export default async function ChairAllocationMatrixPage() {
             </tbody>
           </table>
         </div>
-      </ChairAllocationScoringRoot>
 
       <ChairDelegateApprovalByEmailForm
         conferenceId={allocationsConferenceId}
@@ -565,6 +564,7 @@ export default async function ChairAllocationMatrixPage() {
           </table>
         </div>
       </section>
+      </ChairAllocationScoringRoot>
     </MunPageShell>
   );
 }

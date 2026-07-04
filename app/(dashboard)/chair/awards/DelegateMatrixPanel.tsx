@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { saveAwardParticipationScore } from "@/app/actions/award-participation";
 import { RubricCriterionPicker } from "@/app/(dashboard)/chair/awards/RubricCriterionPicker";
 import {
@@ -46,7 +45,6 @@ export function DelegateMatrixPanel({
   defaultGuided = false,
 }: Props) {
   const t = useTranslations("chairAwardsDelegateMatrix");
-  const router = useRouter();
   const keys = useMemo(() => rubricKeysForParticipationScope("delegate_by_chair"), []);
   const maxPts = maxPointsForParticipationScope("delegate_by_chair");
   const [pending, startTransition] = useTransition();
@@ -99,7 +97,15 @@ export function DelegateMatrixPanel({
   const [criterionIndex, setCriterionIndex] = useState(0);
 
   useEffect(() => {
-    setLiveByProfile({ ...scoresByProfileId });
+    setLiveByProfile((prev) => {
+      const next = { ...prev };
+      for (const [profileId, scores] of Object.entries(scoresByProfileId)) {
+        if (!dirtyProfilesRef.current.has(profileId)) {
+          next[profileId] = scores;
+        }
+      }
+      return next;
+    });
   }, [scoresByProfileId]);
 
   useEffect(() => {
@@ -113,9 +119,13 @@ export function DelegateMatrixPanel({
     };
   }, []);
 
+  const saveInFlightRef = useRef<Set<string>>(new Set());
+
   const saveScores = useCallback(
     (profileId: string, scoreMap: Record<string, number>, onSaved?: () => void) => {
       if (!isRubricScoresComplete(scoreMap, keys)) return;
+      if (saveInFlightRef.current.has(profileId)) return;
+      saveInFlightRef.current.add(profileId);
       setSavingByProfile((prev) => ({ ...prev, [profileId]: true }));
       setSaveStateByProfile((prev) => ({ ...prev, [profileId]: "saving" }));
       setMsg(null);
@@ -128,6 +138,7 @@ export function DelegateMatrixPanel({
           fd.set(`score_${key}`, String(scoreMap[key]));
         }
         const res = await saveAwardParticipationScore(fd);
+        saveInFlightRef.current.delete(profileId);
         setSavingByProfile((prev) => ({ ...prev, [profileId]: false }));
         if (res.error) {
           setMsg(res.error);
@@ -144,19 +155,22 @@ export function DelegateMatrixPanel({
         saveStateTimersRef.current[profileId] = window.setTimeout(() => {
           setSaveStateByProfile((prev) => ({ ...prev, [profileId]: null }));
         }, 2200);
-        router.refresh();
         onSaved?.();
       });
     },
-    [committeeConferenceId, delegates, keys, router, startTransition, t]
+    [committeeConferenceId, delegates, keys, startTransition, t]
   );
 
   const handleScore = useCallback(
     (profileId: string, key: string, score: number | null) => {
       setLiveByProfile((prev) => {
         const row = { ...(prev[profileId] ?? {}) };
-        if (score == null || score < 1) delete row[key];
-        else row[key] = score;
+        const prevVal = row[key];
+        const nextVal = score != null && score >= 1 ? score : undefined;
+        if (prevVal === nextVal) return prev;
+
+        if (nextVal === undefined) delete row[key];
+        else row[key] = nextVal;
         const next = { ...prev, [profileId]: row };
         dirtyProfilesRef.current.add(profileId);
 
@@ -443,7 +457,7 @@ export function DelegateMatrixPanel({
                   criterion={activeCriterion}
                   initialScore={Number((liveByProfile[activeDelegate.userId] ?? {})[activeCriterion.key] ?? 0)}
                   onScoreChange={(key, score) => handleScore(activeDelegate.userId, key, score)}
-                  disabled={pending || Boolean(savingByProfile[activeDelegate.userId])}
+                  disabled={false}
                 />
               </div>
 
@@ -572,7 +586,7 @@ export function DelegateMatrixPanel({
                           criterion={criterion}
                           initialScore={Number(scoreMap[criterion.key] ?? 0)}
                           onScoreChange={(key, score) => handleScore(d.userId, key, score)}
-                          disabled={pending || Boolean(savingByProfile[d.userId])}
+                          disabled={false}
                         />
                       ))}
                     </div>
