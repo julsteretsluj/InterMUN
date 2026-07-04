@@ -798,6 +798,14 @@ html.dark ::selection {
   .nav-priority-link:not(.nav-priority-link--dock) .nav-priority-badge {
     @apply left-2.5 top-1/2 -translate-y-1/2;
   }
+  /* Collapsed sidebar rail: badge sits beside the icon with gap (no overlap). */
+  .group:not(:hover) .nav-priority-link--rail .nav-priority-badge {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    flex-shrink: 0;
+  }
   .nav-priority-tab {
     @apply relative pl-6;
   }

@@ -161,10 +161,10 @@ function ChairNavRow({
       title={labelsHidden ? `${priority}. ${label}` : undefined}
       aria-label={`${priority}. ${label}`}
       className={cn(
-          "nav-priority-link discord-interactive-hover relative flex w-full min-w-0 items-center rounded-[var(--radius-md)] py-2.5 text-sm transition-apple",
+          "nav-priority-link nav-priority-link--rail discord-interactive-hover relative flex w-full min-w-0 items-center rounded-[var(--radius-md)] py-2.5 text-sm transition-apple",
         labelsHidden
           ? "h-11 justify-center gap-0 px-2 pl-2 pr-3.5"
-          : "justify-center gap-0 px-2 pl-2 pr-3.5 group-hover:justify-start group-hover:gap-3 group-hover:pl-9 group-hover:pr-3",
+          : "justify-center gap-2 px-2 pl-2 pr-3.5 group-hover:justify-start group-hover:gap-3 group-hover:pl-9 group-hover:pr-3",
         isActive
           ? "dashboard-nav-active"
           : "border border-transparent font-medium text-brand-muted hover:bg-[color:color-mix(in_srgb,var(--color-text)_5%,#ffffff)]"
