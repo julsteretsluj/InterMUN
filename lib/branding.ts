@@ -3,10 +3,10 @@
  * Override with NEXT_PUBLIC_APP_NAME and NEXT_PUBLIC_APP_TAGLINE.
  */
 
-/** App emblem — RGBA PNG (`public/intermun-emblem.png`). Used for UI; square tab icons are `app/icon.png` / `app/apple-icon.png`. */
+/** Dark-mode circular emblem with laurel wreath (`public/intermun-emblem.png`). Tab icons: `app/icon.png` / `app/apple-icon.png`. */
 export const INTERMUN_EMBLEM_PATH = "/intermun-emblem.png";
 
-/** Light-mode variant — rainbow chain wordmark (`public/intermun-emblem-light.png`). */
+/** Light-mode rainbow chain wordmark (`public/intermun-emblem-light.png`). */
 export const INTERMUN_EMBLEM_LIGHT_PATH = "/intermun-emblem-light.png";
 
 export function getAppName(): string {

@@ -1,10 +1,15 @@
 import { INTERMUN_EMBLEM_LIGHT_PATH, INTERMUN_EMBLEM_PATH } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
+/** Strip fixed width utilities so the horizontal light wordmark can scale naturally. */
+function emblemClassWithoutFixedWidth(className?: string) {
+  return className?.replace(/\bw-[\w\[\]./%-]+/g, "").replace(/\s+/g, " ").trim();
+}
+
 /**
  * InterMUN emblem. Light mode uses the rainbow chain wordmark
- * (`public/intermun-emblem-light.png`); dark mode keeps the original
- * emblem (`public/intermun-emblem.png`).
+ * (`public/intermun-emblem-light.png`); dark mode uses the full circular
+ * mark with laurel wreath (`public/intermun-emblem.png`).
  */
 export function InterMunEmblem({
   className,
@@ -20,8 +25,8 @@ export function InterMunEmblem({
         src={INTERMUN_EMBLEM_LIGHT_PATH}
         alt={alt}
         className={cn(
-          "shrink-0 object-contain drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)] dark:hidden",
-          className
+          "w-auto shrink-0 object-contain drop-shadow-[0_4px_18px_rgba(15,23,42,0.12)] dark:hidden",
+          emblemClassWithoutFixedWidth(className)
         )}
         decoding="async"
       />
