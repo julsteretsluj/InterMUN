@@ -11,7 +11,7 @@ import {
   getCommitteeAwardScope,
   resolveCanonicalCommitteeConferenceId,
 } from "@/lib/conference-committee-canonical";
-import { fetchScorableDelegateProfileIds } from "@/lib/seated-delegates-for-awards";
+import { isSubjectScorableDelegateInCommittee } from "@/lib/seated-delegates-for-awards";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { DELEGATE_CHAIR_EVIDENCE_MIN_LEN } from "@/lib/delegate-chair-feedback-suggestions";
 import { revalidatePath } from "next/cache";
@@ -105,8 +105,13 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
   if (scope === "delegate_by_chair") {
     if (role !== "chair") return { error: "Only chairs can save delegate evaluations." };
     const awardScope = await getCommitteeAwardScope(supabase, committeeConferenceId);
-    const scorableIds = await fetchScorableDelegateProfileIds(supabase, awardScope.siblingConferenceIds);
-    if (!scorableIds.includes(subject_profile_id!)) {
+    const checkClient = createAdminClient() ?? supabase;
+    const seated = await isSubjectScorableDelegateInCommittee(
+      checkClient,
+      awardScope.siblingConferenceIds,
+      subject_profile_id!
+    );
+    if (!seated) {
       return { error: "That delegate is not seated in your committee." };
     }
     const allowed = await chairCanScoreCommittee(supabase, user.id, committeeConferenceId);

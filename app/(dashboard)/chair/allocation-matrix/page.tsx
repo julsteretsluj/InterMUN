@@ -3,7 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { MunPageShell } from "@/components/MunPageShell";
 import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
-import { getCommitteeAwardScope, resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import {
+  getCommitteeAwardScope,
+  mergeAllocationsAcrossSiblingConferences,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
 import { isScorableAllocationSeat } from "@/lib/seated-delegates-for-awards";
 import { loadDelegateFloorActivityByProfileId } from "@/lib/delegate-floor-activity";
 import {
@@ -235,7 +239,7 @@ export default async function ChairAllocationMatrixPage() {
     supabase
       .from("allocations")
       .select("id, conference_id, country, user_id")
-      .eq("conference_id", allocationsConferenceId)
+      .in("conference_id", awardScope.siblingConferenceIds)
       .order("country", { ascending: true }),
     isChairViewer
       ? supabase
@@ -246,18 +250,24 @@ export default async function ChairAllocationMatrixPage() {
       : Promise.resolve({ data: [] as { subject_profile_id: string | null; rubric_scores: Record<string, number> | null }[] }),
   ]);
 
-  const rawRows = (allocData ?? []) as Omit<
-    AllocationRow,
-    | "flag"
-    | "email"
-    | "name"
-    | "grade"
-    | "notes"
-    | "linked_role"
-    | "linked_name"
-    | "country_display"
-    | "party_label"
-  >[];
+  const rawRows = sortRowsByAllocationCountry(
+    mergeAllocationsAcrossSiblingConferences(
+      (allocData ?? []) as Omit<
+        AllocationRow,
+        | "flag"
+        | "email"
+        | "name"
+        | "grade"
+        | "notes"
+        | "linked_role"
+        | "linked_name"
+        | "country_display"
+        | "party_label"
+        | "member_country"
+      >[],
+      awardConferenceId
+    )
+  );
   const allocationIds = rawRows.map((r) => r.id);
   let gateCodeRows: { allocation_id: string; code: string | null }[] = [];
   if (allocationIds.length > 0) {
