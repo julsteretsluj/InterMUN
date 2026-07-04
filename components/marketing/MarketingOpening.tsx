@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { OrbAnimationOverlay } from "@/components/marketing/OrbAnimationOverlay";
+import { ORB_ANIMATION_FADE_MS, ORB_ANIMATION_HOLD_MS } from "@/lib/opening-orb";
 
 const INTRO_SESSION_KEY = "intermun-marketing-intro-seen";
-const OPENING_ORB_SRC = "/marketing/opening-orb.png";
-const INTRO_HOLD_MS = 2800;
-const INTRO_FADE_MS = 750;
 
 type IntroPhase = "pending" | "intro" | "fade" | "open";
 
 export function MarketingOpening({ children }: { children: React.ReactNode }) {
   const [phase, setPhase] = useState<IntroPhase>("pending");
+  const [playKey, setPlayKey] = useState(0);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -23,10 +23,14 @@ export function MarketingOpening({ children }: { children: React.ReactNode }) {
     }
 
     sessionStorage.setItem(INTRO_SESSION_KEY, "1");
+    setPlayKey(1);
     setPhase("intro");
 
-    const fadeTimer = window.setTimeout(() => setPhase("fade"), INTRO_HOLD_MS);
-    const openTimer = window.setTimeout(() => setPhase("open"), INTRO_HOLD_MS + INTRO_FADE_MS);
+    const fadeTimer = window.setTimeout(() => setPhase("fade"), ORB_ANIMATION_HOLD_MS);
+    const openTimer = window.setTimeout(
+      () => setPhase("open"),
+      ORB_ANIMATION_HOLD_MS + ORB_ANIMATION_FADE_MS
+    );
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -49,22 +53,18 @@ export function MarketingOpening({ children }: { children: React.ReactNode }) {
   return (
     <>
       {overlayVisible ? (
-        <div
-          className={cn(
-            "fixed inset-0 z-[200] flex items-center justify-center bg-black transition-opacity duration-700 ease-out",
-            phase === "fade" ? "pointer-events-none opacity-0" : "opacity-100"
-          )}
-          aria-hidden
-        >
-          {phase !== "pending" ? (
-            <img
-              src={OPENING_ORB_SRC}
-              alt=""
-              className="marketing-orb-breathe h-auto w-[min(92vw,28rem)] sm:w-[min(88vw,34rem)] md:w-[min(84vw,40rem)] lg:w-[min(78vw,48rem)]"
-              decoding="async"
+        <>
+          {phase === "pending" ? (
+            <div className="fixed inset-0 z-[200] bg-black" aria-hidden />
+          ) : (
+            <OrbAnimationOverlay
+              open
+              playKey={playKey}
+              onComplete={() => {}}
+              phase={phase === "fade" ? "fade" : "intro"}
             />
-          ) : null}
-        </div>
+          )}
+        </>
       ) : null}
       <div
         className={cn(
