@@ -1,14 +1,21 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import {
   type ParticipationScope,
   rubricKeysForParticipationScope,
   isRubricScoresComplete,
 } from "@/lib/award-participation-scoring";
-import { resolveCanonicalCommitteeConferenceId } from "@/lib/conference-committee-canonical";
+import {
+  getCommitteeAwardScope,
+  resolveCanonicalCommitteeConferenceId,
+} from "@/lib/conference-committee-canonical";
+import { fetchScorableDelegateProfileIds } from "@/lib/seated-delegates-for-awards";
+import { resolveDashboardConferenceForUser } from "@/lib/active-conference";
 import { DELEGATE_CHAIR_EVIDENCE_MIN_LEN } from "@/lib/delegate-chair-feedback-suggestions";
 import { revalidatePath } from "next/cache";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 function parseScoresFromForm(formData: FormData, keys: string[]): Record<string, number> | null {
   const out: Record<string, number> = {};
@@ -23,6 +30,27 @@ function parseScoresFromForm(formData: FormData, keys: string[]): Record<string,
     return null;
   }
   return out;
+}
+
+async function chairCanScoreCommittee(
+  supabase: SupabaseClient,
+  userId: string,
+  canonicalCommitteeId: string
+): Promise<boolean> {
+  const awardScope = await getCommitteeAwardScope(supabase, canonicalCommitteeId);
+  const { data: chairSeat } = await supabase
+    .from("allocations")
+    .select("id")
+    .in("conference_id", awardScope.siblingConferenceIds)
+    .eq("user_id", userId)
+    .limit(1)
+    .maybeSingle();
+  if (chairSeat?.id) return true;
+
+  const activeConf = await resolveDashboardConferenceForUser("chair", userId);
+  if (!activeConf) return false;
+  const activeScope = await getCommitteeAwardScope(supabase, activeConf.id);
+  return activeScope.canonicalConferenceId === awardScope.canonicalConferenceId;
 }
 
 /** Save or update one participation evaluation row (chair delegate matrix or SMT chair/report). */
@@ -76,6 +104,15 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
 
   if (scope === "delegate_by_chair") {
     if (role !== "chair") return { error: "Only chairs can save delegate evaluations." };
+    const awardScope = await getCommitteeAwardScope(supabase, committeeConferenceId);
+    const scorableIds = await fetchScorableDelegateProfileIds(supabase, awardScope.siblingConferenceIds);
+    if (!scorableIds.includes(subject_profile_id!)) {
+      return { error: "That delegate is not seated in your committee." };
+    }
+    const allowed = await chairCanScoreCommittee(supabase, user.id, committeeConferenceId);
+    if (!allowed) {
+      return { error: "Your chair account is not linked to this committee. Open the room gate for your committee first." };
+    }
   } else if (scope === "chair_by_delegate") {
     if (role !== "delegate") return { error: "Only delegates can submit chair feedback." };
   } else {
@@ -93,9 +130,12 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
     updated_at: now,
   };
 
+  const db =
+    scope === "delegate_by_chair" ? createAdminClient() ?? supabase : supabase;
+
   let existingId: string | null = null;
   if (scope === "chair_report_by_smt") {
-    const { data } = await supabase
+    const { data } = await db
       .from("award_participation_scores")
       .select("id")
       .eq("scope", scope)
@@ -104,7 +144,7 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
       .maybeSingle();
     existingId = data?.id ?? null;
   } else if (scope === "chair_by_delegate") {
-    const { data } = await supabase
+    const { data } = await db
       .from("award_participation_scores")
       .select("id")
       .eq("scope", scope)
@@ -114,7 +154,7 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
       .maybeSingle();
     existingId = data?.id ?? null;
   } else {
-    const { data } = await supabase
+    const { data } = await db
       .from("award_participation_scores")
       .select("id")
       .eq("scope", scope)
@@ -129,11 +169,25 @@ export async function saveAwardParticipationScore(formData: FormData): Promise<{
       scope === "chair_by_delegate"
         ? { rubric_scores, evidence_statement, updated_at: now }
         : { rubric_scores, updated_at: now };
-    const { error } = await supabase.from("award_participation_scores").update(updatePayload).eq("id", existingId);
-    if (error) return { error: error.message };
+    const { error } = await db.from("award_participation_scores").update(updatePayload).eq("id", existingId);
+    if (error) {
+      return {
+        error:
+          error.message.includes("row-level security")
+            ? "Could not save — your chair account may not be linked to this committee yet."
+            : error.message,
+      };
+    }
   } else {
-    const { error } = await supabase.from("award_participation_scores").insert(insertPayload);
-    if (error) return { error: error.message };
+    const { error } = await db.from("award_participation_scores").insert(insertPayload);
+    if (error) {
+      return {
+        error:
+          error.message.includes("row-level security")
+            ? "Could not save — your chair account may not be linked to this committee yet."
+            : error.message,
+      };
+    }
   }
 
   revalidatePath("/chair/awards");
