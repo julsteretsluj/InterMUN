@@ -599,7 +599,8 @@
     "previousRoleAria": "Önceki rol",
     "selectRoleAria": "Rol seçin",
     "nextRoleAria": "Sonraki rol",
-    "authConnectError": "Kimlik doğrulamaya bağlanılamadı (Supabase env değişkenlerini kontrol edin)."
+    "authConnectError": "Kimlik doğrulamaya bağlanılamadı (Supabase env değişkenlerini kontrol edin).",
+    "backToHome": "Back to home"
   },
   "googleDocs": {
     "openNewDocHelp": "Google Dokümanlar'ı yeni bir sekmede açar. İstenirse oturum açın, ardından adres çubuğundan belgenin URL'sini kopyalayın.",
@@ -3780,5 +3781,157 @@
     "library": "Library",
     "account": "Account",
     "dockFoldersAria": "Navigation folders"
+  },
+  "marketing": {
+    "metaTitle": "{app} — Model United Nations platform",
+    "metaDescription": "Browser-based MUN software for chairs, delegates, secretariat, and advisors — procedural floor control, prep workflows, and event oversight in one place.",
+    "nav": {
+      "howItWorks": "The gates",
+      "chairs": "Dais",
+      "delegates": "Delegates",
+      "secretariat": "Secretariat",
+      "contact": "Contact",
+      "signIn": "Sign in",
+      "getStarted": "Get started"
+    },
+    "playOrbAnimation": "Play InterMUN animation",
+    "hero": {
+      "eyebrow": "Chamber-floor software · Model UN",
+      "title": "One tab for the",
+      "titleEmphasis": "whole committee.",
+      "subtitle": "InterMUN connects dais procedure, delegate prep, and secretariat oversight — without app installs, scattered chat threads, or paper placards.",
+      "ctaStart": "Host an event",
+      "ctaJoin": "I have a room code",
+      "chip1": "Roll call → quorum",
+      "chip2": "GSL & formal motions",
+      "chip3": "31 interface languages",
+      "previewLabel": "Session floor"
+    },
+    "steps": {
+      "eyebrow": "Gate flow",
+      "title": "Three gates, then you're in",
+      "subtitle": "Organisers publish codes. Participants sign in, choose a role, and pass through event, room, and committee gates.",
+      "step1Code": "GATE 01",
+      "step1Title": "Configure the conference",
+      "step1Description": "Secretariat creates the event, opens committees, and publishes gate codes together with the allocation matrix.",
+      "step2Code": "GATE 02",
+      "step2Title": "Claim your seat",
+      "step2Description": "Delegates, chairs, and advisors verify their role, enter the published codes, and pick a country or press assignment.",
+      "step3Code": "GATE 03",
+      "step3Title": "Open the floor",
+      "step3Description": "The dais handles roll call, speakers, motions, and votes while delegates draft clauses and coordinate with their bloc beside the live room."
+    },
+    "chairs": {
+      "eyebrow": "For the dais",
+      "title": "Procedural tools that follow real committee rhythm",
+      "description": "Session control, speaker queues, motion floors, and awards rubrics share one chair workspace instead of juggling separate tools.",
+      "previewLabel": "Chair controls",
+      "feature1Title": "Roll call & quorum",
+      "feature1Description": "Record present, present-and-voting, and absent delegates. Quorum counts refresh for the entire chamber as statuses change.",
+      "feature2Title": "Speakers list & motions",
+      "feature2Description": "Run the GSL queue, formal motions, points of order, and ranked motion voting with drag-to-reorder priority.",
+      "feature3Title": "Timers & digital room",
+      "feature3Description": "Set per-speaker limits, total speaking time, and reading periods while the dais-facing digital room shows live placards.",
+      "feature4Title": "Awards & scoring",
+      "feature4Description": "Apply the rubric delegate by delegate, capture nominations, and attach evidence before secretariat reviews final awards."
+    },
+    "delegates": {
+      "eyebrow": "For delegates",
+      "title": "Prep beside the live committee room",
+      "description": "Position papers, operative clauses, and bloc messages sit next to the floor — so prep and debate stay in sync.",
+      "previewLabel": "Delegate desk",
+      "feature1Title": "Documents & position papers",
+      "feature1Description": "Submit prep files, open official committee readings, and follow guided position-paper structure.",
+      "feature2Title": "Resolutions & amendments",
+      "feature2Description": "Compose preambulatory and operative language, propose amendments, and follow each draft through committee workflow.",
+      "feature3Title": "Delegation notes & chats",
+      "feature3Description": "Coordinate with allies, raise POIs and POCs, and keep committee messaging under chair moderation.",
+      "feature4Title": "Speeches & stances",
+      "feature4Description": "Outline remarks, chart country positions on a heatmap, and bookmark vetted research sources."
+    },
+    "smt": {
+      "eyebrow": "For secretariat",
+      "title": "Visibility across every chamber",
+      "description": "Configure committees, steer allocations, and monitor session health without standing behind every dais.",
+      "previewLabel": "Oversight board",
+      "feature1Title": "Live committee oversight",
+      "feature1Description": "See roll call, speakers, and session timers for each committee from a single secretariat view.",
+      "feature2Title": "Allocations & room codes",
+      "feature2Description": "Maintain the allocation matrix, rotate gate codes, invite dais chairs, and reset placard access when needed.",
+      "feature3Title": "Awards review",
+      "feature3Description": "Compare chair nominations, confirm Best Delegate picks, and keep scoring consistent between rooms.",
+      "feature4Title": "Event configuration",
+      "feature4Description": "Schedule sessions and topics, wire up newsroom and press corps feeds, and track delegate milestones."
+    },
+    "platform": {
+      "eyebrow": "Across the platform",
+      "title": "More than floor procedure alone",
+      "description": "InterMUN links procedural control with prep, media, and archives so chairs, delegates, and staff share one source of truth.",
+      "feature1Title": "31 languages",
+      "feature1Description": "Switch the interface language at any time — designed for multilingual conferences and international schools.",
+      "feature2Title": "Newsroom & press corps",
+      "feature2Description": "Headline feeds and press surfaces keep media delegates and observers aligned with what is happening on the floor.",
+      "feature3Title": "Session history",
+      "feature3Description": "Browse read-only records of past sessions so delegates and chairs can revisit motions, votes, and timing.",
+      "feature4Title": "Advisor oversight",
+      "feature4Description": "School advisors follow linked delegates, pass along guidance, and review documents plus voting activity."
+    },
+    "about": {
+      "eyebrow": "About InterMUN",
+      "title": "Purpose-built for today's Model UN",
+      "paragraph1": "InterMUN is a browser workspace that replaces the usual mix of spreadsheets, group chats, and printed placards with coordinated committee tooling.",
+      "paragraph2": "Chairs gain procedural control that mirrors how sessions actually unfold. Delegates get structured prep beside the floor. Secretariat keeps event-wide visibility without hovering over every motion.",
+      "paragraph3": "Whether you run one room or a full weekend conference, InterMUN keeps chairs, delegates, and staff aligned from the opening roll call through closing ceremony."
+    },
+    "contact": {
+      "eyebrow": "Get in touch",
+      "title": "Inquiries & conference customization",
+      "description": "Questions about InterMUN, help setting up your event, or requests to add committees, branding, or bespoke conference features — reach out and we'll follow up.",
+      "emailAria": "Email InterMUN for inquiries and conference customization"
+    },
+    "footer": {
+      "ctaTitle": "Bring your next committee",
+      "ctaTitleEmphasis": "online.",
+      "ctaSubtitle": "Create an account, enter your organiser's codes, and step into session when your dais is ready.",
+      "ctaStart": "Create account",
+      "ctaJoin": "Sign in",
+      "copyright": "© {year} InterMUN",
+      "contact": "Contact"
+    },
+    "preview": {
+      "rollCallLabel": "Roll call",
+      "rollCallHint": "Tap a delegation to cycle attendance.",
+      "rollCallCycleAria": "Cycle roll call status for {country}",
+      "quorumLive": "Quorum {present} / {total}",
+      "speakersLabel": "Speakers list",
+      "speakersHint": "Try the floor timer",
+      "nowSpeaking": "Now speaking",
+      "speakersStart": "Start",
+      "speakersPause": "Pause",
+      "speakersNext": "Next",
+      "queueExpand": "+{count} more",
+      "queueCollapse": "Show less",
+      "voteLabel": "Vote on motions",
+      "voteTitle": "Closure of debate",
+      "voteMetaInteractive": "Two-thirds majority · {yes} in favor · {no} against · needs {needed} of {total}",
+      "voteHint": "Tap a ballot option to record a demo vote.",
+      "voteAccept": "In favor",
+      "voteReject": "Against",
+      "prepTile": {
+        "documents": "Documents",
+        "resolutions": "Resolutions",
+        "speeches": "Speeches",
+        "stances": "Stances"
+      },
+      "prepReady": "Open workspace",
+      "prepActive": "Draft in progress",
+      "smtLabel": "Live committees",
+      "smtHint": "Select a chamber to preview secretariat oversight.",
+      "smtLive": "In session",
+      "smtIdle": "Standby",
+      "statusPresentVoting": "P+V",
+      "statusPresent": "P",
+      "statusAbsent": "Absent"
+    }
   }
 }
