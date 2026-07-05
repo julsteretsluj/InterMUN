@@ -129,7 +129,7 @@ export function MarketingSessionSpeakersPanel({
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div className="min-w-0">
               <p className="text-xs text-brand-muted">{tTimer("currentSpeaker")}</p>
-              <p className="font-display text-base font-semibold text-brand-navy">
+              <p className="font-display text-base font-semibold text-zinc-100">
                 {current?.country ?? tq("dash")}
               </p>
             </div>
@@ -165,7 +165,7 @@ export function MarketingSessionSpeakersPanel({
           <label className="min-w-[12rem] flex-1 text-sm text-brand-navy">
             <span className={SESSION_FLOOR_LABEL}>{tq("addDelegation")}</span>
             <select
-              className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-brand-navy shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+              className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 shadow-inner focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
               defaultValue=""
               aria-label={tq("addDelegation")}
             >
@@ -176,13 +176,13 @@ export function MarketingSessionSpeakersPanel({
           </label>
           <button
             type="button"
-            className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-brand-navy hover:bg-white/20"
+            className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-white/20"
           >
             {tq("add")}
           </button>
         </div>
 
-        <ul className="space-y-2 text-brand-navy">
+        <ul className="space-y-2 text-zinc-100">
           {sorted.map((row, pos) => (
             <li
               key={row.id}
@@ -190,7 +190,7 @@ export function MarketingSessionSpeakersPanel({
             >
               <span className="font-medium">
                 {row.country}{" "}
-                <span className="text-xs font-normal text-brand-muted">
+                <span className="text-xs font-normal text-zinc-400">
                   ({tq(`status.${row.status}`)})
                 </span>
               </span>
@@ -198,7 +198,7 @@ export function MarketingSessionSpeakersPanel({
                 <button
                   type="button"
                   disabled={pos <= 0}
-                  className="rounded-md p-1.5 text-brand-navy/80 hover:bg-white/10 disabled:opacity-30"
+                  className="rounded-md p-1.5 text-zinc-300 hover:bg-white/10 hover:text-zinc-100 disabled:opacity-30"
                   title={tq("moveUp")}
                   aria-label={tq("moveUp")}
                   onClick={() => moveRow(row.id, "up")}
@@ -208,7 +208,7 @@ export function MarketingSessionSpeakersPanel({
                 <button
                   type="button"
                   disabled={pos >= sorted.length - 1}
-                  className="rounded-md p-1.5 text-brand-navy/80 hover:bg-white/10 disabled:opacity-30"
+                  className="rounded-md p-1.5 text-zinc-300 hover:bg-white/10 hover:text-zinc-100 disabled:opacity-30"
                   title={tq("moveDown")}
                   aria-label={tq("moveDown")}
                   onClick={() => moveRow(row.id, "down")}

@@ -1589,9 +1589,41 @@ html.colorblind-mode .schedule-swatch-session {
   --color-text-muted: #a1a1aa;
   --brand-navy: #f4f4f5;
   --brand-muted: #a1a1aa;
+  --color-brand-navy: #f4f4f5;
+  --color-brand-muted: #a1a1aa;
   --hairline: rgba(255, 255, 255, 0.12);
   --color-bg-page: #27272a;
   color: #f4f4f5;
+}
+
+/* Tailwind utilities read --color-brand-navy from :root; force light copy on dark glass. */
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(
+  .text-brand-navy,
+  [class*="text-brand-navy"]
+) {
+  color: #f4f4f5;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(
+  .text-brand-muted,
+  [class*="text-brand-muted"]
+) {
+  color: #a1a1aa;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(.bg-white, .bg-brand-cream) :where(
+  .text-brand-navy,
+  .text-zinc-900,
+  [class*="text-brand-navy"]
+) {
+  color: #18181b;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(.bg-white, .bg-brand-cream) :where(
+  .text-brand-muted,
+  [class*="text-brand-muted"]
+) {
+  color: #71717a;
 }
 
 /* Same card on light chamber frames — dark copy on tinted glass. */
@@ -1602,6 +1634,8 @@ html.colorblind-mode .schedule-swatch-session {
   --color-text-muted: #71717a;
   --brand-navy: #1c1c1e;
   --brand-muted: #71717a;
+  --color-brand-navy: #1c1c1e;
+  --color-brand-muted: #71717a;
   --hairline: rgba(60, 60, 67, 0.18);
   --color-bg-page: #ffffff;
   color: #1c1c1e;
@@ -1610,11 +1644,19 @@ html.colorblind-mode .schedule-swatch-session {
 .marketing-shell .marketing-session-surface select,
 .marketing-shell .marketing-session-surface input,
 .marketing-shell .marketing-session-surface textarea {
-  color: var(--brand-navy);
+  color: var(--color-brand-navy);
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface select,
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface input,
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface textarea {
+  background-color: rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f4f4f5;
 }
 
 .marketing-shell .marketing-session-surface option {
-  color: var(--brand-navy);
+  color: var(--color-brand-navy);
   background: var(--color-bg-page);
 }
 

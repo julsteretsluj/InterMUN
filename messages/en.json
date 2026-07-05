@@ -4038,7 +4038,7 @@
             "eyebrow": "Motion floor",
             "title": "RoP-ranked motion queue",
             "description": "Competing motions sort by Rules of Procedure — most disruptive first. InterMUN applies the same priority stack your committee handbook expects before you open voting.",
-            "bullet1": "Sponsor and title on every pending motion",
+            "bullet1": "Motion title and procedure code on every row",
             "bullet2": "Automatic most-disruptive-first vote order",
             "bullet3": "RoP priority score shown on each row",
             "previewLabel": "Motion queue"
