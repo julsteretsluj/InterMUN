@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Check,
-  Copy,
   Pause,
   Play,
   Plus,
@@ -17,7 +16,9 @@ import {
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
 import { MarketingAllocationMatrixPanel } from "@/components/marketing/MarketingAllocationMatrixPanel";
+import { MarketingAwardsReviewPanel } from "@/components/marketing/MarketingAwardsReviewPanel";
 import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
+import { MarketingGateCodesPanel } from "@/components/marketing/MarketingGateCodesPanel";
 import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
 import { MarketingSessionMotionQueuePanel } from "@/components/marketing/MarketingSessionMotionQueuePanel";
 import { MarketingSessionSpeakersPanel } from "@/components/marketing/MarketingSessionSpeakersPanel";
@@ -534,125 +535,11 @@ export function SmtAllocationMatrixDemo() {
 }
 
 export function SmtGateCodesDemo() {
-  const t = useTranslations("marketing.rolePreviews.secretariat");
-  const [codes, setCodes] = useState({
-    event: "IMUN-7K2P",
-    room: "ROOM-4F9A",
-    committee: "ECOSOC-3M1",
-  });
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const rotate = () => {
-    const rand = () => Math.random().toString(36).slice(2, 6).toUpperCase();
-    setCodes({
-      event: `IMUN-${rand()}`,
-      room: `ROOM-${rand()}`,
-      committee: `ECO-${rand()}`,
-    });
-  };
-
-  const copy = async (key: keyof typeof codes) => {
-    await navigator.clipboard.writeText(codes[key]);
-    setCopied(key);
-    window.setTimeout(() => setCopied(null), 1500);
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("gatesLabel")}</span>
-      <ul className="mt-3 space-y-2">
-        {(["event", "room", "committee"] as const).map((key) => (
-          <li key={key} className="flex items-center justify-between gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2">
-            <div>
-              <p className="text-xs text-zinc-500">{t(`gate_${key}`)}</p>
-              <p className="font-mono text-sm font-bold text-zinc-900">{codes[key]}</p>
-            </div>
-            <button
-              type="button"
-              onClick={() => copy(key)}
-              className="rounded-lg border border-zinc-200 p-1.5 text-zinc-600 hover:bg-white"
-              aria-label={t("copyCode")}
-            >
-              {copied === key ? <Check className="h-3.5 w-3.5 text-[var(--accent)]" /> : <Copy className="h-3.5 w-3.5" />}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        onClick={rotate}
-        className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-zinc-200 py-2 text-xs font-semibold text-zinc-700"
-      >
-        <RefreshCw className="h-3.5 w-3.5" />
-        {t("rotateCodes")}
-      </button>
-    </div>
-  );
+  return <MarketingGateCodesPanel />;
 }
 
 export function SmtAwardsReviewDemo() {
-  const t = useTranslations("marketing.rolePreviews.secretariat");
-  type NominationStatus = "pending" | "approved" | "rejected";
-  const [nominations, setNominations] = useState<
-    { id: string; delegate: string; award: string; status: NominationStatus }[]
-  >([
-    { id: "1", delegate: "Norway", award: "Best Delegate", status: "pending" },
-    { id: "2", delegate: "Kenya", award: "Outstanding", status: "pending" },
-    { id: "3", delegate: "Mexico", award: "Honorable", status: "pending" },
-  ]);
-
-  const review = (id: string, approved: boolean) => {
-    setNominations((prev) =>
-      prev.map((n) =>
-        n.id === id ? { ...n, status: approved ? ("approved" as const) : ("rejected" as const) } : n
-      )
-    );
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("awardsReviewLabel")}</span>
-      <ul className="mt-3 space-y-2">
-        {nominations.map((n) => (
-          <li key={n.id} className="rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2">
-            <div className="flex items-center justify-between gap-2">
-              <div>
-                <p className="text-sm font-semibold text-zinc-900">{n.delegate}</p>
-                <p className="text-xs text-zinc-500">{n.award}</p>
-              </div>
-              {n.status === "pending" ? (
-                <div className="flex gap-1">
-                  <button
-                    type="button"
-                    onClick={() => review(n.id, true)}
-                    className="rounded-lg bg-[var(--accent)] px-2 py-1 text-xs font-semibold text-white"
-                  >
-                    {t("approve")}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => review(n.id, false)}
-                    className="rounded-lg border border-zinc-200 px-2 py-1 text-xs font-semibold text-zinc-600"
-                  >
-                    {t("reject")}
-                  </button>
-                </div>
-              ) : (
-                <span
-                  className={cn(
-                    "rounded-full px-2 py-0.5 text-xs font-semibold",
-                    n.status === "approved" ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"
-                  )}
-                >
-                  {t(n.status)}
-                </span>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MarketingAwardsReviewPanel />;
 }
 
 export function SmtEventScheduleDemo() {
