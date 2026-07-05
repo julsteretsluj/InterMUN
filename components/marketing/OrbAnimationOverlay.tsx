@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SyntheticEvent } from "react";
+import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import {
   loadOpeningOrbObjectUrl,
@@ -24,11 +26,19 @@ export function OrbAnimationOverlay({
   open,
   playKey,
   onComplete,
+  surface = "dark",
+  dismissible = false,
 }: {
   open: boolean;
   playKey: number;
   onComplete: () => void;
+  /** Auto-intro uses dark full-screen; logo replay uses light. */
+  surface?: "dark" | "light";
+  /** Logo-triggered overlay — Escape / close button ends playback early. */
+  dismissible?: boolean;
 }) {
+  const tClose = useTranslations("delegationNotes");
+  const isLight = surface === "light";
   const [phase, setPhase] = useState<OrbPhase>("closed");
   const [src, setSrc] = useState<string | null>(null);
   const onCompleteRef = useRef(onComplete);
@@ -48,6 +58,22 @@ export function OrbAnimationOverlay({
     timersRef.current = {};
   }, []);
 
+  const finishPlayback = useCallback(
+    (generation: number) => {
+      if (generation !== loadGenerationRef.current) return;
+      clearTimers();
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+        objectUrlRef.current = null;
+      }
+      activeSrcRef.current = null;
+      setPhase("closed");
+      document.body.style.overflow = "";
+      onCompleteRef.current();
+    },
+    [clearTimers]
+  );
+
   const startPlaybackTimers = useCallback(
     (generation: number) => {
       if (generation !== loadGenerationRef.current) return;
@@ -61,19 +87,17 @@ export function OrbAnimationOverlay({
       }, ORB_ANIMATION_HOLD_MS);
 
       timersRef.current.done = window.setTimeout(() => {
-        if (generation !== loadGenerationRef.current) return;
-        if (objectUrlRef.current) {
-          URL.revokeObjectURL(objectUrlRef.current);
-          objectUrlRef.current = null;
-        }
-        activeSrcRef.current = null;
-        setPhase("closed");
-        document.body.style.overflow = "";
-        onCompleteRef.current();
+        finishPlayback(generation);
       }, ORB_ANIMATION_HOLD_MS + ORB_ANIMATION_FADE_MS);
     },
-    [clearTimers]
+    [clearTimers, finishPlayback]
   );
+
+  const dismissEarly = useCallback(() => {
+    const generation = loadGenerationRef.current;
+    setPhase("fade");
+    window.setTimeout(() => finishPlayback(generation), ORB_ANIMATION_FADE_MS);
+  }, [finishPlayback]);
 
   useEffect(() => {
     if (!open) {
@@ -161,6 +185,15 @@ export function OrbAnimationOverlay({
     [open, startPlaybackTimers]
   );
 
+  useEffect(() => {
+    if (!open || !dismissible) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") dismissEarly();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, dismissible, dismissEarly]);
+
   if (!open || phase === "closed") return null;
 
   const fading = phase === "fade";
@@ -168,20 +201,38 @@ export function OrbAnimationOverlay({
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[9999] overflow-hidden bg-black transition-opacity ease-out",
+        "fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden transition-opacity ease-out",
+        isLight ? "bg-brand-cream [color-scheme:light]" : "bg-black",
         fading ? "pointer-events-none opacity-0 duration-[800ms]" : "opacity-100 duration-0",
         phase === "loading" && "opacity-100"
       )}
       aria-hidden={fading}
       aria-busy={phase === "loading"}
+      role={dismissible ? "dialog" : undefined}
+      aria-modal={dismissible || undefined}
     >
+      {dismissible ? (
+        <button
+          type="button"
+          onClick={dismissEarly}
+          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-white/90 text-brand-navy shadow-sm transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          aria-label={tClose("close")}
+        >
+          <X className="h-5 w-5" aria-hidden />
+        </button>
+      ) : null}
       {src ? (
         <img
           key={`${playKey}-${src}`}
           src={src}
           alt=""
           onLoad={handleImageLoad}
-          className="marketing-opening-orb absolute inset-0 h-[100dvh] w-[100dvw] max-h-none max-w-none object-contain object-center"
+          className={cn(
+            "marketing-opening-orb object-contain object-center",
+            isLight
+              ? "h-[100dvh] w-[100dvw] max-h-[100dvh] max-w-[100dvw]"
+              : "absolute inset-0 h-[100dvh] w-[100dvw] max-h-none max-w-none"
+          )}
           decoding="sync"
           loading="eager"
           fetchPriority="high"

@@ -39,6 +39,8 @@ export function OrbPlayTrigger({
         open={playing}
         playKey={playKey}
         onComplete={handleComplete}
+        surface="light"
+        dismissible
       />
     </>
   );
