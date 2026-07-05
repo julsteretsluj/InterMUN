@@ -27,6 +27,10 @@ import {
   PREVIEW_LABEL,
   PREVIEW_MUTED,
   PREVIEW_ROW,
+  PREVIEW_SPEAKER_NAME,
+  PREVIEW_SPEAKER_NOW,
+  PREVIEW_SPEAKER_PANEL,
+  PREVIEW_SPEAKER_TIMER,
 } from "@/components/marketing/marketing-preview-styles";
 import { cn } from "@/lib/utils";
 
@@ -138,11 +142,11 @@ export function ChairSpeakersTimerDemo() {
   return (
     <div className={PREVIEW_CARD}>
       <span className={PREVIEW_LABEL}>{t("speakersLabel")}</span>
-      <div className="mt-3 rounded-xl border border-[color-mix(in_srgb,var(--accent)_25%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] px-3 py-2.5">
-        <p className="text-xs text-zinc-500">{t("nowSpeaking")}</p>
+      <div className={cn("mt-3", PREVIEW_SPEAKER_PANEL)}>
+        <p className={PREVIEW_SPEAKER_NOW}>{t("nowSpeaking")}</p>
         <div className="mt-0.5 flex items-end justify-between">
-          <p className={cn("text-base", PREVIEW_HEADING)}>{queue[0]}</p>
-          <p className="font-mono text-sm font-semibold text-[var(--accent)]" suppressHydrationWarning>
+          <p className={PREVIEW_SPEAKER_NAME}>{queue[0]}</p>
+          <p className={PREVIEW_SPEAKER_TIMER} suppressHydrationWarning>
             {formatTimer(secondsLeft)}
           </p>
         </div>

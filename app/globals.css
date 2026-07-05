@@ -1433,8 +1433,27 @@ html.colorblind-mode .schedule-swatch-session {
   color: #ffffff;
 }
 
-.marketing-shell .mun-marketing-hero p {
+.marketing-shell .mun-marketing-hero .mun-marketing-hero-copy p {
   color: color-mix(in srgb, #ffffff 68%, transparent);
+}
+
+/* Light preview cards inside dark marketing surfaces — lock readable copy */
+.marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark) .marketing-preview-surface {
+  color: #18181b;
+}
+
+.marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark) .marketing-preview-surface p {
+  color: #71717a;
+}
+
+.marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark)
+  .marketing-preview-surface :is(.text-zinc-900, .preview-speaker-name) {
+  color: #18181b;
+}
+
+.marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark)
+  .marketing-preview-surface .preview-speaker-timer {
+  color: var(--accent);
 }
 
 .marketing-shell .mun-procedure-chip {

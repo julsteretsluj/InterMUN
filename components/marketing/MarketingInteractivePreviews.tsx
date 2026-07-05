@@ -19,6 +19,10 @@ import {
   PREVIEW_LABEL,
   PREVIEW_MUTED,
   PREVIEW_ROW,
+  PREVIEW_SPEAKER_NAME,
+  PREVIEW_SPEAKER_NOW,
+  PREVIEW_SPEAKER_PANEL,
+  PREVIEW_SPEAKER_TIMER,
 } from "@/components/marketing/marketing-preview-styles";
 type RollRow = { id: string; country: string; status: RollAttendance };
 
@@ -159,11 +163,11 @@ function MarketingSpeakersCard({
         <span className={PREVIEW_LABEL}>{t("speakersLabel")}</span>
         <span className="text-[0.65rem] text-brand-muted">{t("speakersHint")}</span>
       </div>
-      <div className="mb-3 rounded-xl border border-[color-mix(in_srgb,var(--accent)_25%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)] px-3 py-2.5">
-        <p className={cn("text-xs", PREVIEW_MUTED)}>{t("nowSpeaking")}</p>
+      <div className={cn("mb-3", PREVIEW_SPEAKER_PANEL)}>
+        <p className={PREVIEW_SPEAKER_NOW}>{t("nowSpeaking")}</p>
         <div className="mt-0.5 flex items-end justify-between gap-3">
-          <p className={cn("font-display text-base", PREVIEW_HEADING)}>{current}</p>
-          <p className="font-mono text-sm font-semibold tabular-nums text-[var(--accent)]" suppressHydrationWarning>
+          <p className={PREVIEW_SPEAKER_NAME}>{current}</p>
+          <p className={PREVIEW_SPEAKER_TIMER} suppressHydrationWarning>
             {formatTimer(secondsLeft)}
           </p>
         </div>

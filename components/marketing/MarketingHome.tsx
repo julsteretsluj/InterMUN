@@ -298,7 +298,7 @@ export async function MarketingHome() {
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div>
+          <div className="mun-marketing-hero-copy">
             <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
             <h1 className="mun-display mt-4 text-4xl md:text-5xl lg:text-6xl">
               {t("hero.title")}{" "}

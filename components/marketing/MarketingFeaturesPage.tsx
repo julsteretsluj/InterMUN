@@ -15,7 +15,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
     <>
       <section className="mun-marketing-hero relative overflow-hidden border-b border-white/10">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-18">
+        <div className="mun-marketing-hero-copy mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-18">
           <p className="mun-marketing-eyebrow">{t("eyebrow")}</p>
           <h1 className="mun-display mt-4 text-4xl md:text-5xl">
             {t("title")} <span className="mun-emph">{t("titleEmphasis")}</span>
@@ -34,7 +34,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
 
       <section className="mun-marketing-hero relative overflow-hidden border-t border-white/10 py-16 md:py-20">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
-        <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
+        <div className="mun-marketing-hero-copy mx-auto max-w-3xl px-4 text-center md:px-6">
           <h2 className="mun-display text-3xl md:text-4xl">
             {t("ctaTitle")} <span className="mun-emph">{t("ctaTitleEmphasis")}</span>
           </h2>
