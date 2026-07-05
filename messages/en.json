@@ -4226,21 +4226,21 @@
           "schedule": {
             "index": "05",
             "eyebrow": "Event schedule",
-            "title": "Toggle sessions on the conference timeline",
-            "description": "Opening ceremony, committee blocks, and press briefings appear on one schedule. Enable or disable items as your weekend programme shifts in real time.",
-            "bullet1": "Time-stamped session rows",
-            "bullet2": "Toggle switches per agenda item",
-            "bullet3": "Feeds delegate and advisor calendars",
+            "title": "Plan the two-day conference timeline",
+            "description": "Build Day 1 and Day 2 blocks per delegate group — session, break, and ceremony rows with start/end times. Mark lunch rows for overlap checks across committees.",
+            "bullet1": "Day tabs with per-group schedule tables",
+            "bullet2": "Color-coded session, break, and ceremony blocks",
+            "bullet3": "Lunch overlap view across groups",
             "previewLabel": "Schedule board"
           },
           "checklist": {
             "index": "06",
             "eyebrow": "Setup checklist",
             "title": "Track conference readiness before doors open",
-            "description": "Allocations, gate codes, chair invites, topics, and newsroom wiring — check each item off as secretariat completes pre-conference setup.",
-            "bullet1": "Progress bar across five setup tasks",
-            "bullet2": "Tap to mark complete or reopen",
-            "bullet3": "Shared view for secretariat team",
+            "description": "The SMT hub opens with a four-step setup guide — event sessions, room codes, allocations, and shared documents — each linking straight into the tool you need next.",
+            "bullet1": "Numbered steps on the secretariat dashboard",
+            "bullet2": "Direct links into conference, codes, and matrix",
+            "bullet3": "RoP and award criteria publishing step",
             "previewLabel": "Setup tracker"
           }
         }

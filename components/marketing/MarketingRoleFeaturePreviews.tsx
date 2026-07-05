@@ -18,7 +18,9 @@ import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
 import { MarketingAllocationMatrixPanel } from "@/components/marketing/MarketingAllocationMatrixPanel";
 import { MarketingAwardsReviewPanel } from "@/components/marketing/MarketingAwardsReviewPanel";
 import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
+import { MarketingEventSchedulePanel } from "@/components/marketing/MarketingEventSchedulePanel";
 import { MarketingGateCodesPanel } from "@/components/marketing/MarketingGateCodesPanel";
+import { MarketingSetupChecklistPanel } from "@/components/marketing/MarketingSetupChecklistPanel";
 import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
 import { MarketingSessionMotionQueuePanel } from "@/components/marketing/MarketingSessionMotionQueuePanel";
 import { MarketingSessionSpeakersPanel } from "@/components/marketing/MarketingSessionSpeakersPanel";
@@ -543,96 +545,9 @@ export function SmtAwardsReviewDemo() {
 }
 
 export function SmtEventScheduleDemo() {
-  const t = useTranslations("marketing.rolePreviews.secretariat");
-  const [sessions, setSessions] = useState([
-    { id: "1", time: "09:00", title: "Opening ceremony", on: true },
-    { id: "2", time: "10:30", title: "ECOSOC — Session I", on: true },
-    { id: "3", time: "14:00", title: "Legal — Session I", on: false },
-    { id: "4", time: "16:30", title: "Press briefing", on: true },
-  ]);
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("scheduleLabel")}</span>
-      <ul className="mt-3 space-y-2">
-        {sessions.map((s) => (
-          <li key={s.id} className="flex items-center justify-between gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2">
-            <div>
-              <p className="font-mono text-xs text-zinc-500">{s.time}</p>
-              <p className="text-sm font-medium text-zinc-900">{s.title}</p>
-            </div>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={s.on}
-              onClick={() =>
-                setSessions((prev) => prev.map((row) => (row.id === s.id ? { ...row, on: !row.on } : row)))
-              }
-              className={cn("relative h-6 w-11 rounded-full transition", s.on ? "bg-[var(--accent)]" : "bg-zinc-300")}
-            >
-              <span
-                className={cn(
-                  "absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition",
-                  s.on ? "left-[1.35rem]" : "left-0.5"
-                )}
-              />
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MarketingEventSchedulePanel />;
 }
 
 export function SmtSetupChecklistDemo() {
-  const t = useTranslations("marketing.rolePreviews.secretariat");
-  const [items, setItems] = useState([
-    { id: "1", labelKey: "check_allocations", done: true },
-    { id: "2", labelKey: "check_gates", done: true },
-    { id: "3", labelKey: "check_chairs", done: false },
-    { id: "4", labelKey: "check_topics", done: false },
-    { id: "5", labelKey: "check_newsroom", done: false },
-  ]);
-
-  const doneCount = items.filter((i) => i.done).length;
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <div className="flex items-center justify-between gap-2">
-        <span className={PREVIEW_LABEL}>{t("checklistLabel")}</span>
-        <span className="font-mono text-xs text-zinc-500">
-          {doneCount}/{items.length}
-        </span>
-      </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-200">
-        <div
-          className="h-full bg-[var(--accent)] transition-all"
-          style={{ width: `${(doneCount / items.length) * 100}%` }}
-        />
-      </div>
-      <ul className="mt-3 space-y-2">
-        {items.map((item) => (
-          <li key={item.id}>
-            <button
-              type="button"
-              onClick={() =>
-                setItems((prev) => prev.map((row) => (row.id === item.id ? { ...row, done: !row.done } : row)))
-              }
-              className="flex w-full items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-left text-sm text-zinc-800"
-            >
-              <span
-                className={cn(
-                  "flex h-4 w-4 shrink-0 items-center justify-center rounded border",
-                  item.done ? "border-[var(--accent)] bg-[var(--accent)] text-white" : "border-zinc-300 bg-white"
-                )}
-              >
-                {item.done ? <Check className="h-3 w-3" /> : null}
-              </span>
-              {t(item.labelKey)}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MarketingSetupChecklistPanel />;
 }
