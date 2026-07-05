@@ -4197,10 +4197,10 @@
             "index": "02",
             "eyebrow": "Allocations",
             "title": "Matrix seating with drag-free assignment",
-            "description": "Fill open seats from the delegate pool. Select a country from the pool, tap an empty slot, and the allocation matrix updates — the source of truth for gate verification.",
-            "bullet1": "Grid view of committee seats",
-            "bullet2": "Pool of unassigned countries",
-            "bullet3": "Dashed slots for open positions",
+            "description": "Build each committee roster in a table — country seats, placard codes, and assignment status. Switch committees with bottom tabs; delegates claim open rows via allocation sign-up links.",
+            "bullet1": "Roster table with placard codes",
+            "bullet2": "Per-committee sheet tabs",
+            "bullet3": "Sign-up links for open seats",
             "previewLabel": "Allocation matrix"
           },
           "gates": {
@@ -4304,7 +4304,7 @@
       },
       "secretariat": {
         "allocationLabel": "Allocation matrix",
-        "allocationHint": "Select a country, then tap an open seat.",
+        "allocationHint": "One roster per committee. Edit placard codes, add open seats, and share allocation sign-up links.",
         "poolLabel": "Delegate pool",
         "gatesLabel": "Gate codes",
         "gate_event": "Event gate",

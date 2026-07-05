@@ -1581,6 +1581,43 @@ html.colorblind-mode .schedule-swatch-session {
   color: #ffffff;
 }
 
+/* Session-floor glass cards — readable copy on dark glass in dark chambers. */
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface {
+  color-scheme: dark;
+  --color-text: #f4f4f5;
+  --color-text-secondary: #d4d4d8;
+  --color-text-muted: #a1a1aa;
+  --brand-navy: #f4f4f5;
+  --brand-muted: #a1a1aa;
+  --hairline: rgba(255, 255, 255, 0.12);
+  --color-bg-page: #27272a;
+  color: #f4f4f5;
+}
+
+/* Same card on light chamber frames — dark copy on tinted glass. */
+.marketing-shell .mun-chamber-frame-light .marketing-session-surface {
+  color-scheme: light;
+  --color-text: #1c1c1e;
+  --color-text-secondary: #3a3a3c;
+  --color-text-muted: #71717a;
+  --brand-navy: #1c1c1e;
+  --brand-muted: #71717a;
+  --hairline: rgba(60, 60, 67, 0.18);
+  --color-bg-page: #ffffff;
+  color: #1c1c1e;
+}
+
+.marketing-shell .marketing-session-surface select,
+.marketing-shell .marketing-session-surface input,
+.marketing-shell .marketing-session-surface textarea {
+  color: var(--brand-navy);
+}
+
+.marketing-shell .marketing-session-surface option {
+  color: var(--brand-navy);
+  background: var(--color-bg-page);
+}
+
 .marketing-shell .mun-gate-flow {
   position: relative;
   list-style: none;

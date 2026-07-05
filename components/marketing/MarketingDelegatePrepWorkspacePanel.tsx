@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 import { StanceHeatmap } from "@/components/stances/StanceHeatmap";
-import { SESSION_SURFACE_CARD } from "@/lib/roll-call-attendance-buttons";
 import {
   OPERATIVE_OPENING_PRESETS,
   PREAMBULATORY_OPENING_PRESETS,
@@ -12,8 +11,7 @@ import {
   type ClauseSection,
 } from "@/lib/resolution-clause-presets";
 import { cn } from "@/lib/utils";
-
-import { MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 type PrepTab = "documents" | "resolutions" | "speeches" | "stances";
 
@@ -53,7 +51,7 @@ export function MarketingDelegatePrepWorkspacePanel({
         </div>
       ) : null}
 
-      <div className={cn(SESSION_SURFACE_CARD, "space-y-4 [color-scheme:light]")}>
+      <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
         <div
           className="flex flex-wrap gap-2 border-b border-[var(--hairline)] pb-3"
           role="tablist"

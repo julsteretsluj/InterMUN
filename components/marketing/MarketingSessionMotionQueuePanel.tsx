@@ -1,12 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { SESSION_SURFACE_CARD } from "@/lib/roll-call-attendance-buttons";
 import { motionDisruptivenessScore } from "@/lib/motion-disruptiveness";
 import type { VoteType } from "@/types/database";
 import { cn } from "@/lib/utils";
 
-import { MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 type MotionDemoRow = {
   id: string;
@@ -59,7 +58,7 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
         <p className="mt-1 text-sm text-white/70">{t("motionControlHelp")}</p>
       </div>
 
-      <div className={cn(SESSION_SURFACE_CARD, "space-y-4 [color-scheme:light]")}>
+      <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"

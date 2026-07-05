@@ -3,10 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp, Pause, Play, SkipForward } from "lucide-react";
-import { SESSION_SURFACE_CARD } from "@/lib/roll-call-attendance-buttons";
 import { cn } from "@/lib/utils";
-
-import { MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 export type SpeakerQueueDemoRow = {
   id: string;
@@ -120,7 +118,7 @@ export function MarketingSessionSpeakersPanel({
         ) : null}
       </div>
 
-      <div className={cn(SESSION_SURFACE_CARD, "space-y-4 [color-scheme:light]")}>
+      <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
         <div className="space-y-3 rounded-lg border border-white/15 bg-black/20 p-3">
           <div>
             <p className={SESSION_FLOOR_LABEL}>{tTimer("speakerTimeRemaining")}</p>
@@ -146,7 +144,7 @@ export function MarketingSessionSpeakersPanel({
             <button
               type="button"
               onClick={() => setRunning((v) => !v)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-brand-navy/20 bg-white px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-cream"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-brand-navy/20 bg-white px-3 py-2 text-sm font-medium text-zinc-900 hover:bg-brand-cream"
             >
               {running ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
               {running ? tTimer("pauseClock") : tTimer("startClock")}

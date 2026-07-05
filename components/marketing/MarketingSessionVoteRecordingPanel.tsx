@@ -3,10 +3,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { RollAttendance } from "@/lib/roll-attendance";
-import { SESSION_SURFACE_CARD } from "@/lib/roll-call-attendance-buttons";
 import { cn } from "@/lib/utils";
-
-import { MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 type VoteValue = "yes" | "no" | "abstain" | null;
 
@@ -108,7 +106,7 @@ export function MarketingSessionVoteRecordingPanel({
         </div>
       ) : null}
 
-      <article className={cn(SESSION_SURFACE_CARD, "space-y-4 [color-scheme:light]")}>
+      <article className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
         <header className="flex flex-wrap items-start justify-between gap-3 border-b border-[var(--hairline)] pb-3">
           <div className="min-w-0 space-y-1">
             <p className={SESSION_FLOOR_LABEL}>{t("voteTypes.motion")}</p>

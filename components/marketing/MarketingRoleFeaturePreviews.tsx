@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
+import { MarketingAllocationMatrixPanel } from "@/components/marketing/MarketingAllocationMatrixPanel";
 import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
 import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
 import { MarketingSessionMotionQueuePanel } from "@/components/marketing/MarketingSessionMotionQueuePanel";
@@ -529,62 +530,7 @@ export function SmtLiveOversightDemo() {
 }
 
 export function SmtAllocationMatrixDemo() {
-  const t = useTranslations("marketing.rolePreviews.secretariat");
-  const pool = ["Canada", "Ghana", "Peru", "Sweden", "Spain", "Italy"];
-  const [matrix, setMatrix] = useState(["Kenya", "Norway", "Mexico", "—", "Philippines", "—"]);
-  const [selectedPool, setSelectedPool] = useState<string | null>(null);
-
-  const assign = (index: number) => {
-    if (!selectedPool) return;
-    setMatrix((prev) => {
-      const next = [...prev];
-      next[index] = selectedPool;
-      return next;
-    });
-    setSelectedPool(null);
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("allocationLabel")}</span>
-      <p className="mt-1 text-xs text-zinc-500">{t("allocationHint")}</p>
-      <div className="mt-3 grid grid-cols-3 gap-2">
-        {matrix.map((seat, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => assign(i)}
-            className={cn(
-              "rounded-lg border px-2 py-3 text-center text-xs font-semibold",
-              seat === "—"
-                ? "border-dashed border-zinc-300 text-zinc-400"
-                : "border-zinc-200 bg-zinc-50 text-zinc-900"
-            )}
-          >
-            {seat}
-          </button>
-        ))}
-      </div>
-      <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">{t("poolLabel")}</p>
-      <div className="mt-2 flex flex-wrap gap-1.5">
-        {pool.map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => setSelectedPool(c)}
-            className={cn(
-              "rounded-full border px-2.5 py-1 text-xs font-semibold",
-              selectedPool === c
-                ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,#fff)] text-[var(--accent)]"
-                : "border-zinc-200 text-zinc-600"
-            )}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+  return <MarketingAllocationMatrixPanel />;
 }
 
 export function SmtGateCodesDemo() {

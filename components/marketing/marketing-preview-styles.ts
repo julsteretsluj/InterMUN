@@ -37,5 +37,9 @@ export const PREVIEW_ROW =
 export const MARKETING_DARK_GLASS_CARD =
   "rounded-xl border border-white/15 bg-black/25 p-4 shadow-sm backdrop-blur-sm";
 
+/** Session-floor glass card inside marketing chamber previews. */
+export const MARKETING_SESSION_SURFACE =
+  "marketing-session-surface rounded-xl border border-white/15 bg-black/25 p-4 text-brand-navy shadow-sm backdrop-blur-sm";
+
 /** Session floor labels — matches chair session control / speaker queue panel. */
 export const SESSION_FLOOR_LABEL = "text-xs font-medium uppercase tracking-wide text-brand-muted";
