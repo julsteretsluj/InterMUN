@@ -11,6 +11,15 @@
   font-display: swap;
 }
 
+/* Coolvetica — display / heading face */
+@font-face {
+  font-family: "Coolvetica";
+  src: url("/fonts/coolvetica-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
  * InterMUN theme — simplified semantic tokens (TAGS):
  *   PAGE / SURFACE / BORDER — layout layers
@@ -303,8 +312,8 @@ html.dark {
   /* Prefer SF on Apple; Inter var from next/font still available as --font-ui */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
-  --font-display:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
+  --font-heading: "Coolvetica", var(--font-ui), system-ui, sans-serif;
+  --font-display: var(--font-heading);
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --font-cursive: "Birds of Paradise", cursive;
   --color-brand-accent-ink: var(--brand-accent-ink);
@@ -356,6 +365,14 @@ html.dyslexic-font .font-mono {
 html.dyslexic-font :is(em, i, .italic, .mun-emph, .font-cursive) {
   font-family: var(--font-cursive) !important;
   font-style: normal !important;
+}
+
+/* Keep Coolvetica on headings when dyslexic mode is on; compact labels stay UI sans */
+html.dyslexic-font
+  :is(h1, h2, h3, h4, h5, h6, .mun-display, .dashboard-panel-title, .font-display):not(.text-xs):not(
+    .text-sm
+  ):not(:is(em, i, .italic, .mun-emph, .font-cursive)) {
+  font-family: var(--font-heading) !important;
 }
 
 /* OpenDyslexic runs wide + tall — open up spacing and line height so it stays readable. */
@@ -1037,6 +1054,18 @@ html.dark ::selection {
   .font-cursive {
     font-family: var(--font-cursive);
     font-style: normal;
+  }
+
+  /* Coolvetica for headers and display type; xs/sm stay in UI sans */
+  :is(h1, h2, h3, h4, h5, h6, .mun-display, .dashboard-panel-title, .font-display):not(
+      :is(.mun-emph, .font-cursive, em, i, .italic)
+    ) {
+    font-family: var(--font-heading);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6, .mun-display, .font-display).text-xs,
+  :is(h1, h2, h3, h4, h5, h6, .mun-display, .font-display).text-sm {
+    font-family: var(--font-sans);
   }
 
   .mun-btn-danger {
