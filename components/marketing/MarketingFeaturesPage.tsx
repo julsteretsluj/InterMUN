@@ -8,6 +8,13 @@ const ROLE_PATH: Record<MarketingFeatureRole, string> = {
   secretariat: "/features/secretariat",
 };
 
+/** Hosting requires a partnership inquiry — delegates still self-serve via signup. */
+const FEATURE_PAGE_CTA_HREF: Record<MarketingFeatureRole, string> = {
+  chairs: "/#contact",
+  delegates: "/signup",
+  secretariat: "/#contact",
+};
+
 export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRole }) {
   const t = await getTranslations(`marketing.featuresPages.${role}`);
 
@@ -40,7 +47,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
           </h2>
           <p className="mt-4 text-base leading-relaxed md:text-lg">{t("ctaSubtitle")}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/signup" className="mun-btn-gold rounded-full px-7 py-3 text-base font-bold">
+            <Link href={FEATURE_PAGE_CTA_HREF[role]} className="mun-btn-gold rounded-full px-7 py-3 text-base font-bold">
               {t("ctaStart")} →
             </Link>
             <Link
