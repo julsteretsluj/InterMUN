@@ -2,6 +2,15 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Birds of Paradise — personal-use script face for cursive / italic emphasis */
+@font-face {
+  font-family: "Birds of Paradise";
+  src: url("/fonts/birds-of-paradise.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
  * InterMUN theme — simplified semantic tokens (TAGS):
  *   PAGE / SURFACE / BORDER — layout layers
@@ -297,6 +306,7 @@ html.dark {
   --font-display:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
+  --font-cursive: "Birds of Paradise", cursive;
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-gold: var(--brand-gold);
@@ -340,6 +350,12 @@ html.dyslexic-font .font-display,
 html.dyslexic-font .font-serif,
 html.dyslexic-font .font-mono {
   font-family: var(--font-dyslexic) !important;
+}
+
+/* Keep script emphasis readable when dyslexic mode overrides UI fonts */
+html.dyslexic-font :is(em, i, .italic, .mun-emph, .font-cursive) {
+  font-family: var(--font-cursive) !important;
+  font-style: normal !important;
 }
 
 /* OpenDyslexic runs wide + tall — open up spacing and line height so it stays readable. */
@@ -998,18 +1014,29 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Two-tone editorial display heading: heavy sans + serif-italic gold emphasis */
+  /* Two-tone editorial display heading: heavy sans + script gold emphasis */
   .mun-display {
     @apply font-display font-extrabold tracking-tight;
     letter-spacing: -0.02em;
     line-height: 1.02;
   }
   .mun-emph {
-    font-family: var(--font-serif);
-    font-style: italic;
+    font-family: var(--font-cursive);
+    font-style: normal;
     font-weight: 400;
     color: var(--gold);
-    letter-spacing: -0.01em;
+    letter-spacing: 0.01em;
+  }
+
+  /* All cursive / italic copy uses Birds of Paradise */
+  :is(em, i, .italic) {
+    font-family: var(--font-cursive);
+    font-style: normal;
+  }
+
+  .font-cursive {
+    font-family: var(--font-cursive);
+    font-style: normal;
   }
 
   .mun-btn-danger {
