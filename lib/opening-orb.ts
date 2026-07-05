@@ -1,9 +1,16 @@
 export const OPENING_ORB_BASE = "/marketing/opening-orb.gif";
-/** One full GIF loop — tuned to opening-orb.gif (~3.1s). */
-export const ORB_ANIMATION_HOLD_MS = 3200;
+
+/** opening-orb.gif metadata: 27 frames @ 9cs (90ms) per frame. */
+export const OPENING_ORB_GIF_FRAME_MS = 90;
+export const OPENING_ORB_GIF_FRAME_COUNT = 27;
+export const OPENING_ORB_GIF_LOOP_MS = OPENING_ORB_GIF_FRAME_MS * OPENING_ORB_GIF_FRAME_COUNT;
+
+/** Full loop on screen before fade — loop length + buffer for decode / paint jitter. */
+export const ORB_ANIMATION_HOLD_MS = OPENING_ORB_GIF_LOOP_MS + 900;
 export const ORB_ANIMATION_FADE_MS = 800;
+
 /** Bump when playback logic changes so users get a fresh auto-intro. */
-export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v5";
+export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v6";
 
 /** Cache-busted URL so each play remounts a fresh GIF decode. */
 export function openingOrbUrl(playKey: number): string {
