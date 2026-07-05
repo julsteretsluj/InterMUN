@@ -16,9 +16,11 @@ import {
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
+import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
 import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
 import { MarketingSessionMotionQueuePanel } from "@/components/marketing/MarketingSessionMotionQueuePanel";
 import { MarketingSessionSpeakersPanel } from "@/components/marketing/MarketingSessionSpeakersPanel";
+import { MarketingSessionVoteRecordingPanel } from "@/components/marketing/MarketingSessionVoteRecordingPanel";
 import {
   MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
@@ -120,62 +122,7 @@ export function ChairMotionQueueDemo() {
 }
 
 export function ChairMotionVoteDemo() {
-  const t = useTranslations("marketing.rolePreviews.chair");
-  const [choice, setChoice] = useState<"in_favor" | "against" | null>(null);
-  const [yes, setYes] = useState(11);
-  const [no, setNo] = useState(4);
-  const needed = 12;
-  const total = 17;
-
-  const cast = (next: "in_favor" | "against") => {
-    setChoice((prev) => {
-      if (prev === "in_favor") setYes((n) => n - 1);
-      if (prev === "against") setNo((n) => n - 1);
-      if (next === "in_favor" && prev !== "in_favor") setYes((n) => n + 1);
-      if (next === "against" && prev !== "against") setNo((n) => n + 1);
-      return prev === next ? null : next;
-    });
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("voteLabel")}</span>
-      <p className={cn("mt-2 text-base", PREVIEW_HEADING)}>{t("voteTitle")}</p>
-      <p className={cn("mt-1", PREVIEW_MUTED)}>{t("voteMeta", { yes, no, needed, total })}</p>
-      <div className="mt-3 h-2 overflow-hidden rounded-full bg-zinc-200">
-        <div
-          className="h-full bg-[var(--accent)] transition-all"
-          style={{ width: `${Math.min(100, (yes / needed) * 100)}%` }}
-        />
-      </div>
-      <div className="mt-3 flex gap-2">
-        <button
-          type="button"
-          onClick={() => cast("in_favor")}
-          className={cn(
-            "rounded-full px-3 py-1 text-xs font-semibold",
-            choice === "in_favor"
-              ? "bg-[color-mix(in_srgb,var(--accent)_22%,#fff)] text-[var(--accent)] ring-2 ring-[var(--accent)]/40"
-              : "bg-[color-mix(in_srgb,var(--accent)_12%,#fff)] text-[var(--accent)]"
-          )}
-        >
-          {t("inFavor")}
-        </button>
-        <button
-          type="button"
-          onClick={() => cast("against")}
-          className={cn(
-            "rounded-full border px-3 py-1 text-xs font-semibold",
-            choice === "against"
-              ? "border-rose-400 bg-rose-50 text-rose-800 ring-2 ring-rose-300"
-              : "border-zinc-200 text-zinc-600"
-          )}
-        >
-          {t("against")}
-        </button>
-      </div>
-    </div>
-  );
+  return <MarketingSessionVoteRecordingPanel />;
 }
 
 const TIMER_PRESETS = [
@@ -305,32 +252,7 @@ export function ChairAwardsRubricDemo() {
 }
 
 export function DelegatePrepHubDemo() {
-  const t = useTranslations("marketing.preview");
-  const keys = ["documents", "resolutions", "speeches", "stances"] as const;
-  const [active, setActive] = useState<string>("documents");
-
-  return (
-    <div className="grid grid-cols-2 gap-3">
-      {keys.map((key) => (
-        <button
-          key={key}
-          type="button"
-          onClick={() => setActive(key)}
-          className={cn(
-            "rounded-2xl border p-4 text-left [color-scheme:light]",
-            active === key
-              ? "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#fff)]"
-              : "border-zinc-200 bg-white"
-          )}
-        >
-          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t(`prepTile.${key}`)}</p>
-          <p className="mt-2 text-sm font-semibold text-zinc-900">
-            {active === key ? t("prepActive") : t("prepReady")}
-          </p>
-        </button>
-      ))}
-    </div>
-  );
+  return <MarketingDelegatePrepWorkspacePanel />;
 }
 
 export function DelegateResolutionClausesDemo() {

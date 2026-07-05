@@ -26,13 +26,13 @@ export function OrbAnimationOverlay({
   open,
   playKey,
   onComplete,
-  surface = "dark",
+  surface = "light",
   dismissible = false,
 }: {
   open: boolean;
   playKey: number;
   onComplete: () => void;
-  /** Auto-intro uses dark full-screen; logo replay uses light. */
+  /** Full-screen backdrop behind the GIF (default light cream). */
   surface?: "dark" | "light";
   /** Logo-triggered overlay — Escape / close button ends playback early. */
   dismissible?: boolean;

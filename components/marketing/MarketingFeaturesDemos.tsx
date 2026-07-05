@@ -39,7 +39,7 @@ const DEMO_CONFIG: Record<MarketingFeatureRole, DemoConfig[]> = {
     { id: "roll-call", sectionKey: "rollCall", Component: ChairRollCallQuorumDemo, variant: "dark", dark: true },
     { id: "speakers", sectionKey: "speakers", Component: ChairSpeakersTimerDemo, variant: "dark" },
     { id: "motions", sectionKey: "motions", Component: ChairMotionQueueDemo, variant: "dark" },
-    { id: "voting", sectionKey: "voting", Component: ChairMotionVoteDemo, variant: "light" },
+    { id: "voting", sectionKey: "voting", Component: ChairMotionVoteDemo, variant: "dark" },
     { id: "timers", sectionKey: "timers", Component: ChairSessionTimerDemo, variant: "light" },
     { id: "awards", sectionKey: "awards", Component: ChairAwardsRubricDemo, variant: "light" },
   ],

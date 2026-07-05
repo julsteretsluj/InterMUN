@@ -3979,6 +3979,8 @@
       },
       "prepReady": "Open workspace",
       "prepActive": "Draft in progress",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes.",
       "smtLabel": "Live committees",
       "smtHint": "Select a chamber to preview secretariat oversight.",
       "smtLive": "In session",

@@ -9,17 +9,14 @@ import {
 } from "@/lib/roll-call-attendance-buttons";
 import { cn } from "@/lib/utils";
 
+import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
 import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
 import { MarketingSessionSpeakersPanel } from "@/components/marketing/MarketingSessionSpeakersPanel";
+import { MarketingSessionVoteRecordingPanel } from "@/components/marketing/MarketingSessionVoteRecordingPanel";
 import {
   MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
   marketingRollAttendanceButtonClass,
-  PREVIEW_CARD,
-  PREVIEW_HEADING,
-  PREVIEW_LABEL,
-  PREVIEW_MUTED,
-  PREVIEW_ROW,
 } from "@/components/marketing/marketing-preview-styles";
 type RollRow = { id: string; country: string; status: RollAttendance };
 
@@ -138,109 +135,23 @@ export function MarketingHeroSessionPreview({ className }: { className?: string 
   );
 }
 
-type VoteChoice = "in_favor" | "against" | null;
-
 export function MarketingChairMotionPreview({ className }: { className?: string }) {
-  const t = useTranslations("marketing.preview");
   const [roll, setRoll] = useState<RollRow[]>(HERO_ROLL_ALL.slice(0, 4));
-  const [choice, setChoice] = useState<VoteChoice>(null);
-  const [yesCount, setYesCount] = useState(11);
-  const [noCount, setNoCount] = useState(4);
 
   const setRollAttendance = useCallback((id: string, status: RollAttendance) => {
     setRoll((prev) => prev.map((row) => (row.id === id ? { ...row, status } : row)));
   }, []);
 
-  const recordVote = useCallback(
-    (next: VoteChoice) => {
-      setChoice((prev) => {
-        if (prev === "in_favor") setYesCount((n) => Math.max(0, n - 1));
-        if (prev === "against") setNoCount((n) => Math.max(0, n - 1));
-        if (next === "in_favor") setYesCount((n) => n + 1);
-        if (next === "against") setNoCount((n) => n + 1);
-        return prev === next ? null : next;
-      });
-    },
-    []
-  );
-
-  const totalNeeded = 17;
-  const threshold = Math.ceil((totalNeeded * 2) / 3);
-
   return (
     <div className={cn("space-y-4", className)}>
       <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} onDarkSurface />
-      <div className={PREVIEW_CARD}>
-        <p className={PREVIEW_LABEL}>{t("voteLabel")}</p>
-        <p className="mt-2 font-display text-base font-semibold text-zinc-900">{t("voteTitle")}</p>
-        <p className={cn("mt-1", PREVIEW_MUTED)}>
-          {t("voteMetaInteractive", { yes: yesCount, no: noCount, needed: threshold, total: totalNeeded })}
-        </p>
-        <p className="mt-2 text-[0.7rem] text-zinc-500">{t("voteHint")}</p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => recordVote("in_favor")}
-            className={cn(
-              "rounded-full px-3 py-1 text-xs font-semibold transition",
-              choice === "in_favor"
-                ? "bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] text-[var(--accent)] ring-2 ring-[var(--accent)]/40"
-                : "bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)] hover:bg-[color-mix(in_srgb,var(--accent)_18%,transparent)]"
-            )}
-          >
-            {t("voteAccept")}
-          </button>
-          <button
-            type="button"
-            onClick={() => recordVote("against")}
-            className={cn(
-              "rounded-full border px-3 py-1 text-xs font-semibold transition",
-              choice === "against"
-                ? "border-rose-400/60 bg-rose-500/10 text-rose-800 ring-2 ring-rose-400/35"
-                : "border-zinc-200 text-zinc-600 hover:border-rose-300 hover:text-rose-800"
-            )}
-          >
-            {t("voteReject")}
-          </button>
-        </div>
-      </div>
+      <MarketingSessionVoteRecordingPanel compactIntro />
     </div>
   );
 }
 
-const PREP_TILE_KEYS = ["documents", "resolutions", "speeches", "stances"] as const;
-
 export function MarketingDelegatePrepPreview({ className }: { className?: string }) {
-  const t = useTranslations("marketing.preview");
-  const [active, setActive] = useState<string>("documents");
-
-  return (
-    <div className={cn("grid grid-cols-2 gap-3", className)}>
-      {PREP_TILE_KEYS.map((key) => {
-        const selected = active === key;
-        return (
-          <button
-            key={key}
-            type="button"
-            onClick={() => setActive(key)}
-            className={cn(
-              "rounded-2xl border p-4 text-left shadow-[0_8px_24px_-12px_rgba(0,0,0,0.2)] transition [color-scheme:light]",
-              selected
-                ? "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_10%,#ffffff)]"
-                : "border-zinc-200 bg-white hover:border-[color-mix(in_srgb,var(--accent)_25%,#d4d4d8)]"
-            )}
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
-              {t(`prepTile.${key}`)}
-            </p>
-            <p className="mt-2 font-display text-sm font-semibold text-zinc-900">
-              {selected ? t("prepActive") : t("prepReady")}
-            </p>
-          </button>
-        );
-      })}
-    </div>
-  );
+  return <MarketingDelegatePrepWorkspacePanel className={className} compactIntro />;
 }
 
 export function MarketingSmtOversightPreview({ className }: { className?: string }) {

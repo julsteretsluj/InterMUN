@@ -50,12 +50,17 @@ export function MarketingOpening({ children }: { children: React.ReactNode }) {
   };
 
   if (phase === "checking") {
-    return <div className="fixed inset-0 z-[9999] bg-black" aria-hidden />;
+    return <div className="fixed inset-0 z-[9999] bg-brand-cream [color-scheme:light]" aria-hidden />;
   }
 
   return (
     <>
-      <OrbAnimationOverlay open={phase === "playing"} playKey={playKey} onComplete={handleComplete} />
+      <OrbAnimationOverlay
+        open={phase === "playing"}
+        playKey={playKey}
+        onComplete={handleComplete}
+        surface="light"
+      />
       <div
         className={cn(
           "transition-opacity duration-500",
