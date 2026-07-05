@@ -3980,7 +3980,9 @@
       "smtIdle": "Gotowość",
       "statusPresentVoting": "P+W",
       "statusPresent": "P",
-      "statusAbsent": "Nieobecny"
+      "statusAbsent": "Nieobecny",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Poznaj wszystkie funkcje podium",
     "exploreDelegates": "Poznaj wszystkie funkcje delegowania",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Wybierz kraj, a następnie dotknij wolnego miejsca.",
         "poolLabel": "Pula delegatów",
         "gatesLabel": "Kody bramek",
-        "gate_event": "Brama zdarzeń",
-        "gate_room": "Brama pokoju",
-        "gate_committee": "Brama Komitetu",
         "copyCode": "Skopiuj kod",
-        "rotateCodes": "Obróć wszystkie kody",
         "awardsReviewLabel": "Przegląd nagród",
         "approve": "Zatwierdzić",
         "reject": "Odrzucić",

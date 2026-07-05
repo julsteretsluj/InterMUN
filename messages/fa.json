@@ -3980,7 +3980,9 @@
       "smtIdle": "آماده به کار",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "غایب"
+      "statusAbsent": "غایب",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "تمام ویژگی‌های دیس را کاوش کنید",
     "exploreDelegates": "همه ویژگی‌های نمایندگی را کاوش کنید",
@@ -4303,11 +4305,7 @@
         "allocationHint": "یک کشور را انتخاب کنید، سپس روی یک صندلی باز ضربه بزنید.",
         "poolLabel": "استخر نمایندگان",
         "gatesLabel": "کدهای دروازه",
-        "gate_event": "دروازه رویداد",
-        "gate_room": "دروازه اتاق",
-        "gate_committee": "دروازه کمیته",
         "copyCode": "کد را کپی کنید",
-        "rotateCodes": "همه کدها را بچرخانید",
         "awardsReviewLabel": "بررسی جوایز",
         "approve": "تایید کنید",
         "reject": "رد کردن",

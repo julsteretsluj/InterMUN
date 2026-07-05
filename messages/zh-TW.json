@@ -3980,7 +3980,9 @@
       "smtIdle": "支援",
       "statusPresentVoting": "壓力+電壓",
       "statusPresent": "P",
-      "statusAbsent": "缺席的"
+      "statusAbsent": "缺席的",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "探索講台的所有功能",
     "exploreDelegates": "探索所有代表功能",
@@ -4303,11 +4305,7 @@
         "allocationHint": "選擇一個國家/地區，然後點選一個空位。",
         "poolLabel": "代表池",
         "gatesLabel": "門禁代碼",
-        "gate_event": "事件門",
-        "gate_room": "房門",
-        "gate_committee": "委員會門",
         "copyCode": "複製程式碼",
-        "rotateCodes": "旋轉所有程式碼",
         "awardsReviewLabel": "獎項回顧",
         "approve": "核准",
         "reject": "拒絕",

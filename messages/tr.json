@@ -3980,7 +3980,9 @@
       "smtIdle": "Yanında olmak",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Mevcut olmayan"
+      "statusAbsent": "Mevcut olmayan",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Tüm dais özelliklerini keşfedin",
     "exploreDelegates": "Tüm temsilci özelliklerini keşfedin",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Bir ülke seçin ve açık bir koltuğa dokunun.",
         "poolLabel": "Delege havuzu",
         "gatesLabel": "Kapı kodları",
-        "gate_event": "Etkinlik kapısı",
-        "gate_room": "Oda kapısı",
-        "gate_committee": "Komite kapısı",
         "copyCode": "Kodu kopyala",
-        "rotateCodes": "Tüm kodları döndür",
         "awardsReviewLabel": "Ödül incelemesi",
         "approve": "Onaylamak",
         "reject": "Reddetmek",

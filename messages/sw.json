@@ -3980,7 +3980,9 @@
       "smtIdle": "Kusubiri",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Haipo"
+      "statusAbsent": "Haipo",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Chunguza vipengele vyote vya dais",
     "exploreDelegates": "Chunguza vipengele vyote vya mjumbe",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Chagua nchi, kisha uguse kiti kilicho wazi.",
         "poolLabel": "Dimbwi la mjumbe",
         "gatesLabel": "Nambari za lango",
-        "gate_event": "Lango la tukio",
-        "gate_room": "Lango la chumba",
-        "gate_committee": "Lango la Kamati",
         "copyCode": "Nakili msimbo",
-        "rotateCodes": "Zungusha misimbo yote",
         "awardsReviewLabel": "Tathmini ya tuzo",
         "approve": "Idhinisha",
         "reject": "Kataa",

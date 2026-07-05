@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import {
-  motionDisruptivenessScore,
   sortMotionsMostDisruptiveFirst,
 } from "@/lib/motion-disruptiveness";
 import type { VoteType } from "@/types/database";
@@ -108,17 +107,11 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
         <div className="space-y-2 rounded-lg border border-white/12 bg-black/25 px-3 py-2">
           <p className={cn(SESSION_FLOOR_LABEL, "text-zinc-400")}>{t("pendingVoteOrderMostDisruptive")}</p>
           <ol className="list-decimal space-y-2 pl-5 text-sm text-zinc-100">
-            {motions.map((motion, index) => {
-              const ropPriority = motionDisruptivenessScore(motion.vote_type, motion.procedure_code);
-              const typeLabel = motion.procedure_code ?? motion.vote_type;
-              return (
+            {motions.map((motion, index) => (
                 <li key={motion.id} className="pl-1">
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="min-w-0">
                       <span className="font-medium">#{index + 1}</span> — {motion.title}
-                      <span className="block text-xs text-zinc-400 sm:ml-2 sm:inline">
-                        ({typeLabel}, RoP priority {ropPriority})
-                      </span>
                     </div>
                     <button
                       type="button"
@@ -128,8 +121,7 @@ export function MarketingSessionMotionQueuePanel({ className }: { className?: st
                     </button>
                   </div>
                 </li>
-              );
-            })}
+            ))}
           </ol>
         </div>
       </div>

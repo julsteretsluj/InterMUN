@@ -3980,7 +3980,9 @@
       "smtIdle": "ສະແຕນບາຍ",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "ຂາດ"
+      "statusAbsent": "ຂາດ",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "ສຳຫຼວດຄຸນສົມບັດຂອງ dais ທັງໝົດ",
     "exploreDelegates": "ສຳຫຼວດຄຸນສົມບັດຂອງຕົວແທນທັງໝົດ",
@@ -4303,11 +4305,7 @@
         "allocationHint": "ເລືອກປະເທດ, ຈາກນັ້ນແຕະທີ່ນັ່ງເປີດ.",
         "poolLabel": "ສະນຸກເກີຕົວແທນ",
         "gatesLabel": "ລະຫັດປະຕູ",
-        "gate_event": "ປະຕູເຫດການ",
-        "gate_room": "ປະຕູຫ້ອງ",
-        "gate_committee": "ປະຕູ​ຄະນະ​ກຳມະການ",
         "copyCode": "ສຳເນົາລະຫັດ",
-        "rotateCodes": "ໝຸນລະຫັດທັງໝົດ",
         "awardsReviewLabel": "ການທົບທວນລາງວັນ",
         "approve": "ອະນຸມັດ",
         "reject": "ປະຕິເສດ",

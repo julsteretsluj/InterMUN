@@ -3980,7 +3980,9 @@
       "smtIdle": "Siaga",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Absen"
+      "statusAbsent": "Absen",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Jelajahi semua fitur dais",
     "exploreDelegates": "Jelajahi semua fitur delegasi",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Pilih negara, lalu ketuk kursi yang terbuka.",
         "poolLabel": "Kelompok delegasi",
         "gatesLabel": "Kode gerbang",
-        "gate_event": "Gerbang acara",
-        "gate_room": "Gerbang kamar",
-        "gate_committee": "Gerbang panitia",
         "copyCode": "Salin kode",
-        "rotateCodes": "Putar semua kode",
         "awardsReviewLabel": "Ulasan penghargaan",
         "approve": "Menyetujui",
         "reject": "Menolak",

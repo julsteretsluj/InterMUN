@@ -3980,7 +3980,9 @@
       "smtIdle": "រង់ចាំ",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "អវត្តមាន"
+      "statusAbsent": "អវត្តមាន",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "ស្វែងរកលក្ខណៈពិសេសទាំងអស់របស់ dais",
     "exploreDelegates": "រុករកមុខងារតំណាងទាំងអស់។",
@@ -4303,11 +4305,7 @@
         "allocationHint": "ជ្រើសរើសប្រទេសមួយ បន្ទាប់មកចុចលើកន្លែងទំនេរ។",
         "poolLabel": "អាងតំណាង",
         "gatesLabel": "លេខកូដច្រកទ្វារ",
-        "gate_event": "ច្រកទ្វារព្រឹត្តិការណ៍",
-        "gate_room": "ច្រកទ្វារបន្ទប់",
-        "gate_committee": "ច្រកទ្វារគណៈកម្មាធិការ",
         "copyCode": "ចម្លងកូដ",
-        "rotateCodes": "បង្វិលលេខកូដទាំងអស់។",
         "awardsReviewLabel": "ការវាយតម្លៃរង្វាន់",
         "approve": "យល់ព្រម",
         "reject": "បដិសេធ",

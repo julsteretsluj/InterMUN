@@ -3980,7 +3980,9 @@
       "smtIdle": "အရန်သင့်လုပ်သည်",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "လာခဲ့ပါ။"
+      "statusAbsent": "လာခဲ့ပါ။",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Dais လုပ်ဆောင်ချက်အားလုံးကို စူးစမ်းပါ။",
     "exploreDelegates": "ကိုယ်စားလှယ်၏အင်္ဂါရပ်အားလုံးကို စူးစမ်းပါ။",
@@ -4303,11 +4305,7 @@
         "allocationHint": "နိုင်ငံတစ်ခုကို ရွေးပါ၊ ထို့နောက် ဖွင့်ထားသော ထိုင်ခုံကို နှိပ်ပါ။",
         "poolLabel": "ကိုယ်စားလှယ်ယူမယ်။",
         "gatesLabel": "ဂိတ်နံပါတ်များ",
-        "gate_event": "ပွဲတံခါး",
-        "gate_room": "အခန်းတံခါး",
-        "gate_committee": "ကော်မတီတံခါး",
         "copyCode": "ကုဒ်ကို ကူးယူပါ။",
-        "rotateCodes": "ကုဒ်အားလုံးကို လှည့်ပါ။",
         "awardsReviewLabel": "ဆုပေးပွဲသုံးသပ်ချက်",
         "approve": "လက်မခံပါ။",
         "reject": "ငြင်းပယ်ပါ။",

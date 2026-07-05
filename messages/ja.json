@@ -3980,7 +3980,9 @@
       "smtIdle": "待機する",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "不在"
+      "statusAbsent": "不在",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "dais のすべての機能を詳しく見る",
     "exploreDelegates": "デリゲートのすべての機能を確認する",
@@ -4303,11 +4305,7 @@
         "allocationHint": "国を選択し、空いている座席をタップします。",
         "poolLabel": "代表者プール",
         "gatesLabel": "ゲートコード",
-        "gate_event": "イベントゲート",
-        "gate_room": "ルームゲート",
-        "gate_committee": "委員会ゲート",
         "copyCode": "コードをコピーする",
-        "rotateCodes": "すべてのコードを回転させる",
         "awardsReviewLabel": "賞のレビュー",
         "approve": "承認する",
         "reject": "拒否する",

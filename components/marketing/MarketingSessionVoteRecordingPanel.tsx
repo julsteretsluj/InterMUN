@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { cn } from "@/lib/utils";
-import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
+import { MARKETING_SESSION_SURFACE, MARKETING_CHAMBER_PREVIEW, MARKETING_LIGHT_SURFACE, SESSION_FLOOR_LABEL } from "./marketing-preview-styles";
 
 type VoteValue = "yes" | "no" | "abstain" | null;
 
@@ -107,36 +107,36 @@ export function MarketingSessionVoteRecordingPanel({
       ) : null}
 
       <article className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
-        <header className="flex flex-wrap items-start justify-between gap-3 border-b border-[var(--hairline)] pb-3">
+        <header className="flex flex-wrap items-start justify-between gap-3 border-b border-white/12 pb-3">
           <div className="min-w-0 space-y-1">
-            <p className={SESSION_FLOOR_LABEL}>{t("voteTypes.motion")}</p>
-            <h3 className="font-display text-lg font-semibold leading-snug text-brand-navy">
+            <p className={cn(SESSION_FLOOR_LABEL, "text-zinc-400")}>{t("voteTypes.motion")}</p>
+            <h3 className="font-display text-lg font-semibold leading-snug text-zinc-100">
               {MOTION_TITLE}
             </h3>
-            <p className="text-xs capitalize text-brand-muted">{MOTION_PROCEDURE.replace(/_/g, " ")}</p>
+            <p className="text-xs capitalize text-zinc-400">{MOTION_PROCEDURE.replace(/_/g, " ")}</p>
           </div>
           <div className="flex shrink-0 flex-wrap justify-end gap-2">
             <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold tracking-wide text-amber-950">
               {t("mustVoteBadge")}
             </span>
-            <span className="rounded-full bg-[color:color-mix(in_srgb,var(--color-text)_7%,var(--color-bg-page))] px-2.5 py-1 text-xs font-medium text-brand-navy">
+            <span className="rounded-full bg-white/12 px-2.5 py-1 text-xs font-medium text-zinc-200">
               {t("majorityLine", { label: majorityLabel })}
             </span>
           </div>
         </header>
 
-        <div className="mun-inset flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+        <div className={cn("mun-inset flex flex-wrap items-center gap-x-6 gap-y-2 text-sm", MARKETING_LIGHT_SURFACE, "bg-white/95")}>
           <span>
             <span className="mun-label mr-1">{t("yes")}</span>
-            <span className="font-semibold tabular-nums text-brand-navy">{yes}</span>
+            <span className="font-semibold tabular-nums">{yes}</span>
           </span>
           <span>
             <span className="mun-label mr-1">{t("no")}</span>
-            <span className="font-semibold tabular-nums text-brand-navy">{no}</span>
+            <span className="font-semibold tabular-nums">{no}</span>
           </span>
           <span>
             <span className="mun-label mr-1">{t("total")}</span>
-            <span className="font-semibold tabular-nums text-brand-navy">{total}</span>
+            <span className="font-semibold tabular-nums">{total}</span>
           </span>
           {total > 0 ? (
             <span
@@ -150,21 +150,21 @@ export function MarketingSessionVoteRecordingPanel({
           ) : null}
         </div>
 
-        <div className="mun-inset space-y-2 border border-[var(--hairline)] bg-[color:color-mix(in_srgb,var(--color-text)_4%,transparent)] px-3 py-3">
+        <div className="mun-inset space-y-2 border border-white/12 bg-black/20 px-3 py-3">
           <div className="space-y-0.5">
-            <p className="mun-label">{t("delegateRollCall", { count: delegates.length })}</p>
-            <p className="text-xs leading-relaxed text-brand-muted">{t("chairRecordVotesHint")}</p>
+            <p className="mun-label text-zinc-400">{t("delegateRollCall", { count: delegates.length })}</p>
+            <p className="text-xs leading-relaxed text-zinc-400">{t("chairRecordVotesHint")}</p>
           </div>
           <div className="max-h-[min(18rem,50vh)] overflow-y-auto pr-1">
-            <div className="mun-group-list">
+            <div className={cn("mun-group-list", MARKETING_LIGHT_SURFACE, "overflow-hidden border-zinc-200/90 p-0")}>
               {delegates.map((row) => (
-                <div key={row.id} className="transition-apple">
+                <div key={row.id} className="transition-apple px-4 py-3">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="font-medium text-brand-navy">{row.country}</p>
-                      <p className="mt-0.5 text-xs text-brand-muted">
+                      <p className="font-medium">{row.country}</p>
+                      <p className="mt-0.5 text-xs text-zinc-500">
                         {t("rollPrefix")} {rollLabel(row.rollAttendance, t)} · {t("recordedPrefix")}{" "}
-                        <span className="font-medium text-brand-navy">
+                        <span className="font-medium text-zinc-800">
                           {recordedLabel(row.vote, t)}
                         </span>
                       </p>
@@ -174,10 +174,10 @@ export function MarketingSessionVoteRecordingPanel({
                       role="group"
                       aria-label={`${row.country}: ${t("recordVoteChoice")}`}
                     >
-                      <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-brand-muted sm:text-right">
+                      <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-zinc-500 sm:text-right">
                         {t("recordVoteChoice")}
                       </p>
-                      <div className="flex flex-wrap gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--color-bg-page)] p-2 sm:justify-end">
+                      <div className="flex flex-wrap gap-2 rounded-lg border border-zinc-200 bg-zinc-100 p-2 sm:justify-end">
                         <button
                           type="button"
                           onClick={() => recordVote(row.id, "yes")}
@@ -206,7 +206,7 @@ export function MarketingSessionVoteRecordingPanel({
                             type="button"
                             disabled
                             title={t("abstainNotApplicableMotionType")}
-                            className="cursor-not-allowed rounded-lg bg-amber-600/35 px-3 py-1.5 text-xs font-medium text-white/80 opacity-50"
+                            className="cursor-not-allowed rounded-lg border border-zinc-200 bg-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-500"
                           >
                             {t("abstain")}
                           </button>
@@ -226,7 +226,7 @@ export function MarketingSessionVoteRecordingPanel({
                         <button
                           type="button"
                           onClick={() => clearVote(row.id)}
-                          className="rounded-[var(--radius-pill)] border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-1.5 text-xs font-medium text-brand-navy transition-apple hover:bg-[color:var(--discord-hover-bg)] active:scale-[0.97]"
+                          className="rounded-[var(--radius-pill)] border border-zinc-300 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-sm transition-apple hover:bg-zinc-50 active:scale-[0.97]"
                         >
                           {t("clear")}
                         </button>

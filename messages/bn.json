@@ -3980,7 +3980,9 @@
       "smtIdle": "স্ট্যান্ডবাই",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "অনুপস্থিত"
+      "statusAbsent": "অনুপস্থিত",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "সমস্ত মঞ্চ বৈশিষ্ট্য অন্বেষণ",
     "exploreDelegates": "সমস্ত প্রতিনিধি বৈশিষ্ট্য অন্বেষণ",
@@ -4303,11 +4305,7 @@
         "allocationHint": "একটি দেশ নির্বাচন করুন, তারপর একটি খোলা আসনে আলতো চাপুন৷",
         "poolLabel": "প্রতিনিধি পুল",
         "gatesLabel": "গেট কোড",
-        "gate_event": "ইভেন্ট গেট",
-        "gate_room": "রুমের গেট",
-        "gate_committee": "কমিটির গেট",
         "copyCode": "কোড কপি করুন",
-        "rotateCodes": "সমস্ত কোড ঘোরান",
         "awardsReviewLabel": "পুরস্কার পর্যালোচনা",
         "approve": "অনুমোদন করুন",
         "reject": "প্রত্যাখ্যান করুন",

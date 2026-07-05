@@ -4038,9 +4038,9 @@
             "eyebrow": "Motion floor",
             "title": "RoP-ranked motion queue",
             "description": "Competing motions sort by Rules of Procedure — most disruptive first. InterMUN applies the same priority stack your committee handbook expects before you open voting.",
-            "bullet1": "Motion title and procedure code on every row",
+            "bullet1": "Motion title on every pending row",
             "bullet2": "Automatic most-disruptive-first vote order",
-            "bullet3": "RoP priority score shown on each row",
+            "bullet3": "Withdraw motions before voting begins",
             "previewLabel": "Motion queue"
           },
           "voting": {
@@ -4111,11 +4111,11 @@
           "resolutions": {
             "index": "B",
             "eyebrow": "Resolutions",
-            "title": "Operative clause drafting with live editing",
-            "description": "Build preambulatory and operative language clause by clause. Add new operatives, remove lines that do not survive bloc review, and keep numbering automatic.",
-            "bullet1": "Numbered operative clauses",
-            "bullet2": "Add and remove lines in real time",
-            "bullet3": "Structured for committee workflow handoff",
+            "title": "Clause suggestions with opening presets",
+            "description": "Choose a draft resolution, pick preambulatory or operative style, tap an opening preset, and submit clause suggestions the dais can merge into the official draft.",
+            "bullet1": "Preambulatory and operative sections",
+            "bullet2": "Opening preset chips plus live preview",
+            "bullet3": "Committee-visible suggestion queue",
             "previewLabel": "Clause editor"
           },
           "amendments": {

@@ -3980,7 +3980,9 @@
       "smtIdle": "tūtatari",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Kei te ngaro"
+      "statusAbsent": "Kei te ngaro",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Tūhurahia ngā āhuatanga katoa o te rā",
     "exploreDelegates": "Te torotoro i nga ahuatanga katoa o te kaitautapa",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Tīpakohia he whenua, ka patohia he nohoanga tuwhera.",
         "poolLabel": "Tukuna te puna wai",
         "gatesLabel": "Waehere kuaha",
-        "gate_event": "Kuaha takahanga",
-        "gate_room": "Kuaha ruma",
-        "gate_committee": "Te kuwaha komiti",
         "copyCode": "Tārua waehere",
-        "rotateCodes": "Hurihia nga waehere katoa",
         "awardsReviewLabel": "Te arotake tohu",
         "approve": "Whakaae",
         "reject": "Whakakahore",

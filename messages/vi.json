@@ -3980,7 +3980,9 @@
       "smtIdle": "Chế độ chờ",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Vắng mặt"
+      "statusAbsent": "Vắng mặt",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Khám phá tất cả các tính năng của dais",
     "exploreDelegates": "Khám phá tất cả các tính năng của đại biểu",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Chọn một quốc gia, sau đó nhấn vào một chỗ ngồi đang mở.",
         "poolLabel": "Nhóm đại biểu",
         "gatesLabel": "Mã cổng",
-        "gate_event": "Cổng sự kiện",
-        "gate_room": "Cổng phòng",
-        "gate_committee": "cổng ủy ban",
         "copyCode": "Sao chép mã",
-        "rotateCodes": "Xoay tất cả các mã",
         "awardsReviewLabel": "Đánh giá giải thưởng",
         "approve": "Chấp thuận",
         "reject": "Từ chối",

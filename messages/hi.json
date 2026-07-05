@@ -3980,7 +3980,9 @@
       "smtIdle": "समर्थन करना",
       "statusPresentVoting": "पी+वी",
       "statusPresent": "P",
-      "statusAbsent": "अनुपस्थित"
+      "statusAbsent": "अनुपस्थित",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "सभी मंच सुविधाओं का अन्वेषण करें",
     "exploreDelegates": "सभी प्रतिनिधि सुविधाओं का अन्वेषण करें",
@@ -4303,11 +4305,7 @@
         "allocationHint": "एक देश चुनें, फिर एक खुली सीट पर टैप करें।",
         "poolLabel": "प्रतिनिधि पूल",
         "gatesLabel": "गेट कोड",
-        "gate_event": "इवेंट गेट",
-        "gate_room": "कमरे का गेट",
-        "gate_committee": "समिति द्वार",
         "copyCode": "कोड कॉपी करें",
-        "rotateCodes": "सभी कोड घुमाएँ",
         "awardsReviewLabel": "पुरस्कार समीक्षा",
         "approve": "मंज़ूरी देना",
         "reject": "अस्वीकार करना",

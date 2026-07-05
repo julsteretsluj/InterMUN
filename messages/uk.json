@@ -3980,7 +3980,9 @@
       "smtIdle": "Режим очікування",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Відсутній"
+      "statusAbsent": "Відсутній",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Ознайомтеся з усіма функціями dais",
     "exploreDelegates": "Ознайомтеся з усіма функціями делегування",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Виберіть країну, а потім торкніться відкритого місця.",
         "poolLabel": "Пул делегатів",
         "gatesLabel": "Коди воріт",
-        "gate_event": "Ворота для подій",
-        "gate_room": "Кімнатні ворота",
-        "gate_committee": "Комітетська брама",
         "copyCode": "Скопіюйте код",
-        "rotateCodes": "Поверніть усі коди",
         "awardsReviewLabel": "Огляд нагород",
         "approve": "Затвердити",
         "reject": "Відхиляти",

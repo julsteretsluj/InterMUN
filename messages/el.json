@@ -3980,7 +3980,9 @@
       "smtIdle": "Αναμονή",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Απών"
+      "statusAbsent": "Απών",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Εξερευνήστε όλες τις δυνατότητες του dais",
     "exploreDelegates": "Εξερευνήστε όλες τις δυνατότητες αντιπροσώπων",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Επιλέξτε μια χώρα και, στη συνέχεια, πατήστε μια ανοιχτή θέση.",
         "poolLabel": "Πισίνα αντιπροσώπων",
         "gatesLabel": "Κωδικοί πυλών",
-        "gate_event": "Πύλη εκδήλωσης",
-        "gate_room": "Πύλη δωματίου",
-        "gate_committee": "Πύλη επιτροπής",
         "copyCode": "Αντιγραφή κωδικού",
-        "rotateCodes": "Περιστρέψτε όλους τους κωδικούς",
         "awardsReviewLabel": "Κριτική βραβείων",
         "approve": "Εγκρίνω",
         "reject": "Απορρίπτω",

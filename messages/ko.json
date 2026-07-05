@@ -3980,7 +3980,9 @@
       "smtIdle": "대기",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "결석한"
+      "statusAbsent": "결석한",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "모든 데이지 기능 살펴보기",
     "exploreDelegates": "모든 대리인 기능 살펴보기",
@@ -4303,11 +4305,7 @@
         "allocationHint": "국가를 선택한 후 빈 자리를 탭하세요.",
         "poolLabel": "대표자 풀",
         "gatesLabel": "게이트 코드",
-        "gate_event": "이벤트 게이트",
-        "gate_room": "객실 게이트",
-        "gate_committee": "위원회 게이트",
         "copyCode": "코드 복사",
-        "rotateCodes": "모든 코드 회전",
         "awardsReviewLabel": "수상내역",
         "approve": "승인하다",
         "reject": "거부하다",

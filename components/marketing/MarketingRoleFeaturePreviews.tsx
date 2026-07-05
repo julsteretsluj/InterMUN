@@ -6,16 +6,15 @@ import {
   Check,
   Pause,
   Play,
-  Plus,
   RefreshCw,
   Send,
   SkipForward,
-  Trash2,
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
 import { MarketingAllocationMatrixPanel } from "@/components/marketing/MarketingAllocationMatrixPanel";
 import { MarketingChairAwardsRubricPanel } from "@/components/marketing/MarketingChairAwardsRubricPanel";
+import { MarketingDelegateResolutionBuilderPanel } from "@/components/marketing/MarketingDelegateResolutionBuilderPanel";
 import { MarketingAwardsReviewPanel } from "@/components/marketing/MarketingAwardsReviewPanel";
 import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
 import { MarketingEventSchedulePanel } from "@/components/marketing/MarketingEventSchedulePanel";
@@ -219,61 +218,7 @@ export function DelegatePrepHubDemo() {
 }
 
 export function DelegateResolutionClausesDemo() {
-  const t = useTranslations("marketing.rolePreviews.delegate");
-  const [clauses, setClauses] = useState([
-    "Calls upon Member States to expand climate finance access;",
-    "Encourages bilateral technology-transfer partnerships;",
-    "Requests the Secretary-General to report annually.",
-  ]);
-  const [draft, setDraft] = useState("");
-
-  const addClause = () => {
-    const trimmed = draft.trim();
-    if (!trimmed) return;
-    setClauses((prev) => [...prev, trimmed.endsWith(";") ? trimmed : `${trimmed};`]);
-    setDraft("");
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("resolutionLabel")}</span>
-      <ol className="mt-3 space-y-2">
-        {clauses.map((clause, i) => (
-          <li
-            key={`${i}-${clause}`}
-            className="flex gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm text-zinc-800"
-          >
-            <span className="font-mono text-xs font-bold text-[var(--accent)]">{i + 1}.</span>
-            <span className="flex-1">{clause}</span>
-            <button
-              type="button"
-              aria-label={t("removeClause")}
-              onClick={() => setClauses((prev) => prev.filter((_, idx) => idx !== i))}
-              className="text-zinc-400 hover:text-rose-600"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </button>
-          </li>
-        ))}
-      </ol>
-      <div className="mt-3 flex gap-2">
-        <input
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder={t("clausePlaceholder")}
-          className="min-w-0 flex-1 rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-900"
-        />
-        <button
-          type="button"
-          onClick={addClause}
-          className="inline-flex items-center gap-1 rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-white"
-        >
-          <Plus className="h-3.5 w-3.5" />
-          {t("addClause")}
-        </button>
-      </div>
-    </div>
-  );
+  return <MarketingDelegateResolutionBuilderPanel />;
 }
 
 export function DelegateAmendmentFloorDemo() {

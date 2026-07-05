@@ -3980,7 +3980,9 @@
       "smtIdle": "Bersedia",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "tidak hadir"
+      "statusAbsent": "tidak hadir",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Terokai semua ciri pelamin",
     "exploreDelegates": "Terokai semua ciri perwakilan",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Pilih negara, kemudian ketik tempat duduk terbuka.",
         "poolLabel": "Kumpulan perwakilan",
         "gatesLabel": "Kod pintu",
-        "gate_event": "Gerbang acara",
-        "gate_room": "Pintu pagar bilik",
-        "gate_committee": "Pintu gerbang panitia",
         "copyCode": "Salin kod",
-        "rotateCodes": "Putar semua kod",
         "awardsReviewLabel": "Semakan anugerah",
         "approve": "Luluskan",
         "reject": "Tolak",

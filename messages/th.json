@@ -3980,7 +3980,9 @@
       "smtIdle": "สแตนด์บาย",
       "statusPresentVoting": "พี+วี",
       "statusPresent": "P",
-      "statusAbsent": "ไม่มา"
+      "statusAbsent": "ไม่มา",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "สำรวจคุณลักษณะทั้งหมดของ dais",
     "exploreDelegates": "สำรวจฟีเจอร์ของผู้รับมอบสิทธิ์ทั้งหมด",
@@ -4303,11 +4305,7 @@
         "allocationHint": "เลือกประเทศ จากนั้นแตะที่นั่งแบบเปิด",
         "poolLabel": "พูลของผู้รับมอบสิทธิ์",
         "gatesLabel": "รหัสประตู",
-        "gate_event": "ประตูเหตุการณ์",
-        "gate_room": "ประตูห้อง",
-        "gate_committee": "ประตูคณะกรรมการ",
         "copyCode": "คัดลอกรหัส",
-        "rotateCodes": "หมุนรหัสทั้งหมด",
         "awardsReviewLabel": "ทบทวนรางวัล",
         "approve": "อนุมัติ",
         "reject": "ปฏิเสธ",

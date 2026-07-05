@@ -1626,6 +1626,70 @@ html.colorblind-mode .schedule-swatch-session {
   color: #71717a;
 }
 
+/* mun-* utilities set color on the element itself (not via utility classes). */
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :where(.mun-inset, .mun-label, .mun-muted) {
+  color: #d4d4d8;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .mun-label {
+  color: #a1a1aa;
+}
+
+/* Light islands inside dark session glass — reset inherited zinc/cream copy. */
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface {
+  color-scheme: light;
+  --color-text: #18181b;
+  --color-text-secondary: #3f3f46;
+  --color-text-muted: #71717a;
+  --brand-navy: #18181b;
+  --brand-muted: #71717a;
+  --color-brand-navy: #18181b;
+  --color-brand-muted: #71717a;
+  --hairline: rgba(60, 60, 67, 0.18);
+  color: #18181b;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface :where(
+  p,
+  span,
+  li,
+  div,
+  .mun-label
+) {
+  color: inherit;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .mun-label,
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .text-zinc-500 {
+  color: #71717a;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .text-zinc-800 {
+  color: #27272a;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface .marketing-light-surface .text-zinc-900 {
+  color: #18181b;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(
+  .bg-white,
+  .bg-white\/95,
+  .bg-zinc-50,
+  .bg-brand-cream
+) :where(.mun-inset, .mun-label, .mun-muted, .mun-group-list) {
+  color: #3f3f46;
+}
+
+.marketing-shell .mun-chamber-frame-dark .marketing-session-surface :is(
+  .bg-white,
+  .bg-white\/95,
+  .bg-zinc-50,
+  .bg-brand-cream
+) .mun-label {
+  color: #71717a;
+}
+
 /* Same card on light chamber frames — dark copy on tinted glass. */
 .marketing-shell .mun-chamber-frame-light .marketing-session-surface {
   color-scheme: light;

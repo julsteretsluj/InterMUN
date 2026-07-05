@@ -3980,7 +3980,9 @@
       "smtIdle": "Stand-by",
       "statusPresentVoting": "P+V",
       "statusPresent": "P",
-      "statusAbsent": "Afwezig"
+      "statusAbsent": "Afwezig",
+      "prepWorkspaceTitle": "Add and save prep work",
+      "prepWorkspaceHint": "Same compose-and-save flows as the delegate dashboard — documents, clause suggestions, speeches, and stance notes."
     },
     "exploreChairs": "Ontdek alle podiumfuncties",
     "exploreDelegates": "Ontdek alle delegatiefuncties",
@@ -4303,11 +4305,7 @@
         "allocationHint": "Selecteer een land en tik vervolgens op een vrije stoel.",
         "poolLabel": "Gedelegeerd zwembad",
         "gatesLabel": "Poortcodes",
-        "gate_event": "Evenement poort",
-        "gate_room": "Kamer poort",
-        "gate_committee": "Comité poort",
         "copyCode": "Kopieer code",
-        "rotateCodes": "Draai alle codes",
         "awardsReviewLabel": "Beoordeling van prijzen",
         "approve": "Goedkeuren",
         "reject": "Afwijzen",
