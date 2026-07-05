@@ -37,8 +37,8 @@ type DemoConfig = {
 const DEMO_CONFIG: Record<MarketingFeatureRole, DemoConfig[]> = {
   chairs: [
     { id: "roll-call", sectionKey: "rollCall", Component: ChairRollCallQuorumDemo, variant: "dark", dark: true },
-    { id: "speakers", sectionKey: "speakers", Component: ChairSpeakersTimerDemo, variant: "light" },
-    { id: "motions", sectionKey: "motions", Component: ChairMotionQueueDemo, variant: "light" },
+    { id: "speakers", sectionKey: "speakers", Component: ChairSpeakersTimerDemo, variant: "dark" },
+    { id: "motions", sectionKey: "motions", Component: ChairMotionQueueDemo, variant: "dark" },
     { id: "voting", sectionKey: "voting", Component: ChairMotionVoteDemo, variant: "light" },
     { id: "timers", sectionKey: "timers", Component: ChairSessionTimerDemo, variant: "light" },
     { id: "awards", sectionKey: "awards", Component: ChairAwardsRubricDemo, variant: "light" },
@@ -52,7 +52,7 @@ const DEMO_CONFIG: Record<MarketingFeatureRole, DemoConfig[]> = {
     { id: "speeches", sectionKey: "speeches", Component: DelegateSpeechPlannerDemo, variant: "light" },
   ],
   secretariat: [
-    { id: "oversight", sectionKey: "oversight", Component: SmtLiveOversightDemo, variant: "light" },
+    { id: "oversight", sectionKey: "oversight", Component: SmtLiveOversightDemo, variant: "dark" },
     { id: "allocations", sectionKey: "allocations", Component: SmtAllocationMatrixDemo, variant: "light" },
     { id: "gates", sectionKey: "gates", Component: SmtGateCodesDemo, variant: "light" },
     { id: "awards", sectionKey: "awards", Component: SmtAwardsReviewDemo, variant: "light" },

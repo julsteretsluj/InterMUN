@@ -3,8 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
-  ArrowDown,
-  ArrowUp,
   Check,
   Copy,
   Pause,
@@ -18,6 +16,9 @@ import {
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
+import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
+import { MarketingSessionMotionQueuePanel } from "@/components/marketing/MarketingSessionMotionQueuePanel";
+import { MarketingSessionSpeakersPanel } from "@/components/marketing/MarketingSessionSpeakersPanel";
 import {
   MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
@@ -26,11 +27,6 @@ import {
   PREVIEW_HEADING,
   PREVIEW_LABEL,
   PREVIEW_MUTED,
-  PREVIEW_ROW,
-  PREVIEW_SPEAKER_NAME,
-  PREVIEW_SPEAKER_NOW,
-  PREVIEW_SPEAKER_PANEL,
-  PREVIEW_SPEAKER_TIMER,
 } from "@/components/marketing/marketing-preview-styles";
 import { cn } from "@/lib/utils";
 
@@ -116,132 +112,11 @@ export function ChairRollCallQuorumDemo() {
 }
 
 export function ChairSpeakersTimerDemo() {
-  const t = useTranslations("marketing.rolePreviews.chair");
-  const [queue, setQueue] = useState(["Norway", "Spain", "Italy", "Kenya", "Mexico"]);
-  const [secondsLeft, setSecondsLeft] = useState(90);
-  const [running, setRunning] = useState(false);
-
-  useEffect(() => {
-    if (!running || secondsLeft <= 0) return;
-    const id = window.setInterval(() => {
-      setSecondsLeft((s) => (s <= 1 ? (setRunning(false), 0) : s - 1));
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [running, secondsLeft]);
-
-  const advance = () => {
-    setQueue((prev) => {
-      if (prev.length < 2) return prev;
-      const [first, ...rest] = prev;
-      return [...rest, first];
-    });
-    setSecondsLeft(90);
-    setRunning(true);
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("speakersLabel")}</span>
-      <div className={cn("mt-3", PREVIEW_SPEAKER_PANEL)}>
-        <p className={PREVIEW_SPEAKER_NOW}>{t("nowSpeaking")}</p>
-        <div className="mt-0.5 flex items-end justify-between">
-          <p className={PREVIEW_SPEAKER_NAME}>{queue[0]}</p>
-          <p className={PREVIEW_SPEAKER_TIMER} suppressHydrationWarning>
-            {formatTimer(secondsLeft)}
-          </p>
-        </div>
-        <div className="mt-3 flex gap-2">
-          <button
-            type="button"
-            onClick={() => setRunning((v) => !v)}
-            className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-zinc-900"
-          >
-            {running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-            {running ? t("pause") : t("start")}
-          </button>
-          <button
-            type="button"
-            onClick={advance}
-            className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-semibold text-zinc-900"
-          >
-            <SkipForward className="h-3.5 w-3.5" />
-            {t("nextSpeaker")}
-          </button>
-        </div>
-      </div>
-      <ul className="mt-3 space-y-1 text-sm text-zinc-600">
-        {queue.slice(1).map((c) => (
-          <li key={c}>{c}</li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MarketingSessionSpeakersPanel />;
 }
 
 export function ChairMotionQueueDemo() {
-  const t = useTranslations("marketing.rolePreviews.chair");
-  const [motions, setMotions] = useState([
-    { id: "1", title: "Closure of debate", sponsor: "Kenya" },
-    { id: "2", title: "Moderated caucus — 10 min", sponsor: "Norway" },
-    { id: "3", title: "Introduce draft resolution A", sponsor: "Mexico" },
-    { id: "4", title: "Point of order", sponsor: "Philippines" },
-  ]);
-
-  const move = (index: number, dir: -1 | 1) => {
-    const next = index + dir;
-    if (next < 0 || next >= motions.length) return;
-    setMotions((prev) => {
-      const copy = [...prev];
-      [copy[index], copy[next]] = [copy[next], copy[index]];
-      return copy;
-    });
-  };
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("motionQueueLabel")}</span>
-      <p className="mt-1 text-xs text-zinc-500">{t("motionQueueHint")}</p>
-      <ol className="mt-3 space-y-2">
-        {motions.map((motion, i) => (
-          <li
-            key={motion.id}
-            className={cn(
-              "flex items-center gap-2 rounded-xl border px-3 py-2",
-              i === 0
-                ? "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_8%,#fff)]"
-                : "border-zinc-200 bg-zinc-50"
-            )}
-          >
-            <span className="font-mono text-xs font-bold text-[var(--accent)]">{i + 1}</span>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-zinc-900">{motion.title}</p>
-              <p className="text-xs text-zinc-500">{motion.sponsor}</p>
-            </div>
-            <div className="flex shrink-0 gap-0.5">
-              <button
-                type="button"
-                aria-label={t("moveUp")}
-                disabled={i === 0}
-                onClick={() => move(i, -1)}
-                className="rounded p-1 text-zinc-500 hover:bg-zinc-200 disabled:opacity-30"
-              >
-                <ArrowUp className="h-3.5 w-3.5" />
-              </button>
-              <button
-                type="button"
-                aria-label={t("moveDown")}
-                disabled={i === motions.length - 1}
-                onClick={() => move(i, 1)}
-                className="rounded p-1 text-zinc-500 hover:bg-zinc-200 disabled:opacity-30"
-              >
-                <ArrowDown className="h-3.5 w-3.5" />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
+  return <MarketingSessionMotionQueuePanel />;
 }
 
 export function ChairMotionVoteDemo() {
@@ -727,40 +602,8 @@ export function DelegateSpeechPlannerDemo() {
   );
 }
 
-const SMT_CHAMBERS = ["ECOSOC", "Legal", "WHO", "Press Corps"] as const;
-
 export function SmtLiveOversightDemo() {
-  const t = useTranslations("marketing.preview");
-  const [liveId, setLiveId] = useState<string>("ECOSOC");
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("smtLabel")}</span>
-      <ul className="mt-3 space-y-2">
-        {SMT_CHAMBERS.map((committee) => {
-          const live = liveId === committee;
-          return (
-            <li key={committee}>
-              <button
-                type="button"
-                onClick={() => setLiveId(committee)}
-                className={cn(
-                  PREVIEW_ROW,
-                  live && "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_8%,#fff)]"
-                )}
-              >
-                <span className="font-medium">{committee}</span>
-                <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500">
-                  <span className={cn("h-2 w-2 rounded-full", live ? "bg-[var(--accent)]" : "bg-zinc-300")} />
-                  {live ? t("smtLive") : t("smtIdle")}
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+  return <MarketingSessionLiveCommitteesPanel />;
 }
 
 export function SmtAllocationMatrixDemo() {

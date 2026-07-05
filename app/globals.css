@@ -1033,16 +1033,16 @@ html.dark ::selection {
 
   /* Two-tone editorial display heading: heavy sans + script gold emphasis */
   .mun-display {
-    @apply font-display font-extrabold tracking-tight;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
+    @apply font-display font-extrabold;
+    letter-spacing: 0.035em;
+    line-height: 1.1;
   }
   .mun-emph {
     font-family: var(--font-cursive);
     font-style: normal;
     font-weight: 400;
     color: var(--gold);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.05em;
   }
 
   /* All cursive / italic copy uses Birds of Paradise */
@@ -1503,13 +1503,8 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark)
-  .marketing-preview-surface :is(.text-zinc-900, .preview-speaker-name) {
+  .marketing-preview-surface :is(.text-zinc-900) {
   color: #18181b;
-}
-
-.marketing-shell :is(.mun-marketing-hero, .mun-chamber-frame-dark)
-  .marketing-preview-surface .preview-speaker-timer {
-  color: var(--accent);
 }
 
 .marketing-shell .mun-procedure-chip {

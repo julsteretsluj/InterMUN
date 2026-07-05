@@ -1,8 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronDown, ChevronUp, Pause, Play, SkipForward } from "lucide-react";
 import { HelpButton } from "@/components/HelpButton";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import {
@@ -10,6 +9,8 @@ import {
 } from "@/lib/roll-call-attendance-buttons";
 import { cn } from "@/lib/utils";
 
+import { MarketingSessionLiveCommitteesPanel } from "@/components/marketing/MarketingSessionLiveCommitteesPanel";
+import { MarketingSessionSpeakersPanel } from "@/components/marketing/MarketingSessionSpeakersPanel";
 import {
   MARKETING_CHAMBER_PREVIEW,
   MARKETING_DARK_GLASS_CARD,
@@ -19,10 +20,6 @@ import {
   PREVIEW_LABEL,
   PREVIEW_MUTED,
   PREVIEW_ROW,
-  PREVIEW_SPEAKER_NAME,
-  PREVIEW_SPEAKER_NOW,
-  PREVIEW_SPEAKER_PANEL,
-  PREVIEW_SPEAKER_TIMER,
 } from "@/components/marketing/marketing-preview-styles";
 type RollRow = { id: string; country: string; status: RollAttendance };
 
@@ -38,15 +35,6 @@ const HERO_ROLL_ALL: RollRow[] = [
 ];
 
 const HERO_ROLL_SEED = HERO_ROLL_ALL.slice(0, 4);
-
-const HERO_SPEAKER_SEED = ["Norway", "Spain", "Italy", "Portugal", "Kenya", "Mexico", "Ghana", "Peru"];
-
-function formatTimer(totalSeconds: number): string {
-  const sec = Math.max(0, totalSeconds);
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  return `${m}:${String(s).padStart(2, "0")}`;
-}
 
 function MarketingRollCallCard({
   rows,
@@ -134,145 +122,18 @@ function MarketingRollCallCard({
   );
 }
 
-function MarketingSpeakersCard({
-  queue,
-  secondsLeft,
-  running,
-  expanded,
-  onToggleTimer,
-  onNext,
-  onToggleExpand,
-}: {
-  queue: string[];
-  secondsLeft: number;
-  running: boolean;
-  expanded: boolean;
-  onToggleTimer: () => void;
-  onNext: () => void;
-  onToggleExpand: () => void;
-}) {
-  const t = useTranslations("marketing.preview");
-  const current = queue[0] ?? "—";
-  const waiting = queue.slice(1);
-  const visible = expanded ? waiting : waiting.slice(0, 3);
-  const hiddenCount = Math.max(0, waiting.length - visible.length);
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <span className={PREVIEW_LABEL}>{t("speakersLabel")}</span>
-        <span className="text-[0.65rem] text-brand-muted">{t("speakersHint")}</span>
-      </div>
-      <div className={cn("mb-3", PREVIEW_SPEAKER_PANEL)}>
-        <p className={PREVIEW_SPEAKER_NOW}>{t("nowSpeaking")}</p>
-        <div className="mt-0.5 flex items-end justify-between gap-3">
-          <p className={PREVIEW_SPEAKER_NAME}>{current}</p>
-          <p className={PREVIEW_SPEAKER_TIMER} suppressHydrationWarning>
-            {formatTimer(secondsLeft)}
-          </p>
-        </div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={onToggleTimer}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-zinc-900 hover:bg-zinc-50"
-          >
-            {running ? <Pause className="h-3.5 w-3.5" aria-hidden /> : <Play className="h-3.5 w-3.5" aria-hidden />}
-            {running ? t("speakersPause") : t("speakersStart")}
-          </button>
-          <button
-            type="button"
-            onClick={onNext}
-            disabled={queue.length < 2}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[color-mix(in_srgb,var(--accent)_30%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_12%,#ffffff)] px-2.5 py-1.5 text-xs font-semibold text-zinc-900 hover:bg-[color-mix(in_srgb,var(--accent)_18%,#ffffff)] disabled:opacity-45"
-          >
-            <SkipForward className="h-3.5 w-3.5" aria-hidden />
-            {t("speakersNext")}
-          </button>
-        </div>
-      </div>
-      <ul className={cn("space-y-1.5 text-sm", PREVIEW_MUTED)}>
-        {visible.map((country) => (
-          <li key={country} className="rounded-lg px-1 py-0.5 text-zinc-600">
-            {country}
-          </li>
-        ))}
-        {hiddenCount > 0 ? (
-          <li>
-            <button
-              type="button"
-              onClick={onToggleExpand}
-              className="inline-flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-zinc-900"
-            >
-              {expanded ? (
-                <>
-                  <ChevronUp className="h-3.5 w-3.5" aria-hidden />
-                  {t("queueCollapse")}
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="h-3.5 w-3.5" aria-hidden />
-                  {t("queueExpand", { count: hiddenCount })}
-                </>
-              )}
-            </button>
-          </li>
-        ) : null}
-      </ul>
-    </div>
-  );
-}
-
 /** Hero + chair sections: roll call and speakers list with local demo state. */
 export function MarketingHeroSessionPreview({ className }: { className?: string }) {
   const [roll, setRoll] = useState<RollRow[]>(HERO_ROLL_SEED);
-  const [queue, setQueue] = useState(HERO_SPEAKER_SEED);
-  const [secondsLeft, setSecondsLeft] = useState(90);
-  const [running, setRunning] = useState(false);
-  const [expanded, setExpanded] = useState(false);
 
   const setRollAttendance = useCallback((id: string, status: RollAttendance) => {
     setRoll((prev) => prev.map((row) => (row.id === id ? { ...row, status } : row)));
   }, []);
 
-  const toggleTimer = useCallback(() => setRunning((v) => !v), []);
-
-  const advanceSpeaker = useCallback(() => {
-    setQueue((prev) => {
-      if (prev.length < 2) return prev;
-      const [first, ...rest] = prev;
-      return [...rest, first];
-    });
-    setSecondsLeft(90);
-    setRunning(true);
-  }, []);
-
-  useEffect(() => {
-    if (!running || secondsLeft <= 0) return;
-    const id = window.setInterval(() => {
-      setSecondsLeft((s) => {
-        if (s <= 1) {
-          setRunning(false);
-          return 0;
-        }
-        return s - 1;
-      });
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [running, secondsLeft]);
-
   return (
     <div className={cn("space-y-4", className)}>
       <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} onDarkSurface />
-      <MarketingSpeakersCard
-        queue={queue}
-        secondsLeft={secondsLeft}
-        running={running}
-        expanded={expanded}
-        onToggleTimer={toggleTimer}
-        onNext={advanceSpeaker}
-        onToggleExpand={() => setExpanded((v) => !v)}
-      />
+      <MarketingSessionSpeakersPanel compactIntro />
     </div>
   );
 }
@@ -382,45 +243,6 @@ export function MarketingDelegatePrepPreview({ className }: { className?: string
   );
 }
 
-const SMT_CHAMBERS = ["ECOSOC", "Legal", "WHO", "Press Corps"] as const;
-
 export function MarketingSmtOversightPreview({ className }: { className?: string }) {
-  const t = useTranslations("marketing.preview");
-  const [liveId, setLiveId] = useState<string>("ECOSOC");
-
-  return (
-    <div className={cn(PREVIEW_CARD, className)}>
-      <p className={PREVIEW_LABEL}>{t("smtLabel")}</p>
-      <p className="mt-1 mb-3 text-[0.7rem] text-zinc-500">{t("smtHint")}</p>
-      <ul className="space-y-2">
-        {SMT_CHAMBERS.map((committee) => {
-          const live = liveId === committee;
-          return (
-            <li key={committee}>
-              <button
-                type="button"
-                onClick={() => setLiveId(committee)}
-                className={cn(
-                  PREVIEW_ROW,
-                  live && "border-[color-mix(in_srgb,var(--accent)_35%,#d4d4d8)] bg-[color-mix(in_srgb,var(--accent)_8%,#ffffff)]"
-                )}
-              >
-                <span className="font-medium text-zinc-900">{committee}</span>
-                <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500">
-                  <span
-                    className={cn(
-                      "h-2 w-2 rounded-full",
-                      live ? "bg-[var(--accent)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--accent)_25%,transparent)]" : "bg-brand-muted/40"
-                    )}
-                    aria-hidden
-                  />
-                  {live ? t("smtLive") : t("smtIdle")}
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+  return <MarketingSessionLiveCommitteesPanel className={className} compactIntro />;
 }
