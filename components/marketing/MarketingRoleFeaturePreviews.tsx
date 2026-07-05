@@ -10,12 +10,12 @@ import {
   RefreshCw,
   Send,
   SkipForward,
-  Star,
   Trash2,
 } from "lucide-react";
 import type { RollAttendance } from "@/lib/roll-attendance";
 import { ROLL_ATTENDANCE_BUTTONS } from "@/lib/roll-call-attendance-buttons";
 import { MarketingAllocationMatrixPanel } from "@/components/marketing/MarketingAllocationMatrixPanel";
+import { MarketingChairAwardsRubricPanel } from "@/components/marketing/MarketingChairAwardsRubricPanel";
 import { MarketingAwardsReviewPanel } from "@/components/marketing/MarketingAwardsReviewPanel";
 import { MarketingDelegatePrepWorkspacePanel } from "@/components/marketing/MarketingDelegatePrepWorkspacePanel";
 import { MarketingEventSchedulePanel } from "@/components/marketing/MarketingEventSchedulePanel";
@@ -211,48 +211,7 @@ export function ChairSessionTimerDemo() {
 }
 
 export function ChairAwardsRubricDemo() {
-  const t = useTranslations("marketing.rolePreviews.chair");
-  const [scores, setScores] = useState<Record<string, number>>({
-    Kenya: 4,
-    Norway: 5,
-    Mexico: 3,
-    Philippines: 2,
-  });
-
-  return (
-    <div className={PREVIEW_CARD}>
-      <span className={PREVIEW_LABEL}>{t("awardsLabel")}</span>
-      <p className="mt-1 text-xs text-zinc-500">{t("awardsHint")}</p>
-      <ul className="mt-3 space-y-2">
-        {Object.keys(scores).map((name) => (
-          <li
-            key={name}
-            className="flex items-center justify-between gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2"
-          >
-            <span className="text-sm font-medium text-zinc-900">{name}</span>
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  aria-label={t("scoreStar", { score: n, delegate: name })}
-                  onClick={() => setScores((prev) => ({ ...prev, [name]: n }))}
-                  className="p-0.5"
-                >
-                  <Star
-                    className={cn(
-                      "h-4 w-4",
-                      n <= scores[name] ? "fill-amber-400 text-amber-400" : "text-zinc-300"
-                    )}
-                  />
-                </button>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MarketingChairAwardsRubricPanel />;
 }
 
 export function DelegatePrepHubDemo() {

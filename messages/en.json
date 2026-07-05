@@ -4068,8 +4068,8 @@
             "eyebrow": "Awards rubric",
             "title": "Delegate scoring before secretariat review",
             "description": "Rate each delegate against the rubric during session. Chair nominations flow to secretariat with evidence attached for final Best Delegate decisions.",
-            "bullet1": "Five-point star rubric per delegate",
-            "bullet2": "Score during session, not after closing",
+            "bullet1": "Six SEAMUN criteria scored 1–8 per delegate",
+            "bullet2": "List or guided scoring with autosave",
             "bullet3": "Feeds secretariat awards review queue",
             "previewLabel": "Awards desk"
           }

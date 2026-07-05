@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { SyntheticEvent } from "react";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -39,6 +40,7 @@ export function OrbAnimationOverlay({
 }) {
   const tClose = useTranslations("delegationNotes");
   const isLight = surface === "light";
+  const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<OrbPhase>("closed");
   const [src, setSrc] = useState<string | null>(null);
   const onCompleteRef = useRef(onComplete);
@@ -47,6 +49,10 @@ export function OrbAnimationOverlay({
   const playbackStartedRef = useRef(-1);
   const activeSrcRef = useRef<string | null>(null);
   const objectUrlRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -194,11 +200,11 @@ export function OrbAnimationOverlay({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, dismissible, dismissEarly]);
 
-  if (!open || phase === "closed") return null;
+  if (!mounted || !open || phase === "closed") return null;
 
   const fading = phase === "fade";
 
-  return (
+  const overlay = (
     <div
       className={cn(
         "fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden transition-opacity ease-out",
@@ -240,4 +246,6 @@ export function OrbAnimationOverlay({
       ) : null}
     </div>
   );
+
+  return createPortal(overlay, document.body);
 }
