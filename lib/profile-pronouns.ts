@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Values stored in `profiles.pronouns` when the user picks a preset. */
 export const PROFILE_PRONOUN_PRESETS = [
   "she/her",

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Build embed URLs for Google Docs. Editing in an iframe requires users to be signed into Google
  * and have access to the doc; Google may still refuse to frame some documents.

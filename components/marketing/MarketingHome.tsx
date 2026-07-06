@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
@@ -22,7 +25,7 @@ import {
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
 import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
-import { INQUIRY_EMAIL } from "@/lib/branding";
+import { getPartnershipContactEmail } from "@/lib/branding";
 import {
   MarketingChairMotionPreview,
   MarketingDelegatePrepPreview,
@@ -165,6 +168,7 @@ function RoleSection({
 
 export async function MarketingHome() {
   const t = await getTranslations("marketing");
+  const partnershipEmail = getPartnershipContactEmail();
 
   const chairFeatures: FeatureItem[] = [
     {
@@ -439,13 +443,15 @@ export async function MarketingHome() {
             </div>
             <p className="mt-6 text-center text-sm text-brand-muted">
               {t("contact.directEmail")}{" "}
-              <a
-                href={`mailto:${INQUIRY_EMAIL}`}
-                className="font-mono font-semibold text-[var(--accent)] hover:underline"
-                aria-label={t("contact.emailAria")}
-              >
-                {INQUIRY_EMAIL}
-              </a>
+              {partnershipEmail ? (
+                <a
+                  href={`mailto:${partnershipEmail}`}
+                  className="font-mono font-semibold text-[var(--accent)] hover:underline"
+                  aria-label={t("contact.emailAria")}
+                >
+                  {partnershipEmail}
+                </a>
+              ) : null}
             </p>
           </div>
         </div>
@@ -477,9 +483,11 @@ export async function MarketingHome() {
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
           <p className="font-mono text-xs tracking-wide">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           <div className="flex flex-wrap items-center justify-center gap-4 font-mono text-xs uppercase tracking-wider">
-            <a href={`mailto:${INQUIRY_EMAIL}`} className="hover:text-brand-navy">
-              {t("footer.contact")}
-            </a>
+            {partnershipEmail ? (
+              <a href={`mailto:${partnershipEmail}`} className="hover:text-brand-navy">
+                {t("footer.contact")}
+              </a>
+            ) : null}
             <Link href="/login" className="hover:text-brand-navy">
               {t("nav.signIn")}
             </Link>

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 export const OPENING_ORB_BASE = "/marketing/opening-orb.gif";
 
 /** opening-orb.gif metadata: 27 frames @ 9cs (90ms) per frame. */

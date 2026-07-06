@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Canonical SEAMUN I 2027 visual schedules (Day 1 & Day 2). Not editable via app or SMT.
  * Source: organisers’ schedules.pdf (three debate groups, June 2026).

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Preset tags for running notes (toggle in UI; users may add custom tags too).
  * First element is the canonical stored value (English, for DB compatibility).

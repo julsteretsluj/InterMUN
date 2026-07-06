@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Navigation & hub priority order — edit these arrays to reorder numbered badges app-wide.
  * Lower index = lower number (1 = most important / start here).

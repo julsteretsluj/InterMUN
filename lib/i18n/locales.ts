@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 export const LOCALE_COOKIE_NAME = "intermun-locale";
 
 export const SUPPORTED_LOCALES = [

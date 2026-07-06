@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Shallow-recursive merge: override wins; nested objects merge. Arrays replaced by override. */
 export function deepMergeMessages<T extends Record<string, unknown>>(base: T, override: T): T {
   const result = { ...base };

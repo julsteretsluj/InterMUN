@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Checklist copy aligned with [SEAMUNs chair dashboard](https://thedashboard.seamuns.site/chair) prep & flow sections. */
 
 export type ChairPrepSection = {

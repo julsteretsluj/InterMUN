@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Second-gate committee / room join codes: exactly 6 characters, A–Z and 0–9.
  * Format: up to 3 letters derived from the chamber label (first token(s)) + 3 digits

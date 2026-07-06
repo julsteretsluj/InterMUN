@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Minimum length for chair evidence statements before SMT submission / approval. */
 export const MIN_AWARD_EVIDENCE_CHARS = 40;
 

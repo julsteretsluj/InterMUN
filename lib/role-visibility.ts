@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 export type AppRole = "delegate" | "chair" | "smt" | "admin" | "unknown";
 
 export function normalizeAppRole(role: string | null | undefined): AppRole {

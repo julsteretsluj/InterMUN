@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Optional dev / staging allowlist so a chair account can switch committee without a seat
  * on every chamber. Set `CHAIR_MULTI_COMMITTEE_TEST_EMAILS` to a comma-separated list of

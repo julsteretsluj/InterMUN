@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Minimum characters for delegate chair feedback evidence (server + client). */
 export const DELEGATE_CHAIR_EVIDENCE_MIN_LEN = 24;
 

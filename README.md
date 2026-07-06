@@ -1,116 +1,188 @@
-# InterMUN - Model United Nations Platform
+# InterMUN
 
-A full-featured MUN platform built with Next.js and Supabase.
+**InterMUN** is an open-source Model United Nations conference platform for live committee sessions, delegate workflows, chair controls, and secretariat (SMT) operations. It is designed for multi-day conferences with allocation matrices, gated room access, real-time floor state, voting, resolutions, awards, and multilingual support.
+
+## About
+
+InterMUN replaces ad-hoc spreadsheets and messaging threads with a single web application: delegates prepare and participate in committee; chairs run speakers lists, motions, and roll call; secretariat configures conferences, allocations, and oversight tools. The project is maintained by **Intermun** and is offered under a dual license (see [License](#license)).
 
 ## Features
 
-- **Profile** – Name, pronouns, allocation, profile picture (visibility rules for chairs/SMT), conferences attended, awards, stance heatmap
-- **Chats/Notes** – Digital notes, live voting (motions, amendments, resolutions) with MUST/CAN vote, majority display, pass/fail
-- **Guides** – RoP, examples, templates, chair report
-- **Documents** – Position papers, prep documents
-- **Stances** – Notes per allocation, stance heatmap (“to what extent does ___”)
-- **Ideas** – Resolution ideas
-- **Sources** – Trusted source links
-- **Resolutions** – Google Docs link, main/co-submitters, signatories (virtual sign notifies main subs), blocs (A/B, for/against)
-- **Speeches** – Write and store speeches
-- **Running Notes** – General notes
-- **Report** – AI use, inappropriate conduct (RoP)
-- **Timers** – Current/next speaker, time left (per active committee, realtime)
-- **Room code** – After login, delegates enter a short code to select the committee session; chairs set codes under **Room code**
-- **Session floor** (chairs) – Timers, speakers queue, roll call, dais announcements; delegates see dais, queue, and their roll status in the header strip
-- **Awards** (chairs / SMT) – Track SEAMUN I categories (conference-wide, collective, committee); delegates see their own rows on **Profile**
-- **Paper Saved Widget** – Saved papers quick access
+### Delegates
+- Profile, pronouns, allocation, awards summary, stance heatmap
+- Digital notes, delegation messaging, and moderation queues
+- Documents, speeches, running notes, guides (RoP, templates)
+- Resolutions workflow (clauses, co-submitters, signatories, blocs)
+- Live session strip: dais announcements, speakers queue, roll-call status
+- Committee room with voting (motions, amendments, resolutions)
 
-## Setup
+### Chairs
+- Session floor: timers, speakers queue, roll call, dais announcements
+- Motion queue with Rules of Procedure priority
+- Agenda votes, amendments, and resolution management
+- Awards rubric and committee participation tracking
+- Room codes and committee session controls
+
+### Secretariat (SMT)
+- Conference setup, allocation matrix import, gate codes
+- Advisor and delegate oversight, delegation notes
+- Event schedules, locked programme views, export tools
+- Staff access controls and committee branding
+
+### Platform
+- **30+ locales** via `next-intl` with CI parity checks
+- **Supabase** auth, Postgres, RLS, storage, and realtime
+- **Role-based routing**: delegate, chair, advisor, SMT, admin
+- **Three-gate access**: event gate → room gate → committee gate (where enabled)
+- Accessibility: colorblind mode, dyslexia-friendly fonts, keyboard navigation
+
+## Tech stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | [Next.js 16](https://nextjs.org/) (App Router, Server Actions) |
+| UI | React 19, Tailwind CSS 4, Lucide icons |
+| Backend / data | [Supabase](https://supabase.com/) (Postgres, Auth, Storage, Realtime) |
+| i18n | [next-intl](https://next-intl-docs.vercel.app/) |
+| Email | Nodemailer (SMTP) for exports and inquiry relay |
+| Deployment | [Vercel](https://vercel.com/) (recommended) |
+| Validation | Zod, React Hook Form |
+
+## Installation
+
+### Prerequisites
+
+- Node.js 20+
+- npm
+- A Supabase project
+- (Optional) SMTP credentials for email features
+
+### Steps
 
 1. **Clone and install**
+
    ```bash
+   git clone https://github.com/your-org/intermun.git
+   cd intermun
    npm install
    ```
 
-2. **Supabase**
+2. **Environment**
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Fill in at minimum:
+
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` (or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY`)
+   - `NEXT_PUBLIC_APP_URL`
+   - `PARTNERSHIP_CONTACT_EMAIL` / `NEXT_PUBLIC_PARTNERSHIP_CONTACT_EMAIL` (marketing contact)
+
+   See [`.env.example`](.env.example) for the full list. **Never commit `.env.local` or real secrets.**
+
+3. **Database**
+
    - Create a [Supabase](https://supabase.com) project
-   - Run migrations in `supabase/migrations/` in order (`00001` … `00008`)
-   - Run `supabase/seed.sql` for guides (and optional placeholder conference)
-   - **Allocation matrix:** keep `data/allocation-matrix.xlsx` **only on your machine** (gitignored). Run `npm run seed:allocations` to regenerate SQL, then run `supabase/seed_allocation_matrix.sql` in the SQL editor. That loads one conference per worksheet (ECOSOC, WHO, …), unassigned allocations, and per-row IDs as `allocation_gate_codes` (e.g. `ECO-001`). Re-running that file replaces only those matrix conferences’ allocations and codes. **Second-gate committee / room codes** are six alphanumeric characters (chamber initials + three digits, e.g. `ECO741` for ECOSOC). Migration `00036` updates canonical seed rows; older databases may still have `LEGACY-…` until you edit codes in **SMT → Room codes** or SQL. First-gate code for the default seed event is `SEAMUNI2027`.
-3. **Pre-provisioning delegates (recommended for conference day)**
-   - In Supabase **Authentication → Users**, use **Invite user** (or the Admin API `inviteUserByEmail`) so each delegate gets an email link instead of open self-signup.
-   - After users exist, link them to allocations: in **Table Editor → allocations**, set `user_id` to the delegate’s profile UUID for their country row and `conference_id`. Chairs can also run **Session floor → Initialize roll call** once allocations exist.
-   - Chairs set **Room code** per committee, then share that code at the dais. Delegates: sign in → **Join committee** (room code) → if enabled, **Committee sign-in** (password + allocation).
+   - Apply migrations in `supabase/migrations/` in order
+   - Run `supabase/seed.sql` for baseline content
+   - **Allocation matrix:** keep `data/allocation-matrix.xlsx` local (gitignored). Run `npm run seed:allocations`, then apply `supabase/seed_allocation_matrix.sql` in the SQL editor
 
-4. **Copy `.env.local.example` to `.env.local` and add:**
-     ```
-     NEXT_PUBLIC_SUPABASE_URL=your_url
-     NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
-     ```
-     You can use `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY` instead of `NEXT_PUBLIC_SUPABASE_ANON_KEY` if that is what the Supabase dashboard shows.
+4. **Storage buckets** (profile pictures, committee logos)
 
-   - **Delegate materials export emails (SMTP):** set on the server only (never commit real credentials). Example shape:
-     ```
-     SMTP_HOST=smtp.your-provider.example
-     SMTP_PORT=465
-     SMTP_USER=your_smtp_username
-     SMTP_PASS=your_smtp_password
-     # optional; otherwise SMTP_USER is used as the sender address
-     MATERIALS_EXPORT_FROM="Your app <no-reply@your-domain.example>"
-     ```
+   Apply the relevant migrations under `supabase/migrations/` (e.g. `00100_profile_pictures_storage_bucket.sql`, `00037_committee_logos_upload.sql`) or create buckets with matching RLS policies.
 
-   - **Profile picture uploads (Supabase Storage):**
-     - Run migration `supabase/migrations/00100_profile_pictures_storage_bucket.sql` (creates public bucket `profile-pictures` + RLS). Or create the bucket manually and match the migration policies so users can upload only under `profiles/<their-user-id>/`.
+5. **Run locally**
 
-- **Committee logo uploads (SMT) (Supabase Storage):**
-  - Run the migration `supabase/migrations/00037_committee_logos_upload.sql`
-  - It creates a storage bucket named `committee-logos` (public read; chairs/SMT/admin can upload)
-     - Make it **public** (so `getPublicUrl` can be used by `<img>`)
-     - Optionally add a policy allowing authenticated users to upload to their own folder
-       (path prefix `profiles/<userId>/...`)
-
-5. **Run**
    ```bash
    npm run dev
    ```
 
-6. **Build** (use webpack if Turbopack has issues on network volumes)
+   Open [http://localhost:3000](http://localhost:3000).
+
+6. **Production build**
+
    ```bash
    npm run build
+   npm start
    ```
-   The build script uses `--webpack` for compatibility.
 
-   Optional: set `NEXT_PUBLIC_SEAMUN_HANDBOOK_PDF_URL` to a hosted PDF URL so the SMT locked schedule screen can link to your conference handbook (avoid committing internal handbooks or allocation workbooks with personal data).
+   The build script uses `--webpack` for compatibility on some environments.
 
-   Optional (local dev only): `CHAIR_MULTI_COMMITTEE_TEST_EMAILS` — comma-separated lowercase emails allowed to switch chair room without a seat on every committee (never commit real addresses; see `lib/testing-overrides.ts`).
+## Usage
 
-## Project structure
+### Roles
+
+| Role | Typical entry |
+|------|----------------|
+| `delegate` | `/delegate` after allocation and gates |
+| `chair` | `/chair` |
+| `advisor` | `/advisor` |
+| `smt` | `/smt` (secretariat surface) |
+| `admin` | `/admin` |
+
+### Conference day flow
+
+1. **Pre-provision delegates** — Supabase Auth invite or admin invite scripts (`npm run invite:smt`)
+2. **Link allocations** — Set `user_id` on allocation rows for each delegate
+3. **Share gate codes** — Event code → room code → committee password (if enabled)
+4. **Chair** — Initialize roll call, run session floor, open votes
+5. **Delegates** — Join committee, request to speak, vote, submit resolutions
+
+### Scripts
+
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Local development server |
+| `npm run build` | Production build |
+| `npm run i18n:check` | Locale key parity (CI) |
+| `npm run i18n:audit` | Full i18n audit |
+| `npm run seed:allocations` | Regenerate allocation SQL from local XLSX |
+
+### Project structure
 
 ```
 app/
-  (auth)/login, signup
-  (dashboard)/layout.tsx   # Tabs + Paper Saved widget + Timers
-  (dashboard)/profile, chats-notes, guides, documents, stances,
-  ideas, sources, resolutions, speeches, running-notes, report
-components/
-  profile, voting, timers, resolutions, guides, documents, ...
-lib/
-  supabase/client, server, middleware
-supabase/
-  migrations/
-  seed.sql
-  seed_allocation_matrix.sql   # generated; see npm run seed:allocations
-data/
-  allocation-matrix.xlsx       # local only (gitignored); see npm run seed:allocations
+  (marketing)/     Public site, features, contact
+  (auth)/          Login, signup
+  (dashboard)/     Delegate & chair dashboards
+  smt/             Secretariat tools
+  actions/         Server Actions (mutations)
+components/        UI by domain (chair, delegate, marketing, …)
+lib/               Business logic, Supabase clients, i18n helpers
+messages/          Translation JSON (en.json is source of truth)
+supabase/          Migrations and seeds
+types/             Shared TypeScript types (e.g. database)
 ```
 
-## Roles
+Architecture decisions and data-flow notes are recorded in [DEVELOPMENT_JOURNAL.md](DEVELOPMENT_JOURNAL.md).
 
-- **delegate** – Default role
-- **chair** – Can manage vote items, allocations, timers; sees all profiles
-- **smt** – Same visibility as chair
+## Contributing
 
-## i18n workflow
+We welcome contributions under the [Developer Certificate of Origin (DCO)](CONTRIBUTING.md). Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. All commits must include `Signed-off-by` (`git commit -s`).
 
-- Run locale parity check:
-  - `npm run i18n:check`
-- Run full translation audit (hardcoded inventory + parity + placeholder checks):
-  - `npm run i18n:audit`
-- Review key conventions:
-  - `docs/i18n-key-conventions.md`
+## License
+
+InterMUN uses a **dual-licensing model**:
+
+| Use | License |
+|-----|---------|
+| **Non-commercial** | [Apache License 2.0](LICENSE) |
+| **Commercial** | [Contact required](COMMERCIAL_LICENSE.md) — prior written approval from Intermun |
+
+Commercial use includes paid hosting, white-label resale, and for-profit production deployment without a separate agreement. See [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md) for details.
+
+Custom deployments may be governed by [CUSTOM_DEVELOPMENT_AGREEMENT.md](CUSTOM_DEVELOPMENT_AGREEMENT.md) (template).
+
+## Contact & partnership
+
+- **Partnership, commercial licensing, and custom conferences:** set `PARTNERSHIP_CONTACT_EMAIL` in your deployment or use the inquiry form on the marketing site (`/#contact`).
+- **Open-source questions:** open a GitHub issue or discussion.
+- **Security:** report vulnerabilities privately to the partnership contact — do not file public issues.
+
+For branded setups, training, and secretariat onboarding, see [CUSTOM_DEVELOPMENT_AGREEMENT.md](CUSTOM_DEVELOPMENT_AGREEMENT.md).
+
+---
+
+Copyright © 2026 Intermun. Licensed under Apache 2.0 for non-commercial use; see [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md).

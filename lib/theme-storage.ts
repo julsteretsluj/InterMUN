@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 export const THEME_STORAGE_KEY = "intermun-theme";
 export const THEME_HUE_STORAGE_KEY = "intermun-theme-hue";
 export const DYSLEXIC_FONT_STORAGE_KEY = "intermun-dyslexic-font";

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { resolveCommitteeDisplayTags } from "@/lib/committee-card-display";
 import { compareAllocationCountryDisplay } from "@/lib/allocation-display-order";
 import { compareCommitteeRowsByDifficultyThenLabel } from "@/lib/committee-difficulty-sort";

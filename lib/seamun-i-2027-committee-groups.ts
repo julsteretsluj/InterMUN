@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * SEAMUN I 2027 — which debate chambers follow which master-schedule track.
  * Source of truth for timings/colours: `lib/seamun-i-2027-locked-schedule.ts` (visual day 1 & 2).

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
@@ -6,7 +9,7 @@ import {
   submitConferenceInquiryAction,
   type ConferenceInquiryState,
 } from "@/app/actions/conferenceInquiry";
-import { INQUIRY_EMAIL } from "@/lib/branding";
+import { getPartnershipContactEmail } from "@/lib/branding";
 import { cn } from "@/lib/utils";
 
 const INITIAL_STATE: ConferenceInquiryState | null = null;
@@ -18,6 +21,7 @@ const LABEL_CLASS = "mb-1.5 block text-xs font-semibold uppercase tracking-wide 
 
 export function ConferenceInquiryForm({ className }: { className?: string }) {
   const t = useTranslations("marketing.contact.form");
+  const partnershipEmail = getPartnershipContactEmail();
   const [state, formAction, pending] = useActionState(submitConferenceInquiryAction, INITIAL_STATE);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -190,9 +194,11 @@ export function ConferenceInquiryForm({ className }: { className?: string }) {
       {state?.error ? (
         <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-800" role="alert">
           {state.error}{" "}
-          <a href={`mailto:${INQUIRY_EMAIL}`} className="font-semibold underline">
-            {INQUIRY_EMAIL}
-          </a>
+          {partnershipEmail ? (
+            <a href={`mailto:${partnershipEmail}`} className="font-semibold underline">
+              {partnershipEmail}
+            </a>
+          ) : null}
         </p>
       ) : null}
 

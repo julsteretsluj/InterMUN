@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { getDaisSeatLabelsForCommittee } from "@/lib/dais-seat-plan";
 
 /** Form value: `{uuid}::{encodeURIComponent(exact seat label)}` */

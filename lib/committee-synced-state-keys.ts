@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Row keys in `committee_synced_state` (must match migration CHECK). */
 export const COMMITTEE_SYNCED_STATE_KEYS = {
   CHAIR_PREP_CHECKLIST: "chair_prep_checklist",

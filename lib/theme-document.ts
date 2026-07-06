@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import {
   DEFAULT_TEXT_SIZE_STEP,
   DYSLEXIC_FONT_STORAGE_KEY,

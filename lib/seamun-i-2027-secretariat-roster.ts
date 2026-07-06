@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Secretariat roster shape for SEAMUN I 2027 UI (allocation matrix / oversight).
  * Replace emails and names with your conference’s public contacts in a private fork or

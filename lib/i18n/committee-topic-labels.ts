@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import agendaTopicSlugToKey from "./generated/agenda-topic-slug-to-key.json";
 import { applyTopicTitleCaseIfLocale } from "./english-topic-title-case";
 

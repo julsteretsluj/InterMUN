@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Two-letter initials for country / display names (note threads, lists). */
 export function displayInitials(label: string): string {
   const trimmed = label.trim();

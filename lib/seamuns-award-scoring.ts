@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Award rubrics aligned with [SEAMUNs Chair dashboard — Score](https://thedashboard.seamuns.site/chair/awards):
  * four proficiency bands (Beginning / Developing / Proficient / Exemplary), stored as 2 / 4 / 6 / 8

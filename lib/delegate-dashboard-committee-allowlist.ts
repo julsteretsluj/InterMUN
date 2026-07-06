@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Delegates normally switch dashboard committee only when they have an allocation row
  * for the target conference. A small allowlist can switch like chairs (any session in the

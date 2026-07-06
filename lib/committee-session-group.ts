@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Merge committee *sessions* (conference rows / agenda topics) that belong to the same
  * chamber within an event. Uses the same first-token rule as committee lookup tables

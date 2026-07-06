@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Preset committee sessions derived from the locked SEAMUN I 2027 timetable.
  * These turn the read-only schedule's `category: "session"` blocks into

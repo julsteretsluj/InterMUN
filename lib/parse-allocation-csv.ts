@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Minimal CSV parsing for allocation imports: country (required), placard code (optional).
  * Supports "country,code" header row, UTF-8 BOM, and quoted fields.

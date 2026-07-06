@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Committee logos often ship with a solid black (or near-black) matte behind the emblem.
  * Remove only background pixels connected to the image border — never interior dark detail.

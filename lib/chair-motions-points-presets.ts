@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Preset lines aligned with [SEAMUNs Chair Room → Motions & Points](https://thedashboard.seamuns.site/chair)
  * “Preset options” (motion vs point kinds match the dashboard).

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import type { RubricCriterion } from "@/lib/seamuns-award-scoring";
 
 /** Column headers aligned with PDF bands (scores stored as 1–8 in nominations). */

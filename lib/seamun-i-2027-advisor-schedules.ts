@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * SEAMUN I 2027 — twenty advisors in three lunch cohorts (not tied to a committee).
  * Chamber duty is balanced across each lunch group; advisors rotate committees each session.

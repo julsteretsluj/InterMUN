@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Chair award nominations: draft → pending (SMT queue) via button or deadline.
  * Default deadline: end of conference day 17 Jan 2027 UTC (override with AWARD_SUBMISSION_DEADLINE_ISO).

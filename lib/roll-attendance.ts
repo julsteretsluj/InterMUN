@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Matches SEAMUNs roll-call cycle: Absent → Present (may abstain) → Present and voting → Absent. */
 
 export type RollAttendance = "absent" | "present_abstain" | "present_voting";

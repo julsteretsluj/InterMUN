@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { getActiveEventId } from "@/lib/active-event-cookie";
 import { seamunDefaultGroupForCommittee } from "@/lib/seamun-i-2027-advisor-schedules";

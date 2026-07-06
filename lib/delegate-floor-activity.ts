@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 const PER_DELEGATE_CAP = 15;

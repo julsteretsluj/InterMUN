@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Opens Google’s “new blank document” flow in the browser.
  * The active Google session owns the file; users paste the document URL back into this app.

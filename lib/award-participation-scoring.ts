@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { rubricKeysForAwardAssignmentCategory } from "@/lib/award-category-rubric";
 import { CHAIR_PERFORMANCE_RUBRIC } from "@/lib/seamun-awards-rubric-guide";
 import { RUBRIC_KEYS_BY_NOMINATION } from "@/lib/seamuns-award-scoring";

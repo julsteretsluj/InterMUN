@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { NAME_TO_FLAG_EMOJI } from "@/lib/country-flag-emoji";
 
 const DISPLAY_NAMES_CACHE = new Map<string, Intl.DisplayNames>();

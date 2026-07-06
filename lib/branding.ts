@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Public app chrome (login, room gate, metadata). Conference-specific titles come from the DB.
  * Override with NEXT_PUBLIC_APP_NAME and NEXT_PUBLIC_APP_TAGLINE.
@@ -17,8 +20,19 @@ export function getAppTagline(): string {
   return process.env.NEXT_PUBLIC_APP_TAGLINE?.trim() || "Model United Nations platform";
 }
 
-/** General inquiries and conference customization requests. */
-export const INQUIRY_EMAIL = "juleskittoastrop@gmail.com";
+/** General inquiries, commercial licensing, and conference partnership requests. */
+export function getPartnershipContactEmail(): string {
+  return (
+    process.env.PARTNERSHIP_CONTACT_EMAIL?.trim() ||
+    process.env.NEXT_PUBLIC_PARTNERSHIP_CONTACT_EMAIL?.trim() ||
+    ""
+  );
+}
+
+/** @deprecated Use getPartnershipContactEmail() */
+export function getInquiryEmail(): string {
+  return getPartnershipContactEmail();
+}
 
 export function getAppMetaDescription(): string {
   const custom = process.env.NEXT_PUBLIC_APP_DESCRIPTION?.trim();

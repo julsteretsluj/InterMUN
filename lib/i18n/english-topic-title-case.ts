@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Locale-aware title case for agenda topics:
  * capitalize major words; keep minor words lowercase unless first/last.

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import type { RollAttendance } from "@/lib/roll-attendance";
 
 export const CLAUSE_TARGET_PROCEDURE_CODES = new Set([

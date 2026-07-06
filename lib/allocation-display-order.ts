@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import {
   SEAMUN_I_2027_SMT_ALLOCATION_COUNTRY_LABELS,
   SMT_TEMPORARY_SEAT_LABELS,

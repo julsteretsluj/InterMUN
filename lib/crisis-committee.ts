@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Crisis-style committees use incident / crisis reporting (`/report`) and crisis prep items.
  * Matches `conferences.committee` labels such as UNSC or FWC (including "FWC - …").

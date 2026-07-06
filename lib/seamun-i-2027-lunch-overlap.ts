@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import { buildSeamunCommitteeDayBlocks } from "@/lib/seamun-i-2027-advisor-schedules";
 import { timeToMinutes, type SeamunLockedBlockCategory } from "@/lib/seamun-i-2027-locked-schedule";
 import { minutesToHHMM } from "@/lib/event-schedule";

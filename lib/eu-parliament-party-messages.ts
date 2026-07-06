@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import type { EuPartyKey } from "@/lib/eu-party-time";
 
 const EU_PARTY_MESSAGE_KEYS: Record<EuPartyKey, string> = {

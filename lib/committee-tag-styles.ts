@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Distinct pill colours per committee metadata category so tags are easy to scan.
  * Used on SMT overview cards and committee detail rows.

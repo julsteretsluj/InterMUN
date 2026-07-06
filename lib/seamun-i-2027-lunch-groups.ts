@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * SEAMUN I 2027 — three schedule groups (10 committees). Each group shares one timetable
  * including lunch slots (see schedules.pdf). Advisor lunch cohorts mirror these groups.

@@ -1,8 +1,11 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 "use server";
 
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
-import { INQUIRY_EMAIL, getAppName } from "@/lib/branding";
+import { getPartnershipContactEmail, getAppName } from "@/lib/branding";
 import { sendTransactionalEmail } from "@/lib/smtp";
 
 export type ConferenceInquiryState = {
@@ -77,6 +80,11 @@ export async function submitConferenceInquiryAction(
   const interests = parseInterests(formData);
   const appName = getAppName();
   const submittedAt = new Date().toISOString();
+  const partnershipEmail = getPartnershipContactEmail();
+
+  if (!partnershipEmail) {
+    return { error: t("errorNotConfigured") };
+  }
 
   const roleLabels = {
     secretariat: t("roleSecretariat"),
@@ -118,7 +126,7 @@ export async function submitConferenceInquiryAction(
   ].join("\n");
 
   const result = await sendTransactionalEmail({
-    to: INQUIRY_EMAIL,
+    to: partnershipEmail,
     subject,
     text,
     replyTo: data.contactEmail,

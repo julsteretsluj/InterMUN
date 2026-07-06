@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** `datetime-local` value from a stored ISO string (browser local timezone). */
 export function isoToDatetimeLocalValue(iso: string | null | undefined): string {
   if (!iso) return "";

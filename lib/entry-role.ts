@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** sessionStorage: post-login hint for first route; must match the account’s real role. */
 export const INTERMUN_ENTRY_ROLE_KEY = "intermun.entryRole";
 

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Build embed URLs for Google Slides. Embedding requires the deck to allow it in Google’s sharing settings.
  */

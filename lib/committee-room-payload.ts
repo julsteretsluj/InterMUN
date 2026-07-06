@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { sortRowsByAllocationCountry } from "@/lib/allocation-display-order";
 import { getDaisSeatLabelsForCommittee, isDaisSeatAllocationCountry } from "@/lib/dais-seat-plan";

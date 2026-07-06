@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /**
  * Public URL of this deployment (no trailing slash). Used for auth invite redirects.
  * Set NEXT_PUBLIC_APP_URL in env (e.g. https://mun.example.com) when not on Vercel.

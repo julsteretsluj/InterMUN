@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 const INAPPROPRIATE_WORD_PATTERNS: RegExp[] = [
   /\bfuck(?:ing|ed|er|ers)?\b/i,
   /\bshit(?:ty|ting|ted)?\b/i,

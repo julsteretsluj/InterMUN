@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** Known chamber labels → full name when `committee_full_name` is not set in DB. */
 const WELL_KNOWN_COMMITTEE_FULL_NAME: Record<string, string> = {
   DISEC: "Disarmament and International Security Committee",

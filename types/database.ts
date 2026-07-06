@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 export type UserRole = "delegate" | "chair" | "smt" | "admin" | "advisor";
 export type VoteType = "motion" | "amendment" | "resolution" | "agenda";
 export type VoteValue = "yes" | "no" | "abstain";

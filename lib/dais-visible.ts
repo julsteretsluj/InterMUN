@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Intermun. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (see LICENSE).
+
 /** First announcement visible on the floor (published, respecting schedule). Rows should be sorted pinned first, then newest. */
 
 export function firstVisibleDaisRow<T extends { publish_at?: string | null }>(rows: T[]): T | null {
