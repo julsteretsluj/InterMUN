@@ -2,19 +2,37 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Birds of Paradise — personal-use script face for cursive / italic emphasis */
+/* Rijusans (SIL OFL 1.1) — display / heading sans */
 @font-face {
-  font-family: "Birds of Paradise";
-  src: url("/fonts/birds-of-paradise.ttf") format("truetype");
+  font-family: "Rijusans";
+  src: url("/fonts/rijusans-regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-/* Coolvetica — display / heading face */
+/* Ithaca (Medium) — marketing display headlines */
 @font-face {
-  font-family: "Coolvetica";
-  src: url("/fonts/coolvetica-regular.otf") format("opentype");
+  font-family: "Ithaca";
+  src: url("/fonts/ithaca-medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Super Onigiri — script emphasis (mun-emph, italic) */
+@font-face {
+  font-family: "Super Onigiri";
+  src: url("/fonts/super-onigiri-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Home Video (CC0) — optional accent display */
+@font-face {
+  font-family: "Home Video";
+  src: url("/fonts/home-video-regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -312,10 +330,11 @@ html.dark {
   /* Prefer SF on Apple; Inter var from next/font still available as --font-ui */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
-  --font-heading: "Coolvetica", var(--font-ui), system-ui, sans-serif;
-  --font-display: var(--font-heading);
+  --font-heading: "Rijusans", var(--font-ui), system-ui, sans-serif;
+  --font-display: "Ithaca", "Rijusans", var(--font-ui), system-ui, sans-serif;
+  --font-accent: "Home Video", "Rijusans", var(--font-ui), system-ui, sans-serif;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
-  --font-cursive: "Birds of Paradise", cursive;
+  --font-cursive: "Super Onigiri", cursive;
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-gold: var(--brand-gold);
@@ -356,6 +375,7 @@ html.dyslexic-font,
 html.dyslexic-font body,
 html.dyslexic-font .font-sans,
 html.dyslexic-font .font-display,
+html.dyslexic-font .mun-display,
 html.dyslexic-font .font-serif,
 html.dyslexic-font .font-mono {
   font-family: var(--font-dyslexic) !important;
@@ -367,9 +387,9 @@ html.dyslexic-font :is(em, i, .italic, .mun-emph, .font-cursive) {
   font-style: normal !important;
 }
 
-/* Keep Coolvetica on headings when dyslexic mode is on; compact labels stay UI sans */
+/* Keep Rijusans on headings when dyslexic mode is on; compact labels stay UI sans */
 html.dyslexic-font
-  :is(h1, h2, h3, h4, h5, h6, .mun-display, .dashboard-panel-title, .font-display):not(.text-xs):not(
+  :is(h1, h2, h3, h4, h5, h6, .dashboard-panel-title, .font-display):not(.text-xs):not(
     .text-sm
   ):not(:is(em, i, .italic, .mun-emph, .font-cursive)) {
   font-family: var(--font-heading) !important;
@@ -1033,7 +1053,8 @@ html.dark ::selection {
 
   /* Two-tone editorial display heading: heavy sans + script gold emphasis */
   .mun-display {
-    @apply font-display font-extrabold;
+    @apply font-extrabold;
+    font-family: var(--font-display);
     letter-spacing: 0.035em;
     line-height: 1.1;
   }
@@ -1045,7 +1066,7 @@ html.dark ::selection {
     letter-spacing: 0.05em;
   }
 
-  /* All cursive / italic copy uses Birds of Paradise */
+  /* Script emphasis (Super Onigiri) */
   :is(em, i, .italic) {
     font-family: var(--font-cursive);
     font-style: normal;
@@ -1056,15 +1077,20 @@ html.dark ::selection {
     font-style: normal;
   }
 
-  /* Coolvetica for headers and display type; xs/sm stay in UI sans */
-  :is(h1, h2, h3, h4, h5, h6, .mun-display, .dashboard-panel-title, .font-display):not(
+  .font-accent {
+    font-family: var(--font-accent);
+    font-style: normal;
+  }
+
+  /* Rijusans for headers; mun-display uses Ithaca via --font-display */
+  :is(h1, h2, h3, h4, h5, h6, .dashboard-panel-title, .font-display):not(
       :is(.mun-emph, .font-cursive, em, i, .italic)
     ) {
     font-family: var(--font-heading);
   }
 
-  :is(h1, h2, h3, h4, h5, h6, .mun-display, .font-display).text-xs,
-  :is(h1, h2, h3, h4, h5, h6, .mun-display, .font-display).text-sm {
+  :is(h1, h2, h3, h4, h5, h6, .font-display).text-xs,
+  :is(h1, h2, h3, h4, h5, h6, .font-display).text-sm {
     font-family: var(--font-sans);
   }
 
