@@ -2,13 +2,13 @@
 /**
  * Replace committee emblems in Supabase storage + `conferences.committee_logo_url`.
  *
- * Source PNGs are **local only** (gitignored under `committee-logo-source/`). See
- * `committee-logo-source/README.md` for setup. Each file is keyed to the exact DB
- * `committee` label via `COMMITTEE_SOURCE` below — customize that map for your event.
+ * Source PNGs are **local only** (gitignored under `committee-logo-source/`). Mapping
+ * is loaded from `committee-logo-source/manifest.json` (copy from `manifest.example.json`).
+ * See `committee-logo-source/README.md` and `public/ASSETS.md`.
  *
  * Dry run (default):    node scripts/replace-committee-logos.mjs
  * Apply (all):          node scripts/replace-committee-logos.mjs --apply
- * Apply (one/some):     node scripts/replace-committee-logos.mjs --apply "Example Committee A"
+ * Apply (one/some):     node scripts/replace-committee-logos.mjs --apply DISEC
  *   (any non-flag args are treated as committee labels to limit the run to)
  *
  * Requires: .env.local with NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY
@@ -25,17 +25,52 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const SOURCE_DIR = path.join(__dirname, "committee-logo-source");
+const MANIFEST_PATH = path.join(SOURCE_DIR, "manifest.json");
+const MANIFEST_EXAMPLE_PATH = path.join(SOURCE_DIR, "manifest.example.json");
 const BUCKET = "committee-logos";
 const APPLY = process.argv.includes("--apply");
 /** Any non-flag args limit the run to those committee labels. */
 const FILTER_LABELS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
 /** DB `committee` label → local gitignored PNG filename under `committee-logo-source/`. */
-const COMMITTEE_SOURCE = {
-  "Example Committee A": "committee-a.png",
-  "Example Committee B": "committee-b.png",
-  "Example Committee C": "committee-c.png",
-};
+function loadCommitteeSource() {
+  const pathToLoad = fs.existsSync(MANIFEST_PATH) ? MANIFEST_PATH : MANIFEST_EXAMPLE_PATH;
+  if (!fs.existsSync(pathToLoad)) {
+    console.error(
+      `Missing ${MANIFEST_PATH}. Copy manifest.example.json to manifest.json and add your PNGs.`
+    );
+    process.exit(1);
+  }
+  if (pathToLoad === MANIFEST_EXAMPLE_PATH) {
+    console.warn(
+      `Using ${MANIFEST_EXAMPLE_PATH} (no local manifest.json). Copy to manifest.json for your conference.`
+    );
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(fs.readFileSync(pathToLoad, "utf8"));
+  } catch (e) {
+    console.error(`Invalid JSON in ${pathToLoad}: ${e instanceof Error ? e.message : e}`);
+    process.exit(1);
+  }
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    console.error(`${pathToLoad} must be a JSON object of committee label → filename.`);
+    process.exit(1);
+  }
+  const map = {};
+  for (const [label, file] of Object.entries(parsed)) {
+    if (typeof file !== "string" || !file.trim()) {
+      console.error(`Invalid filename for committee "${label}" in ${pathToLoad}`);
+      process.exit(1);
+    }
+    map[label] = file.trim();
+  }
+  if (Object.keys(map).length === 0) {
+    console.error(`${pathToLoad} has no committee entries.`);
+    process.exit(1);
+  }
+  return map;
+}
 
 function loadEnvLocal() {
   const envPath = path.join(ROOT, ".env.local");
@@ -135,6 +170,7 @@ async function main() {
     process.exit(1);
   }
 
+  const COMMITTEE_SOURCE = loadCommitteeSource();
   const allLabels = Object.keys(COMMITTEE_SOURCE);
   for (const l of FILTER_LABELS) {
     if (!COMMITTEE_SOURCE[l]) {

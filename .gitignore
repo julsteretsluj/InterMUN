@@ -38,9 +38,10 @@ yarn-error.log*
 /data/allocation-matrix.xlsx
 /public/conference/seamun-i-the-conference-handbook.pdf
 
-# Committee logo PNGs (local ops only — use assets you have rights to host)
+# Committee logo PNGs + local manifest (gitignored; templates tracked)
 /scripts/committee-logo-source/*
 !/scripts/committee-logo-source/README.md
+!/scripts/committee-logo-source/manifest.example.json
 
 # vercel
 .vercel
