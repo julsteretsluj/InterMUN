@@ -2,13 +2,13 @@
 /**
  * Replace committee emblems in Supabase storage + `conferences.committee_logo_url`.
  *
- * Source PNGs live in `scripts/committee-logo-source/` and are keyed to the exact
- * DB `committee` label. Each image is edge-flood knocked out (black matte → alpha)
- * with Pillow before upload, matching the in-app upload pipeline.
+ * Source PNGs are **local only** (gitignored under `committee-logo-source/`). See
+ * `committee-logo-source/README.md` for setup. Each file is keyed to the exact DB
+ * `committee` label via `COMMITTEE_SOURCE` below — customize that map for your event.
  *
  * Dry run (default):    node scripts/replace-committee-logos.mjs
  * Apply (all):          node scripts/replace-committee-logos.mjs --apply
- * Apply (one/some):     node scripts/replace-committee-logos.mjs --apply DISEC
+ * Apply (one/some):     node scripts/replace-committee-logos.mjs --apply "Example Committee A"
  *   (any non-flag args are treated as committee labels to limit the run to)
  *
  * Requires: .env.local with NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY
@@ -30,18 +30,11 @@ const APPLY = process.argv.includes("--apply");
 /** Any non-flag args limit the run to those committee labels. */
 const FILTER_LABELS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
-/** DB `committee` label → local source PNG. Labels must match exactly. */
+/** DB `committee` label → local gitignored PNG filename under `committee-logo-source/`. */
 const COMMITTEE_SOURCE = {
-  "UNHRC": "unhrc.png",
-  "DISEC": "disec.png",
-  "Press Corps": "press-corps.png",
-  "WHO": "who.png",
-  "UN Women": "un-women.png",
-  "UNSC": "unsc.png",
-  "ECOSOC": "ecosoc.png",
-  "UNODC": "unodc.png",
-  "Interpol": "interpol.png",
-  "FWC - Stranger Things": "fwc.png",
+  "Example Committee A": "committee-a.png",
+  "Example Committee B": "committee-b.png",
+  "Example Committee C": "committee-c.png",
 };
 
 function loadEnvLocal() {

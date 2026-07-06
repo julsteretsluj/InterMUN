@@ -93,6 +93,8 @@ InterMUN replaces ad-hoc spreadsheets and messaging threads with a single web ap
 
    Apply the relevant migrations under `supabase/migrations/` (e.g. `00100_profile_pictures_storage_bucket.sql`, `00037_committee_logos_upload.sql`) or create buckets with matching RLS policies.
 
+   Committee logo PNGs for bulk upload are **not** included in this repository. Add your own files under `scripts/committee-logo-source/` (gitignored) and follow `scripts/committee-logo-source/README.md`, or upload per committee in SMT.
+
 5. **Run locally**
 
    ```bash
