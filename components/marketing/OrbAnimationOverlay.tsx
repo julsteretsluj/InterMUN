@@ -32,6 +32,7 @@ export function OrbAnimationOverlay({
   onComplete,
   surface = "light",
   dismissible = false,
+  loops = 1,
 }: {
   open: boolean;
   playKey: number;
@@ -40,18 +41,35 @@ export function OrbAnimationOverlay({
   surface?: "dark" | "light";
   /** Logo-triggered overlay — Escape / close button ends playback early. */
   dismissible?: boolean;
+  /** Full GIF loops to show before fade (click replay uses 2). */
+  loops?: number;
 }) {
   const tClose = useTranslations("delegationNotes");
   const isLight = surface === "light";
   const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<OrbPhase>("closed");
   const [src, setSrc] = useState<string | null>(null);
+  const [loopIndex, setLoopIndex] = useState(0);
   const onCompleteRef = useRef(onComplete);
-  const timersRef = useRef<{ fade?: number; done?: number }>({});
+  const timersRef = useRef<{ fade?: number; done?: number; advance?: number }>({});
   const loadGenerationRef = useRef(0);
   const playbackStartedRef = useRef(-1);
   const activeSrcRef = useRef<string | null>(null);
   const objectUrlRef = useRef<string | null>(null);
+  const loopIndexRef = useRef(0);
+  const loopsRef = useRef(Math.max(1, loops));
+
+  useEffect(() => {
+    loopsRef.current = Math.max(1, loops);
+  }, [loops]);
+
+  useEffect(() => {
+    loopIndexRef.current = loopIndex;
+  }, [loopIndex]);
+
+  useEffect(() => {
+    setLoopIndex(0);
+  }, [playKey]);
 
   useEffect(() => {
     setMounted(true);
@@ -64,6 +82,7 @@ export function OrbAnimationOverlay({
   const clearTimers = useCallback(() => {
     if (timersRef.current.fade) window.clearTimeout(timersRef.current.fade);
     if (timersRef.current.done) window.clearTimeout(timersRef.current.done);
+    if (timersRef.current.advance) window.clearTimeout(timersRef.current.advance);
     timersRef.current = {};
   }, []);
 
@@ -84,20 +103,27 @@ export function OrbAnimationOverlay({
   );
 
   const startPlaybackTimers = useCallback(
-    (generation: number) => {
+    (generation: number, currentLoop: number) => {
       if (generation !== loadGenerationRef.current) return;
 
       clearTimers();
       setPhase("intro");
 
-      timersRef.current.fade = window.setTimeout(() => {
+      timersRef.current.advance = window.setTimeout(() => {
         if (generation !== loadGenerationRef.current) return;
-        setPhase("fade");
-      }, ORB_ANIMATION_HOLD_MS);
 
-      timersRef.current.done = window.setTimeout(() => {
-        finishPlayback(generation);
-      }, ORB_ANIMATION_HOLD_MS + ORB_ANIMATION_FADE_MS);
+        const totalLoops = loopsRef.current;
+        if (currentLoop + 1 < totalLoops) {
+          playbackStartedRef.current = -1;
+          setLoopIndex(currentLoop + 1);
+          return;
+        }
+
+        setPhase("fade");
+        timersRef.current.done = window.setTimeout(() => {
+          finishPlayback(generation);
+        }, ORB_ANIMATION_FADE_MS);
+      }, ORB_ANIMATION_HOLD_MS);
     },
     [clearTimers, finishPlayback]
   );
@@ -120,6 +146,7 @@ export function OrbAnimationOverlay({
       activeSrcRef.current = null;
       setPhase("closed");
       setSrc(null);
+      setLoopIndex(0);
       return;
     }
 
@@ -133,9 +160,11 @@ export function OrbAnimationOverlay({
     activeSrcRef.current = null;
     document.body.style.overflow = "hidden";
 
+    const loadKey = playKey * 100 + loopIndex;
+
     const load = async () => {
       try {
-        const nextUrl = await loadOpeningOrbObjectUrl(playKey);
+        const nextUrl = await loadOpeningOrbObjectUrl(loadKey);
         if (cancelled || generation !== loadGenerationRef.current) {
           URL.revokeObjectURL(nextUrl);
           return;
@@ -146,7 +175,7 @@ export function OrbAnimationOverlay({
         setSrc(nextUrl);
       } catch {
         if (cancelled || generation !== loadGenerationRef.current) return;
-        const fallback = openingOrbUrl(playKey);
+        const fallback = openingOrbUrl(loadKey);
         activeSrcRef.current = fallback;
         setSrc(fallback);
       }
@@ -159,7 +188,7 @@ export function OrbAnimationOverlay({
       clearTimers();
       document.body.style.overflow = "";
     };
-  }, [open, playKey, clearTimers]);
+  }, [open, playKey, loopIndex, clearTimers]);
 
   const handleImageLoad = useCallback(
     (event: SyntheticEvent<HTMLImageElement>) => {
@@ -188,7 +217,7 @@ export function OrbAnimationOverlay({
         if (playbackStartedRef.current === generation) return;
 
         playbackStartedRef.current = generation;
-        startPlaybackTimers(generation);
+        startPlaybackTimers(generation, loopIndexRef.current);
       })();
     },
     [open, startPlaybackTimers]
@@ -232,7 +261,7 @@ export function OrbAnimationOverlay({
       ) : null}
       {src ? (
         <img
-          key={`${playKey}-${src}`}
+          key={`${playKey}-${loopIndex}-${src}`}
           src={src}
           alt=""
           onLoad={handleImageLoad}

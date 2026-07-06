@@ -6,6 +6,7 @@
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
 import { OrbAnimationOverlay } from "@/components/marketing/OrbAnimationOverlay";
+import { ORB_ANIMATION_CLICK_LOOPS } from "@/lib/opening-orb";
 import { cn } from "@/lib/utils";
 
 export function OrbPlayTrigger({
@@ -44,6 +45,7 @@ export function OrbPlayTrigger({
         onComplete={handleComplete}
         surface="light"
         dismissible
+        loops={ORB_ANIMATION_CLICK_LOOPS}
       />
     </>
   );

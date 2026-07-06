@@ -12,6 +12,9 @@ export const OPENING_ORB_GIF_LOOP_MS = OPENING_ORB_GIF_FRAME_MS * OPENING_ORB_GI
 export const ORB_ANIMATION_HOLD_MS = OPENING_ORB_GIF_LOOP_MS + 900;
 export const ORB_ANIMATION_FADE_MS = 800;
 
+/** Logo click replays this many full GIF loops before fading out. */
+export const ORB_ANIMATION_CLICK_LOOPS = 2;
+
 /** Bump when playback logic changes so users get a fresh auto-intro. */
 export const OPENING_ORB_SESSION_KEY = "intermun-opening-orb-v6";
 
