@@ -307,44 +307,52 @@ export async function MarketingHome() {
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-12 md:px-6 md:py-16">
-          <Image
-            src="/marketing/hero-laptop.png"
-            alt=""
-            width={986}
-            height={986}
-            priority
-            aria-hidden
-            className="mun-marketing-hero-accent mx-auto mb-6 w-28 md:mb-8 md:w-36 lg:w-40"
-          />
-          <div className="mun-marketing-hero-copy w-full max-w-3xl">
-            <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
-            <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
-              {t("hero.title")}{" "}
-              <MarketingEmph>{t("hero.titleEmphasis")}</MarketingEmph>
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="/#contact"
-                className="mun-btn-primary rounded-full px-6 py-3 text-base font-semibold shadow-[0_12px_32px_-12px_color-mix(in_srgb,var(--accent)_65%,transparent)]"
-              >
-                {t("hero.ctaStart")} →
-              </Link>
-              <Link
-                href="/login"
-                className="rounded-full border border-white/20 bg-white/8 px-6 py-3 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/12"
-              >
-                {t("hero.ctaJoin")} →
-              </Link>
+        <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:py-20">
+          <div className="mun-marketing-hero-stage grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
+            <div className="mun-marketing-hero-copy order-2 lg:order-1">
+              <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
+              <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[3.25rem] xl:text-6xl">
+                <span className="block">{t("hero.title")}</span>
+                <MarketingEmph className="mt-2 block text-[1.35em] leading-none md:mt-3">
+                  {t("hero.titleEmphasis")}
+                </MarketingEmph>
+              </h1>
+              <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/#contact"
+                  className="mun-btn-primary rounded-full px-6 py-3 text-base font-semibold shadow-[0_12px_32px_-12px_color-mix(in_srgb,var(--accent)_65%,transparent)]"
+                >
+                  {t("hero.ctaStart")} →
+                </Link>
+                <Link
+                  href="/login"
+                  className="rounded-full border border-white/20 bg-white/8 px-6 py-3 text-base font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/12"
+                >
+                  {t("hero.ctaJoin")} →
+                </Link>
+              </div>
+              <ul className="mt-8 flex flex-wrap gap-2">
+                <li className="mun-procedure-chip">{t("hero.chip1")}</li>
+                <li className="mun-procedure-chip">{t("hero.chip2")}</li>
+                <li className="mun-procedure-chip">{t("hero.chip3")}</li>
+              </ul>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-2">
-              <li className="mun-procedure-chip">{t("hero.chip1")}</li>
-              <li className="mun-procedure-chip">{t("hero.chip2")}</li>
-              <li className="mun-procedure-chip">{t("hero.chip3")}</li>
-            </ul>
+
+            <div className="mun-marketing-hero-visual order-1 flex justify-center lg:order-2 lg:justify-end">
+              <Image
+                src="/marketing/hero-laptop.png"
+                alt=""
+                width={986}
+                height={986}
+                priority
+                aria-hidden
+                className="mun-marketing-hero-accent w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-none lg:w-[min(100%,28rem)] xl:w-[min(100%,34rem)]"
+              />
+            </div>
           </div>
-          <div className="mun-marketing-hero-demo relative mt-10 w-full md:mt-12">
+
+          <div className="mun-marketing-hero-demo relative mt-12 w-full md:mt-14 lg:mt-16">
             <MarketingChamberFrame label={t("hero.previewLabel")}>
               <MarketingHeroSessionPreview heroCompact />
             </MarketingChamberFrame>

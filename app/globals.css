@@ -1523,15 +1523,40 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-marketing-hero-accent {
   object-fit: contain;
-  opacity: 0.92;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+  opacity: 0.95;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
   animation: mun-marketing-float 7s var(--ease-apple-out) infinite;
   will-change: transform;
+}
+
+.marketing-shell .mun-marketing-hero-visual {
+  position: relative;
+  isolation: isolate;
+}
+
+.marketing-shell .mun-marketing-hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 8% 0 0;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse 72% 58% at 50% 42%,
+    color-mix(in srgb, var(--gold) 22%, transparent),
+    color-mix(in srgb, var(--accent) 12%, transparent) 42%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+.marketing-shell .mun-marketing-hero-stage {
+  align-items: center;
 }
 
 .marketing-shell .mun-marketing-hero-demo {
   width: min(100%, 56rem);
   max-width: 56rem;
+  margin-inline: auto;
 }
 
 .marketing-shell .mun-marketing-hero-demo .mun-chamber-frame-body {
