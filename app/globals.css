@@ -2004,11 +2004,11 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .marketing-nav a {
   position: relative;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: none;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--text-muted, var(--brand-muted, #6b6b6b));
   padding: 0.4rem 0.8rem;
   border-radius: var(--radius-pill);

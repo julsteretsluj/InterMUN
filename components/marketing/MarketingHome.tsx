@@ -319,7 +319,7 @@ export async function MarketingHome() {
           />
           <div className="mun-marketing-hero-copy w-full max-w-3xl">
             <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
-            <h1 className="mun-display mt-4 text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
               {t("hero.title")}{" "}
               <MarketingEmph>{t("hero.titleEmphasis")}</MarketingEmph>
             </h1>
