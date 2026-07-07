@@ -33,26 +33,22 @@ export function MarketingOriginMap({
         aria-hidden
       />
 
-      <div className="relative flex h-full w-full items-center justify-center px-6 py-8 md:px-10">
-        <div className="relative w-full max-w-[15rem] md:max-w-[18rem]">
+      <div className="relative flex h-full w-full items-center justify-center px-6 py-6 md:px-10 md:py-8">
+        <div className="relative w-full max-w-[11rem] md:max-w-[13rem]">
           <Image
-            src="/globe.svg"
+            src="/marketing/globe.png"
             alt=""
-            width={288}
-            height={288}
+            width={679}
+            height={944}
             aria-hidden
-            className="mx-auto h-auto w-full opacity-[0.28] contrast-125"
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_62%_48%,color-mix(in_srgb,var(--gold)_18%,transparent),transparent_52%)]"
-            aria-hidden
+            className="mx-auto h-auto w-full"
           />
         </div>
       </div>
 
       <button
         type="button"
-        className="group absolute left-[62%] top-[48%] z-10 -translate-x-1/2 -translate-y-full focus:outline-none"
+        className="group absolute left-[58%] top-[34%] z-10 -translate-x-1/2 -translate-y-full focus:outline-none"
         aria-label={tooltip}
       >
         <span
