@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
@@ -307,10 +308,21 @@ export async function MarketingHome() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="mun-marketing-hero-copy">
             <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
-            <h1 className="mun-display mt-4 text-4xl md:text-5xl lg:text-6xl">
-              {t("hero.title")}{" "}
-              <span className="mun-emph">{t("hero.titleEmphasis")}</span>
-            </h1>
+            <div className="mt-4 flex items-start gap-4 sm:gap-5 md:gap-6">
+              <Image
+                src="/marketing/hero-laptop.png"
+                alt=""
+                width={986}
+                height={986}
+                priority
+                aria-hidden
+                className="mun-marketing-hero-accent hidden w-[4.5rem] shrink-0 sm:block md:w-24 lg:w-28"
+              />
+              <h1 className="mun-display min-w-0 text-4xl md:text-5xl lg:text-6xl">
+                {t("hero.title")}{" "}
+                <span className="mun-emph">{t("hero.titleEmphasis")}</span>
+              </h1>
+            </div>
             <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link

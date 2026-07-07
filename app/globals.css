@@ -1512,6 +1512,12 @@ html.colorblind-mode .schedule-swatch-session {
   will-change: transform;
 }
 
+.marketing-shell .mun-marketing-hero-accent {
+  object-fit: contain;
+  opacity: 0.92;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marketing-shell .mun-marketing-hero-preview {
     animation: none;

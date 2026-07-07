@@ -16,6 +16,7 @@ This file records what ships in the open-source repository versus what operators
 | InterMUN emblem (light) | `public/intermun-emblem-light.png` | Light-mode branding |
 | App icons | `app/icon.png`, `app/apple-icon.png` | Browser tab / PWA |
 | Opening orb | `public/marketing/opening-orb.gif`, `.png` | Marketing / auth intro animation |
+| Marketing hero laptop | `public/marketing/hero-laptop.png` | Landing hero accent beside headline |
 | SEAMUN I 2027 conference mark | `public/seamun-i-2027-logo.png` | Dashboard when SEAMUN event is active |
 
 These may be used with the InterMUN software under the project license. **SEAMUN I 2027 marks are for that conference context** — forks should not reuse them as their own conference brand without permission.
