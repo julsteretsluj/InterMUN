@@ -40,10 +40,12 @@ function MarketingRollCallCard({
   rows,
   onSetAttendance,
   onDarkSurface = false,
+  heroCompact = false,
 }: {
   rows: RollRow[];
   onSetAttendance: (id: string, status: RollAttendance) => void;
   onDarkSurface?: boolean;
+  heroCompact?: boolean;
 }) {
   const t = useTranslations("sessionControlClient");
   const heading = onDarkSurface ? "text-white" : "text-brand-navy";
@@ -54,11 +56,12 @@ function MarketingRollCallCard({
     : "rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-4 py-2 text-sm font-medium text-brand-navy hover:bg-[var(--material-thick)]";
 
   return (
-    <section className={cn("space-y-4", onDarkSurface && MARKETING_CHAMBER_PREVIEW, body)}>
+    <section className={cn(heroCompact ? "space-y-2" : "space-y-4", onDarkSurface && MARKETING_CHAMBER_PREVIEW, body)}>
       <div className="flex items-center justify-between gap-3">
-        <h3 className={cn("font-display text-lg font-semibold", heading)}>
+        <h3 className={cn("font-display font-semibold", heading, heroCompact ? "text-base" : "text-lg")}>
           ✅ {t("rollCallTracker")}
         </h3>
+        {!heroCompact ? (
         <HelpButton
           title={t("rollCallTracker")}
           className={
@@ -69,23 +72,29 @@ function MarketingRollCallCard({
         >
           {t("rollCallHelp")}
         </HelpButton>
+        ) : null}
       </div>
-      <p className={cn("text-sm", muted)}>{t("rollCallIntro")}</p>
-      <div className={cn(MARKETING_DARK_GLASS_CARD, "space-y-4", onDarkSurface && "text-white")}>
+      {!heroCompact ? <p className={cn("text-sm", muted)}>{t("rollCallIntro")}</p> : null}
+      <div className={cn(MARKETING_DARK_GLASS_CARD, heroCompact ? "space-y-2 p-2" : "space-y-4", onDarkSurface && "text-white")}>
+        {!heroCompact ? (
         <button type="button" className={initBtn}>
           {t("initializeRowsAllAllocations")}
         </button>
+        ) : null}
         <div>
-          <h4 className={cn("font-display text-base font-semibold", onDarkSurface ? "text-white" : heading)}>
+          <h4 className={cn("font-display font-semibold", onDarkSurface ? "text-white" : heading, heroCompact ? "text-sm" : "text-base")}>
             👥 {t("delegates")}
           </h4>
-          <p className={cn("mt-1 text-sm", muted)}>{t("delegateRollStatusHint")}</p>
+          {!heroCompact ? <p className={cn("mt-1 text-sm", muted)}>{t("delegateRollStatusHint")}</p> : null}
         </div>
-        <ul className={cn("space-y-3 text-sm", body)}>
-          {rows.map((row) => (
+        <ul className={cn(heroCompact ? "space-y-2 text-xs" : "space-y-3 text-sm", body)}>
+          {(heroCompact ? rows.slice(0, 3) : rows).map((row) => (
             <li
               key={row.id}
-              className="flex flex-col gap-2 rounded-lg border border-white/12 bg-black/15 px-3 py-2 sm:flex-row sm:items-center sm:justify-between"
+              className={cn(
+                "flex flex-col gap-2 rounded-lg border border-white/12 bg-black/15 sm:flex-row sm:items-center sm:justify-between",
+                heroCompact ? "px-2 py-1.5" : "px-3 py-2"
+              )}
             >
               <span className="shrink-0 font-medium">{row.country}</span>
               <div
@@ -123,7 +132,14 @@ function MarketingRollCallCard({
 }
 
 /** Hero + chair sections: roll call and speakers list with local demo state. */
-export function MarketingHeroSessionPreview({ className }: { className?: string }) {
+export function MarketingHeroSessionPreview({
+  className,
+  heroCompact = false,
+}: {
+  className?: string;
+  /** Side-by-side layout for a shorter hero chamber demo. */
+  heroCompact?: boolean;
+}) {
   const [roll, setRoll] = useState<RollRow[]>(HERO_ROLL_SEED);
 
   const setRollAttendance = useCallback((id: string, status: RollAttendance) => {
@@ -131,9 +147,14 @@ export function MarketingHeroSessionPreview({ className }: { className?: string 
   }, []);
 
   return (
-    <div className={cn("space-y-4", className)}>
-      <MarketingRollCallCard rows={roll} onSetAttendance={setRollAttendance} onDarkSurface />
-      <MarketingSessionSpeakersPanel compactIntro />
+    <div className={cn(heroCompact ? "grid gap-3 md:grid-cols-2 md:items-start" : "space-y-4", className)}>
+      <MarketingRollCallCard
+        rows={roll}
+        onSetAttendance={setRollAttendance}
+        onDarkSurface
+        heroCompact={heroCompact}
+      />
+      <MarketingSessionSpeakersPanel compactIntro heroCompact={heroCompact} />
     </div>
   );
 }

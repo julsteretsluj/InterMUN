@@ -1525,10 +1525,34 @@ html.colorblind-mode .schedule-swatch-session {
   object-fit: contain;
   opacity: 0.92;
   filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+  animation: mun-marketing-float 7s var(--ease-apple-out) infinite;
+  will-change: transform;
+}
+
+.marketing-shell .mun-marketing-hero-demo {
+  width: min(100%, 56rem);
+  max-width: 56rem;
+}
+
+.marketing-shell .mun-marketing-hero-demo .mun-chamber-frame-body {
+  padding: 0.75rem 1rem;
+}
+
+.marketing-shell .mun-marketing-hero-demo .mun-chamber-frame-bar {
+  padding: 0.4rem 0.7rem;
+}
+
+.marketing-shell .mun-marketing-hero-demo .mun-chamber-frame {
+  border-radius: 1.25rem;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #ffffff 7%, transparent) inset,
+    0 20px 44px -24px rgba(0, 0, 0, 0.62),
+    0 8px 20px -12px rgba(0, 0, 0, 0.32);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marketing-shell .mun-marketing-hero-preview {
+  .marketing-shell .mun-marketing-hero-preview,
+  .marketing-shell .mun-marketing-hero-accent {
     animation: none;
   }
 

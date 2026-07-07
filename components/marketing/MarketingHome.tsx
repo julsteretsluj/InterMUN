@@ -307,24 +307,22 @@ export async function MarketingHome() {
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div className="mun-marketing-hero-copy">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-12 md:px-6 md:py-16">
+          <Image
+            src="/marketing/hero-laptop.png"
+            alt=""
+            width={986}
+            height={986}
+            priority
+            aria-hidden
+            className="mun-marketing-hero-accent mx-auto mb-6 w-28 md:mb-8 md:w-36 lg:w-40"
+          />
+          <div className="mun-marketing-hero-copy w-full max-w-3xl">
             <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
-            <div className="mt-4 flex items-start gap-4 sm:gap-5 md:gap-6">
-              <Image
-                src="/marketing/hero-laptop.png"
-                alt=""
-                width={986}
-                height={986}
-                priority
-                aria-hidden
-                className="mun-marketing-hero-accent hidden w-[4.5rem] shrink-0 sm:block md:w-24 lg:w-28"
-              />
-              <h1 className="mun-display min-w-0 text-4xl md:text-5xl lg:text-6xl">
-                {t("hero.title")}{" "}
-                <MarketingEmph>{t("hero.titleEmphasis")}</MarketingEmph>
-              </h1>
-            </div>
+            <h1 className="mun-display mt-4 text-4xl md:text-5xl lg:text-6xl">
+              {t("hero.title")}{" "}
+              <MarketingEmph>{t("hero.titleEmphasis")}</MarketingEmph>
+            </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
@@ -346,9 +344,9 @@ export async function MarketingHome() {
               <li className="mun-procedure-chip">{t("hero.chip3")}</li>
             </ul>
           </div>
-          <div className="mun-marketing-hero-preview relative">
+          <div className="mun-marketing-hero-demo relative mt-10 w-full md:mt-12">
             <MarketingChamberFrame label={t("hero.previewLabel")}>
-              <MarketingHeroSessionPreview />
+              <MarketingHeroSessionPreview heroCompact />
             </MarketingChamberFrame>
           </div>
         </div>

@@ -33,10 +33,13 @@ function formatTimer(totalSeconds: number): string {
 export function MarketingSessionSpeakersPanel({
   className,
   compactIntro = false,
+  heroCompact = false,
 }: {
   className?: string;
   /** Hide the long intro when stacked under roll call on the hero preview. */
   compactIntro?: boolean;
+  /** Tighter hero chamber demo — shorter queue and controls. */
+  heroCompact?: boolean;
 }) {
   const tq = useTranslations("chairSpeakerQueuePanel");
   const tTimer = useTranslations("session.timerPage");
@@ -107,9 +110,11 @@ export function MarketingSessionSpeakersPanel({
   }, []);
 
   return (
-    <section className={cn("space-y-3", className)}>
+    <section className={cn(heroCompact ? "space-y-2" : "space-y-3", className)}>
       <div className={MARKETING_CHAMBER_PREVIEW}>
-        <h3 className="font-display text-lg font-semibold text-white">🎤 {tq("speakerList")}</h3>
+        <h3 className={cn("font-display font-semibold text-white", heroCompact ? "text-base" : "text-lg")}>
+          🎤 {tq("speakerList")}
+        </h3>
         {!compactIntro ? (
           <p className="mt-1 text-sm text-white/70">
             {tq("introPrefix")}{" "}
@@ -121,33 +126,41 @@ export function MarketingSessionSpeakersPanel({
         ) : null}
       </div>
 
-      <div className={cn(MARKETING_SESSION_SURFACE, "space-y-4")}>
-        <div className="space-y-3 rounded-lg border border-white/15 bg-black/20 p-3">
+      <div className={cn(MARKETING_SESSION_SURFACE, heroCompact ? "space-y-2" : "space-y-4")}>
+        <div className={cn("space-y-2 rounded-lg border border-white/15 bg-black/20", heroCompact ? "p-2" : "space-y-3 p-3")}>
           <div>
             <p className={SESSION_FLOOR_LABEL}>{tTimer("speakerTimeRemaining")}</p>
-            <p className="mt-0.5 text-[0.65rem] font-normal normal-case text-brand-muted">
-              {tTimer("remainingHelpPerSpeaker")}
-            </p>
+            {!heroCompact ? (
+              <p className="mt-0.5 text-[0.65rem] font-normal normal-case text-brand-muted">
+                {tTimer("remainingHelpPerSpeaker")}
+              </p>
+            ) : null}
           </div>
-          <div className="flex flex-wrap items-end justify-between gap-3">
+          <div className="flex flex-wrap items-end justify-between gap-2">
             <div className="min-w-0">
               <p className="text-xs text-brand-muted">{tTimer("currentSpeaker")}</p>
-              <p className="font-display text-base font-semibold text-zinc-100">
+              <p className={cn("font-display font-semibold text-zinc-100", heroCompact ? "text-sm" : "text-base")}>
                 {current?.country ?? tq("dash")}
               </p>
             </div>
             <p
-              className="font-mono text-2xl font-semibold tabular-nums text-[var(--accent)]"
+              className={cn(
+                "font-mono font-semibold tabular-nums text-[var(--accent)]",
+                heroCompact ? "text-xl" : "text-2xl"
+              )}
               suppressHydrationWarning
             >
               {formatTimer(secondsLeft)}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             <button
               type="button"
               onClick={() => setRunning((v) => !v)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-brand-navy/20 bg-white px-3 py-2 text-sm font-medium text-zinc-900 hover:bg-brand-cream"
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-lg border border-brand-navy/20 bg-white font-medium text-zinc-900 hover:bg-brand-cream",
+                heroCompact ? "px-2 py-1.5 text-xs" : "px-3 py-2 text-sm"
+              )}
             >
               {running ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
               {running ? tTimer("pauseClock") : tTimer("startClock")}
@@ -156,7 +169,10 @@ export function MarketingSessionSpeakersPanel({
               type="button"
               onClick={advance}
               disabled={queue.length < 2}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-brand-accent px-3 py-2 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-lg bg-brand-accent font-medium text-white hover:opacity-90 disabled:opacity-50",
+                heroCompact ? "px-2 py-1.5 text-xs" : "px-3 py-2 text-sm"
+              )}
             >
               <SkipForward className="h-4 w-4" aria-hidden />
               {tTimer("advanceSpeakerReset")}
@@ -164,6 +180,7 @@ export function MarketingSessionSpeakersPanel({
           </div>
         </div>
 
+        {!heroCompact ? (
         <div className="flex flex-wrap items-end gap-2">
           <label className="min-w-[12rem] flex-1 text-sm text-brand-navy">
             <span className={SESSION_FLOOR_LABEL}>{tq("addDelegation")}</span>
@@ -184,12 +201,16 @@ export function MarketingSessionSpeakersPanel({
             {tq("add")}
           </button>
         </div>
+        ) : null}
 
-        <ul className="space-y-2 text-zinc-100">
-          {sorted.map((row, pos) => (
+        <ul className={cn("text-zinc-100", heroCompact ? "space-y-1" : "space-y-2")}>
+          {(heroCompact ? sorted.slice(0, 3) : sorted).map((row, pos) => (
             <li
               key={row.id}
-              className="flex flex-wrap items-center justify-between gap-2 border-b border-white/12 py-2"
+              className={cn(
+                "flex flex-wrap items-center justify-between gap-2 border-b border-white/12",
+                heroCompact ? "py-1.5" : "py-2"
+              )}
             >
               <span className="font-medium">
                 {row.country}{" "}
