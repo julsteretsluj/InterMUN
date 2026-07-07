@@ -330,11 +330,13 @@ html.dark {
   /* Prefer SF on Apple; Inter var from next/font still available as --font-ui */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
-  --font-heading: "Rijusans", var(--font-ui), system-ui, sans-serif;
-  --font-display: "Ithaca", "Rijusans", var(--font-ui), system-ui, sans-serif;
-  --font-accent: "Home Video", "Rijusans", var(--font-ui), system-ui, sans-serif;
+  /* UI chrome uses Inter / system sans; decorative faces are marketing-only (see .mun-display). */
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-marketing-display: "Ithaca", "Rijusans", var(--font-ui), system-ui, sans-serif;
+  --font-marketing-cursive: "Super Onigiri", cursive;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
-  --font-cursive: "Super Onigiri", cursive;
+  --font-cursive: var(--font-marketing-cursive);
   --color-brand-accent-ink: var(--brand-accent-ink);
   --color-brand-diplomatic: var(--brand-diplomatic);
   --color-brand-gold: var(--brand-gold);
@@ -383,16 +385,16 @@ html.dyslexic-font .font-mono {
 
 /* Keep script emphasis readable when dyslexic mode overrides UI fonts */
 html.dyslexic-font :is(em, i, .italic, .mun-emph, .font-cursive) {
-  font-family: var(--font-cursive) !important;
+  font-family: var(--font-marketing-cursive) !important;
   font-style: normal !important;
 }
 
-/* Keep Rijusans on headings when dyslexic mode is on; compact labels stay UI sans */
+/* Keep UI sans on compact dashboard headings when dyslexic mode is on */
 html.dyslexic-font
   :is(h1, h2, h3, h4, h5, h6, .dashboard-panel-title, .font-display):not(.text-xs):not(
     .text-sm
-  ):not(:is(em, i, .italic, .mun-emph, .font-cursive)) {
-  font-family: var(--font-heading) !important;
+  ):not(:is(.mun-emph, .font-cursive, em, i, .italic)) {
+  font-family: var(--font-dyslexic) !important;
 }
 
 /* OpenDyslexic runs wide + tall — open up spacing and line height so it stays readable. */
@@ -1051,47 +1053,24 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Two-tone editorial display heading: heavy sans + script gold emphasis */
+  /* Editorial marketing headlines only — not product chrome (.font-display / h3 tabs). */
   .mun-display {
     @apply font-extrabold;
-    font-family: var(--font-display);
+    font-family: var(--font-marketing-display);
     letter-spacing: 0.035em;
     line-height: 1.1;
   }
   .mun-emph {
-    font-family: var(--font-cursive);
+    font-family: var(--font-marketing-cursive);
     font-style: normal;
     font-weight: 400;
     color: var(--gold);
     letter-spacing: 0.05em;
   }
 
-  /* Script emphasis (Super Onigiri) */
-  :is(em, i, .italic) {
-    font-family: var(--font-cursive);
-    font-style: normal;
-  }
-
   .font-cursive {
-    font-family: var(--font-cursive);
+    font-family: var(--font-marketing-cursive);
     font-style: normal;
-  }
-
-  .font-accent {
-    font-family: var(--font-accent);
-    font-style: normal;
-  }
-
-  /* Rijusans for headers; mun-display uses Ithaca via --font-display */
-  :is(h1, h2, h3, h4, h5, h6, .dashboard-panel-title, .font-display):not(
-      :is(.mun-emph, .font-cursive, em, i, .italic)
-    ) {
-    font-family: var(--font-heading);
-  }
-
-  :is(h1, h2, h3, h4, h5, h6, .font-display).text-xs,
-  :is(h1, h2, h3, h4, h5, h6, .font-display).text-sm {
-    font-family: var(--font-sans);
   }
 
   .mun-btn-danger {
