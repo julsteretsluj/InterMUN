@@ -3525,6 +3525,13 @@
     "saveHelpBody": "Saves the stance note for this allocation. It can be viewed by staff and (depending on committee settings) other participants."
   },
   "speeches": {
+    "outlineTitle": "Speech outline",
+    "outlineHelp": "Check off talking points as you deliver them. Add bullets during caucus and keep your GSL structured under time pressure.",
+    "outlineEmpty": "No talking points yet. Add your first bullet below.",
+    "outlinePlaceholder": "Add a talking point…",
+    "addPoint": "Add",
+    "markDone": "Mark done",
+    "markUndone": "Mark not done",
     "newSpeech": "New speech",
     "speechTitlePlaceholder": "Speech title",
     "googleDocsUrl": "Google Docs URL",

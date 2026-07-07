@@ -11,6 +11,8 @@ import { Mic, Plus } from "lucide-react";
 import { OpenNewGoogleDocButton } from "@/components/google-docs/OpenNewGoogleDocButton";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
 import { EmojiQuickInsert } from "@/components/EmojiQuickInsert";
+import { SpeechOutlinePlanner } from "@/components/speeches/SpeechOutlinePlanner";
+import { type SpeechOutlinePoint } from "@/lib/speech-outline";
 
 interface Speech {
   id: string;
@@ -19,7 +21,13 @@ interface Speech {
   google_docs_url?: string | null;
 }
 
-export function SpeechesView({ speeches }: { speeches: Speech[] }) {
+export function SpeechesView({
+  speeches,
+  speechOutlinePoints,
+}: {
+  speeches: Speech[];
+  speechOutlinePoints: SpeechOutlinePoint[];
+}) {
   const t = useTranslations("speeches");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -29,7 +37,12 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: "", content: "", google_docs_url: "" });
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [outlinePoints, setOutlinePoints] = useState(speechOutlinePoints);
   const supabase = createClient();
+
+  useEffect(() => {
+    setOutlinePoints(speechOutlinePoints);
+  }, [speechOutlinePoints]);
 
   useEffect(() => {
     setItems(speeches);
@@ -99,8 +112,44 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
     }));
   }
 
+  async function persistOutlinePoints(next: SpeechOutlinePoint[]) {
+    setSaveError(null);
+    setOutlinePoints(next);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return;
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        speech_outline_points: next,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", user.id);
+    if (error) {
+      setSaveError(error.message);
+      return;
+    }
+    router.refresh();
+  }
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
+      {saveError ? (
+        <p className="text-sm text-red-600" role="alert">
+          {saveError}
+        </p>
+      ) : null}
+      <div>
+        <h3 className="mb-1 font-semibold text-brand-navy dark:text-zinc-100">{t("outlineTitle")}</h3>
+        <p className="mb-3 text-sm text-brand-muted">{t("outlineHelp")}</p>
+        <SpeechOutlinePlanner
+          points={outlinePoints}
+          canEdit
+          onChange={(next) => void persistOutlinePoints(next)}
+        />
+      </div>
+      <div className="space-y-4">
       <button
         type="button"
         onClick={() => {
@@ -250,6 +299,7 @@ export function SpeechesView({ speeches }: { speeches: Speech[] }) {
           ) : null}
         </div>
       )}
+      </div>
     </div>
   );
 }
