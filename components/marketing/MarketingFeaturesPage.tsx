@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { MarketingEmph } from "@/components/marketing/MarketingEmph";
 import { MarketingFeaturesDemos, type MarketingFeatureRole } from "@/components/marketing/MarketingFeaturesDemos";
 
 const ROLE_PATH: Record<MarketingFeatureRole, string> = {
@@ -28,7 +29,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
         <div className="mun-marketing-hero-copy mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-18">
           <p className="mun-marketing-eyebrow">{t("eyebrow")}</p>
           <h1 className="mun-display mt-4 text-4xl md:text-5xl">
-            {t("title")} <span className="mun-emph">{t("titleEmphasis")}</span>
+            {t("title")} <MarketingEmph>{t("titleEmphasis")}</MarketingEmph>
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed md:text-lg">{t("subtitle")}</p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base">{t("intro")}</p>
@@ -46,7 +47,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mun-marketing-hero-copy mx-auto max-w-3xl px-4 text-center md:px-6">
           <h2 className="mun-display text-3xl md:text-4xl">
-            {t("ctaTitle")} <span className="mun-emph">{t("ctaTitleEmphasis")}</span>
+            {t("ctaTitle")} <MarketingEmph>{t("ctaTitleEmphasis")}</MarketingEmph>
           </h2>
           <p className="mt-4 text-base leading-relaxed md:text-lg">{t("ctaSubtitle")}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

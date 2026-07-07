@@ -26,6 +26,7 @@ import {
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
 import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
+import { MarketingEmph } from "@/components/marketing/MarketingEmph";
 import { MarketingOriginMap } from "@/components/marketing/MarketingOriginMap";
 import { getPartnershipContactEmail } from "@/lib/branding";
 import {
@@ -321,7 +322,7 @@ export async function MarketingHome() {
               />
               <h1 className="mun-display min-w-0 text-4xl md:text-5xl lg:text-6xl">
                 {t("hero.title")}{" "}
-                <span className="mun-emph">{t("hero.titleEmphasis")}</span>
+                <MarketingEmph>{t("hero.titleEmphasis")}</MarketingEmph>
               </h1>
             </div>
             <p className="mt-5 max-w-xl text-base leading-relaxed md:text-lg">{t("hero.subtitle")}</p>
@@ -494,7 +495,7 @@ export async function MarketingHome() {
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
           <h2 className="mun-display text-3xl md:text-4xl">
             {t("footer.ctaTitle")}{" "}
-            <span className="mun-emph">{t("footer.ctaTitleEmphasis")}</span>
+            <MarketingEmph>{t("footer.ctaTitleEmphasis")}</MarketingEmph>
           </h2>
           <p className="mt-4 text-base leading-relaxed md:text-lg">{t("footer.ctaSubtitle")}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

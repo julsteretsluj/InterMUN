@@ -20,10 +20,19 @@
   font-display: swap;
 }
 
-/* Super Onigiri — script emphasis (mun-emph, italic) */
+/* Super Onigiri — script emphasis fallback */
 @font-face {
   font-family: "Super Onigiri";
   src: url("/fonts/super-onigiri-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Momo Signature — gold marketing emphasis (`.mun-emph`) */
+@font-face {
+  font-family: "Momo Signature";
+  src: url("/fonts/momosignature-regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -323,11 +332,11 @@ html.dark {
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* Product chrome: UI sans everywhere. Marketing heroes only: Ithaca + Caveat (see .marketing-shell). */
+  /* Product chrome: UI sans everywhere. Marketing heroes: Ithaca display + Momo Signature emphasis. */
   --font-heading: var(--font-sans);
   --font-display: var(--font-sans);
   --font-marketing-display: "Ithaca", "Rijusans", var(--font-sans);
-  --font-marketing-cursive: var(--font-marketing-cursive-face), "Super Onigiri", cursive;
+  --font-marketing-cursive: "Momo Signature", "Super Onigiri", cursive;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --font-cursive: var(--font-marketing-cursive);
   --color-brand-accent-ink: var(--brand-accent-ink);
@@ -1069,15 +1078,15 @@ html.dark ::selection {
   .marketing-shell .mun-emph {
     font-family: var(--font-marketing-cursive);
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-synthesis: none;
     color: var(--gold);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
   }
 
   .marketing-shell .mun-display .mun-emph {
     font-family: var(--font-marketing-cursive);
-    font-weight: 700;
+    font-weight: 400;
     font-synthesis: none;
   }
 
@@ -1559,6 +1568,10 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-marketing-hero .mun-display .mun-emph {
   color: var(--gold);
+  font-family: var(--font-marketing-cursive);
+  font-style: normal;
+  font-weight: 400;
+  font-synthesis: none;
 }
 
 .marketing-shell .mun-marketing-hero .mun-marketing-hero-copy p {
