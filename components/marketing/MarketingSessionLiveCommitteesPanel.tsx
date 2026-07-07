@@ -184,11 +184,6 @@ export function MarketingSessionLiveCommitteesPanel({
                         : "border-brand-navy/10"
                     )}
                   >
-                    <NavPriorityBadge
-                      priority={cardPriority}
-                      variant="tile"
-                      className="left-auto top-auto right-2.5 bottom-2.5 h-8 w-8 text-sm"
-                    />
                     <p className="text-sm font-semibold leading-snug">{title}</p>
                     {tags ? (
                       <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -210,16 +205,19 @@ export function MarketingSessionLiveCommitteesPanel({
                     <p className="mt-1.5 text-xs font-mono tracking-widest text-brand-navy/70">
                       {item.committeeCode}
                     </p>
-                    {item.topics.length > 0 ? (
-                      <ul className="mt-1.5 max-h-20 space-y-1 overflow-y-auto pr-1">
-                        {item.topics.map((topic) => (
-                          <li key={topic} className="text-[0.72rem] leading-snug text-brand-navy/90">
-                            <span className="font-semibold text-brand-navy">{t("topicLabel")} </span>
-                            {topic}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
+                    <div className="mt-1.5 flow-root">
+                      <NavPriorityBadge priority={cardPriority} variant="tile" className="nav-priority-badge--wrap-tile" />
+                      {item.topics.length > 0 ? (
+                        <ul className="max-h-20 space-y-1 overflow-y-auto">
+                          {item.topics.map((topic) => (
+                            <li key={topic} className="text-[0.72rem] leading-snug text-brand-navy/90">
+                              <span className="font-semibold text-brand-navy">{t("topicLabel")} </span>
+                              {topic}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
                   </button>
                 );
               })}

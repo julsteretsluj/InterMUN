@@ -842,6 +842,19 @@ html.dark ::selection {
     background-color: var(--gold);
     color: var(--navy-deep);
   }
+  /* Committee / hub tiles: float the gold number so topic copy wraps around it. */
+  .nav-priority-badge--wrap-tile {
+    position: static;
+    float: right;
+    clear: right;
+    margin: 0 0 0.35rem 0.65rem;
+    height: 2rem;
+    width: 2rem;
+    font-size: 0.875rem;
+    shape-outside: circle(50% at 50% 50%);
+    background-color: var(--gold);
+    color: var(--navy-deep);
+  }
   .nav-priority-link {
     @apply relative pl-8;
   }

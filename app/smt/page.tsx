@@ -258,11 +258,6 @@ export default async function SmtOverviewPage({
                       aria-label={`${cardPriority}. ${g.latestRow.committee ?? "Committee"}`}
                       className="relative rounded-lg border border-brand-navy/10 bg-white px-3.5 py-2.5 text-brand-navy shadow-sm transition-colors hover:bg-brand-navy/5 dark:border-white/10 dark:bg-discord-elevated dark:hover:bg-white/10"
                     >
-                      <NavPriorityBadge
-                        priority={cardPriority}
-                        variant="tile"
-                        className="left-auto top-auto right-2.5 bottom-2.5 h-8 w-8 text-sm"
-                      />
                       {g.logoUrl ? (
                         <CommitteeLogo
                           src={g.logoUrl}
@@ -318,34 +313,34 @@ export default async function SmtOverviewPage({
                           {g.latestRow.committee_code.trim().toUpperCase()}
                         </p>
                       ) : null}
-                      {g.topicCount > 1 ? (
-                        <p className="mt-1 text-[0.72rem] font-medium text-brand-navy/85">
-                          {t("sessionsCount", { count: g.topicCount })}
-                        </p>
-                      ) : null}
-                      {g.topics.length > 0 ? (
-                        (() => {
-                          const sortedTopics = [...g.topics].sort((a, b) =>
-                            a.localeCompare(b, undefined, { sensitivity: "base" })
-                          );
-                          return (
-                            <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
-                              {sortedTopics.map((topic, ti) => {
-                                const isLast = ti === sortedTopics.length - 1;
-                                return (
+                      <div className="mt-1.5 flow-root">
+                        <NavPriorityBadge priority={cardPriority} variant="tile" className="nav-priority-badge--wrap-tile" />
+                        {g.topicCount > 1 ? (
+                          <p className="text-[0.72rem] font-medium text-brand-navy/85">
+                            {t("sessionsCount", { count: g.topicCount })}
+                          </p>
+                        ) : null}
+                        {g.topics.length > 0 ? (
+                          (() => {
+                            const sortedTopics = [...g.topics].sort((a, b) =>
+                              a.localeCompare(b, undefined, { sensitivity: "base" })
+                            );
+                            return (
+                              <ul className={`space-y-1${g.topicCount > 1 ? " mt-1" : ""} max-h-28 overflow-y-auto`}>
+                                {sortedTopics.map((topic, ti) => (
                                   <li
                                     key={`${ti}-${topic.slice(0, 48)}`}
-                                    className={`text-[0.72rem] text-brand-navy/90 leading-snug${isLast ? " pr-12" : ""}`}
+                                    className="text-[0.72rem] leading-snug text-brand-navy/90"
                                   >
                                     <span className="font-semibold text-brand-navy">{t("topicLabel")} </span>
                                     {translateAgendaTopicLabel(tTopics, topic, locale)}
                                   </li>
-                                );
-                              })}
-                            </ul>
-                          );
-                        })()
-                      ) : null}
+                                ))}
+                              </ul>
+                            );
+                          })()
+                        ) : null}
+                      </div>
                     </Link>
                   );
                 })}
