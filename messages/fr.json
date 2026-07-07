@@ -4320,6 +4320,12 @@
         "check_topics": "Sujets de l'agenda configurés",
         "check_newsroom": "Flux de rédaction câblé"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

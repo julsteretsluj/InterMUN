@@ -4320,6 +4320,12 @@
         "check_topics": "Τα θέματα της ατζέντας διαμορφώθηκαν",
         "check_newsroom": "Ενσύρματη τροφοδοσία του Newsroom"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

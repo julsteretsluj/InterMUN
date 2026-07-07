@@ -4320,6 +4320,12 @@
         "check_topics": "Mada za ajenda zimesanidiwa",
         "check_newsroom": "Mlisho wa chumba cha habari ukiwa na waya"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

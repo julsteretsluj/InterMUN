@@ -4320,6 +4320,12 @@
         "check_topics": "נושאי סדר יום מוגדרים",
         "check_newsroom": "עדכון חדר החדשות חוטי"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

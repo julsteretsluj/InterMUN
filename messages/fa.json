@@ -4320,6 +4320,12 @@
         "check_topics": "موضوعات دستور کار پیکربندی شد",
         "check_newsroom": "خوراک اتاق خبر سیمی شد"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

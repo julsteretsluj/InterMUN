@@ -3888,6 +3888,12 @@
       "paragraph2": "Chairs gain procedural control that mirrors how sessions actually unfold. Delegates get structured prep beside the floor. Secretariat keeps event-wide visibility without hovering over every motion.",
       "paragraph3": "Whether you run one room or a full weekend conference, InterMUN keeps chairs, delegates, and staff aligned from the opening roll call through closing ceremony."
     },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
+    },
     "contact": {
       "eyebrow": "Get in touch",
       "title": "Inquiries & conference customization",

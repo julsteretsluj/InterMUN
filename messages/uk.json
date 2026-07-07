@@ -4320,6 +4320,12 @@
         "check_topics": "Теми порядку денного налаштовані",
         "check_newsroom": "Стрічка редакційної кімнати підключена"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

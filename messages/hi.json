@@ -4320,6 +4320,12 @@
         "check_topics": "एजेंडा विषय कॉन्फ़िगर किए गए",
         "check_newsroom": "न्यूज़ रूम फ़ीड वायर्ड"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

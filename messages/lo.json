@@ -4320,6 +4320,12 @@
         "check_topics": "ຕັ້ງຄ່າຫົວຂໍ້ວາລະ",
         "check_newsroom": "ຂ່າວຫ້ອງຂ່າວມີສາຍ"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

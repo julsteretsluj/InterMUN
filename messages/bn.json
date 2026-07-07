@@ -4320,6 +4320,12 @@
         "check_topics": "এজেন্ডার বিষয়গুলি কনফিগার করা হয়েছে৷",
         "check_newsroom": "নিউজরুম ফিড তারযুক্ত"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

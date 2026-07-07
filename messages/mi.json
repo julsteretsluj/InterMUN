@@ -4320,6 +4320,12 @@
         "check_topics": "Kua whirihorahia nga kaupapa kaupapa",
         "check_newsroom": "He waea waea ruma korero"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

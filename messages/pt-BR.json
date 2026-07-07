@@ -4320,6 +4320,12 @@
         "check_topics": "Tópicos da agenda configurados",
         "check_newsroom": "Feed da redação conectado"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

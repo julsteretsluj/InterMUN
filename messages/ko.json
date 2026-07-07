@@ -4320,6 +4320,12 @@
         "check_topics": "의제 주제 구성됨",
         "check_newsroom": "뉴스룸 피드 유선"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

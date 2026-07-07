@@ -26,6 +26,7 @@ import {
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { ConferenceInquiryForm } from "@/components/marketing/ConferenceInquiryForm";
 import { MarketingChamberFrame } from "@/components/marketing/MarketingChamberFrame";
+import { MarketingOriginMap } from "@/components/marketing/MarketingOriginMap";
 import { getPartnershipContactEmail } from "@/lib/branding";
 import {
   MarketingChairMotionPreview,
@@ -428,7 +429,21 @@ export async function MarketingHome() {
         </section>
       </section>
 
-      <section id="about" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-20">
+      <section id="origin" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="max-w-2xl">
+            <p className="mun-marketing-eyebrow">{t("origin.eyebrow")}</p>
+            <h2 className="mun-display mt-3 text-3xl text-brand-navy md:text-4xl">{t("origin.title")}</h2>
+          </div>
+          <MarketingOriginMap
+            className="mt-10 max-w-4xl"
+            tooltip={t("origin.tooltip")}
+            mapAria={t("origin.mapAria")}
+          />
+        </div>
+      </section>
+
+      <section id="about" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:px-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="flex justify-center lg:justify-start">
             <div className="mun-marketing-contact-card max-w-sm p-8">

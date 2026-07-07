@@ -4320,6 +4320,12 @@
         "check_topics": "Temas de agenda configurados",
         "check_newsroom": "Transmisión por cable de la sala de redacción"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

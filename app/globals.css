@@ -1951,6 +1951,13 @@ html.colorblind-mode .schedule-swatch-session {
   background: var(--marketing-rainbow);
 }
 
+.marketing-shell .mun-marketing-origin-map {
+  border: 1px solid var(--marketing-glass-border);
+  background: color-mix(in srgb, var(--material-thick) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(1.05);
+  box-shadow: var(--marketing-float-shadow);
+}
+
 .marketing-shell .marketing-header {
   border-bottom: 1px solid color-mix(in srgb, var(--hairline) 75%, transparent);
   background: color-mix(in srgb, var(--material-thin) 68%, transparent);

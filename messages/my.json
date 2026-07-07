@@ -4320,6 +4320,12 @@
         "check_topics": "အစီအစဉ်အကြောင်းအရာများကို စီစဉ်သတ်မှတ်ထားသည်။",
         "check_newsroom": "Newsroom feed ကို ကြိုးတပ်ထားပါတယ်။"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

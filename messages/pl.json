@@ -4320,6 +4320,12 @@
         "check_topics": "Skonfigurowano tematy programu",
         "check_newsroom": "Kanał informacyjny przewodowy"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }

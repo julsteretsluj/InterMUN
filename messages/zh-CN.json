@@ -4320,6 +4320,12 @@
         "check_topics": "配置的议程主题",
         "check_newsroom": "新闻编辑室有线馈送"
       }
+    },
+    "origin": {
+      "eyebrow": "Our roots",
+      "title": "Where it began",
+      "tooltip": "This project originated in Thailand",
+      "mapAria": "Stylized map with a pin on Thailand"
     }
   }
 }
