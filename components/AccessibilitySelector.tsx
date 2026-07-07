@@ -18,7 +18,13 @@ import {
 import { COLORBLIND_TYPES, type ColorblindType } from "@/lib/theme-storage";
 import { useTranslations } from "next-intl";
 
-export function AccessibilitySelector({ className }: { className?: string }) {
+export function AccessibilitySelector({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const tTheme = useTranslations("themeSelector");
   const tColorblind = useTranslations("colorblindMode");
   const [open, setOpen] = useState(false);
@@ -100,11 +106,17 @@ export function AccessibilitySelector({ className }: { className?: string }) {
     });
   }, []);
 
+  const iconButtonClass = cn(
+    "inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
+    compact ? "size-8" : "size-9"
+  );
+
   if (!mounted) {
     return (
       <span
         className={cn(
-          "inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] opacity-0",
+          iconButtonClass,
+          "border-[var(--hairline)] bg-[var(--material-thin)] opacity-0",
           className
         )}
         aria-hidden
@@ -119,7 +131,7 @@ export function AccessibilitySelector({ className }: { className?: string }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
+          iconButtonClass,
           "border-[var(--hairline)] bg-[var(--material-thin)] hover:bg-[color:var(--discord-hover-bg)]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         )}

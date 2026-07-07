@@ -2034,16 +2034,25 @@ html.colorblind-mode .schedule-swatch-session {
 .marketing-shell .marketing-nav a {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.5625rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--text-muted, var(--brand-muted, #6b6b6b));
-  padding: 0.4rem 0.8rem;
+  padding: 0.3rem 0.45rem;
   border-radius: var(--radius-pill);
   transition:
     color var(--dur-base) var(--ease-apple),
     background-color var(--dur-base) var(--ease-apple);
+}
+
+@media (min-width: 1024px) {
+  .marketing-shell .marketing-nav a {
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 0.55rem;
+  }
 }
 
 .marketing-shell .marketing-nav a:hover {

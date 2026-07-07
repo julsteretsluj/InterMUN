@@ -44,7 +44,13 @@ const HUE_META: Record<
   },
 };
 
-export function ThemeSelector({ className }: { className?: string }) {
+export function ThemeSelector({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const t = useTranslations("themeSelector");
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<ThemePreference>(() => readThemeFromStorage().mode);
@@ -124,11 +130,17 @@ export function ThemeSelector({ className }: { className?: string }) {
     persistAndApplyTextSize(v);
   }, []);
 
+  const iconButtonClass = cn(
+    "inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
+    compact ? "size-8" : "size-9"
+  );
+
   if (!mounted) {
     return (
       <span
         className={cn(
-          "inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--hairline)] bg-[var(--material-thin)] opacity-0",
+          iconButtonClass,
+          "border-[var(--hairline)] bg-[var(--material-thin)] opacity-0",
           className
         )}
         aria-hidden
@@ -143,7 +155,7 @@ export function ThemeSelector({ className }: { className?: string }) {
         type="button"
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "inline-flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border text-brand-navy transition-apple",
+          iconButtonClass,
           "border-[var(--hairline)] bg-[var(--material-thin)] hover:bg-[color:var(--discord-hover-bg)]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         )}

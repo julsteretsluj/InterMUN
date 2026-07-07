@@ -13,8 +13,15 @@ import {
   SUPPORTED_LOCALES,
   type AppLocale,
 } from "@/lib/i18n/locales";
+import { cn } from "@/lib/utils";
 
-export function LanguageSwitcher({ className = "" }: { className?: string }) {
+export function LanguageSwitcher({
+  className = "",
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -38,7 +45,10 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       <span className="sr-only">{t("selectorAria")}</span>
       <select
         aria-label={t("selectorAria")}
-        className="max-w-[8.5rem] min-w-0 cursor-pointer rounded-[var(--radius-sm)] border-0 bg-transparent py-1.5 pl-1.5 pr-0 text-xs font-medium text-brand-navy shadow-none outline-none focus-visible:ring-2 focus-visible:ring-[color:color-mix(in_srgb,var(--accent)_45%,transparent)] dark:text-zinc-100"
+        className={cn(
+          "min-w-0 cursor-pointer rounded-[var(--radius-sm)] border-0 bg-transparent py-1.5 pl-1.5 pr-0 font-medium text-brand-navy shadow-none outline-none focus-visible:ring-2 focus-visible:ring-[color:color-mix(in_srgb,var(--accent)_45%,transparent)] dark:text-zinc-100",
+          compact ? "max-w-[5.75rem] text-[0.65rem] leading-tight" : "max-w-[8.5rem] text-xs"
+        )}
         value={locale}
         disabled={pending}
         onChange={(e) => setLocale(e.target.value as AppLocale)}
