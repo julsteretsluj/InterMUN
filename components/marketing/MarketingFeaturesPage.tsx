@@ -67,7 +67,7 @@ export async function MarketingFeaturesPage({ role }: { role: MarketingFeatureRo
         className="border-t border-[var(--hairline)] bg-[var(--material-thin)] py-6"
         aria-label={t("relatedNavLabel")}
       >
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-4 px-4 font-mono text-xs uppercase tracking-wider md:px-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-4 px-4 font-sans text-xs uppercase tracking-wider md:px-6">
           {(Object.keys(ROLE_PATH) as MarketingFeatureRole[])
             .filter((r) => r !== role)
             .map((r) => (

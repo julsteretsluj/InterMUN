@@ -37,7 +37,7 @@ export function MarketingFeatureDemoSection({
         "scroll-mt-24 py-14 md:py-18",
         dark
           ? "mun-marketing-role-band border-t border-white/8 text-white"
-          : "border-t border-[var(--hairline)] bg-[var(--material-thin)]"
+          : "mun-marketing-surface border-t border-[var(--hairline)]"
       )}
     >
       <div
@@ -48,7 +48,7 @@ export function MarketingFeatureDemoSection({
       >
         <div>
           <p className="mun-marketing-eyebrow">{eyebrow}</p>
-          <p className="mt-3 font-mono text-xs font-bold tracking-[0.14em] text-[var(--accent)]">{index}</p>
+          <p className="mt-3 font-sans text-xs font-bold tracking-[0.14em] text-[var(--accent)]">{index}</p>
           <h2
             className={cn(
               "mun-display mt-2 text-2xl md:text-3xl",

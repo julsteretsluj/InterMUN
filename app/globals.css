@@ -29,15 +29,6 @@
   font-display: swap;
 }
 
-/* Home Video (CC0) — optional accent display */
-@font-face {
-  font-family: "Home Video";
-  src: url("/fonts/home-video-regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 /*
  * InterMUN theme — simplified semantic tokens (TAGS):
  *   PAGE / SURFACE / BORDER — layout layers
@@ -330,11 +321,13 @@ html.dark {
   /* Prefer SF on Apple; Inter var from next/font still available as --font-ui */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
-  /* UI chrome uses Inter / system sans; decorative faces are marketing-only (see .mun-display). */
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* Product chrome: UI sans everywhere. Marketing heroes only: Ithaca + Caveat (see .marketing-shell). */
   --font-heading: var(--font-sans);
   --font-display: var(--font-sans);
-  --font-marketing-display: "Ithaca", "Rijusans", var(--font-ui), system-ui, sans-serif;
-  --font-marketing-cursive: "Super Onigiri", cursive;
+  --font-marketing-display: "Ithaca", "Rijusans", var(--font-sans);
+  --font-marketing-cursive: var(--font-marketing-cursive-face), "Super Onigiri", cursive;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --font-cursive: var(--font-marketing-cursive);
   --color-brand-accent-ink: var(--brand-accent-ink);
@@ -377,7 +370,7 @@ html.dyslexic-font,
 html.dyslexic-font body,
 html.dyslexic-font .font-sans,
 html.dyslexic-font .font-display,
-html.dyslexic-font .mun-display,
+html.dyslexic-font .marketing-shell .mun-display,
 html.dyslexic-font .font-serif,
 html.dyslexic-font .font-mono {
   font-family: var(--font-dyslexic) !important;
@@ -979,6 +972,18 @@ html.dark ::selection {
     transform: scale(0.97);
   }
 
+  .mun-btn-outline {
+    color: var(--brand-navy);
+    background: color-mix(in srgb, #ffffff 55%, transparent);
+    border-color: color-mix(in srgb, var(--hairline-strong) 100%, transparent);
+    box-shadow: 0 1px 0 color-mix(in srgb, #ffffff 80%, transparent) inset;
+  }
+
+  .mun-btn-outline:hover:not(:disabled) {
+    background: color-mix(in srgb, #ffffff 82%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--hairline));
+  }
+
   .mun-btn-primary {
     @apply border border-transparent px-4 py-2 text-sm font-semibold text-white disabled:opacity-45;
     @apply [border-radius:var(--radius-pill)];
@@ -1053,22 +1058,30 @@ html.dark ::selection {
     background-color: color-mix(in srgb, var(--material-thick) 88%, white 12%);
   }
 
-  /* Editorial marketing headlines only — not product chrome (.font-display / h3 tabs). */
-  .mun-display {
+  /* Marketing editorial headlines only — scoped to .marketing-shell (not product chrome). */
+  .marketing-shell .mun-display {
     @apply font-extrabold;
     font-family: var(--font-marketing-display);
     letter-spacing: 0.035em;
     line-height: 1.1;
   }
-  .mun-emph {
+
+  .marketing-shell .mun-emph {
     font-family: var(--font-marketing-cursive);
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
+    font-synthesis: none;
     color: var(--gold);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
   }
 
-  .font-cursive {
+  .marketing-shell .mun-display .mun-emph {
+    font-family: var(--font-marketing-cursive);
+    font-weight: 700;
+    font-synthesis: none;
+  }
+
+  .marketing-shell .font-cursive {
     font-family: var(--font-marketing-cursive);
     font-style: normal;
   }
@@ -1456,10 +1469,13 @@ html.colorblind-mode .schedule-swatch-session {
   border: 2px dashed #18181b;
 }
 
-/* —— Marketing shell: chamber-floor identity (distinct from generic SaaS landings) —— */
+/* —— Marketing shell: chamber-floor identity + SaaS glass / bento inspiration —— */
 .marketing-shell {
   --marketing-chamber: #0b0b0f;
   --marketing-chamber-elevated: #12121a;
+  --marketing-glass: color-mix(in srgb, #ffffff 72%, transparent);
+  --marketing-glass-border: color-mix(in srgb, #ffffff 55%, var(--hairline));
+  --marketing-float-shadow: 0 24px 48px -18px rgba(45, 35, 18, 0.14), 0 8px 20px -10px rgba(45, 35, 18, 0.1);
   --marketing-rainbow: linear-gradient(
     90deg,
     #e11d48 0%,
@@ -1469,6 +1485,42 @@ html.colorblind-mode .schedule-swatch-session {
     #6366f1 72%,
     #a855f7 100%
   );
+  background:
+    radial-gradient(1100px 520px at 12% -8%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%),
+    radial-gradient(900px 480px at 88% 4%, color-mix(in srgb, var(--gold) 6%, transparent), transparent 55%),
+    var(--dashboard-cream);
+}
+
+.marketing-shell .mun-marketing-surface {
+  background-color: color-mix(in srgb, var(--material-thin) 88%, transparent);
+  background-image: radial-gradient(color-mix(in srgb, var(--navy) 7%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@keyframes mun-marketing-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.marketing-shell .mun-marketing-hero-preview {
+  animation: mun-marketing-float 7s var(--ease-apple-out) infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketing-shell .mun-marketing-hero-preview {
+    animation: none;
+  }
+
+  .marketing-shell .mun-gate-card:hover,
+  .marketing-shell .mun-role-feature:hover {
+    transform: none;
+  }
 }
 
 .marketing-shell .mun-marketing-rainbow-bar {
@@ -1477,7 +1529,7 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -1486,12 +1538,21 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-hero {
-  background: var(--marketing-chamber);
+  background:
+    radial-gradient(ellipse 72% 48% at 18% 8%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 62%),
+    radial-gradient(ellipse 58% 42% at 82% 22%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 58%),
+    radial-gradient(color-mix(in srgb, #ffffff 5%, transparent) 1px, transparent 1px),
+    var(--marketing-chamber);
+  background-size: auto, auto, 26px 26px, auto;
   color: #f4f4f5;
 }
 
 .marketing-shell .mun-marketing-hero .mun-display {
   color: #ffffff;
+}
+
+.marketing-shell .mun-marketing-hero .mun-display .mun-emph {
+  color: var(--gold);
 }
 
 .marketing-shell .mun-marketing-hero .mun-marketing-hero-copy p {
@@ -1516,28 +1577,34 @@ html.colorblind-mode .schedule-swatch-session {
   display: inline-flex;
   align-items: center;
   border-radius: var(--radius-pill);
-  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
-  background: color-mix(in srgb, var(--accent) 12%, #0b0b0f);
-  padding: 0.35rem 0.75rem;
-  font-family: var(--font-mono);
+  border: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  background: color-mix(in srgb, #ffffff 9%, transparent);
+  backdrop-filter: blur(12px) saturate(1.1);
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-sans);
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, #ffffff 88%, var(--accent));
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: color-mix(in srgb, #ffffff 92%, var(--accent));
 }
 
 .marketing-shell .mun-chamber-frame {
-  border-radius: 1.25rem;
-  border: 1px solid color-mix(in srgb, #ffffff 14%, transparent);
+  border-radius: 1.75rem;
+  border: 1px solid color-mix(in srgb, #ffffff 16%, transparent);
+  background: color-mix(in srgb, #ffffff 4%, transparent);
+  backdrop-filter: blur(18px) saturate(1.15);
   box-shadow:
-    0 0 0 1px color-mix(in srgb, #ffffff 6%, transparent) inset,
-    0 28px 64px -28px rgba(0, 0, 0, 0.72);
+    0 0 0 1px color-mix(in srgb, #ffffff 7%, transparent) inset,
+    0 32px 64px -28px rgba(0, 0, 0, 0.68),
+    0 12px 28px -16px rgba(0, 0, 0, 0.35);
 }
 
 .marketing-shell .mun-chamber-frame-light {
-  border-color: var(--hairline);
-  box-shadow: var(--dashboard-shadow);
+  border-color: var(--marketing-glass-border);
+  background: var(--marketing-glass);
+  backdrop-filter: blur(20px) saturate(1.1);
+  box-shadow: var(--marketing-float-shadow), 0 1px 0 color-mix(in srgb, #ffffff 85%, transparent) inset;
 }
 
 .marketing-shell .mun-chamber-frame-bar {
@@ -1756,11 +1823,24 @@ html.colorblind-mode .schedule-swatch-session {
 
 .marketing-shell .mun-gate-card {
   position: relative;
-  border-radius: 1rem;
-  border: 1px solid var(--hairline);
-  background: var(--material-thick);
+  border-radius: 1.5rem;
+  border: 1px solid var(--marketing-glass-border);
+  background: color-mix(in srgb, var(--material-thick) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(1.08);
   padding: 1.35rem 1.35rem 1.5rem;
-  box-shadow: var(--dashboard-shadow);
+  box-shadow: var(--marketing-float-shadow);
+  transition:
+    transform var(--dur-base) var(--ease-apple),
+    box-shadow var(--dur-base) var(--ease-apple),
+    border-color var(--dur-base) var(--ease-apple);
+}
+
+.marketing-shell .mun-gate-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--hairline));
+  box-shadow:
+    0 28px 56px -20px rgba(45, 35, 18, 0.16),
+    0 10px 24px -12px rgba(45, 35, 18, 0.1);
 }
 
 .marketing-shell .mun-gate-code {
@@ -1778,17 +1858,39 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-role-feature {
-  border-radius: 1rem;
-  border: 1px solid var(--hairline);
+  border-radius: 1.25rem;
+  border: 1px solid var(--marketing-glass-border);
   border-left-width: 3px;
   border-left-color: color-mix(in srgb, var(--accent) 55%, var(--hairline));
-  background: var(--material-thick);
+  background: color-mix(in srgb, var(--material-thick) 84%, transparent);
+  backdrop-filter: blur(14px) saturate(1.05);
   padding: 1.15rem 1.15rem 1.2rem 1rem;
-  box-shadow: var(--dashboard-shadow);
+  box-shadow: var(--marketing-float-shadow);
+  transition:
+    transform var(--dur-base) var(--ease-apple),
+    box-shadow var(--dur-base) var(--ease-apple),
+    border-color var(--dur-base) var(--ease-apple);
+}
+
+.marketing-shell .mun-role-feature:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 22px 44px -18px rgba(45, 35, 18, 0.14),
+    0 8px 20px -10px rgba(45, 35, 18, 0.08);
+}
+
+@media (min-width: 1024px) {
+  .marketing-shell .mun-marketing-bento > :first-child {
+    grid-column: span 2;
+  }
+
+  .marketing-shell .mun-marketing-bento > :last-child {
+    grid-row: span 1;
+  }
 }
 
 .marketing-shell .mun-role-feature-index {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1811,9 +1913,13 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-section-dark .mun-role-feature {
-  border-color: color-mix(in srgb, #ffffff 12%, transparent);
+  border-color: color-mix(in srgb, #ffffff 14%, transparent);
   border-left-color: var(--accent);
-  background: color-mix(in srgb, #000000 22%, transparent);
+  background: color-mix(in srgb, #ffffff 7%, transparent);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow:
+    0 20px 40px -22px rgba(0, 0, 0, 0.55),
+    0 0 0 1px color-mix(in srgb, #ffffff 6%, transparent) inset;
 }
 
 .marketing-shell .mun-marketing-section-dark .mun-role-feature h3 {
@@ -1821,11 +1927,12 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .mun-marketing-contact-card {
-  border-radius: 1.25rem;
-  border: 1px solid var(--hairline);
-  background: var(--material-thick);
+  border-radius: 1.75rem;
+  border: 1px solid var(--marketing-glass-border);
+  background: color-mix(in srgb, var(--material-thick) 80%, transparent);
+  backdrop-filter: blur(18px) saturate(1.08);
   padding: 2rem 1.5rem;
-  box-shadow: var(--dashboard-shadow);
+  box-shadow: var(--marketing-float-shadow);
   position: relative;
   overflow: hidden;
 }
@@ -1839,22 +1946,30 @@ html.colorblind-mode .schedule-swatch-session {
 }
 
 .marketing-shell .marketing-header {
-  border-bottom-color: color-mix(in srgb, var(--accent) 18%, var(--hairline));
-  background: color-mix(in srgb, var(--material-thin) 92%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--hairline) 75%, transparent);
+  background: color-mix(in srgb, var(--material-thin) 68%, transparent);
+  backdrop-filter: blur(22px) saturate(1.15);
+  box-shadow: 0 1px 0 color-mix(in srgb, #ffffff 70%, transparent);
 }
 
 .marketing-shell .marketing-nav a {
   position: relative;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--text-muted, var(--brand-muted, #6b6b6b));
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-pill);
+  transition:
+    color var(--dur-base) var(--ease-apple),
+    background-color var(--dur-base) var(--ease-apple);
 }
 
 .marketing-shell .marketing-nav a:hover {
-  color: var(--accent);
+  color: var(--brand-navy);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .marketing-shell .mun-marketing-role-band {

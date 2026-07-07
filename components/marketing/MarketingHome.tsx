@@ -45,13 +45,15 @@ function RoleFeatureGrid({
   items,
   className,
   dark,
+  bento,
 }: {
   items: FeatureItem[];
   className?: string;
   dark?: boolean;
+  bento?: boolean;
 }) {
   return (
-    <ul className={cn("grid gap-3 sm:grid-cols-2", className)}>
+    <ul className={cn("grid gap-3 sm:grid-cols-2", bento && "mun-marketing-bento", className)}>
       {items.map((item) => (
         <li key={item.title} className="mun-role-feature">
           <div className="mb-2 flex items-center justify-between gap-2">
@@ -152,7 +154,7 @@ function RoleSection({
             <Link
               href={exploreHref}
               className={cn(
-                "mt-6 inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider transition",
+                "mt-6 inline-flex items-center gap-1 font-sans text-xs font-semibold uppercase tracking-wider transition",
                 dark ? "text-[var(--accent)] hover:text-white" : "text-[var(--accent)] hover:text-brand-navy"
               )}
             >
@@ -300,6 +302,7 @@ export async function MarketingHome() {
     <>
       <section className="mun-marketing-hero relative overflow-hidden border-b border-white/10">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
+        <div className="pointer-events-none absolute -left-16 bottom-8 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--gold)_16%,transparent)] blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] blur-3xl" aria-hidden />
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="mun-marketing-hero-copy">
@@ -329,13 +332,15 @@ export async function MarketingHome() {
               <li className="mun-procedure-chip">{t("hero.chip3")}</li>
             </ul>
           </div>
-          <MarketingChamberFrame label={t("hero.previewLabel")}>
-            <MarketingHeroSessionPreview />
-          </MarketingChamberFrame>
+          <div className="mun-marketing-hero-preview relative">
+            <MarketingChamberFrame label={t("hero.previewLabel")}>
+              <MarketingHeroSessionPreview />
+            </MarketingChamberFrame>
+          </div>
         </div>
       </section>
 
-      <section id="how-it-works" className="scroll-mt-24 border-b border-[var(--hairline)] bg-[var(--material-thin)] py-16 md:py-20">
+      <section id="how-it-works" className="mun-marketing-surface scroll-mt-24 border-b border-[var(--hairline)] py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="max-w-2xl">
             <p className="mun-marketing-eyebrow">{t("steps.eyebrow")}</p>
@@ -397,7 +402,7 @@ export async function MarketingHome() {
           }
         />
 
-        <section className="border-t border-[var(--hairline)] bg-[var(--material-thin)] py-16 md:py-20">
+        <section className="mun-marketing-surface border-t border-[var(--hairline)] py-16 md:py-20">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <div className="max-w-2xl">
               <p className="mun-marketing-eyebrow">{t("platform.eyebrow")}</p>
@@ -406,12 +411,12 @@ export async function MarketingHome() {
                 {t("platform.description")}
               </p>
             </div>
-            <RoleFeatureGrid items={platformFeatures} className="mt-10 lg:grid-cols-4" />
+            <RoleFeatureGrid items={platformFeatures} bento className="mt-10 lg:grid-cols-4" />
           </div>
         </section>
       </section>
 
-      <section id="about" className="scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-20">
+      <section id="about" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:px-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="flex justify-center lg:justify-start">
             <div className="mun-marketing-contact-card max-w-sm p-8">
@@ -430,7 +435,7 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <section id="contact" className="scroll-mt-24 border-t border-[var(--hairline)] bg-[var(--material-thin)] py-16 md:py-20">
+      <section id="contact" className="mun-marketing-surface scroll-mt-24 border-t border-[var(--hairline)] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-4 md:px-6">
           <div className="mun-marketing-contact-card">
             <div className="text-center">
@@ -479,10 +484,10 @@ export async function MarketingHome() {
         </div>
       </section>
 
-      <footer className="border-t border-[var(--hairline)] bg-[var(--material-thin)] py-8">
+      <footer className="mun-marketing-surface border-t border-[var(--hairline)] py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-brand-muted md:flex-row md:px-6">
-          <p className="font-mono text-xs tracking-wide">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-          <div className="flex flex-wrap items-center justify-center gap-4 font-mono text-xs uppercase tracking-wider">
+          <p className="font-sans text-xs tracking-wide">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 font-sans text-xs uppercase tracking-wider">
             {partnershipEmail ? (
               <a href={`mailto:${partnershipEmail}`} className="hover:text-brand-navy">
                 {t("footer.contact")}

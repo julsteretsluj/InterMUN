@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Caveat, Inter, Merriweather } from "next/font/google";
 import Script from "next/script";
 import { getLocale, getMessages } from "next-intl/server";
 import { getAppMetaDescription, getAppName } from "@/lib/branding";
@@ -38,6 +38,13 @@ const documentSerif = Merriweather({
   subsets: ["latin"],
   variable: "--font-document",
   weight: ["400", "700"],
+});
+
+/** Gold marketing emphasis lines (`.mun-emph`). */
+const marketingCursive = Caveat({
+  subsets: ["latin"],
+  variable: "--font-marketing-cursive-face",
+  weight: ["600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -89,7 +96,7 @@ export default async function RootLayout({
       lang={locale}
       dir={localeDirection(locale)}
       suppressHydrationWarning
-      className={`${sans.variable} ${documentSerif.variable} h-full antialiased`}
+      className={`${sans.variable} ${documentSerif.variable} ${marketingCursive.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans text-brand-navy">
         <Script id="intermun-theme-init" strategy="beforeInteractive">

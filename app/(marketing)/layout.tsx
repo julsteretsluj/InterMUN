@@ -14,7 +14,7 @@ export default async function MarketingLayout({
   const appName = getAppName();
 
   return (
-    <div className="marketing-shell relative min-h-screen bg-brand-cream text-brand-navy dark:bg-[var(--color-bg-page)]">
+    <div className="marketing-shell relative min-h-screen text-brand-navy dark:bg-[var(--color-bg-page)]">
       <link rel="preload" href={openingOrbUrl(0)} as="image" />
       <header className="marketing-header relative z-10 border-b backdrop-blur-md">
         <div className="mun-marketing-rainbow-bar" aria-hidden />
@@ -38,7 +38,7 @@ export default async function MarketingLayout({
             </div>
             <Link
               href="/login"
-              className="mun-btn hidden rounded-full px-4 py-2 text-sm font-semibold sm:inline-flex"
+              className="mun-btn mun-btn-outline hidden rounded-full px-4 py-2 text-sm font-semibold sm:inline-flex"
             >
               {t("nav.signIn")}
             </Link>
