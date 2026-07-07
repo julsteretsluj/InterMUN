@@ -1,7 +1,8 @@
 // Copyright (c) 2026 Intermun. All rights reserved.
 // Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-export type EventScheduleDayKey = "1" | "2";
+/** Positive integer day index stored as a string (`"1"`, `"2"`, …). */
+export type EventScheduleDayKey = string;
 
 export type EventScheduleBlockKind = "session" | "break" | "ceremony";
 
@@ -31,6 +32,9 @@ export type EventScheduleConfig = {
 };
 
 export const EVENT_SCHEDULE_VERSION = 1 as const;
+export const MAX_SCHEDULE_DAYS = 14;
+export const MIN_SCHEDULE_DAYS = 1;
+export const DEFAULT_SCHEDULE_DAY_COUNT = 2;
 
 export const DEFAULT_EVENT_SCHEDULE_GROUPS: EventScheduleGroup[] = [
   { id: "g_ga", name: "GA & specialized" },
@@ -38,13 +42,40 @@ export const DEFAULT_EVENT_SCHEDULE_GROUPS: EventScheduleGroup[] = [
   { id: "g_regional", name: "Regional & mixed" },
 ];
 
-export function defaultEventScheduleConfig(): EventScheduleConfig {
-  const slots: EventScheduleConfig["slots"] = { "1": {}, "2": {} };
-  for (const g of DEFAULT_EVENT_SCHEDULE_GROUPS) {
-    slots["1"][g.id] = [];
-    slots["2"][g.id] = [];
+export function isScheduleDayKey(raw: unknown): raw is EventScheduleDayKey {
+  if (typeof raw !== "string") return false;
+  const n = Number(raw);
+  return Number.isInteger(n) && n >= 1 && n <= MAX_SCHEDULE_DAYS;
+}
+
+export function sortedScheduleDayKeys(
+  slots: Record<EventScheduleDayKey, Record<string, EventScheduleSlot[]>>
+): EventScheduleDayKey[] {
+  return Object.keys(slots)
+    .filter(isScheduleDayKey)
+    .sort((a, b) => Number(a) - Number(b));
+}
+
+function emptyDaySlots(groups: EventScheduleGroup[]): Record<string, EventScheduleSlot[]> {
+  const out: Record<string, EventScheduleSlot[]> = {};
+  for (const g of groups) out[g.id] = [];
+  return out;
+}
+
+function buildDefaultSlots(
+  groups: EventScheduleGroup[],
+  dayCount = DEFAULT_SCHEDULE_DAY_COUNT
+): Record<EventScheduleDayKey, Record<string, EventScheduleSlot[]>> {
+  const slots: Record<EventScheduleDayKey, Record<string, EventScheduleSlot[]>> = {};
+  for (let d = 1; d <= dayCount; d++) {
+    slots[String(d)] = emptyDaySlots(groups);
   }
-  return { version: 1, groups: [...DEFAULT_EVENT_SCHEDULE_GROUPS], slots };
+  return slots;
+}
+
+export function defaultEventScheduleConfig(): EventScheduleConfig {
+  const groups = [...DEFAULT_EVENT_SCHEDULE_GROUPS];
+  return { version: 1, groups, slots: buildDefaultSlots(groups) };
 }
 
 function newSlot(partial?: Partial<EventScheduleSlot>): EventScheduleSlot {
@@ -129,7 +160,7 @@ function lunchIntervalsForGroup(slots: EventScheduleSlot[]): { start: number; en
 
 export function computeLunchOverlaps(cfg: EventScheduleConfig): LunchOverlapEntry[] {
   const groupName = (id: string) => cfg.groups.find((g) => g.id === id)?.name ?? id;
-  const days: EventScheduleDayKey[] = ["1", "2"];
+  const days = sortedScheduleDayKeys(cfg.slots);
   const results: LunchOverlapEntry[] = [];
 
   for (const day of days) {
@@ -166,7 +197,7 @@ export function computeLunchOverlaps(cfg: EventScheduleConfig): LunchOverlapEntr
     }
   }
   results.sort((a, b) => {
-    if (a.day !== b.day) return a.day === "1" ? -1 : 1;
+    if (a.day !== b.day) return Number(a.day) - Number(b.day);
     if (a.overlapMinutes !== b.overlapMinutes) return b.overlapMinutes - a.overlapMinutes;
     return `${a.groupA}-${a.groupB}`.localeCompare(`${b.groupA}-${b.groupB}`);
   });
@@ -198,11 +229,18 @@ export function normalizeScheduleConfig(raw: unknown): EventScheduleConfig {
     groups.length > 0 ? groups : [...DEFAULT_EVENT_SCHEDULE_GROUPS.map((g) => ({ ...g }))];
 
   const slotsSrc = o.slots && typeof o.slots === "object" ? (o.slots as Record<string, unknown>) : {};
-  const slots: EventScheduleConfig["slots"] = { "1": {}, "2": {} };
+  const dayKeys = Object.keys(slotsSrc).filter(isScheduleDayKey);
+  const effectiveDays =
+    dayKeys.length > 0
+      ? [...dayKeys].sort((a, b) => Number(a) - Number(b))
+      : Array.from({ length: DEFAULT_SCHEDULE_DAY_COUNT }, (_, i) => String(i + 1));
 
-  for (const day of ["1", "2"] as EventScheduleDayKey[]) {
+  const slots: EventScheduleConfig["slots"] = {};
+
+  for (const day of effectiveDays) {
     const dayObj =
       slotsSrc[day] && typeof slotsSrc[day] === "object" ? (slotsSrc[day] as Record<string, unknown>) : {};
+    slots[day] = {};
     for (const g of base) {
       const rawArr = dayObj[g.id];
       const arr: unknown[] = Array.isArray(rawArr) ? rawArr : [];
@@ -229,6 +267,10 @@ export function validateScheduleConfig(cfg: EventScheduleConfig): ScheduleValida
   if (cfg.groups.length === 0) return { ok: false, error: "At least one schedule group is required." };
   if (cfg.groups.length > MAX_GROUPS) return { ok: false, error: "Too many schedule groups." };
 
+  const days = sortedScheduleDayKeys(cfg.slots);
+  if (days.length < MIN_SCHEDULE_DAYS) return { ok: false, error: "At least one conference day is required." };
+  if (days.length > MAX_SCHEDULE_DAYS) return { ok: false, error: "Too many conference days." };
+
   const seen = new Set<string>();
   for (const g of cfg.groups) {
     if (!g.id.trim()) return { ok: false, error: "Each group needs an id." };
@@ -236,7 +278,7 @@ export function validateScheduleConfig(cfg: EventScheduleConfig): ScheduleValida
     seen.add(g.id);
   }
 
-  for (const day of ["1", "2"] as EventScheduleDayKey[]) {
+  for (const day of days) {
     for (const g of cfg.groups) {
       const rows = cfg.slots[day]?.[g.id] ?? [];
       if (rows.length > MAX_SLOTS_PER_GROUP_DAY) {
@@ -259,23 +301,47 @@ export function validateScheduleConfig(cfg: EventScheduleConfig): ScheduleValida
   return { ok: true, config: cfg };
 }
 
+export function addDayToConfig(cfg: EventScheduleConfig): EventScheduleConfig {
+  const days = sortedScheduleDayKeys(cfg.slots);
+  if (days.length >= MAX_SCHEDULE_DAYS) return cfg;
+  const nextNum = days.length > 0 ? Math.max(...days.map((d) => Number(d))) + 1 : 1;
+  const nextKey = String(nextNum);
+  return {
+    ...cfg,
+    slots: { ...cfg.slots, [nextKey]: emptyDaySlots(cfg.groups) },
+  };
+}
+
+export function removeDayFromConfig(cfg: EventScheduleConfig, dayKey: EventScheduleDayKey): EventScheduleConfig {
+  const days = sortedScheduleDayKeys(cfg.slots);
+  if (days.length <= MIN_SCHEDULE_DAYS) return cfg;
+  if (!days.includes(dayKey)) return cfg;
+  const { [dayKey]: _removed, ...rest } = cfg.slots;
+  return { ...cfg, slots: rest };
+}
+
 export function addGroupToConfig(cfg: EventScheduleConfig, name: string): EventScheduleConfig {
   const id =
     typeof crypto !== "undefined" && "randomUUID" in crypto
       ? `g_${crypto.randomUUID().slice(0, 8)}`
       : `g_${Date.now()}`;
   const nextGroups = [...cfg.groups, { id, name: name.trim().slice(0, 120) || "New group" }];
-  const slots = { ...cfg.slots, "1": { ...cfg.slots["1"] }, "2": { ...cfg.slots["2"] } };
-  slots["1"][id] = [];
-  slots["2"][id] = [];
+  const days = sortedScheduleDayKeys(cfg.slots);
+  const slots = { ...cfg.slots };
+  for (const day of days) {
+    slots[day] = { ...slots[day], [id]: [] };
+  }
   return { ...cfg, groups: nextGroups, slots };
 }
 
 export function removeGroupFromConfig(cfg: EventScheduleConfig, groupId: string): EventScheduleConfig {
   const groups = cfg.groups.filter((g) => g.id !== groupId);
-  const slots: EventScheduleConfig["slots"] = { "1": { ...cfg.slots["1"] }, "2": { ...cfg.slots["2"] } };
-  delete slots["1"][groupId];
-  delete slots["2"][groupId];
+  const days = sortedScheduleDayKeys(cfg.slots);
+  const slots: EventScheduleConfig["slots"] = { ...cfg.slots };
+  for (const day of days) {
+    slots[day] = { ...slots[day] };
+    delete slots[day][groupId];
+  }
   if (groups.length === 0) return defaultEventScheduleConfig();
   return { ...cfg, groups, slots };
 }

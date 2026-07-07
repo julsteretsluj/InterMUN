@@ -7,14 +7,19 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { saveEventScheduleConfigAction } from "@/app/actions/smtConference";
 import {
+  addDayToConfig,
   addGroupToConfig,
   computeLunchOverlaps,
   defaultEventScheduleConfig,
   EVENT_SCHEDULE_BLOCK_KINDS,
+  MAX_SCHEDULE_DAYS,
+  MIN_SCHEDULE_DAYS,
   newSlot,
   normalizeScheduleConfig,
+  removeDayFromConfig,
   removeGroupFromConfig,
   scheduleSlotRowClass,
+  sortedScheduleDayKeys,
   type EventScheduleBlockKind,
   type EventScheduleConfig,
   type EventScheduleDayKey,
@@ -22,12 +27,11 @@ import {
 } from "@/lib/event-schedule";
 import { cn } from "@/lib/utils";
 
-type MainTab = "day1" | "day2" | "lunch";
+type MainTab = "lunch" | `day:${EventScheduleDayKey}`;
 
 function dayKeyFromTab(tab: MainTab): EventScheduleDayKey | null {
-  if (tab === "day1") return "1";
-  if (tab === "day2") return "2";
-  return null;
+  if (tab === "lunch") return null;
+  return tab.slice(4);
 }
 
 export function EventTwoDayScheduleEditor({
@@ -39,7 +43,11 @@ export function EventTwoDayScheduleEditor({
 }) {
   const t = useTranslations("smtConferenceSettings.schedule");
   const [cfg, setCfg] = useState<EventScheduleConfig>(() => normalizeScheduleConfig(initialConfig));
-  const [mainTab, setMainTab] = useState<MainTab>("day1");
+  const dayKeys = useMemo(() => sortedScheduleDayKeys(cfg.slots), [cfg.slots]);
+  const [mainTab, setMainTab] = useState<MainTab>(() => {
+    const days = sortedScheduleDayKeys(normalizeScheduleConfig(initialConfig).slots);
+    return days[0] ? `day:${days[0]}` : "lunch";
+  });
   const [activeGroupId, setActiveGroupId] = useState<string>(() => normalizeScheduleConfig(initialConfig).groups[0]?.id ?? "");
   const [newGroupName, setNewGroupName] = useState("");
   const [message, setMessage] = useState<{ error?: string; ok?: boolean } | null>(null);
@@ -51,6 +59,14 @@ export function EventTwoDayScheduleEditor({
       setActiveGroupId(cfg.groups[0]!.id);
     }
   }, [cfg.groups, activeGroupId]);
+
+  useEffect(() => {
+    if (mainTab === "lunch") return;
+    const activeDay = dayKeyFromTab(mainTab);
+    if (!activeDay || !dayKeys.includes(activeDay)) {
+      setMainTab(dayKeys[0] ? `day:${dayKeys[0]}` : "lunch");
+    }
+  }, [dayKeys, mainTab]);
 
   const dayKey = dayKeyFromTab(mainTab);
   const overlaps = useMemo(() => computeLunchOverlaps(cfg), [cfg]);
@@ -121,7 +137,27 @@ export function EventTwoDayScheduleEditor({
     const next = defaultEventScheduleConfig();
     setCfg(next);
     setActiveGroupId(next.groups[0]?.id ?? "");
+    const firstDay = sortedScheduleDayKeys(next.slots)[0];
+    setMainTab(firstDay ? `day:${firstDay}` : "lunch");
     setMessage(null);
+  }
+
+  function onAddDay() {
+    setCfg((prev) => {
+      const next = addDayToConfig(prev);
+      const added = sortedScheduleDayKeys(next.slots).at(-1);
+      if (added) setMainTab(`day:${added}`);
+      return next;
+    });
+  }
+
+  function onRemoveDay() {
+    if (!dayKey || dayKeys.length <= MIN_SCHEDULE_DAYS) return;
+    if (!window.confirm(t("confirmRemoveDay", { day: dayKey }))) return;
+    const removing = dayKey;
+    setCfg((prev) => removeDayFromConfig(prev, removing));
+    const remaining = dayKeys.filter((d) => d !== removing);
+    setMainTab(remaining[0] ? `day:${remaining[0]}` : "lunch");
   }
 
   return (
@@ -129,28 +165,53 @@ export function EventTwoDayScheduleEditor({
       <h2 className="font-display text-xl font-semibold text-brand-navy mb-1">{t("title")}</h2>
       <p className="text-sm text-brand-muted mb-5">{t("subtitle")}</p>
 
-      <div className="flex flex-wrap gap-1.5 border-b border-brand-navy/10 pb-3 mb-4">
-        {(
-          [
-            ["day1", t("day1Tab")] as const,
-            ["day2", t("day2Tab")] as const,
-            ["lunch", t("lunchOverlapTab")] as const,
-          ] as const
-        ).map(([key, label]) => (
+      <div className="mb-4 flex flex-wrap items-center gap-1.5 border-b border-brand-navy/10 pb-3">
+        {dayKeys.map((dk) => (
           <button
-            key={key}
+            key={dk}
             type="button"
-            onClick={() => setMainTab(key)}
+            onClick={() => setMainTab(`day:${dk}`)}
             className={cn(
               "rounded-[var(--radius-md)] px-3 py-1.5 text-sm font-semibold transition-apple",
-              mainTab === key
+              mainTab === `day:${dk}`
                 ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
                 : "text-brand-muted hover:bg-brand-navy/5"
             )}
           >
-            {label}
+            {t("dayLabel", { day: dk })}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => setMainTab("lunch")}
+          className={cn(
+            "rounded-[var(--radius-md)] px-3 py-1.5 text-sm font-semibold transition-apple",
+            mainTab === "lunch"
+              ? "bg-[color:color-mix(in_srgb,var(--accent)_18%,transparent)] text-brand-navy ring-1 ring-[color:color-mix(in_srgb,var(--accent)_35%,var(--hairline))]"
+              : "text-brand-muted hover:bg-brand-navy/5"
+          )}
+        >
+          {t("lunchOverlapTab")}
+        </button>
+        <div className="ml-auto flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            onClick={onAddDay}
+            disabled={dayKeys.length >= MAX_SCHEDULE_DAYS}
+            className="rounded-[var(--radius-md)] border border-brand-navy/15 bg-white px-2.5 py-1.5 text-xs font-semibold text-brand-navy hover:bg-brand-navy/5 disabled:opacity-50 dark:bg-black/20"
+          >
+            {t("addDay")}
+          </button>
+          {dayKey && dayKeys.length > MIN_SCHEDULE_DAYS ? (
+            <button
+              type="button"
+              onClick={onRemoveDay}
+              className="rounded-[var(--radius-md)] border border-red-200 bg-red-50 px-2.5 py-1.5 text-xs font-semibold text-red-800 hover:bg-red-100 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-200"
+            >
+              {t("removeDay")}
+            </button>
+          ) : null}
+        </div>
       </div>
 
       {mainTab === "lunch" ? (

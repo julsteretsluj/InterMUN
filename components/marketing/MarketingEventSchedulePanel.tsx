@@ -143,8 +143,8 @@ export function MarketingEventSchedulePanel({ className }: { className?: string 
       <div className="flex flex-wrap gap-1 border-b border-zinc-200 pb-2">
         {(
           [
-            ["day1", t("day1Tab")] as const,
-            ["day2", t("day2Tab")] as const,
+            ["day1", t("dayLabel", { day: 1 })] as const,
+            ["day2", t("dayLabel", { day: 2 })] as const,
             ["lunch", t("lunchOverlapTab")] as const,
           ] as const
         ).map(([key, label]) => (
