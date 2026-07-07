@@ -6,7 +6,6 @@
 | `ithaca-medium.ttf` | Ithaca | Verify author license before redistribution |
 | `super-onigiri-regular.ttf` | Super Onigiri | Verify author license before redistribution |
 | `momosignature-regular.otf` | Momo Signature | Author-provided; verify license before redistribution |
-| `home-video-regular.ttf` | Home Video | [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) |
 
 Accessibility fonts (npm `@fontsource/*`): OpenDyslexic and Atkinson Hyperlegible — OFL 1.1.
 
