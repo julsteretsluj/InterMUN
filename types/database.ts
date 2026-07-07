@@ -21,6 +21,7 @@ export interface Profile {
   awards: string[];
   allocation: string | null;
   stance_overview: Record<string, number> | null;
+  country_stance_map: Record<string, "support" | "oppose" | "neutral" | "undecided"> | null;
   /** SMT: optional committee row for “chair” dashboard surface. */
   smt_chair_conference_id?: string | null;
   /** SMT: optional delegate allocation for “delegate” dashboard surface. */

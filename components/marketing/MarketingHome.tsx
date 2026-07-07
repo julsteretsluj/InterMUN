@@ -455,6 +455,7 @@ export async function MarketingHome() {
           <div className="flex justify-center lg:justify-start">
             <div className="mun-marketing-contact-card max-w-sm p-8">
               <BrandWordmark size="hero" />
+              <p className="mun-marketing-eyebrow mt-6 text-center">{t("hero.eyebrow")}</p>
             </div>
           </div>
           <div>
@@ -499,7 +500,8 @@ export async function MarketingHome() {
       <section className="mun-marketing-hero relative overflow-hidden border-t border-white/10 py-16 md:py-20">
         <div className="mun-marketing-rainbow-bar absolute inset-x-0 top-0" aria-hidden />
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
-          <h2 className="mun-display text-3xl md:text-4xl">
+          <p className="mun-marketing-eyebrow">{t("hero.eyebrow")}</p>
+          <h2 className="mun-display mt-3 text-3xl md:text-4xl">
             {t("footer.ctaTitle")}{" "}
             <MarketingEmph>{t("footer.ctaTitleEmphasis")}</MarketingEmph>
           </h2>

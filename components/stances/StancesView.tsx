@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { StanceHeatmap } from "./StanceHeatmap";
+import { CountryStanceGrid } from "./CountryStanceGrid";
 import { detectInappropriateTerms } from "@/lib/note-moderation";
 import { HelpButton } from "@/components/HelpButton";
+import { type CountryStanceMap } from "@/lib/country-stance";
 
 interface Allocation {
   id: string;
@@ -21,12 +23,16 @@ interface Allocation {
 
 export function StancesView({
   allocations,
+  committeeCountries,
   stanceOverviewByUser,
+  countryStanceMapByUser,
   currentUserId,
   canEdit,
 }: {
   allocations: Allocation[];
+  committeeCountries: string[];
   stanceOverviewByUser: Record<string, Record<string, number>>;
+  countryStanceMapByUser: Record<string, CountryStanceMap>;
   currentUserId: string;
   canEdit: boolean;
 }) {
@@ -43,6 +49,10 @@ export function StancesView({
       return stanceOverviewByUser[fallbackUser] || {};
     })()
   );
+  const [countryStanceMap, setCountryStanceMap] = useState<CountryStanceMap>(
+    countryStanceMapByUser[currentUserId] ?? {}
+  );
+  const [countryMapUserId, setCountryMapUserId] = useState(currentUserId);
   const [mutationError, setMutationError] = useState<string | null>(null);
   const supabase = createClient();
   const stanceNoteFlaggedTerms = detectInappropriateTerms(noteContent);
@@ -67,6 +77,33 @@ export function StancesView({
     const row = stanceOverviewByUser[currentUserId];
     if (row) setStanceData(row);
   }, [canEdit, stanceOverviewByUser, currentUserId]);
+
+  useEffect(() => {
+    const row = countryStanceMapByUser[countryMapUserId];
+    if (row) setCountryStanceMap(row);
+  }, [countryMapUserId, countryStanceMapByUser]);
+
+  async function persistCountryStanceMap(next: CountryStanceMap) {
+    setMutationError(null);
+    if (!canEdit || countryMapUserId !== currentUserId) return;
+    setCountryStanceMap(next);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return;
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        country_stance_map: next,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", user.id);
+    if (error) {
+      setMutationError(error.message);
+      return;
+    }
+    router.refresh();
+  }
 
   async function saveStanceNote() {
     setMutationError(null);
@@ -155,6 +192,19 @@ export function StancesView({
         </p>
       ) : null}
       <div>
+        <h3 className="mb-1 font-semibold text-brand-navy">{t("countryGridTitle")}</h3>
+        <p className="mb-3 text-sm text-brand-muted">{t("countryGridHelp")}</p>
+        {!canEdit && countryMapUserId !== currentUserId ? (
+          <p className="mb-3 text-xs text-brand-muted">{t("countryGridViewingDelegate")}</p>
+        ) : null}
+        <CountryStanceGrid
+          countries={committeeCountries}
+          stances={countryStanceMap}
+          canEdit={canEdit && countryMapUserId === currentUserId}
+          onChange={(next) => void persistCountryStanceMap(next)}
+        />
+      </div>
+      <div>
         <h3 className="font-semibold mb-4">{t("heatmapTitle")}</h3>
         <p className="text-sm text-brand-muted text-brand-muted mb-3">
           {t("heatmapHelp")}
@@ -213,8 +263,14 @@ export function StancesView({
                   key={a.id}
                   onClick={() => {
                     setSelectedAllocation(a);
-                    if (a.user_id && stanceOverviewByUser[a.user_id]) {
-                      setStanceData(stanceOverviewByUser[a.user_id]);
+                    if (a.user_id) {
+                      setCountryMapUserId(a.user_id);
+                      if (stanceOverviewByUser[a.user_id]) {
+                        setStanceData(stanceOverviewByUser[a.user_id]);
+                      }
+                      if (countryStanceMapByUser[a.user_id]) {
+                        setCountryStanceMap(countryStanceMapByUser[a.user_id]);
+                      }
                     }
                     setNoteContent(a.notes?.[0]?.content || "");
                   }}

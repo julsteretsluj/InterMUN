@@ -1185,7 +1185,27 @@
     "delete": "Delete",
     "errSelectResolution": "Select a resolution and sign in.",
     "errEmptyBody": "Add clause text after the opening (or type a full clause in the body field).",
-    "okSubmitted": "Suggestion submitted. The dais can review and add it to the draft."
+    "okSubmitted": "Suggestion submitted. The dais can review and add it to the draft.",
+    "mergeToOfficial": "Add to official draft",
+    "merging": "Adding…",
+    "mergedOk": "Added to the official clause list."
+  },
+  "blocChat": {
+    "title": "Bloc chat — {bloc}",
+    "live": "Live",
+    "help": "Message your bloc allies during caucus and session breaks. The dais can review flagged messages before they appear.",
+    "loading": "Loading messages…",
+    "empty": "No bloc messages yet. Say hello to your allies.",
+    "messagePlaceholder": "Message your bloc…",
+    "send": "Send message",
+    "youLabel": "You",
+    "delegationFallback": "Delegation",
+    "heldBadge": "Held for review",
+    "approve": "Approve",
+    "reject": "Reject",
+    "heldPending": "Your message is held for chair review.",
+    "sessionInactive": "Bloc chat opens when the committee session is live.",
+    "chairViewOnly": "Chair view — approve held messages above."
   },
   "committeeGate": {
     "title": "Committee sign-in",
@@ -3479,6 +3499,15 @@
     "emptyIdea": "Empty idea."
   },
   "stances": {
+    "countryGridTitle": "Stance map",
+    "countryGridHelp": "Tap a country to cycle its position — support, oppose, neutral, and undecided.",
+    "countryGridEmpty": "No delegations in this committee yet.",
+    "countryGridViewingDelegate": "Viewing this delegate's country positions.",
+    "countryStance_support": "Support",
+    "countryStance_oppose": "Oppose",
+    "countryStance_neutral": "Neutral",
+    "countryStance_undecided": "Undecided",
+    "countryStanceAria": "{country}: {stance}. Tap to cycle position.",
     "heatmapTitle": "Brief Stance Overview (Heatmap)",
     "heatmapHelp": "To what extent does your allocation support ___? (1-5 scale)",
     "topicPlaceholder": "e.g. climate action",
@@ -3789,7 +3818,7 @@
   },
   "marketing": {
     "metaTitle": "{app} — Model United Nations platform",
-    "metaDescription": "Browser-based MUN software for chairs, delegates, secretariat, and advisors — procedural floor control, prep workflows, and event oversight in one place.",
+    "metaDescription": "The whole conference team, in one tab. Browser-based MUN software for dais, delegates, advisors, and secretariat — procedural floor control, prep workflows, and event oversight.",
     "nav": {
       "howItWorks": "The gates",
       "chairs": "Dais",
@@ -3804,10 +3833,10 @@
     "exploreDelegates": "Explore all delegate features",
     "exploreSecretariat": "Explore all secretariat features",
     "hero": {
-      "eyebrow": "Chamber-floor software · Model UN",
-      "title": "One tab for the",
-      "titleEmphasis": "whole committee.",
-      "subtitle": "InterMUN connects dais procedure, delegate prep, and secretariat oversight — without app installs, scattered chat threads, or paper placards.",
+      "eyebrow": "Dais. Delegates. Advisors. Secretariat.",
+      "title": "The whole conference team,",
+      "titleEmphasis": "in one tab.",
+      "subtitle": "InterMUN connects dais procedure, delegate prep, advisor oversight, and secretariat control — without app installs, scattered chat threads, or paper placards.",
       "ctaStart": "Host an event",
       "ctaJoin": "I have a room code",
       "chip1": "Roll call → quorum",
@@ -3953,8 +3982,8 @@
       }
     },
     "footer": {
-      "ctaTitle": "Bring your next committee",
-      "ctaTitleEmphasis": "online.",
+      "ctaTitle": "The whole conference team,",
+      "ctaTitleEmphasis": "in one tab.",
       "ctaSubtitle": "Create an account, enter your organiser's codes, and step into session when your dais is ready.",
       "ctaStart": "Create account",
       "ctaJoin": "Sign in",

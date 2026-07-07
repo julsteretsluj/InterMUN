@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
+import { addClauseAction } from "@/app/actions/resolutions";
 import {
   PREAMBULATORY_OPENING_PRESETS,
   OPERATIVE_OPENING_PRESETS,
@@ -30,7 +31,16 @@ type SuggestionRow = {
   created_at: string;
 };
 
-export function DelegateResolutionBuilder({ resolutions }: { resolutions: ResolutionPick[] }) {
+export function DelegateResolutionBuilder({
+  resolutions,
+  conferenceId,
+  canMergeToOfficial = false,
+}: {
+  resolutions: ResolutionPick[];
+  conferenceId: string;
+  /** Chairs may copy a suggestion into official resolution_clauses. */
+  canMergeToOfficial?: boolean;
+}) {
   const t = useTranslations("delegateResolutionBuilder");
   const router = useRouter();
   const supabase = createClient();
@@ -44,6 +54,7 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
   const [suggestions, setSuggestions] = useState<SuggestionRow[]>([]);
   const [loadingList, setLoadingList] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mergingId, setMergingId] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
 
   const selectedResolution = useMemo(
@@ -89,6 +100,30 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
       setSelectedResolutionId(resolutions[0]!.id);
     }
   }, [resolutions, selectedResolutionId]);
+
+  useEffect(() => {
+    setOpening("");
+  }, [section]);
+
+  async function mergeSuggestion(s: SuggestionRow) {
+    if (!canMergeToOfficial || !selectedResolution) return;
+    const full = combineClauseSuggestion(s.opening_phrase, s.clause_body);
+    if (!full.trim()) return;
+    setMsg(null);
+    setMergingId(s.id);
+    const result = await addClauseAction({
+      conferenceId,
+      resolutionId: selectedResolution.id,
+      clauseText: full,
+    });
+    setMergingId(null);
+    if (!result.ok) {
+      setMsg({ kind: "err", text: result.error });
+      return;
+    }
+    setMsg({ kind: "ok", text: t("mergedOk") });
+    router.refresh();
+  }
 
   async function submitSuggestion() {
     setMsg(null);
@@ -217,12 +252,12 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
       </div>
 
       <label className="block space-y-1">
-        <span className="mun-label normal-case">Clause text</span>
+        <span className="mun-label normal-case">{t("clauseText")}</span>
         <textarea
           className="mun-field min-h-[100px] resize-y"
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          placeholder="…the rest of the clause (facts, actions, specifics). Commas after the opening are added when you save."
+          placeholder={t("clausePlaceholder")}
         />
       </label>
 
@@ -299,15 +334,27 @@ export function DelegateResolutionBuilder({ resolutions }: { resolutions: Resolu
                     ) : null}
                   </div>
                   <p className="mt-1 text-brand-navy dark:text-zinc-200">{full}</p>
-                  {mine ? (
-                    <button
-                      type="button"
-                      onClick={() => void removeSuggestion(s.id)}
-                      className="mt-2 text-xs text-red-700 hover:underline dark:text-red-300"
-                    >
-                      {t("delete")}
-                    </button>
-                  ) : null}
+                  <div className="mt-2 flex flex-wrap gap-3">
+                    {mine ? (
+                      <button
+                        type="button"
+                        onClick={() => void removeSuggestion(s.id)}
+                        className="text-xs text-red-700 hover:underline dark:text-red-300"
+                      >
+                        {t("delete")}
+                      </button>
+                    ) : null}
+                    {canMergeToOfficial ? (
+                      <button
+                        type="button"
+                        disabled={mergingId === s.id}
+                        onClick={() => void mergeSuggestion(s)}
+                        className="text-xs font-medium text-brand-diplomatic hover:underline dark:text-brand-accent-bright disabled:opacity-50"
+                      >
+                        {mergingId === s.id ? t("merging") : t("mergeToOfficial")}
+                      </button>
+                    ) : null}
+                  </div>
                 </li>
               );
             })}

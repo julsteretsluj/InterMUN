@@ -16,6 +16,11 @@ import {
   updateClauseAction,
 } from "@/app/actions/resolutions";
 import { GoogleDocsEmbed } from "@/components/resolutions/GoogleDocsEmbed";
+import {
+  DelegateResolutionBuilder,
+  type ResolutionPick,
+} from "@/components/resolutions/DelegateResolutionBuilder";
+import { BlocChatPanel, type BlocMemberLabel } from "@/components/resolutions/BlocChatPanel";
 
 type BlocStance = "for" | "against" | "neutral";
 
@@ -62,6 +67,9 @@ export function ResolutionsView({
   conferenceId,
   canCreate,
   currentUserId,
+  myAllocationId,
+  allocations,
+  sessionActive = true,
 }: {
   resolutions: Resolution[];
   blocs: Bloc[];
@@ -69,6 +77,9 @@ export function ResolutionsView({
   conferenceId: string;
   canCreate: boolean;
   currentUserId: string;
+  myAllocationId: string | null;
+  allocations: { id: string; country: string; user_id: string | null }[];
+  sessionActive?: boolean;
 }) {
   const t = useTranslations("resolutions");
   const [actionError, setActionError] = useState<string | null>(null);
@@ -210,8 +221,32 @@ export function ResolutionsView({
   const inputCls =
     "w-full rounded-lg border border-[var(--hairline)] bg-[var(--material-thin)] px-3 py-2 text-sm text-brand-navy placeholder:text-brand-muted focus:border-brand-accent/50 focus:outline-none focus:ring-2 focus:ring-brand-accent/25";
 
+  const draftResolutionPicks: ResolutionPick[] = resolutions
+    .filter((r) => (r.status ?? "draft") !== "finalized")
+    .map((r) => ({
+      id: r.id,
+      conference_id: r.conference_id,
+      google_docs_url: r.google_docs_url,
+    }));
+
+  function blocMemberLabels(members: { user_id: string }[]): BlocMemberLabel[] {
+    const labels: BlocMemberLabel[] = [];
+    for (const member of members) {
+      const alloc = allocations.find((row) => row.user_id === member.user_id);
+      if (!alloc?.user_id) continue;
+      labels.push({ userId: alloc.user_id, country: alloc.country });
+    }
+    return labels;
+  }
+
   return (
     <div className="space-y-4">
+      <DelegateResolutionBuilder
+        resolutions={draftResolutionPicks}
+        conferenceId={conferenceId}
+        canMergeToOfficial={canCreate}
+      />
+
       {/* Chair bloc configuration */}
       {canCreate ? (
         <div className="dashboard-panel space-y-3 rounded-xl p-4">
@@ -420,6 +455,20 @@ export function ResolutionsView({
                     <p className="text-xs text-red-700 dark:text-red-300">{finalizeError[r.id]}</p>
                   ) : null}
                 </div>
+              ) : null}
+
+              {bloc && (isMember || canCreate) ? (
+                <BlocChatPanel
+                  blocId={bloc.id}
+                  blocName={bloc.name}
+                  conferenceId={conferenceId}
+                  myUserId={currentUserId}
+                  myAllocationId={myAllocationId}
+                  memberLabels={blocMemberLabels(members)}
+                  canModerate={canCreate}
+                  isMember={isMember}
+                  sessionActive={sessionActive}
+                />
               ) : null}
 
               {/* Clauses: read-only for delegates, editable override for chairs */}

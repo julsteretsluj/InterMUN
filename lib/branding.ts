@@ -17,7 +17,7 @@ export function getAppName(): string {
 }
 
 export function getAppTagline(): string {
-  return process.env.NEXT_PUBLIC_APP_TAGLINE?.trim() || "Model United Nations platform";
+  return process.env.NEXT_PUBLIC_APP_TAGLINE?.trim() || "The whole conference team, in one tab.";
 }
 
 /** General inquiries, commercial licensing, and conference partnership requests. */
