@@ -43,33 +43,33 @@ export function MarketingOriginMap({
             aria-hidden
             className="mx-auto h-auto w-full"
           />
+
+          <button
+            type="button"
+            className="group absolute left-[71%] top-[27%] z-10 -translate-x-1/2 -translate-y-full focus:outline-none"
+            aria-label={tooltip}
+          >
+            <span
+              className="pointer-events-none absolute left-1/2 top-full mt-2 w-max max-w-[14rem] -translate-x-1/2 rounded-xl border border-[var(--hairline)] bg-[color-mix(in_srgb,var(--material-thick)_94%,transparent)] px-3 py-2 text-left text-xs font-medium leading-snug text-brand-navy opacity-0 shadow-[var(--marketing-float-shadow)] backdrop-blur-md transition-opacity duration-[var(--dur-base)] group-hover:opacity-100 group-focus-visible:opacity-100 sm:max-w-[16rem] sm:text-sm"
+              role="tooltip"
+            >
+              {tooltip}
+            </span>
+            <span className="relative flex flex-col items-center">
+              <span
+                aria-hidden
+                className="absolute -bottom-1 h-8 w-8 rounded-full bg-yellow-400/35 blur-md transition-transform duration-[var(--dur-base)] group-hover:scale-110"
+              />
+              <MapPin
+                aria-hidden
+                className="relative h-9 w-9 text-[#F5C400] drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-transform duration-[var(--dur-base)] group-hover:scale-110"
+                fill="currentColor"
+                strokeWidth={1.5}
+              />
+            </span>
+          </button>
         </div>
       </div>
-
-      <button
-        type="button"
-        className="group absolute left-[58%] top-[34%] z-10 -translate-x-1/2 -translate-y-full focus:outline-none"
-        aria-label={tooltip}
-      >
-        <span
-          className="pointer-events-none absolute left-1/2 top-full mt-2 w-max max-w-[14rem] -translate-x-1/2 rounded-xl border border-[var(--hairline)] bg-[color-mix(in_srgb,var(--material-thick)_94%,transparent)] px-3 py-2 text-left text-xs font-medium leading-snug text-brand-navy opacity-0 shadow-[var(--marketing-float-shadow)] backdrop-blur-md transition-opacity duration-[var(--dur-base)] group-hover:opacity-100 group-focus-visible:opacity-100 sm:max-w-[16rem] sm:text-sm"
-          role="tooltip"
-        >
-          {tooltip}
-        </span>
-        <span className="relative flex flex-col items-center">
-          <span
-            aria-hidden
-            className="absolute -bottom-1 h-8 w-8 rounded-full bg-[color-mix(in_srgb,var(--gold)_28%,transparent)] blur-md transition-transform duration-[var(--dur-base)] group-hover:scale-110"
-          />
-          <MapPin
-            aria-hidden
-            className="relative h-9 w-9 text-[var(--gold)] drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-transform duration-[var(--dur-base)] group-hover:scale-110"
-            fill="currentColor"
-            strokeWidth={1.5}
-          />
-        </span>
-      </button>
     </div>
   );
 }

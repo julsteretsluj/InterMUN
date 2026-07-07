@@ -38,7 +38,7 @@ Template for other conferences: `scripts/committee-logo-source/manifest.example.
 
 ## Third-party fonts
 
-See [`public/fonts/LICENSES.md`](fonts/LICENSES.md). Bundled display fonts (Rijusans, Ithaca, Super Onigiri, Momo Signature) are not Intermun originals; follow each font’s license.
+See [`public/fonts/LICENSES.md`](fonts/LICENSES.md). Bundled display fonts (Rijusans, Super Onigiri, Momo Signature) are not Intermun originals; follow each font’s license.
 
 UI fonts Inter and Merriweather load via `next/font/google` (SIL OFL). Accessibility fonts load via `@fontsource/*` (OFL).
 

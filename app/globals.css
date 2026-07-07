@@ -2,20 +2,11 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Rijusans (SIL OFL 1.1) — display / heading sans */
+/* Rijusans (SIL OFL 1.1) — marketing display + heading sans */
 @font-face {
   font-family: "Rijusans";
   src: url("/fonts/rijusans-regular.ttf") format("truetype");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Ithaca (Medium) — marketing display headlines */
-@font-face {
-  font-family: "Ithaca";
-  src: url("/fonts/ithaca-medium.ttf") format("truetype");
-  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -332,10 +323,10 @@ html.dark {
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-ui), system-ui, sans-serif;
   --font-mono:
     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* Product chrome: UI sans everywhere. Marketing heroes: Ithaca display + Momo Signature emphasis. */
+  /* Product chrome: UI sans everywhere. Marketing heroes: Rijusans display + Momo Signature emphasis. */
   --font-heading: var(--font-sans);
   --font-display: var(--font-sans);
-  --font-marketing-display: "Ithaca", "Rijusans", var(--font-sans);
+  --font-marketing-display: "Rijusans", var(--font-sans);
   --font-marketing-cursive: "Momo Signature", "Super Onigiri", cursive;
   --font-serif: var(--font-document), ui-serif, Georgia, "Times New Roman", serif;
   --font-cursive: var(--font-marketing-cursive);

@@ -3,7 +3,6 @@
 | File | Family | License |
 |------|--------|---------|
 | `rijusans-regular.ttf` | Rijusans | [SIL Open Font License 1.1](https://scripts.sil.org/OFL) |
-| `ithaca-medium.ttf` | Ithaca | Verify author license before redistribution |
 | `super-onigiri-regular.ttf` | Super Onigiri | Verify author license before redistribution |
 | `momosignature-regular.otf` | Momo Signature | Author-provided; verify license before redistribution |
 
